@@ -36,13 +36,15 @@ uses u_constant, u_util,
 Procedure ScaleWindow(var c:conf_skychart);
 Procedure WindowXY(x,y:Double; var WindowX,WindowY: Integer; var c:conf_skychart);
 Procedure XYWindow( x,y: Integer; var Xwindow,Ywindow: double; var c:conf_skychart);
-PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; var c:conf_skychart);
+PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; var c:conf_skychart; tohrz:boolean=false);
 PROCEDURE Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; var c:conf_skychart );
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double; var c:conf_skychart );
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; var c:conf_skychart );
 procedure GetADxy(x,y:Integer ; var a,d : Double; var c:conf_skychart);
 procedure GetAHxy(x,y:Integer ; var a,h : Double; var c:conf_skychart);
 procedure GetAHxyF(x,y:Integer ; var a,h : Double; var c:conf_skychart);
+procedure GetLBxy(x,y:Integer ; var l,b : Double; var c:conf_skychart);
+procedure GetLBExy(x,y:Integer ; var le,be : Double; var c:conf_skychart);
 function NorthPoleInMap(var c:conf_skychart) : Boolean;
 function SouthPoleInMap(var c:conf_skychart) : Boolean;
 function NorthPole2000InMap(var c:conf_skychart) : Boolean;
@@ -63,9 +65,11 @@ procedure PrecessionEcl(ti,tf : double; VAR l,b : double);
 PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; var c:conf_skychart);
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; var c:conf_skychart );
 Procedure Hz2Eq(A,h : double; var hh,de : double; var c:conf_skychart);
+function ecliptic(j:double):double;
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
 Procedure Gal2Eq(l,b: double; var ar,de : double; var c:conf_skychart);
+Procedure Eq2Gal(ar,de : double; var l,b: double; var c:conf_skychart);
 {Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer);
           (* typeobj = 1 etoile ; typeobj = 2 soleil,lune
             irc = 0 lever et coucher
@@ -144,6 +148,7 @@ case c.projtype of              // AIPS memo 27
     yy:= r*(s2*c1-c2*s1*c3);
     end;
 'C' : begin                 // CAR
+    ar:=rmod(ar+pi4,pi2);
     hh:=rmod(ac+pi,pi2);
     if ar>hh then ar:=ar-hh
              else ar:=ar+pi2-hh;
@@ -205,7 +210,7 @@ X:=xx*c.costheta+yy*c.sintheta;
 Y:=yy*c.costheta-xx*c.sintheta;
 END ;
 
-PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; var c:conf_skychart);
+PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; var c:conf_skychart; tohrz:boolean=false);
 Var a,h,ac,dc,d1,d2 : Double ;
     a1,a2,i1,i2 : integer;
 BEGIN
@@ -221,12 +226,31 @@ Equat: begin
        ac:=c.racentre;
        dc:=c.decentre;
        end;
+Gal:   begin
+       Eq2Gal(ar,de,a,h,c) ;
+       ar:=a;
+       de:=h;
+       ac:=c.lcentre;
+       dc:=c.bcentre;
+       end;
+Ecl:   begin
+       Eq2Ecl(ar,de,c.e,a,h) ;
+       ar:=a;
+       de:=h;
+       ac:=c.lecentre;
+       dc:=c.becentre;
+       end;
   else raise exception.Create('Bad projection type');
 end;
 if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then begin
   if h<-musec then begin
+     if tohrz and (h>(-30*deg2rad)) then begin
+       de:=-secarc;
+       Proj2(ar,de,ac,dc,X,Y,c);
+     end else begin
        X:=200;
        Y:=200;
+     end;
   end else begin
     a:=rmod(-rad2deg*ar+181+360,360);
     a1:=trunc(a);
@@ -237,8 +261,13 @@ if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then be
     d2:=c.horizonlist[i2];
     h:=d1+(a-a1)*(d2-d1)/(a2-a1);
     if de<h-musec then begin
-       X:=200;
-       Y:=200;
+     if tohrz then begin
+        de:=h-secarc;
+        Proj2(ar,de,ac,dc,X,Y,c);
+     end else begin
+        X:=200;
+        Y:=200;
+     end;
     end else Proj2(ar,de,ac,dc,X,Y,c);
   end;
 end else Proj2(ar,de,ac,dc,X,Y,c);
@@ -303,6 +332,14 @@ Equat: begin
        ac:=c.racentre;
        dc:=c.decentre;
        end;
+Gal:   begin
+       ac:=c.lcentre;
+       dc:=c.bcentre;
+       end;
+Ecl:   begin
+       ac:=c.lecentre;
+       dc:=c.becentre;
+       end;
   else raise exception.Create('Bad projection type');
 end;
 InvProj2 (xx,yy,ac,dc,ar,de,c);
@@ -310,6 +347,16 @@ case c.Projpole of
 Altaz: begin
        Hz2Eq(-ar,de,a,hh,c) ;
        ar:=c.CurST-a;
+       de:=hh;
+       end;
+Gal:   begin
+       Gal2Eq(ar,de,a,hh,c) ;
+       ar:=a;
+       de:=hh;
+       end;
+Ecl:   begin
+       Ecl2Eq(ar,de,c.e,a,hh) ;
+       ar:=a;
        de:=hh;
        end;
 end;
@@ -339,6 +386,24 @@ begin
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,-c.acentre,c.hcentre,a,h,c);
   a:=-a;
+end;
+
+procedure GetLBxy(x,y:Integer ; var l,b : Double; var c:conf_skychart);
+var
+   x1,y1: Double;
+begin
+  XYwindow(x,y,x1,y1,c);
+  InvProj2 (x1,y1,c.lcentre,c.bcentre,l,b,c);
+  l:=rmod(pi4+l,pi2);
+end;
+
+procedure GetLBExy(x,y:Integer ; var le,be : Double; var c:conf_skychart);
+var
+   x1,y1: Double;
+begin
+  XYwindow(x,y,x1,y1,c);
+  InvProj2 (x1,y1,c.lecentre,c.becentre,le,be,c);
+  le:=rmod(pi4+le,pi2);
 end;
 
 function NorthPoleInMap(var c:conf_skychart) : Boolean;
@@ -675,6 +740,26 @@ hh:= arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1));
 hh:=Rmod(hh+pi2,pi2);
 END ;
 
+function ecliptic(j:double):double;
+var u : double;
+begin
+{meeus91 21.3}
+u:=(j-jd2000)/3652500;
+result:=eps2000 +(
+        -4680.93*u
+        -1.55*u*u
+        +1999.25*intpower(u,3)
+        -51.38*intpower(u,4)
+        -249.67*intpower(u,5)
+        -39.05*intpower(u,6)
+        +7.12*intpower(u,7)
+        +27.87*intpower(u,8)
+        +5.79*intpower(u,9)
+        +2.45*intpower(u,10)
+        )/3600;
+result:=deg2rad*result;
+end;
+
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 begin
 ar:=arctan2(sin(l)*cos(e)-tan(b)*sin(e),cos(l));
@@ -696,6 +781,18 @@ ar:=deg2rad*12.25+arctan2(sin(l),cos(l)*sin(dp)-tan(b)*cos(dp));
 de:=arcsin(sin(b)*sin(dp)+cos(b)*cos(dp)*cos(l));
 precession(jd1950,c.JDchart,ar,de);
 end;
+
+Procedure Eq2Gal(ar,de : double; var l,b: double; var c:conf_skychart);
+var dp : double;
+begin
+precession(c.JDchart,jd1950,ar,de);
+ar:=deg2rad*192.25-ar;
+dp:=deg2rad*27.4;
+l:=deg2rad*303-arctan2(sin(ar),cos(ar)*sin(dp)-tan(de)*cos(dp));
+l:=rmod(l+pi2,pi2);
+b:=arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar));
+end;
+
 {
 procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer);
 const ho : array[1..3] of Double = (-9.89E-3,-1.454E-2,2.18E-3) ;
@@ -846,7 +943,7 @@ begin
 if year>0 then begin
    result:=inttostr(year);
 end else begin
-   result:=inttostr(-year+1)+'BC' ;
+   result:='BC'+inttostr(-year+1) ;
 end;
 end;
 
