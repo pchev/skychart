@@ -3450,7 +3450,7 @@ end;
 procedure Tf_config.ScanImagesClick(Sender: TObject);
 var c,f : tsearchrec;
     i,j,n,p:integer;
-    cmd,catdir,objn,fname:string;
+    catdir,objn,fname:string;
     dummyfile : boolean;
     ra,de,w,h,r: double;
 begin
@@ -3468,7 +3468,7 @@ db.Query('UNLOCK TABLES');
 db.Query('Truncate table cdc_fits');
 j:=findfirst(slash(cmain.ImagePath)+'*',faDirectory,c);
 while j=0 do begin
-  if (c.attr=faDirectory)and(c.Name<>'.')and(c.Name<>'..') then begin
+  if ((c.attr and faDirectory)<>0)and(c.Name<>'.')and(c.Name<>'..') then begin
   catdir:=slash(cmain.ImagePath)+c.Name;
   ProgressCat.caption:=c.Name;
   ProgressBar1.position:=0;
