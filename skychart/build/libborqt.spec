@@ -1,13 +1,15 @@
 Summary: Borland Kylix runtime library
 Name: libborqt
 Version: 6.9.0
-Release: 1
+Release: 2
 Group: System/Libraries
 Copyright: GPL
 URL: http://www.borland.com/kylix
 Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: i386
+Provides: libborqt
+AutoReqProv: no
 
 %description
 This library is require to run any software developped with Borland Kylix compiler.
