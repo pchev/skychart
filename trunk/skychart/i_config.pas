@@ -185,10 +185,12 @@ if csc.SimS>0 then begin
    stepunit.itemindex:=3;
 end;
 stepline.checked:=csc.SimLine;
-for i:=0 to NumSimObject-2 do begin
-  j:=i;
-  if j=0 then j:=10; // sun
-  if j=3 then j:=11; // moon
+for i:=0 to SimObj.Items.Count-1 do begin
+  if i=0 then j:=10         // sun
+  else if i=3 then j:=11    // moon
+  else if i=10 then j:=12   // ast
+  else if i=11 then j:=13   // com
+  else j:=i;
   SimObj.checked[i]:=csc.SimObject[j];
 end;
 end;
@@ -1266,12 +1268,21 @@ end;
 procedure Tf_config.SimObjClickCheck(Sender: TObject);
 var i,j:integer;
 begin
-for i:=0 to NumSimObject-2 do begin
-  j:=i;
-  if j=0 then j:=10; // sun
-  if j=3 then j:=11; // moon
+for i:=0 to SimObj.Items.Count-1 do begin
+  if i=0 then j:=10         // sun
+  else if i=3 then j:=11    // moon
+  else if i=10 then j:=12   // ast
+  else if i=11 then j:=13   // com
+  else j:=i;
   csc.SimObject[j]:=SimObj.checked[i];
 end;
+end;
+
+procedure Tf_config.stepresetClick(Sender: TObject);
+begin
+nbstep.value:=1;
+stepsize.value:=1;
+stepunit.ItemIndex:=0;
 end;
 
 procedure Tf_config.steplineClick(Sender: TObject);
@@ -2185,10 +2196,6 @@ db.database:=cmain.db;
 db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
 if db.Active then begin
   filedesc:=extractfilename(mpcfile.text)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(mpcfile.text)));
-  buf:=db.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
-  if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
-             else filenum:='1';
-  db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
   assignfile(f,mpcfile.text);
   reset(f);
   // minimal file checking to distinguish full mpcorb from daily update
@@ -2243,6 +2250,13 @@ if db.Active then begin
     ref:=trim(copy(buf,108,10));
     nam:=stringreplace(trim(copy(buf,167,27)),'"','\"',[rfreplaceall]);
     eq:='2000';
+    if nl=1 then begin
+       filedesc:=filedesc+', epoch='+ep;
+       buf:=db.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
+       if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
+                   else filenum:='1';
+       db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
+    end;
     cmd:='INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
         +'"'+id+'"'
         +',"'+h+'"'
@@ -2290,7 +2304,67 @@ except
   screen.cursor:=crDefault;
   db.Free;
 end;
+end;
 
+
+procedure Tf_config.AddastClick(Sender: TObject);
+var
+  buf,cmd,filedesc,filenum :string;
+  ep,id,nam,ec,ax,i,node,peri,eq,ma,h,g,ref  : string;
+  lid: integer;
+begin
+db:=TMyDB.create(self);
+try
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+    id:=trim(copy(astid.text,1,7));
+    lid:=length(id);
+    if lid<7 then id:=StringofChar('0',7-lid)+id;
+    h:=trim(asth.text);
+    g:=trim(astg.text);
+    ep:=trim(astep.text);
+    ma:=trim(astma.text);
+    peri:=trim(astperi.text);
+    node:=trim(astnode.text);
+    i:=trim(asti.text);
+    ec:=trim(astec.text);
+    ax:=trim(astax.text);
+    ref:=trim(astref.text);
+    nam:=stringreplace(trim(astnam.text),'"','\"',[rfreplaceall]);
+    eq:=trim(asteq.text);
+    buf:=db.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
+    if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
+               else filenum:='1';
+    filedesc:='Add '+id+', '+nam+', '+ep;
+    db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
+    cmd:='INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
+        +'"'+id+'"'
+        +',"'+h+'"'
+        +',"'+g+'"'
+        +',"'+ep+'"'
+        +',"'+ma+'"'
+        +',"'+peri+'"'
+        +',"'+node+'"'
+        +',"'+i+'"'
+        +',"'+ec+'"'
+        +',"'+ax+'"'
+        +',"'+ref+'"'
+        +',"'+nam+'"'
+        +',"'+eq+'"'
+        +',"'+filenum+'"'+')';
+    if db.query(cmd) then ShowMessage('OK!')
+                     else ShowMessage('Insert failed! '+trim(db.GetLastError));
+end else begin
+   buf:=trim(db.GetLastError);
+   if buf<>'' then showmessage(buf);
+end;
+db.Free;
+UpdAstList;
+except
+  db.Free;
+end;
 end;
 
 procedure Tf_config.delastClick(Sender: TObject);

@@ -809,6 +809,7 @@ begin
 if cfgsc.ShowAsteroid then begin
   Fplanet.ComputeAsteroid(cfgsc);
   for j:=0 to cfgsc.SimNb-1 do begin
+    if (j>0) and (not cfgsc.SimObject[12]) then break;
     for i:=1 to cfgsc.AsteroidNb do begin
       ra:=cfgsc.AsteroidLst[j,i].ra;
       dec:=cfgsc.AsteroidLst[j,i].dec;
@@ -849,7 +850,7 @@ end;
        else Lineto(xx,yy);
   end; }
 xp:=0;yp:=0;
-for i:=1 to cfgsc.AsteroidNb do
+if cfgsc.SimObject[12] then for i:=1 to cfgsc.AsteroidNb do
   for j:=0 to cfgsc.SimNb-1 do begin
     projection(cfgsc.AsteroidLst[j,i].ra,cfgsc.AsteroidLst[j,i].dec,x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);

@@ -469,7 +469,7 @@ type
     Label177: TLabel;
     Edit2: TEdit;
     apply: TButton;
-    SpeedButton7: TSpeedButton;
+    stepreset: TSpeedButton;
     Label167: TLabel;
     Label168: TLabel;
     stepunit: TRadioGroup;
@@ -731,6 +731,36 @@ type
     astlimit: TLongEdit;
     astlimitbox: TCheckBox;
     Label215: TLabel;
+    Label216: TLabel;
+    AddsingleAst: TTabSheet;
+    Label217: TLabel;
+    astid: TEdit;
+    asth: TEdit;
+    astg: TEdit;
+    astep: TEdit;
+    astma: TEdit;
+    astperi: TEdit;
+    astnode: TEdit;
+    asti: TEdit;
+    astec: TEdit;
+    astax: TEdit;
+    astref: TEdit;
+    astnam: TEdit;
+    asteq: TEdit;
+    Label218: TLabel;
+    Label219: TLabel;
+    Label220: TLabel;
+    Label221: TLabel;
+    Label222: TLabel;
+    Label223: TLabel;
+    Label224: TLabel;
+    Label225: TLabel;
+    Label226: TLabel;
+    Label227: TLabel;
+    Label228: TLabel;
+    Label229: TLabel;
+    Label230: TLabel;
+    Addast: TButton;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -895,6 +925,8 @@ type
     procedure AstDBClick(Sender: TObject);
     procedure astmagdiffChange(Sender: TObject);
     procedure deldateastClick(Sender: TObject);
+    procedure stepresetClick(Sender: TObject);
+    procedure AddastClick(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;

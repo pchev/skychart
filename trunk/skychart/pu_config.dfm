@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 212
-  Top = 184
+  Left = 228
+  Top = 129
   Width = 636
   Height = 518
   Caption = 'Configuration'
@@ -441,7 +441,7 @@ object f_config: Tf_config
         Height = 13
         Caption = 'Time Simulation Setting'
       end
-      object SpeedButton7: TSpeedButton
+      object stepreset: TSpeedButton
         Left = 256
         Top = 228
         Width = 145
@@ -449,6 +449,7 @@ object f_config: Tf_config
         Caption = 'Reset to single date'
         Layout = blGlyphTop
         NumGlyphs = 2
+        OnClick = stepresetClick
       end
       object Label178: TLabel
         Left = 8
@@ -6626,7 +6627,7 @@ object f_config: Tf_config
               Width = 241
               Height = 21
               TabOrder = 0
-              Text = 'MPCORB.DAT'
+              Text = 'MPCORBcr.DAT'
             end
             object astnumbered: TCheckBox
               Left = 30
@@ -6899,6 +6900,218 @@ object f_config: Tf_config
               TabOrder = 1
               OnClick = deldateastClick
             end
+          end
+        end
+        object AddsingleAst: TTabSheet
+          Caption = 'Add'
+          ImageIndex = 4
+          object Label217: TLabel
+            Left = 8
+            Top = 8
+            Width = 287
+            Height = 13
+            Caption = 'Add a single element to the database. All field are mandatory.'
+          end
+          object Label218: TLabel
+            Left = 8
+            Top = 40
+            Width = 56
+            Height = 13
+            Caption = 'Designation'
+          end
+          object Label219: TLabel
+            Left = 160
+            Top = 40
+            Width = 103
+            Height = 13
+            Caption = 'H absolute magnitude'
+          end
+          object Label220: TLabel
+            Left = 312
+            Top = 40
+            Width = 86
+            Height = 13
+            Caption = 'G slope parameter'
+          end
+          object Label221: TLabel
+            Left = 8
+            Top = 104
+            Width = 53
+            Height = 13
+            Caption = 'Epoch (JD)'
+          end
+          object Label222: TLabel
+            Left = 160
+            Top = 104
+            Width = 69
+            Height = 13
+            Caption = 'Mean anomaly'
+          end
+          object Label223: TLabel
+            Left = 312
+            Top = 104
+            Width = 105
+            Height = 13
+            Caption = 'Argument of perihelion'
+          end
+          object Label224: TLabel
+            Left = 8
+            Top = 168
+            Width = 128
+            Height = 13
+            Caption = 'Longitude ascending Node'
+          end
+          object Label225: TLabel
+            Left = 160
+            Top = 168
+            Width = 48
+            Height = 13
+            Caption = 'Inclination'
+          end
+          object Label226: TLabel
+            Left = 312
+            Top = 168
+            Width = 55
+            Height = 13
+            Caption = 'Eccentricity'
+          end
+          object Label227: TLabel
+            Left = 8
+            Top = 232
+            Width = 70
+            Height = 13
+            Caption = 'Semimajor Axis'
+          end
+          object Label228: TLabel
+            Left = 160
+            Top = 232
+            Width = 50
+            Height = 13
+            Caption = 'Reference'
+          end
+          object Label229: TLabel
+            Left = 312
+            Top = 232
+            Width = 38
+            Height = 13
+            Caption = 'Equinox'
+          end
+          object Label230: TLabel
+            Left = 8
+            Top = 296
+            Width = 28
+            Height = 13
+            Caption = 'Name'
+          end
+          object astid: TEdit
+            Left = 8
+            Top = 64
+            Width = 100
+            Height = 26
+            TabOrder = 0
+          end
+          object asth: TEdit
+            Left = 160
+            Top = 64
+            Width = 100
+            Height = 26
+            TabOrder = 1
+            Text = '16'
+          end
+          object astg: TEdit
+            Left = 312
+            Top = 64
+            Width = 100
+            Height = 26
+            TabOrder = 2
+            Text = '0.15'
+          end
+          object astep: TEdit
+            Left = 8
+            Top = 128
+            Width = 100
+            Height = 26
+            TabOrder = 3
+            Text = '2453006.5'
+          end
+          object astma: TEdit
+            Left = 160
+            Top = 128
+            Width = 100
+            Height = 26
+            TabOrder = 4
+            Text = '0.0'
+          end
+          object astperi: TEdit
+            Left = 312
+            Top = 128
+            Width = 100
+            Height = 26
+            TabOrder = 5
+            Text = '0.0'
+          end
+          object astnode: TEdit
+            Left = 8
+            Top = 192
+            Width = 100
+            Height = 26
+            TabOrder = 6
+            Text = '0.0'
+          end
+          object asti: TEdit
+            Left = 160
+            Top = 192
+            Width = 100
+            Height = 26
+            TabOrder = 7
+            Text = '0.0'
+          end
+          object astec: TEdit
+            Left = 312
+            Top = 192
+            Width = 100
+            Height = 26
+            TabOrder = 8
+            Text = '0.0'
+          end
+          object astax: TEdit
+            Left = 8
+            Top = 256
+            Width = 100
+            Height = 26
+            TabOrder = 9
+            Text = '2'
+          end
+          object astref: TEdit
+            Left = 160
+            Top = 256
+            Width = 100
+            Height = 26
+            TabOrder = 10
+          end
+          object astnam: TEdit
+            Left = 8
+            Top = 320
+            Width = 257
+            Height = 26
+            TabOrder = 11
+          end
+          object asteq: TEdit
+            Left = 312
+            Top = 256
+            Width = 100
+            Height = 26
+            TabOrder = 12
+            Text = '2000'
+          end
+          object Addast: TButton
+            Left = 312
+            Top = 320
+            Width = 75
+            Height = 25
+            Caption = 'Add'
+            TabOrder = 13
+            OnClick = AddastClick
           end
         end
       end

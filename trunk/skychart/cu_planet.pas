@@ -1001,6 +1001,7 @@ result := false;
 desc:='';tar:=1;tde:=1;jdt:=0;
 repeat
   inc(CurrentPlanet);
+  if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc.SimObject[CurrentPlanet]) then continue;
   if CurrentPlanet=3 then inc(CurrentPlanet);    // skip Earth
   if CurrentPlanet=31 then inc(CurrentPlanet);   // skip Saturn ring
   if (CurrentPlanet=32)and not cfgsc.showearthshadow then inc(CurrentPlanet);
@@ -1794,7 +1795,7 @@ if cfgsc.AsteroidNb>0 then repeat
   inc(CurrentAsteroid);
   if CurrentAsteroid>cfgsc.AsteroidNb then begin
      inc(CurrentAstStep);
-     if nextobj or (CurrentAstStep>=cfgsc.SimNb) then
+     if (not cfgsc.SimObject[12]) or nextobj or (CurrentAstStep>=cfgsc.SimNb) then
         break
      else begin CurrentAsteroid:=0;continue;end;
   end;
