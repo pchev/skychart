@@ -20,16 +20,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {
- Information Form (TCP/IP Server)
+ Information Form (TCP/IP Server, Object list, ...)
 }
 
 interface
 
-uses u_constant, blcksock,
+uses u_constant,
   SysUtils, Types, Classes, Variants, Controls, Forms, Printers,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList;
 
 type
+  Tistrfunc = procedure(i:integer; var txt:string) of object;
+  Tint1func = procedure(i:integer) of object;
+  Tdetinfo  = procedure(chart:string;ra,dec:double;nm,desc:string) of object;
+
   Tf_info = class(TForm)
     PageControl1: TPageControl;
     Panel1: TPanel;
@@ -77,19 +81,25 @@ type
       Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
+    FGetTCPinfo : Tistrfunc;
+    FKillTCP : Tint1func;
+    FPrintSetup: TNotifyEvent;
+    Fdetailinfo: Tdetinfo;
     RowClick,ColClick :integer;
   public
     { Public declarations }
     source_chart:string;
     procedure setpage(n:integer);
+    property OnGetTCPinfo: Tistrfunc read FGetTCPinfo write FGetTCPinfo;
+    property OnKillTCP: Tint1func read FKillTCP write FKillTCP;
+    property OnPrintSetup: TNotifyEvent read FPrintSetup write FPrintSetup;
+    property OnShowDetail: Tdetinfo read Fdetailinfo write Fdetailinfo;
   end;
 
 var
   f_info: Tf_info;
 
 implementation
-
-uses pu_main;
 
 {$R *.dfm}
 

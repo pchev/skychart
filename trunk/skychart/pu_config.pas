@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, u_constant, u_util, jpeg, pngimage, MyDB,
+uses Math, u_constant, u_util, jpeg, pngimage, MyDB, u_projection,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, Grids, ExtCtrls, enhedits, ActnList,
   FoldrDlg, Spin, Mask, CheckLst, cu_zoomimage;
@@ -48,7 +48,6 @@ type
     p_lines: TTabSheet;
     p_labels: TTabSheet;
     Label5: TLabel;
-    Label6: TLabel;
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
@@ -438,9 +437,9 @@ type
     stepsize: TSpinEdit;
     SimObj: TCheckListBox;
     PlaParalaxe: TRadioGroup;
-    planet3: TEdit;
+    planetdir: TEdit;
     Label131: TLabel;
-    BitBtn31: TBitBtn;
+    planetdirsel: TBitBtn;
     Label89: TLabel;
     PlanetBox: TCheckBox;
     PlanetMode: TRadioGroup;
@@ -759,6 +758,101 @@ type
     Label229: TLabel;
     Label230: TLabel;
     Addast: TButton;
+    ComPageControl: TPageControl;
+    comsetting: TTabSheet;
+    GroupBox13: TGroupBox;
+    Label154: TLabel;
+    Label216: TLabel;
+    Label231: TLabel;
+    comlimitmag: TFloatEdit;
+    showcom: TCheckBox;
+    comsymbol: TRadioGroup;
+    commagdiff: TFloatEdit;
+    comdbset: TButton;
+    comload: TTabSheet;
+    Label232: TLabel;
+    GroupBox14: TGroupBox;
+    Label233: TLabel;
+    comfile: TEdit;
+    Loadcom: TButton;
+    comfilebtn: TBitBtn;
+    MemoCom: TMemo;
+    comdelete: TTabSheet;
+    Label238: TLabel;
+    GroupBox16: TGroupBox;
+    comelemlist: TComboBox;
+    DelCom: TButton;
+    GroupBox17: TGroupBox;
+    Label239: TLabel;
+    DelComAll: TButton;
+    DelComMemo: TMemo;
+    Addsinglecom: TTabSheet;
+    Label241: TLabel;
+    Label242: TLabel;
+    Label243: TLabel;
+    Label244: TLabel;
+    Label245: TLabel;
+    Label246: TLabel;
+    Label247: TLabel;
+    Label248: TLabel;
+    Label249: TLabel;
+    Label250: TLabel;
+    Label251: TLabel;
+    Label253: TLabel;
+    Label254: TLabel;
+    comid: TEdit;
+    comh: TEdit;
+    comg: TEdit;
+    comep: TEdit;
+    comperi: TEdit;
+    comnode: TEdit;
+    comi: TEdit;
+    comec: TEdit;
+    comq: TEdit;
+    comnam: TEdit;
+    comeq: TEdit;
+    AddCom: TButton;
+    comt: TMaskEdit;
+    CometDB: TButton;
+    Label6: TLabel;
+    Label234: TLabel;
+    bg4: TPanel;
+    Shape26: TShape;
+    Shape27: TShape;
+    symbfont: TEdit;
+    SpeedButton7: TSpeedButton;
+    Label235: TLabel;
+    labelcolorStar: TShape;
+    labelsizeStar: TSpinEdit;
+    labelmagStar: TSpinEdit;
+    showlabelStar: TCheckBox;
+    Label236: TLabel;
+    Label237: TLabel;
+    Label240: TLabel;
+    Label252: TLabel;
+    Label255: TLabel;
+    labelcolorVar: TShape;
+    labelsizeVar: TSpinEdit;
+    labelmagVar: TSpinEdit;
+    showlabelVar: TCheckBox;
+    labelcolorMult: TShape;
+    labelsizeMult: TSpinEdit;
+    LabelmagMult: TSpinEdit;
+    showlabelMult: TCheckBox;
+    labelcolorNeb: TShape;
+    labelsizeNeb: TSpinEdit;
+    labelmagNeb: TSpinEdit;
+    showlabelNeb: TCheckBox;
+    labelcolorSol: TShape;
+    labelsizeSol: TSpinEdit;
+    labelmagSol: TSpinEdit;
+    showlabelSol: TCheckBox;
+    labelcolorMisc: TShape;
+    labelsizeMisc: TSpinEdit;
+    showlabelMisc: TCheckBox;
+    showlabelConst: TCheckBox;
+    labelcolorConst: TShape;
+    labelsizeConst: TSpinEdit;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -927,9 +1021,27 @@ type
     procedure delallastClick(Sender: TObject);
     procedure stepresetClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
+    procedure showcomClick(Sender: TObject);
+    procedure comsymbolClick(Sender: TObject);
+    procedure comlimitmagChange(Sender: TObject);
+    procedure commagdiffChange(Sender: TObject);
+    procedure comfilebtnClick(Sender: TObject);
+    procedure LoadcomClick(Sender: TObject);
+    procedure DelComClick(Sender: TObject);
+    procedure DelComAllClick(Sender: TObject);
+    procedure AddComClick(Sender: TObject);
+    procedure planetdirChange(Sender: TObject);
+    procedure planetdirselClick(Sender: TObject);
+    procedure CometDBClick(Sender: TObject);
+    procedure showlabelClick(Sender: TObject);
+    procedure labelmagChange(Sender: TObject);
+    procedure labelcolorMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure labelsizeChange(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
+    ObsMapFile:string;
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
   public
@@ -974,6 +1086,10 @@ type
     procedure ShowDB;
     procedure ShowAsteroid;
     procedure UpdAstList;
+    procedure ShowComet;
+    procedure UpdComList;
+    procedure showlabelcolor;
+    procedure showlabel;
   end;
 
 var
@@ -981,7 +1097,7 @@ var
 
 implementation
 
-uses pu_main, u_projection;
+uses pu_main; //todo: replace by event
 
 const b=' ';
 
@@ -1031,9 +1147,8 @@ end;
 
 // end of windows vcl specific code:
 
-
 end.
 
-                       
+
 
 

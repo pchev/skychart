@@ -27,7 +27,7 @@ interface
 
 uses Types, libcatalog,
 {$ifdef linux}
-    QGraphics;
+    QForms,QGraphics;
 {$endif}
 {$ifdef mswindows}
     Graphics;
@@ -38,14 +38,16 @@ const MaxColor = 32;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid
      TSkycolor = array[1..7]of Tcolor;
 
-const version = 'Version 3 alpha 0.0.4';
-      ver     = '3.0.0.4';
+const cdcversion = 'Version 3 alpha 0.0.5';
+      cdcver     = '3.0.0.5';
       MaxSim = 100 ;
-      MaxComet = 1000;
-      MaxAsteroid = 1000;
+      MaxComet = 200;
+      MaxAsteroid = 500;
       MaxPla = 32;
       MaxQuickSearch = 15;
-      MaxWindow = 10;  // maximum number of chart window 
+      MaxWindow = 10;  // maximum number of chart window
+      maxlabels = 300; //maximum number of label to a chart
+      maxmodlabels = 500; //maximum number of modified labels before older one are replaced
       crRetic = 5;
       jd2000 =2451545.0 ;
       jd1950 =2433282.4235;
@@ -65,11 +67,12 @@ const version = 'Version 3 alpha 0.0.4';
       FovMin = 5*secarc;  // 5"
       FovMax = pi2;
       DefaultPrtRes = 300;
-      DfColor : Starcolarray = (clBlack,$00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,clGray,clGray,clYellow,clGray,clSilver,clBlue,clRed,clGreen,clYellow,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite);
-      DfBWColor : Starcolarray = (clBlack,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clBlack,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite);
-      DfRedColor : Starcolarray = (clBlack,$00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,clYellow,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
-      DfWBColor : Starcolarray = (clWhite,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clWhite,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack);
-      dfskycolor : Tskycolor = ($00f03c3c,$00c83232,$00a02828,$00780000,$00640010,$003c0010,$00000000);
+      //                          0         1                                       5                                                 10                                                15                                                20                                                25                                                30                  32
+      DfColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  clGray,   clGray,   clYellow, clGray,   clSilver, clBlue,   clRed,    clGreen,  clYellow, clAqua,   clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
+      DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
+      DfRedColor : Starcolarray =(clBlack,  $00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,clYellow, $000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
+      DfWBColor : Starcolarray = (clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack);
+      dfskycolor : Tskycolor =   ($00f03c3c,$00c83232,$00a02828,$00780000,$00640010,$003c0010,$00000000);
       crlf = chr(13)+chr(10);
       greek : array[1..2,1..24]of string=(('Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega'),
               ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
@@ -97,6 +100,10 @@ const version = 'Version 3 alpha 0.0.4';
       f1='0.0';
       f2='0.00';
       f5='0.00000';
+      f6='0.000000';
+      labspacing=10;
+      numlabtype=7;
+      numfont=7;
       ConstelNum = 88;
       NumLlabel = 100;
       NumSimObject = 13;
@@ -193,6 +200,7 @@ const version = 'Version 3 alpha 0.0.4';
       key_upright=4118;
       key_downleft=4113;
       key_downright =4119;
+      bsDialog=fbsDialog;
 {$endif}
 {$ifdef mswindows}
       DefaultFontName='MS Sans Serif';
@@ -213,11 +221,10 @@ const version = 'Version 3 alpha 0.0.4';
 
 type
      Tplanetlst = array[0..MaxSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth umbra ;
-     Tcometlst = array[0..MaxSim,1..MaxComet,1..7] of double;
-     Tasteroidlst = array[0..MaxSim,1..MaxAsteroid] of record
-                    ra,dec,jd,magn,epoch: double;
-                    id: string;
-                    end;
+     Tcometlst = array of array[1..MaxComet,1..8] of double;
+     TcometName= array of array[1..MaxComet,1..2] of string[27];
+     Tasteroidlst = array of array[1..MaxAsteroid,1..5] of double;
+     TasteroidName = array of array[1..MaxAsteroid,1..2] of string[27];
      double6 = array[1..6] of double;
      Pdouble6 = ^double6;
      Tconstb = record ra,de : single; newconst:boolean; end;
@@ -225,6 +232,19 @@ type
      TLabelAlign = (laNone,laTop,laBottom,laLeft,laRight,laCenter);
      Thorizonlist = array [0..360] of single;
      Phorizonlist = ^Thorizonlist;
+
+     Tobjlabel = record
+            id:integer;
+            x,y,r:smallint;
+            labelnum,fontnum:byte;
+            txt:string;
+            end;
+     Tmodlabel = record
+            id,dx,dy:integer;
+            labelnum,fontnum:byte;
+            txt: string;
+            hiden: boolean;
+            end;
 
      TGCatLst =  record
                     min, max, magmax : single;
@@ -285,13 +305,13 @@ type
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
-                FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol : integer;
+                FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
                 SimNb,SimD,SimH,SimM,SimS : Integer;
                 SimObject: array[1..NumSimObject] of boolean;
                 SimLine,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet : Boolean;
                 ObsLatitude,ObsLongitude,ObsAltitude,ObsTZ : double;
                 ObsTemperature,ObsPressure,ObsRefractionCor : Double;
-                ObsName,ObsCountry,chartname,table_day,table_daypos : string;
+                ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
                 ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay : boolean;
@@ -304,14 +324,21 @@ type
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
-                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff : double;
+                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum : Double;
                 StarFilter,NebFilter,FindOK,WhiteBg : boolean;
                 EquinoxName,EquinoxDate,TrackName,FindName,FindDesc,FindNote : string;
                 PlanetLst : Tplanetlst;
-                AsteroidNb: integer;
+                AsteroidNb,CometNb,AsteroidLstSize,CometLstSize: integer;
                 AsteroidLst: Tasteroidlst;
+                CometLst: Tcometlst;
+                AsteroidName: TasteroidName;
+                CometName: Tcometname;
                 horizonlist : Phorizonlist;
+                nummodlabels: integer;
+                modlabels: array[1..maxmodlabels] of Tmodlabel;
+                LabelMagDiff : array[1..numlabtype] of double;
+                ShowLabel : array[1..numlabtype] of boolean;
                 end;
      conf_plot = record
                 color : Starcolarray;
@@ -320,16 +347,12 @@ type
                 stardyn,starsize,prtres,starplot,nebplot,plaplot : integer;
                 Nebgray,NebBright,starshapesize,starshapew : integer;
                 Invisible,PlanetTransparent,AutoSkycolor : boolean;
-                FontName : array [1..6] of string;
-                FontSize : array [1..6] of integer;
-                FontBold : array [1..6] of boolean;
-                FontItalic : array [1..6] of boolean;
-                LabelColor : array[1..9] of Tcolor;
-                LabelSize : array[1..9] of integer;
-                outlineclosed,outlineinscreen: boolean;
-                outlinetype,outlinemax,outlinenum,outlinelw: integer;
-                outlinecol: Tcolor;
-                outlinepts: array of TPoint;
+                FontName : array [1..numfont] of string;    // 1=grid 2=label 3=legend 4=status 5=list 6=prt 7=symbol
+                FontSize : array [1..numfont] of integer;
+                FontBold : array [1..numfont] of boolean;
+                FontItalic : array [1..numfont] of boolean;
+                LabelColor : array[1..numlabtype] of Tcolor;   // 1=star 2=var 3=mult 4=neb 5=solsys 6=const 7=misc ...
+                LabelSize : array[1..numlabtype] of integer;
                 outradius:integer;
                 end;
      conf_chart = record
@@ -338,11 +361,11 @@ type
                 min_ma : double;
                 end;
      conf_main = record
-                prtname,language,ConstLfile, ConstBfile, EarthMapFile, HorizonFile : string;
+                prtname,language,ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass : string;
                 PrinterResolution,configpage,autorefreshdelay,MaxChildID,dbport : integer;
                 PrintColor,PrintLandscape :boolean;
-                maximized,updall,AutostartServer,keepalive,locked : boolean;
+                maximized,updall,AutostartServer,keepalive : boolean;
                 ServerIPaddr,ServerIPport : string;
                 end;
 
@@ -510,7 +533,12 @@ create_table_ast_day_pos='( id varchar(7) NOT NULL default "", epoch double NOT 
                          'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
                          'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag),'+
                          'UNIQUE KEY name (id,epoch)) TYPE=MyISAM';
-numsqltable=4;
+create_table_com_day=' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0") TYPE=MyISAM';
+create_table_com_day_pos='( id varchar(12) NOT NULL default "", epoch double NOT NULL default "0",'+
+                         'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
+                         'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag),'+
+                         'UNIQUE KEY name (id,epoch)) TYPE=MyISAM';
+numsqltable=7;
 sqltable : array[1..numsqltable,1..2] of string =(
            ('cdc_ast_name',' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'+
                            'PRIMARY KEY (id)) TYPE=MyISAM'),
@@ -527,7 +555,20 @@ sqltable : array[1..numsqltable,1..2] of string =(
            ('cdc_ast_mag',' ( id varchar(7) binary NOT NULL default "",'+
                           'jd double NOT NULL default "0", epoch double NOT NULL default "0",'+
                           'mag smallint(6) NOT NULL default "0", elem_id smallint(6) NOT NULL default "0",'+
-                          'PRIMARY KEY (jd,id), KEY ast_mag_idx  (mag)) TYPE=MyISAM'));
+                          'PRIMARY KEY (jd,id), KEY ast_mag_idx  (mag)) TYPE=MyISAM'),
+           ('cdc_com_name',' ( id varchar(12) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'+
+                           'PRIMARY KEY (id)) TYPE=MyISAM'),
+           ('cdc_com_elem_list',' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'+
+                           'PRIMARY KEY (elem_id)) TYPE=MyISAM'),
+           ('cdc_com_elem',' ( id varchar(12) binary NOT NULL default "0",'+
+                           'peri_epoch double NOT NULL default "0", peri_dist double NOT NULL default "0",'+
+                           'eccentricity double NOT NULL default "0",'+
+                           'arg_perihelion double NOT NULL default "0", asc_node double NOT NULL default "0",'+
+                           'inclination double NOT NULL default "0",'+
+                           'epoch double NOT NULL default "0",'+
+                           'h double NOT NULL default "0", g double NOT NULL default "0",'+
+                           'name varchar(27) NOT NULL default "", equinox smallint(4) NOT NULL default "0",'+
+                           'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch)) TYPE=MyISAM'));
 
 // World cities
 // must equate cities.h

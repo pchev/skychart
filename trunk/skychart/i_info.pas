@@ -31,23 +31,12 @@ procedure Tf_info.Button2Click(Sender: TObject);
 var i : integer;
     buf:string;
 begin
+if not assigned(FGetTCPinfo) then exit;
 try
 stringgrid1.RowCount:=Maxwindow;
-if (f_main.TCPDaemon<>nil) then
- with f_main.TCPDaemon do begin
- for i:=1 to Maxwindow do
-   if (not f_main.TCPDaemon.ThrdActive[i])
-     or(TCPThrd[i]=nil)
-     or(TCPThrd[i].sock=nil)
-     or(TCPThrd[i].terminated)
-     then begin
-       buf:=inttostr(i)+' not connected.';
-       stringgrid1.Cells[0,i-1]:=buf;
-     end
-     else begin
-       buf:=inttostr(i)+' connected from '+TCPThrd[i].RemoteIP+blank+TCPThrd[i].RemotePort+', using chart '+TCPThrd[i].active_chart+', connect time:'+datetimetostr(TCPThrd[i].connecttime);
-       stringgrid1.Cells[0,i-1]:=buf;
-     end;
+for i:=1 to Maxwindow do begin
+   FGetTCPinfo(i,buf);
+   stringgrid1.Cells[0,i-1]:=buf;
 end;
 except
 end;
@@ -67,11 +56,8 @@ end;
 
 procedure Tf_info.closeconnectionClick(Sender: TObject);
 begin
-if (RowClick>=0)
-   and(f_main.TCPDaemon.ThrdActive[RowClick+1])
-   and(f_main.TCPDaemon<>nil)
-   and(f_main.TCPDaemon.TCPThrd[RowClick+1]<>nil)
-   then f_main.TCPDaemon.TCPThrd[RowClick+1].Terminate;
+if (RowClick>=0) and assigned(FKillTCP) then
+   FKillTCP(RowClick+1);
 end;
 
 procedure Tf_info.FormShow(Sender: TObject);
@@ -185,7 +171,7 @@ try
 Printmemo(memo1);
 {$endif}
 {$ifdef mswindows}
-f_main.FilePrintSetup1.Execute;
+if assigned(FPrintSetup) then FPrintSetup(Sender);
 memo1.Print(' ');
 {$endif}
 except
@@ -260,7 +246,7 @@ if p>0 then begin
    p:=pos(tab,buf); delete(buf,1,p);
    p:=pos(tab,buf);
    nm:=copy(buf,1,p-1);
-   f_main.showdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec,nm,desc);
+   if assigned(Fdetailinfo) then Fdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec,nm,desc);
 end;
 end;
 

@@ -50,5 +50,6 @@ begin
   Application.CreateForm(Tf_directory, f_directory);
   Application.CreateForm(Tf_detail, f_detail);
   Application.CreateForm(Tf_info, f_info);
+  f_main.Init;
   Application.Run;
 end.

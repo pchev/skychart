@@ -29,6 +29,8 @@ uses
   QDialogs, QStdCtrls, QComCtrls, QExtCtrls, QMenus, QStdActns, QActnList;
 
 type
+  Tstr1func = procedure(txt:string) of object;
+
   Tf_detail = class(TForm)
     Panel1: TPanel;
     memo: TTextBrowser;
@@ -48,17 +50,19 @@ type
     procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
+    FCenter : Tstr1func;
+    FNeighbor : Tstr1func;
   public
     { Public declarations }
     source_chart:string;
+    property OnCenterObj: Tstr1func read FCenter write FCenter;
+    property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
   end;
 
 var
   f_detail: Tf_detail;
 
 implementation
-
-uses fu_main;
 
 {$R *.xfm}
 
@@ -79,12 +83,12 @@ end;
 
 procedure Tf_detail.Button2Click(Sender: TObject);
 begin
-f_main.CenterFindObj(source_chart);
+if assigned(FCenter) then FCenter(source_chart);
 end;
 
 procedure Tf_detail.Button3Click(Sender: TObject);
 begin
-f_main.NeighborObj(source_chart);
+if assigned(FNeighbor) then FNeighbor(source_chart);
 end;
 
 

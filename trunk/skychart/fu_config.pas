@@ -47,7 +47,6 @@ type
     p_lines: TTabSheet;
     p_labels: TTabSheet;
     Label5: TLabel;
-    Label6: TLabel;
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
@@ -463,9 +462,9 @@ type
     MaskEdit21: TMaskEdit;
     MaskEdit22: TMaskEdit;
     PlaParalaxe: TRadioGroup;
-    Planet3: TEdit;
+    PlanetDir: TEdit;
     Label53: TLabel;
-    BitBtn31: TBitBtn;
+    PlanetDirSel: TBitBtn;
     Label177: TLabel;
     Edit2: TEdit;
     apply: TButton;
@@ -761,6 +760,101 @@ type
     Label229: TLabel;
     Label230: TLabel;
     Addast: TButton;
+    ComPageControl: TPageControl;
+    comsetting: TTabSheet;
+    GroupBox13: TGroupBox;
+    Label6: TLabel;
+    Label231: TLabel;
+    Label232: TLabel;
+    comlimitmag: TFloatEdit;
+    showcom: TCheckBox;
+    comsymbol: TRadioGroup;
+    commagdiff: TFloatEdit;
+    comdbset: TButton;
+    comload: TTabSheet;
+    Label233: TLabel;
+    GroupBox14: TGroupBox;
+    Label234: TLabel;
+    comfile: TEdit;
+    Loadcom: TButton;
+    comfilebtn: TBitBtn;
+    MemoCom: TMemo;
+    comdelete: TTabSheet;
+    Label238: TLabel;
+    GroupBox16: TGroupBox;
+    comelemlist: TComboBox;
+    DelCom: TButton;
+    GroupBox17: TGroupBox;
+    Label239: TLabel;
+    DelComAll: TButton;
+    DelComMemo: TMemo;
+    Addsinglecom: TTabSheet;
+    Label241: TLabel;
+    Label242: TLabel;
+    Label243: TLabel;
+    Label244: TLabel;
+    Label245: TLabel;
+    Label246: TLabel;
+    Label247: TLabel;
+    Label248: TLabel;
+    Label249: TLabel;
+    Label250: TLabel;
+    Label251: TLabel;
+    Label253: TLabel;
+    Label254: TLabel;
+    comid: TEdit;
+    comh: TEdit;
+    comg: TEdit;
+    comep: TEdit;
+    comperi: TEdit;
+    comnode: TEdit;
+    comi: TEdit;
+    comec: TEdit;
+    comq: TEdit;
+    comnam: TEdit;
+    comeq: TEdit;
+    AddCom: TButton;
+    comt: TMaskEdit;
+    CometDB: TButton;
+    labelcolorStar: TShape;
+    Label236: TLabel;
+    Label237: TLabel;
+    Label240: TLabel;
+    Label252: TLabel;
+    Label255: TLabel;
+    labelcolorVar: TShape;
+    labelcolorMult: TShape;
+    labelcolorNeb: TShape;
+    labelcolorSol: TShape;
+    labelcolorMisc: TShape;
+    labelcolorConst: TShape;
+    labelsizeStar: TSpinEdit;
+    labelmagStar: TSpinEdit;
+    showlabelStar: TCheckBox;
+    labelsizeVar: TSpinEdit;
+    labelmagVar: TSpinEdit;
+    showlabelVar: TCheckBox;
+    labelsizeMult: TSpinEdit;
+    LabelmagMult: TSpinEdit;
+    showlabelMult: TCheckBox;
+    labelsizeNeb: TSpinEdit;
+    labelmagNeb: TSpinEdit;
+    showlabelNeb: TCheckBox;
+    labelsizeSol: TSpinEdit;
+    labelmagSol: TSpinEdit;
+    showlabelSol: TCheckBox;
+    labelsizeMisc: TSpinEdit;
+    showlabelMisc: TCheckBox;
+    showlabelConst: TCheckBox;
+    labelsizeConst: TSpinEdit;
+    Label235: TLabel;
+    symbfont: TEdit;
+    SpeedButton7: TSpeedButton;
+    Label256: TLabel;
+    Label257: TLabel;
+    bg4: TPanel;
+    Shape26: TShape;
+    Shape27: TShape;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -927,11 +1021,31 @@ type
     procedure deldateastClick(Sender: TObject);
     procedure stepresetClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
+    procedure showcomClick(Sender: TObject);
+    procedure comsymbolClick(Sender: TObject);
+    procedure comlimitmagChange(Sender: TObject);
+    procedure commagdiffChange(Sender: TObject);
+    procedure comfilebtnClick(Sender: TObject);
+    procedure LoadcomClick(Sender: TObject);
+    procedure DelComClick(Sender: TObject);
+    procedure DelComAllClick(Sender: TObject);
+    procedure AddComClick(Sender: TObject);
+    procedure CometDBClick(Sender: TObject);
+    procedure showlabelClick(Sender: TObject);
+    procedure labelmagChanged(Sender: TObject; NewValue: Integer);
+    procedure labelcolorMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure labelsizeChanged(Sender: TObject; NewValue: Integer);
+    procedure PlanetDirSelClick(Sender: TObject);
+    procedure PlanetDirChange(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
+    ObsMapFile:string;
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
+    procedure labelmagChange(Sender: TObject);
+    procedure labelsizeChange(Sender: TObject);
   public
     { Déclarations publiques }
     ccat : conf_catalog;
@@ -974,6 +1088,10 @@ type
     procedure ShowDB;
     procedure ShowAsteroid;
     procedure UpdAstList;
+    procedure ShowComet;
+    procedure UpdComList;
+    procedure showlabelcolor;
+    procedure showlabel;
   end;
 
 var
@@ -1020,7 +1138,17 @@ begin
 stepunitClick(Sender);
 end;
 
+procedure Tf_config.labelmagChanged(Sender: TObject; NewValue: Integer);
+begin
+labelmagChange(Sender);
+end;
+
+procedure Tf_config.labelsizeChanged(Sender: TObject; NewValue: Integer);
+begin
+labelSizeChange(Sender);
+end;
 // End of Linux specific CLX code:
+
 
 end.
 

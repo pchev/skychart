@@ -25,7 +25,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Windows, Classes, Graphics, Forms, Controls, StdCtrls,
+uses u_constant,
+  Windows, Classes, Graphics, Forms, Controls, StdCtrls,
   Buttons, ExtCtrls, jpeg;
 
 type
@@ -48,8 +49,6 @@ var
   f_about: Tf_about;
 
 implementation
-
-uses u_constant;
 
 {$R *.dfm}
 
