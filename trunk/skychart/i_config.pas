@@ -81,15 +81,12 @@ for i:=0 to COUNTRIES-1 do
 actual_country:='';
 end;
 
-procedure Tf_config.FormDestroy(Sender: TObject);
-begin
-end;
-
 procedure Tf_config.FormShow(Sender: TObject);
 begin
 if topmsg.caption='' then topmsg.color:=color
-                     else topmsg.color:=clRed;
+                     else topmsg.color:=clYellow;
 screen.cursor:=crHourGlass;
+autoprocess:=false;
 ShowTime;
 ShowChart;
 ShowField;
@@ -2002,24 +1999,30 @@ try
   db.database:='';
   db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
   if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
-     else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+db.GetLastError+crlf+'Also verify User/Password'; goto dmsg;end;
+     else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+trim(db.GetLastError)+crlf+'Verify if the MySQL Server is running and control the Userid/Password'; goto dmsg;end;
   if db.SelectDatabase(cmain.db) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
-     else begin msg:=msg+'Cannot open database '+cmain.db+'! '+db.GetLastError+crlf; goto dmsg;end;
+     else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.GetLastError)+crlf; goto dmsg;end;
   for i:=1 to numsqltable do begin
-     if db.Query('DESCRIBE '+sqltable[i,1]) then msg:=msg+'Table exist '+sqltable[i,1]+crlf
+     if db.Query('SHOW TABLES LIKE "'+sqltable[i,1]+'"') then msg:=msg+'Table exist '+sqltable[i,1]+crlf
         else begin msg:=msg+'Table '+sqltable[i,1]+' do not exist! '+crlf; goto dmsg;end;
   end;
   msg:=msg+'All is OK!';
 dmsg:
   ShowMessage(msg);
-finally
+  db.Free;
+except
 db.Free;
+msg:='MySQL database software is probably not installed!';
+ShowMessage(msg);
 end;
 end;
 
 procedure Tf_config.credbClick(Sender: TObject);
 var msg:string;
+    i:integer;
+    ok:boolean;
 begin
+ok:=false;
 db:=TMyDB.create(self);
 try
   db.SetPort(cmain.dbport);
@@ -2028,16 +2031,39 @@ try
   if db.Active then db.Query('Create Database '+cmain.db);
   msg:=trim(db.GetLastError);
   if msg<>'' then showmessage(msg);
-finally
+  if db.SelectDatabase(cmain.db) then begin
+    ok:=true;
+    for i:=1 to numsqltable do
+      if not db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]) then begin
+         ok:=false;
+         msg:='Error creating table '+sqltable[i,1]+' '+trim(db.GetLastError);
+         showmessage(msg);
+         break;
+      end;
+  end else begin
+     ok:=false;
+     msg:=trim(db.GetLastError);
+     if msg<>'' then showmessage(msg);
+  end;
+  db.Free;
+except
 db.Free;
 end;
+if ok then begin
+  // load sample data
+  mpcfile.text:='MPCsample.dat';
+  autoprocess:=true;
+   LoadMPCClick(Sender);
+  autoprocess:=false;
+end;
+chkdbClick(Sender);
 end;
 
 procedure Tf_config.dropdbClick(Sender: TObject);
 var msg:string;
 begin
 if messagedlg('Warning!'+crlf+'You are about to destroy the database '+cmain.db+' and all it''s content, even if this content is not related to this program.'+crlf+'Are you sure you want to continue?',
-              mtWarning, mbYesNo, 0, mbNo)=mrYes then begin
+              mtWarning, [mbYes,mbNo], 0)=mrYes then begin
 db:=TMyDB.create(self);
 try
   db.SetPort(cmain.dbport);
@@ -2046,34 +2072,10 @@ try
   if db.Active then db.Query('Drop Database '+cmain.db);
   msg:=trim(db.GetLastError);
   if msg<>'' then showmessage(msg);
-finally
+  db.Free;
+except
 db.Free;
 end;
-end;
-end;
-
-procedure Tf_config.cretblClick(Sender: TObject);
-var msg:string;
-    i:integer;
-begin
-db:=TMyDB.create(self);
-try
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
-  if db.Active then begin
-    for i:=1 to numsqltable do
-      if not db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]) then begin
-         msg:='Error creating table '+sqltable[i,1]+' '+trim(db.GetLastError);
-         showmessage(msg);
-      end;
-  end else begin
-     msg:=trim(db.GetLastError);
-     if msg<>'' then showmessage(msg);
-  end;
-finally
-db.Free;
-chkdbClick(Sender);
 end;
 end;
 
@@ -2089,6 +2091,7 @@ astsymbol.itemindex:=csc.AstSymbol;
 astlimitmag.value:=csc.AstmagMax;
 astmagdiff.value:=csc.AstmagDiff;
 aststrtdate.text:=inttostr(csc.curyear)+'.'+inttostr(csc.curmonth);
+astdeldate.text:=inttostr(csc.curyear-1)+'.'+inttostr(csc.curmonth);
 UpdAstList;
 end;
 
@@ -2112,8 +2115,9 @@ if db.Active then begin
   astelemlist.itemindex:=0;
   if astelemlist.items.count>0 then astelemlist.text:=astelemlist.items[0];
 end;
-finally
   db.Free;
+except
+db.Free;
 end;
 end;
 
@@ -2129,7 +2133,7 @@ end;
 
 procedure Tf_config.astlimitmagChange(Sender: TObject);
 begin
-csc.AstmagMax:=astlimitmag.value;
+if trim(astlimitmag.text)<>'' then csc.AstmagMax:=astlimitmag.value;
 end;
 
 procedure Tf_config.astmagdiffChange(Sender: TObject);
@@ -2167,7 +2171,12 @@ var
   hh:double;
   f : textfile;
 begin
+nerr:=1;
 MemoMPC.clear;
+if not fileexists(mpcfile.text) then begin
+  MemoMPC.lines.add('File not found!');
+  exit;
+end;
 db:=TMyDB.create(self);
 try
 screen.cursor:=crHourGlass;
@@ -2182,16 +2191,22 @@ if db.Active then begin
   db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
   assignfile(f,mpcfile.text);
   reset(f);
+  // minimal file checking to distinguish full mpcorb from daily update
   readln(f,buf);
   nl:=1;
-  c:=copy(buf,1,1);
-  if (c>='0')and(c<='9') then begin
+  c:=trim(copy(buf,27,9));
+  val(c,hh,nerr);
+  if nerr=0 then begin
             reset(f);
             nl:=0;
      end else repeat
              readln(f,buf);
              inc(nl);
           until eof(f) or (copy(buf,1,5)='-----');
+  if eof(f) then begin
+     MemoMPC.lines.add('This file was not recognized as a MPCORB file.');
+     raise exception.create('');
+  end;
   MemoMPC.lines.add('Data start on line '+inttostr(nl+1));
   prefl:=nl;
   db.Query('LOCK TABLES cdc_ast_elem WRITE;');
@@ -2214,8 +2229,9 @@ if db.Active then begin
     if decode_mpc_date(ep,y,m,d,hh) then
        ep:=floattostr(jd(y,m,d,hh))
      else begin
+       inc(nerr);
        MemoMPC.lines.add('invalid epoch on line'+inttostr(nl+prefl)+' : '+buf);
-       raise exception.create('Process interrupted');
+       break;
      end;
     if nl=1 then edate:=inttostr(y)+'.'+inttostr(m);
     ma:=copy(buf,27,9);
@@ -2250,25 +2266,31 @@ if db.Active then begin
           break;
        end;
     end;
+    if astlimitbox.checked and (nl>=astlimit.value) then break;
   until eof(f);
   closefile(f);
   MemoMPC.lines.add('Processing ended. Total number of asteroid :'+inttostr(nl));
-  if nerr=0 then begin
-     screen.cursor:=crDefault;
-     Showmessage('To use this new data you must compute the Monthly Data at least for '+edate);
-     if aststrtdate.text<edate then aststrtdate.text:=edate;
-     AstPageControl.activepage:=astprepare;
-  end;
 end else begin
    buf:=trim(db.GetLastError);
    if buf<>'' then showmessage(buf);
 end;
-finally
   screen.cursor:=crDefault;
   db.Query('UNLOCK TABLES');
   db.Free;
   UpdAstList;
+if nerr=0 then begin
+  if autoprocess then AstComputeClick(Sender)
+  else begin
+     Showmessage('To use this new data you must compute the Monthly Data for a period near '+edate);
+     if aststrtdate.text<edate then aststrtdate.text:=edate;
+     AstPageControl.activepage:=astprepare;
+  end;
 end;
+except
+  screen.cursor:=crDefault;
+  db.Free;
+end;
+
 end;
 
 procedure Tf_config.delastClick(Sender: TObject);
@@ -2304,10 +2326,12 @@ if db.Active then begin
   f_main.planet.TruncateDailyTables;
   delastMemo.lines.add('Delete completed');
 end;
-finally
+  db.Free;
+  screen.cursor:=crDefault;
+  UpdAstList;
+except
   screen.cursor:=crDefault;
   db.Free;
-  UpdAstList;
 end;
 end;
 
@@ -2339,10 +2363,45 @@ if db.Active then begin
   f_main.planet.TruncateDailyTables;
   delastMemo.lines.add('Delete completed');
 end;
-finally
   screen.cursor:=crDefault;
   db.Free;
   UpdAstList;
+except
+  screen.cursor:=crDefault;
+  db.Free;
+end;
+end;
+
+
+procedure Tf_config.deldateastClick(Sender: TObject);
+var i,y,m: integer;
+    jds: string;
+begin
+delastMemo.clear;
+i:=pos('.',astdeldate.text);
+y:=strtoint(trim(copy(astdeldate.text,1,i-1)));
+m:=strtoint(trim(copy(astdeldate.text,i+1,99)));
+jds:=formatfloat(f1,jd(y,m,1,0));
+db:=TMyDB.create(self);
+try
+screen.cursor:=crHourGlass;
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  db.Query('LOCK TABLES cdc_ast_mag WRITE');
+  delastMemo.lines.add('Delete from monthly table for jd<'+jds);
+  application.processmessages;
+  if not db.Query('Delete from cdc_ast_mag where jd<'+jds) then
+     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('UNLOCK TABLES');
+  delastMemo.lines.add('Delete completed');
+end;
+  screen.cursor:=crDefault;
+  db.Free;
+except
+  screen.cursor:=crDefault;
+  db.Free;
 end;
 end;
 
@@ -2352,10 +2411,11 @@ var jdt:double;
 begin
 try
 screen.cursor:=crHourGlass;
+f_main.planet.ConnectDB(cmain.dbhost,cmain.db,cmain.dbuser,cmain.dbpass,cmain.dbport);
 prepastmemo.clear;
 i:=pos('.',aststrtdate.text);
-y:=strtoint(copy(aststrtdate.text,1,i-1));
-m:=strtoint(copy(aststrtdate.text,i+1,99));
+y:=strtoint(trim(copy(aststrtdate.text,1,i-1)));
+m:=strtoint(trim(copy(aststrtdate.text,i+1,99)));
 for i:=1 to astnummonth.value do begin
   jdt:=jd(y,m,1,0);
   if not f_main.planet.PrepareAsteroid(jdt,prepastmemo.lines) then begin
@@ -2371,7 +2431,8 @@ for i:=1 to astnummonth.value do begin
   end;
 end;
 prepastmemo.lines.Add('You are now ready to display the asteroid for this time period.');
-finally
+screen.cursor:=crDefault;
+except
 screen.cursor:=crDefault;
 end;
 end;

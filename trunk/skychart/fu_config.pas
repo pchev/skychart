@@ -700,7 +700,6 @@ type
     chkdb: TButton;
     credb: TButton;
     dropdb: TButton;
-    cretbl: TButton;
     showast: TCheckBox;
     astdbset: TButton;
     astnummonth: TSpinEdit;
@@ -725,6 +724,13 @@ type
     Label212: TLabel;
     astmagdiff: TFloatEdit;
     Label213: TLabel;
+    GroupBox12: TGroupBox;
+    astdeldate: TMaskEdit;
+    deldateast: TButton;
+    Label214: TLabel;
+    astlimit: TLongEdit;
+    astlimitbox: TCheckBox;
+    Label215: TLabel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -874,11 +880,9 @@ type
     procedure dbportChange(Sender: TObject);
     procedure dbuserChange(Sender: TObject);
     procedure dbpassChange(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure chkdbClick(Sender: TObject);
     procedure credbClick(Sender: TObject);
     procedure dropdbClick(Sender: TObject);
-    procedure cretblClick(Sender: TObject);
     procedure astdbsetClick(Sender: TObject);
     procedure showastClick(Sender: TObject);
     procedure astlimitmagChange(Sender: TObject);
@@ -890,6 +894,7 @@ type
     procedure AstComputeClick(Sender: TObject);
     procedure AstDBClick(Sender: TObject);
     procedure astmagdiffChange(Sender: TObject);
+    procedure deldateastClick(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -959,7 +964,7 @@ var
 var c : Pcities;
     total,first: integer;
     actual_country: string;
-
+    autoprocess: boolean;
 
 {$R *.xfm}
 

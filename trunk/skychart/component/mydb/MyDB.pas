@@ -35,7 +35,7 @@ const
 {$IFNDEF LINUX}
 
   {$IFDEF MYSQL4}
-  DEFAULT_DLL_LOCATION = 'libmysql4.dll';
+  DEFAULT_DLL_LOCATION = 'libmysql.dll';
   {$ELSE}
   DEFAULT_DLL_LOCATION = 'libmysql.dll';
   {$ENDIF}
@@ -1093,6 +1093,7 @@ end;
 function TMyDB.Connect;
 var AH:PMySQL;
 begin
+  result:=false;
   //Allow user to change shared library
   if FLibrary<>'' then
     DLL:=FLibrary;
@@ -1150,6 +1151,7 @@ begin
     end;
   if FActive and Assigned(FOnOpen) then
     FOnOpen(Self);
+  result:=FActive;
 end;
 
 //An active property was added to allow
@@ -1314,6 +1316,7 @@ end;
 //This is the main function to perform a query:
 function TMyDB.Query;
 begin
+  result:=false;
   if not FActive then
     SetActive(True); //Try once if client just performs query
 
@@ -1354,6 +1357,7 @@ end;
 //Query with Use result:
 function TMyDB.QueryUse;
 begin
+  result:=false;
   if not FActive then
     SetActive(True); //Try once if client just performs query
 
@@ -1369,6 +1373,7 @@ begin
       if 0=mysql_query(@MyHandle, PChar(SQL)) then
         begin
           res:=mysql_use_result(@MyHandle);
+          result:=true;
         end
       else
         begin
@@ -1390,6 +1395,7 @@ end;
 Function TMyDB.CloseResult;
 begin
   mysql_free_result(res);
+  result:=true;
 end;
 
 

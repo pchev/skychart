@@ -1,8 +1,8 @@
 object f_config: Tf_config
-  Left = 285
-  Top = 96
-  Width = 634
-  Height = 507
+  Left = 212
+  Top = 184
+  Width = 636
+  Height = 518
   Caption = 'Configuration'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,15 +19,14 @@ object f_config: Tf_config
   TextHeight = 13
   object TreeView1: TTreeView
     Left = 4
-    Top = 0
+    Top = 16
     Width = 136
     Height = 441
     AutoExpand = True
     HideSelection = False
-    Indent = 15
+    Indent = 19
     ReadOnly = True
     RowSelect = True
-    ShowButtons = False
     TabOrder = 0
     OnChange = TreeView1Change
     Items.Data = {
@@ -74,10 +73,10 @@ object f_config: Tf_config
   end
   object PageControl1: TPageControl
     Left = 144
-    Top = 0
+    Top = 16
     Width = 474
     Height = 441
-    ActivePage = p_observatory
+    ActivePage = TabSheet1
     TabOrder = 1
     OnChange = PageControl1Change
     object p_time: TTabSheet
@@ -6492,12 +6491,416 @@ object f_config: Tf_config
       Caption = 'p_asteroids'
       ImageIndex = 6
       TabVisible = False
-      object Label7: TLabel
+      object AstPageControl: TPageControl
         Left = 0
-        Top = 0
-        Width = 79
-        Height = 13
-        Caption = 'Asteroids Setting'
+        Top = 4
+        Width = 465
+        Height = 420
+        ActivePage = astsetting
+        TabIndex = 0
+        TabOrder = 0
+        object astsetting: TTabSheet
+          Caption = 'General Setting'
+          ImageIndex = 3
+          object GroupBox9: TGroupBox
+            Left = 8
+            Top = 10
+            Width = 441
+            Height = 175
+            Caption = 'Chart Setting'
+            TabOrder = 0
+            object Label203: TLabel
+              Left = 32
+              Top = 112
+              Width = 258
+              Height = 13
+              Caption = 'Do not take account of asteroid fainter than magnitude'
+            end
+            object Label212: TLabel
+              Left = 32
+              Top = 144
+              Width = 67
+              Height = 13
+              Caption = 'Show asteroid'
+            end
+            object Label213: TLabel
+              Left = 160
+              Top = 144
+              Width = 148
+              Height = 13
+              Caption = 'magnitude fainter that the stars.'
+            end
+            object astlimitmag: TFloatEdit
+              Left = 320
+              Top = 107
+              Width = 41
+              Height = 22
+              Hint = '0..99'
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 0
+              OnChange = astlimitmagChange
+              MaxValue = 99
+            end
+            object showast: TCheckBox
+              Left = 32
+              Top = 24
+              Width = 241
+              Height = 30
+              Caption = 'Show asteroids on the chart'
+              TabOrder = 1
+              OnClick = showastClick
+            end
+            object astsymbol: TRadioGroup
+              Left = 24
+              Top = 56
+              Width = 393
+              Height = 41
+              Color = clBtnFace
+              Columns = 2
+              ItemIndex = 1
+              Items.Strings = (
+                'Display as a symbol'
+                'Proportional to the magnitude ')
+              ParentColor = False
+              TabOrder = 3
+              OnClick = astsymbolClick
+            end
+            object astmagdiff: TFloatEdit
+              Left = 112
+              Top = 139
+              Width = 41
+              Height = 22
+              Hint = '0..99'
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 2
+              OnChange = astmagdiffChange
+              MaxValue = 99
+            end
+          end
+          object astdbset: TButton
+            Left = 8
+            Top = 232
+            Width = 113
+            Height = 25
+            Caption = 'Database setting...'
+            TabOrder = 1
+            OnClick = astdbsetClick
+          end
+        end
+        object astload: TTabSheet
+          Caption = 'Load MPC File'
+          ImageIndex = 1
+          object Label206: TLabel
+            Left = 8
+            Top = 144
+            Width = 51
+            Height = 13
+            Caption = 'Messages:'
+          end
+          object GroupBox7: TGroupBox
+            Left = 8
+            Top = 10
+            Width = 441
+            Height = 127
+            Caption = 'Load MPC format file'
+            TabOrder = 0
+            object Label204: TLabel
+              Left = 8
+              Top = 32
+              Width = 22
+              Height = 13
+              Caption = 'File :'
+            end
+            object Label215: TLabel
+              Left = 208
+              Top = 101
+              Width = 100
+              Height = 13
+              Caption = 'Asteroids from the file'
+            end
+            object mpcfile: TEdit
+              Left = 32
+              Top = 28
+              Width = 241
+              Height = 21
+              TabOrder = 0
+              Text = 'MPCORB.DAT'
+            end
+            object astnumbered: TCheckBox
+              Left = 30
+              Top = 56
+              Width = 157
+              Height = 30
+              Caption = 'Only numbered asteroids'
+              Checked = True
+              State = cbChecked
+              TabOrder = 1
+            end
+            object LoadMPC: TButton
+              Left = 328
+              Top = 26
+              Width = 97
+              Height = 25
+              Caption = 'Load file'
+              TabOrder = 2
+              OnClick = LoadMPCClick
+            end
+            object mpcfilebtn: TBitBtn
+              Tag = 8
+              Left = 275
+              Top = 25
+              Width = 26
+              Height = 26
+              TabOrder = 4
+              TabStop = False
+              OnClick = mpcfilebtnClick
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                0000000000000000000000000000000000000000000000000000000000000000
+                00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+                7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+                CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+                CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+                7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+              Layout = blGlyphTop
+              Margin = 0
+            end
+            object aststoperr: TCheckBox
+              Left = 196
+              Top = 56
+              Width = 157
+              Height = 30
+              Caption = 'Halt after 1000 errors'
+              Checked = True
+              State = cbChecked
+              TabOrder = 3
+            end
+            object astlimitbox: TCheckBox
+              Left = 30
+              Top = 92
+              Width = 117
+              Height = 30
+              Caption = 'Load only the first '
+              TabOrder = 5
+            end
+            object astlimit: TLongEdit
+              Left = 152
+              Top = 96
+              Width = 49
+              Height = 22
+              Hint = '0..0'
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 6
+              Value = 5000
+            end
+          end
+          object MemoMPC: TMemo
+            Left = 8
+            Top = 160
+            Width = 441
+            Height = 225
+            Color = clBtnFace
+            ScrollBars = ssBoth
+            TabOrder = 1
+          end
+        end
+        object astprepare: TTabSheet
+          Caption = 'Prepare Monthly Data'
+          ImageIndex = 2
+          object Label210: TLabel
+            Left = 8
+            Top = 104
+            Width = 51
+            Height = 13
+            Caption = 'Messages:'
+          end
+          object GroupBox8: TGroupBox
+            Left = 8
+            Top = 10
+            Width = 441
+            Height = 79
+            Caption = 'Prepare data '
+            TabOrder = 0
+            object Label7: TLabel
+              Left = 8
+              Top = 36
+              Width = 55
+              Height = 13
+              Caption = 'Start Month'
+            end
+            object Label207: TLabel
+              Left = 152
+              Top = 36
+              Width = 82
+              Height = 13
+              Caption = 'Number of Month'
+            end
+            object aststrtdate: TMaskEdit
+              Left = 72
+              Top = 32
+              Width = 65
+              Height = 21
+              EditMask = '!9999/99;1;_'
+              MaxLength = 7
+              TabOrder = 0
+              Text = '2003.11'
+            end
+            object AstCompute: TButton
+              Left = 344
+              Top = 32
+              Width = 75
+              Height = 25
+              Caption = 'Compute'
+              TabOrder = 1
+              OnClick = AstComputeClick
+            end
+            object astnummonth: TSpinEdit
+              Left = 240
+              Top = 32
+              Width = 49
+              Height = 22
+              MaxValue = 12
+              MinValue = 2
+              TabOrder = 2
+              Value = 2
+            end
+          end
+          object prepastmemo: TMemo
+            Left = 8
+            Top = 128
+            Width = 441
+            Height = 249
+            Color = clBtnFace
+            ScrollBars = ssBoth
+            TabOrder = 1
+          end
+        end
+        object astdelete: TTabSheet
+          Caption = 'Data Maintenance'
+          ImageIndex = 3
+          object Label211: TLabel
+            Left = 8
+            Top = 184
+            Width = 51
+            Height = 13
+            Caption = 'Messages:'
+          end
+          object GroupBox10: TGroupBox
+            Left = 8
+            Top = 10
+            Width = 441
+            Height = 60
+            Caption = 'Delete MPC data selectively'
+            TabOrder = 0
+            object astelemlist: TComboBox
+              Left = 16
+              Top = 24
+              Width = 281
+              Height = 21
+              Style = csDropDownList
+              ItemHeight = 13
+              TabOrder = 0
+            end
+            object delast: TButton
+              Left = 328
+              Top = 24
+              Width = 75
+              Height = 25
+              Caption = 'Delete'
+              TabOrder = 1
+              OnClick = delastClick
+            end
+          end
+          object GroupBox11: TGroupBox
+            Left = 8
+            Top = 128
+            Width = 441
+            Height = 49
+            Caption = 'Quick Delete'
+            TabOrder = 1
+            object Label209: TLabel
+              Left = 24
+              Top = 19
+              Width = 179
+              Height = 13
+              Caption = 'Quickly delete all asteroid related data'
+            end
+            object delallast: TButton
+              Left = 328
+              Top = 16
+              Width = 75
+              Height = 25
+              Caption = 'Delete'
+              TabOrder = 0
+              OnClick = delallastClick
+            end
+          end
+          object delastMemo: TMemo
+            Left = 8
+            Top = 208
+            Width = 441
+            Height = 177
+            Color = clBtnFace
+            ScrollBars = ssBoth
+            TabOrder = 3
+          end
+          object GroupBox12: TGroupBox
+            Left = 8
+            Top = 72
+            Width = 441
+            Height = 57
+            Caption = 'Delete Monthly data '
+            TabOrder = 2
+            object Label214: TLabel
+              Left = 16
+              Top = 24
+              Width = 148
+              Height = 13
+              Caption = 'Delete Monthly data older than '
+            end
+            object astdeldate: TMaskEdit
+              Left = 232
+              Top = 20
+              Width = 65
+              Height = 21
+              EditMask = '!9999/99;1;_'
+              MaxLength = 7
+              TabOrder = 0
+              Text = '2000. 1'
+            end
+            object deldateast: TButton
+              Left = 328
+              Top = 21
+              Width = 75
+              Height = 25
+              Caption = 'Delete'
+              TabOrder = 1
+              OnClick = deldateastClick
+            end
+          end
+        end
       end
     end
     object p_display: TTabSheet
@@ -7992,6 +8395,138 @@ object f_config: Tf_config
       Caption = 'p_system'
       ImageIndex = 25
       TabVisible = False
+      object Label153: TLabel
+        Left = 0
+        Top = 0
+        Width = 70
+        Height = 13
+        Caption = 'System Setting'
+      end
+      object GroupBox6: TGroupBox
+        Left = 16
+        Top = 26
+        Width = 441
+        Height = 175
+        Caption = 'MySQL  Database'
+        TabOrder = 0
+        object Label77: TLabel
+          Left = 16
+          Top = 28
+          Width = 49
+          Height = 13
+          Caption = 'DB Name:'
+        end
+        object Label84: TLabel
+          Left = 168
+          Top = 28
+          Width = 56
+          Height = 13
+          Caption = 'Host Name:'
+        end
+        object Label85: TLabel
+          Left = 328
+          Top = 28
+          Width = 22
+          Height = 13
+          Caption = 'Port:'
+        end
+        object Label86: TLabel
+          Left = 16
+          Top = 68
+          Width = 33
+          Height = 13
+          Caption = 'Userid:'
+        end
+        object Label133: TLabel
+          Left = 208
+          Top = 68
+          Width = 46
+          Height = 13
+          Caption = 'Password'
+        end
+        object dbname: TEdit
+          Left = 80
+          Top = 24
+          Width = 65
+          Height = 21
+          TabOrder = 0
+          Text = 'cdc'
+          OnChange = dbnameChange
+        end
+        object dbport: TLongEdit
+          Left = 368
+          Top = 26
+          Width = 57
+          Height = 22
+          TabOrder = 1
+          OnChange = dbportChange
+          Value = 3306
+        end
+        object dbhost: TEdit
+          Left = 240
+          Top = 24
+          Width = 65
+          Height = 21
+          TabOrder = 2
+          Text = 'dbhost'
+          OnChange = dbhostChange
+        end
+        object dbuser: TEdit
+          Left = 80
+          Top = 64
+          Width = 100
+          Height = 21
+          TabOrder = 5
+          Text = 'dbuser'
+          OnChange = dbuserChange
+        end
+        object dbpass: TEdit
+          Left = 272
+          Top = 64
+          Width = 100
+          Height = 21
+          PasswordChar = '*'
+          TabOrder = 7
+          Text = 'dbpass'
+          OnChange = dbpassChange
+        end
+        object chkdb: TButton
+          Left = 16
+          Top = 104
+          Width = 97
+          Height = 25
+          Caption = 'Check'
+          TabOrder = 3
+          OnClick = chkdbClick
+        end
+        object credb: TButton
+          Left = 168
+          Top = 104
+          Width = 97
+          Height = 25
+          Caption = 'Create Database'
+          TabOrder = 4
+          OnClick = credbClick
+        end
+        object dropdb: TButton
+          Left = 328
+          Top = 104
+          Width = 97
+          Height = 25
+          Caption = 'Drop Database'
+          TabOrder = 6
+          OnClick = dropdbClick
+        end
+        object AstDB: TButton
+          Left = 16
+          Top = 136
+          Width = 97
+          Height = 25
+          Caption = 'Asteroid Setting'
+          TabOrder = 8
+          OnClick = AstDBClick
+        end
+      end
     end
     object p_server: TTabSheet
       Caption = 'p_server'
@@ -8096,7 +8631,7 @@ object f_config: Tf_config
   end
   object CancelBtn: TButton
     Left = 462
-    Top = 448
+    Top = 460
     Width = 75
     Height = 25
     Cancel = True
@@ -8106,7 +8641,7 @@ object f_config: Tf_config
   end
   object OKBtn: TButton
     Left = 302
-    Top = 448
+    Top = 460
     Width = 75
     Height = 25
     Caption = 'OK'
@@ -8116,7 +8651,7 @@ object f_config: Tf_config
   end
   object HelpBtn: TButton
     Left = 542
-    Top = 448
+    Top = 460
     Width = 75
     Height = 25
     Caption = '&Help'
@@ -8124,7 +8659,7 @@ object f_config: Tf_config
   end
   object Applyall: TCheckBox
     Left = 120
-    Top = 452
+    Top = 464
     Width = 177
     Height = 17
     Caption = 'Apply Change To All Chart'
@@ -8134,7 +8669,7 @@ object f_config: Tf_config
   end
   object next: TButton
     Left = 32
-    Top = 448
+    Top = 460
     Width = 25
     Height = 25
     Caption = '>'
@@ -8143,21 +8678,30 @@ object f_config: Tf_config
   end
   object previous: TButton
     Left = 8
-    Top = 448
+    Top = 460
     Width = 25
     Height = 25
     Caption = '<'
     TabOrder = 7
     OnClick = previousClick
   end
-  object Button2: TButton
+  object Apply: TButton
     Left = 382
-    Top = 448
+    Top = 460
     Width = 75
     Height = 25
     Caption = 'Apply'
     TabOrder = 8
-    OnClick = Button2Click
+    OnClick = ApplyClick
+  end
+  object topmsg: TPanel
+    Left = 0
+    Top = 0
+    Width = 628
+    Height = 16
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 9
   end
   object FontDialog1: TFontDialog
     Font.Charset = DEFAULT_CHARSET

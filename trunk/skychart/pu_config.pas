@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, u_constant, u_util, jpeg, pngimage,
+uses Math, u_constant, u_util, jpeg, pngimage, MyDB,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, Grids, ExtCtrls, enhedits, ActnList,
   FoldrDlg, Spin, Mask, CheckLst, cu_zoomimage;
@@ -49,7 +49,6 @@ type
     p_labels: TTabSheet;
     Label5: TLabel;
     Label6: TLabel;
-    Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
@@ -451,7 +450,7 @@ type
     BitBtn37: TBitBtn;
     Label53: TLabel;
     Edit2: TEdit;
-    Button2: TButton;
+    Apply: TButton;
     p_skycolor: TTabSheet;
     p_nebcolor: TTabSheet;
     bg1: TPanel;
@@ -668,6 +667,69 @@ type
     listvar: TCheckBox;
     listdbl: TCheckBox;
     dbreado: TPanel;
+    topmsg: TPanel;
+    GroupBox6: TGroupBox;
+    dbname: TEdit;
+    dbport: TLongEdit;
+    dbhost: TEdit;
+    Label77: TLabel;
+    Label84: TLabel;
+    Label85: TLabel;
+    dbuser: TEdit;
+    dbpass: TEdit;
+    Label86: TLabel;
+    Label133: TLabel;
+    chkdb: TButton;
+    credb: TButton;
+    dropdb: TButton;
+    AstDB: TButton;
+    Label153: TLabel;
+    AstPageControl: TPageControl;
+    astsetting: TTabSheet;
+    GroupBox9: TGroupBox;
+    astlimitmag: TFloatEdit;
+    Label203: TLabel;
+    showast: TCheckBox;
+    astsymbol: TRadioGroup;
+    Label212: TLabel;
+    astmagdiff: TFloatEdit;
+    Label213: TLabel;
+    astdbset: TButton;
+    astload: TTabSheet;
+    GroupBox7: TGroupBox;
+    Label204: TLabel;
+    mpcfile: TEdit;
+    astnumbered: TCheckBox;
+    LoadMPC: TButton;
+    mpcfilebtn: TBitBtn;
+    aststoperr: TCheckBox;
+    MemoMPC: TMemo;
+    Label206: TLabel;
+    astprepare: TTabSheet;
+    GroupBox8: TGroupBox;
+    aststrtdate: TMaskEdit;
+    Label7: TLabel;
+    Label207: TLabel;
+    AstCompute: TButton;
+    astnummonth: TSpinEdit;
+    prepastmemo: TMemo;
+    Label210: TLabel;
+    astdelete: TTabSheet;
+    GroupBox10: TGroupBox;
+    astelemlist: TComboBox;
+    delast: TButton;
+    GroupBox11: TGroupBox;
+    delallast: TButton;
+    Label209: TLabel;
+    Label211: TLabel;
+    delastMemo: TMemo;
+    GroupBox12: TGroupBox;
+    astdeldate: TMaskEdit;
+    deldateast: TButton;
+    Label214: TLabel;
+    astlimitbox: TCheckBox;
+    astlimit: TLongEdit;
+    Label215: TLabel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -751,7 +813,7 @@ type
     procedure GRSChange(Sender: TObject);
     procedure PlanetBox2Click(Sender: TObject);
     procedure PlanetBox3Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure ApplyClick(Sender: TObject);
     procedure nbstepChange(Sender: TObject);
     procedure steplineClick(Sender: TObject);
     procedure bgClick(Sender: TObject);
@@ -814,8 +876,29 @@ type
     procedure listplaClick(Sender: TObject);
     procedure listvarClick(Sender: TObject);
     procedure listdblClick(Sender: TObject);
+    procedure dbnameChange(Sender: TObject);
+    procedure dbuserChange(Sender: TObject);
+    procedure dbhostChange(Sender: TObject);
+    procedure dbpassChange(Sender: TObject);
+    procedure dbportChange(Sender: TObject);
+    procedure chkdbClick(Sender: TObject);
+    procedure credbClick(Sender: TObject);
+    procedure dropdbClick(Sender: TObject);
+    procedure AstDBClick(Sender: TObject);
+    procedure showastClick(Sender: TObject);
+    procedure astsymbolClick(Sender: TObject);
+    procedure astlimitmagChange(Sender: TObject);
+    procedure astmagdiffChange(Sender: TObject);
+    procedure astdbsetClick(Sender: TObject);
+    procedure mpcfilebtnClick(Sender: TObject);
+    procedure LoadMPCClick(Sender: TObject);
+    procedure AstComputeClick(Sender: TObject);
+    procedure delastClick(Sender: TObject);
+    procedure deldateastClick(Sender: TObject);
+    procedure delallastClick(Sender: TObject);
   private
     { Déclarations privées }
+    db:TmyDB;
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
   public
@@ -857,6 +940,9 @@ type
     procedure CenterObs;
     procedure ShowHorizon;
     procedure ShowObjList;
+    procedure ShowDB;
+    procedure ShowAsteroid;
+    procedure UpdAstList;
   end;
 
 var
@@ -881,6 +967,7 @@ var
 var c : Pcities;
     total,first: integer;
     actual_country: string;
+    autoprocess: boolean;
 
 {$R *.dfm}
 
