@@ -68,6 +68,8 @@ Function DEToStr2(de: Double; var d,m,s : string) : string;
 Function DEToStr3(de: Double) : string;
 Function Str3ToDE(dms : string) : double;
 Function DEToStr4(de: Double) : string;
+Function LONmToStr(l: Double) : string;
+Function LONToStr(l: Double) : string;
 Function GetTimeZone : double;
 Procedure FormPos(form : Tform; x,y : integer);
 
@@ -635,6 +637,51 @@ result:=result+ s * strtoint(t) / 3600;
 except
 result:=0;
 end;
+end;
+
+Function LONToStr(l: Double) : string;
+var dd,min1,min,sec: Double;
+    d,m,s : string;
+begin
+    dd:=Int(l);
+    min1:=abs(l-dd)*60;
+    if min1>=59.99 then begin
+       dd:=dd+sgn(l);
+       min1:=0.0;
+    end;
+    min:=Int(min1);
+    sec:=(min1-min)*60;
+    if sec>=59.5 then begin
+       min:=min+1;
+       sec:=0.0;
+    end;
+    str(abs(dd):2:0,d);
+    if abs(dd)<10 then d:='0'+trim(d);
+    if l<0 then d:='-'+d;
+    str(min:2:0,m);
+    if abs(min)<10 then m:='0'+trim(m);
+    str(sec:2:0,s);
+    if abs(sec)<9.5 then s:='0'+trim(s);
+    result := d+ldeg+m+lmin+s+lsec;
+end;
+
+Function LONmToStr(l: Double) : string;
+var dd,min: Double;
+    d,m : string;
+begin
+    dd:=Int(l);
+    min:=abs(l-dd)*60;
+    if min>=59.5 then begin
+       dd:=dd+sgn(l);
+       min:=0.0;
+    end;
+    min:=Round(min);
+    str(abs(dd):2:0,d);
+    if abs(dd)<10 then d:='0'+trim(d);
+    if l<0 then d:='-'+d;
+    str(min:2:0,m);
+    if abs(min)<10 then m:='0'+trim(m);
+    result := d+ldeg+m+lmin;
 end;
 
 Function GetTimeZone: double;
