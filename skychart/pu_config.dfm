@@ -76,7 +76,7 @@ object f_config: Tf_config
     Top = 16
     Width = 474
     Height = 441
-    ActivePage = TabSheet1
+    ActivePage = p_asteroids
     TabOrder = 1
     OnChange = PageControl1Change
     object p_time: TTabSheet
@@ -6497,8 +6497,8 @@ object f_config: Tf_config
         Top = 4
         Width = 465
         Height = 420
-        ActivePage = astsetting
-        TabIndex = 0
+        ActivePage = astload
+        TabIndex = 1
         TabOrder = 0
         object astsetting: TTabSheet
           Caption = 'General Setting'
@@ -6710,11 +6710,12 @@ object f_config: Tf_config
               Top = 96
               Width = 49
               Height = 22
-              Hint = '0..0'
+              Hint = '0..999999'
               ParentShowHint = False
               ShowHint = True
               TabOrder = 6
               Value = 5000
+              MaxValue = 999999
             end
           end
           object MemoMPC: TMemo

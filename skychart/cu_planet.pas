@@ -1638,6 +1638,7 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
                +' VALUES ("'+inttostr(trunc(newjd))+'","'+inttostr(lmag)+'")';
            db2.Query(qry);
            db2.Query('UNLOCK TABLES');
+           db2.Query('FLUSH TABLES');
         end else begin
            result:=false;
            exit;
@@ -1728,37 +1729,19 @@ end;
 
 function TPlanet.FindAsteroidName(astname: String; var ra,de:double; var cfgsc: conf_skychart):boolean;
 var dist,r,elong,phase,magn : double;
-  epoch,h,g,ma,ap,an,ic,ec,sa,eq,dt,t : double;
-  qry,id1,id2,ref,nam,elem_id :string;
-  i,ira,idec,imag: integer;
+  epoch,h,g,ma,ap,an,ic,ec,sa,eq : double;
+  qry,id,ref,nam,elem_id :string;
+  ira,idec,imag: integer;
 begin
 result:=false;
 if not db1.Active then exit;
-qry:='SELECT id, epoch FROM cdc_ast_elem'
+qry:='SELECT id FROM cdc_ast_name'
     +' where name like "%'+astname+'%"'
-    +' order by id limit 100';
-db1.Query(qry);
-if high(db1.Resultset)>=0 then begin
-   id1:=db1.Resultset[0,0];
-   epoch:=strtofloat(db1.Resultset[0,1]);
-   dt:=abs(epoch-cfgsc.curjd);
-   i:=1;
-   while i<=high(db1.Resultset) do begin
-      id2:=db1.Resultset[i,0];
-      if id2<>id1 then break;
-      t:=strtofloat(db1.Resultset[i,1]);
-      if abs(t-cfgsc.curjd)<dt then begin
-         epoch:=t;
-         dt:=abs(epoch-cfgsc.curjd);
-      end;
-      inc(i);
-   end;
-end else begin
-  result:=false;
-  exit;
-end;
-if GetAstElem(id1,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
-   InitAsteroid(id1,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam);
+    +' limit 1';
+id:=db1.QueryOne(qry);
+if id='' then exit;
+if GetAstElemEpoch(id,cfgsc.curjd,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+   InitAsteroid(id,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam);
    Asteroid(cfgsc.curjd,true,ra,de,dist,r,elong,phase,magn);
    if eq=2000 then precession(jd2000,cfgsc.jdchart,ra,de)
               else precession(jd(trunc(eq),1,1,0),cfgsc.jdchart,ra,de);
@@ -1766,12 +1749,13 @@ if GetAstElem(id1,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    idec:=round(de*1000);
    imag:=round(magn*10);
    qry:='INSERT INTO '+cfgsc.table_daypos+' (id,epoch,ra,de,mag) VALUES ('
-        +'"'+id1+'"'
+        +'"'+id+'"'
         +',"'+formatfloat(f1,epoch)+'"'
         +',"'+inttostr(ira)+'"'
         +',"'+inttostr(idec)+'"'
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
+   db1.Query('FLUSH TABLES');
    precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
@@ -1927,6 +1911,7 @@ while db2.FetchRow(res,row) do begin
 end;
 db2.Closeresult(res);
 db1.Query('UNLOCK TABLES');
+db1.Query('FLUSH TABLES');
 TruncateDailyTables;
 msg.Add('End processing jd='+jds);
 result:=(i>0);
