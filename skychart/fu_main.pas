@@ -227,8 +227,6 @@ type
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure quicksearchKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure FormResize(Sender: TObject);
     procedure quicksearchClick(Sender: TObject);
     procedure FlipxExecute(Sender: TObject);
@@ -262,9 +260,11 @@ type
     procedure TimeIncExecute(Sender: TObject);
     procedure TimeResetExecute(Sender: TObject);
     procedure ListObjExecute(Sender: TObject);
+    procedure quicksearchKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
-    function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
+    function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
   public
@@ -307,6 +307,9 @@ type
     procedure showdetailinfo(chart:string;ra,dec:double;nm,desc:string);
     procedure CenterFindObj(chart:string);
     procedure NeighborObj(chart:string);
+    procedure ConnectDB;
+    procedure OpenAsteroidConfig(Sender: TObject);
+    procedure OpenDBConfig(Sender: TObject);
   end;
 
 var
@@ -317,7 +320,7 @@ implementation
 
 {$R *.xfm}
 
-uses fu_chart, fu_about, fu_config, fu_info, u_projection ;
+uses fu_chart, fu_about, fu_config, fu_info, u_projection, MyDB ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here

@@ -81,8 +81,14 @@ for i:=0 to COUNTRIES-1 do
 actual_country:='';
 end;
 
+procedure Tf_config.FormDestroy(Sender: TObject);
+begin
+end;
+
 procedure Tf_config.FormShow(Sender: TObject);
 begin
+if topmsg.caption='' then topmsg.color:=color
+                     else topmsg.color:=clRed;
 screen.cursor:=crHourGlass;
 ShowTime;
 ShowChart;
@@ -102,6 +108,8 @@ ShowServer;
 ShowObservatory;
 ShowHorizon;
 ShowObjList;
+ShowDB;
+ShowAsteroid;
 TreeView1.TopItem.Expand(false);
 Treeview1.selected:=Treeview1.items[cmain.configpage];
 screen.cursor:=crDefault;
@@ -264,14 +272,14 @@ fpgc2.Value:=ccat.NebCatField[pgc-BaseNeb,2];
 focl2.Value:=ccat.NebCatField[ocl-BaseNeb,2];
 fgcm2.Value:=ccat.NebCatField[gcm-BaseNeb,2];
 fgpn2.Value:=ccat.NebCatField[gpn-BaseNeb,2];
-sac3.Text:=ccat.NebCatPath[sac-BaseNeb]+b;
-ngc3.Text:=ccat.NebCatPath[ngc-BaseNeb]+b;
-lbn3.Text:=ccat.NebCatPath[lbn-BaseNeb]+b;
-rc33.Text:=ccat.NebCatPath[rc3-BaseNeb]+b;
-pgc3.Text:=ccat.NebCatPath[pgc-BaseNeb]+b;
-ocl3.Text:=ccat.NebCatPath[ocl-BaseNeb]+b;
-gcm3.Text:=ccat.NebCatPath[gcm-BaseNeb]+b;
-gpn3.Text:=ccat.NebCatPath[gpn-BaseNeb]+b;
+sac3.Text:=ccat.NebCatPath[sac-BaseNeb]+blank;
+ngc3.Text:=ccat.NebCatPath[ngc-BaseNeb]+blank;
+lbn3.Text:=ccat.NebCatPath[lbn-BaseNeb]+blank;
+rc33.Text:=ccat.NebCatPath[rc3-BaseNeb]+blank;
+pgc3.Text:=ccat.NebCatPath[pgc-BaseNeb]+blank;
+ocl3.Text:=ccat.NebCatPath[ocl-BaseNeb]+blank;
+gcm3.Text:=ccat.NebCatPath[gcm-BaseNeb]+blank;
+gpn3.Text:=ccat.NebCatPath[gpn-BaseNeb]+blank;
 end;
 
 procedure Tf_config.ShowCDCStar;
@@ -323,21 +331,21 @@ dstyc1.Value:=ccat.StarCatField[dstyc-BaseStar,1];
 dstyc2.Value:=ccat.StarCatField[dstyc-BaseStar,2];
 dsgsc1.Value:=ccat.StarCatField[dsgsc-BaseStar,1];
 dsgsc2.Value:=ccat.StarCatField[dsgsc-BaseStar,2];
-bsc3.Text:=ccat.StarCatPath[bsc-BaseStar]+b;
-sky3.Text:=ccat.StarCatPath[sky2000-BaseStar]+b;
-tyc3.Text:=ccat.StarCatPath[tyc-BaseStar]+b;
-ty23.Text:=ccat.StarCatPath[tyc2-BaseStar]+b;
-tic3.Text:=ccat.StarCatPath[tic-BaseStar]+b;
-gscf3.Text:=ccat.StarCatPath[gscf-BaseStar]+b;
-gscc3.Text:=ccat.StarCatPath[gscc-BaseStar]+b;
-gsc3.Text:=ccat.StarCatPath[gsc-BaseStar]+b;
-usn3.Text:=ccat.StarCatPath[usnoa-BaseStar]+b;
-mct3.Text:=ccat.StarCatPath[microcat-BaseStar]+b;
-gcv3.Text:=ccat.VarStarCatPath[gcvs-BaseVar]+b;
-wds3.Text:=ccat.DblStarCatPath[wds-BaseDbl]+b;
-dsbase3.Text:=ccat.StarCatPath[dsbase-BaseStar]+b;
-dstyc3.Text:=ccat.StarCatPath[dstyc-BaseStar]+b;
-dsgsc3.Text:=ccat.StarCatPath[dsgsc-BaseStar]+b;
+bsc3.Text:=ccat.StarCatPath[bsc-BaseStar]+blank;
+sky3.Text:=ccat.StarCatPath[sky2000-BaseStar]+blank;
+tyc3.Text:=ccat.StarCatPath[tyc-BaseStar]+blank;
+ty23.Text:=ccat.StarCatPath[tyc2-BaseStar]+blank;
+tic3.Text:=ccat.StarCatPath[tic-BaseStar]+blank;
+gscf3.Text:=ccat.StarCatPath[gscf-BaseStar]+blank;
+gscc3.Text:=ccat.StarCatPath[gscc-BaseStar]+blank;
+gsc3.Text:=ccat.StarCatPath[gsc-BaseStar]+blank;
+usn3.Text:=ccat.StarCatPath[usnoa-BaseStar]+blank;
+mct3.Text:=ccat.StarCatPath[microcat-BaseStar]+blank;
+gcv3.Text:=ccat.VarStarCatPath[gcvs-BaseVar]+blank;
+wds3.Text:=ccat.DblStarCatPath[wds-BaseDbl]+blank;
+dsbase3.Text:=ccat.StarCatPath[dsbase-BaseStar]+blank;
+dstyc3.Text:=ccat.StarCatPath[dstyc-BaseStar]+blank;
+dsgsc3.Text:=ccat.StarCatPath[dsgsc-BaseStar]+blank;
 end;
 
 procedure Tf_config.ShowFilter;
@@ -1252,7 +1260,7 @@ begin
 csc.ShowEarthShadow:=PlanetBox3.checked;
 end;
 
-procedure Tf_config.Button2Click(Sender: TObject);
+procedure Tf_config.ApplyClick(Sender: TObject);
 begin
 // Apply change
 f_main.activateconfig;
@@ -1948,3 +1956,425 @@ procedure Tf_config.listdblClick(Sender: TObject);
 begin
 cshr.listdbl:=listdbl.checked;
 end;
+
+procedure Tf_config.ShowDB;
+begin
+dbname.Text:=cmain.db;
+dbhost.Text:=cmain.dbhost;
+dbport.value:=cmain.dbport;
+dbuser.Text:=cmain.dbuser;
+dbpass.Text:=cmain.dbpass;
+end;
+
+procedure Tf_config.dbnameChange(Sender: TObject);
+begin
+cmain.db:=dbname.Text;
+end;
+
+procedure Tf_config.dbhostChange(Sender: TObject);
+begin
+cmain.dbhost:=dbhost.Text;
+end;
+
+procedure Tf_config.dbportChange(Sender: TObject);
+begin
+cmain.dbport:=dbport.Value;
+end;
+
+procedure Tf_config.dbuserChange(Sender: TObject);
+begin
+cmain.dbuser:=dbuser.Text;
+end;
+
+procedure Tf_config.dbpassChange(Sender: TObject);
+begin
+cmain.dbpass:=dbpass.Text;
+end;
+
+procedure Tf_config.chkdbClick(Sender: TObject);
+var msg: string;
+    i:integer;
+label dmsg;
+begin
+db:=TMyDB.create(self);
+try
+  db.SetPort(cmain.dbport);
+  db.database:='';
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+  if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
+     else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+db.GetLastError+crlf+'Also verify User/Password'; goto dmsg;end;
+  if db.SelectDatabase(cmain.db) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
+     else begin msg:=msg+'Cannot open database '+cmain.db+'! '+db.GetLastError+crlf; goto dmsg;end;
+  for i:=1 to numsqltable do begin
+     if db.Query('DESCRIBE '+sqltable[i,1]) then msg:=msg+'Table exist '+sqltable[i,1]+crlf
+        else begin msg:=msg+'Table '+sqltable[i,1]+' do not exist! '+crlf; goto dmsg;end;
+  end;
+  msg:=msg+'All is OK!';
+dmsg:
+  ShowMessage(msg);
+finally
+db.Free;
+end;
+end;
+
+procedure Tf_config.credbClick(Sender: TObject);
+var msg:string;
+begin
+db:=TMyDB.create(self);
+try
+  db.SetPort(cmain.dbport);
+  db.database:='';
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+  if db.Active then db.Query('Create Database '+cmain.db);
+  msg:=trim(db.GetLastError);
+  if msg<>'' then showmessage(msg);
+finally
+db.Free;
+end;
+end;
+
+procedure Tf_config.dropdbClick(Sender: TObject);
+var msg:string;
+begin
+if messagedlg('Warning!'+crlf+'You are about to destroy the database '+cmain.db+' and all it''s content, even if this content is not related to this program.'+crlf+'Are you sure you want to continue?',
+              mtWarning, mbYesNo, 0, mbNo)=mrYes then begin
+db:=TMyDB.create(self);
+try
+  db.SetPort(cmain.dbport);
+  db.database:='';
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+  if db.Active then db.Query('Drop Database '+cmain.db);
+  msg:=trim(db.GetLastError);
+  if msg<>'' then showmessage(msg);
+finally
+db.Free;
+end;
+end;
+end;
+
+procedure Tf_config.cretblClick(Sender: TObject);
+var msg:string;
+    i:integer;
+begin
+db:=TMyDB.create(self);
+try
+  db.SetPort(cmain.dbport);
+  db.database:=cmain.db;
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+  if db.Active then begin
+    for i:=1 to numsqltable do
+      if not db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]) then begin
+         msg:='Error creating table '+sqltable[i,1]+' '+trim(db.GetLastError);
+         showmessage(msg);
+      end;
+  end else begin
+     msg:=trim(db.GetLastError);
+     if msg<>'' then showmessage(msg);
+  end;
+finally
+db.Free;
+chkdbClick(Sender);
+end;
+end;
+
+procedure Tf_config.AstDBClick(Sender: TObject);
+begin
+  Pagecontrol1.activepage:=p_asteroids;
+end;
+
+procedure Tf_config.ShowAsteroid;
+begin
+showast.checked:=csc.ShowAsteroid;
+astsymbol.itemindex:=csc.AstSymbol;
+astlimitmag.value:=csc.AstmagMax;
+astmagdiff.value:=csc.AstmagDiff;
+aststrtdate.text:=inttostr(csc.curyear)+'.'+inttostr(csc.curmonth);
+UpdAstList;
+end;
+
+procedure Tf_config.UpdAstList;
+var i:integer;
+begin
+astelemlist.clear;
+astelemlist.text:='';
+db:=TMyDB.create(self);
+try
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  db.Query('Select elem_id,filedesc from cdc_ast_elem_list order by elem_id');
+  i:=0;
+  while i<= high(db.Resultset) do begin
+     astelemlist.items.add(db.Resultset[i,0]+'; '+db.Resultset[i,1]);
+     inc(i);
+  end;
+  astelemlist.itemindex:=0;
+  if astelemlist.items.count>0 then astelemlist.text:=astelemlist.items[0];
+end;
+finally
+  db.Free;
+end;
+end;
+
+procedure Tf_config.showastClick(Sender: TObject);
+begin
+csc.ShowAsteroid:=showast.checked;
+end;
+
+procedure Tf_config.astsymbolClick(Sender: TObject);
+begin
+csc.astsymbol:=astsymbol.itemindex;
+end;
+
+procedure Tf_config.astlimitmagChange(Sender: TObject);
+begin
+csc.AstmagMax:=astlimitmag.value;
+end;
+
+procedure Tf_config.astmagdiffChange(Sender: TObject);
+begin
+csc.AstmagDiff:=astmagdiff.value;
+end;
+
+procedure Tf_config.astdbsetClick(Sender: TObject);
+begin
+  Pagecontrol1.activepage:=p_system;
+end;
+
+procedure Tf_config.mpcfilebtnClick(Sender: TObject);
+var f : string;
+begin
+f:=expandfilename(mpcFile.Text);
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   mpcFile.Text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
+procedure Tf_config.LoadMPCClick(Sender: TObject);
+var
+  buf,cmd,c,filedesc,filenum,edate :string;
+  ep,id,nam,ec,ax,i,node,peri,eq,ma,h,g,ref  : string;
+  y,m,d,nl,prefl,lid,nerr: integer;
+  hh:double;
+  f : textfile;
+begin
+MemoMPC.clear;
+db:=TMyDB.create(self);
+try
+screen.cursor:=crHourGlass;
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  filedesc:=extractfilename(mpcfile.text)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(mpcfile.text)));
+  buf:=db.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
+  if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
+             else filenum:='1';
+  db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
+  assignfile(f,mpcfile.text);
+  reset(f);
+  readln(f,buf);
+  nl:=1;
+  c:=copy(buf,1,1);
+  if (c>='0')and(c<='9') then begin
+            reset(f);
+            nl:=0;
+     end else repeat
+             readln(f,buf);
+             inc(nl);
+          until eof(f) or (copy(buf,1,5)='-----');
+  MemoMPC.lines.add('Data start on line '+inttostr(nl+1));
+  prefl:=nl;
+  db.Query('LOCK TABLES cdc_ast_elem WRITE;');
+  nerr:=0;
+  nl:=0;
+  repeat
+    readln(f,buf);
+    inc(nl);
+    if trim(buf)='' then begin
+      if astnumbered.checked then break
+                             else continue;
+    end;
+    if (nl mod 10000)=0 then begin MemoMPC.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
+    id:=trim(copy(buf,1,7));
+    lid:=length(id);
+    if lid<7 then id:=StringofChar('0',7-lid)+id;
+    h:=copy(buf,9,5);
+    g:=copy(buf,15,5);
+    ep:=trim(copy(buf,21,5));
+    if decode_mpc_date(ep,y,m,d,hh) then
+       ep:=floattostr(jd(y,m,d,hh))
+     else begin
+       MemoMPC.lines.add('invalid epoch on line'+inttostr(nl+prefl)+' : '+buf);
+       raise exception.create('Process interrupted');
+     end;
+    if nl=1 then edate:=inttostr(y)+'.'+inttostr(m);
+    ma:=copy(buf,27,9);
+    peri:=copy(buf,38,9);
+    node:=copy(buf,49,9);
+    i:=copy(buf,60,9);
+    ec:=copy(buf,71,9);
+    ax:=copy(buf,93,11);
+    ref:=trim(copy(buf,108,10));
+    nam:=stringreplace(trim(copy(buf,167,27)),'"','\"',[rfreplaceall]);
+    eq:='2000';
+    cmd:='INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
+        +'"'+id+'"'
+        +',"'+h+'"'
+        +',"'+g+'"'
+        +',"'+ep+'"'
+        +',"'+ma+'"'
+        +',"'+peri+'"'
+        +',"'+node+'"'
+        +',"'+i+'"'
+        +',"'+ec+'"'
+        +',"'+ax+'"'
+        +',"'+ref+'"'
+        +',"'+nam+'"'
+        +',"'+eq+'"'
+        +',"'+filenum+'"'+')';
+    if not db.query(cmd) then begin
+       MemoMPC.lines.add('insert failed line '+inttostr(nl+prefl)+' : '+trim(db.GetLastError));
+       inc(nerr);
+       if aststoperr.checked and (nerr>1000) then begin
+          MemoMPC.lines.add('More than 1000 errors! Process aborted.');
+          break;
+       end;
+    end;
+  until eof(f);
+  closefile(f);
+  MemoMPC.lines.add('Processing ended. Total number of asteroid :'+inttostr(nl));
+  if nerr=0 then begin
+     screen.cursor:=crDefault;
+     Showmessage('To use this new data you must compute the Monthly Data at least for '+edate);
+     if aststrtdate.text<edate then aststrtdate.text:=edate;
+     AstPageControl.activepage:=astprepare;
+  end;
+end else begin
+   buf:=trim(db.GetLastError);
+   if buf<>'' then showmessage(buf);
+end;
+finally
+  screen.cursor:=crDefault;
+  db.Query('UNLOCK TABLES');
+  db.Free;
+  UpdAstList;
+end;
+end;
+
+procedure Tf_config.delastClick(Sender: TObject);
+var i: integer;
+    elem_id:string;
+begin
+delastMemo.clear;
+i:=pos(';',astelemlist.text);
+elem_id:=copy(astelemlist.text,1,i-1);
+if trim(elem_id)='' then exit;
+db:=TMyDB.create(self);
+try
+screen.cursor:=crHourGlass;
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  db.Query('LOCK TABLES cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_mag WRITE');
+  delastMemo.lines.add('Delete from element table...');
+  application.processmessages;
+  if not db.Query('Delete from cdc_ast_elem where elem_id='+elem_id) then
+     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delastMemo.lines.add('Delete from element list...');
+  application.processmessages;
+  if not db.Query('Delete from cdc_ast_elem_list where elem_id='+elem_id) then
+     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delastMemo.lines.add('Delete from monthly table...');
+  application.processmessages;
+  if not db.Query('Delete from cdc_ast_mag where elem_id='+elem_id) then
+     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('UNLOCK TABLES');
+  delastMemo.lines.add('Delete daily data');
+  f_main.planet.TruncateDailyTables;
+  delastMemo.lines.add('Delete completed');
+end;
+finally
+  screen.cursor:=crDefault;
+  db.Free;
+  UpdAstList;
+end;
+end;
+
+
+procedure Tf_config.delallastClick(Sender: TObject);
+begin
+delastMemo.clear;
+db:=TMyDB.create(self);
+try
+screen.cursor:=crHourGlass;
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  db.Query('UNLOCK TABLES');
+  delastMemo.lines.add('Delete from element table...');
+  application.processmessages;
+  if not db.Query('Truncate table cdc_ast_elem') then
+     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delastMemo.lines.add('Delete from element list...');
+  application.processmessages;
+  if not db.Query('Truncate table cdc_ast_elem_list') then
+     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delastMemo.lines.add('Delete from monthly table...');
+  application.processmessages;
+  if not db.Query('Truncate table cdc_ast_mag') then
+     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delastMemo.lines.add('Delete daily data');
+  f_main.planet.TruncateDailyTables;
+  delastMemo.lines.add('Delete completed');
+end;
+finally
+  screen.cursor:=crDefault;
+  db.Free;
+  UpdAstList;
+end;
+end;
+
+procedure Tf_config.AstComputeClick(Sender: TObject);
+var jdt:double;
+    y,m,i:integer;
+begin
+try
+screen.cursor:=crHourGlass;
+prepastmemo.clear;
+i:=pos('.',aststrtdate.text);
+y:=strtoint(copy(aststrtdate.text,1,i-1));
+m:=strtoint(copy(aststrtdate.text,i+1,99));
+for i:=1 to astnummonth.value do begin
+  jdt:=jd(y,m,1,0);
+  if not f_main.planet.PrepareAsteroid(jdt,prepastmemo.lines) then begin
+     screen.cursor:=crDefault;
+     ShowMessage('No Asteroid data found!'+crlf+'Please load a MPC file first.');
+     AstPageControl.activepage:=astload;
+     exit;
+  end;
+  inc(m);
+  if m>12 then begin
+     inc(y);
+     m:=1;
+  end;
+end;
+prepastmemo.lines.Add('You are now ready to display the asteroid for this time period.');
+finally
+screen.cursor:=crDefault;
+end;
+end;
+
+
+

@@ -74,6 +74,8 @@ Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 Function GetTimeZone : double;
 Procedure FormPos(form : Tform; x,y : integer);
+procedure Exec(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string='');
+function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
 
 var traceon : boolean;
     
@@ -755,6 +757,61 @@ with Form do begin
   top:=y;
   if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
   if top<0 then top:=0;
+end;
+end;
+
+procedure Exec(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string='');
+{$ifdef linux}
+// This not work from Kylix IDE!
+var
+  pid: PID_T;
+  parg: array[1..7] of PChar;
+begin
+  pid := fork;
+  if pid = 0 then
+  begin
+    parg[1] := Pchar(cmd);
+    parg[2] := PChar(p1);
+    parg[3] := PChar(p2);
+    parg[4] := PChar(p3);
+    parg[5] := PChar(p4);
+    parg[6] := PChar(p5);
+    parg[7] := nil;
+    if execv(Pchar(cmd),PPChar(@parg[1])) = -1 then
+    begin
+      writetrace('Could not launch '+cmd);
+    end;
+  end;
+end;
+{$endif}
+{$ifdef mswindows}
+begin
+end;
+{$endif}
+
+function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
+var c: char;
+begin
+try
+c:=s[1];
+case c of
+ 'I' : y:=1800;
+ 'J' : y:=1900;
+ 'K' : y:=2000;
+end;
+y:=y+strtoint(copy(s,2,2));
+c:=s[4];
+if c<='9' then m:=strtoint(c)
+          else m:=ord(c)-55;
+c:=s[5];
+if c<='9' then d:=strtoint(c)
+          else d:=ord(c)-55;
+s:=trim(copy(s,6,999));
+if s>'' then hh:=strtofloat(s)
+        else hh:=0;
+result:=true;
+except
+ result:=false;
 end;
 end;
 

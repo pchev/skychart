@@ -1183,6 +1183,7 @@ var
    H : TCatHeader;
    i,version : integer;
 begin
+ok:=false;
 for i:=0 to cfgcat.GCatNum-1 do begin
   if fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx') then begin
    SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
@@ -1913,6 +1914,7 @@ end;
 
 function Tcatalog.FindNum(cat: integer; id: string; var ra,dec: double ):boolean ;
 begin
+result:=false;
 while lockcat do application.ProcessMessages;
 try
   lockcat:=true;
@@ -2174,9 +2176,6 @@ function Tcatalog.FindObj(x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_s
 var
    ok : boolean;
 begin
-while lockcat do application.ProcessMessages;
-try
-  lockcat:=true;
   ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
@@ -2209,9 +2208,6 @@ try
   if (not ok) and ArtSatOn then FindSatellite(ar,de,dx,dx,nextobj,ok,nom,ma,desc);}
   result:=ok;
   cfgsc.FindOK:=ok;
-finally
-  lockcat:=false;
-end;
 end;
 
 Procedure Tcatalog.GetAltName(rec: GCatrec; var txt: string);

@@ -72,6 +72,7 @@ type
      Procedure PlotLine(x1,y1,x2,y2,color,width: integer);
      procedure PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
      procedure PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
+     Procedure PlotAsteroid(xx,yy,symbol: integer; ma : Double);
      procedure PlotLabel(xx,yy,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string);
      procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
      procedure PlotOutline(xx,yy,op,lw,fs,closed: integer; r2:double; col: Tcolor);
@@ -912,6 +913,43 @@ with cnv do begin
    end;
    Pen.mode := pmCopy;
   end;
+end;
+
+Procedure TSplot.PlotAsteroid(xx,yy,symbol: integer; ma : Double);
+var
+  ds,ds2 : Integer;
+  diamond: array[0..3] of TPoint;
+begin
+with cnv do begin
+   Pen.Color := cfgplot.Color[0];
+   Pen.Width := cfgchart.DrawPen;
+   Pen.Mode := pmCopy;
+   Brush.Color := cfgplot.Color[20];
+   Brush.style:=bsSolid;
+   case symbol of
+   0 : begin
+     ds:=3*cfgchart.drawpen;
+     diamond[0]:=point(xx,yy-ds);
+     diamond[1]:=point(xx+ds,yy);
+     diamond[2]:=point(xx,yy+ds);
+     diamond[3]:=point(xx-ds,yy);
+     Polygon(diamond);
+     end;
+   1 : begin
+     ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
+     ds2:= round(ds/2);
+     case ds of
+       1..2: Ellipse(xx,yy,xx+ds,yy+ds);
+       3: Ellipse(xx-1,yy-1,xx+2,yy+2);
+       4: Ellipse(xx-2,yy-2,xx+2,yy+2);
+       5: Ellipse(xx-2,yy-2,xx+3,yy+3);
+       6: Ellipse(xx-3,yy-3,xx+3,yy+3);
+       7: Ellipse(xx-3,yy-3,xx+4,yy+4);
+       else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
+     end;
+     end;
+   end;
+end;
 end;
 
 procedure TSplot.PlotLabel(xx,yy,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string);
