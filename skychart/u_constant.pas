@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses libcatalog,
+uses Types, libcatalog,
 {$ifdef linux}
     QGraphics;
 {$endif}
@@ -35,7 +35,7 @@ uses libcatalog,
 
 const MaxColor = 19;
 
-type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18-19:spare
+type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:spare
      TSkycolor = array[1..7]of Tcolor;
 
 const version = 'Version 3 alpha 0.0.3';
@@ -46,24 +46,26 @@ const version = 'Version 3 alpha 0.0.3';
       MaxPla = 32;
       MaxQuickSearch = 15;
       MaxWindow = 10;  // maximum number of chart window (and also tcp connection)
+      crRetic = 5;
       jd2000 =2451545.0 ;
       jd1950 =2433282.4235;
       jd1900 =2415020.3135;
       km_au = 149597870.691 ;
       clight = 299792.458 ;
       tlight = km_au/clight/3600/24;
-      eps2000 = 23.4392911;
+      eps2000 = 23.439291111;
       deg2rad = pi/180;
       rad2deg = 180/pi;
       pi2 = 2*pi;
       pi4 = 4*pi;
       pid2 = pi/2;
+      minarc = deg2rad/60;
       secarc = deg2rad/3600;
       musec  = deg2rad/3600/1000000; // 1 microarcsec for rounding test
       FovMin = 5*secarc;  // 5"
       FovMax = pi2;
       DefaultPrtRes = 300;
-      DfColor : Starcolarray = (clBlack,$00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,clGray,clGray,clYellow,clGray,clNavy,clBlue,clGray,clGray);
+      DfColor : Starcolarray = (clBlack,$00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,clGray,clGray,clYellow,clGray,clSilver,clBlue,clRed,clSilver);
       DfBWColor : Starcolarray = (clBlack,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite);
       DfRedColor : Starcolarray = (clBlack,$00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
       DfWBColor : Starcolarray = (clWhite,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack);
@@ -96,6 +98,8 @@ const version = 'Version 3 alpha 0.0.3';
       MaxField = 10;
       Equat = 0;
       Altaz = 1;
+      Gal = 2;
+      Ecl = 3;
       BaseStar = 1000;
       MaxStarCatalog = 14;
       bsc     = 1001;
@@ -131,6 +135,9 @@ const version = 'Version 3 alpha 0.0.3';
       gcm     = 4007;
       gpn     = 4008;
       gcneb   = 4009;
+      BaseLin = 5000;
+      MaxLinCatalog = 1;
+      gclin   = 5001;
       MaxSearchCatalog=29;
       S_Messier = 1;
       S_NGC     = 2;
@@ -167,7 +174,7 @@ const version = 'Version 3 alpha 0.0.3';
       nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
 
 {$ifdef linux}
-      DefaultFontName='Sans';
+      DefaultFontName='Helvetica';
       DefaultFontSize=10;
       Defaultconfigfile='~/.cartesduciel.ini';     // to user home directory
       key_cr = 4100;
@@ -183,9 +190,9 @@ const version = 'Version 3 alpha 0.0.3';
       key_downright =4119;
 {$endif}
 {$ifdef mswindows}
-      DefaultFontName='Default';
+      DefaultFontName='MS Sans Serif';
       DefaultFontSize=8;
-      Defaultconfigfile='cartesduciel.ini';      // to user profile directory
+      Defaultconfigfile='cartesduciel.ini';      // to user profile directory or C:\windows
       key_cr   =13;
       key_plus =107;
       key_minus=109;
@@ -205,7 +212,7 @@ type
      Tasteroidlst = array[0..MaxSim,1..MaxAsteroid,1..4] of double;
      double6 = array[1..6] of double;
      Pdouble6 = ^double6;
-     Tconstb = record ra,de : single; end;
+     Tconstb = record ra,de : single; newconst:boolean; end;
      Tconstl = record ra1,de1,ra2,de2 : single; end;
 
      TGCatLst =  record
@@ -234,6 +241,7 @@ type
                 NebCatDef : array [1..MaxNebCatalog] of boolean;   // is the catalog defined
                 NebCatOn : array [1..MaxNebCatalog] of boolean;    // is the catalog used for current chart
                 NebCatField : array [1..MaxNebCatalog,1..2] of integer; // Field min and max the catalog is active
+                LinCatOn : array [1..MaxLinCatalog] of boolean;    // is the catalog used for current chart
                 UseUSNOBrightStars, UseGSVSIr : Boolean;  // filter specific catalog entry
                 end;
      conf_shared = record
@@ -254,13 +262,14 @@ type
                 AzNorth : Boolean;
                 llabel: array[1..NumLlabel] of string;
                 ConstelName: array[1..ConstelNum,1..2] of string; // constellation name and three letter abbrev.
+                ConstLnum,ConstBnum:integer;
                 ConstL: array of Tconstl;
-                ConstLnum:integer;
                 ConstB : array of Tconstb;
                 end;
      conf_skychart = record
-                racentre,decentre,fov,theta,acentre,hcentre : double;
-                Force_DT_UT,horizonopaque,autorefresh,TrackOn : Boolean;
+                // chart setting
+                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e : double;
+                Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
                 FlipX, FlipY, ProjPole, TrackType,TrackObj : integer;
@@ -269,13 +278,14 @@ type
                 SimLine,ShowPlanet,PlanetParalaxe,ShowEarthShadow : Boolean;
                 ObsLatitude,ObsLongitude,ObsAltitude,ObsTZ : double;
                 ObsTemperature,ObsPressure,ObsRefractionCor : Double;
-                ObsName : string;
+                ObsName,ObsCountry : string;
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
-                ShowConstl,ShowConstB,ShowEqGrid,ShowAzGrid,UseSystemTime : boolean;
+                ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
+                ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay : boolean;
                 CurTime,DT_UT_val,GRSlongitude: double;
                 PMon,DrawPMon : boolean; // use proper motion
                 LabelOrientation: integer;
-
+                // working variable
                 HorizonMax,rap2000,dep2000,RefractionOffset : Double;
                 WindowRatio,BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta: Double;
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
@@ -284,7 +294,7 @@ type
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,FindRA,FindDec,FindSize : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum : Double;
                 StarFilter,FindOK : boolean;
-                EquinoxName,TrackName,FindName,FindDesc,FindNote : string;
+                EquinoxName,EquinoxDate,TrackName,FindName,FindDesc,FindNote : string;
                 horizonlist : array [0..360] of single;
                 PlanetLst : Tplanetlst;
                 end;
@@ -301,14 +311,19 @@ type
                 FontItalic : array [1..6] of boolean;
                 LabelColor : array[1..9] of Tcolor;
                 LabelSize : array[1..9] of integer;
+                outlineclosed,outlineinscreen: boolean;
+                outlinetype,outlinemax,outlinenum,outlinelw: integer;
+                outlinecol: Tcolor;
+                outlinepts: array of TPoint;
+                outradius:integer;
                 end;
      conf_chart = record
                 onprinter : boolean;
-                width,height,drawpen : integer;
+                width,height,drawpen,hw,hh : integer;
                 min_ma : double;
                 end;
      conf_main = record
-                prtname,language,ConstLfile : string;
+                prtname,language,ConstLfile, ConstBfile, EarthMapFile : string;
                 PrinterResolution,configpage,autorefreshdelay,MaxChildID : integer;
                 PrintColor,PrintLandscape :boolean;
                 maximized,updall,AutostartServer,keepalive,locked : boolean;
@@ -427,7 +442,7 @@ const
      ('ROT+','17'),
      ('ROT-','18'),
      ('EQGRID','19'),
-     ('AZGRID','20'),
+     ('GRID','20'),
      ('STARMODE','21'),
      ('NEBMODE','22'),
      ('AUTOSKY','23'),
@@ -441,6 +456,263 @@ const
      ('IDCURSOR','31'),
      ('SAVEIMG','32')
      );
+
+// World cities
+const
+   COUNTRIES      = 234;  // number of countries
+   MAX_CITY_LENGTH= 120;  // length of longest city name (including '\0')
+   {$ifdef linux}
+   citylib = 'libCities.so';
+   {$endif}
+   {$ifdef mswindows}
+   citylib = 'Cities.dll';
+   {$endif}
+
+type
+   City = record
+          m_Name: array[0..MAX_CITY_LENGTH-1] of char;  // city name
+	  m_Coord: array[0..1] of integer;              // geogr. latitude and longitude
+          end;
+   Cities = array[0..999999] of City; // never allocate!
+   PCity = ^City;
+   PCities = ^Cities;
+
+const Country: array[0..COUNTRIES-1] of string =(
+	'Afghanistan',
+	'Albania',
+	'Algeria',
+	'Andorra',
+	'Angola',
+	'Anguilla',
+	'Antigua and Barbuda',
+	'Argentina',
+	'Armenia',
+	'Aruba',
+	'Australia',
+	'Austria',
+	'Azerbaijan',
+	'Bahamas, The',
+	'Bahrain',
+	'Bangladesh',
+	'Barbados',
+	'Belarus',
+	'Belgium',
+	'Belize',
+	'Benin',
+	'Bermuda',
+	'Bhutan',
+	'Bolivia',
+	'Bosnia and Herzegovina',
+	'Botswana',
+	'Brazil',
+	'British Virgin Islands',
+	'Brunei',
+	'Bulgaria',
+	'Burkina Faso',
+	'Burma',
+	'Burundi',
+	'Cambodia',
+	'Cameroon',
+	'Canada',
+	'Cap Verde',
+	'Cayman Islands',
+	'Central African Republic',
+	'Chad',
+	'Chile',
+	'China',
+	'Chistmas Island',
+	'Cocos (Keeling) Islands',
+	'Colombia',
+	'Comoros',
+	'Congo',
+	'Congo, Democratic Republic of The',
+	'Cook Islands',
+	'Costa Rica',
+	'Cote d''Ivoire',
+	'Croatia',
+	'Cuba',
+	'Cyprus',
+	'Czech Republic',
+	'Denmark',
+	'Djibouti',
+	'Dominica',
+	'Dominican Republic',
+	'East Timor',
+	'Ecuador',
+	'Egypt',
+	'El Salvador',
+	'Equatorial Guinea',
+	'Eritrea',
+	'Estonia',
+	'Ethiopia',
+	'Falkland Islands',
+	'Faroe Islands',
+	'Fiji',
+	'Finland',
+	'France',
+	'French Guiana',
+	'French Polynesia',
+	'French Southern and Antarctic Lands',
+	'Gabon',
+	'Gambia, The',
+	'Gaza Strip',
+	'Georgia',
+	'Germany',
+	'Ghana',
+	'Gibraltar',
+	'Greece',
+	'Greenland',
+	'Grenada',
+	'Guadeloupe',
+	'Guatemala',
+	'Guernsey',
+	'Guinea',
+	'Guinea-Bisseau',
+	'Guyana',
+	'Haiti',
+	'Honduras',
+	'Hong Kong',
+	'Hungary',
+	'Iceland',
+	'India',
+	'Indonesia',
+	'Iran',
+	'Iraq',
+	'Ireland',
+	'Isle of Man',
+	'Israel',
+	'Italy',
+	'Jamaica',
+	'Japan',
+	'Jersey',
+	'Jordan',
+	'Kazakhstan',
+	'Kenya',
+	'Kiribati',
+	'Kuwait',
+	'Kyrgyzstan',
+	'Laos',
+	'Latvia',
+	'Lebanon',
+	'Lesotho',
+	'Liberia',
+	'Libya',
+	'Liechtenstein',
+	'Lithuania',
+	'Luxembourg',
+	'Macau',
+	'Macedonia, The Former Yugoslav Republic of',
+	'Madagascar',
+	'Malawi',
+	'Malaysia',
+	'Maldives',
+	'Mali',
+	'Malta',
+	'Marshall Islands',
+	'Martinique',
+	'Mauritania',
+	'Mauritius',
+	'Mayotte',
+	'Mexico',
+	'Micronesia, Federated States of',
+	'Moldova',
+	'Monaco',
+	'Mongolia',
+	'Montserrat',
+	'Morocco',
+	'Mozambique',
+	'Namibia',
+	'Nauru',
+	'Nepal',
+	'Netherlands',
+	'Netherlands Antilles',
+	'New Caledonia',
+	'New Zealand',
+	'Nicaragua',
+	'Niger',
+	'Nigeria',
+	'Niue',
+	'No Man''s Land',
+	'Norfolk Island',
+	'North Korea',
+	'Norway',
+	'Oman',
+	'Pakistan',
+	'Palau',
+	'Panama',
+	'Papua New Guinea',
+	'Paraguay',
+	'Peru',
+	'Philippines',
+	'Pitcairn Islands',
+	'Poland',
+	'Portugal',
+	'Qatar',
+	'Reunion',
+	'Romania',
+	'Russia',
+	'Rwanda',
+	'Saint Helena',
+	'Saint Kitts and Nevis',
+	'Saint Lucia',
+	'Saint Pierre and Miquelon',
+	'Saint Vincent and the Grenadines',
+	'Samoa',
+	'San Marino',
+	'Sao Tome and Principe',
+	'Saudi Arabia',
+	'Senegal',
+	'Seychelles',
+	'Sierra Leone',
+	'Singapore',
+	'Slovakia',
+	'Slovenia',
+	'Solomon Islands',
+	'Somalia',
+	'South Africa',
+	'South Georgia and The South Sandwich Islands',
+	'South Korea',
+	'Spain',
+	'Spratly Islands',
+	'Sri Lanka',
+	'Sudan',
+	'Suriname',
+	'Svalbard',
+	'Swaziland',
+	'Sweden',
+	'Switzerland',
+	'Syria',
+	'Taiwan',
+	'Tajikistan',
+	'Tanzania',
+	'Thailand',
+	'Togo',
+	'Tokelau',
+	'Tonga',
+	'Trinidad and Tobago',
+	'Tunisia',
+	'Turkey',
+	'Turkmenistan',
+	'Turks and Caicos Islands',
+	'Tuvalu',
+	'Uganda',
+	'Ukraine',
+	'United Arab Emirates',
+	'United Kingdom',
+	'United States of America',
+	'Uruguay',
+	'Uzbekistan',
+	'Vanuatu',
+	'Venezuela',
+	'Vietnam',
+	'Wallis and Futuna',
+	'West Bank',
+	'Western Sahara',
+	'Yemen',
+	'Yugoslavia',
+	'Zambia',
+	'Zimbabwe');
+
 
 implementation
 

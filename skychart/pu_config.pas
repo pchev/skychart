@@ -24,10 +24,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, u_constant, u_util,
+uses Math, u_constant, u_util, jpeg, pngimage,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, Grids, ExtCtrls, enhedits, ActnList,
-  FoldrDlg, Spin, Mask, CheckLst;
+  FoldrDlg, Spin, Mask, CheckLst, cu_zoomimage;
 
 type
   Tf_config = class(TForm)
@@ -205,8 +205,8 @@ type
     Cat2Box: TCheckBox;
     StringGrid2: TStringGrid;
     Label37: TLabel;
-    BitBtn33: TBitBtn;
-    BitBtn35: TBitBtn;
+    addcat: TBitBtn;
+    delcat: TBitBtn;
     StringGrid3: TStringGrid;
     p_chart: TTabSheet;
     p_fov: TTabSheet;
@@ -561,7 +561,7 @@ type
     Label201: TLabel;
     Bevel6: TBevel;
     EqGrid: TCheckBox;
-    AzGrid: TCheckBox;
+    CGrid: TCheckBox;
     Constl: TCheckBox;
     ConstlFile: TEdit;
     Label132: TLabel;
@@ -581,6 +581,66 @@ type
     Label55: TLabel;
     ipport: TEdit;
     keepalive: TCheckBox;
+    p_observatory: TTabSheet;
+    Latitude: TGroupBox;
+    Label58: TLabel;
+    Label59: TLabel;
+    Label60: TLabel;
+    hemis: TComboBox;
+    latdeg: TLongEdit;
+    latmin: TLongEdit;
+    latsec: TLongEdit;
+    Longitude: TGroupBox;
+    Label61: TLabel;
+    Label62: TLabel;
+    Label63: TLabel;
+    long: TComboBox;
+    longdeg: TLongEdit;
+    longmin: TLongEdit;
+    longsec: TLongEdit;
+    Altitude: TGroupBox;
+    Label70: TLabel;
+    altmeter: TFloatEdit;
+    refraction: TGroupBox;
+    Label82: TLabel;
+    pressure: TFloatEdit;
+    Label83: TLabel;
+    temperature: TFloatEdit;
+    timezone: TGroupBox;
+    Label81: TLabel;
+    timez: TFloatEdit;
+    Obszp: TButton;
+    Obszm: TButton;
+    Obsmap: TButton;
+    ZoomImage1: TZoomImage;
+    HScrollBar: TScrollBar;
+    VScrollBar: TScrollBar;
+    Label56: TLabel;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    Bevel7: TBevel;
+    Bevel8: TBevel;
+    Bevel9: TBevel;
+    Bevel10: TBevel;
+    ecliptic: TCheckBox;
+    galactic: TCheckBox;
+    Bevel11: TBevel;
+    Constb: TCheckBox;
+    ConstbFile: TEdit;
+    Label72: TLabel;
+    ConstbfileBtn: TBitBtn;
+    milkyway: TCheckBox;
+    Bevel12: TBevel;
+    fillmilkyway: TCheckBox;
+    obsname: TGroupBox;
+    citylist: TComboBox;
+    citysearch: TButton;
+    countrylist: TComboBox;
+    cityfilter: TEdit;
+    newcity: TButton;
+    updcity: TButton;
+    delcity: TButton;
+    GridNum: TCheckBox;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -625,8 +685,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure StringGrid3SelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure BitBtn33Click(Sender: TObject);
-    procedure BitBtn35Click(Sender: TObject);
+    procedure addcatClick(Sender: TObject);
+    procedure delcatClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure fBigNebLimitChange(Sender: TObject);
     procedure equinoxtypeClick(Sender: TObject);
@@ -676,7 +736,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure Button3Click(Sender: TObject);
     procedure EqGridClick(Sender: TObject);
-    procedure AzGridClick(Sender: TObject);
+    procedure CGridClick(Sender: TObject);
     procedure ConstlClick(Sender: TObject);
     procedure ConstlFileChange(Sender: TObject);
     procedure ConstlFileBtnClick(Sender: TObject);
@@ -687,6 +747,38 @@ type
     procedure ipaddrChange(Sender: TObject);
     procedure ipportChange(Sender: TObject);
     procedure refreshIPClick(Sender: TObject);
+    procedure latdegChange(Sender: TObject);
+    procedure longdegChange(Sender: TObject);
+    procedure altmeterChange(Sender: TObject);
+    procedure pressureChange(Sender: TObject);
+    procedure temperatureChange(Sender: TObject);
+    procedure ZoomImage1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ZoomImage1Paint(Sender: TObject);
+    procedure ZoomImage1PosChange(Sender: TObject);
+    procedure HScrollBarChange(Sender: TObject);
+    procedure VScrollBarChange(Sender: TObject);
+    procedure ObszpClick(Sender: TObject);
+    procedure ObszmClick(Sender: TObject);
+    procedure ObsmapClick(Sender: TObject);
+    procedure eclipticClick(Sender: TObject);
+    procedure galacticClick(Sender: TObject);
+    procedure ConstbClick(Sender: TObject);
+    procedure ConstbFileChange(Sender: TObject);
+    procedure ConstbfileBtnClick(Sender: TObject);
+    procedure milkywayClick(Sender: TObject);
+    procedure fillmilkywayClick(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
+    procedure GridNumClick(Sender: TObject);
+    procedure countrylistClick(Sender: TObject);
+    procedure obsnameMouseEnter(Sender: TObject);
+    procedure UpdCityList(changecity:boolean);
+    procedure citylistChange(Sender: TObject);
+    procedure citylistClick(Sender: TObject);
+    procedure citysearchClick(Sender: TObject);
+    procedure newcityClick(Sender: TObject);
+    procedure updcityClick(Sender: TObject);
+    procedure delcityClick(Sender: TObject);
   private
     { Déclarations privées }
     procedure EditGCatPath(row : integer);
@@ -699,6 +791,10 @@ type
     cplot : conf_plot;
     cmain : conf_main;
     catalogempty: boolean;
+    EarthMapZoom: double;
+    Obsposx,Obsposy : integer;
+    scrollw, scrollh : integer;
+    scrolllock,obslock:boolean;
     procedure SetLang(lang:string);
     function SelectPage(txt:string):boolean;
     procedure SetFonts(ctrl:Tedit;num:integer);
@@ -720,6 +816,11 @@ type
     procedure ShowColor;
     procedure ShowSkyColor;
     procedure ShowServer;
+    procedure ShowObservatory;
+    Procedure SetScrollBar;
+    Procedure SetObsPos;
+    Procedure ShowObsCoord;
+    procedure CenterObs;
   end;
 
 var
@@ -730,6 +831,20 @@ implementation
 uses pu_main, u_projection;
 
 const b=' ';
+
+var
+   SetDirectory : function(dir:pchar): integer; stdcall;
+   ReadCountryFile: function (country:pchar; var City: PCities): integer; stdcall;
+   AddCity: function(City: PCity): integer; stdcall;
+   ModifyCity: function(index: integer; City: PCity): integer; stdcall;
+   RemoveCity: function(index: integer; City: PCity): integer; stdcall;
+   ReleaseCities: function(): integer; stdcall;
+   SearchCity: function(str: pchar): integer; stdcall;
+   libCities : THandle;
+
+var c : Pcities;
+    total,first: integer;
+    actual_country: string;
 
 {$R *.dfm}
 
@@ -763,4 +878,7 @@ end;
 // end of windows vcl specific code:
 
 end.
+
+
+
 

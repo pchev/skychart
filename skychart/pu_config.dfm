@@ -1,8 +1,8 @@
 object f_config: Tf_config
-  Left = 386
-  Top = 172
+  Left = 285
+  Top = 96
   Width = 634
-  Height = 487
+  Height = 507
   Caption = 'Configuration'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,54 +21,60 @@ object f_config: Tf_config
     Left = 4
     Top = 0
     Width = 136
-    Height = 420
+    Height = 441
     HideSelection = False
     Indent = 19
     ReadOnly = True
     TabOrder = 0
     OnChange = TreeView1Change
     Items.Data = {
-      07000000220000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
-      09446174652F54696D65280000000000000000000000FFFFFFFFFFFFFFFF0000
-      0000000000000F54696D652053696D756C6174696F6E1E000000000000000000
-      0000FFFFFFFFFFFFFFFF00000000040000000543686172742800000000000000
-      00000000FFFFFFFFFFFFFFFF00000000000000000F4669656C64206F66207669
-      73696F6E230000000000000000000000FFFFFFFFFFFFFFFF0000000000000000
-      0A50726F6A656374696F6E260000000000000000000000FFFFFFFFFFFFFFFF00
-      000000000000000D4F626A6563742046696C7465722500000000000000000000
-      00FFFFFFFFFFFFFFFF00000000000000000C477269642053706163696E672300
-      00000000000000000000FFFFFFFFFFFFFFFF00000000020000000A436174616C
-      6F67756573280000000000000000000000FFFFFFFFFFFFFFFF00000000000000
-      000F436174616C6F672053657474696E672A0000000000000000000000FFFFFF
-      FFFFFFFFFF00000000030000001143444320636F6D7061746962696C6974791E
-      0000000000000000000000FFFFFFFFFFFFFFFF00000000000000000553746172
-      73200000000000000000000000FFFFFFFFFFFFFFFF0000000000000000074E65
-      62756C6165210000000000000000000000FFFFFFFFFFFFFFFF00000000000000
-      000845787465726E616C250000000000000000000000FFFFFFFFFFFFFFFF0000
-      0000030000000C536F6C61722053797374656D200000000000000000000000FF
-      FFFFFFFFFFFFFF000000000000000007506C616E6574731F0000000000000000
-      000000FFFFFFFFFFFFFFFF000000000000000006436F6D657473220000000000
-      000000000000FFFFFFFFFFFFFFFF00000000000000000941737465726F696473
-      200000000000000000000000FFFFFFFFFFFFFFFF000000000400000007446973
-      706C61791E0000000000000000000000FFFFFFFFFFFFFFFF0000000000000000
-      05466F6E74731E0000000000000000000000FFFFFFFFFFFFFFFF000000000200
-      000005436F6C6F72220000000000000000000000FFFFFFFFFFFFFFFF00000000
-      0000000009536B7920436F6C6F72260000000000000000000000FFFFFFFFFFFF
-      FFFF00000000000000000D4E6562756C616520436F6C6F721E00000000000000
-      00000000FFFFFFFFFFFFFFFF0000000000000000054C696E65731F0000000000
-      000000000000FFFFFFFFFFFFFFFF0000000000000000064C6162656C731F0000
-      000000000000000000FFFFFFFFFFFFFFFF000000000000000006496D61676573
-      1F0000000000000000000000FFFFFFFFFFFFFFFF000000000100000006537973
-      74656D1F0000000000000000000000FFFFFFFFFFFFFFFF000000000000000006
-      536572766572}
+      08000000250000000000000000000000FFFFFFFF000000000000000001000000
+      0C312D20446174652F54696D652B0000000000000000000000A0A97541000000
+      00000000000000000012312D2054696D652053696D756C6174696F6E27000000
+      FFFFFFFFFFFFFFFFA0A975410000000000000000000000000E322D204F627365
+      727661746F72792E0000000000000000000000A0A97541000000000000000004
+      00000015332D2043686172742C20436F6F7264696E617465732B000000000000
+      0000000000A0A9754100000000000000000000000012312D204669656C64206F
+      6620766973696F6E260000000000000000000000A0A975410000000000000000
+      000000000D322D2050726F6A656374696F6E290000000000000000000000A0A9
+      754100000000000000000000000010332D204F626A6563742046696C74657228
+      000000FFFFFFFFFFFFFFFFA0A975410000000000000000000000000F342D2047
+      7269642053706163696E67260000000000000000000000A0A975410000000000
+      000000020000000D342D20436174616C6F677565732B00000000000000000000
+      00A0A9754100000000000000000000000012312D20436174616C6F6720536574
+      74696E672D0000000000000000000000A0A97541000000000000000003000000
+      14322D2043444320636F6D7061746962696C6974792100000000000000000000
+      00A0A9754100000000000000000000000008312D205374617273230000000000
+      000000000000A0A975410000000000000000000000000A322D204E6562756C61
+      65240000000000000000000000A0A975410000000000000000000000000B332D
+      2045787465726E616C280000000000000000000000A0A9754100000000000000
+      00030000000F352D20536F6C61722053797374656D2300000000000000000000
+      00A0A975410000000000000000000000000A312D20506C616E65747322000000
+      0000000000000000A0A9754100000000000000000000000009322D20436F6D65
+      7473250000000000000000000000A0A975410000000000000000000000000C33
+      2D2041737465726F696473230000000000000000000000A0A975410000000000
+      000000040000000A362D20446973706C6179210000000000000000000000A0A9
+      754100000000000000000000000008312D20466F6E7473210000000000000000
+      000000A0A9754100000000000000000200000008322D20436F6C6F7230000000
+      FFFFFFFFFFFFFFFFA0A9754100000000000000000000000017312D20536B7920
+      4261636B67726F756E6420436F6C6F7232000000FFFFFFFFFFFFFFFFA0A97541
+      00000000000000000000000019322D205374617220616E64204E6562756C6165
+      20436F6C6F72210000000000000000000000A0A9754100000000000000000000
+      000008332D204C696E6573220000000000000000000000A0A975410000000000
+      0000000000000009342D204C6162656C73220000000000000000000000A0A975
+      4100000000000000000000000009372D20496D6167657322000000FFFFFFFFFF
+      FFFFFFA0A9754100000000000000000100000009382D2053797374656D220000
+      00FFFFFFFFFFFFFFFFA0A9754100000000000000000000000009312D20536572
+      766572}
   end
   object PageControl1: TPageControl
     Left = 144
     Top = 0
     Width = 474
-    Height = 420
-    ActivePage = p_server
+    Height = 441
+    ActivePage = p_observatory
     TabOrder = 1
+    OnChange = PageControl1Change
     object p_time: TTabSheet
       Caption = 'p_time'
       ImageIndex = 19
@@ -89,7 +95,7 @@ object f_config: Tf_config
       end
       object Panel11: TPanel
         Left = 32
-        Top = 72
+        Top = 104
         Width = 409
         Height = 105
         TabOrder = 6
@@ -456,10 +462,19 @@ object f_config: Tf_config
       end
       object Label180: TLabel
         Left = 8
-        Top = 32
-        Width = 267
+        Top = 56
+        Width = 306
         Height = 13
-        Caption = 'Plot the moving object for a number of consecutive date.'
+        Caption = 
+          'Plot the moving object position for a number of consecutive date' +
+          '.'
+      end
+      object Label56: TLabel
+        Left = 8
+        Top = 96
+        Width = 115
+        Height = 13
+        Caption = 'For the following object :'
       end
       object stepunit: TRadioGroup
         Left = 8
@@ -508,14 +523,19 @@ object f_config: Tf_config
         OnChange = stepsizeChange
       end
       object SimObj: TCheckListBox
-        Left = 136
-        Top = 64
-        Width = 193
-        Height = 108
+        Left = 144
+        Top = 96
+        Width = 241
+        Height = 84
         OnClickCheck = SimObjClickCheck
-        Columns = 2
+        Columns = 3
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
         IntegralHeight = True
-        ItemHeight = 13
+        ItemHeight = 16
         Items.Strings = (
           'Sun'
           'Mercury '
@@ -529,7 +549,438 @@ object f_config: Tf_config
           'Pluto'
           'Asteroids'
           'Comets')
+        ParentFont = False
         TabOrder = 4
+      end
+    end
+    object p_observatory: TTabSheet
+      Caption = 'p_observatory'
+      ImageIndex = 27
+      TabVisible = False
+      object Latitude: TGroupBox
+        Left = 8
+        Top = 85
+        Width = 185
+        Height = 60
+        Caption = 'Latitude'
+        TabOrder = 0
+        object Label58: TLabel
+          Left = 8
+          Top = 16
+          Width = 35
+          Height = 13
+          Caption = 'Degree'
+        end
+        object Label59: TLabel
+          Left = 48
+          Top = 16
+          Width = 20
+          Height = 13
+          Caption = 'Min.'
+        end
+        object Label60: TLabel
+          Left = 80
+          Top = 16
+          Width = 22
+          Height = 13
+          Caption = 'Sec.'
+        end
+        object hemis: TComboBox
+          Left = 112
+          Top = 33
+          Width = 65
+          Height = 21
+          ItemHeight = 13
+          TabOrder = 3
+          Text = 'North'
+          OnChange = latdegChange
+          Items.Strings = (
+            'North'
+            'South')
+        end
+        object latdeg: TLongEdit
+          Left = 8
+          Top = 32
+          Width = 33
+          Height = 22
+          Hint = '0..90'
+          MaxLength = 2
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnChange = latdegChange
+          Value = 0
+          MaxValue = 90
+        end
+        object latmin: TLongEdit
+          Left = 48
+          Top = 32
+          Width = 25
+          Height = 22
+          Hint = '0..59'
+          MaxLength = 2
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnChange = latdegChange
+          Value = 0
+          MaxValue = 59
+        end
+        object latsec: TLongEdit
+          Left = 80
+          Top = 32
+          Width = 25
+          Height = 22
+          Hint = '0..59'
+          MaxLength = 2
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          OnChange = latdegChange
+          Value = 0
+          MaxValue = 59
+        end
+      end
+      object Longitude: TGroupBox
+        Left = 192
+        Top = 85
+        Width = 185
+        Height = 60
+        Caption = 'Longitude'
+        TabOrder = 1
+        object Label61: TLabel
+          Left = 8
+          Top = 16
+          Width = 35
+          Height = 13
+          Caption = 'Degree'
+        end
+        object Label62: TLabel
+          Left = 48
+          Top = 16
+          Width = 20
+          Height = 13
+          Caption = 'Min.'
+        end
+        object Label63: TLabel
+          Left = 80
+          Top = 16
+          Width = 22
+          Height = 13
+          Caption = 'Sec.'
+        end
+        object long: TComboBox
+          Left = 112
+          Top = 33
+          Width = 65
+          Height = 21
+          ItemHeight = 13
+          ItemIndex = 1
+          TabOrder = 3
+          Text = 'East'
+          OnChange = longdegChange
+          Items.Strings = (
+            'West'
+            'East')
+        end
+        object longdeg: TLongEdit
+          Left = 8
+          Top = 32
+          Width = 33
+          Height = 22
+          Hint = '0..180'
+          MaxLength = 4
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnChange = longdegChange
+          Value = 0
+          MaxValue = 180
+        end
+        object longmin: TLongEdit
+          Left = 48
+          Top = 32
+          Width = 25
+          Height = 22
+          Hint = '0..59'
+          MaxLength = 2
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnChange = longdegChange
+          Value = 0
+          MaxValue = 59
+        end
+        object longsec: TLongEdit
+          Left = 80
+          Top = 32
+          Width = 25
+          Height = 22
+          Hint = '0..59'
+          MaxLength = 2
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          OnChange = longdegChange
+          Value = 0
+          MaxValue = 59
+        end
+      end
+      object Altitude: TGroupBox
+        Left = 376
+        Top = 85
+        Width = 81
+        Height = 60
+        Caption = 'Altitude'
+        TabOrder = 2
+        object Label70: TLabel
+          Left = 8
+          Top = 16
+          Width = 32
+          Height = 13
+          Caption = 'Meters'
+        end
+        object altmeter: TFloatEdit
+          Left = 8
+          Top = 32
+          Width = 65
+          Height = 22
+          Hint = '-500..9000'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnChange = altmeterChange
+          Decimals = 0
+          MinValue = -500
+          MaxValue = 9000
+          Digits = 5
+          NumericType = ntFixed
+        end
+      end
+      object refraction: TGroupBox
+        Left = 8
+        Top = 145
+        Width = 273
+        Height = 60
+        Caption = 'Atmospheric Refraction'
+        TabOrder = 3
+        object Label82: TLabel
+          Left = 32
+          Top = 16
+          Width = 81
+          Height = 13
+          Caption = 'Pressure (millibar)'
+        end
+        object Label83: TLabel
+          Left = 152
+          Top = 16
+          Width = 102
+          Height = 13
+          Caption = 'Temperature (Celsius)'
+        end
+        object pressure: TFloatEdit
+          Left = 40
+          Top = 32
+          Width = 65
+          Height = 22
+          Hint = '0..1500'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnChange = pressureChange
+          Decimals = 0
+          MaxValue = 1500
+          NumericType = ntFixed
+        end
+        object temperature: TFloatEdit
+          Left = 168
+          Top = 32
+          Width = 65
+          Height = 22
+          Hint = '-100..100'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnChange = temperatureChange
+          MinValue = -100
+          MaxValue = 100
+          NumericType = ntFixed
+        end
+      end
+      object timezone: TGroupBox
+        Left = 280
+        Top = 145
+        Width = 177
+        Height = 60
+        Caption = 'Time Zone'
+        TabOrder = 4
+        object Label81: TLabel
+          Left = 8
+          Top = 28
+          Width = 98
+          Height = 13
+          Caption = 'Local Time =  UTC +'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = []
+          ParentFont = False
+        end
+        object timez: TFloatEdit
+          Left = 122
+          Top = 27
+          Width = 37
+          Height = 22
+          Hint = '-12..12'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnChange = tzChange
+          MinValue = -12
+          MaxValue = 12
+          Digits = 3
+          NumericType = ntFixed
+        end
+      end
+      object Obszp: TButton
+        Left = 4
+        Top = 240
+        Width = 41
+        Height = 25
+        Caption = '+'
+        TabOrder = 5
+        OnClick = ObszpClick
+      end
+      object Obszm: TButton
+        Left = 4
+        Top = 280
+        Width = 41
+        Height = 25
+        Caption = '-'
+        TabOrder = 6
+        OnClick = ObszmClick
+      end
+      object Obsmap: TButton
+        Left = 4
+        Top = 320
+        Width = 41
+        Height = 25
+        Caption = 'Load'
+        TabOrder = 7
+        OnClick = ObsmapClick
+      end
+      object ZoomImage1: TZoomImage
+        Left = 48
+        Top = 208
+        Width = 400
+        Height = 200
+        Cursor = crCross
+        Zoom = 1
+        ZoomMax = 4
+        Xcentre = 0
+        Ycentre = 0
+        OnMouseUp = ZoomImage1MouseUp
+        OnPaint = ZoomImage1Paint
+        OnPosChange = ZoomImage1PosChange
+      end
+      object HScrollBar: TScrollBar
+        Left = 48
+        Top = 408
+        Width = 400
+        Height = 18
+        PageSize = 0
+        TabOrder = 9
+        OnChange = HScrollBarChange
+      end
+      object VScrollBar: TScrollBar
+        Left = 448
+        Top = 208
+        Width = 18
+        Height = 200
+        Kind = sbVertical
+        PageSize = 0
+        TabOrder = 10
+        OnChange = VScrollBarChange
+      end
+      object obsname: TGroupBox
+        Left = 8
+        Top = 0
+        Width = 449
+        Height = 81
+        Caption = 'Observatory Database'
+        TabOrder = 11
+        OnEnter = obsnameMouseEnter
+        object citylist: TComboBox
+          Left = 8
+          Top = 48
+          Width = 233
+          Height = 21
+          AutoComplete = False
+          ItemHeight = 13
+          TabOrder = 0
+          Text = '...'
+          OnChange = citylistChange
+          OnClick = citylistClick
+        end
+        object citysearch: TButton
+          Left = 364
+          Top = 21
+          Width = 76
+          Height = 21
+          Caption = 'Search'
+          TabOrder = 1
+          OnClick = citysearchClick
+        end
+        object countrylist: TComboBox
+          Left = 8
+          Top = 18
+          Width = 233
+          Height = 21
+          AutoComplete = False
+          Style = csDropDownList
+          ItemHeight = 13
+          TabOrder = 2
+          OnClick = countrylistClick
+        end
+        object cityfilter: TEdit
+          Left = 248
+          Top = 18
+          Width = 104
+          Height = 21
+          TabOrder = 3
+        end
+        object newcity: TButton
+          Left = 248
+          Top = 51
+          Width = 60
+          Height = 21
+          Caption = 'Add'
+          Enabled = False
+          TabOrder = 4
+          OnClick = newcityClick
+        end
+        object updcity: TButton
+          Left = 314
+          Top = 51
+          Width = 60
+          Height = 21
+          Caption = 'Update'
+          Enabled = False
+          TabOrder = 5
+          OnClick = updcityClick
+        end
+        object delcity: TButton
+          Left = 380
+          Top = 51
+          Width = 60
+          Height = 21
+          Caption = 'Delete'
+          Enabled = False
+          TabOrder = 6
+          OnClick = delcityClick
+        end
       end
     end
     object p_chart: TTabSheet
@@ -669,13 +1120,15 @@ object f_config: Tf_config
         Left = 8
         Top = 332
         Width = 449
-        Height = 53
-        Caption = 'Chart Projection'
+        Height = 69
+        Caption = 'Chart Coordinate System'
         Columns = 2
         ItemIndex = 0
         Items.Strings = (
-          'Equatorial Projection'
-          'Azimuthal Projection')
+          'Equatorial Coordinates'
+          'Azimuthal Coordinates'
+          'Galactic Coordinates'
+          'Ecliptic Coordinates')
         TabOrder = 2
         OnClick = projectiontypeClick
       end
@@ -698,6 +1151,20 @@ object f_config: Tf_config
       Caption = 'p_fov'
       ImageIndex = 15
       TabVisible = False
+      object Bevel1: TBevel
+        Left = 16
+        Top = 48
+        Width = 177
+        Height = 225
+        Shape = bsFrame
+      end
+      object Bevel2: TBevel
+        Left = 208
+        Top = 48
+        Width = 177
+        Height = 225
+        Shape = bsFrame
+      end
       object Label30: TLabel
         Left = 0
         Top = 0
@@ -1066,6 +1533,20 @@ object f_config: Tf_config
       ParentShowHint = False
       ShowHint = True
       TabVisible = False
+      object Bevel8: TBevel
+        Left = 208
+        Top = 48
+        Width = 185
+        Height = 241
+        Shape = bsFrame
+      end
+      object Bevel7: TBevel
+        Left = 16
+        Top = 48
+        Width = 177
+        Height = 241
+        Shape = bsFrame
+      end
       object Label158: TLabel
         Left = 0
         Top = 0
@@ -2128,12 +2609,19 @@ object f_config: Tf_config
       Caption = 'p_gridspacing'
       ImageIndex = 22
       TabVisible = False
+      object Bevel9: TBevel
+        Left = 8
+        Top = 24
+        Width = 377
+        Height = 353
+        Shape = bsFrame
+      end
       object Label159: TLabel
         Left = 0
         Top = 0
-        Width = 83
+        Width = 55
         Height = 13
-        Caption = 'Projection Setting'
+        Caption = 'Grid Setting'
       end
       object Label160: TLabel
         Left = 23
@@ -2591,23 +3079,23 @@ object f_config: Tf_config
         Height = 13
         Caption = 'Stars and Nebulae catalogs prepared with the CATGEN software'
       end
-      object BitBtn33: TBitBtn
+      object addcat: TBitBtn
         Left = 144
         Top = 376
         Width = 75
         Height = 25
-        Caption = 'New'
+        Caption = 'Add'
         TabOrder = 0
-        OnClick = BitBtn33Click
+        OnClick = addcatClick
       end
-      object BitBtn35: TBitBtn
+      object delcat: TBitBtn
         Left = 248
         Top = 376
         Width = 75
         Height = 25
         Caption = 'Delete'
         TabOrder = 1
-        OnClick = BitBtn35Click
+        OnClick = delcatClick
       end
       object StringGrid3: TStringGrid
         Left = 0
@@ -5473,6 +5961,13 @@ object f_config: Tf_config
       Caption = 'p_fonts'
       ImageIndex = 18
       TabVisible = False
+      object Bevel10: TBevel
+        Left = 8
+        Top = 32
+        Width = 393
+        Height = 281
+        Shape = bsFrame
+      end
       object Label51: TLabel
         Left = 0
         Top = 0
@@ -5977,7 +6472,7 @@ object f_config: Tf_config
       end
       object Button1: TButton
         Left = 184
-        Top = 320
+        Top = 328
         Width = 75
         Height = 25
         Caption = 'Default'
@@ -6522,39 +7017,60 @@ object f_config: Tf_config
       end
       object Bevel6: TBevel
         Left = 8
-        Top = 112
+        Top = 136
         Width = 449
         Height = 81
         Shape = bsFrame
       end
       object Label132: TLabel
         Left = 24
-        Top = 160
+        Top = 184
         Width = 151
         Height = 13
         Caption = 'Constellation Figure File Name : '
       end
+      object Bevel11: TBevel
+        Left = 8
+        Top = 224
+        Width = 449
+        Height = 81
+        Shape = bsFrame
+      end
+      object Label72: TLabel
+        Left = 24
+        Top = 272
+        Width = 167
+        Height = 13
+        Caption = 'Constellation Boundary File Name : '
+      end
+      object Bevel12: TBevel
+        Left = 8
+        Top = 312
+        Width = 449
+        Height = 57
+        Shape = bsFrame
+      end
       object EqGrid: TCheckBox
         Left = 24
-        Top = 32
-        Width = 300
+        Top = 64
+        Width = 185
         Height = 30
-        Caption = 'Show Equatorail Grid'
+        Caption = 'Add Equatorial Grid'
         TabOrder = 0
         OnClick = EqGridClick
       end
-      object AzGrid: TCheckBox
+      object CGrid: TCheckBox
         Left = 24
-        Top = 64
-        Width = 300
+        Top = 32
+        Width = 185
         Height = 30
-        Caption = 'Show Azimuthal Grid'
+        Caption = 'Show Coordinate Grid'
         TabOrder = 1
-        OnClick = AzGridClick
+        OnClick = CGridClick
       end
       object Constl: TCheckBox
         Left = 24
-        Top = 120
+        Top = 144
         Width = 300
         Height = 30
         Caption = 'Show Constellation Figure'
@@ -6563,7 +7079,7 @@ object f_config: Tf_config
       end
       object ConstlFile: TEdit
         Left = 216
-        Top = 156
+        Top = 180
         Width = 201
         Height = 21
         TabOrder = 3
@@ -6572,7 +7088,7 @@ object f_config: Tf_config
       object ConstlFileBtn: TBitBtn
         Tag = 8
         Left = 415
-        Top = 156
+        Top = 180
         Width = 26
         Height = 26
         TabOrder = 4
@@ -6607,6 +7123,107 @@ object f_config: Tf_config
           CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
         Layout = blGlyphTop
         Margin = 0
+      end
+      object ecliptic: TCheckBox
+        Left = 224
+        Top = 32
+        Width = 185
+        Height = 30
+        Caption = 'Show Ecliptic'
+        TabOrder = 5
+        OnClick = eclipticClick
+      end
+      object galactic: TCheckBox
+        Left = 224
+        Top = 64
+        Width = 185
+        Height = 30
+        Caption = 'Show Galactic Equator'
+        TabOrder = 6
+        OnClick = galacticClick
+      end
+      object Constb: TCheckBox
+        Left = 24
+        Top = 232
+        Width = 300
+        Height = 30
+        Caption = 'Show Constellation Boundary'
+        TabOrder = 7
+        OnClick = ConstbClick
+      end
+      object ConstbFile: TEdit
+        Left = 216
+        Top = 268
+        Width = 201
+        Height = 21
+        TabOrder = 8
+        OnChange = ConstbFileChange
+      end
+      object ConstbfileBtn: TBitBtn
+        Tag = 8
+        Left = 415
+        Top = 268
+        Width = 26
+        Height = 26
+        TabOrder = 9
+        TabStop = False
+        OnClick = ConstbfileBtnClick
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          0000000000000000000000000000000000000000000000000000000000000000
+          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+        Layout = blGlyphTop
+        Margin = 0
+      end
+      object milkyway: TCheckBox
+        Left = 24
+        Top = 320
+        Width = 185
+        Height = 30
+        Caption = 'Show Milky Way'
+        TabOrder = 10
+        OnClick = milkywayClick
+      end
+      object fillmilkyway: TCheckBox
+        Left = 224
+        Top = 320
+        Width = 185
+        Height = 30
+        Caption = 'Fill Milky Way'
+        TabOrder = 11
+        OnClick = fillmilkywayClick
+      end
+      object GridNum: TCheckBox
+        Left = 24
+        Top = 96
+        Width = 185
+        Height = 30
+        Caption = 'Show Grid Label'
+        TabOrder = 12
+        OnClick = GridNumClick
       end
     end
     object p_labels: TTabSheet
@@ -6729,7 +7346,7 @@ object f_config: Tf_config
   end
   object CancelBtn: TButton
     Left = 462
-    Top = 424
+    Top = 448
     Width = 75
     Height = 25
     Cancel = True
@@ -6739,7 +7356,7 @@ object f_config: Tf_config
   end
   object OKBtn: TButton
     Left = 302
-    Top = 424
+    Top = 448
     Width = 75
     Height = 25
     Caption = 'OK'
@@ -6749,7 +7366,7 @@ object f_config: Tf_config
   end
   object HelpBtn: TButton
     Left = 542
-    Top = 424
+    Top = 448
     Width = 75
     Height = 25
     Caption = '&Help'
@@ -6757,7 +7374,7 @@ object f_config: Tf_config
   end
   object Applyall: TCheckBox
     Left = 120
-    Top = 428
+    Top = 452
     Width = 177
     Height = 17
     Caption = 'Apply Change To All Chart'
@@ -6767,7 +7384,7 @@ object f_config: Tf_config
   end
   object next: TButton
     Left = 32
-    Top = 424
+    Top = 448
     Width = 25
     Height = 25
     Caption = '>'
@@ -6776,7 +7393,7 @@ object f_config: Tf_config
   end
   object previous: TButton
     Left = 8
-    Top = 424
+    Top = 448
     Width = 25
     Height = 25
     Caption = '<'
@@ -6785,7 +7402,7 @@ object f_config: Tf_config
   end
   object Button2: TButton
     Left = 382
-    Top = 424
+    Top = 448
     Width = 75
     Height = 25
     Caption = 'Apply'
