@@ -924,18 +924,18 @@ with cnv do begin
        if n=0 then moveto(ex1,ey1)
        else begin
          if cfgchart.onprinter then begin   // !! pmNot not supported by some printer
-           if sqrt(ex*ex+ey*ey)<R then
+           if sqrt(ex*ex+ey*ey)<1.1*R then
               if be<0 then if n<=25 then Pen.Color:=cfgplot.Color[11]
-                                    else Pen.Color:=cfgplot.Color[0]
+                                    else Pen.Color:=cfgplot.Color[5]
                       else if n>25  then Pen.Color:=cfgplot.Color[11]
-                                    else Pen.Color:=cfgplot.Color[0]
+                                    else Pen.Color:=cfgplot.Color[5]
            else Pen.Color:=cfgplot.Color[11];
          end else
            if sqrt(ex*ex+ey*ey)<1.1*R then
-              if be<0 then if n<=25 then Pen.mode := pmCopy
-                                    else Pen.mode := pmNot
-                      else if n>25  then Pen.mode := pmCopy
-                                    else Pen.mode := pmNot
+              if be<0 then if n<=25 then Pen.mode := pmNot
+                                    else Pen.mode := pmCopy
+                      else if n>25  then Pen.mode := pmNot
+                                    else Pen.mode := pmCopy
            else Pen.mode := pmCopy;                         
          lineto(ex1,ey1);
        end;
