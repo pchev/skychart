@@ -5,7 +5,7 @@ interface
 uses Math, u_constant, u_util,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, Grids, ExtCtrls, enhedits, ActnList,
-  FoldrDlg, Spin;
+  FoldrDlg, Spin, Mask, CheckLst;
 
 type
   Tf_config = class(TForm)
@@ -223,18 +223,6 @@ type
     compdss: TCheckBox;
     GroupBox5: TGroupBox;
     Label50: TLabel;
-    Label53: TLabel;
-    Label89: TLabel;
-    PlanetBox: TCheckBox;
-    Planet3: TEdit;
-    RadioGroup1: TRadioGroup;
-    RadioGroup2: TRadioGroup;
-    PlanetBox2: TCheckBox;
-    PlanetBox3: TCheckBox;
-    BitBtn31: TBitBtn;
-    PlanetBox4: TCheckBox;
-    GRS: TFloatEdit;
-    BitBtn37: TBitBtn;
     Label54: TLabel;
     Label55: TLabel;
     Label56: TLabel;
@@ -415,16 +403,6 @@ type
     Label141: TLabel;
     BitBtn4: TBitBtn;
     p_simulation: TTabSheet;
-    Panel6: TPanel;
-    Label131: TLabel;
-    Label132: TLabel;
-    Label133: TLabel;
-    SpeedButton7: TSpeedButton;
-    nbj: TEdit;
-    nbpas: TEdit;
-    UpDown1: TUpDown;
-    RadioGroup5: TRadioGroup;
-    CheckBox3: TCheckBox;
     LongEdit2: TLongEdit;
     Label142: TLabel;
     ADBC: TRadioGroup;
@@ -477,19 +455,18 @@ type
     ComboBox3: TComboBox;
     ComboBox4: TComboBox;
     ComboBox5: TComboBox;
-    Edit8: TEdit;
-    Label161: TLabel;
-    Label162: TLabel;
-    Label163: TLabel;
-    Label164: TLabel;
+    Labelp1: TLabel;
+    Labelp2: TLabel;
+    Labelp3: TLabel;
+    Labelp4: TLabel;
     Label165: TLabel;
-    Label166: TLabel;
-    Label159: TLabel;
-    Label160: TLabel;
-    Label167: TLabel;
-    Label168: TLabel;
-    Label169: TLabel;
-    Label170: TLabel;
+    Labelp0: TLabel;
+    Labelp5: TLabel;
+    Labelp6: TLabel;
+    Labelp7: TLabel;
+    Labelp8: TLabel;
+    Labelp9: TLabel;
+    Labelp10: TLabel;
     Label171: TLabel;
     ComboBox6: TComboBox;
     ComboBox7: TComboBox;
@@ -498,8 +475,6 @@ type
     ComboBox10: TComboBox;
     Label172: TLabel;
     Label173: TLabel;
-    RadioGroup6: TRadioGroup;
-    RadioGroup7: TRadioGroup;
     Label96: TLabel;
     Label97: TLabel;
     Label98: TLabel;
@@ -527,6 +502,136 @@ type
     fw10: TFloatEdit;
     fw0: TFloatEdit;
     fw00: TFloatEdit;
+    ComboBox11: TComboBox;
+    p_gridspacing: TTabSheet;
+    Label159: TLabel;
+    MaskEdit1: TMaskEdit;
+    MaskEdit2: TMaskEdit;
+    MaskEdit3: TMaskEdit;
+    MaskEdit4: TMaskEdit;
+    MaskEdit5: TMaskEdit;
+    MaskEdit6: TMaskEdit;
+    MaskEdit7: TMaskEdit;
+    MaskEdit8: TMaskEdit;
+    MaskEdit9: TMaskEdit;
+    MaskEdit10: TMaskEdit;
+    MaskEdit11: TMaskEdit;
+    MaskEdit12: TMaskEdit;
+    MaskEdit13: TMaskEdit;
+    MaskEdit14: TMaskEdit;
+    MaskEdit15: TMaskEdit;
+    MaskEdit16: TMaskEdit;
+    MaskEdit17: TMaskEdit;
+    MaskEdit18: TMaskEdit;
+    MaskEdit19: TMaskEdit;
+    MaskEdit20: TMaskEdit;
+    MaskEdit21: TMaskEdit;
+    MaskEdit22: TMaskEdit;
+    Label160: TLabel;
+    Label176: TLabel;
+    Label175: TLabel;
+    Label161: TLabel;
+    Label162: TLabel;
+    Label163: TLabel;
+    Label164: TLabel;
+    Label166: TLabel;
+    Label167: TLabel;
+    Label168: TLabel;
+    Label169: TLabel;
+    Label170: TLabel;
+    Label174: TLabel;
+    Label177: TLabel;
+    SpeedButton7: TSpeedButton;
+    Label178: TLabel;
+    Label179: TLabel;
+    stepunit: TRadioGroup;
+    stepline: TCheckBox;
+    Label180: TLabel;
+    nbstep: TSpinEdit;
+    stepsize: TSpinEdit;
+    SimObj: TCheckListBox;
+    PlaParalaxe: TRadioGroup;
+    planet3: TEdit;
+    Label131: TLabel;
+    BitBtn31: TBitBtn;
+    Label89: TLabel;
+    PlanetBox: TCheckBox;
+    PlanetMode: TRadioGroup;
+    PlanetBox2: TCheckBox;
+    PlanetBox3: TCheckBox;
+    GRS: TFloatEdit;
+    BitBtn37: TBitBtn;
+    Label53: TLabel;
+    Edit2: TEdit;
+    Button2: TButton;
+    p_skycolor: TTabSheet;
+    p_nebcolor: TTabSheet;
+    bg1: TPanel;
+    Shape1: TShape;
+    Shape2: TShape;
+    Shape3: TShape;
+    Shape4: TShape;
+    Shape5: TShape;
+    Shape6: TShape;
+    Shape7: TShape;
+    Label181: TLabel;
+    Label182: TLabel;
+    Label183: TLabel;
+    Label184: TLabel;
+    Label185: TLabel;
+    Label186: TLabel;
+    Label187: TLabel;
+    Label188: TLabel;
+    Label189: TLabel;
+    bg2: TPanel;
+    Shape8: TShape;
+    Shape9: TShape;
+    Shape10: TShape;
+    Shape11: TShape;
+    Shape12: TShape;
+    Shape13: TShape;
+    Label190: TLabel;
+    Label191: TLabel;
+    Label192: TLabel;
+    Label193: TLabel;
+    Label194: TLabel;
+    Label195: TLabel;
+    bg3: TPanel;
+    Shape15: TShape;
+    Shape16: TShape;
+    Shape17: TShape;
+    Shape14: TShape;
+    Label197: TLabel;
+    Label198: TLabel;
+    Label199: TLabel;
+    Label196: TLabel;
+    DefColor: TRadioGroup;
+    LoadDefColor: TButton;
+    Label200: TLabel;
+    skycolorbox: TRadioGroup;
+    Panel6: TPanel;
+    Shape18: TShape;
+    Shape19: TShape;
+    Shape20: TShape;
+    Shape21: TShape;
+    Shape22: TShape;
+    Shape23: TShape;
+    Shape24: TShape;
+    Label202: TLabel;
+    Label205: TLabel;
+    Label208: TLabel;
+    Button3: TButton;
+    Label201: TLabel;
+    Bevel6: TBevel;
+    EqGrid: TCheckBox;
+    AzGrid: TCheckBox;
+    Constl: TCheckBox;
+    ConstlFile: TEdit;
+    Label132: TLabel;
+    ConstlFileBtn: TBitBtn;
+    ColorDialog1: TColorDialog;
+    projectiontype: TRadioGroup;
+    ApparentType: TRadioGroup;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -571,8 +676,6 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure StringGrid3SelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure StringGrid3SetEditText(Sender: TObject; ACol, ARow: Integer;
-      const Value: String);
     procedure BitBtn33Click(Sender: TObject);
     procedure BitBtn35Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -583,11 +686,9 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
-    procedure DateChange(Sender: TObject);
     procedure tzChange(Sender: TObject);
     procedure CheckBox4Click(Sender: TObject);
     procedure dt_utChange(Sender: TObject);
-    procedure TimeChange(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
     procedure PMBoxClick(Sender: TObject);
     procedure DrawPmBoxClick(Sender: TObject);
@@ -595,6 +696,43 @@ type
     procedure nextClick(Sender: TObject);
     procedure previousClick(Sender: TObject);
     procedure ProjectionChange(Sender: TObject);
+    procedure StringGrid3SetEditText(Sender: TObject; ACol, ARow: Integer;
+      const Value: WideString);
+    procedure StringGrid3SetEditText2(Sender: TObject; ACol, ARow: Integer;
+      const Value: String);
+    procedure DateChange(Sender: TObject; NewValue: Integer);
+    procedure DateChange2(Sender: TObject);
+    procedure TimeChange(Sender: TObject; NewValue: Integer);
+    procedure TimeChange2(Sender: TObject);
+    procedure DegSpacingChange(Sender: TObject);
+    procedure HourSpacingChange(Sender: TObject);
+    procedure SimObjClickCheck(Sender: TObject);
+    procedure stepunitClick(Sender: TObject);
+    procedure stepsizeChange(Sender: TObject);
+    procedure PlaParalaxeClick(Sender: TObject);
+    procedure PlanetBoxClick(Sender: TObject);
+    procedure PlanetModeClick(Sender: TObject);
+    procedure GRSChange(Sender: TObject);
+    procedure PlanetBox2Click(Sender: TObject);
+    procedure PlanetBox3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure nbstepChange(Sender: TObject);
+    procedure steplineClick(Sender: TObject);
+    procedure bgClick(Sender: TObject);
+    procedure ShapeMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure LoadDefColorClick(Sender: TObject);
+    procedure skycolorboxClick(Sender: TObject);
+    procedure ShapeSkyMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Button3Click(Sender: TObject);
+    procedure EqGridClick(Sender: TObject);
+    procedure AzGridClick(Sender: TObject);
+    procedure ConstlClick(Sender: TObject);
+    procedure ConstlFileChange(Sender: TObject);
+    procedure ConstlFileBtnClick(Sender: TObject);
+    procedure ApparentTypeClick(Sender: TObject);
+    procedure projectiontypeClick(Sender: TObject);
   private
     { Déclarations privées }
     procedure EditGCatPath(row : integer);
@@ -616,11 +754,17 @@ type
     procedure ShowDisplay;
     procedure ShowFonts;
     procedure ShowField;
+    procedure SetFieldHint(var lab:Tlabel; n:integer);
     procedure ShowProjection;
     procedure ShowFilter;
+    procedure ShowGridSpacing;
     procedure ShowGcat;
     procedure ShowCDCStar;
     procedure ShowCDCNeb;
+    procedure ShowPlanet;
+    procedure ShowLine;
+    procedure ShowColor;
+    procedure ShowSkyColor;
   end;
 
 var
@@ -634,12 +778,34 @@ const b=' ';
 
 {$R *.dfm}
 
+// include all cross-platform common code.
+// you can temporarily copy the file content here
+// to use the IDE facilities
+
 {$include i_config.pas }
 
-procedure Tf_config.ProjectionChange(Sender: TObject);
+// end of common code
+
+// windows vcl specific code:
+
+procedure Tf_config.StringGrid3SetEditText2(Sender: TObject; ACol,
+  ARow: Integer; const Value: String);
 begin
-if sender is TComboBox then with sender as TComboBox do
-   csc.projname[tag]:=text;
+  // clx compatibility call
+  StringGrid3SetEditText(Sender,ACol,ARow,Value);
 end;
 
+procedure Tf_config.stepsizeChange(Sender: TObject);
+begin
+stepunitClick(Sender);
+end;
+
+procedure Tf_config.nbstepChange(Sender: TObject);
+begin
+csc.Simnb:=nbstep.value;
+end;
+
+// end of windows vcl specific code:
+
 end.
+

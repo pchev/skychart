@@ -22,9 +22,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  Cross-platform common code for Main form.
 }
 
-function Tf_main.CreateMDIChild(const Name: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
+function Tf_main.CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
 var
-  Child: Tf_chart;
+  Child : Tf_chart;
 begin
   { allow for a reasonable number of chart }
   if (MDIChildCount>=9) then begin
@@ -41,18 +41,20 @@ begin
   Child := Tf_chart.Create(Application);
   Child.Caption:=name;
   Child.sc.catalog:=catalog;
+  Child.sc.planet:=planet;
   Child.sc.plot.cfgplot:=cfgp;
   Child.sc.plot.starshape:=starshape.Picture.Bitmap;
   Child.sc.plot.cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
   Child.sc.plot.cfgplot.starshapew:=Child.sc.plot.cfgplot.starshapesize div 2;
   Child.sc.cfgsc:=cfg1;
-  if cfgm.maximized then Child.windowstate:=wsmaximized
-                    else Child.windowstate:=wsnormal;
-  Child.width:=Child.sc.cfgsc.winx;
-  Child.height:=Child.sc.cfgsc.winy;
+  if cfgm.maximized then Child.maximize:=true
+                    else begin Child.maximize:=false;
+                               Child.width:=Child.sc.cfgsc.winx;
+                               Child.height:=Child.sc.cfgsc.winy;
+                         end;
   if Child.sc.cfgsc.Projpole=Altaz then begin
-     Child.sc.cfgsc.FollowOn:=true;
-     Child.sc.cfgsc.FollowType:=4;
+     Child.sc.cfgsc.TrackOn:=true;
+     Child.sc.cfgsc.TrackType:=4;
   end;
   {$ifdef linux}
   {require to switch the focus to work with the right child. Kylix bug?}
@@ -91,7 +93,22 @@ c2.ObsName := c1.ObsName ;
 c2.DrawPMyear := c1.DrawPMyear ;
 c2.PMon := c1.PMon ;
 c2.DrawPMon := c1.DrawPMon ;
-for i:=0 to 9 do c2.projname[i] := c1.projname[i];
+for i:=0 to 10 do c2.projname[i] := c1.projname[i];
+c2.Simnb := c1.Simnb ;
+c2.SimLine := c1.SimLine ;
+c2.SimD := c1.SimD ;
+c2.SimH := c1.SimH ;
+c2.SimM := c1.SimM ;
+c2.SimS := c1.SimS ;
+c2.SimObject := c1.SimObject ;
+c2.PlanetParalaxe := c1.PlanetParalaxe ;
+c2.ShowPlanet := c1.ShowPlanet ;
+c2.GRSlongitude := c1.GRSlongitude ;
+c2.ShowEarthShadow := c1.ShowEarthShadow ;
+c2.ProjPole := c1.ProjPole ;
+c2.ShowEqGrid := c1.ShowEqGrid ;
+c2.ShowAzGrid := c1.ShowAzGrid ;
+c2.ShowConstL := c1.ShowConstL ;
 //c2. := c1. ;
 end;
 
@@ -104,6 +121,7 @@ for i:=0 to MDIChildCount-1 do
       sc.plot.cfgplot:=def_cfgplot;
       if applydef then begin
         CopySCconfig(def_cfgsc,sc.cfgsc);
+        sc.cfgsc.FindOk:=false;
       end;
       AutoRefresh;
      end;
@@ -121,7 +139,7 @@ end;
 
 procedure Tf_main.FileNew1Execute(Sender: TObject);
 begin
-  CreateMDIChild('Chart ' + IntToStr(MDIChildCount + 1),true,def_cfgsc,def_cfgplot);
+  CreateMDIChild('Chart ' + IntToStr(MDIChildCount + 1),true,true,def_cfgsc,def_cfgplot);
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
@@ -133,7 +151,7 @@ OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
     cfgp:=def_cfgplot;
     cfgs:=def_cfgsc;
     ReadChartConfig(OpenDialog.FileName,true,cfgp,cfgs);
-    CreateMDIChild(extractfilename(OpenDialog.FileName),false,cfgs,cfgp);
+    CreateMDIChild(extractfilename(OpenDialog.FileName),false,false,cfgs,cfgp);
   end;
 end;
 
@@ -160,12 +178,15 @@ begin
 DecimalSeparator:='.';
 appdir:=getcurrentdir;
 catalog:=Tcatalog.Create(self);
+planet:=Tplanet.Create(self);
 end;
 
 procedure Tf_main.FormShow(Sender: TObject);
 begin
  SetDefault;
  ReadDefault;
+ LoadConstL(cfgm.ConstLfile);
+ SetLang;
  InitFonts;
  SetLpanel1('');
  FileNewItem.click;
@@ -176,6 +197,7 @@ end;
 procedure Tf_main.FormDestroy(Sender: TObject);
 begin
 catalog.free;
+planet.free;
 end;
 
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -239,7 +261,8 @@ begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    if sc.cfgsc.projpole=Equat then sc.cfgsc.projpole:=Altaz
                               else sc.cfgsc.projpole:=Equat;
-   Refresh;                       
+   sc.cfgsc.FindOk:=false; // invalidate the search result
+   Refresh;
 end;
 end;
 
@@ -253,6 +276,16 @@ begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do GridAZExecute(Sender);
 end;
 
+procedure Tf_main.switchstarsExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do switchstarExecute(Sender);
+end;
+
+procedure Tf_main.switchbackgroundExecute(Sender: TObject);
+
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do switchbackgroundExecute(Sender);
+end;
 
 procedure Tf_main.SetFOVExecute(Sender: TObject);
 var f : double;
@@ -264,10 +297,9 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
 end;
 end;
 
-
 procedure Tf_main.OpenConfigExecute(Sender: TObject);
 begin
-f_config:=Tf_config.Create(application);
+if f_config=nil then f_config:=Tf_config.Create(application);
 try
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
@@ -280,6 +312,16 @@ try
  formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
  f_config.showmodal;
  if f_config.ModalResult=mrOK then begin
+   activateconfig;
+ end;
+ cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
+finally
+// f_config.free;
+end;
+end;
+
+procedure Tf_main.activateconfig;
+begin
     cfgm:=f_config.cmain;
     cfgm.updall:=f_config.applyall.checked;
     catalog.cfgcat:=f_config.ccat;
@@ -289,17 +331,14 @@ try
     def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
     InitFonts;
-    if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+    if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
+       sc.cfgsc.FindOk:=false;
+    end;
     RefreshAllChild(cfgm.updall);
     Autorefresh.enabled:=false;
     Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
     Autorefresh.enabled:=true;
- end;
- cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
-finally
- f_config.free;
-end;
 end;
 
 procedure Tf_main.ViewBarExecute(Sender: TObject);
@@ -355,17 +394,25 @@ cfgm.language:='UK';
 cfgm.prtname:='';
 cfgm.configpage:=0;
 cfgm.PrinterResolution:=300;
+cfgm.PrintColor:=true;
+cfgm.PrintLandscape:=true;
 cfgm.maximized:=true;
 cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
 for i:=1 to 6 do begin
-    cfgm.FontName[i]:=DefaultFontName;
-    cfgm.FontSize[i]:=DefaultFontSize;
-    cfgm.FontBold[i]:=false;
-    cfgm.FontItalic[i]:=false;
+   cfgm.FontName[i]:=DefaultFontName;
+   cfgm.FontSize[i]:=DefaultFontSize;
+   cfgm.FontBold[i]:=false;
+   cfgm.FontItalic[i]:=false;
 end;
+for i:=1 to 9 do begin
+   cfgm.LabelColor[i]:=clWhite;
+   cfgm.LabelSize[i]:=DefaultFontSize;
+end;
+cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constl.dat';
 def_cfgplot.invisible:=false;
 def_cfgplot.color:=dfColor;
+def_cfgplot.skycolor:=dfSkyColor;
 def_cfgplot.backgroundcolor:=def_cfgplot.color[0];
 def_cfgplot.Nebgray:=55;
 def_cfgplot.NebBright:=180;
@@ -373,11 +420,14 @@ def_cfgplot.stardyn:=65;
 def_cfgplot.starsize:=13;
 def_cfgplot.starplot:=1;
 def_cfgplot.nebplot:=1;
+def_cfgplot.plaplot:=1;
+def_cfgplot.AutoSkycolor:=true;
 def_cfgsc.winx:=clientwidth;
 def_cfgsc.winy:=clientheight;
 def_cfgsc.UseSystemTime:=true;
 def_cfgsc.AutoRefresh:=false;
 def_cfgsc.JDchart:=jd2000;
+def_cfgsc.LastJDchart:=-1E25;
 def_cfgsc.racentre:=1.4;
 def_cfgsc.decentre:=0;
 def_cfgsc.fov:=1;
@@ -395,8 +445,8 @@ def_cfgsc.xmin:=0;
 def_cfgsc.xmax:=100;
 def_cfgsc.ymin:=0;
 def_cfgsc.ymax:=100;
-def_cfgsc.ObsLatitude := 46.1 ;
-def_cfgsc.ObsLongitude := -6.2 ;
+def_cfgsc.ObsLatitude := 46.2 ;
+def_cfgsc.ObsLongitude := 6.1 ;
 def_cfgsc.ObsAltitude := 0 ;
 def_cfgsc.ObsTemperature := 10 ;
 def_cfgsc.ObsPressure := 1010 ;
@@ -408,6 +458,20 @@ def_cfgsc.DrawPMon:=false;
 def_cfgsc.DrawPMyear:=1000;
 def_cfgsc.ShowEqGrid:=false;
 def_cfgsc.ShowAzGrid:=true;
+def_cfgsc.ShowConstL:=true;
+def_cfgsc.Simnb:=1;
+def_cfgsc.SimD:=1;
+def_cfgsc.SimH:=0;
+def_cfgsc.SimM:=0;
+def_cfgsc.SimS:=0;
+def_cfgsc.SimLine:=True;
+for i:=1 to NumSimObject do def_cfgsc.SimObject[i]:=true;
+def_cfgsc.ShowPlanet:=true;
+def_cfgsc.PlanetParalaxe:=true;
+def_cfgsc.ShowEarthShadow:=false;
+def_cfgsc.GRSlongitude:=84;
+def_cfgsc.LabelOrientation:=1;
+def_cfgsc.FindOk:=false;
 catalog.cfgshr.AzNorth:=true;
 catalog.cfgshr.EquinoxType:=0;
 catalog.cfgshr.EquinoxChart:='J2000';
@@ -502,7 +566,7 @@ def_cfgsc.projname[6]:='ARC';
 def_cfgsc.projname[7]:='ARC';
 def_cfgsc.projname[8]:='ARC';
 def_cfgsc.projname[9]:='ARC';
-def_cfgsc.projname[10]:='CAR';
+def_cfgsc.projname[10]:='ARC';
 catalog.cfgshr.StarMagFilter[0]:=99;
 catalog.cfgshr.StarMagFilter[1]:=99;
 catalog.cfgshr.StarMagFilter[2]:=15;
@@ -644,6 +708,15 @@ end;
 section:='display';
 cplot.starplot:=ReadInteger(section,'starplot',cplot.starplot);
 cplot.nebplot:=ReadInteger(section,'nebplot',cplot.nebplot);
+cplot.plaplot:=ReadInteger(section,'plaplot',cplot.plaplot);
+cplot.PlanetTransparent:=ReadBool(section,'PlanetTransparent',cplot.PlanetTransparent);
+cplot.AutoSkycolor:=ReadBool(section,'AutoSkycolor',cplot.AutoSkycolor);
+for i:=0 to maxcolor do cplot.color[i]:=ReadInteger(section,'color'+inttostr(i),cplot.color[i]);
+for i:=1 to 7 do cplot.skycolor[i]:=ReadInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
+cplot.bgColor:=cplot.color[0];
+section:='grid';
+for i:=1 to maxfield do catalog.cfgshr.HourGridSpacing[i]:=ReadFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
+for i:=1 to maxfield do catalog.cfgshr.DegreeGridSpacing[i]:=ReadFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
 section:='chart';
 catalog.cfgshr.EquinoxType:=ReadInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
 catalog.cfgshr.EquinoxChart:=ReadString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
@@ -667,6 +740,20 @@ csc.PMon:=ReadBool(section,'PMon',csc.PMon);
 csc.DrawPMon:=ReadBool(section,'DrawPMon',csc.DrawPMon);
 csc.DrawPMyear:=ReadInteger(section,'DrawPMyear',csc.DrawPMyear);
 csc.horizonopaque:=ReadBool(section,'horizonopaque',csc.horizonopaque);
+csc.ShowEqGrid:=ReadBool(section,'ShowEqGrid',csc.ShowEqGrid);
+csc.ShowAzGrid:=ReadBool(section,'ShowAzGrid',csc.ShowAzGrid);
+csc.ShowConstL:=ReadBool(section,'ShowConstL',csc.ShowConstL);
+csc.ShowPlanet:=ReadBool(section,'ShowPlanet',csc.ShowPlanet);
+csc.PlanetParalaxe:=ReadBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
+csc.ShowEarthShadow:=ReadBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
+csc.GRSlongitude:=ReadFloat(section,'GRSlongitude',csc.GRSlongitude);
+csc.Simnb:=ReadInteger(section,'Simnb',csc.Simnb);
+csc.SimD:=ReadInteger(section,'SimD',csc.SimD);
+csc.SimH:=ReadInteger(section,'SimH',csc.SimH);
+csc.SimM:=ReadInteger(section,'SimM',csc.SimM);
+csc.SimS:=ReadInteger(section,'SimS',csc.SimS);
+csc.SimLine:=ReadBool(section,'SimLine',csc.SimLine);
+for i:=1 to NumSimObject do csc.SimObject[i]:=ReadBool(section,'SimObject'+inttostr(i),csc.SimObject[i]);
 section:='observatory';
 csc.ObsLatitude := ReadFloat(section,'ObsLatitude',csc.ObsLatitude );
 csc.ObsLongitude := ReadFloat(section,'ObsLongitude',csc.ObsLongitude );
@@ -684,6 +771,8 @@ csc.CurTime:=ReadFloat(section,'CurTime',csc.CurTime);
 csc.autorefresh:=ReadBool(section,'autorefresh',csc.autorefresh);
 csc.Force_DT_UT:=ReadBool(section,'Force_DT_UT',csc.Force_DT_UT);
 csc.DT_UT_val:=ReadFloat(section,'DT_UT_val',csc.DT_UT_val);
+section:='projection';
+for i:=1 to maxfield do csc.projname[i]:=ReadString(section,'ProjName'+inttostr(i),csc.projname[i] );
 end;
 finally
 inif.Free;
@@ -698,17 +787,16 @@ begin
 inif:=Tinifile.create(filename);
 try
 with inif do begin
-section:='util';
-u_util.ldeg:=ReadString(section,'ldeg',u_util.ldeg);
-u_util.lmin:=ReadString(section,'lmin',u_util.lmin);
-u_util.lsec:=ReadString(section,'lsec',u_util.lsec);
 section:='main';
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 cfgm.language:=ReadString(section,'language',cfgm.language);
 cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
 cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterResolution);
+cfgm.PrintColor:=ReadBool(section,'PrintColor',cfgm.PrintColor);
+cfgm.PrintLandscape:=ReadBool(section,'PrintLandscape',cfgm.PrintLandscape);
 if (ReadBool(section,'WinMaximize',false)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
+cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
@@ -817,6 +905,14 @@ if ActiveMDIchild is Tf_chart then with ActiveMDIchild as Tf_chart do begin
 end;
 WriteInteger(section,'starplot',def_cfgplot.starplot);
 WriteInteger(section,'nebplot',def_cfgplot.nebplot);
+WriteInteger(section,'plaplot',def_cfgplot.plaplot);
+WriteBool(section,'PlanetTransparent',def_cfgplot.PlanetTransparent);
+WriteBool(section,'AutoSkycolor',def_cfgplot.AutoSkycolor);
+for i:=0 to maxcolor do WriteInteger(section,'color'+inttostr(i),def_cfgplot.color[i]);
+for i:=1 to 7 do WriteInteger(section,'skycolor'+inttostr(i),def_cfgplot.skycolor[i]);
+section:='grid';
+for i:=1 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
+for i:=1 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
 section:='chart';
 WriteInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
 WriteString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
@@ -842,6 +938,20 @@ WriteBool(section,'PMon',def_cfgsc.PMon);
 WriteBool(section,'DrawPMon',def_cfgsc.DrawPMon);
 WriteInteger(section,'DrawPMyear',def_cfgsc.DrawPMyear);
 WriteBool(section,'horizonopaque',def_cfgsc.horizonopaque);
+WriteBool(section,'ShowEqGrid',def_cfgsc.ShowEqGrid);
+WriteBool(section,'ShowAzGrid',def_cfgsc.ShowAzGrid);
+WriteBool(section,'ShowConstL',def_cfgsc.ShowConstL);
+WriteBool(section,'ShowPlanet',def_cfgsc.ShowPlanet);
+WriteBool(section,'PlanetParalaxe',def_cfgsc.PlanetParalaxe);
+WriteBool(section,'ShowEarthShadow',def_cfgsc.ShowEarthShadow);
+WriteFloat(section,'GRSlongitude',def_cfgsc.GRSlongitude);
+WriteInteger(section,'Simnb',def_cfgsc.Simnb);
+WriteInteger(section,'SimD',def_cfgsc.SimD);
+WriteInteger(section,'SimH',def_cfgsc.SimH);
+WriteInteger(section,'SimM',def_cfgsc.SimM);
+WriteInteger(section,'SimS',def_cfgsc.SimS);
+WriteBool(section,'SimLine',def_cfgsc.SimLine);
+for i:=1 to NumSimObject do WriteBool(section,'SimObject'+inttostr(i),def_cfgsc.SimObject[i]);
 section:='observatory';
 WriteFloat(section,'ObsLatitude',def_cfgsc.ObsLatitude );
 WriteFloat(section,'ObsLongitude',def_cfgsc.ObsLongitude );
@@ -859,6 +969,8 @@ WriteFloat(section,'CurTime',def_cfgsc.CurTime);
 WriteBool(section,'autorefresh',def_cfgsc.autorefresh);
 WriteBool(section,'Force_DT_UT',def_cfgsc.Force_DT_UT);
 WriteFloat(section,'DT_UT_val',def_cfgsc.DT_UT_val);
+section:='projection';
+for i:=1 to maxfield do WriteString(section,'ProjName'+inttostr(i),def_cfgsc.projname[i] );
 end;
 finally
  inif.Free;
@@ -873,17 +985,16 @@ begin
 inif:=Tinifile.create(filename);
 try
 with inif do begin
-section:='util';
-WriteString(section,'ldeg',u_util.ldeg);
-WriteString(section,'lmin',u_util.lmin);
-WriteString(section,'lsec',u_util.lsec);
 section:='main';
 WriteString(section,'language',cfgm.language);
 WriteString(section,'prtname',cfgm.prtname);
 WriteInteger(section,'PrinterResolution',cfgm.PrinterResolution);
+WriteBool(section,'PrintColor',cfgm.PrintColor);
+WriteBool(section,'PrintLandscape',cfgm.PrintLandscape);
 WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 WriteInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
+WriteString(section,'ConstLfile',cfgm.ConstLfile);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -924,6 +1035,7 @@ procedure Tf_main.SaveConfigOnExitExecute(Sender: TObject);
 var inif: TIniFile;
     section : string;
 begin
+SaveConfigOnExit.Checked:=not SaveConfigOnExit.Checked;
 inif:=Tinifile.create(configfile);
 try
 with inif do begin
@@ -935,6 +1047,29 @@ finally
 end;
 end;
 
+procedure Tf_main.SetLang;
+var i:integer;
+    inif: TIniFile;
+    section : string;
+begin
+inif:=Tinifile.create(slash(appdir)+'cdclang_'+trim(cfgm.language)+'.ini');
+try
+with inif do begin
+section:='main';
+u_util.ldeg:=ReadString(section,'ldeg',u_util.ldeg);
+u_util.lmin:=ReadString(section,'lmin',u_util.lmin);
+u_util.lsec:=ReadString(section,'lsec',u_util.lsec);
+section:='detail_label';
+for i:=1 to NumLlabel do begin
+  catalog.cfgshr.llabel[i]:=ReadString(section,'m_'+trim(inttostr(i)),deftxt);
+end;
+end;
+finally
+inif.Free;
+end;
+end;
+
+
 procedure Tf_main.quicksearchClick(Sender: TObject);
 var key:word;
 begin
@@ -942,16 +1077,17 @@ begin
  quicksearchKeyDown(Sender,key,[]);
 end;
 
-procedure Tf_main.quicksearchKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure Tf_main.quicksearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var ar1,de1 : Double;
-    ok : Boolean;
-    num,buf,desc,notes : string;
+    ok,TrackInProgress : Boolean;
+    num,buf : string;
     i : integer;
 label findit;
 begin
 if key<>key_cr then exit;  // wait press Enter
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   TrackInProgress:=sc.cfgsc.TrackOn;
+   sc.cfgsc.TrackOn:=false;
    Num:=trim(quicksearch.text);
    if trim(num)='' then exit;
    if uppercase(copy(Num,1,1))='M' then begin
@@ -1019,19 +1155,19 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
       ok:=catalog.FindNum(S_HR,buf,ar1,de1) ;
       if ok then goto findit;
    end;
-{   for i:=1 to 11 do begin
+   for i:=1 to 30 do begin
      if (uppercase(trim(Num))=uppercase(trim(pla[i]))) then begin
-         FindNumPla(i,ar1,de1,ok);
-         if ok and beingfollow then begin
-               FollowOn:=true;
-               FollowType:=1;
-               FollowObj:=i;
+         planet.FindNumPla(i,ar1,de1,ok,sc.cfgsc);
+         if ok and TrackInProgress then begin
+               sc.cfgsc.TrackOn:=true;
+               sc.cfgsc.TrackType:=1;
+               sc.cfgsc.TrackObj:=i;
          end;
          break;
      end;
    end;
    if ok then goto findit;
-   buf:=trim(uppercase(num));
+{   buf:=trim(uppercase(num));
    j:=length(buf);
    if j>3 then for i:=1 to CometNb do begin
      if uppercase(copy(CometNLst[i],1,j))=buf then begin
@@ -1065,18 +1201,21 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    if ok then goto findit;
 Findit:
    if ok then begin
+      IdentLabel.visible:=false;
       precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
       sc.movetoradec(ar1,de1);
       Refresh;
-      sc.FindatRaDec(ar1,de1,0.0003,desc,notes);
-      f_main.SetLpanel1(desc);
+      sc.FindatRaDec(ar1,de1,0.0003);
+      ShowIdentLabel;
+      f_main.SetLpanel1(sc.cfgsc.FindDesc);
       i:=quicksearch.Items.IndexOf(Num);
-      if i=-1 then i:=MaxQuickSearch-1;
+      if i=-1 then i:=MaxQuickSearch-1;               
       quicksearch.Items.Delete(i);
       quicksearch.Items.Insert(0,Num);
       quicksearch.ItemIndex:=0;
    end
    else begin
+      sc.cfgsc.TrackOn:=TrackInProgress;
       ShowMessage('Not found'+' '+Num);
    end;
 end;
@@ -1090,16 +1229,40 @@ begin
           else FlipButtonY.ImageIndex:=18;
 end;
 
-Procedure Tf_main.FormPos(form : Tform; x,y : integer);
-const bot=25; //minimal distance from screen bottom
+Procedure Tf_main.LoadConstL(fname:string);
+var f : textfile;
+    i,n:integer;
+    ra1,ra2,de1,de2:single;
+    txt:string;
 begin
-with Form do begin
-  left:=x;
-  if left+width>Screen.Width then left:=Screen.Width-width;
-  if left<0 then left:=0;
-  top:=y;
-  if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
-  if top<0 then top:=0;
+   if not FileExists(fname) then begin
+      catalog.cfgshr.ConstLNum := 0;
+      setlength(catalog.cfgshr.ConstL,0);
+      exit;
+   end;
+   assignfile(f,fname);
+   try
+   reset(f);
+   n:=0;
+   // first loop to get the size
+   repeat
+     readln(f,txt);
+     inc(n);
+   until eof(f);
+   setlength(catalog.cfgshr.ConstL,n);
+   // read the file now
+   reset(f);
+   for i:=0 to n-1 do begin
+     readln(f,ra1,de1,ra2,de2);
+     catalog.cfgshr.ConstL[i].ra1:=deg2rad*ra1*15;
+     catalog.cfgshr.ConstL[i].de1:=deg2rad*de1;
+     catalog.cfgshr.ConstL[i].ra2:=deg2rad*ra2*15;
+     catalog.cfgshr.ConstL[i].de2:=deg2rad*de2;
+   end;
+   catalog.cfgshr.ConstLNum := n;
+   finally
+   closefile(f);
+   end;
 end;
-end;
+
 

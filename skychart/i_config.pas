@@ -76,18 +76,31 @@ ShowTime;
 ShowChart;
 ShowField;
 ShowFilter;
+ShowGridSpacing;
 ShowCDCStar;
 ShowCDCNeb;
 ShowFonts;
 ShowDisplay;
 ShowGCat;
+ShowPlanet;
+ShowLine;
+ShowColor;
+ShowSkyColor;
 TreeView1.FullExpand;
 Treeview1.selected:=Treeview1.items[cmain.configpage];
 end;
 
+procedure Tf_config.ShowLine;
+begin
+ConstlFile.Text:=cmain.ConstLfile;
+EqGrid.Checked:=csc.ShowEqGrid;
+AzGrid.Checked:=csc.ShowAzGrid;
+ConstL.Checked:=csc.ShowConstl;
+end;
+
 procedure Tf_config.ShowTime;
 var h,n,s:string;
-    y,m,d:integer;
+    y,m,d,i,j:integer;
 begin
 y:=csc.curyear;
 m:=csc.curmonth;
@@ -116,6 +129,41 @@ Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
 if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
 dt_ut.value:=round(csc.DT_UT_val*3600);
+nbstep.value:=csc.Simnb;
+if csc.SimD>0 then begin
+   stepsize.value:=csc.SimD;
+   stepunit.itemindex:=0;
+end;
+if csc.SimH>0 then begin
+   stepsize.value:=csc.SimH;
+   stepunit.itemindex:=1;
+end;
+if csc.SimM>0 then begin
+   stepsize.value:=csc.SimM;
+   stepunit.itemindex:=2;
+end;
+if csc.SimS>0 then begin
+   stepsize.value:=csc.SimS;
+   stepunit.itemindex:=3;
+end;
+stepline.checked:=csc.SimLine;
+for i:=0 to NumSimObject-2 do begin
+  j:=i;
+  if j=0 then j:=10; // sun
+  if j=3 then j:=11; // moon
+  SimObj.checked[i]:=csc.SimObject[j];
+end;
+end;
+
+procedure Tf_config.ShowPlanet;
+begin
+if csc.PlanetParalaxe then PlaParalaxe.itemindex:=1
+                      else PlaParalaxe.itemindex:=0;
+PlanetBox.checked:=csc.ShowPlanet;
+PlanetMode.itemindex:=cplot.plaplot;
+grs.value:=csc.GRSlongitude;
+PlanetBox3.checked:=csc.ShowEarthShadow;
+PlanetBox2.checked:=cplot.PlanetTransparent;
 end;
 
 procedure Tf_config.ShowChart;
@@ -130,6 +178,8 @@ equinoxtype.itemindex:=cshr.EquinoxType;
 PMBox.checked:=csc.PMon;
 DrawPMBox.checked:=csc.DrawPMon;
 lDrawPMy.value:=csc.DrawPMyear;
+Apparenttype.itemindex:=0;
+projectiontype.itemindex:=csc.ProjPole;
 end;
 
 procedure Tf_config.ShowGCat;
@@ -302,6 +352,32 @@ Panel5.visible:=cshr.NebFilter;
 BigNebBox.visible:=cshr.NebFilter;
 end;
 
+procedure Tf_config.ShowGridSpacing;
+begin
+  MaskEdit1.text:=DEToStr3(cshr.DegreeGridSpacing[0]);
+  MaskEdit2.text:=DEToStr3(cshr.DegreeGridSpacing[1]);
+  MaskEdit3.text:=DEToStr3(cshr.DegreeGridSpacing[2]);
+  MaskEdit4.text:=DEToStr3(cshr.DegreeGridSpacing[3]);
+  MaskEdit5.text:=DEToStr3(cshr.DegreeGridSpacing[4]);
+  MaskEdit6.text:=DEToStr3(cshr.DegreeGridSpacing[5]);
+  MaskEdit7.text:=DEToStr3(cshr.DegreeGridSpacing[6]);
+  MaskEdit8.text:=DEToStr3(cshr.DegreeGridSpacing[7]);
+  MaskEdit9.text:=DEToStr3(cshr.DegreeGridSpacing[8]);
+  MaskEdit10.text:=DEToStr3(cshr.DegreeGridSpacing[9]);
+  MaskEdit11.text:=DEToStr3(cshr.DegreeGridSpacing[10]);
+  MaskEdit12.text:=ArToStr3(cshr.HourGridSpacing[0]);
+  MaskEdit13.text:=ArToStr3(cshr.HourGridSpacing[1]);
+  MaskEdit14.text:=ArToStr3(cshr.HourGridSpacing[2]);
+  MaskEdit15.text:=ArToStr3(cshr.HourGridSpacing[3]);
+  MaskEdit16.text:=ArToStr3(cshr.HourGridSpacing[4]);
+  MaskEdit17.text:=ArToStr3(cshr.HourGridSpacing[5]);
+  MaskEdit18.text:=ArToStr3(cshr.HourGridSpacing[6]);
+  MaskEdit19.text:=ArToStr3(cshr.HourGridSpacing[7]);
+  MaskEdit20.text:=ArToStr3(cshr.HourGridSpacing[8]);
+  MaskEdit21.text:=ArToStr3(cshr.HourGridSpacing[9]);
+  MaskEdit22.text:=ArToStr3(cshr.HourGridSpacing[10]);
+end;
+
 procedure Tf_config.ShowField;
 begin
 fw0.Value:=cshr.fieldnum[0];
@@ -316,11 +392,22 @@ fw8.Value:=cshr.fieldnum[8];
 fw9.Value:=cshr.fieldnum[9];
 end;
 
+procedure Tf_config.SetFieldHint(var lab:Tlabel; n:integer);
+const ff='0.0';
+begin
+case n of
+0 : lab.hint:='0 - '+formatfloat(ff,cshr.fieldnum[n]);
+1..(MaxField) : lab.hint:=formatfloat(ff,cshr.fieldnum[n-1])+' - '+formatfloat(ff,cshr.fieldnum[n]);
+end;
+lab.showhint:=true;
+end;
+
 procedure Tf_config.ShowProjection;
    procedure setprojrange(var cb:Tcombobox;n:integer);
    begin
      cb.items.clear;
-     if cshr.fieldnum[n]<=270 then cb.items.add('ARC');
+     cb.items.add('ARC');
+//     if cshr.fieldnum[n]<=270 then cb.items.add('ARC');
      if cshr.fieldnum[n]<=89 then begin
         cb.items.add('TAN');
         cb.items.add('SIN');
@@ -339,6 +426,18 @@ setprojrange(combobox7,6);
 setprojrange(combobox8,7);
 setprojrange(combobox9,8);
 setprojrange(combobox10,9);
+setprojrange(combobox11,10);
+setfieldhint(labelp0,0); combobox1.hint:=labelp0.hint;
+setfieldhint(labelp1,1); combobox2.hint:=labelp1.hint;
+setfieldhint(labelp2,2); combobox3.hint:=labelp2.hint;
+setfieldhint(labelp3,3); combobox4.hint:=labelp3.hint;
+setfieldhint(labelp4,4); combobox5.hint:=labelp4.hint;
+setfieldhint(labelp5,5); combobox6.hint:=labelp5.hint;
+setfieldhint(labelp6,6); combobox7.hint:=labelp6.hint;
+setfieldhint(labelp7,7); combobox8.hint:=labelp7.hint;
+setfieldhint(labelp8,8); combobox9.hint:=labelp8.hint;
+setfieldhint(labelp9,9); combobox10.hint:=labelp9.hint;
+setfieldhint(labelp10,10); combobox11.hint:=labelp10.hint;
 end;
 
 procedure Tf_config.SetFonts(ctrl:Tedit;num:integer);
@@ -359,6 +458,50 @@ begin
  SetFonts(statusfont,4);
  SetFonts(listfont,5);
  SetFonts(prtfont,6);
+end;
+
+procedure Tf_config.ShowColor;
+begin
+ bg1.color:=cplot.color[0];
+ bg2.color:=cplot.color[0];
+ bg3.color:=cplot.color[0];
+ shape1.brush.color:=cplot.color[1];
+ shape2.brush.color:=cplot.color[2];
+ shape3.brush.color:=cplot.color[3];
+ shape4.brush.color:=cplot.color[4];
+ shape5.brush.color:=cplot.color[5];
+ shape6.brush.color:=cplot.color[6];
+ shape7.brush.color:=cplot.color[7];
+ shape8.pen.color:=cplot.color[8];
+ shape9.pen.color:=cplot.color[9];
+ shape10.pen.color:=cplot.color[10];
+ shape11.pen.color:=cplot.color[12];
+ shape12.pen.color:=cplot.color[13];
+ shape13.pen.color:=cplot.color[14];
+ shape14.pen.color:=cplot.color[15];
+ shape15.pen.color:=cplot.color[16];
+ shape16.pen.color:=cplot.color[17];
+ shape17.pen.color:=cplot.color[18];
+end;
+
+procedure Tf_config.ShowSkyColor;
+begin
+ if cplot.autoskycolor then skycolorbox.itemindex:=1
+                       else skycolorbox.itemindex:=0;
+ shape18.pen.color:=cplot.skycolor[1];
+ shape18.brush.color:=cplot.skycolor[1];
+ shape19.pen.color:=cplot.skycolor[2];
+ shape19.brush.color:=cplot.skycolor[2];
+ shape20.pen.color:=cplot.skycolor[3];
+ shape20.brush.color:=cplot.skycolor[3];
+ shape21.pen.color:=cplot.skycolor[4];
+ shape21.brush.color:=cplot.skycolor[4];
+ shape22.pen.color:=cplot.skycolor[5];
+ shape22.brush.color:=cplot.skycolor[5];
+ shape23.pen.color:=cplot.skycolor[6];
+ shape23.brush.color:=cplot.skycolor[6];
+ shape24.pen.color:=cplot.skycolor[7];
+ shape24.brush.color:=cplot.skycolor[7];
 end;
 
 procedure Tf_config.ShowDisplay;
@@ -869,6 +1012,10 @@ case cshr.EquinoxType of
            cshr.EquinoxChart:='B1950';
            cshr.DefaultJDChart:=jd1950;
          end;
+     2 : begin
+           cshr.EquinoxChart:='B1900';
+           cshr.DefaultJDChart:=jd1900;
+         end;
      end;
      equinox1.Visible:=true;
      equinox2.Visible:=false;
@@ -880,7 +1027,7 @@ case cshr.EquinoxType of
      equinox2.Visible:=true;
     end;
 2 : begin
-     cshr.EquinoxChart:='Date';
+     cshr.EquinoxChart:='Date ';
      cshr.DefaultJDChart:=jd2000;
      equinox1.Visible:=false;
      equinox2.Visible:=false;
@@ -891,7 +1038,6 @@ end;
 procedure Tf_config.equinoxtypeClick(Sender: TObject);
 begin
 cshr.EquinoxType:=equinoxtype.itemindex;
-if cshr.EquinoxType=0 then equinox1.ItemIndex:=0;
 SetEquinox;
 end;
 
@@ -918,6 +1064,11 @@ end;
 procedure Tf_config.lDrawPMyChange(Sender: TObject);
 begin
 csc.DrawPMyear:=lDrawPMy.value;
+end;
+
+procedure Tf_config.projectiontypeClick(Sender: TObject);
+begin
+csc.ProjPole:=projectiontype.itemindex;
 end;
 
 procedure Tf_config.CheckBox1Click(Sender: TObject);
@@ -961,8 +1112,14 @@ csc.DT_UT:=csc.DT_UT_val;
 Tdt_ut.caption:=dt_ut.text;
 end;
 
-procedure Tf_config.DateChange(Sender: TObject);
+procedure Tf_config.DateChange2(Sender: TObject);
 begin
+DateChange(Sender,0);
+end;
+
+procedure Tf_config.DateChange(Sender: TObject; NewValue: Integer);
+begin
+// do not use NewValue for VCL compatibility
 if adbc.itemindex=0 then
   csc.curyear:=d_year.value
 else
@@ -974,8 +1131,14 @@ Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
 end;
 
-procedure Tf_config.TimeChange(Sender: TObject);
+procedure Tf_config.TimeChange2(Sender: TObject);
 begin
+TimeChange(Sender,0);
+end;
+
+procedure Tf_config.TimeChange(Sender: TObject; NewValue: Integer);
+begin
+// do not use NewValue for VCL compatibility
 csc.curtime:=t_hour.value+t_min.value/60+t_sec.value/3600;
 end;
 
@@ -998,6 +1161,194 @@ procedure Tf_config.ProjectionChange(Sender: TObject);
 begin
 if sender is TComboBox then with sender as TComboBox do
    csc.projname[tag]:=text;
+end;
+
+procedure Tf_config.DegSpacingChange(Sender: TObject);
+begin
+if sender is TMaskEdit then with sender as TMaskEdit do
+   cshr.DegreeGridSpacing[tag]:=Str3ToDE(text);
+end;
+
+procedure Tf_config.HourSpacingChange(Sender: TObject);
+begin
+if sender is TMaskEdit then with sender as TMaskEdit do
+   cshr.HourGridSpacing[tag]:=Str3ToAr(text);
+end;
+
+procedure Tf_config.PlaParalaxeClick(Sender: TObject);
+begin
+csc.PlanetParalaxe:=(PlaParalaxe.itemindex=1);
+end;
+
+procedure Tf_config.PlanetBoxClick(Sender: TObject);
+begin
+csc.ShowPlanet:=PlanetBox.checked;
+end;
+
+procedure Tf_config.PlanetModeClick(Sender: TObject);
+begin
+cplot.plaplot:=PlanetMode.itemindex;
+end;
+
+procedure Tf_config.GRSChange(Sender: TObject);
+begin
+csc.GRSlongitude:=grs.value;
+end;
+
+procedure Tf_config.PlanetBox2Click(Sender: TObject);
+begin
+cplot.PlanetTransparent:=PlanetBox2.checked;
+end;
+
+procedure Tf_config.PlanetBox3Click(Sender: TObject);
+begin
+csc.ShowEarthShadow:=PlanetBox3.checked;
+end;
+
+procedure Tf_config.Button2Click(Sender: TObject);
+begin
+// Apply change
+f_main.activateconfig;
+end;
+
+procedure Tf_config.SimObjClickCheck(Sender: TObject);
+var i,j:integer;
+begin
+for i:=0 to NumSimObject-2 do begin
+  j:=i;
+  if j=0 then j:=10; // sun
+  if j=3 then j:=11; // moon
+  csc.SimObject[j]:=SimObj.checked[i];
+end;
+end;
+
+procedure Tf_config.steplineClick(Sender: TObject);
+begin
+csc.SimLine:=stepline.checked;
+end;
+
+procedure Tf_config.stepunitClick(Sender: TObject);
+begin
+case stepunit.ItemIndex of
+ 0 : begin
+       csc.SimD:=stepsize.value;
+       csc.SimH:=0;csc.SimM:=0;csc.SimS:=0;
+     end;
+ 1 : begin
+       csc.SimH:=stepsize.value;
+       csc.SimD:=0;csc.SimM:=0;csc.SimS:=0;
+     end;
+ 2 : begin
+       csc.SimM:=stepsize.value;
+       csc.SimD:=0;csc.SimH:=0;csc.SimS:=0;
+     end;
+ 3 : begin
+       csc.SimS:=stepsize.value;
+       csc.SimD:=0;csc.SimH:=0;csc.SimM:=0;
+     end;
+end;
+end;
+
+
+procedure Tf_config.ConstlFileBtnClick(Sender: TObject);
+var f : string;
+begin
+f:=expandfilename(ConstlFile.Text);
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='All Files|*.*';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   ConstlFile.Text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
+procedure Tf_config.ConstlFileChange(Sender: TObject);
+begin
+  cmain.ConstLfile:=expandfilename(ConstlFile.Text);
+end;
+
+procedure Tf_config.EqGridClick(Sender: TObject);
+begin
+  csc.ShowEqGrid:=EqGrid.Checked;
+end;
+
+procedure Tf_config.AzGridClick(Sender: TObject);
+begin
+  csc.ShowAzGrid:=AzGrid.Checked;
+end;
+
+procedure Tf_config.ConstlClick(Sender: TObject);
+begin
+  csc.ShowConstl:=ConstL.Checked;
+end;
+
+procedure Tf_config.ApparentTypeClick(Sender: TObject);
+begin
+ApparentType.ItemIndex:=0;
+end;
+
+
+procedure Tf_config.bgClick(Sender: TObject);
+begin
+   ColorDialog1.color:=cplot.Color[0];
+   if ColorDialog1.Execute then begin
+      cplot.Color[0]:=ColorDialog1.Color;
+      cplot.color[11]:=not cplot.Color[0];
+      cplot.bgcolor:=cplot.color[0];
+      ShowColor;
+   end;
+end;
+
+procedure Tf_config.ShapeMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+if sender is TShape then with sender as TShape do begin
+   ColorDialog1.color:=cplot.Color[tag];
+   if ColorDialog1.Execute then begin
+      cplot.Color[tag]:=ColorDialog1.Color;
+      ShowColor;
+   end;
+end;
+end;
+
+procedure Tf_config.LoadDefColorClick(Sender: TObject);
+begin
+case DefColor.ItemIndex of
+  0 : cplot.Color:=DfColor;
+  1 : cplot.Color:=DfRedColor;
+  2 : cplot.Color:=DfBWColor;
+  3 : cplot.Color:=DfWBColor;
+end;
+cplot.bgcolor:=cplot.color[0];
+ShowColor;
+end;
+
+procedure Tf_config.skycolorboxClick(Sender: TObject);
+begin
+cplot.autoskycolor:=(skycolorbox.itemindex=1);
+end;
+
+procedure Tf_config.ShapeSkyMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+if sender is TShape then with sender as TShape do begin
+   ColorDialog1.color:=cplot.SkyColor[tag];
+   if ColorDialog1.Execute then begin
+      cplot.SkyColor[tag]:=ColorDialog1.Color;
+      ShowSkyColor;
+   end;
+end;
+end;
+
+procedure Tf_config.Button3Click(Sender: TObject);
+begin
+cplot.SkyColor:=dfSkyColor;
+ShowSkyColor;
 end;
 
 

@@ -113,9 +113,12 @@ begin
 end;
 
 Procedure WindowXY(x,y:Double; var WindowX,WindowY: Integer; var c:conf_skychart);
+var xx,yy : int64;
 BEGIN
-    WindowX:=round(c.AxGlb+c.BxGlb*x)+c.Xshift;
-    WindowY:=round(c.AyGlb+c.ByGlb*y)+c.Yshift;
+ xx:=round(c.AxGlb+c.BxGlb*x)+c.Xshift;
+ yy:=round(c.AyGlb+c.ByGlb*y)+c.Yshift;
+ if abs(xx)<maxint then WindowX:=xx else WindowX:=maxint;
+ if abs(yy)<maxint then WindowY:=yy else WindowY:=maxint;
 END ;
 
 Procedure XYWindow( x,y: Integer; var Xwindow,Ywindow: double; var c:conf_skychart);
@@ -155,16 +158,16 @@ case c.projtype of              // AIPS memo 27
     sincos(hh,s3,c3);
     r:=s1*s2+c2*c1*c3;  // cos the
     if r<=0 then begin  // > 90°
-      xx:=9999;
-      yy:=9999;
+      xx:=200;
+      yy:=200;
     end else begin
       xx:= -(c2*s3);
       yy:= s2*c1-c2*s1*c3;
     end;
-    if xx>10000 then xx:=10000
-     else if xx<-10000 then xx:=-10000;
-    if yy>10000 then yy:=10000
-     else if yy<-10000 then yy:=-10000;
+    if xx>200 then xx:=200
+     else if xx<-200 then xx:=-200;
+    if yy>200 then yy:=200
+     else if yy<-200 then yy:=-200;
     end;
 'T' : begin                  //  TAN
     hh := ar-ac ;
@@ -173,16 +176,16 @@ case c.projtype of              // AIPS memo 27
     sincos(hh,s3,c3);
     r:=s1*s2+c2*c1*c3;     // cos the
     if r<=0 then begin  // > 90°
-      xx:=9999;
-      yy:=9999;
+      xx:=200;
+      yy:=200;
     end else begin
       xx := -( c2*s3/r );
       yy := (s2*c1-c2*s1*c3)/r ;
     end;
-    if xx>10000 then xx:=10000
-     else if xx<-10000 then xx:=-10000;
-    if yy>10000 then yy:=10000
-     else if yy<-10000 then yy:=-10000;
+    if xx>200 then xx:=200
+     else if xx<-200 then xx:=-200;
+    if yy>200 then yy:=200
+     else if yy<-200 then yy:=-200;
     end;
 else begin
     c.projtype:='A';
@@ -221,9 +224,9 @@ Equat: begin
   else raise exception.Create('Bad projection type');
 end;
 if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then begin
-  if h<0 then begin
-       X:=10000;
-       Y:=10000;
+  if h<-musec then begin
+       X:=200;
+       Y:=200;
   end else begin
     a:=rmod(-rad2deg*ar+181+360,360);
     a1:=trunc(a);
@@ -233,9 +236,9 @@ if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then be
     d1:=c.horizonlist[i1];
     d2:=c.horizonlist[i2];
     h:=d1+(a-a1)*(d2-d1)/(a2-a1);
-    if de<h then begin
-       X:=10000;
-       Y:=10000;
+    if de<h-musec then begin
+       X:=200;
+       Y:=200;
     end else Proj2(ar,de,ac,dc,X,Y,c);
   end;
 end else Proj2(ar,de,ac,dc,X,Y,c);
@@ -463,7 +466,7 @@ function SidTim(jd0,ut,long : double): double;
 BEGIN
  t:=(jd0-2451545.0)/36525;
  te:=100.46061837 + 36000.770053608*t + 0.000387933*t*t - t*t*t/38710000;
- result :=  Rmod(te/15 - long/15 + 1.002737908*ut,24) ;
+ result := deg2rad*Rmod(te - long + 1.002737908*ut*15,360) ;
 END ;
 
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; var c:conf_skychart);
@@ -472,7 +475,7 @@ var
 const
      desinpi = 4.26345151e-5;
 begin
-// AR, DE are standard epoch but paralaxe is to be computed with coordinates of the date.
+// AR, DE may be standard epoch but paralaxe is to be computed with coordinates of the date.
 precession(c.JDchart,c.curjd,ar1,de1);
 H:=(SideralTime-ar1);
 rde:=de1;
@@ -662,6 +665,7 @@ var l1,a1,h1 : double;
 BEGIN
 l1:=deg2rad*c.ObsLatitude;
 a1:=A;
+h:=h-c.RefractionOffset; // correction for the refraction equation reversibility at the chart center
 { refraction meeus91 15.3 }
 if h>-deg2rad*0.3534193791 then h:=minvalue([pid2,h-deg2rad*c.ObsRefractionCor*(1/tan((h+(deg2rad*7.31/(h+deg2rad*4.4)))))/60])
                 else h:=h-deg2rad*0.64658062088;

@@ -5,7 +5,7 @@ interface
 uses Math, enhedits, u_constant, u_util,
   SysUtils, Classes, QForms,Types,
   QStdCtrls, QComCtrls, QControls, QGraphics, QExtCtrls, QGrids, QButtons,
-  QDialogs;
+  QDialogs, QMask, QCheckLst;
 
 type
   Tf_config = class(TForm)
@@ -195,16 +195,11 @@ type
     NebBox: TCheckBox;
     BigNebBox: TCheckBox;
     p_image: TTabSheet;
-    Label53: TLabel;
     Label89: TLabel;
     PlanetBox: TCheckBox;
-    Planet3: TEdit;
-    RadioGroup1: TRadioGroup;
-    RadioGroup2: TRadioGroup;
+    PlanetMode: TRadioGroup;
     PlanetBox2: TCheckBox;
     PlanetBox3: TCheckBox;
-    BitBtn31: TBitBtn;
-    PlanetBox4: TCheckBox;
     GRS: TFloatEdit;
     BitBtn37: TBitBtn;
     Label54: TLabel;
@@ -416,15 +411,6 @@ type
     previous: TButton;
     next: TButton;
     Label165: TLabel;
-    Panel14: TPanel;
-    SpeedButton7: TSpeedButton;
-    Label166: TLabel;
-    Label167: TLabel;
-    Label168: TLabel;
-    nbj: TEdit;
-    nbpas: TEdit;
-    RadioGroup5: TRadioGroup;
-    CheckBox7: TCheckBox;
     Label31: TLabel;
     Panel1: TPanel;
     Label134: TLabel;
@@ -434,12 +420,11 @@ type
     lDrawPMy: TLongEdit;
     Panel10: TPanel;
     Label136: TLabel;
-    Label137: TLabel;
+    Labelequinox: TLabel;
     equinoxtype: TRadioGroup;
     equinox2: TFloatEdit;
     equinox1: TComboBox;
-    RadioGroup6: TRadioGroup;
-    RadioGroup7: TRadioGroup;
+    projectiontype: TRadioGroup;
     Label96: TLabel;
     Label97: TLabel;
     Label98: TLabel;
@@ -498,18 +483,18 @@ type
     GroupBox5: TGroupBox;
     p_projection: TTabSheet;
     Label77: TLabel;
-    Label115: TLabel;
-    Label130: TLabel;
-    Label147: TLabel;
-    Label148: TLabel;
+    Labelp1: TLabel;
+    Labelp2: TLabel;
+    Labelp3: TLabel;
+    Labelp4: TLabel;
     Label149: TLabel;
-    Label150: TLabel;
-    Label151: TLabel;
-    Label155: TLabel;
-    Label156: TLabel;
-    Label157: TLabel;
-    Label169: TLabel;
-    Label170: TLabel;
+    Labelp0: TLabel;
+    Labelp5: TLabel;
+    Labelp6: TLabel;
+    Labelp7: TLabel;
+    Labelp8: TLabel;
+    Labelp9: TLabel;
+    Labelp10: TLabel;
     Label171: TLabel;
     Label172: TLabel;
     Label173: TLabel;
@@ -518,13 +503,136 @@ type
     ComboBox3: TComboBox;
     ComboBox4: TComboBox;
     ComboBox5: TComboBox;
-    Edit8: TEdit;
     ComboBox6: TComboBox;
     ComboBox7: TComboBox;
     ComboBox8: TComboBox;
     ComboBox9: TComboBox;
     ComboBox10: TComboBox;
     OpenDialog1: TOpenDialog;
+    ComboBox11: TComboBox;
+    p_gridspacing: TTabSheet;
+    Label115: TLabel;
+    Label130: TLabel;
+    Label137: TLabel;
+    Label147: TLabel;
+    Label148: TLabel;
+    Label150: TLabel;
+    Label151: TLabel;
+    Label155: TLabel;
+    Label156: TLabel;
+    Label157: TLabel;
+    Label169: TLabel;
+    Label170: TLabel;
+    Label174: TLabel;
+    Label175: TLabel;
+    Label176: TLabel;
+    MaskEdit1: TMaskEdit;
+    MaskEdit2: TMaskEdit;
+    MaskEdit3: TMaskEdit;
+    MaskEdit4: TMaskEdit;
+    MaskEdit5: TMaskEdit;
+    MaskEdit6: TMaskEdit;
+    MaskEdit7: TMaskEdit;
+    MaskEdit8: TMaskEdit;
+    MaskEdit9: TMaskEdit;
+    MaskEdit10: TMaskEdit;
+    MaskEdit11: TMaskEdit;
+    MaskEdit12: TMaskEdit;
+    MaskEdit13: TMaskEdit;
+    MaskEdit14: TMaskEdit;
+    MaskEdit15: TMaskEdit;
+    MaskEdit16: TMaskEdit;
+    MaskEdit17: TMaskEdit;
+    MaskEdit18: TMaskEdit;
+    MaskEdit19: TMaskEdit;
+    MaskEdit20: TMaskEdit;
+    MaskEdit21: TMaskEdit;
+    MaskEdit22: TMaskEdit;
+    PlaParalaxe: TRadioGroup;
+    Planet3: TEdit;
+    Label53: TLabel;
+    BitBtn31: TBitBtn;
+    Label177: TLabel;
+    Edit2: TEdit;
+    Button2: TButton;
+    SpeedButton7: TSpeedButton;
+    Label167: TLabel;
+    Label168: TLabel;
+    stepunit: TRadioGroup;
+    stepline: TCheckBox;
+    Label166: TLabel;
+    nbstep: TSpinEdit;
+    stepsize: TSpinEdit;
+    SimObj: TCheckListBox;
+    Label178: TLabel;
+    ApparentType: TRadioGroup;
+    Label179: TLabel;
+    EqGrid: TCheckBox;
+    AzGrid: TCheckBox;
+    Constl: TCheckBox;
+    ConstlFile: TEdit;
+    Label180: TLabel;
+    ConstlFileBtn: TBitBtn;
+    Bevel6: TBevel;
+    bg1: TPanel;
+    Shape1: TShape;
+    Shape2: TShape;
+    Shape3: TShape;
+    Shape4: TShape;
+    Shape5: TShape;
+    Shape6: TShape;
+    Shape7: TShape;
+    Label181: TLabel;
+    Label182: TLabel;
+    Label183: TLabel;
+    Label184: TLabel;
+    Label185: TLabel;
+    Label186: TLabel;
+    Label187: TLabel;
+    Label188: TLabel;
+    Label189: TLabel;
+    bg2: TPanel;
+    Shape8: TShape;
+    Shape9: TShape;
+    Shape10: TShape;
+    Shape11: TShape;
+    Shape12: TShape;
+    Shape13: TShape;
+    Label190: TLabel;
+    Label191: TLabel;
+    Label192: TLabel;
+    Label193: TLabel;
+    Label194: TLabel;
+    Label195: TLabel;
+    bg3: TPanel;
+    Shape15: TShape;
+    Shape16: TShape;
+    Shape17: TShape;
+    Label197: TLabel;
+    Label198: TLabel;
+    Label199: TLabel;
+    Shape14: TShape;
+    Label196: TLabel;
+    ColorDialog1: TColorDialog;
+    DefColor: TRadioGroup;
+    LoadDefColor: TButton;
+    p_skycolor: TTabSheet;
+    p_nebcolor: TTabSheet;
+    Label200: TLabel;
+    Label201: TLabel;
+    skycolorbox: TRadioGroup;
+    Panel6: TPanel;
+    Shape18: TShape;
+    Shape19: TShape;
+    Shape20: TShape;
+    Shape21: TShape;
+    Shape22: TShape;
+    Shape23: TShape;
+    Shape24: TShape;
+    Label202: TLabel;
+    Label205: TLabel;
+    Label208: TLabel;
+    Button3: TButton;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -568,8 +676,6 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
-    procedure DateChange(Sender: TObject);
-    procedure DateChange2(Sender: TObject; NewValue: Integer);
     procedure BitBtn4Click(Sender: TObject);
     procedure tzChange(Sender: TObject);
     procedure CheckBox4Click(Sender: TObject);
@@ -592,9 +698,40 @@ type
     procedure PMBoxClick(Sender: TObject);
     procedure DrawPmBoxClick(Sender: TObject);
     procedure lDrawPMyChange(Sender: TObject);
-    procedure TimeChange(Sender: TObject);
-    procedure TimeChange2(Sender: TObject; NewValue: Integer);
     procedure ProjectionChange(Sender: TObject);
+    procedure TimeChange(Sender: TObject; NewValue: Integer);
+    procedure DateChange(Sender: TObject; NewValue: Integer);
+    procedure DateChange2(Sender: TObject);
+    procedure TimeChange2(Sender: TObject);
+    procedure DegSpacingChange(Sender: TObject);
+    procedure HourSpacingChange(Sender: TObject);
+    procedure PlaParalaxeClick(Sender: TObject);
+    procedure PlanetBoxClick(Sender: TObject);
+    procedure PlanetModeClick(Sender: TObject);
+    procedure GRSChange(Sender: TObject);
+    procedure PlanetBox2Click(Sender: TObject);
+    procedure PlanetBox3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure nbstepChanged(Sender: TObject; NewValue: Integer);
+    procedure steplineClick(Sender: TObject);
+    procedure stepunitClick(Sender: TObject);
+    procedure stepsizeChanged(Sender: TObject; NewValue: Integer);
+    procedure SimObjClickCheck(Sender: TObject);
+    procedure projectiontypeClick(Sender: TObject);
+    procedure ConstlFileBtnClick(Sender: TObject);
+    procedure ConstlFileChange(Sender: TObject);
+    procedure EqGridClick(Sender: TObject);
+    procedure AzGridClick(Sender: TObject);
+    procedure ConstlClick(Sender: TObject);
+    procedure ApparentTypeClick(Sender: TObject);
+    procedure bgClick(Sender: TObject);
+    procedure ShapeMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure LoadDefColorClick(Sender: TObject);
+    procedure skycolorboxClick(Sender: TObject);
+    procedure ShapeSkyMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Button3Click(Sender: TObject);
   private
     { Déclarations privées }
     procedure EditGCatPath(row : integer);
@@ -615,12 +752,18 @@ type
     procedure SetEquinox;
     procedure ShowDisplay;
     procedure ShowFonts;
+    procedure SetFieldHint(var lab:Tlabel; n:integer);
     procedure ShowProjection;
     procedure ShowField;
+    procedure ShowPlanet;
     procedure ShowFilter;
+    procedure ShowGridSpacing;
     procedure ShowGcat;
     procedure ShowCDCStar;
     procedure ShowCDCNeb;
+    procedure ShowLine;
+    procedure ShowColor;
+    procedure ShowSkyColor;
   end;
 
 var
@@ -634,17 +777,27 @@ const b=' ';
 
 {$R *.xfm}
 
+// include all cross-platform common code.
+// you can temporarily copy the file content here
+// to use the IDE facilities
+
 {$include i_config.pas }
 
-procedure Tf_config.DateChange2(Sender: TObject; NewValue: Integer);
+// end of common code
+
+// Specific Linux CLX code:
+
+procedure Tf_config.nbstepChanged(Sender: TObject; NewValue: Integer);
 begin
-DateChange(Sender);
+csc.Simnb:=nbstep.value;
 end;
 
-procedure Tf_config.TimeChange2(Sender: TObject; NewValue: Integer);
+procedure Tf_config.stepsizeChanged(Sender: TObject; NewValue: Integer);
 begin
-TimeChange(Sender);
+stepunitClick(Sender);
 end;
+
+// End of Linux specific CLX code:
 
 end.
 

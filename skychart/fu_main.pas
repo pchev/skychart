@@ -1,5 +1,5 @@
 unit fu_main;
-{
+{                                        
 Copyright (C) 2002 Patrick Chevalley
 
 http://www.astrosurf.com/astropc
@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_catalog, u_constant, u_util,
+uses cu_catalog, cu_planet, u_constant, u_util,
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
      QStdCtrls, IniFiles, Types;
@@ -138,6 +138,10 @@ type
     ToolButton27: TToolButton;
     ToolButton28: TToolButton;
     SaveDialog: TSaveDialog;
+    ToolButton29: TToolButton;
+    ToolButton30: TToolButton;
+    switchstars: TAction;
+    switchbackground: TAction;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -171,9 +175,13 @@ type
     procedure UndoExecute(Sender: TObject);
     procedure RedoExecute(Sender: TObject);
     procedure ViewStatusExecute(Sender: TObject);
+    procedure ToolBar1MouseEnter(Sender: TObject);
+    procedure ToolBar1MouseLeave(Sender: TObject);
+    procedure switchstarsExecute(Sender: TObject);
+    procedure switchbackgroundExecute(Sender: TObject);
   private
     { Private declarations }
-    function CreateMDIChild(const Name: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
+    function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
   public
@@ -182,6 +190,7 @@ type
     def_cfgsc : conf_skychart;
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
+    planet  : Tplanet;
     procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
@@ -190,11 +199,13 @@ type
     procedure SaveChartConfig(filename:string);
     procedure SaveDefault;
     procedure SetDefault;
+    procedure SetLang;
     Procedure InitFonts;
+    Procedure ActivateConfig;
     Procedure SetLPanel1(txt:string);
     Procedure SetLPanel0(txt:string);
     Procedure UpdateBtn(fx,fy:integer);
-    Procedure FormPos(form : Tform; x,y : integer);
+    Procedure LoadConstL(fname:string);
   end;
 
 var
@@ -215,12 +226,27 @@ uses fu_chart, fu_about, fu_config, u_projection ;
 // end of common code
 
 
-// Specific CLX code:
+// Specific Linux CLX code:
 
 procedure Tf_main.PrintSetup1Execute(Sender: TObject);
 begin
 Printer.executesetup;
 end;
+
+procedure Tf_main.ToolBar1MouseEnter(Sender: TObject);
+
+begin
+quicksearch.SetFocus;
+end;
+
+procedure Tf_main.ToolBar1MouseLeave(Sender: TObject);
+
+begin
+activecontrol:=nil;
+end;
+
+// End of Linux specific CLX code:
+
 
 
 end.

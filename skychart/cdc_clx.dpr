@@ -36,7 +36,9 @@ uses
   u_util in 'u_util.pas',
   fu_config in 'fu_config.pas' {f_config},
   libcatalog in 'library/catalog/libcatalog.pas',
-  fu_directory in 'fu_directory.pas' {f_directory};
+  fu_directory in 'fu_directory.pas' {f_directory},
+  cu_planet in 'cu_planet.pas',
+  fu_detail in 'fu_detail.pas' {f_detail};
 
 {$R *.res}
 
@@ -44,7 +46,7 @@ begin
   Application.Initialize;
   Application.CreateForm(Tf_main, f_main);
   Application.CreateForm(Tf_about, f_about);
-  Application.CreateForm(Tf_config, f_config);
   Application.CreateForm(Tf_directory, f_directory);
+  Application.CreateForm(Tf_detail, f_detail);
   Application.Run;
 end.

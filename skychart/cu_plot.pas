@@ -43,6 +43,8 @@ type
      Procedure PlotStar1(xx,yy: integer; ma,b_v : Double);
      Procedure PlotNebula0(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotNebula1(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
+     procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
+     procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
   protected
     { Protected declarations }
   public
@@ -62,6 +64,8 @@ type
      Procedure PlotGalaxie(xx,yy: integer; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotLine(x1,y1,x2,y2,color,width: integer);
+     procedure PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
+     procedure PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
   end;
 
 Implementation
@@ -75,7 +79,6 @@ begin
  cfgchart.min_ma:=6;
  cfgchart.onprinter:=false;
  cfgchart.drawpen:=1;
- cfgchart.drawsize:=1;
 end;
 
 destructor TSplot.Destroy;
@@ -88,13 +91,8 @@ begin
 cfgchart.Width:=w;
 cfgchart.Height:=h;
 with cnv do begin
- if cfgchart.onprinter then begin
-  Brush.Color:=clWhite;
-  Pen.Color:=clWhite;
- end else begin
-  Brush.Color:=clBlack;
-  Pen.Color:=clBlack;
- end;
+  Brush.Color:=cfgplot.Color[0];
+  Pen.Color:=cfgplot.Color[0];
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
 end;
 result:=true;
@@ -118,6 +116,7 @@ with cnv do begin
           14..900: ico := 6;
           else ico:=2;
    end;
+   if ma<-5 then ma:=-5;
    ds := round(maxvalue([1,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)]));
    case ds of
        1..2: isz:=10;
@@ -159,7 +158,8 @@ with cnv do begin
           14..900: co := cfgplot.Color[7];
           else co:=cfgplot.Color[11];
      end;
-     ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawsize);
+     if ma<-5 then ma:=-5;
+     ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
      ds2:= round(ds/2);
      Brush.Color := co ;
      case ds of
@@ -195,7 +195,7 @@ var
 begin
 if not cfgplot.Invisible then begin
   with cnv do begin
-     ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-max*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawsize)-cfgchart.drawpen;
+     ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-max*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen)-cfgchart.drawpen;
      ds2:= trunc(ds/2)+cfgchart.drawpen;
      Brush.Color := cfgplot.Color[0];
      Pen.Color := cfgplot.Color[0];
@@ -217,7 +217,7 @@ if not cfgplot.Invisible then begin
        7: Ellipse(xx-3,yy-3,xx+4,yy+4);
        else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
      end;
-     dsm := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-min*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawsize);
+     dsm := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-min*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
      if (ds-dsm)<2*cfgchart.drawpen then ds:=ds-2*cfgchart.drawpen
                    else ds:=dsm;
      ds2 := trunc(ds/2);
@@ -243,15 +243,14 @@ var
 begin
 if not cfgplot.Invisible then
  with cnv do begin
-   ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawsize);
+   ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
    ds2:= trunc(ds/2);
    Pen.Width := 1;
+   Pen.Color := cfgplot.Color[15];
    if cfgchart.onprinter then begin
-     Pen.Color := clBlack;
      rd:=ds2 + 3 + 3*(0.7+ln(minvalue([50,maxvalue([0.5,sep])])));
    end
    else begin
-     Pen.Color := clGray;
      rd:=ds2 + 2 + 2*(0.7+ln(minvalue([50,maxvalue([0.5,sep])])));
    end;
    MoveTo(xx-round(rd*sin(pa)),yy-round(rd*cos(pa)));
@@ -281,8 +280,8 @@ var
   col : byte;
 begin
 if not cfgplot.Invisible then begin
-  ds1:=round(maxvalue([pixscale*r1/2,cfgchart.drawsize]))+cfgchart.drawpen;
-  ds2:=round(maxvalue([pixscale*r2/2,cfgchart.drawsize]))+cfgchart.drawpen;
+  ds1:=round(maxvalue([pixscale*r1/2,cfgchart.drawpen]))+cfgchart.drawpen;
+  ds2:=round(maxvalue([pixscale*r2/2,cfgchart.drawpen]))+cfgchart.drawpen;
   ds3:=round(pixscale*rnuc/2);
   case Round(b_vt*10) of
              -999: co := $00000000 ;
@@ -386,7 +385,7 @@ begin
 with cnv do begin
    Pen.Width := cfgchart.drawpen;
    sz:=PixScale*dim/2;
-   ds:=round(maxvalue([sz,2*cfgchart.drawsize]));
+   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
    if sbr<=0 then begin
      if dim<=0 then dim:=1;
      sbr:= ma + 5*log10(dim) - 0.26;
@@ -426,7 +425,7 @@ with cnv do begin
 //           RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
            end;
    7..10:  begin
-           ds:=3*cfgchart.drawsize;
+           ds:=3*cfgchart.drawpen;
            MoveTo(xx-ds+1,yy);
            LineTo(xx+ds,yy);
            MoveTo(xx,yy-ds+1);
@@ -483,9 +482,9 @@ begin
 with cnv do begin
    Pen.Width := cfgchart.drawpen;
    sz:=PixScale*dim/2;
-   ds:=round(maxvalue([sz,2*cfgchart.drawsize]));
+   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
    ds2:=round(ds*2/3);
-   Pen.Color := clBlack;
+   Pen.Color := cfgplot.Color[0];
    Brush.Style := bsClear;
    case typ of
        1:  begin
@@ -526,7 +525,7 @@ with cnv do begin
            LineTo(xx,yy+ds);
            end;
    7..10:  begin
-           ds:=3*cfgchart.drawsize;
+           ds:=3*cfgchart.drawpen;
            Pen.Color := cfgplot.Color[9];
            MoveTo(xx-ds+1,yy);
            LineTo(xx+ds,yy);
@@ -587,7 +586,7 @@ end;
 
 Procedure TSplot.PlotNebula(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
 begin
- if not cfgplot.Invisible then 
+ if not cfgplot.Invisible then
    if cfgchart.onprinter then
       case cfgplot.nebplot of
       0 : PlotNebula0(xx,yy,dim,ma,sbr,pixscale,typ);
@@ -603,11 +602,165 @@ end;
 Procedure TSplot.PlotLine(x1,y1,x2,y2,color,width: integer);
 begin
 with cnv do begin
-  Pen.width:=width;
+  Pen.width:=width*cfgchart.drawpen;
   Pen.Color:=color;
   MoveTo(x1,y1);
   LineTo(x2,y2);
 end;
 end;
 
+procedure TSplot.PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
+var b_v:double;
+    ds,n : integer;
+begin
+if not cfgplot.Invisible then begin
+  n:=cfgplot.plaplot;
+  ds:=round(diam*pixscale/2)*cfgchart.drawpen;
+  if n=2 then if ds<10 then n:=1;
+  if n=1 then if ds<5 then n:=0;
+  if cfgchart.onprinter then
+     case n of
+      0 : begin // magn
+          if ipla<11 then b_v:=planetcolor[ipla] else b_v:=0;
+          PlotStar(xx,yy,magn,b_v);
+          end;
+      1 : begin // diam
+          PlotPlanet1(xx,yy,ipla,pixscale,diam);
+          if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,be );
+          end;
+      2 : begin // image
+          end;
+      3 : begin // symbol
+          end;
+     end
+  else
+     case n of
+      0 : begin // magn
+          if ipla<11 then b_v:=planetcolor[ipla] else b_v:=0;
+          PlotStar(xx,yy,magn,b_v);
+          end;
+      1 : begin // diam
+          PlotPlanet1(xx,yy,ipla,pixscale,diam);
+          if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,be );
+          end;
+      2 : begin // image
+          end;
+      3 : begin // symbol
+          end;
+     end;
+end;
+end;
+
+procedure TSplot.PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
+var ds,ico : integer;
+begin
+with cnv do begin
+ ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
+ case Ipla of
+  1: begin ico := 4; end;
+  2: begin ico := 2; end;
+  3: begin ico := 2; end;
+  4: begin ico := 6; end;
+  5: begin ico := 4; end;
+  6: begin ico := 4; end;
+  7: begin ico := 1; end;
+  8: begin ico := 1; end;
+  9: begin ico := 2; end;
+  10:begin ico := 4; end;
+  11:begin ico := 2; end;
+  else begin ico:=2; end;
+ end;
+ Brush.Color := cfgplot.Color[ico+1] ;
+ if cfgplot.PlanetTransparent then Brush.style:=bsclear
+                              else Brush.style:=bssolid;
+ Pen.Width := cfgchart.drawpen;
+ Pen.Color := cfgplot.Color[11];
+ Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+ Pen.Color := cfgplot.Color[0];
+ ds:=ds+cfgchart.drawpen;
+ Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+end;
+end;
+
+Procedure TSplot.PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
+var
+  ds,ds2 : Integer;
+begin
+if not cfgplot.Invisible then
+if not (hidesat xor showhide) then
+   with cnv do begin
+        Pen.Color := cfgplot.Color[0];
+        Pen.Width := cfgchart.drawpen;
+        Pen.Mode := pmCopy;
+        brush.color:=cfgplot.Color[11];
+        ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
+        ds2:=round(diam*pixscale);
+        if ds2>ds then begin
+           ds:=ds2;
+           brush.color:=cfgplot.Color[6];
+        end;
+        ds2:= round(ds/2);
+        case ds of
+                1..2: Ellipse(xx,yy,xx+ds,yy+ds);
+                3: Ellipse(xx-1,yy-1,xx+2,yy+2);
+                4: Ellipse(xx-2,yy-2,xx+2,yy+2);
+                5: Ellipse(xx-2,yy-2,xx+3,yy+3);
+                6: Ellipse(xx-3,yy-3,xx+3,yy+3);
+                7: Ellipse(xx-3,yy-3,xx+4,yy+4);
+                else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
+        end;
+   end;
+end;
+
+Procedure TSplot.PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
+var
+  step: Double;
+  ds1,ds2 : Integer;
+  ex,ey,th : double;
+  n,ex1,ey1,ir,R : integer;
+const fr : array [1..5] of double = (1,0.8801,0.8599,0.6650,0.5486);
+begin
+with cnv do begin
+  pa:=deg2rad*pa+rot;
+  ds1:=round(maxvalue([pixscale*r1/2,cfgchart.drawpen]))+cfgchart.drawpen;
+  ds2:=round(maxvalue([pixscale*r2/2,cfgchart.drawpen]))+cfgchart.drawpen;
+  R:=round(diam*pixscale/2);
+  Pen.Width := cfgchart.drawpen;
+  Brush.Color := cfgplot.Color[0];
+  Pen.Color := cfgplot.Color[5];
+  Pen.mode := pmCopy;
+  step:=pi2/50;
+  for ir:=1 to 5 do begin
+   th:=0;
+     for n:=0 to 50 do begin
+       ex:=(ds1*fr[ir])*cos(th);
+       ey:=(ds2*fr[ir])*sin(th);
+       ex1:=round(ex*sin(pa) - ey*cos(pa)) + xx ;
+       ey1:=round(ex*cos(pa) + ey*sin(pa)) + yy ;
+       if n=0 then moveto(ex1,ey1)
+       else begin
+         if cfgchart.onprinter then begin   // !! pmNot not supported by some printer
+           if sqrt(ex*ex+ey*ey)<R then
+              if be<0 then if n<=25 then Pen.Color:=cfgplot.Color[11]
+                                    else Pen.Color:=cfgplot.Color[0]
+                      else if n>25  then Pen.Color:=cfgplot.Color[11]
+                                    else Pen.Color:=cfgplot.Color[0]
+           else Pen.Color:=cfgplot.Color[11];
+         end else
+           if sqrt(ex*ex+ey*ey)<1.1*R then
+              if be<0 then if n<=25 then Pen.mode := pmCopy
+                                    else Pen.mode := pmNot
+                      else if n>25  then Pen.mode := pmCopy
+                                    else Pen.mode := pmNot
+           else Pen.mode := pmCopy;                         
+         lineto(ex1,ey1);
+       end;
+       th:=th+step;
+     end;
+   end;
+   Pen.mode := pmCopy;
+  end;
+end;
+
 end.
+
