@@ -36,15 +36,21 @@ uses u_constant, u_util,
 
 type
 
+  TSide   = (U,D,L,R);  // Up, Down, Left, Right
+  TSideSet = set of TSide;
+
   TSplot = class(TComponent)
   private
     { Private declarations }
+     outx0,outy0,outx1,outy1:integer;
      Procedure PlotStar0(xx,yy: integer; ma,b_v : Double);
      Procedure PlotStar1(xx,yy: integer; ma,b_v : Double);
      Procedure PlotNebula0(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotNebula1(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
      procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
+     procedure BezierSpline(pts : array of Tpoint;n : integer);
+     function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
   protected
     { Protected declarations }
   public
@@ -67,8 +73,11 @@ type
      procedure PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
      procedure PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      procedure PlotLabel(xx,yy,labelnum:integer ;txt:string);
+     procedure PlotOutline(xx,yy,op,lw,fs,closed: integer; col: Tcolor);
   end;
 
+  const cliparea = 10;
+  
 Implementation
 
 constructor TSplot.Create(AOwner:TComponent);
@@ -96,6 +105,7 @@ with cnv do begin
  Pen.Color:=cfgplot.Color[0];
  Brush.style:=bsSolid;
  Pen.Mode:=pmCopy;
+ Pen.Style:=psSolid;
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
 end;
 result:=true;
@@ -617,9 +627,131 @@ with cnv do begin
   Pen.width:=width*cfgchart.drawpen;
   Pen.Mode:=pmCopy;
   Pen.Color:=color;
-  MoveTo(x1,y1);
-  LineTo(x2,y2);
+  if (abs(x1-cfgchart.hw)<cfgplot.outradius)and(abs(y1-cfgchart.hh)<cfgplot.outradius) and
+     (abs(x2-cfgchart.hw)<cfgplot.outradius)and(abs(y2-cfgchart.hh)<cfgplot.outradius)
+     then begin
+        MoveTo(x1,y1);
+        LineTo(x2,y2);
+  end;
 end;
+end;
+
+procedure TSplot.PlotOutline(xx,yy,op,lw,fs,closed: integer; col: Tcolor);
+procedure addpoint(x,y:integer);
+begin
+// add a point to the line
+ if (cfgplot.outlinenum+1)>=cfgplot.outlinemax then begin
+    cfgplot.outlinemax:=cfgplot.outlinemax+100;
+    setlength(cfgplot.outlinepts,cfgplot.outlinemax);
+ end;
+ cfgplot.outlinepts[cfgplot.outlinenum].x:=x;
+ cfgplot.outlinepts[cfgplot.outlinenum].y:=y;
+ inc(cfgplot.outlinenum);
+end;
+function processpoint(xx,yy:integer):boolean;
+var x1,y1,x2,y2:integer;
+    clip1,clip2:boolean;
+begin
+// find if we can plot this point
+if cfgplot.outlineinscreen and
+   (abs(xx-cfgchart.hw)<cfgplot.outradius)and
+   (abs(yy-cfgchart.hh)<cfgplot.outradius) then
+   begin
+      x1:=outx1; y1:=outy1; x2:=xx; y2:=yy;
+      // find if clipping is necessary
+      ClipVector(x1,y1,x2,y2,clip1,clip2);
+      addpoint(outx1,outy1);
+      if clip1 then addpoint(x1,y1);
+      if clip2 then addpoint(x2,y2);
+      outx1:=xx;
+      outy1:=yy;
+      result:=true;
+   end else begin
+      // point outside safe area, ignore the whole object.
+      cfgplot.outlineinscreen:=false;
+      result:=false;
+end;
+end;
+begin
+if not cfgplot.Invisible then begin
+  case op of
+  0 : begin // init vector
+       // set line options
+       cfgplot.outlinetype:=fs;
+       cfgplot.outlinenum:=0;
+       cfgplot.outlinecol:=col;
+       cfgplot.outlinelw:=lw;
+       cfgplot.outlineclosed:=(closed=1);
+       cfgplot.outlineinscreen:=true;
+       cfgplot.outlinemax:=100;
+       setlength(cfgplot.outlinepts,cfgplot.outlinemax);
+       // initialize first point
+       outx0:=xx;
+       outy0:=yy;
+       outx1:=xx;
+       outy1:=yy;
+      end;
+  1 : begin // close and draw vector
+       // process last point
+       if cfgplot.outlineclosed then begin
+          processpoint(xx,yy);
+          if processpoint(outx0,outy0) then addpoint(outx1,outy1);
+       end else begin
+          if processpoint(xx,yy) then addpoint(outx1,outy1);
+       end;
+       if cfgplot.outlineinscreen and(cfgplot.outlinenum>=2) then begin
+         // object is to be draw
+         dec(cfgplot.outlinenum);
+         if cfgchart.onprinter and (cfgplot.outlinecol=clWhite) then cfgplot.outlinecol:=clBlack;
+         cnv.Pen.Mode:=pmCopy;
+         cnv.Pen.Width:=cfgplot.outlinelw*cfgchart.drawpen;
+         cnv.Pen.Color:=cfgplot.outlinecol;
+         cnv.Brush.Style:=bsSolid;
+         cnv.Brush.Color:=cfgplot.outlinecol;
+         cfgplot.outlinemax:=cfgplot.outlinenum+1;
+         if cfgchart.onprinter and (cfgplot.outlinetype=2) then cfgplot.outlinetype:=0;
+         case cfgplot.outlinetype of
+         0 : begin setlength(cfgplot.outlinepts,cfgplot.outlinenum+1); cnv.polyline(cfgplot.outlinepts);end;
+         1 : Bezierspline(cfgplot.outlinepts,cfgplot.outlinenum+1);
+         2 : begin setlength(cfgplot.outlinepts,cfgplot.outlinenum+1); cnv.polygon(cfgplot.outlinepts);end;
+         end;
+       end;
+     end;
+ 2 : begin // add point
+       processpoint(xx,yy);
+     end; 
+ end; // case op
+end;  // not invisible
+end;
+
+procedure TSplot.BezierSpline(pts : array of Tpoint;n : integer);
+var p : array of TPoint;
+    i,m : integer;
+function LC(Pt1,Pt2:TPoint; c1,c2:extended):TPoint;
+begin
+    result:= Point(round(Pt1.x*c1 + (Pt2.x-Pt1.x)*c2),
+                   round(Pt1.y*c1 + (Pt2.y-Pt1.y)*c2));
+end;
+begin
+m:=3*(n-1);
+setlength(p,1+m);
+p[0]:=pts[0];
+for i:=0 to n-3 do begin
+  p[3*i+1]:=LC(pts[i],pts[i+1],1,1/3);
+  p[3*i+2]:=LC(pts[i+1],pts[i+2],1,-1/3);
+  p[3*i+3]:=pts[i+1]
+end;
+p[m-2]:=LC(pts[n-2],pts[n-1],1,1/3);
+p[m-1]:=LC(pts[n-1],pts[0],1,1/3);
+p[m]:=pts[n-1];
+{$ifdef linux}
+for m:=0 to n-1 do begin
+  cnv.PolyBezier(p,3*m);
+end;
+{$endif}
+{$ifdef mswindows}
+  cnv.PolyBezier(p);
+{$endif}
 end;
 
 procedure TSplot.PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
@@ -791,6 +923,283 @@ if cfgplot.FontItalic[2] then font.style:=font.style+[fsItalic];
 textout(xx,yy,txt);
 end;
 end;
+
+function TSplot.ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
+var
+ side,side1,side2:  TSideSet;
+ x,y: double;
+ xR,xL,yU,yD: integer;
+  procedure GetSide (x,y:integer; var side: TSideSet);
+  begin
+    side := [];
+    if x < xL then side := [L]
+    else if x > xR then side := [R];
+    if y < yU then side := side + [U]
+    else if y > yD then side := side + [D]
+  end;
+  procedure doClip;
+  var deltaX,deltaY: double;
+  begin
+    deltaX := x2-x1;
+    deltaY := y2-y1;
+    if R in side then begin
+       x:=xR;
+       y:=y1+deltaY*(xR-x1)/deltaX;
+    end
+    else if L in side then begin
+       x:=xL;
+       y:=y1+deltaY*(xL-x1)/deltaX;
+    end
+    else if D in side then begin
+       x:=x1+deltaX*(yD-y1)/deltaY;
+       y:=yD;
+    end
+    else if U in side then begin
+       x:=x1+deltaX*(yU-y1)/deltaY;
+       y:=yU;
+    end;
+  end;
+begin
+  xL:=-cliparea;
+  xR:=cfgchart.Width+cliparea;
+  yU:=-cliparea;
+  yD:=cfgchart.Height+cliparea;
+  GetSide(x1,y1,side1);
+  GetSide(x2,y2,side2);
+  result:=(side1*side2=[]);
+  clip1:=false;
+  clip2:=false;
+  while ((side1<>[])or(side2<>[]))and result do begin
+    side:=side1;
+    if side = [] then side:=side2;
+    doclip;
+    if side = side1 then begin
+      clip1:=true;
+      x1:=round(x);
+      y1:=round(y);
+      GetSide(x1,y1,side1);
+    end else begin
+      clip2:=true;
+      x2:=round(x);
+      y2:=round(y);
+      GetSide(x2,y2,side2);
+    end;
+    result:=(side1*side2=[]);
+  end;
+end;
+
+{  clipping function that try to work with complex surface
+
+   Way too complicate! this is no more used
+
+function TSplot.ClipVector(var x1,y1,x2,y2: integer;var exitside:TSideSet;var outoffsetx,outoffsety:integer):boolean;
+var
+ side,side1,side2:  TSideSet;
+ x,y: double;
+ xR,xL,yU,yD: integer;
+  procedure GetSide (x,y:integer; var side: TSideSet);
+  begin
+    side := [];
+    if x < xL then side := [L]
+    else if x > xR then side := [R];
+    if y < yU then side := side + [U]
+    else if y > yD then side := side + [D]
+  end;
+  procedure doClip;
+  var deltaX,deltaY: double;
+  begin
+    deltaX := x2-x1;
+    deltaY := y2-y1;
+    if R in side then begin
+       x:=xR;
+       y:=y1+deltaY*(xR-x1)/deltaX;
+       exitside:=[R];
+       outoffsetx:=1;
+       outoffsety:=0;
+    end
+    else if L in side then begin
+       x:=xL;
+       y:=y1+deltaY*(xL-x1)/deltaX;
+       exitside:=[L];
+       outoffsetx:=-1;
+       outoffsety:=0;
+    end
+    else if D in side then begin
+       x:=x1+deltaX*(yD-y1)/deltaY;
+       y:=yD;
+       exitside:=[D];
+       outoffsetx:=0;
+       outoffsety:=1;
+    end
+    else if U in side then begin
+       x:=x1+deltaX*(yU-y1)/deltaY;
+       y:=yU;
+       exitside:=[U];
+       outoffsetx:=0;
+       outoffsety:=-1;
+    end;
+  end;
+begin
+  exitside:=[];
+  xL:=-cliparea;
+  xR:=cfgchart.Width+cliparea;
+  yU:=-cliparea;
+  yD:=cfgchart.Height+cliparea;
+  GetSide(x1,y1,side1);
+  GetSide(x2,y2,side2);
+  result:=(side1*side2=[]);
+  exitside:=side1;
+  while ((side1<>[])or(side2<>[]))and result do begin
+    side:=side1;
+    if side = [] then side:=side2;
+    doclip;
+    if side = side1 then begin
+      x1:=round(x);
+      y1:=round(y);
+      GetSide(x1,y1,side1);
+    end else begin
+      x2:=round(x);
+      y2:=round(y);
+      GetSide(x2,y2,side2);
+    end;
+    result:=(side1*side2=[]);
+  end;
+end;
+
+procedure processpoint(xx,yy:integer);
+var side1:TSideSet;
+begin
+       pointok:=clipvector(outx1,outy1,xx,yy,side,offx,offy);
+       if not cfgplot.outlineinscreen then cfgplot.outlineinscreen:=pointok;
+       if pointok then begin
+          // this vector is visible
+          if (lastside=[]) then begin
+             // we are not outside the screen, add the point normally.
+             addpoint();
+             outx1:=xx;
+             outy1:=yy;
+             if (side<>[]) then begin  // if extremity is outside,
+                lastside:=side;        // store the exit side.
+                addpoint(outx1,outy1); // add the exit point.
+                // add a small offset to be really out of screen for the next call
+                outx1:=outx1+offx;
+                outy1:=outy1+offy;
+             end;
+          end
+          else // we are outside the screen
+          if (side<>[]) then begin  // the side we return to screen.
+             // add exit and return side.
+             side1:=lastside+side;
+             if side1=lastside then begin
+               // return from the same side, add the point normally.
+               addpoint(outx1,outy1);
+               outx1:=xx;
+               outy1:=yy;
+             end
+             else if (L in side1)and(U in side1) then begin  // exit on Left, return on Up or reverse.
+                // add top-left extra point
+                addpoint(-cliparea,-cliparea);
+                // store return point
+                addpoint(outx1,outy1);
+                outx1:=xx;
+                outy1:=yy;
+             end
+             else if (L in side1)and(D in side1) then begin  // exit on Left, return on Down or reverse.
+                // add bottom-left extra point
+                addpoint(-cliparea,cfgchart.height+cliparea);
+                // store return point
+                addpoint(outx1,outy1);
+                outx1:=xx;
+                outy1:=yy;
+             end
+             else if (R in side1)and(U in side1) then begin  // exit on Right, return on Up or reverse.
+                // add top-right extra point
+                addpoint(cfgchart.width+cliparea,-cliparea);
+                // store return point
+                addpoint(outx1,outy1);
+                outx1:=xx;
+                outy1:=yy;
+             end
+             else if (R in side1)and(D in side1) then begin  // exit on Right, return on Down or reverse.
+                // add bottom-right extra point
+                addpoint(cfgchart.width+cliparea,cfgchart.height+cliparea);
+                // store return point
+                addpoint(outx1,outy1);
+                outx1:=xx;
+                outy1:=yy;
+             end
+             else if (R in side1)and(L in side1) then begin
+                if lastside=[L] then begin                 // exit on Left, return on Right
+                   // add top-left extra point
+                   addpoint(-cliparea,-cliparea);
+                   // add top-right extra point
+                   addpoint(cfgchart.width+cliparea,-cliparea);
+                   // store return point
+                   addpoint(outx1,outy1);
+                   outx1:=xx;
+                   outy1:=yy;
+                end else begin                             // exit on Right, return on Left
+                   // add top-right extra point
+                   addpoint(cfgchart.width+cliparea,-cliparea);
+                   // add top-left extra point
+                   addpoint(-cliparea,-cliparea);
+                   // store return point
+                   addpoint(outx1,outy1);
+                   outx1:=xx;
+                   outy1:=yy;
+                end
+             end
+             else if (U in side1)and(D in side1) then begin
+                if lastside=[U] then begin                 // exit on Up, return on Down
+                   // add top-left extra point
+                   addpoint(-cliparea,-cliparea);
+                   // add bottom-left extra point
+                   addpoint(-cliparea,cfgchart.height+cliparea);
+                   // store return point
+                   addpoint(outx1,outy1);
+                   outx1:=xx;
+                   outy1:=yy;
+                end else begin                             // exit on Down, return on Up
+                   // add bottom-left extra point
+                   addpoint(-cliparea,cfgchart.height+cliparea);
+                   // add top-left extra point
+                   addpoint(-cliparea,-cliparea);
+                   // store return point
+                   addpoint(outx1,outy1);
+                   outx1:=xx;
+                   outy1:=yy;
+                end
+             end else begin
+               // we not return, just store the new position
+               outx1:=xx;
+               outy1:=yy;
+             end;  // side=lastside
+             // we are inside, reset the flag
+             lastside:=[];
+          end;  // else lastside
+       end  // pointok
+       else begin  // this vector is not visible
+          if (lastside<>side)and(lastside<>[]) then begin
+             // we change of side, add a point to the corresponding corner
+             side1:=lastside+side;
+             if outcorner<2 then begin
+               if (L in side1)and(U in side1) then begin addpoint(-cliparea,-cliparea);inc(outcorner);end
+               else if (L in side1)and(D in side1) then begin addpoint(-cliparea,cfgchart.height+cliparea);inc(outcorner);end
+               else if (R in side1)and(U in side1) then begin addpoint(cfgchart.width+cliparea,-cliparea);inc(outcorner);end
+               else if (R in side1)and(D in side1) then begin addpoint(cfgchart.width+cliparea,cfgchart.height+cliparea);inc(outcorner);end
+               else begin outx1:=xx; outy1:=yy; end;
+             end;
+             lastside:=side;
+          end else begin
+             // just store the new position
+             outx1:=xx;
+             outy1:=yy;
+             // in case the line start out of screen
+             if (lastside=[])and(side<>[]) then lastside:=side;
+          end;
+       end; // else pointok
+end;
+ }
 
 end.
 

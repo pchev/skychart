@@ -46,6 +46,9 @@ begin
  zoomfactor:=2;
  lastundo:=0;
  validundo:=0;
+ {$ifdef mswindows}
+ Image1.Cursor := crRetic;
+ {$endif}
 end;
 
 procedure Tf_chart.FormDestroy(Sender: TObject);
@@ -85,10 +88,12 @@ Refresh;
 end;
 
 procedure Tf_chart.Refresh;
+var quick: boolean;
 begin
 try
 if f_main.cfgm.locked then exit;
- screen.cursor:=crHourGlass;
+ quick:=sc.cfgsc.quick;
+ if not quick then screen.cursor:=crHourGlass;
  zoomstep:=0;
  identlabel.visible:=false;
  Image1.width:=clientwidth;
@@ -97,17 +102,35 @@ if f_main.cfgm.locked then exit;
  Image1.Picture.Bitmap.Height:=Image1.Height;
  sc.plot.init(Image1.width,Image1.height);
  sc.Refresh;
- inc(lastundo); inc(validundo);
- if lastundo>maxundo then lastundo:=1;
- undolist[lastundo]:=sc.cfgsc;
- curundo:=lastundo;
- Identlabel.color:=sc.plot.cfgplot.color[0];
- Identlabel.font.color:=sc.plot.cfgplot.color[11];
- Panel1.color:=sc.plot.cfgplot.color[0];
- if sc.cfgsc.FindOk then ShowIdentLabel;
+ if not quick then begin
+    inc(lastundo); inc(validundo);
+    if lastundo>maxundo then lastundo:=1;
+    undolist[lastundo]:=sc.cfgsc;
+    curundo:=lastundo;
+    Identlabel.color:=sc.plot.cfgplot.color[0];
+    Identlabel.font.color:=sc.plot.cfgplot.color[11];
+    Panel1.color:=sc.plot.cfgplot.color[0];
+    if sc.cfgsc.FindOk then ShowIdentLabel;
+    f_main.settopmessage(GetChartInfo);
+ end;
 finally
  screen.cursor:=crDefault;
 end;
+end;
+
+function Tf_chart.GetChartInfo:string;
+var cep:string;
+begin
+    cep:=trim(sc.cfgsc.EquinoxName);
+    if cep='Date' then cep:=sc.cfgsc.EquinoxDate;
+    case sc.cfgsc.projpole of
+    Equat : result:='Equatorial Coordinates, '+cep;
+    AltAz : result:='Alt/AZ Coordinates, '+trim(sc.cfgsc.ObsName)+blank+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+' (UT+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
+    Gal :   result:='Galactic Coordinates';
+    Ecl :   result:='Ecliptic Coordinates, '+cep+', inclination='+detostr(sc.cfgsc.e*rad2deg);
+    else result:='';
+    end;
+    result:=result+' FOV:'+detostr(sc.cfgsc.fov*rad2deg);
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
@@ -124,6 +147,7 @@ if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
   sc.cfgsc:=undolist[curundo];
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
+  f_main.settopmessage(GetChartInfo);
 end;
 end;
 
@@ -141,6 +165,7 @@ if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
   sc.cfgsc:=undolist[curundo];
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
+  f_main.settopmessage(GetChartInfo);
 end;
 end;
 
@@ -236,7 +261,10 @@ end;
 
 procedure Tf_chart.FormActivate(Sender: TObject);
 begin
+// code to execute when the chart get focus.
 f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
+f_main.settopmessage(GetChartInfo);
+if sc.cfgsc.FindOk then f_main.SetLpanel1(sc.cfgsc.FindDesc,caption);
 end;
 
 procedure Tf_chart.FlipxExecute(Sender: TObject);
@@ -271,9 +299,9 @@ begin
  Refresh;
 end;
 
-procedure Tf_chart.GridAzExecute(Sender: TObject);
+procedure Tf_chart.GridExecute(Sender: TObject);
 begin
- sc.cfgsc.ShowAzGrid := not sc.cfgsc.ShowAzGrid;
+ sc.cfgsc.ShowGrid := not sc.cfgsc.ShowGrid;
  Refresh;
 end;
 
@@ -421,11 +449,11 @@ else identlabel.Visible:=false;
 end;
 
 function Tf_chart.IdentXY(X, Y: Integer):boolean;
-var ra,dec,a,h,dx:double;
+var ra,dec,a,h,l,b,le,be,dx:double;
 begin
 result:=false;
 if f_main.cfgm.locked then exit;
-sc.GetCoord(x,y,ra,dec,a,h);
+sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=2/sc.cfgsc.BxGlb; // search a 2 pixel radius
 result:=sc.FindatRaDec(ra,dec,dx);
@@ -437,14 +465,15 @@ end;
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-case Button of
-mbLeft : begin
-           if zoomstep>0 then
-              ZoomBox(3,X,Y)
-           else
-              IdentXY(x,y);
-         end;
- end;
+if (button=mbLeft)and(not(ssShift in shift)) then begin
+   if zoomstep>0 then
+     ZoomBox(3,X,Y)
+   else
+     IdentXY(x,y);
+end
+else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift)) then begin
+   Refresh;
+end;
 end;
 
 
@@ -452,6 +481,9 @@ procedure Tf_chart.Image1MouseDown(Sender: TObject; Button: TMouseButton;
 
   Shift: TShiftState; X, Y: Integer);
 begin
+lastx:=x;
+lasty:=y;
+lastyzoom:=y;
 case Button of
 mbLeft : begin
            ZoomBox(1,X,Y);
@@ -459,25 +491,45 @@ mbLeft : begin
  end;
 end;
 
-
 procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
-var ra,dec,a,h:double;
+var ra,dec,a,h,l,b,le,be,c:double;
     txt:string;
 begin
 if f_main.cfgm.locked then exit;
 if shift = [ssLeft] then begin
    ZoomBox(2,X,Y);
+end else if (shift=[ssMiddle])or(shift=[ssLeft,ssShift]) then begin
+     TrackCursor(X,Y);
+end else if shift=[ssMiddle,ssCtrl] then begin
+     c:=abs(y-lastyzoom)/200;
+     if c>1 then c:=1;
+     if (y-lastyzoom)>0 then ZoomCursor(1+c)
+                        else ZoomCursor(1-c/2);
+     lastx:=x;
+     lasty:=y;
+     lastyzoom:=y;
 end else begin
    {show the coordinates}
-   sc.GetCoord(x,y,ra,dec,a,h);
+   sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
    case sc.cfgsc.projpole of
    AltAz: begin
-          txt:='Az:'+deptostr(rad2deg*a)+' '+deptostr(rad2deg*h);
+          txt:='Az:'+deptostr(rad2deg*a)+' '+deptostr(rad2deg*h)+crlf
+              +'Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
           end;
    Equat: begin
           ra:=rmod(ra+pi2,pi2);
           txt:='Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+          end;
+   Gal:   begin
+          l:=rmod(l+pi2,pi2);
+          txt:='L:'+deptostr(rad2deg*l)+' '+deptostr(rad2deg*b)+crlf
+              +'Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+          end;
+   Ecl:   begin
+          le:=rmod(le+pi2,pi2);
+          txt:='L:'+deptostr(rad2deg*le)+' '+deptostr(rad2deg*be)+crlf
+              +'Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
           end;
    end;
    f_main.SetLpanel0(txt);
@@ -583,6 +635,44 @@ case action of
 end;
 end;
 
+Procedure Tf_chart.TrackCursor(X,Y : integer);
+var xx,yy : integer;
+begin
+if LockTrackCursor then exit;
+try
+   LockTrackCursor:=true;
+   xx:=sc.cfgsc.xcentre-(x-lastx);
+   yy:=sc.cfgsc.ycentre-(y-lasty);
+   lastx:=x;
+   lasty:=y;
+   lastyzoom:=y;
+   GetADxy(xx,yy,sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc);
+   if sc.cfgsc.racentre>pi2 then sc.cfgsc.racentre:=sc.cfgsc.racentre-pi2;
+   if sc.cfgsc.racentre<0 then sc.cfgsc.racentre:=sc.cfgsc.racentre+pi2;
+   sc.cfgsc.quick:=true;
+   Refresh;
+   application.processmessages; // very important to empty the mouse event queue before to unlock
+finally
+LockTrackCursor:=false;
+end;
+end;
+
+Procedure Tf_chart.ZoomCursor(yy : double);
+begin
+if LockTrackCursor then exit;
+try
+   LockTrackCursor:=true;
+   yy:=sc.cfgsc.fov*abs(yy);
+   if yy<FovMin then yy:=FovMin;
+   if yy>FovMax then yy:=FovMax;
+   sc.cfgsc.fov:=yy;
+   Refresh;
+   application.processmessages;
+finally
+LockTrackCursor:=false;
+end;
+end;
+
 procedure Tf_chart.identlabelClick(Sender: TObject);
 {$ifdef mswindows}
 var st : TMemoryStream;
@@ -675,7 +765,7 @@ if (sc.cfgsc.EquinoxName='Date ')and(sc.catalog.cfgshr.EquinoxChart<>'J2000')and
    result:=result+html_b+sc.catalog.cfgshr.EquinoxChart+' RA: '+htms_b+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
 end;
 result:=result+htms_f+html_br;
-result:=result+sc.cfgsc.ObsName+' '+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+' '+ArToStr3(sc.cfgsc.Curtime)+'  ( TU + '+ArmtoStr(sc.cfgsc.TimeZone)+' )'+html_br;
+result:=result+sc.cfgsc.ObsName+' '+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+' '+ArToStr3(sc.cfgsc.Curtime)+'  ( UT + '+ArmtoStr(sc.cfgsc.TimeZone)+' )'+html_br;
 result:=result+html_ffx;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
@@ -892,10 +982,10 @@ begin
 
 end;
 
-function Tf_Chart.cmd_SetGridAZ(onoff:string):string;
+function Tf_Chart.cmd_SetGrid(onoff:string):string;
 begin
 
- sc.cfgsc.ShowAzGrid := (uppercase(onoff)='ON');
+ sc.cfgsc.ShowGrid := (uppercase(onoff)='ON');
 
  Refresh;
 
@@ -938,6 +1028,8 @@ result:='OK';
 proj:=uppercase(proj);
 if proj='ALTAZ' then sc.cfgsc.projpole:=altaz
   else if proj='EQUAT' then sc.cfgsc.projpole:=equat
+  else if proj='GALACTIC' then sc.cfgsc.projpole:=gal
+  else if proj='ECLIPTIC' then sc.cfgsc.projpole:=ecl
   else result:='Bad projection name.';
 sc.cfgsc.FindOk:=false;
 Refresh;
@@ -1145,7 +1237,7 @@ case n of
  17 : rot_plusExecute(self);
  18 : rot_minusExecute(self);
  19 : result:=cmd_SetGridEQ(arg[1]);
- 20 : result:=cmd_SetGridAZ(arg[1]);
+ 20 : result:=cmd_SetGrid(arg[1]);
  21 : result:=cmd_SetStarMode(strtointdef(arg[1],-1));
  22 : result:=cmd_SetNebMode(strtointdef(arg[1],-1));
  23 : result:=cmd_SetSkyMode(arg[1]);
@@ -1160,6 +1252,6 @@ case n of
  32 : result:=cmd_SaveImage(arg[1],arg[2],arg[3]);
 else result:='Bad command name';
 end;
-
 end;
+
 

@@ -83,6 +83,8 @@ type
      function GetOCL(var rec:GcatRec):boolean;
      function GetGCM(var rec:GcatRec):boolean;
      function GetGPN(var rec:GcatRec):boolean;
+     function OpenLinCat:boolean;
+     function CloseLinCat:boolean;
   public
     { Public declarations }
      cfgcat : conf_catalog;
@@ -103,6 +105,12 @@ type
      function OpenNeb:boolean;
      function CloseNeb:boolean;
      function ReadNeb(var rec:GcatRec):boolean;
+     function OpenLin:boolean;
+     function CloseLin:boolean;
+     function ReadLin(var rec:GcatRec):boolean;
+     function OpenMilkyWay(fill:boolean):boolean;
+     function CloseMilkyWay:boolean;
+     function ReadMilkyWay(var rec:GcatRec):boolean;
      function FindNum(cat: integer; id: string; var ra,dec: double ):boolean ;
      function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
      function FindObj(x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
@@ -128,11 +136,26 @@ begin
 end;
 
 Function Tcatalog.OpenCat(c: conf_skychart):boolean;
+var ac,dc: double;
 begin
-// get a lock before to do anything, libcatalog is NOT thread safe. 
+// get a lock before to do anything, libcatalog is NOT thread safe.
   while lockcat do application.ProcessMessages;
   lockcat:=true;
-  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*c.racentre/15,rad2deg*c.decentre,rad2deg*c.acentre,rad2deg*c.hcentre,c.CurJD,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
+  case c.ProjPole of
+  Gal   : begin
+          ac:=rad2deg*c.lcentre;
+          dc:=rad2deg*c.bcentre;
+          end;
+  Ecl   : begin
+          ac:=rad2deg*c.lecentre;
+          dc:=rad2deg*c.becentre;
+          end;
+  else    begin
+          ac:=rad2deg*c.acentre;
+          dc:=rad2deg*c.hcentre;
+          end;
+  end;
+  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*c.racentre/15,rad2deg*c.decentre,ac,dc,c.CurJD,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
   result:=true;
 end;
 
@@ -450,6 +473,88 @@ case curcat of
    gcneb   : CloseGcat;
    else result:=false;
 end;
+end;
+
+{ Outline }
+
+function Tcatalog.OpenLin:boolean;
+begin
+numcat:=MaxLinCatalog;
+curcat:=BaseLin+1;
+while ((curcat-BaseLin)<=numcat)and(not cfgcat.lincaton[curcat-BaseLin]) do inc(curcat);
+if ((curcat-BaseLin)>numcat) then result:=false
+ else result:=OpenLinCat;
+end;
+
+function Tcatalog.CloseLin:boolean;
+begin
+ result:=CloseLinCat;
+ curcat:=numcat+BaseLin;
+end;
+
+function Tcatalog.ReadLin(var rec:GcatRec):boolean;
+begin
+result:=false;
+case curcat of
+   gclin   : begin
+             result:=GetGcatL(rec);
+             if not result then begin
+                result:=NewGcat;
+                if result then OpenGCatWin(result);
+                if result then result:=ReadLin(rec);
+             end;
+             end;
+end;
+if (not result) and ((curcat-BaseLin)<numcat) then begin
+  CloseLinCat;
+  inc(curcat);
+  while ((curcat-BaseLin)<=numcat)and(not cfgcat.Lincaton[curcat-BaseLin]) do inc(curcat);
+  if ((curcat-BaseLin)>numcat) then result:=false
+     else result:=OpenLinCat;
+  if result then result:=ReadLin(rec);
+end;
+end;
+
+function Tcatalog.OpenLinCat:boolean;
+begin
+InitRec(curcat);
+case curcat of
+   gclin  : begin VerGCat:=rtLin; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
+   else result:=false;
+end;
+end;
+
+function Tcatalog.CloseLinCat:boolean;
+begin
+result:=true;
+case curcat of
+   gclin   : CloseGcat;
+   else result:=false;
+end;
+end;
+
+function Tcatalog.OpenMilkyWay(fill:boolean):boolean;
+var GcatH : TCatHeader;
+    v : integer;
+begin
+ if fill then
+    SetGcatPath(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway','mwf')
+ else
+    SetGcatPath(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway','mwl');
+ GetGCatInfo(GcatH,v,result);
+ if result then result:=(v=rtLin);
+ if result then OpenGCatWin(result);
+end;
+
+function Tcatalog.CloseMilkyWay:boolean;
+begin
+ CloseGcat;
+ result:=true;
+end;
+
+function Tcatalog.ReadMilkyWay(var rec:GcatRec):boolean;
+begin
+result:=GetGcatL(rec);
 end;
 
 // CatGen header simulation for old catalog

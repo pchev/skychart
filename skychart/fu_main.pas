@@ -154,7 +154,7 @@ type
     rot_plus: TAction;
     rot_minus: TAction;
     GridEQ: TAction;
-    GridAZ: TAction;
+    Grid: TAction;
     SaveConfiguration: TAction;
     SaveConfigOnExit: TAction;
     Undo: TAction;
@@ -183,6 +183,8 @@ type
     SaveImage1: TMenuItem;
     ViewInfo: TAction;
     ViewInformation1: TMenuItem;
+    topmessage: TMenuItem;
+    N4: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -209,7 +211,7 @@ type
     procedure rot_plusExecute(Sender: TObject);
     procedure rot_minusExecute(Sender: TObject);
     procedure GridEQExecute(Sender: TObject);
-    procedure GridAZExecute(Sender: TObject);
+    procedure GridExecute(Sender: TObject);
     procedure FileSaveAs1Execute(Sender: TObject);
     procedure SaveConfigurationExecute(Sender: TObject);
     procedure SaveConfigOnExitExecute(Sender: TObject);
@@ -234,7 +236,7 @@ type
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
     planet  : Tplanet;
-    serverinfo : string;
+    serverinfo,topmsg : string;
     TCPDaemon: TTCPDaemon;
     procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
@@ -249,8 +251,10 @@ type
     Procedure ActivateConfig;
     Procedure SetLPanel1(txt:string; origin:string='');
     Procedure SetLPanel0(txt:string);
+    Procedure SetTopMessage(txt:string);
     Procedure UpdateBtn(fx,fy:integer);
     Procedure LoadConstL(fname:string);
+    Procedure LoadConstB(fname:string);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
     Function ListChart:string;

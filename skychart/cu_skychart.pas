@@ -61,13 +61,21 @@ Tskychart = class (TComponent)
     function DrawVarStars :boolean;
     function DrawDblStars :boolean;
     function DrawNebulae :boolean;
+    function DrawOutline :boolean;
+    function DrawMilkyWay :boolean;
     function DrawPlanet :boolean;
     function DrawOrbitPath:boolean;
-    function DrawEqGrid :boolean;
-    function DrawAzGrid :boolean;
+    Procedure DrawGrid;
+    procedure DrawEqGrid;
+    procedure DrawAzGrid;
+    procedure DrawGalGrid;
+    procedure DrawEclGrid;
     function DrawConstL :boolean;
+    function DrawConstB :boolean;
     function DrawHorizon:boolean;
-    procedure GetCoord(x,y: integer; var ra,dec,a,h:double);
+    function DrawEcliptic:boolean;
+    function DrawGalactic:boolean;
+    procedure GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
     procedure MovetoXY(X,Y : integer);
     procedure MovetoRaDec(ra,dec:double);
@@ -77,6 +85,7 @@ Tskychart = class (TComponent)
     procedure FormatCatRec(rec:Gcatrec; var desc:string);
     function FindatRaDec(ra,dec,dx: double;showall:boolean=false):boolean;
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
+    Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
 end;
 
 
@@ -88,6 +97,7 @@ constructor Tskychart.Create(AOwner:Tcomponent);
 begin
  inherited Create(AOwner);
  // set safe value
+ cfgsc.quick:=false;
  cfgsc.JDChart:=jd2000;
  cfgsc.lastJDchart:=-1E25;
  cfgsc.racentre:=0;
@@ -118,29 +128,65 @@ begin
 end;
 
 function Tskychart.Refresh :boolean;
+var savmag: double;
+    savfilter,saveautofilter:boolean;
 begin
+savmag:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
+savfilter:=Fcatalog.cfgshr.StarFilter;
+saveautofilter:=Fcatalog.cfgshr.AutoStarFilter;
 try
   chdir(appdir);
+  // initialize chart value
   InitObservatory;
   InitTime;
-  Fplanet.ComputePlanet(cfgsc);
   InitColor;
   InitChart;
   InitCoordinates;
+  if cfgsc.quick then begin
+     Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]-3;
+     Fcatalog.cfgshr.StarFilter:=true;
+     Fcatalog.cfgshr.AutoStarFilter:=false;
+  end else begin
+     Fplanet.ComputePlanet(cfgsc);
+  end;
   InitCatalog;
+  // draw objects
   Fcatalog.OpenCat(cfgsc);
-  DrawNebulae;
-  DrawEqGrid;
-  DrawAzGrid;
-  DrawConstL;
+  // first the extended object
+  if not cfgsc.quick then begin
+    DrawMilkyWay; // always first
+    DrawNebulae;
+    DrawOutline;
+  end;
+  // then the lines
+  if not cfgsc.quick then begin
+    DrawGrid;
+    DrawConstL;
+    DrawConstB;
+    DrawEcliptic;
+    DrawGalactic;
+  end;
+  // the stars
   DrawStars;
-  DrawDblStars;
-  DrawVarStars;
-  DrawOrbitPath;
+  if not cfgsc.quick then begin
+    DrawDblStars;
+    DrawVarStars;
+  end;
+  // finally the planets
+  if not cfgsc.quick then begin
+    DrawOrbitPath;
+  end;
   DrawPlanet;
-  DrawHorizon;
+  // and the horizon line
+  if not cfgsc.quick then DrawHorizon;
   result:=true;
 finally
+  if cfgsc.quick then begin
+     Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=savmag;
+     Fcatalog.cfgshr.StarFilter:=savfilter;
+     Fcatalog.cfgshr.AutoStarFilter:=saveautofilter;
+  end;
+  cfgsc.quick:=false;
   Fcatalog.CloseCat;
 end;
 end;
@@ -223,7 +269,7 @@ Fcatalog.cfgcat.starcaton[gcstar-BaseStar]:=false;
 Fcatalog.cfgcat.varstarcaton[gcvar-Basevar]:=false;
 Fcatalog.cfgcat.dblstarcaton[gcdbl-Basedbl]:=false;
 Fcatalog.cfgcat.nebcaton[gcneb-Baseneb]:=false;
-//Fcatalog.cfgcat.starcaton[gclin-Baselin]:=false;
+Fcatalog.cfgcat.lincaton[gclin-Baselin]:=false;
 for i:=1 to Fcatalog.cfgcat.GCatNum do
   if Fcatalog.cfgcat.GCatLst[i-1].Actif and
      (cfgsc.FieldNum>=Fcatalog.cfgcat.GCatLst[i-1].min) and
@@ -239,7 +285,7 @@ for i:=1 to Fcatalog.cfgcat.GCatNum do
           rtvar : Fcatalog.cfgcat.varstarcaton[gcvar-Basevar]:=true;
           rtdbl : Fcatalog.cfgcat.dblstarcaton[gcdbl-Basedbl]:=true;
           rtneb : Fcatalog.cfgcat.nebcaton[gcneb-Baseneb]:=true;
-//          rtlin : Fcatalog.cfgcat.starcaton[gclin-Baselin]:=true;
+          rtlin : Fcatalog.cfgcat.lincaton[gclin-Baselin]:=true;
          end;
   end else Fcatalog.cfgcat.GCatLst[i-1].CatOn:=false;
 // give mag. limit result to other functions
@@ -249,6 +295,8 @@ result:=true;
 end;
 
 function Tskychart.InitTime:boolean;
+var y,m,d:integer;
+    t:double;
 begin
 if cfgsc.UseSystemTime then begin
    SetCurrentTime(cfgsc);
@@ -271,6 +319,8 @@ end else begin
    cfgsc.JDChart:=Fcatalog.cfgshr.DefaultJDChart;
    cfgsc.EquinoxName:=fcatalog.cfgshr.EquinoxChart;
 end;
+djd(cfgsc.JDChart,y,m,d,t);
+cfgsc.EquinoxDate:=YearADBC(y)+'-'+inttostr(m)+'-'+inttostr(d);
 if (cfgsc.lastJDchart<-1E20) then cfgsc.lastJDchart:=cfgsc.JDchart; // initial value
 cfgsc.rap2000:=0;       // position of J2000 pole in current coordinates
 cfgsc.dep2000:=pid2;
@@ -355,10 +405,14 @@ function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6 : double;
 begin
 cfgsc.RefractionOffset:=0;
+// clipping limit
+Fplot.cfgplot.outradius:=abs(round(minvalue([50*cfgsc.fov,0.8*pi2])*cfgsc.BxGlb/2));
+Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
+Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
+// find the current field number and projection
 w := cfgsc.fov;
 h := cfgsc.fov/cfgsc.WindowRatio;
 w := maxvalue([w,h]);
-// find the current field number and projection
 cfgsc.FieldNum:=GetFieldNum(w);
 cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
 // is the chart to be centered on an object ?
@@ -417,6 +471,11 @@ Eq2Hz(cfgsc.CurST-cfgsc.racentre,cfgsc.decentre,cfgsc.acentre,cfgsc.hcentre,cfgs
 Hz2Eq(cfgsc.acentre,cfgsc.hcentre,a,d,cfgsc);
 Eq2Hz(a,d,w,h,cfgsc) ;
 cfgsc.RefractionOffset:=h-cfgsc.hcentre;
+// get galactic center
+Eq2Gal(cfgsc.racentre,cfgsc.decentre,cfgsc.lcentre,cfgsc.bcentre,cfgsc) ;
+// get ecliptic center
+cfgsc.e:=ecliptic(cfgsc.JDChart);
+Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.e,cfgsc.lecentre,cfgsc.becentre) ;
 result:=true;
 end;
 
@@ -552,7 +611,58 @@ if Fcatalog.OpenNeb then
 end;
 result:=true;
 finally
- Fcatalog.CloseDblStar;
+ Fcatalog.CloseNeb;
+end;
+end;
+
+function Tskychart.DrawOutline :boolean;
+var rec:GcatRec;
+  x1,y1: Double;
+  xx,yy,op,lw,col,fs: integer;
+begin
+fillchar(rec,sizeof(rec),0);
+try
+if Fcatalog.OpenLin then
+ while Fcatalog.readlin(rec) do begin
+ precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+ projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ op:=rec.outlines.lineoperation;
+ if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
+ if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
+ if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
+ FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,col);
+end;
+result:=true;
+finally
+ Fcatalog.CloseLin;
+end;
+end;
+
+function Tskychart.DrawMilkyWay :boolean;
+var rec:GcatRec;
+  x1,y1: Double;
+  xx,yy,op,lw,col,fs: integer;
+begin
+result:=false;
+if not cfgsc.ShowMilkyWay then exit;
+if cfgsc.fov<(deg2rad*2) then exit;
+fillchar(rec,sizeof(rec),0);
+try
+if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
+ while Fcatalog.readMilkyway(rec) do begin
+ precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+ projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ op:=rec.outlines.lineoperation;
+ if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
+ if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
+ if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
+ FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,col);
+end;
+result:=true;
+finally
+ Fcatalog.CloseMilkyway;
 end;
 end;
 
@@ -691,11 +801,13 @@ for i:=1 to AsteroidNb do
 result:=true;  
 end;
 
-procedure Tskychart.GetCoord(x,y: integer; var ra,dec,a,h:double);
+procedure Tskychart.GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
 begin
 getadxy(x,y,ra,dec,cfgsc);
 GetAHxy(X,Y,a,h,cfgsc);
 if Fcatalog.cfgshr.AzNorth then a:=rmod(a+pi,pi2);
+GetLBxy(X,Y,l,b,cfgsc);
+GetLBExy(X,Y,le,be,cfgsc);
 end;
 
 procedure Tskychart.MoveChart(ns,ew:integer; movefactor:double);
@@ -707,7 +819,19 @@ begin
     Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
     cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
  end
- else begin
+ else if cfgsc.Projpole=Gal then begin
+    cfgsc.lcentre:=rmod(cfgsc.lcentre+ew*cfgsc.fov/movefactor/cos(cfgsc.bcentre)+pi2,pi2);
+    cfgsc.bcentre:=cfgsc.bcentre+ns*cfgsc.fov/movefactor/cfgsc.windowratio;
+    if cfgsc.bcentre>pid2 then cfgsc.bcentre:=pi-cfgsc.bcentre;
+    Gal2Eq(cfgsc.lcentre,cfgsc.bcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
+ end
+ else if cfgsc.Projpole=Ecl then begin
+    cfgsc.lecentre:=rmod(cfgsc.lecentre+ew*cfgsc.fov/movefactor/cos(cfgsc.becentre)+pi2,pi2);
+    cfgsc.becentre:=cfgsc.becentre+ns*cfgsc.fov/movefactor/cfgsc.windowratio;
+    if cfgsc.becentre>pid2 then cfgsc.becentre:=pi-cfgsc.becentre;
+    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
+ end
+ else begin // Equ
     cfgsc.racentre:=rmod(cfgsc.racentre+ew*cfgsc.fov/movefactor/cos(cfgsc.decentre)+pi2,pi2);
     cfgsc.decentre:=cfgsc.decentre+ns*cfgsc.fov/movefactor/cfgsc.windowratio;
     if cfgsc.decentre>pid2 then cfgsc.decentre:=pi-cfgsc.decentre;
@@ -950,25 +1074,56 @@ end else begin
 end;
 end;
 
-function Tskychart.DrawEqGrid;
+Procedure Tskychart.DrawGrid;
+begin
+    if cfgsc.ShowGrid then
+       case cfgsc.ProjPole of
+       Equat  :  DrawEqGrid;
+       AltAz  :  begin DrawAzGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
+       Gal    :  begin DrawGalGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
+       Ecl    :  begin DrawEclGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
+       end
+    else if cfgsc.ShowEqGrid then DrawEqGrid;
+end;
+
+Procedure Tskychart.LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
+begin
+x:=xx;
+y:=yy;
+if yy<cfgsc.ymin then y:=cfgsc.ymin+marge;
+if (yy+h+marge)>cfgsc.ymax then y:=cfgsc.ymax-h-marge;
+if xx<cfgsc.xmin then x:=cfgsc.xmin+marge;
+if (xx+w+marge)>cfgsc.xmax then x:=cfgsc.xmax-w-marge;
+end;
+
+procedure Tskychart.DrawEqGrid;
 var ra1,de1,ac,dc,dra,dde:double;
-    col,n:integer;
-    ok:boolean;
-    
+    col,n,lw,lh,lx,ly:integer;
+    ok,labelok:boolean;
 function DrawRAline(ra,de,dd:double):boolean;
 var x1,y1:double;
     n,xx,yy,xxp,yyp: integer;
+    plotok:boolean;
 begin
 projection(ra,de,x1,y1,false,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
+plotok:=false;
 repeat
  inc(n);
  de:=de+dd/3;
  projection(ra,de,x1,y1,cfgsc.horizonopaque,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
- if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)
-    then Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
+    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
+ end;
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
+    LabelPos(xx,yy+lh,lw,lh,5,lx,ly);
+    if dra<=15*minarc then Fplot.cnv.TextOut(lx,ly,artostr3(rmod(ra+pi2,pi2)*rad2deg/15))
+                      else Fplot.cnv.TextOut(lx,ly,armtostr(rmod(ra+pi2,pi2)*rad2deg/15));
+    labelok:=true;
+ end;
  xxp:=xx;
  yyp:=yy;
 until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
@@ -979,17 +1134,27 @@ end;
 function DrawDEline(ra,de,da:double):boolean;
 var x1,y1:double;
     n,xx,yy,xxp,yyp: integer;
+    plotok:boolean;
 begin
 projection(ra,de,x1,y1,false,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
+plotok:=false;
 repeat
  inc(n);
  ra:=ra+da/3;
  projection(ra,de,x1,y1,cfgsc.horizonopaque,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
- if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)
-    then Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
+    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
+ end;
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
+    LabelPos(xx,yy,lw,lh,5,lx,ly);
+    if dde<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(de*rad2deg))
+                     else Fplot.cnv.TextOut(lx,ly,demtostr(de*rad2deg));
+    labelok:=true;
+ end;
  xxp:=xx;
  yyp:=yy;
 until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
@@ -997,11 +1162,18 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (ra>ra1+pi)or(ra<ra1-pi);
 result:=(n>1);
 end;
-
 begin
-result:=false;
-if not cfgsc.ShowEqGrid then exit;
-col:=Fplot.cfgplot.Color[13];
+if (cfgsc.projpole=Equat)and(not cfgsc.ShowEqGrid) then col:=Fplot.cfgplot.Color[12]
+                  else col:=Fplot.cfgplot.Color[13];
+Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
+Fplot.cnv.Brush.Style:=bsClear;
+Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[2];
+Fplot.cnv.Font.Color:=col;
+Fplot.cnv.Font.Size:=Fplot.cfgplot.LabelSize[2];
+if Fplot.cfgplot.FontBold[2] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
+if Fplot.cfgplot.FontItalic[2] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
+lh:=Fplot.cnv.TextHeight('22h22m');
+lw:=Fplot.cnv.TextWidth('22h22m');
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.decentre));
 dra:=Fcatalog.cfgshr.HourGridSpacing[n];
 dde:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
@@ -1011,51 +1183,74 @@ dra:=deg2rad*dra*15;
 dde:=deg2rad*dde;
 ac:=ra1; dc:=de1;
 repeat
-  ok:=DrawRAline(ac,dc,dde);
-  ok:=DrawRAline(ac,dc,-dde) or ok;
+  labelok:=false;
+  if cfgsc.decentre>0 then begin
+    ok:=DrawRAline(ac,dc,-dde);
+    ok:=DrawRAline(ac,dc,dde) or ok;
+  end else begin
+    ok:=DrawRAline(ac,dc,dde);
+    ok:=DrawRAline(ac,dc,-dde) or ok;
+  end;
   ac:=ac+dra;
 until (not ok)or(ac>ra1+pi+musec);
 ac:=ra1; dc:=de1;
 repeat
-  ok:=DrawRAline(ac,dc,dde);
-  ok:=DrawRAline(ac,dc,-dde) or ok;
+  labelok:=false;
+  if cfgsc.decentre>0 then begin
+    ok:=DrawRAline(ac,dc,-dde);
+    ok:=DrawRAline(ac,dc,dde) or ok;
+  end else begin
+    ok:=DrawRAline(ac,dc,dde);
+    ok:=DrawRAline(ac,dc,-dde) or ok;
+  end;
   ac:=ac-dra;
 until (not ok)or(ac<ra1-pi-musec);
 ac:=ra1; dc:=de1;
 repeat
+  labelok:=false;
   ok:=DrawDEline(ac,dc,dra);
   ok:=DrawDEline(ac,dc,-dra) or ok;
   dc:=dc+dde;
 until (not ok)or(dc>pid2);
 ac:=ra1; dc:=de1;
 repeat
+  labelok:=false;
   ok:=DrawDEline(ac,dc,dra);
   ok:=DrawDEline(ac,dc,-dra) or ok;
   dc:=dc-dde;
 until (not ok)or(dc<-pid2);
-result:=true;
 end;
 
-function Tskychart.DrawAzGrid;
+procedure Tskychart.DrawAzGrid;
 var a1,h1,ac,hc,dda,ddh:double;
-    col,n:integer;
-    ok:boolean;
-    
+    col,n,lw,lh,lx,ly:integer;
+    ok,labelok:boolean;
 function DrawAline(a,h,dd:double):boolean;
-var x1,y1:double;
+var x1,y1,al:double;
     n,xx,yy,xxp,yyp: integer;
+    plotok:boolean;
 begin
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
+plotok:=false;
 repeat
  inc(n);
  h:=h+dd/3;
  if cfgsc.horizonopaque and (h<-musec) then break;
  proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
- if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)
-    then Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
+    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
+ end;
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((abs(h)<minarc)or(xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
+    LabelPos(xx,yy+lh,lw,lh,5,lx,ly);
+    if Fcatalog.cfgshr.AzNorth then al:=rmod(a+pi+pi2,pi2) else al:=rmod(a+pi2,pi2);
+    if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(al*rad2deg))
+                      else Fplot.cnv.TextOut(lx,ly,lonmtostr(al*rad2deg));
+    labelok:=true;
+ end;
  xxp:=xx;
  yyp:=yy;
 until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
@@ -1066,18 +1261,28 @@ end;
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
     n,xx,yy,xxp,yyp,w: integer;
+    plotok:boolean;
 begin
 if h=0 then w:=2 else w:=1;
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
+plotok:=false;
 repeat
  inc(n);
  a:=a+da/3;
  proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
- if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)
-    then Fplot.Plotline(xxp,yyp,xx,yy,col,w);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
+    Fplot.Plotline(xxp,yyp,xx,yy,col,w);
+    if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
+ end;
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
+    LabelPos(xx,yy,lw,lh,5,lx,ly);
+    if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
+                     else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
+    labelok:=true;
+ end;
  xxp:=xx;
  yyp:=yy;
 until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
@@ -1085,33 +1290,42 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (a>a1+pi)or(a<a1-pi);
 result:=(n>1);
 end;
-
 begin
-result:=false;
-if (not cfgsc.ShowAzGrid)or(not(cfgsc.ProjPole=Altaz)) then exit;
 col:=Fplot.cfgplot.Color[12];
+Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
+Fplot.cnv.Brush.Style:=bsClear;
+Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[2];
+Fplot.cnv.Font.Color:=col;
+Fplot.cnv.Font.Size:=Fplot.cfgplot.LabelSize[2];
+if Fplot.cfgplot.FontBold[2] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
+if Fplot.cfgplot.FontItalic[2] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
+lh:=Fplot.cnv.TextHeight('222h22m');
+lw:=Fplot.cnv.TextWidth('222h22m');
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.hcentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
 ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
-a1:=deg2rad*trunc(rad2deg*cfgsc.acentre/dda)*dda;
-h1:=deg2rad*trunc(rad2deg*cfgsc.hcentre/ddh)*ddh;
+a1:=deg2rad*round(rad2deg*cfgsc.acentre/dda)*dda;
+h1:=deg2rad*round(rad2deg*cfgsc.hcentre/ddh)*ddh;
 dda:=deg2rad*dda;
 ddh:=deg2rad*ddh;
 ac:=a1; hc:=h1;
 repeat
-  ok:=DrawAline(ac,hc,ddh);
-  ok:=DrawAline(ac,hc,-ddh) or ok;
+  labelok:=false;
+  ok:=DrawAline(ac,hc,-ddh);
+  ok:=DrawAline(ac,hc,ddh) or ok;
   ac:=ac+dda;
 until (not ok)or(ac>a1+pi);
 ac:=a1; hc:=h1;
 repeat
-  ok:=DrawAline(ac,hc,ddh);
-  ok:=DrawAline(ac,hc,-ddh) or ok;
+  labelok:=false;
+  ok:=DrawAline(ac,hc,-ddh);
+  ok:=DrawAline(ac,hc,ddh) or ok;
   ac:=ac-dda;
 until (not ok)or(ac<a1-pi);
 ac:=a1; hc:=h1;
 repeat
   if cfgsc.horizonopaque and (hc<-musec) then break;
+  labelok:=false;
   ok:=DrawHline(ac,hc,dda);
   ok:=DrawHline(ac,hc,-dda) or ok;
   hc:=hc+ddh;
@@ -1119,11 +1333,11 @@ until (not ok)or(hc>pid2);
 ac:=a1; hc:=h1;
 repeat
   if cfgsc.horizonopaque and (hc<-musec) then break;
+  labelok:=false;
   ok:=DrawHline(ac,hc,dda);
   ok:=DrawHline(ac,hc,-dda) or ok;
   hc:=hc-ddh;
 until (not ok)or(hc<-pid2);
-result:=true;
 end;
 
 function Tskychart.DrawHorizon:boolean;
@@ -1136,10 +1350,260 @@ end;
 result:=true;
 end;
 
+procedure Tskychart.DrawGalGrid;
+var a1,h1,ac,hc,dda,ddh:double;
+    col,n,lw,lh,lx,ly:integer;
+    ok,labelok:boolean;
+function DrawAline(a,h,dd:double):boolean;
+var x1,y1:double;
+    n,xx,yy,xxp,yyp: integer;
+    plotok:boolean;
+begin
+proj2(a,h,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc) ;
+WindowXY(x1,y1,xxp,yyp,cfgsc);
+n:=0;
+plotok:=false;
+repeat
+ inc(n);
+ h:=h+dd/3;
+ proj2(a,h,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
+    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
+ end;
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
+    LabelPos(xx,yy+lh,lw,lh,5,lx,ly);
+    if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(rmod(a+pi2,pi2)*rad2deg))
+                      else Fplot.cnv.TextOut(lx,ly,lonmtostr(rmod(a+pi2,pi2)*rad2deg));
+    labelok:=true;
+ end;
+ xxp:=xx;
+ yyp:=yy;
+until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
+      (yy<-cfgsc.Ymax)or(yy>2*cfgsc.Ymax)or
+      (h>(pid2-2*dd/3))or(h<(-pid2-2*dd/3));
+result:=(n>1);
+end;
+function DrawHline(a,h,da:double):boolean;
+var x1,y1:double;
+    n,xx,yy,xxp,yyp,w: integer;
+    plotok:boolean;
+begin
+w:=1;
+proj2(a,h,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc) ;
+WindowXY(x1,y1,xxp,yyp,cfgsc);
+n:=0;
+plotok:=false;
+repeat
+ inc(n);
+ a:=a+da/3;
+ proj2(a,h,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
+    Fplot.Plotline(xxp,yyp,xx,yy,col,w);
+    if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
+ end;
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
+    LabelPos(xx,yy,lw,lh,5,lx,ly);
+    if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
+                     else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
+    labelok:=true;
+ end;
+ xxp:=xx;
+ yyp:=yy;
+until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
+      (yy<-cfgsc.Ymax)or(yy>2*cfgsc.Ymax)or
+      (a>a1+pi)or(a<a1-pi);
+result:=(n>1);
+end;
+begin
+col:=Fplot.cfgplot.Color[12];
+Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
+Fplot.cnv.Brush.Style:=bsClear;
+Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[2];
+Fplot.cnv.Font.Color:=col;
+Fplot.cnv.Font.Size:=Fplot.cfgplot.LabelSize[2];
+if Fplot.cfgplot.FontBold[2] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
+if Fplot.cfgplot.FontItalic[2] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
+lh:=Fplot.cnv.TextHeight('222h22m');
+lw:=Fplot.cnv.TextWidth('222h22m');
+n:=GetFieldNum(cfgsc.fov/cos(cfgsc.bcentre));
+dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
+ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
+a1:=deg2rad*trunc(rad2deg*cfgsc.lcentre/dda)*dda;
+h1:=deg2rad*trunc(rad2deg*cfgsc.bcentre/ddh)*ddh;
+dda:=deg2rad*dda;
+ddh:=deg2rad*ddh;
+ac:=a1; hc:=h1;
+repeat
+  labelok:=false;
+  if cfgsc.bcentre>0 then begin
+    ok:=DrawAline(ac,hc,-ddh);
+    ok:=DrawAline(ac,hc,ddh) or ok;
+  end else begin
+    ok:=DrawAline(ac,hc,ddh);
+    ok:=DrawAline(ac,hc,-ddh) or ok;
+  end;
+  ac:=ac+dda;
+until (not ok)or(ac>a1+pi);
+ac:=a1; hc:=h1;
+repeat
+  labelok:=false;
+  if cfgsc.bcentre>0 then begin
+    ok:=DrawAline(ac,hc,-ddh);
+    ok:=DrawAline(ac,hc,ddh) or ok;
+  end else begin
+    ok:=DrawAline(ac,hc,ddh);
+    ok:=DrawAline(ac,hc,-ddh) or ok;
+  end;
+  ac:=ac-dda;
+until (not ok)or(ac<a1-pi);
+ac:=a1; hc:=h1;
+repeat
+  labelok:=false;
+  ok:=DrawHline(ac,hc,-dda);
+  ok:=DrawHline(ac,hc,dda) or ok;
+  hc:=hc+ddh;
+until (not ok)or(hc>pid2);
+ac:=a1; hc:=h1;
+repeat
+  labelok:=false;
+  ok:=DrawHline(ac,hc,-dda);
+  ok:=DrawHline(ac,hc,dda) or ok;
+  hc:=hc-ddh;
+until (not ok)or(hc<-pid2);
+end;
+
+procedure Tskychart.DrawEclGrid;
+var a1,h1,ac,hc,dda,ddh:double;
+    col,n,lw,lh,lx,ly:integer;
+    ok,labelok:boolean;
+function DrawAline(a,h,dd:double):boolean;
+var x1,y1:double;
+    n,xx,yy,xxp,yyp: integer;
+    plotok:boolean;
+begin
+proj2(a,h,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc) ;
+WindowXY(x1,y1,xxp,yyp,cfgsc);
+n:=0;
+plotok:=false;
+repeat
+ inc(n);
+ h:=h+dd/3;
+ proj2(a,h,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
+    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
+ end;
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
+    LabelPos(xx,yy+lh,lw,lh,5,lx,ly);
+    if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(rmod(a+pi2,pi2)*rad2deg))
+                      else Fplot.cnv.TextOut(lx,ly,lonmtostr(rmod(a+pi2,pi2)*rad2deg));
+    labelok:=true;
+ end;
+ xxp:=xx;
+ yyp:=yy;
+until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
+      (yy<-cfgsc.Ymax)or(yy>2*cfgsc.Ymax)or
+      (h>(pid2-2*dd/3))or(h<(-pid2-2*dd/3));
+result:=(n>1);
+end;
+function DrawHline(a,h,da:double):boolean;
+var x1,y1:double;
+    n,xx,yy,xxp,yyp,w: integer;
+    plotok:boolean;
+begin
+w:=1;
+proj2(a,h,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc) ;
+WindowXY(x1,y1,xxp,yyp,cfgsc);
+n:=0;
+plotok:=false;
+repeat
+ inc(n);
+ a:=a+da/3;
+ proj2(a,h,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
+    Fplot.Plotline(xxp,yyp,xx,yy,col,w);
+    if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
+ end;
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
+    LabelPos(xx,yy,lw,lh,5,lx,ly);
+    if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
+                     else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
+    labelok:=true;
+ end;
+ xxp:=xx;
+ yyp:=yy;
+until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
+      (yy<-cfgsc.Ymax)or(yy>2*cfgsc.Ymax)or
+      (a>a1+pi)or(a<a1-pi);
+result:=(n>1);
+end;
+begin
+col:=Fplot.cfgplot.Color[12];
+Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
+Fplot.cnv.Brush.Style:=bsClear;
+Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[2];
+Fplot.cnv.Font.Color:=col;
+Fplot.cnv.Font.Size:=Fplot.cfgplot.LabelSize[2];
+if Fplot.cfgplot.FontBold[2] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
+if Fplot.cfgplot.FontItalic[2] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
+lh:=Fplot.cnv.TextHeight('222h22m');
+lw:=Fplot.cnv.TextWidth('222h22m');
+n:=GetFieldNum(cfgsc.fov/cos(cfgsc.becentre));
+dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
+ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
+a1:=deg2rad*trunc(rad2deg*cfgsc.lecentre/dda)*dda;
+h1:=deg2rad*trunc(rad2deg*cfgsc.becentre/ddh)*ddh;
+dda:=deg2rad*dda;
+ddh:=deg2rad*ddh;
+ac:=a1; hc:=h1;
+repeat
+  labelok:=false;
+  if cfgsc.becentre>0 then begin
+    ok:=DrawAline(ac,hc,-ddh);
+    ok:=DrawAline(ac,hc,ddh) or ok;
+  end else begin
+    ok:=DrawAline(ac,hc,ddh);
+    ok:=DrawAline(ac,hc,-ddh) or ok;
+  end;
+  ac:=ac+dda;
+until (not ok)or(ac>a1+pi);
+ac:=a1; hc:=h1;
+repeat
+  labelok:=false;
+  if cfgsc.becentre>0 then begin
+    ok:=DrawAline(ac,hc,-ddh);
+    ok:=DrawAline(ac,hc,ddh) or ok;
+  end else begin
+    ok:=DrawAline(ac,hc,ddh);
+    ok:=DrawAline(ac,hc,-ddh) or ok;
+  end;
+  ac:=ac-dda;
+until (not ok)or(ac<a1-pi);
+ac:=a1; hc:=h1;
+repeat
+  labelok:=false;
+  ok:=DrawHline(ac,hc,-dda);
+  ok:=DrawHline(ac,hc,dda) or ok;
+  hc:=hc+ddh;
+until (not ok)or(hc>pid2);
+ac:=a1; hc:=h1;
+repeat
+  labelok:=false;
+  ok:=DrawHline(ac,hc,-dda);
+  ok:=DrawHline(ac,hc,dda) or ok;
+  hc:=hc-ddh;
+until (not ok)or(hc<-pid2);
+end;
+
 Procedure Tskychart.GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 var x1,y1:double;
     xx,yy,rr:integer;
-const spacing=10;    
+const spacing=10;
 begin
  // no precession, the label position is already for the rigth equinox
  projection(ra,dec,x1,y1,true,cfgsc) ;
@@ -1168,7 +1632,7 @@ var
 begin
 result:=false;
 if not cfgsc.ShowConstl then exit;
-dm:=minvalue([10*cfgsc.fov,2.5]);
+dm:=minvalue([10*cfgsc.fov,0.9*pi2]);
 color := Fplot.cfgplot.Color[16];
 for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
   ra:=Fcatalog.cfgshr.ConstL[i].ra1;
@@ -1186,6 +1650,87 @@ for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
      WindowXY(xx2,yy2,x2,y2,cfgsc);
      FPlot.PlotLine(x1,y1,x2,y2,color,1);
   end;
+end;
+result:=true;
+end;
+
+function Tskychart.DrawConstB:boolean;
+var
+  dm,xx,yy,ra,de : Double;
+  x1,y1,x2,y2,i,color : Integer;
+begin
+result:=false;
+if not cfgsc.ShowConstB then exit;
+dm:=maxvalue([cfgsc.fov,0.1]);
+color := Fplot.cfgplot.Color[17];
+x1:=0; y1:=0;
+for i:=0 to Fcatalog.cfgshr.ConstBnum-1 do begin
+  ra:=Fcatalog.cfgshr.ConstB[i].ra;
+  de:=Fcatalog.cfgshr.ConstB[i].de;
+  if Fcatalog.cfgshr.ConstB[i].newconst then x1:=maxint;
+  precession(jd2000,cfgsc.JDChart,ra,de);
+  projection(ra,de,xx,yy,true,cfgsc) ;
+  if (xx<199)and(xx<199) then begin
+    WindowXY(xx,yy,x2,y2,cfgsc);
+    if (x1<maxint)and(abs(xx)<dm)and(abs(yy)<dm) then begin
+       FPlot.PlotLine(x1,y1,x2,y2,color,1);
+    end;
+    x1:=x2;
+    y1:=y2;
+  end else x1:=maxint;
+end;
+result:=true;
+end;
+
+function Tskychart.DrawEcliptic:boolean;
+var l,b,e,ar,de,xx,yy : double;
+    i,x1,y1,x2,y2,color : integer;
+    first : boolean;
+begin
+result:=false;
+if not cfgsc.ShowEcliptic then exit;
+e:=ecliptic(cfgsc.JDChart);
+b:=0;
+first:=true;
+color := Fplot.cfgplot.Color[14];
+x1:=0; y1:=0;
+for i:=0 to 360 do begin
+  l:=deg2rad*i;
+  ecl2eq(l,b,e,ar,de);
+  projection(ar,de,xx,yy,true,cfgsc) ;
+  WindowXY(xx,yy,x2,y2,cfgsc);
+  if first then
+     first:=false
+  else
+     FPlot.PlotLine(x1,y1,x2,y2,color,1);
+  x1:=x2;
+  y1:=y2;
+end;
+result:=true;
+end;
+
+function Tskychart.DrawGalactic:boolean;
+var l,b,ar,de,xx,yy : double;
+    i,x1,y1,x2,y2,color : integer;
+    first : boolean;
+begin
+result:=false;
+if not cfgsc.ShowGalactic then exit;
+b:=0;
+first:=true;
+color := Fplot.cfgplot.Color[15];
+x1:=0; y1:=0;
+for i:=0 to 360 do begin
+  l:=deg2rad*i;
+  gal2eq(l,b,ar,de,cfgsc);
+  projection(ar,de,xx,yy,true,cfgsc) ;
+  WindowXY(xx,yy,x2,y2,cfgsc);
+  if first then begin
+     first:=false;
+  end else
+     FPlot.PlotLine(x1,y1,x2,y2,color,1);
+  x1:=x2;
+  y1:=y2;
 end;
 result:=true;
 end;

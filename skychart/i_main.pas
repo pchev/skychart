@@ -92,6 +92,7 @@ c2.TimeZone := c1.TimeZone ;
 c2.ObsTemperature := c1.ObsTemperature ;
 c2.ObsPressure := c1.ObsPressure ;
 c2.ObsName := c1.ObsName ;
+c2.ObsCountry := c1.ObsCountry ;
 c2.DrawPMyear := c1.DrawPMyear ;
 c2.PMon := c1.PMon ;
 c2.DrawPMon := c1.DrawPMon ;
@@ -109,8 +110,14 @@ c2.GRSlongitude := c1.GRSlongitude ;
 c2.ShowEarthShadow := c1.ShowEarthShadow ;
 c2.ProjPole := c1.ProjPole ;
 c2.ShowEqGrid := c1.ShowEqGrid ;
-c2.ShowAzGrid := c1.ShowAzGrid ;
+c2.ShowGrid := c1.ShowGrid ;
+c2.ShowGridNum := c1.ShowGridNum ;
 c2.ShowConstL := c1.ShowConstL ;
+c2.ShowConstB := c1.ShowConstB ;
+c2.ShowEcliptic := c1.ShowEcliptic ;
+c2.ShowGalactic := c1.ShowGalactic ;
+c2.ShowMilkyWay := c1.ShowMilkyWay ;
+c2.FillMilkyWay := c1.FillMilkyWay ;
 //c2. := c1. ;
 end;
 
@@ -219,14 +226,20 @@ DecimalSeparator:='.';
 appdir:=getcurrentdir;
 catalog:=Tcatalog.Create(self);
 planet:=Tplanet.Create(self);
+{$ifdef mswindows}
+Screen.Cursors[crRetic] := LoadCursor(HInstance,'RETIC');
+Application.UpdateFormatSettings:=false;
+{$endif}
 end;
 
 procedure Tf_main.FormShow(Sender: TObject);
 begin
+try
  cfgm.locked:=false;
  SetDefault;
  ReadDefault;
  LoadConstL(cfgm.ConstLfile);
+ LoadConstB(cfgm.ConstBfile);
  SetLang;
  InitFonts;
  SetLpanel1('');
@@ -234,6 +247,8 @@ begin
  Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
  Autorefresh.enabled:=true;
  if cfgm.AutostartServer then StartServer;
+except
+end; 
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -303,8 +318,8 @@ end;
 procedure Tf_main.ChangeProjExecute(Sender: TObject);
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
-   if sc.cfgsc.projpole=Equat then sc.cfgsc.projpole:=Altaz
-                              else sc.cfgsc.projpole:=Equat;
+   inc(sc.cfgsc.projpole);
+   if sc.cfgsc.projpole>Ecl then sc.cfgsc.projpole:=Equat;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    Refresh;
 end;
@@ -315,9 +330,9 @@ begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do GridEQExecute(Sender);
 end;
 
-procedure Tf_main.GridAZExecute(Sender: TObject);
+procedure Tf_main.GridExecute(Sender: TObject);
 begin
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do GridAZExecute(Sender);
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do GridExecute(Sender);
 end;
 
 procedure Tf_main.switchstarsExecute(Sender: TObject);
@@ -343,6 +358,7 @@ end;
 
 procedure Tf_main.OpenConfigExecute(Sender: TObject);
 begin
+screen.cursor:=crHourGlass;
 if f_config=nil then f_config:=Tf_config.Create(application);
 try
  f_config.ccat:=catalog.cfgcat;
@@ -361,6 +377,7 @@ try
  cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
 finally
 // f_config.free;
+screen.cursor:=crDefault;
 end;
 end;
 
@@ -376,6 +393,7 @@ begin
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
     InitFonts;
     LoadConstL(cfgm.ConstLfile);
+    LoadConstB(cfgm.ConstBfile);
     if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
        sc.cfgsc.FindOk:=false;
@@ -415,7 +433,7 @@ Procedure Tf_main.SetLPanel1(txt:string; origin:string='');
 begin
 LPanels1.width:=PPanels1.ClientWidth;
 LPanels1.Caption:=txt;
-PPanels1.ClientHeight:=LPanels1.Height+8;
+//PPanels1.ClientHeight:=LPanels1.Height+8;
 SendInfo(origin,txt);
 if traceon then writetrace(txt);
 end;
@@ -423,13 +441,25 @@ end;
 Procedure Tf_main.SetLPanel0(txt:string);
 begin
 LPanels0.Caption:=txt;
-PPanels0.ClientHeight:=LPanels0.Height+8;
+//PPanels0.ClientHeight:=LPanels0.Height+8;
+end;
+
+Procedure Tf_main.SetTopMessage(txt:string);
+begin
+// set the message that appear in the menu bar
+topmsg:=txt;
+{$ifdef linux}
+topmessage.caption:=topmsg;
+{$endif}
+{$ifdef mswindows}
+// do something to refresh the text
+topmessage.visible:=false;
+topmessage.visible:=true;
+{$endif}
 end;
 
 procedure Tf_main.FormResize(Sender: TObject);
 begin
-//   PanelLeft.width:=ToolBar2.width+2;
-//   PanelRight.width:=ToolBar3.width+2;
    Ppanels1.width:=PanelBottom.ClientWidth-Ppanels1.left;
 end;
 
@@ -464,6 +494,8 @@ for i:=1 to 9 do begin
    def_cfgplot.LabelSize[i]:=DefaultFontSize;
 end;
 cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constl.dat';
+cfgm.ConstBfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constb.dat';
+cfgm.EarthMapFile:=slash(appdir)+'data'+Pathdelim+'earthmap1k.jpg';
 def_cfgplot.invisible:=false;
 def_cfgplot.color:=dfColor;
 def_cfgplot.skycolor:=dfSkyColor;
@@ -506,15 +538,22 @@ def_cfgsc.ObsLongitude := 6.1 ;
 def_cfgsc.ObsAltitude := 0 ;
 def_cfgsc.ObsTemperature := 10 ;
 def_cfgsc.ObsPressure := 1010 ;
-def_cfgsc.ObsName := 'Geneve' ;
+def_cfgsc.ObsName := 'Genève' ;
+def_cfgsc.ObsCountry := 'Switzerland' ;
 def_cfgsc.horizonopaque:=true;
 def_cfgsc.HorizonMax:=0;
 def_cfgsc.PMon:=false;
 def_cfgsc.DrawPMon:=false;
 def_cfgsc.DrawPMyear:=1000;
 def_cfgsc.ShowEqGrid:=false;
-def_cfgsc.ShowAzGrid:=true;
+def_cfgsc.ShowGrid:=true;
+def_cfgsc.ShowGridNum:=true;
 def_cfgsc.ShowConstL:=true;
+def_cfgsc.ShowConstB:=false;
+def_cfgsc.ShowEcliptic:=false;                  
+def_cfgsc.ShowGalactic:=false;
+def_cfgsc.ShowMilkyWay:=true;
+def_cfgsc.FillMilkyWay:=true;
 def_cfgsc.Simnb:=1;
 def_cfgsc.SimD:=1;
 def_cfgsc.SimH:=0;
@@ -797,8 +836,14 @@ csc.DrawPMon:=ReadBool(section,'DrawPMon',csc.DrawPMon);
 csc.DrawPMyear:=ReadInteger(section,'DrawPMyear',csc.DrawPMyear);
 csc.horizonopaque:=ReadBool(section,'horizonopaque',csc.horizonopaque);
 csc.ShowEqGrid:=ReadBool(section,'ShowEqGrid',csc.ShowEqGrid);
-csc.ShowAzGrid:=ReadBool(section,'ShowAzGrid',csc.ShowAzGrid);
+csc.ShowGrid:=ReadBool(section,'ShowGrid',csc.ShowGrid);
+csc.ShowGridNum:=ReadBool(section,'ShowGridNum',csc.ShowGridNum);
 csc.ShowConstL:=ReadBool(section,'ShowConstL',csc.ShowConstL);
+csc.ShowConstB:=ReadBool(section,'ShowConstB',csc.ShowConstB);
+csc.ShowEcliptic:=ReadBool(section,'ShowEcliptic',csc.ShowEcliptic);
+csc.ShowGalactic:=ReadBool(section,'ShowGalactic',csc.ShowGalactic); 
+csc.ShowMilkyWay:=ReadBool(section,'ShowMilkyWay',csc.ShowMilkyWay);
+csc.FillMilkyWay:=ReadBool(section,'FillMilkyWay',csc.FillMilkyWay);
 csc.ShowPlanet:=ReadBool(section,'ShowPlanet',csc.ShowPlanet);
 csc.PlanetParalaxe:=ReadBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
 csc.ShowEarthShadow:=ReadBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
@@ -817,6 +862,7 @@ csc.ObsAltitude := ReadFloat(section,'ObsAltitude',csc.ObsAltitude );
 csc.ObsTemperature := ReadFloat(section,'ObsTemperature',csc.ObsTemperature );
 csc.ObsPressure := ReadFloat(section,'ObsPressure',csc.ObsPressure );
 csc.ObsName := ReadString(section,'ObsName',csc.ObsName );
+csc.ObsCountry := ReadString(section,'ObsCountry',csc.ObsCountry );
 csc.ObsTZ := ReadFloat(section,'ObsTZ',csc.ObsTZ );
 section:='date';
 csc.UseSystemTime:=ReadBool(section,'UseSystemTime',csc.UseSystemTime);
@@ -853,6 +899,8 @@ cfgm.PrintLandscape:=ReadBool(section,'PrintLandscape',cfgm.PrintLandscape);
 if (ReadBool(section,'WinMaximize',false)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
+cfgm.ConstBfile:=ReadString(section,'ConstBfile',cfgm.ConstBfile);
+cfgm.EarthMapFile:=ReadString(section,'EarthMapFile',cfgm.EarthMapFile);
 cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
 cfgm.keepalive:=ReadBool(section,'keepalive',cfgm.keepalive);
@@ -999,8 +1047,14 @@ WriteBool(section,'DrawPMon',def_cfgsc.DrawPMon);
 WriteInteger(section,'DrawPMyear',def_cfgsc.DrawPMyear);
 WriteBool(section,'horizonopaque',def_cfgsc.horizonopaque);
 WriteBool(section,'ShowEqGrid',def_cfgsc.ShowEqGrid);
-WriteBool(section,'ShowAzGrid',def_cfgsc.ShowAzGrid);
+WriteBool(section,'ShowGrid',def_cfgsc.ShowGrid);
+WriteBool(section,'ShowGridNum',def_cfgsc.ShowGridNum);
 WriteBool(section,'ShowConstL',def_cfgsc.ShowConstL);
+WriteBool(section,'ShowConstB',def_cfgsc.ShowConstB);
+WriteBool(section,'ShowEcliptic',def_cfgsc.ShowEcliptic);   
+WriteBool(section,'ShowGalactic',def_cfgsc.ShowGalactic);
+WriteBool(section,'ShowMilkyWay',def_cfgsc.ShowMilkyWay);
+WriteBool(section,'FillMilkyWay',def_cfgsc.FillMilkyWay);
 WriteBool(section,'ShowPlanet',def_cfgsc.ShowPlanet);
 WriteBool(section,'PlanetParalaxe',def_cfgsc.PlanetParalaxe);
 WriteBool(section,'ShowEarthShadow',def_cfgsc.ShowEarthShadow);
@@ -1019,6 +1073,7 @@ WriteFloat(section,'ObsAltitude',def_cfgsc.ObsAltitude );
 WriteFloat(section,'ObsTemperature',def_cfgsc.ObsTemperature );
 WriteFloat(section,'ObsPressure',def_cfgsc.ObsPressure );
 WriteString(section,'ObsName',def_cfgsc.ObsName );
+WriteString(section,'ObsCountry',def_cfgsc.ObsCountry );
 WriteFloat(section,'ObsTZ',def_cfgsc.ObsTZ );
 section:='date';
 WriteBool(section,'UseSystemTime',def_cfgsc.UseSystemTime);
@@ -1055,6 +1110,8 @@ WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 WriteInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 WriteString(section,'ConstLfile',cfgm.ConstLfile);
+WriteString(section,'ConstBfile',cfgm.ConstBfile);
+WriteString(section,'EarthMapFile',cfgm.EarthMapFile);
 WriteString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 WriteString(section,'ServerIPport',cfgm.ServerIPport);
 WriteBool(section,'keepalive',cfgm.keepalive);
@@ -1347,6 +1404,44 @@ begin
      catalog.cfgshr.ConstL[i].de2:=deg2rad*de2;
    end;
    catalog.cfgshr.ConstLNum := n;
+   finally
+   closefile(f);
+   end;
+end;
+
+Procedure Tf_main.LoadConstB(fname:string);
+var
+  f : textfile;
+  i,n:integer;
+  ra,de : Double;
+  constel,curconst:string;
+begin
+   if not FileExists(fname) then begin
+      catalog.cfgshr.ConstBNum := 0;
+      setlength(catalog.cfgshr.ConstB,0);
+      exit;
+   end;
+   assignfile(f,fname);
+   try
+   reset(f);
+   n:=0;
+   // first loop to get the size
+   repeat
+     readln(f,constel);
+     inc(n);
+   until eof(f);
+   setlength(catalog.cfgshr.ConstB,n);
+   // read the file now
+   reset(f);
+   curconst:='';
+   for i:=0 to n-1 do begin
+     readln(f,ra,de,constel);
+     catalog.cfgshr.ConstB[i].ra:=deg2rad*ra*15;
+     catalog.cfgshr.ConstB[i].de:=deg2rad*de;
+     catalog.cfgshr.ConstB[i].newconst:=(constel<>curconst);
+     curconst:=constel;
+   end;
+   catalog.cfgshr.ConstBNum := n;
    finally
    closefile(f);
    end;
@@ -1652,7 +1747,8 @@ application.processmessages;
 TCPDaemon.terminate;
 d:=now+1.7E-5;  // 1.5 seconde delay to close the thread
 while now<d do application.processmessages;
-finally
+screen.cursor:=crDefault;
+except
  screen.cursor:=crDefault;
 end;
 end;

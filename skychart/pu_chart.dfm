@@ -34,7 +34,6 @@ object f_chart: Tf_chart
       Top = 0
       Width = 376
       Height = 217
-      Cursor = crCross
       Align = alClient
       AutoSize = True
       PopupMenu = PopupMenu1
@@ -181,11 +180,11 @@ object f_chart: Tf_chart
       ImageIndex = 24
       OnExecute = GridEQExecute
     end
-    object GridAz: TAction
+    object Grid: TAction
       Category = 'Grid'
-      Caption = 'GridAz'
+      Caption = 'Grid'
       ImageIndex = 25
-      OnExecute = GridAzExecute
+      OnExecute = GridExecute
     end
     object switchbackground: TAction
       Caption = 'switchbackground'

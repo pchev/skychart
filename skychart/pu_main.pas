@@ -172,7 +172,7 @@ type
     rot_plus: TAction;
     rot_minus: TAction;
     GridEQ: TAction;
-    GridAZ: TAction;
+    Grid: TAction;
     ToolButton27: TToolButton;
     ToolButton28: TToolButton;
     switchstars: TAction;
@@ -183,6 +183,8 @@ type
     SaveImage1: TMenuItem;
     ViewInfo: TAction;
     ViewInformation1: TMenuItem;
+    N4: TMenuItem;
+    topmessage: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -214,7 +216,7 @@ type
     procedure rot_plusExecute(Sender: TObject);
     procedure rot_minusExecute(Sender: TObject);
     procedure GridEQExecute(Sender: TObject);
-    procedure GridAZExecute(Sender: TObject);
+    procedure GridExecute(Sender: TObject);
     procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -223,6 +225,8 @@ type
     procedure switchbackgroundExecute(Sender: TObject);
     procedure SaveImageExecute(Sender: TObject);
     procedure ViewInfoExecute(Sender: TObject);
+    procedure topmessageDrawItem(Sender: TObject; ACanvas: TCanvas;
+      ARect: TRect; Selected: Boolean);
   private
     { Private declarations }
     function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
@@ -235,7 +239,7 @@ type
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
     planet  : Tplanet;
-    serverinfo : string;
+    serverinfo,topmsg : string;
     TCPDaemon: TTCPDaemon;
     procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
@@ -250,8 +254,10 @@ type
     Procedure ActivateConfig;
     Procedure SetLPanel1(txt:string; origin:string='');
     Procedure SetLPanel0(txt:string);
+    Procedure SetTopMessage(txt:string);
     procedure updatebtn(fx,fy:integer);
     Procedure LoadConstL(fname:string);
+    Procedure LoadConstB(fname:string);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
     Function ListChart:string;
@@ -270,6 +276,7 @@ var
 implementation
 
 {$R *.dfm}
+{$R cursbmp.res}
 
 uses pu_chart, pu_about, pu_config, pu_info, u_projection ;
 
@@ -297,6 +304,13 @@ begin
 // keep here because of focus problem with the child that have no text control
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
    CKeyDown(Key,Shift);
+end;
+
+procedure Tf_main.topmessageDrawItem(Sender: TObject; ACanvas: TCanvas;
+  ARect: TRect; Selected: Boolean);
+begin
+// draw the message in the menu bar, avoiding to extent the menu on the next line
+ACanvas.TextOut(Arect.left,Arect.top+2,topmsg);
 end;
 
 // end of windows vcl specific code:
