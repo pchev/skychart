@@ -1601,18 +1601,21 @@ end;
 end;
 
 procedure Tf_config.UpdCityList(changecity:boolean);
-var s : pchar;
+var s,cfile : pchar;
+    cfilename: array[0..200]of char;
     i,n: integer;
     ci,filter:utf8string;
     savecity:string;
 begin
+cfile:=nil;
 if (countrylist.text<>actual_country)or(total<=0) then begin
   try
   screen.cursor:=crHourGlass;
   s:=pchar(string(slash(appdir)+'data'+pathdelim+'CitiesOfTheWorld'));
   setdirectory(s);
   releasecities();
-  total:=readcountryfile(pchar(string(countrylist.text)),c);
+  total:=readcountryfile(pchar(string(countrylist.text)),c,cfilename);
+  cfile:=cfilename;
   actual_country:=countrylist.text;
   finally
    screen.cursor:=crDefault;
@@ -1641,9 +1644,21 @@ if changecity then begin
   citylistClick(Self);
 end
 else citylist.text:=savecity;
-updcity.enabled:=true;
-newcity.enabled:=true;
-delcity.enabled:=true;
+if (cfile<>nil)then begin
+  if (not FileIsReadOnly(cfile)) then begin
+     dbreado.sendtoback;
+     dbreado.visible:=false;
+     updcity.enabled:=true;
+     newcity.enabled:=true;
+     delcity.enabled:=true
+  end else begin
+     dbreado.bringtofront;
+     dbreado.visible:=true;
+     updcity.enabled:=false;
+     newcity.enabled:=false;
+     delcity.enabled:=false
+  end;
+end;
 end;
 
 procedure Tf_config.newcityClick(Sender: TObject);

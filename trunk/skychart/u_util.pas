@@ -80,7 +80,6 @@ var traceon : boolean;
 implementation
 var
   dummy_double : double;
-  tracefile : string;
   ftrace : textfile;
 
 Function mm2pi(l,PrinterResolution : single): integer;
@@ -146,12 +145,21 @@ end;
 
 Procedure InitTrace;
 begin
- tracefile:='trace.txt';
+try
+{$ifdef linux}
+ tracefile:=expandfilename(tracefile);
+{$endif}
  assignfile(ftrace,tracefile);
  rewrite(ftrace);
  writeln(ftrace,DateTimeToStr(Now)+'  Start trace');
  closefile(ftrace);
-end;
+except
+{$I-}
+ traceon:=false;
+ closefile(ftrace);
+ IOResult;
+{$I+}
+end;end;
 
 Procedure WriteTrace( buf : string);
 begin
@@ -164,6 +172,7 @@ except
 {$I-}
  traceon:=false;
  closefile(ftrace);
+ IOResult;
 {$I+}
 end;
 end;

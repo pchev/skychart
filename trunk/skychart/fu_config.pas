@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses Math, enhedits, u_constant, u_util, cu_zoomimage,
-  SysUtils, Classes, QForms,Types,
+  SysUtils, Classes, QForms,Types, QStyle,
   QStdCtrls, QComCtrls, QControls, QGraphics, QExtCtrls, QGrids, QButtons,
   QDialogs, QMask, QCheckLst;
 
@@ -669,6 +669,8 @@ type
     listpla: TCheckBox;
     listvar: TCheckBox;
     listdbl: TCheckBox;
+    RadioGroup1: TRadioGroup;
+    dbreado: TPanel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -813,6 +815,7 @@ type
     procedure listplaClick(Sender: TObject);
     procedure listvarClick(Sender: TObject);
     procedure listdblClick(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
   private
     { Déclarations privées }
     procedure EditGCatPath(row : integer);
@@ -869,7 +872,7 @@ const b=' ';
 
 var
    SetDirectory : function(dir:pchar): integer; stdcall;
-   ReadCountryFile: function (country:pchar; var City: PCities): integer; stdcall;
+   ReadCountryFile: function (country:pchar; var City: PCities; var cfile:array of char): integer; stdcall;
    AddCity: function(City: PCity): integer; stdcall;
    ModifyCity: function(index: integer; City: PCity): integer; stdcall;
    RemoveCity: function(index: integer; City: PCity): integer; stdcall;
@@ -904,9 +907,23 @@ begin
 stepunitClick(Sender);
 end;
 
+procedure Tf_config.RadioGroup1Click(Sender: TObject);
+begin
+case radiogroup1.ItemIndex of
+0 : Application.Style.DefaultStyle:=dsSystemDefault;
+1 : Application.Style.DefaultStyle:=dsMotif;
+2 : Application.Style.DefaultStyle:=dsMotifPlus;
+3 : Application.Style.DefaultStyle:=dsCDE;
+4 : Application.Style.DefaultStyle:=dsQtSGI;
+5 : Application.Style.DefaultStyle:=dsPlatinum;
+6 : Application.Style.DefaultStyle:=dsWindows;
+end;
+end;
+
 // End of Linux specific CLX code:
 
 
 end.
+
 
 
