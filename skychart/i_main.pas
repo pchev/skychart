@@ -133,6 +133,7 @@ c2.SimObject := c1.SimObject ;
 c2.PlanetParalaxe := c1.PlanetParalaxe ;
 c2.ShowPlanet := c1.ShowPlanet ;
 c2.ShowAsteroid := c1.ShowAsteroid ;
+c2.ShowImages := c1.ShowImages ;
 c2.AstmagMax := c1.AstmagMax;
 c2.AstmagDiff := c1.AstmagDiff;
 c2.AstSymbol := c1.AstSymbol;
@@ -1036,6 +1037,7 @@ def_cfgsc.SimLine:=True;
 for i:=1 to NumSimObject do def_cfgsc.SimObject[i]:=true;
 def_cfgsc.ShowPlanet:=true;
 def_cfgsc.ShowAsteroid:=true;
+def_cfgsc.ShowImages:=true;
 def_cfgsc.AstSymbol:=0;
 def_cfgsc.AstmagMax:=18;
 def_cfgsc.AstmagDiff:=6;
@@ -1111,7 +1113,7 @@ catalog.cfgshr.AutoStarFilterMag:=6.5;
 catalog.cfgcat.StarmagMax:=12;
 catalog.cfgshr.NebFilter:=true;
 catalog.cfgshr.BigNebFilter:=true;
-catalog.cfgshr.BigNebLimit:=150;
+catalog.cfgshr.BigNebLimit:=210;
 catalog.cfgcat.NebmagMax:=12;
 catalog.cfgcat.NebSizeMin:=1;
 catalog.cfgcat.UseUSNOBrightStars:=false;
@@ -1217,7 +1219,7 @@ catalog.cfgshr.NebMagFilter[0]:=99;
 catalog.cfgshr.NebMagFilter[1]:=99;
 catalog.cfgshr.NebMagFilter[2]:=99;
 catalog.cfgshr.NebMagFilter[3]:=99;
-catalog.cfgshr.NebMagFilter[4]:=16;
+catalog.cfgshr.NebMagFilter[4]:=99;
 catalog.cfgshr.NebMagFilter[5]:=13;
 catalog.cfgshr.NebMagFilter[6]:=11;
 catalog.cfgshr.NebMagFilter[7]:=10;
@@ -1241,6 +1243,7 @@ procedure Tf_main.ReadDefault;
 begin
 ReadPrivateConfig(configfile);
 ReadChartConfig(configfile,true,def_cfgplot,def_cfgsc);
+if config_version<cdcver then UpdateConfig;
 end;
 
 procedure Tf_main.ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
@@ -1401,6 +1404,7 @@ csc.FillMilkyWay:=ReadBool(section,'FillMilkyWay',csc.FillMilkyWay);
 csc.ShowPlanet:=ReadBool(section,'ShowPlanet',csc.ShowPlanet);
 csc.ShowAsteroid:=ReadBool(section,'ShowAsteroid',csc.ShowAsteroid);
 csc.ShowComet:=ReadBool(section,'ShowComet',csc.ShowComet);
+csc.ShowImages:=ReadBool(section,'ShowImages',csc.ShowImages);
 csc.AstSymbol:=ReadInteger(section,'AstSymbol',csc.AstSymbol);
 csc.AstmagMax:=ReadFloat(section,'AstmagMax',csc.AstmagMax);
 csc.AstmagDiff:=ReadFloat(section,'AstmagDiff',csc.AstmagDiff);
@@ -1469,6 +1473,7 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
+Config_Version:=ReadString(section,'version','0');
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 cfgm.language:=ReadString(section,'language',cfgm.language);
 cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
@@ -1534,6 +1539,16 @@ end;
 finally
 inif.Free;
 end;
+end;
+
+procedure Tf_main.UpdateConfig;
+begin
+if Config_Version < '3.0.0.7' then begin
+   def_cfgplot.color[22]:=DFcolor[22];
+   catalog.cfgshr.BigNebLimit:=210;
+   catalog.cfgshr.NebMagFilter[4]:=99;
+end;
+SaveDefault;   
 end;
 
 procedure Tf_main.SaveDefault;
@@ -1687,6 +1702,7 @@ WriteBool(section,'FillMilkyWay',def_cfgsc.FillMilkyWay);
 WriteBool(section,'ShowPlanet',def_cfgsc.ShowPlanet);
 WriteBool(section,'ShowAsteroid',def_cfgsc.ShowAsteroid);
 WriteBool(section,'ShowComet',def_cfgsc.ShowComet);
+WriteBool(section,'ShowImages',def_cfgsc.ShowImages);
 WriteInteger(section,'AstSymbol',def_cfgsc.AstSymbol);
 WriteFloat(section,'AstmagMax',def_cfgsc.AstmagMax);
 WriteFloat(section,'AstmagDiff',def_cfgsc.AstmagDiff);
@@ -1757,6 +1773,7 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
+WriteString(section,'version',cdcver);
 WriteString(section,'AppDir',appdir);
 WriteString(section,'PrivateDir',privatedir); 
 WriteString(section,'language',cfgm.language);
@@ -2404,15 +2421,16 @@ end;
 procedure Tf_main.ConnectDB;
 begin
 try
-if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
+//if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
     if (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
         Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
     end else begin
           SetLpanel1('MySQL database not available.');
           def_cfgsc.ShowAsteroid:=false;
           def_cfgsc.ShowComet:=false;
+          def_cfgsc.ShowImages:=false;
     end;
-end;
+//end;
 except
   SetLpanel1('MySQL database not available.');
 end;

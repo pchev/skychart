@@ -1,7 +1,7 @@
 object f_main: Tf_main
   Tag = 1
-  Left = 212
-  Top = 196
+  Left = 180
+  Top = 185
   Width = 800
   Height = 600
   HorzScrollBar.Range = 54
@@ -121,7 +121,6 @@ object f_main: Tf_main
   Position = poDefaultPosOnly
   Scaled = False
   Visible = True
-  WindowState = wsMinimized
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -3172,7 +3171,7 @@ object f_main: Tf_main
     Left = 0
     Top = 25
     Width = 27
-    Height = 515
+    Height = 545
     Align = alLeft
     TabOrder = 1
     object ToolBar2: TToolBar
@@ -3276,7 +3275,7 @@ object f_main: Tf_main
     Left = 773
     Top = 25
     Width = 27
-    Height = 515
+    Height = 545
     Align = alRight
     TabOrder = 2
     object ToolBar3: TToolBar
@@ -3426,7 +3425,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Left = 0
-    Top = 540
+    Top = 570
     Width = 800
     Height = 30
     Align = alBottom

@@ -1,27 +1,4 @@
 unit cu_fits;
-{
-Copyright (C) 2005 Patrick Chevalley
-
-http://www.astrosurf.com/astropc
-pch@freesurf.ch
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-}
-{
- Manage FITS file read, including WCS and database
-}
 
 interface
 
@@ -58,11 +35,11 @@ type
     d16 : array[1..1440] of word;
     d32 : array[1..720] of Longword;
     d64 : array[1..360] of Int64;
-    imai8,savi8 : Timai8;
-    imai16,savi16 : Timai16;
-    imai32,savi32 : Timai32;
-    imar32,savr32 : Timar32;
-    imar64,savr64 : Timar64;
+    imai8 : Timai8;
+    imai16 : Timai16;
+    imai32 : Timai32;
+    imar32 : Timar32;
+    imar64 : Timar64;
     Fheader : Tfitsheader;
     FFileName : String;
     n_axis,cur_axis,Fwidth,Fheight,hdr_end,colormode,current_result : Integer;
@@ -83,9 +60,10 @@ type
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
      Function ConnectDB(host,db,user,pass:string; port:integer):boolean;
-     Function OpenDB:boolean;
-     Function GetDB(var filename:string; var ra,de,width,height,cosr,sinr:double):boolean;
-     function GetAllHeader:Tstringlist;
+     Function OpenDB(catalogname:string; ra1,ra2,dec1,dec2:double):boolean;
+     Function GetDB(var filename:string; var ra,de,width,height,rot:double):boolean;
+     Function GetFileName(catname,objectname:string; var filename:string):boolean;
+     Procedure GetAllHeader(var result:Tstringlist);
      procedure GetBitmap(var imabmp:Tbitmap);
      Property Header : Tfitsheader read Fheader;
      Property FileName : string read FFileName write SetFile;
@@ -139,7 +117,7 @@ Fheader.valid:=false;
 end;
 end;
 
-function TFits.GetAllHeader:Tstringlist;
+Procedure TFits.GetAllHeader(var result:Tstringlist);
 var   header : array[1..36,1..80] of char;
       i,n,p1 : integer;
       eoh,ItsFits : boolean;
@@ -259,7 +237,7 @@ end;
 
 Procedure TFits.FITSCoord ;
 var   cmethod : integer;
-      ic,jc,x,y,R : double;
+      ic,jc,x,y : double;
       cosr,sinr : extended;
       buf : string;
 begin
@@ -296,7 +274,7 @@ if (copy(Fheader.ctype1,2,4)='RA--')and(copy(Fheader.ctype2,2,4)='DEC-') then be
         y:=Fheader.cd2_1*ic + Fheader.cd2_2*jc;
         Fde:=deg2rad*(Fheader.crval2 + y);
         Fra:=deg2rad*(Fheader.crval1 + x/cos(Fde) );
-        x:=arctan2(Fheader.cd2_1,Fheader.cd1_1);
+     //   x:=arctan2(Fheader.cd2_1,Fheader.cd1_1);
         y:=arctan2(-Fheader.cd1_2,Fheader.cd2_2);
      //   Frotation:=-(x+y)/2;
         Frotation:=-y;
@@ -376,7 +354,7 @@ end;
 
 Procedure TFits.ReadFitsImage;
 var i,ii,j,n,npix,k : integer;
-    x,blank : double;
+    x : double;
     f : file;
     ni,sum,sum2 : extended;
 begin
@@ -551,12 +529,15 @@ end;
 closefile(f);
 Fmean:=sum/ni;
 Fsigma:=sqrt( (sum2/ni)-(Fmean*Fmean) );
+if (Fheader.dmin=0)and(Fheader.dmax=0) then begin
+  Fheader.dmin:=dmin;
+  Fheader.dmax:=dmax;
+end;
 end;
 
 procedure TFits.SetITT;
 var
   i: Integer;
-  s : double;
 begin
 
 // Ramp
@@ -578,8 +559,8 @@ imabmp.freeimage;
 imabmp.height:=Fheight;
 imabmp.width:=Fwidth;
 imabmp.pixelformat:=pf32bit;
-dmin:=dmin+Fmin_sigma*Fsigma;
-dmax:=dmax-Fmax_sigma*Fsigma;
+dmin:=Fheader.dmin+Fmin_sigma*Fsigma;
+dmax:=Fheader.dmax-Fmax_sigma*Fsigma;
 c:=255/(dmax-dmin);
 case Fheader.bitpix of
      -64 : for i:=0 to Fheight-1 do begin
@@ -741,19 +722,34 @@ except
 end;
 end;
 
-Function TFits.OpenDB:boolean;
-var qry : string;
+Function TFits.OpenDB(catalogname:string; ra1,ra2,dec1,dec2:double):boolean;
+var qry,r1,r2,d1,d2 : string;
 begin
 if not db1.Active then result:=false
 else begin
-   qry:='SELECT filename,ra,de,width,height,cosr,sinr from cdc_fits';
+   r1:=formatfloat(f5,ra1);
+   r2:=formatfloat(f5,ra2);
+   d1:=formatfloat(f5,dec1);
+   d2:=formatfloat(f5,dec2);
+   qry:='SELECT filename,ra,de,width,height,rotation from cdc_fits where '+
+        'catalogname="'+uppercase(catalogname)+'" and ';
+   if ra2>ra1 then begin
+      qry:=qry+' ra>'+r1+' and '+
+               ' ra<'+r2;
+   end else begin
+      qry:=qry+' (ra>'+r1+' or '+
+               ' ra<'+r2+')';
+   end;
+   qry:=qry+' and de>'+d1+' and '+
+        ' de<'+d2+
+        ' order by width desc';
    db1.Query(qry);
    result:=db1.RowCount>0;
    current_result:=-1;
 end;
 end;
 
-Function TFits.GetDB(var filename:string; var ra,de,width,height,cosr,sinr:double):boolean;
+Function TFits.GetDB(var filename:string; var ra,de,width,height,rot:double):boolean;
 begin
 inc(current_result);
 try
@@ -763,13 +759,23 @@ if current_result < db1.RowCount then begin
   de:=strtofloat(db1.Results[current_result][2]);
   width:=strtofloat(db1.Results[current_result][3]);
   height:=strtofloat(db1.Results[current_result][4]);
-  cosr:=strtofloat(db1.Results[current_result][5]);
-  sinr:=strtofloat(db1.Results[current_result][6]);
+  rot:=strtofloat(db1.Results[current_result][5]);
   result:=true;
 end
 else result:=false;
 except
  result:=false;
+end;
+end;
+
+Function TFits.GetFileName(catname,objectname:string; var filename:string):boolean;
+begin
+if not db1.Active then result:=false
+else begin
+  filename:=db1.QueryOne('SELECT filename from cdc_fits where '+
+        'catalogname="'+uppercase(trim(catname))+'" and '+
+        'objectname="'+uppercase(stringreplace(objectname,' ','',[rfReplaceAll]))+'" ');
+  result:=filename<>'';
 end;
 end;
 

@@ -564,6 +564,7 @@ begin
  shape25.brush.color:=cplot.color[19];
  shape26.brush.color:=cplot.color[20];
  shape27.brush.color:=cplot.color[21];
+ shape28.brush.color:=cplot.color[22];
 end;
 
 procedure Tf_config.ShowSkyColor;
@@ -3385,13 +3386,19 @@ begin
 imgpath.text:=cmain.ImagePath;
 ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
 ImgContrastBar.position:=round(10*cmain.ImageContrast);
+ShowImagesBox.checked:=csc.ShowImages;
 CountImages;
+end;
+
+
+procedure Tf_config.ShowImagesBoxClick(Sender: TObject);
+begin
+csc.ShowImages:=ShowImagesBox.checked;
 end;
 
 procedure Tf_config.imgpathChange(Sender: TObject);
 begin
 cmain.ImagePath:=imgpath.text;
-ScanImages.click;
 end;
 
 procedure Tf_config.BitBtn3Click(Sender: TObject);
@@ -3411,9 +3418,6 @@ begin
 end;
 
 procedure Tf_config.CountImages;
-var i:integer;
-    ci,si:extended;
-    cmd:string;
 begin
 db:=TMyDB.create(self);
 try
@@ -3429,42 +3433,96 @@ end;
 end;
 
 procedure Tf_config.ScanImagesClick(Sender: TObject);
-var f : tsearchrec;
-    i:integer;
-    ci,si:extended;
-    cmd:string;
+var c,f : tsearchrec;
+    i,j,n,p:integer;
+    cmd,catdir,objn,fname:string;
+    dummyfile : boolean;
+    ra,de,w,h,r: double;
 begin
 db:=TMyDB.create(self);
 try
-screen.cursor:=crHourGlass;
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
 db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
-  db.Query('UNLOCK TABLES');
-  db.Query('Truncate table cdc_fits');
-  i:=findfirst(slash(cmain.ImagePath)+'*.*',0,f);
+screen.cursor:=crHourGlass;
+ProgressCat.caption:='';
+ProgressBar1.position:=0;
+ProgressPanel.visible:=true;
+db.Query('UNLOCK TABLES');
+db.Query('Truncate table cdc_fits');
+j:=findfirst(slash(cmain.ImagePath)+'*',faDirectory,c);
+while j=0 do begin
+  if (c.attr=faDirectory)and(c.Name<>'.')and(c.Name<>'..') then begin
+  catdir:=slash(cmain.ImagePath)+c.Name;
+  ProgressCat.caption:=c.Name;
+  ProgressBar1.position:=0;
+  ProgressPanel.Refresh;
+  Application.processmessages;
+  i:=findfirst(slash(catdir)+'*.*',0,f);
+  n:=1;
   while i=0 do begin
-    FFits.FileName:=slash(cmain.ImagePath)+f.Name;
-    if FFits.header.valid then begin
-      sincos(FFits.Rotation,si,ci);
-      cmd:='INSERT INTO cdc_fits (filename,ra,de,width,height,cosr,sinr) VALUES ('
-        +'"'+stringreplace(FFits.FileName,'\','\\',[rfReplaceAll])+'"'
-        +',"'+floattostr(FFits.Center_RA)+'"'
-        +',"'+floattostr(FFits.Center_DE)+'"'
-        +',"'+floattostr(FFits.Img_Width)+'"'
-        +',"'+floattostr(FFits.img_Height)+'"'
-        +',"'+floattostr(abs(ci))+'"'
-        +',"'+floattostr(abs(si))+'"'+')';
-      db.query(cmd);
+   inc(n);
+   i:=findnext(f);
+  end;
+  ProgressBar1.min:=0;
+  ProgressBar1.max:=n;
+  if (ProgressBar1.Max > 25) then
+    ProgressBar1.Step := ProgressBar1.Max div 25
+  else
+    ProgressBar1.Step := 1;
+  i:=findfirst(slash(catdir)+'*.*',0,f);
+  n:=0;
+  while i=0 do begin
+    inc(n);
+    if (n mod ProgressBar1.step)=0 then begin ProgressBar1.stepit; Application.processmessages; end;
+    dummyfile:=(extractfileext(f.Name)='.nil');
+    if dummyfile then begin
+      ra:=99+random(999999999999999);
+      de:=99+random(999999999999999);
+      w:=0;
+      h:=0;
+      r:=0;
+      fname:=slash(catdir)+f.Name;
+    end else begin
+      FFits.FileName:=slash(catdir)+f.Name;
+      ra:=FFits.Center_RA;
+      de:=FFits.Center_DE;
+      w:=FFits.Img_Width;
+      h:=FFits.img_Height;
+      r:=FFits.Rotation;
+      fname:=FFits.FileName;
     end;
+    if FFits.header.valid or dummyfile then begin
+      objn:=extractfilename(f.Name);
+      p:=pos(extractfileext(objn),objn);
+      objn:=uppercase(stringreplace(copy(objn,1,p-1),' ','',[rfReplaceAll]));
+      cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
+        +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
+        +',"'+uppercase(c.Name)+'"'
+        +',"'+uppercase(objn)+'"'
+        +',"'+formatfloat(f5,ra)+'"'
+        +',"'+formatfloat(f5,de)+'"'
+        +',"'+formatfloat(f5,w)+'"'
+        +',"'+formatfloat(f5,h)+'"'
+        +',"'+formatfloat(f5,r)+'"'
+        +')';
+      if not db.query(cmd) then
+        writetrace('DB insert failed for '+f.Name+' :'+db.GetLastError);
+    end
+    else writetrace('Invalid FITS file: '+f.Name);
     i:=findnext(f);
   end;
-  db.Query('FLUSH TABLES');
+  end;
+  j:=findnext(c);
+end;
+db.Query('FLUSH TABLES');
 end;
 finally
   screen.cursor:=crDefault;
+  ProgressPanel.visible:=false;
   db.Free;
+  findclose(c);
   findclose(f);
 end;
 CountImages;

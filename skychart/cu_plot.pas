@@ -103,12 +103,12 @@ type
      Procedure PlotGalaxie(x,y: single; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotLine(x1,y1,x2,y2:single; color,width: integer);
-     Procedure PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; bmp:Tbitmap);
+     Procedure PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg:boolean; bmp:Tbitmap);
      procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
-     function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string):integer;
+     function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg:boolean; txt:string):integer;
      procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;color:integer;moving:boolean);
@@ -1089,11 +1089,11 @@ with cnv do begin
 end;
 end;
 
-Procedure TSplot.PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; bmp:Tbitmap);
+Procedure TSplot.PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg:boolean; bmp:Tbitmap);
 var dsx,dsy,xx,yy : single;
     DestR,SrcR :Trect;
 begin
-BitmapRotation(bmp,imabmp,Rotation);
+BitmapRotation(bmp,imabmp,Rotation,WhiteBg);
 //BitmapRotMask(imamask,imabmp,bmp,Rotation);
 BitmapBlackMask(imamask,imabmp);
 if (Width<=cfgchart.Width)and(Height<=cfgchart.Height) then begin
@@ -1117,8 +1117,13 @@ end else begin
    imacopy.canvas.copymode:=cmSrcCopy;
    imacopy.Width:=round(2*dsx);
    imacopy.Height:=round(2*dsy);
-   imacopy.Canvas.Brush.Color:=clBlack;
-   imacopy.Canvas.Pen.Color:=clBlack;
+   if WhiteBg then begin
+     imacopy.Canvas.Brush.Color:=clWhite;
+     imacopy.Canvas.Pen.Color:=clWhite;
+   end else begin
+     imacopy.Canvas.Brush.Color:=clBlack;
+     imacopy.Canvas.Pen.Color:=clBlack;
+   end;
    imacopy.Canvas.Rectangle(0,0,imacopy.Width,imacopy.Height);
    imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imamask.Canvas,SrcR);
    if (flipx>0)and(flipy>0) then DestR:=Rect(0,0,cfgchart.Width,cfgchart.Height)
@@ -1359,7 +1364,7 @@ with cnv do begin
 end;
 end;
 
-function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string):integer;
+function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg:boolean; txt:string):integer;
 var ts:TSize;
 begin
 // If drawing to the printer plot the text label to the canvas
@@ -1370,7 +1375,7 @@ with cnv do begin
   {$ifdef linux} Font.CharSet:=fcsAnyCharSet; {$endif}
   {$ifdef mswindows} Font.CharSet:=DEFAULT_CHARSET; {$endif}
   Font.Name:=cfgplot.FontName[fontnum];
-  if cfgplot.backgroundcolor=clWhite then Font.Color:=clBlack
+  if WhiteBg then Font.Color:=clBlack
      else Font.Color:=cfgplot.LabelColor[labelnum];
   Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
@@ -1400,6 +1405,7 @@ with labels[i] do begin
   Transparent:=true;
   Font.Name:=cfgplot.FontName[fontnum];
   Font.Color:=cfgplot.LabelColor[labelnum];
+  if WhiteBg and (Font.Color=clWhite) then Font.Color:=clBlack;
   Font.Size:=cfgplot.LabelSize[labelnum];
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
