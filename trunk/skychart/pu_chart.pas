@@ -107,6 +107,7 @@ type
     procedure switchbackgroundExecute(Sender: TObject);
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     movefactor,zoomfactor: double;
@@ -150,6 +151,11 @@ type
     Procedure TrackCursor(X,Y : integer);
     Procedure ZoomCursor(yy : double);
     function GetChartInfo:string;
+    procedure SetField(field : double);
+    procedure SetZenit(field : double);
+    procedure SetAz(Az : double);
+    procedure SetDate(y,m,d,h,n,s:integer);
+    procedure SetJD(njd:double);
   end;
 
 implementation

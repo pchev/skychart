@@ -53,6 +53,7 @@ function InvertI32(X : LongWord) : LongInt;
 function InvertI64(X : Int64) : Int64;
 function InvertF32(X : LongWord) : Single;
 function InvertF64(X : Int64) : Double;
+Procedure DToS(t: Double; var h,m,s : integer);
 Function DEToStr(de: Double) : string;
 Function ARtoStr(ar: Double) : string;
 Function DEmToStr(de: Double) : string;
@@ -297,6 +298,26 @@ begin
     temp:=4294967296 * ((P[0] shl 24) or (P[1] shl 16) or (P[2] shl 8) or (P[3])) + ((P[4] shl 24) or (P[5] shl 16) or (P[6] shl 8) or (P[7]));
     move(temp,result,8);
     end;
+end;
+
+Procedure DToS(t: Double; var h,m,s : integer);
+var dd,min1,min,sec: Double;
+begin
+    dd:=Int(t);
+    min1:=abs(t-dd)*60;
+    if min1>=59.999 then begin
+       dd:=dd+sgn(t);
+       min1:=0.0;
+    end;
+    min:=Int(min1);
+    sec:=(min1-min)*60;
+    if sec>=59.95 then begin
+       min:=min+1;
+       sec:=0.0;
+    end;
+    h:=round(dd);
+    m:=round(min);
+    s:=round(sec);
 end;
 
 Function DEToStr(de: Double) : string;

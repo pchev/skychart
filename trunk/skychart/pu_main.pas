@@ -26,9 +26,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses cu_catalog, cu_planet, u_constant, u_util, blcksock, Winsock,
-  Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus,
+  Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, Messages, ExtCtrls, ComCtrls, StdActns,
-  ActnList, ToolWin, ImgList, IniFiles;
+  ActnList, ToolWin, ImgList, IniFiles, Spin;
 
 type
   TTCPThrd = class(TThread)
@@ -173,18 +173,45 @@ type
     rot_minus: TAction;
     GridEQ: TAction;
     Grid: TAction;
-    ToolButton27: TToolButton;
-    ToolButton28: TToolButton;
     switchstars: TAction;
     switchbackground: TAction;
-    ToolButton25: TToolButton;
-    ToolButton26: TToolButton;
     SaveImage: TAction;
     SaveImage1: TMenuItem;
     ViewInfo: TAction;
     ViewInformation1: TMenuItem;
     N4: TMenuItem;
     topmessage: TMenuItem;
+    ToolButton29: TToolButton;
+    ToolButton30: TToolButton;
+    ToolButton31: TToolButton;
+    ToolButton32: TToolButton;
+    toN: TAction;
+    toE: TAction;
+    toS: TAction;
+    toW: TAction;
+    toZenith: TAction;
+    allSky: TAction;
+    popupProj: TPopupMenu;
+    Equatorial1: TMenuItem;
+    AltAz1: TMenuItem;
+    Galactic1: TMenuItem;
+    Ecliptic1: TMenuItem;
+    ToolButton25: TToolButton;
+    ToolButton26: TToolButton;
+    ToolButton27: TToolButton;
+    ToolButton28: TToolButton;
+    ToolButton33: TToolButton;
+    ToolButton34: TToolButton;
+    TimeInc: TAction;
+    TimeDec: TAction;
+    TimeReset: TAction;
+    ToolButton35: TToolButton;
+    ToolButton36: TToolButton;
+    TimeVal: TSpinEdit;
+    TimeU: TComboBox;
+    ToolButton37: TToolButton;
+    ToolButton38: TToolButton;
+    ToolButton39: TToolButton;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -227,6 +254,15 @@ type
     procedure ViewInfoExecute(Sender: TObject);
     procedure topmessageDrawItem(Sender: TObject; ACanvas: TCanvas;
       ARect: TRect; Selected: Boolean);
+    procedure toNExecute(Sender: TObject);
+    procedure toEExecute(Sender: TObject);
+    procedure toSExecute(Sender: TObject);
+    procedure toWExecute(Sender: TObject);
+    procedure toZenithExecute(Sender: TObject);
+    procedure allSkyExecute(Sender: TObject);
+    procedure popupProjClick(Sender: TObject);
+    procedure TimeResetExecute(Sender: TObject);
+    procedure TimeIncExecute(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
@@ -258,6 +294,7 @@ type
     procedure updatebtn(fx,fy:integer);
     Procedure LoadConstL(fname:string);
     Procedure LoadConstB(fname:string);
+    Procedure LoadHorizon(fname:string);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
     Function ListChart:string;

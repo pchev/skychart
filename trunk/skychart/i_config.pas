@@ -108,7 +108,8 @@ ShowColor;
 ShowSkyColor;
 ShowServer;
 ShowObservatory;
-TreeView1.FullExpand;
+ShowHorizon;
+TreeView1.TopItem.Expand(false);
 Treeview1.selected:=Treeview1.items[cmain.configpage];
 screen.cursor:=crDefault;
 end;
@@ -429,6 +430,8 @@ fw6.Value:=cshr.fieldnum[6];
 fw7.Value:=cshr.fieldnum[7];
 fw8.Value:=cshr.fieldnum[8];
 fw9.Value:=cshr.fieldnum[9];
+fw4b.value:=fw4.value;
+fw5b.value:=fw5.value;
 end;
 
 procedure Tf_config.SetFieldHint(var lab:Tlabel; n:integer);
@@ -501,9 +504,9 @@ end;
 
 procedure Tf_config.ShowColor;
 begin
- bg1.color:=cplot.color[0];
- bg2.color:=cplot.color[0];
- bg3.color:=cplot.color[0];
+ bg1.color:=cplot.bgColor;
+ bg2.color:=cplot.bgColor;
+ bg3.color:=cplot.bgColor;
  shape1.brush.color:=cplot.color[1];
  shape2.brush.color:=cplot.color[2];
  shape3.brush.color:=cplot.color[3];
@@ -521,6 +524,7 @@ begin
  shape15.pen.color:=cplot.color[16];
  shape16.pen.color:=cplot.color[17];
  shape17.pen.color:=cplot.color[18];
+ shape25.brush.color:=cplot.color[19];
 end;
 
 procedure Tf_config.ShowSkyColor;
@@ -584,6 +588,8 @@ procedure Tf_config.FWChange(Sender: TObject);
 begin
 if sender is TFloatEdit then with sender as TFloatEdit do begin
   cshr.fieldnum[tag]:=Value;
+  if (fw4<>nil)and(fw4b<>nil) then fw4b.value:=fw4.value;
+  if (fw5<>nil)and(fw5b<>nil) then fw5b.value:=fw5.value;
 end;
 end;
 
@@ -1304,7 +1310,7 @@ begin
 f:=expandfilename(ConstlFile.Text);
 opendialog1.InitialDir:=extractfilepath(f);
 opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='All Files|*.*';
+opendialog1.Filter:='Constellation Figure|*.cln';
 opendialog1.DefaultExt:='';
 try
 if opendialog1.execute then begin
@@ -1377,7 +1383,7 @@ begin
 f:=expandfilename(ConstbFile.Text);
 opendialog1.InitialDir:=extractfilepath(f);
 opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='All Files|*.*';
+opendialog1.Filter:='Constellation Boundary|*.cby';
 opendialog1.DefaultExt:='';
 try
 if opendialog1.execute then begin
@@ -1396,13 +1402,14 @@ end;
 
 procedure Tf_config.bgClick(Sender: TObject);
 begin
+{ bad idea...
    ColorDialog1.color:=cplot.Color[0];
    if ColorDialog1.Execute then begin
       cplot.Color[0]:=ColorDialog1.Color;
       cplot.color[11]:=not cplot.Color[0];
       cplot.bgcolor:=cplot.color[0];
       ShowColor;
-   end;
+   end;}
 end;
 
 procedure Tf_config.ShapeMouseUp(Sender: TObject; Button: TMouseButton;
@@ -1503,7 +1510,9 @@ Obsposy:=0;
 ZoomImage1.Xcentre:=Obsposx;
 ZoomImage1.Ycentre:=Obsposy;
 ZoomImage1.ZoomMax:=3;
-ZoomImage1.Picture.LoadFromFile(cmain.EarthMapFile);
+if fileexists(cmain.EarthMapFile) then
+   ZoomImage1.Picture.LoadFromFile(cmain.EarthMapFile)
+else  ZoomImage1.PictureChange(self);
 SetScrollBar;
 Hscrollbar.Position:=ZoomImage1.SizeX div 2;
 Vscrollbar.Position:=ZoomImage1.SizeY div 2;
@@ -1565,7 +1574,7 @@ var i:integer;
     x,xx:double;
 begin
 csc.obsname:=citylist.text;
-if c=nil then exit;
+if (c=nil)or(total<=0) then exit;
 i := citylist.ItemIndex+first;
 x:=abs(c^[i].m_Coord[0]/10000);
 xx:=trunc(x);
@@ -1617,7 +1626,7 @@ if (countrylist.text<>actual_country)or(total<=0) then begin
   end;
 end;
 if total<=0 then begin
-  showmessage('Error reading country file: '+inttostr(total));
+  if total<>-2 then showmessage('Error reading country file: '+inttostr(total));
   exit;
 end;
 filter:=utf8encode(cityfilter.text);
@@ -1830,8 +1839,13 @@ end;
 
 procedure Tf_config.ObsmapClick(Sender: TObject);
 begin
-opendialog1.InitialDir:=extractfilepath(cmain.EarthMapFile);
-opendialog1.filename:=extractfilename(cmain.EarthMapFile);
+if fileexists(cmain.EarthMapFile) then begin
+   opendialog1.InitialDir:=extractfilepath(cmain.EarthMapFile);
+   opendialog1.filename:=extractfilename(cmain.EarthMapFile);
+end else begin
+   opendialog1.InitialDir:=slash(appdir)+'data'+pathdelim+'earthmap';
+   opendialog1.filename:='';
+end;
 opendialog1.Filter:='PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
 opendialog1.DefaultExt:='.png';
 try
@@ -1847,6 +1861,45 @@ if opendialog1.execute
    Vscrollbar.Position:=ZoomImage1.SizeY div 2;
    SetObsPos;
    CenterObs;
+end;
+finally
+   chdir(appdir);
+end;
+end;
+
+procedure Tf_config.ShowHorizon;
+begin
+horizonopaque.checked:=not csc.horizonopaque;
+horizonfile.text:=cmain.horizonfile;
+end;
+
+
+procedure Tf_config.horizonopaqueClick(Sender: TObject);
+begin
+csc.horizonopaque:=not horizonopaque.checked;
+end;
+
+procedure Tf_config.horizonfileChange(Sender: TObject);
+begin
+cmain.horizonfile:=horizonfile.text;
+end;
+
+procedure Tf_config.horizonfileBtnClick(Sender: TObject);
+begin
+if fileexists(cmain.horizonfile) then begin
+   opendialog1.InitialDir:=extractfilepath(cmain.horizonfile);
+   opendialog1.filename:=extractfilename(cmain.horizonfile);
+end else begin
+   opendialog1.InitialDir:=slash(appdir)+'data'+pathdelim+'horizon';
+   opendialog1.filename:='horizon.txt';
+end;
+opendialog1.Filter:='All|*.*';
+try
+if opendialog1.execute
+   and(fileexists(opendialog1.filename))
+   then begin
+   horizonfile.text:=opendialog1.filename;
+   cmain.horizonfile:=opendialog1.filename;
 end;
 finally
    chdir(appdir);

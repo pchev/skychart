@@ -72,8 +72,9 @@ type
      Procedure PlotLine(x1,y1,x2,y2,color,width: integer);
      procedure PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
      procedure PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
-     procedure PlotLabel(xx,yy,labelnum:integer ;txt:string);
-     procedure PlotOutline(xx,yy,op,lw,fs,closed: integer; col: Tcolor);
+     procedure PlotLabel(xx,yy,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string);
+     procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
+     procedure PlotOutline(xx,yy,op,lw,fs,closed: integer; r2:double; col: Tcolor);
   end;
 
   const cliparea = 10;
@@ -636,7 +637,7 @@ with cnv do begin
 end;
 end;
 
-procedure TSplot.PlotOutline(xx,yy,op,lw,fs,closed: integer; col: Tcolor);
+procedure TSplot.PlotOutline(xx,yy,op,lw,fs,closed: integer; r2:double; col: Tcolor);
 procedure addpoint(x,y:integer);
 begin
 // add a point to the line
@@ -655,14 +656,18 @@ begin
 // find if we can plot this point
 if cfgplot.outlineinscreen and
    (abs(xx-cfgchart.hw)<cfgplot.outradius)and
-   (abs(yy-cfgchart.hh)<cfgplot.outradius) then
+   (abs(yy-cfgchart.hh)<cfgplot.outradius)and
+   ((intpower(outx1-xx,2)+intpower(outy1-yy,2))<r2)
+   then
    begin
+      // begin at last point
+      addpoint(outx1,outy1);
       x1:=outx1; y1:=outy1; x2:=xx; y2:=yy;
       // find if clipping is necessary
       ClipVector(x1,y1,x2,y2,clip1,clip2);
-      addpoint(outx1,outy1);
       if clip1 then addpoint(x1,y1);
       if clip2 then addpoint(x2,y2);
+      // set last point
       outx1:=xx;
       outy1:=yy;
       result:=true;
@@ -909,17 +914,52 @@ with cnv do begin
   end;
 end;
 
-procedure TSplot.PlotLabel(xx,yy,labelnum:integer ;txt:string);
+procedure TSplot.PlotLabel(xx,yy,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string);
+var ts:TSize;
 begin
 with cnv do begin
 Brush.Color:=cfgplot.Color[0];
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
-Font.Name:=cfgplot.FontName[2];
+Font.Name:=cfgplot.FontName[fontnum];
 Font.Color:=cfgplot.LabelColor[labelnum];
 Font.Size:=cfgplot.LabelSize[labelnum];
-if cfgplot.FontBold[2] then Font.Style:=[fsBold] else Font.Style:=[];
-if cfgplot.FontItalic[2] then font.style:=font.style+[fsItalic];
+if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
+if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
+ts:=cnv.TextExtent(txt);
+case Xalign of
+ laRight  : xx:=xx-ts.cx;
+ laCenter : xx:=xx-(ts.cx div 2);
+end;
+case Yalign of
+ laBottom : yy:=yy-ts.cy;
+ laCenter : yy:=yy-(ts.cy div 2);
+end;
+textout(xx,yy,txt);
+end;
+end;
+
+procedure TSplot.PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
+var ts:TSize;
+begin
+with cnv do begin
+Brush.Color:=cfgplot.Color[0];
+Brush.Style:=bsSolid;
+Pen.Mode:=pmCopy;
+Font.Name:=cfgplot.FontName[fontnum];
+Font.Color:=color;
+Font.Size:=cfgplot.FontSize[fontnum];
+if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
+if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
+ts:=cnv.TextExtent(txt);
+case Xalign of
+ laRight  : xx:=xx-ts.cx;
+ laCenter : xx:=xx-(ts.cx div 2);
+end;
+case Yalign of
+ laBottom : yy:=yy-ts.cy;
+ laCenter : yy:=yy-(ts.cy div 2);
+end;
 textout(xx,yy,txt);
 end;
 end;

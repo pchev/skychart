@@ -35,7 +35,7 @@ uses Types, libcatalog,
 
 const MaxColor = 19;
 
-type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:spare
+type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon
      TSkycolor = array[1..7]of Tcolor;
 
 const version = 'Version 3 alpha 0.0.3';
@@ -45,7 +45,7 @@ const version = 'Version 3 alpha 0.0.3';
       MaxAsteroid = 500;
       MaxPla = 32;
       MaxQuickSearch = 15;
-      MaxWindow = 10;  // maximum number of chart window (and also tcp connection)
+      MaxWindow = 10;  // maximum number of chart window 
       crRetic = 5;
       jd2000 =2451545.0 ;
       jd1950 =2433282.4235;
@@ -65,11 +65,11 @@ const version = 'Version 3 alpha 0.0.3';
       FovMin = 5*secarc;  // 5"
       FovMax = pi2;
       DefaultPrtRes = 300;
-      DfColor : Starcolarray = (clBlack,$00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,clGray,clGray,clYellow,clGray,clSilver,clBlue,clRed,clSilver);
-      DfBWColor : Starcolarray = (clBlack,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite);
+      DfColor : Starcolarray = (clBlack,$00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,clGray,clGray,clYellow,clGray,clSilver,clBlue,clRed,clGreen);
+      DfBWColor : Starcolarray = (clBlack,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clBlack);
       DfRedColor : Starcolarray = (clBlack,$00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
-      DfWBColor : Starcolarray = (clWhite,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack);
-      dfskycolor : Tskycolor = ($00ffdc50,$00dca000,$00a02828,$00780000,$00640010,$003c0010,$00000000);
+      DfWBColor : Starcolarray = (clWhite,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clWhite);
+      dfskycolor : Tskycolor = ($00f03c3c,$00c83232,$00a02828,$00780000,$00640010,$003c0010,$00000000);
       crlf = chr(13)+chr(10);
       greek : array[1..2,1..24]of string=(('Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega'),
               ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
@@ -214,6 +214,9 @@ type
      Pdouble6 = ^double6;
      Tconstb = record ra,de : single; newconst:boolean; end;
      Tconstl = record ra1,de1,ra2,de2 : single; end;
+     TLabelAlign = (laNone,laTop,laBottom,laLeft,laRight,laCenter);
+     Thorizonlist = array [0..360] of single;
+     Phorizonlist = ^Thorizonlist;
 
      TGCatLst =  record
                     min, max, magmax : single;
@@ -265,6 +268,7 @@ type
                 ConstLnum,ConstBnum:integer;
                 ConstL: array of Tconstl;
                 ConstB : array of Tconstb;
+                horizonlist : Thorizonlist;
                 end;
      conf_skychart = record
                 // chart setting
@@ -287,16 +291,16 @@ type
                 LabelOrientation: integer;
                 // working variable
                 HorizonMax,rap2000,dep2000,RefractionOffset : Double;
-                WindowRatio,BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta: Double;
+                WindowRatio,BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta,x2: Double;
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,FindRA,FindDec,FindSize : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum : Double;
-                StarFilter,FindOK : boolean;
+                StarFilter,FindOK,WhiteBg : boolean;
                 EquinoxName,EquinoxDate,TrackName,FindName,FindDesc,FindNote : string;
-                horizonlist : array [0..360] of single;
                 PlanetLst : Tplanetlst;
+                horizonlist : Phorizonlist;
                 end;
      conf_plot = record
                 color : Starcolarray;
@@ -323,7 +327,7 @@ type
                 min_ma : double;
                 end;
      conf_main = record
-                prtname,language,ConstLfile, ConstBfile, EarthMapFile : string;
+                prtname,language,ConstLfile, ConstBfile, EarthMapFile, HorizonFile : string;
                 PrinterResolution,configpage,autorefreshdelay,MaxChildID : integer;
                 PrintColor,PrintLandscape :boolean;
                 maximized,updall,AutostartServer,keepalive,locked : boolean;
@@ -421,7 +425,7 @@ const
 
 // Chart Commands
 const
-     numcmd = 32;
+     numcmd = 38;
      cmdlist: array[1..numcmd,1..2] of string=(
      ('ZOOM+','1'),
      ('ZOOM-','2'),
@@ -454,10 +458,17 @@ const
      ('DATE','29'),
      ('OBSL','30'),
      ('IDCURSOR','31'),
-     ('SAVEIMG','32')
+     ('SAVEIMG','32'),
+     ('SETNORTH','33'),
+     ('SETSOUTH','34'),
+     ('SETEAST','35'),
+     ('SETWEST','36'),
+     ('SETZENITH','37'),
+     ('ALLSKY','38')
      );
 
 // World cities
+// must equate cities.h
 const
    COUNTRIES      = 234;  // number of countries
    MAX_CITY_LENGTH= 120;  // length of longest city name (including '\0')

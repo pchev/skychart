@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_catalog, cu_planet, u_constant, u_util, blcksock, libc,
+uses cu_catalog, cu_planet, u_constant, u_util, blcksock, libc, Math,
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
      QStdCtrls, IniFiles, Types;
@@ -172,11 +172,7 @@ type
     ToolButton24: TToolButton;
     ToolButton25: TToolButton;
     ToolButton26: TToolButton;
-    ToolButton27: TToolButton;
-    ToolButton28: TToolButton;
     SaveDialog: TSaveDialog;
-    ToolButton29: TToolButton;
-    ToolButton30: TToolButton;
     switchstars: TAction;
     switchbackground: TAction;
     SaveImage: TAction;
@@ -185,6 +181,35 @@ type
     ViewInformation1: TMenuItem;
     topmessage: TMenuItem;
     N4: TMenuItem;
+    popupProj: TPopupMenu;
+    Equatorial1: TMenuItem;
+    AltAz1: TMenuItem;
+    Galactic1: TMenuItem;
+    Ecliptic1: TMenuItem;
+    ToolButton31: TToolButton;
+    ToolButton32: TToolButton;
+    toN: TAction;
+    toE: TAction;
+    toS: TAction;
+    toW: TAction;
+    toZenith: TAction;
+    allSky: TAction;
+    ToolButton27: TToolButton;
+    ToolButton28: TToolButton;
+    ToolButton33: TToolButton;
+    ToolButton34: TToolButton;
+    ToolButton35: TToolButton;
+    ToolButton36: TToolButton;
+    ToolButton37: TToolButton;
+    ToolButton38: TToolButton;
+    TimeInc: TAction;
+    TimeDec: TAction;
+    TimeReset: TAction;
+    TimeVal: TSpinEdit;
+    TimeU: TComboBox;
+    ToolButton29: TToolButton;
+    ToolButton30: TToolButton;
+    ToolButton39: TToolButton;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -224,6 +249,15 @@ type
     procedure switchbackgroundExecute(Sender: TObject);
     procedure SaveImageExecute(Sender: TObject);
     procedure ViewInfoExecute(Sender: TObject);
+    procedure popupProjClick(Sender: TObject);
+    procedure toNExecute(Sender: TObject);
+    procedure toEExecute(Sender: TObject);
+    procedure toSExecute(Sender: TObject);
+    procedure toWExecute(Sender: TObject);
+    procedure toZenithExecute(Sender: TObject);
+    procedure allSkyExecute(Sender: TObject);
+    procedure TimeIncExecute(Sender: TObject);
+    procedure TimeResetExecute(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
@@ -255,6 +289,7 @@ type
     Procedure UpdateBtn(fx,fy:integer);
     Procedure LoadConstL(fname:string);
     Procedure LoadConstB(fname:string);
+    Procedure LoadHorizon(fname:string);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
     Function ListChart:string;
@@ -306,6 +341,7 @@ activecontrol:=nil;
 end;
 
 // End of Linux specific CLX code:
+
 
 end.
 

@@ -16,6 +16,7 @@ object f_chart: Tf_chart
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
