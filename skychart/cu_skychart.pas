@@ -1517,7 +1517,7 @@ Fplot.cnv.Brush.Style:=bsClear;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.drawpen;
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.fontscale;
 if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('22h22m');
@@ -1648,7 +1648,7 @@ Fplot.cnv.Brush.Style:=bsClear;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.drawpen;
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.fontscale;
 if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');
@@ -1809,7 +1809,7 @@ Fplot.cnv.Brush.Style:=bsClear;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.drawpen;
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.fontscale;
 if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');
@@ -1937,7 +1937,7 @@ Fplot.cnv.Brush.Style:=bsClear;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.drawpen;
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.fontscale;
 if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');

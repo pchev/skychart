@@ -48,7 +48,7 @@ OutputDir=/home/cdc
 UnitOutputDir=../dcu/
 PackageDLLOutputDir=
 PackageDCPOutputDir=
-SearchPath=library/catalog:component/enhedits:component/mydb:component/synapse:component/zoomimage
+SearchPath=library/catalog:component/enhedits:component/mydb:component/synapse/source/lib:component/zoomimage
 Packages=rtl:visualclx
 Conditionals=
 DebugSourceDirs=
@@ -62,10 +62,11 @@ UseLauncher=0
 DebugCWD=
 
 [HistoryLists\hlSearchPath]
-Count=3
-Item0=library/catalog:component/enhedits:component/mydb:component/synapse:component/zoomimage
-Item1=library/catalog:component/enhedits:component/foldrdg:component/mydb:component/synapse:component/zoomimage
-Item2=library/catalog
+Count=4
+Item0=library/catalog:component/enhedits:component/mydb:component/synapse/source/lib:component/zoomimage
+Item1=library/catalog:component/enhedits:component/mydb:component/synapse:component/zoomimage
+Item2=library/catalog:component/enhedits:component/foldrdg:component/mydb:component/synapse:component/zoomimage
+Item3=library/catalog
 
 [HistoryLists\hlUnitOutputDirectory]
 Count=1

@@ -240,6 +240,7 @@ try
     sc.plot.cnv:=Printer.canvas;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 75]);
+    sc.plot.cfgchart.fontscale:=1;
     sc.plot.init(Printer.pagewidth,Printer.pageheight);
     sc.Refresh;
     Printer.EndDoc;
@@ -259,6 +260,7 @@ try
     sc.plot.cnv:=prtbmp.canvas;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 75]);
+    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawpen; // because we cannot set a dpi property for the bitmap
     sc.plot.init(prtbmp.width,prtbmp.height);
     sc.Refresh;
     // convert the bitmap to Postscript
@@ -302,6 +304,7 @@ try
     sc.plot.cnv:=prtbmp.canvas;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 75]);
+    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawpen; // because we cannot set a dpi property for the bitmap
     sc.plot.init(prtbmp.width,prtbmp.height);
     sc.Refresh;
     // save the bitmap
@@ -328,6 +331,7 @@ finally
  sc.plot.cnv:=Image1.canvas;
  sc.plot.cfgchart.onprinter:=false;
  sc.plot.cfgchart.drawpen:=1;
+ sc.plot.cfgchart.fontscale:=1;
  Image1.Picture.Bitmap.Width:=Image1.width;
  Image1.Picture.Bitmap.Height:=Image1.Height;
  sc.plot.init(Image1.width,Image1.height);
@@ -1611,6 +1615,8 @@ sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=1/sc.cfgsc.BxGlb; // search a 1 pixel radius
 sc.FindatRaDec(ra,dec,dx);
-if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption);
-identlabelClick(Self);
+if sc.cfgsc.FindDesc>'' then begin
+   if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption);
+   identlabelClick(Self);
+end;   
 end;

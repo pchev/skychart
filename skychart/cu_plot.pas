@@ -130,6 +130,7 @@ begin
  cfgchart.min_ma:=6;
  cfgchart.onprinter:=false;
  cfgchart.drawpen:=1;
+ cfgchart.fontscale:=1;
  for i:=1 to maxlabels do begin
     labels[i]:=Tlabel.Create((AOwner as Timage).parent);
     labels[i].parent:=(AOwner as Timage).parent;
@@ -984,6 +985,7 @@ end;
 
 Procedure TSplot.PlotComet(xx,yy,cxx,cyy,symbol: integer; ma,diam,PixScale : Double);
 var ds:integer;
+    x,y,a,r : double;
 begin
 with cnv do begin
    Pen.Color := cfgplot.Color[0];
@@ -991,9 +993,12 @@ with cnv do begin
    Pen.Mode := pmCopy;
    Brush.Color := cfgplot.Color[21];
    Brush.style:=bsSolid;
+   x:=cxx-xx;
+   y:=cyy-yy;
+   if (symbol=1)and(x=0)and(y=0) then symbol:=0;  // force symbol if no tail
    case symbol of
    0: begin
-        ds:=3*cfgchart.drawpen;
+        ds:=2*cfgchart.drawpen;
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
         Pen.Color := cfgplot.Color[21];
         moveto(xx,yy);
@@ -1014,15 +1019,22 @@ with cnv do begin
         ds:=ds+cfgchart.drawpen;
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
         Brush.style:=bsSolid;
-        if (cxx=xx)and(cyy=yy) then begin
-           PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,xx-3*ds+cfgchart.drawpen,yy-3*ds+cfgchart.drawpen,cfgplot.Color[0],2);
-           PlotLine(xx,yy,xx-3*ds,yy-3*ds,cfgplot.Color[21],1);
-        end else begin
-           PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],2);
-           PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
-        end;
-        PlotLine(xx,yy,cxx-4*ds,cyy-2*ds,cfgplot.Color[21],1);
-        PlotLine(xx,yy,cxx-2*ds,cyy-4*ds,cfgplot.Color[21],1);
+        r:=sqrt(x*x+y*y);
+        r:=maxvalue([r,12*cfgchart.drawpen]);
+        a:=arctan2(y,x);
+        cxx:=xx+round(r*cos(a));
+        cyy:=yy+round(r*sin(a));
+        PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],1);
+        PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
+        r:=0.9*r;
+        cxx:=xx+round(r*cos(a+0.18));
+        cyy:=yy+round(r*sin(a+0.18));
+        PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],1);
+        PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
+        cxx:=xx+round(r*cos(a-0.18));
+        cyy:=yy+round(r*sin(a-0.18));
+        PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],1);
+        PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
       end;
    end;
 end;
@@ -1041,7 +1053,7 @@ with cnv do begin
   Font.Name:=cfgplot.FontName[fontnum];
   if cfgplot.backgroundcolor=clWhite then Font.Color:=clBlack
      else Font.Color:=cfgplot.LabelColor[labelnum];
-  Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.drawpen;
+  Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
   ts:=cnv.TextExtent(txt);
@@ -1103,7 +1115,7 @@ Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Font.Name:=cfgplot.FontName[fontnum];
 Font.Color:=color;
-Font.Size:=cfgplot.FontSize[fontnum]*cfgchart.drawpen;
+Font.Size:=cfgplot.FontSize[fontnum]*cfgchart.fontscale;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
 if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
 ts:=cnv.TextExtent(txt);
