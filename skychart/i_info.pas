@@ -210,7 +210,7 @@ begin
 try
 Savedialog1.DefaultExt:='.csv';
 Savedialog1.filter:='Tab Separated File (*.csv)|*.csv';
-Savedialog1.Initialdir:='';
+Savedialog1.Initialdir:=privatedir;
 if SaveDialog1.Execute then
    memo1.Lines.SavetoFile(savedialog1.Filename);
 finally

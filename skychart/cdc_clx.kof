@@ -74,7 +74,8 @@ Count=1
 Item0=../dcu/
 
 [HistoryLists\hlOutputDirectorry]
-Count=2
+Count=3
 Item0=/home/cdc
-Item1=../../
+Item1=/home/pch
+Item2=../../
 

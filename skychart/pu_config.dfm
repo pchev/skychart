@@ -165,7 +165,7 @@ object f_config: Tf_config
     Top = 16
     Width = 490
     Height = 455
-    ActivePage = s_display
+    ActivePage = s_catalog
     TabOrder = 9
     object s_time: TTabSheet
       Caption = 's_time'
@@ -618,7 +618,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_observatory
+        ActivePage = t_horizon
         Align = alClient
         TabOrder = 0
         object t_observatory: TTabSheet
@@ -1623,7 +1623,7 @@ object f_config: Tf_config
               Width = 233
               Height = 21
               AutoComplete = False
-              ItemHeight = 0
+              ItemHeight = 13
               TabOrder = 0
               Text = '...'
               OnChange = citylistChange
@@ -1645,7 +1645,7 @@ object f_config: Tf_config
               Height = 21
               AutoComplete = False
               Style = csDropDownList
-              ItemHeight = 0
+              ItemHeight = 13
               TabOrder = 2
               OnClick = countrylistClick
             end
@@ -3973,7 +3973,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_catalog
+        ActivePage = t_cdcstar
         Align = alClient
         TabOrder = 0
         object t_catalog: TTabSheet
@@ -7070,7 +7070,7 @@ object f_config: Tf_config
                   Width = 281
                   Height = 21
                   Style = csDropDownList
-                  ItemHeight = 0
+                  ItemHeight = 13
                   TabOrder = 0
                 end
                 object DelCom: TButton
@@ -7652,7 +7652,7 @@ object f_config: Tf_config
                   Width = 281
                   Height = 21
                   Style = csDropDownList
-                  ItemHeight = 0
+                  ItemHeight = 13
                   TabOrder = 0
                 end
                 object delast: TButton
@@ -10053,7 +10053,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_telescope
+        ActivePage = t_system
         Align = alClient
         TabOrder = 0
         object t_system: TTabSheet
@@ -10198,6 +10198,120 @@ object f_config: Tf_config
               Caption = 'Comet Setting'
               TabOrder = 9
               OnClick = CometDBClick
+            end
+          end
+          object GroupBoxDir: TGroupBox
+            Left = 16
+            Top = 216
+            Width = 441
+            Height = 105
+            Caption = 'Directory'
+            TabOrder = 1
+            object Label156: TLabel
+              Left = 8
+              Top = 24
+              Width = 68
+              Height = 13
+              Caption = 'Program Data '
+            end
+            object Label157: TLabel
+              Left = 8
+              Top = 68
+              Width = 65
+              Height = 13
+              Caption = 'Personal data'
+            end
+            object prgdir: TEdit
+              Left = 104
+              Top = 20
+              Width = 233
+              Height = 21
+              TabOrder = 0
+            end
+            object persdir: TEdit
+              Left = 104
+              Top = 64
+              Width = 233
+              Height = 21
+              TabOrder = 1
+            end
+            object BitBtn1: TBitBtn
+              Tag = 8
+              Left = 338
+              Top = 17
+              Width = 26
+              Height = 26
+              TabOrder = 2
+              TabStop = False
+              OnClick = BitBtn1Click
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                0000000000000000000000000000000000000000000000000000000000000000
+                00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+                7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+                CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+                CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+                7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+              Layout = blGlyphTop
+              Margin = 0
+            end
+            object BitBtn2: TBitBtn
+              Tag = 8
+              Left = 338
+              Top = 61
+              Width = 26
+              Height = 26
+              TabOrder = 3
+              TabStop = False
+              OnClick = BitBtn2Click
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                0000000000000000000000000000000000000000000000000000000000000000
+                00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+                7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+                CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+                CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+                7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+              Layout = blGlyphTop
+              Margin = 0
             end
           end
         end

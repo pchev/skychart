@@ -905,6 +905,13 @@ type
     RectangleGrid: TStringGrid;
     CenterMark1: TCheckBox;
     CenterMark2: TCheckBox;
+    GroupBoxDir: TGroupBox;
+    Label73: TLabel;
+    Label74: TLabel;
+    prgdir: TEdit;
+    persdir: TEdit;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1104,6 +1111,8 @@ type
     procedure RectangleGridSetEditText(Sender: TObject; ACol, ARow: Integer;
       const Value: WideString);
     procedure CenterMark1Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -1153,7 +1162,7 @@ type
     procedure CenterObs;
     procedure ShowHorizon;
     procedure ShowObjList;
-    procedure ShowDB;
+    procedure ShowSYS;
     procedure ShowAsteroid;
     procedure UpdAstList;
     procedure ShowComet;

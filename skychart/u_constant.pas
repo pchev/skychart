@@ -189,12 +189,14 @@ const cdcversion = 'Version 3 alpha 0.0.6';
 
 {$ifdef linux}
       DefaultFontName='Helvetica';
-      DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts 
+      DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
       DefaultFontSize=10;
-      Defaultconfigfile='~/.cartesduciel.ini';     // to user home directory
+      DefaultPrivateDir='~/cartes_du_ciel';
+      Defaultconfigfile='~/.cartesduciel.ini';
+      SharedDir='/usr/share/apps/skychart';
       DefaultPrintCmd1='kghostview';
       DefaultPrintCmd2='gimp';
-      DefaultTmpPath='~/';
+      DefaultTmpPath=DefaultPrivateDir;
       key_cr = 4100;
       key_plus =43;
       key_minus=45;
@@ -212,10 +214,11 @@ const cdcversion = 'Version 3 alpha 0.0.6';
       DefaultFontName='Arial';
       DefaultFontSymbol='Symbol';
       DefaultFontSize=8;
+      DefaultPrivateDir='';
       Defaultconfigfile='cartesduciel.ini';      // to user profile directory or C:\windows
       DefaultPrintCmd1='gsview32.exe';
       DefaultPrintCmd2='mspaint.exe';
-      DefaultTmpPath='C:\temp';
+      DefaultTmpPath='C:\';
       key_cr   =13;
       key_plus =107;
       key_minus=109;
@@ -422,7 +425,7 @@ type double8 = array[1..8] of double;
      TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
 
 
-Var  Appdir, Configfile: string;         // pseudo-constant only here
+Var  Appdir, PrivateDir, SampleDir, Configfile: string;         // pseudo-constant only here
      ldeg,lmin,lsec : string;
 {$ifdef linux}
      tracefile:string =''; // to stdout

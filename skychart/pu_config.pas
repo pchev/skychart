@@ -907,6 +907,13 @@ type
     TelescopePlugin: TGroupBox;
     telescopepluginlist: TComboBox;
     Label155: TLabel;
+    GroupBoxDir: TGroupBox;
+    Label156: TLabel;
+    prgdir: TEdit;
+    Label157: TLabel;
+    persdir: TEdit;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1110,6 +1117,8 @@ type
       ARow: Integer; const Value: String);
     procedure TelescopeSelectClick(Sender: TObject);
     procedure telescopepluginlistChange(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -1157,7 +1166,7 @@ type
     procedure CenterObs;
     procedure ShowHorizon;
     procedure ShowObjList;
-    procedure ShowDB;
+    procedure ShowSYS;
     procedure ShowAsteroid;
     procedure UpdAstList;
     procedure ShowComet;
@@ -1235,6 +1244,7 @@ csc.ScopePlugin:=telescopepluginlist.text;
 end;
 
 // end of windows vcl specific code:
+
 
 end.
 
