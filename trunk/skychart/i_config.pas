@@ -2056,6 +2056,7 @@ try
      msg:=trim(db.GetLastError);
      if msg<>'' then showmessage(msg);
   end;
+  db.Query('FLUSH TABLES');
   db.Free;
 except
 db.Free;
@@ -2216,7 +2217,7 @@ if db.Active then begin
   end;
   MemoMPC.lines.add('Data start on line '+inttostr(nl+1));
   prefl:=nl;
-  db.Query('LOCK TABLES cdc_ast_elem WRITE;');
+  db.Query('LOCK TABLES cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_name WRITE');
   nerr:=0;
   nl:=0;
   repeat
@@ -2255,7 +2256,8 @@ if db.Active then begin
        buf:=db.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
        if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
                    else filenum:='1';
-       db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
+       if not db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")') then
+              MemoMPC.lines.add(trim(db.GetLastError));
     end;
     cmd:='INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
         +'"'+id+'"'
@@ -2280,6 +2282,10 @@ if db.Active then begin
           break;
        end;
     end;
+    cmd:='INSERT INTO cdc_ast_name (name, id) VALUES ('
+        +'"'+nam+'"'
+        +',"'+id+'"'+')';
+    db.query(cmd);
     if astlimitbox.checked and (nl>=astlimit.value) then break;
   until eof(f);
   closefile(f);
@@ -2290,6 +2296,7 @@ end else begin
 end;
   screen.cursor:=crDefault;
   db.Query('UNLOCK TABLES');
+  db.Query('FLUSH TABLES');
   db.Free;
   UpdAstList;
 if nerr=0 then begin
@@ -2354,12 +2361,18 @@ if db.Active then begin
         +',"'+nam+'"'
         +',"'+eq+'"'
         +',"'+filenum+'"'+')';
-    if db.query(cmd) then ShowMessage('OK!')
-                     else ShowMessage('Insert failed! '+trim(db.GetLastError));
+    if db.query(cmd) then begin
+       cmd:='INSERT INTO cdc_ast_name (name, id) VALUES ('
+           +'"'+nam+'"'
+           +',"'+id+'"'+')';
+       db.query(cmd);
+       ShowMessage('OK!')
+    end else ShowMessage('Insert failed! '+trim(db.GetLastError));
 end else begin
    buf:=trim(db.GetLastError);
    if buf<>'' then showmessage(buf);
 end;
+db.Query('FLUSH TABLES');
 db.Free;
 UpdAstList;
 except
@@ -2396,6 +2409,7 @@ if db.Active then begin
   if not db.Query('Delete from cdc_ast_mag where elem_id='+elem_id) then
      delastMemo.lines.add('Failed : '+trim(db.GetLastError));
   db.Query('UNLOCK TABLES');
+  db.Query('FLUSH TABLES');
   delastMemo.lines.add('Delete daily data');
   f_main.planet.TruncateDailyTables;
   delastMemo.lines.add('Delete completed');
@@ -2428,6 +2442,10 @@ if db.Active then begin
   delastMemo.lines.add('Delete from element list...');
   application.processmessages;
   if not db.Query('Truncate table cdc_ast_elem_list') then
+     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delastMemo.lines.add('Delete from name list...');
+  application.processmessages;
+  if not db.Query('Truncate table cdc_ast_name') then
      delastMemo.lines.add('Failed : '+trim(db.GetLastError));
   delastMemo.lines.add('Delete from monthly table...');
   application.processmessages;
@@ -2469,6 +2487,7 @@ if db.Active then begin
   if not db.Query('Delete from cdc_ast_mag where jd<'+jds) then
      delastMemo.lines.add('Failed : '+trim(db.GetLastError));
   db.Query('UNLOCK TABLES');
+  db.Query('FLUSH TABLES');
   delastMemo.lines.add('Delete completed');
 end;
   screen.cursor:=crDefault;

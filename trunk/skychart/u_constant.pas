@@ -510,8 +510,10 @@ create_table_ast_day_pos='( id varchar(7) NOT NULL default "", epoch double NOT 
                          'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
                          'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag),'+
                          'UNIQUE KEY name (id,epoch)) TYPE=MyISAM';
-numsqltable=3;
+numsqltable=4;
 sqltable : array[1..numsqltable,1..2] of string =(
+           ('cdc_ast_name',' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'+
+                           'PRIMARY KEY (id)) TYPE=MyISAM'),
            ('cdc_ast_elem_list',' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'+
                            'PRIMARY KEY (elem_id)) TYPE=MyISAM'),
            ('cdc_ast_elem',' ( id varchar(7) binary NOT NULL default "0",'+
