@@ -46,7 +46,6 @@ type
      FOnPaint: TNotifyEvent;
      FOnPosChange: TNotifyEvent;
      procedure SetPicture(Value: TPicture);
-     procedure PictureChange(Sender: TObject);
   protected
     { Protected declarations }
     procedure Paint; override;
@@ -54,6 +53,7 @@ type
     { Public declarations }
      constructor Create(Aowner:Tcomponent); override;
      destructor Destroy; override;
+     procedure PictureChange(Sender: TObject);
   published
     { Published declarations }
      procedure Draw;
@@ -117,6 +117,7 @@ if FPicture.Width=0 then raise exception.create('Invalid image!');
 FSizeX:=FPicture.Width;
 FSizeY:=FPicture.Height;
 FZoomMin:=Width / FSizeX;
+if FZoomMax<=FZoomMin then FZoomMax:=FZoomMin+1;
 end;
 
 procedure TZoomImage.PictureChange(Sender: TObject);
@@ -131,6 +132,7 @@ FBitmap.Height:=FSizeY;
 FBitmap.Canvas.Draw(0,0,FPicture.Graphic);
 {$endif}
 FZoomMin:=Width / FSizeX;
+if FZoomMax<=FZoomMin then FZoomMax:=FZoomMin+1;
 FZoom:=ZoomMin;
 Draw;
 end;
