@@ -2,7 +2,7 @@ unit cu_fits;
 
 interface
 
-uses u_util, u_constant, u_projection, SysUtils, Classes, Math, passql, pasmysql,
+uses u_util, u_constant, u_projection, SysUtils, Classes, Math, passql, pasmysql, StrUtils,
 {$ifdef mswindows}
 Windows,  Graphics;
 {$endif}
@@ -14,7 +14,7 @@ type Tfitsheader = record
                 bitpix,naxis,naxis1,naxis2,naxis3 : integer;
                 bzero,bscale,dmax,dmin,blank,equinox : double;
                 ctype1,ctype2,radecsys : string;
-                rotaok,cdok,pcok,valid : boolean;
+                rotaok,cdok,pcok,valid,coordinate_valid : boolean;
                 crpix1,crpix2,crval1,crval2,cdelt1,cdelt2,crota1,crota2 : double;
                 cd1_1,cd1_2,cd2_1,cd2_2 : double;
                 pc : array[1..2,1..2] of double;
@@ -61,7 +61,9 @@ type
      destructor  Destroy; override;
      Function ConnectDB(host,db,user,pass:string; port:integer):boolean;
      Function OpenDB(catalogname:string; ra1,ra2,dec1,dec2:double):boolean;
-     Function GetDB(var filename:string; var ra,de,width,height,rot:double):boolean;
+     Function GetDB(var filename,objname:string; var ra,de,width,height,rot:double):boolean;
+     Function DeleteDB(cname,oname: string):boolean;
+     Function InsertDB(fname,cname,oname: string; ra,de,width,height,rotation:double):boolean;
      Function GetFileName(catname,objectname:string; var filename:string):boolean;
      Procedure GetAllHeader(var result:Tstringlist);
      procedure GetBitmap(var imabmp:Tbitmap);
@@ -101,7 +103,8 @@ procedure TFits.SetFile(value:string);
 begin
 try
 Fheader.valid:=false;
-if fileexists(value) then begin
+Fheader.coordinate_valid:=false;
+if fileexists(value) and (rightstr(value,1)<>PathDelim) then begin
  cur_axis:=1;
  setlength(imar64,0,0,0);
  setlength(imar32,0,0,0);
@@ -157,6 +160,7 @@ filemode:=0;
 assignfile(f,FFileName);
 reset(f,1);
 with FHeader do begin
+coordinate_valid:=false;
 valid:=false;eoh:=false; naxis1:=0 ; naxis2:=0 ; naxis3:=1; bitpix:=0 ; dmin:=0 ; dmax := 0; blank:=0;
 bzero:=0 ; bscale:=1;
 ctype1:='' ;ctype2:='';
@@ -241,6 +245,7 @@ var   cmethod : integer;
       cosr,sinr : extended;
       buf : string;
 begin
+Fheader.coordinate_valid:=false;
 Fimg_width:=0; Fimg_Height:=0;
 if (copy(Fheader.ctype1,2,4)='RA--')and(copy(Fheader.ctype2,2,4)='DEC-') then begin
   buf:=copy(Fheader.ctype1,6,4);
@@ -255,8 +260,8 @@ if (copy(Fheader.ctype1,2,4)='RA--')and(copy(Fheader.ctype2,2,4)='DEC-') then be
   else
   if Fheader.rotaok then cmethod:=3
   else cmethod:=99;
-  ic:=Fheader.naxis1/2 - Fheader.crpix1;
-  jc:=Fheader.naxis2/2 - Fheader.crpix2;
+  ic:=Fheader.naxis1/2 - Fheader.crpix1+0.5;
+  jc:=Fheader.naxis2/2 - Fheader.crpix2+0.5;
   case cmethod of
   1 : begin
         x:=Fheader.pc[1,1]*ic + Fheader.pc[1,2]*jc;
@@ -268,6 +273,7 @@ if (copy(Fheader.ctype1,2,4)='RA--')and(copy(Fheader.ctype2,2,4)='DEC-') then be
         Frotation:=-(x+y)/2;
         Fimg_width:=deg2rad*abs(Fheader.naxis1*Fheader.cdelt1);
         Fimg_Height:=deg2rad*abs(Fheader.naxis2*Fheader.cdelt2);
+        Fheader.coordinate_valid:=true;
       end;
   2 : begin
         x:=Fheader.cd1_1*ic + Fheader.cd1_2*jc;
@@ -280,6 +286,7 @@ if (copy(Fheader.ctype1,2,4)='RA--')and(copy(Fheader.ctype2,2,4)='DEC-') then be
         Frotation:=-y;
         Fimg_width:=deg2rad*abs(Fheader.naxis1*Fheader.cd1_1);
         Fimg_Height:=deg2rad*abs(Fheader.naxis2*Fheader.cd2_2);
+        Fheader.coordinate_valid:=true;
       end;
   3 : begin
         Frotation:=-Fheader.crota2*deg2rad;
@@ -290,6 +297,7 @@ if (copy(Fheader.ctype1,2,4)='RA--')and(copy(Fheader.ctype2,2,4)='DEC-') then be
         Fra:=deg2rad*(Fheader.crval1 + x/cos(Fde) );
         Fimg_width:=deg2rad*abs(Fheader.naxis1*Fheader.cdelt1);
         Fimg_Height:=deg2rad*abs(Fheader.naxis2*Fheader.cdelt2);
+        Fheader.coordinate_valid:=true;
       end;
   else Fimg_width:=0;
   end;
@@ -731,7 +739,7 @@ else begin
    r2:=formatfloat(f5,ra2);
    d1:=formatfloat(f5,dec1);
    d2:=formatfloat(f5,dec2);
-   qry:='SELECT filename,ra,de,width,height,rotation from cdc_fits where '+
+   qry:='SELECT filename,objectname,ra,de,width,height,rotation from cdc_fits where '+
         'catalogname="'+uppercase(catalogname)+'" and ';
    if ra2>ra1 then begin
       qry:=qry+' ra>'+r1+' and '+
@@ -749,17 +757,18 @@ else begin
 end;
 end;
 
-Function TFits.GetDB(var filename:string; var ra,de,width,height,rot:double):boolean;
+Function TFits.GetDB(var filename,objname:string; var ra,de,width,height,rot:double):boolean;
 begin
 inc(current_result);
 try
 if current_result < db1.RowCount then begin
   filename:=db1.Results[current_result][0];
-  ra:=strtofloat(db1.Results[current_result][1]);
-  de:=strtofloat(db1.Results[current_result][2]);
-  width:=strtofloat(db1.Results[current_result][3]);
-  height:=strtofloat(db1.Results[current_result][4]);
-  rot:=strtofloat(db1.Results[current_result][5]);
+  objname:=db1.Results[current_result][1];
+  ra:=strtofloat(db1.Results[current_result][2]);
+  de:=strtofloat(db1.Results[current_result][3]);
+  width:=strtofloat(db1.Results[current_result][4]);
+  height:=strtofloat(db1.Results[current_result][5]);
+  rot:=strtofloat(db1.Results[current_result][6]);
   result:=true;
 end
 else result:=false;
@@ -776,6 +785,38 @@ else begin
         'catalogname="'+uppercase(trim(catname))+'" and '+
         'objectname="'+uppercase(stringreplace(objectname,' ','',[rfReplaceAll]))+'" ');
   result:=filename<>'';
+end;
+end;
+
+Function TFits.InsertDB(fname,cname,oname: string; ra,de,width,height,rotation:double):boolean;
+var cmd:string;
+begin
+if not db1.Active then result:=false
+else begin
+      oname:=uppercase(stringreplace(oname,' ','',[rfReplaceAll]));
+      cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
+        +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
+        +',"'+uppercase(cname)+'"'
+        +',"'+uppercase(oname)+'"'
+        +',"'+formatfloat(f5,ra)+'"'
+        +',"'+formatfloat(f5,de)+'"'
+        +',"'+formatfloat(f5,width)+'"'
+        +',"'+formatfloat(f5,height)+'"'
+        +',"'+formatfloat(f5,rotation)+'"'
+        +')';
+      result:= db1.query(cmd);
+end;
+end;
+
+Function TFits.DeleteDB(cname,oname: string):boolean;
+var cmd:string;
+begin
+if not db1.Active then result:=false
+else begin
+      oname:=uppercase(stringreplace(oname,' ','',[rfReplaceAll]));
+      cname:=uppercase(cname);
+      cmd:='DELETE FROM cdc_fits WHERE catalogname="'+cname+'" AND objectname="'+oname+'"';
+      result:= db1.query(cmd);
 end;
 end;
 

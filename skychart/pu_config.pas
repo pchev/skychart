@@ -945,6 +945,13 @@ type
     ShowImagesBox: TCheckBox;
     Shape28: TShape;
     Label269: TLabel;
+    t_background: TTabSheet;
+    Label270: TLabel;
+    Label271: TLabel;
+    backimg: TEdit;
+    BitBtn5: TBitBtn;
+    ShowBackImg: TCheckBox;
+    backimginfo: TLabel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1164,6 +1171,9 @@ type
     procedure ImgLumBarChange(Sender: TObject);
     procedure ImgContrastBarChange(Sender: TObject);
     procedure ShowImagesBoxClick(Sender: TObject);
+    procedure backimgChange(Sender: TObject);
+    procedure ShowBackImgClick(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
