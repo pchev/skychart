@@ -1,5 +1,5 @@
 object f_config: Tf_config
-  Left = 228
+  Left = 232
   Top = 129
   Width = 636
   Height = 518
@@ -6761,9 +6761,9 @@ object f_config: Tf_config
             object aststrtdate: TMaskEdit
               Left = 72
               Top = 32
-              Width = 65
+              Width = 62
               Height = 21
-              EditMask = '!9999/99;1;_'
+              EditMask = '!9999.99;1;_'
               MaxLength = 7
               TabOrder = 0
               Text = '2003.11'
@@ -6884,12 +6884,12 @@ object f_config: Tf_config
             object astdeldate: TMaskEdit
               Left = 232
               Top = 20
-              Width = 65
+              Width = 62
               Height = 21
-              EditMask = '!9999/99;1;_'
+              EditMask = '!9999.99;1;_'
               MaxLength = 7
               TabOrder = 0
-              Text = '2000. 1'
+              Text = '2002.11'
             end
             object deldateast: TButton
               Left = 328

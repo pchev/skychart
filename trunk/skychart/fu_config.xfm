@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 408
-  Top = 346
+  Left = 411
+  Top = 345
   Width = 639
   Height = 480
   HorzScrollBar.Range = 626
@@ -6658,7 +6658,7 @@ object f_config: Tf_config
               Top = 32
               Width = 65
               Height = 26
-              EditMask = '!9999/99;1;_'
+              EditMask = '!9999.99;1;_'
               MaxLength = 7
               TabOrder = 0
               Text = '2003.11'
@@ -6802,10 +6802,10 @@ object f_config: Tf_config
               Top = 20
               Width = 65
               Height = 26
-              EditMask = '!9999/99;1;_'
+              EditMask = '!9999.99;1;_'
               MaxLength = 7
               TabOrder = 0
-              Text = '2000. 1'
+              Text = '2000.01'
             end
             object deldateast: TButton
               Left = 328
