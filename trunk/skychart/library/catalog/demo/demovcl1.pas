@@ -174,7 +174,7 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
 // Initialize the library with the caching flag
-InitCat(true);
+InitCat(0,true);
 end;
 
 end.

@@ -176,7 +176,7 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
 decimalseparator:='.';
 // Initialize the library with the caching flag
-InitCat(true);
+InitCat(0,true);
 {$ifdef linux}
 edit1.Text:='/mnt/win_d/ciel/cat/bsc5';
 {$endif}

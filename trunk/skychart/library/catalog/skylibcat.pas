@@ -23,7 +23,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 uses   gscconst,SysUtils,Math;
 
-Procedure InitCat(Cache : boolean); stdcall;
+Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall;
+Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall;
 Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
 procedure GetADxy(x,y:Integer ; var a,d : Double);
 Function sgn(x:Double):Double ;
@@ -124,9 +125,10 @@ BEGIN
     Rmod := x - Int(x/y) * y ;
 END  ;
 
-Procedure InitCat(Cache : boolean);
+Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall;
 begin
 UseCache:=Cache;
+// HND is no more used, keep for compatibility with previous version
 end;
 
 Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
@@ -1052,6 +1054,10 @@ result:=trim(nom);
 if copy(result,length(nom),1)<>slashchar then result:=result+slashchar;
 end;
 
+Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall;
+begin
+// no more used, added for compatibility with previous version
+end;
+
 end.
 
- 

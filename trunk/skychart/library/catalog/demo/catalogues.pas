@@ -11,7 +11,11 @@ const lib_catalog='libcatalog.dll';
 
 {  Initialisation de la librarie 
    et indication de l'utilisation du cache de donnee (recommander si >=32 MB memoire}
-Procedure InitCat(cache : boolean); stdcall; external lib_catalog;
+Procedure InitCat(hnd : Cardinal; cache : boolean); stdcall; external lib_catalog;
+
+// no more used, added for compatibility with previous version
+Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall; external lib_catalog;
+
 
 { Initialisation de la fenetre d'ecran pour utiliser OpenXXXWin
  Il n'est pas necessaire d'appeler cette fonction pour OpenXXX
