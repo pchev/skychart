@@ -121,7 +121,7 @@ if UseCache then begin
    SetLength(cache[Ncache],1);
    Imax[Ncache]:=filesize(fsac)-1;
    Iread[Ncache]:=0;
-   SetLength(cache[Ncache],Imax[Ncache]+1);
+   SetLength(cache[Ncache],Imax[Ncache]+2);
 end;
 end;
 ok:=true;

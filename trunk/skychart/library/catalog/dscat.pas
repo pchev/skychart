@@ -273,7 +273,7 @@ if not OnCache then begin
    if Usecache then begin
       SetLength(cache,1);
       Imax:=filesize(fbase)-1;
-      SetLength(cache,Imax+1);
+      SetLength(cache,Imax+2);
    end;
 end;
 Icache:=0;

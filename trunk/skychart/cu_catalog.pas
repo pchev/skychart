@@ -116,7 +116,7 @@ type
      function FindObj(x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
      procedure GetAltName(rec: GCatrec; var txt: string);
      function CheckPath(cat: integer; catpath:string):boolean;
-     function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
+     function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:shortstring):boolean;
      function GetMaxField(path,cat: string):string;
   published
     { Published declarations }
@@ -1064,7 +1064,7 @@ repeat
 until result and (v=VerGCat);
 end;
 
-function Tcatalog.GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
+function Tcatalog.GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:shortstring):boolean;
 var GcatH : TCatHeader;
 begin
 SetGcatPath(path,shortname);

@@ -2063,12 +2063,11 @@ for i:=0 to Fcatalog.cfgshr.ConstBnum-1 do begin
   if Fcatalog.cfgshr.ConstB[i].newconst then x1:=maxint;
   precession(jd2000,cfgsc.JDChart,ra,de);
   projection(ra,de,xx,yy,true,cfgsc) ;
-  if (xx<199)and(xx<199) then begin
+  if (xx<199) then begin
     WindowXY(xx,yy,x2,y2,cfgsc);
-    if (intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2 then
-    if (x1<maxint)and(abs(xx)<dm)and(abs(yy)<dm) then begin
-       FPlot.PlotLine(x1,y1,x2,y2,color,1);
-    end;
+    if (x1<maxint)and(abs(xx)<dm)and(abs(yy)<dm) and
+       ((intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2) then
+           FPlot.PlotLine(x1,y1,x2,y2,color,1);
     x1:=x2;
     y1:=y2;
   end else x1:=maxint;

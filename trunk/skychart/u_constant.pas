@@ -237,12 +237,12 @@ type
             id:integer;
             x,y,r:smallint;
             labelnum,fontnum:byte;
-            txt:string;
+            txt:shortstring;
             end;
      Tmodlabel = record
             id,dx,dy:integer;
             labelnum,fontnum:byte;
-            txt: string;
+            txt: shortstring;
             hiden: boolean;
             end;
 
@@ -250,25 +250,25 @@ type
                     min, max, magmax : single;
                     cattype:integer;
                     Actif,CatOn : boolean;
-                    shortname, name, path, version : string;
+                    shortname, name, path, version : shortstring;
                  end;
      conf_catalog = record
                 GCatLst : array of TGCatLst;
                 GCatNum  : Integer;
                 StarmagMax,NebMagMax,NebSizeMin : double;            // limit to extract from catalog
-                StarCatPath : array [1..MaxStarCatalog] of string;   // path to each catalog
+                StarCatPath : array [1..MaxStarCatalog] of shortstring;   // path to each catalog
                 StarCatDef : array [1..MaxStarCatalog] of boolean;   // is the catalog defined
                 StarCatOn : array [1..MaxStarCatalog] of boolean;    // is the catalog used for current chart
                 StarCatField : array [1..MaxStarCatalog,1..2] of integer; // Field min and max the catalog is active
-                VarStarCatPath : array [1..MaxVarStarCatalog] of string;   // path to each catalog
+                VarStarCatPath : array [1..MaxVarStarCatalog] of shortstring;   // path to each catalog
                 VarStarCatDef : array [1..MaxVarStarCatalog] of boolean;   // is the catalog defined
                 VarStarCatOn : array [1..MaxVarStarCatalog] of boolean;    // is the catalog used for current chart
                 VarStarCatField : array [1..MaxVarStarCatalog,1..2] of integer; // Field min and max the catalog is active
-                DblStarCatPath : array [1..MaxDblStarCatalog] of string;   // path to each catalog
+                DblStarCatPath : array [1..MaxDblStarCatalog] of shortstring;   // path to each catalog
                 DblStarCatDef : array [1..MaxDblStarCatalog] of boolean;   // is the catalog defined
                 DblStarCatOn : array [1..MaxDblStarCatalog] of boolean;    // is the catalog used for current chart
                 DblStarCatField : array [1..MaxDblStarCatalog,1..2] of integer; // Field min and max the catalog is active
-                NebCatPath : array [1..MaxNebCatalog] of string;   // path to each catalog
+                NebCatPath : array [1..MaxNebCatalog] of shortstring;   // path to each catalog
                 NebCatDef : array [1..MaxNebCatalog] of boolean;   // is the catalog defined
                 NebCatOn : array [1..MaxNebCatalog] of boolean;    // is the catalog used for current chart
                 NebCatField : array [1..MaxNebCatalog,1..2] of integer; // Field min and max the catalog is active
@@ -289,10 +289,10 @@ type
                 DegreeGridSpacing : array [0..MaxField] of double;
                 EquinoxType : integer;
                 DefaultJDchart : double;
-                EquinoxChart : string;
+                EquinoxChart : shortstring;
                 AzNorth : Boolean;
-                llabel: array[1..NumLlabel] of string;
-                ConstelName: array[1..ConstelNum,1..2] of string; // constellation name and three letter abbrev.
+                llabel: array[1..NumLlabel] of shortstring;
+                ConstelName: array[1..ConstelNum,1..2] of shortstring; // constellation name and three letter abbrev.
                 ConstLnum,ConstBnum:integer;
                 ConstL: array of Tconstl;
                 ConstB : array of Tconstb;
