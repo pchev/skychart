@@ -75,9 +75,7 @@ Function GetTimeZone : double;
 Procedure FormPos(form : Tform; x,y : integer);
 
 var traceon : boolean;
-    ldeg,lmin,lsec : string;
-
-
+    
 implementation
 var
   dummy_double : double;
@@ -489,7 +487,9 @@ begin
        min:=min+1;
        sec:=0.0;
     end;
-    str(dd:3:0,d);
+    str(abs(dd):2:0,d);
+    if abs(dd)<10 then d:='0'+trim(d);
+    if dd<0 then d:='-'+d else d:=' '+d;
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:5:2,s);

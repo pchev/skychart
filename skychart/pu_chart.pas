@@ -126,6 +126,7 @@ type
     function  FormatDesc:string;
     procedure ShowIdentLabel;
     function  IdentXY(X, Y: Integer):boolean;
+    function  ListXY(X, Y: Integer):boolean;
     function  LongLabel(txt:string):string;
     function  LongLabelObj(txt:string):string;
     function  LongLabelGreek(txt : string) : string;
@@ -140,7 +141,8 @@ type
     function cmd_SetSkyMode(onoff:string):string;
     function cmd_SetProjection(proj:string):string;
     function cmd_SetFov(fov:string):string;
-    function cmd_SetRaDec(param:string):string;
+    function cmd_SetRa(param1:string):string;
+    function cmd_SetDec(param1:string):string;
     function cmd_SetDate(dt:string):string;
     function cmd_SetObs(obs:string):string;
     function cmd_IdentCursor:string;
@@ -152,17 +154,33 @@ type
     Procedure ZoomCursor(yy : double);
     function GetChartInfo:string;
     procedure SetField(field : double);
-    procedure SetZenit(field : double);
-    procedure SetAz(Az : double);
+    procedure SetZenit(field : double; redraw:boolean=true);
+    procedure SetAz(Az : double; redraw:boolean=true);
     procedure SetDate(y,m,d,h,n,s:integer);
     procedure SetJD(njd:double);
+    function cmd_GetProjection:string;
+    function cmd_GetSkyMode:string;
+    function cmd_GetNebMode:string;
+    function cmd_GetStarMode:string;
+    function cmd_GetGrid:string;
+    function cmd_GetGridEQ:string;
+    function cmd_GetCursorPosition :string;
+    function cmd_GetFov(format:string):string;
+    function cmd_GetRA(format:string):string;
+    function cmd_GetDEC(format:string):string;
+    function cmd_GetDate:string;
+    function cmd_GetObs:string;
+    function cmd_SetTZ(tz:string):string;
+    function cmd_GetTZ:string;
   end;
+
+function PosEx(const SubStr, S: string; Offset: Cardinal = 1): Integer;
 
 implementation
 
 {$R *.dfm}
 
-uses pu_main;
+uses pu_main, pu_info;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here
@@ -219,6 +237,37 @@ begin
     end;
     end
  else result:=false;
+end;
+
+function PosEx(const SubStr, S: string; Offset: Cardinal = 1): Integer;
+var
+  I,X: Integer;
+  Len, LenSubStr: Integer;
+begin
+  if Offset = 1 then
+    Result := Pos(SubStr, S)
+  else
+  begin
+    I := Offset;
+    LenSubStr := Length(SubStr);
+    Len := Length(S) - LenSubStr + 1;
+    while I <= Len do
+    begin
+      if S[I] = SubStr[1] then
+      begin
+        X := 1;
+        while (X < LenSubStr) and (S[I + X] = SubStr[X + 1]) do
+          Inc(X);
+        if (X = LenSubStr) then
+        begin
+          Result := I;
+          exit;
+        end;
+      end;
+      Inc(I);
+    end;
+    Result := 0;
+  end;
 end;
 
 // end of windows vcl specific code:

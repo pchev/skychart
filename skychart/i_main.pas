@@ -319,6 +319,21 @@ begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do rot_minusExecute(Sender);
 end;
 
+
+procedure Tf_main.ListObjExecute(Sender: TObject);
+var buf:widestring;
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+  sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf);
+  f_info.Memo1.text:=buf;
+  f_info.Memo1.selstart:=0;
+  f_info.Memo1.sellength:=0;
+  f_info.setpage(1);
+  f_info.source_chart:=caption;
+  f_info.show;
+end;
+end;
+
 procedure Tf_main.ChangeProjExecute(Sender: TObject);
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
@@ -567,9 +582,9 @@ end;
 procedure Tf_main.SetDefault;
 var i:integer;
 begin
-u_util.ldeg:='°';
-u_util.lmin:='''';
-u_util.lsec:='"';
+ldeg:='°';
+lmin:='''';
+lsec:='"';
 cfgm.MaxChildID:=0;
 cfgm.language:='UK';
 cfgm.prtname:='';
@@ -1284,9 +1299,9 @@ inif:=Tinifile.create(slash(appdir)+'cdclang_'+trim(cfgm.language)+'.ini');
 try
 with inif do begin
 section:='main';
-u_util.ldeg:=ReadString(section,'ldeg',u_util.ldeg);
-u_util.lmin:=ReadString(section,'lmin',u_util.lmin);
-u_util.lsec:=ReadString(section,'lsec',u_util.lsec);
+ldeg:=ReadString(section,'ldeg',ldeg);
+lmin:=ReadString(section,'lmin',lmin);
+lsec:=ReadString(section,'lsec',lsec);
 section:='detail_label';
 for i:=1 to NumLlabel do begin
   catalog.cfgshr.llabel[i]:=ReadString(section,'m_'+trim(inttostr(i)),deftxt);
@@ -1923,6 +1938,54 @@ end;
 
 procedure Tf_main.ViewInfoExecute(Sender: TObject);
 begin
+f_info.setpage(0);
 f_info.show;
 end;
+
+procedure Tf_main.showdetailinfo(chart:string;ra,dec:double;nm,desc:string);
+var i : integer;
+begin
+for i:=0 to MDIChildCount-1 do
+ if MDIChildren[i] is Tf_chart then
+   if MDIChildren[i].caption=chart then with MDIChildren[i] as Tf_chart do begin
+      sc.cfgsc.FindRa:=ra;
+      sc.cfgsc.FindDec:=dec;
+      sc.cfgsc.FindDesc:=desc;
+      sc.cfgsc.FindName:=nm;
+      sc.cfgsc.FindNote:='';
+      sc.cfgsc.FindOK:=true;
+      sc.cfgsc.FindSize:=0;
+      ShowIdentLabel;
+      identlabelClick(nil);
+      break;
+end;
+end;
+
+procedure Tf_main.CenterFindObj(chart:string);
+var i : integer;
+begin
+for i:=0 to MDIChildCount-1 do
+ if MDIChildren[i] is Tf_chart then
+   if MDIChildren[i].caption=chart then with MDIChildren[i] as Tf_chart do begin
+     sc.cfgsc.racentre:=sc.cfgsc.FindRa;
+     sc.cfgsc.decentre:=sc.cfgsc.FindDec;
+     Refresh;
+     break;
+end;
+end;
+
+procedure Tf_main.NeighborObj(chart:string);
+var i,x,y :integer;
+    x1,y1: double;
+begin
+for i:=0 to MDIChildCount-1 do
+ if MDIChildren[i] is Tf_chart then
+   if MDIChildren[i].caption=chart then with MDIChildren[i] as Tf_chart do begin
+     projection(sc.cfgsc.FindRa,sc.cfgsc.FindDec,x1,y1,true,sc.cfgsc) ;
+     WindowXY(x1,y1,x,y,sc.cfgsc);
+     ListXY(x,y);
+     break;
+end;
+end;
+
 

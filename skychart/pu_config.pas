@@ -650,6 +650,7 @@ type
     hor_l2: TLabel;
     Shape25: TShape;
     Label11: TLabel;
+    TabSheet1: TTabSheet;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -808,7 +809,6 @@ type
     scrollw, scrollh : integer;
     scrolllock,obslock:boolean;
     procedure SetLang(lang:string);
-    function SelectPage(txt:string):boolean;
     procedure SetFonts(ctrl:Tedit;num:integer);
     procedure ShowTime;
     procedure ShowChart;

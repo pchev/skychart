@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_constant, blcksock,
-  SysUtils, Types, Classes, Variants, Controls, Forms,
-  Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus;
+  SysUtils, Types, Classes, Variants, Controls, Forms, Printers,
+  Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList;
 
 type
   Tf_info = class(TForm)
@@ -42,6 +42,22 @@ type
     closeconnection: TMenuItem;
     CheckBox1: TCheckBox;
     Timer1: TTimer;
+    TabSheet2: TTabSheet;
+    Panel3: TPanel;
+    Button3: TButton;
+    Edit1: TEdit;
+    Button5: TButton;
+    Button4: TButton;
+    Memo1: TRichEdit;
+    PopupMenu2: TPopupMenu;
+    ActionList1: TActionList;
+    EditSelectAll1: TEditSelectAll;
+    EditCopy1: TEditCopy;
+    outslectionner1: TMenuItem;
+    Copier1: TMenuItem;
+    Button6: TButton;
+    Button7: TButton;
+    SaveDialog1: TSaveDialog;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure closeconnectionClick(Sender: TObject);
@@ -51,11 +67,21 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Timer1Timer(Sender: TObject);
+    procedure Edit1KeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Button3Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Memo1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     RowClick,ColClick :integer;
   public
     { Public declarations }
+    source_chart:string;
+    procedure setpage(n:integer);
   end;
 
 var
@@ -76,7 +102,6 @@ uses pu_main;
 // end of common code
 
 // windows vcl specific code:
-
 
 // end of windows vcl specific code:
 

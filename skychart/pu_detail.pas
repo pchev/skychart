@@ -40,10 +40,15 @@ type
     PopupMenu1: TPopupMenu;
     SelectAll1: TMenuItem;
     Copy1: TMenuItem;
+    Button2: TButton;
+    Button3: TButton;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
+    source_chart:string;
     { Public declarations }
   end;
 
@@ -52,11 +57,23 @@ var
 
 implementation
 
+uses pu_main;
+
 {$R *.dfm}
 
 procedure Tf_detail.Button1Click(Sender: TObject);
 begin
 close;
+end;
+
+procedure Tf_detail.Button2Click(Sender: TObject);
+begin
+f_main.CenterFindObj(source_chart);
+end;
+
+procedure Tf_detail.Button3Click(Sender: TObject);
+begin
+f_main.NeighborObj(source_chart);
 end;
 
 end.

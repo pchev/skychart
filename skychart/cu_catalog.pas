@@ -1215,7 +1215,7 @@ if result then begin
    rec.star.pmra:=deg2rad*lin.pmar/1000/3600;  // mas -> rad
    rec.star.pmdec:=deg2rad*lin.pmde/1000/3600;
    rec.star.sp:=lin.sp;
-   if lin.flam>0 then rec.star.id:=inttostr(lin.flam) else rec.star.id:='';
+   if lin.flam>0 then rec.star.id:=copy(inttostr(lin.flam)+blank15,1,3) else rec.star.id:='';
    rec.star.id:=rec.star.id+' '+ lin.bayer+' '+lin.cons;
    rec.str[1]:=inttostr(lin.bs);
    if lin.hd>0 then rec.str[2]:=inttostr(lin.hd) else rec.str[2]:='';

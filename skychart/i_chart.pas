@@ -462,6 +462,24 @@ ShowIdentLabel;
 f_main.SetLpanel1(sc.cfgsc.FindDesc,caption);
 end;
 
+function Tf_chart.ListXY(X, Y: Integer):boolean;
+var ra,dec,a,h,l,b,le,be,dx:double;
+    buf:widestring;
+begin
+result:=false;
+if f_main.cfgm.locked then exit;
+sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
+ra:=rmod(ra+pi2,pi2);
+dx:=12/sc.cfgsc.BxGlb; // search a 12 pixel radius
+sc.Findlist(ra,dec,dx,dx,buf);
+f_info.Memo1.text:=buf;
+f_info.Memo1.selstart:=0;
+f_info.Memo1.sellength:=0;
+f_info.setpage(1);
+f_info.source_chart:=caption;
+f_info.show;
+end;
+
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -470,6 +488,9 @@ if (button=mbLeft)and(not(ssShift in shift)) then begin
      ZoomBox(3,X,Y)
    else
      IdentXY(x,y);
+end
+else if (button=mbLeft)and(ssShift in shift) then begin
+   ListXY(x,y);
 end
 else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift)) then begin
    Refresh;
@@ -694,14 +715,15 @@ begin
  st.free;
  end;
 {$endif}
-formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
+if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
+f_detail.source_chart:=caption;
 f_detail.show;
 f_detail.setfocus;
 end;
 
 function Tf_chart.FormatDesc:string;
 var desc,buf,buf2: string;
-    i,n,p,l : integer;
+    i,p,l : integer;
     ra,dec,a,h :double;
 function Bold(s:string):string;
 var k:integer;

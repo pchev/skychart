@@ -1,6 +1,6 @@
 object f_info: Tf_info
-  Left = 235
-  Top = 233
+  Left = 205
+  Top = 158
   Width = 460
   Height = 354
   VertScrollBar.Range = 30
@@ -14,6 +14,7 @@ object f_info: Tf_info
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = True
+  Position = poDefaultPosOnly
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -22,10 +23,10 @@ object f_info: Tf_info
     Left = 0
     Top = 0
     Width = 452
-    Height = 297
-    ActivePage = TabSheet1
+    Height = 300
+    ActivePage = TabSheet2
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TCP/IP Connection'
@@ -33,7 +34,7 @@ object f_info: Tf_info
         Left = 0
         Top = 0
         Width = 444
-        Height = 239
+        Height = 245
         Align = alClient
         ColCount = 1
         DefaultColWidth = 800
@@ -49,14 +50,14 @@ object f_info: Tf_info
       end
       object Panel2: TPanel
         Left = 0
-        Top = 239
+        Top = 245
         Width = 444
-        Height = 30
+        Height = 27
         Align = alBottom
         TabOrder = 1
         object Button2: TButton
           Left = 12
-          Top = 3
+          Top = 1
           Width = 75
           Height = 25
           Caption = 'Refresh'
@@ -67,7 +68,7 @@ object f_info: Tf_info
           Left = 136
           Top = 2
           Width = 100
-          Height = 25
+          Height = 22
           Caption = 'AutoRefresh'
           Checked = True
           State = cbChecked
@@ -76,22 +77,106 @@ object f_info: Tf_info
         end
       end
     end
+    object TabSheet2: TTabSheet
+      Caption = 'Object List'
+      ImageIndex = 1
+      object Panel3: TPanel
+        Left = 0
+        Top = 245
+        Width = 444
+        Height = 27
+        Align = alBottom
+        TabOrder = 0
+        object Button3: TButton
+          Left = 94
+          Top = 1
+          Width = 75
+          Height = 25
+          Caption = 'Search'
+          TabOrder = 0
+          OnClick = Button3Click
+        end
+        object Edit1: TEdit
+          Left = 4
+          Top = 3
+          Width = 85
+          Height = 21
+          TabOrder = 1
+          OnKeyUp = Edit1KeyUp
+        end
+        object Button5: TButton
+          Left = 180
+          Top = 1
+          Width = 75
+          Height = 25
+          Caption = 'Sort by RA'
+          TabOrder = 2
+          OnClick = Button5Click
+        end
+        object Button6: TButton
+          Left = 268
+          Top = 1
+          Width = 75
+          Height = 25
+          Caption = 'Print'
+          TabOrder = 3
+          OnClick = Button6Click
+        end
+        object Button7: TButton
+          Left = 356
+          Top = 0
+          Width = 75
+          Height = 25
+          Caption = 'Save'
+          TabOrder = 4
+          OnClick = Button7Click
+        end
+      end
+      object Memo1: TRichEdit
+        Left = 0
+        Top = 0
+        Width = 444
+        Height = 245
+        Align = alClient
+        PlainText = True
+        PopupMenu = PopupMenu2
+        ReadOnly = True
+        ScrollBars = ssBoth
+        TabOrder = 1
+        WordWrap = False
+        OnMouseUp = Memo1MouseUp
+      end
+    end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 297
+    Top = 300
     Width = 452
-    Height = 30
+    Height = 27
     Align = alBottom
     TabOrder = 1
+    DesignSize = (
+      452
+      27)
     object Button1: TButton
-      Left = 16
-      Top = 3
+      Left = 272
+      Top = 1
       Width = 75
       Height = 25
+      Anchors = [akTop, akRight]
+      Cancel = True
       Caption = 'Close'
       TabOrder = 0
       OnClick = Button1Click
+    end
+    object Button4: TButton
+      Left = 360
+      Top = 0
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = 'Help'
+      TabOrder = 1
     end
   end
   object PopupMenu1: TPopupMenu
@@ -108,5 +193,36 @@ object f_info: Tf_info
     OnTimer = Timer1Timer
     Left = 64
     Top = 64
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 104
+    Top = 176
+    object outslectionner1: TMenuItem
+      Action = EditSelectAll1
+    end
+    object Copier1: TMenuItem
+      Action = EditCopy1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 72
+    Top = 176
+    object EditSelectAll1: TEditSelectAll
+      Category = 'Edition'
+      Caption = '&Tout s'#233'lectionner'
+      Hint = 'Tout s'#233'lectionner|S'#233'lectionner l'#39'int'#233'gralit'#233' du document'
+      ShortCut = 16449
+    end
+    object EditCopy1: TEditCopy
+      Category = 'Edition'
+      Caption = '&Copier'
+      Hint = 'Copier|Copier la s'#233'lection et la mettre dans le Presse-papiers'
+      ImageIndex = 1
+      ShortCut = 16451
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 72
+    Top = 136
   end
 end

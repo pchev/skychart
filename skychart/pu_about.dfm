@@ -1,11 +1,15 @@
 object f_about: Tf_about
-  Left = 196
-  Top = 127
+  Left = 197
+  Top = 105
   BorderStyle = bsDialog
   Caption = 'About'
-  ClientHeight = 334
-  ClientWidth = 400
+  ClientHeight = 266
+  ClientWidth = 342
   Color = clBtnFace
+  Constraints.MaxHeight = 293
+  Constraints.MaxWidth = 350
+  Constraints.MinHeight = 293
+  Constraints.MinWidth = 350
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clBlack
   Font.Height = -11
@@ -19,8 +23,8 @@ object f_about: Tf_about
   object logo: TImage
     Left = 0
     Top = 0
-    Width = 400
-    Height = 294
+    Width = 342
+    Height = 222
     Align = alClient
     AutoSize = True
     Picture.Data = {
@@ -378,10 +382,11 @@ object f_about: Tf_about
     Stretch = True
   end
   object Label1: TLabel
-    Left = 216
-    Top = 56
+    Left = 160
+    Top = 24
     Width = 167
     Height = 37
+    Alignment = taRightJustify
     Caption = 'Sky Charts'
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
@@ -392,11 +397,12 @@ object f_about: Tf_about
     ParentColor = False
     ParentFont = False
     Transparent = True
+    WordWrap = True
   end
   object Label2: TLabel
     Left = 16
-    Top = 200
-    Width = 164
+    Top = 168
+    Width = 169
     Height = 24
     Caption = 'Version 3 alpha 0'
     Color = clBlack
@@ -410,8 +416,8 @@ object f_about: Tf_about
     Transparent = True
   end
   object Label3: TLabel
-    Left = 0
-    Top = 252
+    Left = 8
+    Top = 202
     Width = 185
     Height = 14
     Caption = 'Copyright (C) 2002 Patrick Chevalley '
@@ -424,41 +430,48 @@ object f_about: Tf_about
     ParentColor = False
     ParentFont = False
   end
-  object Label4: TLabel
-    Left = 0
-    Top = 266
-    Width = 401
-    Height = 28
-    AutoSize = False
-    Caption = 
-      'This program is free software; you can redistribute it and/or mo' +
-      'dify it under the terms of the GNU General Public License'
-    Color = clBlack
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clSilver
-    Font.Height = -11
-    Font.Name = 'Arial'
-    Font.Style = [fsItalic]
-    ParentColor = False
-    ParentFont = False
-    WordWrap = True
-  end
   object Panel1: TPanel
     Left = 0
-    Top = 294
-    Width = 400
-    Height = 40
+    Top = 222
+    Width = 342
+    Height = 44
     Align = alBottom
     BevelOuter = bvLowered
+    Color = clBlack
     TabOrder = 0
+    object Label4: TLabel
+      Left = 8
+      Top = 1
+      Width = 248
+      Height = 42
+      Caption = 
+        'This program is free software; you can redistribute it and/or mo' +
+        'dify it under the terms of the GNU General Public License'
+      Color = clBlack
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clSilver
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = [fsItalic]
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
     object OKButton: TButton
-      Left = 168
-      Top = 3
-      Width = 65
+      Left = 280
+      Top = 6
+      Width = 55
       Height = 33
+      Cancel = True
       Caption = 'OK'
       Default = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBtnText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
       ModalResult = 1
+      ParentFont = False
       TabOrder = 0
     end
   end

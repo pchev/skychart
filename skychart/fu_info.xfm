@@ -1,12 +1,13 @@
 object f_info: Tf_info
-  Left = 235
-  Top = 233
+  Left = 178
+  Top = 172
   Width = 460
   Height = 338
-  VertScrollBar.Range = 30
+  VertScrollBar.Range = 27
   ActiveControl = PageControl1
   Caption = 'Info'
   Color = clBackground
+  Position = poDefaultPosOnly
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 80
@@ -16,17 +17,17 @@ object f_info: Tf_info
     Left = 0
     Top = 0
     Width = 460
-    Height = 308
-    ActivePage = TabSheet1
+    Height = 311
+    ActivePage = objectlist
     Align = alClient
     TabOrder = 0
-    object TabSheet1: TTabSheet
+    object tcpinfo: TTabSheet
       Caption = 'TCP/IP Connection'
       object StringGrid1: TStringGrid
         Left = 0
         Top = 0
         Width = 452
-        Height = 248
+        Height = 254
         Align = alClient
         ColCount = 1
         DefaultColWidth = 800
@@ -42,14 +43,14 @@ object f_info: Tf_info
       end
       object Panel2: TPanel
         Left = 0
-        Top = 248
+        Top = 254
         Width = 452
-        Height = 30
+        Height = 27
         Align = alBottom
         TabOrder = 1
         object Button2: TButton
           Left = 12
-          Top = 5
+          Top = 1
           Width = 75
           Height = 25
           Caption = 'Refresh'
@@ -58,9 +59,9 @@ object f_info: Tf_info
         end
         object CheckBox1: TCheckBox
           Left = 136
-          Top = 2
+          Top = 1
           Width = 100
-          Height = 30
+          Height = 24
           Caption = 'AutoRefresh'
           Checked = True
           State = cbChecked
@@ -69,22 +70,101 @@ object f_info: Tf_info
         end
       end
     end
+    object objectlist: TTabSheet
+      Caption = 'Object List'
+      ImageIndex = 1
+      object Memo1: TMemo
+        Left = 0
+        Top = 0
+        Width = 452
+        Height = 254
+        Align = alClient
+        ReadOnly = True
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+        WordWrap = False
+        OnDblClick = Memo1DblClick
+      end
+      object Panel3: TPanel
+        Left = 0
+        Top = 254
+        Width = 452
+        Height = 27
+        Align = alBottom
+        TabOrder = 1
+        object Button3: TButton
+          Left = 108
+          Top = 1
+          Width = 75
+          Height = 25
+          Caption = 'Search'
+          TabOrder = 0
+          OnClick = Button3Click
+        end
+        object Edit1: TEdit
+          Left = 4
+          Top = 3
+          Width = 100
+          Height = 21
+          TabOrder = 1
+          OnKeyUp = Edit1KeyUp
+        end
+        object Button5: TButton
+          Left = 192
+          Top = 1
+          Width = 75
+          Height = 25
+          Caption = 'Sort by RA'
+          TabOrder = 2
+          OnClick = Button5Click
+        end
+        object Button6: TButton
+          Left = 277
+          Top = 0
+          Width = 75
+          Height = 25
+          Caption = 'Print'
+          TabOrder = 3
+          OnClick = Button6Click
+        end
+        object Button7: TButton
+          Left = 365
+          Top = 0
+          Width = 75
+          Height = 25
+          Caption = 'Save'
+          TabOrder = 4
+          OnClick = Button7Click
+        end
+      end
+    end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 308
+    Top = 311
     Width = 460
-    Height = 30
+    Height = 27
     Align = alBottom
     TabOrder = 1
     object Button1: TButton
-      Left = 16
-      Top = 3
+      Left = 280
+      Top = 1
       Width = 75
       Height = 25
+      Anchors = [akTop, akRight]
+      Cancel = True
       Caption = 'Close'
       TabOrder = 0
       OnClick = Button1Click
+    end
+    object Button4: TButton
+      Left = 368
+      Top = 1
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = 'Help'
+      TabOrder = 1
     end
   end
   object PopupMenu1: TPopupMenu
@@ -101,5 +181,13 @@ object f_info: Tf_info
     OnTimer = Timer1Timer
     Left = 64
     Top = 64
+  end
+  object SaveDialog1: TSaveDialog
+    FilterIndex = 0
+    Height = 0
+    Title = 'Save'
+    Width = 0
+    Left = 72
+    Top = 136
   end
 end

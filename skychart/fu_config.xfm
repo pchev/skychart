@@ -1,5 +1,5 @@
 object f_config: Tf_config
-  Left = 248
+  Left = 254
   Top = 255
   Width = 639
   Height = 480
@@ -25,7 +25,7 @@ object f_config: Tf_config
     Top = 0
     Width = 474
     Height = 433
-    ActivePage = TabSheet1
+    ActivePage = p_time
     Style = tsNoTabs
     TabOrder = 0
     OnChange = PageControl1Change
