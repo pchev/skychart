@@ -22,9 +22,12 @@ object f_config: Tf_config
     Top = 0
     Width = 136
     Height = 441
+    AutoExpand = True
     HideSelection = False
-    Indent = 19
+    Indent = 15
     ReadOnly = True
+    RowSelect = True
+    ShowButtons = False
     TabOrder = 0
     OnChange = TreeView1Change
     Items.Data = {
@@ -41,37 +44,40 @@ object f_config: Tf_config
       000000FFFFFFFFFFFFFFFFA0A975410000000000000000000000000F342D2047
       7269642053706163696E67260000000000000000000000A0A975410000000000
       000000010000000D342D20436174616C6F677565732700000000000000000000
-      00A0A975410000000000000000030000000E312D204F6C6420636174616C6F67
-      210000000000000000000000A0A9754100000000000000000000000008312D20
-      5374617273230000000000000000000000A0A975410000000000000000000000
-      000A322D204E6562756C6165240000000000000000000000A0A9754100000000
-      00000000000000000B332D2045787465726E616C280000000000000000000000
-      A0A975410000000000000000030000000F352D20536F6C61722053797374656D
-      230000000000000000000000A0A975410000000000000000000000000A312D20
-      506C616E657473220000000000000000000000A0A97541000000000000000000
-      00000009322D20436F6D657473250000000000000000000000A0A97541000000
-      0000000000000000000C332D2041737465726F69647323000000000000000000
-      0000A0A975410000000000000000050000000A362D20446973706C6179210000
-      000000000000000000A0A9754100000000000000000000000008312D20466F6E
-      7473210000000000000000000000A0A975410000000000000000020000000832
-      2D20436F6C6F7230000000FFFFFFFFFFFFFFFFA0A97541000000000000000000
-      00000017312D20536B79204261636B67726F756E6420436F6C6F7232000000FF
-      FFFFFFFFFFFFFFA0A9754100000000000000000000000019322D205374617220
-      616E64204E6562756C616520436F6C6F72210000000000000000000000A0A975
-      4100000000000000000000000008332D204C696E657323000000000000000000
-      0000FFFFFFFFFFFFFFFF00000000000000000A342D20486F72697A6F6E220000
-      000000000000000000A0A9754100000000000000000000000009352D204C6162
-      656C73220000000000000000000000A0A9754100000000000000000000000009
-      372D20496D6167657322000000FFFFFFFFFFFFFFFFA0A9754100000000000000
-      000100000009382D2053797374656D22000000FFFFFFFFFFFFFFFFA0A9754100
-      000000000000000000000009312D20536572766572}
+      00A0A975410000000000000000030000000E312D2043444320636174616C6F67
+      210000000000000000000000A0A9754100000000000000000100000008312D20
+      5374617273240000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      000B312D204F62736F6C657465230000000000000000000000A0A97541000000
+      0000000000000000000A322D204E6562756C6165240000000000000000000000
+      A0A975410000000000000000000000000B332D2045787465726E616C28000000
+      0000000000000000A0A975410000000000000000030000000F352D20536F6C61
+      722053797374656D230000000000000000000000A0A975410000000000000000
+      000000000A312D20506C616E657473220000000000000000000000A0A9754100
+      000000000000000000000009322D20436F6D6574732500000000000000000000
+      00A0A975410000000000000000000000000C332D2041737465726F6964732300
+      00000000000000000000A0A975410000000000000000060000000A362D204469
+      73706C6179210000000000000000000000A0A975410000000000000000000000
+      0008312D20466F6E7473210000000000000000000000A0A97541000000000000
+      00000200000008322D20436F6C6F7230000000FFFFFFFFFFFFFFFFA0A9754100
+      000000000000000000000017312D20536B79204261636B67726F756E6420436F
+      6C6F7232000000FFFFFFFFFFFFFFFFA0A9754100000000000000000000000019
+      322D205374617220616E64204E6562756C616520436F6C6F7221000000000000
+      0000000000A0A9754100000000000000000000000008332D204C696E65732300
+      00000000000000000000FFFFFFFFFFFFFFFF00000000000000000A342D20486F
+      72697A6F6E220000000000000000000000A0A975410000000000000000000000
+      0009352D204C6162656C73270000000000000000000000FFFFFFFFFFFFFFFF00
+      000000000000000E362D204F626A656374204C69737422000000000000000000
+      0000A0A9754100000000000000000000000009372D20496D6167657322000000
+      FFFFFFFFFFFFFFFFA0A9754100000000000000000100000009382D2053797374
+      656D22000000FFFFFFFFFFFFFFFFA0A975410000000000000000000000000931
+      2D20536572766572}
   end
   object PageControl1: TPageControl
     Left = 144
     Top = 0
     Width = 474
     Height = 441
-    ActivePage = TabSheet1
+    ActivePage = p_list
     TabOrder = 1
     OnChange = PageControl1Change
     object p_time: TTabSheet
@@ -3682,16 +3688,9 @@ object f_config: Tf_config
         Height = 13
         Caption = 'pm'
       end
-      object Label67: TLabel
-        Left = 72
-        Top = 85
-        Width = 14
-        Height = 13
-        Caption = 'pm'
-      end
       object Label87: TLabel
         Left = 72
-        Top = 108
+        Top = 84
         Width = 14
         Height = 13
         Caption = 'pm'
@@ -3727,7 +3726,7 @@ object f_config: Tf_config
       end
       object Label18: TLabel
         Left = 8
-        Top = 37
+        Top = 38
         Width = 24
         Height = 13
         Caption = 'Stars'
@@ -3741,14 +3740,14 @@ object f_config: Tf_config
       end
       object Label19: TLabel
         Left = 8
-        Top = 272
+        Top = 248
         Width = 43
         Height = 13
         Caption = 'Variables'
       end
       object Label20: TLabel
         Left = 8
-        Top = 303
+        Top = 287
         Width = 39
         Height = 13
         Caption = 'Doubles'
@@ -3937,60 +3936,38 @@ object f_config: Tf_config
           CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
         Margin = 0
       end
-      object BitBtn11: TBitBtn
-        Tag = 3
-        Left = 439
+      object TY2Box: TCheckBox
+        Tag = 4
+        Left = 96
         Top = 82
-        Width = 19
-        Height = 19
+        Width = 137
+        Height = 17
+        Hint = 'The Tycho-2 Catalogue (Hog+ 2000)'
+        HelpContext = 102
+        Caption = 'Tycho 2 Catalog'
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 10
-        TabStop = False
-        OnClick = CDCStarSelPathClick
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          0000000000000000000000000000000000000000000000000000000000000000
-          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
-        Margin = 0
+        OnClick = CDCStarSelClick
       end
-      object tyc3: TEdit
-        Tag = 3
-        Left = 330
-        Top = 82
-        Width = 111
-        Height = 19
-        Ctl3D = False
-        ParentCtl3D = False
+      object Fty21: TLongEdit
+        Tag = 4
+        Left = 256
+        Top = 79
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 11
-        Text = 'tyc3'
-        OnChange = CDCStarPathChange
+        OnChange = CDCStarField1Change
+        Value = 0
+        MaxValue = 10
       end
-      object Ftyc2: TLongEdit
-        Tag = 3
+      object Fty22: TLongEdit
+        Tag = 4
         Left = 296
-        Top = 80
+        Top = 79
         Width = 30
         Height = 22
         Hint = '0..10'
@@ -4001,187 +3978,25 @@ object f_config: Tf_config
         Value = 10
         MaxValue = 10
       end
-      object Ftyc1: TLongEdit
-        Tag = 3
-        Left = 256
-        Top = 80
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 13
-        OnChange = CDCStarField1Change
-        Value = 0
-        MaxValue = 10
-      end
-      object TYCbox: TCheckBox
-        Tag = 3
-        Left = 96
-        Top = 83
-        Width = 137
-        Height = 17
-        Hint = 'The Tycho Catalogue (ESA 1997)'
-        HelpContext = 102
-        Caption = 'Tycho Catalog'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 14
-        OnClick = CDCStarSelClick
-      end
-      object TY2Box: TCheckBox
-        Tag = 4
-        Left = 96
-        Top = 106
-        Width = 137
-        Height = 17
-        Hint = 'The Tycho-2 Catalogue (Hog+ 2000)'
-        HelpContext = 102
-        Caption = 'Tycho 2 Catalog'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 15
-        OnClick = CDCStarSelClick
-      end
-      object TICbox: TCheckBox
-        Tag = 5
-        Left = 96
-        Top = 130
-        Width = 137
-        Height = 17
-        Hint = 'Tycho Input Catalog  (Revised Version) (Egret+ 1992)'
-        HelpContext = 103
-        Caption = 'Tycho  Input Catalog'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 16
-        OnClick = CDCStarSelClick
-      end
-      object Ftic1: TLongEdit
-        Tag = 5
-        Left = 256
-        Top = 127
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 17
-        OnChange = CDCStarField1Change
-        Value = 0
-        MaxValue = 10
-      end
-      object Fty21: TLongEdit
-        Tag = 4
-        Left = 256
-        Top = 103
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 18
-        OnChange = CDCStarField1Change
-        Value = 0
-        MaxValue = 10
-      end
-      object Fty22: TLongEdit
-        Tag = 4
-        Left = 296
-        Top = 103
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 19
-        OnChange = CDCStarField2Change
-        Value = 10
-        MaxValue = 10
-      end
-      object Ftic2: TLongEdit
-        Tag = 5
-        Left = 296
-        Top = 127
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 20
-        OnChange = CDCStarField2Change
-        Value = 7
-        MaxValue = 10
-      end
       object ty23: TEdit
         Tag = 4
         Left = 330
-        Top = 105
+        Top = 81
         Width = 111
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 21
+        TabOrder = 13
         Text = 'cat\tycho2'
         OnChange = CDCStarPathChange
-      end
-      object tic3: TEdit
-        Tag = 5
-        Left = 330
-        Top = 129
-        Width = 111
-        Height = 19
-        Ctl3D = False
-        ParentCtl3D = False
-        TabOrder = 22
-        Text = 'tic3'
-        OnChange = CDCStarPathChange
-      end
-      object BitBtn13: TBitBtn
-        Tag = 5
-        Left = 439
-        Top = 129
-        Width = 19
-        Height = 19
-        TabOrder = 23
-        TabStop = False
-        OnClick = CDCStarSelPathClick
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          0000000000000000000000000000000000000000000000000000000000000000
-          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
-        Margin = 0
       end
       object BitBtn12: TBitBtn
         Tag = 4
         Left = 439
-        Top = 105
+        Top = 81
         Width = 19
         Height = 19
-        TabOrder = 24
+        TabOrder = 14
         TabStop = False
         OnClick = CDCStarSelPathClick
         Glyph.Data = {
@@ -4216,7 +4031,7 @@ object f_config: Tf_config
       object GSCFBox: TCheckBox
         Tag = 6
         Left = 96
-        Top = 153
+        Top = 105
         Width = 153
         Height = 17
         Hint = 
@@ -4226,13 +4041,13 @@ object f_config: Tf_config
         Caption = 'HST GSC original FITS'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 25
+        TabOrder = 15
         OnClick = CDCStarSelClick
       end
       object GSCCbox: TCheckBox
         Tag = 7
         Left = 96
-        Top = 177
+        Top = 129
         Width = 137
         Height = 17
         Hint = 
@@ -4242,27 +4057,13 @@ object f_config: Tf_config
         Caption = 'HST GSC compact'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 26
-        OnClick = CDCStarSelClick
-      end
-      object GSCbox: TCheckBox
-        Tag = 8
-        Left = 96
-        Top = 200
-        Width = 153
-        Height = 17
-        Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)'
-        HelpContext = 104
-        Caption = 'HST Guide Star Catalog'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 27
+        TabOrder = 16
         OnClick = CDCStarSelClick
       end
       object USNbox: TCheckBox
         Tag = 9
         Left = 96
-        Top = 224
+        Top = 152
         Width = 65
         Height = 17
         Hint = 
@@ -4272,21 +4073,7 @@ object f_config: Tf_config
         Caption = 'USNO-A'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 28
-        OnClick = CDCStarSelClick
-      end
-      object MCTBox: TCheckBox
-        Tag = 10
-        Left = 96
-        Top = 247
-        Width = 137
-        Height = 17
-        Hint = 'AUDE MicroCat CDROM'
-        HelpContext = 113
-        Caption = 'AUDE MicroCat'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 29
+        TabOrder = 17
         OnClick = CDCStarSelClick
       end
       object dsbasebox: TCheckBox
@@ -4300,7 +4087,7 @@ object f_config: Tf_config
         Caption = 'Deepsky 2000 base'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 30
+        TabOrder = 18
         OnClick = CDCStarSelClick
       end
       object dstycBox: TCheckBox
@@ -4314,7 +4101,7 @@ object f_config: Tf_config
         Caption = 'Deepsky 2000 Super Tycho'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 31
+        TabOrder = 19
         OnClick = CDCStarSelClick
       end
       object dsgscBox: TCheckBox
@@ -4330,29 +4117,29 @@ object f_config: Tf_config
         Caption = 'Deepsky 2000 HST GSC'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 32
+        TabOrder = 20
         OnClick = CDCStarSelClick
       end
       object USNBright: TCheckBox
         Tag = 9
         Left = 168
-        Top = 224
+        Top = 152
         Width = 81
         Height = 17
         Caption = 'Bright stars'
-        TabOrder = 33
+        TabOrder = 21
         OnClick = USNBrightClick
       end
       object fgscf1: TLongEdit
         Tag = 6
         Left = 256
-        Top = 150
+        Top = 102
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 34
+        TabOrder = 22
         OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
@@ -4360,27 +4147,13 @@ object f_config: Tf_config
       object fgscc1: TLongEdit
         Tag = 7
         Left = 256
-        Top = 174
+        Top = 126
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 35
-        OnChange = CDCStarField1Change
-        Value = 0
-        MaxValue = 10
-      end
-      object fgsc1: TLongEdit
-        Tag = 8
-        Left = 256
-        Top = 197
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 36
+        TabOrder = 23
         OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
@@ -4388,27 +4161,13 @@ object f_config: Tf_config
       object fusn1: TLongEdit
         Tag = 9
         Left = 256
-        Top = 221
+        Top = 149
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 37
-        OnChange = CDCStarField1Change
-        Value = 0
-        MaxValue = 10
-      end
-      object fmct1: TLongEdit
-        Tag = 10
-        Left = 256
-        Top = 244
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 38
+        TabOrder = 24
         OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
@@ -4422,7 +4181,7 @@ object f_config: Tf_config
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 39
+        TabOrder = 25
         OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
@@ -4436,7 +4195,7 @@ object f_config: Tf_config
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 40
+        TabOrder = 26
         OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
@@ -4450,7 +4209,7 @@ object f_config: Tf_config
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 41
+        TabOrder = 27
         OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
@@ -4464,7 +4223,7 @@ object f_config: Tf_config
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 42
+        TabOrder = 28
         OnChange = CDCStarField2Change
         Value = 10
         MaxValue = 10
@@ -4478,7 +4237,7 @@ object f_config: Tf_config
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 43
+        TabOrder = 29
         OnChange = CDCStarField2Change
         Value = 10
         MaxValue = 10
@@ -4492,49 +4251,21 @@ object f_config: Tf_config
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 44
+        TabOrder = 30
         OnChange = CDCStarField2Change
         Value = 10
-        MaxValue = 10
-      end
-      object fmct2: TLongEdit
-        Tag = 10
-        Left = 296
-        Top = 244
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 45
-        OnChange = CDCStarField2Change
-        Value = 2
         MaxValue = 10
       end
       object fusn2: TLongEdit
         Tag = 9
         Left = 296
-        Top = 221
+        Top = 149
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 46
-        OnChange = CDCStarField2Change
-        Value = 2
-        MaxValue = 10
-      end
-      object fgsc2: TLongEdit
-        Tag = 8
-        Left = 296
-        Top = 197
-        Width = 30
-        Height = 22
-        Hint = '0..10'
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 47
+        TabOrder = 31
         OnChange = CDCStarField2Change
         Value = 2
         MaxValue = 10
@@ -4542,13 +4273,13 @@ object f_config: Tf_config
       object fgscc2: TLongEdit
         Tag = 7
         Left = 296
-        Top = 174
+        Top = 126
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 48
+        TabOrder = 32
         OnChange = CDCStarField2Change
         Value = 2
         MaxValue = 10
@@ -4556,13 +4287,13 @@ object f_config: Tf_config
       object fgscf2: TLongEdit
         Tag = 6
         Left = 296
-        Top = 150
+        Top = 102
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 49
+        TabOrder = 33
         OnChange = CDCStarField2Change
         Value = 2
         MaxValue = 10
@@ -4570,61 +4301,37 @@ object f_config: Tf_config
       object gscf3: TEdit
         Tag = 6
         Left = 330
-        Top = 152
+        Top = 104
         Width = 111
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 50
+        TabOrder = 34
         Text = 'gscf3'
         OnChange = CDCStarPathChange
       end
       object gscc3: TEdit
         Tag = 7
         Left = 330
-        Top = 176
+        Top = 128
         Width = 111
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 51
+        TabOrder = 35
         Text = 'gscc3'
-        OnChange = CDCStarPathChange
-      end
-      object gsc3: TEdit
-        Tag = 8
-        Left = 330
-        Top = 199
-        Width = 111
-        Height = 19
-        Ctl3D = False
-        ParentCtl3D = False
-        TabOrder = 52
-        Text = 'gsc3'
         OnChange = CDCStarPathChange
       end
       object usn3: TEdit
         Tag = 9
         Left = 330
-        Top = 223
+        Top = 151
         Width = 111
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 53
+        TabOrder = 36
         Text = 'usn3'
-        OnChange = CDCStarPathChange
-      end
-      object mct3: TEdit
-        Tag = 10
-        Left = 330
-        Top = 246
-        Width = 111
-        Height = 19
-        Ctl3D = False
-        ParentCtl3D = False
-        TabOrder = 54
-        Text = 'x:\'
         OnChange = CDCStarPathChange
       end
       object dsbase3: TEdit
@@ -4635,7 +4342,7 @@ object f_config: Tf_config
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 55
+        TabOrder = 37
         Text = 'dsbase3'
         OnChange = CDCStarPathChange
       end
@@ -4647,7 +4354,7 @@ object f_config: Tf_config
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 56
+        TabOrder = 38
         Text = 'dstyc3'
         OnChange = CDCStarPathChange
       end
@@ -4659,7 +4366,7 @@ object f_config: Tf_config
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 57
+        TabOrder = 39
         Text = 'dsgsc3'
         OnChange = CDCStarPathChange
       end
@@ -4669,7 +4376,7 @@ object f_config: Tf_config
         Top = 372
         Width = 19
         Height = 19
-        TabOrder = 58
+        TabOrder = 40
         TabStop = False
         OnClick = CDCStarSelPathClick
         Glyph.Data = {
@@ -4707,7 +4414,7 @@ object f_config: Tf_config
         Top = 348
         Width = 19
         Height = 19
-        TabOrder = 59
+        TabOrder = 41
         TabStop = False
         OnClick = CDCStarSelPathClick
         Glyph.Data = {
@@ -4745,45 +4452,7 @@ object f_config: Tf_config
         Top = 324
         Width = 19
         Height = 19
-        TabOrder = 60
-        TabStop = False
-        OnClick = CDCStarSelPathClick
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          0000000000000000000000000000000000000000000000000000000000000000
-          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
-        Margin = 0
-      end
-      object BitBtn32: TBitBtn
-        Tag = 10
-        Left = 439
-        Top = 246
-        Width = 19
-        Height = 19
-        TabOrder = 61
+        TabOrder = 42
         TabStop = False
         OnClick = CDCStarSelPathClick
         Glyph.Data = {
@@ -4818,48 +4487,10 @@ object f_config: Tf_config
       object BitBtn19: TBitBtn
         Tag = 9
         Left = 439
-        Top = 223
+        Top = 151
         Width = 19
         Height = 19
-        TabOrder = 62
-        TabStop = False
-        OnClick = CDCStarSelPathClick
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          0000000000000000000000000000000000000000000000000000000000000000
-          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
-        Margin = 0
-      end
-      object BitBtn18: TBitBtn
-        Tag = 8
-        Left = 439
-        Top = 199
-        Width = 19
-        Height = 19
-        TabOrder = 63
+        TabOrder = 43
         TabStop = False
         OnClick = CDCStarSelPathClick
         Glyph.Data = {
@@ -4894,10 +4525,10 @@ object f_config: Tf_config
       object BitBtn17: TBitBtn
         Tag = 7
         Left = 439
-        Top = 176
+        Top = 128
         Width = 19
         Height = 19
-        TabOrder = 64
+        TabOrder = 44
         TabStop = False
         OnClick = CDCStarSelPathClick
         Glyph.Data = {
@@ -4932,10 +4563,10 @@ object f_config: Tf_config
       object BitBtn16: TBitBtn
         Tag = 6
         Left = 439
-        Top = 152
+        Top = 104
         Width = 19
         Height = 19
-        TabOrder = 65
+        TabOrder = 45
         TabStop = False
         OnClick = CDCStarSelPathClick
         Glyph.Data = {
@@ -4970,10 +4601,10 @@ object f_config: Tf_config
       object BitBtn14: TBitBtn
         Tag = 1
         Left = 439
-        Top = 270
+        Top = 246
         Width = 19
         Height = 19
-        TabOrder = 66
+        TabOrder = 46
         TabStop = False
         OnClick = BitBtn14Click
         Glyph.Data = {
@@ -5008,10 +4639,10 @@ object f_config: Tf_config
       object BitBtn15: TBitBtn
         Tag = 1
         Left = 439
-        Top = 301
+        Top = 285
         Width = 19
         Height = 19
-        TabOrder = 67
+        TabOrder = 47
         TabStop = False
         OnClick = BitBtn15Click
         Glyph.Data = {
@@ -5046,37 +4677,37 @@ object f_config: Tf_config
       object wds3: TEdit
         Tag = 1
         Left = 330
-        Top = 301
+        Top = 285
         Width = 111
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 68
+        TabOrder = 48
         Text = 'wds3'
         OnChange = wds3Change
       end
       object gcv3: TEdit
         Tag = 1
         Left = 330
-        Top = 270
+        Top = 246
         Width = 111
         Height = 19
         Ctl3D = False
         ParentCtl3D = False
-        TabOrder = 69
+        TabOrder = 49
         Text = 'gcv3'
         OnChange = gcv3Change
       end
       object Fgcv2: TLongEdit
         Tag = 1
         Left = 296
-        Top = 268
+        Top = 244
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 70
+        TabOrder = 50
         OnChange = Fgcv2Change
         Value = 10
         MaxValue = 10
@@ -5084,13 +4715,13 @@ object f_config: Tf_config
       object Fwds2: TLongEdit
         Tag = 1
         Left = 296
-        Top = 299
+        Top = 283
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 71
+        TabOrder = 51
         OnChange = Fwds2Change
         Value = 10
         MaxValue = 10
@@ -5098,13 +4729,13 @@ object f_config: Tf_config
       object Fwds1: TLongEdit
         Tag = 1
         Left = 256
-        Top = 299
+        Top = 283
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 72
+        TabOrder = 52
         OnChange = Fwds1Change
         Value = 0
         MaxValue = 10
@@ -5112,13 +4743,13 @@ object f_config: Tf_config
       object Fgcv1: TLongEdit
         Tag = 1
         Left = 256
-        Top = 268
+        Top = 244
         Width = 30
         Height = 22
         Hint = '0..10'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 73
+        TabOrder = 53
         OnChange = Fgcv1Change
         Value = 0
         MaxValue = 10
@@ -5126,7 +4757,7 @@ object f_config: Tf_config
       object GCVBox: TCheckBox
         Tag = 1
         Left = 96
-        Top = 271
+        Top = 247
         Width = 137
         Height = 17
         Hint = 'General Catalog of Variable Stars    (Kholopov+ 1998)'
@@ -5134,23 +4765,23 @@ object f_config: Tf_config
         Caption = 'Gen. Cat. Variable Star'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 74
+        TabOrder = 54
         OnClick = GCVBoxClick
       end
       object IRVar: TCheckBox
         Tag = 1
         Left = 96
-        Top = 286
-        Width = 81
+        Top = 262
+        Width = 137
         Height = 17
-        Caption = 'IR variables'
-        TabOrder = 75
+        Caption = 'Show IR variables'
+        TabOrder = 55
         OnClick = IRVarClick
       end
       object WDSbox: TCheckBox
         Tag = 1
         Left = 96
-        Top = 302
+        Top = 286
         Width = 153
         Height = 17
         Hint = 'The Washington Visual Double Star Catalog    (USNO, 2000)'
@@ -5158,8 +4789,431 @@ object f_config: Tf_config
         Caption = 'Washington Double Star'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 76
+        TabOrder = 56
         OnClick = WDSboxClick
+      end
+    end
+    object p_obsolete: TTabSheet
+      Caption = 'Obsolete'
+      ImageIndex = 29
+      TabVisible = False
+      object Label88: TLabel
+        Left = 0
+        Top = 0
+        Width = 234
+        Height = 13
+        Caption = 'CDC Obsolete Catalog (but you can still use them)'
+      end
+      object Label67: TLabel
+        Left = 72
+        Top = 39
+        Width = 14
+        Height = 13
+        Caption = 'pm'
+      end
+      object Label91: TLabel
+        Left = 116
+        Top = 58
+        Width = 102
+        Height = 13
+        Caption = 'Replaced by Tycho-2'
+      end
+      object Label92: TLabel
+        Left = 116
+        Top = 108
+        Width = 102
+        Height = 13
+        Caption = 'Replaced by Tycho-2'
+      end
+      object Label93: TLabel
+        Left = 116
+        Top = 162
+        Width = 114
+        Height = 26
+        Caption = 'CDC format, prefere the compact version'
+        WordWrap = True
+      end
+      object Label94: TLabel
+        Left = 116
+        Top = 226
+        Width = 62
+        Height = 13
+        Caption = 'Not available'
+      end
+      object Label90: TLabel
+        Left = 8
+        Top = 39
+        Width = 24
+        Height = 13
+        Caption = 'Stars'
+      end
+      object TYCbox: TCheckBox
+        Tag = 3
+        Left = 96
+        Top = 37
+        Width = 137
+        Height = 17
+        Hint = 'The Tycho Catalogue (ESA 1997)'
+        HelpContext = 102
+        Caption = 'Tycho Catalog'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        OnClick = CDCStarSelClick
+      end
+      object Ftyc1: TLongEdit
+        Tag = 3
+        Left = 256
+        Top = 34
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        OnChange = CDCStarField1Change
+        Value = 0
+        MaxValue = 10
+      end
+      object Ftyc2: TLongEdit
+        Tag = 3
+        Left = 296
+        Top = 34
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        OnChange = CDCStarField2Change
+        Value = 10
+        MaxValue = 10
+      end
+      object tyc3: TEdit
+        Tag = 3
+        Left = 330
+        Top = 36
+        Width = 111
+        Height = 19
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 3
+        Text = 'tyc3'
+        OnChange = CDCStarPathChange
+      end
+      object BitBtn11: TBitBtn
+        Tag = 3
+        Left = 439
+        Top = 36
+        Width = 19
+        Height = 19
+        TabOrder = 4
+        TabStop = False
+        OnClick = CDCStarSelPathClick
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          0000000000000000000000000000000000000000000000000000000000000000
+          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+        Margin = 0
+      end
+      object TICbox: TCheckBox
+        Tag = 5
+        Left = 96
+        Top = 90
+        Width = 137
+        Height = 17
+        Hint = 'Tycho Input Catalog  (Revised Version) (Egret+ 1992)'
+        HelpContext = 103
+        Caption = 'Tycho  Input Catalog'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 5
+        OnClick = CDCStarSelClick
+      end
+      object Ftic1: TLongEdit
+        Tag = 5
+        Left = 256
+        Top = 87
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 6
+        OnChange = CDCStarField1Change
+        Value = 0
+        MaxValue = 10
+      end
+      object Ftic2: TLongEdit
+        Tag = 5
+        Left = 296
+        Top = 87
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 7
+        OnChange = CDCStarField2Change
+        Value = 7
+        MaxValue = 10
+      end
+      object tic3: TEdit
+        Tag = 5
+        Left = 330
+        Top = 89
+        Width = 111
+        Height = 19
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 8
+        Text = 'tic3'
+        OnChange = CDCStarPathChange
+      end
+      object BitBtn13: TBitBtn
+        Tag = 5
+        Left = 439
+        Top = 89
+        Width = 19
+        Height = 19
+        TabOrder = 9
+        TabStop = False
+        OnClick = CDCStarSelPathClick
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          0000000000000000000000000000000000000000000000000000000000000000
+          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+        Margin = 0
+      end
+      object GSCbox: TCheckBox
+        Tag = 8
+        Left = 96
+        Top = 144
+        Width = 153
+        Height = 17
+        Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)'
+        HelpContext = 104
+        Caption = 'HST Guide Star Catalog'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 10
+        OnClick = CDCStarSelClick
+      end
+      object fgsc1: TLongEdit
+        Tag = 8
+        Left = 256
+        Top = 141
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 11
+        OnChange = CDCStarField1Change
+        Value = 0
+        MaxValue = 10
+      end
+      object fgsc2: TLongEdit
+        Tag = 8
+        Left = 296
+        Top = 141
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 12
+        OnChange = CDCStarField2Change
+        Value = 2
+        MaxValue = 10
+      end
+      object gsc3: TEdit
+        Tag = 8
+        Left = 330
+        Top = 143
+        Width = 111
+        Height = 19
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 13
+        Text = 'gsc3'
+        OnChange = CDCStarPathChange
+      end
+      object BitBtn18: TBitBtn
+        Tag = 8
+        Left = 439
+        Top = 143
+        Width = 19
+        Height = 19
+        TabOrder = 14
+        TabStop = False
+        OnClick = CDCStarSelPathClick
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          0000000000000000000000000000000000000000000000000000000000000000
+          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+        Margin = 0
+      end
+      object MCTBox: TCheckBox
+        Tag = 10
+        Left = 96
+        Top = 207
+        Width = 137
+        Height = 17
+        Hint = 'AUDE MicroCat CDROM'
+        HelpContext = 113
+        Caption = 'AUDE MicroCat'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 15
+        OnClick = CDCStarSelClick
+      end
+      object fmct1: TLongEdit
+        Tag = 10
+        Left = 256
+        Top = 204
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 16
+        OnChange = CDCStarField1Change
+        Value = 0
+        MaxValue = 10
+      end
+      object fmct2: TLongEdit
+        Tag = 10
+        Left = 296
+        Top = 204
+        Width = 30
+        Height = 22
+        Hint = '0..10'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 17
+        OnChange = CDCStarField2Change
+        Value = 2
+        MaxValue = 10
+      end
+      object mct3: TEdit
+        Tag = 10
+        Left = 330
+        Top = 206
+        Width = 111
+        Height = 19
+        Ctl3D = False
+        ParentCtl3D = False
+        TabOrder = 18
+        Text = 'x:\'
+        OnChange = CDCStarPathChange
+      end
+      object BitBtn32: TBitBtn
+        Tag = 10
+        Left = 439
+        Top = 206
+        Width = 19
+        Height = 19
+        TabOrder = 19
+        TabStop = False
+        OnClick = CDCStarSelPathClick
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          0000000000000000000000000000000000000000000000000000000000000000
+          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+        Margin = 0
       end
     end
     object p_cdcneb: TTabSheet
@@ -6050,6 +6104,7 @@ object f_config: Tf_config
         Width = 130
         Height = 13
         Caption = 'According to the magnitude'
+        Visible = False
       end
       object Label71: TLabel
         Left = 320
@@ -6066,6 +6121,7 @@ object f_config: Tf_config
         Width = 99
         Height = 13
         Caption = 'According to the size'
+        Visible = False
       end
       object StringGrid1: TStringGrid
         Left = 0
@@ -6079,6 +6135,7 @@ object f_config: Tf_config
         RowCount = 20
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goTabs]
         TabOrder = 0
+        Visible = False
         ColWidths = (
           30
           43
@@ -6111,6 +6168,7 @@ object f_config: Tf_config
         ParentShowHint = False
         ShowHint = False
         TabOrder = 1
+        Visible = False
       end
       object Edit1: TEdit
         Left = 417
@@ -6132,6 +6190,7 @@ object f_config: Tf_config
         ParentShowHint = False
         ShowHint = False
         TabOrder = 3
+        Visible = False
       end
       object StringGrid2: TStringGrid
         Left = 0
@@ -6145,6 +6204,7 @@ object f_config: Tf_config
         RowCount = 20
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goTabs]
         TabOrder = 4
+        Visible = False
         ColWidths = (
           30
           43
@@ -7842,6 +7902,71 @@ object f_config: Tf_config
         Caption = 'Labels Setting'
       end
     end
+    object p_list: TTabSheet
+      Caption = 'p_list'
+      ImageIndex = 30
+      TabVisible = False
+      object Label95: TLabel
+        Left = 0
+        Top = 0
+        Width = 86
+        Height = 13
+        Caption = 'Object List Setting'
+      end
+      object GroupBox5: TGroupBox
+        Left = 24
+        Top = 40
+        Width = 369
+        Height = 217
+        Caption = 'Type of object to add to the list'
+        TabOrder = 0
+        object liststar: TCheckBox
+          Left = 32
+          Top = 24
+          Width = 289
+          Height = 30
+          Caption = 'Stars'
+          TabOrder = 0
+          OnClick = liststarClick
+        end
+        object listneb: TCheckBox
+          Left = 32
+          Top = 58
+          Width = 289
+          Height = 30
+          Caption = 'Nebulae'
+          TabOrder = 1
+          OnClick = listnebClick
+        end
+        object listpla: TCheckBox
+          Left = 32
+          Top = 92
+          Width = 289
+          Height = 30
+          Caption = 'Solar System object'
+          TabOrder = 2
+          OnClick = listplaClick
+        end
+        object listvar: TCheckBox
+          Left = 32
+          Top = 126
+          Width = 289
+          Height = 30
+          Caption = 'Variable Stars'
+          TabOrder = 3
+          OnClick = listvarClick
+        end
+        object listdbl: TCheckBox
+          Left = 32
+          Top = 160
+          Width = 289
+          Height = 30
+          Caption = 'Double Stars'
+          TabOrder = 4
+          OnClick = listdblClick
+        end
+      end
+    end
     object p_image: TTabSheet
       Caption = 'p_image'
       ImageIndex = 17
@@ -7951,6 +8076,13 @@ object f_config: Tf_config
       Caption = 'Let one empty extra page at the end'
       ImageIndex = 28
       TabVisible = False
+      object Label75: TLabel
+        Left = 80
+        Top = 136
+        Width = 145
+        Height = 13
+        Caption = 'Extra page to solve a Kylix bug'
+      end
     end
   end
   object CancelBtn: TButton

@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses fu_detail, cu_skychart, u_constant, u_util, u_projection, Math, StrUtils,
+uses fu_detail, cu_skychart, u_constant, u_util, u_projection, Math, 
   SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs, Qt,
   QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList;
 
@@ -117,7 +117,7 @@ type
   public
     { Public declarations }
     sc: Tskychart;
-    maximize,LockTrackCursor:boolean;
+    maximize,LockTrackCursor,lastquick:boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo,lastx,lasty,lastyzoom : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;

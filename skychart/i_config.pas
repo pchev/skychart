@@ -45,12 +45,16 @@ procedure Tf_config.nextClick(Sender: TObject);
 begin
  if PageControl1.ActivePageIndex<PageControl1.PageCount-2 then // kylix bug? look at the last page
     Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex+1];
+Treeview1.selected.expand(true);
 end;
 
 procedure Tf_config.previousClick(Sender: TObject);
 begin
- if PageControl1.ActivePageIndex>0 then
+ while PageControl1.ActivePageIndex>0 do begin
     Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex-1];
+    if Treeview1.selected.level=0 then break;
+ end;
+Treeview1.selected.expand(true);
 end;
 
 procedure Tf_config.PageControl1Change(Sender: TObject);
@@ -97,6 +101,7 @@ ShowSkyColor;
 ShowServer;
 ShowObservatory;
 ShowHorizon;
+ShowObjList;
 TreeView1.TopItem.Expand(false);
 Treeview1.selected:=Treeview1.items[cmain.configpage];
 screen.cursor:=crDefault;
@@ -1894,3 +1899,37 @@ finally
 end;
 end;
 
+procedure Tf_config.ShowObjList;
+begin
+ liststar.checked:=cshr.liststar;
+ listneb.checked:=cshr.listneb;
+ listvar.checked:=cshr.listvar;
+ listdbl.checked:=cshr.listdbl;
+ listpla.checked:=cshr.listpla;
+end;
+
+
+procedure Tf_config.liststarClick(Sender: TObject);
+begin
+cshr.liststar:=liststar.checked;
+end;
+
+procedure Tf_config.listnebClick(Sender: TObject);
+begin
+cshr.listneb:=listneb.checked;
+end;
+
+procedure Tf_config.listplaClick(Sender: TObject);
+begin
+cshr.listpla:=listpla.checked;
+end;
+
+procedure Tf_config.listvarClick(Sender: TObject);
+begin
+cshr.listvar:=listvar.checked;
+end;
+
+procedure Tf_config.listdblClick(Sender: TObject);
+begin
+cshr.listdbl:=listdbl.checked;
+end;

@@ -88,12 +88,11 @@ Refresh;
 end;
 
 procedure Tf_chart.Refresh;
-var quick: boolean;
 begin
 try
 if f_main.cfgm.locked then exit;
- quick:=sc.cfgsc.quick;
- if not quick then screen.cursor:=crHourGlass;
+ lastquick:=sc.cfgsc.quick;
+ if not lastquick then screen.cursor:=crHourGlass;
  zoomstep:=0;
  identlabel.visible:=false;
  Image1.width:=clientwidth;
@@ -102,7 +101,7 @@ if f_main.cfgm.locked then exit;
  Image1.Picture.Bitmap.Height:=Image1.Height;
  sc.plot.init(Image1.width,Image1.height);
  sc.Refresh;
- if not quick then begin
+ if not lastquick then begin
     inc(lastundo); inc(validundo);
     if lastundo>maxundo then lastundo:=1;
     undolist[lastundo]:=sc.cfgsc;
@@ -471,7 +470,7 @@ if f_main.cfgm.locked then exit;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=12/sc.cfgsc.BxGlb; // search a 12 pixel radius
-sc.Findlist(ra,dec,dx,dx,buf);
+sc.Findlist(ra,dec,dx,dx,buf,false,true,true);
 f_info.Memo1.text:=buf;
 f_info.Memo1.selstart:=0;
 f_info.Memo1.sellength:=0;
@@ -489,7 +488,8 @@ if (button=mbLeft)and(not(ssShift in shift)) then begin
    else
      IdentXY(x,y);
 end
-else if (button=mbLeft)and(ssShift in shift) then begin
+else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
+   ZoomBox(4,0,0);
    ListXY(x,y);
 end
 else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift)) then begin
@@ -653,6 +653,10 @@ case action of
         Image1MouseUp(Self,mbLeft,[],X,Y);
     end;
    end;
+4 : begin   // abort
+     if Zoomstep>1 then Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoom1,YZoom1,XZoom2,YZoom2));
+     Zoomstep:=0;
+   end;
 end;
 end;
 
@@ -738,16 +742,16 @@ end;
 begin
 desc:=sc.cfgsc.FindDesc;
 result:=html_h;
-p:=posex(tab,desc);
-p:=posex(tab,desc,p+1);
-l:=posex(tab,desc,p+1);
+p:=pos(tab,desc);
+p:=pos2(tab,desc,p+1);
+l:=pos2(tab,desc,p+1);
 buf:=trim(copy(desc,p+1,l-p-1));
 //objtype:=trim(buf);
 buf:=LongLabelObj(buf);
 result:=result+html_h2+buf+htms_h2;
 buf:=copy(desc,l+1,9999);
 repeat
-  i:=posex(tab,buf);
+  i:=pos(tab,buf);
   if i=0 then i:=length(buf)+1;
   buf2:=copy(buf,1,i-1);
   delete(buf,1,i);
@@ -797,7 +801,7 @@ if pos('PA:',f_main.LPanels0.caption)>0
    then result:=result+html_b+sc.catalog.cfgshr.llabel[98]+' : '+htms_b+f_main.LPanels0.caption+html_br;
 buf:=sc.cfgsc.FindNote;
 repeat
-  i:=posex(tab,buf);
+  i:=pos(tab,buf);
   if i=0 then i:=length(buf)+1;
   buf2:=copy(buf,1,i-1);
   delete(buf,1,i);

@@ -87,7 +87,7 @@ Tskychart = class (TComponent)
     function FindatRaDec(ra,dec,dx: double;showall:boolean=false):boolean;
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
     Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
-    function  FindList(ra,dec,dx,dy: double;var text:widestring;showall:boolean=false):boolean;
+    procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
 end;
 
 
@@ -1101,16 +1101,16 @@ end else begin
 end;
 end;
 
-function Tskychart.FindList(ra,dec,dx,dy: double;var text:widestring;showall:boolean=false):boolean;
+procedure Tskychart.FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
 var x1,x2,y1,y2,xx1,yy1:double;
     rec: Gcatrec;
     desc,n,m,d: string;
     saveStarFilter,saveNebFilter,ok:boolean;
     i,xx,yy:integer;
-const maxln : integer = 1000;
+const maxln : integer = 2000;
 Procedure FindatPosCat(cat:integer);
 begin
- ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,false,cfgsc,rec);
+ ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,false,trunc,cfgsc,rec);
  while ok do begin
    if i>maxln then break;
    projection(rec.ra,rec.dec,xx1,yy1,true,cfgsc) ;
@@ -1120,7 +1120,7 @@ begin
       text:=text+desc+crlf;
       inc(i);
    end;   
-   ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,true,cfgsc,rec);
+   ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,true,trunc,cfgsc,rec);
  end;
  fcatalog.CloseCat;
 end;
@@ -1129,14 +1129,24 @@ begin
  ok:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
  while ok do begin
    if i>maxln then break;
-   text:=text+desc+crlf;
-   inc(i);
+   projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
+   windowxy(xx1,yy1,xx,yy,cfgsc);
+   if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+      text:=text+desc+crlf;
+      inc(i);
+   end;   
    ok:=fplanet.findplanet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc);
  end;
 end;
 begin
-x1 := NormRA(ra-dx/cos(dec));
-x2 := NormRA(ra+dx/cos(dec));
+if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
+  x1:=0;
+  x2:=pi2;
+end else begin
+  x1 := NormRA(ra-dx/cos(dec));
+  x2 := NormRA(ra+dx/cos(dec));
+  if x2<x1 then x2:=x2+pi2;
+end;
 y1 := maxvalue([-pid2,dec-dy]);
 y2 := minvalue([pid2,dec+dy]);
 text:='';
@@ -1149,34 +1159,42 @@ end;
 // search catalog object
 try
   i:=0;
-  FindatPosPlanet;
-  FindAtPosCat(gcneb);
-  if Fcatalog.cfgcat.nebcaton[sac-BaseNeb] then FindAtPosCat(sac);
-  if Fcatalog.cfgcat.nebcaton[ngc-BaseNeb] then FindAtPosCat(ngc);
-  if Fcatalog.cfgcat.nebcaton[lbn-BaseNeb] then FindAtPosCat(lbn);
-  if Fcatalog.cfgcat.nebcaton[rc3-BaseNeb] then FindAtPosCat(rc3);
-  if Fcatalog.cfgcat.nebcaton[pgc-BaseNeb] then FindAtPosCat(pgc);
-  if Fcatalog.cfgcat.nebcaton[ocl-BaseNeb] then FindAtPosCat(ocl);
-  if Fcatalog.cfgcat.nebcaton[gcm-BaseNeb] then FindAtPosCat(gcm);
-  if Fcatalog.cfgcat.nebcaton[gpn-BaseNeb] then FindAtPosCat(gpn);
-  FindAtPosCat(gcvar);
-  if Fcatalog.cfgcat.varstarcaton[gcvs-BaseVar] then FindAtPosCat(gcvs);
-  FindAtPosCat(gcdbl);
-  if Fcatalog.cfgcat.dblstarcaton[wds-BaseDbl]  then FindAtPosCat(wds);
-  FindAtPosCat(gcstar);
-  if Fcatalog.cfgcat.starcaton[bsc-BaseStar] then FindAtPosCat(bsc);
-  if Fcatalog.cfgcat.starcaton[dsbase-BaseStar] then FindAtPosCat(dsbase);
-  if Fcatalog.cfgcat.starcaton[sky2000-BaseStar] then FindAtPosCat(sky2000);
-  if Fcatalog.cfgcat.starcaton[tyc-BaseStar] then FindAtPosCat(tyc);
-  if Fcatalog.cfgcat.starcaton[tyc2-BaseStar] then FindAtPosCat(tyc2);
-  if Fcatalog.cfgcat.starcaton[tic-BaseStar] then FindAtPosCat(tic);
-  if Fcatalog.cfgcat.starcaton[dstyc-BaseStar] then FindAtPosCat(dstyc);
-  if Fcatalog.cfgcat.starcaton[gsc-BaseStar] then FindAtPosCat(gsc);
-  if Fcatalog.cfgcat.starcaton[gscf-BaseStar] then FindAtPosCat(gscf);
-  if Fcatalog.cfgcat.starcaton[gscc-BaseStar] then FindAtPosCat(gscc);
-  if Fcatalog.cfgcat.starcaton[dsgsc-BaseStar] then FindAtPosCat(dsgsc);
-  if Fcatalog.cfgcat.starcaton[usnoa-BaseStar] then FindAtPosCat(usnoa);
-  if Fcatalog.cfgcat.starcaton[microcat-BaseStar] then FindAtPosCat(microcat);
+  if allobject or Fcatalog.cfgshr.ListPla then FindatPosPlanet;
+  if allobject or Fcatalog.cfgshr.ListNeb then begin
+     FindAtPosCat(gcneb);
+     if Fcatalog.cfgcat.nebcaton[sac-BaseNeb] then FindAtPosCat(sac);
+     if Fcatalog.cfgcat.nebcaton[ngc-BaseNeb] then FindAtPosCat(ngc);
+     if Fcatalog.cfgcat.nebcaton[lbn-BaseNeb] then FindAtPosCat(lbn);
+     if Fcatalog.cfgcat.nebcaton[rc3-BaseNeb] then FindAtPosCat(rc3);
+     if Fcatalog.cfgcat.nebcaton[pgc-BaseNeb] then FindAtPosCat(pgc);
+     if Fcatalog.cfgcat.nebcaton[ocl-BaseNeb] then FindAtPosCat(ocl);
+     if Fcatalog.cfgcat.nebcaton[gcm-BaseNeb] then FindAtPosCat(gcm);
+     if Fcatalog.cfgcat.nebcaton[gpn-BaseNeb] then FindAtPosCat(gpn);
+  end;
+  if allobject or Fcatalog.cfgshr.ListVar then begin
+     FindAtPosCat(gcvar);
+     if Fcatalog.cfgcat.varstarcaton[gcvs-BaseVar] then FindAtPosCat(gcvs);
+  end;
+  if allobject or Fcatalog.cfgshr.ListDbl then begin
+     FindAtPosCat(gcdbl);
+     if Fcatalog.cfgcat.dblstarcaton[wds-BaseDbl]  then FindAtPosCat(wds);
+  end;
+  if allobject or Fcatalog.cfgshr.ListStar then begin
+     FindAtPosCat(gcstar);
+     if Fcatalog.cfgcat.starcaton[bsc-BaseStar] then FindAtPosCat(bsc);
+     if Fcatalog.cfgcat.starcaton[dsbase-BaseStar] then FindAtPosCat(dsbase);
+     if Fcatalog.cfgcat.starcaton[sky2000-BaseStar] then FindAtPosCat(sky2000);
+     if Fcatalog.cfgcat.starcaton[tyc-BaseStar] then FindAtPosCat(tyc);
+     if Fcatalog.cfgcat.starcaton[tyc2-BaseStar] then FindAtPosCat(tyc2);
+     if Fcatalog.cfgcat.starcaton[tic-BaseStar] then FindAtPosCat(tic);
+     if Fcatalog.cfgcat.starcaton[dstyc-BaseStar] then FindAtPosCat(dstyc);
+     if Fcatalog.cfgcat.starcaton[gsc-BaseStar] then FindAtPosCat(gsc);
+     if Fcatalog.cfgcat.starcaton[gscf-BaseStar] then FindAtPosCat(gscf);
+     if Fcatalog.cfgcat.starcaton[gscc-BaseStar] then FindAtPosCat(gscc);
+     if Fcatalog.cfgcat.starcaton[dsgsc-BaseStar] then FindAtPosCat(dsgsc);
+     if Fcatalog.cfgcat.starcaton[usnoa-BaseStar] then FindAtPosCat(usnoa);
+     if Fcatalog.cfgcat.starcaton[microcat-BaseStar] then FindAtPosCat(microcat);
+  end;
   if i>maxln then desc:='More than '+inttostr(maxln)+' objects, result truncated.'
              else desc:='There is '+inttostr(i)+' objects in this field.';
   text:=text+desc+crlf;

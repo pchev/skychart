@@ -1,7 +1,7 @@
 object f_detail: Tf_detail
   Left = 516
   Top = 103
-  Width = 286
+  Width = 335
   Height = 349
   Caption = 'Details'
   Color = clBtnFace
@@ -16,7 +16,7 @@ object f_detail: Tf_detail
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 278
+    Width = 327
     Height = 41
     Align = alTop
     TabOrder = 0
@@ -52,7 +52,7 @@ object f_detail: Tf_detail
   object memo: TRichEdit
     Left = 0
     Top = 41
-    Width = 278
+    Width = 327
     Height = 281
     Align = alClient
     Lines.Strings = (
