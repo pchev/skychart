@@ -264,7 +264,7 @@ begin
 // code to execute when the chart get focus.
 f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
 f_main.settopmessage(GetChartInfo);
-if sc.cfgsc.FindOk then f_main.SetLpanel1(sc.cfgsc.FindDesc,caption);
+if sc.cfgsc.FindOk then f_main.SetLpanel1(sc.cfgsc.FindDesc,caption,false);
 end;
 
 procedure Tf_chart.FlipxExecute(Sender: TObject);
@@ -700,8 +700,8 @@ f_detail.setfocus;
 end;
 
 function Tf_chart.FormatDesc:string;
-var desc,buf,objtype: string;
-    i,n,p : integer;
+var desc,buf,buf2: string;
+    i,n,p,l : integer;
     ra,dec,a,h :double;
 function Bold(s:string):string;
 var k:integer;
@@ -716,34 +716,27 @@ end;
 begin
 desc:=sc.cfgsc.FindDesc;
 result:=html_h;
-p:=length(ldeg)+length(lmin)+length(lsec);
-buf:=trim(copy(desc,25+p,3));
-objtype:=trim(buf);
+p:=posex(tab,desc);
+p:=posex(tab,desc,p+1);
+l:=posex(tab,desc,p+1);
+buf:=trim(copy(desc,p+1,l-p-1));
+//objtype:=trim(buf);
 buf:=LongLabelObj(buf);
 result:=result+html_h2+buf+htms_h2;
-buf:=trim(copy(desc,28+p,999));
-i:=pos(':',buf);
-while i>0 do begin
-  n:=1;
-  repeat
-    inc(n);
-    i:=i-1;
-    if buf[i]=' ' then break;
-  until i=1;
-  if i>1 then begin
-    if copy(buf,1,5)='desc:' then buf:=stringreplace(buf,';',html_br,[rfReplaceAll]);
-    result:=result+bold(LongLabel(copy(buf,1,i)))+html_br;
-    delete(buf,1,i);
+buf:=copy(desc,l+1,9999);
+repeat
+  i:=posex(tab,buf);
+  if i=0 then i:=length(buf)+1;
+  buf2:=copy(buf,1,i-1);
+  delete(buf,1,i);
+  i:=pos(':',buf2);
+  if i>0 then begin
+     result:=result+bold(LongLabel(copy(buf2,1,i)));
+     if copy(buf2,1,5)='desc:' then buf2:=stringreplace(buf2,';',html_br,[rfReplaceAll]);
+     delete(buf2,1,i);
   end;
-  i:=pos(':',copy(buf,n,999));
-  if i>0 then i:=i+n;
-end;
-i:=pos(';',buf);
-if i=0 then result:=result+bold(LongLabel(buf))+html_br
-else begin
-   result:=result+bold(LongLabel(copy(buf,1,i-1)))+html_br;
-   result:=result+LongLabel(copy(buf,i+1,999))+html_br;
-end;
+  result:=result+buf2+html_br;
+until buf='';
 result:=result+html_br+html_ffx;
 result:=result+html_b+sc.cfgsc.EquinoxName+html_sp+'RA: '+htms_b+arptostr(rad2deg*sc.cfgsc.FindRA/15)+'   DE:'+deptostr(rad2deg*sc.cfgsc.FindDec)+html_br;
 if (sc.cfgsc.EquinoxName<>'J2000') then begin
@@ -781,22 +774,18 @@ result:=result+html_br;
 if pos('PA:',f_main.LPanels0.caption)>0
    then result:=result+html_b+sc.catalog.cfgshr.llabel[98]+' : '+htms_b+f_main.LPanels0.caption+html_br;
 buf:=sc.cfgsc.FindNote;
-i:=pos(':',buf);
-while i>0 do begin
-  n:=1;
-  repeat
-    inc(n);
-    i:=i-1;
-    if buf[i]=' ' then break;
-  until i=0;
+repeat
+  i:=posex(tab,buf);
+  if i=0 then i:=length(buf)+1;
+  buf2:=copy(buf,1,i-1);
+  delete(buf,1,i);
+  i:=pos(':',buf2);
   if i>0 then begin
-    result:=result+bold(copy(buf,1,i))+html_br;
-    buf:=copy(buf,i+1,9999);
-  end
-  else break;
-  i:=pos(':',copy(buf,n,9999));
-  if i>0 then i:=i+n;
-end;
+     result:=result+bold(copy(buf2,1,i));
+     delete(buf2,1,i);
+  end;
+  result:=result+buf2+html_br;
+until buf='';
 result:=result+htms_f+html_br+htms_h;
 end;
 
@@ -962,11 +951,20 @@ if (x>=0)and(x<=image1.width)and(y>=0)and(y<=image1.height) then begin
 
   xcursor:=x;
 
-  xcursor:=y;
+  ycursor:=y;
 
-  result:='OK';
+  result:=msgOK;
 
-end else result:='Bad position.';
+end else result:=msgfailed+' Bad position.';
+
+end;
+
+
+function Tf_Chart.cmd_GetCursorPosition :string;
+
+begin
+
+result:=msgOK+blank+inttostr(xcursor)+blank+inttostr(ycursor);
 
 end;
 
@@ -977,9 +975,16 @@ begin
 
  sc.cfgsc.ShowEqGrid := (uppercase(onoff)='ON');
 
- Refresh;
+ result:=msgOK;
 
- result:='OK';
+end;
+
+function Tf_Chart.cmd_GetGridEQ:string;
+begin
+
+ if sc.cfgsc.ShowEqGrid then result:=msgOK+' ON'
+
+                        else result:=msgOK+' OFF'
 
 end;
 
@@ -988,9 +993,18 @@ begin
 
  sc.cfgsc.ShowGrid := (uppercase(onoff)='ON');
 
- Refresh;
+ result:=msgOK;
 
- result:='OK';
+end;
+
+
+function Tf_Chart.cmd_GetGrid:string;
+
+begin
+
+ if sc.cfgsc.ShowGrid then result:=msgOK+' ON'
+
+                      else result:=msgOK+' OFF'
 
 end;
 
@@ -1000,107 +1014,178 @@ function Tf_chart.cmd_SetStarMode(i:integer):string;
 begin
 if (i>=0)and(i<=1) then begin
   sc.plot.cfgplot.starplot:=i;
-  result:='';
-  Refresh;
-  result:='OK';
-end else result:='Bad star mode.';
+  result:=msgOK;
+end else result:=msgFailed+' Bad star mode.';
+end;
+
+function Tf_chart.cmd_GetStarMode:string;
+begin
+  result:=msgOK+blank+inttostr(sc.plot.cfgplot.starplot);
 end;
 
 function Tf_chart.cmd_SetNebMode(i:integer):string;
 begin
 if (i>=0)and(i<=1) then begin
   sc.plot.cfgplot.nebplot:=i;
-  result:='';
-  Refresh;
-  result:='OK';
-end else result:='Bad nebula mode.';
+  result:=msgOK;
+end else result:=msgFailed+' Bad nebula mode.';
+end;
+
+function Tf_chart.cmd_GetNebMode:string;
+begin
+  result:=msgOK+blank+inttostr(sc.plot.cfgplot.nebplot);
 end;
 
 function Tf_chart.cmd_SetSkyMode(onoff:string):string;
 begin
 sc.plot.cfgplot.autoskycolor:=(uppercase(onoff)='ON');
-Refresh;
-result:='OK';
+result:=msgOK;
+end;
+
+function Tf_chart.cmd_GetSkyMode:string;
+begin
+ if sc.plot.cfgplot.autoskycolor then result:=msgOK+' ON'
+                                 else result:=msgOK+' OFF'
+
 end;
 
 function Tf_chart.cmd_SetProjection(proj:string):string;
 begin
-result:='OK';
+result:=msgOK;
 proj:=uppercase(proj);
 if proj='ALTAZ' then sc.cfgsc.projpole:=altaz
   else if proj='EQUAT' then sc.cfgsc.projpole:=equat
   else if proj='GALACTIC' then sc.cfgsc.projpole:=gal
   else if proj='ECLIPTIC' then sc.cfgsc.projpole:=ecl
-  else result:='Bad projection name.';
+  else result:=msgFailed+' Bad projection name.';
 sc.cfgsc.FindOk:=false;
-Refresh;
+end;
+
+function Tf_chart.cmd_GetProjection:string;
+begin
+case sc.cfgsc.projpole of
+equat :  result:='EQUAT';
+altaz :  result:='ALTAZ';
+gal   :  result:='GALACTIC';
+ecl   :  result:='ECLIPTIC';
+end;
+result:=msgOK+blank+result;
 end;
 
 function Tf_chart.cmd_SetFov(fov:string):string;
 var f : double;
     p : integer;
 begin
-result:='Bad format!';
+result:=msgFailed+' Bad format!';
 try
 fov:=trim(fov);
 p:=pos('d',fov);
-f:=strtofloat(copy(fov,1,p-1));
-fov:=copy(fov,p+1,999);
-p:=pos('m',fov);
-f:=f+strtofloat(copy(fov,1,p-1))/60;
-fov:=copy(fov,p+1,999);
-p:=pos('s',fov);
-f:=f+strtofloat(copy(fov,1,p-1))/3600;
+if p>0 then begin
+  f:=strtofloat(copy(fov,1,p-1));
+  fov:=copy(fov,p+1,999);
+  p:=pos('m',fov);
+  f:=f+strtofloat(copy(fov,1,p-1))/60;
+  fov:=copy(fov,p+1,999);
+  p:=pos('s',fov);
+  f:=f+strtofloat(copy(fov,1,p-1))/3600;
+end else begin
+  f:=strtofloat(fov);
+end;
 sc.setfov(deg2rad*f);
-Refresh;
-result:='OK';
+result:=msgOK;
 except
 exit;
 end;
 end;
 
-function Tf_chart.cmd_SetRaDec(param:string):string;
+function Tf_chart.cmd_GetFov(format:string):string;
+begin
+if format='F' then begin
+ result:=msgOK+blank+formatfloat(f5,rad2deg*sc.cfgsc.fov);
+end else begin
+ result:=msgOK+blank+detostr3(rad2deg*sc.cfgsc.fov);
+end
+end;
+
+function Tf_chart.cmd_SetRa(param1:string):string;
 var buf : string;
     p : integer;
-    s,ar,de : double;
+    ar : double;
 begin
-result:='Bad coordinates format!';
+result:=msgFailed+' Bad coordinates format!';
 try
-p:=pos('RA:',param);
-if p=0 then exit;
-buf:=copy(param,p+3,999);
-p:=pos('h',buf);
-ar:=strtofloat(copy(buf,1,p-1));
-buf:=copy(buf,p+1,999);
-p:=pos('m',buf);
-ar:=ar+strtofloat(copy(buf,1,p-1))/60;
-buf:=copy(buf,p+1,999);
-p:=pos('s',buf);
-ar:=ar+strtofloat(copy(buf,1,p-1))/3600;
-p:=pos('DEC:',param);
-if p=0 then exit;
-buf:=copy(param,p+4,999);
-p:=pos('d',buf);
-de:=strtofloat(copy(buf,1,p-1));
-s:=sgn(de);
-buf:=copy(buf,p+1,999);
-p:=pos('m',buf);
-de:=de+s*strtofloat(copy(buf,1,p-1))/60;
-buf:=copy(buf,p+1,999);
-p:=pos('s',buf);
-de:=de+s*strtofloat(copy(buf,1,p-1))/3600;
-sc.MovetoRaDec(deg2rad*ar*15,deg2rad*de);
-Refresh;
-result:='OK';
+p:=pos('RA:',param1);
+if p>0 then begin
+ buf:=copy(param1,p+3,999);
+ p:=pos('h',buf);
+ ar:=strtofloat(copy(buf,1,p-1));
+ buf:=copy(buf,p+1,999);
+ p:=pos('m',buf);
+ ar:=ar+strtofloat(copy(buf,1,p-1))/60;
+ buf:=copy(buf,p+1,999);
+ p:=pos('s',buf);
+ ar:=ar+strtofloat(copy(buf,1,p-1))/3600;
+end else begin
+ ar:=strtofloat(param1);
+end;
+sc.cfgsc.racentre:=rmod(deg2rad*ar*15+pi2,pi2);
+result:=msgOK;
 except
 exit;
 end;
+end;
+
+function Tf_chart.cmd_SetDec(param1:string):string;
+var buf : string;
+    p : integer;
+    s,de : double;
+begin
+result:=msgFailed+' Bad coordinates format!';
+try
+p:=pos('DEC:',param1);
+if p>0 then begin
+ buf:=copy(param1,p+4,999);
+ p:=pos('d',buf);
+ de:=strtofloat(copy(buf,1,p-1));
+ s:=sgn(de);
+ buf:=copy(buf,p+1,999);
+ p:=pos('m',buf);
+ de:=de+s*strtofloat(copy(buf,1,p-1))/60;
+ buf:=copy(buf,p+1,999);
+ p:=pos('s',buf);
+ de:=de+s*strtofloat(copy(buf,1,p-1))/3600;
+end else begin
+ de:=strtofloat(param1);
+end;
+sc.cfgsc.decentre:=deg2rad*de;
+result:=msgOK;
+except
+exit;
+end;
+end;
+
+function Tf_chart.cmd_GetRA(format:string):string;
+begin
+if format='F' then begin
+ result:=msgOK+blank+formatfloat(f5,rad2deg*sc.cfgsc.racentre/15);
+end else begin
+ result:=msgOK+blank+artostr3(rad2deg*sc.cfgsc.racentre/15);
+end
+end;
+
+function Tf_chart.cmd_GetDEC(format:string):string;
+begin
+if format='F' then begin
+ result:=msgOK+blank+formatfloat(f5,rad2deg*sc.cfgsc.decentre);
+end else begin
+ result:=msgOK+blank+detostr3(rad2deg*sc.cfgsc.decentre);
+end
 end;
 
 function Tf_chart.cmd_SetDate(dt:string):string;
 var p,y,m,d,h,n,s : integer;
 begin
-result:='Bad date format!';
+result:=msgFailed+' Bad date format!';
 try
 dt:=trim(dt);
 p:=pos('-',dt);
@@ -1129,11 +1214,15 @@ sc.cfgsc.CurYear:=y;
 sc.cfgsc.CurMonth:=m;
 sc.cfgsc.CurDay:=d;
 sc.cfgsc.CurTime:=h+n/60+s/3600;
-Refresh;
-result:='OK';
+result:=msgOK;
 except
 exit;
 end;
+end;
+
+function Tf_chart.cmd_GetDate:string;
+begin
+result:=msgOK+blank+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+'T'+ArToStr3(sc.cfgsc.Curtime);
 end;
 
 function Tf_chart.cmd_SetObs(obs:string):string;
@@ -1141,9 +1230,9 @@ var n,buf : string;
     p : integer;
     s,la,lo,al : double;
 begin
-result:='Bad observatory format!';
+result:=msgFailed+' Bad observatory format!';
 try
-p:=pos('LAT:',obs);
+p:=pos('LAT:',obs);          
 if p=0 then exit;
 buf:=copy(obs,p+4,999);
 p:=pos('d',buf);
@@ -1172,12 +1261,6 @@ if p=0 then exit;
 buf:=copy(obs,p+4,999);
 p:=pos('m',buf);
 al:=strtofloat(copy(buf,1,p-1));
-p:=pos('TZ:',obs);
-if p>0 then begin
-  buf:=copy(obs,p+3,999);
-  p:=pos('h',buf);
-  sc.cfgsc.ObsTZ:=strtofloat(copy(buf,1,p-1));
-end;
 p:=pos('OBS:',obs);
 if p=0 then n:='obs?'
        else n:=trim(copy(obs,p+4,999));
@@ -1190,25 +1273,44 @@ if p>0 then begin
    delete(n,1,p);
 end else sc.cfgsc.Obscountry:='';
 sc.cfgsc.ObsName := n;
-Refresh;
-result:='OK';
+result:=msgOK;
 except
 exit;
 end;
 end;
 
+function Tf_chart.cmd_GetObs:string;
+begin
+result:=msgOK+blank+'LAT:'+detostr3(sc.cfgsc.ObsLatitude)+'LON:'+detostr3(sc.cfgsc.ObsLongitude)+'ALT:'+formatfloat(f0,sc.cfgsc.ObsAltitude)+'mOBS:'+sc.cfgsc.Obscountry+'/'+sc.cfgsc.ObsName;
+end;
+
+function Tf_chart.cmd_SetTZ(tz:string):string;
+begin
+try
+  sc.cfgsc.ObsTZ:=strtofloat(tz);
+  result:=msgOK;
+except
+  result:=msgFailed;
+end
+end;
+
+function Tf_chart.cmd_GetTZ:string;
+begin
+ result:=msgOK+blank+formatfloat(f1,sc.cfgsc.ObsTZ);
+end;
+
 function Tf_chart.cmd_IdentCursor:string;
 begin
-if identxy(xcursor,ycursor) then result:='OK'
-   else result:='No object found!';
+if identxy(xcursor,ycursor) then result:=msgOK
+   else result:=msgFailed+' No object found!';
 end;
 
 function Tf_chart.cmd_SaveImage(format,fn,quality:string):string;
 var i : integer;
 begin
 i:=strtointdef(quality,75);
-if SaveChartImage(format,fn,i) then result:='OK'
-   else result:='Failed!';
+if SaveChartImage(format,fn,i) then result:=msgOK
+   else result:=msgFailed;
 end;
 
 function Tf_chart.ExecuteCmd(arg:Tstringlist):string;
@@ -1222,26 +1324,26 @@ for i:=1 to numcmd do
       n:=strtointdef(cmdlist[i,2],-1);
       break;
    end;
-result:='OK';
+result:=msgOK;
 case n of
- 1 : zoomplusExecute(self);
- 2 : zoomminusExecute(self);
- 3 : MoveEastExecute(self);
- 4 : MoveWestExecute(self);
- 5 : MoveNorthExecute(self);
- 6 : MoveSouthExecute(self);
- 7 : MoveNorthEastExecute(self);
- 8 : MoveNorthWestExecute(self);
- 9 : MoveSouthEastExecute(self);
- 10 : MoveSouthWestExecute(self);
- 11 : FlipxExecute(self);
- 12 : FlipyExecute(self);
+ 1 : sc.zoom(zoomfactor);
+ 2 : sc.zoom(1/zoomfactor);
+ 3 : sc.MoveChart(0,1,movefactor);
+ 4 : sc.MoveChart(0,-1,movefactor);
+ 5 : sc.MoveChart(1,0,movefactor);
+ 6 : sc.MoveChart(-1,0,movefactor);
+ 7 : sc.MoveChart(1,1,movefactor);
+ 8 : sc.MoveChart(1,-1,movefactor);
+ 9 : sc.MoveChart(-1,1,movefactor);
+ 10 : sc.MoveChart(-1,-1,movefactor);
+ 11 : begin sc.cfgsc.FlipX:=-sc.cfgsc.FlipX; f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);end;
+ 12 : begin sc.cfgsc.FlipY:=-sc.cfgsc.FlipY; f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);end;
  13 : result:=cmd_SetCursorPosition(strtointdef(arg[1],-1),strtointdef(arg[2],-1));
- 14 : CentreExecute(self);
- 15 : zoomplusmoveExecute(self);
- 16 : zoomminusmoveExecute(self);
- 17 : rot_plusExecute(self);
- 18 : rot_minusExecute(self);
+ 14 : sc.MovetoXY(xcursor,ycursor);
+ 15 : begin sc.zoom(zoomfactor);sc.MovetoXY(xcursor,ycursor);end;
+ 16 : begin sc.zoom(1/zoomfactor);sc.MovetoXY(xcursor,ycursor);end;
+ 17 : sc.cfgsc.theta:=sc.cfgsc.theta+deg2rad*15;
+ 18 : sc.cfgsc.theta:=sc.cfgsc.theta-deg2rad*15;
  19 : result:=cmd_SetGridEQ(arg[1]);
  20 : result:=cmd_SetGrid(arg[1]);
  21 : result:=cmd_SetStarMode(strtointdef(arg[1],-1));
@@ -1251,18 +1353,34 @@ case n of
  25 : RedoExecute(self);
  26 : result:=cmd_SetProjection(arg[1]);
  27 : result:=cmd_SetFov(arg[1]);
- 28 : result:=cmd_SetRaDec(arg[1]);
- 29 : result:=cmd_SetDate(arg[1]);
+ 28 : result:=cmd_SetRa(arg[1]);
+ 29 : result:=cmd_SetDec(arg[1]);
  30 : result:=cmd_SetObs(arg[1]);
  31 : result:=cmd_IdentCursor;
  32 : result:=cmd_SaveImage(arg[1],arg[2],arg[3]);
- 33 : begin SetAz(deg2rad*180); result:='OK'; end;
- 34 : begin SetAz(0); result:='OK'; end;
- 35 : begin SetAz(deg2rad*270); result:='OK'; end;
- 36 : begin SetAz(deg2rad*90); result:='OK'; end;
- 37 : begin SetZenit(0); result:='OK'; end;
- 38 : begin SetZenit(deg2rad*200); result:='OK'; end;
-else result:='Bad command name';
+ 33 : SetAz(deg2rad*180,false);
+ 34 : SetAz(0,false);
+ 35 : SetAz(deg2rad*270,false);
+ 36 : SetAz(deg2rad*90,false);
+ 37 : SetZenit(0,false);
+ 38 : SetZenit(deg2rad*200,false);
+ 39 : Refresh;
+ 40 : result:=cmd_GetCursorPosition;
+ 41 : result:=cmd_GetGridEQ;
+ 42 : result:=cmd_GetGrid;
+ 43 : result:=cmd_GetStarMode;
+ 44 : result:=cmd_GetNebMode;
+ 45 : result:=cmd_GetSkyMode;
+ 46 : result:=cmd_GetProjection;
+ 47 : result:=cmd_GetFov(arg[1]);
+ 48 : result:=cmd_GetRA(arg[1]);
+ 49 : result:=cmd_GetDEC(arg[1]);
+ 50 : result:=cmd_GetDate;
+ 51 : result:=cmd_GetObs;
+ 52 : result:=cmd_SetDate(arg[1]);
+ 53 : result:=cmd_SetTZ(arg[1]);
+ 54 : result:=cmd_GetTZ;
+else result:=msgFailed+' Bad command name';
 end;
 end;
 
@@ -1309,7 +1427,7 @@ sc.setfov(field);
 Refresh;
 end;
 
-procedure Tf_chart.SetZenit(field : double);
+procedure Tf_chart.SetZenit(field : double; redraw:boolean=true);
 var a,d,az : double;
 begin
 az:=sc.cfgsc.acentre;
@@ -1324,12 +1442,12 @@ Hz2Eq(sc.cfgsc.acentre,sc.cfgsc.hcentre,a,d,sc.cfgsc);
 sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
 sc.cfgsc.decentre:=d;
 if field>0 then begin
-   setaz(az);
+   setaz(az,redraw);
    end
-else Refresh;
+else if redraw then Refresh;
 end;
 
-procedure Tf_chart.SetAz(Az : double);
+procedure Tf_chart.SetAz(Az : double; redraw:boolean=true);
 var a,d : double;
 begin
 a := minvalue([sc.cfgsc.Fov,sc.cfgsc.Fov/sc.cfgsc.windowratio]);
@@ -1338,7 +1456,7 @@ if sc.cfgsc.Fov<pi then Hz2Eq(Az,a/2.3,a,d,sc.cfgsc)
 sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
 sc.cfgsc.decentre:=d;
 sc.cfgsc.ProjPole:=Altaz;
-Refresh;
+if redraw then Refresh;
 end;
 
 procedure Tf_chart.SetDate(y,m,d,h,n,s:integer);

@@ -1,5 +1,5 @@
 object f_config: Tf_config
-  Left = 230
+  Left = 248
   Top = 255
   Width = 639
   Height = 480
@@ -25,13 +25,13 @@ object f_config: Tf_config
     Top = 0
     Width = 474
     Height = 433
-    ActivePage = p_color
+    ActivePage = TabSheet1
     Style = tsNoTabs
     TabOrder = 0
     OnChange = PageControl1Change
     object p_time: TTabSheet
       Caption = 'p_time'
-      ImageIndex = 19
+      ImageIndex = -1
       TabVisible = False
       object Panel11: TPanel
         Left = 32
@@ -375,7 +375,7 @@ object f_config: Tf_config
     end
     object p_simulation: TTabSheet
       Caption = 'p_simulation'
-      ImageIndex = 20
+      ImageIndex = -1
       TabVisible = False
       object SpeedButton7: TSpeedButton
         Left = 256
@@ -496,7 +496,7 @@ object f_config: Tf_config
     end
     object p_observatory: TTabSheet
       Caption = 'p_observatory'
-      ImageIndex = 27
+      ImageIndex = -1
       object Latitude: TGroupBox
         Left = 8
         Top = 80
@@ -1392,7 +1392,7 @@ object f_config: Tf_config
     end
     object p_chart: TTabSheet
       Caption = 'p_chart'
-      ImageIndex = 14
+      ImageIndex = -1
       TabVisible = False
       object Label31: TLabel
         Left = 0
@@ -1564,7 +1564,7 @@ object f_config: Tf_config
     end
     object p_fov: TTabSheet
       Caption = 'p_fov'
-      ImageIndex = 15
+      ImageIndex = -1
       TabVisible = False
       object Bevel1: TBevel
         Left = 16
@@ -1985,7 +1985,7 @@ object f_config: Tf_config
     object p_projection: TTabSheet
       Tag = 1
       Caption = 'p_projection'
-      ImageIndex = 21
+      ImageIndex = -1
       ParentShowHint = False
       ShowHint = True
       TabVisible = False
@@ -2349,7 +2349,7 @@ object f_config: Tf_config
     end
     object p_filter: TTabSheet
       Caption = 'p_filter'
-      ImageIndex = 16
+      ImageIndex = -1
       TabVisible = False
       object Label29: TLabel
         Left = 0
@@ -3064,7 +3064,7 @@ object f_config: Tf_config
     end
     object p_gridspacing: TTabSheet
       Caption = 'p_gridspacing'
-      ImageIndex = 22
+      ImageIndex = -1
       TabVisible = False
       object Bevel9: TBevel
         Left = 8
@@ -3510,6 +3510,7 @@ object f_config: Tf_config
     end
     object p_catgen: TTabSheet
       Caption = 'p_catgen'
+      ImageIndex = -1
       TabVisible = False
       object Label1: TLabel
         Left = 0
@@ -3569,7 +3570,7 @@ object f_config: Tf_config
     end
     object p_cdc: TTabSheet
       Caption = 'p_cdc'
-      ImageIndex = 12
+      ImageIndex = -1
       TabVisible = False
       object Label13: TLabel
         Left = 0
@@ -3593,7 +3594,7 @@ object f_config: Tf_config
     end
     object p_cdcstars: TTabSheet
       Caption = 'p_cdcstars'
-      ImageIndex = 1
+      ImageIndex = -1
       TabVisible = False
       object Label2: TLabel
         Left = 0
@@ -5068,7 +5069,7 @@ object f_config: Tf_config
     end
     object p_cdcneb: TTabSheet
       Caption = 'p_cdcneb'
-      ImageIndex = 2
+      ImageIndex = -1
       TabVisible = False
       object Bevel5: TBevel
         Left = 1
@@ -5923,7 +5924,7 @@ object f_config: Tf_config
     end
     object p_external: TTabSheet
       Caption = 'p_external'
-      ImageIndex = 3
+      ImageIndex = -1
       TabVisible = False
       object Label4: TLabel
         Left = 0
@@ -6060,7 +6061,7 @@ object f_config: Tf_config
     end
     object p_solsys: TTabSheet
       Caption = 'p_solsys'
-      ImageIndex = 11
+      ImageIndex = -1
       TabVisible = False
       object Label12: TLabel
         Left = 0
@@ -6137,7 +6138,7 @@ object f_config: Tf_config
     end
     object p_planets: TTabSheet
       Caption = 'p_planets'
-      ImageIndex = 4
+      ImageIndex = -1
       TabVisible = False
       object Label5: TLabel
         Left = 0
@@ -6297,7 +6298,7 @@ object f_config: Tf_config
     end
     object p_comets: TTabSheet
       Caption = 'p_comets'
-      ImageIndex = 5
+      ImageIndex = -1
       TabVisible = False
       object Label6: TLabel
         Left = 0
@@ -6309,7 +6310,7 @@ object f_config: Tf_config
     end
     object p_asteroids: TTabSheet
       Caption = 'p_asteroids'
-      ImageIndex = 6
+      ImageIndex = -1
       TabVisible = False
       object Label7: TLabel
         Left = 0
@@ -6321,7 +6322,7 @@ object f_config: Tf_config
     end
     object p_display: TTabSheet
       Caption = 'p_display'
-      ImageIndex = 13
+      ImageIndex = -1
       TabVisible = False
       object Label14: TLabel
         Left = 0
@@ -6359,7 +6360,7 @@ object f_config: Tf_config
     end
     object p_fonts: TTabSheet
       Caption = 'p_fonts'
-      ImageIndex = 18
+      ImageIndex = -1
       TabVisible = False
       object Bevel10: TBevel
         Left = 8
@@ -6882,7 +6883,7 @@ object f_config: Tf_config
     end
     object p_color: TTabSheet
       Caption = 'p_color'
-      ImageIndex = 7
+      ImageIndex = -1
       TabVisible = False
       object Label8: TLabel
         Left = 0
@@ -7277,7 +7278,7 @@ object f_config: Tf_config
     end
     object p_skycolor: TTabSheet
       Caption = 'p_skycolor'
-      ImageIndex = 23
+      ImageIndex = -1
       object Label200: TLabel
         Left = 0
         Top = 0
@@ -7410,7 +7411,7 @@ object f_config: Tf_config
     end
     object p_nebcolor: TTabSheet
       Caption = 'p_nebcolor'
-      ImageIndex = 24
+      ImageIndex = -1
       object Label201: TLabel
         Left = 0
         Top = 0
@@ -7421,7 +7422,7 @@ object f_config: Tf_config
     end
     object p_lines: TTabSheet
       Caption = 'p_lines'
-      ImageIndex = 8
+      ImageIndex = -1
       TabVisible = False
       object Bevel6: TBevel
         Left = 8
@@ -7643,7 +7644,7 @@ object f_config: Tf_config
     end
     object p_horizon: TTabSheet
       Caption = 'p_horizon'
-      ImageIndex = 27
+      ImageIndex = -1
       object horizonopaque: TCheckBox
         Left = 16
         Top = 72
@@ -7717,7 +7718,7 @@ object f_config: Tf_config
     end
     object p_labels: TTabSheet
       Caption = 'p_labels'
-      ImageIndex = 9
+      ImageIndex = -1
       TabVisible = False
       object Label10: TLabel
         Left = 0
@@ -7729,7 +7730,7 @@ object f_config: Tf_config
     end
     object p_image: TTabSheet
       Caption = 'p_image'
-      ImageIndex = 17
+      ImageIndex = -1
       TabVisible = False
       object Label113: TLabel
         Left = 0
@@ -7741,18 +7742,32 @@ object f_config: Tf_config
     end
     object p_system: TTabSheet
       Caption = 'p_system'
-      ImageIndex = 25
+      ImageIndex = -1
+      object Label84: TLabel
+        Left = 0
+        Top = 0
+        Width = 71
+        Height = 18
+        Caption = 'System Setting'
+      end
     end
     object p_server: TTabSheet
       Caption = 'p_server'
-      ImageIndex = 26
+      ImageIndex = -1
+      object Label54: TLabel
+        Left = 0
+        Top = 0
+        Width = 68
+        Height = 18
+        Caption = 'Server Setting'
+      end
       object GroupBox3: TGroupBox
         Left = 16
         Top = 16
         Width = 393
         Height = 177
         Caption = 'TCP/IP Server'
-        TabOrder = 0
+        TabOrder = 1
         object UseIPserver: TCheckBox
           Left = 16
           Top = 32
@@ -7771,14 +7786,14 @@ object f_config: Tf_config
           Text = '127.0.0.1'
           OnChange = ipaddrChange
         end
-        object Label54: TLabel
+        object Label55: TLabel
           Left = 16
           Top = 104
           Width = 94
           Height = 18
           Caption = 'Server IP Interface :'
         end
-        object Label55: TLabel
+        object Label85: TLabel
           Left = 16
           Top = 140
           Width = 74
@@ -7810,7 +7825,7 @@ object f_config: Tf_config
         Width = 393
         Height = 105
         Caption = 'TCP/IP Server Status'
-        TabOrder = 1
+        TabOrder = 2
         object ipstatus: TEdit
           Left = 16
           Top = 24
@@ -7829,6 +7844,10 @@ object f_config: Tf_config
           OnClick = refreshIPClick
         end
       end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'Let one empty extra page at the end'
+      ImageIndex = -1
     end
   end
   object CancelBtn: TButton

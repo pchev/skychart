@@ -1032,23 +1032,23 @@ if result and (currentplanet<10) then begin
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   nom:=pla[CurrentPlanet];
   ma:=smagn;
-  Desc := sar+' '+sde
-          +'   P '+nom
-          +' '+syy+'-'+smm+'-'+sdd+' '+shh
-          +' m:'+smagn
-          +' diam:'+sdiam+' '+lsec
-          +' illum:'+sillum
-          +' phase:'+sphase+' '+ldeg
-          +' dist:'+sdist+' ua'
-          +' rsol:'+sdp+' ua';
+  Desc := sar+tab+sde+tab
+          +'  P'+tab+nom+tab
+          +syy+'-'+smm+'-'+sdd+' '+shh+tab
+          +'m:'+smagn+tab
+          +'diam:'+sdiam+' '+lsec+tab
+          +'illum:'+sillum+tab
+          +'phase:'+sphase+' '+ldeg+tab
+          +'dist:'+sdist+' ua'+tab
+          +'rsol:'+sdp+' ua'+tab;
   PlanetOrientation(jdt,CurrentPlanet,p,pde,pds,w1,w2,w3);
-  Desc:=Desc+' pa:'+formatfloat(d1,p)
-          +' PoleIncl:'+formatfloat(d1,pde)
-          +' SunIncl:'+formatfloat(d1,pds);
+  Desc:=Desc+'pa:'+formatfloat(d1,p)+tab
+          +'PoleIncl:'+formatfloat(d1,pde)+tab
+          +'SunIncl:'+formatfloat(d1,pds)+tab;
   if Currentplanet=5 then begin
-     Desc:=Desc+' CMI:'+formatfloat(d2,w1)
-          +' CMII:'+formatfloat(d2,w2)
-          +' CMIII:'+formatfloat(d2,w3);
+     Desc:=Desc+'CMI:'+formatfloat(d2,w1)+tab
+          +'CMII:'+formatfloat(d2,w2)+tab
+          +'CMIII:'+formatfloat(d2,w3)+tab;
      jd0:=jd(yy,mm,dd,0-cfgsc.TimeZone+cfgsc.DT_UT);
      PlanetOrientation(jd0,CurrentPlanet,p,pde,pds,w1,w2,w3);
      w1:=(cfgsc.GRSlongitude-w2)*24/870.27003539;
@@ -1058,9 +1058,9 @@ if result and (currentplanet<10) then begin
         w1:=w1+24*360/870.27003539;
         if (w1>0)and(w1<24) then shh:=shh+' '+ARmtoStr(w1);
      until w1>24;
-     Desc:=Desc+' GRStr:'+shh;
+     Desc:=Desc+'GRStr:'+shh+tab;
   end else begin
-     Desc:=Desc+' CM:'+formatfloat(d2,w1)
+     Desc:=Desc+'CM:'+formatfloat(d2,w1)+tab
   end;
 end;
 if result and (currentplanet=10) then begin
@@ -1069,15 +1069,15 @@ if result and (currentplanet=10) then begin
   str(diam/60:5:1,sdiam);
   nom:=pla[CurrentPlanet];
   ma:='-26';
-  Desc := sar+' '+sde
-          +'   P '+nom
-          +' '+syy+'-'+smm+'-'+sdd+' '+shh
-          +' diam:'+sdiam+' '+lmin
-          +' dist:'+sdist+' ua';
+  Desc := sar+tab+sde+tab
+          +'  P'+tab+nom
+          +syy+'-'+smm+'-'+sdd+' '+shh+tab
+          +'diam:'+sdiam+' '+lmin+tab
+          +'dist:'+sdist+' ua'+tab;
   PlanetOrientation(jdt,CurrentPlanet,p,pde,pds,w1,w2,w3);
-  Desc:=Desc+' pa:'+formatfloat(d1,p)
-          +' PoleIncl:'+formatfloat(d1,pde)
-          +' CM:'+formatfloat(d1,w1)
+  Desc:=Desc+'pa:'+formatfloat(d1,p)+tab
+          +'PoleIncl:'+formatfloat(d1,pde)+tab
+          +'CM:'+formatfloat(d1,w1)+tab;
 end;
 if result and (currentplanet=11) then begin
   Moon(jdt,ar,de,dist,dkm,diam,phase,illum);
@@ -1097,19 +1097,19 @@ if result and (currentplanet=11) then begin
   magn:=MoonMag(phase);
   str(magn:5:2,smagn);
   ma:=smagn;
-  Desc := sar+' '+sde
-          +'   P '+nom
-          +' '+syy+'-'+smm+'-'+sdd+' '+shh
-          +' m:'+smagn
-          +' diam:'+sdiam+' '+lmin
-          +' illum:'+sillum
-          +' phase:'+sphase+' '+ldeg
-          +' dist:'+sdist+' km';
+  Desc := sar+tab+sde+tab
+          +'  P'+nom+tab
+          +syy+'-'+smm+'-'+sdd+' '+shh+tab
+          +'m:'+smagn+tab
+          +'diam:'+sdiam+' '+lmin+tab
+          +'illum:'+sillum+tab
+          +'phase:'+sphase+' '+ldeg+tab
+          +'dist:'+sdist+' km'+tab;
   MoonOrientation(jdt,ar,de,dist,p,pde,pds,w1);
-  Desc := Desc+' pa:'+formatfloat(d1,p)
-          +' llat:'+formatfloat(d2,pde)
-          +' llon:'+formatfloat(d2,w1)
-          +' SunIncl:'+formatfloat(d2,pds);
+  Desc := Desc+'pa:'+formatfloat(d1,p)+tab
+          +'llat:'+formatfloat(d2,pde)+tab
+          +'llon:'+formatfloat(d2,w1)+tab
+          +'SunIncl:'+formatfloat(d2,pds)+tab;
 end;
 if result and (currentplanet=32) then begin   // Earth umbra
   jdt:=cfgsc.PlanetLst[CurrentStep,10,3];  // date from the Sun
@@ -1125,53 +1125,53 @@ if result and (currentplanet=32) then begin   // Earth umbra
   cfgsc.TrackName:='Earth umbra';
   nom:=cfgsc.Trackname;
   ma:='';
-  Desc := sar+' '+sde
-          +'   P '+nom
-          +' '+syy+'-'+smm+'-'+sdd+' '+shh;
+  Desc := sar+tab+sde+tab
+          +'  P'+nom+tab
+          +syy+'-'+smm+'-'+sdd+' '+shh+tab;
 end;
 if result and (currentplanet>11) and (currentplanet<=15) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
   ma:=smagn;
-  Desc := sar+' '+sde
-          +'   P '+nom
-          +' '+syy+'-'+smm+'-'+sdd+' '+shh
-          +' diam:'+sdiam+' '+lsec
-          +' m:'+smagn;
+  Desc := sar+tab+sde+tab
+          +'  P'+nom+tab
+          +syy+'-'+smm+'-'+sdd+' '+shh+tab
+          +'diam:'+sdiam+' '+lsec+tab
+          +'m:'+smagn+tab;
 end;
 if result and (currentplanet>15) and (currentplanet<=23) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
   ma:=smagn;
-  Desc := sar+' '+sde
-          +'   P '+nom
-          +' '+syy+'-'+smm+'-'+sdd+' '+shh
-          +' diam:'+sdiam+' '+lsec
-          +' m:'+smagn;
+  Desc := sar+tab+sde+tab
+          +'  P'+nom+tab
+          +syy+'-'+smm+'-'+sdd+' '+shh+tab
+          +'diam:'+sdiam+' '+lsec+tab
+          +'m:'+smagn+tab;
 end;
 if result and (currentplanet>23) and (currentplanet<=28) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
   ma:=smagn;
-  Desc := sar+' '+sde
-          +'   P '+nom
-          +' '+syy+'-'+smm+'-'+sdd+' '+shh
-          +' diam:'+sdiam+' '+lsec
-          +' m:'+smagn;
+  Desc := sar+tab+sde+tab
+          +'  P'+nom+tab
+          +syy+'-'+smm+'-'+sdd+' '+shh+tab
+          +'diam:'+sdiam+' '+lsec+tab
+          +'m:'+smagn+tab;
 end;
 if result and (currentplanet>28) and (currentplanet<=30) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
   ma:=smagn;
-  Desc := sar+' '+sde
-          +'   P '+nom
-          +' '+syy+'-'+smm+'-'+sdd+' '+shh
-          +' diam:'+sdiam+' '+lsec
-          +' m:'+smagn;
+  Desc := sar+tab+sde+tab
+          +'  P'+nom+tab
+          +syy+'-'+smm+'-'+sdd+' '+shh+tab
+          +'diam:'+sdiam+' '+lsec+tab
+          +'m:'+smagn+tab;
 end;
 cfgsc.FindName:=nom;
 cfgsc.FindDesc:=Desc;

@@ -91,7 +91,11 @@ const version = 'Version 3 alpha 0.0.3';
       D0ura : array [1..5] of double = (236,581,585,789,761);
       blank15='               ';
       blank=' ';
+      tab=#09;
       deftxt = '?';
+      f0='0';
+      f1='0.0';
+      f5='0.00000';
       ConstelNum = 88;
       NumLlabel = 100;
       NumSimObject = 13;
@@ -403,7 +407,7 @@ const
 {$endif}
 
 const msgTimeout='Timeout!';
-      msgOK='OK';
+      msgOK='OK!';
       msgFailed='Failed!';
       msgNotFound='Not found!';
 
@@ -412,7 +416,7 @@ const msgTimeout='Timeout!';
 // Main Commands
 const
      MaxCmdArg = 10;
-     numcmdmain = 7;
+     numcmdmain = 8;
      maincmdlist: array[1..numcmdmain,1..2] of string=(
      ('NEWCHART','1'),
      ('CLOSECHART','2'),
@@ -420,12 +424,13 @@ const
      ('LISTCHART','4'),
      ('SEARCH','5'),
      ('GETMSGBOX','6'),
-     ('GETCOORDBOX','7')
+     ('GETCOORBOX','7'),
+     ('GETINFOBOX','8')
      );
 
 // Chart Commands
 const
-     numcmd = 38;
+     numcmd = 54;
      cmdlist: array[1..numcmd,1..2] of string=(
      ('ZOOM+','1'),
      ('ZOOM-','2'),
@@ -439,32 +444,48 @@ const
      ('MOVESOUTHWEST','10'),
      ('FLIPX','11'),
      ('FLIPY','12'),
-     ('SETCURSOR','13'),
-     ('CENTRE','14'),
+     ('SETCURSOR','13'),     // pixX pixY
+     ('CENTRECURSOR','14'),
      ('ZOOM+MOVE','15'),
      ('ZOOM-MOVE','16'),
      ('ROT+','17'),
      ('ROT-','18'),
-     ('EQGRID','19'),
-     ('GRID','20'),
-     ('STARMODE','21'),
-     ('NEBMODE','22'),
-     ('AUTOSKY','23'),
+     ('SETEQGRID','19'),       // ON/OFF
+     ('SETGRID','20'),         // ON/OFF
+     ('SETSTARMODE','21'),     // 0/1
+     ('SETNEBMODE','22'),      // 0/1
+     ('SETAUTOSKY','23'),      // ON/OFF
      ('UNDO','24'),
      ('REDO','25'),
-     ('PROJ','26'),
-     ('FOV','27'),
-     ('MOVE','28'),
-     ('DATE','29'),
-     ('OBSL','30'),
+     ('SETPROJ','26'),         // ALTAZ/EQUAT/GALACTIC/ECLIPTIC
+     ('SETFOV','27'),          // 00d00m00s/00.00
+     ('SETRA','28'),           // RA:00h00m00s/00.00
+     ('SETDEC','29'),          // DEC:+00d00m00s/00.00
+     ('SETOBS','30'),          // LAT:+00d00m00sLON:+000d00m00sALT:000mOBS:name
      ('IDCURSOR','31'),
-     ('SAVEIMG','32'),
+     ('SAVEIMG','32'),         // PNG/JPEG/BMP filename quality
      ('SETNORTH','33'),
      ('SETSOUTH','34'),
      ('SETEAST','35'),
      ('SETWEST','36'),
      ('SETZENITH','37'),
-     ('ALLSKY','38')
+     ('ALLSKY','38'),
+     ('REDRAW','39'),
+     ('GETCURSOR','40'),
+     ('GETEQGRID','41'),
+     ('GETGRID','42'),
+     ('GETSTARMODE','43'),
+     ('GETNEBMODE','44'),
+     ('GETAUTOSKY','45'),
+     ('GETPROJ','46'),
+     ('GETFOV','47'),          // S/F
+     ('GETRA','48'),           // S/F
+     ('GETDEC','49'),          // S/F
+     ('GETDATE','50'),
+     ('GETOBS','51'),
+     ('SETDATE','52'),         // yyyy-mm-ddThh:mm:ss
+     ('SETTZ','53'),           // 0.0
+     ('GETTZ','54')
      );
 
 // World cities
