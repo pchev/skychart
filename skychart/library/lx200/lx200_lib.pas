@@ -24,11 +24,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 Contribution from :
 PJ Pallez Nov 1999
 Patrick Chevalley Oct 2000
+Renato Bonomini Jul 2004
 -------------------------------------------------------------------------------}
 
 interface
 
-Uses Dialogs,SysUtils,Windows,Classes,Forms ;
+Uses Dialogs,SysUtils,Windows,Classes,Forms,StrUtils ;
 
 {basic LX200 functions}
 Function LX200_Open(model,commport,baud,parity,data,stop,timeout,inttimeout : string) : boolean;
@@ -52,6 +53,49 @@ Function LX200_StartFocus(dir:char):boolean;
 Function LX200_StopFocus:boolean;
 function LX200_SetTimeDate : boolean;
 function LX200_Parkscope : boolean;
+// Renato Bonomini:
+Procedure LX200_SimpleCmd(cmd: string);
+Function LX200_QueryGV(query: string; chartoread: integer) : string;
+Function LX200_QueryFirmwareID : string;
+Function LX200_QueryProductID : string;
+Function LX200_QueryFirmwareTime : string;
+Function LX200_QueryFirmwareDate : string;
+Function LX200_QueryFirmwareNumber : string;
+Procedure LX200_PecToggle;
+Procedure LX200_FieldRotationOn;
+Procedure LX200_FieldRotationOff;
+Function LX200_GetTrackingRate : Single;
+Function LX200_SetTrackingRateS(arcsec : Single): boolean;
+Function LX200_SetTrackingRateT(arcsec : Single): boolean;
+Procedure LX200_TrackingDefaultRate;
+Procedure LX200_TrackingCustomRate;
+Procedure LX200_TrackingLunarRate;
+Procedure LX200_TrackingIncreaseRate;
+Procedure LX200_TrackingDecreaseRate;
+Procedure LX200_FanOn;
+Procedure LX200_FanOff;
+Procedure LX200_SlewSpeed(speed: integer);
+Procedure LX200_GPS_SetGuideRate(rate: Single);
+Procedure LX200_GPS_RASlewRate(rate: Single);
+Procedure LX200_GPS_DECSlewRate(rate: Single);
+// :$QA+ Enable Dec/Alt PEC [LX200gps only]
+// :$QA- Enable Dec/Alt PEC [LX200gps only]
+// :$QZ+ Enable RA/AZ PEC compensation [LX200gps only]
+// :$QZ- Disable RA/AZ PEC Compensation [LX200gpgs only]
+Procedure LX200_GPS_EnableDecPec;
+Procedure LX200_GPS_EnableRAPec;
+Procedure LX200_GPS_DisableDecPec;
+Procedure LX200_GPS_DisableRAPec;
+
+// Scope.exe custom commands:
+Function LX200_Scope_HpLm:boolean;
+Function LX200_Scope_HpRm:boolean;
+Function LX200_Scope_Hp_Mode(smode:char):boolean;
+Function LX200_Scope_GetGuideArcSec : Integer;
+Function LX200_Scope_GetMsArcSec : Integer;
+Procedure LX200_Scope_SetGuideArcSec(arcsec: Integer);
+Procedure LX200_Scope_SetMsArcSec(arcsec: Integer);
+Function LX200_Scope_GetFRAngle : Single;
 
 Function DEToStr(de: Double; var d,m,s : string) : string;
 Function ARToStr(ar: Double; var d,m,s : string) : string;
@@ -59,8 +103,8 @@ Function DEmToStr(de: Double; var d,m : string) : string;
 Function ARmToStr(ar: Double; var d,m : string) : string;
 
 const ValidPort='COM1 COM2 COM3 COM4 COM5 COM6 COM7 COM8';
-      ValidModel :array[1..4] of string=('LX200','AutoStar','Magellan-II','Magellan-I');
-      NumModel = 3;
+      ValidModel :array[1..5] of string=('LX200','AutoStar','Magellan-II','Magellan-I','Scope.exe');
+      NumModel = 5;
       crlf = chr(13)+chr(10);
 var
 {system flags and statuses}
@@ -209,7 +253,7 @@ if OpenCom(LX200_port,commport,baud,parity,data,stop,timeout,inttimeout) then be
    PurgeBuffer(LX200_port);
    // check scope connected
    case LX200_type of
-   1..2 : begin  // get DEC (change for FS2 with no ACK nor GC)
+   5,1..2 : begin  // get DEC (change for FS2 with no ACK nor GC)
          buf:='#:GD#';
          count:=length(buf);
          if WriteCom(LX200_port,buf,count)= false then exit;
@@ -336,7 +380,7 @@ case LX200_format of
     end;
 end;
     end;
-else begin          // LX200, Magellan
+else begin          // LX200, Magellan, scope
 buf:='#:GR#:GD#';
 count:=length(buf);
 PurgeBuffer(LX200_port);
@@ -442,7 +486,7 @@ case LX200_format of
     end;
 end;
     end;
-else begin          // LX200, Magellan
+else begin          // LX200, Magellan, scope
 buf:='#:GZ#:GA#';
 count:=length(buf);
 PurgeBuffer(LX200_port);
@@ -626,7 +670,7 @@ begin
 result:=false;
 PurgeBuffer(LX200_port);
 case LX200_type of
-1 : begin // LX200
+5,1 : begin // LX200 + scope.exe
     buf:='#:R';
     case speed of
     0 : buf:=buf+'S#';
@@ -677,7 +721,7 @@ begin
 result:=false;
 PurgeBuffer(LX200_port);
 case LX200_type of
-1 : begin // LX200
+5,1 : begin // LX200
     buf:='#:Q';
     case direction of
     north : buf:=buf+'n#';
@@ -738,6 +782,95 @@ PurgeBuffer(LX200_port);
     if ReadCom(LX200_port,buf,count) = false then exit;
 result:=trim(buf);
 LX200_UseHPP:=result='HIGH PRECISION';
+end;
+
+Function LX200_QueryGV(query: string; chartoread: integer) : string;
+var count : integer;
+begin
+// Renato Bonomini:
+result:='Error';
+PurgeBuffer(LX200_port);
+count:=length(query);
+if WriteCom(LX200_port,query,count)= false then exit;
+if ReadCom(LX200_port,query,chartoread) = false then exit;
+Result:=trim(LeftStr(query, length(query)-1));
+end;
+
+Function LX200_QueryFirmwareID : string;
+var count : integer;
+character: string;
+query: string;
+maxtries: integer;
+begin
+// GVF variabile string length:
+query:=':GVF#';
+result:='Error';
+PurgeBuffer(LX200_port);
+count:=length(query);
+if WriteCom(LX200_port,query,count)= false then exit;
+// Read one character at a time, max characters 20,
+// read until we receive a #
+PurgeBuffer(LX200_port);
+count:=1;
+character:='';
+query:='';
+maxtries:=0;
+while (character <> '#') and (maxtries <20) do
+begin
+        if ReadCom(LX200_port,character,count) = false then exit;
+        query:=query+character;
+        maxtries:=maxtries+1;
+end;
+Result:=trim(LeftStr(query, maxtries-1));
+end;
+
+Function LX200_QueryProductID : string;
+var count : integer;
+character: string;
+query: string;
+maxtries: integer;
+begin
+// GVP variabile string length:
+query:=':GVP#';
+result:='Error';
+PurgeBuffer(LX200_port);
+count:=length(query);
+if WriteCom(LX200_port,query,count)= false then exit;
+// Read one character at a time, max characters 20,
+// read until we receive a #
+PurgeBuffer(LX200_port);
+count:=1;
+character:='';
+query:='';
+maxtries:=0;
+while (character <> '#') and (maxtries <20) do
+begin
+        if ReadCom(LX200_port,character,count) = false then exit;
+        query:=query+character;
+        maxtries:=maxtries+1;
+end;
+Result:=trim(LeftStr(query, maxtries-1));
+end;
+
+Function LX200_QueryFirmwareDate : string;
+begin
+// Renato Bonomini:
+// GVD Get Telescope Firmware Date
+Result:=LX200_QueryGV(':GVD#',12);
+end;
+
+Function LX200_QueryFirmwareNumber : string;
+begin
+// Renato Bonomini:
+// GVD Get Telescope Firmware Number
+Result:=LX200_QueryGV(':GVN#',5);
+end;
+
+Function LX200_QueryFirmwareTime : string;
+begin
+// Renato Bonomini:
+// GVD Get Telescope Firmware Time
+Result:=LX200_QueryGV(':GVT#',9);
 end;
 
 Function LX200_SetFocusSteep(speed:char):boolean;
@@ -853,6 +986,311 @@ begin
  count:=length(buf);
  if WriteCom(LX200_port,buf,count) = false then exit;
  result := true;
+end;
+
+Procedure LX200_SimpleCmd(cmd: string);
+// Renato Bonomini:
+// Executes simple commands
+var count : integer;
+begin
+PurgeBuffer(LX200_port);
+count:=length(cmd);
+if WriteCom(LX200_port,cmd,count)= false then exit;
+end;
+
+Procedure LX200_PecToggle;
+// Toggles Pec condition on both drives
+begin
+LX200_SimpleCmd(':$Q#');
+end;
+
+Procedure LX200_FieldRotationOn;
+// Turns field rotation on
+begin
+LX200_SimpleCmd(':r+#');
+end;
+
+Procedure LX200_FieldRotationOff;
+// Turns field rotation off
+begin
+LX200_SimpleCmd(':r-#');
+end;
+
+Function LX200_SetTrackingRateS(arcsec : Single): boolean;
+var buf : string;
+    arcsecstr : string;
+    count : integer;
+begin
+Result:=False;
+PurgeBuffer(LX200_port);
+// :SDDD.D# format
+arcsecstr:=PadZeros(Format('%4.1f',[ arcsec]),5);
+buf:='#:S'+arcsecstr+'#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count) = false then exit;
+// Read response 1 or 0
+count:=1;
+if ReadCom(LX200_port,buf,count) = false then exit;
+if buf='1' then Result := True;
+end;
+
+Function LX200_SetTrackingRateT(arcsec : Single): boolean;
+var buf : string;
+    arcsecstr : string;
+    count: integer;
+begin
+Result:=False;
+PurgeBuffer(LX200_port);
+// :TDDD.DDD# format
+arcsecstr:=PadZeros(Format('%6.3f', [arcsec]),7);
+buf:='#:T'+arcsecstr+'#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count) = false then exit;
+// Read response 1 or 0
+count:=1;
+if ReadCom(LX200_port,buf,count) = false then exit;
+if buf='1' then Result := True;
+end;
+
+Function LX200_GetTrackingRate: Single;
+var buf : string;
+    count : integer;
+begin
+result:=-1;
+PurgeBuffer(LX200_port);
+buf:=':GT#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count)= false then exit;
+count:=5;
+if ReadCom(LX200_port,buf,count) = false then exit;
+Result:=StrToFloat(LeftStr(trim(buf),4));
+end;
+
+Procedure LX200_TrackingDefaultRate;
+// Sets default tracking rate, 60Hz
+begin
+LX200_SimpleCmd(':TQ#');
+end;
+
+Procedure LX200_TrackingCustomRate;
+// Sets custom tracking rate
+begin
+LX200_SimpleCmd(':TM#');
+end;
+
+Procedure LX200_TrackingLunarRate;
+// Sets selenic tracking rate
+begin
+LX200_SimpleCmd(':TL#');
+end;
+
+Procedure LX200_TrackingIncreaseRate;
+// increase tracking rate 1Hz
+begin
+LX200_SimpleCmd(':T+#');
+end;
+
+Procedure LX200_TrackingDecreaseRate;
+// decrease tracking rate 1Hz
+begin
+LX200_SimpleCmd(':T-#');
+end;
+
+Procedure LX200_FanOn;
+// Turns Fan On (16" Only)
+begin
+LX200_SimpleCmd(':f+#');
+end;
+Procedure LX200_FanOff;
+// Turns Fan Off (16" Only)
+begin
+LX200_SimpleCmd(':f-#');
+end;
+
+Procedure LX200_SlewSpeed(speed: integer);
+// Sends Sw1 .. Sw4 to change slew speed
+begin
+LX200_SimpleCmd(':Sw'+IntToStr(speed)+'#');
+end;
+
+Procedure LX200_GPS_SetGuideRate(rate: Single);
+// Set Guide rate on LX200GPS
+// :RgSS.S# format
+var buf : string;
+    arcsecstr : string;
+    count: integer;
+begin
+PurgeBuffer(LX200_port);
+arcsecstr:=PadZeros(Format('%3.1f', [rate]),4);
+buf:='#:Rg'+arcsecstr+'#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count) = false then exit;
+end;
+
+Procedure LX200_GPS_RASlewRate(rate: Single);
+// Set RA Slew rate on LX200GPS
+// :RADD.D# format
+var buf : string;
+    arcsecstr : string;
+    count: integer;
+begin
+PurgeBuffer(LX200_port);
+arcsecstr:=PadZeros(Format('%3.1f', [rate]),4);
+buf:='#:RA'+arcsecstr+'#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count) = false then exit;
+end;
+
+Procedure LX200_GPS_DECSlewRate(rate: Single);
+// Set DEC Slew rate on LX200GPS
+// :REDD.D# format
+var buf : string;
+    arcsecstr : string;
+    count: integer;
+begin
+PurgeBuffer(LX200_port);
+arcsecstr:=PadZeros(Format('%3.1f', [rate]),4);
+buf:='#:RE'+arcsecstr+'#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count) = false then exit;
+end;
+
+Procedure LX200_GPS_EnableDecPec;
+// :$QA+ Enable Dec/Alt PEC [LX200gps only]
+begin
+LX200_SimpleCmd(':$QA+#');
+end;
+
+Procedure LX200_GPS_EnableRAPec;
+// :$QZ+ Enable RA/AZ PEC compensation [LX200gps only]
+begin
+LX200_SimpleCmd(':$QZ+#');
+end;
+
+Procedure LX200_GPS_DisableDecPec;
+// :$QA- Disable Dec/Alt PEC [LX200gps only]
+begin
+LX200_SimpleCmd(':$QA-#');
+end;
+
+Procedure LX200_GPS_DisableRAPec;
+// :$QZ- Disable RA/AZ PEC Compensation [LX200gpgs only]
+begin
+LX200_SimpleCmd(':$QZ-#');
+end;
+
+
+///////////////////////////////////////////////
+// Scope.exe custom lx-200 protocol commands //
+///////////////////////////////////////////////
+
+Function LX200_Scope_HpRm:boolean;
+// Renato Bonomini:
+// Simulates Right mode
+var count : integer;
+    buf : string;
+begin
+PurgeBuffer(LX200_port);
+buf:='#:XHR#';
+count:=length(buf);
+result:=WriteCom(LX200_port,buf,count);
+end;
+
+Function LX200_Scope_HpLm:boolean;
+// Renato Bonomini:
+// Simulates Left mode
+var count : integer;
+    buf : string;
+begin
+PurgeBuffer(LX200_port);
+buf:='#:XHL#';
+count:=length(buf);
+result:=WriteCom(LX200_port,buf,count);
+end;
+
+Function LX200_Scope_Hp_Mode(smode:char):boolean;
+// Renato Bonomini:
+// Simulates selected mode
+var count : integer;
+    buf : string;
+begin
+PurgeBuffer(LX200_port);
+buf:='#:XH'+smode+'#';
+count:=length(buf);
+result:=WriteCom(LX200_port,buf,count);
+end;
+
+Function LX200_Scope_GetMsArcSec : Integer;
+// Renato Bonomini:
+// XGM Get MsArcSec
+var buf : string;
+    count : integer;
+begin
+result:=-1;
+PurgeBuffer(LX200_port);
+buf:='#:XGM#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count)= false then exit;
+count:=5;
+if ReadCom(LX200_port,buf,count) = false then exit;
+Result:=StrToInt(LeftStr(trim(buf),4));
+end;
+
+Function LX200_Scope_GetGuideArcSec : Integer;
+// Renato Bonomini:
+// XGG Get GuideArcSec
+var buf : string;
+    count : integer;
+begin
+result:=-1;
+PurgeBuffer(LX200_port);
+buf:='#:XGG#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count)= false then exit;
+count:=5;
+if ReadCom(LX200_port,buf,count) = false then exit;
+Result:=StrToInt(LeftStr(trim(buf),4));
+end;
+
+Procedure LX200_Scope_SetGuideArcSec(arcsec: Integer);
+// Renato Bonomini:
+// XSGnnnn set GuideArcSec in nnnn
+var buf : string;
+    arcsecstr : string;
+begin
+PurgeBuffer(LX200_port);
+arcsecstr:=PadZeros(InttoStr(arcsec),4);
+buf:='#:XSG'+arcsecstr+'#';
+LX200_SimpleCmd(buf);
+end;
+
+Procedure LX200_Scope_SetMsArcSec(arcsec: Integer);
+// Renato Bonomini:
+// XSMnnnn set MsArcSec in nnnn
+var buf : string;
+    arcsecstr : string;
+begin
+PurgeBuffer(LX200_port);
+arcsecstr:=PadZeros(InttoStr(arcsec),4);
+buf:='#:XSM'+arcsecstr+'#';
+LX200_SimpleCmd(buf);
+end;
+
+Function LX200_Scope_GetFRAngle : Single;
+// Renato Bonomini:
+// XGR Get FR angle
+var buf : string;
+    count : integer;
+begin
+result:=-1;
+PurgeBuffer(LX200_port);
+buf:=':XGR#';
+count:=length(buf);
+if WriteCom(LX200_port,buf,count)= false then exit;
+count:=7;
+if ReadCom(LX200_port,buf,count) = false then exit;
+//ShowMessage(buf);
+Result:=StrToFloat(LeftStr(trim(buf),6));
 end;
 
 end.

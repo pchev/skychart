@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 Contribution from :
 PJ Pallez Nov 1999
 Patrick Chevalley Oct 2000
+Renato Bonomini Jul 2004
 
 will work with all systems using same protocol
 (LX200,AutoStar,..)
@@ -126,62 +127,156 @@ type
     Bevel1: TBevel;
     Button1: TButton;
     Timer1: THiResTimer;
-    SpeedButton4: TSpeedButton;
-    SpeedButton8: TSpeedButton;
-    SpeedButton9: TSpeedButton;
-    {Utility and form functions}
-    procedure formcreate(Sender: TObject);
-    procedure kill(Sender: TObject; var CanClose: Boolean);
-    procedure Timer1Timer(Sender: TObject);
-    procedure setresClick(Sender: TObject);
-    function str2ra(s:string):double;
-    function str2dec(s:string):double;
-    procedure SaveButton1Click(Sender: TObject);
-    procedure ReadIntBoxChange(Sender: TObject);
-    procedure latChange(Sender: TObject);
-    procedure longChange(Sender: TObject);
-    procedure SpeedButton5Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure TopBtnMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure TopBtnMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure BotBtnMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure LeftBtnMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure RightBtnMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure StopBtnMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure RadioGroup2Click(Sender: TObject);
-    procedure RightBtnMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure BotBtnMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure LeftBtnMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure cbo_typeChange(Sender: TObject);
-    procedure CheckBox1Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
-    procedure CheckBox2Click(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure CheckBox3Click(Sender: TObject);
-    procedure CheckBox4Click(Sender: TObject);
-    procedure CheckBox5Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
-    procedure RadioGroup5Click(Sender: TObject);
-    procedure SpeedButton6MouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure SpeedButton6MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure SpeedButton7MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure CheckBox6Click(Sender: TObject);
+     SpeedButton4: TSpeedButton;
+     SpeedButton8: TSpeedButton;
+     SpeedButton9: TSpeedButton;
+     QueryFirmwareButton: TButton;
+     VirtHP: TTabSheet;
+     LeftModeButton: TButton;
+     RightModeButton: TButton;
+     VHPTitleLabel: TLabel;
+     LRModeGroup: TGroupBox;
+     HandPadModeSelection: TRadioGroup;
+     Adv: TTabSheet;
+     ADVTitleLabel: TLabel;
+     ScopeSpeeds: TGroupBox;
+     MsArcSec: TLongEdit;
+     GuideArcSec: TLongEdit;
+     GetMsArcSec: TButton;
+     GetGuideArcSec: TButton;
+     SetMsArcSec: TButton;
+     SetGuideArcSec: TButton;
+     MsArcSecLabel: TLabel;
+     GuideArcSecLabel: TLabel;
+     FieldRotation: TCheckBox;
+     ScopeInit: TGroupBox;
+     ScopeInit1: TButton;
+     ScopeInit2: TButton;
+     ScopeInit3: TButton;
+    VirtHpHelp: TButton;
+    AdvHelp: TButton;
+    FieldRotationGroup: TGroupBox;
+    FRQuery: TButton;
+    FRLabel: TLabel;
+    FRAngle: TFloatEdit;
+    MotorTab: TTabSheet;
+    TrackingGroup: TGroupBox;
+    TrackingDefaultButton: TButton;
+    TrackingLunarButton: TButton;
+    TrackingCustomButton: TButton;
+    TrackingGetButton: TButton;
+    TrackingRateLabel: TLabel;
+    TrackingDecreaseLabel: TLabel;
+    TrackingIncreaseLabel: TLabel;
+    TrackingRateEdit: TFloatEdit;
+    TrackingSetRateButton: TButton;
+    LxPecToggle: TButton;
+    TrackingRateDecrease: TButton;
+    TrackingRateIncrease: TButton;
+    Lx200GPSMotorSpeeds: TGroupBox;
+    LabelGuideSpeed: TLabel;
+    LxGuideRate: TFloatEdit;
+    LxGuideRateSet: TBitBtn;
+    LabelRaAzSpeed: TLabel;
+    RASlewRate: TFloatEdit;
+    RASlewRateSet: TBitBtn;
+    LabelDecSlewRate: TLabel;
+    DECSlewRate: TFloatEdit;
+    DECSlewRateSet: TBitBtn;
+    LX200GPSRate: TCheckBox;
+    PEC: TTabSheet;
+    RAPEC: TGroupBox;
+    DECPEC: TGroupBox;
+    RAPECOn: TButton;
+    RAPECOff: TButton;
+    DECPECOn: TButton;
+    DECPECOff: TButton;
+    FanControl: TCheckBox;
+    SlewSpeedBar: TTrackBar;
+    SlewSpeedGroup: TGroupBox;
+    LabelSetSlewSpeed: TLabel;
+     {Utility and form functions}
+     procedure formcreate(Sender: TObject);
+     procedure kill(Sender: TObject; var CanClose: Boolean);
+     procedure Timer1Timer(Sender: TObject);
+     procedure setresClick(Sender: TObject);
+     function str2ra(s:string):double;
+     function str2dec(s:string):double;
+     procedure SaveButton1Click(Sender: TObject);
+     procedure ReadIntBoxChange(Sender: TObject);
+     procedure latChange(Sender: TObject);
+     procedure longChange(Sender: TObject);
+     procedure SpeedButton5Click(Sender: TObject);
+     procedure SpeedButton2Click(Sender: TObject);
+     procedure TopBtnMouseDown(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure TopBtnMouseUp(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure BotBtnMouseDown(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure LeftBtnMouseDown(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure RightBtnMouseDown(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure StopBtnMouseDown(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure RadioGroup2Click(Sender: TObject);
+     procedure RightBtnMouseUp(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure BotBtnMouseUp(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure LeftBtnMouseUp(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure cbo_typeChange(Sender: TObject);
+     procedure CheckBox1Click(Sender: TObject);
+     procedure Button3Click(Sender: TObject);
+     procedure SpeedButton3Click(Sender: TObject);
+     procedure CheckBox2Click(Sender: TObject);
+     procedure FormShow(Sender: TObject);
+     procedure CheckBox3Click(Sender: TObject);
+     procedure CheckBox4Click(Sender: TObject);
+     procedure CheckBox5Click(Sender: TObject);
+     procedure SpeedButton4Click(Sender: TObject);
+     procedure RadioGroup5Click(Sender: TObject);
+     procedure SpeedButton6MouseUp(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure SpeedButton6MouseDown(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure SpeedButton7MouseDown(Sender: TObject; Button: TMouseButton;
+       Shift: TShiftState; X, Y: Integer);
+     procedure CheckBox6Click(Sender: TObject);
     procedure SpeedButton8Click(Sender: TObject);
     procedure SpeedButton9Click(Sender: TObject);
-
+    procedure VHpLeftClick(Sender: TObject);
+    procedure VHRightClick(Sender: TObject);
+    procedure QueryFirmwareButtonClick(Sender: TObject);
+    procedure HandPadModeSelectionClick(Sender: TObject);
+    procedure GetMsArcSecClick(Sender: TObject);
+    procedure GetGuideArcSecClick(Sender: TObject);
+    procedure PecToggleClick(Sender: TObject);
+    procedure ScopeFieldRotationClick(Sender: TObject);
+    procedure SetGuideArcSecClick(Sender: TObject);
+    procedure SetMsArcSecClick(Sender: TObject);
+    procedure ScopeInit1Click(Sender: TObject);
+    procedure ScopeInit2Click(Sender: TObject);
+    procedure ScopeInit3Click(Sender: TObject);
+    procedure AdvHelpClick(Sender: TObject);
+    procedure VirtHpHelpClick(Sender: TObject);
+    procedure FRQueryClick(Sender: TObject);
+    procedure TrackingDefaultButtonClick(Sender: TObject);
+    procedure TrackingLunarButtonClick(Sender: TObject);
+    procedure TrackingCustomButtonClick(Sender: TObject);
+    procedure TrackingRateChangerClick(Sender: TObject; Button: TUDBtnType);
+    procedure TrackingSetRateButtonClick(Sender: TObject);
+    procedure TrackingGetButtonClick(Sender: TObject);
+    procedure TrackingRateDecreaseClick(Sender: TObject);
+    procedure TrackingRateIncreaseClick(Sender: TObject);
+    procedure LX200GPSRateClick(Sender: TObject);
+    procedure LxGuideRateSetClick(Sender: TObject);
+    procedure RASlewRateSetClick(Sender: TObject);
+    procedure DECSlewRateSetClick(Sender: TObject);
+    procedure FanControlClick(Sender: TObject);
+    procedure SlewSpeedBarChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -220,7 +315,7 @@ implementation
 var CoordLock : boolean = false;
     Initial : boolean = true;
     Appdir : string;
-    
+
 const crlf=chr(10)+chr(13);
 
 {-------------------------------------------------------------------------------
@@ -285,6 +380,53 @@ TopBtn.enabled:=onoff;
 RightBtn.enabled:=onoff;
 BotBtn.enabled:=onoff;
 StopBtn.enabled:=onoff;
+// RB: Lx200 16"GPS and others
+LxPecToggle.Enabled:=onoff;
+TrackingGroup.Enabled:=onoff;
+TrackingDefaultButton.Enabled:=onoff;
+TrackingLunarButton.Enabled:=onoff;
+TrackingCustomButton.Enabled:=onoff;
+TrackingGetButton.Enabled:=onoff;
+TrackingSetRateButton.Enabled:=onoff;
+TrackingRateEdit.Enabled:=onoff;
+TrackingRateIncrease.Enabled:=onoff;
+TrackingRateDecrease.Enabled:=onoff;
+DECPECOn.Enabled:=onoff;
+DECPECOff.Enabled:=onoff;
+RAPECOn.Enabled:=onoff;
+RAPECOff.Enabled:=onoff;
+DECSlewRate.Enabled:=onoff;
+DECSlewRateSet.Enabled:=onoff;
+LxGuideRate.Enabled:=onoff;
+LxGuideRateSet.Enabled:=onoff;
+RASlewRate.Enabled:=onoff;
+RASlewRateSet.Enabled:=onoff;
+SlewSpeedGroup.Enabled:=onoff;
+SlewSpeedBar.Enabled:=onoff;
+end;
+end;
+
+procedure ScopeChangeButton(onoff : boolean);
+begin
+with pop_scope do begin
+// Virthp
+HandPadModeSelection.Enabled:=onoff;
+LRModeGroup.Enabled:=onoff;
+// Speeds
+ScopeSpeeds.Enabled:=onoff;
+if onoff = true then
+begin
+        MsArcSec.Value:=LX200_Scope_GetMsArcSec;
+        GuideArcSec.Value:=LX200_Scope_GetGuideArcSec;
+end;
+MsArcSec.Enabled:=onoff;
+GuideArcSec.Enabled:=onoff;
+// Init
+ScopeInit.Enabled:=onoff;
+// FR
+FieldRotationGroup.Enabled:=onoff;
+FieldRotation.Enabled:=onoff;
+FRQuery.Enabled:=onoff;
 end;
 end;
 
@@ -308,12 +450,16 @@ if LX200_Open(trim(pop_scope.cbo_type.text),trim(pop_scope.cbo_port.text),pop_sc
    end else begin
      pop_scope.GroupBox6.visible:=false;
    end;
+   // Renato Bonomini:
+   if pop_scope.cbo_type.Text = 'Scope.exe' then ScopeChangeButton(true);
 end else begin
     LX200_Close;
     pop_scope.formstyle:=fsNormal;
     ShowMessage('Error opening '+pop_scope.cbo_type.text+' on port '+pop_scope.cbo_port.text+crlf+'Check if device is connected and power on');
     pop_scope.formstyle:=fsStayOnTop;
     ChangeButton(false);
+    // Renato Bonomini:
+    if pop_scope.cbo_type.Text = 'Scope.exe' then ScopeChangeButton(false);
     pop_scope.cbo_type.enabled:=true;
 end;
 end;
@@ -328,6 +474,8 @@ ok:=LX200_Close;
 pop_scope.led.color:=clRed;
 ChangeButton(false);
 pop_scope.cbo_type.enabled:=true;
+// Renato Bonomini:
+if pop_scope.cbo_type.Text = 'Scope.exe' then ScopeChangeButton(false);
 end;
 
 Procedure ScopeClose; stdcall;
@@ -389,7 +537,8 @@ if (pop_scope=nil)or(pop_scope.pos_x=nil) then begin
    decimalseparator:='.';
    pop_scope:=Tpop_scope.Create(nil);
 end;
-if (pop_scope.cbo_type.text=validModel[1])or(pop_scope.cbo_type.text=validModel[2]) then begin // lx200, autostar
+// Renato added model 5
+if (pop_scope.cbo_type.text=validModel[1])or(pop_scope.cbo_type.text=validModel[2])or(pop_scope.cbo_type.text=validModel[5]) then begin // lx200, autostar, scope.exe
        name:=pop_scope.cbo_type.text;
        QueryOK:=true;
        SyncOK:=true;
@@ -488,6 +637,9 @@ begin
      longedit1.Value:=ini.readinteger('lx200','focusduration',100);
      ini.free;
      Timer1.Interval:=strtointdef(ReadIntBox.text,500);
+     // Renato Bonomini:
+     MsArcSecLabel.Caption:='Microstep'#13#10'[arc"/s]';
+     GuideArcSecLabel.Caption:='Guide'#13#10'[arc"/s]';
 
 checkbox2.checked:=av;
 
@@ -501,13 +653,36 @@ if cbo_type.text='LX200' then begin
   GroupBox7.visible:=true;
   if LX200_UseHPP then GroupBox6.visible:=true;
   SpeedButton8.visible:=true;
-  SpeedButton9.visible:=false;
+  SpeedButton9.visible:=true;
   Radiogroup1.Items.Clear;
   Radiogroup1.Items.Add('Slew');
   Radiogroup1.Items.Add('Find');
   Radiogroup1.Items.Add('Centering');
   Radiogroup1.Items.Add('Guide');
   Radiogroup1.ItemIndex:=1;
+// Renato Bonomini:
+end else if cbo_type.text='Scope.exe' then begin
+  PortSpeedbox.itemindex:=5;
+  ShowAltAz.checked:=true;
+  ShowAltAz.enabled:=true;
+  GroupBox1.visible:=true;
+  RadioGroup2.visible:=true;
+  GroupBox5.visible:=true;
+  GroupBox7.visible:=false;
+  // if LX200_UseHPP then GroupBox6.visible:=true; //
+  Radiogroup1.Items.Clear;
+  Radiogroup1.Items.Add('Slew');
+  Radiogroup1.Items.Add('Find');
+  Radiogroup1.Items.Add('Centering');
+  Radiogroup1.Items.Add('Guide');
+  Radiogroup1.ItemIndex:=1;
+  VirtHP.TabVisible:=True;
+  Adv.TabVisible:=True;
+  FRAngle.Visible:=True;
+  FRQuery.Visible:=True;
+  FRLabel.Visible:=True;
+  SpeedButton8.visible:=true;
+  SpeedButton9.visible:=true;
 end else if cbo_type.text='AutoStar' then begin
   PortSpeedbox.itemindex:=5;
   ShowAltAz.checked:=false;
@@ -566,7 +741,6 @@ begin
      if av then pop_scope.FormStyle:=fsStayOnTop
            else pop_scope.FormStyle:=fsNormal;
 end;
-
 
 procedure Tpop_scope.kill(Sender: TObject; var CanClose: Boolean);
 begin
@@ -732,6 +906,11 @@ end;
 
 procedure Tpop_scope.cbo_typeChange(Sender: TObject);
 begin
+  VirtHP.TabVisible:=False;
+  Adv.TabVisible:=False;
+  FRAngle.Visible:=false;
+  FRQuery.Visible:=false;
+  FRLabel.Visible:=false;
 if cbo_type.text='LX200' then begin
   PortSpeedbox.itemindex:=5;
   DatabitBox.itemindex:=4;
@@ -752,6 +931,29 @@ if cbo_type.text='LX200' then begin
   Radiogroup1.Items.Add('Centering');
   Radiogroup1.Items.Add('Guide');
   Radiogroup1.ItemIndex:=1;
+// Renato Bonomini:
+end else if cbo_type.text='Scope.exe' then begin
+  PortSpeedbox.itemindex:=5;
+  ShowAltAz.checked:=true;
+  ShowAltAz.enabled:=true;
+  GroupBox1.visible:=true;
+  RadioGroup2.visible:=true;
+  GroupBox5.visible:=true;
+  GroupBox7.visible:=false;
+  // if LX200_UseHPP then GroupBox6.visible:=true; //
+  Radiogroup1.Items.Clear;
+  Radiogroup1.Items.Add('Slew');
+  Radiogroup1.Items.Add('Find');
+  Radiogroup1.Items.Add('Centering');
+  Radiogroup1.Items.Add('Guide');
+  Radiogroup1.ItemIndex:=1;
+  VirtHP.TabVisible:=True;
+  Adv.TabVisible:=True;
+  FRAngle.Visible:=True;
+  FRQuery.Visible:=True;
+  FRLabel.Visible:=True;
+  SpeedButton8.visible:=true;
+  SpeedButton9.visible:=true;
 end else if cbo_type.text='AutoStar' then begin
   PortSpeedbox.itemindex:=5;
   DatabitBox.itemindex:=4;
@@ -969,6 +1171,200 @@ if MessageDlg('REALLY park and disconnect the telescope?', mtConfirmation, [mbYe
       ScopeDisconnect(ok);
       ShowMessage('Parking and Disconnecting telescope.');
    end;
+end;
+
+
+procedure Tpop_scope.VHpLeftClick(Sender: TObject);
+// Renato Bonomini:
+begin
+LX200_Scope_HpLm;
+end;
+
+procedure Tpop_scope.VHRightClick(Sender: TObject);
+// Renato Bonomini:
+begin
+LX200_Scope_HpRm;
+end;
+
+procedure Tpop_scope.QueryFirmwareButtonClick(Sender: TObject);
+// Renato Bonomini:
+var ok : boolean;
+    alreadyconnected: boolean;
+begin
+alreadyconnected:=ScopeConnected;
+if alreadyconnected <> true then begin
+ScopeConnect(ok);
+end;
+showmessage('Controller returned'+crlf+crlf+'Product Id : '+LX200_QueryProductID+crlf+'Firmware ID-Revision : '+LX200_QueryFirmwareID+LX200_QueryFirmwareNumber+crlf+'Firmware Date-Time : '+LX200_QueryFirmwareTime+LX200_QueryFirmwareDate);
+if alreadyconnected <> true then begin
+ScopeDisconnect(ok);
+end;
+end;
+
+procedure Tpop_scope.HandPadModeSelectionClick(Sender: TObject);
+// Renato Bonomini:
+const hpmodes : array[1..19] of Char=('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s');
+var selectedmode : Char;
+begin
+// Get the index from the radiogroup
+selectedmode:=hpmodes[HandPadModeSelection.ItemIndex+1];
+// showmessage('Selected HandPad mode : '+selectedmode);
+LX200_Scope_Hp_Mode(selectedmode);
+end;
+
+procedure Tpop_scope.GetMsArcSecClick(Sender: TObject);
+var arcsec: string;
+begin
+MsArcSec.Value:=LX200_Scope_GetMsArcSec;
+arcsec:=IntToStr(MsArcSec.Value);
+// showmessage('MsArcSec:'+arcsec);
+end;
+
+procedure Tpop_scope.GetGuideArcSecClick(Sender: TObject);
+var arcsec: string;
+begin
+GuideArcSec.Value:=LX200_Scope_GetGuideArcSec;
+arcsec:=IntToStr(GuideArcSec.Value);
+// showmessage('MsArcSec:'+arcsec);
+end;
+
+procedure Tpop_scope.PecToggleClick(Sender: TObject);
+begin
+LX200_PecToggle;
+end;
+
+Procedure Tpop_scope.ScopeFieldRotationClick(Sender: TObject);
+begin
+if pop_scope.cbo_type.text='Scope.exe' then pop_scope.FRAngle.Value:=LX200_Scope_GetFRAngle;
+if pop_scope.FieldRotation.State=cbUnchecked then LX200_FieldRotationOff else LX200_FieldRotationOn;
+end;
+
+procedure Tpop_scope.SetGuideArcSecClick(Sender: TObject);
+begin
+LX200_Scope_SetGuideArcSec(pop_scope.GuideArcSec.Value);
+GuideArcSec.Value:=LX200_Scope_GetGuideArcSec;
+end;
+
+procedure Tpop_scope.SetMsArcSecClick(Sender: TObject);
+begin
+LX200_Scope_SetMsArcSec(pop_scope.MsArcSec.Value);
+MsArcSec.Value:=LX200_Scope_GetMsArcSec;
+end;
+
+procedure Tpop_scope.ScopeInit1Click(Sender: TObject);
+begin
+LX200_SimpleCmd('#:XI1#');
+end;
+
+procedure Tpop_scope.ScopeInit2Click(Sender: TObject);
+begin
+LX200_SimpleCmd('#:XI2#');
+end;
+
+procedure Tpop_scope.ScopeInit3Click(Sender: TObject);
+begin
+LX200_SimpleCmd('#:XI3#');
+end;
+
+procedure Tpop_scope.AdvHelpClick(Sender: TObject);
+begin
+showmessage('Scope.exe accepts custom LX-200 commands to '+crlf+'1) Set or get msarcsec and guidespeed'+crlf+'2) Init 1->3 '+crlf+crlf+'Please check Scope website for additional info'+crlf+crlf+'R.Bonomini <renato@linux.eubia.it>');
+end;
+
+procedure Tpop_scope.VirtHpHelpClick(Sender: TObject);
+begin
+showmessage('Scope.exe accepts custom LX-200 commands to '+crlf+'1) Simulate selection of Right or Left mode'+crlf+'2) Select handpad mode'+crlf+'Please check Scope website for additional info'+crlf+crlf+'R.Bonomini <renato@linux.eubia.it>');
+end;
+
+procedure Tpop_scope.FRQueryClick(Sender: TObject);
+begin
+    FRAngle.Value:=LX200_Scope_GetFRAngle;
+end;
+
+procedure Tpop_scope.TrackingDefaultButtonClick(Sender: TObject);
+begin
+LX200_TrackingDefaultRate;
+end;
+
+procedure Tpop_scope.TrackingLunarButtonClick(Sender: TObject);
+begin
+LX200_TrackingLunarRate;
+end;
+
+procedure Tpop_scope.TrackingCustomButtonClick(Sender: TObject);
+begin
+LX200_TrackingCustomRate;
+end;
+
+procedure Tpop_scope.TrackingRateChangerClick(Sender: TObject; Button: TUDBtnType);
+begin
+LX200_TrackingIncreaseRate;
+LX200_TrackingDecreaseRate;
+end;
+
+procedure Tpop_scope.TrackingSetRateButtonClick(Sender: TObject);
+var rate : Single;
+begin
+rate:=pop_scope.TrackingRateEdit.Value;
+if LX200_SetTrackingRateT(rate) = false then LX200_SetTrackingRateS(rate);
+end;
+
+procedure Tpop_scope.TrackingGetButtonClick(Sender: TObject);
+begin
+pop_scope.TrackingRateEdit.Value:=LX200_GetTrackingRate;
+end;
+
+procedure Tpop_scope.TrackingRateDecreaseClick(Sender: TObject);
+begin
+LX200_TrackingDecreaseRate;
+end;
+
+procedure Tpop_scope.TrackingRateIncreaseClick(Sender: TObject);
+begin
+LX200_TrackingIncreaseRate
+end;
+
+procedure Tpop_scope.LX200GPSRateClick(Sender: TObject);
+begin
+if not LX200GPSRate.Checked then
+begin
+pop_scope.Lx200GPSMotorSpeeds.Visible:=False;
+pop_scope.PEC.TabVisible:=False;
+pop_scope.LxPecToggle.Visible:=True;
+pop_scope.FanControl.Visible:=False;
+end;
+if LX200GPSRate.Checked then
+begin
+pop_scope.Lx200GPSMotorSpeeds.Visible:=True;
+pop_scope.PEC.TabVisible:=True;
+pop_scope.LxPecToggle.Visible:=False;
+pop_scope.FanControl.Visible:=True;
+end;
+end;
+
+procedure Tpop_scope.LxGuideRateSetClick(Sender: TObject);
+begin
+LX200_GPS_SetGuideRate(pop_scope.LxGuideRate.Value);
+end;
+
+procedure Tpop_scope.RASlewRateSetClick(Sender: TObject);
+begin
+LX200_GPS_RASlewRate(pop_scope.RASlewRate.Value);
+end;
+
+procedure Tpop_scope.DECSlewRateSetClick(Sender: TObject);
+begin
+LX200_GPS_DECSlewRate(pop_scope.DECSlewRate.Value);
+end;
+
+procedure Tpop_scope.FanControlClick(Sender: TObject);
+begin
+if FanControl.Checked then LX200_FanOn else LX200_FanOff;
+end;
+
+procedure Tpop_scope.SlewSpeedBarChange(Sender: TObject);
+begin
+LX200_SlewSpeed(pop_scope.SlewSpeedBar.Position);
 end;
 
 initialization

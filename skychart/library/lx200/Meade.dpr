@@ -24,6 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 Contribution from :
 PJ Pallez Nov 1999
 Patrick Chevalley Oct 2000
+Renato Bonomini Jul 2004
 
 will work with all systems using same protocol
 (LX200,AutoStar,..)
@@ -31,7 +32,8 @@ will work with all systems using same protocol
 
 uses
   lx2001 in 'lx2001.pas' {pop_scope},
-  lx200_lib in 'lx200_lib.pas';
+  lx200_lib in 'lx200_lib.pas',
+  EnhEdits in '..\enhedits\EnhEdits.pas';
 
 {$E .tid}
 
