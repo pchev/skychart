@@ -20,7 +20,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {
- Information Form (TCP/IP Server)
+ Information Form (Object list, TCP/IP Server)
 }
 
 interface
@@ -34,7 +34,7 @@ type
     PageControl1: TPageControl;
     Panel1: TPanel;
     Button1: TButton;
-    TabSheet1: TTabSheet;
+    tcpinfo: TTabSheet;
     StringGrid1: TStringGrid;
     Panel2: TPanel;
     Button2: TButton;
@@ -42,6 +42,16 @@ type
     closeconnection: TMenuItem;
     CheckBox1: TCheckBox;
     Timer1: TTimer;
+    objectlist: TTabSheet;
+    Memo1: TMemo;
+    Panel3: TPanel;
+    Button3: TButton;
+    Edit1: TEdit;
+    Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
+    Button7: TButton;
+    SaveDialog1: TSaveDialog;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure closeconnectionClick(Sender: TObject);
@@ -51,11 +61,21 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Timer1Timer(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Edit1KeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Memo1DblClick(Sender: TObject);
   private
     { Private declarations }
     RowClick,ColClick :integer;
   public
     { Public declarations }
+    source_chart:string;
+    procedure setpage(n:integer);
+    procedure PrintMemo(MemoName : TMemo);
   end;
 
 var
@@ -63,7 +83,7 @@ var
 
 implementation
 
-uses fu_main;
+uses QPrinters, fu_main;
 
 {$R *.xfm}
 

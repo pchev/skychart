@@ -127,6 +127,7 @@ type
     function  FormatDesc:string;
     procedure ShowIdentLabel;
     function  IdentXY(X, Y: Integer):boolean;
+    function  ListXY(X, Y: Integer):boolean;
     function  LongLabel(txt:string):string;
     function  LongLabelObj(txt:string):string;
     function  LongLabelGreek(txt : string) : string;
@@ -182,7 +183,7 @@ implementation
 
 {$R *.xfm}
 
-uses QClipbrd, fu_main;
+uses QClipbrd, fu_main, fu_info;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here

@@ -71,7 +71,7 @@ object f_config: Tf_config
     Top = 0
     Width = 474
     Height = 441
-    ActivePage = p_observatory
+    ActivePage = TabSheet1
     TabOrder = 1
     OnChange = PageControl1Change
     object p_time: TTabSheet
@@ -7946,6 +7946,11 @@ object f_config: Tf_config
           OnClick = refreshIPClick
         end
       end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'Let one empty extra page at the end'
+      ImageIndex = 28
+      TabVisible = False
     end
   end
   object CancelBtn: TButton

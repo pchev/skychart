@@ -373,6 +373,7 @@ type double8 = array[1..8] of double;
 
 
 Var  Appdir, Configfile: string;         // pseudo-constant only here
+     ldeg,lmin,lsec : string;
 
 // Text formating constant
 const

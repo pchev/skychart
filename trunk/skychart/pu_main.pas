@@ -212,6 +212,8 @@ type
     ToolButton37: TToolButton;
     ToolButton38: TToolButton;
     ToolButton39: TToolButton;
+    listobj: TAction;
+    ToolButton40: TToolButton;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -263,6 +265,7 @@ type
     procedure popupProjClick(Sender: TObject);
     procedure TimeResetExecute(Sender: TObject);
     procedure TimeIncExecute(Sender: TObject);
+    procedure listobjExecute(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
@@ -288,7 +291,7 @@ type
     procedure SetLang;
     Procedure InitFonts;
     Procedure ActivateConfig;
-    Procedure SetLPanel1(txt:string; origin:string='');
+    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true);
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string);
     procedure updatebtn(fx,fy:integer);
@@ -305,6 +308,9 @@ type
     procedure StartServer;
     procedure StopServer;
     function GetUniqueName(cname:string; forcenumeric:boolean):string;
+    procedure showdetailinfo(chart:string;ra,dec:double;nm,desc:string);
+    procedure CenterFindObj(chart:string);
+    procedure NeighborObj(chart:string);
   end;
 
 var

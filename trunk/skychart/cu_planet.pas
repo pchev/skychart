@@ -1070,7 +1070,7 @@ if result and (currentplanet=10) then begin
   nom:=pla[CurrentPlanet];
   ma:='-26';
   Desc := sar+tab+sde+tab
-          +'  P'+tab+nom
+          +'  P'+tab+nom+tab
           +syy+'-'+smm+'-'+sdd+' '+shh+tab
           +'diam:'+sdiam+' '+lmin+tab
           +'dist:'+sdist+' ua'+tab;
@@ -1098,7 +1098,7 @@ if result and (currentplanet=11) then begin
   str(magn:5:2,smagn);
   ma:=smagn;
   Desc := sar+tab+sde+tab
-          +'  P'+nom+tab
+          +'  P'+tab+nom+tab
           +syy+'-'+smm+'-'+sdd+' '+shh+tab
           +'m:'+smagn+tab
           +'diam:'+sdiam+' '+lmin+tab

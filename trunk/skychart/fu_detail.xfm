@@ -1,8 +1,8 @@
 object f_detail: Tf_detail
-  Left = 247
-  Top = 380
-  Width = 337
-  Height = 414
+  Left = 179
+  Top = 117
+  Width = 290
+  Height = 306
   VertScrollBar.Range = 41
   ActiveControl = Button1
   Caption = 'Details'
@@ -10,30 +10,48 @@ object f_detail: Tf_detail
   FormStyle = fsStayOnTop
   Position = poDefault
   Scaled = False
-  PixelsPerInch = 90
+  PixelsPerInch = 80
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 337
+    Width = 290
     Height = 41
     Align = alTop
     TabOrder = 0
     object Button1: TButton
       Left = 8
       Top = 8
-      Width = 75
+      Width = 85
       Height = 25
       Cancel = True
       Caption = 'Close'
       TabOrder = 0
       OnClick = Button1Click
     end
+    object Button2: TButton
+      Left = 98
+      Top = 8
+      Width = 85
+      Height = 25
+      Caption = 'Center Object'
+      TabOrder = 1
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Left = 188
+      Top = 8
+      Width = 85
+      Height = 25
+      Caption = 'Neighbor'
+      TabOrder = 2
+      OnClick = Button3Click
+    end
   end
   object memo: TTextBrowser
     Left = 0
     Top = 41
-    Width = 337
-    Height = 373
+    Width = 290
+    Height = 265
     Align = alClient
     PopupMenu = PopupMenu1
     TabOrder = 1

@@ -104,7 +104,7 @@ type
     Configuration1: TMenuItem;
     Setup1: TMenuItem;
     Print2: TMenuItem;
-    PrintSetup1: TAction;
+    FilePrintSetup1: TAction;
     PrintSetup2: TMenuItem;
     N2: TMenuItem;
     HelpContents1: THelpContents;
@@ -211,6 +211,8 @@ type
     ToolButton30: TToolButton;
     ToolButton39: TToolButton;
     ToolButton40: TToolButton;
+    ListObj: TAction;
+    ToolButton41: TToolButton;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -220,7 +222,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
-    procedure PrintSetup1Execute(Sender: TObject);
+    procedure FilePrintSetup1Execute(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
@@ -259,6 +261,7 @@ type
     procedure allSkyExecute(Sender: TObject);
     procedure TimeIncExecute(Sender: TObject);
     procedure TimeResetExecute(Sender: TObject);
+    procedure ListObjExecute(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
@@ -301,6 +304,9 @@ type
     procedure StartServer;
     procedure StopServer;
     function GetUniqueName(cname:string; forcenumeric:boolean):string;
+    procedure showdetailinfo(chart:string;ra,dec:double;nm,desc:string);
+    procedure CenterFindObj(chart:string);
+    procedure NeighborObj(chart:string);
   end;
 
 var
@@ -324,7 +330,7 @@ uses fu_chart, fu_about, fu_config, fu_info, u_projection ;
 
 // Specific Linux CLX code:
 
-procedure Tf_main.PrintSetup1Execute(Sender: TObject);
+procedure Tf_main.FilePrintSetup1Execute(Sender: TObject);
 begin
 Printer.executesetup;
 end;

@@ -39,19 +39,26 @@ type
     PopupMenu1: TPopupMenu;
     SelectAll1: TMenuItem;
     Copy1: TMenuItem;
+    Button2: TButton;
+    Button3: TButton;
     procedure Button1Click(Sender: TObject);
     procedure EditSelectAll1Execute(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    source_chart:string;
   end;
 
 var
   f_detail: Tf_detail;
 
 implementation
+
+uses fu_main;
 
 {$R *.xfm}
 
@@ -69,5 +76,16 @@ procedure Tf_detail.EditCopy1Execute(Sender: TObject);
 begin
 memo.CopyToClipboard;
 end;
+
+procedure Tf_detail.Button2Click(Sender: TObject);
+begin
+f_main.CenterFindObj(source_chart);
+end;
+
+procedure Tf_detail.Button3Click(Sender: TObject);
+begin
+f_main.NeighborObj(source_chart);
+end;
+
 
 end.
