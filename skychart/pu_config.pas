@@ -1,5 +1,27 @@
 unit pu_config;
+{
+Copyright (C) 2002 Patrick Chevalley
 
+http://www.astrosurf.com/astropc
+pch@freesurf.ch
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+}
+{
+ Configuration form for Windows VCL application
+}
 interface
 
 uses Math, u_constant, u_util,
@@ -198,91 +220,7 @@ type
     NebBox: TCheckBox;
     BigNebBox: TCheckBox;
     p_image: TTabSheet;
-    GroupBox3: TGroupBox;
-    Label72: TLabel;
-    Label73: TLabel;
-    Label74: TLabel;
-    Bevel1: TBevel;
-    Bevel2: TBevel;
-    Label75: TLabel;
-    Label77: TLabel;
-    realskydir: TEdit;
-    realskydrive: TEdit;
-    realskyfile: TEdit;
-    RealSkyNord: TCheckBox;
-    RealSkySud: TCheckBox;
-    DSS102CD: TCheckBox;
-    usesubsample: TCheckBox;
-    realskymax: TEdit;
-    realskymb: TEdit;
-    reallist: TCheckBox;
-    dssautofilter: TCheckBox;
-    RadioGroup3: TRadioGroup;
-    RadioGroup4: TRadioGroup;
-    GroupBox4: TGroupBox;
-    compdss: TCheckBox;
-    GroupBox5: TGroupBox;
     Label50: TLabel;
-    Label54: TLabel;
-    Label55: TLabel;
-    Label56: TLabel;
-    Label57: TLabel;
-    Label58: TLabel;
-    Label59: TLabel;
-    Label60: TLabel;
-    Label61: TLabel;
-    Label62: TLabel;
-    Label63: TLabel;
-    Label70: TLabel;
-    NbComet: TLabel;
-    CometList: TListBox;
-    com1: TEdit;
-    com2: TEdit;
-    com3: TEdit;
-    com4: TEdit;
-    com5: TEdit;
-    com6: TEdit;
-    com7: TEdit;
-    com8: TEdit;
-    com9: TEdit;
-    com10: TEdit;
-    com11: TEdit;
-    RadioComet1: TRadioGroup;
-    GroupBox6: TGroupBox;
-    Image1: TImage;
-    BitBtn6: TBitBtn;
-    BitBtn7: TBitBtn;
-    NbAster: TLabel;
-    Label81: TLabel;
-    Label82: TLabel;
-    Label83: TLabel;
-    Label84: TLabel;
-    Label85: TLabel;
-    Label86: TLabel;
-    Label88: TLabel;
-    Label90: TLabel;
-    Label91: TLabel;
-    Label92: TLabel;
-    Label93: TLabel;
-    Label94: TLabel;
-    Label95: TLabel;
-    AsterList: TListBox;
-    RadioAsteroid1: TRadioGroup;
-    RadioAsteroid2: TRadioGroup;
-    ast1: TEdit;
-    ast5: TEdit;
-    ast8: TEdit;
-    ast3: TEdit;
-    ast6: TEdit;
-    ast9: TEdit;
-    ast10: TEdit;
-    ast4: TEdit;
-    ast7: TEdit;
-    ast11: TEdit;
-    ast2: TEdit;
-    AstMax: TEdit;
-    BitBtn8: TBitBtn;
-    Astmin: TEdit;
     Panel4: TPanel;
     Panel3: TPanel;
     Label110: TLabel;
@@ -606,7 +544,6 @@ type
     Label199: TLabel;
     Label196: TLabel;
     DefColor: TRadioGroup;
-    LoadDefColor: TButton;
     Label200: TLabel;
     skycolorbox: TRadioGroup;
     Panel6: TPanel;
@@ -721,7 +658,7 @@ type
     procedure bgClick(Sender: TObject);
     procedure ShapeMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure LoadDefColorClick(Sender: TObject);
+    procedure DefColorClick(Sender: TObject);
     procedure skycolorboxClick(Sender: TObject);
     procedure ShapeSkyMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);

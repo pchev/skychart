@@ -331,6 +331,7 @@ begin
     def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
     InitFonts;
+    LoadConstL(cfgm.ConstLfile);
     if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
        sc.cfgsc.FindOk:=false;
@@ -355,10 +356,10 @@ end;
 
 Procedure Tf_main.InitFonts;
 begin
-   font.name:=cfgm.fontname[4];
-   font.size:=cfgm.fontsize[4];
-   if cfgm.FontBold[4] then font.style:=[fsBold] else font.style:=[];
-   if cfgm.FontItalic[4] then font.style:=font.style+[fsItalic];
+   font.name:=def_cfgplot.fontname[4];
+   font.size:=def_cfgplot.fontsize[4];
+   if def_cfgplot.FontBold[4] then font.style:=[fsBold] else font.style:=[];
+   if def_cfgplot.FontItalic[4] then font.style:=font.style+[fsItalic];
    LPanels0.Caption:='Ra:22h22m22.22s +22°22''22"22';
    Ppanels0.ClientWidth:=LPanels0.width+8;
    Lpanels0.Caption:='';
@@ -381,6 +382,8 @@ end;
 
 procedure Tf_main.FormResize(Sender: TObject);
 begin
+//   PanelLeft.width:=ToolBar2.width+2;
+//   PanelRight.width:=ToolBar3.width+2;
    Ppanels1.width:=PanelBottom.ClientWidth-Ppanels1.left;
 end;
 
@@ -400,14 +403,14 @@ cfgm.maximized:=true;
 cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
 for i:=1 to 6 do begin
-   cfgm.FontName[i]:=DefaultFontName;
-   cfgm.FontSize[i]:=DefaultFontSize;
-   cfgm.FontBold[i]:=false;
-   cfgm.FontItalic[i]:=false;
+   def_cfgplot.FontName[i]:=DefaultFontName;
+   def_cfgplot.FontSize[i]:=DefaultFontSize;
+   def_cfgplot.FontBold[i]:=false;
+   def_cfgplot.FontItalic[i]:=false;
 end;
 for i:=1 to 9 do begin
-   cfgm.LabelColor[i]:=clWhite;
-   cfgm.LabelSize[i]:=DefaultFontSize;
+   def_cfgplot.LabelColor[i]:=clWhite;
+   def_cfgplot.LabelSize[i]:=DefaultFontSize;
 end;
 cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constl.dat';
 def_cfgplot.invisible:=false;
@@ -430,10 +433,12 @@ def_cfgsc.JDchart:=jd2000;
 def_cfgsc.LastJDchart:=-1E25;
 def_cfgsc.racentre:=1.4;
 def_cfgsc.decentre:=0;
-def_cfgsc.fov:=1;
+def_cfgsc.fov:=deg2rad*90;
 def_cfgsc.theta:=0;
 def_cfgsc.projtype:='A';
-def_cfgsc.ProjPole:=Equat;
+def_cfgsc.ProjPole:=AltAz;
+def_cfgsc.acentre:=0;
+def_cfgsc.hcentre:=deg2rad*28;
 def_cfgsc.FlipX:=1;
 def_cfgsc.FlipY:=1;
 def_cfgsc.WindowRatio:=1;
@@ -634,10 +639,10 @@ formpos(f_main,f_main.Left,f_main.Top);
 for i:=0 to MaxField do catalog.cfgshr.FieldNum[i]:=ReadFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
 section:='font';
 for i:=1 to 6 do begin
-   cfgm.FontName[i]:=ReadString(section,'FontName'+inttostr(i),cfgm.FontName[i]);
-   cfgm.FontSize[i]:=ReadInteger(section,'FontSize'+inttostr(i),cfgm.FontSize[i]);
-   cfgm.FontBold[i]:=ReadBool(section,'FontBold'+inttostr(i),cfgm.FontBold[i]);
-   cfgm.FontItalic[i]:=ReadBool(section,'FontItalic'+inttostr(i),cfgm.FontItalic[i]);
+   cplot.FontName[i]:=ReadString(section,'FontName'+inttostr(i),cplot.FontName[i]);
+   cplot.FontSize[i]:=ReadInteger(section,'FontSize'+inttostr(i),cplot.FontSize[i]);
+   cplot.FontBold[i]:=ReadBool(section,'FontBold'+inttostr(i),cplot.FontBold[i]);
+   cplot.FontItalic[i]:=ReadBool(section,'FontItalic'+inttostr(i),cplot.FontItalic[i]);
 end;
 section:='filter';
 catalog.cfgshr.StarFilter:=ReadBool(section,'StarFilter',catalog.cfgshr.StarFilter);
@@ -841,13 +846,6 @@ WriteInteger(section,'WinLeft',f_main.Left);
 WriteInteger(section,'WinWidth',f_main.Width);
 WriteInteger(section,'WinHeight',f_main.Height);
 for i:=0 to MaxField do WriteFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
-section:='font';
-for i:=1 to 6 do begin
-    WriteString(section,'FontName'+inttostr(i),cfgm.FontName[i]);
-    WriteInteger(section,'FontSize'+inttostr(i),cfgm.FontSize[i]);
-    WriteBool(section,'FontBold'+inttostr(i),cfgm.FontBold[i]);
-    WriteBool(section,'FontItalic'+inttostr(i),cfgm.FontItalic[i]);
-end;
 section:='filter';
 WriteBool(section,'StarFilter',catalog.cfgshr.StarFilter);
 WriteBool(section,'AutoStarFilter',catalog.cfgshr.AutoStarFilter);
@@ -910,6 +908,13 @@ WriteBool(section,'PlanetTransparent',def_cfgplot.PlanetTransparent);
 WriteBool(section,'AutoSkycolor',def_cfgplot.AutoSkycolor);
 for i:=0 to maxcolor do WriteInteger(section,'color'+inttostr(i),def_cfgplot.color[i]);
 for i:=1 to 7 do WriteInteger(section,'skycolor'+inttostr(i),def_cfgplot.skycolor[i]);
+section:='font';
+for i:=1 to 6 do begin
+    WriteString(section,'FontName'+inttostr(i),def_cfgplot.FontName[i]);
+    WriteInteger(section,'FontSize'+inttostr(i),def_cfgplot.FontSize[i]);
+    WriteBool(section,'FontBold'+inttostr(i),def_cfgplot.FontBold[i]);
+    WriteBool(section,'FontItalic'+inttostr(i),def_cfgplot.FontItalic[i]);
+end;
 section:='grid';
 for i:=1 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=1 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );

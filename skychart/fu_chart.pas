@@ -111,7 +111,7 @@ type
     { Private declarations }
     movefactor,zoomfactor: double;
     xcursor,ycursor : integer;
-    lock_trackcursor : boolean;
+    lock_trackcursor,LockWheel : boolean;
   public
     { Public declarations }
     sc: Tskychart;
@@ -156,7 +156,13 @@ procedure Tf_chart.FormMouseWheel(Sender: TObject; Shift: TShiftState;
 
   WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 begin
-CMouseWheel(Shift,WheelDelta,MousePos,Handled);
+// why two event for each mouse turn ?
+if lockwheel then begin
+   lockwheel:=false;
+end else begin
+   lockwheel:=true;
+   CMouseWheel(Shift,WheelDelta,MousePos,Handled);
+end;   
 end;
 
 // End of Linux specific CLX code:

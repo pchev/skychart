@@ -66,6 +66,7 @@ type
      Procedure PlotLine(x1,y1,x2,y2,color,width: integer);
      procedure PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
      procedure PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
+     procedure PlotLabel(xx,yy,labelnum:integer ;txt:string);
   end;
 
 Implementation
@@ -91,8 +92,10 @@ begin
 cfgchart.Width:=w;
 cfgchart.Height:=h;
 with cnv do begin
-  Brush.Color:=cfgplot.Color[0];
-  Pen.Color:=cfgplot.Color[0];
+ Brush.Color:=cfgplot.Color[0];
+ Pen.Color:=cfgplot.Color[0];
+ Brush.style:=bsSolid;
+ Pen.Mode:=pmCopy;
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
 end;
 result:=true;
@@ -162,6 +165,7 @@ with cnv do begin
      ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
      ds2:= round(ds/2);
      Brush.Color := co ;
+     Brush.style:=bsSolid;
      case ds of
        1..2: Ellipse(xx,yy,xx+ds,yy+ds);
        3: Ellipse(xx-1,yy-1,xx+2,yy+2);
@@ -198,6 +202,8 @@ if not cfgplot.Invisible then begin
      ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-max*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen)-cfgchart.drawpen;
      ds2:= trunc(ds/2)+cfgchart.drawpen;
      Brush.Color := cfgplot.Color[0];
+     Brush.style:=bsSolid;
+     Pen.Mode:=pmCopy;
      Pen.Color := cfgplot.Color[0];
      Pen.Width := cfgchart.Drawpen;
      case ds of
@@ -247,6 +253,8 @@ if not cfgplot.Invisible then
    ds2:= trunc(ds/2);
    Pen.Width := 1;
    Pen.Color := cfgplot.Color[15];
+   Brush.style:=bsSolid;
+   Pen.Mode:=pmCopy;
    if cfgchart.onprinter then begin
      rd:=ds2 + 3 + 3*(0.7+ln(minvalue([50,maxvalue([0.5,sep])])));
    end
@@ -301,6 +309,8 @@ if not cfgplot.Invisible then begin
      +(((co and $00ff0000) div dc)and$00ff0000);
   with cnv do begin
    Pen.Width := cfgchart.drawpen;
+   Brush.style:=bsSolid;
+   Pen.Mode:=pmCopy;
    case cfgplot.Nebplot of
    0: begin
        Brush.Color := cfgplot.Color[0];
@@ -399,6 +409,7 @@ with cnv do begin
    Pen.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
    Brush.Color := Pen.Color;
    Brush.Style := bsSolid;
+   Pen.Mode:=pmCopy;
    case typ of
        1:  begin
            ds2:=round(ds*0.75);
@@ -485,6 +496,7 @@ with cnv do begin
    ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
    ds2:=round(ds*2/3);
    Pen.Color := cfgplot.Color[0];
+   Pen.Mode:=pmCopy;
    Brush.Style := bsClear;
    case typ of
        1:  begin
@@ -603,6 +615,7 @@ Procedure TSplot.PlotLine(x1,y1,x2,y2,color,width: integer);
 begin
 with cnv do begin
   Pen.width:=width*cfgchart.drawpen;
+  Pen.Mode:=pmCopy;
   Pen.Color:=color;
   MoveTo(x1,y1);
   LineTo(x2,y2);
@@ -675,6 +688,7 @@ with cnv do begin
                               else Brush.style:=bssolid;
  Pen.Width := cfgchart.drawpen;
  Pen.Color := cfgplot.Color[11];
+ Pen.Mode:=pmCopy;
  Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
  Pen.Color := cfgplot.Color[0];
  ds:=ds+cfgchart.drawpen;
@@ -691,6 +705,7 @@ if not (hidesat xor showhide) then
    with cnv do begin
         Pen.Color := cfgplot.Color[0];
         Pen.Width := cfgchart.drawpen;
+        Brush.style:=bsSolid;
         Pen.Mode := pmCopy;
         brush.color:=cfgplot.Color[11];
         ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
@@ -760,6 +775,21 @@ with cnv do begin
    end;
    Pen.mode := pmCopy;
   end;
+end;
+
+procedure TSplot.PlotLabel(xx,yy,labelnum:integer ;txt:string);
+begin
+with cnv do begin
+Brush.Color:=cfgplot.Color[0];
+Brush.Style:=bsSolid;
+Pen.Mode:=pmCopy;
+Font.Name:=cfgplot.FontName[2];
+Font.Color:=cfgplot.LabelColor[labelnum];
+Font.Size:=cfgplot.LabelSize[labelnum];
+if cfgplot.FontBold[2] then Font.Style:=[fsBold] else Font.Style:=[];
+if cfgplot.FontItalic[2] then font.style:=font.style+[fsItalic];
+textout(xx,yy,txt);
+end;
 end;
 
 end.
