@@ -298,6 +298,7 @@ DLL_FUNC void SetDirectory (const char* dir);
  *  Output:                                                                            *
  *     cities (struct City**)                                                          *
  *        pointer to the 'struct City' array containing the cities of the file read in *
+ *     cfile  country file name
  *                                                                                     *
  *  Returns:                                                                           *
  *     (int)                                                                           *
@@ -308,7 +309,7 @@ DLL_FUNC void SetDirectory (const char* dir);
  *        -4   =  ConvertCitiesToWChar() failed                                        *
  *                                                                                     *
  *-------------------------------------------------------------------------------------*/
-DLL_FUNC int ReadCountryFile (const char* country, struct City **cities);
+DLL_FUNC int ReadCountryFile (const char* country, struct City **cities, char cfile[200]);
 
 
 /*-------------------------------------------------------------------------------------*
