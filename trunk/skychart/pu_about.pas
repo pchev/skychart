@@ -26,17 +26,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses Windows, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls;
+  Buttons, ExtCtrls, jpeg;
 
 type
   Tf_about = class(TForm)
     Panel1: TPanel;
     OKButton: TButton;
-    ProgramIcon: TImage;
-    ProductName: TLabel;
-    Version: TLabel;
-    Copyright: TLabel;
-    Comments: TLabel;
+    logo: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,7 +49,14 @@ var
 
 implementation
 
+uses u_constant;
+
 {$R *.dfm}
+
+procedure Tf_about.FormCreate(Sender: TObject);
+begin
+label2.caption:=version;
+end;
 
 end.
  
