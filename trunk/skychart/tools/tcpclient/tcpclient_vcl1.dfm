@@ -105,16 +105,17 @@ object Form1: TForm1
     Width = 241
     Height = 21
     ItemHeight = 13
-    ItemIndex = 3
     TabOrder = 6
     Text = 'listchart'
     OnKeyDown = Combobox1KeyDown
     Items.Strings = (
-      'newchart tcpcli1'
-      'selectchart tcpcli1'
-      'closechart tcpcli1'
+      'newchart tcpclient'
+      'selectchart tcpclient'
+      'closechart tcpclient'
       'listchart'
       'search m51'
+      'getmsgbox'
+      'getcoordbox'
       'zoom+'
       'zoom-'
       'fov 15d0m0s'

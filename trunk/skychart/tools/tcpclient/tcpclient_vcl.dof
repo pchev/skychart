@@ -44,12 +44,12 @@ ImageBase=4194304
 ExeDescription=
 
 [Directories]
-OutputDir=
-UnitOutputDir=
+OutputDir=E:\cdc
+UnitOutputDir=E:\cdc\dev\dcu
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
-Packages=
+Packages=vcl;rtl;vclx;VclSmp;vclshlctrls;enheditsD6;FoldrDlgD6;HiResD5;jdcalendarD6;pngimageD6
 Conditionals=
 DebugSourceDirs=
 UsePackages=0
@@ -87,3 +87,15 @@ OriginalFilename=
 ProductName=
 ProductVersion=1.0.0.0
 Comments=
+
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+
+[HistoryLists\hlUnitOutputDirectory]
+Count=1
+Item0=E:\cdc\dev\dcu
+
+[HistoryLists\hlOutputDirectorry]
+Count=1
+Item0=E:\cdc

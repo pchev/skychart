@@ -134,7 +134,7 @@ var resp,cname:string;
     i : integer;
 begin
 if (client<>nil)and(not client.Terminated) then begin
-  cname:='tcpcli'+client.clientid;
+  cname:='tcpclient';
   resp:=client.Send('NEWCHART '+cname);
   i:=pos(' ',resp);
   if i>0 then begin
