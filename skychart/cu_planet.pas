@@ -1857,8 +1857,8 @@ end;
 function TPlanet.Checkdb:boolean;
 begin
 if db1.Active then begin
-   result:=db1.Query('DESCRIBE cdc_ast_elem');
-   result:=result and db1.Query('DESCRIBE cdc_ast_mag');
+   result:=db1.Query('SHOW TABLES LIKE "cdc_ast_elem"');
+   result:=result and db1.Query('SHOW TABLES LIKE "cdc_ast_mag"');
 end else result:=false;
 if not result then begin
   db1.Close;

@@ -268,7 +268,7 @@ type
     procedure listobjExecute(Sender: TObject);
   private
     { Private declarations }
-    function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
+    function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
   public
@@ -311,6 +311,9 @@ type
     procedure showdetailinfo(chart:string;ra,dec:double;nm,desc:string);
     procedure CenterFindObj(chart:string);
     procedure NeighborObj(chart:string);
+    procedure ConnectDB;
+    procedure OpenAsteroidConfig(Sender: TObject);
+    procedure OpenDBConfig(Sender: TObject);
   end;
 
 var
@@ -321,7 +324,7 @@ implementation
 {$R *.dfm}
 {$R cursbmp.res}
 
-uses pu_chart, pu_about, pu_config, pu_info, u_projection ;
+uses pu_chart, pu_about, pu_config, pu_info, u_projection, MyDB ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here
