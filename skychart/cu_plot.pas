@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util, u_planetrender,
+uses u_constant, u_util, u_planetrender, u_bitmap,
      Math, SysUtils, Classes, Types,
 {$ifdef linux}
    Qmenus, QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
@@ -63,6 +63,7 @@ type
      PlanetBMP : Tbitmap;
      PlanetBMPjd,PlanetBMProt : double;
      PlanetBMPpla : integer;
+     imabmp,imacopy,imamask:tbitmap;
      Procedure PlotStar0(x,y: single; ma,b_v : Double);
      Procedure PlotStar1(x,y: single; ma,b_v : Double);
      Procedure PlotStar2(x,y: single; ma,b_v : Double);
@@ -102,6 +103,7 @@ type
      Procedure PlotGalaxie(x,y: single; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotLine(x1,y1,x2,y2:single; color,width: integer);
+     Procedure PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; bmp:Tbitmap);
      procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
@@ -134,6 +136,12 @@ var i : integer;
     MenuItem: TMenuItem;
 begin
  inherited Create(AOwner);
+ imabmp:=tbitmap.Create;
+ imabmp.PixelFormat:=pf32bit;
+ imacopy:=tbitmap.Create;
+ imacopy.PixelFormat:=pf32bit;
+ imamask:=tbitmap.Create;
+ imamask.PixelFormat:=pf32bit;
  starbmp:=Tbitmap.Create;
  destcnv:=(AOwner as Timage).Canvas;
  cbmp:=Tbitmap.Create;
@@ -219,6 +227,9 @@ begin
  for i:=1 to maxlabels do labels[i].Free;
  starbmp.Free;
  cbmp.Free;
+ imabmp.Free;
+ imacopy.Free;
+ imamask.Free;
  if planetrender then begin
     planetbmp.Free;
     planetbmpmask.Free;
@@ -383,7 +394,7 @@ end;
 Procedure TSplot.PlotStar2(x,y: single; ma,b_v : Double);
 type
   TPos=single;
-  TColorArray = array[0..32767] of TColor;
+  TColorArray = array[0..32767] of Longword;
   PColorArray = ^TColorArray;
 var LineWidth,AAWidth,Lum,R,G,B  : TPos;
 var
@@ -1078,11 +1089,55 @@ with cnv do begin
 end;
 end;
 
+Procedure TSplot.PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; bmp:Tbitmap);
+var dsx,dsy,xx,yy : single;
+    DestR,SrcR :Trect;
+begin
+BitmapRotation(bmp,imabmp,Rotation);
+//BitmapRotMask(imamask,imabmp,bmp,Rotation);
+BitmapBlackMask(imamask,imabmp);
+if (Width<=cfgchart.Width)and(Height<=cfgchart.Height) then begin
+   // image smaller than chart, write in full
+   xx:=x;
+   yy:=y;
+   dsx:=(imabmp.Width/bmp.Width)*Width/2;
+   dsy:=(imabmp.Height/bmp.Height)*Height/2;
+   DestR:=Rect(round(xx-flipx*dsx),round(yy-flipy*dsy),round(xx+flipx*dsx),round(yy+flipy*dsy));
+   cnv.copymode:=cmSrcAnd;
+   cnv.StretchDraw(DestR,imamask);
+   cnv.copymode:=cmSrcPaint;
+   cnv.StretchDraw(DestR,imabmp);
+end else begin
+   // only a part of the image is displayed
+   xx:=(imabmp.Width/2)+flipx*((cfgchart.Width/2)-x)*bmp.Width/Width;
+   yy:=(imabmp.Height/2)+flipy*((cfgchart.Height/2)-y)*bmp.height/Height;
+   dsx:=(bmp.Width*cfgchart.Width/Width)/2;
+   dsy:=dsx*cfgchart.height/cfgchart.width;
+   SrcR:=Rect(round(xx-dsx),round(yy-dsy),round(xx+dsx),round(yy+dsy));
+   imacopy.canvas.copymode:=cmSrcCopy;
+   imacopy.Width:=round(2*dsx);
+   imacopy.Height:=round(2*dsy);
+   imacopy.Canvas.Brush.Color:=clBlack;
+   imacopy.Canvas.Pen.Color:=clBlack;
+   imacopy.Canvas.Rectangle(0,0,imacopy.Width,imacopy.Height);
+   imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imamask.Canvas,SrcR);
+   if (flipx>0)and(flipy>0) then DestR:=Rect(0,0,cfgchart.Width,cfgchart.Height)
+     else if (flipx<0)and(flipy<0) then DestR:=Rect(cfgchart.Width,cfgchart.Height,0,0)
+     else if flipx<0 then DestR:=Rect(cfgchart.Width,0,0,cfgchart.Height)
+     else if flipy<0 then DestR:=Rect(0,cfgchart.Height,cfgchart.Width,0);
+   cnv.copymode:=cmSrcAnd;
+   cnv.StretchDraw(DestR,imacopy);
+   imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imabmp.Canvas,SrcR);
+   cnv.copymode:=cmSrcPaint;
+   cnv.StretchDraw(DestR,imacopy);
+end;
+end;
+
 procedure TSplot.PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w:double);
 var ds,i : integer;
     DestR :Trect;
 const planetsize=450;
-      moonsize=1000;    
+      moonsize=1000;
 begin
 if ipla=6 then ds:=round(maxvalue([2.2261*diam*pixscale/2,2*cfgchart.drawpen]))
           else ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
@@ -1160,7 +1215,7 @@ if not (hidesat xor showhide) then
                 else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
            end;
            end;
-        end else PlotStar(x,y,ma,1020);
+        end else PlotStar(x,y,ma,1020);                    
    end;
 end;
 

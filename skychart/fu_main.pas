@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                                 
 interface
 
-uses cu_catalog, cu_planet, u_constant, u_util, blcksock, libc, Math,
+uses cu_catalog, cu_planet, cu_fits, u_constant, u_util, blcksock, libc, Math,
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
      QStdCtrls, IniFiles, Types, QButtons, QFileCtrls;
@@ -296,6 +296,7 @@ type
     def_cfgsc : conf_skychart;
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
+    fits : TFits;
     planet  : Tplanet;
     serverinfo,topmsg : string;
     TCPDaemon: TTCPDaemon;

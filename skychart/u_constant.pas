@@ -38,8 +38,8 @@ const MaxColor = 32;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid
      TSkycolor = array[1..7]of Tcolor;
 
-const cdcversion = 'Version 3 alpha 0.0.6b';
-      cdcver     = '3.0.0.6';
+const cdcversion = 'Version 3 alpha 0.0.7';
+      cdcver     = '3.0.0.7';
       MaxSim = 100 ;
       MaxComet = 200;
       MaxAsteroid = 500;
@@ -385,11 +385,12 @@ type
                 end;
      conf_main = record
                 prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
-                db,dbhost,dbuser,dbpass : string;
+                db,dbhost,dbuser,dbpass, ImagePath : string;
                 PrinterResolution,PrintMethod,PrintColor,configpage,autorefreshdelay,MaxChildID,dbport : integer;
                 PrintLandscape :boolean;
                 maximized,updall,AutostartServer,keepalive : boolean;
                 ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath : string;
+                ImageLuminosity, ImageContrast : double;
                 end;
 
 // external library
@@ -605,7 +606,7 @@ create_table_com_day_pos='( id varchar(12) NOT NULL default "", epoch double NOT
                          'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
                          'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag),'+
                          'UNIQUE KEY name (id,epoch)) TYPE=MyISAM';
-numsqltable=7;
+numsqltable=8;
 sqltable : array[1..numsqltable,1..2] of string =(
            ('cdc_ast_name',' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'+
                            'PRIMARY KEY (id)) TYPE=MyISAM'),
@@ -635,7 +636,12 @@ sqltable : array[1..numsqltable,1..2] of string =(
                            'epoch double NOT NULL default "0",'+
                            'h double NOT NULL default "0", g double NOT NULL default "0",'+
                            'name varchar(27) NOT NULL default "", equinox smallint(4) NOT NULL default "0",'+
-                           'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch)) TYPE=MyISAM'));
+                           'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch)) TYPE=MyISAM'),
+           ('cdc_fits',' (filename varchar(255) NOT NULL default "", ra double NOT NULL default "0",'+
+                           'de double NOT NULL default "0", width double NOT NULL default "0", '+
+                           'height double NOT NULL default "0", cosr double NOT NULL default "0", '+
+                           'sinr  double NOT NULL default "0", PRIMARY KEY (ra,de)) TYPE=MyISAM')
+                           );
 
 // World cities
 // must equate cities.h

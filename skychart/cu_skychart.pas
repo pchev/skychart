@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_plot, cu_catalog, u_constant, libcatalog, cu_planet, u_projection, u_util,
+uses cu_plot, cu_catalog, cu_fits, u_constant, libcatalog, cu_planet, u_projection, u_util,
      SysUtils, Classes, Math, Types,
 {$ifdef linux}
    QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
@@ -39,6 +39,7 @@ type
 Tskychart = class (TComponent)
    private
     Fplot: TSplot;
+    FFits: TFits;
     Fcatalog : Tcatalog;
     Fplanet : Tplanet;
     FShowDetailXY: Tint2func;
@@ -61,6 +62,7 @@ Tskychart = class (TComponent)
     property plot: TSplot read Fplot;
     property catalog: Tcatalog read Fcatalog write Fcatalog;
     property planet: Tplanet read Fplanet write Fplanet;
+    property Fits: TFits read FFits write FFits;
     function Refresh : boolean;
     function InitCatalog : boolean;
     function InitTime : boolean;
@@ -73,6 +75,7 @@ Tskychart = class (TComponent)
     function DrawVarStars :boolean;
     function DrawDblStars :boolean;
     function DrawNebulae :boolean;
+    function DrawNebImages :boolean;
     function DrawOutline :boolean;
     function DrawMilkyWay :boolean;
     function DrawPlanet :boolean;
@@ -188,7 +191,12 @@ try
     DrawMilkyWay; // most extended first
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque) then DrawHorizon;
-    DrawNebulae;
+    if DrawNebImages then begin
+       Fplot.cfgplot.Invisible:=true;
+       DrawNebulae;
+       Fplot.cfgplot.Invisible:=false;
+    end
+    else DrawNebulae;
     DrawOutline;
   end;
   // then the lines
@@ -646,7 +654,7 @@ if Fcatalog.OpenDblStar then
     rec.double.pa:=rec.double.pa*cfgsc.FlipX;
     if cfgsc.FlipY<0 then rec.double.pa:=180-rec.double.pa;
     rec.double.pa:=Deg2Rad*rec.double.pa+rot;
-    Fplot.PlotDblStar(xx,yy,rec.double.sep*secarc*cfgsc.BxGlb,rec.double.mag1,rec.double.sep,rec.double.pa,0);
+    Fplot.PlotDblStar(xx,yy,abs(rec.double.sep*secarc*cfgsc.BxGlb),rec.double.mag1,rec.double.sep,rec.double.pa,0);
     if rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3] then
     if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1))
        else SetLabel(lid,xx,yy,0,2,3,rec.double.id);
@@ -704,6 +712,43 @@ end;
 result:=true;
 finally
  Fcatalog.CloseNeb;
+end;
+end;
+
+function Tskychart.DrawNebImages :boolean;
+var bmp:Tbitmap;
+  filename : string;
+  ra,de,width,height,cosr,sinr,dw,dh: double;
+  i:integer;
+  x1,y1,x2,y2,rot: Double;
+  xx,yy:single;
+begin
+result:=false;
+bmp:=Tbitmap.Create;
+try
+if FFits.OpenDB then
+  while FFits.GetDB(filename,ra,de,width,height,cosr,sinr) do begin
+    precession(jd2000,cfgsc.JDChart,ra,de);
+    if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
+    projection(ra,de,x1,y1,true,cfgsc) ;
+    WindowXY(x1,y1,xx,yy,cfgsc);
+    dw:=(width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2;
+    dh:=(height*cosr+width*sinr)*abs(cfgsc.ByGlb)/2;
+    if ((xx+dw)>cfgsc.Xmin) and ((xx-dw)<cfgsc.Xmax) and ((yy+dh)>cfgsc.Ymin) and ((yy-dh)<cfgsc.Ymax)
+        and (abs(max(width,height)*cfgsc.BxGlb)>10)
+    then begin
+       result:=true;
+       FFits.FileName:=filename;
+       if FFits.Header.valid then begin
+          FFits.GetBitmap(bmp);
+          projection(ra,de+0.001,x2,y2,false,cfgsc) ;
+          rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
+          Fplot.plotimage(xx,yy,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,bmp);
+       end;   
+    end;
+  end;
+finally
+ bmp.Free;
 end;
 end;
 

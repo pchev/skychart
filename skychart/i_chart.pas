@@ -578,7 +578,7 @@ lastdec:=sc.cfgsc.FindDEC;
 lastname:=sc.cfgsc.FindName;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
-dx:=2/sc.cfgsc.BxGlb; // search a 2 pixel radius
+dx:=abs(2/sc.cfgsc.BxGlb); // search a 2 pixel radius
 result:=sc.FindatRaDec(ra,dec,dx);
 if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx);  //else 6 pixel
 ShowIdentLabel;

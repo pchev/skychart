@@ -2224,6 +2224,7 @@ cfgsc.FindNote:='';
 end;
 
 function TPlanet.Checkdb:boolean;
+// this function is here instead of fu_config because fu_config is not created at startup.
 var i:integer;
 begin
 if db1.Active then begin

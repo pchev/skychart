@@ -41,7 +41,9 @@ uses
   pu_printsetup in 'pu_printsetup.pas' {f_printsetup},
   u_planetrender in 'u_planetrender.pas',
   cu_indiclient in 'cu_indiclient.pas',
-  cu_telescope in 'cu_telescope.pas';
+  cu_telescope in 'cu_telescope.pas',
+  cu_fits in 'cu_fits.pas',
+  u_bitmap in 'u_bitmap.pas';
 
 {$R *.RES}
 

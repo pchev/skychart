@@ -1,6 +1,6 @@
 object f_main: Tf_main
-  Left = 216
-  Top = 119
+  Left = 238
+  Top = 121
   Width = 790
   Height = 587
   ActiveControl = PanelBottom
@@ -8,7 +8,7 @@ object f_main: Tf_main
   Color = clAppWorkSpace
   Font.Charset = ANSI_CHARSET
   Font.Color = clBlack
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Arial'
   Font.Style = []
   FormStyle = fsMDIForm
@@ -24,11 +24,11 @@ object f_main: Tf_main
   OnMouseWheel = FormMouseWheel
   OnResize = FormResize
   OnShow = FormShow
-  PixelsPerInch = 96
-  TextHeight = 14
+  PixelsPerInch = 101
+  TextHeight = 15
   object starshape: TImage
-    Left = 264
-    Top = 160
+    Left = 283
+    Top = 171
     Width = 209
     Height = 133
     AutoSize = True
@@ -2652,7 +2652,7 @@ object f_main: Tf_main
     Left = 0
     Top = 27
     Width = 23
-    Height = 476
+    Height = 477
     Align = alLeft
     AutoSize = True
     BevelOuter = bvNone
@@ -2738,7 +2738,7 @@ object f_main: Tf_main
     Left = 759
     Top = 27
     Width = 23
-    Height = 476
+    Height = 477
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
@@ -2868,41 +2868,41 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Left = 0
-    Top = 503
+    Top = 504
     Width = 782
-    Height = 30
+    Height = 32
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 2
     object PPanels0: TPanel
       Left = 1
       Top = 1
-      Width = 104
-      Height = 29
+      Width = 112
+      Height = 31
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       TabOrder = 0
       object LPanels0: TLabel
         Left = 1
         Top = 1
-        Width = 44
-        Height = 14
+        Width = 53
+        Height = 15
         Caption = 'LPanels0'
       end
     end
     object PPanels1: TPanel
-      Left = 105
+      Left = 113
       Top = 1
-      Width = 557
-      Height = 29
+      Width = 596
+      Height = 31
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       TabOrder = 1
       object LPanels1: TLabel
         Left = 4
         Top = 1
-        Width = 44
-        Height = 14
+        Width = 53
+        Height = 15
         Caption = 'LPanels1'
         WordWrap = True
       end
@@ -2922,9 +2922,9 @@ object f_main: Tf_main
       Left = 2
       Top = 2
       Width = 778
-      Height = 23
+      Height = 24
       AutoSize = True
-      ButtonHeight = 23
+      ButtonHeight = 24
       Color = clBtnFace
       EdgeBorders = [ebRight]
       Flat = True
@@ -3004,7 +3004,7 @@ object f_main: Tf_main
         Left = 246
         Top = 0
         Width = 23
-        Height = 23
+        Height = 24
         BevelOuter = bvNone
         TabOrder = 3
         object SpeedButton1: TSpeedButton
@@ -3184,10 +3184,10 @@ object f_main: Tf_main
         Left = 269
         Top = 0
         Width = 70
-        Height = 22
+        Height = 23
         AutoComplete = False
         DropDownCount = 15
-        ItemHeight = 14
+        ItemHeight = 15
         TabOrder = 0
         TabStop = False
         OnClick = quicksearchClick
@@ -3225,7 +3225,7 @@ object f_main: Tf_main
         Left = 439
         Top = 0
         Width = 47
-        Height = 23
+        Height = 24
         MaxValue = 1000
         MinValue = 1
         TabOrder = 1
@@ -3235,11 +3235,11 @@ object f_main: Tf_main
         Left = 486
         Top = 0
         Width = 88
-        Height = 22
+        Height = 23
         Style = csDropDownList
         Color = clBtnFace
         DropDownCount = 11
-        ItemHeight = 14
+        ItemHeight = 15
         ItemIndex = 0
         TabOrder = 2
         Text = 'Hour'

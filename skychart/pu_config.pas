@@ -27,7 +27,7 @@ interface
 uses Math, u_constant, u_util, jpeg, pngimage, passql, pasmysql, u_projection,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, Grids, ExtCtrls, enhedits, ActnList,
-  FoldrDlg, Spin, Mask, CheckLst, StrUtils, cu_zoomimage;
+  FoldrDlg, Spin, Mask, CheckLst, StrUtils, cu_zoomimage, cu_fits;
 
 type
   Tf_config = class(TForm)
@@ -927,6 +927,18 @@ type
     StarButton2: TButton;
     StarButton3: TButton;
     StarButton4: TButton;
+    imgpath: TEdit;
+    BitBtn3: TBitBtn;
+    Label264: TLabel;
+    ScanImages: TButton;
+    Label265: TLabel;
+    nimages: TLabel;
+    Label267: TLabel;
+    Panel11: TPanel;
+    ImgLumBar: TTrackBar;
+    ImgContrastBar: TTrackBar;
+    Label266: TLabel;
+    Label268: TLabel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1140,11 +1152,17 @@ type
     procedure StarButton2Click(Sender: TObject);
     procedure StarButton3Click(Sender: TObject);
     procedure StarButton4Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure ScanImagesClick(Sender: TObject);
+    procedure imgpathChange(Sender: TObject);
+    procedure ImgLumBarChange(Sender: TObject);
+    procedure ImgContrastBarChange(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
     ObsMapFile:string;
     locktree:boolean;
+    FFits: TFits;
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
   public
@@ -1187,6 +1205,8 @@ type
     procedure CenterObs;
     procedure ShowHorizon;
     procedure ShowObjList;
+    procedure ShowImages;
+    procedure CountImages;
     procedure ShowSYS;
     procedure ShowAsteroid;
     procedure UpdAstList;
@@ -1197,6 +1217,7 @@ type
     procedure showcircle;
     procedure showrectangle;
     procedure showtelescope;
+    property Fits: TFits read FFits write FFits;
   end;
 
 var
@@ -1265,7 +1286,6 @@ csc.ScopePlugin:=telescopepluginlist.text;
 end;
 
 // end of windows vcl specific code:
-
 
 end.
 
