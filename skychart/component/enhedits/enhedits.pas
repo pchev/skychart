@@ -517,14 +517,17 @@ end;
 { Function to check the Value property is in range
   Min < Value < Max. }
 function TFloatEdit.CheckValue(NewValue: Extended): Extended;
+const
+  FMaxVal: Double = 1.7E308;
+  FMinVal: Double = -1.7E308;
 begin
   Result := NewValue;
-  if (FMaxValue <> FMinValue) then
+  if (FMaxVal <> FMinVal) then
   begin
-    if NewValue < FMinValue
-      then Result := FMinValue
+    if NewValue < FMinVal
+      then Result := FMinVal
     else
-      if NewValue > FMaxValue then Result := FMaxValue;
+      if NewValue > FMaxVal then Result := FMaxVal;
   end;
 end;
 
