@@ -38,8 +38,8 @@ const MaxColor = 19;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18-19:spare
      TSkycolor = array[1..7]of Tcolor;
 
-const version = 'Version 3 alpha 0.0.2';
-      ver     = '3.0.0.2';
+const version = 'Version 3 alpha 0.0.3';
+      ver     = '3.0.0.3';
       MaxSim = 100 ;
       MaxComet = 500;
       MaxAsteroid = 500;
@@ -383,16 +383,25 @@ const
      html_sp       = ' ';
 {$endif}
 
+const msgTimeout='Timeout!';
+      msgOK='OK';
+      msgFailed='Failed!';
+      msgNotFound='Not found!';
+
+      msgBye='Bye!';
+
 // Main Commands
 const
      MaxCmdArg = 10;
-     numcmdmain = 5;
+     numcmdmain = 7;
      maincmdlist: array[1..numcmdmain,1..2] of string=(
      ('NEWCHART','1'),
      ('CLOSECHART','2'),
      ('SELECTCHART','3'),
      ('LISTCHART','4'),
-     ('SEARCH','5')
+     ('SEARCH','5'),
+     ('GETMSGBOX','6'),
+     ('GETCOORDBOX','7')
      );
 
 // Chart Commands

@@ -38,7 +38,8 @@ uses
   libcatalog in 'library/catalog/libcatalog.pas',
   fu_directory in 'fu_directory.pas' {f_directory},
   cu_planet in 'cu_planet.pas',
-  fu_detail in 'fu_detail.pas' {f_detail};
+  fu_detail in 'fu_detail.pas' {f_detail},
+  fu_info in 'fu_info.pas' {f_info};
 
 {$R *.res}
 
@@ -48,5 +49,6 @@ begin
   Application.CreateForm(Tf_about, f_about);
   Application.CreateForm(Tf_directory, f_directory);
   Application.CreateForm(Tf_detail, f_detail);
+  Application.CreateForm(Tf_info, f_info);
   Application.Run;
 end.
