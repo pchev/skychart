@@ -165,7 +165,7 @@ object f_config: Tf_config
     Top = 16
     Width = 490
     Height = 455
-    ActivePage = s_catalog
+    ActivePage = s_display
     TabOrder = 9
     object s_time: TTabSheet
       Caption = 's_time'
@@ -7958,7 +7958,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_circle
+        ActivePage = t_display
         Align = alClient
         TabOrder = 0
         object t_display: TTabSheet
@@ -7973,20 +7973,21 @@ object f_config: Tf_config
           end
           object stardisplay: TRadioGroup
             Left = 8
-            Top = 48
+            Top = 120
             Width = 441
             Height = 65
             Caption = 'Star Display'
-            Columns = 2
+            Columns = 3
             Items.Strings = (
               'Line mode'
-              'Graphic')
+              'Photographic'
+              'Parametric')
             TabOrder = 0
             OnClick = stardisplayClick
           end
           object nebuladisplay: TRadioGroup
             Left = 8
-            Top = 128
+            Top = 32
             Width = 441
             Height = 65
             Caption = 'Nebula Display'
@@ -7996,6 +7997,114 @@ object f_config: Tf_config
               'Graphic')
             TabOrder = 1
             OnClick = nebuladisplayClick
+          end
+          object starvisual: TGroupBox
+            Left = 8
+            Top = 216
+            Width = 441
+            Height = 185
+            Caption = 'Star Display  Properties'
+            TabOrder = 2
+            Visible = False
+            object Label256: TLabel
+              Left = 24
+              Top = 38
+              Width = 76
+              Height = 13
+              Caption = 'Faint Stars Size '
+            end
+            object Label262: TLabel
+              Left = 24
+              Top = 112
+              Width = 39
+              Height = 13
+              Caption = 'Contrast'
+            end
+            object Label263: TLabel
+              Left = 24
+              Top = 150
+              Width = 73
+              Height = 13
+              Caption = 'Color saturation'
+            end
+            object Label257: TLabel
+              Left = 24
+              Top = 75
+              Width = 119
+              Height = 13
+              Caption = 'Increment for Bright Stars'
+            end
+            object StarSizeBar: TTrackBar
+              Left = 170
+              Top = 32
+              Width = 225
+              Height = 25
+              Max = 100
+              Min = 1
+              Orientation = trHorizontal
+              PageSize = 10
+              Frequency = 10
+              Position = 1
+              SelEnd = 0
+              SelStart = 0
+              TabOrder = 0
+              TickMarks = tmBottomRight
+              TickStyle = tsAuto
+              OnChange = StarSizeBarChange
+            end
+            object StarContrastBar: TTrackBar
+              Left = 170
+              Top = 106
+              Width = 225
+              Height = 25
+              Max = 500
+              Min = 100
+              Orientation = trHorizontal
+              PageSize = 50
+              Frequency = 50
+              Position = 100
+              SelEnd = 0
+              SelStart = 0
+              TabOrder = 1
+              TickMarks = tmBottomRight
+              TickStyle = tsAuto
+              OnChange = StarContrastBarChange
+            end
+            object SaturationBar: TTrackBar
+              Left = 170
+              Top = 144
+              Width = 225
+              Height = 25
+              Max = 255
+              Orientation = trHorizontal
+              PageSize = 25
+              Frequency = 25
+              Position = 0
+              SelEnd = 0
+              SelStart = 0
+              TabOrder = 2
+              TickMarks = tmBottomRight
+              TickStyle = tsAuto
+              OnChange = SaturationBarChange
+            end
+            object SizeContrastBar: TTrackBar
+              Left = 170
+              Top = 69
+              Width = 225
+              Height = 25
+              Max = 50
+              Min = 10
+              Orientation = trHorizontal
+              PageSize = 5
+              Frequency = 5
+              Position = 10
+              SelEnd = 0
+              SelStart = 0
+              TabOrder = 3
+              TickMarks = tmBottomRight
+              TickStyle = tsAuto
+              OnChange = SizeContrastBarChange
+            end
           end
         end
         object t_font: TTabSheet

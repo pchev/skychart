@@ -29,6 +29,9 @@ end;
 
 procedure Tf_chart.FormCreate(Sender: TObject);
 begin
+{$ifdef mswindows}
+ Image1.Picture.Bitmap.pixelformat:=pf32bit;
+ {$endif}
  sc:=Tskychart.Create(Image1);
  // set initial value
  sc.cfgsc.racentre:=1.4;
@@ -1146,8 +1149,12 @@ end;
 
 procedure Tf_chart.switchstarExecute(Sender: TObject);
 begin
-sc.plot.cfgplot.starplot:=abs(sc.plot.cfgplot.starplot-1);
-sc.plot.cfgplot.nebplot:=sc.plot.cfgplot.starplot;
+//sc.plot.cfgplot.starplot:=abs(sc.plot.cfgplot.starplot-1);
+//sc.plot.cfgplot.nebplot:=sc.plot.cfgplot.starplot;
+inc(sc.plot.cfgplot.starplot);
+if sc.plot.cfgplot.starplot>2 then sc.plot.cfgplot.starplot:=0;
+if sc.plot.cfgplot.starplot=0 then sc.plot.cfgplot.nebplot:=0
+                              else sc.plot.cfgplot.nebplot:=1;
 sc.cfgsc.FillMilkyWay:=(sc.plot.cfgplot.nebplot=1);
 Refresh;
 end;
@@ -1295,7 +1302,7 @@ end;
 function Tf_chart.cmd_SetStarMode(i:integer):string;
 
 begin
-if (i>=0)and(i<=1) then begin
+if (i>=0)and(i<=2) then begin
   sc.plot.cfgplot.starplot:=i;
   result:=msgOK;
 end else result:=msgFailed+' Bad star mode.';

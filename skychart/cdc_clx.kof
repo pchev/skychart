@@ -61,6 +61,9 @@ Launcher=/usr/X11R6/bin/xterm -T KylixDebuggerOutput -e bash -i -c %debuggee%
 UseLauncher=1
 DebugCWD=
 
+[Excluded Packages]
+/home/pch/source/GLScene/Kylix/GLSceneK3.so=GLScene - OpenGL 3D library
+
 [HistoryLists\hlSearchPath]
 Count=5
 Item0=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage

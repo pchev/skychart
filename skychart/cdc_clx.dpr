@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 
 uses
+  // fix bug with exec-shield enabled kernel > 2.6.8
+  execshieldfix,
   QForms,
   fu_main in 'fu_main.pas' {f_main},
   fu_directory in 'fu_directory.pas' {f_directory},
