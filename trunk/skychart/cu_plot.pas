@@ -1118,11 +1118,11 @@ end else begin
    imacopy.Width:=round(2*dsx);
    imacopy.Height:=round(2*dsy);
    if WhiteBg then begin
-     imacopy.Canvas.Brush.Color:=clWhite;
-     imacopy.Canvas.Pen.Color:=clWhite;
-   end else begin
      imacopy.Canvas.Brush.Color:=clBlack;
      imacopy.Canvas.Pen.Color:=clBlack;
+   end else begin
+     imacopy.Canvas.Brush.Color:=clWhite;
+     imacopy.Canvas.Pen.Color:=clWhite;
    end;
    imacopy.Canvas.Rectangle(0,0,imacopy.Width,imacopy.Height);
    imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imamask.Canvas,SrcR);
@@ -1132,6 +1132,14 @@ end else begin
      else if flipy<0 then DestR:=Rect(0,cfgchart.Height,cfgchart.Width,0);
    cnv.copymode:=cmSrcAnd;
    cnv.StretchDraw(DestR,imacopy);
+   if WhiteBg then begin
+     imacopy.Canvas.Brush.Color:=clWhite;
+     imacopy.Canvas.Pen.Color:=clWhite;
+   end else begin
+     imacopy.Canvas.Brush.Color:=clBlack;
+     imacopy.Canvas.Pen.Color:=clBlack;
+   end;
+   imacopy.Canvas.Rectangle(0,0,imacopy.Width,imacopy.Height);
    imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imabmp.Canvas,SrcR);
    cnv.copymode:=cmSrcPaint;
    cnv.StretchDraw(DestR,imacopy);

@@ -134,6 +134,8 @@ c2.PlanetParalaxe := c1.PlanetParalaxe ;
 c2.ShowPlanet := c1.ShowPlanet ;
 c2.ShowAsteroid := c1.ShowAsteroid ;
 c2.ShowImages := c1.ShowImages ;
+c2.ShowBackgroundImage := c1.ShowBackgroundImage ;
+c2.BackgroundImage := c1.BackgroundImage ;
 c2.AstmagMax := c1.AstmagMax;
 c2.AstmagDiff := c1.AstmagDiff;
 c2.AstSymbol := c1.AstSymbol;
@@ -300,10 +302,7 @@ privatedir:=expanddirectoryname(PrivateDir);
 Tempdir:=expanddirectoryname(Tempdir);
 {$endif}
 {$ifdef mswindows}
-SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
-if PIDL=nil then begin // Pre-IE4.0
-  SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
-end;
+SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
 privatedir:=slash(Folder)+privatedir;
 configfile:=slash(privatedir)+configfile;
@@ -370,6 +369,10 @@ try
  telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
  telescope.plugin:=def_cfgsc.ScopePlugin;
 {$endif}
+ if def_cfgsc.BackgroundImage='' then begin
+   def_cfgsc.BackgroundImage:=slash(privatedir)+slash('pictures');
+   if not DirectoryExists(def_cfgsc.BackgroundImage) then forcedirectories(def_cfgsc.BackgroundImage);
+ end;
  catalog.LoadConstellation(cfgm.Constellationfile);
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
@@ -508,6 +511,7 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    inc(sc.cfgsc.projpole);
    if sc.cfgsc.projpole>Ecl then sc.cfgsc.projpole:=Equat;
    sc.cfgsc.FindOk:=false; // invalidate the search result
+   sc.cfgsc.theta:=0; // rotation = 0
    Refresh;
 end;
 end;
@@ -520,6 +524,7 @@ if (newproj<Equat)or(newproj>Ecl) then newproj:=Equat;
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    sc.cfgsc.projpole:=newproj;
    sc.cfgsc.FindOk:=false; // invalidate the search result
+   sc.cfgsc.theta:=0; // rotation = 0
    Refresh;
 end;
 end;
@@ -839,7 +844,19 @@ begin
     if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
        sc.cfgsc.FindOk:=false;
+       if cfgm.NewBackgroundImage then begin
+          sc.Fits.Filename:=sc.cfgsc.BackgroundImage;
+          if sc.Fits.Header.valid then begin
+            sc.Fits.DeleteDB('OTHER','BKG');
+            if not sc.Fits.InsertDB(sc.cfgsc.BackgroundImage,'OTHER','BKG',sc.Fits.Center_RA,sc.Fits.Center_DE,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation) then
+               sc.Fits.InsertDB(sc.cfgsc.BackgroundImage,'OTHER','BKG',sc.Fits.Center_RA+0.00001,sc.Fits.Center_DE+0.00001,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation);
+            sc.cfgsc.TrackOn:=true;
+            sc.cfgsc.TrackType:=5;
+          end;
+          cfgm.NewBackgroundImage:=false;
+       end;
     end;
+    cfgm.NewBackgroundImage:=false;
     RefreshAllChild(cfgm.updall);
     Autorefresh.enabled:=false;
     Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
@@ -937,7 +954,7 @@ cfgm.dbport:=3306;
 cfgm.db:='cdc';
 cfgm.dbuser:='root';
 cfgm.dbpass:='';
-cfgm.ImagePath:=slash(appDir)+slash('data')+slash('images');
+cfgm.ImagePath:=slash(appDir)+slash('data')+slash('pictures');
 cfgm.ImageLuminosity:=0;
 cfgm.ImageContrast:=0;
 for i:=1 to numfont do begin
@@ -979,7 +996,7 @@ def_cfgplot.starsize:=13;
 def_cfgplot.starplot:=2;
 def_cfgplot.nebplot:=1;
 def_cfgplot.plaplot:=1;
-def_cfgplot.AutoSkycolor:=true;
+def_cfgplot.AutoSkycolor:=false;
 def_cfgsc.winx:=clientwidth;
 def_cfgsc.winy:=clientheight;
 def_cfgsc.UseSystemTime:=true;
@@ -1038,6 +1055,8 @@ for i:=1 to NumSimObject do def_cfgsc.SimObject[i]:=true;
 def_cfgsc.ShowPlanet:=true;
 def_cfgsc.ShowAsteroid:=true;
 def_cfgsc.ShowImages:=true;
+def_cfgsc.ShowBackgroundImage:=false;
+def_cfgsc.BackgroundImage:='';
 def_cfgsc.AstSymbol:=0;
 def_cfgsc.AstmagMax:=18;
 def_cfgsc.AstmagDiff:=6;
@@ -1113,7 +1132,7 @@ catalog.cfgshr.AutoStarFilterMag:=6.5;
 catalog.cfgcat.StarmagMax:=12;
 catalog.cfgshr.NebFilter:=true;
 catalog.cfgshr.BigNebFilter:=true;
-catalog.cfgshr.BigNebLimit:=210;
+catalog.cfgshr.BigNebLimit:=211;
 catalog.cfgcat.NebmagMax:=12;
 catalog.cfgcat.NebSizeMin:=1;
 catalog.cfgcat.UseUSNOBrightStars:=false;
@@ -1405,6 +1424,8 @@ csc.ShowPlanet:=ReadBool(section,'ShowPlanet',csc.ShowPlanet);
 csc.ShowAsteroid:=ReadBool(section,'ShowAsteroid',csc.ShowAsteroid);
 csc.ShowComet:=ReadBool(section,'ShowComet',csc.ShowComet);
 csc.ShowImages:=ReadBool(section,'ShowImages',csc.ShowImages);
+csc.ShowBackgroundImage:=ReadBool(section,'ShowBackgroundImage',csc.ShowBackgroundImage);
+csc.BackgroundImage:=ReadString(section,'BackgroundImage',csc.BackgroundImage);
 csc.AstSymbol:=ReadInteger(section,'AstSymbol',csc.AstSymbol);
 csc.AstmagMax:=ReadFloat(section,'AstmagMax',csc.AstmagMax);
 csc.AstmagDiff:=ReadFloat(section,'AstmagDiff',csc.AstmagDiff);
@@ -1545,7 +1566,7 @@ procedure Tf_main.UpdateConfig;
 begin
 if Config_Version < '3.0.0.7' then begin
    def_cfgplot.color[22]:=DFcolor[22];
-   catalog.cfgshr.BigNebLimit:=210;
+   catalog.cfgshr.BigNebLimit:=211;
    catalog.cfgshr.NebMagFilter[4]:=99;
 end;
 SaveDefault;   
@@ -1703,6 +1724,8 @@ WriteBool(section,'ShowPlanet',def_cfgsc.ShowPlanet);
 WriteBool(section,'ShowAsteroid',def_cfgsc.ShowAsteroid);
 WriteBool(section,'ShowComet',def_cfgsc.ShowComet);
 WriteBool(section,'ShowImages',def_cfgsc.ShowImages);
+WriteBool(section,'ShowBackgroundImage',def_cfgsc.ShowBackgroundImage);
+WriteString(section,'BackgroundImage',def_cfgsc.BackgroundImage);
 WriteInteger(section,'AstSymbol',def_cfgsc.AstSymbol);
 WriteFloat(section,'AstmagMax',def_cfgsc.AstmagMax);
 WriteFloat(section,'AstmagDiff',def_cfgsc.AstmagDiff);

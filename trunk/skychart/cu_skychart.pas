@@ -464,12 +464,6 @@ cfgsc.RefractionOffset:=0;
 Fplot.cfgplot.outradius:=abs(round(minvalue([50*cfgsc.fov,0.98*pi2])*cfgsc.BxGlb/2));
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
-// find the current field number and projection
-w := cfgsc.fov;
-h := cfgsc.fov/cfgsc.WindowRatio;
-w := maxvalue([w,h]);
-cfgsc.FieldNum:=GetFieldNum(w);
-cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
 // nutation constant
 cfgsc.e:=ecliptic(cfgsc.JDChart);
 nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
@@ -519,8 +513,25 @@ aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
           end;
          cfgsc.TrackOn:=false;
          end;
+     5 : begin
+         cfgsc.TrackOn:=false;
+         if FFits.Header.valid then begin
+            cfgsc.Projpole:=Equat;
+            cfgsc.racentre:=FFits.Center_RA;
+            cfgsc.decentre:=FFits.Center_DE;
+            cfgsc.fov:=FFits.Img_Width;
+            cfgsc.theta:=FFits.Rotation;
+            ScaleWindow(cfgsc);
+         end;
+         end;
    end;
   end;
+// find the current field number and projection
+w := cfgsc.fov;
+h := cfgsc.fov/cfgsc.WindowRatio;
+w := maxvalue([w,h]);
+cfgsc.FieldNum:=GetFieldNum(w);
+cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
 // normalize the coordinates
 if (cfgsc.decentre>=(pid2-secarc)) then cfgsc.decentre:=pid2-secarc;
 if (cfgsc.decentre<=(-pid2+secarc)) then cfgsc.decentre:=-pid2+secarc;
@@ -734,7 +745,7 @@ end;
 
 function Tskychart.DrawNebImages :boolean;
 var bmp:Tbitmap;
-  filename : string;
+  filename,objname : string;
   ra,de,width,height,dw,dh: double;
   cosr,sinr: extended;
   x1,y1,x2,y2,rot: Double;
@@ -753,7 +764,8 @@ end;
 y1 := maxvalue([-pid2,cfgsc.decentre-cfgsc.fov/cfgsc.WindowRatio-deg2rad]);
 y2 := minvalue([pid2,cfgsc.decentre+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
 if FFits.OpenDB('other',x1,x2,y1,y2) then
-  while FFits.GetDB(filename,ra,de,width,height,rot) do begin
+  while FFits.GetDB(filename,objname,ra,de,width,height,rot) do begin
+    if (objname='BKG') and (not cfgsc.ShowBackgroundImage) then continue;
     sincos(rot,sinr,cosr);
     precession(jd2000,cfgsc.JDChart,ra,de);
     if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);

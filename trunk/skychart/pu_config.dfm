@@ -77,14 +77,16 @@ object f_config: Tf_config
       6162656C73340000000000000000000000FFFFFFFFFFFFFFFF00000000000000
       001B382D2046696E64657220636972636C652028457965706965636529320000
       000000000000000000FFFFFFFFFFFFFFFF000000000000000019392D2046696E
-      6465722072656374616E676C65202843434429220000000000000000000000A0
-      A9754100000000000000000100000009372D20496D6167657322000000000000
-      0000000000FFFFFFFFFFFFFFFF000000000000000009312D20496D6167657322
-      000000FFFFFFFFFFFFFFFFA0A9754100000000000000000300000009382D2053
-      797374656D220000000000000000000000FFFFFFFFFFFFFFFF00000000000000
-      0009312D2053797374656D22000000FFFFFFFFFFFFFFFFA0A975410000000000
-      0000000000000009322D20536572766572250000000000000000000000FFFFFF
-      FFFFFFFFFF00000000000000000C332D2054656C6573636F7065}
+      6465722072656374616E676C65202843434429240000000000000000000000A0
+      A975410000000000000000020000000B372D2050696374757265732200000000
+      00000000000000FFFFFFFFFFFFFFFF000000000000000009312D204F626A6563
+      74260000000000000000000000FFFFFFFFFFFFFFFF00000000000000000D322D
+      204261636B67726F756E6422000000FFFFFFFFFFFFFFFFA0A975410000000000
+      0000000300000009382D2053797374656D220000000000000000000000FFFFFF
+      FFFFFFFFFF000000000000000009312D2053797374656D22000000FFFFFFFFFF
+      FFFFFFA0A9754100000000000000000000000009322D20536572766572250000
+      000000000000000000FFFFFFFFFFFFFFFF00000000000000000C332D2054656C
+      6573636F7065}
   end
   object CancelBtn: TButton
     Left = 462
@@ -165,7 +167,7 @@ object f_config: Tf_config
     Top = 16
     Width = 490
     Height = 455
-    ActivePage = s_display
+    ActivePage = s_images
     TabOrder = 9
     object s_time: TTabSheet
       Caption = 's_time'
@@ -10188,7 +10190,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_images
+        ActivePage = t_background
         Align = alClient
         TabOrder = 0
         object t_images: TTabSheet
@@ -10197,16 +10199,16 @@ object f_config: Tf_config
           object Label50: TLabel
             Left = 0
             Top = 0
-            Width = 70
+            Width = 74
             Height = 13
-            Caption = 'Images Setting'
+            Caption = 'Pictures Setting'
           end
           object Label264: TLabel
             Left = 8
             Top = 46
-            Width = 59
+            Width = 63
             Height = 13
-            Caption = 'Images Path'
+            Caption = 'Pictures Path'
           end
           object Label265: TLabel
             Left = 98
@@ -10373,9 +10375,93 @@ object f_config: Tf_config
             Top = 344
             Width = 369
             Height = 17
-            Caption = 'Show Images on the chart'
+            Caption = 'Show object pictures on the chart'
             TabOrder = 5
             OnClick = ShowImagesBoxClick
+          end
+        end
+        object t_background: TTabSheet
+          Caption = 't_background'
+          ImageIndex = 1
+          TabVisible = False
+          object Label270: TLabel
+            Left = 0
+            Top = 0
+            Width = 94
+            Height = 13
+            Caption = 'Background Picture'
+          end
+          object Label271: TLabel
+            Left = 8
+            Top = 46
+            Width = 42
+            Height = 13
+            Caption = 'FITS File'
+          end
+          object backimginfo: TLabel
+            Left = 8
+            Top = 88
+            Width = 57
+            Height = 13
+            Caption = 'backimginfo'
+          end
+          object backimg: TEdit
+            Tag = 1
+            Left = 98
+            Top = 43
+            Width = 327
+            Height = 19
+            Ctl3D = False
+            ParentCtl3D = False
+            TabOrder = 0
+            OnChange = backimgChange
+          end
+          object BitBtn5: TBitBtn
+            Tag = 1
+            Left = 431
+            Top = 43
+            Width = 19
+            Height = 19
+            TabOrder = 1
+            TabStop = False
+            OnClick = BitBtn5Click
+            Glyph.Data = {
+              36030000424D3603000000000000360000002800000010000000100000000100
+              1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+              C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+              CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+              CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+              0000000000000000000000000000000000000000000000000000000000000000
+              00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+              7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+              7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+              7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+              CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+              7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+              7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+              CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+              7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+              7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+              7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+              7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+              CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+              CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+              C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+              CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+              CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+              C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+              CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+              CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+            Margin = 0
+          end
+          object ShowBackImg: TCheckBox
+            Left = 8
+            Top = 128
+            Width = 369
+            Height = 17
+            Caption = 'Show this picture'
+            TabOrder = 2
+            OnClick = ShowBackImgClick
           end
         end
       end

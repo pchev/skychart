@@ -552,15 +552,25 @@ begin
  shape6.brush.color:=cplot.color[6];
  shape7.brush.color:=cplot.color[7];
  shape8.pen.color:=cplot.color[8];
+ shape8.brush.color:=cplot.bgColor;
  shape9.pen.color:=cplot.color[9];
+ shape9.brush.color:=cplot.bgColor;
  shape10.pen.color:=cplot.color[10];
+ shape10.brush.color:=cplot.bgColor;
  shape11.pen.color:=cplot.color[12];
+ shape11.brush.color:=cplot.bgColor;
  shape12.pen.color:=cplot.color[13];
+ shape12.brush.color:=cplot.bgColor;
  shape13.pen.color:=cplot.color[14];
+ shape13.brush.color:=cplot.bgColor;
  shape14.pen.color:=cplot.color[15];
+ shape14.brush.color:=cplot.bgColor;
  shape15.pen.color:=cplot.color[16];
+ shape15.brush.color:=cplot.bgColor;
  shape16.pen.color:=cplot.color[17];
+ shape16.brush.color:=cplot.bgColor;
  shape17.pen.color:=cplot.color[18];
+ shape17.brush.color:=cplot.bgColor;
  shape25.brush.color:=cplot.color[19];
  shape26.brush.color:=cplot.color[20];
  shape27.brush.color:=cplot.color[21];
@@ -3382,12 +3392,17 @@ end;
 end;
 
 procedure Tf_config.ShowImages;
+var save:boolean;
 begin
 imgpath.text:=cmain.ImagePath;
 ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
 ImgContrastBar.position:=round(10*cmain.ImageContrast);
 ShowImagesBox.checked:=csc.ShowImages;
 CountImages;
+save:=csc.ShowBackgroundImage;
+backimg.text:=csc.BackgroundImage;
+ShowBackImg.checked:=save;
+cmain.NewBackgroundImage:=false;
 end;
 
 
@@ -3496,19 +3511,9 @@ while j=0 do begin
     if FFits.header.valid or dummyfile then begin
       objn:=extractfilename(f.Name);
       p:=pos(extractfileext(objn),objn);
-      objn:=uppercase(stringreplace(copy(objn,1,p-1),' ','',[rfReplaceAll]));
-      cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
-        +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
-        +',"'+uppercase(c.Name)+'"'
-        +',"'+uppercase(objn)+'"'
-        +',"'+formatfloat(f5,ra)+'"'
-        +',"'+formatfloat(f5,de)+'"'
-        +',"'+formatfloat(f5,w)+'"'
-        +',"'+formatfloat(f5,h)+'"'
-        +',"'+formatfloat(f5,r)+'"'
-        +')';
-      if not db.query(cmd) then
-        writetrace('DB insert failed for '+f.Name+' :'+db.GetLastError);
+      objn:=copy(objn,1,p-1);
+      if not FFits.InsertDB(fname,c.Name,objn,ra,de,w,h,r) then
+         writetrace('DB insert failed for '+f.Name+' :'+db.GetLastError);
     end
     else writetrace('Invalid FITS file: '+f.Name);
     i:=findnext(f);
@@ -3538,3 +3543,40 @@ begin
 cmain.ImageContrast:=ImgContrastBar.position/10;
 end;
 
+procedure Tf_config.backimgChange(Sender: TObject);
+begin
+csc.BackgroundImage:=backimg.text;
+fits.filename:=csc.BackgroundImage;
+if fits.header.coordinate_valid then begin
+  cmain.NewBackgroundImage:=true;
+  ShowBackImg.checked:=true;
+  backimginfo.caption:=extractfilename(csc.BackgroundImage)+' RA:'+ARtoStr(fits.center_ra*rad2deg/15)+' DEC:'+DEtoStr(fits.center_de*rad2deg)+' FOV:'+DEtoStr(fits.img_width*rad2deg);
+end
+else begin
+  backimginfo.caption:='No picture';
+  ShowBackImg.checked:=false;
+end;
+end;
+
+procedure Tf_config.ShowBackImgClick(Sender: TObject);
+begin
+csc.ShowBackgroundImage:=ShowBackImg.checked;
+cmain.NewBackgroundImage:=csc.ShowBackgroundImage;
+end;
+
+procedure Tf_config.BitBtn5Click(Sender: TObject);
+var f : string;
+begin
+f:=expandfilename(backimg.text);
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='FITS Files|*.fit';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   backimg.text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
+end;
