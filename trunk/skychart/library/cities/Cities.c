@@ -275,7 +275,6 @@ static const char *m_Filename[COUNTRIES] =
 // directory where the country files are located
 static char m_Directory[200];
 
-
 // all cities contained in one country file
 static struct City *m_Cities = NULL;
 
@@ -351,7 +350,7 @@ DLL_FUNC void SetDirectory (const char* dir)
 }
 
 
-DLL_FUNC int ReadCountryFile (const char* country, struct City **cities)
+DLL_FUNC int ReadCountryFile (const char* country, struct City **cities, char cfile[200])
 /*-----------------------------------------------------------------------------------------*
  *  - - - - - - - - -                                                                      *
  *   ReadCountryFile                                                                       *
@@ -365,7 +364,8 @@ DLL_FUNC int ReadCountryFile (const char* country, struct City **cities)
  *                                                                                         *
  *  Output:                                                                                *
  *     cities (struct City**)                                                              *
- *        pointer to the 'struct City' array containing the cities of the file read in     *
+ *        pointer to the 'struct City' array containing the cities of the file read in
+ *     cfile  country file name
  *                                                                                         *
  *  Returns:                                                                               *
  *     (int)                                                                               *
@@ -378,7 +378,7 @@ DLL_FUNC int ReadCountryFile (const char* country, struct City **cities)
  *-----------------------------------------------------------------------------------------*/
 {
 	FILE  *File;
-	char   filename[200];
+	char  filename[200];
 
 	int    index = GetCountryIndex (country);
 	size_t i, j;
@@ -399,6 +399,8 @@ DLL_FUNC int ReadCountryFile (const char* country, struct City **cities)
 	// construct file name
 	strcpy (filename, m_Directory);
 	strcat (filename, m_Filename[index]);
+
+    strcpy (cfile, filename);
 
 	File = fopen (filename, "rb");
 
