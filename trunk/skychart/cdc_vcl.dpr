@@ -37,7 +37,7 @@ uses
   pu_config in 'pu_config.pas' {f_config},
   cu_planet in 'cu_planet.pas',
   pu_detail in 'pu_detail.pas' {f_detail},
-  pu_info in '\\STAR\WIN_E\cdc\dev\skychart\pu_info.pas' {f_info};
+  pu_info in 'pu_info.pas' {f_info};
 
 {$R *.RES}
 

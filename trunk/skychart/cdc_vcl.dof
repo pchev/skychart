@@ -61,6 +61,11 @@ Launcher=
 UseLauncher=0
 DebugCWD=
 
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+
 [Version Info]
 IncludeVerInfo=0
 AutoIncBuild=0
