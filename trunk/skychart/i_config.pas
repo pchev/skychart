@@ -134,6 +134,7 @@ ShowServer;
 ShowObservatory;
 ShowHorizon;
 ShowObjList;
+ShowImages;
 ShowSYS;
 ShowAsteroid;
 ShowComet;
@@ -3379,4 +3380,103 @@ case ACol of
 end;
 end;
 
+procedure Tf_config.ShowImages;
+begin
+imgpath.text:=cmain.ImagePath;
+ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
+ImgContrastBar.position:=round(10*cmain.ImageContrast);
+CountImages;
+end;
+
+procedure Tf_config.imgpathChange(Sender: TObject);
+begin
+cmain.ImagePath:=imgpath.text;
+ScanImages.click;
+end;
+
+procedure Tf_config.BitBtn3Click(Sender: TObject);
+begin
+{$ifdef mswindows}
+  FolderDialog1.Directory:=imgpath.text;
+  if FolderDialog1.execute then
+     imgpath.text:=FolderDialog1.Directory;
+{$endif}
+{$ifdef linux }
+  f_directory.DirectoryTreeView1.Directory:=imgpath.text;
+  f_directory.showmodal;
+  if f_directory.modalresult=mrOK then
+     imgpath.text:=f_directory.DirectoryTreeView1.Directory;
+{$endif}
+  ShowCDCStar;
+end;
+
+procedure Tf_config.CountImages;
+var i:integer;
+    ci,si:extended;
+    cmd:string;
+begin
+db:=TMyDB.create(self);
+try
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
+if db.Active then begin
+  nimages.caption:=db.QueryOne('select count(*) from cdc_fits');
+end;
+finally
+  db.Free;
+end;
+end;
+
+procedure Tf_config.ScanImagesClick(Sender: TObject);
+var f : tsearchrec;
+    i:integer;
+    ci,si:extended;
+    cmd:string;
+begin
+db:=TMyDB.create(self);
+try
+screen.cursor:=crHourGlass;
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
+if db.Active then begin
+  db.Query('UNLOCK TABLES');
+  db.Query('Truncate table cdc_fits');
+  i:=findfirst(slash(cmain.ImagePath)+'*.*',0,f);
+  while i=0 do begin
+    FFits.FileName:=slash(cmain.ImagePath)+f.Name;
+    if FFits.header.valid then begin
+      sincos(FFits.Rotation,si,ci);
+      cmd:='INSERT INTO cdc_fits (filename,ra,de,width,height,cosr,sinr) VALUES ('
+        +'"'+stringreplace(FFits.FileName,'\','\\',[rfReplaceAll])+'"'
+        +',"'+floattostr(FFits.Center_RA)+'"'
+        +',"'+floattostr(FFits.Center_DE)+'"'
+        +',"'+floattostr(FFits.Img_Width)+'"'
+        +',"'+floattostr(FFits.img_Height)+'"'
+        +',"'+floattostr(abs(ci))+'"'
+        +',"'+floattostr(abs(si))+'"'+')';
+      db.query(cmd);
+    end;
+    i:=findnext(f);
+  end;
+  db.Query('FLUSH TABLES');
+end;
+finally
+  screen.cursor:=crDefault;
+  db.Free;
+  findclose(f);
+end;
+CountImages;
+end;
+
+procedure Tf_config.ImgLumBarChange(Sender: TObject);
+begin
+cmain.ImageLuminosity:=-ImgLumBar.position/10;
+end;
+
+procedure Tf_config.ImgContrastBarChange(Sender: TObject);
+begin
+cmain.ImageContrast:=ImgContrastBar.position/10;
+end;
 

@@ -16,7 +16,7 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 101
   TextHeight = 13
   object TreeView1: TTreeView
     Left = 4
@@ -165,7 +165,7 @@ object f_config: Tf_config
     Top = 16
     Width = 490
     Height = 455
-    ActivePage = s_display
+    ActivePage = s_images
     TabOrder = 9
     object s_time: TTabSheet
       Caption = 's_time'
@@ -10186,6 +10186,149 @@ object f_config: Tf_config
             Height = 13
             Caption = 'Images Setting'
           end
+          object Label264: TLabel
+            Left = 8
+            Top = 46
+            Width = 59
+            Height = 13
+            Caption = 'Images Path'
+          end
+          object Label265: TLabel
+            Left = 8
+            Top = 80
+            Width = 41
+            Height = 13
+            Caption = 'There is '
+          end
+          object nimages: TLabel
+            Left = 56
+            Top = 80
+            Width = 39
+            Height = 13
+            Caption = 'nimages'
+          end
+          object Label267: TLabel
+            Left = 112
+            Top = 80
+            Width = 89
+            Height = 13
+            Caption = 'catalogued images'
+          end
+          object imgpath: TEdit
+            Tag = 1
+            Left = 98
+            Top = 43
+            Width = 239
+            Height = 19
+            Ctl3D = False
+            ParentCtl3D = False
+            TabOrder = 0
+            OnChange = imgpathChange
+          end
+          object BitBtn3: TBitBtn
+            Tag = 1
+            Left = 335
+            Top = 43
+            Width = 19
+            Height = 19
+            TabOrder = 1
+            TabStop = False
+            OnClick = BitBtn3Click
+            Glyph.Data = {
+              36030000424D3603000000000000360000002800000010000000100000000100
+              1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+              C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+              CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+              CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+              0000000000000000000000000000000000000000000000000000000000000000
+              00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+              7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+              7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+              7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+              CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+              7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+              7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+              CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+              7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+              7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+              7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+              7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+              CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+              CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+              C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+              CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+              CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+              C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+              CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+              CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+            Margin = 0
+          end
+          object ScanImages: TButton
+            Left = 104
+            Top = 104
+            Width = 113
+            Height = 25
+            Caption = 'Re-Scan directory'
+            TabOrder = 2
+            OnClick = ScanImagesClick
+          end
+          object Panel11: TPanel
+            Left = 16
+            Top = 168
+            Width = 401
+            Height = 145
+            TabOrder = 3
+            object Label266: TLabel
+              Left = 32
+              Top = 32
+              Width = 49
+              Height = 13
+              Caption = 'Luminosity'
+            end
+            object Label268: TLabel
+              Left = 40
+              Top = 96
+              Width = 39
+              Height = 13
+              Caption = 'Contrast'
+            end
+            object ImgLumBar: TTrackBar
+              Left = 120
+              Top = 24
+              Width = 222
+              Height = 45
+              Max = 30
+              Min = -30
+              Orientation = trHorizontal
+              PageSize = 5
+              Frequency = 5
+              Position = 0
+              SelEnd = 0
+              SelStart = 0
+              TabOrder = 0
+              TickMarks = tmBottomRight
+              TickStyle = tsAuto
+              OnChange = ImgLumBarChange
+            end
+            object ImgContrastBar: TTrackBar
+              Left = 120
+              Top = 88
+              Width = 222
+              Height = 45
+              Max = 30
+              Min = -30
+              Orientation = trHorizontal
+              PageSize = 5
+              Frequency = 5
+              Position = 0
+              SelEnd = 0
+              SelStart = 0
+              TabOrder = 1
+              TickMarks = tmBottomRight
+              TickStyle = tsAuto
+              OnChange = ImgContrastBarChange
+            end
+          end
         end
       end
     end
@@ -10739,17 +10882,17 @@ object f_config: Tf_config
     Top = 384
   end
   object FolderDialog1: TFolderDialog
-    Top = 384
+    Top = 408
     Left = 72
     Title = 'Browse for Folder'
   end
   object OpenDialog1: TOpenDialog
     Left = 40
-    Top = 384
+    Top = 408
   end
   object ColorDialog1: TColorDialog
     Ctl3D = True
     Left = 104
-    Top = 384
+    Top = 416
   end
 end

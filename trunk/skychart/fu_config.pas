@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, enhedits, u_constant, u_util, cu_zoomimage, passql, pasmysql,
+uses Math, enhedits, u_constant, u_util, cu_zoomimage, cu_fits, passql, pasmysql,
   SysUtils, Classes, QForms,Types, QStyle,
   QStdCtrls, QComCtrls, QControls, QGraphics, QExtCtrls, QGrids, QButtons,
   QDialogs, QMask, QCheckLst;
@@ -925,6 +925,18 @@ type
     StarButton2: TButton;
     StarButton3: TButton;
     StarButton4: TButton;
+    Label265: TLabel;
+    Label266: TLabel;
+    nimages: TLabel;
+    Label267: TLabel;
+    imgpath: TEdit;
+    BitBtn3: TBitBtn;
+    ScanImages: TButton;
+    Panel11: TPanel;
+    Label268: TLabel;
+    Label269: TLabel;
+    ImgLumBar: TTrackBar;
+    ImgContrastBar: TTrackBar;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1134,11 +1146,17 @@ type
     procedure StarButton2Click(Sender: TObject);
     procedure StarButton3Click(Sender: TObject);
     procedure StarButton4Click(Sender: TObject);
+    procedure imgpathChange(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure ScanImagesClick(Sender: TObject);
+    procedure ImgLumBarChange(Sender: TObject);
+    procedure ImgContrastBarChange(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
     ObsMapFile:string;
     locktree: boolean;
+    FFits: TFits;
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
     procedure labelmagChange(Sender: TObject);
@@ -1193,6 +1211,9 @@ type
     procedure showcircle;
     procedure showrectangle;
     procedure showtelescope;
+    procedure showimages;
+    procedure countimages;
+    property Fits: TFits read FFits write FFits;
   end;
 
 var
@@ -1249,7 +1270,6 @@ begin
 labelSizeChange(Sender);
 end;
 // End of Linux specific CLX code:
-
 
 end.
 

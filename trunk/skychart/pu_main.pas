@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_catalog, cu_planet, cu_telescope, u_constant, u_util, blcksock, Winsock,
+uses cu_catalog, cu_planet, cu_telescope, cu_fits, u_constant, u_util, blcksock, Winsock,
   Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, Messages, ExtCtrls, ComCtrls, StdActns,
   ActnList, ToolWin, ImgList, IniFiles, Spin, DdeMan;
@@ -306,6 +306,7 @@ type
     def_cfgsc : conf_skychart;
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
+    fits : TFits;
     planet  : Tplanet;
     telescope: Ttelescope;
     serverinfo,topmsg : string;

@@ -57,6 +57,7 @@ begin
   Child.Caption:=CName;
   Child.locked:=false;
   Child.sc.catalog:=catalog;
+  Child.sc.Fits:=Fits;
   Child.sc.planet:=planet;
   {$ifdef mswindows}
   Child.telescopeplugin:=telescope;
@@ -341,6 +342,7 @@ InitTrace;
 traceon:=true;
 catalog:=Tcatalog.Create(self);
 planet:=Tplanet.Create(self);
+Fits:=TFits.Create(self);
 //planet.OnAsteroidConfig:=OpenAsteroidConfig;
 //planet.OnCometConfig:=OpenCometConfig;
 {$ifdef mswindows}
@@ -375,6 +377,8 @@ try
  InitFonts;
  SetLpanel1('');
  ConnectDB;
+ Fits.min_sigma:=cfgm.ImageLuminosity;
+ Fits.max_sigma:=cfgm.ImageContrast;
  CreateMDIChild(GetUniqueName('Chart_',true),true,true,def_cfgsc,def_cfgplot,true);
  Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
  Autorefresh.enabled:=true;
@@ -387,6 +391,7 @@ procedure Tf_main.FormDestroy(Sender: TObject);
 begin
 try
 catalog.free;
+Fits.Free;
 planet.free;
 {$ifdef mswindows}
 telescope.free;
@@ -658,6 +663,7 @@ begin
 screen.cursor:=crHourGlass;
 if f_config=nil then f_config:=Tf_config.Create(application);
 try
+ f_config.Fits:=fits;
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
  f_config.cplot:=def_cfgplot;
@@ -691,6 +697,7 @@ if f_config=nil then f_config:=Tf_config.Create(application);
 if f_config.visible then exit;
 screen.cursor:=crHourGlass;
 try
+ f_config.Fits:=fits;
  cfgm.configpage:=f_config.astpage;
  f_config.AstPageControl.activepage:=f_config.astprepare;
  f_config.ccat:=catalog.cfgcat;
@@ -729,6 +736,7 @@ if f_config=nil then f_config:=Tf_config.Create(application);
 if f_config.visible then exit;
 screen.cursor:=crHourGlass;
 try
+ f_config.Fits:=fits;
  cfgm.configpage:=f_config.compage;
  f_config.ComPageControl.activepage:=f_config.comload;
  f_config.ccat:=catalog.cfgcat;
@@ -764,6 +772,7 @@ if f_config=nil then f_config:=Tf_config.Create(application);
 if f_config.visible then exit;
 screen.cursor:=crHourGlass;
 try
+ f_config.Fits:=fits;
  cfgm.configpage:=f_config.dbpage;
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
@@ -813,6 +822,8 @@ begin
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
     ConnectDB;
+    Fits.min_sigma:=cfgm.ImageLuminosity;
+    Fits.max_sigma:=cfgm.ImageContrast;
     {$ifdef mswindows}
     if (telescope.scopelibok)and(def_cfgsc.IndiTelescope) then begin
        telescope.ScopeDisconnect;
@@ -925,6 +936,9 @@ cfgm.dbport:=3306;
 cfgm.db:='cdc';
 cfgm.dbuser:='root';
 cfgm.dbpass:='';
+cfgm.ImagePath:=slash(appDir)+slash('data')+slash('images');
+cfgm.ImageLuminosity:=0;
+cfgm.ImageContrast:=0;
 for i:=1 to numfont do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
    def_cfgplot.FontSize[i]:=DefaultFontSize;
@@ -1482,6 +1496,9 @@ cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
 cfgm.db:=ReadString(section,'db',cfgm.db);
 cfgm.dbuser:=ReadString(section,'dbuser',cfgm.dbuser);
 cfgm.dbpass:=ReadString(section,'dbpass',cfgm.dbpass);
+cfgm.ImagePath:=ReadString(section,'ImagePath',cfgm.ImagePath);
+cfgm.ImageLuminosity:=ReadFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
+cfgm.ImageContrast:=ReadFloat(section,'ImageContrast',cfgm.ImageContrast);
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 catalog.cfgshr.ListStar:=ReadBool(section,'ListStar',catalog.cfgshr.ListStar);
 catalog.cfgshr.ListNeb:=ReadBool(section,'ListNeb',catalog.cfgshr.ListNeb);
@@ -1774,6 +1791,9 @@ WriteInteger(section,'dbport',cfgm.dbport);
 WriteString(section,'db',cfgm.db);
 WriteString(section,'dbuser',cfgm.dbuser);
 WriteString(section,'dbpass',cfgm.dbpass);
+WriteString(section,'ImagePath',cfgm.ImagePath);
+WriteFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
+WriteFloat(section,'ImageContrast',cfgm.ImageContrast);
 WriteBool(section,'IndiAutostart',def_cfgsc.IndiAutostart);
 WriteString(section,'IndiServerHost',def_cfgsc.IndiServerHost);
 WriteString(section,'IndiServerPort',def_cfgsc.IndiServerPort);
@@ -2383,26 +2403,19 @@ end;
 
 procedure Tf_main.ConnectDB;
 begin
- try
-// if not MySqlLoadLib then begin
-//    SetLpanel1('MySQL Library not available. Please install MySQL Client.');
-//    def_cfgsc.ShowAsteroid:=false;
-//    def_cfgsc.ShowComet:=false;
-// end else
+try
 if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
-    if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
-       // SetLpanel1('Try to initialyse MySQL database.');
-       // OpenDBConfig(self);
-       // if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
+    if (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
+        Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
+    end else begin
           SetLpanel1('MySQL database not available.');
           def_cfgsc.ShowAsteroid:=false;
           def_cfgsc.ShowComet:=false;
-       // end;
     end;
 end;
- except
+except
   SetLpanel1('MySQL database not available.');
- end;
+end;
 end;
 
 procedure Tf_main.ViewInfoExecute(Sender: TObject);
