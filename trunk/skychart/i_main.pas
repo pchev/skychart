@@ -437,11 +437,11 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        inc(y,mult);
        SetDate(y,m,d,h,n,s);
        end;
-   6 : SetJD(sc.cfgsc.CurJD+mult*365.25);      // julian year
-   7 : SetJD(sc.cfgsc.CurJD+mult*365.2421988); // tropical year
-   8 : SetJD(sc.cfgsc.CurJD+mult*0.99726956633); // sideral day
-   9 : SetJD(sc.cfgsc.CurJD+mult*29.530589);   // synodic month
-   10: SetJD(sc.cfgsc.CurJD+mult*6585.321);    // saros
+   6 : SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*365.25);      // julian year
+   7 : SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*365.2421988); // tropical year
+   8 : SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*0.99726956633); // sideral day
+   9 : SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*29.530589);   // synodic month
+   10: SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*6585.321);    // saros
    end;
 end;
 end;
@@ -530,12 +530,12 @@ begin
    Ppanels1.width:=PanelBottom.ClientWidth-Ppanels1.left;
 end;
 
-Procedure Tf_main.SetLPanel1(txt:string; origin:string='');
+Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true);
 begin
 LPanels1.width:=PPanels1.ClientWidth;
-LPanels1.Caption:=txt;
+LPanels1.Caption:=stringreplace(txt,tab,' ',[rfReplaceall]);
 //PPanels1.ClientHeight:=LPanels1.Height+8;
-SendInfo(origin,txt);
+if sendmsg then SendInfo(origin,txt);
 if traceon then writetrace(txt);
 end;
 
@@ -1618,7 +1618,7 @@ Function Tf_main.NewChart(cname:string):string;
 begin
 if cname='' then cname:='Chart_' + IntToStr(MDIChildCount + 1);
 cname:=GetUniqueName(cname,false);
-if CreateMDIChild(cname,true,true,def_cfgsc,def_cfgplot) then result:='OK '+cname
+if CreateMDIChild(cname,true,true,def_cfgsc,def_cfgplot) then result:=msgOK+blank+cname
   else result:=msgFailed;
 end;
 
@@ -1689,6 +1689,7 @@ case n of
  5 : if Genericsearch(cname,arg[1]) then result:=msgOK else result:=msgNotFound;
  6 : result:=msgOK+blank+LPanels1.Caption;
  7 : result:=msgOK+blank+LPanels0.Caption;
+ 8 : result:=msgOK+blank+topmsg;
 else begin
 result:='Bad chart name '+cname;
  for i:=0 to MDIChildCount-1 do

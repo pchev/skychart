@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses fu_detail, cu_skychart, u_constant, u_util, u_projection, math,
+uses fu_detail, cu_skychart, u_constant, u_util, u_projection, Math, StrUtils,
   SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs, Qt,
   QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList;
 
@@ -141,7 +141,8 @@ type
     function cmd_SetSkyMode(onoff:string):string;
     function cmd_SetProjection(proj:string):string;
     function cmd_SetFov(fov:string):string;
-    function cmd_SetRaDec(param:string):string;
+    function cmd_SetRa(param1:string):string;
+    function cmd_SetDec(param1:string):string;
     function cmd_SetDate(dt:string):string;
     function cmd_SetObs(obs:string):string;
     function cmd_IdentCursor:string;
@@ -153,10 +154,27 @@ type
     Procedure ZoomCursor(yy : double);
     function  GetChartInfo:string;
     procedure SetField(field : double);
-    procedure SetZenit(field : double);
-    procedure SetAz(Az : double);
+    procedure SetZenit(field : double; redraw:boolean=true);
+    procedure SetAz(Az : double; redraw:boolean=true);
     procedure SetDate(y,m,d,h,n,s:integer);
     procedure SetJD(njd:double);
+    function cmd_GetProjection:string;
+    function cmd_GetSkyMode:string;
+    function cmd_GetNebMode:string;
+    function cmd_GetStarMode:string;
+    function cmd_GetGrid:string;
+
+    function cmd_GetGridEQ:string;
+
+    function cmd_GetCursorPosition :string;
+
+    function cmd_GetFov(format:string):string;
+    function cmd_GetRA(format:string):string;
+    function cmd_GetDEC(format:string):string;
+    function cmd_GetDate:string;
+    function cmd_GetObs:string;
+    function cmd_SetTZ(tz:string):string;
+    function cmd_GetTZ:string;
   end;
 
 

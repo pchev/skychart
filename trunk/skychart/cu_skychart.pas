@@ -459,8 +459,8 @@ cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
          if cfgsc.Projpole=AltAz then begin
            Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
            cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
-           cfgsc.TrackOn:=false;
          end;
+         cfgsc.TrackOn:=false;
          end;
    end;
   end;
@@ -897,114 +897,114 @@ begin
  cfgsc.FindRA:=rec.ra;
  cfgsc.FindDec:=rec.dec;
  cfgsc.FindSize:=0;
- desc:= ARpToStr(rmod(rad2deg*rec.ra/15+24,24))+b+DEpToStr(rad2deg*rec.dec);
+ desc:= ARpToStr(rmod(rad2deg*rec.ra/15+24,24))+tab+DEpToStr(rad2deg*rec.dec)+tab;
  case rec.options.rectype of
  rtStar: begin   // stars
          if rec.star.valid[vsId] then txt:=rec.star.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
-         Desc:=Desc+'   * '+txt;
+         Desc:=Desc+'  *'+tab+txt+tab;
          if rec.star.magv<90 then str(rec.star.magv:5:2,txt) else txt:=b5;
-         Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsMagv])+dp+txt;
+         Desc:=Desc+trim(rec.options.flabel[lOffset+vsMagv])+dp+txt+tab;
          if rec.star.valid[vsB_v] then begin
             if (rec.star.b_v<90) then str(rec.star.b_v:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsB_v])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsB_v])+dp+txt+tab;
          end;
          if rec.star.valid[vsMagb] then begin
             if (rec.star.magb<90) then str(rec.star.magb:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsMagb])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsMagb])+dp+txt+tab;
          end;
          if rec.star.valid[vsMagr] then begin
             if (rec.star.magr<90) then str(rec.star.magr:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsMagr])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsMagr])+dp+txt+tab;
          end;
-         if rec.star.valid[vsSp] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsSp])+dp+rec.star.sp;
+         if rec.star.valid[vsSp] then Desc:=Desc+trim(rec.options.flabel[lOffset+vsSp])+dp+rec.star.sp+tab;
          if rec.star.valid[vsPmra] then begin
             str(rad2deg*3600*rec.star.pmra:6:3,txt);
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsPmra])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPmra])+dp+txt+tab;
          end;
          if rec.star.valid[vsPmdec] then begin
             str(rad2deg*3600*rec.star.pmdec:6:3,txt);
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsPmdec])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPmdec])+dp+txt+tab;
          end;
          if rec.star.valid[vsEpoch] then begin
             str(rec.star.epoch:8:2,txt);
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsEpoch])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsEpoch])+dp+txt+tab;
          end;
          if rec.star.valid[vsPx] then begin
             str(rec.star.px:6:4,txt);
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsPx])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPx])+dp+txt+tab;
             if rec.star.px>0 then begin
                str(3.2616/rec.star.px:5:1,txt);
-               Desc:=Desc+' Dist:'+txt+b+'ly';
+               Desc:=Desc+'Dist:'+txt+b+'ly'+tab;
             end;
          end;
          if rec.star.valid[vsComment] then
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vsComment])+dp+b+rec.star.comment;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsComment])+dp+b+rec.star.comment+tab;
          end;
  rtVar : begin   // variables stars
          if rec.variable.valid[vvId] then txt:=rec.variable.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
-         Desc:=Desc+'  V* '+txt;
-         if rec.variable.valid[vvVartype] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvVartype])+dp+rec.variable.vartype;
-         if rec.variable.valid[vvMagcode] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvMagcode])+dp+rec.variable.magcode;
+         Desc:=Desc+' V*'+tab+txt+tab;
+         if rec.variable.valid[vvVartype] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvVartype])+dp+rec.variable.vartype+tab;
+         if rec.variable.valid[vvMagcode] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvMagcode])+dp+rec.variable.magcode+tab;
          if rec.variable.valid[vvMagmax] then begin
             if (rec.variable.magmax<90) then str(rec.variable.magmax:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvMagmax])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vvMagmax])+dp+txt+tab;
          end;
          if rec.variable.valid[vvMagmin] then begin
             if (rec.variable.magmin<90) then str(rec.variable.magmin:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvMagmin])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vvMagmin])+dp+txt+tab;
          end;
          if rec.variable.valid[vvPeriod] then begin
             str(rec.variable.period:16:10,txt);
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvPeriod])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vvPeriod])+dp+txt+tab;
          end;
          if rec.variable.valid[vvMaxepoch] then begin
             str(rec.variable.Maxepoch:16:10,txt);
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvMaxepoch])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vvMaxepoch])+dp+txt+tab;
          end;
          if rec.variable.valid[vvRisetime] then begin
             str(rec.variable.risetime:5:2,txt);
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvRisetime])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vvRisetime])+dp+txt+tab;
          end;
-         if rec.variable.valid[vvSp] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvSp])+dp+rec.variable.sp;
-         if rec.variable.valid[vvComment] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vvComment])+dp+rec.variable.comment;
+         if rec.variable.valid[vvSp] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvSp])+dp+rec.variable.sp+tab;
+         if rec.variable.valid[vvComment] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvComment])+dp+rec.variable.comment+tab;
          end;
  rtDbl : begin   // doubles stars
          if rec.double.valid[vdId] then txt:=rec.double.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
-         Desc:=Desc+'  D* '+txt;
-         if rec.double.valid[vdCompname] then Desc:=Desc+b+rec.double.compname;
+         Desc:=Desc+' D*'+tab+txt+tab;
+         if rec.double.valid[vdCompname] then Desc:=Desc+rec.double.compname+tab;
          if rec.double.valid[vdMag1] then begin
             if (rec.double.mag1<90) then str(rec.double.mag1:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdMag1])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vdMag1])+dp+txt+tab;
          end;
          if rec.double.valid[vdMag2] then begin
             if (rec.double.mag2<90) then str(rec.double.mag2:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdMag2])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vdMag2])+dp+txt+tab;
          end;
          if rec.double.valid[vdSep] then begin
             if (rec.double.sep>0) then str(rec.double.sep:5:1,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdSep])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vdSep])+dp+txt+tab;
             cfgsc.FindSize:=rec.double.sep*secarc;
          end;
          if rec.double.valid[vdPa] then begin
             if (rec.double.pa>0) then str(round(rec.double.pa-rad2deg*PoleRot2000(rec.ra,rec.dec)):3,txt) else txt:='   ';
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdPa])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vdPa])+dp+txt+tab;
          end;
          if rec.double.valid[vdEpoch] then begin
             str(rec.double.epoch:4:2,txt);
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdEpoch])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vdEpoch])+dp+txt+tab;
          end;
-         if rec.double.valid[vdSp1] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdSp1])+dp+' 1 '+rec.double.sp1;
-         if rec.double.valid[vdSp2] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdSp2])+dp+' 2 '+rec.double.sp2;
-         if rec.double.valid[vdComment] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdComment])+dp+rec.double.comment;
+         if rec.double.valid[vdSp1] then Desc:=Desc+trim(rec.options.flabel[lOffset+vdSp1])+dp+' 1 '+rec.double.sp1+tab;
+         if rec.double.valid[vdSp2] then Desc:=Desc+trim(rec.options.flabel[lOffset+vdSp2])+dp+' 2 '+rec.double.sp2+tab;
+         if rec.double.valid[vdComment] then Desc:=Desc+trim(rec.options.flabel[lOffset+vdComment])+dp+rec.double.comment+tab;
          end;
  rtNeb : begin   // nebulae
          if rec.neb.valid[vnId] then txt:=rec.neb.id else txt:='';
@@ -1012,20 +1012,20 @@ begin
          cfgsc.FindName:=txt;
          if rec.neb.valid[vnNebtype] then i:=rec.neb.nebtype
                                         else i:=rec.options.ObjType;
-         Desc:=Desc+' '+nebtype[i+2]+' '+txt;
+         Desc:=Desc+nebtype[i+2]+tab+txt+tab;
          if rec.neb.valid[vnMag] then begin
             if (rec.neb.mag<90) then str(rec.neb.mag:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vnMag])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vnMag])+dp+txt+tab;
          end;
          if rec.neb.valid[vnSbr] then begin
             if (rec.neb.sbr<90) then str(rec.neb.sbr:5:2,txt) else txt:=b5;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vnSbr])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vnSbr])+dp+txt+tab;
          end;
          if rec.options.LogSize=0 then begin
             if rec.neb.valid[vnDim1] then cfgsc.FindSize:=rec.neb.dim1
                                      else cfgsc.FindSize:=rec.options.Size;
             str(cfgsc.FindSize:5:1,txt);
-            Desc:=Desc+b+'Dim'+dp+txt;
+            Desc:=Desc+'Dim'+dp+txt;
             if rec.neb.valid[vnDim2] and (rec.neb.dim2>0) then str(rec.neb.dim2:5:1,txt);
             Desc:=Desc+' x'+txt+b;
             if rec.neb.valid[vnNebunit] then i:=rec.neb.nebunit
@@ -1037,28 +1037,29 @@ begin
             60   : Desc:=Desc+lmin;
             3600 : Desc:=Desc+lsec;
             end;
+            Desc:=Desc+tab;
          end else begin
             if rec.neb.valid[vnDim1] then str(rec.neb.dim1:5:1,txt)
                                      else txt:=b5;
-            Desc:=Desc+' Flux:'+txt+b;
+            Desc:=Desc+'Flux:'+txt+tab;
          end;
          if rec.neb.valid[vnPa] then begin
             if (rec.neb.pa>0) then str(rec.neb.pa-rad2deg*PoleRot2000(rec.ra,rec.dec):3:0,txt) else txt:='   ';
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vnPa])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vnPa])+dp+txt+tab;
          end;
          if rec.neb.valid[vnRv] then begin
             str(rec.neb.rv:6:0,txt) ;
-            Desc:=Desc+b+trim(rec.options.flabel[lOffset+vnRv])+dp+txt;
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vnRv])+dp+txt+tab;
          end;
-         if rec.neb.valid[vnMorph] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vnMorph])+dp+rec.neb.morph;
-         if rec.neb.valid[vnComment] then Desc:=Desc+b+trim(rec.options.flabel[lOffset+vnComment])+dp+rec.neb.comment;
+         if rec.neb.valid[vnMorph] then Desc:=Desc+trim(rec.options.flabel[lOffset+vnMorph])+dp+rec.neb.morph+tab;
+         if rec.neb.valid[vnComment] then Desc:=Desc+trim(rec.options.flabel[lOffset+vnComment])+dp+rec.neb.comment+tab;
          end;
  end;
  for i:=1 to 10 do begin
-   if rec.vstr[i] then Desc:=Desc+b+trim(rec.options.flabel[15+i])+dp+rec.str[i];
+   if rec.vstr[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
  end;
  for i:=1 to 10 do begin
-   if rec.vnum[i] then Desc:=Desc+b+trim(rec.options.flabel[25+i])+dp+formatfloat('0.0####',rec.num[i]);
+   if rec.vnum[i] then Desc:=Desc+trim(rec.options.flabel[25+i])+dp+formatfloat('0.0####',rec.num[i])+tab;
  end;
  cfgsc.FindDesc:=Desc;
  cfgsc.FindNote:='';

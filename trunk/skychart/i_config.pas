@@ -31,23 +31,11 @@ for i:=0 to n-1 do begin
 end;
 end;
 
-function Tf_config.SelectPage(txt:string):boolean;
-var i: integer;
-begin
-result:=false;
-for i:=0 to PageControl1.PageCount-1 do
-  if PageControl1.Pages[i].Caption=txt then begin
-     PageControl1.ActivePageIndex:=i;
-     result:=true;
-  end;
-end;
-
 procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var i: integer;
 begin
-// SelectPage(node.Text);
  i:=node.AbsoluteIndex;
- PageControl1.ActivePageIndex:=i;
+ if (PageControl1.ActivePageIndex<>i)and(i<PageControl1.PageCount) then PageControl1.ActivePageIndex:=i;
  case PageControl1.ActivePage.Tag of
   1 : ShowProjection;
  end;
@@ -55,7 +43,7 @@ end;
 
 procedure Tf_config.nextClick(Sender: TObject);
 begin
- if PageControl1.ActivePageIndex<PageControl1.PageCount-1 then
+ if PageControl1.ActivePageIndex<PageControl1.PageCount-2 then // kylix bug? look at the last page
     Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex+1];
 end;
 

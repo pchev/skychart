@@ -210,6 +210,7 @@ type
     ToolButton29: TToolButton;
     ToolButton30: TToolButton;
     ToolButton39: TToolButton;
+    ToolButton40: TToolButton;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -283,7 +284,7 @@ type
     procedure SetLang;
     Procedure InitFonts;
     Procedure ActivateConfig;
-    Procedure SetLPanel1(txt:string; origin:string='');
+    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true);
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string);
     Procedure UpdateBtn(fx,fy:integer);
