@@ -871,7 +871,6 @@ int GetCountryIndex (const char* str)
 	{
 		middle = (low + high) / 2;
 
-//		cmp = strcmp (str, m_Filename[middle]);
 		cmp = strcmp (str, Country[middle]);
 
 		if (cmp == 0)
