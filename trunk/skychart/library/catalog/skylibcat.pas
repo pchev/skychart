@@ -301,8 +301,8 @@ Procedure FindRegion7(ar,de : double; var hemis : char ; var zone,S : integer);
 var i1,i2,N,L1,L : integer;
     del : double;
 begin
-if de>0 then hemis:='N'
-        else hemis:='S';
+if de>0 then hemis:='n'
+        else hemis:='s';
 i1 := Trunc((de+90)/7.5) ;
 N  := lg_reg_x7[i1,1];
 L1 := lg_reg_x7[i1,2];
@@ -721,8 +721,8 @@ Procedure FindRegion(ar,de : double; var hemis : char ; var zone,S : integer);
 var i1,i2,j1,j2,N,L1,L,S1,k : integer;
     arl,del,dar,dde : double;
 begin
-if de>0 then hemis:='N'
-        else hemis:='S';
+if de>0 then hemis:='n'
+        else hemis:='s';
 i1 := Trunc((de+90)/7.5) ;
 N  := lg_reg_x[i1,1];
 L1 := lg_reg_x[i1,2];
@@ -1061,3 +1061,4 @@ end;
 
 end.
 
+   

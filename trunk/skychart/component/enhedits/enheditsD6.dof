@@ -11,7 +11,7 @@ F=0
 G=1
 H=1
 I=1
-J=0
+J=1
 K=0
 L=1
 M=0
@@ -41,15 +41,15 @@ RemoteSymbols=0
 MinStackSize=16384
 MaxStackSize=1048576
 ImageBase=4194304
-ExeDescription=
+ExeDescription=EnhEdits component
 
 [Directories]
-OutputDir=..\..\..\..\
-UnitOutputDir=..\..\..\dcu
+OutputDir=
+UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
-Packages=vcl;rtl;vclx;visualclx;vclshlctrls
+Packages=VCL40;VCLX40;VCLSMP40;VCLDB40;QRPT40;VCLDBX40;ibevnt40;NMFAST40;INETDB40;INET40;DSS40;TEEUI40;TEEDB40;TEE40;VCLMID40
 Conditionals=
 DebugSourceDirs=
 UsePackages=0
@@ -93,19 +93,11 @@ ProductName=
 ProductVersion=1.0.0.0
 Comments=
 
-[Excluded Packages]
-c:\program files\borland\delphi6\Projects\Bpl\skychartD6.bpl=Composant Carte du Ciel
-
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 
-[HistoryLists\hlUnitOutputDirectory]
+[HistoryLists\hlSearchPath]
 Count=2
-Item0=..\..\..\dcu
-Item1=..\dcu
-
-[HistoryLists\hlOutputDirectorry]
-Count=2
-Item0=..\..\..\..\
-Item1=..\
+Item0=d:\source\systree;d:\source\htmllite\delphi4
+Item1=d:\source\systree
