@@ -1,30 +1,28 @@
 object f_about: Tf_about
-  Left = 197
-  Top = 105
-  BorderStyle = bsDialog
+  Left = 231
+  Top = 109
+  BorderStyle = bsNone
   Caption = 'About'
-  ClientHeight = 266
-  ClientWidth = 342
+  ClientHeight = 253
+  ClientWidth = 350
   Color = clBtnFace
-  Constraints.MaxHeight = 293
-  Constraints.MaxWidth = 350
-  Constraints.MinHeight = 293
-  Constraints.MinWidth = 350
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  FormStyle = fsStayOnTop
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object logo: TImage
     Left = 0
     Top = 0
-    Width = 342
-    Height = 222
+    Width = 350
+    Height = 253
     Align = alClient
     AutoSize = True
     Picture.Data = {
@@ -380,6 +378,7 @@ object f_about: Tf_about
       8C313C7A735D5D41E1B78F338D8BE407B75E9517863118211790D5D5D415DFC2
       90A445063702681CD757507FFFD9}
     Stretch = True
+    OnDblClick = logoDblClick
   end
   object Label1: TLabel
     Left = 160
@@ -401,8 +400,8 @@ object f_about: Tf_about
   end
   object Label2: TLabel
     Left = 16
-    Top = 168
-    Width = 169
+    Top = 176
+    Width = 164
     Height = 24
     Caption = 'Version 3 alpha 0'
     Color = clBlack
@@ -416,11 +415,12 @@ object f_about: Tf_about
     Transparent = True
   end
   object Label3: TLabel
-    Left = 8
-    Top = 202
-    Width = 185
+    Left = 16
+    Top = 230
+    Width = 322
     Height = 14
-    Caption = 'Copyright (C) 2002 Patrick Chevalley '
+    AutoSize = False
+    Caption = 'Copyright (C) 2002-2004 Patrick Chevalley '
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clSilver
@@ -430,49 +430,30 @@ object f_about: Tf_about
     ParentColor = False
     ParentFont = False
   end
-  object Panel1: TPanel
-    Left = 0
-    Top = 222
-    Width = 342
-    Height = 44
-    Align = alBottom
-    BevelOuter = bvLowered
+  object Label4: TLabel
+    Left = 16
+    Top = 202
+    Width = 322
+    Height = 28
+    AutoSize = False
+    Caption = 
+      'This program is free software; you can redistribute it and/or mo' +
+      'dify it under the terms of the GNU General Public License'
     Color = clBlack
-    TabOrder = 0
-    object Label4: TLabel
-      Left = 8
-      Top = 1
-      Width = 248
-      Height = 42
-      Caption = 
-        'This program is free software; you can redistribute it and/or mo' +
-        'dify it under the terms of the GNU General Public License'
-      Color = clBlack
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clSilver
-      Font.Height = -11
-      Font.Name = 'Arial'
-      Font.Style = [fsItalic]
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
-    object OKButton: TButton
-      Left = 280
-      Top = 6
-      Width = 55
-      Height = 33
-      Cancel = True
-      Caption = 'OK'
-      Default = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBtnText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ModalResult = 1
-      ParentFont = False
-      TabOrder = 0
-    end
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clSilver
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = [fsItalic]
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 5000
+    OnTimer = Timer1Timer
+    Left = 16
+    Top = 24
   end
 end

@@ -38,7 +38,10 @@ uses
   cu_planet in 'cu_planet.pas',
   pu_detail in 'pu_detail.pas' {f_detail},
   pu_info in 'pu_info.pas' {f_info},
-  pu_printsetup in 'pu_printsetup.pas' {f_printsetup};
+  pu_printsetup in 'pu_printsetup.pas' {f_printsetup},
+  u_planetrender in 'u_planetrender.pas',
+  cu_indiclient in 'cu_indiclient.pas',
+  cu_telescope in 'cu_telescope.pas';
 
 {$R *.RES}
 
@@ -46,6 +49,7 @@ begin
   Application.Initialize;
   Application.CreateForm(Tf_main, f_main);
   Application.CreateForm(Tf_about, f_about);
+  f_about.ShowTimer:=true; f_about.Show;
   Application.CreateForm(Tf_detail, f_detail);
   Application.CreateForm(Tf_info, f_info);
   Application.CreateForm(Tf_printsetup, f_printsetup);

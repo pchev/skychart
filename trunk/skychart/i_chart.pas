@@ -42,6 +42,7 @@ begin
  sc.onShowDetailXY:=IdentDetail;
  sc.InitChart;
  sc.plot.init(Image1.width,Image1.height);
+ skipmove:=0;
  movefactor:=4;
  zoomfactor:=2;
  lastundo:=0;
@@ -50,11 +51,18 @@ begin
  Image1.Cursor := crRetic;
  {$endif}
  lock_refresh:=false;
+ MovingCircle:=false;
 end;
 
 procedure Tf_chart.FormDestroy(Sender: TObject);
 begin
  sc.free;
+ if indi1<>nil then begin
+   indi1.onCoordChange:=nil;
+   indi1.onStatusChange:=nil;
+   indi1.onMessage:=nil;
+   indi1.terminate;
+ end;                            
 end;
 
 procedure Tf_chart.FormKeyDown(Sender: TObject; var Key: Word;
@@ -118,12 +126,12 @@ function Tf_chart.GetChartInfo:string;
 var cep,dat:string;
 begin
     cep:=trim(sc.cfgsc.EquinoxName);
-    if cep='Date' then cep:=sc.cfgsc.EquinoxDate;
-    dat:=YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+' (+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
+    //if cep='Date' then cep:=sc.cfgsc.EquinoxDate;
+    dat:=Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+' (+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
     case sc.cfgsc.projpole of
     Equat : result:='Equatorial Coord. '+cep+blank+dat;
     AltAz : result:='Alt/AZ Coord. '+trim(sc.cfgsc.ObsName)+blank+dat;
-    Gal :   result:='Galactic Coordinates'+blank+dat;
+    Gal :   result:='Galactic Coord.'+blank+dat;
     Ecl :   result:='Ecliptic Coord. '+cep+blank+dat+', Inclination='+detostr(sc.cfgsc.e*rad2deg);
     else result:='';
     end;
@@ -312,7 +320,7 @@ try
     prtbmp.savetofile(fname);
     if printcmd2<>'' then begin
        if assigned(Fshowinfo) then Fshowinfo('Open the bitmap.' ,caption);
-       execnowait(printcmd2+' '+fname);
+       execnowait(printcmd2+' '+fname,'',false);
     end;
  end;
 end;
@@ -349,7 +357,7 @@ end;
 procedure Tf_chart.FormActivate(Sender: TObject);
 begin
 // code to execute when the chart get focus.
-if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
+if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
 if sc.cfgsc.FindOk and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,false);
 end;
@@ -357,14 +365,14 @@ end;
 procedure Tf_chart.FlipxExecute(Sender: TObject);
 begin
  sc.cfgsc.FlipX:=-sc.cfgsc.FlipX;
- if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
+ if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  Refresh;
 end;
 
 procedure Tf_chart.FlipyExecute(Sender: TObject);
 begin
  sc.cfgsc.FlipY:=-sc.cfgsc.FlipY;
- if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
+ if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  Refresh;
 end;
 
@@ -537,17 +545,41 @@ else identlabel.Visible:=false;
 end;
 
 function Tf_chart.IdentXY(X, Y: Integer):boolean;
-var ra,dec,a,h,l,b,le,be,dx:double;
+var ra,dec,a,h,l,b,le,be,dx,lastra,lastdec,dist:double;
+    pa: integer;
+    txt,lastname: string;
+    showdist:boolean;
 begin
 result:=false;
 if locked then exit;
+showdist:=sc.cfgsc.FindOk;
+lastra:=sc.cfgsc.FindRA;
+lastdec:=sc.cfgsc.FindDEC;
+lastname:=sc.cfgsc.FindName;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=2/sc.cfgsc.BxGlb; // search a 2 pixel radius
 result:=sc.FindatRaDec(ra,dec,dx);
 if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx);  //else 6 pixel
 ShowIdentLabel;
-if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption);
+if showdist then begin
+   ra:=sc.cfgsc.FindRA;
+   dec:=sc.cfgsc.FindDEC;
+   dist := rad2deg*angulardistance(ra,dec,lastra,lastdec);
+   if dist>0 then begin
+      pa:=round(rmod(rad2deg*PositionAngle(lastra,lastdec,ra,dec)+360,360));
+      txt:=DEptoStr(dist)+' PA:'+inttostr(pa)+ldeg;
+      dx:=rmod((rad2deg*(ra-lastra)/15)+24,24);
+      if dx>12 then dx:=dx-24;
+      txt:=txt+crlf+artostr(dx)+' '+detostr(rad2deg*(dec-lastdec));
+      if assigned(Fshowcoord) then Fshowcoord(txt);
+      txt:=stringreplace(sc.catalog.cfgshr.llabel[104]+' "'+lastname+'" '+sc.catalog.cfgshr.llabel[105]+' "'+sc.cfgsc.FindName+'"'+tab+sc.catalog.cfgshr.llabel[79]+': '+txt,crlf,tab+sc.catalog.cfgshr.llabel[106]+':',[]);
+      if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
+      sc.cfgsc.FindNote:=sc.cfgsc.FindNote+txt+tab;
+      skipmove:=10;
+   end;
+end;
+if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption,true,self);
 end;
 
 function Tf_chart.ListXY(X, Y: Integer):boolean;
@@ -566,6 +598,16 @@ end;
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+if MovingCircle then begin
+   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+   MovingCircle := false;
+   if button=mbLeft then begin
+      inc(sc.cfgsc.NumCircle);
+      GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[sc.cfgsc.NumCircle,1],sc.cfgsc.CircleLst[sc.cfgsc.NumCircle,2],sc.cfgsc);
+      Refresh;
+   end;
+end
+else
 if (button=mbLeft)and(not(ssShift in shift)) then begin
    if zoomstep>0 then
      ZoomBox(3,X,Y)
@@ -602,6 +644,17 @@ var ra,dec,a,h,l,b,le,be,c:double;
     txt:string;
 begin
 if locked then exit;
+if skipmove>0 then begin
+   system.dec(skipmove);
+   exit;
+end;
+if MovingCircle then begin
+   Xcursor:=x;
+   Ycursor:=y;
+   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+   GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],sc.cfgsc);
+   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+end else
 if shift = [ssLeft] then begin
    ZoomBox(2,X,Y);
 end else if (shift=[ssMiddle])or(shift=[ssLeft,ssShift]) then begin
@@ -811,9 +864,10 @@ f_detail.setfocus;
 end;
 
 function Tf_chart.FormatDesc:string;
-var desc,buf,buf2: string;
-    i,p,l : integer;
-    ra,dec,a,h :double;
+var desc,buf,buf2,otype,oname,txt: string;
+    thr,tht,ths,tazr,tazs: string;
+    i,p,l,y,m,d : integer;
+    ra,dec,a,h,hr,ht,hs,azr,azs :double;
 function Bold(s:string):string;
 var k:integer;
 begin
@@ -826,15 +880,22 @@ begin
 end;
 begin
 desc:=sc.cfgsc.FindDesc;
-result:=html_h;
+// header
+txt:=html_h;
+// object type
 p:=pos(tab,desc);
 p:=pos2(tab,desc,p+1);
 l:=pos2(tab,desc,p+1);
-buf:=trim(copy(desc,p+1,l-p-1));
-//objtype:=trim(buf);
-buf:=LongLabelObj(buf);
-result:=result+html_h2+buf+htms_h2;
+otype:=trim(copy(desc,p+1,l-p-1));
+buf:=LongLabelObj(otype);
+txt:=txt+html_h2+buf+htms_h2;
 buf:=copy(desc,l+1,9999);
+// object name
+i:=pos(tab,buf);
+oname:=trim(copy(buf,1,i-1));
+delete(buf,1,i);
+txt:=txt+html_b+oname+htms_b+html_br;
+// other attribute
 repeat
   i:=pos(tab,buf);
   if i=0 then i:=length(buf)+1;
@@ -842,48 +903,92 @@ repeat
   delete(buf,1,i);
   i:=pos(':',buf2);
   if i>0 then begin
-     result:=result+bold(LongLabel(copy(buf2,1,i)));
+     txt:=txt+bold(LongLabel(copy(buf2,1,i)));
      if copy(buf2,1,5)='desc:' then buf2:=stringreplace(buf2,';',html_br,[rfReplaceAll]);
      delete(buf2,1,i);
   end;
-  result:=result+buf2+html_br;
+  txt:=txt+buf2+html_br;
 until buf='';
-result:=result+html_br+html_ffx;
-result:=result+html_b+sc.cfgsc.EquinoxName+html_sp+'RA: '+htms_b+arptostr(rad2deg*sc.cfgsc.FindRA/15)+'   DE:'+deptostr(rad2deg*sc.cfgsc.FindDec)+html_br;
+// coordinates
+txt:=txt+html_ffx+html_br;
+txt:=txt+html_b+sc.cfgsc.EquinoxName+htms_b+'RA: '+arptostr(rad2deg*sc.cfgsc.FindRA/15)+'   DE:'+deptostr(rad2deg*sc.cfgsc.FindDec)+html_br;
 if (sc.cfgsc.EquinoxName<>'J2000') then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-   result:=result+html_b+'J2000'+' RA: '+htms_b+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+'J2000'+htms_b+' RA: '+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
 end;
 if (sc.cfgsc.EquinoxName<>'Date ') then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
-   result:=result+html_b+'Date '+html_sp+'RA: '+htms_b+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+'Date '+htms_b+'RA: '+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
 end;
 if (sc.cfgsc.EquinoxName='Date ')and(sc.catalog.cfgshr.EquinoxChart<>'J2000')and(sc.cfgsc.EquinoxName<>sc.catalog.cfgshr.EquinoxChart) then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,sc.catalog.cfgshr.DefaultJDchart,ra,dec);
-   result:=result+html_b+sc.catalog.cfgshr.EquinoxChart+' RA: '+htms_b+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+sc.catalog.cfgshr.EquinoxChart+htms_b+' RA: '+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
 end;
-result:=result+htms_f+html_br;
-result:=result+sc.cfgsc.ObsName+' '+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+' '+ArToStr3(sc.cfgsc.Curtime)+'  ( UT + '+ArmtoStr(sc.cfgsc.TimeZone)+' )'+html_br;
-result:=result+html_ffx;
+ra:=sc.cfgsc.FindRA;
+dec:=sc.cfgsc.FindDec;
+precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+Eq2Ecl(ra,dec,sc.cfgsc.e,a,h) ;
+txt:=txt+html_b+'Ecliptic '+htms_b+' L: '+detostr(rad2deg*a)+'   B:'+detostr(rad2deg*h)+html_br;
+ra:=sc.cfgsc.FindRA;
+dec:=sc.cfgsc.FindDec;
+precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+Eq2Gal(ra,dec,a,h,sc.cfgsc) ;
+txt:=txt+html_b+'Galactic '+htms_b+' L: '+detostr(rad2deg*a)+'   B:'+detostr(rad2deg*h)+html_br;
+txt:=txt+htms_f+html_br;
+// local position
+txt:=txt+html_b+sc.catalog.cfgshr.llabel[103]+':'+htms_b+html_br;
+txt:=txt+sc.cfgsc.ObsName+' '+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+' '+ArToStr3(sc.cfgsc.Curtime)+'  ( UT + '+ArmtoStr(sc.cfgsc.TimeZone)+' )';
+txt:=txt+html_pre;
+djd(sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24,y,m,d,h);
+txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[102]+blank15,1,17)+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
 if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
-result:=result+html_b+copy(sc.catalog.cfgshr.llabel[99]+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*sc.cfgsc.CurSt/15+24,24))+html_br;
-result:=result+html_b+copy(sc.catalog.cfgshr.llabel[100]+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24))+html_br;
-result:=result+html_b+copy(sc.catalog.cfgshr.llabel[91]+blank15,1,17)+':'+htms_b+demtostr(rad2deg*a)+html_br;
-result:=result+html_b+copy(sc.catalog.cfgshr.llabel[92]+blank15,1,17)+':'+htms_b+demtostr(rad2deg*h)+html_br;
-result:=result+html_br;
-// here the rise/set time 
-//if pos('PA:',f_main.LPanels0.caption)>0
-  // then result:=result+html_b+sc.catalog.cfgshr.llabel[98]+' : '+htms_b+f_main.LPanels0.caption+html_br;
+txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[99]+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*sc.cfgsc.CurSt/15+24,24))+html_br;
+txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[100]+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24))+html_br;
+txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[91]+blank15,1,17)+':'+htms_b+demtostr(rad2deg*a)+html_br;
+txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[92]+blank15,1,17)+':'+htms_b+demtostr(rad2deg*h)+html_br;
+// rise/set time
+if (otype='P') then begin // planet
+   sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,sc.cfgsc.jd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,i,sc.cfgsc);
+end
+// todo: comet, asteroid, satellites, ...
+else begin // fixed object
+     RiseSet(1,sc.cfgsc.jd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
+     if sc.catalog.cfgshr.AzNorth then begin
+        Azr:=rmod(Azr+pi,pi2);
+        Azs:=rmod(Azs+pi,pi2);
+     end;
+     thr:=armtostr(hr);
+     tht:=armtostr(ht);
+     ths:=armtostr(hs);
+     tazr:=demtostr(rad2deg*Azr);
+     tazs:=demtostr(rad2deg*Azs);
+end;
+case i of
+0 : begin
+    txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[93]+blank15,1,17)+':'+htms_b+thr+blank+sc.catalog.cfgshr.llabel[91]+tAzr+html_br;
+    txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[94]+blank15,1,17)+':'+htms_b+tht+html_br;
+    txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[95]+blank15,1,17)+':'+htms_b+ths+blank+sc.catalog.cfgshr.llabel[91]+tAzs+html_br;
+    end;
+1 : begin
+    txt:=txt+sc.catalog.cfgshr.llabel[96]+html_br;
+    txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[94]+blank15,1,17)+':'+htms_b+tht+html_br;
+    end;
+else begin
+    txt:=txt+sc.catalog.cfgshr.llabel[97]+html_br;
+    end;
+end;
+txt:=txt+htms_pre;
+// other notes
 buf:=sc.cfgsc.FindNote;
 repeat
   i:=pos(tab,buf);
@@ -892,12 +997,12 @@ repeat
   delete(buf,1,i);
   i:=pos(':',buf2);
   if i>0 then begin
-     result:=result+bold(copy(buf2,1,i));
+     txt:=txt+bold(copy(buf2,1,i));
      delete(buf2,1,i);
   end;
-  result:=result+buf2+html_br;
+  txt:=txt+buf2+html_br;
 until buf='';
-result:=result+htms_f+html_br+htms_h;
+result:=txt+htms_f+html_br+htms_h;
 end;
 
 function Tf_chart.LongLabelObj(txt:string):string;
@@ -920,6 +1025,7 @@ else if txt='' then txt:=sc.catalog.cfgshr.llabel[59]
 else if txt='-' then txt:=sc.catalog.cfgshr.llabel[60]
 else if txt='PD' then txt:=sc.catalog.cfgshr.llabel[61]
 else if txt='P' then txt:=sc.catalog.cfgshr.llabel[62]
+else if txt='Ps' then txt:=sc.catalog.cfgshr.llabel[101]
 else if txt='As' then txt:=sc.catalog.cfgshr.llabel[63]
 else if txt='Cm' then txt:=sc.catalog.cfgshr.llabel[64]
 else if txt='C1' then txt:=sc.catalog.cfgshr.llabel[65]
@@ -977,7 +1083,7 @@ if i>0 then begin
   else if key='DIAM' then result:=sc.catalog.cfgshr.llabel[39]+d+value
   else if key='ILLUM' then result:=sc.catalog.cfgshr.llabel[40]+d+value
   else if key='PHASE' then result:=sc.catalog.cfgshr.llabel[41]+d+value
-  else if key='QL' then result:=sc.catalog.cfgshr.llabel[42]+d+value
+  else if key='TL' then result:=sc.catalog.cfgshr.llabel[42]+d+value
   else if key='EL' then result:=sc.catalog.cfgshr.llabel[43]+d+value
   else if key='RSOL' then result:=sc.catalog.cfgshr.llabel[44]+d+value
   else if key='D1' then result:=sc.catalog.cfgshr.llabel[23]+' 1'+d+value
@@ -1116,6 +1222,72 @@ begin
  if sc.cfgsc.ShowGrid then result:=msgOK+' ON'
 
                       else result:=msgOK+' OFF'
+
+end;
+
+
+function Tf_Chart.cmd_SetGridNum(onoff:string):string;
+
+begin
+
+ sc.cfgsc.ShowGridNum := (uppercase(onoff)='ON');
+
+ result:=msgOK;
+
+end;
+
+
+function Tf_Chart.cmd_SetConstL(onoff:string):string;
+
+begin
+
+ sc.cfgsc.ShowConstl := (uppercase(onoff)='ON');
+
+ result:=msgOK;
+
+end;
+
+
+function Tf_Chart.cmd_SetConstB(onoff:string):string;
+
+begin
+
+ sc.cfgsc.ShowConstB := (uppercase(onoff)='ON');
+
+ result:=msgOK;
+
+end;
+
+
+function Tf_Chart.cmd_SwitchGridNum:string;
+
+begin
+
+ sc.cfgsc.ShowGridNum := not sc.cfgsc.ShowGridNum;
+
+ result:=msgOK;
+
+end;
+
+
+function Tf_Chart.cmd_SwitchConstL:string;
+
+begin
+
+ sc.cfgsc.ShowConstl := not sc.cfgsc.ShowConstl;
+
+ result:=msgOK;
+
+end;
+
+
+function Tf_Chart.cmd_SwitchConstB:string;
+
+begin
+
+ sc.cfgsc.ShowConstB := not sc.cfgsc.ShowConstB;
+
+ result:=msgOK;
 
 end;
 
@@ -1333,7 +1505,7 @@ end;
 
 function Tf_chart.cmd_GetDate:string;
 begin
-result:=msgOK+blank+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+'T'+ArToStr3(sc.cfgsc.Curtime);
+result:=msgOK+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+'T'+ArToStr3(sc.cfgsc.Curtime);
 end;
 
 function Tf_chart.cmd_SetObs(obs:string):string;
@@ -1416,12 +1588,81 @@ if identxy(xcursor,ycursor) then result:=msgOK
    else result:=msgFailed+' No object found!';
 end;
 
+Function Tf_chart.cmd_IdXY(xx,yy : string): string;
+var x,y,p : integer;
+    buf : string;
+begin
+p:=pos('X:',xx);
+if p=0 then buf:=xx
+       else buf:=copy(xx,p+2,999);
+x:=strtoint(trim(buf));
+p:=pos('Y:',yy);
+if p=0 then buf:=yy
+       else buf:=copy(yy,p+2,999);
+y:=strtoint(trim(buf));
+if identxy(x,y) then result:=msgOK
+   else result:=msgFailed+' No object found!';
+end;
+
+Procedure Tf_chart.cmd_GoXY(xx,yy : string);
+var x,y,p : integer;
+    buf:string;
+begin
+p:=pos('X:',xx);
+if p=0 then buf:=xx
+       else buf:=copy(xx,p+2,999);
+x:=strtoint(trim(buf));
+p:=pos('Y:',yy);
+if p=0 then buf:=yy
+       else buf:=copy(yy,p+2,999);
+y:=strtoint(trim(buf));
+sc.MovetoXY(x,y);
+end;
+
 function Tf_chart.cmd_SaveImage(format,fn,quality:string):string;
 var i : integer;
 begin
 i:=strtointdef(quality,75);
 if SaveChartImage(format,fn,i) then result:=msgOK
    else result:=msgFailed;
+end;
+
+procedure Tf_chart.cmd_MoreStar;
+begin
+if sc.catalog.cfgshr.AutoStarFilter then
+   sc.catalog.cfgshr.AutoStarFilterMag:=min(16,sc.catalog.cfgshr.AutoStarFilterMag+0.5)
+else
+   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=min(16,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]+0.5);
+refresh;
+end;
+
+procedure Tf_chart.cmd_LessStar;
+begin
+if sc.catalog.cfgshr.AutoStarFilter then
+   sc.catalog.cfgshr.AutoStarFilterMag:=max(1,sc.catalog.cfgshr.AutoStarFilterMag-0.5)
+else
+   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=max(1,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]-0.5);
+refresh;
+end;
+
+procedure Tf_chart.cmd_MoreNeb;
+begin
+sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]+0.5;
+if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]>15 then sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=99;
+sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]/1.5;
+if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]<0.1 then sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=0;
+refresh;
+end;
+
+procedure Tf_chart.cmd_LessNeb;
+begin
+if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]>=99 then sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=15
+   else sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]-0.5;
+if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]<6 then sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=6;
+if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]<=0 then sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=0.1
+   else sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]*1.5;
+if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]>100 then sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=100;
+refresh;
 end;
 
 function Tf_chart.ExecuteCmd(arg:Tstringlist):string;
@@ -1447,8 +1688,8 @@ case n of
  8 : sc.MoveChart(1,-1,movefactor);
  9 : sc.MoveChart(-1,1,movefactor);
  10 : sc.MoveChart(-1,-1,movefactor);
- 11 : begin sc.cfgsc.FlipX:=-sc.cfgsc.FlipX; if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);end;
- 12 : begin sc.cfgsc.FlipY:=-sc.cfgsc.FlipY; if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);end;
+ 11 : begin sc.cfgsc.FlipX:=-sc.cfgsc.FlipX; if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);end;
+ 12 : begin sc.cfgsc.FlipY:=-sc.cfgsc.FlipY; if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);end;
  13 : result:=cmd_SetCursorPosition(strtointdef(arg[1],-1),strtointdef(arg[2],-1));
  14 : sc.MovetoXY(xcursor,ycursor);
  15 : begin sc.zoom(zoomfactor);sc.MovetoXY(xcursor,ycursor);end;
@@ -1491,13 +1732,31 @@ case n of
  52 : result:=cmd_SetDate(arg[1]);
  53 : result:=cmd_SetTZ(arg[1]);
  54 : result:=cmd_GetTZ;
+ 55 : begin cmd_SetRa(arg[1]); cmd_SetDec(arg[2]); cmd_SetFov(arg[3]); Refresh; end;
+ 56 : result:='not implemented'; // dss
+ 57 : result:=cmd_SaveImage('BMP',arg[1],'');
+ 58 : result:=cmd_SaveImage('GIF',arg[1],'');
+ 59 : result:=cmd_SaveImage('JPEG',arg[1],arg[2]);
+ 60 : result:=cmd_IdXY(arg[1],arg[2]);
+ 61 : cmd_GoXY(arg[1],arg[2]);
+ 62 : cmd_MoreStar;
+ 63 : cmd_LessStar;
+ 64 : cmd_MoreNeb;
+ 65 : cmd_LessNeb;
+ 66 : GridEQExecute(Self);
+ 67 : GridExecute(Self);
+ 68 : begin result:=cmd_SwitchGridNum; Refresh; end;
+ 69 : begin result:=cmd_SwitchConstL; Refresh; end;
+ 70 : begin result:=cmd_SwitchConstB; Refresh; end;
+ 71 : begin if sc.cfgsc.projpole<>equat then sc.cfgsc.projpole:=equat else sc.cfgsc.projpole:=altaz; refresh; end;
+ 77 : result:=cmd_SetGridNum(arg[1]);
+ 78 : result:=cmd_SetConstL(arg[1]);
+ 79 : result:=cmd_SetConstB(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
 
-
 procedure Tf_chart.FormKeyPress(Sender: TObject; var Key: Char);
-
 begin
 case key of
 '1' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[0]);
@@ -1601,12 +1860,6 @@ sc.cfgsc.TrackType:=4;
 Refresh;
 end;
 
-procedure Tf_chart.Resetalllabels1Click(Sender: TObject);
-begin
-sc.cfgsc.nummodlabels:=0;
-sc.DrawLabels;
-end;
-
 procedure Tf_chart.IdentDetail(X, Y: Integer);
 var ra,dec,a,h,l,b,le,be,dx:double;
 begin
@@ -1616,7 +1869,168 @@ ra:=rmod(ra+pi2,pi2);
 dx:=1/sc.cfgsc.BxGlb; // search a 1 pixel radius
 sc.FindatRaDec(ra,dec,dx);
 if sc.cfgsc.FindDesc>'' then begin
-   if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption);
+   if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption,true,self);
    identlabelClick(Self);
 end;   
 end;
+
+
+procedure Tf_chart.Connect1Click(Sender: TObject);
+
+begin
+{$ifdef mswindows}
+if not sc.cfgsc.IndiTelescope then begin
+   ConnectPlugin(Sender);
+end else
+{$endif}
+begin
+if Connect1.checked then begin
+   indi1.terminate;
+   sc.cfgsc.ScopeMark:=false;
+   Refresh;
+end else begin
+if (indi1=nil)or(indi1.Terminated) then begin
+   indi1:=TIndiClient.Create;
+   indi1.TargetHost:=sc.cfgsc.IndiServerHost;
+   indi1.TargetPort:=sc.cfgsc.IndiServerPort;
+   indi1.Timeout := 500;
+   indi1.TelescopePort:=sc.cfgsc.IndiPort;
+   if sc.cfgsc.IndiDevice='Other' then indi1.Device:=''
+      else indi1.Device:=sc.cfgsc.IndiDevice;
+   indi1.IndiServer:=sc.cfgsc.IndiServerCmd;
+   indi1.IndiDriver:=sc.cfgsc.IndiDriver;
+   indi1.AutoStart:=sc.cfgsc.IndiAutostart;
+   indi1.Autoconnect:=true;
+   indi1.onCoordChange:=TelescopeCoordChange;
+   indi1.onStatusChange:=TelescopeStatusChange;
+   indi1.onMessage:=TelescopeGetMessage;
+   indi1.Resume;
+end else begin
+   indi1.Connect;
+end;
+end;
+end;
+end;
+
+procedure Tf_chart.Slew1Click(Sender: TObject);
+var ra,dec:double;
+begin
+if Connect1.checked then begin
+{$ifdef mswindows}
+if not sc.cfgsc.IndiTelescope then begin
+   SlewPlugin(Sender);
+end else
+{$endif}
+begin
+ra:=sc.cfgsc.FindRA;
+dec:=sc.cfgsc.FindDec;
+if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+indi1.RA:=formatfloat(f6,ra*rad2deg/15);
+indi1.Dec:=formatfloat(f6,dec*rad2deg);
+Indi1.Slew;
+end;
+end
+else if assigned(Fshowinfo) then Fshowinfo('Telescope not connected');
+end;
+
+procedure Tf_chart.AbortSlew1Click(Sender: TObject);
+
+begin
+if Connect1.checked then begin
+{$ifdef mswindows}
+if not sc.cfgsc.IndiTelescope then begin
+   AbortSlewPlugin(Sender);
+end else
+{$endif}
+begin
+Indi1.AbortSlew;
+end;
+end;
+end;
+
+procedure Tf_chart.Sync1Click(Sender: TObject);
+
+var ra,dec:double;
+begin
+if Connect1.checked and
+   (mrYes=MessageDlg('Please confirm that the telescope is centered to '+sc.cfgsc.FindName, mtConfirmation, [mbYes,mbNo], 0))
+then begin
+{$ifdef mswindows}
+if not sc.cfgsc.IndiTelescope then begin
+   SyncPlugin(Sender);
+end else
+{$endif}
+begin
+  ra:=sc.cfgsc.FindRA;
+  dec:=sc.cfgsc.FindDec;
+  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+  precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+  indi1.RA:=formatfloat(f6,ra*rad2deg/15);
+  indi1.Dec:=formatfloat(f6,dec*rad2deg);
+  Indi1.Sync;
+end;
+end
+else if assigned(Fshowinfo) then Fshowinfo('Telescope not connected');
+end;
+
+procedure Tf_chart.TelescopeCoordChange(Sender: TObject);
+var ra,dec:double;
+    i:integer;
+begin
+if (indi1.RA='0')and(indi1.Dec='0') then exit;
+try
+val(indi1.RA,ra,i);
+if i<>0 then exit;
+val(indi1.Dec,Dec,i);
+if i<>0 then exit;
+ra:=ra*15*deg2rad;
+dec:=dec*deg2rad;
+precession(jd2000,sc.cfgsc.JDChart,ra,dec);
+if sc.cfgsc.ApparentPos then apparent_equatorial(ra,dec,sc.cfgsc);
+identlabel.Visible:=false;
+sc.TelescopeMove(ra,dec);
+except
+end;
+end;
+
+
+procedure Tf_chart.TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
+begin
+if source=Telescope then begin
+   if (status=Ok)or(status=Busy) then Connect1.checked:=true
+                                 else Connect1.checked:=false;
+if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
+end;
+end;
+
+procedure Tf_chart.TelescopeGetMessage(Sender : TObject; const msg : string);
+begin
+if assigned(Fshowinfo) then Fshowinfo('Telescope: '+msg);
+end;
+
+procedure Tf_chart.NewFinderCircle1Click(Sender: TObject);
+
+begin
+if MovingCircle or (sc.cfgsc.NumCircle>=MaxCircle) then exit;
+mouse.CursorPos:=point(xcursor+ClientOrigin.x,ycursor+ClientOrigin.y);
+GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],sc.cfgsc);
+sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+MovingCircle := true;
+end;
+
+
+procedure Tf_chart.RemoveLastCircle1Click(Sender: TObject);
+
+begin
+if sc.cfgsc.NumCircle>0 then dec(sc.cfgsc.NumCircle);
+Refresh;
+end;
+
+procedure Tf_chart.RemoveAllCircles1Click(Sender: TObject);
+
+begin
+sc.cfgsc.NumCircle:=0;
+Refresh;
+end;
+

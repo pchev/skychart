@@ -25,16 +25,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses fu_detail, cu_skychart, u_constant, u_util, u_projection, Math, 
-  SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs, Qt, 
-  QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList;
+uses Math,
+  SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs, Qt,
+  QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList,
+  fu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection;
 
 const maxundo=10;
 
 type
   Tstr1func = procedure(txt:string) of object;
   Tint2func = procedure(i1,i2:integer) of object;
-  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=true) of object;
+  Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
+  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil) of object;
 
   Tf_chart = class(TForm)
     RefreshTimer: TTimer;
@@ -69,7 +71,16 @@ type
     identlabel: TLabel;
     switchstar: TAction;
     switchbackground: TAction;
-    ResetAllLabels1: TMenuItem;
+    Telescope1: TMenuItem;
+    Connect1: TMenuItem;
+    Slew1: TMenuItem;
+    Sync1: TMenuItem;
+    NewFinderCircle1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    RemoveLastCircle1: TMenuItem;
+    RemoveAllCircles1: TMenuItem;
+    AbortSlew1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -114,21 +125,31 @@ type
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure ResetAllLabels1Click(Sender: TObject);
+    procedure Connect1Click(Sender: TObject);
+    procedure Slew1Click(Sender: TObject);
+    procedure Sync1Click(Sender: TObject);
+    procedure NewFinderCircle1Click(Sender: TObject);
+    procedure RemoveLastCircle1Click(Sender: TObject);
+    procedure RemoveAllCircles1Click(Sender: TObject);
+    procedure AbortSlew1Click(Sender: TObject);
   private
     { Private declarations }
     FImageSetFocus: TnotifyEvent;
     FShowTopMessage: Tstr1func;
-    FUpdateFlipBtn: Tint2func;
+    FUpdateBtn: Tbtnfunc;
     FShowInfo : Tshowinfo;
     FShowCoord: Tstr1func;
     FListInfo: Tstr1func;
     movefactor,zoomfactor: double;
-    xcursor,ycursor : integer;
-    LockWheel : boolean;
+    xcursor,ycursor,skipmove : integer;
+    LockWheel,MovingCircle : boolean;
+    procedure TelescopeCoordChange(Sender: TObject);
+    procedure TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
+    procedure TelescopeGetMessage(Sender : TObject; const msg : string);
   public
     { Public declarations }
     sc: Tskychart;
+    indi1: TIndiClient;
     maximize,locked,LockTrackCursor,lastquick,lock_refresh: boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo,lastx,lasty,lastyzoom : integer;
@@ -189,9 +210,24 @@ type
     function cmd_GetObs:string;
     function cmd_SetTZ(tz:string):string;
     function cmd_GetTZ:string;
+    procedure cmd_GoXY(xx,yy : string);
+    function cmd_IdXY(xx,yy : string): string;
+    procedure cmd_MoreStar;
+    procedure cmd_LessStar;
+    procedure cmd_MoreNeb;
+    procedure cmd_LessNeb;
+    function cmd_SetGridNum(onoff:string):string;
+    function cmd_SetConstL(onoff:string):string;
+
+    function cmd_SetConstB(onoff:string):string;
+
+    function cmd_SwitchGridNum:string;
+    function cmd_SwitchConstL:string;
+    function cmd_SwitchConstB:string;
+
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnShowTopMessage: Tstr1func read FShowTopMessage write FShowTopMessage;
-    property OnUpdateFlipBtn: Tint2func read FUpdateFlipBtn write FUpdateFlipBtn;
+    property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
     property OnListInfo: Tstr1func read FListInfo write FListInfo;
@@ -253,7 +289,8 @@ begin
 end;
 
 
-// End of Linux specific CLX code:
+// End of Linux specific CLX code
+
 
 end.
 

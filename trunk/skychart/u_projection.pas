@@ -34,10 +34,12 @@ uses u_constant, u_util,
 {$endif}
 
 Procedure ScaleWindow(var c:conf_skychart);
+Function RotationAngle(x1,y1,x2,y2: double; var c:conf_skychart): double;
 Procedure WindowXY(x,y:Double; var WindowX,WindowY: Integer; var c:conf_skychart);
 Procedure XYWindow( x,y: Integer; var Xwindow,Ywindow: double; var c:conf_skychart);
 PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; var c:conf_skychart; tohrz:boolean=false);
 PROCEDURE Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; var c:conf_skychart );
+PROCEDURE Proj3(ar,de,ac,dc : Double ; VAR X,Y : Double; var c:conf_skychart );
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double; var c:conf_skychart );
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; var c:conf_skychart );
 procedure GetADxy(x,y:Integer ; var a,d : Double; var c:conf_skychart);
@@ -57,8 +59,6 @@ function Jd(annee,mois,jour :INTEGER; Heure:double):double;
 PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
 function SidTim(jd0,ut,long : double): double;
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; var c:conf_skychart);
-function SetCurrentTime(var cfgsc:conf_skychart):boolean;
-function DTminusUT(annee : integer; var c:conf_skychart) : double;
 PROCEDURE PrecessionFK4(ti,tf : double; VAR ari,dei : double);
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
 procedure PrecessionEcl(ti,tf : double; VAR l,b : double);
@@ -69,16 +69,19 @@ function ecliptic(j:double):double;
 procedure nutation(j:double; var nutl,nuto:double);
 procedure aberration(j:double; var abe,abp:double);
 procedure apparent_equatorial(var ra,de:double; var c:conf_skychart);
+procedure mean_equatorial(var ra,de:double; var c:conf_skychart);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
 Procedure Gal2Eq(l,b: double; var ar,de : double; var c:conf_skychart);
 Procedure Eq2Gal(ar,de : double; var l,b: double; var c:conf_skychart);
-{Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer);
+Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart);
           (* typeobj = 1 etoile ; typeobj = 2 soleil,lune
+            ar,de equinox of the date
             irc = 0 lever et coucher
             irc = 1 circumpolaire
             irc = 2 invisible
           *)
+{
 Procedure HeurePo(jd,ar,de,h :Double; VAR hp1,hp2 :Double );
           (*
              Heure a laquel un astre est a un hauteur donnee sur l'horizon .
@@ -91,9 +94,8 @@ Procedure HeurePo(jd,ar,de,h :Double; VAR hp1,hp2 :Double );
              hp1      :  heure matin
              hp2      :  heure soir
            *)
-procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs:double;var irc:integer);
 }
-Function YearADBC(year : integer) : string;
+procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart);
 
 
 implementation
@@ -115,6 +117,7 @@ begin
    c.ByGlb:= c.FlipY * (Y1-Y2) / (c.Ywrldmax-c.Ywrldmin) ;
    c.AxGlb:= c.FlipX * (- c.Xwrldmin * c.BxGlb) ;
    c.AyGlb:=  c.FlipY * ( c.Ywrldmin * c.ByGlb) ;
+   if abs(c.theta)<1e-6 then c.theta:=0;
    c.sintheta:=sin(c.theta);
    c.costheta:=cos(c.theta);
    if c.fov>pid2 then
@@ -122,6 +125,16 @@ begin
                          else c.x2:=intpower(x2-x1,2)
    else c.x2:=intpower(c.BxGlb*pid2,2);
 end;
+
+Function RotationAngle(x1,y1,x2,y2: double; var c:conf_skychart): double;
+begin
+x1:=c.AxGlb+c.BxGlb*x1+c.Xshift;
+y1:=c.AyGlb+c.ByGlb*y1+c.Yshift;
+x2:=c.AxGlb+c.BxGlb*x2+c.Xshift;
+y2:=c.AyGlb+c.ByGlb*y2+c.Yshift;
+result:=arctan2((x1-x2),(y1-y2));
+if c.FlipY<0 then result:=result-pi;
+end;      
 
 Procedure WindowXY(x,y:Double; var WindowX,WindowY: Integer; var c:conf_skychart);
 var xx,yy : int64;
@@ -217,6 +230,85 @@ X:=xx*c.costheta+yy*c.sintheta;
 Y:=yy*c.costheta-xx*c.sintheta;
 END ;
 
+PROCEDURE Proj3(ar,de,ac,dc : Double ; VAR X,Y : Double; var c:conf_skychart );
+Var r,hh,s1,s2,s3,c1,c2,c3,xx,yy : Extended ;
+BEGIN
+case c.projtype of              // AIPS memo 27
+'A' : begin                   //  ARC
+    hh := ac-ar ;
+    sincos(dc,s1,c1);
+    sincos(de,s2,c2);
+    sincos(hh,s3,c3);
+    r:=s1*s2 + c1*c2*c3;
+    if r>1 then r:=1;
+    r:= arccos(r)  ;
+    if r<>0 then r:= (r/sin(r));
+    xx:= r*c2*s3;
+    yy:= r*(s2*c1-c2*s1*c3);
+    end;
+'C' : begin                 // CAR
+    ar:=rmod(ar+pi4,pi2);
+    hh:=rmod(ac+pi,pi2);
+    if ar>hh then ar:=ar-hh
+             else ar:=ar+pi2-hh;
+    ac:=rmod(hh-ac+pi2,pi2);
+    xx:=ac-ar;
+    yy:=de-dc;
+    end;
+'S' : begin                 // SIN
+    hh := ar-ac ;
+    sincos(dc,s1,c1);
+    sincos(de,s2,c2);
+    sincos(hh,s3,c3);
+    r:=s1*s2+c2*c1*c3;  // cos the
+    if r<=0 then begin  // > 90°
+      xx:=200;
+      yy:=200;
+    end else begin
+      xx:= -(c2*s3);
+      yy:= s2*c1-c2*s1*c3;
+    end;
+    if xx>200 then xx:=200
+     else if xx<-200 then xx:=-200;
+    if yy>200 then yy:=200
+     else if yy<-200 then yy:=-200;
+    end;
+'T' : begin                  //  TAN
+    hh := ar-ac ;
+    sincos(dc,s1,c1);
+    sincos(de,s2,c2);
+    sincos(hh,s3,c3);
+    r:=s1*s2+c2*c1*c3;     // cos the
+    if r<=0 then begin  // > 90°
+      xx:=200;
+      yy:=200;
+    end else begin
+      xx := -( c2*s3/r );
+      yy := (s2*c1-c2*s1*c3)/r ;
+    end;
+    if xx>200 then xx:=200
+     else if xx<-200 then xx:=-200;
+    if yy>200 then yy:=200
+     else if yy<-200 then yy:=-200;
+    end;
+else begin
+    c.projtype:='A';
+    hh := ac-ar ;
+    s1:=sin(dc);
+    s2:=sin(de);
+    c1:=cos(dc);
+    c2:=cos(de);
+    c3:=cos(hh);
+    r:= (arccos( s1*s2 + c1*c2*c3-1e-12 ))  ;
+    r:= (r/sin(r));
+    xx:= r*c2*sin(hh);
+    yy:= r*(s2*c1-c2*s1*c3);
+    end;
+end;
+X:=xx;
+Y:=yy;
+END ;
+
 PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; var c:conf_skychart; tohrz:boolean=false);
 Var a,h,ac,dc,d1,d2 : Double ;
     a1,a2,i1,i2 : integer;
@@ -295,9 +387,9 @@ case c.projtype of
     sincos(a,s1,c1);
     sincos(dc,s2,c2);
     sincos(r,s3,c3);
-    de:=(arcsin( s2*s3 - c2*c3*c1)) + 1E-7 ;
+    de:=(arcsin( s2*s3 - c2*c3*c1)) + 1E-9 ;
     hh:=(arctan2((c3*s1),(c2*s3+s2*c3*c1) ));
-    ar := ac - hh - 1E-7 ;
+    ar := ac - hh - 1E-9 ;
    end;
 'C' : begin
     ar:=ac-x;
@@ -323,9 +415,9 @@ else begin
     c.projtype:='A';
     r :=(pid2-sqrt(x*x+y*y)) ;
     a := arctan2(x,y) ;
-    de:=(arcsin( sin(dc)*sin(r) - cos(dc)*cos(r)*cos(a) )) + 1E-7 ;
+    de:=(arcsin( sin(dc)*sin(r) - cos(dc)*cos(r)*cos(a) )) + 1E-9 ;
     hh:=(arctan2((cos(r)*sin(a)),(cos(dc)*sin(r)+sin(dc)*cos(r)*cos(a)) ));
-    ar := ac - hh - 1E-7 ;
+    ar := ac - hh - 1E-9 ;
     end;
 end;
 end ;
@@ -471,17 +563,21 @@ Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
 end;
 
 Function AngularDistance(ar1,de1,ar2,de2 : Double) : Double;
-var s1,s2,c1,c2: extended;
+var s1,s2,c1,c2,c3: extended;
 begin
 try
 if (ar1=ar2) and (de1=de2) then result:=0.0
 else begin
     sincos(de1,s1,c1);
     sincos(de2,s2,c2);
-    result:=arccos((s1*s2)+(c1*c2*cos((ar1-ar2))));
+    c3:=(s1*s2)+(c1*c2*cos((ar1-ar2)));
+    if abs(c3)<=1 then
+       result:=arccos(c3)
+    else
+       result:=pi2;
 end;    
 except
-  result:=0;
+  result:=pi2;
 end;
 end;
 
@@ -563,99 +659,6 @@ b := cos(rde)*cos(H)-c.ObsRoSinPhi*sinpi;
 d := sin(rde)-c.ObsRoSinPhi*sinpi;
 q := sqrt(a*a+b*b+d*d);
 precession(c.curjd,c.JDchart,ar,de);
-end;
-
-function SetCurrentTime(var cfgsc:conf_skychart):boolean;
-var y,m,d:word;
-begin
-decodedate(now,y,m,d);
-cfgsc.CurYear:=y;
-cfgsc.CurMonth:=m;
-cfgsc.CurDay:=d;
-cfgsc.CurTime:=frac(now)*24;
-result:=true;
-end;
-
-
-function DTminusUT(annee : integer; var c:conf_skychart) : double;
-var t : double;
-begin
-if c.Force_DT_UT then result:=c.DT_UT_val
-else begin
-case annee of
-{ Atlas of Historical Eclipse Maps East Asia 1500 BC - AD 1900, Stephenson and Houlden (1986)
-     (1) prior to 948 AD
-         delta-T (seconds) = 1830 - 405*t + 46.5*t^2
-             (t = centuries since 948 AD)
-
-     (2) 948 AD to 1600 AD
-         delta-T (seconds) = 22.5*t^2
-             (t = centuries since 1850 AD)
-}
--99999..948 : begin
-              t:=(annee-2000)/100;
-              result:=(2715.6 + 573.36 * t + 46.5 * t*t) / 3600;
-              end;
-  949..1619 : begin
-              t:=(annee-1850)/100;
-              result:=(22.5*t*t)/3600;
-              end;
-  1620..1621 : result:=124/3600;
-  1622..1623 : result:=115/3600;
-  1624..1625 : result:=106/3600;
-  1626..1627 : result:= 98/3600;
-  1628..1629 : result:= 91/3600;
-  1630..1631 : result:= 85/3600;
-  1632..1633 : result:= 79/3600;
-  1634..1635 : result:= 74/3600;
-  1636..1637 : result:= 70/3600;
-  1638..1639 : result:= 65/3600;
-  1640..1645 : result:= 60/3600;
-  1646..1653 : result:= 50/3600;
-  1654..1661 : result:= 40/3600;
-  1662..1671 : result:= 30/3600;
-  1672..1681 : result:= 20/3600;
-  1682..1691 : result:= 10/3600;
-  1692..1707 : result:=  9/3600;
-  1708..1717 : result:= 10/3600;
-  1718..1733 : result:= 11/3600;
-  1734..1743 : result:= 12/3600;
-  1744..1751 : result:= 13/3600;
-  1752..1757 : result:= 14/3600;
-  1758..1765 : result:= 15/3600;
-  1766..1775 : result:= 16/3600;
-  1776..1791 : result:= 17/3600;
-  1792..1795 : result:= 16/3600;
-  1796..1797 : result:= 15/3600;
-  1798..1799 : result:= 14/3600;
- 1800..1899 : begin
-              t:=(annee-1900)/100;
-              result:=(-1.4e-5+t*(1.148e-3+t*(3.357e-3+t*(-1.2462e-2+t*(-2.2542e-2+t*(6.2971e-2+t*(7.9441e-2+t*(-0.146960+t*(-0.149279+t*(0.161416+t*(0.145932+t*(-6.7471e-2+t*(-5.8091e-2))))))))))))  )*24;
-              end;
- 1900..1987 : begin
-              t:=(annee-1900)/100;
-              result:=(-2e-5+t*(2.97e-4+t*(2.5184e-2+t*(-0.181133+t*(0.553040+t*(-0.861938+t*(0.677066+t*(-0.212591))))))))*24;
-              end;
- 1988..1996 : begin
-              t:=(annee-2000)/100;
-              result:=(67+123.5*t+32.5*t*t)/3600;
-              end;
-       1997 : result:=62/3600;
-       1998 : result:=63/3600;
-       1999 : result:=63/3600;
-       2000 : result:=64/3600;
-       2001 : result:=64/3600;
- 2002..2020 : begin
-              t:=(annee-2000)/100;
-              result:=(63+123.5*t+32.5*t*t)/3600;
-              end;
- 2021..99999 : begin
-              t:=(annee-1875.1)/100;
-              result:=45.39*t*t/3600;
-              end;
- else result:=0;
- end;
-end;
 end;
 
 PROCEDURE PrecessionFK4(ti,tf : double; VAR ari,dei : double);
@@ -820,6 +823,35 @@ ra:=ra+da;
 de:=de+dd;
 end;
 
+procedure mean_equatorial(var ra,de:double; var c:conf_skychart);
+var da,dd,l,b: double;
+    cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
+begin
+sincos(ra,sra,cra);
+sincos(de,sde,cde);
+sincos(c.e,se,ce);
+sincos(c.sunl,sls,cls);
+sincos(c.abp,sp,cp);
+// nutation
+if abs(de)<(89*deg2rad) then begin    // meeus91 22.1
+   da:=c.nutl*(ce+se*sra*tan(de))-c.nuto*(cra*tan(de));
+   dd:=c.nutl*se*cra+c.nuto*sra;
+   ra:=ra+da;
+   de:=de+dd;
+end else begin
+   Eq2Ecl(ra,de,c.e,l,b);
+   l:=l+c.nutl;
+   b:=b+c.nuto;
+   Ecl2Eq(l,b,c.e,ra,de);
+end;
+//aberration
+//meeus91 22.3
+da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
+dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*cde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*cde*sp);
+ra:=ra-da;
+de:=de-dd;
+end;
+
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 begin
 ar:=arctan2(sin(l)*cos(e)-tan(b)*sin(e),cos(l));
@@ -853,31 +885,29 @@ l:=rmod(l+pi2,pi2);
 b:=arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar));
 end;
 
-{
-procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer);
+procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart);
 const ho : array[1..3] of Double = (-9.89E-3,-1.454E-2,2.18E-3) ;
 var hs0,chh0,hh0,m0,m1,m2,a0 : double;
 begin
-precession(2451545.0,jd0,ar,de); // J2000 coord. to date
-hs0 := sidtim(jd0,0.0,0.0)*15 ;
-chh0 :=(ho[typobj]-sin(degtorad(ObsLatitude))*sin(degtorad(de)))/(cos(degtorad(ObsLatitude))*cos(degtorad(de))) ;
+hs0 := sidtim(jd0,0.0,0.0);
+chh0 :=(ho[typobj]-sin(deg2rad*c.ObsLatitude)*sin(de))/(cos(deg2rad*c.ObsLatitude)*cos(de)) ;
 if abs(chh0)<=1 then begin
-   hh0:=radtodeg(arccos(chh0));
-   m0:=(ar*15+ObsLongitude-hs0)/360;
-   m1:=m0-hh0/360;
-   m2:=m0+hh0/360;
-   ht:=rmod(rmod(m0+1,1)*24+TimeBias+24,24);
-   hr:=rmod(rmod(m1+1,1)*24+TimeBias+24,24);
-   hs:=rmod(rmod(m2+1,1)*24+TimeBias+24,24);
-   a0:= radtodeg(arctan2(sin(degtorad(hh0)),cos(degtorad(hh0))*sin(degtorad(Obslatitude))-tan(degtorad(de))*cos(degtorad(Obslatitude))));
-   azr:=360-a0;
+   hh0:=arccos(chh0);
+   m0:=(ar+deg2rad*c.ObsLongitude-hs0)/pi2;
+   m1:=m0-hh0/pi2;
+   m2:=m0+hh0/pi2;
+   ht:=rmod(rmod(m0+1,1)*24+c.TimeZone+24,24);
+   hr:=rmod(rmod(m1+1,1)*24+c.TimeZone+24,24);
+   hs:=rmod(rmod(m2+1,1)*24+c.TimeZone+24,24);
+   a0:= arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c.Obslatitude)-tan(de)*cos(deg2rad*c.Obslatitude));
+   azr:=pi2-a0;
    azs:=a0;
    irc:=0;
 end else begin
    hr:=0;hs:=0;azr:=0;azs:=0;
-   if sgn(de)=sgn(ObsLatitude) then begin
-      m0:=(ar*15+ObsLongitude-hs0)/360;     (* circumpolaire *)
-      ht:=rmod(rmod(m0+1,1)*24+TimeBias+24,24);
+   if sgn(de)=sgn(c.ObsLatitude) then begin
+      m0:=(ar+deg2rad*c.ObsLongitude-hs0)/pi2;     (* circumpolar *)
+      ht:=rmod(rmod(m0+1,1)*24+c.TimeZone+24,24);
       irc:=1 ;
     end else begin
       ht:=0;      (* invisible *)
@@ -895,84 +925,70 @@ c:= b - a;
 result:= y2 + n/2*(a + b + n*c);
 end;
 
-procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs:double;var irc:integer);
+procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart);
 const ho : array[1..3] of Double = (-0.5667,-0.8333,0.125) ;
 var hs0,chh0,hh0,m0,m1,m2,a0,n,hsg,aa,dd,hl,h,dm,longref : double;
 begin
-precession(2451545.0,jd0,ar1,de1); // J2000 coord. to date
-precession(2451545.0,jd0,ar2,de2);
-precession(2451545.0,jd0,ar3,de3);
-if ar1>12 then begin
-   if ar2<12 then ar2:=ar2+24;
-   if ar3<12 then ar3:=ar3+24;
+if ar1>pi then begin
+   if ar2<pi then ar2:=ar2+pi2;
+   if ar3<pi then ar3:=ar3+pi2;
 end;
-longref:=-timebias*15;
-//hs0 := sidtim(jd0,0.0,0.0)*15 ;
-hs0 := sidtim(jd0,-timebias,longref)*15 ;
-chh0 :=(sin(degtorad(ho[typobj]))-sin(degtorad(ObsLatitude))*sin(degtorad(de2)))/(cos(degtorad(ObsLatitude))*cos(degtorad(de2))) ;
+longref:=-c.timezone*15;
+hs0 := sidtim(jd0,-c.timezone,longref);
+chh0 :=(sin(deg2rad*ho[typobj])-sin(deg2rad*c.ObsLatitude)*sin(de2))/(cos(deg2rad*c.ObsLatitude)*cos(de2)) ;
 if abs(chh0)<=1 then begin
-   hh0:=radtodeg(arccos(chh0));
-//   m0:=(ar2*15+ObsLongitude-hs0)/360;
-   m0:=(ar2*15+Obslongitude-longref-hs0)/360;
-   m1:=m0-hh0/360;
-   m2:=m0+hh0/360;
-  if m0<0 then m0:=m0+1;
-  if m0>1 then m0:=m0-1;
-  if m1<0 then m1:=m1+1;
-  if m1>1 then m1:=m1-1;
-  if m2<0 then m2:=m2+1;
-  if m2>1 then m2:=m2-1;
-   // lever
-   hsg:= hs0 + 360.985647 * m1;
+   hh0:=arccos(chh0);
+   m0:=(ar2+deg2rad*c.ObsLongitude-deg2rad*longref-hs0)/pi2;
+   m1:=m0-hh0/pi2;
+   m2:=m0+hh0/pi2;
+   if m0<0 then m0:=m0+1;
+   if m0>1 then m0:=m0-1;
+   if m1<0 then m1:=m1+1;
+   if m1>1 then m1:=m1-1;
+   if m2<0 then m2:=m2+1;
+   if m2>1 then m2:=m2-1;
+   // rise
+   hsg:= hs0 + deg2rad*360.985647 * m1;
    n:= m1 ;
-   aa:=int3(n,ar1,ar2,ar3)*15;
+   aa:=int3(n,ar1,ar2,ar3);
    dd:=int3(n,de1,de2,de3);
-//   hl:= hsg - ObsLongitude - aa;
-   hl:= hsg - Obslongitude + longref - aa;
-   h:= radtodeg(arcsin(sin(degtorad(Obslatitude)) * sin(degtorad(dd)) + cos(degtorad(Obslatitude)) * cos(degtorad(dd)) * cos(degtorad(hl)) ));
-   dm:= (h - ho[typobj]) / (360 * cos(degtorad(dd)) * cos(degtorad(Obslatitude)) * sin(degtorad(hl)) );
-//   hr:=rmod((m1+dm)*24+TimeBias+24,24);
-//   hr:=(m1+dm)*24+timebias;
+   hl:= hsg - deg2rad*c.Obslongitude + deg2rad*longref - aa;
+   h:= rad2deg*(arcsin(sin(deg2rad*c.Obslatitude) * sin(dd) + cos(deg2rad*c.Obslatitude) * cos(dd) * cos(hl) ));
+   dm:= (h - ho[typobj]) / (360 * cos(dd) * cos(deg2rad*c.Obslatitude) * sin(hl) );
    hr:=(m1+dm)*24;
-   a0:= radtodeg(arctan2(sin(degtorad(hh0)),cos(degtorad(hh0))*sin(degtorad(Obslatitude))-tan(degtorad(dd))*cos(degtorad(Obslatitude))));
-   azr:=360-a0;
-   // culmination
-   hsg:= hs0 + 360.985647 * m0;
+   a0:= arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c.Obslatitude)-tan(dd)*cos(deg2rad*c.Obslatitude));
+   azr:=pi2-a0;
+   // transit
+   hsg:= hs0 + deg2rad*360.985647 * m0;
    n:= m0 ;
-   aa:=int3(n,ar1,ar2,ar3)*15;
-//   hl:= hsg - ObsLongitude - aa;
-   hl:= hsg - Obslongitude + longref - aa;
-   dm:= -(hl / 360);
-//   ht:=rmod((m0+dm)*24+TimeBias+24,24);
-//   ht:=(m0+dm)*24+timebias;
+   aa:=int3(n,ar1,ar2,ar3);
+   hl:= hsg - deg2rad*c.Obslongitude + deg2rad*longref - aa;
+   dm:= -(hl / pi2);
    ht:=rmod((m0+dm)*24+24,24);
    if (ht<10)and(m0>0.6) then ht:=ht+24;
    if (ht>14)and(m0<0.4) then ht:=ht-24;
-   // coucher
-   hsg:= hs0 + 360.985647 * m2;
+   // set
+   hsg:= hs0 + deg2rad*360.985647 * m2;
    n:= m2 ;
-   aa:=int3(n,ar1,ar2,ar3)*15;
+   aa:=int3(n,ar1,ar2,ar3);
    dd:=int3(n,de1,de2,de3);
-//   hl:= hsg - ObsLongitude - aa;
-   hl:= hsg - Obslongitude + longref - aa;
-   h:= radtodeg(arcsin(sin(degtorad(Obslatitude)) * sin(degtorad(dd)) + cos(degtorad(Obslatitude)) * cos(degtorad(dd)) * cos(degtorad(hl)) ));
-   dm:= (h - ho[typobj]) / (360 * cos(degtorad(dd)) * cos(degtorad(Obslatitude)) * sin(degtorad(hl)) );
-//   hs:=rmod((m2+dm)*24+TimeBias+24,24);
-//   hs:=(m2+dm)*24+timebias;
+   hl:= hsg - deg2rad*c.Obslongitude + deg2rad*longref - aa;
+   h:= rad2deg*(arcsin(sin(deg2rad*c.Obslatitude) * sin(dd) + cos(deg2rad*c.Obslatitude) * cos(dd) * cos(hl) ));
+   dm:= (h - ho[typobj]) / (360 * cos(dd) * cos(deg2rad*c.Obslatitude) * sin(hl) );
    hs:=(m2+dm)*24;
-   a0:= radtodeg(arctan2(sin(degtorad(hh0)),cos(degtorad(hh0))*sin(degtorad(Obslatitude))-tan(degtorad(dd))*cos(degtorad(Obslatitude))));
+   a0:= arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c.Obslatitude)-tan(dd)*cos(deg2rad*c.Obslatitude));
    azs:=a0;
    irc:=0;
 end else begin
    hr:=0;hs:=0;azr:=0;azs:=0;
-   if sgn(de1)=sgn(ObsLatitude) then begin
-      m0:=(ar2*15+ObsLongitude-hs0)/360;     (* circumpolaire *)
-      hsg:= hs0 + 360.985647 * m0;
-      n:= m0 + dt_ut / 24;
-      aa:=int3(n,ar1,ar2,ar3)*15;
-      hl:= hsg - ObsLongitude - aa;
-      dm:= -(hl / 360);
-      ht:=rmod((m0+dm)*24+TimeBias+24,24);
+   if sgn(de1)=sgn(c.ObsLatitude) then begin
+      m0:=(ar2+deg2rad*c.ObsLongitude-hs0)/pi2;     (* circumpolar *)
+      hsg:= hs0 + deg2rad*360.985647 * m0;
+      n:= m0 + c.DT_UT / 24;
+      aa:=int3(n,ar1,ar2,ar3);
+      hl:= hsg - deg2rad*c.ObsLongitude - aa;
+      dm:= -(hl / pi2);
+      ht:=rmod((m0+dm)*24+c.Timezone+24,24);
       irc:=1 ;
     end else begin
       ht:=0;      (* invisible *)
@@ -980,7 +996,7 @@ end else begin
     end;
 end;
 end;
-
+{
 Procedure HeurePo(jd,ar,de,h :Double; VAR hp1,hp2 :Double );
 VAR hh,st,st0 : Double ;
 BEGIN
@@ -998,14 +1014,6 @@ end else begin
 end;
 END;
  }
-Function YearADBC(year : integer) : string;
-begin
-if year>0 then begin
-   result:=inttostr(year);
-end else begin
-   result:='BC'+inttostr(-year+1) ;
-end;
-end;
 
 end.
 

@@ -1,8 +1,8 @@
 object f_chart: Tf_chart
-  Left = 400
-  Top = 118
-  Width = 384
-  Height = 244
+  Left = 405
+  Top = 123
+  Width = 374
+  Height = 231
   Caption = 'Chart'
   Color = clBlack
   ParentFont = True
@@ -24,8 +24,8 @@ object f_chart: Tf_chart
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 376
-    Height = 217
+    Width = 366
+    Height = 197
     Align = alClient
     BevelOuter = bvNone
     Color = clBlack
@@ -33,8 +33,8 @@ object f_chart: Tf_chart
     object Image1: TImage
       Left = 0
       Top = 0
-      Width = 376
-      Height = 217
+      Width = 366
+      Height = 197
       Align = alClient
       AutoSize = True
       PopupMenu = PopupMenu1
@@ -57,6 +57,7 @@ object f_chart: Tf_chart
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+      ShowAccelChar = False
       Visible = False
       OnClick = identlabelClick
     end
@@ -210,9 +211,49 @@ object f_chart: Tf_chart
     object Zoom2: TMenuItem
       Action = zoomminusmove
     end
-    object Resetalllabels1: TMenuItem
-      Caption = 'Reset all labels'
-      OnClick = Resetalllabels1Click
+    object N1: TMenuItem
+      Caption = '-'
     end
+    object NewFinderCircle1: TMenuItem
+      Caption = 'New Finder Circle'
+      OnClick = NewFinderCircle1Click
+    end
+    object RemoveLastCircle1: TMenuItem
+      Caption = 'Remove Last Circle'
+      OnClick = RemoveLastCircle1Click
+    end
+    object RemoveAllCircles1: TMenuItem
+      Caption = 'Remove All Circles'
+      OnClick = RemoveAllCircles1Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object elescope1: TMenuItem
+      Caption = 'Telescope'
+      object Slew1: TMenuItem
+        Caption = 'Slew'
+        OnClick = Slew1Click
+      end
+      object Sync1: TMenuItem
+        Caption = 'Sync'
+        OnClick = Sync1Click
+      end
+      object Connect1: TMenuItem
+        Caption = 'Connect'
+        OnClick = Connect1Click
+      end
+      object AbortSlew1: TMenuItem
+        Caption = 'Abort Slew'
+        OnClick = AbortSlew1Click
+      end
+    end
+  end
+  object TelescopeTimer: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = TelescopeTimerTimer
+    Left = 160
+    Top = 64
   end
 end

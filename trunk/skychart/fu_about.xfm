@@ -1,16 +1,16 @@
 object f_about: Tf_about
-  Left = 359
-  Top = 269
+  Left = 362
+  Top = 298
   Width = 350
-  Height = 293
-  HorzScrollBar.Range = 335
-  VertScrollBar.Range = 286
-  ActiveControl = OKButton
+  Height = 253
+  HorzScrollBar.Range = 338
+  VertScrollBar.Range = 246
+  BorderStyle = fbsToolWindow
   Caption = 'About'
   Color = clBackground
-  Constraints.MaxHeight = 293
+  Constraints.MaxHeight = 253
   Constraints.MaxWidth = 350
-  Constraints.MinHeight = 293
+  Constraints.MinHeight = 253
   Constraints.MinWidth = 350
   Font.Color = clBlack
   Font.Height = 12
@@ -18,10 +18,12 @@ object f_about: Tf_about
   Font.Pitch = fpVariable
   Font.Style = []
   Font.Weight = 0
+  FormStyle = fsStayOnTop
   ParentFont = False
-  Position = poScreenCenter
+  Position = poDefault
   Scaled = False
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 90
   object logo: TImage
     Left = 0
@@ -4289,56 +4291,7 @@ object f_about: Tf_about
       797777656363615F5F706E6E6361615957575D58595C57585853545651525852
       53595354585051534B4C5A52535B53540000}
     Stretch = True
-  end
-  object Panel1: TPanel
-    Left = 0
-    Top = 253
-    Width = 350
-    Height = 40
-    Align = alBottom
-    BevelOuter = bvLowered
-    Color = clBlack
-    TabOrder = 0
-    object OKButton: TButton
-      Left = 292
-      Top = 3
-      Width = 55
-      Height = 33
-      Anchors = [akTop, akRight]
-      Caption = 'OK'
-      Color = clBlack
-      Default = True
-      Font.Color = clWhite
-      Font.Height = 12
-      Font.Name = 'Sans'
-      Font.Pitch = fpVariable
-      Font.Style = []
-      Font.Weight = 0
-      ModalResult = 1
-      ParentFont = False
-      TabOrder = 0
-    end
-    object Label4: TLabel
-      Left = 1
-      Top = 1
-      Width = 290
-      Height = 38
-      Align = alLeft
-      AutoSize = False
-      Caption = 
-        'This program is free software; you can redistribute it and/or mo' +
-        'dify it under the terms of the GNU General Public License'
-      Color = clBlack
-      Font.Color = clSilver
-      Font.Height = 10
-      Font.Name = 'Sans'
-      Font.Pitch = fpVariable
-      Font.Style = [fsItalic]
-      Font.Weight = 0
-      ParentColor = False
-      ParentFont = False
-      WordWrap = True
-    end
+    OnDblClick = logoDblClick
   end
   object Label1: TLabel
     Left = 200
@@ -4362,7 +4315,7 @@ object f_about: Tf_about
   end
   object Label2: TLabel
     Left = 16
-    Top = 176
+    Top = 165
     Width = 157
     Height = 29
     Caption = 'Version 3 alpha 0.0'
@@ -4379,11 +4332,12 @@ object f_about: Tf_about
     Transparent = True
   end
   object Label3: TLabel
-    Left = 12
+    Left = 16
     Top = 228
-    Width = 176
+    Width = 322
     Height = 18
-    Caption = 'Copyright (C) 2002 Patrick Chevalley '
+    AutoSize = False
+    Caption = 'Copyright (C) 2002-2004 Patrick Chevalley '
     Color = clBlack
     Font.Color = clSilver
     Font.Height = 10
@@ -4393,5 +4347,31 @@ object f_about: Tf_about
     Font.Weight = 0
     ParentColor = False
     ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 16
+    Top = 192
+    Width = 322
+    Height = 36
+    AutoSize = False
+    Caption = 
+      'This program is free software; you can redistribute it and/or mo' +
+      'dify it under the terms of the GNU General Public License'
+    Color = clBlack
+    Font.Color = clSilver
+    Font.Height = 10
+    Font.Name = 'Sans'
+    Font.Pitch = fpVariable
+    Font.Style = [fsItalic]
+    Font.Weight = 0
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+  end
+  object Timer1: TTimer
+    Interval = 5000
+    OnTimer = Timer1Timer
+    Left = 8
+    Top = 8
   end
 end

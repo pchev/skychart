@@ -31,18 +31,21 @@ uses u_constant,
 
 type
   Tf_about = class(TForm)
-    Panel1: TPanel;
-    OKButton: TButton;
     logo: TImage;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure logoDblClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    ShowTimer: Boolean;
   end;
 
 var
@@ -54,7 +57,31 @@ implementation
 
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
-label2.caption:=version;
+ ShowTimer:=false;
+ label2.caption:=cdcversion;
+end;
+
+procedure Tf_about.FormShow(Sender: TObject);
+begin
+if ShowTimer then begin
+   Timer1.Enabled:=true;
+end else begin
+   Timer1.Enabled:=false;
+end;
+end;
+
+procedure Tf_about.Timer1Timer(Sender: TObject);
+begin
+Timer1.Enabled:=false;
+ShowTimer:=false;
+BorderStyle:=bsToolWindow;
+ClientHeight:=253;
+Close;
+end;
+
+procedure Tf_about.logoDblClick(Sender: TObject);
+begin
+Timer1Timer(Sender);
 end;
 
 end.

@@ -63,7 +63,9 @@ Function DEdToStr(de: Double) : string;
 Function ARmtoStr(ar: Double) : string;
 Function DEpToStr(de: Double) : string;
 Function ARptoStr(ar: Double) : string;
-Function TimToStr(de: Double) : string;
+Function TimToStr(tim: Double) : string;
+Function YearADBC(year : integer) : string;
+Function Date2Str(y,m,d:integer):string;
 Function ARToStr2(ar: Double; var d,m,s : string) : string;
 Function ARToStr3(ar: Double) : string;
 Function Str3ToAR(dms : string) : double;
@@ -74,14 +76,19 @@ Function DEToStr4(de: Double) : string;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 Function GetTimeZone : double;
+function SetCurrentTime(var cfgsc:conf_skychart):boolean;
+function DTminusUT(annee : integer; var c:conf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
-Function Exec(cmd: string): integer;
-procedure ExecNowait(cmd:string);
+Function Exec(cmd: string; hide: boolean=true): integer;
+procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
 function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
 Function GreekLetter(gr : shortstring) : shortstring;
 function GetId(str:string):integer;
 Procedure GetPrinterResolution(var name : string; var resol : integer);
 Procedure ImageResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
+{$ifdef linux}
+function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
+{$endif}
 
 var traceon : boolean;
     
@@ -154,13 +161,11 @@ end;
 Procedure InitTrace;
 begin
 try
-{$ifdef linux}
- tracefile:=expandfilename(tracefile);
-{$endif}
+ if tracefile<>'' then tracefile:=expandfilename(tracefile); 
  assignfile(ftrace,tracefile);
  rewrite(ftrace);
- writeln(ftrace,DateTimeToStr(Now)+'  Start trace');
- closefile(ftrace);
+ writeln(ftrace,FormatDateTime(dateiso,Now)+'  Start trace');
+ if tracefile<>'' then closefile(ftrace);
 except
 {$I-}
  traceon:=false;
@@ -172,10 +177,12 @@ end;end;
 Procedure WriteTrace( buf : string);
 begin
 try
- assignfile(ftrace,tracefile);
- append(ftrace);
- writeln(ftrace,DateTimeToStr(Now)+'  '+buf);
- closefile(ftrace);
+ if tracefile<>'' then begin
+    assignfile(ftrace,tracefile);
+    append(ftrace);
+ end;   
+ writeln(ftrace,FormatDateTime(dateiso,Now)+'  '+buf);
+ if tracefile<>'' then closefile(ftrace);
 except
 {$I-}
  traceon:=false;
@@ -434,14 +441,14 @@ begin
     result := d+'°'+m+''''+s+'"';
 end;
 
-Function TimToStr(de: Double) : string;
+Function TimToStr(tim: Double) : string;
 var dd,min1,min,sec: Double;
     d,m,s : string;
 begin
-    dd:=Int(de);
-    min1:=abs(de-dd)*60;
+    dd:=Int(tim);
+    min1:=abs(tim-dd)*60;
     if min1>=59.99 then begin
-       dd:=dd+sgn(de);
+       dd:=dd+sgn(tim);
        min1:=0.0;
     end;
     min:=Int(min1);
@@ -457,6 +464,27 @@ begin
     str(sec:2:0,s);
     if abs(sec)<9.5 then s:='0'+trim(s);
     result := d+':'+m+':'+s;
+end;
+
+Function Date2Str(y,m,d:integer):string;
+var buf:string;
+begin
+  result:=YearADBC(y);
+  str(m:2,buf);
+  if m<10 then buf:='0'+trim(buf);
+  result:=result+'-'+buf;
+  str(d:2,buf);
+  if d<10 then buf:='0'+trim(buf);
+  result:=result+'-'+buf;
+end;
+
+Function YearADBC(year : integer) : string;
+begin
+if year>0 then begin
+   result:=inttostr(year);
+end else begin
+   result:='BC'+inttostr(-year+1) ;
+end;
 end;
 
 Function ARToStr(ar: Double) : string;
@@ -767,6 +795,99 @@ begin
 {$endif}
 end;
 
+function SetCurrentTime(var cfgsc:conf_skychart):boolean;
+var y,m,d:word;
+begin
+decodedate(now,y,m,d);
+cfgsc.CurYear:=y;
+cfgsc.CurMonth:=m;
+cfgsc.CurDay:=d;
+cfgsc.CurTime:=frac(now)*24;
+cfgsc.TimeZone:=GetTimezone;
+result:=true;
+end;
+
+function DTminusUT(annee : integer; var c:conf_skychart) : double;
+var t : double;
+begin
+if c.Force_DT_UT then result:=c.DT_UT_val
+else begin
+case annee of
+{ Atlas of Historical Eclipse Maps East Asia 1500 BC - AD 1900, Stephenson and Houlden (1986)
+     (1) prior to 948 AD
+         delta-T (seconds) = 1830 - 405*t + 46.5*t^2
+             (t = centuries since 948 AD)
+
+     (2) 948 AD to 1600 AD
+         delta-T (seconds) = 22.5*t^2
+             (t = centuries since 1850 AD)
+}
+-99999..948 : begin
+              t:=(annee-2000)/100;
+              result:=(2715.6 + 573.36 * t + 46.5 * t*t) / 3600;
+              end;
+  949..1619 : begin
+              t:=(annee-1850)/100;
+              result:=(22.5*t*t)/3600;
+              end;
+  1620..1621 : result:=124/3600;
+  1622..1623 : result:=115/3600;
+  1624..1625 : result:=106/3600;
+  1626..1627 : result:= 98/3600;
+  1628..1629 : result:= 91/3600;
+  1630..1631 : result:= 85/3600;
+  1632..1633 : result:= 79/3600;
+  1634..1635 : result:= 74/3600;
+  1636..1637 : result:= 70/3600;
+  1638..1639 : result:= 65/3600;
+  1640..1645 : result:= 60/3600;
+  1646..1653 : result:= 50/3600;
+  1654..1661 : result:= 40/3600;
+  1662..1671 : result:= 30/3600;
+  1672..1681 : result:= 20/3600;
+  1682..1691 : result:= 10/3600;
+  1692..1707 : result:=  9/3600;
+  1708..1717 : result:= 10/3600;
+  1718..1733 : result:= 11/3600;
+  1734..1743 : result:= 12/3600;
+  1744..1751 : result:= 13/3600;
+  1752..1757 : result:= 14/3600;
+  1758..1765 : result:= 15/3600;
+  1766..1775 : result:= 16/3600;
+  1776..1791 : result:= 17/3600;
+  1792..1795 : result:= 16/3600;
+  1796..1797 : result:= 15/3600;
+  1798..1799 : result:= 14/3600;
+ 1800..1899 : begin
+              t:=(annee-1900)/100;
+              result:=(-1.4e-5+t*(1.148e-3+t*(3.357e-3+t*(-1.2462e-2+t*(-2.2542e-2+t*(6.2971e-2+t*(7.9441e-2+t*(-0.146960+t*(-0.149279+t*(0.161416+t*(0.145932+t*(-6.7471e-2+t*(-5.8091e-2))))))))))))  )*24;
+              end;
+ 1900..1987 : begin
+              t:=(annee-1900)/100;
+              result:=(-2e-5+t*(2.97e-4+t*(2.5184e-2+t*(-0.181133+t*(0.553040+t*(-0.861938+t*(0.677066+t*(-0.212591))))))))*24;
+              end;
+ 1988..1996 : begin
+              t:=(annee-2000)/100;
+              result:=(67+123.5*t+32.5*t*t)/3600;
+              end;
+       1997 : result:=62/3600;
+       1998 : result:=63/3600;
+       1999 : result:=63/3600;
+       2000 : result:=64/3600;
+       2001 : result:=64/3600;
+ 2002..2020 : begin
+              t:=(annee-2000)/100;
+              result:=(63+123.5*t+32.5*t*t)/3600;
+              end;
+ 2021..99999 : begin
+              t:=(annee-1875.1)/100;
+              result:=45.39*t*t/3600;
+              end;
+ else result:=0;
+ end;
+end;
+end;
+
 Procedure FormPos(form : Tform; x,y : integer);
 const bot=25; //minimal distance from screen bottom
 begin
@@ -781,7 +902,7 @@ end;
 end;
 
 
-Function Exec(cmd: string): integer;
+Function Exec(cmd: string; hide: boolean=true): integer;
 {$ifdef linux}
 // This not work from Kylix IDE without libcexec workaround.
 begin
@@ -794,10 +915,8 @@ var
    pchEXEC: Pchar;
    si: TStartupInfo;
    pi: TProcessInformation;
-   hide: boolean;
    res:cardinal;
 begin
-   hide:=true;
    pchExec := @bchExec;
    StrPCopy(pchExec,cmd);
    FillChar(si,sizeof(si),0);
@@ -822,12 +941,11 @@ begin
 end;
 {$endif}
 
-procedure ExecNoWait(cmd: string);
+procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
 {$ifdef linux}
 // This not work from Kylix IDE without libxexec workaround.
-
 begin
- libc.system(pchar(cmd+'&'));
+ libc.system(pchar(cmd+' &'));
 end;
 {$endif}
 {$ifdef mswindows}
@@ -836,17 +954,17 @@ var
    pchEXEC: Pchar;
    si: TStartupInfo;
    pi: TProcessInformation;
-   hide: boolean;
 begin
-   hide:=false;
    pchExec := @bchExec;
    StrPCopy(pchExec,cmd);
    FillChar(si,sizeof(si),0);
    FillChar(pi,sizeof(pi),0);
    si.dwFlags:=STARTF_USESHOWWINDOW;
+   if title<>'' then si.lpTitle:=Pchar(title);
    if hide then si.wShowWindow:=SW_SHOWMINIMIZED
            else si.wShowWindow:=SW_SHOWNORMAL;
    si.cb := sizeof(si);
+   writetrace('Try to launch '+cmd);
    try
      CreateProcess(Nil,pchExec,Nil,Nil,false,CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, Nil,Nil,si,pi);
     except;
@@ -856,23 +974,23 @@ end;
 {$endif}
 
 {$ifdef linux}
-procedure ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string='');
+function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 // This not work from Kylix IDE without libxexec workaround.
 var
-  pid: PID_T;
   parg: array[1..7] of PChar;
 begin
-  pid := fork;
-  if pid = 0 then
+  result := fork;
+  if result = 0 then
   begin
     parg[1] := Pchar(cmd);
-    parg[2] := PChar(p1);
-    parg[3] := PChar(p2);
-    parg[4] := PChar(p3);
-    parg[5] := PChar(p4);
-    parg[6] := PChar(p5);
+    if p1='' then parg[2]:=nil else parg[2] := PChar(p1);
+    if p2='' then parg[3]:=nil else parg[3] := PChar(p2);
+    if p3='' then parg[4]:=nil else parg[4] := PChar(p3);
+    if p4='' then parg[5]:=nil else parg[5] := PChar(p4);
+    if p5='' then parg[6]:=nil else parg[6] := PChar(p5);
     parg[7] := nil;
-    if execv(Pchar(cmd),PPChar(@parg[1])) = -1 then
+    writetrace('Try to launch '+cmd+blank+p1+blank+p2+blank+p3+blank+p4+blank+p5);
+    if execvp(Pchar(cmd),PPChar(@parg[1])) = -1 then
     begin
       writetrace('Could not launch '+cmd);
     end;

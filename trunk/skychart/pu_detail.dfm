@@ -1,8 +1,9 @@
 object f_detail: Tf_detail
-  Left = 516
-  Top = 103
-  Width = 335
-  Height = 349
+  Left = 521
+  Top = 108
+  Width = 355
+  Height = 372
+  BorderStyle = bsSizeToolWin
   Caption = 'Details'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -16,14 +17,14 @@ object f_detail: Tf_detail
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 327
+    Width = 347
     Height = 41
     Align = alTop
     TabOrder = 0
     object Button1: TButton
-      Left = 184
+      Left = 216
       Top = 8
-      Width = 85
+      Width = 95
       Height = 25
       Cancel = True
       Caption = 'Close'
@@ -33,16 +34,16 @@ object f_detail: Tf_detail
     object Button2: TButton
       Left = 8
       Top = 8
-      Width = 85
+      Width = 95
       Height = 25
       Caption = 'Center Object'
       TabOrder = 1
       OnClick = Button2Click
     end
     object Button3: TButton
-      Left = 96
+      Left = 112
       Top = 8
-      Width = 85
+      Width = 95
       Height = 25
       Caption = 'Neighbor'
       TabOrder = 2
@@ -52,8 +53,8 @@ object f_detail: Tf_detail
   object memo: TRichEdit
     Left = 0
     Top = 41
-    Width = 327
-    Height = 281
+    Width = 347
+    Height = 297
     Align = alClient
     Lines.Strings = (
       '')

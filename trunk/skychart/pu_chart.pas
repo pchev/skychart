@@ -25,8 +25,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses pu_detail, cu_skychart, u_constant, u_util, u_projection, jpeg, pngimage,
-     Printers, Math,
+uses pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection, jpeg, pngimage,
+     Printers, Math, cu_telescope,
      Windows, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList, SysUtils;
      
@@ -35,7 +35,8 @@ const maxundo=10;
 type
   Tstr1func = procedure(txt:string) of object;
   Tint2func = procedure(i1,i2:integer) of object;
-  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=true) of object;
+  Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
+  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil) of object;
 
   Tf_chart = class(TForm)
     RefreshTimer: TTimer;
@@ -70,7 +71,17 @@ type
     identlabel: TLabel;
     switchbackground: TAction;
     switchstar: TAction;
-    Resetalllabels1: TMenuItem;
+    elescope1: TMenuItem;
+    Connect1: TMenuItem;
+    Slew1: TMenuItem;
+    Sync1: TMenuItem;
+    NewFinderCircle1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    RemoveLastCircle1: TMenuItem;
+    RemoveAllCircles1: TMenuItem;
+    AbortSlew1: TMenuItem;
+    TelescopeTimer: TTimer;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -113,20 +124,37 @@ type
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure Resetalllabels1Click(Sender: TObject);
+    procedure Connect1Click(Sender: TObject);
+    procedure Slew1Click(Sender: TObject);
+    procedure Sync1Click(Sender: TObject);
+    procedure NewFinderCircle1Click(Sender: TObject);
+    procedure RemoveLastCircle1Click(Sender: TObject);
+    procedure RemoveAllCircles1Click(Sender: TObject);
+    procedure AbortSlew1Click(Sender: TObject);
+    procedure TelescopeTimerTimer(Sender: TObject);
   private
     { Private declarations }
+    Ftelescope: Ttelescope;
     FImageSetFocus: TnotifyEvent;
     FShowTopMessage: Tstr1func;
-    FUpdateFlipBtn: Tint2func;
+    FUpdateBtn: Tbtnfunc;
     FShowInfo : Tshowinfo;
     FShowCoord: Tstr1func;
     FListInfo: Tstr1func;
     movefactor,zoomfactor: double;
-    xcursor,ycursor : integer;
+    xcursor,ycursor,skipmove : integer;
+    MovingCircle: Boolean;
+    procedure TelescopeCoordChange(Sender: TObject);
+    procedure TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
+    procedure TelescopeGetMessage(Sender : TObject; const msg : string);
+    procedure ConnectPlugin(Sender: TObject);
+    procedure SlewPlugin(Sender: TObject);
+    procedure AbortSlewPlugin(Sender: TObject);
+    procedure SyncPlugin(Sender: TObject);
   public
     { Public declarations }
     sc: Tskychart;
+    indi1: TIndiClient;
     maximize,locked,LockTrackCursor,lastquick,lock_refresh :boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
@@ -184,9 +212,22 @@ type
     function cmd_GetObs:string;
     function cmd_SetTZ(tz:string):string;
     function cmd_GetTZ:string;
+    procedure cmd_GoXY(xx,yy : string);
+    function cmd_IdXY(xx,yy : string): string;
+    procedure cmd_MoreStar;
+    procedure cmd_LessStar;
+    procedure cmd_MoreNeb;
+    procedure cmd_LessNeb;
+    function cmd_SetGridNum(onoff:string):string;
+    function cmd_SetConstL(onoff:string):string;
+    function cmd_SetConstB(onoff:string):string;
+    function cmd_SwitchGridNum:string;
+    function cmd_SwitchConstL:string;
+    function cmd_SwitchConstB:string;
+    property telescopeplugin: Ttelescope read Ftelescope write Ftelescope;
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnShowTopMessage: Tstr1func read FShowTopMessage write FShowTopMessage;
-    property OnUpdateFlipBtn: Tint2func read FUpdateFlipBtn write FUpdateFlipBtn;
+    property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
     property OnListInfo: Tstr1func read FListInfo write FListInfo;
@@ -209,7 +250,7 @@ implementation
 function Tf_chart.SaveChartImage(format,fn : string; quality : integer=75):boolean;
 var
    JPG : TJpegImage;
-   PNG: TPNGObject;
+   PNG : TPNGObject;
 begin
  if fn='' then fn:='cdc.png';
  if format='' then format:='PNG';
@@ -253,7 +294,95 @@ begin
  else result:=false;
 end;
 
-// end of windows vcl specific code:
+// Windows only telescope plugin 
+
+procedure Tf_chart.ConnectPlugin(Sender: TObject);
+var ok: boolean;
+begin
+if Connect1.checked then begin
+   Ftelescope.ScopeShow;
+end else begin
+   if not Ftelescope.scopelibok then Ftelescope.InitScopeLibrary;
+   if Ftelescope.scopelibok then begin
+     Ftelescope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+     Ftelescope.ScopeShow;
+     ok:=Ftelescope.ScopeConnect;
+     Connect1.Checked:=ok;
+     TelescopeTimer.Enabled:=ok;
+   end;
+end;
+if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
+end;
+
+procedure Tf_chart.SlewPlugin(Sender: TObject);
+var ra,dec:double;
+    ok:boolean;
+begin
+ra:=sc.cfgsc.FindRA;
+dec:=sc.cfgsc.FindDec;
+if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+Ftelescope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+end;
+
+procedure Tf_chart.AbortSlewPlugin(Sender: TObject);
+begin
+Ftelescope.ScopeShow;
+end;
+
+procedure Tf_chart.SyncPlugin(Sender: TObject);
+var ra,dec:double;
+begin
+ra:=sc.cfgsc.FindRA;
+dec:=sc.cfgsc.FindDec;
+if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+Ftelescope.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
+end;
+
+procedure Tf_chart.TelescopeTimerTimer(Sender: TObject);
+var ra,dec:double;
+    ok: boolean;
+begin
+try
+TelescopeTimer.Enabled:=false;
+if Ftelescope.scopelibok then begin
+ Connect1.checked:=Ftelescope.ScopeConnected;
+ if Connect1.checked then begin
+   Ftelescope.ScopeGetRaDec(ra,dec,ok);
+   if ok then begin
+      ra:=ra*15*deg2rad;
+      dec:=dec*deg2rad;
+      precession(jd2000,sc.cfgsc.JDChart,ra,dec);
+      if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
+      TelescopeTimer.Interval:=500;
+      TelescopeTimer.Enabled:=true;
+   end;
+ end else begin
+   TelescopeTimer.Interval:=2000;
+   TelescopeTimer.Enabled:=true;
+   if sc.cfgsc.ScopeMark then begin
+      sc.cfgsc.ScopeMark:=false;
+      Refresh;
+   end;
+ end;
+end else begin
+   Connect1.checked:=false;
+   TelescopeTimer.Enabled:=false;
+   if sc.cfgsc.ScopeMark then begin
+      sc.cfgsc.ScopeMark:=false;
+      Refresh;
+   end;
+end;
+if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
+except
+ TelescopeTimer.Enabled:=false;
+ Connect1.checked:=false;
+end;
+end;
+
+// end of windows vcl specific code
+
 
 end.
 

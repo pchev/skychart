@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_catalog, cu_planet, u_constant, u_util, blcksock, Winsock,
+uses cu_catalog, cu_planet, cu_telescope, u_constant, u_util, blcksock, Winsock,
   Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, Messages, ExtCtrls, ComCtrls, StdActns,
-  ActnList, ToolWin, ImgList, IniFiles, Spin;
+  ActnList, ToolWin, ImgList, IniFiles, Spin, DdeMan;
 
 type
   TTCPThrd = class(TThread)
@@ -214,6 +214,23 @@ type
     listobj: TAction;
     ToolButton40: TToolButton;
     FilePrintSetup1: TAction;
+    TConnect: TToolButton;
+    TSlew: TToolButton;
+    TSync: TToolButton;
+    TelescopeConnect: TAction;
+    TelescopeSlew: TAction;
+    TelescopeSync: TAction;
+    MoreStar: TAction;
+    LessStar: TAction;
+    MoreNeb: TAction;
+    LessNeb: TAction;
+    MagPanel: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    DdeData: TDdeServerItem;
+    DdeSkyChart: TDdeServerConv;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -267,6 +284,16 @@ type
     procedure TimeIncExecute(Sender: TObject);
     procedure listobjExecute(Sender: TObject);
     procedure FilePrintSetup1Execute(Sender: TObject);
+    procedure TelescopeConnectExecute(Sender: TObject);
+    procedure TelescopeSlewExecute(Sender: TObject);
+    procedure TelescopeSyncExecute(Sender: TObject);
+    procedure LessNebExecute(Sender: TObject);
+    procedure LessStarExecute(Sender: TObject);
+    procedure MoreNebExecute(Sender: TObject);
+    procedure MoreStarExecute(Sender: TObject);
+    procedure DdeDataPokeData(Sender: TObject);
+    procedure DdeSkyChartClose(Sender: TObject);
+    procedure DdeSkyChartOpen(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
@@ -279,8 +306,13 @@ type
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
     planet  : Tplanet;
+    telescope: Ttelescope;
     serverinfo,topmsg : string;
     TCPDaemon: TTCPDaemon;
+    DdeInfo : TstringList;
+    Dde_active_chart : string;
+    DdeOpen : boolean;
+    DdeEnqueue: boolean;
     procedure Init;
     procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
@@ -293,16 +325,16 @@ type
     procedure SetLang;
     Procedure InitFonts;
     Procedure ActivateConfig;
-    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true);
+    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string);
-    procedure updatebtn(fx,fy:integer);
+    procedure updatebtn(fx,fy:integer;tc:boolean;sender:TObject);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
     Function ListChart:string;
     Function SelectChart(cname:string):string;
     function ExecuteCmd(cname:string; arg:Tstringlist):string;
-    procedure SendInfo(origin,str:string);
+    procedure SendInfo(Sender: TObject; origin,str:string);
     function GenericSearch(cname,Num:string):boolean;
     procedure StartServer;
     procedure StopServer;
@@ -329,7 +361,7 @@ implementation
 {$R *.dfm}
 {$R cursbmp.res}
 
-uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection, pu_printsetup, MyDB ;
+uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection, pu_printsetup, passql, pasmysql ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here
@@ -362,6 +394,45 @@ procedure Tf_main.topmessageDrawItem(Sender: TObject; ACanvas: TCanvas;
 begin
 // draw the message in the menu bar, avoiding to extent the menu on the next line
 ACanvas.TextOut(Arect.left,Arect.top+2,topmsg);
+end;
+
+// DDE server, windows only 
+procedure Tf_main.DdeDataPokeData(Sender: TObject);
+var cmd : Tstringlist;
+    cmdresult:string;
+    i: integer;
+begin
+while DDEenqueue do application.processmessages;
+try
+DdeEnqueue:=true;
+cmd:=TStringlist.create;
+splitarg(DdeData.text,' ',cmd);
+for i:=cmd.count to MaxCmdArg do cmd.add('');
+cmdresult:=ExecuteCmd(Dde_active_chart,cmd);
+if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then Dde_active_chart:=cmd[1];
+if (cmdresult=msgOK) then DdeInfo[0]:=formatdatetime('c',now)+' ACK'
+                     else DdeInfo[0]:=formatdatetime('c',now)+' NAK';
+DdeInfo[2]:=cmdresult;
+DdeInfo[1]:='';
+DdeInfo[3]:='';
+DdeInfo[4]:='';
+DdeData.Lines:=DdeInfo;
+finally
+DdeEnqueue:=false;
+cmd.Free;
+end;
+end;
+
+procedure Tf_main.DdeSkyChartOpen(Sender: TObject);
+begin
+Dde_active_chart:='Chart_1';
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do Dde_active_chart:=caption;
+DDeOpen:=true;
+end;
+
+procedure Tf_main.DdeSkyChartClose(Sender: TObject);
+begin
+DDeOpen:=false;
 end;
 
 // end of windows vcl specific code:

@@ -38,8 +38,8 @@ const MaxColor = 32;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid
      TSkycolor = array[1..7]of Tcolor;
 
-const cdcversion = 'Version 3 alpha 0.0.5';
-      cdcver     = '3.0.0.5';
+const cdcversion = 'Version 3 alpha 0.0.6';
+      cdcver     = '3.0.0.6';
       MaxSim = 100 ;
       MaxComet = 200;
       MaxAsteroid = 500;
@@ -48,6 +48,7 @@ const cdcversion = 'Version 3 alpha 0.0.5';
       MaxWindow = 10;  // maximum number of chart window
       maxlabels = 300; //maximum number of label to a chart
       maxmodlabels = 500; //maximum number of modified labels before older one are replaced
+      MaxCircle = 100;
       crRetic = 5;
       jd2000 =2451545.0 ;
       jd1950 =2433282.4235;
@@ -65,7 +66,7 @@ const cdcversion = 'Version 3 alpha 0.0.5';
       secarc = deg2rad/3600;
       musec  = deg2rad/3600/1000000; // 1 microarcsec for rounding test
       abek = secarc*20.49552;  // aberration constant
-      FovMin = 5*secarc;  // 5"
+      FovMin = 2*secarc;  // 2"
       FovMax = pi2;
       DefaultPrtRes = 300;
       //                          0         1                                       5                                                 10                                                15                                                20                                                25                                                30                  32
@@ -102,10 +103,11 @@ const cdcversion = 'Version 3 alpha 0.0.5';
       f2='0.00';
       f5='0.00000';
       f6='0.000000';
+      dateiso='yyyy"-"mm"-"dd"T"hh":"nn":"ss';
       labspacing=10;
       numlabtype=7;
       numfont=7;
-      NumLlabel = 100;
+      NumLlabel = 106;
       NumSimObject = 13;
       MaxField = 10;
       Equat = 0;
@@ -335,11 +337,11 @@ type
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
-                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum : Double;
-                StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,ConstFullLabel : boolean;
+                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec : Double;
+                StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,ConstFullLabel,ScopeMark,ScopeLock : boolean;
                 EquinoxName,EquinoxDate,TrackName,FindName,FindDesc,FindNote : string;
                 PlanetLst : Tplanetlst;
-                AsteroidNb,CometNb,AsteroidLstSize,CometLstSize: integer;
+                AsteroidNb,CometNb,AsteroidLstSize,CometLstSize,NumCircle: integer;
                 AsteroidLst: Tasteroidlst;
                 CometLst: Tcometlst;
                 AsteroidName: TasteroidName;
@@ -349,6 +351,13 @@ type
                 modlabels: array[1..maxmodlabels] of Tmodlabel;
                 LabelMagDiff : array[1..numlabtype] of double;
                 ShowLabel : array[1..numlabtype] of boolean;
+                circle : array [1..10,1..3] of single; // radius, rotation, offset
+                circleok : array [1..10] of boolean; circlelbl : array [1..10] of string;
+                rectangle : array [1..10,1..4] of single; // width, height, rotation, offset
+                rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
+                CircleLst : array[0..MaxCircle,1..2] of double; 
+                IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
+                IndiAutostart,ShowCircle,IndiTelescope: boolean;
                 end;
      conf_plot = record
                 color : Starcolarray;
@@ -416,7 +425,7 @@ type double8 = array[1..8] of double;
 Var  Appdir, Configfile: string;         // pseudo-constant only here
      ldeg,lmin,lsec : string;
 {$ifdef linux}
-     tracefile:string ='~/cdc_trace.txt';
+     tracefile:string =''; // to stdout
 {$endif}
 {$ifdef mswindows}
      tracefile:string ='cdc_trace.txt';
@@ -431,12 +440,14 @@ const
      htms_f        = '</font>';
      html_b        = '<b>';
      htms_b        = '</b>';
-     html_h2       = '<h2>';
-     htms_h2       = '</h2>';
+     html_h2       = '<font size="+2"><b>';
+     htms_h2       = '</b></font><br>';
      html_p        = '<p>';
      htms_p        = '</p>';
      html_br       = '<br>';
      html_sp       = '&nbsp;';
+     html_pre      = '<pre>';
+     htms_pre      = '</pre>';
 {$endif}
 {$ifdef mswindows}
 // D6 Personal as no html viewer, so using RTF instead
@@ -452,6 +463,8 @@ const
      htms_p        = '';
      html_br       = '\line ';
      html_sp       = ' ';
+     html_pre      = '\pard\f2\fs18\par ';
+     htms_pre      = '\pard\f0\fs18\par ';
 {$endif}
 
 const msgTimeout='Timeout!';
@@ -461,10 +474,10 @@ const msgTimeout='Timeout!';
 
       msgBye='Bye!';
 
-// Main Commands
 const
      MaxCmdArg = 10;
-     numcmdmain = 8;
+// Main Commands, excuted form main form
+     numcmdmain = 11;
      maincmdlist: array[1..numcmdmain,1..2] of string=(
      ('NEWCHART','1'),
      ('CLOSECHART','2'),
@@ -473,12 +486,14 @@ const
      ('SEARCH','5'),
      ('GETMSGBOX','6'),
      ('GETCOORBOX','7'),
-     ('GETINFOBOX','8')
+     ('GETINFOBOX','8'),
+     ('FIND' ,'9'),
+     ('SAVE' ,'10'),
+     ('LOAD' ,'11')
      );
 
 // Chart Commands
-const
-     numcmd = 54;
+     numcmd = 79;
      cmdlist: array[1..numcmd,1..2] of string=(
      ('ZOOM+','1'),
      ('ZOOM-','2'),
@@ -533,8 +548,46 @@ const
      ('GETOBS','51'),
      ('SETDATE','52'),         // yyyy-mm-ddThh:mm:ss
      ('SETTZ','53'),           // 0.0
-     ('GETTZ','54')
+     ('GETTZ','54'),
+     // V2.7 compatibility DDE command
+     ('MOVE' ,'55'),           // obsolete, RA: 00h00m00.00s DEC:+00°00'00.0" FOV:+00°00'00"
+     ('DATE' ,'52'),           // obsolete, same as SETDATE
+     ('OBSL' ,'30'),           // obsolete, same as SETOBS
+     ('RFSH' ,'39'),           // obsolete, same as REDRAW
+     ('PDSS' ,'56'),
+     ('SBMP' ,'57'),           // obsolete, use SAVEIMG
+     ('SGIF' ,'58'),           // obsolete, use SAVEIMG
+     ('SJPG' ,'59'),           // obsolete, use SAVEIMG
+     ('IDXY' ,'60'),           // X:pixelx Y:pixely
+     ('GOXY' ,'61'),           // X:pixelx Y:pixely
+     ('ZOM+' ,'1'),            // obsolete, same as ZOOM+
+     ('ZOM-' ,'2'),            // obsolete, same as ZOOM-
+     ('STA+' ,'62'),
+     ('STA-' ,'63'),
+     ('NEB+' ,'64'),
+     ('NEB-' ,'65'),
+     ('GREQ' ,'66'),           // obsolete, use SETEQGRID
+     ('GRAZ' ,'67'),           // obsolete, use SETGRID
+     ('GRNM' ,'68'),           // obsolete, use SETGRIDNUM
+     ('CONL' ,'69'),           // obsolete, use SETCONSTLINE
+     ('CONB' ,'70'),           // obsolete, use SETCONSTBOUNDARY
+     ('EQAZ' ,'71'),            // obsolete, use SETPROJ
+     // end V2.7 compatibility DDE command
+     ('SETGRIDNUM','77'),      // ON/OFF
+     ('SETCONSTLINE','78'),    // ON/OFF
+     ('SETCONSTBOUNDARY','79') // ON/OFF
      );
+
+// INDI Telescope driver
+const
+      NumIndiDriver=6;
+      IndiDriverLst: array[0..NumIndiDriver,1..2] of string =(('Other',''),
+                  ('LX200 Generic','lx200generic'),
+                  ('LX200 Classic','lx200classic'),
+                  ('LX200 GPS','lx200gps'),
+                  ('LX200 Autostar','lx200autostar'),
+                  ('LX200 16','lx200_16'),
+                  ('Celestron GPS','celestrongps'));
 
 // MySQL Table structure
 const

@@ -40,7 +40,8 @@ uses
   cu_planet in 'cu_planet.pas',
   fu_detail in 'fu_detail.pas' {f_detail},
   fu_info in 'fu_info.pas' {f_info},
-  fu_printsetup in 'fu_printsetup.pas' {f_printsetup};
+  fu_printsetup in 'fu_printsetup.pas' {f_printsetup},
+  cu_indiclient in 'cu_indiclient.pas';
 
 {$R *.res}
 
@@ -48,6 +49,7 @@ begin
   Application.Initialize;
   Application.CreateForm(Tf_main, f_main);
   Application.CreateForm(Tf_about, f_about);
+  f_about.ShowTimer:=true; f_about.Show;
   Application.CreateForm(Tf_directory, f_directory);
   Application.CreateForm(Tf_detail, f_detail);
   Application.CreateForm(Tf_info, f_info);

@@ -38,7 +38,7 @@ OutputObjs=0
 ConsoleApp=1
 DebugInfo=0
 RemoteSymbols=0
-ResourceReserve=4194304
+ResourceReserve=8388608
 ImageBase=4194304
 ExeDescription=
 DynamicLoader=/lib/ld-linux.so.2
@@ -48,7 +48,7 @@ OutputDir=/home/cdc
 UnitOutputDir=../dcu/
 PackageDLLOutputDir=
 PackageDCPOutputDir=
-SearchPath=library/catalog:component/enhedits:component/mydb:component/synapse/source/lib:component/zoomimage
+SearchPath=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage
 Packages=rtl:visualclx
 Conditionals=
 DebugSourceDirs=
@@ -58,15 +58,16 @@ UsePackages=0
 RunParams=-ns
 HostApplication=
 Launcher=/usr/X11R6/bin/xterm -T KylixDebuggerOutput -e bash -i -c %debuggee%
-UseLauncher=0
+UseLauncher=1
 DebugCWD=
 
 [HistoryLists\hlSearchPath]
-Count=4
-Item0=library/catalog:component/enhedits:component/mydb:component/synapse/source/lib:component/zoomimage
-Item1=library/catalog:component/enhedits:component/mydb:component/synapse:component/zoomimage
-Item2=library/catalog:component/enhedits:component/foldrdg:component/mydb:component/synapse:component/zoomimage
-Item3=library/catalog
+Count=5
+Item0=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage
+Item1=library/catalog:component/enhedits:component/mydb:component/synapse/source/lib:component/zoomimage
+Item2=library/catalog:component/enhedits:component/mydb:component/synapse:component/zoomimage
+Item3=library/catalog:component/enhedits:component/foldrdg:component/mydb:component/synapse:component/zoomimage
+Item4=library/catalog
 
 [HistoryLists\hlUnitOutputDirectory]
 Count=1
