@@ -77,7 +77,7 @@ object f_config: Tf_config
     Top = 0
     Width = 474
     Height = 441
-    ActivePage = p_list
+    ActivePage = p_observatory
     TabOrder = 1
     OnChange = PageControl1Change
     object p_time: TTabSheet
@@ -1389,6 +1389,15 @@ object f_config: Tf_config
         Caption = 'Observatory Database'
         TabOrder = 11
         OnEnter = obsnameMouseEnter
+        object dbreado: TPanel
+          Left = 248
+          Top = 48
+          Width = 192
+          Height = 27
+          Caption = 'Database cannot be modified'
+          TabOrder = 7
+          Visible = False
+        end
         object citylist: TComboBox
           Left = 8
           Top = 48

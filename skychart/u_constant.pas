@@ -38,8 +38,8 @@ const MaxColor = 19;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon
      TSkycolor = array[1..7]of Tcolor;
 
-const version = 'Version 3 alpha 0.0.3';
-      ver     = '3.0.0.3';
+const version = 'Version 3 alpha 0.0.4';
+      ver     = '3.0.0.4';
       MaxSim = 100 ;
       MaxComet = 500;
       MaxAsteroid = 500;
@@ -376,6 +376,12 @@ type double8 = array[1..8] of double;
 
 Var  Appdir, Configfile: string;         // pseudo-constant only here
      ldeg,lmin,lsec : string;
+{$ifdef linux}
+     tracefile:string ='~/cdc_trace.txt';
+{$endif}
+{$ifdef mswindows}
+     tracefile:string ='cdc_trace.txt';
+{$endif}
 
 // Text formating constant
 const

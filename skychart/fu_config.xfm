@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 224
-  Top = 227
+  Left = 318
+  Top = 54
   Width = 639
   Height = 480
   HorzScrollBar.Range = 626
@@ -25,7 +25,7 @@ object f_config: Tf_config
     Top = 0
     Width = 474
     Height = 433
-    ActivePage = TabSheet1
+    ActivePage = p_observatory
     Style = tsNoTabs
     TabOrder = 0
     OnChange = PageControl1Change
@@ -742,6 +742,15 @@ object f_config: Tf_config
         Caption = 'Observatory Database'
         TabOrder = 4
         OnMouseEnter = obsnameMouseEnter
+        object dbreado: TPanel
+          Left = 248
+          Top = 48
+          Width = 192
+          Height = 25
+          Caption = 'Database cannot be modified'
+          TabOrder = 7
+          Visible = False
+        end
         object citylist: TComboBox
           Left = 8
           Top = 48
@@ -1597,7 +1606,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label97: TLabel
@@ -1610,7 +1620,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label98: TLabel
@@ -1623,7 +1634,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label99: TLabel
@@ -1636,7 +1648,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label100: TLabel
@@ -1649,7 +1662,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label101: TLabel
@@ -1662,7 +1676,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label102: TLabel
@@ -1675,7 +1690,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label103: TLabel
@@ -1688,7 +1704,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label104: TLabel
@@ -1701,7 +1718,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label105: TLabel
@@ -1714,7 +1732,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label106: TLabel
@@ -1742,7 +1761,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object fw1: TFloatEdit
@@ -1948,7 +1968,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object fw4b: TFloatEdit
@@ -2020,7 +2041,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp2: TLabel
@@ -2033,7 +2055,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp3: TLabel
@@ -2046,7 +2069,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp4: TLabel
@@ -2059,7 +2083,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label149: TLabel
@@ -2081,7 +2106,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp5: TLabel
@@ -2094,7 +2120,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp6: TLabel
@@ -2107,7 +2134,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp7: TLabel
@@ -2120,7 +2148,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp8: TLabel
@@ -2133,7 +2162,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp9: TLabel
@@ -2146,7 +2176,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Labelp10: TLabel
@@ -2159,7 +2190,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label171: TLabel
@@ -3090,7 +3122,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label137: TLabel
@@ -3103,7 +3136,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label147: TLabel
@@ -3116,7 +3150,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label148: TLabel
@@ -3129,7 +3164,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label150: TLabel
@@ -3150,7 +3186,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label155: TLabel
@@ -3163,7 +3200,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label156: TLabel
@@ -3176,7 +3214,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label157: TLabel
@@ -3189,7 +3228,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label169: TLabel
@@ -3202,7 +3242,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label170: TLabel
@@ -3215,7 +3256,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label174: TLabel
@@ -3228,7 +3270,8 @@ object f_config: Tf_config
         Font.Height = 13
         Font.Name = 'MS Sans Serif'
         Font.Pitch = fpVariable
-        Font.Style = [fsBold]
+        Font.Style = []
+        Font.Weight = 0
         ParentFont = False
       end
       object Label175: TLabel
@@ -7866,6 +7909,25 @@ object f_config: Tf_config
         Width = 71
         Height = 18
         Caption = 'System Setting'
+      end
+      object RadioGroup1: TRadioGroup
+        Left = 8
+        Top = 32
+        Width = 433
+        Height = 121
+        Items.Strings = (
+          'System Default'
+          'Motif'
+          'Motif+'
+          'CDE'
+          'SGI'
+          'Platinum'
+          'Windows')
+        Caption = 'Style'
+        Columns = 4
+        ItemIndex = 0
+        TabOrder = 1
+        OnClick = RadioGroup1Click
       end
     end
     object p_server: TTabSheet

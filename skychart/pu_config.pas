@@ -667,6 +667,7 @@ type
     listpla: TCheckBox;
     listvar: TCheckBox;
     listdbl: TCheckBox;
+    dbreado: TPanel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -869,7 +870,7 @@ const b=' ';
 
 var
    SetDirectory : function(dir:pchar): integer; stdcall;
-   ReadCountryFile: function (country:pchar; var City: PCities): integer; stdcall;
+   ReadCountryFile: function (country:pchar; var City: PCities; var cfile:array of char): integer; stdcall;
    AddCity: function(City: PCity): integer; stdcall;
    ModifyCity: function(index: integer; City: PCity): integer; stdcall;
    RemoveCity: function(index: integer; City: PCity): integer; stdcall;
