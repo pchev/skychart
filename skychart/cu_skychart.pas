@@ -665,7 +665,7 @@ if Fcatalog.OpenNeb then
       Fplot.PlotGalaxie(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit);
    end else
       Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype);
-   if rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4] then
+   if rec.neb.messierobject or (rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then
       SetLabel(lid,xx,yy,round(abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit*rec.neb.dim1/2),2,4,rec.neb.id);
  end;
 end;
