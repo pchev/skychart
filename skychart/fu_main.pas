@@ -262,8 +262,6 @@ type
     procedure ListObjExecute(Sender: TObject);
     procedure quicksearchKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure changeprojMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
@@ -294,9 +292,6 @@ type
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string);
     Procedure UpdateBtn(fx,fy:integer);
-    Procedure LoadConstL(fname:string);
-    Procedure LoadConstB(fname:string);
-    Procedure LoadHorizon(fname:string);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
     Function ListChart:string;
@@ -329,7 +324,9 @@ implementation
 
 {$R *.xfm}
 
-uses fu_detail, fu_chart, fu_about, fu_config, fu_info, u_projection, MyDB ;
+uses fu_detail, fu_chart, fu_about, fu_config, fu_info, u_projection, MyDB,
+     LibcExec,  // libc exec bug workaround by Andreas Hausladen
+     fu_printsetup ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here
@@ -341,11 +338,6 @@ uses fu_detail, fu_chart, fu_about, fu_config, fu_info, u_projection, MyDB ;
 
 
 // Specific Linux CLX code:
-
-procedure Tf_main.FilePrintSetup1Execute(Sender: TObject);
-begin
-Printer.executesetup;
-end;
 
 procedure Tf_main.ToolBar1MouseEnter(Sender: TObject);
 

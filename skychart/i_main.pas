@@ -116,6 +116,7 @@ c2.ObsCountry := c1.ObsCountry ;
 c2.DrawPMyear := c1.DrawPMyear ;
 c2.PMon := c1.PMon ;
 c2.DrawPMon := c1.DrawPMon ;
+c2.ApparentPos := c1.ApparentPos;
 for i:=0 to 10 do c2.projname[i] := c1.projname[i];
 c2.Simnb := c1.Simnb ;
 c2.SimLine := c1.SimLine ;
@@ -134,6 +135,8 @@ c2.ShowComet := c1.ShowComet ;
 c2.CommagMax := c1.CommagMax;
 c2.CommagDiff := c1.CommagDiff;
 c2.ComSymbol := c1.ComSymbol;
+c2.MagLabel := c1.MagLabel;
+c2.ConstFullLabel := c1.ConstFullLabel;
 c2.GRSlongitude := c1.GRSlongitude ;
 c2.ShowEarthShadow := c1.ShowEarthShadow ;
 c2.ProjPole := c1.ProjPole ;
@@ -273,9 +276,10 @@ begin
 try
  SetDefault;
  ReadDefault;
- LoadConstL(cfgm.ConstLfile);
- LoadConstB(cfgm.ConstBfile);
- LoadHorizon(cfgm.horizonfile);
+ catalog.LoadConstellation(cfgm.Constellationfile);
+ catalog.LoadConstL(cfgm.ConstLfile);
+ catalog.LoadConstB(cfgm.ConstBfile);
+ catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
  SetLang;
  InitFonts;
  SetLpanel1('');
@@ -315,7 +319,9 @@ end;
 
 procedure Tf_main.Print1Execute(Sender: TObject);
 begin
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do PrintChart(cfgm.printcolor,cfgm.printlandscape);
+if ActiveMdiChild is Tf_chart then
+   with ActiveMdiChild as Tf_chart do
+      PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath);
 end;
 
 procedure Tf_main.UndoExecute(Sender: TObject);
@@ -661,9 +667,10 @@ begin
     def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
     InitFonts;
-    LoadConstL(cfgm.ConstLfile);
-    LoadConstB(cfgm.ConstBfile);
-    LoadHorizon(cfgm.horizonfile);
+    catalog.LoadConstellation(cfgm.Constellationfile);
+    catalog.LoadConstL(cfgm.ConstLfile);
+    catalog.LoadConstB(cfgm.ConstBfile);
+    catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
     ConnectDB;
     if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
@@ -704,6 +711,7 @@ Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true);
 begin
 LPanels1.width:=PPanels1.ClientWidth;
 LPanels1.Caption:=stringreplace(txt,tab,' ',[rfReplaceall]);
+LPanels1.refresh;
 if sendmsg then SendInfo(origin,txt);
 if traceon then writetrace(txt);
 end;
@@ -711,6 +719,7 @@ end;
 Procedure Tf_main.SetLPanel0(txt:string);
 begin
 LPanels0.Caption:=txt;
+LPanels0.refresh;
 end;
 
 Procedure Tf_main.SetTopMessage(txt:string);
@@ -742,9 +751,13 @@ cfgm.MaxChildID:=0;
 cfgm.language:='UK';
 cfgm.prtname:='';
 cfgm.configpage:=0;
-cfgm.PrinterResolution:=300;
-cfgm.PrintColor:=true;
+cfgm.PrinterResolution:=150;
+cfgm.PrintColor:=0;
 cfgm.PrintLandscape:=true;
+cfgm.PrintMethod:=0;
+cfgm.PrintCmd1:=DefaultPrintCmd1;
+cfgm.PrintCmd2:=DefaultPrintCmd2;
+cfgm.PrintTmpPath:=expandfilename(DefaultTmpPath);
 cfgm.maximized:=true;
 cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
@@ -763,7 +776,7 @@ for i:=1 to numfont do begin
    def_cfgplot.FontBold[i]:=false;
    def_cfgplot.FontItalic[i]:=false;
 end;
-def_cfgplot.FontName[7]:='Symbol';
+def_cfgplot.FontName[7]:=DefaultFontSymbol;
 for i:=1 to numlabtype do begin
    def_cfgplot.LabelColor[i]:=clWhite;
    def_cfgplot.LabelSize[i]:=DefaultFontSize;
@@ -771,6 +784,9 @@ for i:=1 to numlabtype do begin
    def_cfgsc.ShowLabel[i]:=true;
 end;
 def_cfgsc.LabelMagDiff[5]:=2;
+def_cfgplot.LabelColor[6]:=clYellow;
+def_cfgplot.LabelSize[6]:=12;
+cfgm.Constellationfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constlabel.cla';
 cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'DefaultConstL.cln';
 cfgm.ConstBfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constb.cby';
 cfgm.EarthMapFile:=slash(appdir)+'data'+Pathdelim+'earthmap'+Pathdelim+'earthmap1k.jpg';
@@ -827,6 +843,7 @@ def_cfgsc.HorizonMax:=0;
 def_cfgsc.PMon:=false;
 def_cfgsc.DrawPMon:=false;
 def_cfgsc.DrawPMyear:=1000;
+def_cfgsc.ApparentPos:=false;
 def_cfgsc.ShowEqGrid:=false;
 def_cfgsc.ShowGrid:=true;
 def_cfgsc.ShowGridNum:=true;
@@ -851,7 +868,9 @@ def_cfgsc.AstmagDiff:=6;
 def_cfgsc.ShowComet:=true;
 def_cfgsc.ComSymbol:=1;
 def_cfgsc.CommagMax:=18;
-def_cfgsc.CommagDiff:=6;
+def_cfgsc.CommagDiff:=4;
+def_cfgsc.MagLabel:=false;
+def_cfgsc.ConstFullLabel:=true;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
 def_cfgsc.GRSlongitude:=84;
@@ -1133,6 +1152,7 @@ csc.FlipX:=ReadInteger(section,'FlipX',csc.FlipX);
 csc.FlipY:=ReadInteger(section,'FlipY',csc.FlipY);
 csc.PMon:=ReadBool(section,'PMon',csc.PMon);
 csc.DrawPMon:=ReadBool(section,'DrawPMon',csc.DrawPMon);
+csc.ApparentPos:=ReadBool(section,'ApparentPos',csc.ApparentPos);
 csc.DrawPMyear:=ReadInteger(section,'DrawPMyear',csc.DrawPMyear);
 csc.horizonopaque:=ReadBool(section,'horizonopaque',csc.horizonopaque);
 csc.ShowEqGrid:=ReadBool(section,'ShowEqGrid',csc.ShowEqGrid);
@@ -1153,6 +1173,8 @@ csc.AstmagDiff:=ReadFloat(section,'AstmagDiff',csc.AstmagDiff);
 csc.ComSymbol:=ReadInteger(section,'ComSymbol',csc.ComSymbol);
 csc.CommagMax:=ReadFloat(section,'CommagMax',csc.CommagMax);
 csc.CommagDiff:=ReadFloat(section,'CommagDiff',csc.CommagDiff);
+csc.MagLabel:=ReadBool(section,'MagLabel',csc.MagLabel);
+csc.ConstFullLabel:=ReadBool(section,'ConstFullLabel',csc.ConstFullLabel);
 csc.PlanetParalaxe:=ReadBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
 csc.ShowEarthShadow:=ReadBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
 csc.GRSlongitude:=ReadFloat(section,'GRSlongitude',csc.GRSlongitude);
@@ -1217,10 +1239,15 @@ SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.C
 cfgm.language:=ReadString(section,'language',cfgm.language);
 cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
 cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterResolution);
-cfgm.PrintColor:=ReadBool(section,'PrintColor',cfgm.PrintColor);
+cfgm.PrintColor:=ReadInteger(section,'PrintColor',cfgm.PrintColor);
 cfgm.PrintLandscape:=ReadBool(section,'PrintLandscape',cfgm.PrintLandscape);
+cfgm.PrintMethod:=ReadInteger(section,'PrintMethod',cfgm.PrintMethod);
+cfgm.PrintCmd1:=ReadString(section,'PrintCmd1',cfgm.PrintCmd1);
+cfgm.PrintCmd2:=ReadString(section,'PrintCmd2',cfgm.PrintCmd2);
+cfgm.PrintTmpPath:=ReadString(section,'PrintTmpPath',cfgm.PrintTmpPath);
 if (ReadBool(section,'WinMaximize',false)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
+cfgm.Constellationfile:=ReadString(section,'Constellationfile',cfgm.Constellationfile);
 cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
 cfgm.ConstBfile:=ReadString(section,'ConstBfile',cfgm.ConstBfile);
 cfgm.EarthMapFile:=ReadString(section,'EarthMapFile',cfgm.EarthMapFile);
@@ -1384,6 +1411,7 @@ WriteInteger(section,'FlipX',def_cfgsc.FlipX);
 WriteInteger(section,'FlipY',def_cfgsc.FlipY);
 WriteBool(section,'PMon',def_cfgsc.PMon);
 WriteBool(section,'DrawPMon',def_cfgsc.DrawPMon);
+WriteBool(section,'ApparentPos',def_cfgsc.ApparentPos);
 WriteInteger(section,'DrawPMyear',def_cfgsc.DrawPMyear);
 WriteBool(section,'horizonopaque',def_cfgsc.horizonopaque);
 WriteBool(section,'ShowEqGrid',def_cfgsc.ShowEqGrid);
@@ -1404,6 +1432,8 @@ WriteFloat(section,'AstmagDiff',def_cfgsc.AstmagDiff);
 WriteInteger(section,'ComSymbol',def_cfgsc.ComSymbol);
 WriteFloat(section,'CommagMax',def_cfgsc.CommagMax);
 WriteFloat(section,'CommagDiff',def_cfgsc.CommagDiff);
+WriteBool(section,'MagLabel',def_cfgsc.MagLabel);
+WriteBool(section,'ConstFullLabel',def_cfgsc.ConstFullLabel);
 WriteBool(section,'PlanetParalaxe',def_cfgsc.PlanetParalaxe);
 WriteBool(section,'ShowEarthShadow',def_cfgsc.ShowEarthShadow);
 WriteFloat(section,'GRSlongitude',def_cfgsc.GRSlongitude);
@@ -1469,8 +1499,12 @@ section:='main';
 WriteString(section,'language',cfgm.language);
 WriteString(section,'prtname',cfgm.prtname);
 WriteInteger(section,'PrinterResolution',cfgm.PrinterResolution);
-WriteBool(section,'PrintColor',cfgm.PrintColor);
+WriteInteger(section,'PrintColor',cfgm.PrintColor);
 WriteBool(section,'PrintLandscape',cfgm.PrintLandscape);
+WriteInteger(section,'PrintMethod',cfgm.PrintMethod);
+WriteString(section,'PrintCmd1',cfgm.PrintCmd1);
+WriteString(section,'PrintCmd2',cfgm.PrintCmd2);
+WriteString(section,'PrintTmpPath',cfgm.PrintTmpPath);
 WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 WriteBool(section,'ListStar',catalog.cfgshr.ListStar);
@@ -1479,6 +1513,7 @@ WriteBool(section,'ListVar',catalog.cfgshr.ListVar);
 WriteBool(section,'ListDbl',catalog.cfgshr.ListDbl);
 WriteBool(section,'ListPla',catalog.cfgshr.ListPla);
 WriteInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
+WriteString(section,'Constellationfile',cfgm.Constellationfile);
 WriteString(section,'ConstLfile',cfgm.ConstLfile);
 WriteString(section,'ConstBfile',cfgm.ConstBfile);
 WriteString(section,'EarthMapFile',cfgm.EarthMapFile);
@@ -1598,8 +1633,6 @@ if ok then begin
       SetLPanel1(Num+'  Not found in any installed catalog index.');
    end;
 end;
-
-
 
 function Tf_main.GenericSearch(cname,Num:string):boolean;
 var ok,TrackInProgress : Boolean;
@@ -1745,140 +1778,6 @@ begin
           else FlipButtonX.ImageIndex:=16;
   if fy>0 then FlipButtonY.ImageIndex:=17
           else FlipButtonY.ImageIndex:=18;
-end;
-
-Procedure Tf_main.LoadConstL(fname:string);
-var f : textfile;
-    i,n:integer;
-    ra1,ra2,de1,de2:single;
-    txt:string;
-begin
-   if not FileExists(fname) then begin
-      catalog.cfgshr.ConstLNum := 0;
-      setlength(catalog.cfgshr.ConstL,0);
-      exit;
-   end;
-   assignfile(f,fname);
-   try
-   reset(f);
-   n:=0;
-   // first loop to get the size
-   repeat
-     readln(f,txt);
-     inc(n);
-   until eof(f);
-   setlength(catalog.cfgshr.ConstL,n);
-   // read the file now
-   reset(f);
-   for i:=0 to n-1 do begin
-     readln(f,ra1,de1,ra2,de2);
-     catalog.cfgshr.ConstL[i].ra1:=deg2rad*ra1*15;
-     catalog.cfgshr.ConstL[i].de1:=deg2rad*de1;
-     catalog.cfgshr.ConstL[i].ra2:=deg2rad*ra2*15;
-     catalog.cfgshr.ConstL[i].de2:=deg2rad*de2;
-   end;
-   catalog.cfgshr.ConstLNum := n;
-   finally
-   closefile(f);
-   end;
-end;
-
-Procedure Tf_main.LoadConstB(fname:string);
-var
-  f : textfile;
-  i,n:integer;
-  ra,de : Double;
-  constel,curconst:string;
-begin
-   if not FileExists(fname) then begin
-      catalog.cfgshr.ConstBNum := 0;
-      setlength(catalog.cfgshr.ConstB,0);
-      exit;
-   end;
-   assignfile(f,fname);
-   try
-   reset(f);
-   n:=0;
-   // first loop to get the size
-   repeat
-     readln(f,constel);
-     inc(n);
-   until eof(f);
-   setlength(catalog.cfgshr.ConstB,n);
-   // read the file now
-   reset(f);
-   curconst:='';
-   for i:=0 to n-1 do begin
-     readln(f,ra,de,constel);
-     catalog.cfgshr.ConstB[i].ra:=deg2rad*ra*15;
-     catalog.cfgshr.ConstB[i].de:=deg2rad*de;
-     catalog.cfgshr.ConstB[i].newconst:=(constel<>curconst);
-     curconst:=constel;
-   end;
-   catalog.cfgshr.ConstBNum := n;
-   finally
-   closefile(f);
-   end;
-end;
-
-Procedure Tf_main.LoadHorizon(fname:string);
-var de,d0,d1,d2 : single;
-    i,i1,i2 : integer;
-    f : textfile;
-    buf : string;
-begin
-def_cfgsc.HorizonMax:=0;
-for i:=1 to 360 do catalog.cfgshr.horizonlist[i]:=0;
-if fileexists(fname) then begin
-i1:=0;i2:=0;d1:=0;d0:=0;
-try
-assignfile(f,fname);
-reset(f);
-// get first point
-repeat readln(f,buf) until eof(f)or((trim(buf)<>'')and(buf[1]<>'#'));
-if (trim(buf)='')or(buf[1]='#') then exit;
-i1:=strtoint(trim(words(buf,' ',1,1)));
-d1:=strtofloat(trim(words(buf,' ',2,1)));
-if d1>90 then d1:=90;
-if d1<0 then d1:=0;
-if i1<>0 then begin
-   reset(f);
-   i1:=0;
-   d1:=0;
-end;
-i2:=0;
-d0:=d1;
-// process each point
-while (not eof(f))and(i2<359) do begin
-    repeat readln(f,buf) until eof(f)or((trim(buf)<>'')and(buf[1]<>'#'));
-    if (trim(buf)='')or(buf[1]='#') then break;
-    i2:=strtoint(trim(words(buf,' ',1,1)));
-    d2:=strtofloat(trim(words(buf,' ',2,1)));
-    if i2>359 then i2:=359;
-    if i1>=i2 then continue;
-    if d2>90 then d2:=90;
-    if d2<0 then d2:=0;
-    for i := i1 to i2 do begin
-        de:=deg2rad*(d1+(i-i1)*(d2-d1)/(i2-i1));
-        catalog.cfgshr.horizonlist[i+1]:=de;
-        def_cfgsc.HorizonMax:=maxvalue([def_cfgsc.HorizonMax,de]);
-    end;
-    i1:=i2;
-    d1:=d2;
-end;
-finally
-closefile(f);
-// fill last point
-if i2<359 then begin
-    for i:=i1 to 359 do begin
-        de:=deg2rad*(d1+(i-i1)*(d0-d1)/(359-i1));
-        catalog.cfgshr.horizonlist[i+1]:=de;
-        def_cfgsc.HorizonMax:=maxvalue([def_cfgsc.HorizonMax,de]);
-    end;
-end;
-def_cfgsc.horizonlist:=@catalog.cfgshr.horizonlist;
-end;
-end;
 end;
 
 Function Tf_main.NewChart(cname:string):string;
@@ -2195,7 +2094,7 @@ begin
     SetLpanel1('MySQL Library not available. Please install MySQL Client.');
     def_cfgsc.ShowAsteroid:=false;
     def_cfgsc.ShowComet:=false;
- end else begin
+ end else if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
     if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
        SetLpanel1('Try to initialyse MySQL database.');
        OpenDBConfig(self);
@@ -2263,12 +2162,6 @@ for i:=0 to MDIChildCount-1 do
 end;
 end;
 
-procedure Tf_main.changeprojMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if button=mbRight then ChangeProjExecute(Sender);
-end;
-
 procedure Tf_main.ImageSetFocus(Sender: TObject);
 begin
 // to restore focus to the chart that as no text control
@@ -2324,4 +2217,13 @@ end;
 procedure Tf_main.PrintSetup(Sender: TObject);
 begin
 FilePrintSetup1.Execute;
+end;
+
+procedure Tf_main.FilePrintSetup1Execute(Sender: TObject);
+begin
+f_printsetup.cm:=cfgm;
+formpos(f_printsetup,mouse.cursorpos.x,mouse.cursorpos.y);
+if f_printsetup.showmodal=mrOK then begin
+ cfgm:=f_printsetup.cm;
+end;
 end;

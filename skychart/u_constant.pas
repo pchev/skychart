@@ -64,6 +64,7 @@ const cdcversion = 'Version 3 alpha 0.0.5';
       minarc = deg2rad/60;
       secarc = deg2rad/3600;
       musec  = deg2rad/3600/1000000; // 1 microarcsec for rounding test
+      abek = secarc*20.49552;  // aberration constant
       FovMin = 5*secarc;  // 5"
       FovMax = pi2;
       DefaultPrtRes = 300;
@@ -104,7 +105,6 @@ const cdcversion = 'Version 3 alpha 0.0.5';
       labspacing=10;
       numlabtype=7;
       numfont=7;
-      ConstelNum = 88;
       NumLlabel = 100;
       NumSimObject = 13;
       MaxField = 10;
@@ -187,8 +187,12 @@ const cdcversion = 'Version 3 alpha 0.0.5';
 
 {$ifdef linux}
       DefaultFontName='Helvetica';
+      DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts 
       DefaultFontSize=10;
       Defaultconfigfile='~/.cartesduciel.ini';     // to user home directory
+      DefaultPrintCmd1='kghostview';
+      DefaultPrintCmd2='gimp';
+      DefaultTmpPath='~/';
       key_cr = 4100;
       key_plus =43;
       key_minus=45;
@@ -203,9 +207,13 @@ const cdcversion = 'Version 3 alpha 0.0.5';
       bsDialog=fbsDialog;
 {$endif}
 {$ifdef mswindows}
-      DefaultFontName='MS Sans Serif';
+      DefaultFontName='Arial';
+      DefaultFontSymbol='Symbol';
       DefaultFontSize=8;
       Defaultconfigfile='cartesduciel.ini';      // to user profile directory or C:\windows
+      DefaultPrintCmd1='gsview32.exe';
+      DefaultPrintCmd2='mspaint.exe';
+      DefaultTmpPath='C:\temp';
       key_cr   =13;
       key_plus =107;
       key_minus=109;
@@ -227,6 +235,7 @@ type
      TasteroidName = array of array[1..MaxAsteroid,1..2] of string[27];
      double6 = array[1..6] of double;
      Pdouble6 = ^double6;
+     Tconstpos  = record ra,de : single; end;
      Tconstb = record ra,de : single; newconst:boolean; end;
      Tconstl = record ra1,de1,ra2,de2 : single; end;
      TLabelAlign = (laNone,laTop,laBottom,laLeft,laRight,laCenter);
@@ -292,8 +301,9 @@ type
                 EquinoxChart : shortstring;
                 AzNorth : Boolean;
                 llabel: array[1..NumLlabel] of shortstring;
-                ConstelName: array[1..ConstelNum,1..2] of shortstring; // constellation name and three letter abbrev.
-                ConstLnum,ConstBnum:integer;
+                ConstelName: array of array[1..2] of shortstring; // constellation three letter abbrev and name.
+                ConstLnum,ConstBnum,ConstelNum:integer;
+                ConstelPos:  array of Tconstpos;
                 ConstL: array of Tconstl;
                 ConstB : array of Tconstb;
                 horizonlist : Thorizonlist;
@@ -301,7 +311,7 @@ type
                 end;
      conf_skychart = record
                 // chart setting
-                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e : double;
+                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,nutl,nuto,sunl,sunb,abe,abp : double;
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
@@ -316,7 +326,7 @@ type
                 ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay : boolean;
                 CurTime,DT_UT_val,GRSlongitude: double;
-                PMon,DrawPMon : boolean; // use proper motion
+                PMon,DrawPMon,ApparentPos : boolean; // use proper motion
                 LabelOrientation: integer;
                 // working variable
                 HorizonMax,rap2000,dep2000,RefractionOffset : Double;
@@ -326,7 +336,7 @@ type
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum : Double;
-                StarFilter,NebFilter,FindOK,WhiteBg : boolean;
+                StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,ConstFullLabel : boolean;
                 EquinoxName,EquinoxDate,TrackName,FindName,FindDesc,FindNote : string;
                 PlanetLst : Tplanetlst;
                 AsteroidNb,CometNb,AsteroidLstSize,CometLstSize: integer;
@@ -361,12 +371,12 @@ type
                 min_ma : double;
                 end;
      conf_main = record
-                prtname,language,ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
+                prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass : string;
-                PrinterResolution,configpage,autorefreshdelay,MaxChildID,dbport : integer;
-                PrintColor,PrintLandscape :boolean;
+                PrinterResolution,PrintMethod,PrintColor,configpage,autorefreshdelay,MaxChildID,dbport : integer;
+                PrintLandscape :boolean;
                 maximized,updall,AutostartServer,keepalive : boolean;
-                ServerIPaddr,ServerIPport : string;
+                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath : string;
                 end;
 
 // external library

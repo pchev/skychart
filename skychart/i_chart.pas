@@ -194,12 +194,16 @@ if sc<>nil then sc.plot.init(Image1.width,Image1.height);
 Refresh;
 end;
 
-procedure Tf_chart.PrintChart(printcolor,printlandscape:boolean);
+procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string);
 var savecolor: Starcolarray;
     savesplot,savenplot,savepplot,savebgcolor,resol: integer;
     saveskycolor: boolean;
     prtname:string;
-begin
+    prtbmp:Tbitmap;
+    fname:WideString;
+    cmd:string;
+    i:integer;
+ begin
  zoomstep:=0;
  // save current state
  savecolor:=sc.plot.cfgplot.color;
@@ -208,33 +212,111 @@ begin
  savepplot:=sc.plot.cfgplot.plaplot;
  saveskycolor:=sc.plot.cfgplot.autoskycolor;
  savebgcolor:=sc.plot.cfgplot.bgColor;
+ prtbmp:=Tbitmap.create;
 try
- GetPrinterResolution(prtname,resol);
- // force line drawing
- sc.plot.cfgplot.starplot:=0;
- sc.plot.cfgplot.nebplot:=0;
- if sc.plot.cfgplot.plaplot=2 then sc.plot.cfgplot.plaplot:=1;
- // ensure white background
- sc.plot.cfgplot.autoskycolor:=false;
- if printcolor then begin
-   sc.plot.cfgplot.color[0]:=clWhite;
-   sc.plot.cfgplot.color[11]:=clBlack;
- end else begin
-   sc.plot.cfgplot.color:=DfWBColor;
+ screen.cursor:=crHourGlass;
+ if printcolor<>2 then begin
+   // force line drawing
+   sc.plot.cfgplot.starplot:=0;
+   sc.plot.cfgplot.nebplot:=0;
+   if sc.plot.cfgplot.plaplot=2 then sc.plot.cfgplot.plaplot:=1;
+   // ensure white background
+   sc.plot.cfgplot.autoskycolor:=false;
+   if printcolor=0 then begin
+     sc.plot.cfgplot.color[0]:=clWhite;
+     sc.plot.cfgplot.color[11]:=clBlack;
+   end else begin
+     sc.plot.cfgplot.color:=DfWBColor;
+   end;
+   sc.plot.cfgplot.bgColor:=sc.plot.cfgplot.color[0];
  end;
- sc.plot.cfgplot.bgColor:=sc.plot.cfgplot.color[0];
- // set orientation
- if PrintLandscape then Printer.Orientation:=poLandscape
+ Case PrintMethod of
+ 0: begin
+    GetPrinterResolution(prtname,resol);
+    if PrintLandscape then Printer.Orientation:=poLandscape
                    else Printer.Orientation:=poPortrait;
- // print
- Printer.BeginDoc;
- sc.plot.cnv:=Printer.canvas;
- sc.plot.cfgchart.onprinter:=true;
- sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 100]);
- sc.plot.init(Printer.pagewidth,Printer.pageheight);
- sc.Refresh;
- Printer.EndDoc;
+    // print
+    Printer.BeginDoc;
+    sc.plot.cnv:=Printer.canvas;
+    sc.plot.cfgchart.onprinter:=true;
+    sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 75]);
+    sc.plot.init(Printer.pagewidth,Printer.pageheight);
+    sc.Refresh;
+    Printer.EndDoc;
+    end;
+ 1: begin
+    if assigned(Fshowinfo) then Fshowinfo('Create raster chart at '+inttostr(printresol)+' dpi. Please wait...' ,caption);
+    {$ifdef mswindows}prtbmp.pixelformat:=pf24bit;{$endif}
+    {$ifdef linux}prtbmp.pixelformat:=pf32bit;{$endif}
+    if PrintLandscape then begin
+       prtbmp.width:=11*printresol;
+       prtbmp.height:=8*printresol;
+    end else begin
+       prtbmp.width:=8*printresol;
+       prtbmp.height:=11*printresol;
+    end;
+   // draw the chart to the bitmap
+    sc.plot.cnv:=prtbmp.canvas;
+    sc.plot.cfgchart.onprinter:=true;
+    sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 75]);
+    sc.plot.init(prtbmp.width,prtbmp.height);
+    sc.Refresh;
+    // convert the bitmap to Postscript
+   {$ifdef linux}
+      if printcolor=1 then begin
+         fname:=slash(printpath)+'cdcprint.pgm';
+         QPixMap_save(prtbmp.Handle,@fname,PChar('PGM'));
+      end else begin
+         fname:=slash(printpath)+'cdcprint.ppm';
+         QPixMap_save(prtbmp.Handle,@fname,PChar('PPM'));
+      end;
+      cmd:='pnmtops -equalpixels -dpi='+inttostr(printresol)+' -rle '+fname+' >'+changefileext(fname,'.ps');
+    {$endif}
+    {$ifdef mswindows}
+      fname:=slash(printpath)+'cdcprint.bmp';
+      prtbmp.savetofile(fname);
+      //cmd:='bmptopnm '+fname+' | pnmtops -equalpixels -dpi='+inttostr(printresol)+' -rle >'+changefileext(fname,'.ps');
+      cmd:='command.com /C bmptops.bat '+fname+' '+changefileext(fname,'.ps');
+      chdir(slash(appdir)+'plugins\netpbm');
+    {$endif}
+    i:=exec(cmd);
+    chdir(appdir);
+    if i=0 then begin
+       if assigned(Fshowinfo) then Fshowinfo('Send chart to printer.' ,caption);
+       deletefile(fname);
+       execnowait(printcmd1+' '+changefileext(fname,'.ps'));
+    end else showmessage('Print failed, return code='+inttostr(i));
+    end;
+ 2: begin
+    if assigned(Fshowinfo) then Fshowinfo('Create raster chart at '+inttostr(printresol)+' dpi. Please wait...' ,caption);
+    {$ifdef mswindows}prtbmp.pixelformat:=pf24bit;{$endif}
+    {$ifdef linux}prtbmp.pixelformat:=pf32bit;{$endif}
+    if PrintLandscape then begin
+       prtbmp.width:=11*printresol;
+       prtbmp.height:=8*printresol;
+    end else begin
+       prtbmp.width:=8*printresol;
+       prtbmp.height:=11*printresol;
+    end;
+   // draw the chart to the bitmap
+    sc.plot.cnv:=prtbmp.canvas;
+    sc.plot.cfgchart.onprinter:=true;
+    sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 75]);
+    sc.plot.init(prtbmp.width,prtbmp.height);
+    sc.Refresh;
+    // save the bitmap
+    fname:=slash(printpath)+'cdcprint.bmp';
+    prtbmp.savetofile(fname);
+    if printcmd2<>'' then begin
+       if assigned(Fshowinfo) then Fshowinfo('Open the bitmap.' ,caption);
+       execnowait(printcmd2+' '+fname);
+    end;
+ end;
+end;
 finally
+ chdir(appdir);
+ screen.cursor:=crDefault;
+ prtbmp.free;
  // restore state
  sc.plot.cfgplot.color:=savecolor;
  sc.plot.cfgplot.starplot:=savesplot;
@@ -930,9 +1012,9 @@ Function Tf_chart.LongLabelConst(txt : string) : string;
 var i : integer;
 begin
 txt:=uppercase(trim(txt));
-for i:=1 to ConstelNum do begin
-  if txt=UpperCase(sc.catalog.cfgshr.ConstelName[i,2]) then begin
-     txt:=sc.catalog.cfgshr.ConstelName[i,1];
+for i:=1 to sc.catalog.cfgshr.ConstelNum do begin
+  if txt=UpperCase(sc.catalog.cfgshr.ConstelName[i,1]) then begin
+     txt:=sc.catalog.cfgshr.ConstelName[i,2];
      break;
    end;
 end;

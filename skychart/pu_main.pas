@@ -103,11 +103,10 @@ type
     ImageList1: TImageList;
     Print1: TAction;
     Print2: TMenuItem;
-    FilePrintSetup1: TFilePrintSetup;
     starshape: TImage;
     OpenConfig: TAction;
     Configuration1: TMenuItem;
-    Configurerlimpression1: TMenuItem;
+    PrintSetup2: TMenuItem;
     N2: TMenuItem;
     Setup1: TMenuItem;
     HelpContents1: THelpContents;
@@ -214,6 +213,7 @@ type
     ToolButton39: TToolButton;
     listobj: TAction;
     ToolButton40: TToolButton;
+    FilePrintSetup1: TAction;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -266,8 +266,7 @@ type
     procedure TimeResetExecute(Sender: TObject);
     procedure TimeIncExecute(Sender: TObject);
     procedure listobjExecute(Sender: TObject);
-    procedure ChangeprojMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure FilePrintSetup1Execute(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
@@ -298,9 +297,6 @@ type
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string);
     procedure updatebtn(fx,fy:integer);
-    Procedure LoadConstL(fname:string);
-    Procedure LoadConstB(fname:string);
-    Procedure LoadHorizon(fname:string);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
     Function ListChart:string;
@@ -333,7 +329,7 @@ implementation
 {$R *.dfm}
 {$R cursbmp.res}
 
-uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection, MyDB ;
+uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection, pu_printsetup, MyDB ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here
