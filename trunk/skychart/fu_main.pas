@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  Main form for Linux CLX application
 }
 
+
 interface
 
 uses cu_catalog, cu_planet, u_constant, u_util, blcksock, libc,
