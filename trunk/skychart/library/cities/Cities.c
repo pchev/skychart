@@ -306,7 +306,8 @@ static int m_CityModified = 0;
 	static const char* m_Locale = "English_USA.65001";
 #else
 //	static const char* m_Locale = "en_US.utf8";
-	static const char* m_Locale = "en_US.UTF-8";
+//	static const char* m_Locale = "en_US.UTF-8";
+	static const char* m_Locale = "UTF-8";
 #endif
 
 
