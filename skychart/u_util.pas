@@ -44,8 +44,8 @@ function IsNumber(n : string) : boolean;
 function AddColor(c1,c2 : Tcolor):Tcolor;
 function SubColor(c1,c2 : Tcolor):Tcolor;
 function roundF(x:double;n:integer):double;
-Procedure InitDebug;
-Procedure WriteDebug( buf : string);
+Procedure InitTrace;
+Procedure WriteTrace( buf : string);
 procedure Splitarg(buf,sep:string; var arg: TStringList);
 function words(str,sep : string; p,n : integer) : string;
 function InvertI16(X : Word) : SmallInt;
@@ -71,15 +71,15 @@ Function DEToStr4(de: Double) : string;
 Function GetTimeZone : double;
 Procedure FormPos(form : Tform; x,y : integer);
 
-var debugon : boolean;
+var traceon : boolean;
     ldeg,lmin,lsec : string;
 
 
 implementation
 var
   dummy_double : double;
-  debugfile : string;
-  fdebug : textfile;
+  tracefile : string;
+  ftrace : textfile;
 
 Function mm2pi(l,PrinterResolution : single): integer;
 begin
@@ -142,26 +142,26 @@ y:=intpower(10,n);
 result:=round(x*y)/y;
 end;
 
-Procedure InitDebug;
+Procedure InitTrace;
 begin
- debugfile:='trace.txt';
- assignfile(fdebug,debugfile);
- rewrite(fdebug);
- writeln(fdebug,DateTimeToStr(Now)+'  Start trace');
- closefile(fdebug);
+ tracefile:='trace.txt';
+ assignfile(ftrace,tracefile);
+ rewrite(ftrace);
+ writeln(ftrace,DateTimeToStr(Now)+'  Start trace');
+ closefile(ftrace);
 end;
 
-Procedure WriteDebug( buf : string);
+Procedure WriteTrace( buf : string);
 begin
 try
- assignfile(fdebug,debugfile);
- append(fdebug);
- writeln(fdebug,DateTimeToStr(Now)+'  '+buf);
- closefile(fdebug);
+ assignfile(ftrace,tracefile);
+ append(ftrace);
+ writeln(ftrace,DateTimeToStr(Now)+'  '+buf);
+ closefile(ftrace);
 except
 {$I-}
- debugon:=false;
- closefile(fdebug);
+ traceon:=false;
+ closefile(ftrace);
 {$I+}
 end;
 end;
