@@ -198,8 +198,10 @@ var
     ar,de : cardinal;
     ma : longint;
     buf : string;
+    fok:boolean;
 begin
 ok:=true;
+fok:=false;
    repeat
      inc(currec);
      if eof(fcat) or (currec>nrec) then NextRegion(ok);
@@ -215,7 +217,8 @@ ok:=true;
      end;
      de:=InvertI32(cat.de);
      lin.de:=de/360000-90;
-   until (lin.de>demin)and(lin.de<demax);
+     if (lin.de>demin)and(lin.de<demax) then fok:=true;
+   until fok;
    ma:=InvertI32(cat.ma);
    lin.ar:=lin.ar/15;
    lin.s:=trunc(sgn(ma));

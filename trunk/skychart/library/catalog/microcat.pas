@@ -181,8 +181,10 @@ end;
 Procedure ReadMCT(var lin : MCTrec; var ok : boolean);
 var
     cat:CatRec;
+    fok:boolean;
 begin
 ok:=true;
+fok:=false;
    repeat
      inc(currec);
      if eof(fcat) or (currec>nrec) then NextRegion(ok);
@@ -196,7 +198,8 @@ ok:=true;
         continue;
      end;
      lin.de:=cat.de/360000-90;
-   until (lin.de>demin)and(lin.de<demax);
+     if (lin.de>demin)and(lin.de<demax) then fok:=true;
+   until fok;
    lin.ar:=lin.ar/15;
    lin.mb:=(cat.mb/10)-3;
    lin.mr:=(cat.mr/10)-3;
