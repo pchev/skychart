@@ -36,7 +36,8 @@ uses
   cu_catalog in 'cu_catalog.pas',
   pu_config in 'pu_config.pas' {f_config},
   cu_planet in 'cu_planet.pas',
-  pu_detail in 'pu_detail.pas' {f_detail};
+  pu_detail in 'pu_detail.pas' {f_detail},
+  pu_info in '\\STAR\WIN_E\cdc\dev\skychart\pu_info.pas' {f_info};
 
 {$R *.RES}
 
@@ -45,5 +46,6 @@ begin
   Application.CreateForm(Tf_main, f_main);
   Application.CreateForm(Tf_about, f_about);
   Application.CreateForm(Tf_detail, f_detail);
+  Application.CreateForm(Tf_info, f_info);
   Application.Run;
 end.

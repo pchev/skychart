@@ -1357,19 +1357,19 @@ begin
 if cname='' then cname:='Chart_' + IntToStr(MDIChildCount + 1);
 cname:=GetUniqueName(cname,false);
 if CreateMDIChild(cname,true,true,def_cfgsc,def_cfgplot) then result:='OK '+cname
-  else result:='Failed!';
+  else result:=msgFailed;
 end;
 
 Function Tf_main.CloseChart(cname:string):string;
 var i: integer;
 begin
-result:='Not found!';
+result:=msgNotFound;
 for i:=0 to MDIChildCount-1 do
   if MDIChildren[i] is Tf_chart then
      with MDIChildren[i] as Tf_chart do
         if caption=cname then begin
            Close;
-           result:='OK';
+           result:=msgOK;
         end;
 end;
 
@@ -1381,15 +1381,15 @@ for i:=0 to MDIChildCount-1 do
   if MDIChildren[i] is Tf_chart then
      with MDIChildren[i] as Tf_chart do
         result:=result+';'+caption;
-        
-if result>'' then result:='OK '+result+';'
-             else result:='No Chart!';
+
+if result>'' then result:=msgOK+blank+result+';'
+             else result:=msgFailed+blank+'No Chart!';
 end;
 
 Function Tf_main.SelectChart(cname:string):string;
 var i: integer;
 begin
-result:='Not found!';
+result:=msgNotFound;
 for i:=0 to MDIChildCount-1 do
   if MDIChildren[i] is Tf_chart then
      with MDIChildren[i] as Tf_chart do
@@ -1404,7 +1404,7 @@ for i:=0 to MDIChildCount-1 do
           end;
          {$endif}
          setfocus;
-         result:='OK';
+         result:=msgOK;
         end;
 end;
 
@@ -1424,7 +1424,9 @@ case n of
  2 : result:=CloseChart(arg[1]);
  3 : result:=SelectChart(arg[1]);
  4 : result:=ListChart;
- 5 : if Genericsearch(cname,arg[1]) then result:='OK' else result:='Not found!';
+ 5 : if Genericsearch(cname,arg[1]) then result:=msgOK else result:=msgNotFound;
+ 6 : result:=msgOK+blank+LPanels1.Caption;
+ 7 : result:=msgOK+blank+LPanels0.Caption;
 else begin
 result:='Bad chart name '+cname;
  for i:=0 to MDIChildCount-1 do
@@ -1441,8 +1443,9 @@ var i : integer;
 begin
 for i:=1 to Maxwindow do
  if (TCPDaemon<>nil)
+    and(TCPDaemon.ThrdActive[i])
     and (TCPDaemon.TCPThrd[i]<>nil)
-    and(TCPDaemon.TCPThrd[i].sock<>nil)
+    and(TCPDaemon.TCPThrd[i].Fsock<>nil)
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('> '+origin+' : '+str);
 end;
@@ -1486,12 +1489,14 @@ var
   ClientSock:TSocket;
   i,n : integer;
 begin
+for i:=1 to MaxWindow do ThrdActive[i]:=false;
 sock:=TTCPBlockSocket.create;
 try
   with sock do
     begin
       CreateSocket;
       if lasterror<>0 then Synchronize(ShowError);
+      MaxLineLength:=1024;
       setLinger(true,10);
       if lasterror<>0 then Synchronize(ShowError);
       bind(f_main.cfgm.ServerIPaddr,f_main.cfgm.ServerIPport);
@@ -1507,8 +1512,9 @@ try
             if lastError=0 then begin
               n:=-1;
               for i:=1 to Maxwindow do
-                 if (TCPThrd[i]=nil)
-                    or(TCPThrd[i].sock=nil)
+                 if (not ThrdActive[i])
+                    or(TCPThrd[i]=nil)
+                    or(TCPThrd[i].Fsock=nil)
                     or(TCPThrd[i].terminated)
                     then begin
                       n:=i;
@@ -1517,21 +1523,23 @@ try
               if n>0 then begin
                  TCPThrd[n]:=TTCPThrd.create(ClientSock);
                  TCPThrd[n].keepalive:=keepalive;
-                 i:=0; while (TCPThrd[n].sock=nil)and(i<100) do begin sleep(100); inc(i); end;
+                 i:=0; while (TCPThrd[n].Fsock=nil)and(i<100) do begin sleep(100); inc(i); end;
                  if not TCPThrd[n].terminated then begin
+                      TCPThrd[n].id:=n;
+                      ThrdActive[n]:=true;
                       Synchronize(GetActiveChart);
-                      if active_chart='Failed!' then
-                        TCPThrd[n].senddata('Failed to activate a chart.')
+                      if active_chart=msgFailed then
+                        TCPThrd[n].senddata(msgFailed+' Cannot activate a chart.')
                       else begin
                         TCPThrd[n].active_chart:=active_chart;
-                        TCPThrd[n].senddata('OK id='+inttostr(n)+' chart='+active_chart);
+                        TCPThrd[n].senddata(msgOK+' id='+inttostr(n)+' chart='+active_chart);
                       end;
                  end;
               end else
                  with TTCPThrd.create(ClientSock) do begin
                    i:=0; while (sock=nil)and(i<100) do begin sleep(100); inc(i); end;
                    if not terminated then begin
-                      if Sock<>nil then Sock.SendString('Maximum connection reach!'+CRLF);
+                      if Sock<>nil then Sock.SendString(msgFailed+' Maximum connection reach!'+CRLF);
                       terminate;
                    end;
               end;
@@ -1562,12 +1570,15 @@ var
   s: string;
   i: integer;
 begin
-  sock:=TTCPBlockSocket.create;
+  Fsock:=TTCPBlockSocket.create;
+  FConnectTime:=now;
   try
-    Sock.socket:=CSock;
-    sock.GetSins;
-    sock.MaxLineLength:=1024;
-    with sock do
+    Fsock.socket:=CSock;
+    Fsock.GetSins;
+    Fsock.MaxLineLength:=1024;
+    remoteip:=Fsock.GetRemoteSinIP;
+    remoteport:=inttostr(Fsock.GetRemoteSinPort);
+    with Fsock do
       begin
         repeat
           if terminated then break;
@@ -1579,19 +1590,20 @@ begin
              Synchronize(ExecuteCmd);
              SendString(cmdresult+crlf);
              if lastError<>0 then break;
-             if (cmdresult='OK')and(uppercase(cmd[0])='SELECTCHART') then active_chart:=cmd[1];
+             if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then active_chart:=cmd[1];
           end else
              if keepalive then begin
-                SendString('.'+crlf);    // keepalive check
-                if lastError<>0 then break;
+                SendString('.'+crlf);        // keepalive check
+                if lastError<>0 then break;  // if send failed we close the connection
           end;
         until false;
       end;
   finally
     terminate;
-    sock.SendString('Bye!'+crlf);
-    sock.CloseSocket;
-    sock.Free;
+    f_main.TCPDaemon.ThrdActive[id]:=false;
+    Fsock.SendString(msgBye+crlf);
+    Fsock.CloseSocket;
+    Fsock.Free;
     cmd.free;
   end;
 end;
@@ -1599,8 +1611,8 @@ end;
 procedure TTCPThrd.Senddata(str:string);
 begin
 try
-if sock<>nil then
- with sock do begin
+if Fsock<>nil then
+ with Fsock do begin
    if terminated then exit;
    SendString(str+CRLF);
    if LastError<>0 then
@@ -1638,11 +1650,15 @@ for i:=1 to Maxwindow do
     TCPDaemon.TCPThrd[i].terminate;
 application.processmessages;
 TCPDaemon.terminate;
-// 1.5 seconde delay to close the thread
-d:=now+1.7E-5;
+d:=now+1.7E-5;  // 1.5 seconde delay to close the thread
 while now<d do application.processmessages;
 finally
  screen.cursor:=crDefault;
 end;
+end;
+
+procedure Tf_main.ViewInfoExecute(Sender: TObject);
+begin
+f_info.show;
 end;
 

@@ -34,17 +34,22 @@ uses cu_catalog, cu_planet, u_constant, u_util, blcksock, libc,
 type
   TTCPThrd = class(TThread)
   private
-    Sock:TTCPBlockSocket;
+    FSock:TTCPBlockSocket;
     CSock: TSocket;
     cmd : TStringlist;
     cmdresult : string;
+    FConnectTime : double;
   public
+    id : integer;
     keepalive,abort : boolean;
-    active_chart : string;
+    active_chart,remoteip,remoteport : string;
     Constructor Create (hsock:tSocket);
     procedure Execute; override;
     procedure SendData(str:string);
     procedure ExecuteCmd;
+    property sock : TTCPBlockSocket read FSock;
+    property ConnectTime : double read FConnectTime;
+    property Terminated;
   end;
 
   TTCPDaemon = class(TThread)
@@ -55,6 +60,7 @@ type
   public
     keepalive : boolean;
     TCPThrd: array [1..Maxwindow] of TTCPThrd ;
+    ThrdActive: array [1..Maxwindow] of boolean ;
     Constructor Create;
     procedure Execute; override;
     procedure ShowSocket;
@@ -175,6 +181,8 @@ type
     switchbackground: TAction;
     SaveImage: TAction;
     SaveImage1: TMenuItem;
+    ViewInfo: TAction;
+    ViewInformation1: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -213,6 +221,7 @@ type
     procedure switchstarsExecute(Sender: TObject);
     procedure switchbackgroundExecute(Sender: TObject);
     procedure SaveImageExecute(Sender: TObject);
+    procedure ViewInfoExecute(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
@@ -262,7 +271,7 @@ implementation
 
 {$R *.xfm}
 
-uses fu_chart, fu_about, fu_config, u_projection ;
+uses fu_chart, fu_about, fu_config, fu_info, u_projection ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here
