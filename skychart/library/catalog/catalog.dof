@@ -1,6 +1,5 @@
 [FileVersion]
 Version=6.0
-
 [Compiler]
 A=8
 B=0
@@ -31,7 +30,6 @@ Z=1
 ShowHints=1
 ShowWarnings=1
 UnitAliases=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
-
 [Linker]
 MapFile=0
 OutputObjs=0
@@ -42,7 +40,6 @@ MinStackSize=16384
 MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
-
 [Directories]
 OutputDir=..\..\..\..\
 UnitOutputDir=..\..\..\dcu
@@ -53,26 +50,23 @@ Packages=vcl;rtl;vclx;visualclx;vclshlctrls
 Conditionals=
 DebugSourceDirs=
 UsePackages=0
-
 [Parameters]
 RunParams=
 HostApplication=C:\cdc\cdc_vcl.exe
 Launcher=
 UseLauncher=0
 DebugCWD=
-
 [Language]
 ActiveLang=
 ProjectLang=
 RootDir=
-
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=0
-MajorVer=3
+MajorVer=1
 MinorVer=0
 Release=0
-Build=1
+Build=0
 Debug=0
 PreRelease=0
 Special=0
@@ -80,11 +74,10 @@ Private=0
 DLL=0
 Locale=4108
 CodePage=1252
-
 [Version Info Keys]
 CompanyName=
 FileDescription=
-FileVersion=3.0.0.1
+FileVersion=1.0.0.0
 InternalName=
 LegalCopyright=
 LegalTrademarks=
@@ -92,19 +85,15 @@ OriginalFilename=
 ProductName=
 ProductVersion=1.0.0.0
 Comments=
-
 [Excluded Packages]
 c:\program files\borland\delphi6\Projects\Bpl\skychartD6.bpl=Composant Carte du Ciel
-
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
-
 [HistoryLists\hlUnitOutputDirectory]
 Count=2
 Item0=..\..\..\dcu
 Item1=..\dcu
-
 [HistoryLists\hlOutputDirectorry]
 Count=3
 Item0=..\..\..\..\
