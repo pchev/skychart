@@ -50,6 +50,8 @@ uses
 
 {$R *.res}
 
+{$LIBPREFIX 'lib'}
+
 exports
        setbscpath   {$ifdef mswindows} index  130   {$endif} ,
        openbsc      {$ifdef mswindows} index  129   {$endif} ,
@@ -225,6 +227,7 @@ exports
        findnumwds    {$ifdef mswindows} index  131   {$endif} ,
        findnumgcat   {$ifdef mswindows} index  178  {$endif} ,
        initcat      {$ifdef mswindows} index  3   {$endif} ,
+       SetCatLang   {$ifdef mswindows} index  2  {$endif} ,
        initcatwin   {$ifdef mswindows} index  1   {$endif} ,
 
        isbscpath   {$ifdef mswindows} index  153   {$endif} ,
