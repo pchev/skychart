@@ -146,6 +146,7 @@ object f_chart: Tf_chart
       PopupMenu = PopupMenu1
       Stretch = True
       OnClick = Image1Click
+      OnMouseDown = Image1MouseDown
       OnMouseMove = Image1MouseMove
       OnMouseUp = Image1MouseUp
     end

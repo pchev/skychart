@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses pu_detail, cu_skychart, u_constant, u_util, u_projection,
+uses pu_detail, cu_skychart, u_constant, u_util, u_projection, jpeg, pngimage,
      Printers, Math, SysUtils,
      Windows, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList;
@@ -105,6 +105,8 @@ type
     procedure Image1Click(Sender: TObject);
     procedure switchstarExecute(Sender: TObject);
     procedure switchbackgroundExecute(Sender: TObject);
+    procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     movefactor,zoomfactor: double;
@@ -116,6 +118,7 @@ type
     maximize:boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo : integer;
+    zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
     procedure PrintChart(Sender: TObject);
@@ -143,6 +146,7 @@ type
     function cmd_SaveImage(format,fn,quality:string):string;
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=75):boolean;
+    Procedure ZoomBox(action,x,y:integer);
   end;
 
 implementation
@@ -163,23 +167,49 @@ uses pu_main;
 
 function Tf_chart.SaveChartImage(format,fn : string; quality : integer=75):boolean;
 var
- fnw: WideString;
+   JPG : TJpegImage;
+   PNG: TPNGObject;
 begin
  if fn='' then fn:='cdc.png';
  if format='' then format:='PNG';
-{ if format='PNG' then begin
-    fnw:=changefileext(fn,'.png');
-    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('PNG'));
+ if format='PNG' then begin
+    fn:=changefileext(fn,'.png');
+    PNG := TPNGObject.Create;
+    try
+    // Convert the bitmap to PNG
+    PNG.Assign(Image1.Picture.Bitmap);
+    PNG.CompressionLevel:=9;
+    // Save the PNG
+    PNG.SaveToFile(fn);
+    result:=true;
+    finally
+    PNG.Free;
+    end;
     end
  else if format='JPEG' then begin
-    fnw:=changefileext(fn,'.jpg');
-    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('JPEG'), quality);
+    fn:=changefileext(fn,'.jpg');
+    JPG := TJpegImage.Create;
+    try
+    // Convert the bitmap to a Jpeg
+    JPG.Assign(Image1.Picture.Bitmap);
+    JPG.CompressionQuality:=quality;
+    // Save the Jpeg
+    JPG.SaveToFile(fn);
+    result:=true;
+    finally
+    JPG.Free;
+    end;
     end
  else if format='BMP' then begin
-    fnw:=changefileext(fn,'.bmp');
-    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('BMP'));
+    fn:=changefileext(fn,'.bmp');
+    try
+    Image1.Picture.Bitmap.SaveTofile(fn);
+    result:=true;
+    except
+      result:=false;
+    end;
     end
- else} result:=false;
+ else result:=false;
 end;
 
 // end of windows vcl specific code:
