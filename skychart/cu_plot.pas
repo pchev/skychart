@@ -86,8 +86,7 @@ type
     cfgplot : conf_plot;
     cfgchart: conf_chart;
     cbmp : Tbitmap;
-    cnv  : Tcanvas;
-    destcnv  : Tcanvas;
+    cnv, destcnv  : Tcanvas;
     Fstarshape,starbmp: Tbitmap;
     starbmpw:integer;
     constructor Create(AOwner:TComponent); override;
@@ -244,6 +243,7 @@ cfgchart.Width:=w;
 cfgchart.Height:=h;
 cbmp.Width:=w;
 cbmp.Height:=h;
+cnv:=cbmp.Canvas; // defered plot to bitmap
 with cnv do begin
  Brush.Color:=cfgplot.Color[0];
  Pen.Color:=cfgplot.Color[0];
@@ -263,6 +263,7 @@ end;
 Procedure TSplot.Flush;
 begin
  destcnv.Draw(0,0,cbmp);
+ cnv:=destcnv;  // direct plot to screen;
 end;
 
 procedure TSplot.Setstarshape(value:Tbitmap);
