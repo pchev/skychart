@@ -120,6 +120,7 @@ object f_chart: Tf_chart
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   OnMouseWheel = FormMouseWheel
   OnResize = FormResize
   OnShow = FormShow

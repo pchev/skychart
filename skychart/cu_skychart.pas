@@ -70,6 +70,7 @@ Tskychart = class (TComponent)
     procedure DrawAzGrid;
     procedure DrawGalGrid;
     procedure DrawEclGrid;
+    Procedure DrawScale;
     function DrawConstL :boolean;
     function DrawConstB :boolean;
     function DrawHorizon:boolean;
@@ -129,17 +130,17 @@ end;
 
 function Tskychart.Refresh :boolean;
 var savmag: double;
-    savfilter,saveautofilter:boolean;
+    savfilter,saveautofilter,savfillmw:boolean;
 begin
 savmag:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
 savfilter:=Fcatalog.cfgshr.StarFilter;
 saveautofilter:=Fcatalog.cfgshr.AutoStarFilter;
+savfillmw:=cfgsc.FillMilkyWay;
 try
   chdir(appdir);
   // initialize chart value
   InitObservatory;
   InitTime;
-  InitColor;
   InitChart;
   InitCoordinates;
   if cfgsc.quick then begin
@@ -149,18 +150,21 @@ try
   end else begin
      Fplanet.ComputePlanet(cfgsc);
   end;
+  InitColor; // after ComputePlanet
   InitCatalog;
   // draw objects
   Fcatalog.OpenCat(cfgsc);
   // first the extended object
   if not cfgsc.quick then begin
-    DrawMilkyWay; // always first
+    DrawMilkyWay; // most extended first
+    // then the horizon line if transparent
+    if (not cfgsc.horizonopaque) then DrawHorizon;
     DrawNebulae;
     DrawOutline;
   end;
   // then the lines
+  DrawGrid;
   if not cfgsc.quick then begin
-    DrawGrid;
     DrawConstL;
     DrawConstB;
     DrawEcliptic;
@@ -177,8 +181,8 @@ try
     DrawOrbitPath;
   end;
   DrawPlanet;
-  // and the horizon line
-  if not cfgsc.quick then DrawHorizon;
+  // and the horizon line if not transparent
+  if (not cfgsc.quick)and cfgsc.horizonopaque then DrawHorizon;
   result:=true;
 finally
   if cfgsc.quick then begin
@@ -186,6 +190,7 @@ finally
      Fcatalog.cfgshr.StarFilter:=savfilter;
      Fcatalog.cfgshr.AutoStarFilter:=saveautofilter;
   end;
+  cfgsc.FillMilkyWay:=savfillmw;
   cfgsc.quick:=false;
   Fcatalog.CloseCat;
 end;
@@ -355,11 +360,13 @@ end;
 function Tskychart.InitColor:boolean;
 var i : integer;
 begin
-if Fplot.cfgplot.color[0]>Fplot.cfgplot.color[11] then begin
+if Fplot.cfgplot.color[0]>Fplot.cfgplot.color[11] then begin // white background
    Fplot.cfgplot.AutoSkyColor:=false;
    Fplot.cfgplot.StarPlot:=0;
    Fplot.cfgplot.NebPlot:=0;
-end;
+   cfgsc.FillMilkyWay:=false;
+   cfgsc.WhiteBg:=true;
+end else cfgsc.WhiteBg:=false;
 if Fplot.cfgplot.AutoSkyColor and (cfgsc.Projpole=AltAz) then begin
  if (cfgsc.fov>10*deg2rad) then begin
   if cfgsc.CurSunH>0 then i:=1
@@ -406,7 +413,7 @@ var w,h,a,d,dist,v1,v2,v3,v4,v5,v6 : double;
 begin
 cfgsc.RefractionOffset:=0;
 // clipping limit
-Fplot.cfgplot.outradius:=abs(round(minvalue([50*cfgsc.fov,0.8*pi2])*cfgsc.BxGlb/2));
+Fplot.cfgplot.outradius:=abs(round(minvalue([50*cfgsc.fov,0.98*pi2])*cfgsc.BxGlb/2));
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
 // find the current field number and projection
@@ -629,9 +636,13 @@ if Fcatalog.OpenLin then
  WindowXY(x1,y1,xx,yy,cfgsc);
  op:=rec.outlines.lineoperation;
  if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
- if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
  if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
- FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,col);
+ if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
+ else begin
+    if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
+//    col:=addcolor(col,FPlot.cfgplot.Color[0]);
+ end;
+ FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,cfgsc.x2,col);
 end;
 result:=true;
 finally
@@ -643,22 +654,33 @@ function Tskychart.DrawMilkyWay :boolean;
 var rec:GcatRec;
   x1,y1: Double;
   xx,yy,op,lw,col,fs: integer;
+  first:boolean;
 begin
 result:=false;
 if not cfgsc.ShowMilkyWay then exit;
 if cfgsc.fov<(deg2rad*2) then exit;
 fillchar(rec,sizeof(rec),0);
+first:=true;
+col:=0;lw:=1;fs:=1;
 try
 if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
  while Fcatalog.readMilkyway(rec) do begin
+ if first then begin
+    // all the milkyway line use the same property
+    if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
+    if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
+    else begin
+      if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
+      col:=addcolor(col,FPlot.cfgplot.Color[0]);
+    end;  
+    if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
+    first:=false;
+ end;
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  op:=rec.outlines.lineoperation;
- if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
- if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
- if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
- FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,col);
+ FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,cfgsc.x2,col);
 end;
 result:=true;
 finally
@@ -706,34 +728,37 @@ for j:=0 to cfgsc.SimNb-1 do begin
     if cfgsc.FlipY<0 then rot:=rot-pi;
     case ipla of
     4 :  begin
-         if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],cfgsc.Planetlst[j,i+28,6]>1.0,true);
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then
+         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],cfgsc.Planetlst[j,i+28,6]>1.0,true);
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
-         if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],cfgsc.Planetlst[j,i+28,6]>1.0,false);
+            if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],cfgsc.Planetlst[j,i+28,6]>1.0,false);
+         end;
          end;
     5 :  begin
-         if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],cfgsc.Planetlst[j,i+11,6]>1.0,true);
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then
+         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],cfgsc.Planetlst[j,i+11,6]>1.0,true);
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
-         if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],cfgsc.Planetlst[j,i+11,6]>1.0,false);
+            if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],cfgsc.Planetlst[j,i+11,6]>1.0,false);
+         end;
          end;
     6 :  begin
-         if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],cfgsc.Planetlst[j,i+15,6]>1.0,true);
          if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],cfgsc.Planetlst[j,i+15,6]>1.0,true);
             pa:=cfgsc.Planetlst[j,31,1]*cfgsc.FlipX;
             r1:=cfgsc.Planetlst[j,31,2];
             r2:=cfgsc.Planetlst[j,31,3];
             be:=cfgsc.Planetlst[j,31,4];
             if cfgsc.FlipY<0 then pa:=180-pa;
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,pa,rot,r1,r2,be,0);
+            if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],cfgsc.Planetlst[j,i+15,6]>1.0,false);
          end;
-         if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],cfgsc.Planetlst[j,i+15,6]>1.0,false);
          end;
     7 :  begin
-         if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],cfgsc.Planetlst[j,i+23,6]>1.0,true);
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then
+         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],cfgsc.Planetlst[j,i+23,6]>1.0,true);
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
-         if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],cfgsc.Planetlst[j,i+23,6]>1.0,false);
+            if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],cfgsc.Planetlst[j,i+23,6]>1.0,false);
+         end;
          end;
     11 : begin
          if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
@@ -1076,6 +1101,7 @@ end;
 
 Procedure Tskychart.DrawGrid;
 begin
+if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
     if cfgsc.ShowGrid then
        case cfgsc.ProjPole of
        Equat  :  DrawEqGrid;
@@ -1084,6 +1110,37 @@ begin
        Ecl    :  begin DrawEclGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        end
     else if cfgsc.ShowEqGrid then DrawEqGrid;
+end else if cfgsc.ShowGrid then DrawScale;
+end;
+
+Procedure Tskychart.DrawScale;
+var fv,u:double;
+    i,n,s,x,y,xp:integer;
+    l1,l2:string;
+const sticksize=10;
+begin
+fv:=rad2deg*cfgsc.fov/3;
+if trunc(fv)>5 then begin l1:='1'+ldeg; n:=trunc(fv); l2:=inttostr(n)+ldeg; s:=1; u:=deg2rad; end
+else if trunc(fv)>0 then begin l1:='30'+lmin; n:=trunc(fv)*2; l2:=inttostr(n*30)+lmin; s:=30; u:=deg2rad/60; end
+else if trunc(6*fv/2)>0 then begin l1:='10'+lmin; n:=trunc(6*fv); l2:=inttostr(n*10)+lmin; s:=10; u:=deg2rad/60; end
+else if trunc(30*fv/2)>0 then begin l1:='2'+lmin; n:=trunc(30*fv); l2:=inttostr(n*2)+lmin; s:=2; u:=deg2rad/60; end
+else if trunc(60*fv/2)>0 then begin l1:='1'+lmin; n:=trunc(60*fv); l2:=inttostr(n)+lmin; s:=1; u:=deg2rad/60; end
+else if trunc(360*fv/2)>0 then begin l1:='10'+lsec; n:=trunc(360*fv); l2:=inttostr(n*10)+lsec; s:=10; u:=deg2rad/3600; end
+else if trunc(1800*fv/2)>0 then begin l1:='2'+lsec; n:=trunc(1800*fv); l2:=inttostr(n*2)+lsec; s:=2; u:=deg2rad/3600; end
+else begin l1:='1'+lsec; n:=trunc(3600*fv); l2:=inttostr(n)+lsec; s:=1; u:=deg2rad/3600; end;
+if n<1 then n:=1;
+xp:=cfgsc.xmin+sticksize;
+y:=cfgsc.ymax-sticksize;
+FPlot.PlotLine(xp,y,xp,y-sticksize,Fplot.cfgplot.Color[12],1);
+FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot.Color[12],laCenter,laBottom,'0');
+for i:=1 to n do begin
+  x:=xp+round(s*u*cfgsc.bxglb);
+  FPlot.PlotLine(xp,y,x,y,Fplot.cfgplot.Color[12],1);
+  FPlot.PlotLine(x,y,x,y-sticksize,Fplot.cfgplot.Color[12],1);
+  if i=1 then FPlot.PlotText(x,y-sticksize,1,Fplot.cfgplot.Color[12],laCenter,laBottom,l1);
+  xp:=x;
+end;
+if n>1 then FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot.Color[12],laCenter,laBottom,l2);
 end;
 
 Procedure Tskychart.LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
@@ -1114,6 +1171,7 @@ repeat
  de:=de+dd/3;
  projection(ra,de,x1,y1,cfgsc.horizonopaque,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
+ if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
     Fplot.Plotline(xxp,yyp,xx,yy,col,1);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
@@ -1145,6 +1203,7 @@ repeat
  ra:=ra+da/3;
  projection(ra,de,x1,y1,cfgsc.horizonopaque,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
+ if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
     Fplot.Plotline(xxp,yyp,xx,yy,col,1);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
@@ -1240,6 +1299,7 @@ repeat
  if cfgsc.horizonopaque and (h<-musec) then break;
  proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
+ if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
     Fplot.Plotline(xxp,yyp,xx,yy,col,1);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
@@ -1273,6 +1333,7 @@ repeat
  a:=a+da/3;
  proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
+ if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
     Fplot.Plotline(xxp,yyp,xx,yy,col,w);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
@@ -1340,11 +1401,71 @@ repeat
 until (not ok)or(hc<-pid2);
 end;
 
-function Tskychart.DrawHorizon:boolean;
+{function Tskychart.DrawHorizon:boolean;
+var az,h,x1,y1 : double;
+    i,x,y,xp,yp,x0,y0: integer;
+    first:boolean;
 begin
 if cfgsc.ProjPole=Altaz then begin
-  if cfgsc.hcentre<-(cfgsc.fov/6) then begin
-     Fplot.PlotLabel((cfgsc.xmax-cfgsc.xmin)div 2,(cfgsc.ymax-cfgsc.ymin)div 2,1,' Below the horizon ');
+  if cfgsc.hcentre<-(cfgsc.fov/6) then
+     Fplot.PlotLabel((cfgsc.xmax-cfgsc.xmin)div 2,(cfgsc.ymax-cfgsc.ymin)div 2,1,2,laCenter,laCenter,' Below the horizon ');
+  if (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
+     first:=true; xp:=0;yp:=0;x0:=0;y0:=0;
+     for i:=1 to 360 do begin
+       h:=cfgsc.horizonlist^[i];
+       az:=deg2rad*rmod(360+i-1-180,360);
+       proj2(-az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+       WindowXY(x1,y1,x,y,cfgsc);
+       if first then begin
+                first:=false;
+                x0:=x;
+                y0:=y;
+          end else Fplot.Plotline(xp,yp,x,y,Fplot.cfgplot.Color[12],1);
+       xp:=x;
+       yp:=y;
+     end;
+     Fplot.Plotline(x,y,x0,y0,Fplot.cfgplot.Color[12],1);
+  end;
+end;
+result:=true;
+end;     }
+
+function Tskychart.DrawHorizon:boolean;
+var az,h,x1,y1 : double;
+    i,x,y,xp,yp,x0,y0,xh,yh,xph,yph,x0h,y0h: integer;
+    first:boolean;
+begin
+if cfgsc.ProjPole=Altaz then begin
+  if cfgsc.hcentre<-(cfgsc.fov/6) then
+     Fplot.PlotLabel((cfgsc.xmax-cfgsc.xmin)div 2,(cfgsc.ymax-cfgsc.ymin)div 2,1,2,laCenter,laCenter,' Below the horizon ');
+  if (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
+     first:=true; xp:=0;yp:=0;x0:=0;y0:=0; xph:=0;yph:=0;x0h:=0;y0h:=0;
+     for i:=1 to 360 do begin
+       h:=cfgsc.horizonlist^[i];
+       az:=deg2rad*rmod(360+i-1-180,360);
+       proj2(-az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+       WindowXY(x1,y1,x,y,cfgsc);
+       proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+       WindowXY(x1,y1,xh,yh,cfgsc);
+       if first then begin
+          first:=false;
+          x0:=x; x0h:=xh;
+          y0:=y; y0h:=yh;
+       end else begin
+          Fplot.PlotOutline(xp,yp,0,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
+          Fplot.PlotOutline(x,y,2,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
+          Fplot.PlotOutline(xh,yh,2,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
+          Fplot.PlotOutline(xph,yph,1,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
+          Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot.Color[12],2);
+       end;
+       xp:=x; xph:=xh;
+       yp:=y; yph:=yh;
+     end;
+     Fplot.PlotOutline(x,y,0,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
+     Fplot.PlotOutline(x0,y0,2,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
+     Fplot.PlotOutline(x0h,y0h,2,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
+     Fplot.PlotOutline(xh,yh,1,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
+     Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot.Color[12],2);
   end;
 end;
 result:=true;
@@ -1368,6 +1489,7 @@ repeat
  h:=h+dd/3;
  proj2(a,h,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
+ if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
     Fplot.Plotline(xxp,yyp,xx,yy,col,1);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
@@ -1400,6 +1522,7 @@ repeat
  a:=a+da/3;
  proj2(a,h,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
+ if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
     Fplot.Plotline(xxp,yyp,xx,yy,col,w);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
@@ -1493,6 +1616,7 @@ repeat
  h:=h+dd/3;
  proj2(a,h,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
+ if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
     Fplot.Plotline(xxp,yyp,xx,yy,col,1);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
@@ -1525,6 +1649,7 @@ repeat
  a:=a+da/3;
  proj2(a,h,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
+ if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
     Fplot.Plotline(xxp,yyp,xx,yy,col,w);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
@@ -1627,28 +1752,26 @@ end;
 
 function Tskychart.DrawConstL:boolean;
 var
-  dm,xx1,yy1,xx2,yy2,ra,de : Double;
+  xx1,yy1,xx2,yy2,ra1,de1,ra2,de2 : Double;
   x1,y1,x2,y2,i,color : Integer;
 begin
 result:=false;
 if not cfgsc.ShowConstl then exit;
-dm:=minvalue([10*cfgsc.fov,0.9*pi2]);
 color := Fplot.cfgplot.Color[16];
 for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
-  ra:=Fcatalog.cfgshr.ConstL[i].ra1;
-  de:=Fcatalog.cfgshr.ConstL[i].de1;
-  precession(jd2000,cfgsc.JDChart,ra,de);
-  projection(ra,de,xx1,yy1,true,cfgsc) ;
-  if (abs(xx1)>dm)or(abs(yy1)>dm) then continue;
-  ra:=Fcatalog.cfgshr.ConstL[i].ra2;
-  de:=Fcatalog.cfgshr.ConstL[i].de2;
-  precession(jd2000,cfgsc.JDChart,ra,de);
-  projection(ra,de,xx2,yy2,true,cfgsc) ;
-  if (abs(xx2)>dm)or(abs(yy2)>dm) then continue;
+  ra1:=Fcatalog.cfgshr.ConstL[i].ra1;
+  de1:=Fcatalog.cfgshr.ConstL[i].de1;
+  ra2:=Fcatalog.cfgshr.ConstL[i].ra2;
+  de2:=Fcatalog.cfgshr.ConstL[i].de2;
+  precession(jd2000,cfgsc.JDChart,ra1,de1);
+  projection(ra1,de1,xx1,yy1,true,cfgsc) ;
+  precession(jd2000,cfgsc.JDChart,ra2,de2);
+  projection(ra2,de2,xx2,yy2,true,cfgsc) ;
   if (xx1<199)and(xx2<199) then begin
      WindowXY(xx1,yy1,x1,y1,cfgsc);
      WindowXY(xx2,yy2,x2,y2,cfgsc);
-     FPlot.PlotLine(x1,y1,x2,y2,color,1);
+     if (intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2 then
+        FPlot.PlotLine(x1,y1,x2,y2,color,1);
   end;
 end;
 result:=true;
@@ -1672,6 +1795,7 @@ for i:=0 to Fcatalog.cfgshr.ConstBnum-1 do begin
   projection(ra,de,xx,yy,true,cfgsc) ;
   if (xx<199)and(xx<199) then begin
     WindowXY(xx,yy,x2,y2,cfgsc);
+    if (intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2 then
     if (x1<maxint)and(abs(xx)<dm)and(abs(yy)<dm) then begin
        FPlot.PlotLine(x1,y1,x2,y2,color,1);
     end;

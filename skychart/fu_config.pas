@@ -52,8 +52,6 @@ type
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
-    p_catalog: TTabSheet;
-    Label11: TLabel;
     p_solsys: TTabSheet;
     Label12: TLabel;
     p_cdc: TTabSheet;
@@ -641,6 +639,17 @@ type
     newcity: TButton;
     updcity: TButton;
     delcity: TButton;
+    Label57: TLabel;
+    fw4b: TFloatEdit;
+    fw5b: TFloatEdit;
+    p_horizon: TTabSheet;
+    horizonopaque: TCheckBox;
+    hor_l1: TLabel;
+    horizonfile: TEdit;
+    horizonfileBtn: TBitBtn;
+    hor_l2: TLabel;
+    Shape25: TShape;
+    Label11: TLabel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -777,6 +786,9 @@ type
     procedure delcityClick(Sender: TObject);
     procedure obsnameMouseEnter(Sender: TObject);
     procedure UpdCityList(changecity:boolean);
+    procedure horizonfileBtnClick(Sender: TObject);
+    procedure horizonopaqueClick(Sender: TObject);
+    procedure horizonfileChange(Sender: TObject);
   private
     { Déclarations privées }
     procedure EditGCatPath(row : integer);
@@ -819,6 +831,7 @@ type
     Procedure SetObsPos;
     Procedure ShowObsCoord;
     procedure CenterObs;
+    procedure ShowHorizon;
   end;
 
 var

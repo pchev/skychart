@@ -53,8 +53,6 @@ type
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
-    p_catalog: TTabSheet;
-    Label11: TLabel;
     p_solsys: TTabSheet;
     Label12: TLabel;
     p_cdc: TTabSheet;
@@ -413,33 +411,6 @@ type
     ComboBox10: TComboBox;
     Label172: TLabel;
     Label173: TLabel;
-    Label96: TLabel;
-    Label97: TLabel;
-    Label98: TLabel;
-    Label99: TLabel;
-    Label100: TLabel;
-    Label101: TLabel;
-    Label102: TLabel;
-    Label103: TLabel;
-    Label104: TLabel;
-    Label105: TLabel;
-    Label106: TLabel;
-    Label107: TLabel;
-    Label114: TLabel;
-    Label153: TLabel;
-    Label154: TLabel;
-    fw1: TFloatEdit;
-    fw2: TFloatEdit;
-    fw3: TFloatEdit;
-    fw4: TFloatEdit;
-    fw5: TFloatEdit;
-    fw6: TFloatEdit;
-    fw7: TFloatEdit;
-    fw8: TFloatEdit;
-    fw9: TFloatEdit;
-    fw10: TFloatEdit;
-    fw0: TFloatEdit;
-    fw00: TFloatEdit;
     ComboBox11: TComboBox;
     p_gridspacing: TTabSheet;
     Label159: TLabel;
@@ -616,8 +587,6 @@ type
     HScrollBar: TScrollBar;
     VScrollBar: TScrollBar;
     Label56: TLabel;
-    Bevel1: TBevel;
-    Bevel2: TBevel;
     Bevel7: TBevel;
     Bevel8: TBevel;
     Bevel9: TBevel;
@@ -641,6 +610,46 @@ type
     updcity: TButton;
     delcity: TButton;
     GridNum: TCheckBox;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    Label96: TLabel;
+    Label97: TLabel;
+    Label98: TLabel;
+    Label99: TLabel;
+    Label100: TLabel;
+    Label101: TLabel;
+    Label102: TLabel;
+    Label103: TLabel;
+    Label104: TLabel;
+    Label105: TLabel;
+    Label106: TLabel;
+    Label107: TLabel;
+    Label114: TLabel;
+    fw1: TFloatEdit;
+    fw2: TFloatEdit;
+    fw3: TFloatEdit;
+    fw4: TFloatEdit;
+    fw5: TFloatEdit;
+    fw6: TFloatEdit;
+    fw7: TFloatEdit;
+    fw8: TFloatEdit;
+    fw9: TFloatEdit;
+    fw10: TFloatEdit;
+    fw0: TFloatEdit;
+    fw00: TFloatEdit;
+    Label57: TLabel;
+    Label73: TLabel;
+    Label74: TLabel;
+    fw4b: TFloatEdit;
+    fw5b: TFloatEdit;
+    p_horizon: TTabSheet;
+    horizonopaque: TCheckBox;
+    hor_l1: TLabel;
+    horizonfile: TEdit;
+    horizonfileBtn: TBitBtn;
+    hor_l2: TLabel;
+    Shape25: TShape;
+    Label11: TLabel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -779,6 +788,9 @@ type
     procedure newcityClick(Sender: TObject);
     procedure updcityClick(Sender: TObject);
     procedure delcityClick(Sender: TObject);
+    procedure horizonopaqueClick(Sender: TObject);
+    procedure horizonfileChange(Sender: TObject);
+    procedure horizonfileBtnClick(Sender: TObject);
   private
     { Déclarations privées }
     procedure EditGCatPath(row : integer);
@@ -821,6 +833,7 @@ type
     Procedure SetObsPos;
     Procedure ShowObsCoord;
     procedure CenterObs;
+    procedure ShowHorizon;
   end;
 
 var
@@ -876,6 +889,7 @@ csc.Simnb:=nbstep.value;
 end;
 
 // end of windows vcl specific code:
+
 
 end.
 

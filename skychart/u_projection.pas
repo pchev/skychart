@@ -114,6 +114,10 @@ begin
    c.AyGlb:=  c.FlipY * ( c.Ywrldmin * c.ByGlb) ;
    c.sintheta:=sin(c.theta);
    c.costheta:=cos(c.theta);
+   if c.fov>pid2 then
+      if c.WindowRatio>1 then c.x2:=intpower(y2-y1,2)
+                         else c.x2:=intpower(x2-x1,2)
+   else c.x2:=intpower(c.BxGlb*pid2,2);
 end;
 
 Procedure WindowXY(x,y:Double; var WindowX,WindowY: Integer; var c:conf_skychart);
@@ -243,7 +247,7 @@ Ecl:   begin
   else raise exception.Create('Bad projection type');
 end;
 if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then begin
-  if h<-musec then begin
+  if (h<-musec) then begin
      if tohrz and (h>(-30*deg2rad)) then begin
        de:=-secarc;
        Proj2(ar,de,ac,dc,X,Y,c);
@@ -252,14 +256,17 @@ if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then be
        Y:=200;
      end;
   end else begin
-    a:=rmod(-rad2deg*ar+181+360,360);
-    a1:=trunc(a);
-    if a1=0 then i1:=360 else i1:=a1;
-    a2:=a1+1;
-    if a2=361 then i2:=1 else i2:=a2;
-    d1:=c.horizonlist[i1];
-    d2:=c.horizonlist[i2];
-    h:=d1+(a-a1)*(d2-d1)/(a2-a1);
+    if c.horizonlist=nil then h:=0
+    else begin
+      a:=rmod(-rad2deg*ar+181+360,360);
+      a1:=trunc(a);
+      if a1=0 then i1:=360 else i1:=a1;
+      a2:=a1+1;
+      if a2=361 then i2:=1 else i2:=a2;
+      d1:=c.horizonlist^[i1];
+      d2:=c.horizonlist^[i2];
+      h:=d1+(a-a1)*(d2-d1)/(a2-a1);
+    end;
     if de<h-musec then begin
      if tohrz then begin
         de:=h-secarc;
@@ -531,7 +538,7 @@ function SidTim(jd0,ut,long : double): double;
 BEGIN
  t:=(jd0-2451545.0)/36525;
  te:=100.46061837 + 36000.770053608*t + 0.000387933*t*t - t*t*t/38710000;
- result := deg2rad*Rmod(te - long + 1.002737908*ut*15,360) ;
+ result := deg2rad*Rmod(te - long + 1.00273790935*ut*15,360) ;
 END ;
 
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; var c:conf_skychart);

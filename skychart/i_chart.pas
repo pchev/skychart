@@ -124,10 +124,10 @@ begin
     cep:=trim(sc.cfgsc.EquinoxName);
     if cep='Date' then cep:=sc.cfgsc.EquinoxDate;
     case sc.cfgsc.projpole of
-    Equat : result:='Equatorial Coordinates, '+cep;
-    AltAz : result:='Alt/AZ Coordinates, '+trim(sc.cfgsc.ObsName)+blank+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+' (UT+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
+    Equat : result:='Equatorial Coord. '+cep;
+    AltAz : result:='Alt/AZ Coord. '+trim(sc.cfgsc.ObsName)+blank+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+' (UT+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
     Gal :   result:='Galactic Coordinates';
-    Ecl :   result:='Ecliptic Coordinates, '+cep+', inclination='+detostr(sc.cfgsc.e*rad2deg);
+    Ecl :   result:='Ecliptic Coord. '+cep+', Inclination='+detostr(sc.cfgsc.e*rad2deg);
     else result:='';
     end;
     result:=result+' FOV:'+detostr(sc.cfgsc.fov*rad2deg);
@@ -941,7 +941,8 @@ end;
 procedure Tf_chart.switchstarExecute(Sender: TObject);
 begin
 sc.plot.cfgplot.starplot:=abs(sc.plot.cfgplot.starplot-1);
-sc.plot.cfgplot.nebplot:=abs(sc.plot.cfgplot.nebplot-1);
+sc.plot.cfgplot.nebplot:=sc.plot.cfgplot.starplot;
+sc.cfgsc.FillMilkyWay:=(sc.plot.cfgplot.nebplot=1);
 Refresh;
 end;
 
@@ -1183,6 +1184,11 @@ if p=0 then n:='obs?'
 sc.cfgsc.ObsLatitude := la;
 sc.cfgsc.ObsLongitude := lo;
 sc.cfgsc.ObsAltitude := al;
+p:=pos('/',n);
+if p>0 then begin
+   sc.cfgsc.Obscountry:=trim(copy(n,1,p-1));
+   delete(n,1,p);
+end else sc.cfgsc.Obscountry:='';
 sc.cfgsc.ObsName := n;
 Refresh;
 result:='OK';
@@ -1250,8 +1256,119 @@ case n of
  30 : result:=cmd_SetObs(arg[1]);
  31 : result:=cmd_IdentCursor;
  32 : result:=cmd_SaveImage(arg[1],arg[2],arg[3]);
+ 33 : begin SetAz(deg2rad*180); result:='OK'; end;
+ 34 : begin SetAz(0); result:='OK'; end;
+ 35 : begin SetAz(deg2rad*270); result:='OK'; end;
+ 36 : begin SetAz(deg2rad*90); result:='OK'; end;
+ 37 : begin SetZenit(0); result:='OK'; end;
+ 38 : begin SetZenit(deg2rad*200); result:='OK'; end;
 else result:='Bad command name';
 end;
 end;
 
+
+procedure Tf_chart.FormKeyPress(Sender: TObject; var Key: Char);
+
+begin
+case key of
+'1' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[0]);
+'2' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[1]);
+'3' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[2]);
+'4' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[3]);
+'5' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[4]);
+'6' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[5]);
+'7' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[6]);
+'8' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[7]);
+'9' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[8]);
+'0' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[9]);
+'a' : SetZenit(deg2rad*200);
+'e' : SetAz(deg2rad*270);
+//'f' : SpeedButton17Click(Sender);  // find
+//'h' : SpeedButton24Click(Sender);  // horizon
+//'l' : ToolbarButtonLabelClick(Sender);  // label
+//'m' : Coordone1Click(Sender);     // entree des coordonnees
+'n' : SetAz(deg2rad*180);
+//'p' : popupmenu2.popup(mouse.cursorpos.x,mouse.cursorpos.y);
+//'q' : SwitchProj;
+//'r' : SetRot(15);
+'s' : SetAz(0);
+//'t' : Heure1Click(Sender);         // date time
+'w' : SetAz(deg2rad*90);
+'z' : SetZenit(0);
+//'P' : SetRecording;
+//'R' : SetRot(-15);
+//'+' : SpeedButton2Click(Sender);
+//'-' : SpeedButton3Click(Sender);
+//' ' : HideMenu(not menu_on);
+end;
+end;
+
+procedure Tf_chart.SetField(field : double);
+begin
+sc.setfov(field);
+Refresh;
+end;
+
+procedure Tf_chart.SetZenit(field : double);
+var a,d,az : double;
+begin
+az:=sc.cfgsc.acentre;
+if field>0 then begin
+  if sc.cfgsc.windowratio>1  then sc.cfgsc.fov:=field*sc.cfgsc.windowratio
+     else sc.cfgsc.fov:=field;
+end;
+sc.cfgsc.ProjPole:=Altaz;
+sc.cfgsc.Acentre:=0;
+sc.cfgsc.hcentre:=pid2;
+Hz2Eq(sc.cfgsc.acentre,sc.cfgsc.hcentre,a,d,sc.cfgsc);
+sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
+sc.cfgsc.decentre:=d;
+if field>0 then begin
+   setaz(az);
+   end
+else Refresh;
+end;
+
+procedure Tf_chart.SetAz(Az : double);
+var a,d : double;
+begin
+a := minvalue([sc.cfgsc.Fov,sc.cfgsc.Fov/sc.cfgsc.windowratio]);
+if sc.cfgsc.Fov<pi then Hz2Eq(Az,a/2.3,a,d,sc.cfgsc)
+                   else Hz2Eq(Az,sc.cfgsc.hcentre,a,d,sc.cfgsc);
+sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
+sc.cfgsc.decentre:=d;
+sc.cfgsc.ProjPole:=Altaz;
+Refresh;
+end;
+
+procedure Tf_chart.SetDate(y,m,d,h,n,s:integer);
+var jj,hh: double;
+begin
+hh:=h+n/60+s/3600;
+jj:=jd(y,m,d,hh);
+djd(jj,y,m,d,hh);
+sc.cfgsc.UseSystemTime:=false;
+sc.cfgsc.CurYear:=y;
+sc.cfgsc.CurMonth:=m;
+sc.cfgsc.CurDay:=d;
+sc.cfgsc.CurTime:=hh;
+sc.cfgsc.TrackOn:=true;
+sc.cfgsc.TrackType:=4;
+Refresh;
+end;
+
+procedure Tf_chart.SetJD(njd:double);
+var y,m,d : integer;
+    h : double;
+begin
+djd(njd,y,m,d,h);
+sc.cfgsc.UseSystemTime:=false;
+sc.cfgsc.CurYear:=y;
+sc.cfgsc.CurMonth:=m;
+sc.cfgsc.CurDay:=d;
+sc.cfgsc.CurTime:=h-sc.cfgsc.DT_UT;
+sc.cfgsc.TrackOn:=true;
+sc.cfgsc.TrackType:=4;
+Refresh;
+end;
 

@@ -952,6 +952,8 @@ if (id<1) or (id>30) then exit;
 ok:=true;
 ar:=cfgsc.Planetlst[0,id,1];
 de:=cfgsc.Planetlst[0,id,2];
+// back to j2000
+precession(cfgsc.JDchart,jd2000,ar,de);
 end;
 
 function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; var cfgsc: conf_skychart; var nom,ma,date,desc:string):boolean;

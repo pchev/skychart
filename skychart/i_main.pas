@@ -118,6 +118,9 @@ c2.ShowEcliptic := c1.ShowEcliptic ;
 c2.ShowGalactic := c1.ShowGalactic ;
 c2.ShowMilkyWay := c1.ShowMilkyWay ;
 c2.FillMilkyWay := c1.FillMilkyWay ;
+c2.HorizonOpaque := c1.HorizonOpaque ;
+c2.HorizonMax := c1.HorizonMax ;
+c2.Horizonlist := c1.Horizonlist ;
 //c2. := c1. ;
 end;
 
@@ -240,6 +243,7 @@ try
  ReadDefault;
  LoadConstL(cfgm.ConstLfile);
  LoadConstB(cfgm.ConstBfile);
+ LoadHorizon(cfgm.horizonfile);
  SetLang;
  InitFonts;
  SetLpanel1('');
@@ -325,6 +329,18 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
 end;
 end;
 
+procedure Tf_main.popupProjClick(Sender: TObject);
+var newproj: integer;
+begin
+with Sender as TmenuItem do newproj:=tag;
+if (newproj<Equat)or(newproj>Ecl) then newproj:=Equat;
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.projpole:=newproj;
+   sc.cfgsc.FindOk:=false; // invalidate the search result
+   Refresh;
+end;
+end;
+
 procedure Tf_main.GridEQExecute(Sender: TObject);
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do GridEQExecute(Sender);
@@ -352,6 +368,90 @@ begin
 with Sender as TToolButton do f:=deg2rad*tag/60;
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    sc.SetFOV(f);
+   Refresh;
+end;
+end;
+
+procedure Tf_main.toNExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do SetAz(deg2rad*180);
+end;
+
+procedure Tf_main.toEExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do SetAz(deg2rad*270);
+end;
+
+procedure Tf_main.toSExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do SetAz(0);
+end;
+
+procedure Tf_main.toWExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do SetAz(deg2rad*90);
+end;
+
+procedure Tf_main.toZenithExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do SetZenit(0);
+end;
+
+procedure Tf_main.allSkyExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do SetZenit(deg2rad*200);
+end;
+
+
+procedure Tf_main.TimeIncExecute(Sender: TObject);
+var hh : double;
+    y,m,d,h,n,s,mult : integer;
+begin
+// tag is used for the sign
+mult:=TAction(sender).tag*TimeVal.value;
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   djd(sc.cfgsc.CurJD,y,m,d,hh);
+   DtoS(hh+sc.cfgsc.TimeZone-sc.cfgsc.DT_UT,h,n,s);
+   case TimeU.itemindex of
+   0 : begin
+       inc(h,mult);
+       SetDate(y,m,d,h,n,s);
+       end;
+   1 : begin
+       inc(n,mult);
+       SetDate(y,m,d,h,n,s);
+       end;
+   2 : begin
+       inc(s,mult);
+       SetDate(y,m,d,h,n,s);
+       end;
+   3 : begin
+       inc(d,mult);
+       SetDate(y,m,d,h,n,s);
+       end;
+   4 : begin
+       inc(m,mult);
+       SetDate(y,m,d,h,n,s);
+       end;
+   5 : begin
+       inc(y,mult);
+       SetDate(y,m,d,h,n,s);
+       end;
+   6 : SetJD(sc.cfgsc.CurJD+mult*365.25);      // julian year
+   7 : SetJD(sc.cfgsc.CurJD+mult*365.2421988); // tropical year
+   8 : SetJD(sc.cfgsc.CurJD+mult*0.99726956633); // sideral day
+   9 : SetJD(sc.cfgsc.CurJD+mult*29.530589);   // synodic month
+   10: SetJD(sc.cfgsc.CurJD+mult*6585.321);    // saros
+   end;
+end;
+end;
+
+procedure Tf_main.TimeResetExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.UseSystemTime:=true;
+   sc.cfgsc.TrackOn:=true;
+   sc.cfgsc.TrackType:=4;
    Refresh;
 end;
 end;
@@ -394,6 +494,7 @@ begin
     InitFonts;
     LoadConstL(cfgm.ConstLfile);
     LoadConstB(cfgm.ConstBfile);
+    LoadHorizon(cfgm.horizonfile);
     if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
        sc.cfgsc.FindOk:=false;
@@ -493,12 +594,14 @@ for i:=1 to 9 do begin
    def_cfgplot.LabelColor[i]:=clWhite;
    def_cfgplot.LabelSize[i]:=DefaultFontSize;
 end;
-cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constl.dat';
-cfgm.ConstBfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constb.dat';
-cfgm.EarthMapFile:=slash(appdir)+'data'+Pathdelim+'earthmap1k.jpg';
+cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'DefaultConstL.cln';
+cfgm.ConstBfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constb.cby';
+cfgm.EarthMapFile:=slash(appdir)+'data'+Pathdelim+'earthmap'+Pathdelim+'earthmap1k.jpg';
+cfgm.horizonfile:='';
 def_cfgplot.invisible:=false;
 def_cfgplot.color:=dfColor;
 def_cfgplot.skycolor:=dfSkyColor;
+def_cfgplot.bgColor:=dfColor[0];
 def_cfgplot.backgroundcolor:=def_cfgplot.color[0];
 def_cfgplot.Nebgray:=55;
 def_cfgplot.NebBright:=180;
@@ -536,6 +639,7 @@ def_cfgsc.ymax:=100;
 def_cfgsc.ObsLatitude := 46.2 ;
 def_cfgsc.ObsLongitude := 6.1 ;
 def_cfgsc.ObsAltitude := 0 ;
+def_cfgsc.ObsTZ := GetTimezone ;
 def_cfgsc.ObsTemperature := 10 ;
 def_cfgsc.ObsPressure := 1010 ;
 def_cfgsc.ObsName := 'Genève' ;
@@ -627,7 +731,7 @@ catalog.cfgshr.FieldNum[5]:=20;
 catalog.cfgshr.FieldNum[6]:=45;
 catalog.cfgshr.FieldNum[7]:=90;
 catalog.cfgshr.FieldNum[8]:=180;
-catalog.cfgshr.FieldNum[9]:=270;
+catalog.cfgshr.FieldNum[9]:=310;
 catalog.cfgshr.FieldNum[10]:=360;
 catalog.cfgshr.DegreeGridSpacing[0]:=5/60;
 catalog.cfgshr.DegreeGridSpacing[1]:=10/60;
@@ -808,10 +912,10 @@ cplot.PlanetTransparent:=ReadBool(section,'PlanetTransparent',cplot.PlanetTransp
 cplot.AutoSkycolor:=ReadBool(section,'AutoSkycolor',cplot.AutoSkycolor);
 for i:=0 to maxcolor do cplot.color[i]:=ReadInteger(section,'color'+inttostr(i),cplot.color[i]);
 for i:=1 to 7 do cplot.skycolor[i]:=ReadInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
-cplot.bgColor:=cplot.color[0];
+cplot.bgColor:=ReadInteger(section,'bgColor',cplot.bgColor);
 section:='grid';
-for i:=1 to maxfield do catalog.cfgshr.HourGridSpacing[i]:=ReadFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
-for i:=1 to maxfield do catalog.cfgshr.DegreeGridSpacing[i]:=ReadFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
+for i:=0 to maxfield do catalog.cfgshr.HourGridSpacing[i]:=ReadFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
+for i:=0 to maxfield do catalog.cfgshr.DegreeGridSpacing[i]:=ReadFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
 section:='chart';
 catalog.cfgshr.EquinoxType:=ReadInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
 catalog.cfgshr.EquinoxChart:=ReadString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
@@ -901,6 +1005,7 @@ cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshde
 cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
 cfgm.ConstBfile:=ReadString(section,'ConstBfile',cfgm.ConstBfile);
 cfgm.EarthMapFile:=ReadString(section,'EarthMapFile',cfgm.EarthMapFile);
+cfgm.horizonfile:=ReadString(section,'horizonfile',cfgm.horizonfile);
 cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
 cfgm.keepalive:=ReadBool(section,'keepalive',cfgm.keepalive);
@@ -1011,6 +1116,7 @@ WriteBool(section,'PlanetTransparent',def_cfgplot.PlanetTransparent);
 WriteBool(section,'AutoSkycolor',def_cfgplot.AutoSkycolor);
 for i:=0 to maxcolor do WriteInteger(section,'color'+inttostr(i),def_cfgplot.color[i]);
 for i:=1 to 7 do WriteInteger(section,'skycolor'+inttostr(i),def_cfgplot.skycolor[i]);
+WriteInteger(section,'bgColor',def_cfgplot.bgColor);
 section:='font';
 for i:=1 to 6 do begin
     WriteString(section,'FontName'+inttostr(i),def_cfgplot.FontName[i]);
@@ -1019,8 +1125,8 @@ for i:=1 to 6 do begin
     WriteBool(section,'FontItalic'+inttostr(i),def_cfgplot.FontItalic[i]);
 end;
 section:='grid';
-for i:=1 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
-for i:=1 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
+for i:=0 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
+for i:=0 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
 section:='chart';
 WriteInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
 WriteString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
@@ -1112,6 +1218,7 @@ WriteInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 WriteString(section,'ConstLfile',cfgm.ConstLfile);
 WriteString(section,'ConstBfile',cfgm.ConstBfile);
 WriteString(section,'EarthMapFile',cfgm.EarthMapFile);
+WriteString(section,'horizonfile',cfgm.horizonfile);
 WriteString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 WriteString(section,'ServerIPport',cfgm.ServerIPport);
 WriteBool(section,'keepalive',cfgm.keepalive);
@@ -1445,6 +1552,66 @@ begin
    finally
    closefile(f);
    end;
+end;
+
+Procedure Tf_main.LoadHorizon(fname:string);
+var de,d0,d1,d2 : single;
+    i,i1,i2 : integer;
+    f : textfile;
+    buf : string;
+begin
+def_cfgsc.HorizonMax:=0;
+for i:=1 to 360 do catalog.cfgshr.horizonlist[i]:=0;
+if fileexists(fname) then begin
+i1:=0;i2:=0;d1:=0;d0:=0;
+try
+assignfile(f,fname);
+reset(f);
+// get first point
+repeat readln(f,buf) until eof(f)or((trim(buf)<>'')and(buf[1]<>'#'));
+if (trim(buf)='')or(buf[1]='#') then exit;
+i1:=strtoint(trim(words(buf,' ',1,1)));
+d1:=strtofloat(trim(words(buf,' ',2,1)));
+if d1>90 then d1:=90;
+if d1<0 then d1:=0;
+if i1<>0 then begin
+   reset(f);
+   i1:=0;
+   d1:=0;
+end;
+i2:=0;
+d0:=d1;
+// process each point
+while (not eof(f))and(i2<359) do begin
+    repeat readln(f,buf) until eof(f)or((trim(buf)<>'')and(buf[1]<>'#'));
+    if (trim(buf)='')or(buf[1]='#') then break;
+    i2:=strtoint(trim(words(buf,' ',1,1)));
+    d2:=strtofloat(trim(words(buf,' ',2,1)));
+    if i2>359 then i2:=359;
+    if i1>=i2 then continue;
+    if d2>90 then d2:=90;
+    if d2<0 then d2:=0;
+    for i := i1 to i2 do begin
+        de:=deg2rad*(d1+(i-i1)*(d2-d1)/(i2-i1));
+        catalog.cfgshr.horizonlist[i+1]:=de;
+        def_cfgsc.HorizonMax:=maxvalue([def_cfgsc.HorizonMax,de]);
+    end;
+    i1:=i2;
+    d1:=d2;
+end;
+finally
+closefile(f);
+// fill last point
+if i2<359 then begin
+    for i:=i1 to 359 do begin
+        de:=deg2rad*(d1+(i-i1)*(d0-d1)/(359-i1));
+        catalog.cfgshr.horizonlist[i+1]:=de;
+        def_cfgsc.HorizonMax:=maxvalue([def_cfgsc.HorizonMax,de]);
+    end;
+end;
+def_cfgsc.horizonlist:=@catalog.cfgshr.horizonlist;
+end;
+end;
 end;
 
 Function Tf_main.NewChart(cname:string):string;
