@@ -1,6 +1,6 @@
 object f_chart: Tf_chart
-  Left = 708
-  Top = 555
+  Left = 714
+  Top = 613
   Width = 314
   Height = 209
   Caption = 'Chart'
@@ -321,6 +321,10 @@ object f_chart: Tf_chart
     end
     object zoomminus1: TMenuItem
       Action = zoomminusmove
+    end
+    object ResetAllLabels1: TMenuItem
+      Caption = 'Reset All Labels'
+      OnClick = ResetAllLabels1Click
     end
   end
 end

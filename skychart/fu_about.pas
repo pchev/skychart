@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses
+uses u_constant,
   SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs,
   QStdCtrls, QExtCtrls;
 
@@ -52,11 +52,9 @@ implementation
 
 {$R *.xfm}
 
-uses u_constant;
-
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
- label2.caption:=version;
+ label2.caption:=cdcversion;
 end;
 
 end.

@@ -29,7 +29,7 @@ end;
 
 procedure Tf_chart.FormCreate(Sender: TObject);
 begin
- sc:=Tskychart.Create(self);
+ sc:=Tskychart.Create(Image1);
  // set initial value
  sc.cfgsc.racentre:=1.4;
  sc.cfgsc.decentre:=0;
@@ -39,7 +39,7 @@ begin
  sc.cfgsc.ProjPole:=Equat;
  sc.cfgsc.FlipX:=1;
  sc.cfgsc.FlipY:=1;
- sc.plot.cnv:=Image1.canvas;
+ sc.onShowDetailXY:=IdentDetail;
  sc.InitChart;
  sc.plot.init(Image1.width,Image1.height);
  movefactor:=4;
@@ -68,19 +68,12 @@ begin
 // to restore focus to the chart that as no text control
 // it is also mandatory to keep the keydown and mousewheel
 // event to the main form.
-{$ifdef linux}
-f_main.activecontrol:=nil;
-{$endif}
-{$ifdef mswindows}
-f_main.quicksearch.Enabled:=false;
-f_main.quicksearch.Enabled:=true;
-f_main.setfocus;
-{$endif}
+if assigned(FImageSetFocus) then FImageSetFocus(Sender);
 end;
 
 procedure Tf_chart.AutoRefresh;
 begin
-if f_main.cfgm.locked then exit;
+if locked then exit;
 if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
@@ -91,7 +84,7 @@ end;
 procedure Tf_chart.Refresh;
 begin
 try
-if f_main.cfgm.locked then exit;
+if locked then exit;
 if lock_refresh then exit;
  lock_refresh:=true;
  lastquick:=sc.cfgsc.quick;
@@ -113,7 +106,7 @@ if lock_refresh then exit;
     Identlabel.font.color:=sc.plot.cfgplot.color[11];
     Panel1.color:=sc.plot.cfgplot.color[0];
     if sc.cfgsc.FindOk then ShowIdentLabel;
-    f_main.settopmessage(GetChartInfo);
+    if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
  end;
 finally
  lock_refresh:=false;
@@ -122,24 +115,25 @@ end;
 end;
 
 function Tf_chart.GetChartInfo:string;
-var cep:string;
+var cep,dat:string;
 begin
     cep:=trim(sc.cfgsc.EquinoxName);
     if cep='Date' then cep:=sc.cfgsc.EquinoxDate;
+    dat:=YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+' (+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
     case sc.cfgsc.projpole of
-    Equat : result:='Equatorial Coord. '+cep;
-    AltAz : result:='Alt/AZ Coord. '+trim(sc.cfgsc.ObsName)+blank+YearADBC(sc.cfgsc.CurYear)+'-'+inttostr(sc.cfgsc.curmonth)+'-'+inttostr(sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+' (UT+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
-    Gal :   result:='Galactic Coordinates';
-    Ecl :   result:='Ecliptic Coord. '+cep+', Inclination='+detostr(sc.cfgsc.e*rad2deg);
+    Equat : result:='Equatorial Coord. '+cep+blank+dat;
+    AltAz : result:='Alt/AZ Coord. '+trim(sc.cfgsc.ObsName)+blank+dat;
+    Gal :   result:='Galactic Coordinates'+blank+dat;
+    Ecl :   result:='Ecliptic Coord. '+cep+blank+dat+', Inclination='+detostr(sc.cfgsc.e*rad2deg);
     else result:='';
     end;
-    result:=result+' FOV:'+detostr(sc.cfgsc.fov*rad2deg);
+    result:=result+' Mag:'+formatfloat(f1,sc.plot.cfgchart.min_ma)+' FOV:'+detostr(sc.cfgsc.fov*rad2deg);
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
 var i,j : integer;
 begin
-if f_main.cfgm.locked then exit;
+if locked then exit;
 zoomstep:=0;
 i:=curundo-1;
 j:=lastundo+1;
@@ -150,14 +144,14 @@ if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
   sc.cfgsc:=undolist[curundo];
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
-  f_main.settopmessage(GetChartInfo);
+  if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
 end;
 end;
 
 procedure Tf_chart.RedoExecute(Sender: TObject);
 var i,j : integer;
 begin
-if f_main.cfgm.locked then exit;
+if locked then exit;
 zoomstep:=0;
 i:=curundo+1;
 j:=lastundo+1;
@@ -168,13 +162,13 @@ if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
   sc.cfgsc:=undolist[curundo];
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
-  f_main.settopmessage(GetChartInfo);
+  if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
 end;
 end;
 
 procedure Tf_chart.FormResize(Sender: TObject);
 begin
-if f_main.cfgm.locked then exit;
+if locked then exit;
 RefreshTimer.Enabled:=false;
 RefreshTimer.Enabled:=true;
 Image1.Picture.Bitmap.Width:=Image1.width;
@@ -185,7 +179,7 @@ end;
 procedure Tf_chart.RefreshTimerTimer(Sender: TObject);
 begin
 RefreshTimer.Enabled:=false;
-if f_main.cfgm.locked then exit;
+if locked then exit;
 { maximize a new window now to avoid a Kylix bug
   if WindowState is set to wsMaximized at creation }
 if maximize then begin
@@ -200,10 +194,11 @@ if sc<>nil then sc.plot.init(Image1.width,Image1.height);
 Refresh;
 end;
 
-procedure Tf_chart.PrintChart(Sender: TObject);
+procedure Tf_chart.PrintChart(printcolor,printlandscape:boolean);
 var savecolor: Starcolarray;
-    savesplot,savenplot,savepplot,savebgcolor: integer;
+    savesplot,savenplot,savepplot,savebgcolor,resol: integer;
     saveskycolor: boolean;
+    prtname:string;
 begin
  zoomstep:=0;
  // save current state
@@ -214,13 +209,14 @@ begin
  saveskycolor:=sc.plot.cfgplot.autoskycolor;
  savebgcolor:=sc.plot.cfgplot.bgColor;
 try
+ GetPrinterResolution(prtname,resol);
  // force line drawing
  sc.plot.cfgplot.starplot:=0;
  sc.plot.cfgplot.nebplot:=0;
  if sc.plot.cfgplot.plaplot=2 then sc.plot.cfgplot.plaplot:=1;
  // ensure white background
  sc.plot.cfgplot.autoskycolor:=false;
- if f_main.cfgm.printcolor then begin
+ if printcolor then begin
    sc.plot.cfgplot.color[0]:=clWhite;
    sc.plot.cfgplot.color[11]:=clBlack;
  end else begin
@@ -228,12 +224,13 @@ try
  end;
  sc.plot.cfgplot.bgColor:=sc.plot.cfgplot.color[0];
  // set orientation
- if f_main.cfgm.PrintLandscape then Printer.Orientation:=poLandscape
-                               else Printer.Orientation:=poPortrait;
+ if PrintLandscape then Printer.Orientation:=poLandscape
+                   else Printer.Orientation:=poPortrait;
  // print
  Printer.BeginDoc;
  sc.plot.cnv:=Printer.canvas;
  sc.plot.cfgchart.onprinter:=true;
+ sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 100]);
  sc.plot.init(Printer.pagewidth,Printer.pageheight);
  sc.Refresh;
  Printer.EndDoc;
@@ -248,6 +245,7 @@ finally
  // redraw to screen
  sc.plot.cnv:=Image1.canvas;
  sc.plot.cfgchart.onprinter:=false;
+ sc.plot.cfgchart.drawpen:=1;
  Image1.Picture.Bitmap.Width:=Image1.width;
  Image1.Picture.Bitmap.Height:=Image1.Height;
  sc.plot.init(Image1.width,Image1.height);
@@ -265,22 +263,22 @@ end;
 procedure Tf_chart.FormActivate(Sender: TObject);
 begin
 // code to execute when the chart get focus.
-f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
-f_main.settopmessage(GetChartInfo);
-if sc.cfgsc.FindOk then f_main.SetLpanel1(sc.cfgsc.FindDesc,caption,false);
+if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
+if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
+if sc.cfgsc.FindOk and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,false);
 end;
 
 procedure Tf_chart.FlipxExecute(Sender: TObject);
 begin
  sc.cfgsc.FlipX:=-sc.cfgsc.FlipX;
- f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
+ if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
  Refresh;
 end;
 
 procedure Tf_chart.FlipyExecute(Sender: TObject);
 begin
  sc.cfgsc.FlipY:=-sc.cfgsc.FlipY;
- f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
+ if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
  Refresh;
 end;
 
@@ -428,7 +426,7 @@ end;
 procedure Tf_chart.CMouseWheel(Shift: TShiftState;WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 begin
 handled:=true;
-lock_TrackCursor:=true;
+//lock_TrackCursor:=true;
 if wheeldelta>0 then sc.Zoom(1.25)
                 else sc.Zoom(0.8);
 Refresh;
@@ -437,16 +435,17 @@ end;
 Procedure Tf_chart.ShowIdentLabel;
 var x,y : integer;
 begin
-if f_main.cfgm.locked then exit;
+if locked then exit;
 if sc.cfgsc.FindOK then begin
    identlabel.Visible:=false;
    identlabel.font.name:=sc.plot.cfgplot.fontname[2];
-   identlabel.font.size:=sc.plot.cfgplot.LabelSize[1];
+   identlabel.font.size:=sc.plot.cfgplot.fontSize[2];
    identlabel.caption:=trim(sc.cfgsc.FindName);
    sc.GetLabPos(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc.FindSize/2,identlabel.Width,identlabel.Height,x,y);
    identlabel.left:=x;
    identlabel.top:=y;
    identlabel.Visible:=true;
+   identlabel.bringtofront;
 end
 else identlabel.Visible:=false;
 end;
@@ -455,14 +454,14 @@ function Tf_chart.IdentXY(X, Y: Integer):boolean;
 var ra,dec,a,h,l,b,le,be,dx:double;
 begin
 result:=false;
-if f_main.cfgm.locked then exit;
+if locked then exit;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=2/sc.cfgsc.BxGlb; // search a 2 pixel radius
 result:=sc.FindatRaDec(ra,dec,dx);
 if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx);  //else 6 pixel
 ShowIdentLabel;
-f_main.SetLpanel1(sc.cfgsc.FindDesc,caption);
+if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption);
 end;
 
 function Tf_chart.ListXY(X, Y: Integer):boolean;
@@ -470,17 +469,12 @@ var ra,dec,a,h,l,b,le,be,dx:double;
     buf:widestring;
 begin
 result:=false;
-if f_main.cfgm.locked then exit;
+if locked then exit;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=12/sc.cfgsc.BxGlb; // search a 12 pixel radius
 sc.Findlist(ra,dec,dx,dx,buf,false,true,true);
-f_info.Memo1.text:=buf;
-f_info.Memo1.selstart:=0;
-f_info.Memo1.sellength:=0;
-f_info.setpage(1);
-f_info.source_chart:=caption;
-f_info.show;
+if assigned(FListInfo) then FListInfo(buf);
 end;
 
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -521,7 +515,7 @@ procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
 var ra,dec,a,h,l,b,le,be,c:double;
     txt:string;
 begin
-if f_main.cfgm.locked then exit;
+if locked then exit;
 if shift = [ssLeft] then begin
    ZoomBox(2,X,Y);
 end else if (shift=[ssMiddle])or(shift=[ssLeft,ssShift]) then begin
@@ -535,6 +529,7 @@ end else if shift=[ssMiddle,ssCtrl] then begin
      lasty:=y;
      lastyzoom:=y;
 end else begin
+   if lastquick then Refresh; //the mouse as leave during a quick refresh
    {show the coordinates}
    sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
    case sc.cfgsc.projpole of
@@ -557,7 +552,7 @@ end else begin
               +'Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
           end;
    end;
-   f_main.SetLpanel0(txt);
+   if assigned(Fshowcoord) then Fshowcoord(txt);
 end;
 end;
 
@@ -603,7 +598,7 @@ case action of
      YzoomD1:=y1;
      YzoomD2:=y2;
      Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
-     f_main.SetLPanel0(demtostr(rad2deg*abs(dx/sc.cfgsc.Bxglb)));
+     if assigned(Fshowcoord) then Fshowcoord(demtostr(rad2deg*abs(dx/sc.cfgsc.Bxglb)));
   end else begin
      // draw zoom box
      inc(ZoomMove);
@@ -623,7 +618,7 @@ case action of
      YzoomD2:=y2;
      Zoomstep:=2;
      Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
-     f_main.SetLPanel0(demtostr(rad2deg*abs((XZoomD2-XZoomD1)/sc.cfgsc.Bxglb)));
+     if assigned(Fshowcoord) then Fshowcoord(demtostr(rad2deg*abs((XZoomD2-XZoomD1)/sc.cfgsc.Bxglb)));
      end
     end;
 3 : begin   // mouse up
@@ -801,8 +796,8 @@ result:=result+html_b+copy(sc.catalog.cfgshr.llabel[91]+blank15,1,17)+':'+htms_b
 result:=result+html_b+copy(sc.catalog.cfgshr.llabel[92]+blank15,1,17)+':'+htms_b+demtostr(rad2deg*h)+html_br;
 result:=result+html_br;
 // here the rise/set time 
-if pos('PA:',f_main.LPanels0.caption)>0
-   then result:=result+html_b+sc.catalog.cfgshr.llabel[98]+' : '+htms_b+f_main.LPanels0.caption+html_br;
+//if pos('PA:',f_main.LPanels0.caption)>0
+  // then result:=result+html_b+sc.catalog.cfgshr.llabel[98]+' : '+htms_b+f_main.LPanels0.caption+html_br;
 buf:=sc.cfgsc.FindNote;
 repeat
   i:=pos(tab,buf);
@@ -1366,8 +1361,8 @@ case n of
  8 : sc.MoveChart(1,-1,movefactor);
  9 : sc.MoveChart(-1,1,movefactor);
  10 : sc.MoveChart(-1,-1,movefactor);
- 11 : begin sc.cfgsc.FlipX:=-sc.cfgsc.FlipX; f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);end;
- 12 : begin sc.cfgsc.FlipY:=-sc.cfgsc.FlipY; f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);end;
+ 11 : begin sc.cfgsc.FlipX:=-sc.cfgsc.FlipX; if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);end;
+ 12 : begin sc.cfgsc.FlipY:=-sc.cfgsc.FlipY; if assigned(FUpdateFlipBtn) then FUpdateFlipBtn(sc.cfgsc.flipx,sc.cfgsc.flipy);end;
  13 : result:=cmd_SetCursorPosition(strtointdef(arg[1],-1),strtointdef(arg[2],-1));
  14 : sc.MovetoXY(xcursor,ycursor);
  15 : begin sc.zoom(zoomfactor);sc.MovetoXY(xcursor,ycursor);end;
@@ -1520,3 +1515,20 @@ sc.cfgsc.TrackType:=4;
 Refresh;
 end;
 
+procedure Tf_chart.Resetalllabels1Click(Sender: TObject);
+begin
+sc.cfgsc.nummodlabels:=0;
+sc.DrawLabels;
+end;
+
+procedure Tf_chart.IdentDetail(X, Y: Integer);
+var ra,dec,a,h,l,b,le,be,dx:double;
+begin
+if locked then exit;
+sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
+ra:=rmod(ra+pi2,pi2);
+dx:=1/sc.cfgsc.BxGlb; // search a 1 pixel radius
+sc.FindatRaDec(ra,dec,dx);
+if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption);
+identlabelClick(Self);
+end;

@@ -1,8 +1,8 @@
 object f_config: Tf_config
-  Left = 232
-  Top = 129
+  Left = 208
+  Top = 215
   Width = 636
-  Height = 518
+  Height = 516
   Caption = 'Configuration'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -76,7 +76,7 @@ object f_config: Tf_config
     Top = 16
     Width = 474
     Height = 441
-    ActivePage = p_asteroids
+    ActivePage = p_labels
     TabOrder = 1
     OnChange = PageControl1Change
     object p_time: TTabSheet
@@ -6270,21 +6270,23 @@ object f_config: Tf_config
         TabOrder = 0
         OnClick = PlaParalaxeClick
       end
-      object planet3: TEdit
+      object planetdir: TEdit
         Left = 104
         Top = 59
-        Width = 113
+        Width = 225
         Height = 21
         TabOrder = 1
         Text = '~/'
+        OnChange = planetdirChange
       end
-      object BitBtn31: TBitBtn
-        Left = 216
-        Top = 59
+      object planetdirsel: TBitBtn
+        Left = 336
+        Top = 56
         Width = 26
         Height = 26
         TabOrder = 2
         TabStop = False
+        OnClick = planetdirselClick
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
           1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
@@ -6480,12 +6482,464 @@ object f_config: Tf_config
       Caption = 'p_comets'
       ImageIndex = 5
       TabVisible = False
-      object Label6: TLabel
+      object ComPageControl: TPageControl
         Left = 0
-        Top = 0
-        Width = 71
-        Height = 13
-        Caption = 'Comets Setting'
+        Top = 4
+        Width = 465
+        Height = 420
+        ActivePage = comsetting
+        TabIndex = 0
+        TabOrder = 0
+        object comsetting: TTabSheet
+          Caption = 'General Setting'
+          ImageIndex = 3
+          object GroupBox13: TGroupBox
+            Left = 8
+            Top = 10
+            Width = 441
+            Height = 175
+            Caption = 'Chart Setting'
+            TabOrder = 0
+            object Label154: TLabel
+              Left = 32
+              Top = 112
+              Width = 250
+              Height = 13
+              Caption = 'Do not take account of comet fainter than magnitude'
+            end
+            object Label216: TLabel
+              Left = 32
+              Top = 144
+              Width = 59
+              Height = 13
+              Caption = 'Show comet'
+            end
+            object Label231: TLabel
+              Left = 160
+              Top = 144
+              Width = 151
+              Height = 13
+              Caption = 'magnitude fainter than the stars.'
+            end
+            object comlimitmag: TFloatEdit
+              Left = 320
+              Top = 107
+              Width = 41
+              Height = 22
+              Hint = '0..99'
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 0
+              OnChange = comlimitmagChange
+              MaxValue = 99
+            end
+            object showcom: TCheckBox
+              Left = 32
+              Top = 24
+              Width = 241
+              Height = 30
+              Caption = 'Show comets on the chart'
+              TabOrder = 1
+              OnClick = showcomClick
+            end
+            object comsymbol: TRadioGroup
+              Left = 24
+              Top = 56
+              Width = 393
+              Height = 41
+              Color = clBtnFace
+              Columns = 2
+              ItemIndex = 1
+              Items.Strings = (
+                'Display as a symbol'
+                'Proportional to the magnitude ')
+              ParentColor = False
+              TabOrder = 3
+              OnClick = comsymbolClick
+            end
+            object commagdiff: TFloatEdit
+              Left = 112
+              Top = 139
+              Width = 41
+              Height = 22
+              Hint = '0..99'
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 2
+              OnChange = commagdiffChange
+              MaxValue = 99
+            end
+          end
+          object comdbset: TButton
+            Left = 8
+            Top = 232
+            Width = 113
+            Height = 25
+            Caption = 'Database setting...'
+            TabOrder = 1
+            OnClick = astdbsetClick
+          end
+        end
+        object comload: TTabSheet
+          Caption = 'Load MPC File'
+          ImageIndex = 1
+          object Label232: TLabel
+            Left = 8
+            Top = 112
+            Width = 51
+            Height = 13
+            Caption = 'Messages:'
+          end
+          object GroupBox14: TGroupBox
+            Left = 8
+            Top = 10
+            Width = 441
+            Height = 87
+            Caption = 'Load MPC format file'
+            TabOrder = 0
+            object Label233: TLabel
+              Left = 8
+              Top = 32
+              Width = 22
+              Height = 13
+              Caption = 'File :'
+            end
+            object comfile: TEdit
+              Left = 32
+              Top = 28
+              Width = 241
+              Height = 21
+              TabOrder = 0
+              Text = 'COMET.DAT'
+            end
+            object Loadcom: TButton
+              Left = 328
+              Top = 26
+              Width = 97
+              Height = 25
+              Caption = 'Load file'
+              TabOrder = 1
+              OnClick = LoadcomClick
+            end
+            object comfilebtn: TBitBtn
+              Tag = 8
+              Left = 275
+              Top = 25
+              Width = 26
+              Height = 26
+              TabOrder = 2
+              TabStop = False
+              OnClick = comfilebtnClick
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                0000000000000000000000000000000000000000000000000000000000000000
+                00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+                7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+                CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+                CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+                7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+                7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+                C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+                CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+                CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+              Layout = blGlyphTop
+              Margin = 0
+            end
+          end
+          object MemoCom: TMemo
+            Left = 8
+            Top = 128
+            Width = 441
+            Height = 257
+            Color = clBtnFace
+            ScrollBars = ssBoth
+            TabOrder = 1
+          end
+        end
+        object comdelete: TTabSheet
+          Caption = 'Data Maintenance'
+          ImageIndex = 3
+          object Label238: TLabel
+            Left = 8
+            Top = 144
+            Width = 51
+            Height = 13
+            Caption = 'Messages:'
+          end
+          object GroupBox16: TGroupBox
+            Left = 8
+            Top = 10
+            Width = 441
+            Height = 60
+            Caption = 'Delete MPC data selectively'
+            TabOrder = 0
+            object comelemlist: TComboBox
+              Left = 16
+              Top = 24
+              Width = 281
+              Height = 21
+              Style = csDropDownList
+              ItemHeight = 13
+              TabOrder = 0
+            end
+            object DelCom: TButton
+              Left = 328
+              Top = 24
+              Width = 75
+              Height = 25
+              Caption = 'Delete'
+              TabOrder = 1
+              OnClick = DelComClick
+            end
+          end
+          object GroupBox17: TGroupBox
+            Left = 8
+            Top = 80
+            Width = 441
+            Height = 49
+            Caption = 'Quick Delete'
+            TabOrder = 1
+            object Label239: TLabel
+              Left = 24
+              Top = 19
+              Width = 171
+              Height = 13
+              Caption = 'Quickly delete all comet related data'
+            end
+            object DelComAll: TButton
+              Left = 328
+              Top = 16
+              Width = 75
+              Height = 25
+              Caption = 'Delete'
+              TabOrder = 0
+              OnClick = DelComAllClick
+            end
+          end
+          object DelComMemo: TMemo
+            Left = 8
+            Top = 168
+            Width = 441
+            Height = 217
+            Color = clBtnFace
+            ScrollBars = ssBoth
+            TabOrder = 2
+          end
+        end
+        object Addsinglecom: TTabSheet
+          Caption = 'Add'
+          ImageIndex = 4
+          object Label241: TLabel
+            Left = 8
+            Top = 8
+            Width = 287
+            Height = 13
+            Caption = 'Add a single element to the database. All field are mandatory.'
+          end
+          object Label242: TLabel
+            Left = 8
+            Top = 40
+            Width = 56
+            Height = 13
+            Caption = 'Designation'
+          end
+          object Label243: TLabel
+            Left = 8
+            Top = 232
+            Width = 103
+            Height = 13
+            Caption = 'H absolute magnitude'
+          end
+          object Label244: TLabel
+            Left = 160
+            Top = 232
+            Width = 86
+            Height = 13
+            Caption = 'G slope parameter'
+          end
+          object Label245: TLabel
+            Left = 160
+            Top = 168
+            Width = 53
+            Height = 13
+            Caption = 'Epoch (JD)'
+          end
+          object Label246: TLabel
+            Left = 160
+            Top = 40
+            Width = 70
+            Height = 13
+            Caption = 'Perihelion date'
+          end
+          object Label247: TLabel
+            Left = 160
+            Top = 104
+            Width = 105
+            Height = 13
+            Caption = 'Argument of perihelion'
+          end
+          object Label248: TLabel
+            Left = 312
+            Top = 104
+            Width = 128
+            Height = 13
+            Caption = 'Longitude ascending Node'
+          end
+          object Label249: TLabel
+            Left = 8
+            Top = 168
+            Width = 48
+            Height = 13
+            Caption = 'Inclination'
+          end
+          object Label250: TLabel
+            Left = 8
+            Top = 104
+            Width = 55
+            Height = 13
+            Caption = 'Eccentricity'
+          end
+          object Label251: TLabel
+            Left = 312
+            Top = 40
+            Width = 89
+            Height = 13
+            Caption = 'Perihelion distance'
+          end
+          object Label253: TLabel
+            Left = 312
+            Top = 168
+            Width = 38
+            Height = 13
+            Caption = 'Equinox'
+          end
+          object Label254: TLabel
+            Left = 8
+            Top = 296
+            Width = 28
+            Height = 13
+            Caption = 'Name'
+          end
+          object comid: TEdit
+            Left = 8
+            Top = 64
+            Width = 100
+            Height = 21
+            TabOrder = 0
+          end
+          object comh: TEdit
+            Left = 8
+            Top = 256
+            Width = 100
+            Height = 21
+            TabOrder = 1
+            Text = '5'
+          end
+          object comg: TEdit
+            Left = 160
+            Top = 256
+            Width = 100
+            Height = 21
+            TabOrder = 2
+            Text = '10'
+          end
+          object comep: TEdit
+            Left = 160
+            Top = 192
+            Width = 100
+            Height = 21
+            TabOrder = 3
+          end
+          object comperi: TEdit
+            Left = 160
+            Top = 128
+            Width = 100
+            Height = 21
+            TabOrder = 4
+            Text = '0.0'
+          end
+          object comnode: TEdit
+            Left = 312
+            Top = 128
+            Width = 100
+            Height = 21
+            TabOrder = 5
+            Text = '0.0'
+          end
+          object comi: TEdit
+            Left = 8
+            Top = 192
+            Width = 100
+            Height = 21
+            TabOrder = 6
+            Text = '0.0'
+          end
+          object comec: TEdit
+            Left = 8
+            Top = 128
+            Width = 100
+            Height = 21
+            TabOrder = 7
+            Text = '0.0'
+          end
+          object comq: TEdit
+            Left = 312
+            Top = 64
+            Width = 100
+            Height = 21
+            TabOrder = 8
+            Text = '2'
+          end
+          object comnam: TEdit
+            Left = 8
+            Top = 320
+            Width = 257
+            Height = 21
+            TabOrder = 9
+          end
+          object comeq: TEdit
+            Left = 312
+            Top = 192
+            Width = 100
+            Height = 21
+            TabOrder = 10
+            Text = '2000'
+          end
+          object AddCom: TButton
+            Left = 312
+            Top = 320
+            Width = 75
+            Height = 25
+            Caption = 'Add'
+            TabOrder = 11
+            OnClick = AddComClick
+          end
+          object comt: TMaskEdit
+            Left = 160
+            Top = 64
+            Width = 91
+            Height = 21
+            EditMask = '!9999.99.00.0000;1;_'
+            MaxLength = 15
+            TabOrder = 12
+            Text = '    .  .  .    '
+          end
+        end
       end
     end
     object p_asteroids: TTabSheet
@@ -6497,8 +6951,8 @@ object f_config: Tf_config
         Top = 4
         Width = 465
         Height = 420
-        ActivePage = astload
-        TabIndex = 1
+        ActivePage = astsetting
+        TabIndex = 0
         TabOrder = 0
         object astsetting: TTabSheet
           Caption = 'General Setting'
@@ -6527,9 +6981,9 @@ object f_config: Tf_config
             object Label213: TLabel
               Left = 160
               Top = 144
-              Width = 148
+              Width = 151
               Height = 13
-              Caption = 'magnitude fainter that the stars.'
+              Caption = 'magnitude fainter than the stars.'
             end
             object astlimitmag: TFloatEdit
               Left = 320
@@ -7163,7 +7617,7 @@ object f_config: Tf_config
         Left = 8
         Top = 32
         Width = 393
-        Height = 281
+        Height = 329
         Shape = bsFrame
       end
       object Label51: TLabel
@@ -7602,6 +8056,74 @@ object f_config: Tf_config
           FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3F}
         OnClick = SelectFontClick
       end
+      object SpeedButton7: TSpeedButton
+        Tag = 7
+        Left = 352
+        Top = 317
+        Width = 23
+        Height = 22
+        Glyph.Data = {
+          76060000424D7606000000000000360000002800000014000000140000000100
+          20000000000040060000000000000000000000000000000000000000003F0000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          00000000000000000000BFBFBF3FBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBF
+          BFBF7F0000BF7F000000BFBFBF00BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBFBFBF7F0000BF7F000000BFBFBF00BFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBF
+          BFBF7F0000BF7F000000BFBFBF00BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFFF00FFBF00007F3FFF00FF00BFBFBF3FBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBFBFBF7F0000BF7F0000007F000000BFBF
+          BF00BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBF00007FBFBFBFBF00BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBF
+          BFBF7F0000BF7F000000BFBFBF00BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF00007FBFBFBFBF00FF00FFBFBFBF
+          BF3FBFBFBFBFBFBFBFBFBFBFBF3FBFBFBFBF7F0000BF7F000000BFBFBF00BFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBF00007FBF00007F0000007F3FBFBFBF00BFBFBFBFBFBFBFBFBFBFBF3FBFBF
+          BFBF7F0000BF7F0000007F0000007F000000BFBFBF00BFBFBFBF7F007FBF7F00
+          7F00BFBFBF3FBFBFBFBFBFBFBFBFBFBFBFBF00007FBFBFBFBF00FF00FFBFBFBF
+          BF3FBFBFBFBFBFBFBFBFBFBFBF3FBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFFF00FFBF7F007F3FBFBFBF00BFBFBFBFBFBF
+          BFBF00007FBFBFBFBF00BFBFBFBFFF00FFBFBFBFBF3FBFBFBFBFBFBFBF3FBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBF7F007FBFBFBFBF00BFBFBFBFFF00FFBF00007F3F00007F0000007F3F0000
+          7F00BFBFBF3FBFBFBFBFBFBFBF3FBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF7F007FBFBFBFBF00BFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF7F00
+          7FBF7F007F3F7F007F00BFBFBF3FBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF7F007FBFBFBFBF00BFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBF7F007FBFFF00FF00BFBFBF3FBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF7F007FBF7F007F3FBFBF
+          BF00BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF3FBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBFBF
+          BFBFBFBFBFBFBFBFBFBF0000003F000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000FFFFFF3F0000
+          00BFFF000000FF000000FF000000FF000000FF000000FF000000FF000000FF00
+          0000FF000000FF000000FF000000FF000000FF000000FF00000000000000FFFF
+          FF00000000BFFFFFFF00FF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00
+          FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00
+          FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3FFF00FF3F}
+        OnClick = SelectFontClick
+      end
+      object Label235: TLabel
+        Left = 16
+        Top = 328
+        Width = 64
+        Height = 13
+        Caption = 'Greek symbol'
+      end
       object gridfont: TEdit
         Left = 184
         Top = 65
@@ -7670,12 +8192,23 @@ object f_config: Tf_config
       end
       object Button1: TButton
         Left = 184
-        Top = 328
+        Top = 376
         Width = 75
         Height = 25
         Caption = 'Default'
         TabOrder = 6
         OnClick = DefaultFontClick
+      end
+      object symbfont: TEdit
+        Left = 184
+        Top = 313
+        Width = 160
+        Height = 30
+        TabStop = False
+        AutoSize = False
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 7
       end
     end
     object p_color: TTabSheet
@@ -7691,70 +8224,70 @@ object f_config: Tf_config
       end
       object Label181: TLabel
         Left = 93
-        Top = 30
+        Top = 22
         Width = 18
         Height = 13
         Caption = '-0.3'
       end
       object Label182: TLabel
         Left = 147
-        Top = 30
+        Top = 22
         Width = 18
         Height = 13
         Caption = '-0.1'
       end
       object Label183: TLabel
         Left = 201
-        Top = 30
+        Top = 22
         Width = 15
         Height = 13
         Caption = '0.2'
       end
       object Label184: TLabel
         Left = 254
-        Top = 30
+        Top = 22
         Width = 15
         Height = 13
         Caption = '0.5'
       end
       object Label185: TLabel
         Left = 308
-        Top = 30
+        Top = 22
         Width = 15
         Height = 13
         Caption = '0.8'
       end
       object Label186: TLabel
         Left = 362
-        Top = 30
+        Top = 22
         Width = 15
         Height = 13
         Caption = '1.3'
       end
       object Label187: TLabel
         Left = 416
-        Top = 30
+        Top = 22
         Width = 6
         Height = 13
         Caption = '>'
       end
       object Label188: TLabel
         Left = 40
-        Top = 30
+        Top = 22
         Width = 6
         Height = 13
         Caption = '<'
       end
       object Label189: TLabel
         Left = 8
-        Top = 30
+        Top = 22
         Width = 20
         Height = 13
         Caption = 'B-V:'
       end
       object Label190: TLabel
         Left = 56
-        Top = 118
+        Top = 86
         Width = 32
         Height = 13
         Alignment = taCenter
@@ -7762,7 +8295,7 @@ object f_config: Tf_config
       end
       object Label191: TLabel
         Left = 120
-        Top = 118
+        Top = 86
         Width = 32
         Height = 13
         Alignment = taCenter
@@ -7770,7 +8303,7 @@ object f_config: Tf_config
       end
       object Label192: TLabel
         Left = 185
-        Top = 118
+        Top = 86
         Width = 34
         Height = 13
         Alignment = taCenter
@@ -7778,7 +8311,7 @@ object f_config: Tf_config
       end
       object Label193: TLabel
         Left = 248
-        Top = 118
+        Top = 86
         Width = 34
         Height = 13
         Alignment = taCenter
@@ -7786,7 +8319,7 @@ object f_config: Tf_config
       end
       object Label194: TLabel
         Left = 307
-        Top = 118
+        Top = 86
         Width = 35
         Height = 13
         Alignment = taCenter
@@ -7794,7 +8327,7 @@ object f_config: Tf_config
       end
       object Label195: TLabel
         Left = 380
-        Top = 118
+        Top = 86
         Width = 22
         Height = 13
         Alignment = taCenter
@@ -7802,7 +8335,7 @@ object f_config: Tf_config
       end
       object Label197: TLabel
         Left = 32
-        Top = 206
+        Top = 150
         Width = 92
         Height = 13
         Alignment = taCenter
@@ -7810,7 +8343,7 @@ object f_config: Tf_config
       end
       object Label198: TLabel
         Left = 144
-        Top = 206
+        Top = 150
         Width = 45
         Height = 13
         Alignment = taCenter
@@ -7818,7 +8351,7 @@ object f_config: Tf_config
       end
       object Label199: TLabel
         Left = 208
-        Top = 206
+        Top = 150
         Width = 73
         Height = 13
         Alignment = taCenter
@@ -7826,7 +8359,7 @@ object f_config: Tf_config
       end
       object Label196: TLabel
         Left = 290
-        Top = 206
+        Top = 150
         Width = 53
         Height = 13
         Alignment = taCenter
@@ -7834,23 +8367,39 @@ object f_config: Tf_config
       end
       object Label11: TLabel
         Left = 374
-        Top = 206
+        Top = 150
         Width = 36
         Height = 13
         Alignment = taCenter
         Caption = 'Horizon'
       end
+      object Label6: TLabel
+        Left = 56
+        Top = 214
+        Width = 38
+        Height = 13
+        Alignment = taCenter
+        Caption = 'Asteroid'
+      end
+      object Label234: TLabel
+        Left = 120
+        Top = 214
+        Width = 30
+        Height = 13
+        Alignment = taCenter
+        Caption = 'Comet'
+      end
       object bg1: TPanel
         Left = 32
-        Top = 48
+        Top = 36
         Width = 401
-        Height = 57
+        Height = 38
         TabOrder = 0
         OnClick = bgClick
         object Shape1: TShape
           Tag = 1
           Left = 24
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Shape = stCircle
@@ -7859,7 +8408,7 @@ object f_config: Tf_config
         object Shape2: TShape
           Tag = 2
           Left = 77
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Shape = stCircle
@@ -7868,7 +8417,7 @@ object f_config: Tf_config
         object Shape3: TShape
           Tag = 3
           Left = 130
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Shape = stCircle
@@ -7877,7 +8426,7 @@ object f_config: Tf_config
         object Shape4: TShape
           Tag = 4
           Left = 184
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Shape = stCircle
@@ -7886,7 +8435,7 @@ object f_config: Tf_config
         object Shape5: TShape
           Tag = 5
           Left = 237
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Shape = stCircle
@@ -7895,7 +8444,7 @@ object f_config: Tf_config
         object Shape6: TShape
           Tag = 6
           Left = 290
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Shape = stCircle
@@ -7904,7 +8453,7 @@ object f_config: Tf_config
         object Shape7: TShape
           Tag = 7
           Left = 344
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Shape = stCircle
@@ -7913,15 +8462,15 @@ object f_config: Tf_config
       end
       object bg2: TPanel
         Left = 32
-        Top = 136
+        Top = 100
         Width = 401
-        Height = 57
+        Height = 38
         TabOrder = 1
         OnClick = bgClick
         object Shape8: TShape
           Tag = 8
           Left = 24
-          Top = 20
+          Top = 7
           Width = 33
           Height = 25
           Brush.Style = bsClear
@@ -7933,7 +8482,7 @@ object f_config: Tf_config
         object Shape9: TShape
           Tag = 9
           Left = 88
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Brush.Style = bsClear
@@ -7945,7 +8494,7 @@ object f_config: Tf_config
         object Shape10: TShape
           Tag = 10
           Left = 152
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Brush.Style = bsClear
@@ -7957,7 +8506,7 @@ object f_config: Tf_config
         object Shape11: TShape
           Tag = 12
           Left = 216
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Brush.Style = bsClear
@@ -7969,7 +8518,7 @@ object f_config: Tf_config
         object Shape12: TShape
           Tag = 13
           Left = 280
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Brush.Style = bsClear
@@ -7981,7 +8530,7 @@ object f_config: Tf_config
         object Shape13: TShape
           Tag = 14
           Left = 344
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Brush.Style = bsClear
@@ -7993,15 +8542,15 @@ object f_config: Tf_config
       end
       object bg3: TPanel
         Left = 32
-        Top = 224
+        Top = 164
         Width = 401
-        Height = 57
+        Height = 38
         TabOrder = 2
         OnClick = bgClick
         object Shape15: TShape
           Tag = 16
           Left = 32
-          Top = 16
+          Top = 4
           Width = 33
           Height = 30
           Brush.Style = bsClear
@@ -8013,7 +8562,7 @@ object f_config: Tf_config
         object Shape16: TShape
           Tag = 17
           Left = 114
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Brush.Style = bsClear
@@ -8025,7 +8574,7 @@ object f_config: Tf_config
         object Shape17: TShape
           Tag = 18
           Left = 197
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Brush.Style = bsClear
@@ -8037,7 +8586,7 @@ object f_config: Tf_config
         object Shape14: TShape
           Tag = 15
           Left = 272
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Brush.Style = bsClear
@@ -8049,7 +8598,7 @@ object f_config: Tf_config
         object Shape25: TShape
           Tag = 19
           Left = 344
-          Top = 16
+          Top = 4
           Width = 30
           Height = 30
           Shape = stSquare
@@ -8071,6 +8620,32 @@ object f_config: Tf_config
           'White/Black')
         TabOrder = 3
         OnClick = DefColorClick
+      end
+      object bg4: TPanel
+        Left = 32
+        Top = 228
+        Width = 401
+        Height = 38
+        TabOrder = 4
+        OnClick = bgClick
+        object Shape26: TShape
+          Tag = 20
+          Left = 24
+          Top = 4
+          Width = 30
+          Height = 30
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape27: TShape
+          Tag = 21
+          Left = 88
+          Top = 4
+          Width = 30
+          Height = 30
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
       end
     end
     object p_skycolor: TTabSheet
@@ -8527,6 +9102,307 @@ object f_config: Tf_config
         Height = 13
         Caption = 'Labels Setting'
       end
+      object labelcolorStar: TShape
+        Tag = 1
+        Left = 344
+        Top = 88
+        Width = 17
+        Height = 17
+        OnMouseUp = labelcolorMouseUp
+      end
+      object Label236: TLabel
+        Left = 40
+        Top = 40
+        Width = 60
+        Height = 13
+        Caption = 'Label Object'
+      end
+      object Label237: TLabel
+        Left = 264
+        Top = 40
+        Width = 65
+        Height = 33
+        AutoSize = False
+        Caption = 'Magnitude difference'
+        WordWrap = True
+      end
+      object Label240: TLabel
+        Left = 344
+        Top = 40
+        Width = 26
+        Height = 13
+        Caption = 'Label'
+      end
+      object Label252: TLabel
+        Left = 344
+        Top = 56
+        Width = 24
+        Height = 13
+        Caption = 'Color'
+      end
+      object Label255: TLabel
+        Left = 384
+        Top = 56
+        Width = 20
+        Height = 13
+        Caption = 'Size'
+      end
+      object labelcolorVar: TShape
+        Tag = 2
+        Left = 344
+        Top = 120
+        Width = 17
+        Height = 17
+        OnMouseUp = labelcolorMouseUp
+      end
+      object labelcolorMult: TShape
+        Tag = 3
+        Left = 344
+        Top = 152
+        Width = 17
+        Height = 17
+        OnMouseUp = labelcolorMouseUp
+      end
+      object labelcolorNeb: TShape
+        Tag = 4
+        Left = 344
+        Top = 184
+        Width = 17
+        Height = 17
+        OnMouseUp = labelcolorMouseUp
+      end
+      object labelcolorSol: TShape
+        Tag = 5
+        Left = 344
+        Top = 216
+        Width = 17
+        Height = 17
+        OnMouseUp = labelcolorMouseUp
+      end
+      object labelcolorMisc: TShape
+        Tag = 7
+        Left = 344
+        Top = 280
+        Width = 17
+        Height = 17
+        OnMouseUp = labelcolorMouseUp
+      end
+      object labelcolorConst: TShape
+        Tag = 6
+        Left = 344
+        Top = 248
+        Width = 17
+        Height = 17
+        OnMouseUp = labelcolorMouseUp
+      end
+      object labelsizeStar: TSpinEdit
+        Tag = 1
+        Left = 384
+        Top = 85
+        Width = 41
+        Height = 22
+        MaxValue = 48
+        MinValue = 6
+        TabOrder = 0
+        Value = 0
+        OnChange = labelsizeChange
+      end
+      object labelmagStar: TSpinEdit
+        Tag = 1
+        Left = 264
+        Top = 85
+        Width = 41
+        Height = 22
+        MaxValue = 10
+        MinValue = 0
+        TabOrder = 1
+        Value = 0
+        OnChange = labelmagChange
+      end
+      object showlabelStar: TCheckBox
+        Tag = 1
+        Left = 40
+        Top = 88
+        Width = 209
+        Height = 17
+        Caption = 'Stars'
+        TabOrder = 2
+        OnClick = showlabelClick
+      end
+      object labelsizeVar: TSpinEdit
+        Tag = 2
+        Left = 384
+        Top = 117
+        Width = 41
+        Height = 22
+        MaxValue = 48
+        MinValue = 6
+        TabOrder = 3
+        Value = 0
+      end
+      object labelmagVar: TSpinEdit
+        Tag = 2
+        Left = 264
+        Top = 117
+        Width = 41
+        Height = 22
+        MaxValue = 10
+        MinValue = 0
+        TabOrder = 4
+        Value = 0
+        OnChange = labelmagChange
+      end
+      object showlabelVar: TCheckBox
+        Tag = 2
+        Left = 40
+        Top = 120
+        Width = 209
+        Height = 17
+        Caption = 'Variable Stars'
+        TabOrder = 5
+        OnClick = showlabelClick
+      end
+      object labelsizeMult: TSpinEdit
+        Tag = 3
+        Left = 384
+        Top = 149
+        Width = 41
+        Height = 22
+        MaxValue = 48
+        MinValue = 6
+        TabOrder = 6
+        Value = 0
+      end
+      object LabelmagMult: TSpinEdit
+        Tag = 3
+        Left = 264
+        Top = 149
+        Width = 41
+        Height = 22
+        MaxValue = 10
+        MinValue = 0
+        TabOrder = 7
+        Value = 0
+        OnChange = labelmagChange
+      end
+      object showlabelMult: TCheckBox
+        Tag = 3
+        Left = 40
+        Top = 152
+        Width = 209
+        Height = 17
+        Caption = 'Multiple Stars'
+        TabOrder = 8
+        OnClick = showlabelClick
+      end
+      object labelsizeNeb: TSpinEdit
+        Tag = 4
+        Left = 384
+        Top = 181
+        Width = 41
+        Height = 22
+        MaxValue = 48
+        MinValue = 6
+        TabOrder = 9
+        Value = 0
+      end
+      object labelmagNeb: TSpinEdit
+        Tag = 4
+        Left = 264
+        Top = 181
+        Width = 41
+        Height = 22
+        MaxValue = 10
+        MinValue = 0
+        TabOrder = 10
+        Value = 0
+        OnChange = labelmagChange
+      end
+      object showlabelNeb: TCheckBox
+        Tag = 4
+        Left = 40
+        Top = 184
+        Width = 209
+        Height = 17
+        Caption = 'Nebulae'
+        TabOrder = 11
+        OnClick = showlabelClick
+      end
+      object labelsizeSol: TSpinEdit
+        Tag = 5
+        Left = 384
+        Top = 213
+        Width = 41
+        Height = 22
+        MaxValue = 48
+        MinValue = 6
+        TabOrder = 12
+        Value = 0
+      end
+      object labelmagSol: TSpinEdit
+        Tag = 5
+        Left = 264
+        Top = 213
+        Width = 41
+        Height = 22
+        MaxValue = 10
+        MinValue = 0
+        TabOrder = 13
+        Value = 0
+        OnChange = labelmagChange
+      end
+      object showlabelSol: TCheckBox
+        Tag = 5
+        Left = 40
+        Top = 216
+        Width = 209
+        Height = 17
+        Caption = 'Solar System'
+        TabOrder = 14
+        OnClick = showlabelClick
+      end
+      object labelsizeMisc: TSpinEdit
+        Tag = 7
+        Left = 384
+        Top = 277
+        Width = 41
+        Height = 22
+        MaxValue = 48
+        MinValue = 6
+        TabOrder = 15
+        Value = 0
+      end
+      object showlabelMisc: TCheckBox
+        Tag = 7
+        Left = 40
+        Top = 280
+        Width = 209
+        Height = 17
+        Caption = 'Other labels'
+        TabOrder = 16
+        OnClick = showlabelClick
+      end
+      object showlabelConst: TCheckBox
+        Tag = 6
+        Left = 40
+        Top = 248
+        Width = 209
+        Height = 17
+        Caption = 'Constellation name'
+        TabOrder = 17
+        OnClick = showlabelClick
+      end
+      object labelsizeConst: TSpinEdit
+        Tag = 6
+        Left = 384
+        Top = 245
+        Width = 41
+        Height = 22
+        MaxValue = 48
+        MinValue = 6
+        TabOrder = 18
+        Value = 0
+      end
     end
     object p_list: TTabSheet
       Caption = 'p_list'
@@ -8739,6 +9615,15 @@ object f_config: Tf_config
           Caption = 'Asteroid Setting'
           TabOrder = 8
           OnClick = AstDBClick
+        end
+        object CometDB: TButton
+          Left = 168
+          Top = 136
+          Width = 97
+          Height = 25
+          Caption = 'Comet Setting'
+          TabOrder = 9
+          OnClick = CometDBClick
         end
       end
     end

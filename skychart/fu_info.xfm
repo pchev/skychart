@@ -1,6 +1,6 @@
 object f_info: Tf_info
-  Left = 181
-  Top = 201
+  Left = 184
+  Top = 230
   Width = 460
   Height = 338
   VertScrollBar.Range = 27

@@ -266,6 +266,8 @@ type
     procedure TimeResetExecute(Sender: TObject);
     procedure TimeIncExecute(Sender: TObject);
     procedure listobjExecute(Sender: TObject);
+    procedure ChangeprojMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
@@ -280,6 +282,7 @@ type
     planet  : Tplanet;
     serverinfo,topmsg : string;
     TCPDaemon: TTCPDaemon;
+    procedure Init;
     procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
@@ -313,7 +316,13 @@ type
     procedure NeighborObj(chart:string);
     procedure ConnectDB;
     procedure OpenAsteroidConfig(Sender: TObject);
+    procedure OpenCometConfig(Sender: TObject);
     procedure OpenDBConfig(Sender: TObject);
+    procedure ImageSetFocus(Sender: TObject);
+    procedure ListInfo(buf:string);
+    procedure GetTCPInfo(i:integer; var buf:string);
+    procedure KillTCPClient(i:integer);
+    procedure PrintSetup(Sender: TObject);
   end;
 
 var
@@ -324,7 +333,7 @@ implementation
 {$R *.dfm}
 {$R cursbmp.res}
 
-uses pu_chart, pu_about, pu_config, pu_info, u_projection, MyDB ;
+uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection, MyDB ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here

@@ -1,6 +1,6 @@
 object f_detail: Tf_detail
-  Left = 179
-  Top = 117
+  Left = 185
+  Top = 175
   Width = 290
   Height = 306
   VertScrollBar.Range = 41
@@ -10,7 +10,7 @@ object f_detail: Tf_detail
   FormStyle = fsStayOnTop
   Position = poDefault
   Scaled = False
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   object Panel1: TPanel
     Left = 0
     Top = 0

@@ -22,7 +22,7 @@ object f_about: Tf_about
   Position = poScreenCenter
   Scaled = False
   OnCreate = FormCreate
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   object logo: TImage
     Left = 0
     Top = 0
@@ -4334,16 +4334,17 @@ object f_about: Tf_about
       Font.Name = 'Sans'
       Font.Pitch = fpVariable
       Font.Style = [fsItalic]
+      Font.Weight = 0
       ParentColor = False
       ParentFont = False
       WordWrap = True
     end
   end
   object Label1: TLabel
-    Left = 192
+    Left = 200
     Top = 32
-    Width = 143
-    Height = 36
+    Width = 135
+    Height = 34
     Alignment = taRightJustify
     Caption = 'Sky Charts'
     Color = clBlack
@@ -4351,7 +4352,8 @@ object f_about: Tf_about
     Font.Height = 27
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
-    Font.Style = [fsBold]
+    Font.Style = []
+    Font.Weight = 0
     Masked = True
     ParentColor = False
     ParentFont = False
@@ -4361,7 +4363,7 @@ object f_about: Tf_about
   object Label2: TLabel
     Left = 16
     Top = 176
-    Width = 185
+    Width = 157
     Height = 29
     Caption = 'Version 3 alpha 0.0'
     Color = clBlack
@@ -4369,7 +4371,8 @@ object f_about: Tf_about
     Font.Height = 18
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
-    Font.Style = [fsBold]
+    Font.Style = []
+    Font.Weight = 0
     Masked = True
     ParentColor = False
     ParentFont = False
@@ -4387,6 +4390,7 @@ object f_about: Tf_about
     Font.Name = 'Sans'
     Font.Pitch = fpVariable
     Font.Style = [fsItalic]
+    Font.Weight = 0
     ParentColor = False
     ParentFont = False
   end

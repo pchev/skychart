@@ -2681,9 +2681,12 @@ object f_main: Tf_main
       object ToolButton20: TToolButton
         Left = 0
         Top = 23
-        Action = ChangeProj
-        PopupMenu = popupProj
+        Hint = 'Change Coordinate System'
+        Caption = 'ChangeProj'
+        DropdownMenu = popupProj
+        ImageIndex = 23
         Wrap = True
+        OnMouseUp = ChangeprojMouseUp
       end
       object FlipButtonX: TToolButton
         Left = 0
@@ -5252,7 +5255,8 @@ object f_main: Tf_main
     Top = 208
   end
   object popupProj: TPopupMenu
-    Left = 32
+    TrackButton = tbLeftButton
+    Left = 48
     Top = 56
     object Equatorial1: TMenuItem
       Caption = 'Equatorial'

@@ -210,5 +210,9 @@ object f_chart: Tf_chart
     object Zoom2: TMenuItem
       Action = zoomminusmove
     end
+    object Resetalllabels1: TMenuItem
+      Caption = 'Reset all labels'
+      OnClick = Resetalllabels1Click
+    end
   end
 end

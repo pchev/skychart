@@ -28,21 +28,36 @@ interface
 uses u_constant, u_util,
      Math, SysUtils, Classes, Types,
 {$ifdef linux}
-   QControls, QExtCtrls, QGraphics;
+   Qmenus, QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
 {$endif}
 {$ifdef mswindows}
-   Controls, ExtCtrls, Graphics;
+   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Graphics;
 {$endif}
 
 type
 
   TSide   = (U,D,L,R);  // Up, Down, Left, Right
   TSideSet = set of TSide;
+  TEditLabelPos = procedure(lnum,left,top: integer) of object;
+  Tintfunc = procedure(i: integer) of object;
 
   TSplot = class(TComponent)
   private
     { Private declarations }
      outx0,outy0,outx1,outy1:integer;
+     outlineclosed,outlineinscreen: boolean;
+     outlinetype,outlinemax,outlinenum,outlinelw: integer;
+     outlinecol: Tcolor;
+     outlinepts: array of TPoint;
+     labels: array [1..maxlabels] of Tlabel;
+     editlabel,editlabelx,editlabely,selectedlabel : integer;
+     editlabelmod: boolean;
+     FEditLabelPos: TEditLabelPos;
+     FEditLabelTxt: TEditLabelPos;
+     FDefaultLabel: Tintfunc;
+     FDeleteLabel: Tintfunc;
+     FLabelClick: Tintfunc;
+     editlabelmenu: Tpopupmenu;
      Procedure PlotStar0(xx,yy: integer; ma,b_v : Double);
      Procedure PlotStar1(xx,yy: integer; ma,b_v : Double);
      Procedure PlotNebula0(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
@@ -51,6 +66,10 @@ type
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
+     procedure labelMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+     procedure labelMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+     procedure labelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+     procedure labelMouseLeave(Sender: TObject);
   protected
     { Protected declarations }
   public
@@ -64,6 +83,7 @@ type
   published
     { Published declarations }
      function Init(w,h : integer) : boolean;
+     function InitLabel : boolean;
      Procedure PlotStar(xx,yy: integer; ma,b_v : Double);
      Procedure PlotVarStar(xx,yy: integer; max,min : Double);
      Procedure PlotDblStar(xx,yy: integer; ma,sep,pa,b_v : Double);
@@ -73,9 +93,19 @@ type
      procedure PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
      procedure PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(xx,yy,symbol: integer; ma : Double);
-     procedure PlotLabel(xx,yy,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string);
+     Procedure PlotComet(xx,yy,cxx,cyy,symbol: integer; ma,diam,PixScale : Double);
+     function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string):integer;
      procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
      procedure PlotOutline(xx,yy,op,lw,fs,closed: integer; r2:double; col: Tcolor);
+     property OnEditLabelPos: TEditLabelPos read FEditLabelPos write FEditLabelPos;
+     property OnEditLabelTxt: TEditLabelPos read FEditLabelTxt write FEditLabelTxt;
+     property OnDefaultLabel: Tintfunc read FDefaultLabel write FDefaultLabel;
+     property OnDeleteLabel: Tintfunc read FDeleteLabel write FDeleteLabel;
+     property OnLabelClick: Tintfunc read FLabelClick write FLabelClick;
+     Procedure Movelabel(Sender: TObject);
+     Procedure EditlabelTxt(Sender: TObject);
+     Procedure DefaultLabel(Sender: TObject);
+     Procedure Deletelabel(Sender: TObject);
   end;
 
   const cliparea = 10;
@@ -83,18 +113,60 @@ type
 Implementation
 
 constructor TSplot.Create(AOwner:TComponent);
+var i : integer;
+    MenuItem: TMenuItem;
 begin
  inherited Create(AOwner);
  // set safe value
+ editlabel:=-1;
+ cnv:=(AOwner as Timage).canvas;
  cfgchart.width:=100;
  cfgchart.height:=100;
  cfgchart.min_ma:=6;
  cfgchart.onprinter:=false;
  cfgchart.drawpen:=1;
+ for i:=1 to maxlabels do begin
+    labels[i]:=Tlabel.Create((AOwner as Timage).parent);
+    labels[i].parent:=(AOwner as Timage).parent;
+    labels[i].tag:=i;
+    labels[i].Visible:=false;
+    labels[i].transparent:=true;
+    {$ifdef linux} labels[i].Font.CharSet:=fcsAnyCharSet; {$endif}
+    labels[i].OnMouseDown:=labelmousedown;
+    labels[i].OnMouseUp:=labelmouseup;
+    labels[i].OnMouseMove:=labelmousemove;
+    labels[i].OnMouseLeave:=labelmouseleave;
+ end;
+ editlabelmenu:=Tpopupmenu.Create(AOwner);
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := '';
+ MenuItem.Enabled:=false;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := '-';
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Move label';
+ MenuItem.OnClick := MoveLabel;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Edit label';
+ MenuItem.OnClick := EditLabelTxt;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Default label';
+ MenuItem.OnClick := DefaultLabel;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Delete label';
+ MenuItem.OnClick := DeleteLabel;
 end;
 
 destructor TSplot.Destroy;
+var i:integer;
 begin
+ for i:=1 to maxlabels do labels[i].Free;
  inherited destroy;
 end;
 
@@ -110,6 +182,15 @@ with cnv do begin
  Pen.Style:=psSolid;
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
 end;
+InitLabel;
+result:=true;
+end;
+
+function TSplot.InitLabel : boolean;
+var i:integer;
+begin
+editlabel:=-1;
+for i:=1 to maxlabels do labels[i].visible:=false;
 result:=true;
 end;
 
@@ -642,20 +723,20 @@ procedure TSplot.PlotOutline(xx,yy,op,lw,fs,closed: integer; r2:double; col: Tco
 procedure addpoint(x,y:integer);
 begin
 // add a point to the line
- if (cfgplot.outlinenum+1)>=cfgplot.outlinemax then begin
-    cfgplot.outlinemax:=cfgplot.outlinemax+100;
-    setlength(cfgplot.outlinepts,cfgplot.outlinemax);
+ if (outlinenum+1)>=outlinemax then begin
+    outlinemax:=outlinemax+100;
+    setlength(outlinepts,outlinemax);
  end;
- cfgplot.outlinepts[cfgplot.outlinenum].x:=x;
- cfgplot.outlinepts[cfgplot.outlinenum].y:=y;
- inc(cfgplot.outlinenum);
+ outlinepts[outlinenum].x:=x;
+ outlinepts[outlinenum].y:=y;
+ inc(outlinenum);
 end;
 function processpoint(xx,yy:integer):boolean;
 var x1,y1,x2,y2:integer;
     clip1,clip2:boolean;
 begin
 // find if we can plot this point
-if cfgplot.outlineinscreen and
+if outlineinscreen and
    (abs(xx-cfgchart.hw)<cfgplot.outradius)and
    (abs(yy-cfgchart.hh)<cfgplot.outradius)and
    ((intpower(outx1-xx,2)+intpower(outy1-yy,2))<r2)
@@ -674,7 +755,7 @@ if cfgplot.outlineinscreen and
       result:=true;
    end else begin
       // point outside safe area, ignore the whole object.
-      cfgplot.outlineinscreen:=false;
+      outlineinscreen:=false;
       result:=false;
 end;
 end;
@@ -683,14 +764,14 @@ if not cfgplot.Invisible then begin
   case op of
   0 : begin // init vector
        // set line options
-       cfgplot.outlinetype:=fs;
-       cfgplot.outlinenum:=0;
-       cfgplot.outlinecol:=col;
-       cfgplot.outlinelw:=lw;
-       cfgplot.outlineclosed:=(closed=1);
-       cfgplot.outlineinscreen:=true;
-       cfgplot.outlinemax:=100;
-       setlength(cfgplot.outlinepts,cfgplot.outlinemax);
+       outlinetype:=fs;
+       outlinenum:=0;
+       outlinecol:=col;
+       outlinelw:=lw;
+       outlineclosed:=(closed=1);
+       outlineinscreen:=true;
+       outlinemax:=100;
+       setlength(outlinepts,outlinemax);
        // initialize first point
        outx0:=xx;
        outy0:=yy;
@@ -699,27 +780,27 @@ if not cfgplot.Invisible then begin
       end;
   1 : begin // close and draw vector
        // process last point
-       if cfgplot.outlineclosed then begin
+       if outlineclosed then begin
           processpoint(xx,yy);
           if processpoint(outx0,outy0) then addpoint(outx1,outy1);
        end else begin
           if processpoint(xx,yy) then addpoint(outx1,outy1);
        end;
-       if cfgplot.outlineinscreen and(cfgplot.outlinenum>=2) then begin
+       if outlineinscreen and(outlinenum>=2) then begin
          // object is to be draw
-         dec(cfgplot.outlinenum);
-         if cfgchart.onprinter and (cfgplot.outlinecol=clWhite) then cfgplot.outlinecol:=clBlack;
+         dec(outlinenum);
+         if cfgchart.onprinter and (outlinecol=clWhite) then outlinecol:=clBlack;
          cnv.Pen.Mode:=pmCopy;
-         cnv.Pen.Width:=cfgplot.outlinelw*cfgchart.drawpen;
-         cnv.Pen.Color:=cfgplot.outlinecol;
+         cnv.Pen.Width:=outlinelw*cfgchart.drawpen;
+         cnv.Pen.Color:=outlinecol;
          cnv.Brush.Style:=bsSolid;
-         cnv.Brush.Color:=cfgplot.outlinecol;
-         cfgplot.outlinemax:=cfgplot.outlinenum+1;
-         if cfgchart.onprinter and (cfgplot.outlinetype=2) then cfgplot.outlinetype:=0;
-         case cfgplot.outlinetype of
-         0 : begin setlength(cfgplot.outlinepts,cfgplot.outlinenum+1); cnv.polyline(cfgplot.outlinepts);end;
-         1 : Bezierspline(cfgplot.outlinepts,cfgplot.outlinenum+1);
-         2 : begin setlength(cfgplot.outlinepts,cfgplot.outlinenum+1); cnv.polygon(cfgplot.outlinepts);end;
+         cnv.Brush.Color:=outlinecol;
+         outlinemax:=outlinenum+1;
+         if cfgchart.onprinter and (outlinetype=2) then outlinetype:=0;
+         case outlinetype of
+         0 : begin setlength(outlinepts,outlinenum+1); cnv.polyline(outlinepts);end;
+         1 : Bezierspline(outlinepts,outlinenum+1);
+         2 : begin setlength(outlinepts,outlinenum+1); cnv.polygon(outlinepts);end;
          end;
        end;
      end;
@@ -952,29 +1033,108 @@ with cnv do begin
 end;
 end;
 
-procedure TSplot.PlotLabel(xx,yy,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string);
-var ts:TSize;
+Procedure TSplot.PlotComet(xx,yy,cxx,cyy,symbol: integer; ma,diam,PixScale : Double);
+var ds:integer;
 begin
 with cnv do begin
-Brush.Color:=cfgplot.Color[0];
-Brush.Style:=bsSolid;
-Pen.Mode:=pmCopy;
-Font.Name:=cfgplot.FontName[fontnum];
-Font.Color:=cfgplot.LabelColor[labelnum];
-Font.Size:=cfgplot.LabelSize[labelnum];
-if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
-if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
-ts:=cnv.TextExtent(txt);
-case Xalign of
- laRight  : xx:=xx-ts.cx;
- laCenter : xx:=xx-(ts.cx div 2);
+   Pen.Color := cfgplot.Color[0];
+   Pen.Width := cfgchart.DrawPen;
+   Pen.Mode := pmCopy;
+   Brush.Color := cfgplot.Color[21];
+   Brush.style:=bsSolid;
+   case symbol of
+   0: begin
+        ds:=3*cfgchart.drawpen;
+        Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+        Pen.Color := cfgplot.Color[21];
+        moveto(xx,yy);
+        lineto(xx-4*ds,yy-4*ds);
+        moveto(xx,yy);
+        lineto(xx-2*ds,yy-4*ds);
+        moveto(xx,yy);
+        lineto(xx-4*ds,yy-2*ds);
+      end;
+   1: begin
+        ds:=round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen/2);
+        Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+        ds:=round(maxvalue([PixScale*diam/2,2*cfgchart.drawpen]));
+        Brush.style:=bsClear;
+        Pen.Color := cfgplot.Color[21];
+        Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+        Pen.Color := cfgplot.Color[0];
+        ds:=ds+cfgchart.drawpen;
+        Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+        Brush.style:=bsSolid;
+        PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],2);
+        PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
+        PlotLine(xx,yy,cxx-4*ds,cyy-2*ds,cfgplot.Color[21],1);
+        PlotLine(xx,yy,cxx-2*ds,cyy-4*ds,cfgplot.Color[21],1);
+      end;
+   end;
 end;
-case Yalign of
- laBottom : yy:=yy-ts.cy;
- laCenter : yy:=yy-(ts.cy div 2);
 end;
-textout(xx,yy,txt);
+
+function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string):integer;
+var ts:TSize;
+begin
+// If drawing to the printer plot the text label to the canvas
+if cfgchart.onprinter then begin
+with cnv do begin
+  Brush.Style:=bsClear;
+  Pen.Mode:=pmCopy;
+  Font.Name:=cfgplot.FontName[fontnum];
+  Font.Color:=clBlack; //cfgplot.LabelColor[labelnum];
+  Font.Size:=cfgplot.LabelSize[labelnum];
+  if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
+  if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
+  ts:=cnv.TextExtent(txt);
+  if r>=0 then begin
+  case Xalign of
+   laLeft   : xx:=xx+labspacing*cfgchart.drawpen+r;
+   laRight  : xx:=xx-ts.cx-labspacing*cfgchart.drawpen-r;
+   laCenter : xx:=xx-(ts.cx div 2);
+  end;
+  case Yalign of
+   laBottom : yy:=yy-ts.cy;
+   laCenter : yy:=yy-(ts.cy div 2);
+  end;
+  end;
+  textout(xx,yy,txt);
 end;
+// If drawing to the screen use movable label 
+end else begin
+if i>maxlabels then begin
+  result:=-1;
+  exit;
+end;
+with labels[i] do begin
+  Color:=cfgplot.Color[0];
+  Transparent:=true;
+  Font.Name:=cfgplot.FontName[fontnum];
+  Font.Color:=cfgplot.LabelColor[labelnum];
+  Font.Size:=cfgplot.LabelSize[labelnum];
+  if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
+  if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
+  caption:=txt;
+  //tag:=id;
+  if r>=0 then begin
+    case Xalign of
+     laLeft   : xx:=xx+labspacing+r;
+     laRight  : xx:=xx-width-labspacing-r;
+     laCenter : xx:=xx-(width div 2);
+    end;
+    case Yalign of
+     //laTop
+     laBottom : yy:=yy-height;
+     laCenter : yy:=yy-(height div 2);
+    end;
+  end;
+  left:=xx;
+  top:=yy;
+  visible:=true;
+end;
+end;
+result:=0;
 end;
 
 procedure TSplot.PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
@@ -1066,218 +1226,80 @@ begin
   end;
 end;
 
-{  clipping function that try to work with complex surface
-
-   Way too complicate! this is no more used
-
-function TSplot.ClipVector(var x1,y1,x2,y2: integer;var exitside:TSideSet;var outoffsetx,outoffsety:integer):boolean;
-var
- side,side1,side2:  TSideSet;
- x,y: double;
- xR,xL,yU,yD: integer;
-  procedure GetSide (x,y:integer; var side: TSideSet);
-  begin
-    side := [];
-    if x < xL then side := [L]
-    else if x > xR then side := [R];
-    if y < yU then side := side + [U]
-    else if y > yD then side := side + [D]
-  end;
-  procedure doClip;
-  var deltaX,deltaY: double;
-  begin
-    deltaX := x2-x1;
-    deltaY := y2-y1;
-    if R in side then begin
-       x:=xR;
-       y:=y1+deltaY*(xR-x1)/deltaX;
-       exitside:=[R];
-       outoffsetx:=1;
-       outoffsety:=0;
-    end
-    else if L in side then begin
-       x:=xL;
-       y:=y1+deltaY*(xL-x1)/deltaX;
-       exitside:=[L];
-       outoffsetx:=-1;
-       outoffsety:=0;
-    end
-    else if D in side then begin
-       x:=x1+deltaX*(yD-y1)/deltaY;
-       y:=yD;
-       exitside:=[D];
-       outoffsetx:=0;
-       outoffsety:=1;
-    end
-    else if U in side then begin
-       x:=x1+deltaX*(yU-y1)/deltaY;
-       y:=yU;
-       exitside:=[U];
-       outoffsetx:=0;
-       outoffsety:=-1;
-    end;
-  end;
+procedure TSplot.labelMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var pt:Tpoint;
 begin
-  exitside:=[];
-  xL:=-cliparea;
-  xR:=cfgchart.Width+cliparea;
-  yU:=-cliparea;
-  yD:=cfgchart.Height+cliparea;
-  GetSide(x1,y1,side1);
-  GetSide(x2,y2,side2);
-  result:=(side1*side2=[]);
-  exitside:=side1;
-  while ((side1<>[])or(side2<>[]))and result do begin
-    side:=side1;
-    if side = [] then side:=side2;
-    doclip;
-    if side = side1 then begin
-      x1:=round(x);
-      y1:=round(y);
-      GetSide(x1,y1,side1);
-    end else begin
-      x2:=round(x);
-      y2:=round(y);
-      GetSide(x2,y2,side2);
-    end;
-    result:=(side1*side2=[]);
-  end;
+if editlabel<0 then with Sender as Tlabel do begin
+pt:=clienttoscreen(point(x,y));
+if button=mbRight then begin
+  selectedlabel:=tag;
+  editlabelx:=pt.x;
+  editlabely:=pt.y;
+  editlabelmod:=false;
+  editlabelmenu.Items[0].Caption:=labels[selectedlabel].Caption;
+  editlabelmenu.popup(pt.x,pt.y);
+end else if button=mbLeft then begin
+  if assigned(FLabelClick) then FLabelClick(tag);
+end;
+end;
 end;
 
-procedure processpoint(xx,yy:integer);
-var side1:TSideSet;
+procedure TSplot.labelMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var pt:Tpoint;
 begin
-       pointok:=clipvector(outx1,outy1,xx,yy,side,offx,offy);
-       if not cfgplot.outlineinscreen then cfgplot.outlineinscreen:=pointok;
-       if pointok then begin
-          // this vector is visible
-          if (lastside=[]) then begin
-             // we are not outside the screen, add the point normally.
-             addpoint();
-             outx1:=xx;
-             outy1:=yy;
-             if (side<>[]) then begin  // if extremity is outside,
-                lastside:=side;        // store the exit side.
-                addpoint(outx1,outy1); // add the exit point.
-                // add a small offset to be really out of screen for the next call
-                outx1:=outx1+offx;
-                outy1:=outy1+offy;
-             end;
-          end
-          else // we are outside the screen
-          if (side<>[]) then begin  // the side we return to screen.
-             // add exit and return side.
-             side1:=lastside+side;
-             if side1=lastside then begin
-               // return from the same side, add the point normally.
-               addpoint(outx1,outy1);
-               outx1:=xx;
-               outy1:=yy;
-             end
-             else if (L in side1)and(U in side1) then begin  // exit on Left, return on Up or reverse.
-                // add top-left extra point
-                addpoint(-cliparea,-cliparea);
-                // store return point
-                addpoint(outx1,outy1);
-                outx1:=xx;
-                outy1:=yy;
-             end
-             else if (L in side1)and(D in side1) then begin  // exit on Left, return on Down or reverse.
-                // add bottom-left extra point
-                addpoint(-cliparea,cfgchart.height+cliparea);
-                // store return point
-                addpoint(outx1,outy1);
-                outx1:=xx;
-                outy1:=yy;
-             end
-             else if (R in side1)and(U in side1) then begin  // exit on Right, return on Up or reverse.
-                // add top-right extra point
-                addpoint(cfgchart.width+cliparea,-cliparea);
-                // store return point
-                addpoint(outx1,outy1);
-                outx1:=xx;
-                outy1:=yy;
-             end
-             else if (R in side1)and(D in side1) then begin  // exit on Right, return on Down or reverse.
-                // add bottom-right extra point
-                addpoint(cfgchart.width+cliparea,cfgchart.height+cliparea);
-                // store return point
-                addpoint(outx1,outy1);
-                outx1:=xx;
-                outy1:=yy;
-             end
-             else if (R in side1)and(L in side1) then begin
-                if lastside=[L] then begin                 // exit on Left, return on Right
-                   // add top-left extra point
-                   addpoint(-cliparea,-cliparea);
-                   // add top-right extra point
-                   addpoint(cfgchart.width+cliparea,-cliparea);
-                   // store return point
-                   addpoint(outx1,outy1);
-                   outx1:=xx;
-                   outy1:=yy;
-                end else begin                             // exit on Right, return on Left
-                   // add top-right extra point
-                   addpoint(cfgchart.width+cliparea,-cliparea);
-                   // add top-left extra point
-                   addpoint(-cliparea,-cliparea);
-                   // store return point
-                   addpoint(outx1,outy1);
-                   outx1:=xx;
-                   outy1:=yy;
-                end
-             end
-             else if (U in side1)and(D in side1) then begin
-                if lastside=[U] then begin                 // exit on Up, return on Down
-                   // add top-left extra point
-                   addpoint(-cliparea,-cliparea);
-                   // add bottom-left extra point
-                   addpoint(-cliparea,cfgchart.height+cliparea);
-                   // store return point
-                   addpoint(outx1,outy1);
-                   outx1:=xx;
-                   outy1:=yy;
-                end else begin                             // exit on Down, return on Up
-                   // add bottom-left extra point
-                   addpoint(-cliparea,cfgchart.height+cliparea);
-                   // add top-left extra point
-                   addpoint(-cliparea,-cliparea);
-                   // store return point
-                   addpoint(outx1,outy1);
-                   outx1:=xx;
-                   outy1:=yy;
-                end
-             end else begin
-               // we not return, just store the new position
-               outx1:=xx;
-               outy1:=yy;
-             end;  // side=lastside
-             // we are inside, reset the flag
-             lastside:=[];
-          end;  // else lastside
-       end  // pointok
-       else begin  // this vector is not visible
-          if (lastside<>side)and(lastside<>[]) then begin
-             // we change of side, add a point to the corresponding corner
-             side1:=lastside+side;
-             if outcorner<2 then begin
-               if (L in side1)and(U in side1) then begin addpoint(-cliparea,-cliparea);inc(outcorner);end
-               else if (L in side1)and(D in side1) then begin addpoint(-cliparea,cfgchart.height+cliparea);inc(outcorner);end
-               else if (R in side1)and(U in side1) then begin addpoint(cfgchart.width+cliparea,-cliparea);inc(outcorner);end
-               else if (R in side1)and(D in side1) then begin addpoint(cfgchart.width+cliparea,cfgchart.height+cliparea);inc(outcorner);end
-               else begin outx1:=xx; outy1:=yy; end;
-             end;
-             lastside:=side;
-          end else begin
-             // just store the new position
-             outx1:=xx;
-             outy1:=yy;
-             // in case the line start out of screen
-             if (lastside=[])and(side<>[]) then lastside:=side;
-          end;
-       end; // else pointok
+if editlabel>0 then with Sender as Tlabel do begin
+  pt:=clienttoscreen(point(x,y));
+  labels[editlabel].left:=labels[editlabel].Left+pt.X-editlabelX;
+  labels[editlabel].Top:=labels[editlabel].Top+pt.Y-editlabelY;
+  editlabelx:=pt.x;
+  editlabely:=pt.y;
+  editlabelmod:=true;
 end;
- }
+end;
+
+procedure TSplot.labelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if editlabel>0 then begin
+  labels[editlabel].Transparent:=true;
+  labels[editlabel].Cursor:=crDefault;
+  if editlabelmod and assigned(FEditLabelPos) then FEditLabelPos(editlabel,labels[editlabel].left,labels[editlabel].top);
+end;
+editlabel:=-1;
+end;
+
+procedure TSplot.labelMouseLeave(Sender: TObject);
+begin
+if editlabel>0 then begin
+ // force the label to the cursor while editing
+ labels[editlabel].left:=labels[editlabel].Left+mouse.CursorPos.x-editlabelX;
+ labels[editlabel].Top:=labels[editlabel].Top+mouse.CursorPos.y-editlabelY;
+ editlabelx:=mouse.CursorPos.x;
+ editlabely:=mouse.CursorPos.y;
+end;
+end;
+
+Procedure TSplot.Movelabel(Sender: TObject);
+begin
+mouse.CursorPos:=point(editlabelx,editlabely);
+editlabel:=selectedlabel;
+labels[editlabel].Transparent:=false;
+labels[editlabel].Cursor:=crSizeAll;
+end;
+
+Procedure TSplot.EditlabelTxt(Sender: TObject);
+begin
+if (selectedlabel>0)and assigned(FEditLabelTxt) then FEditLabelTxt(selectedlabel,editlabelx,editlabely);
+end;
+
+Procedure TSplot.DefaultLabel(Sender: TObject);
+begin
+if (selectedlabel>0)and assigned(FDefaultLabel) then FDefaultLabel(selectedlabel);
+end;
+
+Procedure TSplot.Deletelabel(Sender: TObject);
+begin
+if (selectedlabel>0)and assigned(FDeleteLabel) then FDeleteLabel(selectedlabel);
+end;
 
 end.
 

@@ -32,6 +32,10 @@ uses fu_detail, cu_skychart, u_constant, u_util, u_projection, Math,
 const maxundo=10;
 
 type
+  Tstr1func = procedure(txt:string) of object;
+  Tint2func = procedure(i1,i2:integer) of object;
+  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=true) of object;
+
   Tf_chart = class(TForm)
     RefreshTimer: TTimer;
     ActionList1: TActionList;
@@ -65,6 +69,7 @@ type
     identlabel: TLabel;
     switchstar: TAction;
     switchbackground: TAction;
+    ResetAllLabels1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -109,24 +114,32 @@ type
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure ResetAllLabels1Click(Sender: TObject);
   private
     { Private declarations }
+    FImageSetFocus: TnotifyEvent;
+    FShowTopMessage: Tstr1func;
+    FUpdateFlipBtn: Tint2func;
+    FShowInfo : Tshowinfo;
+    FShowCoord: Tstr1func;
+    FListInfo: Tstr1func;
     movefactor,zoomfactor: double;
     xcursor,ycursor : integer;
-    lock_trackcursor,LockWheel : boolean;
+    LockWheel : boolean;
   public
     { Public declarations }
     sc: Tskychart;
-    maximize,LockTrackCursor,lastquick,lock_refresh: boolean;
+    maximize,locked,LockTrackCursor,lastquick,lock_refresh: boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo,lastx,lasty,lastyzoom : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
-    procedure PrintChart(Sender: TObject);
+    procedure PrintChart(printcolor,printlandscape:boolean);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
     function  IdentXY(X, Y: Integer):boolean;
+    procedure  IdentDetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
     function  LongLabel(txt:string):string;
     function  LongLabelObj(txt:string):string;
@@ -176,6 +189,12 @@ type
     function cmd_GetObs:string;
     function cmd_SetTZ(tz:string):string;
     function cmd_GetTZ:string;
+    property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
+    property OnShowTopMessage: Tstr1func read FShowTopMessage write FShowTopMessage;
+    property OnUpdateFlipBtn: Tint2func read FUpdateFlipBtn write FUpdateFlipBtn;
+    property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
+    property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
+    property OnListInfo: Tstr1func read FListInfo write FListInfo;
   end;
 
 
@@ -183,7 +202,7 @@ implementation
 
 {$R *.xfm}
 
-uses QClipbrd, fu_main, fu_info;
+uses QClipbrd;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here
@@ -235,8 +254,6 @@ end;
 
 
 // End of Linux specific CLX code:
-
-
 
 end.
 

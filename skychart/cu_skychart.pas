@@ -25,24 +25,34 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_plot, cu_catalog, u_constant, libcatalog, cu_planet,
-     SysUtils, Classes, Math,
+uses cu_plot, cu_catalog, u_constant, libcatalog, cu_planet, u_projection, u_util,
+     SysUtils, Classes, Math,  
 {$ifdef linux}
-   QControls, QExtCtrls, QGraphics;
+   QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
 {$endif}
 {$ifdef mswindows}
-   Controls, ExtCtrls, Graphics;
+   Forms, StdCtrls, Controls, ExtCtrls, Graphics;
 {$endif}
 type
+  Tint2func = procedure(i,j: integer) of object;
 
 Tskychart = class (TComponent)
    private
     Fplot: TSplot;
     Fcatalog : Tcatalog;
     Fplanet : Tplanet;
-    Procedure DrawSatel(ipla:integer; ra,dec,ma,diam : double; hidesat, showhide : boolean);
+    FShowDetailXY: Tint2func;
+    Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
+    procedure SetLabel(id,xx,yy,radius,fontnum,labelnum:integer; txt:string);
+    procedure EditLabelPos(lnum,x,y: integer);
+    procedure EditLabelTxt(lnum,x,y: integer);
+    procedure DefaultLabel(lnum: integer);
+    procedure DeleteLabel(lnum: integer);
+    procedure LabelClick(lnum: integer);
    public
     cfgsc : conf_skychart;
+    labels: array[1..maxlabels] of Tobjlabel;
+    numlabels: integer;
     constructor Create(AOwner:Tcomponent); override;
     destructor  Destroy; override;
    published
@@ -65,6 +75,7 @@ Tskychart = class (TComponent)
     function DrawMilkyWay :boolean;
     function DrawPlanet :boolean;
     function DrawAsteroid :boolean;
+    function DrawComet :boolean;
     function DrawOrbitPath:boolean;
     Procedure DrawGrid;
     procedure DrawEqGrid;
@@ -77,6 +88,7 @@ Tskychart = class (TComponent)
     function DrawHorizon:boolean;
     function DrawEcliptic:boolean;
     function DrawGalactic:boolean;
+    function DrawLabels:boolean;
     procedure GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
     procedure MovetoXY(X,Y : integer);
@@ -89,12 +101,11 @@ Tskychart = class (TComponent)
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
     Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
     procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
+    property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
 end;
 
 
 implementation
-
-uses u_projection, u_util;
 
 constructor Tskychart.Create(AOwner:Tcomponent);
 begin
@@ -121,7 +132,15 @@ begin
  cfgsc.ymin:=0;
  cfgsc.ymax:=100;
  cfgsc.RefractionOffset:=0;
+ cfgsc.AsteroidLstSize:=0;
+ cfgsc.CometLstSize:=0;
+ cfgsc.nummodlabels:=0;
  Fplot:=TSplot.Create(AOwner);
+ Fplot.OnEditLabelPos:=EditLabelPos;
+ Fplot.OnEditLabelTxt:=EditLabelTxt;
+ Fplot.OnDefaultLabel:=DefaultLabel;
+ Fplot.OnDeleteLabel:=DeleteLabel;
+ Fplot.OnLabelClick:=LabelClick;
 end;
 
 destructor Tskychart.Destroy;
@@ -141,6 +160,7 @@ savfillmw:=cfgsc.FillMilkyWay;
 try
   chdir(appdir);
   // initialize chart value
+  numlabels:=0;
   InitObservatory;
   InitTime;
   InitChart;
@@ -181,11 +201,14 @@ try
   // finally the planets
   if not cfgsc.quick then begin
     DrawAsteroid;
+    DrawComet;
     DrawOrbitPath;
   end;
   DrawPlanet;
   // and the horizon line if not transparent
   if (not cfgsc.quick)and cfgsc.horizonopaque then DrawHorizon;
+  // the labels
+  if not cfgsc.quick then DrawLabels;
   result:=true;
 finally
   if cfgsc.quick then begin
@@ -398,6 +421,7 @@ if Fplot.cfgplot.AutoSkyColor and (cfgsc.Projpole=AltAz) then begin
 end else Fplot.cfgplot.color[0]:=Fplot.cfgplot.bgColor;
 Fplot.cfgplot.backgroundcolor:=Fplot.cfgplot.color[0];
 Fplot.init(Fplot.cfgchart.width,Fplot.cfgchart.height);
+if Fplot.cfgchart.onprinter then Fplot.cfgplot.color[0]:=clBlack;
 result:=true;
 end;
 
@@ -497,14 +521,22 @@ end;
 function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
   x1,y1,cyear,dyear: Double;
-  xx,yy,xxp,yyp: integer;
+  xx,yy,xxp,yyp,lid: integer;
+  first:boolean;
+  firstcat:TSname;
 begin
 fillchar(rec,sizeof(rec),0);
 cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
 dyear:=0;
+first:=true;
 try
 if Fcatalog.OpenStar then
  while Fcatalog.readstar(rec) do begin
+ if first then begin
+    firstcat:=rec.options.ShortName;
+    first:=false;
+ end;
+ lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  if cfgsc.PMon or cfgsc.DrawPMon then begin
     if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
                                else dyear:=cyear-rec.options.Epoch;
@@ -518,6 +550,10 @@ if Fcatalog.OpenStar then
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
+    if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
+       if rec.star.valid[vsGreekSymbol] then SetLabel(lid,xx,yy,0,7,1,rec.star.greeksymbol)
+          else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
+    end;
     if cfgsc.DrawPMon then begin
        rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*cfgsc.DrawPMyear;
        rec.dec:=rec.dec+(rec.star.pmdec)*cfgsc.DrawPMyear;
@@ -536,17 +572,20 @@ end;
 function Tskychart.DrawVarStars :boolean;
 var rec:GcatRec;
   x1,y1: Double;
-  xx,yy: integer;
+  xx,yy,lid: integer;
 begin
 fillchar(rec,sizeof(rec),0);
 try
 if Fcatalog.OpenVarStar then
  while Fcatalog.readvarstar(rec) do begin
+ lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
+    if rec.variable.magmax<cfgsc.StarmagMax-cfgsc.LabelMagDiff[2] then
+       SetLabel(lid,xx,yy,0,2,2,rec.variable.id);
  end;
 end;
 result:=true;
@@ -558,12 +597,13 @@ end;
 function Tskychart.DrawDblStars :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot: Double;
-  xx,yy: integer;
+  xx,yy,lid: integer;
 begin
 fillchar(rec,sizeof(rec),0);
 try
 if Fcatalog.OpenDblStar then
  while Fcatalog.readdblstar(rec) do begin
+ lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
@@ -577,6 +617,8 @@ if Fcatalog.OpenDblStar then
     if cfgsc.FlipY<0 then rot:=rot-pi;
     rec.double.pa:=DegToRad(rec.double.pa)-rot;
     Fplot.PlotDblStar(xx,yy,rec.double.mag1,rec.double.sep,rec.double.pa,0);
+    if rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3] then
+       SetLabel(lid,xx,yy,0,2,3,rec.double.id);
  end;
 end;
 result:=true;
@@ -598,12 +640,13 @@ end;
 function Tskychart.DrawNebulae :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot: Double;
-  xx,yy: integer;
+  xx,yy,lid: integer;
 begin
 fillchar(rec,sizeof(rec),0);
 try
 if Fcatalog.OpenNeb then
  while Fcatalog.readneb(rec) do begin
+ lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
@@ -622,6 +665,8 @@ if Fcatalog.OpenNeb then
       Fplot.PlotGalaxie(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit);
    end else
       Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype);
+   if rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4] then
+      SetLabel(lid,xx,yy,round(abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit*rec.neb.dim1/2),2,4,rec.neb.id);
  end;
 end;
 result:=true;
@@ -734,42 +779,35 @@ for j:=0 to cfgsc.SimNb-1 do begin
     projection(ra,dec+0.001,x2,y2,false,cfgsc) ;
     rot:=arctan2((x1-x2),(y1-y2));
     if cfgsc.FlipY<0 then rot:=rot-pi;
-    case ipla of
-    4 :  begin
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
-            if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],cfgsc.Planetlst[j,i+28,6]>1.0,true);
+    if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
+      if j=0 then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
+      case ipla of
+      4 :  begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,true);
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
-            if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],cfgsc.Planetlst[j,i+28,6]>1.0,false);
-         end;
-         end;
-    5 :  begin
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
-            if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],cfgsc.Planetlst[j,i+11,6]>1.0,true);
+            if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,false);
+           end;
+      5 :  begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
-            if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],cfgsc.Planetlst[j,i+11,6]>1.0,false);
-         end;
-         end;
-    6 :  begin
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
-            if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],cfgsc.Planetlst[j,i+15,6]>1.0,true);
+            if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
+           end;
+      6 :  begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,true);
             pa:=cfgsc.Planetlst[j,31,1]*cfgsc.FlipX;
             r1:=cfgsc.Planetlst[j,31,2];
             r2:=cfgsc.Planetlst[j,31,3];
             be:=cfgsc.Planetlst[j,31,4];
             if cfgsc.FlipY<0 then pa:=180-pa;
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,pa,rot,r1,r2,be,0);
-            if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],cfgsc.Planetlst[j,i+15,6]>1.0,false);
-         end;
-         end;
-    7 :  begin
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
-            if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],cfgsc.Planetlst[j,i+23,6]>1.0,true);
+            if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,false);
+           end;
+      7 :  begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,true);
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
-            if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],cfgsc.Planetlst[j,i+23,6]>1.0,false);
-         end;
-         end;
-    11 : begin
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
+            if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,false);
+           end;
+      11 : begin
             illum:=magn;
             magn:=-10;  // better to alway show a bright dot for the Moon
             dist:=cfgsc.Planetlst[j,ipla,6];
@@ -777,51 +815,82 @@ for j:=0 to cfgsc.SimNb-1 do begin
             pa:=pa*cfgsc.FlipX;
             if cfgsc.FlipY<0 then pa:=180-pa;
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,illum,pa,rot,0,0,0,dist);
-         end;
-         end;
-    else begin
-         if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then
+           end;
+      else begin
             Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
-         end;
-    end;
-//  end;
+           end;
+  end;
   //if ShowEarthUmbra then DrawEarthUmbra(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5],onprinter,out);
+  end;
   end;
 end;
 result:=true;
 end;
 
-Procedure Tskychart.DrawSatel(ipla:integer; ra,dec,ma,diam : double; hidesat, showhide : boolean);
+Procedure Tskychart.DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
 var
   x1,y1 : double;
   xx,yy : Integer;
 begin
 projection(ra,dec,x1,y1,true,cfgsc) ;
 WindowXY(x1,y1,xx,yy,cfgsc);
-Fplot.PlotSatel(xx,yy,ipla,abs(cfgsc.BxGlb)*deg2rad/3600,ma,diam,hidesat,showhide);
+Fplot.PlotSatel(xx,yy,ipla,pixscale,ma,diam,hidesat,showhide);
+if not(hidesat xor showhide)and(j=0) then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
 end;
 
 function Tskychart.DrawAsteroid :boolean;
 var
   x1,y1,ra,dec,magn: Double;
-  xx,yy,i,j: integer;
+  xx,yy,i,j,lid: integer;
 begin
 if cfgsc.ShowAsteroid then begin
   Fplanet.ComputeAsteroid(cfgsc);
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[12]) then break;
     for i:=1 to cfgsc.AsteroidNb do begin
-      ra:=cfgsc.AsteroidLst[j,i].ra;
-      dec:=cfgsc.AsteroidLst[j,i].dec;
-      magn:=cfgsc.AsteroidLst[j,i].magn;
-      projection(ra,dec,x1,y1,true,cfgsc) ;
+      ra:=cfgsc.AsteroidLst[j,i,1];
+      dec:=cfgsc.AsteroidLst[j,i,2];
+      magn:=cfgsc.AsteroidLst[j,i,3];
+      projection(ra,dec,x1,y1,true,cfgsc);
       WindowXY(x1,y1,xx,yy,cfgsc);
       Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,magn);
+      if (j=0)and(magn<cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5]) then begin
+         lid:=GetId(cfgsc.AsteroidName[j,i,1]);
+         SetLabel(lid,xx,yy,0,2,5,cfgsc.AsteroidName[j,i,2]);
+      end;
     end;
   end;
   result:=true;
 end else begin
   cfgsc.AsteroidNb:=0;
+  result:=false;
+end;
+end;
+
+function Tskychart.DrawComet :boolean;
+var
+  x1,y1: Double;
+  xx,yy,cxx,cyy,i,j,lid: integer;
+begin
+if cfgsc.ShowComet then begin
+  Fplanet.ComputeComet(cfgsc);
+  for j:=0 to cfgsc.SimNb-1 do begin
+    if (j>0) and (not cfgsc.SimObject[13]) then break;
+    for i:=1 to cfgsc.CometNb do begin
+      projection(cfgsc.CometLst[j,i,1],cfgsc.CometLst[j,i,2],x1,y1,true,cfgsc);
+      WindowXY(x1,y1,xx,yy,cfgsc);
+      if (j=0)and(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5]) then begin
+         lid:=GetId(cfgsc.CometName[j,i,1]);
+         SetLabel(lid,xx,yy,0,2,5,cfgsc.CometName[j,i,2]);
+      end;
+      projection(cfgsc.CometLst[j,i,5],cfgsc.CometLst[j,i,6],x1,y1,true,cfgsc);
+      WindowXY(x1,y1,cxx,cyy,cfgsc);
+      Fplot.PlotComet(xx,yy,cxx,cyy,cfgsc.Comsymbol, cfgsc.CometLst[j,i,3],cfgsc.CometLst[j,i,4],abs(cfgsc.BxGlb)*deg2rad/60);
+    end;
+  end;
+  result:=true;
+end else begin
+  cfgsc.CometNb:=0;
   result:=false;
 end;
 end;
@@ -842,17 +911,21 @@ if cfgsc.ShowPlanet then for i:=1 to 11 do
     xp:=xx;
     yp:=yy;
 end;
-{for i:=1 to CometNb do
-  for j:=0 to SimNb-1 do begin
-    projection(CometPlst[j,i,1]*15,CometPlst[j,i,2],x1,y1,true) ;
-    windowxy(x1,y1,xx,yy);
-    if (j=0)or((xx<-xmax)or(yy<-ymax)or(xx>2*xmax)or(yy>2*ymax)) then Moveto(xx,yy)
-       else Lineto(xx,yy);
-  end; }
+xp:=0;yp:=0;
+if cfgsc.SimObject[13] then for i:=1 to cfgsc.CometNb do
+  for j:=0 to cfgsc.SimNb-1 do begin
+    projection(cfgsc.CometLst[j,i,1],cfgsc.CometLst[j,i,2],x1,y1,true,cfgsc) ;
+    windowxy(x1,y1,xx,yy,cfgsc);
+    if (j<>0)and((xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax))
+       and ((xp>-2*cfgsc.xmax)and(yp>-2*cfgsc.ymax)and(xp<3*cfgsc.xmax)and(yp<3*cfgsc.ymax)) then
+       Fplot.PlotLine(xp,yp,xx,yy,color,1);
+    xp:=xx;
+    yp:=yy;
+  end;
 xp:=0;yp:=0;
 if cfgsc.SimObject[12] then for i:=1 to cfgsc.AsteroidNb do
   for j:=0 to cfgsc.SimNb-1 do begin
-    projection(cfgsc.AsteroidLst[j,i].ra,cfgsc.AsteroidLst[j,i].dec,x1,y1,true,cfgsc) ;
+    projection(cfgsc.AsteroidLst[j,i,1],cfgsc.AsteroidLst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
     if (j<>0)and((xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax))
        and ((xp>-2*cfgsc.xmax)and(yp>-2*cfgsc.ymax)and(xp<3*cfgsc.xmax)and(yp<3*cfgsc.ymax)) then
@@ -1146,8 +1219,13 @@ end else begin
       result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+' '+d;
+   end else begin
+      result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+      if result then begin
+         if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+' '+d;
       end;
    end;
+end;
 end;
 end;
 
@@ -1203,6 +1281,20 @@ begin
    ok:=fplanet.findasteroid(x1,y1,x2,y2,true,cfgsc,n,m,d,desc);
  end;
 end;
+Procedure FindatPosComet;
+begin
+ ok:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+ while ok do begin
+   if i>maxln then break;
+   projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
+   windowxy(xx1,yy1,xx,yy,cfgsc);
+   if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+      text:=text+desc+crlf;
+      inc(i);
+   end;
+   ok:=fplanet.findcomet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc);
+ end;
+end;
 /////////////
 begin
 if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
@@ -1228,6 +1320,7 @@ end;
 try
   i:=0;
   if allobject or Fcatalog.cfgshr.ListPla then FindatPosPlanet;
+  if allobject or Fcatalog.cfgshr.ListPla then FindatPosComet;
   if allobject or Fcatalog.cfgshr.ListPla then FindatPosAsteroid;
   if allobject or Fcatalog.cfgshr.ListNeb then begin
      FindAtPosCat(gcneb);
@@ -1403,11 +1496,11 @@ if (cfgsc.projpole=Equat)and(not cfgsc.ShowEqGrid) then col:=Fplot.cfgplot.Color
                   else col:=Fplot.cfgplot.Color[13];
 Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
 Fplot.cnv.Brush.Style:=bsClear;
-Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[2];
+Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.LabelSize[2];
-if Fplot.cfgplot.FontBold[2] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
-if Fplot.cfgplot.FontItalic[2] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1];
+if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
+if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('22h22m');
 lw:=Fplot.cnv.TextWidth('22h22m');
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.decentre));
@@ -1463,9 +1556,10 @@ var a1,h1,ac,hc,dda,ddh:double;
     ok,labelok:boolean;
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1,al:double;
-    n,xx,yy,xxp,yyp: integer;
+    n,xx,yy,xxp,yyp,w: integer;
     plotok:boolean;
 begin
+if (abs(a)<musec)or(abs(a-pi2)<musec)or(abs(a-pi)<musec) then w:=2 else w:=1;
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
@@ -1478,7 +1572,7 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    Fplot.Plotline(xxp,yyp,xx,yy,col,w);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((abs(h)<minarc)or(xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
@@ -1532,11 +1626,11 @@ begin
 col:=Fplot.cfgplot.Color[12];
 Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
 Fplot.cnv.Brush.Style:=bsClear;
-Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[2];
+Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.LabelSize[2];
-if Fplot.cfgplot.FontBold[2] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
-if Fplot.cfgplot.FontItalic[2] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1];
+if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
+if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');
 lw:=Fplot.cnv.TextWidth('222h22m');
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.hcentre));
@@ -1614,7 +1708,7 @@ var az,h,x1,y1 : double;
 begin
 if cfgsc.ProjPole=Altaz then begin
   if cfgsc.hcentre<-(cfgsc.fov/6) then
-     Fplot.PlotLabel((cfgsc.xmax-cfgsc.xmin)div 2,(cfgsc.ymax-cfgsc.ymin)div 2,1,2,laCenter,laCenter,' Below the horizon ');
+     Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2,(cfgsc.ymax-cfgsc.ymin)div 2,2,Fplot.cfgplot.Color[12],laCenter,laCenter,' Below the horizon ');
   if (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
      first:=true; xp:=0;yp:=0;x0:=0;y0:=0; xph:=0;yph:=0;x0h:=0;y0h:=0;
      for i:=1 to 360 do begin
@@ -1721,11 +1815,11 @@ begin
 col:=Fplot.cfgplot.Color[12];
 Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
 Fplot.cnv.Brush.Style:=bsClear;
-Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[2];
+Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.LabelSize[2];
-if Fplot.cfgplot.FontBold[2] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
-if Fplot.cfgplot.FontItalic[2] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1];
+if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
+if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');
 lw:=Fplot.cnv.TextWidth('222h22m');
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.bcentre));
@@ -1848,11 +1942,11 @@ begin
 col:=Fplot.cfgplot.Color[12];
 Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
 Fplot.cnv.Brush.Style:=bsClear;
-Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[2];
+Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.LabelSize[2];
-if Fplot.cfgplot.FontBold[2] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
-if Fplot.cfgplot.FontItalic[2] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1];
+if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
+if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');
 lw:=Fplot.cnv.TextWidth('222h22m');
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.becentre));
@@ -1905,7 +1999,6 @@ end;
 Procedure Tskychart.GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 var x1,y1:double;
     xx,yy,rr:integer;
-const spacing=10;
 begin
  // no precession, the label position is already for the rigth equinox
  projection(ra,dec,x1,y1,true,cfgsc) ;
@@ -1916,11 +2009,11 @@ begin
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     case cfgsc.LabelOrientation of
     0 : begin                    // to the left
-         x:=xx-rr-spacing-w;
+         x:=xx-rr-labspacing-w;
          y:=y-(h div 2);
         end;
     1 : begin                    // to the right
-         x:=xx+rr+spacing;
+         x:=xx+rr+labspacing;
          y:=y-(h div 2);
         end;
     end;
@@ -2036,5 +2129,217 @@ end;
 result:=true;
 end;
 
+procedure Tskychart.SetLabel(id,xx,yy,radius,fontnum,labelnum:integer; txt:string);
+begin
+if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=cfgsc.xmin)and(xx<=cfgsc.xmax)and(yy>=cfgsc.ymin)and(yy<=cfgsc.ymax) then begin
+  inc(numlabels);
+  try
+  labels[numlabels].id:=id;
+  labels[numlabels].x:=xx;
+  labels[numlabels].y:=yy;
+  labels[numlabels].r:=radius;
+  labels[numlabels].labelnum:=labelnum;
+  labels[numlabels].fontnum:=fontnum;
+  labels[numlabels].txt:=wordspace(txt);
+  except
+   dec(numlabels);
+  end;
+end;
+end;
+
+procedure Tskychart.EditLabelPos(lnum,x,y: integer);
+var
+    i,j,id: integer;
+    labelnum,fontnum:byte;
+    txt: string;
+begin
+i:=-1;
+txt:=labels[lnum].txt;
+labelnum:=labels[lnum].labelnum;
+fontnum:=labels[lnum].fontnum;
+id:=labels[lnum].id;
+for j:=1 to cfgsc.nummodlabels do
+    if id=cfgsc.modlabels[j].id then begin
+       i:=j;
+       txt:=cfgsc.modlabels[j].txt;
+       labelnum:=cfgsc.modlabels[j].labelnum;
+       fontnum:=cfgsc.modlabels[j].fontnum;
+       break;
+     end;
+if i<0 then begin
+  inc(cfgsc.nummodlabels);
+  if cfgsc.nummodlabels>maxmodlabels then cfgsc.nummodlabels:=1;
+  i:=cfgsc.nummodlabels;
+end;
+cfgsc.modlabels[i].dx:=x-labels[lnum].x;
+cfgsc.modlabels[i].dy:=y-labels[lnum].y;
+cfgsc.modlabels[i].txt:=txt;
+cfgsc.modlabels[i].labelnum:=labelnum;
+cfgsc.modlabels[i].fontnum:=fontnum;
+cfgsc.modlabels[i].id:=id;
+cfgsc.modlabels[i].hiden:=false;
+end;
+
+procedure Tskychart.EditLabelTxt(lnum,x,y: integer);
+var i,j,id: integer;
+    labelnum,fontnum:byte;
+    txt: string;
+    f1:Tform;
+    e1:Tedit;
+    b1,b2:Tbutton;
+begin
+i:=-1;
+txt:=labels[lnum].txt;
+labelnum:=labels[lnum].labelnum;
+fontnum:=labels[lnum].fontnum;
+id:=labels[lnum].id;
+for j:=1 to cfgsc.nummodlabels do
+    if id=cfgsc.modlabels[j].id then begin
+       i:=j;
+       txt:=cfgsc.modlabels[j].txt;
+       labelnum:=cfgsc.modlabels[j].labelnum;
+       fontnum:=cfgsc.modlabels[j].fontnum;
+       break;
+     end;
+f1:=Tform.Create(self);
+e1:=Tedit.Create(f1);
+b1:=Tbutton.Create(f1);
+b2:=Tbutton.Create(f1);
+try
+e1.Parent:=f1;
+b1.Parent:=f1;
+b2.Parent:=f1;
+e1.Font.Name:=fplot.cfgplot.FontName[fontnum];
+{$ifdef linux} e1.Font.CharSet:=fcsAnyCharSet; {$endif}
+e1.Top:=8;
+e1.Left:=8;
+e1.Width:=150;
+b1.Width:=65;
+b2.Width:=65;
+b1.Top:=e1.Top+e1.Height+8;
+b2.Top:=b1.Top;
+b1.Left:=8;
+b2.Left:=b1.Left+b2.Width+8;
+b1.Caption:='Ok';
+b2.Caption:='Cancel';
+b1.ModalResult:=mrOk;
+b2.ModalResult:=mrCancel;
+f1.ClientWidth:=e1.Width+16;
+f1.ClientHeight:=b1.top+b1.Height+8;
+e1.Text:=txt;
+f1.BorderStyle:=bsDialog;
+f1.Caption:='Edit Label';
+formpos(f1,x,y);
+if f1.ShowModal=mrOK then begin
+   txt:=e1.Text;
+   if i<0 then begin
+     inc(cfgsc.nummodlabels);
+     if cfgsc.nummodlabels>maxmodlabels then cfgsc.nummodlabels:=1;
+     i:=cfgsc.nummodlabels;
+     cfgsc.modlabels[i].dx:=0;
+     cfgsc.modlabels[i].dy:=0;
+   end;
+   cfgsc.modlabels[i].txt:=txt;
+   cfgsc.modlabels[i].labelnum:=labelnum;
+   cfgsc.modlabels[i].fontnum:=fontnum;
+   cfgsc.modlabels[i].id:=id;
+   cfgsc.modlabels[i].hiden:=false;
+   DrawLabels;
+end;
+finally
+e1.Free;
+b1.Free;
+b2.Free;
+f1.Free;
+end;
+end;
+
+procedure Tskychart.DeleteLabel(lnum: integer);
+var i,j,id: integer;
+    labelnum,fontnum:byte;
+    txt: string;
+begin
+i:=-1;
+txt:=labels[lnum].txt;
+labelnum:=labels[lnum].labelnum;
+fontnum:=labels[lnum].fontnum;
+id:=labels[lnum].id;
+for j:=1 to cfgsc.nummodlabels do
+    if id=cfgsc.modlabels[j].id then begin
+       i:=j;
+       txt:=cfgsc.modlabels[j].txt;
+       labelnum:=cfgsc.modlabels[j].labelnum;
+       fontnum:=cfgsc.modlabels[j].fontnum;
+       break;
+     end;
+if i<0 then begin
+  inc(cfgsc.nummodlabels);
+  if cfgsc.nummodlabels>maxmodlabels then cfgsc.nummodlabels:=1;
+  i:=cfgsc.nummodlabels;
+end;
+cfgsc.modlabels[i].dx:=0;
+cfgsc.modlabels[i].dy:=0;
+cfgsc.modlabels[i].txt:=txt;
+cfgsc.modlabels[i].labelnum:=labelnum;
+cfgsc.modlabels[i].fontnum:=fontnum;
+cfgsc.modlabels[i].id:=id;
+cfgsc.modlabels[i].hiden:=true;
+DrawLabels;
+end;
+
+procedure Tskychart.DefaultLabel(lnum: integer);
+var i,j,id: integer;
+begin
+i:=-1;
+id:=labels[lnum].id;
+for j:=1 to cfgsc.nummodlabels do
+    if id=cfgsc.modlabels[j].id then begin
+       i:=j;
+       break;
+     end;
+if i<0 then exit;
+for j:=i+1 to cfgsc.nummodlabels do cfgsc.modlabels[j-1]:=cfgsc.modlabels[j];
+dec(cfgsc.nummodlabels);
+DrawLabels;
+end;
+
+procedure Tskychart.LabelClick(lnum: integer);
+var x,y: integer;
+begin
+x:=labels[lnum].x;
+y:=labels[lnum].y;
+if assigned(FShowDetailXY) then FShowDetailXY(x,y);
+end;
+
+function Tskychart.DrawLabels:boolean;
+var i,j,x,y,r: integer;
+    labelnum,fontnum:byte;
+    txt:string;
+    skiplabel:boolean;
+begin
+Fplot.InitLabel;
+for i:=1 to numlabels do begin
+  skiplabel:=false;
+  x:=labels[i].x;
+  y:=labels[i].y;
+  r:=labels[i].r;
+  txt:=labels[i].txt;
+  labelnum:=labels[i].labelnum;
+  fontnum:=labels[i].fontnum;
+  for j:=1 to cfgsc.nummodlabels do
+     if labels[i].id=cfgsc.modlabels[j].id then begin
+        skiplabel:=cfgsc.modlabels[j].hiden;
+        txt:=cfgsc.modlabels[j].txt;
+        labelnum:=cfgsc.modlabels[j].labelnum;
+        fontnum:=cfgsc.modlabels[j].fontnum;
+        x:=x+cfgsc.modlabels[j].dx*Fplot.cfgchart.drawpen;
+        y:=y+cfgsc.modlabels[j].dy*Fplot.cfgchart.drawpen;
+        if (cfgsc.modlabels[j].dx<>0)or(cfgsc.modlabels[j].dy<>0) then r:=-1;
+        break;
+     end;
+  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,txt);
+end;
+result:=true;
+end;
 
 end.

@@ -1220,6 +1220,10 @@ if result then begin
    rec.star.id:=rec.star.id+' '+ lin.bayer+' '+lin.cons;
    rec.str[1]:=inttostr(lin.bs);
    if lin.hd>0 then rec.str[2]:=inttostr(lin.hd) else rec.str[2]:='';
+   if trim(lin.bayer)<>'' then begin
+      rec.star.greeksymbol:=GreekLetter(lin.bayer);
+      rec.star.valid[vsGreekSymbol]:=true;
+   end;
 end;
 end;
 

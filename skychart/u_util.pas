@@ -30,7 +30,7 @@ uses Math, SysUtils, Classes, u_constant,
     Libc,QForms,QGraphics;
 {$endif}
 {$ifdef mswindows}
-    Windows,Forms,Graphics;
+    Windows,Forms,Graphics,Printers,Winspool;
 {$endif}
 
 function rmod(x,y:Double):Double;
@@ -48,6 +48,7 @@ Procedure InitTrace;
 Procedure WriteTrace( buf : string);
 procedure Splitarg(buf,sep:string; var arg: TStringList);
 function words(str,sep : string; p,n : integer) : string;
+function wordspace(str:string):string;
 function pos2(sub,str:string;i:integer):integer;
 function InvertI16(X : Word) : SmallInt;
 function InvertI32(X : LongWord) : LongInt;
@@ -76,6 +77,9 @@ Function GetTimeZone : double;
 Procedure FormPos(form : Tform; x,y : integer);
 procedure Exec(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string='');
 function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
+Function GreekLetter(gr : shortstring) : shortstring;
+function GetId(str:string):integer;
+Procedure GetPrinterResolution(var name : string; var resol : integer);
 
 var traceon : boolean;
     
@@ -243,6 +247,20 @@ while pos(sep,buf)<>0 do begin
  end;
 end;
 arg.add(buf);
+end;
+
+function wordspace(str:string):string;
+var i : integer;
+    c : char;
+begin
+c:=' ';
+result:='';
+for i:=1 to length(str) do begin
+  if str[i]=' ' then begin
+     if c<>' ' then result:=result+str[i];
+  end else result:=result+str[i];
+  c:=str[i];
+end;
 end;
 
 function words(str,sep : string; p,n : integer) : string;
@@ -814,5 +832,72 @@ except
  result:=false;
 end;
 end;
+
+Function GreekLetter(gr : shortstring) : shortstring;
+var i : integer;
+    buf:shortstring;
+begin
+result:='';
+buf:=lowercase(trim(copy(gr,1,3)));
+for i:=1 to 24 do begin
+  if buf=greeksymbol[1,i] then begin
+     result:=greeksymbol[2,i]+copy(gr,4,1); // ome2 -> w2
+     break;
+   end;
+end;
+end;
+
+function GetId(str:string):integer;
+var buf:shortstring;
+    i,k:integer;
+    v,w:extended;
+begin
+buf:=trim(str);
+k:=length(buf);
+v:=0;
+for i:=0 to k-1 do
+  v:=v+intpower(10,i)*ord(buf[i]);
+w:=intpower(10,k)/maxint;
+if w>1 then result:=trunc(v/w)
+       else result:=trunc(v);
+end;
+
+Procedure GetPrinterResolution(var name : string; var resol : integer);
+{$ifdef linux}
+begin
+name:='';
+resol:=75;  // Kylix - Qt bug!
+end;
+{$endif}
+{$ifdef mswindows}
+var
+  FDevice: PChar;
+  FDriver: PChar;
+  FPort: PChar;
+  DeviceMode: THandle;
+  DevMode: PDeviceMode;
+  hPrinter: THandle;
+begin
+  GetMem(FDevice, 128);
+  GetMem(FDriver, 128);
+  GetMem(FPort, 128);
+  Printer().GetPrinter(FDevice, FDriver, FPort, DeviceMode);
+  if DeviceMode = 0 then
+    Printer().GetPrinter(FDevice, FDriver, FPort, DeviceMode);
+  OpenPrinter(FDevice, hPrinter, nil);
+  DevMode := GlobalLock(DeviceMode);
+  resol:=DevMode^.dmYResolution;
+  if resol=0 then resol:=DevMode^.dmPrintQuality;
+  name:=DevMode^.dmDeviceName;
+//  if debugon then WriteDebug(Format('Printer %s  Resolution: %d', [name ,resol]));
+  if resol=0 then resol:=DefaultPrtRes;
+//  ShowMessage(Format('dmYResolution: %d', [resol]));
+  GlobalUnlock(DeviceMode);
+  FreeMem(FDevice, 128);
+  FreeMem(FDriver, 128);
+  FreeMem(FPort, 128);
+end;
+{$endif}
+
 
 end.

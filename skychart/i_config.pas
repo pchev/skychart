@@ -101,12 +101,14 @@ ShowPlanet;
 ShowLine;
 ShowColor;
 ShowSkyColor;
+ShowLabel;
 ShowServer;
 ShowObservatory;
 ShowHorizon;
 ShowObjList;
 ShowDB;
 ShowAsteroid;
+ShowComet;
 TreeView1.TopItem.Expand(false);
 Treeview1.selected:=Treeview1.items[cmain.configpage];
 screen.cursor:=crDefault;
@@ -204,6 +206,7 @@ PlanetMode.itemindex:=cplot.plaplot;
 grs.value:=csc.GRSlongitude;
 PlanetBox3.checked:=csc.ShowEarthShadow;
 PlanetBox2.checked:=cplot.PlanetTransparent;
+Planetdir.Text:=cmain.planetdir;
 end;
 
 procedure Tf_config.ShowChart;
@@ -500,6 +503,7 @@ begin
  SetFonts(statusfont,4);
  SetFonts(listfont,5);
  SetFonts(prtfont,6);
+ SetFonts(symbfont,7);
 end;
 
 procedure Tf_config.ShowColor;
@@ -507,6 +511,7 @@ begin
  bg1.color:=cplot.bgColor;
  bg2.color:=cplot.bgColor;
  bg3.color:=cplot.bgColor;
+ bg4.color:=cplot.bgColor;
  shape1.brush.color:=cplot.color[1];
  shape2.brush.color:=cplot.color[2];
  shape3.brush.color:=cplot.color[3];
@@ -525,6 +530,8 @@ begin
  shape16.pen.color:=cplot.color[17];
  shape17.pen.color:=cplot.color[18];
  shape25.brush.color:=cplot.color[19];
+ shape26.brush.color:=cplot.color[20];
+ shape27.brush.color:=cplot.color[21];
 end;
 
 procedure Tf_config.ShowSkyColor;
@@ -575,12 +582,13 @@ end;
 procedure Tf_config.DefaultFontClick(Sender: TObject);
 var i : integer;
 begin
-for i:=1 to 6 do begin
+for i:=1 to numfont do begin
     cplot.FontName[i]:=DefaultFontName;
     cplot.FontSize[i]:=DefaultFontSize;
     cplot.FontBold[i]:=false;
     cplot.FontItalic[i]:=false;
 end;
+cplot.FontName[7]:='Symbol';
 ShowFonts;
 end;
                  
@@ -1229,6 +1237,26 @@ if sender is TMaskEdit then with sender as TMaskEdit do
    cshr.HourGridSpacing[tag]:=Str3ToAr(text);
 end;
 
+procedure Tf_config.planetdirChange(Sender: TObject);
+begin
+cmain.planetdir:=planetdir.text;
+end;
+
+procedure Tf_config.planetdirselClick(Sender: TObject);
+begin
+{$ifdef mswindows}
+  FolderDialog1.Directory:=planetdir.text;
+  if FolderDialog1.execute then
+     planetdir.text:=FolderDialog1.Directory;
+{$endif}
+{$ifdef linux }
+  f_directory.DirectoryTreeView1.Directory:=planetdir.text;
+  f_directory.showmodal;
+  if f_directory.modalresult=mrOK then
+     planetdir.text:=f_directory.DirectoryTreeView1.Directory;
+{$endif}
+end;
+
 procedure Tf_config.PlaParalaxeClick(Sender: TObject);
 begin
 csc.PlanetParalaxe:=(PlaParalaxe.itemindex=1);
@@ -1519,9 +1547,10 @@ Obsposy:=0;
 ZoomImage1.Xcentre:=Obsposx;
 ZoomImage1.Ycentre:=Obsposy;
 ZoomImage1.ZoomMax:=3;
-if fileexists(cmain.EarthMapFile) then
-   ZoomImage1.Picture.LoadFromFile(cmain.EarthMapFile)
-else  ZoomImage1.PictureChange(self);
+if fileexists(cmain.EarthMapFile)and(cmain.EarthMapFile<>ObsMapfile) then begin
+   ZoomImage1.Picture.LoadFromFile(cmain.EarthMapFile);
+   ObsMapfile:=cmain.EarthMapFile;
+end else  ZoomImage1.PictureChange(self);
 SetScrollBar;
 Hscrollbar.Position:=ZoomImage1.SizeX div 2;
 Vscrollbar.Position:=ZoomImage1.SizeY div 2;
@@ -1870,8 +1899,8 @@ end else begin
    opendialog1.InitialDir:=slash(appdir)+'data'+pathdelim+'earthmap';
    opendialog1.filename:='';
 end;
-opendialog1.Filter:='PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
-opendialog1.DefaultExt:='.png';
+opendialog1.Filter:='JPEG|*.jpg|PNG|*.png|BMP|*.bmp';
+opendialog1.DefaultExt:='.jpg';
 try
 if opendialog1.execute
    and(fileexists(opendialog1.filename))
@@ -2014,8 +2043,8 @@ try
   if db.SelectDatabase(cmain.db) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
      else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.GetLastError)+crlf; goto dmsg;end;
   for i:=1 to numsqltable do begin
-     if db.Query('SHOW TABLES LIKE "'+sqltable[i,1]+'"') then msg:=msg+'Table exist '+sqltable[i,1]+crlf
-        else begin msg:=msg+'Table '+sqltable[i,1]+' do not exist! '+crlf; goto dmsg;end;
+     if sqltable[i,1]=db.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"') then msg:=msg+'Table exist '+sqltable[i,1]+crlf
+        else begin msg:=msg+'Table '+sqltable[i,1]+' do not exist! '+crlf+'Please correct the error and retry.' ; goto dmsg;end;
   end;
   msg:=msg+'All is OK!';
 dmsg:
@@ -2039,13 +2068,13 @@ try
   db.SetPort(cmain.dbport);
   db.database:='';
   db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
-  if db.Active then db.Query('Create Database '+cmain.db);
+  if db.Active then db.Query('Create Database if not exists '+cmain.db);
   msg:=trim(db.GetLastError);
   if msg<>'' then showmessage(msg);
   if db.SelectDatabase(cmain.db) then begin
     ok:=true;
     for i:=1 to numsqltable do
-      if not db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]) then begin
+      if not db.Query('CREATE TABLE if not exists '+sqltable[i,1]+sqltable[i,2]) then begin
          ok:=false;
          msg:='Error creating table '+sqltable[i,1]+' '+trim(db.GetLastError);
          showmessage(msg);
@@ -2062,11 +2091,14 @@ except
 db.Free;
 end;
 if ok then begin
-  // load sample data
-  mpcfile.text:='MPCsample.dat';
+  // load sample asteroid data
+  mpcfile.text:=slash(appdir)+'data'+Pathdelim+'planet'+Pathdelim+'MPCsample.dat';
   autoprocess:=true;
-   LoadMPCClick(Sender);
+  LoadMPCClick(Sender);
   autoprocess:=false;
+  // load sample comet data
+  comfile.text:=slash(appdir)+'data'+Pathdelim+'planet'+Pathdelim+'Cometsample.dat';
+  LoadComClick(Sender);
 end;
 chkdbClick(Sender);
 end;
@@ -2093,7 +2125,14 @@ end;
 
 procedure Tf_config.AstDBClick(Sender: TObject);
 begin
-  Pagecontrol1.activepage:=p_asteroids;
+Treeview1.selected:=Treeview1.items[p_asteroids.PageIndex];
+Treeview1.selected.expand(true);
+end;
+
+procedure Tf_config.CometDBClick(Sender: TObject);
+begin
+Treeview1.selected:=Treeview1.items[p_comets.PageIndex];
+Treeview1.selected.expand(true);
 end;
 
 procedure Tf_config.ShowAsteroid;
@@ -2155,14 +2194,16 @@ end;
 
 procedure Tf_config.astdbsetClick(Sender: TObject);
 begin
-  Pagecontrol1.activepage:=p_system;
+Treeview1.selected:=Treeview1.items[p_system.PageIndex];
+Treeview1.selected.expand(true);
 end;
 
 procedure Tf_config.mpcfilebtnClick(Sender: TObject);
 var f : string;
 begin
-f:=expandfilename(mpcFile.Text);
+f:=mpcFile.Text;
 opendialog1.InitialDir:=extractfilepath(f);
+if opendialog1.InitialDir='' then opendialog1.InitialDir:=cmain.planetdir;
 opendialog1.filename:=extractfilename(f);
 opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
 opendialog1.DefaultExt:='';
@@ -2411,7 +2452,7 @@ if db.Active then begin
   db.Query('UNLOCK TABLES');
   db.Query('FLUSH TABLES');
   delastMemo.lines.add('Delete daily data');
-  f_main.planet.TruncateDailyTables;
+  f_main.planet.TruncateDailyAsteroid;
   delastMemo.lines.add('Delete completed');
 end;
   db.Free;
@@ -2452,7 +2493,7 @@ if db.Active then begin
   if not db.Query('Truncate table cdc_ast_mag') then
      delastMemo.lines.add('Failed : '+trim(db.GetLastError));
   delastMemo.lines.add('Delete daily data');
-  f_main.planet.TruncateDailyTables;
+  f_main.planet.TruncateDailyAsteroid;
   delastMemo.lines.add('Delete completed');
 end;
   screen.cursor:=crDefault;
@@ -2530,5 +2571,426 @@ screen.cursor:=crDefault;
 end;
 end;
 
+procedure Tf_config.ShowComet;
+begin
+showcom.checked:=csc.ShowComet;
+comsymbol.itemindex:=csc.ComSymbol;
+comlimitmag.value:=csc.CommagMax;
+commagdiff.value:=csc.CommagDiff;
+UpdComList;
+end;
 
+procedure Tf_config.showcomClick(Sender: TObject);
+begin
+csc.ShowComet:=showcom.checked;
+end;
+
+procedure Tf_config.comsymbolClick(Sender: TObject);
+begin
+csc.ComSymbol:=comsymbol.itemindex;
+end;
+
+procedure Tf_config.comlimitmagChange(Sender: TObject);
+begin
+csc.CommagMax:=comlimitmag.value;
+end;
+
+procedure Tf_config.commagdiffChange(Sender: TObject);
+begin
+csc.CommagDiff:=commagdiff.value;
+end;
+
+procedure Tf_config.comfilebtnClick(Sender: TObject);
+var f : string;
+begin
+f:=comFile.Text;
+opendialog1.InitialDir:=extractfilepath(f);
+if opendialog1.InitialDir='' then opendialog1.InitialDir:=cmain.planetdir;
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   comFile.Text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
+procedure Tf_config.LoadcomClick(Sender: TObject);
+var
+  buf,cmd,filedesc,filenum,edate :string;
+  t,ep,id,nam,ec,q,i,node,peri,eq,h,g  : string;
+  y,m,d,nl: integer;
+  hh:double;
+  f : textfile;
+begin
+MemoCom.clear;
+if not fileexists(comfile.text) then begin
+  MemoCom.lines.add('File not found!');
+  exit;
+end;
+db:=TMyDB.create(self);
+try
+screen.cursor:=crHourGlass;
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  filedesc:=extractfilename(comfile.text)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(comfile.text)));
+  assignfile(f,comfile.text);
+  reset(f);
+  db.Query('LOCK TABLES cdc_com_elem WRITE, cdc_ast_com_list WRITE, cdc_com_name WRITE');
+  nl:=0;
+  repeat
+    readln(f,buf);
+    inc(nl);
+    if trim(buf)='' then continue;
+    if (nl mod 10000)=0 then begin MemoCom.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
+    id:=trim(copy(buf,1,12));
+    y:=strtoint(trim(copy(buf,15,4)));
+    m:=strtoint(trim(copy(buf,20,2)));
+    d:=strtoint(trim(copy(buf,23,2)));
+    hh:=24*strtofloat('0'+trim(copy(buf,25,5)));
+    t:=formatfloat(f6,jd(y,m,d,hh));
+    ep:=trim(copy(buf,82,8));
+    if ep<>'' then begin
+       y:=strtoint(trim(copy(ep,1,4)));
+       m:=strtoint(trim(copy(ep,5,2)));
+       d:=strtoint(trim(copy(ep,7,2)));
+       hh:=0;
+    end;
+    ep:=formatfloat(f1,jd(y,m,d,hh));
+    if nl=1 then edate:=inttostr(y)+'.'+inttostr(m);
+    q:=copy(buf,31,9);
+    ec:=copy(buf,41,9);
+    peri:=copy(buf,51,9);
+    node:=copy(buf,61,9);
+    i:=copy(buf,71,9);
+    h:=copy(buf,92,4);
+    g:=copy(buf,97,4);
+    nam:=stringreplace(trim(copy(buf,103,27)),'"','\"',[rfreplaceall]);
+    eq:='2000';
+    if nl=1 then begin
+       filedesc:=filedesc+', epoch='+ep;
+       buf:=db.QueryOne('Select max(elem_id) from cdc_com_elem_list');
+       if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
+                   else filenum:='1';
+       if not db.Query('Insert into cdc_com_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")') then
+              MemoCom.lines.add(trim(db.GetLastError));
+    end;
+    cmd:='INSERT INTO cdc_com_elem (id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id) VALUES ('
+        +'"'+id+'"'
+        +',"'+t+'"'
+        +',"'+q+'"'
+        +',"'+ec+'"'
+        +',"'+peri+'"'
+        +',"'+node+'"'
+        +',"'+i+'"'
+        +',"'+ep+'"'
+        +',"'+h+'"'
+        +',"'+g+'"'
+        +',"'+nam+'"'
+        +',"'+eq+'"'
+        +',"'+filenum+'"'+')';
+    if not db.query(cmd) then begin
+       MemoCom.lines.add('insert failed line '+inttostr(nl)+' : '+trim(db.GetLastError));
+    end;
+    cmd:='INSERT INTO cdc_com_name (name, id) VALUES ('
+        +'"'+nam+'"'
+        +',"'+id+'"'+')';
+    db.query(cmd);
+  until eof(f);
+  closefile(f);
+  MemoCom.lines.add('Processing ended. Total number of comet :'+inttostr(nl));
+end else begin
+   buf:=trim(db.GetLastError);
+   if buf<>'' then showmessage(buf);
+end;
+  screen.cursor:=crDefault;
+  db.Query('UNLOCK TABLES');
+  db.Query('FLUSH TABLES');
+  db.Free;
+  UpdComList;
+except
+  screen.cursor:=crDefault;
+  db.Free;
+end;
+end;
+
+
+procedure Tf_config.AddComClick(Sender: TObject);
+var
+  buf,cmd,filedesc,filenum :string;
+  t,q,ep,id,nam,ec,i,node,peri,eq,h,g  : string;
+  y,m,d,p:integer;
+  hh:double;
+begin
+db:=TMyDB.create(self);
+try
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+    id:=trim(copy(comid.text,1,7));
+    buf:=comt.text;
+    p:=pos('.',buf);
+    y:=strtoint(trim(copy(buf,1,p-1)));
+    delete(buf,1,p);
+    p:=pos('.',buf);
+    m:=strtoint(trim(copy(buf,1,p-1)));
+    delete(buf,1,p);
+    p:=pos('.',buf);
+    d:=strtoint(trim(copy(buf,1,p-1)));
+    delete(buf,1,p);
+    hh:=strtofloat(trim('0.'+trim(buf)))*24;
+    t:=formatfloat(f6,jd(y,m,d,hh));
+    ep:=trim(comep.text);
+    if ep='' then begin
+       ep:=formatfloat(f1,jd(y,m,d,hh));
+    end;
+    q:=trim(comq.text);
+    ec:=trim(comec.text);
+    peri:=trim(comperi.text);
+    node:=trim(comnode.text);
+    i:=trim(comi.text);
+    h:=trim(comh.text);
+    g:=trim(comg.text);
+    nam:=stringreplace(trim(comnam.text),'"','\"',[rfreplaceall]);
+    eq:=trim(comeq.text);
+    buf:=db.QueryOne('Select max(elem_id) from cdc_com_elem_list');
+    if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
+               else filenum:='1';
+    filedesc:='Add '+id+', '+nam+', '+ep;
+    db.Query('Insert into cdc_com_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
+    cmd:='INSERT INTO cdc_com_elem (id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id) VALUES ('
+        +'"'+id+'"'
+        +',"'+t+'"'
+        +',"'+q+'"'
+        +',"'+ec+'"'
+        +',"'+peri+'"'
+        +',"'+node+'"'
+        +',"'+i+'"'
+        +',"'+ep+'"'
+        +',"'+h+'"'
+        +',"'+g+'"'
+        +',"'+nam+'"'
+        +',"'+eq+'"'
+        +',"'+filenum+'"'+')';
+    if db.query(cmd) then begin
+       cmd:='INSERT INTO cdc_com_name (name, id) VALUES ('
+           +'"'+nam+'"'
+           +',"'+id+'"'+')';
+       db.query(cmd);
+       ShowMessage('OK!')
+    end else ShowMessage('Insert failed! '+trim(db.GetLastError));
+end else begin
+   buf:=trim(db.GetLastError);
+   if buf<>'' then showmessage(buf);
+end;
+db.Query('FLUSH TABLES');
+db.Free;
+UpdComList;
+except
+  db.Free;
+end;
+end;
+
+procedure Tf_config.UpdComList;
+var i:integer;
+begin
+comelemlist.clear;
+comelemlist.text:='';
+db:=TMyDB.create(self);
+try
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  db.Query('Select elem_id,filedesc from cdc_com_elem_list order by elem_id');
+  i:=0;
+  while i<= high(db.Resultset) do begin
+     comelemlist.items.add(db.Resultset[i,0]+'; '+db.Resultset[i,1]);
+     inc(i);
+  end;
+  comelemlist.itemindex:=0;
+  if comelemlist.items.count>0 then comelemlist.text:=comelemlist.items[0];
+end;
+  db.Free;
+except
+db.Free;
+end;
+end;
+
+
+procedure Tf_config.DelComClick(Sender: TObject);
+var i: integer;
+    elem_id:string;
+begin
+delComMemo.clear;
+i:=pos(';',comelemlist.text);
+elem_id:=copy(comelemlist.text,1,i-1);
+if trim(elem_id)='' then exit;
+db:=TMyDB.create(self);
+try
+screen.cursor:=crHourGlass;
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  db.Query('LOCK TABLES cdc_com_elem WRITE, cdc_com_elem_list WRITE');
+  delcomMemo.lines.add('Delete from element table...');
+  application.processmessages;
+  if not db.Query('Delete from cdc_com_elem where elem_id='+elem_id) then
+     delcomMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delcomMemo.lines.add('Delete from element list...');
+  application.processmessages;
+  if not db.Query('Delete from cdc_com_elem_list where elem_id='+elem_id) then
+     delcomMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('UNLOCK TABLES');
+  db.Query('FLUSH TABLES');
+  delcomMemo.lines.add('Delete daily data');
+  f_main.planet.TruncateDailyComet;
+  delcomMemo.lines.add('Delete completed');
+end;
+  db.Free;
+  screen.cursor:=crDefault;
+  UpdComList;
+except
+  screen.cursor:=crDefault;
+  db.Free;
+end;
+end;
+
+procedure Tf_config.DelComAllClick(Sender: TObject);
+begin
+delComMemo.clear;
+db:=TMyDB.create(self);
+try
+screen.cursor:=crHourGlass;
+db.SetPort(cmain.dbport);
+db.database:=cmain.db;
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+if db.Active then begin
+  db.Query('UNLOCK TABLES');
+  delComMemo.lines.add('Delete from element table...');
+  application.processmessages;
+  if not db.Query('Truncate table cdc_com_elem') then
+     delcomMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delcomMemo.lines.add('Delete from element list...');
+  application.processmessages;
+  if not db.Query('Truncate table cdc_com_elem_list') then
+     delcomMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delcomMemo.lines.add('Delete from name list...');
+  application.processmessages;
+  if not db.Query('Truncate table cdc_com_name') then
+     delcomMemo.lines.add('Failed : '+trim(db.GetLastError));
+  delcomMemo.lines.add('Delete daily data');
+  f_main.planet.TruncateDailyComet;
+  delcomMemo.lines.add('Delete completed');
+end;
+  screen.cursor:=crDefault;
+  db.Free;
+  UpdComList;
+except
+  screen.cursor:=crDefault;
+  db.Free;
+end;
+end;
+
+
+procedure Tf_config.showlabelcolor;
+
+begin
+
+ labelcolorStar.brush.color:=cplot.labelcolor[1];
+
+ labelcolorVar.brush.color:=cplot.labelcolor[2];
+
+ labelcolorMult.brush.color:=cplot.labelcolor[3];
+
+ labelcolorNeb.brush.color:=cplot.labelcolor[4];
+
+ labelcolorSol.brush.color:=cplot.labelcolor[5];
+
+ labelcolorConst.brush.color:=cplot.labelcolor[6];
+
+ labelcolorMisc.brush.color:=cplot.labelcolor[7];
+
+end;
+
+
+procedure Tf_config.showlabel;
+begin
+
+ showlabelStar.checked:=csc.showlabel[1];
+
+ showlabelVar.checked:=csc.showlabel[2];
+
+ showlabelMult.checked:=csc.showlabel[3];
+
+ showlabelNeb.checked:=csc.showlabel[4];
+
+ showlabelSol.checked:=csc.showlabel[5];
+
+ showlabelConst.checked:=csc.showlabel[6];
+
+ showlabelMisc.checked:=csc.showlabel[7];
+
+ labelmagStar.value:=round(csc.labelmagdiff[1]);
+
+ labelmagVar.value:=round(csc.labelmagdiff[2]);
+
+ labelmagMult.value:=round(csc.labelmagdiff[3]);
+
+ labelmagNeb.value:=round(csc.labelmagdiff[4]);
+
+ labelmagSol.value:=round(csc.labelmagdiff[5]);
+
+ labelsizeStar.value:=cplot.labelsize[1];
+
+ labelsizeVar.value:=cplot.labelsize[2];
+
+ labelsizeMult.value:=cplot.labelsize[3];
+
+ labelsizeNeb.value:=cplot.labelsize[4];
+
+ labelsizeSol.value:=cplot.labelsize[5];
+
+ labelsizeConst.value:=cplot.labelsize[6];
+
+ labelsizeMisc.value:=cplot.labelsize[7];
+
+ showlabelcolor;
+
+end;
+
+
+procedure Tf_config.showlabelClick(Sender: TObject);
+begin
+with sender as TCheckBox do csc.ShowLabel[tag]:=checked;
+end;
+
+procedure Tf_config.labelmagChange(Sender: TObject);
+begin
+with sender as TSpinEdit do csc.LabelmagDiff[tag]:=value;
+end;
+
+procedure Tf_config.labelcolorMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+if sender is TShape then with sender as TShape do begin
+   ColorDialog1.color:=cplot.LabelColor[tag];
+   if ColorDialog1.Execute then begin
+      cplot.LabelColor[tag]:=ColorDialog1.Color;
+      ShowLabelColor;
+   end;
+end;
+end;
+
+procedure Tf_config.labelsizeChange(Sender: TObject);
+begin
+with sender as TSpinEdit do cplot.LabelSize[tag]:=value;
+end;
 

@@ -22,6 +22,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  Cross-platform common code for Main form.
 }
 
+procedure Tf_main.Init;
+begin
+ // some initialisation that need to be done after all the forms are created. Kylix onShow is called immediatly after onCreate, not after application.run!
+ f_info.onGetTCPinfo:=GetTCPInfo;
+ f_info.onKillTCP:=KillTCPClient;
+ f_info.onPrintSetup:=PrintSetup;
+ f_info.OnShowDetail:=showdetailinfo;
+ f_detail.OnCenterObj:=CenterFindObj;
+ f_detail.OnNeighborObj:=NeighborObj;
+end;
+
 function Tf_main.CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
 var
   Child : Tf_chart;
@@ -43,6 +54,7 @@ begin
   inc(cfgm.MaxChildID);
   Child.tag:=cfgm.MaxChildID;
   Child.Caption:=CName;
+  Child.locked:=false;
   Child.sc.catalog:=catalog;
   Child.sc.planet:=planet;
   Child.sc.plot.cfgplot:=cfgp;
@@ -51,6 +63,12 @@ begin
   Child.sc.plot.cfgplot.starshapew:=Child.sc.plot.cfgplot.starshapesize div 2;
   Child.sc.cfgsc:=cfg1;
   Child.sc.cfgsc.chartname:=CName;
+  Child.onImageSetFocus:=ImageSetFocus;
+  Child.onShowTopMessage:=SetTopMessage;
+  Child.OnUpdateFlipBtn:=UpdateBtn;
+  Child.onShowInfo:=SetLpanel1;
+  Child.onShowCoord:=SetLpanel0;
+  Child.onListInfo:=ListInfo;
   if cfgm.maximized then Child.maximize:=true
                     else begin Child.maximize:=false;
                                Child.width:=Child.sc.cfgsc.winx;
@@ -113,6 +131,9 @@ c2.AstmagMax := c1.AstmagMax;
 c2.AstmagDiff := c1.AstmagDiff;
 c2.AstSymbol := c1.AstSymbol;
 c2.ShowComet := c1.ShowComet ;
+c2.CommagMax := c1.CommagMax;
+c2.CommagDiff := c1.CommagDiff;
+c2.ComSymbol := c1.ComSymbol;
 c2.GRSlongitude := c1.GRSlongitude ;
 c2.ShowEarthShadow := c1.ShowEarthShadow ;
 c2.ProjPole := c1.ProjPole ;
@@ -128,6 +149,10 @@ c2.FillMilkyWay := c1.FillMilkyWay ;
 c2.HorizonOpaque := c1.HorizonOpaque ;
 c2.HorizonMax := c1.HorizonMax ;
 c2.Horizonlist := c1.Horizonlist ;
+for i:=1 to numlabtype do begin
+   c2.ShowLabel[i]:=c1.ShowLabel[i];
+   c2.LabelMagDiff[i]:=c1.LabelMagDiff[i];
+end;
 //c2. := c1. ;
 end;
 
@@ -231,12 +256,12 @@ procedure Tf_main.FormCreate(Sender: TObject);
 begin
 InitTrace;
 traceon:=true;
-cfgm.locked:=false;
 DecimalSeparator:='.';
 appdir:=getcurrentdir;
 catalog:=Tcatalog.Create(self);
 planet:=Tplanet.Create(self);
 planet.OnAsteroidConfig:=OpenAsteroidConfig;
+planet.OnCometConfig:=OpenCometConfig;
 {$ifdef mswindows}
 Screen.Cursors[crRetic] := LoadCursor(HInstance,'RETIC');
 Application.UpdateFormatSettings:=false;
@@ -246,7 +271,6 @@ end;
 procedure Tf_main.FormShow(Sender: TObject);
 begin
 try
- cfgm.locked:=false;
  SetDefault;
  ReadDefault;
  LoadConstL(cfgm.ConstLfile);
@@ -272,10 +296,16 @@ StopServer;
 end;
 
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
+var i:integer;
 begin
+try
 if SaveConfigOnExit.checked then SaveDefault
                             else SaveQuickSearch(configfile);
-cfgm.locked:=true;
+for i:=0 to MDIChildCount-1 do
+   if MDIChildren[i] is Tf_chart then
+      (MDIChildren[i] as Tf_chart).locked:=true;
+except
+end;      
 end;
 
 procedure Tf_main.SaveConfigurationExecute(Sender: TObject);
@@ -285,7 +315,7 @@ end;
 
 procedure Tf_main.Print1Execute(Sender: TObject);
 begin
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do PrintChart(Sender);
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do PrintChart(cfgm.printcolor,cfgm.printlandscape);
 end;
 
 procedure Tf_main.UndoExecute(Sender: TObject);
@@ -500,6 +530,7 @@ try
  f_config.next.enabled:=true;
  f_config.apply.enabled:=true;
  f_config.AstDB.enabled:=true;
+ f_config.CometDB.enabled:=true;
  f_config.showmodal;
  if f_config.ModalResult=mrOK then begin
    activateconfig;
@@ -534,11 +565,48 @@ try
  f_config.next.enabled:=false;
  f_config.apply.enabled:=false;
  f_config.AstDB.enabled:=true;
+ f_config.CometDB.enabled:=true;
  f_config.showmodal;
  if f_config.ModalResult=mrCancel then for i:=0 to MDIChildCount-1 do
     if MDIChildren[i] is Tf_chart then
        with MDIChildren[i] as Tf_chart do begin
           sc.cfgsc.ShowAsteroid:=false;
+          sc.cfgsc.FindOk:=false;
+       end;
+ cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
+finally
+screen.cursor:=crDefault;
+end;
+end;
+
+procedure Tf_main.OpenCometConfig(Sender: TObject);
+var i:integer;
+begin
+if f_config=nil then f_config:=Tf_config.Create(application);
+if f_config.visible then exit;
+screen.cursor:=crHourGlass;
+try
+ cfgm.configpage:=f_config.p_comets.PageIndex;
+ f_config.ComPageControl.activepage:=f_config.comload;
+ f_config.ccat:=catalog.cfgcat;
+ f_config.cshr:=catalog.cfgshr;
+ f_config.cplot:=def_cfgplot;
+ f_config.csc:=def_cfgsc;
+ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+     CopySCconfig(sc.cfgsc,f_config.csc);
+ f_config.cmain:=cfgm;
+ f_config.applyall.checked:=cfgm.updall;
+ formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
+ f_config.topmsg.caption:='No Comet element found. Please load an element file, or click Cancel to disable the Comet display.';
+ f_config.TreeView1.enabled:=false;
+ f_config.previous.enabled:=false;
+ f_config.next.enabled:=false;
+ f_config.apply.enabled:=false;
+ f_config.showmodal;
+ if f_config.ModalResult=mrCancel then for i:=0 to MDIChildCount-1 do
+    if MDIChildren[i] is Tf_chart then
+       with MDIChildren[i] as Tf_chart do begin
+          sc.cfgsc.ShowComet:=false;
           sc.cfgsc.FindOk:=false;
        end;
  cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
@@ -569,6 +637,7 @@ try
  f_config.next.enabled:=false;
  f_config.apply.enabled:=false;
  f_config.AstDB.enabled:=false;
+ f_config.CometDB.enabled:=false;
  f_config.showmodal;
  if f_config.ModalResult=mrCancel then begin
     def_cfgsc.ShowAsteroid:=false;
@@ -635,7 +704,6 @@ Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true);
 begin
 LPanels1.width:=PPanels1.ClientWidth;
 LPanels1.Caption:=stringreplace(txt,tab,' ',[rfReplaceall]);
-//PPanels1.ClientHeight:=LPanels1.Height+8;
 if sendmsg then SendInfo(origin,txt);
 if traceon then writetrace(txt);
 end;
@@ -643,7 +711,6 @@ end;
 Procedure Tf_main.SetLPanel0(txt:string);
 begin
 LPanels0.Caption:=txt;
-//PPanels0.ClientHeight:=LPanels0.Height+8;
 end;
 
 Procedure Tf_main.SetTopMessage(txt:string);
@@ -690,19 +757,24 @@ cfgm.dbport:=3306;
 cfgm.db:='cdc';
 cfgm.dbuser:='root';
 cfgm.dbpass:='';
-for i:=1 to 6 do begin
+for i:=1 to numfont do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
    def_cfgplot.FontSize[i]:=DefaultFontSize;
    def_cfgplot.FontBold[i]:=false;
    def_cfgplot.FontItalic[i]:=false;
 end;
-for i:=1 to 9 do begin
+def_cfgplot.FontName[7]:='Symbol';
+for i:=1 to numlabtype do begin
    def_cfgplot.LabelColor[i]:=clWhite;
    def_cfgplot.LabelSize[i]:=DefaultFontSize;
+   def_cfgsc.LabelMagDiff[i]:=4;
+   def_cfgsc.ShowLabel[i]:=true;
 end;
+def_cfgsc.LabelMagDiff[5]:=2;
 cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'DefaultConstL.cln';
 cfgm.ConstBfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constb.cby';
 cfgm.EarthMapFile:=slash(appdir)+'data'+Pathdelim+'earthmap'+Pathdelim+'earthmap1k.jpg';
+cfgm.PlanetDir:=slash(appdir)+'data'+Pathdelim+'planet';
 cfgm.horizonfile:='';
 def_cfgplot.invisible:=false;
 def_cfgplot.color:=dfColor;
@@ -773,15 +845,19 @@ def_cfgsc.SimLine:=True;
 for i:=1 to NumSimObject do def_cfgsc.SimObject[i]:=true;
 def_cfgsc.ShowPlanet:=true;
 def_cfgsc.ShowAsteroid:=true;
-def_cfgsc.AstSymbol:=1;
+def_cfgsc.AstSymbol:=0;
 def_cfgsc.AstmagMax:=18;
 def_cfgsc.AstmagDiff:=6;
 def_cfgsc.ShowComet:=true;
+def_cfgsc.ComSymbol:=1;
+def_cfgsc.CommagMax:=18;
+def_cfgsc.CommagDiff:=6;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
 def_cfgsc.GRSlongitude:=84;
 def_cfgsc.LabelOrientation:=1;
 def_cfgsc.FindOk:=false;
+def_cfgsc.nummodlabels:=0;
 catalog.cfgshr.ListStar:=false;
 catalog.cfgshr.ListNeb:=true;
 catalog.cfgshr.ListVar:=true;
@@ -948,11 +1024,15 @@ if f_main.Height>(screen.Height-25) then f_main.Height:=screen.Height-25;
 formpos(f_main,f_main.Left,f_main.Top);
 for i:=0 to MaxField do catalog.cfgshr.FieldNum[i]:=ReadFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
 section:='font';
-for i:=1 to 6 do begin
+for i:=1 to numfont do begin
    cplot.FontName[i]:=ReadString(section,'FontName'+inttostr(i),cplot.FontName[i]);
    cplot.FontSize[i]:=ReadInteger(section,'FontSize'+inttostr(i),cplot.FontSize[i]);
    cplot.FontBold[i]:=ReadBool(section,'FontBold'+inttostr(i),cplot.FontBold[i]);
    cplot.FontItalic[i]:=ReadBool(section,'FontItalic'+inttostr(i),cplot.FontItalic[i]);
+end;
+for i:=1 to numlabtype do begin
+   cplot.LabelColor[i]:=ReadInteger(section,'LabelColor'+inttostr(i),cplot.LabelColor[i]);
+   cplot.LabelSize[i]:=ReadInteger(section,'LabelSize'+inttostr(i),cplot.LabelSize[i]);
 end;
 section:='filter';
 catalog.cfgshr.StarFilter:=ReadBool(section,'StarFilter',catalog.cfgshr.StarFilter);
@@ -1070,6 +1150,9 @@ csc.ShowComet:=ReadBool(section,'ShowComet',csc.ShowComet);
 csc.AstSymbol:=ReadInteger(section,'AstSymbol',csc.AstSymbol);
 csc.AstmagMax:=ReadFloat(section,'AstmagMax',csc.AstmagMax);
 csc.AstmagDiff:=ReadFloat(section,'AstmagDiff',csc.AstmagDiff);
+csc.ComSymbol:=ReadInteger(section,'ComSymbol',csc.ComSymbol);
+csc.CommagMax:=ReadFloat(section,'CommagMax',csc.CommagMax);
+csc.CommagDiff:=ReadFloat(section,'CommagDiff',csc.CommagDiff);
 csc.PlanetParalaxe:=ReadBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
 csc.ShowEarthShadow:=ReadBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
 csc.GRSlongitude:=ReadFloat(section,'GRSlongitude',csc.GRSlongitude);
@@ -1080,6 +1163,10 @@ csc.SimM:=ReadInteger(section,'SimM',csc.SimM);
 csc.SimS:=ReadInteger(section,'SimS',csc.SimS);
 csc.SimLine:=ReadBool(section,'SimLine',csc.SimLine);
 for i:=1 to NumSimObject do csc.SimObject[i]:=ReadBool(section,'SimObject'+inttostr(i),csc.SimObject[i]);
+for i:=1 to numlabtype do begin
+   csc.ShowLabel[i]:=readBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
+   csc.LabelMagDiff[i]:=readFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
+end;
 section:='observatory';
 csc.ObsLatitude := ReadFloat(section,'ObsLatitude',csc.ObsLatitude );
 csc.ObsLongitude := ReadFloat(section,'ObsLongitude',csc.ObsLongitude );
@@ -1100,6 +1187,17 @@ csc.Force_DT_UT:=ReadBool(section,'Force_DT_UT',csc.Force_DT_UT);
 csc.DT_UT_val:=ReadFloat(section,'DT_UT_val',csc.DT_UT_val);
 section:='projection';
 for i:=1 to maxfield do csc.projname[i]:=ReadString(section,'ProjName'+inttostr(i),csc.projname[i] );
+section:='labels';
+csc.nummodlabels:=ReadInteger(section,'numlabels',0);
+for i:=1 to csc.nummodlabels do begin
+   csc.modlabels[i].id:=ReadInteger(section,'labelid'+inttostr(i),0);
+   csc.modlabels[i].dx:=ReadInteger(section,'labeldx'+inttostr(i),0);
+   csc.modlabels[i].dy:=ReadInteger(section,'labeldy'+inttostr(i),0);
+   csc.modlabels[i].labelnum:=ReadInteger(section,'labelnum'+inttostr(i),1);
+   csc.modlabels[i].fontnum:=ReadInteger(section,'labelfont'+inttostr(i),2);
+   csc.modlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
+   csc.modlabels[i].hiden:=ReadBool(section,'labelhiden'+inttostr(i),false);
+end;
 end;
 finally
 inif.Free;
@@ -1126,6 +1224,7 @@ cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshde
 cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
 cfgm.ConstBfile:=ReadString(section,'ConstBfile',cfgm.ConstBfile);
 cfgm.EarthMapFile:=ReadString(section,'EarthMapFile',cfgm.EarthMapFile);
+cfgm.PlanetDir:=ReadString(section,'PlanetDir',cfgm.PlanetDir);
 cfgm.horizonfile:=ReadString(section,'horizonfile',cfgm.horizonfile);
 cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
@@ -1249,11 +1348,15 @@ for i:=0 to maxcolor do WriteInteger(section,'color'+inttostr(i),def_cfgplot.col
 for i:=1 to 7 do WriteInteger(section,'skycolor'+inttostr(i),def_cfgplot.skycolor[i]);
 WriteInteger(section,'bgColor',def_cfgplot.bgColor);
 section:='font';
-for i:=1 to 6 do begin
+for i:=1 to numfont do begin
     WriteString(section,'FontName'+inttostr(i),def_cfgplot.FontName[i]);
     WriteInteger(section,'FontSize'+inttostr(i),def_cfgplot.FontSize[i]);
     WriteBool(section,'FontBold'+inttostr(i),def_cfgplot.FontBold[i]);
     WriteBool(section,'FontItalic'+inttostr(i),def_cfgplot.FontItalic[i]);
+end;
+for i:=1 to numlabtype do begin
+   WriteInteger(section,'LabelColor'+inttostr(i),def_cfgplot.LabelColor[i]);
+   WriteInteger(section,'LabelSize'+inttostr(i),def_cfgplot.LabelSize[i]);
 end;
 section:='grid';
 for i:=0 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
@@ -1298,6 +1401,9 @@ WriteBool(section,'ShowComet',def_cfgsc.ShowComet);
 WriteInteger(section,'AstSymbol',def_cfgsc.AstSymbol);
 WriteFloat(section,'AstmagMax',def_cfgsc.AstmagMax);
 WriteFloat(section,'AstmagDiff',def_cfgsc.AstmagDiff);
+WriteInteger(section,'ComSymbol',def_cfgsc.ComSymbol);
+WriteFloat(section,'CommagMax',def_cfgsc.CommagMax);
+WriteFloat(section,'CommagDiff',def_cfgsc.CommagDiff);
 WriteBool(section,'PlanetParalaxe',def_cfgsc.PlanetParalaxe);
 WriteBool(section,'ShowEarthShadow',def_cfgsc.ShowEarthShadow);
 WriteFloat(section,'GRSlongitude',def_cfgsc.GRSlongitude);
@@ -1308,6 +1414,10 @@ WriteInteger(section,'SimM',def_cfgsc.SimM);
 WriteInteger(section,'SimS',def_cfgsc.SimS);
 WriteBool(section,'SimLine',def_cfgsc.SimLine);
 for i:=1 to NumSimObject do WriteBool(section,'SimObject'+inttostr(i),def_cfgsc.SimObject[i]);
+for i:=1 to numlabtype do begin
+   WriteBool(section,'ShowLabel'+inttostr(i),def_cfgsc.ShowLabel[i]);
+   WriteFloat(section,'LabelMag'+inttostr(i),def_cfgsc.LabelMagDiff[i]);
+end;
 section:='observatory';
 WriteFloat(section,'ObsLatitude',def_cfgsc.ObsLatitude );
 WriteFloat(section,'ObsLongitude',def_cfgsc.ObsLongitude );
@@ -1328,6 +1438,18 @@ WriteBool(section,'Force_DT_UT',def_cfgsc.Force_DT_UT);
 WriteFloat(section,'DT_UT_val',def_cfgsc.DT_UT_val);
 section:='projection';
 for i:=1 to maxfield do WriteString(section,'ProjName'+inttostr(i),def_cfgsc.projname[i] );
+section:='labels';
+EraseSection(section);
+WriteInteger(section,'numlabels',def_cfgsc.nummodlabels);
+for i:=1 to def_cfgsc.nummodlabels do begin
+   WriteInteger(section,'labelid'+inttostr(i),def_cfgsc.modlabels[i].id);
+   WriteInteger(section,'labeldx'+inttostr(i),def_cfgsc.modlabels[i].dx);
+   WriteInteger(section,'labeldy'+inttostr(i),def_cfgsc.modlabels[i].dy);
+   WriteInteger(section,'labelnum'+inttostr(i),def_cfgsc.modlabels[i].labelnum);
+   WriteInteger(section,'labelfont'+inttostr(i),def_cfgsc.modlabels[i].fontnum);
+   WriteString(section,'labeltxt'+inttostr(i),def_cfgsc.modlabels[i].txt);
+   WriteBool(section,'labelhiden'+inttostr(i),def_cfgsc.modlabels[i].hiden);
+end;
 Updatefile;
 end;
 finally
@@ -1360,6 +1482,7 @@ WriteInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 WriteString(section,'ConstLfile',cfgm.ConstLfile);
 WriteString(section,'ConstBfile',cfgm.ConstBfile);
 WriteString(section,'EarthMapFile',cfgm.EarthMapFile);
+WriteString(section,'PlanetDir',cfgm.PlanetDir);
 WriteString(section,'horizonfile',cfgm.horizonfile);
 WriteString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 WriteString(section,'ServerIPport',cfgm.ServerIPport);
@@ -1578,20 +1701,8 @@ if chart is Tf_chart then with chart as Tf_chart do begin
    if ok then goto findit;
    ok:=planet.FindAsteroidName(trim(Num),ar1,de1,sc.cfgsc);
    if ok then goto findit;
-{   buf:=trim(uppercase(num));
-   j:=length(buf);
-   if j>3 then for i:=1 to CometNb do begin
-     if uppercase(copy(CometNLst[i],1,j))=buf then begin
-         Findnumcom(i,ar1,de1,ok);
-         if ok and beingfollow then begin
-               FollowOn:=true;
-               FollowType:=2;
-               FollowObj:=i;
-         end;
-         break;
-     end;
-   end;
-   if ok then goto findit;  }
+   ok:=planet.FindCometName(trim(Num),ar1,de1,sc.cfgsc);
+   if ok then goto findit;
    if fileexists(slash(catalog.cfgcat.VarStarCatPath[gcvs-BaseVar])+'gcvs.idx') then begin
       ok:=catalog.FindNum(S_GCVS,Num,ar1,de1) ;
       if ok then goto findit;
@@ -1620,7 +1731,7 @@ Findit:
       if sc.cfgsc.fov>0.17 then sc.FindatRaDec(ar1,de1,0.0005,true)
                         else sc.FindatRaDec(ar1,de1,0.00005,true);
       ShowIdentLabel;
-      f_main.SetLpanel1(sc.cfgsc.FindDesc,caption);
+      f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
    end
    else begin
       sc.cfgsc.TrackOn:=TrackInProgress;
@@ -2083,6 +2194,7 @@ begin
  if not MySqlLoadLib then begin
     SetLpanel1('MySQL Library not available. Please install MySQL Client.');
     def_cfgsc.ShowAsteroid:=false;
+    def_cfgsc.ShowComet:=false;
  end else begin
     if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
        SetLpanel1('Try to initialyse MySQL database.');
@@ -2090,6 +2202,7 @@ begin
        if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
           SetLpanel1('MySQL database not available.');
           def_cfgsc.ShowAsteroid:=false;
+          def_cfgsc.ShowComet:=false;
        end;
     end;
 end;
@@ -2150,4 +2263,65 @@ for i:=0 to MDIChildCount-1 do
 end;
 end;
 
+procedure Tf_main.changeprojMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if button=mbRight then ChangeProjExecute(Sender);
+end;
 
+procedure Tf_main.ImageSetFocus(Sender: TObject);
+begin
+// to restore focus to the chart that as no text control
+// it is also mandatory to keep the keydown and mousewheel
+// event to the main form.
+{$ifdef linux}
+activecontrol:=nil;
+{$endif}
+{$ifdef mswindows}
+quicksearch.Enabled:=false;
+quicksearch.Enabled:=true;
+setfocus;
+{$endif}
+end;
+
+procedure Tf_main.ListInfo(buf:string);
+begin
+f_info.Memo1.text:=buf;
+f_info.Memo1.selstart:=0;
+f_info.Memo1.sellength:=0;
+f_info.setpage(1);
+f_info.source_chart:=caption;
+f_info.show;
+end;
+
+procedure Tf_main.GetTCPInfo(i:integer; var buf:string);
+begin
+if (TCPDaemon<>nil) then
+ with TCPDaemon do begin
+   if (not TCPDaemon.ThrdActive[i])
+     or(TCPThrd[i]=nil)
+     or(TCPThrd[i].sock=nil)
+     or(TCPThrd[i].terminated)
+     then begin
+       buf:=inttostr(i)+' not connected.';
+     end
+     else begin
+       buf:=inttostr(i)+' connected from '+TCPThrd[i].RemoteIP+blank+TCPThrd[i].RemotePort+', using chart '+TCPThrd[i].active_chart+', connect time:'+datetimetostr(TCPThrd[i].connecttime);
+     end;
+ end
+   else buf:='';    
+end;
+
+procedure Tf_main.KillTCPClient(i:integer);
+begin
+if (i>0)
+   and(TCPDaemon.ThrdActive[i])
+   and(TCPDaemon<>nil)
+   and(TCPDaemon.TCPThrd[i]<>nil)
+   then TCPDaemon.TCPThrd[i].Terminate;
+end;
+
+procedure Tf_main.PrintSetup(Sender: TObject);
+begin
+FilePrintSetup1.Execute;
+end;
