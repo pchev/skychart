@@ -1,6 +1,6 @@
 object f_about: Tf_about
-  Left = 344
-  Top = 176
+  Left = 348
+  Top = 198
   Width = 404
   Height = 339
   HorzScrollBar.Range = 392
@@ -16,9 +16,10 @@ object f_about: Tf_about
   Font.Weight = 0
   ParentFont = False
   Position = poScreenCenter
-  Scaled = False
   OnCreate = FormCreate
   PixelsPerInch = 90
+  TextHeight = 20
+  TextWidth = 7
   object logo: TImage
     Left = 0
     Top = 0

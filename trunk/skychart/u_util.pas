@@ -25,15 +25,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Math, SysUtils,
+uses Math, SysUtils, u_constant,
 {$ifdef linux}
-    QGraphics;
+    Libc,QForms,QGraphics;
 {$endif}
 {$ifdef mswindows}
-    Windows,Graphics;
+    Windows,Forms,Graphics;
 {$endif}
 
 function rmod(x,y:Double):Double;
+Function NormRA(ra : double):double;
 Function sgn(x:Double):Double ;
 Function PadZeros(x : string ; l :integer) : string;
 Function mm2pi(l,PrinterResolution : single): integer;
@@ -60,10 +61,14 @@ Function DEpToStr(de: Double) : string;
 Function ARptoStr(ar: Double) : string;
 Function TimToStr(de: Double) : string;
 Function ARToStr2(ar: Double; var d,m,s : string) : string;
+Function ARToStr3(ar: Double) : string;
+Function Str3ToAR(dms : string) : double;
 Function DEToStr2(de: Double; var d,m,s : string) : string;
 Function DEToStr3(de: Double) : string;
+Function Str3ToDE(dms : string) : double;
 Function DEToStr4(de: Double) : string;
 Function GetTimeZone : double;
+Procedure FormPos(form : Tform; x,y : integer);
 
 var debugon : boolean;
     ldeg,lmin,lsec : string;
@@ -94,8 +99,16 @@ BEGIN
     Rmod := x - Int(x/y) * y ;
 END  ;
 
+Function NormRA(ra : double):double;
+begin
+result:=rmod(ra+pi2,pi2);
+//if (ar2<ar1)and(ra<=arm) then NormRA:=ra+pi2
+//else NormRA:=ra;
+end;
+
 Function sgn(x:Double):Double ;
 begin
+// sign function with zero positive
 if x<0 then
    sgn:= -1
 else
@@ -524,9 +537,82 @@ begin
     result := d+'h'+m+'m'+s+'s';
 end;
 
+Function ARToStr3(ar: Double) : string;
+var dd,min1,min,sec: Double;
+    d,m,s : string;
+begin
+    dd:=Int(ar);
+    min1:=abs(ar-dd)*60;
+    if min1>=59.999 then begin
+       dd:=dd+sgn(ar);
+       min1:=0.0;
+    end;
+    min:=Int(min1);
+    sec:=(min1-min)*60;
+    if sec>=59.95 then begin
+       min:=min+1;
+       sec:=0.0;
+    end;
+    str(dd:2:0,d);
+    if abs(dd)<10 then d:='0'+trim(d);
+    str(min:2:0,m);
+    if abs(min)<10 then m:='0'+trim(m);
+    str(sec:2:0,s);
+    if abs(sec)<9.95 then s:='0'+trim(s);
+    result := d+'h'+m+'m'+s+'s';
+end;
+
+Function Str3ToAR(dms : string) : double;
+var s,p : integer;
+    t : string;
+begin
+try
+dms:=StringReplace(dms,' ','0',[rfReplaceAll]);
+if copy(dms,1,1)='-' then s:=-1 else s:=1;
+p:=pos('h',dms);
+t:=copy(dms,1,p-1); delete(dms,1,p);
+result:=strtoint(t);
+p:=pos('m',dms);
+t:=copy(dms,1,p-1); delete(dms,1,p);
+result:=result+ s * strtoint(t) / 60;
+p:=pos('s',dms);
+t:=copy(dms,1,p-1);
+result:=result+ s * strtoint(t) / 3600;
+except
+result:=0;
+end;
+end;
+
+Function Str3ToDE(dms : string) : double;
+var s,p : integer;
+    t : string;
+begin
+try
+dms:=StringReplace(dms,' ','0',[rfReplaceAll]);
+if copy(dms,1,1)='-' then s:=-1 else s:=1;
+p:=pos('d',dms);
+t:=copy(dms,1,p-1); delete(dms,1,p);
+result:=strtoint(t);
+p:=pos('m',dms);
+t:=copy(dms,1,p-1); delete(dms,1,p);
+result:=result+ s * strtoint(t) / 60;
+p:=pos('s',dms);
+t:=copy(dms,1,p-1);
+result:=result+ s * strtoint(t) / 3600;
+except
+result:=0;
+end;
+end;
+
 Function GetTimeZone: double;
+var
 {$ifdef mswindows}
-var lt,st : TSystemTime;
+  lt,st : TSystemTime;
+{$endif}
+{$ifdef linux}
+  t: TTime_T;
+  tv: TTimeVal;
+  lt: TUnixTime;
 {$endif}
 begin
 // return time zone in hour
@@ -534,6 +620,25 @@ begin
  GetLocalTime(lt);GetSystemTime(st);
  result:=round(24000000*(SystemTimeToDateTime(lt)-SystemTimeToDateTime(st)))/1000000;
 {$endif}
+{$ifdef linux}
+  gettimeofday(tv, nil);
+  t := tv.tv_sec;
+  localtime_r(@t, lt);
+  result:=lt.__tm_gmtoff / 3600;
+{$endif}
+end;
+
+Procedure FormPos(form : Tform; x,y : integer);
+const bot=25; //minimal distance from screen bottom
+begin
+with Form do begin
+  left:=x;
+  if left+width>Screen.Width then left:=Screen.Width-width;
+  if left<0 then left:=0;
+  top:=y;
+  if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
+  if top<0 then top:=0;
+end;
 end;
 
 end.

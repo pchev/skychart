@@ -1,0 +1,70 @@
+object f_detail: Tf_detail
+  Left = 239
+  Top = 338
+  Width = 337
+  Height = 414
+  VertScrollBar.Range = 41
+  ActiveControl = Button1
+  Caption = 'Details'
+  Color = clBackground
+  FormStyle = fsStayOnTop
+  Position = poDefault
+  PixelsPerInch = 90
+  TextHeight = 17
+  TextWidth = 7
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 337
+    Height = 41
+    Align = alTop
+    TabOrder = 0
+    object Button1: TButton
+      Left = 8
+      Top = 8
+      Width = 75
+      Height = 25
+      Cancel = True
+      Caption = 'Close'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+  end
+  object memo: TTextBrowser
+    Left = 0
+    Top = 41
+    Width = 337
+    Height = 373
+    Align = alClient
+    PopupMenu = PopupMenu1
+    TabOrder = 1
+  end
+  object ActionList1: TActionList
+    Left = 168
+    Top = 160
+    object EditSelectAll1: TEditSelectAll
+      Category = 'Edit'
+      Caption = 'Select &All'
+      Hint = 'Select All'
+      OnExecute = EditSelectAll1Execute
+    end
+    object EditCopy1: TEditCopy
+      Category = 'Edit'
+      Caption = '&Copy'
+      Hint = 'Copy'
+      ImageIndex = 1
+      ShortCut = 16451
+      OnExecute = EditCopy1Execute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 128
+    Top = 160
+    object SelectAll1: TMenuItem
+      Action = EditSelectAll1
+    end
+    object Copy1: TMenuItem
+      Action = EditCopy1
+    end
+  end
+end

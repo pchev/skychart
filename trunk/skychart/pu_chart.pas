@@ -25,8 +25,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_skychart, u_constant, u_util,
-     Printers, Math,
+uses pu_detail, cu_skychart, u_constant, u_util, u_projection,
+     Printers, Math, SysUtils,
      Windows, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList;
      
@@ -63,14 +63,14 @@ type
     rot_minus: TAction;
     GridEQ: TAction;
     GridAz: TAction;
+    identlabel: TLabel;
+    switchbackground: TAction;
+    switchstar: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure Refresh;
-    procedure AutoRefresh;
     procedure FormResize(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
-    procedure PrintChart(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure FormShow(Sender: TObject);
@@ -80,16 +80,12 @@ type
     procedure MoveEastExecute(Sender: TObject);
     procedure MoveNorthExecute(Sender: TObject);
     procedure MoveSouthExecute(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure MoveNorthWestExecute(Sender: TObject);
     procedure MoveNorthEastExecute(Sender: TObject);
     procedure MoveSouthWestExecute(Sender: TObject);
     procedure MoveSouthEastExecute(Sender: TObject);
     procedure CentreExecute(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure zoomminusmoveExecute(Sender: TObject);
@@ -103,18 +99,34 @@ type
     procedure rot_minusExecute(Sender: TObject);
     procedure GridEQExecute(Sender: TObject);
     procedure GridAzExecute(Sender: TObject);
+    procedure identlabelClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Image1Click(Sender: TObject);
+    procedure switchstarExecute(Sender: TObject);
+    procedure switchbackgroundExecute(Sender: TObject);
   private
     { Private declarations }
     movefactor,zoomfactor: double;
     xcursor,ycursor : integer;
     lock_trackcursor : boolean;
-    skip_wheel : boolean;
   public
     { Public declarations }
     sc: Tskychart;
     maximize:boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo : integer;
+    procedure Refresh;
+    procedure AutoRefresh;
+    procedure PrintChart(Sender: TObject);
+    function  FormatDesc:string;
+    procedure ShowIdentLabel;
+    function  LongLabel(txt:string):string;
+    function  LongLabelObj(txt:string):string;
+    function  LongLabelGreek(txt : string) : string;
+    Function  LongLabelConst(txt : string) : string;
+    procedure CMouseWheel(Shift: TShiftState;WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure CKeyDown(var Key: Word; Shift: TShiftState);
   end;
 
 implementation
@@ -124,6 +136,15 @@ implementation
 uses pu_main;
 
 // include all cross-platform common code.
+// you can temporarily copy the file content here
+// to use the IDE facilities
+
 {$include i_chart.pas}
+
+// end of common code
+
+// windows vcl specific code:
+
+// end of windows vcl specific code:
 
 end.

@@ -1,6 +1,6 @@
 object f_chart: Tf_chart
-  Left = 671
-  Top = 564
+  Left = 703
+  Top = 620
   Width = 314
   Height = 209
   Caption = 'Chart'
@@ -114,7 +114,6 @@ object f_chart: Tf_chart
   KeyPreview = True
   ParentFont = False
   Position = poDefaultPosOnly
-  Scaled = False
   Visible = True
   OnActivate = FormActivate
   OnClose = FormClose
@@ -125,6 +124,8 @@ object f_chart: Tf_chart
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 90
+  TextHeight = 20
+  TextWidth = 7
   object Panel1: TPanel
     Left = 0
     Top = 0
@@ -132,6 +133,7 @@ object f_chart: Tf_chart
     Height = 209
     Align = alClient
     BevelOuter = bvNone
+    Color = clBlack
     TabOrder = 0
     object Image1: TImage
       Left = 0
@@ -143,8 +145,28 @@ object f_chart: Tf_chart
       AutoSize = True
       PopupMenu = PopupMenu1
       Stretch = True
+      OnClick = Image1Click
       OnMouseMove = Image1MouseMove
       OnMouseUp = Image1MouseUp
+    end
+    object identlabel: TLabel
+      Left = 128
+      Top = 128
+      Width = 54
+      Height = 20
+      Cursor = crHandPoint
+      Caption = 'identlabel'
+      Color = clBlack
+      Font.Color = clWhite
+      Font.Height = 12
+      Font.Name = 'Sans'
+      Font.Pitch = fpVariable
+      Font.Style = []
+      Font.Weight = 0
+      ParentColor = False
+      ParentFont = False
+      Visible = False
+      OnClick = identlabelClick
     end
   end
   object RefreshTimer: TTimer
@@ -276,6 +298,16 @@ object f_chart: Tf_chart
       Category = 'Undo'
       Caption = 'Redo'
       OnExecute = RedoExecute
+    end
+    object switchstar: TAction
+      Category = 'Edit'
+      Caption = 'switchstar'
+      OnExecute = switchstarExecute
+    end
+    object switchbackground: TAction
+      Category = 'Edit'
+      Caption = 'switchbackground'
+      OnExecute = switchbackgroundExecute
     end
   end
   object PopupMenu1: TPopupMenu

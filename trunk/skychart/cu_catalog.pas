@@ -568,14 +568,14 @@ begin
              EmptyRec.vstr[2]:=true;
              EmptyRec.vstr[3]:=true;
              EmptyRec.vstr[4]:=true;
-             EmptyRec.options.flabel[16]:='Mag. band';
+             EmptyRec.options.flabel[16]:='Mag.band';
              EmptyRec.options.flabel[17]:='Class';
              EmptyRec.options.flabel[18]:='Mult';
              EmptyRec.options.flabel[19]:='Plate';
              EmptyRec.vnum[1]:=true;
              EmptyRec.vnum[2]:=true;
-             EmptyRec.options.flabel[26]:='Pos. error';
-             EmptyRec.options.flabel[27]:='Mag. error';
+             EmptyRec.options.flabel[26]:='Pos.error';
+             EmptyRec.options.flabel[27]:='Mag.error';
              end;
    gscc    : begin
              EmptyRec.options.flabel:=StarLabel;
@@ -591,14 +591,14 @@ begin
              EmptyRec.vstr[2]:=true;
              EmptyRec.vstr[3]:=true;
              EmptyRec.vstr[4]:=true;
-             EmptyRec.options.flabel[16]:='Mag. band';
+             EmptyRec.options.flabel[16]:='Mag.band';
              EmptyRec.options.flabel[17]:='Class';
              EmptyRec.options.flabel[18]:='Mult';
              EmptyRec.options.flabel[19]:='Plate';
              EmptyRec.vnum[1]:=true;
              EmptyRec.vnum[2]:=true;
-             EmptyRec.options.flabel[26]:='Pos. error';
-             EmptyRec.options.flabel[27]:='Mag. error';
+             EmptyRec.options.flabel[26]:='Pos.error';
+             EmptyRec.options.flabel[27]:='Mag.error';
              end;
    gsc     : begin
              EmptyRec.options.flabel:=StarLabel;
@@ -613,13 +613,13 @@ begin
              EmptyRec.vstr[1]:=true;
              EmptyRec.vstr[2]:=true;
              EmptyRec.vstr[3]:=true;
-             EmptyRec.options.flabel[16]:='Mag. band';
+             EmptyRec.options.flabel[16]:='Mag.band';
              EmptyRec.options.flabel[17]:='Class';
              EmptyRec.options.flabel[18]:='Mult';
              EmptyRec.vnum[1]:=true;
              EmptyRec.vnum[2]:=true;
-             EmptyRec.options.flabel[26]:='Pos. error';
-             EmptyRec.options.flabel[27]:='Mag. error';
+             EmptyRec.options.flabel[26]:='Pos.error';
+             EmptyRec.options.flabel[27]:='Mag.error';
              end;
    usnoa   : begin
              EmptyRec.options.flabel:=StarLabel;
@@ -745,7 +745,7 @@ begin
              EmptyRec.vstr[1]:=true;
              EmptyRec.vstr[2]:=true;
              EmptyRec.options.flabel[16]:='Name';
-             EmptyRec.options.flabel[17]:='Constel';
+             EmptyRec.options.flabel[17]:='Const';
              end;
    ngc     : begin
              EmptyRec.options.flabel:=NebLabel;
@@ -765,7 +765,7 @@ begin
              Emptyrec.neb.valid[vnNebtype]:=true;
              Emptyrec.neb.valid[vnComment]:=true;
              EmptyRec.vstr[1]:=true;
-             EmptyRec.options.flabel[16]:='Constel';
+             EmptyRec.options.flabel[16]:='Const';
              end;
    lbn     : begin
              EmptyRec.options.flabel:=NebLabel;
@@ -824,7 +824,7 @@ begin
              EmptyRec.vnum[5]:=true;
              EmptyRec.options.flabel[26]:='Aperture';
              EmptyRec.options.flabel[27]:='B-V';
-             EmptyRec.options.flabel[28]:='App. B-V';
+             EmptyRec.options.flabel[28]:='App.B-V';
              EmptyRec.options.flabel[29]:='Stage';
              EmptyRec.options.flabel[30]:='Luminosity';
              end;
@@ -876,8 +876,8 @@ begin
              EmptyRec.options.flabel[26]:='Dist';
              EmptyRec.options.flabel[27]:='Age';
              EmptyRec.options.flabel[28]:='B-V';
-             EmptyRec.options.flabel[29]:='Star Num.';
-             EmptyRec.options.flabel[30]:='Star Mag.';
+             EmptyRec.options.flabel[29]:='Star-Num.';
+             EmptyRec.options.flabel[30]:='Star-Mag.';
              end;
    gcm     : begin
              EmptyRec.options.flabel:=NebLabel;
@@ -904,9 +904,9 @@ begin
              EmptyRec.vnum[4]:=true;
              EmptyRec.vnum[5]:=true;
              EmptyRec.options.flabel[26]:='B-V';
-             EmptyRec.options.flabel[27]:='Central Sbr';
+             EmptyRec.options.flabel[27]:='Central-Sbr';
              EmptyRec.options.flabel[28]:='Nucleus';
-             EmptyRec.options.flabel[29]:='Half Mass';
+             EmptyRec.options.flabel[29]:='Half-Mass';
              EmptyRec.options.flabel[30]:='Dist';
              end;
    gpn     : begin
@@ -933,8 +933,8 @@ begin
              EmptyRec.vnum[2]:=true;
              EmptyRec.vnum[3]:=true;
              EmptyRec.options.flabel[26]:='Mag. Hb';
-             EmptyRec.options.flabel[27]:='C. Star V';
-             EmptyRec.options.flabel[28]:='C. Star B';
+             EmptyRec.options.flabel[27]:='C.Star_V';
+             EmptyRec.options.flabel[28]:='C.Star_B';
              end;
    else result:=false;
   end;
@@ -2097,11 +2097,11 @@ try
   if (not ok) and cfgcat.starcaton[dsgsc-BaseStar] then ok:=FindAtPos(dsgsc,x1,y1,x2,y2,nextobj,cfgsc,rec);
   if (not ok) and cfgcat.starcaton[usnoa-BaseStar] then ok:=FindAtPos(usnoa,x1,y1,x2,y2,nextobj,cfgsc,rec);
   if (not ok) and cfgcat.starcaton[microcat-BaseStar] then ok:=FindAtPos(microcat,x1,y1,x2,y2,nextobj,cfgsc,rec);
-{  if (not ok) then FindMobil(ar,de,dx,dx,nextobj,ok,nom,ma,desc);
-  if (not ok) and Catalog1Show then FindCatalogue1(ar,de,dx,dx,nextobj,ok,nom,ma,desc);
+{ if (not ok) and Catalog1Show then FindCatalogue1(ar,de,dx,dx,nextobj,ok,nom,ma,desc);
   if (not ok) and Catalog2Show then FindCatalogue2(ar,de,dx,dx,nextobj,ok,nom,ma,desc,notes);
   if (not ok) and ArtSatOn then FindSatellite(ar,de,dx,dx,nextobj,ok,nom,ma,desc);}
   result:=ok;
+  cfgsc.FindOK:=ok;
 finally
   lockcat:=false;
 end;

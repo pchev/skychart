@@ -34,7 +34,9 @@ uses
   u_constant in 'u_constant.pas',
   u_projection in 'u_projection.pas',
   cu_catalog in 'cu_catalog.pas',
-  pu_config in 'pu_config.pas' {f_config};
+  pu_config in 'pu_config.pas' {f_config},
+  cu_planet in 'cu_planet.pas',
+  pu_detail in 'pu_detail.pas' {f_detail};
 
 {$R *.RES}
 
@@ -42,5 +44,6 @@ begin
   Application.Initialize;
   Application.CreateForm(Tf_main, f_main);
   Application.CreateForm(Tf_about, f_about);
+  Application.CreateForm(Tf_detail, f_detail);
   Application.Run;
 end.

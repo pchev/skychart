@@ -4,7 +4,7 @@ object f_chart: Tf_chart
   Width = 384
   Height = 244
   Caption = 'Chart'
-  Color = clBtnFace
+  Color = clBlack
   ParentFont = True
   FormStyle = fsMDIChild
   KeyPreview = True
@@ -16,7 +16,6 @@ object f_chart: Tf_chart
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
-  OnMouseWheel = FormMouseWheel
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
@@ -28,6 +27,7 @@ object f_chart: Tf_chart
     Height = 217
     Align = alClient
     BevelOuter = bvNone
+    Color = clBlack
     TabOrder = 0
     object Image1: TImage
       Left = 0
@@ -39,8 +39,26 @@ object f_chart: Tf_chart
       AutoSize = True
       PopupMenu = PopupMenu1
       Stretch = True
+      OnClick = Image1Click
       OnMouseMove = Image1MouseMove
       OnMouseUp = Image1MouseUp
+    end
+    object identlabel: TLabel
+      Left = 96
+      Top = 120
+      Width = 45
+      Height = 13
+      Cursor = crHandPoint
+      Caption = 'identlabel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+      Visible = False
+      OnClick = identlabelClick
     end
   end
   object RefreshTimer: TTimer
@@ -168,6 +186,14 @@ object f_chart: Tf_chart
       Caption = 'GridAz'
       ImageIndex = 25
       OnExecute = GridAzExecute
+    end
+    object switchbackground: TAction
+      Caption = 'switchbackground'
+      OnExecute = switchbackgroundExecute
+    end
+    object switchstar: TAction
+      Caption = 'switchstar'
+      OnExecute = switchstarExecute
     end
   end
   object PopupMenu1: TPopupMenu

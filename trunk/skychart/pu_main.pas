@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_catalog, u_constant, u_util,
+uses cu_catalog, cu_planet, u_constant, u_util,
   Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus,
   StdCtrls, Dialogs, Buttons, Messages, ExtCtrls, ComCtrls, StdActns,
   ActnList, ToolWin, ImgList, IniFiles;
@@ -135,12 +135,14 @@ type
     ToolButton24: TToolButton;
     rot_plus: TAction;
     rot_minus: TAction;
-    ToolBar4: TToolBar;
-    ToolButton25: TToolButton;
-    ToolButton26: TToolButton;
-    ToolButton27: TToolButton;
     GridEQ: TAction;
     GridAZ: TAction;
+    ToolButton27: TToolButton;
+    ToolButton28: TToolButton;
+    switchstars: TAction;
+    switchbackground: TAction;
+    ToolButton25: TToolButton;
+    ToolButton26: TToolButton;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -173,9 +175,15 @@ type
     procedure rot_minusExecute(Sender: TObject);
     procedure GridEQExecute(Sender: TObject);
     procedure GridAZExecute(Sender: TObject);
+    procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure switchstarsExecute(Sender: TObject);
+    procedure switchbackgroundExecute(Sender: TObject);
   private
     { Private declarations }
-    function CreateMDIChild(const Name: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
+    function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
   public
@@ -184,6 +192,7 @@ type
     def_cfgsc : conf_skychart;
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
+    planet  : Tplanet;
     procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
@@ -192,11 +201,13 @@ type
     procedure SaveChartConfig(filename:string);
     procedure SaveDefault;
     procedure SetDefault;
+    procedure SetLang;
     Procedure InitFonts;
+    Procedure ActivateConfig;
     Procedure SetLPanel1(txt:string);
     Procedure SetLPanel0(txt:string);
     procedure updatebtn(fx,fy:integer);
-    Procedure FormPos(form : Tform; x,y : integer);
+    Procedure LoadConstL(fname:string);
   end;
 
 var
@@ -209,7 +220,32 @@ implementation
 uses pu_chart, pu_about, pu_config, u_projection ;
 
 // include all cross-platform common code.
+// you can temporarily copy the file content here
+// to use the IDE facilities
+
 {$include i_main.pas}
+
+// end of common code
+
+// windows vcl specific code:
+
+procedure Tf_main.FormMouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+// keep here because of focus problem with the child that have no text control
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+   CMouseWheel(Shift,WheelDelta,MousePos,Handled);
+end;
+
+procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+// keep here because of focus problem with the child that have no text control
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+   CKeyDown(Key,Shift);
+end;
+
+// end of windows vcl specific code:
 
 
 end.

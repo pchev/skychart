@@ -33,31 +33,64 @@ uses libcatalog,
     Graphics;
 {$endif}
 
-type Starcolarray =  Array [0..11] of Tcolor;
+const MaxColor = 19;
+
+type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18-19:spare
      TSkycolor = array[1..7]of Tcolor;
 
 const version = 'Version 3 alpha 0.0.2';
+      ver     = '3.0.0.2';
       MaxSim = 100 ;
       MaxComet = 500;
       MaxAsteroid = 500;
       MaxPla = 32;
       MaxQuickSearch = 15;
-      FovMin = 9.6963E-6;  // 2"
-      FovMax = 2*pi;
-      jd2000 : double =2451545.0 ;
-      jd1950 : double =2433282.4235;
+      jd2000 =2451545.0 ;
+      jd1950 =2433282.4235;
+      jd1900 =2415020.3135;
+      km_au = 149597870.691 ;
+      clight = 299792.458 ;
+      tlight = km_au/clight/3600/24;
+      eps2000 = 23.4392911;
       deg2rad = pi/180;
       rad2deg = 180/pi;
-      crlf=chr(10)+chr(13);
+      pi2 = 2*pi;
+      pi4 = 4*pi;
+      pid2 = pi/2;
+      secarc = deg2rad/3600;
+      musec  = deg2rad/3600/1000000; // 1 microarcsec for rounding test
+      FovMin = 5*secarc;  // 5"
+      FovMax = pi2;
+      DefaultPrtRes = 300;
+      DfColor : Starcolarray = (clBlack,$00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,clGray,clGray,clYellow,clGray,clNavy,clBlue,clGray,clGray);
+      DfBWColor : Starcolarray = (clBlack,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite,clWhite);
+      DfRedColor : Starcolarray = (clBlack,$00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
+      DfWBColor : Starcolarray = (clWhite,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack,clBlack);
+      dfskycolor : Tskycolor = ($00ffdc50,$00dca000,$00a02828,$00780000,$00640010,$003c0010,$00000000);
+      crlf = chr(13)+chr(10);
       greek : array[1..2,1..24]of string=(('Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega'),
               ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
       greeksymbol : array[1..2,1..24]of string=(('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'),
                   ('a','b','g','d','e','z','h','q','i','k','l','m','n','x','o','p','r','s','t','u','f','c','y','w'));
-      pi2: double = 2*pi;
-      pi4: double = 4*pi;
-      pid2: double = pi/2;
-      DefaultPrtRes = 300;
-      DfColor : Starcolarray = (clBlack,$00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite);
+      pla : array[1..32] of string[8] = ('Mercury ','Venus   ','*       ','Mars    ','Jupiter ',
+      'Saturn  ','Uranus  ','Neptune ','Pluto   ','Sun     ','Moon    ',
+      'Io      ','Europa  ','Ganymede','Callisto','Mimas   ','Encelade','Tethys  ','Dione   ',
+      'Rhea    ','Titan   ','Hyperion','Iapetus ','Miranda ','Ariel   ','Umbriel ','Titania ',
+      'Oberon  ','Phobos  ','Deimos  ','Sat.Ring','E.Shadow');
+      planetcolor: array[1..11]of double=(0.7,0,0,1.5,0.7,0.7,-1.5,-1.5,0,0.7,0);
+      V0mar : array [1..2] of double = (11.80,12.89);
+      V0jup : array [1..4] of double = (-1.68,-1.41,-2.09,-1.05);
+      V0sat : array [1..8] of double = (3.30,2.10,0.60,0.80,0.10,-1.28,4.63,1.50);
+      V0ura : array [1..5] of double = (3.60,1.45,2.10,1.02,1.23);
+      D0mar : array [1..2] of double = (11,6);
+      D0jup : array [1..4] of double = (1821,1565,2634,2403);
+      D0sat : array [1..8] of double = (199,249,530,560,764,2575,143,718);
+      D0ura : array [1..5] of double = (236,581,585,789,761);
+      blank15='               ';
+      deftxt = '?';
+      ConstelNum = 88;
+      NumLlabel = 100;
+      NumSimObject = 13;
       MaxField = 10;
       Equat = 0;
       Altaz = 1;
@@ -165,6 +198,14 @@ const version = 'Version 3 alpha 0.0.2';
 {$endif}
 
 type
+     Tplanetlst = array[0..MaxSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth umbra ;
+     Tcometlst = array[0..MaxSim,1..MaxComet,1..7] of double;
+     Tasteroidlst = array[0..MaxSim,1..MaxAsteroid,1..4] of double;
+     double6 = array[1..6] of double;
+     Pdouble6 = ^double6;
+     Tconstb = record ra,de : single; end;
+     Tconstl = record ra1,de1,ra2,de2 : single; end;
+
      TGCatLst =  record
                     min, max, magmax : single;
                     cattype:integer;
@@ -209,57 +250,137 @@ type
                 DefaultJDchart : double;
                 EquinoxChart : string;
                 AzNorth : Boolean;
+                llabel: array[1..NumLlabel] of string;
+                ConstelName: array[1..ConstelNum,1..2] of string; // constellation name and three letter abbrev.
+                ConstL: array of Tconstl;
+                ConstLnum:integer;
+                ConstB : array of Tconstb;
                 end;
      conf_skychart = record
                 racentre,decentre,fov,theta,acentre,hcentre : double;
-                Force_DT_UT,horizonopaque,autorefresh,FollowOn : Boolean;
+                Force_DT_UT,horizonopaque,autorefresh,TrackOn : Boolean;
                 projtype : char;
-                projname : array [0..10] of string[3];
-                FlipX, FlipY, ProjPole, FollowType,FollowObj : integer;
+                projname : array [0..MaxField] of string[3];
+                FlipX, FlipY, ProjPole, TrackType,TrackObj : integer;
+                SimNb,SimD,SimH,SimM,SimS : Integer;
+                SimObject: array[1..NumSimObject] of boolean;
+                SimLine,ShowPlanet,PlanetParalaxe,ShowEarthShadow : Boolean;
                 ObsLatitude,ObsLongitude,ObsAltitude,ObsTZ : double;
                 ObsTemperature,ObsPressure,ObsRefractionCor : Double;
                 ObsName : string;
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
                 ShowConstl,ShowConstB,ShowEqGrid,ShowAzGrid,UseSystemTime : boolean;
-                CurTime,DT_UT_val: double;
+                CurTime,DT_UT_val,GRSlongitude: double;
                 PMon,DrawPMon : boolean; // use proper motion
+                LabelOrientation: integer;
 
-                HorizonMax,rap2000,dep2000 : Double;
+                HorizonMax,rap2000,dep2000,RefractionOffset : Double;
                 WindowRatio,BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta: Double;
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
-                ObsRoSinPhi,ObsRoCosPhi : double;
-                TimeZone,DT_UT,CurST,CurJD,jd0,JDChart,CurSunH,CurMoonH,CurMoonIllum : Double;
+                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,FindRA,FindDec,FindSize : double;
+                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum : Double;
+                StarFilter,FindOK : boolean;
+                EquinoxName,TrackName,FindName,FindDesc,FindNote : string;
                 horizonlist : array [0..360] of single;
+                PlanetLst : Tplanetlst;
                 end;
      conf_plot = record
                 color : Starcolarray;
-                backgroundcolor : Tcolor;
-                stardyn,starsize,prtres,starplot,nebplot : integer;
+                skycolor : TSkycolor;
+                backgroundcolor,bgcolor : Tcolor;
+                stardyn,starsize,prtres,starplot,nebplot,plaplot : integer;
                 Nebgray,NebBright,starshapesize,starshapew : integer;
-                Invisible : boolean;
+                Invisible,PlanetTransparent,AutoSkycolor : boolean;
                 end;
      conf_chart = record
                 onprinter : boolean;
-                width,height,drawpen,drawsize : integer;
+                width,height,drawpen : integer;
                 min_ma : double;
                 end;
      conf_main = record
-                prtname,language : string;
+                prtname,language,ConstLfile : string;
                 PrinterResolution,configpage,autorefreshdelay : integer;
+                PrintColor,PrintLandscape :boolean;
                 FontName : array [1..6] of string;
                 FontSize : array [1..6] of integer;
                 FontBold : array [1..6] of boolean;
                 FontItalic : array [1..6] of boolean;
+                LabelColor : array[1..9] of Tcolor;
+                LabelSize : array[1..9] of integer;
                 maximized,updall : boolean;
                 end;
-     Tplanetlst = array[0..MaxSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth umbra ;
-     Tcometlst = array[0..MaxSim,1..MaxComet,1..7] of double;
-     Tasteroidlst = array[0..MaxSim,1..MaxAsteroid,1..4] of double;
+
+// external library
+const
+{$ifdef linux}
+      lib404   = 'libplan404.so';
+      libsatxy = 'libsatxy.so';
+      libsatxyfm='Satxyfm';
+{$endif}
+{$ifdef mswindows}
+      lib404 = 'libplan404.dll';
+      libsatxy = 'libsatxy.dll';
+      libsatxyfm='Satxyfm';
+{$endif}
+
+// libplan404
+type
+     TPlanetData = record
+        JD : double;
+         l : double ;
+         b : double ;
+         r : double ;
+         x : double ;
+         y : double ;
+         z : double ;
+         ipla : integer;
+     end;
+     PPlanetData = ^TPlanetData;
+Function Plan404( pla : PPlanetData):integer; cdecl; external lib404;
+
+// libsatxy
+type double8 = array[1..8] of double;
+     Pdouble8 = ^double8;
+     TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
+
 
 Var  Appdir, Configfile: string;         // pseudo-constant only here
+
+// Text formating constant
+const
+{$ifdef linux}
+     html_h        = '<HTML>';
+     htms_h        = '</HTML>';
+     html_ffx      = '<font face="fixed">';
+     htms_f        = '</font>';
+     html_b        = '<b>';
+     htms_b        = '</b>';
+     html_h2       = '<h2>';
+     htms_h2       = '</h2>';
+     html_p        = '<p>';
+     htms_p        = '</p>';
+     html_br       = '<br>';
+     html_sp       = '&nbsp;';
+{$endif}
+{$ifdef mswindows}
+// D6 Personal as no html viewer, so using RTF instead
+     html_h        = '{\rtf1\ansi\deff0{\fonttbl{\f0\fnil\fcharset0 MS Sans Serif;}{\f1\fnil MS Sans Serif;}{\f2\fmodern\fprq1\fcharset0 Courier New;}{\f3\fmodern\fprq1 Courier New;}}\f0\fs18';
+     htms_h        = '}';
+     html_ffx      = '\pard\f2\fs18 ';
+     htms_f        = '\pard\f0\fs18 ';
+     html_b        = '\b ';
+     htms_b        = '\b0 ';
+     html_h2       = '\pard\f0\fs24\b ';
+     htms_h2       = '\pard\f0\fs18\b0\par ';
+     html_p        = '\par ';
+     htms_p        = '';
+     html_br       = '\line ';
+     html_sp       = ' ';
+{$endif}
 
 implementation
 
 end.
+

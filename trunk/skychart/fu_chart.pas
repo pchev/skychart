@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_skychart, u_constant, u_util,
+uses fu_detail, cu_skychart, u_constant, u_util, u_projection,
   SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs,
   QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList;
 
@@ -63,6 +63,9 @@ type
     rot_minus: TAction;
     Undo: TAction;
     Redo: TAction;
+    identlabel: TLabel;
+    switchstar: TAction;
+    switchbackground: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -81,12 +84,8 @@ type
     procedure MoveNorthEastExecute(Sender: TObject);
     procedure MoveSouthWestExecute(Sender: TObject);
     procedure MoveSouthEastExecute(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure CentreExecute(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure zoomplusmoveExecute(Sender: TObject);
@@ -100,12 +99,19 @@ type
     procedure rot_plusExecute(Sender: TObject);
     procedure RedoExecute(Sender: TObject);
     procedure UndoExecute(Sender: TObject);
+    procedure identlabelClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Image1Click(Sender: TObject);
+    procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure switchstarExecute(Sender: TObject);
+    procedure switchbackgroundExecute(Sender: TObject);
   private
     { Private declarations }
     movefactor,zoomfactor: double;
     xcursor,ycursor : integer;
     lock_trackcursor : boolean;
-    skip_wheel : boolean;
   public
     { Public declarations }
     sc: Tskychart;
@@ -115,6 +121,14 @@ type
     procedure Refresh;
     procedure AutoRefresh;
     procedure PrintChart(Sender: TObject);
+    function  FormatDesc:string;
+    procedure ShowIdentLabel;
+    function  LongLabel(txt:string):string;
+    function  LongLabelObj(txt:string):string;
+    function  LongLabelGreek(txt : string) : string;
+    Function  LongLabelConst(txt : string) : string;
+    procedure CKeyDown(var Key: Word; Shift: TShiftState);
+    procedure CMouseWheel(Shift: TShiftState;WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
   end;
 
 
@@ -134,5 +148,21 @@ uses QClipbrd, fu_main;
 // end of common code
 
 
+
+// Specific Linux CLX code:
+
+
+procedure Tf_chart.FormMouseWheel(Sender: TObject; Shift: TShiftState;
+
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+CMouseWheel(Shift,WheelDelta,MousePos,Handled);
+end;
+
+// End of Linux specific CLX code:
+
+
+
 end.
+
 
