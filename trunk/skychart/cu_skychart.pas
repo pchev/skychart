@@ -64,6 +64,7 @@ Tskychart = class (TComponent)
     function DrawOutline :boolean;
     function DrawMilkyWay :boolean;
     function DrawPlanet :boolean;
+    function DrawAsteroid :boolean;
     function DrawOrbitPath:boolean;
     Procedure DrawGrid;
     procedure DrawEqGrid;
@@ -152,9 +153,9 @@ try
      Fplanet.ComputePlanet(cfgsc);
   end;
   InitColor; // after ComputePlanet
-  InitCatalog;
   // draw objects
   Fcatalog.OpenCat(cfgsc);
+  InitCatalog;
   // first the extended object
   if not cfgsc.quick then begin
     DrawMilkyWay; // most extended first
@@ -179,6 +180,7 @@ try
   end;
   // finally the planets
   if not cfgsc.quick then begin
+    DrawAsteroid;
     DrawOrbitPath;
   end;
   DrawPlanet;
@@ -294,9 +296,11 @@ for i:=1 to Fcatalog.cfgcat.GCatNum do
           rtlin : Fcatalog.cfgcat.lincaton[gclin-Baselin]:=true;
          end;
   end else Fcatalog.cfgcat.GCatLst[i-1].CatOn:=false;
-// give mag. limit result to other functions
+// Store mag limit for this chart
 cfgsc.StarFilter:=Fcatalog.cfgshr.StarFilter;
 cfgsc.StarMagMax:=Fcatalog.cfgcat.StarMagMax;
+cfgsc.NebFilter:=Fcatalog.cfgshr.NebFilter;
+cfgsc.NebMagMax:=Fcatalog.cfgcat.NebMagMax;
 result:=true;
 end;
 
@@ -484,6 +488,9 @@ Eq2Gal(cfgsc.racentre,cfgsc.decentre,cfgsc.lcentre,cfgsc.bcentre,cfgsc) ;
 // get ecliptic center
 cfgsc.e:=ecliptic(cfgsc.JDChart);
 Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.e,cfgsc.lecentre,cfgsc.becentre) ;
+// is one the pole in the chart
+cfgsc.NP:=northpoleinmap(cfgsc);
+cfgsc.SP:=southpoleinmap(cfgsc);
 result:=true;
 end;
 
@@ -794,6 +801,30 @@ WindowXY(x1,y1,xx,yy,cfgsc);
 Fplot.PlotSatel(xx,yy,ipla,abs(cfgsc.BxGlb)*deg2rad/3600,ma,diam,hidesat,showhide);
 end;
 
+function Tskychart.DrawAsteroid :boolean;
+var
+  x1,y1,ra,dec,magn: Double;
+  xx,yy,i,j: integer;
+begin
+if cfgsc.ShowAsteroid then begin
+  Fplanet.ComputeAsteroid(cfgsc);
+  for j:=0 to cfgsc.SimNb-1 do begin
+    for i:=1 to cfgsc.AsteroidNb do begin
+      ra:=cfgsc.AsteroidLst[j,i].ra;
+      dec:=cfgsc.AsteroidLst[j,i].dec;
+      magn:=cfgsc.AsteroidLst[j,i].magn;
+      projection(ra,dec,x1,y1,true,cfgsc) ;
+      WindowXY(x1,y1,xx,yy,cfgsc);
+      Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,magn);
+    end;
+  end;
+  result:=true;
+end else begin
+  cfgsc.AsteroidNb:=0;
+  result:=false;
+end;
+end;
+
 function Tskychart.DrawOrbitPath:boolean;
 var i,j,xx,yy,xp,yp,color : integer;
     x1,y1 : double;
@@ -805,7 +836,7 @@ if cfgsc.ShowPlanet then for i:=1 to 11 do
     projection(cfgsc.Planetlst[j,i,1],cfgsc.Planetlst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
     if (j<>0)and((xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax))
-       and ((xp>-2*cfgsc.xmax)and(yp>-2*cfgsc.ymax)and(xp<3*cfgsc.xmax)and(yp<3*cfgsc.ymax)) then 
+       and ((xp>-2*cfgsc.xmax)and(yp>-2*cfgsc.ymax)and(xp<3*cfgsc.xmax)and(yp<3*cfgsc.ymax)) then
        Fplot.PlotLine(xp,yp,xx,yy,color,1);
     xp:=xx;
     yp:=yy;
@@ -816,15 +847,19 @@ end;
     windowxy(x1,y1,xx,yy);
     if (j=0)or((xx<-xmax)or(yy<-ymax)or(xx>2*xmax)or(yy>2*ymax)) then Moveto(xx,yy)
        else Lineto(xx,yy);
+  end; }
+xp:=0;yp:=0;
+for i:=1 to cfgsc.AsteroidNb do
+  for j:=0 to cfgsc.SimNb-1 do begin
+    projection(cfgsc.AsteroidLst[j,i].ra,cfgsc.AsteroidLst[j,i].dec,x1,y1,true,cfgsc) ;
+    windowxy(x1,y1,xx,yy,cfgsc);
+    if (j<>0)and((xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax))
+       and ((xp>-2*cfgsc.xmax)and(yp>-2*cfgsc.ymax)and(xp<3*cfgsc.xmax)and(yp<3*cfgsc.ymax)) then
+       Fplot.PlotLine(xp,yp,xx,yy,color,1);
+    xp:=xx;
+    yp:=yy;
   end;
-for i:=1 to AsteroidNb do
-  for j:=0 to SimNb-1 do begin
-    projection(AsteroidPlst[j,i,1]*15,AsteroidPlst[j,i,2],x1,y1,true) ;
-    windowxy(x1,y1,xx,yy);
-    if (j=0)or((xx<-xmax)or(yy<-ymax)or(xx>2*xmax)or(yy>2*ymax)) then Moveto(xx,yy)
-       else Lineto(xx,yy);
-  end;}
-result:=true;  
+result:=true;
 end;
 
 procedure Tskychart.GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
@@ -834,6 +869,10 @@ GetAHxy(X,Y,a,h,cfgsc);
 if Fcatalog.cfgshr.AzNorth then a:=rmod(a+pi,pi2);
 GetLBxy(X,Y,l,b,cfgsc);
 GetLBExy(X,Y,le,be,cfgsc);
+ra:=rmod(ra+pi2,pi2);
+a:=rmod(a+pi2,pi2);
+l:=rmod(l+pi2,pi2);
+le:=rmod(le+pi2,pi2);
 end;
 
 procedure Tskychart.MoveChart(ns,ew:integer; movefactor:double);
@@ -1077,6 +1116,8 @@ x2 := NormRA(ra+dx/cos(dec));
 y1 := maxvalue([-pid2,dec-dx]);
 y2 := minvalue([pid2,dec+dx]);
 desc:='';
+Fcatalog.OpenCat(cfgsc);
+InitCatalog;
 saveNebFilter:=Fcatalog.cfgshr.NebFilter;
 saveStarFilter:=Fcatalog.cfgshr.StarFilter;
 if showall then begin
@@ -1087,6 +1128,7 @@ end;
 try
   result:=fcatalog.Findobj(x1,y1,x2,y2,false,cfgsc,rec);
 finally
+  Fcatalog.CloseCat;
   if showall then begin
     Fcatalog.cfgshr.NebFilter:=saveNebFilter;
     Fcatalog.cfgshr.StarFilter:=saveStarFilter;
@@ -1097,11 +1139,19 @@ if result then begin
 end else begin
 // search solar system object
    result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
-   if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+' '+d; // add date to the name if simulation for more than one date
+   if result then begin
+      if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+' '+d; // add date to the name if simulation for more than one date
+   end else begin
+      result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+      if result then begin
+         if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+' '+d;
+      end;
+   end;
 end;
 end;
 
 procedure Tskychart.FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
+// todo: do not work if crossing 0h ra
 var x1,x2,y1,y2,xx1,yy1:double;
     rec: Gcatrec;
     desc,n,m,d: string;
@@ -1134,10 +1184,25 @@ begin
    if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
       text:=text+desc+crlf;
       inc(i);
-   end;   
+   end;
    ok:=fplanet.findplanet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc);
  end;
 end;
+Procedure FindatPosAsteroid;
+begin
+ ok:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+ while ok do begin
+   if i>maxln then break;
+   projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
+   windowxy(xx1,yy1,xx,yy,cfgsc);
+   if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+      text:=text+desc+crlf;
+      inc(i);
+   end;
+   ok:=fplanet.findasteroid(x1,y1,x2,y2,true,cfgsc,n,m,d,desc);
+ end;
+end;
+/////////////
 begin
 if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
   x1:=0;
@@ -1150,6 +1215,8 @@ end;
 y1 := maxvalue([-pid2,dec-dy]);
 y2 := minvalue([pid2,dec+dy]);
 text:='';
+Fcatalog.OpenCat(cfgsc);
+InitCatalog;
 saveNebFilter:=Fcatalog.cfgshr.NebFilter;
 saveStarFilter:=Fcatalog.cfgshr.StarFilter;
 if showall then begin
@@ -1160,6 +1227,7 @@ end;
 try
   i:=0;
   if allobject or Fcatalog.cfgshr.ListPla then FindatPosPlanet;
+  if allobject or Fcatalog.cfgshr.ListPla then FindatPosAsteroid;
   if allobject or Fcatalog.cfgshr.ListNeb then begin
      FindAtPosCat(gcneb);
      if Fcatalog.cfgcat.nebcaton[sac-BaseNeb] then FindAtPosCat(sac);
@@ -1199,6 +1267,7 @@ try
              else desc:='There is '+inttostr(i)+' objects in this field.';
   text:=text+desc+crlf;
 finally
+  Fcatalog.CloseCat;
   if showall then begin
     Fcatalog.cfgshr.NebFilter:=saveNebFilter;
     Fcatalog.cfgshr.StarFilter:=saveStarFilter;

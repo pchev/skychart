@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, enhedits, u_constant, u_util, cu_zoomimage,
+uses Math, enhedits, u_constant, u_util, cu_zoomimage, MyDB,
   SysUtils, Classes, QForms,Types, QStyle,
   QStdCtrls, QComCtrls, QControls, QGraphics, QExtCtrls, QGrids, QButtons,
   QDialogs, QMask, QCheckLst;
@@ -48,7 +48,6 @@ type
     p_labels: TTabSheet;
     Label5: TLabel;
     Label6: TLabel;
-    Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
@@ -469,7 +468,7 @@ type
     BitBtn31: TBitBtn;
     Label177: TLabel;
     Edit2: TEdit;
-    Button2: TButton;
+    apply: TButton;
     SpeedButton7: TSpeedButton;
     Label167: TLabel;
     Label168: TLabel;
@@ -669,8 +668,63 @@ type
     listpla: TCheckBox;
     listvar: TCheckBox;
     listdbl: TCheckBox;
-    RadioGroup1: TRadioGroup;
     dbreado: TPanel;
+    AstPageControl: TPageControl;
+    astload: TTabSheet;
+    GroupBox7: TGroupBox;
+    Label204: TLabel;
+    mpcfile: TEdit;
+    astnumbered: TCheckBox;
+    LoadMPC: TButton;
+    astprepare: TTabSheet;
+    GroupBox8: TGroupBox;
+    aststrtdate: TMaskEdit;
+    Label7: TLabel;
+    Label207: TLabel;
+    AstCompute: TButton;
+    astsetting: TTabSheet;
+    GroupBox9: TGroupBox;
+    astlimitmag: TFloatEdit;
+    Label203: TLabel;
+    GroupBox6: TGroupBox;
+    dbname: TEdit;
+    dbport: TLongEdit;
+    dbhost: TEdit;
+    Label141: TLabel;
+    Label142: TLabel;
+    Label143: TLabel;
+    dbuser: TEdit;
+    dbpass: TEdit;
+    Label144: TLabel;
+    Label145: TLabel;
+    chkdb: TButton;
+    credb: TButton;
+    dropdb: TButton;
+    cretbl: TButton;
+    showast: TCheckBox;
+    astdbset: TButton;
+    astnummonth: TSpinEdit;
+    astsymbol: TRadioGroup;
+    mpcfilebtn: TBitBtn;
+    MemoMPC: TMemo;
+    Label206: TLabel;
+    aststoperr: TCheckBox;
+    prepastmemo: TMemo;
+    Label210: TLabel;
+    astdelete: TTabSheet;
+    GroupBox10: TGroupBox;
+    astelemlist: TComboBox;
+    delast: TButton;
+    GroupBox11: TGroupBox;
+    delallast: TButton;
+    Label209: TLabel;
+    Label211: TLabel;
+    delastMemo: TMemo;
+    topmsg: TPanel;
+    AstDB: TButton;
+    Label212: TLabel;
+    astmagdiff: TFloatEdit;
+    Label213: TLabel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -749,7 +803,7 @@ type
     procedure GRSChange(Sender: TObject);
     procedure PlanetBox2Click(Sender: TObject);
     procedure PlanetBox3Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure applyClick(Sender: TObject);
     procedure nbstepChanged(Sender: TObject; NewValue: Integer);
     procedure steplineClick(Sender: TObject);
     procedure stepunitClick(Sender: TObject);
@@ -815,9 +869,30 @@ type
     procedure listplaClick(Sender: TObject);
     procedure listvarClick(Sender: TObject);
     procedure listdblClick(Sender: TObject);
-    procedure RadioGroup1Click(Sender: TObject);
+    procedure dbnameChange(Sender: TObject);
+    procedure dbhostChange(Sender: TObject);
+    procedure dbportChange(Sender: TObject);
+    procedure dbuserChange(Sender: TObject);
+    procedure dbpassChange(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure chkdbClick(Sender: TObject);
+    procedure credbClick(Sender: TObject);
+    procedure dropdbClick(Sender: TObject);
+    procedure cretblClick(Sender: TObject);
+    procedure astdbsetClick(Sender: TObject);
+    procedure showastClick(Sender: TObject);
+    procedure astlimitmagChange(Sender: TObject);
+    procedure astsymbolClick(Sender: TObject);
+    procedure mpcfilebtnClick(Sender: TObject);
+    procedure LoadMPCClick(Sender: TObject);
+    procedure delastClick(Sender: TObject);
+    procedure delallastClick(Sender: TObject);
+    procedure AstComputeClick(Sender: TObject);
+    procedure AstDBClick(Sender: TObject);
+    procedure astmagdiffChange(Sender: TObject);
   private
     { Déclarations privées }
+    db:TmyDB;
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
   public
@@ -859,6 +934,9 @@ type
     procedure CenterObs;
     procedure ShowHorizon;
     procedure ShowObjList;
+    procedure ShowDB;
+    procedure ShowAsteroid;
+    procedure UpdAstList;
   end;
 
 var
@@ -867,8 +945,6 @@ var
 implementation
 
 uses fu_main, fu_directory, u_projection;
-
-const b=' ';
 
 var
    SetDirectory : function(dir:pchar): integer; stdcall;
@@ -907,21 +983,7 @@ begin
 stepunitClick(Sender);
 end;
 
-procedure Tf_config.RadioGroup1Click(Sender: TObject);
-begin
-case radiogroup1.ItemIndex of
-0 : Application.Style.DefaultStyle:=dsSystemDefault;
-1 : Application.Style.DefaultStyle:=dsMotif;
-2 : Application.Style.DefaultStyle:=dsMotifPlus;
-3 : Application.Style.DefaultStyle:=dsCDE;
-4 : Application.Style.DefaultStyle:=dsQtSGI;
-5 : Application.Style.DefaultStyle:=dsPlatinum;
-6 : Application.Style.DefaultStyle:=dsWindows;
-end;
-end;
-
 // End of Linux specific CLX code:
-
 
 end.
 

@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  Cross-platform common code for Main form.
 }
 
-function Tf_main.CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
+function Tf_main.CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
 var
   Child : Tf_chart;
 begin
@@ -39,9 +39,10 @@ begin
   end;
   { create a new MDI child window }
   Child := Tf_chart.Create(Application);
+  if locked then Child.lock_refresh:=true;
   inc(cfgm.MaxChildID);
   Child.tag:=cfgm.MaxChildID;
-  Child.Caption:=name;
+  Child.Caption:=CName;
   Child.sc.catalog:=catalog;
   Child.sc.planet:=planet;
   Child.sc.plot.cfgplot:=cfgp;
@@ -49,6 +50,7 @@ begin
   Child.sc.plot.cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
   Child.sc.plot.cfgplot.starshapew:=Child.sc.plot.cfgplot.starshapesize div 2;
   Child.sc.cfgsc:=cfg1;
+  Child.sc.cfgsc.chartname:=CName;
   if cfgm.maximized then Child.maximize:=true
                     else begin Child.maximize:=false;
                                Child.width:=Child.sc.cfgsc.winx;
@@ -106,6 +108,11 @@ c2.SimS := c1.SimS ;
 c2.SimObject := c1.SimObject ;
 c2.PlanetParalaxe := c1.PlanetParalaxe ;
 c2.ShowPlanet := c1.ShowPlanet ;
+c2.ShowAsteroid := c1.ShowAsteroid ;
+c2.AstmagMax := c1.AstmagMax;
+c2.AstmagDiff := c1.AstmagDiff;
+c2.AstSymbol := c1.AstSymbol;
+c2.ShowComet := c1.ShowComet ;
 c2.GRSlongitude := c1.GRSlongitude ;
 c2.ShowEarthShadow := c1.ShowEarthShadow ;
 c2.ProjPole := c1.ProjPole ;
@@ -229,6 +236,7 @@ DecimalSeparator:='.';
 appdir:=getcurrentdir;
 catalog:=Tcatalog.Create(self);
 planet:=Tplanet.Create(self);
+planet.OnAsteroidConfig:=OpenAsteroidConfig;
 {$ifdef mswindows}
 Screen.Cursors[crRetic] := LoadCursor(HInstance,'RETIC');
 Application.UpdateFormatSettings:=false;
@@ -247,7 +255,8 @@ try
  SetLang;
  InitFonts;
  SetLpanel1('');
- FileNewItem.click;
+ ConnectDB;
+ CreateMDIChild(GetUniqueName('Chart_',true),true,true,def_cfgsc,def_cfgplot,true);
  Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
  Autorefresh.enabled:=true;
  if cfgm.AutostartServer then StartServer;
@@ -485,13 +494,89 @@ try
  f_config.cmain:=cfgm;
  f_config.applyall.checked:=cfgm.updall;
  formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
+ f_config.topmsg.caption:='';
+ f_config.TreeView1.enabled:=true;
+ f_config.previous.enabled:=true;
+ f_config.next.enabled:=true;
+ f_config.apply.enabled:=true;
+ f_config.AstDB.enabled:=true;
  f_config.showmodal;
  if f_config.ModalResult=mrOK then begin
    activateconfig;
  end;
  cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
 finally
-// f_config.free;
+screen.cursor:=crDefault;
+end;
+end;
+
+procedure Tf_main.OpenAsteroidConfig(Sender: TObject);
+var i:integer;
+begin
+if f_config=nil then f_config:=Tf_config.Create(application);
+if f_config.visible then exit;
+screen.cursor:=crHourGlass;
+try
+ cfgm.configpage:=f_config.p_asteroids.PageIndex;
+ f_config.AstPageControl.activepage:=f_config.astprepare;
+ f_config.ccat:=catalog.cfgcat;
+ f_config.cshr:=catalog.cfgshr;
+ f_config.cplot:=def_cfgplot;
+ f_config.csc:=def_cfgsc;
+ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+     CopySCconfig(sc.cfgsc,f_config.csc);
+ f_config.cmain:=cfgm;
+ f_config.applyall.checked:=cfgm.updall;
+ formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
+ f_config.topmsg.caption:='No Asteroid data found for this date. Please prepare the data for at least two month, or click Cancel to disable the Asteroid display.';
+ f_config.TreeView1.enabled:=false;
+ f_config.previous.enabled:=false;
+ f_config.next.enabled:=false;
+ f_config.apply.enabled:=false;
+ f_config.AstDB.enabled:=true;
+ f_config.showmodal;
+ if f_config.ModalResult=mrCancel then for i:=0 to MDIChildCount-1 do
+    if MDIChildren[i] is Tf_chart then
+       with MDIChildren[i] as Tf_chart do begin
+          sc.cfgsc.ShowAsteroid:=false;
+          sc.cfgsc.FindOk:=false;
+       end;
+ cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
+finally
+screen.cursor:=crDefault;
+end;
+end;
+
+procedure Tf_main.OpenDBConfig(Sender: TObject);
+begin
+if f_config=nil then f_config:=Tf_config.Create(application);
+if f_config.visible then exit;
+screen.cursor:=crHourGlass;
+try
+ cfgm.configpage:=f_config.p_system.PageIndex;
+ f_config.ccat:=catalog.cfgcat;
+ f_config.cshr:=catalog.cfgshr;
+ f_config.cplot:=def_cfgplot;
+ f_config.csc:=def_cfgsc;
+ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+     CopySCconfig(sc.cfgsc,f_config.csc);
+ f_config.cmain:=cfgm;
+ f_config.applyall.checked:=cfgm.updall;
+ formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
+ f_config.topmsg.caption:='Please set your MySQL database preferences. Use the Check button to control your input. Click Cancel to disable database function.';
+ f_config.TreeView1.enabled:=false;
+ f_config.previous.enabled:=false;
+ f_config.next.enabled:=false;
+ f_config.apply.enabled:=false;
+ f_config.AstDB.enabled:=false;
+ f_config.showmodal;
+ if f_config.ModalResult=mrCancel then begin
+    def_cfgsc.ShowAsteroid:=false;
+ end else begin
+    cfgm:=f_config.cmain;
+ end;
+ cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
+finally
 screen.cursor:=crDefault;
 end;
 end;
@@ -510,6 +595,7 @@ begin
     LoadConstL(cfgm.ConstLfile);
     LoadConstB(cfgm.ConstBfile);
     LoadHorizon(cfgm.horizonfile);
+    ConnectDB;
     if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
        sc.cfgsc.FindOk:=false;
@@ -599,6 +685,11 @@ cfgm.ServerIPaddr:='127.0.0.1';
 cfgm.ServerIPport:='3292'; // x'CDC' :o)
 cfgm.keepalive:=false;
 cfgm.AutostartServer:=true;
+cfgm.dbhost:='localhost';
+cfgm.dbport:=3306;
+cfgm.db:='cdc';
+cfgm.dbuser:='root';
+cfgm.dbpass:='';
 for i:=1 to 6 do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
    def_cfgplot.FontSize[i]:=DefaultFontSize;
@@ -681,6 +772,11 @@ def_cfgsc.SimS:=0;
 def_cfgsc.SimLine:=True;
 for i:=1 to NumSimObject do def_cfgsc.SimObject[i]:=true;
 def_cfgsc.ShowPlanet:=true;
+def_cfgsc.ShowAsteroid:=true;
+def_cfgsc.AstSymbol:=1;
+def_cfgsc.AstmagMax:=18;
+def_cfgsc.AstmagDiff:=6;
+def_cfgsc.ShowComet:=true;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
 def_cfgsc.GRSlongitude:=84;
@@ -969,6 +1065,11 @@ csc.ShowGalactic:=ReadBool(section,'ShowGalactic',csc.ShowGalactic);
 csc.ShowMilkyWay:=ReadBool(section,'ShowMilkyWay',csc.ShowMilkyWay);
 csc.FillMilkyWay:=ReadBool(section,'FillMilkyWay',csc.FillMilkyWay);
 csc.ShowPlanet:=ReadBool(section,'ShowPlanet',csc.ShowPlanet);
+csc.ShowAsteroid:=ReadBool(section,'ShowAsteroid',csc.ShowAsteroid);
+csc.ShowComet:=ReadBool(section,'ShowComet',csc.ShowComet);
+csc.AstSymbol:=ReadInteger(section,'AstSymbol',csc.AstSymbol);
+csc.AstmagMax:=ReadFloat(section,'AstmagMax',csc.AstmagMax);
+csc.AstmagDiff:=ReadFloat(section,'AstmagDiff',csc.AstmagDiff);
 csc.PlanetParalaxe:=ReadBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
 csc.ShowEarthShadow:=ReadBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
 csc.GRSlongitude:=ReadFloat(section,'GRSlongitude',csc.GRSlongitude);
@@ -1030,6 +1131,11 @@ cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
 cfgm.keepalive:=ReadBool(section,'keepalive',cfgm.keepalive);
 cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
+cfgm.dbhost:=ReadString(section,'dbhost',cfgm.dbhost);
+cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
+cfgm.db:=ReadString(section,'db',cfgm.db);
+cfgm.dbuser:=ReadString(section,'dbuser',cfgm.dbuser);
+cfgm.dbpass:=ReadString(section,'dbpass',cfgm.dbpass);
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 catalog.cfgshr.ListStar:=ReadBool(section,'ListStar',catalog.cfgshr.ListStar);
 catalog.cfgshr.ListNeb:=ReadBool(section,'ListNeb',catalog.cfgshr.ListNeb);
@@ -1187,6 +1293,11 @@ WriteBool(section,'ShowGalactic',def_cfgsc.ShowGalactic);
 WriteBool(section,'ShowMilkyWay',def_cfgsc.ShowMilkyWay);
 WriteBool(section,'FillMilkyWay',def_cfgsc.FillMilkyWay);
 WriteBool(section,'ShowPlanet',def_cfgsc.ShowPlanet);
+WriteBool(section,'ShowAsteroid',def_cfgsc.ShowAsteroid);
+WriteBool(section,'ShowComet',def_cfgsc.ShowComet);
+WriteInteger(section,'AstSymbol',def_cfgsc.AstSymbol);
+WriteFloat(section,'AstmagMax',def_cfgsc.AstmagMax);
+WriteFloat(section,'AstmagDiff',def_cfgsc.AstmagDiff);
 WriteBool(section,'PlanetParalaxe',def_cfgsc.PlanetParalaxe);
 WriteBool(section,'ShowEarthShadow',def_cfgsc.ShowEarthShadow);
 WriteFloat(section,'GRSlongitude',def_cfgsc.GRSlongitude);
@@ -1254,6 +1365,11 @@ WriteString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 WriteString(section,'ServerIPport',cfgm.ServerIPport);
 WriteBool(section,'keepalive',cfgm.keepalive);
 WriteBool(section,'AutostartServer',cfgm.AutostartServer);
+WriteString(section,'dbhost',cfgm.dbhost);
+WriteInteger(section,'dbport',cfgm.dbport);
+WriteString(section,'db',cfgm.db);
+WriteString(section,'dbuser',cfgm.dbuser);
+WriteString(section,'dbpass',cfgm.dbpass);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -1332,6 +1448,7 @@ end;
 end;
 
 
+
 procedure Tf_main.quicksearchClick(Sender: TObject);
 var key:word;
 begin
@@ -1358,6 +1475,8 @@ if ok then begin
       SetLPanel1(Num+'  Not found in any installed catalog index.');
    end;
 end;
+
+
 
 function Tf_main.GenericSearch(cname,Num:string):boolean;
 var ok,TrackInProgress : Boolean;
@@ -1457,6 +1576,8 @@ if chart is Tf_chart then with chart as Tf_chart do begin
      end;
    end;
    if ok then goto findit;
+   ok:=planet.FindAsteroidName(trim(Num),ar1,de1,sc.cfgsc);
+   if ok then goto findit;
 {   buf:=trim(uppercase(num));
    j:=length(buf);
    if j>3 then for i:=1 to CometNb do begin
@@ -1496,7 +1617,8 @@ Findit:
       precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
       sc.movetoradec(ar1,de1);
       Refresh;
-      sc.FindatRaDec(ar1,de1,0.0005,true);
+      if sc.cfgsc.fov>0.17 then sc.FindatRaDec(ar1,de1,0.0005,true)
+                        else sc.FindatRaDec(ar1,de1,0.00005,true);
       ShowIdentLabel;
       f_main.SetLpanel1(sc.cfgsc.FindDesc,caption);
    end
@@ -1953,6 +2075,27 @@ screen.cursor:=crDefault;
 except
  screen.cursor:=crDefault;
 end;
+end;
+
+procedure Tf_main.ConnectDB;
+begin
+ try
+ if not MySqlLoadLib then begin
+    SetLpanel1('MySQL Library not available. Please install MySQL Client.');
+    def_cfgsc.ShowAsteroid:=false;
+ end else begin
+    if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
+       SetLpanel1('Try to initialyse MySQL database.');
+       OpenDBConfig(self);
+       if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
+          SetLpanel1('MySQL database not available.');
+          def_cfgsc.ShowAsteroid:=false;
+       end;
+    end;
+end;
+ except
+  SetLpanel1('MySQL database not available.');
+ end;
 end;
 
 procedure Tf_main.ViewInfoExecute(Sender: TObject);

@@ -117,7 +117,7 @@ type
   public
     { Public declarations }
     sc: Tskychart;
-    maximize,LockTrackCursor,lastquick:boolean;
+    maximize,LockTrackCursor,lastquick,lock_refresh: boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo,lastx,lasty,lastyzoom : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;

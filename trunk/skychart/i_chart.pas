@@ -49,6 +49,7 @@ begin
  {$ifdef mswindows}
  Image1.Cursor := crRetic;
  {$endif}
+ lock_refresh:=false;
 end;
 
 procedure Tf_chart.FormDestroy(Sender: TObject);
@@ -91,6 +92,8 @@ procedure Tf_chart.Refresh;
 begin
 try
 if f_main.cfgm.locked then exit;
+if lock_refresh then exit;
+ lock_refresh:=true;
  lastquick:=sc.cfgsc.quick;
  if not lastquick then screen.cursor:=crHourGlass;
  zoomstep:=0;
@@ -113,6 +116,7 @@ if f_main.cfgm.locked then exit;
     f_main.settopmessage(GetChartInfo);
  end;
 finally
+ lock_refresh:=false;
  screen.cursor:=crDefault;
 end;
 end;

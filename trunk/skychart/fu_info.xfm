@@ -1,6 +1,6 @@
 object f_info: Tf_info
-  Left = 178
-  Top = 172
+  Left = 181
+  Top = 201
   Width = 460
   Height = 338
   VertScrollBar.Range = 27
@@ -8,11 +8,10 @@ object f_info: Tf_info
   Caption = 'Info'
   Color = clBackground
   Position = poDefaultPosOnly
+  Scaled = False
   OnClose = FormClose
   OnShow = FormShow
-  PixelsPerInch = 80
-  TextHeight = 13
-  TextWidth = 5
+  PixelsPerInch = 90
   object PageControl1: TPageControl
     Left = 0
     Top = 0
@@ -105,7 +104,7 @@ object f_info: Tf_info
           Left = 4
           Top = 3
           Width = 100
-          Height = 21
+          Height = 25
           TabOrder = 1
           OnKeyUp = Edit1KeyUp
         end
