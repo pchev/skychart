@@ -19,6 +19,16 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+
+Modified Sept 21, 2004 by G. Carpenter for support of Orion Intelliscope
+Object locator.  Changes marked with ####
+Also modified the encoder.dfm
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
 ****************************************************************}
 
 interface
@@ -36,8 +46,8 @@ Function Encoder_Get_Init_Flag(var initflag : string): boolean;
 Function GetDeviceStatus(var ex,ey : integer; var batteryOK : boolean) : boolean;
 
 const ValidPort='COM1 COM2 COM3 COM4 COM5 COM6 COM7 COM8';
-      ValidModel :array[1..3] of string=('Tangent Ouranos MicroGuider','NGC-MAX' ,'AAM SkyVector Discovery');
-      NumModel = 3;
+      ValidModel :array[1..4] of string=('Tangent Ouranos MicroGuider','NGC-MAX' ,'AAM SkyVector Discovery','Intelliscope');
+      NumModel = 4;
       max_error = 10;
 var
 {system flags and statuses}
@@ -84,7 +94,7 @@ var i:integer;
     sgn,str:string;
 begin
 case encoder_type of
-1,2,3 : begin
+1,2,3,4 : begin
      if num < 0 then sgn:='-' else sgn:='+';
      str:=inttostr(abs(num));
      if length(str) = 1 then result:=sgn+'0000'+str;
@@ -130,21 +140,31 @@ result:=true;
 end;
 
 Function Encoder_Query(var Xpos,Ypos : integer) : boolean;
-var buf,a,b : string;
+var buf,a,b: string;						
     count,p : integer;
 begin
 result:=false;
 PurgeBuffer(encoder_port);
 case encoder_type of
-1,2,3 : begin
+1,2,3,4 : begin
     buf:='Q';
+   
     count:=length(buf);
     if WriteCom(encoder_port,buf,count)= false then exit;
     count:=14;
     if ReadCom(encoder_port,buf,count) = false then begin; Affmsg('Encoder_Query : Read error'); exit; end;
+
+    p:= pos('Q',buf);                                     // #### test is leading character is xmit character then intelliscope
+    if p>0 then begin    // trim for intelliscope	      // #### HERE's the modifications for the intelliscope protocol
+	 buf:=trim(copy(buf,2,count-1));                        // #### it strips off the leading Q Character
+	 count:=count-1;							// #### shortens the count for the buffer by one so rest driver is not affected
+    end;								       
+
     p:=pos(tab,buf);
     if p>0 then begin // Ouranos tab separated
-      a:=trim(copy(buf,1,p-1));
+      a:=trim(copy(buf,1,p-1));                              
+
+     
       buf:=copy(buf,p+1,99);
       p:=pos(cr,buf); if p=0 then p:=99;
       b:=trim(copy(buf,1,p-1));
@@ -241,8 +261,8 @@ end;
 end;
 
 Function GetDeviceStatus(var ex,ey : integer; var batteryOK : boolean) : boolean;
-var buf : string;
-    count : integer;
+var buf : string;							// #### added variable for intelliscope
+    count,p : integer;
 begin
 result:=false;
 PurgeBuffer(encoder_port);
@@ -251,6 +271,14 @@ PurgeBuffer(encoder_port);
     if WriteCom(encoder_port,buf,count)= false then exit;
     count:=20;
     if ReadCom(encoder_port,buf,count) = false then exit;
+    p:=pos('P',buf);                                     // #### test is leading character is xmit character then intelliscope
+    if p>0 then begin                                    // #### HERE's the modifications for the intelliscope protocol
+	    buf:=trim(copy(buf,2,count-1));                        // #### it strips off the leading Q Character
+	    count:=count-1;							// #### shortens the count for the buffer by one so rest driver is not affected
+    end;
+
+
+
     if count<3 then exit;
     ey:=strtointdef(buf[1],0);
     ex:=strtointdef(buf[2],0);
