@@ -196,7 +196,7 @@ const cdcversion = 'Version 3 alpha 0.0.6b';
       SharedDir='/usr/share/apps/skychart';
       DefaultPrintCmd1='kghostview';
       DefaultPrintCmd2='gimp';
-      DefaultTmpPath=DefaultPrivateDir;
+      DefaultTmpDir=DefaultPrivateDir+'/tmp';
       key_cr = 4100;
       key_plus =43;
       key_minus=45;
@@ -214,11 +214,11 @@ const cdcversion = 'Version 3 alpha 0.0.6b';
       DefaultFontName='Arial';
       DefaultFontSymbol='Symbol';
       DefaultFontSize=8;
-      DefaultPrivateDir='';
-      Defaultconfigfile='cartesduciel.ini';      // to user profile directory or C:\windows
+      DefaultPrivateDir='Cartes du Ciel';
+      Defaultconfigfile='cartesduciel.ini';  
       DefaultPrintCmd1='gsview32.exe';
       DefaultPrintCmd2='mspaint.exe';
-      DefaultTmpPath='C:\';
+      DefaultTmpDir='C:\';
       key_cr   =13;
       key_plus =107;
       key_minus=109;
@@ -426,13 +426,13 @@ type double8 = array[1..8] of double;
      TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
 
 
-Var  Appdir, PrivateDir, SampleDir, Configfile: string;         // pseudo-constant only here
+Var  Appdir, PrivateDir, SampleDir, TempDir, Configfile: string;         // pseudo-constant only here
      ldeg,lmin,lsec : string;
 {$ifdef linux}
      tracefile:string =''; // to stdout
 {$endif}
 {$ifdef mswindows}
-     tracefile:string ='cdc_trace.txt';
+     tracefile:string = 'cdc_trace.txt';
 {$endif}
 
 // Text formating constant

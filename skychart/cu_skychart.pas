@@ -232,6 +232,7 @@ finally
   cfgsc.FillMilkyWay:=savfillmw;
   cfgsc.quick:=false;
   Fcatalog.CloseCat;
+  plot.Flush;
 end;
 end;
 
@@ -645,7 +646,7 @@ if Fcatalog.OpenDblStar then
     rec.double.pa:=rec.double.pa*cfgsc.FlipX;
     if cfgsc.FlipY<0 then rec.double.pa:=180-rec.double.pa;
     rec.double.pa:=Deg2Rad*rec.double.pa+rot;
-    Fplot.PlotDblStar(xx,yy,rec.double.mag1,rec.double.sep,rec.double.pa,0);
+    Fplot.PlotDblStar(xx,yy,rec.double.sep*secarc*cfgsc.BxGlb,rec.double.mag1,rec.double.sep,rec.double.pa,0);
     if rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3] then
     if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1))
        else SetLabel(lid,xx,yy,0,2,3,rec.double.id);

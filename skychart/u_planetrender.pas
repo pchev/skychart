@@ -50,6 +50,7 @@ TRenderCloselib = Procedure; stdcall;
 Var
 planetrender: boolean;
 Prenderlib : Dword = 0;
+UseCount   : Dword = 0;
 SetTexturePath : TSetTexturePath;
 RenderMercury : TRenderMercury;
 RenderVenus : TRenderVenus;
@@ -64,14 +65,26 @@ RenderSun : TRenderSun;
 RenderCloselib : TRenderCloselib;
 
 procedure InitPlanetRender;
+procedure ClosePlanetRender;
 
 implementation
 
+procedure ClosePlanetRender;
+begin
+ dec(UseCount);
+ if UseCount<=0 then begin
+    if Prenderlib<>0 then RenderCloseLib;
+    Prenderlib:=0;
+    UseCount:=0;
+ end;
+end;
+
 procedure InitPlanetRender;
 begin
-planetrender:=false;
-{$ifdef mswindows}
-try
+if Prenderlib=0 then begin
+ planetrender:=false;
+ {$ifdef mswindows}
+ try
   Prenderlib := LoadLibrary('libplanetrender.dll');
   if Prenderlib<>0 then begin
     RenderCloseLib:= TRenderCloseLib(GetProcAddress(Prenderlib, 'CloseLib'));
@@ -87,11 +100,15 @@ try
     RenderPluto:= TRenderPluto(GetProcAddress(Prenderlib, 'RenderPluto'));
     RenderSun:= TRenderSun(GetProcAddress(Prenderlib, 'RenderSun'));
     planetrender:=true;
+    inc(UseCount);
   end;
-except
-planetrender:=false;
-end;
+ except
+  planetrender:=false;
+ end;
 {$endif}
+end else begin
+ inc(UseCount);
+end;
 end;
 
 end.

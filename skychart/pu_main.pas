@@ -299,7 +299,7 @@ type
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
-    Procedure GetAppDir(filename:string);
+    Procedure GetAppDir;
   public
     { Public declarations }
     cfgm : conf_main;
@@ -362,7 +362,8 @@ implementation
 {$R *.dfm}
 {$R cursbmp.res}
 
-uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection, pu_printsetup, passql, pasmysql ;
+uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection, pu_printsetup,
+     passql, pasmysql, ShlObj ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here

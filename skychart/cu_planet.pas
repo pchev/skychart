@@ -99,7 +99,7 @@ type
      PROCEDURE InitComet(tp,q,ec,ap,an,ic,mh,mg,eq: double; nam:string);
      PROCEDURE Comet(jd :Double; lightcor:boolean; VAR ar,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc : Double);
      PROCEDURE InitAsteroid(epoch,mh,mg,ma,ap,an,ic,ec,sa,eq: double; nam:string);
-     PROCEDURE Asteroid(jd :Double; lightcor:boolean; VAR ar,de,dist,r,elong,phase,magn : Double);
+     PROCEDURE Asteroid(jd :Double; highprec:boolean; VAR ar,de,dist,r,elong,phase,magn : Double);
      Function ConnectDB(host,db,user,pass:string; port:integer):boolean;
      function CheckDB:boolean;
      procedure TruncateDailyAsteroid;
@@ -1235,7 +1235,7 @@ cfgsc.FindDesc:=Desc;
 cfgsc.FindNote:='';
 end;
 
-PROCEDURE Kepler(VAR E1:Double; e,m:Double);
+PROCEDURE Kepler(VAR E1:Double; e,m:Double; precision:double=1.0E-11);
  VAR e0,c:Double;
  BEGIN
 { meeus  22.3 }
@@ -1244,7 +1244,7 @@ PROCEDURE Kepler(VAR E1:Double; e,m:Double);
     REPEAT
       c := (m+e0*sin(E1) - E1) / (1.0 - e*cos(E1)) ;
       E1:= E1 + c ;
-    UNTIL ABS(c) < 1.0E-11 ;
+    UNTIL ABS(c) < precision ;
  END ;
 
 Procedure RectToPol(x,y : double; var r,alpha : double);
@@ -1439,14 +1439,15 @@ astelem.Ob := sqrt(g*g+qq*qq);
 astelem.Oc := sqrt(h*h+r*r) ;
 END  ;
 
-PROCEDURE TPlanet.Asteroid(jd :Double; lightcor:boolean; VAR ar,de,dist,r,elong,phase,magn : Double);
+PROCEDURE TPlanet.Asteroid(jd :Double; highprec:boolean; VAR ar,de,dist,r,elong,phase,magn : Double);
 VAR xc,yc,zc,xs,ys,zs,rr,phi1,phi2 :Double;
     nu,da,n0,m,ex,num,den :Double ;
 
 Procedure AstGeom ;
 begin
 m:=rmod(astelem.am+n0*(jd-astelem.At),pi2);
-Kepler(ex,astelem.Oe,m) ;
+if highprec then Kepler(ex,astelem.Oe,m)
+            else Kepler(ex,astelem.Oe,m,1e-5);
 num:=sqrt(1.0+astelem.Oe)*tan(ex/2.0);  { meeus 25.1 }
 den:=sqrt(1.0-astelem.Oe);
 nu:=2.0*arctan2(num,den);
@@ -1462,7 +1463,7 @@ da:=astelem.Aa ;                     { meeus 25.12 }
 n0:=0.01720209895/(da*sqrt(da));
 SunRect(jd,false,xs,ys,zs);
 AstGeom;
-if lightcor then begin
+if highprec then begin
    jd:=jd-dist*tlight;
    AstGeom;
 end;

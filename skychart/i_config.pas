@@ -926,7 +926,39 @@ procedure Tf_config.SizeContrastBarChange(Sender: TObject);
 begin
 cplot.magsize:= SizeContrastBar.position/10;
 end;
-                  
+
+procedure Tf_config.StarButton1Click(Sender: TObject);
+begin
+StarSizeBar.Position:=12;
+SizeContrastBar.Position:=40;
+StarContrastBar.Position:=400;
+SaturationBar.Position:=192;
+end;
+
+procedure Tf_config.StarButton2Click(Sender: TObject);
+begin
+StarSizeBar.Position:=12;
+SizeContrastBar.Position:=10;
+StarContrastBar.Position:=400;
+SaturationBar.Position:=192;
+end;
+
+procedure Tf_config.StarButton3Click(Sender: TObject);
+begin
+StarSizeBar.Position:=25;
+SizeContrastBar.Position:=40;
+StarContrastBar.Position:=300;
+SaturationBar.Position:=255;
+end;
+
+procedure Tf_config.StarButton4Click(Sender: TObject);
+begin
+StarSizeBar.Position:=12;
+SizeContrastBar.Position:=40;
+StarContrastBar.Position:=500;
+SaturationBar.Position:=0;
+end;
+
 procedure Tf_config.StringGrid3DrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);
 begin

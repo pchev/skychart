@@ -923,6 +923,10 @@ type
     Label263: TLabel;
     Label257: TLabel;
     SizeContrastBar: TTrackBar;
+    StarButton1: TButton;
+    StarButton2: TButton;
+    StarButton3: TButton;
+    StarButton4: TButton;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1132,6 +1136,10 @@ type
     procedure StarContrastBarChange(Sender: TObject);
     procedure SaturationBarChange(Sender: TObject);
     procedure SizeContrastBarChange(Sender: TObject);
+    procedure StarButton1Click(Sender: TObject);
+    procedure StarButton2Click(Sender: TObject);
+    procedure StarButton3Click(Sender: TObject);
+    procedure StarButton4Click(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -1257,6 +1265,7 @@ csc.ScopePlugin:=telescopepluginlist.text;
 end;
 
 // end of windows vcl specific code:
+
 
 end.
 

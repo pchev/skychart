@@ -282,16 +282,32 @@ begin
   Close;
 end;
 
-Procedure Tf_main.GetAppDir(filename:string);
+Procedure Tf_main.GetAppDir;
 var inif: TMemIniFile;
+{$ifdef mswindows}
+    PIDL : PItemIDList;
+    Folder : array[0..MAX_PATH] of Char;
+{$endif}
 begin
 appdir:=extractfilepath(paramstr(0));
-privatedir:=appdir;
+privatedir:=DefaultPrivateDir;
+Tempdir:=DefaultTmpDir;
 {$ifdef linux}
 appdir:=expanddirectoryname(appdir);
-privatedir:=expanddirectoryname(DefaultPrivateDir);
+privatedir:=expanddirectoryname(PrivateDir);
+Tempdir:=expanddirectoryname(Tempdir);
 {$endif}
-inif:=TMeminifile.create(filename);
+{$ifdef mswindows}
+SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
+if PIDL=nil then begin // Pre-IE4.0
+  SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
+end;
+SHGetPathFromIDList(PIDL, Folder);
+privatedir:=slash(Folder)+privatedir;
+configfile:=slash(privatedir)+configfile;
+tracefile:=slash(privatedir)+tracefile;
+{$endif}
+inif:=TMeminifile.create(configfile);
 try
 appdir:=inif.ReadString('main','AppDir',appdir);
 privatedir:=inif.ReadString('main','PrivateDir',privatedir);
@@ -300,6 +316,7 @@ finally
 end;
 if not directoryexists(privatedir) then forcedirectories(privatedir);
 if not directoryexists(slash(privatedir)+'MPC') then forcedirectories(slash(privatedir)+'MPC');
+if not directoryexists(TempDir) then forcedirectories(TempDir);
 {$ifdef linux}  // allow a shared install
 if (not directoryexists(slash(appdir)+'data/constellation')) and
    (directoryexists(SharedDir)) then
@@ -310,8 +327,6 @@ end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
-InitTrace;
-traceon:=true;
 DecimalSeparator:='.';
 {$ifdef linux}
 f_directory:=Tf_directory.Create(application);
@@ -320,12 +335,14 @@ configfile:=expandfilename(Defaultconfigfile);
 {$ifdef mswindows}
 configfile:=Defaultconfigfile;
 {$endif}
-GetAppDir(configfile);
+GetAppDir;
 chdir(appdir);
+InitTrace;
+traceon:=true;
 catalog:=Tcatalog.Create(self);
 planet:=Tplanet.Create(self);
-planet.OnAsteroidConfig:=OpenAsteroidConfig;
-planet.OnCometConfig:=OpenCometConfig;
+//planet.OnAsteroidConfig:=OpenAsteroidConfig;
+//planet.OnCometConfig:=OpenCometConfig;
 {$ifdef mswindows}
 DdeOpen := false;
 DdeEnqueue := false;
@@ -385,8 +402,10 @@ var i:integer;
 begin
 try
 writetrace('Exiting ...');
-if SaveConfigOnExit.checked then SaveDefault
-                            else SaveQuickSearch(configfile);
+SaveQuickSearch(configfile);
+if SaveConfigOnExit.checked and
+   (MessageDlg('Do you want to save the program setting now?',mtConfirmation,[mbYes, mbNo],0)=mrYes) then
+      SaveDefault;
 for i:=0 to MDIChildCount-1 do
    if MDIChildren[i] is Tf_chart then with (MDIChildren[i] as Tf_chart) do begin
       locked:=true;
@@ -893,7 +912,7 @@ cfgm.PrintLandscape:=true;
 cfgm.PrintMethod:=0;
 cfgm.PrintCmd1:=DefaultPrintCmd1;
 cfgm.PrintCmd2:=DefaultPrintCmd2;
-cfgm.PrintTmpPath:=expandfilename(DefaultTmpPath);
+cfgm.PrintTmpPath:=expandfilename(TempDir);
 cfgm.maximized:=true;
 cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
@@ -923,9 +942,9 @@ def_cfgsc.LabelMagDiff[1]:=3;
 def_cfgsc.LabelMagDiff[5]:=2;
 def_cfgplot.LabelColor[6]:=clYellow;
 def_cfgplot.LabelSize[6]:=12;
-def_cfgplot.contrast:=300;
-def_cfgplot.partsize:=1.5;
-def_cfgplot.magsize:=3;
+def_cfgplot.contrast:=400;
+def_cfgplot.partsize:=1.2;
+def_cfgplot.magsize:=4;
 def_cfgplot.saturation:=192;
 cfgm.Constellationfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constlabel.cla';
 cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'DefaultConstL.cln';
@@ -1503,7 +1522,6 @@ end;
 procedure Tf_main.SaveDefault;
 begin
 SavePrivateConfig(configfile);
-SaveQuickSearch(configfile);
 SaveChartConfig(configfile);
 end;
 
@@ -2373,13 +2391,13 @@ begin
 // end else
 if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
     if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
-       SetLpanel1('Try to initialyse MySQL database.');
-       OpenDBConfig(self);
-       if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
+       // SetLpanel1('Try to initialyse MySQL database.');
+       // OpenDBConfig(self);
+       // if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
           SetLpanel1('MySQL database not available.');
           def_cfgsc.ShowAsteroid:=false;
           def_cfgsc.ShowComet:=false;
-       end;
+       // end;
     end;
 end;
  except

@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 373
-  Top = 120
+  Left = 435
+  Top = 119
   Width = 652
   Height = 544
   BorderStyle = bsSizeToolWin
@@ -8000,9 +8000,9 @@ object f_config: Tf_config
           end
           object starvisual: TGroupBox
             Left = 8
-            Top = 216
+            Top = 192
             Width = 441
-            Height = 185
+            Height = 233
             Caption = 'Star Display  Properties'
             TabOrder = 2
             Visible = False
@@ -8039,11 +8039,11 @@ object f_config: Tf_config
               Top = 32
               Width = 225
               Height = 25
-              Max = 100
+              Max = 50
               Min = 1
               Orientation = trHorizontal
-              PageSize = 10
-              Frequency = 10
+              PageSize = 5
+              Frequency = 5
               Position = 1
               SelEnd = 0
               SelStart = 0
@@ -8057,11 +8057,11 @@ object f_config: Tf_config
               Top = 106
               Width = 225
               Height = 25
-              Max = 500
+              Max = 1000
               Min = 100
               Orientation = trHorizontal
-              PageSize = 50
-              Frequency = 50
+              PageSize = 100
+              Frequency = 100
               Position = 100
               SelEnd = 0
               SelStart = 0
@@ -8077,8 +8077,8 @@ object f_config: Tf_config
               Height = 25
               Max = 255
               Orientation = trHorizontal
-              PageSize = 25
-              Frequency = 25
+              PageSize = 28
+              Frequency = 28
               Position = 0
               SelEnd = 0
               SelStart = 0
@@ -8092,11 +8092,11 @@ object f_config: Tf_config
               Top = 69
               Width = 225
               Height = 25
-              Max = 50
+              Max = 100
               Min = 10
               Orientation = trHorizontal
-              PageSize = 5
-              Frequency = 5
+              PageSize = 10
+              Frequency = 10
               Position = 10
               SelEnd = 0
               SelStart = 0
@@ -8104,6 +8104,42 @@ object f_config: Tf_config
               TickMarks = tmBottomRight
               TickStyle = tsAuto
               OnChange = SizeContrastBarChange
+            end
+            object StarButton1: TButton
+              Left = 16
+              Top = 192
+              Width = 95
+              Height = 25
+              Caption = 'Default'
+              TabOrder = 4
+              OnClick = StarButton1Click
+            end
+            object StarButton2: TButton
+              Left = 120
+              Top = 192
+              Width = 95
+              Height = 25
+              Caption = 'Naked Eye'
+              TabOrder = 5
+              OnClick = StarButton2Click
+            end
+            object StarButton3: TButton
+              Left = 224
+              Top = 192
+              Width = 95
+              Height = 25
+              Caption = 'High Color'
+              TabOrder = 6
+              OnClick = StarButton3Click
+            end
+            object StarButton4: TButton
+              Left = 336
+              Top = 192
+              Width = 95
+              Height = 25
+              Caption = 'Black/White'
+              TabOrder = 7
+              OnClick = StarButton4Click
             end
           end
         end

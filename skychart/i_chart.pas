@@ -30,9 +30,17 @@ end;
 procedure Tf_chart.FormCreate(Sender: TObject);
 begin
 {$ifdef mswindows}
- Image1.Picture.Bitmap.pixelformat:=pf32bit;
+// Image1.Picture.Bitmap.pixelformat:=pf32bit;
  {$endif}
  sc:=Tskychart.Create(Image1);
+ with Image1.Canvas do begin
+ Brush.Color:=sc.plot.cfgplot.Color[0];
+ Pen.Color:=sc.plot.cfgplot.Color[0];
+ Brush.style:=bsSolid;
+ Pen.Mode:=pmCopy;
+ Pen.Style:=psSolid;
+ Rectangle(0,0,Width,Height);
+ end;
  // set initial value
  sc.cfgsc.racentre:=1.4;
  sc.cfgsc.decentre:=0;
@@ -59,6 +67,7 @@ end;
 
 procedure Tf_chart.FormDestroy(Sender: TObject);
 begin
+ locked:=true;
  sc.free;
  if indi1<>nil then begin
    indi1.onCoordChange:=nil;
@@ -184,6 +193,14 @@ RefreshTimer.Enabled:=false;
 RefreshTimer.Enabled:=true;
 Image1.Picture.Bitmap.Width:=Image1.width;
 Image1.Picture.Bitmap.Height:=Image1.Height;
+with Image1.Canvas do begin
+ Brush.Color:=sc.plot.cfgplot.Color[0];
+ Pen.Color:=sc.plot.cfgplot.Color[0];
+ Brush.style:=bsSolid;
+ Pen.Mode:=pmCopy;
+ Pen.Style:=psSolid;
+ Rectangle(0,0,Width,Height);
+end;
 if sc<>nil then sc.plot.init(Image1.width,Image1.height);
 end;
 
@@ -248,7 +265,7 @@ try
                    else Printer.Orientation:=poPortrait;
     // print
     Printer.BeginDoc;
-    sc.plot.cnv:=Printer.canvas;
+    sc.plot.destcnv:=Printer.canvas;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 75]);
     sc.plot.cfgchart.fontscale:=1;
@@ -268,7 +285,7 @@ try
        prtbmp.height:=11*printresol;
     end;
    // draw the chart to the bitmap
-    sc.plot.cnv:=prtbmp.canvas;
+    sc.plot.destcnv:=prtbmp.canvas;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 75]);
     sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawpen; // because we cannot set a dpi property for the bitmap
@@ -312,7 +329,7 @@ try
        prtbmp.height:=11*printresol;
     end;
    // draw the chart to the bitmap
-    sc.plot.cnv:=prtbmp.canvas;
+    sc.plot.destcnv:=prtbmp.canvas;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 75]);
     sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawpen; // because we cannot set a dpi property for the bitmap
@@ -339,7 +356,7 @@ finally
  sc.plot.cfgplot.autoskycolor:=saveskycolor;
  sc.plot.cfgplot.bgColor:=savebgcolor;
  // redraw to screen
- sc.plot.cnv:=Image1.canvas;
+ sc.plot.destcnv:=Image1.canvas;
  sc.plot.cfgchart.onprinter:=false;
  sc.plot.cfgchart.drawpen:=1;
  sc.plot.cfgchart.fontscale:=1;
@@ -722,51 +739,55 @@ case action of
      // move box
      inc(ZoomMove);
      if ZoomMove>2 then zoomstep:=3;
-     Image1.picture.bitmap.Canvas.Pen.Width := 1;
-     Image1.picture.bitmap.Canvas.Brush.Color:=clWhite;
-     Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
-     dx:=abs(XzoomD2-XzoomD1);
-     dy:=abs(YzoomD2-YzoomD1);
-     XZoom1:=x+DXZoom;
-     YZoom1:=y+DYZoom;
-     Xzoom2:=Xzoom1+dx;
-     YZoom2:=Yzoom1+dy;
-     x1:=round(minvalue([Xzoom1,Xzoom2]));
-     x2:=round(maxvalue([Xzoom1,Xzoom2]));
-     y1:=round(minvalue([Yzoom1,Yzoom2]));
-     y2:=round(maxvalue([Yzoom1,Yzoom2]));
-     XzoomD1:=x1;
-     XzoomD2:=x2;
-     YzoomD1:=y1;
-     YzoomD2:=y2;
-     Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+     with Image1.Canvas do begin
+      Pen.Width := 1;
+      Brush.Color:=clWhite;
+      DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+      dx:=abs(XzoomD2-XzoomD1);
+      dy:=abs(YzoomD2-YzoomD1);
+      XZoom1:=x+DXZoom;
+      YZoom1:=y+DYZoom;
+      Xzoom2:=Xzoom1+dx;
+      YZoom2:=Yzoom1+dy;
+      x1:=round(minvalue([Xzoom1,Xzoom2]));
+      x2:=round(maxvalue([Xzoom1,Xzoom2]));
+      y1:=round(minvalue([Yzoom1,Yzoom2]));
+      y2:=round(maxvalue([Yzoom1,Yzoom2]));
+      XzoomD1:=x1;
+      XzoomD2:=x2;
+      YzoomD1:=y1;
+      YzoomD2:=y2;
+      DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+     end;
      if assigned(Fshowcoord) then Fshowcoord(demtostr(rad2deg*abs(dx/sc.cfgsc.Bxglb)));
   end else begin
      // draw zoom box
      inc(ZoomMove);
      if ZoomMove<2 then exit;
-     Image1.picture.bitmap.Canvas.Pen.Width := 1;
-     Image1.picture.bitmap.Canvas.Brush.Color:=clWhite;
-     if Zoomstep>1 then Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
-     Xzoom2:=x;
-     Yzoom2:=Yzoom1+round(sgn(y-Yzoom1)*abs(Xzoom2-Xzoom1)/sc.cfgsc.windowratio);
-     x1:=round(minvalue([Xzoom1,Xzoom2]));
-     x2:=round(maxvalue([Xzoom1,Xzoom2]));
-     y1:=round(minvalue([Yzoom1,Yzoom2]));
-     y2:=round(maxvalue([Yzoom1,Yzoom2]));
-     XzoomD1:=x1;
-     XzoomD2:=x2;
-     YzoomD1:=y1;
-     YzoomD2:=y2;
-     Zoomstep:=2;
-     Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+     with Image1.Canvas do begin
+      Pen.Width := 1;
+      Brush.Color:=clWhite;
+      if Zoomstep>1 then DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+      Xzoom2:=x;
+      Yzoom2:=Yzoom1+round(sgn(y-Yzoom1)*abs(Xzoom2-Xzoom1)/sc.cfgsc.windowratio);
+      x1:=round(minvalue([Xzoom1,Xzoom2]));
+      x2:=round(maxvalue([Xzoom1,Xzoom2]));
+      y1:=round(minvalue([Yzoom1,Yzoom2]));
+      y2:=round(maxvalue([Yzoom1,Yzoom2]));
+      XzoomD1:=x1;
+      XzoomD2:=x2;
+      YzoomD1:=y1;
+      YzoomD2:=y2;
+      Zoomstep:=2;
+      DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+     end;
      if assigned(Fshowcoord) then Fshowcoord(demtostr(rad2deg*abs((XZoomD2-XZoomD1)/sc.cfgsc.Bxglb)));
      end
     end;
 3 : begin   // mouse up
     if zoomstep>=4 then begin
      // final confirmation
-     Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoom1,YZoom1,XZoom2,YZoom2));
+     Image1.Canvas.DrawFocusRect(Rect(XZoom1,YZoom1,XZoom2,YZoom2));
      Zoomstep:=0;
      //SkipMouseUp:=true;
      x1:=trunc(Minvalue([XZoom1,XZoom2])); x2:=trunc(Maxvalue([XZoom1,XZoom2]));
