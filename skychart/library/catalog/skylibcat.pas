@@ -31,6 +31,11 @@ PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
 Function sgn(x:Double):Double ;
 Function PadZeros(x : string ; l :integer) : string;
 function Jd(annee,mois,jour :INTEGER; Heure:double):double;
+function ecliptic(j:double):double;
+Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
+Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
+Procedure Gal2Eq(l,b: double; var ar,de : double);
+Procedure Eq2Gal(ar,de : double; var l,b: double);
 function words(str,sep : string; p,n : integer) : string;
 procedure FindRegionListWin(var Nsm : integer ;
                             var zonelst,SMlst : array of integer ;
@@ -96,6 +101,8 @@ const slashchar='\';
 {$endif}
 
 Const
+    deg2rad = pi/180;
+    rad2deg = 180/pi;
     jd2000 : double =2451545.0 ;
     jd1950 : double =2433282.4235;
     lg_reg_x7 : array [0..23,1..2] of integer = (
@@ -114,6 +121,7 @@ Const
 
 var
   arcentre,decentre,acentre,hcentre,CurrentJD,JDChart,JDcatalog,CurrentST,ObsLatitude: Double;
+  lcentre,bcentre,lecentre,becentre,ecl: Double;
   xmin,xmax,ymin,ymax,Xshift,Yshift,ProjPole : Integer;
   BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta: Double;
   projtype : char;
@@ -144,8 +152,6 @@ begin
    costheta:=ct;
    arcentre:=ac;
    decentre:=dc;
-   acentre:=azc;
-   hcentre:=hc;
    CurrentST:=sidt;
    CurrentJD:=jdt;
    JDChart:=jdc;
@@ -160,6 +166,21 @@ begin
    projtype:=projt;
    Northpoleinmap:=np;
    Southpoleinmap:=sp;
+   case ProjPole of
+   0..1: begin
+      acentre:=azc;    // alt-az
+      hcentre:=hc;
+      end;
+   2: begin
+      lcentre:=azc;    // galactic
+      bcentre:=hc;
+      end;
+   3: begin
+      lecentre:=azc;   // ecliptic
+      becentre:=hc;
+      ecl:=ecliptic(JDChart);
+      end;
+   end;
 end;
 
 Function PadZeros(x : string ; l :integer) : string;
@@ -221,17 +242,84 @@ hh:= radtodeg(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
 hh:=Rmod(hh+360,360);
 END ;
 
+function ecliptic(j:double):double;
+var u : double;
+begin
+{meeus91 21.3}
+u:=(j-jd2000)/3652500;
+result:=23.439291111 +(
+        -4680.93*u
+        -1.55*u*u
+        +1999.25*intpower(u,3)
+        -51.38*intpower(u,4)
+        -249.67*intpower(u,5)
+        -39.05*intpower(u,6)
+        +7.12*intpower(u,7)
+        +27.87*intpower(u,8)
+        +5.79*intpower(u,9)
+        +2.45*intpower(u,10)
+        )/3600;
+result:=deg2rad*result;        
+end;
+
+Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
+begin
+l:=deg2rad*l;
+b:=deg2rad*b;
+ar:=rad2deg*arctan2(sin(l)*cos(e)-tan(b)*sin(e),cos(l));
+de:=rad2deg*arcsin(sin(b)*cos(e)+cos(b)*sin(e)*sin(l));
+end;
+
+Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
+begin
+ar:=deg2rad*ar;
+de:=deg2rad*de;
+l:=rad2deg*arctan2(sin(ar)*cos(e)+tan(de)*sin(e),cos(ar));
+b:=rad2deg*arcsin(sin(de)*cos(e)-cos(de)*sin(e)*sin(ar));
+end;
+
+Procedure Gal2Eq(l,b: double; var ar,de : double);
+var dp : double;
+begin
+l:=deg2rad*(l-123);
+b:=deg2rad*b;
+dp:=deg2rad*27.4;
+ar:=12.25+rad2deg*arctan2(sin(l),cos(l)*sin(dp)-tan(b)*cos(dp));
+de:=rad2deg*arcsin(sin(b)*sin(dp)+cos(b)*cos(dp)*cos(l));
+precession(jd1950,JDchart,ar,de);
+end;
+
+Procedure Eq2Gal(ar,de : double; var l,b: double);
+var dp : double;
+begin
+precession(JDchart,jd1950,ar,de);
+ar:=deg2rad*(192.25-ar);
+dp:=deg2rad*27.4;
+l:=303-rad2deg*arctan2(sin(ar),cos(ar)*sin(dp)-tan(de)*cos(dp));
+l:=rmod(l+360,360);
+b:=rad2deg*arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar));
+end;
+
+
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double );
 Var a,r,hh,s1,c1,x,y,ac,dc : Double ;
 Begin
 case Projpole of
+   0 : begin
+       ac:=arcentre*15;
+       dc:=decentre;
+       end;
    1 : begin
        ac:=-acentre;
        dc:=hcentre;
        end;
-   else begin
-       ac:=arcentre*15;
-       dc:=decentre;
+   2 : begin
+       ac:=lcentre;
+       dc:=bcentre;
+       end;
+   3 : begin
+       ac:=lecentre;
+       dc:=becentre;
        end;
 end;
 x:=(xx*costheta-yy*sintheta) ;     // AIPS memo 27
@@ -246,7 +334,6 @@ case projtype of
     ar := ac - hh - 1E-7 ;
    end;
 'C' : begin
-//    ar:=rmod(ac-x+360,360);
     ar:=ac-x;
     de:=dc-y;
     if de>0 then de:=minvalue([de,89.999]) else de:=maxvalue([de,-89.999]);
@@ -271,7 +358,6 @@ case projtype of
     de:=radtodeg(arctan((cos(degtorad(ar-ac))*(y*c1+s1))/(c1-y*s1)));
     end;
 else begin
-    //showmessage(commsg[2]+' '+projtype);
     projtype:='A';
     r :=DegToRad(90-sqrt(x*x+y*y)) ;
     a := arctan2(x,y) ;
@@ -286,7 +372,17 @@ case Projpole of
        Hz2Eq(-ar,de,a,hh) ;
        ar:=15*CurrentST-a;
        de:=hh;
-       precession(currentjd,jd2000,ar,de);
+       precession(currentjd,jdChart,ar,de);
+       end;
+   2 : begin
+       Gal2Eq(ar,de,a,hh) ;
+       ar:=a;
+       de:=hh;
+       end;
+   3 : begin
+       Ecl2Eq(ar,de,ecl,a,hh) ;
+       ar:=a;
+       de:=hh;
        end;
 end;
 end ;
