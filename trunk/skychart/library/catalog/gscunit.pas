@@ -126,6 +126,7 @@ end;
 
 Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 if usecache then FindRegionList(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst)
@@ -201,6 +202,7 @@ end;
 
 Procedure OpenGSCwin(var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 if usecache then FindRegionListWin(nSM,zonelst,SMlst,hemislst)
             else FindRegionAllWin(nSM,zonelst,SMlst,hemislst);

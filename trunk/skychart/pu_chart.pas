@@ -29,11 +29,12 @@ uses cu_skychart, u_constant, u_util,
      Printers, Math,
      Windows, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList;
+     
+const maxundo=10;
 
 type
   Tf_chart = class(TForm)
     RefreshTimer: TTimer;
-    Image1: TImage;
     ActionList1: TActionList;
     zoomplus: TAction;
     zoomminus: TAction;
@@ -54,10 +55,19 @@ type
     zoomminusmove: TAction;
     FlipX: TAction;
     FlipY: TAction;
+    Panel1: TPanel;
+    Image1: TImage;
+    Undo: TAction;
+    Redo: TAction;
+    rot_plus: TAction;
+    rot_minus: TAction;
+    GridEQ: TAction;
+    GridAz: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Refresh;
+    procedure AutoRefresh;
     procedure FormResize(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure PrintChart(Sender: TObject);
@@ -87,6 +97,12 @@ type
     procedure FormActivate(Sender: TObject);
     procedure FlipXExecute(Sender: TObject);
     procedure FlipYExecute(Sender: TObject);
+    procedure UndoExecute(Sender: TObject);
+    procedure RedoExecute(Sender: TObject);
+    procedure rot_plusExecute(Sender: TObject);
+    procedure rot_minusExecute(Sender: TObject);
+    procedure GridEQExecute(Sender: TObject);
+    procedure GridAzExecute(Sender: TObject);
   private
     { Private declarations }
     movefactor,zoomfactor: double;
@@ -97,6 +113,8 @@ type
     { Public declarations }
     sc: Tskychart;
     maximize:boolean;
+    undolist : array[1..maxundo] of conf_skychart;
+    lastundo,curundo,validundo : integer;
   end;
 
 implementation

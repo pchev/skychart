@@ -157,6 +157,7 @@ end;
 
 Procedure OpenGSCF(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 currec:=0;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
@@ -244,6 +245,7 @@ end;
 
 Procedure OpenGSCFwin(var ok : boolean);
 begin
+JDCatalog:=jd2000;
 currec:=0;
 curSM:=1;
 if usecache then FindRegionListWin(nSM,zonelst,SMlst,hemislst)

@@ -21,7 +21,7 @@ Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall; external lib_catalo
 { Initialisation de la fenetre d'ecran pour utiliser OpenXXXWin
  Il n'est pas necessaire d'appeler cette fonction pour OpenXXX
  Cette fonction est utilisee en interne par Cartes du Ciel}
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall; external lib_catalog;
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall; external lib_catalog;
 
 { Pour tout les catalogues l'utilisation des procedure est la meme :
 
@@ -668,7 +668,7 @@ procedure CloseDSbase ; stdcall; external lib_catalog;
 
 //  Custom catalog
 const
- rtStar = 1;  rtVar  = 2; rtDbl  = 3; rtNeb  = 4; rlin   = 5;
+ rtStar = 1;  rtVar  = 2; rtDbl  = 3; rtNeb  = 4; rtlin   = 5;
  vsId=1; vsMagv=2; vsB_v=3; vsMagb=4; vsMagr=5; vsSp=6; vsPmra=7; vsPmdec=8; vsEpoch=9; vsPx=10; vsComment=11;
  vvId=1; vvMagmax=2; vvMagmin=3; vvPeriod=4; vvVartype=5; vvMaxepoch=6; vvRisetime=7;  vvSp=8; vvMagcode=9; vvComment=10;
  vdId=1; vdMag1=2; vdMag2=3; vdSep=4; vdPa=5; vdEpoch=6; vdCompname=7; vdSp1=8; vdSp2=9; vdComment=10;
@@ -683,6 +683,7 @@ TVneb  = array[1..11] of boolean;
 TVlin  = array[1..6] of boolean;
 TValid = array[1..10] of boolean;
 Tlabellst = array[1..35,0..10] of char;
+TSname = array[0..3] of char;
 Tstar =   packed record
           magv,b_v,magb,magr,pmra,pmdec,epoch,px : double;
           id,sp,comment : shortstring;
@@ -712,9 +713,10 @@ Toutlines = packed record
           valid : TVlin;
           end;
 TCatOption = packed record
-          ShortName: array[0..3] of char;
+          ShortName: TSname;
           rectype  : integer;
           Equinox  : double;
+          EquinoxJD: double;
           Epoch    : double;
           MagMax   : double;
           Size     : Integer;
@@ -723,7 +725,7 @@ TCatOption = packed record
           LogSize  : Integer;
           UsePrefix: byte;
           altname  : Tvalid;
-          flabel   : Tlabellst
+          flabel   : Tlabellst;
           end;
 GCatrec = packed record
           ra,dec   : double ;
@@ -740,7 +742,7 @@ GCatrec = packed record
 Type TCatHeader = packed record
                  hdrl     : Integer;
                  version  : array[0..7] of char;
-                 ShortName: array[0..3] of char;
+                 ShortName: TSname;
                  LongName : array[0..49] of char;
                  reclen   : Integer;
                  FileNum  : Integer;
@@ -759,7 +761,7 @@ Type TCatHeader = packed record
                  Spare2   : array[1..20] of integer;
                  flen     : array[1..35] of integer;
                  Spare3   : array[1..20] of integer;
-                 flabel   : array[1..35,0..10] of char;
+                 flabel   : Tlabellst;
                  Spare4   : array[1..20,0..10] of char;
                  end;
 

@@ -1,9 +1,9 @@
 object f_config: Tf_config
-  Left = 361
-  Top = 110
-  Width = 630
-  Height = 480
-  Caption = 'f_config'
+  Left = 161
+  Top = 77
+  Width = 634
+  Height = 487
+  Caption = 'Configuration'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,7 @@ object f_config: Tf_config
   Font.Style = []
   OldCreateOrder = False
   Scaled = False
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -21,41 +22,500 @@ object f_config: Tf_config
     Top = 0
     Width = 136
     Height = 420
+    HideSelection = False
     Indent = 19
     ReadOnly = True
     TabOrder = 0
     OnChange = TreeView1Change
     Items.Data = {
-      050000001E0000000000000000000000FFFFFFFFFFFFFFFF0000000002000000
-      054368617274280000000000000000000000FFFFFFFFFFFFFFFF000000000000
-      00000F4669656C64206F6620766973696F6E260000000000000000000000FFFF
-      FFFFFFFFFFFF00000000000000000D4F626A6563742046696C74657223000000
-      0000000000000000FFFFFFFFFFFFFFFF00000000030000000A436174616C6F67
-      756573200000000000000000000000FFFFFFFFFFFFFFFF000000000000000007
-      47656E657269631C0000000000000000000000FFFFFFFFFFFFFFFF0000000002
-      000000034344431E0000000000000000000000FFFFFFFFFFFFFFFF0000000000
-      000000055374617273200000000000000000000000FFFFFFFFFFFFFFFF000000
-      0000000000074E6562756C6165210000000000000000000000FFFFFFFFFFFFFF
-      FF00000000000000000845787465726E616C250000000000000000000000FFFF
-      FFFFFFFFFFFF00000000030000000C536F6C61722053797374656D2000000000
-      00000000000000FFFFFFFFFFFFFFFF000000000000000007506C616E6574731F
-      0000000000000000000000FFFFFFFFFFFFFFFF000000000000000006436F6D65
-      7473220000000000000000000000FFFFFFFFFFFFFFFF00000000000000000941
-      737465726F696473200000000000000000000000FFFFFFFFFFFFFFFF00000000
-      0400000007446973706C61791E0000000000000000000000FFFFFFFFFFFFFFFF
-      000000000000000005466F6E74731E0000000000000000000000FFFFFFFFFFFF
-      FFFF000000000000000005436F6C6F721E0000000000000000000000FFFFFFFF
-      FFFFFFFF0000000000000000054C696E65731F0000000000000000000000FFFF
-      FFFFFFFFFFFF0000000000000000064C6162656C731F00000000000000000000
-      00FFFFFFFFFFFFFFFF000000000000000006496D61676573}
+      06000000220000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
+      09446174652F54696D65280000000000000000000000FFFFFFFFFFFFFFFF0000
+      0000000000000F54696D652053696D756C6174696F6E1E000000000000000000
+      0000FFFFFFFFFFFFFFFF00000000030000000543686172742800000000000000
+      00000000FFFFFFFFFFFFFFFF00000000000000000F4669656C64206F66207669
+      73696F6E230000000000000000000000FFFFFFFFFFFFFFFF0000000000000000
+      0A50726F6A656374696F6E260000000000000000000000FFFFFFFFFFFFFFFF00
+      000000000000000D4F626A6563742046696C7465722300000000000000000000
+      00FFFFFFFFFFFFFFFF00000000020000000A436174616C6F6775657328000000
+      0000000000000000FFFFFFFFFFFFFFFF00000000000000000F436174616C6F67
+      2053657474696E672A0000000000000000000000FFFFFFFFFFFFFFFF00000000
+      030000001143444320636F6D7061746962696C6974791E000000000000000000
+      0000FFFFFFFFFFFFFFFF00000000000000000553746172732000000000000000
+      00000000FFFFFFFFFFFFFFFF0000000000000000074E6562756C616521000000
+      0000000000000000FFFFFFFFFFFFFFFF00000000000000000845787465726E61
+      6C250000000000000000000000FFFFFFFFFFFFFFFF00000000030000000C536F
+      6C61722053797374656D200000000000000000000000FFFFFFFFFFFFFFFF0000
+      00000000000007506C616E6574731F0000000000000000000000FFFFFFFFFFFF
+      FFFF000000000000000006436F6D657473220000000000000000000000FFFFFF
+      FFFFFFFFFF00000000000000000941737465726F696473200000000000000000
+      000000FFFFFFFFFFFFFFFF000000000400000007446973706C61791E00000000
+      00000000000000FFFFFFFFFFFFFFFF000000000000000005466F6E74731E0000
+      000000000000000000FFFFFFFFFFFFFFFF000000000000000005436F6C6F721E
+      0000000000000000000000FFFFFFFFFFFFFFFF0000000000000000054C696E65
+      731F0000000000000000000000FFFFFFFFFFFFFFFF0000000000000000064C61
+      62656C731F0000000000000000000000FFFFFFFFFFFFFFFF0000000000000000
+      06496D61676573}
   end
   object PageControl1: TPageControl
     Left = 144
     Top = 0
     Width = 474
     Height = 420
-    ActivePage = p_image
+    ActivePage = p_projection
     TabOrder = 1
+    object p_time: TTabSheet
+      Caption = 'p_time'
+      ImageIndex = 19
+      TabVisible = False
+      object Label142: TLabel
+        Left = 224
+        Top = 50
+        Width = 42
+        Height = 13
+        Caption = 'Seconds'
+      end
+      object Label147: TLabel
+        Left = 0
+        Top = 0
+        Width = 59
+        Height = 13
+        Caption = 'Time Setting'
+      end
+      object Panel11: TPanel
+        Left = 32
+        Top = 72
+        Width = 409
+        Height = 105
+        TabOrder = 6
+        object Label155: TLabel
+          Left = 8
+          Top = 22
+          Width = 23
+          Height = 13
+          Caption = 'Date'
+        end
+        object Label156: TLabel
+          Left = 8
+          Top = 46
+          Width = 23
+          Height = 13
+          Caption = 'Time'
+        end
+        object Label157: TLabel
+          Left = 8
+          Top = 70
+          Width = 51
+          Height = 13
+          Caption = 'Time Zone'
+        end
+        object LabelDate: TLabel
+          Left = 80
+          Top = 22
+          Width = 49
+          Height = 13
+          Caption = 'LabelDate'
+        end
+        object LabelTime: TLabel
+          Left = 80
+          Top = 46
+          Width = 49
+          Height = 13
+          Caption = 'LabelTime'
+        end
+        object LabelTimezone: TLabel
+          Left = 80
+          Top = 70
+          Width = 72
+          Height = 13
+          Caption = 'LabelTimezone'
+        end
+      end
+      object CheckBox1: TCheckBox
+        Left = 40
+        Top = 24
+        Width = 177
+        Height = 17
+        Caption = 'Use system time'
+        TabOrder = 0
+        OnClick = CheckBox1Click
+      end
+      object CheckBox2: TCheckBox
+        Left = 40
+        Top = 48
+        Width = 129
+        Height = 17
+        Caption = 'Auto-refresh every '
+        TabOrder = 1
+        OnClick = CheckBox2Click
+      end
+      object Panel7: TPanel
+        Left = 32
+        Top = 216
+        Width = 409
+        Height = 65
+        TabOrder = 2
+        object Label134: TLabel
+          Left = 8
+          Top = 31
+          Width = 97
+          Height = 13
+          Caption = 'Local Time   =  UT +'
+        end
+        object Label148: TLabel
+          Left = 8
+          Top = 8
+          Width = 51
+          Height = 13
+          Caption = 'Time Zone'
+        end
+        object Label149: TLabel
+          Left = 200
+          Top = 32
+          Width = 142
+          Height = 13
+          Caption = '(Negative East of GreenWich)'
+        end
+        object tz: TFloatEdit
+          Left = 120
+          Top = 26
+          Width = 41
+          Height = 22
+          Hint = '-12..12'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnChange = tzChange
+          MinValue = -12
+          MaxValue = 12
+          Digits = 3
+          NumericType = ntFixed
+        end
+      end
+      object Panel8: TPanel
+        Left = 32
+        Top = 288
+        Width = 409
+        Height = 97
+        TabOrder = 3
+        object Label135: TLabel
+          Left = 8
+          Top = 33
+          Width = 51
+          Height = 13
+          Caption = 'DT - UT  : '
+        end
+        object Tdt_Ut: TLabel
+          Left = 77
+          Top = 33
+          Width = 24
+          Height = 13
+          Caption = '0000'
+        end
+        object Label136: TLabel
+          Left = 115
+          Top = 33
+          Width = 42
+          Height = 13
+          Caption = 'Seconds'
+        end
+        object Label150: TLabel
+          Left = 8
+          Top = 8
+          Width = 212
+          Height = 13
+          Caption = 'Dynamic Time difference with Universal Time'
+        end
+        object CheckBox4: TCheckBox
+          Left = 8
+          Top = 64
+          Width = 193
+          Height = 17
+          Caption = 'Use another DT-UT value'
+          TabOrder = 0
+          OnClick = CheckBox4Click
+        end
+        object dt_ut: TLongEdit
+          Left = 208
+          Top = 61
+          Width = 105
+          Height = 22
+          Hint = '-99999999..99999999'
+          Enabled = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnChange = dt_utChange
+          Value = 0
+          MinValue = -99999999
+          MaxValue = 99999999
+        end
+      end
+      object Panel9: TPanel
+        Left = 32
+        Top = 72
+        Width = 409
+        Height = 137
+        TabOrder = 4
+        object Label137: TLabel
+          Left = 8
+          Top = 70
+          Width = 23
+          Height = 13
+          Caption = 'Time'
+        end
+        object Label139: TLabel
+          Left = 112
+          Top = 52
+          Width = 9
+          Height = 13
+          Caption = 'M'
+        end
+        object Label141: TLabel
+          Left = 152
+          Top = 52
+          Width = 7
+          Height = 13
+          Caption = 'S'
+        end
+        object Label138: TLabel
+          Left = 56
+          Top = 52
+          Width = 8
+          Height = 13
+          Caption = 'H'
+        end
+        object Label143: TLabel
+          Left = 56
+          Top = 6
+          Width = 7
+          Height = 13
+          Caption = 'Y'
+        end
+        object Label144: TLabel
+          Left = 112
+          Top = 6
+          Width = 9
+          Height = 13
+          Caption = 'M'
+        end
+        object Label145: TLabel
+          Left = 152
+          Top = 6
+          Width = 8
+          Height = 13
+          Caption = 'D'
+        end
+        object Label140: TLabel
+          Left = 8
+          Top = 22
+          Width = 23
+          Height = 13
+          Caption = 'Date'
+        end
+        object BitBtn4: TBitBtn
+          Left = 40
+          Top = 104
+          Width = 177
+          Height = 25
+          Caption = 'Actual system time'
+          TabOrder = 0
+          OnClick = BitBtn4Click
+        end
+        object ADBC: TRadioGroup
+          Left = 216
+          Top = 12
+          Width = 89
+          Height = 33
+          Columns = 2
+          Items.Strings = (
+            'AD'
+            'BC')
+          TabOrder = 1
+          OnClick = DateChange
+        end
+        object d_year: TSpinEdit
+          Left = 56
+          Top = 19
+          Width = 57
+          Height = 22
+          MaxValue = 20000
+          MinValue = 0
+          TabOrder = 2
+          Value = 2003
+          OnChange = DateChange
+        end
+        object d_month: TSpinEdit
+          Left = 112
+          Top = 19
+          Width = 41
+          Height = 22
+          MaxValue = 12
+          MinValue = 1
+          TabOrder = 3
+          Value = 1
+          OnChange = DateChange
+        end
+        object d_day: TSpinEdit
+          Left = 152
+          Top = 19
+          Width = 41
+          Height = 22
+          MaxValue = 31
+          MinValue = 1
+          TabOrder = 4
+          Value = 1
+          OnChange = DateChange
+        end
+        object t_hour: TSpinEdit
+          Left = 56
+          Top = 65
+          Width = 41
+          Height = 22
+          MaxValue = 23
+          MinValue = 0
+          TabOrder = 5
+          Value = 0
+          OnChange = TimeChange
+        end
+        object t_min: TSpinEdit
+          Left = 112
+          Top = 65
+          Width = 41
+          Height = 22
+          MaxValue = 59
+          MinValue = 0
+          TabOrder = 6
+          Value = 0
+          OnChange = TimeChange
+        end
+        object t_sec: TSpinEdit
+          Left = 152
+          Top = 65
+          Width = 41
+          Height = 22
+          MaxValue = 59
+          MinValue = 0
+          TabOrder = 7
+          Value = 0
+          OnChange = TimeChange
+        end
+      end
+      object LongEdit2: TLongEdit
+        Left = 176
+        Top = 45
+        Width = 41
+        Height = 22
+        Hint = '0..86400'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 5
+        OnChange = LongEdit2Change
+        Value = 1
+        MaxValue = 86400
+      end
+    end
+    object p_simulation: TTabSheet
+      Caption = 'p_simulation'
+      ImageIndex = 20
+      TabVisible = False
+      object Label146: TLabel
+        Left = 0
+        Top = 0
+        Width = 110
+        Height = 13
+        Caption = 'Time Simulation Setting'
+      end
+      object Panel6: TPanel
+        Left = 32
+        Top = 88
+        Width = 409
+        Height = 185
+        TabOrder = 0
+        TabStop = True
+        object Label131: TLabel
+          Left = 8
+          Top = 8
+          Width = 81
+          Height = 16
+          Caption = 'Simulation :'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label132: TLabel
+          Left = 136
+          Top = 37
+          Width = 21
+          Height = 13
+          Caption = 'Pas '
+        end
+        object Label133: TLabel
+          Left = 8
+          Top = 37
+          Width = 42
+          Height = 13
+          Caption = 'Nombres'
+        end
+        object SpeedButton7: TSpeedButton
+          Left = 332
+          Top = 33
+          Width = 65
+          Height = 25
+          Caption = 'Reset'
+          Layout = blGlyphTop
+          NumGlyphs = 2
+        end
+        object nbj: TEdit
+          Left = 192
+          Top = 35
+          Width = 41
+          Height = 21
+          TabOrder = 2
+          Text = 'nbj'
+        end
+        object nbpas: TEdit
+          Left = 88
+          Top = 35
+          Width = 33
+          Height = 21
+          TabOrder = 0
+          Text = '1'
+        end
+        object UpDown1: TUpDown
+          Left = 121
+          Top = 35
+          Width = 15
+          Height = 21
+          Associate = nbpas
+          Min = 1
+          Position = 1
+          TabOrder = 1
+          Wrap = False
+        end
+        object RadioGroup5: TRadioGroup
+          Left = 240
+          Top = 16
+          Width = 81
+          Height = 65
+          Items.Strings = (
+            'jours'
+            'heures'
+            'minutes')
+          TabOrder = 3
+        end
+        object CheckBox3: TCheckBox
+          Left = 88
+          Top = 64
+          Width = 145
+          Height = 17
+          Caption = 'Lignes de connexion'
+          TabOrder = 4
+        end
+      end
+    end
     object p_chart: TTabSheet
       Caption = 'p_chart'
       ImageIndex = 14
@@ -66,6 +526,154 @@ object f_config: Tf_config
         Width = 61
         Height = 13
         Caption = 'Chart Setting'
+      end
+      object Panel1: TPanel
+        Left = 9
+        Top = 152
+        Width = 449
+        Height = 105
+        BevelInner = bvRaised
+        BevelOuter = bvNone
+        TabOrder = 0
+        object Label68: TLabel
+          Left = 404
+          Top = 74
+          Width = 25
+          Height = 13
+          Caption = 'years'
+        end
+        object Label113: TLabel
+          Left = 8
+          Top = 16
+          Width = 254
+          Height = 13
+          Caption = 'Stars proper motion options (if available in the catalog)'
+        end
+        object PMBox: TCheckBox
+          Left = 8
+          Top = 40
+          Width = 425
+          Height = 17
+          Caption = 
+            'Use the proper motion to correct the position for the current da' +
+            'te'
+          TabOrder = 0
+          OnClick = PMBoxClick
+        end
+        object DrawPmBox: TCheckBox
+          Left = 8
+          Top = 72
+          Width = 345
+          Height = 17
+          Caption = 'Draw a line that represent the proper motion for the next '
+          TabOrder = 1
+          OnClick = DrawPmBoxClick
+        end
+        object lDrawPMy: TLongEdit
+          Left = 360
+          Top = 69
+          Width = 40
+          Height = 22
+          Hint = '-99999..99999'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          OnChange = lDrawPMyChange
+          Value = 0
+          MinValue = -99999
+          MaxValue = 99999
+        end
+      end
+      object Panel10: TPanel
+        Left = 8
+        Top = 24
+        Width = 449
+        Height = 121
+        TabOrder = 1
+        object Label151: TLabel
+          Left = 16
+          Top = 8
+          Width = 178
+          Height = 13
+          Caption = 'Equatorial Chart  Coordinates Equinox'
+        end
+        object Label152: TLabel
+          Left = 192
+          Top = 46
+          Width = 41
+          Height = 13
+          Caption = 'Equinox:'
+        end
+        object equinoxtype: TRadioGroup
+          Left = 16
+          Top = 24
+          Width = 161
+          Height = 89
+          ItemIndex = 0
+          Items.Strings = (
+            'Standard Equinox'
+            'Fixed Equinox'
+            'Equinox of the date')
+          TabOrder = 0
+          OnClick = equinoxtypeClick
+        end
+        object equinox2: TFloatEdit
+          Left = 260
+          Top = 41
+          Width = 49
+          Height = 22
+          Hint = '-20000..20000'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          Visible = False
+          OnChange = equinox2Change
+          Value = 1975
+          MinValue = -20000
+          MaxValue = 20000
+          Digits = 8
+          NumericType = ntFixed
+        end
+        object equinox1: TComboBox
+          Left = 260
+          Top = 42
+          Width = 65
+          Height = 21
+          ItemHeight = 13
+          ItemIndex = 0
+          TabOrder = 2
+          Text = 'J2000'
+          OnChange = equinox1Change
+          Items.Strings = (
+            'J2000'
+            'B1950')
+        end
+      end
+      object RadioGroup6: TRadioGroup
+        Left = 8
+        Top = 264
+        Width = 449
+        Height = 49
+        Caption = 'Orientation des cartes'
+        Columns = 2
+        ItemIndex = 0
+        Items.Strings = (
+          'Projection polaire'
+          'Projection z'#233'nithale ')
+        TabOrder = 2
+      end
+      object RadioGroup7: TRadioGroup
+        Left = 9
+        Top = 320
+        Width = 448
+        Height = 49
+        Caption = 'Origine de l'#39'azimut'
+        Columns = 2
+        ItemIndex = 0
+        Items.Strings = (
+          '0 = Sud'
+          '0 = Nord')
+        TabOrder = 3
       end
     end
     object p_fov: TTabSheet
@@ -79,350 +687,701 @@ object f_config: Tf_config
         Height = 13
         Caption = 'Field of Vision Setting'
       end
-      object GroupBox7: TGroupBox
-        Left = 9
-        Top = 32
-        Width = 449
-        Height = 377
+      object Label96: TLabel
+        Left = 80
+        Top = 147
+        Width = 9
+        Height = 16
+        Caption = '1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label97: TLabel
+        Left = 80
+        Top = 176
+        Width = 9
+        Height = 16
+        Caption = '2'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label98: TLabel
+        Left = 80
+        Top = 205
+        Width = 9
+        Height = 16
+        Caption = '3'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label99: TLabel
+        Left = 80
+        Top = 234
+        Width = 9
+        Height = 16
+        Caption = '4'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label100: TLabel
+        Left = 272
+        Top = 90
+        Width = 9
+        Height = 16
+        Caption = '5'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label101: TLabel
+        Left = 272
+        Top = 118
+        Width = 9
+        Height = 16
+        Caption = '6'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label102: TLabel
+        Left = 272
+        Top = 147
+        Width = 9
+        Height = 16
+        Caption = '7'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label103: TLabel
+        Left = 272
+        Top = 176
+        Width = 9
+        Height = 16
+        Caption = '8'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label104: TLabel
+        Left = 272
+        Top = 205
+        Width = 9
+        Height = 16
+        Caption = '9'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label105: TLabel
+        Left = 264
+        Top = 234
+        Width = 17
+        Height = 16
+        Caption = '10'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label106: TLabel
+        Left = 29
+        Top = 64
+        Width = 62
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Field Number'
+      end
+      object Label107: TLabel
+        Left = 120
+        Top = 64
+        Width = 53
+        Height = 13
+        Caption = 'Field Width'
+      end
+      object Label114: TLabel
+        Left = 80
+        Top = 118
+        Width = 9
+        Height = 16
+        Caption = '0'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label153: TLabel
+        Left = 221
+        Top = 64
+        Width = 62
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Field Number'
+      end
+      object Label154: TLabel
+        Left = 312
+        Top = 64
+        Width = 53
+        Height = 13
+        Caption = 'Field Width'
+      end
+      object fw1: TFloatEdit
+        Tag = 1
+        Left = 120
+        Top = 144
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 0
-        object Label96: TLabel
-          Left = 144
-          Top = 90
-          Width = 9
-          Height = 16
-          Caption = '1'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label97: TLabel
-          Left = 144
-          Top = 114
-          Width = 9
-          Height = 16
-          Caption = '2'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label98: TLabel
-          Left = 144
-          Top = 138
-          Width = 9
-          Height = 16
-          Caption = '3'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label99: TLabel
-          Left = 144
-          Top = 162
-          Width = 9
-          Height = 16
-          Caption = '4'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label100: TLabel
-          Left = 144
-          Top = 186
-          Width = 9
-          Height = 16
-          Caption = '5'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label101: TLabel
-          Left = 144
-          Top = 210
-          Width = 9
-          Height = 16
-          Caption = '6'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label102: TLabel
-          Left = 144
-          Top = 234
-          Width = 9
-          Height = 16
-          Caption = '7'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label103: TLabel
-          Left = 144
-          Top = 258
-          Width = 9
-          Height = 16
-          Caption = '8'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label104: TLabel
-          Left = 144
-          Top = 282
-          Width = 9
-          Height = 16
-          Caption = '9'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label105: TLabel
-          Left = 136
-          Top = 306
-          Width = 17
-          Height = 16
-          Caption = '10'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label106: TLabel
-          Left = 93
-          Top = 16
-          Width = 62
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Field Number'
-        end
-        object Label107: TLabel
-          Left = 184
-          Top = 16
-          Width = 53
-          Height = 13
-          Caption = 'Field Width'
-        end
-        object Label114: TLabel
-          Left = 144
-          Top = 66
-          Width = 9
-          Height = 16
-          Caption = '0'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object fw1: TFloatEdit
-          Tag = 1
-          Left = 184
-          Top = 87
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          OnChange = FWChange
-          Value = 1
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw2: TFloatEdit
-          Tag = 2
-          Left = 184
-          Top = 111
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-          OnChange = FWChange
-          Value = 2
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw3: TFloatEdit
-          Tag = 3
-          Left = 184
-          Top = 135
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 2
-          OnChange = FWChange
-          Value = 5
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw4: TFloatEdit
-          Tag = 4
-          Left = 184
-          Top = 159
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          OnChange = FWChange
-          Value = 10
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw5: TFloatEdit
-          Tag = 5
-          Left = 184
-          Top = 183
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 4
-          OnChange = FWChange
-          Value = 15
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw6: TFloatEdit
-          Tag = 6
-          Left = 184
-          Top = 207
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 5
-          OnChange = FWChange
-          Value = 25
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw7: TFloatEdit
-          Tag = 7
-          Left = 184
-          Top = 231
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 6
-          OnChange = FWChange
-          Value = 45
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw8: TFloatEdit
-          Tag = 8
-          Left = 184
-          Top = 255
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 7
-          OnChange = FWChange
-          Value = 90
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw9: TFloatEdit
-          Tag = 9
-          Left = 184
-          Top = 279
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 8
-          OnChange = FWChange
-          Value = 180
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw10: TFloatEdit
-          Left = 184
-          Top = 303
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          TabStop = False
-          Color = clBtnFace
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
-          TabOrder = 9
-          Value = 360
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw0: TFloatEdit
-          Left = 184
-          Top = 63
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 10
-          OnChange = FWChange
-          Value = 0.5
-          MaxValue = 360
-          NumericType = ntFixed
-        end
-        object fw00: TFloatEdit
-          Left = 184
-          Top = 39
-          Width = 40
-          Height = 22
-          Hint = '0..360'
-          TabStop = False
-          Color = clBtnFace
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
-          TabOrder = 11
-          MaxValue = 360
-          NumericType = ntFixed
-        end
+        OnChange = FWChange
+        Value = 1
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw2: TFloatEdit
+        Tag = 2
+        Left = 120
+        Top = 173
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        OnChange = FWChange
+        Value = 2
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw3: TFloatEdit
+        Tag = 3
+        Left = 120
+        Top = 202
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        OnChange = FWChange
+        Value = 5
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw4: TFloatEdit
+        Tag = 4
+        Left = 120
+        Top = 231
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 3
+        OnChange = FWChange
+        Value = 10
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw5: TFloatEdit
+        Tag = 5
+        Left = 312
+        Top = 87
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 4
+        OnChange = FWChange
+        Value = 15
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw6: TFloatEdit
+        Tag = 6
+        Left = 312
+        Top = 115
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 5
+        OnChange = FWChange
+        Value = 25
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw7: TFloatEdit
+        Tag = 7
+        Left = 312
+        Top = 144
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 6
+        OnChange = FWChange
+        Value = 45
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw8: TFloatEdit
+        Tag = 8
+        Left = 312
+        Top = 173
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 7
+        OnChange = FWChange
+        Value = 90
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw9: TFloatEdit
+        Tag = 9
+        Left = 312
+        Top = 202
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 8
+        OnChange = FWChange
+        Value = 180
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw10: TFloatEdit
+        Left = 312
+        Top = 231
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        TabStop = False
+        Color = clBtnFace
+        ParentShowHint = False
+        ReadOnly = True
+        ShowHint = True
+        TabOrder = 9
+        Value = 360
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw0: TFloatEdit
+        Left = 120
+        Top = 115
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 10
+        OnChange = FWChange
+        Value = 0.5
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+      object fw00: TFloatEdit
+        Left = 120
+        Top = 87
+        Width = 40
+        Height = 22
+        Hint = '0..360'
+        TabStop = False
+        Color = clBtnFace
+        ParentShowHint = False
+        ReadOnly = True
+        ShowHint = True
+        TabOrder = 11
+        MaxValue = 360
+        NumericType = ntFixed
+      end
+    end
+    object p_projection: TTabSheet
+      Tag = 1
+      Caption = 'p_projection'
+      ImageIndex = 21
+      TabVisible = False
+      object Label158: TLabel
+        Left = 0
+        Top = 0
+        Width = 83
+        Height = 13
+        Caption = 'Projection Setting'
+      end
+      object Label161: TLabel
+        Left = 72
+        Top = 123
+        Width = 9
+        Height = 16
+        Caption = '1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label162: TLabel
+        Left = 72
+        Top = 152
+        Width = 9
+        Height = 16
+        Caption = '2'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label163: TLabel
+        Left = 72
+        Top = 181
+        Width = 9
+        Height = 16
+        Caption = '3'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label164: TLabel
+        Left = 72
+        Top = 210
+        Width = 9
+        Height = 16
+        Caption = '4'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label165: TLabel
+        Left = 29
+        Top = 64
+        Width = 62
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Field Number'
+      end
+      object Label166: TLabel
+        Left = 72
+        Top = 94
+        Width = 9
+        Height = 16
+        Caption = '0'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label159: TLabel
+        Left = 264
+        Top = 94
+        Width = 9
+        Height = 16
+        Caption = '5'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label160: TLabel
+        Left = 264
+        Top = 123
+        Width = 9
+        Height = 16
+        Caption = '6'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label167: TLabel
+        Left = 264
+        Top = 152
+        Width = 9
+        Height = 16
+        Caption = '7'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label168: TLabel
+        Left = 264
+        Top = 181
+        Width = 9
+        Height = 16
+        Caption = '8'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label169: TLabel
+        Left = 264
+        Top = 210
+        Width = 9
+        Height = 16
+        Caption = '9'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label170: TLabel
+        Left = 256
+        Top = 239
+        Width = 17
+        Height = 16
+        Caption = '10'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label171: TLabel
+        Left = 221
+        Top = 64
+        Width = 62
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Field Number'
+      end
+      object Label172: TLabel
+        Left = 104
+        Top = 64
+        Width = 47
+        Height = 13
+        Caption = 'Projection'
+      end
+      object Label173: TLabel
+        Left = 304
+        Top = 64
+        Width = 47
+        Height = 13
+        Caption = 'Projection'
+      end
+      object ComboBox2: TComboBox
+        Tag = 1
+        Left = 104
+        Top = 121
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 0
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'TAN'
+          'SIN')
+      end
+      object ComboBox1: TComboBox
+        Left = 104
+        Top = 92
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 1
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'TAN'
+          'SIN')
+      end
+      object ComboBox3: TComboBox
+        Tag = 2
+        Left = 104
+        Top = 150
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 2
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'TAN'
+          'SIN')
+      end
+      object ComboBox4: TComboBox
+        Tag = 3
+        Left = 104
+        Top = 179
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 3
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'CAR')
+      end
+      object ComboBox5: TComboBox
+        Tag = 4
+        Left = 105
+        Top = 208
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 4
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'CAR')
+      end
+      object Edit8: TEdit
+        Left = 305
+        Top = 237
+        Width = 73
+        Height = 21
+        TabStop = False
+        ReadOnly = True
+        TabOrder = 5
+        Text = 'CAR'
+      end
+      object ComboBox6: TComboBox
+        Tag = 5
+        Left = 304
+        Top = 92
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 6
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'TAN'
+          'SIN')
+      end
+      object ComboBox7: TComboBox
+        Tag = 6
+        Left = 304
+        Top = 121
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 7
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'TAN'
+          'SIN')
+      end
+      object ComboBox8: TComboBox
+        Tag = 7
+        Left = 304
+        Top = 150
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 8
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'TAN'
+          'SIN')
+      end
+      object ComboBox9: TComboBox
+        Tag = 8
+        Left = 304
+        Top = 179
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 9
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'TAN'
+          'SIN')
+      end
+      object ComboBox10: TComboBox
+        Tag = 9
+        Left = 304
+        Top = 208
+        Width = 73
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 10
+        Text = 'ARC'
+        OnChange = ProjectionChange
+        Items.Strings = (
+          'ARC'
+          'TAN'
+          'SIN')
       end
     end
     object p_filter: TTabSheet
@@ -734,6 +1693,13 @@ object f_config: Tf_config
         Height = 200
         Caption = 'Nebulae Filter'
         TabOrder = 1
+        object Label115: TLabel
+          Left = 376
+          Top = 23
+          Width = 36
+          Height = 13
+          Caption = 'minutes'
+        end
         object NebBox: TCheckBox
           Left = 8
           Top = 22
@@ -746,9 +1712,9 @@ object f_config: Tf_config
         object BigNebBox: TCheckBox
           Left = 160
           Top = 21
-          Width = 265
+          Width = 161
           Height = 17
-          Caption = 'Show object widther than 200'#39
+          Caption = 'Hide object widther than'
           TabOrder = 1
           OnClick = BigNebBoxClick
         end
@@ -1118,6 +2084,19 @@ object f_config: Tf_config
             MaxValue = 1000
           end
         end
+        object fBigNebLimit: TLongEdit
+          Left = 328
+          Top = 18
+          Width = 41
+          Height = 22
+          Hint = '0..20000'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          OnChange = fBigNebLimitChange
+          Value = 1
+          MaxValue = 20000
+        end
       end
     end
     object p_catalog: TTabSheet
@@ -1130,60 +2109,6 @@ object f_config: Tf_config
         Width = 72
         Height = 13
         Caption = 'Catalog Setting'
-      end
-      object Panel1: TPanel
-        Left = 9
-        Top = 24
-        Width = 449
-        Height = 105
-        BevelInner = bvRaised
-        BevelOuter = bvNone
-        TabOrder = 0
-        object Label68: TLabel
-          Left = 404
-          Top = 74
-          Width = 25
-          Height = 13
-          Caption = 'years'
-        end
-        object Label113: TLabel
-          Left = 8
-          Top = 16
-          Width = 254
-          Height = 13
-          Caption = 'Stars proper motion options (if available in the catalog)'
-        end
-        object PMBox: TCheckBox
-          Left = 8
-          Top = 40
-          Width = 425
-          Height = 17
-          Caption = 
-            'Use the proper motion to correct the position for the current da' +
-            'te'
-          TabOrder = 0
-        end
-        object DrawPmBox: TCheckBox
-          Left = 8
-          Top = 72
-          Width = 345
-          Height = 17
-          Caption = 'Draw a line that represent the proper motion for the next '
-          TabOrder = 1
-        end
-        object lDrawPMy: TLongEdit
-          Left = 360
-          Top = 69
-          Width = 40
-          Height = 22
-          Hint = '-9999..9999'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 2
-          Value = 0
-          MinValue = -9999
-          MaxValue = 9999
-        end
       end
     end
     object p_catgen: TTabSheet
@@ -1210,6 +2135,7 @@ object f_config: Tf_config
         Height = 25
         Caption = 'New'
         TabOrder = 0
+        OnClick = BitBtn33Click
       end
       object BitBtn35: TBitBtn
         Left = 248
@@ -1218,6 +2144,7 @@ object f_config: Tf_config
         Height = 25
         Caption = 'Delete'
         TabOrder = 1
+        OnClick = BitBtn35Click
       end
       object StringGrid3: TStringGrid
         Left = 0
@@ -1230,6 +2157,10 @@ object f_config: Tf_config
         RowCount = 2
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
         TabOrder = 2
+        OnDrawCell = StringGrid3DrawCell
+        OnMouseUp = StringGrid3MouseUp
+        OnSelectCell = StringGrid3SelectCell
+        OnSetEditText = StringGrid3SetEditText
         ColWidths = (
           18
           54
@@ -1249,6 +2180,18 @@ object f_config: Tf_config
         Width = 97
         Height = 13
         Caption = 'CDC Catalog Setting'
+      end
+      object Label130: TLabel
+        Left = 56
+        Top = 72
+        Width = 305
+        Height = 153
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 
+          'Use this pages to define the catalogues compatible with the prev' +
+          'ious version of Cartes du Ciel'
+        WordWrap = True
       end
     end
     object p_cdcstars: TTabSheet
@@ -4199,7 +5142,7 @@ object f_config: Tf_config
         object Image1: TImage
           Left = 2
           Top = 83
-          Width = 106
+          Width = 16
           Height = 16
           Align = alBottom
           AutoSize = True
@@ -4497,7 +5440,7 @@ object f_config: Tf_config
         Top = 48
         Width = 441
         Height = 65
-        Caption = 'stardisplay'
+        Caption = 'Star Display'
         Columns = 2
         Items.Strings = (
           'Line mode'
@@ -4510,7 +5453,7 @@ object f_config: Tf_config
         Top = 128
         Width = 441
         Height = 65
-        Caption = 'stardisplay'
+        Caption = 'Nebula Display'
         Columns = 2
         Items.Strings = (
           'Line mode'
@@ -5312,6 +6255,34 @@ object f_config: Tf_config
     Caption = '&Help'
     TabOrder = 4
   end
+  object Applyall: TCheckBox
+    Left = 200
+    Top = 428
+    Width = 177
+    Height = 17
+    Caption = 'Apply Change To All Chart'
+    Checked = True
+    State = cbChecked
+    TabOrder = 5
+  end
+  object next: TButton
+    Left = 168
+    Top = 424
+    Width = 25
+    Height = 25
+    Caption = '>'
+    TabOrder = 6
+    OnClick = nextClick
+  end
+  object previous: TButton
+    Left = 144
+    Top = 424
+    Width = 25
+    Height = 25
+    Caption = '<'
+    TabOrder = 7
+    OnClick = previousClick
+  end
   object FontDialog1: TFontDialog
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -5322,11 +6293,15 @@ object f_config: Tf_config
     MaxFontSize = 0
     Options = []
     Left = 8
-    Top = 424
+    Top = 384
   end
   object FolderDialog1: TFolderDialog
-    Top = 424
-    Left = 96
+    Top = 384
+    Left = 72
     Title = 'Browse for Folder'
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 40
+    Top = 384
   end
 end

@@ -114,6 +114,33 @@ type
     ToolButton14: TToolButton;
     ToolButton16: TToolButton;
     ToolButton17: TToolButton;
+    ViewToolsBar1: TMenuItem;
+    SaveDialog: TSaveDialog;
+    ViewStatus: TAction;
+    ViewStatusBar1: TMenuItem;
+    View1: TMenuItem;
+    SaveConfiguration: TAction;
+    SaveConfigurationNow1: TMenuItem;
+    SaveConfigOnExit: TAction;
+    SaveConfigurationOnExit1: TMenuItem;
+    N3: TMenuItem;
+    ToolButton18: TToolButton;
+    Undo: TAction;
+    Redo: TAction;
+    ToolButton19: TToolButton;
+    ToolButton20: TToolButton;
+    ChangeProj: TAction;
+    Autorefresh: TTimer;
+    ToolButton23: TToolButton;
+    ToolButton24: TToolButton;
+    rot_plus: TAction;
+    rot_minus: TAction;
+    ToolBar4: TToolBar;
+    ToolButton25: TToolButton;
+    ToolButton26: TToolButton;
+    ToolButton27: TToolButton;
+    GridEQ: TAction;
+    GridAZ: TAction;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -134,23 +161,42 @@ type
     procedure FlipXExecute(Sender: TObject);
     procedure FlipYExecute(Sender: TObject);
     procedure SetFOVExecute(Sender: TObject);
+    procedure FileSaveAs1Execute(Sender: TObject);
+    procedure ViewStatusExecute(Sender: TObject);
+    procedure SaveConfigurationExecute(Sender: TObject);
+    procedure SaveConfigOnExitExecute(Sender: TObject);
+    procedure UndoExecute(Sender: TObject);
+    procedure RedoExecute(Sender: TObject);
+    procedure ChangeProjExecute(Sender: TObject);
+    procedure AutorefreshTimer(Sender: TObject);
+    procedure rot_plusExecute(Sender: TObject);
+    procedure rot_minusExecute(Sender: TObject);
+    procedure GridEQExecute(Sender: TObject);
+    procedure GridAZExecute(Sender: TObject);
   private
     { Private declarations }
-    procedure CreateMDIChild(const Name: string);
-    Procedure RefreshAllChild;
+    function CreateMDIChild(const Name: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
+    Procedure RefreshAllChild(applydef:boolean);
+    procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
   public
     { Public declarations }
     cfgm : conf_main;
     def_cfgsc : conf_skychart;
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
+    procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
+    procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
+    procedure SavePrivateConfig(filename:string);
+    procedure SaveQuickSearch(filename:string);
+    procedure SaveChartConfig(filename:string);
     procedure SaveDefault;
     procedure SetDefault;
     Procedure InitFonts;
     Procedure SetLPanel1(txt:string);
     Procedure SetLPanel0(txt:string);
     procedure updatebtn(fx,fy:integer);
+    Procedure FormPos(form : Tform; x,y : integer);
   end;
 
 var
@@ -160,9 +206,10 @@ implementation
 
 {$R *.dfm}
 
-uses pu_chart, pu_about, pu_config ;
+uses pu_chart, pu_about, pu_config, u_projection ;
 
 // include all cross-platform common code.
 {$include i_main.pas}
+
 
 end.

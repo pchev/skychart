@@ -45,6 +45,8 @@ procedure GetAHxy(x,y:Integer ; var a,h : Double; var c:conf_skychart);
 procedure GetAHxyF(x,y:Integer ; var a,h : Double; var c:conf_skychart);
 function NorthPoleInMap(var c:conf_skychart) : Boolean;
 function SouthPoleInMap(var c:conf_skychart) : Boolean;
+function NorthPole2000InMap(var c:conf_skychart) : Boolean;
+function SouthPole2000InMap(var c:conf_skychart) : Boolean;
 function ZenithInMap(var c:conf_skychart) : Boolean;
 function NadirInMap(var c:conf_skychart) : Boolean;
 Function AngularDistance(ar1,de1,ar2,de2 : Double) : Double;
@@ -53,6 +55,7 @@ function Jd(annee,mois,jour :INTEGER; Heure:double):double;
 PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
 function SidTim(jd0,ut,long : double): double;
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; var c:conf_skychart);
+function SetCurrentTime(var cfgsc:conf_skychart):boolean;
 function DTminusUT(annee : integer; var c:conf_skychart) : double;
 PROCEDURE PrecessionFK4(ti,tf : double; VAR ari,dei : double);
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
@@ -62,7 +65,7 @@ PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; var c:conf_skychart );
 Procedure Hz2Eq(A,h : double; var hh,de : double; var c:conf_skychart);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
-Procedure Gal2Eq(l,b: double; var ar,de : double);
+Procedure Gal2Eq(l,b: double; var ar,de : double; var c:conf_skychart);
 {Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer);
           (* typeobj = 1 etoile ; typeobj = 2 soleil,lune
             irc = 0 lever et coucher
@@ -138,11 +141,10 @@ case c.projtype of              // AIPS memo 27
     yy:= r*(s2*c1-c2*s1*c3);
     end;
 'C' : begin                 // CAR
-    ac:=rad2deg*ac;
-    hh:=rmod(ac+180,360);
+    hh:=rmod(ac+pi,pi2);
     if ar>hh then ar:=ar-hh
-             else ar:=ar+360-hh;
-    ac:=deg2rad*rmod(hh-ac+360,360);
+             else ar:=ar+pi2-hh;
+    ac:=rmod(hh-ac+pi2,pi2);
     xx:=ac-ar;
     yy:=de-dc;
     end;
@@ -205,20 +207,20 @@ Var a,h,ac,dc,d1,d2 : Double ;
     a1,a2,i1,i2 : integer;
 BEGIN
 case c.Projpole of
-   1 : begin
-       precession(jd2000,c.currentjd,ar,de);
-       Eq2Hz(c.CurrentST-ar,de,a,h,c) ;
+AltAz: begin
+       Eq2Hz(c.CurST-ar,de,a,h,c) ;
        ar:=-a;
        de:=h;
        ac:=-c.acentre;
        dc:=c.hcentre;
        end;
-   else begin
+Equat: begin
        ac:=c.racentre;
        dc:=c.decentre;
        end;
+  else raise exception.Create('Bad projection type');
 end;
-if clip and (c.projpole=1) and c.horizonopaque and (h<=c.HorizonMax) then begin
+if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then begin
   if h<0 then begin
        X:=10000;
        Y:=10000;
@@ -290,22 +292,22 @@ Procedure InvProj (xx,yy : Double ; VAR ar,de : Double; var c:conf_skychart);
 Var a,hh,ac,dc : Double ;
 Begin
 case c.Projpole of
-   1 : begin
+Altaz: begin
        ac:=-c.acentre;
        dc:=c.hcentre;
        end;
-   else begin
+Equat: begin
        ac:=c.racentre;
        dc:=c.decentre;
        end;
+  else raise exception.Create('Bad projection type');
 end;
 InvProj2 (xx,yy,ac,dc,ar,de,c);
 case c.Projpole of
-   1 : begin
+Altaz: begin
        Hz2Eq(-ar,de,a,hh,c) ;
-       ar:=c.CurrentST-a;
+       ar:=c.CurST-a;
        de:=hh;
-       precession(c.currentjd,jd2000,ar,de);
        end;
 end;
 end ;
@@ -340,7 +342,6 @@ function NorthPoleInMap(var c:conf_skychart) : Boolean;
 var a,d,x1,y1: Double; xx,yy : integer;
 begin
 a:=0 ; d:=pid2;
-if c.projpole=1 then precession(c.CurrentJD,JD2000,a,d);
 projection(a,d,x1,y1,false,c) ;
 windowxy(x1,y1,xx,yy,c);
 Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
@@ -350,7 +351,26 @@ function SouthPoleInMap(var c:conf_skychart) : Boolean;
 var a,d,x1,y1: Double; xx,yy : integer;
 begin
 a:=0 ; d:=-pid2;
-if c.projpole=1 then precession(c.CurrentJD,JD2000,a,d);
+projection(a,d,x1,y1,false,c) ;
+windowxy(x1,y1,xx,yy,c);
+Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
+end;
+
+function NorthPole2000InMap(var c:conf_skychart) : Boolean;
+var a,d,x1,y1: Double; xx,yy : integer;
+begin
+a:=c.rap2000 ; d:=c.dep2000;
+projection(a,d,x1,y1,false,c) ;
+windowxy(x1,y1,xx,yy,c);
+Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
+end;
+
+function SouthPole2000InMap(var c:conf_skychart) : Boolean;
+var a,d,x1,y1: Double; xx,yy : integer;
+begin
+a:=0;
+d:=-pid2;
+precession(jd2000,c.JDChart,a,d);
 projection(a,d,x1,y1,false,c) ;
 windowxy(x1,y1,xx,yy,c);
 Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
@@ -452,8 +472,8 @@ var
 const
      desinpi = 4.26345151e-5;
 begin
-// AR, DE are J2000 but paralaxe is to be computed with coordinates of the date.
-precession(jd2000,c.currentjd,ar1,de1);
+// AR, DE are standard epoch but paralaxe is to be computed with coordinates of the date.
+precession(c.JDchart,c.curjd,ar1,de1);
 H:=(SideralTime-ar1);
 rde:=de1;
 sinpi:=desinpi/dist;
@@ -464,8 +484,20 @@ a := cos(rde)*sin(H);
 b := cos(rde)*cos(H)-c.ObsRoSinPhi*sinpi;
 d := sin(rde)-c.ObsRoSinPhi*sinpi;
 q := sqrt(a*a+b*b+d*d);
-precession(c.currentjd,jd2000,ar,de);
+precession(c.curjd,c.JDchart,ar,de);
 end;
+
+function SetCurrentTime(var cfgsc:conf_skychart):boolean;
+var y,m,d:word;
+begin
+decodedate(now,y,m,d);
+cfgsc.CurYear:=y;
+cfgsc.CurMonth:=m;
+cfgsc.CurDay:=d;
+cfgsc.CurTime:=frac(now)*24;
+result:=true;
+end;
+
 
 function DTminusUT(annee : integer; var c:conf_skychart) : double;
 var t : double;
@@ -567,6 +599,7 @@ var i1,i2,i3,i4,i5,i6,i7 : double ;
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);  // ICRS
 var i1,i2,i3,i4,i5,i6,i7 : double ;
    BEGIN
+   if ti=tf then exit;
       I1:=(TI-2451545.0)/36525 ;
       I2:=(TF-TI)/36525;
       I3:=deg2rad*((2306.2181+1.39656*i1-1.39e-4*i1*i1)*i2+(0.30188-3.44e-4*i1)*i2*i2+1.7998e-2*i2*i2*i2)/3600 ;
@@ -602,7 +635,7 @@ end;
 PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; var c:conf_skychart);
 var l1,d1,h1 : double;
 BEGIN
-l1:=c.ObsLatitude;
+l1:=deg2rad*c.ObsLatitude;
 d1:=DE;
 h1:=HH;
 h:= arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) );
@@ -613,7 +646,7 @@ END ;
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; var c:conf_skychart);
 var l1,d1,h1 : double;
 BEGIN
-l1:=c.ObsLatitude;
+l1:=deg2rad*c.ObsLatitude;
 d1:=DE;
 h1:=HH;
 h:= arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) );
@@ -627,7 +660,7 @@ END ;
 Procedure Hz2Eq(A,h : double; var hh,de : double; var c:conf_skychart);
 var l1,a1,h1 : double;
 BEGIN
-l1:=c.ObsLatitude;
+l1:=deg2rad*c.ObsLatitude;
 a1:=A;
 { refraction meeus91 15.3 }
 if h>-deg2rad*0.3534193791 then h:=minvalue([pid2,h-deg2rad*c.ObsRefractionCor*(1/tan((h+(deg2rad*7.31/(h+deg2rad*4.4)))))/60])
@@ -650,14 +683,14 @@ l:=arctan2(sin(ar)*cos(e)+tan(de)*sin(e),cos(ar));
 b:=arcsin(sin(de)*cos(e)-cos(de)*sin(e)*sin(ar));
 end;
 
-Procedure Gal2Eq(l,b: double; var ar,de : double);
+Procedure Gal2Eq(l,b: double; var ar,de : double; var c:conf_skychart);
 var dp : double;
 begin
 l:=l-deg2rad*123;
 dp:=deg2rad*27.4;
 ar:=deg2rad*12.25+arctan2(sin(l),cos(l)*sin(dp)-tan(b)*cos(dp));
 de:=arcsin(sin(b)*sin(dp)+cos(b)*cos(dp)*cos(l));
-precession(jd1950,jd2000,ar,de);
+precession(jd1950,c.JDchart,ar,de);
 end;
 {
 procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer);

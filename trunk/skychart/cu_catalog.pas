@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_constant, libcatalog, u_util, u_projection,
-     SysUtils, Classes,
+     SysUtils, Classes, Math,
 {$ifdef linux}
    Qforms;
 {$endif}
@@ -40,13 +40,20 @@ type
   private
     { Private declarations }
     LockCat : boolean;
-    NumCat,CurCat : integer;
+    NumCat,CurCat,CurGCat,VerGCat : integer;
     EmptyRec : GCatRec;
   protected
     { Protected declarations }
      function InitRec(cat:integer):boolean;
      function OpenStarCat:boolean;
      function CloseStarCat:boolean;
+     function NewGCat:boolean;
+     function GetGCatS(var rec:GcatRec):boolean;
+     function GetGCatV(var rec:GcatRec):boolean;
+     function GetGCatD(var rec:GcatRec):boolean;
+     function GetGCatN(var rec:GcatRec):boolean;
+     function GetGCatL(var rec:GcatRec):boolean;
+     procedure FindNGCat(id : shortstring; var ar,de:double ; var ok:boolean);
      function GetBSC(var rec:GcatRec):boolean;
      function GetSky2000(var rec:GcatRec):boolean;
      function GetTYC(var rec:GcatRec):boolean;
@@ -69,6 +76,13 @@ type
      function OpenNebCat:boolean;
      function CloseNebCat:boolean;
      function GetSAC(var rec:GcatRec):boolean;
+     function GetNGC(var rec:GcatRec):boolean;
+     function GetLBN(var rec:GcatRec):boolean;
+     function GetRC3(var rec:GcatRec):boolean;
+     function GetPGC(var rec:GcatRec):boolean;
+     function GetOCL(var rec:GcatRec):boolean;
+     function GetGCM(var rec:GcatRec):boolean;
+     function GetGPN(var rec:GcatRec):boolean;
   public
     { Public declarations }
      cfgcat : conf_catalog;
@@ -94,6 +108,8 @@ type
      function FindObj(x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
      procedure GetAltName(rec: GCatrec; var txt: string);
      function CheckPath(cat: integer; catpath:string):boolean;
+     function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
+     function GetMaxField(path,cat: string):string;
   published
     { Published declarations }
   end;
@@ -113,10 +129,10 @@ end;
 
 Function Tcatalog.OpenCat(c: conf_skychart):boolean;
 begin
+// get a lock before to do anything, libcatalog is NOT thread safe. 
   while lockcat do application.ProcessMessages;
   lockcat:=true;
-//  InitCat(0,true);
-  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*c.racentre/15,rad2deg*c.decentre,rad2deg*c.acentre,rad2deg*c.hcentre,c.CurrentJD,c.CurrentST,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpoleinmap(c),southpoleinmap(c));
+  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*c.racentre/15,rad2deg*c.decentre,rad2deg*c.acentre,rad2deg*c.hcentre,c.CurJD,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
   result:=true;
 end;
 
@@ -125,6 +141,7 @@ begin
 lockcat:=false;
 result:=true;
 end;
+
 
 { Stars }
 
@@ -160,6 +177,14 @@ case curcat of
    dsbase  : result:=GetDSbase(rec);
    dstyc   : result:=GetDSTyc(rec);
    dsgsc   : result:=GetDSGsc(rec);
+   gcstar  : begin
+             result:=GetGcatS(rec);
+             if not result then begin
+                result:=NewGcat;
+                if result then OpenGCatWin(result);
+                if result then result:=ReadStar(rec);
+             end;
+             end;
 end;
 if (not result) and ((curcat-BaseStar)<numcat) then begin
   CloseStarCat;
@@ -196,6 +221,7 @@ case curcat of
    dsbase  : begin SetDSPath(cfgcat.starcatpath[dsbase-BaseStar],cfgcat.starcatpath[dstyc-BaseStar],cfgcat.starcatpath[dsgsc-BaseStar]); OpenDSbasewin(result); end;
    dstyc   : begin SetDSPath(cfgcat.starcatpath[dsbase-BaseStar],cfgcat.starcatpath[dstyc-BaseStar],cfgcat.starcatpath[dsgsc-BaseStar]); OpenDStycwin(result); end;
    dsgsc   : begin SetDSPath(cfgcat.starcatpath[dsbase-BaseStar],cfgcat.starcatpath[dstyc-BaseStar],cfgcat.starcatpath[dsgsc-BaseStar]); OpenDSgscwin(result); end;
+   gcstar  : begin VerGCat:=rtStar; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result);end;
    else result:=false;
 end;
 end;
@@ -216,7 +242,8 @@ case curcat of
    microcat: CloseMCT;
    dsbase  : CloseDSbase;
    dstyc   : CloseDStyc;
-   dsgsc   : CloseDSgsc;  
+   dsgsc   : CloseDSgsc;
+   gcstar  : CloseGcat;
    else result:=false;
 end;
 end;
@@ -243,6 +270,14 @@ begin
 result:=false;
 case curcat of
    gcvs     : result:=GetGCVS(rec);
+   gcvar   : begin
+             result:=GetGcatV(rec);
+             if not result then begin
+                result:=NewGcat;
+                if result then OpenGCatWin(result);
+                if result then result:=ReadVarStar(rec);
+             end;
+             end;
 end;
 if (not result) and ((curcat-BaseVar)<numcat) then begin
   CloseVarStarCat;
@@ -259,6 +294,7 @@ begin
 InitRec(curcat);
 case curcat of
    gcvs    : begin SetGCVPath(cfgcat.varstarcatpath[gcvs-BaseVar]); OpenGCVwin(result); end;
+   gcvar   : begin VerGCat:=rtVar; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
    else result:=false;
 end;
 end;
@@ -268,6 +304,7 @@ begin
 result:=true;
 case curcat of
    gcvs    : CloseGCV;
+   gcvar   : CloseGcat;
    else result:=false;
 end;
 end;
@@ -294,6 +331,14 @@ begin
 result:=false;
 case curcat of
    wds      : result:=GetWDS(rec);
+   gcdbl   : begin
+             result:=GetGcatD(rec);
+             if not result then begin
+                result:=NewGcat;
+                if result then OpenGCatWin(result);
+                if result then result:=ReadDblStar(rec);
+             end;
+             end;
 end;
 if (not result) and ((curcat-BaseDbl)<numcat) then begin
   CloseDblStarCat;
@@ -310,6 +355,7 @@ begin
 InitRec(curcat);
 case curcat of
    wds     : begin SetWDSPath(cfgcat.dblstarcatpath[wds-BaseDbl]); OpenWDSwin(result); end;
+   gcdbl   : begin VerGCat:=rtDbl; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
    else result:=false;
 end;
 end;
@@ -319,6 +365,7 @@ begin
 result:=true;
 case curcat of
    wds     : CloseWDS;
+   gcdbl   : CloseGcat;
    else result:=false;
 end;
 end;
@@ -345,6 +392,21 @@ begin
 result:=false;
 case curcat of
    sac     : result:=GetSAC(rec);
+   ngc     : result:=GetNGC(rec);
+   lbn     : result:=GetLBN(rec);
+   rc3     : result:=GetRC3(rec);
+   pgc     : result:=GetPGC(rec);
+   ocl     : result:=GetOCL(rec);
+   gcm     : result:=GetGCM(rec);
+   gpn     : result:=GetGPN(rec);
+   gcneb   : begin
+             result:=GetGcatN(rec);
+             if not result then begin
+                result:=NewGcat;
+                if result then OpenGCatWin(result);
+                if result then result:=ReadNeb(rec);
+             end;
+             end;
 end;
 if (not result) and ((curcat-BaseNeb)<numcat) then begin
   CloseNebCat;
@@ -361,6 +423,14 @@ begin
 InitRec(curcat);
 case curcat of
    sac     : begin SetSacPath(cfgcat.nebcatpath[sac-BaseNeb]); OpenSACwin(result); end;
+   ngc     : begin SetngcPath(cfgcat.nebcatpath[ngc-BaseNeb]); Openngcwin(result); end;
+   lbn     : begin SetlbnPath(cfgcat.nebcatpath[lbn-BaseNeb]); Openlbnwin(result); end;
+   rc3     : begin Setrc3Path(cfgcat.nebcatpath[rc3-BaseNeb]); Openrc3win(result); end;
+   pgc     : begin SetpgcPath(cfgcat.nebcatpath[pgc-BaseNeb]); Openpgcwin(result); end;
+   ocl     : begin SetoclPath(cfgcat.nebcatpath[ocl-BaseNeb]); Openoclwin(result); end;
+   gcm     : begin SetgcmPath(cfgcat.nebcatpath[gcm-BaseNeb]); Opengcmwin(result); end;
+   gpn     : begin SetgpnPath(cfgcat.nebcatpath[gpn-BaseNeb]); Opengpnwin(result); end;
+   gcneb  : begin VerGCat:=rtNeb; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
    else result:=false;
 end;
 end;
@@ -370,9 +440,19 @@ begin
 result:=true;
 case curcat of
    sac     : CloseSAC;
+   ngc     : CloseNGC;
+   lbn     : CloseLBN;
+   rc3     : CloseRC3;
+   pgc     : ClosePGC;
+   ocl     : CloseOCL;
+   gcm     : CloseGCM;
+   gpn     : CloseGPN;
+   gcneb   : CloseGcat;
    else result:=false;
 end;
 end;
+
+// CatGen header simulation for old catalog
 
 function Tcatalog.InitRec(cat:integer):boolean;
 begin
@@ -384,6 +464,7 @@ begin
              EmptyRec.options.ShortName:='BSC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.Epoch:=2000;
              EmptyRec.options.MagMax:=6.5;
              EmptyRec.options.UsePrefix:=1;
@@ -405,6 +486,7 @@ begin
              EmptyRec.options.ShortName:='Sky';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.Epoch:=2000;
              EmptyRec.options.MagMax:=9.5;
              EmptyRec.options.UsePrefix:=0;
@@ -430,6 +512,7 @@ begin
              EmptyRec.options.ShortName:='TYC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.Epoch:=1991.25;
              EmptyRec.options.MagMax:=12;
              EmptyRec.options.UsePrefix:=0;
@@ -445,6 +528,7 @@ begin
              EmptyRec.options.ShortName:='TYC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.Epoch:=1991.25;
              EmptyRec.options.MagMax:=12;
              EmptyRec.options.UsePrefix:=0;
@@ -460,6 +544,7 @@ begin
              EmptyRec.options.ShortName:='TIC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=12;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -474,6 +559,7 @@ begin
              EmptyRec.options.ShortName:='GSC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=15;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -496,6 +582,7 @@ begin
              EmptyRec.options.ShortName:='GSC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=15;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -518,6 +605,7 @@ begin
              EmptyRec.options.ShortName:='GSC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=15;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -538,6 +626,7 @@ begin
              EmptyRec.options.ShortName:='UNA';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=18;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -555,6 +644,7 @@ begin
              EmptyRec.options.ShortName:='MCT';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=16;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -566,6 +656,7 @@ begin
              EmptyRec.options.ShortName:='BRS';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=5;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -575,6 +666,7 @@ begin
              EmptyRec.options.ShortName:='TYC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=12;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -584,6 +676,7 @@ begin
              EmptyRec.options.ShortName:='GSC';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=15;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -593,6 +686,7 @@ begin
              EmptyRec.options.ShortName:='GCV';
              EmptyRec.options.rectype:=rtVar;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=12;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.variable.valid[vvId]:=true;
@@ -613,6 +707,7 @@ begin
              EmptyRec.options.ShortName:='WDS';
              EmptyRec.options.rectype:=rtDbl;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=12;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.double.valid[vdId]:=true;
@@ -631,6 +726,7 @@ begin
              EmptyRec.options.ShortName:='SAC';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
              EmptyRec.options.MagMax:=12;
              EmptyRec.options.UsePrefix:=0;
              EmptyRec.options.Units:=60;
@@ -650,13 +746,347 @@ begin
              EmptyRec.vstr[2]:=true;
              EmptyRec.options.flabel[16]:='Name';
              EmptyRec.options.flabel[17]:='Constel';
-
+             end;
+   ngc     : begin
+             EmptyRec.options.flabel:=NebLabel;
+             EmptyRec.options.ShortName:='NGC';
+             EmptyRec.options.rectype:=rtNeb;
+             EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
+             EmptyRec.options.MagMax:=12;
+             EmptyRec.options.UsePrefix:=0;
+             EmptyRec.options.Units:=60;
+             EmptyRec.options.LogSize:=0;
+             EmptyRec.options.ObjType:=-1;
+             Emptyrec.neb.valid[vnId]:=true;
+             Emptyrec.neb.valid[vnMag]:=true;
+             Emptyrec.neb.valid[vnSbr]:=true;
+             Emptyrec.neb.valid[vnDim1]:=true;
+             Emptyrec.neb.valid[vnNebtype]:=true;
+             Emptyrec.neb.valid[vnComment]:=true;
+             EmptyRec.vstr[1]:=true;
+             EmptyRec.options.flabel[16]:='Constel';
+             end;
+   lbn     : begin
+             EmptyRec.options.flabel:=NebLabel;
+             EmptyRec.options.ShortName:='LBN';
+             EmptyRec.options.rectype:=rtNeb;
+             EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
+             EmptyRec.options.MagMax:=12;
+             EmptyRec.options.UsePrefix:=0;
+             EmptyRec.options.Units:=60;
+             EmptyRec.options.LogSize:=0;
+             EmptyRec.options.ObjType:=5;
+             Emptyrec.neb.valid[vnId]:=true;
+             Emptyrec.neb.valid[vnMag]:=true;
+             Emptyrec.neb.valid[vnSbr]:=true;
+             Emptyrec.neb.valid[vnDim1]:=true;
+             Emptyrec.neb.valid[vnDim2]:=true;
+             EmptyRec.options.altname[1]:=true;
+             EmptyRec.vstr[1]:=true;
+             EmptyRec.options.flabel[16]:='LBN';
+             EmptyRec.vnum[1]:=true;
+             EmptyRec.vnum[2]:=true;
+             EmptyRec.vnum[3]:=true;
+             EmptyRec.vnum[4]:=true;
+             EmptyRec.options.flabel[26]:='Region';
+             EmptyRec.options.flabel[27]:='Bright';
+             EmptyRec.options.flabel[28]:='Color';
+             EmptyRec.options.flabel[29]:='Area';
+             end;
+   rc3     : begin
+             EmptyRec.options.flabel:=NebLabel;
+             EmptyRec.options.ShortName:='RC3';
+             EmptyRec.options.rectype:=rtNeb;
+             EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
+             EmptyRec.options.MagMax:=12;
+             EmptyRec.options.UsePrefix:=0;
+             EmptyRec.options.Units:=60;
+             EmptyRec.options.LogSize:=0;
+             EmptyRec.options.ObjType:=1;
+             Emptyrec.neb.valid[vnId]:=true;
+             Emptyrec.neb.valid[vnMag]:=true;
+             Emptyrec.neb.valid[vnSbr]:=true;
+             Emptyrec.neb.valid[vnDim1]:=true;
+             Emptyrec.neb.valid[vnDim2]:=true;
+             Emptyrec.neb.valid[vnPA]:=true;
+             Emptyrec.neb.valid[vnRV]:=true;
+             Emptyrec.neb.valid[vnMorph]:=true;
+             EmptyRec.options.altname[1]:=true;
+             EmptyRec.vstr[1]:=true;
+             EmptyRec.options.flabel[16]:='PGC';
+             EmptyRec.vnum[1]:=true;
+             EmptyRec.vnum[2]:=true;
+             EmptyRec.vnum[3]:=true;
+             EmptyRec.vnum[4]:=true;
+             EmptyRec.vnum[5]:=true;
+             EmptyRec.options.flabel[26]:='Aperture';
+             EmptyRec.options.flabel[27]:='B-V';
+             EmptyRec.options.flabel[28]:='App. B-V';
+             EmptyRec.options.flabel[29]:='Stage';
+             EmptyRec.options.flabel[30]:='Luminosity';
+             end;
+   pgc     : begin
+             EmptyRec.options.flabel:=NebLabel;
+             EmptyRec.options.ShortName:='PGC';
+             EmptyRec.options.rectype:=rtNeb;
+             EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
+             EmptyRec.options.MagMax:=12;
+             EmptyRec.options.UsePrefix:=0;
+             EmptyRec.options.Units:=60;
+             EmptyRec.options.LogSize:=0;
+             EmptyRec.options.ObjType:=1;
+             Emptyrec.neb.valid[vnId]:=true;
+             Emptyrec.neb.valid[vnMag]:=true;
+             Emptyrec.neb.valid[vnSbr]:=true;
+             Emptyrec.neb.valid[vnDim1]:=true;
+             Emptyrec.neb.valid[vnDim2]:=true;
+             Emptyrec.neb.valid[vnPA]:=true;
+             Emptyrec.neb.valid[vnRV]:=true;
+             EmptyRec.options.altname[1]:=true;
+             EmptyRec.vstr[1]:=true;
+             EmptyRec.options.flabel[16]:='PGC';
+             end;
+   ocl     : begin
+             EmptyRec.options.flabel:=NebLabel;
+             EmptyRec.options.ShortName:='OCL';
+             EmptyRec.options.rectype:=rtNeb;
+             EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
+             EmptyRec.options.MagMax:=12;
+             EmptyRec.options.UsePrefix:=0;
+             EmptyRec.options.Units:=60;
+             EmptyRec.options.LogSize:=0;
+             EmptyRec.options.ObjType:=2;
+             Emptyrec.neb.valid[vnId]:=true;
+             Emptyrec.neb.valid[vnMag]:=true;
+             Emptyrec.neb.valid[vnDim1]:=true;
+             Emptyrec.neb.valid[vnMorph]:=true;
+             EmptyRec.options.altname[1]:=true;
+             EmptyRec.vstr[1]:=true;
+             EmptyRec.options.flabel[16]:='OCL';
+             EmptyRec.vnum[1]:=true;
+             EmptyRec.vnum[2]:=true;
+             EmptyRec.vnum[3]:=true;
+             EmptyRec.vnum[4]:=true;
+             EmptyRec.vnum[5]:=true;
+             EmptyRec.options.flabel[26]:='Dist';
+             EmptyRec.options.flabel[27]:='Age';
+             EmptyRec.options.flabel[28]:='B-V';
+             EmptyRec.options.flabel[29]:='Star Num.';
+             EmptyRec.options.flabel[30]:='Star Mag.';
+             end;
+   gcm     : begin
+             EmptyRec.options.flabel:=NebLabel;
+             EmptyRec.options.ShortName:='GCM';
+             EmptyRec.options.rectype:=rtNeb;
+             EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
+             EmptyRec.options.MagMax:=12;
+             EmptyRec.options.UsePrefix:=0;
+             EmptyRec.options.Units:=60;
+             EmptyRec.options.LogSize:=0;
+             EmptyRec.options.ObjType:=3;
+             Emptyrec.neb.valid[vnId]:=true;
+             Emptyrec.neb.valid[vnMag]:=true;
+             Emptyrec.neb.valid[vnDim1]:=true;
+             EmptyRec.options.altname[1]:=true;
+             EmptyRec.vstr[1]:=true;
+             EmptyRec.vstr[2]:=true;
+             EmptyRec.options.flabel[16]:='GCM';
+             EmptyRec.options.flabel[17]:='Sp';
+             EmptyRec.vnum[1]:=true;
+             EmptyRec.vnum[2]:=true;
+             EmptyRec.vnum[3]:=true;
+             EmptyRec.vnum[4]:=true;
+             EmptyRec.vnum[5]:=true;
+             EmptyRec.options.flabel[26]:='B-V';
+             EmptyRec.options.flabel[27]:='Central Sbr';
+             EmptyRec.options.flabel[28]:='Nucleus';
+             EmptyRec.options.flabel[29]:='Half Mass';
+             EmptyRec.options.flabel[30]:='Dist';
+             end;
+   gpn     : begin
+             EmptyRec.options.flabel:=NebLabel;
+             EmptyRec.options.ShortName:='GPN';
+             EmptyRec.options.rectype:=rtNeb;
+             EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
+             EmptyRec.options.MagMax:=12;
+             EmptyRec.options.UsePrefix:=0;
+             EmptyRec.options.Units:=3600;
+             EmptyRec.options.LogSize:=0;
+             EmptyRec.options.ObjType:=4;
+             Emptyrec.neb.valid[vnId]:=true;
+             Emptyrec.neb.valid[vnMag]:=true;
+             Emptyrec.neb.valid[vnDim1]:=true;
+             EmptyRec.options.altname[1]:=true;
+             EmptyRec.options.altname[2]:=true;
+             EmptyRec.vstr[1]:=true;
+             EmptyRec.vstr[2]:=true;
+             EmptyRec.options.flabel[16]:='PK';
+             EmptyRec.options.flabel[17]:='PNG';
+             EmptyRec.vnum[1]:=true;
+             EmptyRec.vnum[2]:=true;
+             EmptyRec.vnum[3]:=true;
+             EmptyRec.options.flabel[26]:='Mag. Hb';
+             EmptyRec.options.flabel[27]:='C. Star V';
+             EmptyRec.options.flabel[28]:='C. Star B';
              end;
    else result:=false;
   end;
 end;
 
 { catalog read functions }
+
+function Tcatalog.NewGCat:boolean;
+var GcatH : TCatHeader;
+    v : integer;
+begin
+repeat
+ inc(CurGCat);
+ if CurGCat>cfgcat.GCatNum then begin
+    result:=false;
+    break;
+ end;
+ if cfgcat.GCatLst[CurGCat-1].CatOn then begin
+   SetGcatPath(cfgcat.GCatLst[CurGCat-1].path,cfgcat.GCatLst[CurGCat-1].shortname);
+   GetGCatInfo(GcatH,v,result);
+ end else result:=false;
+until result and (v=VerGCat);
+end;
+
+function Tcatalog.GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
+var GcatH : TCatHeader;
+begin
+SetGcatPath(path,shortname);
+GetGCatInfo(GcatH,v,result);
+magmax:=GcatH.MagMax;
+version:=GcatH.version;
+longname:=GcatH.LongName;
+end;
+
+function Tcatalog.GetMaxField(path,cat: string):string;
+var GCatH : TCatHeader;
+    v : integer;
+    ok : boolean;
+begin
+SetGcatPath(path,cat);
+GetGCatInfo(GcatH,v,ok);
+case GcatH.FileNum of
+  1    : result:='10';
+  50   : result:='10';
+  184  : result:='7';
+  732  : result:='5';
+  9537 : result:='3';
+  else   result:='7';
+end;
+end;
+
+function Tcatalog.GetGCatS(var rec:GcatRec):boolean;
+begin
+result:=true;
+repeat
+  ReadGCat(rec,result);
+  if not result then break;
+  if cfgshr.StarFilter and (rec.star.magv>cfgcat.StarMagMax) then begin
+             NextGCat(result);
+             if result then continue;
+  end;
+  rec.ra:=deg2rad*rec.ra;
+  rec.dec:=deg2rad*rec.dec;
+  rec.star.pmra:=deg2rad*rec.star.pmra/3600;
+  rec.star.pmdec:=deg2rad*rec.star.pmdec/3600;
+  break;
+until not result;
+end;
+
+function Tcatalog.GetGCatV(var rec:GcatRec):boolean;
+begin
+result:=true;
+repeat
+  ReadGCat(rec,result);
+  if not result then break;
+  if cfgshr.StarFilter and (rec.variable.magmax>cfgcat.StarMagMax) then begin
+             NextGCat(result);
+             if result then continue;
+  end;
+  rec.ra:=deg2rad*rec.ra;
+  rec.dec:=deg2rad*rec.dec;
+  break;
+until not result;
+end;
+
+function Tcatalog.GetGCatD(var rec:GcatRec):boolean;
+begin
+result:=true;
+repeat
+  ReadGCat(rec,result);
+  if not result then break;
+  if cfgshr.StarFilter and (rec.double.mag1>cfgcat.StarMagMax) then begin
+             NextGCat(result);
+             if result then continue;
+  end;
+  rec.ra:=deg2rad*rec.ra;
+  rec.dec:=deg2rad*rec.dec;
+  break;
+until not result;
+end;
+
+function Tcatalog.GetGCatN(var rec:GcatRec):boolean;
+begin
+result:=true;
+repeat
+  ReadGCat(rec,result);
+  if not result then break;
+  if cfgshr.NebFilter and
+     rec.neb.valid[vnMag] and
+    (rec.neb.mag>cfgcat.NebMagMax) then begin
+             NextGCat(result);
+             if result then continue;
+  end;
+  if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
+  if cfgshr.NebFilter and
+     rec.neb.valid[vnDim1] and
+     (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
+  if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
+  if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
+  rec.ra:=deg2rad*rec.ra;
+  rec.dec:=deg2rad*rec.dec;
+  break;
+until not result;
+end;
+
+function Tcatalog.GetGCatL(var rec:GcatRec):boolean;
+begin
+result:=true;
+repeat
+  ReadGCat(rec,result);
+  if not result then break;
+  // no line filter at the moment
+  rec.ra:=deg2rad*rec.ra;
+  rec.dec:=deg2rad*rec.dec;
+  break;
+until not result;
+end;
+
+procedure Tcatalog.FindNGCat(id : shortstring; var ar,de:double ; var ok:boolean);
+var
+   H : TCatHeader;
+   i,version : integer;
+begin
+for i:=0 to cfgcat.GCatNum-1 do begin
+  if fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx') then begin
+   SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
+   GetGCatInfo(H,version,ok);
+   if ok then FindNumGcat(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,id,H.ixkeylen, ar,de,ok);
+   if ok then break;
+  end;
+end;
+end;
 
 function Tcatalog.GetBSC(var rec:GcatRec):boolean;
 var lin : BSCrec;
@@ -1092,7 +1522,7 @@ repeat
   rec.neb.mag:=lin.ma;
   if trim(lin.typ)='Drk' then rec.neb.mag:=11;  // also filter dark nebulae
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
-  if (not cfgshr.BigNebFilter) and (rec.neb.dim1>=200) and (trim(lin.typ)<>'Gx') then continue; // filter big object except M31, LMC, SMC
+  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (trim(lin.typ)<>'Gx') then continue; // filter big object except M31, LMC, SMC
   break;
 until not result;
 if result then begin
@@ -1128,6 +1558,251 @@ if result then begin
    rec.str[2]:=lin.cons;
    rec.neb.morph:=lin.clas;
    rec.neb.comment:=lin.desc;
+end;
+end;
+
+function Tcatalog.GetNGC(var rec:GcatRec):boolean;
+var lin : NGCrec;
+begin
+rec:=EmptyRec;
+result:=true;
+repeat
+  ReadNGC(lin,result);
+  if not result then break;
+  rec.neb.dim1:=lin.dim/10;
+  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+  rec.neb.mag:=lin.ma/100;
+  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (trim(lin.typ)<>'Gx') then continue; // filter big object except M31, LMC, SMC
+  break;
+until not result;
+if result then begin
+   rec.ra:=deg2rad*lin.ar/100000;
+   rec.dec:=deg2rad*lin.de/100000;
+   rec.neb.nebtype:=-1;
+   if trim(lin.typ)='Gx'  then rec.neb.nebtype:=1
+   else if trim(lin.typ)='OC'  then rec.neb.nebtype:=2
+   else if trim(lin.typ)='Gb'  then rec.neb.nebtype:=3
+   else if trim(lin.typ)='Pl'  then rec.neb.nebtype:=4
+   else if trim(lin.typ)='Nb'  then rec.neb.nebtype:=5
+   else if trim(lin.typ)='C+N'  then rec.neb.nebtype:=6
+   else if trim(lin.typ)='*'  then rec.neb.nebtype:=7
+   else if trim(lin.typ)='D*'  then rec.neb.nebtype:=8
+   else if trim(lin.typ)='***'  then rec.neb.nebtype:=9
+   else if trim(lin.typ)='Ast'  then rec.neb.nebtype:=10
+   else if trim(lin.typ)='Kt'  then rec.neb.nebtype:=11
+   else if trim(lin.typ)='?'  then rec.neb.nebtype:=0
+   else if lin.typ='   '  then rec.neb.nebtype:=0
+   else if trim(lin.typ)='-'  then rec.neb.nebtype:=-1
+   else if trim(lin.typ)='PD'  then rec.neb.nebtype:=-1;
+   if rec.neb.dim1<=0 then rec.neb.dim1:=1;
+   if (rec.neb.mag>70)or(rec.neb.mag<-70) then begin
+     rec.neb.mag:=99.9;     // undefined magnitude
+     rec.neb.sbr:=99.9;
+   end else begin;
+     rec.neb.sbr:= rec.neb.mag + 5*log10(rec.neb.dim1) - 0.26;
+   end;
+   str(lin.id:4,rec.neb.id);
+   if lin.ic='I' then rec.neb.id:='IC '+rec.neb.id
+                 else rec.neb.id:='NGC'+rec.neb.id;
+   rec.str[1]:=lin.cons;
+   rec.neb.comment:=lin.desc;
+end;
+end;
+
+function Tcatalog.GetLBN(var rec:GcatRec):boolean;
+var lin : LBNrec;
+begin
+rec:=EmptyRec;
+result:=true;
+repeat
+  ReadLBN(lin,result);
+  if not result then break;
+  rec.neb.dim1:=lin.d1;
+  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+  case lin.bright of
+  0..1 : rec.neb.mag:=8;
+  2    : rec.neb.mag:=13;
+  3    : rec.neb.mag:=15;
+  4    : rec.neb.mag:=16;
+  else rec.neb.mag:=18;
+  end;
+  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) then continue;
+  break;
+until not result;
+if result then begin
+   rec.ra:=deg2rad*lin.ar/100000;
+   rec.dec:=deg2rad*lin.de/100000;
+   rec.neb.dim2:=lin.d2;
+   if rec.neb.dim1<=0 then rec.neb.dim1:=1;
+   if (rec.neb.mag>70)or(rec.neb.mag<-70) then begin
+     rec.neb.mag:=99.9;     // undefined magnitude
+     rec.neb.sbr:=99.9;
+   end else begin;
+     rec.neb.sbr:= rec.neb.mag + 5*log10(rec.neb.dim1) - 0.26;
+   end;
+   rec.neb.id:=lin.name;
+   rec.str[1]:=inttostr(lin.num);
+   rec.num[1]:=lin.id;
+   rec.num[2]:=lin.bright;
+   rec.num[3]:=lin.color;
+   rec.num[4]:=lin.area;
+end;
+end;
+
+function Tcatalog.GetRC3(var rec:GcatRec):boolean;
+var lin : RC3rec;
+begin
+rec:=EmptyRec;
+result:=true;
+repeat
+  ReadRC3(lin,result);
+  if not result then break;
+  rec.neb.mag:=minvalue([90,abs(lin.mb/100)]);
+  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  if lin.d25>=0 then rec.neb.dim1:=power(10,lin.d25/100)/10
+                else rec.neb.dim1:=0;
+  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+  break;
+until not result;
+if result then begin
+   rec.ra:=deg2rad*lin.ar/100000;
+   rec.dec:=deg2rad*lin.de/100000;
+   rec.neb.id:=lin.nom;
+   rec.str[1]:=lin.pgc;
+   rec.neb.morph:=lin.typ;
+   if lin.r25>=0 then rec.neb.dim2:=rec.neb.dim1/power(10,lin.r25/100)
+                 else rec.neb.dim2:=rec.neb.dim1;
+   if lin.ae>=0 then rec.num[1]:=power(10,lin.ae/100)/10
+                else rec.num[1]:=0;
+   if lin.pa=255 then rec.neb.pa:=90
+                 else rec.neb.pa:=lin.pa;
+   rec.num[2]:=lin.b_vt/100;
+   rec.num[3]:=lin.b_ve/100;
+   if lin.m25>-9000 then rec.neb.sbr:=lin.m25/100
+                    else rec.neb.sbr:=-99;
+   if lin.vgsr>-999999 then rec.neb.rv:=lin.vgsr;
+   rec.num[4]:=lin.stage/10;
+   rec.num[5]:=lin.lumcl/10;
+end;
+end;
+
+function Tcatalog.GetPGC(var rec:GcatRec):boolean;
+var lin : PGCrec;
+begin
+rec:=EmptyRec;
+result:=true;
+repeat
+  ReadPGC(lin,result);
+  if not result then break;
+  rec.neb.mag:=minvalue([90,abs(lin.mb/100)]);
+  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  if lin.maj>=0 then rec.neb.dim1:=lin.maj/100
+                else rec.neb.dim1:=0;
+  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+  break;
+until not result;
+if result then begin
+   rec.ra:=deg2rad*lin.ar/100000;
+   rec.dec:=deg2rad*lin.de/100000;
+   rec.neb.id:=lin.nom;
+   rec.str[1]:=inttostr(lin.pgc);
+   rec.neb.morph:=lin.typ;
+   if lin.min>=0 then rec.neb.dim2:=lin.min/100
+                 else rec.neb.dim2:=rec.neb.dim1;
+   if lin.pa=255 then rec.neb.pa:=90
+                 else rec.neb.pa:=lin.pa;
+   if lin.hrv>-999999 then rec.neb.rv:=lin.hrv;
+end;
+end;
+
+function Tcatalog.GetOCL(var rec:GcatRec):boolean;
+var lin : OCLrec;
+begin
+rec:=EmptyRec;
+result:=true;
+repeat
+  ReadOCL(lin,result);
+  if not result then break;
+  rec.neb.dim1:=lin.dim/10;
+  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) then continue; // filter big object except M31, LMC, SMC
+  rec.neb.mag:=lin.mt/100;
+  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  break;
+until not result;
+if result then begin
+   rec.ra:=deg2rad*lin.ar/100000;
+   rec.dec:=deg2rad*lin.de/100000;
+   case lin.cat of
+   1 : rec.neb.id:='NGC';
+   2 : rec.neb.id:='IC ';
+   else str(lin.cat:3,rec.neb.id);
+   end;
+   rec.neb.id:=rec.neb.id+inttostr(lin.num);
+   rec.str[1]:=inttostr(lin.ocl);
+   rec.neb.morph:=lin.conc+lin.range+lin.rich+lin.neb;
+   rec.num[1]:=3.2616*lin.dist;
+   if lin.age>0 then rec.num[2]:=power(10,frac(lin.age/100));
+   rec.num[3]:=lin.b_v/100;
+   rec.num[4]:=lin.ns;
+   rec.num[5]:=lin.ms/100;
+end;
+end;
+
+function Tcatalog.GetGCM(var rec:GcatRec):boolean;
+var lin : GCMrec;
+begin
+rec:=EmptyRec;
+result:=true;
+repeat
+  ReadGCM(lin,result);
+  if not result then break;
+  rec.neb.mag:=lin.vt/100;
+  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  rec.neb.dim1:=(lin.rc/100)*power(10,(lin.c/100));
+  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) then continue; // filter big object except M31, LMC, SMC
+  break;
+until not result;
+if result then begin
+   rec.ra:=deg2rad*lin.ar/100000;
+   rec.dec:=deg2rad*lin.de/100000;
+   rec.neb.id:=lin.name;
+   rec.str[1]:=lin.id;
+   rec.str[2]:=lin.spt;
+   rec.num[1]:=lin.b_vt/100;
+   rec.num[2]:=(lin.muv/100)-8.89; // sec->min
+   rec.num[3]:=lin.rc/100;
+   rec.num[4]:=lin.rh/100;
+   rec.num[5]:=3261.6*lin.rsun/10;
+end;
+end;
+
+function Tcatalog.GetGPN(var rec:GcatRec):boolean;
+var lin : GPNrec;
+begin
+rec:=EmptyRec;
+result:=true;
+repeat
+  ReadGPN(lin,result);
+  if not result then break;
+  rec.neb.mag:=lin.mv/100;
+  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  rec.neb.dim1:=lin.dim/10;
+  if cfgshr.NebFilter and (rec.neb.dim1/60<cfgcat.NebSizeMin) then continue;
+  break;
+until not result;
+if result then begin
+   rec.ra:=deg2rad*lin.ar/100000;
+   rec.dec:=deg2rad*lin.de/100000;
+   rec.neb.id:=lin.name;
+   rec.str[1]:=lin.pk;
+   rec.str[2]:=lin.png;
+   rec.num[1]:=lin.mHb/100;
+   rec.num[2]:=lin.cs_v/100;
+   rec.num[3]:=lin.cs_b/100;
 end;
 end;
 
@@ -1248,9 +1923,9 @@ try
                      SetWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]);
                      FindNumWDS(id,ra,dec,result) ;
                      end;
-{       S_GCat     : begin
+        S_GCat     : begin
                      FindNGcat(id,ra,dec,result) ;
-                     end;}
+                     end;
         S_TYC2     : begin
                      SetTY2Path(cfgcat.StarCatPath[tyc2-BaseStar]);
                      FindNumTYC2(id,ra,dec,result) ;
@@ -1268,14 +1943,15 @@ end;
 
 function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
 var
-   tar,tde,xx1,xx2,yy1,yy2 : double;
+   xx1,xx2,yy1,yy2,cyear,dyear : double;
    ok : boolean;
 begin
+xx1:=rad2deg*x1/15;
+xx2:=rad2deg*x2/15;
+yy1:=rad2deg*y1;
+yy2:=rad2deg*y2;
+cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
 if not nextobj then begin
-  xx1:=rad2deg*x1/15;
-  xx2:=rad2deg*x2/15;
-  yy1:=rad2deg*y1;
-  yy2:=rad2deg*y2;
   InitRec(cat);
   case cat of
    bsc     : OpenBSC(xx1,xx2,yy1,yy2,ok);
@@ -1294,6 +1970,17 @@ if not nextobj then begin
    gcvs    : OpenGCV(xx1,xx2,yy1,yy2,ok);
    wds     : OpenWDS(xx1,xx2,yy1,yy2,ok);
    sac     : OpenSAC(xx1,xx2,yy1,yy2,ok);
+   ngc     : OpenNGC(xx1,xx2,yy1,yy2,ok);
+   lbn     : OpenLBN(xx1,xx2,yy1,yy2,ok);
+   rc3     : OpenRC3(xx1,xx2,yy1,yy2,ok);
+   pgc     : OpenPGC(xx1,xx2,yy1,yy2,ok);
+   ocl     : OpenOCL(xx1,xx2,yy1,yy2,ok);
+   gcm     : OpenGCM(xx1,xx2,yy1,yy2,ok);
+   gpn     : OpenGPN(xx1,xx2,yy1,yy2,ok);
+   gcstar  : begin VerGCat:=rtStar; CurGCat:=0; ok:=NewGCat; if ok then OpenGCat(xx1,xx2,yy1,yy2,ok);end;
+   gcvar   : begin VerGCat:=rtVar; CurGCat:=0; ok:=NewGCat; if ok then OpenGCat(xx1,xx2,yy1,yy2,ok);end;
+   gcdbl   : begin VerGCat:=rtDbl; CurGCat:=0; ok:=NewGCat; if ok then OpenGCat(xx1,xx2,yy1,yy2,ok);end;
+   gcneb   : begin VerGCat:=rtNeb; CurGCat:=0; ok:=NewGCat; if ok then OpenGCat(xx1,xx2,yy1,yy2,ok);end;
    else ok:=false;
   end;
   if not ok then begin result:=false; exit; end;
@@ -1316,17 +2003,61 @@ repeat
    gcvs    : ok:=GetGCVS(rec);
    wds     : ok:=GetWDS(rec);
    sac     : ok:=GetSAC(rec);
+   ngc     : ok:=GetNGC(rec);
+   lbn     : ok:=GetLBN(rec);
+   rc3     : ok:=GetRC3(rec);
+   pgc     : ok:=GetPGC(rec);
+   ocl     : ok:=GetOCL(rec);
+   gcm     : ok:=GetGCM(rec);
+   gpn     : ok:=GetGPN(rec);
+   gcstar  : begin
+             ok:=GetGcatS(rec);
+             while not ok do begin
+                ok:=NewGcat;
+                if not ok then break;
+                OpenGCat(xx1,xx2,yy1,yy2,ok);
+                if ok then ok:=GetGcatS(rec);
+             end;
+             end;
+   gcvar   : begin
+             ok:=GetGcatV(rec);
+             while not ok do begin
+                ok:=NewGcat;
+                if not ok then break;
+                OpenGCat(xx1,xx2,yy1,yy2,ok);
+                if ok then ok:=GetGcatV(rec);
+             end;
+             end;
+   gcdbl   : begin
+             ok:=GetGcatD(rec);
+             while not ok do begin
+                ok:=NewGcat;
+                if not ok then break;
+                OpenGCat(xx1,xx2,yy1,yy2,ok);
+                if ok then ok:=GetGcatD(rec);
+             end;
+             end;
+   gcneb   : begin
+             ok:=GetGcatN(rec);
+             while not ok do begin
+                ok:=NewGcat;
+                if not ok then break;
+                OpenGCat(xx1,xx2,yy1,yy2,ok);
+                if ok then ok:=GetGcatN(rec);
+             end;
+             end;
    else ok:=false;
   end;
   if not ok then break;
-  tar:=rec.ra;
-  tde:=rec.dec;
-  if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[5] and rec.star.valid[6] then begin
-     tar:=tar+(rec.star.pmra/cos(tde))*cfgsc.dyear;
-     tde:=tde+(rec.star.pmdec)*cfgsc.dyear;
+  if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
+    if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
+                               else dyear:=cyear-rec.options.Epoch;
+    rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*dyear;
+    rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
   end;
-  if (tar<x1) or (tar>x2) then continue;
-  if (tde<y1) or (tde>y2) then continue;
+  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+  if (rec.ra<x1) or (rec.ra>x2) then continue;
+  if (rec.dec<y1) or (rec.dec>y2) then continue;
   break;
 until false ;
 result:=ok;
@@ -1336,18 +2067,23 @@ function Tcatalog.FindObj(x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_s
 var
    ok : boolean;
 begin
- ok:=false;
-{  FindGcat(ar,de,dx,dx,nextobj,false,ok,nom,ma,desc); }
-  if (not ok) and cfgcat.starcaton[sac-BaseNeb] then ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,cfgsc,rec);
-{  if (not ok) and GPNshow then FindGPN(ar,de,2*dx,2*dx,nextobj,ok,nom,ma,desc);
-  if (not ok) and OCLshow then FindOCL(ar,de,2*dx,2*dx,nextobj,ok,nom,ma,desc);
-  if (not ok) and LBNshow then FindLBN(ar,de,2*dx,2*dx,nextobj,ok,nom,ma,desc);
-  if (not ok) and GCMshow then FindGCM(ar,de,2*dx,2*dx,nextobj,ok,nom,ma,desc);
-  if (not ok) and RC3show then FindRC3(ar,de,2*dx,2*dx,nextobj,ok,nom,ma,desc);
-  if (not ok) and PGCshow then FindPGC(ar,de,2*dx,2*dx,nextobj,ok,nom,ma,desc);
-  if (not ok) and NGCshow then FindNGC(ar,de,2*dx,2*dx,nextobj,ok,nom,ma,desc);}
+while lockcat do application.ProcessMessages;
+try
+  lockcat:=true;
+  ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) and cfgcat.nebcaton[lbn-BaseNeb] then ok:=FindAtPos(lbn,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) and cfgcat.nebcaton[rc3-BaseNeb] then ok:=FindAtPos(rc3,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) and cfgcat.nebcaton[pgc-BaseNeb] then ok:=FindAtPos(pgc,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) and cfgcat.nebcaton[ocl-BaseNeb] then ok:=FindAtPos(ocl,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) and cfgcat.nebcaton[gcm-BaseNeb] then ok:=FindAtPos(gcm,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) and cfgcat.nebcaton[gpn-BaseNeb] then ok:=FindAtPos(gpn,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) then ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,cfgsc,rec);
   if (not ok) and cfgcat.varstarcaton[gcvs-BaseVar] then ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) then ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,cfgsc,rec);
   if (not ok) and cfgcat.dblstarcaton[wds-BaseDbl]  then ok:=FindAtPos(wds,x1,y1,x2,y2,nextobj,cfgsc,rec);
+  if (not ok) then ok:=FindAtPos(gcstar,x1,y1,x2,y2,nextobj,cfgsc,rec);
   if (not ok) and cfgcat.starcaton[bsc-BaseStar] then ok:=FindAtPos(bsc,x1,y1,x2,y2,nextobj,cfgsc,rec);
   if (not ok) and cfgcat.starcaton[dsbase-BaseStar] then ok:=FindAtPos(dsbase,x1,y1,x2,y2,nextobj,cfgsc,rec);
   if (not ok) and cfgcat.starcaton[sky2000-BaseStar] then ok:=FindAtPos(sky2000,x1,y1,x2,y2,nextobj,cfgsc,rec);
@@ -1366,6 +2102,9 @@ begin
   if (not ok) and Catalog2Show then FindCatalogue2(ar,de,dx,dx,nextobj,ok,nom,ma,desc,notes);
   if (not ok) and ArtSatOn then FindSatellite(ar,de,dx,dx,nextobj,ok,nom,ma,desc);}
   result:=ok;
+finally
+  lockcat:=false;
+end;
 end;
 
 Procedure Tcatalog.GetAltName(rec: GCatrec; var txt: string);
@@ -1401,6 +2140,13 @@ begin
    gcvs    : result:=IsGCVPath(catpath);
    wds     : result:=IsWDSPath(catpath);
    sac     : result:=IsSACPath(catpath);
+   ngc     : result:=IsNGCPath(catpath);
+   lbn     : result:=IsLBNPath(catpath);
+   rc3     : result:=IsRC3Path(catpath);
+   pgc     : result:=IsPGCPath(catpath);
+   ocl     : result:=IsOCLPath(catpath);
+   gcm     : result:=IsGCMPath(catpath);
+   gpn     : result:=IsGPNPath(catpath);
    else result:=false;
   end;
 end;

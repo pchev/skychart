@@ -61,6 +61,7 @@ type
      Procedure PlotDblStar(xx,yy: integer; ma,sep,pa,b_v : Double);
      Procedure PlotGalaxie(xx,yy: integer; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
+     Procedure PlotLine(x1,y1,x2,y2,color,width: integer);
   end;
 
 Implementation
@@ -386,7 +387,7 @@ with cnv do begin
    Pen.Width := cfgchart.drawpen;
    sz:=PixScale*dim/2;
    ds:=round(maxvalue([sz,2*cfgchart.drawsize]));
-   if sbr<0 then begin
+   if sbr<=0 then begin
      if dim<=0 then dim:=1;
      sbr:= ma + 5*log10(dim) - 0.26;
    end;
@@ -597,6 +598,16 @@ begin
       0 : PlotNebula0(xx,yy,dim,ma,sbr,pixscale,typ);
       1 : PlotNebula1(xx,yy,dim,ma,sbr,pixscale,typ);
       end;
+end;
+
+Procedure TSplot.PlotLine(x1,y1,x2,y2,color,width: integer);
+begin
+with cnv do begin
+  Pen.width:=width;
+  Pen.Color:=color;
+  MoveTo(x1,y1);
+  LineTo(x2,y2);
+end;
 end;
 
 end.

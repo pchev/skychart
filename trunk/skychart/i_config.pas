@@ -43,8 +43,26 @@ for i:=0 to PageControl1.PageCount-1 do
 end;
 
 procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
+var i: integer;
 begin
- SelectPage(node.Text);
+// SelectPage(node.Text);
+ i:=node.AbsoluteIndex;
+ PageControl1.ActivePageIndex:=i;
+ case PageControl1.ActivePage.Tag of
+  1 : ShowProjection;
+ end;
+end;
+
+procedure Tf_config.nextClick(Sender: TObject);
+begin
+ if PageControl1.ActivePageIndex<PageControl1.PageCount-1 then
+    Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex+1];
+end;
+
+procedure Tf_config.previousClick(Sender: TObject);
+begin
+ if PageControl1.ActivePageIndex>0 then
+    Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex-1];
 end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
@@ -54,14 +72,87 @@ end;
 
 procedure Tf_config.FormShow(Sender: TObject);
 begin
+ShowTime;
+ShowChart;
 ShowField;
 ShowFilter;
 ShowCDCStar;
 ShowCDCNeb;
 ShowFonts;
 ShowDisplay;
+ShowGCat;
 TreeView1.FullExpand;
 Treeview1.selected:=Treeview1.items[cmain.configpage];
+end;
+
+procedure Tf_config.ShowTime;
+var h,n,s:string;
+    y,m,d:integer;
+begin
+y:=csc.curyear;
+m:=csc.curmonth;
+d:=csc.curday;
+checkbox1.checked:=csc.UseSystemTime;
+checkbox2.checked:=csc.AutoRefresh;
+longedit2.value:=cmain.AutoRefreshDelay;
+if y>0 then begin
+  d_year.value:=y;
+  adbc.itemindex:=0;
+end else begin
+  d_year.value:=1-y;
+  adbc.itemindex:=1;
+end;
+d_month.value:=m;
+d_day.value:=d;
+labeldate.caption:=d_year.text+'-'+d_month.text+'-'+d_day.text;
+artostr2(csc.curtime,h,n,s);
+t_hour.value:=strtoint(h);
+t_min.value:=strtoint(n);
+t_sec.value:=strtoint(s);
+labeltime.caption:=t_hour.text+':'+t_min.text+':'+t_sec.text;
+tz.value:=csc.timezone;
+labeltimezone.caption:=tz.text;
+Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
+checkbox4.checked:=csc.Force_DT_UT;
+if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
+dt_ut.value:=round(csc.DT_UT_val*3600);
+end;
+
+procedure Tf_config.ShowChart;
+var i : integer;
+begin
+equinox2.text:=stringreplace(stringreplace(stringreplace(cshr.EquinoxChart,'J','',[]),'B','',[]),'Date','2000.0',[]);
+equinox1.itemindex:=0;
+for i:=0 to equinox1.items.count-1 do
+  if equinox1.items[i]=cshr.EquinoxChart then
+      equinox1.itemindex:=i;
+equinoxtype.itemindex:=cshr.EquinoxType;
+PMBox.checked:=csc.PMon;
+DrawPMBox.checked:=csc.DrawPMon;
+lDrawPMy.value:=csc.DrawPMyear;
+end;
+
+procedure Tf_config.ShowGCat;
+var i,j:integer;
+begin
+stringgrid3.RowCount:=2;
+stringgrid3.cells[0,1]:='';
+stringgrid3.cells[1,1]:='';
+stringgrid3.cells[2,1]:='';
+stringgrid3.cells[3,1]:='';
+stringgrid3.cells[4,1]:='';
+CatalogEmpty:=true;
+for j:=0 to ccat.GCatnum-1 do begin
+  if catalogempty then catalogempty:=false
+                  else stringgrid3.rowcount:=stringgrid3.rowcount+1;
+  i:=stringgrid3.rowcount-1;
+  stringgrid3.cells[1,i]:=ccat.GCatLst[j].shortname;
+  stringgrid3.cells[2,i]:=floattostr(ccat.GCatLst[j].min);
+  stringgrid3.cells[3,i]:=floattostr(ccat.GCatLst[j].max);
+  stringgrid3.cells[4,i]:=ccat.GCatLst[j].path;
+  if ccat.GCatLst[j].actif then stringgrid3.cells[0,i]:='1'
+                           else stringgrid3.cells[0,i]:='0';
+end;
 end;
 
 procedure Tf_config.ShowCDCNeb;
@@ -90,14 +181,14 @@ fpgc2.Value:=ccat.NebCatField[pgc-BaseNeb,2];
 focl2.Value:=ccat.NebCatField[ocl-BaseNeb,2];
 fgcm2.Value:=ccat.NebCatField[gcm-BaseNeb,2];
 fgpn2.Value:=ccat.NebCatField[gpn-BaseNeb,2];
-sac3.Text:=ccat.NebCatPath[sac-BaseNeb];
-ngc3.Text:=ccat.NebCatPath[ngc-BaseNeb];
-lbn3.Text:=ccat.NebCatPath[lbn-BaseNeb];
-rc33.Text:=ccat.NebCatPath[rc3-BaseNeb];
-pgc3.Text:=ccat.NebCatPath[pgc-BaseNeb];
-ocl3.Text:=ccat.NebCatPath[ocl-BaseNeb];
-gcm3.Text:=ccat.NebCatPath[gcm-BaseNeb];
-gpn3.Text:=ccat.NebCatPath[gpn-BaseNeb];
+sac3.Text:=ccat.NebCatPath[sac-BaseNeb]+b;
+ngc3.Text:=ccat.NebCatPath[ngc-BaseNeb]+b;
+lbn3.Text:=ccat.NebCatPath[lbn-BaseNeb]+b;
+rc33.Text:=ccat.NebCatPath[rc3-BaseNeb]+b;
+pgc3.Text:=ccat.NebCatPath[pgc-BaseNeb]+b;
+ocl3.Text:=ccat.NebCatPath[ocl-BaseNeb]+b;
+gcm3.Text:=ccat.NebCatPath[gcm-BaseNeb]+b;
+gpn3.Text:=ccat.NebCatPath[gpn-BaseNeb]+b;
 end;
 
 procedure Tf_config.ShowCDCStar;
@@ -149,21 +240,21 @@ dstyc1.Value:=ccat.StarCatField[dstyc-BaseStar,1];
 dstyc2.Value:=ccat.StarCatField[dstyc-BaseStar,2];
 dsgsc1.Value:=ccat.StarCatField[dsgsc-BaseStar,1];
 dsgsc2.Value:=ccat.StarCatField[dsgsc-BaseStar,2];
-bsc3.Text:=ccat.StarCatPath[bsc-BaseStar];
-sky3.Text:=ccat.StarCatPath[sky2000-BaseStar];
-tyc3.Text:=ccat.StarCatPath[tyc-BaseStar];
-ty23.Text:=ccat.StarCatPath[tyc2-BaseStar];
-tic3.Text:=ccat.StarCatPath[tic-BaseStar];
-gscf3.Text:=ccat.StarCatPath[gscf-BaseStar];
-gscc3.Text:=ccat.StarCatPath[gscc-BaseStar];
-gsc3.Text:=ccat.StarCatPath[gsc-BaseStar];
-usn3.Text:=ccat.StarCatPath[usnoa-BaseStar];
-mct3.Text:=ccat.StarCatPath[microcat-BaseStar];
-gcv3.Text:=ccat.VarStarCatPath[gcvs-BaseVar];
-wds3.Text:=ccat.DblStarCatPath[wds-BaseDbl];
-dsbase3.Text:=ccat.StarCatPath[dsbase-BaseStar];
-dstyc3.Text:=ccat.StarCatPath[dstyc-BaseStar];
-dsgsc3.Text:=ccat.StarCatPath[dsgsc-BaseStar];
+bsc3.Text:=ccat.StarCatPath[bsc-BaseStar]+b;
+sky3.Text:=ccat.StarCatPath[sky2000-BaseStar]+b;
+tyc3.Text:=ccat.StarCatPath[tyc-BaseStar]+b;
+ty23.Text:=ccat.StarCatPath[tyc2-BaseStar]+b;
+tic3.Text:=ccat.StarCatPath[tic-BaseStar]+b;
+gscf3.Text:=ccat.StarCatPath[gscf-BaseStar]+b;
+gscc3.Text:=ccat.StarCatPath[gscc-BaseStar]+b;
+gsc3.Text:=ccat.StarCatPath[gsc-BaseStar]+b;
+usn3.Text:=ccat.StarCatPath[usnoa-BaseStar]+b;
+mct3.Text:=ccat.StarCatPath[microcat-BaseStar]+b;
+gcv3.Text:=ccat.VarStarCatPath[gcvs-BaseVar]+b;
+wds3.Text:=ccat.DblStarCatPath[wds-BaseDbl]+b;
+dsbase3.Text:=ccat.StarCatPath[dsbase-BaseStar]+b;
+dstyc3.Text:=ccat.StarCatPath[dstyc-BaseStar]+b;
+dsgsc3.Text:=ccat.StarCatPath[dsgsc-BaseStar]+b;
 end;
 
 procedure Tf_config.ShowFilter;
@@ -183,6 +274,7 @@ fsmag8.Value:=cshr.StarMagFilter[8];
 fsmag9.Value:=cshr.StarMagFilter[9];
 nebbox.Checked:=cshr.NebFilter;
 bignebbox.Checked:=cshr.BigNebFilter;
+fBigNebLimit.value:=round(cshr.BigNebLimit);
 fmag0.Value:=cshr.NebMagFilter[0];
 fmag1.Value:=cshr.NebMagFilter[1];
 fmag2.Value:=cshr.NebMagFilter[2];
@@ -222,6 +314,31 @@ fw6.Value:=cshr.fieldnum[6];
 fw7.Value:=cshr.fieldnum[7];
 fw8.Value:=cshr.fieldnum[8];
 fw9.Value:=cshr.fieldnum[9];
+end;
+
+procedure Tf_config.ShowProjection;
+   procedure setprojrange(var cb:Tcombobox;n:integer);
+   begin
+     cb.items.clear;
+     if cshr.fieldnum[n]<=270 then cb.items.add('ARC');
+     if cshr.fieldnum[n]<=89 then begin
+        cb.items.add('TAN');
+        cb.items.add('SIN');
+     end;
+     cb.items.add('CAR');
+     cb.text:=csc.projname[n]
+   end;
+begin
+setprojrange(combobox1,0);
+setprojrange(combobox2,1);
+setprojrange(combobox3,2);
+setprojrange(combobox4,3);
+setprojrange(combobox5,4);
+setprojrange(combobox6,5);
+setprojrange(combobox7,6);
+setprojrange(combobox8,7);
+setprojrange(combobox9,8);
+setprojrange(combobox10,9);
 end;
 
 procedure Tf_config.SetFonts(ctrl:Tedit;num:integer);
@@ -280,7 +397,7 @@ for i:=1 to 6 do begin
 end;
 ShowFonts;
 end;
-
+                 
 procedure Tf_config.FWChange(Sender: TObject);
 begin
 if sender is TFloatEdit then with sender as TFloatEdit do begin
@@ -292,6 +409,7 @@ procedure Tf_config.CDCStarSelClick(Sender: TObject);
 begin
 if sender is TCheckBox then with sender as TCheckBox do begin
   ccat.StarCatDef[tag]:=Checked;
+  ShowCDCStar;
 end;
 end;
 
@@ -312,10 +430,13 @@ end;
 procedure Tf_config.CDCStarPathChange(Sender: TObject);
 begin
 if sender is TEdit then with sender as TEdit do begin
-  if f_main.catalog.checkpath(tag+BaseStar,text) then begin
-     ccat.StarCatPath[tag]:=Text;
-     color:=clWindow;
-  end else color:=clRed;
+  Text:=trim(Text);
+  ccat.StarCatPath[tag]:=Text;
+  if ccat.StarCatDef[tag] then
+     if f_main.catalog.checkpath(tag+BaseStar,text)
+        then color:=clWindow
+        else color:=clRed
+     else color:=clWindow;
 end;
 end;
 
@@ -360,6 +481,11 @@ end;
 procedure Tf_config.BigNebBoxClick(Sender: TObject);
 begin
 cshr.BigNebFilter:=bignebbox.Checked;
+end;
+
+procedure Tf_config.fBigNebLimitChange(Sender: TObject);
+begin
+cshr.BigNebLimit:=fBigNebLimit.value;
 end;
 
 procedure Tf_config.fsmagvisChange(Sender: TObject);
@@ -410,6 +536,7 @@ procedure Tf_config.CDCNebSelClick(Sender: TObject);
 begin
 if sender is TCheckBox then with sender as TCheckBox do begin
   ccat.NebCatDef[tag]:=Checked;
+  ShowCDCNeb;
 end;
 end;
 
@@ -430,10 +557,13 @@ end;
 procedure Tf_config.CDCNebPathChange(Sender: TObject);
 begin
 if sender is TEdit then with sender as TEdit do begin
-  if f_main.catalog.checkpath(tag+BaseNeb,text) then begin
-     ccat.NebCatPath[tag]:=Text;
-     color:=clWindow;
-  end else color:=clRed;
+  Text:=trim(Text);
+  ccat.NebCatPath[tag]:=Text;
+  if ccat.NebCatDef[tag] then
+     if f_main.catalog.checkpath(tag+BaseNeb,text)
+        then color:=clWindow
+        else color:=clRed
+     else color:=clWindow;
 end;
 end;
 
@@ -450,6 +580,7 @@ end;
 procedure Tf_config.GCVBoxClick(Sender: TObject);
 begin
 ccat.VarStarCatDef[gcvs-BaseVar]:=GCVBox.Checked;
+ShowCDCStar;
 end;
 
 procedure Tf_config.Fgcv1Change(Sender: TObject);
@@ -464,10 +595,13 @@ end;
 
 procedure Tf_config.gcv3Change(Sender: TObject);
 begin
-if f_main.catalog.checkpath(gcvs,gcv3.text) then begin
-   ccat.VarStarCatPath[gcvs-BaseVar]:=gcv3.Text;
-   gcv3.color:=clWindow;
-end else gcv3.color:=clRed;
+  gcv3.Text:=trim(gcv3.Text);
+  ccat.VarStarCatPath[gcvs-BaseVar]:=gcv3.Text;
+  if ccat.VarStarCatDef[gcvs-BaseVar] then
+     if f_main.catalog.checkpath(gcvs,gcv3.text)
+        then gcv3.color:=clWindow
+        else gcv3.color:=clRed
+     else gcv3.color:=clWindow;
 end;
 
 procedure Tf_config.BitBtn14Click(Sender: TObject);
@@ -489,6 +623,7 @@ end;
 procedure Tf_config.WDSboxClick(Sender: TObject);
 begin
 ccat.DblStarCatDef[wds-BaseDbl]:=WDSbox.Checked;
+ShowCDCStar;
 end;
 
 procedure Tf_config.Fwds1Change(Sender: TObject);
@@ -503,10 +638,13 @@ end;
 
 procedure Tf_config.wds3Change(Sender: TObject);
 begin
-if f_main.catalog.checkpath(wds,wds3.text) then begin
-   ccat.DblStarCatPath[wds-BaseDbl]:=wds3.Text;
-   wds3.color:=clWindow;
-end else wds3.color:=clRed;
+  wds3.Text:=trim(wds3.Text);
+  ccat.DblStarCatPath[wds-BaseDbl]:=wds3.Text;
+  if ccat.DblStarCatDef[wds-BaseDbl] then
+     if f_main.catalog.checkpath(wds,wds3.text)
+        then wds3.color:=clWindow
+        else wds3.color:=clRed
+     else wds3.color:=clWindow;
 end;
 
 procedure Tf_config.BitBtn15Click(Sender: TObject);
@@ -533,6 +671,333 @@ end;
 procedure Tf_config.nebuladisplayClick(Sender: TObject);
 begin
  cplot.nebplot:=nebuladisplay.itemindex;
+end;
+                  
+procedure Tf_config.StringGrid3DrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+with Sender as TStringGrid do begin
+if (Acol=0)and(Arow>0) then begin
+  if (cells[acol,arow]='1')then begin
+    Canvas.Brush.Color := clLime;
+    Canvas.FillRect(Rect);
+  end else if (cells[acol,arow]='0')then begin
+    Canvas.Brush.Color := clRed;
+    Canvas.FillRect(Rect);
+  end;
+  end;
+if (Acol=1)and(Arow>0) then
+  if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
+    Canvas.Brush.Color := clRed;
+    Canvas.FillRect(Rect);
+    cells[0,arow]:='0';
+  end;
+if (Acol=2)and(Arow>0) then
+  if not IsNumber(cells[acol,arow]) then begin
+    Canvas.Brush.Color := clRed;
+    Canvas.FillRect(Rect);
+    cells[0,arow]:='0';
+  end;
+if (Acol=3)and(Arow>0) then
+  if not IsNumber(cells[acol,arow]) then begin
+    Canvas.Brush.Color := clRed;
+    Canvas.FillRect(Rect);
+    cells[0,arow]:='0';
+  end;
+if (Acol=4)and(Arow>0) then
+  if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
+    Canvas.Brush.Color := clRed;
+    Canvas.FillRect(Rect);
+    cells[0,arow]:='0';
+  end;
+if (Acol=5)and(Arow>0) then begin
+    Canvas.draw(Rect.left,Rect.top,BitBtn9.Glyph);
+  end;
+end;
+end;
+
+Procedure Tf_config.EditGCatPath(row : integer);
+var buf : string;
+    p : integer;
+begin
+    if trim(stringgrid3.Cells[4,row])<>'' then opendialog1.InitialDir:=stringgrid3.Cells[4,row]
+                                          else opendialog1.InitialDir:=slash(appdir)+'cat';
+    if trim(stringgrid3.Cells[1,row])<>'' then opendialog1.filename:=trim(stringgrid3.Cells[1,row])+'.hdr';
+    opendialog1.Filter:='Catalog header|*.hdr';
+    opendialog1.DefaultExt:='.hdr';
+    try
+    if opendialog1.execute then begin
+       buf:=extractfilename(opendialog1.FileName);
+       p:=pos('.',buf);
+       stringgrid3.Cells[1,row]:=uppercase(copy(buf,1,p-1));
+       stringgrid3.Cells[4,row]:=extractfilepath(opendialog1.filename);
+       stringgrid3.Cells[2,row]:='0';
+       stringgrid3.Cells[3,row]:=f_main.catalog.GetMaxField(stringgrid3.Cells[4,row],stringgrid3.Cells[1,row]);
+    end;
+    finally
+    chdir(appdir);
+    end;
+end;
+
+Procedure Tf_config.DeleteGCatRow(p : integer);
+var i : integer;
+begin
+if p<1 then exit;
+if stringgrid3.rowcount=2 then begin
+ stringgrid3.cells[0,1]:='';
+ stringgrid3.cells[1,1]:='';
+ stringgrid3.cells[2,1]:='';
+ stringgrid3.cells[3,1]:='';
+ stringgrid3.cells[4,1]:='';
+ CatalogEmpty:=true;
+end else begin
+for i:=p to stringgrid3.RowCount-2 do begin
+ stringgrid3.cells[0,i]:=stringgrid3.cells[0,i+1];
+ stringgrid3.cells[1,i]:=stringgrid3.cells[1,i+1];
+ stringgrid3.cells[2,i]:=stringgrid3.cells[2,i+1];
+ stringgrid3.cells[3,i]:=stringgrid3.cells[3,i+1];
+ stringgrid3.cells[4,i]:=stringgrid3.cells[4,i+1];
+end;
+stringgrid3.RowCount:=stringgrid3.RowCount-1;
+end;
+end;
+
+procedure Tf_config.StringGrid3MouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var col,row:integer;
+begin
+StringGrid3.MouseToCell(X, Y, Col, Row);
+if row=0 then exit;
+case col of
+0 : begin
+    if stringgrid3.Cells[col,row]='1' then stringgrid3.Cells[col,row]:='0'
+       else
+       if fileexists(slash(stringgrid3.cells[4,row])+stringgrid3.cells[1,row]+'.hdr') then stringgrid3.Cells[col,row]:='1'
+          else  stringgrid3.Cells[col,row]:='0';
+    end;
+5 : begin
+    EditGCatPath(row);
+    end;
+end;
+end;
+
+procedure Tf_config.StringGrid3SelectCell(Sender: TObject; ACol,
+  ARow: Integer; var CanSelect: Boolean);
+begin
+if Acol=5 then canselect:=false else canselect:=true;
+end;
+
+procedure Tf_config.StringGrid3SetEditText(Sender: TObject; ACol,
+  ARow: Integer; const Value: WideString);
+begin
+if (Acol=4)and(Arow>0) then
+  if not fileexists(slash(value)+StringGrid3.cells[1,arow]+'.hdr') then begin
+    StringGrid3.Canvas.Brush.Color := clRed;
+    StringGrid3.Canvas.FillRect(StringGrid3.CellRect(ACol, ARow));
+    StringGrid3.cells[0,arow]:='0';
+  end;
+if ((Acol=2)or(Acol=3))and(Arow>0)and(value>'') then begin
+  if not IsNumber(value) then begin
+    StringGrid3.Canvas.Brush.Color := clRed;
+    StringGrid3.Canvas.FillRect(StringGrid3.CellRect(ACol, ARow));
+    StringGrid3.cells[0,arow]:='0';
+  end;
+end;
+end;
+
+procedure Tf_config.BitBtn33Click(Sender: TObject);
+begin
+catalogempty:=false;
+stringgrid3.rowcount:=stringgrid3.rowcount+1;
+stringgrid3.cells[2,stringgrid3.rowcount-1]:='0';
+stringgrid3.cells[3,stringgrid3.rowcount-1]:='10';
+EditGCatPath(stringgrid3.rowcount-1);
+end;
+
+procedure Tf_config.BitBtn35Click(Sender: TObject);
+var p : integer;
+begin
+p:=stringgrid3.selection.top;
+stringgrid3.cells[1,p]:='';
+stringgrid3.cells[2,p]:='';
+stringgrid3.cells[3,p]:='';
+stringgrid3.cells[4,p]:='';
+DeleteGCatRow(p);
+end;
+
+procedure Tf_config.FormClose(Sender: TObject; var Action: TCloseAction);
+var i,x,v:integer;
+begin
+ccat.GCatNum:=stringgrid3.RowCount-1;
+SetLength(ccat.GCatLst,ccat.GCatNum);
+for i:=0 to ccat.GCatNum-1 do begin
+   ccat.GCatLst[i].shortname:=stringgrid3.cells[1,i+1];
+   ccat.GCatLst[i].path:=stringgrid3.cells[4,i+1];
+   val(stringgrid3.cells[2,i+1],x,v);
+   if v=0 then ccat.GCatLst[i].min:=x
+          else ccat.GCatLst[i].min:=0;
+   val(stringgrid3.cells[3,i+1],x,v);
+   if v=0 then ccat.GCatLst[i].max:=x
+          else ccat.GCatLst[i].max:=0;
+   ccat.GCatLst[i].Actif:=stringgrid3.cells[0,i+1]='1';
+   ccat.GCatLst[i].magmax:=0;
+   ccat.GCatLst[i].name:='';
+   ccat.GCatLst[i].cattype:=0;
+   if ccat.GCatLst[i].Actif then begin
+      if not
+      f_main.catalog.GetInfo(ccat.GCatLst[i].path,
+                      ccat.GCatLst[i].shortname,
+                      ccat.GCatLst[i].magmax,
+                      ccat.GCatLst[i].cattype,
+                      ccat.GCatLst[i].version,
+                      ccat.GCatLst[i].name)
+      then ccat.GCatLst[i].Actif:=false;
+   end;
+end;
+end;
+
+procedure Tf_config.SetEquinox;
+begin
+case cshr.EquinoxType of
+0 : begin
+     case equinox1.itemindex of
+     0 : begin
+           cshr.EquinoxChart:='J2000';
+           cshr.DefaultJDChart:=jd2000;
+         end;
+     1 : begin
+           cshr.EquinoxChart:='B1950';
+           cshr.DefaultJDChart:=jd1950;
+         end;
+     end;
+     equinox1.Visible:=true;
+     equinox2.Visible:=false;
+    end;
+1 : begin
+     cshr.EquinoxChart:=equinox2.text;
+     cshr.DefaultJDChart:=jd(trunc(equinox2.Value),trunc(frac(equinox2.Value)*12)+1,0,0);
+     equinox1.Visible:=false;
+     equinox2.Visible:=true;
+    end;
+2 : begin
+     cshr.EquinoxChart:='Date';
+     cshr.DefaultJDChart:=jd2000;
+     equinox1.Visible:=false;
+     equinox2.Visible:=false;
+    end;
+end;
+end;
+
+procedure Tf_config.equinoxtypeClick(Sender: TObject);
+begin
+cshr.EquinoxType:=equinoxtype.itemindex;
+if cshr.EquinoxType=0 then equinox1.ItemIndex:=0;
+SetEquinox;
+end;
+
+procedure Tf_config.equinox1Change(Sender: TObject);
+begin
+if (cshr.EquinoxType=0) then SetEquinox;
+end;
+
+procedure Tf_config.equinox2Change(Sender: TObject);
+begin
+if (cshr.EquinoxType=1)and(trim(equinox2.text)>'') then SetEquinox;
+end;
+
+procedure Tf_config.PMBoxClick(Sender: TObject);
+begin
+csc.PMon:=PMBox.checked;
+end;
+
+procedure Tf_config.DrawPmBoxClick(Sender: TObject);
+begin
+csc.DrawPMon:=DrawPMBox.checked;
+end;
+
+procedure Tf_config.lDrawPMyChange(Sender: TObject);
+begin
+csc.DrawPMyear:=lDrawPMy.value;
+end;
+
+procedure Tf_config.CheckBox1Click(Sender: TObject);
+begin
+csc.UseSystemTime:=checkbox1.checked;
+SetCurrentTime(csc);
+panel7.visible:=not csc.UseSystemTime;
+panel9.visible:=not csc.UseSystemTime;
+ShowTime;
+end;
+
+procedure Tf_config.CheckBox2Click(Sender: TObject);
+begin
+csc.AutoRefresh:=checkbox2.checked;
+end;
+
+procedure Tf_config.LongEdit2Change(Sender: TObject);
+begin
+cmain.AutoRefreshDelay:=longedit2.value;
+end;
+
+procedure Tf_config.tzChange(Sender: TObject);
+begin
+csc.timezone:=tz.value;
+csc.obstz:=tz.value;
+end;
+
+procedure Tf_config.CheckBox4Click(Sender: TObject);
+begin
+csc.Force_DT_UT:=checkbox4.checked;
+dt_ut.enabled:=csc.Force_DT_UT;
+csc.DT_UT:=DTminusUT(csc.curyear,csc);
+Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
+dt_ut.text:=Tdt_Ut.caption;
+end;
+
+procedure Tf_config.dt_utChange(Sender: TObject);
+begin
+csc.DT_UT_val:=dt_ut.value/3600;
+csc.DT_UT:=csc.DT_UT_val;
+Tdt_ut.caption:=dt_ut.text;
+end;
+
+procedure Tf_config.DateChange(Sender: TObject);
+begin
+if adbc.itemindex=0 then
+  csc.curyear:=d_year.value
+else
+  csc.curyear:=1-d_year.value;
+csc.curmonth:=d_month.value;
+csc.curday:=d_day.value;
+csc.DT_UT:=DTminusUT(csc.curyear,csc);
+Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
+dt_ut.text:=Tdt_Ut.caption;
+end;
+
+procedure Tf_config.TimeChange(Sender: TObject);
+begin
+csc.curtime:=t_hour.value+t_min.value/60+t_sec.value/3600;
+end;
+
+procedure Tf_config.BitBtn4Click(Sender: TObject);
+var y,m,d,h,n,s,ms : word;
+begin
+ ADBC.itemindex:=0;
+ decodedate(now,y,m,d);
+ decodeTime(now,h,n,s,ms);
+ d_year.value:=y;
+ d_month.value:=m;
+ d_day.value:=d;
+ t_hour.value:=h;
+ t_min.value:=n;
+ t_sec.value:=s;
+ tz.value:=GetTimezone;
+end;
+
+procedure Tf_config.ProjectionChange(Sender: TObject);
+begin
+if sender is TComboBox then with sender as TComboBox do
+   csc.projname[tag]:=text;
 end;
 
 

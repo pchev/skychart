@@ -1,6 +1,6 @@
 object f_chart: Tf_chart
-  Left = 667
-  Top = 542
+  Left = 671
+  Top = 564
   Width = 314
   Height = 209
   Caption = 'Chart'
@@ -185,6 +185,12 @@ object f_chart: Tf_chart
       Caption = 'Move North'
       OnExecute = MoveNorthExecute
     end
+    object Flipx: TAction
+      Category = 'rotation'
+      Caption = 'Flipx'
+      ImageIndex = 15
+      OnExecute = FlipxExecute
+    end
     object MoveSouth: TAction
       Category = 'move'
       Caption = 'Move South'
@@ -231,17 +237,45 @@ object f_chart: Tf_chart
       ImageIndex = 7
       OnExecute = zoomminusmoveExecute
     end
-    object Flipx: TAction
-      Category = 'zoom'
-      Caption = 'Flipx'
-      ImageIndex = 15
-      OnExecute = FlipxExecute
-    end
     object Flipy: TAction
-      Category = 'zoom'
+      Category = 'rotation'
       Caption = 'Flipy'
       ImageIndex = 17
       OnExecute = FlipyExecute
+    end
+    object GridEQ: TAction
+      Category = 'Grid'
+      Caption = 'GridEQ'
+      ImageIndex = 24
+      OnExecute = GridEQExecute
+    end
+    object GridAZ: TAction
+      Category = 'Grid'
+      Caption = 'GridAZ'
+      ImageIndex = 25
+      OnExecute = GridAZExecute
+    end
+    object rot_plus: TAction
+      Category = 'rotation'
+      Caption = 'rot_plus'
+      ImageIndex = 21
+      OnExecute = rot_plusExecute
+    end
+    object rot_minus: TAction
+      Category = 'rotation'
+      Caption = 'rot_minus'
+      ImageIndex = 22
+      OnExecute = rot_minusExecute
+    end
+    object Undo: TAction
+      Category = 'Undo'
+      Caption = 'Undo'
+      OnExecute = UndoExecute
+    end
+    object Redo: TAction
+      Category = 'Undo'
+      Caption = 'Redo'
+      OnExecute = RedoExecute
     end
   end
   object PopupMenu1: TPopupMenu

@@ -36,13 +36,15 @@ begin
  sc.cfgsc.fov:=1;
  sc.cfgsc.theta:=0;
  sc.cfgsc.projtype:='A';
- sc.cfgsc.ProjPole:=0;
+ sc.cfgsc.ProjPole:=Equat;
  sc.cfgsc.FlipX:=1;
  sc.cfgsc.FlipY:=1;
  sc.plot.cnv:=Image1.canvas;
  sc.InitChart;
  movefactor:=4;
  zoomfactor:=2;
+ lastundo:=0;
+ validundo:=0;
 end;
 
 procedure Tf_chart.FormDestroy(Sender: TObject);
@@ -50,8 +52,18 @@ begin
  sc.free;
 end;
 
+procedure Tf_chart.AutoRefresh;
+begin
+if (not sc.cfgsc.FollowOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.FollowOn:=true;
+  sc.cfgsc.FollowType:=4;
+end;
+Refresh;
+end;
+
 procedure Tf_chart.Refresh;
 begin
+try
  screen.cursor:=crHourGlass;
  Image1.width:=clientwidth;
  Image1.height:=clientheight;
@@ -59,7 +71,43 @@ begin
  Image1.Picture.Bitmap.Height:=Image1.Height;
  sc.plot.init(Image1.width,Image1.height);
  sc.Refresh;
+ inc(lastundo); inc(validundo);
+ if lastundo>maxundo then lastundo:=1;
+ undolist[lastundo]:=sc.cfgsc;
+ curundo:=lastundo;
+finally
  screen.cursor:=crDefault;
+end;
+end;
+
+procedure Tf_chart.UndoExecute(Sender: TObject);
+var i,j : integer;
+begin
+i:=curundo-1;
+j:=lastundo+1;
+if i<1 then i:=maxundo;
+if j>maxundo then j:=1;
+if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
+  curundo:=i;
+  sc.cfgsc:=undolist[curundo];
+  sc.plot.init(Image1.width,Image1.height);
+  sc.Refresh;
+end;
+end;
+
+procedure Tf_chart.RedoExecute(Sender: TObject);
+var i,j : integer;
+begin
+i:=curundo+1;
+j:=lastundo+1;
+if i>maxundo then i:=1;
+if j>maxundo then j:=1;
+if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
+  curundo:=i;
+  sc.cfgsc:=undolist[curundo];
+  sc.plot.init(Image1.width,Image1.height);
+  sc.Refresh;
+end;
 end;
 
 procedure Tf_chart.FormResize(Sender: TObject);
@@ -127,6 +175,30 @@ procedure Tf_chart.FlipyExecute(Sender: TObject);
 begin
  sc.cfgsc.FlipY:=-sc.cfgsc.FlipY;
  f_main.updatebtn(sc.cfgsc.flipx,sc.cfgsc.flipy);
+ Refresh;
+end;
+
+procedure Tf_chart.rot_plusExecute(Sender: TObject);
+begin
+ sc.cfgsc.theta:=sc.cfgsc.theta+deg2rad*15;
+ Refresh;
+end;
+
+procedure Tf_chart.rot_minusExecute(Sender: TObject);
+begin
+ sc.cfgsc.theta:=sc.cfgsc.theta-deg2rad*15;
+ Refresh;
+end;
+
+procedure Tf_chart.GridEQExecute(Sender: TObject);
+begin
+ sc.cfgsc.ShowEqGrid := not sc.cfgsc.ShowEqGrid;
+ Refresh;
+end;
+
+procedure Tf_chart.GridAzExecute(Sender: TObject);
+begin
+ sc.cfgsc.ShowAzGrid := not sc.cfgsc.ShowAzGrid;
  Refresh;
 end;
 
@@ -217,30 +289,16 @@ if Shift = [ssCtrl] then begin
    zoomfactor:=3;
 end;
 case key of
-{$ifdef linux}
-43 : Zoomplus.execute;
-45 : Zoomminus.execute;
-4112 : MoveNorthEast.execute;
-4113 : MoveSouthEast.execute;
-4114 : MoveEast.execute;
-4115 : MoveNorth.execute;
-4116 : MoveWest.execute;
-4117 : MoveSouth.execute;
-4118 : MoveNorthWest.execute;
-4119 : MoveSouthWest.execute;
-{$endif}
-{$ifdef mswindows}
-33 : MoveNorthWest.execute;
-34 : MoveSouthWest.execute;
-35 : MoveSouthEast.execute;
-36 : MoveNorthEast.execute;
-37 : MoveEast.execute;
-38 : MoveNorth.execute;
-39 : MoveWest.execute;
-40 : MoveSouth.execute;
-107 : Zoomplus.execute;
-109 : Zoomminus.execute;
-{$endif}
+key_upright   : MoveNorthWest.execute;
+key_downright : MoveSouthWest.execute;
+key_downleft  : MoveSouthEast.execute;
+key_upleft    : MoveNorthEast.execute;
+key_left      : MoveEast.execute;
+key_up        : MoveNorth.execute;
+key_right     : MoveWest.execute;
+key_down      : MoveSouth.execute;
+key_plus      : Zoomplus.execute;
+key_minus     : Zoomminus.execute;
 end;
 movefactor:=4;
 zoomfactor:=2;
@@ -275,28 +333,34 @@ end;
 
 procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
-var ra,dec:double;
+var ra,dec,a,h:double;
     txt:string;
 begin
-{ activate the chart with the mouse }
-setfocus;
 {show the coordinates}
-sc.GetCoord(x,y,ra,dec);
-ra:=rmod(ra+pi2,pi2);
-txt:='Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+sc.GetCoord(x,y,ra,dec,a,h);
+case sc.cfgsc.projpole of
+AltAz: begin
+       txt:='Az:'+deptostr(rad2deg*a)+' '+deptostr(rad2deg*h);
+       end;
+Equat: begin
+       ra:=rmod(ra+pi2,pi2);
+       txt:='Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+       end;
+end;
 f_main.SetLpanel0(txt);
 end;
 
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
-var ra,dec,dx:double;
+var ra,dec,a,h,dx:double;
     txt,ltxt:string;
 begin
-sc.GetCoord(x,y,ra,dec);
+sc.GetCoord(x,y,ra,dec,a,h);
 ra:=rmod(ra+pi2,pi2);
-dx:=5/sc.cfgsc.BxGlb; // search a 5 pixel radius
-sc.FindatRaDec(ra,dec,dx,txt,ltxt);
+dx:=2/sc.cfgsc.BxGlb; // search a 2 pixel radius
+if (not sc.FindatRaDec(ra,dec,dx,txt,ltxt))
+   then sc.FindatRaDec(ra,dec,3*dx,txt,ltxt);  //else 6 pixel
 f_main.SetLpanel1(txt);
 end;
-
+           
 
