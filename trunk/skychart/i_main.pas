@@ -27,7 +27,7 @@ var
   Child : Tf_chart;
 begin
   { allow for a reasonable number of chart }
-  if (MDIChildCount>=9) then begin
+  if (MDIChildCount>=MaxWindow) then begin
      SetLpanel1('Too many open window, please close some chart.');
      result:=false;
      exit;
@@ -39,6 +39,8 @@ begin
   end;
   { create a new MDI child window }
   Child := Tf_chart.Create(Application);
+  inc(cfgm.MaxChildID);
+  Child.tag:=cfgm.MaxChildID;
   Child.Caption:=name;
   Child.sc.catalog:=catalog;
   Child.sc.planet:=planet;
@@ -139,7 +141,7 @@ end;
 
 procedure Tf_main.FileNew1Execute(Sender: TObject);
 begin
-  CreateMDIChild('Chart ' + IntToStr(MDIChildCount + 1),true,true,def_cfgsc,def_cfgplot);
+  CreateMDIChild('Chart_' + IntToStr(MDIChildCount + 1),true,true,def_cfgsc,def_cfgplot);
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
@@ -151,7 +153,7 @@ OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
     cfgp:=def_cfgplot;
     cfgs:=def_cfgsc;
     ReadChartConfig(OpenDialog.FileName,true,cfgp,cfgs);
-    CreateMDIChild(extractfilename(OpenDialog.FileName),false,false,cfgs,cfgp);
+    CreateMDIChild(stringreplace(extractfilename(OpenDialog.FileName),' ','_',[rfReplaceAll]),false,false,cfgs,cfgp);
   end;
 end;
 
@@ -161,6 +163,22 @@ Savedialog.DefaultExt:='cdc3';
 savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 if ActiveMDIchild is Tf_chart then
   if SaveDialog.Execute then SaveChartConfig(SaveDialog.Filename);
+end;
+
+procedure Tf_main.SaveImageExecute(Sender: TObject);
+var ext,format:string;
+begin
+Savedialog.DefaultExt:='png';
+savedialog.Filter:='PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
+if ActiveMDIchild is Tf_chart then
+ with ActiveMDIchild as Tf_chart do
+  if SaveDialog.Execute then begin
+     ext:=uppercase(extractfileext(SaveDialog.Filename));
+     if (ext='.BMP') then format:='BMP'
+     else if (ext='.JPG')or(ext='.JPEG') then format:='JPEG'
+     else format:='PNG';
+     SaveChartImage(format,SaveDialog.Filename,75);
+  end;
 end;
 
 procedure Tf_main.HelpAbout1Execute(Sender: TObject);
@@ -175,6 +193,7 @@ end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
+cfgm.locked:=false;
 DecimalSeparator:='.';
 appdir:=getcurrentdir;
 catalog:=Tcatalog.Create(self);
@@ -183,6 +202,7 @@ end;
 
 procedure Tf_main.FormShow(Sender: TObject);
 begin
+ cfgm.locked:=false;
  SetDefault;
  ReadDefault;
  LoadConstL(cfgm.ConstLfile);
@@ -192,18 +212,21 @@ begin
  FileNewItem.click;
  Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
  Autorefresh.enabled:=true;
+ if cfgm.AutostartServer then StartServer;
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
 begin
 catalog.free;
 planet.free;
+StopServer(true);
 end;
 
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 if SaveConfigOnExit.checked then SaveDefault
                             else SaveQuickSearch(configfile);
+cfgm.locked:=true;
 end;
 
 procedure Tf_main.SaveConfigurationExecute(Sender: TObject);
@@ -367,11 +390,12 @@ begin
    Ppanels1.width:=PanelBottom.ClientWidth-Ppanels1.left;
 end;
 
-Procedure Tf_main.SetLPanel1(txt:string);
+Procedure Tf_main.SetLPanel1(txt:string; origin:string='');
 begin
 LPanels1.width:=PPanels1.ClientWidth;
 LPanels1.Caption:=txt;
 PPanels1.ClientHeight:=LPanels1.Height+8;
+SendInfo(origin,txt);
 end;
 
 Procedure Tf_main.SetLPanel0(txt:string);
@@ -393,6 +417,7 @@ begin
 u_util.ldeg:='°';
 u_util.lmin:='''';
 u_util.lsec:='"';
+cfgm.MaxChildID:=0;
 cfgm.language:='UK';
 cfgm.prtname:='';
 cfgm.configpage:=0;
@@ -402,6 +427,10 @@ cfgm.PrintLandscape:=true;
 cfgm.maximized:=true;
 cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
+cfgm.ServerIPaddr:='127.0.0.1';
+cfgm.ServerIPport:='3292'; // x'CDC' :o)
+cfgm.keepalive:=false;
+cfgm.AutostartServer:=true;
 for i:=1 to 6 do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
    def_cfgplot.FontSize[i]:=DefaultFontSize;
@@ -802,6 +831,10 @@ cfgm.PrintLandscape:=ReadBool(section,'PrintLandscape',cfgm.PrintLandscape);
 if (ReadBool(section,'WinMaximize',false)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
+cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
+cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
+cfgm.keepalive:=ReadBool(section,'keepalive',cfgm.keepalive);
+cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
@@ -1000,6 +1033,10 @@ WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 WriteInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 WriteString(section,'ConstLfile',cfgm.ConstLfile);
+WriteString(section,'ServerIPaddr',cfgm.ServerIPaddr);
+WriteString(section,'ServerIPport',cfgm.ServerIPport);
+WriteBool(section,'keepalive',cfgm.keepalive);
+WriteBool(section,'AutostartServer',cfgm.AutostartServer);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -1083,18 +1120,46 @@ begin
 end;
 
 procedure Tf_main.quicksearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-var ar1,de1 : Double;
-    ok,TrackInProgress : Boolean;
-    num,buf : string;
+var ok : Boolean;
+    num : string;
     i : integer;
-label findit;
 begin
 if key<>key_cr then exit;  // wait press Enter
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+Num:=trim(quicksearch.text);
+ok:=GenericSearch('',num);
+if ok then begin
+      i:=quicksearch.Items.IndexOf(Num);
+      if i=-1 then i:=MaxQuickSearch-1;
+      quicksearch.Items.Delete(i);
+      quicksearch.Items.Insert(0,Num);
+      quicksearch.ItemIndex:=0;
+   end
+   else begin
+      ShowMessage('Not found'+' '+Num);
+   end;
+end;
+
+function Tf_main.GenericSearch(cname,Num:string):boolean;
+var ok,TrackInProgress : Boolean;
+    ar1,de1 : Double;
+    buf : string;
+    i : integer;
+    chart:TForm;
+label findit;
+begin
+result:=false;
+if trim(num)='' then exit;
+chart:=nil;
+if cname='' then begin
+  if ActiveMdiChild is Tf_chart then chart:=ActiveMdiChild;
+end else begin
+ for i:=0 to MDIChildCount-1 do
+   if MDIChildren[i] is Tf_chart then
+      if MDIChildren[i].caption=cname then chart:=MDIChildren[i];
+end;
+if chart is Tf_chart then with chart as Tf_chart do begin
    TrackInProgress:=sc.cfgsc.TrackOn;
    sc.cfgsc.TrackOn:=false;
-   Num:=trim(quicksearch.text);
-   if trim(num)='' then exit;
    if uppercase(copy(Num,1,1))='M' then begin
       buf:=StringReplace(Num,'m','',[rfReplaceAll,rfIgnoreCase]);
       ok:=catalog.FindNum(S_messier,buf,ar1,de1) ;
@@ -1205,23 +1270,18 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    ok:=catalog.FindNum(S_Ext,Num,ar1,de1) ;
    if ok then goto findit;
 Findit:
+   result:=ok;
    if ok then begin
       IdentLabel.visible:=false;
       precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
       sc.movetoradec(ar1,de1);
       Refresh;
-      sc.FindatRaDec(ar1,de1,0.0003);
+      sc.FindatRaDec(ar1,de1,0.0005,true);
       ShowIdentLabel;
-      f_main.SetLpanel1(sc.cfgsc.FindDesc);
-      i:=quicksearch.Items.IndexOf(Num);
-      if i=-1 then i:=MaxQuickSearch-1;               
-      quicksearch.Items.Delete(i);
-      quicksearch.Items.Insert(0,Num);
-      quicksearch.ItemIndex:=0;
+      f_main.SetLpanel1(sc.cfgsc.FindDesc,caption);
    end
    else begin
       sc.cfgsc.TrackOn:=TrackInProgress;
-      ShowMessage('Not found'+' '+Num);
    end;
 end;
 end;
@@ -1270,4 +1330,298 @@ begin
    end;
 end;
 
+Function Tf_main.NewChart(cname:string):string;
+begin
+if cname='' then cname:='Chart ' + IntToStr(MDIChildCount + 1);
+if CreateMDIChild(cname,true,true,def_cfgsc,def_cfgplot) then result:='OK '+cname
+  else result:='Failed!';
+end;
+
+Function Tf_main.CloseChart(cname:string):string;
+var i: integer;
+begin
+result:='Not found!';
+for i:=0 to MDIChildCount-1 do
+  if MDIChildren[i] is Tf_chart then
+     with MDIChildren[i] as Tf_chart do
+        if caption=cname then begin
+           Close;
+           result:='OK';
+        end;
+end;
+
+Function Tf_main.ListChart:string;
+var i: integer;
+begin
+result:='';
+for i:=0 to MDIChildCount-1 do
+  if MDIChildren[i] is Tf_chart then
+     with MDIChildren[i] as Tf_chart do
+        result:=result+';'+caption;
+        
+if result>'' then result:='OK '+result+';'
+             else result:='No Chart!';
+end;
+
+Function Tf_main.SelectChart(cname:string):string;
+var i: integer;
+begin
+result:='Not found!';
+for i:=0 to MDIChildCount-1 do
+  if MDIChildren[i] is Tf_chart then
+     with MDIChildren[i] as Tf_chart do
+        if caption=cname then begin
+          {$ifdef linux}
+          {require to switch the focus to work with the right child. Kylix bug?}
+          try
+          if MDIChildCount>2 then MDIChildren[1].setfocus // MDIChildren[0] already as focus
+                             else quicksearch.setfocus;
+          except
+          // here if quicksearch is hiden, do nothing.
+          end;
+         {$endif}
+         setfocus;
+         result:='OK';
+        end;
+end;
+
+function Tf_main.ExecuteCmd(cname:string; arg:Tstringlist):string;
+var i,n : integer;
+    var cmd:string;
+begin
+cmd:=trim(uppercase(arg[0]));
+n:=-1;
+for i:=1 to numcmdmain do
+   if cmd=maincmdlist[i,1] then begin
+      n:=strtointdef(maincmdlist[i,2],-1);
+      break;
+   end;
+case n of
+ 1 : result:=NewChart(arg[1]);
+ 2 : result:=CloseChart(arg[1]);
+ 3 : result:=SelectChart(arg[1]);
+ 4 : result:=ListChart;
+ 5 : if Genericsearch(cname,arg[1]) then result:='OK' else result:='Not found!';
+else begin
+result:='Bad chart name '+cname;
+ for i:=0 to MDIChildCount-1 do
+   if MDIChildren[i] is Tf_chart then
+     with MDIChildren[i] as Tf_chart do
+       if caption=cname then
+         result:=ExecuteCmd(arg);
+end;
+end;
+end;
+
+procedure Tf_main.SendInfo(origin,str:string);
+var i : integer;
+begin
+for i:=1 to Maxwindow do
+ if (TCPDaemon<>nil)
+    and (TCPDaemon.TCPThrd[i]<>nil)
+    and(TCPDaemon.TCPThrd[i].sock<>nil)
+    and(not TCPDaemon.TCPThrd[i].terminated)
+    then TCPDaemon.TCPThrd[i].SendData('> '+origin+' : '+str);
+end;
+
+{ TCP/IP Connexion, based on Synapse Echo demo }
+
+Constructor TTCPDaemon.Create;
+begin
+  FreeOnTerminate:=true;
+  keepalive:=false;
+  inherited create(false);
+end;
+
+procedure TTCPDaemon.ShowError;
+begin
+f_main.SetLpanel1('Socket error '+inttostr(sock.lasterror)+'.  '+sock.GetErrorDesc(sock.lasterror));
+end;
+
+procedure TTCPDaemon.ShowSocket;
+
+var locport:string;
+
+begin
+sock.GetSins;
+locport:=inttostr(sock.GetLocalSinPort);
+if locport<>f_main.cfgm.ServerIPport then locport:=locport+' (different than configured port, maybe busy or other error.)';
+f_main.serverinfo:='Listen on port: '+locport;
+f_main.SetLpanel1(f_main.serverinfo);
+end;
+
+procedure TTCPDaemon.Execute;
+var
+  ClientSock:TSocket;
+  i,n : integer;
+begin
+sock:=TTCPBlockSocket.create;
+try
+  with sock do
+    begin
+      CreateSocket;
+      if lasterror<>0 then Synchronize(ShowError);
+      setLinger(true,10);
+      if lasterror<>0 then Synchronize(ShowError);
+      bind(f_main.cfgm.ServerIPaddr,f_main.cfgm.ServerIPport);
+      if lasterror<>0 then Synchronize(ShowError);
+      listen;
+      if lasterror<>0 then Synchronize(ShowError);
+      Synchronize(ShowSocket);
+      repeat
+        if terminated then break;
+        if canread(1000) then
+          begin
+            ClientSock:=accept;
+            if lastError=0 then begin
+              n:=-1;
+              for i:=1 to Maxwindow do
+                 if (TCPThrd[i]=nil)
+                    or(TCPThrd[i].sock=nil)
+                    or(TCPThrd[i].terminated)
+                    then begin
+                      n:=i;
+                      break;
+                    end;
+              if n>0 then begin
+                 TCPThrd[n]:=TTCPThrd.create(ClientSock);
+                 TCPThrd[n].keepalive:=keepalive;
+                 i:=0; while (TCPThrd[n].sock=nil)and(i<100) do begin sleep(100); inc(i); end;
+                 if not TCPThrd[n].terminated then begin
+                      TCPThrd[n].default_chart:='CLIENT_'+inttostr(n);
+                      TCPThrd[n].cmd.clear;
+                      TCPThrd[n].cmd.add('NEWCHART');
+                      TCPThrd[n].cmd.add(TCPThrd[n].default_chart);
+                      for i:=TCPThrd[n].cmd.count to MaxCmdArg do TCPThrd[n].cmd.add('');
+//                      TCPThrd[n].synchronize(TCPThrd[n].executecmd);
+                      synchronize(TCPThrd[n].executecmd);
+                      TCPThrd[n].senddata(TCPThrd[n].cmdresult);
+                      TCPThrd[n].active_chart:=TCPThrd[n].default_chart;
+                 end;
+              end else
+                 with TTCPThrd.create(ClientSock) do begin
+                   i:=0; while (sock=nil)and(i<100) do begin sleep(100); inc(i); end;
+                   if not terminated then begin
+                      if Sock<>nil then Sock.SendString('Maximum connection reach!'+CRLF);
+                      terminate;
+                   end;
+              end;
+            end
+            else Synchronize(ShowError);
+          end;
+      until false;
+    end;
+finally
+  terminate;
+  Sock.CloseSocket;
+  Sock.free;
+end;
+end;
+
+Constructor TTCPThrd.Create(Hsock:TSocket);
+begin
+  Csock := Hsock;
+  FreeOnTerminate:=true;
+  cmd:=TStringlist.create;
+  keepalive:=false;
+  abort:=false;
+  inherited create(false);
+end;
+
+procedure TTCPThrd.Execute;
+var
+  s: string;
+  i: integer;
+begin
+  sock:=TTCPBlockSocket.create;
+  try
+    Sock.socket:=CSock;
+    sock.GetSins;
+    sock.MaxLineLength:=1024;
+    with sock do
+      begin
+        repeat
+          if terminated then break;
+          s := RecvString(1000);
+          if lastError=0 then begin
+             if (uppercase(s)='QUIT')or(uppercase(s)='EXIT') then break;
+             splitarg(s,' ',cmd);
+             for i:=cmd.count to MaxCmdArg do cmd.add('');
+             Synchronize(ExecuteCmd);
+             SendString(cmdresult+crlf);
+             if lastError<>0 then break;
+             if (cmdresult='OK')and(uppercase(cmd[0])='SELECTCHART') then active_chart:=cmd[1];
+          end else
+             if keepalive then begin
+                SendString('.'+crlf);    // keepalive check
+                if lastError<>0 then break;
+          end;
+        until false;
+      end;
+  finally
+    terminate;
+    if not abort then begin
+      cmd.clear;
+      cmd.add('CLOSECHART');
+      cmd.add(default_chart);
+      for i:=cmd.count to MaxCmdArg do cmd.add('');
+      Synchronize(ExecuteCmd);
+    end;
+    sock.SendString('Bye!'+crlf);
+    sock.CloseSocket;
+    sock.Free;
+    cmd.free;
+  end;
+end;
+
+procedure TTCPThrd.Senddata(str:string);
+begin
+try
+if sock<>nil then
+ with sock do begin
+   if terminated then exit;
+   SendString(str+CRLF);
+   if LastError<>0 then
+      terminate;
+ end;
+except
+terminate;
+end;
+end;
+
+procedure TTCPThrd.ExecuteCmd;
+begin
+cmdresult:=f_main.ExecuteCmd(active_chart,cmd);
+end;
+
+procedure Tf_main.StartServer;
+begin
+ try
+ TCPDaemon:=TTCPDaemon.create;
+ TCPDaemon.keepalive:=cfgm.keepalive;
+ except
+  SetLpanel1('TCP/IP service not available.');
+ end;
+end;
+
+procedure Tf_main.StopServer(abort:boolean);
+var i :integer;
+    d :double;
+begin
+if TCPDaemon=nil then exit;
+try
+for i:=1 to Maxwindow do
+ if (TCPDaemon.TCPThrd[i]<>nil) then begin
+    TCPDaemon.TCPThrd[i].abort:=abort;
+    TCPDaemon.TCPThrd[i].terminate;
+ end;
+d:=now+2E-5; // 1.7 seconde delay to close the tcp/ip thread
+while now<d do application.processmessages;
+//TCPDaemon.sock.CloseSocket;
+TCPDaemon.terminate;
+finally
+//d:=now+2E-5; // 1.7 seconde delay to close the tcp/ip thread
+//while now<d do application.processmessages;
+end;
+end;
 

@@ -121,12 +121,28 @@ type
     procedure PrintChart(Sender: TObject);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
+    function  IdentXY(X, Y: Integer):boolean;
     function  LongLabel(txt:string):string;
     function  LongLabelObj(txt:string):string;
     function  LongLabelGreek(txt : string) : string;
     Function  LongLabelConst(txt : string) : string;
     procedure CMouseWheel(Shift: TShiftState;WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure CKeyDown(var Key: Word; Shift: TShiftState);
+    function cmd_SetCursorPosition(x,y:integer):string;
+    function cmd_SetGridEQ(onoff:string):string;
+    function cmd_SetGridAZ(onoff:string):string;
+    function cmd_SetStarMode(i:integer):string;
+    function cmd_SetNebMode(i:integer):string;
+    function cmd_SetSkyMode(onoff:string):string;
+    function cmd_SetProjection(proj:string):string;
+    function cmd_SetFov(fov:string):string;
+    function cmd_SetRaDec(param:string):string;
+    function cmd_SetDate(dt:string):string;
+    function cmd_SetObs(obs:string):string;
+    function cmd_IdentCursor:string;
+    function cmd_SaveImage(format,fn,quality:string):string;
+    function ExecuteCmd(arg:Tstringlist):string;
+    function SaveChartImage(format,fn : string; quality: integer=75):boolean;
   end;
 
 implementation
@@ -145,6 +161,28 @@ uses pu_main;
 
 // windows vcl specific code:
 
+function Tf_chart.SaveChartImage(format,fn : string; quality : integer=75):boolean;
+var
+ fnw: WideString;
+begin
+ if fn='' then fn:='cdc.png';
+ if format='' then format:='PNG';
+{ if format='PNG' then begin
+    fnw:=changefileext(fn,'.png');
+    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('PNG'));
+    end
+ else if format='JPEG' then begin
+    fnw:=changefileext(fn,'.jpg');
+    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('JPEG'), quality);
+    end
+ else if format='BMP' then begin
+    fnw:=changefileext(fn,'.bmp');
+    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('BMP'));
+    end
+ else} result:=false;
+end;
+
 // end of windows vcl specific code:
 
 end.
+

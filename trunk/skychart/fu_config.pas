@@ -570,6 +570,18 @@ type
     Label208: TLabel;
     Button3: TButton;
     ColorDialog1: TColorDialog;
+    p_system: TTabSheet;
+    p_server: TTabSheet;
+    GroupBox3: TGroupBox;
+    UseIPserver: TCheckBox;
+    ipaddr: TEdit;
+    Label54: TLabel;
+    Label55: TLabel;
+    ipport: TEdit;
+    GroupBox4: TGroupBox;
+    ipstatus: TEdit;
+    refreshIP: TButton;
+    keepalive: TCheckBox;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -669,6 +681,11 @@ type
     procedure ShapeSkyMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Button3Click(Sender: TObject);
+    procedure refreshIPClick(Sender: TObject);
+    procedure UseIPserverClick(Sender: TObject);
+    procedure ipaddrChange(Sender: TObject);
+    procedure ipportChange(Sender: TObject);
+    procedure keepaliveClick(Sender: TObject);
   private
     { Déclarations privées }
     procedure EditGCatPath(row : integer);
@@ -701,6 +718,7 @@ type
     procedure ShowLine;
     procedure ShowColor;
     procedure ShowSkyColor;
+    procedure ShowServer;
   end;
 
 var

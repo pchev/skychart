@@ -86,8 +86,18 @@ ShowPlanet;
 ShowLine;
 ShowColor;
 ShowSkyColor;
+ShowServer;
 TreeView1.FullExpand;
 Treeview1.selected:=Treeview1.items[cmain.configpage];
+end;
+
+procedure Tf_config.ShowServer;
+begin
+ipaddr.text:=cmain.ServerIPaddr;
+ipport.text:=cmain.ServerIPport;
+useipserver.checked:=cmain.autostartserver;
+keepalive.checked:=cmain.keepalive;
+RefreshIPClick(nil);
 end;
 
 procedure Tf_config.ShowLine;
@@ -1351,4 +1361,31 @@ cplot.SkyColor:=dfSkyColor;
 ShowSkyColor;
 end;
 
+procedure Tf_config.refreshIPClick(Sender: TObject);
+begin
+if f_main.TCPDaemon<>nil then begin
+  f_main.TCPDaemon.ShowSocket;
+  ipstatus.Text:=f_main.serverinfo;
+end else  ipstatus.Text:='Not started.';
+end;
+
+procedure Tf_config.UseIPserverClick(Sender: TObject);
+begin
+cmain.AutostartServer:=UseIPserver.Checked;
+end;
+
+procedure Tf_config.keepaliveClick(Sender: TObject);
+begin
+cmain.keepalive:=keepalive.checked;
+end;
+
+procedure Tf_config.ipaddrChange(Sender: TObject);
+begin
+cmain.ServerIPaddr:=ipaddr.Text;
+end;
+
+procedure Tf_config.ipportChange(Sender: TObject);
+begin
+cmain.ServerIPport:=ipport.Text;
+end;
 

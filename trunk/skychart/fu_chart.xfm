@@ -1,6 +1,6 @@
 object f_chart: Tf_chart
-  Left = 703
-  Top = 620
+  Left = 705
+  Top = 526
   Width = 314
   Height = 209
   Caption = 'Chart'
@@ -242,10 +242,6 @@ object f_chart: Tf_chart
       Category = 'move'
       Caption = 'Centre'
       OnExecute = CentreExecute
-    end
-    object EdCopy: TAction
-      Category = 'Edit'
-      Caption = 'Copy'
     end
     object zoomplusmove: TAction
       Category = 'zoom'
