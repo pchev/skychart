@@ -14,10 +14,11 @@ $eol = "\x0D\x0A";
   sendcmd("newchart test");
   sendcmd("selectchart test");
 
-  sendcmd("proj equat");
+  sendcmd("setproj equat");
   sendcmd("search M37");
   sleep(2);
-  sendcmd("fov 3d0m0s");
+  sendcmd("setfov 3d0m0s");
+  sendcmd("redraw");
 
   $path = `pwd`;
   chop $path;
@@ -46,7 +47,7 @@ sub sendcmd {
         }
     }
   # we go here after receiving response from our command
-  if (($line =~ /^OK/) or ($line =~ /^Bye/) )
+  if (($line =~ /^OK!/) or ($line =~ /^Bye!/) )
      {
      print STDOUT "Command success\n";
      }
@@ -71,7 +72,7 @@ print STDOUT "[Connected to $host:$port]\n";
 # wait connection and get client chart name
   $line = <$handle>;
   print STDOUT $line;
-  $line =~ /OK id=(.*) chart=(.*)$/;
+  $line =~ /OK! id=(.*) chart=(.*)$/;
   $client = $1;
   $chart = $2;
   chop $chart;
