@@ -836,10 +836,10 @@ end;
 
 procedure Tf_main.ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
 var i:integer;
-    inif: TIniFile;
+    inif: TMemIniFile;
     section,buf : string;
 begin
-inif:=Tinifile.create(filename);
+inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
@@ -1007,10 +1007,10 @@ end;
 
 procedure Tf_main.ReadPrivateConfig(filename:string);
 var i,j:integer;
-    inif: TIniFile;
+    inif: TMemIniFile;
     section : string;
 begin
-inif:=Tinifile.create(filename);
+inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
@@ -1067,10 +1067,10 @@ end;
 
 procedure Tf_main.SaveChartConfig(filename:string);
 var i:integer;
-    inif: TIniFile;
+    inif: TMemIniFile;
     section : string;
 begin
-inif:=Tinifile.create(filename);
+inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
@@ -1217,6 +1217,7 @@ WriteBool(section,'Force_DT_UT',def_cfgsc.Force_DT_UT);
 WriteFloat(section,'DT_UT_val',def_cfgsc.DT_UT_val);
 section:='projection';
 for i:=1 to maxfield do WriteString(section,'ProjName'+inttostr(i),def_cfgsc.projname[i] );
+Updatefile;
 end;
 finally
  inif.Free;
@@ -1225,10 +1226,10 @@ end;
 
 procedure Tf_main.SavePrivateConfig(filename:string);
 var i:integer;
-    inif: TIniFile;
+    inif: TMemIniFile;
     section : string;
 begin
-inif:=Tinifile.create(filename);
+inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
@@ -1266,6 +1267,7 @@ end;
 for i:=1 to maxnebcatalog do begin
    WriteString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
 end;
+Updatefile;
 end;
 finally
  inif.Free;
@@ -1274,15 +1276,16 @@ end;
 
 procedure Tf_main.SaveQuickSearch(filename:string);
 var i:integer;
-    inif: TIniFile;
+    inif: TMemIniFile;
     section : string;
 begin
-inif:=Tinifile.create(filename);
+inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='quicksearch';
 WriteInteger(section,'count',quicksearch.Items.count);
 for i:=1 to quicksearch.Items.count do WriteString(section,'item'+inttostr(i),quicksearch.Items[i-1]);
+Updatefile;
 end;
 finally
  inif.Free;
@@ -1290,15 +1293,16 @@ end;
 end;
 
 procedure Tf_main.SaveConfigOnExitExecute(Sender: TObject);
-var inif: TIniFile;
+var inif: TMemIniFile;
     section : string;
 begin
 SaveConfigOnExit.Checked:=not SaveConfigOnExit.Checked;
-inif:=Tinifile.create(configfile);
+inif:=TMeminifile.create(configfile);
 try
 with inif do begin
 section:='main';
 WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
+Updatefile;
 end;
 finally
  inif.Free;
@@ -1307,10 +1311,10 @@ end;
 
 procedure Tf_main.SetLang;
 var i:integer;
-    inif: TIniFile;
+    inif: TMemIniFile;
     section : string;
 begin
-inif:=Tinifile.create(slash(appdir)+'cdclang_'+trim(cfgm.language)+'.ini');
+inif:=TMeminifile.create(slash(appdir)+'cdclang_'+trim(cfgm.language)+'.ini');
 try
 with inif do begin
 section:='main';
@@ -1323,7 +1327,7 @@ for i:=1 to NumLlabel do begin
 end;
 end;
 finally
-inif.Free;
+ inif.Free;
 end;
 end;
 
