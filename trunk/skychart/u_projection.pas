@@ -66,6 +66,9 @@ PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; var c:conf_skyc
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; var c:conf_skychart );
 Procedure Hz2Eq(A,h : double; var hh,de : double; var c:conf_skychart);
 function ecliptic(j:double):double;
+procedure nutation(j:double; var nutl,nuto:double);
+procedure aberration(j:double; var abe,abp:double);
+procedure apparent_equatorial(var ra,de:double; var c:conf_skychart);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
 Procedure Gal2Eq(l,b: double; var ar,de : double; var c:conf_skychart);
@@ -765,6 +768,56 @@ result:=eps2000 +(
         +2.45*intpower(u,10)
         )/3600;
 result:=deg2rad*result;
+end;
+
+procedure nutation(j:double; var nutl,nuto:double);
+var t,ls,lm,om : double;
+begin
+t:=(j-jd2000)/36525;
+// low precision.  todo: use table 21.A
+om:=deg2rad*(125.04452-1934.136261*t);
+ls:=deg2rad*(280.4665+36000.7698*t);
+lm:=deg2rad*(218.3165+481267.8813*t);
+nutl:=secarc*(-17.20*sin(om)-1.32*sin(2*ls)-0.23*sin(2*lm)+0.21*sin(2*om));
+nuto:=secarc*(9.20*cos(om)+0.57*cos(2*ls)+0.10*cos(2*lm)-0.09*cos(2*om));
+end;
+
+
+procedure aberration(j:double; var abe,abp:double);
+var t : double;
+begin
+t:=(j-jd2000)/36525;
+abe:=0.016708617-4.2037e-5*t-1.236e-7*t*t;
+abp:=deg2rad*(102.93735+1.71953*t+4.6e-4*t*t);
+end;
+
+procedure apparent_equatorial(var ra,de:double; var c:conf_skychart);
+var da,dd,l,b: double;
+    cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
+begin
+sincos(ra,sra,cra);
+sincos(de,sde,cde);
+sincos(c.e,se,ce);
+sincos(c.sunl,sls,cls);
+sincos(c.abp,sp,cp);
+// nutation
+if abs(de)<(89*deg2rad) then begin    // meeus91 22.1
+   da:=c.nutl*(ce+se*sra*tan(de))-c.nuto*(cra*tan(de));
+   dd:=c.nutl*se*cra+c.nuto*sra;
+   ra:=ra+da;
+   de:=de+dd;
+end else begin
+   Eq2Ecl(ra,de,c.e,l,b);
+   l:=l+c.nutl;
+   b:=b+c.nuto;
+   Ecl2Eq(l,b,c.e,ra,de);
+end;
+//aberration
+//meeus91 22.3
+da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
+dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*cde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*cde*sp);
+ra:=ra+da;
+de:=de+dd;
 end;
 
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);

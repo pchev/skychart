@@ -853,6 +853,8 @@ type
     showlabelConst: TCheckBox;
     labelcolorConst: TShape;
     labelsizeConst: TSpinEdit;
+    MagLabel: TRadioGroup;
+    constlabel: TRadioGroup;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1038,6 +1040,8 @@ type
     procedure labelcolorMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure labelsizeChange(Sender: TObject);
+    procedure MagLabelClick(Sender: TObject);
+    procedure constlabelClick(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -1146,6 +1150,7 @@ csc.Simnb:=nbstep.value;
 end;
 
 // end of windows vcl specific code:
+
 
 end.
 

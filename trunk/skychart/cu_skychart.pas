@@ -43,6 +43,7 @@ Tskychart = class (TComponent)
     Fplanet : Tplanet;
     FShowDetailXY: Tint2func;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
+    Procedure InitLabels;
     procedure SetLabel(id,xx,yy,radius,fontnum,labelnum:integer; txt:string);
     procedure EditLabelPos(lnum,x,y: integer);
     procedure EditLabelTxt(lnum,x,y: integer);
@@ -160,7 +161,6 @@ savfillmw:=cfgsc.FillMilkyWay;
 try
   chdir(appdir);
   // initialize chart value
-  numlabels:=0;
   InitObservatory;
   InitTime;
   InitChart;
@@ -170,6 +170,7 @@ try
      Fcatalog.cfgshr.StarFilter:=true;
      Fcatalog.cfgshr.AutoStarFilter:=false;
   end else begin
+     InitLabels;
      Fplanet.ComputePlanet(cfgsc);
   end;
   InitColor; // after ComputePlanet
@@ -421,7 +422,7 @@ if Fplot.cfgplot.AutoSkyColor and (cfgsc.Projpole=AltAz) then begin
 end else Fplot.cfgplot.color[0]:=Fplot.cfgplot.bgColor;
 Fplot.cfgplot.backgroundcolor:=Fplot.cfgplot.color[0];
 Fplot.init(Fplot.cfgchart.width,Fplot.cfgchart.height);
-if Fplot.cfgchart.onprinter then Fplot.cfgplot.color[0]:=clBlack;
+if Fplot.cfgchart.onprinter and (Fplot.cfgplot.starplot=0) then Fplot.cfgplot.color[0]:=clBlack;
 result:=true;
 end;
 
@@ -451,6 +452,14 @@ h := cfgsc.fov/cfgsc.WindowRatio;
 w := maxvalue([w,h]);
 cfgsc.FieldNum:=GetFieldNum(w);
 cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
+// nutation constant
+cfgsc.e:=ecliptic(cfgsc.JDChart);
+nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
+// Sun geometric longitude
+fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
+PrecessionEcl(jd2000,cfgsc.JdChart,cfgsc.sunl,cfgsc.sunb);
+// aberration constant
+aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
 // is the chart to be centered on an object ?
  if cfgsc.TrackOn then begin
   case cfgsc.TrackType of
@@ -467,6 +476,7 @@ cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
                 end;
          end;
          if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
+         if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
          cfgsc.racentre:=a;
          cfgsc.decentre:=d;
          end;
@@ -488,7 +498,7 @@ cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
          if cfgsc.Projpole=AltAz then begin
            Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
            cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
-         end;
+          end;
          cfgsc.TrackOn:=false;
          end;
    end;
@@ -510,9 +520,8 @@ cfgsc.RefractionOffset:=h-cfgsc.hcentre;
 // get galactic center
 Eq2Gal(cfgsc.racentre,cfgsc.decentre,cfgsc.lcentre,cfgsc.bcentre,cfgsc) ;
 // get ecliptic center
-cfgsc.e:=ecliptic(cfgsc.JDChart);
 Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.e,cfgsc.lecentre,cfgsc.becentre) ;
-// is one the pole in the chart
+// is the pole in the chart
 cfgsc.NP:=northpoleinmap(cfgsc);
 cfgsc.SP:=southpoleinmap(cfgsc);
 result:=true;
@@ -546,12 +555,14 @@ if Fcatalog.OpenStar then
     rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
  end;
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
     if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
-       if rec.star.valid[vsGreekSymbol] then SetLabel(lid,xx,yy,0,7,1,rec.star.greeksymbol)
+       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv))
+       else if rec.star.valid[vsGreekSymbol] then SetLabel(lid,xx,yy,0,7,1,rec.star.greeksymbol)
           else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
     end;
     if cfgsc.DrawPMon then begin
@@ -580,12 +591,14 @@ if Fcatalog.OpenVarStar then
  while Fcatalog.readvarstar(rec) do begin
  lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
     if rec.variable.magmax<cfgsc.StarmagMax-cfgsc.LabelMagDiff[2] then
-       SetLabel(lid,xx,yy,0,2,2,rec.variable.id);
+    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,2,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin))
+       else SetLabel(lid,xx,yy,0,2,2,rec.variable.id);
  end;
 end;
 result:=true;
@@ -605,6 +618,7 @@ if Fcatalog.OpenDblStar then
  while Fcatalog.readdblstar(rec) do begin
  lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
@@ -618,7 +632,8 @@ if Fcatalog.OpenDblStar then
     rec.double.pa:=DegToRad(rec.double.pa)-rot;
     Fplot.PlotDblStar(xx,yy,rec.double.mag1,rec.double.sep,rec.double.pa,0);
     if rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3] then
-       SetLabel(lid,xx,yy,0,2,3,rec.double.id);
+    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1))
+       else SetLabel(lid,xx,yy,0,2,3,rec.double.id);
  end;
 end;
 result:=true;
@@ -648,6 +663,7 @@ if Fcatalog.OpenNeb then
  while Fcatalog.readneb(rec) do begin
  lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
@@ -685,6 +701,7 @@ try
 if Fcatalog.OpenLin then
  while Fcatalog.readlin(rec) do begin
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  op:=rec.outlines.lineoperation;
@@ -730,6 +747,7 @@ if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
     first:=false;
  end;
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  op:=rec.outlines.lineoperation;
@@ -1496,9 +1514,10 @@ if (cfgsc.projpole=Equat)and(not cfgsc.ShowEqGrid) then col:=Fplot.cfgplot.Color
                   else col:=Fplot.cfgplot.Color[13];
 Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
 Fplot.cnv.Brush.Style:=bsClear;
+// todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1];
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.drawpen;
 if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('22h22m');
@@ -1626,9 +1645,10 @@ begin
 col:=Fplot.cfgplot.Color[12];
 Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
 Fplot.cnv.Brush.Style:=bsClear;
+// todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1];
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.drawpen;
 if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');
@@ -1671,35 +1691,6 @@ repeat
   hc:=hc-ddh;
 until (not ok)or(hc<-pid2);
 end;
-
-{function Tskychart.DrawHorizon:boolean;
-var az,h,x1,y1 : double;
-    i,x,y,xp,yp,x0,y0: integer;
-    first:boolean;
-begin
-if cfgsc.ProjPole=Altaz then begin
-  if cfgsc.hcentre<-(cfgsc.fov/6) then
-     Fplot.PlotLabel((cfgsc.xmax-cfgsc.xmin)div 2,(cfgsc.ymax-cfgsc.ymin)div 2,1,2,laCenter,laCenter,' Below the horizon ');
-  if (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
-     first:=true; xp:=0;yp:=0;x0:=0;y0:=0;
-     for i:=1 to 360 do begin
-       h:=cfgsc.horizonlist^[i];
-       az:=deg2rad*rmod(360+i-1-180,360);
-       proj2(-az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
-       WindowXY(x1,y1,x,y,cfgsc);
-       if first then begin
-                first:=false;
-                x0:=x;
-                y0:=y;
-          end else Fplot.Plotline(xp,yp,x,y,Fplot.cfgplot.Color[12],1);
-       xp:=x;
-       yp:=y;
-     end;
-     Fplot.Plotline(x,y,x0,y0,Fplot.cfgplot.Color[12],1);
-  end;
-end;
-result:=true;
-end;     }
 
 function Tskychart.DrawHorizon:boolean;
 var az,h,x1,y1 : double;
@@ -1815,9 +1806,10 @@ begin
 col:=Fplot.cfgplot.Color[12];
 Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
 Fplot.cnv.Brush.Style:=bsClear;
+// todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1];
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.drawpen;
 if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');
@@ -1942,9 +1934,10 @@ begin
 col:=Fplot.cfgplot.Color[12];
 Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
 Fplot.cnv.Brush.Style:=bsClear;
+// todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
-Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1];
+Fplot.cnv.Font.Size:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.drawpen;
 if Fplot.cfgplot.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
 lh:=Fplot.cnv.TextHeight('222h22m');
@@ -2034,8 +2027,10 @@ for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
   ra2:=Fcatalog.cfgshr.ConstL[i].ra2;
   de2:=Fcatalog.cfgshr.ConstL[i].de2;
   precession(jd2000,cfgsc.JDChart,ra1,de1);
+  if cfgsc.ApparentPos then apparent_equatorial(ra1,de1,cfgsc);
   projection(ra1,de1,xx1,yy1,true,cfgsc) ;
   precession(jd2000,cfgsc.JDChart,ra2,de2);
+  if cfgsc.ApparentPos then apparent_equatorial(ra2,de2,cfgsc);
   projection(ra2,de2,xx2,yy2,true,cfgsc) ;
   if (xx1<199)and(xx2<199) then begin
      WindowXY(xx1,yy1,x1,y1,cfgsc);
@@ -2062,6 +2057,7 @@ for i:=0 to Fcatalog.cfgshr.ConstBnum-1 do begin
   de:=Fcatalog.cfgshr.ConstB[i].de;
   if Fcatalog.cfgshr.ConstB[i].newconst then x1:=maxint;
   precession(jd2000,cfgsc.JDChart,ra,de);
+  if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
   projection(ra,de,xx,yy,true,cfgsc) ;
   if (xx<199) then begin
     WindowXY(xx,yy,x2,y2,cfgsc);
@@ -2090,6 +2086,7 @@ x1:=0; y1:=0;
 for i:=0 to 360 do begin
   l:=deg2rad*i;
   ecl2eq(l,b,e,ar,de);
+  if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
   projection(ar,de,xx,yy,true,cfgsc) ;
   WindowXY(xx,yy,x2,y2,cfgsc);
   if first then
@@ -2116,6 +2113,7 @@ x1:=0; y1:=0;
 for i:=0 to 360 do begin
   l:=deg2rad*i;
   gal2eq(l,b,ar,de,cfgsc);
+  if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
   projection(ar,de,xx,yy,true,cfgsc) ;
   WindowXY(xx,yy,x2,y2,cfgsc);
   if first then begin
@@ -2126,6 +2124,23 @@ for i:=0 to 360 do begin
   y1:=y2;
 end;
 result:=true;
+end;
+
+Procedure Tskychart.InitLabels;
+var i,xx,yy,lid : integer;
+    ra,de,x1,y1:double;
+begin
+  numlabels:=0;
+  for i:=0 to Fcatalog.cfgshr.ConstelNum-1 do begin
+      ra:=Fcatalog.cfgshr.ConstelPos[i].ra;
+      de:=Fcatalog.cfgshr.ConstelPos[i].de;
+      precession(jd2000,cfgsc.JDChart,ra,de);
+      projection(ra,de,x1,y1,true,cfgsc) ;
+      WindowXY(x1,y1,xx,yy,cfgsc);
+      lid:=GetId(Fcatalog.cfgshr.ConstelName[i,2]);
+      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2])
+                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1]);
+  end;
 end;
 
 procedure Tskychart.SetLabel(id,xx,yy,radius,fontnum,labelnum:integer; txt:string);

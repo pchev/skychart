@@ -31,7 +31,7 @@ uses u_constant, u_util,
    Qmenus, QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
 {$endif}
 {$ifdef mswindows}
-   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Graphics;
+   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Windows, Graphics;
 {$endif}
 
 type
@@ -70,6 +70,7 @@ type
      procedure labelMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
      procedure labelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
      procedure labelMouseLeave(Sender: TObject);
+     procedure Setstarshape(value:Tbitmap);
   protected
     { Protected declarations }
   public
@@ -77,7 +78,8 @@ type
     cfgplot : conf_plot;
     cfgchart: conf_chart;
     cnv : Tcanvas;
-    starshape: Tbitmap;
+    Fstarshape,starbmp: Tbitmap;
+    starbmpw:integer;
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
   published
@@ -97,6 +99,7 @@ type
      function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string):integer;
      procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
      procedure PlotOutline(xx,yy,op,lw,fs,closed: integer; r2:double; col: Tcolor);
+     property Starshape: TBitmap read Fstarshape write Setstarshape;
      property OnEditLabelPos: TEditLabelPos read FEditLabelPos write FEditLabelPos;
      property OnEditLabelTxt: TEditLabelPos read FEditLabelTxt write FEditLabelTxt;
      property OnDefaultLabel: Tintfunc read FDefaultLabel write FDefaultLabel;
@@ -117,9 +120,11 @@ var i : integer;
     MenuItem: TMenuItem;
 begin
  inherited Create(AOwner);
- // set safe value
- editlabel:=-1;
+ starbmp:=Tbitmap.Create;
  cnv:=(AOwner as Timage).canvas;
+ // set safe value
+ starbmpw:=1;
+ editlabel:=-1;
  cfgchart.width:=100;
  cfgchart.height:=100;
  cfgchart.min_ma:=6;
@@ -128,10 +133,10 @@ begin
  for i:=1 to maxlabels do begin
     labels[i]:=Tlabel.Create((AOwner as Timage).parent);
     labels[i].parent:=(AOwner as Timage).parent;
-    labels[i].tag:=i;
-    labels[i].Visible:=false;
+    labels[i].tag:=i;                                
     labels[i].transparent:=true;
     {$ifdef linux} labels[i].Font.CharSet:=fcsAnyCharSet; {$endif}
+    {$ifdef mswindows} labels[i].Font.CharSet:=DEFAULT_CHARSET; {$endif}
     labels[i].OnMouseDown:=labelmousedown;
     labels[i].OnMouseUp:=labelmouseup;
     labels[i].OnMouseMove:=labelmousemove;
@@ -167,6 +172,7 @@ destructor TSplot.Destroy;
 var i:integer;
 begin
  for i:=1 to maxlabels do labels[i].Free;
+ starbmp.Free;
  inherited destroy;
 end;
 
@@ -183,7 +189,21 @@ with cnv do begin
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
 end;
 InitLabel;
+if (cfgchart.drawpen<>starbmpw)and(Fstarshape<>nil) then begin
+   starbmpw:=cfgchart.drawpen;
+   ImageResize(Fstarshape,starbmp,starbmpw);
+end;
 result:=true;
+end;
+
+procedure TSplot.Setstarshape(value:Tbitmap);
+begin
+Fstarshape:=value;
+starbmpw:=1;
+starbmp.Width:=Fstarshape.Width;
+starbmp.Height:=Fstarshape.Height;
+starbmp.PixelFormat:=Fstarshape.PixelFormat;
+starbmp.Canvas.Draw(0,0,Fstarshape);
 end;
 
 function TSplot.InitLabel : boolean;
@@ -227,10 +247,10 @@ with cnv do begin
       11: isz:=1;
      else isz:=0;
    end;
-   SrcR:=Rect(isz*cfgplot.starshapesize,ico*cfgplot.starshapesize,(isz+1)*cfgplot.starshapesize,(ico+1)*cfgplot.starshapesize);
-   DestR:=Rect(xx-cfgplot.starshapew,yy-cfgplot.starshapew,xx+cfgplot.starshapew+1,yy+cfgplot.starshapew+1);
+   SrcR:=Rect(isz*cfgplot.starshapesize*starbmpw,ico*cfgplot.starshapesize*starbmpw,(isz+1)*cfgplot.starshapesize*starbmpw,(ico+1)*cfgplot.starshapesize*starbmpw);
+   DestR:=Rect(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,xx+(cfgplot.starshapew+1)*starbmpw,yy+(cfgplot.starshapew+1)*starbmpw);
    copymode:=cmSrcPaint;
-   CopyRect(DestR,starshape.canvas,SrcR);
+   CopyRect(DestR,starbmp.canvas,SrcR);
 end;
 end;
 
@@ -274,12 +294,6 @@ end;
 Procedure TSplot.PlotStar(xx,yy: integer; ma,b_v : Double);
 begin
  if not cfgplot.Invisible then
-   if cfgchart.onprinter then
-      case cfgplot.starplot of
-      0 : PlotStar0(xx,yy,ma,b_v);
-      1 : PlotStar0(xx,yy,ma,b_v);
-      end
-   else
       case cfgplot.starplot of
       0 : PlotStar0(xx,yy,ma,b_v);
       1 : PlotStar1(xx,yy,ma,b_v);
@@ -348,24 +362,13 @@ if not cfgplot.Invisible then
    Pen.Color := cfgplot.Color[15];
    Brush.style:=bsSolid;
    Pen.Mode:=pmCopy;
-   if cfgchart.onprinter then begin
-     rd:=ds2 + 3 + 3*(0.7+ln(minvalue([50,maxvalue([0.5,sep])])));
-   end
-   else begin
-     rd:=ds2 + 2 + 2*(0.7+ln(minvalue([50,maxvalue([0.5,sep])])));
-   end;
+   rd:=ds2 + cfgchart.drawpen*(2+2*(0.7+ln(minvalue([50,maxvalue([0.5,sep])]))));
    MoveTo(xx-round(rd*sin(pa)),yy-round(rd*cos(pa)));
    LineTo(xx,yy);
-   if cfgchart.onprinter then
-      case cfgplot.starplot of
-      0 : PlotStar0(xx,yy,ma,b_v);
-      1 : PlotStar0(xx,yy,ma,b_v);
-      end
-   else
-      case cfgplot.starplot of
+   case cfgplot.starplot of
       0 : PlotStar0(xx,yy,ma,b_v);
       1 : PlotStar1(xx,yy,ma,b_v);
-      end;
+   end;
 end;
 end;
 
@@ -374,10 +377,9 @@ var
   x1,y1: Double;
   ds1,ds2,ds3 : Integer;
   ex,ey,th,rot : double;
-  n,ex1,ey1,dc : integer;
+  n,ex1,ey1 : integer;
   elp : array [1..22] of Tpoint;
-  co,cg,nebcolor : Tcolor;
-//  labeltxt,sma : string;
+  co,nebcolor : Tcolor;
   col : byte;
 begin
 if not cfgplot.Invisible then begin
@@ -396,10 +398,6 @@ if not cfgplot.Invisible then begin
             1000 : co := cfgplot.Color[8];
           else co:=cfgplot.color[11]
   end;
-  if cfgchart.onprinter then dc:=4 else dc:=3;
-  cg:=((co and $000000ff) div dc)
-     +(((co and $0000ff00) div dc)and$0000ff00)
-     +(((co and $00ff0000) div dc)and$00ff0000);
   with cnv do begin
    Pen.Width := cfgchart.drawpen;
    Brush.style:=bsSolid;
@@ -412,17 +410,14 @@ if not cfgplot.Invisible then begin
        Brush.Style := bsClear;
       end;
    1: begin
-       if cfgchart.onprinter then Brush.Color := $00606060+cg
-         else begin
-          if sbr<0 then begin
-             if r1<=0 then r1:=1;
-             if r2<=0 then r2:=r1;
-             sbr:= ma + 2.5*log10(r1*r2) - 0.26;
-          end;
-          col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((sbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-          Nebcolor:=col+256*col+65536*col;
-          Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
-         end;
+       if sbr<0 then begin
+          if r1<=0 then r1:=1;
+          if r2<=0 then r2:=r1;
+          sbr:= ma + 2.5*log10(r1*r2) - 0.26;
+       end;
+       col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((sbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+       Nebcolor:=col+256*col+65536*col;
+       Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
        Pen.Color := cfgplot.Color[0];
        Brush.Style := bsSolid;
       end;
@@ -437,7 +432,7 @@ if not cfgplot.Invisible then begin
      th:=th+0.3;
    end;
    Polygon(elp);
-   if rnuc>0 then begin
+   if rnuc>0 then begin  // no more used
      case Round(b_ve*10) of
                -999: co := $00000000 ;
            -990..-3: co := cfgplot.Color[1];
@@ -449,9 +444,6 @@ if not cfgplot.Invisible then begin
             14..999: co := cfgplot.Color[7];
             else co:=cfgplot.Color[11];
      end;
-     cg:=((co and $000000ff) div dc)
-        +(((co and $0000ff00) div dc)and$0000ff00)
-        +(((co and $00ff0000) div dc)and$00ff0000);
      case cfgplot.Nebplot of
      0: begin
          Brush.Color := cfgplot.Color[0];
@@ -460,15 +452,10 @@ if not cfgplot.Invisible then begin
          Brush.Style := bsClear;
         end;
      1: begin
-         if cfgchart.onprinter then begin
-           Brush.Color := $00808080+cg;
-           Pen.Color := $00808080+cg;
-         end else begin
-           col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((sbr-1-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-           Nebcolor:=col+256*col+65536*col;
-           Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
-           Pen.Color := Brush.Color;
-         end;
+         col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((sbr-1-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+         Nebcolor:=col+256*col+65536*col;
+         Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
+         Pen.Color := Brush.Color;
          Brush.Style := bsSolid;
         end;
      end;
@@ -560,18 +547,10 @@ with cnv do begin
                   point(xx,yy-ds)]);
            end;
        else begin
-           if cfgchart.onprinter then begin
-           ds:=5;
-           MoveTo(xx-ds,yy-ds);
-           LineTo(xx+ds,yy+ds);
-           MoveTo(xx-ds,yy+ds);
-           LineTo(xx+ds,yy-ds);
-           end else begin
            MoveTo(xx-1,yy-1);
            LineTo(xx+3,yy+3);
            MoveTo(xx-1,yy+2);
            LineTo(xx+3,yy-2);
-           end;
            end;
    end;
    Brush.Style := bsSolid;
@@ -671,18 +650,10 @@ with cnv do begin
            end;
        else begin
            Pen.Color := cfgplot.Color[9];
-           if cfgchart.onprinter then begin
-           ds:=5;
-           MoveTo(xx-ds,yy-ds);
-           LineTo(xx+ds,yy+ds);
-           MoveTo(xx-ds,yy+ds);
-           LineTo(xx+ds,yy-ds);
-           end else begin
            MoveTo(xx-1,yy-1);
            LineTo(xx+3,yy+3);
            MoveTo(xx-1,yy+2);
            LineTo(xx+3,yy-2);
-           end;
            end;
    end;
  Brush.Style := bsSolid;
@@ -692,12 +663,6 @@ end;
 Procedure TSplot.PlotNebula(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
 begin
  if not cfgplot.Invisible then
-   if cfgchart.onprinter then
-      case cfgplot.nebplot of
-      0 : PlotNebula0(xx,yy,dim,ma,sbr,pixscale,typ);
-      1 : PlotNebula0(xx,yy,dim,ma,sbr,pixscale,typ);
-      end
-   else
       case cfgplot.nebplot of
       0 : PlotNebula0(xx,yy,dim,ma,sbr,pixscale,typ);
       1 : PlotNebula1(xx,yy,dim,ma,sbr,pixscale,typ);
@@ -789,14 +754,14 @@ if not cfgplot.Invisible then begin
        if outlineinscreen and(outlinenum>=2) then begin
          // object is to be draw
          dec(outlinenum);
-         if cfgchart.onprinter and (outlinecol=clWhite) then outlinecol:=clBlack;
+         if outlinecol=cfgplot.bgColor then outlinecol:=outlinecol xor clWhite;
          cnv.Pen.Mode:=pmCopy;
          cnv.Pen.Width:=outlinelw*cfgchart.drawpen;
          cnv.Pen.Color:=outlinecol;
          cnv.Brush.Style:=bsSolid;
          cnv.Brush.Color:=outlinecol;
          outlinemax:=outlinenum+1;
-         if cfgchart.onprinter and (outlinetype=2) then outlinetype:=0;
+         if (cfgplot.nebplot=0) and (outlinetype=2) then outlinetype:=0;
          case outlinetype of
          0 : begin setlength(outlinepts,outlinenum+1); cnv.polyline(outlinepts);end;
          1 : Bezierspline(outlinepts,outlinenum+1);
@@ -850,8 +815,7 @@ if not cfgplot.Invisible then begin
   ds:=round(diam*pixscale/2)*cfgchart.drawpen;
   if n=2 then if ds<10 then n:=1;
   if n=1 then if ds<5 then n:=0;
-  if cfgchart.onprinter then
-     case n of
+  case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=0;
           PlotStar(xx,yy,magn,b_v);
@@ -864,22 +828,7 @@ if not cfgplot.Invisible then begin
           end;
       3 : begin // symbol
           end;
-     end
-  else
-     case n of
-      0 : begin // magn
-          if ipla<11 then b_v:=planetcolor[ipla] else b_v:=0;
-          PlotStar(xx,yy,magn,b_v);
-          end;
-      1 : begin // diam
-          PlotPlanet1(xx,yy,ipla,pixscale,diam);
-          if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,be );
-          end;
-      2 : begin // image
-          end;
-      3 : begin // symbol
-          end;
-     end;
+  end
 end;
 end;
 
@@ -1065,8 +1014,13 @@ with cnv do begin
         ds:=ds+cfgchart.drawpen;
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
         Brush.style:=bsSolid;
-        PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],2);
-        PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
+        if (cxx=xx)and(cyy=yy) then begin
+           PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,xx-3*ds+cfgchart.drawpen,yy-3*ds+cfgchart.drawpen,cfgplot.Color[0],2);
+           PlotLine(xx,yy,xx-3*ds,yy-3*ds,cfgplot.Color[21],1);
+        end else begin
+           PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],2);
+           PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
+        end;
         PlotLine(xx,yy,cxx-4*ds,cyy-2*ds,cfgplot.Color[21],1);
         PlotLine(xx,yy,cxx-2*ds,cyy-4*ds,cfgplot.Color[21],1);
       end;
@@ -1082,9 +1036,12 @@ if cfgchart.onprinter then begin
 with cnv do begin
   Brush.Style:=bsClear;
   Pen.Mode:=pmCopy;
+  {$ifdef linux} Font.CharSet:=fcsAnyCharSet; {$endif}
+  {$ifdef mswindows} Font.CharSet:=DEFAULT_CHARSET; {$endif}
   Font.Name:=cfgplot.FontName[fontnum];
-  Font.Color:=clBlack; //cfgplot.LabelColor[labelnum];
-  Font.Size:=cfgplot.LabelSize[labelnum];
+  if cfgplot.backgroundcolor=clWhite then Font.Color:=clBlack
+     else Font.Color:=cfgplot.LabelColor[labelnum];
+  Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.drawpen;
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
   ts:=cnv.TextExtent(txt);
@@ -1146,7 +1103,7 @@ Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Font.Name:=cfgplot.FontName[fontnum];
 Font.Color:=color;
-Font.Size:=cfgplot.FontSize[fontnum];
+Font.Size:=cfgplot.FontSize[fontnum]*cfgchart.drawpen;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
 if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
 ts:=cnv.TextExtent(txt);

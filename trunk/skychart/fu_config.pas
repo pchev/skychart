@@ -855,6 +855,8 @@ type
     bg4: TPanel;
     Shape26: TShape;
     Shape27: TShape;
+    MagLabel: TRadioGroup;
+    constlabel: TRadioGroup;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1038,6 +1040,8 @@ type
     procedure labelsizeChanged(Sender: TObject; NewValue: Integer);
     procedure PlanetDirSelClick(Sender: TObject);
     procedure PlanetDirChange(Sender: TObject);
+    procedure MagLabelClick(Sender: TObject);
+    procedure constlabelClick(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -1148,7 +1152,6 @@ begin
 labelSizeChange(Sender);
 end;
 // End of Linux specific CLX code:
-
 
 end.
 

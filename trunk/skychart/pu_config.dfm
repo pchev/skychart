@@ -9204,7 +9204,7 @@ object f_config: Tf_config
         MaxValue = 48
         MinValue = 6
         TabOrder = 0
-        Value = 0
+        Value = 6
         OnChange = labelsizeChange
       end
       object labelmagStar: TSpinEdit
@@ -9238,7 +9238,7 @@ object f_config: Tf_config
         MaxValue = 48
         MinValue = 6
         TabOrder = 3
-        Value = 0
+        Value = 6
       end
       object labelmagVar: TSpinEdit
         Tag = 2
@@ -9271,7 +9271,7 @@ object f_config: Tf_config
         MaxValue = 48
         MinValue = 6
         TabOrder = 6
-        Value = 0
+        Value = 6
       end
       object LabelmagMult: TSpinEdit
         Tag = 3
@@ -9304,7 +9304,7 @@ object f_config: Tf_config
         MaxValue = 48
         MinValue = 6
         TabOrder = 9
-        Value = 0
+        Value = 6
       end
       object labelmagNeb: TSpinEdit
         Tag = 4
@@ -9337,7 +9337,7 @@ object f_config: Tf_config
         MaxValue = 48
         MinValue = 6
         TabOrder = 12
-        Value = 0
+        Value = 6
       end
       object labelmagSol: TSpinEdit
         Tag = 5
@@ -9370,7 +9370,7 @@ object f_config: Tf_config
         MaxValue = 48
         MinValue = 6
         TabOrder = 15
-        Value = 0
+        Value = 6
       end
       object showlabelMisc: TCheckBox
         Tag = 7
@@ -9401,7 +9401,35 @@ object f_config: Tf_config
         MaxValue = 48
         MinValue = 6
         TabOrder = 18
-        Value = 0
+        Value = 6
+      end
+      object MagLabel: TRadioGroup
+        Left = 24
+        Top = 320
+        Width = 201
+        Height = 57
+        Caption = 'Star Label'
+        Columns = 2
+        ItemIndex = 0
+        Items.Strings = (
+          'Name'
+          'Magnitude')
+        TabOrder = 19
+        OnClick = MagLabelClick
+      end
+      object constlabel: TRadioGroup
+        Left = 240
+        Top = 320
+        Width = 201
+        Height = 57
+        Caption = 'Constellation Label'
+        Columns = 2
+        ItemIndex = 0
+        Items.Strings = (
+          'Full Name'
+          'Abbreviation')
+        TabOrder = 20
+        OnClick = constlabelClick
       end
     end
     object p_list: TTabSheet

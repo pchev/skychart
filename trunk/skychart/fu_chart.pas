@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses fu_detail, cu_skychart, u_constant, u_util, u_projection, Math, 
-  SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs, Qt,
+  SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs, Qt, 
   QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList;
 
 const maxundo=10;
@@ -135,7 +135,7 @@ type
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
-    procedure PrintChart(printcolor,printlandscape:boolean);
+    procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
     function  IdentXY(X, Y: Integer):boolean;

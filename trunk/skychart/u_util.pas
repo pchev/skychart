@@ -27,7 +27,7 @@ interface
 
 uses Math, SysUtils, Classes, u_constant,
 {$ifdef linux}
-    Libc,QForms,QGraphics;
+    Libc,QForms,QGraphics,QPrinters;
 {$endif}
 {$ifdef mswindows}
     Windows,Forms,Graphics,Printers,Winspool;
@@ -75,11 +75,13 @@ Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 Function GetTimeZone : double;
 Procedure FormPos(form : Tform; x,y : integer);
-procedure Exec(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string='');
+Function Exec(cmd: string): integer;
+procedure ExecNowait(cmd:string);
 function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
 Function GreekLetter(gr : shortstring) : shortstring;
 function GetId(str:string):integer;
 Procedure GetPrinterResolution(var name : string; var resol : integer);
+Procedure ImageResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
 
 var traceon : boolean;
     
@@ -778,9 +780,84 @@ with Form do begin
 end;
 end;
 
-procedure Exec(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string='');
+
+Function Exec(cmd: string): integer;
 {$ifdef linux}
-// This not work from Kylix IDE!
+// This not work from Kylix IDE without libcexec workaround.
+begin
+ result:=libc.system(pchar(cmd));
+end;
+{$endif}
+{$ifdef mswindows}
+var
+   bchExec: array[0..MAX_PATH] of char;
+   pchEXEC: Pchar;
+   si: TStartupInfo;
+   pi: TProcessInformation;
+   hide: boolean;
+   res:cardinal;
+begin
+   hide:=true;
+   pchExec := @bchExec;
+   StrPCopy(pchExec,cmd);
+   FillChar(si,sizeof(si),0);
+   FillChar(pi,sizeof(pi),0);
+   si.dwFlags:=STARTF_USESHOWWINDOW;
+   if hide then si.wShowWindow:=SW_SHOWMINIMIZED
+           else si.wShowWindow:=SW_SHOWNORMAL;
+   si.cb := sizeof(si);
+   try
+      if CreateProcess(Nil,pchExec,Nil,Nil,false,CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS,
+                       Nil,Nil,si,pi) = True then
+         begin
+           WaitForSingleObject(pi.hProcess,INFINITE);
+           GetExitCodeProcess(pi.hProcess,Res);
+           result:=res;
+         end
+         else
+           Result := GetLastError;
+    except;
+       Result := GetLastError;
+    end;
+end;
+{$endif}
+
+procedure ExecNoWait(cmd: string);
+{$ifdef linux}
+// This not work from Kylix IDE without libxexec workaround.
+
+begin
+ libc.system(pchar(cmd+'&'));
+end;
+{$endif}
+{$ifdef mswindows}
+var
+   bchExec: array[0..MAX_PATH] of char;
+   pchEXEC: Pchar;
+   si: TStartupInfo;
+   pi: TProcessInformation;
+   hide: boolean;
+begin
+   hide:=false;
+   pchExec := @bchExec;
+   StrPCopy(pchExec,cmd);
+   FillChar(si,sizeof(si),0);
+   FillChar(pi,sizeof(pi),0);
+   si.dwFlags:=STARTF_USESHOWWINDOW;
+   if hide then si.wShowWindow:=SW_SHOWMINIMIZED
+           else si.wShowWindow:=SW_SHOWNORMAL;
+   si.cb := sizeof(si);
+   try
+     CreateProcess(Nil,pchExec,Nil,Nil,false,CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, Nil,Nil,si,pi);
+    except;
+      writetrace('Could not launch '+cmd);
+    end;
+end;
+{$endif}
+
+{$ifdef linux}
+procedure ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string='');
+// This not work from Kylix IDE without libxexec workaround.
 var
   pid: PID_T;
   parg: array[1..7] of PChar;
@@ -800,10 +877,6 @@ begin
       writetrace('Could not launch '+cmd);
     end;
   end;
-end;
-{$endif}
-{$ifdef mswindows}
-begin
 end;
 {$endif}
 
@@ -857,7 +930,7 @@ k:=length(buf);
 v:=0;
 for i:=0 to k-1 do
   v:=v+intpower(10,i)*ord(buf[i]);
-w:=intpower(10,k)/maxint;
+w:=255*intpower(10,k-1)/maxint;
 if w>1 then result:=trunc(v/w)
        else result:=trunc(v);
 end;
@@ -866,7 +939,7 @@ Procedure GetPrinterResolution(var name : string; var resol : integer);
 {$ifdef linux}
 begin
 name:='';
-resol:=75;  // Kylix - Qt bug!
+resol:=Printer.XDPI;
 end;
 {$endif}
 {$ifdef mswindows}
@@ -899,5 +972,49 @@ begin
 end;
 {$endif}
 
+Procedure ImageResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
+var i,j,k,l,s,c,nw,nh,color:integer;
+    p,p1,p2:pbytearray;
+    x,y,a,b:double;
+begin
+case img1.PixelFormat of
+  pf8bit: s:=1;
+  {$ifdef mswindows} pf24bit: s:=3;{$endif}
+  pf32bit: s:=4;
+  else raise exception.create('Invalid bitmap format');
+end;
+nh:=round(img1.Height*zoom);
+nw:=round(img1.Width*zoom);
+img2.Height:=nh;
+img2.Width:=nw;
+if zoom=1 then img2.Canvas.Draw(0,0,img1)
+ else
+   for i:=0 to nh-1 do begin
+      p:=img2.ScanLine[i];
+      y:=i/zoom;
+      k:=trunc(y);
+      b:=y-k;
+      p1:=img1.ScanLine[k];
+      if k<(img1.Height-1) then p2:=img1.ScanLine[k+1]
+         else p2:=p1;                                  // last row, duplicate the previous one
+      for l:=0 to nw-1 do begin
+         x:=l/zoom;
+         j:=trunc(x);
+         a:=x-j;
+         if (abs(a)<1e-3)and(abs(b)<1e-3) then
+              for c:=0 to s-1 do begin          // pixel center, use the original value
+                p[l*s+c]:=p1[j*s+c]
+              end
+            else
+            if j<(img1.Width-1) then for c:=0 to s-1 do begin
+               color:=round( (1-a)*(1-b)*p1[j*s+c]+a*(1-b)*p1[j*s+s+c]+b*(1-a)*p2[j*s+c]+a*b*p2[j*s+s+c] );
+               p[l*s+c]:=color;
+            end
+            else for c:=0 to s-1 do begin
+                p[l*s+c]:=p1[j*s+c]            // last column, use the original last column
+            end;
+      end;
+   end;
+end;
 
 end.

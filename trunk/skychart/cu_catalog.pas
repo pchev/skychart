@@ -118,6 +118,10 @@ type
      function CheckPath(cat: integer; catpath:string):boolean;
      function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:shortstring):boolean;
      function GetMaxField(path,cat: string):string;
+     Procedure LoadConstellation(fname:string);
+     Procedure LoadConstL(fname:string);
+     Procedure LoadConstB(fname:string);
+     Procedure LoadHorizon(fname:string; var cfgsc:conf_skychart);
   published
     { Published declarations }
   end;
@@ -1223,6 +1227,9 @@ if result then begin
    if trim(lin.bayer)<>'' then begin
       rec.star.greeksymbol:=GreekLetter(lin.bayer);
       rec.star.valid[vsGreekSymbol]:=true;
+   end else if lin.flam>0 then begin
+      rec.star.greeksymbol:=inttostr(lin.flam);
+      rec.star.valid[vsGreekSymbol]:=true;
    end;
 end;
 end;
@@ -2168,6 +2175,7 @@ repeat
     rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
   end;
   precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
   if truncate then begin
     if (rec.ra<x1) or (rec.ra>x2) then continue;
     if (rec.dec<y1) or (rec.dec>y2) then continue;
@@ -2258,5 +2266,193 @@ begin
    else result:=false;
   end;
 end;
+
+Procedure Tcatalog.LoadConstellation(fname:string);
+var f : textfile;
+    i,n,p:integer;
+    txt:string;
+begin
+   if not FileExists(fname) then begin
+      cfgshr.ConstelNum := 0;
+      setlength(cfgshr.ConstelName,0);
+      setlength(cfgshr.ConstelPos,0);
+      exit;
+   end;
+   assignfile(f,fname);
+   try
+   reset(f);
+   n:=0;
+   // first loop to get the size
+   repeat
+     readln(f,txt);
+     txt:=trim(txt);
+     if (txt='')or(copy(txt,1,1)=';') then continue;
+     inc(n);
+   until eof(f);
+   setlength(cfgshr.ConstelName,n);
+   setlength(cfgshr.ConstelPos,n);
+   // read the file now
+   reset(f);
+   i:=0;
+   repeat
+     readln(f,txt);
+     txt:=trim(txt);
+     if (txt='')or(copy(txt,1,1)=';') then continue;
+     p:=pos(';',txt);
+     if p=0 then continue;
+     if not isnumber(trim(copy(txt,1,p-1))) then continue;
+     cfgshr.ConstelPos[i].ra:=deg2rad*15*strtofloat(trim(copy(txt,1,p-1)));
+     delete(txt,1,p);
+     p:=pos(';',txt);
+     if p=0 then continue;
+     cfgshr.ConstelPos[i].de:=deg2rad*strtofloat(trim(copy(txt,1,p-1)));
+     delete(txt,1,p);
+     p:=pos(';',txt);
+     if p=0 then continue;
+     cfgshr.ConstelName[i,1]:=trim(copy(txt,1,p-1));
+     delete(txt,1,p);
+     cfgshr.ConstelName[i,2]:=trim(txt);
+     inc(i);
+   until eof(f) or (i>=(n-1));
+   cfgshr.ConstelNum := n;
+   finally
+   closefile(f);
+   end;
+end;
+
+Procedure Tcatalog.LoadConstL(fname:string);
+var f : textfile;
+    i,n:integer;
+    ra1,ra2,de1,de2:single;
+    txt:string;
+begin
+   if not FileExists(fname) then begin
+      cfgshr.ConstLNum := 0;
+      setlength(cfgshr.ConstL,0);
+      exit;
+   end;
+   assignfile(f,fname);
+   try
+   reset(f);
+   n:=0;
+   // first loop to get the size
+   repeat
+     readln(f,txt);
+     inc(n);
+   until eof(f);
+   setlength(cfgshr.ConstL,n);
+   // read the file now
+   reset(f);
+   for i:=0 to n-1 do begin
+     readln(f,ra1,de1,ra2,de2);
+     cfgshr.ConstL[i].ra1:=deg2rad*ra1*15;
+     cfgshr.ConstL[i].de1:=deg2rad*de1;
+     cfgshr.ConstL[i].ra2:=deg2rad*ra2*15;
+     cfgshr.ConstL[i].de2:=deg2rad*de2;
+   end;
+   cfgshr.ConstLNum := n;
+   finally
+   closefile(f);
+   end;
+end;
+
+Procedure Tcatalog.LoadConstB(fname:string);
+var
+  f : textfile;
+  i,n:integer;
+  ra,de : Double;
+  constel,curconst:string;
+begin
+   if not FileExists(fname) then begin
+      cfgshr.ConstBNum := 0;
+      setlength(cfgshr.ConstB,0);
+      exit;
+   end;
+   assignfile(f,fname);
+   try
+   reset(f);
+   n:=0;
+   // first loop to get the size
+   repeat
+     readln(f,constel);
+     inc(n);
+   until eof(f);
+   setlength(cfgshr.ConstB,n);
+   // read the file now
+   reset(f);
+   curconst:='';
+   for i:=0 to n-1 do begin
+     readln(f,ra,de,constel);
+     cfgshr.ConstB[i].ra:=deg2rad*ra*15;
+     cfgshr.ConstB[i].de:=deg2rad*de;
+     cfgshr.ConstB[i].newconst:=(constel<>curconst);
+     curconst:=constel;
+   end;
+   cfgshr.ConstBNum := n;
+   finally
+   closefile(f);
+   end;
+end;
+
+Procedure Tcatalog.LoadHorizon(fname:string; var cfgsc:conf_skychart);
+var de,d0,d1,d2 : single;
+    i,i1,i2 : integer;
+    f : textfile;
+    buf : string;
+begin
+cfgsc.HorizonMax:=0;  // require in cfgsc for horizon clipping in u_projection
+for i:=1 to 360 do cfgshr.horizonlist[i]:=0;
+if fileexists(fname) then begin
+i1:=0;i2:=0;d1:=0;d0:=0;
+try
+assignfile(f,fname);
+reset(f);
+// get first point
+repeat readln(f,buf) until eof(f)or((trim(buf)<>'')and(buf[1]<>'#'));
+if (trim(buf)='')or(buf[1]='#') then exit;
+i1:=strtoint(trim(words(buf,' ',1,1)));
+d1:=strtofloat(trim(words(buf,' ',2,1)));
+if d1>90 then d1:=90;
+if d1<0 then d1:=0;
+if i1<>0 then begin
+   reset(f);
+   i1:=0;
+   d1:=0;
+end;
+i2:=0;
+d0:=d1;
+// process each point
+while (not eof(f))and(i2<359) do begin
+    repeat readln(f,buf) until eof(f)or((trim(buf)<>'')and(buf[1]<>'#'));
+    if (trim(buf)='')or(buf[1]='#') then break;
+    i2:=strtoint(trim(words(buf,' ',1,1)));
+    d2:=strtofloat(trim(words(buf,' ',2,1)));
+    if i2>359 then i2:=359;
+    if i1>=i2 then continue;
+    if d2>90 then d2:=90;
+    if d2<0 then d2:=0;
+    for i := i1 to i2 do begin
+        de:=deg2rad*(d1+(i-i1)*(d2-d1)/(i2-i1));
+        cfgshr.horizonlist[i+1]:=de;
+        cfgsc.HorizonMax:=maxvalue([cfgsc.HorizonMax,de]);
+    end;
+    i1:=i2;
+    d1:=d2;
+end;
+finally
+closefile(f);
+// fill last point
+if i2<359 then begin
+    for i:=i1 to 359 do begin
+        de:=deg2rad*(d1+(i-i1)*(d0-d1)/(359-i1));
+        cfgshr.horizonlist[i+1]:=de;
+        cfgsc.HorizonMax:=maxvalue([cfgsc.HorizonMax,de]);
+    end;
+end;
+cfgsc.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
+end;
+end;
+end;
+
 
 end.

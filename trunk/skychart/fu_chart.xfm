@@ -1,6 +1,6 @@
 object f_chart: Tf_chart
-  Left = 714
-  Top = 613
+  Left = 720
+  Top = 616
   Width = 314
   Height = 209
   Caption = 'Chart'

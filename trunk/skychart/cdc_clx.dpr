@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 
 uses
-  QForms, 
+  QForms,
   fu_main in 'fu_main.pas' {f_main},
   fu_chart in 'fu_chart.pas' {f_chart},
   fu_about in 'fu_about.pas' {f_about},
@@ -39,7 +39,8 @@ uses
   fu_directory in 'fu_directory.pas' {f_directory},
   cu_planet in 'cu_planet.pas',
   fu_detail in 'fu_detail.pas' {f_detail},
-  fu_info in 'fu_info.pas' {f_info};
+  fu_info in 'fu_info.pas' {f_info},
+  fu_printsetup in 'fu_printsetup.pas' {f_printsetup};
 
 {$R *.res}
 
@@ -50,6 +51,7 @@ begin
   Application.CreateForm(Tf_directory, f_directory);
   Application.CreateForm(Tf_detail, f_detail);
   Application.CreateForm(Tf_info, f_info);
+  Application.CreateForm(Tf_printsetup, f_printsetup);
   f_main.Init;
   Application.Run;
 end.

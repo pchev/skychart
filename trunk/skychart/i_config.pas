@@ -221,7 +221,8 @@ equinoxtype.itemindex:=cshr.EquinoxType;
 PMBox.checked:=csc.PMon;
 DrawPMBox.checked:=csc.DrawPMon;
 lDrawPMy.value:=csc.DrawPMyear;
-Apparenttype.itemindex:=0;
+if csc.ApparentPos then ApparentType.ItemIndex:=1
+                   else Apparenttype.itemindex:=0;
 projectiontype.itemindex:=csc.ProjPole;
 end;
 
@@ -1124,6 +1125,11 @@ begin
 csc.DrawPMyear:=lDrawPMy.value;
 end;
 
+procedure Tf_config.ApparentTypeClick(Sender: TObject);
+begin
+csc.ApparentPos:=(ApparentType.ItemIndex=1)
+end;
+
 procedure Tf_config.projectiontypeClick(Sender: TObject);
 begin
 csc.ProjPole:=projectiontype.itemindex;
@@ -1430,12 +1436,6 @@ finally
  chdir(appdir);
 end;
 end;
-
-procedure Tf_config.ApparentTypeClick(Sender: TObject);
-begin
-ApparentType.ItemIndex:=0;
-end;
-
 
 procedure Tf_config.bgClick(Sender: TObject);
 begin
@@ -2964,6 +2964,24 @@ begin
 
  showlabelcolor;
 
+ if csc.MagLabel then MagLabel.ItemIndex:=1
+
+                 else MagLabel.itemindex:=0;
+ if csc.ConstFullLabel then constlabel.ItemIndex:=0
+                       else constlabel.ItemIndex:=1;
+end;
+
+
+
+procedure Tf_config.MagLabelClick(Sender: TObject);
+begin
+csc.MagLabel:=(MagLabel.ItemIndex=1);
+end;
+
+
+procedure Tf_config.constlabelClick(Sender: TObject);
+begin
+csc.ConstFullLabel:=(constlabel.ItemIndex=0);
 end;
 
 
