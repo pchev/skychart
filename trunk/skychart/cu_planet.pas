@@ -1389,7 +1389,7 @@ if abs(n1)<=1 then elong:=arccos(n1)
 n1:=(r*r+dist*dist-rr*rr)/(2.0*r*dist);
 if abs(n1)<=1 then phase:=arccos(n1)
          else phase:=0;
-magn:=comelem.Oh+5.0*log10(dist)+comelem.Og*log10(r);  { meeus 25.16 }
+magn:=comelem.Oh+5.0*log10(dist)+2.5*comelem.Og*log10(r);  { meeus 25.16 }
 { estimated coma diameter arcmin }
 diam:=(maxvalue([0,1-ln(r)])/maxvalue([1,comelem.Oh-2]))*30/dist;
 { estimated tail length UA }
