@@ -33,7 +33,7 @@ Windows, Graphics;
 Types, QGraphics;
 {$endif}
 
-Procedure BitmapRotation(bmp,rbmp: TBitmap; Rotation:double);
+Procedure BitmapRotation(bmp,rbmp: TBitmap; Rotation:double; WhiteBg:boolean);
 procedure BitmapRotMask(imamask,rbmp,bmp: tbitmap; Rotation:double);
 procedure BitmapBlackMask(imamask,bmp: tbitmap);
 
@@ -113,7 +113,9 @@ end;
 		out   BitMapRotated:TBitMap; //output bitmap
 		const theta:AngleType;  // rotn angle in radians counterclockwise in windows
 		const oldAxis:TPOINT; 	// center of rotation in pixels, rel to bmp origin
-		var   newAxis:TPOINT);  // center of rotated bitmap, relative to bmp origin
+		var   newAxis:TPOINT;  // center of rotated bitmap, relative to bmp origin
+                const TransCol: byte;  // force transparent color
+                const RevertImage : Boolean); // Revert image to negative
 {
   (c) har*GIS L.L.C., 1999
   	You are free to use this in any way, but please retain this comment block.
@@ -211,7 +213,7 @@ end;
 		pRGBQuadArray = ^TRGBQuadArray;
 	var //each of the following points to the same scanlines
 		RowRotatedB: pByteArray; 			//1 byte
-		RowRotatedW: pWordArray;  		//2 bytes
+//		RowRotatedW: pWordArray;  		//2 bytes
 		//RowRotatedT: pRGBtripleArray;	//3 bytes
 		RowRotatedQ: pRGBquadArray;  	//4 bytes
 	var //a single pixel for each format 	1/8/00
@@ -240,7 +242,7 @@ with BitMapOriginal do begin
 //	pf4bit:	 nBytes:=0;// 4bit, PByteArray     // 16 color pallette; build nibble for pixel pallette index; convert to 8 pixels
 			pf8bit:  nBytes:=1;// 8bit, PByteArray     // byte pallette, 253 out of 256 colors; depends on display mode, needs truecolor ;
 //	pf15bit: nBytes:=2;// 15bit,PWordArrayType // 0rrrrr ggggg bbbbb  0+5+5+5
-			pf16bit: nBytes:=2;// 16bit,PWordArrayType // rrrrr gggggg bbbbb  5+6+5
+//			pf16bit: nBytes:=2;// 16bit,PWordArrayType // rrrrr gggggg bbbbb  5+6+5
 //	pf24bit: nBytes:=3;// 24bit,pRGBtripleArray// bbbbbbbb gggggggg rrrrrrrr  8+8+8
 			pf32bit: nBytes:=4;// 32bit,pRGBquadArray  // bbbbbbbb gggggggg rrrrrrrr aaaaaaaa 8+8+8+alpha
 											   // can assign 'Single' reals to this for generating displays/plasma!
@@ -294,14 +296,19 @@ with BitMapOriginal do begin
 //Transparent pixel color used for out of range pixels 1/8/00
 //how to translate a Bitmap.TransparentColor=Canvas.Pixels[0, Height - 1];
 // from Tcolor into pixelformat..
-        // force transparent to black
-        PWordArray  ( Scanline[ Oht ] )[0]:=0;
-        if nBytes>2 then PWordArray  ( Scanline[ Oht ] )[1]:=0;
+//        PWordArray  ( Scanline[ Oht ] )[0]:=TransparentColor;
+//        if nBytes>2 then PWordArray  ( Scanline[ Oht ] )[1]:=TransparentColor;
+        // force transparent color
 	case nBytes of
-		0,1:TransparentB := PByteArray     ( Scanline[ Oht ] )[0];
-		2:	TransparentW := PWordArray     ( Scanline[ Oht ] )[0];
+		0,1:    TransparentB := TransCol; // PByteArray     ( Scanline[ Oht ] )[0];
+//		2:	TransparentW := TransCol; //:= PWordArray     ( Scanline[ Oht ] )[0];
 //		3:	TransparentT := pRGBtripleArray( Scanline[ Oht ] )[0];
-		4:	TransparentQ := pRGBquadArray  ( Scanline[ Oht ] )[0];
+		4:      begin
+                        TransparentQ.rgbBlue := TransCol; //pRGBquadArray  ( Scanline[ Oht ] )[0];
+                        TransparentQ.rgbRed := TransCol;
+                        TransparentQ.rgbGreen := TransCol;
+                        TransparentQ.rgbReserved := 0;
+                        end;
 	end;//case *)
 
 // Step through each row of rotated image.
@@ -310,7 +317,7 @@ with BitMapOriginal do begin
 
 		case nBytes of  //1/6/00
 		0,1:RowRotatedB := BitmapRotated.Scanline[ j ] ;
-		2:	RowRotatedW := BitmapRotated.Scanline[ j ] ;
+//		2:	RowRotatedW := BitmapRotated.Scanline[ j ] ;
 //		3:	RowRotatedT := BitmapRotated.Scanline[ j ] ;
 		4:	RowRotatedQ := BitmapRotated.Scanline[ j ] ;
 		end;//case
@@ -343,10 +350,21 @@ with BitMapOriginal do begin
 				// Assign pixel from rotated space to current pixel in BitmapRotated
 				//( nearest neighbor interpolation)
 				case nBytes of  //get pixel bytes according to pixel format   1/6/00
-				0,1:RowRotatedB[i] := pByteArray(      scanline[joriginal] )[iOriginal];
-				2:	RowRotatedW[i] := pWordArray(      Scanline[jOriginal] )[iOriginal];
+				0,1:    begin
+                                         RowRotatedB[i] := pByteArray(      scanline[joriginal] )[iOriginal];
+                                         if RevertImage then
+                                           RowRotatedB[i] := 256-RowRotatedB[i];
+                                        end;
+//				2:	RowRotatedW[i] := pWordArray(      Scanline[jOriginal] )[iOriginal];
 //				3:	RowRotatedT[i] := pRGBtripleArray( Scanline[jOriginal] )[iOriginal];
-				4:	RowRotatedQ[i] := pRGBquadArray(   Scanline[jOriginal] )[iOriginal];
+				4:      begin
+                                         RowRotatedQ[i] := pRGBquadArray(   Scanline[jOriginal] )[iOriginal];
+                                         if RevertImage then begin
+                                         RowRotatedQ[i].rgbBlue:=256- RowRotatedQ[i].rgbBlue;
+                                         RowRotatedQ[i].rgbRed:=256- RowRotatedQ[i].rgbRed;
+                                         RowRotatedQ[i].rgbGreen:=256- RowRotatedQ[i].rgbGreen;
+                                         end;
+                                        end;
 				end;//case
 			END //inside
 			ELSE	BEGIN //outside
@@ -355,7 +373,7 @@ with BitMapOriginal do begin
 //	RowRotated[i]:=tpixelformat(BitMapOriginal.TRANSPARENTCOLOR) ; wont work
 				case nBytes of
 				0,1:RowRotatedB[i] := TransparentB;
-				2:	RowRotatedW[i] := TransparentW;
+//				2:	RowRotatedW[i] := TransparentW;
 //				3:	RowRotatedT[i] := TransparentT;
 				4:	RowRotatedQ[i] := TransparentQ;
 				end;//case
@@ -381,11 +399,13 @@ END; {RotateImage}
 
 {=============================================================================}
 
-Procedure BitmapRotation(bmp,rbmp: TBitmap; Rotation:double);
+Procedure BitmapRotation(bmp,rbmp: TBitmap; Rotation:double; WhiteBg :boolean);
 var np :tpoint;
+    TrColor: byte;
 begin
 Rotation:=rmod(Rotation+pi2,pi2);
-RotateBitmap(bmp,rbmp,Rotation,point(bmp.Width div 2, bmp.Height div 2),np);
+TrColor:=0;
+RotateBitmap(bmp,rbmp,Rotation,point(bmp.Width div 2, bmp.Height div 2),np,TrColor,WhiteBg);
 end;
 
 procedure BitmapRotMask(imamask,rbmp,bmp: tbitmap; Rotation:double);

@@ -194,8 +194,8 @@ RefreshTimer.Enabled:=true;
 Image1.Picture.Bitmap.Width:=Image1.width;
 Image1.Picture.Bitmap.Height:=Image1.Height;
 with Image1.Canvas do begin
- Brush.Color:=sc.plot.cfgplot.Color[0];
- Pen.Color:=sc.plot.cfgplot.Color[0];
+ //Brush.Color:=sc.plot.cfgplot.Color[0];
+// Pen.Color:=sc.plot.cfgplot.Color[0];
  Brush.style:=bsSolid;
  Pen.Mode:=pmCopy;
  Pen.Style:=psSolid;

@@ -2226,16 +2226,25 @@ end;
 function TPlanet.Checkdb:boolean;
 // this function is here instead of fu_config because fu_config is not created at startup.
 var i:integer;
+   ok:boolean;
 begin
 if db1.Active then begin
   result:=true;
-  for i:=1 to numsqltable do
-     result:=result and (sqltable[i,1]=db1.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"'));
+  for i:=1 to numsqltable do begin
+     ok:=(sqltable[i,1]=db1.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"'));
+     if not ok then begin  // try to create the missing table
+       db1.Query('CREATE TABLE if not exists '+sqltable[i,1]+sqltable[i,2]);
+       ok:=(sqltable[i,1]=db1.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"'));
+       if ok then writetrace('Create table '+sqltable[i,1]+' ... Ok')
+             else writetrace('Create table '+sqltable[i,1]+' ... Failed');
+     end;
+     result:=result and ok;
+  end;
 end else result:=false;
 if not result then begin
   db1.Close;
   db2.Close;
-end;  
+end;
 end;
 
 procedure TPlanet.TruncateDailyAsteroid;

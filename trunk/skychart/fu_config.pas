@@ -757,6 +757,7 @@ type
     bg4: TPanel;
     Shape26: TShape;
     Shape27: TShape;
+    Shape28: TShape;
     Label200: TLabel;
     skycolorbox: TRadioGroup;
     Panel6: TPanel;
@@ -937,6 +938,10 @@ type
     Label269: TLabel;
     ImgLumBar: TTrackBar;
     ImgContrastBar: TTrackBar;
+    ProgressPanel: TPanel;
+    ProgressCat: TLabel;
+    ProgressBar1: TProgressBar;
+    ShowImagesBox: TCheckBox;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1151,6 +1156,7 @@ type
     procedure ScanImagesClick(Sender: TObject);
     procedure ImgLumBarChange(Sender: TObject);
     procedure ImgContrastBarChange(Sender: TObject);
+    procedure ShowImagesBoxClick(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;

@@ -1,11 +1,11 @@
 object f_about: Tf_about
-  Left = 362
-  Top = 298
+  Left = 447
+  Top = 297
   Width = 350
   Height = 253
   HorzScrollBar.Range = 338
   VertScrollBar.Range = 246
-  BorderStyle = fbsToolWindow
+  BorderStyle = fbsNone
   Caption = 'About'
   Color = clBackground
   Constraints.MaxHeight = 253

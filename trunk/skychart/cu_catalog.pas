@@ -1649,7 +1649,7 @@ repeat
   rec.neb.mag:=lin.ma;
   if trim(lin.typ)='Drk' then rec.neb.mag:=11;  // also filter dark nebulae
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
-  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (trim(lin.typ)<>'Gx') then continue; // filter big object except M31, LMC, SMC
+  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (trim(lin.typ)<>'Gx') then continue; // filter big object (only open cluster)
   break;
 until not result;
 if result then begin

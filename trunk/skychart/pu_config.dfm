@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 435
-  Top = 119
+  Left = 328
+  Top = 124
   Width = 652
   Height = 544
   BorderStyle = bsSizeToolWin
@@ -16,7 +16,7 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 101
+  PixelsPerInch = 96
   TextHeight = 13
   object TreeView1: TTreeView
     Left = 4
@@ -165,7 +165,7 @@ object f_config: Tf_config
     Top = 16
     Width = 490
     Height = 455
-    ActivePage = s_images
+    ActivePage = s_display
     TabOrder = 9
     object s_time: TTabSheet
       Caption = 's_time'
@@ -7958,7 +7958,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_display
+        ActivePage = t_color
         Align = alClient
         TabOrder = 0
         object t_display: TTabSheet
@@ -8923,6 +8923,13 @@ object f_config: Tf_config
             Alignment = taCenter
             Caption = 'Comet'
           end
+          object Label269: TLabel
+            Left = 176
+            Top = 214
+            Width = 49
+            Height = 13
+            Caption = 'Milky Way'
+          end
           object bg1: TPanel
             Left = 32
             Top = 36
@@ -9146,7 +9153,6 @@ object f_config: Tf_config
             Height = 89
             Caption = 'Standard  Color'
             Columns = 2
-            ItemIndex = 0
             Items.Strings = (
               'Default'
               'Red'
@@ -9178,6 +9184,15 @@ object f_config: Tf_config
               Width = 30
               Height = 30
               Shape = stCircle
+              OnMouseUp = ShapeMouseUp
+            end
+            object Shape28: TShape
+              Tag = 22
+              Left = 152
+              Top = 4
+              Width = 30
+              Height = 30
+              Shape = stSquare
               OnMouseUp = ShapeMouseUp
             end
           end
@@ -9231,7 +9246,7 @@ object f_config: Tf_config
             Caption = 'Sky Color'
             Columns = 2
             Items.Strings = (
-              'Fixed'
+              'Fixed Black'
               'Automatic')
             TabOrder = 0
             OnClick = skycolorboxClick
@@ -10194,21 +10209,21 @@ object f_config: Tf_config
             Caption = 'Images Path'
           end
           object Label265: TLabel
-            Left = 8
+            Left = 98
             Top = 80
             Width = 41
             Height = 13
             Caption = 'There is '
           end
           object nimages: TLabel
-            Left = 56
+            Left = 144
             Top = 80
             Width = 39
             Height = 13
             Caption = 'nimages'
           end
           object Label267: TLabel
-            Left = 112
+            Left = 200
             Top = 80
             Width = 89
             Height = 13
@@ -10264,11 +10279,11 @@ object f_config: Tf_config
             Margin = 0
           end
           object ScanImages: TButton
-            Left = 104
+            Left = 98
             Top = 104
             Width = 113
             Height = 25
-            Caption = 'Re-Scan directory'
+            Caption = 'Scan directory'
             TabOrder = 2
             OnClick = ScanImagesClick
           end
@@ -10328,6 +10343,39 @@ object f_config: Tf_config
               TickStyle = tsAuto
               OnChange = ImgContrastBarChange
             end
+          end
+          object ProgressPanel: TPanel
+            Left = 16
+            Top = 80
+            Width = 401
+            Height = 73
+            TabOrder = 4
+            Visible = False
+            object ProgressCat: TLabel
+              Left = 187
+              Top = 8
+              Width = 26
+              Height = 13
+              Caption = 'Other'
+            end
+            object ProgressBar1: TProgressBar
+              Left = 24
+              Top = 40
+              Width = 361
+              Height = 17
+              Min = 0
+              Max = 100
+              TabOrder = 0
+            end
+          end
+          object ShowImagesBox: TCheckBox
+            Left = 32
+            Top = 344
+            Width = 369
+            Height = 17
+            Caption = 'Show Images on the chart'
+            TabOrder = 5
+            OnClick = ShowImagesBoxClick
           end
         end
       end

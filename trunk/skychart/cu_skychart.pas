@@ -191,12 +191,8 @@ try
     DrawMilkyWay; // most extended first
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque) then DrawHorizon;
-    if DrawNebImages then begin
-       Fplot.cfgplot.Invisible:=true;
-       DrawNebulae;
-       Fplot.cfgplot.Invisible:=false;
-    end
-    else DrawNebulae;
+    DrawNebulae;
+    DrawNebImages;
     DrawOutline;
   end;
   // then the lines
@@ -678,11 +674,14 @@ end;
 
 function Tskychart.DrawNebulae :boolean;
 var rec:GcatRec;
-  x1,y1,x2,y2,rot: Double;
-  xx,yy:single;
+  x1,y1,x2,y2,rot,ra,de: Double;
+  x,y,xx,yy,sz:single;
   lid: integer;
+  imgfile: string;
+  bmp:Tbitmap;
 begin
 fillchar(rec,sizeof(rec),0);
+bmp:=Tbitmap.Create;
 try
 if Fcatalog.OpenNeb then
  while Fcatalog.readneb(rec) do begin
@@ -691,10 +690,26 @@ if Fcatalog.OpenNeb then
  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
- if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-  if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
-  if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
-  if rec.neb.nebtype=1 then begin
+ if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
+ if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
+ sz:=abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit*rec.neb.dim1/2;
+ if ((xx+sz)>cfgsc.Xmin) and ((xx-sz)<cfgsc.Xmax) and ((yy+sz)>cfgsc.Ymin) and ((yy-sz)<cfgsc.Ymax) then begin
+  if cfgsc.ShowImages and (sz>6) and FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then begin
+       FFits.FileName:=imgfile;
+       if FFits.Header.valid then begin
+          ra:=FFits.Center_RA;
+          de:=FFits.Center_DE;
+          precession(jd2000,cfgsc.JDChart,ra,de);
+          if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
+          projection(ra,de,x1,y1,true,cfgsc) ;
+          WindowXY(x1,y1,x,y,cfgsc);
+          FFits.GetBitmap(bmp);
+          projection(ra,de+0.001,x2,y2,false,cfgsc) ;
+          rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
+          Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,bmp);
+       end;
+  end else begin
+   if rec.neb.nebtype=1 then begin
       projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
       rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
       if (not rec.neb.valid[vnPA])or(rec.neb.pa=-999) then rec.neb.pa:=90
@@ -703,31 +718,43 @@ if Fcatalog.OpenNeb then
       if cfgsc.FlipY<0 then rec.neb.pa:=180-rec.neb.pa;
       rec.neb.pa:=Deg2Rad*rec.neb.pa+rot;
       Fplot.PlotGalaxie(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit);
-   end else
+    end else
       Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype);
+   end;
    if rec.neb.messierobject or (rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then
-      SetLabel(lid,xx,yy,round(abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit*rec.neb.dim1/2),2,4,rec.neb.id);
+      SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id);
  end;
 end;
 result:=true;
 finally
  Fcatalog.CloseNeb;
+ bmp.Free;
 end;
 end;
 
 function Tskychart.DrawNebImages :boolean;
 var bmp:Tbitmap;
   filename : string;
-  ra,de,width,height,cosr,sinr,dw,dh: double;
-  i:integer;
+  ra,de,width,height,dw,dh: double;
+  cosr,sinr: extended;
   x1,y1,x2,y2,rot: Double;
   xx,yy:single;
 begin
 result:=false;
 bmp:=Tbitmap.Create;
 try
-if FFits.OpenDB then
-  while FFits.GetDB(filename,ra,de,width,height,cosr,sinr) do begin
+if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
+  x1:=0;
+  x2:=pi2;
+end else begin
+  x1 := NormRA(cfgsc.racentre-cfgsc.fov/cos(cfgsc.decentre)-deg2rad);
+  x2 := NormRA(cfgsc.racentre+cfgsc.fov/cos(cfgsc.decentre)+deg2rad);
+end;
+y1 := maxvalue([-pid2,cfgsc.decentre-cfgsc.fov/cfgsc.WindowRatio-deg2rad]);
+y2 := minvalue([pid2,cfgsc.decentre+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
+if FFits.OpenDB('other',x1,x2,y1,y2) then
+  while FFits.GetDB(filename,ra,de,width,height,rot) do begin
+    sincos(rot,sinr,cosr);
     precession(jd2000,cfgsc.JDChart,ra,de);
     if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
     projection(ra,de,x1,y1,true,cfgsc) ;
@@ -743,8 +770,8 @@ if FFits.OpenDB then
           FFits.GetBitmap(bmp);
           projection(ra,de+0.001,x2,y2,false,cfgsc) ;
           rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
-          Fplot.plotimage(xx,yy,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,bmp);
-       end;   
+          Fplot.plotimage(xx,yy,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY, cfgsc.WhiteBg, bmp);
+       end;
     end;
   end;
 finally
@@ -795,17 +822,17 @@ if cfgsc.fov<(deg2rad*2) then exit;
 fillchar(rec,sizeof(rec),0);
 first:=true;
 col:=0;lw:=1;fs:=1;
+if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
+else begin
+   col:=addcolor(FPlot.cfgplot.Color[22],FPlot.cfgplot.Color[0]);
+end;
+if col = FPlot.cfgplot.bgcolor then cfgsc.FillMilkyWay:=false;
 try
 if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
  while Fcatalog.readMilkyway(rec) do begin
  if first then begin
     // all the milkyway line use the same property
     if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
-    if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
-    else begin
-      if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
-      col:=addcolor(col,FPlot.cfgplot.Color[0]);
-    end;  
     if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
     first:=false;
  end;
@@ -2444,7 +2471,7 @@ for i:=1 to numlabels do begin
         if (cfgsc.modlabels[j].dx<>0)or(cfgsc.modlabels[j].dy<>0) then r:=-1;
         break;
      end;
-  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,txt);
+  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,cfgsc.WhiteBg,txt);
 end;
 result:=true;
 end;

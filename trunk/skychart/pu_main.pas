@@ -315,10 +315,12 @@ type
     Dde_active_chart : string;
     DdeOpen : boolean;
     DdeEnqueue: boolean;
+    Config_Version : string;
     procedure Init;
     procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
+    procedure UpdateConfig;
     procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
     procedure SaveChartConfig(filename:string);
