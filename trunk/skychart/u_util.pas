@@ -48,6 +48,7 @@ Procedure InitTrace;
 Procedure WriteTrace( buf : string);
 procedure Splitarg(buf,sep:string; var arg: TStringList);
 function words(str,sep : string; p,n : integer) : string;
+function pos2(sub,str:string;i:integer):integer;
 function InvertI16(X : Word) : SmallInt;
 function InvertI32(X : LongWord) : LongInt;
 function InvertI64(X : Int64) : Int64;
@@ -249,6 +250,12 @@ for i:=1 to n do begin
  result:=result+trim(copy(str,1,j))+sep;
  str:=trim(copy(str,j,length(str)));
 end;
+end;
+
+function pos2(sub,str:string;i:integer):integer;
+begin
+result:=pos(sub,copy(str,i,length(str)));
+if result>0 then result:=result+i-1;
 end;
 
 function InvertI16(X : word) : smallInt;

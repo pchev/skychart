@@ -116,7 +116,7 @@ type
   public
     { Public declarations }
     sc: Tskychart;
-    maximize,LockTrackCursor :boolean;
+    maximize,LockTrackCursor,lastquick :boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
@@ -173,8 +173,6 @@ type
     function cmd_SetTZ(tz:string):string;
     function cmd_GetTZ:string;
   end;
-
-function PosEx(const SubStr, S: string; Offset: Cardinal = 1): Integer;
 
 implementation
 
@@ -237,37 +235,6 @@ begin
     end;
     end
  else result:=false;
-end;
-
-function PosEx(const SubStr, S: string; Offset: Cardinal = 1): Integer;
-var
-  I,X: Integer;
-  Len, LenSubStr: Integer;
-begin
-  if Offset = 1 then
-    Result := Pos(SubStr, S)
-  else
-  begin
-    I := Offset;
-    LenSubStr := Length(SubStr);
-    Len := Length(S) - LenSubStr + 1;
-    while I <= Len do
-    begin
-      if S[I] = SubStr[1] then
-      begin
-        X := 1;
-        while (X < LenSubStr) and (S[I + X] = SubStr[X + 1]) do
-          Inc(X);
-        if (X = LenSubStr) then
-        begin
-          Result := I;
-          exit;
-        end;
-      end;
-      Inc(I);
-    end;
-    Result := 0;
-  end;
 end;
 
 // end of windows vcl specific code:

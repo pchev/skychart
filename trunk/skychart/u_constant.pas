@@ -95,6 +95,7 @@ const version = 'Version 3 alpha 0.0.3';
       deftxt = '?';
       f0='0';
       f1='0.0';
+      f2='0.00';
       f5='0.00000';
       ConstelNum = 88;
       NumLlabel = 100;
@@ -273,6 +274,7 @@ type
                 ConstL: array of Tconstl;
                 ConstB : array of Tconstb;
                 horizonlist : Thorizonlist;
+                ListNeb,ListStar,ListVar,ListDbl,ListPla : boolean;
                 end;
      conf_skychart = record
                 // chart setting
