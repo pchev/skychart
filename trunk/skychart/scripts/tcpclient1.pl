@@ -41,7 +41,7 @@ print STDOUT "[Connected to $host:$port]\n";
 # wait connection and get client chart name
   $line = <$handle>;
   print STDOUT $line;
-  $line =~ /OK id=(.*) chart=(.*)$/;
+  $line =~ /OK! id=(.*) chart=(.*)$/;
   $client = $1;
   $chart = $2;
   chop $chart;
