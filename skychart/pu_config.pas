@@ -569,6 +569,18 @@ type
     ColorDialog1: TColorDialog;
     projectiontype: TRadioGroup;
     ApparentType: TRadioGroup;
+    p_system: TTabSheet;
+    p_server: TTabSheet;
+    GroupBox4: TGroupBox;
+    ipstatus: TEdit;
+    refreshIP: TButton;
+    GroupBox3: TGroupBox;
+    UseIPserver: TCheckBox;
+    ipaddr: TEdit;
+    Label54: TLabel;
+    Label55: TLabel;
+    ipport: TEdit;
+    keepalive: TCheckBox;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -670,6 +682,11 @@ type
     procedure ConstlFileBtnClick(Sender: TObject);
     procedure ApparentTypeClick(Sender: TObject);
     procedure projectiontypeClick(Sender: TObject);
+    procedure UseIPserverClick(Sender: TObject);
+    procedure keepaliveClick(Sender: TObject);
+    procedure ipaddrChange(Sender: TObject);
+    procedure ipportChange(Sender: TObject);
+    procedure refreshIPClick(Sender: TObject);
   private
     { Déclarations privées }
     procedure EditGCatPath(row : integer);
@@ -702,6 +719,7 @@ type
     procedure ShowLine;
     procedure ShowColor;
     procedure ShowSkyColor;
+    procedure ShowServer;
   end;
 
 var

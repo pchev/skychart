@@ -45,6 +45,7 @@ const version = 'Version 3 alpha 0.0.2';
       MaxAsteroid = 500;
       MaxPla = 32;
       MaxQuickSearch = 15;
+      MaxWindow = 10;  // maximum number of chart window (and also tcp connection)
       jd2000 =2451545.0 ;
       jd1950 =2433282.4235;
       jd1900 =2415020.3135;
@@ -87,6 +88,7 @@ const version = 'Version 3 alpha 0.0.2';
       D0sat : array [1..8] of double = (199,249,530,560,764,2575,143,718);
       D0ura : array [1..5] of double = (236,581,585,789,761);
       blank15='               ';
+      blank=' ';
       deftxt = '?';
       ConstelNum = 88;
       NumLlabel = 100;
@@ -307,9 +309,10 @@ type
                 end;
      conf_main = record
                 prtname,language,ConstLfile : string;
-                PrinterResolution,configpage,autorefreshdelay : integer;
+                PrinterResolution,configpage,autorefreshdelay,MaxChildID : integer;
                 PrintColor,PrintLandscape :boolean;
-                maximized,updall : boolean;
+                maximized,updall,AutostartServer,keepalive,locked : boolean;
+                ServerIPaddr,ServerIPport : string;
                 end;
 
 // external library
@@ -379,6 +382,56 @@ const
      html_br       = '\line ';
      html_sp       = ' ';
 {$endif}
+
+// Main Commands
+const
+     MaxCmdArg = 10;
+     numcmdmain = 5;
+     maincmdlist: array[1..numcmdmain,1..2] of string=(
+     ('NEWCHART','1'),
+     ('CLOSECHART','2'),
+     ('SELECTCHART','3'),
+     ('LISTCHART','4'),
+     ('SEARCH','5')
+     );
+
+// Chart Commands
+const
+     numcmd = 32;
+     cmdlist: array[1..numcmd,1..2] of string=(
+     ('ZOOM+','1'),
+     ('ZOOM-','2'),
+     ('MOVEEAST','3'),
+     ('MOVEWEST','4'),
+     ('MOVENORTH','5'),
+     ('MOVESOUTH','6'),
+     ('MOVENORTHEAST','7'),
+     ('MOVENORTHWEST','8'),
+     ('MOVESOUTHEAST','9'),
+     ('MOVESOUTHWEST','10'),
+     ('FLIPX','11'),
+     ('FLIPY','12'),
+     ('SETCURSOR','13'),
+     ('CENTRE','14'),
+     ('ZOOM+MOVE','15'),
+     ('ZOOM-MOVE','16'),
+     ('ROT+','17'),
+     ('ROT-','18'),
+     ('EQGRID','19'),
+     ('AZGRID','20'),
+     ('STARMODE','21'),
+     ('NEBMODE','22'),
+     ('AUTOSKY','23'),
+     ('UNDO','24'),
+     ('REDO','25'),
+     ('PROJ','26'),
+     ('FOV','27'),
+     ('MOVE','28'),
+     ('DATE','29'),
+     ('OBSL','30'),
+     ('IDCURSOR','31'),
+     ('SAVEIMG','32')
+     );
 
 implementation
 

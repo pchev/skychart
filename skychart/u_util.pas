@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Math, SysUtils, u_constant,
+uses Math, SysUtils, Classes, u_constant,
 {$ifdef linux}
     Libc,QForms,QGraphics;
 {$endif}
@@ -46,6 +46,7 @@ function SubColor(c1,c2 : Tcolor):Tcolor;
 function roundF(x:double;n:integer):double;
 Procedure InitDebug;
 Procedure WriteDebug( buf : string);
+procedure Splitarg(buf,sep:string; var arg: TStringList);
 function words(str,sep : string; p,n : integer) : string;
 function InvertI16(X : Word) : SmallInt;
 function InvertI32(X : LongWord) : LongInt;
@@ -197,6 +198,38 @@ if min<0 then begin
   b:=trunc(f*(b-min));
 end;
 result:=r+256*v+65536*b;
+end;
+
+procedure Splitarg(buf,sep:string; var arg: TStringList);
+var i,j,k,l:integer;
+begin
+arg.clear;
+l:=length(sep);
+while copy(buf,1,l)=sep do delete(buf,1,1);
+while pos(sep,buf)<>0 do begin
+ for i:=1 to length(buf) do begin
+  if copy(buf,i,l) = sep then begin
+    if copy(buf,i+l,l)=sep then continue;
+    if copy(buf,1,1)='"' then begin
+      j:=length(buf);
+      for k:=2 to length(buf) do
+        if copy(buf,k,1)='"' then begin
+          j:=k;
+          break;
+        end;
+      arg.Add(copy(buf,2,j-2));
+      delete(buf,1,j);
+      while copy(buf,1,l)=sep do delete(buf,1,1);
+      break;
+    end else begin
+      arg.add(copy(buf,1,i-1));
+      delete(buf,1,i-1+l);
+      break;
+    end;
+  end;
+ end;
+end;
+arg.add(buf);
 end;
 
 function words(str,sep : string; p,n : integer) : string;

@@ -76,6 +76,7 @@ end;
 
 procedure Tf_chart.AutoRefresh;
 begin
+if f_main.cfgm.locked then exit;
 if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
@@ -86,6 +87,7 @@ end;
 procedure Tf_chart.Refresh;
 begin
 try
+if f_main.cfgm.locked then exit;
  screen.cursor:=crHourGlass;
  identlabel.visible:=false;
  Image1.width:=clientwidth;
@@ -110,6 +112,7 @@ end;
 procedure Tf_chart.UndoExecute(Sender: TObject);
 var i,j : integer;
 begin
+if f_main.cfgm.locked then exit;
 i:=curundo-1;
 j:=lastundo+1;
 if i<1 then i:=maxundo;
@@ -125,6 +128,7 @@ end;
 procedure Tf_chart.RedoExecute(Sender: TObject);
 var i,j : integer;
 begin
+if f_main.cfgm.locked then exit;
 i:=curundo+1;
 j:=lastundo+1;
 if i>maxundo then i:=1;
@@ -139,6 +143,7 @@ end;
 
 procedure Tf_chart.FormResize(Sender: TObject);
 begin
+if f_main.cfgm.locked then exit;
 RefreshTimer.Enabled:=false;
 RefreshTimer.Enabled:=true;
 Image1.Picture.Bitmap.Width:=Image1.width;
@@ -149,6 +154,7 @@ end;
 procedure Tf_chart.RefreshTimerTimer(Sender: TObject);
 begin
 RefreshTimer.Enabled:=false;
+if f_main.cfgm.locked then exit;
 { maximize a new window now to avoid a Kylix bug
   if WindowState is set to wsMaximized at creation }
 if maximize then begin
@@ -397,6 +403,7 @@ procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
 var ra,dec,a,h:double;
     txt:string;
 begin
+if f_main.cfgm.locked then exit;
 {show the coordinates}
 sc.GetCoord(x,y,ra,dec,a,h);
 case sc.cfgsc.projpole of
@@ -415,6 +422,7 @@ end;
 Procedure Tf_chart.ShowIdentLabel;
 var x,y : integer;
 begin
+if f_main.cfgm.locked then exit;
 if sc.cfgsc.FindOK then begin
    identlabel.Visible:=false;
    identlabel.font.name:=sc.plot.cfgplot.fontname[2];
@@ -428,19 +436,26 @@ end
 else identlabel.Visible:=false;
 end;
 
-procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+function Tf_chart.IdentXY(X, Y: Integer):boolean;
 var ra,dec,a,h,dx:double;
 begin
+result:=false;
+if f_main.cfgm.locked then exit;
 sc.GetCoord(x,y,ra,dec,a,h);
 ra:=rmod(ra+pi2,pi2);
 dx:=2/sc.cfgsc.BxGlb; // search a 2 pixel radius
-if (not sc.FindatRaDec(ra,dec,dx))
-   then sc.FindatRaDec(ra,dec,3*dx);  //else 6 pixel
+result:=sc.FindatRaDec(ra,dec,dx);
+if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx);  //else 6 pixel
 ShowIdentLabel;
-f_main.SetLpanel1(sc.cfgsc.FindDesc);
+f_main.SetLpanel1(sc.cfgsc.FindDesc,caption);
 end;
-           
+
+procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+if button=mbLeft then IdentXY(x,y);
+end;
+
 procedure Tf_chart.identlabelClick(Sender: TObject);
 {$ifdef mswindows}
 var st : TMemoryStream;
@@ -718,5 +733,306 @@ procedure Tf_chart.switchbackgroundExecute(Sender: TObject);
 begin
 sc.plot.cfgplot.autoskycolor:=not sc.plot.cfgplot.autoskycolor;
 Refresh;
+end;
+
+
+function Tf_Chart.cmd_SetCursorPosition(x,y:integer) :string;
+
+begin
+
+if (x>=0)and(x<=image1.width)and(y>=0)and(y<=image1.height) then begin
+
+  xcursor:=x;
+
+  xcursor:=y;
+
+  result:='OK';
+
+end else result:='Bad position.';
+
+end;
+
+
+function Tf_Chart.cmd_SetGridEQ(onoff:string):string;
+
+begin
+
+ sc.cfgsc.ShowEqGrid := (uppercase(onoff)='ON');
+
+ Refresh;
+
+ result:='OK';
+
+end;
+
+function Tf_Chart.cmd_SetGridAZ(onoff:string):string;
+begin
+
+ sc.cfgsc.ShowAzGrid := (uppercase(onoff)='ON');
+
+ Refresh;
+
+ result:='OK';
+
+end;
+
+
+function Tf_chart.cmd_SetStarMode(i:integer):string;
+
+begin
+if (i>=0)and(i<=1) then begin
+  sc.plot.cfgplot.starplot:=i;
+  result:='';
+  Refresh;
+  result:='OK';
+end else result:='Bad star mode.';
+end;
+
+function Tf_chart.cmd_SetNebMode(i:integer):string;
+begin
+if (i>=0)and(i<=1) then begin
+  sc.plot.cfgplot.nebplot:=i;
+  result:='';
+  Refresh;
+  result:='OK';
+end else result:='Bad nebula mode.';
+end;
+
+function Tf_chart.cmd_SetSkyMode(onoff:string):string;
+begin
+sc.plot.cfgplot.autoskycolor:=(uppercase(onoff)='ON');
+Refresh;
+result:='OK';
+end;
+
+function Tf_chart.cmd_SetProjection(proj:string):string;
+begin
+result:='OK';
+proj:=uppercase(proj);
+if proj='ALTAZ' then sc.cfgsc.projpole:=altaz
+  else if proj='EQUAT' then sc.cfgsc.projpole:=equat
+  else result:='Bad projection name.';
+sc.cfgsc.FindOk:=false;
+Refresh;
+end;
+
+function Tf_chart.cmd_SetFov(fov:string):string;
+var f : double;
+    p : integer;
+begin
+result:='Bad format!';
+try
+fov:=trim(fov);
+p:=pos('d',fov);
+f:=strtofloat(copy(fov,1,p-1));
+fov:=copy(fov,p+1,999);
+p:=pos('m',fov);
+f:=f+strtofloat(copy(fov,1,p-1))/60;
+fov:=copy(fov,p+1,999);
+p:=pos('s',fov);
+f:=f+strtofloat(copy(fov,1,p-1))/3600;
+sc.setfov(deg2rad*f);
+Refresh;
+result:='OK';
+except
+exit;
+end;
+end;
+
+function Tf_chart.cmd_SetRaDec(param:string):string;
+var buf : string;
+    p : integer;
+    s,ar,de : double;
+begin
+result:='Bad coordinates format!';
+try
+p:=pos('RA:',param);
+if p=0 then exit;
+buf:=copy(param,p+3,999);
+p:=pos('h',buf);
+ar:=strtofloat(copy(buf,1,p-1));
+buf:=copy(buf,p+1,999);
+p:=pos('m',buf);
+ar:=ar+strtofloat(copy(buf,1,p-1))/60;
+buf:=copy(buf,p+1,999);
+p:=pos('s',buf);
+ar:=ar+strtofloat(copy(buf,1,p-1))/3600;
+p:=pos('DEC:',param);
+if p=0 then exit;
+buf:=copy(param,p+4,999);
+p:=pos('d',buf);
+de:=strtofloat(copy(buf,1,p-1));
+s:=sgn(de);
+buf:=copy(buf,p+1,999);
+p:=pos('m',buf);
+de:=de+s*strtofloat(copy(buf,1,p-1))/60;
+buf:=copy(buf,p+1,999);
+p:=pos('s',buf);
+de:=de+s*strtofloat(copy(buf,1,p-1))/3600;
+sc.MovetoRaDec(deg2rad*ar*15,deg2rad*de);
+Refresh;
+result:='OK';
+except
+exit;
+end;
+end;
+
+function Tf_chart.cmd_SetDate(dt:string):string;
+var p,y,m,d,h,n,s : integer;
+begin
+result:='Bad date format!';
+try
+dt:=trim(dt);
+p:=pos('-',dt);
+if p=0 then exit;
+y:=strtoint(trim(copy(dt,1,p-1)));
+dt:=copy(dt,p+1,999);
+p:=pos('-',dt);
+if p=0 then exit;
+m:=strtoint(trim(copy(dt,1,p-1)));
+dt:=copy(dt,p+1,999);
+p:=pos('T',dt);
+if p=0 then exit;
+d:=strtoint(trim(copy(dt,1,p-1)));
+dt:=copy(dt,p+1,999);
+p:=pos(':',dt);
+if p=0 then exit;
+h:=strtoint(trim(copy(dt,1,p-1)));
+dt:=copy(dt,p+1,999);
+p:=pos(':',dt);
+if p=0 then exit;
+n:=strtoint(trim(copy(dt,1,p-1)));
+dt:=copy(dt,p+1,999);
+s:=strtoint(trim(dt));
+sc.cfgsc.UseSystemTime:=false;
+sc.cfgsc.CurYear:=y;
+sc.cfgsc.CurMonth:=m;
+sc.cfgsc.CurDay:=d;
+sc.cfgsc.CurTime:=h+n/60+s/3600;
+Refresh;
+result:='OK';
+except
+exit;
+end;
+end;
+
+function Tf_chart.cmd_SetObs(obs:string):string;
+var n,buf : string;
+    p : integer;
+    s,la,lo,al : double;
+begin
+result:='Bad observatory format!';
+try
+p:=pos('LAT:',obs);
+if p=0 then exit;
+buf:=copy(obs,p+4,999);
+p:=pos('d',buf);
+la:=strtofloat(copy(buf,1,p-1));
+s:=sgn(la);
+buf:=copy(buf,p+1,999);
+p:=pos('m',buf);
+la:=la+s*strtofloat(copy(buf,1,p-1))/60;
+buf:=copy(buf,p+1,999);
+p:=pos('s',buf);
+la:=la+s*strtofloat(copy(buf,1,p-1))/3600;
+p:=pos('LON:',obs);
+if p=0 then exit;
+buf:=copy(obs,p+4,999);
+p:=pos('d',buf);
+lo:=strtofloat(copy(buf,1,p-1));
+s:=sgn(lo);
+buf:=copy(buf,p+1,999);
+p:=pos('m',buf);
+lo:=lo+s*strtofloat(copy(buf,1,p-1))/60;
+buf:=copy(buf,p+1,999);
+p:=pos('s',buf);
+lo:=lo+s*strtofloat(copy(buf,1,p-1))/3600;
+p:=pos('ALT:',obs);
+if p=0 then exit;
+buf:=copy(obs,p+4,999);
+p:=pos('m',buf);
+al:=strtofloat(copy(buf,1,p-1));
+p:=pos('TZ:',obs);
+if p>0 then begin
+  buf:=copy(obs,p+3,999);
+  p:=pos('h',buf);
+  sc.cfgsc.ObsTZ:=strtofloat(copy(buf,1,p-1));
+end;
+p:=pos('OBS:',obs);
+if p=0 then n:='obs?'
+       else n:=trim(copy(obs,p+4,999));
+sc.cfgsc.ObsLatitude := la;
+sc.cfgsc.ObsLongitude := lo;
+sc.cfgsc.ObsAltitude := al;
+sc.cfgsc.ObsName := n;
+Refresh;
+result:='OK';
+except
+exit;
+end;
+end;
+
+function Tf_chart.cmd_IdentCursor:string;
+begin
+if identxy(xcursor,ycursor) then result:='OK'
+   else result:='No object found!';
+end;
+
+function Tf_chart.cmd_SaveImage(format,fn,quality:string):string;
+var i : integer;
+begin
+i:=strtointdef(quality,75);
+if SaveChartImage(format,fn,i) then result:='OK'
+   else result:='Failed!';
+end;
+
+function Tf_chart.ExecuteCmd(arg:Tstringlist):string;
+var i,n : integer;
+    cmd : string;
+begin
+cmd:=trim(uppercase(arg[0]));
+n:=-1;
+for i:=1 to numcmd do
+   if cmd=cmdlist[i,1] then begin
+      n:=strtointdef(cmdlist[i,2],-1);
+      break;
+   end;
+result:='OK';
+case n of
+ 1 : zoomplusExecute(self);
+ 2 : zoomminusExecute(self);
+ 3 : MoveEastExecute(self);
+ 4 : MoveWestExecute(self);
+ 5 : MoveNorthExecute(self);
+ 6 : MoveSouthExecute(self);
+ 7 : MoveNorthEastExecute(self);
+ 8 : MoveNorthWestExecute(self);
+ 9 : MoveSouthEastExecute(self);
+ 10 : MoveSouthWestExecute(self);
+ 11 : FlipxExecute(self);
+ 12 : FlipyExecute(self);
+ 13 : result:=cmd_SetCursorPosition(strtointdef(arg[1],-1),strtointdef(arg[2],-1));
+ 14 : CentreExecute(self);
+ 15 : zoomplusmoveExecute(self);
+ 16 : zoomminusmoveExecute(self);
+ 17 : rot_plusExecute(self);
+ 18 : rot_minusExecute(self);
+ 19 : result:=cmd_SetGridEQ(arg[1]);
+ 20 : result:=cmd_SetGridAZ(arg[1]);
+ 21 : result:=cmd_SetStarMode(strtointdef(arg[1],-1));
+ 22 : result:=cmd_SetNebMode(strtointdef(arg[1],-1));
+ 23 : result:=cmd_SetSkyMode(arg[1]);
+ 24 : UndoExecute(self);
+ 25 : RedoExecute(self);
+ 26 : result:=cmd_SetProjection(arg[1]);
+ 27 : result:=cmd_SetFov(arg[1]);
+ 28 : result:=cmd_SetRaDec(arg[1]);
+ 29 : result:=cmd_SetDate(arg[1]);
+ 30 : result:=cmd_SetObs(arg[1]);
+ 31 : result:=cmd_IdentCursor;
+ 32 : result:=cmd_SaveImage(arg[1],arg[2],arg[3]);
+else result:='Bad command name';
+end;
+
 end;
 

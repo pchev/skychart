@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses fu_detail, cu_skychart, u_constant, u_util, u_projection,
-  SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs,
+  SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs, Qt,
   QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList;
 
 const maxundo=10;
@@ -52,7 +52,6 @@ type
     Centre1: TMenuItem;
     Panel1: TPanel;
     Image1: TImage;
-    EdCopy: TAction;
     zoomplusmove: TAction;
     zoomminusmove: TAction;
     Flipx: TAction;
@@ -123,12 +122,28 @@ type
     procedure PrintChart(Sender: TObject);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
+    function  IdentXY(X, Y: Integer):boolean;
     function  LongLabel(txt:string):string;
     function  LongLabelObj(txt:string):string;
     function  LongLabelGreek(txt : string) : string;
     Function  LongLabelConst(txt : string) : string;
     procedure CKeyDown(var Key: Word; Shift: TShiftState);
     procedure CMouseWheel(Shift: TShiftState;WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    function cmd_SetCursorPosition(x,y:integer):string;
+    function cmd_SetGridEQ(onoff:string):string;
+    function cmd_SetGridAZ(onoff:string):string;
+    function cmd_SetStarMode(i:integer):string;
+    function cmd_SetNebMode(i:integer):string;
+    function cmd_SetSkyMode(onoff:string):string;
+    function cmd_SetProjection(proj:string):string;
+    function cmd_SetFov(fov:string):string;
+    function cmd_SetRaDec(param:string):string;
+    function cmd_SetDate(dt:string):string;
+    function cmd_SetObs(obs:string):string;
+    function cmd_IdentCursor:string;
+    function cmd_SaveImage(format,fn,quality:string):string;
+    function ExecuteCmd(arg:Tstringlist):string;
+    function SaveChartImage(format,fn : string; quality: integer=75):boolean;
   end;
 
 
@@ -164,6 +179,28 @@ end else begin
    CMouseWheel(Shift,WheelDelta,MousePos,Handled);
 end;   
 end;
+
+function Tf_chart.SaveChartImage(format,fn : string; quality : integer=75):boolean;
+var
+ fnw: WideString;
+begin
+ if fn='' then fn:='cdc.png';
+ if format='' then format:='PNG';
+ if format='PNG' then begin
+    fnw:=changefileext(fn,'.png');
+    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('PNG'));
+    end
+ else if format='JPEG' then begin
+    fnw:=changefileext(fn,'.jpg');
+    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('JPEG'), quality);
+    end
+ else if format='BMP' then begin
+    fnw:=changefileext(fn,'.bmp');
+    result:=QPixMap_save (Image1.Picture.Bitmap.Handle,@fnw,PChar('BMP'));
+    end
+ else result:=false;
+end;
+
 
 // End of Linux specific CLX code:
 

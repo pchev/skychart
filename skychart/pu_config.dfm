@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 416
-  Top = 112
+  Left = 386
+  Top = 172
   Width = 634
   Height = 487
   Caption = 'Configuration'
@@ -28,7 +28,7 @@ object f_config: Tf_config
     TabOrder = 0
     OnChange = TreeView1Change
     Items.Data = {
-      06000000220000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
+      07000000220000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
       09446174652F54696D65280000000000000000000000FFFFFFFFFFFFFFFF0000
       0000000000000F54696D652053696D756C6174696F6E1E000000000000000000
       0000FFFFFFFFFFFFFFFF00000000040000000543686172742800000000000000
@@ -57,14 +57,17 @@ object f_config: Tf_config
       FFFF00000000000000000D4E6562756C616520436F6C6F721E00000000000000
       00000000FFFFFFFFFFFFFFFF0000000000000000054C696E65731F0000000000
       000000000000FFFFFFFFFFFFFFFF0000000000000000064C6162656C731F0000
-      000000000000000000FFFFFFFFFFFFFFFF000000000000000006496D61676573}
+      000000000000000000FFFFFFFFFFFFFFFF000000000000000006496D61676573
+      1F0000000000000000000000FFFFFFFFFFFFFFFF000000000100000006537973
+      74656D1F0000000000000000000000FFFFFFFFFFFFFFFF000000000000000006
+      536572766572}
   end
   object PageControl1: TPageControl
     Left = 144
     Top = 0
     Width = 474
     Height = 420
-    ActivePage = p_display
+    ActivePage = p_server
     TabOrder = 1
     object p_time: TTabSheet
       Caption = 'p_time'
@@ -6628,6 +6631,99 @@ object f_config: Tf_config
         Width = 70
         Height = 13
         Caption = 'Images Setting'
+      end
+    end
+    object p_system: TTabSheet
+      Caption = 'p_system'
+      ImageIndex = 25
+      TabVisible = False
+    end
+    object p_server: TTabSheet
+      Caption = 'p_server'
+      ImageIndex = 26
+      TabVisible = False
+      object GroupBox3: TGroupBox
+        Left = 16
+        Top = 8
+        Width = 393
+        Height = 177
+        Caption = 'TCP/IP Server'
+        TabOrder = 0
+        object Label54: TLabel
+          Left = 16
+          Top = 104
+          Width = 95
+          Height = 13
+          Caption = 'Server IP Interface :'
+        end
+        object Label55: TLabel
+          Left = 16
+          Top = 140
+          Width = 72
+          Height = 13
+          Caption = 'Server IP Port :'
+        end
+        object UseIPserver: TCheckBox
+          Left = 16
+          Top = 32
+          Width = 345
+          Height = 30
+          Caption = 'Use TCP/IP Server'
+          TabOrder = 0
+          OnClick = UseIPserverClick
+        end
+        object ipaddr: TEdit
+          Left = 144
+          Top = 100
+          Width = 100
+          Height = 21
+          TabOrder = 1
+          Text = '127.0.0.1'
+          OnChange = ipaddrChange
+        end
+        object ipport: TEdit
+          Left = 144
+          Top = 136
+          Width = 100
+          Height = 21
+          TabOrder = 2
+          Text = '3292'
+          OnChange = ipportChange
+        end
+        object keepalive: TCheckBox
+          Left = 16
+          Top = 64
+          Width = 345
+          Height = 30
+          Caption = 'Client Connection Keep Alive'
+          TabOrder = 3
+          OnClick = keepaliveClick
+        end
+      end
+      object GroupBox4: TGroupBox
+        Left = 16
+        Top = 200
+        Width = 393
+        Height = 105
+        Caption = 'TCP/IP Server Status'
+        TabOrder = 1
+        object ipstatus: TEdit
+          Left = 16
+          Top = 24
+          Width = 353
+          Height = 21
+          TabOrder = 0
+          Text = 'ipstatus'
+        end
+        object refreshIP: TButton
+          Left = 144
+          Top = 64
+          Width = 75
+          Height = 25
+          Caption = 'Refresh Status'
+          TabOrder = 1
+          OnClick = refreshIPClick
+        end
       end
     end
   end

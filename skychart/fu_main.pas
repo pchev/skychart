@@ -25,10 +25,38 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_catalog, cu_planet, u_constant, u_util,
+uses cu_catalog, cu_planet, u_constant, u_util, blcksock, libc,
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
      QStdCtrls, IniFiles, Types;
+
+type
+  TTCPThrd = class(TThread)
+  private
+    Sock:TTCPBlockSocket;
+    CSock: TSocket;
+    cmd : TStringlist;
+    cmdresult : string;
+  public
+    keepalive,abort : boolean;
+    default_chart, active_chart : string;
+    Constructor Create (hsock:tSocket);
+    procedure Execute; override;
+    procedure SendData(str:string);
+    procedure ExecuteCmd;
+  end;
+
+  TTCPDaemon = class(TThread)
+  private
+    Sock:TTCPBlockSocket;
+    procedure ShowError;
+  public
+    keepalive : boolean;
+    TCPThrd: array [1..Maxwindow] of TTCPThrd ;
+    Constructor Create;
+    procedure Execute; override;
+    procedure ShowSocket;
+  end;
 
 type
   Tf_main = class(TForm)
@@ -142,6 +170,8 @@ type
     ToolButton30: TToolButton;
     switchstars: TAction;
     switchbackground: TAction;
+    SaveImage: TAction;
+    SaveImage1: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -179,6 +209,7 @@ type
     procedure ToolBar1MouseLeave(Sender: TObject);
     procedure switchstarsExecute(Sender: TObject);
     procedure switchbackgroundExecute(Sender: TObject);
+    procedure SaveImageExecute(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const Name: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
@@ -191,6 +222,8 @@ type
     def_cfgplot : conf_plot;
     catalog : Tcatalog;
     planet  : Tplanet;
+    serverinfo : string;
+    TCPDaemon: TTCPDaemon;
     procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
@@ -202,14 +235,24 @@ type
     procedure SetLang;
     Procedure InitFonts;
     Procedure ActivateConfig;
-    Procedure SetLPanel1(txt:string);
+    Procedure SetLPanel1(txt:string; origin:string='');
     Procedure SetLPanel0(txt:string);
     Procedure UpdateBtn(fx,fy:integer);
     Procedure LoadConstL(fname:string);
+    Function NewChart(cname:string):string;
+    Function CloseChart(cname:string):string;
+    Function ListChart:string;
+    Function SelectChart(cname:string):string;
+    function ExecuteCmd(cname:string; arg:Tstringlist):string;
+    procedure SendInfo(origin,str:string);
+    function GenericSearch(cname,Num:string):boolean;
+    procedure StartServer;
+    procedure StopServer(abort:boolean);
   end;
 
 var
   f_main: Tf_main;
+
 
 implementation
 
@@ -246,8 +289,6 @@ activecontrol:=nil;
 end;
 
 // End of Linux specific CLX code:
-
-
 
 end.
 

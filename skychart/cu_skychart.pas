@@ -75,7 +75,7 @@ Tskychart = class (TComponent)
     procedure SetFOV(f:double);
     function PoleRot2000(ra,dec:double):double;
     procedure FormatCatRec(rec:Gcatrec; var desc:string);
-    function FindatRaDec(ra,dec,dx: double):boolean;
+    function FindatRaDec(ra,dec,dx: double;showall:boolean=false):boolean;
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 end;
 
@@ -915,18 +915,32 @@ begin
  cfgsc.FindNote:='';
 end;
 
-function Tskychart.FindatRaDec(ra,dec,dx: double):boolean;
+function Tskychart.FindatRaDec(ra,dec,dx: double;showall:boolean=false):boolean;
 var x1,x2,y1,y2:double;
     rec: Gcatrec;
-     desc,n,m,d: string;
+    desc,n,m,d: string;
+    saveStarFilter,saveNebFilter:boolean;
 begin
 x1 := NormRA(ra-dx/cos(dec));
 x2 := NormRA(ra+dx/cos(dec));
 y1 := maxvalue([-pid2,dec-dx]);
 y2 := minvalue([pid2,dec+dx]);
 desc:='';
+saveNebFilter:=Fcatalog.cfgshr.NebFilter;
+saveStarFilter:=Fcatalog.cfgshr.StarFilter;
+if showall then begin
+  Fcatalog.cfgshr.NebFilter:=false;
+  Fcatalog.cfgshr.StarFilter:=false;
+end;
 // search catalog object
-result:=fcatalog.Findobj(x1,y1,x2,y2,false,cfgsc,rec);
+try
+  result:=fcatalog.Findobj(x1,y1,x2,y2,false,cfgsc,rec);
+finally
+  if showall then begin
+    Fcatalog.cfgshr.NebFilter:=saveNebFilter;
+    Fcatalog.cfgshr.StarFilter:=saveStarFilter;
+  end;
+end;
 if result then begin
    FormatCatRec(rec,desc);
 end else begin
