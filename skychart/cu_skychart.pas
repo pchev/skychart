@@ -1132,7 +1132,10 @@ begin
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+' D*'+tab+txt+tab;
-         if rec.double.valid[vdCompname] then Desc:=Desc+rec.double.compname+tab;
+         if rec.double.valid[vdCompname] then begin
+            Desc:=Desc+rec.double.compname+tab;
+            cfgsc.FindName:=cfgsc.FindName+blank+trim(rec.double.compname);
+         end;
          if rec.double.valid[vdMag1] then begin
             if (rec.double.mag1<90) then str(rec.double.mag1:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vdMag1])+dp+txt+tab;
@@ -1144,7 +1147,7 @@ begin
          if rec.double.valid[vdSep] then begin
             if (rec.double.sep>0) then str(rec.double.sep:5:1,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vdSep])+dp+txt+tab;
-            cfgsc.FindSize:=rec.double.sep*secarc;
+            // cfgsc.FindSize:=rec.double.sep*secarc;
          end;
          if rec.double.valid[vdPa] then begin
             if (rec.double.pa>0) then str(round(rec.double.pa-rad2deg*PoleRot2000(rec.ra,rec.dec)):3,txt) else txt:='   ';

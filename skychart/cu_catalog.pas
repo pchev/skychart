@@ -1592,6 +1592,8 @@ end;
 
 function Tcatalog.GetWDS(var rec:GcatRec):boolean;
 var lin : WDSrec;
+    n,s:string;
+    p:integer;
 begin
 rec:=EmptyRec;
 result:=true;
@@ -1620,6 +1622,14 @@ if result then begin
    rec.double.compname:=lin.comp;
    rec.double.sp1:=lin.sp;
    rec.double.comment:=lin.note;
+   if lin.dm<>0 then begin
+     if lin.dm>=0 then s:='+' else s:='-';
+     n:=inttostr(abs(lin.dm));
+     p:=length(n)-4;
+     if p>0 then n:=s+copy(n,1,p-1)+'.'+copy(n,p,p+5)
+            else n:=s+'0.'+padzeros(n,5);
+     rec.double.comment:=rec.double.comment+' BD'+n;
+   end;
 end;
 end;
 
