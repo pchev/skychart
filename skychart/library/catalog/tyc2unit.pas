@@ -248,7 +248,7 @@ if (not OnCache) and UseCache then begin      // initialize cache
    SetLength(cache[Ncache],1);
    tmax[Ncache]:=t2nrec;
    smax[Ncache]:=s1nrec;
-   SetLength(cache[Ncache],t2nrec+s1nrec+1);
+   SetLength(cache[Ncache],t2nrec+s1nrec+2);
 end;
 end;
 SMname:=nomreg;

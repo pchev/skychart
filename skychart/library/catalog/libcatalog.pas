@@ -801,4 +801,3 @@ Procedure FindNumTYC2(id : ShortString ;var ar,de:double; var ok:boolean); stdca
 implementation
 
 end.
-   
