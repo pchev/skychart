@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses cu_plot, cu_catalog, u_constant, libcatalog, cu_planet, u_projection, u_util,
-     SysUtils, Classes, Math,  
+     SysUtils, Classes, Math, Types,
 {$ifdef linux}
    QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
 {$endif}
@@ -49,6 +49,7 @@ Tskychart = class (TComponent)
     procedure EditLabelTxt(lnum,x,y: integer);
     procedure DefaultLabel(lnum: integer);
     procedure DeleteLabel(lnum: integer);
+    procedure DeleteAllLabel(lnum: integer);
     procedure LabelClick(lnum: integer);
    public
     cfgsc : conf_skychart;
@@ -90,6 +91,9 @@ Tskychart = class (TComponent)
     function DrawEcliptic:boolean;
     function DrawGalactic:boolean;
     function DrawLabels:boolean;
+    procedure DrawFinderMark(ra,de :double; moving:boolean) ;
+    procedure DrawCircle;
+    function TelescopeMove(ra,dec:double):boolean;
     procedure GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
     procedure MovetoXY(X,Y : integer);
@@ -141,6 +145,7 @@ begin
  Fplot.OnEditLabelTxt:=EditLabelTxt;
  Fplot.OnDefaultLabel:=DefaultLabel;
  Fplot.OnDeleteLabel:=DeleteLabel;
+ Fplot.OnDeleteAllLabel:=DeleteAllLabel;
  Fplot.OnLabelClick:=LabelClick;
 end;
 
@@ -152,12 +157,13 @@ end;
 
 function Tskychart.Refresh :boolean;
 var savmag: double;
-    savfilter,saveautofilter,savfillmw:boolean;
+    savfilter,saveautofilter,savfillmw,scopemark:boolean;
 begin
 savmag:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
 savfilter:=Fcatalog.cfgshr.StarFilter;
 saveautofilter:=Fcatalog.cfgshr.AutoStarFilter;
 savfillmw:=cfgsc.FillMilkyWay;
+scopemark:=cfgsc.ScopeMark;
 try
   chdir(appdir);
   // initialize chart value
@@ -193,6 +199,7 @@ try
     DrawEcliptic;
     DrawGalactic;
   end;
+  DrawCircle;
   // the stars
   DrawStars;
   if not cfgsc.quick then begin
@@ -210,6 +217,11 @@ try
   if (not cfgsc.quick)and cfgsc.horizonopaque then DrawHorizon;
   // the labels
   if not cfgsc.quick then DrawLabels;
+  // refresh telescope mark
+  if scopemark then begin
+     DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
+     cfgsc.ScopeMark:=true;
+  end;   
   result:=true;
 finally
   if cfgsc.quick then begin
@@ -354,7 +366,7 @@ end else begin
    cfgsc.EquinoxName:=fcatalog.cfgshr.EquinoxChart;
 end;
 djd(cfgsc.JDChart,y,m,d,t);
-cfgsc.EquinoxDate:=YearADBC(y)+'-'+inttostr(m)+'-'+inttostr(d);
+cfgsc.EquinoxDate:=Date2Str(y,m,d);
 if (cfgsc.lastJDchart<-1E20) then cfgsc.lastJDchart:=cfgsc.JDchart; // initial value
 cfgsc.rap2000:=0;       // position of J2000 pole in current coordinates
 cfgsc.dep2000:=pid2;
@@ -441,6 +453,7 @@ end;
 function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6 : double;
 begin
+cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
 // clipping limit
 Fplot.cfgplot.outradius:=abs(round(minvalue([50*cfgsc.fov,0.98*pi2])*cfgsc.BxGlb/2));
@@ -623,13 +636,12 @@ if Fcatalog.OpenDblStar then
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
-    rot:=arctan2((x1-x2),(y1-y2));
+    rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
     if (not rec.double.valid[vdPA])or(rec.double.pa=-999) then rec.double.pa:=0
         else rec.double.pa:=rec.double.pa-rad2deg*PoleRot2000(rec.ra,rec.dec);
     rec.double.pa:=rec.double.pa*cfgsc.FlipX;
     if cfgsc.FlipY<0 then rec.double.pa:=180-rec.double.pa;
-    if cfgsc.FlipY<0 then rot:=rot-pi;
-    rec.double.pa:=DegToRad(rec.double.pa)-rot;
+    rec.double.pa:=Deg2Rad*rec.double.pa+rot;
     Fplot.PlotDblStar(xx,yy,rec.double.mag1,rec.double.sep,rec.double.pa,0);
     if rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3] then
     if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1))
@@ -647,7 +659,7 @@ var  x1,y1: Double;
 begin
 if cfgsc.JDChart=jd2000 then result:=0
 else begin
-  Proj2(cfgsc.rap2000,cfgsc.dep2000,ra,dec,x1,y1,cfgsc);
+  Proj3(cfgsc.rap2000,cfgsc.dep2000,ra,dec,x1,y1,cfgsc);
   result:=arctan2(x1,y1);
 end;
 end;
@@ -671,13 +683,12 @@ if Fcatalog.OpenNeb then
   if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
   if rec.neb.nebtype=1 then begin
       projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
-      rot:=arctan2((x1-x2),(y1-y2));
+      rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
       if (not rec.neb.valid[vnPA])or(rec.neb.pa=-999) then rec.neb.pa:=90
           else rec.neb.pa:=rec.neb.pa-rad2deg*PoleRot2000(rec.ra,rec.dec);
       rec.neb.pa:=rec.neb.pa*cfgsc.FlipX;
       if cfgsc.FlipY<0 then rec.neb.pa:=180-rec.neb.pa;
-      if cfgsc.FlipY<0 then rot:=rot-pi;
-      rec.neb.pa:=DegToRad(rec.neb.pa)-rot;
+      rec.neb.pa:=Deg2Rad*rec.neb.pa+rot;
       Fplot.PlotGalaxie(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit);
    end else
       Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype);
@@ -762,7 +773,8 @@ end;
 function Tskychart.DrawPlanet :boolean;
 var
   x1,y1,x2,y2,pixscale,ra,dec,jdt,diam,magn,phase,fov,illum,pa,rot,r1,r2,be,dist: Double;
-  xx,yy,xxp,yyp,i,j,n,ipla: integer;
+  ppa,poleincl,sunincl,w1,w2,w3 : double;
+  xx,yy,i,j,n,ipla: integer;
   draworder : array[1..11] of integer;
 begin
 if not cfgsc.ShowPlanet then exit;
@@ -795,19 +807,18 @@ for j:=0 to cfgsc.SimNb-1 do begin
     projection(ra,dec,x1,y1,true,cfgsc) ;
     WindowXY(x1,y1,xx,yy,cfgsc);
     projection(ra,dec+0.001,x2,y2,false,cfgsc) ;
-    rot:=arctan2((x1-x2),(y1-y2));
-    if cfgsc.FlipY<0 then rot:=rot-pi;
-    if (xx>-cfgsc.Xmax) and (xx<2*cfgsc.Xmax) and (yy>-cfgsc.Ymax) and (yy<2*cfgsc.Ymax) then begin
-      if j=0 then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
-      case ipla of
+    rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
+    if ipla<>3 then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
+    if j=0 then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
+    case ipla of
       4 :  begin
             if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,true);
-            Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0);
             if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,false);
            end;
       5 :  begin
             if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
-            Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w2-cfgsc.GRSlongitude,0,0,0);
             if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
            end;
       6 :  begin
@@ -817,29 +828,27 @@ for j:=0 to cfgsc.SimNb-1 do begin
             r2:=cfgsc.Planetlst[j,31,3];
             be:=cfgsc.Planetlst[j,31,4];
             if cfgsc.FlipY<0 then pa:=180-pa;
-            Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,pa,rot,r1,r2,be,0);
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,r1,r2,be);
             if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,false);
            end;
       7 :  begin
             if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,true);
-            Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0);
             if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,false);
            end;
       11 : begin
             illum:=magn;
             magn:=-10;  // better to alway show a bright dot for the Moon
             dist:=cfgsc.Planetlst[j,ipla,6];
-            fplanet.MoonIncl(ra,dec,cfgsc.PlanetLst[j,10,1],cfgsc.PlanetLst[j,10,2],pa);
-            pa:=pa*cfgsc.FlipX;
-            if cfgsc.FlipY<0 then pa:=180-pa;
-            Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,illum,pa,rot,0,0,0,dist);
+            fplanet.MoonOrientation(jdt,ra,dec,dist,pa,poleincl,sunincl,w1);
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,-w1,0,0,0);
            end;
       else begin
-            Fplot.PlotPlanet(xx,yy,ipla,pixscale,jdt,diam,magn,phase,0,0,0,0,0,0,0);
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0);
            end;
-  end;
+    end;
   //if ShowEarthUmbra then DrawEarthUmbra(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5],onprinter,out);
-  end;
+//  end;
   end;
 end;
 result:=true;
@@ -1205,6 +1214,7 @@ var x1,x2,y1,y2:double;
 begin
 x1 := NormRA(ra-dx/cos(dec));
 x2 := NormRA(ra+dx/cos(dec));
+if x2<x1 then x2:=x2+pi2;
 y1 := maxvalue([-pid2,dec-dx]);
 y2 := minvalue([pid2,dec+dx]);
 desc:='';
@@ -2301,6 +2311,12 @@ cfgsc.modlabels[i].hiden:=true;
 DrawLabels;
 end;
 
+procedure Tskychart.DeleteAllLabel(lnum: integer);
+begin
+cfgsc.nummodlabels:=0;
+DrawLabels;
+end;
+
 procedure Tskychart.DefaultLabel(lnum: integer);
 var i,j,id: integer;
 begin
@@ -2354,6 +2370,87 @@ for i:=1 to numlabels do begin
   if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,txt);
 end;
 result:=true;
+end;
+
+Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean) ;
+var x1,y1,x2,y2,r : double;
+    i,xa,ya,xb,yb : integer;
+    pa,xx1,xx2,yy1,yy2,rot,o : single;
+    spa,cpa:extended;
+    p : array [0..4] of Tpoint;
+begin
+projection(ra,de,x1,y1,false,cfgsc) ;
+WindowXY(x1,y1,xa,ya,cfgsc);
+projection(ra,de+0.001,x2,y2,false,cfgsc) ;
+rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
+for i:=1 to 10 do if cfgsc.circleok[i] then begin
+    pa:=deg2rad*cfgsc.circle[i,2]*cfgsc.FlipX;
+    if cfgsc.FlipY<0 then pa:=pi-pa;
+    sincos(pa+rot,spa,cpa);
+    o:=abs(cfgsc.circle[i,3]*deg2rad/60);
+    x2:=x1-cfgsc.flipx*o*spa;
+    y2:=y1+cfgsc.flipy*o*cpa;
+    r:=deg2rad*cfgsc.circle[i,1]/120;
+    WindowXY(x2-r,y2-r,xa,ya,cfgsc);
+    WindowXY(x2+r,y2+r,xb,yb,cfgsc);
+    Fplot.PlotCircle(xa,ya,xb,yb,Fplot.cfgplot.Color[18],moving);
+end;
+for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2*cfgsc.fov) then begin
+    pa:=deg2rad*cfgsc.rectangle[i,3]*cfgsc.FlipX;
+    if cfgsc.FlipY<0 then pa:=pi-pa;
+    sincos(pa+rot,spa,cpa);
+    o:=abs(cfgsc.rectangle[i,4]*deg2rad/60);
+    x2:=x1-cfgsc.flipx*o*spa;
+    y2:=y1+cfgsc.flipy*o*cpa;
+    xx1:=deg2rad*cfgsc.flipx*(cfgsc.rectangle[i,1]/120*cpa - cfgsc.rectangle[i,2]/120*spa);
+    yy1:=deg2rad*cfgsc.flipy*(cfgsc.rectangle[i,1]/120*spa + cfgsc.rectangle[i,2]/120*cpa);
+    xx2:=deg2rad*cfgsc.flipx*(cfgsc.rectangle[i,1]/120*cpa + cfgsc.rectangle[i,2]/120*spa);
+    yy2:=deg2rad*cfgsc.flipy*(-cfgsc.rectangle[i,1]/120*spa + cfgsc.rectangle[i,2]/120*cpa);
+    WindowXY(x2-xx1,y2-yy1,xa,ya,cfgsc);
+    p[0]:=Point(xa,ya);
+    WindowXY(x2+xx2,y2-yy2,xa,ya,cfgsc);
+    p[1]:=Point(xa,ya);
+    WindowXY(x2+xx1,y2+yy1,xa,ya,cfgsc);
+    p[2]:=Point(xa,ya);
+    WindowXY(x2-xx2,y2+yy2,xa,ya,cfgsc);
+    p[3]:=Point(xa,ya);
+    p[4]:=p[0];
+    Fplot.PlotPolyline(p,Fplot.cfgplot.Color[18],moving);
+  end;
+end;
+
+Procedure Tskychart.DrawCircle;
+var i : integer;
+begin
+//center mark
+if cfgsc.ShowCircle then begin
+ DrawFinderMark(cfgsc.racentre,cfgsc.decentre,false);
+end;
+//listed mark
+for i:=1 to cfgsc.NumCircle do DrawFinderMark(cfgsc.CircleLst[i,1],cfgsc.CircleLst[i,2],false);
+end;
+
+function Tskychart.TelescopeMove(ra,dec:double):boolean;
+var dist:double;
+begin
+result:=false;
+if (ra<>cfgsc.ScopeRa)and(dec<>cfgsc.ScopeDec) then begin
+if cfgsc.scopemark then DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
+DrawFinderMark(ra,dec,true);
+cfgsc.ScopeRa:=ra;
+cfgsc.ScopeDec:=dec;
+cfgsc.scopemark:=true;
+dist:=angulardistance(cfgsc.racentre,cfgsc.decentre,ra,dec);
+if dist>cfgsc.fov/4 then begin
+   if not cfgsc.scopelock then begin
+      result:=true;
+      cfgsc.scopelock:=true;
+      MovetoRaDec(cfgsc.ScopeRa,cfgsc.ScopeDec);
+      Refresh;
+      cfgsc.scopelock:=false;
+   end;
+end;
+end;
 end;
 
 end.

@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util,
+uses u_constant, u_util, u_planetrender,
      Math, SysUtils, Classes, Types,
 {$ifdef linux}
    Qmenus, QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
@@ -56,13 +56,19 @@ type
      FEditLabelTxt: TEditLabelPos;
      FDefaultLabel: Tintfunc;
      FDeleteLabel: Tintfunc;
+     FDeleteAllLabel: Tintfunc;
      FLabelClick: Tintfunc;
      editlabelmenu: Tpopupmenu;
+     Planetbmpmask: Tbitmap;
+     PlanetBMP : Tbitmap;
+     PlanetBMPjd,PlanetBMProt : double;
+     PlanetBMPpla : integer;
      Procedure PlotStar0(xx,yy: integer; ma,b_v : Double);
      Procedure PlotStar1(xx,yy: integer; ma,b_v : Double);
      Procedure PlotNebula0(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotNebula1(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
      procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
+     procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w:double);
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
@@ -92,23 +98,27 @@ type
      Procedure PlotGalaxie(xx,yy: integer; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: integer; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotLine(x1,y1,x2,y2,color,width: integer);
-     procedure PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
+     procedure PlotPlanet(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
      procedure PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(xx,yy,symbol: integer; ma : Double);
      Procedure PlotComet(xx,yy,cxx,cyy,symbol: integer; ma,diam,PixScale : Double);
      function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; txt:string):integer;
      procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
      procedure PlotOutline(xx,yy,op,lw,fs,closed: integer; r2:double; col: Tcolor);
+     Procedure PlotCircle(x1,y1,x2,y2,color:integer;moving:boolean);
+     Procedure PlotPolyLine(p:array of Tpoint; color:integer; moving:boolean);
      property Starshape: TBitmap read Fstarshape write Setstarshape;
      property OnEditLabelPos: TEditLabelPos read FEditLabelPos write FEditLabelPos;
      property OnEditLabelTxt: TEditLabelPos read FEditLabelTxt write FEditLabelTxt;
      property OnDefaultLabel: Tintfunc read FDefaultLabel write FDefaultLabel;
      property OnDeleteLabel: Tintfunc read FDeleteLabel write FDeleteLabel;
+     property OnDeleteAllLabel: Tintfunc read FDeleteAllLabel write FDeleteAllLabel;
      property OnLabelClick: Tintfunc read FLabelClick write FLabelClick;
      Procedure Movelabel(Sender: TObject);
      Procedure EditlabelTxt(Sender: TObject);
      Procedure DefaultLabel(Sender: TObject);
      Procedure Deletelabel(Sender: TObject);
+     Procedure DeleteAlllabel(Sender: TObject);
   end;
 
   const cliparea = 10;
@@ -136,6 +146,7 @@ begin
     labels[i].parent:=(AOwner as Timage).parent;
     labels[i].tag:=i;                                
     labels[i].transparent:=true;
+    labels[i].ShowAccelChar:=false;
     {$ifdef linux} labels[i].Font.CharSet:=fcsAnyCharSet; {$endif}
     {$ifdef mswindows} labels[i].Font.CharSet:=DEFAULT_CHARSET; {$endif}
     labels[i].OnMouseDown:=labelmousedown;
@@ -167,6 +178,30 @@ begin
  editlabelmenu.Items.Add(MenuItem);
  MenuItem.Caption := 'Delete label';
  MenuItem.OnClick := DeleteLabel;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Reset all label';
+ MenuItem.OnClick := DeleteAllLabel;
+ InitPlanetRender;
+ try
+ if planetrender then begin
+    planetbmp:=Tbitmap.create;
+    planetbmp.Width:=450;
+    planetbmp.Height:=450;
+    planetbmpmask:=Tbitmap.create;
+    planetbmpmask.Width:=450;
+    planetbmpmask.Height:=450;
+    settexturepath(slash(appdir)+slash('data')+slash('planet'));
+    // try if it work
+    planetrender:=false;
+    RenderPluto(0,0,0,0,0,1,planetbmp.width, planetbmp);
+    // we are here! so it don't crash, reset the value.
+    planetrender:=true;
+ end;
+ except
+   planetrender:=false;
+   if cfgplot.plaplot=2 then cfgplot.plaplot:=1;
+ end;
 end;
 
 destructor TSplot.Destroy;
@@ -174,6 +209,11 @@ var i:integer;
 begin
  for i:=1 to maxlabels do labels[i].Free;
  starbmp.Free;
+ if planetrender then begin
+    planetbmp.Free;
+    planetbmpmask.Free;
+    if Prenderlib<>0 then RenderCloseLib;
+ end;   
  inherited destroy;
 end;
 
@@ -807,15 +847,17 @@ end;
 {$endif}
 end;
 
-procedure TSplot.PlotPlanet(xx,yy,ipla:integer; pixscale,jdt,diam,magn,phase,illum,pa,rot,r1,r2,be,dist:double);
+procedure TSplot.PlotPlanet(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
 var b_v:double;
     ds,n : integer;
 begin
 if not cfgplot.Invisible then begin
-  n:=cfgplot.plaplot;
-  ds:=round(diam*pixscale/2)*cfgchart.drawpen;
-  if n=2 then if ds<10 then n:=1;
-  if n=1 then if ds<5 then n:=0;
+ n:=cfgplot.plaplot;
+ ds:=round(diam*pixscale/2)*cfgchart.drawpen;
+ if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then begin
+  if (n=2) and ((ds<5)or(ds>1500)) then n:=1;
+  if (n=1) and (ds<3)  then n:=0;
+  if (not planetrender) and (n=2) then n:=1;
   case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=0;
@@ -826,10 +868,12 @@ if not cfgplot.Invisible then begin
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,be );
           end;
       2 : begin // image
+          PlotPlanet2(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,phase,pa+rad2deg*rot,poleincl,sunincl,w);
           end;
       3 : begin // symbol
           end;
-  end
+  end;
+ end; 
 end;
 end;
 
@@ -838,6 +882,7 @@ var ds,ico : integer;
 begin
 with cnv do begin
  ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
+ if cfgplot.Color[11]>cfgplot.BgColor then begin
  case Ipla of
   1: begin ico := 4; end;
   2: begin ico := 2; end;
@@ -853,6 +898,8 @@ with cnv do begin
   else begin ico:=2; end;
  end;
  Brush.Color := cfgplot.Color[ico+1] ;
+ end
+ else Brush.Color := cfgplot.BgColor ;
  if cfgplot.PlanetTransparent then Brush.style:=bsclear
                               else Brush.style:=bssolid;
  Pen.Width := cfgchart.drawpen;
@@ -860,9 +907,61 @@ with cnv do begin
  Pen.Mode:=pmCopy;
  Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
  Pen.Color := cfgplot.Color[0];
+ Brush.style:=bsclear;
  ds:=ds+cfgchart.drawpen;
  Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
 end;
+end;
+
+procedure TSplot.PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w:double);
+var ds,i : integer;
+    DestR :Trect;
+const planetsize=450;
+      moonsize=1000;    
+begin
+if ipla=6 then ds:=round(maxvalue([2.2261*diam*pixscale/2,2*cfgchart.drawpen]))
+          else ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
+if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
+ case ipla of
+  1 :  RenderMercury(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  2 :  RenderVenus(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  4 :  RenderMars(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  5 :  RenderJupiter(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  6 :  RenderSaturn(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  7 :  RenderUranus(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  8 :  RenderNeptune(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  9 :  RenderPluto(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  10 : RenderSun(w,pa,poleincl,1,planetsize, planetbmp);
+  11 : RenderMoon(w,phase,pa,poleincl,sunincl,1,moonsize, planetbmp);
+ end;
+ planetbmppla:=ipla;
+ planetbmpjd:=jdt;
+ planetbmprot:=pa;
+end;
+DestR:=Rect(xx-flipx*ds,yy-flipy*ds,xx+flipx*ds,yy+flipy*ds);
+if not cfgplot.planetTransparent then begin
+  i:=planetbmp.Width;
+  planetbmpmask.Width:=i;
+  planetbmpmask.Height:=i;
+  planetbmpmask.canvas.brush.color:=clwhite;
+  planetbmpmask.canvas.brush.style:=bssolid;
+  planetbmpmask.canvas.pen.color:=clwhite;
+  planetbmpmask.canvas.pen.width:=1;
+  planetbmpmask.canvas.rectangle(0,0,i,i);
+  planetbmpmask.canvas.pen.color:=clblack;
+  planetbmpmask.canvas.brush.color:=clblack;
+  case ipla of
+    5  : planetbmpmask.canvas.ellipse(0,round(i*0.0289),i,round(i*0.9689));
+    6  : planetbmpmask.canvas.ellipse(round(i*0.2756),round(i*0.2978),round(i*0.7244),round(i*0.7));
+    7  : planetbmpmask.canvas.ellipse(0,round(i*0.0133),i,round(i*0.9867));
+    8  : planetbmpmask.canvas.ellipse(0,round(i*0.0133),i,round(i*0.9867));
+    else planetbmpmask.canvas.ellipse(0,0,i,i);
+  end;
+  cnv.copymode:=cmSrcAnd;
+  cnv.StretchDraw(DestR,planetbmpmask);
+end;
+cnv.copymode:=cmSrcPaint;
+cnv.StretchDraw(DestR,planetbmp);
 end;
 
 Procedure TSplot.PlotSatel(xx,yy,ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
@@ -884,7 +983,8 @@ if not (hidesat xor showhide) then
            brush.color:=cfgplot.Color[6];
         end;
         ds2:= round(ds/2);
-        case ds of
+        if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then begin
+           case ds of
                 1..2: Ellipse(xx,yy,xx+ds,yy+ds);
                 3: Ellipse(xx-1,yy-1,xx+2,yy+2);
                 4: Ellipse(xx-2,yy-2,xx+2,yy+2);
@@ -892,6 +992,7 @@ if not (hidesat xor showhide) then
                 6: Ellipse(xx-3,yy-3,xx+3,yy+3);
                 7: Ellipse(xx-3,yy-3,xx+4,yy+4);
                 else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
+           end;
         end;
    end;
 end;
@@ -905,7 +1006,7 @@ var
 const fr : array [1..5] of double = (1,0.8801,0.8599,0.6650,0.5486);
 begin
 with cnv do begin
-  pa:=deg2rad*pa+rot;
+  pa:=deg2rad*pa+rot-pid2;
   ds1:=round(maxvalue([pixscale*r1/2,cfgchart.drawpen]))+cfgchart.drawpen;
   ds2:=round(maxvalue([pixscale*r2/2,cfgchart.drawpen]))+cfgchart.drawpen;
   R:=round(diam*pixscale/2);
@@ -1268,6 +1369,42 @@ end;
 Procedure TSplot.Deletelabel(Sender: TObject);
 begin
 if (selectedlabel>0)and assigned(FDeleteLabel) then FDeleteLabel(selectedlabel);
+end;
+
+Procedure TSplot.DeleteAlllabel(Sender: TObject);
+begin
+if assigned(FDeleteAllLabel) then FDeleteAllLabel(0);
+end;
+
+Procedure TSplot.PlotCircle(x1,y1,x2,y2,color: integer;moving:boolean);
+begin
+with cnv do begin
+  Pen.Width:=cfgchart.drawpen;
+  if moving then begin
+     Pen.Color:=clWhite;
+     Pen.Mode:=pmXor;
+  end else begin
+     Pen.Color:=color;
+     Pen.Mode:=pmCopy;
+  end;
+  Brush.Style:=bsClear;
+  Ellipse(x1,y1,x2,y2);
+end;
+end;
+
+Procedure TSplot.PlotPolyLine(p:array of Tpoint; color:integer; moving:boolean);
+begin
+with cnv do begin
+  Pen.Width:=cfgchart.drawpen;
+  if moving then begin
+     Pen.Color:=clWhite;
+     Pen.Mode:=pmXor;
+  end else begin
+     Pen.Color:=color;
+     Pen.Mode:=pmCopy;
+  end;
+  Polyline(p);
+end;
 end;
 
 end.

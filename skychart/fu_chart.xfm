@@ -322,9 +322,42 @@ object f_chart: Tf_chart
     object zoomminus1: TMenuItem
       Action = zoomminusmove
     end
-    object ResetAllLabels1: TMenuItem
-      Caption = 'Reset All Labels'
-      OnClick = ResetAllLabels1Click
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object NewFinderCircle1: TMenuItem
+      Caption = 'New Finder Circle'
+      OnClick = NewFinderCircle1Click
+    end
+    object RemoveLastCircle1: TMenuItem
+      Caption = 'Remove Last Circle'
+      OnClick = RemoveLastCircle1Click
+    end
+    object RemoveAllCircles1: TMenuItem
+      Caption = 'Remove All Circles'
+      OnClick = RemoveAllCircles1Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object Telescope1: TMenuItem
+      Caption = 'Telescope'
+      object Slew1: TMenuItem
+        Caption = 'Slew'
+        OnClick = Slew1Click
+      end
+      object Sync1: TMenuItem
+        Caption = 'Sync'
+        OnClick = Sync1Click
+      end
+      object Connect1: TMenuItem
+        Caption = 'Connect'
+        OnClick = Connect1Click
+      end
+      object AbortSlew1: TMenuItem
+        Caption = 'Abort Slew'
+        OnClick = AbortSlew1Click
+      end
     end
   end
 end

@@ -164,5 +164,3 @@ finally
  chdir(appdir);
 end;
 end;
-
-

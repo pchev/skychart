@@ -27,22 +27,25 @@ interface
 
 uses u_constant,
   SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs,
-  QStdCtrls, QExtCtrls;
+  QStdCtrls, QExtCtrls, QTypes;
 
 type
   Tf_about = class(TForm)
-    Panel1: TPanel;
     logo: TImage;
-    OKButton: TButton;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Timer1: TTimer;
     Label4: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure logoDblClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    ShowTimer: Boolean;
   end;
 
 var
@@ -54,7 +57,31 @@ implementation
 
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
+ ShowTimer:=false;
  label2.caption:=cdcversion;
+end;
+
+procedure Tf_about.FormShow(Sender: TObject);
+begin
+if ShowTimer then begin
+   BorderStyle:=fbsNone;
+   Timer1.Enabled:=true;
+end else begin
+   BorderStyle:=fbsToolWindow;
+   Timer1.Enabled:=false;
+end;
+end;
+
+procedure Tf_about.Timer1Timer(Sender: TObject);
+begin
+Timer1.Enabled:=false;
+ShowTimer:=false;
+Close;
+end;
+
+procedure Tf_about.logoDblClick(Sender: TObject);
+begin
+Timer1Timer(Sender);
 end;
 
 end.

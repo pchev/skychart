@@ -32,34 +32,58 @@ end;
 end;
 
 procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
-var i: integer;
+var i,j,tag: integer;
 begin
- i:=node.AbsoluteIndex;
- if (PageControl1.ActivePageIndex<>i)and(i<PageControl1.PageCount) then PageControl1.ActivePageIndex:=i;
- case PageControl1.ActivePage.Tag of
-  1 : ShowProjection;
- end;
+if locktree then exit;
+if node.level=0 then begin
+   Treeview1.selected:=Treeview1.items[(Treeview1.selected.absoluteindex+1)];
+end else begin
+   i:=node.parent.index;
+   j:=node.index;
+   PageControl1.ActivePageIndex:=i;
+   tag:=0;
+   case i of
+     0 : begin pa_time.ActivePageIndex:=j; tag:=pa_time.ActivePage.Tag; end;
+     1 : begin pa_observatory.ActivePageIndex:=j; tag:=pa_observatory.ActivePage.Tag; end;
+     2 : begin pa_chart.ActivePageIndex:=j; tag:=pa_chart.ActivePage.Tag; end;
+     3 : begin pa_catalog.ActivePageIndex:=j; tag:=pa_catalog.ActivePage.Tag; end;
+     4 : begin pa_solsys.ActivePageIndex:=j; tag:=pa_solsys.ActivePage.Tag; end;
+     5 : begin pa_display.ActivePageIndex:=j; tag:=pa_display.ActivePage.Tag; end;
+     6 : begin pa_images.ActivePageIndex:=j; tag:=pa_images.ActivePage.Tag; end;
+     7 : begin pa_system.ActivePageIndex:=j; tag:=pa_system.ActivePage.Tag; end;
+   end;
+   case Tag of
+     1 : ShowProjection;
+   end;
+end;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);
 begin
- if PageControl1.ActivePageIndex<PageControl1.PageCount-2 then // kylix bug? look at the last page
-    Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex+1];
-Treeview1.selected.expand(true);
+if Treeview1.selected.absoluteindex< Treeview1.items.count-1 then begin
+ Treeview1.selected:=Treeview1.selected.GetNext;
+ Treeview1.selected.parent.expand(true);
+end;
 end;
 
 procedure Tf_config.previousClick(Sender: TObject);
+var i : integer;
 begin
- while PageControl1.ActivePageIndex>0 do begin
-    Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex-1];
-    if Treeview1.selected.level=0 then break;
- end;
-Treeview1.selected.expand(true);
+if Treeview1.selected.absoluteindex>1 then begin
+ locktree:=true;
+ Treeview1.selected:=Treeview1.selected.GetPrev;
+ if Treeview1.selected.level=0 then Treeview1.selected:=Treeview1.selected.GetPrev;
+ i:=Treeview1.selected.absoluteindex;
+ locktree:=false;
+ Treeview1.selected.parent.expand(true);
+ Treeview1.selected:=Treeview1.items[i];
+ TreeView1Change(Sender,Treeview1.selected);
+end;
 end;
 
 procedure Tf_config.PageControl1Change(Sender: TObject);
 begin
- Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex];
+// Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex];
 end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
@@ -79,10 +103,14 @@ end;
 for i:=0 to COUNTRIES-1 do
   countrylist.Items.Add(Country[i]);
 actual_country:='';
+compage:=22;
+astpage:=23;
+dbpage:=36;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
 begin
+locktree:=false;
 if topmsg.caption='' then topmsg.color:=color
                      else topmsg.color:=clYellow;
 screen.cursor:=crHourGlass;
@@ -109,7 +137,12 @@ ShowObjList;
 ShowDB;
 ShowAsteroid;
 ShowComet;
+ShowCircle;
+ShowRectangle;
+ShowTelescope;
 TreeView1.TopItem.Expand(false);
+Treeview1.selected:=Treeview1.items[cmain.configpage];
+Treeview1.selected.parent.expand(true);
 Treeview1.selected:=Treeview1.items[cmain.configpage];
 screen.cursor:=crDefault;
 end;
@@ -157,14 +190,11 @@ end else begin
 end;
 d_month.value:=m;
 d_day.value:=d;
-labeldate.caption:=d_year.text+'-'+d_month.text+'-'+d_day.text;
 artostr2(csc.curtime,h,n,s);
 t_hour.value:=strtoint(h);
 t_min.value:=strtoint(n);
 t_sec.value:=strtoint(s);
-labeltime.caption:=t_hour.text+':'+t_min.text+':'+t_sec.text;
 tz.value:=csc.timezone;
-labeltimezone.caption:=tz.text;
 Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
 if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
@@ -1139,8 +1169,15 @@ procedure Tf_config.CheckBox1Click(Sender: TObject);
 begin
 csc.UseSystemTime:=checkbox1.checked;
 SetCurrentTime(csc);
-panel7.visible:=not csc.UseSystemTime;
-panel9.visible:=not csc.UseSystemTime;
+d_year.enabled:=not csc.UseSystemTime;
+d_month.enabled:=d_year.enabled;
+d_day.enabled:=d_year.enabled;
+ADBC.enabled:=d_year.enabled;
+t_hour.enabled:=d_year.enabled;
+t_min.enabled:=d_year.enabled;
+t_sec.enabled:=d_year.enabled;
+bitbtn4.enabled:=d_year.enabled;
+tz.enabled:=d_year.enabled;
 ShowTime;
 end;
 
@@ -2034,10 +2071,10 @@ var msg: string;
 label dmsg;
 begin
 db:=TMyDB.create(self);
+screen.cursor:=crHourGlass;
 try
   db.SetPort(cmain.dbport);
-  db.database:='';
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
   if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
      else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+trim(db.GetLastError)+crlf+'Verify if the MySQL Server is running and control the Userid/Password'; goto dmsg;end;
   if db.SelectDatabase(cmain.db) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
@@ -2048,9 +2085,11 @@ try
   end;
   msg:=msg+'All is OK!';
 dmsg:
+  screen.cursor:=crDefault;
   ShowMessage(msg);
   db.Free;
 except
+screen.cursor:=crDefault;
 db.Free;
 msg:='MySQL database software is probably not installed!';
 ShowMessage(msg);
@@ -2067,19 +2106,22 @@ db:=TMyDB.create(self);
 try
   db.SetPort(cmain.dbport);
   db.database:='';
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
   if db.Active then db.Query('Create Database if not exists '+cmain.db);
   msg:=trim(db.GetLastError);
   if msg<>'' then showmessage(msg);
   if db.SelectDatabase(cmain.db) then begin
     ok:=true;
-    for i:=1 to numsqltable do
-      if not db.Query('CREATE TABLE if not exists '+sqltable[i,1]+sqltable[i,2]) then begin
+    for i:=1 to numsqltable do begin
+      db.Query('CREATE TABLE if not exists '+sqltable[i,1]+sqltable[i,2]);
+      msg:=trim(db.GetLastError);
+      if sqltable[i,1]<>db.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"') then begin
          ok:=false;
-         msg:='Error creating table '+sqltable[i,1]+' '+trim(db.GetLastError);
+         msg:='Error creating table '+sqltable[i,1]+' '+msg;
          showmessage(msg);
          break;
       end;
+    end;
   end else begin
      ok:=false;
      msg:=trim(db.GetLastError);
@@ -2112,7 +2154,7 @@ db:=TMyDB.create(self);
 try
   db.SetPort(cmain.dbport);
   db.database:='';
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
   if db.Active then db.Query('Drop Database '+cmain.db);
   msg:=trim(db.GetLastError);
   if msg<>'' then showmessage(msg);
@@ -2125,14 +2167,16 @@ end;
 
 procedure Tf_config.AstDBClick(Sender: TObject);
 begin
-Treeview1.selected:=Treeview1.items[p_asteroids.PageIndex];
-Treeview1.selected.expand(true);
+Treeview1.selected:=Treeview1.items[astpage];
+Treeview1.selected.parent.expand(true);
+Treeview1.selected:=Treeview1.items[astpage];
 end;
 
 procedure Tf_config.CometDBClick(Sender: TObject);
 begin
-Treeview1.selected:=Treeview1.items[p_comets.PageIndex];
-Treeview1.selected.expand(true);
+Treeview1.selected:=Treeview1.items[compage];
+Treeview1.selected.parent.expand(true);
+Treeview1.selected:=Treeview1.items[compage];
 end;
 
 procedure Tf_config.ShowAsteroid;
@@ -2143,7 +2187,7 @@ astlimitmag.value:=csc.AstmagMax;
 astmagdiff.value:=csc.AstmagDiff;
 aststrtdate.text:=inttostr(csc.curyear)+'.'+inttostr(csc.curmonth);
 astdeldate.text:=inttostr(csc.curyear-1)+'.'+inttostr(csc.curmonth);
-UpdAstList;
+if csc.ShowAsteroid then UpdAstList;
 end;
 
 procedure Tf_config.UpdAstList;
@@ -2155,12 +2199,12 @@ db:=TMyDB.create(self);
 try
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   db.Query('Select elem_id,filedesc from cdc_ast_elem_list order by elem_id');
   i:=0;
-  while i<= high(db.Resultset) do begin
-     astelemlist.items.add(db.Resultset[i,0]+'; '+db.Resultset[i,1]);
+  while i< db.Rowcount do begin
+     astelemlist.items.add(db.Results[i][0]+'; '+db.Results[i][1]);
      inc(i);
   end;
   astelemlist.itemindex:=0;
@@ -2194,8 +2238,9 @@ end;
 
 procedure Tf_config.astdbsetClick(Sender: TObject);
 begin
-Treeview1.selected:=Treeview1.items[p_system.PageIndex];
+Treeview1.selected:=Treeview1.items[dbpage];
 Treeview1.selected.expand(true);
+Treeview1.selected.parent.expand(true);
 end;
 
 procedure Tf_config.mpcfilebtnClick(Sender: TObject);
@@ -2235,7 +2280,7 @@ try
 screen.cursor:=crHourGlass;
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   filedesc:=extractfilename(mpcfile.text)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(mpcfile.text)));
   assignfile(f,mpcfile.text);
@@ -2365,7 +2410,7 @@ db:=TMyDB.create(self);
 try
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
     id:=trim(copy(astid.text,1,7));
     lid:=length(id);
@@ -2434,7 +2479,7 @@ try
 screen.cursor:=crHourGlass;
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   db.Query('LOCK TABLES cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_mag WRITE');
   delastMemo.lines.add('Delete from element table...');
@@ -2473,25 +2518,21 @@ try
 screen.cursor:=crHourGlass;
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   db.Query('UNLOCK TABLES');
   delastMemo.lines.add('Delete from element table...');
   application.processmessages;
-  if not db.Query('Truncate table cdc_ast_elem') then
-     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('Truncate table cdc_ast_elem');
   delastMemo.lines.add('Delete from element list...');
   application.processmessages;
-  if not db.Query('Truncate table cdc_ast_elem_list') then
-     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('Truncate table cdc_ast_elem_list');
   delastMemo.lines.add('Delete from name list...');
   application.processmessages;
-  if not db.Query('Truncate table cdc_ast_name') then
-     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('Truncate table cdc_ast_name');
   delastMemo.lines.add('Delete from monthly table...');
   application.processmessages;
-  if not db.Query('Truncate table cdc_ast_mag') then
-     delastMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('Truncate table cdc_ast_mag');
   delastMemo.lines.add('Delete daily data');
   f_main.planet.TruncateDailyAsteroid;
   delastMemo.lines.add('Delete completed');
@@ -2520,7 +2561,7 @@ try
 screen.cursor:=crHourGlass;
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   db.Query('LOCK TABLES cdc_ast_mag WRITE');
   delastMemo.lines.add('Delete from monthly table for jd<'+jds);
@@ -2577,7 +2618,7 @@ showcom.checked:=csc.ShowComet;
 comsymbol.itemindex:=csc.ComSymbol;
 comlimitmag.value:=csc.CommagMax;
 commagdiff.value:=csc.CommagDiff;
-UpdComList;
+if csc.ShowComet then UpdComList;
 end;
 
 procedure Tf_config.showcomClick(Sender: TObject);
@@ -2636,7 +2677,7 @@ try
 screen.cursor:=crHourGlass;
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   filedesc:=extractfilename(comfile.text)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(comfile.text)));
   assignfile(f,comfile.text);
@@ -2731,7 +2772,7 @@ db:=TMyDB.create(self);
 try
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
     id:=trim(copy(comid.text,1,7));
     buf:=comt.text;
@@ -2806,12 +2847,12 @@ db:=TMyDB.create(self);
 try
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   db.Query('Select elem_id,filedesc from cdc_com_elem_list order by elem_id');
   i:=0;
-  while i<= high(db.Resultset) do begin
-     comelemlist.items.add(db.Resultset[i,0]+'; '+db.Resultset[i,1]);
+  while i<db.Rowcount do begin
+     comelemlist.items.add(db.Results[i][0]+'; '+db.Results[i][1]);
      inc(i);
   end;
   comelemlist.itemindex:=0;
@@ -2837,7 +2878,7 @@ try
 screen.cursor:=crHourGlass;
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   db.Query('LOCK TABLES cdc_com_elem WRITE, cdc_com_elem_list WRITE');
   delcomMemo.lines.add('Delete from element table...');
@@ -2871,21 +2912,18 @@ try
 screen.cursor:=crHourGlass;
 db.SetPort(cmain.dbport);
 db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass);
+db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
 if db.Active then begin
   db.Query('UNLOCK TABLES');
   delComMemo.lines.add('Delete from element table...');
   application.processmessages;
-  if not db.Query('Truncate table cdc_com_elem') then
-     delcomMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('Truncate table cdc_com_elem');
   delcomMemo.lines.add('Delete from element list...');
   application.processmessages;
-  if not db.Query('Truncate table cdc_com_elem_list') then
-     delcomMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('Truncate table cdc_com_elem_list');
   delcomMemo.lines.add('Delete from name list...');
   application.processmessages;
-  if not db.Query('Truncate table cdc_com_name') then
-     delcomMemo.lines.add('Failed : '+trim(db.GetLastError));
+  db.Query('Truncate table cdc_com_name');
   delcomMemo.lines.add('Delete daily data');
   f_main.planet.TruncateDailyComet;
   delcomMemo.lines.add('Delete completed');
@@ -3011,4 +3049,240 @@ procedure Tf_config.labelsizeChange(Sender: TObject);
 begin
 with sender as TSpinEdit do cplot.LabelSize[tag]:=value;
 end;
+
+procedure Tf_config.ShowTelescope;
+var i:integer;
+{$ifdef mswindows}
+    n:integer;
+    fs : TSearchRec;
+    buf : string;
+{$endif}
+begin
+IndiServerHost.text:=csc.IndiServerHost;
+IndiServerPort.text:=csc.IndiServerPort;
+IndiAutostart.checked:=csc.IndiAutostart;
+IndiServerCmd.text:=csc.IndiServerCmd;
+IndiDriver.text:=csc.IndiDriver;
+{$ifdef linux}
+IndiPort.text:=csc.IndiPort;
+{$endif}
+{$ifdef mswindows}
+if csc.IndiTelescope then Telescopeselect.itemindex:=0
+                     else Telescopeselect.itemindex:=1;
+val(rightstr(csc.IndiPort,1),i,n);
+if n=0 then IndiPort.itemindex:=i
+       else IndiPort.itemindex:=0;
+i:=findfirst(slash(appdir)+slash('plugins')+slash('telescope')+'*.tid',0,fs);
+telescopepluginlist.clear;
+n:=0;
+while i=0 do begin
+  buf:=extractfilename(fs.name);
+  telescopepluginlist.items.Add(buf);
+  if csc.ScopePlugin=buf then telescopepluginlist.itemindex:=n;
+  inc(n);
+  i:=findnext(fs);
+end;
+findclose(fs);
+{$endif}
+IndiDev.items.clear;
+for i:=0 to NumIndiDriver do IndiDev.items.add(IndiDriverLst[i,1]);
+for i:=0 to NumIndiDriver do if IndiDriverLst[i,1]=csc.IndiDevice then IndiDev.itemindex:=i;
+end;
+
+procedure Tf_config.IndiServerHostChange(Sender: TObject);
+begin
+csc.IndiServerHost:=IndiServerHost.text;
+end;
+
+procedure Tf_config.IndiServerPortChange(Sender: TObject);
+begin
+csc.IndiServerPort:=IndiServerPort.text;
+end;
+
+procedure Tf_config.IndiAutostartClick(Sender: TObject);
+begin
+csc.IndiAutostart:=IndiAutostart.checked;
+end;
+
+procedure Tf_config.IndiServerCmdChange(Sender: TObject);
+begin
+csc.IndiServerCmd:=IndiServerCmd.text;
+end;
+
+procedure Tf_config.IndiDevChange(Sender: TObject);
+begin
+csc.IndiDevice:=IndiDriverLst[IndiDev.itemindex,1];
+IndiDriver.text:=IndiDriverLst[IndiDev.itemindex,2];
+if IndiDev.itemindex=0 then begin
+   IndiDriver.enabled:=true;
+   IndiDriver.setfocus;
+end else begin
+   IndiDriver.enabled:=false;
+end;
+end;
+
+procedure Tf_config.IndiDriverChange(Sender: TObject);
+begin
+csc.IndiDriver:=IndiDriver.text;
+end;
+
+procedure Tf_config.IndiPortChange(Sender: TObject);
+begin
+{$ifdef linux}
+csc.IndiPort:=IndiPort.text;
+{$endif}
+{$ifdef mswindows}
+csc.IndiPort:='/dev/ttyS'+inttostr(IndiPort.itemindex);
+{$endif}
+end;
+
+procedure Tf_config.ShowCircle;
+var i:integer;
+begin
+cb1.checked:=csc.circleok[1];
+cb2.checked:=csc.circleok[2];
+cb3.checked:=csc.circleok[3];
+cb4.checked:=csc.circleok[4];
+cb5.checked:=csc.circleok[5];
+cb6.checked:=csc.circleok[6];
+cb7.checked:=csc.circleok[7];
+cb8.checked:=csc.circleok[8];
+cb9.checked:=csc.circleok[9];
+cb10.checked:=csc.circleok[10];
+circlegrid.ColWidths[0]:=60;
+circlegrid.ColWidths[1]:=60;
+circlegrid.ColWidths[2]:=60;
+circlegrid.ColWidths[3]:=circlegrid.clientwidth-185;
+circlegrid.Cells[0,0]:='FOV';
+circlegrid.Cells[1,0]:='Rotation';
+circlegrid.Cells[2,0]:='Offset';
+circlegrid.Cells[3,0]:='Description';
+for i:=1 to 10 do begin
+  circlegrid.Cells[0,i]:=formatfloat(f2,csc.circle[i,1]);
+  circlegrid.Cells[1,i]:=formatfloat(f2,csc.circle[i,2]);
+  circlegrid.Cells[2,i]:=formatfloat(f2,csc.circle[i,3]);
+  circlegrid.Cells[3,i]:=csc.circlelbl[i];
+end;
+CenterMark1.checked:=csc.ShowCircle;
+end;
+
+procedure Tf_config.cb1Click(Sender: TObject);
+begin
+with Sender as TCheckBox do csc.circleok[tag]:=checked;
+end;
+
+{$ifdef mswindows}
+procedure Tf_config.CirclegridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: String);
+{$endif}
+{$ifdef linux }
+procedure Tf_config.CirclegridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: WideString);
+{$endif}
+var x:single;
+    n:integer;
+begin
+case ACol of
+0 : begin
+    val(value,x,n);
+    if n=0 then csc.circle[Arow,1]:=x
+           else beep;
+    end;
+1 : begin
+    val(value,x,n);
+    if n=0 then csc.circle[Arow,2]:=x
+           else beep;
+    end;
+2 : begin
+    val(value,x,n);
+    if n=0 then csc.circle[Arow,3]:=x
+           else beep;
+    end;
+3 : begin
+    csc.circlelbl[ARow]:=Value;
+    end;
+end;
+end;
+
+procedure Tf_config.CenterMark1Click(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+ csc.ShowCircle:=checked;
+ CenterMark1.checked:=checked;
+ CenterMark2.checked:=checked;
+end;
+end;
+
+procedure Tf_config.ShowRectangle;
+var i:integer;
+begin
+rb1.checked:=csc.rectangleok[1];
+rb2.checked:=csc.rectangleok[2];
+rb3.checked:=csc.rectangleok[3];
+rb4.checked:=csc.rectangleok[4];
+rb5.checked:=csc.rectangleok[5];
+rb6.checked:=csc.rectangleok[6];
+rb7.checked:=csc.rectangleok[7];
+rb8.checked:=csc.rectangleok[8];
+rb9.checked:=csc.rectangleok[9];
+rb10.checked:=csc.rectangleok[10];
+rectanglegrid.ColWidths[0]:=60;
+rectanglegrid.ColWidths[1]:=60;
+rectanglegrid.ColWidths[2]:=60;
+rectanglegrid.ColWidths[3]:=60;
+rectanglegrid.ColWidths[4]:=rectanglegrid.clientwidth-245;
+rectanglegrid.Cells[0,0]:='Width';
+rectanglegrid.Cells[1,0]:='Height';
+rectanglegrid.Cells[2,0]:='Rotation';
+rectanglegrid.Cells[3,0]:='Offset';
+rectanglegrid.Cells[4,0]:='Description';
+for i:=1 to 10 do begin
+  rectanglegrid.Cells[0,i]:=formatfloat(f2,csc.rectangle[i,1]);
+  rectanglegrid.Cells[1,i]:=formatfloat(f2,csc.rectangle[i,2]);
+  rectanglegrid.Cells[2,i]:=formatfloat(f2,csc.rectangle[i,3]);
+  rectanglegrid.Cells[3,i]:=formatfloat(f2,csc.rectangle[i,4]);
+  rectanglegrid.Cells[4,i]:=csc.rectanglelbl[i];
+end;
+CenterMark2.checked:=csc.ShowCircle;
+end;
+
+procedure Tf_config.rb1Click(Sender: TObject);
+begin
+with Sender as TCheckBox do csc.rectangleok[tag]:=checked;
+end;
+
+{$ifdef mswindows}
+procedure Tf_config.RectangleGridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: String);
+{$endif}
+{$ifdef linux }
+procedure Tf_config.RectangleGridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: WideString);
+{$endif}
+var x:single;
+    n:integer;
+begin
+case ACol of
+0 : begin
+    val(value,x,n);
+    if n=0 then csc.rectangle[Arow,1]:=x
+           else beep;
+    end;
+1 : begin
+    val(value,x,n);
+    if n=0 then csc.rectangle[Arow,2]:=x
+           else beep;
+    end;
+2 : begin
+    val(value,x,n);
+    if n=0 then csc.rectangle[Arow,3]:=x
+           else beep;
+    end;
+3 : begin
+    val(value,x,n);
+    if n=0 then csc.rectangle[Arow,4]:=x
+           else beep;
+    end;
+4 : begin
+    csc.rectanglelbl[ARow]:=Value;
+    end;
+end;
+end;
+
 

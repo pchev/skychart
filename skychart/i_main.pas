@@ -47,6 +47,7 @@ begin
   if copyactive and (ActiveMDIchild is Tf_chart) then with ActiveMDIchild as Tf_chart do begin
     cfg1:=sc.cfgsc;
     cfgp:=sc.plot.cfgplot;
+    cfg1.scopemark:=false;
   end;
   { create a new MDI child window }
   Child := Tf_chart.Create(Application);
@@ -57,6 +58,9 @@ begin
   Child.locked:=false;
   Child.sc.catalog:=catalog;
   Child.sc.planet:=planet;
+  {$ifdef mswindows}
+  Child.telescopeplugin:=telescope;
+  {$endif}
   Child.sc.plot.cfgplot:=cfgp;
   Child.sc.plot.starshape:=starshape.Picture.Bitmap;
   Child.sc.plot.cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
@@ -65,7 +69,7 @@ begin
   Child.sc.cfgsc.chartname:=CName;
   Child.onImageSetFocus:=ImageSetFocus;
   Child.onShowTopMessage:=SetTopMessage;
-  Child.OnUpdateFlipBtn:=UpdateBtn;
+  Child.OnUpdateBtn:=UpdateBtn;
   Child.onShowInfo:=SetLpanel1;
   Child.onShowCoord:=SetLpanel0;
   Child.onListInfo:=ListInfo;
@@ -89,7 +93,7 @@ begin
   {$endif}
   Child.setfocus;
   result:=true;
-  UpdateBtn(Child.sc.cfgsc.flipx,Child.sc.cfgsc.flipy);
+  UpdateBtn(Child.sc.cfgsc.flipx,Child.sc.cfgsc.flipy,Child.Connect1.checked,Child);
 end;
 
 procedure Tf_main.CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
@@ -156,6 +160,26 @@ for i:=1 to numlabtype do begin
    c2.ShowLabel[i]:=c1.ShowLabel[i];
    c2.LabelMagDiff[i]:=c1.LabelMagDiff[i];
 end;
+for i:=1 to 10 do c2.circle[i,1]:=c1.circle[i,1];
+for i:=1 to 10 do c2.circle[i,2]:=c1.circle[i,2];
+for i:=1 to 10 do c2.circle[i,3]:=c1.circle[i,3];
+for i:=1 to 10 do c2.circleok[i]:=c1.circleok[i];
+for i:=1 to 10 do c2.circlelbl[i]:=c1.circlelbl[i];
+for i:=1 to 10 do c2.rectangle[i,1]:=c1.rectangle[i,1];
+for i:=1 to 10 do c2.rectangle[i,2]:=c1.rectangle[i,2];
+for i:=1 to 10 do c2.rectangle[i,3]:=c1.rectangle[i,3];
+for i:=1 to 10 do c2.rectangle[i,4]:=c1.rectangle[i,4];
+for i:=1 to 10 do c2.rectangleok[i]:=c1.rectangleok[i];
+for i:=1 to 10 do c2.rectanglelbl[i]:=c1.rectanglelbl[i];
+c2.ShowCircle:=c1.ShowCircle;
+c2.IndiServerHost:=c1.IndiServerHost;
+c2.IndiServerPort:=c1.IndiServerPort;
+c2.IndiServerCmd:=c1.IndiServerCmd;
+c2.IndiDriver:=c1.IndiDriver;
+c2.IndiPort:=c1.IndiPort;
+c2.IndiDevice:=c1.IndiDevice;
+c2.IndiTelescope:=c1.IndiTelescope;
+c2.ScopePlugin:=c1.ScopePlugin;
 //c2. := c1. ;
 end;
 
@@ -260,14 +284,24 @@ begin
 InitTrace;
 traceon:=true;
 DecimalSeparator:='.';
-appdir:=getcurrentdir;
+appdir:=extractfilepath(paramstr(0));
+chdir(appdir);
 catalog:=Tcatalog.Create(self);
 planet:=Tplanet.Create(self);
 planet.OnAsteroidConfig:=OpenAsteroidConfig;
 planet.OnCometConfig:=OpenCometConfig;
 {$ifdef mswindows}
+DdeOpen := false;
+DdeEnqueue := false;
+DdeInfo := TstringList.create;
+DdeInfo.add('.');
+DdeInfo.add('.');
+DdeInfo.add('.');
+DdeInfo.add('.');
+DdeInfo.add('.');
 Screen.Cursors[crRetic] := LoadCursor(HInstance,'RETIC');
 Application.UpdateFormatSettings:=false;
+telescope:=Ttelescope.Create(self);
 {$endif}
 end;
 
@@ -276,6 +310,10 @@ begin
 try
  SetDefault;
  ReadDefault;
+{$ifdef mswindows}
+ telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
+ telescope.plugin:=def_cfgsc.ScopePlugin;
+{$endif}
  catalog.LoadConstellation(cfgm.Constellationfile);
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
@@ -294,20 +332,30 @@ end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
 begin
+try
 catalog.free;
 planet.free;
+{$ifdef mswindows}
+telescope.free;
+DdeInfo.free;
+{$endif}
 StopServer;
+except
+end;
 end;
 
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
 var i:integer;
 begin
 try
+writetrace('Exiting ...');
 if SaveConfigOnExit.checked then SaveDefault
                             else SaveQuickSearch(configfile);
 for i:=0 to MDIChildCount-1 do
-   if MDIChildren[i] is Tf_chart then
-      (MDIChildren[i] as Tf_chart).locked:=true;
+   if MDIChildren[i] is Tf_chart then with (MDIChildren[i] as Tf_chart) do begin
+      locked:=true;
+      if indi1<>nil then indi1.terminate;
+   end;
 except
 end;      
 end;
@@ -364,6 +412,20 @@ begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do rot_minusExecute(Sender);
 end;
 
+procedure Tf_main.TelescopeConnectExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do Connect1Click(Sender);
+end;
+
+procedure Tf_main.TelescopeSlewExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do Slew1Click(Sender);
+end;
+
+procedure Tf_main.TelescopeSyncExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do Sync1Click(Sender);
+end;
 
 procedure Tf_main.ListObjExecute(Sender: TObject);
 var buf:widestring;
@@ -463,6 +525,26 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do SetZenit(d
 end;
 
 
+procedure Tf_main.MoreStarExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do cmd_MoreStar;
+end;
+
+procedure Tf_main.LessStarExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do cmd_LessStar;
+end;
+
+procedure Tf_main.MoreNebExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do cmd_MoreNeb;
+end;
+
+procedure Tf_main.LessNebExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do cmd_LessNeb;
+end;
+
 procedure Tf_main.TimeIncExecute(Sender: TObject);
 var hh : double;
     y,m,d,h,n,s,mult : integer;
@@ -541,7 +623,7 @@ try
  if f_config.ModalResult=mrOK then begin
    activateconfig;
  end;
- cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
+ cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
 finally
 screen.cursor:=crDefault;
 end;
@@ -554,7 +636,7 @@ if f_config=nil then f_config:=Tf_config.Create(application);
 if f_config.visible then exit;
 screen.cursor:=crHourGlass;
 try
- cfgm.configpage:=f_config.p_asteroids.PageIndex;
+ cfgm.configpage:=f_config.astpage;
  f_config.AstPageControl.activepage:=f_config.astprepare;
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
@@ -579,7 +661,7 @@ try
           sc.cfgsc.ShowAsteroid:=false;
           sc.cfgsc.FindOk:=false;
        end;
- cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
+ cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
 finally
 screen.cursor:=crDefault;
 end;
@@ -592,7 +674,7 @@ if f_config=nil then f_config:=Tf_config.Create(application);
 if f_config.visible then exit;
 screen.cursor:=crHourGlass;
 try
- cfgm.configpage:=f_config.p_comets.PageIndex;
+ cfgm.configpage:=f_config.compage;
  f_config.ComPageControl.activepage:=f_config.comload;
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
@@ -615,7 +697,7 @@ try
           sc.cfgsc.ShowComet:=false;
           sc.cfgsc.FindOk:=false;
        end;
- cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
+ cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
 finally
 screen.cursor:=crDefault;
 end;
@@ -627,7 +709,7 @@ if f_config=nil then f_config:=Tf_config.Create(application);
 if f_config.visible then exit;
 screen.cursor:=crHourGlass;
 try
- cfgm.configpage:=f_config.p_system.PageIndex;
+ cfgm.configpage:=f_config.dbpage;
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
  f_config.cplot:=def_cfgplot;
@@ -650,7 +732,7 @@ try
  end else begin
     cfgm:=f_config.cmain;
  end;
- cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
+ cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
 finally
 screen.cursor:=crDefault;
 end;
@@ -672,6 +754,17 @@ begin
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
     ConnectDB;
+    {$ifdef mswindows}
+    if (telescope.scopelibok)and(def_cfgsc.IndiTelescope) then begin
+       telescope.ScopeDisconnect;
+       telescope.UnloadScopeLibrary;
+    end;
+    if (telescope.scopelibok)and(not def_cfgsc.IndiTelescope)and(def_cfgsc.ScopePlugin<>telescope.plugin) then begin
+       telescope.ScopeDisconnect;
+       telescope.UnloadScopeLibrary;
+    end;
+    telescope.plugin:=def_cfgsc.ScopePlugin;
+    {$endif}
     if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
        sc.cfgsc.FindOk:=false;
@@ -710,12 +803,12 @@ begin
    PanelBottom.height:=Ppanels0.height+1;
 end;
 
-Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true);
+Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
 begin
 LPanels1.width:=PPanels1.ClientWidth;
 LPanels1.Caption:=stringreplace(txt,tab,' ',[rfReplaceall]);
 PPanels1.refresh;
-if sendmsg then SendInfo(origin,txt);
+if sendmsg then SendInfo(Sender,origin,txt);
 if traceon then writetrace(txt);
 end;
 
@@ -786,6 +879,7 @@ for i:=1 to numlabtype do begin
    def_cfgsc.LabelMagDiff[i]:=4;
    def_cfgsc.ShowLabel[i]:=true;
 end;
+def_cfgsc.LabelMagDiff[1]:=3;
 def_cfgsc.LabelMagDiff[5]:=2;
 def_cfgplot.LabelColor[6]:=clYellow;
 def_cfgplot.LabelSize[6]:=12;
@@ -876,10 +970,55 @@ def_cfgsc.MagLabel:=false;
 def_cfgsc.ConstFullLabel:=true;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
-def_cfgsc.GRSlongitude:=84;
+def_cfgsc.GRSlongitude:=92;
 def_cfgsc.LabelOrientation:=1;
 def_cfgsc.FindOk:=false;
 def_cfgsc.nummodlabels:=0;
+for i:=1 to 10 do def_cfgsc.circle[i,1]:=0;
+for i:=1 to 10 do def_cfgsc.circle[i,2]:=0;
+for i:=1 to 10 do def_cfgsc.circle[i,3]:=0;
+for i:=1 to 10 do def_cfgsc.circleok[i]:=false;
+for i:=1 to 10 do def_cfgsc.circlelbl[i]:='';
+for i:=1 to 10 do def_cfgsc.rectangle[i,1]:=0;
+for i:=1 to 10 do def_cfgsc.rectangle[i,2]:=0;
+for i:=1 to 10 do def_cfgsc.rectangle[i,3]:=0;
+for i:=1 to 10 do def_cfgsc.rectangle[i,4]:=0;
+for i:=1 to 10 do def_cfgsc.rectangleok[i]:=false;
+for i:=1 to 10 do def_cfgsc.rectanglelbl[i]:='';
+def_cfgsc.circle[1,1]:=240;
+def_cfgsc.circle[2,1]:=120;
+def_cfgsc.circle[3,1]:=30;
+def_cfgsc.circleok[1]:=true;
+def_cfgsc.circleok[2]:=true;
+def_cfgsc.circleok[3]:=true;
+def_cfgsc.circlelbl[1]:='Telrad';
+def_cfgsc.circle[4,1]:=18;
+def_cfgsc.circle[4,2]:=45;
+def_cfgsc.circle[4,3]:=30;
+def_cfgsc.circlelbl[4]:='Off-Axis guider';
+def_cfgsc.circle[5,1]:=26.5;
+def_cfgsc.circle[6,1]:=17.5;
+def_cfgsc.circlelbl[5]:='ST7 autoguider area';
+def_cfgsc.circlelbl[6]:='ST7 autoguider area';
+def_cfgsc.rectangle[1,1]:=11.8;
+def_cfgsc.rectangle[1,2]:=7.9;
+def_cfgsc.rectangleok[1]:=true;
+def_cfgsc.rectanglelbl[1]:='KAF400 prime focus';
+def_cfgsc.rectangle[2,1]:=4.5;
+def_cfgsc.rectangle[2,2]:=4.5;
+def_cfgsc.rectangle[2,4]:=11;
+def_cfgsc.rectangleok[2]:=true;
+def_cfgsc.rectanglelbl[2]:='ST7 autoguider';
+def_cfgsc.NumCircle:=0;
+def_cfgsc.IndiAutostart:=true;
+def_cfgsc.IndiServerHost:='localhost';
+def_cfgsc.IndiServerPort:='7624';
+def_cfgsc.IndiServerCmd:='indiserver';
+def_cfgsc.IndiDriver:='lx200generic';
+def_cfgsc.IndiPort:='/dev/ttyS0';
+def_cfgsc.IndiDevice:='LX200 Generic';
+def_cfgsc.IndiTelescope:=false;
+def_cfgsc.ScopePlugin:='Ascom.tid';
 catalog.cfgshr.ListStar:=false;
 catalog.cfgshr.ListNeb:=true;
 catalog.cfgshr.ListVar:=true;
@@ -1140,6 +1279,18 @@ cplot.bgColor:=ReadInteger(section,'bgColor',cplot.bgColor);
 section:='grid';
 for i:=0 to maxfield do catalog.cfgshr.HourGridSpacing[i]:=ReadFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=0 to maxfield do catalog.cfgshr.DegreeGridSpacing[i]:=ReadFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
+section:='Finder';
+for i:=1 to 10 do csc.circle[i,1]:=ReadFloat(section,'Circle'+inttostr(i),csc.circle[i,1]);
+for i:=1 to 10 do csc.circle[i,2]:=ReadFloat(section,'CircleR'+inttostr(i),csc.circle[i,2]);
+for i:=1 to 10 do csc.circle[i,3]:=ReadFloat(section,'CircleOffset'+inttostr(i),csc.circle[i,3]);
+for i:=1 to 10 do csc.circleok[i]:=ReadBool(section,'ShowCircle'+inttostr(i),csc.circleok[i]);
+for i:=1 to 10 do csc.circlelbl[i]:=ReadString(section,'CircleLbl'+inttostr(i),csc.circlelbl[i]);
+for i:=1 to 10 do csc.rectangle[i,1]:=ReadFloat(section,'RectangleW'+inttostr(i),csc.rectangle[i,1]);
+for i:=1 to 10 do csc.rectangle[i,2]:=ReadFloat(section,'RectangleH'+inttostr(i),csc.rectangle[i,2]);
+for i:=1 to 10 do csc.rectangle[i,3]:=ReadFloat(section,'RectangleR'+inttostr(i),csc.rectangle[i,3]);
+for i:=1 to 10 do csc.rectangle[i,4]:=ReadFloat(section,'RectangleOffset'+inttostr(i),csc.rectangle[i,4]);
+for i:=1 to 10 do csc.rectangleok[i]:=ReadBool(section,'ShowRectangle'+inttostr(i),csc.rectangleok[i]);
+for i:=1 to 10 do csc.rectanglelbl[i]:=ReadString(section,'RectangleLbl'+inttostr(i),csc.rectanglelbl[i]);
 section:='chart';
 catalog.cfgshr.EquinoxType:=ReadInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
 catalog.cfgshr.EquinoxChart:=ReadString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
@@ -1277,6 +1428,15 @@ catalog.cfgshr.ListNeb:=ReadBool(section,'ListNeb',catalog.cfgshr.ListNeb);
 catalog.cfgshr.ListVar:=ReadBool(section,'ListVar',catalog.cfgshr.ListVar);
 catalog.cfgshr.ListDbl:=ReadBool(section,'ListDbl',catalog.cfgshr.ListDbl);
 catalog.cfgshr.ListPla:=ReadBool(section,'ListPla',catalog.cfgshr.ListPla);
+def_cfgsc.IndiAutostart:=ReadBool(section,'IndiAutostart',def_cfgsc.IndiAutostart);
+def_cfgsc.IndiServerHost:=ReadString(section,'IndiServerHost',def_cfgsc.IndiServerHost);
+def_cfgsc.IndiServerPort:=ReadString(section,'IndiServerPort',def_cfgsc.IndiServerPort);
+def_cfgsc.IndiServerCmd:=ReadString(section,'IndiServerCmd',def_cfgsc.IndiServerCmd);
+def_cfgsc.IndiDriver:=ReadString(section,'IndiDriver',def_cfgsc.IndiDriver);
+def_cfgsc.IndiPort:=ReadString(section,'IndiPort',def_cfgsc.IndiPort);
+def_cfgsc.IndiDevice:=ReadString(section,'IndiDevice',def_cfgsc.IndiDevice);
+def_cfgsc.IndiTelescope:=ReadBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
+def_cfgsc.ScopePlugin:=ReadString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatpath[i]:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -1397,6 +1557,18 @@ end;
 section:='grid';
 for i:=0 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=0 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
+section:='Finder';
+for i:=1 to 10 do WriteFloat(section,'Circle'+inttostr(i),def_cfgsc.circle[i,1]);
+for i:=1 to 10 do WriteFloat(section,'CircleR'+inttostr(i),def_cfgsc.circle[i,2]);
+for i:=1 to 10 do WriteFloat(section,'CircleOffset'+inttostr(i),def_cfgsc.circle[i,3]);
+for i:=1 to 10 do WriteBool(section,'ShowCircle'+inttostr(i),def_cfgsc.circleok[i]);
+for i:=1 to 10 do WriteString(section,'CircleLbl'+inttostr(i),def_cfgsc.circlelbl[i]);
+for i:=1 to 10 do WriteFloat(section,'RectangleW'+inttostr(i),def_cfgsc.rectangle[i,1]);
+for i:=1 to 10 do WriteFloat(section,'RectangleH'+inttostr(i),def_cfgsc.rectangle[i,2]);
+for i:=1 to 10 do WriteFloat(section,'RectangleR'+inttostr(i),def_cfgsc.rectangle[i,3]);
+for i:=1 to 10 do WriteFloat(section,'RectangleOffset'+inttostr(i),def_cfgsc.rectangle[i,4]);
+for i:=1 to 10 do WriteBool(section,'ShowRectangle'+inttostr(i),def_cfgsc.rectangleok[i]);
+for i:=1 to 10 do WriteString(section,'RectangleLbl'+inttostr(i),def_cfgsc.rectanglelbl[i]);
 section:='chart';
 WriteInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
 WriteString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
@@ -1537,6 +1709,15 @@ WriteInteger(section,'dbport',cfgm.dbport);
 WriteString(section,'db',cfgm.db);
 WriteString(section,'dbuser',cfgm.dbuser);
 WriteString(section,'dbpass',cfgm.dbpass);
+WriteBool(section,'IndiAutostart',def_cfgsc.IndiAutostart);
+WriteString(section,'IndiServerHost',def_cfgsc.IndiServerHost);
+WriteString(section,'IndiServerPort',def_cfgsc.IndiServerPort);
+WriteString(section,'IndiServerCmd',def_cfgsc.IndiServerCmd);
+WriteString(section,'IndiDriver',def_cfgsc.IndiDriver);
+WriteString(section,'IndiPort',def_cfgsc.IndiPort);
+WriteString(section,'IndiDevice',def_cfgsc.IndiDevice);
+WriteBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
+WriteString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -1781,12 +1962,21 @@ Findit:
 end;
 end;
 
-procedure Tf_main.UpdateBtn(fx,fy:integer);
+procedure Tf_main.UpdateBtn(fx,fy:integer;tc:boolean;sender:TObject);
 begin
+if f_main.ActiveMDIchild=sender then begin
   if fx>0 then FlipButtonX.ImageIndex:=15
           else FlipButtonX.ImageIndex:=16;
   if fy>0 then FlipButtonY.ImageIndex:=17
           else FlipButtonY.ImageIndex:=18;
+  if tc   then begin
+               TConnect.ImageIndex:=49;
+               TelescopeConnect.Hint:='Disconnect Telescope';
+          end else begin
+               TConnect.ImageIndex:=48;
+               TelescopeConnect.Hint:='Connect Telescope';
+          end;
+end;
 end;
 
 Function Tf_main.NewChart(cname:string):string;
@@ -1865,8 +2055,11 @@ case n of
  6 : result:=msgOK+blank+LPanels1.Caption;
  7 : result:=msgOK+blank+LPanels0.Caption;
  8 : result:=msgOK+blank+topmsg;
+ 9 :  ;// find
+ 10 : ;// save
+ 11 : ;// load
 else begin
-result:='Bad chart name '+cname;
+ result:='Bad chart name '+cname;
  for i:=0 to MDIChildCount-1 do
    if MDIChildren[i] is Tf_chart then
      with MDIChildren[i] as Tf_chart do
@@ -1876,7 +2069,7 @@ end;
 end;
 end;
 
-procedure Tf_main.SendInfo(origin,str:string);
+procedure Tf_main.SendInfo(Sender: TObject; origin,str:string);
 var i : integer;
 begin
 for i:=1 to Maxwindow do
@@ -1886,6 +2079,22 @@ for i:=1 to Maxwindow do
     and(TCPDaemon.TCPThrd[i].Fsock<>nil)
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('> '+origin+' : '+str);
+{$ifdef mswindows}
+if DDEopen then begin
+   DdeInfo[0]:=formatdatetime('c',now);
+   DdeInfo[2]:='> '+origin+' : '+str;
+   if sender is Tf_Chart then with sender as Tf_Chart do begin
+      DdeInfo[1]:='RA:'+arptostr(rad2deg*sc.cfgsc.racentre/15)+' DEC:'+deptostr(rad2deg*sc.cfgsc.decentre)+' FOV:'+detostr(rad2deg*sc.cfgsc.fov);
+      DdeInfo[3]:=Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+'T'+TimtoStr(sc.cfgsc.Curtime);
+      DdeInfo[4]:='LAT:'+detostr3(sc.cfgsc.ObsLatitude)+' LON:'+detostr3(sc.cfgsc.ObsLongitude)+' ALT:'+floattostr(sc.cfgsc.ObsAltitude)+'m OBS:'+sc.cfgsc.ObsName;
+   end else begin
+      DdeInfo[1]:='';
+      DdeInfo[3]:='';
+      DdeInfo[4]:='';
+   end;
+   DdeData.Lines:=DdeInfo;
+end;
+{$endif}
 end;
 
 { TCP/IP Connexion, based on Synapse Echo demo }
@@ -2099,11 +2308,12 @@ end;
 procedure Tf_main.ConnectDB;
 begin
  try
- if not MySqlLoadLib then begin
-    SetLpanel1('MySQL Library not available. Please install MySQL Client.');
-    def_cfgsc.ShowAsteroid:=false;
-    def_cfgsc.ShowComet:=false;
- end else if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
+// if not MySqlLoadLib then begin
+//    SetLpanel1('MySQL Library not available. Please install MySQL Client.');
+//    def_cfgsc.ShowAsteroid:=false;
+//    def_cfgsc.ShowComet:=false;
+// end else
+if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
     if not (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
        SetLpanel1('Try to initialyse MySQL database.');
        OpenDBConfig(self);
