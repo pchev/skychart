@@ -24,29 +24,64 @@ interface
 
 uses
   skylibcat, sysutils;
-type
+
+const
+ rtStar = 1;  rtVar  = 2; rtDbl  = 3; rtNeb  = 4; rlin   = 5;
+ vsId=1; vsMagv=2; vsB_v=3; vsMagb=4; vsMagr=5; vsSp=6; vsPmra=7; vsPmdec=8; vsEpoch=9; vsPx=10; vsComment=11;
+ vvId=1; vvMagmax=2; vvMagmin=3; vvPeriod=4; vvVartype=5; vvMaxepoch=6; vvRisetime=7;  vvSp=8; vvMagcode=9; vvComment=10;
+ vdId=1; vdMag1=2; vdMag2=3; vdSep=4; vdPa=5; vdEpoch=6; vdCompname=7; vdSp1=8; vdSp2=9; vdComment=10;
+ vnId=1; vnNebtype=2; vnMag=3; vnSbr=4; vnDim1=5; vnDim2=6; vnNebunit=7; vnPa=8; vnRv=9; vnMorph=10; vnComment=11;
+ vlId=1; vlLinecolor=2; vlLineoperation=3; vlLinewidth=4; vlLinetype=5; vlComment=6;
+ lOffset=2;
+Type
+TVstar = array[1..11] of boolean;
+TVvar  = array[1..10] of boolean;
+TVdbl  = array[1..10] of boolean;
+TVneb  = array[1..11] of boolean;
+TVlin  = array[1..6] of boolean;
+TValid = array[1..10] of boolean;
+Tlabellst = array[1..35,0..10] of char;
 Tstar =   packed record
           magv,b_v,magb,magr,pmra,pmdec,epoch,px : double;
           id,sp,comment : shortstring;
+          valid : TVstar;
           end;
 Tvariable=packed record
           magmax,magmin,period,maxepoch,risetime : double;
           id,vartype,sp,magcode,comment : shortstring;
+          valid : TVvar;
           end;
 Tdouble = packed record
           mag1,mag2,sep,pa,epoch : double;
           id,compname,sp1,sp2,comment : shortstring;
+          valid : TVdbl;
           end;
 Tneb    = packed record
           mag,sbr,dim1,dim2,pa,rv : double;
           nebunit : Smallint;
           nebtype : ShortInt;
           id,morph,comment : shortstring;
+          valid : TVneb;
           end;
 Toutlines = packed record
           linecolor : LongWord;
-          linetype,linewidth,usespline : byte;
+          lineoperation,linewidth,linetype : byte;
           id,comment : shortstring;
+          valid : TVlin;
+          end;
+TCatOption = packed record
+          ShortName: array[0..3] of char;
+          rectype  : integer;
+          Equinox  : double;
+          Epoch    : double;
+          MagMax   : double;
+          Size     : Integer;
+          Units    : Integer;
+          ObjType  : Integer;
+          LogSize  : Integer;
+          UsePrefix: byte;
+          altname  : Tvalid;
+          flabel   : Tlabellst
           end;
 GCatrec = packed record
           ra,dec   : double ;
@@ -57,6 +92,8 @@ GCatrec = packed record
           outlines : Toutlines;
           str      : array[1..10] of shortstring;
           num      : array[1..10] of double;
+          vstr,vnum: Tvalid;
+          options  : TCatoption;
           end;
 Type TCatHeader = packed record
                  hdrl     : Integer;
@@ -83,7 +120,6 @@ Type TCatHeader = packed record
                  flabel   : array[1..35,0..10] of char;
                  Spare4   : array[1..20,0..10] of char;
                  end;
-
 
 procedure SetGCatpath(path,catshortname : shortstring); stdcall;
 procedure GetGCatInfo(var h : TCatHeader; var version : integer; var ok : boolean); stdcall;
@@ -294,10 +330,10 @@ if ok then begin
       end;
   4 : begin  // outlines
       if catheader.flen[3]>0 then lin.outlines.id:=GetRecString(3);
-      if catheader.flen[4]>0 then lin.outlines.linetype:=GetRecByte(4);
+      if catheader.flen[4]>0 then lin.outlines.lineoperation:=GetRecByte(4);
       if catheader.flen[5]>0 then lin.outlines.linewidth:=GetRecByte(5);
       if catheader.flen[6]>0 then lin.outlines.linecolor:=GetRecCard(6);
-      if catheader.flen[7]>0 then lin.outlines.usespline:=GetRecByte(7);
+      if catheader.flen[7]>0 then lin.outlines.linetype:=GetRecByte(7);
       if catheader.flen[8]>0 then lin.outlines.comment:=GetRecString(8);
       end;
   end;
@@ -370,10 +406,10 @@ if ok then begin
       end;
   4 : begin  // outlines
       if catheader.flen[3]>0 then lin.outlines.id:=GetRecString(3);
-      if catheader.flen[4]>0 then lin.outlines.linetype:=GetRecByte(4);
+      if catheader.flen[4]>0 then lin.outlines.lineoperation:=GetRecByte(4);
       if catheader.flen[5]>0 then lin.outlines.linewidth:=GetRecByte(5);
       if catheader.flen[6]>0 then lin.outlines.linecolor:=GetRecCard(6);
-      if catheader.flen[7]>0 then lin.outlines.usespline:=GetRecByte(7);
+      if catheader.flen[7]>0 then lin.outlines.linetype:=GetRecByte(7);
       end;
   end;
   if catheader.flen[16]>0 then lin.str[1]:=GetRecString(16);

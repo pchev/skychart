@@ -63,30 +63,30 @@ Function IsGSCpath(path : shortstring) : Boolean;
 var p : string;
 begin
 p:=slash(path);
-result:=    FileExists(p+'N0000'+slashchar+'0001.dat')
-         or FileExists(p+'N0730'+slashchar+'0594.dat')
-         or FileExists(p+'N1500'+slashchar+'1178.dat')
-         or FileExists(p+'N2230'+slashchar+'1729.dat')
-         or FileExists(p+'N3000'+slashchar+'2259.dat')
-         or FileExists(p+'N3730'+slashchar+'2781.dat')
-         or FileExists(p+'N4500'+slashchar+'3246.dat')
-         or FileExists(p+'N5230'+slashchar+'3652.dat')
-         or FileExists(p+'N6000'+slashchar+'4014.dat')
-         or FileExists(p+'N6730'+slashchar+'4294.dat')
-         or FileExists(p+'N7500'+slashchar+'4492.dat')
-         or FileExists(p+'N8230'+slashchar+'4615.dat')
-         or FileExists(p+'S0000'+slashchar+'4663.dat')
-         or FileExists(p+'S0730'+slashchar+'5260.dat')
-         or FileExists(p+'S1500'+slashchar+'5838.dat')
-         or FileExists(p+'S2230'+slashchar+'6412.dat')
-         or FileExists(p+'S3000'+slashchar+'6989.dat')
-         or FileExists(p+'S3730'+slashchar+'7523.dat')
-         or FileExists(p+'S4500'+slashchar+'8022.dat')
-         or FileExists(p+'S5230'+slashchar+'8464.dat')
-         or FileExists(p+'S6000'+slashchar+'8840.dat')
-         or FileExists(p+'S6730'+slashchar+'9134.dat')
-         or FileExists(p+'S7500'+slashchar+'9346.dat')
-         or FileExists(p+'S8230'+slashchar+'9490.dat')
+result:=    FileExists(p+'n0000'+slashchar+'0001.dat')
+         or FileExists(p+'n0730'+slashchar+'0594.dat')
+         or FileExists(p+'n1500'+slashchar+'1178.dat')
+         or FileExists(p+'n2230'+slashchar+'1729.dat')
+         or FileExists(p+'n3000'+slashchar+'2259.dat')
+         or FileExists(p+'n3730'+slashchar+'2781.dat')
+         or FileExists(p+'n4500'+slashchar+'3246.dat')
+         or FileExists(p+'n5230'+slashchar+'3652.dat')
+         or FileExists(p+'n6000'+slashchar+'4014.dat')
+         or FileExists(p+'n6730'+slashchar+'4294.dat')
+         or FileExists(p+'n7500'+slashchar+'4492.dat')
+         or FileExists(p+'n8230'+slashchar+'4615.dat')
+         or FileExists(p+'s0000'+slashchar+'4663.dat')
+         or FileExists(p+'s0730'+slashchar+'5260.dat')
+         or FileExists(p+'s1500'+slashchar+'5838.dat')
+         or FileExists(p+'s2230'+slashchar+'6412.dat')
+         or FileExists(p+'s3000'+slashchar+'6989.dat')
+         or FileExists(p+'s3730'+slashchar+'7523.dat')
+         or FileExists(p+'s4500'+slashchar+'8022.dat')
+         or FileExists(p+'s5230'+slashchar+'8464.dat')
+         or FileExists(p+'s6000'+slashchar+'8840.dat')
+         or FileExists(p+'s6730'+slashchar+'9134.dat')
+         or FileExists(p+'s7500'+slashchar+'9346.dat')
+         or FileExists(p+'s8230'+slashchar+'9490.dat')
 end;
 
 procedure SetGSCpath(path : shortstring);
@@ -164,8 +164,8 @@ end;
 
 Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
 const dirlst : array [0..23,1..5] of char =
-      ('S8230','S7500','S6730','S6000','S5230','S4500','S3730','S3000','S2230','S1500','S0730','S0000',
-       'N0000','N0730','N1500','N2230','N3000','N3730','N4500','N5230','N6000','N6730','N7500','N8230');
+      ('s8230','s7500','s6730','s6000','s5230','s4500','s3730','s3000','s2230','s1500','s0730','s0000',
+       'n0000','n0730','n1500','n2230','n3000','n3730','n4500','n5230','n6000','n6730','n7500','n8230');
 var L1,S1,zone,i,j : integer;
     hemis : char;
 begin

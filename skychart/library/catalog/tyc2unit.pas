@@ -295,7 +295,7 @@ if readsup and (currec>s1nrec) then begin            // end of second data file
 end;
 if not ok then exit;
 
-if not readsup then                                  // read first data file
+if not readsup then begin                                  // read first data file
 if oncache then lin:=cache[ncache,icache]
 else
 if readbin then begin
@@ -329,8 +329,9 @@ end else begin
                    else lin.vt:=99;
     if usecache then cache[ncache,icache]:=lin;
 end;
+end;
 
-if readsup then                                       // read second data file
+if readsup then begin                                      // read second data file
 if oncache then lin:=cache[ncache,icache]
 else
  if readbin then begin
@@ -361,6 +362,7 @@ else
     if trim(sup.vt)>'' then lin.vt:=strtofloat(sup.vt)
                    else lin.vt:=99;
     if usecache then cache[ncache,icache]:=lin;
+  end;
   end;
 SMnum:=SMname;
 end;

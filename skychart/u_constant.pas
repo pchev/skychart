@@ -1,0 +1,221 @@
+unit u_constant;
+{
+Copyright (C) 2002 Patrick Chevalley
+
+http://www.astrosurf.com/astropc
+pch@freesurf.ch
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+}
+{
+ Type and constant declaration
+}
+
+interface
+
+uses libcatalog,
+{$ifdef linux}
+    QGraphics;
+{$endif}
+{$ifdef mswindows}
+    Graphics;
+{$endif}
+
+type Starcolarray =  Array [0..11] of Tcolor;
+     TSkycolor = array[1..7]of Tcolor;
+
+const version = 'Version 3 alpha 0.0.1';
+      MaxSim = 100 ;
+      MaxComet = 500;
+      MaxAsteroid = 500;
+      MaxPla = 32;
+      MaxQuickSearch = 15;
+      FovMin = 9.6963E-6;  // 2"
+      FovMax = 2*pi;
+      jd2000 : double =2451545.0 ;
+      jd1950 : double =2433282.4235;
+      deg2rad = pi/180;
+      rad2deg = 180/pi;
+      crlf=chr(10)+chr(13);
+      greek : array[1..2,1..24]of string=(('Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega'),
+              ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
+      greeksymbol : array[1..2,1..24]of string=(('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'),
+                  ('a','b','g','d','e','z','h','q','i','k','l','m','n','x','o','p','r','s','t','u','f','c','y','w'));
+      pi2: double = 2*pi;
+      pi4: double = 4*pi;
+      pid2: double = pi/2;
+      DefaultPrtRes = 300;
+      DfColor : Starcolarray = (clBlack,$00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite);
+      MaxField = 10;
+      BaseStar = 1000;
+      MaxStarCatalog = 13;
+      bsc     = 1001;
+      sky2000 = 1002;
+      tyc     = 1003;
+      tyc2    = 1004;
+      tic     = 1005;
+      gscf    = 1006;
+      gscc    = 1007;
+      gsc     = 1008;
+      usnoa   = 1009;
+      microcat= 1010;
+      dsbase  = 1011;
+      dstyc   = 1012;
+      dsgsc   = 1013;
+      BaseVar = 2000;
+      MaxVarStarCatalog = 1;
+      gcvs    = 2001;
+      BaseDbl = 3000;
+      MaxDblStarCatalog = 1;
+      wds     = 3001;
+      BaseNeb = 4000;
+      MaxNebCatalog = 8;
+      sac     = 4001;
+      ngc     = 4002;
+      lbn     = 4003;
+      rc3     = 4004;
+      pgc     = 4005;
+      ocl     = 4006;
+      gcm     = 4007;
+      gpn     = 4008;
+      MaxSearchCatalog=29;
+      S_Messier = 1;
+      S_NGC     = 2;
+      S_IC      = 3;
+      S_PGC     = 4;
+      S_GCVS    = 5;
+      S_GC      = 6;
+      S_GSC     = 7;
+      S_SAO     = 8;
+      S_HD      = 9;
+      S_BD      =10;
+      S_CD      =11;
+      S_CPD     =12;
+      S_HR      =13;
+      S_Comet   =14;
+      S_Planet  =15;
+      S_Asteroid=16;
+      S_Const   =17;
+      S_Bayer   =18;
+      S_Flam    =19;
+      S_U2k     =20;
+      S_Ext     =21;
+      S_SAC     =22;
+      S_SIMBAD  =23;
+      S_NED     =24;
+      S_WDS     =25;
+      S_GCat    =26;
+      S_TYC2    =27;
+      S_Common  =28;
+      StarLabel : Tlabellst =('RA','DEC','Id','mV','b-v','mB','mR','sp','pmRA','pmDE','date','px','desc','','','Str1','Str2','Str3','Str4','Str5','Str6','Str7','Str8','Str9','Str10','Num1','Num2','Num3','Num4','Num5','Num6','Num7','Num8','Num9','Num10');
+      VarLabel : Tlabellst =('RA','DEC','Id','mMax','mMin','Period','Type','Mepoch','Rise','sp','mag. code','desc','','','','Str1','Str2','Str3','Str4','Str5','Str6','Str7','Str8','Str9','Str10','Num1','Num2','Num3','Num4','Num5','Num6','Num7','Num8','Num9','Num10');
+      DblLabel : Tlabellst =('RA','DEC','Id','m1','m2','sep','pa','date','Comp','sp','sp','desc','','','','Str1','Str2','Str3','Str4','Str5','Str6','Str7','Str8','Str9','Str10','Num1','Num2','Num3','Num4','Num5','Num6','Num7','Num8','Num9','Num10');
+      NebLabel : Tlabellst =('RA','DEC','Id','NebTyp','m','sbr','D','D','Unit','pa','rv','class','desc','','','Str1','Str2','Str3','Str4','Str5','Str6','Str7','Str8','Str9','Str10','Num1','Num2','Num3','Num4','Num5','Num6','Num7','Num8','Num9','Num10');
+      nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
+
+
+{$ifdef linux}
+      DefaultFontName='Sans';
+      DefaultFontSize=10;
+      Defaultconfigfile='~/.cartesduciel.ini';     // to user home directory
+      key_cr = 4100;
+{$endif}
+{$ifdef mswindows}
+      DefaultFontName='Default';
+      DefaultFontSize=8;
+      Defaultconfigfile='cartesduciel.ini';      // to user profile directory
+      key_cr = 13;
+{$endif}
+
+type
+     conf_catalog = record
+                StarmagMax,NebMagMax,NebSizeMin : double;            // limit to extract from catalog
+                StarCatPath : array [1..MaxStarCatalog] of string;   // path to each catalog
+                StarCatDef : array [1..MaxStarCatalog] of boolean;   // is the catalog defined
+                StarCatOn : array [1..MaxStarCatalog] of boolean;    // is the catalog used for current chart
+                StarCatField : array [1..MaxStarCatalog,1..2] of integer; // Field min and max the catalog is active
+                VarStarCatPath : array [1..MaxVarStarCatalog] of string;   // path to each catalog
+                VarStarCatDef : array [1..MaxVarStarCatalog] of boolean;   // is the catalog defined
+                VarStarCatOn : array [1..MaxVarStarCatalog] of boolean;    // is the catalog used for current chart
+                VarStarCatField : array [1..MaxVarStarCatalog,1..2] of integer; // Field min and max the catalog is active
+                DblStarCatPath : array [1..MaxDblStarCatalog] of string;   // path to each catalog
+                DblStarCatDef : array [1..MaxDblStarCatalog] of boolean;   // is the catalog defined
+                DblStarCatOn : array [1..MaxDblStarCatalog] of boolean;    // is the catalog used for current chart
+                DblStarCatField : array [1..MaxDblStarCatalog,1..2] of integer; // Field min and max the catalog is active
+                NebCatPath : array [1..MaxNebCatalog] of string;   // path to each catalog
+                NebCatDef : array [1..MaxNebCatalog] of boolean;   // is the catalog defined
+                NebCatOn : array [1..MaxNebCatalog] of boolean;    // is the catalog used for current chart
+                NebCatField : array [1..MaxNebCatalog,1..2] of integer; // Field min and max the catalog is active
+                UseUSNOBrightStars, UseGSVSIr : Boolean;  // filter specific catalog entry
+                end;
+     conf_shared = record
+                FieldNum : array [0..MaxField] of double;  // Field of vision limit
+                StarFilter,NebFilter : boolean;   // filter by magnitude
+                BigNebFilter : boolean;           // filter big nebulae
+                AutoStarFilter : boolean;         // automatic limit
+                AutoStarFilterMag : double;       // automatic limit reference magnitude
+                StarMagFilter : array [0..MaxField] of double;  // Limiting mag. for each field
+                NebMagFilter : array [0..MaxField] of double;   // Limiting mag. for each field
+                NebSizeFilter : array [0..MaxField] of double;  // Limiting size for each field
+                end;
+     conf_skychart = record
+                date,time,racentre,decentre,fov : double;
+                theta,acentre,hcentre,HorizonMax : Double;
+                Force_DT_UT,horizonopaque : Boolean;
+                PMon : boolean; // use proper motion
+                arref,deref : double;
+                projtype : char;
+                WindowRatio,BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta: Double;
+                Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
+                xmin,xmax,ymin,ymax,xshift,yshift,FieldNum : integer;
+                LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
+                FlipX, FlipY, ProjPole,ReqProj,lastprojpole : integer;
+                ObsLatitude,ObsLongitude,ObsAltitude,SaveObsLatitude,SaveObsLongitude : double;
+                ObsRoSinPhi,ObsRoCosPhi,ObsTemperature,ObsPressure,ObsRefractionCor : Double;
+                ObsName : string;
+                CurYear,CurrentMonth,CurrentDay : integer;
+                CurrentTime,TimeBias,DT_UT,CurrentST,dYear,CurrentJD,DT_UT_val,CurrentSunH,CurrentMoonH,CurrentMoonIllum : Double;
+                ShowConstl,ShowConstB,NetworkOn,ByPassNetworkCheck,zlibok,PlanetParalaxe,satxyok,AzNorth : boolean;
+                horizonlist : array [0..360] of single;
+                end;
+     conf_plot = record
+                color : Starcolarray;
+                backgroundcolor : Tcolor;
+                stardyn,starsize,prtres,starplot,nebplot : integer;
+                Nebgray,NebBright,starshapesize,starshapew : integer;
+                Invisible : boolean;
+                end;
+     conf_chart = record
+                onprinter : boolean;
+                width,height,drawpen,drawsize : integer;
+                min_ma : double;
+                end;
+     conf_main = record
+                prtname,language : string;
+                PrinterResolution,configpage : integer;
+                FontName : array [1..6] of string;
+                FontSize : array [1..6] of integer;
+                FontBold : array [1..6] of boolean;
+                FontItalic : array [1..6] of boolean;
+                end;
+     Tplanetlst = array[0..MaxSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth umbra ;
+     Tcometlst = array[0..MaxSim,1..MaxComet,1..7] of double;
+     Tasteroidlst = array[0..MaxSim,1..MaxAsteroid,1..4] of double;
+
+Var  Appdir, Configfile: string;         // pseudo-constant only here
+
+implementation
+
+end.
