@@ -921,6 +921,10 @@ type
     Label263: TLabel;
     SizeContrastBar: TTrackBar;
     Label264: TLabel;
+    StarButton1: TButton;
+    StarButton2: TButton;
+    StarButton3: TButton;
+    StarButton4: TButton;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1126,6 +1130,10 @@ type
     procedure StarContrastBarChange(Sender: TObject);
     procedure SaturationBarChange(Sender: TObject);
     procedure SizeContrastBarChange(Sender: TObject);
+    procedure StarButton1Click(Sender: TObject);
+    procedure StarButton2Click(Sender: TObject);
+    procedure StarButton3Click(Sender: TObject);
+    procedure StarButton4Click(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -1241,6 +1249,7 @@ begin
 labelSizeChange(Sender);
 end;
 // End of Linux specific CLX code:
+
 
 end.
 

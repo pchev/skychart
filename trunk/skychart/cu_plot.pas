@@ -84,8 +84,9 @@ type
     { Public declarations }
     cfgplot : conf_plot;
     cfgchart: conf_chart;
-    cnv : Tcanvas;
-    bmp : Tbitmap;
+    cbmp : Tbitmap;
+    cnv  : Tcanvas;
+    destcnv  : Tcanvas;
     Fstarshape,starbmp: Tbitmap;
     starbmpw:integer;
     constructor Create(AOwner:TComponent); override;
@@ -94,9 +95,10 @@ type
     { Published declarations }
      function Init(w,h : integer) : boolean;
      function InitLabel : boolean;
+     Procedure Flush;
      Procedure PlotStar(xx,yy: single; ma,b_v : Double);
      Procedure PlotVarStar(x,y: single; max,min : Double);
-     Procedure PlotDblStar(x,y: single; ma,sep,pa,b_v : Double);
+     Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
      Procedure PlotGalaxie(x,y: single; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotLine(x1,y1,x2,y2:single; color,width: integer);
@@ -133,11 +135,15 @@ var i : integer;
 begin
  inherited Create(AOwner);
  starbmp:=Tbitmap.Create;
- cnv:=(AOwner as Timage).canvas;
- bmp:=(AOwner as Timage).Picture.Bitmap;
+ destcnv:=(AOwner as Timage).Canvas;
+ cbmp:=Tbitmap.Create;
+ cnv:=cbmp.canvas;
  // set safe value
  starbmpw:=1;
  editlabel:=-1;
+ cbmp.PixelFormat:=pf32bit;
+ cbmp.width:=100;
+ cbmp.height:=100;
  cfgchart.width:=100;
  cfgchart.height:=100;
  cfgchart.min_ma:=6;
@@ -212,10 +218,11 @@ var i:integer;
 begin
  for i:=1 to maxlabels do labels[i].Free;
  starbmp.Free;
+ cbmp.Free;
  if planetrender then begin
     planetbmp.Free;
     planetbmpmask.Free;
-    if Prenderlib<>0 then RenderCloseLib;
+    ClosePlanetRender;
  end;   
  inherited destroy;
 end;
@@ -224,6 +231,8 @@ function TSplot.Init(w,h : integer) : boolean;
 begin
 cfgchart.Width:=w;
 cfgchart.Height:=h;
+cbmp.Width:=w;
+cbmp.Height:=h;
 with cnv do begin
  Brush.Color:=cfgplot.Color[0];
  Pen.Color:=cfgplot.Color[0];
@@ -238,6 +247,11 @@ if (cfgchart.drawpen<>starbmpw)and(Fstarshape<>nil) then begin
    ImageResize(Fstarshape,starbmp,starbmpw);
 end;
 result:=true;
+end;
+
+Procedure TSplot.Flush;
+begin
+ destcnv.Draw(0,0,cbmp);
 end;
 
 procedure TSplot.Setstarshape(value:Tbitmap);
@@ -373,32 +387,29 @@ type
   PColorArray = ^TColorArray;
 var LineWidth,AAWidth,Lum,R,G,B  : TPos;
 var
-  Contrast,Saturation: integer;
   Alpha, UseContrast, Distance,
   OutLevelR, OutLevelG, OutLevelB : TPos;
-  DX, DY, thermo : TPos; // Distance elements
+  DX, DY : TPos; // Distance elements
   XCount, YCount : integer;
   MinX, MinY, MaxX, MaxY, bmWidth : integer;
   ExistingPixelRed, ExistingPixelGreen, ExistingPixelBlue,
   NewPixelR, NewPixelG, NewPixelB : integer;
   P : PColorArray;
-  Icol : Integer;
-  co : Tcolor;
+  Icol,Contrast : Integer;
+  co,px : Tcolor;
 const
-  PointAlpha : single = 0.2;// Transparency at Solid;
+  PointAlpha : single = 0.2;  // Transparency at Solid;
 
 begin
   LineWidth:=0;
-  if ma<0 then ma:=ma/10;
-  Lum := (1.1*cfgchart.min_ma-ma)/cfgchart.min_ma;
-  if Lum<0.1 then Lum:=0.1;
-  AAwidth:=cfgplot.partsize*power(cfgplot.magsize,Lum);
-  Contrast:=cfgplot.contrast;
-  Saturation:=cfgplot.saturation;
+  if ma<0 then ma:=ma/10;                               // avoid Moon and Sun be too big
+  Lum := (1.1*cfgchart.min_ma-ma)/cfgchart.min_ma;      // logarithmic luminosity proportional to magnitude
+  if Lum<0.1 then Lum:=0.1;                             // for object fainter than the limit (asteroid)
+  AAwidth:=cfgplot.partsize*power(cfgplot.magsize,Lum); // particle size also depend on the magnitude
 
-  if b_v>1000 then co:=cfgplot.Color[trunc(b_v-1000)]
+  if b_v>1000 then co:=cfgplot.Color[trunc(b_v-1000)]   // Use direct color table indice
   else begin
-  Icol:=Round(b_v*10);
+  Icol:=Round(b_v*10);                                  // Use color from B-V
   case Icol of
          -999..-3: co := cfgplot.Color[1];
            -2..-1: co := cfgplot.Color[2];
@@ -412,12 +423,12 @@ begin
   end;
   R := co and $FF;
   G := (co div $100) and $FF;
-  B := co div $10000 and $FF;
-  R := ( (R * Saturation) + (65536-Saturation) ) * 0.0035;
-  G := ( (G * Saturation) + (65536-Saturation) ) * 0.0035;
-  B := ( (B * Saturation) + (65536-Saturation) ) * 0.0035;
+  B := (co div $10000) and $FF;
+  R := ( (R * cfgplot.Saturation) + (65536-cfgplot.Saturation) ) * 0.0035;
+  G := ( (G * cfgplot.Saturation) + (65536-cfgplot.Saturation) ) * 0.0035;
+  B := ( (B * cfgplot.Saturation) + (65536-cfgplot.Saturation) ) * 0.0035;
 
-  UseContrast := (Contrast * Contrast) shr 6;
+  UseContrast := (cfgplot.contrast * cfgplot.contrast) shr 6;
   if (AAWidth<1) then begin
     Lum := Lum * AAWidth;
     AAWidth := 1;
@@ -427,7 +438,7 @@ begin
   MinY := round(Y - LineWidth - AAWidth - 0.5);
   MaxY := round(Y + LineWidth + AAWidth + 0.5);
 
-  with bmp do begin
+  with cbmp do begin
   bmWidth := Width;
 
   for YCount := MinY to MaxY do
@@ -446,20 +457,21 @@ begin
           else
             Alpha := PointAlpha - PointAlpha * Distance / (LineWidth+AAWidth+0.5)
         end;
+
         ExistingPixelBlue  :=  P[XCount] and $FF;
         ExistingPixelGreen :=  (P[XCount] div $100) and $FF;
         ExistingPixelRed   :=  (P[XCount] div $10000) and $FF;
 
         OutLevelR := (ExistingPixelRed)*(1-Alpha) +  ((Lum*R*(Alpha)*UseContrast) /256 );
-        NewPixelR := round(int(OutLevelR));
+        NewPixelR := trunc(OutLevelR);
         if NewPixelR>255 then NewPixelR := 255;
 
         OutLevelG := (ExistingPixelGreen)*(1-Alpha) +  ((Lum*G*(Alpha)*UseContrast) /256 );
-        NewPixelG := round(int(OutLevelG));
+        NewPixelG := trunc(OutLevelG);
         if NewPixelG>255 then NewPixelG := 255;
 
         OutLevelB := (ExistingPixelBlue)*(1-Alpha) +  ((Lum*B*(Alpha)*UseContrast) /256 );
-        NewPixelB := round(int(OutLevelB));
+        NewPixelB := trunc(OutLevelB);
         if NewPixelB>255 then NewPixelB := 255;
 
         P[XCount] := (NewPixelB + NewPixelG*$100 + NewPixelR*$10000);
@@ -467,7 +479,6 @@ begin
     end;
   end;
   end;
-
 end;
 
 
@@ -532,7 +543,7 @@ if not cfgplot.Invisible then begin
 end;
 end;
 
-Procedure TSplot.PlotDblStar(x,y: single; ma,sep,pa,b_v : Double);
+Procedure TSplot.PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
 var
   rd: Double;
   ds,ds2,xx,yy : Integer;
@@ -547,14 +558,9 @@ if not cfgplot.Invisible then
    Pen.Color := cfgplot.Color[15];
    Brush.style:=bsSolid;
    Pen.Mode:=pmCopy;
-   rd:=ds2 + cfgchart.drawpen*(2+2*(0.7+ln(minvalue([50,maxvalue([0.5,sep])]))));
+   rd:=max(r,ds2 + cfgchart.drawpen*(2+2*(0.7+ln(minvalue([50,maxvalue([0.5,sep])])))));
    MoveTo(xx-round(rd*sin(pa)),yy-round(rd*cos(pa)));
    LineTo(xx,yy);
-   case cfgplot.starplot of
-      0 : PlotStar0(x,y,ma,b_v);
-      1 : PlotStar1(x,y,ma,b_v);
-      2 : PlotStar2(x,y,ma,b_v);
-   end;
 end;
 end;
 
