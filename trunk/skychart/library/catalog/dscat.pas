@@ -90,7 +90,7 @@ end;
 
 Function IsDSgscpath(path : shortstring) : Boolean;
 begin
-result:= FileExists(slash(path)+'00N00.dat');
+result:= FileExists(slash(path)+'00N00.DAT');
 end;
 
 procedure SetDSpath(path,tycpath,gscpath : shortstring);
@@ -183,7 +183,7 @@ end;
 Procedure OpenRegionGSC(zone : string ; var ok:boolean);
 var nomfich :string;
 begin
-nomfich:=DSGSCpath+slashchar+zone+'.dat';
+nomfich:=DSGSCpath+slashchar+zone+'.DAT';
 if not FileExists(nomfich) then begin
    ok:=false;
    exit;
