@@ -914,6 +914,15 @@ type
     persdir: TEdit;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
+    starvisual: TGroupBox;
+    StarSizeBar: TTrackBar;
+    StarContrastBar: TTrackBar;
+    SaturationBar: TTrackBar;
+    Label256: TLabel;
+    Label262: TLabel;
+    Label263: TLabel;
+    Label257: TLabel;
+    SizeContrastBar: TTrackBar;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1119,6 +1128,10 @@ type
     procedure telescopepluginlistChange(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
+    procedure StarSizeBarChange(Sender: TObject);
+    procedure StarContrastBarChange(Sender: TObject);
+    procedure SaturationBarChange(Sender: TObject);
+    procedure SizeContrastBarChange(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -1244,7 +1257,6 @@ csc.ScopePlugin:=telescopepluginlist.text;
 end;
 
 // end of windows vcl specific code:
-
 
 end.
 

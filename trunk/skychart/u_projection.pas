@@ -35,7 +35,7 @@ uses u_constant, u_util,
 
 Procedure ScaleWindow(var c:conf_skychart);
 Function RotationAngle(x1,y1,x2,y2: double; var c:conf_skychart): double;
-Procedure WindowXY(x,y:Double; var WindowX,WindowY: Integer; var c:conf_skychart);
+Procedure WindowXY(x,y:Double; var WindowX,WindowY: single; var c:conf_skychart);
 Procedure XYWindow( x,y: Integer; var Xwindow,Ywindow: double; var c:conf_skychart);
 PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; var c:conf_skychart; tohrz:boolean=false);
 PROCEDURE Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; var c:conf_skychart );
@@ -136,13 +136,10 @@ result:=arctan2((x1-x2),(y1-y2));
 if c.FlipY<0 then result:=result-pi;
 end;      
 
-Procedure WindowXY(x,y:Double; var WindowX,WindowY: Integer; var c:conf_skychart);
-var xx,yy : int64;
+Procedure WindowXY(x,y:Double; var WindowX,WindowY: single; var c:conf_skychart);
 BEGIN
- xx:=round(c.AxGlb+c.BxGlb*x)+c.Xshift;
- yy:=round(c.AyGlb+c.ByGlb*y)+c.Yshift;
- if abs(xx)<maxint then WindowX:=xx else WindowX:=maxint;
- if abs(yy)<maxint then WindowY:=yy else WindowY:=maxint;
+ WindowX:=c.AxGlb+c.BxGlb*x+c.Xshift;
+ WindowY:=c.AyGlb+c.ByGlb*y+c.Yshift;
 END ;
 
 Procedure XYWindow( x,y: Integer; var Xwindow,Ywindow: double; var c:conf_skychart);
@@ -509,7 +506,7 @@ begin
 end;
 
 function NorthPoleInMap(var c:conf_skychart) : Boolean;
-var a,d,x1,y1: Double; xx,yy : integer;
+var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=0 ; d:=pid2;
 projection(a,d,x1,y1,false,c) ;
@@ -518,7 +515,7 @@ Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
 end;
 
 function SouthPoleInMap(var c:conf_skychart) : Boolean;
-var a,d,x1,y1: Double; xx,yy : integer;
+var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=0 ; d:=-pid2;
 projection(a,d,x1,y1,false,c) ;
@@ -527,7 +524,7 @@ Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
 end;
 
 function NorthPole2000InMap(var c:conf_skychart) : Boolean;
-var a,d,x1,y1: Double; xx,yy : integer;
+var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=c.rap2000 ; d:=c.dep2000;
 projection(a,d,x1,y1,false,c) ;
@@ -536,7 +533,7 @@ Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
 end;
 
 function SouthPole2000InMap(var c:conf_skychart) : Boolean;
-var a,d,x1,y1: Double; xx,yy : integer;
+var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=0;
 d:=-pid2;
@@ -547,7 +544,7 @@ Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
 end;
 
 function ZenithInMap(var c:conf_skychart) : Boolean;
-var x1,y1: Double; xx,yy : integer;
+var x1,y1: Double; xx,yy : single;
 begin
 proj2(1.0,pid2,c.acentre,c.hcentre,x1,y1,c) ;
 windowxy(x1,y1,xx,yy,c);
@@ -555,7 +552,7 @@ Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
 end;
 
 function NadirInMap(var c:conf_skychart) : Boolean;
-var x1,y1: Double; xx,yy : integer;
+var x1,y1: Double; xx,yy : single;
 begin
 proj2(1.0,-pid2,c.acentre,c.hcentre,x1,y1,c) ;
 windowxy(x1,y1,xx,yy,c);

@@ -44,7 +44,7 @@ Tskychart = class (TComponent)
     FShowDetailXY: Tint2func;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
-    procedure SetLabel(id,xx,yy,radius,fontnum,labelnum:integer; txt:string);
+    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string);
     procedure EditLabelPos(lnum,x,y: integer);
     procedure EditLabelTxt(lnum,x,y: integer);
     procedure DefaultLabel(lnum: integer);
@@ -543,7 +543,8 @@ end;
 function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
   x1,y1,cyear,dyear: Double;
-  xx,yy,xxp,yyp,lid: integer;
+  xx,yy,xxp,yyp : single;
+  lid : integer;
   first:boolean;
   firstcat:TSname;
 begin
@@ -596,7 +597,8 @@ end;
 function Tskychart.DrawVarStars :boolean;
 var rec:GcatRec;
   x1,y1: Double;
-  xx,yy,lid: integer;
+  xx,yy:single;
+  lid: integer;
 begin
 fillchar(rec,sizeof(rec),0);
 try
@@ -623,7 +625,8 @@ end;
 function Tskychart.DrawDblStars :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot: Double;
-  xx,yy,lid: integer;
+  xx,yy:single;
+  lid: integer;
 begin
 fillchar(rec,sizeof(rec),0);
 try
@@ -667,7 +670,8 @@ end;
 function Tskychart.DrawNebulae :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot: Double;
-  xx,yy,lid: integer;
+  xx,yy:single;
+  lid: integer;
 begin
 fillchar(rec,sizeof(rec),0);
 try
@@ -705,7 +709,8 @@ end;
 function Tskychart.DrawOutline :boolean;
 var rec:GcatRec;
   x1,y1: Double;
-  xx,yy,op,lw,col,fs: integer;
+  xx,yy: single;
+  op,lw,col,fs: integer;
 begin
 fillchar(rec,sizeof(rec),0);
 try
@@ -734,7 +739,8 @@ end;
 function Tskychart.DrawMilkyWay :boolean;
 var rec:GcatRec;
   x1,y1: Double;
-  xx,yy,op,lw,col,fs: integer;
+  xx,yy:single;
+  op,lw,col,fs: integer;
   first:boolean;
 begin
 result:=false;
@@ -774,7 +780,8 @@ function Tskychart.DrawPlanet :boolean;
 var
   x1,y1,x2,y2,pixscale,ra,dec,jdt,diam,magn,phase,fov,illum,pa,rot,r1,r2,be,dist: Double;
   ppa,poleincl,sunincl,w1,w2,w3 : double;
-  xx,yy,i,j,n,ipla: integer;
+  xx,yy:single;
+  i,j,n,ipla: integer;
   draworder : array[1..11] of integer;
 begin
 if not cfgsc.ShowPlanet then exit;
@@ -817,19 +824,19 @@ for j:=0 to cfgsc.SimNb-1 do begin
             if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,false);
            end;
       5 :  begin
-            if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
+            if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
             Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w2-cfgsc.GRSlongitude,0,0,0);
-            if (fov<=1.5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
+            if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
            end;
       6 :  begin
-            if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,true);
+            if (fov<=2) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,true);
             pa:=cfgsc.Planetlst[j,31,1]*cfgsc.FlipX;
             r1:=cfgsc.Planetlst[j,31,2];
             r2:=cfgsc.Planetlst[j,31,3];
             be:=cfgsc.Planetlst[j,31,4];
             if cfgsc.FlipY<0 then pa:=180-pa;
             Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,r1,r2,be);
-            if (fov<=1.5) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,false);
+            if (fov<=2) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,false);
            end;
       7 :  begin
             if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,true);
@@ -857,7 +864,7 @@ end;
 Procedure Tskychart.DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
 var
   x1,y1 : double;
-  xx,yy : Integer;
+  xx,yy : single;
 begin
 projection(ra,dec,x1,y1,true,cfgsc) ;
 WindowXY(x1,y1,xx,yy,cfgsc);
@@ -868,7 +875,8 @@ end;
 function Tskychart.DrawAsteroid :boolean;
 var
   x1,y1,ra,dec,magn: Double;
-  xx,yy,i,j,lid: integer;
+  xx,yy:single;
+  i,j,lid: integer;
 begin
 if cfgsc.ShowAsteroid then begin
   Fplanet.ComputeAsteroid(cfgsc);
@@ -897,7 +905,8 @@ end;
 function Tskychart.DrawComet :boolean;
 var
   x1,y1: Double;
-  xx,yy,cxx,cyy,i,j,lid: integer;
+  xx,yy,cxx,cyy:single;
+  i,j,lid: integer;
 begin
 if cfgsc.ShowComet then begin
   Fplanet.ComputeComet(cfgsc);
@@ -923,8 +932,9 @@ end;
 end;
 
 function Tskychart.DrawOrbitPath:boolean;
-var i,j,xx,yy,xp,yp,color : integer;
+var i,j,color : integer;
     x1,y1 : double;
+    xx,yy,xp,yp:single;
 begin
 Color:=Fplot.cfgplot.Color[14];
 xp:=0;yp:=0;
@@ -1263,7 +1273,8 @@ var x1,x2,y1,y2,xx1,yy1:double;
     rec: Gcatrec;
     desc,n,m,d: string;
     saveStarFilter,saveNebFilter,ok:boolean;
-    i,xx,yy:integer;
+    i:integer;
+    xx,yy:single;
 const maxln : integer = 2000;
 Procedure FindatPosCat(cat:integer);
 begin
@@ -1457,7 +1468,8 @@ var ra1,de1,ac,dc,dra,dde:double;
     ok,labelok:boolean;
 function DrawRAline(ra,de,dd:double):boolean;
 var x1,y1:double;
-    n,xx,yy,xxp,yyp: integer;
+    n: integer;
+    xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
 projection(ra,de,x1,y1,false,cfgsc) ;
@@ -1475,7 +1487,7 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    LabelPos(xx,yy+lh,lw,lh,5,lx,ly);
+    LabelPos(round(xx),round(yy)+lh,lw,lh,5,lx,ly);
     if dra<=15*minarc then Fplot.cnv.TextOut(lx,ly,artostr3(rmod(ra+pi2,pi2)*rad2deg/15))
                       else Fplot.cnv.TextOut(lx,ly,armtostr(rmod(ra+pi2,pi2)*rad2deg/15));
     labelok:=true;
@@ -1489,7 +1501,8 @@ result:=(n>1);
 end;
 function DrawDEline(ra,de,da:double):boolean;
 var x1,y1:double;
-    n,xx,yy,xxp,yyp: integer;
+    n: integer;
+    xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
 projection(ra,de,x1,y1,false,cfgsc) ;
@@ -1507,7 +1520,7 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    LabelPos(xx,yy,lw,lh,5,lx,ly);
+    LabelPos(round(xx),round(yy),lw,lh,5,lx,ly);
     if dde<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(de*rad2deg))
                      else Fplot.cnv.TextOut(lx,ly,demtostr(de*rad2deg));
     labelok:=true;
@@ -1585,7 +1598,8 @@ var a1,h1,ac,hc,dda,ddh:double;
     ok,labelok:boolean;
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1,al:double;
-    n,xx,yy,xxp,yyp,w: integer;
+    n,w: integer;
+    xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
 if (abs(a)<musec)or(abs(a-pi2)<musec)or(abs(a-pi)<musec) then w:=2 else w:=1;
@@ -1605,7 +1619,7 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((abs(h)<minarc)or(xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    LabelPos(xx,yy+lh,lw,lh,5,lx,ly);
+    LabelPos(round(xx),round(yy)+lh,lw,lh,5,lx,ly);
     if Fcatalog.cfgshr.AzNorth then al:=rmod(a+pi+pi2,pi2) else al:=rmod(a+pi2,pi2);
     if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(al*rad2deg))
                       else Fplot.cnv.TextOut(lx,ly,lonmtostr(al*rad2deg));
@@ -1620,7 +1634,8 @@ result:=(n>1);
 end;
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
-    n,xx,yy,xxp,yyp,w: integer;
+    n,w: integer;
+    xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
 if h=0 then w:=2 else w:=1;
@@ -1639,7 +1654,7 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    LabelPos(xx,yy,lw,lh,5,lx,ly);
+    LabelPos(round(xx),round(yy),lw,lh,5,lx,ly);
     if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
                      else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
     labelok:=true;
@@ -1704,7 +1719,8 @@ end;
 
 function Tskychart.DrawHorizon:boolean;
 var az,h,x1,y1 : double;
-    i,x,y,xp,yp,x0,y0,xh,yh,xph,yph,x0h,y0h: integer;
+    i: integer;
+    x,y,xh,yh,xp,yp,x0,y0,xph,yph,x0h,y0h :single;
     first:boolean;
 begin
 if cfgsc.ProjPole=Altaz then begin
@@ -1749,7 +1765,8 @@ var a1,h1,ac,hc,dda,ddh:double;
     ok,labelok:boolean;
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1:double;
-    n,xx,yy,xxp,yyp: integer;
+    n: integer;
+    xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
 proj2(a,h,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc) ;
@@ -1767,7 +1784,7 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    LabelPos(xx,yy+lh,lw,lh,5,lx,ly);
+    LabelPos(round(xx),round(yy)+lh,lw,lh,5,lx,ly);
     if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(rmod(a+pi2,pi2)*rad2deg))
                       else Fplot.cnv.TextOut(lx,ly,lonmtostr(rmod(a+pi2,pi2)*rad2deg));
     labelok:=true;
@@ -1781,7 +1798,8 @@ result:=(n>1);
 end;
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
-    n,xx,yy,xxp,yyp,w: integer;
+    n,w: integer;
+    xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
 w:=1;
@@ -1800,7 +1818,7 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    LabelPos(xx,yy,lw,lh,5,lx,ly);
+    LabelPos(round(xx),round(yy),lw,lh,5,lx,ly);
     if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
                      else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
     labelok:=true;
@@ -1877,7 +1895,8 @@ var a1,h1,ac,hc,dda,ddh:double;
     ok,labelok:boolean;
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1:double;
-    n,xx,yy,xxp,yyp: integer;
+    n: integer;
+    xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
 proj2(a,h,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc) ;
@@ -1895,7 +1914,7 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    LabelPos(xx,yy+lh,lw,lh,5,lx,ly);
+    LabelPos(round(xx),round(yy)+lh,lw,lh,5,lx,ly);
     if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(rmod(a+pi2,pi2)*rad2deg))
                       else Fplot.cnv.TextOut(lx,ly,lonmtostr(rmod(a+pi2,pi2)*rad2deg));
     labelok:=true;
@@ -1909,7 +1928,8 @@ result:=(n>1);
 end;
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
-    n,xx,yy,xxp,yyp,w: integer;
+    n,w: integer;
+    xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
 w:=1;
@@ -1928,7 +1948,7 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    LabelPos(xx,yy,lw,lh,5,lx,ly);
+    LabelPos(round(xx),round(yy),lw,lh,5,lx,ly);
     if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
                      else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
     labelok:=true;
@@ -2001,12 +2021,15 @@ end;
 
 Procedure Tskychart.GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 var x1,y1:double;
-    xx,yy,rr:integer;
+    xxx,yyy:single;
+    rr,xx,yy:integer;
 begin
  // no precession, the label position is already for the rigth equinox
  projection(ra,dec,x1,y1,true,cfgsc) ;
- WindowXY(x1,y1,xx,yy,cfgsc);
+ WindowXY(x1,y1,xxx,yyy,cfgsc);
  rr:=round(r*cfgsc.BxGlb);
+ xx:=round(xxx);
+ yy:=round(yyy);
  x:=xx;
  y:=yy;
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
@@ -2026,7 +2049,8 @@ end;
 function Tskychart.DrawConstL:boolean;
 var
   xx1,yy1,xx2,yy2,ra1,de1,ra2,de2 : Double;
-  x1,y1,x2,y2,i,color : Integer;
+  i,color : Integer;
+  x1,y1,x2,y2:single;
 begin
 result:=false;
 if not cfgsc.ShowConstl then exit;
@@ -2055,7 +2079,8 @@ end;
 function Tskychart.DrawConstB:boolean;
 var
   dm,xx,yy,ra,de : Double;
-  x1,y1,x2,y2,i,color : Integer;
+  i,color : Integer;
+  x1,y1,x2,y2:single;
 begin
 result:=false;
 if not cfgsc.ShowConstB then exit;
@@ -2083,7 +2108,8 @@ end;
 
 function Tskychart.DrawEcliptic:boolean;
 var l,b,e,ar,de,xx,yy : double;
-    i,x1,y1,x2,y2,color : integer;
+    i,color : integer;
+    x1,y1,x2,y2:single;
     first : boolean;
 begin
 result:=false;
@@ -2111,7 +2137,8 @@ end;
 
 function Tskychart.DrawGalactic:boolean;
 var l,b,ar,de,xx,yy : double;
-    i,x1,y1,x2,y2,color : integer;
+    i,color : integer;
+    x1,y1,x2,y2:single;
     first : boolean;
 begin
 result:=false;
@@ -2137,7 +2164,8 @@ result:=true;
 end;
 
 Procedure Tskychart.InitLabels;
-var i,xx,yy,lid : integer;
+var i,lid : integer;
+    xx,yy:single;
     ra,de,x1,y1:double;
 begin
   numlabels:=0;
@@ -2153,14 +2181,14 @@ begin
   end;
 end;
 
-procedure Tskychart.SetLabel(id,xx,yy,radius,fontnum,labelnum:integer; txt:string);
+procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string);
 begin
 if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=cfgsc.xmin)and(xx<=cfgsc.xmax)and(yy>=cfgsc.ymin)and(yy<=cfgsc.ymax) then begin
   inc(numlabels);
   try
   labels[numlabels].id:=id;
-  labels[numlabels].x:=xx;
-  labels[numlabels].y:=yy;
+  labels[numlabels].x:=round(xx);
+  labels[numlabels].y:=round(yy);
   labels[numlabels].r:=radius;
   labels[numlabels].labelnum:=labelnum;
   labels[numlabels].fontnum:=fontnum;
@@ -2374,7 +2402,8 @@ end;
 
 Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean) ;
 var x1,y1,x2,y2,r : double;
-    i,xa,ya,xb,yb : integer;
+    i : integer;
+    xa,ya,xb,yb:single;
     pa,xx1,xx2,yy1,yy2,rot,o : single;
     spa,cpa:extended;
     p : array [0..4] of Tpoint;
@@ -2407,13 +2436,13 @@ for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2
     xx2:=deg2rad*cfgsc.flipx*(cfgsc.rectangle[i,1]/120*cpa + cfgsc.rectangle[i,2]/120*spa);
     yy2:=deg2rad*cfgsc.flipy*(-cfgsc.rectangle[i,1]/120*spa + cfgsc.rectangle[i,2]/120*cpa);
     WindowXY(x2-xx1,y2-yy1,xa,ya,cfgsc);
-    p[0]:=Point(xa,ya);
+    p[0]:=Point(round(xa),round(ya));
     WindowXY(x2+xx2,y2-yy2,xa,ya,cfgsc);
-    p[1]:=Point(xa,ya);
+    p[1]:=Point(round(xa),round(ya));
     WindowXY(x2+xx1,y2+yy1,xa,ya,cfgsc);
-    p[2]:=Point(xa,ya);
+    p[2]:=Point(round(xa),round(ya));
     WindowXY(x2-xx2,y2+yy2,xa,ya,cfgsc);
-    p[3]:=Point(xa,ya);
+    p[3]:=Point(round(xa),round(ya));
     p[4]:=p[0];
     Fplot.PlotPolyline(p,Fplot.cfgplot.Color[18],moving);
   end;

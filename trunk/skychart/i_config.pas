@@ -589,6 +589,11 @@ procedure Tf_config.ShowDisplay;
 begin
  stardisplay.itemindex:=cplot.starplot;
  nebuladisplay.itemindex:=cplot.nebplot;
+ StarSizeBar.position:=round(cplot.partsize*10);
+ StarContrastBar.position:=cplot.contrast;
+ SaturationBar.position:=cplot.saturation;
+ starvisual.visible:= (cplot.starplot=2);
+ SizeContrastBar.position:=round(cplot.magsize*10);
 end;
 
 procedure Tf_config.SelectFontClick(Sender: TObject);
@@ -893,11 +898,33 @@ end;
 procedure Tf_config.stardisplayClick(Sender: TObject);
 begin
  cplot.starplot:=stardisplay.itemindex;
+ starvisual.visible:= (cplot.starplot=2);
 end;
 
 procedure Tf_config.nebuladisplayClick(Sender: TObject);
 begin
  cplot.nebplot:=nebuladisplay.itemindex;
+end;
+
+
+procedure Tf_config.StarSizeBarChange(Sender: TObject);
+begin
+cplot.partsize:= StarSizeBar.position/10;
+end;
+
+procedure Tf_config.StarContrastBarChange(Sender: TObject);
+begin
+cplot.contrast:= StarContrastBar.position;
+end;
+
+procedure Tf_config.SaturationBarChange(Sender: TObject);
+begin
+cplot.saturation:= SaturationBar.position;
+end;
+
+procedure Tf_config.SizeContrastBarChange(Sender: TObject);
+begin
+cplot.magsize:= SizeContrastBar.position/10;
 end;
                   
 procedure Tf_config.StringGrid3DrawCell(Sender: TObject; ACol,
