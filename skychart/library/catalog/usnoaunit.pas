@@ -227,8 +227,8 @@ fok:=false;
    lin.field:=trunc(ma/1e6); ma:=trunc(1e6*frac(ma/1e6));
    lin.mb:=trunc(ma/1e3)/10; ma:=trunc(1e3*frac(ma/1e3));
    lin.mr:=ma/10;
-   str((rec1+currec-1):8,buf);
-   lin.id:=CurZone+'.'+padzeros(buf,8);
+   str((rec1+currec):8,buf);
+   lin.id:=CurZone+'-'+padzeros(buf,8);
 end;
 
 procedure CloseUSNOA ;
