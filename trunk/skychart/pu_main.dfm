@@ -2986,11 +2986,14 @@ object f_main: Tf_main
       object FileOpenItem: TMenuItem
         Action = FileOpen1
       end
-      object FileCloseItem: TMenuItem
-        Action = FileClose1
-      end
       object FileSaveAsItem: TMenuItem
         Action = FileSaveAs1
+      end
+      object SaveImage1: TMenuItem
+        Action = SaveImage
+      end
+      object FileCloseItem: TMenuItem
+        Action = FileClose1
       end
       object N2: TMenuItem
         Caption = '-'

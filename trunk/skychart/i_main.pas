@@ -139,9 +139,28 @@ for i:=0 to MDIChildCount-1 do
      end;
 end;
 
+function Tf_main.GetUniqueName(cname:string; forcenumeric:boolean):string;
+var xname: array of string;
+    i,n : integer;
+    ok: boolean;
+begin
+setlength(xname,MDIChildCount);
+for i:=0 to MDIChildCount-1 do xname[i]:=MDIChildren[i].caption;
+if forcenumeric then n:=1
+                else n:=0;
+repeat
+  ok:=true;
+  if n=0 then result:=cname
+         else result:=cname+inttostr(n);
+  for i:=0 to MDIChildCount-1 do
+     if xname[i]=result then ok:=false;
+  inc(n);
+until ok;
+end;
+
 procedure Tf_main.FileNew1Execute(Sender: TObject);
 begin
-  CreateMDIChild('Chart_' + IntToStr(MDIChildCount + 1),true,true,def_cfgsc,def_cfgplot);
+  CreateMDIChild(GetUniqueName('Chart_',true),true,true,def_cfgsc,def_cfgplot);
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
@@ -153,7 +172,7 @@ OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
     cfgp:=def_cfgplot;
     cfgs:=def_cfgsc;
     ReadChartConfig(OpenDialog.FileName,true,cfgp,cfgs);
-    CreateMDIChild(stringreplace(extractfilename(OpenDialog.FileName),' ','_',[rfReplaceAll]),false,false,cfgs,cfgp);
+    CreateMDIChild(GetUniqueName(stringreplace(extractfilename(OpenDialog.FileName),' ','_',[rfReplaceAll]),false) ,false,false,cfgs,cfgp);
   end;
 end;
 
@@ -193,6 +212,8 @@ end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
+InitTrace;
+traceon:=true;
 cfgm.locked:=false;
 DecimalSeparator:='.';
 appdir:=getcurrentdir;
@@ -219,7 +240,7 @@ procedure Tf_main.FormDestroy(Sender: TObject);
 begin
 catalog.free;
 planet.free;
-StopServer(true);
+StopServer;
 end;
 
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -396,6 +417,7 @@ LPanels1.width:=PPanels1.ClientWidth;
 LPanels1.Caption:=txt;
 PPanels1.ClientHeight:=LPanels1.Height+8;
 SendInfo(origin,txt);
+if traceon then writetrace(txt);
 end;
 
 Procedure Tf_main.SetLPanel0(txt:string);
@@ -1135,7 +1157,7 @@ if ok then begin
       quicksearch.ItemIndex:=0;
    end
    else begin
-      ShowMessage('Not found'+' '+Num);
+      SetLPanel1(Num+'  Not found in any installed catalog index.');
    end;
 end;
 
@@ -1332,7 +1354,8 @@ end;
 
 Function Tf_main.NewChart(cname:string):string;
 begin
-if cname='' then cname:='Chart ' + IntToStr(MDIChildCount + 1);
+if cname='' then cname:='Chart_' + IntToStr(MDIChildCount + 1);
+cname:=GetUniqueName(cname,false);
 if CreateMDIChild(cname,true,true,def_cfgsc,def_cfgplot) then result:='OK '+cname
   else result:='Failed!';
 end;
@@ -1450,6 +1473,14 @@ f_main.serverinfo:='Listen on port: '+locport;
 f_main.SetLpanel1(f_main.serverinfo);
 end;
 
+procedure TTCPDaemon.GetActiveChart;
+begin
+  if f_main.ActiveMDIchild is Tf_chart then
+    active_chart:=f_main.ActiveMDIchild.caption
+  else
+    active_chart:=f_main.newchart('');
+end;
+
 procedure TTCPDaemon.Execute;
 var
   ClientSock:TSocket;
@@ -1488,15 +1519,13 @@ try
                  TCPThrd[n].keepalive:=keepalive;
                  i:=0; while (TCPThrd[n].sock=nil)and(i<100) do begin sleep(100); inc(i); end;
                  if not TCPThrd[n].terminated then begin
-                      TCPThrd[n].default_chart:='CLIENT_'+inttostr(n);
-                      TCPThrd[n].cmd.clear;
-                      TCPThrd[n].cmd.add('NEWCHART');
-                      TCPThrd[n].cmd.add(TCPThrd[n].default_chart);
-                      for i:=TCPThrd[n].cmd.count to MaxCmdArg do TCPThrd[n].cmd.add('');
-//                      TCPThrd[n].synchronize(TCPThrd[n].executecmd);
-                      synchronize(TCPThrd[n].executecmd);
-                      TCPThrd[n].senddata(TCPThrd[n].cmdresult);
-                      TCPThrd[n].active_chart:=TCPThrd[n].default_chart;
+                      Synchronize(GetActiveChart);
+                      if active_chart='Failed!' then
+                        TCPThrd[n].senddata('Failed to activate a chart.')
+                      else begin
+                        TCPThrd[n].active_chart:=active_chart;
+                        TCPThrd[n].senddata('OK id='+inttostr(n)+' chart='+active_chart);
+                      end;
                  end;
               end else
                  with TTCPThrd.create(ClientSock) do begin
@@ -1560,13 +1589,6 @@ begin
       end;
   finally
     terminate;
-    if not abort then begin
-      cmd.clear;
-      cmd.add('CLOSECHART');
-      cmd.add(default_chart);
-      for i:=cmd.count to MaxCmdArg do cmd.add('');
-      Synchronize(ExecuteCmd);
-    end;
     sock.SendString('Bye!'+crlf);
     sock.CloseSocket;
     sock.Free;
@@ -1604,24 +1626,23 @@ begin
  end;
 end;
 
-procedure Tf_main.StopServer(abort:boolean);
+procedure Tf_main.StopServer;
 var i :integer;
     d :double;
 begin
 if TCPDaemon=nil then exit;
 try
+screen.cursor:=crHourglass;
 for i:=1 to Maxwindow do
- if (TCPDaemon.TCPThrd[i]<>nil) then begin
-    TCPDaemon.TCPThrd[i].abort:=abort;
+ if (TCPDaemon.TCPThrd[i]<>nil) then
     TCPDaemon.TCPThrd[i].terminate;
- end;
-d:=now+2E-5; // 1.7 seconde delay to close the tcp/ip thread
-while now<d do application.processmessages;
-//TCPDaemon.sock.CloseSocket;
+application.processmessages;
 TCPDaemon.terminate;
+// 1.5 seconde delay to close the thread
+d:=now+1.7E-5;
+while now<d do application.processmessages;
 finally
-//d:=now+2E-5; // 1.7 seconde delay to close the tcp/ip thread
-//while now<d do application.processmessages;
+ screen.cursor:=crDefault;
 end;
 end;
 

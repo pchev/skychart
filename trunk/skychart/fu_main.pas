@@ -40,7 +40,7 @@ type
     cmdresult : string;
   public
     keepalive,abort : boolean;
-    default_chart, active_chart : string;
+    active_chart : string;
     Constructor Create (hsock:tSocket);
     procedure Execute; override;
     procedure SendData(str:string);
@@ -50,6 +50,7 @@ type
   TTCPDaemon = class(TThread)
   private
     Sock:TTCPBlockSocket;
+    active_chart : string;
     procedure ShowError;
   public
     keepalive : boolean;
@@ -57,6 +58,7 @@ type
     Constructor Create;
     procedure Execute; override;
     procedure ShowSocket;
+    procedure GetACtiveChart;
   end;
 
 type
@@ -248,7 +250,8 @@ type
     procedure SendInfo(origin,str:string);
     function GenericSearch(cname,Num:string):boolean;
     procedure StartServer;
-    procedure StopServer(abort:boolean);
+    procedure StopServer;
+    function GetUniqueName(cname:string; forcenumeric:boolean):string;
   end;
 
 var

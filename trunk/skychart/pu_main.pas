@@ -39,7 +39,7 @@ type
     cmdresult : string;
   public
     keepalive,abort : boolean;
-    default_chart, active_chart : string;
+    active_chart : string;
     Constructor Create (hsock:tSocket);
     procedure Execute; override;
     procedure SendData(str:string);
@@ -49,14 +49,15 @@ type
   TTCPDaemon = class(TThread)
   private
     Sock:TTCPBlockSocket;
+    active_chart : string;
     procedure ShowError;
-    procedure SynShowSocket;
   public
     keepalive : boolean;
     TCPThrd: array [1..Maxwindow] of TTCPThrd ;
     Constructor Create;
     procedure Execute; override;
     procedure ShowSocket;
+    procedure GetACtiveChart;
   end;
 
 type
@@ -173,6 +174,7 @@ type
     ToolButton25: TToolButton;
     ToolButton26: TToolButton;
     SaveImage: TAction;
+    SaveImage1: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -249,7 +251,8 @@ type
     procedure SendInfo(origin,str:string);
     function GenericSearch(cname,Num:string):boolean;
     procedure StartServer;
-    procedure StopServer(abort:boolean);
+    procedure StopServer;
+    function GetUniqueName(cname:string; forcenumeric:boolean):string;
   end;
 
 var
