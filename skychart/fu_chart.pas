@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses fu_detail, cu_skychart, u_constant, u_util, u_projection,
+uses fu_detail, cu_skychart, u_constant, u_util, u_projection, math,
   SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs, Qt,
   QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList;
 
@@ -106,6 +106,8 @@ type
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure switchstarExecute(Sender: TObject);
     procedure switchbackgroundExecute(Sender: TObject);
+    procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     movefactor,zoomfactor: double;
@@ -117,6 +119,7 @@ type
     maximize:boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo : integer;
+    zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
     procedure PrintChart(Sender: TObject);
@@ -144,6 +147,7 @@ type
     function cmd_SaveImage(format,fn,quality:string):string;
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=75):boolean;
+    Procedure ZoomBox(action,x,y:integer);
   end;
 
 

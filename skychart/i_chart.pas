@@ -89,6 +89,7 @@ begin
 try
 if f_main.cfgm.locked then exit;
  screen.cursor:=crHourGlass;
+ zoomstep:=0;
  identlabel.visible:=false;
  Image1.width:=clientwidth;
  Image1.height:=clientheight;
@@ -113,6 +114,7 @@ procedure Tf_chart.UndoExecute(Sender: TObject);
 var i,j : integer;
 begin
 if f_main.cfgm.locked then exit;
+zoomstep:=0;
 i:=curundo-1;
 j:=lastundo+1;
 if i<1 then i:=maxundo;
@@ -129,6 +131,7 @@ procedure Tf_chart.RedoExecute(Sender: TObject);
 var i,j : integer;
 begin
 if f_main.cfgm.locked then exit;
+zoomstep:=0;
 i:=curundo+1;
 j:=lastundo+1;
 if i>maxundo then i:=1;
@@ -174,6 +177,7 @@ var savecolor: Starcolarray;
     savesplot,savenplot,savepplot,savebgcolor: integer;
     saveskycolor: boolean;
 begin
+ zoomstep:=0;
  // save current state
  savecolor:=sc.plot.cfgplot.color;
  savesplot:=sc.plot.cfgplot.starplot;
@@ -227,6 +231,7 @@ procedure Tf_chart.FormShow(Sender: TObject);
 begin
 { update the chart after it is show a first time (part of the wsMaximized bug bypass) }
 RefreshTimer.enabled:=true;
+zoomstep:=0;
 end;
 
 procedure Tf_chart.FormActivate(Sender: TObject);
@@ -398,27 +403,6 @@ if wheeldelta>0 then sc.Zoom(1.25)
 Refresh;
 end;
 
-procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
-  Y: Integer);
-var ra,dec,a,h:double;
-    txt:string;
-begin
-if f_main.cfgm.locked then exit;
-{show the coordinates}
-sc.GetCoord(x,y,ra,dec,a,h);
-case sc.cfgsc.projpole of
-AltAz: begin
-       txt:='Az:'+deptostr(rad2deg*a)+' '+deptostr(rad2deg*h);
-       end;
-Equat: begin
-       ra:=rmod(ra+pi2,pi2);
-       txt:='Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
-       end;
-end;
-f_main.SetLpanel0(txt);
-end;
-
-
 Procedure Tf_chart.ShowIdentLabel;
 var x,y : integer;
 begin
@@ -453,7 +437,150 @@ end;
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-if button=mbLeft then IdentXY(x,y);
+case Button of
+mbLeft : begin
+           if zoomstep>0 then
+              ZoomBox(3,X,Y)
+           else
+              IdentXY(x,y);
+         end;
+ end;
+end;
+
+
+procedure Tf_chart.Image1MouseDown(Sender: TObject; Button: TMouseButton;
+
+  Shift: TShiftState; X, Y: Integer);
+begin
+case Button of
+mbLeft : begin
+           ZoomBox(1,X,Y);
+         end;
+ end;
+end;
+
+
+procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+var ra,dec,a,h:double;
+    txt:string;
+begin
+if f_main.cfgm.locked then exit;
+if shift = [ssLeft] then begin
+   ZoomBox(2,X,Y);
+end else begin
+   {show the coordinates}
+   sc.GetCoord(x,y,ra,dec,a,h);
+   case sc.cfgsc.projpole of
+   AltAz: begin
+          txt:='Az:'+deptostr(rad2deg*a)+' '+deptostr(rad2deg*h);
+          end;
+   Equat: begin
+          ra:=rmod(ra+pi2,pi2);
+          txt:='Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+          end;
+   end;
+   f_main.SetLpanel0(txt);
+end;
+end;
+
+Procedure Tf_chart.ZoomBox(action,x,y:integer);
+var
+   x1,x2,y1,y2,dx,dy,xc,yc,lc : integer;
+begin
+case action of
+1 : begin    // mouse down
+   ZoomMove:=0;
+   if Zoomstep=0 then begin
+     // begin zoom
+     XZoom1:=X;
+     YZoom1:=Y;
+     Zoomstep:=1;
+   end else begin
+     // move box or confirm click
+     DXzoom:=Xzoom1-X;
+     DYzoom:=Yzoom1-Y;
+     Zoomstep:=4;
+   end;
+   end;
+2 : begin   // mouse move
+  if Zoomstep>=3 then  begin
+     // move box
+     inc(ZoomMove);
+     if ZoomMove>2 then zoomstep:=3;
+     Image1.picture.bitmap.Canvas.Pen.Width := 1;
+     Image1.picture.bitmap.Canvas.Brush.Color:=clWhite;
+     Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+     dx:=abs(XzoomD2-XzoomD1);
+     dy:=abs(YzoomD2-YzoomD1);
+     XZoom1:=x+DXZoom;
+     YZoom1:=y+DYZoom;
+     Xzoom2:=Xzoom1+dx;
+     YZoom2:=Yzoom1+dy;
+     x1:=round(minvalue([Xzoom1,Xzoom2]));
+     x2:=round(maxvalue([Xzoom1,Xzoom2]));
+     y1:=round(minvalue([Yzoom1,Yzoom2]));
+     y2:=round(maxvalue([Yzoom1,Yzoom2]));
+     XzoomD1:=x1;
+     XzoomD2:=x2;
+     YzoomD1:=y1;
+     YzoomD2:=y2;
+     Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+     f_main.SetLPanel0(demtostr(rad2deg*abs(dx/sc.cfgsc.Bxglb)));
+  end else begin
+     // draw zoom box
+     inc(ZoomMove);
+     if ZoomMove<2 then exit;
+     Image1.picture.bitmap.Canvas.Pen.Width := 1;
+     Image1.picture.bitmap.Canvas.Brush.Color:=clWhite;
+     if Zoomstep>1 then Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+     Xzoom2:=x;
+     Yzoom2:=Yzoom1+round(sgn(y-Yzoom1)*abs(Xzoom2-Xzoom1)/sc.cfgsc.windowratio);
+     x1:=round(minvalue([Xzoom1,Xzoom2]));
+     x2:=round(maxvalue([Xzoom1,Xzoom2]));
+     y1:=round(minvalue([Yzoom1,Yzoom2]));
+     y2:=round(maxvalue([Yzoom1,Yzoom2]));
+     XzoomD1:=x1;
+     XzoomD2:=x2;
+     YzoomD1:=y1;
+     YzoomD2:=y2;
+     Zoomstep:=2;
+     Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+     f_main.SetLPanel0(demtostr(rad2deg*abs((XZoomD2-XZoomD1)/sc.cfgsc.Bxglb)));
+     end
+    end;
+3 : begin   // mouse up
+    if zoomstep>=4 then begin
+     // final confirmation
+     Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoom1,YZoom1,XZoom2,YZoom2));
+     Zoomstep:=0;
+     //SkipMouseUp:=true;
+     x1:=trunc(Minvalue([XZoom1,XZoom2])); x2:=trunc(Maxvalue([XZoom1,XZoom2]));
+     y1:=trunc(Minvalue([YZoom1,YZoom2])); y2:=trunc(Maxvalue([YZoom1,YZoom2]));
+     if (X>=X1) and (X<=X2) and (Y>=Y1) and (Y<=Y2)
+        and (X1<>X2 ) and (Y1<>Y2) and (abs(x2-x1)>5) and (abs(y2-y1)>5) then begin
+        // do the zoom
+        lc := abs(X2-X1);
+        xc := round(X1+lc/2);
+        yc := round(Y1+(Y2-Y1)/2);
+        sc.setfov(abs(lc/sc.cfgsc.BxGlb));
+        sc.MovetoXY(xc,yc);
+        Refresh;
+     end
+     else // zoom aborted, nothing to do.
+    end else if zoomstep>=2 then begin
+        zoomstep:=4  // box size fixed, wait confirmation or move
+    end else begin
+        // zoom aborted or not initialized
+        // box cleanup if necessary
+        if Zoomstep>1 then Image1.picture.bitmap.Canvas.DrawFocusRect(Rect(XZoom1,YZoom1,XZoom2,YZoom2));
+        // zoom reset
+        Zoomstep:=0;
+        // call other mouseup function (identification)
+        Image1MouseUp(Self,mbLeft,[],X,Y);
+    end;
+   end;
+end;
 end;
 
 procedure Tf_chart.identlabelClick(Sender: TObject);
