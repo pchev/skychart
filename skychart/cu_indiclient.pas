@@ -254,7 +254,8 @@ end;
 procedure TIndiClient.DisplayMessage(msg:string);
 begin
 FErrorDesc:=msg;
-if FErrorDesc='OK' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
+//if FErrorDesc='OK' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
+if FErrorDesc='' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
 Synchronize(DisplayMessageSyn);
 end;
 
