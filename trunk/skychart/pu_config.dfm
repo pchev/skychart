@@ -76,7 +76,7 @@ object f_config: Tf_config
     Top = 16
     Width = 474
     Height = 441
-    ActivePage = p_labels
+    ActivePage = p_filter
     TabOrder = 1
     OnChange = PageControl1Change
     object p_time: TTabSheet
@@ -1404,7 +1404,7 @@ object f_config: Tf_config
           Width = 233
           Height = 21
           AutoComplete = False
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 0
           Text = '...'
           OnChange = citylistChange
@@ -1426,7 +1426,7 @@ object f_config: Tf_config
           Height = 21
           AutoComplete = False
           Style = csDropDownList
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 2
           OnClick = countrylistClick
         end
@@ -2554,6 +2554,7 @@ object f_config: Tf_config
               Caption = 'Limiting magnitude :'
             end
             object fsmag0: TFloatEdit
+              Tag = 1
               Left = 8
               Top = 71
               Width = 40
@@ -2567,7 +2568,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag1: TFloatEdit
-              Tag = 1
+              Tag = 2
               Left = 49
               Top = 71
               Width = 40
@@ -2581,7 +2582,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag2: TFloatEdit
-              Tag = 2
+              Tag = 3
               Left = 91
               Top = 71
               Width = 40
@@ -2595,7 +2596,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag3: TFloatEdit
-              Tag = 3
+              Tag = 4
               Left = 133
               Top = 71
               Width = 40
@@ -2609,7 +2610,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag4: TFloatEdit
-              Tag = 4
+              Tag = 5
               Left = 175
               Top = 71
               Width = 40
@@ -2623,7 +2624,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag5: TFloatEdit
-              Tag = 5
+              Tag = 6
               Left = 216
               Top = 71
               Width = 40
@@ -2637,7 +2638,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag6: TFloatEdit
-              Tag = 6
+              Tag = 7
               Left = 258
               Top = 71
               Width = 40
@@ -2651,7 +2652,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag7: TFloatEdit
-              Tag = 7
+              Tag = 8
               Left = 300
               Top = 71
               Width = 40
@@ -2665,7 +2666,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag8: TFloatEdit
-              Tag = 8
+              Tag = 9
               Left = 342
               Top = 71
               Width = 40
@@ -2679,7 +2680,7 @@ object f_config: Tf_config
               MaxValue = 99
             end
             object fsmag9: TFloatEdit
-              Tag = 9
+              Tag = 10
               Left = 384
               Top = 71
               Width = 40
@@ -2861,6 +2862,7 @@ object f_config: Tf_config
             Caption = 'Field of vision number :'
           end
           object fmag0: TFloatEdit
+            Tag = 1
             Left = 8
             Top = 66
             Width = 40
@@ -2874,7 +2876,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fmag1: TFloatEdit
-            Tag = 1
+            Tag = 2
             Left = 49
             Top = 66
             Width = 40
@@ -2888,7 +2890,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fmag2: TFloatEdit
-            Tag = 2
+            Tag = 3
             Left = 91
             Top = 66
             Width = 40
@@ -2902,7 +2904,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fmag3: TFloatEdit
-            Tag = 3
+            Tag = 4
             Left = 133
             Top = 66
             Width = 40
@@ -2916,7 +2918,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fmag4: TFloatEdit
-            Tag = 4
+            Tag = 5
             Left = 175
             Top = 66
             Width = 40
@@ -2930,7 +2932,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fmag5: TFloatEdit
-            Tag = 5
+            Tag = 6
             Left = 216
             Top = 66
             Width = 40
@@ -2944,7 +2946,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fmag6: TFloatEdit
-            Tag = 6
+            Tag = 7
             Left = 258
             Top = 66
             Width = 40
@@ -2958,6 +2960,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fdim0: TFloatEdit
+            Tag = 1
             Left = 8
             Top = 120
             Width = 40
@@ -2970,7 +2973,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fdim1: TFloatEdit
-            Tag = 1
+            Tag = 2
             Left = 49
             Top = 120
             Width = 40
@@ -2983,7 +2986,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fdim2: TFloatEdit
-            Tag = 2
+            Tag = 3
             Left = 91
             Top = 120
             Width = 40
@@ -2996,7 +2999,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fdim3: TFloatEdit
-            Tag = 3
+            Tag = 4
             Left = 133
             Top = 120
             Width = 40
@@ -3009,7 +3012,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fdim4: TFloatEdit
-            Tag = 4
+            Tag = 5
             Left = 175
             Top = 120
             Width = 40
@@ -3022,7 +3025,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fdim5: TFloatEdit
-            Tag = 5
+            Tag = 6
             Left = 216
             Top = 120
             Width = 40
@@ -3035,7 +3038,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fdim6: TFloatEdit
-            Tag = 6
+            Tag = 7
             Left = 258
             Top = 120
             Width = 40
@@ -3048,7 +3051,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fmag7: TFloatEdit
-            Tag = 7
+            Tag = 8
             Left = 300
             Top = 66
             Width = 40
@@ -3062,7 +3065,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fmag8: TFloatEdit
-            Tag = 8
+            Tag = 9
             Left = 342
             Top = 66
             Width = 40
@@ -3076,7 +3079,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fmag9: TFloatEdit
-            Tag = 9
+            Tag = 10
             Left = 384
             Top = 66
             Width = 40
@@ -3090,7 +3093,7 @@ object f_config: Tf_config
             MaxValue = 99
           end
           object fdim7: TFloatEdit
-            Tag = 7
+            Tag = 8
             Left = 300
             Top = 120
             Width = 40
@@ -3103,7 +3106,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fdim8: TFloatEdit
-            Tag = 8
+            Tag = 9
             Left = 342
             Top = 120
             Width = 40
@@ -3116,7 +3119,7 @@ object f_config: Tf_config
             MaxValue = 1000
           end
           object fdim9: TFloatEdit
-            Tag = 9
+            Tag = 10
             Left = 384
             Top = 120
             Width = 40
@@ -6694,7 +6697,7 @@ object f_config: Tf_config
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
             end
             object DelCom: TButton
@@ -7276,7 +7279,7 @@ object f_config: Tf_config
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
             end
             object delast: TButton

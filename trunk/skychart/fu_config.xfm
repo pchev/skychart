@@ -1,5 +1,5 @@
 object f_config: Tf_config
-  Left = 211
+  Left = 217
   Top = 345
   Width = 639
   Height = 480
@@ -2505,6 +2505,7 @@ object f_config: Tf_config
               Caption = 'Limiting magnitude :'
             end
             object fsmag0: TFloatEdit
+              Tag = 1
               Left = 8
               Top = 71
               Width = 40
@@ -2518,7 +2519,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag1: TFloatEdit
-              Tag = 1
+              Tag = 2
               Left = 49
               Top = 71
               Width = 40
@@ -2532,7 +2533,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag2: TFloatEdit
-              Tag = 2
+              Tag = 3
               Left = 91
               Top = 71
               Width = 40
@@ -2546,7 +2547,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag3: TFloatEdit
-              Tag = 3
+              Tag = 4
               Left = 133
               Top = 71
               Width = 40
@@ -2560,7 +2561,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag4: TFloatEdit
-              Tag = 4
+              Tag = 5
               Left = 175
               Top = 71
               Width = 40
@@ -2574,7 +2575,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag5: TFloatEdit
-              Tag = 5
+              Tag = 6
               Left = 216
               Top = 71
               Width = 40
@@ -2588,7 +2589,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag6: TFloatEdit
-              Tag = 6
+              Tag = 7
               Left = 258
               Top = 71
               Width = 40
@@ -2602,7 +2603,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag7: TFloatEdit
-              Tag = 7
+              Tag = 8
               Left = 300
               Top = 71
               Width = 40
@@ -2616,7 +2617,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag8: TFloatEdit
-              Tag = 8
+              Tag = 9
               Left = 342
               Top = 71
               Width = 40
@@ -2630,7 +2631,7 @@ object f_config: Tf_config
               MaxValue = 99.000000000000000000
             end
             object fsmag9: TFloatEdit
-              Tag = 9
+              Tag = 10
               Left = 384
               Top = 71
               Width = 40
@@ -2805,6 +2806,7 @@ object f_config: Tf_config
             Caption = 'Field of vision number :'
           end
           object fmag0: TFloatEdit
+            Tag = 1
             Left = 8
             Top = 66
             Width = 40
@@ -2818,7 +2820,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fmag1: TFloatEdit
-            Tag = 1
+            Tag = 2
             Left = 49
             Top = 66
             Width = 40
@@ -2832,7 +2834,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fmag2: TFloatEdit
-            Tag = 2
+            Tag = 3
             Left = 91
             Top = 66
             Width = 40
@@ -2846,7 +2848,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fmag3: TFloatEdit
-            Tag = 3
+            Tag = 4
             Left = 133
             Top = 66
             Width = 40
@@ -2860,7 +2862,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fmag4: TFloatEdit
-            Tag = 4
+            Tag = 5
             Left = 175
             Top = 66
             Width = 40
@@ -2874,7 +2876,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fmag5: TFloatEdit
-            Tag = 5
+            Tag = 6
             Left = 216
             Top = 66
             Width = 40
@@ -2888,7 +2890,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fmag6: TFloatEdit
-            Tag = 6
+            Tag = 7
             Left = 258
             Top = 66
             Width = 40
@@ -2902,6 +2904,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fdim0: TFloatEdit
+            Tag = 1
             Left = 8
             Top = 120
             Width = 40
@@ -2914,7 +2917,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fdim1: TFloatEdit
-            Tag = 1
+            Tag = 2
             Left = 49
             Top = 120
             Width = 40
@@ -2927,7 +2930,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fdim2: TFloatEdit
-            Tag = 2
+            Tag = 3
             Left = 91
             Top = 120
             Width = 40
@@ -2940,7 +2943,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fdim3: TFloatEdit
-            Tag = 3
+            Tag = 4
             Left = 133
             Top = 120
             Width = 40
@@ -2953,7 +2956,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fdim4: TFloatEdit
-            Tag = 4
+            Tag = 5
             Left = 175
             Top = 120
             Width = 40
@@ -2966,7 +2969,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fdim5: TFloatEdit
-            Tag = 5
+            Tag = 6
             Left = 216
             Top = 120
             Width = 40
@@ -2979,7 +2982,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fdim6: TFloatEdit
-            Tag = 6
+            Tag = 7
             Left = 258
             Top = 120
             Width = 40
@@ -2992,7 +2995,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fmag7: TFloatEdit
-            Tag = 7
+            Tag = 8
             Left = 300
             Top = 66
             Width = 40
@@ -3006,7 +3009,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fmag8: TFloatEdit
-            Tag = 8
+            Tag = 9
             Left = 342
             Top = 66
             Width = 40
@@ -3020,7 +3023,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fmag9: TFloatEdit
-            Tag = 9
+            Tag = 10
             Left = 384
             Top = 66
             Width = 40
@@ -3034,7 +3037,7 @@ object f_config: Tf_config
             MaxValue = 99.000000000000000000
           end
           object fdim7: TFloatEdit
-            Tag = 7
+            Tag = 8
             Left = 300
             Top = 120
             Width = 40
@@ -3047,7 +3050,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fdim8: TFloatEdit
-            Tag = 8
+            Tag = 9
             Left = 342
             Top = 120
             Width = 40
@@ -3060,7 +3063,7 @@ object f_config: Tf_config
             MaxValue = 1000.000000000000000000
           end
           object fdim9: TFloatEdit
-            Tag = 9
+            Tag = 10
             Left = 384
             Top = 120
             Width = 40

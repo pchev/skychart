@@ -367,7 +367,7 @@ type
                 end;
      conf_chart = record
                 onprinter : boolean;
-                width,height,drawpen,hw,hh : integer;
+                width,height,drawpen,fontscale,hw,hh : integer;
                 min_ma : double;
                 end;
      conf_main = record
