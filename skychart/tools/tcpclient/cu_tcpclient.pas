@@ -38,9 +38,6 @@ type
   private
     FSock: TTCPBlockSocket;
     FSendBuffer,FResultBuffer: string;
-    Fcmdtimeout:double;
-    procedure SetCmdTimeout(value:double);
-    function GetCmdTimeout:double;
   public
     constructor Create;
     destructor Destroy; override;
@@ -52,7 +49,6 @@ type
     property Sock: TTCPBlockSocket read FSock;
     property SendBuffer: string read FSendBuffer write FSendBuffer;
     property ResultBuffer: string read FResultBuffer write FResultBuffer;
-    property CmdTimeout: double read GetCmdTimeout write SetCmdTimeout;
   end;
 
   TDataEvent = procedure(Sender : TObject; const data : string) of object;
@@ -62,6 +58,8 @@ type
     FTargetHost,FTargetPort,FErrorDesc,FRecvData,FClientId,FClientName : string;
     FTimeout : integer;
     FCmdTimeout : double;
+    procedure SetCmdTimeout(value:double);
+    function GetCmdTimeout:double;
     procedure DisplayMessagesyn;
     procedure ProcessDataSyn;
     procedure DisplayMessage(msg:string);
@@ -78,7 +76,7 @@ type
     property TargetHost : string read FTargetHost write FTargetHost;
     property TargetPort : string read FTargetPort write FTargetPort;
     property Timeout : integer read FTimeout write FTimeout;
-    property CmdTimeout : double read FCmdTimeout write FCmdTimeout;
+    property CmdTimeout: double read GetCmdTimeout write SetCmdTimeout;
     property ErrorDesc : string read FErrorDesc;
     property RecvData : string read FRecvData;
     property ClientId : string read FClientId;
@@ -88,6 +86,7 @@ type
 const msgTimeout='Timeout!';
       msgOK='OK';
       msgFailed='Failed!';
+      msgBye='Bye!';
 
 implementation
 
@@ -129,12 +128,12 @@ begin
   Result := FSock.GetErrorDesc(FSock.LastError);
 end;
 
-procedure TTCPclient.SetCmdTimeout(value:double);
+procedure TClientThrd.SetCmdTimeout(value:double);
 begin
  FCmdTimeout := value / 86400;  // store timeout value in days
 end;
 
-function TTCPclient.GetCmdTimeout:double;
+function TClientThrd.GetCmdTimeout:double;
 begin
  result := FCmdTimeout * 86400;
 end;
@@ -150,17 +149,18 @@ procedure TClientThrd.Execute;
 var buf:string;
     dateto : double;
     i : integer;
+    ending : boolean;
 begin
+ending:=false;
 tcpclient:=TTCPClient.Create;
 try
  tcpclient.TargetHost:=FTargetHost;
  tcpclient.TargetPort:=FTargetPort;
  tcpclient.Timeout := FTimeout;
- tcpclient.cmdtimeout := FCmdTimeout;
  // connect
  if tcpclient.Connect then begin
     // wait connect message
-    dateto:=now+tcpclient.cmdtimeout;
+    dateto:=now+Fcmdtimeout;
     repeat
       buf:=tcpclient.recvstring;
       if (buf='')or(buf='.') then continue;  // keepalive
@@ -190,15 +190,21 @@ try
      if terminated then break;
      // handle unattended messages (mouseclick...)
      buf:=tcpclient.recvstring;
+     if ending and (tcpclient.FSock.LastError<>0) then break; // finish to read data before to exit
      if (buf<>'')and(buf<>'.') then ProcessData(buf);
+     if buf=msgBye then ending:=true;
      // handle synchronous command and response
      if tcpclient.sendbuffer<>'' then begin
         tcpclient.resultbuffer:='';
         // send command
         tcpclient.Sock.SendString(tcpclient.sendbuffer+crlf);
+        if tcpclient.FSock.LastError<>0 then begin
+           terminate;
+           break;
+        end;
         tcpclient.sendbuffer:='';
         // wait response
-        dateto:=now+tcpclient.cmdtimeout;
+        dateto:=now+Fcmdtimeout;
         repeat
           buf:=tcpclient.recvstring;
           if (buf='')or(buf='.') then continue;  // keepalive
@@ -247,7 +253,7 @@ begin
  if Value>'' then begin
    tcpclient.sendbuffer:=Value;
    // set a double timeout just in case Execute is no more running.
-   dateto:=now+2*tcpclient.cmdtimeout;
+   dateto:=now+2*Fcmdtimeout;
    while (tcpclient.resultbuffer='')and(now<dateto) do application.ProcessMessages;
  end;
  if tcpclient.resultbuffer='' then tcpclient.resultbuffer:=msgTimeout;

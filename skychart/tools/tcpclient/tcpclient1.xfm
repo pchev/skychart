@@ -1,5 +1,5 @@
 object Form1: TForm1
-  Left = 66
+  Left = 69
   Top = 346
   Width = 343
   Height = 389
@@ -100,11 +100,13 @@ object Form1: TForm1
     Height = 21
     ItemHeight = 15
     Items.Strings = (
-      'newchart tcpcli1'
-      'selectchart tcpcli1'
-      'closechart tcpcli1'
+      'newchart tcpclient'
+      'selectchart tcpclient'
+      'closechart tcpclient'
       'listchart'
       'search m51'
+      'getmsgbox'
+      'getcoordbox'
       'zoom+'
       'zoom-'
       'fov 15d0m0s'

@@ -44,8 +44,8 @@ ExeDescription=
 DynamicLoader=/lib/ld-linux.so.2
 
 [Directories]
-OutputDir=
-UnitOutputDir=
+OutputDir=/home/cdc
+UnitOutputDir=/home/cdc/dev/dcu
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
@@ -60,4 +60,12 @@ HostApplication=
 Launcher=/usr/X11R6/bin/xterm -T KylixDebuggerOutput -e bash -i -c %debuggee%
 UseLauncher=0
 DebugCWD=
+
+[HistoryLists\hlUnitOutputDirectory]
+Count=1
+Item0=/home/cdc/dev/dcu
+
+[HistoryLists\hlOutputDirectorry]
+Count=1
+Item0=/home/cdc
 
