@@ -1,7 +1,7 @@
 object f_main: Tf_main
   Tag = 1
-  Left = 228
-  Top = 216
+  Left = 212
+  Top = 225
   Width = 800
   Height = 600
   HorzScrollBar.Range = 54

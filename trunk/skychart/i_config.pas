@@ -134,7 +134,7 @@ ShowServer;
 ShowObservatory;
 ShowHorizon;
 ShowObjList;
-ShowDB;
+ShowSYS;
 ShowAsteroid;
 ShowComet;
 ShowCircle;
@@ -2031,13 +2031,46 @@ begin
 cshr.listdbl:=listdbl.checked;
 end;
 
-procedure Tf_config.ShowDB;
+procedure Tf_config.ShowSYS;
 begin
 dbname.Text:=cmain.db;
 dbhost.Text:=cmain.dbhost;
 dbport.value:=cmain.dbport;
 dbuser.Text:=cmain.dbuser;
 dbpass.Text:=cmain.dbpass;
+prgdir.text:=appdir;
+persdir.text:=privatedir;
+end;
+
+
+procedure Tf_config.BitBtn1Click(Sender: TObject);
+begin
+{$ifdef mswindows}
+  FolderDialog1.Directory:=prgdir.Text;
+  if FolderDialog1.execute then
+     prgdir.Text:=FolderDialog1.Directory;
+{$endif}
+{$ifdef linux }
+  f_directory.DirectoryTreeView1.Directory:=prgdir.Text;
+  f_directory.showmodal;
+  if f_directory.modalresult=mrOK then
+     prgdir.Text:=f_directory.DirectoryTreeView1.Directory;
+{$endif}
+end;
+
+procedure Tf_config.BitBtn2Click(Sender: TObject);
+begin
+{$ifdef mswindows}
+  FolderDialog1.Directory:=persdir.Text;
+  if FolderDialog1.execute then
+     persdir.Text:=FolderDialog1.Directory;
+{$endif}
+{$ifdef linux }
+  f_directory.DirectoryTreeView1.Directory:=persdir.Text;
+  f_directory.showmodal;
+  if f_directory.modalresult=mrOK then
+     persdir.Text:=f_directory.DirectoryTreeView1.Directory;
+{$endif}
 end;
 
 procedure Tf_config.dbnameChange(Sender: TObject);
@@ -2134,13 +2167,15 @@ db.Free;
 end;
 if ok then begin
   // load sample asteroid data
-  mpcfile.text:=slash(appdir)+'data'+Pathdelim+'planet'+Pathdelim+'MPCsample.dat';
+  mpcfile.text:=slash(sampledir)+'MPCsample.dat';
   autoprocess:=true;
   LoadMPCClick(Sender);
   autoprocess:=false;
+  mpcfile.text:='';
   // load sample comet data
-  comfile.text:=slash(appdir)+'data'+Pathdelim+'planet'+Pathdelim+'Cometsample.dat';
+  comfile.text:=slash(sampledir)+'Cometsample.dat';
   LoadComClick(Sender);
+  comfile.text:='';
 end;
 chkdbClick(Sender);
 end;
@@ -2248,7 +2283,7 @@ var f : string;
 begin
 f:=mpcFile.Text;
 opendialog1.InitialDir:=extractfilepath(f);
-if opendialog1.InitialDir='' then opendialog1.InitialDir:=cmain.planetdir;
+if opendialog1.InitialDir='' then opendialog1.InitialDir:=slash(privatedir)+slash('MPC');
 opendialog1.filename:=extractfilename(f);
 opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
 opendialog1.DefaultExt:='';
@@ -2646,7 +2681,7 @@ var f : string;
 begin
 f:=comFile.Text;
 opendialog1.InitialDir:=extractfilepath(f);
-if opendialog1.InitialDir='' then opendialog1.InitialDir:=cmain.planetdir;
+if opendialog1.InitialDir='' then opendialog1.InitialDir:=slash(privatedir)+slash('MPC');
 opendialog1.filename:=extractfilename(f);
 opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
 opendialog1.DefaultExt:='';

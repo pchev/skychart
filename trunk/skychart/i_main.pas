@@ -236,6 +236,7 @@ procedure Tf_main.FileOpen1Execute(Sender: TObject);
 var cfgs :conf_skychart;
     cfgp : conf_plot;
 begin
+if Opendialog.InitialDir='' then Opendialog.InitialDir:=privatedir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
   if OpenDialog.Execute then begin
     cfgp:=def_cfgplot;
@@ -248,6 +249,7 @@ end;
 procedure Tf_main.FileSaveAs1Execute(Sender: TObject);
 begin
 Savedialog.DefaultExt:='cdc3';
+if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
 savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 if ActiveMDIchild is Tf_chart then
   if SaveDialog.Execute then SaveChartConfig(SaveDialog.Filename);
@@ -257,6 +259,7 @@ procedure Tf_main.SaveImageExecute(Sender: TObject);
 var ext,format:string;
 begin
 Savedialog.DefaultExt:='png';
+if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
 savedialog.Filter:='PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
 if ActiveMDIchild is Tf_chart then
  with ActiveMDIchild as Tf_chart do
@@ -279,12 +282,45 @@ begin
   Close;
 end;
 
+Procedure Tf_main.GetAppDir(filename:string);
+var inif: TMemIniFile;
+begin
+appdir:=extractfilepath(paramstr(0));
+privatedir:=appdir;
+{$ifdef linux}
+appdir:=expanddirectoryname(appdir);
+privatedir:=expanddirectoryname(DefaultPrivateDir);
+{$endif}
+inif:=TMeminifile.create(filename);
+try
+appdir:=inif.ReadString('main','AppDir',appdir);
+privatedir:=inif.ReadString('main','PrivateDir',privatedir);
+finally
+ inif.Free;
+end;
+if not directoryexists(privatedir) then forcedirectories(privatedir);
+if not directoryexists(slash(privatedir)+'MPC') then forcedirectories(slash(privatedir)+'MPC');
+{$ifdef linux}  // allow a shared install
+if (not directoryexists(slash(appdir)+'data/constellation')) and
+   (directoryexists(SharedDir)) then
+   appdir:=SharedDir;
+{$endif}
+SampleDir:=slash(appdir)+slash('data')+'sample';
+end;
+
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
 InitTrace;
 traceon:=true;
 DecimalSeparator:='.';
-appdir:=extractfilepath(paramstr(0));
+{$ifdef linux}
+f_directory:=Tf_directory.Create(application);
+configfile:=expandfilename(Defaultconfigfile);
+{$endif}
+{$ifdef mswindows}
+configfile:=Defaultconfigfile;
+{$endif}
+GetAppDir(configfile);
 chdir(appdir);
 catalog:=Tcatalog.Create(self);
 planet:=Tplanet.Create(self);
@@ -730,6 +766,8 @@ try
  if f_config.ModalResult=mrCancel then begin
     def_cfgsc.ShowAsteroid:=false;
  end else begin
+    if directoryexists(f_config.prgdir.text) then appdir:=f_config.prgdir.text; // this setting is on the same page
+    if directoryexists(f_config.persdir.text) then privatedir:=f_config.persdir.text;
     cfgm:=f_config.cmain;
  end;
  cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
@@ -740,6 +778,8 @@ end;
 
 procedure Tf_main.activateconfig;
 begin
+    if directoryexists(f_config.prgdir.text) then appdir:=f_config.prgdir.text;
+    if directoryexists(f_config.persdir.text) then privatedir:=f_config.persdir.text;
     cfgm:=f_config.cmain;
     cfgm.updall:=f_config.applyall.checked;
     catalog.cfgcat:=f_config.ccat;
@@ -1158,13 +1198,6 @@ catalog.cfgshr.NebSizeFilter[7]:=10;
 catalog.cfgshr.NebSizeFilter[8]:=20;
 catalog.cfgshr.NebSizeFilter[9]:=30;
 catalog.cfgshr.NebSizeFilter[10]:=60;
-{ platform specific default values }
-{$ifdef linux}
-configfile:=expandfilename(Defaultconfigfile);
-{$endif}
-{$ifdef mswindows}
-configfile:=Defaultconfigfile;
-{$endif}
 end;
 
 procedure Tf_main.ReadDefault;
@@ -1677,6 +1710,8 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
+WriteString(section,'AppDir',appdir);
+WriteString(section,'PrivateDir',privatedir); 
 WriteString(section,'language',cfgm.language);
 WriteString(section,'prtname',cfgm.prtname);
 WriteInteger(section,'PrinterResolution',cfgm.PrinterResolution);
@@ -1742,6 +1777,9 @@ procedure Tf_main.SaveQuickSearch(filename:string);
 var i:integer;
     inif: TMemIniFile;
     section : string;
+    {$ifdef mswindows}
+    instini: TIniFile;
+    {$endif}
 begin
 inif:=TMeminifile.create(filename);
 try
@@ -1754,6 +1792,14 @@ end;
 finally
  inif.Free;
 end;
+{$ifdef mswindows}
+ // hard to locate the main .ini file, the location depend on the Windows version
+ // put this one in the system default location (C:\windows) to locate the install path
+ // To be read by external software only
+ instini:=TIniFile.Create('cdc_install.ini');
+ instini.WriteString('Default','Install_Dir',appdir);
+ instini.free;
+{$endif}
 end;
 
 procedure Tf_main.SaveConfigOnExitExecute(Sender: TObject);
@@ -1778,7 +1824,7 @@ var i:integer;
     inif: TMemIniFile;
     section : string;
 begin
-inif:=TMeminifile.create(slash(appdir)+'cdclang_'+trim(cfgm.language)+'.ini');
+inif:=TMeminifile.create(slash(appdir)+slash('data')+slash('language')+'cdclang_'+trim(cfgm.language)+'.ini');
 try
 with inif do begin
 section:='main';

@@ -29,7 +29,7 @@ interface
 uses cu_catalog, cu_planet, u_constant, u_util, blcksock, libc, Math,
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
-     QStdCtrls, IniFiles, Types, QButtons;
+     QStdCtrls, IniFiles, Types, QButtons, QFileCtrls;
 
 type
   TTCPThrd = class(TThread)
@@ -289,6 +289,7 @@ type
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
+    Procedure GetAppDir(filename:string);
   public
     { Public declarations }
     cfgm : conf_main;
@@ -348,7 +349,7 @@ implementation
 
 uses fu_detail, fu_chart, fu_about, fu_config, fu_info, u_projection, passql, pasmysql,
      LibcExec,  // libc exec bug workaround by Andreas Hausladen
-     fu_printsetup ;
+     fu_printsetup, fu_directory ;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here

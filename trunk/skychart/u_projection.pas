@@ -74,7 +74,7 @@ Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
 Procedure Gal2Eq(l,b: double; var ar,de : double; var c:conf_skychart);
 Procedure Eq2Gal(ar,de : double; var l,b: double; var c:conf_skychart);
-Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart);
+Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart; dho:double=9999);
           (* typeobj = 1 etoile ; typeobj = 2 soleil,lune
             ar,de equinox of the date
             irc = 0 lever et coucher
@@ -734,8 +734,9 @@ h:= arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) );
 A:= arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1));
 A:=Rmod(A+pi2,pi2);
 { refraction meeus91 15.4 }
-if h>-deg2rad then h:=minvalue([pid2,h+deg2rad*c.ObsRefractionCor*(1.02/tan((h+deg2rad*10.3/(h+deg2rad*5.11))))/60])
-        else h:=h+deg2rad*0.64658062088;
+h1:=rad2deg*h;
+if h1>-1 then h:=minvalue([pid2,h+deg2rad*c.ObsRefractionCor*(1.02/tan(deg2rad*(h1+10.3/(h1+5.11))))/60])
+         else h:=h+deg2rad*0.64658062088;
 END ;
 
 Procedure Hz2Eq(A,h : double; var hh,de : double; var c:conf_skychart);
@@ -745,8 +746,9 @@ l1:=deg2rad*c.ObsLatitude;
 a1:=A;
 h:=h-c.RefractionOffset; // correction for the refraction equation reversibility at the chart center
 { refraction meeus91 15.3 }
-if h>-deg2rad*0.3534193791 then h:=minvalue([pid2,h-deg2rad*c.ObsRefractionCor*(1/tan((h+(deg2rad*7.31/(h+deg2rad*4.4)))))/60])
-                else h:=h-deg2rad*0.64658062088;
+h1:=rad2deg*h;
+if h1>-0.3534193791 then h:=minvalue([pid2,h-deg2rad*c.ObsRefractionCor*(1/tan(deg2rad*(h1+(7.31/(h1+4.4)))))/60])
+                    else h:=h-deg2rad*0.64658062088;
 h1:=h;
 de:= arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) );
 hh:= arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1));
@@ -885,20 +887,47 @@ l:=rmod(l+pi2,pi2);
 b:=arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar));
 end;
 
-procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart);
-const ho : array[1..3] of Double = (-9.89E-3,-1.454E-2,2.18E-3) ;
-var hs0,chh0,hh0,m0,m1,m2,a0 : double;
+procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart; dho:double=9999);
+const ho : array[1..3] of Double = (-0.5667,-0.8333,0.125) ;
+var hoo,hs0,chh0,hh0,m0,m1,m2,a0 : double;
+    hsg,hl,h,dm,longref : double;
 begin
-hs0 := sidtim(jd0,0.0,0.0);
-chh0 :=(ho[typobj]-sin(deg2rad*c.ObsLatitude)*sin(de))/(cos(deg2rad*c.ObsLatitude)*cos(de)) ;
+if (typobj=3)and(dho<9999) then hoo:=dho
+   else hoo:=ho[typobj];
+longref:=-c.timezone*15;
+hs0 := sidtim(jd0,-c.timezone,longref);
+chh0 :=(sin(deg2rad*hoo)-sin(deg2rad*c.ObsLatitude)*sin(de))/(cos(deg2rad*c.ObsLatitude)*cos(de)) ;
 if abs(chh0)<=1 then begin
    hh0:=arccos(chh0);
-   m0:=(ar+deg2rad*c.ObsLongitude-hs0)/pi2;
+   m0:=(ar+deg2rad*c.ObsLongitude-deg2rad*longref-hs0)/pi2;
    m1:=m0-hh0/pi2;
    m2:=m0+hh0/pi2;
-   ht:=rmod(rmod(m0+1,1)*24+c.TimeZone+24,24);
-   hr:=rmod(rmod(m1+1,1)*24+c.TimeZone+24,24);
-   hs:=rmod(rmod(m2+1,1)*24+c.TimeZone+24,24);
+   if m0<0 then m0:=m0+1;
+   if m0>1 then m0:=m0-1;
+   if m1<0 then m1:=m1+1;
+   if m1>1 then m1:=m1-1;
+   if m2<0 then m2:=m2+1;
+   if m2>1 then m2:=m2-1;
+   // rise
+   hsg:= hs0 + deg2rad*360.985647 * m1;
+   hl:= hsg - deg2rad*c.Obslongitude + deg2rad*longref - ar;
+   h:= rad2deg*(arcsin(sin(deg2rad*c.Obslatitude) * sin(de) + cos(deg2rad*c.Obslatitude) * cos(de) * cos(hl) ));
+   dm:= (h - hoo) / (360 * cos(de) * cos(deg2rad*c.Obslatitude) * sin(hl) );
+   hr:=(m1+dm)*24;
+   // transit
+   hsg:= hs0 + deg2rad*360.985647 * m0;
+   hl:= hsg - deg2rad*c.Obslongitude + deg2rad*longref - ar;
+   dm:= -(hl / pi2);
+   ht:=rmod((m0+dm)*24+24,24);
+   if (ht<10)and(m0>0.6) then ht:=ht+24;
+   if (ht>14)and(m0<0.4) then ht:=ht-24;
+   // set
+   hsg:= hs0 + deg2rad*360.985647 * m2;
+   hl:= hsg - deg2rad*c.Obslongitude + deg2rad*longref - ar;
+   h:= rad2deg*(arcsin(sin(deg2rad*c.Obslatitude) * sin(de) + cos(deg2rad*c.Obslatitude) * cos(de) * cos(hl) ));
+   dm:= (h - hoo) / (360 * cos(de) * cos(deg2rad*c.Obslatitude) * sin(hl) );
+   hs:=(m2+dm)*24;
+   // azimuth
    a0:= arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c.Obslatitude)-tan(de)*cos(deg2rad*c.Obslatitude));
    azr:=pi2-a0;
    azs:=a0;
@@ -907,7 +936,10 @@ end else begin
    hr:=0;hs:=0;azr:=0;azs:=0;
    if sgn(de)=sgn(c.ObsLatitude) then begin
       m0:=(ar+deg2rad*c.ObsLongitude-hs0)/pi2;     (* circumpolar *)
-      ht:=rmod(rmod(m0+1,1)*24+c.TimeZone+24,24);
+      hsg:= hs0 + deg2rad*360.985647 * m0;
+      hl:= hsg - deg2rad*c.ObsLongitude - ar;
+      dm:= -(hl / pi2);
+      ht:=rmod((m0+dm)*24+c.Timezone+24,24);
       irc:=1 ;
     end else begin
       ht:=0;      (* invisible *)

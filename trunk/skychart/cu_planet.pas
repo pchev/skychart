@@ -2338,7 +2338,7 @@ begin
 end;
 
 procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var i: integer; var cfgsc: conf_skychart);
-var am1,am2,am3,dm1,dm2,dm3,dm4,dm5,dm6,dm7,dm8,dm9,hr,ht,hs,azr,azs : double;
+var am1,am2,am3,dm1,dm2,dm3,dm4,dm5,dm6,dm7,dm8,dm9,hr,ht,hs,azr,azs,hrm,htm,hsm : double;
     t: integer;
 const b6='      ';
       b7='       ';
@@ -2411,6 +2411,31 @@ case i of
     tazr:=na;
     tazs:=na;
     end;
+end;
+// For the Moon the interpolation is not sufficient, do again the using previous approximate time.
+if pla=11 then begin
+   if trim(thr)>'' then begin
+      Moon(jd0+(hr-cfgsc.TimeZone+cfgsc.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
+      precession(jd2000,jd0,am1,dm1);
+      RiseSet(3,jd0,am1,dm1,hrm,htm,hsm,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5746*cfgsc.ObsRefractionCor-dm6/2/3600); // paralaxe - refraction - semi-diameter
+      thr:=armtostr(hrm);
+      if AzNorth then Azr:=rmod(Azr+pi,pi2);
+      tazr:=demtostr(rad2deg*Azr);
+   end;
+   if trim(tht)>'' then begin
+      Moon(jd0+(ht-cfgsc.TimeZone+cfgsc.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
+      precession(jd2000,jd0,am1,dm1);
+      RiseSet(3,jd0,am1,dm1,hrm,htm,hsm,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5746*cfgsc.ObsRefractionCor-dm6/2/3600); // paralaxe - refraction - semi-diameter
+      tht:=armtostr(htm);
+   end;
+   if trim(ths)>'' then begin
+      Moon(jd0+(hs-cfgsc.TimeZone+cfgsc.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
+      precession(jd2000,jd0,am1,dm1);
+      RiseSet(3,jd0,am1,dm1,hrm,htm,hsm,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5746*cfgsc.ObsRefractionCor-dm6/2/3600); // paralaxe - refraction - semi-diameter
+      ths:=armtostr(hsm);
+      if AzNorth then Azs:=rmod(Azs+pi,pi2);
+      tazs:=demtostr(rad2deg*Azs);
+   end;
 end;
 end;
 
