@@ -704,6 +704,7 @@ Tneb    = packed record
           nebunit : Smallint;
           nebtype : ShortInt;
           id,morph,comment : shortstring;
+          messierobject : boolean;
           valid : TVneb;
           end;
 Toutlines = packed record

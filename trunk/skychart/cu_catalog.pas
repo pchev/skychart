@@ -1664,6 +1664,7 @@ if result then begin
                 else rec.neb.sbr:=lin.sbr;
    if (rec.neb.mag<6)and((rec.neb.nebtype=2)or(rec.neb.nebtype=6)) then rec.neb.mag:=6;  // overestimate mag for open cluster
    rec.neb.id:=lin.nom1;
+   rec.neb.messierobject:=(copy(lin.nom1,1,2)='M ');
    rec.str[1]:=lin.nom2;
    rec.str[2]:=lin.cons;
    rec.neb.morph:=lin.clas;
