@@ -50,8 +50,6 @@ uses
 
 {$R *.res}
 
-{$LIBPREFIX 'lib'}
-
 exports
        setbscpath   {$ifdef mswindows} index  130   {$endif} ,
        openbsc      {$ifdef mswindows} index  129   {$endif} ,

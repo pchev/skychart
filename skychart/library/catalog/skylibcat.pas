@@ -1076,11 +1076,24 @@ var
    zone : string;
    def : boolean;
 begin
-nx:=maxintvalue([1,round((xmax-xmin)/abs(BxGlb)/10)]);
-ny:=maxintvalue([1,round((ymax-ymin)/abs(ByGlb)/8)]);
+nx:=maxintvalue([1,round((xmax-xmin)/abs(BxGlb)/5/cos(deg2rad*decentre))]);
+if (10*nx)>(xmax-xmin) then nx:=(xmax-xmin)div 10;
+ny:=maxintvalue([1,round((ymax-ymin)/abs(ByGlb)/5)]);
 dx:=Trunc((xmax-xmin)/nx);
 dy:=Trunc((ymax-ymin)/ny);
 nSM:=0;
+if northpoleinmap {or(decentre>85)} then
+  for i:=0 to 23 do begin
+    zone:=padzeros(inttostr(i),2);
+    zonelst[nSM]:=zone+'N80';
+    inc(nSM);
+  end;
+if southpoleinmap {or(decentre<-85)} then
+  for i:=0 to 23 do begin
+    zone:=padzeros(inttostr(i),2);
+    zonelst[nSM]:=zone+'S90';
+    inc(nSM);
+  end;
 for i:=0 to nx do begin
   xx:=xmin+i*dx ;
   for j:=0 to ny do begin
