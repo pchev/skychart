@@ -29,6 +29,8 @@ uses cu_skychart, u_constant, u_util,
   SysUtils, Types, Classes, QGraphics, QControls, QForms, QDialogs,
   QStdCtrls, QExtCtrls, QMenus, QTypes, QComCtrls, QPrinters, QActnList;
 
+const maxundo=10;
+
 type
   Tf_chart = class(TForm)
     RefreshTimer: TTimer;
@@ -55,10 +57,15 @@ type
     zoomminusmove: TAction;
     Flipx: TAction;
     Flipy: TAction;
+    GridEQ: TAction;
+    GridAZ: TAction;
+    rot_plus: TAction;
+    rot_minus: TAction;
+    Undo: TAction;
+    Redo: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure Refresh;
     procedure FormResize(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -87,6 +94,12 @@ type
     procedure FlipxExecute(Sender: TObject);
     procedure FlipyExecute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure GridAZExecute(Sender: TObject);
+    procedure GridEQExecute(Sender: TObject);
+    procedure rot_minusExecute(Sender: TObject);
+    procedure rot_plusExecute(Sender: TObject);
+    procedure RedoExecute(Sender: TObject);
+    procedure UndoExecute(Sender: TObject);
   private
     { Private declarations }
     movefactor,zoomfactor: double;
@@ -97,6 +110,10 @@ type
     { Public declarations }
     sc: Tskychart;
     maximize:boolean;
+    undolist : array[1..maxundo] of conf_skychart;
+    lastundo,curundo,validundo : integer;
+    procedure Refresh;
+    procedure AutoRefresh;
     procedure PrintChart(Sender: TObject);
   end;
 

@@ -22,35 +22,37 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  Cross-platform common code for Main form.
 }
 
-procedure Tf_main.CreateMDIChild(const Name: string);
+function Tf_main.CreateMDIChild(const Name: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot):boolean;
 var
   Child: Tf_chart;
-  cfg1 : conf_skychart;
-  copyactive: boolean;
 begin
-  { allow a reasonable number of chart }
-  if (MDIChildCount>=9) then exit;
+  { allow for a reasonable number of chart }
+  if (MDIChildCount>=9) then begin
+     SetLpanel1('Too many open window, please close some chart.');
+     result:=false;
+     exit;
+  end;
   { copy active child config }
-  if ActiveMDIchild is Tf_chart then with ActiveMDIchild as Tf_chart do begin
+  if copyactive and (ActiveMDIchild is Tf_chart) then with ActiveMDIchild as Tf_chart do begin
     cfg1:=sc.cfgsc;
-    copyactive:=true;
-  end
-  else  copyactive:=false;
+    cfgp:=sc.plot.cfgplot;
+  end;
   { create a new MDI child window }
   Child := Tf_chart.Create(Application);
-  if (MDIChildCount=1)or((MDIChildCount>1)and(MDIChildren[0].windowstate=wsMaximized))
-     then Child.maximize:=true
-     else Child.maximize:=false;
   Child.Caption:=name;
   Child.sc.catalog:=catalog;
-  Child.sc.plot.cfgplot:=def_cfgplot;
+  Child.sc.plot.cfgplot:=cfgp;
   Child.sc.plot.starshape:=starshape.Picture.Bitmap;
   Child.sc.plot.cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
   Child.sc.plot.cfgplot.starshapew:=Child.sc.plot.cfgplot.starshapesize div 2;
-  if copyactive then begin
-    Child.sc.cfgsc:=cfg1;
-  end else begin
-    Child.sc.cfgsc:=def_cfgsc;
+  Child.sc.cfgsc:=cfg1;
+  if cfgm.maximized then Child.windowstate:=wsmaximized
+                    else Child.windowstate:=wsnormal;
+  Child.width:=Child.sc.cfgsc.winx;
+  Child.height:=Child.sc.cfgsc.winy;
+  if Child.sc.cfgsc.Projpole=Altaz then begin
+     Child.sc.cfgsc.FollowOn:=true;
+     Child.sc.cfgsc.FollowType:=4;
   end;
   {$ifdef linux}
   {require to switch the focus to work with the right child. Kylix bug?}
@@ -62,31 +64,85 @@ begin
   end;
   {$endif}
   Child.setfocus;
+  result:=true;
   UpdateBtn(Child.sc.cfgsc.flipx,Child.sc.cfgsc.flipy);
 end;
 
-procedure Tf_main.RefreshAllChild;
+procedure Tf_main.CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
+var i : integer;
+begin
+c2.CurYear:=c1.CurYear;
+c2.CurMonth := c1.CurMonth ;
+c2.CurDay := c1.CurDay ;
+c2.UseSystemTime := c1.UseSystemTime ;
+c2.autorefresh := c1.autorefresh ;
+c2.CurTime := c1.CurTime ;
+c2.DT_UT := c1.DT_UT ;
+c2.DT_UT_val := c1.DT_UT_val ;
+c2.Force_DT_UT := c1.Force_DT_UT ;
+c2.ObsLatitude := c1.ObsLatitude ;
+c2.ObsLongitude := c1.ObsLongitude ;
+c2.ObsAltitude := c1.ObsAltitude ;
+c2.ObsTZ := c1.ObsTZ ;
+c2.TimeZone := c1.TimeZone ;
+c2.ObsTemperature := c1.ObsTemperature ;
+c2.ObsPressure := c1.ObsPressure ;
+c2.ObsName := c1.ObsName ;
+c2.DrawPMyear := c1.DrawPMyear ;
+c2.PMon := c1.PMon ;
+c2.DrawPMon := c1.DrawPMon ;
+for i:=0 to 9 do c2.projname[i] := c1.projname[i];
+//c2. := c1. ;
+end;
+
+procedure Tf_main.RefreshAllChild(applydef:boolean);
 var i: integer;
 begin
 for i:=0 to MDIChildCount-1 do
   if MDIChildren[i] is Tf_chart then
      with MDIChildren[i] as Tf_chart do begin
       sc.plot.cfgplot:=def_cfgplot;
-      Refresh;
+      if applydef then begin
+        CopySCconfig(def_cfgsc,sc.cfgsc);
+      end;
+      AutoRefresh;
+     end;
+end;
+
+procedure Tf_main.AutorefreshTimer(Sender: TObject);
+var i: integer;
+begin
+for i:=0 to MDIChildCount-1 do
+  if MDIChildren[i] is Tf_chart then
+     with MDIChildren[i] as Tf_chart do begin
+      if sc.cfgsc.autorefresh then AutoRefresh;
      end;
 end;
 
 procedure Tf_main.FileNew1Execute(Sender: TObject);
 begin
-  CreateMDIChild('Chart ' + IntToStr(MDIChildCount + 1));
+  CreateMDIChild('Chart ' + IntToStr(MDIChildCount + 1),true,def_cfgsc,def_cfgplot);
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
+var cfgs :conf_skychart;
+    cfgp : conf_plot;
 begin
+OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
   if OpenDialog.Execute then begin
-    CreateMDIChild(OpenDialog.FileName);
-    // load the saved chart
+    cfgp:=def_cfgplot;
+    cfgs:=def_cfgsc;
+    ReadChartConfig(OpenDialog.FileName,true,cfgp,cfgs);
+    CreateMDIChild(extractfilename(OpenDialog.FileName),false,cfgs,cfgp);
   end;
+end;
+
+procedure Tf_main.FileSaveAs1Execute(Sender: TObject);
+begin
+Savedialog.DefaultExt:='cdc3';
+savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
+if ActiveMDIchild is Tf_chart then
+  if SaveDialog.Execute then SaveChartConfig(SaveDialog.Filename);
 end;
 
 procedure Tf_main.HelpAbout1Execute(Sender: TObject);
@@ -113,6 +169,8 @@ begin
  InitFonts;
  SetLpanel1('');
  FileNewItem.click;
+ Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
+ Autorefresh.enabled:=true;
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -122,12 +180,28 @@ end;
 
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+if SaveConfigOnExit.checked then SaveDefault
+                            else SaveQuickSearch(configfile);
+end;
+
+procedure Tf_main.SaveConfigurationExecute(Sender: TObject);
+begin
 SaveDefault;
 end;
 
 procedure Tf_main.Print1Execute(Sender: TObject);
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do PrintChart(Sender);
+end;
+
+procedure Tf_main.UndoExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do UndoExecute(Sender);
+end;
+
+procedure Tf_main.RedoExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do RedoExecute(Sender);
 end;
 
 procedure Tf_main.zoomplusExecute(Sender: TObject);
@@ -146,10 +220,39 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do FlipxExecu
 end;
 
 procedure Tf_main.FlipyExecute(Sender: TObject);
-
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do FlipyExecute(Sender);
 end;
+
+procedure Tf_main.rot_plusExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do rot_plusExecute(Sender);
+end;
+
+procedure Tf_main.rot_minusExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do rot_minusExecute(Sender);
+end;
+
+procedure Tf_main.ChangeProjExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   if sc.cfgsc.projpole=Equat then sc.cfgsc.projpole:=Altaz
+                              else sc.cfgsc.projpole:=Equat;
+   Refresh;                       
+end;
+end;
+
+procedure Tf_main.GridEQExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do GridEQExecute(Sender);
+end;
+
+procedure Tf_main.GridAZExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do GridAZExecute(Sender);
+end;
+
 
 procedure Tf_main.SetFOVExecute(Sender: TObject);
 var f : double;
@@ -168,20 +271,30 @@ f_config:=Tf_config.Create(application);
 try
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
-// f_config.cskyc:=def_cfgsc;
  f_config.cplot:=def_cfgplot;
+ f_config.csc:=def_cfgsc;
+ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+     CopySCconfig(sc.cfgsc,f_config.csc);
  f_config.cmain:=cfgm;
+ f_config.applyall.checked:=cfgm.updall;
+ formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
  f_config.showmodal;
  if f_config.ModalResult=mrOK then begin
     cfgm:=f_config.cmain;
+    cfgm.updall:=f_config.applyall.checked;
     catalog.cfgcat:=f_config.ccat;
     catalog.cfgshr:=f_config.cshr;
-//    def_cfgsc:=f_config.cskyc;
+    def_cfgsc:=f_config.csc;
     def_cfgplot:=f_config.cplot;
     def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
     InitFonts;
-    RefreshAllChild;
+    if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+       CopySCconfig(def_cfgsc,sc.cfgsc);
+    RefreshAllChild(cfgm.updall);
+    Autorefresh.enabled:=false;
+    Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
+    Autorefresh.enabled:=true;
  end;
  cfgm.configpage:=f_config.Pagecontrol1.activepageindex;
 finally
@@ -194,6 +307,11 @@ begin
 PanelTop.visible:=not PanelTop.visible;
 PanelLeft.visible:=PanelTop.visible;
 PanelRight.visible:=PanelTop.visible;
+end;
+
+procedure Tf_main.ViewStatusExecute(Sender: TObject);
+begin
+PanelBottom.visible:=not PanelBottom.visible;
 end;
 
 Procedure Tf_main.InitFonts;
@@ -237,6 +355,9 @@ cfgm.language:='UK';
 cfgm.prtname:='';
 cfgm.configpage:=0;
 cfgm.PrinterResolution:=300;
+cfgm.maximized:=true;
+cfgm.updall:=true;
+cfgm.AutoRefreshDelay:=60;
 for i:=1 to 6 do begin
     cfgm.FontName[i]:=DefaultFontName;
     cfgm.FontSize[i]:=DefaultFontSize;
@@ -252,12 +373,17 @@ def_cfgplot.stardyn:=65;
 def_cfgplot.starsize:=13;
 def_cfgplot.starplot:=1;
 def_cfgplot.nebplot:=1;
+def_cfgsc.winx:=clientwidth;
+def_cfgsc.winy:=clientheight;
+def_cfgsc.UseSystemTime:=true;
+def_cfgsc.AutoRefresh:=false;
+def_cfgsc.JDchart:=jd2000;
 def_cfgsc.racentre:=1.4;
 def_cfgsc.decentre:=0;
 def_cfgsc.fov:=1;
 def_cfgsc.theta:=0;
 def_cfgsc.projtype:='A';
-def_cfgsc.ProjPole:=0;
+def_cfgsc.ProjPole:=Equat;
 def_cfgsc.FlipX:=1;
 def_cfgsc.FlipY:=1;
 def_cfgsc.WindowRatio:=1;
@@ -269,16 +395,35 @@ def_cfgsc.xmin:=0;
 def_cfgsc.xmax:=100;
 def_cfgsc.ymin:=0;
 def_cfgsc.ymax:=100;
+def_cfgsc.ObsLatitude := 46.1 ;
+def_cfgsc.ObsLongitude := -6.2 ;
+def_cfgsc.ObsAltitude := 0 ;
+def_cfgsc.ObsTemperature := 10 ;
+def_cfgsc.ObsPressure := 1010 ;
+def_cfgsc.ObsName := 'Geneve' ;
+def_cfgsc.horizonopaque:=true;
+def_cfgsc.HorizonMax:=0;
+def_cfgsc.PMon:=false;
+def_cfgsc.DrawPMon:=false;
+def_cfgsc.DrawPMyear:=1000;
+def_cfgsc.ShowEqGrid:=false;
+def_cfgsc.ShowAzGrid:=true;
+catalog.cfgshr.AzNorth:=true;
+catalog.cfgshr.EquinoxType:=0;
+catalog.cfgshr.EquinoxChart:='J2000';
+catalog.cfgshr.DefaultJDchart:=jd2000;
 catalog.cfgshr.StarFilter:=true;
 catalog.cfgshr.AutoStarFilter:=false;
 catalog.cfgshr.AutoStarFilterMag:=6.5;
 catalog.cfgcat.StarmagMax:=12;
 catalog.cfgshr.NebFilter:=true;
-catalog.cfgshr.BigNebFilter:=false;
+catalog.cfgshr.BigNebFilter:=true;
+catalog.cfgshr.BigNebLimit:=150;
 catalog.cfgcat.NebmagMax:=12;
 catalog.cfgcat.NebSizeMin:=1;
 catalog.cfgcat.UseUSNOBrightStars:=false;
 catalog.cfgcat.UseGSVSIr:=false;
+catalog.cfgcat.GCatNum:=0;
 for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatpath[i]:=slash(appdir)+'cat';
    catalog.cfgcat.starcatdef[i]:=false;
@@ -319,12 +464,45 @@ catalog.cfgshr.FieldNum[1]:=1;
 catalog.cfgshr.FieldNum[2]:=2;
 catalog.cfgshr.FieldNum[3]:=5;
 catalog.cfgshr.FieldNum[4]:=10;
-catalog.cfgshr.FieldNum[5]:=15;
-catalog.cfgshr.FieldNum[6]:=25;
-catalog.cfgshr.FieldNum[7]:=45;
-catalog.cfgshr.FieldNum[8]:=90;
-catalog.cfgshr.FieldNum[9]:=180;
+catalog.cfgshr.FieldNum[5]:=20;
+catalog.cfgshr.FieldNum[6]:=45;
+catalog.cfgshr.FieldNum[7]:=90;
+catalog.cfgshr.FieldNum[8]:=180;
+catalog.cfgshr.FieldNum[9]:=270;
 catalog.cfgshr.FieldNum[10]:=360;
+catalog.cfgshr.DegreeGridSpacing[0]:=5/60;
+catalog.cfgshr.DegreeGridSpacing[1]:=10/60;
+catalog.cfgshr.DegreeGridSpacing[2]:=20/60;
+catalog.cfgshr.DegreeGridSpacing[3]:=30/60;
+catalog.cfgshr.DegreeGridSpacing[4]:=1;
+catalog.cfgshr.DegreeGridSpacing[5]:=2;
+catalog.cfgshr.DegreeGridSpacing[6]:=5;
+catalog.cfgshr.DegreeGridSpacing[7]:=10;
+catalog.cfgshr.DegreeGridSpacing[8]:=15;
+catalog.cfgshr.DegreeGridSpacing[9]:=20;
+catalog.cfgshr.DegreeGridSpacing[10]:=20;
+catalog.cfgshr.HourGridSpacing[0]:=20/3600;
+catalog.cfgshr.HourGridSpacing[1]:=30/3600;
+catalog.cfgshr.HourGridSpacing[2]:=1/60;
+catalog.cfgshr.HourGridSpacing[3]:=2/60;
+catalog.cfgshr.HourGridSpacing[4]:=5/60;
+catalog.cfgshr.HourGridSpacing[5]:=15/60;
+catalog.cfgshr.HourGridSpacing[6]:=30/60;
+catalog.cfgshr.HourGridSpacing[7]:=1;
+catalog.cfgshr.HourGridSpacing[8]:=1;
+catalog.cfgshr.HourGridSpacing[9]:=2;
+catalog.cfgshr.HourGridSpacing[10]:=2;
+def_cfgsc.projname[0]:='ARC';
+def_cfgsc.projname[1]:='ARC';
+def_cfgsc.projname[2]:='ARC';
+def_cfgsc.projname[3]:='ARC';
+def_cfgsc.projname[4]:='ARC';
+def_cfgsc.projname[5]:='ARC';
+def_cfgsc.projname[6]:='ARC';
+def_cfgsc.projname[7]:='ARC';
+def_cfgsc.projname[8]:='ARC';
+def_cfgsc.projname[9]:='ARC';
+def_cfgsc.projname[10]:='CAR';
 catalog.cfgshr.StarMagFilter[0]:=99;
 catalog.cfgshr.StarMagFilter[1]:=99;
 catalog.cfgshr.StarMagFilter[2]:=15;
@@ -368,27 +546,28 @@ configfile:=Defaultconfigfile;
 end;
 
 procedure Tf_main.ReadDefault;
-var i,j:integer;
+begin
+ReadPrivateConfig(configfile);
+ReadChartConfig(configfile,true,def_cfgplot,def_cfgsc);
+end;
+
+procedure Tf_main.ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
+var i:integer;
     inif: TIniFile;
     section,buf : string;
 begin
-inif:=Tinifile.create(configfile);
+inif:=Tinifile.create(filename);
 try
 with inif do begin
-section:='util';
-u_util.ldeg:=ReadString(section,'ldeg',u_util.ldeg);
-u_util.lmin:=ReadString(section,'lmin',u_util.lmin);
-u_util.lsec:=ReadString(section,'lsec',u_util.lsec);
 section:='main';
-cfgm.language:=ReadString(section,'language',cfgm.language);
-cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
-cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterResolution);
-for i:=0 to MaxField do catalog.cfgshr.FieldNum[i]:=ReadFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
 f_main.Top := ReadInteger(section,'WinTop',f_main.Top);
 f_main.Left := ReadInteger(section,'WinLeft',f_main.Left);
 f_main.Width := ReadInteger(section,'WinWidth',f_main.Width);
 f_main.Height := ReadInteger(section,'WinHeight',f_main.Height);
-if (ReadBool(section,'WinMaximize',false)) then f_main.WindowState:=wsMaximized;
+if f_main.Width>screen.Width then f_main.Width:=screen.Width;
+if f_main.Height>(screen.Height-25) then f_main.Height:=screen.Height-25;
+formpos(f_main,f_main.Left,f_main.Top);
+for i:=0 to MaxField do catalog.cfgshr.FieldNum[i]:=ReadFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
 section:='font';
 for i:=1 to 6 do begin
    cfgm.FontName[i]:=ReadString(section,'FontName'+inttostr(i),cfgm.FontName[i]);
@@ -402,61 +581,151 @@ catalog.cfgshr.AutoStarFilter:=ReadBool(section,'AutoStarFilter',catalog.cfgshr.
 catalog.cfgshr.AutoStarFilterMag:=ReadFloat(section,'AutoStarFilterMag',catalog.cfgshr.AutoStarFilterMag);
 catalog.cfgshr.NebFilter:=ReadBool(section,'NebFilter',catalog.cfgshr.NebFilter);
 catalog.cfgshr.BigNebFilter:=ReadBool(section,'BigNebFilter',catalog.cfgshr.BigNebFilter);
+catalog.cfgshr.BigNebLimit:=ReadFloat(section,'BigNebLimit',catalog.cfgshr.BigNebLimit);
 for i:=1 to maxfield do begin
    catalog.cfgshr.StarMagFilter[i]:=ReadFloat(section,'StarMagFilter'+inttostr(i),catalog.cfgshr.StarMagFilter[i]);
    catalog.cfgshr.NebMagFilter[i]:=ReadFloat(section,'NebMagFilter'+inttostr(i),catalog.cfgshr.NebMagFilter[i]);
    catalog.cfgshr.NebSizeFilter[i]:=ReadFloat(section,'NebSizeFilter'+inttostr(i),catalog.cfgshr.NebSizeFilter[i]);
 end;
+if usecatalog then begin
 section:='catalog';
+catalog.cfgcat.GCatNum:=Readinteger(section,'GCatNum',0);
+SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
+for i:=0 to catalog.cfgcat.GCatNum-1 do begin
+   catalog.cfgcat.GCatLst[i].shortname:=Readstring(section,'CatName'+inttostr(i),'');
+   catalog.cfgcat.GCatLst[i].name:=Readstring(section,'CatLongName'+inttostr(i),'');
+   catalog.cfgcat.GCatLst[i].path:=Readstring(section,'CatPath'+inttostr(i),'');
+   catalog.cfgcat.GCatLst[i].min:=ReadFloat(section,'CatMin'+inttostr(i),0);
+   catalog.cfgcat.GCatLst[i].max:=ReadFloat(section,'CatMax'+inttostr(i),0);
+   catalog.cfgcat.GCatLst[i].Actif:=ReadBool(section,'CatActif'+inttostr(i),false);
+   catalog.cfgcat.GCatLst[i].magmax:=0;
+   catalog.cfgcat.GCatLst[i].cattype:=0;
+   if catalog.cfgcat.GCatLst[i].Actif then begin
+      if not
+      catalog.GetInfo(catalog.cfgcat.GCatLst[i].path,
+                      catalog.cfgcat.GCatLst[i].shortname,
+                      catalog.cfgcat.GCatLst[i].magmax,
+                      catalog.cfgcat.GCatLst[i].cattype,
+                      catalog.cfgcat.GCatLst[i].version,
+                      catalog.cfgcat.GCatLst[i].name)
+      then catalog.cfgcat.GCatLst[i].Actif:=false;
+   end;
+end;
 catalog.cfgcat.StarmagMax:=ReadFloat(section,'StarmagMax',catalog.cfgcat.StarmagMax);
 catalog.cfgcat.NebmagMax:=ReadFloat(section,'NebmagMax',catalog.cfgcat.NebmagMax);
 catalog.cfgcat.NebSizeMin:=ReadFloat(section,'NebSizeMin',catalog.cfgcat.NebSizeMin);
 catalog.cfgcat.UseUSNOBrightStars:=ReadBool(section,'UseUSNOBrightStars',catalog.cfgcat.UseUSNOBrightStars);
 catalog.cfgcat.UseGSVSIr:=ReadBool(section,'UseGSVSIr',catalog.cfgcat.UseGSVSIr);
 for i:=1 to maxstarcatalog do begin
-   catalog.cfgcat.starcatpath[i]:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
    catalog.cfgcat.starcatdef[i]:=ReadBool(section,'starcatdef'+inttostr(i),catalog.cfgcat.starcatdef[i]);
    catalog.cfgcat.starcaton[i]:=ReadBool(section,'starcaton'+inttostr(i),catalog.cfgcat.starcaton[i]);
    catalog.cfgcat.starcatfield[i,1]:=ReadInteger(section,'starcatfield1'+inttostr(i),catalog.cfgcat.starcatfield[i,1]);
    catalog.cfgcat.starcatfield[i,2]:=ReadInteger(section,'starcatfield2'+inttostr(i),catalog.cfgcat.starcatfield[i,2]);
 end;
 for i:=1 to maxvarstarcatalog do begin
-   catalog.cfgcat.varstarcatpath[i]:=ReadString(section,'varstarcatpath'+inttostr(i),catalog.cfgcat.varstarcatpath[i]);
    catalog.cfgcat.varstarcatdef[i]:=ReadBool(section,'varstarcatdef'+inttostr(i),catalog.cfgcat.varstarcatdef[i]);
    catalog.cfgcat.varstarcaton[i]:=ReadBool(section,'varstarcaton'+inttostr(i),catalog.cfgcat.varstarcaton[i]);
    catalog.cfgcat.varstarcatfield[i,1]:=ReadInteger(section,'varstarcatfield1'+inttostr(i),catalog.cfgcat.varstarcatfield[i,1]);
    catalog.cfgcat.varstarcatfield[i,2]:=ReadInteger(section,'varstarcatfield2'+inttostr(i),catalog.cfgcat.varstarcatfield[i,2]);
 end;
 for i:=1 to maxdblstarcatalog do begin
-   catalog.cfgcat.dblstarcatpath[i]:=ReadString(section,'dblstarcatpath'+inttostr(i),catalog.cfgcat.dblstarcatpath[i]);
    catalog.cfgcat.dblstarcatdef[i]:=ReadBool(section,'dblstarcatdef'+inttostr(i),catalog.cfgcat.dblstarcatdef[i]);
    catalog.cfgcat.dblstarcaton[i]:=ReadBool(section,'dblstarcaton'+inttostr(i),catalog.cfgcat.dblstarcaton[i]);
    catalog.cfgcat.dblstarcatfield[i,1]:=ReadInteger(section,'dblstarcatfield1'+inttostr(i),catalog.cfgcat.dblstarcatfield[i,1]);
    catalog.cfgcat.dblstarcatfield[i,2]:=ReadInteger(section,'dblstarcatfield2'+inttostr(i),catalog.cfgcat.dblstarcatfield[i,2]);
 end;
 for i:=1 to maxnebcatalog do begin
-   catalog.cfgcat.nebcatpath[i]:=ReadString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
    catalog.cfgcat.nebcatdef[i]:=ReadBool(section,'nebcatdef'+inttostr(i),catalog.cfgcat.nebcatdef[i]);
    catalog.cfgcat.nebcaton[i]:=ReadBool(section,'nebcaton'+inttostr(i),catalog.cfgcat.nebcaton[i]);
    catalog.cfgcat.nebcatfield[i,1]:=ReadInteger(section,'nebcatfield1'+inttostr(i),catalog.cfgcat.nebcatfield[i,1]);
    catalog.cfgcat.nebcatfield[i,2]:=ReadInteger(section,'nebcatfield2'+inttostr(i),catalog.cfgcat.nebcatfield[i,2]);
 end;
+end;
+section:='display';
+cplot.starplot:=ReadInteger(section,'starplot',cplot.starplot);
+cplot.nebplot:=ReadInteger(section,'nebplot',cplot.nebplot);
+section:='chart';
+catalog.cfgshr.EquinoxType:=ReadInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
+catalog.cfgshr.EquinoxChart:=ReadString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
+catalog.cfgshr.DefaultJDchart:=ReadFloat(section,'DefaultJDchart',catalog.cfgshr.DefaultJDchart);
+section:='default_chart';
+csc.winx:=ReadInteger(section,'ChartWidth',csc.xmax);
+csc.winy:=ReadInteger(section,'ChartHeight',csc.ymax);
+cfgm.maximized:=ReadBool(section,'ChartMaximized',true);
+csc.racentre:=ReadFloat(section,'racentre',csc.racentre);
+csc.decentre:=ReadFloat(section,'decentre',csc.decentre);
+csc.acentre:=ReadFloat(section,'acentre',csc.acentre);
+csc.hcentre:=ReadFloat(section,'hcentre',csc.hcentre);
+csc.fov:=ReadFloat(section,'fov',csc.fov);
+csc.theta:=ReadFloat(section,'theta',csc.theta);
+buf:=trim(ReadString(section,'projtype',csc.projtype))+'A';
+csc.projtype:=buf[1];
+csc.ProjPole:=ReadInteger(section,'ProjPole',csc.ProjPole);
+csc.FlipX:=ReadInteger(section,'FlipX',csc.FlipX);
+csc.FlipY:=ReadInteger(section,'FlipY',csc.FlipY);
+csc.PMon:=ReadBool(section,'PMon',csc.PMon);
+csc.DrawPMon:=ReadBool(section,'DrawPMon',csc.DrawPMon);
+csc.DrawPMyear:=ReadInteger(section,'DrawPMyear',csc.DrawPMyear);
+csc.horizonopaque:=ReadBool(section,'horizonopaque',csc.horizonopaque);
+section:='observatory';
+csc.ObsLatitude := ReadFloat(section,'ObsLatitude',csc.ObsLatitude );
+csc.ObsLongitude := ReadFloat(section,'ObsLongitude',csc.ObsLongitude );
+csc.ObsAltitude := ReadFloat(section,'ObsAltitude',csc.ObsAltitude );
+csc.ObsTemperature := ReadFloat(section,'ObsTemperature',csc.ObsTemperature );
+csc.ObsPressure := ReadFloat(section,'ObsPressure',csc.ObsPressure );
+csc.ObsName := ReadString(section,'ObsName',csc.ObsName );
+csc.ObsTZ := ReadFloat(section,'ObsTZ',csc.ObsTZ );
+section:='date';
+csc.UseSystemTime:=ReadBool(section,'UseSystemTime',csc.UseSystemTime);
+csc.CurYear:=ReadInteger(section,'CurYear',csc.CurYear);
+csc.CurMonth:=ReadInteger(section,'CurMonth',csc.CurMonth);
+csc.CurDay:=ReadInteger(section,'CurDay',csc.CurDay);
+csc.CurTime:=ReadFloat(section,'CurTime',csc.CurTime);
+csc.autorefresh:=ReadBool(section,'autorefresh',csc.autorefresh);
+csc.Force_DT_UT:=ReadBool(section,'Force_DT_UT',csc.Force_DT_UT);
+csc.DT_UT_val:=ReadFloat(section,'DT_UT_val',csc.DT_UT_val);
+end;
+finally
+inif.Free;
+end;
+end;
+
+procedure Tf_main.ReadPrivateConfig(filename:string);
+var i,j:integer;
+    inif: TIniFile;
+    section : string;
+begin
+inif:=Tinifile.create(filename);
+try
+with inif do begin
+section:='util';
+u_util.ldeg:=ReadString(section,'ldeg',u_util.ldeg);
+u_util.lmin:=ReadString(section,'lmin',u_util.lmin);
+u_util.lsec:=ReadString(section,'lsec',u_util.lsec);
+section:='main';
+SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
+cfgm.language:=ReadString(section,'language',cfgm.language);
+cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
+cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterResolution);
+if (ReadBool(section,'WinMaximize',false)) then f_main.WindowState:=wsMaximized;
+cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
+catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
+section:='catalog';
+for i:=1 to maxstarcatalog do begin
+   catalog.cfgcat.starcatpath[i]:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
+end;
+for i:=1 to maxvarstarcatalog do begin
+   catalog.cfgcat.varstarcatpath[i]:=ReadString(section,'varstarcatpath'+inttostr(i),catalog.cfgcat.varstarcatpath[i]);
+end;
+for i:=1 to maxdblstarcatalog do begin
+   catalog.cfgcat.dblstarcatpath[i]:=ReadString(section,'dblstarcatpath'+inttostr(i),catalog.cfgcat.dblstarcatpath[i]);
+end;
+for i:=1 to maxnebcatalog do begin
+   catalog.cfgcat.nebcatpath[i]:=ReadString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
+end;
 section:='quicksearch';
 j:=ReadInteger(section,'count',0);
 for i:=1 to j do quicksearch.Items.Add(ReadString(section,'item'+inttostr(i),''));
-section:='display';
-def_cfgplot.starplot:=ReadInteger(section,'starplot',def_cfgplot.starplot);
-def_cfgplot.nebplot:=ReadInteger(section,'nebplot',def_cfgplot.nebplot);
-section:='default_chart';
-def_cfgsc.racentre:=ReadFloat(section,'racentre',def_cfgsc.racentre);
-def_cfgsc.decentre:=ReadFloat(section,'decentre',def_cfgsc.decentre);
-def_cfgsc.fov:=ReadFloat(section,'fov',def_cfgsc.fov);
-def_cfgsc.theta:=ReadFloat(section,'theta',def_cfgsc.theta);
-buf:=trim(ReadString(section,'projtype',def_cfgsc.projtype))+'A';
-def_cfgsc.projtype:=buf[1];
-def_cfgsc.ProjPole:=ReadInteger(section,'ProjPole',def_cfgsc.ProjPole);
-def_cfgsc.FlipX:=ReadInteger(section,'FlipX',def_cfgsc.FlipX);
-def_cfgsc.FlipY:=ReadInteger(section,'FlipY',def_cfgsc.FlipY);
 end;
 finally
 inif.Free;
@@ -464,28 +733,26 @@ end;
 end;
 
 procedure Tf_main.SaveDefault;
+begin
+SavePrivateConfig(configfile);
+SaveQuickSearch(configfile);
+SaveChartConfig(configfile);
+end;
+
+procedure Tf_main.SaveChartConfig(filename:string);
 var i:integer;
     inif: TIniFile;
     section : string;
 begin
-{ save the config file }
-inif:=Tinifile.create(configfile);
+inif:=Tinifile.create(filename);
 try
 with inif do begin
-section:='util';
-WriteString(section,'ldeg',u_util.ldeg);
-WriteString(section,'lmin',u_util.lmin);
-WriteString(section,'lsec',u_util.lsec);
 section:='main';
-WriteString(section,'language',cfgm.language);
-WriteString(section,'prtname',cfgm.prtname);
-WriteInteger(section,'PrinterResolution',cfgm.PrinterResolution);
-for i:=0 to MaxField do WriteFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
 WriteInteger(section,'WinTop',f_main.Top);
 WriteInteger(section,'WinLeft',f_main.Left);
 WriteInteger(section,'WinWidth',f_main.Width);
 WriteInteger(section,'WinHeight',f_main.Height);
-WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
+for i:=0 to MaxField do WriteFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
 section:='font';
 for i:=1 to 6 do begin
     WriteString(section,'FontName'+inttostr(i),cfgm.FontName[i]);
@@ -499,63 +766,169 @@ WriteBool(section,'AutoStarFilter',catalog.cfgshr.AutoStarFilter);
 WriteFloat(section,'AutoStarFilterMag',catalog.cfgshr.AutoStarFilterMag);
 WriteBool(section,'NebFilter',catalog.cfgshr.NebFilter);
 WriteBool(section,'BigNebFilter',catalog.cfgshr.BigNebFilter);
+WriteFloat(section,'BigNebLimit',catalog.cfgshr.BigNebLimit);
 for i:=1 to maxfield do begin
    WriteFloat(section,'StarMagFilter'+inttostr(i),catalog.cfgshr.StarMagFilter[i]);
    WriteFloat(section,'NebMagFilter'+inttostr(i),catalog.cfgshr.NebMagFilter[i]);
    WriteFloat(section,'NebSizeFilter'+inttostr(i),catalog.cfgshr.NebSizeFilter[i]);
 end;
 section:='catalog';
+Writeinteger(section,'GCatNum',catalog.cfgcat.GCatNum);
+for i:=0 to catalog.cfgcat.GCatNum-1 do begin
+   Writestring(section,'CatName'+inttostr(i),catalog.cfgcat.GCatLst[i].shortname);
+   Writestring(section,'CatLongName'+inttostr(i),catalog.cfgcat.GCatLst[i].name);
+   Writestring(section,'CatPath'+inttostr(i),catalog.cfgcat.GCatLst[i].path);
+   WriteFloat(section,'CatMin'+inttostr(i),catalog.cfgcat.GCatLst[i].min);
+   WriteFloat(section,'CatMax'+inttostr(i),catalog.cfgcat.GCatLst[i].max);
+   WriteBool(section,'CatActif'+inttostr(i),catalog.cfgcat.GCatLst[i].Actif);
+end;
 WriteFloat(section,'StarmagMax',catalog.cfgcat.StarmagMax);
 WriteFloat(section,'NebmagMax',catalog.cfgcat.NebmagMax);
 WriteFloat(section,'NebSizeMin',catalog.cfgcat.NebSizeMin);
 WriteBool(section,'UseUSNOBrightStars',catalog.cfgcat.UseUSNOBrightStars);
 WriteBool(section,'UseGSVSIr',catalog.cfgcat.UseGSVSIr);
 for i:=1 to maxstarcatalog do begin
-   WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
    WriteBool(section,'starcatdef'+inttostr(i),catalog.cfgcat.starcatdef[i]);
    WriteBool(section,'starcaton'+inttostr(i),catalog.cfgcat.starcaton[i]);
    WriteInteger(section,'starcatfield1'+inttostr(i),catalog.cfgcat.starcatfield[i,1]);
    WriteInteger(section,'starcatfield2'+inttostr(i),catalog.cfgcat.starcatfield[i,2]);
 end;
 for i:=1 to maxvarstarcatalog do begin
-   WriteString(section,'varstarcatpath'+inttostr(i),catalog.cfgcat.varstarcatpath[i]);
    WriteBool(section,'varstarcatdef'+inttostr(i),catalog.cfgcat.varstarcatdef[i]);
    WriteBool(section,'varstarcaton'+inttostr(i),catalog.cfgcat.varstarcaton[i]);
    WriteInteger(section,'varstarcatfield1'+inttostr(i),catalog.cfgcat.varstarcatfield[i,1]);
    WriteInteger(section,'varstarcatfield2'+inttostr(i),catalog.cfgcat.varstarcatfield[i,2]);
 end;
 for i:=1 to maxdblstarcatalog do begin
-   WriteString(section,'dblstarcatpath'+inttostr(i),catalog.cfgcat.dblstarcatpath[i]);
    WriteBool(section,'dblstarcatdef'+inttostr(i),catalog.cfgcat.dblstarcatdef[i]);
    WriteBool(section,'dblstarcaton'+inttostr(i),catalog.cfgcat.dblstarcaton[i]);
    WriteInteger(section,'dblstarcatfield1'+inttostr(i),catalog.cfgcat.dblstarcatfield[i,1]);
    WriteInteger(section,'dblstarcatfield2'+inttostr(i),catalog.cfgcat.dblstarcatfield[i,2]);
 end;
 for i:=1 to maxnebcatalog do begin
-   WriteString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
    WriteBool(section,'nebcatdef'+inttostr(i),catalog.cfgcat.nebcatdef[i]);
    WriteBool(section,'nebcaton'+inttostr(i),catalog.cfgcat.nebcaton[i]);
    WriteInteger(section,'nebcatfield1'+inttostr(i),catalog.cfgcat.nebcatfield[i,1]);
    WriteInteger(section,'nebcatfield2'+inttostr(i),catalog.cfgcat.nebcatfield[i,2]);
 end;
-section:='quicksearch';
-WriteInteger(section,'count',quicksearch.Items.count);
-for i:=1 to quicksearch.Items.count do WriteString(section,'item'+inttostr(i),quicksearch.Items[i-1]);
 section:='display';
+if ActiveMDIchild is Tf_chart then with ActiveMDIchild as Tf_chart do begin
+  def_cfgplot:=sc.plot.cfgplot;
+end;
 WriteInteger(section,'starplot',def_cfgplot.starplot);
 WriteInteger(section,'nebplot',def_cfgplot.nebplot);
+section:='chart';
+WriteInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
+WriteString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
+WriteFloat(section,'DefaultJDchart',catalog.cfgshr.DefaultJDchart);
 section:='default_chart';
 if ActiveMDIchild is Tf_chart then with ActiveMDIchild as Tf_chart do begin
   def_cfgsc:=sc.cfgsc;
+  WriteInteger(section,'ChartWidth',width);
+  WriteInteger(section,'ChartHeight',height);
+  WriteBool(section,'ChartMaximized',(WindowState=wsMaximized));
 end;
 WriteFloat(section,'racentre',def_cfgsc.racentre);
 WriteFloat(section,'decentre',def_cfgsc.decentre);
+WriteFloat(section,'acentre',def_cfgsc.acentre);
+WriteFloat(section,'hcentre',def_cfgsc.hcentre);
 WriteFloat(section,'fov',def_cfgsc.fov);
 WriteFloat(section,'theta',def_cfgsc.theta);
 WriteString(section,'projtype',def_cfgsc.projtype);
 WriteInteger(section,'ProjPole',def_cfgsc.ProjPole);
 WriteInteger(section,'FlipX',def_cfgsc.FlipX);
 WriteInteger(section,'FlipY',def_cfgsc.FlipY);
+WriteBool(section,'PMon',def_cfgsc.PMon);
+WriteBool(section,'DrawPMon',def_cfgsc.DrawPMon);
+WriteInteger(section,'DrawPMyear',def_cfgsc.DrawPMyear);
+WriteBool(section,'horizonopaque',def_cfgsc.horizonopaque);
+section:='observatory';
+WriteFloat(section,'ObsLatitude',def_cfgsc.ObsLatitude );
+WriteFloat(section,'ObsLongitude',def_cfgsc.ObsLongitude );
+WriteFloat(section,'ObsAltitude',def_cfgsc.ObsAltitude );
+WriteFloat(section,'ObsTemperature',def_cfgsc.ObsTemperature );
+WriteFloat(section,'ObsPressure',def_cfgsc.ObsPressure );
+WriteString(section,'ObsName',def_cfgsc.ObsName );
+WriteFloat(section,'ObsTZ',def_cfgsc.ObsTZ );
+section:='date';
+WriteBool(section,'UseSystemTime',def_cfgsc.UseSystemTime);
+WriteInteger(section,'CurYear',def_cfgsc.CurYear);
+WriteInteger(section,'CurMonth',def_cfgsc.CurMonth);
+WriteInteger(section,'CurDay',def_cfgsc.CurDay);
+WriteFloat(section,'CurTime',def_cfgsc.CurTime);
+WriteBool(section,'autorefresh',def_cfgsc.autorefresh);
+WriteBool(section,'Force_DT_UT',def_cfgsc.Force_DT_UT);
+WriteFloat(section,'DT_UT_val',def_cfgsc.DT_UT_val);
+end;
+finally
+ inif.Free;
+end;
+end;
+
+procedure Tf_main.SavePrivateConfig(filename:string);
+var i:integer;
+    inif: TIniFile;
+    section : string;
+begin
+inif:=Tinifile.create(filename);
+try
+with inif do begin
+section:='util';
+WriteString(section,'ldeg',u_util.ldeg);
+WriteString(section,'lmin',u_util.lmin);
+WriteString(section,'lsec',u_util.lsec);
+section:='main';
+WriteString(section,'language',cfgm.language);
+WriteString(section,'prtname',cfgm.prtname);
+WriteInteger(section,'PrinterResolution',cfgm.PrinterResolution);
+WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
+WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
+WriteInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
+section:='catalog';
+for i:=1 to maxstarcatalog do begin
+   WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
+end;
+for i:=1 to maxvarstarcatalog do begin
+   WriteString(section,'varstarcatpath'+inttostr(i),catalog.cfgcat.varstarcatpath[i]);
+end;
+for i:=1 to maxdblstarcatalog do begin
+   WriteString(section,'dblstarcatpath'+inttostr(i),catalog.cfgcat.dblstarcatpath[i]);
+end;
+for i:=1 to maxnebcatalog do begin
+   WriteString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
+end;
+end;
+finally
+ inif.Free;
+end;
+end;
+
+procedure Tf_main.SaveQuickSearch(filename:string);
+var i:integer;
+    inif: TIniFile;
+    section : string;
+begin
+inif:=Tinifile.create(filename);
+try
+with inif do begin
+section:='quicksearch';
+WriteInteger(section,'count',quicksearch.Items.count);
+for i:=1 to quicksearch.Items.count do WriteString(section,'item'+inttostr(i),quicksearch.Items[i-1]);
+end;
+finally
+ inif.Free;
+end;
+end;
+
+procedure Tf_main.SaveConfigOnExitExecute(Sender: TObject);
+var inif: TIniFile;
+    section : string;
+begin
+inif:=Tinifile.create(configfile);
+try
+with inif do begin
+section:='main';
+WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 end;
 finally
  inif.Free;
@@ -673,28 +1046,29 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    end;
    if ok then goto findit;  }
    if fileexists(slash(catalog.cfgcat.VarStarCatPath[gcvs-BaseVar])+'gcvs.idx') then begin
-      ok:=catalog.FindNum(S_GCVS,buf,ar1,de1) ;
+      ok:=catalog.FindNum(S_GCVS,Num,ar1,de1) ;
       if ok then goto findit;
    end;
-   ok:=catalog.FindNum(S_SAC,buf,ar1,de1) ;
+   ok:=catalog.FindNum(S_SAC,Num,ar1,de1) ;
    if ok then goto findit;
-   ok:=catalog.FindNum(S_Bayer,buf,ar1,de1) ;
+   ok:=catalog.FindNum(S_Bayer,Num,ar1,de1) ;
    if ok then goto findit;
-   ok:=catalog.FindNum(S_Flam,buf,ar1,de1) ;
+   ok:=catalog.FindNum(S_Flam,Num,ar1,de1) ;
    if ok then goto findit;
    if fileexists(slash(catalog.cfgcat.DblStarCatPath[wds-BaseDbl])+'wds.idx') then begin
-      ok:=catalog.FindNum(S_WDS,buf,ar1,de1) ;
+      ok:=catalog.FindNum(S_WDS,Num,ar1,de1) ;
       if ok then goto findit;
    end;
-   ok:=catalog.FindNum(S_Gcat,buf,ar1,de1) ;
+   ok:=catalog.FindNum(S_Gcat,Num,ar1,de1) ;
    if ok then goto findit;
-   ok:=catalog.FindNum(S_Ext,buf,ar1,de1) ;
+   ok:=catalog.FindNum(S_Ext,Num,ar1,de1) ;
    if ok then goto findit;
 Findit:
    if ok then begin
+      precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
       sc.movetoradec(ar1,de1);
       Refresh;
-      sc.FindatRaDec(ar1,de1,0.0001,desc,notes);
+      sc.FindatRaDec(ar1,de1,0.0003,desc,notes);
       f_main.SetLpanel1(desc);
       i:=quicksearch.Items.IndexOf(Num);
       if i=-1 then i:=MaxQuickSearch-1;
@@ -716,4 +1090,16 @@ begin
           else FlipButtonY.ImageIndex:=18;
 end;
 
+Procedure Tf_main.FormPos(form : Tform; x,y : integer);
+const bot=25; //minimal distance from screen bottom
+begin
+with Form do begin
+  left:=x;
+  if left+width>Screen.Width then left:=Screen.Width-width;
+  if left<0 then left:=0;
+  top:=y;
+  if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
+  if top<0 then top:=0;
+end;
+end;
 

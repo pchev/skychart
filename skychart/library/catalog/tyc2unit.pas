@@ -258,6 +258,7 @@ end;
 
 Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 maxcat:=ncat;
 if maxbin=1 then maxcat:=maxbin;
 curSM:=1;
@@ -388,6 +389,7 @@ end;
 
 Procedure OpenTY2win(ncat : integer; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 maxcat:=ncat;
 if maxbin=1 then maxcat:=maxbin;
 curSM:=1;

@@ -21,18 +21,27 @@ object f_chart: Tf_chart
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Image1: TImage
+  object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 376
     Height = 217
-    Cursor = crCross
     Align = alClient
-    AutoSize = True
-    PopupMenu = PopupMenu1
-    Stretch = True
-    OnMouseMove = Image1MouseMove
-    OnMouseUp = Image1MouseUp
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Image1: TImage
+      Left = 0
+      Top = 0
+      Width = 376
+      Height = 217
+      Cursor = crCross
+      Align = alClient
+      AutoSize = True
+      PopupMenu = PopupMenu1
+      Stretch = True
+      OnMouseMove = Image1MouseMove
+      OnMouseUp = Image1MouseUp
+    end
   end
   object RefreshTimer: TTimer
     Enabled = False
@@ -115,16 +124,50 @@ object f_chart: Tf_chart
       OnExecute = zoomminusmoveExecute
     end
     object FlipX: TAction
-      Category = 'zoom'
+      Category = 'rotation'
       Caption = 'FlipX'
       ImageIndex = 15
       OnExecute = FlipXExecute
     end
     object FlipY: TAction
-      Category = 'zoom'
+      Category = 'rotation'
       Caption = 'FlipY'
       ImageIndex = 17
       OnExecute = FlipYExecute
+    end
+    object Undo: TAction
+      Category = 'Undo'
+      Caption = 'Undo'
+      OnExecute = UndoExecute
+    end
+    object Redo: TAction
+      Category = 'Undo'
+      Caption = 'Redo'
+      OnExecute = RedoExecute
+    end
+    object rot_plus: TAction
+      Category = 'rotation'
+      Caption = 'rot_plus'
+      ImageIndex = 21
+      OnExecute = rot_plusExecute
+    end
+    object rot_minus: TAction
+      Category = 'rotation'
+      Caption = 'rot_minus'
+      ImageIndex = 22
+      OnExecute = rot_minusExecute
+    end
+    object GridEQ: TAction
+      Category = 'Grid'
+      Caption = 'GridEQ'
+      ImageIndex = 24
+      OnExecute = GridEQExecute
+    end
+    object GridAz: TAction
+      Category = 'Grid'
+      Caption = 'GridAz'
+      ImageIndex = 25
+      OnExecute = GridAzExecute
     end
   end
   object PopupMenu1: TPopupMenu

@@ -2,10 +2,10 @@ unit pu_config;
 
 interface
 
-uses Math, u_constant,
+uses Math, u_constant, u_util,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, Grids, ExtCtrls, enhedits, ActnList,
-  FoldrDlg;
+  FoldrDlg, Spin;
 
 type
   Tf_config = class(TForm)
@@ -295,36 +295,6 @@ type
     AstMax: TEdit;
     BitBtn8: TBitBtn;
     Astmin: TEdit;
-    Panel1: TPanel;
-    Label68: TLabel;
-    PMBox: TCheckBox;
-    DrawPmBox: TCheckBox;
-    lDrawPMy: TLongEdit;
-    GroupBox7: TGroupBox;
-    fw1: TFloatEdit;
-    fw2: TFloatEdit;
-    fw3: TFloatEdit;
-    fw4: TFloatEdit;
-    fw5: TFloatEdit;
-    fw6: TFloatEdit;
-    fw7: TFloatEdit;
-    fw8: TFloatEdit;
-    fw9: TFloatEdit;
-    fw10: TFloatEdit;
-    fw0: TFloatEdit;
-    Label96: TLabel;
-    Label97: TLabel;
-    Label98: TLabel;
-    Label99: TLabel;
-    Label100: TLabel;
-    Label101: TLabel;
-    Label102: TLabel;
-    Label103: TLabel;
-    Label104: TLabel;
-    Label105: TLabel;
-    Label106: TLabel;
-    Label107: TLabel;
-    fw00: TFloatEdit;
     Panel4: TPanel;
     Panel3: TPanel;
     Label110: TLabel;
@@ -390,8 +360,6 @@ type
     CancelBtn: TButton;
     OKBtn: TButton;
     HelpBtn: TButton;
-    Label113: TLabel;
-    Label114: TLabel;
     Label15: TLabel;
     Label116: TLabel;
     Label117: TLabel;
@@ -429,6 +397,136 @@ type
     FolderDialog1: TFolderDialog;
     stardisplay: TRadioGroup;
     nebuladisplay: TRadioGroup;
+    OpenDialog1: TOpenDialog;
+    fBigNebLimit: TLongEdit;
+    Label115: TLabel;
+    Label130: TLabel;
+    p_time: TTabSheet;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    Panel7: TPanel;
+    Label134: TLabel;
+    Panel8: TPanel;
+    CheckBox4: TCheckBox;
+    dt_ut: TLongEdit;
+    Panel9: TPanel;
+    Label137: TLabel;
+    Label139: TLabel;
+    Label141: TLabel;
+    BitBtn4: TBitBtn;
+    p_simulation: TTabSheet;
+    Panel6: TPanel;
+    Label131: TLabel;
+    Label132: TLabel;
+    Label133: TLabel;
+    SpeedButton7: TSpeedButton;
+    nbj: TEdit;
+    nbpas: TEdit;
+    UpDown1: TUpDown;
+    RadioGroup5: TRadioGroup;
+    CheckBox3: TCheckBox;
+    LongEdit2: TLongEdit;
+    Label142: TLabel;
+    ADBC: TRadioGroup;
+    Label138: TLabel;
+    Label143: TLabel;
+    Label144: TLabel;
+    Label145: TLabel;
+    Label135: TLabel;
+    Tdt_Ut: TLabel;
+    Label136: TLabel;
+    Label146: TLabel;
+    Label147: TLabel;
+    Label148: TLabel;
+    Label149: TLabel;
+    Label150: TLabel;
+    Panel1: TPanel;
+    Label68: TLabel;
+    Label113: TLabel;
+    PMBox: TCheckBox;
+    DrawPmBox: TCheckBox;
+    lDrawPMy: TLongEdit;
+    Panel10: TPanel;
+    Label151: TLabel;
+    equinoxtype: TRadioGroup;
+    equinox2: TFloatEdit;
+    equinox1: TComboBox;
+    Label152: TLabel;
+    Applyall: TCheckBox;
+    tz: TFloatEdit;
+    d_year: TSpinEdit;
+    d_month: TSpinEdit;
+    d_day: TSpinEdit;
+    t_hour: TSpinEdit;
+    t_min: TSpinEdit;
+    t_sec: TSpinEdit;
+    next: TButton;
+    previous: TButton;
+    Panel11: TPanel;
+    Label140: TLabel;
+    Label155: TLabel;
+    Label156: TLabel;
+    Label157: TLabel;
+    LabelDate: TLabel;
+    LabelTime: TLabel;
+    LabelTimezone: TLabel;
+    p_projection: TTabSheet;
+    Label158: TLabel;
+    ComboBox2: TComboBox;
+    ComboBox1: TComboBox;
+    ComboBox3: TComboBox;
+    ComboBox4: TComboBox;
+    ComboBox5: TComboBox;
+    Edit8: TEdit;
+    Label161: TLabel;
+    Label162: TLabel;
+    Label163: TLabel;
+    Label164: TLabel;
+    Label165: TLabel;
+    Label166: TLabel;
+    Label159: TLabel;
+    Label160: TLabel;
+    Label167: TLabel;
+    Label168: TLabel;
+    Label169: TLabel;
+    Label170: TLabel;
+    Label171: TLabel;
+    ComboBox6: TComboBox;
+    ComboBox7: TComboBox;
+    ComboBox8: TComboBox;
+    ComboBox9: TComboBox;
+    ComboBox10: TComboBox;
+    Label172: TLabel;
+    Label173: TLabel;
+    RadioGroup6: TRadioGroup;
+    RadioGroup7: TRadioGroup;
+    Label96: TLabel;
+    Label97: TLabel;
+    Label98: TLabel;
+    Label99: TLabel;
+    Label100: TLabel;
+    Label101: TLabel;
+    Label102: TLabel;
+    Label103: TLabel;
+    Label104: TLabel;
+    Label105: TLabel;
+    Label106: TLabel;
+    Label107: TLabel;
+    Label114: TLabel;
+    Label153: TLabel;
+    Label154: TLabel;
+    fw1: TFloatEdit;
+    fw2: TFloatEdit;
+    fw3: TFloatEdit;
+    fw4: TFloatEdit;
+    fw5: TFloatEdit;
+    fw6: TFloatEdit;
+    fw7: TFloatEdit;
+    fw8: TFloatEdit;
+    fw9: TFloatEdit;
+    fw10: TFloatEdit;
+    fw0: TFloatEdit;
+    fw00: TFloatEdit;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -467,22 +565,60 @@ type
     procedure BitBtn15Click(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
+    procedure StringGrid3DrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
+    procedure StringGrid3MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure StringGrid3SelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
+    procedure StringGrid3SetEditText(Sender: TObject; ACol, ARow: Integer;
+      const Value: String);
+    procedure BitBtn33Click(Sender: TObject);
+    procedure BitBtn35Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure fBigNebLimitChange(Sender: TObject);
+    procedure equinoxtypeClick(Sender: TObject);
+    procedure equinox1Change(Sender: TObject);
+    procedure equinox2Change(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
+    procedure LongEdit2Change(Sender: TObject);
+    procedure DateChange(Sender: TObject);
+    procedure tzChange(Sender: TObject);
+    procedure CheckBox4Click(Sender: TObject);
+    procedure dt_utChange(Sender: TObject);
+    procedure TimeChange(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure PMBoxClick(Sender: TObject);
+    procedure DrawPmBoxClick(Sender: TObject);
+    procedure lDrawPMyChange(Sender: TObject);
+    procedure nextClick(Sender: TObject);
+    procedure previousClick(Sender: TObject);
+    procedure ProjectionChange(Sender: TObject);
   private
     { Déclarations privées }
+    procedure EditGCatPath(row : integer);
+    procedure DeleteGCatRow(p : integer);
   public
     { Déclarations publiques }
     ccat : conf_catalog;
     cshr : conf_shared;
-    cskyc : conf_skychart;
+    csc  : conf_skychart;
     cplot : conf_plot;
     cmain : conf_main;
+    catalogempty: boolean;
     procedure SetLang(lang:string);
     function SelectPage(txt:string):boolean;
     procedure SetFonts(ctrl:Tedit;num:integer);
+    procedure ShowTime;
+    procedure ShowChart;
+    procedure SetEquinox;
     procedure ShowDisplay;
     procedure ShowFonts;
     procedure ShowField;
+    procedure ShowProjection;
     procedure ShowFilter;
+    procedure ShowGcat;
     procedure ShowCDCStar;
     procedure ShowCDCNeb;
   end;
@@ -492,11 +628,18 @@ var
 
 implementation
 
-uses pu_main;
+uses pu_main, u_projection;
+
+const b=' ';
 
 {$R *.dfm}
 
 {$include i_config.pas }
 
+procedure Tf_config.ProjectionChange(Sender: TObject);
+begin
+if sender is TComboBox then with sender as TComboBox do
+   csc.projname[tag]:=text;
+end;
 
 end.

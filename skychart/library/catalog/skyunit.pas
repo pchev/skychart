@@ -127,6 +127,7 @@ end;
 
 Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 if UseCache then FindRegionList15(ar1,ar2,de1,de2,nSM,SMlst)
@@ -191,6 +192,7 @@ end;
 
 Procedure OpenSKYwin(var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 if UseCache then FindRegionListWin15(nSM,SMlst)
             else FindRegionAllWin15(nSM,SMlst);

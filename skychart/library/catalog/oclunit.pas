@@ -88,6 +88,7 @@ end;
 
 Procedure OpenOCL(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionList30(ar1,ar2,de1,de2,nSM,SMlst);
@@ -119,6 +120,7 @@ end;
 
 Procedure OpenOCLwin(var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];

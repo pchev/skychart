@@ -473,8 +473,13 @@ end;
   converting from its string representation. }
 function TFloatEdit.GetValue: Extended;
 begin
+try
   FValue := StrToFloat(Text);
   Result := CheckValue(FValue);
+except
+  FValue := 0;
+  Result := CheckValue(FValue);
+end;
 end;
 
 { Method to set the FMinValue property, check that

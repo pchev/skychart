@@ -132,6 +132,7 @@ end;
 
 Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionListDS(ar1,ar2,de1,de2,nSM,zonelst);
@@ -170,6 +171,7 @@ end;
 
 Procedure OpenDSTYCwin(var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWinDS(nSM,zonelst);
 zone := zonelst[curSM];
@@ -196,6 +198,7 @@ end;
 
 Procedure OpenDSGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionListDS(ar1,ar2,de1,de2,nSM,zonelst);
@@ -234,6 +237,7 @@ end;
 
 Procedure OpenDSGSCwin(var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWinDS(nSM,zonelst);
 zone := zonelst[curSM];
@@ -278,6 +282,7 @@ end;
 
 Procedure OpenDSbase(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 OpenRegionBase(ok);
 end;
 
@@ -309,6 +314,7 @@ end;
 
 Procedure OpenDSbasewin(var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 Nsm:=1;
 OpenRegionBase(ok);

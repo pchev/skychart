@@ -30,7 +30,7 @@ uses Math, SysUtils,
     QGraphics;
 {$endif}
 {$ifdef mswindows}
-    Graphics;
+    Windows,Graphics;
 {$endif}
 
 function rmod(x,y:Double):Double;
@@ -63,6 +63,7 @@ Function ARToStr2(ar: Double; var d,m,s : string) : string;
 Function DEToStr2(de: Double; var d,m,s : string) : string;
 Function DEToStr3(de: Double) : string;
 Function DEToStr4(de: Double) : string;
+Function GetTimeZone : double;
 
 var debugon : boolean;
     ldeg,lmin,lsec : string;
@@ -521,6 +522,18 @@ begin
     str(sec:2:0,s);
     if abs(sec)<9.95 then s:='0'+trim(s);
     result := d+'h'+m+'m'+s+'s';
+end;
+
+Function GetTimeZone: double;
+{$ifdef mswindows}
+var lt,st : TSystemTime;
+{$endif}
+begin
+// return time zone in hour
+{$ifdef mswindows}
+ GetLocalTime(lt);GetSystemTime(st);
+ result:=round(24000000*(SystemTimeToDateTime(lt)-SystemTimeToDateTime(st)))/1000000;
+{$endif}
 end;
 
 end.

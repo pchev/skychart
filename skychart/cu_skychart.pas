@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_plot, cu_catalog, u_constant,
+uses cu_plot, cu_catalog, u_constant, libcatalog,
      SysUtils, Classes, Math,
 {$ifdef linux}
    QControls, QExtCtrls, QGraphics;
@@ -48,36 +48,44 @@ Tskychart = class (TComponent)
     property catalog: Tcatalog read Fcatalog write Fcatalog;
     function Refresh : boolean;
     function InitCatalog : boolean;
+    function InitTime : boolean;
     function InitChart : boolean;
+    function InitCoordinates : boolean;
+    function InitObservatory : boolean;
     function DrawStars :boolean;
     function DrawVarStars :boolean;
     function DrawDblStars :boolean;
     function DrawNebulae :boolean;
-    procedure GetCoord(x,y: integer; var ra,dec:double);
+    function DrawEqGrid :boolean;
+    function DrawAzGrid :boolean;
+    procedure GetCoord(x,y: integer; var ra,dec,a,h:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
     procedure MovetoXY(X,Y : integer);
     procedure MovetoRaDec(ra,dec:double);
     procedure Zoom(zoomfactor:double);
     procedure SetFOV(f:double);
     function NormRA(ra : double):double;
+    function PoleRot2000(ra,dec:double):double;
+    procedure FormatCatRec(rec:Gcatrec; var desc:string);
     function FindatRaDec(ra,dec,dx: double; var desc,longdesc :string):boolean;
 end;
 
 
 implementation
 
-uses libcatalog, u_projection, u_util;
+uses u_projection, u_util;
 
 constructor Tskychart.Create(AOwner:Tcomponent);
 begin
  inherited Create(AOwner);
  // set safe value
+ cfgsc.JDChart:=jd2000;
  cfgsc.racentre:=0;
  cfgsc.decentre:=0;
  cfgsc.fov:=1;
  cfgsc.theta:=0;
  cfgsc.projtype:='A';
- cfgsc.ProjPole:=0;
+ cfgsc.ProjPole:=Equat;
  cfgsc.FlipX:=1;
  cfgsc.FlipY:=1;
  cfgsc.WindowRatio:=1;
@@ -102,25 +110,29 @@ function Tskychart.Refresh :boolean;
 begin
 try
   chdir(appdir);
+  InitObservatory;
+  InitTime;
   InitChart;
+  InitCoordinates;
   InitCatalog;
-  catalog.OpenCat(cfgsc);
+  Fcatalog.OpenCat(cfgsc);
   DrawNebulae;
+  DrawEqGrid;
+  DrawAzGrid;
   DrawStars;
   DrawDblStars;
   DrawVarStars;
   result:=true;
 finally
-  catalog.CloseCat;
+  Fcatalog.CloseCat;
 end;
 end;
 
 function Tskychart.InitCatalog:boolean;
-var w,h : double;
-    i : integer;
+var i:integer;
+    mag:double;
   procedure InitStarC(cat:integer;defaultmag:double);
   { determine if the star catalog is active at this scale }
-  var mag:double;
   begin
   if Fcatalog.cfgcat.starcatdef[cat-BaseStar] and
     (cfgsc.FieldNum>=Fcatalog.cfgcat.starcatfield[cat-BaseStar,1]) and
@@ -160,22 +172,12 @@ var w,h : double;
      else Fcatalog.cfgcat.nebcaton[cat-BaseNeb]:=false;
   end;
 begin
-w := cfgsc.fov;
-h := cfgsc.fov/cfgsc.WindowRatio;
-w := rad2deg*maxvalue([w,h]);
-if w>360 then w:=360;
-{ find the current field number}
-cfgsc.FieldNum:=10;
-for i:=0 to 10 do if Fcatalog.cfgshr.FieldNum[i]>=w then begin
-       cfgsc.FieldNum:=i;
-       break;
-    end;
 if Fcatalog.cfgshr.AutoStarFilter then Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
    else Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
 Fcatalog.cfgcat.NebMagMax:=Fcatalog.cfgshr.NebMagFilter[cfgsc.FieldNum];
 Fcatalog.cfgcat.NebSizeMin:=Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
 Fplot.cfgchart.min_ma:=1;
-{ activate the star catalog in increasing magnitude order}
+{ activate the star catalog}
 InitStarC(dsbase,5.5);
 InitStarC(bsc,6.5);
 InitStarC(sky2000,9.5);
@@ -193,7 +195,73 @@ InitStarC(usnoa,18);
 InitVarC(gcvs);
 InitDblC(wds);
 InitNebC(sac);
+InitNebC(ngc);
+InitNebC(lbn);
+InitNebC(rc3);
+InitNebC(pgc);
+InitNebC(ocl);
+InitNebC(gcm);
+InitNebC(gpn);
+Fcatalog.cfgcat.starcaton[gcstar-BaseStar]:=false;
+Fcatalog.cfgcat.varstarcaton[gcvar-Basevar]:=false;
+Fcatalog.cfgcat.dblstarcaton[gcdbl-Basedbl]:=false;
+Fcatalog.cfgcat.nebcaton[gcneb-Baseneb]:=false;
+//Fcatalog.cfgcat.starcaton[gclin-Baselin]:=false;
+for i:=1 to Fcatalog.cfgcat.GCatNum do
+  if Fcatalog.cfgcat.GCatLst[i-1].Actif and
+     (cfgsc.FieldNum>=Fcatalog.cfgcat.GCatLst[i-1].min) and
+     (cfgsc.FieldNum<=Fcatalog.cfgcat.GCatLst[i-1].max) then begin
+         Fcatalog.cfgcat.GCatLst[i-1].CatOn:=true;
+         case Fcatalog.cfgcat.GCatLst[i-1].cattype of
+          rtstar: begin
+                  Fcatalog.cfgcat.starcaton[gcstar-BaseStar]:=true;
+                  if Fcatalog.cfgshr.StarFilter then mag:=minvalue([Fcatalog.cfgcat.GCatLst[i-1].magmax,Fcatalog.cfgcat.StarMagMax])
+                                                else mag:=Fcatalog.cfgcat.GCatLst[i-1].magmax;
+                  Fplot.cfgchart.min_ma:=maxvalue([Fplot.cfgchart.min_ma,mag]);
+                  end;
+          rtvar : Fcatalog.cfgcat.varstarcaton[gcvar-Basevar]:=true;
+          rtdbl : Fcatalog.cfgcat.dblstarcaton[gcdbl-Basedbl]:=true;
+          rtneb : Fcatalog.cfgcat.nebcaton[gcneb-Baseneb]:=true;
+//          rtlin : Fcatalog.cfgcat.starcaton[gclin-Baselin]:=true;
+         end;
+  end else Fcatalog.cfgcat.GCatLst[i-1].CatOn:=false;
 result:=true;
+end;
+
+function Tskychart.InitTime:boolean;
+begin
+if cfgsc.UseSystemTime then begin
+   SetCurrentTime(cfgsc);
+   cfgsc.TimeZone:=GetTimezone
+end else begin
+   cfgsc.TimeZone:=cfgsc.ObsTZ;
+end;
+cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc);
+cfgsc.CurJD:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);
+cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
+cfgsc.CurST:=deg2rad*15*Sidtim(cfgsc.jd0,cfgsc.CurTime-cfgsc.TimeZone,cfgsc.ObsLongitude);
+if (Fcatalog.cfgshr.Equinoxtype=2)or(cfgsc.projpole=altaz) then begin  // use equinox of the date
+   cfgsc.JDChart:=cfgsc.CurJD;
+end else begin
+   cfgsc.JDChart:=Fcatalog.cfgshr.DefaultJDChart;
+end;
+cfgsc.rap2000:=0;       // position of J2000 pole in current coordinates
+cfgsc.dep2000:=pid2;
+precession(jd2000,cfgsc.JDChart,cfgsc.rap2000,cfgsc.dep2000);
+result:=true;
+end;
+
+function Tskychart.InitObservatory:boolean;
+var u,p : double;
+const ratio = 0.99664719;
+      H0 = 6378140.0 ;
+begin
+   p:=deg2rad*cfgsc.ObsLatitude;
+   u:=arctan(ratio*tan(p));
+   cfgsc.ObsRoSinPhi:=ratio*sin(u)+(cfgsc.ObsAltitude/H0)*sin(p);
+   cfgsc.ObsRoCosPhi:=cos(u)+(cfgsc.ObsAltitude/H0)*cos(p);
+   cfgsc.ObsRefractionCor:=(cfgsc.ObsPressure/1010)*(283/(273+cfgsc.ObsTemperature));
+   result:=true;
 end;
 
 function Tskychart.InitChart:boolean;
@@ -206,22 +274,103 @@ ScaleWindow(cfgsc);
 result:=true;
 end;
 
+function Tskychart.InitCoordinates:boolean;
+var w,h : double;
+    i : integer;
+begin
+w := cfgsc.fov;
+h := cfgsc.fov/cfgsc.WindowRatio;
+w := rad2deg*maxvalue([w,h]);
+if w>360 then w:=360;
+{ find the current field number}
+cfgsc.FieldNum:=10;
+for i:=0 to 10 do if Fcatalog.cfgshr.FieldNum[i]>=w then begin
+       cfgsc.FieldNum:=i;
+       break;
+    end;
+cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
+ if cfgsc.FollowOn then begin
+  case cfgsc.FollowType of
+{     1 : begin
+         case followobj of
+         1..9 : Planet(FollowObj,jdt,ar,de,dist,v1,v2,v3,v4,v5,err);
+         10   : Soleil(jdt,ar,de,dist,v1,err);
+         11   : Lune(jdt,ar,de,dist,v1,v2,v3,v4);
+         32   : begin
+                Soleil(jdt,ar,de,v1,v2,err);
+                Lune(jdt,v1,v2,dist,v3,v4,v5,v6);
+                ar:=rmod(ar+12,24);
+                de:=-de;
+                end;
+         end;
+         if PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,v1);
+         arcentre:=ar;
+         decentre:=de;
+         end;
+     2 : begin
+         InitComete(CometNum[FollowObj],buf);
+         Comete(jdt,ar,de,dist,v1,v2,v3,v4,v5,v6,v7,v8);
+         if PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,v1);
+         arcentre:=ar;
+         decentre:=de;
+         end;
+     3 : begin
+         InitAsteroide(AsteroidNum[FollowObj],buf);
+         Asteroide(jdt,ar,de,dist,v1,v2,v3,v4);
+         if PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,v1);
+         arcentre:=ar;
+         decentre:=de;
+         end;    }
+     4 : begin
+         if cfgsc.Projpole=AltAz then begin
+           Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
+           cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
+           cfgsc.FollowOn:=false;
+         end;
+         end;
+   end;
+  end;
+Eq2Hz(cfgsc.CurST-cfgsc.racentre,cfgsc.decentre,cfgsc.acentre,cfgsc.hcentre,cfgsc) ;
+result:=true;
+end;
+
 function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
-  x1,y1: Double;
-  xx,yy: integer;
+  x1,y1,cyear,dyear: Double;
+  xx,yy,xxp,yyp: integer;
 begin
 fillchar(rec,sizeof(rec),0);
+cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
+dyear:=0;
+try
 if Fcatalog.OpenStar then
  while Fcatalog.readstar(rec) do begin
+ if cfgsc.PMon or cfgsc.DrawPMon then begin
+    if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
+                               else dyear:=cyear-rec.options.Epoch;
+ end;
+ if cfgsc.PMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
+    rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*dyear;
+    rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
+ end;
+ precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
+    if cfgsc.DrawPMon then begin
+       rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*cfgsc.DrawPMyear;
+       rec.dec:=rec.dec+(rec.star.pmdec)*cfgsc.DrawPMyear;
+       projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
+       WindowXY(x1,y1,xxp,yyp,cfgsc);
+       Fplot.PlotLine(xx,yy,xxp,yyp,clGray,1);
+    end;
  end;
 end;
-Fcatalog.CloseStar;
 result:=true;
+finally
+Fcatalog.CloseStar;
+end;
 end;
 
 function Tskychart.DrawVarStars :boolean;
@@ -230,88 +379,112 @@ var rec:GcatRec;
   xx,yy: integer;
 begin
 fillchar(rec,sizeof(rec),0);
+try
 if Fcatalog.OpenVarStar then
  while Fcatalog.readvarstar(rec) do begin
+ precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
  end;
 end;
-Fcatalog.CloseVarStar;
 result:=true;
+finally
+ Fcatalog.CloseVarStar;
+end;
 end;
 
 function Tskychart.DrawDblStars :boolean;
 var rec:GcatRec;
-  x1,y1,rot: Double;
-  xx,yy,xxn,yyn: integer;
+  x1,y1,x2,y2,rot: Double;
+  xx,yy: integer;
 begin
 fillchar(rec,sizeof(rec),0);
+try
 if Fcatalog.OpenDblStar then
  while Fcatalog.readdblstar(rec) do begin
+ precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    projection(rec.ra,rec.dec+1,x1,y1,false,cfgsc) ;
-    windowxy(x1,y1,xxn,yyn,cfgsc);
-    if rec.double.pa=-999 then rec.double.pa:=0;
+    projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
+    rot:=arctan2((x1-x2),(y1-y2));
+    if (not rec.double.valid[vdPA])or(rec.double.pa=-999) then rec.double.pa:=0
+        else rec.double.pa:=rec.double.pa-rad2deg*PoleRot2000(rec.ra,rec.dec);
     rec.double.pa:=rec.double.pa*cfgsc.FlipX;
     if cfgsc.FlipY<0 then rec.double.pa:=180-rec.double.pa;
-    rot:=arctan2((xx-xxn),(yy-yyn));
     if cfgsc.FlipY<0 then rot:=rot-pi;
-    rec.double.pa:=DegToRad(rec.double.pa)+rot;
+    rec.double.pa:=DegToRad(rec.double.pa)-rot;
     Fplot.PlotDblStar(xx,yy,rec.double.mag1,rec.double.sep,rec.double.pa,0);
  end;
 end;
-Fcatalog.CloseDblStar;
 result:=true;
+finally
+  Fcatalog.CloseDblStar;
+end;
+end;
+
+function Tskychart.PoleRot2000(ra,dec:double):double;
+var  x1,y1: Double;
+begin
+if cfgsc.JDChart=jd2000 then result:=0
+else begin
+  Proj2(cfgsc.rap2000,cfgsc.dep2000,ra,dec,x1,y1,cfgsc);
+  result:=arctan2(x1,y1);
+end;
 end;
 
 function Tskychart.DrawNebulae :boolean;
 var rec:GcatRec;
-  x1,y1,rot: Double;
-  xx,yy,xxn,yyn,nebunit: integer;
+  x1,y1,x2,y2,rot: Double;
+  xx,yy: integer;
 begin
 fillchar(rec,sizeof(rec),0);
+try
 if Fcatalog.OpenNeb then
  while Fcatalog.readneb(rec) do begin
+ precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-  if rec.neb.valid[vnNebunit] then nebunit:=rec.neb.nebunit
-                              else nebunit:=rec.options.Units;
+  if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
+  if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
   if rec.neb.nebtype=1 then begin
-      projection(rec.ra,rec.dec+1,x1,y1,false,cfgsc) ;
-      windowxy(x1,y1,xxn,yyn,cfgsc);
-      if rec.neb.pa=-999 then rec.neb.pa:=90;
+      projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
+      rot:=arctan2((x1-x2),(y1-y2));
+      if (not rec.neb.valid[vnPA])or(rec.neb.pa=-999) then rec.neb.pa:=90
+          else rec.neb.pa:=rec.neb.pa-rad2deg*PoleRot2000(rec.ra,rec.dec);
       rec.neb.pa:=rec.neb.pa*cfgsc.FlipX;
       if cfgsc.FlipY<0 then rec.neb.pa:=180-rec.neb.pa;
-      rot:=arctan2((xx-xxn),(yy-yyn));
       if cfgsc.FlipY<0 then rot:=rot-pi;
-      rec.neb.pa:=DegToRad(rec.neb.pa)+rot;
-      Fplot.PlotGalaxie(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/nebunit);
+      rec.neb.pa:=DegToRad(rec.neb.pa)-rot;
+      Fplot.PlotGalaxie(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit);
    end else
-      Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/nebunit,rec.neb.nebtype);
+      Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype);
  end;
 end;
-Fcatalog.CloseDblStar;
 result:=true;
+finally
+ Fcatalog.CloseDblStar;
+end;
 end;
 
-procedure Tskychart.GetCoord(x,y: integer; var ra,dec:double);
+procedure Tskychart.GetCoord(x,y: integer; var ra,dec,a,h:double);
 begin
 getadxy(x,y,ra,dec,cfgsc);
+GetAHxy(X,Y,a,h,cfgsc);
+if Fcatalog.cfgshr.AzNorth then a:=rmod(a+pi,pi2);
 end;
 
 procedure Tskychart.MoveChart(ns,ew:integer; movefactor:double);
 begin
- if cfgsc.Projpole=1 then begin
-    cfgsc.acentre:=rmod(cfgsc.acentre+ew*cfgsc.fov/movefactor/cos(cfgsc.hcentre)+pi2,pi2);
+ if cfgsc.Projpole=AltAz then begin
+    cfgsc.acentre:=rmod(cfgsc.acentre-ew*cfgsc.fov/movefactor/cos(cfgsc.hcentre)+pi2,pi2);
     cfgsc.hcentre:=cfgsc.hcentre+ns*cfgsc.fov/movefactor/cfgsc.windowratio;
     if cfgsc.hcentre>pid2 then cfgsc.hcentre:=pi-cfgsc.hcentre;
     Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
-    cfgsc.racentre:=cfgsc.CurrentST-cfgsc.racentre;
+    cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
  end
  else begin
     cfgsc.racentre:=rmod(cfgsc.racentre+ew*cfgsc.fov/movefactor/cos(cfgsc.decentre)+pi2,pi2);
@@ -324,18 +497,12 @@ procedure Tskychart.MovetoXY(X,Y : integer);
 begin
    GetADxy(X,Y,cfgsc.racentre,cfgsc.decentre,cfgsc);
    cfgsc.racentre:=rmod(cfgsc.racentre+pi2,pi2);
-   if cfgsc.projpole=1 then begin
-      precession(jd2000,cfgsc.CurrentJD,cfgsc.racentre,cfgsc.decentre);
-   end;
 end;
 
 procedure Tskychart.MovetoRaDec(ra,dec:double);
 begin
    cfgsc.racentre:=rmod(ra+pi2,pi2);
    cfgsc.decentre:=dec;
-   if cfgsc.projpole=1 then begin
-      precession(jd2000,cfgsc.CurrentJD,cfgsc.racentre,cfgsc.decentre);
-   end;
 end;
 
 procedure Tskychart.Zoom(zoomfactor:double);
@@ -357,22 +524,13 @@ result:=rmod(ra+pi2,pi2);
 //else NormRA:=ra;
 end;
 
-function Tskychart.FindatRaDec(ra,dec,dx: double; var desc, longdesc :string):boolean;
-var x1,x2,y1,y2:double;
+Procedure Tskychart.FormatCatRec(rec:Gcatrec; var desc:string);
+var txt: string;
     i : integer;
-    rec: Gcatrec;
-    txt: string;
 const b=' ';
       b5='     ';
       dp = ':';
 begin
-x1 := NormRA(ra-dx/cos(dec));
-x2 := NormRA(ra+dx/cos(dec));
-y1 := maxvalue([-pid2,dec-dx]);
-y2 := minvalue([pid2,dec+dx]);
-result:=catalog.Findobj(x1,y1,x2,y2,false,cfgsc,rec);
-if result then begin
- desc:=''; longdesc:='';
  desc:= ARpToStr(rmod(rad2deg*rec.ra/15+24,24))+b+DEpToStr(rad2deg*rec.dec);
  case rec.options.rectype of
  rtStar: begin   // stars
@@ -467,7 +625,7 @@ if result then begin
             Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdSep])+dp+txt;
          end;
          if rec.double.valid[vdPa] then begin
-            if (rec.double.pa>0) then str(round(rec.double.pa):3,txt) else txt:='   ';
+            if (rec.double.pa>0) then str(round(rec.double.pa-rad2deg*PoleRot2000(rec.ra,rec.dec)):3,txt) else txt:='   ';
             Desc:=Desc+b+trim(rec.options.flabel[lOffset+vdPa])+dp+txt;
          end;
          if rec.double.valid[vdEpoch] then begin
@@ -481,7 +639,7 @@ if result then begin
  rtNeb : begin   // nebulae
          if rec.neb.valid[vnId] then txt:=rec.neb.id else txt:='';
          if trim(txt)='' then catalog.GetAltName(rec,txt);
-         if rec.double.valid[vnNebtype] then i:=rec.neb.nebtype
+         if rec.neb.valid[vnNebtype] then i:=rec.neb.nebtype
                                         else i:=rec.options.ObjType;
          Desc:=Desc+' '+nebtype[i+2]+' '+txt;
          if rec.neb.valid[vnMag] then begin
@@ -511,7 +669,7 @@ if result then begin
             Desc:=Desc+' Flux:'+txt+b;
          end;
          if rec.neb.valid[vnPa] then begin
-            if (rec.neb.pa>0) then str(rec.neb.pa:3:0,txt) else txt:='   ';
+            if (rec.neb.pa>0) then str(rec.neb.pa-rad2deg*PoleRot2000(rec.ra,rec.dec):3:0,txt) else txt:='   ';
             Desc:=Desc+b+trim(rec.options.flabel[lOffset+vnPa])+dp+txt;
          end;
          if rec.neb.valid[vnRv] then begin
@@ -529,6 +687,194 @@ if result then begin
    if rec.vnum[i] then Desc:=Desc+b+trim(rec.options.flabel[25+i])+dp+formatfloat('0.0####',rec.num[i]);
  end;
 end;
+
+function Tskychart.FindatRaDec(ra,dec,dx: double; var desc, longdesc :string):boolean;
+var x1,x2,y1,y2:double;
+    rec: Gcatrec;
+begin
+x1 := NormRA(ra-dx/cos(dec));
+x2 := NormRA(ra+dx/cos(dec));
+y1 := maxvalue([-pid2,dec-dx]);
+y2 := minvalue([pid2,dec+dx]);
+desc:=''; longdesc:='';
+result:=catalog.Findobj(x1,y1,x2,y2,false,cfgsc,rec);
+if result then begin
+ FormatCatRec(rec,desc);
+end;
+end;
+
+function Tskychart.DrawEqGrid;
+var ra1,de1,ac,dc,dra,dde:double;
+    col:integer;
+    ok:boolean;
+    
+function DrawRAline(ra,de,dd:double):boolean;
+var x1,y1:double;
+    n,xx,yy,xxp,yyp: integer;
+begin
+projection(ra,de,x1,y1,true,cfgsc) ;
+WindowXY(x1,y1,xxp,yyp,cfgsc);
+n:=0;
+repeat
+ inc(n);
+ de:=de+dd/3;
+ projection(ra,de,x1,y1,cfgsc.horizonopaque,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)
+    then Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+ xxp:=xx;
+ yyp:=yy;
+until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
+      (yy<-cfgsc.Ymax)or(yy>2*cfgsc.Ymax)or
+      (de>(pid2-dd/3))or(de<(-pid2+dd/3));
+result:=(n>1);
+end;
+function DrawDEline(ra,de,da:double):boolean;
+var x1,y1:double;
+    n,xx,yy,xxp,yyp: integer;
+begin
+projection(ra,de,x1,y1,cfgsc.horizonopaque,cfgsc) ;
+WindowXY(x1,y1,xxp,yyp,cfgsc);
+n:=0;
+repeat
+ inc(n);
+ ra:=ra+da/3;
+ projection(ra,de,x1,y1,true,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)
+    then Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+ xxp:=xx;
+ yyp:=yy;
+until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
+      (yy<-cfgsc.Ymax)or(yy>2*cfgsc.Ymax)or
+      (ra>ra1+pi)or(ra<ra1-pi);
+result:=(n>1);
+end;
+
+begin
+result:=false;
+if not cfgsc.ShowEqGrid then exit;
+col:=clGray;
+dra:=Fcatalog.cfgshr.HourGridSpacing[cfgsc.FieldNum];
+dde:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
+ra1:=deg2rad*trunc(rad2deg*cfgsc.racentre/15/dra)*dra*15;
+de1:=deg2rad*trunc(rad2deg*cfgsc.decentre/dde)*dde;
+dra:=deg2rad*dra*15;
+dde:=deg2rad*dde;
+ac:=ra1; dc:=de1;
+repeat
+  ok:=DrawRAline(ac,dc,dde);
+  ok:=DrawRAline(ac,dc,-dde) or ok;
+  ac:=ac+dra;
+until (not ok)or(ac>ra1+pi);
+ac:=ra1; dc:=de1;
+repeat
+  ok:=DrawRAline(ac,dc,dde);
+  ok:=DrawRAline(ac,dc,-dde) or ok;
+  ac:=ac-dra;
+until (not ok)or(ac<ra1-pi);
+ac:=ra1; dc:=de1;
+repeat
+  ok:=DrawDEline(ac,dc,dra);
+  ok:=DrawDEline(ac,dc,-dra) or ok;
+  dc:=dc+dde;
+until (not ok)or(dc>pid2);
+ac:=ra1; dc:=de1;
+repeat
+  ok:=DrawDEline(ac,dc,dra);
+  ok:=DrawDEline(ac,dc,-dra) or ok;
+  dc:=dc-dde;
+until (not ok)or(dc<-pid2);
+result:=true;
+end;
+
+function Tskychart.DrawAzGrid;
+var a1,h1,ac,hc,dda,ddh:double;
+    col:integer;
+    ok:boolean;
+    
+function DrawAline(a,h,dd:double):boolean;
+var x1,y1:double;
+    n,xx,yy,xxp,yyp: integer;
+begin
+proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+WindowXY(x1,y1,xxp,yyp,cfgsc);
+n:=0;
+repeat
+ inc(n);
+ h:=h+dd/3;
+ if cfgsc.horizonopaque and (h<0) then break;
+ proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)
+    then Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+ xxp:=xx;
+ yyp:=yy;
+until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
+      (yy<-cfgsc.Ymax)or(yy>2*cfgsc.Ymax)or
+      (h>(pid2-dd/3))or(h<(-pid2+dd/3));
+result:=(n>1);
+end;
+function DrawHline(a,h,da:double):boolean;
+var x1,y1:double;
+    n,xx,yy,xxp,yyp,w: integer;
+begin
+if h=0 then w:=2 else w:=1;
+proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+WindowXY(x1,y1,xxp,yyp,cfgsc);
+n:=0;
+repeat
+ inc(n);
+ a:=a+da/3;
+ proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)
+    then Fplot.Plotline(xxp,yyp,xx,yy,col,w);
+ xxp:=xx;
+ yyp:=yy;
+until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
+      (yy<-cfgsc.Ymax)or(yy>2*cfgsc.Ymax)or
+      (a>a1+pi)or(a<a1-pi);
+result:=(n>1);
+end;
+
+begin
+result:=false;
+if (not cfgsc.ShowAzGrid)or(not cfgsc.ProjPole=Altaz) then exit;
+col:=clGray;
+dda:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
+ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
+a1:=deg2rad*trunc(rad2deg*cfgsc.acentre/dda)*dda;
+h1:=deg2rad*trunc(rad2deg*cfgsc.hcentre/ddh)*ddh;
+dda:=deg2rad*dda;
+ddh:=deg2rad*ddh;
+ac:=a1; hc:=h1;
+repeat
+  ok:=DrawAline(ac,hc,ddh);
+  ok:=DrawAline(ac,hc,-ddh) or ok;
+  ac:=ac+dda;
+until (not ok)or(ac>a1+pi);
+ac:=a1; hc:=h1;
+repeat
+  ok:=DrawAline(ac,hc,ddh);
+  ok:=DrawAline(ac,hc,-ddh) or ok;
+  ac:=ac-dda;
+until (not ok)or(ac<a1-pi);
+ac:=a1; hc:=h1;
+repeat
+  if cfgsc.horizonopaque and (hc<0) then break;
+  ok:=DrawHline(ac,hc,dda);
+  ok:=DrawHline(ac,hc,-dda) or ok;
+  hc:=hc+ddh;
+until (not ok)or(hc>pid2);
+ac:=a1; hc:=h1;
+repeat
+  if cfgsc.horizonopaque and (hc<0) then break;
+  ok:=DrawHline(ac,hc,dda);
+  ok:=DrawHline(ac,hc,-dda) or ok;
+  hc:=hc-ddh;
+until (not ok)or(hc<-pid2);
+result:=true;
 end;
 
 end.

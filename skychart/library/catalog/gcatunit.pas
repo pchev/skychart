@@ -26,7 +26,7 @@ uses
   skylibcat, sysutils;
 
 const
- rtStar = 1;  rtVar  = 2; rtDbl  = 3; rtNeb  = 4; rlin   = 5;
+ rtStar = 1;  rtVar  = 2; rtDbl  = 3; rtNeb  = 4; rtlin   = 5;
  vsId=1; vsMagv=2; vsB_v=3; vsMagb=4; vsMagr=5; vsSp=6; vsPmra=7; vsPmdec=8; vsEpoch=9; vsPx=10; vsComment=11;
  vvId=1; vvMagmax=2; vvMagmin=3; vvPeriod=4; vvVartype=5; vvMaxepoch=6; vvRisetime=7;  vvSp=8; vvMagcode=9; vvComment=10;
  vdId=1; vdMag1=2; vdMag2=3; vdSep=4; vdPa=5; vdEpoch=6; vdCompname=7; vdSp1=8; vdSp2=9; vdComment=10;
@@ -41,6 +41,7 @@ TVneb  = array[1..11] of boolean;
 TVlin  = array[1..6] of boolean;
 TValid = array[1..10] of boolean;
 Tlabellst = array[1..35,0..10] of char;
+TSname = array[0..3] of char;
 Tstar =   packed record
           magv,b_v,magb,magr,pmra,pmdec,epoch,px : double;
           id,sp,comment : shortstring;
@@ -70,9 +71,10 @@ Toutlines = packed record
           valid : TVlin;
           end;
 TCatOption = packed record
-          ShortName: array[0..3] of char;
+          ShortName: TSname;
           rectype  : integer;
           Equinox  : double;
+          EquinoxJD: double;
           Epoch    : double;
           MagMax   : double;
           Size     : Integer;
@@ -81,7 +83,7 @@ TCatOption = packed record
           LogSize  : Integer;
           UsePrefix: byte;
           altname  : Tvalid;
-          flabel   : Tlabellst
+          flabel   : Tlabellst;
           end;
 GCatrec = packed record
           ra,dec   : double ;
@@ -98,7 +100,7 @@ GCatrec = packed record
 Type TCatHeader = packed record
                  hdrl     : Integer;
                  version  : array[0..7] of char;
-                 ShortName: array[0..3] of char;
+                 ShortName: TSname;
                  LongName : array[0..49] of char;
                  reclen   : Integer;
                  FileNum  : Integer;
@@ -117,7 +119,7 @@ Type TCatHeader = packed record
                  Spare2   : array[1..20] of integer;
                  flen     : array[1..35] of integer;
                  Spare3   : array[1..20] of integer;
-                 flabel   : array[1..35,0..10] of char;
+                 flabel   : Tlabellst;
                  Spare4   : array[1..20,0..10] of char;
                  end;
 
@@ -136,6 +138,7 @@ implementation
 var
    GCatpath : string ='';
    catheader : Tcatheader;
+   emptyrec : gcatrec;
    datarec : array [0..4096] of byte;
    f : file ;
    hemis : char;
@@ -146,6 +149,107 @@ var
    zonelst,SMlst : array[1..9537] of integer;
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
+
+Procedure InitRec;
+var n : integer;
+begin
+  emptyrec.options.rectype:=catversion;
+  emptyrec.options.Equinox:=catheader.Equinox;
+  if catheader.Equinox=2000 then emptyrec.options.EquinoxJD:=jd2000
+  else if catheader.Equinox=1950 then emptyrec.options.EquinoxJD:=jd1950
+  else emptyrec.options.EquinoxJD:=jd(trunc(catheader.Equinox),1,0,0);
+  JDCatalog:=emptyrec.options.EquinoxJD;
+  emptyrec.options.Epoch:=catheader.Epoch;
+  emptyrec.options.MagMax:=catheader.MagMax;
+  emptyrec.options.Size:=catheader.Size;
+  emptyrec.options.Units:=catheader.Units;
+  emptyrec.options.ObjType:=catheader.ObjType;
+  emptyrec.options.LogSize:=catheader.LogSize;
+  emptyrec.options.UsePrefix:=catheader.UsePrefix;
+  for n:=1 to 10 do emptyrec.options.altname[n]:=(catheader.altname[n]=1);
+  emptyrec.options.flabel:=catheader.flabel;
+  emptyrec.options.ShortName:=catheader.shortname;
+  case catversion of
+  rtstar : begin  // Star 1
+      if catheader.flen[3]>0 then emptyrec.star.valid[vsId]:=true;
+      if catheader.flen[4]>0 then emptyrec.star.valid[vsMagV]:=true;
+      if catheader.flen[5]>0 then emptyrec.star.valid[vsB_V]:=true;
+      if catheader.flen[6]>0 then emptyrec.star.valid[vsMagB]:=true;
+      if catheader.flen[7]>0 then emptyrec.star.valid[vsMagR]:=true;
+      if catheader.flen[8]>0 then emptyrec.star.valid[vsSp]:=true;
+      if catheader.flen[9]>0 then emptyrec.star.valid[vsPmra]:=true;
+      if catheader.flen[10]>0 then emptyrec.star.valid[vsPmdec]:=true;
+      if catheader.flen[11]>0 then emptyrec.star.valid[vsEpoch]:=true;
+      if catheader.flen[12]>0 then emptyrec.star.valid[vsPx]:=true;
+      if catheader.flen[13]>0 then emptyrec.star.valid[vsComment]:=true;
+      end;
+  rtvar : begin  // variables stars 1
+      if catheader.flen[3]>0 then emptyrec.variable.valid[vvId]:=true;
+      if catheader.flen[4]>0 then emptyrec.variable.valid[vvMagmax]:=true;
+      if catheader.flen[5]>0 then emptyrec.variable.valid[vvMagmin]:=true;
+      if catheader.flen[6]>0 then emptyrec.variable.valid[vvPeriod]:=true;
+      if catheader.flen[7]>0 then emptyrec.variable.valid[vvVartype]:=true;
+      if catheader.flen[8]>0 then emptyrec.variable.valid[vvMaxepoch]:=true;
+      if catheader.flen[9]>0 then emptyrec.variable.valid[vvRisetime]:=true;
+      if catheader.flen[10]>0 then emptyrec.variable.valid[vvSp]:=true;
+      if catheader.flen[11]>0 then emptyrec.variable.valid[vvMagcode]:=true;
+      if catheader.flen[12]>0 then emptyrec.variable.valid[vvComment]:=true;
+      end;
+  rtdbl : begin  // doubles stars 1
+      if catheader.flen[3]>0 then emptyrec.double.valid[vdId]:=true;
+      if catheader.flen[4]>0 then emptyrec.double.valid[vdMag1]:=true;
+      if catheader.flen[5]>0 then emptyrec.double.valid[vdMag2]:=true;
+      if catheader.flen[6]>0 then emptyrec.double.valid[vdSep]:=true;
+      if catheader.flen[7]>0 then emptyrec.double.valid[vdPa]:=true;
+      if catheader.flen[8]>0 then emptyrec.double.valid[vdEpoch]:=true;
+      if catheader.flen[9]>0 then emptyrec.double.valid[vdCompname]:=true;
+      if catheader.flen[10]>0 then emptyrec.double.valid[vdSp1]:=true;
+      if catheader.flen[11]>0 then emptyrec.double.valid[vdSp2]:=true;
+      if catheader.flen[12]>0 then emptyrec.double.valid[vdComment]:=true;
+      end;
+  rtneb : begin  // nebulae 1
+      if catheader.flen[3]>0 then emptyrec.neb.valid[vnId]:=true;
+      if catheader.flen[4]>0 then emptyrec.neb.valid[vnNebtype]:=true;
+      if catheader.flen[5]>0 then emptyrec.neb.valid[vnMag]:=true;
+      if catheader.flen[6]>0 then emptyrec.neb.valid[vnSbr]:=true;
+      if catheader.flen[7]>0 then emptyrec.neb.valid[vnDim1]:=true;
+      if catheader.flen[8]>0 then emptyrec.neb.valid[vnDim2]:=true;
+      if catheader.flen[9]>0 then emptyrec.neb.valid[vnNebunit]:=true;
+      if catheader.flen[10]>0 then emptyrec.neb.valid[vnPa]:=true;
+      if catheader.flen[11]>0 then emptyrec.neb.valid[vnRv]:=true;
+      if catheader.flen[12]>0 then emptyrec.neb.valid[vnMorph]:=true;
+      if catheader.flen[13]>0 then emptyrec.neb.valid[vnComment]:=true;
+      end;
+  rtlin : begin  // outlines
+      if catheader.flen[3]>0 then emptyrec.outlines.valid[vlId]:=true;
+      if catheader.flen[4]>0 then emptyrec.outlines.valid[vlLineoperation]:=true;
+      if catheader.flen[5]>0 then emptyrec.outlines.valid[vlLinewidth]:=true;
+      if catheader.flen[6]>0 then emptyrec.outlines.valid[vlLinecolor]:=true;
+      if catheader.flen[7]>0 then emptyrec.outlines.valid[vlLinetype]:=true;
+      if catheader.flen[8]>0 then emptyrec.outlines.valid[vlComment]:=true;
+      end;
+  end;
+  if catheader.flen[16]>0 then emptyrec.vstr[1]:=true;
+  if catheader.flen[17]>0 then emptyrec.vstr[2]:=true;
+  if catheader.flen[18]>0 then emptyrec.vstr[3]:=true;
+  if catheader.flen[19]>0 then emptyrec.vstr[4]:=true;
+  if catheader.flen[20]>0 then emptyrec.vstr[5]:=true;
+  if catheader.flen[21]>0 then emptyrec.vstr[6]:=true;
+  if catheader.flen[22]>0 then emptyrec.vstr[7]:=true;
+  if catheader.flen[23]>0 then emptyrec.vstr[8]:=true;
+  if catheader.flen[24]>0 then emptyrec.vstr[9]:=true;
+  if catheader.flen[25]>0 then emptyrec.vstr[10]:=true;
+  if catheader.flen[26]>0 then emptyrec.vnum[1]:=true;
+  if catheader.flen[27]>0 then emptyrec.vnum[2]:=true;
+  if catheader.flen[28]>0 then emptyrec.vnum[3]:=true;
+  if catheader.flen[29]>0 then emptyrec.vnum[4]:=true;
+  if catheader.flen[30]>0 then emptyrec.vnum[5]:=true;
+  if catheader.flen[31]>0 then emptyrec.vnum[6]:=true;
+  if catheader.flen[32]>0 then emptyrec.vnum[7]:=true;
+  if catheader.flen[33]>0 then emptyrec.vnum[8]:=true;
+  if catheader.flen[34]>0 then emptyrec.vnum[9]:=true;
+  if catheader.flen[35]>0 then emptyrec.vnum[10]:=true;
+end;
 
 procedure SetGCatpath(path,catshortname : shortstring);
 begin
@@ -159,6 +263,7 @@ var n : integer;
     fh : file;
 begin
 result:=false;
+fillchar(EmptyRec,sizeof(GcatRec),0);
 if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
 filemode:=0;
 assignfile(fh,Gcatpath+slashchar+catname+'.hdr');
@@ -166,11 +271,12 @@ reset(fh,1);
 blockread(fh,catheader,sizeof(catheader),n);
 result:=(n=sizeof(catheader))and(n=catheader.hdrl);
 closefile(fh);
-if catheader.version='CDCSTAR1' then catversion:=0;
-if catheader.version='CDCVAR 1' then catversion:=1;
-if catheader.version='CDCDBL 1' then catversion:=2;
-if catheader.version='CDCNEB 1' then catversion:=3;
-if catheader.version='CDCLINE1' then catversion:=4;
+if catheader.version='CDCSTAR1' then catversion:=rtStar;
+if catheader.version='CDCVAR 1' then catversion:=rtVar;
+if catheader.version='CDCDBL 1' then catversion:=rtDbl;
+if catheader.version='CDCNEB 1' then catversion:=rtNeb;
+if catheader.version='CDCLINE1' then catversion:=rtLin;
+InitRec;
 end;
 end;
 
@@ -271,6 +377,7 @@ var n : integer;
 begin
 ok:=true;
 //fillchar(lin,sizeof(lin),0);
+lin:=emptyrec;
 if eof(f) then NextGCat(ok);
 if ok then begin
  blockread(f,datarec,catheader.reclen,n);
@@ -278,7 +385,7 @@ if ok then begin
   lin.ra:=GetRecCard(1)/3600000;
   lin.dec:=GetRecCard(2)/3600000-90;
   case catversion of
-  0 : begin  // Star 1
+  rtstar : begin  // Star 1
       if catheader.flen[3]>0 then lin.star.id:=GetRecString(3);
       if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99.9;end;
       if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end;
@@ -291,7 +398,7 @@ if ok then begin
       if catheader.flen[12]>0 then lin.star.px:=GetRecSmallint(12)/10000;
       if catheader.flen[13]>0 then lin.star.comment:=GetRecString(13);
       end;
-  1 : begin  // variables stars 1
+  rtvar : begin  // variables stars 1
       if catheader.flen[3]>0 then lin.variable.id:=GetRecString(3);
       if catheader.flen[4]>0 then begin lin.variable.magmax:=GetRecSmallint(4)/1000; if lin.variable.magmax>32 then lin.variable.magmax:=99.9;end;
       if catheader.flen[5]>0 then begin lin.variable.magmin:=GetRecSmallint(5)/1000; if lin.variable.magmin>32 then lin.variable.magmin:=99.9;end;
@@ -303,7 +410,7 @@ if ok then begin
       if catheader.flen[11]>0 then lin.variable.magcode:=GetRecString(11);
       if catheader.flen[12]>0 then lin.variable.comment:=GetRecString(12);
       end;
-  2 : begin  // doubles stars 1
+  rtdbl : begin  // doubles stars 1
       if catheader.flen[3]>0 then lin.double.id:=GetRecString(3);
       if catheader.flen[4]>0 then begin lin.double.mag1:=GetRecSmallint(4)/1000; if lin.double.mag1>32 then lin.double.mag1:=99.9;end;
       if catheader.flen[5]>0 then begin lin.double.mag2:=GetRecSmallint(5)/1000; if lin.double.mag2>32 then lin.double.mag2:=99.9;end;
@@ -315,7 +422,7 @@ if ok then begin
       if catheader.flen[11]>0 then lin.double.sp2:=GetRecString(11);
       if catheader.flen[12]>0 then lin.double.comment:=GetRecString(12);
       end;
-  3 : begin  // nebulae 1
+  rtneb : begin  // nebulae 1
       if catheader.flen[3]>0 then lin.neb.id:=GetRecString(3);
       if catheader.flen[4]>0 then lin.neb.nebtype:=GetRecByte(4);
       if catheader.flen[5]>0 then begin lin.neb.mag:=GetRecSmallint(5)/1000; if lin.neb.mag>32 then lin.neb.mag:=99.9;end;
@@ -328,7 +435,7 @@ if ok then begin
       if catheader.flen[12]>0 then lin.neb.morph:=GetRecString(12);
       if catheader.flen[13]>0 then lin.neb.comment:=GetRecString(13);
       end;
-  4 : begin  // outlines
+  rtlin : begin  // outlines
       if catheader.flen[3]>0 then lin.outlines.id:=GetRecString(3);
       if catheader.flen[4]>0 then lin.outlines.lineoperation:=GetRecByte(4);
       if catheader.flen[5]>0 then lin.outlines.linewidth:=GetRecByte(5);
@@ -367,6 +474,7 @@ var n : integer;
 begin
 ok:=true;
 //fillchar(lin,sizeof(lin),0);
+lin:=emptyrec;
 if eof(f) then NextGCat(ok);
 if ok then begin
  blockread(f,datarec,catheader.reclen,n);
@@ -374,7 +482,7 @@ if ok then begin
   lin.ra:=GetRecCard(1)/3600000;
   lin.dec:=GetRecCard(2)/3600000-90;
   case catversion of
-  0 : begin  // Star 1
+  rtstar : begin  // Star 1
       if catheader.flen[3]>0 then lin.star.id:=GetRecString(3);
       if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99.9;end;
       if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end;
@@ -382,19 +490,19 @@ if ok then begin
       if catheader.flen[9]>0 then lin.star.pmra:=GetRecSmallint(9)/1000;
       if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSmallint(10)/1000;
       end;
-  1 : begin  // variables stars 1
+  rtvar : begin  // variables stars 1
       if catheader.flen[3]>0 then lin.variable.id:=GetRecString(3);
       if catheader.flen[4]>0 then begin lin.variable.magmax:=GetRecSmallint(4)/1000; if lin.variable.magmax>32 then lin.variable.magmax:=99.9;end;
       if catheader.flen[5]>0 then begin lin.variable.magmin:=GetRecSmallint(5)/1000; if lin.variable.magmin>32 then lin.variable.magmin:=99.9;end;
       end;
-  2 : begin  // doubles stars 1
+  rtdbl : begin  // doubles stars 1
       if catheader.flen[3]>0 then lin.double.id:=GetRecString(3);
       if catheader.flen[4]>0 then begin lin.double.mag1:=GetRecSmallint(4)/1000; if lin.double.mag1>32 then lin.double.mag1:=99.9;end;
       if catheader.flen[5]>0 then begin lin.double.mag2:=GetRecSmallint(5)/1000; if lin.double.mag2>32 then lin.double.mag2:=99.9;end;
       if catheader.flen[6]>0 then lin.double.sep:=GetRecSmallint(6)/10;
       if catheader.flen[7]>0 then begin lin.double.pa:=GetRecSmallint(7); if lin.double.pa=32767 then lin.double.pa:=-999;end;
       end;
-  3 : begin  // nebulae 1
+  rtneb : begin  // nebulae 1
       if catheader.flen[3]>0 then lin.neb.id:=GetRecString(3);
       if catheader.flen[4]>0 then lin.neb.nebtype:=GetRecByte(4);
       if catheader.flen[5]>0 then begin lin.neb.mag:=GetRecSmallint(5)/1000; if lin.neb.mag>32 then lin.neb.mag:=99.9;end;
@@ -404,7 +512,7 @@ if ok then begin
       if catheader.flen[9]>0 then lin.neb.nebunit:=GetRecSmallint(9);
       if catheader.flen[10]>0 then begin lin.neb.pa:=GetRecSmallint(10); if lin.neb.pa=32767 then lin.neb.pa:=-999;end;
       end;
-  4 : begin  // outlines
+  rtlin : begin  // outlines
       if catheader.flen[3]>0 then lin.outlines.id:=GetRecString(3);
       if catheader.flen[4]>0 then lin.outlines.lineoperation:=GetRecByte(4);
       if catheader.flen[5]>0 then lin.outlines.linewidth:=GetRecByte(5);

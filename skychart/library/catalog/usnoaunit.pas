@@ -247,7 +247,7 @@ end;
 Procedure FindRegionListWin;
 var
    xx,yy,dx,dy,Sm,i,j,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 begin
 fullwin:=true;
@@ -266,11 +266,13 @@ for i:=0 to 9 do begin
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    FindregionU(ar,de,Sm);
-    demin:=minvalue([demin,de]);
-    demax:=maxvalue([demax,de]);
-    armin:=minvalue([armin,ar]);
-    armax:=maxvalue([armax,ar]);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    FindregionU(arp,dep,Sm);
+    demin:=minvalue([demin,dep]);
+    demax:=maxvalue([demax,dep]);
+    armin:=minvalue([armin,arp]);
+    armax:=maxvalue([armax,arp]);
     def:=true ;
     for k:=1 to nSM do begin
       if Sm=SMlst[k] then def:=false
@@ -298,7 +300,7 @@ end;
 procedure FindRegionList(x1,x2,y1,y2:Double );
 var
    Sm,i,j,k : integer;
-   ar,de,dar,dde : double;
+   ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
 fullwin:=false;
@@ -315,12 +317,14 @@ for i:=0 to 9 do begin
   if ar<0 then ar:=ar+360;
   for j:=0 to 9 do begin
     de:=y1+j*dde ;
-    if abs(de) >= 90 then continue;
-    FindregionU(ar,de,Sm);
-    demin:=minvalue([demin,de]);
-    demax:=maxvalue([demax,de]);
-    armin:=minvalue([armin,ar]);
-    armax:=maxvalue([armax,ar]);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    if abs(dep) >= 90 then continue;
+    FindregionU(arp,dep,Sm);
+    demin:=minvalue([demin,dep]);
+    demax:=maxvalue([demax,dep]);
+    armin:=minvalue([armin,arp]);
+    armax:=maxvalue([armax,arp]);
     def:=true ;
     for k:=1 to nSM do begin
       if Sm=Smlst[k] then def:=false
@@ -339,6 +343,7 @@ end;
 
 Procedure OpenUSNOAwin(var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWin;
 Sm := Smlst[curSM];
@@ -347,6 +352,7 @@ end;
 
 Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionList(ar1,ar2,de1,de2);

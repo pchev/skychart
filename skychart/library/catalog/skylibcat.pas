@@ -25,10 +25,12 @@ uses   gscconst,SysUtils,Math;
 
 Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall;
 Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall;
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
 procedure GetADxy(x,y:Integer ; var a,d : Double);
+PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
 Function sgn(x:Double):Double ;
 Function PadZeros(x : string ; l :integer) : string;
+function Jd(annee,mois,jour :INTEGER; Heure:double):double;
 function words(str,sep : string; p,n : integer) : string;
 procedure FindRegionListWin(var Nsm : integer ;
                             var zonelst,SMlst : array of integer ;
@@ -95,6 +97,7 @@ const slashchar='\';
 
 Const
     jd2000 : double =2451545.0 ;
+    jd1950 : double =2433282.4235;
     lg_reg_x7 : array [0..23,1..2] of integer = (
 (   3,  730),(   9,  721),(  15,  706),(  21,  685),(  27,  658),(  32,  626),
 (  36,  590),(  40,  550),(  43,  507),(  45,  462),(  47,  415),(  48,  367),
@@ -110,7 +113,7 @@ Const
 (  12,  1),(  9, 13),(  4, 22));
 
 var
-  arcentre,decentre,acentre,hcentre,CurrentJD,CurrentST,ObsLatitude: Double;
+  arcentre,decentre,acentre,hcentre,CurrentJD,JDChart,JDcatalog,CurrentST,ObsLatitude: Double;
   xmin,xmax,ymin,ymax,Xshift,Yshift,ProjPole : Integer;
   BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta: Double;
   projtype : char;
@@ -131,7 +134,7 @@ UseCache:=Cache;
 // HND is no more used, keep for compatibility with previous version
 end;
 
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
 begin
    BxGlb:= bx;
    ByGlb:= by;
@@ -145,6 +148,7 @@ begin
    hcentre:=hc;
    CurrentST:=sidt;
    CurrentJD:=jdt;
+   JDChart:=jdc;
    ObsLatitude:=lat;
    ProjPole:=pjp;
    Xshift:=xs;
@@ -175,8 +179,9 @@ end ;
 
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);  // ICRS
 var i1,i2,i3,i4,i5,i6,i7 : double ;
+//RA en degre!
    BEGIN
-      ari:=ari*15;
+      if ti=tf then exit;
       I1:=(TI-2451545.0)/36525 ;
       I2:=(TF-TI)/36525;
       I3:=((2306.2181+1.39656*i1-1.39e-4*i1*i1)*i2+(0.30188-3.44e-4*i1)*i2*i2+1.7998e-2*i2*i2*i2)/3600 ;
@@ -187,7 +192,7 @@ var i1,i2,i3,i4,i5,i6,i7 : double ;
       DEI:=radtodeg(ArcSIN(SIN(degtorad(I5))*COS(degtorad(DEI))*COS(degtorad(ARI+I3))+COS(degtorad(I5))*SIN(degtorad(DEI)))) ;
       ARI:=radtodeg(ARCTAN2(I6,I7)) ;
       ARI:=ARI+I4   ;
-      ARI:=RMOD(ARI+360.0,360.0)/15;
+      ARI:=RMOD(ARI+360.0,360.0);
    END  ;
 
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double );
@@ -281,9 +286,7 @@ case Projpole of
        Hz2Eq(-ar,de,a,hh) ;
        ar:=15*CurrentST-a;
        de:=hh;
-       ar:=ar/15;
        precession(currentjd,jd2000,ar,de);
-       ar:=ar*15;
        end;
 end;
 end ;
@@ -320,7 +323,7 @@ procedure FindRegionList7(x1,x2,y1,y2:Double ;
 var
    hemis : char;
    zone,Sm,i,j,k : integer;
-   ar,de,dar,dde : double;
+   ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
 dar:=(x2-x1)/9;
@@ -333,7 +336,9 @@ for i:=0 to 9 do begin
   for j:=0 to 9 do begin
     de:=y1+j*dde ;
     if abs(de) >= 90 then continue;
-    Findregion7(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion7(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -354,7 +359,7 @@ procedure FindRegionListWin7(var Nsm : integer ;
 var
    hemis : char;
    xx,yy,dx,dy,Sm,zone,i,j,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 begin
 dx:=Trunc((xmax-xmin)/9);
@@ -368,7 +373,9 @@ for i:=0 to 9 do begin
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion7(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion7(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -389,7 +396,7 @@ procedure FindRegionAllWin7(var Nsm : integer ;
 var
    hemis : char;
    xx,yy,dx,dy,Sm,zone,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 const step = 6;
 begin
@@ -408,7 +415,9 @@ repeat
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion7(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion7(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -432,7 +441,7 @@ procedure FindRegionAll7(x1,x2,y1,y2:Double ;
 var
    hemis : char;
    zone,Sm,k : integer;
-   step,ar,de,ra : double;
+   step,ar,de,ra,arp,dep : double;
    def : boolean;
 begin
 if x2<x1 then begin ra:=x2; x2:=x1; x1:=ra; end;
@@ -450,7 +459,9 @@ repeat
     ar:=ra;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion7(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion7(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -482,7 +493,7 @@ procedure FindRegionList15(x1,x2,y1,y2:Double ;
                           var SMlst : array of integer );
 var
    Sm,i,j,k : integer;
-   ar,de,dar,dde : double;
+   ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
 dar:=(x2-x1)/5;
@@ -495,7 +506,9 @@ for i:=0 to 5 do begin
   for j:=0 to 5 do begin
     de:=y1+j*dde ;
     if abs(de) >= 90 then continue;
-    Findregion15(ar,de,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion15(arp,dep,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -513,7 +526,7 @@ procedure FindRegionAll15(x1,x2,y1,y2:Double ;
                           var SMlst : array of integer );
 var
    Sm,k : integer;
-   step,ar,de,ra : double;
+   step,ar,de,ra,arp,dep : double;
    def : boolean;
 begin
 if x2<x1 then begin ra:=x2; x2:=x1; x1:=ra; end;
@@ -531,7 +544,9 @@ repeat
     ar:=ra;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion15(ar,de,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion15(arp,dep,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -549,7 +564,7 @@ end;
 procedure FindRegionListWin15(var Nsm : integer ;var SMlst : array of integer );
 var
    xx,yy,dx,dy,Sm,i,j,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 begin
 dx:=Trunc((xmax-xmin)/5);
@@ -563,7 +578,9 @@ for i:=0 to 5 do begin
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion15(ar,de,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion15(arp,dep,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -579,7 +596,7 @@ end;
 procedure FindRegionAllWin15(var Nsm : integer ;var SMlst : array of integer );
 var
    xx,yy,dx,dy,Sm,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 const step = 10;
 begin
@@ -598,7 +615,9 @@ repeat
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion15(ar,de,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion15(arp,dep,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -628,7 +647,7 @@ procedure FindRegionList30(x1,x2,y1,y2:Double ;
                           var SMlst : array of integer );
 var
    Sm,i,j,k : integer;
-   ar,de,dar,dde : double;
+   ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
 dar:=(x2-x1)/15;
@@ -641,7 +660,9 @@ for i:=0 to 15 do begin
   for j:=0 to 15 do begin
     de:=y1+j*dde ;
     if abs(de) >= 89.9 then continue;
-    Findregion30(ar,de,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion30(arp,dep,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -657,7 +678,7 @@ end;
 procedure FindRegionListWin30(var Nsm : integer ;var SMlst : array of integer );
 var
    xx,yy,dx,dy,Sm,i,j,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 begin
 dx:=Trunc((xmax-xmin)/15);
@@ -671,7 +692,9 @@ for i:=0 to 15 do begin
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion30(ar,de,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion30(arp,dep,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -747,7 +770,7 @@ procedure FindRegionList(x1,x2,y1,y2:Double ;
 var
    hemis : char;
    zone,Sm,i,j,k : integer;
-   ar,de,dar,dde : double;
+   ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
 dar:=(x2-x1)/9;
@@ -759,8 +782,10 @@ for i:=0 to 9 do begin
   if ar<0 then ar:=ar+360;
   for j:=0 to 9 do begin
     de:=y1+j*dde ;
-    if abs(de) >= 90 then continue;
-    Findregion(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    if abs(dep) >= 90 then continue;
+    Findregion(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -782,7 +807,7 @@ procedure FindRegionAll(x1,x2,y1,y2:Double ;
 var
    hemis : char;
    zone,Sm,k : integer;
-   step,ar,de,ra : double;
+   step,ar,de,ra,arp,dep : double;
    def : boolean;
 begin
 if x2<x1 then begin ra:=x2; x2:=x1; x1:=ra; end;
@@ -800,7 +825,10 @@ repeat
     ar:=ra;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    if abs(dep) >= 90 then continue;
+    Findregion(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -823,7 +851,7 @@ procedure FindRegionListWin(var Nsm : integer ;
 var
    hemis : char;
    xx,yy,dx,dy,Sm,zone,i,j,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 begin
 dx:=Trunc((xmax-xmin)/9);
@@ -837,7 +865,9 @@ for i:=0 to 9 do begin
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -858,7 +888,7 @@ procedure FindRegionAllWin(var Nsm : integer ;
 var
    hemis : char;
    xx,yy,dx,dy,Sm,zone,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 const step = 1;
 begin
@@ -877,7 +907,9 @@ repeat
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -908,7 +940,7 @@ procedure FindRegionListDS(x1,x2,y1,y2:Double ;
 var
    zone : string;
    i,j,k : integer;
-   ar,de,dar,dde : double;
+   ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
 dar:=minvalue([10,(x2-x1)/2]); // plus petit que 15 pour etre sur de tout avoir
@@ -923,7 +955,9 @@ repeat
   repeat
     de:=y1+j*dde ;
     if abs(de) >= 90 then break;
-    FindregionDS(ar/15,de,zone);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    FindregionDS(arp/15,dep,zone);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if zone=zonelst[k] then def:=false
@@ -942,7 +976,7 @@ procedure FindRegionListWinDS(var Nsm : integer ;
                             var zonelst : array of string) ;
 var
    xx,yy,dx,dy,i,j,k,nx,ny : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    zone : string;
    def : boolean;
 begin
@@ -959,7 +993,9 @@ for i:=0 to nx do begin
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    FindregionDS(ar/15,de,zone);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    FindregionDS(arp/15,dep,zone);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if zone=zonelst[k] then def:=false
@@ -979,7 +1015,7 @@ procedure FindRegionList2(x1,x2,y1,y2:Double ;
 var
    hemis : char;
    zone,Sm,i,j,k : integer;
-   ar,de,dar,dde : double;
+   ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
 dar:=(x2-x1)/29;
@@ -991,8 +1027,10 @@ for i:=0 to 29 do begin
   if ar<0 then ar:=ar+360;
   for j:=0 to 29 do begin
     de:=y1+j*dde ;
-    if abs(de) >= 90 then continue;
-    Findregion(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    if abs(dep) >= 90 then continue;
+    Findregion(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -1013,7 +1051,7 @@ procedure FindRegionListWin2(var Nsm : integer ;
 var
    hemis : char;
    xx,yy,dx,dy,Sm,zone,i,j,k : integer;
-   ar,de : double;
+   ar,de,arp,dep : double;
    def : boolean;
 begin
 dx:=Trunc((xmax-xmin)/29);
@@ -1027,7 +1065,9 @@ for i:=0 to 29 do begin
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    Findregion(ar,de,hemis,zone,Sm);
+    arp:=ar; dep:=de;
+    precession(JDChart,JDCatalog,arp,dep);
+    Findregion(arp,dep,hemis,zone,Sm);
     def:=true ;
     for k:=0 to nSM-1 do begin
       if Sm=Smlst[k] then def:=false
@@ -1054,11 +1094,32 @@ result:=trim(nom);
 if copy(result,length(nom),1)<>slashchar then result:=result+slashchar;
 end;
 
+function Jd(annee,mois,jour :INTEGER; Heure:double):double;
+var u,u0,u1,u2 : double;
+	gregorian : boolean;
+begin
+if annee*10000+mois*100+jour >= 15821015 then gregorian:=true else gregorian:=false;
+u:=annee;
+if mois<3 then u:=u-1;
+u0:=u+4712;
+u1:=mois+1;
+if u1<4 then u1:=u1+12;
+result:=floor(u0*365.25)+floor(30.6*u1+0.000001)+jour+heure/24-63.5;
+if gregorian then begin
+   u2:=floor(abs(u)/100)-floor(abs(u)/400);
+   if u<0 then u2:=-u2;
+   result:=result-u2+2;
+   if (u<0)and((u/100)=floor(u/100))and((u/400)<>floor(u/400)) then result:=result-1;
+end;
+end;
+
 Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall;
 begin
 // no more used, added for compatibility with previous version
 end;
 
+Initialization
+  JDChart:=jd2000;
+  JDcatalog:=jd2000;
 end.
 
-   
