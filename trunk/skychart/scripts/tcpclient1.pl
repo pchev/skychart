@@ -41,12 +41,14 @@ print STDOUT "[Connected to $host:$port]\n";
 # wait connection and get client chart name
   $line = <$handle>;
   print STDOUT $line;
-  $line =~ /OK (.*)$/;
+  $line =~ /OK id=(.*) chart=(.*)$/;
   $client = $1;
-  chop $client;
+  $chart = $2;
+  chop $chart;
   if ($client)
     {
-     print STDOUT " We are connected to $client \n";
+     print STDOUT " We are connected as client $client , the active chart is $chart\n";
+     print STDOUT " Close CDC or hit Ctrl+C to quit.\n";
     }
     else { die " We are not connected \n"};
 }

@@ -11,6 +11,9 @@ $eol = "\x0D\x0A";
 
   connectCDC();
 
+  sendcmd("newchart test");
+  sendcmd("selectchart test");
+
   sendcmd("proj equat");
   sendcmd("search M37");
   sleep(2);
@@ -22,12 +25,13 @@ $eol = "\x0D\x0A";
   sendcmd("saveimg JPEG $path/test.jpg 50");
 
   sleep(5);
+  sendcmd("closechart test");
   sendcmd("quit");
 
 
 sub sendcmd {
   my $cmd = shift;
-  print STDOUT " Send CMD to $client: $cmd \n";
+  print STDOUT " Send CMD : $cmd \n";
   print $handle $cmd.$eol;                       # send command
 
   $line = <$handle>;
@@ -48,6 +52,7 @@ sub sendcmd {
      }
   else {
      print STDOUT "Command failed\n";
+	 exit;
      }
 }
 
@@ -66,12 +71,13 @@ print STDOUT "[Connected to $host:$port]\n";
 # wait connection and get client chart name
   $line = <$handle>;
   print STDOUT $line;
-  $line =~ /OK (.*)$/;
+  $line =~ /OK id=(.*) chart=(.*)$/;
   $client = $1;
-  chop $client;
+  $chart = $2;
+  chop $chart;
   if ($client)
     {
-     print STDOUT " We are connected to $client \n";
+     print STDOUT " We are connected as client $client , the active chart is $chart\n";
     }
     else { die " We are not connected \n"};
 }
