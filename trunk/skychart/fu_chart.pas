@@ -57,7 +57,7 @@ type
     Flipx: TAction;
     Flipy: TAction;
     GridEQ: TAction;
-    GridAZ: TAction;
+    Grid: TAction;
     rot_plus: TAction;
     rot_minus: TAction;
     Undo: TAction;
@@ -92,7 +92,7 @@ type
     procedure FlipxExecute(Sender: TObject);
     procedure FlipyExecute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure GridAZExecute(Sender: TObject);
+    procedure GridExecute(Sender: TObject);
     procedure GridEQExecute(Sender: TObject);
     procedure rot_minusExecute(Sender: TObject);
     procedure rot_plusExecute(Sender: TObject);
@@ -116,9 +116,9 @@ type
   public
     { Public declarations }
     sc: Tskychart;
-    maximize:boolean;
+    maximize,LockTrackCursor:boolean;
     undolist : array[1..maxundo] of conf_skychart;
-    lastundo,curundo,validundo : integer;
+    lastundo,curundo,validundo,lastx,lasty,lastyzoom : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
@@ -134,7 +134,7 @@ type
     procedure CMouseWheel(Shift: TShiftState;WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     function cmd_SetCursorPosition(x,y:integer):string;
     function cmd_SetGridEQ(onoff:string):string;
-    function cmd_SetGridAZ(onoff:string):string;
+    function cmd_SetGrid(onoff:string):string;
     function cmd_SetStarMode(i:integer):string;
     function cmd_SetNebMode(i:integer):string;
     function cmd_SetSkyMode(onoff:string):string;
@@ -148,6 +148,9 @@ type
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=75):boolean;
     Procedure ZoomBox(action,x,y:integer);
+    Procedure TrackCursor(X,Y : integer);
+    Procedure ZoomCursor(yy : double);
+    function  GetChartInfo:string;
   end;
 
 

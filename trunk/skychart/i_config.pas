@@ -65,13 +65,33 @@ begin
     Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex-1];
 end;
 
+procedure Tf_config.PageControl1Change(Sender: TObject);
+begin
+ Treeview1.selected:=Treeview1.items[PageControl1.ActivePageIndex];
+end;
+
 procedure Tf_config.FormCreate(Sender: TObject);
+var i : integer;
 begin
 SetLang('');
+LibCities := LoadLibrary(citylib);
+if (LibCities>0) then begin
+   @SetDirectory     := GetProcAddress (LibCities, 'SetDirectory');
+   @ReadCountryFile  := GetProcAddress (LibCities, 'ReadCountryFile');
+   @AddCity          := GetProcAddress (LibCities, 'AddCity');
+   @ModifyCity       := GetProcAddress (LibCities, 'ModifyCity');
+   @RemoveCity       := GetProcAddress (LibCities, 'RemoveCity');
+   @ReleaseCities    := GetProcAddress (LibCities, 'ReleaseCities');
+   @SearchCity       := GetProcAddress (LibCities, 'SearchCity');
+end;
+for i:=0 to COUNTRIES-1 do
+  countrylist.Items.Add(Country[i]);
+actual_country:='';
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
 begin
+screen.cursor:=crHourGlass;
 ShowTime;
 ShowChart;
 ShowField;
@@ -87,8 +107,10 @@ ShowLine;
 ShowColor;
 ShowSkyColor;
 ShowServer;
+ShowObservatory;
 TreeView1.FullExpand;
 Treeview1.selected:=Treeview1.items[cmain.configpage];
+screen.cursor:=crDefault;
 end;
 
 procedure Tf_config.ShowServer;
@@ -102,10 +124,17 @@ end;
 
 procedure Tf_config.ShowLine;
 begin
-ConstlFile.Text:=cmain.ConstLfile;
 EqGrid.Checked:=csc.ShowEqGrid;
-AzGrid.Checked:=csc.ShowAzGrid;
+CGrid.Checked:=csc.ShowGrid;
+GridNum.Checked:=csc.ShowGridNum;
+Ecliptic.Checked:=csc.ShowEcliptic;
+Galactic.Checked:=csc.ShowGalactic;
+ConstlFile.Text:=cmain.ConstLfile;
+ConstbFile.Text:=cmain.ConstBfile;
 ConstL.Checked:=csc.ShowConstl;
+ConstB.Checked:=csc.ShowConstb;
+milkyway.Checked:=csc.ShowMilkyWay;
+fillmilkyway.Checked:=csc.FillMilkyWay;
 end;
 
 procedure Tf_config.ShowTime;
@@ -831,6 +860,7 @@ procedure Tf_config.StringGrid3DrawCell(Sender: TObject; ACol,
 begin
 with Sender as TStringGrid do begin
 if (Acol=0)and(Arow>0) then begin
+  Canvas.Brush.style := bssolid;
   if (cells[acol,arow]='1')then begin
     Canvas.Brush.Color := clLime;
     Canvas.FillRect(Rect);
@@ -841,26 +871,30 @@ if (Acol=0)and(Arow>0) then begin
   end;
 if (Acol=1)and(Arow>0) then
   if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
-    Canvas.Brush.Color := clRed;
-    Canvas.FillRect(Rect);
+    Canvas.Pen.Color := clRed;
+    Canvas.Brush.style := bsclear;
+    Canvas.rectangle(Rect);
     cells[0,arow]:='0';
   end;
 if (Acol=2)and(Arow>0) then
   if not IsNumber(cells[acol,arow]) then begin
-    Canvas.Brush.Color := clRed;
-    Canvas.FillRect(Rect);
+    Canvas.Pen.Color := clRed;
+    Canvas.Brush.style := bsclear;
+    Canvas.rectangle(Rect);
     cells[0,arow]:='0';
   end;
 if (Acol=3)and(Arow>0) then
   if not IsNumber(cells[acol,arow]) then begin
-    Canvas.Brush.Color := clRed;
-    Canvas.FillRect(Rect);
+    Canvas.Pen.Color := clRed;
+    Canvas.Brush.style := bsclear;
+    Canvas.rectangle(Rect);
     cells[0,arow]:='0';
   end;
 if (Acol=4)and(Arow>0) then
   if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
-    Canvas.Brush.Color := clRed;
-    Canvas.FillRect(Rect);
+    Canvas.Pen.Color := clRed;
+    Canvas.Brush.style := bsclear;
+    Canvas.rectangle(Rect);
     cells[0,arow]:='0';
   end;
 if (Acol=5)and(Arow>0) then begin
@@ -882,7 +916,7 @@ begin
     if opendialog1.execute then begin
        buf:=extractfilename(opendialog1.FileName);
        p:=pos('.',buf);
-       stringgrid3.Cells[1,row]:=uppercase(copy(buf,1,p-1));
+       stringgrid3.Cells[1,row]:=copy(buf,1,p-1);
        stringgrid3.Cells[4,row]:=extractfilepath(opendialog1.filename);
        stringgrid3.Cells[2,row]:='0';
        stringgrid3.Cells[3,row]:=f_main.catalog.GetMaxField(stringgrid3.Cells[4,row],stringgrid3.Cells[1,row]);
@@ -958,7 +992,7 @@ if ((Acol=2)or(Acol=3))and(Arow>0)and(value>'') then begin
 end;
 end;
 
-procedure Tf_config.BitBtn33Click(Sender: TObject);
+procedure Tf_config.AddCatClick(Sender: TObject);
 begin
 catalogempty:=false;
 stringgrid3.rowcount:=stringgrid3.rowcount+1;
@@ -967,7 +1001,7 @@ stringgrid3.cells[3,stringgrid3.rowcount-1]:='10';
 EditGCatPath(stringgrid3.rowcount-1);
 end;
 
-procedure Tf_config.BitBtn35Click(Sender: TObject);
+procedure Tf_config.DelCatClick(Sender: TObject);
 var p : integer;
 begin
 p:=stringgrid3.selection.top;
@@ -1102,8 +1136,12 @@ end;
 
 procedure Tf_config.tzChange(Sender: TObject);
 begin
-csc.timezone:=tz.value;
-csc.obstz:=tz.value;
+with sender as Tfloatedit do begin
+  csc.obstz:=value;
+end;
+// same value in Time and Observatory panel
+if tz<>nil then tz.value:=csc.obstz;
+if timez<>nil then timez.value:=csc.obstz;
 end;
 
 procedure Tf_config.CheckBox4Click(Sender: TObject);
@@ -1287,14 +1325,67 @@ begin
   csc.ShowEqGrid:=EqGrid.Checked;
 end;
 
-procedure Tf_config.AzGridClick(Sender: TObject);
+procedure Tf_config.CGridClick(Sender: TObject);
 begin
-  csc.ShowAzGrid:=AzGrid.Checked;
+  csc.ShowGrid:=CGrid.Checked;
+end;
+
+procedure Tf_config.GridNumClick(Sender: TObject);
+begin
+  csc.ShowGridNum:=GridNum.Checked;
+end;
+
+procedure Tf_config.eclipticClick(Sender: TObject);
+begin
+  csc.Showecliptic:=ecliptic.Checked;
+end;
+
+procedure Tf_config.galacticClick(Sender: TObject);
+begin
+  csc.Showgalactic:=galactic.Checked;
 end;
 
 procedure Tf_config.ConstlClick(Sender: TObject);
 begin
   csc.ShowConstl:=ConstL.Checked;
+end;
+
+procedure Tf_config.ConstbClick(Sender: TObject);
+begin
+  csc.ShowConstb:=ConstB.Checked;
+end;
+
+
+procedure Tf_config.milkywayClick(Sender: TObject);
+begin
+  csc.showmilkyway:=milkyway.checked;
+end;
+
+procedure Tf_config.fillmilkywayClick(Sender: TObject);
+begin
+  csc.fillmilkyway:=fillmilkyway.checked;
+end;
+
+procedure Tf_config.ConstbFileChange(Sender: TObject);
+begin
+  cmain.ConstBfile:=expandfilename(ConstbFile.Text);
+end;
+
+procedure Tf_config.ConstbfileBtnClick(Sender: TObject);
+var f : string;
+begin
+f:=expandfilename(ConstbFile.Text);
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='All Files|*.*';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   ConstbFile.Text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
 end;
 
 procedure Tf_config.ApparentTypeClick(Sender: TObject);
@@ -1387,5 +1478,378 @@ end;
 procedure Tf_config.ipportChange(Sender: TObject);
 begin
 cmain.ServerIPport:=ipport.Text;
+end;
+
+procedure Tf_config.ShowObservatory;
+var i:integer;
+begin
+try
+altmeter.value:=csc.obsaltitude;
+pressure.value:=csc.obspressure;
+temperature.value:=csc.obstemperature;
+timez.value:=csc.obstz;
+ShowObsCoord;
+//countrylist.text:=csc.obscountry;
+countrylist.itemindex:=0;
+for i:=0 to countrylist.items.count-1 do
+  if uppercase(trim(countrylist.Items[i]))=uppercase(trim(csc.obscountry)) then begin
+    countrylist.itemindex:=i;
+    break;
+  end;
+citylist.text:=csc.obsname;
+cityfilter.text:=copy(csc.obsname,1,3);
+Obsposx:=0;
+Obsposy:=0;
+ZoomImage1.Xcentre:=Obsposx;
+ZoomImage1.Ycentre:=Obsposy;
+ZoomImage1.ZoomMax:=3;
+ZoomImage1.Picture.LoadFromFile(cmain.EarthMapFile);
+SetScrollBar;
+Hscrollbar.Position:=ZoomImage1.SizeX div 2;
+Vscrollbar.Position:=ZoomImage1.SizeY div 2;
+SetObsPos;
+CenterObs;
+except
+end;
+end;
+
+Procedure Tf_config.ShowObsCoord;
+var d,m,s : string;
+begin
+try
+obslock:=true;
+ArToStr2(abs(csc.ObsLatitude),d,m,s);
+latdeg.Text:=d;
+latmin.Text:=m;
+latsec.Text:=s;
+ArToStr2(abs(csc.ObsLongitude),d,m,s);
+longdeg.Text:=d;
+longmin.Text:=m;
+longsec.Text:=s;
+if csc.ObsLatitude>=0 then hemis.Itemindex:=0
+                      else hemis.Itemindex:=1;
+if csc.ObsLongitude>=0 then long.Itemindex:=0
+                       else long.Itemindex:=1;
+finally
+obslock:=false;
+end;
+end;
+
+procedure Tf_config.countrylistClick(Sender: TObject);
+begin
+try
+csc.obscountry:=countrylist.text;
+citysearch.click;
+except
+end;
+end;
+
+procedure Tf_config.obsnameMouseEnter(Sender: TObject);
+begin
+try
+if (c=nil)or(total<=0)or(countrylist.text<>actual_country) then begin
+  csc.obscountry:=countrylist.text;
+  UpdCityList(false);
+end;
+except
+end;
+end;
+
+procedure Tf_config.citylistChange(Sender: TObject);
+begin
+csc.obsname:=citylist.text;
+end;
+
+procedure Tf_config.citylistClick(Sender: TObject);
+var i:integer;
+    x,xx:double;
+begin
+csc.obsname:=citylist.text;
+if c=nil then exit;
+i := citylist.ItemIndex+first;
+x:=abs(c^[i].m_Coord[0]/10000);
+xx:=trunc(x);
+csc.ObsLatitude:=xx;
+x:=(x-xx)*100;
+xx:=trunc(x);
+csc.ObsLatitude:=csc.ObsLatitude+xx/60;
+x:=(x-xx)*100;
+csc.ObsLatitude:=csc.ObsLatitude+x/3600;
+if c^[i].m_Coord[0]<0 then csc.ObsLatitude:=-csc.ObsLatitude;
+x:=abs(c^[i].m_Coord[1]/10000);
+xx:=trunc(x);
+csc.ObsLongitude:=xx;
+x:=(x-xx)*100;
+xx:=trunc(x);
+csc.ObsLongitude:=csc.ObsLongitude+xx/60;
+x:=(x-xx)*100;
+csc.ObsLongitude:=csc.ObsLongitude+x/3600;
+if c^[i].m_Coord[1]>0 then csc.ObsLongitude:=-csc.ObsLongitude;
+ShowObsCoord;
+SetObsPos;
+CenterObs;
+end;
+
+procedure Tf_config.citysearchClick(Sender: TObject);
+begin
+try
+UpdCityList(true);
+except
+end;
+end;
+
+procedure Tf_config.UpdCityList(changecity:boolean);
+var s : pchar;
+    i,n: integer;
+    ci,filter:utf8string;
+    savecity:string;
+begin
+if (countrylist.text<>actual_country)or(total<=0) then begin
+  try
+  screen.cursor:=crHourGlass;
+  s:=pchar(string(slash(appdir)+'data'+pathdelim+'CitiesOfTheWorld'));
+  setdirectory(s);
+  releasecities();
+  total:=readcountryfile(pchar(string(countrylist.text)),c);
+  actual_country:=countrylist.text;
+  finally
+   screen.cursor:=crDefault;
+  end;
+end;
+if total<=0 then begin
+  showmessage('Error reading country file: '+inttostr(total));
+  exit;
+end;
+filter:=utf8encode(cityfilter.text);
+if filter<>'' then first:=SearchCity(pchar(filter))
+              else first:=0;
+if first<0 then first:=total-50;
+n:=minintvalue([total-1,first+100]);
+savecity:=citylist.text;
+citylist.clear;
+citylist.ItemIndex:=-1;
+citylist.Items.BeginUpdate;
+for i:=first to n do begin
+  ci:=c^[i].m_Name;
+  citylist.items.Add(utf8decode(ci));
+end;
+citylist.Items.EndUpdate;
+if changecity then begin
+  citylist.ItemIndex:=0;
+  citylistClick(Self);
+end
+else citylist.text:=savecity;
+updcity.enabled:=true;
+newcity.enabled:=true;
+delcity.enabled:=true;
+end;
+
+procedure Tf_config.newcityClick(Sender: TObject);
+var nc : City;
+begin
+if (c=nil)or(total<=0) then begin
+  showmessage('Error, country file not initialized: '+inttostr(total));
+  exit;
+end;
+strpcopy(nc.m_Name,utf8encode(citylist.text));
+nc.m_Coord[0]:=latsec.value+latmin.value*100+latdeg.value*10000;
+if hemis.itemindex=1 then nc.m_Coord[0]:=-nc.m_Coord[0];
+nc.m_Coord[1]:=longsec.value+longmin.value*100+longdeg.value*10000;
+if long.itemindex=1 then nc.m_Coord[1]:=-nc.m_Coord[1];
+if AddCity(@nc)>0 then begin;
+   actual_country:='';
+   cityfilter.text:=citylist.text;
+   citysearch.click;
+end else showmessage(citylist.text+' already exist!');
+end;
+
+procedure Tf_config.updcityClick(Sender: TObject);
+var nc : City;
+    i : integer;
+begin
+if (c=nil)or(total<=0) then begin
+  showmessage('Error, country file not initialized: '+inttostr(total));
+  exit;
+end;
+i := citylist.ItemIndex+first;
+strpcopy(nc.m_Name,utf8encode(citylist.text));
+nc.m_Coord[0]:=latsec.value+latmin.value*100+latdeg.value*10000;
+if hemis.itemindex=1 then nc.m_Coord[0]:=-nc.m_Coord[0];
+nc.m_Coord[1]:=longsec.value+longmin.value*100+longdeg.value*10000;
+if long.itemindex=1 then nc.m_Coord[1]:=-nc.m_Coord[1];
+if ModifyCity(i,@nc)>0 then begin;
+   actual_country:='';
+   cityfilter.text:=citylist.text;
+   citysearch.click;
+end else showmessage('Failed to update '+citylist.text+'!');
+end;
+
+procedure Tf_config.delcityClick(Sender: TObject);
+var nc : City;
+    i : integer;
+begin
+if (c=nil)or(total<=0) then begin
+  showmessage('Error, country file not initialized: '+inttostr(total));
+  exit;
+end;
+i := citylist.ItemIndex+first;
+nc:=c^[i];
+if messagedlg('Are you sure you want to remove '+nc.m_Name+' ?',mtConfirmation,[mbYes,mbNo],0)=mrYes then begin
+   if RemoveCity(i,@nc)>0 then begin;
+      actual_country:='';
+      citysearch.click;
+   end else showmessage('Failed to delete!');
+end;
+end;
+
+procedure Tf_config.latdegChange(Sender: TObject);
+begin
+if obslock then exit;
+csc.ObsLatitude:=latdeg.value+latmin.value/60+latsec.value/3600;
+if hemis.Itemindex>0 then csc.ObsLatitude:=-csc.ObsLatitude;
+SetObsPos;
+CenterObs;
+end;
+
+procedure Tf_config.longdegChange(Sender: TObject);
+begin
+if obslock then exit;
+csc.ObsLongitude:=longdeg.value+longmin.value/60+longsec.value/3600;
+if long.Itemindex>0 then csc.ObsLongitude:=-csc.ObsLongitude;
+SetObsPos;
+CenterObs;
+end;
+
+procedure Tf_config.altmeterChange(Sender: TObject);
+begin
+csc.obsaltitude:=altmeter.value;
+end;
+
+procedure Tf_config.pressureChange(Sender: TObject);
+begin
+csc.obspressure:=pressure.value;
+end;
+
+procedure Tf_config.temperatureChange(Sender: TObject);
+begin
+csc.obstemperature:=temperature.value;
+end;
+
+Procedure Tf_config.SetScrollBar;
+begin
+try
+ScrollLock:=true;
+scrollw:=round(ZoomImage1.Width/ZoomImage1.zoom/2);
+Hscrollbar.SetParams(Hscrollbar.Position, scrollw, ZoomImage1.SizeX-scrollw);
+Hscrollbar.LargeChange:=scrollw;
+Hscrollbar.SmallChange:=scrollw div 10;
+scrollh:=round(ZoomImage1.Height/ZoomImage1.zoom/2);
+Vscrollbar.SetParams(Vscrollbar.Position, scrollh, ZoomImage1.SizeY-scrollh);
+Vscrollbar.LargeChange:=scrollh;
+Vscrollbar.SmallChange:=scrollh div 10;
+finally
+ScrollLock:=false;
+end;
+end;
+
+procedure Tf_config.ZoomImage1Paint(Sender: TObject);
+var x,y : integer;
+begin
+  with ZoomImage1.Canvas do begin
+     pen.Color:=clred;
+     brush.Style:=bsClear;
+     x:=ZoomImage1.Wrld2ScrX(Obsposx);
+     y:=ZoomImage1.Wrld2ScrY(Obsposy);
+     ellipse(x-3,y-3,x+3,y+3);
+  end;
+end;
+
+procedure Tf_config.ZoomImage1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+if ZoomImage1.SizeX>0 then begin
+  Obsposx:=ZoomImage1.scr2wrldx(x);
+  Obsposy:=ZoomImage1.scr2wrldy(y);
+  ZoomImage1.Refresh;
+  csc.ObsLongitude:=180-360*Obsposx/ZoomImage1.SizeX;
+  csc.ObsLatitude:=90-180*Obsposy/ZoomImage1.SizeY;
+  ShowObsCoord;
+end;
+end;
+
+Procedure Tf_config.SetObsPos;
+begin
+Obsposx:=round(ZoomImage1.SizeX*(180-csc.ObsLongitude)/360);
+Obsposy:=round(ZoomImage1.SizeY*(90-csc.ObsLatitude)/180);
+ZoomImage1.Xcentre:=Obsposx;
+ZoomImage1.Ycentre:=Obsposy;
+end;
+
+procedure Tf_config.ZoomImage1PosChange(Sender: TObject);
+begin
+ScrollLock:=true;
+Hscrollbar.Position:=ZoomImage1.Xc;
+Vscrollbar.Position:=ZoomImage1.Yc;
+application.processmessages;
+ScrollLock:=false;
+end;
+
+procedure Tf_config.HScrollBarChange(Sender: TObject);
+begin
+if scrolllock then exit;
+ZoomImage1.Xcentre:=HScrollBar.Position;
+ZoomImage1.Draw;
+end;
+
+procedure Tf_config.VScrollBarChange(Sender: TObject);
+begin
+if scrolllock then exit;
+ZoomImage1.Ycentre:=VScrollBar.Position;
+ZoomImage1.Draw;
+end;
+
+procedure Tf_config.CenterObs;
+begin
+ZoomImage1.Xcentre:=Obsposx;
+ZoomImage1.Ycentre:=Obsposy;
+ZoomImage1.Draw;
+SetScrollBar;
+end;
+
+procedure Tf_config.ObszpClick(Sender: TObject);
+begin
+ZoomImage1.zoom:=1.5*ZoomImage1.zoom;
+CenterObs;
+end;
+
+procedure Tf_config.ObszmClick(Sender: TObject);
+begin
+ZoomImage1.zoom:=ZoomImage1.zoom/1.5;
+CenterObs;
+end;
+
+procedure Tf_config.ObsmapClick(Sender: TObject);
+begin
+opendialog1.InitialDir:=extractfilepath(cmain.EarthMapFile);
+opendialog1.filename:=extractfilename(cmain.EarthMapFile);
+opendialog1.Filter:='PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
+opendialog1.DefaultExt:='.png';
+try
+if opendialog1.execute
+   and(fileexists(opendialog1.filename))
+   then begin
+   cmain.EarthMapFile:=opendialog1.filename;
+   ZoomImage1.Xcentre:=Obsposx;
+   ZoomImage1.Ycentre:=Obsposy;
+   ZoomImage1.Picture.LoadFromFile(cmain.EarthMapFile);
+   SetScrollBar;
+   Hscrollbar.Position:=ZoomImage1.SizeX div 2;
+   Vscrollbar.Position:=ZoomImage1.SizeY div 2;
+   SetObsPos;
+   CenterObs;
+end;
+finally
+   chdir(appdir);
+end;
 end;
 

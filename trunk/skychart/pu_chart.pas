@@ -62,7 +62,7 @@ type
     rot_plus: TAction;
     rot_minus: TAction;
     GridEQ: TAction;
-    GridAz: TAction;
+    Grid: TAction;
     identlabel: TLabel;
     switchbackground: TAction;
     switchstar: TAction;
@@ -98,7 +98,7 @@ type
     procedure rot_plusExecute(Sender: TObject);
     procedure rot_minusExecute(Sender: TObject);
     procedure GridEQExecute(Sender: TObject);
-    procedure GridAzExecute(Sender: TObject);
+    procedure GridExecute(Sender: TObject);
     procedure identlabelClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -115,9 +115,9 @@ type
   public
     { Public declarations }
     sc: Tskychart;
-    maximize:boolean;
+    maximize,LockTrackCursor :boolean;
     undolist : array[1..maxundo] of conf_skychart;
-    lastundo,curundo,validundo : integer;
+    lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
@@ -133,7 +133,7 @@ type
     procedure CKeyDown(var Key: Word; Shift: TShiftState);
     function cmd_SetCursorPosition(x,y:integer):string;
     function cmd_SetGridEQ(onoff:string):string;
-    function cmd_SetGridAZ(onoff:string):string;
+    function cmd_SetGrid(onoff:string):string;
     function cmd_SetStarMode(i:integer):string;
     function cmd_SetNebMode(i:integer):string;
     function cmd_SetSkyMode(onoff:string):string;
@@ -147,6 +147,9 @@ type
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=75):boolean;
     Procedure ZoomBox(action,x,y:integer);
+    Procedure TrackCursor(X,Y : integer);
+    Procedure ZoomCursor(yy : double);
+    function GetChartInfo:string;
   end;
 
 implementation

@@ -268,11 +268,11 @@ object f_chart: Tf_chart
       ImageIndex = 24
       OnExecute = GridEQExecute
     end
-    object GridAZ: TAction
+    object Grid: TAction
       Category = 'Grid'
-      Caption = 'GridAZ'
+      Caption = 'Grid'
       ImageIndex = 25
-      OnExecute = GridAZExecute
+      OnExecute = GridExecute
     end
     object rot_plus: TAction
       Category = 'rotation'
