@@ -41,6 +41,7 @@ type
     { Private declarations }
      FBitmap: TBitmap;
      FPicture: TPicture;
+     lockPicture:boolean;
      Fzoom, FZoomMin, FZoomMax : double;
      FXcentre, FYcentre, FSizeX, FSizeY, FXo, FYo, FXc, FYc, Fw, Fh  : integer;
      FOnPaint: TNotifyEvent;
@@ -93,6 +94,7 @@ end;
 constructor TZoomImage.Create(Aowner:Tcomponent);
 begin
 inherited create(Aowner);
+LockPicture:=false;
 Height := 105;
 Width  := 105;
 FZoom  := 1;
@@ -112,24 +114,37 @@ end;
 
 procedure TZoomImage.SetPicture(Value: TPicture);
 begin
+if Value.Width=0 then raise exception.create('Invalid image!');
+FSizeX:=Value.Width;
+FSizeY:=Value.Height;
 FPicture.Assign(Value);
-if FPicture.Width=0 then raise exception.create('Invalid image!');
-FSizeX:=FPicture.Width;
-FSizeY:=FPicture.Height;
 FZoomMin:=Width / FSizeX;
 if FZoomMax<=FZoomMin then FZoomMax:=FZoomMin+1;
 end;
 
 procedure TZoomImage.PictureChange(Sender: TObject);
 begin
+if lockPicture then begin
+   // do not loop when replacing the picture by a bitmap (windows only)
+   exit;
+end;
 if FPicture.Width=0 then raise exception.create('Invalid image!');
 FSizeX:=FPicture.Width;
 FSizeY:=FPicture.Height;
 {$ifdef mswindows}
 // Windows Copyrect require a bitmap
-FBitmap.Width:=FSizeX;
-FBitmap.Height:=FSizeY;
-FBitmap.Canvas.Draw(0,0,FPicture.Graphic);
+  try
+  // avoid to loop
+  lockPicture:=true;
+  FBitmap.Width:=FSizeX;
+  FBitmap.Height:=FSizeY;
+  // copy temporarily to FBitmap
+  FBitmap.Canvas.Draw(0,0,FPicture.Graphic);
+  // copy the bitmap back to the picture
+  FPicture.Bitmap.Assign(FBitmap);
+  finally
+  lockPicture:=false;
+  end;
 {$endif}
 FZoomMin:=Width / FSizeX;
 if FZoomMax<=FZoomMin then FZoomMax:=FZoomMin+1;
@@ -158,12 +173,11 @@ if FYo<0 then FYo:=0;
 if FYo>y0 then FYo:=y0;
 FXc:=FXo+dx;
 FYc:=FYo+dy;
-{$ifdef linux}
-// Kylix Copyrect do not stretch the image
+// Copy the partial image
 FBitmap.Width:=Fw;
 FBitmap.Height:=Fh;
 FBitmap.Canvas.CopyRect(Rect(0, 0, Fw, Fh),FPicture.Bitmap.Canvas,Rect(FXo, FYo, FXo+Fw, FYo+Fh));
-{$endif}
+// refresh the image
 Paint;
 if Assigned(FOnPosChange) then FOnPosChange(Self);
 end;
@@ -172,14 +186,8 @@ end;
 procedure TZoomImage.Paint;
 begin
 if assigned(FPicture.Graphic) then begin
-{$ifdef linux}
 // Stretch the image here
 Canvas.StretchDraw(rect(0,0,Width,Height),FBitmap);
-{$endif}
-{$ifdef mswindows}
-// Clip and stretch here
-Canvas.CopyRect(Rect(0, 0, Width, Height),FBitmap.Canvas,Rect(FXo, FYo, FXo+Fw, FYo+Fh));
-{$endif}
 if Assigned(FOnPaint) then FOnPaint(Self);
 end;
 end;
