@@ -1,0 +1,36 @@
+This component is only to be use to add PNG support for the Windows version.
+The Linux Kylix version use the standard PNG support in Qt.
+
+
+TPNGImage 1.4
+
+Component author and website:
+
+Gustavo Huffenbacher Daud
+ Currently, contact me at: gubadaud@terra.com.br
+
+ http://pngdelphi.sourceforge.net
+
+
+ This is the best place to get the latest version. TPNGImage took me lots of hours programming, and it's free even for commercial projects (read license). above.
+
+
+
+Component license:
+
+The previous versions from this component were unclear about the license to use this component. Here it is:
+ 
+This component should be distributed freely over the internet only when containing the exact same files from the original packaging. 
+Modified files may not be distributed. If you want to contribute with TPNGImage, send the enhancements to the author and if he implements your changes, you will be given the proper credit.
+ 
+The component may be used in commercial projects but may NEVER be sold as source code.
+
+Commercial graphics libraries are not allowed to use this component WITHOUT AUTHOR PRIOR AGREEMENT.
+ 
+Credit for the author is required somewhere in the product documentation/or about box/etc for applications distributed over the internet.
+ 
+Source code may be changed since it's not redistributed.
+ 
+
+If are about to use the component in a major project which is going to be distributed over the internet, I'd love to know, so please send me an email telling me about.
+
