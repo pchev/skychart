@@ -51,6 +51,7 @@ debug:=false;
 {$I-}
 closefile(fdebug);
 {$I+}
+// just to cleanup ioresult
 i:=ioresult;
 except
 end;
