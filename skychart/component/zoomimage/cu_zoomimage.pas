@@ -1,4 +1,3 @@
-unit cu_zoomimage;
 {                                        
 Copyright (C) 2002 Patrick Chevalley
 
@@ -19,6 +18,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
+unit cu_zoomimage;
 {
  Very simple, not polished component to zoom an image.
 }
@@ -36,56 +36,71 @@ uses
 
 
 type
+  {
+   Very simple, not polished component to zoom an image.
+  }
   TZoomImage = class(TCustomControl)
   private
-    { Private declarations }
-     FBitmap: TBitmap;
-     FPicture: TPicture;
+     FBitmap: TBitmap;   // zoomed image ready to paint to the canvas
+     FPicture: TPicture; // original image
      lockPicture:boolean;
      Fzoom, FZoomMin, FZoomMax : double;
      FXcentre, FYcentre, FSizeX, FSizeY, FXo, FYo, FXc, FYc, Fw, Fh  : integer;
      FOnPaint: TNotifyEvent;
      FOnPosChange: TNotifyEvent;
+     { Assign a new picture to the original image
+       ~param Value a valid TPicture }
      procedure SetPicture(Value: TPicture);
   protected
-    { Protected declarations }
     procedure Paint; override;
   public
-    { Public declarations }
      constructor Create(Aowner:Tcomponent); override;
      destructor Destroy; override;
-     procedure PictureChange(Sender: TObject);
+     procedure PictureChange(Sender: TObject); // Initialize the zoom after a new image is loaded
   published
-    { Published declarations }
+     { Draw the zooomed image using the zoom properties }
      procedure Draw;
+     { Get X screen coordinate from original image X coordinate 
+       ~param X image coordinate (pixel) 
+       ~result X screen coordinate (pixel) }
      function Wrld2ScrX(X: integer): integer;
+     { Get Y screen coordinate from original image Y coordinate 
+       ~param Y image coordinate (pixel) 
+       ~result Y screen coordinate (pixel) }
      function Wrld2ScrY(Y: integer): integer;
+     { Get original image X coordinate from X screen coordinate 
+       ~param X screen coordinate (pixel) 
+       ~result X image coordinate (pixel) }
      function Scr2WrldX(X: integer): integer;
+     { Get original image Y coordinate from Y screen coordinate 
+       ~param Y screen coordinate (pixel) 
+       ~result Y image coordinate (pixel) }
      function Scr2WrldY(Y: integer): integer;
-     property Canvas;
-     property Picture: TPicture read FPicture write SetPicture;
-     property Zoom : double read Fzoom  write Fzoom  ;
-     property ZoomMin : double read FZoomMin;
-     property ZoomMax : double read FZoomMax write FZoomMax;
-     property Xcentre : integer read FXcentre  write FXcentre  ;
-     property Ycentre : integer read FYcentre  write FYcentre  ;
-     property Xc : integer read FXc;
-     property Yc : integer read FYc;
-     property SizeX : integer read FSizeX;
-     property SizeY : integer read FSizeY;
+     property Canvas; // The canvas where the image is draw, published to allow further drawing (reticle)
+     property Picture: TPicture read FPicture write SetPicture; // The original image
+     property Zoom : double read Fzoom  write Fzoom  ; // The zoom factor
+     property ZoomMin : double read FZoomMin; // The minimal zoom factor (default is adjusted to display the full image)
+     property ZoomMax : double read FZoomMax write FZoomMax; // The maximal zoom factor (default=4)
+     property Xcentre : integer read FXcentre  write FXcentre  ; // Desired image X coordinate of the center of the zoom window 
+     property Ycentre : integer read FYcentre  write FYcentre  ; // Desired image Y coordinate of the center of the zoom window 
+     property Xc : integer read FXc; // Actual image Y coordinate of the center of the zoom window 
+     property Yc : integer read FYc; // Actual image Y coordinate of the center of the zoom window 
+     property SizeX : integer read FSizeX; // Width of the original image
+     property SizeY : integer read FSizeY; // Height of the original image
      property OnClick;
      property OnDblClick;
      property OnMouseDown;
      property OnMouseMove;
      property OnMouseUp;
-     property OnPaint: TNotifyEvent read FOnPaint write FOnPaint;
-     property OnPosChange: TNotifyEvent read FOnPosChange write FOnPosChange;
+     property OnPaint: TNotifyEvent read FOnPaint write FOnPaint; // Raise at each repaint of the canvas
+     property OnPosChange: TNotifyEvent read FOnPosChange write FOnPosChange; // Raise after position of the window change
   end;
 
 procedure Register;
 
 implementation
 
+// Register the component to Delphi IDE
 procedure Register;
 begin
   RegisterComponents('CDC', [TZoomImage]);
