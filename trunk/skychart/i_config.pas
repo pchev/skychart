@@ -442,12 +442,12 @@ end;
 
 procedure Tf_config.SetFonts(ctrl:Tedit;num:integer);
 begin
- ctrl.Text:=cmain.FontName[num];
- ctrl.Font.Name:=cmain.FontName[num];
- ctrl.Font.Size:=cmain.FontSize[num];
- if cmain.FontBold[num] then ctrl.Font.Style:=[fsBold]
+ ctrl.Text:=cplot.FontName[num];
+ ctrl.Font.Name:=cplot.FontName[num];
+ ctrl.Font.Size:=cplot.FontSize[num];
+ if cplot.FontBold[num] then ctrl.Font.Style:=[fsBold]
                         else ctrl.Font.Style:=[];
- if cmain.FontItalic[num] then ctrl.Font.Style:=ctrl.Font.Style+[fsItalic];
+ if cplot.FontItalic[num] then ctrl.Font.Style:=ctrl.Font.Style+[fsItalic];
 end;
 
 procedure Tf_config.ShowFonts;
@@ -515,16 +515,16 @@ var i : integer;
 begin
 if sender is Tspeedbutton then with sender as Tspeedbutton do i:=tag
    else exit;
-Fontdialog1.Font.Name:=cmain.FontName[i];
-Fontdialog1.Font.Size:=cmain.FontSize[i];
-if cmain.FontBold[i] then Fontdialog1.Font.Style:=[fsBold]
+Fontdialog1.Font.Name:=cplot.FontName[i];
+Fontdialog1.Font.Size:=cplot.FontSize[i];
+if cplot.FontBold[i] then Fontdialog1.Font.Style:=[fsBold]
                      else Fontdialog1.Font.Style:=[];
-if cmain.FontItalic[i] then Fontdialog1.Font.Style:=Fontdialog1.Font.Style+[fsItalic];
+if cplot.FontItalic[i] then Fontdialog1.Font.Style:=Fontdialog1.Font.Style+[fsItalic];
 if Fontdialog1.Execute then begin
-   cmain.FontName[i]:=Fontdialog1.Font.Name;
-   cmain.FontSize[i]:=Fontdialog1.Font.Size;
-   cmain.FontBold[i]:=fsBold in Fontdialog1.Font.Style;
-   cmain.FontItalic[i]:=fsItalic in Fontdialog1.Font.Style;
+   cplot.FontName[i]:=Fontdialog1.Font.Name;
+   cplot.FontSize[i]:=Fontdialog1.Font.Size;
+   cplot.FontBold[i]:=fsBold in Fontdialog1.Font.Style;
+   cplot.FontItalic[i]:=fsItalic in Fontdialog1.Font.Style;
 end;
 ShowFonts;
 end;
@@ -533,10 +533,10 @@ procedure Tf_config.DefaultFontClick(Sender: TObject);
 var i : integer;
 begin
 for i:=1 to 6 do begin
-    cmain.FontName[i]:=DefaultFontName;
-    cmain.FontSize[i]:=DefaultFontSize;
-    cmain.FontBold[i]:=false;
-    cmain.FontItalic[i]:=false;
+    cplot.FontName[i]:=DefaultFontName;
+    cplot.FontSize[i]:=DefaultFontSize;
+    cplot.FontBold[i]:=false;
+    cplot.FontItalic[i]:=false;
 end;
 ShowFonts;
 end;
@@ -1316,7 +1316,7 @@ if sender is TShape then with sender as TShape do begin
 end;
 end;
 
-procedure Tf_config.LoadDefColorClick(Sender: TObject);
+procedure Tf_config.DefColorClick(Sender: TObject);
 begin
 case DefColor.ItemIndex of
   0 : cplot.Color:=DfColor;

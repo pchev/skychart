@@ -56,7 +56,6 @@ object f_chart: Tf_chart
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      Transparent = True
       Visible = False
       OnClick = identlabelClick
     end

@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 242
-  Top = 83
+  Left = 416
+  Top = 112
   Width = 634
   Height = 487
   Caption = 'Configuration'
@@ -11,6 +11,7 @@ object f_config: Tf_config
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Scaled = False
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -63,7 +64,7 @@ object f_config: Tf_config
     Top = 0
     Width = 474
     Height = 420
-    ActivePage = p_chart
+    ActivePage = p_display
     TabOrder = 1
     object p_time: TTabSheet
       Caption = 'p_time'
@@ -5201,7 +5202,7 @@ object f_config: Tf_config
         Left = 104
         Top = 59
         Width = 113
-        Height = 26
+        Height = 21
         TabOrder = 1
         Text = '~/'
       end
@@ -5399,7 +5400,7 @@ object f_config: Tf_config
         Left = 152
         Top = 84
         Width = 100
-        Height = 26
+        Height = 21
         TabOrder = 6
       end
     end
@@ -5414,235 +5415,6 @@ object f_config: Tf_config
         Height = 13
         Caption = 'Comets Setting'
       end
-      object Label54: TLabel
-        Left = 0
-        Top = 308
-        Width = 22
-        Height = 13
-        Caption = 'Nom'
-      end
-      object Label55: TLabel
-        Left = 0
-        Top = 332
-        Width = 44
-        Height = 13
-        Caption = 'Equinoxe'
-      end
-      object Label56: TLabel
-        Left = 160
-        Top = 332
-        Width = 40
-        Height = 13
-        Caption = 'P'#233'rih'#233'lie'
-      end
-      object Label57: TLabel
-        Left = 320
-        Top = 332
-        Width = 51
-        Height = 13
-        Caption = 'd. p'#233'rih'#233'lie'
-      end
-      object Label58: TLabel
-        Left = 0
-        Top = 356
-        Width = 6
-        Height = 13
-        Caption = 'e'
-      end
-      object Label59: TLabel
-        Left = 160
-        Top = 356
-        Width = 50
-        Height = 13
-        Caption = 'w p'#233'rih'#233'lie'
-      end
-      object Label60: TLabel
-        Left = 320
-        Top = 356
-        Width = 36
-        Height = 13
-        Caption = 'L. node'
-      end
-      object Label61: TLabel
-        Left = 0
-        Top = 380
-        Width = 20
-        Height = 13
-        Caption = 'Incl.'
-      end
-      object Label62: TLabel
-        Left = 160
-        Top = 380
-        Width = 44
-        Height = 13
-        Caption = 'Magn   H'
-      end
-      object Label63: TLabel
-        Left = 320
-        Top = 380
-        Width = 50
-        Height = 13
-        Caption = 'R'#233'f'#233'rence'
-      end
-      object Label70: TLabel
-        Left = 263
-        Top = 380
-        Width = 8
-        Height = 13
-        Caption = 'G'
-      end
-      object NbComet: TLabel
-        Left = 8
-        Top = 96
-        Width = 51
-        Height = 13
-        Caption = '.                '
-      end
-      object CometList: TListBox
-        Left = 112
-        Top = 96
-        Width = 354
-        Height = 160
-        IntegralHeight = True
-        ItemHeight = 13
-        MultiSelect = True
-        TabOrder = 0
-      end
-      object com1: TEdit
-        Left = 41
-        Top = 304
-        Width = 425
-        Height = 21
-        MaxLength = 39
-        TabOrder = 1
-      end
-      object com2: TEdit
-        Left = 56
-        Top = 328
-        Width = 97
-        Height = 21
-        TabOrder = 2
-      end
-      object com3: TEdit
-        Left = 216
-        Top = 328
-        Width = 97
-        Height = 21
-        TabOrder = 3
-      end
-      object com4: TEdit
-        Left = 369
-        Top = 328
-        Width = 97
-        Height = 21
-        TabOrder = 4
-      end
-      object com5: TEdit
-        Left = 56
-        Top = 352
-        Width = 97
-        Height = 21
-        TabOrder = 5
-      end
-      object com6: TEdit
-        Left = 216
-        Top = 352
-        Width = 97
-        Height = 21
-        TabOrder = 6
-      end
-      object com7: TEdit
-        Left = 369
-        Top = 352
-        Width = 97
-        Height = 21
-        TabOrder = 7
-      end
-      object com8: TEdit
-        Left = 56
-        Top = 376
-        Width = 97
-        Height = 21
-        TabOrder = 8
-      end
-      object com9: TEdit
-        Left = 216
-        Top = 376
-        Width = 41
-        Height = 21
-        MaxLength = 5
-        TabOrder = 9
-      end
-      object com10: TEdit
-        Left = 272
-        Top = 376
-        Width = 41
-        Height = 21
-        MaxLength = 5
-        TabOrder = 10
-      end
-      object com11: TEdit
-        Left = 369
-        Top = 376
-        Width = 97
-        Height = 21
-        TabOrder = 11
-      end
-      object RadioComet1: TRadioGroup
-        Left = 0
-        Top = 120
-        Width = 110
-        Height = 75
-        Caption = 'Aspect'
-        Items.Strings = (
-          'Symbole'
-          'Dimension')
-        TabOrder = 12
-      end
-      object GroupBox6: TGroupBox
-        Left = 0
-        Top = 196
-        Width = 110
-        Height = 101
-        Caption = 'Com'#232'te courante '
-        TabOrder = 13
-        object Image1: TImage
-          Left = 2
-          Top = 83
-          Width = 16
-          Height = 16
-          Align = alBottom
-          AutoSize = True
-          Center = True
-          Picture.Data = {
-            07544269746D6170F6000000424DF60000000000000076000000280000001000
-            000010000000010004000000000080000000120B0000120B0000100000001000
-            0000000000000000800000800000008080008000000080008000808000008080
-            8000C0C0C0000000FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFF
-            FF00DADADAD0DADADADAADADAD0D0DADADADDADAD0DAD0DADADAADAD0DADAD0D
-            ADADDAD0DADADAD0DADAAD0DADADADAD0DADD0DADADADADAD0DA00000DADAD00
-            000DDADA0ADADA0ADADAADAD0DADAD0DADADDADA0ADADA0ADADAADAD0DADAD0D
-            ADADDADA0ADADA0ADADAADAD0DADAD0DADADDADA0000000ADADAADADADADADAD
-            ADAD}
-          Transparent = True
-        end
-        object BitBtn6: TBitBtn
-          Left = 18
-          Top = 20
-          Width = 73
-          Height = 25
-          Caption = 'Enregistrer'
-          TabOrder = 0
-        end
-        object BitBtn7: TBitBtn
-          Left = 18
-          Top = 52
-          Width = 73
-          Height = 25
-          Caption = 'Supprimer'
-          TabOrder = 1
-        end
-      end
     end
     object p_asteroids: TTabSheet
       Caption = 'p_asteroids'
@@ -5654,241 +5426,6 @@ object f_config: Tf_config
         Width = 79
         Height = 13
         Caption = 'Asteroids Setting'
-      end
-      object NbAster: TLabel
-        Left = 8
-        Top = 96
-        Width = 48
-        Height = 13
-        Caption = '.               '
-      end
-      object Label81: TLabel
-        Left = 0
-        Top = 296
-        Width = 22
-        Height = 13
-        Caption = 'Nom'
-      end
-      object Label82: TLabel
-        Left = 0
-        Top = 320
-        Width = 44
-        Height = 13
-        Caption = 'Equinoxe'
-      end
-      object Label83: TLabel
-        Left = 0
-        Top = 344
-        Width = 6
-        Height = 13
-        Caption = 'e'
-      end
-      object Label84: TLabel
-        Left = 0
-        Top = 368
-        Width = 20
-        Height = 13
-        Caption = 'Incl.'
-      end
-      object Label85: TLabel
-        Left = 160
-        Top = 320
-        Width = 37
-        Height = 13
-        Caption = 'Epoque'
-      end
-      object Label86: TLabel
-        Left = 160
-        Top = 344
-        Width = 50
-        Height = 13
-        Caption = 'w p'#233'rih'#233'lie'
-      end
-      object Label88: TLabel
-        Left = 320
-        Top = 368
-        Width = 44
-        Height = 13
-        Caption = 'Magn   H'
-      end
-      object Label90: TLabel
-        Left = 415
-        Top = 368
-        Width = 8
-        Height = 13
-        Caption = 'G'
-      end
-      object Label91: TLabel
-        Left = 320
-        Top = 320
-        Width = 54
-        Height = 13
-        Caption = 'M. anomaly'
-      end
-      object Label92: TLabel
-        Left = 320
-        Top = 344
-        Width = 36
-        Height = 13
-        Caption = 'L. node'
-      end
-      object Label93: TLabel
-        Left = 160
-        Top = 368
-        Width = 6
-        Height = 13
-        Caption = 'a'
-      end
-      object Label94: TLabel
-        Left = 2
-        Top = 245
-        Width = 27
-        Height = 13
-        Caption = 'Limite'
-      end
-      object Label95: TLabel
-        Left = 2
-        Top = 227
-        Width = 55
-        Height = 13
-        AutoSize = False
-        Caption = '1 ==>'
-      end
-      object AsterList: TListBox
-        Left = 104
-        Top = 96
-        Width = 362
-        Height = 147
-        IntegralHeight = True
-        ItemHeight = 13
-        MultiSelect = True
-        TabOrder = 0
-      end
-      object RadioAsteroid1: TRadioGroup
-        Left = 0
-        Top = 112
-        Width = 105
-        Height = 55
-        Caption = 'Aspect'
-        Items.Strings = (
-          'Symbole'
-          'Magnitude')
-        TabOrder = 1
-      end
-      object RadioAsteroid2: TRadioGroup
-        Left = 0
-        Top = 168
-        Width = 105
-        Height = 55
-        Caption = 'Source'
-        Items.Strings = (
-          'CBAT'
-          'Astorb')
-        TabOrder = 2
-      end
-      object ast1: TEdit
-        Left = 41
-        Top = 292
-        Width = 425
-        Height = 21
-        MaxLength = 39
-        TabOrder = 3
-      end
-      object ast5: TEdit
-        Left = 56
-        Top = 340
-        Width = 97
-        Height = 21
-        TabOrder = 4
-      end
-      object ast8: TEdit
-        Left = 56
-        Top = 364
-        Width = 97
-        Height = 21
-        TabOrder = 5
-      end
-      object ast3: TEdit
-        Left = 216
-        Top = 316
-        Width = 97
-        Height = 21
-        TabOrder = 6
-      end
-      object ast6: TEdit
-        Left = 216
-        Top = 340
-        Width = 97
-        Height = 21
-        TabOrder = 7
-      end
-      object ast9: TEdit
-        Left = 368
-        Top = 364
-        Width = 41
-        Height = 21
-        MaxLength = 5
-        TabOrder = 8
-      end
-      object ast10: TEdit
-        Left = 425
-        Top = 364
-        Width = 41
-        Height = 21
-        MaxLength = 5
-        TabOrder = 9
-      end
-      object ast4: TEdit
-        Left = 369
-        Top = 316
-        Width = 97
-        Height = 21
-        TabOrder = 10
-      end
-      object ast7: TEdit
-        Left = 369
-        Top = 340
-        Width = 97
-        Height = 21
-        TabOrder = 11
-      end
-      object ast11: TEdit
-        Left = 216
-        Top = 364
-        Width = 97
-        Height = 21
-        TabOrder = 12
-      end
-      object ast2: TEdit
-        Left = 56
-        Top = 316
-        Width = 97
-        Height = 21
-        TabOrder = 13
-      end
-      object AstMax: TEdit
-        Left = 64
-        Top = 242
-        Width = 41
-        Height = 21
-        TabOrder = 14
-        Text = '99999'
-      end
-      object BitBtn8: TBitBtn
-        Left = 0
-        Top = 264
-        Width = 75
-        Height = 25
-        Caption = 'Rafraichir'
-        TabOrder = 15
-      end
-      object Astmin: TEdit
-        Left = 64
-        Top = 224
-        Width = 41
-        Height = 21
-        TabOrder = 16
-        Text = '0'
       end
     end
     object p_display: TTabSheet
@@ -6809,7 +6346,7 @@ object f_config: Tf_config
       object DefColor: TRadioGroup
         Left = 32
         Top = 288
-        Width = 297
+        Width = 401
         Height = 89
         Caption = 'Standard  Color'
         Columns = 2
@@ -6820,15 +6357,7 @@ object f_config: Tf_config
           'Black/White'
           'White/Black')
         TabOrder = 3
-      end
-      object LoadDefColor: TButton
-        Left = 336
-        Top = 320
-        Width = 97
-        Height = 25
-        Caption = 'Load Color'
-        TabOrder = 4
-        OnClick = LoadDefColorClick
+        OnClick = DefColorClick
       end
     end
     object p_skycolor: TTabSheet
@@ -7033,7 +6562,7 @@ object f_config: Tf_config
         Left = 216
         Top = 156
         Width = 201
-        Height = 26
+        Height = 21
         TabOrder = 3
         OnChange = ConstlFileChange
       end
@@ -7099,206 +6628,6 @@ object f_config: Tf_config
         Width = 70
         Height = 13
         Caption = 'Images Setting'
-      end
-      object GroupBox3: TGroupBox
-        Left = 8
-        Top = 64
-        Width = 458
-        Height = 161
-        Caption = 'RealSky'#174
-        TabOrder = 0
-        object Label72: TLabel
-          Left = 240
-          Top = 20
-          Width = 84
-          Height = 13
-          Caption = 'Fichiers auxiliaires'
-        end
-        object Label73: TLabel
-          Left = 240
-          Top = 48
-          Width = 86
-          Height = 13
-          Caption = 'Lecteur de CDrom'
-        end
-        object Label74: TLabel
-          Left = 240
-          Top = 76
-          Width = 83
-          Height = 13
-          Caption = 'Fichier temporaire'
-        end
-        object Bevel1: TBevel
-          Left = 235
-          Top = 6
-          Width = 50
-          Height = 96
-          Shape = bsLeftLine
-        end
-        object Bevel2: TBevel
-          Left = 0
-          Top = 100
-          Width = 480
-          Height = 20
-          Shape = bsTopLine
-        end
-        object Label75: TLabel
-          Left = 416
-          Top = 114
-          Width = 26
-          Height = 13
-          Caption = 'pixels'
-        end
-        object Label77: TLabel
-          Left = 416
-          Top = 136
-          Width = 35
-          Height = 13
-          Caption = 'MBytes'
-        end
-        object realskydir: TEdit
-          Left = 336
-          Top = 16
-          Width = 113
-          Height = 21
-          TabOrder = 0
-          Text = 'cat\RealSky\'
-        end
-        object realskydrive: TEdit
-          Left = 336
-          Top = 44
-          Width = 113
-          Height = 21
-          TabOrder = 1
-          Text = 'X:\'
-        end
-        object realskyfile: TEdit
-          Left = 336
-          Top = 72
-          Width = 113
-          Height = 21
-          TabOrder = 2
-          Text = 'images\$TEMP.FIT'
-        end
-        object RealSkyNord: TCheckBox
-          Left = 8
-          Top = 18
-          Width = 105
-          Height = 17
-          Caption = 'RealSky North'
-          TabOrder = 3
-        end
-        object RealSkySud: TCheckBox
-          Left = 8
-          Top = 46
-          Width = 113
-          Height = 17
-          Caption = 'RealSky South'
-          TabOrder = 4
-        end
-        object DSS102CD: TCheckBox
-          Left = 128
-          Top = 18
-          Width = 97
-          Height = 17
-          Caption = '102 CD DSS'
-          TabOrder = 5
-        end
-        object usesubsample: TCheckBox
-          Left = 8
-          Top = 112
-          Width = 321
-          Height = 17
-          Caption = 'Utilise le sous-'#233'chantillonage pour limiter l'#39'image '#224
-          Checked = True
-          State = cbChecked
-          TabOrder = 6
-        end
-        object realskymax: TEdit
-          Left = 336
-          Top = 110
-          Width = 73
-          Height = 21
-          TabOrder = 7
-          Text = 'realskymax'
-        end
-        object realskymb: TEdit
-          Left = 336
-          Top = 132
-          Width = 73
-          Height = 21
-          Color = clBtnFace
-          ReadOnly = True
-          TabOrder = 8
-        end
-        object reallist: TCheckBox
-          Left = 8
-          Top = 72
-          Width = 225
-          Height = 17
-          Caption = 'Choix de la plaque dans la liste'
-          Checked = True
-          State = cbChecked
-          TabOrder = 9
-        end
-        object dssautofilter: TCheckBox
-          Left = 8
-          Top = 136
-          Width = 249
-          Height = 17
-          Caption = 'Filtre passe bas automatique'
-          TabOrder = 10
-        end
-      end
-      object RadioGroup3: TRadioGroup
-        Left = 8
-        Top = 272
-        Width = 230
-        Height = 97
-        Caption = 'Ouvre l'#39'image'
-        ItemIndex = 1
-        Items.Strings = (
-          'Dans la fen'#234'tre de visualisation'
-          'Directement sur la carte')
-        TabOrder = 1
-      end
-      object RadioGroup4: TRadioGroup
-        Left = 236
-        Top = 272
-        Width = 230
-        Height = 97
-        Caption = 'Intensit'#233' par d'#233'faut'
-        ItemIndex = 4
-        Items.Strings = (
-          'En-t'#234'te du fichier FITS'
-          'Min/Max des donn'#233'es'
-          '+/- 1 '#233'cart type des donn'#233'es'
-          '+/- 2 '#233'carts type des donn'#233'es'
-          '+/- 70% de la moyenne')
-        TabOrder = 2
-      end
-      object GroupBox4: TGroupBox
-        Left = 8
-        Top = 228
-        Width = 230
-        Height = 41
-        Caption = 'DSS distant'
-        TabOrder = 3
-        object compdss: TCheckBox
-          Left = 8
-          Top = 16
-          Width = 217
-          Height = 17
-          Caption = 'Utilise la compression des fichiers'
-          TabOrder = 0
-        end
-      end
-      object GroupBox5: TGroupBox
-        Left = 236
-        Top = 228
-        Width = 230
-        Height = 41
-        TabOrder = 4
       end
     end
   end

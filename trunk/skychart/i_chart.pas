@@ -417,8 +417,8 @@ var x,y : integer;
 begin
 if sc.cfgsc.FindOK then begin
    identlabel.Visible:=false;
-   identlabel.font.name:=f_main.cfgm.fontname[2];
-   identlabel.font.size:=f_main.cfgm.LabelSize[1];
+   identlabel.font.name:=sc.plot.cfgplot.fontname[2];
+   identlabel.font.size:=sc.plot.cfgplot.LabelSize[1];
    identlabel.caption:=trim(sc.cfgsc.FindName);
    sc.GetLabPos(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc.FindSize/2,identlabel.Width,identlabel.Height,x,y);
    identlabel.left:=x;

@@ -1,6 +1,6 @@
 object f_about: Tf_about
-  Left = 348
-  Top = 198
+  Left = 356
+  Top = 240
   Width = 404
   Height = 339
   HorzScrollBar.Range = 392
@@ -8,6 +8,10 @@ object f_about: Tf_about
   ActiveControl = OKButton
   Caption = 'About'
   Color = clBackground
+  Constraints.MaxHeight = 339
+  Constraints.MaxWidth = 404
+  Constraints.MinHeight = 339
+  Constraints.MinWidth = 404
   Font.Color = clBlack
   Font.Height = 12
   Font.Name = 'Sans'
@@ -16,10 +20,9 @@ object f_about: Tf_about
   Font.Weight = 0
   ParentFont = False
   Position = poScreenCenter
+  Scaled = False
   OnCreate = FormCreate
   PixelsPerInch = 90
-  TextHeight = 20
-  TextWidth = 7
   object logo: TImage
     Left = 0
     Top = 0

@@ -66,6 +66,7 @@ Tskychart = class (TComponent)
     function DrawEqGrid :boolean;
     function DrawAzGrid :boolean;
     function DrawConstL :boolean;
+    function DrawHorizon:boolean;
     procedure GetCoord(x,y: integer; var ra,dec,a,h:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
     procedure MovetoXY(X,Y : integer);
@@ -137,6 +138,7 @@ try
   DrawVarStars;
   DrawOrbitPath;
   DrawPlanet;
+  DrawHorizon;
   result:=true;
 finally
   Fcatalog.CloseCat;
@@ -334,6 +336,7 @@ if Fplot.cfgplot.AutoSkyColor and (cfgsc.Projpole=AltAz) then begin
 end else Fplot.cfgplot.color[0]:=Fplot.cfgplot.bgColor;
 Fplot.cfgplot.backgroundcolor:=Fplot.cfgplot.color[0];
 Fplot.init(Fplot.cfgchart.width,Fplot.cfgchart.height);
+result:=true;
 end;
 
 function Tskychart.GetFieldNum(fov:double):integer;
@@ -749,7 +752,7 @@ begin
  case rec.options.rectype of
  rtStar: begin   // stars
          if rec.star.valid[vsId] then txt:=rec.star.id else txt:='';
-         if trim(txt)='' then catalog.GetAltName(rec,txt);
+         if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+'   * '+txt;
@@ -793,7 +796,7 @@ begin
          end;
  rtVar : begin   // variables stars
          if rec.variable.valid[vvId] then txt:=rec.variable.id else txt:='';
-         if trim(txt)='' then catalog.GetAltName(rec,txt);
+         if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+'  V* '+txt;
@@ -824,7 +827,7 @@ begin
          end;
  rtDbl : begin   // doubles stars
          if rec.double.valid[vdId] then txt:=rec.double.id else txt:='';
-         if trim(txt)='' then catalog.GetAltName(rec,txt);
+         if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+'  D* '+txt;
@@ -856,7 +859,7 @@ begin
          end;
  rtNeb : begin   // nebulae
          if rec.neb.valid[vnId] then txt:=rec.neb.id else txt:='';
-         if trim(txt)='' then catalog.GetAltName(rec,txt);
+         if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          cfgsc.FindName:=txt;
          if rec.neb.valid[vnNebtype] then i:=rec.neb.nebtype
                                         else i:=rec.options.ObjType;
@@ -1109,6 +1112,16 @@ until (not ok)or(hc<-pid2);
 result:=true;
 end;
 
+function Tskychart.DrawHorizon:boolean;
+begin
+if cfgsc.ProjPole=Altaz then begin
+  if cfgsc.hcentre<-(cfgsc.fov/6) then begin
+     Fplot.PlotLabel((cfgsc.xmax-cfgsc.xmin)div 2,(cfgsc.ymax-cfgsc.ymin)div 2,1,' Below the horizon ');
+  end;
+end;
+result:=true;
+end;
+
 Procedure Tskychart.GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 var x1,y1:double;
     xx,yy,rr:integer;
@@ -1143,14 +1156,14 @@ result:=false;
 if not cfgsc.ShowConstl then exit;
 dm:=minvalue([10*cfgsc.fov,2.5]);
 color := Fplot.cfgplot.Color[16];
-for i:=0 to catalog.cfgshr.ConstLnum-1 do begin
-  ra:=catalog.cfgshr.ConstL[i].ra1;
-  de:=catalog.cfgshr.ConstL[i].de1;
+for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
+  ra:=Fcatalog.cfgshr.ConstL[i].ra1;
+  de:=Fcatalog.cfgshr.ConstL[i].de1;
   precession(jd2000,cfgsc.JDChart,ra,de);
   projection(ra,de,xx1,yy1,true,cfgsc) ;
   if (abs(xx1)>dm)or(abs(yy1)>dm) then continue;
-  ra:=catalog.cfgshr.ConstL[i].ra2;
-  de:=catalog.cfgshr.ConstL[i].de2;
+  ra:=Fcatalog.cfgshr.ConstL[i].ra2;
+  de:=Fcatalog.cfgshr.ConstL[i].de2;
   precession(jd2000,cfgsc.JDChart,ra,de);
   projection(ra,de,xx2,yy2,true,cfgsc) ;
   if (abs(xx2)>dm)or(abs(yy2)>dm) then continue;

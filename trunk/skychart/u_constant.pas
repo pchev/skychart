@@ -293,6 +293,12 @@ type
                 stardyn,starsize,prtres,starplot,nebplot,plaplot : integer;
                 Nebgray,NebBright,starshapesize,starshapew : integer;
                 Invisible,PlanetTransparent,AutoSkycolor : boolean;
+                FontName : array [1..6] of string;
+                FontSize : array [1..6] of integer;
+                FontBold : array [1..6] of boolean;
+                FontItalic : array [1..6] of boolean;
+                LabelColor : array[1..9] of Tcolor;
+                LabelSize : array[1..9] of integer;
                 end;
      conf_chart = record
                 onprinter : boolean;
@@ -303,12 +309,6 @@ type
                 prtname,language,ConstLfile : string;
                 PrinterResolution,configpage,autorefreshdelay : integer;
                 PrintColor,PrintLandscape :boolean;
-                FontName : array [1..6] of string;
-                FontSize : array [1..6] of integer;
-                FontBold : array [1..6] of boolean;
-                FontItalic : array [1..6] of boolean;
-                LabelColor : array[1..9] of Tcolor;
-                LabelSize : array[1..9] of integer;
                 maximized,updall : boolean;
                 end;
 
