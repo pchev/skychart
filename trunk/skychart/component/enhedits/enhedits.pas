@@ -474,7 +474,8 @@ end;
 function TFloatEdit.GetValue: Extended;
 begin
 try
-  FValue := StrToFloat(Text);
+  if Text='' then FValue:=0
+             else FValue := StrToFloat(Text);
   Result := CheckValue(FValue);
 except
   FValue := 0;
