@@ -9,7 +9,7 @@ use strict;
 use IO::Socket;
 my ($host, $port, $kidpid, $handle, $line, $eol);
 
-$host = "192.168.0.1";
+$host = "127.0.0.1";
 $port = "3292";
 
 $eol = "\x0D\x0A";

@@ -1,13 +1,15 @@
 #!/usr/bin/perl -w
 use IO::Socket;
+use Cwd;
 
 #
 # example program to send sequential command to the program
 #
 
-$host = "192.168.0.1";
+$host = "127.0.0.1";
 $port = "3292";
 $eol = "\x0D\x0A";
+$path = cwd;
 
   connectCDC();
 
@@ -20,8 +22,6 @@ $eol = "\x0D\x0A";
   sendcmd("setfov 3d0m0s");
   sendcmd("redraw");
 
-  $path = `pwd`;
-  chop $path;
   sendcmd("saveimg PNG $path/test.png");
   sendcmd("saveimg JPEG $path/test.jpg 50");
 
