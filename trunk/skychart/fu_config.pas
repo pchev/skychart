@@ -948,7 +948,11 @@ type
     backimg: TEdit;
     BitBtn5: TBitBtn;
     ShowBackImg: TCheckBox;
-    backimginfo: TLabel;   
+    backimginfo: TLabel;
+    GroupBoxLinux: TGroupBox;
+    LinuxDesktopBox: TComboBox;
+    LinuxCmd: TEdit;
+    Label272: TLabel;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure SelectFontClick(Sender: TObject);
@@ -1167,6 +1171,7 @@ type
     procedure backimgChange(Sender: TObject);
     procedure ShowBackImgClick(Sender: TObject);
     procedure BitBtn5Click(Sender: TObject);
+    procedure LinuxDesktopBoxChange(Sender: TObject);
   private
     { Déclarations privées }
     db:TmyDB;
@@ -1286,6 +1291,7 @@ begin
 labelSizeChange(Sender);
 end;
 // End of Linux specific CLX code:
+
 
 end.
 

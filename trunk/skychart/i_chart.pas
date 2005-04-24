@@ -89,6 +89,7 @@ begin
 // it is also mandatory to keep the keydown and mousewheel
 // event to the main form.
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
+setfocus;
 end;
 
 procedure Tf_chart.AutoRefresh;
@@ -131,6 +132,7 @@ if lock_refresh then exit;
 finally
  lock_refresh:=false;
  screen.cursor:=crDefault;
+ if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 end;
 end;
 
@@ -189,13 +191,14 @@ end;
 procedure Tf_chart.FormResize(Sender: TObject);
 begin
 if locked then exit;
+RefreshTimer.Interval:=200;
 RefreshTimer.Enabled:=false;
 RefreshTimer.Enabled:=true;
 Image1.Picture.Bitmap.Width:=Image1.width;
 Image1.Picture.Bitmap.Height:=Image1.Height;
 with Image1.Canvas do begin
- //Brush.Color:=sc.plot.cfgplot.Color[0];
-// Pen.Color:=sc.plot.cfgplot.Color[0];
+ Brush.Color:=sc.plot.cfgplot.Color[0];
+ Pen.Color:=sc.plot.cfgplot.Color[0];
  Brush.style:=bsSolid;
  Pen.Mode:=pmCopy;
  Pen.Style:=psSolid;

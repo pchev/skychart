@@ -2,7 +2,7 @@ unit fu_main;
 {                                        
 Copyright (C) 2002 Patrick Chevalley
 
-http://www.astrosurf.com/astropc
+http://www.astrosurf.com/astropc               
 pch@freesurf.ch
 
 This program is free software; you can redistribute it and/or
@@ -160,15 +160,13 @@ type
     Undo: TAction;
     Redo: TAction;
     ViewStatus: TAction;
-    View: TMenuItem;
+    View1: TMenuItem;
     ViewToolsBar1: TMenuItem;
-    ViewStatus1: TMenuItem;
     SaveConfigurationNow1: TMenuItem;
     SaveConfigurationOnExit1: TMenuItem;
     N3: TMenuItem;
     ToolButton2: TToolButton;
     ToolButton12: TToolButton;
-    ToolButton23: TToolButton;
     ToolButton24: TToolButton;
     ToolButton25: TToolButton;
     ToolButton26: TToolButton;
@@ -200,8 +198,6 @@ type
     ToolButton34: TToolButton;
     ToolButton35: TToolButton;
     ToolButton36: TToolButton;
-    ToolButton37: TToolButton;
-    ToolButton38: TToolButton;
     TimeInc: TAction;
     TimeDec: TAction;
     TimeReset: TAction;
@@ -228,6 +224,65 @@ type
     LessStar: TAction;
     MoreNeb: TAction;
     LessNeb: TAction;
+    ToolBar4: TToolBar;
+    ToolButtonList: TToolButton;
+    ToolButton42: TToolButton;
+    ToolButton43: TToolButton;
+    ToolButton44: TToolButton;
+    ToolButton45: TToolButton;
+    ToolButton46: TToolButton;
+    ToolButton47: TToolButton;
+    ShowStars: TAction;
+    ShowNebulae: TAction;
+    ShowPictures: TAction;
+    ShowLines: TAction;
+    ShowPlanets: TAction;
+    ShowAsteroids: TAction;
+    ShowComets: TAction;
+    ShowMilkyWay: TAction;
+    ToolButton48: TToolButton;
+    ShowLabels: TAction;
+    ToolButton49: TToolButton;
+    ShowConstellationLine: TAction;
+    ShowConstellationLimit: TAction;
+    ToolButton50: TToolButton;
+    ToolButton51: TToolButton;
+    ToolButton52: TToolButton;
+    ToolButton53: TToolButton;
+    ShowGalacticEquator: TAction;
+    ShowEcliptic: TAction;
+    ToolButton54: TToolButton;
+    ShowMark: TAction;
+    ShowObjectbelowHorizon: TAction;
+    ToolButton55: TToolButton;
+    StarSizePanel: TPanel;
+    TrackBar1: TTrackBar;
+    TrackBar2: TTrackBar;
+    TrackBar3: TTrackBar;
+    TrackBar4: TTrackBar;
+    ToolButton56: TToolButton;
+    ToolButton57: TToolButton;
+    ToolButton58: TToolButton;
+    ToolButton59: TToolButton;
+    EquatorialProjection: TAction;
+    AltAzProjection: TAction;
+    EclipticProjection: TAction;
+    GalacticProjection: TAction;
+    oolBar1: TMenuItem;
+    MainBar1: TMenuItem;
+    LeftBar1: TMenuItem;
+    RightBar1: TMenuItem;
+    ObjectBar1: TMenuItem;
+    ViewMainBar: TAction;
+    ViewObjectBar: TAction;
+    ViewLeftBar: TAction;
+    ViewRightBar: TAction;
+    N5: TMenuItem;
+    ToolButton23: TToolButton;
+    Calendar: TAction;
+    ToolButton37: TToolButton;
+    Content1: TMenuItem;
+
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -248,7 +303,6 @@ type
     procedure FlipyExecute(Sender: TObject);
     procedure SetFOVExecute(Sender: TObject);
     procedure AutoRefreshTimer(Sender: TObject);
-    procedure ChangeProjExecute(Sender: TObject);
     procedure rot_plusExecute(Sender: TObject);
     procedure rot_minusExecute(Sender: TObject);
     procedure GridEQExecute(Sender: TObject);
@@ -265,7 +319,6 @@ type
     procedure switchbackgroundExecute(Sender: TObject);
     procedure SaveImageExecute(Sender: TObject);
     procedure ViewInfoExecute(Sender: TObject);
-    procedure popupProjClick(Sender: TObject);
     procedure toNExecute(Sender: TObject);
     procedure toEExecute(Sender: TObject);
     procedure toSExecute(Sender: TObject);
@@ -284,6 +337,33 @@ type
     procedure LessStarExecute(Sender: TObject);
     procedure MoreNebExecute(Sender: TObject);
     procedure LessNebExecute(Sender: TObject);
+    procedure ShowStarsExecute(Sender: TObject);
+    procedure ShowNebulaeExecute(Sender: TObject);
+    procedure ShowPicturesExecute(Sender: TObject);
+    procedure ShowLinesExecute(Sender: TObject);
+    procedure ShowPlanetsExecute(Sender: TObject);
+    procedure ShowAsteroidsExecute(Sender: TObject);
+    procedure ShowCometsExecute(Sender: TObject);
+    procedure ShowMilkyWayExecute(Sender: TObject);
+    procedure ShowLabelsExecute(Sender: TObject);
+    procedure ShowConstellationLineExecute(Sender: TObject);
+    procedure ShowConstellationLimitExecute(Sender: TObject);
+    procedure ShowGalacticEquatorExecute(Sender: TObject);
+    procedure ShowEclipticExecute(Sender: TObject);
+    procedure ShowMarkExecute(Sender: TObject);
+    procedure ShowObjectbelowHorizonExecute(Sender: TObject);
+    procedure StarSizeChange(Sender: TObject);
+    procedure EquatorialProjectionExecute(Sender: TObject);
+    procedure AltAzProjectionExecute(Sender: TObject);
+    procedure EclipticProjectionExecute(Sender: TObject);
+    procedure GalacticProjectionExecute(Sender: TObject);
+    procedure ViewMainBarExecute(Sender: TObject);
+    procedure ViewObjectBarExecute(Sender: TObject);
+    procedure ViewLeftBarExecute(Sender: TObject);
+    procedure ViewRightBarExecute(Sender: TObject);
+    procedure CalendarExecute(Sender: TObject);
+    procedure HelpContents1Execute(Sender: TObject);
+    
   private
     { Private declarations }
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
@@ -340,6 +420,8 @@ type
     procedure GetTCPInfo(i:integer; var buf:string);
     procedure KillTCPClient(i:integer);
     procedure PrintSetup(Sender: TObject);
+    procedure GetChartConfig(var csc:conf_skychart);
+    procedure DrawChart(var csc:conf_skychart);
   end;
 
 var
@@ -352,7 +434,7 @@ implementation
 
 uses fu_detail, fu_chart, fu_about, fu_config, fu_info, u_projection, passql, pasmysql,
      LibcExec,  // libc exec bug workaround by Andreas Hausladen
-     fu_printsetup, fu_directory ;
+     fu_printsetup, fu_directory, fu_calendar;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here

@@ -191,9 +191,9 @@ try
     DrawMilkyWay; // most extended first
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque) then DrawHorizon;
-    DrawNebulae;
-    DrawNebImages;
-    DrawOutline;
+    if cfgsc.shownebulae or cfgsc.ShowImages then DrawNebulae;
+    if cfgsc.ShowImages then DrawNebImages;
+    if cfgsc.showline then DrawOutline;
   end;
   // then the lines
   DrawGrid;
@@ -205,7 +205,7 @@ try
   end;
   DrawCircle;
   // the stars
-  DrawStars;
+  if cfgsc.showstars then DrawStars;
   if not cfgsc.quick then begin
     DrawDblStars;
     DrawVarStars;
@@ -216,11 +216,11 @@ try
     DrawComet;
     DrawOrbitPath;
   end;
-  DrawPlanet;
+  if cfgsc.ShowPlanet then DrawPlanet;
   // and the horizon line if not transparent
   if (not cfgsc.quick)and cfgsc.horizonopaque then DrawHorizon;
   // the labels
-  if not cfgsc.quick then DrawLabels;
+  if (not cfgsc.quick) and cfgsc.showlabelall then DrawLabels;
   // refresh telescope mark
   if scopemark then begin
      DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
@@ -719,7 +719,7 @@ if Fcatalog.OpenNeb then
           rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
           Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,bmp);
        end;
-  end else begin
+  end else if cfgsc.shownebulae then begin
    if rec.neb.nebtype=1 then begin
       projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
       rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
@@ -869,7 +869,6 @@ var
   i,j,n,ipla: integer;
   draworder : array[1..11] of integer;
 begin
-if not cfgsc.ShowPlanet then exit;
 fov:=rad2deg*cfgsc.fov;
 pixscale:=abs(cfgsc.BxGlb)*deg2rad/3600;
 for j:=0 to cfgsc.SimNb-1 do begin

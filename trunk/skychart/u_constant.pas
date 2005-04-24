@@ -38,8 +38,8 @@ const MaxColor = 32;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid
      TSkycolor = array[1..7]of Tcolor;
 
-const cdcversion = 'Version 3 alpha 0.0.7';
-      cdcver     = '3.0.0.7';
+const cdcversion = 'Version 3 alpha 0.0.8';
+      cdcver     = '3.0.0.8';
       MaxSim = 100 ;
       MaxComet = 200;
       MaxAsteroid = 500;
@@ -360,7 +360,7 @@ type
                 rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
                 CircleLst : array[0..MaxCircle,1..2] of double; 
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
-                IndiAutostart,ShowCircle,IndiTelescope, ShowImages, ShowBackgroundImage : boolean;
+                IndiAutostart,ShowCircle,IndiTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall : boolean;
                 BackgroundImage: string;
                 end;
      conf_plot = record
@@ -428,10 +428,12 @@ type double8 = array[1..8] of double;
      TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
 
 
-Var  Appdir, PrivateDir, SampleDir, TempDir, Configfile: string;         // pseudo-constant only here
+Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, Configfile: string;         // pseudo-constant only here
      ldeg,lmin,lsec : string;
 {$ifdef linux}
      tracefile:string =''; // to stdout
+     LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
+     OpenFileCMD:string = 'kfmclient exec';   // default KDE
 {$endif}
 {$ifdef mswindows}
      tracefile:string = 'cdc_trace.txt';

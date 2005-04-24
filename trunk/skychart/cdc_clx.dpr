@@ -43,7 +43,9 @@ uses
   fu_info in 'fu_info.pas' {f_info},
   fu_printsetup in 'fu_printsetup.pas' {f_printsetup},
   cu_indiclient in 'cu_indiclient.pas',
-  cu_fits in 'cu_fits.pas';
+  cu_fits in 'cu_fits.pas',
+  fu_image in 'fu_image.pas' {f_image},
+  fu_calendar in 'fu_calendar.pas' {f_calendar};
 
 {$R *.res}
 

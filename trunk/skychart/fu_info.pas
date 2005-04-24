@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, 
+uses u_constant, u_util,
   SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms,
   QDialogs, QStdCtrls, QGrids, QComCtrls, QExtCtrls, QMenus;
 
@@ -83,7 +83,6 @@ type
     { Public declarations }
     source_chart:string;
     procedure setpage(n:integer);
-    procedure PrintMemo(MemoName : TMemo);
     property OnGetTCPinfo: Tistrfunc read FGetTCPinfo write FGetTCPinfo;
     property OnKillTCP: Tint1func read FKillTCP write FKillTCP;
     property OnPrintSetup: TNotifyEvent read FPrintSetup write FPrintSetup;

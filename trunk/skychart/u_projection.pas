@@ -81,20 +81,20 @@ Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;
             irc = 1 circumpolaire
             irc = 2 invisible
           *)
-{
-Procedure HeurePo(jd,ar,de,h :Double; VAR hp1,hp2 :Double );
+
+Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; var c:conf_skychart );
           (*
              Heure a laquel un astre est a un hauteur donnee sur l'horizon .
              jd       :  date julienne desiree a 0H TU
-             ar       :  ascension droite
+             ar       :  ascension droite  radiant
              de       :  declinaison
-             h        :  hauteur sur l'horizon
+             h        :  hauteur sur l'horizon   degres
                          crepuscule nautique h=-12
                          crepuscule astronomique h=-18
              hp1      :  heure matin
              hp2      :  heure soir
            *)
-}
+
 procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs:double;var irc:integer; var c:conf_skychart);
 
 
@@ -1025,24 +1025,24 @@ end else begin
     end;
 end;
 end;
-{
-Procedure HeurePo(jd,ar,de,h :Double; VAR hp1,hp2 :Double );
+
+Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; var c:conf_skychart );
 VAR hh,st,st0 : Double ;
 BEGIN
-hh := (sin(degtorad(h))-sin(degtorad(ObsLatitude))*sin(degtorad(de)))/(cos(degtorad(ObsLatitude))*cos(degtorad(de))) ;
+hh := (sin(deg2rad*h)-sin(deg2rad*c.ObsLatitude)*sin(de))/(cos(deg2rad*c.ObsLatitude)*cos(de)) ;
 if abs(hh)<=1 then begin
-     hh := radtodeg(arccos(hh)) ;
-     st0 := sidtim(jd,0.0,ObsLongitude) ;
-     st := (ar-hh)/15 ;
+     hh := arccos(hh) ;
+     st0 := rad2deg*sidtim(jd,0.0,c.ObsLongitude)/15 ;
+     st := rad2deg*(ar-hh)/15 ;
      hp1 := rmod((st-st0)/1.002737908+24,24) ;
-     st := (ar+hh)/15 ;
+     st := rad2deg*(ar+hh)/15 ;
      hp2 := rmod((st-st0)/1.002737908+24,24) ;
 end else begin
      hp1:=-99;
      hp2:=-99;
 end;
 END;
- }
+
 
 end.
 

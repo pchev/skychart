@@ -2111,8 +2111,32 @@ dbuser.Text:=cmain.dbuser;
 dbpass.Text:=cmain.dbpass;
 prgdir.text:=appdir;
 persdir.text:=privatedir;
+{$ifdef linux}
+LinuxDesktopBox.itemIndex:=LinuxDesktop;
+LinuxCmd.Text:=OpenFileCMD;
+if LinuxDesktopBox.itemIndex<>2 then LinuxCmd.Enabled:=false;
+{$endif}
 end;
 
+{$ifdef linux}
+procedure Tf_config.LinuxDesktopBoxChange(Sender: TObject);
+begin
+case LinuxDesktopBox.itemIndex of
+  0:  begin  // KDE
+        LinuxCmd.Text:='kfmclient exec';
+        LinuxCmd.Enabled:=false;
+      end;
+  1:  begin  // GNOME
+        LinuxCmd.Text:='gnome-open';
+        LinuxCmd.Enabled:=false;
+      end;
+  2:  begin  // Other
+        LinuxCmd.Text:='/usr/bin/mozilla';
+        LinuxCmd.Enabled:=true;
+      end;
+end;
+end;
+{$endif}
 
 procedure Tf_config.BitBtn1Click(Sender: TObject);
 begin

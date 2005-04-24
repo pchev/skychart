@@ -15,6 +15,7 @@ object f_about: Tf_about
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnPaint = FormPaint
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

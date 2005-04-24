@@ -166,44 +166,8 @@ end;
 
 procedure Tf_info.Button6Click(Sender: TObject);
 begin
-try
-{$ifdef linux}
 Printmemo(memo1);
-{$endif}
-{$ifdef mswindows}
-if assigned(FPrintSetup) then FPrintSetup(Sender);
-memo1.Print(' ');
-{$endif}
-except
 end;
-end;
-
-{$ifdef linux}
-procedure Tf_info.PrintMemo(MemoName : TMemo);
-var
-  P : TextFile;   { The text file}
-  i : integer;     { Loop counter }
-begin
-Printer.Executesetup;
-Printer.Canvas.Font.Name:='courier';
-Printer.Canvas.Font.Color:=clBlack;
-Printer.Canvas.Font.size:=10;
-Printer.Canvas.Font.pitch:=fpFixed;
-with AssignPrn(P,Printer) do begin  {unit QPrinters Assign text file to PRN }
-  Rewrite(P);      { Open it    }
-  try
-    try
-     for i := 0 to MemoName.Lines.Count - 1 do
-         Writeln(P,stringreplace(MemoName.Lines[i],tab,blank,[rfReplaceAll]));
-    except on E:EInOutError do
-      MessageDlg('Can Not Print error: ' + IntToStr(E.ErrorCode), mtError, [mbOK], 0);
-    end;
-  finally
-    system.CloseFile(P);
-  end;
-end;
-end;
-{$endif}
 
 procedure Tf_info.Button7Click(Sender: TObject);
 begin

@@ -41,7 +41,7 @@ MaxStackSize=10485760
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=..\..\
+OutputDir=E:\cdc
 UnitOutputDir=..\dcu
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -98,6 +98,7 @@ Count=2
 Item0=..\dcu
 Item1=E:\cdc\dev\dcu
 [HistoryLists\hlOutputDirectorry]
-Count=2
-Item0=..\..\
-Item1=E:\cdc
+Count=3
+Item0=E:\cdc
+Item1=D:\ciel
+Item2=..\..\

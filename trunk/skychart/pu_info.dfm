@@ -1,11 +1,10 @@
 object f_info: Tf_info
-  Left = 205
-  Top = 158
-  Width = 460
-  Height = 354
-  VertScrollBar.Range = 30
+  Left = 210
+  Top = 163
+  Width = 448
+  Height = 352
   ActiveControl = PageControl1
-  AutoScroll = False
+  BorderStyle = bsSizeToolWin
   Caption = 'Info'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,8 +21,8 @@ object f_info: Tf_info
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 452
-    Height = 300
+    Width = 440
+    Height = 295
     ActivePage = TabSheet2
     Align = alClient
     TabIndex = 1
@@ -33,8 +32,8 @@ object f_info: Tf_info
       object StringGrid1: TStringGrid
         Left = 0
         Top = 0
-        Width = 444
-        Height = 245
+        Width = 432
+        Height = 240
         Align = alClient
         ColCount = 1
         DefaultColWidth = 800
@@ -50,8 +49,8 @@ object f_info: Tf_info
       end
       object Panel2: TPanel
         Left = 0
-        Top = 245
-        Width = 444
+        Top = 240
+        Width = 432
         Height = 27
         Align = alBottom
         TabOrder = 1
@@ -82,8 +81,8 @@ object f_info: Tf_info
       ImageIndex = 1
       object Panel3: TPanel
         Left = 0
-        Top = 245
-        Width = 444
+        Top = 240
+        Width = 432
         Height = 27
         Align = alBottom
         TabOrder = 0
@@ -135,8 +134,8 @@ object f_info: Tf_info
       object Memo1: TRichEdit
         Left = 0
         Top = 0
-        Width = 444
-        Height = 245
+        Width = 432
+        Height = 240
         Align = alClient
         PlainText = True
         PopupMenu = PopupMenu2
@@ -150,16 +149,16 @@ object f_info: Tf_info
   end
   object Panel1: TPanel
     Left = 0
-    Top = 300
-    Width = 452
+    Top = 295
+    Width = 440
     Height = 27
     Align = alBottom
     TabOrder = 1
     DesignSize = (
-      452
+      440
       27)
     object Button1: TButton
-      Left = 272
+      Left = 260
       Top = 1
       Width = 75
       Height = 25
@@ -170,7 +169,7 @@ object f_info: Tf_info
       OnClick = Button1Click
     end
     object Button4: TButton
-      Left = 360
+      Left = 348
       Top = 0
       Width = 75
       Height = 25

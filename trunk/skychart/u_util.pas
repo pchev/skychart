@@ -27,10 +27,10 @@ interface
 
 uses Math, SysUtils, Classes, u_constant,
 {$ifdef linux}
-    Libc,QForms,QGraphics,QPrinters;
+    Libc,QForms,QGraphics,QPrinters,QStdCtrls,QDialogs;
 {$endif}
 {$ifdef mswindows}
-    Windows,Forms,Graphics,Printers,Winspool;
+    ShellApi,Windows,Forms,Graphics,Printers,Winspool,StdCtrls,ComCtrls,Dialogs;
 {$endif}
 
 function rmod(x,y:Double):Double;
@@ -73,6 +73,7 @@ Function DEToStr2(de: Double; var d,m,s : string) : string;
 Function DEToStr3(de: Double) : string;
 Function Str3ToDE(dms : string) : double;
 Function DEToStr4(de: Double) : string;
+function isodate(a,m,d : integer) : string;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 Function GetTimeZone : double;
@@ -86,8 +87,13 @@ Function GreekLetter(gr : shortstring) : shortstring;
 function GetId(str:string):integer;
 Procedure GetPrinterResolution(var name : string; var resol : integer);
 Procedure ImageResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
+Function ExecuteFile(const FileName: string): integer;
+{$ifdef mswindows}
+procedure PrintMemo(Memo : TRichEdit);
+{$endif}
 {$ifdef linux}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
+procedure PrintMemo(Memo : TMemo);
 {$endif}
 
 var traceon : boolean;
@@ -726,6 +732,11 @@ result:=0;
 end;
 end;
 
+function isodate(a,m,d : integer) : string;
+begin
+result:=padzeros(inttostr(a),4)+'-'+padzeros(inttostr(m),2)+'-'+padzeros(inttostr(d),2);
+end;
+
 Function LONToStr(l: Double) : string;
 var dd,min1,min,sec: Double;
     d,m,s : string;
@@ -973,6 +984,30 @@ begin
 end;
 {$endif}
 
+Function ExecuteFile(const FileName: string): integer;
+{$ifdef mswindows}
+var
+  zFileName, zParams, zDir: array[0..255] of Char;
+begin
+  Result := ShellExecute(Application.MainForm.Handle, nil, StrPCopy(zFileName, FileName),
+                         StrPCopy(zParams, ''), StrPCopy(zDir, ''), SW_SHOWNOACTIVATE);
+{$endif}
+{$ifdef linux}
+var cmd,p1,p2,p3,p4: string;
+begin
+  cmd:=trim(words(OpenFileCMD,blank,1,1));
+  p1:=trim(words(OpenFileCMD,blank,2,1));
+  p2:=trim(words(OpenFileCMD,blank,3,1));
+  p3:=trim(words(OpenFileCMD,blank,4,1));
+  p4:=trim(words(OpenFileCMD,blank,5,1));
+  if p1='' then result:=ExecFork(cmd,FileName)
+  else if p2='' then result:=ExecFork(cmd,p1,FileName)
+  else if p3='' then result:=ExecFork(cmd,p1,p2,FileName)
+  else if p4='' then result:=ExecFork(cmd,p1,p2,p3,FileName)
+  else result:=ExecFork(cmd,p1,p2,p3,p4,FileName);
+{$endif}
+end;
+
 {$ifdef linux}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 // This not work from Kylix IDE without libxexec workaround.
@@ -1134,5 +1169,45 @@ if zoom=1 then img2.Canvas.Draw(0,0,img1)
       end;
    end;
 end;
+
+{$ifdef linux}
+procedure PrintMemo(Memo : TMemo);
+var
+  P : TextFile;
+  i : integer;
+begin
+Printer.Orientation:=poLandscape;
+Printer.Executesetup;
+Printer.Canvas.Font.Name:='courier';
+Printer.Canvas.Font.Color:=clBlack;
+Printer.Canvas.Font.size:=10;
+Printer.Canvas.Font.pitch:=fpFixed;
+with AssignPrn(P,Printer) do begin  {unit QPrinters Assign text file to PRN }
+  Rewrite(P);      { Open it    }
+  try
+    try
+     for i := 0 to Memo.Lines.Count - 1 do
+         Writeln(P,stringreplace(Memo.Lines[i],tab,blank,[rfReplaceAll]));
+    except on E:EInOutError do
+      MessageDlg('Can Not Print error: ' + IntToStr(E.ErrorCode), mtError, [mbOK], 0);
+    end;
+  finally
+    system.CloseFile(P);
+  end;
+end;
+end;
+{$endif}
+{$ifdef mswindows}
+procedure PrintMemo(Memo : TRichEdit);
+var
+  PrinterSetup: TPrinterSetupDialog;
+begin
+Printer.Orientation:=poLandscape;
+PrinterSetup:=TPrinterSetupDialog.Create(nil);
+PrinterSetup.Execute;
+PrinterSetup.Free;
+memo.Print(' ');
+end;
+{$endif}
 
 end.

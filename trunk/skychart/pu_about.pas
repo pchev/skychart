@@ -41,6 +41,7 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure logoDblClick(Sender: TObject);
+    procedure FormPaint(Sender: TObject);
   private
     { Private declarations }
   public
@@ -82,6 +83,12 @@ end;
 procedure Tf_about.logoDblClick(Sender: TObject);
 begin
 Timer1Timer(Sender);
+end;
+
+procedure Tf_about.FormPaint(Sender: TObject);
+begin
+   Timer1.Enabled:=false;
+   Timer1.Enabled:=true;
 end;
 
 end.
