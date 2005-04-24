@@ -1,0 +1,932 @@
+object f_calendar: Tf_calendar
+  Left = 449
+  Top = 74
+  Width = 646
+  Height = 435
+  HorzScrollBar.Range = 217
+  VertScrollBar.Range = 89
+  Caption = 'f_calendar'
+  Color = clButton
+  Font.Color = clText
+  Font.Height = 11
+  Font.Name = 'MS Sans Serif'
+  Font.Pitch = fpVariable
+  Font.Style = []
+  Font.Weight = 48
+  ParentFont = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 18
+  TextWidth = 5
+  object Memo1: TMemo
+    Left = 32
+    Top = 0
+    Width = 185
+    Height = 89
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 2
+    WordWrap = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 646
+    Height = 70
+    Align = alTop
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 3
+      Top = 14
+      Width = 53
+      Height = 19
+      Caption = 'P'#233'riode du'
+      Font.Color = clText
+      Font.Height = 11
+      Font.Name = 'MS Sans Serif'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 170
+      Top = 14
+      Width = 12
+      Height = 19
+      Caption = 'au'
+      Font.Color = clText
+      Font.Height = 11
+      Font.Name = 'MS Sans Serif'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 58
+      Top = 46
+      Width = 6
+      Height = 19
+      Caption = #224
+      Font.Color = clText
+      Font.Height = 11
+      Font.Name = 'MS Sans Serif'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 172
+      Top = 46
+      Width = 18
+      Height = 19
+      Caption = 'pas'
+      Font.Color = clText
+      Font.Height = 11
+      Font.Name = 'MS Sans Serif'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 242
+      Top = 46
+      Width = 25
+      Height = 19
+      Caption = 'jours'
+      Font.Color = clText
+      Font.Height = 11
+      Font.Name = 'MS Sans Serif'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object SatPanel: TPanel
+      Left = 8
+      Top = 37
+      Width = 273
+      Height = 30
+      Cursor = crHandPoint
+      Alignment = taLeftJustify
+      TabOrder = 10
+      Visible = False
+      object Label9: TLabel
+        Left = 1
+        Top = 1
+        Width = 242
+        Height = 36
+        Hint = 'http://users2.ev1.net/~mmccants/'
+        Caption = 
+          'Satellites calculation use QuickSat by Mike McCants, Iridium fla' +
+          're prediction use Iridflar by Robert Matson'
+        ParentShowHint = False
+        ShowHint = True
+        WordWrap = True
+      end
+    end
+    object EcliPanel: TPanel
+      Left = 8
+      Top = 37
+      Width = 273
+      Height = 30
+      Cursor = crHandPoint
+      Hint = 'http://sunearth.gsfc.nasa.gov/eclipse/eclipse.html'
+      Caption = 'Eclipse Predictions by Fred Espenak, NASA/GSFC'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 9
+      Visible = False
+      OnClick = EcliPanelClick
+    end
+    object BitBtn1: TBitBtn
+      Left = 314
+      Top = 8
+      Width = 81
+      Height = 25
+      Caption = 'Refresh'
+      Default = True
+      TabOrder = 4
+      OnClick = BitBtn1Click
+      NumGlyphs = 2
+    end
+    object BitBtn2: TBitBtn
+      Left = 536
+      Top = 8
+      Width = 81
+      Height = 25
+      Cancel = True
+      Caption = 'Fermer'
+      ModalResult = 2
+      TabOrder = 6
+      OnClick = BitBtn2Click
+      NumGlyphs = 2
+    end
+    object BitBtn3: TBitBtn
+      Left = 425
+      Top = 8
+      Width = 81
+      Height = 25
+      Caption = 'Help'
+      TabOrder = 5
+      OnClick = BitBtn3Click
+      NumGlyphs = 2
+    end
+    object BitBtn4: TBitBtn
+      Left = 425
+      Top = 40
+      Width = 81
+      Height = 25
+      Caption = 'Print'
+      TabOrder = 8
+      OnClick = BitBtn4Click
+    end
+    object BitBtn5: TBitBtn
+      Left = 314
+      Top = 40
+      Width = 81
+      Height = 25
+      Caption = 'Copy'
+      TabOrder = 7
+      OnClick = BitBtn5Click
+    end
+    object ResetBtn: TBitBtn
+      Left = 536
+      Top = 40
+      Width = 80
+      Height = 25
+      Caption = 'Reset Chart'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 11
+      OnClick = ResetBtnClick
+    end
+    object Date1: TJDDatePicker
+      Left = 72
+      Top = 8
+      Width = 95
+      Height = 26
+      Cursor = crIBeam
+      EditMask = '!999999.99.99;1; '
+      MaxLength = 12
+      TabOrder = 0
+      Text = '  2005. 4. 2'
+      JD = 2453462.500000000000000000
+      Year = 2005
+      Month = 4
+      Day = 2
+    end
+    object Date2: TJDDatePicker
+      Left = 192
+      Top = 8
+      Width = 95
+      Height = 26
+      Cursor = crIBeam
+      EditMask = '!999999.99.99;1; '
+      MaxLength = 12
+      TabOrder = 1
+      Text = '  2005. 4. 2'
+      JD = 2453462.500000000000000000
+      Year = 2005
+      Month = 4
+      Day = 2
+    end
+    object step: TLongEdit
+      Left = 200
+      Top = 41
+      Width = 33
+      Height = 22
+      TabOrder = 3
+      Value = 1
+    end
+    object Time: TTimePicker
+      Left = 72
+      Top = 40
+      Width = 65
+      Height = 26
+      Cursor = crIBeam
+      EditMask = '!99:99:99;1; '
+      MaxLength = 8
+      TabOrder = 16
+      Text = '17:37:43'
+      Time = 0.734525462962963000
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Top = 70
+    Width = 646
+    Height = 365
+    ActivePage = twilight
+    Align = alClient
+    HotTrack = True
+    TabOrder = 0
+    OnChange = PageControl1Change
+    object twilight: TTabSheet
+      Caption = 'twilight'
+      object TwilightGrid: TStringGrid
+        Left = 0
+        Top = 24
+        Width = 633
+        Height = 305
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        DefaultColWidth = 115
+        DefaultRowHeight = 20
+        RowCount = 3
+        FixedRows = 2
+        Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+        TabOrder = 0
+        OnMouseUp = GridMouseUp
+        RowHeights = (
+          20
+          20
+          20)
+      end
+    end
+    object planets: TTabSheet
+      Caption = 'Planets'
+      ImageIndex = 1
+      object Pagecontrol2: TPageControl
+        Left = 0
+        Top = 0
+        Width = 632
+        Height = 329
+        ActivePage = Psoleil
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        HotTrack = True
+        Style = tsFlatButtons
+        TabOrder = 0
+        object Psoleil: TTabSheet
+          Caption = 'Soleil'
+          ImageIndex = 9
+          object SoleilGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 295
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+            RowHeights = (
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20)
+          end
+        end
+        object Mercure: TTabSheet
+          Caption = 'Mercure'
+          object MercureGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 297
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+            RowHeights = (
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20
+              20)
+          end
+        end
+        object Venus: TTabSheet
+          Caption = 'Venus'
+          ImageIndex = 1
+          object VenusGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 297
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+          end
+        end
+        object PLune: TTabSheet
+          Caption = 'Lune'
+          ImageIndex = 2
+          object LuneGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 297
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+          end
+        end
+        object Mars: TTabSheet
+          Caption = 'Mars'
+          ImageIndex = 3
+          object MarsGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 297
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+          end
+        end
+        object Jupiter: TTabSheet
+          Caption = 'Jupiter'
+          ImageIndex = 4
+          object JupiterGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 297
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+          end
+        end
+        object Saturne: TTabSheet
+          Caption = 'Saturne'
+          ImageIndex = 5
+          object SaturneGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 292
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+          end
+        end
+        object Uranus: TTabSheet
+          Caption = 'Uranus'
+          ImageIndex = 6
+          object UranusGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 297
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+          end
+        end
+        object Neptune: TTabSheet
+          Caption = 'Neptune'
+          ImageIndex = 7
+          object NeptuneGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 297
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+          end
+        end
+        object Pluton: TTabSheet
+          Caption = 'Pluton'
+          ImageIndex = 8
+          object PlutonGrid: TStringGrid
+            Left = 0
+            Top = 0
+            Width = 625
+            Height = 297
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            ColCount = 11
+            DefaultColWidth = 75
+            DefaultRowHeight = 20
+            RowCount = 15
+            FixedRows = 2
+            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            TabOrder = 0
+            OnMouseUp = GridMouseUp
+            ColWidths = (
+              75
+              75
+              75
+              55
+              52
+              40
+              68
+              71
+              72
+              75
+              75)
+          end
+        end
+      end
+    end
+    object comet: TTabSheet
+      Caption = 'Comets'
+      ImageIndex = 2
+      object ComboBox1: TComboBox
+        Left = 256
+        Top = 0
+        Width = 169
+        Height = 26
+        Style = csDropDownList
+        ItemHeight = 20
+        TabOrder = 0
+        OnChange = ComboBox1Change
+      end
+      object CometGrid: TStringGrid
+        Left = 0
+        Top = 32
+        Width = 633
+        Height = 297
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        ColCount = 13
+        DefaultColWidth = 70
+        DefaultRowHeight = 20
+        RowCount = 3
+        FixedRows = 2
+        Options = [goVertLine, goHorzLine, goThumbTracking]
+        TabOrder = 1
+        OnMouseUp = GridMouseUp
+        ColWidths = (
+          70
+          85
+          74
+          45
+          70
+          70
+          70
+          70
+          70
+          70
+          70
+          70
+          70)
+      end
+      object CometFilter: TEdit
+        Left = 8
+        Top = 0
+        Width = 121
+        Height = 26
+        Cursor = crIBeam
+        TabOrder = 2
+      end
+      object Button1: TButton
+        Left = 152
+        Top = 2
+        Width = 75
+        Height = 22
+        Caption = 'Filter ->'
+        TabOrder = 3
+        OnClick = Button1Click
+      end
+    end
+    object Asteroids: TTabSheet
+      Caption = 'Asteroids'
+      ImageIndex = 6
+      object AstFilter: TEdit
+        Left = 8
+        Top = 0
+        Width = 121
+        Height = 26
+        Cursor = crIBeam
+        TabOrder = 0
+      end
+      object Button2: TButton
+        Left = 152
+        Top = 2
+        Width = 75
+        Height = 22
+        Caption = 'Filter ->'
+        TabOrder = 1
+        OnClick = Button2Click
+      end
+      object ComboBox2: TComboBox
+        Left = 256
+        Top = 0
+        Width = 169
+        Height = 26
+        Style = csDropDownList
+        ItemHeight = 20
+        TabOrder = 2
+        OnChange = ComboBox2Change
+      end
+      object AsteroidGrid: TStringGrid
+        Left = 0
+        Top = 32
+        Width = 633
+        Height = 297
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        ColCount = 13
+        DefaultColWidth = 70
+        DefaultRowHeight = 20
+        RowCount = 3
+        FixedRows = 2
+        Options = [goVertLine, goHorzLine, goThumbTracking]
+        TabOrder = 3
+        OnMouseUp = GridMouseUp
+        ColWidths = (
+          70
+          85
+          74
+          45
+          70
+          70
+          70
+          70
+          70
+          70
+          70
+          70
+          70)
+      end
+    end
+    object Solar: TTabSheet
+      Caption = 'Eclipses Solaires'
+      ImageIndex = 3
+      object SolarGrid: TStringGrid
+        Left = 0
+        Top = 8
+        Width = 633
+        Height = 321
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        ColCount = 12
+        DefaultColWidth = 75
+        DefaultRowHeight = 20
+        RowCount = 3
+        FixedRows = 2
+        Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+        TabOrder = 0
+        OnMouseUp = GridMouseUp
+        RowHeights = (
+          20
+          20
+          20)
+      end
+    end
+    object Lunar: TTabSheet
+      Caption = 'Eclipses Lunaires'
+      ImageIndex = 4
+      object LunarGrid: TStringGrid
+        Left = 0
+        Top = 8
+        Width = 633
+        Height = 321
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        ColCount = 9
+        DefaultColWidth = 75
+        DefaultRowHeight = 20
+        RowCount = 3
+        FixedRows = 2
+        Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+        TabOrder = 0
+        OnMouseUp = GridMouseUp
+        RowHeights = (
+          20
+          20
+          20)
+      end
+    end
+    object Satellites: TTabSheet
+      Caption = 'Satellites artificiels'
+      ImageIndex = 5
+      TabVisible = False
+      object Label6: TLabel
+        Left = 240
+        Top = 4
+        Width = 24
+        Height = 18
+        Caption = 'TLE :'
+        Visible = False
+      end
+      object Label7: TLabel
+        Left = 0
+        Top = 4
+        Width = 104
+        Height = 18
+        Caption = 'Magnitude limite, liste :'
+      end
+      object Label8: TLabel
+        Left = 152
+        Top = 4
+        Width = 29
+        Height = 18
+        Caption = 'carte :'
+      end
+      object SatGrid: TStringGrid
+        Left = 8
+        Top = 48
+        Width = 614
+        Height = 252
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        ColCount = 10
+        DefaultColWidth = 70
+        DefaultRowHeight = 20
+        RowCount = 3
+        FixedRows = 2
+        Options = [goVertLine, goHorzLine, goThumbTracking]
+        TabOrder = 0
+        ColWidths = (
+          132
+          100
+          42
+          41
+          34
+          44
+          45
+          47
+          46
+          42)
+      end
+      object maglimit: TFloatEdit
+        Left = 112
+        Top = 0
+        Width = 33
+        Height = 21
+        Hint = '0..99'
+        MaxLength = 4
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        Value = 4.000000000000000000
+        MaxValue = 99.000000000000000000
+      end
+      object tle: TEdit
+        Left = 272
+        Top = 0
+        Width = 97
+        Height = 26
+        Cursor = crIBeam
+        TabOrder = 2
+        Text = 'Visual.tle'
+      end
+      object SatChartBox: TCheckBox
+        Left = 408
+        Top = 0
+        Width = 201
+        Height = 17
+        Caption = 'Uniquement dans la carte courante'
+        TabOrder = 3
+      end
+      object magchart: TFloatEdit
+        Left = 192
+        Top = 0
+        Width = 33
+        Height = 21
+        Hint = '0..99'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 4
+        Value = 6.500000000000000000
+        MaxValue = 99.000000000000000000
+      end
+      object IridiumBox: TCheckBox
+        Left = 408
+        Top = 24
+        Width = 185
+        Height = 17
+        Caption = 'Inclu les flares Iridium'
+        Checked = True
+        State = cbChecked
+        TabOrder = 5
+      end
+      object fullday: TCheckBox
+        Left = 8
+        Top = 24
+        Width = 153
+        Height = 17
+        Caption = 'Include day time pass'
+        TabOrder = 7
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 24
+    Top = 344
+    object HelpContents1: THelpContents
+      Category = 'Help'
+      Caption = '&Contents'
+      Hint = 'Help Contents'
+      ShortCut = 4144
+      OnExecute = HelpContents1Execute
+    end
+  end
+end
