@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 328
-  Top = 124
+  Left = 389
+  Top = 111
   Width = 652
   Height = 544
   BorderStyle = bsSizeToolWin
@@ -167,7 +167,7 @@ object f_config: Tf_config
     Top = 16
     Width = 490
     Height = 455
-    ActivePage = s_images
+    ActivePage = s_time
     TabOrder = 9
     object s_time: TTabSheet
       Caption = 's_time'
@@ -238,9 +238,9 @@ object f_config: Tf_config
             object Label149: TLabel
               Left = 200
               Top = 32
-              Width = 142
+              Width = 146
               Height = 13
-              Caption = '(Negative East of GreenWich)'
+              Caption = '(Negative West of GreenWich)'
             end
             object tz: TFloatEdit
               Left = 120
@@ -1625,7 +1625,7 @@ object f_config: Tf_config
               Width = 233
               Height = 21
               AutoComplete = False
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
               Text = '...'
               OnChange = citylistChange
@@ -1647,7 +1647,7 @@ object f_config: Tf_config
               Height = 21
               AutoComplete = False
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 2
               OnClick = countrylistClick
             end
@@ -1706,7 +1706,7 @@ object f_config: Tf_config
             Top = 0
             Width = 72
             Height = 13
-            Caption = 'Hotizon Setting'
+            Caption = 'Horizon Setting'
           end
           object horizonopaque: TCheckBox
             Left = 16
@@ -1776,7 +1776,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_chart
+        ActivePage = t_objlist
         Align = alClient
         TabOrder = 0
         object t_chart: TTabSheet
@@ -7072,7 +7072,7 @@ object f_config: Tf_config
                   Width = 281
                   Height = 21
                   Style = csDropDownList
-                  ItemHeight = 13
+                  ItemHeight = 0
                   TabOrder = 0
                 end
                 object DelCom: TButton
@@ -7654,7 +7654,7 @@ object f_config: Tf_config
                   Width = 281
                   Height = 21
                   Style = csDropDownList
-                  ItemHeight = 13
+                  ItemHeight = 0
                   TabOrder = 0
                 end
                 object delast: TButton
@@ -7960,7 +7960,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_color
+        ActivePage = t_display
         Align = alClient
         TabOrder = 0
         object t_display: TTabSheet
@@ -10190,7 +10190,7 @@ object f_config: Tf_config
         Top = 0
         Width = 482
         Height = 445
-        ActivePage = t_background
+        ActivePage = t_images
         Align = alClient
         TabOrder = 0
         object t_images: TTabSheet
@@ -10994,7 +10994,7 @@ object f_config: Tf_config
               Width = 145
               Height = 21
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
               OnChange = telescopepluginlistChange
             end

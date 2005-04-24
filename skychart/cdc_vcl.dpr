@@ -43,7 +43,9 @@ uses
   cu_indiclient in 'cu_indiclient.pas',
   cu_telescope in 'cu_telescope.pas',
   cu_fits in 'cu_fits.pas',
-  u_bitmap in 'u_bitmap.pas';
+  u_bitmap in 'u_bitmap.pas',
+  pu_calendar in 'pu_calendar.pas' {f_calendar},
+  pu_image in 'pu_image.pas' {f_image};
 
 {$R *.RES}
 
@@ -54,6 +56,7 @@ begin
   f_about.ShowTimer:=true; f_about.Show;
   Application.CreateForm(Tf_detail, f_detail);
   Application.CreateForm(Tf_info, f_info);
+  Application.CreateForm(Tf_calendar, f_calendar);
   Application.CreateForm(Tf_printsetup, f_printsetup);
   f_main.Init;
   Application.Run;

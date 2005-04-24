@@ -20,7 +20,7 @@ object f_about: Tf_about
   Font.Weight = 0
   FormStyle = fsStayOnTop
   ParentFont = False
-  Position = poDefault
+  Position = poScreenCenter
   Scaled = False
   OnCreate = FormCreate
   OnShow = FormShow

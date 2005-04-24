@@ -2410,7 +2410,7 @@ var de,d0,d1,d2 : single;
     f : textfile;
     buf : string;
 begin
-cfgsc.HorizonMax:=0;  // require in cfgsc for horizon clipping in u_projection
+cfgsc.HorizonMax:=musec;  // require in cfgsc for horizon clipping in u_projection
 for i:=1 to 360 do cfgshr.horizonlist[i]:=0;
 if fileexists(fname) then begin
 i1:=0;i2:=0;d1:=0;d0:=0;
@@ -2459,9 +2459,11 @@ if i2<359 then begin
         cfgsc.HorizonMax:=maxvalue([cfgsc.HorizonMax,de]);
     end;
 end;
+//cfgsc.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
+end;
+end;
 cfgsc.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
-end;
-end;
+
 end;
 
 

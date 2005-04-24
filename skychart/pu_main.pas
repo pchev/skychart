@@ -163,8 +163,6 @@ type
     Undo: TAction;
     Redo: TAction;
     ToolButton19: TToolButton;
-    ToolButton20: TToolButton;
-    ChangeProj: TAction;
     Autorefresh: TTimer;
     ToolButton23: TToolButton;
     ToolButton24: TToolButton;
@@ -180,21 +178,12 @@ type
     ViewInformation1: TMenuItem;
     N4: TMenuItem;
     topmessage: TMenuItem;
-    ToolButton29: TToolButton;
-    ToolButton30: TToolButton;
-    ToolButton31: TToolButton;
-    ToolButton32: TToolButton;
     toN: TAction;
     toE: TAction;
     toS: TAction;
     toW: TAction;
     toZenith: TAction;
     allSky: TAction;
-    popupProj: TPopupMenu;
-    Equatorial1: TMenuItem;
-    AltAz1: TMenuItem;
-    Galactic1: TMenuItem;
-    Ecliptic1: TMenuItem;
     ToolButton25: TToolButton;
     ToolButton26: TToolButton;
     ToolButton27: TToolButton;
@@ -231,6 +220,68 @@ type
     SpeedButton4: TSpeedButton;
     DdeData: TDdeServerItem;
     DdeSkyChart: TDdeServerConv;
+    ToolBar4: TToolBar;
+    ToolButton41: TToolButton;
+    ToolButton42: TToolButton;
+    ToolButton43: TToolButton;
+    ToolButton44: TToolButton;
+    ToolButton45: TToolButton;
+    ToolButton46: TToolButton;
+    ToolButton47: TToolButton;
+    ShowStars: TAction;
+    ShowNebulae: TAction;
+    ShowPictures: TAction;
+    ShowLines: TAction;
+    ShowPlanets: TAction;
+    ShowAsteroids: TAction;
+    ShowComets: TAction;
+    ShowMilkyWay: TAction;
+    ToolButton48: TToolButton;
+    ShowLabels: TAction;
+    ToolButton49: TToolButton;
+    ToolButton29: TToolButton;
+    ToolButton30: TToolButton;
+    ShowConstellationLine: TAction;
+    ShowConstellationLimit: TAction;
+    ToolButton50: TToolButton;
+    ToolButton51: TToolButton;
+    ToolButton52: TToolButton;
+    ToolButton53: TToolButton;
+    ShowGalacticEquator: TAction;
+    ShowEcliptic: TAction;
+    ToolButton54: TToolButton;
+    ShowMark: TAction;
+    ShowObjectbelowHorizon: TAction;
+    ToolButton55: TToolButton;
+    ToolButton31: TToolButton;
+    ToolButton32: TToolButton;
+    StarSizePanel: TPanel;
+    TrackBar1: TTrackBar;
+    TrackBar2: TTrackBar;
+    TrackBar3: TTrackBar;
+    TrackBar4: TTrackBar;
+    ToolButton56: TToolButton;
+    ToolButton57: TToolButton;
+    ToolButton58: TToolButton;
+    ToolButton59: TToolButton;
+    EquatorialProjection: TAction;
+    AltAzProjection: TAction;
+    EclipticProjection: TAction;
+    GalacticProjection: TAction;
+    oolBar1: TMenuItem;
+    MainBar1: TMenuItem;
+    LeftBar1: TMenuItem;
+    RightBar1: TMenuItem;
+    ObjectBar1: TMenuItem;
+    ViewMainBar: TAction;
+    ViewObjectBar: TAction;
+    ViewLeftBar: TAction;
+    ViewRightBar: TAction;
+    N5: TMenuItem;
+    ToolButton20: TToolButton;
+    Calendar: TAction;
+    ToolButton60: TToolButton;
+    Content1: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -257,7 +308,6 @@ type
     procedure SaveConfigOnExitExecute(Sender: TObject);
     procedure UndoExecute(Sender: TObject);
     procedure RedoExecute(Sender: TObject);
-    procedure ChangeProjExecute(Sender: TObject);
     procedure AutorefreshTimer(Sender: TObject);
     procedure rot_plusExecute(Sender: TObject);
     procedure rot_minusExecute(Sender: TObject);
@@ -279,7 +329,6 @@ type
     procedure toWExecute(Sender: TObject);
     procedure toZenithExecute(Sender: TObject);
     procedure allSkyExecute(Sender: TObject);
-    procedure popupProjClick(Sender: TObject);
     procedure TimeResetExecute(Sender: TObject);
     procedure TimeIncExecute(Sender: TObject);
     procedure listobjExecute(Sender: TObject);
@@ -294,6 +343,32 @@ type
     procedure DdeDataPokeData(Sender: TObject);
     procedure DdeSkyChartClose(Sender: TObject);
     procedure DdeSkyChartOpen(Sender: TObject);
+    procedure ShowStarsExecute(Sender: TObject);
+    procedure ShowNebulaeExecute(Sender: TObject);
+    procedure ShowPicturesExecute(Sender: TObject);
+    procedure ShowLinesExecute(Sender: TObject);
+    procedure ShowPlanetsExecute(Sender: TObject);
+    procedure ShowAsteroidsExecute(Sender: TObject);
+    procedure ShowCometsExecute(Sender: TObject);
+    procedure ShowMilkyWayExecute(Sender: TObject);
+    procedure ShowLabelsExecute(Sender: TObject);
+    procedure ShowConstellationLineExecute(Sender: TObject);
+    procedure ShowConstellationLimitExecute(Sender: TObject);
+    procedure ShowGalacticEquatorExecute(Sender: TObject);
+    procedure ShowEclipticExecute(Sender: TObject);
+    procedure ShowMarkExecute(Sender: TObject);
+    procedure ShowObjectbelowHorizonExecute(Sender: TObject);
+    procedure StarSizeChange(Sender: TObject);
+    procedure EquatorialProjectionExecute(Sender: TObject);
+    procedure AltAzProjectionExecute(Sender: TObject);
+    procedure EclipticProjectionExecute(Sender: TObject);
+    procedure GalacticProjectionExecute(Sender: TObject);
+    procedure ViewMainBarExecute(Sender: TObject);
+    procedure ViewObjectBarExecute(Sender: TObject);
+    procedure ViewLeftBarExecute(Sender: TObject);
+    procedure ViewRightBarExecute(Sender: TObject);
+    procedure CalendarExecute(Sender: TObject);
+    procedure HelpContents1Execute(Sender: TObject);
   private
     { Private declarations }
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
@@ -355,6 +430,8 @@ type
     procedure GetTCPInfo(i:integer; var buf:string);
     procedure KillTCPClient(i:integer);
     procedure PrintSetup(Sender: TObject);
+    procedure GetChartConfig(var csc:conf_skychart);
+    procedure DrawChart(var csc:conf_skychart);
   end;
 
 var
@@ -365,7 +442,8 @@ implementation
 {$R *.dfm}
 {$R cursbmp.res}
 
-uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection, pu_printsetup,
+uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection,
+     pu_printsetup, pu_calendar,
      passql, pasmysql, ShlObj ;
 
 // include all cross-platform common code.

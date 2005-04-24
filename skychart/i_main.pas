@@ -281,6 +281,11 @@ begin
   f_about.ShowModal;
 end;
 
+procedure Tf_main.HelpContents1Execute(Sender: TObject);
+begin
+   ExecuteFile(slash(helpdir)+'index.html');
+end;
+
 procedure Tf_main.FileExit1Execute(Sender: TObject);
 begin
   Close;
@@ -331,6 +336,7 @@ begin
 DecimalSeparator:='.';
 {$ifdef linux}
 f_directory:=Tf_directory.Create(application);
+f_calendar:=Tf_calendar.Create(application);
 configfile:=expandfilename(Defaultconfigfile);
 {$endif}
 {$ifdef mswindows}
@@ -387,8 +393,13 @@ try
  Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
  Autorefresh.enabled:=true;
  if cfgm.AutostartServer then StartServer;
+ f_calendar.planet:=planet;
+ f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
+ f_calendar.OnGetChartConfig:=GetChartConfig;
+ f_calendar.OnUpdateChart:=DrawChart;
+ f_calendar.setlang(slash(appdir)+slash('data')+slash('language')+'cdclang_'+trim(cfgm.language)+'.ini');
 except
-end; 
+end;
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -502,30 +513,6 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
   f_info.setpage(1);
   f_info.source_chart:=caption;
   f_info.show;
-end;
-end;
-
-procedure Tf_main.ChangeProjExecute(Sender: TObject);
-begin
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
-   inc(sc.cfgsc.projpole);
-   if sc.cfgsc.projpole>Ecl then sc.cfgsc.projpole:=Equat;
-   sc.cfgsc.FindOk:=false; // invalidate the search result
-   sc.cfgsc.theta:=0; // rotation = 0
-   Refresh;
-end;
-end;
-
-procedure Tf_main.popupProjClick(Sender: TObject);
-var newproj: integer;
-begin
-with Sender as TmenuItem do newproj:=tag;
-if (newproj<Equat)or(newproj>Ecl) then newproj:=Equat;
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
-   sc.cfgsc.projpole:=newproj;
-   sc.cfgsc.FindOk:=false; // invalidate the search result
-   sc.cfgsc.theta:=0; // rotation = 0
-   Refresh;
 end;
 end;
 
@@ -660,6 +647,206 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    sc.cfgsc.UseSystemTime:=true;
    sc.cfgsc.TrackOn:=true;
    sc.cfgsc.TrackType:=4;
+   Refresh;
+end;
+end;
+
+
+procedure Tf_main.ShowStarsExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.showstars:=not sc.cfgsc.showstars;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowNebulaeExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.shownebulae:=not sc.cfgsc.shownebulae;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowPicturesExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowImages:=not sc.cfgsc.ShowImages;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowLinesExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowLine:=not sc.cfgsc.ShowLine;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowPlanetsExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowPlanet:=not sc.cfgsc.ShowPlanet;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowAsteroidsExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowAsteroid:=not sc.cfgsc.ShowAsteroid;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowCometsExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowMilkyWayExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowMilkyWay:=not sc.cfgsc.ShowMilkyWay;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowLabelsExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.Showlabelall:=not sc.cfgsc.Showlabelall;
+   Refresh;
+end;
+end;
+
+
+procedure Tf_main.ShowConstellationLineExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowConstl:=not sc.cfgsc.ShowConstl;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowConstellationLimitExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowConstB:=not sc.cfgsc.ShowConstB;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowGalacticEquatorExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowGalactic:=not sc.cfgsc.ShowGalactic;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowEclipticExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowEcliptic:=not sc.cfgsc.ShowEcliptic;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowMarkExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowCircle:=not sc.cfgsc.ShowCircle;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowObjectbelowHorizonExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.horizonopaque:=not sc.cfgsc.horizonopaque;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.StarSizeChange(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+  case Ttrackbar(sender).tag of
+    1: sc.plot.cfgplot.partsize:=trackbar1.position/10;
+    2: sc.plot.cfgplot.magsize:=trackbar2.position/10;
+    3: sc.plot.cfgplot.contrast:=trackbar3.position;
+    4: sc.plot.cfgplot.saturation:=trackbar4.position;
+  end;
+  RefreshTimer.Interval:=1000;
+  RefreshTimer.Enabled:=false;
+  RefreshTimer.Enabled:=true;
+end;  
+end;
+
+procedure Tf_main.EquatorialProjectionExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.projpole:=Equat;
+   sc.cfgsc.FindOk:=false; // invalidate the search result
+   sc.cfgsc.theta:=0; // rotation = 0
+   Refresh;
+end;
+end;
+
+procedure Tf_main.AltAzProjectionExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.projpole:=AltAz;
+   sc.cfgsc.FindOk:=false; // invalidate the search result
+   sc.cfgsc.theta:=0; // rotation = 0
+   Refresh;
+end;
+end;
+
+procedure Tf_main.EclipticProjectionExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.projpole:=Ecl;
+   sc.cfgsc.FindOk:=false; // invalidate the search result
+   sc.cfgsc.theta:=0; // rotation = 0
+   Refresh;
+end;
+end;
+
+procedure Tf_main.GalacticProjectionExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.projpole:=Gal;
+   sc.cfgsc.FindOk:=false; // invalidate the search result
+   sc.cfgsc.theta:=0; // rotation = 0
+   Refresh;
+end;
+end;
+
+procedure Tf_main.CalendarExecute(Sender: TObject);
+begin
+  if ActiveMdiChild is Tf_chart then f_calendar.config:= Tf_chart(ActiveMdiChild).sc.cfgsc
+     else f_calendar.config:=def_cfgsc;
+  formpos(f_calendar,mouse.cursorpos.x,mouse.cursorpos.y);
+  f_calendar.show;
+end;
+
+procedure Tf_main.GetChartConfig(var csc:conf_skychart);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
+   csc:=sc.cfgsc
+else csc:=def_cfgsc;
+end;
+
+procedure Tf_main.DrawChart(var csc:conf_skychart);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc:=csc;
    Refresh;
 end;
 end;
@@ -803,6 +990,10 @@ try
     if directoryexists(f_config.prgdir.text) then appdir:=f_config.prgdir.text; // this setting is on the same page
     if directoryexists(f_config.persdir.text) then privatedir:=f_config.persdir.text;
     cfgm:=f_config.cmain;
+    {$ifdef linux}
+      LinuxDesktop:=f_config.LinuxDesktopBox.itemIndex;
+      OpenFileCMD:=f_config.LinuxCmd.Text;
+    {$endif}
  end;
  cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
 finally
@@ -814,6 +1005,10 @@ procedure Tf_main.activateconfig;
 begin
     if directoryexists(f_config.prgdir.text) then appdir:=f_config.prgdir.text;
     if directoryexists(f_config.persdir.text) then privatedir:=f_config.persdir.text;
+    {$ifdef linux}
+      LinuxDesktop:=f_config.LinuxDesktopBox.itemIndex;
+      OpenFileCMD:=f_config.LinuxCmd.Text;
+    {$endif}
     cfgm:=f_config.cmain;
     cfgm.updall:=f_config.applyall.checked;
     catalog.cfgcat:=f_config.ccat;
@@ -865,9 +1060,47 @@ end;
 
 procedure Tf_main.ViewBarExecute(Sender: TObject);
 begin
-PanelTop.visible:=not PanelTop.visible;
-PanelLeft.visible:=PanelTop.visible;
-PanelRight.visible:=PanelTop.visible;
+ToolBar1.visible:=not ViewToolsBar1.checked;
+ToolBar2.visible:=ToolBar1.visible;
+ToolBar3.visible:=ToolBar1.visible;
+ToolBar4.visible:=ToolBar1.visible;
+ViewToolsBar1.checked:=ToolBar1.visible;
+MainBar1.checked:=ToolBar1.visible;
+ObjectBar1.checked:=ToolBar1.visible;
+LeftBar1.checked:=ToolBar1.visible;
+RightBar1.checked:=ToolBar1.visible;
+end;
+
+procedure Tf_main.ViewMainBarExecute(Sender: TObject);
+begin
+ToolBar1.visible:=not ToolBar1.visible;
+MainBar1.checked:=ToolBar1.visible;
+if not MainBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+end;
+
+procedure Tf_main.ViewObjectBarExecute(Sender: TObject);
+begin
+ToolBar4.visible:=not ToolBar4.visible;
+ObjectBar1.checked:=ToolBar4.visible;
+if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+end;
+
+procedure Tf_main.ViewLeftBarExecute(Sender: TObject);
+begin
+ToolBar2.visible:=not ToolBar2.visible;
+LeftBar1.checked:=ToolBar2.visible;
+if not LeftBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+end;
+
+procedure Tf_main.ViewRightBarExecute(Sender: TObject);
+begin
+ToolBar3.visible:=not ToolBar3.visible;
+RightBar1.checked:=ToolBar3.visible;
+if not RightBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
 end;
 
 procedure Tf_main.ViewStatusExecute(Sender: TObject);
@@ -1045,6 +1278,10 @@ def_cfgsc.ShowEcliptic:=false;
 def_cfgsc.ShowGalactic:=false;
 def_cfgsc.ShowMilkyWay:=true;
 def_cfgsc.FillMilkyWay:=true;
+def_cfgsc.showstars:=true;
+def_cfgsc.shownebulae:=true;
+def_cfgsc.showline:=true;
+def_cfgsc.showlabelall:=true;
 def_cfgsc.Simnb:=1;
 def_cfgsc.SimD:=1;
 def_cfgsc.SimH:=0;
@@ -1497,6 +1734,10 @@ section:='main';
 Config_Version:=ReadString(section,'version','0');
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 cfgm.language:=ReadString(section,'language',cfgm.language);
+{$ifdef linux}
+LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
+OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
+{$endif}
 cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
 cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterResolution);
 cfgm.PrintColor:=ReadInteger(section,'PrintColor',cfgm.PrintColor);
@@ -1540,6 +1781,15 @@ def_cfgsc.IndiPort:=ReadString(section,'IndiPort',def_cfgsc.IndiPort);
 def_cfgsc.IndiDevice:=ReadString(section,'IndiDevice',def_cfgsc.IndiDevice);
 def_cfgsc.IndiTelescope:=ReadBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
 def_cfgsc.ScopePlugin:=ReadString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
+toolbar1.visible:=ReadBool(section,'ViewMainBar',true);
+toolbar2.visible:=ReadBool(section,'ViewLeftBar',true);
+toolbar3.visible:=ReadBool(section,'ViewRightBar',true);
+toolbar4.visible:=ReadBool(section,'ViewObjectBar',true);
+MainBar1.checked:=ToolBar1.visible;
+ObjectBar1.checked:=ToolBar4.visible;
+LeftBar1.checked:=ToolBar2.visible;
+RightBar1.checked:=ToolBar3.visible;
+ViewToolsBar1.checked:=(MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatpath[i]:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -1798,7 +2048,11 @@ with inif do begin
 section:='main';
 WriteString(section,'version',cdcver);
 WriteString(section,'AppDir',appdir);
-WriteString(section,'PrivateDir',privatedir); 
+WriteString(section,'PrivateDir',privatedir);
+{$ifdef linux}
+WriteInteger(section,'LinuxDesktop',LinuxDesktop);
+WriteString(section,'OpenFileCMD',OpenFileCMD);
+{$endif}
 WriteString(section,'language',cfgm.language);
 WriteString(section,'prtname',cfgm.prtname);
 WriteInteger(section,'PrinterResolution',cfgm.PrinterResolution);
@@ -1843,6 +2097,10 @@ WriteString(section,'IndiPort',def_cfgsc.IndiPort);
 WriteString(section,'IndiDevice',def_cfgsc.IndiDevice);
 WriteBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
 WriteString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
+WriteBool(section,'ViewMainBar',toolbar1.visible);
+WriteBool(section,'ViewLeftBar',toolbar2.visible);
+WriteBool(section,'ViewRightBar',toolbar3.visible);
+WriteBool(section,'ViewObjectBar',toolbar4.visible);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -1914,6 +2172,7 @@ var i:integer;
     inif: TMemIniFile;
     section : string;
 begin
+helpdir:=slash(appdir)+slash('doc')+slash(trim(cfgm.language));
 inif:=TMeminifile.create(slash(appdir)+slash('data')+slash('language')+'cdclang_'+trim(cfgm.language)+'.ini');
 try
 with inif do begin
@@ -1930,8 +2189,6 @@ finally
  inif.Free;
 end;
 end;
-
-
 
 procedure Tf_main.quicksearchClick(Sender: TObject);
 var key:word;
@@ -2112,6 +2369,39 @@ if f_main.ActiveMDIchild=sender then begin
                TConnect.ImageIndex:=48;
                TelescopeConnect.Hint:='Connect Telescope';
           end;
+  with ActiveMdiChild as Tf_chart do begin
+    toolbutton41.down:=sc.cfgsc.showstars;
+    toolbutton42.down:=sc.cfgsc.shownebulae;
+    toolbutton43.down:=sc.cfgsc.ShowImages;
+    toolbutton44.down:=sc.cfgsc.ShowLine;
+    toolbutton45.down:=sc.cfgsc.ShowAsteroid;
+    toolbutton46.down:=sc.cfgsc.ShowComet;
+    toolbutton47.down:=sc.cfgsc.ShowPlanet;
+    toolbutton48.down:=sc.cfgsc.ShowMilkyWay;
+    toolbutton49.down:=sc.cfgsc.Showlabelall;
+    toolbutton29.down:=sc.cfgsc.ShowGrid;
+    toolbutton30.down:=sc.cfgsc.ShowEqGrid;
+    toolbutton50.down:=sc.cfgsc.ShowConstl;
+    toolbutton51.down:=sc.cfgsc.ShowConstB;
+    toolbutton52.down:=sc.cfgsc.ShowGalactic;
+    toolbutton53.down:=sc.cfgsc.ShowEcliptic;
+    toolbutton54.down:=sc.cfgsc.ShowCircle;
+    toolbutton55.down:=not sc.cfgsc.horizonopaque;
+    toolbutton31.down:= sc.plot.cfgplot.autoskycolor;
+    case sc.plot.cfgplot.starplot of
+    0: begin toolbutton32.down:=true; toolbutton32.marked:=true; StarSizePanel.visible:=false; end;
+    1: begin toolbutton32.down:=false; toolbutton32.marked:=false; StarSizePanel.visible:=false; end;
+    2: begin toolbutton32.down:=true; toolbutton32.marked:=false; StarSizePanel.visible:=true; end;
+    end;
+    trackbar1.position:=round(sc.plot.cfgplot.partsize*10);
+    trackbar2.position:=round(sc.plot.cfgplot.magsize*10);
+    trackbar3.position:=sc.plot.cfgplot.contrast;
+    trackbar4.position:=sc.plot.cfgplot.saturation;
+    toolbutton56.down:= (sc.cfgsc.projpole=Equat);
+    toolbutton57.down:= (sc.cfgsc.projpole=AltAz);
+    toolbutton58.down:= (sc.cfgsc.projpole=Ecl);
+    toolbutton59.down:= (sc.cfgsc.projpole=Gal);
+  end;
 end;
 end;
 
@@ -2447,6 +2737,7 @@ try
 //if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
     if (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
         Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
+        f_calendar.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
     end else begin
           SetLpanel1('MySQL database not available.');
           def_cfgsc.ShowAsteroid:=false;

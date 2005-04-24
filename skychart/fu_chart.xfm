@@ -1,8 +1,8 @@
 object f_chart: Tf_chart
-  Left = 720
-  Top = 587
-  Width = 314
-  Height = 209
+  Left = 271
+  Top = 247
+  Width = 640
+  Height = 480
   Caption = 'Chart'
   Color = clButton
   Font.Color = clBlack
@@ -130,8 +130,8 @@ object f_chart: Tf_chart
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 314
-    Height = 209
+    Width = 640
+    Height = 480
     Align = alClient
     BevelOuter = bvNone
     Color = clBlack
@@ -139,8 +139,8 @@ object f_chart: Tf_chart
     object Image1: TImage
       Left = 0
       Top = 0
-      Width = 314
-      Height = 209
+      Width = 640
+      Height = 480
       Cursor = crCross
       Align = alClient
       AutoSize = True
@@ -148,6 +148,7 @@ object f_chart: Tf_chart
       Stretch = True
       OnClick = Image1Click
       OnMouseDown = Image1MouseDown
+      OnMouseEnter = Image1Click
       OnMouseMove = Image1MouseMove
       OnMouseUp = Image1MouseUp
     end

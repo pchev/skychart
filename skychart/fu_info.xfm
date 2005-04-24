@@ -7,6 +7,13 @@ object f_info: Tf_info
   ActiveControl = PageControl1
   Caption = 'Info'
   Color = clBackground
+  Font.Color = clBlack
+  Font.Height = 13
+  Font.Name = 'Tahoma'
+  Font.Pitch = fpVariable
+  Font.Style = []
+  Font.Weight = 48
+  ParentFont = False
   Position = poDefaultPosOnly
   Scaled = False
   OnClose = FormClose
@@ -26,7 +33,7 @@ object f_info: Tf_info
         Left = 0
         Top = 0
         Width = 452
-        Height = 254
+        Height = 253
         Align = alClient
         ColCount = 1
         DefaultColWidth = 800
@@ -42,7 +49,7 @@ object f_info: Tf_info
       end
       object Panel2: TPanel
         Left = 0
-        Top = 254
+        Top = 253
         Width = 452
         Height = 27
         Align = alBottom
@@ -76,7 +83,7 @@ object f_info: Tf_info
         Left = 0
         Top = 0
         Width = 452
-        Height = 254
+        Height = 253
         Align = alClient
         ReadOnly = True
         ScrollBars = ssAutoBoth
@@ -86,7 +93,7 @@ object f_info: Tf_info
       end
       object Panel3: TPanel
         Left = 0
-        Top = 254
+        Top = 253
         Width = 452
         Height = 27
         Align = alBottom
@@ -104,7 +111,8 @@ object f_info: Tf_info
           Left = 4
           Top = 3
           Width = 100
-          Height = 25
+          Height = 28
+          Cursor = crIBeam
           TabOrder = 1
           OnKeyUp = Edit1KeyUp
         end
