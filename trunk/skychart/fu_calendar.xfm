@@ -186,7 +186,7 @@ object f_calendar: Tf_calendar
       Top = 40
       Width = 81
       Height = 25
-      Caption = 'Copy'
+      Caption = 'Save to File'
       TabOrder = 7
       OnClick = BitBtn5Click
     end
@@ -928,5 +928,13 @@ object f_calendar: Tf_calendar
       ShortCut = 4144
       OnExecute = HelpContents1Execute
     end
+  end
+  object SaveDialog1: TSaveDialog
+    FilterIndex = 0
+    Height = 0
+    Title = 'Save'
+    Width = 0
+    Left = 64
+    Top = 344
   end
 end
