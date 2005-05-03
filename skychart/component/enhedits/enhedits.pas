@@ -8,10 +8,12 @@ Change by P. Chevalley November 25 2002 :
 Linux port
    Remove D16 support TRealEdit
    change CMexit message to OnExit event
+   May 5 2005: Change TRightEdit ancestor to TCustomEdit on Linux to avoid strange cursor behavior.
 
 Remove DsgnIntf dependency
 
 Add automatic hint's with mini-maxi values
+
 --------------------------------------------------------------
 
 This unit contains the code for 4 enhanced edits. TRightEdit,
@@ -70,7 +72,12 @@ uses
 {$endif}
 
 type
+{$ifdef mswindows}
   TRightEdit = class(TCustomMemo)
+{$endif}
+{$ifdef linux}
+  TRightEdit = class(TCustomEdit)
+{$endif}
   private
     { Private declarations }
   protected
@@ -231,10 +238,12 @@ begin
   inherited Create(AOwner);
   Align := alNone;
   Alignment := taRightJustify;
+{$ifdef mswindows}
   ScrollBars := ssNone;
   WantReturns := False;
   WantTabs := False;
   WordWrap := False;
+{$endif}
 end;
 
 procedure TRightEdit.SetBounds(ALeft, ATop, AWidth, AHeight: Integer);
