@@ -1175,8 +1175,8 @@ procedure Tf_chart.switchstarExecute(Sender: TObject);
 begin
 //sc.plot.cfgplot.starplot:=abs(sc.plot.cfgplot.starplot-1);
 //sc.plot.cfgplot.nebplot:=sc.plot.cfgplot.starplot;
-inc(sc.plot.cfgplot.starplot);
-if sc.plot.cfgplot.starplot>2 then sc.plot.cfgplot.starplot:=0;
+dec(sc.plot.cfgplot.starplot);
+if sc.plot.cfgplot.starplot<0 then sc.plot.cfgplot.starplot:=2;
 if sc.plot.cfgplot.starplot=0 then sc.plot.cfgplot.nebplot:=0
                               else sc.plot.cfgplot.nebplot:=1;
 sc.cfgsc.FillMilkyWay:=(sc.plot.cfgplot.nebplot=1);
