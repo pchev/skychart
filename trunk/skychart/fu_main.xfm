@@ -1,7 +1,7 @@
 object f_main: Tf_main
   Tag = 1
-  Left = 216
-  Top = 110
+  Left = 214
+  Top = 163
   Width = 800
   Height = 600
   HorzScrollBar.Range = 54
@@ -2773,7 +2773,7 @@ object f_main: Tf_main
       Wrapable = False
       OnMouseEnter = ToolBar1MouseEnter
       OnMouseLeave = ToolBar1MouseLeave
-      object ToolButton8: TToolButton
+      object ToolButtonNew: TToolButton
         HelpType = htContext
         Left = 3
         Top = 2
@@ -2781,7 +2781,7 @@ object f_main: Tf_main
         Action = FileNew1
         Caption = '&New'
       end
-      object ToolButton9: TToolButton
+      object ToolButtonOpen: TToolButton
         HelpType = htContext
         Left = 26
         Top = 2
@@ -2789,7 +2789,7 @@ object f_main: Tf_main
         Action = FileOpen1
         Caption = '&Open'
       end
-      object ToolButton10: TToolButton
+      object ToolButtonSave: TToolButton
         HelpType = htContext
         Left = 49
         Top = 2
@@ -2797,7 +2797,7 @@ object f_main: Tf_main
         Action = FileSaveAs1
         Caption = 'Save &As...'
       end
-      object ToolButton11: TToolButton
+      object ToolButtonPrint: TToolButton
         HelpType = htContext
         Left = 72
         Top = 2
@@ -2814,7 +2814,7 @@ object f_main: Tf_main
         Caption = 'ToolButton15'
         ImageIndex = 15
       end
-      object ToolButton16: TToolButton
+      object ToolButtonCascade: TToolButton
         HelpType = htContext
         Left = 103
         Top = 2
@@ -2822,7 +2822,7 @@ object f_main: Tf_main
         Action = WindowCascade1
         Caption = '&Cascade'
       end
-      object ToolButton17: TToolButton
+      object ToolButtonTile: TToolButton
         HelpType = htContext
         Left = 126
         Top = 2
@@ -2839,7 +2839,7 @@ object f_main: Tf_main
         Caption = 'ToolButton18'
         ImageIndex = 16
       end
-      object ToolButton5: TToolButton
+      object ToolButtonZoom: TToolButton
         HelpType = htContext
         Left = 203
         Top = 2
@@ -2847,7 +2847,7 @@ object f_main: Tf_main
         Action = zoomplus
         Caption = 'zoomplus'
       end
-      object ToolButton6: TToolButton
+      object ToolButtonUnZomm: TToolButton
         HelpType = htContext
         Left = 226
         Top = 2
@@ -2885,7 +2885,7 @@ object f_main: Tf_main
         OnClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
       end
-      object ToolButton24: TToolButton
+      object ToolButtonUndo: TToolButton
         HelpType = htContext
         Left = 157
         Top = 2
@@ -2893,7 +2893,7 @@ object f_main: Tf_main
         Action = Undo
         Caption = 'Undo'
       end
-      object ToolButton25: TToolButton
+      object ToolButtonRedo: TToolButton
         HelpType = htContext
         Left = 180
         Top = 2
@@ -2948,7 +2948,7 @@ object f_main: Tf_main
         TabOrder = 16
         Text = 'Hour'
       end
-      object ToolButton29: TToolButton
+      object ToolButtonTnow: TToolButton
         HelpType = htContext
         Left = 450
         Top = 2
@@ -2956,7 +2956,7 @@ object f_main: Tf_main
         Action = TimeReset
         Caption = 'TimeReset'
       end
-      object ToolButton30: TToolButton
+      object ToolButtonTdec: TToolButton
         HelpType = htContext
         Left = 427
         Top = 2
@@ -2964,7 +2964,7 @@ object f_main: Tf_main
         Action = TimeDec
         Caption = 'TimeDec'
       end
-      object ToolButton39: TToolButton
+      object ToolButtonTinc: TToolButton
         HelpType = htContext
         Left = 473
         Top = 2
@@ -2981,7 +2981,7 @@ object f_main: Tf_main
         Caption = 'ToolButton40'
         ImageIndex = 45
       end
-      object ToolButtonList: TToolButton
+      object ToolButtonListObj: TToolButton
         HelpType = htContext
         Left = 373
         Top = 2
@@ -3021,7 +3021,7 @@ object f_main: Tf_main
         Align = alCustom
         BevelOuter = bvNone
         TabOrder = 25
-        object SpeedButton1: TSpeedButton
+        object SpeedButtonMoreStar: TSpeedButton
           Left = 0
           Top = 0
           Width = 11
@@ -3056,7 +3056,7 @@ object f_main: Tf_main
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         end
-        object SpeedButton2: TSpeedButton
+        object SpeedButtonLessStar: TSpeedButton
           Left = 12
           Top = 0
           Width = 11
@@ -3092,7 +3092,7 @@ object f_main: Tf_main
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           Spacing = 0
         end
-        object SpeedButton3: TSpeedButton
+        object SpeedButtonMoreNeb: TSpeedButton
           Left = 0
           Top = 12
           Width = 11
@@ -3128,7 +3128,7 @@ object f_main: Tf_main
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           Spacing = 0
         end
-        object SpeedButton4: TSpeedButton
+        object SpeedButtonLessNeb: TSpeedButton
           Left = 12
           Top = 12
           Width = 11
@@ -3165,7 +3165,7 @@ object f_main: Tf_main
           Spacing = 0
         end
       end
-      object ToolButton23: TToolButton
+      object ToolButtonCal: TToolButton
         HelpType = htContext
         Left = 396
         Top = 2
@@ -3173,11 +3173,12 @@ object f_main: Tf_main
         Action = Calendar
         Caption = 'Calendar'
       end
-      object ToolButton37: TToolButton
+      object ToolButtonSearch: TToolButton
         Left = 350
         Top = 2
         Height = 23
-        Caption = 'ToolButton37'
+        Hint = 'Search'
+        Caption = 'ToolButtonSearch'
         ImageIndex = 76
         OnClick = quicksearchClick
       end
@@ -3196,121 +3197,145 @@ object f_main: Tf_main
       ShowHint = True
       TabOrder = 1
       Wrapable = False
-      object ToolButton41: TToolButton
+      object ButtonStarSize: TSpeedButton
+        Left = 440
+        Top = 2
+        Width = 12
+        Height = 23
+        Hint = 'Star Size'
+        Glyph.Data = {
+          BA010000424DB601000000000000360000002800000008000000100000000100
+          18000000000080010000120B0000120B00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF395DBAE3E8F5FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF0040E23965F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF053AFF
+          AFBCFF3965F5E3E8F5FFFFFFFFFFFFFFFFFFFFFFFF0B39FFB1BEFF91A3FF3965
+          F5FFFFFFFFFFFFFFFFFFFFFFFF1541FFBFCAFFB1BEFFAFBCFF3965F5E3E8F5FF
+          FFFFFFFFFF1D42FFCDD5FFBBC6FFB1BEFF91A3FF3965F5FFFFFFFFFFFF294CFF
+          DFE4FFCDD5FFBFCAFF93A5FF3965F5FFFFFFFFFFFF2F51FFEBEEFFDBE1FFCDD5
+          FF396FF6E3E8F5FFFFFFFFFFFF3355FFFBFCFFC7D3FF3A72FFFFFFFFFFFFFFFF
+          FFFFFFFFFF3355FFFFFFFF4570FFE3E8F5FFFFFFFFFFFFFFFFFFFFFFFF1138FF
+          506CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3953D7E3E7F9FFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        Visible = False
+        OnClick = ButtonStarSizeClick
+      end
+      object ToolButtonShowStars: TToolButton
         Left = 3
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowStars
       end
-      object ToolButton42: TToolButton
+      object ToolButtonShowNebulae: TToolButton
         Left = 26
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowNebulae
       end
-      object ToolButton43: TToolButton
+      object ToolButtonShowPictures: TToolButton
         Left = 49
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowPictures
       end
-      object ToolButton44: TToolButton
+      object ToolButtonShowLines: TToolButton
         Left = 72
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowLines
       end
-      object ToolButton47: TToolButton
+      object ToolButtonShowPlanets: TToolButton
         Left = 95
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowPlanets
       end
-      object ToolButton45: TToolButton
+      object ToolButtonShowAsteroids: TToolButton
         Left = 118
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowAsteroids
       end
-      object ToolButton46: TToolButton
+      object ToolButtonShowComets: TToolButton
         Left = 141
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowComets
       end
-      object ToolButton48: TToolButton
+      object ToolButtonShowMilkyWay: TToolButton
         Left = 164
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowMilkyWay
       end
-      object ToolButton50: TToolButton
-        Left = 187
+      object ToolButtonShowConstellationLine: TToolButton
+        Left = 233
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowConstellationLine
       end
-      object ToolButton51: TToolButton
-        Left = 210
+      object ToolButtonShowConstellationLimit: TToolButton
+        Left = 256
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowConstellationLimit
       end
-      object ToolButton52: TToolButton
-        Left = 233
+      object ToolButtonShowGalacticEquator: TToolButton
+        Left = 279
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowGalacticEquator
       end
-      object ToolButton53: TToolButton
-        Left = 256
+      object ToolButtonShowEcliptic: TToolButton
+        Left = 302
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowEcliptic
       end
-      object ToolButton54: TToolButton
-        Left = 279
+      object ToolButtonShowMark: TToolButton
+        Left = 325
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowMark
       end
-      object ToolButton49: TToolButton
-        Left = 302
+      object ToolButtonShowLabels: TToolButton
+        Left = 348
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowLabels
       end
-      object ToolButton55: TToolButton
-        Left = 325
+      object ToolButtonShowObjectbelowHorizon: TToolButton
+        Left = 371
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = ShowObjectbelowHorizon
       end
-      object ToolButton31: TToolButton
-        Left = 348
+      object ToolButtonswitchbackground: TToolButton
+        Left = 394
         Top = 2
         Height = 23
         Style = tbsCheck
         Action = switchbackground
         Caption = 'switchbackground'
       end
-      object ToolButton32: TToolButton
-        Left = 371
+      object ToolButtonswitchstars: TToolButton
+        Left = 417
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3318,12 +3343,13 @@ object f_main: Tf_main
         Caption = 'switchstars'
       end
       object StarSizePanel: TPanel
-        Left = 394
+        Left = 452
         Top = 2
         Width = 97
         Height = 23
         Align = alCustom
         TabOrder = 0
+        Visible = False
         object TrackBar1: TTrackBar
           Tag = 1
           Left = 2
@@ -3384,6 +3410,22 @@ object f_main: Tf_main
           OnChange = StarSizeChange
         end
       end
+      object ToolButtonGrid: TToolButton
+        HelpType = htContext
+        Left = 187
+        Top = 2
+        Height = 23
+        Action = Grid
+        Caption = 'Grid'
+      end
+      object ToolButtonGridEq: TToolButton
+        HelpType = htContext
+        Left = 210
+        Top = 2
+        Height = 23
+        Action = GridEQ
+        Caption = 'GridEQ'
+      end
     end
   end
   object PanelLeft: TPanel
@@ -3406,7 +3448,7 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      object ToolButton1: TToolButton
+      object ToolButtonConfig: TToolButton
         HelpType = htContext
         Left = 1
         Top = 4
@@ -3414,7 +3456,7 @@ object f_main: Tf_main
         Action = OpenConfig
         Caption = 'Configuration'
       end
-      object ToolButton56: TToolButton
+      object ToolButtonEQ: TToolButton
         Left = 1
         Top = 27
         Height = 23
@@ -3422,7 +3464,7 @@ object f_main: Tf_main
         Action = EquatorialProjection
         Wrap = True
       end
-      object ToolButton57: TToolButton
+      object ToolButtonAZ: TToolButton
         Left = 1
         Top = 50
         Height = 23
@@ -3431,7 +3473,7 @@ object f_main: Tf_main
         Caption = 'AltAzProjection'
         Wrap = True
       end
-      object ToolButton58: TToolButton
+      object ToolButtonEC: TToolButton
         Left = 1
         Top = 73
         Height = 23
@@ -3440,7 +3482,7 @@ object f_main: Tf_main
         Caption = 'EclipticProjection'
         Wrap = True
       end
-      object ToolButton59: TToolButton
+      object ToolButtonGL: TToolButton
         Left = 1
         Top = 96
         Height = 23
@@ -3465,7 +3507,7 @@ object f_main: Tf_main
         Action = Flipy
         Caption = 'Flipy'
       end
-      object ToolButton2: TToolButton
+      object ToolButtonRotP: TToolButton
         HelpType = htContext
         Left = 1
         Top = 165
@@ -3473,7 +3515,7 @@ object f_main: Tf_main
         Action = rot_plus
         Caption = 'rot_plus'
       end
-      object ToolButton12: TToolButton
+      object ToolButtonRotM: TToolButton
         HelpType = htContext
         Left = 1
         Top = 188
@@ -3511,17 +3553,17 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      object ToolButton3: TToolButton
+      object ToolButtonF10m: TToolButton
         Tag = 10
         HelpType = htContext
         Left = 1
         Top = 4
         Height = 23
-        Caption = 'ToolButton3'
+        Caption = 'ToolButtonF10m'
         ImageIndex = 26
         OnClick = SetFOVExecute
       end
-      object ToolButton4: TToolButton
+      object ToolButtonF15: TToolButton
         Tag = 900
         HelpType = htContext
         Left = 1
@@ -3531,7 +3573,7 @@ object f_main: Tf_main
         ImageIndex = 29
         OnClick = SetFOVExecute
       end
-      object ToolButton13: TToolButton
+      object ToolButtonF1: TToolButton
         Tag = 60
         Left = 1
         Top = 27
@@ -3540,7 +3582,7 @@ object f_main: Tf_main
         ImageIndex = 27
         OnClick = SetFOVExecute
       end
-      object ToolButton14: TToolButton
+      object ToolButtonF5: TToolButton
         Tag = 300
         Left = 1
         Top = 50
@@ -3549,7 +3591,7 @@ object f_main: Tf_main
         ImageIndex = 28
         OnClick = SetFOVExecute
       end
-      object ToolButton19: TToolButton
+      object ToolButtonF30: TToolButton
         Tag = 1800
         Left = 1
         Top = 96
@@ -3558,7 +3600,7 @@ object f_main: Tf_main
         ImageIndex = 30
         OnClick = SetFOVExecute
       end
-      object ToolButton20: TToolButton
+      object ToolButtonF50: TToolButton
         Tag = 3000
         Left = 1
         Top = 119
@@ -3567,7 +3609,7 @@ object f_main: Tf_main
         ImageIndex = 31
         OnClick = SetFOVExecute
       end
-      object ToolButton21: TToolButton
+      object ToolButtonF90: TToolButton
         Tag = 5400
         Left = 1
         Top = 142
@@ -3576,7 +3618,7 @@ object f_main: Tf_main
         ImageIndex = 32
         OnClick = SetFOVExecute
       end
-      object ToolButton22: TToolButton
+      object ToolButtonF120: TToolButton
         Tag = 7200
         Left = 1
         Top = 165
@@ -3585,7 +3627,7 @@ object f_main: Tf_main
         ImageIndex = 33
         OnClick = SetFOVExecute
       end
-      object ToolButton27: TToolButton
+      object ToolButtonToN: TToolButton
         HelpType = htContext
         Left = 1
         Top = 211
@@ -3593,7 +3635,7 @@ object f_main: Tf_main
         Action = toN
         Caption = 'toN'
       end
-      object ToolButton28: TToolButton
+      object ToolButtonToS: TToolButton
         HelpType = htContext
         Left = 1
         Top = 234
@@ -3601,7 +3643,7 @@ object f_main: Tf_main
         Action = toS
         Caption = 'toS'
       end
-      object ToolButton33: TToolButton
+      object ToolButtonToE: TToolButton
         HelpType = htContext
         Left = 1
         Top = 257
@@ -3609,7 +3651,7 @@ object f_main: Tf_main
         Action = toE
         Caption = 'toE'
       end
-      object ToolButton34: TToolButton
+      object ToolButtonToW: TToolButton
         HelpType = htContext
         Left = 1
         Top = 280
@@ -3617,7 +3659,7 @@ object f_main: Tf_main
         Action = toW
         Caption = 'toW'
       end
-      object ToolButton35: TToolButton
+      object ToolButtonToZ: TToolButton
         HelpType = htContext
         Left = 1
         Top = 303
@@ -3625,7 +3667,7 @@ object f_main: Tf_main
         Action = toZenith
         Caption = 'toZenith'
       end
-      object ToolButton36: TToolButton
+      object ToolButtonAllSky: TToolButton
         HelpType = htContext
         Left = 1
         Top = 188
@@ -3721,7 +3763,7 @@ object f_main: Tf_main
       GroupIndex = 9
       Hint = 'Edit commands'
       object Copy1: TMenuItem
-        Caption = 'Copy'
+        Action = EditCopy1
       end
     end
     object View1: TMenuItem
@@ -4030,19 +4072,21 @@ object f_main: Tf_main
     end
     object ViewStatus: TAction
       Category = 'View'
-      Caption = 'ViewStatus'
+      Caption = 'Status Bar'
       Hint = 'View the status bar'
       OnExecute = ViewStatusExecute
     end
     object switchstars: TAction
       Category = 'chart'
       Caption = 'switchstars'
+      Hint = 'Change Star Display'
       ImageIndex = 34
       OnExecute = switchstarsExecute
     end
     object switchbackground: TAction
       Category = 'chart'
       Caption = 'switchbackground'
+      Hint = 'Sky Color'
       ImageIndex = 35
       OnExecute = switchbackgroundExecute
     end
@@ -4119,6 +4163,7 @@ object f_main: Tf_main
     object ListObj: TAction
       Category = 'chart'
       Caption = 'ListObj'
+      Hint = 'Object List'
       ImageIndex = 46
       OnExecute = ListObjExecute
     end
@@ -4307,8 +4352,16 @@ object f_main: Tf_main
     object Calendar: TAction
       Category = 'File'
       Caption = 'Calendar'
+      Hint = 'Ephemeris Calendar'
       ImageIndex = 75
       OnExecute = CalendarExecute
+    end
+    object EditCopy1: TEditCopy
+      Category = 'Edit'
+      Caption = '&Copy'
+      Hint = 'Copy'
+      ShortCut = 16451
+      OnExecute = EditCopy1Execute
     end
   end
   object ImageList1: TImageList
@@ -4316,7 +4369,7 @@ object f_main: Tf_main
     Left = 200
     Top = 200
     Bitmap = {
-      494D474C0100010010000000100000004D000000424D36F30000000000003600
+      494D474C0100010010000000100000004F000000424D36F30000000000003600
       0000280000009000000090000000010018000000000000F30000120B0000120B
       00000000000000000000FFFFFFFFEEDEFFD9CFFFD9CFE6BDB6A87876D2A6A1FF
       D9CFFFD9CFFFD9CFFFE8D1FFD9CFFFD9CFFFD9CFFFD9CFFFE7D0FFFFFFFFEEDE
@@ -6265,13 +6318,13 @@ object f_main: Tf_main
       FFFFFFFFFFFFFFFFFFFF424D7E0B0000000000003E0000002800000090000000
       900000000100010000000000400B0000120B0000120B00000200000002000000
       FFFFFF0000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000821000000000000000000000000000000000
-      0000D01000000000000000000000000000000000000000000000000000000000
-      000000000000000000001E10000000000000000000000000000000000000CE00
+      0000000000000000000000000000990000000000000000000000000000000000
+      0000D010000000000000000000000000000000000000FF000000000000000000
+      00000000000000000000FF00000000000000000000000000000000000000CE00
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000FF00000000000000000000000000000000000000FF0000000000
-      0000000000000000000000000000420000000000000000000000000000000000
-      0000C400000000000000000000000000000000000000FFFD0000000000000000
+      0000000000000000000000000000FF0000000000000000000000000000000000
+      0000FF00000000000000000000000000000000000000FF000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000FF00000000000000000000000000
       0000000000000E00000000000000000000000000000000000000FF0000000000
@@ -6287,7 +6340,7 @@ object f_main: Tf_main
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000821000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000410000000000000000000000000000000000000B610
+      000000000000000000000410000000000000000000000000000000000000A910
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000A80200000000
       0000000000000000000000000000FF0000000000000000000000000000000000

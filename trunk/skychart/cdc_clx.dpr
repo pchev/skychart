@@ -45,7 +45,15 @@ uses
   cu_indiclient in 'cu_indiclient.pas',
   cu_fits in 'cu_fits.pas',
   fu_image in 'fu_image.pas' {f_image},
-  fu_calendar in 'fu_calendar.pas' {f_calendar};
+  fu_calendar in 'fu_calendar.pas' {f_calendar},
+  fr_config_time in 'fr_config_time.pas' {f_config_time: TFrame},
+  fr_config_catalog in 'fr_config_catalog.pas' {f_config_catalog: TFrame},
+  fr_config_chart in 'fr_config_chart.pas' {f_config_chart: TFrame},
+  fr_config_display in 'fr_config_display.pas' {f_config_display: TFrame},
+  fr_config_observatory in 'fr_config_observatory.pas' {f_config_observatory: TFrame},
+  fr_config_pictures in 'fr_config_pictures.pas' {f_config_pictures: TFrame},
+  fr_config_solsys in 'fr_config_solsys.pas' {f_config_solsys: TFrame},
+  fr_config_system in 'fr_config_system.pas' {f_config_system: TFrame};
 
 {$R *.res}
 

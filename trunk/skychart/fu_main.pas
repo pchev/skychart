@@ -29,7 +29,7 @@ interface
 uses cu_catalog, cu_planet, cu_fits, u_constant, u_util, blcksock, libc, Math,
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
-     QStdCtrls, IniFiles, Types, QButtons, QFileCtrls;
+     QStdCtrls, IniFiles, Types, QButtons, QFileCtrls, QClipbrd;
 
 type
   TTCPThrd = class(TThread)
@@ -115,26 +115,26 @@ type
     PanelRight: TPanel;
     PanelBottom: TPanel;
     ToolBar1: TToolBar;
-    ToolButton8: TToolButton;
-    ToolButton9: TToolButton;
-    ToolButton10: TToolButton;
-    ToolButton11: TToolButton;
+    ToolButtonNew: TToolButton;
+    ToolButtonOpen: TToolButton;
+    ToolButtonSave: TToolButton;
+    ToolButtonPrint: TToolButton;
     ToolButton15: TToolButton;
-    ToolButton16: TToolButton;
-    ToolButton17: TToolButton;
+    ToolButtonCascade: TToolButton;
+    ToolButtonTile: TToolButton;
     ToolButton18: TToolButton;
     ToolBar2: TToolBar;
-    ToolButton1: TToolButton;
+    ToolButtonConfig: TToolButton;
     FlipButtonX: TToolButton;
     ToolBar3: TToolBar;
-    ToolButton3: TToolButton;
-    ToolButton4: TToolButton;
+    ToolButtonF10m: TToolButton;
+    ToolButtonF15: TToolButton;
     PPanels0: TPanel;
     LPanels0: TLabel;
     PPanels1: TPanel;
     LPanels1: TLabel;
-    ToolButton5: TToolButton;
-    ToolButton6: TToolButton;
+    ToolButtonZoom: TToolButton;
+    ToolButtonUnZomm: TToolButton;
     zoomplus: TAction;
     zoomminus: TAction;
     ToolButton7: TToolButton;
@@ -143,12 +143,12 @@ type
     Flipx: TAction;
     Flipy: TAction;
     FlipButtonY: TToolButton;
-    ToolButton13: TToolButton;
-    ToolButton14: TToolButton;
-    ToolButton19: TToolButton;
-    ToolButton20: TToolButton;
-    ToolButton21: TToolButton;
-    ToolButton22: TToolButton;
+    ToolButtonF1: TToolButton;
+    ToolButtonF5: TToolButton;
+    ToolButtonF30: TToolButton;
+    ToolButtonF50: TToolButton;
+    ToolButtonF90: TToolButton;
+    ToolButtonF120: TToolButton;
     AutoRefresh: TTimer;
     ChangeProj: TAction;
     rot_plus: TAction;
@@ -165,10 +165,10 @@ type
     SaveConfigurationNow1: TMenuItem;
     SaveConfigurationOnExit1: TMenuItem;
     N3: TMenuItem;
-    ToolButton2: TToolButton;
-    ToolButton12: TToolButton;
-    ToolButton24: TToolButton;
-    ToolButton25: TToolButton;
+    ToolButtonRotP: TToolButton;
+    ToolButtonRotM: TToolButton;
+    ToolButtonUndo: TToolButton;
+    ToolButtonRedo: TToolButton;
     ToolButton26: TToolButton;
     SaveDialog: TSaveDialog;
     switchstars: TAction;
@@ -184,31 +184,31 @@ type
     AltAz1: TMenuItem;
     Galactic1: TMenuItem;
     Ecliptic1: TMenuItem;
-    ToolButton31: TToolButton;
-    ToolButton32: TToolButton;
+    ToolButtonswitchbackground: TToolButton;
+    ToolButtonswitchstars: TToolButton;
     toN: TAction;
     toE: TAction;
     toS: TAction;
     toW: TAction;
     toZenith: TAction;
     allSky: TAction;
-    ToolButton27: TToolButton;
-    ToolButton28: TToolButton;
-    ToolButton33: TToolButton;
-    ToolButton34: TToolButton;
-    ToolButton35: TToolButton;
-    ToolButton36: TToolButton;
+    ToolButtonToN: TToolButton;
+    ToolButtonToS: TToolButton;
+    ToolButtonToE: TToolButton;
+    ToolButtonToW: TToolButton;
+    ToolButtonToZ: TToolButton;
+    ToolButtonAllSky: TToolButton;
     TimeInc: TAction;
     TimeDec: TAction;
     TimeReset: TAction;
     TimeVal: TSpinEdit;
     TimeU: TComboBox;
-    ToolButton29: TToolButton;
-    ToolButton30: TToolButton;
-    ToolButton39: TToolButton;
+    ToolButtonTnow: TToolButton;
+    ToolButtonTdec: TToolButton;
+    ToolButtonTinc: TToolButton;
     ToolButton40: TToolButton;
     ListObj: TAction;
-    ToolButton41: TToolButton;
+    ToolButtonShowStars: TToolButton;
     TConnect: TToolButton;
     TSlew: TToolButton;
     TSync: TToolButton;
@@ -216,22 +216,22 @@ type
     TelescopeSlew: TAction;
     TelescopeSync: TAction;
     MagPanel: TPanel;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
+    SpeedButtonMoreStar: TSpeedButton;
+    SpeedButtonLessStar: TSpeedButton;
+    SpeedButtonMoreNeb: TSpeedButton;
+    SpeedButtonLessNeb: TSpeedButton;
     MoreStar: TAction;
     LessStar: TAction;
     MoreNeb: TAction;
     LessNeb: TAction;
     ToolBar4: TToolBar;
-    ToolButtonList: TToolButton;
-    ToolButton42: TToolButton;
-    ToolButton43: TToolButton;
-    ToolButton44: TToolButton;
-    ToolButton45: TToolButton;
-    ToolButton46: TToolButton;
-    ToolButton47: TToolButton;
+    ToolButtonListObj: TToolButton;
+    ToolButtonShowNebulae: TToolButton;
+    ToolButtonShowPictures: TToolButton;
+    ToolButtonShowLines: TToolButton;
+    ToolButtonShowAsteroids: TToolButton;
+    ToolButtonShowComets: TToolButton;
+    ToolButtonShowPlanets: TToolButton;
     ShowStars: TAction;
     ShowNebulae: TAction;
     ShowPictures: TAction;
@@ -240,30 +240,30 @@ type
     ShowAsteroids: TAction;
     ShowComets: TAction;
     ShowMilkyWay: TAction;
-    ToolButton48: TToolButton;
+    ToolButtonShowMilkyWay: TToolButton;
     ShowLabels: TAction;
-    ToolButton49: TToolButton;
+    ToolButtonShowLabels: TToolButton;
     ShowConstellationLine: TAction;
     ShowConstellationLimit: TAction;
-    ToolButton50: TToolButton;
-    ToolButton51: TToolButton;
-    ToolButton52: TToolButton;
-    ToolButton53: TToolButton;
+    ToolButtonShowConstellationLine: TToolButton;
+    ToolButtonShowConstellationLimit: TToolButton;
+    ToolButtonShowGalacticEquator: TToolButton;
+    ToolButtonShowEcliptic: TToolButton;
     ShowGalacticEquator: TAction;
     ShowEcliptic: TAction;
-    ToolButton54: TToolButton;
+    ToolButtonShowMark: TToolButton;
     ShowMark: TAction;
     ShowObjectbelowHorizon: TAction;
-    ToolButton55: TToolButton;
+    ToolButtonShowObjectbelowHorizon: TToolButton;
     StarSizePanel: TPanel;
     TrackBar1: TTrackBar;
     TrackBar2: TTrackBar;
     TrackBar3: TTrackBar;
     TrackBar4: TTrackBar;
-    ToolButton56: TToolButton;
-    ToolButton57: TToolButton;
-    ToolButton58: TToolButton;
-    ToolButton59: TToolButton;
+    ToolButtonEQ: TToolButton;
+    ToolButtonAZ: TToolButton;
+    ToolButtonEC: TToolButton;
+    ToolButtonGL: TToolButton;
     EquatorialProjection: TAction;
     AltAzProjection: TAction;
     EclipticProjection: TAction;
@@ -278,10 +278,14 @@ type
     ViewLeftBar: TAction;
     ViewRightBar: TAction;
     N5: TMenuItem;
-    ToolButton23: TToolButton;
+    ToolButtonCal: TToolButton;
     Calendar: TAction;
-    ToolButton37: TToolButton;
+    ToolButtonSearch: TToolButton;
     Content1: TMenuItem;
+    ToolButtonGrid: TToolButton;
+    ToolButtonGridEq: TToolButton;
+    ButtonStarSize: TSpeedButton;
+    EditCopy1: TEditCopy;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -363,6 +367,8 @@ type
     procedure ViewRightBarExecute(Sender: TObject);
     procedure CalendarExecute(Sender: TObject);
     procedure HelpContents1Execute(Sender: TObject);
+    procedure ButtonStarSizeClick(Sender: TObject);
+    procedure EditCopy1Execute(Sender: TObject);
     
   private
     { Private declarations }
@@ -370,6 +376,8 @@ type
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
     Procedure GetAppDir;
+    procedure ViewTopPanel;
+    procedure ApplyConfig(Sender: TObject);
   public
     { Public declarations }
     cfgm : conf_main;
@@ -460,6 +468,7 @@ activecontrol:=nil;
 end;
 
 // End of Linux specific CLX code:
+
 
 end.
 
