@@ -560,7 +560,7 @@ function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
   x1,y1,cyear,dyear: Double;
   xx,yy,xxp,yyp : single;
-  lid : integer;
+  lid,saveplot : integer;
   first:boolean;
   firstcat:TSname;
 begin
@@ -569,6 +569,7 @@ cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
 dyear:=0;
 first:=true;
 try
+saveplot:=Fplot.cfgplot.starplot;
 if Fcatalog.OpenStar then
  while Fcatalog.readstar(rec) do begin
  if first then begin
@@ -589,23 +590,27 @@ if Fcatalog.OpenStar then
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
-    if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
-       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv))
-       else if rec.star.valid[vsGreekSymbol] then SetLabel(lid,xx,yy,0,7,1,rec.star.greeksymbol)
-          else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
-    end;
     if cfgsc.DrawPMon then begin
        rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*cfgsc.DrawPMyear;
        rec.dec:=rec.dec+(rec.star.pmdec)*cfgsc.DrawPMyear;
        projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
        WindowXY(x1,y1,xxp,yyp,cfgsc);
        Fplot.PlotLine(xx,yy,xxp,yyp,Fplot.cfgplot.Color[15],1);
+       Fplot.cfgplot.starplot:=1;
+    end
+    else
+       Fplot.cfgplot.starplot:=saveplot;
+    Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
+    if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
+       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv))
+       else if rec.star.valid[vsGreekSymbol] then SetLabel(lid,xx,yy,0,7,1,rec.star.greeksymbol)
+          else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
     end;
  end;
 end;
 result:=true;
 finally
+Fplot.cfgplot.starplot:=saveplot;
 Fcatalog.CloseStar;
 end;
 end;
