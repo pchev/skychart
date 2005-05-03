@@ -34,7 +34,7 @@ type
                 jd,ra,dec : double;
                 end;
 
-const nummsg = 46;
+const nummsg = 47;
       maxcombo = 50;
 
 type
@@ -111,6 +111,7 @@ type
     Memo1: TMemo;
     ActionList1: TActionList;
     HelpContents1: THelpContents;
+    SaveDialog1: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -154,8 +155,8 @@ type
     procedure FreeCoord(var gr : Tstringgrid);
     procedure InitRiseCell(var gr : Tstringgrid);
     procedure PlanetRiseCell(var gr : Tstringgrid; i,irc : integer; hr,ht,hs,azr,azs,jda,h,ar,de : double);
-    procedure Gridetoclipboard(grid : tstringgrid);
-    procedure Gridetoprinter(grid : tstringgrid);
+    procedure SaveGrid(grid : tstringgrid);
+    procedure Gridtoprinter(grid : tstringgrid);
     procedure RefreshAll;
     procedure RefreshTwilight;
     procedure RefreshPlanet;

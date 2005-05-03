@@ -90,11 +90,11 @@ with inifile do begin
     west:=ReadString(section,'t_20',deftxt);
     east:=ReadString(section,'t_21',deftxt);
     EcliPanel.Hint:=ReadString(section,'t_22',deftxt);
+    BitBtn5.Caption:=ReadString(section,'t_23',deftxt);
     BitBtn1.Caption:=ReadString('buttons','refresh',deftxt);
     BitBtn2.Caption:=ReadString('buttons','close',deftxt);
     BitBtn3.Caption:=ReadString('buttons','help',deftxt);
     BitBtn4.Caption:=ReadString('buttons','print',deftxt);
-    BitBtn5.Caption:=ReadString('buttons','copy',deftxt);
     mercure.caption:=pla[1];
     venus.caption:=pla[2];
     mars.caption:=pla[4];
@@ -305,19 +305,21 @@ Procedure Tf_calendar.Solartitle;
 begin
 with solargrid do begin
 cells[0,1]:=appmsg[11];
-cells[1,0]:=appmsg[23];
-cells[1,1]:=appmsg[24];
-cells[2,1]:=appmsg[25];
-cells[3,1]:=appmsg[26];
-cells[4,1]:=appmsg[27];
-cells[5,1]:=appmsg[28];
-cells[6,0]:=appmsg[29];
-cells[6,1]:=appmsg[31];
-cells[7,0]:=appmsg[30];
-cells[7,1]:=appmsg[32];
-cells[8,1]:=appmsg[33];
-cells[9,1]:=appmsg[34];
-cells[10,1]:=appmsg[35];
+cells[1,1]:=appmsg[47];
+cells[2,0]:=appmsg[23];
+cells[2,1]:=appmsg[24];
+cells[3,1]:=appmsg[25];
+cells[4,1]:=appmsg[26];
+cells[5,1]:=appmsg[27];
+cells[6,1]:=appmsg[28];
+cells[7,0]:=appmsg[29];
+cells[7,1]:=appmsg[31];
+cells[8,0]:=appmsg[30];
+cells[8,1]:=appmsg[32];
+cells[9,1]:=appmsg[33];
+cells[10,1]:=appmsg[34];
+cells[11,1]:=appmsg[35];
+
 end;
 end;
 
@@ -466,19 +468,19 @@ Readln(f,buf);
 with solargrid do begin
   RowCount:=i+1;
   cells[0,i]:=copy(buf,1,12);
-  cells[1,i]:=copy(buf,15,5);
-  cells[2,i]:=copy(buf,23,3);
-  cells[3,i]:=copy(buf,26,4);
-  cells[4,i]:=copy(buf,31,6);
-  cells[5,i]:=copy(buf,39,5);
-  cells[6,i]:=copy(buf,46,5);
-  cells[7,i]:=copy(buf,52,6);
-  cells[8,i]:=copy(buf,60,2);
-  cells[9,i]:=copy(buf,63,4);
-  cells[10,i]:=copy(buf,69,6);
-  pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,i],' ','',[rfReplaceAll])+copy(cells[2,i],1,1)+'.png';
-  if fileexists(pathimage) then cells[11,i]:='Map'
-                           else cells[11,i]:='';
+  cells[2,i]:=copy(buf,15,5);
+  cells[3,i]:=copy(buf,23,3);
+  cells[4,i]:=copy(buf,26,4);
+  cells[5,i]:=copy(buf,31,6);
+  cells[6,i]:=copy(buf,39,5);
+  cells[7,i]:=copy(buf,46,5);
+  cells[8,i]:=copy(buf,52,6);
+  cells[9,i]:=copy(buf,60,2);
+  cells[10,i]:=copy(buf,63,4);
+  cells[11,i]:=copy(buf,69,6);
+  pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,i],' ','',[rfReplaceAll])+copy(cells[3,i],1,1)+'.png';
+  if fileexists(pathimage) then cells[1,i]:=appmsg[47]
+                           else cells[1,i]:='';
   a:=strtointdef(copy(cells[0,i],1,5),-9999);
   mm:=copy(cells[0,i],7,3);
   m:=0;
@@ -489,7 +491,7 @@ with solargrid do begin
       end;
   j:=strtointdef(copy(cells[0,i],11,2),0);
   if (a<>-9999)and(m<>0)and(j<>0) then begin
-     h:=strtofloat(copy(cells[1,i],1,2))+strtofloat(copy(cells[1,i],4,2))/60;
+     h:=strtofloat(copy(cells[2,i],1,2))+strtofloat(copy(cells[2,i],4,2))/60;
      jda:=jd(a,m,j,h);
      objects[0,i]:=SetObjCoord(jda,-1000,-1000);
   end;
@@ -1286,10 +1288,11 @@ if (row>=0)and(Column>=0) then begin
     if assigned(FGetChartConfig) then FGetChartConfig(csc)
                                  else csc:=c;
     csc.UseSystemTime:=false;
+    csc.ObsTZ:=csc.Timezone;
     djd(p.jd+c.timezone/24,csc.CurYear,csc.CurMonth,csc.CurDay,csc.CurTime);
     if gr = solargrid then  begin      // Solar eclipse
-       if (Column=11) then begin   // image map
-         pathimage:=slash(Feclipsepath)+'SE'+stringreplace(gr.cells[0,row],' ','',[rfReplaceAll])+copy(gr.cells[2,row],1,1)+'.png';
+       if (Column=1) then begin   // image map
+         pathimage:=slash(Feclipsepath)+'SE'+stringreplace(gr.cells[0,row],' ','',[rfReplaceAll])+copy(gr.cells[3,row],1,1)+'.png';
          if fileexists(pathimage) then begin
             ShowImage.labeltext:=eclipanel.caption;
             ShowImage.titre:=solar.Caption+' '+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
@@ -1308,10 +1311,10 @@ if (row>=0)and(Column>=0) then begin
        csc.PlanetParalaxe:=true;
        csc.ShowPlanet:=true;
        if (Column=6)or(Column=7) then begin         // change location to eclipse maxima
-         d:=strtofloat(copy(gr.cells[6,row],1,4));
-         if copy(gr.cells[6,row],5,1)='S' then d:=-d;
-         a:=strtofloat(copy(gr.cells[7,row],1,5));
-         if copy(gr.cells[7,row],6,1)='E' then a:=-a;
+         d:=strtofloat(copy(gr.cells[7,row],1,4));
+         if copy(gr.cells[7,row],5,1)='S' then d:=-d;
+         a:=strtofloat(copy(gr.cells[8,row],1,5));
+         if copy(gr.cells[8,row],6,1)='E' then a:=-a;
          csc.ObsLatitude:=d;
          csc.ObsLongitude:=a;
          csc.ObsName:='Max. Solar Eclipse '+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
@@ -1407,7 +1410,7 @@ case pagecontrol1.ActivePage.TabIndex of
 end;
 end;
 
-Procedure Tf_calendar.Gridetoclipboard(grid : tstringgrid);
+Procedure Tf_calendar.SaveGrid(grid : tstringgrid);
 var buf,d : string;
     i,j : integer;
     x : double;
@@ -1429,36 +1432,43 @@ for i:=0 to grid.RowCount-1 do begin
   buf:=buf+'"';
   memo1.Lines.add(buf);
 end;
-memo1.selectall;
-memo1.copytoclipboard;
+try
+Savedialog1.DefaultExt:='.csv';
+Savedialog1.filter:='Tab Separated File (*.csv)|*.csv';
+Savedialog1.Initialdir:=privatedir;
+if SaveDialog1.Execute then
+   memo1.Lines.SavetoFile(savedialog1.Filename);
+finally
+ChDir(appdir);
+end;
 memo1.clear;
 end;
 
 procedure Tf_calendar.BitBtn5Click(Sender: TObject);
 begin
 case pagecontrol1.ActivePage.TabIndex of
- 0 : GridetoClipboard(TwilightGrid);
+ 0 : SaveGrid(TwilightGrid);
  1 : case pagecontrol2.ActivePage.TabIndex of
-     0 : GridetoClipboard(SoleilGrid);
-     1 : GridetoClipboard(MercureGrid);
-     2 : GridetoClipboard(VenusGrid);
-     3 : GridetoClipboard(LuneGrid);
-     4 : GridetoClipboard(MarsGrid);
-     5 : GridetoClipboard(JupiterGrid);
-     6 : GridetoClipboard(SaturneGrid);
-     7 : GridetoClipboard(UranusGrid);
-     8 : GridetoClipboard(NeptuneGrid);
-     9 : GridetoClipboard(PlutonGrid);
+     0 : SaveGrid(SoleilGrid);
+     1 : SaveGrid(MercureGrid);
+     2 : SaveGrid(VenusGrid);
+     3 : SaveGrid(LuneGrid);
+     4 : SaveGrid(MarsGrid);
+     5 : SaveGrid(JupiterGrid);
+     6 : SaveGrid(SaturneGrid);
+     7 : SaveGrid(UranusGrid);
+     8 : SaveGrid(NeptuneGrid);
+     9 : SaveGrid(PlutonGrid);
      end;
- 2 : GridetoClipboard(CometGrid);
- 3 : GridetoClipboard(AsteroidGrid);
- 4 : GridetoClipboard(SolarGrid);
- 5 : GridetoClipboard(LunarGrid);
- 6 : GridetoClipboard(SatGrid);
+ 2 : SaveGrid(CometGrid);
+ 3 : SaveGrid(AsteroidGrid);
+ 4 : SaveGrid(SolarGrid);
+ 5 : SaveGrid(LunarGrid);
+ 6 : SaveGrid(SatGrid);
  end;
 end;
 
-procedure Tf_calendar.Gridetoprinter(grid : tstringgrid);
+procedure Tf_calendar.Gridtoprinter(grid : tstringgrid);
 var buf,d : string;
     i,j : integer;
     x : double;
@@ -1486,24 +1496,24 @@ end;
 procedure Tf_calendar.BitBtn4Click(Sender: TObject);
 begin
 case pagecontrol1.ActivePage.TabIndex of
- 0 : GridetoPrinter(TwilightGrid);
+ 0 : GridtoPrinter(TwilightGrid);
  1 : case pagecontrol2.ActivePage.TabIndex of
-     0 : GridetoPrinter(SoleilGrid);
-     1 : GridetoPrinter(MercureGrid);
-     2 : GridetoPrinter(VenusGrid);
-     3 : GridetoPrinter(LuneGrid);
-     4 : GridetoPrinter(MarsGrid);
-     5 : GridetoPrinter(JupiterGrid);
-     6 : GridetoPrinter(SaturneGrid);
-     7 : GridetoPrinter(UranusGrid);
-     8 : GridetoPrinter(NeptuneGrid);
-     9 : GridetoPrinter(PlutonGrid);
+     0 : GridtoPrinter(SoleilGrid);
+     1 : GridtoPrinter(MercureGrid);
+     2 : GridtoPrinter(VenusGrid);
+     3 : GridtoPrinter(LuneGrid);
+     4 : GridtoPrinter(MarsGrid);
+     5 : GridtoPrinter(JupiterGrid);
+     6 : GridtoPrinter(SaturneGrid);
+     7 : GridtoPrinter(UranusGrid);
+     8 : GridtoPrinter(NeptuneGrid);
+     9 : GridtoPrinter(PlutonGrid);
      end;
- 2 : GridetoPrinter(CometGrid);
- 3 : GridetoPrinter(AsteroidGrid);
- 4 : GridetoPrinter(SolarGrid);
- 5 : GridetoPrinter(LunarGrid);
- 6 : GridetoPrinter(SatGrid);
+ 2 : GridtoPrinter(CometGrid);
+ 3 : GridtoPrinter(AsteroidGrid);
+ 4 : GridtoPrinter(SolarGrid);
+ 5 : GridtoPrinter(LunarGrid);
+ 6 : GridtoPrinter(SatGrid);
  end;
 end;
 
