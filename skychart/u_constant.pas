@@ -386,7 +386,7 @@ type
                 end;
      conf_main = record
                 prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
-                db,dbhost,dbuser,dbpass, ImagePath : string;
+                db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
                 PrinterResolution,PrintMethod,PrintColor,configpage,autorefreshdelay,MaxChildID,dbport : integer;
                 PrintLandscape :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;

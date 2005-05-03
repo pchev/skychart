@@ -30,7 +30,7 @@ begin
  f_info.onPrintSetup:=PrintSetup;
  f_info.OnShowDetail:=showdetailinfo;
  f_detail.OnCenterObj:=CenterFindObj;
- f_detail.OnNeighborObj:=NeighborObj;
+ f_detail.OnNeighborObj:=NeighborObj; 
 end;
 
 function Tf_main.CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
@@ -438,6 +438,11 @@ end;
 procedure Tf_main.SaveConfigurationExecute(Sender: TObject);
 begin
 SaveDefault;
+end;
+
+procedure Tf_main.EditCopy1Execute(Sender: TObject);
+begin
+if ActiveMDIchild is Tf_chart then Clipboard.Assign(Tf_chart(ActiveMDIchild).Image1.Picture.Bitmap);
 end;
 
 procedure Tf_main.Print1Execute(Sender: TObject);
@@ -852,27 +857,31 @@ end;
 end;
 
 procedure Tf_main.OpenConfigExecute(Sender: TObject);
+var c : conf_skychart;
 begin
 screen.cursor:=crHourGlass;
-if f_config=nil then f_config:=Tf_config.Create(application);
+if f_config=nil then begin
+   f_config:=Tf_config.Create(application);
+   f_config.onApplyConfig:=ApplyConfig;
+   f_config.Fits:=fits;
+   f_config.catalog:=catalog;
+end;
 try
- f_config.Fits:=fits;
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
  f_config.cplot:=def_cfgplot;
- f_config.csc:=def_cfgsc;
+ c:=def_cfgsc;
  if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
-     CopySCconfig(sc.cfgsc,f_config.csc);
+     CopySCconfig(sc.cfgsc,c);
+ f_config.csc:=c;
+ cfgm.prgdir:=appdir;
+ cfgm.persdir:=privatedir;
  f_config.cmain:=cfgm;
  f_config.applyall.checked:=cfgm.updall;
  formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
- f_config.topmsg.caption:='';
  f_config.TreeView1.enabled:=true;
  f_config.previous.enabled:=true;
  f_config.next.enabled:=true;
- f_config.apply.enabled:=true;
- f_config.AstDB.enabled:=true;
- f_config.CometDB.enabled:=true;
  f_config.showmodal;
  if f_config.ModalResult=mrOK then begin
    activateconfig;
@@ -883,134 +892,34 @@ screen.cursor:=crDefault;
 end;
 end;
 
+procedure Tf_main.ApplyConfig(Sender: TObject);
+begin
+ activateconfig;
+end;
+
 procedure Tf_main.OpenAsteroidConfig(Sender: TObject);
 var i:integer;
 begin
-if f_config=nil then f_config:=Tf_config.Create(application);
-if f_config.visible then exit;
-screen.cursor:=crHourGlass;
-try
- f_config.Fits:=fits;
- cfgm.configpage:=f_config.astpage;
- f_config.AstPageControl.activepage:=f_config.astprepare;
- f_config.ccat:=catalog.cfgcat;
- f_config.cshr:=catalog.cfgshr;
- f_config.cplot:=def_cfgplot;
- f_config.csc:=def_cfgsc;
- if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
-     CopySCconfig(sc.cfgsc,f_config.csc);
- f_config.cmain:=cfgm;
- f_config.applyall.checked:=cfgm.updall;
- formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
- f_config.topmsg.caption:='No Asteroid data found for this date. Please prepare the data for at least two month, or click Cancel to disable the Asteroid display.';
- f_config.TreeView1.enabled:=false;
- f_config.previous.enabled:=false;
- f_config.next.enabled:=false;
- f_config.apply.enabled:=false;
- f_config.AstDB.enabled:=true;
- f_config.CometDB.enabled:=true;
- f_config.showmodal;
- if f_config.ModalResult=mrCancel then for i:=0 to MDIChildCount-1 do
-    if MDIChildren[i] is Tf_chart then
-       with MDIChildren[i] as Tf_chart do begin
-          sc.cfgsc.ShowAsteroid:=false;
-          sc.cfgsc.FindOk:=false;
-       end;
- cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
-finally
-screen.cursor:=crDefault;
-end;
+
 end;
 
 procedure Tf_main.OpenCometConfig(Sender: TObject);
 var i:integer;
 begin
-if f_config=nil then f_config:=Tf_config.Create(application);
-if f_config.visible then exit;
-screen.cursor:=crHourGlass;
-try
- f_config.Fits:=fits;
- cfgm.configpage:=f_config.compage;
- f_config.ComPageControl.activepage:=f_config.comload;
- f_config.ccat:=catalog.cfgcat;
- f_config.cshr:=catalog.cfgshr;
- f_config.cplot:=def_cfgplot;
- f_config.csc:=def_cfgsc;
- if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
-     CopySCconfig(sc.cfgsc,f_config.csc);
- f_config.cmain:=cfgm;
- f_config.applyall.checked:=cfgm.updall;
- formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
- f_config.topmsg.caption:='No Comet element found. Please load an element file, or click Cancel to disable the Comet display.';
- f_config.TreeView1.enabled:=false;
- f_config.previous.enabled:=false;
- f_config.next.enabled:=false;
- f_config.apply.enabled:=false;
- f_config.showmodal;
- if f_config.ModalResult=mrCancel then for i:=0 to MDIChildCount-1 do
-    if MDIChildren[i] is Tf_chart then
-       with MDIChildren[i] as Tf_chart do begin
-          sc.cfgsc.ShowComet:=false;
-          sc.cfgsc.FindOk:=false;
-       end;
- cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
-finally
-screen.cursor:=crDefault;
-end;
+
 end;
 
 procedure Tf_main.OpenDBConfig(Sender: TObject);
 begin
-if f_config=nil then f_config:=Tf_config.Create(application);
-if f_config.visible then exit;
-screen.cursor:=crHourGlass;
-try
- f_config.Fits:=fits;
- cfgm.configpage:=f_config.dbpage;
- f_config.ccat:=catalog.cfgcat;
- f_config.cshr:=catalog.cfgshr;
- f_config.cplot:=def_cfgplot;
- f_config.csc:=def_cfgsc;
- if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
-     CopySCconfig(sc.cfgsc,f_config.csc);
- f_config.cmain:=cfgm;
- f_config.applyall.checked:=cfgm.updall;
- formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
- f_config.topmsg.caption:='Please set your MySQL database preferences. Use the Check button to control your input. Click Cancel to disable database function.';
- f_config.TreeView1.enabled:=false;
- f_config.previous.enabled:=false;
- f_config.next.enabled:=false;
- f_config.apply.enabled:=false;
- f_config.AstDB.enabled:=false;
- f_config.CometDB.enabled:=false;
- f_config.showmodal;
- if f_config.ModalResult=mrCancel then begin
-    def_cfgsc.ShowAsteroid:=false;
- end else begin
-    if directoryexists(f_config.prgdir.text) then appdir:=f_config.prgdir.text; // this setting is on the same page
-    if directoryexists(f_config.persdir.text) then privatedir:=f_config.persdir.text;
-    cfgm:=f_config.cmain;
-    {$ifdef linux}
-      LinuxDesktop:=f_config.LinuxDesktopBox.itemIndex;
-      OpenFileCMD:=f_config.LinuxCmd.Text;
-    {$endif}
- end;
- cfgm.configpage:=f_config.Treeview1.selected.absoluteindex;
-finally
-screen.cursor:=crDefault;
-end;
+
 end;
 
 procedure Tf_main.activateconfig;
 begin
-    if directoryexists(f_config.prgdir.text) then appdir:=f_config.prgdir.text;
-    if directoryexists(f_config.persdir.text) then privatedir:=f_config.persdir.text;
-    {$ifdef linux}
-      LinuxDesktop:=f_config.LinuxDesktopBox.itemIndex;
-      OpenFileCMD:=f_config.LinuxCmd.Text;
-    {$endif}
     cfgm:=f_config.cmain;
     cfgm.updall:=f_config.applyall.checked;
+    if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
+    if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
     catalog.cfgcat:=f_config.ccat;
     catalog.cfgshr:=f_config.cshr;
     def_cfgsc:=f_config.csc;
@@ -1058,17 +967,31 @@ begin
     Autorefresh.enabled:=true;
 end;
 
+procedure Tf_main.ViewTopPanel;
+var i: integer;
+begin
+i:=0;
+if ToolBar1.visible then i:=i+ToolBar1.Height;
+if ToolBar4.visible then i:=i+ToolBar4.Height;
+if i=0 then PanelTop.visible:=false
+   else begin
+     PanelTop.visible:=true;
+     PanelTop.Height:=i+2;
+   end;  
+end;
+
 procedure Tf_main.ViewBarExecute(Sender: TObject);
 begin
 ToolBar1.visible:=not ViewToolsBar1.checked;
-ToolBar2.visible:=ToolBar1.visible;
-ToolBar3.visible:=ToolBar1.visible;
+PanelLeft.visible:=ToolBar1.visible;
+PanelRight.visible:=ToolBar1.visible;
 ToolBar4.visible:=ToolBar1.visible;
 ViewToolsBar1.checked:=ToolBar1.visible;
 MainBar1.checked:=ToolBar1.visible;
 ObjectBar1.checked:=ToolBar1.visible;
 LeftBar1.checked:=ToolBar1.visible;
 RightBar1.checked:=ToolBar1.visible;
+ViewTopPanel;
 end;
 
 procedure Tf_main.ViewMainBarExecute(Sender: TObject);
@@ -1077,6 +1000,7 @@ ToolBar1.visible:=not ToolBar1.visible;
 MainBar1.checked:=ToolBar1.visible;
 if not MainBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+ViewTopPanel;
 end;
 
 procedure Tf_main.ViewObjectBarExecute(Sender: TObject);
@@ -1085,20 +1009,21 @@ ToolBar4.visible:=not ToolBar4.visible;
 ObjectBar1.checked:=ToolBar4.visible;
 if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+ViewTopPanel;
 end;
 
 procedure Tf_main.ViewLeftBarExecute(Sender: TObject);
 begin
-ToolBar2.visible:=not ToolBar2.visible;
-LeftBar1.checked:=ToolBar2.visible;
+PanelLeft.visible:=not PanelLeft.visible;
+LeftBar1.checked:=PanelLeft.visible;
 if not LeftBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
 end;
 
 procedure Tf_main.ViewRightBarExecute(Sender: TObject);
 begin
-ToolBar3.visible:=not ToolBar3.visible;
-RightBar1.checked:=ToolBar3.visible;
+PanelRight.visible:=not PanelRight.visible;
+RightBar1.checked:=PanelRight.visible;
 if not RightBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
 end;
@@ -1782,14 +1707,15 @@ def_cfgsc.IndiDevice:=ReadString(section,'IndiDevice',def_cfgsc.IndiDevice);
 def_cfgsc.IndiTelescope:=ReadBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
 def_cfgsc.ScopePlugin:=ReadString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
 toolbar1.visible:=ReadBool(section,'ViewMainBar',true);
-toolbar2.visible:=ReadBool(section,'ViewLeftBar',true);
-toolbar3.visible:=ReadBool(section,'ViewRightBar',true);
+PanelLeft.visible:=ReadBool(section,'ViewLeftBar',true);
+PanelRight.visible:=ReadBool(section,'ViewRightBar',true);
 toolbar4.visible:=ReadBool(section,'ViewObjectBar',true);
 MainBar1.checked:=ToolBar1.visible;
 ObjectBar1.checked:=ToolBar4.visible;
-LeftBar1.checked:=ToolBar2.visible;
-RightBar1.checked:=ToolBar3.visible;
+LeftBar1.checked:=PanelLeft.visible;
+RightBar1.checked:=PanelRight.visible;
 ViewToolsBar1.checked:=(MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked);
+ViewTopPanel;
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatpath[i]:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -2098,8 +2024,8 @@ WriteString(section,'IndiDevice',def_cfgsc.IndiDevice);
 WriteBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
 WriteString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
 WriteBool(section,'ViewMainBar',toolbar1.visible);
-WriteBool(section,'ViewLeftBar',toolbar2.visible);
-WriteBool(section,'ViewRightBar',toolbar3.visible);
+WriteBool(section,'ViewLeftBar',PanelLeft.visible);
+WriteBool(section,'ViewRightBar',PanelRight.visible);
 WriteBool(section,'ViewObjectBar',toolbar4.visible);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
@@ -2370,39 +2296,44 @@ if f_main.ActiveMDIchild=sender then begin
                TelescopeConnect.Hint:='Connect Telescope';
           end;
   with ActiveMdiChild as Tf_chart do begin
-    toolbutton41.down:=sc.cfgsc.showstars;
-    toolbutton42.down:=sc.cfgsc.shownebulae;
-    toolbutton43.down:=sc.cfgsc.ShowImages;
-    toolbutton44.down:=sc.cfgsc.ShowLine;
-    toolbutton45.down:=sc.cfgsc.ShowAsteroid;
-    toolbutton46.down:=sc.cfgsc.ShowComet;
-    toolbutton47.down:=sc.cfgsc.ShowPlanet;
-    toolbutton48.down:=sc.cfgsc.ShowMilkyWay;
-    toolbutton49.down:=sc.cfgsc.Showlabelall;
-    toolbutton29.down:=sc.cfgsc.ShowGrid;
-    toolbutton30.down:=sc.cfgsc.ShowEqGrid;
-    toolbutton50.down:=sc.cfgsc.ShowConstl;
-    toolbutton51.down:=sc.cfgsc.ShowConstB;
-    toolbutton52.down:=sc.cfgsc.ShowGalactic;
-    toolbutton53.down:=sc.cfgsc.ShowEcliptic;
-    toolbutton54.down:=sc.cfgsc.ShowCircle;
-    toolbutton55.down:=not sc.cfgsc.horizonopaque;
-    toolbutton31.down:= sc.plot.cfgplot.autoskycolor;
+    toolbuttonshowStars.down:=sc.cfgsc.showstars;
+    toolbuttonshowNebulae.down:=sc.cfgsc.shownebulae;
+    toolbuttonShowPictures.down:=sc.cfgsc.ShowImages;
+    toolbuttonShowLines.down:=sc.cfgsc.ShowLine;
+    toolbuttonShowAsteroids.down:=sc.cfgsc.ShowAsteroid;
+    toolbuttonShowComets.down:=sc.cfgsc.ShowComet;
+    toolbuttonShowPlanets.down:=sc.cfgsc.ShowPlanet;
+    toolbuttonShowMilkyWay.down:=sc.cfgsc.ShowMilkyWay;
+    toolbuttonShowlabels.down:=sc.cfgsc.Showlabelall;
+    toolbuttonGrid.down:=sc.cfgsc.ShowGrid;
+    toolbuttonGridEq.down:=sc.cfgsc.ShowEqGrid;
+    ToolButtonShowConstellationLine.down:=sc.cfgsc.ShowConstl;
+    ToolButtonShowConstellationLimit.down:=sc.cfgsc.ShowConstB;
+    ToolButtonShowGalacticEquator.down:=sc.cfgsc.ShowGalactic;
+    toolbuttonShowEcliptic.down:=sc.cfgsc.ShowEcliptic;
+    ToolButtonShowMark.down:=sc.cfgsc.ShowCircle;
+    ToolButtonShowObjectbelowHorizon.down:=not sc.cfgsc.horizonopaque;
+    ToolButtonswitchbackground.down:= sc.plot.cfgplot.autoskycolor;
     case sc.plot.cfgplot.starplot of
-    0: begin toolbutton32.down:=true; toolbutton32.marked:=true; StarSizePanel.visible:=false; end;
-    1: begin toolbutton32.down:=false; toolbutton32.marked:=false; StarSizePanel.visible:=false; end;
-    2: begin toolbutton32.down:=true; toolbutton32.marked:=false; StarSizePanel.visible:=true; end;
+    0: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=true; ButtonStarSize.visible:=false; starsizepanel.Visible:=false; end;
+    1: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=false; ButtonStarSize.visible:=false; starsizepanel.Visible:=false; end;
+    2: begin ToolButtonswitchstars.down:=false; ToolButtonswitchstars.marked:=false; ButtonStarSize.visible:=true; end;
     end;
     trackbar1.position:=round(sc.plot.cfgplot.partsize*10);
     trackbar2.position:=round(sc.plot.cfgplot.magsize*10);
     trackbar3.position:=sc.plot.cfgplot.contrast;
     trackbar4.position:=sc.plot.cfgplot.saturation;
-    toolbutton56.down:= (sc.cfgsc.projpole=Equat);
-    toolbutton57.down:= (sc.cfgsc.projpole=AltAz);
-    toolbutton58.down:= (sc.cfgsc.projpole=Ecl);
-    toolbutton59.down:= (sc.cfgsc.projpole=Gal);
+    toolbuttonEQ.down:= (sc.cfgsc.projpole=Equat);
+    toolbuttonAZ.down:= (sc.cfgsc.projpole=AltAz);
+    toolbuttonEC.down:= (sc.cfgsc.projpole=Ecl);
+    toolbuttonGL.down:= (sc.cfgsc.projpole=Gal);
   end;
 end;
+end;
+
+procedure Tf_main.ButtonStarSizeClick(Sender: TObject);
+begin
+starsizepanel.Visible:= not starsizepanel.Visible;
 end;
 
 Function Tf_main.NewChart(cname:string):string;
@@ -2858,7 +2789,7 @@ end;
 procedure Tf_main.PrintSetup(Sender: TObject);
 begin
 FilePrintSetup1.Execute;
-end;
+end;                                              
 
 procedure Tf_main.FilePrintSetup1Execute(Sender: TObject);
 begin

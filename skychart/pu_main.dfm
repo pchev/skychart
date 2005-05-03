@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 205
-  Top = 165
-  Width = 790
+  Left = 260
+  Top = 152
+  Width = 791
   Height = 587
   ActiveControl = PanelBottom
   Caption = 'Cartes du Ciel'
@@ -2673,34 +2673,34 @@ object f_main: Tf_main
       ShowHint = True
       TabOrder = 0
       Wrapable = False
-      object ToolButton7: TToolButton
+      object ToolButtonConfig: TToolButton
         Left = 0
         Top = 0
         Action = OpenConfig
         Wrap = True
       end
-      object ToolButton56: TToolButton
+      object ToolButtonEQ: TToolButton
         Left = 0
         Top = 23
         Action = EquatorialProjection
         Wrap = True
         Style = tbsCheck
       end
-      object ToolButton57: TToolButton
+      object ToolButtonAZ: TToolButton
         Left = 0
         Top = 46
         Action = AltAzProjection
         Wrap = True
         Style = tbsCheck
       end
-      object ToolButton58: TToolButton
+      object ToolButtonEC: TToolButton
         Left = 0
         Top = 69
         Action = EclipticProjection
         Wrap = True
         Style = tbsCheck
       end
-      object ToolButton59: TToolButton
+      object ToolButtonGL: TToolButton
         Left = 0
         Top = 92
         Action = GalacticProjection
@@ -2719,13 +2719,13 @@ object f_main: Tf_main
         Action = FlipY
         Wrap = True
       end
-      object ToolButton23: TToolButton
+      object ToolButtonRotP: TToolButton
         Left = 0
         Top = 161
         Action = rot_plus
         Wrap = True
       end
-      object ToolButton24: TToolButton
+      object ToolButtonRotM: TToolButton
         Left = 0
         Top = 184
         Action = rot_minus
@@ -2733,7 +2733,7 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 759
+    Left = 760
     Top = 51
     Width = 23
     Height = 456
@@ -2764,7 +2764,7 @@ object f_main: Tf_main
       ShowHint = True
       TabOrder = 0
       Wrapable = False
-      object ToolButton6: TToolButton
+      object ToolButtonF10m: TToolButton
         Tag = 10
         Left = 0
         Top = 0
@@ -2772,7 +2772,7 @@ object f_main: Tf_main
         Wrap = True
         OnClick = SetFOVExecute
       end
-      object ToolButton4: TToolButton
+      object ToolButtonF1: TToolButton
         Tag = 60
         Left = 0
         Top = 23
@@ -2780,7 +2780,7 @@ object f_main: Tf_main
         Wrap = True
         OnClick = SetFOVExecute
       end
-      object ToolButton10: TToolButton
+      object ToolButtonF5: TToolButton
         Tag = 300
         Left = 0
         Top = 46
@@ -2788,7 +2788,7 @@ object f_main: Tf_main
         Wrap = True
         OnClick = SetFOVExecute
       end
-      object ToolButton12: TToolButton
+      object ToolButtonF15: TToolButton
         Tag = 900
         Left = 0
         Top = 69
@@ -2796,7 +2796,7 @@ object f_main: Tf_main
         Wrap = True
         OnClick = SetFOVExecute
       end
-      object ToolButton13: TToolButton
+      object ToolButtonF30: TToolButton
         Tag = 1800
         Left = 0
         Top = 92
@@ -2804,7 +2804,7 @@ object f_main: Tf_main
         Wrap = True
         OnClick = SetFOVExecute
       end
-      object ToolButton14: TToolButton
+      object ToolButtonF50: TToolButton
         Tag = 3000
         Left = 0
         Top = 115
@@ -2812,7 +2812,7 @@ object f_main: Tf_main
         Wrap = True
         OnClick = SetFOVExecute
       end
-      object ToolButton16: TToolButton
+      object ToolButtonF90: TToolButton
         Tag = 5400
         Left = 0
         Top = 138
@@ -2820,7 +2820,7 @@ object f_main: Tf_main
         Wrap = True
         OnClick = SetFOVExecute
       end
-      object ToolButton17: TToolButton
+      object ToolButtonF120: TToolButton
         Tag = 7200
         Left = 0
         Top = 161
@@ -2828,37 +2828,37 @@ object f_main: Tf_main
         Wrap = True
         OnClick = SetFOVExecute
       end
-      object ToolButton25: TToolButton
+      object ToolButtonAllSky: TToolButton
         Left = 0
         Top = 184
         Action = allSky
         Wrap = True
       end
-      object ToolButton26: TToolButton
+      object ToolButtonToN: TToolButton
         Left = 0
         Top = 207
         Action = toN
         Wrap = True
       end
-      object ToolButton27: TToolButton
+      object ToolButtonToS: TToolButton
         Left = 0
         Top = 230
         Action = toS
         Wrap = True
       end
-      object ToolButton28: TToolButton
+      object ToolButtonToE: TToolButton
         Left = 0
         Top = 253
         Action = toE
         Wrap = True
       end
-      object ToolButton33: TToolButton
+      object ToolButtonToW: TToolButton
         Left = 0
         Top = 276
         Action = toW
         Wrap = True
       end
-      object ToolButton34: TToolButton
+      object ToolButtonToZ: TToolButton
         Left = 0
         Top = 299
         Action = toZenith
@@ -2868,7 +2868,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Top = 507
-    Width = 782
+    Width = 783
     Height = 30
     Align = alBottom
     BevelOuter = bvNone
@@ -2910,7 +2910,7 @@ object f_main: Tf_main
   object PanelTop: TPanel
     Left = 0
     Top = 0
-    Width = 782
+    Width = 783
     Height = 51
     Align = alTop
     AutoSize = True
@@ -2921,7 +2921,7 @@ object f_main: Tf_main
     object ToolBar1: TToolBar
       Left = 2
       Top = 2
-      Width = 778
+      Width = 779
       Height = 23
       AutoSize = True
       ButtonHeight = 23
@@ -2934,22 +2934,22 @@ object f_main: Tf_main
       ShowHint = True
       TabOrder = 0
       Wrapable = False
-      object ToolButton9: TToolButton
+      object ToolButtonNew: TToolButton
         Left = 0
         Top = 0
         Action = FileNew1
       end
-      object ToolButton1: TToolButton
+      object ToolButtonOpen: TToolButton
         Left = 23
         Top = 0
         Action = FileOpen1
       end
-      object ToolButton2: TToolButton
+      object ToolButtonSave: TToolButton
         Left = 46
         Top = 0
         Action = FileSaveAs1
       end
-      object ToolButton15: TToolButton
+      object ToolButtonPrint: TToolButton
         Left = 69
         Top = 0
         Action = Print1
@@ -2962,12 +2962,12 @@ object f_main: Tf_main
         ImageIndex = 2
         Style = tbsSeparator
       end
-      object ToolButton8: TToolButton
+      object ToolButtonCascade: TToolButton
         Left = 100
         Top = 0
         Action = WindowCascade1
       end
-      object ToolButton11: TToolButton
+      object ToolButtonTile: TToolButton
         Left = 123
         Top = 0
         Action = WindowTileVertical1
@@ -2980,22 +2980,22 @@ object f_main: Tf_main
         ImageIndex = 17
         Style = tbsSeparator
       end
-      object ToolButton18: TToolButton
+      object ToolButtonUndo: TToolButton
         Left = 154
         Top = 0
         Action = Undo
       end
-      object ToolButton19: TToolButton
+      object ToolButtonRedo: TToolButton
         Left = 177
         Top = 0
         Action = Redo
       end
-      object ToolButton21: TToolButton
+      object ToolButtonZoom: TToolButton
         Left = 200
         Top = 0
         Action = zoomplus
       end
-      object ToolButton22: TToolButton
+      object ToolButtonUnZoom: TToolButton
         Left = 223
         Top = 0
         Action = zoomminus
@@ -3007,7 +3007,7 @@ object f_main: Tf_main
         Height = 23
         BevelOuter = bvNone
         TabOrder = 3
-        object SpeedButton1: TSpeedButton
+        object SpeedButtonMoreStar: TSpeedButton
           Left = 0
           Top = 0
           Width = 11
@@ -3050,7 +3050,7 @@ object f_main: Tf_main
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
         end
-        object SpeedButton2: TSpeedButton
+        object SpeedButtonLessStar: TSpeedButton
           Left = 12
           Top = 0
           Width = 11
@@ -3093,7 +3093,7 @@ object f_main: Tf_main
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
         end
-        object SpeedButton3: TSpeedButton
+        object SpeedButtonMoreNeb: TSpeedButton
           Left = 0
           Top = 12
           Width = 11
@@ -3136,7 +3136,7 @@ object f_main: Tf_main
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
         end
-        object SpeedButton4: TSpeedButton
+        object SpeedButtonLessNeb: TSpeedButton
           Left = 12
           Top = 12
           Width = 11
@@ -3193,19 +3193,20 @@ object f_main: Tf_main
         OnClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
       end
-      object ToolButton60: TToolButton
+      object ToolButtonSearch: TToolButton
         Left = 339
         Top = 0
-        Caption = 'ToolButton60'
+        Hint = 'Search'
+        Caption = 'ToolButtonSearch'
         ImageIndex = 76
         OnClick = quicksearchClick
       end
-      object ToolButton40: TToolButton
+      object ToolButtonListObj: TToolButton
         Left = 362
         Top = 0
         Action = listobj
       end
-      object ToolButton20: TToolButton
+      object ToolButtonCal: TToolButton
         Left = 385
         Top = 0
         Action = Calendar
@@ -3218,17 +3219,17 @@ object f_main: Tf_main
         ImageIndex = 8
         Style = tbsSeparator
       end
-      object ToolButton37: TToolButton
+      object ToolButtonTdec: TToolButton
         Left = 416
         Top = 0
         Action = TimeDec
       end
-      object ToolButton36: TToolButton
+      object ToolButtonTnow: TToolButton
         Left = 439
         Top = 0
         Action = TimeReset
       end
-      object ToolButton38: TToolButton
+      object ToolButtonTinc: TToolButton
         Left = 462
         Top = 0
         Action = TimeInc
@@ -3295,7 +3296,7 @@ object f_main: Tf_main
     object ToolBar4: TToolBar
       Left = 2
       Top = 25
-      Width = 778
+      Width = 779
       Height = 24
       AutoSize = True
       Caption = 'ToolBar4'
@@ -3305,126 +3306,151 @@ object f_main: Tf_main
       ShowHint = True
       TabOrder = 1
       Wrapable = False
-      object ToolButton41: TToolButton
+      object ToolButtonShowStars: TToolButton
         Left = 0
         Top = 2
         Action = ShowStars
         Style = tbsCheck
       end
-      object ToolButton42: TToolButton
+      object ToolButtonShowNebulae: TToolButton
         Left = 23
         Top = 2
         Action = ShowNebulae
         Style = tbsCheck
       end
-      object ToolButton43: TToolButton
+      object ToolButtonShowPictures: TToolButton
         Left = 46
         Top = 2
         Action = ShowPictures
         Style = tbsCheck
       end
-      object ToolButton44: TToolButton
+      object ToolButtonShowLines: TToolButton
         Left = 69
         Top = 2
         Action = ShowLines
         Style = tbsCheck
       end
-      object ToolButton47: TToolButton
+      object ToolButtonShowPlanets: TToolButton
         Left = 92
         Top = 2
         Action = ShowPlanets
         Style = tbsCheck
       end
-      object ToolButton45: TToolButton
+      object ToolButtonShowAsteroids: TToolButton
         Left = 115
         Top = 2
         Action = ShowAsteroids
         Style = tbsCheck
       end
-      object ToolButton46: TToolButton
+      object ToolButtonShowComets: TToolButton
         Left = 138
         Top = 2
         Action = ShowComets
         Style = tbsCheck
       end
-      object ToolButton48: TToolButton
+      object ToolButtonShowMilkyWay: TToolButton
         Left = 161
         Top = 2
         Action = ShowMilkyWay
         Style = tbsCheck
       end
-      object ToolButton29: TToolButton
+      object ToolButtonGrid: TToolButton
         Left = 184
         Top = 2
         Action = Grid
         Style = tbsCheck
       end
-      object ToolButton30: TToolButton
+      object ToolButtonGridEq: TToolButton
         Left = 207
         Top = 2
         Action = GridEQ
         Style = tbsCheck
       end
-      object ToolButton50: TToolButton
+      object ToolButtonShowConstellationLine: TToolButton
         Left = 230
         Top = 2
         Action = ShowConstellationLine
         Style = tbsCheck
       end
-      object ToolButton51: TToolButton
+      object ToolButtonShowConstellationLimit: TToolButton
         Left = 253
         Top = 2
         Action = ShowConstellationLimit
         Style = tbsCheck
       end
-      object ToolButton52: TToolButton
+      object ToolButtonShowGalacticEquator: TToolButton
         Left = 276
         Top = 2
         Action = ShowGalacticEquator
         Style = tbsCheck
       end
-      object ToolButton53: TToolButton
+      object ToolButtonShowEcliptic: TToolButton
         Left = 299
         Top = 2
         Action = ShowEcliptic
         Style = tbsCheck
       end
-      object ToolButton54: TToolButton
+      object ToolButtonShowMark: TToolButton
         Left = 322
         Top = 2
         Action = ShowMark
         Style = tbsCheck
       end
-      object ToolButton49: TToolButton
+      object ToolButtonShowLabels: TToolButton
         Left = 345
         Top = 2
         Action = ShowLabels
         Style = tbsCheck
       end
-      object ToolButton55: TToolButton
+      object ToolButtonShowObjectbelowHorizon: TToolButton
         Left = 368
         Top = 2
         Action = ShowObjectbelowHorizon
         Style = tbsCheck
       end
-      object ToolButton31: TToolButton
+      object ToolButtonswitchbackground: TToolButton
         Left = 391
         Top = 2
         Action = switchbackground
         Style = tbsCheck
       end
-      object ToolButton32: TToolButton
+      object ToolButtonswitchstars: TToolButton
         Left = 414
         Top = 2
         Action = switchstars
         Style = tbsCheck
       end
-      object StarSizePanel: TPanel
+      object ButtonStarSize: TSpeedButton
         Left = 437
+        Top = 2
+        Width = 12
+        Height = 22
+        Hint = 'Adjust Star Size'
+        Glyph.Data = {
+          B6010000424DB601000000000000360000002800000008000000100000000100
+          180000000000800100000A0B00000A0B00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFF395DBAE3E8F5FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFF0040E23965F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF053AFF
+          AFBCFF3965F5E3E8F5FFFFFFFFFFFFFFFFFFFFFFFF0B39FFB1BEFF91A3FF3965
+          F5FFFFFFFFFFFFFFFFFFFFFFFF1541FFBFCAFFB1BEFFAFBCFF3965F5E3E8F5FF
+          FFFFFFFFFF1D42FFCDD5FFBBC6FFB1BEFF91A3FF3965F5FFFFFFFFFFFF294CFF
+          DFE4FFCDD5FFBFCAFF93A5FF3965F5FFFFFFFFFFFF2F51FFEBEEFFDBE1FFCDD5
+          FF396FF6E3E8F5FFFFFFFFFFFF3355FFFBFCFFC7D3FF3A72FFFFFFFFFFFFFFFF
+          FFFFFFFFFF3355FFFFFFFF4570FFE3E8F5FFFFFFFFFFFFFFFFFFFFFFFF1138FF
+          506CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3953D7E3E7F9FFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        Visible = False
+        OnClick = ButtonStarSizeClick
+      end
+      object StarSizePanel: TPanel
+        Left = 449
         Top = 2
         Width = 97
         Height = 22
         TabOrder = 0
+        Visible = False
         object TrackBar1: TTrackBar
           Tag = 1
           Left = 2
@@ -3722,6 +3748,7 @@ object f_main: Tf_main
       Caption = '&Copy'
       Hint = 'Copy|Copies the selection and puts it on the Clipboard'
       ShortCut = 16451
+      OnExecute = EditCopy1Execute
     end
     object FilePrintSetup1: TAction
       Category = 'File'
@@ -3945,6 +3972,7 @@ object f_main: Tf_main
       Tag = 1
       Category = 'chart'
       Caption = 'TimeInc'
+      Hint = 'Increment Time'
       ImageIndex = 44
       OnExecute = TimeIncExecute
     end
@@ -3952,24 +3980,28 @@ object f_main: Tf_main
       Tag = -1
       Category = 'chart'
       Caption = 'TimeDec'
+      Hint = 'Decrement Time'
       ImageIndex = 43
       OnExecute = TimeIncExecute
     end
     object TimeReset: TAction
       Category = 'chart'
       Caption = 'TimeReset'
+      Hint = 'Now'
       ImageIndex = 45
       OnExecute = TimeResetExecute
     end
     object listobj: TAction
       Category = 'chart'
       Caption = 'listobj'
+      Hint = 'Object List'
       ImageIndex = 46
       OnExecute = listobjExecute
     end
     object TelescopeConnect: TAction
       Category = 'Telescope'
       Caption = 'TelescopeConnect'
+      Hint = 'Connect Telescope'
       ImageIndex = 48
       OnExecute = TelescopeConnectExecute
     end
@@ -4151,6 +4183,7 @@ object f_main: Tf_main
     object Calendar: TAction
       Category = 'File'
       Caption = 'Calendar'
+      Hint = 'Ephemeris Calendar'
       ImageIndex = 75
       OnExecute = CalendarExecute
     end
@@ -4160,7 +4193,7 @@ object f_main: Tf_main
     Left = 216
     Top = 256
     Bitmap = {
-      494C01014D004F00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014E004F00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004001000001002000000000000040
       01000000000000000000000000000000000000000000FFEEDE00FFE8D100FFE8
       D100FFE8D100FFE8D100FFE8D100FFE8D100FFE8D100FFE8D100FFD9CF00FFD9
@@ -4181,7 +4214,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFF0E300FBE8D900FFF0
       E300FBE8D900FFF0E300FBE8D900FFF0E300FFE8D300FFE8D300FFE8D300FFE8
       D100FFE7D000FFE6CE00FFE6CE00FFD9CF000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000B8653B00F5E9E300000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4189,7 +4222,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFF0E300400000004000
       0000400000004000000040000000FFF0E300FFF0E300FFF1E400FFEAD6004000
       0000400000004000000040000000400000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000B85D2A00CC896100000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4197,7 +4230,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000F9EADE004000000000F0
       E100400000004000000040000000FFF0E300FFF1E400FFF1E400FFF1E4004000
       000000E8D3004000000040000000400000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000C6733D00FFD7AF00CC896100F5E9E30000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4205,7 +4238,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFF3E80040000000FEF0
       E4004000000040000000400000007F7871007F787200FFF1E400FFF1E4004000
       0000FFF1E4004000000040000000400000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000CB793E00FFD8B000F4C59C00CC89610000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4213,7 +4246,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFFDFC00400000004000
       0000400000004000000040000000400000004000000040000000400000004000
       0000400000004000000040000000400000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000D0804300FFDEBE00FFD8B000FFD7AF00CC896100F5E9E3000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4221,7 +4254,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFFAF600400000004000
       0000FFFDFC00400000004000000040000000400000004000000000F0E1004000
       0000400000004000000040000000400000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000D5874700FFE5CC00FFDDBB00FFD8B000F4C59C00CC8961000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4229,7 +4262,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FAF0E800400000004000
       0000FFFDFC004000000040000000400000004000000040000000FFF1E4004000
       0000400000004000000040000000400000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000DB904C00FFEEDE00FFE5CC00FFDEBE00F4C69E00CC8961000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4237,7 +4270,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFF8F200400000004000
       0000FFFDFC004000000040000000400000004000000040000000400000004000
       0000400000004000000040000000400000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000DD945000FFF4EA00FFECDA00FFE5CD00CC8A6400F5E9E3000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4245,7 +4278,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFFDFB00FFF8F2004000
       0000400000004000000040000000400000007E797500FFF2E600400000004000
       0000400000004000000040000000FFF1E4000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000DD975500FFFCFA00F4DFD100CC8E6C0000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4253,7 +4286,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFFDFB00FFFDFB00FFFC
       F90040000000FFFAF60040000000FFFDFC00FFFDFC00FDF2E900FFFBF7004000
       000000F1E40040000000FFF1E400FFF1E4000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000DD965400FFFEFE00D2957100F5E9E30000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4261,7 +4294,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFFEFD00FFFDFB00FFFD
       FB0040000000FFFBF70040000000FFFDFC00FFFDFC00FFFDFC00FFFDFC004000
       0000FFF5EC0040000000FFFDFC00FFF1E4000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000D8853800DDA27200000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4269,7 +4302,7 @@ object f_main: Tf_main
       00000000000000000000000000000000000000000000FFFFFF00FFFEFD00FFFD
       FB00400000004000000040000000FFFAF600FFFDFC00FFFDFC00FFFDFC004000
       00004000000040000000FFFDFC00FFFDFC000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000D7843900F9EEE300000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6724,11 +6757,11 @@ object f_main: Tf_main
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
       2800000040000000400100000100010000000000000A00000000000000000000
-      000000000000000000000000FFFFFF0080000000000000008000000000000000
-      8000000000000000800000000000000080000000000000008000000000000000
-      8000000000000000800000000000000080000000000000008000000000000000
-      8000000000000000800000000000000080000000000000008000000000000000
-      8000000000000000800000000000000080008000800080008000800080008000
+      000000000000000000000000FFFFFF008000FFFF000000008000FFFF00000000
+      8000F9FF000000008000F9FF000000008000F87F000000008000F87F00000000
+      8000F81F000000008000F81F000000008000F81F000000008000F81F00000000
+      8000F87F000000008000F87F000000008000F9FF000000008000F9FF00000000
+      8000FFFF000000008000FFFF0000000080008000800080008000800080008000
       8000800080008000800080008000800080008000800080008000800080008000
       8000800080008000800080008000800080008000800080008000800080008000
       8000800080008000800080008000800080008000800080008000800080008000

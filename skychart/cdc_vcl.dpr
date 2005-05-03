@@ -45,7 +45,15 @@ uses
   cu_fits in 'cu_fits.pas',
   u_bitmap in 'u_bitmap.pas',
   pu_calendar in 'pu_calendar.pas' {f_calendar},
-  pu_image in 'pu_image.pas' {f_image};
+  pu_image in 'pu_image.pas' {f_image},
+  pr_config_time in 'pr_config_time.pas' {f_config_time: TFrame},
+  pr_config_catalog in 'pr_config_catalog.pas' {f_config_catalog: TFrame},
+  pr_config_chart in 'pr_config_chart.pas' {f_config_chart: TFrame},
+  pr_config_display in 'pr_config_display.pas' {f_config_display: TFrame},
+  pr_config_observatory in 'pr_config_observatory.pas' {f_config_observatory: TFrame},
+  pr_config_pictures in 'pr_config_pictures.pas' {f_config_pictures: TFrame},
+  pr_config_solsys in 'pr_config_solsys.pas' {f_config_solsys: TFrame},
+  pr_config_system in 'pr_config_system.pas' {f_config_system: TFrame};
 
 {$R *.RES}
 

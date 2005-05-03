@@ -1,0 +1,429 @@
+object f_config_time: Tf_config_time
+  Left = 0
+  Top = 0
+  Width = 490
+  Height = 440
+  TabOrder = 0
+  object pa_time: TPageControl
+    Left = 0
+    Top = 0
+    Width = 490
+    Height = 440
+    ActivePage = t_simulation
+    Align = alClient
+    Style = tsNoTabs
+    TabOrder = 0
+    object t_time: TTabSheet
+      Caption = 't_time'
+      object Label50: TLabel
+        Left = 224
+        Top = 46
+        Width = 49
+        Height = 20
+        Caption = 'Seconds'
+      end
+      object Label72: TLabel
+        Left = 0
+        Top = 0
+        Width = 68
+        Height = 20
+        Caption = 'Time Setting'
+      end
+      object CheckBox1: TCheckBox
+        Left = 40
+        Top = 24
+        Width = 177
+        Height = 17
+        Caption = 'Use system time'
+        TabOrder = 3
+        OnClick = CheckBox1Click
+      end
+      object CheckBox2: TCheckBox
+        Left = 40
+        Top = 48
+        Width = 129
+        Height = 17
+        Caption = 'Auto-refresh every '
+        TabOrder = 4
+        OnClick = CheckBox2Click
+      end
+      object Panel7: TPanel
+        Left = 32
+        Top = 216
+        Width = 409
+        Height = 65
+        TabOrder = 5
+        object Label131: TLabel
+          Left = 8
+          Top = 31
+          Width = 114
+          Height = 20
+          Caption = 'Local Time   =  UT +'
+        end
+        object Label132: TLabel
+          Left = 8
+          Top = 8
+          Width = 60
+          Height = 20
+          Caption = 'Time Zone'
+        end
+        object Label133: TLabel
+          Left = 200
+          Top = 31
+          Width = 167
+          Height = 20
+          Caption = '(Negative West of Greenwich)'
+        end
+        object tz: TFloatEdit
+          Left = 128
+          Top = 30
+          Width = 41
+          Height = 22
+          Hint = '-12..12'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnChange = tzChange
+          MinValue = -12.000000000000000000
+          MaxValue = 12.000000000000000000
+          Digits = 3
+          NumericType = ntFixed
+        end
+      end
+      object Panel12: TPanel
+        Left = 32
+        Top = 288
+        Width = 409
+        Height = 97
+        TabOrder = 6
+        object Label146: TLabel
+          Left = 8
+          Top = 33
+          Width = 59
+          Height = 20
+          Caption = 'DT - UT  : '
+        end
+        object Tdt_Ut: TLabel
+          Left = 77
+          Top = 33
+          Width = 28
+          Height = 20
+          Caption = '0000'
+        end
+        object Label152: TLabel
+          Left = 115
+          Top = 33
+          Width = 49
+          Height = 20
+          Caption = 'Seconds'
+        end
+        object Label153: TLabel
+          Left = 8
+          Top = 8
+          Width = 250
+          Height = 20
+          Caption = 'Dynamic Time difference with Universal Time'
+        end
+        object CheckBox4: TCheckBox
+          Left = 8
+          Top = 64
+          Width = 193
+          Height = 17
+          Caption = 'Use another DT-UT value'
+          TabOrder = 0
+          OnClick = CheckBox4Click
+        end
+        object dt_ut: TLongEdit
+          Left = 208
+          Top = 61
+          Width = 105
+          Height = 22
+          Hint = '-99999999..99999999'
+          Enabled = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnChange = dt_utChange
+          Value = 0
+          MinValue = -99999999
+          MaxValue = 99999999
+        end
+      end
+      object LongEdit2: TLongEdit
+        Left = 176
+        Top = 45
+        Width = 41
+        Height = 22
+        Hint = '0..86400'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 7
+        OnChange = LongEdit2Change
+        Value = 1
+        MaxValue = 86400
+      end
+      object Panel9: TPanel
+        Left = 32
+        Top = 72
+        Width = 409
+        Height = 137
+        TabOrder = 0
+        object Label154: TLabel
+          Left = 8
+          Top = 70
+          Width = 26
+          Height = 20
+          Caption = 'Time'
+        end
+        object Label158: TLabel
+          Left = 112
+          Top = 48
+          Width = 11
+          Height = 20
+          Caption = 'M'
+        end
+        object Label159: TLabel
+          Left = 152
+          Top = 48
+          Width = 8
+          Height = 20
+          Caption = 'S'
+        end
+        object Label160: TLabel
+          Left = 56
+          Top = 48
+          Width = 9
+          Height = 20
+          Caption = 'H'
+        end
+        object Label161: TLabel
+          Left = 56
+          Top = 2
+          Width = 9
+          Height = 20
+          Caption = 'Y'
+        end
+        object Label162: TLabel
+          Left = 112
+          Top = 2
+          Width = 11
+          Height = 20
+          Caption = 'M'
+        end
+        object Label163: TLabel
+          Left = 152
+          Top = 2
+          Width = 9
+          Height = 20
+          Caption = 'D'
+        end
+        object Label164: TLabel
+          Left = 8
+          Top = 22
+          Width = 26
+          Height = 20
+          Caption = 'Date'
+        end
+        object BitBtn4: TBitBtn
+          Left = 40
+          Top = 104
+          Width = 177
+          Height = 25
+          Caption = 'Actual system time'
+          TabOrder = 0
+          OnClick = BitBtn4Click
+        end
+        object ADBC: TRadioGroup
+          Left = 216
+          Top = 12
+          Width = 89
+          Height = 33
+          Items.Strings = (
+            'AD'
+            'BC')
+          Columns = 2
+          TabOrder = 1
+          OnClick = DateChange2
+        end
+        object d_year: TSpinEdit
+          Left = 56
+          Top = 19
+          Width = 57
+          Height = 28
+          Max = 20000
+          TabOrder = 2
+          Value = 100
+          OnChanged = DateChange
+        end
+        object d_month: TSpinEdit
+          Left = 112
+          Top = 19
+          Width = 41
+          Height = 28
+          Max = 12
+          Min = 1
+          TabOrder = 3
+          Value = 1
+          OnChanged = DateChange
+        end
+        object d_day: TSpinEdit
+          Left = 152
+          Top = 19
+          Width = 41
+          Height = 28
+          Max = 31
+          Min = 1
+          TabOrder = 4
+          Value = 1
+          OnChanged = DateChange
+        end
+        object t_hour: TSpinEdit
+          Left = 56
+          Top = 65
+          Width = 41
+          Height = 28
+          Max = 23
+          TabOrder = 5
+          OnChanged = TimeChange
+        end
+        object t_min: TSpinEdit
+          Left = 112
+          Top = 65
+          Width = 41
+          Height = 28
+          Max = 59
+          TabOrder = 6
+          OnChanged = TimeChange
+        end
+        object t_sec: TSpinEdit
+          Left = 152
+          Top = 65
+          Width = 41
+          Height = 28
+          Max = 59
+          TabOrder = 7
+          OnChanged = TimeChange
+        end
+      end
+    end
+    object t_simulation: TTabSheet
+      Caption = 't_simulation'
+      ImageIndex = 1
+      object stepreset: TSpeedButton
+        Left = 256
+        Top = 236
+        Width = 145
+        Height = 25
+        Caption = 'Reset to single date'
+        Layout = blGlyphTop
+        NumGlyphs = 2
+        OnClick = stepresetClick
+      end
+      object Label165: TLabel
+        Left = 0
+        Top = 0
+        Width = 129
+        Height = 20
+        Caption = 'Time Simulation Setting'
+      end
+      object Label167: TLabel
+        Left = 8
+        Top = 269
+        Width = 40
+        Height = 20
+        Caption = 'every  '
+      end
+      object Label168: TLabel
+        Left = 8
+        Top = 213
+        Width = 128
+        Height = 20
+        Caption = 'Number of computation'
+      end
+      object stepunit: TRadioGroup
+        Left = 8
+        Top = 304
+        Width = 417
+        Height = 49
+        Items.Strings = (
+          'Days'
+          'Hours'
+          'Minutes'
+          'Seconds')
+        Caption = 'Step unit'
+        Columns = 4
+        TabOrder = 3
+        OnClick = stepunitClick
+      end
+      object stepline: TCheckBox
+        Left = 8
+        Top = 376
+        Width = 417
+        Height = 17
+        Caption = 'Connection lines between each position '
+        TabOrder = 4
+        OnClick = steplineClick
+      end
+      object Label166: TLabel
+        Left = 8
+        Top = 32
+        Width = 315
+        Height = 20
+        Caption = 'Plot the moving object for a number of consecutive date.'
+      end
+      object nbstep: TSpinEdit
+        Left = 144
+        Top = 209
+        Width = 70
+        Height = 28
+        Min = 1
+        TabOrder = 6
+        Value = 1
+        OnChanged = nbstepChanged
+      end
+      object stepsize: TSpinEdit
+        Left = 144
+        Top = 265
+        Width = 70
+        Height = 28
+        Max = 999999
+        Min = 1
+        TabOrder = 7
+        Value = 1
+        OnChanged = stepsizeChanged
+      end
+      object SimObj: TCheckListBox
+        Left = 176
+        Top = 80
+        Width = 249
+        Height = 97
+        Columns = 3
+        ColumnLayout = llVariable
+        Items.Strings = (
+          'Sun'
+          'Mercury '
+          'Venus'
+          'Moon'
+          'Mars'
+          'Jupiter'
+          'Saturn'
+          'Uranus'
+          'Neptune'
+          'Pluto'
+          'Asteroids'
+          'Comets')
+        RowLayout = llFitToWidth
+        Rows = 5
+        TabOrder = 8
+        OnClickCheck = SimObjClickCheck
+      end
+      object Label178: TLabel
+        Left = 8
+        Top = 80
+        Width = 137
+        Height = 20
+        Caption = 'For the following objects'
+      end
+    end
+  end
+end
