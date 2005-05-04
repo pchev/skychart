@@ -67,7 +67,6 @@ type
     {$ifdef mswindows}
     satxylib: dword;
     {$endif}
-    FOnAsteroidConfig,FOnCometConfig: TNotifyEvent;
   protected
     { Protected declarations }
      Procedure JupSatInt(jde : double;var P : double; var xsat,ysat : array of double; var supconj : array of boolean);
@@ -119,8 +118,6 @@ type
      function FindComet(x1,y1,x2,y2:double; nextobj:boolean; var cfgsc: conf_skychart; var nom,mag,date,desc:string):boolean;
      function FindCometName(comname: String; var ra,de:double; var cfgsc: conf_skychart):boolean;
      procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var i: integer; var cfgsc: conf_skychart);
-     property OnAsteroidConfig: TNotifyEvent read FOnAsteroidConfig write FOnAsteroidConfig;
-     property OnCometConfig: TNotifyEvent read FOnCometConfig write FOnCometConfig;
   end;
 
 implementation
@@ -1853,16 +1850,11 @@ while lockdb do application.ProcessMessages; lockdb:=true;
 cfgsc.ast_day:='cdc_ast_day_'+cfgsc.chartname;
 cfgsc.ast_daypos:='cdc_ast_day_pos_'+cfgsc.chartname;
 cfgsc.AsteroidNb:=0;
-if not db1.Active then exit;
+if not db1.Active then cfgsc.ShowAsteroid:=false;
 if not cfgsc.ShowAsteroid then exit;
 if not NewAstDay(cfgsc.CurJD,cfgsc.AstmagMax,cfgsc) then begin
-  if assigned(FOnAsteroidConfig) then begin
-     repeat
-        FOnAsteroidConfig(self);
-     until (not cfgsc.ShowAsteroid) or NewAstDay(cfgsc.CurJD,cfgsc.AstmagMax,cfgsc);
-     if not cfgsc.ShowAsteroid then exit;
-  end
-  else exit;
+   cfgsc.ShowAsteroid:=false;
+   exit;
 end;
 d:=maxvalue([0.6*cfgsc.fov,0.02]);
 da:=d/cos(cfgsc.decentre);
@@ -1933,16 +1925,11 @@ while lockdb do application.ProcessMessages; lockdb:=true;
 cfgsc.com_day:='cdc_com_day_'+cfgsc.chartname;
 cfgsc.com_daypos:='cdc_com_day_pos_'+cfgsc.chartname;
 cfgsc.CometNb:=0;
-if not db1.Active then exit;
+if not db1.Active then cfgsc.ShowComet:=false;
 if not cfgsc.ShowComet then exit;
 if not NewComDay(cfgsc.CurJD,cfgsc.CommagMax,cfgsc) then begin
-  if assigned(FOnCometConfig) then begin
-     repeat
-        FOnCometConfig(self);
-     until (not cfgsc.ShowComet) or NewComDay(cfgsc.CurJD,cfgsc.CommagMax,cfgsc);
-     if not cfgsc.ShowComet then exit;
-  end
-  else exit;
+   cfgsc.ShowComet:=false;
+   exit;
 end;
 d:=maxvalue([0.6*cfgsc.fov,0.02]);
 da:=d/cos(cfgsc.decentre);
@@ -2298,7 +2285,7 @@ var jds,qry : string;
 begin
 try
 jds:=formatfloat(f1,jdt);
-msg.Add('Begin processing for jd='+jds);
+msg.Add('Begin processing for jd='+jds+' '+jddate(jdt));
 db1.Query('LOCK TABLES cdc_ast_mag WRITE, cdc_ast_elem READ');
 msg.Add('Delete previous data for this date.');
 application.processmessages;
@@ -2319,8 +2306,13 @@ db1.Query('FLUSH TABLES');
 TruncateDailyAsteroid;
 msg.Add('End processing jd='+jds);
 result:=(n_ast>0);
+if not result then begin
+   msg.Add('Error! please check the database parameters.');
+   sleep(3000);
+end;
 except
   result:=false;
+  msg.Add('Error! please check the database parameters.');
   db2.Query(qry);
   db2.CallBackOnly:=false;
 end;

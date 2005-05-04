@@ -22,10 +22,10 @@ object f_info: Tf_info
     Left = 0
     Top = 0
     Width = 440
-    Height = 295
-    ActivePage = TabSheet2
+    Height = 298
+    ActivePage = ProgressMessages
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TCP/IP Connection'
@@ -81,7 +81,7 @@ object f_info: Tf_info
       ImageIndex = 1
       object Panel3: TPanel
         Left = 0
-        Top = 240
+        Top = 243
         Width = 432
         Height = 27
         Align = alBottom
@@ -135,7 +135,7 @@ object f_info: Tf_info
         Left = 0
         Top = 0
         Width = 432
-        Height = 240
+        Height = 243
         Align = alClient
         PlainText = True
         PopupMenu = PopupMenu2
@@ -146,10 +146,24 @@ object f_info: Tf_info
         OnMouseUp = Memo1MouseUp
       end
     end
+    object ProgressMessages: TTabSheet
+      Caption = 'Progress Messages'
+      ImageIndex = 2
+      object ProgressMemo: TMemo
+        Left = 0
+        Top = 0
+        Width = 432
+        Height = 270
+        Align = alClient
+        Lines.Strings = (
+          '')
+        TabOrder = 0
+      end
+    end
   end
   object Panel1: TPanel
     Left = 0
-    Top = 295
+    Top = 298
     Width = 440
     Height = 27
     Align = alBottom

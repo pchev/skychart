@@ -349,8 +349,6 @@ traceon:=true;
 catalog:=Tcatalog.Create(self);
 planet:=Tplanet.Create(self);
 Fits:=TFits.Create(self);
-//planet.OnAsteroidConfig:=OpenAsteroidConfig;
-//planet.OnCometConfig:=OpenCometConfig;
 {$ifdef mswindows}
 DdeOpen := false;
 DdeEnqueue := false;
@@ -677,6 +675,10 @@ procedure Tf_main.ShowPicturesExecute(Sender: TObject);
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    sc.cfgsc.ShowImages:=not sc.cfgsc.ShowImages;
+   if sc.cfgsc.ShowImages and (not Fits.dbconnected) then begin
+      sc.cfgsc.ShowImages:=false;
+      showmessage('Error! Please check the database parameters and load the picture package.');
+   end;
    Refresh;
 end;
 end;
@@ -698,18 +700,33 @@ end;
 end;
 
 procedure Tf_main.ShowAsteroidsExecute(Sender: TObject);
+var showast:boolean;
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    sc.cfgsc.ShowAsteroid:=not sc.cfgsc.ShowAsteroid;
+   showast:=sc.cfgsc.ShowAsteroid;
    Refresh;
+   if showast<>sc.cfgsc.ShowAsteroid then begin
+      f_info.setpage(2);
+      f_info.show;
+      f_info.ProgressMemo.lines.add('Compute asteroid data for this date');
+      if Planet.PrepareAsteroid(sc.cfgsc.curjd, f_info.ProgressMemo.lines) then begin
+         sc.cfgsc.ShowAsteroid:=true;
+         Refresh;
+      end;
+      f_info.close;   
+   end;
 end;
 end;
 
 procedure Tf_main.ShowCometsExecute(Sender: TObject);
+var showcom:boolean;
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
+   showcom:=sc.cfgsc.ShowComet;
    Refresh;
+   if showcom<>sc.cfgsc.ShowComet then showmessage('Error! Please check the database parameters and load the comete data file.');
 end;
 end;
 
@@ -895,23 +912,6 @@ end;
 procedure Tf_main.ApplyConfig(Sender: TObject);
 begin
  activateconfig;
-end;
-
-procedure Tf_main.OpenAsteroidConfig(Sender: TObject);
-var i:integer;
-begin
-
-end;
-
-procedure Tf_main.OpenCometConfig(Sender: TObject);
-var i:integer;
-begin
-
-end;
-
-procedure Tf_main.OpenDBConfig(Sender: TObject);
-begin
-
 end;
 
 procedure Tf_main.activateconfig;

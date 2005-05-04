@@ -56,6 +56,8 @@ type
     Button6: TButton;
     Button7: TButton;
     SaveDialog1: TSaveDialog;
+    ProgressMessages: TTabSheet;
+    ProgressMemo: TMemo;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure closeconnectionClick(Sender: TObject);

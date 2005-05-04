@@ -24,7 +24,7 @@ object f_info: Tf_info
     Top = 0
     Width = 460
     Height = 311
-    ActivePage = objectlist
+    ActivePage = ProgressMessages
     Align = alClient
     TabOrder = 0
     object tcpinfo: TTabSheet
@@ -143,6 +143,18 @@ object f_info: Tf_info
           TabOrder = 4
           OnClick = Button7Click
         end
+      end
+    end
+    object ProgressMessages: TTabSheet
+      Caption = 'Progress Messages'
+      ImageIndex = 2
+      object ProgressMemo: TMemo
+        Left = 0
+        Top = 0
+        Width = 452
+        Height = 280
+        Align = alClient
+        TabOrder = 0
       end
     end
   end
