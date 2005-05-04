@@ -56,7 +56,7 @@ type
     { Protected declarations }
   public
     { Public declarations }
-     invertx, inverty : boolean;
+     dbconnected, invertx, inverty : boolean;
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
      Function ConnectDB(host,db,user,pass:string; port:integer):boolean;
@@ -86,6 +86,7 @@ begin
 inherited Create(AOwner);
 SetITT;
 db1:=TMyDB.create(nil);
+dbconnected:=false;
 end;
 
 destructor  TFits.Destroy; 
@@ -724,8 +725,10 @@ begin
 try
   db1.SetPort(port);
   db1.Connect(host,user,pass,db);
-  result:=db1.Active;
+  dbconnected:=db1.Active;
+  result:=dbconnected;
 except
+  dbconnected:=false;
   result:=false;
 end;
 end;

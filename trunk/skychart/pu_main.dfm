@@ -2652,7 +2652,7 @@ object f_main: Tf_main
     Left = 0
     Top = 51
     Width = 23
-    Height = 456
+    Height = 460
     Align = alLeft
     AutoSize = True
     BevelOuter = bvNone
@@ -2736,7 +2736,7 @@ object f_main: Tf_main
     Left = 760
     Top = 51
     Width = 23
-    Height = 456
+    Height = 460
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
@@ -2867,7 +2867,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Left = 0
-    Top = 507
+    Top = 511
     Width = 783
     Height = 30
     Align = alBottom

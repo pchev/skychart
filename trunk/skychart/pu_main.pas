@@ -426,9 +426,6 @@ type
     procedure CenterFindObj(chart:string);
     procedure NeighborObj(chart:string);
     procedure ConnectDB;
-    procedure OpenAsteroidConfig(Sender: TObject);
-    procedure OpenCometConfig(Sender: TObject);
-    procedure OpenDBConfig(Sender: TObject);
     procedure ImageSetFocus(Sender: TObject);
     procedure ListInfo(buf:string);
     procedure GetTCPInfo(i:integer; var buf:string);

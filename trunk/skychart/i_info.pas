@@ -64,15 +64,21 @@ procedure Tf_info.FormShow(Sender: TObject);
 begin
 case Pagecontrol1.ActivepageIndex of
 0: begin
+   panel1.visible:=true;
    Button2Click(self);
    Timer1.enabled:=CheckBox1.Checked;
    end;
 1: begin
+   panel1.visible:=true;
    memo1.setfocus;
    memo1.SelStart:=0;
    memo1.SelLength:=0;
    end;
-end;   
+2: begin
+   panel1.visible:=false;
+   f_info.ProgressMemo.clear;
+   end;
+end;
 end;
 
 procedure Tf_info.setpage(n:integer);
