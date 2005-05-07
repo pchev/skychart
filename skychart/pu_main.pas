@@ -374,11 +374,13 @@ type
     procedure EditCopy1Execute(Sender: TObject);
   private
     { Private declarations }
+    cryptedpwd:string;
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
     Procedure GetAppDir;
     procedure ViewTopPanel;
+    procedure ApplyConfig(Sender: TObject);    
   public
     { Public declarations }
     cfgm : conf_main;
@@ -433,7 +435,8 @@ type
     procedure PrintSetup(Sender: TObject);
     procedure GetChartConfig(var csc:conf_skychart);
     procedure DrawChart(var csc:conf_skychart);
-    procedure ApplyConfig(Sender: TObject);    
+    procedure ConfigDBChange(Sender: TObject);
+    function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
   end;
 
 var
