@@ -262,7 +262,7 @@ object f_config_solsys: Tf_config_solsys
         Top = 4
         Width = 481
         Height = 420
-        ActivePage = comsetting
+        ActivePage = comload
         TabOrder = 0
         object comsetting: TTabSheet
           Caption = 'General Setting'
@@ -358,7 +358,7 @@ object f_config_solsys: Tf_config_solsys
           ImageIndex = 1
           object Label233: TLabel
             Left = 8
-            Top = 112
+            Top = 104
             Width = 60
             Height = 20
             Caption = 'Messages:'
