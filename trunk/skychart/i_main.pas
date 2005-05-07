@@ -880,6 +880,8 @@ screen.cursor:=crHourGlass;
 if f_config=nil then begin
    f_config:=Tf_config.Create(application);
    f_config.onApplyConfig:=ApplyConfig;
+   f_config.onDBChange:=ConfigDBChange;
+   f_config.onPrepareAsteroid:=PrepareAsteroid;
    f_config.Fits:=fits;
    f_config.catalog:=catalog;
 end;
@@ -909,9 +911,24 @@ screen.cursor:=crDefault;
 end;
 end;
 
+function Tf_main.PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+begin
+ result:=planet.PrepareAsteroid(jdt,msg);
+end;
+
 procedure Tf_main.ApplyConfig(Sender: TObject);
 begin
  activateconfig;
+end;
+
+procedure Tf_main.ConfigDBChange(Sender: TObject);
+begin
+cfgm.dbhost:=f_config.cmain.dbhost;
+cfgm.db:=f_config.cmain.db;
+cfgm.dbuser:=f_config.cmain.dbuser;
+cfgm.dbpass:=f_config.cmain.dbpass;
+cfgm.dbport:=f_config.cmain.dbport;
+ConnectDB;
 end;
 
 procedure Tf_main.activateconfig;
@@ -1687,7 +1704,8 @@ cfgm.dbhost:=ReadString(section,'dbhost',cfgm.dbhost);
 cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
 cfgm.db:=ReadString(section,'db',cfgm.db);
 cfgm.dbuser:=ReadString(section,'dbuser',cfgm.dbuser);
-cfgm.dbpass:=ReadString(section,'dbpass',cfgm.dbpass);
+cryptedpwd:=ReadString(section,'dbpass',cfgm.dbpass);
+cfgm.dbpass:=DecryptStr(cryptedpwd,encryptpwd);
 cfgm.ImagePath:=ReadString(section,'ImagePath',cfgm.ImagePath);
 cfgm.ImageLuminosity:=ReadFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
 cfgm.ImageContrast:=ReadFloat(section,'ImageContrast',cfgm.ImageContrast);
@@ -1745,7 +1763,10 @@ if Config_Version < '3.0.0.7' then begin
    catalog.cfgshr.BigNebLimit:=211;
    catalog.cfgshr.NebMagFilter[4]:=99;
 end;
-SaveDefault;   
+if Config_Version < '3.0.0.8' then begin
+   cfgm.dbpass:=cryptedpwd;
+end;
+SaveDefault;
 end;
 
 procedure Tf_main.SaveDefault;
@@ -2010,7 +2031,7 @@ WriteString(section,'dbhost',cfgm.dbhost);
 WriteInteger(section,'dbport',cfgm.dbport);
 WriteString(section,'db',cfgm.db);
 WriteString(section,'dbuser',cfgm.dbuser);
-WriteString(section,'dbpass',cfgm.dbpass);
+WriteString(section,'dbpass',encryptStr(cfgm.dbpass,encryptpwd));
 WriteString(section,'ImagePath',cfgm.ImagePath);
 WriteFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
 WriteFloat(section,'ImageContrast',cfgm.ImageContrast);
@@ -2665,19 +2686,18 @@ end;
 procedure Tf_main.ConnectDB;
 begin
 try
-//if def_cfgsc.ShowAsteroid or def_cfgsc.ShowComet then begin
     if (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
         Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
         f_calendar.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
+        SetLpanel1('Connected to SQL database '+cfgm.db);
     end else begin
-          SetLpanel1('MySQL database not available.');
+          SetLpanel1('SQL database not available.');
           def_cfgsc.ShowAsteroid:=false;
           def_cfgsc.ShowComet:=false;
           def_cfgsc.ShowImages:=false;
     end;
-//end;
 except
-  SetLpanel1('MySQL database not available.');
+  SetLpanel1('SQL database not available.');
 end;
 end;
 
