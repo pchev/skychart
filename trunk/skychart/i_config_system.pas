@@ -31,6 +31,12 @@ end;
 
 procedure Tf_config_system.FormShow(Sender: TObject);
 begin
+if db=nil then
+  if DBtype=mysql then
+     db:=TMyDB.create(self)
+  else if DBtype=sqlite then
+     db:=TLiteDB.create(self);
+dbchanged:=false;
 ShowSYS;
 ShowServer;
 ShowTelescope;
@@ -38,6 +44,19 @@ end;
 
 procedure Tf_config_system.ShowSYS;
 begin
+case DBtype of
+ sqlite : begin
+           DBtypeGroup.itemindex:=0;
+           MysqlBox.visible:=false;
+           SqliteBox.visible:=true;
+          end;
+ mysql :  begin
+           DBtypeGroup.itemindex:=1;
+           MysqlBox.visible:=true;
+           SqliteBox.visible:=false;
+          end;
+end;
+dbnamesqlite.Text:=cmain.db;
 dbname.Text:=cmain.db;
 dbhost.Text:=cmain.dbhost;
 dbport.value:=cmain.dbport;
@@ -99,28 +118,58 @@ for i:=0 to NumIndiDriver do IndiDev.items.add(IndiDriverLst[i,1]);
 for i:=0 to NumIndiDriver do if IndiDriverLst[i,1]=csc.IndiDevice then IndiDev.itemindex:=i;
 end;
 
+procedure Tf_config_system.DBtypeGroupClick(Sender: TObject);
+begin
+case DBtypeGroup.ItemIndex of
+  0 : begin
+        DBtype:=sqlite;
+        MysqlBox.visible:=false;
+        SqliteBox.visible:=true;
+        dbnamesqlite.text:=slash(privatedir)+slash('data')+defaultSqliteDB;
+      end;
+  1 : begin
+        DBtype:=mysql;
+        MysqlBox.visible:=true;
+        SqliteBox.visible:=false;
+        dbname.text:=defaultMySqlDB;
+      end;
+end;
+dbchanged:=true;
+end;
+
+procedure Tf_config_system.dbnamesqliteChange(Sender: TObject);
+begin
+if cmain.db<>dbnamesqlite.text then dbchanged:=true;
+cmain.db:=dbnamesqlite.text;
+end;
+
 procedure Tf_config_system.dbnameChange(Sender: TObject);
 begin
+if cmain.db<>dbname.Text then dbchanged:=true;
 cmain.db:=dbname.Text;
 end;
 
 procedure Tf_config_system.dbhostChange(Sender: TObject);
 begin
+if cmain.dbhost<>dbhost.Text then dbchanged:=true;
 cmain.dbhost:=dbhost.Text;
 end;
 
 procedure Tf_config_system.dbportChange(Sender: TObject);
 begin
+if cmain.dbport<>dbport.Value then dbchanged:=true;
 cmain.dbport:=dbport.Value;
 end;
 
 procedure Tf_config_system.dbuserChange(Sender: TObject);
 begin
+if cmain.dbuser<>dbuser.Text then dbchanged:=true;
 cmain.dbuser:=dbuser.Text;
 end;
 
 procedure Tf_config_system.dbpassChange(Sender: TObject);
 begin
+if cmain.dbpass<>dbpass.Text then dbchanged:=true;
 cmain.dbpass:=dbpass.Text;
 end;
 
@@ -129,52 +178,61 @@ var msg: string;
     i:integer;
 label dmsg;
 begin
-db:=TMyDB.create(self);
 screen.cursor:=crHourGlass;
 try
-  db.SetPort(cmain.dbport);
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
-  if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
-     else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+trim(db.GetLastError)+crlf+'Verify if the MySQL Server is running and control the Userid/Password'; goto dmsg;end;
-  if db.SelectDatabase(cmain.db) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
-     else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.GetLastError)+crlf; goto dmsg;end;
+  if DBtype=mysql then begin
+    db.SetPort(cmain.dbport);
+    db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
+    if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
+       else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+trim(db.ErrorMessage)+crlf+'Verify if the MySQL Server is running and control the Userid/Password'; goto dmsg;end;
+  end;
+  if ((db.database=cmain.db)or db.use(cmain.db)) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
+     else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.ErrorMessage)+crlf; goto dmsg;end;
   for i:=1 to numsqltable do begin
-     if sqltable[i,1]=db.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"') then msg:=msg+'Table exist '+sqltable[i,1]+crlf
+     if sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then msg:=msg+'Table exist '+sqltable[i,1]+crlf
         else begin msg:=msg+'Table '+sqltable[i,1]+' do not exist! '+crlf+'Please correct the error and retry.' ; goto dmsg;end;
   end;
   msg:=msg+'All is OK!';
 dmsg:
   screen.cursor:=crDefault;
   ShowMessage(msg);
-  db.Free;
 except
-screen.cursor:=crDefault;
-db.Free;
-msg:='MySQL database software is probably not installed!';
-ShowMessage(msg);
+  screen.cursor:=crDefault;
+  msg:='SQL database software is probably not installed!';
+  ShowMessage(msg);
 end;
 end;
 
 procedure Tf_config_system.credbClick(Sender: TObject);
 var msg:string;
-    i:integer;
+    i,j:integer;
     ok:boolean;
 begin
 ok:=false;
-db:=TMyDB.create(self);
 try
-  db.SetPort(cmain.dbport);
-  db.database:='';
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
-  if db.Active then db.Query('Create Database if not exists '+cmain.db);
-  msg:=trim(db.GetLastError);
-  if msg<>'' then showmessage(msg);
-  if db.SelectDatabase(cmain.db) then begin
+  if DBtype=mysql then begin
+     db.SetPort(cmain.dbport);
+     db.database:='';
+     db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
+     if db.Active then db.Query('Create Database if not exists '+cmain.db);
+     msg:=trim(db.ErrorMessage);
+     if msg<>'0' then showmessage(msg);
+     db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
+  end;
+  if db.database<>cmain.db then db.Use(cmain.db);
+  if db.database=cmain.db then begin
     ok:=true;
     for i:=1 to numsqltable do begin
-      db.Query('CREATE TABLE if not exists '+sqltable[i,1]+sqltable[i,2]);
-      msg:=trim(db.GetLastError);
-      if sqltable[i,1]<>db.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"') then begin
+      if DBtype=sqlite then
+          db.Query('CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]))
+      else
+          db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
+      msg:=trim(db.ErrorMessage);
+      if sqltable[i,3]>'' then begin   // create the index
+         j:=strtoint(sqltable[i,3]);
+         db.Query('CREATE INDEX '+sqlindex[j,1]+' on '+sqlindex[j,2]);
+      end;
+      if sqltable[i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then begin
          ok:=false;
          msg:='Error creating table '+sqltable[i,1]+' '+msg;
          showmessage(msg);
@@ -183,17 +241,17 @@ try
     end;
   end else begin
      ok:=false;
-     msg:=trim(db.GetLastError);
-     if msg<>'' then showmessage(msg);
+     msg:=trim(db.ErrorMessage);
+     if msg<>'0' then showmessage(msg);
   end;
-  db.Query('FLUSH TABLES');
-  db.Free;
+  db.Query(flushtable[dbtype]);
 except
-db.Free;
 end;
 if ok then begin
+  // signal new database
+  if Assigned(FDBChange) then FDBChange(self);
   // load sample data
-  if Assigned(FLoadMPCSample) then FLoadMPCSample(self);  
+  if Assigned(FLoadMPCSample) then FLoadMPCSample(self);
 end;
 chkdbClick(Sender);
 end;
@@ -203,19 +261,20 @@ var msg:string;
 begin
 if messagedlg('Warning!'+crlf+'You are about to destroy the database '+cmain.db+' and all it''s content, even if this content is not related to this program.'+crlf+'Are you sure you want to continue?',
               mtWarning, [mbYes,mbNo], 0)=mrYes then begin
-db:=TMyDB.create(self);
-try
+if DBtype=mysql then
+  try
   db.SetPort(cmain.dbport);
   db.database:='';
   db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
   if db.Active then db.Query('Drop Database '+cmain.db);
-  msg:=trim(db.GetLastError);
-  if msg<>'' then showmessage(msg);
-  db.Free;
-except
-db.Free;
-end;
-end;
+  msg:=trim(db.ErrorMessage);
+  if msg<>'0' then showmessage(msg);
+  // signal database no more exists
+  if Assigned(FDBChange) then FDBChange(self);
+  except
+  end;
+end else if DBtype=sqlite then
+  Deletefile(cmain.db);
 end;
 
 procedure Tf_config_system.AstDBClick(Sender: TObject);
@@ -226,6 +285,11 @@ end;
 procedure Tf_config_system.CometDBClick(Sender: TObject);
 begin
  if Assigned(FShowComet) then FShowComet(self);
+end;
+
+procedure Tf_config_system.FrameExit(Sender: TObject);
+begin
+ if dbchanged and Assigned(FDBChange) then FDBChange(self);
 end;
 
 procedure Tf_config_system.BitBtn1Click(Sender: TObject);

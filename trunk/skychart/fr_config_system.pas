@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, fu_directory,  passql, pasmysql,
+uses u_constant, u_util, fu_directory,  passql, pasmysql, passqlite,
   SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
   QDialogs, QExtCtrls, QStdCtrls, QButtons, enhedits, QComCtrls;
 
@@ -31,7 +31,7 @@ type
     pa_system: TPageControl;
     t_system: TTabSheet;
     Label84: TLabel;
-    GroupBox6: TGroupBox;
+    MysqlBox: TGroupBox;
     dbname: TEdit;
     dbport: TLongEdit;
     dbhost: TEdit;
@@ -42,11 +42,6 @@ type
     dbpass: TEdit;
     Label144: TLabel;
     Label145: TLabel;
-    chkdb: TButton;
-    credb: TButton;
-    dropdb: TButton;
-    AstDB: TButton;
-    CometDB: TButton;
     GroupBoxDir: TGroupBox;
     Label73: TLabel;
     Label74: TLabel;
@@ -83,6 +78,16 @@ type
     Label260: TLabel;
     Label261: TLabel;
     IndiPort: TEdit;
+    GroupBox1: TGroupBox;
+    chkdb: TButton;
+    credb: TButton;
+    dropdb: TButton;
+    CometDB: TButton;
+    AstDB: TButton;
+    DBtypeGroup: TRadioGroup;
+    SQLiteBox: TGroupBox;
+    Label1: TLabel;
+    dbnamesqlite: TEdit;
     procedure dbnameChange(Sender: TObject);
     procedure dbhostChange(Sender: TObject);
     procedure dbportChange(Sender: TObject);
@@ -111,12 +116,17 @@ type
     procedure LinuxCmdChange(Sender: TObject);
     procedure AstDBClick(Sender: TObject);
     procedure CometDBClick(Sender: TObject);
+    procedure DBtypeGroupClick(Sender: TObject);
+    procedure dbnamesqliteChange(Sender: TObject);
+    procedure FrameExit(Sender: TObject);
   private
     { Private declarations }
-    db:TmyDB;
+    db:TSqlDB;
     FShowAsteroid: TNotifyEvent;
     FShowComet: TNotifyEvent;
     FLoadMPCSample: TNotifyEvent;
+    FDBChange: TNotifyEvent;
+    dbchanged: boolean;
     procedure ShowSYS;
     procedure ShowServer;
     procedure ShowTelescope;
@@ -136,6 +146,7 @@ type
     property onShowAsteroid: TNotifyEvent read FShowAsteroid write FShowAsteroid;
     property onShowComet: TNotifyEvent read FShowComet write FShowComet;
     property onLoadMPCSample: TNotifyEvent read FLoadMPCSample write FLoadMPCSample;
+    property onDBChange: TNotifyEvent read FDBChange write FDBChange;
   end;
 
 var

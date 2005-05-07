@@ -4,6 +4,7 @@ object f_config_system: Tf_config_system
   Width = 490
   Height = 440
   TabOrder = 0
+  OnExit = FrameExit
   object pa_system: TPageControl
     Left = 0
     Top = 0
@@ -22,11 +23,11 @@ object f_config_system: Tf_config_system
         Height = 13
         Caption = 'System Setting'
       end
-      object GroupBox6: TGroupBox
+      object MysqlBox: TGroupBox
         Left = 16
-        Top = 26
+        Top = 48
         Width = 441
-        Height = 175
+        Height = 97
         Caption = 'MySQL  Database'
         TabOrder = 0
         object Label77: TLabel
@@ -96,7 +97,7 @@ object f_config_system: Tf_config_system
           Top = 64
           Width = 100
           Height = 21
-          TabOrder = 5
+          TabOrder = 3
           Text = 'dbuser'
           OnChange = dbuserChange
         end
@@ -106,59 +107,14 @@ object f_config_system: Tf_config_system
           Width = 100
           Height = 21
           PasswordChar = '*'
-          TabOrder = 7
+          TabOrder = 4
           Text = 'dbpass'
           OnChange = dbpassChange
-        end
-        object chkdb: TButton
-          Left = 16
-          Top = 104
-          Width = 97
-          Height = 25
-          Caption = 'Check'
-          TabOrder = 3
-          OnClick = chkdbClick
-        end
-        object credb: TButton
-          Left = 168
-          Top = 104
-          Width = 97
-          Height = 25
-          Caption = 'Create Database'
-          TabOrder = 4
-          OnClick = credbClick
-        end
-        object dropdb: TButton
-          Left = 328
-          Top = 104
-          Width = 97
-          Height = 25
-          Caption = 'Drop Database'
-          TabOrder = 6
-          OnClick = dropdbClick
-        end
-        object AstDB: TButton
-          Left = 16
-          Top = 136
-          Width = 97
-          Height = 25
-          Caption = 'Asteroid Setting'
-          TabOrder = 8
-          OnClick = AstDBClick
-        end
-        object CometDB: TButton
-          Left = 168
-          Top = 136
-          Width = 97
-          Height = 25
-          Caption = 'Comet Setting'
-          TabOrder = 9
-          OnClick = CometDBClick
         end
       end
       object GroupBoxDir: TGroupBox
         Left = 16
-        Top = 216
+        Top = 256
         Width = 441
         Height = 105
         Caption = 'Directory'
@@ -271,6 +227,98 @@ object f_config_system: Tf_config_system
           Layout = blGlyphTop
           Margin = 0
         end
+      end
+      object GroupBox1: TGroupBox
+        Left = 16
+        Top = 144
+        Width = 441
+        Height = 81
+        TabOrder = 2
+        object chkdb: TButton
+          Left = 16
+          Top = 16
+          Width = 97
+          Height = 25
+          Caption = 'Check'
+          TabOrder = 0
+          OnClick = chkdbClick
+        end
+        object credb: TButton
+          Left = 168
+          Top = 16
+          Width = 97
+          Height = 25
+          Caption = 'Create Database'
+          TabOrder = 1
+          OnClick = credbClick
+        end
+        object dropdb: TButton
+          Left = 328
+          Top = 16
+          Width = 97
+          Height = 25
+          Caption = 'Drop Database'
+          TabOrder = 2
+          OnClick = dropdbClick
+        end
+        object CometDB: TButton
+          Left = 168
+          Top = 48
+          Width = 97
+          Height = 25
+          Caption = 'Comet Setting'
+          TabOrder = 3
+          OnClick = CometDBClick
+        end
+        object AstDB: TButton
+          Left = 16
+          Top = 48
+          Width = 97
+          Height = 25
+          Caption = 'Asteroid Setting'
+          TabOrder = 4
+          OnClick = AstDBClick
+        end
+      end
+      object SqliteBox: TGroupBox
+        Left = 16
+        Top = 48
+        Width = 441
+        Height = 97
+        Caption = 'Sqlite Database'
+        TabOrder = 3
+        Visible = False
+        object Label1: TLabel
+          Left = 16
+          Top = 44
+          Width = 68
+          Height = 13
+          Caption = 'Database file: '
+        end
+        object dbnamesqlite: TEdit
+          Left = 128
+          Top = 40
+          Width = 281
+          Height = 21
+          TabOrder = 0
+          Text = 'dbnamesqlite'
+          OnChange = dbnamesqliteChange
+        end
+      end
+      object DBtypeGroup: TRadioGroup
+        Left = 120
+        Top = 0
+        Width = 337
+        Height = 41
+        Caption = 'DBtypeGroup'
+        Columns = 2
+        ItemIndex = 0
+        Items.Strings = (
+          'SQLite'
+          'MySQL')
+        TabOrder = 4
+        Visible = False
+        OnClick = DBtypeGroupClick
       end
     end
     object t_server: TTabSheet

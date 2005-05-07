@@ -27,7 +27,10 @@ procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
 begin
 ShowImage:=Tf_image.Create(self);
-db:=TMyDB.create(self);
+if DBtype=mysql then
+   db:=TMyDB.create(self)
+else if DBtype=sqlite then
+   db:=TLiteDB.create(self);
 decodedate(now,yy,mm,dd);
 date1.Year:=yy;
 date1.Month:=mm;
@@ -1531,9 +1534,16 @@ end;
 Function Tf_calendar.ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
 begin
 try
-  db.SetPort(port);
-  db.Connect(host,user,pass,dbn);
-  result:=db.Active;
+if DBtype=mysql then
+   db:=TMyDB.create(self)
+else if DBtype=sqlite then
+   db:=TLiteDB.create(self);
+if DBtype=mysql then begin
+   db.SetPort(port);
+   db.Connect(host,user,pass,dbn);
+end;
+db.Use(dbn);
+result:=db.Active;
 except
   result:=false;
 end;

@@ -28,9 +28,11 @@ compage:=22;
 astpage:=23;
 dbpage:=37;
 f_config_solsys1.onShowDB:=ShowDBSetting;
+f_config_solsys1.onPrepareAsteroid:=SolSysPrepareAsteroid;
 f_config_system1.onShowAsteroid:=ShowAsteroidSetting;
 f_config_system1.onShowComet:=ShowCometSetting;
 f_config_system1.onLoadMPCSample:=LoadMPCSample;
+f_config_system1.onDBChange:=SysDBChange;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
@@ -120,6 +122,17 @@ end;
 procedure Tf_config.LoadMPCSample(Sender: TObject);
 begin
 f_config_solsys1.LoadSampleData;
+end;
+
+procedure Tf_config.SysDBChange(Sender: TObject);
+begin
+ if Assigned(FDBChange) then FDBChange(self);
+end;
+
+function Tf_config.SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+begin
+ if assigned(FPrepareAsteroid) then result:=FPrepareAsteroid(jdt,msg)
+   else result:=false;
 end;
 
 function Tf_config.GetFits: TFits;

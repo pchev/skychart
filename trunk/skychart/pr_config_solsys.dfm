@@ -9,7 +9,7 @@ object f_config_solsys: Tf_config_solsys
     Top = 0
     Width = 490
     Height = 443
-    ActivePage = t_asteroid
+    ActivePage = t_comet
     Align = alClient
     TabOrder = 0
     object t_solsys: TTabSheet
@@ -262,8 +262,8 @@ object f_config_solsys: Tf_config_solsys
         Top = 4
         Width = 481
         Height = 429
-        ActivePage = comsetting
-        TabIndex = 0
+        ActivePage = comload
+        TabIndex = 1
         TabOrder = 0
         object comsetting: TTabSheet
           Caption = 'General Setting'
@@ -405,6 +405,7 @@ object f_config_solsys: Tf_config_solsys
               Height = 26
               TabOrder = 2
               TabStop = False
+              OnClick = comfilebtnClick
               Glyph.Data = {
                 36030000424D3603000000000000360000002800000010000000100000000100
                 1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
@@ -469,7 +470,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 0
+              ItemHeight = 13
               TabOrder = 0
             end
             object DelCom: TButton
