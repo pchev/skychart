@@ -568,8 +568,8 @@ fillchar(rec,sizeof(rec),0);
 cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
 dyear:=0;
 first:=true;
-try
 saveplot:=Fplot.cfgplot.starplot;
+try
 if Fcatalog.OpenStar then
  while Fcatalog.readstar(rec) do begin
  if first then begin
@@ -838,7 +838,7 @@ if not cfgsc.ShowMilkyWay then exit;
 if cfgsc.fov<(deg2rad*2) then exit;
 fillchar(rec,sizeof(rec),0);
 first:=true;
-col:=0;lw:=1;fs:=1;
+lw:=1;fs:=1;
 if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
 else begin
    col:=addcolor(FPlot.cfgplot.Color[22],FPlot.cfgplot.Color[0]);

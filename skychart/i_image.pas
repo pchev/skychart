@@ -45,7 +45,6 @@ begin
 end;
 
 Procedure Tf_image.ZoomN(n:double);
-var x : double;
 begin
    Image1.Zoom:=n;
    Image1.Draw;

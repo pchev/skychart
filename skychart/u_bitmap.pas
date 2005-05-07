@@ -194,16 +194,16 @@ end;
 		sinTheta       :  Single;
 		i              :  INTEGER;
 		iOriginal      :  INTEGER;
-		iRotationAxis  :  INTEGER;// Axis of rotation is normally center of image
+//		iRotationAxis  :  INTEGER;// Axis of rotation is normally center of image
 		iPrime         :  INTEGER;
 //		iPrimeRotated  :  INTEGER; use width if doubled
 		j              :  INTEGER;
 		jOriginal      :  INTEGER;
-		jRotationAxis  :  INTEGER;
+//		jRotationAxis  :  INTEGER;
 		jPrime         :  INTEGER;
 //		jPrimeRotated  :  INTEGER; use height if doubled
 		NewWidth,NewHeight:INTEGER;
-		nBytes, nBits: Integer;//no. bytes per pixelformat
+		nBytes: Integer;//no. bytes per pixelformat
 		Oht,Owi,Rht,Rwi: Integer;//Original and Rotated subscripts to bottom/right
 //The variant pixel formats for subscripting       1/6/00
 	type // from Delphi
@@ -218,12 +218,12 @@ end;
 		RowRotatedQ: pRGBquadArray;  	//4 bytes
 	var //a single pixel for each format 	1/8/00
 		TransparentB: Byte;
-		TransparentW: Word;
+//		TransparentW: Word;
 		//TransparentT: TRGBTriple;
 		TransparentQ: TRGBQuad;
   var
    // DIB: TDIBSection;//10/31/00
-    Center:  TPOINT; //the middle of the bmp relative to bmp origin.
+//    Center:  TPOINT; //the middle of the bmp relative to bmp origin.
     SiCoPhi: SiCoDiType;//sine,cosine, distance
 {=======================================}
 begin
@@ -284,8 +284,8 @@ with BitMapOriginal do begin
 	BitmapRotated.Width  := NewWidth;   //resize it for rotation
 	BitmapRotated.Height := NewHeight;
 //center of rotation is center of bitmap
-  iRotationAxis := width div 2;
-  jRotationAxis := height div 2;
+//  iRotationAxis := width div 2;
+//  jRotationAxis := height div 2;
 
 //local constants for loop, each was hit at least width*height times   1/8/00
 	Rwi := NewWidth - 1; //right column index
@@ -299,6 +299,7 @@ with BitMapOriginal do begin
 //        PWordArray  ( Scanline[ Oht ] )[0]:=TransparentColor;
 //        if nBytes>2 then PWordArray  ( Scanline[ Oht ] )[1]:=TransparentColor;
         // force transparent color
+        TransparentB:=0;
 	case nBytes of
 		0,1:    TransparentB := TransCol; // PByteArray     ( Scanline[ Oht ] )[0];
 //		2:	TransparentW := TransCol; //:= PWordArray     ( Scanline[ Oht ] )[0];
@@ -312,6 +313,7 @@ with BitMapOriginal do begin
 	end;//case *)
 
 // Step through each row of rotated image.
+        RowRotatedQ:=nil;  RowRotatedB:=nil;
 	FOR j := Rht DOWNTO 0 DO   //1/8/00
 	BEGIN //for j
 
