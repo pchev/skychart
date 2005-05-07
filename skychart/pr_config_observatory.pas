@@ -108,7 +108,7 @@ type
   private
     { Private declarations }
     scrolllock,obslock:boolean;
-    EarthMapZoom: double;
+//    EarthMapZoom: double;
     Obsposx,Obsposy : integer;
     scrollw, scrollh : integer;
     ObsMapFile:string;

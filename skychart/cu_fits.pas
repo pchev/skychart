@@ -2,7 +2,7 @@ unit cu_fits;
 
 interface
 
-uses u_util, u_constant, u_projection, SysUtils, Classes, Math, passql, pasmysql, StrUtils,
+uses u_util, u_constant, u_projection, SysUtils, Classes, Math, passql, pasmysql, passqlite, StrUtils,
 {$ifdef mswindows}
 Windows,  Graphics;
 {$endif}
@@ -30,7 +30,7 @@ const    maxl = 4000;
 type
   TFits = class(TComponent)
   private
-    db1 : TMyDB;
+    db1 : TSqlDB;
     d8  : array[1..2880] of byte;
     d16 : array[1..1440] of word;
     d32 : array[1..720] of Longword;
@@ -85,7 +85,10 @@ constructor TFits.Create(AOwner:TComponent);
 begin
 inherited Create(AOwner);
 SetITT;
-db1:=TMyDB.create(nil);
+if DBtype=mysql then
+   db1:=TMyDB.create(nil)
+else if DBtype=sqlite then
+   db1:=TLiteDB.create(nil);
 dbconnected:=false;
 end;
 
@@ -722,11 +725,19 @@ end;
 
 Function TFits.ConnectDB(host,db,user,pass:string; port:integer):boolean;
 begin
+db1.Free; db1:=nil;
+if DBtype=mysql then
+   db1:=TMyDB.create(nil)
+else if DBtype=sqlite then
+   db1:=TLiteDB.create(nil);
 try
+if DBtype=mysql then begin
   db1.SetPort(port);
   db1.Connect(host,user,pass,db);
-  dbconnected:=db1.Active;
-  result:=dbconnected;
+end;
+db1.Use(db);
+dbconnected:=db1.Active;
+result:=dbconnected;
 except
   dbconnected:=false;
   result:=false;

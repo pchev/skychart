@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses u_constant, cu_fits, cu_catalog,
+uses u_constant, u_util, u_projection, cu_fits, cu_catalog, 
   SysUtils, Classes, QForms,Types, QStyle,
   QStdCtrls, QComCtrls, QControls, QGraphics, QExtCtrls, QGrids, QButtons,
   QDialogs, QMask, QCheckLst, QTypes, fr_config_time, fr_config_observatory,
@@ -81,6 +81,8 @@ type
     Fcmain : conf_main;
     astpage,compage,dbpage: integer;
     FApplyConfig: TNotifyEvent;
+    FDBChange: TNotifyEvent;
+    FPrepareAsteroid: TPrepareAsteroid;
     function GetFits: TFits;
     procedure SetFits(value: TFits);
     function GetCatalog: Tcatalog;
@@ -94,6 +96,9 @@ type
     procedure ShowCometSetting(Sender: TObject);
     procedure ShowAsteroidSetting(Sender: TObject);
     procedure LoadMPCSample(Sender: TObject);
+    procedure SysDBChange(Sender: TObject);
+    function SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    
   public
     { Déclarations publiques }
     property ccat : conf_catalog read Fccat write SetCcat;
@@ -104,6 +109,8 @@ type
     property fits : TFits read GetFits write SetFits;
     property catalog : Tcatalog read GetCatalog write SetCatalog;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
+    property onDBChange: TNotifyEvent read FDBChange write FDBChange;
+    property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
   end;
 
 var

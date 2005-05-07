@@ -26,7 +26,7 @@ uses Math,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, Mask, Inifiles,
   cu_jdcalendar, cu_planet, u_constant, pu_image, Buttons, ExtCtrls,
-  passql, pasmysql, ActnList, StdActns;
+  passql, pasmysql, passqlite, ActnList, StdActns;
 
 type
     TScFunc = procedure(var csc:conf_skychart) of object;
@@ -34,7 +34,7 @@ type
                 jd,ra,dec : double;
                 end;
 
-const nummsg = 46;
+const nummsg = 47;
       maxcombo = 50;
 
 type
@@ -112,6 +112,7 @@ type
     ActionList1: TActionList;
     HelpContents1: THelpContents;
     memo1: TRichEdit;
+    SaveDialog1: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -138,7 +139,7 @@ type
     FGetChartConfig: TScFunc;
     Fupdchart: TScFunc;
     c: conf_skychart;
-    db : TMyDB;
+    db : TSqlDB;
     Feclipsepath: string;
     dat11,dat12,dat13,dat21,dat22,dat23,dat31,dat32,dat33,dat41,dat51,dat61,dat71,dat72,dat73 : double ;
     dat14,dat24,dat34,dat74,tz,west,east,title : string;
@@ -156,8 +157,8 @@ type
     procedure FreeCoord(var gr : Tstringgrid);
     procedure InitRiseCell(var gr : Tstringgrid);
     procedure PlanetRiseCell(var gr : Tstringgrid; i,irc : integer; hr,ht,hs,azr,azs,jda,h,ar,de : double);
-    procedure Gridetoclipboard(grid : tstringgrid);
-    procedure Gridetoprinter(grid : tstringgrid);
+    procedure SaveGrid(grid : tstringgrid);
+    procedure Gridtoprinter(grid : tstringgrid);
     procedure RefreshAll;
     procedure RefreshTwilight;
     procedure RefreshPlanet;

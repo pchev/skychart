@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_util, u_projection, cu_planet, passql, pasmysql,
+uses  u_constant, u_util, u_projection, passql, pasmysql, passqlite,
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Spin, enhedits, Mask, StdCtrls, Buttons, ExtCtrls, ComCtrls, FoldrDlg;
 
@@ -214,8 +214,9 @@ type
     procedure AddastClick(Sender: TObject);
   private
     { Private declarations }
-    db:TmyDB;
+    db:TSqlDB;
     FShowDB: TNotifyEvent;
+    FPrepareAsteroid: TPrepareAsteroid;
     procedure ShowPlanet;
     procedure ShowComet;
     procedure UpdComList;
@@ -224,7 +225,6 @@ type
   public
     { Public declarations }
     autoprocess: boolean;
-    planet: TPlanet;
     mycsc : conf_skychart;
     myccat : conf_catalog;
     mycshr : conf_shared;
@@ -238,6 +238,7 @@ type
     constructor Create(AOwner:TComponent); override;
     procedure LoadSampleData;
     property onShowDB: TNotifyEvent read FShowDB write FShowDB;
+    property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
   end;
 
 implementation

@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Types, libcatalog,
+uses Types, Classes, libcatalog,
 {$ifdef linux}
     QForms,QGraphics;
 {$endif}
@@ -69,6 +69,7 @@ const cdcversion = 'Version 3 alpha 0.0.8';
       FovMin = 2*secarc;  // 2"
       FovMax = pi2;
       DefaultPrtRes = 300;
+      encryptpwd = 'zh6Tiq4h;90uA3.ert';
       //                          0         1                                       5                                                 10                                                15                                                20                                                25                                                30                  32
       DfColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00008000,clYellow, clAqua,   $00202020,clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
       DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
@@ -394,6 +395,9 @@ type
                 ImageLuminosity, ImageContrast : double;
                 end;
 
+type
+  TPrepareAsteroid = function (jdt:double; msg:Tstrings):boolean of object;
+                  
 // external library
 const
 {$ifdef linux}
@@ -597,24 +601,41 @@ const
                   ('LX200 16','lx200_16'),
                   ('Celestron GPS','celestrongps'));
 
-// MySQL Table structure
+// Database
+type TDBtype = (mysql,sqlite);
 const
-create_table_ast_day=' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0") TYPE=MyISAM';
+    showtable : array[mysql..sqlite] of string =(
+                'show tables like',
+                'select name from sqlite_master where type="table" and name like'
+                );
+    flushtable : array[mysql..sqlite] of string =(
+                'flush tables',
+                ' '
+                );
+    truncatetable : array[mysql..sqlite] of string =(
+                'Truncate table',
+                'delete from'
+                );
+    defaultSqliteDB='cdc.db';
+    defaultMysqlDB='cdc';            
+var DBtype: TDBtype = mysql;
+
+// SQL Table structure
+const
+create_table_ast_day=' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
 create_table_ast_day_pos='( id varchar(7) NOT NULL default "", epoch double NOT NULL default "0",'+
                          'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
-                         'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag),'+
-                         'UNIQUE KEY name (id,epoch)) TYPE=MyISAM';
-create_table_com_day=' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0") TYPE=MyISAM';
+                         'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag))';
+create_table_com_day=' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
 create_table_com_day_pos='( id varchar(12) NOT NULL default "", epoch double NOT NULL default "0",'+
                          'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
-                         'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag),'+
-                         'UNIQUE KEY name (id,epoch)) TYPE=MyISAM';
+                         'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag))';
 numsqltable=8;
-sqltable : array[1..numsqltable,1..2] of string =(
+sqltable : array[1..numsqltable,1..3] of string =(
            ('cdc_ast_name',' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'+
-                           'PRIMARY KEY (id)) TYPE=MyISAM'),
+                           'PRIMARY KEY (id))',''),
            ('cdc_ast_elem_list',' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'+
-                           'PRIMARY KEY (elem_id)) TYPE=MyISAM'),
+                           'PRIMARY KEY (elem_id))',''),
            ('cdc_ast_elem',' ( id varchar(7) binary NOT NULL default "0",'+
                            'h double NOT NULL default "0", g double NOT NULL default "0",'+
                            'epoch double NOT NULL default "0", mean_anomaly double NOT NULL default "0",'+
@@ -622,15 +643,15 @@ sqltable : array[1..numsqltable,1..2] of string =(
                            'inclination double NOT NULL default "0", eccentricity double NOT NULL default "0",'+
                            'semi_axis double NOT NULL default "0", ref varchar(10) binary NOT NULL default "",'+
                            'name varchar(27) NOT NULL default "", equinox smallint(4) NOT NULL default "0",'+
-                           'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch)) TYPE=MyISAM'),
+                           'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch))',''),
            ('cdc_ast_mag',' ( id varchar(7) binary NOT NULL default "",'+
                           'jd double NOT NULL default "0", epoch double NOT NULL default "0",'+
                           'mag smallint(6) NOT NULL default "0", elem_id smallint(6) NOT NULL default "0",'+
-                          'PRIMARY KEY (jd,id), KEY ast_mag_idx  (mag)) TYPE=MyISAM'),
+                          'PRIMARY KEY (jd,id))','1'),
            ('cdc_com_name',' ( id varchar(12) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'+
-                           'PRIMARY KEY (id)) TYPE=MyISAM'),
+                           'PRIMARY KEY (id))',''),
            ('cdc_com_elem_list',' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'+
-                           'PRIMARY KEY (elem_id)) TYPE=MyISAM'),
+                           'PRIMARY KEY (elem_id))',''),
            ('cdc_com_elem',' ( id varchar(12) binary NOT NULL default "0",'+
                            'peri_epoch double NOT NULL default "0", peri_dist double NOT NULL default "0",'+
                            'eccentricity double NOT NULL default "0",'+
@@ -639,7 +660,7 @@ sqltable : array[1..numsqltable,1..2] of string =(
                            'epoch double NOT NULL default "0",'+
                            'h double NOT NULL default "0", g double NOT NULL default "0",'+
                            'name varchar(27) NOT NULL default "", equinox smallint(4) NOT NULL default "0",'+
-                           'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch)) TYPE=MyISAM'),
+                           'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch))',''),
            ('cdc_fits',' (filename varchar(255) NOT NULL default "", '+
                            'catalogname varchar(5)  NOT NULL default "", '+
                            'objectname varchar(25) NOT NULL default "", '+
@@ -648,10 +669,14 @@ sqltable : array[1..numsqltable,1..2] of string =(
                            'width double NOT NULL default "0", '+
                            'height double NOT NULL default "0", '+
                            'rotation  double NOT NULL default "0", '+
-                           'PRIMARY KEY (ra,de), '+
-                           'KEY objname (objectname) '+
-                           ') TYPE=MyISAM')
+                           'PRIMARY KEY (ra,de)'+
+                           ')','2')
                            );
+numsqlindex=2;
+sqlindex : array[1..numsqlindex,1..2] of string =(
+           ('ast_mag_idx','cdc_ast_mag (mag)'),
+           ('cdc_fits_objname','cdc_fits (objectname)')
+           );
 
 // World cities
 // must equate cities.h

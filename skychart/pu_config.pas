@@ -32,7 +32,7 @@ interface
 uses Math, u_constant, u_util, jpeg, pngimage, passql, pasmysql, u_projection,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
-  FoldrDlg, StrUtils,  cu_fits, cu_catalog,
+  FoldrDlg, StrUtils,  cu_fits, cu_catalog, 
   pr_config_chart, pr_config_observatory, pr_config_time, pr_config_catalog,
   pr_config_system, pr_config_pictures, pr_config_display, pr_config_solsys;
 
@@ -81,6 +81,8 @@ type
     Fcmain : conf_main;
     astpage,compage,dbpage: integer;
     FApplyConfig: TNotifyEvent;
+    FDBChange: TNotifyEvent;
+    FPrepareAsteroid: TPrepareAsteroid;
     function GetFits: TFits;
     procedure SetFits(value: TFits);
     function GetCatalog: Tcatalog;
@@ -94,6 +96,8 @@ type
     procedure ShowCometSetting(Sender: TObject);
     procedure ShowAsteroidSetting(Sender: TObject);
     procedure LoadMPCSample(Sender: TObject);
+    procedure SysDBChange(Sender: TObject);
+    function SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
   public
     { Déclarations publiques }
     property ccat : conf_catalog read Fccat write SetCcat;
@@ -104,6 +108,8 @@ type
     property fits : TFits read GetFits write SetFits;
     property catalog : Tcatalog read GetCatalog write SetCatalog;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
+    property onDBChange: TNotifyEvent read FDBChange write FDBChange;
+    property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
   end;
 
 var

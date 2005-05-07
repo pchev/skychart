@@ -1677,7 +1677,7 @@ object f_config: Tf_config
               Width = 71
               Height = 18
             end
-            inherited GroupBox6: TGroupBox
+            inherited MysqlBox: TGroupBox
               inherited dbname: TEdit
                 Height = 26
               end

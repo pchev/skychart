@@ -31,6 +31,11 @@ end;
 
 procedure Tf_config_pictures.FormShow(Sender: TObject);
 begin
+if db=nil then
+  if DBtype=mysql then
+    db:=TMyDB.create(self)
+  else if DBtype=sqlite then
+    db:=TLiteDB.create(self);
 ShowImages;
 end;
 
@@ -50,16 +55,17 @@ end;
 
 procedure Tf_config_pictures.CountImages;
 begin
-db:=TMyDB.create(self);
 try
-db.SetPort(cmain.dbport);
-db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
+if DBtype=mysql then begin
+  db.SetPort(cmain.dbport);
+  db.database:=cmain.db;
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
+end;
+if db.database<>cmain.db then db.Use(cmain.db);
 if db.Active then begin
   nimages.caption:=db.QueryOne('select count(*) from cdc_fits');
 end;
 finally
-  db.Free;
 end;
 end;
 
@@ -92,18 +98,22 @@ var c,f : tsearchrec;
     dummyfile : boolean;
     ra,de,w,h,r: double;
 begin
-db:=TMyDB.create(self);
 try
-db.SetPort(cmain.dbport);
-db.database:=cmain.db;
-db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
+if DBtype=mysql then begin
+  db.SetPort(cmain.dbport);
+  db.database:=cmain.db;
+  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
+end;
+if db.database<>cmain.db then db.Use(cmain.db);
 if db.Active then begin
 screen.cursor:=crHourGlass;
 ProgressCat.caption:='';
 ProgressBar1.position:=0;
 ProgressPanel.visible:=true;
-db.Query('UNLOCK TABLES');
-db.Query('Truncate table cdc_fits');
+if DBtype=mysql then db.Query('UNLOCK TABLES');
+db.starttransaction;
+db.Query(truncatetable[DBtype]+' cdc_fits');
+db.commit;
 j:=findfirst(slash(cmain.ImagePath)+'*',faDirectory,c);
 while j=0 do begin
   if ((c.attr and faDirectory)<>0)and(c.Name<>'.')and(c.Name<>'..') then begin
@@ -151,7 +161,7 @@ while j=0 do begin
       p:=pos(extractfileext(objn),objn);
       objn:=copy(objn,1,p-1);
       if not FFits.InsertDB(fname,c.Name,objn,ra,de,w,h,r) then
-         writetrace('DB insert failed for '+f.Name+' :'+db.GetLastError);
+         writetrace('DB insert failed for '+f.Name+' :'+db.ErrorMessage);
     end
     else writetrace('Invalid FITS file: '+f.Name);
     i:=findnext(f);
@@ -159,12 +169,12 @@ while j=0 do begin
   end;
   j:=findnext(c);
 end;
-db.Query('FLUSH TABLES');
+db.Query(flushtable[DBtype]);
 end;
+ShowImagesBox.checked:=true;
 finally
   screen.cursor:=crDefault;
   ProgressPanel.visible:=false;
-  db.Free;
   findclose(c);
   findclose(f);
 end;

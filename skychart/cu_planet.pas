@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Classes, Math, Sysutils, passql, pasmysql, u_constant, u_util, u_projection,
+uses Classes, Math, Sysutils, StrUtils, passql, pasmysql, passqlite, u_constant, u_util, u_projection,
 {$ifdef linux}
    Libc,Qforms;
 {$endif}
@@ -47,7 +47,7 @@ type
   TPlanet = class(TComponent)
   private
     { Private declarations }
-    db1,db2 : TMyDB;
+    db1,db2 : TSqlDB;
     LockPla,LockDB : boolean;
     SolT0,XSol,YSol,ZSol : double;
     jdnew,jdchart,com_limitmag:double;
@@ -120,6 +120,9 @@ type
      procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var i: integer; var cfgsc: conf_skychart);
   end;
 
+type
+  Pplanet= ^TPlanet;
+
 implementation
 
 constructor TPlanet.Create(AOwner:TComponent);
@@ -142,8 +145,13 @@ begin
    if addr(satxyfm)<>nil then satxyok:=true;
  end;
  {$endif}
- db1:=TMyDB.create(nil);
- db2:=TMyDB.create(nil);
+ if DBtype=mysql then begin
+   db1:=TMyDB.create(nil);
+   db2:=TMyDB.create(nil);
+ end else if DBtype=sqlite then begin
+   db1:=TLiteDB.create(nil);
+   db2:=TLiteDB.create(nil);
+ end;
 end;
 
 destructor TPlanet.Destroy;
@@ -1478,13 +1486,15 @@ end ;
 Function TPlanet.ConnectDB(host,db,user,pass:string; port:integer):boolean;
 begin
 try
-  db1.SetPort(port);
-//  db1.SetDatabase(db);
-  db1.Connect(host,user,pass,db);
-  db2.SetPort(port);
-//  db2.SetDatabase(db);
-  db2.Connect(host,user,pass,db);
-  result:=db1.Active and db2.Active;
+ if DBtype=mysql then begin
+   db1.SetPort(port);
+   db1.Connect(host,user,pass,db);
+   db2.SetPort(port);
+   db2.Connect(host,user,pass,db);
+ end;
+ if db1.database<>db then db1.Use(db);
+ if db2.database<>db then db2.Use(db);
+ result:=db1.Active and db2.Active;
 except
   result:=false;
 end;
@@ -1659,10 +1669,12 @@ end else begin
 end;
 if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
  else begin
-     if cfgsc.ast_day<>db1.QueryOne('SHOW TABLES LIKE "'+cfgsc.ast_day+'"') then
+     if cfgsc.ast_day<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.ast_day+'"') then
         db1.Query('CREATE TABLE '+cfgsc.ast_day+create_table_ast_day);
-     if cfgsc.ast_daypos<>db1.QueryOne('SHOW TABLES LIKE "'+cfgsc.ast_daypos+'"') then
+     if cfgsc.ast_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.ast_daypos+'"') then begin
         db1.Query('CREATE TABLE '+cfgsc.ast_daypos+create_table_ast_day_pos);
+        db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc.ast_daypos+' ON '+cfgsc.ast_daypos+' (id,epoch)');
+     end;
      qry:='SELECT distinct(jd) from cdc_ast_mag where mag<110';
      db1.Query(qry);
      if db1.Rowcount>0 then begin
@@ -1689,10 +1701,11 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
             +' and a.epoch=b.epoch';
         db1.CallBackOnly:=true;
         db1.OnFetchRow:=NewAstDayCallback;
-        db2.Query('UNLOCK TABLES');
-        db2.Query('TRUNCATE TABLE '+cfgsc.ast_day);
-        db2.Query('TRUNCATE TABLE '+cfgsc.ast_daypos);
-        db2.Query('LOCK TABLES '+cfgsc.ast_day+' WRITE, '+cfgsc.ast_daypos+' WRITE');
+        if DBtype=mysql then db2.Query('UNLOCK TABLES');
+        db2.StartTransaction;
+        db2.Query(truncatetable[DBtype]+' '+cfgsc.ast_day);
+        db2.Query(truncatetable[DBtype]+' '+cfgsc.ast_daypos);
+        if DBtype=mysql then db2.Query('LOCK TABLES '+cfgsc.ast_day+' WRITE, '+cfgsc.ast_daypos+' WRITE');
         jdnew:=newjd;
         jdchart:=cfgsc.JDChart;
         ast_daypos:=cfgsc.ast_daypos;
@@ -1702,8 +1715,9 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
         qry:='INSERT INTO '+cfgsc.ast_day+' (jd,limit_mag)'
             +' VALUES ("'+inttostr(trunc(newjd))+'","'+inttostr(lmag)+'")';
         db2.Query(qry);
-        db2.Query('UNLOCK TABLES');
-        db2.Query('FLUSH TABLES');
+        if DBtype=mysql then db2.Query('UNLOCK TABLES');
+        db2.Commit;
+        db2.Query(flushtable[DBtype]);
         result:=true;
      end else begin
        result:=false;
@@ -1772,14 +1786,17 @@ end else begin
 end;
 if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
  else begin
-     if cfgsc.com_day<>db1.QueryOne('SHOW TABLES LIKE "'+cfgsc.com_day+'"') then
+     if cfgsc.com_day<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.com_day+'"') then
         db1.Query('CREATE TABLE '+cfgsc.com_day+create_table_com_day);
-     if cfgsc.com_daypos<>db1.QueryOne('SHOW TABLES LIKE "'+cfgsc.com_daypos+'"') then
+     if cfgsc.com_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.com_daypos+'"') then begin
         db1.Query('CREATE TABLE '+cfgsc.com_daypos+create_table_com_day_pos);
-     db1.Query('UNLOCK TABLES');
-     db1.Query('TRUNCATE TABLE '+cfgsc.com_day);
-     db1.Query('TRUNCATE TABLE '+cfgsc.com_daypos);
-     db1.Query('LOCK TABLES '+cfgsc.com_day+' WRITE, '+cfgsc.com_daypos+' WRITE, cdc_com_elem READ');
+        db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc.com_daypos+' ON '+cfgsc.com_daypos+' (id,epoch)');
+     end;
+     if DBtype=mysql then db1.Query('UNLOCK TABLES');
+     db1.StartTransaction;
+     db1.Query(truncatetable[DBtype]+' '+cfgsc.com_day);
+     db1.Query(truncatetable[DBtype]+' '+cfgsc.com_daypos);
+     if DBtype=mysql then db1.Query('LOCK TABLES '+cfgsc.com_day+' WRITE, '+cfgsc.com_daypos+' WRITE, cdc_com_elem READ');
      qry:='SELECT distinct(id) from cdc_com_elem';
      db2.CallBackOnly:=true;
      db2.OnFetchRow:=NewComDayCallback;
@@ -1796,12 +1813,14 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
        qry:='INSERT INTO '+cfgsc.com_day+' (jd,limit_mag)'
            +' VALUES ("'+inttostr(trunc(newjd))+'","'+inttostr(lmag)+'")';
        db1.Query(qry);
-       db1.Query('UNLOCK TABLES');
-       db1.Query('FLUSH TABLES');
+       if DBtype=mysql then db1.Query('UNLOCK TABLES');
+       db1.Commit;
+       db1.Query(flushtable[DBtype]);
      end else begin
        result:=false;
-       db1.Query('UNLOCK TABLES');
-       db1.Query('FLUSH TABLES');
+       if DBtype=mysql then db1.Query('UNLOCK TABLES');
+       db1.Commit;
+       db1.Query(flushtable[DBtype]);
        end;
 end;
 except
@@ -2026,7 +2045,7 @@ if GetAstElemEpoch(id,cfgsc.curjd,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id
         +',"'+inttostr(idec)+'"'
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
-   db1.Query('FLUSH TABLES');
+   db1.Query(flushtable[DBtype]);
    precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
@@ -2060,7 +2079,7 @@ if GetComElemEpoch(id,cfgsc.curjd,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) the
         +',"'+inttostr(idec)+'"'
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
-   db1.Query('FLUSH TABLES');
+   db1.Query(flushtable[DBtype]);
    precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
@@ -2212,21 +2231,29 @@ end;
 
 function TPlanet.Checkdb:boolean;
 // this function is here instead of fu_config because fu_config is not created at startup.
-var i:integer;
+var i,j:integer;
    ok:boolean;
 begin
 if db1.Active then begin
   result:=true;
   for i:=1 to numsqltable do begin
-     ok:=(sqltable[i,1]=db1.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"'));
+     ok:=(sqltable[i,1]=db1.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
      if not ok then begin  // try to create the missing table
-       db1.Query('CREATE TABLE if not exists '+sqltable[i,1]+sqltable[i,2]);
-       ok:=(sqltable[i,1]=db1.QueryOne('SHOW TABLES LIKE "'+sqltable[i,1]+'"'));
+       if DBtype=sqlite then
+           db1.Query('CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]))
+       else
+           db1.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
+       if sqltable[i,3]>'' then begin   // create the index
+          j:=strtoint(sqltable[i,3]);
+          db1.Query('CREATE INDEX '+sqlindex[j,1]+' on '+sqlindex[j,2]);
+       end;
+       ok:=(sqltable[i,1]=db1.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
        if ok then writetrace('Create table '+sqltable[i,1]+' ... Ok')
              else writetrace('Create table '+sqltable[i,1]+' ... Failed');
      end;
      result:=result and ok;
   end;
+
 end else result:=false;
 if not result then begin
   db1.Close;
@@ -2240,18 +2267,20 @@ var i,j:integer;
 begin
 dailytable:=Tstringlist.create;
 try
-  db1.Query('UNLOCK TABLES');
-  db1.ListTables('cdc_ast_day_%');
+  if DBtype=mysql then db1.Query('UNLOCK TABLES');
+  db1.Query(showtable[DBtype]+' cdc_ast_day_%');
   i:=0;
   while i<db1.Rowcount do begin
      dailytable.add(db1.results[i][0]);
      inc(i);
   end;
   j:=0;
-  while j<i do begin
-     db1.Query('Truncate table '+dailytable[j]);
+  db1.StartTransaction;
+  while j<dailytable.Count do begin
+     db1.Query(truncatetable[DBtype]+' '+dailytable[j]);
      inc(j);
   end;
+  db1.Commit;
 finally
   dailytable.free;
 end;
@@ -2263,18 +2292,20 @@ var i,j:integer;
 begin
 dailytable:=Tstringlist.create;
 try
-  db1.Query('UNLOCK TABLES');
-  db1.ListTables('cdc_com_day_%');
+  if DBtype=mysql then db1.Query('UNLOCK TABLES');
+  db1.Query(showtable[DBtype]+' cdc_com_day_%');
   i:=0;
   while i<db1.Rowcount do begin
      dailytable.add(db1.results[i][0]);
      inc(i);
   end;
   j:=0;
-  while j<i do begin
-     db1.Query('Truncate table '+dailytable[j]);
+  db1.StartTransaction;
+  while j<dailytable.Count do begin
+     db1.Query(truncatetable[DBtype]+' '+dailytable[j]);
      inc(j);
   end;
+  db1.Commit;
 finally
   dailytable.free;
 end;
@@ -2286,7 +2317,8 @@ begin
 try
 jds:=formatfloat(f1,jdt);
 msg.Add('Begin processing for jd='+jds+' '+jddate(jdt));
-db1.Query('LOCK TABLES cdc_ast_mag WRITE, cdc_ast_elem READ');
+db1.StartTransaction;
+if DBtype=mysql then db1.Query('LOCK TABLES cdc_ast_mag WRITE, cdc_ast_elem READ');
 msg.Add('Delete previous data for this date.');
 application.processmessages;
 db1.Query('DELETE from cdc_ast_mag where jd='+jds);
@@ -2301,8 +2333,9 @@ smsg:=msg;
 db2.Query(qry);
 db2.CallBackOnly:=false;
 db2.OnFetchRow:=nil;
-db1.Query('UNLOCK TABLES');
-db1.Query('FLUSH TABLES');
+if DBtype=mysql then db1.Query('UNLOCK TABLES');
+db1.Commit;
+db1.Query(flushtable[DBtype]);
 TruncateDailyAsteroid;
 msg.Add('End processing jd='+jds);
 result:=(n_ast>0);
@@ -2313,7 +2346,6 @@ end;
 except
   result:=false;
   msg.Add('Error! please check the database parameters.');
-  db2.Query(qry);
   db2.CallBackOnly:=false;
 end;
 end;

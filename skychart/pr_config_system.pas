@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, passql, pasmysql, u_util,
+uses u_constant, passql, pasmysql, passqlite, u_util,
   StrUtils, Dialogs, FoldrDlg,
   Controls, Buttons, enhedits, ComCtrls, Classes,
   Windows, Messages, SysUtils, Graphics, Forms,
@@ -33,7 +33,7 @@ type
     pa_system: TPageControl;
     t_system: TTabSheet;
     Label153: TLabel;
-    GroupBox6: TGroupBox;
+    MysqlBox: TGroupBox;
     Label77: TLabel;
     Label84: TLabel;
     Label85: TLabel;
@@ -44,11 +44,6 @@ type
     dbhost: TEdit;
     dbuser: TEdit;
     dbpass: TEdit;
-    chkdb: TButton;
-    credb: TButton;
-    dropdb: TButton;
-    AstDB: TButton;
-    CometDB: TButton;
     GroupBoxDir: TGroupBox;
     Label156: TLabel;
     Label157: TLabel;
@@ -85,6 +80,16 @@ type
     Label155: TLabel;
     telescopepluginlist: TComboBox;
     FolderDialog1: TFolderDialog;
+    GroupBox1: TGroupBox;
+    chkdb: TButton;
+    credb: TButton;
+    dropdb: TButton;
+    CometDB: TButton;
+    AstDB: TButton;
+    SqliteBox: TGroupBox;
+    Label1: TLabel;
+    dbnamesqlite: TEdit;
+    DBtypeGroup: TRadioGroup;
     procedure dbnameChange(Sender: TObject);
     procedure dbhostChange(Sender: TObject);
     procedure dbportChange(Sender: TObject);
@@ -113,12 +118,17 @@ type
     procedure persdirChange(Sender: TObject);
     procedure AstDBClick(Sender: TObject);
     procedure CometDBClick(Sender: TObject);
+    procedure FrameExit(Sender: TObject);
+    procedure DBtypeGroupClick(Sender: TObject);
+    procedure dbnamesqliteChange(Sender: TObject);
   private
     { Private declarations }
-    db:TmyDB;
+    db:TSqlDB;
     FShowAsteroid: TNotifyEvent;
     FShowComet: TNotifyEvent;
     FLoadMPCSample: TNotifyEvent;
+    FDBChange: TNotifyEvent;
+    dbchanged: boolean;
     procedure ShowSYS;
     procedure ShowServer;
     procedure ShowTelescope;
@@ -138,6 +148,7 @@ type
     property onShowAsteroid: TNotifyEvent read FShowAsteroid write FShowAsteroid;
     property onShowComet: TNotifyEvent read FShowComet write FShowComet;
     property onLoadMPCSample: TNotifyEvent read FLoadMPCSample write FLoadMPCSample;
+    property onDBChange: TNotifyEvent read FDBChange write FDBChange;
   end;
 
 implementation
@@ -168,4 +179,7 @@ end;
 
 // end of windows vcl specific code:
 
+
+
 end.
+

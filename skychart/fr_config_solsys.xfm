@@ -262,7 +262,7 @@ object f_config_solsys: Tf_config_solsys
         Top = 4
         Width = 481
         Height = 420
-        ActivePage = comload
+        ActivePage = comsetting
         TabOrder = 0
         object comsetting: TTabSheet
           Caption = 'General Setting'

@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, fu_directory,u_util, cu_fits, passql, pasmysql,
+uses  u_constant, fu_directory,u_util, cu_fits, passql, pasmysql, passqlite,
   SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
   QDialogs, QStdCtrls, QComCtrls, QExtCtrls, QButtons;
 
@@ -68,7 +68,7 @@ type
   private
     { Private declarations }
     FFits: TFits;
-    db:TmyDB;
+    db:TSqlDB;
     procedure ShowImages;
     procedure CountImages;
   public
