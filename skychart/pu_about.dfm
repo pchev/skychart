@@ -421,7 +421,7 @@ object f_about: Tf_about
     Width = 322
     Height = 14
     AutoSize = False
-    Caption = 'Copyright (C) 2002-2004 Patrick Chevalley '
+    Caption = 'Copyright (C) 2002-2005 Patrick Chevalley '
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clSilver
