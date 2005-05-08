@@ -33,6 +33,7 @@ f_config_system1.onShowAsteroid:=ShowAsteroidSetting;
 f_config_system1.onShowComet:=ShowCometSetting;
 f_config_system1.onLoadMPCSample:=LoadMPCSample;
 f_config_system1.onDBChange:=SysDBChange;
+f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
@@ -129,6 +130,11 @@ begin
  if Assigned(FDBChange) then FDBChange(self);
 end;
 
+procedure Tf_config.SysSaveAndRestart(Sender: TObject);
+begin
+ if Assigned(FSaveAndRestart) then FSaveAndRestart(self);
+end;
+
 function Tf_config.SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
 begin
  if assigned(FPrepareAsteroid) then result:=FPrepareAsteroid(jdt,msg)
@@ -153,6 +159,18 @@ end;
 procedure Tf_config.SetCatalog(value: Tcatalog);
 begin
 f_config_catalog1.catalog:=value;
+end;
+
+function Tf_config.GetDB: Tcdcdb;
+begin
+result:=f_config_system1.cdb;
+end;
+
+procedure Tf_config.SetDB(value: Tcdcdb);
+begin
+f_config_system1.cdb:=value;
+f_config_solsys1.cdb:=value;
+f_config_pictures1.cdb:=value;
 end;
 
 procedure Tf_config.SetCcat(value: conf_catalog);

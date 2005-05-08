@@ -31,11 +31,6 @@ end;
 
 procedure Tf_config_solsys.FormShow(Sender: TObject);
 begin
-if db=nil then
-  if DBtype=mysql then
-     db:=TMyDB.create(self)
-  else if DBtype=sqlite then
-     db:=TLiteDB.create(self);
 ShowPlanet;
 ShowComet;
 ShowAsteroid;
@@ -130,29 +125,10 @@ ExecuteFile('http://jupos.privat.t-online.de/');
 end;
 
 procedure Tf_config_solsys.UpdComList;
-var i:integer;
 begin
-comelemlist.clear;
-comelemlist.text:='';
-try
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  db.Query('Select elem_id,filedesc from cdc_com_elem_list order by elem_id');
-  i:=0;
-  while i<db.Rowcount do begin
-     comelemlist.items.add(db.Results[i][0]+'; '+db.Results[i][1]);
-     inc(i);
-  end;
-  comelemlist.itemindex:=0;
-  if comelemlist.items.count>0 then comelemlist.text:=comelemlist.items[0];
-end;
-except
-end;
+cdb.GetCometFileList(cmain^,comelemlist.items);
+comelemlist.itemindex:=0;
+if comelemlist.items.count>0 then comelemlist.text:=comelemlist.items[0];
 end;
 
 procedure Tf_config_solsys.showcomClick(Sender: TObject);
@@ -194,260 +170,36 @@ end;
 end;
 
 procedure Tf_config_solsys.LoadcomClick(Sender: TObject);
-var
-  buf,cmd,filedesc,filenum,edate :string;
-  t,ep,id,nam,ec,q,i,node,peri,eq,h,g  : string;
-  y,m,d,nl: integer;
-  hh:double;
-  f : textfile;
 begin
-MemoCom.clear;
-if not fileexists(comfile.text) then begin
-  MemoCom.lines.add('File not found!');
-  exit;
-end;
-try
 screen.cursor:=crHourGlass;
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  filedesc:=extractfilename(comfile.text)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(comfile.text)));
-  assignfile(f,comfile.text);
-  reset(f);
-  db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_com_elem WRITE, cdc_ast_com_list WRITE, cdc_com_name WRITE');
-  nl:=0;
-  repeat
-    readln(f,buf);
-    inc(nl);
-    if trim(buf)='' then continue;
-    if (nl mod 10000)=0 then begin MemoCom.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
-    id:=trim(copy(buf,1,12));
-    y:=strtoint(trim(copy(buf,15,4)));
-    m:=strtoint(trim(copy(buf,20,2)));
-    d:=strtoint(trim(copy(buf,23,2)));
-    hh:=24*strtofloat('0'+trim(copy(buf,25,5)));
-    t:=formatfloat(f6,jd(y,m,d,hh));
-    ep:=trim(copy(buf,82,8));
-    if ep<>'' then begin
-       y:=strtoint(trim(copy(ep,1,4)));
-       m:=strtoint(trim(copy(ep,5,2)));
-       d:=strtoint(trim(copy(ep,7,2)));
-       hh:=0;
-    end;
-    ep:=formatfloat(f1,jd(y,m,d,hh));
-    if nl=1 then edate:=inttostr(y)+'.'+inttostr(m);
-    q:=copy(buf,31,9);
-    ec:=copy(buf,41,9);
-    peri:=copy(buf,51,9);
-    node:=copy(buf,61,9);
-    i:=copy(buf,71,9);
-    h:=copy(buf,92,4);
-    g:=copy(buf,97,4);
-    nam:=stringreplace(trim(copy(buf,103,27)),'"','\"',[rfreplaceall]);
-    eq:='2000';
-    if nl=1 then begin
-       filedesc:=filedesc+', epoch='+ep;
-       buf:=db.QueryOne('Select max(elem_id) from cdc_com_elem_list');
-       if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
-                   else filenum:='1';
-       if not db.Query('Insert into cdc_com_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")') then
-              MemoCom.lines.add(trim(db.ErrorMessage));
-    end;
-    cmd:='INSERT INTO cdc_com_elem (id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id) VALUES ('
-        +'"'+id+'"'
-        +',"'+t+'"'
-        +',"'+q+'"'
-        +',"'+ec+'"'
-        +',"'+peri+'"'
-        +',"'+node+'"'
-        +',"'+i+'"'
-        +',"'+ep+'"'
-        +',"'+h+'"'
-        +',"'+g+'"'
-        +',"'+nam+'"'
-        +',"'+eq+'"'
-        +',"'+filenum+'"'+')';
-    if not db.query(cmd) then begin
-       MemoCom.lines.add('insert failed line '+inttostr(nl)+' : '+trim(db.ErrorMessage));
-    end;
-    cmd:='INSERT INTO cdc_com_name (name, id) VALUES ('
-        +'"'+nam+'"'
-        +',"'+id+'"'+')';
-    db.query(cmd);
-  until eof(f);
-  closefile(f);
-  MemoCom.lines.add('Processing ended. Total number of comet :'+inttostr(nl));
-end else begin
-   buf:=trim(db.ErrorMessage);
-   if buf<>'0' then showmessage(buf);
-end;
-  screen.cursor:=crDefault;
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
-  db.commit;
-  db.Query(flushtable[DBtype]);
-  UpdComList;
-  showcom.checked:=true;
-except
-  screen.cursor:=crDefault;
-end;
+cdb.LoadCometFile(comfile.text,MemoCom);
+UpdComList;
+screen.cursor:=crDefault;
 end;
 
 procedure Tf_config_solsys.DelComClick(Sender: TObject);
-var i: integer;
-    elem_id:string;
 begin
-delComMemo.clear;
-i:=pos(';',comelemlist.text);
-elem_id:=copy(comelemlist.text,1,i-1);
-if trim(elem_id)='' then exit;
-try
 screen.cursor:=crHourGlass;
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_com_elem WRITE, cdc_com_elem_list WRITE');
-  delcomMemo.lines.add('Delete from element table...');
-  application.processmessages;
-  if not db.Query('Delete from cdc_com_elem where elem_id='+elem_id) then
-     delcomMemo.lines.add('Failed : '+trim(db.ErrorMessage));
-  delcomMemo.lines.add('Delete from element list...');
-  application.processmessages;
-  if not db.Query('Delete from cdc_com_elem_list where elem_id='+elem_id) then
-     delcomMemo.lines.add('Failed : '+trim(db.ErrorMessage));
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
-  db.commit;
-  db.Query(flushtable[DBtype]);
-  delcomMemo.lines.add('Delete daily data');
-//  planet.TruncateDailyComet;
-  delcomMemo.lines.add('Delete completed');
-end;
-  screen.cursor:=crDefault;
-  UpdComList;
-except
-  screen.cursor:=crDefault;
-end;
+cdb.DelComet(comelemlist.text,delcommemo);
+screen.cursor:=crDefault;
+UpdComList;
 end;
 
 procedure Tf_config_solsys.DelComAllClick(Sender: TObject);
 begin
-delComMemo.clear;
-try
 screen.cursor:=crHourGlass;
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
-  db.starttransaction;
-  delComMemo.lines.add('Delete from element table...');
-  application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_com_elem');
-  delcomMemo.lines.add('Delete from element list...');
-  application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_com_elem_list');
-  delcomMemo.lines.add('Delete from name list...');
-  application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_com_name');
-  db.commit;
-  delcomMemo.lines.add('Delete daily data');
-//  planet.TruncateDailyComet;
-  delcomMemo.lines.add('Delete completed');
-end;
-  screen.cursor:=crDefault;
-  UpdComList;
-except
-  screen.cursor:=crDefault;
-end;
+cdb.DelCometAll(delComMemo);
+screen.cursor:=crDefault;
+UpdComList;
 end;
 
 procedure Tf_config_solsys.AddComClick(Sender: TObject);
 var
-  buf,cmd,filedesc,filenum :string;
-  t,q,ep,id,nam,ec,i,node,peri,eq,h,g  : string;
-  y,m,d,p:integer;
-  hh:double;
+  msg :string;
 begin
-try
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-    id:=trim(copy(comid.text,1,7));
-    buf:=comt.text;
-    p:=pos('.',buf);
-    y:=strtoint(trim(copy(buf,1,p-1)));
-    delete(buf,1,p);
-    p:=pos('.',buf);
-    m:=strtoint(trim(copy(buf,1,p-1)));
-    delete(buf,1,p);
-    p:=pos('.',buf);
-    d:=strtoint(trim(copy(buf,1,p-1)));
-    delete(buf,1,p);
-    hh:=strtofloat(trim('0.'+trim(buf)))*24;
-    t:=formatfloat(f6,jd(y,m,d,hh));
-    ep:=trim(comep.text);
-    if ep='' then begin
-       ep:=formatfloat(f1,jd(y,m,d,hh));
-    end;
-    q:=trim(comq.text);
-    ec:=trim(comec.text);
-    peri:=trim(comperi.text);
-    node:=trim(comnode.text);
-    i:=trim(comi.text);
-    h:=trim(comh.text);
-    g:=trim(comg.text);
-    nam:=stringreplace(trim(comnam.text),'"','\"',[rfreplaceall]);
-    eq:=trim(comeq.text);
-    buf:=db.QueryOne('Select max(elem_id) from cdc_com_elem_list');
-    if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
-               else filenum:='1';
-    filedesc:='Add '+id+', '+nam+', '+ep;
-    db.Query('Insert into cdc_com_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
-    cmd:='INSERT INTO cdc_com_elem (id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id) VALUES ('
-        +'"'+id+'"'
-        +',"'+t+'"'
-        +',"'+q+'"'
-        +',"'+ec+'"'
-        +',"'+peri+'"'
-        +',"'+node+'"'
-        +',"'+i+'"'
-        +',"'+ep+'"'
-        +',"'+h+'"'
-        +',"'+g+'"'
-        +',"'+nam+'"'
-        +',"'+eq+'"'
-        +',"'+filenum+'"'+')';
-    if db.query(cmd) then begin
-       cmd:='INSERT INTO cdc_com_name (name, id) VALUES ('
-           +'"'+nam+'"'
-           +',"'+id+'"'+')';
-       db.query(cmd);
-       ShowMessage('OK!')
-    end else ShowMessage('Insert failed! '+trim(db.ErrorMessage));
-end else begin
-   buf:=trim(db.ErrorMessage);
-   if buf<>'0' then showmessage(buf);
-end;
-db.Query(flushtable[DBtype]);
+msg:=cdb.AddCom(comid.text,comt.text,comep.text,comq.text,comec.text,comperi.text,comnode.text,comi.text,comh.text,comg.text,comnam.text,comeq.text);
 UpdComList;
-except
-end;
+if msg<>'' then Showmessage(msg);
 end;
 
 procedure Tf_config_solsys.comdbsetClick(Sender: TObject);
@@ -456,29 +208,10 @@ if Assigned(FShowDB) then FShowDB(self);
 end;
 
 procedure Tf_config_solsys.UpdAstList;
-var i:integer;
 begin
-astelemlist.clear;
-astelemlist.text:='';
-try
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  db.Query('Select elem_id,filedesc from cdc_ast_elem_list order by elem_id');
-  i:=0;
-  while i< db.Rowcount do begin
-     astelemlist.items.add(db.Results[i][0]+'; '+db.Results[i][1]);
-     inc(i);
-  end;
-  astelemlist.itemindex:=0;
-  if astelemlist.items.count>0 then astelemlist.text:=astelemlist.items[0];
-end;
-except
-end;
+cdb.GetAsteroidFileList(cmain^,astelemlist.items);
+astelemlist.itemindex:=0;
+if astelemlist.items.count>0 then astelemlist.text:=astelemlist.items[0];
 end;
 
 
@@ -526,142 +259,18 @@ end;
 end;
 
 procedure Tf_config_solsys.LoadMPCClick(Sender: TObject);
-var
-  buf,cmd,c,filedesc,filenum,edate :string;
-  ep,id,nam,ec,ax,i,node,peri,eq,ma,h,g,ref  : string;
-  y,m,d,nl,prefl,lid,nerr: integer;
-  hh:double;
-  f : textfile;
+var ok:boolean;
 begin
-nerr:=1;
-MemoMPC.clear;
-if not fileexists(mpcfile.text) then begin
-  MemoMPC.lines.add('File not found!');
-  exit;
-end;
-try
 screen.cursor:=crHourGlass;
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  filedesc:=extractfilename(mpcfile.text)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(mpcfile.text)));
-  assignfile(f,mpcfile.text);
-  reset(f);
-  // minimal file checking to distinguish full mpcorb from daily update
-  readln(f,buf);
-  nl:=1;
-  c:=trim(copy(buf,27,9));
-  val(c,hh,nerr);
-  if nerr=0 then begin
-            reset(f);
-            nl:=0;
-     end else repeat
-             readln(f,buf);
-             inc(nl);
-          until eof(f) or (copy(buf,1,5)='-----');
-  if eof(f) then begin
-     MemoMPC.lines.add('This file was not recognized as a MPCORB file.');
-     raise exception.create('');
-  end;
-  MemoMPC.lines.add('Data start on line '+inttostr(nl+1));
-  prefl:=nl;
-  db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_name WRITE');
-  nerr:=0;
-  nl:=0;
-  repeat
-    readln(f,buf);
-    inc(nl);
-    if trim(buf)='' then begin
-      if astnumbered.checked then break
-                             else continue;
-    end;
-    if (nl mod 10000)=0 then begin MemoMPC.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
-    id:=trim(copy(buf,1,7));
-    lid:=length(id);
-    if lid<7 then id:=StringofChar('0',7-lid)+id;
-    h:=copy(buf,9,5);
-    g:=copy(buf,15,5);
-    ep:=trim(copy(buf,21,5));
-    if decode_mpc_date(ep,y,m,d,hh) then
-       ep:=floattostr(jd(y,m,d,hh))
-     else begin
-       inc(nerr);
-       MemoMPC.lines.add('invalid epoch on line'+inttostr(nl+prefl)+' : '+buf);
-       break;
-     end;
-    if nl=1 then edate:=inttostr(y)+'.'+inttostr(m);
-    ma:=copy(buf,27,9);
-    peri:=copy(buf,38,9);
-    node:=copy(buf,49,9);
-    i:=copy(buf,60,9);
-    ec:=copy(buf,71,9);
-    ax:=copy(buf,93,11);
-    ref:=trim(copy(buf,108,10));
-    nam:=stringreplace(trim(copy(buf,167,27)),'"','\"',[rfreplaceall]);
-    eq:='2000';
-    if nl=1 then begin
-       filedesc:=filedesc+', epoch='+ep;
-       buf:=db.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
-       if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
-                   else filenum:='1';
-       if not db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")') then
-              MemoMPC.lines.add(trim(db.ErrorMessage));
-    end;
-    cmd:='INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
-        +'"'+id+'"'
-        +',"'+h+'"'
-        +',"'+g+'"'
-        +',"'+ep+'"'
-        +',"'+ma+'"'
-        +',"'+peri+'"'
-        +',"'+node+'"'
-        +',"'+i+'"'
-        +',"'+ec+'"'
-        +',"'+ax+'"'
-        +',"'+ref+'"'
-        +',"'+nam+'"'
-        +',"'+eq+'"'
-        +',"'+filenum+'"'+')';
-    if not db.query(cmd) then begin
-       MemoMPC.lines.add('insert failed line '+inttostr(nl+prefl)+' : '+trim(db.ErrorMessage));
-       inc(nerr);
-       if aststoperr.checked and (nerr>1000) then begin
-          MemoMPC.lines.add('More than 1000 errors! Process aborted.');
-          break;
-       end;
-    end;
-    cmd:='INSERT INTO cdc_ast_name (name, id) VALUES ('
-        +'"'+nam+'"'
-        +',"'+id+'"'+')';
-    db.query(cmd);
-    if astlimitbox.checked and (nl>=astlimit.value) then break;
-  until eof(f);
-  closefile(f);
-  MemoMPC.lines.add('Processing ended. Total number of asteroid :'+inttostr(nl));
-end else begin
-   buf:=trim(db.ErrorMessage);
-   if buf<>'0' then showmessage(buf);
-end;
-  screen.cursor:=crDefault;
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
-  db.commit;
-  db.Query(flushtable[DBtype]);
-  UpdAstList;
-if nerr=0 then begin
+ok:=cdb.LoadAsteroidFile(mpcfile.text,astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
+UpdAstList;
+screen.cursor:=crDefault;
+if ok then begin
   if autoprocess then AstComputeClick(Sender)
   else begin
-     Showmessage('To use this new data you must compute the Monthly Data for a period near '+edate);
-     if aststrtdate.text<edate then aststrtdate.text:=edate;
+     Showmessage('To use this new data you must now compute the Monthly Data');
      AstPageControl.activepage:=astprepare;
   end;
-end;
-except
-  screen.cursor:=crDefault;
 end;
 end;
 
@@ -701,187 +310,35 @@ end;
 end;
 
 procedure Tf_config_solsys.delastClick(Sender: TObject);
-var i: integer;
-    elem_id:string;
 begin
-delastMemo.clear;
-i:=pos(';',astelemlist.text);
-elem_id:=copy(astelemlist.text,1,i-1);
-if trim(elem_id)='' then exit;
-try
 screen.cursor:=crHourGlass;
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_mag WRITE');
-  delastMemo.lines.add('Delete from element table...');
-  application.processmessages;
-  if not db.Query('Delete from cdc_ast_elem where elem_id='+elem_id) then
-     delastMemo.lines.add('Failed : '+trim(db.ErrorMessage));
-  delastMemo.lines.add('Delete from element list...');
-  application.processmessages;
-  if not db.Query('Delete from cdc_ast_elem_list where elem_id='+elem_id) then
-     delastMemo.lines.add('Failed : '+trim(db.ErrorMessage));
-  delastMemo.lines.add('Delete from monthly table...');
-  application.processmessages;
-  if not db.Query('Delete from cdc_ast_mag where elem_id='+elem_id) then
-     delastMemo.lines.add('Failed : '+trim(db.ErrorMessage));
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
-  db.commit;
-  db.Query(flushtable[DBtype]);
-  delastMemo.lines.add('Delete daily data');
-//  planet.TruncateDailyAsteroid;
-  delastMemo.lines.add('Delete completed');
-end;
-  screen.cursor:=crDefault;
-  UpdAstList;
-except
-  screen.cursor:=crDefault;
-end;
+Cdb.DelAsteroid(astelemlist.text, delastMemo);
+screen.cursor:=crDefault;
+UpdAstList;
 end;
 
 procedure Tf_config_solsys.deldateastClick(Sender: TObject);
-var i,y,m: integer;
-    jds: string;
 begin
-delastMemo.clear;
-i:=pos('.',astdeldate.text);
-y:=strtoint(trim(copy(astdeldate.text,1,i-1)));
-m:=strtoint(trim(copy(astdeldate.text,i+1,99)));
-jds:=formatfloat(f1,jd(y,m,1,0));
-try
 screen.cursor:=crHourGlass;
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_ast_mag WRITE');
-  delastMemo.lines.add('Delete from monthly table for jd<'+jds);
-  application.processmessages;
-  if not db.Query('Delete from cdc_ast_mag where jd<'+jds) then
-     delastMemo.lines.add('Failed : '+trim(db.ErrorMessage));
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
-  db.commit;
-  db.Query(flushtable[DBtype]);
-  delastMemo.lines.add('Delete completed');
-end;
-  screen.cursor:=crDefault;
-except
-  screen.cursor:=crDefault;
-end;
+cdb.DelAstDate(astdeldate.text, delastMemo);
+screen.cursor:=crDefault;
 end;
 
 procedure Tf_config_solsys.delallastClick(Sender: TObject);
 begin
-delastMemo.clear;
-try
 screen.cursor:=crHourGlass;
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
-  db.starttransaction;
-  delastMemo.lines.add('Delete from element table...');
-  application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_ast_elem');
-  delastMemo.lines.add('Delete from element list...');
-  application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_ast_elem_list');
-  delastMemo.lines.add('Delete from name list...');
-  application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_ast_name');
-  delastMemo.lines.add('Delete from monthly table...');
-  application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_ast_mag');
-  db.commit;
-  delastMemo.lines.add('Delete daily data');
-//  planet.TruncateDailyAsteroid;
-  delastMemo.lines.add('Delete completed');
-end;
-  screen.cursor:=crDefault;
-  UpdAstList;
-except
-  screen.cursor:=crDefault;
-end;
+cdb.DelAstAll(delastMemo);
+screen.cursor:=crDefault;
+UpdAstList;
 end;
 
 procedure Tf_config_solsys.AddastClick(Sender: TObject);
 var
-  buf,cmd,filedesc,filenum :string;
-  ep,id,nam,ec,ax,i,node,peri,eq,ma,h,g,ref  : string;
-  lid: integer;
+  msg :string;
 begin
-try
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-    id:=trim(copy(astid.text,1,7));
-    lid:=length(id);
-    if lid<7 then id:=StringofChar('0',7-lid)+id;
-    h:=trim(asth.text);
-    g:=trim(astg.text);
-    ep:=trim(astep.text);
-    ma:=trim(astma.text);
-    peri:=trim(astperi.text);
-    node:=trim(astnode.text);
-    i:=trim(asti.text);
-    ec:=trim(astec.text);
-    ax:=trim(astax.text);
-    ref:=trim(astref.text);
-    nam:=stringreplace(trim(astnam.text),'"','\"',[rfreplaceall]);
-    eq:=trim(asteq.text);
-    buf:=db.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
-    if buf<>'' then filenum:=inttostr(strtoint(buf)+1)
-               else filenum:='1';
-    filedesc:='Add '+id+', '+nam+', '+ep;
-    db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")');
-    cmd:='INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
-        +'"'+id+'"'
-        +',"'+h+'"'
-        +',"'+g+'"'
-        +',"'+ep+'"'
-        +',"'+ma+'"'
-        +',"'+peri+'"'
-        +',"'+node+'"'
-        +',"'+i+'"'
-        +',"'+ec+'"'
-        +',"'+ax+'"'
-        +',"'+ref+'"'
-        +',"'+nam+'"'
-        +',"'+eq+'"'
-        +',"'+filenum+'"'+')';
-    if db.query(cmd) then begin
-       cmd:='INSERT INTO cdc_ast_name (name, id) VALUES ('
-           +'"'+nam+'"'
-           +',"'+id+'"'+')';
-       db.query(cmd);
-       ShowMessage('OK!')
-    end else ShowMessage('Insert failed! '+trim(db.ErrorMessage));
-end else begin
-   buf:=trim(db.ErrorMessage);
-   if buf<>'0' then showmessage(buf);
-end;
-db.Query(flushtable[DBtype]);
+msg:=Cdb.AddAsteroid(astid.text,asth.text,astg.text,astep.text,astma.text,astperi.text,astnode.text,asti.text,astec.text,astax.text,astref.text,astnam.text,asteq.text);
 UpdAstList;
-except
-end;
+if msg<>'' then showmessage(msg);
 end;
 
 procedure Tf_config_solsys.LoadSampleData;

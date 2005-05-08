@@ -27,10 +27,6 @@ procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
 begin
 ShowImage:=Tf_image.Create(self);
-if DBtype=mysql then
-   db:=TMyDB.create(self)
-else if DBtype=sqlite then
-   db:=TLiteDB.create(self);
 decodedate(now,yy,mm,dd);
 date1.Year:=yy;
 date1.Month:=mm;
@@ -43,7 +39,6 @@ end;
 procedure Tf_calendar.FormDestroy(Sender: TObject);
 begin
 ShowImage.Free;
-db.Free;
 end;
 
 procedure Tf_calendar.FormShow(Sender: TObject);
@@ -1531,37 +1526,11 @@ begin
 if assigned(Fupdchart) then Fupdchart(c);
 end;
 
-Function Tf_calendar.ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
-begin
-try
-if DBtype=mysql then
-   db:=TMyDB.create(self)
-else if DBtype=sqlite then
-   db:=TLiteDB.create(self);
-if DBtype=mysql then begin
-   db.SetPort(port);
-   db.Connect(host,user,pass,dbn);
-end;
-db.Use(dbn);
-result:=db.Active;
-except
-  result:=false;
-end;
-end;
-
 procedure Tf_calendar.Button1Click(Sender: TObject);
-var qry: string;
-    i: integer;
 begin
-Combobox1.Clear;
-qry:='SELECT distinct(id),name FROM cdc_com_elem where name like "%'+trim(CometFilter.Text)+'%" limit '+inttostr(maxcombo);
-db.Query(qry);
-if db.Rowcount>0 then
-  for i:=0 to db.Rowcount-1 do begin
-    cometid[i]:=db.Results[i][0];
-    Combobox1.Items.Add(db.Results[i][1]);
-  end;
+Cdb.GetCometList(CometFilter.Text, maxcombo, Combobox1.Items, cometid);
 Combobox1.ItemIndex:=0;
+RefreshComet;
 end;
 
 procedure Tf_calendar.ComboBox1Change(Sender: TObject);
@@ -1570,9 +1539,9 @@ RefreshComet;
 end;
 
 procedure Tf_calendar.RefreshComet;
-var qry,id,nam,elem_id : string;
+var id,nam,elem_id : string;
     i,a,m,d,s,nj,irc,irc2: integer;
-    cjd,diff,dif,epoch: double;
+    cjd,epoch: double;
     ra,dec,dist,r,elong,phase,magn,st0,q : double;
     hh,g,ap,an,ic,ec,eq,dd,da,tp,diam,lc,car,cde,rc : double;
     hr,ht,hs,azr,azs,hp1,hp2,ars,des,ds,dds,az,ha :Double;
@@ -1583,19 +1552,8 @@ begin
 screen.cursor:=crHourGlass;
 try
 cjd:=(date1.JD+date2.JD)/2;
-diff:=1E10;
-epoch:=0;
 id:=cometid[ComboBox1.itemindex];
-qry:='SELECT epoch FROM cdc_com_elem where id="'+id+'"';
-db.Query(qry);
-if db.Rowcount>0 then
-  for i:=0 to db.Rowcount-1 do begin
-      dif:=abs(strtofloat(db.Results[i][0])-cjd);
-      if dif<diff then begin
-         epoch:=strtofloat(db.Results[i][0]);
-         diff:=dif;
-      end;
-  end;
+epoch:=cdb.GetCometEpoch(id,cjd);
 if Fplanet.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    Fplanet.InitComet(tp,q,ec,ap,an,ic,hh,g,eq,nam);
    Cometgrid.Visible:=false;
@@ -1750,18 +1708,10 @@ end;
 end;
 
 procedure Tf_calendar.Button2Click(Sender: TObject);
-var qry: string;
-    i: integer;
 begin
-Combobox2.Clear;
-qry:='SELECT distinct(id),name FROM cdc_ast_elem where name like "%'+trim(AstFilter.Text)+'%" limit '+inttostr(maxcombo);
-db.Query(qry);
-if db.Rowcount>0 then
-  for i:=0 to db.Rowcount-1 do begin
-    astid[i]:=db.Results[i][0];
-    Combobox2.Items.Add(db.Results[i][1]);
-  end;
+Cdb.GetAsteroidList(AstFilter.Text, maxcombo, Combobox2.Items, astid);
 Combobox2.ItemIndex:=0;
+RefreshAsteroid;
 end;
 
 procedure Tf_calendar.ComboBox2Change(Sender: TObject);
@@ -1770,9 +1720,9 @@ RefreshAsteroid;
 end;
 
 procedure Tf_calendar.RefreshAsteroid;
-var qry,id,nam,elem_id,ref : string;
+var id,nam,elem_id,ref : string;
     i,a,m,d,s,nj,irc,irc2: integer;
-    cjd,diff,dif,epoch: double;
+    cjd,epoch: double;
     ra,dec,dist,r,elong,phase,magn,st0,q : double;
     hh,g,ma,ap,an,ic,ec,sa,eq : double;
     hr,ht,hs,azr,azs: Double;
@@ -1783,19 +1733,8 @@ begin
 screen.cursor:=crHourGlass;
 try
 cjd:=(date1.JD+date2.JD)/2;
-diff:=1E10;
-epoch:=0;
 id:=astid[ComboBox2.itemindex];
-qry:='SELECT epoch FROM cdc_ast_elem where id="'+id+'"';
-db.Query(qry);
-if db.Rowcount>0 then
-  for i:=0 to db.Rowcount-1 do begin
-      dif:=abs(strtofloat(db.Results[i][0])-cjd);
-      if dif<diff then begin
-         epoch:=strtofloat(db.Results[i][0]);
-         diff:=dif;
-      end;
-  end;
+epoch:=cdb.GetAsteroidEpoch(id,cjd);
 if Fplanet.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    Fplanet.InitAsteroid(epoch,hh,g,ma,ap,an,ic,ec,sa,eq,nam);
    Asteroidgrid.Visible:=false;
@@ -1896,5 +1835,3 @@ procedure Tf_calendar.HelpContents1Execute(Sender: TObject);
 begin
 ExecuteFile(slash(helpdir)+'calendar.html');
 end;
-
-

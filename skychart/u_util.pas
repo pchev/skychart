@@ -75,6 +75,7 @@ Function Str3ToDE(dms : string) : double;
 Function DEToStr4(de: Double) : string;
 function isodate(a,m,d : integer) : string;
 function jddate(jd: double) : string;
+function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 Function GetTimeZone : double;
@@ -751,6 +752,13 @@ djd(jd,a,m,d,h);
 result:=isodate(a,m,d);
 end;
 
+function DateTimetoJD(date: Tdatetime): double;
+var Year, Month, Day: Word;
+begin
+DecodeDate(Date, Year, Month, Day);
+result:=jd(Year,Month,Day,frac(date)*24);
+end;
+
 Function LONToStr(l: Double) : string;
 var dd,min1,min,sec: Double;
     d,m,s : string;
@@ -1033,7 +1041,7 @@ end;
 
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
 {$ifdef linux}
-// This not work from Kylix IDE without libxexec workaround.
+// This not work from Kylix IDE without libcexec workaround.
 begin
  libc.system(pchar(cmd+' &'));
 end;

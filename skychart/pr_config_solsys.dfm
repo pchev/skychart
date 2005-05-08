@@ -262,8 +262,8 @@ object f_config_solsys: Tf_config_solsys
         Top = 4
         Width = 481
         Height = 429
-        ActivePage = comload
-        TabIndex = 1
+        ActivePage = comsetting
+        TabIndex = 0
         TabOrder = 0
         object comsetting: TTabSheet
           Caption = 'General Setting'
@@ -470,7 +470,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
             end
             object DelCom: TButton
@@ -1052,7 +1052,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
             end
             object delast: TButton

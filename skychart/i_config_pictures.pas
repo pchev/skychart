@@ -31,11 +31,6 @@ end;
 
 procedure Tf_config_pictures.FormShow(Sender: TObject);
 begin
-if db=nil then
-  if DBtype=mysql then
-    db:=TMyDB.create(self)
-  else if DBtype=sqlite then
-    db:=TLiteDB.create(self);
 ShowImages;
 end;
 
@@ -46,27 +41,11 @@ imgpath.text:=cmain.ImagePath;
 ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
 ImgContrastBar.position:=round(10*cmain.ImageContrast);
 ShowImagesBox.checked:=csc.ShowImages;
-CountImages;
+nimages.caption:=inttostr(cdb.CountImages);
 save:=csc.ShowBackgroundImage;
 backimg.text:=csc.BackgroundImage;
 ShowBackImg.checked:=save;
 cmain.NewBackgroundImage:=false;
-end;
-
-procedure Tf_config_pictures.CountImages;
-begin
-try
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
-  nimages.caption:=db.QueryOne('select count(*) from cdc_fits');
-end;
-finally
-end;
 end;
 
 procedure Tf_config_pictures.imgpathChange(Sender: TObject);
@@ -92,93 +71,14 @@ end;
 
 
 procedure Tf_config_pictures.ScanImagesClick(Sender: TObject);
-var c,f : tsearchrec;
-    i,j,n,p:integer;
-    catdir,objn,fname:string;
-    dummyfile : boolean;
-    ra,de,w,h,r: double;
 begin
-try
-if DBtype=mysql then begin
-  db.SetPort(cmain.dbport);
-  db.database:=cmain.db;
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-end;
-if db.database<>cmain.db then db.Use(cmain.db);
-if db.Active then begin
 screen.cursor:=crHourGlass;
-ProgressCat.caption:='';
-ProgressBar1.position:=0;
 ProgressPanel.visible:=true;
-if DBtype=mysql then db.Query('UNLOCK TABLES');
-db.starttransaction;
-db.Query(truncatetable[DBtype]+' cdc_fits');
-db.commit;
-j:=findfirst(slash(cmain.ImagePath)+'*',faDirectory,c);
-while j=0 do begin
-  if ((c.attr and faDirectory)<>0)and(c.Name<>'.')and(c.Name<>'..') then begin
-  catdir:=slash(cmain.ImagePath)+c.Name;
-  ProgressCat.caption:=c.Name;
-  ProgressBar1.position:=0;
-  ProgressPanel.Refresh;
-  Application.processmessages;
-  i:=findfirst(slash(catdir)+'*.*',0,f);
-  n:=1;
-  while i=0 do begin
-   inc(n);
-   i:=findnext(f);
-  end;
-  ProgressBar1.min:=0;
-  ProgressBar1.max:=n;
-  if (ProgressBar1.Max > 25) then
-    ProgressBar1.Step := ProgressBar1.Max div 25
-  else
-    ProgressBar1.Step := 1;
-  i:=findfirst(slash(catdir)+'*.*',0,f);
-  n:=0;
-  while i=0 do begin
-    inc(n);
-    if (n mod ProgressBar1.step)=0 then begin ProgressBar1.stepit; Application.processmessages; end;
-    dummyfile:=(extractfileext(f.Name)='.nil');
-    if dummyfile then begin
-      ra:=99+random(999999999999999);
-      de:=99+random(999999999999999);
-      w:=0;
-      h:=0;
-      r:=0;
-      fname:=slash(catdir)+f.Name;
-    end else begin
-      FFits.FileName:=slash(catdir)+f.Name;
-      ra:=FFits.Center_RA;
-      de:=FFits.Center_DE;
-      w:=FFits.Img_Width;
-      h:=FFits.img_Height;
-      r:=FFits.Rotation;
-      fname:=FFits.FileName;
-    end;
-    if FFits.header.valid or dummyfile then begin
-      objn:=extractfilename(f.Name);
-      p:=pos(extractfileext(objn),objn);
-      objn:=copy(objn,1,p-1);
-      if not FFits.InsertDB(fname,c.Name,objn,ra,de,w,h,r) then
-         writetrace('DB insert failed for '+f.Name+' :'+db.ErrorMessage);
-    end
-    else writetrace('Invalid FITS file: '+f.Name);
-    i:=findnext(f);
-  end;
-  end;
-  j:=findnext(c);
-end;
-db.Query(flushtable[DBtype]);
-end;
+Cdb.ScanImagesDirectory(cmain.ImagePath,ProgressCat,ProgressBar1 );
 ShowImagesBox.checked:=true;
-finally
-  screen.cursor:=crDefault;
-  ProgressPanel.visible:=false;
-  findclose(c);
-  findclose(f);
-end;
-CountImages;
+screen.cursor:=crDefault;
+ProgressPanel.visible:=false;
+nimages.caption:=inttostr(cdb.CountImages);
 end;
 
 procedure Tf_config_pictures.ImgLumBarChange(Sender: TObject);

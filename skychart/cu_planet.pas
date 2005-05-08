@@ -100,7 +100,6 @@ type
      PROCEDURE InitAsteroid(epoch,mh,mg,ma,ap,an,ic,ec,sa,eq: double; nam:string);
      PROCEDURE Asteroid(jd :Double; highprec:boolean; VAR ar,de,dist,r,elong,phase,magn : Double);
      Function ConnectDB(host,db,user,pass:string; port:integer):boolean;
-     function CheckDB:boolean;
      procedure TruncateDailyAsteroid;
      procedure TruncateDailyComet;
      Function NewAstDay(newjd,limitmag:double; var cfgsc: conf_skychart):boolean;
@@ -119,9 +118,6 @@ type
      function FindCometName(comname: String; var ra,de:double; var cfgsc: conf_skychart):boolean;
      procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var i: integer; var cfgsc: conf_skychart);
   end;
-
-type
-  Pplanet= ^TPlanet;
 
 implementation
 
@@ -146,11 +142,11 @@ begin
  end;
  {$endif}
  if DBtype=mysql then begin
-   db1:=TMyDB.create(nil);
-   db2:=TMyDB.create(nil);
+   db1:=TMyDB.create(self);
+   db2:=TMyDB.create(self);
  end else if DBtype=sqlite then begin
-   db1:=TLiteDB.create(nil);
-   db2:=TLiteDB.create(nil);
+   db1:=TLiteDB.create(self);
+   db2:=TLiteDB.create(self);
  end;
 end;
 
@@ -2227,38 +2223,6 @@ end;
 cfgsc.FindName:=nom;
 cfgsc.FindDesc:=Desc;
 cfgsc.FindNote:='';
-end;
-
-function TPlanet.Checkdb:boolean;
-// this function is here instead of fu_config because fu_config is not created at startup.
-var i,j:integer;
-   ok:boolean;
-begin
-if db1.Active then begin
-  result:=true;
-  for i:=1 to numsqltable do begin
-     ok:=(sqltable[i,1]=db1.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
-     if not ok then begin  // try to create the missing table
-       if DBtype=sqlite then
-           db1.Query('CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]))
-       else
-           db1.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
-       if sqltable[i,3]>'' then begin   // create the index
-          j:=strtoint(sqltable[i,3]);
-          db1.Query('CREATE INDEX '+sqlindex[j,1]+' on '+sqlindex[j,2]);
-       end;
-       ok:=(sqltable[i,1]=db1.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
-       if ok then writetrace('Create table '+sqltable[i,1]+' ... Ok')
-             else writetrace('Create table '+sqltable[i,1]+' ... Failed');
-     end;
-     result:=result and ok;
-  end;
-
-end else result:=false;
-if not result then begin
-  db1.Close;
-  db2.Close;
-end;
 end;
 
 procedure TPlanet.TruncateDailyAsteroid;

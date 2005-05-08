@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util, fu_directory,  passql, pasmysql, passqlite,
+uses u_constant, u_util, fu_directory,  cu_database,
   SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
   QDialogs, QExtCtrls, QStdCtrls, QButtons, enhedits, QComCtrls;
 
@@ -121,17 +121,18 @@ type
     procedure FrameExit(Sender: TObject);
   private
     { Private declarations }
-    db:TSqlDB;
     FShowAsteroid: TNotifyEvent;
     FShowComet: TNotifyEvent;
     FLoadMPCSample: TNotifyEvent;
     FDBChange: TNotifyEvent;
-    dbchanged: boolean;
+    FSaveAndRestart: TNotifyEvent;
+    dbchanged,skipDBtypeGroupClick: boolean;
     procedure ShowSYS;
     procedure ShowServer;
     procedure ShowTelescope;
   public
     { Public declarations }
+    cdb:Tcdcdb;
     mycsc : conf_skychart;
     myccat : conf_catalog;
     mycshr : conf_shared;
@@ -147,6 +148,7 @@ type
     property onShowComet: TNotifyEvent read FShowComet write FShowComet;
     property onLoadMPCSample: TNotifyEvent read FLoadMPCSample write FLoadMPCSample;
     property onDBChange: TNotifyEvent read FDBChange write FDBChange;
+    property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
   end;
 
 var

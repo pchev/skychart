@@ -53,7 +53,8 @@ uses
   pr_config_observatory in 'pr_config_observatory.pas' {f_config_observatory: TFrame},
   pr_config_pictures in 'pr_config_pictures.pas' {f_config_pictures: TFrame},
   pr_config_solsys in 'pr_config_solsys.pas' {f_config_solsys: TFrame},
-  pr_config_system in 'pr_config_system.pas' {f_config_system: TFrame};
+  pr_config_system in 'pr_config_system.pas' {f_config_system: TFrame},
+  cu_database in 'cu_database.pas';
 
 {$R *.RES}
 

@@ -332,14 +332,16 @@ object f_config_system: Tf_config_system
         Top = 0
         Width = 361
         Height = 41
+        Hint = 'Warning! Change to this setting will restart the program now!'
         Items.Strings = (
           'SQLite'
           'MySQL')
         Caption = 'Database '
         Columns = 2
         ItemIndex = 1
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 5
-        Visible = False
         OnClick = DBtypeGroupClick
       end
       object SQLiteBox: TGroupBox
@@ -363,6 +365,8 @@ object f_config_system: Tf_config_system
           Width = 289
           Height = 28
           Cursor = crIBeam
+          Color = clButton
+          ReadOnly = True
           TabOrder = 1
           OnChange = dbnamesqliteChange
         end

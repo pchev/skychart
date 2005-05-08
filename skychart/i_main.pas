@@ -193,6 +193,8 @@ begin
 for i:=0 to MDIChildCount-1 do
   if MDIChildren[i] is Tf_chart then
      with MDIChildren[i] as Tf_chart do begin
+      sc.Fits:=Fits;
+      sc.planet:=planet;
       sc.plot.cfgplot:=def_cfgplot;
       if applydef then begin
         CopySCconfig(def_cfgsc,sc.cfgsc);
@@ -334,7 +336,9 @@ end;
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
 DecimalSeparator:='.';
-{$ifdef linux}
+NeedRestart:=false;
+{$ifdef linux}    // FormShow is called immediately before Application.Run, so this form need to be created immediately here. Be sure to remove them from the .dpr file.
+f_info:=TF_info.Create(application);
 f_directory:=Tf_directory.Create(application);
 f_calendar:=Tf_calendar.Create(application);
 configfile:=expandfilename(Defaultconfigfile);
@@ -347,8 +351,6 @@ chdir(appdir);
 InitTrace;
 traceon:=true;
 catalog:=Tcatalog.Create(self);
-planet:=Tplanet.Create(self);
-Fits:=TFits.Create(self);
 {$ifdef mswindows}
 DdeOpen := false;
 DdeEnqueue := false;
@@ -369,6 +371,11 @@ begin
 try
  SetDefault;
  ReadDefault;
+ // must read db configuration before to create this one!
+ cdcdb:=TCDCdb.Create(self);
+ planet:=Tplanet.Create(self);
+ Fits:=TFits.Create(self);
+ cdcdb.onInitializeDB:=InitializeDB;
 {$ifdef mswindows}
  telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
  telescope.plugin:=def_cfgsc.ScopePlugin;
@@ -392,6 +399,7 @@ try
  Autorefresh.enabled:=true;
  if cfgm.AutostartServer then StartServer;
  f_calendar.planet:=planet;
+ f_calendar.cdb:=cdcdb;
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
@@ -406,11 +414,19 @@ try
 catalog.free;
 Fits.Free;
 planet.free;
+cdcdb.free;
 {$ifdef mswindows}
 telescope.free;
 DdeInfo.free;
 {$endif}
 StopServer;
+if NeedRestart then
+   {$ifdef mswindows}
+      ExecNoWait(paramstr(0));
+   {$endif}
+   {$ifdef linux}
+      ExecFork(paramstr(0),'-ns');
+   {$endif}
 except
 end;
 end;
@@ -714,7 +730,7 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
          sc.cfgsc.ShowAsteroid:=true;
          Refresh;
       end;
-      f_info.close;   
+      f_info.close;
    end;
 end;
 end;
@@ -881,9 +897,11 @@ if f_config=nil then begin
    f_config:=Tf_config.Create(application);
    f_config.onApplyConfig:=ApplyConfig;
    f_config.onDBChange:=ConfigDBChange;
+   f_config.onSaveAndRestart:=SaveAndRestart;
    f_config.onPrepareAsteroid:=PrepareAsteroid;
    f_config.Fits:=fits;
    f_config.catalog:=catalog;
+   f_config.db:=cdcdb;
 end;
 try
  f_config.ccat:=catalog.cfgcat;
@@ -931,6 +949,19 @@ cfgm.dbport:=f_config.cmain.dbport;
 ConnectDB;
 end;
 
+procedure Tf_main.SaveAndRestart(Sender: TObject);
+begin
+cfgm:=f_config.cmain;
+if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
+if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
+def_cfgsc:=f_config.csc;
+catalog.cfgcat:=f_config.ccat;
+catalog.cfgshr:=f_config.cshr;
+SavePrivateConfig(configfile);
+NeedRestart:=true;
+Close;
+end;
+
 procedure Tf_main.activateconfig;
 begin
     cfgm:=f_config.cmain;
@@ -964,6 +995,8 @@ begin
     {$endif}
     if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
+       sc.Fits:=Fits;
+       sc.planet:=planet;
        sc.cfgsc.FindOk:=false;
        if cfgm.NewBackgroundImage then begin
           sc.Fits.Filename:=sc.cfgsc.BackgroundImage;
@@ -1126,7 +1159,7 @@ cfgm.keepalive:=false;
 cfgm.AutostartServer:=true;
 cfgm.dbhost:='localhost';
 cfgm.dbport:=3306;
-cfgm.db:='cdc';
+cfgm.db:=slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]);
 cfgm.dbuser:='root';
 cfgm.dbpass:='';
 cfgm.ImagePath:=slash(appDir)+slash('data')+slash('pictures');
@@ -1700,6 +1733,7 @@ cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
 cfgm.keepalive:=ReadBool(section,'keepalive',cfgm.keepalive);
 cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
+DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
 cfgm.dbhost:=ReadString(section,'dbhost',cfgm.dbhost);
 cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
 cfgm.db:=ReadString(section,'db',cfgm.db);
@@ -2027,6 +2061,7 @@ WriteString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 WriteString(section,'ServerIPport',cfgm.ServerIPport);
 WriteBool(section,'keepalive',cfgm.keepalive);
 WriteBool(section,'AutostartServer',cfgm.AutostartServer);
+WriteInteger(section,'dbtype',ord(DBtype));
 WriteString(section,'dbhost',cfgm.dbhost);
 WriteInteger(section,'dbport',cfgm.dbport);
 WriteString(section,'db',cfgm.db);
@@ -2686,19 +2721,37 @@ end;
 procedure Tf_main.ConnectDB;
 begin
 try
-    if (planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport) and planet.CheckDB) then begin
-        Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
-        f_calendar.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
-        SetLpanel1('Connected to SQL database '+cfgm.db);
+    NeedToInitializeDB:=false;
+    if ((DBtype=sqlite) and not Fileexists(cfgm.db)) then
+       ForceDirectories(Extractfilepath(cfgm.db));
+    if (cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport)
+       and cdcdb.CheckDB) then begin
+          planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
+          Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
+          SetLpanel1('Connected to SQL database '+cfgm.db);
     end else begin
           SetLpanel1('SQL database not available.');
           def_cfgsc.ShowAsteroid:=false;
           def_cfgsc.ShowComet:=false;
           def_cfgsc.ShowImages:=false;
     end;
+    if NeedToInitializeDB then begin
+       f_info.setpage(2);
+       f_info.show;
+       f_info.ProgressMemo.lines.add('Initialize Database');
+       cdcdb.LoadSampleData(f_info.ProgressMemo);
+       Planet.PrepareAsteroid(DateTimetoJD(now), f_info.ProgressMemo.lines);
+       def_cfgsc.ShowAsteroid:=true;
+       f_info.close;
+    end;
 except
   SetLpanel1('SQL database not available.');
 end;
+end;
+
+procedure Tf_main.InitializeDB(Sender: TObject);
+begin
+  NeedToInitializeDB:=true;
 end;
 
 procedure Tf_main.ViewInfoExecute(Sender: TObject);

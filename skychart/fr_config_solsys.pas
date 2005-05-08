@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, fu_directory, u_util, u_projection, cu_planet, passql, pasmysql, passqlite,
+uses u_constant, fu_directory, u_util, u_projection, cu_planet, cu_database,
   SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
   QDialogs, QExtCtrls, QComCtrls, enhedits, QMask, QStdCtrls, QButtons;
 
@@ -214,7 +214,6 @@ type
     procedure AddastClick(Sender: TObject);
   private
     { Private declarations }
-    db:TSqlDB;
     FShowDB: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
     procedure ShowPlanet;
@@ -224,6 +223,7 @@ type
     procedure UpdAstList;
   public
     { Public declarations }
+    cdb:Tcdcdb;
     autoprocess: boolean;
     mycsc : conf_skychart;
     myccat : conf_catalog;

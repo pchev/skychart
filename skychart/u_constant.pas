@@ -616,9 +616,9 @@ const
                 'Truncate table',
                 'delete from'
                 );
-    defaultSqliteDB='cdc.db';
+    defaultSqliteDB='database/cdc.db';
     defaultMysqlDB='cdc';            
-var DBtype: TDBtype = mysql;
+var DBtype: TDBtype = sqlite;
 
 // SQL Table structure
 const
