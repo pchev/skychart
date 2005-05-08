@@ -30,7 +30,6 @@ const    maxl = 4000;
 type
   TFits = class(TComponent)
   private
-    db1 : TSqlDB;
     d8  : array[1..2880] of byte;
     d16 : array[1..1440] of word;
     d32 : array[1..720] of Longword;
@@ -56,6 +55,7 @@ type
     { Protected declarations }
   public
     { Public declarations }
+    db1 : TSqlDB;
      dbconnected, invertx, inverty : boolean;
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
@@ -86,9 +86,9 @@ begin
 inherited Create(AOwner);
 SetITT;
 if DBtype=mysql then
-   db1:=TMyDB.create(nil)
+   db1:=TMyDB.create(self)
 else if DBtype=sqlite then
-   db1:=TLiteDB.create(nil);
+   db1:=TLiteDB.create(self);
 dbconnected:=false;
 end;
 
@@ -725,17 +725,12 @@ end;
 
 Function TFits.ConnectDB(host,db,user,pass:string; port:integer):boolean;
 begin
-db1.Free; db1:=nil;
-if DBtype=mysql then
-   db1:=TMyDB.create(nil)
-else if DBtype=sqlite then
-   db1:=TLiteDB.create(nil);
 try
 if DBtype=mysql then begin
   db1.SetPort(port);
   db1.Connect(host,user,pass,db);
 end;
-db1.Use(db);
+if db1.database<>db then db1.Use(db);
 dbconnected:=db1.Active;
 result:=dbconnected;
 except

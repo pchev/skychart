@@ -22,10 +22,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Math, 
+uses Math, cu_database,
   SysUtils, Classes, QForms, Types, 
   QStdCtrls, QComCtrls, QControls, QGraphics, QExtCtrls, QGrids, QButtons,
-  QDialogs, QMask, Inifiles, passql, pasmysql, passqlite, enhedits, 
+  QDialogs, QMask, Inifiles, enhedits, 
   cu_jdcalendar, cu_planet, u_constant, fu_image, QActnList, QStdActns ;
 
 type
@@ -137,7 +137,6 @@ type
     FGetChartConfig: TScFunc;
     Fupdchart: TScFunc;
     c: conf_skychart;
-    db : TSqlDB;
     Feclipsepath: string;
     dat11,dat12,dat13,dat21,dat22,dat23,dat31,dat32,dat33,dat41,dat51,dat61,dat71,dat72,dat73 : double ;
     dat14,dat24,dat34,dat74,tz,west,east,title : string;
@@ -166,7 +165,7 @@ type
     procedure RefreshSolarEclipse;
   public
     { Public declarations }
-    function ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
+    cdb: Tcdcdb;
     procedure SetLang(languagefile:string);
     property planet: Tplanet read Fplanet write Fplanet;
     property config: conf_skychart read c write c;

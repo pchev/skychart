@@ -29,13 +29,13 @@ begin
  inherited Create(AOwner);
 end;
 
+procedure Tf_config_system.FrameExit(Sender: TObject);
+begin
+ if dbchanged and Assigned(FDBChange) then FDBChange(self);
+end;
+
 procedure Tf_config_system.FormShow(Sender: TObject);
 begin
-if db=nil then
-  if DBtype=mysql then
-     db:=TMyDB.create(self)
-  else if DBtype=sqlite then
-     db:=TLiteDB.create(self);
 dbchanged:=false;
 ShowSYS;
 ShowServer;
@@ -44,6 +44,7 @@ end;
 
 procedure Tf_config_system.ShowSYS;
 begin
+skipDBtypeGroupClick:=true;
 case DBtype of
  sqlite : begin
            DBtypeGroup.itemindex:=0;
@@ -56,6 +57,7 @@ case DBtype of
            SqliteBox.visible:=false;
           end;
 end;
+skipDBtypeGroupClick:=false;
 dbnamesqlite.Text:=cmain.db;
 dbname.Text:=cmain.db;
 dbhost.Text:=cmain.dbhost;
@@ -120,12 +122,18 @@ end;
 
 procedure Tf_config_system.DBtypeGroupClick(Sender: TObject);
 begin
-case DBtypeGroup.ItemIndex of
+if skipDBtypeGroupClick then begin
+   skipDBtypeGroupClick:=false;
+   exit;
+end;
+if messageDlg(DBtypeGroup.hint+crlf+crlf+'Also be sure the require database software is installed.'+crlf+'Please consult the documentation if you are unsure.'+crlf+'Do you want to continue?',mtConfirmation,[mbYes,mbNo],0)=mrYes then begin
+ case DBtypeGroup.ItemIndex of
   0 : begin
         DBtype:=sqlite;
         MysqlBox.visible:=false;
         SqliteBox.visible:=true;
-        dbnamesqlite.text:=slash(privatedir)+slash('data')+defaultSqliteDB;
+        dbnamesqlite.text:=slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]);
+        forcedirectories(extractfilepath(dbnamesqlite.text));
       end;
   1 : begin
         DBtype:=mysql;
@@ -133,13 +141,20 @@ case DBtypeGroup.ItemIndex of
         SqliteBox.visible:=false;
         dbname.text:=defaultMySqlDB;
       end;
+ end;
+ if Assigned(FSaveAndRestart) then FSaveAndRestart(self);
+end
+else begin
+ skipDBtypeGroupClick:=true;
+ case DBtype of
+  sqlite : DBtypeGroup.itemindex:=0;
+  mysql  : DBtypeGroup.itemindex:=1;
+ end;
 end;
-dbchanged:=true;
 end;
 
 procedure Tf_config_system.dbnamesqliteChange(Sender: TObject);
 begin
-if cmain.db<>dbnamesqlite.text then dbchanged:=true;
 cmain.db:=dbnamesqlite.text;
 end;
 
@@ -175,84 +190,24 @@ end;
 
 procedure Tf_config_system.chkdbClick(Sender: TObject);
 var msg: string;
-    i:integer;
-label dmsg;
 begin
-screen.cursor:=crHourGlass;
-try
-  if DBtype=mysql then begin
-    db.SetPort(cmain.dbport);
-    db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
-    if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
-       else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+trim(db.ErrorMessage)+crlf+'Verify if the MySQL Server is running and control the Userid/Password'; goto dmsg;end;
-  end;
-  if ((db.database=cmain.db)or db.use(cmain.db)) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
-     else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.ErrorMessage)+crlf; goto dmsg;end;
-  for i:=1 to numsqltable do begin
-     if sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then msg:=msg+'Table exist '+sqltable[i,1]+crlf
-        else begin msg:=msg+'Table '+sqltable[i,1]+' do not exist! '+crlf+'Please correct the error and retry.' ; goto dmsg;end;
-  end;
-  msg:=msg+'All is OK!';
-dmsg:
-  screen.cursor:=crDefault;
-  ShowMessage(msg);
-except
-  screen.cursor:=crDefault;
-  msg:='SQL database software is probably not installed!';
-  ShowMessage(msg);
-end;
+msg:=cdb.checkdbconfig(cmain^);
+ShowMessage(msg);
 end;
 
 procedure Tf_config_system.credbClick(Sender: TObject);
 var msg:string;
-    i,j:integer;
     ok:boolean;
 begin
-ok:=false;
-try
-  if DBtype=mysql then begin
-     db.SetPort(cmain.dbport);
-     db.database:='';
-     db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
-     if db.Active then db.Query('Create Database if not exists '+cmain.db);
-     msg:=trim(db.ErrorMessage);
-     if msg<>'0' then showmessage(msg);
-     db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-  end;
-  if db.database<>cmain.db then db.Use(cmain.db);
-  if db.database=cmain.db then begin
-    ok:=true;
-    for i:=1 to numsqltable do begin
-      if DBtype=sqlite then
-          db.Query('CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]))
-      else
-          db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
-      msg:=trim(db.ErrorMessage);
-      if sqltable[i,3]>'' then begin   // create the index
-         j:=strtoint(sqltable[i,3]);
-         db.Query('CREATE INDEX '+sqlindex[j,1]+' on '+sqlindex[j,2]);
-      end;
-      if sqltable[i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then begin
-         ok:=false;
-         msg:='Error creating table '+sqltable[i,1]+' '+msg;
-         showmessage(msg);
-         break;
-      end;
-    end;
-  end else begin
-     ok:=false;
-     msg:=trim(db.ErrorMessage);
-     if msg<>'0' then showmessage(msg);
-  end;
-  db.Query(flushtable[dbtype]);
-except
-end;
+screen.cursor:=crHourGlass;
+msg:=cdb.createdb(cmain^,ok);
 if ok then begin
   // signal new database
   if Assigned(FDBChange) then FDBChange(self);
   // load sample data
   if Assigned(FLoadMPCSample) then FLoadMPCSample(self);
 end;
+screen.cursor:=crDefault;
 chkdbClick(Sender);
 end;
 
@@ -261,20 +216,11 @@ var msg:string;
 begin
 if messagedlg('Warning!'+crlf+'You are about to destroy the database '+cmain.db+' and all it''s content, even if this content is not related to this program.'+crlf+'Are you sure you want to continue?',
               mtWarning, [mbYes,mbNo], 0)=mrYes then begin
-if DBtype=mysql then
-  try
-  db.SetPort(cmain.dbport);
-  db.database:='';
-  db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
-  if db.Active then db.Query('Drop Database '+cmain.db);
-  msg:=trim(db.ErrorMessage);
-  if msg<>'0' then showmessage(msg);
+  msg:=cdb.dropdb(cmain^);
+  if msg<>'' then showmessage(msg);
   // signal database no more exists
   if Assigned(FDBChange) then FDBChange(self);
-  except
-  end;
-end else if DBtype=sqlite then
-  Deletefile(cmain.db);
+end;
 end;
 
 procedure Tf_config_system.AstDBClick(Sender: TObject);
@@ -285,11 +231,6 @@ end;
 procedure Tf_config_system.CometDBClick(Sender: TObject);
 begin
  if Assigned(FShowComet) then FShowComet(self);
-end;
-
-procedure Tf_config_system.FrameExit(Sender: TObject);
-begin
- if dbchanged and Assigned(FDBChange) then FDBChange(self);
 end;
 
 procedure Tf_config_system.BitBtn1Click(Sender: TObject);

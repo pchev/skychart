@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_util, cu_fits, passql, pasmysql, passqlite,
+uses  u_constant, u_util, cu_fits, cu_database, 
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, FoldrDlg;
 
@@ -69,11 +69,10 @@ type
   private
     { Private declarations }
     FFits: TFits;
-    db:TSqlDB;
     procedure ShowImages;
-    procedure CountImages;
   public
     { Public declarations }
+    cdb: Tcdcdb;
     mycsc : conf_skychart;
     myccat : conf_catalog;
     mycshr : conf_shared;

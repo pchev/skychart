@@ -63,7 +63,6 @@ begin
   Application.CreateForm(Tf_about, f_about);
   f_about.ShowTimer:=true; f_about.Show;
   Application.CreateForm(Tf_detail, f_detail);
-  Application.CreateForm(Tf_info, f_info);
   Application.CreateForm(Tf_printsetup, f_printsetup);
   f_main.Init;
   Application.Run;

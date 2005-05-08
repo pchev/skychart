@@ -300,6 +300,8 @@ object f_config_system: Tf_config_system
           Top = 40
           Width = 281
           Height = 21
+          Color = clBtnFace
+          ReadOnly = True
           TabOrder = 0
           Text = 'dbnamesqlite'
           OnChange = dbnamesqliteChange
@@ -310,14 +312,16 @@ object f_config_system: Tf_config_system
         Top = 0
         Width = 337
         Height = 41
-        Caption = 'DBtypeGroup'
+        Hint = 'Warning! '#13#10'Change to this setting will restart the program now!'
+        Caption = 'Database Type'
         Columns = 2
         ItemIndex = 0
         Items.Strings = (
           'SQLite'
           'MySQL')
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 4
-        Visible = False
         OnClick = DBtypeGroupClick
       end
     end

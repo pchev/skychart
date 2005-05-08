@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses u_constant, u_util, u_projection, cu_fits, cu_catalog, 
+uses u_constant, u_util, u_projection, cu_fits, cu_catalog,  cu_database,
   SysUtils, Classes, QForms,Types, QStyle,
   QStdCtrls, QComCtrls, QControls, QGraphics, QExtCtrls, QGrids, QButtons,
   QDialogs, QMask, QCheckLst, QTypes, fr_config_time, fr_config_observatory,
@@ -82,11 +82,14 @@ type
     astpage,compage,dbpage: integer;
     FApplyConfig: TNotifyEvent;
     FDBChange: TNotifyEvent;
+    FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
     function GetFits: TFits;
     procedure SetFits(value: TFits);
     function GetCatalog: Tcatalog;
     procedure SetCatalog(value: Tcatalog);
+    function GetDB: Tcdcdb;
+    procedure SetDB(value: Tcdcdb);
     procedure SetCcat(value: conf_catalog);
     procedure SetCshr(value: conf_shared);
     procedure SetCsc(value: conf_skychart);
@@ -97,6 +100,7 @@ type
     procedure ShowAsteroidSetting(Sender: TObject);
     procedure LoadMPCSample(Sender: TObject);
     procedure SysDBChange(Sender: TObject);
+    procedure SysSaveAndRestart(Sender: TObject);
     function SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
     
   public
@@ -108,8 +112,10 @@ type
     property cmain : conf_main read Fcmain write SetCmain;
     property fits : TFits read GetFits write SetFits;
     property catalog : Tcatalog read GetCatalog write SetCatalog;
+    property db : Tcdcdb read GetDB write SetDB;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
     property onDBChange: TNotifyEvent read FDBChange write FDBChange;
+    property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
   end;
 

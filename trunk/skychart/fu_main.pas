@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                                 
 interface
 
-uses cu_catalog, cu_planet, cu_fits, u_constant, u_util, blcksock, libc, Math,
+uses cu_catalog, cu_planet, cu_fits, cu_database, u_constant, u_util, blcksock, libc, Math,
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
      QStdCtrls, IniFiles, Types, QButtons, QFileCtrls, QClipbrd;
@@ -373,6 +373,7 @@ type
   private
     { Private declarations }
     cryptedpwd: string;
+    NeedRestart,NeedToInitializeDB: Boolean;
     function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
@@ -387,6 +388,7 @@ type
     catalog : Tcatalog;
     fits : TFits;
     planet  : Tplanet;
+    cdcdb: TCDCdb;
     serverinfo,topmsg : string;
     TCPDaemon: TTCPDaemon;
     Config_Version : string;
@@ -429,6 +431,8 @@ type
     procedure GetChartConfig(var csc:conf_skychart);
     procedure DrawChart(var csc:conf_skychart);
     procedure ConfigDBChange(Sender: TObject);
+    procedure SaveAndRestart(Sender: TObject);
+    procedure InitializeDB(Sender: TObject);
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
   end;
 

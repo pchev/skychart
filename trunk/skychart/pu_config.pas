@@ -29,10 +29,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, u_constant, u_util, jpeg, pngimage, passql, pasmysql, u_projection,
+uses Math, u_constant, u_util, jpeg, pngimage, u_projection,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
-  FoldrDlg, StrUtils,  cu_fits, cu_catalog, 
+  FoldrDlg, StrUtils,  cu_fits, cu_catalog, cu_database,
   pr_config_chart, pr_config_observatory, pr_config_time, pr_config_catalog,
   pr_config_system, pr_config_pictures, pr_config_display, pr_config_solsys;
 
@@ -82,11 +82,14 @@ type
     astpage,compage,dbpage: integer;
     FApplyConfig: TNotifyEvent;
     FDBChange: TNotifyEvent;
+    FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
     function GetFits: TFits;
     procedure SetFits(value: TFits);
     function GetCatalog: Tcatalog;
     procedure SetCatalog(value: Tcatalog);
+    function GetDB: Tcdcdb;
+    procedure SetDB(value: Tcdcdb);
     procedure SetCcat(value: conf_catalog);
     procedure SetCshr(value: conf_shared);
     procedure SetCsc(value: conf_skychart);
@@ -97,6 +100,7 @@ type
     procedure ShowAsteroidSetting(Sender: TObject);
     procedure LoadMPCSample(Sender: TObject);
     procedure SysDBChange(Sender: TObject);
+    procedure SysSaveAndRestart(Sender: TObject);
     function SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
   public
     { Déclarations publiques }
@@ -107,8 +111,10 @@ type
     property cmain : conf_main read Fcmain write SetCmain;
     property fits : TFits read GetFits write SetFits;
     property catalog : Tcatalog read GetCatalog write SetCatalog;
+    property db : Tcdcdb read GetDB write SetDB;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
     property onDBChange: TNotifyEvent read FDBChange write FDBChange;
+    property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
   end;
 
