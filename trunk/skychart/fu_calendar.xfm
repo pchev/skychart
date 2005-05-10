@@ -211,6 +211,7 @@ object f_calendar: Tf_calendar
       MaxLength = 12
       TabOrder = 0
       Text = '  2005. 4. 2'
+      OnChange = Date1Change
       JD = 2453462.500000000000000000
       Year = 2005
       Month = 4
@@ -226,6 +227,7 @@ object f_calendar: Tf_calendar
       MaxLength = 12
       TabOrder = 1
       Text = '  2005. 4. 2'
+      OnChange = Date2Change
       JD = 2453462.500000000000000000
       Year = 2005
       Month = 4
@@ -236,8 +238,12 @@ object f_calendar: Tf_calendar
       Top = 41
       Width = 33
       Height = 22
+      Hint = '0..9999'
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 3
       Value = 1
+      MaxValue = 9999
     end
     object Time: TTimePicker
       Left = 72

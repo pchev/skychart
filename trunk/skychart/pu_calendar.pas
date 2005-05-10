@@ -131,6 +131,8 @@ type
     procedure HelpContents1Execute(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
+    procedure Date1Change(Sender: TObject);
+    procedure Date2Change(Sender: TObject);
   private
     { Private declarations }
     initial: boolean;
@@ -140,7 +142,9 @@ type
     Fupdchart: TScFunc;
     c: conf_skychart;
     Feclipsepath: string;
-    dat11,dat12,dat13,dat21,dat22,dat23,dat31,dat32,dat33,dat41,dat51,dat61,dat71,dat72,dat73 : double ;
+    deltajd: double;
+    dat11,dat12,dat13,dat21,dat22,dat23,dat31,dat32,dat33 : double ;
+    dat41,dat51,dat61,dat71,dat72,dat73 : double ;
     dat14,dat24,dat34,dat74,tz,west,east,title : string;
     century_Solar, century_Lunar: string;
     appmsg: array[1..nummsg] of string;

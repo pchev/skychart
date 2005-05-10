@@ -573,6 +573,7 @@ imabmp.width:=Fwidth;
 imabmp.pixelformat:=pf32bit;
 dmin:=Fheader.dmin+Fmin_sigma*Fsigma;
 dmax:=Fheader.dmax-Fmax_sigma*Fsigma;
+if dmin=dmax then dmax:=dmin+1;
 c:=255/(dmax-dmin);
 case Fheader.bitpix of
      -64 : for i:=0 to Fheight-1 do begin
