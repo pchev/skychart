@@ -94,7 +94,6 @@ type
     WindowMinimizeAll1: TWindowMinimizeAll;
     HelpAbout1: TAction;
     FileClose1: TWindowClose;
-    WindowTileItem2: TMenuItem;
     WindowClose1: TWindowClose;
     WindowTile1: TWindowTile;
     ImageList1: TImageList;
@@ -127,8 +126,6 @@ type
     ToolButtonConfig: TToolButton;
     FlipButtonX: TToolButton;
     ToolBar3: TToolBar;
-    ToolButtonF10m: TToolButton;
-    ToolButtonF15: TToolButton;
     PPanels0: TPanel;
     LPanels0: TLabel;
     PPanels1: TPanel;
@@ -143,12 +140,6 @@ type
     Flipx: TAction;
     Flipy: TAction;
     FlipButtonY: TToolButton;
-    ToolButtonF1: TToolButton;
-    ToolButtonF5: TToolButton;
-    ToolButtonF30: TToolButton;
-    ToolButtonF50: TToolButton;
-    ToolButtonF90: TToolButton;
-    ToolButtonF120: TToolButton;
     AutoRefresh: TTimer;
     ChangeProj: TAction;
     rot_plus: TAction;
@@ -286,6 +277,73 @@ type
     ToolButtonGridEq: TToolButton;
     ButtonStarSize: TSpeedButton;
     EditCopy1: TEditCopy;
+    Field1: TSpeedButton;
+    Field2: TSpeedButton;
+    Field3: TSpeedButton;
+    Field4: TSpeedButton;
+    Field5: TSpeedButton;
+    Field6: TSpeedButton;
+    Field7: TSpeedButton;
+    Field8: TSpeedButton;
+    Field9: TSpeedButton;
+    Field10: TSpeedButton;
+    N6: TMenuItem;
+    Calendar1: TMenuItem;
+    Undo1: TMenuItem;
+    Redo1: TMenuItem;
+    Chart1: TMenuItem;
+    Projection1: TMenuItem;
+    EquatorialCoordinate1: TMenuItem;
+    AltAzProjection1: TMenuItem;
+    EclipticProjection1: TMenuItem;
+    GalacticProjection1: TMenuItem;
+    zoomplus1: TMenuItem;
+    zoomminus1: TMenuItem;
+    Transformation1: TMenuItem;
+    Flipx1: TMenuItem;
+    MirrorVertically1: TMenuItem;
+    rotplus1: TMenuItem;
+    rotminus1: TMenuItem;
+    FieldofVision1: TMenuItem;
+    SetFov1: TMenuItem;
+    SetFov2: TMenuItem;
+    SetFov3: TMenuItem;
+    SetFov4: TMenuItem;
+    SetFov5: TMenuItem;
+    SetFov6: TMenuItem;
+    SetFov7: TMenuItem;
+    SetFov8: TMenuItem;
+    SetFov9: TMenuItem;
+    SetFov10: TMenuItem;
+    allSky1: TMenuItem;
+    ViewHorizon1: TMenuItem;
+    toN1: TMenuItem;
+    toS1: TMenuItem;
+    toE1: TMenuItem;
+    toW1: TMenuItem;
+    ShowObjects1: TMenuItem;
+    ShowStars1: TMenuItem;
+    ShowNebulae1: TMenuItem;
+    ShowPictures1: TMenuItem;
+    ShowLines1: TMenuItem;
+    ShowPlanets1: TMenuItem;
+    ShowAsteroids1: TMenuItem;
+    ShowComets1: TMenuItem;
+    ShowMilkyWay1: TMenuItem;
+    LinesGrid1: TMenuItem;
+    Grid1: TMenuItem;
+    GridEQ1: TMenuItem;
+    ShowConstellationLine1: TMenuItem;
+    ShowConstellationLimit1: TMenuItem;
+    ShowGalacticEquator1: TMenuItem;
+    ShowEcliptic1: TMenuItem;
+    ShowMark1: TMenuItem;
+    ShowLabels1: TMenuItem;
+    ShowObjectbelowthehorizon1: TMenuItem;
+    Telescope1: TMenuItem;
+    Connect1: TMenuItem;
+    Slew1: TMenuItem;
+    TelescopeSync1: TMenuItem;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -305,7 +363,7 @@ type
     procedure quicksearchClick(Sender: TObject);
     procedure FlipxExecute(Sender: TObject);
     procedure FlipyExecute(Sender: TObject);
-    procedure SetFOVExecute(Sender: TObject);
+    procedure SetFOVClick(Sender: TObject);
     procedure AutoRefreshTimer(Sender: TObject);
     procedure rot_plusExecute(Sender: TObject);
     procedure rot_minusExecute(Sender: TObject);
@@ -369,6 +427,7 @@ type
     procedure HelpContents1Execute(Sender: TObject);
     procedure ButtonStarSizeClick(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
+    procedure SetFovExecute(Sender: TObject);
     
   private
     { Private declarations }
@@ -472,7 +531,6 @@ activecontrol:=nil;
 end;
 
 // End of Linux specific CLX code:
-
 
 end.
 

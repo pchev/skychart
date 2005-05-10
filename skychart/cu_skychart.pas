@@ -192,7 +192,7 @@ try
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque) then DrawHorizon;
     if cfgsc.shownebulae or cfgsc.ShowImages then DrawNebulae;
-    if cfgsc.ShowImages then DrawNebImages;
+    if cfgsc.ShowBackgroundImage then DrawNebImages;
     if cfgsc.showline then DrawOutline;
   end;
   // then the lines
@@ -517,6 +517,8 @@ aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
          cfgsc.TrackOn:=false;
          if FFits.Header.valid then begin
             cfgsc.Projpole:=Equat;
+            cfgsc.JDChart:=jd2000; //FFits.Header.equinox;
+            cfgsc.lastJDchart:=cfgsc.JDChart; 
             cfgsc.racentre:=FFits.Center_RA;
             cfgsc.decentre:=FFits.Center_DE;
             cfgsc.fov:=FFits.Img_Width;

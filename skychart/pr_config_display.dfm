@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_display
+    ActivePage = t_nebcolor
     Align = alClient
     TabOrder = 0
     object t_display: TTabSheet
@@ -1388,6 +1388,144 @@ object f_config_display: Tf_config_display
         Width = 103
         Height = 13
         Caption = 'Nebulae Color Setting'
+      end
+      object Label1: TLabel
+        Left = 136
+        Top = 40
+        Width = 109
+        Height = 13
+        Caption = 'Low surface brightness'
+      end
+      object Label2: TLabel
+        Left = 320
+        Top = 40
+        Width = 111
+        Height = 13
+        Caption = 'High surface brightness'
+      end
+      object Label3: TLabel
+        Left = 40
+        Top = 144
+        Width = 32
+        Height = 13
+        Caption = 'Galaxy'
+      end
+      object Label4: TLabel
+        Left = 40
+        Top = 232
+        Width = 32
+        Height = 13
+        Caption = 'Cluster'
+      end
+      object Label5: TLabel
+        Left = 40
+        Top = 320
+        Width = 34
+        Height = 13
+        Caption = 'Nebula'
+      end
+      object NebGrayBar: TTrackBar
+        Left = 128
+        Top = 56
+        Width = 150
+        Height = 45
+        Max = 255
+        Orientation = trHorizontal
+        PageSize = 26
+        Frequency = 26
+        Position = 0
+        SelEnd = 0
+        SelStart = 0
+        TabOrder = 0
+        TickMarks = tmBottomRight
+        TickStyle = tsAuto
+        OnChange = NebGrayBarChange
+      end
+      object NebBrightBar: TTrackBar
+        Left = 312
+        Top = 56
+        Width = 150
+        Height = 45
+        Max = 255
+        Orientation = trHorizontal
+        PageSize = 26
+        Frequency = 26
+        Position = 0
+        SelEnd = 0
+        SelStart = 0
+        TabOrder = 1
+        TickMarks = tmBottomRight
+        TickStyle = tsAuto
+        OnChange = NebBrightBarChange
+      end
+      object NebColorPanel: TPanel
+        Left = 104
+        Top = 104
+        Width = 361
+        Height = 281
+        Color = clBlack
+        TabOrder = 2
+        object Shape29: TShape
+          Tag = 8
+          Left = 56
+          Top = 16
+          Width = 97
+          Height = 49
+          Shape = stEllipse
+          OnMouseUp = NebShapeMouseUp
+        end
+        object Shape30: TShape
+          Tag = 8
+          Left = 232
+          Top = 16
+          Width = 97
+          Height = 49
+          Shape = stEllipse
+          OnMouseUp = NebShapeMouseUp
+        end
+        object Shape31: TShape
+          Tag = 9
+          Left = 72
+          Top = 96
+          Width = 65
+          Height = 65
+          Shape = stCircle
+          OnMouseUp = NebShapeMouseUp
+        end
+        object Shape32: TShape
+          Tag = 9
+          Left = 248
+          Top = 96
+          Width = 65
+          Height = 65
+          Shape = stCircle
+          OnMouseUp = NebShapeMouseUp
+        end
+        object Shape33: TShape
+          Tag = 10
+          Left = 72
+          Top = 192
+          Width = 65
+          Height = 65
+          OnMouseUp = NebShapeMouseUp
+        end
+        object Shape34: TShape
+          Tag = 10
+          Left = 248
+          Top = 192
+          Width = 65
+          Height = 65
+          OnMouseUp = NebShapeMouseUp
+        end
+      end
+      object DefNebColorButton: TButton
+        Left = 16
+        Top = 56
+        Width = 75
+        Height = 25
+        Caption = 'Default'
+        TabOrder = 3
+        OnClick = DefNebColorButtonClick
       end
     end
     object t_lines: TTabSheet

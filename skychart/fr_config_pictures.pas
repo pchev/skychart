@@ -55,6 +55,13 @@ type
     BitBtn5: TBitBtn;
     ShowBackImg: TCheckBox;
     OpenDialog1: TOpenDialog;
+    Image1: TImage;
+    Panel1: TPanel;
+    ImgLumBar2: TTrackBar;
+    ImgContrastBar2: TTrackBar;
+    Label1: TLabel;
+    Label2: TLabel;
+    ImageTimer1: TTimer;
     procedure imgpathChange(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -65,10 +72,14 @@ type
     procedure backimgChange(Sender: TObject);
     procedure BitBtn5Click(Sender: TObject);
     procedure ShowBackImgClick(Sender: TObject);
+    procedure ImgContrastBar2Change(Sender: TObject);
+    procedure ImgLumBar2Change(Sender: TObject);
+    procedure ImageTimer1Timer(Sender: TObject);
   private
     { Private declarations }
     FFits: TFits;
     procedure ShowImages;
+    Procedure RefreshImage;
   public
     { Public declarations }
     cdb:Tcdcdb;
@@ -100,5 +111,8 @@ implementation
 {$include i_config_pictures.pas}
 
 // end of common code
+
+
+
 
 end.

@@ -1,7 +1,7 @@
 object f_main: Tf_main
   Tag = 1
-  Left = 211
-  Top = 142
+  Left = 255
+  Top = 141
   Width = 800
   Height = 600
   HorzScrollBar.Range = 54
@@ -2779,7 +2779,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = FileNew1
-        Caption = '&New'
+        Caption = '&New Chart'
       end
       object ToolButtonOpen: TToolButton
         HelpType = htContext
@@ -2787,7 +2787,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = FileOpen1
-        Caption = '&Open'
+        Caption = '&Open Chart'
       end
       object ToolButtonSave: TToolButton
         HelpType = htContext
@@ -2845,7 +2845,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = zoomplus
-        Caption = 'zoomplus'
+        Caption = 'Zoom In'
       end
       object ToolButtonUnZomm: TToolButton
         HelpType = htContext
@@ -2853,7 +2853,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = zoomminus
-        Caption = 'zoomminus'
+        Caption = 'Zoom Out'
       end
       object ToolButton7: TToolButton
         Left = 272
@@ -2891,7 +2891,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = Undo
-        Caption = 'Undo'
+        Caption = 'Undo Last Change'
       end
       object ToolButtonRedo: TToolButton
         HelpType = htContext
@@ -2899,7 +2899,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = Redo
-        Caption = 'Redo'
+        Caption = 'Redo Last Change'
       end
       object ToolButton26: TToolButton
         Left = 419
@@ -3227,6 +3227,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowStars
+        Caption = 'Show Stars'
       end
       object ToolButtonShowNebulae: TToolButton
         Left = 26
@@ -3234,6 +3235,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowNebulae
+        Caption = 'Show Nebulae'
       end
       object ToolButtonShowPictures: TToolButton
         Left = 49
@@ -3241,6 +3243,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowPictures
+        Caption = 'Show Pictures'
       end
       object ToolButtonShowLines: TToolButton
         Left = 72
@@ -3248,6 +3251,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowLines
+        Caption = 'Show Lines'
       end
       object ToolButtonShowPlanets: TToolButton
         Left = 95
@@ -3255,6 +3259,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowPlanets
+        Caption = 'Show Planets'
       end
       object ToolButtonShowAsteroids: TToolButton
         Left = 118
@@ -3262,6 +3267,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowAsteroids
+        Caption = 'Show Asteroids'
       end
       object ToolButtonShowComets: TToolButton
         Left = 141
@@ -3269,6 +3275,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowComets
+        Caption = 'Show Comets'
       end
       object ToolButtonShowMilkyWay: TToolButton
         Left = 164
@@ -3276,6 +3283,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowMilkyWay
+        Caption = 'Show Milky Way'
       end
       object ToolButtonShowConstellationLine: TToolButton
         Left = 233
@@ -3283,6 +3291,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowConstellationLine
+        Caption = 'Show Constellation Line'
       end
       object ToolButtonShowConstellationLimit: TToolButton
         Left = 256
@@ -3290,6 +3299,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowConstellationLimit
+        Caption = 'Show Constellation Limit'
       end
       object ToolButtonShowGalacticEquator: TToolButton
         Left = 279
@@ -3297,6 +3307,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowGalacticEquator
+        Caption = 'Show Galactic Equator'
       end
       object ToolButtonShowEcliptic: TToolButton
         Left = 302
@@ -3304,6 +3315,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowEcliptic
+        Caption = 'Show Ecliptic'
       end
       object ToolButtonShowMark: TToolButton
         Left = 325
@@ -3311,6 +3323,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowMark
+        Caption = 'Show Mark'
       end
       object ToolButtonShowLabels: TToolButton
         Left = 348
@@ -3318,6 +3331,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowLabels
+        Caption = 'Show Labels'
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
         Left = 371
@@ -3325,6 +3339,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = ShowObjectbelowHorizon
+        Caption = 'Below the horizon'
       end
       object ToolButtonswitchbackground: TToolButton
         Left = 394
@@ -3416,7 +3431,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = Grid
-        Caption = 'Grid'
+        Caption = 'Show Coordinate Grid'
       end
       object ToolButtonGridEq: TToolButton
         HelpType = htContext
@@ -3424,7 +3439,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = GridEQ
-        Caption = 'GridEQ'
+        Caption = 'Add Equatorial Grid'
       end
     end
   end
@@ -3462,6 +3477,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = EquatorialProjection
+        Caption = 'Equatorial Coordinate'
         Wrap = True
       end
       object ToolButtonAZ: TToolButton
@@ -3470,7 +3486,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = AltAzProjection
-        Caption = 'AltAzProjection'
+        Caption = 'Alt-Az Coordinate'
         Wrap = True
       end
       object ToolButtonEC: TToolButton
@@ -3488,7 +3504,7 @@ object f_main: Tf_main
         Height = 23
         Style = tbsCheck
         Action = GalacticProjection
-        Caption = 'GalacticProjection'
+        Caption = 'Galactic Coordinate'
         Wrap = True
       end
       object FlipButtonX: TToolButton
@@ -3497,7 +3513,7 @@ object f_main: Tf_main
         Top = 119
         Height = 23
         Action = Flipx
-        Caption = 'Flipx'
+        Caption = 'Mirror Horizontally'
       end
       object FlipButtonY: TToolButton
         HelpType = htContext
@@ -3505,7 +3521,7 @@ object f_main: Tf_main
         Top = 142
         Height = 23
         Action = Flipy
-        Caption = 'Flipy'
+        Caption = 'Mirror Vertically'
       end
       object ToolButtonRotP: TToolButton
         HelpType = htContext
@@ -3513,7 +3529,7 @@ object f_main: Tf_main
         Top = 165
         Height = 23
         Action = rot_plus
-        Caption = 'rot_plus'
+        Caption = 'Rotate Right'
       end
       object ToolButtonRotM: TToolButton
         HelpType = htContext
@@ -3521,7 +3537,7 @@ object f_main: Tf_main
         Top = 188
         Height = 23
         Action = rot_minus
-        Caption = 'rot_minus'
+        Caption = 'Rotate Left'
       end
     end
   end
@@ -3532,11 +3548,162 @@ object f_main: Tf_main
     Height = 489
     Align = alRight
     TabOrder = 2
+    object Field1: TSpeedButton
+      Left = 2
+      Top = 1
+      Width = 23
+      Height = 22
+      Caption = '10'#39
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field2: TSpeedButton
+      Tag = 1
+      Left = 2
+      Top = 23
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field3: TSpeedButton
+      Tag = 2
+      Left = 2
+      Top = 45
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field4: TSpeedButton
+      Tag = 3
+      Left = 2
+      Top = 67
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field5: TSpeedButton
+      Tag = 4
+      Left = 2
+      Top = 89
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field6: TSpeedButton
+      Tag = 5
+      Left = 2
+      Top = 111
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field7: TSpeedButton
+      Tag = 6
+      Left = 2
+      Top = 133
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field8: TSpeedButton
+      Tag = 7
+      Left = 2
+      Top = 155
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field9: TSpeedButton
+      Tag = 8
+      Left = 2
+      Top = 177
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
+    object Field10: TSpeedButton
+      Tag = 9
+      Left = 2
+      Top = 200
+      Width = 23
+      Height = 22
+      Flat = True
+      Font.Color = clNavy
+      Font.Height = 10
+      Font.Name = 'adobe-helvetica'
+      Font.Pitch = fpVariable
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = SetFOVClick
+    end
     object ToolBar3: TToolBar
       Left = 1
-      Top = 1
+      Top = 223
       Width = 25
-      Height = 326
+      Height = 142
+      Align = alNone
       AutoSize = True
       ButtonHeight = 23
       Caption = 'ToolBar3'
@@ -3553,116 +3720,42 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      object ToolButtonF10m: TToolButton
-        Tag = 10
-        HelpType = htContext
-        Left = 1
-        Top = 4
-        Height = 23
-        Caption = 'ToolButtonF10m'
-        ImageIndex = 26
-        OnClick = SetFOVExecute
-      end
-      object ToolButtonF15: TToolButton
-        Tag = 900
-        HelpType = htContext
-        Left = 1
-        Top = 73
-        Height = 23
-        Caption = '15'#176' '
-        ImageIndex = 29
-        OnClick = SetFOVExecute
-      end
-      object ToolButtonF1: TToolButton
-        Tag = 60
-        Left = 1
-        Top = 27
-        Height = 23
-        Caption = '1'#176' '
-        ImageIndex = 27
-        OnClick = SetFOVExecute
-      end
-      object ToolButtonF5: TToolButton
-        Tag = 300
-        Left = 1
-        Top = 50
-        Height = 23
-        Caption = '5'#176' '
-        ImageIndex = 28
-        OnClick = SetFOVExecute
-      end
-      object ToolButtonF30: TToolButton
-        Tag = 1800
-        Left = 1
-        Top = 96
-        Height = 23
-        Caption = '30'#176' '
-        ImageIndex = 30
-        OnClick = SetFOVExecute
-      end
-      object ToolButtonF50: TToolButton
-        Tag = 3000
-        Left = 1
-        Top = 119
-        Height = 23
-        Caption = '50'#176' '
-        ImageIndex = 31
-        OnClick = SetFOVExecute
-      end
-      object ToolButtonF90: TToolButton
-        Tag = 5400
-        Left = 1
-        Top = 142
-        Height = 23
-        Caption = '90'#176' '
-        ImageIndex = 32
-        OnClick = SetFOVExecute
-      end
-      object ToolButtonF120: TToolButton
-        Tag = 7200
-        Left = 1
-        Top = 165
-        Height = 23
-        Caption = '120'#176
-        ImageIndex = 33
-        OnClick = SetFOVExecute
-      end
       object ToolButtonToN: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 211
+        Top = 27
         Height = 23
         Action = toN
-        Caption = 'toN'
+        Caption = 'North'
       end
       object ToolButtonToS: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 234
+        Top = 50
         Height = 23
         Action = toS
-        Caption = 'toS'
+        Caption = 'South'
       end
       object ToolButtonToE: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 257
+        Top = 73
         Height = 23
         Action = toE
-        Caption = 'toE'
+        Caption = 'East'
       end
       object ToolButtonToW: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 280
+        Top = 96
         Height = 23
         Action = toW
-        Caption = 'toW'
+        Caption = 'West'
       end
       object ToolButtonToZ: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 303
+        Top = 119
         Height = 23
         Action = toZenith
         Caption = 'toZenith'
@@ -3670,10 +3763,10 @@ object f_main: Tf_main
       object ToolButtonAllSky: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 188
+        Top = 4
         Height = 23
         Action = allSky
-        Caption = 'allSky'
+        Caption = 'Show All Sky'
       end
     end
   end
@@ -3742,6 +3835,12 @@ object f_main: Tf_main
       object FileCloseItem: TMenuItem
         Action = FileClose1
       end
+      object N6: TMenuItem
+        Caption = '-'
+      end
+      object Calendar1: TMenuItem
+        Action = Calendar
+      end
       object N2: TMenuItem
         Caption = '-'
       end
@@ -3764,6 +3863,32 @@ object f_main: Tf_main
       Hint = 'Edit commands'
       object Copy1: TMenuItem
         Action = EditCopy1
+      end
+      object Undo1: TMenuItem
+        Action = Undo
+      end
+      object Redo1: TMenuItem
+        Action = Redo
+      end
+    end
+    object Setup1: TMenuItem
+      Caption = '&Setup'
+      GroupIndex = 9
+      object Configuration1: TMenuItem
+        Action = OpenConfig
+        GroupIndex = 9
+      end
+      object SaveConfigurationNow1: TMenuItem
+        Action = SaveConfiguration
+        GroupIndex = 9
+      end
+      object N3: TMenuItem
+        Caption = '-'
+        GroupIndex = 9
+      end
+      object SaveConfigurationOnExit1: TMenuItem
+        Action = SaveConfigOnExit
+        GroupIndex = 9
       end
     end
     object View1: TMenuItem
@@ -3802,25 +3927,186 @@ object f_main: Tf_main
       object ViewInformation1: TMenuItem
         Action = ViewInfo
       end
+      object zoomplus1: TMenuItem
+        Action = zoomplus
+      end
+      object zoomminus1: TMenuItem
+        Action = zoomminus
+      end
     end
-    object Setup1: TMenuItem
-      Caption = '&Setup'
+    object Chart1: TMenuItem
+      Caption = 'Chart'
       GroupIndex = 9
-      object Configuration1: TMenuItem
-        Action = OpenConfig
-        GroupIndex = 9
+      object Projection1: TMenuItem
+        Caption = 'Projection'
+        object EquatorialCoordinate1: TMenuItem
+          Action = EquatorialProjection
+        end
+        object AltAzProjection1: TMenuItem
+          Action = AltAzProjection
+        end
+        object EclipticProjection1: TMenuItem
+          Action = EclipticProjection
+          Caption = 'Ecliptic Coordinate'
+        end
+        object GalacticProjection1: TMenuItem
+          Action = GalacticProjection
+        end
       end
-      object SaveConfigurationNow1: TMenuItem
-        Action = SaveConfiguration
-        GroupIndex = 9
+      object Transformation1: TMenuItem
+        Caption = 'Transformation'
+        object Flipx1: TMenuItem
+          Action = Flipx
+        end
+        object MirrorVertically1: TMenuItem
+          Action = Flipy
+        end
+        object rotplus1: TMenuItem
+          Action = rot_plus
+        end
+        object rotminus1: TMenuItem
+          Action = rot_minus
+        end
       end
-      object N3: TMenuItem
-        Caption = '-'
-        GroupIndex = 9
+      object FieldofVision1: TMenuItem
+        Caption = 'Field of Vision'
+        object SetFov1: TMenuItem
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov2: TMenuItem
+          Tag = 1
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov3: TMenuItem
+          Tag = 2
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov4: TMenuItem
+          Tag = 3
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov5: TMenuItem
+          Tag = 4
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov6: TMenuItem
+          Tag = 5
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov7: TMenuItem
+          Tag = 6
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov8: TMenuItem
+          Tag = 7
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov9: TMenuItem
+          Tag = 8
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object SetFov10: TMenuItem
+          Tag = 9
+          Caption = 'SetFov'
+          OnClick = SetFovExecute
+        end
+        object allSky1: TMenuItem
+          Action = allSky
+        end
       end
-      object SaveConfigurationOnExit1: TMenuItem
-        Action = SaveConfigOnExit
-        GroupIndex = 9
+      object ViewHorizon1: TMenuItem
+        Caption = 'View Horizon'
+        object toN1: TMenuItem
+          Action = toN
+        end
+        object toS1: TMenuItem
+          Action = toS
+        end
+        object toE1: TMenuItem
+          Action = toE
+        end
+        object toW1: TMenuItem
+          Action = toW
+        end
+      end
+      object ShowObjects1: TMenuItem
+        Caption = 'Show Objects'
+        object ShowStars1: TMenuItem
+          Action = ShowStars
+        end
+        object ShowNebulae1: TMenuItem
+          Action = ShowNebulae
+        end
+        object ShowPictures1: TMenuItem
+          Action = ShowPictures
+        end
+        object ShowLines1: TMenuItem
+          Action = ShowLines
+        end
+        object ShowPlanets1: TMenuItem
+          Action = ShowPlanets
+        end
+        object ShowAsteroids1: TMenuItem
+          Action = ShowAsteroids
+        end
+        object ShowComets1: TMenuItem
+          Action = ShowComets
+        end
+        object ShowMilkyWay1: TMenuItem
+          Action = ShowMilkyWay
+        end
+      end
+      object LinesGrid1: TMenuItem
+        Caption = 'Lines / Grid'
+        object Grid1: TMenuItem
+          Action = Grid
+        end
+        object GridEQ1: TMenuItem
+          Action = GridEQ
+        end
+        object ShowConstellationLine1: TMenuItem
+          Action = ShowConstellationLine
+        end
+        object ShowConstellationLimit1: TMenuItem
+          Action = ShowConstellationLimit
+        end
+        object ShowGalacticEquator1: TMenuItem
+          Action = ShowGalacticEquator
+        end
+        object ShowEcliptic1: TMenuItem
+          Action = ShowEcliptic
+        end
+        object ShowMark1: TMenuItem
+          Action = ShowMark
+        end
+      end
+      object ShowLabels1: TMenuItem
+        Action = ShowLabels
+      end
+      object ShowObjectbelowthehorizon1: TMenuItem
+        Action = ShowObjectbelowHorizon
+      end
+    end
+    object Telescope1: TMenuItem
+      Caption = 'Telescope'
+      GroupIndex = 9
+      object Connect1: TMenuItem
+        Action = TelescopeConnect
+      end
+      object Slew1: TMenuItem
+        Action = TelescopeSlew
+      end
+      object TelescopeSync1: TMenuItem
+        Action = TelescopeSync
       end
     end
     object Window1: TMenuItem
@@ -3835,9 +4121,6 @@ object f_main: Tf_main
       end
       object WindowMinimizeItem: TMenuItem
         Action = WindowMinimizeAll1
-      end
-      object WindowTileItem2: TMenuItem
-        Action = WindowClose1
       end
     end
     object Help1: TMenuItem
@@ -3877,7 +4160,7 @@ object f_main: Tf_main
     Top = 200
     object FileNew1: TAction
       Category = 'File'
-      Caption = '&New'
+      Caption = '&New Chart'
       Hint = 'New Chart'
       ImageIndex = 0
       ShortCut = 16462
@@ -3885,7 +4168,7 @@ object f_main: Tf_main
     end
     object FileOpen1: TAction
       Category = 'File'
-      Caption = '&Open'
+      Caption = '&Open Chart'
       Hint = 'Open Chart'
       ImageIndex = 1
       ShortCut = 16463
@@ -3893,7 +4176,7 @@ object f_main: Tf_main
     end
     object FileClose1: TWindowClose
       Category = 'File'
-      Caption = '&Close'
+      Caption = '&Close Chart'
       Hint = 'Close|Close current file'
       ImageIndex = 13
     end
@@ -3983,29 +4266,29 @@ object f_main: Tf_main
     end
     object zoomplus: TAction
       Category = 'chart'
-      Caption = 'zoomplus'
+      Caption = 'Zoom In'
       Hint = 'Zoom In'
       ImageIndex = 6
       OnExecute = zoomplusExecute
     end
     object zoomminus: TAction
       Category = 'chart'
-      Caption = 'zoomminus'
+      Caption = 'Zoom Out'
       Hint = 'Zoom Out'
       ImageIndex = 7
       OnExecute = zoomminusExecute
     end
     object Flipx: TAction
       Category = 'chart'
-      Caption = 'Flipx'
-      Hint = 'Flip Horizontally'
+      Caption = 'Mirror Horizontally'
+      Hint = 'Mirror Horizontally'
       ImageIndex = 15
       OnExecute = FlipxExecute
     end
     object Flipy: TAction
       Category = 'chart'
-      Caption = 'Flipy'
-      Hint = 'Flip Vertically'
+      Caption = 'Mirror Vertically'
+      Hint = 'Mirror Vertically'
       ImageIndex = 17
       OnExecute = FlipyExecute
     end
@@ -4017,29 +4300,29 @@ object f_main: Tf_main
     end
     object rot_plus: TAction
       Category = 'chart'
-      Caption = 'rot_plus'
+      Caption = 'Rotate Right'
       Hint = 'Rotate Right'
       ImageIndex = 21
       OnExecute = rot_plusExecute
     end
     object rot_minus: TAction
       Category = 'chart'
-      Caption = 'rot_minus'
+      Caption = 'Rotate Left'
       Hint = 'Rotate Left'
       ImageIndex = 22
       OnExecute = rot_minusExecute
     end
     object GridEQ: TAction
       Category = 'chart'
-      Caption = 'GridEQ'
+      Caption = 'Add Equatorial Grid'
       Hint = 'Add Equatorial Grid'
       ImageIndex = 24
       OnExecute = GridEQExecute
     end
     object Grid: TAction
       Category = 'chart'
-      Caption = 'Grid'
-      Hint = 'Switch Coordinate Grid'
+      Caption = 'Show Coordinate Grid'
+      Hint = 'Show Coordinate Grid'
       ImageIndex = 25
       OnExecute = GridExecute
     end
@@ -4058,14 +4341,14 @@ object f_main: Tf_main
     end
     object Undo: TAction
       Category = 'Undo'
-      Caption = 'Undo'
+      Caption = 'Undo Last Change'
       Hint = 'Undo Last Change'
       ImageIndex = 19
       OnExecute = UndoExecute
     end
     object Redo: TAction
       Category = 'Undo'
-      Caption = 'Redo'
+      Caption = 'Redo Last Change'
       Hint = 'Redo Last Change'
       ImageIndex = 20
       OnExecute = RedoExecute
@@ -4103,25 +4386,29 @@ object f_main: Tf_main
     end
     object toN: TAction
       Category = 'chart'
-      Caption = 'toN'
+      Caption = 'North'
+      Hint = 'North'
       ImageIndex = 38
       OnExecute = toNExecute
     end
     object toE: TAction
       Category = 'chart'
-      Caption = 'toE'
+      Caption = 'East'
+      Hint = 'East'
       ImageIndex = 37
       OnExecute = toEExecute
     end
     object toS: TAction
       Category = 'chart'
-      Caption = 'toS'
+      Caption = 'South'
+      Hint = 'South'
       ImageIndex = 39
       OnExecute = toSExecute
     end
     object toW: TAction
       Category = 'chart'
-      Caption = 'toW'
+      Caption = 'West'
+      Hint = 'West'
       ImageIndex = 40
       OnExecute = toWExecute
     end
@@ -4133,7 +4420,8 @@ object f_main: Tf_main
     end
     object allSky: TAction
       Category = 'chart'
-      Caption = 'allSky'
+      Caption = 'Show All Sky'
+      Hint = 'Show All Sky'
       ImageIndex = 42
       OnExecute = allSkyExecute
     end
@@ -4214,103 +4502,119 @@ object f_main: Tf_main
     end
     object ShowStars: TAction
       Category = 'chart'
+      Caption = 'Show Stars'
       Hint = 'Show Stars'
       ImageIndex = 56
       OnExecute = ShowStarsExecute
     end
     object ShowNebulae: TAction
       Category = 'chart'
+      Caption = 'Show Nebulae'
       Hint = 'Show Nebulae'
       ImageIndex = 57
       OnExecute = ShowNebulaeExecute
     end
     object ShowPictures: TAction
       Category = 'chart'
+      Caption = 'Show Pictures'
       Hint = 'Show Pictures'
       ImageIndex = 58
       OnExecute = ShowPicturesExecute
     end
     object ShowLines: TAction
       Category = 'chart'
+      Caption = 'Show Lines'
       Hint = 'Show Lines'
       ImageIndex = 59
       OnExecute = ShowLinesExecute
     end
     object ShowPlanets: TAction
       Category = 'chart'
+      Caption = 'Show Planets'
       Hint = 'Show Planets'
       ImageIndex = 62
       OnExecute = ShowPlanetsExecute
     end
     object ShowAsteroids: TAction
       Category = 'chart'
+      Caption = 'Show Asteroids'
       Hint = 'Show Asteroids'
       ImageIndex = 60
       OnExecute = ShowAsteroidsExecute
     end
     object ShowComets: TAction
       Category = 'chart'
+      Caption = 'Show Comets'
       Hint = 'Show Comets'
       ImageIndex = 61
       OnExecute = ShowCometsExecute
     end
     object ShowMilkyWay: TAction
       Category = 'chart'
+      Caption = 'Show Milky Way'
       Hint = 'Show Milky Way'
       ImageIndex = 63
       OnExecute = ShowMilkyWayExecute
     end
     object ShowLabels: TAction
       Category = 'chart'
+      Caption = 'Show Labels'
       Hint = 'Show Labels'
       ImageIndex = 64
       OnExecute = ShowLabelsExecute
     end
     object ShowConstellationLine: TAction
       Category = 'chart'
+      Caption = 'Show Constellation Line'
       Hint = 'Show Constellation Line'
       ImageIndex = 65
       OnExecute = ShowConstellationLineExecute
     end
     object ShowConstellationLimit: TAction
       Category = 'chart'
+      Caption = 'Show Constellation Limit'
       Hint = 'Show Constellation Limit'
       ImageIndex = 66
       OnExecute = ShowConstellationLimitExecute
     end
     object ShowGalacticEquator: TAction
       Category = 'chart'
+      Caption = 'Show Galactic Equator'
       Hint = 'Show Galactic Equator'
       ImageIndex = 67
       OnExecute = ShowGalacticEquatorExecute
     end
     object ShowEcliptic: TAction
       Category = 'chart'
+      Caption = 'Show Ecliptic'
       Hint = 'Show Ecliptic'
       ImageIndex = 68
       OnExecute = ShowEclipticExecute
     end
     object ShowMark: TAction
       Category = 'chart'
+      Caption = 'Show Mark'
       Hint = 'Show Mark'
       ImageIndex = 69
       OnExecute = ShowMarkExecute
     end
     object ShowObjectbelowHorizon: TAction
       Category = 'chart'
+      Caption = 'Below the horizon'
       Hint = 'Show Object below the horizon'
       ImageIndex = 70
       OnExecute = ShowObjectbelowHorizonExecute
     end
     object EquatorialProjection: TAction
       Category = 'chart'
+      Caption = 'Equatorial Coordinate'
       Hint = 'Equatorial Coordinate'
       ImageIndex = 71
       OnExecute = EquatorialProjectionExecute
     end
     object AltAzProjection: TAction
       Category = 'chart'
-      Caption = 'AltAzProjection'
+      Caption = 'Alt-Az Coordinate'
       Hint = 'Alt-Az Coordinate'
       ImageIndex = 72
       OnExecute = AltAzProjectionExecute
@@ -4324,7 +4628,7 @@ object f_main: Tf_main
     end
     object GalacticProjection: TAction
       Category = 'chart'
-      Caption = 'GalacticProjection'
+      Caption = 'Galactic Coordinate'
       Hint = 'Galactic Coordinate'
       ImageIndex = 74
       OnExecute = GalacticProjectionExecute
@@ -6340,29 +6644,29 @@ object f_main: Tf_main
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000821000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000082100000000000000000000000000000000000004910
+      0000000000000000000082100000000000000000000000000000000000001110
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000A80200000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000101000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000010000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000048000000000000000000000000000000000
-      0000001D00000000000000000000000000000000000000010000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000006810000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000041000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000008020000000000000000000000000000000000006E0000000000
+      0000000000000000000000000000FF0000000000000000000000000000000000
+      00001010000000000000000000000000000000000000F7000000000000000000
+      000000000000000000006F00000000000000000000000000000000000000FF00
+      000000000000000000000000000000000000FF00000000000000000000000000
+      000000000000FF00000000000000000000000000000000000000FF0000000000
+      0000000000000000000000000000FF0000000000000000000000000000000000
+      0000FF00000000000000000000000000000000000000FF000000000000000000
+      00000000000000000000FF00000000000000000000000000000000000000FF00
+      000000000000000000000000000000000000FF00000000000000000000000000
+      000000000000FF00000000000000000000000000000000000000FF0000000000
+      0000000000000000000000000000FF0000000000000000000000000000000000
+      0000FF00000000000000000000000000000000000000FF000000000000000000
+      00000000000000000000FF00000000000000000000000000000000000000FF00
+      000000000000000000000000000000000000FF00000000000000000000000000
+      000000000000FF00000000000000000000000000000000000000FF0000000000
+      0000000000000000000000000000FF0000000000000000000000000000000000
+      0000FF00000000000000000000000000000000000000FF000000000000000000
+      00000000000000000000FF00000000000000000000000000000000000000FF00
+      000000000000000000000000000000000000FF00000000000000000000000000
+      000000000000FF000000000000000000000000000000000000006E0000000000
       00000000000000000000000000004F0000000000000000000000000000000000
       0000FF00000000000000000000000000000000000000FF000000000000000000
       00000000000000000000FF000000000000000000000000000000000000003500

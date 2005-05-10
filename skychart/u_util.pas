@@ -60,6 +60,7 @@ Function DEToStr(de: Double) : string;
 Function ARtoStr(ar: Double) : string;
 Function DEmToStr(de: Double) : string;
 Function DEdToStr(de: Double) : string;
+Function DEToStrmin(de: Double) : string;
 Function ARmtoStr(ar: Double) : string;
 Function DEpToStr(de: Double) : string;
 Function ARptoStr(ar: Double) : string;
@@ -604,6 +605,22 @@ begin
     if abs(dd)<10 then d:='0'+trim(d);
     if de<0 then d:='-'+d else d:='+'+d;
     result := d+ldeg;
+end;
+
+Function DEToStrmin(de: Double) : string;
+var dd: Double;
+    d : string;
+begin
+ if de<=0 then result:='0'+ldeg
+ else if de<1 then begin
+    str((de*60):2:0,d);
+    result := d+lmin;
+ end
+ else begin
+    dd:=round(de);
+    str(dd:2:0,d);
+    result := d+ldeg;
+ end;
 end;
 
 Function ARmToStr(ar: Double) : string;

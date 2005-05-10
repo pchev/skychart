@@ -35,6 +35,7 @@ ShowDisplay;
 ShowFonts;
 ShowColor;
 ShowSkyColor;
+ShowNebColor;
 ShowLine;
 ShowLabelColor;
 ShowCircle;
@@ -120,6 +121,13 @@ begin
  shape23.brush.color:=cplot.skycolor[6];
  shape24.pen.color:=cplot.skycolor[7];
  shape24.brush.color:=cplot.skycolor[7];
+end;
+
+procedure Tf_config_display.ShowNebColor;
+begin
+NebGrayBar.position:=cplot.NebGray;
+NebBrightBar.position:=cplot.NebBright;
+UpdNebColor;
 end;
 
 procedure Tf_config_display.ShowLine;
@@ -371,6 +379,89 @@ procedure Tf_config_display.Button3Click(Sender: TObject);
 begin
 cplot.SkyColor:=dfSkyColor;
 ShowSkyColor;
+end;
+                     
+procedure Tf_config_display.UpdNebColor;
+  function SetColor(i,col:integer):Tcolor;
+   var r,g,b: byte;
+   begin
+     r:=cplot.Color[i] and $FF;
+     g:=(cplot.Color[i] shr 8) and $FF;
+     b:=(cplot.Color[i] shr 16) and $FF;
+     result:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+   end;
+begin
+NebColorPanel.color:=cplot.Color[0];
+shape29.brush.color:=SetColor(8,cplot.NebGray);
+shape30.brush.color:=SetColor(8,cplot.NebBright);
+shape31.brush.color:=SetColor(9,cplot.NebGray);
+shape32.brush.color:=SetColor(9,cplot.NebBright);
+shape33.brush.color:=SetColor(10,cplot.NebGray);
+shape34.brush.color:=SetColor(10,cplot.NebBright);
+end;
+
+procedure Tf_config_display.NebShapeMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if sender is TShape then with sender as TShape do begin
+   ColorDialog1.color:=cplot.Color[tag];
+   if ColorDialog1.Execute then begin
+      cplot.Color[tag]:=ColorDialog1.Color;
+      UpdNebColor;
+   end;
+end;
+end;
+
+procedure Tf_config_display.NebGrayBarChange(Sender: TObject);
+begin
+if NebGrayBar.position < cplot.NebBright then begin
+   cplot.NebGray:=NebGrayBar.position;
+   UpdNebColor;
+end else begin
+   NebGrayBar.position:=cplot.NebBright-1;
+end;
+end;
+
+procedure Tf_config_display.NebBrightBarChange(Sender: TObject);
+begin
+if NebBrightBar.position > cplot.NebGray then begin
+   cplot.NebBright:=NebBrightBar.position;
+   UpdNebColor;
+end else begin
+   NebBrightBar.position:=cplot.NebGray+1;
+end;
+end;
+
+procedure Tf_config_display.DefNebColorButtonClick(Sender: TObject);
+begin
+cplot.Nebgray:=55;
+cplot.NebBright:=180;
+
+case DefColor.ItemIndex of
+
+  0 : begin
+      cplot.Color[8]:=DfColor[8];
+      cplot.Color[9]:=DfColor[9];
+      cplot.Color[10]:=DfColor[10];
+      end;
+  1 : begin
+      cplot.Color[8]:=DfRedColor[8];
+      cplot.Color[9]:=DfRedColor[9];
+      cplot.Color[10]:=DfRedColor[10];
+      end;
+  2 : begin
+      cplot.Color[8]:=DfBWColor[8];
+      cplot.Color[9]:=DfBWColor[9];
+      cplot.Color[10]:=DfBWColor[10];
+      end;
+  3 : begin
+      cplot.Color[8]:=DfWBColor[8];
+      cplot.Color[9]:=DfWBColor[9];
+      cplot.Color[10]:=DfWBColor[10];
+      end;
+end;
+ShowNebColor;
+
 end;
 
 procedure Tf_config_display.CGridClick(Sender: TObject);

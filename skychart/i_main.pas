@@ -376,6 +376,7 @@ try
  planet:=Tplanet.Create(self);
  Fits:=TFits.Create(self);
  cdcdb.onInitializeDB:=InitializeDB;
+ planet.cdb:=cdcdb;
 {$ifdef mswindows}
  telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
  telescope.plugin:=def_cfgsc.ScopePlugin;
@@ -556,13 +557,21 @@ begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do switchbackgroundExecute(Sender);
 end;
 
-procedure Tf_main.SetFOVExecute(Sender: TObject);
-var f : double;
+procedure Tf_main.SetFOVClick(Sender: TObject);
+var f : integer;
 begin
-with Sender as TToolButton do f:=deg2rad*tag/60;
+with Sender as TSpeedButton do f:=tag;
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
-   sc.SetFOV(f);
-   Refresh;
+   SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f]);
+end;
+end;
+
+procedure Tf_main.SetFovExecute(Sender: TObject);
+var f : integer;
+begin
+with Sender as TMenuItem do f:=tag;
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f]);
 end;
 end;
 
@@ -725,7 +734,7 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    if showast<>sc.cfgsc.ShowAsteroid then begin
       f_info.setpage(2);
       f_info.show;
-      f_info.ProgressMemo.lines.add('Compute asteroid data for this date');
+      f_info.ProgressMemo.lines.add('Compute asteroid data for this month');
       if Planet.PrepareAsteroid(sc.cfgsc.curjd, f_info.ProgressMemo.lines) then begin
          sc.cfgsc.ShowAsteroid:=true;
          Refresh;
@@ -1575,6 +1584,8 @@ section:='display';
 cplot.starplot:=ReadInteger(section,'starplot',cplot.starplot);
 cplot.nebplot:=ReadInteger(section,'nebplot',cplot.nebplot);
 cplot.plaplot:=ReadInteger(section,'plaplot',cplot.plaplot);
+cplot.Nebgray:=ReadInteger(section,'Nebgray',cplot.Nebgray);
+cplot.NebBright:=ReadInteger(section,'NebBright',cplot.NebBright);
 cplot.contrast:=ReadInteger(section,'contrast',cplot.contrast);
 cplot.saturation:=ReadInteger(section,'saturation',cplot.saturation);
 cplot.partsize:=ReadFloat(section,'partsize',cplot.partsize);
@@ -1881,6 +1892,8 @@ end;
 WriteInteger(section,'starplot',def_cfgplot.starplot);
 WriteInteger(section,'nebplot',def_cfgplot.nebplot);
 WriteInteger(section,'plaplot',def_cfgplot.plaplot);
+WriteInteger(section,'Nebgray',def_cfgplot.Nebgray);
+WriteInteger(section,'NebBright',def_cfgplot.NebBright);
 WriteInteger(section,'contrast',def_cfgplot.contrast);
 WriteInteger(section,'saturation',def_cfgplot.saturation);
 WriteFloat(section,'partsize',def_cfgplot.partsize);
@@ -2353,22 +2366,39 @@ if f_main.ActiveMDIchild=sender then begin
           end;
   with ActiveMdiChild as Tf_chart do begin
     toolbuttonshowStars.down:=sc.cfgsc.showstars;
+    ShowStars1.checked:=sc.cfgsc.showstars;
     toolbuttonshowNebulae.down:=sc.cfgsc.shownebulae;
+    ShowNebulae1.checked:=sc.cfgsc.shownebulae;
     toolbuttonShowPictures.down:=sc.cfgsc.ShowImages;
+    ShowPictures1.checked:=sc.cfgsc.ShowImages;
     toolbuttonShowLines.down:=sc.cfgsc.ShowLine;
+    ShowLines1.checked:=sc.cfgsc.ShowLine;
     toolbuttonShowAsteroids.down:=sc.cfgsc.ShowAsteroid;
+    ShowAsteroids1.checked:=sc.cfgsc.ShowAsteroid;
     toolbuttonShowComets.down:=sc.cfgsc.ShowComet;
+    ShowComets1.checked:=sc.cfgsc.ShowComet;
     toolbuttonShowPlanets.down:=sc.cfgsc.ShowPlanet;
+    ShowPlanets1.checked:=sc.cfgsc.ShowPlanet;
     toolbuttonShowMilkyWay.down:=sc.cfgsc.ShowMilkyWay;
+    ShowMilkyWay.checked:=sc.cfgsc.ShowMilkyWay;
     toolbuttonShowlabels.down:=sc.cfgsc.Showlabelall;
+    ShowLabels1.checked:=sc.cfgsc.Showlabelall;
     toolbuttonGrid.down:=sc.cfgsc.ShowGrid;
+    Grid1.checked:=sc.cfgsc.ShowGrid;
     toolbuttonGridEq.down:=sc.cfgsc.ShowEqGrid;
+    GridEQ1.checked:=sc.cfgsc.ShowEqGrid;
     ToolButtonShowConstellationLine.down:=sc.cfgsc.ShowConstl;
+    ShowConstellationLine1.checked:=sc.cfgsc.ShowConstl;
     ToolButtonShowConstellationLimit.down:=sc.cfgsc.ShowConstB;
+    ShowConstellationLimit1.checked:=sc.cfgsc.ShowConstB;
     ToolButtonShowGalacticEquator.down:=sc.cfgsc.ShowGalactic;
+    ShowGalacticEquator1.checked:=sc.cfgsc.ShowGalactic;
     toolbuttonShowEcliptic.down:=sc.cfgsc.ShowEcliptic;
+    ShowEcliptic1.checked:=sc.cfgsc.ShowEcliptic;
     ToolButtonShowMark.down:=sc.cfgsc.ShowCircle;
+    ShowMark1.checked:=sc.cfgsc.ShowCircle;
     ToolButtonShowObjectbelowHorizon.down:=not sc.cfgsc.horizonopaque;
+    ShowObjectbelowthehorizon1.checked:=not sc.cfgsc.horizonopaque;
     ToolButtonswitchbackground.down:= sc.plot.cfgplot.autoskycolor;
     case sc.plot.cfgplot.starplot of
     0: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=true; ButtonStarSize.visible:=false; starsizepanel.Visible:=false; end;
@@ -2383,6 +2413,26 @@ if f_main.ActiveMDIchild=sender then begin
     toolbuttonAZ.down:= (sc.cfgsc.projpole=AltAz);
     toolbuttonEC.down:= (sc.cfgsc.projpole=Ecl);
     toolbuttonGL.down:= (sc.cfgsc.projpole=Gal);
+    Field1.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[0]);
+    Field2.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[1]);
+    Field3.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[2]);
+    Field4.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[3]);
+    Field5.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[4]);
+    Field6.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[5]);
+    Field7.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[6]);
+    Field8.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[7]);
+    Field9.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[8]);
+    Field10.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[9]);
+    SetFov1.caption:=Field1.caption;
+    SetFov2.caption:=Field2.caption;
+    SetFov3.caption:=Field3.caption;
+    SetFov4.caption:=Field4.caption;
+    SetFov5.caption:=Field5.caption;
+    SetFov6.caption:=Field6.caption;
+    SetFov7.caption:=Field7.caption;
+    SetFov8.caption:=Field8.caption;
+    SetFov9.caption:=Field9.caption;
+    SetFov10.caption:=Field10.caption;
   end;
 end;
 end;
