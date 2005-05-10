@@ -30,6 +30,7 @@ object f_calendar: Tf_calendar
     Lines.Strings = (
       'memo1')
     ParentFont = False
+    PlainText = True
     TabOrder = 2
     WordWrap = False
   end
@@ -202,7 +203,7 @@ object f_calendar: Tf_calendar
       Top = 40
       Width = 81
       Height = 25
-      Caption = 'Copy'
+      Caption = 'Save to File'
       TabOrder = 7
       OnClick = BitBtn5Click
     end
@@ -227,6 +228,7 @@ object f_calendar: Tf_calendar
       MaxLength = 12
       TabOrder = 0
       Text = '  2005. 4. 2'
+      OnChange = Date1Change
       JD = 2453462.5
       Year = 2005
       Month = 4
@@ -241,6 +243,7 @@ object f_calendar: Tf_calendar
       MaxLength = 12
       TabOrder = 1
       Text = '  2005. 4. 2'
+      OnChange = Date2Change
       JD = 2453462.5
       Year = 2005
       Month = 4
@@ -251,15 +254,19 @@ object f_calendar: Tf_calendar
       Top = 41
       Width = 33
       Height = 22
+      Hint = '0..9999'
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 3
       Value = 1
+      MaxValue = 9999
     end
   end
   object PageControl1: TPageControl
     Left = 0
     Top = 70
     Width = 627
-    Height = 313
+    Height = 316
     ActivePage = twilight
     Align = alClient
     HotTrack = True
@@ -270,7 +277,7 @@ object f_calendar: Tf_calendar
       Caption = 'Cr'#233'puscule'
       DesignSize = (
         619
-        285)
+        288)
       object TwilightGrid: TStringGrid
         Left = 0
         Top = 24
@@ -295,7 +302,7 @@ object f_calendar: Tf_calendar
       ImageIndex = 1
       DesignSize = (
         619
-        285)
+        288)
       object Pagecontrol2: TPageControl
         Left = 0
         Top = 0
@@ -685,14 +692,14 @@ object f_calendar: Tf_calendar
       ImageIndex = 2
       DesignSize = (
         619
-        285)
+        288)
       object ComboBox1: TComboBox
         Left = 216
         Top = 2
         Width = 169
         Height = 21
         Style = csDropDownList
-        ItemHeight = 13
+        ItemHeight = 0
         TabOrder = 2
         OnChange = ComboBox1Change
       end
@@ -747,7 +754,7 @@ object f_calendar: Tf_calendar
       ImageIndex = 6
       DesignSize = (
         619
-        285)
+        288)
       object AsteroidGrid: TStringGrid
         Left = 0
         Top = 24
@@ -795,7 +802,7 @@ object f_calendar: Tf_calendar
         Width = 169
         Height = 21
         Style = csDropDownList
-        ItemHeight = 13
+        ItemHeight = 0
         TabOrder = 3
         OnChange = ComboBox2Change
       end
@@ -805,7 +812,7 @@ object f_calendar: Tf_calendar
       ImageIndex = 3
       DesignSize = (
         619
-        285)
+        288)
       object SolarGrid: TStringGrid
         Left = 8
         Top = 8
@@ -831,7 +838,7 @@ object f_calendar: Tf_calendar
       ImageIndex = 4
       DesignSize = (
         619
-        285)
+        288)
       object LunarGrid: TStringGrid
         Left = 8
         Top = 8
@@ -858,7 +865,7 @@ object f_calendar: Tf_calendar
       TabVisible = False
       DesignSize = (
         619
-        285)
+        288)
       object Label6: TLabel
         Left = 240
         Top = 4
@@ -989,5 +996,9 @@ object f_calendar: Tf_calendar
       ShortCut = 112
       OnExecute = HelpContents1Execute
     end
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 72
+    Top = 304
   end
 end

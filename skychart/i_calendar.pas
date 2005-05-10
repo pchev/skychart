@@ -48,11 +48,24 @@ if initial then begin
   date1.Month:=c.CurMonth;
   date1.day:=c.CurDay;
   date2.JD:=date1.JD+5;
+  deltajd:=date2.JD-date1.JD;
   time.Time:=c.CurTime/24;
   CometFilter.Text:='C/'+inttostr(c.CurYear);
   RefreshAll;
   initial:=false;
 end;
+end;
+
+procedure Tf_calendar.Date1Change(Sender: TObject);
+begin
+if date2.JD<=date1.JD then date2.JD:=date1.JD+deltajd;
+deltajd:=date2.JD-date1.JD;
+end;
+
+procedure Tf_calendar.Date2Change(Sender: TObject);
+begin
+if date2.JD<=date1.JD then date1.JD:=date2.JD-deltajd;
+deltajd:=date2.JD-date1.JD;
 end;
 
 Procedure Tf_calendar.SetLang(languagefile:string);
@@ -1554,7 +1567,7 @@ try
 cjd:=(date1.JD+date2.JD)/2;
 id:=cometid[ComboBox1.itemindex];
 epoch:=cdb.GetCometEpoch(id,cjd);
-if Fplanet.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
+if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    Fplanet.InitComet(tp,q,ec,ap,an,ic,hh,g,eq,nam);
    Cometgrid.Visible:=false;
    FreeCoord(Cometgrid);
@@ -1735,7 +1748,7 @@ try
 cjd:=(date1.JD+date2.JD)/2;
 id:=astid[ComboBox2.itemindex];
 epoch:=cdb.GetAsteroidEpoch(id,cjd);
-if Fplanet.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    Fplanet.InitAsteroid(epoch,hh,g,ma,ap,an,ic,ec,sa,eq,nam);
    Asteroidgrid.Visible:=false;
    FreeCoord(Asteroidgrid);

@@ -61,10 +61,16 @@ type
      procedure DelAstDate(astdeldate:string; memoast:Tmemo);
      procedure DelAstAll(memoast:Tmemo);
      function AddAsteroid(astid,asth,astg,astep,astma,astperi,astnode,asti,astec,astax,astref,astnam,asteq: string): string;
+     procedure TruncateDailyComet;
+     procedure TruncateDailyAsteroid;
      procedure GetCometList(filter:string; maxnumber:integer; list:Tstrings; var cometid: array of string);
      procedure GetAsteroidList(filter:string; maxnumber:integer; list:Tstrings; var astid: array of string);
      function GetCometEpoch(id:string; now_jd:double):double;
      function GetAsteroidEpoch(id:string; now_jd:double):double;
+     Function GetAstElem(id: string; epoch:double; var h,g,ma,ap,an,ic,ec,sa,eq: double; var ref,nam,elem_id:string):boolean;  published
+     Function GetAstElemEpoch(id:string; jd:double; var epoch,h,g,ma,ap,an,ic,ec,sa,eq: double; var ref,nam,elem_id:string):boolean;
+     Function GetComElem(id: string; epoch:double; var tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
+     Function GetComElemEpoch(id:string; jd:double; var epoch,tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
      procedure LoadSampleData(memo:Tmemo);
      function CountImages:integer;
      procedure ScanImagesDirectory(ImagePath:string; ProgressCat:Tlabel; ProgressBar:TProgressBar );
@@ -223,6 +229,7 @@ if DBtype=mysql then begin
   end;
 end
 else if DBtype=sqlite then begin
+  // do not work
   result:='';
   db.StartTransaction;
   for i:=0 to db.Tables.Count-1 do begin
@@ -388,7 +395,8 @@ if db.Active then begin
   db.commit;
   db.Query(flushtable[DBtype]);
   memocom.lines.add('Delete daily data');
-//  planet.TruncateDailyComet;
+  TruncateDailyComet;
+  if DBtype=sqlite then db.Query('VACUUM');
   memocom.lines.add('Delete completed');
 end;
 except
@@ -413,7 +421,8 @@ if db.Active then begin
   db.Query(truncatetable[DBtype]+' cdc_com_name');
   db.commit;
   memocom.lines.add('Delete daily data');
-//  planet.TruncateDailyComet;
+  TruncateDailyComet;
+  if DBtype=sqlite then db.Query('VACUUM');
   memocom.lines.add('Delete completed');
 end;
 except
@@ -642,7 +651,8 @@ if db.Active then begin
   db.commit;
   db.Query(flushtable[DBtype]);
   memoast.lines.add('Delete daily data');
-//  planet.TruncateDailyAsteroid;
+  TruncateDailyAsteroid;
+  if DBtype=sqlite then db.Query('VACUUM');
   memoast.lines.add('Delete completed');
 end;
 except
@@ -669,6 +679,7 @@ if db.Active then begin
   if DBtype=mysql then db.Query('UNLOCK TABLES');
   db.commit;
   db.Query(flushtable[DBtype]);
+  if DBtype=sqlite then db.Query('VACUUM');
   memoast.lines.add('Delete completed');
 end;
 except
@@ -696,7 +707,8 @@ if db.Active then begin
   db.Query(truncatetable[DBtype]+' cdc_ast_mag');
   db.commit;
   memoast.lines.add('Delete daily data');
-//  planet.TruncateDailyAsteroid;
+  TruncateDailyAsteroid;
+  if DBtype=sqlite then db.Query('VACUUM');
   memoast.lines.add('Delete completed');
 end;
 except
@@ -759,6 +771,56 @@ end else begin
 end;
 db.Query(flushtable[DBtype]);
 except
+end;
+end;
+
+procedure TCDCdb.TruncateDailyAsteroid;
+var i,j:integer;
+    dailytable:Tstringlist;
+begin
+dailytable:=Tstringlist.create;
+try
+  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.Query(showtable[DBtype]+' "cdc_ast_day_%"');
+  i:=0;
+  while i<db.Rowcount do begin
+     dailytable.add(db.results[i][0]);
+     inc(i);
+  end;
+  j:=0;
+  db.StartTransaction;
+  while j<dailytable.Count do begin
+     db.Query(truncatetable[DBtype]+' '+dailytable[j]);
+     inc(j);
+  end;
+  db.Commit;
+finally
+  dailytable.free;
+end;
+end;
+
+procedure TCDCdb.TruncateDailyComet;
+var i,j:integer;
+    dailytable:Tstringlist;
+begin
+dailytable:=Tstringlist.create;
+try
+  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.Query(showtable[DBtype]+' "cdc_com_day_%"');
+  i:=0;
+  while i<db.Rowcount do begin
+     dailytable.add(db.results[i][0]);
+     inc(i);
+  end;
+  j:=0;
+  db.StartTransaction;
+  while j<dailytable.Count do begin
+     db.Query(truncatetable[DBtype]+' '+dailytable[j]);
+     inc(j);
+  end;
+  db.Commit;
+finally
+  dailytable.free;
 end;
 end;
 
@@ -834,6 +896,157 @@ if db.Rowcount>0 then
          diff:=dif;
       end;
   end;
+end;
+
+
+Function TCDCdb.GetAstElem(id: string; epoch:double; var h,g,ma,ap,an,ic,ec,sa,eq: double; var ref,nam,elem_id:string):boolean;
+var qry : string;
+begin
+try
+qry:='SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id'
+    +' from cdc_ast_elem '
+    +' where id="'+id+'"'
+    +' and epoch='+formatfloat(f1,epoch);
+db.Query(qry);
+if db.rowcount>0 then begin
+  h:=strtofloat(db.Results[0][1]);
+  g:=strtofloat(db.Results[0][2]);
+  ma:=strtofloat(db.Results[0][4]);
+  ap:=strtofloat(db.Results[0][5]);
+  an:=strtofloat(db.Results[0][6]);
+  ic:=strtofloat(db.Results[0][7]);
+  ec:=strtofloat(db.Results[0][8]);
+  sa:=strtofloat(db.Results[0][9]);
+  ref:=db.Results[0][10];
+  nam:=db.Results[0][11];
+  eq:=strtofloat(db.Results[0][12]);
+  elem_id:=db.Results[0][13];
+  result:=true;
+end else begin
+  result:=false;
+end;
+except
+  result:=false;
+end;
+end;
+
+Function TCDCdb.GetComElem(id: string; epoch:double; var tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
+var qry : string;
+begin
+try
+qry:='SELECT id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id'
+    +' from cdc_com_elem '
+    +' where id="'+id+'"'
+    +' and epoch='+formatfloat(f1,epoch);
+db.Query(qry);
+if db.Rowcount>0 then begin
+  tp:=strtofloat(db.Results[0][1]);
+  q:=strtofloat(db.Results[0][2]);
+  ec:=strtofloat(db.Results[0][3]);
+  ap:=strtofloat(db.Results[0][4]);
+  an:=strtofloat(db.Results[0][5]);
+  ic:=strtofloat(db.Results[0][6]);
+  h:=strtofloat(db.Results[0][8]);
+  g:=strtofloat(db.Results[0][9]);
+  nam:=db.Results[0][10];
+  eq:=strtofloat(db.Results[0][11]);
+  elem_id:=db.Results[0][12];
+  result:=true;
+end else begin
+  result:=false;
+end;
+except
+  result:=false;
+end;
+end;
+
+Function TCDCdb.GetAstElemEpoch(id:string; jd:double; var epoch,h,g,ma,ap,an,ic,ec,sa,eq: double; var ref,nam,elem_id:string):boolean;
+var qry : string;
+    dt,t : double;
+    i,j : integer;
+begin
+try
+qry:='SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id'
+    +' from cdc_ast_elem'
+    +' where id="'+id+'"';
+db.Query(qry);
+if db.Rowcount>0 then begin
+  epoch:=strtofloat(db.Results[0][3]);
+  dt:=abs(jd-epoch);
+  j:=0;
+  i:=1;
+  while i<db.Rowcount do begin
+    t:=strtofloat(db.Results[i][3]);
+    if abs(jd-t)<dt then begin
+       epoch:=t;
+       dt:=abs(jd-t);
+       j:=i;
+    end;
+    inc(i);
+  end;
+  h:=strtofloat(db.Results[j][1]);
+  g:=strtofloat(db.Results[j][2]);
+  ma:=strtofloat(db.Results[j][4]);
+  ap:=strtofloat(db.Results[j][5]);
+  an:=strtofloat(db.Results[j][6]);
+  ic:=strtofloat(db.Results[j][7]);
+  ec:=strtofloat(db.Results[j][8]);
+  sa:=strtofloat(db.Results[j][9]);
+  ref:=db.Results[j][10];
+  nam:=db.Results[j][11];
+  eq:=strtofloat(db.Results[j][12]);
+  elem_id:=db.Results[j][13];
+  result:=true;
+end else begin
+  result:=false;
+end;
+except
+  result:=false;
+end;
+end;
+
+Function TCDCdb.GetComElemEpoch(id:string; jd:double; var epoch,tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
+var qry : string;
+    dt,t : double;
+    i,j : integer;
+begin
+try
+qry:='SELECT id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id'
+    +' from cdc_com_elem'
+    +' where id="'+id+'"';
+db.Query(qry);
+if db.Rowcount>0 then begin
+  epoch:=strtofloat(db.Results[0][7]);
+  dt:=abs(jd-epoch);
+  j:=0;
+  i:=1;
+  while i<db.Rowcount do begin
+    t:=strtofloat(db.Results[i][7]);
+    if abs(jd-t)<dt then begin
+       epoch:=t;
+       dt:=abs(jd-t);
+       j:=i;
+    end;
+    inc(i);
+  end;
+  tp:=strtofloat(db.Results[j][1]);
+  q:=strtofloat(db.Results[j][2]);
+  ec:=strtofloat(db.Results[j][3]);
+  ap:=strtofloat(db.Results[j][4]);
+  an:=strtofloat(db.Results[j][5]);
+  ic:=strtofloat(db.Results[j][6]);
+  h:=strtofloat(db.Results[j][8]);
+  g:=strtofloat(db.Results[j][9]);
+  nam:=db.Results[j][10];
+  eq:=strtofloat(db.Results[j][11]);
+  elem_id:=db.Results[j][12];
+  result:=true;
+end else begin
+  result:=false;
+end;
+except
+  result:=false;
+end;
 end;
 
 function TCDCdb.CountImages:integer;
