@@ -50,11 +50,13 @@ case DBtype of
            DBtypeGroup.itemindex:=0;
            MysqlBox.visible:=false;
            SqliteBox.visible:=true;
+           dropdb.visible:=false;
           end;
  mysql :  begin
            DBtypeGroup.itemindex:=1;
            MysqlBox.visible:=true;
            SqliteBox.visible:=false;
+           dropdb.visible:=true;
           end;
 end;
 skipDBtypeGroupClick:=false;

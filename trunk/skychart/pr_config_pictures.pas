@@ -56,6 +56,13 @@ type
     ShowBackImg: TCheckBox;
     FolderDialog1: TFolderDialog;
     OpenDialog1: TOpenDialog;
+    Panel1: TPanel;
+    ImgLumBar2: TTrackBar;
+    Image1: TImage;
+    ImgContrastBar2: TTrackBar;
+    Label1: TLabel;
+    Label2: TLabel;
+    ImageTimer1: TTimer;
     procedure imgpathChange(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -66,10 +73,14 @@ type
     procedure backimgChange(Sender: TObject);
     procedure BitBtn5Click(Sender: TObject);
     procedure ShowBackImgClick(Sender: TObject);
+    procedure ImgLumBar2Change(Sender: TObject);
+    procedure ImgContrastBar2Change(Sender: TObject);
+    procedure ImageTimer1Timer(Sender: TObject);
   private
     { Private declarations }
     FFits: TFits;
     procedure ShowImages;
+    procedure RefreshImage;
   public
     { Public declarations }
     cdb: Tcdcdb;

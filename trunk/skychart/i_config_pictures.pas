@@ -40,6 +40,8 @@ begin
 imgpath.text:=cmain.ImagePath;
 ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
 ImgContrastBar.position:=round(10*cmain.ImageContrast);
+ImgLumBar2.position:=-round(10*cmain.ImageLuminosity);
+ImgContrastBar2.position:=round(10*cmain.ImageContrast);
 ShowImagesBox.checked:=csc.ShowImages;
 nimages.caption:=inttostr(cdb.CountImages);
 save:=csc.ShowBackgroundImage;
@@ -96,6 +98,26 @@ begin
 csc.ShowImages:=ShowImagesBox.checked;
 end;
 
+procedure Tf_config_pictures.ImgContrastBar2Change(Sender: TObject);
+begin
+cmain.ImageContrast:=ImgContrastBar2.position/10;
+FFits.max_sigma:=cmain.ImageContrast;
+ImageTimer1.enabled:=true;
+end;
+
+procedure Tf_config_pictures.ImgLumBar2Change(Sender: TObject);
+begin
+cmain.ImageLuminosity:=-ImgLumBar2.position/10;
+FFits.min_sigma:=cmain.ImageLuminosity;
+ImageTimer1.enabled:=true;
+end;
+
+procedure Tf_config_pictures.ImageTimer1Timer(Sender: TObject);
+begin
+ImageTimer1.enabled:=false;
+RefreshImage;
+end;
+
 procedure Tf_config_pictures.backimgChange(Sender: TObject);
 begin
 csc.BackgroundImage:=backimg.text;
@@ -104,11 +126,39 @@ if Ffits.header.coordinate_valid then begin
   cmain.NewBackgroundImage:=true;
   ShowBackImg.checked:=true;
   backimginfo.caption:=extractfilename(csc.BackgroundImage)+' RA:'+ARtoStr(Ffits.center_ra*rad2deg/15)+' DEC:'+DEtoStr(Ffits.center_de*rad2deg)+' FOV:'+DEtoStr(Ffits.img_width*rad2deg);
+  RefreshImage;
 end
 else begin
   backimginfo.caption:='No picture';
   ShowBackImg.checked:=false;
 end;
+end;
+
+Procedure  Tf_config_pictures.RefreshImage;
+var bmp: TBitmap;
+    c1,c2:double;
+    x,y,dx,dy:integer;
+begin
+  bmp:=Tbitmap.create;
+  FFits.GetBitmap(bmp);
+  c1:=Image1.width/Image1.Height;
+  c2:=bmp.width/bmp.Height;
+  if c1>c2 then begin
+    dy:=Image1.Height;
+    dx:=round(c2*dy);
+    y:=0;
+    x:=round((Image1.width-dx)/2);
+  end else begin
+    dx:=Image1.width;
+    dy:=round(dx/c2);
+    x:=0;
+    y:=round((Image1.Height-dy)/2);
+  end;
+  Image1.canvas.brush.color:=clBlack;
+  Image1.canvas.pen.color:=clBlack;
+  Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
+  Image1.canvas.stretchdraw(rect(x,y,x+dx,y+dy),bmp);
+  bmp.Free;
 end;
 
 procedure Tf_config_pictures.BitBtn5Click(Sender: TObject);

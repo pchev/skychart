@@ -227,6 +227,21 @@ type
     OpenDialog1: TOpenDialog;
     FontDialog1: TFontDialog;
     ColorDialog1: TColorDialog;
+    NebGrayBar: TTrackBar;
+    NebBrightBar: TTrackBar;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    NebColorPanel: TPanel;
+    Shape29: TShape;
+    Shape30: TShape;
+    Shape31: TShape;
+    Shape32: TShape;
+    Shape33: TShape;
+    Shape34: TShape;
+    DefNebColorButton: TButton;
     procedure FormShow(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
@@ -274,17 +289,24 @@ type
     procedure RectangleGridSetEditText(Sender: TObject; ACol,
       ARow: Integer; const Value: WideString);
     procedure rbClick(Sender: TObject);
+    procedure NebShapeMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure NebGrayBarChange(Sender: TObject);
+    procedure NebBrightBarChange(Sender: TObject);
+    procedure DefNebColorButtonClick(Sender: TObject);
   private
     { Private declarations }
     procedure ShowDisplay;
     procedure ShowFonts;
     procedure ShowColor;
     procedure ShowSkyColor;
+    procedure ShowNebColor;
     procedure ShowLine;
     procedure ShowLabelColor;
     procedure ShowCircle;
     procedure ShowRectangle;
     procedure SetFonts(ctrl:Tedit;num:integer);
+    procedure UpdNebColor;
   public
     { Public declarations }
     mycsc : conf_skychart;
@@ -314,6 +336,7 @@ implementation
 {$include i_config_display.pas}
 
 // end of common code
+
 
 
 end.

@@ -9,18 +9,18 @@ object f_config_pictures: Tf_config_pictures
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_images
+    ActivePage = t_background
     Align = alClient
     TabOrder = 0
     object t_images: TTabSheet
       Caption = 't_images'
       TabVisible = False
       object Label50: TLabel
-        Left = 0
-        Top = 0
-        Width = 74
+        Left = 2
+        Top = 2
+        Width = 164
         Height = 13
-        Caption = 'Pictures Setting'
+        Caption = 'Display image of cataloged objects'
       end
       object Label264: TLabel
         Left = 8
@@ -212,22 +212,29 @@ object f_config_pictures: Tf_config_pictures
       end
       object Label271: TLabel
         Left = 8
-        Top = 46
+        Top = 22
         Width = 42
         Height = 13
         Caption = 'FITS File'
       end
       object backimginfo: TLabel
         Left = 8
-        Top = 88
-        Width = 57
+        Top = 40
+        Width = 65
         Height = 13
         Caption = 'backimginfo'
+      end
+      object Image1: TImage
+        Left = 0
+        Top = 112
+        Width = 481
+        Height = 313
+        Stretch = True
       end
       object backimg: TEdit
         Tag = 1
         Left = 98
-        Top = 43
+        Top = 19
         Width = 327
         Height = 19
         Ctl3D = False
@@ -238,7 +245,7 @@ object f_config_pictures: Tf_config_pictures
       object BitBtn5: TBitBtn
         Tag = 1
         Left = 428
-        Top = 43
+        Top = 19
         Width = 19
         Height = 19
         TabOrder = 1
@@ -275,22 +282,88 @@ object f_config_pictures: Tf_config_pictures
       end
       object ShowBackImg: TCheckBox
         Left = 8
-        Top = 128
-        Width = 369
+        Top = 80
+        Width = 145
         Height = 17
         Caption = 'Show this picture'
         TabOrder = 2
         OnClick = ShowBackImgClick
       end
+      object Panel1: TPanel
+        Left = 176
+        Top = 60
+        Width = 305
+        Height = 50
+        TabOrder = 3
+        object Label1: TLabel
+          Left = 54
+          Top = 8
+          Width = 49
+          Height = 13
+          Caption = 'Luminosity'
+        end
+        object Label2: TLabel
+          Left = 203
+          Top = 8
+          Width = 39
+          Height = 13
+          Caption = 'Contrast'
+        end
+        object ImgLumBar2: TTrackBar
+          Left = 8
+          Top = 24
+          Width = 140
+          Height = 18
+          Max = 30
+          Min = -30
+          Orientation = trHorizontal
+          PageSize = 5
+          Frequency = 5
+          Position = 0
+          SelEnd = 0
+          SelStart = 0
+          TabOrder = 0
+          ThumbLength = 13
+          TickMarks = tmBottomRight
+          TickStyle = tsAuto
+          OnChange = ImgLumBar2Change
+        end
+        object ImgContrastBar2: TTrackBar
+          Left = 152
+          Top = 24
+          Width = 140
+          Height = 18
+          Max = 30
+          Min = -30
+          Orientation = trHorizontal
+          PageSize = 5
+          Frequency = 5
+          Position = 0
+          SelEnd = 0
+          SelStart = 0
+          TabOrder = 1
+          ThumbLength = 13
+          TickMarks = tmBottomRight
+          TickStyle = tsAuto
+          OnChange = ImgContrastBar2Change
+        end
+      end
     end
   end
   object FolderDialog1: TFolderDialog
-    Top = 8
-    Left = 448
+    Top = 400
+    Left = 40
     Title = 'Browse for Folder'
   end
   object OpenDialog1: TOpenDialog
-    Left = 408
-    Top = 8
+    Left = 8
+    Top = 400
+  end
+  object ImageTimer1: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = ImageTimer1Timer
+    Left = 80
+    Top = 400
   end
 end

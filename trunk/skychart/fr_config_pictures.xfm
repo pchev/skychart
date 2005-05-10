@@ -18,9 +18,9 @@ object f_config_pictures: Tf_config_pictures
       object Label113: TLabel
         Left = 0
         Top = 0
-        Width = 87
+        Width = 209
         Height = 20
-        Caption = 'Pictures Setting'
+        Caption = 'Display images of catalogued objects'
       end
       object Label265: TLabel
         Left = 8
@@ -188,6 +188,12 @@ object f_config_pictures: Tf_config_pictures
     end
     object t_background: TTabSheet
       Caption = 't_background'
+      object Image1: TImage
+        Left = 0
+        Top = 128
+        Width = 481
+        Height = 305
+      end
       object Label270: TLabel
         Left = 0
         Top = 0
@@ -197,14 +203,14 @@ object f_config_pictures: Tf_config_pictures
       end
       object Label271: TLabel
         Left = 8
-        Top = 46
+        Top = 30
         Width = 51
         Height = 20
         Caption = 'FITS File'
       end
       object backimginfo: TLabel
         Left = 8
-        Top = 88
+        Top = 56
         Width = 66
         Height = 20
         Caption = 'backimginfo'
@@ -212,7 +218,7 @@ object f_config_pictures: Tf_config_pictures
       object backimg: TEdit
         Tag = 1
         Left = 98
-        Top = 43
+        Top = 27
         Width = 327
         Height = 28
         Cursor = crIBeam
@@ -222,7 +228,7 @@ object f_config_pictures: Tf_config_pictures
       object BitBtn5: TBitBtn
         Tag = 1
         Left = 431
-        Top = 43
+        Top = 27
         Width = 25
         Height = 25
         TabOrder = 1
@@ -260,12 +266,58 @@ object f_config_pictures: Tf_config_pictures
       end
       object ShowBackImg: TCheckBox
         Left = 8
-        Top = 128
-        Width = 369
+        Top = 96
+        Width = 161
         Height = 17
         Caption = 'Show this picture'
         TabOrder = 2
         OnClick = ShowBackImgClick
+      end
+      object Panel1: TPanel
+        Left = 176
+        Top = 74
+        Width = 297
+        Height = 55
+        Color = clButton
+        TabOrder = 6
+        object ImgLumBar2: TTrackBar
+          Left = 8
+          Top = 24
+          Width = 137
+          Height = 18
+          Frequency = 5
+          Max = 30
+          Min = -30
+          PageSize = 5
+          TabOrder = 0
+          OnChange = ImgLumBar2Change
+        end
+        object ImgContrastBar2: TTrackBar
+          Left = 152
+          Top = 24
+          Width = 137
+          Height = 18
+          Frequency = 5
+          Max = 30
+          Min = -30
+          PageSize = 5
+          TabOrder = 1
+          OnChange = ImgContrastBar2Change
+        end
+        object Label1: TLabel
+          Left = 47
+          Top = 4
+          Width = 59
+          Height = 20
+          Caption = 'Luminosity'
+        end
+        object Label2: TLabel
+          Left = 197
+          Top = 4
+          Width = 46
+          Height = 20
+          Caption = 'Contrast'
+        end
       end
     end
   end
@@ -274,6 +326,13 @@ object f_config_pictures: Tf_config_pictures
     Height = 0
     Width = 0
     Left = 8
+    Top = 392
+  end
+  object ImageTimer1: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = ImageTimer1Timer
+    Left = 48
     Top = 392
   end
 end

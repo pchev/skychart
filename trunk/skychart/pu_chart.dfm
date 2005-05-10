@@ -1,8 +1,8 @@
 object f_chart: Tf_chart
-  Left = 405
-  Top = 123
-  Width = 374
-  Height = 231
+  Left = 406
+  Top = 124
+  Width = 372
+  Height = 233
   Caption = 'Chart'
   Color = clBlack
   ParentFont = True
@@ -24,8 +24,8 @@ object f_chart: Tf_chart
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 366
-    Height = 197
+    Width = 364
+    Height = 199
     Align = alClient
     BevelOuter = bvNone
     Color = clBlack
@@ -33,8 +33,8 @@ object f_chart: Tf_chart
     object Image1: TImage
       Left = 0
       Top = 0
-      Width = 366
-      Height = 197
+      Width = 364
+      Height = 199
       Align = alClient
       AutoSize = True
       PopupMenu = PopupMenu1

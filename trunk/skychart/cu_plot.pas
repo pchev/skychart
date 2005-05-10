@@ -584,7 +584,7 @@ var
   n,ex1,ey1 : integer;
   elp : array [1..22] of Tpoint;
   co,nebcolor : Tcolor;
-  col : byte;
+  col,r,g,b : byte;
 begin
 xx:=round(x);
 yy:=round(y);
@@ -625,7 +625,10 @@ if not cfgplot.Invisible then begin
           sbr:= ma + 2.5*log10(r1*r2) - 0.26;
        end;
        col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((sbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-       Nebcolor:=col+256*col+65536*col;
+       r:=co and $FF;
+       g:=(co shr 8) and $FF;
+       b:=(co shr 16) and $FF;
+       Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
        Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
        Pen.Color := cfgplot.Color[0];
        Brush.Style := bsSolid;
@@ -641,7 +644,8 @@ if not cfgplot.Invisible then begin
      th:=th+0.3;
    end;
    Polygon(elp);
-   if rnuc>0 then begin  // no more used
+   if rnuc>0 then begin
+   // different surface brightness and color for the nucleus, no more used with present catalog
      case Round(b_ve*10) of
                -999: co := $00000000 ;
            -990..-3: co := cfgplot.Color[1];
@@ -662,7 +666,10 @@ if not cfgplot.Invisible then begin
         end;
      1: begin
          col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((sbr-1-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-         Nebcolor:=col+256*col+65536*col;
+         r:=co and $FF;
+         g:=(co shr 8) and $FF;
+         b:=(co shr 16) and $FF;
+         Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
          Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
          Pen.Color := Brush.Color;
          Brush.Style := bsSolid;
@@ -678,8 +685,17 @@ Procedure TSplot.PlotNebula1(x,y: single; dim,ma,sbr,pixscale : Double ; typ : I
 var
   sz: Double;
   ds,ds2,xx,yy : Integer;
-  col : byte;
+  col,r,g,b : byte;
   nebcolor : Tcolor;
+  Procedure SetColor(i:integer);
+   begin
+     r:=cfgplot.Color[i] and $FF;
+     g:=(cfgplot.Color[i] shr 8) and $FF;
+     b:=(cfgplot.Color[i] shr 16) and $FF;
+     Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+     cnv.Pen.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
+     cnv.Brush.Color := cnv.Pen.Color;
+   end;
 begin
 xx:=round(x);
 yy:=round(y);
@@ -696,20 +712,20 @@ with cnv do begin
    13  : col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-(0.8)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
     else col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((sbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
    end;
-   Nebcolor:=col+256*col+65536*col;
-   Pen.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
-   Brush.Color := Pen.Color;
    Brush.Style := bsSolid;
    Pen.Mode:=pmCopy;
    case typ of
        1:  begin
+           SetColor(8);
            ds2:=round(ds*0.75);
            Ellipse(xx-ds,yy-ds2,xx+ds,yy+ds2);
            end;
        2:  begin
+           SetColor(9);
            Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
            end;
        3:  begin
+           SetColor(9);
            Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
            Brush.Color := Addcolor(Brush.Color,$00202020);
            Pen.Color :=Brush.Color;
@@ -717,16 +733,20 @@ with cnv do begin
            Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
            end;
        4:  begin
+           SetColor(10);
            Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
            end;
        5:  begin
+           SetColor(10);
            RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
            end;
        6:  begin
+           SetColor(10);
            Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
 //           RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
            end;
    7..10:  begin
+           SetColor(9);
            ds:=3*cfgchart.drawpen;
            MoveTo(xx-ds+1,yy);
            LineTo(xx+ds,yy);
@@ -734,9 +754,11 @@ with cnv do begin
            LineTo(xx,yy+ds);
            end;
       11:  begin
+           SetColor(10);
            RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
            end;
       12:  begin
+           SetColor(8);
            Pen.Width := 1;
            Pen.Style := psDot;
            Brush.Style := bsClear;
@@ -745,12 +767,20 @@ with cnv do begin
            Pen.Style := psSolid;
            end;
       13:  begin
+           SetColor(11);
            Brush.Style := bsClear;
            RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
            end;
-     14 :  Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-     15 :  Rectangle(xx-ds,yy-ds,xx+ds,yy+ds);
+     14 :  begin
+           SetColor(11);
+           Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+           end;
+     15 :  begin
+           SetColor(11);
+           Rectangle(xx-ds,yy-ds,xx+ds,yy+ds);
+           end;
      16 :  begin
+           SetColor(11);
            polygon([point(xx,yy-ds),
                   point(xx+ds,yy),
                   point(xx,yy+ds),
@@ -758,6 +788,7 @@ with cnv do begin
                   point(xx,yy-ds)]);
            end;
        else begin
+           SetColor(9);
            MoveTo(xx-1,yy-1);
            LineTo(xx+3,yy+3);
            MoveTo(xx-1,yy+2);
