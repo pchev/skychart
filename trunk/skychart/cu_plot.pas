@@ -104,6 +104,7 @@ type
      Procedure PlotLine(x1,y1,x2,y2:single; color,width: integer);
      Procedure PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg:boolean; bmp:Tbitmap);
      procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
+     procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
@@ -1227,6 +1228,90 @@ if not cfgplot.planetTransparent then begin
 end;
 cnv.copymode:=cmSrcPaint;
 cnv.StretchDraw(DestR,planetbmp);
+end;
+
+procedure TSplot.PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
+var
+   ds1,ds2,xx,yy,xm,ym,i,j : Integer;
+   mbmp,mask:tbitmap;
+   P,M: Pbytearray;
+begin
+xx:=round(x);
+yy:=round(y);
+if not cfgplot.Invisible then
+with cnv do begin
+ ds1:=round(maxvalue([r1*pixscale/2,2*cfgchart.drawpen]));
+ ds2:=round(maxvalue([r2*pixscale/2,2*cfgchart.drawpen]));
+ if ((xx+ds2)>0) and ((xx-ds2)<cfgchart.Width) and ((yy+ds2)>0) and ((yy-ds2)<cfgchart.Height) then begin
+  case  cfgplot.nebplot of
+   0: begin
+      Pen.Width := cfgchart.drawpen;
+      Pen.Color := cfgplot.Color[11];
+      Brush.style:=bsClear;
+      Ellipse(xx-ds1,yy-ds1,xx+ds1,yy+ds1);
+      Brush.style:=bsClear;
+      Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
+      end;
+   1: begin
+      mbmp:=Tbitmap.Create;
+      mask:=Tbitmap.Create;
+      mask.PixelFormat:=pf32bit;
+      mbmp.PixelFormat:=pf32bit;
+      mbmp.Width:=2*ds2;
+      mbmp.Height:=mbmp.Width;
+      mask.Width:=mbmp.Width;
+      mask.Height:=mbmp.Height;
+      xm:=ds2;
+      ym:=ds2;
+      // mask=shadow to substract from the moon
+      mask.Canvas.Pen.Color:=clBlack;
+      mask.Canvas.Brush.Color:=clBlack;
+      mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
+      mask.Canvas.Pen.Color:=$302000;
+      mask.Canvas.Brush.Color:=$302000;
+      mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
+      mask.Canvas.Pen.Color:=$604000;
+      mask.Canvas.Brush.Color:=$604000;
+      mask.Canvas.Ellipse(xm-ds1,ym-ds1,xm+ds1,ym+ds1);
+      // get source bitmap from the chart
+      mbmp.Canvas.CopyRect(rect(0,0,mbmp.Width,mbmp.Height),cnv,rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2));
+      mask.PixelFormat:=pf32bit;
+      mbmp.PixelFormat:=pf32bit;
+      // substract the shadow
+      for i:= 0 to mbmp.Height-1 do begin
+         P:=mbmp.ScanLine[i];
+         M:=mask.ScanLine[i];
+         for j:=0 to 4*(mbmp.Width-1) do begin
+            P[j]:=max(0,round((P[j]-M[j])));
+         end;
+      end;
+      // mask to erase anything outside the shadow
+      mask.Canvas.Pen.Color:=clBlack;
+      mask.Canvas.Brush.Color:=clBlack;
+      mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
+      mask.Canvas.Pen.Color:=clWhite;
+      mask.Canvas.Brush.Color:=clWhite;
+      mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
+      mbmp.Canvas.copymode:=cmSrcAnd;
+      mbmp.Canvas.copyrect(rect(xm-ds2,ym-ds2,xm+ds2,ym+ds2),mask.Canvas,rect(0,0,mbmp.Width,mbmp.Height));
+      // mask to clear the destination
+      mask.Canvas.Pen.Color:=clWhite;
+      mask.Canvas.Brush.Color:=clWhite;
+      mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
+      mask.Canvas.Pen.Color:=clBlack;
+      mask.Canvas.Brush.Color:=clBlack;
+      mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
+      copymode:=cmSrcAnd;
+      copyrect(rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2),mask.Canvas,rect(0,0,mbmp.Width,mbmp.Height));
+      // finally copy back the image
+      copymode:=cmSrcPaint;
+      copyrect(rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2),mbmp.Canvas,rect(0,0,mbmp.Width,mbmp.Height));
+      mbmp.Free;
+      mask.Free;
+      end;  // 1
+    end; // case
+ end;  // if xx
+end; // with
 end;
 
 Procedure TSplot.PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);

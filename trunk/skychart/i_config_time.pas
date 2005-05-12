@@ -207,6 +207,22 @@ for i:=0 to SimObj.Items.Count-1 do begin
 end;
 end;
 
+procedure Tf_config_time.AllSimClick(Sender: TObject);
+var i:integer;
+begin
+for i:=0 to SimObj.Items.Count-1 do
+    SimObj.checked[i]:=true;
+SimObjClickCheck(Sender);
+end;
+
+procedure Tf_config_time.NoSimClick(Sender: TObject);
+var i:integer;
+begin
+for i:=0 to SimObj.Items.Count-1 do
+    SimObj.checked[i]:=false;
+SimObjClickCheck(Sender);
+end;
+
 procedure Tf_config_time.stepunitClick(Sender: TObject);
 begin
 case stepunit.ItemIndex of

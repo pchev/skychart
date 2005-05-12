@@ -243,6 +243,7 @@ type
     Shape33: TShape;
     Shape34: TShape;
     DefNebColorButton: TButton;
+    Showlabelall: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
@@ -295,6 +296,7 @@ type
     procedure DefNebColorButtonClick(Sender: TObject);
     procedure NebShapeMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ShowlabelallClick(Sender: TObject);
   private
     { Private declarations }
     procedure ShowDisplay;
@@ -304,6 +306,7 @@ type
     procedure ShowNebColor;
     procedure ShowLine;
     procedure ShowLabelColor;
+    procedure ShowLabel;
     procedure ShowCircle;
     procedure ShowRectangle;
     procedure SetFonts(ctrl:Tedit;num:integer);

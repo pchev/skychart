@@ -79,6 +79,7 @@ Tskychart = class (TComponent)
     function DrawOutline :boolean;
     function DrawMilkyWay :boolean;
     function DrawPlanet :boolean;
+    procedure DrawEarthShadow(AR,DE,SunDist,MoonDist,MoonDistTopo : double);
     function DrawAsteroid :boolean;
     function DrawComet :boolean;
     function DrawOrbitPath:boolean;
@@ -214,7 +215,7 @@ try
   if not cfgsc.quick then begin
     DrawAsteroid;
     DrawComet;
-    DrawOrbitPath;
+    if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanet then DrawPlanet;
   // and the horizon line if not transparent
@@ -945,11 +946,28 @@ for j:=0 to cfgsc.SimNb-1 do begin
             Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0);
            end;
     end;
-  //if ShowEarthUmbra then DrawEarthUmbra(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5],onprinter,out);
 //  end;
   end;
+  if cfgsc.ShowEarthShadow then DrawEarthShadow(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5]);
 end;
 result:=true;
+end;
+
+Procedure Tskychart.DrawEarthShadow(AR,DE,SunDist,MoonDist,MoonDistTopo : double);
+var x,y,cone,umbra,penumbra,pixscale : double;
+    xx,yy: single;
+    ds : integer;
+    labeltxt : string;
+begin
+ projection(ar,de,x,y,true,cfgsc) ;
+ windowxy(x,y,xx,yy,cfgsc);
+ cone:=SunDist*12.78/(1392-12.78);  // earth diam = 12.78 (12776 incl atmophere) ; sun diam = 1392 (*1000 km)
+ umbra:=12776*(cone-MoonDist)/cone;
+ umbra:=arctan2(umbra,MoonDistTopo);
+ penumbra:=umbra+1.07*deg2rad;  // + 2x sun diameter
+ pixscale:=abs(cfgsc.BxGlb);
+ Fplot.PlotEarthShadow(xx,yy,umbra,penumbra,pixscale);
+// SetLabel(1000032,xx,yy,round(pixscale*penumbra/2),2,5,'Earth Shadow');
 end;
 
 Procedure Tskychart.DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);

@@ -21,7 +21,7 @@ object f_config: Tf_config
     Left = 200
     Top = 0
     Width = 506
-    Height = 456
+    Height = 452
     ActivePage = s_time
     Align = alClient
     TabOrder = 0
@@ -82,6 +82,9 @@ object f_config: Tf_config
         Width = 490
         Height = 440
         TabOrder = 0
+        inherited pa_solsys: TPageControl
+          Height = 440
+        end
       end
     end
     object s_display: TTabSheet
@@ -125,7 +128,7 @@ object f_config: Tf_config
     Left = 0
     Top = 0
     Width = 200
-    Height = 456
+    Height = 452
     Align = alLeft
     TabOrder = 1
     object TreeView1: TTreeView
@@ -219,7 +222,7 @@ object f_config: Tf_config
   end
   object Panel2: TPanel
     Left = 0
-    Top = 456
+    Top = 452
     Width = 706
     Height = 41
     Align = alBottom

@@ -48,6 +48,7 @@ save:=csc.ShowBackgroundImage;
 backimg.text:=csc.BackgroundImage;
 ShowBackImg.checked:=save;
 cmain.NewBackgroundImage:=false;
+ImageTimer1.enabled:=false;
 end;
 
 procedure Tf_config_pictures.imgpathChange(Sender: TObject);
@@ -118,6 +119,15 @@ ImageTimer1.enabled:=false;
 RefreshImage;
 end;
 
+{$ifdef linux}
+procedure Tf_config_pictures.pa_imagesPageChanging(Sender: TObject; NewPage: TTabSheet; var AllowChange: Boolean);
+begin
+if (newpage.pageindex=1) then
+    backimgChange(Sender);
+AllowChange:=true;
+end;
+{$endif}
+
 procedure Tf_config_pictures.backimgChange(Sender: TObject);
 begin
 csc.BackgroundImage:=backimg.text;
@@ -131,6 +141,9 @@ end
 else begin
   backimginfo.caption:='No picture';
   ShowBackImg.checked:=false;
+  Image1.canvas.brush.color:=clBlack;
+  Image1.canvas.pen.color:=clBlack;
+  Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
 end;
 end;
 

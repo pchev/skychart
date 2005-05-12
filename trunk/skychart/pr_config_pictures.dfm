@@ -9,7 +9,7 @@ object f_config_pictures: Tf_config_pictures
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_background
+    ActivePage = t_images
     Align = alClient
     TabOrder = 0
     object t_images: TTabSheet
@@ -220,7 +220,7 @@ object f_config_pictures: Tf_config_pictures
       object backimginfo: TLabel
         Left = 8
         Top = 40
-        Width = 65
+        Width = 57
         Height = 13
         Caption = 'backimginfo'
       end

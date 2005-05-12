@@ -13,6 +13,7 @@ object f_config_pictures: Tf_config_pictures
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
+    OnPageChanging = pa_imagesPageChanging
     object t_images: TTabSheet
       Caption = 't_images'
       object Label113: TLabel

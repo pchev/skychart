@@ -180,7 +180,7 @@ type
     fdim8: TFloatEdit;
     fdim9: TFloatEdit;
     fBigNebLimit: TLongEdit;
-    Label140: TLabel;
+    BigNebUnit: TLabel;
     t_grid: TTabSheet;
     Bevel9: TBevel;
     Label115: TLabel;

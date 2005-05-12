@@ -37,7 +37,7 @@ ShowColor;
 ShowSkyColor;
 ShowNebColor;
 ShowLine;
-ShowLabelColor;
+Showlabel;
 ShowCircle;
 ShowRectangle;
 end;
@@ -149,21 +149,42 @@ procedure Tf_config_display.showlabelcolor;
 begin
 
  labelcolorStar.brush.color:=cplot.labelcolor[1];
-
  labelcolorVar.brush.color:=cplot.labelcolor[2];
-
  labelcolorMult.brush.color:=cplot.labelcolor[3];
-
  labelcolorNeb.brush.color:=cplot.labelcolor[4];
-
  labelcolorSol.brush.color:=cplot.labelcolor[5];
-
  labelcolorConst.brush.color:=cplot.labelcolor[6];
-
  labelcolorMisc.brush.color:=cplot.labelcolor[7];
-
 end;
 
+procedure Tf_config_display.showlabel;
+begin
+ showlabelStar.checked:=csc.showlabel[1];
+ showlabelVar.checked:=csc.showlabel[2];
+ showlabelMult.checked:=csc.showlabel[3];
+ showlabelNeb.checked:=csc.showlabel[4];
+ showlabelSol.checked:=csc.showlabel[5];
+ showlabelConst.checked:=csc.showlabel[6];
+ showlabelMisc.checked:=csc.showlabel[7];
+ labelmagStar.value:=round(csc.labelmagdiff[1]);
+ labelmagVar.value:=round(csc.labelmagdiff[2]);
+ labelmagMult.value:=round(csc.labelmagdiff[3]);
+ labelmagNeb.value:=round(csc.labelmagdiff[4]);
+ labelmagSol.value:=round(csc.labelmagdiff[5]);
+ labelsizeStar.value:=cplot.labelsize[1];
+ labelsizeVar.value:=cplot.labelsize[2];
+ labelsizeMult.value:=cplot.labelsize[3];
+ labelsizeNeb.value:=cplot.labelsize[4];
+ labelsizeSol.value:=cplot.labelsize[5];
+ labelsizeConst.value:=cplot.labelsize[6];
+ labelsizeMisc.value:=cplot.labelsize[7];
+ showlabelcolor;
+ if csc.MagLabel then MagLabel.ItemIndex:=1
+                 else MagLabel.itemindex:=0;
+ if csc.ConstFullLabel then constlabel.ItemIndex:=0
+                       else constlabel.ItemIndex:=1;
+ Showlabelall.checked:=csc.Showlabelall;
+end;
 
 procedure Tf_config_display.ShowCircle;
 
@@ -556,6 +577,11 @@ end;
 procedure Tf_config_display.showlabelClick(Sender: TObject);
 begin
 with sender as TCheckBox do csc.ShowLabel[tag]:=checked;
+end;
+
+procedure Tf_config_display.showlabelallClick(Sender: TObject);
+begin
+csc.Showlabelall:=Showlabelall.checked;
 end;
 
 {$ifdef mswindows}

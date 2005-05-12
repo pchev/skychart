@@ -9,7 +9,7 @@ object f_config_time: Tf_config_time
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_time
+    ActivePage = t_simulation
     Align = alClient
     TabOrder = 0
     object t_time: TTabSheet
@@ -439,6 +439,24 @@ object f_config_time: Tf_config_time
           'Comets')
         ParentFont = False
         TabOrder = 4
+      end
+      object AllSim: TButton
+        Left = 56
+        Top = 120
+        Width = 75
+        Height = 25
+        Caption = 'All'
+        TabOrder = 5
+        OnClick = AllSimClick
+      end
+      object NoSim: TButton
+        Left = 56
+        Top = 152
+        Width = 75
+        Height = 25
+        Caption = 'None'
+        TabOrder = 6
+        OnClick = NoSimClick
       end
     end
   end

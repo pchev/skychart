@@ -9,7 +9,7 @@ object f_config_solsys: Tf_config_solsys
     Top = 0
     Width = 490
     Height = 443
-    ActivePage = t_comet
+    ActivePage = t_planet
     Align = alClient
     TabOrder = 0
     object t_solsys: TTabSheet
@@ -143,7 +143,7 @@ object f_config_solsys: Tf_config_solsys
           'Realistics image'
           'Symbol')
         TabOrder = 1
-        OnClick = PlaParalaxeClick
+        OnClick = PlanetModeClick
       end
       object PlanetBox2: TCheckBox
         Left = 40

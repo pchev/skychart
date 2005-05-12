@@ -209,8 +209,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure StringGrid3SelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure StringGrid3SetEditText(Sender: TObject; ACol, ARow: Integer;
-      const Value: WideString);
+    procedure StringGrid3SetEditText(Sender: TObject; ACol, ARow: Integer;const Value: String);
     procedure AddCatClick(Sender: TObject);
     procedure DelCatClick(Sender: TObject);
     procedure CDCStarSelClick(Sender: TObject);
@@ -235,6 +234,8 @@ type
     procedure CDCNebField2Change(Sender: TObject);
     procedure CDCNebPathChange(Sender: TObject);
     procedure CDCNebSelPathClick(Sender: TObject);
+    procedure FrameExit(Sender: TObject);
+
   private
     { Private declarations }
     catalogempty: boolean;
@@ -270,5 +271,6 @@ implementation
 {$include i_config_catalog.pas}
 
 // end of common code
+
 
 end.

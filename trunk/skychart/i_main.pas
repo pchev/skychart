@@ -160,6 +160,7 @@ c2.FillMilkyWay := c1.FillMilkyWay ;
 c2.HorizonOpaque := c1.HorizonOpaque ;
 c2.HorizonMax := c1.HorizonMax ;
 c2.Horizonlist := c1.Horizonlist ;
+c2.ShowlabelAll := c1.ShowlabelAll ;
 for i:=1 to numlabtype do begin
    c2.ShowLabel[i]:=c1.ShowLabel[i];
    c2.LabelMagDiff[i]:=c1.LabelMagDiff[i];
@@ -972,11 +973,24 @@ Close;
 end;
 
 procedure Tf_main.activateconfig;
+var i:integer;
 begin
     cfgm:=f_config.cmain;
     cfgm.updall:=f_config.applyall.checked;
     if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
     if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
+    for i:=0 to f_config.ccat.GCatNum-1 do begin
+    if f_config.ccat.GCatLst[i].Actif then begin
+      if not
+      catalog.GetInfo(f_config.ccat.GCatLst[i].path,
+                      f_config.ccat.GCatLst[i].shortname,
+                      f_config.ccat.GCatLst[i].magmax,
+                      f_config.ccat.GCatLst[i].cattype,
+                      f_config.ccat.GCatLst[i].version,
+                      f_config.ccat.GCatLst[i].name)
+      then f_config.ccat.GCatLst[i].Actif:=false;
+    end;
+    end;
     catalog.cfgcat:=f_config.ccat;
     catalog.cfgshr:=f_config.cshr;
     def_cfgsc:=f_config.csc;

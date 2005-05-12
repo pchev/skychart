@@ -324,6 +324,8 @@ begin
 cshr.NebFilter:=NebBox.Checked;
 Panel5.visible:=cshr.NebFilter;
 BigNebBox.visible:=cshr.NebFilter;
+fBigNebLimit.visible:=cshr.NebFilter;
+BigNebUnit.visible:=cshr.NebFilter;
 end;
 
 procedure Tf_config_chart.BigNebBoxClick(Sender: TObject);
@@ -351,15 +353,28 @@ end;
 end;
 
 procedure Tf_config_chart.DegSpacingChange(Sender: TObject);
+var str: string;
+    val:double;
 begin
-if sender is TMaskEdit then with sender as TMaskEdit do
-   cshr.DegreeGridSpacing[tag]:=Str3ToDE(text);
+if sender is TMaskEdit then with sender as TMaskEdit do begin
+   str:=stringreplace(text,'dd','d',[]); // kylix bug ?
+   str:=stringreplace(str,'mm','m',[]);
+   val:=Str3ToDE(str);
+   if val>0 then cshr.DegreeGridSpacing[tag]:=val;
+
+end;
 end;
 
 procedure Tf_config_chart.HourSpacingChange(Sender: TObject);
+var str: string;
+    val:double;
 begin
-if sender is TMaskEdit then with sender as TMaskEdit do
-   cshr.HourGridSpacing[tag]:=Str3ToAr(text);
+if sender is TMaskEdit then with sender as TMaskEdit do begin
+   str:=stringreplace(text,'hh','h',[]); // kylix bug ?
+   str:=stringreplace(str,'mm','m',[]);
+   val:=Str3ToAR(str);
+   if val>0 then cshr.HourGridSpacing[tag]:=val;
+end;   
 end;
 
 procedure Tf_config_chart.liststarClick(Sender: TObject);
