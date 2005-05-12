@@ -76,6 +76,8 @@ type
     stepsize: TSpinEdit;
     SimObj: TCheckListBox;
     Label178: TLabel;
+    AllSim: TButton;
+    NoSim: TButton;
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
@@ -93,6 +95,8 @@ type
     procedure stepresetClick(Sender: TObject);
     procedure steplineClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure AllSimClick(Sender: TObject);
+    procedure NoSimClick(Sender: TObject);
   private
     { Private declarations }
     procedure ShowTime;

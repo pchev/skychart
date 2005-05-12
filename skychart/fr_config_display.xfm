@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_nebcolor
+    ActivePage = t_labels
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -2085,6 +2085,15 @@ object f_config_display: Tf_config_display
         ItemIndex = 0
         TabOrder = 26
         OnClick = constlabelClick
+      end
+      object showlabelall: TCheckBox
+        Left = 40
+        Top = 392
+        Width = 257
+        Height = 21
+        Caption = 'Display the labels on the chart'
+        TabOrder = 27
+        OnClick = showlabelallClick
       end
     end
     object t_circle: TTabSheet

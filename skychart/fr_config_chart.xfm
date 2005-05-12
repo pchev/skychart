@@ -9,7 +9,7 @@ object f_config_chart: Tf_config_chart
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_chart
+    ActivePage = t_grid
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -1695,7 +1695,7 @@ object f_config_chart: Tf_config_chart
           Value = 1
           MaxValue = 20000
         end
-        object Label140: TLabel
+        object BigNebUnit: TLabel
           Left = 376
           Top = 20
           Width = 42

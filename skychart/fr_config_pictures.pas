@@ -75,6 +75,8 @@ type
     procedure ImgContrastBar2Change(Sender: TObject);
     procedure ImgLumBar2Change(Sender: TObject);
     procedure ImageTimer1Timer(Sender: TObject);
+    procedure pa_imagesPageChanging(Sender: TObject; NewPage: TTabSheet;
+      var AllowChange: Boolean);
   private
     { Private declarations }
     FFits: TFits;
@@ -111,8 +113,6 @@ implementation
 {$include i_config_pictures.pas}
 
 // end of common code
-
-
 
 
 end.

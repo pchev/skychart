@@ -141,7 +141,7 @@ type
     fsmagvis: TFloatEdit;
     StarAutoBox: TCheckBox;
     GroupBox1: TGroupBox;
-    Label115: TLabel;
+    BigNebUnit: TLabel;
     NebBox: TCheckBox;
     BigNebBox: TCheckBox;
     Panel5: TPanel;

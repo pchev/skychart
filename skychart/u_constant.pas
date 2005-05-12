@@ -234,7 +234,7 @@ const cdcversion = 'Version 3 alpha 0.0.8';
 {$endif}
 
 type
-     Tplanetlst = array[0..MaxSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth umbra ;
+     Tplanetlst = array[0..MaxSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ;
      Tcometlst = array of array[1..MaxComet,1..8] of double;
      TcometName= array of array[1..MaxComet,1..2] of string[27];
      Tasteroidlst = array of array[1..MaxAsteroid,1..5] of double;

@@ -140,8 +140,11 @@ function Tf_chart.GetChartInfo:string;
 var cep,dat:string;
 begin
     cep:=trim(sc.cfgsc.EquinoxName);
-    //if cep='Date' then cep:=sc.cfgsc.EquinoxDate;
-    dat:=Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+' (+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
+    dat:=Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime);
+    if  sc.cfgsc.TimeZone>=0 then
+       dat:=dat+' (+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')'
+    else
+       dat:=dat+' ('+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
     case sc.cfgsc.projpole of
     Equat : result:='Equatorial Coord. '+cep+blank+dat;
     AltAz : result:='Alt/AZ Coord. '+trim(sc.cfgsc.ObsName)+blank+dat;

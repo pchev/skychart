@@ -4,6 +4,7 @@ object f_config_catalog: Tf_config_catalog
   Width = 490
   Height = 440
   TabOrder = 0
+  OnExit = FrameExit
   object pa_catalog: TPageControl
     Left = 0
     Top = 0
@@ -61,6 +62,7 @@ object f_config_catalog: Tf_config_catalog
         OnDrawCell = StringGrid3DrawCell
         OnMouseUp = StringGrid3MouseUp
         OnSelectCell = StringGrid3SelectCell
+        OnSetEditText = StringGrid3SetEditText
         ColWidths = (
           18
           54

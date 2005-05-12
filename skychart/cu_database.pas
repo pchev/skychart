@@ -984,19 +984,23 @@ if db.Rowcount>0 then begin
     end;
     inc(i);
   end;
-  h:=strtofloat(db.Results[j][1]);
-  g:=strtofloat(db.Results[j][2]);
-  ma:=strtofloat(db.Results[j][4]);
-  ap:=strtofloat(db.Results[j][5]);
-  an:=strtofloat(db.Results[j][6]);
-  ic:=strtofloat(db.Results[j][7]);
-  ec:=strtofloat(db.Results[j][8]);
-  sa:=strtofloat(db.Results[j][9]);
-  ref:=db.Results[j][10];
-  nam:=db.Results[j][11];
-  eq:=strtofloat(db.Results[j][12]);
-  elem_id:=db.Results[j][13];
-  result:=true;
+  if dt<1000 then begin
+     h:=strtofloat(db.Results[j][1]);
+     g:=strtofloat(db.Results[j][2]);
+     ma:=strtofloat(db.Results[j][4]);
+     ap:=strtofloat(db.Results[j][5]);
+     an:=strtofloat(db.Results[j][6]);
+     ic:=strtofloat(db.Results[j][7]);
+     ec:=strtofloat(db.Results[j][8]);
+     sa:=strtofloat(db.Results[j][9]);
+     ref:=db.Results[j][10];
+     nam:=db.Results[j][11];
+     eq:=strtofloat(db.Results[j][12]);
+     elem_id:=db.Results[j][13];
+     result:=true;
+  end
+  else
+     result:=false;
 end else begin
   result:=false;
 end;
@@ -1029,18 +1033,22 @@ if db.Rowcount>0 then begin
     end;
     inc(i);
   end;
-  tp:=strtofloat(db.Results[j][1]);
-  q:=strtofloat(db.Results[j][2]);
-  ec:=strtofloat(db.Results[j][3]);
-  ap:=strtofloat(db.Results[j][4]);
-  an:=strtofloat(db.Results[j][5]);
-  ic:=strtofloat(db.Results[j][6]);
-  h:=strtofloat(db.Results[j][8]);
-  g:=strtofloat(db.Results[j][9]);
-  nam:=db.Results[j][10];
-  eq:=strtofloat(db.Results[j][11]);
-  elem_id:=db.Results[j][12];
-  result:=true;
+  if dt<1000 then begin
+     tp:=strtofloat(db.Results[j][1]);
+     q:=strtofloat(db.Results[j][2]);
+     ec:=strtofloat(db.Results[j][3]);
+     ap:=strtofloat(db.Results[j][4]);
+     an:=strtofloat(db.Results[j][5]);
+     ic:=strtofloat(db.Results[j][6]);
+     h:=strtofloat(db.Results[j][8]);
+     g:=strtofloat(db.Results[j][9]);
+     nam:=db.Results[j][10];
+     eq:=strtofloat(db.Results[j][11]);
+     elem_id:=db.Results[j][12];
+     result:=true;
+  end
+  else
+    result:=false;
 end else begin
   result:=false;
 end;

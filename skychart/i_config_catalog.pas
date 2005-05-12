@@ -259,8 +259,14 @@ begin
 if Acol=5 then canselect:=false else canselect:=true;
 end;
 
+{$ifdef mswindows}
+procedure Tf_config_catalog.StringGrid3SetEditText(Sender: TObject; ACol,
+  ARow: Integer; const Value: String);
+{$endif}
+{$ifdef linux }
 procedure Tf_config_catalog.StringGrid3SetEditText(Sender: TObject; ACol,
   ARow: Integer; const Value: WideString);
+{$endif}
 begin
 if (Acol=4)and(Arow>0) then
   if not fileexists(slash(value)+StringGrid3.cells[1,arow]+'.hdr') then begin
@@ -519,5 +525,37 @@ if sender is TBitBtn then with sender as TBitBtn do begin
      ccat.NebCatPath[tag]:=f_directory.DirectoryTreeView1.Directory;
 {$endif}
   ShowCDCNeb;
+end;
+end;
+
+
+procedure Tf_config_catalog.FrameExit(Sender: TObject);
+var i,x,v:integer;
+begin
+ccat.GCatNum:=stringgrid3.RowCount-1;
+SetLength(ccat.GCatLst,ccat.GCatNum);
+for i:=0 to ccat.GCatNum-1 do begin
+   ccat.GCatLst[i].shortname:=stringgrid3.cells[1,i+1];
+   ccat.GCatLst[i].path:=stringgrid3.cells[4,i+1];
+   val(stringgrid3.cells[2,i+1],x,v);
+   if v=0 then ccat.GCatLst[i].min:=x
+          else ccat.GCatLst[i].min:=0;
+   val(stringgrid3.cells[3,i+1],x,v);
+   if v=0 then ccat.GCatLst[i].max:=x
+          else ccat.GCatLst[i].max:=0;
+   ccat.GCatLst[i].Actif:=stringgrid3.cells[0,i+1]='1';
+   ccat.GCatLst[i].magmax:=0;
+   ccat.GCatLst[i].name:='';
+   ccat.GCatLst[i].cattype:=0;
+{   if ccat.GCatLst[i].Actif then begin
+      if not
+      f_main.catalog.GetInfo(ccat.GCatLst[i].path,
+                      ccat.GCatLst[i].shortname,
+                      ccat.GCatLst[i].magmax,
+                      ccat.GCatLst[i].cattype,
+                      ccat.GCatLst[i].version,
+                      ccat.GCatLst[i].name)
+      then ccat.GCatLst[i].Actif:=false;
+   end;}
 end;
 end;

@@ -4,12 +4,13 @@ object f_config_catalog: Tf_config_catalog
   Width = 490
   Height = 440
   TabOrder = 0
+  OnExit = FrameExit
   object pa_catalog: TPageControl
     Left = 0
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_catgen
+    ActivePage = t_obsolete
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -2092,7 +2093,7 @@ object f_config_catalog: Tf_config_catalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 3
-        OnClick = CDCStarField1Change
+        OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
       end
@@ -2106,7 +2107,7 @@ object f_config_catalog: Tf_config_catalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
-        OnClick = CDCNebField2Change
+        OnChange = CDCNebField2Change
         Value = 10
         MaxValue = 10
       end
@@ -2119,7 +2120,7 @@ object f_config_catalog: Tf_config_catalog
         Cursor = crIBeam
         TabOrder = 5
         Text = 'tyc3'
-        OnClick = CDCStarPathChange
+        OnChange = CDCStarPathChange
       end
       object BitBtn11: TBitBtn
         Tag = 3
@@ -2183,7 +2184,7 @@ object f_config_catalog: Tf_config_catalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 8
-        OnClick = CDCStarField1Change
+        OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
       end
@@ -2197,7 +2198,7 @@ object f_config_catalog: Tf_config_catalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 9
-        OnClick = CDCNebField2Change
+        OnChange = CDCStarField2Change
         Value = 7
         MaxValue = 10
       end
@@ -2210,7 +2211,7 @@ object f_config_catalog: Tf_config_catalog
         Cursor = crIBeam
         TabOrder = 10
         Text = 'tic3'
-        OnClick = CDCStarPathChange
+        OnChange = CDCStarPathChange
       end
       object BitBtn13: TBitBtn
         Tag = 5
@@ -2274,7 +2275,7 @@ object f_config_catalog: Tf_config_catalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 13
-        OnClick = CDCStarField1Change
+        OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
       end
@@ -2288,7 +2289,7 @@ object f_config_catalog: Tf_config_catalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 14
-        OnClick = CDCNebField2Change
+        OnChange = CDCStarField2Change
         Value = 2
         MaxValue = 10
       end
@@ -2301,7 +2302,7 @@ object f_config_catalog: Tf_config_catalog
         Cursor = crIBeam
         TabOrder = 15
         Text = 'gsc3'
-        OnClick = CDCStarPathChange
+        OnChange = CDCStarPathChange
       end
       object BitBtn18: TBitBtn
         Tag = 8
@@ -2365,7 +2366,7 @@ object f_config_catalog: Tf_config_catalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 18
-        OnClick = CDCStarField1Change
+        OnChange = CDCStarField1Change
         Value = 0
         MaxValue = 10
       end
@@ -2379,7 +2380,7 @@ object f_config_catalog: Tf_config_catalog
         ParentShowHint = False
         ShowHint = True
         TabOrder = 19
-        OnClick = CDCNebField2Change
+        OnChange = CDCStarField2Change
         Value = 2
         MaxValue = 10
       end
@@ -2392,7 +2393,7 @@ object f_config_catalog: Tf_config_catalog
         Cursor = crIBeam
         TabOrder = 20
         Text = 'x:\'
-        OnClick = CDCStarPathChange
+        OnChange = CDCStarPathChange
       end
       object BitBtn32: TBitBtn
         Tag = 10

@@ -36,7 +36,7 @@ object f_config_solsys: Tf_config_solsys
         OnClick = PlaParalaxeClick
       end
       object PlanetDir: TEdit
-        Left = 104
+        Left = 120
         Top = 59
         Width = 225
         Height = 28
@@ -53,7 +53,7 @@ object f_config_solsys: Tf_config_solsys
         Caption = 'Data Files :'
       end
       object PlanetDirSel: TBitBtn
-        Left = 336
+        Left = 352
         Top = 59
         Width = 26
         Height = 26
@@ -156,7 +156,7 @@ object f_config_solsys: Tf_config_solsys
         OnClick = PlanetBox3Click
       end
       object GRS: TFloatEdit
-        Left = 152
+        Left = 184
         Top = 277
         Width = 41
         Height = 22
@@ -169,7 +169,7 @@ object f_config_solsys: Tf_config_solsys
         MaxValue = 360.000000000000000000
       end
       object BitBtn37: TBitBtn
-        Left = 199
+        Left = 231
         Top = 276
         Width = 27
         Height = 25

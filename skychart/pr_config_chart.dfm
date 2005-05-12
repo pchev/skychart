@@ -9,7 +9,7 @@ object f_config_chart: Tf_config_chart
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_chart
+    ActivePage = t_filter
     Align = alClient
     TabOrder = 0
     object t_chart: TTabSheet
@@ -1279,7 +1279,7 @@ object f_config_chart: Tf_config_chart
         Height = 200
         Caption = 'Nebulae Filter'
         TabOrder = 1
-        object Label115: TLabel
+        object BigNebUnit: TLabel
           Left = 376
           Top = 23
           Width = 36

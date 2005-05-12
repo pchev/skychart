@@ -1679,9 +1679,9 @@ var qry,id,elem_id : string;
     dist,r,elong,phase,h,g,ap,an,ic,ec,eq,epoch,ra,dec,mag,tp,q,diam,lc,car,cde,rc: double;
     nam:string;
 begin
-       inc(n_com);
        id:=row[0];
        if cdb.GetComElemEpoch(id,jdnew,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
+         inc(n_com);
          InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
          Comet(jdnew,false,ra,dec,dist,r,elong,phase,mag,diam,lc,car,cde,rc);
          if mag<com_limitmag then begin
@@ -2115,9 +2115,9 @@ var id,jds,ref,nam,qry,elem_id : string;
     epoch,h,g,ma,ap,an,ic,ec,sa,eq : double;
     ra,dec,dist,r,elong,phase,magn : Double;
 begin
-    inc(n_ast);
     id:=row[0];
     if cdb.GetAstElemEpoch(id,jdnew,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+         inc(n_ast);
          InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
          Asteroid(jdnew,false,ra,dec,dist,r,elong,phase,magn);
          jds:=formatfloat(f1,jdnew);

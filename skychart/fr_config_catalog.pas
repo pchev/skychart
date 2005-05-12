@@ -238,6 +238,7 @@ type
     procedure CDCNebField2Change(Sender: TObject);
     procedure CDCNebPathChange(Sender: TObject);
     procedure CDCNebSelPathClick(Sender: TObject);
+    procedure FrameExit(Sender: TObject);
   private
     { Private declarations }
     catalogempty: boolean;
@@ -276,6 +277,5 @@ implementation
 {$include i_config_catalog.pas}
 
 // end of common code
-
 
 end.

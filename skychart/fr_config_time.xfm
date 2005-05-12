@@ -424,6 +424,24 @@ object f_config_time: Tf_config_time
         Height = 20
         Caption = 'For the following objects'
       end
+      object AllSim: TButton
+        Left = 72
+        Top = 112
+        Width = 75
+        Height = 25
+        Caption = 'All'
+        TabOrder = 10
+        OnClick = AllSimClick
+      end
+      object NoSim: TButton
+        Left = 72
+        Top = 144
+        Width = 75
+        Height = 25
+        Caption = 'None'
+        TabOrder = 11
+        OnClick = NoSimClick
+      end
     end
   end
 end

@@ -3338,7 +3338,21 @@ object f_main: Tf_main
         Color = clBtnFace
         DropDownCount = 11
         ItemHeight = 14
+        ItemIndex = 0
         TabOrder = 2
+        Text = 'Hour'
+        Items.Strings = (
+          'Hour'
+          'Minute'
+          'Second'
+          'Day'
+          'Month'
+          'Year'
+          'Julian Year'
+          'Tropical Year'
+          'Sideral Day'
+          'Synodic Month'
+          'Saros')
       end
       object ToolButton39: TToolButton
         Left = 620
@@ -3609,7 +3623,6 @@ object f_main: Tf_main
     end
   end
   object MainMenu1: TMainMenu
-    Images = ImageList1
     Left = 216
     Top = 160
     object File1: TMenuItem
@@ -3849,7 +3862,6 @@ object f_main: Tf_main
         Caption = 'Show Objects'
         object ShowStars1: TMenuItem
           Action = ShowStars
-          RadioItem = True
         end
         object ShowNebulae1: TMenuItem
           Action = ShowNebulae

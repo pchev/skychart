@@ -572,10 +572,6 @@ object f_config: Tf_config
                   Height = 18
                 end
               end
-              inherited Label140: TLabel
-                Width = 35
-                Height = 18
-              end
             end
           end
           inherited t_grid: TTabSheet
