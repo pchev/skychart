@@ -184,7 +184,7 @@ try
  if (not connected) and FAutoStart then begin
     buf:=getcurrentdir;
     try
-      plugin:=slash('plugins')+slash('indi');
+      plugin:=slash('plugins');
       localplugin:=directoryexists(plugin);
       {$ifdef linux}
       plugin:=expanddirectoryname(plugin);
