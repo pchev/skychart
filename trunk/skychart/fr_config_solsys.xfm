@@ -9,7 +9,7 @@ object f_config_solsys: Tf_config_solsys
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_asteroid
+    ActivePage = t_planet
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -125,9 +125,9 @@ object f_config_solsys: Tf_config_solsys
       end
       object PlanetMode: TRadioGroup
         Left = 40
-        Top = 120
+        Top = 96
         Width = 329
-        Height = 137
+        Height = 161
         Items.Strings = (
           'Star'
           'Line mode drawing'
@@ -237,16 +237,16 @@ object f_config_solsys: Tf_config_solsys
           8000808000808000808000808000808000808000808000808000}
       end
       object Label177: TLabel
-        Left = 40
-        Top = 88
+        Left = 248
+        Top = 56
         Width = 119
         Height = 20
         Caption = 'Computation Plugin : '
         Visible = False
       end
       object Edit2: TEdit
-        Left = 152
-        Top = 84
+        Left = 360
+        Top = 52
         Width = 100
         Height = 28
         Cursor = crIBeam

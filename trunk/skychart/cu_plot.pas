@@ -28,10 +28,10 @@ interface
 uses u_constant, u_util, u_planetrender, u_bitmap,
      Math, SysUtils, Classes, Types,
 {$ifdef linux}
-   Qmenus, QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
+   Qt, Qmenus, QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
 {$endif}
 {$ifdef mswindows}
-   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Windows, Graphics;
+   jpeg, Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Windows, Graphics;
 {$endif}
 
 type
@@ -61,8 +61,11 @@ type
      editlabelmenu: Tpopupmenu;
      Planetbmpmask: Tbitmap;
      PlanetBMP : Tbitmap;
+     XplanetImg: TPicture;
      PlanetBMPjd,PlanetBMProt : double;
      PlanetBMPpla : integer;
+     Xplanetrender: boolean;
+     OldGRSlong: double;
      imabmp,imacopy,imamask:tbitmap;
      Procedure PlotStar0(x,y: single; ma,b_v : Double);
      Procedure PlotStar1(x,y: single; ma,b_v : Double);
@@ -70,7 +73,8 @@ type
      Procedure PlotNebula0(x,y: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotNebula1(x,y: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
      procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
-     procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w:double);
+     procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double);
+     procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double);
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
@@ -79,6 +83,8 @@ type
      procedure labelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
      procedure labelMouseLeave(Sender: TObject);
      procedure Setstarshape(value:Tbitmap);
+     procedure InitXPlanetRender;
+     procedure MapGRSlongitude(GRSlongitude: double);
   protected
     { Protected declarations }
   public
@@ -200,14 +206,18 @@ begin
  MenuItem.Caption := 'Reset all label';
  MenuItem.OnClick := DeleteAllLabel;
  InitPlanetRender;
+ InitXPlanetRender;
  try
- if planetrender then begin
+ if planetrender or Xplanetrender then begin
     planetbmp:=Tbitmap.create;
     planetbmp.Width:=450;
     planetbmp.Height:=450;
     planetbmpmask:=Tbitmap.create;
     planetbmpmask.Width:=450;
     planetbmpmask.Height:=450;
+    xplanetimg:=TPicture.create;
+ end;
+ if planetrender then begin
     settexturepath(slash(appdir)+slash('data')+slash('planet'));
     // try if it work
     planetrender:=false;
@@ -230,11 +240,14 @@ begin
  imabmp.Free;
  imacopy.Free;
  imamask.Free;
- if planetrender then begin
+ if planetrender or Xplanetrender then begin
     planetbmp.Free;
     planetbmpmask.Free;
+    xplanetimg.Free;
+ end;
+ if planetrender then begin
     ClosePlanetRender;
- end;   
+ end;
  inherited destroy;
 end;
 
@@ -259,6 +272,12 @@ if (cfgchart.drawpen<>starbmpw)and(Fstarshape<>nil) then begin
    ImageResize(Fstarshape,starbmp,starbmpw);
 end;
 result:=true;
+end;
+
+procedure TSplot.InitXPlanetRender;
+begin
+ OldGRSlong:=-9999;
+ Xplanetrender:=true;
 end;
 
 Procedure TSplot.Flush;
@@ -1066,7 +1085,10 @@ if not cfgplot.Invisible then begin
  if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then begin
   if (n=2) and ((ds<5)or(ds>1500)) then n:=1;
   if (n=1) and (ds<5)  then n:=0;
-  if (not planetrender) and (n=2) then n:=1;
+  if ((not planetrender)and(not Xplanetrender)) and (n=2) then n:=1;
+  {$ifdef linux}
+     if (n=2)and(ipla=10) then n:=1;
+  {$endif}
   case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=1020;
@@ -1077,7 +1099,12 @@ if not cfgplot.Invisible then begin
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,be );
           end;
       2 : begin // image
-          PlotPlanet2(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,phase,pa+rad2deg*rot,poleincl,sunincl,w);
+          {$ifdef mswindows}
+             PlotPlanet2(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,phase,pa+rad2deg*rot,poleincl,sunincl,w,r1);
+          {$endif}
+          {$ifdef linux}
+             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1);
+          {$endif}
           end;
       3 : begin // symbol
           end;
@@ -1179,7 +1206,7 @@ end else begin
 end;
 end;
 
-procedure TSplot.PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w:double);
+procedure TSplot.PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double);
 var ds,i : integer;
     DestR :Trect;
 const planetsize=450;
@@ -1192,7 +1219,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
   1 :  RenderMercury(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
   2 :  RenderVenus(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
   4 :  RenderMars(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  5 :  RenderJupiter(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
+  5 :  RenderJupiter(w-gw,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
   6 :  RenderSaturn(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
   7 :  RenderUranus(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
   8 :  RenderNeptune(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
@@ -1200,6 +1227,137 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
   10 : RenderSun(w,pa,poleincl,1,planetsize, planetbmp);
   11 : RenderMoon(w,phase,pa,poleincl,sunincl,1,moonsize, planetbmp);
  end;
+ planetbmppla:=ipla;
+ planetbmpjd:=jdt;
+ planetbmprot:=pa;
+end;
+DestR:=Rect(xx-flipx*ds,yy-flipy*ds,xx+flipx*ds,yy+flipy*ds);
+if not cfgplot.planetTransparent then begin
+  i:=planetbmp.Width;
+  planetbmpmask.Width:=i;
+  planetbmpmask.Height:=i;
+  planetbmpmask.canvas.brush.color:=clwhite;
+  planetbmpmask.canvas.brush.style:=bssolid;
+  planetbmpmask.canvas.pen.color:=clwhite;
+  planetbmpmask.canvas.pen.width:=1;
+  planetbmpmask.canvas.rectangle(0,0,i,i);
+  planetbmpmask.canvas.pen.color:=clblack;
+  planetbmpmask.canvas.brush.color:=clblack;
+  case ipla of
+    5  : planetbmpmask.canvas.ellipse(0,round(i*0.0289),i,round(i*0.9689));
+    6  : planetbmpmask.canvas.ellipse(round(i*0.2756),round(i*0.2978),round(i*0.7244),round(i*0.7));
+    7  : planetbmpmask.canvas.ellipse(0,round(i*0.0133),i,round(i*0.9867));
+    8  : planetbmpmask.canvas.ellipse(0,round(i*0.0133),i,round(i*0.9867));
+    else planetbmpmask.canvas.ellipse(0,0,i,i);
+  end;
+  cnv.copymode:=cmSrcAnd;
+  cnv.StretchDraw(DestR,planetbmpmask);
+end;
+cnv.copymode:=cmSrcPaint;
+cnv.StretchDraw(DestR,planetbmp);
+end;
+
+procedure TSplot.MapGRSlongitude(GRSlongitude: double);
+var jup: TPicture;
+    jup0: TPicture;
+   {$ifdef mswindows}
+      jupjpg: TJpegImage;
+   {$endif}
+    x0,i: integer;
+    fn: WideString;
+    f: textfile;
+    longfn,buf:string;
+begin
+longfn:=slash(tempdir)+'jupiter0.long';
+if  (OldGRSlong=-9999) and fileexists(longfn) then begin
+   {$I-}
+   assignfile(f,longfn);
+   reset(f);
+   readln(f,buf);
+   closefile(f);
+   {$I+}
+   val(buf,OldGRSlong,i);
+end;
+if abs(GRSlongitude-OldGRSlong)>1 then begin
+   jup:=TPicture.Create;
+   jup0:=TPicture.Create;
+   {$ifdef mswindows}
+      jupjpg:=TJpegImage.Create;
+   {$endif}
+   try
+   {$ifdef mswindows}
+      jupjpg.loadfromfile(slash(appdir)+slash('data')+slash('planet')+'jupiter.jpg');
+      jup.Bitmap.Assign(jupjpg);
+   {$endif}
+   {$ifdef linux}
+      jup.loadfromfile(slash(appdir)+slash('data')+slash('planet')+'jupiter.jpg');
+   {$endif}
+   x0:=round((jup.width/2)+(jup.width/360)*(180-GRSlongitude));
+   fn:=slash(tempdir)+'jupiter0.jpg';
+   jup0.bitmap.width:=jup.width;
+   jup0.bitmap.height:=jup.height;
+   jup0.bitmap.canvas.copyrect(rect(0,0,jup.width-x0,jup.height),jup.bitmap.canvas,rect(x0,0,jup.width,jup.height));
+   jup0.bitmap.canvas.copyrect(rect(jup.width-x0,0,jup.width,jup.height),jup.bitmap.canvas,rect(0,0,x0,jup.height));
+   {$ifdef linux}
+      QPixMap_save(jup0.Bitmap.Handle,@fn,PChar('JPEG'),30);
+   {$endif}
+   {$ifdef mswindows}
+      jupjpg.Assign(jup0.Bitmap);
+      jupjpg.CompressionQuality:=30;
+      jupjpg.SaveToFile(fn);
+   {$endif}
+   OldGRSlong:=GRSlongitude;
+   assignfile(f,longfn);
+   buf:=formatfloat(f1,GRSlongitude);
+   rewrite(f);
+   writeln(f,buf);
+   closefile(f);
+   finally
+   jup.free;
+   jup0.free;
+   {$ifdef mswindows}
+      jupjpg.free;
+   {$endif}
+   end;
+end;
+end;
+
+procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double);
+var ds,i : integer;
+    cmd, searchdir: string;
+    DestR :Trect;
+const planetsize=450;
+      moonsize=1000;
+begin
+if ipla=6 then ds:=round(maxvalue([2.2261*diam*pixscale/2,2*cfgchart.drawpen]))
+          else ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
+if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
+ if ipla=5 then begin
+    MapGRSlongitude(gw);
+    searchdir:='"'+tempdir+'"';
+    if not fileexists(slash(tempdir)+'xplanet.config') then
+       exec('cp '+'"'+slash(appdir)+slash('data')+slash('planet')+'xplanet.config" '+'"'+slash(tempdir)+'xplanet.config"');
+ end
+ else
+    searchdir:='"'+slash(appdir)+slash('data')+'planet"';
+ {$ifdef linux}
+    cmd:='xplanet';
+ {$endif}
+ {$ifdef mswindows}
+    chdir(slash(appdir)+'plugins');
+    cmd:=slash(appdir)+slash('plugins')+'xplanet.exe';
+ {$endif}
+ cmd:=cmd+' -target '+pla[ipla]+' -origin earth -rotate '+
+      stringreplace(formatfloat(f1,pa),'.',SysDecimalSeparator,[]) +
+      ' -light_time -tt -num_times 1 -jd '+
+      stringreplace(formatfloat(f5,jdt),'.',SysDecimalSeparator,[]) +
+      ' -searchdir '+searchdir+
+      ' -config xplanet.config -verbosity -1'+
+      ' -radius 50'+
+      ' -geometry 450x450 -output "'+slash(Tempdir)+'planet.jpg'+'"';
+ i:=exec(cmd);
+ xplanetimg.LoadFromFile(slash(Tempdir)+'planet.jpg');
+ planetbmp.Assign(xplanetimg);
  planetbmppla:=ipla;
  planetbmpjd:=jdt;
  planetbmprot:=pa;
@@ -1267,11 +1425,11 @@ with cnv do begin
       mask.Canvas.Pen.Color:=clBlack;
       mask.Canvas.Brush.Color:=clBlack;
       mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
-      mask.Canvas.Pen.Color:=$302000;
-      mask.Canvas.Brush.Color:=$302000;
+      mask.Canvas.Pen.Color:=$080800;
+      mask.Canvas.Brush.Color:=$080800;
       mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
-      mask.Canvas.Pen.Color:=$604000;
-      mask.Canvas.Brush.Color:=$604000;
+      mask.Canvas.Pen.Color:=$101000;
+      mask.Canvas.Brush.Color:=$101000;
       mask.Canvas.Ellipse(xm-ds1,ym-ds1,xm+ds1,ym+ds1);
       // get source bitmap from the chart
       mbmp.Canvas.CopyRect(rect(0,0,mbmp.Width,mbmp.Height),cnv,rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2));
