@@ -109,8 +109,8 @@ object f_config_solsys: Tf_config_solsys
         Caption = 'Jupiter GRS longitude :'
       end
       object Label53: TLabel
-        Left = 40
-        Top = 88
+        Left = 248
+        Top = 48
         Width = 100
         Height = 13
         Caption = 'Computation Plugin : '
@@ -133,9 +133,9 @@ object f_config_solsys: Tf_config_solsys
       end
       object PlanetMode: TRadioGroup
         Left = 40
-        Top = 120
+        Top = 96
         Width = 329
-        Height = 137
+        Height = 161
         Caption = 'Draw Planet As'
         Items.Strings = (
           'Star'
@@ -245,8 +245,8 @@ object f_config_solsys: Tf_config_solsys
           8000808000808000808000808000808000808000808000808000}
       end
       object Edit2: TEdit
-        Left = 152
-        Top = 84
+        Left = 360
+        Top = 44
         Width = 100
         Height = 21
         TabOrder = 6

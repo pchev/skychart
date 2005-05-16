@@ -9,7 +9,7 @@ object f_config_time: Tf_config_time
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_simulation
+    ActivePage = t_time
     Align = alClient
     TabOrder = 0
     object t_time: TTabSheet
