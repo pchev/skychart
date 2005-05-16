@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_plot, cu_catalog, cu_fits, u_constant, libcatalog, cu_planet, u_projection, u_util,
+uses cu_plot, cu_catalog, cu_fits, u_constant, libcatalog, cu_planet, cu_database, u_projection, u_util,
      SysUtils, Classes, Math, Types,
 {$ifdef linux}
    QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
@@ -42,6 +42,7 @@ Tskychart = class (TComponent)
     FFits: TFits;
     Fcatalog : Tcatalog;
     Fplanet : Tplanet;
+    Fcdb: Tcdcdb;
     FShowDetailXY: Tint2func;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
@@ -62,6 +63,7 @@ Tskychart = class (TComponent)
     property plot: TSplot read Fplot;
     property catalog: Tcatalog read Fcatalog write Fcatalog;
     property planet: Tplanet read Fplanet write Fplanet;
+    property cdb: Tcdcdb read Fcdb write Fcdb;
     property Fits: TFits read FFits write FFits;
     function Refresh : boolean;
     function InitCatalog : boolean;
@@ -457,7 +459,8 @@ for i:=0 to MaxField do if Fcatalog.cfgshr.FieldNum[i]>=fov then begin
 end;
 
 function Tskychart.InitCoordinates:boolean;
-var w,h,a,d,dist,v1,v2,v3,v4,v5,v6 : double;
+var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9 : double;
+    s1,s2,s3: string;
 begin
 cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
@@ -477,6 +480,7 @@ aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
  if cfgsc.TrackOn then begin
   case cfgsc.TrackType of
      1 : begin
+         // planet
          case cfgsc.Trackobj of
          1..9 : fplanet.Planet(cfgsc.TrackObj,cfgsc.CurJd,a,d,dist,v1,v2,v3,v4,v5);
          10   : fplanet.Sun(cfgsc.CurJd,a,d,dist,v1);
@@ -488,26 +492,43 @@ aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
                 d:=-d;
                 end;
          end;
+         precession(jd2000,cfgsc.JDChart,a,d);
+         cfgsc.LastJDChart:=cfgsc.JDChart;
          if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
          if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
          cfgsc.racentre:=a;
          cfgsc.decentre:=d;
          end;
-{     2 : begin
-         InitComete(CometNum[FollowObj],buf);
-         Comete(jdt,ar,de,dist,v1,v2,v3,v4,v5,v6,v7,v8);
-         if PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,v1);
-         arcentre:=ar;
-         decentre:=de;
+     2 : begin
+         // comet
+         if cdb.GetComElem(cfgsc.TrackId,cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2) then begin
+            Fplanet.InitComet(v1,v2,v3,v4,v5,v6,v7,v8,v9,s1);
+            Fplanet.Comet(cfgsc.CurJd,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9);
+            precession(jd2000,cfgsc.JDChart,a,d);
+            cfgsc.LastJDChart:=cfgsc.JDChart;
+            if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
+            if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
+            cfgsc.racentre:=a;
+            cfgsc.decentre:=d;
+          end
+          else cfgsc.TrackOn:=false;
          end;
      3 : begin
-         InitAsteroide(AsteroidNum[FollowObj],buf);
-         Asteroide(jdt,ar,de,dist,v1,v2,v3,v4);
-         if PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,v1);
-         arcentre:=ar;
-         decentre:=de;
-         end;    }
+         // asteroid
+         if cdb.GetAstElem(cfgsc.TrackId,cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2,s3) then begin
+            Fplanet.InitAsteroid(cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s2);
+            Fplanet.Asteroid(cfgsc.CurJd,true,a,d,dist,v1,v2,v3,v4);
+            precession(jd2000,cfgsc.JDChart,a,d);
+            cfgsc.LastJDChart:=cfgsc.JDChart;
+            if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
+            if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
+            cfgsc.racentre:=a;
+            cfgsc.decentre:=d;
+          end
+          else cfgsc.TrackOn:=false;
+         end;
      4 : begin
+         // azimuth - altitude
          if cfgsc.Projpole=AltAz then begin
            Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
            cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
@@ -515,6 +536,7 @@ aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
          cfgsc.TrackOn:=false;
          end;
      5 : begin
+         // fits image
          cfgsc.TrackOn:=false;
          if FFits.Header.valid then begin
             cfgsc.Projpole:=Equat;
@@ -526,6 +548,11 @@ aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
             cfgsc.theta:=FFits.Rotation;
             ScaleWindow(cfgsc);
          end;
+         end;
+     6 : begin
+         // ra - dec
+         cfgsc.racentre:=cfgsc.TrackRA;
+         cfgsc.decentre:=cfgsc.TrackDec;
          end;
    end;
   end;
@@ -698,6 +725,20 @@ var rec:GcatRec;
   lid: integer;
   imgfile: string;
   bmp:Tbitmap;
+Procedure Drawing;
+begin
+   if rec.neb.nebtype=1 then begin
+      projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
+      rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
+      if (not rec.neb.valid[vnPA])or(rec.neb.pa=-999) then rec.neb.pa:=90
+          else rec.neb.pa:=rec.neb.pa-rad2deg*PoleRot2000(rec.ra,rec.dec);
+      rec.neb.pa:=rec.neb.pa*cfgsc.FlipX;
+      if cfgsc.FlipY<0 then rec.neb.pa:=180-rec.neb.pa;
+      rec.neb.pa:=Deg2Rad*rec.neb.pa+rot;
+      Fplot.PlotGalaxie(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit);
+    end else
+      Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype);
+end;
 begin
 fillchar(rec,sizeof(rec),0);
 bmp:=Tbitmap.Create;
@@ -715,7 +756,7 @@ if Fcatalog.OpenNeb then
  if ((xx+sz)>cfgsc.Xmin) and ((xx-sz)<cfgsc.Xmax) and ((yy+sz)>cfgsc.Ymin) and ((yy-sz)<cfgsc.Ymax) then begin
   if cfgsc.ShowImages and (sz>6) and FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then begin
        FFits.FileName:=imgfile;
-       if FFits.Header.valid then begin
+       if FFits.Header.valid and ((FFits.Img_Width*cfgsc.BxGlb/FFits.Header.naxis1)<10) then begin
           ra:=FFits.Center_RA;
           de:=FFits.Center_DE;
           precession(jd2000,cfgsc.JDChart,ra,de);
@@ -726,19 +767,10 @@ if Fcatalog.OpenNeb then
           projection(ra,de+0.001,x2,y2,false,cfgsc) ;
           rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
           Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,bmp);
-       end;
+       end
+         else Drawing;
   end else if cfgsc.shownebulae then begin
-   if rec.neb.nebtype=1 then begin
-      projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
-      rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
-      if (not rec.neb.valid[vnPA])or(rec.neb.pa=-999) then rec.neb.pa:=90
-          else rec.neb.pa:=rec.neb.pa-rad2deg*PoleRot2000(rec.ra,rec.dec);
-      rec.neb.pa:=rec.neb.pa*cfgsc.FlipX;
-      if cfgsc.FlipY<0 then rec.neb.pa:=180-rec.neb.pa;
-      rec.neb.pa:=Deg2Rad*rec.neb.pa+rot;
-      Fplot.PlotGalaxie(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit);
-    end else
-      Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype);
+      Drawing;
    end;
    if rec.neb.messierobject or (rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then
       SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id);
@@ -908,7 +940,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
     projection(ra,dec+0.001,x2,y2,false,cfgsc) ;
     rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
     if ipla<>3 then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
-    if j=0 then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
+    if (j=0)and(ipla<=11) then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
     case ipla of
       4 :  begin
             if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,true);
@@ -917,7 +949,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
            end;
       5 :  begin
             if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w2-cfgsc.GRSlongitude,0,0,0);
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w2,cfgsc.GRSlongitude,0,0);
             if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
            end;
       6 :  begin
@@ -956,8 +988,6 @@ end;
 Procedure Tskychart.DrawEarthShadow(AR,DE,SunDist,MoonDist,MoonDistTopo : double);
 var x,y,cone,umbra,penumbra,pixscale : double;
     xx,yy: single;
-    ds : integer;
-    labeltxt : string;
 begin
  projection(ar,de,x,y,true,cfgsc) ;
  windowxy(x,y,xx,yy,cfgsc);
@@ -1360,6 +1390,10 @@ finally
 end;
 if result then begin
    FormatCatRec(rec,desc);
+   cfgsc.TrackType:=6;
+   cfgsc.TrackName:=cfgsc.FindName;
+   cfgsc.TrackRA:=rec.ra;
+   cfgsc.TrackDec:=rec.dec;
 end else begin
 // search solar system object
    result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);

@@ -3623,6 +3623,7 @@ object f_main: Tf_main
     end
   end
   object MainMenu1: TMainMenu
+    OwnerDraw = True
     Left = 216
     Top = 160
     object File1: TMenuItem

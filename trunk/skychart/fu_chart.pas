@@ -81,6 +81,9 @@ type
     RemoveLastCircle1: TMenuItem;
     RemoveAllCircles1: TMenuItem;
     AbortSlew1: TMenuItem;
+    N3: TMenuItem;
+    TrackOn1: TMenuItem;
+    TrackOff1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -132,6 +135,8 @@ type
     procedure RemoveLastCircle1Click(Sender: TObject);
     procedure RemoveAllCircles1Click(Sender: TObject);
     procedure AbortSlew1Click(Sender: TObject);
+    procedure TrackOn1Click(Sender: TObject);
+    procedure TrackOff1Click(Sender: TObject);
   private
     { Private declarations }
     FImageSetFocus: TnotifyEvent;

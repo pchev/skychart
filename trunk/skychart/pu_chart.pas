@@ -82,6 +82,9 @@ type
     RemoveAllCircles1: TMenuItem;
     AbortSlew1: TMenuItem;
     TelescopeTimer: TTimer;
+    N3: TMenuItem;
+    TrackOn1: TMenuItem;
+    TrackOff1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -132,6 +135,8 @@ type
     procedure RemoveAllCircles1Click(Sender: TObject);
     procedure AbortSlew1Click(Sender: TObject);
     procedure TelescopeTimerTimer(Sender: TObject);
+    procedure TrackOn1Click(Sender: TObject);
+    procedure TrackOff1Click(Sender: TObject);
   private
     { Private declarations }
     Ftelescope: Ttelescope;
@@ -382,7 +387,6 @@ end;
 end;
 
 // end of windows vcl specific code
-
 
 end.
 
