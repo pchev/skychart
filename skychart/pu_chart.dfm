@@ -248,6 +248,17 @@ object f_chart: Tf_chart
         OnClick = AbortSlew1Click
       end
     end
+    object N3: TMenuItem
+      Caption = '-'
+    end
+    object TrackOn1: TMenuItem
+      Caption = 'TrackOn'
+      OnClick = TrackOn1Click
+    end
+    object TrackOff1: TMenuItem
+      Caption = 'End Tracking'
+      OnClick = TrackOff1Click
+    end
   end
   object TelescopeTimer: TTimer
     Enabled = False

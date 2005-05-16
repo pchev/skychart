@@ -313,7 +313,7 @@ try
       prtbmp.savetofile(fname);
       //cmd:='bmptopnm '+fname+' | pnmtops -equalpixels -dpi='+inttostr(printresol)+' -rle >'+changefileext(fname,'.ps');
       cmd:='command.com /C bmptops.bat '+fname+' '+changefileext(fname,'.ps');
-      chdir(slash(appdir)+'plugins\netpbm');
+      chdir(slash(appdir)+'plugins');
     {$endif}
     i:=exec(cmd);
     chdir(appdir);
@@ -535,6 +535,32 @@ procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
 begin
  xcursor:=ScreenToClient(mouse.cursorpos).x;
  ycursor:=ScreenToClient(mouse.cursorpos).y;
+ if sc.cfgsc.TrackOn then begin
+    TrackOff1.visible:=true;
+    TrackOn1.visible:=false;
+ end else begin
+    TrackOff1.visible:=false;
+    IdentXY(xcursor, ycursor);
+    if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)or(sc.cfgsc.TrackType=6)) then begin
+      TrackOn1.Caption:='Track '+sc.cfgsc.TrackName;
+      TrackOn1.visible:=true;
+    end
+    else TrackOn1.visible:=false;
+ end;
+end;
+
+procedure Tf_chart.TrackOn1Click(Sender: TObject);
+
+begin
+  sc.cfgsc.TrackOn:=true;
+  Refresh;
+end;
+
+procedure Tf_chart.TrackOff1Click(Sender: TObject);
+
+begin
+  sc.cfgsc.TrackOn:=false;
+  Refresh;
 end;
 
 procedure Tf_chart.CentreExecute(Sender: TObject);
@@ -1874,8 +1900,10 @@ sc.cfgsc.CurYear:=y;
 sc.cfgsc.CurMonth:=m;
 sc.cfgsc.CurDay:=d;
 sc.cfgsc.CurTime:=hh;
-sc.cfgsc.TrackOn:=true;
-sc.cfgsc.TrackType:=4;
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 Refresh;
 end;
 
@@ -1889,8 +1917,10 @@ sc.cfgsc.CurYear:=y;
 sc.cfgsc.CurMonth:=m;
 sc.cfgsc.CurDay:=d;
 sc.cfgsc.CurTime:=h-sc.cfgsc.DT_UT;
-sc.cfgsc.TrackOn:=true;
-sc.cfgsc.TrackType:=4;
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 Refresh;
 end;
 

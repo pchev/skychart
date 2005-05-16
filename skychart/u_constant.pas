@@ -219,7 +219,7 @@ const cdcversion = 'Version 3 alpha 0.0.8';
       Defaultconfigfile='cartesduciel.ini';  
       DefaultPrintCmd1='gsview32.exe';
       DefaultPrintCmd2='mspaint.exe';
-      DefaultTmpDir='C:\';
+      DefaultTmpDir='tmp';
       key_cr   =13;
       key_plus =107;
       key_minus=109;
@@ -235,10 +235,10 @@ const cdcversion = 'Version 3 alpha 0.0.8';
 
 type
      Tplanetlst = array[0..MaxSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ;
-     Tcometlst = array of array[1..MaxComet,1..8] of double;
-     TcometName= array of array[1..MaxComet,1..2] of string[27];
-     Tasteroidlst = array of array[1..MaxAsteroid,1..5] of double;
-     TasteroidName = array of array[1..MaxAsteroid,1..2] of string[27];
+     Tcometlst = array of array[1..MaxComet,1..8] of double;       // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch
+     TcometName= array of array[1..MaxComet,1..2] of string[27];   // id, name
+     Tasteroidlst = array of array[1..MaxAsteroid,1..5] of double;  // ra, dec, magn, jd, epoch
+     TasteroidName = array of array[1..MaxAsteroid,1..2] of string[27]; // id, name
      double6 = array[1..6] of double;
      Pdouble6 = ^double6;
      Tconstpos  = record ra,de : single; end;
@@ -341,9 +341,9 @@ type
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
-                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec : Double;
+                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
                 StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,ConstFullLabel,ScopeMark,ScopeLock : boolean;
-                EquinoxName,EquinoxDate,TrackName,FindName,FindDesc,FindNote : string;
+                EquinoxName,EquinoxDate,TrackName,TrackId,FindName,FindDesc,FindNote : string;
                 PlanetLst : Tplanetlst;
                 AsteroidNb,CometNb,AsteroidLstSize,CometLstSize,NumCircle: integer;
                 AsteroidLst: Tasteroidlst;
@@ -432,7 +432,7 @@ type double8 = array[1..8] of double;
      TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
 
 
-Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, Configfile: string;         // pseudo-constant only here
+Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, Configfile, SysDecimalSeparator: string;         // pseudo-constant only here
      ldeg,lmin,lsec : string;
 {$ifdef linux}
      tracefile:string =''; // to stdout

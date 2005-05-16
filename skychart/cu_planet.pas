@@ -1991,7 +1991,8 @@ if result then begin
   djd(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],yy,mm,dd,hh);
   Desc := Desc +'/'+Date2Str(yy,mm,dd)+tab; // ephemeris date
   cfgsc.TrackType:=3;
-  cfgsc.TrackObj:=CurrentAsteroid;
+  cfgsc.TrackId:=cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1];
+  cfgsc.TrackEpoch:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5];
   cfgsc.TrackName:=nom;
 end;
 cfgsc.FindName:=nom;
@@ -2062,8 +2063,9 @@ if result then begin
           +'ref:'+ref;
   djd(cfgsc.CometLst[CurrentComStep,CurrentComet,8],yy,mm,dd,hh);
   Desc := Desc +'/'+Date2Str(yy,mm,dd)+tab;
-  cfgsc.TrackType:=4;
-  cfgsc.TrackObj:=CurrentComet;
+  cfgsc.TrackType:=2;
+  cfgsc.TrackId:=cfgsc.CometName[CurrentComStep,CurrentComet,1];
+  cfgsc.TrackEpoch:=cfgsc.CometLst[CurrentComStep,CurrentComet,8];
   cfgsc.TrackName:=nom;
 end;
 cfgsc.FindName:=nom;

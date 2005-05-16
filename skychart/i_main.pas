@@ -59,6 +59,7 @@ begin
   Child.sc.catalog:=catalog;
   Child.sc.Fits:=Fits;
   Child.sc.planet:=planet;
+  Child.sc.cdb:=cdcdb;
   {$ifdef mswindows}
   Child.telescopeplugin:=telescope;
   {$endif}
@@ -196,6 +197,7 @@ for i:=0 to MDIChildCount-1 do
      with MDIChildren[i] as Tf_chart do begin
       sc.Fits:=Fits;
       sc.planet:=planet;
+      sc.cdb:=cdcdb;
       sc.plot.cfgplot:=def_cfgplot;
       if applydef then begin
         CopySCconfig(def_cfgsc,sc.cfgsc);
@@ -315,6 +317,7 @@ SHGetPathFromIDList(PIDL, Folder);
 privatedir:=slash(Folder)+privatedir;
 configfile:=slash(privatedir)+configfile;
 tracefile:=slash(privatedir)+tracefile;
+Tempdir:=slash(privatedir)+DefaultTmpDir;
 {$endif}
 inif:=TMeminifile.create(configfile);
 try
@@ -336,6 +339,7 @@ end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
+SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
 {$ifdef linux}    // FormShow is called immediately before Application.Run, so this form need to be created immediately here. Be sure to remove them from the .dpr file.
@@ -674,8 +678,10 @@ procedure Tf_main.TimeResetExecute(Sender: TObject);
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    sc.cfgsc.UseSystemTime:=true;
-   sc.cfgsc.TrackOn:=true;
-   sc.cfgsc.TrackType:=4;
+   if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+      sc.cfgsc.TrackOn:=true;
+      sc.cfgsc.TrackType:=4;
+   end;
    Refresh;
 end;
 end;
@@ -1020,6 +1026,7 @@ begin
        CopySCconfig(def_cfgsc,sc.cfgsc);
        sc.Fits:=Fits;
        sc.planet:=planet;
+       sc.cdb:=cdcdb;
        sc.cfgsc.FindOk:=false;
        if cfgm.NewBackgroundImage then begin
           sc.Fits.Filename:=sc.cfgsc.BackgroundImage;
