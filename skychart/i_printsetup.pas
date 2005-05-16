@@ -54,7 +54,7 @@ case cm.PrintMethod of
      ok:=(0=exec('which pnmtops'));
    {$endif}
    {$ifdef mswindows}
-     ok:=Fileexists(slash(appdir)+'plugins\netpbm\bmptops.bat');
+     ok:=Fileexists(slash(appdir)+'plugins\bmptops.bat');
    {$endif}
    if ok then begin
       cmdreport.text:='Netpbm package OK.';
