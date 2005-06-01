@@ -48,7 +48,7 @@ OutputDir=/home/cdc
 UnitOutputDir=../dcu/
 PackageDLLOutputDir=
 PackageDCPOutputDir=
-SearchPath=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage
+SearchPath=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage:component/xmlparser:component/jdcalendar
 Packages=rtl:visualclx
 Conditionals=
 DebugSourceDirs=
@@ -62,23 +62,25 @@ UseLauncher=1
 DebugCWD=
 
 [Excluded Packages]
+/home/cdc/dev/skychart/component/libsql/bpllibsql.so=LibSQL sqlite et mysql
 /home/pch/source/GLScene/Kylix/GLSceneK3.so=GLScene - OpenGL 3D library
 
 [HistoryLists\hlSearchPath]
-Count=5
-Item0=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage
-Item1=library/catalog:component/enhedits:component/mydb:component/synapse/source/lib:component/zoomimage
-Item2=library/catalog:component/enhedits:component/mydb:component/synapse:component/zoomimage
-Item3=library/catalog:component/enhedits:component/foldrdg:component/mydb:component/synapse:component/zoomimage
-Item4=library/catalog
+Count=3
+Item0=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage:component/xmlparser:component/jdcalendar
+Item1=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage:component/xmlparser
+Item2=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage
 
 [HistoryLists\hlUnitOutputDirectory]
-Count=1
+Count=4
 Item0=../dcu/
+Item1=/home/cdc/dev/dcu
+Item2=../../../dcu
+Item3=../dcu
 
 [HistoryLists\hlOutputDirectorry]
 Count=3
 Item0=/home/cdc
-Item1=/home/pch
-Item2=../../
+Item1=../../../../
+Item2=../
 

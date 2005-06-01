@@ -557,7 +557,6 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do switchstar
 end;
 
 procedure Tf_main.switchbackgroundExecute(Sender: TObject);
-
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do switchbackgroundExecute(Sender);
 end;
@@ -710,6 +709,18 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    if sc.cfgsc.ShowImages and (not Fits.dbconnected) then begin
       sc.cfgsc.ShowImages:=false;
       showmessage('Error! Please check the database parameters and load the picture package.');
+   end;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.ShowBackgroundImageExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
+   if sc.cfgsc.ShowBackgroundImage and (not Fits.dbconnected) then begin
+      sc.cfgsc.ShowBackgroundImage:=false;
+      showmessage('Error! Please check the database parameters.');
    end;
    Refresh;
 end;
@@ -2391,6 +2402,7 @@ if f_main.ActiveMDIchild=sender then begin
     toolbuttonshowNebulae.down:=sc.cfgsc.shownebulae;
     ShowNebulae1.checked:=sc.cfgsc.shownebulae;
     toolbuttonShowPictures.down:=sc.cfgsc.ShowImages;
+    ToolButtonShowBackgroundImage.down:=sc.cfgsc.ShowBackgroundImage;
     ShowPictures1.checked:=sc.cfgsc.ShowImages;
     toolbuttonShowLines.down:=sc.cfgsc.ShowLine;
     ShowLines1.checked:=sc.cfgsc.ShowLine;
