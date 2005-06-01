@@ -344,6 +344,8 @@ type
     Connect1: TMenuItem;
     Slew1: TMenuItem;
     TelescopeSync1: TMenuItem;
+    ToolButtonShowBackgroundImage: TToolButton;
+    ShowBackgroundImage: TAction;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -428,6 +430,7 @@ type
     procedure ButtonStarSizeClick(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
     procedure SetFovExecute(Sender: TObject);
+    procedure ShowBackgroundImageExecute(Sender: TObject);
     
   private
     { Private declarations }
@@ -531,6 +534,7 @@ activecontrol:=nil;
 end;
 
 // End of Linux specific CLX code:
+
 
 end.
 

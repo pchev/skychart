@@ -343,6 +343,8 @@ type
     ShowObjectbelowthehorizon1: TMenuItem;
     Calendar1: TMenuItem;
     N6: TMenuItem;
+    ShowBackgroundImage: TAction;
+    ToolButtonShowBackgroundImage: TToolButton;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -433,6 +435,7 @@ type
     procedure ButtonStarSizeClick(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
     procedure SetFovExecute(Sender: TObject);
+    procedure ShowBackgroundImageExecute(Sender: TObject);
   private
     { Private declarations }
     cryptedpwd:string;
