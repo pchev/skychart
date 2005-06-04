@@ -722,9 +722,10 @@ function Tskychart.DrawNebulae :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot,ra,de: Double;
   x,y,xx,yy,sz:single;
-  lid: integer;
+  lid, save_nebplot: integer;
   imgfile: string;
   bmp:Tbitmap;
+  save_col8,save_col9,save_col10,save_col11: TColor;
 Procedure Drawing;
 begin
    if rec.neb.nebtype=1 then begin
@@ -739,6 +740,26 @@ begin
     end else
       Fplot.PlotNebula(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype);
 end;
+Procedure Drawing_Gray;
+begin
+   save_nebplot:=Fplot.cfgplot.nebplot;
+   save_col8:=Fplot.cfgplot.color[8];
+   save_col9:=Fplot.cfgplot.color[9];
+   save_col10:=Fplot.cfgplot.color[10];
+   save_col11:=Fplot.cfgplot.color[11];
+   Fplot.cfgplot.nebplot:=1;
+   Fplot.cfgplot.color[8]:=clSilver;
+   Fplot.cfgplot.color[9]:=clSilver;
+   Fplot.cfgplot.color[10]:=clSilver;
+   Fplot.cfgplot.color[11]:=clSilver;
+   Drawing;
+   Fplot.cfgplot.nebplot:=save_nebplot;
+   Fplot.cfgplot.color[8]:=save_col8;
+   Fplot.cfgplot.color[9]:=save_col9;
+   Fplot.cfgplot.color[10]:=save_col10;
+   Fplot.cfgplot.color[11]:=save_col11;
+end;
+
 begin
 fillchar(rec,sizeof(rec),0);
 bmp:=Tbitmap.Create;
@@ -754,21 +775,25 @@ if Fcatalog.OpenNeb then
  if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
  sz:=abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit*rec.neb.dim1/2;
  if ((xx+sz)>cfgsc.Xmin) and ((xx-sz)<cfgsc.Xmax) and ((yy+sz)>cfgsc.Ymin) and ((yy-sz)<cfgsc.Ymax) then begin
-  if cfgsc.ShowImages and (sz>6) and FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then begin
+  if cfgsc.ShowImages and FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then begin
+     if (sz>6) then begin
        FFits.FileName:=imgfile;
-       if FFits.Header.valid and ((FFits.Img_Width*cfgsc.BxGlb/FFits.Header.naxis1)<10) then begin
-          ra:=FFits.Center_RA;
-          de:=FFits.Center_DE;
-          precession(jd2000,cfgsc.JDChart,ra,de);
-          if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
-          projection(ra,de,x1,y1,true,cfgsc) ;
-          WindowXY(x1,y1,x,y,cfgsc);
-          FFits.GetBitmap(bmp);
-          projection(ra,de+0.001,x2,y2,false,cfgsc) ;
-          rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
-          Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,bmp);
-       end
-         else Drawing;
+       if FFits.Header.valid then
+          if ((FFits.Img_Width*cfgsc.BxGlb/FFits.Header.naxis1)<10) then begin
+             ra:=FFits.Center_RA;
+             de:=FFits.Center_DE;
+             precession(jd2000,cfgsc.JDChart,ra,de);
+             if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
+             projection(ra,de,x1,y1,true,cfgsc) ;
+             WindowXY(x1,y1,x,y,cfgsc);
+             FFits.GetBitmap(bmp);
+             projection(ra,de+0.001,x2,y2,false,cfgsc) ;
+             rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
+             Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,bmp);
+          end
+          else Drawing_Gray;
+     end
+     else Drawing_Gray;
   end else if cfgsc.shownebulae then begin
       Drawing;
    end;

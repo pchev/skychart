@@ -1108,7 +1108,7 @@ while j=0 do begin
   while i=0 do begin
     inc(n);
     if (n mod ProgressBar.step)=0 then begin ProgressBar.stepit; Application.processmessages; end;
-    dummyfile:=(extractfileext(f.Name)='.nil');
+    dummyfile:=uppercase((extractfileext(f.Name)))='.NIL';
     if dummyfile then begin
       ra:=99+random(999999999999999);
       de:=99+random(999999999999999);
