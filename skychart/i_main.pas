@@ -417,6 +417,7 @@ end;
 procedure Tf_main.FormDestroy(Sender: TObject);
 begin
 try
+StopServer;
 catalog.free;
 Fits.Free;
 planet.free;
@@ -425,7 +426,6 @@ cdcdb.free;
 telescope.free;
 DdeInfo.free;
 {$endif}
-StopServer;
 if NeedRestart then
    {$ifdef mswindows}
       ExecNoWait(paramstr(0));
@@ -2649,7 +2649,7 @@ try
       Synchronize(ShowSocket);
       repeat
         if terminated then break;
-        if canread(1000) then
+        if canread(1000) and (not terminated) then
           begin
             ClientSock:=accept;
             if lastError=0 then begin
@@ -2793,8 +2793,8 @@ for i:=1 to Maxwindow do
     TCPDaemon.TCPThrd[i].terminate;
 application.processmessages;
 TCPDaemon.terminate;
-d:=now+1.7E-5;  // 1.5 seconde delay to close the thread
-while now<d do application.processmessages;
+//d:=now+1.7E-5;  // 1.5 seconde delay to close the thread
+//while now<d do application.processmessages;
 screen.cursor:=crDefault;
 except
  screen.cursor:=crDefault;
