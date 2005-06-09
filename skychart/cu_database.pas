@@ -1146,10 +1146,10 @@ while j=0 do begin
     else writetrace('Invalid FITS file: '+f.Name);
     i:=findnext(f);
   end;
+  db.commit;
   end;
   j:=findnext(c);
 end;
-db.commit;
 db.Query(flushtable[DBtype]);
 end;
 finally
