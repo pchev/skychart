@@ -1026,7 +1026,7 @@ end;
 {$endif}
 {$ifdef mswindows}
 var
-   bchExec: array[0..MAX_PATH] of char;
+   bchExec: array[0..1024] of char;
    pchEXEC: Pchar;
    si: TStartupInfo;
    pi: TProcessInformation;
@@ -1065,7 +1065,7 @@ end;
 {$endif}
 {$ifdef mswindows}
 var
-   bchExec: array[0..MAX_PATH] of char;
+   bchExec: array[0..1024] of char;
    pchEXEC: Pchar;
    si: TStartupInfo;
    pi: TProcessInformation;

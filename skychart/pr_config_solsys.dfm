@@ -103,7 +103,7 @@ object f_config_solsys: Tf_config_solsys
       end
       object Label89: TLabel
         Left = 40
-        Top = 282
+        Top = 314
         Width = 109
         Height = 13
         Caption = 'Jupiter GRS longitude :'
@@ -133,9 +133,9 @@ object f_config_solsys: Tf_config_solsys
       end
       object PlanetMode: TRadioGroup
         Left = 40
-        Top = 96
+        Top = 80
         Width = 329
-        Height = 161
+        Height = 145
         Caption = 'Draw Planet As'
         Items.Strings = (
           'Star'
@@ -147,7 +147,7 @@ object f_config_solsys: Tf_config_solsys
       end
       object PlanetBox2: TCheckBox
         Left = 40
-        Top = 312
+        Top = 344
         Width = 321
         Height = 17
         Caption = 'Show stars behind the planets'
@@ -156,7 +156,7 @@ object f_config_solsys: Tf_config_solsys
       end
       object PlanetBox3: TCheckBox
         Left = 40
-        Top = 336
+        Top = 368
         Width = 321
         Height = 17
         Caption = 'Show Earth Shadow  (Lunar eclipses)'
@@ -165,7 +165,7 @@ object f_config_solsys: Tf_config_solsys
       end
       object GRS: TFloatEdit
         Left = 152
-        Top = 277
+        Top = 309
         Width = 41
         Height = 22
         Hint = '0..360'
@@ -178,7 +178,7 @@ object f_config_solsys: Tf_config_solsys
       end
       object BitBtn37: TBitBtn
         Left = 199
-        Top = 276
+        Top = 308
         Width = 27
         Height = 25
         Hint = 'Get recent measurement from JUPOS'
@@ -251,6 +251,70 @@ object f_config_solsys: Tf_config_solsys
         Height = 21
         TabOrder = 6
         Visible = False
+      end
+      object XplanetBox: TGroupBox
+        Left = 40
+        Top = 232
+        Width = 329
+        Height = 65
+        Caption = 'Image Options'
+        TabOrder = 7
+        object UseXplanet: TCheckBox
+          Left = 8
+          Top = 24
+          Width = 97
+          Height = 17
+          Caption = 'Use Xplanet'
+          TabOrder = 0
+          OnClick = UseXplanetClick
+        end
+        object XplanetDir: TEdit
+          Left = 104
+          Top = 24
+          Width = 177
+          Height = 21
+          TabOrder = 1
+          Text = 'XplanetDir'
+          OnChange = XplanetDirChange
+        end
+        object XplanetBtn: TBitBtn
+          Left = 279
+          Top = 23
+          Width = 26
+          Height = 26
+          TabOrder = 2
+          TabStop = False
+          OnClick = XplanetBtnClick
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            0000000000000000000000000000000000000000000000000000000000000000
+            00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+            7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+            CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+            CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+            7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+          Layout = blGlyphTop
+          Margin = 0
+        end
       end
     end
     object t_comet: TTabSheet
@@ -470,7 +534,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 0
+              ItemHeight = 13
               TabOrder = 0
             end
             object DelCom: TButton
@@ -1052,7 +1116,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 0
+              ItemHeight = 13
               TabOrder = 0
             end
             object delast: TButton

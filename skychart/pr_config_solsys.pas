@@ -180,6 +180,10 @@ type
     Addast: TButton;
     FolderDialog1: TFolderDialog;
     OpenDialog1: TOpenDialog;
+    XplanetBox: TGroupBox;
+    UseXplanet: TCheckBox;
+    XplanetDir: TEdit;
+    XplanetBtn: TBitBtn;
     procedure PlanetDirChange(Sender: TObject);
     procedure PlanetDirSelClick(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
@@ -212,6 +216,9 @@ type
     procedure deldateastClick(Sender: TObject);
     procedure delallastClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
+    procedure XplanetBtnClick(Sender: TObject);
+    procedure XplanetDirChange(Sender: TObject);
+    procedure UseXplanetClick(Sender: TObject);
   private
     { Private declarations }
     FShowDB: TNotifyEvent;
@@ -252,5 +259,34 @@ implementation
 {$include i_config_solsys.pas}
 
 // end of common code
+
+// windows specific code:
+
+procedure Tf_config_solsys.XplanetBtnClick(Sender: TObject);
+var f : string;
+begin
+f:=slash(XplanetDir.text)+'xplanet.exe';
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='Exe Files|*.exe';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   XplanetDir.text:=extractfilepath(opendialog1.FileName);
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
+procedure Tf_config_solsys.XplanetDirChange(Sender: TObject);
+begin
+xplanet_dir:=XplanetDir.text;
+end;
+
+procedure Tf_config_solsys.UseXplanetClick(Sender: TObject);
+begin
+use_xplanet:=UseXplanet.checked;
+end;
 
 end.
