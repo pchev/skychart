@@ -84,7 +84,7 @@ type
      procedure labelMouseLeave(Sender: TObject);
      procedure Setstarshape(value:Tbitmap);
      procedure InitXPlanetRender;
-     procedure MapGRSlongitude(GRSlongitude: double);
+//     procedure MapGRSlongitude(GRSlongitude: double); //  No more necessary with Xplanet 1.2.0 !
   protected
     { Protected declarations }
   public
@@ -1100,6 +1100,9 @@ if not cfgplot.Invisible then begin
           end;
       2 : begin // image
           {$ifdef mswindows}
+          if use_Xplanet then
+             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1)
+          else   
              PlotPlanet2(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,phase,pa+rad2deg*rot,poleincl,sunincl,w,r1);
           {$endif}
           {$ifdef linux}
@@ -1257,7 +1260,7 @@ cnv.copymode:=cmSrcPaint;
 cnv.StretchDraw(DestR,planetbmp);
 end;
 
-procedure TSplot.MapGRSlongitude(GRSlongitude: double);
+(* procedure TSplot.MapGRSlongitude(GRSlongitude: double); //  No more necessary with Xplanet 1.2.0 !
 var jup: TPicture;
     jup0: TPicture;
    {$ifdef mswindows}
@@ -1320,7 +1323,7 @@ if abs(GRSlongitude-OldGRSlong)>1 then begin
    {$endif}
    end;
 end;
-end;
+end; *)
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double);
 var ds,i : integer;
@@ -1332,20 +1335,20 @@ begin
 if ipla=6 then ds:=round(maxvalue([2.2261*diam*pixscale/2,2*cfgchart.drawpen]))
           else ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
 if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
- if ipla=5 then begin
-    MapGRSlongitude(gw);
+{ if ipla=5 then begin
+    MapGRSlongitude(gw);     //  No more necessary with Xplanet 1.2.0 !
     searchdir:='"'+tempdir+'"';
     if not fileexists(slash(tempdir)+'xplanet.config') then
        exec('cp '+'"'+slash(appdir)+slash('data')+slash('planet')+'xplanet.config" '+'"'+slash(tempdir)+'xplanet.config"');
  end
- else
-    searchdir:='"'+slash(appdir)+slash('data')+'planet"';
+ else}
+ searchdir:='"'+slash(appdir)+slash('data')+'planet"';
  {$ifdef linux}
     cmd:='xplanet';
  {$endif}
  {$ifdef mswindows}
-    chdir(slash(appdir)+'plugins');
-    cmd:=slash(appdir)+slash('plugins')+'xplanet.exe';
+    chdir(xplanet_dir);
+    cmd:='xplanet.exe';
  {$endif}
  cmd:=cmd+' -target '+pla[ipla]+' -origin earth -rotate '+
       stringreplace(formatfloat(f1,pa),'.',SysDecimalSeparator,[]) +
@@ -1355,9 +1358,16 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
       ' -config xplanet.config -verbosity -1'+
       ' -radius 50'+
       ' -geometry 450x450 -output "'+slash(Tempdir)+'planet.jpg'+'"';
+ if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,gw);
  i:=exec(cmd);
  xplanetimg.LoadFromFile(slash(Tempdir)+'planet.jpg');
- planetbmp.Assign(xplanetimg);
+ {$ifdef linux}
+    planetbmp.Assign(xplanetimg);
+ {$endif}
+ {$ifdef mswindows}
+    chdir(appdir);
+    planetbmp.Canvas.Draw(0,0,xplanetimg.Graphic);
+ {$endif}
  planetbmppla:=ipla;
  planetbmpjd:=jdt;
  planetbmprot:=pa;
