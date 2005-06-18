@@ -46,6 +46,10 @@ grs.value:=csc.GRSlongitude;
 PlanetBox3.checked:=csc.ShowEarthShadow;
 PlanetBox2.checked:=cplot.PlanetTransparent;
 Planetdir.Text:=cmain.planetdir;
+{$ifdef mswindows}
+XplanetDir.text:=xplanet_dir;
+UseXplanet.checked:=use_xplanet;
+{$endif}
 end;
 
 procedure Tf_config_solsys.ShowComet;

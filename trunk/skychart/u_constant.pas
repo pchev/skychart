@@ -432,7 +432,10 @@ type double8 = array[1..8] of double;
      TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
 
 
-Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, Configfile, SysDecimalSeparator: string;         // pseudo-constant only here
+
+// pseudo-constant only here
+Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
+     Configfile, SysDecimalSeparator: string;
      ldeg,lmin,lsec : string;
 {$ifdef linux}
      tracefile:string =''; // to stdout
@@ -441,6 +444,8 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, Configfile, SysDecimalSepa
 {$endif}
 {$ifdef mswindows}
      tracefile:string = 'cdc_trace.txt';
+     xplanet_dir: string = 'C:\Program Files\xplanet';
+     use_xplanet: boolean = false;
 {$endif}
 
 // Text formating constant
