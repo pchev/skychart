@@ -17,7 +17,7 @@ object f_calendar: Tf_calendar
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 18
   TextWidth = 5
   object Memo1: TMemo

@@ -113,6 +113,7 @@ Tskychart = class (TComponent)
     Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
     procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
+    function GetChartInfo(sep:string=' '):string;
 end;
 
 
@@ -228,7 +229,7 @@ try
   if scopemark then begin
      DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
      cfgsc.ScopeMark:=true;
-  end;   
+  end;
   result:=true;
 finally
   if cfgsc.quick then begin
@@ -583,6 +584,12 @@ Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.e,cfgsc.lecentre,cfgsc.becentre) ;
 // is the pole in the chart
 cfgsc.NP:=northpoleinmap(cfgsc);
 cfgsc.SP:=southpoleinmap(cfgsc);
+// detect if the position change
+if not cfgsc.quick then begin
+  cfgsc.moved:=(cfgsc.racentre<>cfgsc.raprev)or(cfgsc.decentre<>cfgsc.deprev);
+  cfgsc.raprev:=cfgsc.racentre;
+  cfgsc.deprev:=cfgsc.decentre;
+end;  
 result:=true;
 end;
 
@@ -789,7 +796,7 @@ if Fcatalog.OpenNeb then
              FFits.GetBitmap(bmp);
              projection(ra,de+0.001,x2,y2,false,cfgsc) ;
              rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
-             Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,bmp);
+             Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,true,bmp);
           end
           else Drawing_Gray;
      end
@@ -847,7 +854,7 @@ if FFits.OpenDB('other',x1,x2,y1,y2) then
           FFits.GetBitmap(bmp);
           projection(ra,de+0.001,x2,y2,false,cfgsc) ;
           rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
-          Fplot.plotimage(xx,yy,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY, cfgsc.WhiteBg, bmp);
+          Fplot.plotimage(xx,yy,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY, cfgsc.WhiteBg,(objname<>'BKG'), bmp);
        end;
     end;
   end;
@@ -964,7 +971,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
     WindowXY(x1,y1,xx,yy,cfgsc);
     projection(ra,dec+0.001,x2,y2,false,cfgsc) ;
     rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
-    if ipla<>3 then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
+    if (ipla<>3)and(ipla<=10) then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
     if (j=0)and(ipla<=11) then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
     case ipla of
       4 :  begin
@@ -1706,8 +1713,8 @@ end;
 begin
 if (cfgsc.projpole=Equat)and(not cfgsc.ShowEqGrid) then col:=Fplot.cfgplot.Color[12]
                   else col:=Fplot.cfgplot.Color[13];
-Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
-Fplot.cnv.Brush.Style:=bsClear;
+Fplot.cnv.Brush.Color:=Fplot.cfgplot.backgroundcolor;
+Fplot.cnv.Brush.Style:=bsSolid;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
@@ -1839,8 +1846,8 @@ result:=(n>1);
 end;
 begin
 col:=Fplot.cfgplot.Color[12];
-Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
-Fplot.cnv.Brush.Style:=bsClear;
+Fplot.cnv.Brush.Color:=Fplot.cfgplot.backgroundcolor;
+Fplot.cnv.Brush.Style:=bsSolid;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
@@ -2003,8 +2010,8 @@ result:=(n>1);
 end;
 begin
 col:=Fplot.cfgplot.Color[12];
-Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
-Fplot.cnv.Brush.Style:=bsClear;
+Fplot.cnv.Brush.Color:=Fplot.cfgplot.backgroundcolor;
+Fplot.cnv.Brush.Style:=bsSolid;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
@@ -2133,8 +2140,8 @@ result:=(n>1);
 end;
 begin
 col:=Fplot.cfgplot.Color[12];
-Fplot.cnv.Brush.Color:=Fplot.cfgplot.Color[0];
-Fplot.cnv.Brush.Style:=bsClear;
+Fplot.cnv.Brush.Color:=Fplot.cfgplot.backgroundcolor;
+Fplot.cnv.Brush.Style:=bsSolid;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot.FontName[1];
 Fplot.cnv.Font.Color:=col;
@@ -2568,6 +2575,7 @@ for i:=1 to numlabels do begin
      end;
   if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,cfgsc.WhiteBg,txt);
 end;
+if cfgsc.showlabel[8] then plot.PlotTextCR(5,5,2,8,GetChartInfo(crlf));
 result:=true;
 end;
 
@@ -2634,14 +2642,19 @@ function Tskychart.TelescopeMove(ra,dec:double):boolean;
 var dist:double;
 begin
 result:=false;
-if (ra<>cfgsc.ScopeRa)and(dec<>cfgsc.ScopeDec) then begin
+cfgsc.moved:=false;
+if (ra<>cfgsc.ScopeRa)or(dec<>cfgsc.ScopeDec) then begin
+cfgsc.TrackType:=6;
+cfgsc.TrackName:='Telescope';
+cfgsc.TrackRA:=ra;
+cfgsc.TrackDec:=dec;
 if cfgsc.scopemark then DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
 DrawFinderMark(ra,dec,true);
 cfgsc.ScopeRa:=ra;
 cfgsc.ScopeDec:=dec;
 cfgsc.scopemark:=true;
 dist:=angulardistance(cfgsc.racentre,cfgsc.decentre,ra,dec);
-if dist>cfgsc.fov/4 then begin
+if (dist>cfgsc.fov/4)and(cfgsc.TrackOn) then begin
    if not cfgsc.scopelock then begin
       result:=true;
       cfgsc.scopelock:=true;
@@ -2651,6 +2664,25 @@ if dist>cfgsc.fov/4 then begin
    end;
 end;
 end;
+end;
+
+function Tskychart.GetChartInfo(sep:string=' '):string;
+var cep,dat:string;
+begin
+    cep:=trim(cfgsc.EquinoxName);
+    dat:=Date2Str(cfgsc.CurYear,cfgsc.curmonth,cfgsc.curday)+sep+ArToStr3(cfgsc.Curtime);
+    if  cfgsc.TimeZone>=0 then
+       dat:=dat+' (+'+trim(ArmtoStr(cfgsc.TimeZone))+')'
+    else
+       dat:=dat+' ('+trim(ArmtoStr(cfgsc.TimeZone))+')';
+    case cfgsc.projpole of
+    Equat : result:='Equatorial Coord. '+cep+sep+dat;
+    AltAz : result:='Alt/AZ Coord.'+sep+trim(cfgsc.ObsName)+sep+dat;
+    Gal :   result:='Galactic Coord.'+sep+dat;
+    Ecl :   result:='Ecliptic Coord. '+cep+sep+dat+sep+'Inclination='+detostr(cfgsc.e*rad2deg);
+    else result:='';
+    end;
+    result:=result+sep+'Mag:'+formatfloat(f1,plot.cfgchart.min_ma)+sep+'FOV:'+detostr(cfgsc.fov*rad2deg);
 end;
 
 end.

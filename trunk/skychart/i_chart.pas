@@ -127,32 +127,14 @@ if lock_refresh then exit;
     Identlabel.font.color:=sc.plot.cfgplot.color[11];
     Panel1.color:=sc.plot.cfgplot.color[0];
     if sc.cfgsc.FindOk then ShowIdentLabel;
-    if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
+    if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
  end;
 finally
  lock_refresh:=false;
  screen.cursor:=crDefault;
- if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
+ if (not lastquick) and assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
+ if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
-end;
-
-function Tf_chart.GetChartInfo:string;
-var cep,dat:string;
-begin
-    cep:=trim(sc.cfgsc.EquinoxName);
-    dat:=Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime);
-    if  sc.cfgsc.TimeZone>=0 then
-       dat:=dat+' (+'+trim(ArmtoStr(sc.cfgsc.TimeZone))+')'
-    else
-       dat:=dat+' ('+trim(ArmtoStr(sc.cfgsc.TimeZone))+')';
-    case sc.cfgsc.projpole of
-    Equat : result:='Equatorial Coord. '+cep+blank+dat;
-    AltAz : result:='Alt/AZ Coord. '+trim(sc.cfgsc.ObsName)+blank+dat;
-    Gal :   result:='Galactic Coord.'+blank+dat;
-    Ecl :   result:='Ecliptic Coord. '+cep+blank+dat+', Inclination='+detostr(sc.cfgsc.e*rad2deg);
-    else result:='';
-    end;
-    result:=result+' Mag:'+formatfloat(f1,sc.plot.cfgchart.min_ma)+' FOV:'+detostr(sc.cfgsc.fov*rad2deg);
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
@@ -169,7 +151,8 @@ if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
   sc.cfgsc:=undolist[curundo];
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
-  if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
+  if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
+  if assigned(FChartMove) then FChartMove(self);
 end;
 end;
 
@@ -187,7 +170,8 @@ if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
   sc.cfgsc:=undolist[curundo];
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
-  if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
+  if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
+  if assigned(FChartMove) then FChartMove(self);
 end;
 end;
 
@@ -384,7 +368,7 @@ procedure Tf_chart.FormActivate(Sender: TObject);
 begin
 // code to execute when the chart get focus.
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
-if assigned(fshowtopmessage) then fshowtopmessage(GetChartInfo);
+if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
 if sc.cfgsc.FindOk and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,false);
 end;
 
@@ -541,8 +525,8 @@ begin
  end else begin
     TrackOff1.visible:=false;
     IdentXY(xcursor, ycursor);
-    if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)or(sc.cfgsc.TrackType=6)) then begin
-      TrackOn1.Caption:='Track '+sc.cfgsc.TrackName;
+    if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6) then begin
+      TrackOn1.Caption:='Lock on '+sc.cfgsc.TrackName;
       TrackOn1.visible:=true;
     end
     else TrackOn1.visible:=false;
@@ -1951,6 +1935,7 @@ begin
 if Connect1.checked then begin
    indi1.terminate;
    sc.cfgsc.ScopeMark:=false;
+   sc.cfgsc.TrackOn:=false;
    Refresh;
 end else begin
 if (indi1=nil)or(indi1.Terminated) then begin
@@ -1969,8 +1954,10 @@ if (indi1=nil)or(indi1.Terminated) then begin
    indi1.onStatusChange:=TelescopeStatusChange;
    indi1.onMessage:=TelescopeGetMessage;
    indi1.Resume;
+   sc.cfgsc.TrackOn:=true;
 end else begin
    indi1.Connect;
+   sc.cfgsc.TrackOn:=true;
 end;
 end;
 end;
@@ -2054,6 +2041,7 @@ precession(jd2000,sc.cfgsc.JDChart,ra,dec);
 if sc.cfgsc.ApparentPos then apparent_equatorial(ra,dec,sc.cfgsc);
 identlabel.Visible:=false;
 sc.TelescopeMove(ra,dec);
+if sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 except
 end;
 end;

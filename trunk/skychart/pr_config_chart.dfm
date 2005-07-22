@@ -9,7 +9,7 @@ object f_config_chart: Tf_config_chart
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_filter
+    ActivePage = t_chart
     Align = alClient
     TabOrder = 0
     object t_chart: TTabSheet
@@ -88,11 +88,11 @@ object f_config_chart: Tf_config_chart
         object Label151: TLabel
           Left = 16
           Top = 8
-          Width = 178
+          Width = 236
           Height = 13
-          Caption = 'Equatorial Chart  Coordinates Equinox'
+          Caption = 'Equatorial and Ecliptic Chart  Coordinates Equinox'
         end
-        object Label152: TLabel
+        object EquinoxLabel: TLabel
           Left = 192
           Top = 46
           Width = 41

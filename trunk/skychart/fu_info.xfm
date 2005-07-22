@@ -24,7 +24,7 @@ object f_info: Tf_info
     Top = 0
     Width = 460
     Height = 311
-    ActivePage = ProgressMessages
+    ActivePage = objectlist
     Align = alClient
     TabOrder = 0
     object tcpinfo: TTabSheet
@@ -103,6 +103,7 @@ object f_info: Tf_info
           Top = 1
           Width = 75
           Height = 25
+          Anchors = [akTop, akRight]
           Caption = 'Search'
           TabOrder = 0
           OnClick = Button3Click
@@ -113,6 +114,7 @@ object f_info: Tf_info
           Width = 100
           Height = 28
           Cursor = crIBeam
+          Anchors = [akTop, akRight]
           TabOrder = 1
           OnKeyUp = Edit1KeyUp
         end
@@ -121,6 +123,7 @@ object f_info: Tf_info
           Top = 1
           Width = 75
           Height = 25
+          Anchors = [akTop, akRight]
           Caption = 'Sort by RA'
           TabOrder = 2
           OnClick = Button5Click
@@ -130,6 +133,7 @@ object f_info: Tf_info
           Top = 0
           Width = 75
           Height = 25
+          Anchors = [akTop, akRight]
           Caption = 'Print'
           TabOrder = 3
           OnClick = Button6Click
@@ -139,6 +143,7 @@ object f_info: Tf_info
           Top = 0
           Width = 75
           Height = 25
+          Anchors = [akTop, akRight]
           Caption = 'Save'
           TabOrder = 4
           OnClick = Button7Click

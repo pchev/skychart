@@ -9,7 +9,7 @@ object f_config_pictures: Tf_config_pictures
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_images
+    ActivePage = t_dss
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -318,6 +318,173 @@ object f_config_pictures: Tf_config_pictures
           Width = 46
           Height = 20
           Caption = 'Contrast'
+        end
+      end
+    end
+    object t_dss: TTabSheet
+      Caption = 't_dss'
+      ImageIndex = 2
+      object GroupBox3: TGroupBox
+        Left = 1
+        Top = 8
+        Width = 481
+        Height = 345
+        Caption = 'RealSky'#174
+        TabOrder = 0
+        object Label72: TLabel
+          Left = 8
+          Top = 100
+          Width = 75
+          Height = 20
+          Caption = 'Auxiliary files'
+        end
+        object Label73: TLabel
+          Left = 8
+          Top = 152
+          Width = 103
+          Height = 20
+          Caption = 'Data Files, CDrom'
+        end
+        object Label74: TLabel
+          Left = 8
+          Top = 196
+          Width = 75
+          Height = 20
+          Caption = 'temporary file'
+        end
+        object Label75: TLabel
+          Left = 416
+          Top = 272
+          Width = 32
+          Height = 20
+          Caption = 'pixels'
+        end
+        object Label77: TLabel
+          Left = 416
+          Top = 308
+          Width = 42
+          Height = 20
+          Caption = 'MBytes'
+        end
+        object realskydir: TEdit
+          Left = 144
+          Top = 96
+          Width = 169
+          Height = 27
+          Cursor = crIBeam
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          Text = 'cat\RealSky\'
+          OnChange = realskydirChange
+        end
+        object realskydrive: TEdit
+          Left = 144
+          Top = 148
+          Width = 169
+          Height = 27
+          Cursor = crIBeam
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+          Text = 'X:\'
+          OnChange = realskydriveChange
+        end
+        object realskyfile: TEdit
+          Left = 144
+          Top = 192
+          Width = 169
+          Height = 27
+          Cursor = crIBeam
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+          Text = 'images\$TEMP.FIT'
+          OnChange = realskyfileChange
+        end
+        object RealSkyNorth: TCheckBox
+          Left = 8
+          Top = 26
+          Width = 153
+          Height = 17
+          Caption = 'RealSky North'
+          TabOrder = 3
+          OnClick = RealSkyNorthClick
+        end
+        object RealSkySouth: TCheckBox
+          Left = 8
+          Top = 62
+          Width = 169
+          Height = 17
+          Caption = 'RealSky South'
+          TabOrder = 4
+          OnClick = RealSkySouthClick
+        end
+        object DSS102CD: TCheckBox
+          Left = 184
+          Top = 26
+          Width = 169
+          Height = 17
+          Caption = '102 CD DSS'
+          TabOrder = 5
+          OnClick = DSS102CDClick
+        end
+        object usesubsample: TCheckBox
+          Left = 8
+          Top = 272
+          Width = 321
+          Height = 17
+          Caption = 'Use subsampling to limit image size to'
+          Checked = True
+          State = cbChecked
+          TabOrder = 6
+          OnClick = usesubsampleClick
+        end
+        object reallist: TCheckBox
+          Left = 8
+          Top = 240
+          Width = 289
+          Height = 17
+          Caption = 'Select plate from list'
+          Checked = True
+          State = cbChecked
+          TabOrder = 7
+          OnClick = reallistClick
+        end
+        object realskymax: TLongEdit
+          Left = 336
+          Top = 268
+          Width = 65
+          Height = 24
+          Hint = '0..99999'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 8
+          OnChange = realskymaxChange
+          Value = 0
+          MaxValue = 99999
+        end
+        object realskymb: TLongEdit
+          Left = 336
+          Top = 304
+          Width = 65
+          Height = 24
+          Color = clButton
+          ReadOnly = True
+          TabOrder = 9
+          Value = 0
         end
       end
     end

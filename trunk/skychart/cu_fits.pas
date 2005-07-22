@@ -160,7 +160,7 @@ var   header : array[1..36,1..80] of char;
       keyword,buf : string;
       f : file;
 begin
-filemode:=0;
+filemode:=fmShareDenyNone;
 assignfile(f,FFileName);
 reset(f,1);
 with FHeader do begin
@@ -222,6 +222,16 @@ repeat
                    else equinox:=strtofloat(buf);
                    end;
       if (keyword='RADECSYS') then radecsys:=buf;
+      if keyword='CONTRAS1' then
+           try
+             dmin:=strtoint(words(buf,'',1,1));   // low value for good contrast
+           except
+           end;
+      if keyword='CONTRAS9' then
+           try
+             dmax:=strtoint(words(buf,'',9,1));   // high value for good contrast
+           except
+           end;
       if (keyword='END') then eoh:=true;
    end;
    if bitpix=0 then Break;
@@ -371,7 +381,7 @@ var i,ii,j,n,npix,k : integer;
     ni,sum,sum2 : extended;
 begin
 if Fheader.naxis1=0 then exit;
-filemode:=0;
+filemode:=fmShareDenyNone;
 assignfile(f,FFileName);
 reset(f,1);
 dmin:=1.0E100;

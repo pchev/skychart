@@ -26,6 +26,7 @@ begin
  cshr:=@mycshr;
  cplot:=@mycplot;
  cmain:=@mycmain;
+ cdss:=@mycdss;
  inherited Create(AOwner);
 end;
 
@@ -49,6 +50,15 @@ backimg.text:=csc.BackgroundImage;
 ShowBackImg.checked:=save;
 cmain.NewBackgroundImage:=false;
 ImageTimer1.enabled:=false;
+RealSkyNorth.Checked:=cdss.dssnorth;
+RealSkySouth.Checked:=cdss.dsssouth;
+DSS102CD.Checked:=cdss.dss102;
+realskydir.text:=cdss.dssdir;
+realskydrive.text:=cdss.dssdrive;
+realskyfile.text:=cdss.dssfile;
+reallist.checked:=cdss.dssplateprompt;
+usesubsample.checked:=cdss.dsssampling;
+realskymax.value:=cdss.dssmaxsize;
 end;
 
 procedure Tf_config_pictures.imgpathChange(Sender: TObject);
@@ -196,4 +206,66 @@ begin
 csc.ShowBackgroundImage:=ShowBackImg.checked;
 cmain.NewBackgroundImage:=csc.ShowBackgroundImage;
 end;
+
+procedure Tf_config_pictures.DSS102CDClick(Sender: TObject);
+begin
+cdss.dss102:=DSS102CD.Checked;
+if DSS102CD.Checked then begin
+   RealSkyNorth.Checked:=false;
+   RealSkySouth.Checked:=false;
+end;
+end;
+
+procedure Tf_config_pictures.RealSkyNorthClick(Sender: TObject);
+begin
+cdss.dssnorth:=RealSkyNorth.Checked;
+if RealSkyNorth.Checked then begin
+   DSS102CD.Checked:=false;
+end;
+end;
+
+procedure Tf_config_pictures.RealSkySouthClick(Sender: TObject);
+begin
+cdss.dsssouth:=RealSkySouth.Checked;
+if RealSkySouth.Checked then begin
+   DSS102CD.Checked:=false;
+end;
+end;
+
+procedure Tf_config_pictures.realskymaxChange(Sender: TObject);
+begin
+cdss.dssmaxsize:=realskymax.value;
+realskymb.value:=round(sqr(realskymax.value)*2/1024/1024);
+end;
+
+
+procedure Tf_config_pictures.realskydirChange(Sender: TObject);
+begin
+cdss.dssdir:=realskydir.text;
+if fileexists(slash(cdss.dssdir)+'Hi_comp.lis') then
+   realskydir.color:=clWindow
+else
+   realskydir.color:=clRed;
+end;
+
+procedure Tf_config_pictures.realskydriveChange(Sender: TObject);
+begin
+cdss.dssdrive:=realskydrive.text;
+end;
+
+procedure Tf_config_pictures.realskyfileChange(Sender: TObject);
+begin
+cdss.dssfile:=realskyfile.text;
+end;
+
+procedure Tf_config_pictures.reallistClick(Sender: TObject);
+begin
+cdss.dssplateprompt:=reallist.checked;
+end;
+
+procedure Tf_config_pictures.usesubsampleClick(Sender: TObject);
+begin
+cdss.dsssampling:=usesubsample.checked;
+end;
+
 

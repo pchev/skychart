@@ -24,7 +24,7 @@ interface
 
 uses  u_constant, u_util, cu_fits, cu_database, 
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, ExtCtrls, Buttons, FoldrDlg;
+  StdCtrls, ComCtrls, ExtCtrls, Buttons, FoldrDlg, enhedits;
 
 type
   Tf_config_pictures = class(TFrame)
@@ -63,6 +63,23 @@ type
     Label1: TLabel;
     Label2: TLabel;
     ImageTimer1: TTimer;
+    t_realsky: TTabSheet;
+    GroupBox3: TGroupBox;
+    Label72: TLabel;
+    Label73: TLabel;
+    Label74: TLabel;
+    Label75: TLabel;
+    Label77: TLabel;
+    realskydir: TEdit;
+    realskydrive: TEdit;
+    realskyfile: TEdit;
+    RealSkyNorth: TCheckBox;
+    RealSkySouth: TCheckBox;
+    DSS102CD: TCheckBox;
+    usesubsample: TCheckBox;
+    reallist: TCheckBox;
+    realskymax: TLongEdit;
+    realskymb: TLongEdit;
     procedure imgpathChange(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -76,6 +93,15 @@ type
     procedure ImgLumBar2Change(Sender: TObject);
     procedure ImgContrastBar2Change(Sender: TObject);
     procedure ImageTimer1Timer(Sender: TObject);
+    procedure RealSkyNorthClick(Sender: TObject);
+    procedure DSS102CDClick(Sender: TObject);
+    procedure RealSkySouthClick(Sender: TObject);
+    procedure realskymaxChange(Sender: TObject);
+    procedure realskydirChange(Sender: TObject);
+    procedure realskydriveChange(Sender: TObject);
+    procedure realskyfileChange(Sender: TObject);
+    procedure reallistClick(Sender: TObject);
+    procedure usesubsampleClick(Sender: TObject);
   private
     { Private declarations }
     FFits: TFits;
@@ -89,11 +115,13 @@ type
     mycshr : conf_shared;
     mycplot : conf_plot;
     mycmain : conf_main;
+    mycdss : conf_dss;
     csc : ^conf_skychart;
     ccat : ^conf_catalog;
     cshr : ^conf_shared;
     cplot : ^conf_plot;
     cmain : ^conf_main;
+    cdss : ^conf_dss;
     constructor Create(AOwner:TComponent); override;
     property Fits: TFits read FFits write FFits;
   end;

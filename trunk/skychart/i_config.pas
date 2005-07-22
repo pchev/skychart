@@ -26,7 +26,7 @@ procedure Tf_config.FormCreate(Sender: TObject);
 begin
 compage:=22;
 astpage:=23;
-dbpage:=37;
+dbpage:=38;
 f_config_solsys1.onShowDB:=ShowDBSetting;
 f_config_solsys1.onPrepareAsteroid:=SolSysPrepareAsteroid;
 f_config_system1.onShowAsteroid:=ShowAsteroidSetting;
@@ -236,6 +236,12 @@ f_config_solsys1.cmain:=@Fcmain;
 f_config_display1.cmain:=@Fcmain;
 f_config_pictures1.cmain:=@Fcmain;
 f_config_system1.cmain:=@Fcmain;
+end;
+
+procedure Tf_config.SetCdss(value: conf_dss);
+begin
+Fcdss:=value;
+f_config_pictures1.cdss:=@Fcdss;
 end;
 
 procedure Tf_config.applyClick(Sender: TObject);

@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database,
+uses cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   u_constant, u_util, blcksock, Winsock,
   Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, Messages, ExtCtrls, ComCtrls, StdActns,
@@ -345,6 +345,23 @@ type
     N6: TMenuItem;
     ShowBackgroundImage: TAction;
     ToolButtonShowBackgroundImage: TToolButton;
+    ToolButtonPosition: TToolButton;
+    Position: TAction;
+    ToolButtonSyncChart: TToolButton;
+    SyncChart: TAction;
+    Track: TAction;
+    ToolButtonTrack: TToolButton;
+    ZoomBar: TAction;
+    ToolButton1: TToolButton;
+    DSSImage: TAction;
+    ToolButtonDSS: TToolButton;
+    ToolButtonNightVision: TToolButton;
+    ImageList2: TImageList;
+    Buttons1: TMenuItem;
+    Normal1: TMenuItem;
+    Reverse1: TMenuItem;
+    NightVision1: TMenuItem;
+    RedColor1: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -436,16 +453,32 @@ type
     procedure EditCopy1Execute(Sender: TObject);
     procedure SetFovExecute(Sender: TObject);
     procedure ShowBackgroundImageExecute(Sender: TObject);
+    procedure PositionExecute(Sender: TObject);
+    procedure Search1Execute(Sender: TObject);
+    procedure SyncChartExecute(Sender: TObject);
+    procedure TrackExecute(Sender: TObject);
+    procedure ZoomBarExecute(Sender: TObject);
+    procedure DSSImageExecute(Sender: TObject);
+    procedure ToolButtonNightVisionClick(Sender: TObject);
+    procedure ButtonModeClick(Sender: TObject);
   private
     { Private declarations }
     cryptedpwd:string;
-    NeedRestart,NeedToInitializeDB: Boolean;
-    function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
+    NeedRestart,NeedToInitializeDB : Boolean;
+    InitialChartNum, ButtonImage: integer;
+    nightvision : Boolean;
+    savwincol  : array[0..30] of Tcolor;
+    Procedure SaveWinColor;
+    Procedure ResetWinColor;
+    procedure SetNightVision(night: boolean);
+    procedure SetButtonImage(button: Integer);
+    function CreateMDIChild(const CName: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
+    Procedure SyncChild;
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
     Procedure GetAppDir;
     procedure ViewTopPanel;
-    procedure ApplyConfig(Sender: TObject);    
+    procedure ApplyConfig(Sender: TObject);
   public
     { Public declarations }
     cfgm : conf_main;
@@ -470,7 +503,7 @@ type
     procedure UpdateConfig;
     procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
-    procedure SaveChartConfig(filename:string);
+    procedure SaveChartConfig(filename:string; chart: Tf_chart);
     procedure SaveDefault;
     procedure SetDefault;
     procedure SetLang;
@@ -505,6 +538,7 @@ type
     procedure SaveAndRestart(Sender: TObject);
     procedure InitializeDB(Sender: TObject);
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    procedure ChartMove(Sender: TObject);
   end;
 
 var
@@ -515,8 +549,8 @@ implementation
 {$R *.dfm}
 {$R cursbmp.res}
 
-uses pu_detail, pu_chart, pu_about, pu_config, pu_info, u_projection,
-     pu_printsetup, pu_calendar,
+uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
+     pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      passql, pasmysql, ShlObj ;
 
 // include all cross-platform common code.
@@ -590,6 +624,45 @@ procedure Tf_main.DdeSkyChartClose(Sender: TObject);
 begin
 DDeOpen:=false;
 end;
+
+Procedure Tf_main.SaveWinColor;
+var n : integer;
+begin
+   for n:=0 to 30 do savwincol[n]:=getsyscolor(n);
+end;
+
+Procedure Tf_main.ResetWinColor;
+const elem31 : array[0..30] of integer=(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+begin
+setsyscolors(31,elem31,savwincol);
+end;
+
+procedure Tf_main.SetNightVision(night: boolean);
+const light  = $004040ff;
+      middle = $003030c0;
+      dark   = $00000040;
+      black  = $00000000;
+      elem : array[0..30] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUBAR,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,25   ,26   ,27   ,28   ,29   );
+      rgb  : array[0..30] of Tcolor =  (black           ,dark         ,dark              ,dark  ,middle             ,middle       ,middle           ,dark           ,dark              ,light              ,black                ,black             ,dark                     ,black       ,middle        ,dark      ,dark         ,middle        ,black          ,black       ,middle          ,black            ,black           ,middle       ,black          ,dark          ,dark ,dark ,dark ,dark ,dark );
+begin
+if night then begin
+   SaveWinColor;
+   setsyscolors(sizeof(elem),elem,rgb);
+   SetButtonImage(2);
+end else begin
+   ResetWinColor;
+   SetButtonImage(ButtonImage);
+end;
+end;
+
+procedure Tf_main.ToolButtonNightVisionClick(Sender: TObject);
+begin
+nightvision:= not nightvision;
+SetNightVision(nightvision);
+ToolButtonNightVision.Down:=nightvision;
+RedColor1.Checked:=nightvision;
+end;
+
 
 // end of windows vcl specific code:
 

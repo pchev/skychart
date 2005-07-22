@@ -146,6 +146,7 @@ type
     FShowInfo : Tshowinfo;
     FShowCoord: Tstr1func;
     FListInfo: Tstr1func;
+    FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove : integer;
     MovingCircle: Boolean;
@@ -197,7 +198,6 @@ type
     Procedure ZoomBox(action,x,y:integer);
     Procedure TrackCursor(X,Y : integer);
     Procedure ZoomCursor(yy : double);
-    function GetChartInfo:string;
     procedure SetField(field : double);
     procedure SetZenit(field : double; redraw:boolean=true);
     procedure SetAz(Az : double; redraw:boolean=true);
@@ -236,6 +236,7 @@ type
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
     property OnListInfo: Tstr1func read FListInfo write FListInfo;
+    property OnChartMove: TNotifyEvent read FChartMove write FChartMove;
   end;
 
 implementation
@@ -314,6 +315,7 @@ end else begin
      ok:=Ftelescope.ScopeConnect;
      Connect1.Checked:=ok;
      TelescopeTimer.Enabled:=ok;
+     sc.cfgsc.TrackOn:=true;
    end;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -360,6 +362,7 @@ if Ftelescope.scopelibok then begin
       dec:=dec*deg2rad;
       precession(jd2000,sc.cfgsc.JDChart,ra,dec);
       if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
+      if sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
       TelescopeTimer.Interval:=500;
       TelescopeTimer.Enabled:=true;
    end;
@@ -368,6 +371,7 @@ if Ftelescope.scopelibok then begin
    TelescopeTimer.Enabled:=true;
    if sc.cfgsc.ScopeMark then begin
       sc.cfgsc.ScopeMark:=false;
+      sc.cfgsc.TrackOn:=false;
       Refresh;
    end;
  end;
@@ -376,6 +380,7 @@ end else begin
    TelescopeTimer.Enabled:=false;
    if sc.cfgsc.ScopeMark then begin
       sc.cfgsc.ScopeMark:=false;
+      sc.cfgsc.TrackOn:=false;
       Refresh;
    end;
 end;

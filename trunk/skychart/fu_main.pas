@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                                 
 interface
 
-uses cu_catalog, cu_planet, cu_fits, cu_database, u_constant, u_util, blcksock, libc, Math,
+uses fu_chart, cu_catalog, cu_planet, cu_fits, cu_database, u_constant, u_util, blcksock, libc, Math,
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
      QStdCtrls, IniFiles, Types, QButtons, QFileCtrls, QClipbrd;
@@ -346,6 +346,23 @@ type
     TelescopeSync1: TMenuItem;
     ToolButtonShowBackgroundImage: TToolButton;
     ShowBackgroundImage: TAction;
+    SyncChart: TAction;
+    Position: TAction;
+    ToolButtonSyncChart: TToolButton;
+    ToolButton1: TToolButton;
+    ZoomBar: TAction;
+    ImageList2: TImageList;
+    DSSImage: TAction;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    Track: TAction;
+    ToolButtonTrack: TToolButton;
+    Buttons1: TMenuItem;
+    Normal1: TMenuItem;
+    Reverse1: TMenuItem;
+    NightVision1: TMenuItem;
+    Useyourdesktopmanagertochangethecolor1: TMenuItem;
+    N7: TMenuItem;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -431,12 +448,24 @@ type
     procedure EditCopy1Execute(Sender: TObject);
     procedure SetFovExecute(Sender: TObject);
     procedure ShowBackgroundImageExecute(Sender: TObject);
-    
+    procedure ChartMove(Sender: TObject);
+    procedure SyncChild;
+    procedure SyncChartExecute(Sender: TObject);
+    procedure PositionExecute(Sender: TObject);
+    procedure Search1Execute(Sender: TObject);
+    procedure ZoomBarExecute(Sender: TObject);
+    procedure DSSImageExecute(Sender: TObject);
+    procedure TrackExecute(Sender: TObject);
+    procedure ButtonModeClick(Sender: TObject);
+
   private
     { Private declarations }
     cryptedpwd: string;
     NeedRestart,NeedToInitializeDB: Boolean;
-    function CreateMDIChild(const CName: string; copyactive,linkactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
+    InitialChartNum, ButtonImage : integer;
+    NightVision: boolean;
+    procedure SetButtonImage(button: Integer);
+    function CreateMDIChild(const CName: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
     Procedure GetAppDir;
@@ -461,7 +490,7 @@ type
     procedure UpdateConfig;
     procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
-    procedure SaveChartConfig(filename:string);
+    procedure SaveChartConfig(filename:string; chart: Tf_chart);
     procedure SaveDefault;
     procedure SetDefault;
     procedure SetLang;
@@ -506,9 +535,10 @@ implementation
 
 {$R *.xfm}
 
-uses fu_detail, fu_chart, fu_about, fu_config, fu_info, u_projection, passql, pasmysql,
+uses fu_detail, fu_about, fu_config, fu_info, u_projection, passql, pasmysql,
      LibcExec,  // libc exec bug workaround by Andreas Hausladen
-     fu_printsetup, fu_directory, fu_calendar;
+     fu_zoom, fu_getdss,
+     fu_printsetup, fu_directory, fu_calendar, fu_search, fu_position;
 
 // include all cross-platform common code.
 // you can temporarily copy the file content here
@@ -534,7 +564,6 @@ activecontrol:=nil;
 end;
 
 // End of Linux specific CLX code:
-
 
 end.
 

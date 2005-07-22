@@ -36,6 +36,7 @@ Types, QGraphics;
 Procedure BitmapRotation(bmp,rbmp: TBitmap; Rotation:double; WhiteBg:boolean);
 procedure BitmapRotMask(imamask,rbmp,bmp: tbitmap; Rotation:double);
 procedure BitmapBlackMask(imamask,bmp: tbitmap);
+procedure BitmapNotZero(bmp: tbitmap);
 
 implementation
 
@@ -277,7 +278,8 @@ with BitMapOriginal do begin
 
 //diff size bitmaps have diff resolution of angle, ie r*sin(theta)<1 pixel
 //use the small angle approx: sin(theta) ~~ theta   //11/7/00
-  if ( ABS(theta)*MAX( width,height ) ) > 1 then
+// NO! we just compute the real sintheta above! and 6.28 is a small angle ! // pch 07/15/2005 
+  if (abs(sinTheta*MAX( width,height)) ) > 1 then
   begin//non-zero rotation
 
 //set output bitmap formats; we do not assume a fixed format or size 1/6/00
@@ -473,6 +475,23 @@ for i:=0 to bmp.Height-1 do begin
            Q[j].rgbGreen:=0;
            Q[j].rgbRed:=0;
         end;
+    end;
+end;
+end;
+
+procedure BitmapNotZero(bmp: tbitmap);
+// Replace bitmap pixel with zero vaue to one to avoid transparency
+type TRGBQuadArray = array [0..32767]  of TRGBQuad;
+     pRGBQuadArray = ^TRGBQuadArray;
+var i,j : integer;
+    P : pRGBQuadArray ;
+begin
+for i:=0 to bmp.Height-1 do begin
+    P:=bmp.ScanLine[i];
+    for j:=0 to bmp.width-1 do begin
+      if (P[j].rgbBlue<1) then P[j].rgbBlue:=1;
+      if (P[j].rgbGreen<1) then P[j].rgbGreen:=1;
+      if (P[j].rgbRed<1) then P[j].rgbRed:=1;
     end;
 end;
 end;

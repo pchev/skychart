@@ -39,7 +39,7 @@ type
     lDrawPMy: TLongEdit;
     Panel10: TPanel;
     Label151: TLabel;
-    Label152: TLabel;
+    EquinoxLabel: TLabel;
     equinoxtype: TRadioGroup;
     equinox2: TFloatEdit;
     projectiontype: TRadioGroup;

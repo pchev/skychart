@@ -9,7 +9,7 @@ object f_config_pictures: Tf_config_pictures
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_images
+    ActivePage = t_background
     Align = alClient
     TabOrder = 0
     object t_images: TTabSheet
@@ -18,36 +18,36 @@ object f_config_pictures: Tf_config_pictures
       object Label50: TLabel
         Left = 2
         Top = 2
-        Width = 164
-        Height = 13
+        Width = 212
+        Height = 16
         Caption = 'Display image of cataloged objects'
       end
       object Label264: TLabel
         Left = 8
         Top = 46
-        Width = 63
-        Height = 13
+        Width = 78
+        Height = 16
         Caption = 'Pictures Path'
       end
       object Label265: TLabel
         Left = 98
         Top = 80
-        Width = 41
-        Height = 13
+        Width = 52
+        Height = 16
         Caption = 'There is '
       end
       object nimages: TLabel
         Left = 144
         Top = 80
-        Width = 39
-        Height = 13
+        Width = 52
+        Height = 16
         Caption = 'nimages'
       end
       object Label267: TLabel
         Left = 200
         Top = 80
-        Width = 89
-        Height = 13
+        Width = 116
+        Height = 16
         Caption = 'catalogued images'
       end
       object imgpath: TEdit
@@ -55,7 +55,7 @@ object f_config_pictures: Tf_config_pictures
         Left = 98
         Top = 43
         Width = 239
-        Height = 19
+        Height = 22
         Ctl3D = False
         ParentCtl3D = False
         TabOrder = 0
@@ -117,15 +117,15 @@ object f_config_pictures: Tf_config_pictures
         object Label266: TLabel
           Left = 32
           Top = 32
-          Width = 49
-          Height = 13
+          Width = 63
+          Height = 16
           Caption = 'Luminosity'
         end
         object Label268: TLabel
           Left = 40
           Top = 96
-          Width = 39
-          Height = 13
+          Width = 49
+          Height = 16
           Caption = 'Contrast'
         end
         object ImgLumBar: TTrackBar
@@ -175,8 +175,8 @@ object f_config_pictures: Tf_config_pictures
         object ProgressCat: TLabel
           Left = 187
           Top = 8
-          Width = 26
-          Height = 13
+          Width = 32
+          Height = 16
           Caption = 'Other'
         end
         object ProgressBar1: TProgressBar
@@ -206,22 +206,22 @@ object f_config_pictures: Tf_config_pictures
       object Label270: TLabel
         Left = 0
         Top = 0
-        Width = 94
-        Height = 13
+        Width = 117
+        Height = 16
         Caption = 'Background Picture'
       end
       object Label271: TLabel
         Left = 8
         Top = 22
-        Width = 42
-        Height = 13
+        Width = 54
+        Height = 16
         Caption = 'FITS File'
       end
       object backimginfo: TLabel
         Left = 8
         Top = 40
-        Width = 57
-        Height = 13
+        Width = 73
+        Height = 16
         Caption = 'backimginfo'
       end
       object Image1: TImage
@@ -236,7 +236,7 @@ object f_config_pictures: Tf_config_pictures
         Left = 98
         Top = 19
         Width = 327
-        Height = 19
+        Height = 22
         Ctl3D = False
         ParentCtl3D = False
         TabOrder = 0
@@ -298,15 +298,15 @@ object f_config_pictures: Tf_config_pictures
         object Label1: TLabel
           Left = 54
           Top = 8
-          Width = 49
-          Height = 13
+          Width = 63
+          Height = 16
           Caption = 'Luminosity'
         end
         object Label2: TLabel
           Left = 203
           Top = 8
-          Width = 39
-          Height = 13
+          Width = 49
+          Height = 16
           Caption = 'Contrast'
         end
         object ImgLumBar2: TTrackBar
@@ -346,6 +346,167 @@ object f_config_pictures: Tf_config_pictures
           TickMarks = tmBottomRight
           TickStyle = tsAuto
           OnChange = ImgContrastBar2Change
+        end
+      end
+    end
+    object t_realsky: TTabSheet
+      Caption = 't_realsky'
+      ImageIndex = 2
+      TabVisible = False
+      object GroupBox3: TGroupBox
+        Left = 1
+        Top = 8
+        Width = 481
+        Height = 345
+        Caption = 'RealSky'#174
+        TabOrder = 0
+        object Label72: TLabel
+          Left = 8
+          Top = 100
+          Width = 77
+          Height = 16
+          Caption = 'Auxiliary files'
+        end
+        object Label73: TLabel
+          Left = 8
+          Top = 152
+          Width = 109
+          Height = 16
+          Caption = 'Data Files, CDrom'
+        end
+        object Label74: TLabel
+          Left = 8
+          Top = 196
+          Width = 81
+          Height = 16
+          Caption = 'temporary file'
+        end
+        object Label75: TLabel
+          Left = 416
+          Top = 272
+          Width = 35
+          Height = 16
+          Caption = 'pixels'
+        end
+        object Label77: TLabel
+          Left = 416
+          Top = 308
+          Width = 45
+          Height = 16
+          Caption = 'MBytes'
+        end
+        object realskydir: TEdit
+          Left = 144
+          Top = 96
+          Width = 169
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          Text = 'cat\RealSky\'
+          OnChange = realskydirChange
+        end
+        object realskydrive: TEdit
+          Left = 144
+          Top = 148
+          Width = 169
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+          Text = 'X:\'
+          OnChange = realskydriveChange
+        end
+        object realskyfile: TEdit
+          Left = 144
+          Top = 192
+          Width = 169
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+          Text = 'images\$TEMP.FIT'
+          OnChange = realskyfileChange
+        end
+        object RealSkyNorth: TCheckBox
+          Left = 8
+          Top = 26
+          Width = 153
+          Height = 17
+          Caption = 'RealSky North'
+          TabOrder = 3
+          OnClick = RealSkyNorthClick
+        end
+        object RealSkySouth: TCheckBox
+          Left = 8
+          Top = 62
+          Width = 169
+          Height = 17
+          Caption = 'RealSky South'
+          TabOrder = 4
+          OnClick = RealSkySouthClick
+        end
+        object DSS102CD: TCheckBox
+          Left = 184
+          Top = 26
+          Width = 169
+          Height = 17
+          Caption = '102 CD DSS'
+          TabOrder = 5
+          OnClick = DSS102CDClick
+        end
+        object usesubsample: TCheckBox
+          Left = 8
+          Top = 272
+          Width = 321
+          Height = 17
+          Caption = 'Use subsampling to limit image size to'
+          Checked = True
+          State = cbChecked
+          TabOrder = 6
+          OnClick = usesubsampleClick
+        end
+        object reallist: TCheckBox
+          Left = 8
+          Top = 240
+          Width = 289
+          Height = 17
+          Caption = 'Select plate from list'
+          Checked = True
+          State = cbChecked
+          TabOrder = 7
+          OnClick = reallistClick
+        end
+        object realskymax: TLongEdit
+          Left = 336
+          Top = 268
+          Width = 65
+          Height = 24
+          TabOrder = 8
+          OnChange = realskymaxChange
+          Value = 0
+        end
+        object realskymb: TLongEdit
+          Left = 336
+          Top = 304
+          Width = 65
+          Height = 24
+          Color = clBtnFace
+          ReadOnly = True
+          TabOrder = 9
+          Value = 0
         end
       end
     end

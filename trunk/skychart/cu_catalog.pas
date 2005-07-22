@@ -28,10 +28,10 @@ interface
 uses u_constant, libcatalog, u_util, u_projection,
      SysUtils, Classes, Math,
 {$ifdef linux}
-   Qforms;
+   QDialogs, Qforms;
 {$endif}
 {$ifdef mswindows}
-   Forms;
+   Dialogs, Forms;
 {$endif}
 
 type
@@ -53,7 +53,7 @@ type
      function GetGCatD(var rec:GcatRec):boolean;
      function GetGCatN(var rec:GcatRec):boolean;
      function GetGCatL(var rec:GcatRec):boolean;
-     procedure FindNGCat(id : shortstring; var ar,de:double ; var ok:boolean);
+     procedure FindNGCat(id : shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
      function GetBSC(var rec:GcatRec):boolean;
      function GetSky2000(var rec:GcatRec):boolean;
      function GetTYC(var rec:GcatRec):boolean;
@@ -111,7 +111,13 @@ type
      function OpenMilkyWay(fill:boolean):boolean;
      function CloseMilkyWay:boolean;
      function ReadMilkyWay(var rec:GcatRec):boolean;
-     function FindNum(cat: integer; id: string; var ra,dec: double ):boolean ;
+     function FindNum(cat: integer; id: string; var ra,dec: double):boolean ;
+     function SearchNebulae(Num:string; var ar1,de1: double): boolean;
+     function SearchStar(Num:string; var ar1,de1: double): boolean;
+     function SearchDblStar(Num:string; var ar1,de1: double): boolean;
+     function SearchVarStar(Num:string; var ar1,de1: double): boolean;
+     function SearchLines(Num:string; var ar1,de1: double): boolean;
+     function SearchConstellation(Num:string; var ar1,de1: double): boolean;
      function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
      function FindObj(x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
      procedure GetAltName(rec: GCatrec; var txt: string);
@@ -1182,18 +1188,20 @@ repeat
 until not result;
 end;
 
-procedure Tcatalog.FindNGCat(id : shortstring; var ar,de:double ; var ok:boolean);
+procedure Tcatalog.FindNGCat(id : shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
 var
    H : TCatHeader;
    i,version : integer;
 begin
 ok:=false;
 for i:=0 to cfgcat.GCatNum-1 do begin
-  if fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx') then begin
-   SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
-   GetGCatInfo(H,version,ok);
-   if ok then FindNumGcat(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,id,H.ixkeylen, ar,de,ok);
-   if ok then break;
+  if ((ctype=-1)or(cfgcat.GCatLst[i].cattype=ctype))
+   and fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx')
+   then begin
+     SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
+     GetGCatInfo(H,version,ok);
+     if ok then FindNumGcat(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,id,H.ixkeylen, ar,de,ok);
+     if ok then break;
   end;
 end;
 end;
@@ -1941,27 +1949,27 @@ while lockcat do application.ProcessMessages;
 try
   lockcat:=true;
   case cat of
-        S_Messier  : begin
+        S_Messier  : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
                      SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
                      FindNumMessier(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_NGC      : begin
+        S_NGC      : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
                      SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
                      FindNumNGC(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_IC       : begin
+        S_IC       : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
                      SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
                      FindNumIC(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_PGC      : begin
-                     SetNGCPath(cfgcat.NebCatPath[pgc-BaseNeb]);
+        S_PGC      : if IsPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]) then begin
+                     SetPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]);
                      FindNumPGC(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_GCVS     : begin
+        S_GCVS     : if IsGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]) then begin
                      SetGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]);
                      FindNumGCVS(id,ra,dec,result) ;
                      end;
-        S_GC       : begin
+        S_GC       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumGC(strtointdef(id,0),ra,dec,result) ;
                      end;
@@ -1973,72 +1981,42 @@ try
                        else if cfgcat.StarCatDef[gscf-BaseStar] then FindNumGSCF(id,ra,dec,result)
                        else if cfgcat.StarCatDef[gscc-BaseStar] then FindNumGSCC(id,ra,dec,result) ;
                      end;
-        S_SAO      : begin
+        S_SAO      : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumSAO(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_HD       : begin
+        S_HD       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumHD(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_BD       : begin
+        S_BD       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumBD(id,ra,dec,result) ;
                      end;
-        S_CD       : begin
+        S_CD       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumCD(id,ra,dec,result) ;
                      end;
-        S_CPD      : begin
+        S_CPD      : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumCPD(id,ra,dec,result) ;
                      end;
-        S_HR       : begin
+        S_HR       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumHR(strtointdef(id,0),ra,dec,result) ;
                      end;
-{       S_Comet    : begin
-            FindNumCom(strtointdef(id,0),ra,dec,result);
-            if result and beingfollow then begin
-               FollowOn:=true;
-               FollowType:=2;
-               FollowObj:=strtointdef(id,0);
-            end;
-            end;
-        S_Planet   : begin
-            FindNumPla(strtointdef(id,0),ra,dec,result);
-            if result and beingfollow then begin
-               FollowOn:=true;
-               FollowType:=1;
-               FollowObj:=strtointdef(id,0);
-            end;
-            end;
-        S_Asteroid : begin
-            FindNumAst(strtointdef(id,0),ra,dec,result);
-            if result and beingfollow then begin
-               FollowOn:=true;
-               FollowType:=3;
-               FollowObj:=strtointdef(id,0);
-            end;
-            end;
-        S_Const    : begin
+{        S_Const    : begin
                      FindNumCon(strtointdef(id,0),ra,dec,result);
                      end; }
-        S_Bayer    : begin
+        S_Bayer    : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumBayer(id,ra,dec,result) ;
                      end;
-        S_Flam     : begin
+        S_Flam     : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumFlam(id,ra,dec,result) ;
                      end;
-{       S_U2k      : begin
-                     FindNumU2000(strtointdef(id,0),ra,dec,result);
-                     end;
-        S_Ext      : begin
-                     FindNumExt(id,ra,dec,result) ;
-                     end; }
-        S_SAC      : begin
+        S_SAC      : if IsSACPath(cfgcat.NebCatPath[sac-BaseNeb]) then begin
                      SetSACPath(cfgcat.NebCatPath[sac-BaseNeb]);
                      FindNumSAC(id,ra,dec,result) ;
                      end;
@@ -2048,14 +2026,14 @@ try
         S_NED      : begin
                      FindNumNED(id,ra,dec,result) ;
                      end;}
-        S_WDS      : begin
+        S_WDS      : if IsWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]) then begin
                      SetWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]);
                      FindNumWDS(id,ra,dec,result) ;
                      end;
         S_GCat     : begin
                      FindNGcat(id,ra,dec,result) ;
                      end;
-        S_TYC2     : begin
+        S_TYC2     : if IsTY2Path(cfgcat.StarCatPath[tyc2-BaseStar]) then begin
                      SetTY2Path(cfgcat.StarCatPath[tyc2-BaseStar]);
                      FindNumTYC2(id,ra,dec,result) ;
                      end;
@@ -2068,6 +2046,150 @@ try
 finally
    lockcat:=false;
 end;
+end;
+
+function Tcatalog.SearchNebulae(Num:string; var ar1,de1: double): boolean;
+var buf : string;
+begin
+   if uppercase(copy(Num,1,1))='M' then begin
+      buf:=StringReplace(Num,'m','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_messier,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,3))='NGC' then begin
+      buf:=StringReplace(Num,'ngc','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_NGC,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,2))='IC' then begin
+      buf:=StringReplace(Num,'ic','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_IC,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,3))='PGC' then begin
+      buf:=StringReplace(Num,'pgc','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_PGC,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   result:=FindNum(S_SAC,Num,ar1,de1) ;
+   if result then exit;
+   FindNGcat(Num,ar1,de1,result,rtNeb) ;
+   if result then begin
+      ar1:=deg2rad*15*ar1;
+      de1:=deg2rad*de1;
+      exit;
+   end;
+end;
+
+function Tcatalog.SearchStar(Num:string; var ar1,de1: double): boolean;
+var buf : string;
+begin
+   if uppercase(copy(Num,1,2))='GC' then begin
+      buf:=StringReplace(Num,'gc','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_GC,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,3))='GSC' then begin
+      buf:=StringReplace(Num,'gsc','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_GSC,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,3))='TYC' then begin
+      buf:=StringReplace(Num,'tyc','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_TYC2,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,3))='SAO' then begin
+      buf:=StringReplace(Num,'sao','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_SAO,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,2))='HD' then begin
+      buf:=StringReplace(Num,'hd','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_HD,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,2))='BD' then begin
+      buf:=StringReplace(Num,'bd','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_BD,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,2))='CD' then begin
+      buf:=StringReplace(Num,'cd','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_CD,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,3))='CPD' then begin
+      buf:=StringReplace(Num,'cpd','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_CPD,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,2))='HR' then begin
+      buf:=StringReplace(Num,'hr','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_HR,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   result:=FindNum(S_Bayer,Num,ar1,de1) ;
+   if result then exit;
+   result:=FindNum(S_Flam,Num,ar1,de1) ;
+   if result then exit;
+   FindNGcat(Num,ar1,de1,result,rtStar) ;
+   if result then begin
+      ar1:=deg2rad*15*ar1;
+      de1:=deg2rad*de1;
+      exit;
+   end;
+end;
+
+function Tcatalog.SearchDblStar(Num:string; var ar1,de1: double): boolean;
+begin
+   if fileexists(slash(cfgcat.DblStarCatPath[wds-BaseDbl])+'wds.idx') then begin
+      result:=FindNum(S_WDS,Num,ar1,de1) ;
+      if result then exit;
+   end;
+   FindNGcat(Num,ar1,de1,result,rtDbl) ;
+   if result then begin
+      ar1:=deg2rad*15*ar1;
+      de1:=deg2rad*de1;
+      exit;
+   end;
+end;
+
+function Tcatalog.SearchVarStar(Num:string; var ar1,de1: double): boolean;
+begin
+   if fileexists(slash(cfgcat.VarStarCatPath[gcvs-BaseVar])+'gcvs.idx') then begin
+      result:=FindNum(S_GCVS,Num,ar1,de1) ;
+      if result then exit;
+   end;
+   FindNGcat(Num,ar1,de1,result,rtVar) ;
+   if result then begin
+      ar1:=deg2rad*15*ar1;
+      de1:=deg2rad*de1;
+      exit;
+   end;
+end;
+
+function Tcatalog.SearchLines(Num:string; var ar1,de1: double): boolean;
+begin
+   FindNGcat(Num,ar1,de1,result,rtLin) ;
+   if result then begin
+      ar1:=deg2rad*15*ar1;
+      de1:=deg2rad*de1;
+      exit;
+   end;
+end;
+
+function Tcatalog.SearchConstellation(Num:string; var ar1,de1: double): boolean;
+var i : integer;
+begin
+   result:=false;
+   for i:=0 to cfgshr.ConstelNum-1 do
+     if trim(cfgshr.ConstelName[i,2])=trim(Num) then begin
+        result:=true;
+        ar1:=cfgshr.ConstelPos[i].ra;
+        de1:=cfgshr.ConstelPos[i].de;
+        break;
+     end;
 end;
 
 function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
@@ -2309,21 +2431,21 @@ begin
      txt:=trim(txt);
      if (txt='')or(copy(txt,1,1)=';') then continue;
      p:=pos(';',txt);
-     if p=0 then continue;
+     if p=0 then begin showmessage(txt); continue; end;
      if not isnumber(trim(copy(txt,1,p-1))) then continue;
      cfgshr.ConstelPos[i].ra:=deg2rad*15*strtofloat(trim(copy(txt,1,p-1)));
      delete(txt,1,p);
      p:=pos(';',txt);
-     if p=0 then continue;
+     if p=0 then begin showmessage(txt); continue; end;
      cfgshr.ConstelPos[i].de:=deg2rad*strtofloat(trim(copy(txt,1,p-1)));
      delete(txt,1,p);
      p:=pos(';',txt);
-     if p=0 then continue;
+     if p=0 then begin showmessage(txt); continue; end;
      cfgshr.ConstelName[i,1]:=trim(copy(txt,1,p-1));
      delete(txt,1,p);
      cfgshr.ConstelName[i,2]:=trim(txt);
      inc(i);
-   until eof(f) or (i>=(n-1));
+   until eof(f) or (i>=n);
    cfgshr.ConstelNum := n;
    finally
    closefile(f);

@@ -1764,21 +1764,21 @@ object f_config_display: Tf_config_display
       object labelcolorStar: TShape
         Tag = 1
         Left = 344
-        Top = 88
+        Top = 72
         Width = 17
         Height = 17
         OnMouseUp = labelcolorMouseUp
       end
       object Label236: TLabel
         Left = 40
-        Top = 40
+        Top = 24
         Width = 60
         Height = 13
         Caption = 'Label Object'
       end
       object Label237: TLabel
         Left = 264
-        Top = 40
+        Top = 24
         Width = 65
         Height = 33
         AutoSize = False
@@ -1787,21 +1787,21 @@ object f_config_display: Tf_config_display
       end
       object Label240: TLabel
         Left = 344
-        Top = 40
+        Top = 24
         Width = 26
         Height = 13
         Caption = 'Label'
       end
       object Label252: TLabel
         Left = 344
-        Top = 56
+        Top = 40
         Width = 24
         Height = 13
         Caption = 'Color'
       end
       object Label255: TLabel
         Left = 384
-        Top = 56
+        Top = 40
         Width = 20
         Height = 13
         Caption = 'Size'
@@ -1809,7 +1809,7 @@ object f_config_display: Tf_config_display
       object labelcolorVar: TShape
         Tag = 2
         Left = 344
-        Top = 120
+        Top = 101
         Width = 17
         Height = 17
         OnMouseUp = labelcolorMouseUp
@@ -1817,7 +1817,7 @@ object f_config_display: Tf_config_display
       object labelcolorMult: TShape
         Tag = 3
         Left = 344
-        Top = 152
+        Top = 131
         Width = 17
         Height = 17
         OnMouseUp = labelcolorMouseUp
@@ -1825,7 +1825,7 @@ object f_config_display: Tf_config_display
       object labelcolorNeb: TShape
         Tag = 4
         Left = 344
-        Top = 184
+        Top = 161
         Width = 17
         Height = 17
         OnMouseUp = labelcolorMouseUp
@@ -1833,7 +1833,7 @@ object f_config_display: Tf_config_display
       object labelcolorSol: TShape
         Tag = 5
         Left = 344
-        Top = 216
+        Top = 190
         Width = 17
         Height = 17
         OnMouseUp = labelcolorMouseUp
@@ -1841,7 +1841,7 @@ object f_config_display: Tf_config_display
       object labelcolorMisc: TShape
         Tag = 7
         Left = 344
-        Top = 280
+        Top = 250
         Width = 17
         Height = 17
         OnMouseUp = labelcolorMouseUp
@@ -1849,7 +1849,15 @@ object f_config_display: Tf_config_display
       object labelcolorConst: TShape
         Tag = 6
         Left = 344
-        Top = 248
+        Top = 220
+        Width = 17
+        Height = 17
+        OnMouseUp = labelcolorMouseUp
+      end
+      object labelcolorchartinfo: TShape
+        Tag = 8
+        Left = 344
+        Top = 280
         Width = 17
         Height = 17
         OnMouseUp = labelcolorMouseUp
@@ -1857,7 +1865,7 @@ object f_config_display: Tf_config_display
       object labelsizeStar: TSpinEdit
         Tag = 1
         Left = 384
-        Top = 85
+        Top = 69
         Width = 41
         Height = 22
         MaxValue = 48
@@ -1869,7 +1877,7 @@ object f_config_display: Tf_config_display
       object labelmagStar: TSpinEdit
         Tag = 1
         Left = 264
-        Top = 85
+        Top = 69
         Width = 41
         Height = 22
         MaxValue = 10
@@ -1881,7 +1889,7 @@ object f_config_display: Tf_config_display
       object showlabelStar: TCheckBox
         Tag = 1
         Left = 40
-        Top = 88
+        Top = 72
         Width = 209
         Height = 17
         Caption = 'Stars'
@@ -1891,7 +1899,7 @@ object f_config_display: Tf_config_display
       object labelsizeVar: TSpinEdit
         Tag = 2
         Left = 384
-        Top = 117
+        Top = 98
         Width = 41
         Height = 22
         MaxValue = 48
@@ -1903,7 +1911,7 @@ object f_config_display: Tf_config_display
       object labelmagVar: TSpinEdit
         Tag = 2
         Left = 264
-        Top = 117
+        Top = 98
         Width = 41
         Height = 22
         MaxValue = 10
@@ -1915,7 +1923,7 @@ object f_config_display: Tf_config_display
       object showlabelVar: TCheckBox
         Tag = 2
         Left = 40
-        Top = 120
+        Top = 101
         Width = 209
         Height = 17
         Caption = 'Variable Stars'
@@ -1925,7 +1933,7 @@ object f_config_display: Tf_config_display
       object labelsizeMult: TSpinEdit
         Tag = 3
         Left = 384
-        Top = 149
+        Top = 128
         Width = 41
         Height = 22
         MaxValue = 48
@@ -1937,7 +1945,7 @@ object f_config_display: Tf_config_display
       object LabelmagMult: TSpinEdit
         Tag = 3
         Left = 264
-        Top = 149
+        Top = 128
         Width = 41
         Height = 22
         MaxValue = 10
@@ -1949,7 +1957,7 @@ object f_config_display: Tf_config_display
       object showlabelMult: TCheckBox
         Tag = 3
         Left = 40
-        Top = 152
+        Top = 131
         Width = 209
         Height = 17
         Caption = 'Multiple Stars'
@@ -1959,7 +1967,7 @@ object f_config_display: Tf_config_display
       object labelsizeNeb: TSpinEdit
         Tag = 4
         Left = 384
-        Top = 181
+        Top = 158
         Width = 41
         Height = 22
         MaxValue = 48
@@ -1971,7 +1979,7 @@ object f_config_display: Tf_config_display
       object labelmagNeb: TSpinEdit
         Tag = 4
         Left = 264
-        Top = 181
+        Top = 158
         Width = 41
         Height = 22
         MaxValue = 10
@@ -1983,7 +1991,7 @@ object f_config_display: Tf_config_display
       object showlabelNeb: TCheckBox
         Tag = 4
         Left = 40
-        Top = 184
+        Top = 161
         Width = 209
         Height = 17
         Caption = 'Nebulae'
@@ -1993,7 +2001,7 @@ object f_config_display: Tf_config_display
       object labelsizeSol: TSpinEdit
         Tag = 5
         Left = 384
-        Top = 213
+        Top = 187
         Width = 41
         Height = 22
         MaxValue = 48
@@ -2005,7 +2013,7 @@ object f_config_display: Tf_config_display
       object labelmagSol: TSpinEdit
         Tag = 5
         Left = 264
-        Top = 213
+        Top = 187
         Width = 41
         Height = 22
         MaxValue = 10
@@ -2017,7 +2025,7 @@ object f_config_display: Tf_config_display
       object showlabelSol: TCheckBox
         Tag = 5
         Left = 40
-        Top = 216
+        Top = 190
         Width = 209
         Height = 17
         Caption = 'Solar System'
@@ -2027,7 +2035,7 @@ object f_config_display: Tf_config_display
       object labelsizeMisc: TSpinEdit
         Tag = 7
         Left = 384
-        Top = 277
+        Top = 247
         Width = 41
         Height = 22
         MaxValue = 48
@@ -2039,7 +2047,7 @@ object f_config_display: Tf_config_display
       object showlabelMisc: TCheckBox
         Tag = 7
         Left = 40
-        Top = 280
+        Top = 250
         Width = 209
         Height = 17
         Caption = 'Other labels'
@@ -2049,7 +2057,7 @@ object f_config_display: Tf_config_display
       object showlabelConst: TCheckBox
         Tag = 6
         Left = 40
-        Top = 248
+        Top = 220
         Width = 209
         Height = 17
         Caption = 'Constellation name'
@@ -2059,7 +2067,7 @@ object f_config_display: Tf_config_display
       object labelsizeConst: TSpinEdit
         Tag = 6
         Left = 384
-        Top = 245
+        Top = 217
         Width = 41
         Height = 22
         MaxValue = 48
@@ -2070,7 +2078,7 @@ object f_config_display: Tf_config_display
       end
       object MagLabel: TRadioGroup
         Left = 24
-        Top = 320
+        Top = 304
         Width = 201
         Height = 57
         Caption = 'Star Label'
@@ -2084,7 +2092,7 @@ object f_config_display: Tf_config_display
       end
       object constlabel: TRadioGroup
         Left = 240
-        Top = 320
+        Top = 304
         Width = 201
         Height = 57
         Caption = 'Constellation Label'
@@ -2098,12 +2106,43 @@ object f_config_display: Tf_config_display
       end
       object Showlabelall: TCheckBox
         Left = 40
-        Top = 392
+        Top = 368
         Width = 241
         Height = 17
         Caption = 'Display the labels to the chart'
         TabOrder = 21
         OnClick = ShowlabelallClick
+      end
+      object ShowLabelChartInfo: TCheckBox
+        Tag = 8
+        Left = 40
+        Top = 280
+        Width = 209
+        Height = 17
+        Caption = 'Chart Information'
+        TabOrder = 22
+        OnClick = showlabelClick
+      end
+      object labelsizechartinfo: TSpinEdit
+        Tag = 8
+        Left = 384
+        Top = 277
+        Width = 41
+        Height = 22
+        MaxValue = 48
+        MinValue = 6
+        TabOrder = 23
+        Value = 6
+        OnChange = labelsizeChanged
+      end
+      object ShowChartInfo: TCheckBox
+        Left = 40
+        Top = 400
+        Width = 393
+        Height = 17
+        Caption = 'Display the chart information in the menu bar.'
+        TabOrder = 24
+        OnClick = ShowChartInfoClick
       end
     end
     object t_circle: TTabSheet

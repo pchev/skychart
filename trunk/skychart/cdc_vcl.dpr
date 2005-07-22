@@ -54,7 +54,11 @@ uses
   pr_config_pictures in 'pr_config_pictures.pas' {f_config_pictures: TFrame},
   pr_config_solsys in 'pr_config_solsys.pas' {f_config_solsys: TFrame},
   pr_config_system in 'pr_config_system.pas' {f_config_system: TFrame},
-  cu_database in 'cu_database.pas';
+  cu_database in 'cu_database.pas',
+  pu_position in 'pu_position.pas' {f_position},
+  pu_search in 'pu_search.pas' {f_search},
+  pu_zoom in 'pu_zoom.pas' {f_zoom},
+  pu_getdss in 'pu_getdss.pas' {f_getdss};
 
 {$R *.RES}
 
@@ -62,6 +66,10 @@ begin
   Application.Initialize;
   Application.CreateForm(Tf_main, f_main);
   Application.CreateForm(Tf_about, f_about);
+  Application.CreateForm(Tf_position, f_position);
+  Application.CreateForm(Tf_search, f_search);
+  Application.CreateForm(Tf_zoom, f_zoom);
+  Application.CreateForm(Tf_getdss, f_getdss);
   f_about.ShowTimer:=true; f_about.Show;
   Application.CreateForm(Tf_detail, f_detail);
   Application.CreateForm(Tf_info, f_info);
