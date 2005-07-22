@@ -79,6 +79,7 @@ type
     Fcsc  : conf_skychart;
     Fcplot : conf_plot;
     Fcmain : conf_main;
+    Fcdss : conf_dss;
     astpage,compage,dbpage: integer;
     FApplyConfig: TNotifyEvent;
     FDBChange: TNotifyEvent;
@@ -95,6 +96,7 @@ type
     procedure SetCsc(value: conf_skychart);
     procedure SetCplot(value: conf_plot);
     procedure SetCmain(value: conf_main);
+    procedure SetCdss(value: conf_dss);
     procedure ShowDBSetting(Sender: TObject);
     procedure ShowCometSetting(Sender: TObject);
     procedure ShowAsteroidSetting(Sender: TObject);
@@ -109,6 +111,7 @@ type
     property csc  : conf_skychart read Fcsc write SetCsc;
     property cplot : conf_plot read Fcplot write SetCplot;
     property cmain : conf_main read Fcmain write SetCmain;
+    property cdss : conf_dss read Fcdss write SetCdss;
     property fits : TFits read GetFits write SetFits;
     property catalog : Tcatalog read GetCatalog write SetCatalog;
     property db : Tcdcdb read GetDB write SetDB;

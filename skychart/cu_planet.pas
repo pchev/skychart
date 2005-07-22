@@ -78,6 +78,7 @@ type
      destructor  Destroy; override;
      Procedure ComputePlanet(var cfgsc: conf_skychart);
      Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;var cfgsc: conf_skychart);
+     function  FindPlanetName(planetname: String; var ra,de:double; var cfgsc: conf_skychart):boolean;
      function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; var cfgsc: conf_skychart; var nom,ma,date,desc:string):boolean;
      Procedure EARTH(tjd:double; Pr : Pdouble6 );
      Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp : double);
@@ -1013,6 +1014,17 @@ ar:=cfgsc.Planetlst[0,id,1];
 de:=cfgsc.Planetlst[0,id,2];
 // back to j2000
 precession(cfgsc.JDchart,jd2000,ar,de);
+end;
+
+function TPlanet.FindPlanetName(planetname: String; var ra,de:double; var cfgsc: conf_skychart):boolean;
+var i : integer;
+begin
+   for i:=1 to 30 do begin
+     if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) then begin
+         FindNumPla(i,ra,de,result,cfgsc);
+         break;
+     end;
+   end;
 end;
 
 function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; var cfgsc: conf_skychart; var nom,ma,date,desc:string):boolean;

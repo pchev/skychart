@@ -261,18 +261,21 @@ case cshr.EquinoxType of
      end;
      equinox1.Visible:=true;
      equinox2.Visible:=false;
+     EquinoxLabel.Visible:=true;
     end;
 1 : begin
      cshr.EquinoxChart:=equinox2.text;
      cshr.DefaultJDChart:=jd(trunc(equinox2.Value),trunc(frac(equinox2.Value)*12)+1,0,0);
      equinox1.Visible:=false;
      equinox2.Visible:=true;
+     EquinoxLabel.Visible:=true;
     end;
 2 : begin
      cshr.EquinoxChart:='Date ';
      cshr.DefaultJDChart:=jd2000;
      equinox1.Visible:=false;
      equinox2.Visible:=false;
+     EquinoxLabel.Visible:=false;
     end;
 end;
 end;

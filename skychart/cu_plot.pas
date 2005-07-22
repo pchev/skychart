@@ -108,7 +108,7 @@ type
      Procedure PlotGalaxie(x,y: single; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotLine(x1,y1,x2,y2:single; color,width: integer);
-     Procedure PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg:boolean; bmp:Tbitmap);
+     Procedure PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg, Transparent :boolean; bmp:Tbitmap);
      procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
      procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
@@ -116,6 +116,7 @@ type
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
      function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg:boolean; txt:string):integer;
      procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
+     procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;color:integer;moving:boolean);
      Procedure PlotPolyLine(p:array of Tpoint; color:integer; moving:boolean);
@@ -1152,10 +1153,11 @@ with cnv do begin
 end;
 end;
 
-Procedure TSplot.PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg:boolean; bmp:Tbitmap);
+Procedure TSplot.PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg, Transparent : boolean; bmp:Tbitmap);
 var dsx,dsy,xx,yy : single;
     DestR,SrcR :Trect;
 begin
+if not transparent then BitmapNotZero(bmp);
 BitmapRotation(bmp,imabmp,Rotation,WhiteBg);
 //BitmapRotMask(imamask,imabmp,bmp,Rotation);
 BitmapBlackMask(imamask,imabmp);
@@ -1177,6 +1179,10 @@ end else begin
    dsx:=(bmp.Width*cfgchart.Width/Width)/2;
    dsy:=dsx*cfgchart.height/cfgchart.width;
    SrcR:=Rect(round(xx-dsx),round(yy-dsy),round(xx+dsx),round(yy+dsy));
+   if (flipx>0)and(flipy>0) then DestR:=Rect(0,0,cfgchart.Width,cfgchart.Height)
+     else if (flipx<0)and(flipy<0) then DestR:=Rect(cfgchart.Width,cfgchart.Height,0,0)
+     else if flipx<0 then DestR:=Rect(cfgchart.Width,0,0,cfgchart.Height)
+     else if flipy<0 then DestR:=Rect(0,cfgchart.Height,cfgchart.Width,0);
    imacopy.canvas.copymode:=cmSrcCopy;
    imacopy.Width:=round(2*dsx);
    imacopy.Height:=round(2*dsy);
@@ -1189,12 +1195,9 @@ end else begin
    end;
    imacopy.Canvas.Rectangle(0,0,imacopy.Width,imacopy.Height);
    imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imamask.Canvas,SrcR);
-   if (flipx>0)and(flipy>0) then DestR:=Rect(0,0,cfgchart.Width,cfgchart.Height)
-     else if (flipx<0)and(flipy<0) then DestR:=Rect(cfgchart.Width,cfgchart.Height,0,0)
-     else if flipx<0 then DestR:=Rect(cfgchart.Width,0,0,cfgchart.Height)
-     else if flipy<0 then DestR:=Rect(0,cfgchart.Height,cfgchart.Width,0);
    cnv.copymode:=cmSrcAnd;
    cnv.StretchDraw(DestR,imacopy);
+   cnv.copymode:=cmSrcPaint;
    if WhiteBg then begin
      imacopy.Canvas.Brush.Color:=clWhite;
      imacopy.Canvas.Pen.Color:=clWhite;
@@ -1204,7 +1207,6 @@ end else begin
    end;
    imacopy.Canvas.Rectangle(0,0,imacopy.Width,imacopy.Height);
    imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imabmp.Canvas,SrcR);
-   cnv.copymode:=cmSrcPaint;
    cnv.StretchDraw(DestR,imacopy);
 end;
 end;
@@ -1359,7 +1361,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
       ' -radius 50'+
       ' -geometry 450x450 -output "'+slash(Tempdir)+'planet.jpg'+'"';
  if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,gw);
- i:=exec(cmd);
+ exec(cmd);
  xplanetimg.LoadFromFile(slash(Tempdir)+'planet.jpg');
  {$ifdef linux}
     planetbmp.Assign(xplanetimg);
@@ -1746,6 +1748,33 @@ case Yalign of
  laCenter : yy:=yy-(ts.cy div 2);
 end;
 textout(xx,yy,txt);
+end;
+end;
+
+procedure TSplot.PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string);
+var ls,p:Integer;
+    buf: string;
+begin
+with cnv do begin
+Brush.Color:=cfgplot.backgroundcolor;
+Brush.Style:=bsSolid;
+Pen.Mode:=pmCopy;
+Font.Name:=cfgplot.FontName[fontnum];
+Font.Color:=cfgplot.LabelColor[labelnum];
+Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
+if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
+if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
+ls:=cnv.TextHeight('A');
+repeat
+  p:=pos(crlf,txt);
+  if p=0 then buf:=txt
+    else begin
+      buf:=copy(txt,1,p-1);
+      delete(txt,1,p+1);
+  end;
+  textout(xx,yy,buf);
+  yy:=yy+ls;
+until p=0;
 end;
 end;
 

@@ -24,7 +24,7 @@ interface
 
 uses  u_constant, fu_directory,u_util, cu_fits, cu_database,
   SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
-  QDialogs, QStdCtrls, QComCtrls, QExtCtrls, QButtons;
+  QDialogs, QStdCtrls, QComCtrls, QExtCtrls, QButtons, enhedits;
 
 type
   Tf_config_pictures = class(TFrame)
@@ -62,6 +62,23 @@ type
     Label1: TLabel;
     Label2: TLabel;
     ImageTimer1: TTimer;
+    t_dss: TTabSheet;
+    GroupBox3: TGroupBox;
+    Label72: TLabel;
+    Label73: TLabel;
+    Label74: TLabel;
+    Label75: TLabel;
+    Label77: TLabel;
+    realskydir: TEdit;
+    realskydrive: TEdit;
+    realskyfile: TEdit;
+    RealSkyNorth: TCheckBox;
+    RealSkySouth: TCheckBox;
+    DSS102CD: TCheckBox;
+    usesubsample: TCheckBox;
+    reallist: TCheckBox;
+    realskymax: TLongEdit;
+    realskymb: TLongEdit;
     procedure imgpathChange(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -77,6 +94,15 @@ type
     procedure ImageTimer1Timer(Sender: TObject);
     procedure pa_imagesPageChanging(Sender: TObject; NewPage: TTabSheet;
       var AllowChange: Boolean);
+    procedure RealSkyNorthClick(Sender: TObject);
+    procedure RealSkySouthClick(Sender: TObject);
+    procedure DSS102CDClick(Sender: TObject);
+    procedure realskydirChange(Sender: TObject);
+    procedure realskydriveChange(Sender: TObject);
+    procedure realskyfileChange(Sender: TObject);
+    procedure reallistClick(Sender: TObject);
+    procedure usesubsampleClick(Sender: TObject);
+    procedure realskymaxChange(Sender: TObject);
   private
     { Private declarations }
     FFits: TFits;
@@ -90,11 +116,13 @@ type
     mycshr : conf_shared;
     mycplot : conf_plot;
     mycmain : conf_main;
+    mycdss : conf_dss;
     csc : ^conf_skychart;
     ccat : ^conf_catalog;
     cshr : ^conf_shared;
     cplot : ^conf_plot;
     cmain : ^conf_main;
+    cdss : ^conf_dss;
     constructor Create(AOwner:TComponent); override;
     property Fits: TFits read FFits write FFits;
   end;
@@ -113,6 +141,7 @@ implementation
 {$include i_config_pictures.pas}
 
 // end of common code
+
 
 
 end.

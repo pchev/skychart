@@ -1,6 +1,6 @@
 object f_chart: Tf_chart
-  Left = 271
-  Top = 247
+  Left = 232
+  Top = 308
   Width = 640
   Height = 480
   Caption = 'Chart'
@@ -148,7 +148,6 @@ object f_chart: Tf_chart
       Stretch = True
       OnClick = Image1Click
       OnMouseDown = Image1MouseDown
-      OnMouseEnter = Image1Click
       OnMouseMove = Image1MouseMove
       OnMouseUp = Image1MouseUp
     end

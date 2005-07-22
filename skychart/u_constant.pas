@@ -106,7 +106,7 @@ const cdcversion = 'Version 3 alpha 0.0.8';
       f6='0.000000';
       dateiso='yyyy"-"mm"-"dd"T"hh":"nn":"ss';
       labspacing=10;
-      numlabtype=7;
+      numlabtype=8;
       numfont=7;
       NumLlabel = 106;
       NumSimObject = 13;
@@ -317,8 +317,8 @@ type
                 end;
      conf_skychart = record
                 // chart setting
-                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,nutl,nuto,sunl,sunb,abe,abp : double;
-                Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP : Boolean;
+                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
+                Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP,moved : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
                 FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
@@ -338,7 +338,7 @@ type
                 HorizonMax,rap2000,dep2000,RefractionOffset : Double;
                 WindowRatio,BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta,x2: Double;
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
-                xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy : integer;
+                xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy,wintop,winleft : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
@@ -375,7 +375,7 @@ type
                 FontSize : array [1..numfont] of integer;
                 FontBold : array [1..numfont] of boolean;
                 FontItalic : array [1..numfont] of boolean;
-                LabelColor : array[1..numlabtype] of Tcolor;   // 1=star 2=var 3=mult 4=neb 5=solsys 6=const 7=misc ...
+                LabelColor : array[1..numlabtype] of Tcolor;   // 1=star 2=var 3=mult 4=neb 5=solsys 6=const 7=misc 8=chart info 
                 LabelSize : array[1..numlabtype] of integer;
                 outradius,contrast,saturation:integer;
                 partsize,magsize:single;
@@ -389,10 +389,15 @@ type
                 prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
                 PrinterResolution,PrintMethod,PrintColor,configpage,autorefreshdelay,MaxChildID,dbport : integer;
-                PrintLandscape :boolean;
+                PrintLandscape, ShowChartInfo, SyncChart :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
                 ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath : string;
                 ImageLuminosity, ImageContrast : double;
+                end;
+     conf_dss  = record
+                dssdir,dssdrive,dssfile : string;
+                dss102,dssnorth,dsssouth,dsssampling,dssplateprompt : boolean;
+                dssmaxsize : integer;
                 end;
 
 type

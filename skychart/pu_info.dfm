@@ -33,7 +33,7 @@ object f_info: Tf_info
         Left = 0
         Top = 0
         Width = 432
-        Height = 240
+        Height = 242
         Align = alClient
         ColCount = 1
         DefaultColWidth = 800
@@ -49,9 +49,9 @@ object f_info: Tf_info
       end
       object Panel2: TPanel
         Left = 0
-        Top = 240
+        Top = 242
         Width = 432
-        Height = 27
+        Height = 28
         Align = alBottom
         TabOrder = 1
         object Button2: TButton
@@ -86,11 +86,15 @@ object f_info: Tf_info
         Height = 27
         Align = alBottom
         TabOrder = 0
+        DesignSize = (
+          432
+          27)
         object Button3: TButton
           Left = 94
           Top = 1
           Width = 75
           Height = 25
+          Anchors = [akTop, akRight]
           Caption = 'Search'
           TabOrder = 0
           OnClick = Button3Click
@@ -100,6 +104,7 @@ object f_info: Tf_info
           Top = 3
           Width = 85
           Height = 21
+          Anchors = [akTop, akRight]
           TabOrder = 1
           OnKeyUp = Edit1KeyUp
         end
@@ -108,6 +113,7 @@ object f_info: Tf_info
           Top = 1
           Width = 75
           Height = 25
+          Anchors = [akTop, akRight]
           Caption = 'Sort by RA'
           TabOrder = 2
           OnClick = Button5Click
@@ -117,6 +123,7 @@ object f_info: Tf_info
           Top = 1
           Width = 75
           Height = 25
+          Anchors = [akTop, akRight]
           Caption = 'Print'
           TabOrder = 3
           OnClick = Button6Click
@@ -126,6 +133,7 @@ object f_info: Tf_info
           Top = 0
           Width = 75
           Height = 25
+          Anchors = [akTop, akRight]
           Caption = 'Save'
           TabOrder = 4
           OnClick = Button7Click
@@ -172,7 +180,7 @@ object f_info: Tf_info
       440
       27)
     object Button1: TButton
-      Left = 260
+      Left = 272
       Top = 1
       Width = 75
       Height = 25
@@ -183,9 +191,9 @@ object f_info: Tf_info
       OnClick = Button1Click
     end
     object Button4: TButton
-      Left = 348
+      Left = 360
       Top = 0
-      Width = 75
+      Width = 76
       Height = 25
       Anchors = [akTop, akRight]
       Caption = 'Help'

@@ -145,6 +145,7 @@ type
     FShowInfo : Tshowinfo;
     FShowCoord: Tstr1func;
     FListInfo: Tstr1func;
+    FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove : integer;
     LockWheel,MovingCircle : boolean;
@@ -192,7 +193,6 @@ type
     Procedure ZoomBox(action,x,y:integer);
     Procedure TrackCursor(X,Y : integer);
     Procedure ZoomCursor(yy : double);
-    function  GetChartInfo:string;
     procedure SetField(field : double);
     procedure SetZenit(field : double; redraw:boolean=true);
     procedure SetAz(Az : double; redraw:boolean=true);
@@ -236,6 +236,7 @@ type
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
     property OnListInfo: Tstr1func read FListInfo write FListInfo;
+    property OnChartMove: TnotifyEvent read FChartMove write FChartMove;
   end;
 
 

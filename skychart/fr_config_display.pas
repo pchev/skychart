@@ -243,6 +243,10 @@ type
     Shape34: TShape;
     DefNebColorButton: TButton;
     showlabelall: TCheckBox;
+    showlabelChartInfo: TCheckBox;
+    labelcolorChartInfo: TShape;
+    labelsizeChartInfo: TSpinEdit;
+    ShowChartInfo: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
@@ -296,6 +300,7 @@ type
     procedure NebBrightBarChange(Sender: TObject);
     procedure DefNebColorButtonClick(Sender: TObject);
     procedure showlabelallClick(Sender: TObject);
+    procedure ShowChartInfoClick(Sender: TObject);
   private
     { Private declarations }
     procedure ShowDisplay;

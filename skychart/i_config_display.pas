@@ -155,6 +155,7 @@ begin
  labelcolorSol.brush.color:=cplot.labelcolor[5];
  labelcolorConst.brush.color:=cplot.labelcolor[6];
  labelcolorMisc.brush.color:=cplot.labelcolor[7];
+ labelcolorChartInfo.brush.color:=cplot.labelcolor[8];
 end;
 
 procedure Tf_config_display.showlabel;
@@ -166,6 +167,7 @@ begin
  showlabelSol.checked:=csc.showlabel[5];
  showlabelConst.checked:=csc.showlabel[6];
  showlabelMisc.checked:=csc.showlabel[7];
+ showlabelChartInfo.checked:=csc.showlabel[8];
  labelmagStar.value:=round(csc.labelmagdiff[1]);
  labelmagVar.value:=round(csc.labelmagdiff[2]);
  labelmagMult.value:=round(csc.labelmagdiff[3]);
@@ -178,12 +180,14 @@ begin
  labelsizeSol.value:=cplot.labelsize[5];
  labelsizeConst.value:=cplot.labelsize[6];
  labelsizeMisc.value:=cplot.labelsize[7];
+ labelsizeChartInfo.value:=cplot.labelsize[8];
  showlabelcolor;
  if csc.MagLabel then MagLabel.ItemIndex:=1
                  else MagLabel.itemindex:=0;
  if csc.ConstFullLabel then constlabel.ItemIndex:=0
                        else constlabel.ItemIndex:=1;
  Showlabelall.checked:=csc.Showlabelall;
+ ShowChartInfo.checked:=cmain.ShowChartInfo;
 end;
 
 procedure Tf_config_display.ShowCircle;
@@ -582,6 +586,11 @@ end;
 procedure Tf_config_display.showlabelallClick(Sender: TObject);
 begin
 csc.Showlabelall:=Showlabelall.checked;
+end;
+
+procedure Tf_config_display.ShowChartInfoClick(Sender: TObject);
+begin
+cmain.ShowChartInfo:=ShowChartInfo.checked;
 end;
 
 {$ifdef mswindows}
