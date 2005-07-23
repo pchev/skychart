@@ -287,6 +287,8 @@ end;
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
 var cfgs :conf_skychart;
     cfgp : conf_plot;
+    nam: string;
+    p: integer;
 begin
 if Opendialog.InitialDir='' then Opendialog.InitialDir:=privatedir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
@@ -294,7 +296,10 @@ OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
     cfgp:=def_cfgplot;
     cfgs:=def_cfgsc;
     ReadChartConfig(OpenDialog.FileName,true,cfgp,cfgs);
-    CreateMDIChild(GetUniqueName(stringreplace(extractfilename(OpenDialog.FileName),' ','_',[rfReplaceAll]),false) ,false,cfgs,cfgp);
+    nam:=stringreplace(extractfilename(OpenDialog.FileName),' ','_',[rfReplaceAll]);
+    p:=pos('.',nam);
+    if p>0 then nam:=copy(nam,1,p-1);
+    CreateMDIChild(GetUniqueName(nam,false) ,false,cfgs,cfgp);
   end;
 end;
 

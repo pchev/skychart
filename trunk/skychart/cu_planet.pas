@@ -1043,9 +1043,9 @@ desc:='';tar:=1;tde:=1;jdt:=0;
 repeat
   inc(CurrentPlanet);
   if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc.SimObject[CurrentPlanet]) then continue;
-  if CurrentPlanet=3 then inc(CurrentPlanet);    // skip Earth
-  if CurrentPlanet=31 then inc(CurrentPlanet);   // skip Saturn ring
-  if (CurrentPlanet=32)and not cfgsc.showearthshadow then inc(CurrentPlanet);
+  if CurrentPlanet=3 then continue;    // skip Earth
+  if CurrentPlanet=31 then continue;   // skip Saturn ring
+  if (CurrentPlanet=32)and not cfgsc.showearthshadow then continue;
   if CurrentPlanet>32 then begin;
      inc(CurrentStep);
      if nextobj or (CurrentStep>cfgsc.SimNb) then
@@ -1086,7 +1086,8 @@ if result then begin
   jd0:=jd(yy,mm,dd,0);
   st0:=SidTim(jd0,hh-cfgsc.TimeZone,cfgsc.ObsLongitude);
 end;
-if result and (currentplanet<=11) then begin
+//if result and (currentplanet<=11) then begin
+if result then begin
   cfgsc.TrackType:=1;
   cfgsc.TrackObj:=CurrentPlanet;
   cfgsc.TrackName:=trim(pla[CurrentPlanet]);

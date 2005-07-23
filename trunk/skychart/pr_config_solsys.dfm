@@ -9,7 +9,7 @@ object f_config_solsys: Tf_config_solsys
     Top = 0
     Width = 490
     Height = 443
-    ActivePage = t_planet
+    ActivePage = t_comet
     Align = alClient
     TabOrder = 0
     object t_solsys: TTabSheet
@@ -391,7 +391,7 @@ object f_config_solsys: Tf_config_solsys
               ItemIndex = 1
               Items.Strings = (
                 'Display as a symbol'
-                'Proportional to the magnitude ')
+                'Proportional to the tail length')
               ParentColor = False
               TabOrder = 3
               OnClick = comsymbolClick
@@ -534,7 +534,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
             end
             object DelCom: TButton
@@ -1116,7 +1116,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
             end
             object delast: TButton

@@ -1599,8 +1599,11 @@ end;
 end;
 
 Procedure TSplot.PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
-var ds,xx,yy,cxx,cyy:integer;
-    dx,dy,a,r : double;
+var ds,ds1,xx,yy,cxx,cyy,i,j,co:integer;
+    cp1,cp2: array[0..3] of TPoint;
+    cr,cg,cb: byte;
+    Col: Tcolor;
+    dx,dy,a,r,k : double;
 begin
 xx:=round(x);
 yy:=round(y);
@@ -1614,7 +1617,7 @@ with cnv do begin
    Brush.style:=bsSolid;
    dx:=cxx-xx;
    dy:=cyy-yy;
-   if (symbol=1)and(dx=0)and(dy=0) then symbol:=0;  // force symbol if no tail
+   if (symbol=1)and(cfgplot.nebplot=0) then symbol:=2;
    case symbol of
    0: begin
         ds:=2*cfgchart.drawpen;
@@ -1628,6 +1631,63 @@ with cnv do begin
         lineto(xx-4*ds,yy-2*ds);
       end;
    1: begin
+        r:=sqrt(dx*dx+dy*dy);
+        r:=maxvalue([r,12*cfgchart.drawpen]);
+        a:=arctan2(dy,dx);
+        if ma<5 then k:=1
+        else if ma>18 then k:=0.5
+        else k:=1-(ma-5)*0.0385;
+        cr:=round(k*(cfgplot.Color[21] and $FF));
+        cg:=round(k*((cfgplot.Color[21] shr 8) and $FF));
+        cb:=round(k*((cfgplot.Color[21] shr 16) and $FF));
+        pen.Mode:=pmCopy;
+        brush.Style:=bsSolid;
+        ds:=round(maxvalue([PixScale*diam/2,2*cfgchart.drawpen]));
+        for i:=19 downto 0 do begin
+          co:=max(0,255-i*10);
+          Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
+          Col:=Addcolor(Col,cfgplot.backgroundcolor);
+          pen.Color:=Col;
+          brush.Color:=Col;
+          ds1:=round((i+1)*ds/20);
+          Ellipse(xx-ds1,yy-ds1,xx+ds1,yy+ds1);
+        end;
+        if (dx<>0)or(dy<>0) then for i:=0 to 9 do begin
+         cp1[2].X:=xx;
+         cp1[2].Y:=yy;
+         cp1[3].X:=xx;
+         cp1[3].Y:=yy;
+         cp2:=cp1;
+         r:=0.99*r;
+         for j:=0 to 19 do begin
+          co:=max(0,255-i*14-j*10);
+          Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
+          Col:=Addcolor(Col,cfgplot.backgroundcolor);
+          pen.Color:=Col;
+          brush.Color:=Col;
+          cp1[0].X:=cp1[3].X;
+          cp1[0].Y:=cp1[3].Y;
+          cp1[1].X:=cp1[2].X;
+          cp1[1].Y:=cp1[2].Y;
+          cp1[2].X:=xx+round((j+1)*r/20*cos(a+0.015*(i)));
+          cp1[2].Y:=yy+round((j+1)*r/20*sin(a+0.015*(i)));
+          cp1[3].X:=xx+round((j+1)*0.99*r/20*cos(a+0.015*(i+1)));
+          cp1[3].Y:=yy+round((j+1)*0.99*r/20*sin(a+0.015*(i+1)));
+          polygon(cp1);
+          cp2[0].X:=cp2[3].X;
+          cp2[0].Y:=cp2[3].Y;
+          cp2[1].X:=cp2[2].X;
+          cp2[1].Y:=cp2[2].Y;
+          cp2[2].X:=xx+round((j+1)*r/20*cos(a-0.015*(i)));
+          cp2[2].Y:=yy+round((j+1)*r/20*sin(a-0.015*(i)));
+          cp2[3].X:=xx+round((j+1)*0.99*r/20*cos(a-0.015*(i+1)));
+          cp2[3].Y:=yy+round((j+1)*0.99*r/20*sin(a-0.015*(i+1)));
+          polygon(cp2);
+         end;
+        end;
+        PlotStar(xx,yy,ma,1021);
+      end;
+   2: begin
         ds:=round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen/2);
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
         ds:=round(maxvalue([PixScale*diam/2,2*cfgchart.drawpen]));
@@ -1735,6 +1795,7 @@ Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Font.Name:=cfgplot.FontName[fontnum];
 Font.Color:=color;
+if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
 Font.Size:=cfgplot.FontSize[fontnum]*cfgchart.fontscale;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
 if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
@@ -1761,6 +1822,7 @@ Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Font.Name:=cfgplot.FontName[fontnum];
 Font.Color:=cfgplot.LabelColor[labelnum];
+if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
 Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
 if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
