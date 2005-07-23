@@ -19,13 +19,13 @@ object f_chart: Tf_chart
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  PixelsPerInch = 120
-  TextHeight = 16
+  PixelsPerInch = 96
+  TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 362
-    Height = 191
+    Height = 190
     Align = alClient
     BevelOuter = bvNone
     Color = clBlack
@@ -34,7 +34,7 @@ object f_chart: Tf_chart
       Left = 0
       Top = 0
       Width = 362
-      Height = 191
+      Height = 190
       Align = alClient
       AutoSize = True
       PopupMenu = PopupMenu1
@@ -45,15 +45,15 @@ object f_chart: Tf_chart
       OnMouseUp = Image1MouseUp
     end
     object identlabel: TLabel
-      Left = 118
-      Top = 148
-      Width = 59
-      Height = 16
+      Left = 96
+      Top = 120
+      Width = 45
+      Height = 13
       Cursor = crHandPoint
       Caption = 'identlabel'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
-      Font.Height = -15
+      Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False

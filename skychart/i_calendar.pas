@@ -1562,6 +1562,7 @@ var id,nam,elem_id : string;
     hr1,ht1,hs1,hr2,ht2,hs2 : double;
     ra1,dec1,ra2,dec2,ra3,dec3: double;
 begin
+if ComboBox1.itemindex<0 then exit;
 screen.cursor:=crHourGlass;
 try
 cjd:=(date1.JD+date2.JD)/2;

@@ -38,8 +38,8 @@ const MaxColor = 32;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid
      TSkycolor = array[1..7]of Tcolor;
 
-const cdcversion = 'Version 3 alpha 0.0.8';
-      cdcver     = '3.0.0.8';
+const cdcversion = 'Version 3 alpha 0.0.9';
+      cdcver     = '3.0.0.9';
       MaxSim = 100 ;
       MaxComet = 200;
       MaxAsteroid = 500;
@@ -71,7 +71,7 @@ const cdcversion = 'Version 3 alpha 0.0.8';
       DefaultPrtRes = 300;
       encryptpwd = 'zh6Tiq4h;90uA3.ert';
       //                          0         1                                       5                                                 10                                                15                                                20                                                25                                                30                  32
-      DfColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00008000,clYellow, clAqua,   $00202020,clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
+      DfColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00008000,clYellow, $00FFC000,$00202020,clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
       DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
       DfRedColor : Starcolarray =(clBlack,  $00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,clYellow, $000000A0,$00000020,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
       DfWBColor : Starcolarray = (clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack);

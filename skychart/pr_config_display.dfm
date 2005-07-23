@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_labels
+    ActivePage = t_color
     Align = alClient
     TabOrder = 0
     object t_display: TTabSheet

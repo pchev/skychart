@@ -177,14 +177,13 @@ try
   InitObservatory;
   InitTime;
   InitChart;
-  InitCoordinates;
+  InitCoordinates; // now include ComputePlanet
   if cfgsc.quick then begin
      Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]-3;
      Fcatalog.cfgshr.StarFilter:=true;
      Fcatalog.cfgshr.AutoStarFilter:=false;
   end else begin
      InitLabels;
-     Fplanet.ComputePlanet(cfgsc);
   end;
   InitColor; // after ComputePlanet
   // draw objects
@@ -195,6 +194,7 @@ try
     DrawMilkyWay; // most extended first
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque) then DrawHorizon;
+    DrawComet;
     if cfgsc.shownebulae or cfgsc.ShowImages then DrawNebulae;
     if cfgsc.ShowBackgroundImage then DrawNebImages;
     if cfgsc.showline then DrawOutline;
@@ -217,7 +217,6 @@ try
   // finally the planets
   if not cfgsc.quick then begin
     DrawAsteroid;
-    DrawComet;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanet then DrawPlanet;
@@ -477,28 +476,15 @@ fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
 PrecessionEcl(jd2000,cfgsc.JdChart,cfgsc.sunl,cfgsc.sunb);
 // aberration constant
 aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
+// Planet position
+if not cfgsc.quick then Fplanet.ComputePlanet(cfgsc);
 // is the chart to be centered on an object ?
  if cfgsc.TrackOn then begin
   case cfgsc.TrackType of
      1 : begin
          // planet
-         case cfgsc.Trackobj of
-         1..9 : fplanet.Planet(cfgsc.TrackObj,cfgsc.CurJd,a,d,dist,v1,v2,v3,v4,v5);
-         10   : fplanet.Sun(cfgsc.CurJd,a,d,dist,v1);
-         11   : fplanet.Moon(cfgsc.CurJd,a,d,dist,v1,v2,v3,v4);
-         32   : begin
-                fplanet.Sun(cfgsc.CurJd,a,d,v1,v2);
-                fplanet.Moon(cfgsc.CurJd,v1,v2,dist,v3,v4,v5,v6);
-                a:=rmod(a+pi,pi2);
-                d:=-d;
-                end;
-         end;
-         precession(jd2000,cfgsc.JDChart,a,d);
-         cfgsc.LastJDChart:=cfgsc.JDChart;
-         if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
-         if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
-         cfgsc.racentre:=a;
-         cfgsc.decentre:=d;
+         cfgsc.racentre:=cfgsc.PlanetLst[0,cfgsc.Trackobj,1];
+         cfgsc.decentre:=cfgsc.PlanetLst[0,cfgsc.Trackobj,2];
          end;
      2 : begin
          // comet
@@ -1077,7 +1063,7 @@ function Tskychart.DrawComet :boolean;
 var
   x1,y1: Double;
   xx,yy,cxx,cyy:single;
-  i,j,lid: integer;
+  i,j,lid,sz : integer;
 begin
 if cfgsc.ShowComet then begin
   Fplanet.ComputeComet(cfgsc);
@@ -1088,7 +1074,8 @@ if cfgsc.ShowComet then begin
       WindowXY(x1,y1,xx,yy,cfgsc);
       if (j=0)and(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5]) then begin
          lid:=GetId(cfgsc.CometName[j,i,1]);
-         SetLabel(lid,xx,yy,0,2,5,cfgsc.CometName[j,i,2]);
+         sz:=round(abs(cfgsc.BxGlb)*deg2rad/60*cfgsc.CometLst[j,i,4]/2);
+         SetLabel(lid,xx,yy,sz,2,5,cfgsc.CometName[j,i,2]);
       end;
       projection(cfgsc.CometLst[j,i,5],cfgsc.CometLst[j,i,6],x1,y1,true,cfgsc);
       WindowXY(x1,y1,cxx,cyy,cfgsc);

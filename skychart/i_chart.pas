@@ -258,7 +258,7 @@ try
     sc.plot.destcnv:=Printer.canvas;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 75]);
-    sc.plot.cfgchart.fontscale:=1;
+    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawpen;
     sc.plot.init(Printer.pagewidth,Printer.pageheight);
     sc.Refresh;
     Printer.EndDoc;
