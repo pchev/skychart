@@ -1,0 +1,12 @@
+To make the red button:
+
+ImageList1 export -> imagelist.bmp
+copy imagelist.bmp to imagelist_red.bmp
+
+Open in an image editor
+- Convert to gray level
+- revert to negative
+- luminosity +30
+- color function: dye 5 saturation 200
+
+save and import to ImageList2
