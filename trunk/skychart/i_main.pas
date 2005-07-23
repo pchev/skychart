@@ -231,17 +231,30 @@ for i:=0 to MDIChildCount-1 do
 end;
 
 procedure Tf_main.SyncChild;
-var i: integer;
-    ra,de,jda: double;
+var i,y,m,d: integer;
+    ra,de,jda,t,tz: double;
+    st: boolean;
 begin
 if ActiveMDIChild is Tf_chart then begin
  ra:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.racentre;
  de:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.decentre;
  jda:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.jdchart;
+ y:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.curyear;
+ m:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.curmonth;
+ d:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.curday;
+ t:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.curtime;
+ tz:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.ObsTZ;
+ st:=(f_main.ActiveMDIChild as Tf_chart).sc.cfgsc.UseSystemTime;
  for i:=0 to MDIChildCount-1 do
   if (MDIChildren[i] is Tf_chart) and (MDIChildren[i]<>ActiveMDIChild) then
      with MDIChildren[i] as Tf_chart do begin
       precession(jda,sc.cfgsc.jdchart,ra,de);
+      sc.cfgsc.UseSystemTime:=st;
+      sc.cfgsc.curyear:=y;
+      sc.cfgsc.curmonth:=m;
+      sc.cfgsc.curday:=d;
+      sc.cfgsc.curtime:=t;
+      sc.cfgsc.ObsTZ:=tz;
       sc.cfgsc.TrackOn:=false;
       sc.cfgsc.racentre:=ra;
       sc.cfgsc.decentre:=de;
@@ -295,7 +308,7 @@ OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
   if OpenDialog.Execute then begin
     cfgp:=def_cfgplot;
     cfgs:=def_cfgsc;
-    ReadChartConfig(OpenDialog.FileName,true,cfgp,cfgs);
+    ReadChartConfig(OpenDialog.FileName,true,false,cfgp,cfgs);
     nam:=stringreplace(extractfilename(OpenDialog.FileName),' ','_',[rfReplaceAll]);
     p:=pos('.',nam);
     if p>0 then nam:=copy(nam,1,p-1);
@@ -471,7 +484,7 @@ try
     for i:=1 to InitialChartNum-1 do begin
       cfgp:=def_cfgplot;
       cfgs:=def_cfgsc;
-      ReadChartConfig(configfile+inttostr(i),true,cfgp,cfgs);
+      ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
       CreateMDIChild(GetUniqueName('Chart_',true) ,false,cfgs,cfgp);
     end;
 except
@@ -841,7 +854,7 @@ procedure Tf_main.SyncChartExecute(Sender: TObject);
 begin
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
    cfgm.SyncChart:=not cfgm.SyncChart;
-   if cfgm.SyncChart then Refresh;
+   if cfgm.SyncChart then SyncChild;
 end;
 end;
 
@@ -1745,11 +1758,11 @@ end;
 procedure Tf_main.ReadDefault;
 begin
 ReadPrivateConfig(configfile);
-ReadChartConfig(configfile,true,def_cfgplot,def_cfgsc);
+ReadChartConfig(configfile,true,true,def_cfgplot,def_cfgsc);
 if config_version<cdcver then UpdateConfig;
 end;
 
-procedure Tf_main.ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
+procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:conf_plot ;var csc:conf_skychart);
 var i:integer;
     inif: TMemIniFile;
     section,buf : string;
@@ -1758,13 +1771,15 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
-f_main.Top := ReadInteger(section,'WinTop',f_main.Top);
-f_main.Left := ReadInteger(section,'WinLeft',f_main.Left);
-f_main.Width := ReadInteger(section,'WinWidth',f_main.Width);
-f_main.Height := ReadInteger(section,'WinHeight',f_main.Height);
-if f_main.Width>screen.Width then f_main.Width:=screen.Width;
-if f_main.Height>(screen.Height-25) then f_main.Height:=screen.Height-25;
-formpos(f_main,f_main.Left,f_main.Top);
+if resizemain then begin
+  f_main.Top := ReadInteger(section,'WinTop',f_main.Top);
+  f_main.Left := ReadInteger(section,'WinLeft',f_main.Left);
+  f_main.Width := ReadInteger(section,'WinWidth',f_main.Width);
+  f_main.Height := ReadInteger(section,'WinHeight',f_main.Height);
+  if f_main.Width>screen.Width then f_main.Width:=screen.Width;
+  if f_main.Height>(screen.Height-25) then f_main.Height:=screen.Height-25;
+  formpos(f_main,f_main.Left,f_main.Top);
+end;
 for i:=0 to MaxField do catalog.cfgshr.FieldNum[i]:=ReadFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
 section:='font';
 for i:=1 to numfont do begin

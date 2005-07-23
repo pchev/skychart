@@ -484,7 +484,7 @@ type
     TCPDaemon: TTCPDaemon;
     Config_Version : string;
     procedure Init;
-    procedure ReadChartConfig(filename:string; usecatalog:boolean; var cplot:conf_plot ;var csc:conf_skychart);
+    procedure ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:conf_plot ;var csc:conf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
     procedure UpdateConfig;
