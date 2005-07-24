@@ -26,7 +26,7 @@ interface
 
 uses passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
      {$ifdef linux}
-        QForms, QStdctrls, QComCtrls,
+        QForms, QStdctrls, QComCtrls,    Qdialogs,
      {$endif}
      {$ifdef mswindows}
         Forms, Stdctrls, ComCtrls,
@@ -206,7 +206,7 @@ try
      ok:=false;
      result:=result+crlf+trim(db.ErrorMessage);
   end;
-  db.Query(flushtable[dbtype]);
+  db.flush('tables');
 except
 end;
 end;
@@ -297,7 +297,7 @@ if db.Active then begin
   assignfile(f,comfile);
   reset(f);
   db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_com_elem WRITE, cdc_ast_com_list WRITE, cdc_com_name WRITE');
+  db.LockTables('cdc_com_elem WRITE, cdc_ast_com_list WRITE, cdc_com_name WRITE');
   nl:=0;
   repeat
     readln(f,buf);
@@ -364,9 +364,9 @@ end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then MemoCom.lines.add(buf);
 end;
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.commit;
-  db.Query(flushtable[DBtype]);
+  db.flush('tables');
 except
 end;
 end;
@@ -382,7 +382,7 @@ if trim(elem_id)='' then exit;
 try
 if db.Active then begin
   db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_com_elem WRITE, cdc_com_elem_list WRITE');
+  db.LockTables('cdc_com_elem WRITE, cdc_com_elem_list WRITE');
   memocom.lines.add('Delete from element table...');
   application.processmessages;
   if not db.Query('Delete from cdc_com_elem where elem_id='+elem_id) then
@@ -391,9 +391,9 @@ if db.Active then begin
   application.processmessages;
   if not db.Query('Delete from cdc_com_elem_list where elem_id='+elem_id) then
      memocom.lines.add('Failed : '+trim(db.ErrorMessage));
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.commit;
-  db.Query(flushtable[DBtype]);
+  db.flush('tables');
   memocom.lines.add('Delete daily data');
   TruncateDailyComet;
   if DBtype=sqlite then db.Query('VACUUM');
@@ -408,17 +408,17 @@ begin
 memocom.clear;
 try
 if db.Active then begin
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.starttransaction;
   memocom.lines.add('Delete from element table...');
   application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_com_elem');
+  db.TruncateTable('cdc_com_elem');
   memocom.lines.add('Delete from element list...');
   application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_com_elem_list');
+  db.TruncateTable('cdc_com_elem_list');
   memocom.lines.add('Delete from name list...');
   application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_com_name');
+  db.TruncateTable('cdc_com_name');
   db.commit;
   memocom.lines.add('Delete daily data');
   TruncateDailyComet;
@@ -494,7 +494,7 @@ end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then result:=buf;
 end;
-db.Query(flushtable[DBtype]);
+db.flush('tables');
 except
 end;
 end;
@@ -538,7 +538,7 @@ if db.Active then begin
   memoast.lines.add('Data start on line '+inttostr(nl+1));
   prefl:=nl;
   db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_name WRITE');
+  db.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_name WRITE');
   nerr:=0;
   nl:=0;
   repeat
@@ -615,9 +615,9 @@ end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then memoast.lines.add(buf);
 end;
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.commit;
-  db.Query(flushtable[DBtype]);
+  db.flush('tables');
 result:=(nerr=0);
 except
 end;
@@ -634,7 +634,7 @@ if trim(elem_id)='' then exit;
 try
 if db.Active then begin
   db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_mag WRITE');
+  db.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_mag WRITE');
   memoast.lines.add('Delete from element table...');
   application.processmessages;
   if not db.Query('Delete from cdc_ast_elem where elem_id='+elem_id) then
@@ -647,9 +647,9 @@ if db.Active then begin
   application.processmessages;
   if not db.Query('Delete from cdc_ast_mag where elem_id='+elem_id) then
      memoast.lines.add('Failed : '+trim(db.ErrorMessage));
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.commit;
-  db.Query(flushtable[DBtype]);
+  db.flush('tables');
   memoast.lines.add('Delete daily data');
   TruncateDailyAsteroid;
   if DBtype=sqlite then db.Query('VACUUM');
@@ -671,15 +671,15 @@ jds:=formatfloat(f1,jd(y,m,1,0));
 try
 if db.Active then begin
   db.starttransaction;
-  if DBtype=mysql then db.Query('LOCK TABLES cdc_ast_mag WRITE');
+  db.LockTables('cdc_ast_mag WRITE');
   memoast.lines.add('Delete from monthly table for jd<'+jds);
   application.processmessages;
   if not db.Query('Delete from cdc_ast_mag where jd<'+jds) then
      memoast.lines.add('Failed : '+trim(db.ErrorMessage));
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.commit;
-  db.Query(flushtable[DBtype]);
-  if DBtype=sqlite then db.Query('VACUUM');
+  db.flush('tables');
+  db.Vaccum;
   memoast.lines.add('Delete completed');
 end;
 except
@@ -691,20 +691,20 @@ begin
 memoast.clear;
 try
 if db.Active then begin
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.starttransaction;
   memoast.lines.add('Delete from element table...');
   application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_ast_elem');
+  db.TruncateTable('cdc_ast_elem');
   memoast.lines.add('Delete from element list...');
   application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_ast_elem_list');
+  db.TruncateTable('cdc_ast_elem_list');
   memoast.lines.add('Delete from name list...');
   application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_ast_name');
+  db.TruncateTable('cdc_ast_name');
   memoast.lines.add('Delete from monthly table...');
   application.processmessages;
-  db.Query(truncatetable[DBtype]+' cdc_ast_mag');
+  db.TruncateTable('cdc_ast_mag');
   db.commit;
   memoast.lines.add('Delete daily data');
   TruncateDailyAsteroid;
@@ -769,7 +769,7 @@ end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then result:=buf;
 end;
-db.Query(flushtable[DBtype]);
+db.flush('tables');
 except
 end;
 end;
@@ -780,7 +780,7 @@ var i,j:integer;
 begin
 dailytable:=Tstringlist.create;
 try
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.Query(showtable[DBtype]+' "cdc_ast_day_%"');
   i:=0;
   while i<db.Rowcount do begin
@@ -790,7 +790,7 @@ try
   j:=0;
   db.StartTransaction;
   while j<dailytable.Count do begin
-     db.Query(truncatetable[DBtype]+' '+dailytable[j]);
+     db.TruncateTable(dailytable[j]);
      inc(j);
   end;
   db.Commit;
@@ -805,7 +805,7 @@ var i,j:integer;
 begin
 dailytable:=Tstringlist.create;
 try
-  if DBtype=mysql then db.Query('UNLOCK TABLES');
+  db.UnLockTables;
   db.Query(showtable[DBtype]+' "cdc_com_day_%"');
   i:=0;
   while i<db.Rowcount do begin
@@ -815,7 +815,7 @@ try
   j:=0;
   db.StartTransaction;
   while j<dailytable.Count do begin
-     db.Query(truncatetable[DBtype]+' '+dailytable[j]);
+     db.TruncateTable(dailytable[j]);
      inc(j);
   end;
   db.Commit;
@@ -1079,9 +1079,9 @@ try
 if db.Active then begin
 ProgressCat.caption:='';
 ProgressBar.position:=0;
-if DBtype=mysql then db.Query('UNLOCK TABLES');
+db.UnLockTables;
 db.starttransaction;
-db.Query(truncatetable[DBtype]+' cdc_fits');
+db.TruncateTable('cdc_fits');
 db.commit;
 j:=findfirst(slash(ImagePath)+'*',faDirectory,c);
 while j=0 do begin
@@ -1150,7 +1150,7 @@ while j=0 do begin
   end;
   j:=findnext(c);
 end;
-db.Query(flushtable[DBtype]);
+db.flush('tables');
 end;
 finally
   findclose(c);

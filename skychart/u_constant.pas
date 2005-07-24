@@ -618,14 +618,6 @@ const
                 'show tables like',
                 'select name from sqlite_master where type="table" and name like'
                 );
-    flushtable : array[mysql..sqlite] of string =(
-                'flush tables',
-                ' '
-                );
-    truncatetable : array[mysql..sqlite] of string =(
-                'Truncate table',
-                'delete from'
-                );
     defaultSqliteDB='database/cdc.db';
     defaultMysqlDB='cdc';            
 var DBtype: TDBtype = sqlite;
