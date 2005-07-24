@@ -1556,11 +1556,11 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
             +' and a.epoch=b.epoch';
         db1.CallBackOnly:=true;
         db1.OnFetchRow:=NewAstDayCallback;
-        if DBtype=mysql then db2.Query('UNLOCK TABLES');
+        db2.UnLockTables;
         db2.StartTransaction;
-        db2.Query(truncatetable[DBtype]+' '+cfgsc.ast_day);
-        db2.Query(truncatetable[DBtype]+' '+cfgsc.ast_daypos);
-        if DBtype=mysql then db2.Query('LOCK TABLES '+cfgsc.ast_day+' WRITE, '+cfgsc.ast_daypos+' WRITE');
+        db2.TruncateTable(cfgsc.ast_day);
+        db2.TruncateTable(cfgsc.ast_daypos);
+        db2.LockTables(cfgsc.ast_day+' WRITE, '+cfgsc.ast_daypos+' WRITE');
         jdnew:=newjd;
         jdchart:=cfgsc.JDChart;
         ast_daypos:=cfgsc.ast_daypos;
@@ -1570,9 +1570,9 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
         qry:='INSERT INTO '+cfgsc.ast_day+' (jd,limit_mag)'
             +' VALUES ("'+inttostr(trunc(newjd))+'","'+inttostr(lmag)+'")';
         db2.Query(qry);
-        if DBtype=mysql then db2.Query('UNLOCK TABLES');
+        db2.UnLockTables;
         db2.Commit;
-        db2.Query(flushtable[DBtype]);
+        db2.flush('tables');
         result:=true;
      end else begin
        result:=false;
@@ -1647,11 +1647,11 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
         db1.Query('CREATE TABLE '+cfgsc.com_daypos+create_table_com_day_pos);
         db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc.com_daypos+' ON '+cfgsc.com_daypos+' (id,epoch)');
      end;
-     if DBtype=mysql then db1.Query('UNLOCK TABLES');
+     db1.UnLockTables;
      db1.StartTransaction;
-     db1.Query(truncatetable[DBtype]+' '+cfgsc.com_day);
-     db1.Query(truncatetable[DBtype]+' '+cfgsc.com_daypos);
-     if DBtype=mysql then db1.Query('LOCK TABLES '+cfgsc.com_day+' WRITE, '+cfgsc.com_daypos+' WRITE, cdc_com_elem READ');
+     db1.TruncateTable(cfgsc.com_day);
+     db1.TruncateTable(cfgsc.com_daypos);
+     db1.LockTables(cfgsc.com_day+' WRITE, '+cfgsc.com_daypos+' WRITE, cdc_com_elem READ');
      qry:='SELECT distinct(id) from cdc_com_elem';
      db2.CallBackOnly:=true;
      db2.OnFetchRow:=NewComDayCallback;
@@ -1668,14 +1668,14 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
        qry:='INSERT INTO '+cfgsc.com_day+' (jd,limit_mag)'
            +' VALUES ("'+inttostr(trunc(newjd))+'","'+inttostr(lmag)+'")';
        db1.Query(qry);
-       if DBtype=mysql then db1.Query('UNLOCK TABLES');
+       db1.UnLockTables;
        db1.Commit;
-       db1.Query(flushtable[DBtype]);
+       db1.flush('tables');
      end else begin
        result:=false;
-       if DBtype=mysql then db1.Query('UNLOCK TABLES');
+       db1.UnLockTables;
        db1.Commit;
-       db1.Query(flushtable[DBtype]);
+       db1.flush('tables');
        end;
 end;
 except
@@ -1900,7 +1900,7 @@ if cdb.GetAstElemEpoch(id,cfgsc.curjd,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,ele
         +',"'+inttostr(idec)+'"'
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
-   db1.Query(flushtable[DBtype]);
+   db1.flush('tables');
    precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
@@ -1934,7 +1934,7 @@ if cdb.GetComElemEpoch(id,cfgsc.curjd,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id)
         +',"'+inttostr(idec)+'"'
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
-   db1.Query(flushtable[DBtype]);
+   db1.flush('tables');
    precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
@@ -2093,7 +2093,7 @@ try
 jds:=formatfloat(f1,jdt);
 msg.Add('Begin processing for jd='+jds+' / '+jddate(jdt));
 db1.StartTransaction;
-if DBtype=mysql then db1.Query('LOCK TABLES cdc_ast_mag WRITE, cdc_ast_elem READ');
+db1.LockTables('cdc_ast_mag WRITE, cdc_ast_elem READ');
 msg.Add('Delete previous data for this date.');
 application.processmessages;
 db1.Query('DELETE from cdc_ast_mag where jd='+jds);
@@ -2108,9 +2108,9 @@ smsg:=msg;
 db2.Query(qry);
 db2.CallBackOnly:=false;
 db2.OnFetchRow:=nil;
-if DBtype=mysql then db1.Query('UNLOCK TABLES');
+db1.UnLockTables;
 db1.Commit;
-db1.Query(flushtable[DBtype]);
+db1.flush('tables');
 cdb.TruncateDailyAsteroid;
 msg.Add('End processing: '+inttostr(n_ast)+' asteroids');
 result:=(n_ast>0);
