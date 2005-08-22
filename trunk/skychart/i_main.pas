@@ -182,6 +182,8 @@ c2.ShowGalactic := c1.ShowGalactic ;
 c2.ShowMilkyWay := c1.ShowMilkyWay ;
 c2.FillMilkyWay := c1.FillMilkyWay ;
 c2.HorizonOpaque := c1.HorizonOpaque ;
+c2.ShowHorizon := c1.ShowHorizon ;
+c2.ShowHorizonDepression := c1.ShowHorizonDepression ;
 c2.HorizonMax := c1.HorizonMax ;
 c2.Horizonlist := c1.Horizonlist ;
 c2.ShowlabelAll := c1.ShowlabelAll ;
@@ -359,6 +361,7 @@ end;
 
 Procedure Tf_main.GetAppDir;
 var inif: TMemIniFile;
+    buf: string;
 {$ifdef mswindows}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
@@ -382,7 +385,8 @@ Tempdir:=slash(privatedir)+DefaultTmpDir;
 {$endif}
 inif:=TMeminifile.create(configfile);
 try
-appdir:=inif.ReadString('main','AppDir',appdir);
+buf:=inif.ReadString('main','AppDir',appdir);
+if Directoryexists(buf) then appdir:=buf;
 privatedir:=inif.ReadString('main','PrivateDir',privatedir);
 finally
  inif.Free;
@@ -1524,6 +1528,8 @@ def_cfgsc.ObsPressure := 1010 ;
 def_cfgsc.ObsName := 'Genève' ;
 def_cfgsc.ObsCountry := 'Switzerland' ;
 def_cfgsc.horizonopaque:=true;
+def_cfgsc.ShowHorizon:=false;
+def_cfgsc.ShowHorizonDepression:=false;
 def_cfgsc.HorizonMax:=0;
 def_cfgsc.PMon:=false;
 def_cfgsc.DrawPMon:=false;
@@ -1914,6 +1920,8 @@ csc.DrawPMon:=ReadBool(section,'DrawPMon',csc.DrawPMon);
 csc.ApparentPos:=ReadBool(section,'ApparentPos',csc.ApparentPos);
 csc.DrawPMyear:=ReadInteger(section,'DrawPMyear',csc.DrawPMyear);
 csc.horizonopaque:=ReadBool(section,'horizonopaque',csc.horizonopaque);
+csc.ShowHorizon:=ReadBool(section,'ShowHorizon',csc.ShowHorizon);
+csc.ShowHorizonDepression:=ReadBool(section,'ShowHorizonDepression',csc.ShowHorizonDepression);
 csc.ShowEqGrid:=ReadBool(section,'ShowEqGrid',csc.ShowEqGrid);
 csc.ShowGrid:=ReadBool(section,'ShowGrid',csc.ShowGrid);
 csc.ShowGridNum:=ReadBool(section,'ShowGridNum',csc.ShowGridNum);
@@ -2269,6 +2277,8 @@ WriteBool(section,'DrawPMon',csc.DrawPMon);
 WriteBool(section,'ApparentPos',csc.ApparentPos);
 WriteInteger(section,'DrawPMyear',csc.DrawPMyear);
 WriteBool(section,'horizonopaque',csc.horizonopaque);
+WriteBool(section,'ShowHorizon',csc.ShowHorizon);
+WriteBool(section,'ShowHorizonDepression',csc.ShowHorizonDepression);
 WriteBool(section,'ShowEqGrid',csc.ShowEqGrid);
 WriteBool(section,'ShowGrid',csc.ShowGrid);
 WriteBool(section,'ShowGridNum',csc.ShowGridNum);
