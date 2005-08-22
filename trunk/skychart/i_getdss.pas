@@ -125,10 +125,31 @@ try
       showmodal;
       if ModalResult<>mrOK then exit;
       platename:=pl.plate_name[listbox1.itemindex+1];
+    {$ifdef linux}
+    repeat
+    {$endif}
     rc:=ImageExtractFromPlate(addr(i),Pchar(platename));
+    {$ifdef linux}
+    if rc>0 then begin
+      if (MessageDlg(i.pPrompt1+blank+inttostr(rc)+crlf+i.pPrompt2+blank+cfgdss.dssdrive,mtConfirmation,[mbOK, mbCancel],0)<>mrOK) then
+         rc:=-999;
+    end;
+    until rc<=0;
+    {$endif}
   end
-  else
+  else begin
+   {$ifdef linux}
+    repeat
+    {$endif}
      rc:=ImageExtract(addr(i));
+    {$ifdef linux}
+    if rc>0 then begin
+      if (MessageDlg(i.pPrompt1+blank+inttostr(rc)+crlf+i.pPrompt2+blank+cfgdss.dssdrive,mtConfirmation,[mbOK, mbCancel],0)<>mrOK) then
+         rc:=-999;
+    end;
+    until rc<=0;
+    {$endif}
+  end;
   result:=(rc=0);
 finally
   chdir(appdir);
