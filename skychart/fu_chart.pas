@@ -270,7 +270,7 @@ if lockwheel then begin
 end else begin
    lockwheel:=true;
    CMouseWheel(Shift,WheelDelta,MousePos,Handled);
-end;   
+end;
 end;
 
 function Tf_chart.SaveChartImage(format,fn : string; quality : integer=75):boolean;

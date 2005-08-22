@@ -668,10 +668,9 @@ lastx:=x;
 lasty:=y;
 lastyzoom:=y;
 case Button of
-mbLeft : begin
-           ZoomBox(1,X,Y);
-         end;
- end;
+   mbLeft  : ZoomBox(1,X,Y);
+   mbMiddle: screen.cursor:=crHandPoint;
+end;
 end;
 
 procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -844,6 +843,7 @@ begin
 if LockTrackCursor then exit;
 try
    LockTrackCursor:=true;
+   screen.cursor:=crHandPoint;
    xx:=sc.cfgsc.xcentre-(x-lastx);
    yy:=sc.cfgsc.ycentre-(y-lasty);
    lastx:=x;
@@ -854,7 +854,13 @@ try
    if sc.cfgsc.racentre<0 then sc.cfgsc.racentre:=sc.cfgsc.racentre+pi2;
    sc.cfgsc.quick:=true;
    Refresh;
-   application.processmessages; // very important to empty the mouse event queue before to unlock
+   screen.cursor:=crHandPoint;
+   {$ifdef linux}
+   application.handlemessage;   // very important to empty the mouse event queue before to unlock
+   {$endif}
+   {$ifdef mswindows}
+   application.processmessages;
+   {$endif}
 finally
 LockTrackCursor:=false;
 end;
