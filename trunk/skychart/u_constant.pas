@@ -104,7 +104,7 @@ const cdcversion = 'Version 3 alpha 0.0.9';
       f2='0.00';
       f5='0.00000';
       f6='0.000000';
-      dateiso='yyyy"-"mm"-"dd"T"hh":"nn":"ss';
+      dateiso='yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
       labspacing=10;
       numlabtype=8;
       numfont=7;
@@ -326,11 +326,11 @@ type
                 SimObject: array[1..NumSimObject] of boolean;
                 SimLine,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet : Boolean;
                 ObsLatitude,ObsLongitude,ObsAltitude,ObsTZ : double;
-                ObsTemperature,ObsPressure,ObsRefractionCor : Double;
+                ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
                 ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
                 ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
-                ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay : boolean;
+                ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude: double;
                 PMon,DrawPMon,ApparentPos : boolean; // use proper motion
                 LabelOrientation: integer;
