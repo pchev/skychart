@@ -73,12 +73,18 @@ type
     updcity: TButton;
     delcity: TButton;
     t_horizon: TTabSheet;
-    hor_l1: TLabel;
     hor_l2: TLabel;
-    horizonopaque: TCheckBox;
-    horizonfile: TEdit;
-    horizonfileBtn: TBitBtn;
     OpenDialog1: TOpenDialog;
+    GroupBox2: TGroupBox;
+    horizonopaque: TCheckBox;
+    GroupBox1: TGroupBox;
+    horizonfile: TEdit;
+    hor_l1: TLabel;
+    horizonfileBtn: TBitBtn;
+    displayhorizon: TCheckBox;
+    GroupBox3: TGroupBox;
+    horizondepression: TCheckBox;
+    Label1: TLabel;
     procedure countrylistClick(Sender: TObject);
     procedure citysearchClick(Sender: TObject);
     procedure citylistChange(Sender: TObject);
@@ -105,6 +111,8 @@ type
     procedure horizonfileChange(Sender: TObject);
     procedure horizonfileBtnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure displayhorizonClick(Sender: TObject);
+    procedure horizondepressionClick(Sender: TObject);
   private
     { Private declarations }
     scrolllock,obslock:boolean;
@@ -145,5 +153,7 @@ implementation
 {$include i_config_observatory.pas}
 
 // end of common code
+
+
 
 end.
