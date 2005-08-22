@@ -166,6 +166,7 @@ function Tskychart.Refresh :boolean;
 var savmag: double;
     savfilter,saveautofilter,savfillmw,scopemark:boolean;
 begin
+//writetrace('Refresh');
 savmag:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
 savfilter:=Fcatalog.cfgshr.StarFilter;
 saveautofilter:=Fcatalog.cfgshr.AutoStarFilter;
@@ -179,9 +180,9 @@ try
   InitChart;
   InitCoordinates; // now include ComputePlanet
   if cfgsc.quick then begin
-     Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]-3;
+//     Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]-3;
      Fcatalog.cfgshr.StarFilter:=true;
-     Fcatalog.cfgshr.AutoStarFilter:=false;
+//     Fcatalog.cfgshr.AutoStarFilter:=false;
   end else begin
      InitLabels;
   end;
@@ -189,6 +190,7 @@ try
   // draw objects
   Fcatalog.OpenCat(cfgsc);
   InitCatalog;
+  //writetrace('Draw');
   // first the extended object
   if not cfgsc.quick then begin
     DrawMilkyWay; // most extended first
@@ -200,6 +202,7 @@ try
     if cfgsc.showline then DrawOutline;
   end;
   // then the lines
+  //writetrace('Draw grid');
   DrawGrid;
   if not cfgsc.quick then begin
     DrawConstL;
@@ -207,29 +210,36 @@ try
     DrawEcliptic;
     DrawGalactic;
   end;
+  //writetrace('Draw circle');
   DrawCircle;
   // the stars
+  //writetrace('Draw star');
   if cfgsc.showstars then DrawStars;
   if not cfgsc.quick then begin
     DrawDblStars;
     DrawVarStars;
   end;
   // finally the planets
+  //writetrace('Draw planet');
   if not cfgsc.quick then begin
     DrawAsteroid;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanet then DrawPlanet;
   // and the horizon line if not transparent
+  //writetrace('Draw horizon');
   if (not cfgsc.quick)and cfgsc.horizonopaque then DrawHorizon;
   // the labels
+  //writetrace('Draw label');
   if (not cfgsc.quick) and cfgsc.showlabelall then DrawLabels;
   // refresh telescope mark
   if scopemark then begin
+     //writetrace('Draw mark');
      DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
      cfgsc.ScopeMark:=true;
   end;
   result:=true;
+  //writetrace('Draw end');
 finally
   if cfgsc.quick then begin
      Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=savmag;
@@ -240,6 +250,7 @@ finally
   cfgsc.quick:=false;
   Fcatalog.CloseCat;
   plot.Flush;
+  //writetrace('flush');
 end;
 end;
 
@@ -289,6 +300,7 @@ var i:integer;
 begin
 if Fcatalog.cfgshr.AutoStarFilter then Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
    else Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
+if cfgsc.quick then Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgcat.StarMagMax-3;
 Fcatalog.cfgcat.NebMagMax:=Fcatalog.cfgshr.NebMagFilter[cfgsc.FieldNum];
 Fcatalog.cfgcat.NebSizeMin:=Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
 Fplot.cfgchart.min_ma:=1;
@@ -392,6 +404,7 @@ begin
    cfgsc.ObsRoSinPhi:=ratio*sin(u)+(cfgsc.ObsAltitude/H0)*sin(p);
    cfgsc.ObsRoCosPhi:=cos(u)+(cfgsc.ObsAltitude/H0)*cos(p);
    cfgsc.ObsRefractionCor:=(cfgsc.ObsPressure/1010)*(283/(273+cfgsc.ObsTemperature));
+   cfgsc.ObsHorizonDepression:=-deg2rad*sqrt(cfgsc.ObsAltitude)*0.02931+deg2rad*0.64658062088;
    result:=true;
 end;
 
@@ -1373,6 +1386,7 @@ begin
  for i:=1 to 10 do begin
    if rec.vnum[i] then Desc:=Desc+trim(rec.options.flabel[25+i])+dp+formatfloat('0.0####',rec.num[i])+tab;
  end;
+ cfgsc.FindName:=wordspace(cfgsc.FindName);
  cfgsc.FindDesc:=Desc;
  cfgsc.FindNote:='';
 end;
@@ -1891,7 +1905,7 @@ begin
 if cfgsc.ProjPole=Altaz then begin
   if cfgsc.hcentre<-(cfgsc.fov/6) then
      Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2,(cfgsc.ymax-cfgsc.ymin)div 2,2,Fplot.cfgplot.Color[12],laCenter,laCenter,' Below the horizon ');
-  if (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
+  if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
      first:=true; xp:=0;yp:=0;x0:=0;y0:=0; xph:=0;yph:=0;x0h:=0;y0h:=0;
      for i:=1 to 360 do begin
        h:=cfgsc.horizonlist^[i];
@@ -1919,6 +1933,22 @@ if cfgsc.ProjPole=Altaz then begin
      Fplot.PlotOutline(x0h,y0h,2,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
      Fplot.PlotOutline(xh,yh,1,1,2,1,cfgsc.x2,Fplot.cfgplot.Color[19]);
      Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot.Color[12],2);
+  end;
+  if cfgsc.ShowHorizonDepression then begin
+     first:=true; xp:=0;yp:=0;
+     h:=cfgsc.ObsHorizonDepression;
+     if h<0 then for i:=1 to 360 do begin
+       az:=deg2rad*rmod(360+i-1-180,360);
+       proj2(-az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+       WindowXY(x1,y1,x,y,cfgsc);
+       if first then begin
+          first:=false;
+       end else begin
+          Fplot.Plotline(xp,yp,x,y,Fplot.cfgplot.Color[15],2);
+       end;
+       xp:=x;
+       yp:=y;
+     end;
   end;
 end;
 result:=true;
