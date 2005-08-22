@@ -420,6 +420,18 @@ procedure Tf_config_observatory.ShowHorizon;
 begin
 horizonopaque.checked:=not csc.horizonopaque;
 horizonfile.text:=cmain.horizonfile;
+displayhorizon.Checked:=csc.ShowHorizon;
+horizondepression.Checked:=csc.ShowHorizonDepression;
+end;
+
+procedure Tf_config_observatory.displayhorizonClick(Sender: TObject);
+begin
+csc.ShowHorizon:=displayhorizon.Checked;
+end;
+
+procedure Tf_config_observatory.horizondepressionClick(Sender: TObject);
+begin
+csc.ShowHorizonDepression:=horizondepression.Checked;
 end;
 
 procedure Tf_config_observatory.horizonopaqueClick(Sender: TObject);

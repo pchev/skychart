@@ -9,7 +9,7 @@ object f_config_observatory: Tf_config_observatory
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_observatory
+    ActivePage = t_horizon
     Align = alClient
     TabOrder = 0
     object t_observatory: TTabSheet
@@ -1082,13 +1082,6 @@ object f_config_observatory: Tf_config_observatory
       Caption = 't_horizon'
       ImageIndex = 1
       TabVisible = False
-      object hor_l1: TLabel
-        Left = 16
-        Top = 136
-        Width = 124
-        Height = 13
-        Caption = 'Local Horizon File Name : '
-      end
       object hor_l2: TLabel
         Left = 0
         Top = 0
@@ -1096,61 +1089,122 @@ object f_config_observatory: Tf_config_observatory
         Height = 13
         Caption = 'Horizon Setting'
       end
-      object horizonopaque: TCheckBox
-        Left = 16
-        Top = 72
-        Width = 300
-        Height = 30
-        Caption = 'Show Object below the horizon'
+      object GroupBox2: TGroupBox
+        Left = 8
+        Top = 160
+        Width = 457
+        Height = 89
+        Caption = 'Want to track an object before it rise ?'
         TabOrder = 0
-        OnClick = horizonopaqueClick
+        object horizonopaque: TCheckBox
+          Left = 16
+          Top = 34
+          Width = 300
+          Height = 30
+          Caption = 'Show Object below the horizon'
+          TabOrder = 0
+          OnClick = horizonopaqueClick
+        end
       end
-      object horizonfile: TEdit
-        Left = 16
-        Top = 164
-        Width = 201
-        Height = 21
+      object GroupBox1: TGroupBox
+        Left = 8
+        Top = 32
+        Width = 457
+        Height = 121
+        Caption = 'Local Horizon'
         TabOrder = 1
-        OnChange = horizonfileChange
+        object hor_l1: TLabel
+          Left = 16
+          Top = 76
+          Width = 124
+          Height = 13
+          Caption = 'Local Horizon File Name : '
+        end
+        object horizonfile: TEdit
+          Left = 184
+          Top = 72
+          Width = 201
+          Height = 21
+          Cursor = crIBeam
+          TabOrder = 0
+          OnChange = horizonfileChange
+        end
+        object horizonfileBtn: TBitBtn
+          Tag = 8
+          Left = 383
+          Top = 71
+          Width = 22
+          Height = 22
+          TabOrder = 2
+          TabStop = False
+          OnClick = horizonfileBtnClick
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            0000000000000000000000000000000000000000000000000000000000000000
+            00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+            7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+            CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+            CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+            7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+          Layout = blGlyphTop
+          Margin = 0
+        end
+        object displayhorizon: TCheckBox
+          Left = 16
+          Top = 40
+          Width = 369
+          Height = 21
+          Caption = 'Display the local horizon line'
+          TabOrder = 1
+          OnClick = displayhorizonClick
+        end
       end
-      object horizonfileBtn: TBitBtn
-        Tag = 8
-        Left = 215
-        Top = 161
-        Width = 26
-        Height = 26
+      object GroupBox3: TGroupBox
+        Left = 8
+        Top = 256
+        Width = 457
+        Height = 121
+        Caption = 'Depression of the visible horizon'
         TabOrder = 2
-        TabStop = False
-        OnClick = horizonfileBtnClick
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          0000000000000000000000000000000000000000000000000000000000000000
-          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
-        Layout = blGlyphTop
-        Margin = 0
+        object Label1: TLabel
+          Left = 16
+          Top = 32
+          Width = 415
+          Height = 49
+          AutoSize = False
+          Caption = 
+            'You live on a big mountain near the ocean shore and you like to ' +
+            'observe the distorded image of the object below the horizon.'
+          WordWrap = True
+        end
+        object horizondepression: TCheckBox
+          Left = 16
+          Top = 80
+          Width = 409
+          Height = 21
+          Caption = 'Draw the apparent depressed horizon line'
+          TabOrder = 0
+          OnClick = horizondepressionClick
+        end
       end
     end
   end

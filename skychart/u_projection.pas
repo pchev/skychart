@@ -339,7 +339,9 @@ Ecl:   begin
   else raise exception.Create('Bad projection type');
 end;
 if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then begin
-  if (h<-musec) then begin
+
+
+  if (h<(c.ObsHorizonDepression-musec)) then begin
      if tohrz and (h>(-30*deg2rad)) then begin
        de:=-secarc;
        Proj2(ar,de,ac,dc,X,Y,c);
@@ -348,7 +350,10 @@ if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then be
        Y:=200;
      end;
   end else begin
-    if c.horizonlist=nil then h:=0
+    if (not c.ShowHorizon) or (c.horizonlist=nil) then
+       if c.ShowHorizonDepression then h:=c.ObsHorizonDepression
+          else h:=0
+//    if c.horizonlist=nil then h:=0
     else begin
       a:=rmod(-rad2deg*ar+181+360,360);
       a1:=trunc(a);

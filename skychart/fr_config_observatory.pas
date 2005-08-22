@@ -74,12 +74,18 @@ type
     HScrollBar: TScrollBar;
     VScrollBar: TScrollBar;
     t_horizon: TTabSheet;
-    horizonopaque: TCheckBox;
-    hor_l1: TLabel;
-    horizonfile: TEdit;
-    horizonfileBtn: TBitBtn;
     hor_l2: TLabel;
     OpenDialog1: TOpenDialog;
+    GroupBox1: TGroupBox;
+    horizonfile: TEdit;
+    hor_l1: TLabel;
+    horizonfileBtn: TBitBtn;
+    displayhorizon: TCheckBox;
+    GroupBox2: TGroupBox;
+    horizonopaque: TCheckBox;
+    GroupBox3: TGroupBox;
+    horizondepression: TCheckBox;
+    Label1: TLabel;
     procedure countrylistClick(Sender: TObject);
     procedure citysearchClick(Sender: TObject);
     procedure citylistChange(Sender: TObject);
@@ -106,6 +112,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure HScrollBarChange(Sender: TObject);
     procedure VScrollBarChange(Sender: TObject);
+    procedure displayhorizonClick(Sender: TObject);
+    procedure horizondepressionClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -150,6 +158,5 @@ implementation
 {$include i_config_observatory.pas}
 
 // end of common code
-
 
 end.
