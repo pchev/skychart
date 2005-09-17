@@ -212,22 +212,26 @@ Procedure ShowCoordinates;
 begin
 with pop_scope do begin
    if ScopeInitialized then begin
-      Curdeg_x:=T.RightAscension*15;
-      Curdeg_y:=T.Declination;
+      try
+         Curdeg_x:=T.RightAscension*15;
+         Curdeg_y:=T.Declination;
+      except
+         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      end;
       if ShowAltAz.checked then begin
          try
-           Cur_az:=T.Azimuth;
-           Cur_alt:=T.Altitude;
+            Cur_az:=T.Azimuth;
+            Cur_alt:=T.Altitude;
          except
-           ShowAltAz.checked:=false;
-         end;  
+            ShowAltAz.checked:=false;
+         end;
       end;
       pos_x.text := artostr(Curdeg_x/15);
       pos_y.text := detostr(Curdeg_y);
       if ShowAltAz.checked then begin
           az_x.text  := detostr(Cur_az);
           alt_y.text := detostr(Cur_alt);
-         end else begin
+      end else begin
           az_x.text  := '';
           alt_y.text := '';
       end;
@@ -238,7 +242,7 @@ with pop_scope do begin
       az_x.text  := '';
       alt_y.text := '';
    end;
-end;
+   end;
 end;
 
 Procedure ScopeDisconnect(var ok : boolean); stdcall;
@@ -310,8 +314,15 @@ end;
 
 Procedure ScopeAlign(source : string; ra,dec : double); stdcall;
 begin
-if not ScopeConnected then exit;
-if T.CanSync then T.SyncToCoordinates(Ra,Dec);
+   if not ScopeConnected then exit;
+   if T.CanSync then begin
+      try
+         T.SyncToCoordinates(Ra,Dec);
+      except
+         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      end;
+   end
+
 end;
 
 Procedure ScopeShowModal(var ok : boolean); stdcall;
@@ -327,41 +338,59 @@ end;
 
 Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean); stdcall;
 begin
-if ScopeConnected then begin
-   ar:=Curdeg_x/15;
-   de:=Curdeg_y;
-   ok:=true;
-end else ok:=false;
+   if ScopeConnected then begin
+      try
+         ar:=Curdeg_x/15;
+         de:=Curdeg_y;
+         ok:=true;
+      except
+         on E: EOleException do begin
+            MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+            ok:=false;
+         end;
+      end;
+   end else ok:=false;
 end;
 
 Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean); stdcall;
 begin
-if ScopeConnected then begin
-   az:=cur_az;
-   alt:=cur_alt;
-   ok:=true;
-end else ok:=false;
+   if ScopeConnected then begin
+      try
+         az:=cur_az;
+         alt:=cur_alt;
+         ok:=true;
+      except
+         on E: EOleException do begin
+            MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+            ok:=false;
+         end;
+      end;
+   end else ok:=false;
 end;
 
 Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer); stdcall;
 begin
-if (pop_scope=nil)or(pop_scope.pos_x=nil) then begin
-    Initialized := false;
-    Initial := true;
-    pop_scope:=Tpop_scope.Create(nil);
-end;
-if ScopeConnected  then begin
-  name:=T.name;
-  QueryOK:=true;
-  SyncOK:=T.CanSync;
-  GotoOK:=T.CanSlew;
-end else begin
-  name:='';
-  QueryOK:=false;
-  SyncOK:=false;
-  GotoOK:=false;
-end;
-refreshrate:=pop_scope.timer1.interval;
+   if (pop_scope=nil)or(pop_scope.pos_x=nil) then begin
+      Initialized := false;
+      Initial := true;
+      pop_scope:=Tpop_scope.Create(nil);
+   end;
+   if ScopeConnected  then begin
+      try
+         name:=T.name;
+         QueryOK:=true;
+         SyncOK:=T.CanSync;
+         GotoOK:=T.CanSlew;
+      except
+         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      end;
+   end else begin
+      name:='';
+      QueryOK:=false;
+      SyncOK:=false;
+      GotoOK:=false;
+   end;
+   refreshrate:=pop_scope.timer1.interval;
 end;
 
 Procedure ScopeReset; stdcall;
@@ -378,9 +407,13 @@ end;
 
 Procedure ScopeGoto(ar,de : double; var ok : boolean); stdcall;
 begin
-if not ScopeConnected then exit;
-if T.CanSlewAsync then T.SlewToCoordinatesAsync(ar,de)
-                  else T.SlewToCoordinates(ar,de);
+   if not ScopeConnected then exit;
+   try
+      if T.CanSlewAsync then T.SlewToCoordinatesAsync(ar,de)
+      else T.SlewToCoordinates(ar,de);
+   except
+      on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+   end;
 end;
 
 {-------------------------------------------------------------------------------
@@ -487,7 +520,13 @@ end;
 
 procedure Tpop_scope.SpeedButton6Click(Sender: TObject);
 begin
-if ScopeConnected then T.AbortSlew;
+   if ScopeConnected then begin
+      try
+         T.AbortSlew;
+      except
+         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      end;
+   end;
 end;
 
 procedure Tpop_scope.SpeedButton3Click(Sender: TObject);
@@ -523,19 +562,32 @@ end;
 
 procedure Tpop_scope.SpeedButton9Click(Sender: TObject);
 begin
-if ScopeConnected then begin
-  T.SiteLongitude:=longitude;
-  T.SiteLatitude:=latitude;
-end;
+   if ScopeConnected then begin
+      try
+         T.SiteLongitude:=longitude;
+         T.SiteLatitude:=latitude;
+      except
+         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      end;
+   end;
 end;
 
 procedure Tpop_scope.SpeedButton8Click(Sender: TObject);
 var utc: Tsystemtime;
+    buf : shortstring;
 begin
-if ScopeConnected then begin
-   getsystemtime(utc);
-   T.UTCDate:=systemtimetodatetime(utc);
-end;
+//date='26.01.02 13:13:22'
+   if ScopeConnected then begin
+      try
+         getsystemtime(utc);
+         buf:=(Formatdatetime('dd.mm.yy hh:nn:ss',systemtimetodatetime(utc)));
+         //T.UTCDate:=buf;
+         // does not raise and error but may not be UTC
+         T.UTCDate:=systemtimetodatetime(utc);
+      except
+         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      end;
+   end;
 end;
 
 procedure Tpop_scope.FormDestroy(Sender: TObject);
@@ -545,45 +597,52 @@ end;
 
 procedure Tpop_scope.UpdTrackingButton;
 begin
-if not ScopeConnected then exit;
-if (not T.CanSetTracking)or(not T.connected) then begin
-   SpeedButton10.Font.Color:=clWindowText;
-   SpeedButton10.Font.Style:=[];
-   SpeedButton10.Enabled:=false;
-end else begin
-   SpeedButton10.Enabled:=true;
-   SpeedButton10.Font.Style:=[fsBold];
-   if T.Tracking then SpeedButton10.Font.Color:=clGreen
-                 else SpeedButton10.Font.Color:=clRed;
-end;
+   if not ScopeConnected then exit;
+   if (not T.CanSetTracking)or(not T.connected) then begin
+      SpeedButton10.Font.Color:=clWindowText;
+      SpeedButton10.Font.Style:=[];
+      SpeedButton10.Enabled:=false;
+   end else begin
+      SpeedButton10.Enabled:=true;
+      SpeedButton10.Font.Style:=[fsBold];
+      if T.Tracking then SpeedButton10.Font.Color:=clGreen
+      else SpeedButton10.Font.Color:=clRed;
+   end;
 end;
 
 
 procedure Tpop_scope.SpeedButton10Click(Sender: TObject);
 begin
-if ScopeConnected then begin
-   T.Tracking:=not T.Tracking;
-   UpdTrackingButton;
-end;
+   if ScopeConnected then begin
+      try
+         T.Tracking:=not T.Tracking;
+         UpdTrackingButton;
+      except
+         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      end;
+   end;
 end;
 
 procedure Tpop_scope.SpeedButton11Click(Sender: TObject);
 var buf : string;
 begin
-if (edit1.text>'') then begin
-if VarIsEmpty(T) then begin
-   T := CreateOleObject(edit1.text);
-   buf:=T.Description;
-   buf:=buf+crlf+T.DriverInfo;
-   T:=Unassigned;
-   showmessage(buf);
-end else begin
-   buf:=T.Description;
-   buf:=buf+crlf+T.DriverInfo;
-   showmessage(buf);
-end;
-UpdTrackingButton;
-end;
+   if (edit1.text>'') then begin
+      try
+         if VarIsEmpty(T) then begin
+            T := CreateOleObject(edit1.text);
+            buf:=T.Description;
+            buf:=buf+crlf+T.DriverInfo;
+            T:=Unassigned;
+            showmessage(buf);
+         end else begin
+            buf:=T.Description;
+            buf:=buf+crlf+T.DriverInfo;
+            showmessage(buf);
+         end;
+         UpdTrackingButton;
+      except
+      end;
+   end;
 end;
 
 initialization
