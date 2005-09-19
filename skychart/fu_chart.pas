@@ -156,7 +156,7 @@ type
     { Public declarations }
     sc: Tskychart;
     indi1: TIndiClient;
-    maximize,locked,LockTrackCursor,lastquick,lock_refresh: boolean;
+    maximize,locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh: boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo,lastx,lasty,lastyzoom : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;

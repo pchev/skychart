@@ -362,6 +362,8 @@ type
     Reverse1: TMenuItem;
     NightVision1: TMenuItem;
     RedColor1: TMenuItem;
+    ToolButtonEditlabels: TToolButton;
+    EditLabels: TAction;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -395,8 +397,7 @@ type
     procedure GridExecute(Sender: TObject);
     procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+//    procedure FormKeyDown(Sender: TObject; var Key: Word;   Shift: TShiftState);
     procedure switchstarsExecute(Sender: TObject);
     procedure switchbackgroundExecute(Sender: TObject);
     procedure SaveImageExecute(Sender: TObject);
@@ -461,6 +462,7 @@ type
     procedure DSSImageExecute(Sender: TObject);
     procedure ToolButtonNightVisionClick(Sender: TObject);
     procedure ButtonModeClick(Sender: TObject);
+    procedure EditLabelsExecute(Sender: TObject);
   private
     { Private declarations }
     cryptedpwd:string;
@@ -571,13 +573,14 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
    CMouseWheel(Shift,WheelDelta,MousePos,Handled);
 end;
 
+{ removed sep 19 2005: no more problem ?
 procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 // keep here because of focus problem with the child that have no text control
 if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
    CKeyDown(Key,Shift);
-end;
+end;}
 
 procedure Tf_main.topmessageDrawItem(Sender: TObject; ACanvas: TCanvas;
   ARect: TRect; Selected: Boolean);

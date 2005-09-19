@@ -2590,7 +2590,7 @@ for i:=1 to numlabels do begin
         if (cfgsc.modlabels[j].dx<>0)or(cfgsc.modlabels[j].dy<>0) then r:=-1;
         break;
      end;
-  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,cfgsc.WhiteBg,txt);
+  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
 end;
 if cfgsc.showlabel[8] then plot.PlotTextCR(5,5,2,8,GetChartInfo(crlf));
 result:=true;

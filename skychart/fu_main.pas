@@ -363,6 +363,8 @@ type
     NightVision1: TMenuItem;
     Useyourdesktopmanagertochangethecolor1: TMenuItem;
     N7: TMenuItem;
+    ToolButtonEditLabels: TToolButton;
+    EditLabels: TAction;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -457,6 +459,7 @@ type
     procedure DSSImageExecute(Sender: TObject);
     procedure TrackExecute(Sender: TObject);
     procedure ButtonModeClick(Sender: TObject);
+    procedure EditLabelsExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -564,6 +567,7 @@ activecontrol:=nil;
 end;
 
 // End of Linux specific CLX code:
+
 
 end.
 

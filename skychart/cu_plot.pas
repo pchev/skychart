@@ -114,7 +114,7 @@ type
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
-     function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg:boolean; txt:string):integer;
+     function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string):integer;
      procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
@@ -1719,11 +1719,12 @@ with cnv do begin
 end;
 end;
 
-function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg:boolean; txt:string):integer;
+function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string):integer;
 var ts:TSize;
 begin
-// If drawing to the printer plot the text label to the canvas
-if cfgchart.onprinter then begin
+// If drawing to the printer force to plot the text label to the canvas
+// even if label editing is selected
+if (cfgchart.onprinter or forcetextlabel) then begin
 with cnv do begin
   Brush.Style:=bsClear;
   Pen.Mode:=pmCopy;

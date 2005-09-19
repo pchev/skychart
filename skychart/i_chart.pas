@@ -58,6 +58,8 @@ begin
  zoomfactor:=2;
  lastundo:=0;
  validundo:=0;
+ LockKeyboard:=false;
+ LockTrackCursor:=false;
  {$ifdef mswindows}
  Image1.Cursor := crRetic;
  {$endif}
@@ -488,6 +490,9 @@ end;
 procedure Tf_chart.CKeyDown(var Key: Word; Shift: TShiftState);
 var ok:boolean;
 begin
+if LockKeyboard then exit;
+try
+LockKeyboard:=true;
 if Shift = [ssShift] then begin
    movefactor:=8;
    zoomfactor:=1.5;
@@ -513,6 +518,15 @@ end;
 if ok then key:=0;
 movefactor:=4;
 zoomfactor:=2;
+   {$ifdef linux}
+   application.handlemessage;   // very important to empty the mouse event queue before to unlock
+   {$endif}
+   {$ifdef mswindows}
+   application.processmessages;
+   {$endif}
+finally
+LockKeyboard:=false;
+end;
 end;
 
 procedure Tf_chart.PopupMenu1Popup(Sender: TObject);

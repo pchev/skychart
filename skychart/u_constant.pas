@@ -361,7 +361,7 @@ type
                 rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
                 CircleLst : array[0..MaxCircle,1..2] of double; 
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
-                IndiAutostart,ShowCircle,IndiTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall : boolean;
+                IndiAutostart,ShowCircle,IndiTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
                 BackgroundImage: string;
                 end;
      conf_plot = record
