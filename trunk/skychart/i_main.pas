@@ -187,6 +187,7 @@ c2.ShowHorizonDepression := c1.ShowHorizonDepression ;
 c2.HorizonMax := c1.HorizonMax ;
 c2.Horizonlist := c1.Horizonlist ;
 c2.ShowlabelAll := c1.ShowlabelAll ;
+c2.Editlabels := c1.Editlabels ;
 for i:=1 to numlabtype do begin
    c2.ShowLabel[i]:=c1.ShowLabel[i];
    c2.LabelMagDiff[i]:=c1.LabelMagDiff[i];
@@ -925,6 +926,13 @@ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
 end;
 end;
 
+procedure Tf_main.EditLabelsExecute(Sender: TObject);
+begin
+if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+   sc.cfgsc.Editlabels:=not sc.cfgsc.Editlabels;
+   Refresh;
+end;
+end;
 
 procedure Tf_main.ShowConstellationLineExecute(Sender: TObject);
 begin
@@ -1548,6 +1556,7 @@ def_cfgsc.showstars:=true;
 def_cfgsc.shownebulae:=true;
 def_cfgsc.showline:=true;
 def_cfgsc.showlabelall:=true;
+def_cfgsc.Editlabels:=false;
 def_cfgsc.Simnb:=1;
 def_cfgsc.SimD:=1;
 def_cfgsc.SimH:=0;
@@ -1923,6 +1932,8 @@ csc.horizonopaque:=ReadBool(section,'horizonopaque',csc.horizonopaque);
 csc.ShowHorizon:=ReadBool(section,'ShowHorizon',csc.ShowHorizon);
 csc.ShowHorizonDepression:=ReadBool(section,'ShowHorizonDepression',csc.ShowHorizonDepression);
 csc.ShowEqGrid:=ReadBool(section,'ShowEqGrid',csc.ShowEqGrid);
+csc.ShowLabelAll:=ReadBool(section,'ShowLabelAll',csc.ShowLabelAll);
+csc.EditLabels:=ReadBool(section,'EditLabels',csc.EditLabels);
 csc.ShowGrid:=ReadBool(section,'ShowGrid',csc.ShowGrid);
 csc.ShowGridNum:=ReadBool(section,'ShowGridNum',csc.ShowGridNum);
 csc.ShowConstL:=ReadBool(section,'ShowConstL',csc.ShowConstL);
@@ -2280,6 +2291,8 @@ WriteBool(section,'horizonopaque',csc.horizonopaque);
 WriteBool(section,'ShowHorizon',csc.ShowHorizon);
 WriteBool(section,'ShowHorizonDepression',csc.ShowHorizonDepression);
 WriteBool(section,'ShowEqGrid',csc.ShowEqGrid);
+WriteBool(section,'ShowLabelAll',csc.ShowLabelAll);
+WriteBool(section,'EditLabels',csc.EditLabels);
 WriteBool(section,'ShowGrid',csc.ShowGrid);
 WriteBool(section,'ShowGridNum',csc.ShowGridNum);
 WriteBool(section,'ShowConstL',csc.ShowConstL);
@@ -2651,6 +2664,7 @@ if ActiveMDIchild=sender then begin
     toolbuttonShowMilkyWay.down:=sc.cfgsc.ShowMilkyWay;
     ShowMilkyWay.checked:=sc.cfgsc.ShowMilkyWay;
     toolbuttonShowlabels.down:=sc.cfgsc.Showlabelall;
+    toolbuttonEditlabels.down:=sc.cfgsc.Editlabels;
     ShowLabels1.checked:=sc.cfgsc.Showlabelall;
     toolbuttonGrid.down:=sc.cfgsc.ShowGrid;
     Grid1.checked:=sc.cfgsc.ShowGrid;
@@ -2827,7 +2841,7 @@ for i:=1 to Maxwindow do
     and (TCPDaemon.TCPThrd[i]<>nil)
     and(TCPDaemon.TCPThrd[i].Fsock<>nil)
     and(not TCPDaemon.TCPThrd[i].terminated)
-    then TCPDaemon.TCPThrd[i].SendData('> '+origin+' : '+str);
+    then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
 {$ifdef mswindows}
 if DDEopen then begin
    DdeInfo[0]:=formatdatetime('c',now);
@@ -2979,6 +2993,7 @@ begin
         repeat
           if terminated then break;
           s := RecvString(1000);
+          //if s<>'' then writetrace(s);   // for debuging only, not thread safe!
           if lastError=0 then begin
              if (uppercase(s)='QUIT')or(uppercase(s)='EXIT') then break;
              splitarg(s,' ',cmd);
@@ -3152,8 +3167,12 @@ begin
 activecontrol:=nil;
 {$endif}
 {$ifdef mswindows}
-quicksearch.Enabled:=false;
+quicksearch.Enabled:=false;   // add all main form text control here
+TimeVal.Enabled:=false;
+TimeU.Enabled:=false;
 quicksearch.Enabled:=true;
+TimeVal.Enabled:=true;
+TimeU.Enabled:=true;
 setfocus;
 {$endif}
 end;
