@@ -679,7 +679,7 @@ if db.Active then begin
   db.UnLockTables;
   db.commit;
   db.flush('tables');
-  db.Vaccum;
+  db.Vacuum;
   memoast.lines.add('Delete completed');
 end;
 except
