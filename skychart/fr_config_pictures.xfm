@@ -64,9 +64,9 @@ object f_config_pictures: Tf_config_pictures
       object BitBtn3: TBitBtn
         Tag = 1
         Left = 335
-        Top = 45
-        Width = 25
-        Height = 25
+        Top = 43
+        Width = 28
+        Height = 28
         TabOrder = 6
         TabStop = False
         OnClick = BitBtn3Click
@@ -228,10 +228,10 @@ object f_config_pictures: Tf_config_pictures
       end
       object BitBtn5: TBitBtn
         Tag = 1
-        Left = 431
+        Left = 423
         Top = 27
-        Width = 25
-        Height = 25
+        Width = 28
+        Height = 28
         TabOrder = 1
         TabStop = False
         OnClick = BitBtn5Click
@@ -370,14 +370,8 @@ object f_config_pictures: Tf_config_pictures
           Left = 144
           Top = 96
           Width = 169
-          Height = 27
+          Height = 28
           Cursor = crIBeam
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
           TabOrder = 0
           Text = 'cat\RealSky\'
           OnChange = realskydirChange
@@ -386,14 +380,8 @@ object f_config_pictures: Tf_config_pictures
           Left = 144
           Top = 148
           Width = 169
-          Height = 27
+          Height = 28
           Cursor = crIBeam
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
           TabOrder = 1
           Text = 'X:\'
           OnChange = realskydriveChange
@@ -402,14 +390,8 @@ object f_config_pictures: Tf_config_pictures
           Left = 144
           Top = 192
           Width = 169
-          Height = 27
+          Height = 28
           Cursor = crIBeam
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
           TabOrder = 2
           Text = 'images\$TEMP.FIT'
           OnChange = realskyfileChange

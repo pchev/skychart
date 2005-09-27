@@ -116,7 +116,6 @@ begin
     // here if quicksearch is hiden, do nothing.
   end;
   {$endif}
-  Child.setfocus;
   result:=true;
   UpdateBtn(Child.sc.cfgsc.flipx,Child.sc.cfgsc.flipy,Child.Connect1.checked,Child);
 end;
@@ -168,6 +167,7 @@ c2.CommagMax := c1.CommagMax;
 c2.CommagDiff := c1.CommagDiff;
 c2.ComSymbol := c1.ComSymbol;
 c2.MagLabel := c1.MagLabel;
+c2.NameLabel := c1.NameLabel;
 c2.ConstFullLabel := c1.ConstFullLabel;
 c2.GRSlongitude := c1.GRSlongitude ;
 c2.ShowEarthShadow := c1.ShowEarthShadow ;
@@ -405,24 +405,27 @@ end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
+activecontrol:=quicksearch;
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
-{$ifdef linux}    // FormShow is called immediately before Application.Run, so this form need to be created immediately here. Be sure to remove them from the .dpr file.
+GetAppDir;
+chdir(appdir);
+InitTrace;
+traceon:=true;
+
+{$ifdef linux}    // FormShow is called immediately, before Application.Run, so this form need to be created immediately here. Be sure to remove them from the .dpr file.
+configfile:=expandfilename(Defaultconfigfile);
+InitTheme;
 f_info:=TF_info.Create(application);
 f_directory:=Tf_directory.Create(application);
 f_calendar:=Tf_calendar.Create(application);
 f_search:=Tf_search.Create(application);
 f_getdss:=Tf_getdss.Create(application);
-configfile:=expandfilename(Defaultconfigfile);
 {$endif}
 {$ifdef mswindows}
 configfile:=Defaultconfigfile;
 {$endif}
-GetAppDir;
-chdir(appdir);
-InitTrace;
-traceon:=true;
 catalog:=Tcatalog.Create(self);
 {$ifdef mswindows}
 DdeOpen := false;
@@ -467,6 +470,7 @@ try
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
  catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
+ catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
  f_search.cfgshr:=catalog.cfgshr;
  f_search.Init;
  SetLang;
@@ -1577,6 +1581,7 @@ def_cfgsc.ComSymbol:=1;
 def_cfgsc.CommagMax:=18;
 def_cfgsc.CommagDiff:=4;
 def_cfgsc.MagLabel:=false;
+def_cfgsc.NameLabel:=false;
 def_cfgsc.ConstFullLabel:=true;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
@@ -1955,6 +1960,7 @@ csc.ComSymbol:=ReadInteger(section,'ComSymbol',csc.ComSymbol);
 csc.CommagMax:=ReadFloat(section,'CommagMax',csc.CommagMax);
 csc.CommagDiff:=ReadFloat(section,'CommagDiff',csc.CommagDiff);
 csc.MagLabel:=ReadBool(section,'MagLabel',csc.MagLabel);
+csc.NameLabel:=ReadBool(section,'NameLabel',csc.NameLabel);
 csc.ConstFullLabel:=ReadBool(section,'ConstFullLabel',csc.ConstFullLabel);
 csc.PlanetParalaxe:=ReadBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
 csc.ShowEarthShadow:=ReadBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
@@ -2314,6 +2320,7 @@ WriteInteger(section,'ComSymbol',csc.ComSymbol);
 WriteFloat(section,'CommagMax',csc.CommagMax);
 WriteFloat(section,'CommagDiff',csc.CommagDiff);
 WriteBool(section,'MagLabel',csc.MagLabel);
+WriteBool(section,'NameLabel',csc.NameLabel);
 WriteBool(section,'ConstFullLabel',csc.ConstFullLabel);
 WriteBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
 WriteBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
@@ -2399,6 +2406,7 @@ WriteInteger(section,'PrintMethod',cfgm.PrintMethod);
 WriteString(section,'PrintCmd1',cfgm.PrintCmd1);
 WriteString(section,'PrintCmd2',cfgm.PrintCmd2);
 WriteString(section,'PrintTmpPath',cfgm.PrintTmpPath);
+WriteString(section,'ThemeName',cfgm.ThemeName);
 WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 WriteBool(section,'ListStar',catalog.cfgshr.ListStar);
@@ -2634,10 +2642,10 @@ end;
 procedure Tf_main.UpdateBtn(fx,fy:integer;tc:boolean;sender:TObject);
 begin
 if ActiveMDIchild=sender then begin
-  if fx>0 then FlipButtonX.ImageIndex:=15
-          else FlipButtonX.ImageIndex:=16;
-  if fy>0 then FlipButtonY.ImageIndex:=17
-          else FlipButtonY.ImageIndex:=18;
+  if fx>0 then begin FlipButtonX.ImageIndex:=15 ; Flipx1.checked:=false; end
+          else begin FlipButtonX.ImageIndex:=16 ; Flipx1.checked:=true;  end;
+  if fy>0 then begin FlipButtonY.ImageIndex:=17 ; Flipy1.checked:=false; end
+          else begin FlipButtonY.ImageIndex:=18 ; Flipy1.checked:=true; end;
   if tc   then begin
                TConnect.ImageIndex:=49;
                TelescopeConnect.Hint:='Disconnect Telescope';
@@ -2705,6 +2713,10 @@ if ActiveMDIchild=sender then begin
     toolbuttonAZ.down:= (sc.cfgsc.projpole=AltAz);
     toolbuttonEC.down:= (sc.cfgsc.projpole=Ecl);
     toolbuttonGL.down:= (sc.cfgsc.projpole=Gal);
+    EquatorialCoordinate1.checked:= toolbuttonEQ.down;
+    AltAzProjection1.checked:= toolbuttonAZ.down;
+    EclipticProjection1.checked:= toolbuttonEC.down;
+    GalacticProjection1.checked:= toolbuttonGL.down;
     Field1.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[0]);
     Field2.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[1]);
     Field3.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[2]);
@@ -3164,16 +3176,24 @@ begin
 // it is also mandatory to keep the keydown and mousewheel
 // event to the main form.
 {$ifdef linux}
-activecontrol:=nil;
+  activecontrol:=nil;
 {$endif}
 {$ifdef mswindows}
-quicksearch.Enabled:=false;   // add all main form text control here
-TimeVal.Enabled:=false;
-TimeU.Enabled:=false;
-quicksearch.Enabled:=true;
-TimeVal.Enabled:=true;
-TimeU.Enabled:=true;
-setfocus;
+  quicksearch.Enabled:=false;   // add all main form focusable control here
+  TimeVal.Enabled:=false;
+  TimeU.Enabled:=false;
+  TrackBar1.Enabled:=false;
+  TrackBar2.Enabled:=false;
+  TrackBar3.Enabled:=false;
+  TrackBar4.Enabled:=false;
+  quicksearch.Enabled:=true;
+  TimeVal.Enabled:=true;
+  TimeU.Enabled:=true;
+  TrackBar1.Enabled:=true;
+  TrackBar2.Enabled:=true;
+  TrackBar3.Enabled:=true;
+  TrackBar4.Enabled:=true;
+  setfocus;
 {$endif}
 end;
 

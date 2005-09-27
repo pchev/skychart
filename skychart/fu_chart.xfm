@@ -309,7 +309,6 @@ object f_chart: Tf_chart
     end
   end
   object PopupMenu1: TPopupMenu
-    Images = f_main.ImageList1
     OnPopup = PopupMenu1Popup
     Left = 88
     Top = 48

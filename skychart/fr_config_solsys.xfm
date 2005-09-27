@@ -9,7 +9,7 @@ object f_config_solsys: Tf_config_solsys
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_planet
+    ActivePage = t_asteroid
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -53,10 +53,10 @@ object f_config_solsys: Tf_config_solsys
         Caption = 'Data Files :'
       end
       object PlanetDirSel: TBitBtn
-        Left = 352
+        Left = 344
         Top = 59
-        Width = 26
-        Height = 26
+        Width = 28
+        Height = 28
         TabOrder = 4
         TabStop = False
         OnClick = PlanetDirSelClick
@@ -159,7 +159,7 @@ object f_config_solsys: Tf_config_solsys
         Left = 184
         Top = 277
         Width = 41
-        Height = 22
+        Height = 25
         Hint = '0..360'
         ParentShowHint = False
         ShowHint = True
@@ -170,9 +170,9 @@ object f_config_solsys: Tf_config_solsys
       end
       object BitBtn37: TBitBtn
         Left = 231
-        Top = 276
-        Width = 27
-        Height = 25
+        Top = 275
+        Width = 28
+        Height = 28
         Hint = 'Get recent measurement from JUPOS'
         ParentShowHint = False
         ShowHint = True
@@ -397,10 +397,10 @@ object f_config_solsys: Tf_config_solsys
             end
             object comfilebtn: TBitBtn
               Tag = 8
-              Left = 275
-              Top = 29
-              Width = 26
-              Height = 26
+              Left = 272
+              Top = 28
+              Width = 28
+              Height = 28
               TabOrder = 2
               TabStop = False
               OnClick = comfilebtnClick
@@ -877,8 +877,8 @@ object f_config_solsys: Tf_config_solsys
               Tag = 8
               Left = 275
               Top = 32
-              Width = 26
-              Height = 26
+              Width = 28
+              Height = 28
               TabOrder = 4
               TabStop = False
               OnClick = mpcfilebtnClick

@@ -438,7 +438,7 @@ begin
   if ma<0 then ma:=ma/10;                               // avoid Moon and Sun be too big
   Lum := (1.1*cfgchart.min_ma-ma)/cfgchart.min_ma;      // logarithmic luminosity proportional to magnitude
   if Lum<0.1 then Lum:=0.1;                             // for object fainter than the limit (asteroid)
-  AAwidth:=cfgplot.partsize*power(cfgplot.magsize,Lum); // particle size also depend on the magnitude
+  AAwidth:=cfgchart.drawpen*cfgplot.partsize*power(cfgplot.magsize,Lum); // particle size also depend on the magnitude
 
   if b_v>1000 then co:=cfgplot.Color[trunc(b_v-1000)]   // Use direct color table indice
   else begin

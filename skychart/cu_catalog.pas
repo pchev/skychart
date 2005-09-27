@@ -128,6 +128,7 @@ type
      Procedure LoadConstL(fname:string);
      Procedure LoadConstB(fname:string);
      Procedure LoadHorizon(fname:string; var cfgsc:conf_skychart);
+     Procedure LoadStarName(fname:string);
   published
     { Published declarations }
   end;
@@ -587,6 +588,7 @@ begin
              EmptyRec.options.altname[2]:=true;
              EmptyRec.options.flabel[16]:='HR';
              EmptyRec.options.flabel[17]:='HD';
+             EmptyRec.options.flabel[18]:='Common Name';
              Emptyrec.star.valid[vsId]:=true;
              Emptyrec.star.valid[vsMagv]:=true;
              Emptyrec.star.valid[vsB_v]:=true;
@@ -1208,6 +1210,7 @@ end;
 
 function Tcatalog.GetBSC(var rec:GcatRec):boolean;
 var lin : BSCrec;
+    i: integer;
 begin
 rec:=EmptyRec;
 result:=true;
@@ -1239,6 +1242,12 @@ if result then begin
       rec.star.greeksymbol:=inttostr(lin.flam);
       rec.star.valid[vsGreekSymbol]:=true;
    end;
+   rec.str[3]:='';
+   for i:=0 to cfgshr.StarNameNum-1 do begin
+     if cfgshr.StarNameHR[i]=lin.bs then begin rec.str[3]:=cfgshr.StarName[i]; rec.vstr[3]:=true; break;end;
+   end;
+   i:=pos(';',rec.str[3]);
+   if i>0 then rec.str[3]:=copy(rec.str[3],1,i-1);
 end;
 end;
 
@@ -2586,6 +2595,52 @@ end;
 end;
 cfgsc.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
 
+end;
+
+
+Procedure Tcatalog.LoadStarName(fname:string);
+
+var
+
+    buf,hr : string;
+    f : TextFile;
+    n,i : integer;
+begin
+  cfgshr.StarNameNum := 0;
+  if not FileExists(fname) then begin
+     setlength(cfgshr.StarName,0);
+     setlength(cfgshr.StarNameHR,0);
+     exit;
+  end;
+  assignfile(f,fname);
+  FileMode:=0;
+  try
+  reset(f);
+  n:=0;
+  // first loop to get the size
+  repeat
+     readln(f,buf);
+     if copy(buf,1,1)=';' then continue;
+     inc(n);
+  until eof(f);
+  setlength(cfgshr.StarName,n);
+  setlength(cfgshr.StarNameHR,n);
+  // read the file now
+  reset(f);
+  i:=0;
+  repeat
+    Readln(f,buf);
+    if copy(buf,1,1)=';' then continue;
+    hr:=trim(copy(buf,1,6));
+    buf:=trim(copy(buf,10,999));
+    cfgshr.StarName[i]:=buf;
+    cfgshr.StarNameHR[i]:=strtointdef(hr,0);
+    inc(i);
+  until eof(f);
+  cfgshr.StarNameNum:=n;
+  finally
+   CloseFile(f);
+  end;
 end;
 
 

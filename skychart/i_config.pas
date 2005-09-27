@@ -57,6 +57,8 @@ procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var i,j: integer;
 begin
 if locktree then exit;
+try
+locktree:=true;
 if node.level=0 then begin
    Treeview1.selected:=Treeview1.items[(Treeview1.selected.absoluteindex+1)];
 end else begin
@@ -74,6 +76,10 @@ end else begin
      7 : begin f_config_system1.pa_system.ActivePageIndex:=j;           f_config_system1.FormShow(Sender); end;
    end;
 end;
+application.processmessages;
+finally
+locktree:=false;
+end;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);
@@ -81,6 +87,8 @@ begin
 if Treeview1.selected.absoluteindex< Treeview1.items.count-1 then begin
  Treeview1.selected:=Treeview1.selected.GetNext;
  Treeview1.selected.parent.expand(true);
+ treeview1.topitem:=Treeview1.selected;
+ TreeView1Change(Sender,Treeview1.selected);
 end;
 end;
 
@@ -95,6 +103,7 @@ if Treeview1.selected.absoluteindex>1 then begin
  locktree:=false;
  Treeview1.selected.parent.expand(true);
  Treeview1.selected:=Treeview1.items[i];
+ treeview1.topitem:=Treeview1.selected;
  TreeView1Change(Sender,Treeview1.selected);
 end;
 end;

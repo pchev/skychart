@@ -228,6 +228,8 @@ type
     listpla: TCheckBox;
     listvar: TCheckBox;
     listdbl: TCheckBox;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure equinoxtypeClick(Sender: TObject);
     procedure equinox1Change(Sender: TObject);
     procedure PMBoxClick(Sender: TObject);

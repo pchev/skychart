@@ -3369,14 +3369,15 @@ object f_main: Tf_main
       object StarSizePanel: TPanel
         Left = 567
         Top = 2
-        Width = 97
+        Width = 100
         Height = 23
         Align = alCustom
         TabOrder = 0
         Visible = False
+        OnMouseLeave = ToolBar1MouseLeave
         object TrackBar1: TTrackBar
           Tag = 1
-          Left = 2
+          Left = 0
           Top = 1
           Width = 50
           Height = 9
@@ -3391,7 +3392,7 @@ object f_main: Tf_main
         end
         object TrackBar2: TTrackBar
           Tag = 2
-          Left = 2
+          Left = 0
           Top = 11
           Width = 50
           Height = 9
@@ -3406,7 +3407,7 @@ object f_main: Tf_main
         end
         object TrackBar3: TTrackBar
           Tag = 3
-          Left = 45
+          Left = 50
           Top = 1
           Width = 50
           Height = 9
@@ -3421,7 +3422,7 @@ object f_main: Tf_main
         end
         object TrackBar4: TTrackBar
           Tag = 4
-          Left = 45
+          Left = 50
           Top = 11
           Width = 50
           Height = 9
@@ -3973,16 +3974,16 @@ object f_main: Tf_main
       object ViewStatusBar1: TMenuItem
         Action = ViewStatus
       end
-      object zoomplus1: TMenuItem
-        Action = zoomplus
-      end
-      object zoomminus1: TMenuItem
-        Action = zoomminus
-      end
       object NightVision1: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Night Vision'
         object Useyourdesktopmanagertochangethecolor1: TMenuItem
-          Caption = 'Use your desktop manager to set the color'
+          Caption = 'Use your desktop manager'
+          Enabled = False
+        end
+        object tosetthecolor1: TMenuItem
+          Caption = 'to set the color'
+          Enabled = False
         end
         object N7: TMenuItem
           Caption = '-'
@@ -4005,8 +4006,28 @@ object f_main: Tf_main
           end
         end
       end
+      object Themes1: TMenuItem
+        AutoHotkeys = maManual
+        Caption = 'Themes'
+        object Default1: TMenuItem
+          AutoHotkeys = maManual
+          Caption = 'Default'
+          GroupIndex = 102
+          RadioItem = True
+          OnClick = SetThemeClick
+        end
+      end
       object ViewInformation1: TMenuItem
         Action = ViewInfo
+      end
+      object N8: TMenuItem
+        Caption = '-'
+      end
+      object zoomplus1: TMenuItem
+        Action = zoomplus
+      end
+      object zoomminus1: TMenuItem
+        Action = zoomminus
       end
     end
     object Chart1: TMenuItem
@@ -4033,7 +4054,7 @@ object f_main: Tf_main
         object Flipx1: TMenuItem
           Action = Flipx
         end
-        object MirrorVertically1: TMenuItem
+        object flipy1: TMenuItem
           Action = Flipy
         end
         object rotplus1: TMenuItem

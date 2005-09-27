@@ -238,7 +238,7 @@ else if DBtype=sqlite then begin
      if msg<>'0' then result:=result+msg;
   end;
   db.Commit;
-  db.Query('VACUUM');
+  db.Vacuum;
   msg:=trim(db.ErrorMessage);
   if msg<>'0' then result:=result+msg;
 end;
@@ -396,7 +396,7 @@ if db.Active then begin
   db.flush('tables');
   memocom.lines.add('Delete daily data');
   TruncateDailyComet;
-  if DBtype=sqlite then db.Query('VACUUM');
+  db.Vacuum;
   memocom.lines.add('Delete completed');
 end;
 except
@@ -422,7 +422,7 @@ if db.Active then begin
   db.commit;
   memocom.lines.add('Delete daily data');
   TruncateDailyComet;
-  if DBtype=sqlite then db.Query('VACUUM');
+  db.Vacuum;
   memocom.lines.add('Delete completed');
 end;
 except
@@ -652,7 +652,7 @@ if db.Active then begin
   db.flush('tables');
   memoast.lines.add('Delete daily data');
   TruncateDailyAsteroid;
-  if DBtype=sqlite then db.Query('VACUUM');
+  db.Vacuum;
   memoast.lines.add('Delete completed');
 end;
 except
@@ -708,7 +708,7 @@ if db.Active then begin
   db.commit;
   memoast.lines.add('Delete daily data');
   TruncateDailyAsteroid;
-  if DBtype=sqlite then db.Query('VACUUM');
+  db.Vacuum;
   memoast.lines.add('Delete completed');
 end;
 except

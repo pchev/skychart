@@ -9,7 +9,7 @@ object f_config_observatory: Tf_config_observatory
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_horizon
+    ActivePage = t_observatory
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -956,9 +956,9 @@ object f_config_observatory: Tf_config_observatory
         object horizonfileBtn: TBitBtn
           Tag = 8
           Left = 383
-          Top = 73
-          Width = 26
-          Height = 26
+          Top = 72
+          Width = 28
+          Height = 28
           TabOrder = 2
           TabStop = False
           OnClick = horizonfileBtnClick

@@ -206,7 +206,7 @@ if maximize then begin
  { beware to pass here only for the first refresh to avoid to loop}
  maximize:=false;
  windowstate:=wsMaximized;
- setfocus;
+ Image1Click(nil);
 end;
 Image1.Picture.Bitmap.Width:=Image1.width;
 Image1.Picture.Bitmap.Height:=Image1.Height;
@@ -963,11 +963,13 @@ repeat
   delete(buf,1,i);
   i:=pos(':',buf2);
   if i>0 then begin
-     txt:=txt+bold(LongLabel(copy(buf2,1,i)));
-     if copy(buf2,1,5)='desc:' then buf2:=stringreplace(buf2,';',html_br,[rfReplaceAll]);
-     delete(buf2,1,i);
-  end;
-  txt:=txt+buf2+html_br;
+     buf2:=stringreplace(buf2,':',': ',[]);
+     if copy(buf2,1,5)='desc:' then buf2:=stringreplace(buf2,';',html_br+html_sp+html_sp+html_sp,[rfReplaceAll]);
+     txt:=txt+bold(LongLabel(buf2));
+  end
+  else
+     txt:=txt+buf2;
+  txt:=txt+html_br;
 until buf='';
 // coordinates
 txt:=txt+html_ffx+html_br;
@@ -1182,7 +1184,7 @@ Function Tf_chart.LongLabelConst(txt : string) : string;
 var i : integer;
 begin
 txt:=uppercase(trim(txt));
-for i:=1 to sc.catalog.cfgshr.ConstelNum do begin
+for i:=0 to sc.catalog.cfgshr.ConstelNum-1 do begin
   if txt=UpperCase(sc.catalog.cfgshr.ConstelName[i,1]) then begin
      txt:=sc.catalog.cfgshr.ConstelName[i,2];
      break;
