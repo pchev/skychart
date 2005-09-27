@@ -40,6 +40,11 @@ procedure Tf_config_catalog.ShowGCat;
 var i,j:integer;
 begin
 stringgrid3.RowCount:=2;
+stringgrid3.cells[0,0]:='x';
+stringgrid3.cells[1,0]:='Cat.';
+stringgrid3.cells[2,0]:='Min.';
+stringgrid3.cells[3,0]:='Max.';
+stringgrid3.cells[4,0]:='Path';
 stringgrid3.cells[0,1]:='';
 stringgrid3.cells[1,1]:='';
 stringgrid3.cells[2,1]:='';

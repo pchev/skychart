@@ -27,6 +27,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses fu_chart, cu_catalog, cu_planet, cu_fits, cu_database, u_constant, u_util, blcksock, libc, Math,
+     {$ifdef Themed}
+     QThemed, QThemeSrvLinux,
+     {$endif}
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
      QStdCtrls, IniFiles, Types, QButtons, QFileCtrls, QClipbrd;
@@ -301,7 +304,7 @@ type
     zoomminus1: TMenuItem;
     Transformation1: TMenuItem;
     Flipx1: TMenuItem;
-    MirrorVertically1: TMenuItem;
+    flipy1: TMenuItem;
     rotplus1: TMenuItem;
     rotminus1: TMenuItem;
     FieldofVision1: TMenuItem;
@@ -365,6 +368,10 @@ type
     N7: TMenuItem;
     ToolButtonEditLabels: TToolButton;
     EditLabels: TAction;
+    Themes1: TMenuItem;
+    Default1: TMenuItem;
+    N8: TMenuItem;
+    tosetthecolor1: TMenuItem;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -460,6 +467,7 @@ type
     procedure TrackExecute(Sender: TObject);
     procedure ButtonModeClick(Sender: TObject);
     procedure EditLabelsExecute(Sender: TObject);
+    procedure SetThemeClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -528,6 +536,8 @@ type
     procedure SaveAndRestart(Sender: TObject);
     procedure InitializeDB(Sender: TObject);
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    procedure InitTheme;
+    procedure SetTheme;
   end;
 
 var
@@ -566,8 +576,89 @@ begin
 activecontrol:=nil;
 end;
 
-// End of Linux specific CLX code:
+procedure Tf_main.InitTheme;
+var  i: integer;
+     sr: TSearchRec;
+     inif: TMemIniFile;
+     m: Tmenuitem;
+begin
+ {$ifdef Themed}
+   cfgm.ThemeName:='Silver';
+   inif:=TMeminifile.create(configfile);
+   ThemePath:=slash(appdir)+ThemePath;
+   try
+     cfgm.ThemeName:=inif.ReadString('main','ThemeName',cfgm.ThemeName);
+   finally
+     inif.Free;
+   end;
+   if cfgm.ThemeName='Default' then Default1.Checked:=true;
+   if FindFirst(ThemePath + PathDelim + '*', faAnyFile, sr) = 0 then
+   try
+    repeat
+      if (sr.Attr and faDirectory <> 0) and (sr.Name <> '.') and (sr.Name <> '..') and
+         (CompareText(sr.Name, '.svn') <> 0) and (CompareText(sr.Name, 'svn') <> 0) and
+         (CompareText(sr.Name, '.cvs') <> 0) and (CompareText(sr.Name, 'cvs') <> 0) then begin
+             m:=Tmenuitem.create(self);
+             m.caption:=sr.Name;
+             m.OnClick:=SetThemeClick;
+             m.RadioItem:=true;
+             m.GroupIndex:=102;
+             m.checked:=(m.caption=cfgm.ThemeName);
+             Themes1.add(m);
+      end;
+    until FindNext(sr) <> 0;
+   finally
+    FindClose(sr);
+   end;
+   SetTheme;
+ {$else}
+   Themes1.visible:=false;
+ {$endif}
+end;
 
+procedure Tf_main.SetTheme;
+var i: integer;
+begin
+{$ifdef Themed}
+   if cfgm.ThemeName<>'Default' then begin
+      SetThemesDirectory(ThemePath);
+      if ThemeServices.ThemesAvailable and (ThemeServices.ThemeCount > 0) then
+         for i:=0 to ThemeServices.ThemeCount-1 do begin
+             if ThemeServices.ThemeNames[i]=cfgm.ThemeName then begin
+                ThemeServices.ThemeIndex := i;
+             end;
+         end;
+  end;
+{$endif}
+end;
+
+procedure Tf_main.SetThemeClick(Sender: TObject);
+var  inif: TMemIniFile;
+begin
+{$ifdef Themed}
+if sender is TmenuItem then with Sender as TmenuItem do begin
+  if cfgm.ThemeName<>Caption then begin
+     cfgm.ThemeName:=Caption;
+     checked:=true;
+     inif:=TMeminifile.create(configfile);
+     try
+       inif.WriteString('main','ThemeName',cfgm.ThemeName);
+       inif.Updatefile;
+     finally
+       inif.Free;
+     end;
+     SetTheme;
+     if (cfgm.ThemeName='Default') and
+        (MessageDlg('You need to restart the program to reset the default theme. Do you want to restart now?',mtConfirmation,[mbYes, mbNo],0)=mrYes) then begin
+            NeedRestart:=true;
+            Close;
+     end;
+  end;
+end;
+ {$endif}
+end;
+
+// End of Linux specific CLX code:
 
 end.
 

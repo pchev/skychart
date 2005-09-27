@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_color
+    ActivePage = t_labels
     Align = alClient
     TabOrder = 0
     object t_display: TTabSheet
@@ -1869,7 +1869,7 @@ object f_config_display: Tf_config_display
         Width = 41
         Height = 22
         MaxValue = 48
-        MinValue = 6
+        MinValue = 2
         TabOrder = 0
         Value = 6
         OnChange = labelsizeChanged
@@ -1903,7 +1903,7 @@ object f_config_display: Tf_config_display
         Width = 41
         Height = 22
         MaxValue = 48
-        MinValue = 6
+        MinValue = 2
         TabOrder = 3
         Value = 6
         OnChange = labelsizeChanged
@@ -1937,7 +1937,7 @@ object f_config_display: Tf_config_display
         Width = 41
         Height = 22
         MaxValue = 48
-        MinValue = 6
+        MinValue = 2
         TabOrder = 6
         Value = 6
         OnChange = labelsizeChanged
@@ -1971,7 +1971,7 @@ object f_config_display: Tf_config_display
         Width = 41
         Height = 22
         MaxValue = 48
-        MinValue = 6
+        MinValue = 2
         TabOrder = 9
         Value = 6
         OnChange = labelsizeChanged
@@ -2005,7 +2005,7 @@ object f_config_display: Tf_config_display
         Width = 41
         Height = 22
         MaxValue = 48
-        MinValue = 6
+        MinValue = 2
         TabOrder = 12
         Value = 6
         OnChange = labelsizeChanged
@@ -2039,7 +2039,7 @@ object f_config_display: Tf_config_display
         Width = 41
         Height = 22
         MaxValue = 48
-        MinValue = 6
+        MinValue = 2
         TabOrder = 15
         Value = 6
         OnChange = labelsizeChanged
@@ -2071,27 +2071,28 @@ object f_config_display: Tf_config_display
         Width = 41
         Height = 22
         MaxValue = 48
-        MinValue = 6
+        MinValue = 2
         TabOrder = 18
         Value = 6
         OnChange = labelsizeChanged
       end
       object MagLabel: TRadioGroup
-        Left = 24
+        Left = 32
         Top = 304
-        Width = 201
+        Width = 225
         Height = 57
         Caption = 'Star Label'
         Columns = 2
         ItemIndex = 0
         Items.Strings = (
           'Name'
+          'Common Name'
           'Magnitude')
         TabOrder = 19
         OnClick = MagLabelClick
       end
       object constlabel: TRadioGroup
-        Left = 240
+        Left = 264
         Top = 304
         Width = 201
         Height = 57
@@ -2130,7 +2131,7 @@ object f_config_display: Tf_config_display
         Width = 41
         Height = 22
         MaxValue = 48
-        MinValue = 6
+        MinValue = 2
         TabOrder = 23
         Value = 6
         OnChange = labelsizeChanged

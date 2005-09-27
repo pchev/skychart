@@ -61,7 +61,7 @@ case searchkind of
       ra:=NebNameAR[NebNameBox.itemindex];
       de:=NebNameDE[NebNameBox.itemindex];
       end;
-  3 : num:='HR'+inttostr(starlst[starnamebox.itemindex]);
+  3 : num:='HR'+inttostr(cfgshr.StarNameHR[starnamebox.itemindex]);
   8 : num:=PlanetBox.Text;
   9 : num:=ConstBox.Text;
   else num:=Id.text;
@@ -217,51 +217,23 @@ procedure Tf_search.InitConst;
 var i : integer;
 begin
 ConstBox.Clear;
-for i:=0 to cfgshr.ConstelNum-1 do begin
+for i:=0 to cfgshr.ConstelNum-1 do
   ConstBox.Items.Add(cfgshr.ConstelName[i,2]);
-end;
+if ConstBox.items.Count=0 then
+   ConstBox.items.add(' ');
 ConstBox.ItemIndex:=0;
 end;
 
 procedure Tf_search.InitStarName;
 var
-    buf,n,fn : string;
-    f : TextFile;
     i : integer;
 begin
-try
 starnamebox.Clear;
-i:=0;
-maxstar:=0;
-fn:=slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt';
-if FileExists(fn) then begin
-  maxstar:=100;
-  setlength(starlst,maxstar);
-  AssignFile(f,fn);
-  FileMode:=0;
-  reset(f);
-  repeat
-    if i>=maxstar then begin
-       maxstar:=maxstar+100;
-       setlength(starlst,maxstar)
-    end;
-    Readln(f,buf);
-    if copy(buf,1,1)=';' then continue;
-    n:=trim(copy(buf,1,6));
-    buf:=trim(copy(buf,10,999));
-    starnamebox.items.Add(buf);
-    starlst[i]:=strtointdef(n,0);
-    inc(i);
-  until eof(f);
-  CloseFile(f);
-end;
-finally
-maxstar:=starnamebox.items.Count;
-if starnamebox.items.Count=0 then begin
-  starnamebox.items.add(' ');
-end;
+for i:=0 to cfgshr.StarNameNum-1 do
+   starnamebox.items.Add(cfgshr.StarName[i]);
+if starnamebox.items.Count=0 then
+   starnamebox.items.add(' ');
 starnamebox.itemindex:=0;
-end;
 end;
 
 procedure Tf_search.InitNebName;

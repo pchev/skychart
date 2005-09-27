@@ -10,7 +10,7 @@ object f_config_system: Tf_config_system
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_system
+    ActivePage = t_telescope
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -157,10 +157,10 @@ object f_config_system: Tf_config_system
         end
         object BitBtn1: TBitBtn
           Tag = 8
-          Left = 338
-          Top = 17
-          Width = 26
-          Height = 26
+          Left = 336
+          Top = 16
+          Width = 28
+          Height = 28
           TabOrder = 2
           TabStop = False
           OnClick = BitBtn1Click
@@ -196,10 +196,10 @@ object f_config_system: Tf_config_system
         end
         object BitBtn2: TBitBtn
           Tag = 8
-          Left = 338
-          Top = 53
-          Width = 26
-          Height = 26
+          Left = 336
+          Top = 52
+          Width = 28
+          Height = 28
           TabOrder = 3
           TabStop = False
           OnClick = BitBtn2Click
@@ -477,7 +477,7 @@ object f_config_system: Tf_config_system
           OnChange = IndiServerHostChange
         end
         object Label86: TLabel
-          Left = 248
+          Left = 240
           Top = 28
           Width = 89
           Height = 20
@@ -504,9 +504,9 @@ object f_config_system: Tf_config_system
         object Label258: TLabel
           Left = 8
           Top = 104
-          Width = 126
+          Width = 69
           Height = 20
-          Caption = 'INDI Server command '
+          Caption = 'INDI Server '
         end
         object IndiServerCmd: TEdit
           Left = 120
@@ -518,7 +518,7 @@ object f_config_system: Tf_config_system
           OnChange = IndiServerCmdChange
         end
         object Label259: TLabel
-          Left = 248
+          Left = 232
           Top = 136
           Width = 96
           Height = 20
@@ -548,7 +548,7 @@ object f_config_system: Tf_config_system
           OnChange = IndiDevChange
         end
         object Label260: TLabel
-          Left = 248
+          Left = 240
           Top = 104
           Width = 86
           Height = 20

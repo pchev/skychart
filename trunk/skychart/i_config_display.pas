@@ -182,8 +182,9 @@ begin
  labelsizeMisc.value:=cplot.labelsize[7];
  labelsizeChartInfo.value:=cplot.labelsize[8];
  showlabelcolor;
- if csc.MagLabel then MagLabel.ItemIndex:=1
-                 else MagLabel.itemindex:=0;
+ if csc.NameLabel then MagLabel.ItemIndex:=1
+ else if csc.MagLabel then MagLabel.ItemIndex:=2
+                      else MagLabel.itemindex:=0;
  if csc.ConstFullLabel then constlabel.ItemIndex:=0
                        else constlabel.ItemIndex:=1;
  Showlabelall.checked:=csc.Showlabelall;
@@ -627,7 +628,8 @@ end;
 
 procedure Tf_config_display.MagLabelClick(Sender: TObject);
 begin
-csc.MagLabel:=(MagLabel.ItemIndex=1);
+csc.MagLabel:=(MagLabel.ItemIndex=2);
+csc.NameLabel:=(MagLabel.ItemIndex=1);
 end;
 
 procedure Tf_config_display.constlabelClick(Sender: TObject);

@@ -100,10 +100,9 @@ type
     procedure InitNebName;
   private
     { Private declarations }
-    starlst : array of integer;
     NebNameAR : array of single;
     NebNameDE : array of single;
-    maxstar, numNebName : integer;
+    numNebName : integer;
   public
     { Public declarations }
     Num : string;

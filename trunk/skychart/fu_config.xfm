@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 205
-  Top = 223
+  Left = 209
+  Top = 249
   Width = 740
   Height = 500
   HorzScrollBar.Range = 205
@@ -9,7 +9,7 @@ object f_config: Tf_config
   Caption = 'Configuration'
   Color = clButton
   Font.Color = clText
-  Font.Height = 11
+  Font.Height = 13
   Font.Name = 'Sans'
   Font.Pitch = fpVariable
   Font.Style = []
@@ -20,7 +20,7 @@ object f_config: Tf_config
   Scaled = False
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   object Panel2: TPanel
     Left = 0
     Top = 466
@@ -81,7 +81,7 @@ object f_config: Tf_config
     Top = 0
     Width = 535
     Height = 466
-    ActivePage = TabSheet1
+    ActivePage = TabSheet6
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -96,129 +96,10 @@ object f_config: Tf_config
         TabOrder = 0
         inherited pa_time: TPageControl
           ActivePage = f_config_time1.t_time
-          inherited t_time: TTabSheet
-            inherited Label50: TLabel
-              Width = 40
-              Height = 18
-            end
-            inherited Label72: TLabel
-              Width = 57
-              Height = 18
-            end
-            inherited Panel7: TPanel
-              inherited Label131: TLabel
-                Width = 89
-                Height = 18
-              end
-              inherited Label132: TLabel
-                Width = 47
-                Height = 18
-              end
-              inherited Label133: TLabel
-                Width = 140
-                Height = 18
-              end
-            end
-            inherited Panel12: TPanel
-              inherited Label146: TLabel
-                Width = 48
-                Height = 18
-              end
-              inherited Tdt_Ut: TLabel
-                Width = 24
-                Height = 18
-              end
-              inherited Label152: TLabel
-                Width = 40
-                Height = 18
-              end
-              inherited Label153: TLabel
-                Width = 203
-                Height = 18
-              end
-            end
-            inherited Panel9: TPanel
-              inherited Label154: TLabel
-                Width = 20
-                Height = 18
-              end
-              inherited Label158: TLabel
-                Width = 9
-                Height = 18
-              end
-              inherited Label159: TLabel
-                Width = 7
-                Height = 18
-              end
-              inherited Label160: TLabel
-                Width = 8
-                Height = 18
-              end
-              inherited Label161: TLabel
-                Width = 7
-                Height = 18
-              end
-              inherited Label162: TLabel
-                Width = 9
-                Height = 18
-              end
-              inherited Label163: TLabel
-                Width = 8
-                Height = 18
-              end
-              inherited Label164: TLabel
-                Width = 22
-                Height = 18
-              end
-              inherited d_year: TSpinEdit
-                Height = 26
-              end
-              inherited d_month: TSpinEdit
-                Height = 26
-              end
-              inherited d_day: TSpinEdit
-                Height = 26
-              end
-              inherited t_hour: TSpinEdit
-                Height = 26
-              end
-              inherited t_min: TSpinEdit
-                Height = 26
-              end
-              inherited t_sec: TSpinEdit
-                Height = 26
-              end
-            end
-          end
           inherited t_simulation: TTabSheet
-            inherited Label165: TLabel
-              Width = 107
-              Height = 18
-            end
-            inherited Label167: TLabel
-              Width = 31
-              Height = 18
-            end
-            inherited Label168: TLabel
-              Width = 109
-              Height = 18
-            end
-            inherited Label166: TLabel
-              Width = 263
-              Height = 18
-            end
-            inherited nbstep: TSpinEdit
-              Height = 26
-            end
-            inherited stepsize: TSpinEdit
-              Height = 26
-            end
             inherited SimObj: TCheckListBox
-              ItemHeight = 18
-            end
-            inherited Label178: TLabel
-              Width = 115
-              Height = 18
+              ItemHeight = 20
+              Rows = 4
             end
           end
         end
@@ -234,88 +115,6 @@ object f_config: Tf_config
         Width = 490
         Height = 440
         TabOrder = 0
-        inherited pa_observatory: TPageControl
-          inherited t_observatory: TTabSheet
-            inherited Latitude: TGroupBox
-              inherited Label58: TLabel
-                Width = 33
-                Height = 18
-              end
-              inherited Label59: TLabel
-                Width = 20
-                Height = 18
-              end
-              inherited Label60: TLabel
-                Width = 20
-                Height = 18
-              end
-              inherited hemis: TComboBox
-                Height = 26
-                ItemHeight = 20
-              end
-            end
-            inherited Longitude: TGroupBox
-              inherited Label61: TLabel
-                Width = 33
-                Height = 18
-              end
-              inherited Label62: TLabel
-                Width = 20
-                Height = 18
-              end
-              inherited Label63: TLabel
-                Width = 20
-                Height = 18
-              end
-              inherited long: TComboBox
-                Height = 26
-                ItemHeight = 20
-              end
-            end
-            inherited Altitude: TGroupBox
-              inherited Label70: TLabel
-                Width = 32
-                Height = 18
-              end
-            end
-            inherited obsname: TGroupBox
-              inherited citylist: TComboBox
-                Height = 26
-                ItemHeight = 20
-              end
-              inherited countrylist: TComboBox
-                Height = 26
-                ItemHeight = 20
-              end
-              inherited cityfilter: TEdit
-                Height = 26
-              end
-            end
-            inherited refraction: TGroupBox
-              inherited Label82: TLabel
-                Width = 82
-                Height = 18
-              end
-              inherited Label83: TLabel
-                Width = 99
-                Height = 18
-              end
-            end
-          end
-          inherited t_horizon: TTabSheet
-            inherited hor_l1: TLabel
-              Width = 120
-              Height = 18
-            end
-            inherited horizonfile: TEdit
-              Height = 26
-            end
-            inherited hor_l2: TLabel
-              Width = 74
-              Height = 18
-            end
-          end
-        end
       end
     end
     object TabSheet3: TTabSheet
@@ -328,346 +127,6 @@ object f_config: Tf_config
         Width = 490
         Height = 440
         TabOrder = 0
-        inherited pa_chart: TPageControl
-          inherited t_chart: TTabSheet
-            inherited Label31: TLabel
-              Width = 64
-              Height = 18
-            end
-            inherited Panel1: TPanel
-              inherited Label134: TLabel
-                Width = 25
-                Height = 18
-              end
-              inherited Label135: TLabel
-                Width = 255
-                Height = 18
-              end
-            end
-            inherited Panel10: TPanel
-              inherited Label136: TLabel
-                Width = 180
-                Height = 18
-              end
-              inherited EquinoxLabel: TLabel
-                Width = 41
-                Height = 18
-              end
-              inherited equinox1: TComboBox
-                Height = 26
-                ItemHeight = 20
-              end
-            end
-          end
-          inherited t_fov: TTabSheet
-            inherited Label30: TLabel
-              Width = 102
-              Height = 18
-            end
-            inherited Label106: TLabel
-              Left = 23
-              Width = 60
-              Height = 18
-            end
-            inherited Label107: TLabel
-              Width = 49
-              Height = 18
-            end
-            inherited Label138: TLabel
-              Left = 215
-              Width = 60
-              Height = 18
-            end
-            inherited Label139: TLabel
-              Width = 46
-              Height = 18
-            end
-          end
-          inherited t_projection: TTabSheet
-            inherited Label77: TLabel
-              Width = 84
-              Height = 18
-            end
-            inherited Label149: TLabel
-              Left = 31
-              Width = 60
-              Height = 18
-            end
-            inherited Label171: TLabel
-              Left = 223
-              Width = 60
-              Height = 18
-            end
-            inherited Label172: TLabel
-              Width = 47
-              Height = 18
-            end
-            inherited Label173: TLabel
-              Width = 47
-              Height = 18
-            end
-            inherited ComboBox2: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox1: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox3: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox4: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox5: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox6: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox7: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox8: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox9: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox10: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-            inherited ComboBox11: TComboBox
-              Height = 26
-              ItemHeight = 20
-            end
-          end
-          inherited t_filter: TTabSheet
-            inherited Label29: TLabel
-              Width = 93
-              Height = 18
-            end
-            inherited GroupBox2: TGroupBox
-              inherited Panel4: TPanel
-                inherited Panel2: TPanel
-                  inherited Label32: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label33: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label34: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label35: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label36: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label38: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label39: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label40: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label76: TLabel
-                    Width = 6
-                    Height = 18
-                  end
-                  inherited Label78: TLabel
-                    Width = 12
-                    Height = 18
-                  end
-                  inherited Label108: TLabel
-                    Width = 107
-                    Height = 18
-                  end
-                  inherited Label109: TLabel
-                    Width = 92
-                    Height = 18
-                  end
-                end
-                inherited Panel3: TPanel
-                  inherited Label110: TLabel
-                    Width = 98
-                    Height = 18
-                  end
-                end
-              end
-            end
-            inherited GroupBox1: TGroupBox
-              inherited Panel5: TPanel
-                inherited Label48: TLabel
-                  Width = 93
-                  Height = 18
-                end
-                inherited Label49: TLabel
-                  Width = 124
-                  Height = 18
-                end
-                inherited Label41: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label42: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label43: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label44: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label45: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label46: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label47: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label79: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label80: TLabel
-                  Width = 6
-                  Height = 18
-                end
-                inherited Label111: TLabel
-                  Width = 12
-                  Height = 18
-                end
-                inherited Label112: TLabel
-                  Width = 107
-                  Height = 18
-                end
-              end
-              inherited BigNebUnit: TLabel
-                Width = 35
-                Height = 18
-              end
-            end
-          end
-          inherited t_grid: TTabSheet
-            inherited Label115: TLabel
-              Width = 57
-              Height = 18
-            end
-            inherited Label150: TLabel
-              Width = 60
-              Height = 18
-            end
-            inherited Label175: TLabel
-              Width = 86
-              Height = 18
-            end
-            inherited Label176: TLabel
-              Width = 96
-              Height = 18
-            end
-            inherited MaskEdit1: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit2: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit3: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit4: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit5: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit6: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit7: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit8: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit9: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit10: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit11: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit12: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit13: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit14: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit15: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit16: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit17: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit18: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit19: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit20: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit21: TMaskEdit
-              Height = 26
-            end
-            inherited MaskEdit22: TMaskEdit
-              Height = 26
-            end
-          end
-          inherited t_list: TTabSheet
-            inherited Label95: TLabel
-              Width = 87
-              Height = 18
-            end
-          end
-        end
       end
     end
     object TabSheet4: TTabSheet
@@ -681,239 +140,9 @@ object f_config: Tf_config
         Height = 440
         TabOrder = 0
         inherited pa_catalog: TPageControl
-          inherited t_catgen: TTabSheet
-            inherited Label1: TLabel
-              Width = 73
-              Height = 18
-            end
-            inherited Label37: TLabel
-              Width = 300
-              Height = 18
-            end
-          end
-          inherited t_cdcstar: TTabSheet
-            inherited Label2: TLabel
-              Width = 128
-              Height = 18
-            end
-            inherited Label65: TLabel
-              Width = 14
-              Height = 18
-            end
-            inherited Label66: TLabel
-              Width = 14
-              Height = 18
-            end
-            inherited Label87: TLabel
-              Width = 14
-              Height = 18
-            end
-            inherited Label16: TLabel
-              Width = 19
-              Height = 18
-            end
-            inherited Label28: TLabel
-              Left = 268
-              Width = 58
-              Height = 18
-            end
-            inherited Label17: TLabel
-              Width = 22
-              Height = 18
-            end
-            inherited Label27: TLabel
-              Width = 45
-              Height = 18
-            end
-            inherited Label18: TLabel
-              Width = 25
-              Height = 18
-            end
-            inherited bsc3: TEdit
-              Height = 26
-            end
-            inherited sky3: TEdit
-              Height = 26
-            end
-            inherited ty23: TEdit
-              Height = 26
-            end
-            inherited gscf3: TEdit
-              Height = 26
-            end
-            inherited gscc3: TEdit
-              Height = 26
-            end
-            inherited usn3: TEdit
-              Height = 26
-            end
-            inherited Label21: TLabel
-              Width = 42
-              Height = 36
-            end
-            inherited Label19: TLabel
-              Width = 41
-              Height = 18
-            end
-            inherited Label20: TLabel
-              Width = 37
-              Height = 18
-            end
-            inherited dsbase3: TEdit
-              Height = 26
-            end
-            inherited dstyc3: TEdit
-              Height = 26
-            end
-            inherited dsgsc3: TEdit
-              Height = 26
-            end
-            inherited wds3: TEdit
-              Height = 26
-            end
-            inherited gcv3: TEdit
-              Height = 26
-            end
-          end
           inherited t_cdcneb: TTabSheet
-            inherited Label3: TLabel
-              Width = 139
-              Height = 18
-            end
-            inherited Label69: TLabel
-              Width = 35
-              Height = 18
-            end
-            inherited Label15: TLabel
-              Left = 268
-              Width = 58
-              Height = 18
-            end
-            inherited Label116: TLabel
-              Width = 19
-              Height = 18
-            end
-            inherited Label117: TLabel
-              Width = 22
-              Height = 18
-            end
-            inherited Label118: TLabel
-              Width = 45
-              Height = 18
-            end
-            inherited Label119: TLabel
-              Width = 33
-              Height = 18
-            end
-            inherited ngc3: TEdit
-              Height = 26
-            end
-            inherited sac3: TEdit
-              Height = 26
-            end
             inherited Label120: TLabel
               Left = 28
-              Width = 284
-              Height = 18
-            end
-            inherited rc33: TEdit
-              Height = 26
-            end
-            inherited lbn3: TEdit
-              Height = 26
-            end
-            inherited ocl3: TEdit
-              Height = 26
-            end
-            inherited gcm3: TEdit
-              Height = 26
-            end
-            inherited gpn3: TEdit
-              Height = 26
-            end
-            inherited pgc3: TEdit
-              Height = 26
-            end
-          end
-          inherited t_obsolete: TTabSheet
-            inherited Label88: TLabel
-              Width = 233
-              Height = 18
-            end
-            inherited Label67: TLabel
-              Width = 14
-              Height = 18
-            end
-            inherited tyc3: TEdit
-              Height = 26
-            end
-            inherited tic3: TEdit
-              Height = 26
-            end
-            inherited gsc3: TEdit
-              Height = 26
-            end
-            inherited mct3: TEdit
-              Height = 26
-            end
-            inherited Label90: TLabel
-              Width = 25
-              Height = 18
-            end
-            inherited Label91: TLabel
-              Width = 95
-              Height = 18
-            end
-            inherited Label92: TLabel
-              Width = 95
-              Height = 18
-            end
-            inherited Label93: TLabel
-              Width = 118
-              Height = 36
-            end
-            inherited Label94: TLabel
-              Width = 59
-              Height = 18
-            end
-            inherited Label5: TLabel
-              Left = 268
-              Width = 58
-              Height = 18
-            end
-            inherited Label6: TLabel
-              Width = 19
-              Height = 18
-            end
-            inherited Label7: TLabel
-              Width = 22
-              Height = 18
-            end
-            inherited Label8: TLabel
-              Width = 45
-              Height = 18
-            end
-          end
-          inherited t_external: TTabSheet
-            inherited Label4: TLabel
-              Width = 115
-              Height = 18
-            end
-            inherited Label52: TLabel
-              Width = 128
-              Height = 18
-            end
-            inherited Label71: TLabel
-              Left = 322
-              Width = 86
-              Height = 18
-            end
-            inherited Edit1: TEdit
-              Height = 26
-            end
-            inherited Label64: TLabel
-              Width = 98
-              Height = 18
             end
           end
         end
@@ -929,370 +158,6 @@ object f_config: Tf_config
         Width = 490
         Height = 440
         TabOrder = 0
-        inherited pa_solsys: TPageControl
-          inherited t_solsys: TTabSheet
-            inherited Label12: TLabel
-              Width = 98
-              Height = 18
-            end
-            inherited PlanetDir: TEdit
-              Height = 26
-            end
-            inherited Label53: TLabel
-              Width = 51
-              Height = 18
-            end
-          end
-          inherited t_planet: TTabSheet
-            inherited Label5: TLabel
-              Width = 71
-              Height = 18
-            end
-            inherited Label89: TLabel
-              Width = 107
-              Height = 18
-            end
-            inherited Label177: TLabel
-              Width = 100
-              Height = 18
-            end
-            inherited Edit2: TEdit
-              Height = 26
-            end
-          end
-          inherited t_comet: TTabSheet
-            inherited ComPageControl: TPageControl
-              inherited comsetting: TTabSheet
-                inherited GroupBox13: TGroupBox
-                  inherited Label6: TLabel
-                    Width = 245
-                    Height = 18
-                  end
-                  inherited Label231: TLabel
-                    Width = 58
-                    Height = 18
-                  end
-                  inherited Label232: TLabel
-                    Width = 151
-                    Height = 18
-                  end
-                end
-              end
-              inherited comload: TTabSheet
-                inherited Label233: TLabel
-                  Width = 48
-                  Height = 18
-                end
-                inherited GroupBox14: TGroupBox
-                  inherited Label234: TLabel
-                    Width = 21
-                    Height = 18
-                  end
-                  inherited comfile: TEdit
-                    Height = 26
-                  end
-                end
-              end
-              inherited comdelete: TTabSheet
-                inherited Label238: TLabel
-                  Width = 48
-                  Height = 18
-                end
-                inherited GroupBox16: TGroupBox
-                  inherited comelemlist: TComboBox
-                    Height = 26
-                    ItemHeight = 20
-                  end
-                end
-                inherited GroupBox17: TGroupBox
-                  inherited Label239: TLabel
-                    Width = 162
-                    Height = 18
-                  end
-                end
-              end
-              inherited Addsinglecom: TTabSheet
-                inherited Label241: TLabel
-                  Width = 280
-                  Height = 18
-                end
-                inherited Label242: TLabel
-                  Width = 55
-                  Height = 18
-                end
-                inherited Label243: TLabel
-                  Width = 99
-                  Height = 18
-                end
-                inherited Label244: TLabel
-                  Width = 84
-                  Height = 18
-                end
-                inherited Label245: TLabel
-                  Width = 54
-                  Height = 18
-                end
-                inherited Label246: TLabel
-                  Width = 68
-                  Height = 18
-                end
-                inherited Label247: TLabel
-                  Width = 105
-                  Height = 18
-                end
-                inherited Label248: TLabel
-                  Width = 123
-                  Height = 18
-                end
-                inherited Label249: TLabel
-                  Width = 47
-                  Height = 18
-                end
-                inherited Label250: TLabel
-                  Width = 54
-                  Height = 18
-                end
-                inherited Label251: TLabel
-                  Width = 86
-                  Height = 18
-                end
-                inherited Label253: TLabel
-                  Width = 38
-                  Height = 18
-                end
-                inherited Label254: TLabel
-                  Width = 26
-                  Height = 18
-                end
-                inherited comid: TEdit
-                  Height = 26
-                end
-                inherited comh: TEdit
-                  Height = 26
-                end
-                inherited comg: TEdit
-                  Height = 26
-                end
-                inherited comep: TEdit
-                  Height = 26
-                end
-                inherited comperi: TEdit
-                  Height = 26
-                end
-                inherited comnode: TEdit
-                  Height = 26
-                end
-                inherited comi: TEdit
-                  Height = 26
-                end
-                inherited comec: TEdit
-                  Height = 26
-                end
-                inherited comq: TEdit
-                  Height = 26
-                end
-                inherited comnam: TEdit
-                  Height = 26
-                end
-                inherited comeq: TEdit
-                  Height = 26
-                end
-                inherited comt: TMaskEdit
-                  Height = 26
-                end
-              end
-            end
-          end
-          inherited t_asteroid: TTabSheet
-            inherited AstPageControl: TPageControl
-              inherited astsetting: TTabSheet
-                inherited GroupBox9: TGroupBox
-                  inherited Label203: TLabel
-                    Width = 254
-                    Height = 18
-                  end
-                  inherited Label212: TLabel
-                    Width = 67
-                    Height = 18
-                  end
-                  inherited Label213: TLabel
-                    Width = 149
-                    Height = 18
-                  end
-                end
-              end
-              inherited astload: TTabSheet
-                inherited GroupBox7: TGroupBox
-                  inherited Label204: TLabel
-                    Width = 21
-                    Height = 18
-                  end
-                  inherited mpcfile: TEdit
-                    Height = 26
-                  end
-                  inherited Label215: TLabel
-                    Width = 103
-                    Height = 18
-                  end
-                end
-                inherited Label206: TLabel
-                  Width = 48
-                  Height = 18
-                end
-              end
-              inherited astprepare: TTabSheet
-                inherited GroupBox8: TGroupBox
-                  inherited aststrtdate: TMaskEdit
-                    Height = 26
-                  end
-                  inherited Label7: TLabel
-                    Width = 58
-                    Height = 18
-                  end
-                  inherited Label207: TLabel
-                    Width = 83
-                    Height = 18
-                  end
-                  inherited astnummonth: TSpinEdit
-                    Height = 26
-                  end
-                  inherited Label216: TLabel
-                    Width = 257
-                    Height = 18
-                  end
-                end
-                inherited Label210: TLabel
-                  Width = 48
-                  Height = 18
-                end
-              end
-              inherited astdelete: TTabSheet
-                inherited GroupBox10: TGroupBox
-                  inherited astelemlist: TComboBox
-                    Height = 26
-                    ItemHeight = 20
-                  end
-                end
-                inherited GroupBox11: TGroupBox
-                  inherited Label209: TLabel
-                    Width = 171
-                    Height = 18
-                  end
-                end
-                inherited Label211: TLabel
-                  Width = 48
-                  Height = 18
-                end
-                inherited GroupBox12: TGroupBox
-                  inherited astdeldate: TMaskEdit
-                    Height = 26
-                  end
-                  inherited Label214: TLabel
-                    Width = 146
-                    Height = 18
-                  end
-                end
-              end
-              inherited AddsingleAst: TTabSheet
-                inherited Label217: TLabel
-                  Width = 280
-                  Height = 18
-                end
-                inherited astid: TEdit
-                  Height = 26
-                end
-                inherited asth: TEdit
-                  Height = 26
-                end
-                inherited astg: TEdit
-                  Height = 26
-                end
-                inherited astep: TEdit
-                  Height = 26
-                end
-                inherited astma: TEdit
-                  Height = 26
-                end
-                inherited astperi: TEdit
-                  Height = 26
-                end
-                inherited astnode: TEdit
-                  Height = 26
-                end
-                inherited asti: TEdit
-                  Height = 26
-                end
-                inherited astec: TEdit
-                  Height = 26
-                end
-                inherited astax: TEdit
-                  Height = 26
-                end
-                inherited astref: TEdit
-                  Height = 26
-                end
-                inherited astnam: TEdit
-                  Height = 26
-                end
-                inherited asteq: TEdit
-                  Height = 26
-                end
-                inherited Label218: TLabel
-                  Width = 55
-                  Height = 18
-                end
-                inherited Label219: TLabel
-                  Width = 99
-                  Height = 18
-                end
-                inherited Label220: TLabel
-                  Width = 84
-                  Height = 18
-                end
-                inherited Label221: TLabel
-                  Width = 54
-                  Height = 18
-                end
-                inherited Label222: TLabel
-                  Width = 65
-                  Height = 18
-                end
-                inherited Label223: TLabel
-                  Width = 105
-                  Height = 18
-                end
-                inherited Label224: TLabel
-                  Width = 123
-                  Height = 18
-                end
-                inherited Label225: TLabel
-                  Width = 47
-                  Height = 18
-                end
-                inherited Label226: TLabel
-                  Width = 54
-                  Height = 18
-                end
-                inherited Label227: TLabel
-                  Width = 70
-                  Height = 18
-                end
-                inherited Label228: TLabel
-                  Width = 46
-                  Height = 18
-                end
-                inherited Label229: TLabel
-                  Width = 38
-                  Height = 18
-                end
-                inherited Label230: TLabel
-                  Width = 26
-                  Height = 18
-                end
-              end
-            end
-          end
-        end
       end
     end
     object TabSheet6: TTabSheet
@@ -1306,306 +171,45 @@ object f_config: Tf_config
         Height = 440
         TabOrder = 0
         inherited pa_display: TPageControl
-          inherited t_display: TTabSheet
-            inherited Label14: TLabel
-              Width = 70
-              Height = 18
-            end
-            inherited starvisual: TGroupBox
-              inherited Label75: TLabel
-                Width = 73
-                Height = 18
-              end
-              inherited Label262: TLabel
-                Width = 42
-                Height = 18
-              end
-              inherited Label263: TLabel
-                Width = 77
-                Height = 18
-              end
-              inherited Label264: TLabel
-                Width = 123
-                Height = 18
-              end
-            end
-          end
-          inherited t_fonts: TTabSheet
-            inherited Label51: TLabel
-              Width = 64
-              Height = 18
-            end
-            inherited Label121: TLabel
-              Width = 80
-              Height = 18
-            end
-            inherited Label122: TLabel
-              Width = 30
-              Height = 18
-            end
-            inherited Label123: TLabel
-              Width = 29
-              Height = 18
-            end
-            inherited Label124: TLabel
-              Width = 34
-              Height = 18
-            end
-            inherited Label125: TLabel
-              Width = 104
-              Height = 18
-            end
-            inherited Label126: TLabel
-              Width = 46
-              Height = 18
-            end
-            inherited Label127: TLabel
-              Width = 65
-              Height = 18
-            end
-            inherited Label128: TLabel
-              Width = 22
-              Height = 18
-            end
-            inherited Label129: TLabel
-              Width = 32
-              Height = 18
-            end
-            inherited Label235: TLabel
-              Width = 64
-              Height = 18
-            end
-          end
           inherited t_color: TTabSheet
-            inherited Label8: TLabel
-              Width = 63
-              Height = 18
-            end
-            inherited Label181: TLabel
-              Width = 19
-              Height = 18
-            end
-            inherited Label182: TLabel
-              Width = 19
-              Height = 18
-            end
-            inherited Label183: TLabel
-              Width = 15
-              Height = 18
-            end
-            inherited Label184: TLabel
-              Width = 15
-              Height = 18
-            end
-            inherited Label185: TLabel
-              Width = 15
-              Height = 18
-            end
-            inherited Label186: TLabel
-              Width = 15
-              Height = 18
-            end
-            inherited Label187: TLabel
-              Width = 6
-              Height = 18
-            end
-            inherited Label188: TLabel
-              Width = 6
-              Height = 18
-            end
-            inherited Label189: TLabel
-              Width = 21
-              Height = 18
-            end
             inherited Label190: TLabel
               Left = 60
-              Width = 31
-              Height = 18
             end
             inherited Label191: TLabel
               Left = 123
-              Width = 33
-              Height = 18
             end
             inherited Label192: TLabel
               Left = 189
-              Width = 31
-              Height = 18
             end
             inherited Label193: TLabel
               Left = 240
-              Width = 53
-              Height = 18
             end
             inherited Label194: TLabel
               Left = 310
-              Width = 36
-              Height = 18
             end
             inherited Label195: TLabel
               Left = 381
-              Width = 24
-              Height = 18
             end
             inherited Label197: TLabel
               Left = 42
-              Width = 92
-              Height = 18
             end
             inherited Label198: TLabel
               Left = 149
-              Width = 47
-              Height = 18
             end
             inherited Label199: TLabel
               Left = 218
-              Width = 69
-              Height = 18
             end
             inherited Label196: TLabel
               Left = 304
-              Width = 51
-              Height = 18
             end
             inherited Label11: TLabel
               Left = 377
-              Width = 37
-              Height = 18
             end
             inherited Label256: TLabel
               Left = 122
-              Width = 31
-              Height = 18
             end
             inherited Label257: TLabel
               Left = 59
-              Width = 39
-              Height = 18
-            end
-          end
-          inherited t_skycolor: TTabSheet
-            inherited Label200: TLabel
-              Width = 83
-              Height = 18
-            end
-          end
-          inherited t_nebcolor: TTabSheet
-            inherited Label201: TLabel
-              Width = 102
-              Height = 18
-            end
-            inherited Label1: TLabel
-              Width = 108
-              Height = 18
-            end
-            inherited Label2: TLabel
-              Width = 110
-              Height = 18
-            end
-            inherited Label3: TLabel
-              Width = 31
-              Height = 18
-            end
-            inherited Label4: TLabel
-              Width = 33
-              Height = 18
-            end
-            inherited Label5: TLabel
-              Width = 31
-              Height = 18
-            end
-          end
-          inherited t_lines: TTabSheet
-            inherited Label9: TLabel
-              Width = 61
-              Height = 18
-            end
-            inherited ConstlFile: TEdit
-              Height = 26
-            end
-            inherited Label180: TLabel
-              Width = 148
-              Height = 18
-            end
-            inherited ConstbFile: TEdit
-              Height = 26
-            end
-            inherited Label56: TLabel
-              Width = 164
-              Height = 18
-            end
-          end
-          inherited t_labels: TTabSheet
-            inherited Label10: TLabel
-              Width = 66
-              Height = 18
-            end
-            inherited Label236: TLabel
-              Width = 57
-              Height = 18
-            end
-            inherited Label240: TLabel
-              Width = 24
-              Height = 18
-            end
-            inherited Label252: TLabel
-              Width = 26
-              Height = 18
-            end
-            inherited Label255: TLabel
-              Width = 19
-              Height = 18
-            end
-            inherited labelsizeStar: TSpinEdit
-              Height = 26
-            end
-            inherited labelmagStar: TSpinEdit
-              Height = 26
-            end
-            inherited labelsizeVar: TSpinEdit
-              Height = 26
-            end
-            inherited labelmagVar: TSpinEdit
-              Height = 26
-            end
-            inherited labelsizeMult: TSpinEdit
-              Height = 26
-            end
-            inherited LabelmagMult: TSpinEdit
-              Height = 26
-            end
-            inherited labelsizeNeb: TSpinEdit
-              Height = 26
-            end
-            inherited labelmagNeb: TSpinEdit
-              Height = 26
-            end
-            inherited labelsizeSol: TSpinEdit
-              Height = 26
-            end
-            inherited labelmagSol: TSpinEdit
-              Height = 26
-            end
-            inherited labelsizeMisc: TSpinEdit
-              Height = 26
-            end
-            inherited labelsizeConst: TSpinEdit
-              Height = 26
-            end
-            inherited labelsizeChartInfo: TSpinEdit
-              Height = 26
-            end
-          end
-          inherited t_circle: TTabSheet
-            inherited Label307: TLabel
-              Width = 136
-              Height = 18
-            end
-          end
-          inherited t_rectangle: TTabSheet
-            inherited Label308: TLabel
-              Width = 153
-              Height = 18
             end
           end
         end
@@ -1621,100 +225,6 @@ object f_config: Tf_config
         Width = 490
         Height = 440
         TabOrder = 0
-        inherited pa_images: TPageControl
-          inherited t_images: TTabSheet
-            inherited Label113: TLabel
-              Width = 168
-              Height = 18
-            end
-            inherited Label265: TLabel
-              Width = 62
-              Height = 18
-            end
-            inherited Label266: TLabel
-              Width = 38
-              Height = 18
-            end
-            inherited nimages: TLabel
-              Width = 37
-              Height = 18
-            end
-            inherited Label267: TLabel
-              Width = 83
-              Height = 18
-            end
-            inherited imgpath: TEdit
-              Height = 26
-            end
-            inherited Panel11: TPanel
-              inherited Label268: TLabel
-                Width = 49
-                Height = 18
-              end
-              inherited Label269: TLabel
-                Width = 42
-                Height = 18
-              end
-            end
-            inherited ProgressPanel: TPanel
-              inherited ProgressCat: TLabel
-                Width = 27
-                Height = 18
-              end
-            end
-          end
-          inherited t_background: TTabSheet
-            inherited Label270: TLabel
-              Width = 90
-              Height = 18
-            end
-            inherited Label271: TLabel
-              Width = 39
-              Height = 18
-            end
-            inherited backimginfo: TLabel
-              Width = 55
-              Height = 18
-            end
-            inherited backimg: TEdit
-              Height = 26
-            end
-            inherited Panel1: TPanel
-              inherited Label1: TLabel
-                Width = 49
-                Height = 18
-              end
-              inherited Label2: TLabel
-                Width = 42
-                Height = 18
-              end
-            end
-          end
-          inherited t_dss: TTabSheet
-            inherited GroupBox3: TGroupBox
-              inherited Label72: TLabel
-                Width = 59
-                Height = 18
-              end
-              inherited Label73: TLabel
-                Width = 85
-                Height = 18
-              end
-              inherited Label74: TLabel
-                Width = 63
-                Height = 18
-              end
-              inherited Label75: TLabel
-                Width = 26
-                Height = 18
-              end
-              inherited Label77: TLabel
-                Width = 35
-                Height = 18
-              end
-            end
-          end
-        end
       end
     end
     object TabSheet8: TTabSheet
@@ -1727,159 +237,6 @@ object f_config: Tf_config
         Width = 490
         Height = 440
         TabOrder = 0
-        inherited pa_system: TPageControl
-          inherited t_system: TTabSheet
-            inherited Label84: TLabel
-              Width = 71
-              Height = 18
-            end
-            inherited MysqlBox: TGroupBox
-              inherited dbname: TEdit
-                Height = 26
-              end
-              inherited dbhost: TEdit
-                Height = 26
-              end
-              inherited Label141: TLabel
-                Width = 47
-                Height = 18
-              end
-              inherited Label142: TLabel
-                Width = 55
-                Height = 18
-              end
-              inherited Label143: TLabel
-                Width = 24
-                Height = 18
-              end
-              inherited dbuser: TEdit
-                Height = 26
-              end
-              inherited dbpass: TEdit
-                Height = 26
-              end
-              inherited Label144: TLabel
-                Width = 33
-                Height = 18
-              end
-              inherited Label145: TLabel
-                Width = 46
-                Height = 18
-              end
-            end
-            inherited GroupBoxDir: TGroupBox
-              inherited Label73: TLabel
-                Width = 68
-                Height = 18
-              end
-              inherited Label74: TLabel
-                Width = 63
-                Height = 18
-              end
-              inherited prgdir: TEdit
-                Height = 26
-              end
-              inherited persdir: TEdit
-                Height = 26
-              end
-            end
-            inherited GroupBoxLinux: TGroupBox
-              inherited LinuxDesktopBox: TComboBox
-                Height = 26
-                ItemHeight = 20
-              end
-              inherited LinuxCmd: TEdit
-                Height = 26
-              end
-              inherited Label272: TLabel
-                Width = 113
-                Height = 18
-              end
-            end
-            inherited SQLiteBox: TGroupBox
-              inherited Label1: TLabel
-                Width = 64
-                Height = 18
-              end
-              inherited dbnamesqlite: TEdit
-                Height = 26
-              end
-            end
-          end
-          inherited t_server: TTabSheet
-            inherited Label54: TLabel
-              Width = 68
-              Height = 18
-            end
-            inherited GroupBox3: TGroupBox
-              inherited ipaddr: TEdit
-                Height = 26
-              end
-              inherited Label55: TLabel
-                Width = 94
-                Height = 18
-              end
-              inherited Label85: TLabel
-                Width = 74
-                Height = 18
-              end
-              inherited ipport: TEdit
-                Height = 26
-              end
-            end
-          end
-          inherited t_telescope: TTabSheet
-            inherited Label13: TLabel
-              Width = 81
-              Height = 18
-            end
-            inherited GroupBox15: TGroupBox
-              inherited Label68: TLabel
-                Width = 85
-                Height = 18
-              end
-              inherited IndiServerHost: TEdit
-                Height = 26
-              end
-              inherited Label86: TLabel
-                Width = 78
-                Height = 18
-              end
-              inherited IndiServerPort: TEdit
-                Height = 26
-              end
-              inherited Label258: TLabel
-                Width = 106
-                Height = 18
-              end
-              inherited IndiServerCmd: TEdit
-                Height = 26
-              end
-              inherited Label259: TLabel
-                Width = 81
-                Height = 18
-              end
-              inherited IndiDriver: TEdit
-                Height = 26
-              end
-              inherited IndiDev: TComboBox
-                Height = 26
-                ItemHeight = 20
-              end
-              inherited Label260: TLabel
-                Width = 67
-                Height = 18
-              end
-              inherited Label261: TLabel
-                Width = 58
-                Height = 18
-              end
-              inherited IndiPort: TEdit
-                Height = 26
-              end
-            end
-          end
-        end
       end
     end
   end
@@ -1899,61 +256,61 @@ object f_config: Tf_config
       Columns = <>
       ItemMargin = 5
       Items.Data = {
-        08000000250000000000000000000000E0E37541000000000000000002000000
-        0C312D20446174652F54696D65250000000000000000000000E0E37541000000
+        0800000025000000000000000000000014570340000000000000000002000000
+        0C312D20446174652F54696D6525000000000000000000000014570340000000
         0000000000000000000C312D20446174652F54696D652B000000000000000000
-        0000E0E3754100000000000000000000000012322D2054696D652053696D756C
-        6174696F6E27000000FFFFFFFFFFFFFFFFE0E375410000000000000000020000
-        000E322D204F627365727661746F7279270000000000000000000000E0E37541
+        00001457034000000000000000000000000012322D2054696D652053696D756C
+        6174696F6E27000000FFFFFFFFFFFFFFFF145703400000000000000000020000
+        000E322D204F627365727661746F727927000000000000000000000014570340
         0000000000000000000000000E312D204F627365727661746F72792300000000
-        00000000000000E0E375410000000000000000000000000A322D20486F72697A
-        6F6E2E0000000000000000000000E0E375410000000000000000060000001533
+        00000000000000145703400000000000000000000000000A322D20486F72697A
+        6F6E2E0000000000000000000000145703400000000000000000060000001533
         2D2043686172742C20436F6F7264696E617465732E0000000000000000000000
-        E0E3754100000000000000000000000015312D2043686172742C20436F6F7264
-        696E617465732B0000000000000000000000E0E3754100000000000000000000
+        1457034000000000000000000000000015312D2043686172742C20436F6F7264
+        696E617465732B00000000000000000000001457034000000000000000000000
         000012322D204669656C64206F6620766973696F6E2600000000000000000000
-        00E0E375410000000000000000000000000D332D2050726F6A656374696F6E29
-        0000000000000000000000E0E3754100000000000000000000000010342D204F
-        626A6563742046696C74657228000000FFFFFFFFFFFFFFFFE0E3754100000000
+        00145703400000000000000000000000000D332D2050726F6A656374696F6E29
+        00000000000000000000001457034000000000000000000000000010342D204F
+        626A6563742046696C74657228000000FFFFFFFFFFFFFFFF1457034000000000
         00000000000000000F352D20477269642053706163696E672700000000000000
-        00000000E0E375410000000000000000000000000E362D204F626A656374204C
-        697374260000000000000000000000E0E375410000000000000000050000000D
-        342D20436174616C6F67756573260000000000000000000000E0E37541000000
+        00000000145703400000000000000000000000000E362D204F626A656374204C
+        697374260000000000000000000000145703400000000000000000050000000D
+        342D20436174616C6F6775657326000000000000000000000014570340000000
         0000000000000000000D312D20436174616C6F67756573210000000000000000
-        000000E0E3754100000000000000000000000008322D20537461727323000000
-        0000000000000000E0E375410000000000000000000000000A332D204E656275
-        6C6165240000000000000000000000E0E375410000000000000000000000000B
-        342D204F62736F6C657465240000000000000000000000E0E375410000000000
-        000000000000000B352D2045787465726E616C280000000000000000000000E0
-        E375410000000000000000040000000F352D20536F6C61722053797374656D28
-        0000000000000000000000E0E375410000000000000000000000000F312D2053
-        6F6C61722053797374656D230000000000000000000000E0E375410000000000
-        000000000000000A322D20506C616E657473220000000000000000000000E0E3
-        754100000000000000000000000009332D20436F6D6574732500000000000000
-        00000000E0E375410000000000000000000000000C342D2041737465726F6964
-        73230000000000000000000000E0E375410000000000000000090000000A362D
-        20446973706C6179230000000000000000000000E0E375410000000000000000
-        000000000A312D20446973706C6179210000000000000000000000E0E3754100
+        0000001457034000000000000000000000000008322D20537461727323000000
+        0000000000000000145703400000000000000000000000000A332D204E656275
+        6C6165240000000000000000000000145703400000000000000000000000000B
+        342D204F62736F6C657465240000000000000000000000145703400000000000
+        000000000000000B352D2045787465726E616C28000000000000000000000014
+        5703400000000000000000040000000F352D20536F6C61722053797374656D28
+        0000000000000000000000145703400000000000000000000000000F312D2053
+        6F6C61722053797374656D230000000000000000000000145703400000000000
+        000000000000000A322D20506C616E6574732200000000000000000000001457
+        034000000000000000000000000009332D20436F6D6574732500000000000000
+        00000000145703400000000000000000000000000C342D2041737465726F6964
+        73230000000000000000000000145703400000000000000000090000000A362D
+        20446973706C6179230000000000000000000000145703400000000000000000
+        000000000A312D20446973706C61792100000000000000000000001457034000
         000000000000000000000008322D20466F6E7473210000000000000000000000
-        E0E3754100000000000000000000000008332D20436F6C6F7230000000000000
-        0000000000E0E3754100000000000000000000000017342D20536B7920426163
-        6B67726F756E6420436F6C6F72290000000000000000000000E0E37541000000
+        1457034000000000000000000000000008332D20436F6C6F7230000000000000
+        00000000001457034000000000000000000000000017342D20536B7920426163
+        6B67726F756E6420436F6C6F7229000000000000000000000014570340000000
         00000000000000000010352D204E6562756C616520436F6C6F72210000000000
-        000000000000E0E3754100000000000000000000000008362D204C696E657322
-        0000000000000000000000E0E3754100000000000000000000000009372D204C
-        6162656C73340000000000000000000000E0E375410000000000000000000000
+        0000000000001457034000000000000000000000000008362D204C696E657322
+        00000000000000000000001457034000000000000000000000000009372D204C
+        6162656C73340000000000000000000000145703400000000000000000000000
         001B382D2046696E64657220636972636C652028457965706965636529320000
-        000000000000000000E0E3754100000000000000000000000019392D2046696E
-        6465722072656374616E676C65202843434429240000000000000000000000E0
-        E375410000000000000000030000000B372D2050696374757265732200000000
-        00000000000000E0E3754100000000000000000000000009312D204F626A6563
-        74260000000000000000000000E0E375410000000000000000000000000D322D
-        204261636B67726F756E6427000000FFFFFFFFFFFFFFFFE0E375410000000000
+        0000000000000000001457034000000000000000000000000019392D2046696E
+        6465722072656374616E676C6520284343442924000000000000000000000014
+        5703400000000000000000030000000B372D2050696374757265732200000000
+        000000000000001457034000000000000000000000000009312D204F626A6563
+        74260000000000000000000000145703400000000000000000000000000D322D
+        204261636B67726F756E6427000000FFFFFFFFFFFFFFFF145703400000000000
         000000000000000E332D20445353205265616C736B7922000000FFFFFFFFFFFF
-        FFFFE0E3754100000000000000000300000009382D2053797374656D22000000
-        0000000000000000E0E3754100000000000000000000000009312D2053797374
-        656D22000000FFFFFFFFFFFFFFFFE0E375410000000000000000000000000932
-        2D20536572766572250000000000000000000000E0E375410000000000000000
+        FFFF1457034000000000000000000300000009382D2053797374656D22000000
+        00000000000000001457034000000000000000000000000009312D2053797374
+        656D22000000FFFFFFFFFFFFFFFF145703400000000000000000000000000932
+        2D20536572766572250000000000000000000000145703400000000000000000
         000000000C332D2054656C6573636F7065}
       Indent = 12
       ReadOnly = True

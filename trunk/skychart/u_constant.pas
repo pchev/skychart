@@ -305,15 +305,16 @@ type
                 EquinoxType : integer;
                 DefaultJDchart : double;
                 EquinoxChart : shortstring;
-                AzNorth : Boolean;
+                AzNorth,ListNeb,ListStar,ListVar,ListDbl,ListPla : boolean;
                 llabel: array[1..NumLlabel] of shortstring;
                 ConstelName: array of array[1..2] of shortstring; // constellation three letter abbrev and name.
-                ConstLnum,ConstBnum,ConstelNum:integer;
+                ConstLnum,ConstBnum,ConstelNum,StarNameNum:integer;
                 ConstelPos:  array of Tconstpos;
                 ConstL: array of Tconstl;
                 ConstB : array of Tconstb;
                 horizonlist : Thorizonlist;
-                ListNeb,ListStar,ListVar,ListDbl,ListPla : boolean;
+                StarName: array of string;
+                StarNameHR: array of integer;
                 end;
      conf_skychart = record
                 // chart setting
@@ -342,7 +343,7 @@ type
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
-                StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,ConstFullLabel,ScopeMark,ScopeLock : boolean;
+                StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ScopeMark,ScopeLock : boolean;
                 EquinoxName,EquinoxDate,TrackName,TrackId,FindName,FindDesc,FindNote : string;
                 PlanetLst : Tplanetlst;
                 AsteroidNb,CometNb,AsteroidLstSize,CometLstSize,NumCircle: integer;
@@ -391,7 +392,7 @@ type
                 PrinterResolution,PrintMethod,PrintColor,configpage,autorefreshdelay,MaxChildID,dbport : integer;
                 PrintLandscape, ShowChartInfo, SyncChart :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
-                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath : string;
+                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName : string;
                 ImageLuminosity, ImageContrast : double;
                 end;
      conf_dss  = record
@@ -442,6 +443,7 @@ type double8 = array[1..8] of double;
 Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
      Configfile, SysDecimalSeparator: string;
      ldeg,lmin,lsec : string;
+     ThemePath:string ='data/Themes';
 {$ifdef linux}
      tracefile:string =''; // to stdout
      LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2

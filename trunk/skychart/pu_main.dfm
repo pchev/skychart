@@ -3,7 +3,7 @@ object f_main: Tf_main
   Top = 132
   Width = 794
   Height = 579
-  ActiveControl = PanelBottom
+  ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
   Color = clAppWorkSpace
   Font.Charset = ANSI_CHARSET
@@ -3285,7 +3285,6 @@ object f_main: Tf_main
         DropDownCount = 15
         ItemHeight = 14
         TabOrder = 0
-        TabStop = False
         OnClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
       end
@@ -3577,6 +3576,7 @@ object f_main: Tf_main
           SelEnd = 0
           SelStart = 0
           TabOrder = 0
+          TabStop = False
           ThumbLength = 8
           TickMarks = tmBottomRight
           TickStyle = tsNone
@@ -3598,6 +3598,7 @@ object f_main: Tf_main
           SelEnd = 0
           SelStart = 0
           TabOrder = 1
+          TabStop = False
           ThumbLength = 8
           TickMarks = tmBottomRight
           TickStyle = tsNone
@@ -3619,6 +3620,7 @@ object f_main: Tf_main
           SelEnd = 0
           SelStart = 0
           TabOrder = 2
+          TabStop = False
           ThumbLength = 8
           TickMarks = tmBottomRight
           TickStyle = tsNone
@@ -3639,6 +3641,7 @@ object f_main: Tf_main
           SelEnd = 0
           SelStart = 0
           TabOrder = 3
+          TabStop = False
           ThumbLength = 8
           TickMarks = tmBottomRight
           TickStyle = tsNone
@@ -4600,7 +4603,7 @@ object f_main: Tf_main
     Left = 200
     Top = 256
     Bitmap = {
-      494C010154005900040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010154005900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -7640,7 +7643,8 @@ object f_main: Tf_main
       DF55800389400001DFE1800189A80000DF55800189100000DFF980008FA00000
       DFD1000080000000DFF9000080008000DFFD00018500C000DFF900018FA0E000
       DFFD87FF8D50E003DFC1C7C38FE0F003DFDDFFE38F50F001DFDBFBC38FF8F801
-      DFD7FC0B8000FC01C00FFE3FFFFFFFFF}
+      DFD7FC0B8000FC01C00FFE3FFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object SaveDialog: TSaveDialog
     Left = 152
@@ -7670,7 +7674,7 @@ object f_main: Tf_main
     Left = 232
     Top = 256
     Bitmap = {
-      494C01015400590004001000100000000000FF00FFFFFFFFFFFFFFFF424D3600
+      494C01015400590004001000100000000000FF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007001000001002000000000000070
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -10710,6 +10714,7 @@ object f_main: Tf_main
       DF55800389400001DFE1800189A80000DF55800189100000DFF980008FA00000
       DFD1000080000000DFF9000080008000DFFD00018500C000DFF900018FA0E000
       DFFD87FF8D50E003DFC1C7C38FE0F003DFDDFFE38F50F001DFDBFBC38FF8F801
-      DFD7FC0B8000FC01C00FFE3FFFFFFFFF}
+      DFD7FC0B8000FC01C00FFE3FFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
 end
