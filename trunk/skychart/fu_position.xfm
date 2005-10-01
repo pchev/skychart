@@ -1,6 +1,6 @@
 object f_position: Tf_position
-  Left = 190
-  Top = 283
+  Left = 194
+  Top = 303
   Width = 291
   Height = 223
   HorzScrollBar.Range = 281
@@ -26,6 +26,7 @@ object f_position: Tf_position
     Height = 25
     Caption = 'OK'
     ModalResult = 1
+    ParentColor = True
     TabOrder = 0
   end
   object Button2: TButton
@@ -36,6 +37,7 @@ object f_position: Tf_position
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
+    ParentColor = True
     TabOrder = 1
   end
   object Panel1: TPanel
@@ -43,6 +45,7 @@ object f_position: Tf_position
     Top = 64
     Width = 273
     Height = 57
+    ParentColor = True
     TabOrder = 2
     object coord1: TLabel
       Left = 8
@@ -97,6 +100,7 @@ object f_position: Tf_position
     Top = 3
     Width = 273
     Height = 57
+    ParentColor = True
     TabOrder = 3
     object eq1: TLabel
       Left = 8
@@ -151,6 +155,7 @@ object f_position: Tf_position
     Top = 126
     Width = 273
     Height = 41
+    ParentColor = True
     TabOrder = 4
     object Label3: TLabel
       Left = 8

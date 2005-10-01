@@ -226,16 +226,9 @@ object f_config_observatory: Tf_config_observatory
         object Label81: TLabel
           Left = 8
           Top = 28
-          Width = 91
-          Height = 18
+          Width = 115
+          Height = 20
           Caption = 'Local Time =  UTC +'
-          Font.Color = clBlack
-          Font.Height = 11
-          Font.Name = 'Sans'
-          Font.Pitch = fpVariable
-          Font.Style = []
-          Font.Weight = 0
-          ParentFont = False
         end
         object timez: TFloatEdit
           Left = 122
@@ -266,6 +259,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 192
           Height = 25
           Caption = 'Database cannot be modified'
+          ParentColor = True
           TabOrder = 7
           Visible = False
         end
@@ -286,6 +280,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 76
           Height = 21
           Caption = 'Search'
+          ParentColor = True
           TabOrder = 1
           OnClick = citysearchClick
         end
@@ -314,6 +309,7 @@ object f_config_observatory: Tf_config_observatory
           Height = 21
           Caption = 'Add'
           Enabled = False
+          ParentColor = True
           TabOrder = 4
           OnClick = newcityClick
         end
@@ -324,6 +320,7 @@ object f_config_observatory: Tf_config_observatory
           Height = 21
           Caption = 'Update'
           Enabled = False
+          ParentColor = True
           TabOrder = 5
           OnClick = updcityClick
         end
@@ -334,6 +331,7 @@ object f_config_observatory: Tf_config_observatory
           Height = 21
           Caption = 'Delete'
           Enabled = False
+          ParentColor = True
           TabOrder = 6
           OnClick = delcityClick
         end
@@ -394,6 +392,7 @@ object f_config_observatory: Tf_config_observatory
         Width = 35
         Height = 25
         Caption = '+'
+        ParentColor = True
         TabOrder = 6
         OnClick = ObszpClick
       end
@@ -403,6 +402,7 @@ object f_config_observatory: Tf_config_observatory
         Width = 35
         Height = 25
         Caption = '-'
+        ParentColor = True
         TabOrder = 7
         OnClick = ObszmClick
       end
@@ -412,6 +412,7 @@ object f_config_observatory: Tf_config_observatory
         Width = 35
         Height = 25
         Caption = 'Load'
+        ParentColor = True
         TabOrder = 8
         OnClick = ObsmapClick
       end
@@ -959,6 +960,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 72
           Width = 28
           Height = 28
+          ParentColor = True
           TabOrder = 2
           TabStop = False
           OnClick = horizonfileBtnClick

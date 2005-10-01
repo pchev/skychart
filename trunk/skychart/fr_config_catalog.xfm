@@ -36,6 +36,7 @@ object f_config_catalog: Tf_config_catalog
         Width = 75
         Height = 25
         Caption = 'Add'
+        ParentColor = True
         TabOrder = 2
         OnClick = AddCatClick
       end
@@ -45,6 +46,7 @@ object f_config_catalog: Tf_config_catalog
         Width = 75
         Height = 25
         Caption = 'Delete'
+        ParentColor = True
         TabOrder = 3
         OnClick = DelCatClick
       end
@@ -198,6 +200,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 35
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 13
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -290,6 +293,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 66
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 18
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -382,6 +386,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 97
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 23
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -596,6 +601,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 191
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 37
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -635,6 +641,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 159
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 38
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -674,6 +681,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 128
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 39
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -895,6 +903,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 388
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 55
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -934,6 +943,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 360
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 56
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -973,6 +983,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 333
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 57
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -1012,6 +1023,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 262
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 58
         TabStop = False
         OnClick = BitBtn14Click
@@ -1051,6 +1063,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 297
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 59
         TabStop = False
         OnClick = BitBtn15Click
@@ -1389,6 +1402,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 94
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 15
         TabStop = False
         OnClick = CDCNebSelPathClick
@@ -1428,6 +1442,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 47
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 16
         TabStop = False
         OnClick = CDCNebSelPathClick
@@ -1842,6 +1857,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 143
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 47
         TabStop = False
         OnClick = CDCNebSelPathClick
@@ -1881,6 +1897,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 183
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 48
         TabStop = False
         OnClick = CDCNebSelPathClick
@@ -1920,6 +1937,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 212
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 49
         TabStop = False
         OnClick = CDCNebSelPathClick
@@ -1959,6 +1977,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 248
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 50
         TabStop = False
         OnClick = CDCNebSelPathClick
@@ -1998,6 +2017,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 288
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 51
         TabStop = False
         OnClick = CDCNebSelPathClick
@@ -2037,6 +2057,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 328
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 52
         TabStop = False
         OnClick = CDCNebSelPathClick
@@ -2147,6 +2168,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 67
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 6
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -2239,6 +2261,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 117
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 11
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -2331,6 +2354,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 171
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 16
         TabStop = False
         OnClick = CDCStarSelPathClick
@@ -2423,6 +2447,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 234
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 21
         TabStop = False
         OnClick = CDCStarSelPathClick

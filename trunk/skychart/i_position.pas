@@ -23,6 +23,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 
 procedure Tf_position.FormShow(Sender: TObject);
+{$ifdef linux}
+var i:integer;
+{$endif}
 begin
 ra.value:=rad2deg*cfgsc.racentre/15;
 de.value:=rad2deg*cfgsc.decentre;
@@ -54,6 +57,31 @@ case cfgsc.projpole of
   else Panel1.visible:=false;
 end;
 EqChange(self);
+{$ifdef linux}
+  if color=dark then begin
+     for i := 0 to ComponentCount-1 do begin
+        if  ( Components[i] is Tmaskedit ) then with (Components[i] as Tmaskedit) do begin
+           if color=clBase   then  color:=black;
+           if color=clButton then  color:=dark;
+        end;
+        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
+           if color=clBase   then  color:=black;
+           if color=clButton then  color:=dark;
+        end;
+     end;
+  end else begin
+     for i := 0 to ComponentCount-1 do begin
+        if  ( Components[i] is Tmaskedit ) then with (Components[i] as Tmaskedit) do begin
+           if color=black then color:=clBase;
+           if color=dark  then color:=clButton;
+        end;
+        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
+           if color=black then color:=clBase;
+           if color=dark  then color:=clButton;
+        end;
+     end;
+  end;   
+{$endif}
 end;
 
 procedure Tf_position.EqChange(Sender: TObject);

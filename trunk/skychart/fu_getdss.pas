@@ -69,6 +69,7 @@ type
     BitBtn2: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     dsslib: longword;
@@ -92,5 +93,6 @@ implementation
 {$R *.xfm}
 
 {$include i_getdss.pas}
+
 
 end.

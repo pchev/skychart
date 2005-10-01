@@ -1,22 +1,30 @@
 object f_detail: Tf_detail
-  Left = 188
-  Top = 204
+  Left = 408
+  Top = 175
   Width = 359
   Height = 356
   VertScrollBar.Range = 41
   ActiveControl = Button1
   Caption = 'Details'
   Color = clBackground
+  Font.Color = clBlack
+  Font.Height = 13
+  Font.Name = 'Tahoma'
+  Font.Pitch = fpVariable
+  Font.Style = []
+  Font.Weight = 48
   FormStyle = fsStayOnTop
+  ParentFont = False
   Position = poDefault
   Scaled = False
-  PixelsPerInch = 92
+  PixelsPerInch = 90
   object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 359
     Height = 41
     Align = alTop
+    ParentColor = True
     TabOrder = 0
     object Button1: TButton
       Left = 8
@@ -25,6 +33,7 @@ object f_detail: Tf_detail
       Height = 25
       Cancel = True
       Caption = 'Close'
+      ParentColor = True
       TabOrder = 0
       OnClick = Button1Click
     end
@@ -34,6 +43,7 @@ object f_detail: Tf_detail
       Width = 95
       Height = 25
       Caption = 'Center Object'
+      ParentColor = True
       TabOrder = 1
       OnClick = Button2Click
     end
@@ -43,6 +53,7 @@ object f_detail: Tf_detail
       Width = 95
       Height = 25
       Caption = 'Neighbor'
+      ParentColor = True
       TabOrder = 2
       OnClick = Button3Click
     end

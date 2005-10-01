@@ -1,6 +1,6 @@
 object f_config: Tf_config
-  Left = 209
-  Top = 249
+  Left = 221
+  Top = 309
   Width = 740
   Height = 500
   HorzScrollBar.Range = 205
@@ -27,6 +27,7 @@ object f_config: Tf_config
     Width = 740
     Height = 34
     Align = alBottom
+    ParentColor = True
     TabOrder = 1
     object Applyall: TCheckBox
       Left = 16
@@ -46,6 +47,7 @@ object f_config: Tf_config
       Caption = 'OK'
       Default = True
       ModalResult = 1
+      ParentColor = True
       TabOrder = 1
     end
     object apply: TButton
@@ -54,6 +56,7 @@ object f_config: Tf_config
       Width = 75
       Height = 25
       Caption = 'Apply'
+      ParentColor = True
       TabOrder = 2
       OnClick = applyClick
     end
@@ -65,6 +68,7 @@ object f_config: Tf_config
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
+      ParentColor = True
       TabOrder = 3
     end
     object HelpBtn: TButton
@@ -73,6 +77,7 @@ object f_config: Tf_config
       Width = 75
       Height = 25
       Caption = '&Help'
+      ParentColor = True
       TabOrder = 4
     end
   end
@@ -95,7 +100,6 @@ object f_config: Tf_config
         Height = 440
         TabOrder = 0
         inherited pa_time: TPageControl
-          ActivePage = f_config_time1.t_time
           inherited t_simulation: TTabSheet
             inherited SimObj: TCheckListBox
               ItemHeight = 20
@@ -246,6 +250,7 @@ object f_config: Tf_config
     Width = 205
     Height = 466
     Align = alLeft
+    ParentColor = True
     TabOrder = 2
     object TreeView1: TTreeView
       Left = 0
@@ -324,6 +329,7 @@ object f_config: Tf_config
       Width = 25
       Height = 25
       Caption = '<'
+      ParentColor = True
       TabOrder = 1
       OnClick = previousClick
     end
@@ -333,6 +339,7 @@ object f_config: Tf_config
       Width = 25
       Height = 25
       Caption = '>'
+      ParentColor = True
       TabOrder = 2
       OnClick = nextClick
     end

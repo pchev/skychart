@@ -2,9 +2,9 @@ object f_search: Tf_search
   Left = 200
   Top = 131
   Width = 533
-  Height = 401
+  Height = 334
   HorzScrollBar.Range = 521
-  VertScrollBar.Range = 385
+  VertScrollBar.Range = 321
   ActiveControl = Id
   Caption = 'Search'
   Color = clButton
@@ -15,14 +15,16 @@ object f_search: Tf_search
   Font.Style = []
   Font.Weight = 0
   ParentFont = False
+  OnShow = FormShow
   PixelsPerInch = 90
   TextHeight = 20
   TextWidth = 7
   object PlanetPanel: TPanel
     Left = 8
-    Top = 286
+    Top = 222
     Width = 513
     Height = 50
+    ParentColor = True
     TabOrder = 4
     object Label2: TLabel
       Left = 16
@@ -42,9 +44,10 @@ object f_search: Tf_search
   end
   object NebNamePanel: TPanel
     Left = 8
-    Top = 286
+    Top = 222
     Width = 513
     Height = 50
+    ParentColor = True
     TabOrder = 5
     object Label3: TLabel
       Left = 16
@@ -64,9 +67,10 @@ object f_search: Tf_search
   end
   object StarNamePanel: TPanel
     Left = 8
-    Top = 286
+    Top = 222
     Width = 513
     Height = 50
+    ParentColor = True
     TabOrder = 6
     object Label4: TLabel
       Left = 16
@@ -86,9 +90,10 @@ object f_search: Tf_search
   end
   object ConstPanel: TPanel
     Left = 8
-    Top = 286
+    Top = 222
     Width = 513
     Height = 50
+    ParentColor = True
     TabOrder = 7
     object Label5: TLabel
       Left = 16
@@ -108,9 +113,10 @@ object f_search: Tf_search
   end
   object IDPanel: TPanel
     Left = 8
-    Top = 286
+    Top = 222
     Width = 513
     Height = 50
+    ParentColor = True
     TabOrder = 0
     object Label1: TLabel
       Left = 10
@@ -124,6 +130,7 @@ object f_search: Tf_search
       Top = 1
       Width = 90
       Height = 48
+      ParentColor = True
       TabOrder = 5
       object SpeedButton30: TSpeedButton
         Left = 0
@@ -147,6 +154,7 @@ object f_search: Tf_search
       Top = 1
       Width = 90
       Height = 48
+      ParentColor = True
       TabOrder = 4
       object SpeedButton21: TSpeedButton
         Left = 0
@@ -210,6 +218,7 @@ object f_search: Tf_search
       Top = 1
       Width = 90
       Height = 48
+      ParentColor = True
       TabOrder = 3
       object SpeedButton19: TSpeedButton
         Left = 0
@@ -259,6 +268,7 @@ object f_search: Tf_search
       Width = 158
       Height = 48
       BevelOuter = bvNone
+      ParentColor = True
       TabOrder = 1
       object SpeedButton1: TSpeedButton
         Left = 0
@@ -370,6 +380,7 @@ object f_search: Tf_search
       Top = 1
       Width = 90
       Height = 48
+      ParentColor = True
       TabOrder = 2
       object SpeedButton14: TSpeedButton
         Left = 0
@@ -415,9 +426,9 @@ object f_search: Tf_search
   end
   object RadioGroup1: TRadioGroup
     Left = 8
-    Top = 10
+    Top = 2
     Width = 513
-    Height = 267
+    Height = 207
     Items.Strings = (
       'Nebulae'
       'Nebula Common Name'
@@ -437,21 +448,23 @@ object f_search: Tf_search
   end
   object Button1: TButton
     Left = 158
-    Top = 354
+    Top = 290
     Width = 92
     Height = 31
     Caption = 'Find'
+    ParentColor = True
     TabOrder = 2
     OnClick = Button1Click
   end
   object Button2: TButton
     Left = 286
-    Top = 354
+    Top = 290
     Width = 92
     Height = 31
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
+    ParentColor = True
     TabOrder = 3
   end
 end

@@ -8,6 +8,13 @@ object f_directory: Tf_directory
   ActiveControl = DirectoryTreeView1
   Caption = 'Browse directory'
   Color = clBackground
+  Font.Color = clBlack
+  Font.Height = 13
+  Font.Name = 'Tahoma'
+  Font.Pitch = fpVariable
+  Font.Style = []
+  Font.Weight = 48
+  ParentFont = False
   Scaled = False
   OnShow = FormShow
   PixelsPerInch = 90
@@ -28,6 +35,7 @@ object f_directory: Tf_directory
     Height = 25
     Caption = 'OK'
     ModalResult = 1
+    ParentColor = True
     TabOrder = 1
   end
   object Button2: TButton
@@ -38,6 +46,7 @@ object f_directory: Tf_directory
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
+    ParentColor = True
     TabOrder = 2
   end
   object Label1: TLabel

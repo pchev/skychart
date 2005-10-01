@@ -23,7 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 
 procedure Tf_main.Init;
+var cfgs :conf_skychart;
+    cfgp : conf_plot;
+    i: integer;
 begin
+try
  // some initialisation that need to be done after all the forms are created. Kylix onShow is called immediatly after onCreate, not after application.run!
  f_info.onGetTCPinfo:=GetTCPInfo;
  f_info.onKillTCP:=KillTCPClient;
@@ -31,6 +35,56 @@ begin
  f_info.OnShowDetail:=showdetailinfo;
  f_detail.OnCenterObj:=CenterFindObj;
  f_detail.OnNeighborObj:=NeighborObj;
+ SetDefault;
+ ReadDefault;
+ // must read db configuration before to create this one!
+ cdcdb:=TCDCdb.Create(self);
+ planet:=Tplanet.Create(self);
+ Fits:=TFits.Create(self);
+ cdcdb.onInitializeDB:=InitializeDB;
+ planet.cdb:=cdcdb;
+ SetButtonImage(ButtonImage);
+{$ifdef mswindows}
+ if nightvision then SetNightVision(nightvision);
+ telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
+ telescope.plugin:=def_cfgsc.ScopePlugin;
+{$endif}
+ if def_cfgsc.BackgroundImage='' then begin
+   def_cfgsc.BackgroundImage:=slash(privatedir)+slash('pictures');
+   if not DirectoryExists(def_cfgsc.BackgroundImage) then forcedirectories(def_cfgsc.BackgroundImage);
+ end;
+ catalog.LoadConstellation(cfgm.Constellationfile);
+ catalog.LoadConstL(cfgm.ConstLfile);
+ catalog.LoadConstB(cfgm.ConstBfile);
+ catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
+ catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
+ f_search.cfgshr:=catalog.cfgshr;
+ f_search.Init;
+ SetLang;
+ InitFonts;
+ SetLpanel1('');
+ ConnectDB;
+ Fits.min_sigma:=cfgm.ImageLuminosity;
+ Fits.max_sigma:=cfgm.ImageContrast;
+ CreateMDIChild(GetUniqueName('Chart_',true),true,def_cfgsc,def_cfgplot,true);
+ Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
+ Autorefresh.enabled:=true;
+ if cfgm.AutostartServer then StartServer;
+ f_calendar.planet:=planet;
+ f_calendar.cdb:=cdcdb;
+ f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
+ f_calendar.OnGetChartConfig:=GetChartConfig;
+ f_calendar.OnUpdateChart:=DrawChart;
+ f_calendar.setlang(slash(appdir)+slash('data')+slash('language')+'cdclang_'+trim(cfgm.language)+'.ini');
+ if InitialChartNum>1 then
+    for i:=1 to InitialChartNum-1 do begin
+      cfgp:=def_cfgplot;
+      cfgs:=def_cfgsc;
+      ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
+      CreateMDIChild(GetUniqueName('Chart_',true) ,false,cfgs,cfgp);
+    end;
+except
+end;
 end;
 
 function Tf_main.CreateMDIChild(const CName: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
@@ -409,22 +463,23 @@ activecontrol:=quicksearch;
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
+{$ifdef mswindows}
+  configfile:=Defaultconfigfile;
+{$endif}
+{$ifdef linux}
+  configfile:=expandfilename(Defaultconfigfile);
+{$endif}
 GetAppDir;
 chdir(appdir);
 InitTrace;
 traceon:=true;
-
 {$ifdef linux}    // FormShow is called immediately, before Application.Run, so this form need to be created immediately here. Be sure to remove them from the .dpr file.
-configfile:=expandfilename(Defaultconfigfile);
 InitTheme;
 f_info:=TF_info.Create(application);
 f_directory:=Tf_directory.Create(application);
 f_calendar:=Tf_calendar.Create(application);
 f_search:=Tf_search.Create(application);
 f_getdss:=Tf_getdss.Create(application);
-{$endif}
-{$ifdef mswindows}
-configfile:=Defaultconfigfile;
 {$endif}
 catalog:=Tcatalog.Create(self);
 {$ifdef mswindows}
@@ -443,61 +498,8 @@ telescope:=Ttelescope.Create(self);
 end;
 
 procedure Tf_main.FormShow(Sender: TObject);
-var cfgs :conf_skychart;
-    cfgp : conf_plot;
-    i: integer;
 begin
-try
- SetDefault;
- ReadDefault;
- // must read db configuration before to create this one!
- cdcdb:=TCDCdb.Create(self);
- planet:=Tplanet.Create(self);
- Fits:=TFits.Create(self);
- cdcdb.onInitializeDB:=InitializeDB;
- planet.cdb:=cdcdb;
- SetButtonImage(ButtonImage);
-{$ifdef mswindows}
- if nightvision then SetNightVision(nightvision);
- telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
- telescope.plugin:=def_cfgsc.ScopePlugin;
-{$endif}
- if def_cfgsc.BackgroundImage='' then begin
-   def_cfgsc.BackgroundImage:=slash(privatedir)+slash('pictures');
-   if not DirectoryExists(def_cfgsc.BackgroundImage) then forcedirectories(def_cfgsc.BackgroundImage);
- end;
- catalog.LoadConstellation(cfgm.Constellationfile);
- catalog.LoadConstL(cfgm.ConstLfile);
- catalog.LoadConstB(cfgm.ConstBfile);
- catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
- catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
- f_search.cfgshr:=catalog.cfgshr;
- f_search.Init;
- SetLang;
- InitFonts;
- SetLpanel1('');
- ConnectDB;
- Fits.min_sigma:=cfgm.ImageLuminosity;
- Fits.max_sigma:=cfgm.ImageContrast;
- CreateMDIChild(GetUniqueName('Chart_',true),true,def_cfgsc,def_cfgplot,true);
- Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
- Autorefresh.enabled:=true;
- if cfgm.AutostartServer then StartServer;
- f_calendar.planet:=planet;
- f_calendar.cdb:=cdcdb;
- f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
- f_calendar.OnGetChartConfig:=GetChartConfig;
- f_calendar.OnUpdateChart:=DrawChart;
- f_calendar.setlang(slash(appdir)+slash('data')+slash('language')+'cdclang_'+trim(cfgm.language)+'.ini');
- if InitialChartNum>1 then
-    for i:=1 to InitialChartNum-1 do begin
-      cfgp:=def_cfgplot;
-      cfgs:=def_cfgsc;
-      ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
-      CreateMDIChild(GetUniqueName('Chart_',true) ,false,cfgs,cfgp);
-    end;
-except
-end;
+
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -1167,7 +1169,6 @@ end;
 end;
 
 procedure Tf_main.OpenConfigExecute(Sender: TObject);
-var c : conf_skychart;
 begin
 screen.cursor:=crHourGlass;
 if f_config=nil then begin
@@ -1179,15 +1180,22 @@ if f_config=nil then begin
    f_config.Fits:=fits;
    f_config.catalog:=catalog;
    f_config.db:=cdcdb;
+   {$ifdef linux}
+     if nightvision then begin
+        f_config.Color:=dark;
+        f_config.font.Color:=middle;
+     end;
+   {$endif}
 end;
 try
  f_config.ccat:=catalog.cfgcat;
  f_config.cshr:=catalog.cfgshr;
  f_config.cplot:=def_cfgplot;
- c:=def_cfgsc;
- if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
-     CopySCconfig(sc.cfgsc,c);
- f_config.csc:=c;
+ f_config.csc:=def_cfgsc;
+ if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do begin
+     f_config.csc:=sc.cfgsc;
+     f_config.cplot:=sc.plot.cfgplot;
+ end;
  cfgm.prgdir:=appdir;
  cfgm.persdir:=privatedir;
  f_config.cmain:=cfgm;
@@ -1329,11 +1337,13 @@ ToolBar1.visible:=not ViewToolsBar1.checked;
 PanelLeft.visible:=ToolBar1.visible;
 PanelRight.visible:=ToolBar1.visible;
 ToolBar4.visible:=ToolBar1.visible;
+PanelBottom.visible:=ToolBar1.visible;
 ViewToolsBar1.checked:=ToolBar1.visible;
 MainBar1.checked:=ToolBar1.visible;
 ObjectBar1.checked:=ToolBar1.visible;
 LeftBar1.checked:=ToolBar1.visible;
 RightBar1.checked:=ToolBar1.visible;
+ViewStatusBar1.checked:=ToolBar1.visible;
 ViewTopPanel;
 end;
 
@@ -1342,7 +1352,7 @@ begin
 ToolBar1.visible:=not ToolBar1.visible;
 MainBar1.checked:=ToolBar1.visible;
 if not MainBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 ViewTopPanel;
 end;
 
@@ -1351,7 +1361,7 @@ begin
 ToolBar4.visible:=not ToolBar4.visible;
 ObjectBar1.checked:=ToolBar4.visible;
 if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 ViewTopPanel;
 end;
 
@@ -1360,7 +1370,7 @@ begin
 PanelLeft.visible:=not PanelLeft.visible;
 LeftBar1.checked:=PanelLeft.visible;
 if not LeftBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 end;
 
 procedure Tf_main.ViewRightBarExecute(Sender: TObject);
@@ -1368,12 +1378,15 @@ begin
 PanelRight.visible:=not PanelRight.visible;
 RightBar1.checked:=PanelRight.visible;
 if not RightBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked then ViewToolsBar1.checked:=true;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 end;
 
 procedure Tf_main.ViewStatusExecute(Sender: TObject);
 begin
 PanelBottom.visible:=not PanelBottom.visible;
+ViewStatusBar1.checked:=PanelBottom.visible;
+if not ViewStatusBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 end;
 
 Procedure Tf_main.InitFonts;
@@ -2117,7 +2130,7 @@ f_getdss.cfgdss.dssdir:=ReadString(section,'dssdir',slash('cat')+'RealSky');
 f_getdss.cfgdss.dssdrive:=ReadString(section,'dssdrive','D:\');
 f_getdss.cfgdss.dssfile:=ReadString(section,'dssfile',slash(privatedir)+slash('pictures')+'$temp.fit');
 section:='quicksearch';
-j:=ReadInteger(section,'count',0);
+j:=min(MaxQuickSearch,ReadInteger(section,'count',0));
 for i:=1 to j do quicksearch.Items.Add(ReadString(section,'item'+inttostr(i),''));
 end;
 finally
@@ -2481,7 +2494,7 @@ end;
 end;
 
 procedure Tf_main.SaveQuickSearch(filename:string);
-var i:integer;
+var i,j:integer;
     inif: TMemIniFile;
     section : string;
     {$ifdef mswindows}
@@ -2492,8 +2505,9 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='quicksearch';
-WriteInteger(section,'count',quicksearch.Items.count);
-for i:=1 to quicksearch.Items.count do WriteString(section,'item'+inttostr(i),quicksearch.Items[i-1]);
+j:=min(MaxQuickSearch,quicksearch.Items.count);
+WriteInteger(section,'count',j);
+for i:=1 to j do WriteString(section,'item'+inttostr(i),quicksearch.Items[i-1]);
 Updatefile;
 end;
 finally

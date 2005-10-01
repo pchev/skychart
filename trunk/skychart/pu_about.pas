@@ -87,8 +87,10 @@ end;
 
 procedure Tf_about.FormPaint(Sender: TObject);
 begin
+if ShowTimer then begin
    Timer1.Enabled:=false;
    Timer1.Enabled:=true;
+end;   
 end;
 
 end.

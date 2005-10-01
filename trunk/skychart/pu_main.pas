@@ -27,6 +27,9 @@ interface
 
 uses cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   u_constant, u_util, blcksock, Winsock,
+  //{$IFDEF VER150} XPman, {$ENDIF}  // night vision mode do not work well with XP theme
+  //{$IFDEF VER160} XPman, {$ENDIF}
+  //{$IFDEF VER170} XPman, {$ENDIF}
   Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, Messages, ExtCtrls, ComCtrls, StdActns,
   ActnList, ToolWin, ImgList, IniFiles, Spin, DdeMan, Clipbrd;
@@ -361,9 +364,12 @@ type
     Normal1: TMenuItem;
     Reverse1: TMenuItem;
     NightVision1: TMenuItem;
-    RedColor1: TMenuItem;
     ToolButtonEditlabels: TToolButton;
     EditLabels: TAction;
+    N7: TMenuItem;
+    FullScreen1: TMenuItem;
+    N8: TMenuItem;
+    N9: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -463,6 +469,7 @@ type
     procedure ToolButtonNightVisionClick(Sender: TObject);
     procedure ButtonModeClick(Sender: TObject);
     procedure EditLabelsExecute(Sender: TObject);
+    procedure FullScreen1Click(Sender: TObject);
   private
     { Private declarations }
     cryptedpwd:string;
@@ -659,15 +666,45 @@ end;
 end;
 
 procedure Tf_main.ToolButtonNightVisionClick(Sender: TObject);
+var i: integer;
 begin
 nightvision:= not nightvision;
 SetNightVision(nightvision);
 ToolButtonNightVision.Down:=nightvision;
-RedColor1.Checked:=nightvision;
+NightVision1.Checked:=nightvision;
+for i:=0 to MDIChildCount-1 do
+  if MDIChildren[i] is Tf_chart then
+    (MDIChildren[i] as Tf_chart).NightVision:=nightvision;
+end;
+
+procedure Tf_main.FullScreen1Click(Sender: TObject);
+var lPrevStyle: LongInt;
+begin
+FullScreen1.Checked:=not FullScreen1.Checked;
+if FullScreen1.Checked then begin
+   cfgm.savetop:=top;
+   cfgm.saveleft:=left;
+   cfgm.savewidth:=width;
+   cfgm.saveheight:=height;
+   lPrevStyle := GetWindowLong(f_main.handle, GWL_STYLE);
+   SetWindowLong(f_main.handle, GWL_STYLE, (lPrevStyle And (Not WS_THICKFRAME) And (Not WS_BORDER) And (Not WS_CAPTION) And (Not WS_MINIMIZEBOX) And (Not WS_MAXIMIZEBOX)));
+   SetWindowPos(f_main.handle, 0, 0, 0, 0, 0, SWP_FRAMECHANGED Or SWP_NOMOVE Or SWP_NOSIZE Or SWP_NOZORDER);
+   top:=0;
+   left:=0;
+   width:=screen.Width;
+   height:=screen.Height;
+end else begin
+   lPrevStyle := GetWindowLong(f_main.handle, GWL_STYLE);
+   SetWindowLong(f_main.handle, GWL_STYLE, (lPrevStyle Or WS_THICKFRAME Or WS_BORDER Or WS_CAPTION Or WS_MINIMIZEBOX Or WS_MAXIMIZEBOX));
+   SetWindowPos(f_main.handle, 0, 0, 0, 0, 0, SWP_FRAMECHANGED Or SWP_NOMOVE Or SWP_NOSIZE Or SWP_NOZORDER);
+   top:=cfgm.savetop;
+   left:=cfgm.saveleft;
+   width:=cfgm.savewidth;
+   height:=cfgm.saveheight;
+end;
 end;
 
 
 // end of windows vcl specific code:
-
 
 end.

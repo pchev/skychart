@@ -36,71 +36,42 @@ object f_calendar: Tf_calendar
     Width = 646
     Height = 70
     Align = alTop
+    ParentColor = True
     TabOrder = 1
     object Label1: TLabel
       Left = 3
       Top = 14
-      Width = 53
-      Height = 19
+      Width = 49
+      Height = 18
       Caption = 'P'#233'riode du'
-      Font.Color = clText
-      Font.Height = 11
-      Font.Name = 'MS Sans Serif'
-      Font.Pitch = fpVariable
-      Font.Style = [fsBold]
-      ParentFont = False
     end
     object Label2: TLabel
       Left = 170
       Top = 14
-      Width = 12
-      Height = 19
+      Width = 10
+      Height = 18
       Caption = 'au'
-      Font.Color = clText
-      Font.Height = 11
-      Font.Name = 'MS Sans Serif'
-      Font.Pitch = fpVariable
-      Font.Style = [fsBold]
-      ParentFont = False
     end
     object Label5: TLabel
       Left = 58
       Top = 46
-      Width = 6
-      Height = 19
+      Width = 5
+      Height = 18
       Caption = #224
-      Font.Color = clText
-      Font.Height = 11
-      Font.Name = 'MS Sans Serif'
-      Font.Pitch = fpVariable
-      Font.Style = [fsBold]
-      ParentFont = False
     end
     object Label3: TLabel
       Left = 172
       Top = 46
-      Width = 18
-      Height = 19
+      Width = 16
+      Height = 18
       Caption = 'pas'
-      Font.Color = clText
-      Font.Height = 11
-      Font.Name = 'MS Sans Serif'
-      Font.Pitch = fpVariable
-      Font.Style = [fsBold]
-      ParentFont = False
     end
     object Label4: TLabel
       Left = 242
       Top = 46
-      Width = 25
-      Height = 19
+      Width = 22
+      Height = 18
       Caption = 'jours'
-      Font.Color = clText
-      Font.Height = 11
-      Font.Name = 'MS Sans Serif'
-      Font.Pitch = fpVariable
-      Font.Style = [fsBold]
-      ParentFont = False
     end
     object SatPanel: TPanel
       Left = 8
@@ -109,6 +80,7 @@ object f_calendar: Tf_calendar
       Height = 30
       Cursor = crHandPoint
       Alignment = taLeftJustify
+      ParentColor = True
       TabOrder = 10
       Visible = False
       object Label9: TLabel
@@ -133,6 +105,7 @@ object f_calendar: Tf_calendar
       Cursor = crHandPoint
       Hint = 'http://sunearth.gsfc.nasa.gov/eclipse/eclipse.html'
       Caption = 'Eclipse Predictions by Fred Espenak, NASA/GSFC'
+      ParentColor = True
       ParentShowHint = False
       ShowHint = True
       TabOrder = 9
@@ -146,6 +119,7 @@ object f_calendar: Tf_calendar
       Height = 25
       Caption = 'Refresh'
       Default = True
+      ParentColor = True
       TabOrder = 4
       OnClick = BitBtn1Click
       NumGlyphs = 2
@@ -158,6 +132,7 @@ object f_calendar: Tf_calendar
       Cancel = True
       Caption = 'Fermer'
       ModalResult = 2
+      ParentColor = True
       TabOrder = 6
       OnClick = BitBtn2Click
       NumGlyphs = 2
@@ -168,6 +143,7 @@ object f_calendar: Tf_calendar
       Width = 81
       Height = 25
       Caption = 'Help'
+      ParentColor = True
       TabOrder = 5
       OnClick = BitBtn3Click
       NumGlyphs = 2
@@ -178,6 +154,7 @@ object f_calendar: Tf_calendar
       Width = 81
       Height = 25
       Caption = 'Print'
+      ParentColor = True
       TabOrder = 8
       OnClick = BitBtn4Click
     end
@@ -187,6 +164,7 @@ object f_calendar: Tf_calendar
       Width = 81
       Height = 25
       Caption = 'Save to File'
+      ParentColor = True
       TabOrder = 7
       OnClick = BitBtn5Click
     end
@@ -196,6 +174,7 @@ object f_calendar: Tf_calendar
       Width = 80
       Height = 25
       Caption = 'Reset Chart'
+      ParentColor = True
       ParentShowHint = False
       ShowHint = True
       TabOrder = 11
@@ -701,6 +680,7 @@ object f_calendar: Tf_calendar
         Width = 75
         Height = 22
         Caption = 'Filter ->'
+        ParentColor = True
         TabOrder = 3
         OnClick = Button1Click
       end
@@ -722,6 +702,7 @@ object f_calendar: Tf_calendar
         Width = 75
         Height = 22
         Caption = 'Filter ->'
+        ParentColor = True
         TabOrder = 1
         OnClick = Button2Click
       end

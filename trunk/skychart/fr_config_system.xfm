@@ -10,7 +10,7 @@ object f_config_system: Tf_config_system
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_telescope
+    ActivePage = t_system
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -161,6 +161,7 @@ object f_config_system: Tf_config_system
           Top = 16
           Width = 28
           Height = 28
+          ParentColor = True
           TabOrder = 2
           TabStop = False
           OnClick = BitBtn1Click
@@ -200,6 +201,7 @@ object f_config_system: Tf_config_system
           Top = 52
           Width = 28
           Height = 28
+          ParentColor = True
           TabOrder = 3
           TabStop = False
           OnClick = BitBtn2Click
@@ -287,6 +289,7 @@ object f_config_system: Tf_config_system
           Width = 115
           Height = 25
           Caption = 'Check'
+          ParentColor = True
           TabOrder = 0
           OnClick = chkdbClick
         end
@@ -296,6 +299,7 @@ object f_config_system: Tf_config_system
           Width = 115
           Height = 25
           Caption = 'Create Database'
+          ParentColor = True
           TabOrder = 1
           OnClick = credbClick
         end
@@ -305,6 +309,7 @@ object f_config_system: Tf_config_system
           Width = 115
           Height = 25
           Caption = 'Drop Database'
+          ParentColor = True
           TabOrder = 2
           OnClick = dropdbClick
         end
@@ -314,6 +319,7 @@ object f_config_system: Tf_config_system
           Width = 115
           Height = 25
           Caption = 'Comet Setting'
+          ParentColor = True
           TabOrder = 3
           OnClick = CometDBClick
         end
@@ -323,6 +329,7 @@ object f_config_system: Tf_config_system
           Width = 115
           Height = 25
           Caption = 'Asteroid Setting'
+          ParentColor = True
           TabOrder = 4
           OnClick = AstDBClick
         end
@@ -531,6 +538,7 @@ object f_config_system: Tf_config_system
           Height = 28
           Cursor = crIBeam
           Enabled = False
+          ParentColor = True
           TabOrder = 8
           OnChange = IndiDriverChange
         end

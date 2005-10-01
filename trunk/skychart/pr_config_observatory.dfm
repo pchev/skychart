@@ -9,7 +9,7 @@ object f_config_observatory: Tf_config_observatory
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_horizon
+    ActivePage = t_observatory
     Align = alClient
     TabOrder = 0
     object t_observatory: TTabSheet
@@ -965,6 +965,7 @@ object f_config_observatory: Tf_config_observatory
           CF00E0D0CE00E0CFCE00DFCFCD00DECECC00DBCBCA00D9CBCA00D8CCCB00D7CC
           CB00}
         Zoom = 4
+        ZoomMin = 4
         ZoomMax = 4
         Xcentre = 0
         Ycentre = 0

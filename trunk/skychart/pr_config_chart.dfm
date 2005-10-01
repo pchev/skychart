@@ -202,7 +202,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label96: TLabel
         Left = 72
-        Top = 137
+        Top = 128
         Width = 8
         Height = 13
         Caption = '1'
@@ -216,7 +216,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label97: TLabel
         Left = 72
-        Top = 166
+        Top = 157
         Width = 8
         Height = 13
         Caption = '2'
@@ -230,7 +230,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label98: TLabel
         Left = 72
-        Top = 195
+        Top = 186
         Width = 8
         Height = 13
         Caption = '3'
@@ -244,7 +244,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label99: TLabel
         Left = 72
-        Top = 224
+        Top = 215
         Width = 8
         Height = 13
         Caption = '4'
@@ -258,7 +258,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label100: TLabel
         Left = 264
-        Top = 108
+        Top = 100
         Width = 8
         Height = 13
         Caption = '5'
@@ -272,7 +272,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label101: TLabel
         Left = 264
-        Top = 137
+        Top = 128
         Width = 8
         Height = 13
         Caption = '6'
@@ -286,7 +286,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label102: TLabel
         Left = 264
-        Top = 166
+        Top = 157
         Width = 8
         Height = 13
         Caption = '7'
@@ -300,7 +300,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label103: TLabel
         Left = 264
-        Top = 195
+        Top = 186
         Width = 8
         Height = 13
         Caption = '8'
@@ -314,7 +314,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label104: TLabel
         Left = 264
-        Top = 224
+        Top = 215
         Width = 8
         Height = 13
         Caption = '9'
@@ -328,7 +328,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label105: TLabel
         Left = 256
-        Top = 256
+        Top = 244
         Width = 15
         Height = 13
         Caption = '10'
@@ -357,7 +357,7 @@ object f_config_chart: Tf_config_chart
       end
       object Label114: TLabel
         Left = 72
-        Top = 108
+        Top = 100
         Width = 8
         Height = 13
         Caption = '0'
@@ -386,10 +386,38 @@ object f_config_chart: Tf_config_chart
       end
       object Label74: TLabel
         Left = 72
-        Top = 256
+        Top = 244
         Width = 8
         Height = 13
         Caption = '5'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label1: TLabel
+        Left = 72
+        Top = 273
+        Width = 8
+        Height = 13
+        Caption = '6'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 13
+        Font.Name = 'MS Sans Serif'
+        Font.Pitch = fpVariable
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 256
+        Top = 273
+        Width = 15
+        Height = 13
+        Caption = '11'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = 13
@@ -634,11 +662,11 @@ object f_config_chart: Tf_config_chart
         Caption = 'Projection Setting'
       end
       object Labelp1: TLabel
-        Left = 72
+        Left = 56
         Top = 123
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '1'
+        Caption = '1 - 2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -647,11 +675,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp2: TLabel
-        Left = 72
+        Left = 56
         Top = 152
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '2'
+        Caption = '2 - 3'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -660,11 +688,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp3: TLabel
-        Left = 72
+        Left = 56
         Top = 181
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '3'
+        Caption = '3 - 4'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -673,11 +701,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp4: TLabel
-        Left = 72
+        Left = 56
         Top = 210
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '4'
+        Caption = '4 - 5'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -694,11 +722,11 @@ object f_config_chart: Tf_config_chart
         Caption = 'Field Number'
       end
       object Labelp0: TLabel
-        Left = 72
+        Left = 56
         Top = 94
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '0'
+        Caption = '0 - 1'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -707,11 +735,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp5: TLabel
-        Left = 264
+        Left = 248
         Top = 94
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '5'
+        Caption = '5 - 6'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -720,11 +748,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp6: TLabel
-        Left = 264
+        Left = 248
         Top = 123
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '6'
+        Caption = '6 - 7'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -733,11 +761,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp7: TLabel
-        Left = 264
+        Left = 248
         Top = 152
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '7'
+        Caption = '7 - 8'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -746,11 +774,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp8: TLabel
-        Left = 264
+        Left = 248
         Top = 181
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '8'
+        Caption = '8 - 9'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -759,11 +787,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp9: TLabel
-        Left = 264
+        Left = 240
         Top = 210
-        Width = 9
+        Width = 38
         Height = 16
-        Caption = '9'
+        Caption = '9 - 10'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -772,11 +800,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Labelp10: TLabel
-        Left = 256
+        Left = 232
         Top = 239
-        Width = 17
+        Width = 46
         Height = 16
-        Caption = '10'
+        Caption = '10 - 11'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1010,71 +1038,71 @@ object f_config_chart: Tf_config_chart
             Height = 105
             TabOrder = 2
             object Label32: TLabel
-              Left = 23
-              Top = 24
+              Left = 7
+              Top = 32
               Width = 6
               Height = 13
               Caption = '1'
             end
             object Label33: TLabel
-              Left = 64
-              Top = 24
+              Left = 48
+              Top = 32
               Width = 6
               Height = 13
               Caption = '2'
             end
             object Label34: TLabel
-              Left = 106
-              Top = 24
+              Left = 89
+              Top = 32
               Width = 6
               Height = 13
               Caption = '3'
             end
             object Label35: TLabel
-              Left = 148
-              Top = 24
+              Left = 130
+              Top = 32
               Width = 6
               Height = 13
               Caption = '4'
             end
             object Label36: TLabel
-              Left = 190
-              Top = 24
+              Left = 171
+              Top = 32
               Width = 6
               Height = 13
               Caption = '5'
             end
             object Label38: TLabel
-              Left = 231
-              Top = 24
+              Left = 212
+              Top = 32
               Width = 6
               Height = 13
               Caption = '6'
             end
             object Label39: TLabel
-              Left = 273
-              Top = 24
+              Left = 253
+              Top = 32
               Width = 6
               Height = 13
               Caption = '7'
             end
             object Label40: TLabel
-              Left = 315
-              Top = 24
+              Left = 294
+              Top = 32
               Width = 6
               Height = 13
               Caption = '8'
             end
             object Label76: TLabel
-              Left = 357
-              Top = 24
+              Left = 335
+              Top = 32
               Width = 6
               Height = 13
               Caption = '9'
             end
             object Label78: TLabel
-              Left = 394
-              Top = 24
+              Left = 376
+              Top = 32
               Width = 12
               Height = 13
               Caption = '10'
@@ -1092,6 +1120,13 @@ object f_config_chart: Tf_config_chart
               Width = 93
               Height = 13
               Caption = 'Limiting magnitude :'
+            end
+            object Label3: TLabel
+              Left = 418
+              Top = 32
+              Width = 12
+              Height = 13
+              Caption = '11'
             end
             object fsmag0: TFloatEdit
               Tag = 1
@@ -1236,7 +1271,7 @@ object f_config_chart: Tf_config_chart
           end
           object Panel3: TPanel
             Left = 4
-            Top = 30
+            Top = 38
             Width = 434
             Height = 37
             TabOrder = 0
@@ -1325,71 +1360,71 @@ object f_config_chart: Tf_config_chart
             Caption = 'Limiting Size (arcminutes) :'
           end
           object Label41: TLabel
-            Left = 23
-            Top = 24
+            Left = 7
+            Top = 32
             Width = 6
             Height = 13
             Caption = '1'
           end
           object Label42: TLabel
-            Left = 64
-            Top = 24
+            Left = 48
+            Top = 32
             Width = 6
             Height = 13
             Caption = '2'
           end
           object Label43: TLabel
-            Left = 106
-            Top = 24
+            Left = 89
+            Top = 32
             Width = 6
             Height = 13
             Caption = '3'
           end
           object Label44: TLabel
-            Left = 148
-            Top = 24
+            Left = 130
+            Top = 32
             Width = 6
             Height = 13
             Caption = '4'
           end
           object Label45: TLabel
-            Left = 190
-            Top = 24
+            Left = 171
+            Top = 32
             Width = 6
             Height = 13
             Caption = '5'
           end
           object Label46: TLabel
-            Left = 231
-            Top = 24
+            Left = 212
+            Top = 32
             Width = 6
             Height = 13
             Caption = '6'
           end
           object Label47: TLabel
-            Left = 273
-            Top = 24
+            Left = 253
+            Top = 32
             Width = 6
             Height = 13
             Caption = '7'
           end
           object Label79: TLabel
-            Left = 315
-            Top = 24
+            Left = 294
+            Top = 32
             Width = 6
             Height = 13
             Caption = '8'
           end
           object Label80: TLabel
-            Left = 357
-            Top = 24
+            Left = 335
+            Top = 32
             Width = 6
             Height = 13
             Caption = '9'
           end
           object Label111: TLabel
-            Left = 394
-            Top = 24
+            Left = 376
+            Top = 32
             Width = 12
             Height = 13
             Caption = '10'
@@ -1400,6 +1435,13 @@ object f_config_chart: Tf_config_chart
             Width = 108
             Height = 13
             Caption = 'Field of vision number :'
+          end
+          object Label4: TLabel
+            Left = 418
+            Top = 32
+            Width = 12
+            Height = 13
+            Caption = '11'
           end
           object fmag0: TFloatEdit
             Tag = 1
@@ -1694,7 +1736,7 @@ object f_config_chart: Tf_config_chart
       object Bevel9: TBevel
         Left = 8
         Top = 24
-        Width = 355
+        Width = 377
         Height = 353
         Shape = bsFrame
       end
@@ -1729,9 +1771,9 @@ object f_config_chart: Tf_config_chart
       object Label161: TLabel
         Left = 48
         Top = 86
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '1'
+        Caption = '1 - 2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1742,9 +1784,9 @@ object f_config_chart: Tf_config_chart
       object Label162: TLabel
         Left = 48
         Top = 115
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '2'
+        Caption = '2 - 3'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1755,9 +1797,9 @@ object f_config_chart: Tf_config_chart
       object Label163: TLabel
         Left = 48
         Top = 144
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '3'
+        Caption = '3 - 4'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1768,9 +1810,9 @@ object f_config_chart: Tf_config_chart
       object Label164: TLabel
         Left = 48
         Top = 172
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '4'
+        Caption = '4 - 5'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1781,9 +1823,9 @@ object f_config_chart: Tf_config_chart
       object Label166: TLabel
         Left = 48
         Top = 58
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '0'
+        Caption = '0 - 1'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1794,9 +1836,9 @@ object f_config_chart: Tf_config_chart
       object Label167: TLabel
         Left = 48
         Top = 201
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '5'
+        Caption = '5 - 6'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1807,9 +1849,9 @@ object f_config_chart: Tf_config_chart
       object Label168: TLabel
         Left = 48
         Top = 230
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '6'
+        Caption = '6 - 7'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1820,9 +1862,9 @@ object f_config_chart: Tf_config_chart
       object Label169: TLabel
         Left = 48
         Top = 258
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '7'
+        Caption = '7 - 8'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1833,9 +1875,9 @@ object f_config_chart: Tf_config_chart
       object Label170: TLabel
         Left = 48
         Top = 287
-        Width = 9
+        Width = 30
         Height = 16
-        Caption = '8'
+        Caption = '8 - 9'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1844,11 +1886,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Label174: TLabel
-        Left = 48
+        Left = 40
         Top = 316
-        Width = 9
+        Width = 38
         Height = 16
-        Caption = '9'
+        Caption = '9 - 10'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1857,11 +1899,11 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object Label177: TLabel
-        Left = 40
+        Left = 32
         Top = 345
-        Width = 17
+        Width = 46
         Height = 16
-        Caption = '10'
+        Caption = '10 - 11'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13

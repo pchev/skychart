@@ -8,6 +8,13 @@ object f_printsetup: Tf_printsetup
   ActiveControl = printmode
   Caption = 'f_printsetup'
   Color = clBackground
+  Font.Color = clBlack
+  Font.Height = 13
+  Font.Name = 'Tahoma'
+  Font.Pitch = fpVariable
+  Font.Style = []
+  Font.Weight = 48
+  ParentFont = False
   Scaled = False
   OnShow = FormShow
   PixelsPerInch = 90
@@ -44,28 +51,28 @@ object f_printsetup: Tf_printsetup
       Left = 216
       Top = 12
       Width = 64
-      Height = 17
+      Height = 20
       Caption = '                '
     end
     object qtprintresol: TLabel
       Left = 216
       Top = 40
       Width = 76
-      Height = 17
+      Height = 20
       Caption = '                   '
     end
     object Label2: TLabel
       Left = 136
       Top = 12
-      Width = 43
-      Height = 17
+      Width = 39
+      Height = 20
       Caption = 'Printer:'
     end
     object Label3: TLabel
       Left = 136
       Top = 40
-      Width = 64
-      Height = 17
+      Width = 61
+      Height = 20
       Caption = 'Resolution:'
     end
   end
@@ -74,13 +81,14 @@ object f_printsetup: Tf_printsetup
     Top = 88
     Width = 425
     Height = 121
+    ParentColor = True
     TabOrder = 2
     object printcmd: TComboBox
       Left = 232
       Top = 56
       Width = 137
-      Height = 25
-      ItemHeight = 19
+      Height = 28
+      ItemHeight = 22
       Items.Strings = (
         'kprinter'
         'xpp'
@@ -110,15 +118,16 @@ object f_printsetup: Tf_printsetup
     object Label1: TLabel
       Left = 232
       Top = 4
-      Width = 100
-      Height = 17
+      Width = 97
+      Height = 20
       Caption = 'Raster Resolution'
     end
     object cmdreport: TEdit
       Left = 8
       Top = 90
       Width = 393
-      Height = 22
+      Height = 28
+      Cursor = crIBeam
       Color = clButton
       ReadOnly = True
       TabOrder = 3
@@ -126,38 +135,40 @@ object f_printsetup: Tf_printsetup
     object Label4: TLabel
       Left = 288
       Top = 24
-      Width = 115
-      Height = 17
+      Width = 112
+      Height = 20
       Caption = 'dpi for 8"x11" paper'
     end
     object Label5: TLabel
       Left = 8
       Top = 60
-      Width = 203
-      Height = 17
+      Width = 196
+      Height = 20
       Caption = 'Command to use to process the file'
     end
     object Label6: TLabel
       Left = 8
       Top = 4
-      Width = 113
-      Height = 17
+      Width = 111
+      Height = 20
       Caption = 'Path to save the file'
     end
     object savepath: TEdit
       Left = 8
       Top = 22
       Width = 153
-      Height = 25
+      Height = 28
+      Cursor = crIBeam
       TabOrder = 7
       Text = 'savepath'
       OnChange = savepathChange
     end
     object savepathsel: TBitBtn
       Left = 160
-      Top = 21
+      Top = 23
       Width = 26
       Height = 26
+      ParentColor = True
       TabOrder = 8
       TabStop = False
       OnClick = savepathselClick
@@ -192,10 +203,11 @@ object f_printsetup: Tf_printsetup
       Margin = 0
     end
     object printcmdsel: TBitBtn
-      Left = 376
-      Top = 55
+      Left = 368
+      Top = 57
       Width = 26
       Height = 26
+      ParentColor = True
       TabOrder = 9
       TabStop = False
       OnClick = printcmdselClick
@@ -237,6 +249,7 @@ object f_printsetup: Tf_printsetup
     Height = 25
     Caption = 'Ok'
     ModalResult = 1
+    ParentColor = True
     TabOrder = 3
   end
   object Cancel: TButton
@@ -246,6 +259,7 @@ object f_printsetup: Tf_printsetup
     Height = 25
     Caption = 'Cancel'
     ModalResult = 2
+    ParentColor = True
     TabOrder = 4
   end
   object prtcolor: TRadioGroup

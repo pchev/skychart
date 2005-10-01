@@ -31,8 +31,44 @@ begin
 end;
 
 procedure Tf_config_pictures.FormShow(Sender: TObject);
+{$ifdef linux}
+var i:integer;
+{$endif}
 begin
 ShowImages;
+{$ifdef linux}
+  if color=dark then begin
+     for i := 0 to ComponentCount-1 do begin
+        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
+           if color=clBase   then  color:=black;
+           if color=clButton then  color:=dark;
+        end;
+        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
+           if color=clBase   then  color:=black;
+           if color=clButton then  color:=dark;
+        end;
+        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
+           if color=clBase   then  color:=black;
+           if color=clButton then  color:=dark;
+        end;
+     end;
+  end else begin
+     for i := 0 to ComponentCount-1 do begin
+        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
+           if color=black then color:=clBase;
+           if color=dark  then color:=clButton;
+        end;
+        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
+           if color=black then color:=clBase;
+           if color=dark  then color:=clButton;
+        end;
+        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
+           if color=black then color:=clBase;
+           if color=dark  then color:=clButton;
+        end;
+     end;
+  end;
+{$endif}
 end;
 
 procedure Tf_config_pictures.ShowImages;
@@ -242,8 +278,8 @@ end;
 procedure Tf_config_pictures.realskydirChange(Sender: TObject);
 begin
 cdss.dssdir:=realskydir.text;
-if fileexists(slash(cdss.dssdir)+'Hi_comp.lis') then
-   realskydir.color:=clWindow
+if fileexists(slash(cdss.dssdir)+'hi_comp.lis') then
+   realskydir.color:=realskydrive.color
 else
    realskydir.color:=clRed;
 end;

@@ -9,7 +9,7 @@ object f_config_pictures: Tf_config_pictures
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_dss
+    ActivePage = t_images
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -67,6 +67,7 @@ object f_config_pictures: Tf_config_pictures
         Top = 43
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 6
         TabStop = False
         OnClick = BitBtn3Click
@@ -106,6 +107,7 @@ object f_config_pictures: Tf_config_pictures
         Width = 113
         Height = 25
         Caption = 'Scan directory'
+        ParentColor = True
         TabOrder = 7
         OnClick = ScanImagesClick
       end
@@ -114,7 +116,7 @@ object f_config_pictures: Tf_config_pictures
         Top = 168
         Width = 401
         Height = 145
-        Color = clButton
+        ParentColor = True
         TabOrder = 8
         object Label268: TLabel
           Left = 32
@@ -160,7 +162,7 @@ object f_config_pictures: Tf_config_pictures
         Top = 80
         Width = 401
         Height = 73
-        Color = clButton
+        ParentColor = True
         TabOrder = 9
         Visible = False
         object ProgressBar1: TProgressBar
@@ -232,6 +234,7 @@ object f_config_pictures: Tf_config_pictures
         Top = 27
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 1
         TabStop = False
         OnClick = BitBtn5Click
@@ -279,7 +282,7 @@ object f_config_pictures: Tf_config_pictures
         Top = 74
         Width = 297
         Height = 55
-        Color = clButton
+        ParentColor = True
         TabOrder = 6
         object ImgLumBar2: TTrackBar
           Left = 8

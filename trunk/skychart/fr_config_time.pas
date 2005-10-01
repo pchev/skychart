@@ -65,7 +65,6 @@ type
     t_min: TSpinEdit;
     t_sec: TSpinEdit;
     t_simulation: TTabSheet;
-    stepreset: TSpeedButton;
     Label165: TLabel;
     Label167: TLabel;
     Label168: TLabel;
@@ -78,6 +77,7 @@ type
     Label178: TLabel;
     AllSim: TButton;
     NoSim: TButton;
+    ResetButton: TButton;
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);

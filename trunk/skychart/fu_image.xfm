@@ -37,6 +37,7 @@ object f_image: Tf_image
     Width = 615
     Height = 27
     Align = alTop
+    ParentColor = True
     TabOrder = 0
     TabStop = True
     object Label1: TLabel
@@ -52,6 +53,7 @@ object f_image: Tf_image
       Width = 75
       Height = 25
       Caption = 'Close'
+      ParentColor = True
       TabOrder = 0
       OnClick = Button1Click
     end
@@ -61,6 +63,7 @@ object f_image: Tf_image
       Width = 75
       Height = 25
       Caption = 'Zoom +'
+      ParentColor = True
       TabOrder = 1
       OnClick = Button2Click
     end
@@ -70,6 +73,7 @@ object f_image: Tf_image
       Width = 75
       Height = 25
       Caption = 'Zoom -'
+      ParentColor = True
       TabOrder = 2
       OnClick = Button3Click
     end
