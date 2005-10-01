@@ -9,7 +9,7 @@ object f_config_chart: Tf_config_chart
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_filter
+    ActivePage = t_chart
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -27,7 +27,7 @@ object f_config_chart: Tf_config_chart
         Top = 152
         Width = 449
         Height = 105
-        Color = clButton
+        ParentColor = True
         TabOrder = 1
         object Label134: TLabel
           Left = 404
@@ -83,7 +83,7 @@ object f_config_chart: Tf_config_chart
         Top = 24
         Width = 449
         Height = 121
-        Color = clButton
+        ParentColor = True
         TabOrder = 2
         object Label136: TLabel
           Left = 16
@@ -214,13 +214,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '1'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label97: TLabel
         Left = 72
@@ -228,13 +221,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '2'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label98: TLabel
         Left = 72
@@ -242,13 +228,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '3'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label99: TLabel
         Left = 72
@@ -256,13 +235,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '4'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label100: TLabel
         Left = 264
@@ -270,13 +242,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '5'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label101: TLabel
         Left = 264
@@ -284,13 +249,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '6'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label102: TLabel
         Left = 264
@@ -298,13 +256,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '7'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label103: TLabel
         Left = 264
@@ -312,13 +263,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '8'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label104: TLabel
         Left = 264
@@ -326,13 +270,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '9'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label105: TLabel
         Left = 256
@@ -340,13 +277,6 @@ object f_config_chart: Tf_config_chart
         Width = 14
         Height = 20
         Caption = '10'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label106: TLabel
         Left = 24
@@ -369,13 +299,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '0'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object fw1: TFloatEdit
         Tag = 1
@@ -576,13 +499,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '5'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object fw4b: TFloatEdit
         Tag = 4
@@ -620,13 +536,6 @@ object f_config_chart: Tf_config_chart
         Width = 7
         Height = 20
         Caption = '6'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label2: TLabel
         Left = 256
@@ -634,13 +543,6 @@ object f_config_chart: Tf_config_chart
         Width = 14
         Height = 20
         Caption = '11'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
     end
     object t_projection: TTabSheet
@@ -674,13 +576,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '1 - 2'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp2: TLabel
         Left = 56
@@ -688,13 +583,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '2 - 3'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp3: TLabel
         Left = 56
@@ -702,13 +590,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '3 - 4'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp4: TLabel
         Left = 56
@@ -716,13 +597,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '4 - 5'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label149: TLabel
         Left = 16
@@ -739,13 +613,6 @@ object f_config_chart: Tf_config_chart
         Height = 20
         Hint = 'aa'
         Caption = '0 - 1'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp5: TLabel
         Left = 248
@@ -753,13 +620,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '5 - 6'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp6: TLabel
         Left = 248
@@ -767,13 +627,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '6 - 7'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp7: TLabel
         Left = 248
@@ -781,13 +634,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '7 - 8'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp8: TLabel
         Left = 248
@@ -795,13 +641,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '8 - 9'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp9: TLabel
         Left = 241
@@ -809,13 +648,6 @@ object f_config_chart: Tf_config_chart
         Width = 34
         Height = 20
         Caption = '9 - 10'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Labelp10: TLabel
         Left = 234
@@ -823,13 +655,6 @@ object f_config_chart: Tf_config_chart
         Width = 41
         Height = 20
         Caption = '10 - 11'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label171: TLabel
         Left = 208
@@ -1059,12 +884,14 @@ object f_config_chart: Tf_config_chart
           Top = 44
           Width = 442
           Height = 137
+          ParentColor = True
           TabOrder = 1
           object Panel2: TPanel
             Left = 4
             Top = 30
             Width = 434
             Height = 105
+            ParentColor = True
             TabOrder = 2
             object Label32: TLabel
               Left = 23
@@ -1296,6 +1123,7 @@ object f_config_chart: Tf_config_chart
             Top = 32
             Width = 434
             Height = 43
+            ParentColor = True
             TabOrder = 0
             object Label110: TLabel
               Left = 8
@@ -1359,6 +1187,7 @@ object f_config_chart: Tf_config_chart
           Top = 44
           Width = 442
           Height = 149
+          ParentColor = True
           TabOrder = 2
           object Label48: TLabel
             Left = 8
@@ -1767,13 +1596,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '1 - 2'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label137: TLabel
         Left = 24
@@ -1781,13 +1603,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '2 - 3'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label147: TLabel
         Left = 24
@@ -1795,13 +1610,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '3 - 4'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label148: TLabel
         Left = 24
@@ -1809,13 +1617,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '4 - 5'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label150: TLabel
         Left = 23
@@ -1831,13 +1632,6 @@ object f_config_chart: Tf_config_chart
         Height = 20
         Hint = 'aa'
         Caption = '0 - 1'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label155: TLabel
         Left = 24
@@ -1845,13 +1639,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '5 - 6'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label156: TLabel
         Left = 24
@@ -1859,13 +1646,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '6 - 7'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label157: TLabel
         Left = 24
@@ -1873,13 +1653,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '7 - 8'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label169: TLabel
         Left = 24
@@ -1887,13 +1660,6 @@ object f_config_chart: Tf_config_chart
         Width = 27
         Height = 20
         Caption = '8 - 9'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label170: TLabel
         Left = 24
@@ -1901,13 +1667,6 @@ object f_config_chart: Tf_config_chart
         Width = 34
         Height = 20
         Caption = '9 - 10'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label174: TLabel
         Left = 24
@@ -1915,13 +1674,6 @@ object f_config_chart: Tf_config_chart
         Width = 41
         Height = 20
         Caption = '10 - 11'
-        Font.Color = clText
-        Font.Height = 13
-        Font.Name = 'MS Sans Serif'
-        Font.Pitch = fpVariable
-        Font.Style = []
-        Font.Weight = 0
-        ParentFont = False
       end
       object Label175: TLabel
         Left = 261

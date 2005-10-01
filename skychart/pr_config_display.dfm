@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_labels
+    ActivePage = t_color
     Align = alClient
     TabOrder = 0
     object t_display: TTabSheet
@@ -92,15 +92,10 @@ object f_config_display: Tf_config_display
           Height = 25
           Max = 50
           Min = 1
-          Orientation = trHorizontal
           PageSize = 5
           Frequency = 5
           Position = 1
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 0
-          TickMarks = tmBottomRight
-          TickStyle = tsAuto
           OnChange = StarSizeBarChange
         end
         object StarContrastBar: TTrackBar
@@ -110,15 +105,10 @@ object f_config_display: Tf_config_display
           Height = 25
           Max = 1000
           Min = 100
-          Orientation = trHorizontal
           PageSize = 100
           Frequency = 100
           Position = 100
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 1
-          TickMarks = tmBottomRight
-          TickStyle = tsAuto
           OnChange = StarContrastBarChange
         end
         object SaturationBar: TTrackBar
@@ -127,15 +117,9 @@ object f_config_display: Tf_config_display
           Width = 225
           Height = 25
           Max = 255
-          Orientation = trHorizontal
           PageSize = 28
           Frequency = 28
-          Position = 0
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 2
-          TickMarks = tmBottomRight
-          TickStyle = tsAuto
           OnChange = SaturationBarChange
         end
         object SizeContrastBar: TTrackBar
@@ -145,15 +129,10 @@ object f_config_display: Tf_config_display
           Height = 25
           Max = 100
           Min = 10
-          Orientation = trHorizontal
           PageSize = 10
           Frequency = 10
           Position = 10
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 3
-          TickMarks = tmBottomRight
-          TickStyle = tsAuto
           OnChange = SizeContrastBarChange
         end
         object StarButton1: TButton
@@ -1430,15 +1409,9 @@ object f_config_display: Tf_config_display
         Width = 150
         Height = 45
         Max = 255
-        Orientation = trHorizontal
         PageSize = 26
         Frequency = 26
-        Position = 0
-        SelEnd = 0
-        SelStart = 0
         TabOrder = 0
-        TickMarks = tmBottomRight
-        TickStyle = tsAuto
         OnChange = NebGrayBarChange
       end
       object NebBrightBar: TTrackBar
@@ -1447,15 +1420,9 @@ object f_config_display: Tf_config_display
         Width = 150
         Height = 45
         Max = 255
-        Orientation = trHorizontal
         PageSize = 26
         Frequency = 26
-        Position = 0
-        SelEnd = 0
-        SelStart = 0
         TabOrder = 1
-        TickMarks = tmBottomRight
-        TickStyle = tsAuto
         OnChange = NebBrightBarChange
       end
       object NebColorPanel: TPanel
@@ -2419,8 +2386,7 @@ object f_config_display: Tf_config_display
     end
   end
   object OpenDialog1: TOpenDialog
-    Left = 328
-    Top = 8
+    Left = 392
   end
   object FontDialog1: TFontDialog
     Font.Charset = DEFAULT_CHARSET
@@ -2428,14 +2394,9 @@ object f_config_display: Tf_config_display
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    MinFontSize = 0
-    MaxFontSize = 0
-    Left = 368
-    Top = 8
+    Left = 424
   end
   object ColorDialog1: TColorDialog
-    Ctl3D = True
-    Left = 408
-    Top = 8
+    Left = 456
   end
 end

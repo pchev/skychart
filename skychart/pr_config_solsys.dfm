@@ -9,7 +9,7 @@ object f_config_solsys: Tf_config_solsys
     Top = 0
     Width = 490
     Height = 443
-    ActivePage = t_comet
+    ActivePage = t_solsys
     Align = alClient
     TabOrder = 0
     object t_solsys: TTabSheet
@@ -52,7 +52,7 @@ object f_config_solsys: Tf_config_solsys
         OnChange = PlanetDirChange
       end
       object planetdirsel: TBitBtn
-        Left = 336
+        Left = 328
         Top = 56
         Width = 26
         Height = 26
@@ -534,7 +534,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 0
+              ItemHeight = 13
               TabOrder = 0
             end
             object DelCom: TButton
@@ -1116,7 +1116,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 0
+              ItemHeight = 13
               TabOrder = 0
             end
             object delast: TButton

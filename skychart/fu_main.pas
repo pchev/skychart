@@ -30,7 +30,7 @@ uses fu_chart, cu_catalog, cu_planet, cu_fits, cu_database, u_constant, u_util, 
      {$ifdef Themed}
      QThemed, QThemeSrvLinux,
      {$endif}
-     SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs,
+     SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs, Qt,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
      QStdCtrls, IniFiles, Types, QButtons, QFileCtrls, QClipbrd;
 
@@ -154,7 +154,6 @@ type
     Undo: TAction;
     Redo: TAction;
     ViewStatus: TAction;
-    View1: TMenuItem;
     ViewToolsBar1: TMenuItem;
     SaveConfigurationNow1: TMenuItem;
     SaveConfigurationOnExit1: TMenuItem;
@@ -363,15 +362,16 @@ type
     Buttons1: TMenuItem;
     Normal1: TMenuItem;
     Reverse1: TMenuItem;
-    NightVision1: TMenuItem;
-    Useyourdesktopmanagertochangethecolor1: TMenuItem;
-    N7: TMenuItem;
     ToolButtonEditLabels: TToolButton;
     EditLabels: TAction;
     Themes1: TMenuItem;
     Default1: TMenuItem;
     N8: TMenuItem;
-    tosetthecolor1: TMenuItem;
+    ViewStatusBar1: TMenuItem;
+    N9: TMenuItem;
+    ToolButtonNightVision: TToolButton;
+    NightVision1: TMenuItem;
+    N7: TMenuItem;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -468,6 +468,7 @@ type
     procedure ButtonModeClick(Sender: TObject);
     procedure EditLabelsExecute(Sender: TObject);
     procedure SetThemeClick(Sender: TObject);
+    procedure ToolButtonNightVisionClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -538,6 +539,7 @@ type
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
     procedure InitTheme;
     procedure SetTheme;
+    procedure SetNightVision(night: boolean);
   end;
 
 var
@@ -577,13 +579,12 @@ activecontrol:=nil;
 end;
 
 procedure Tf_main.InitTheme;
-var  i: integer;
-     sr: TSearchRec;
+var  sr: TSearchRec;
      inif: TMemIniFile;
      m: Tmenuitem;
 begin
+  cfgm.ThemeName:='Default';
  {$ifdef Themed}
-   cfgm.ThemeName:='Silver';
    inif:=TMeminifile.create(configfile);
    ThemePath:=slash(appdir)+ThemePath;
    try
@@ -658,7 +659,120 @@ end;
  {$endif}
 end;
 
+{
+too tricky and windows manager dependant...
+beware that modal form get hiden and lock the app.
+is this really useful ? better to use a theme with small border.
+procedure Tf_main.FullScreen1Click(Sender: TObject);
+var i: integer;
+    p:Tpoint;
+begin
+FullScreen1.Checked:=not FullScreen1.Checked;
+if FullScreen1.Checked then begin
+   cfgm.savetop:=f_main.top;
+   cfgm.saveleft:=f_main.left;
+   cfgm.savewidth:=f_main.width;
+   cfgm.saveheight:=f_main.height;
+   WindowState:=wsMinimized;
+   application.ProcessMessages;
+   BoundsRect:=Rect(0,0,screen.Width,screen.Height);
+   BorderStyle:=fbsNone;
+   WindowState:=wsNormal;
+   QWidget_setActiveWindow(Handle);
+end else begin
+   WindowState:=wsMinimized;
+   application.ProcessMessages;
+   f_main.top:=cfgm.savetop;
+   f_main.left:=cfgm.saveleft;
+   f_main.width:=cfgm.savewidth;
+   f_main.height:=cfgm.saveheight;
+   WindowState:=wsNormal;
+   application.ProcessMessages;
+   BorderStyle:=fbsSizeable;
+end;
+end;}
+
 // End of Linux specific CLX code:
+
+procedure Tf_main.SetNightVision(night: boolean);
+begin
+if night then begin
+   if cfgm.ThemeName<>'Default' then cfgm.ThemeName:='Red';
+   SetButtonImage(2);
+   Color:=dark;
+   font.Color:=middle;
+   MainMenu1.Color:=dark;
+   quicksearch.Color:=black;
+   timeu.Color:=black;
+   timeval.Color:=black;
+   f_calendar.Color:=dark;
+   f_calendar.font.Color:=middle;
+   f_detail.Color:=dark;
+   f_detail.font.Color:=middle;
+   f_search.Color:=dark;
+   f_search.font.Color:=middle;
+   f_zoom.Color:=dark;
+   f_zoom.font.Color:=middle;
+   f_info.Color:=dark;
+   f_info.font.Color:=middle;
+   f_position.Color:=dark;
+   f_position.font.Color:=middle;
+   f_directory.Color:=dark;
+   f_directory.font.Color:=middle;
+   f_getdss.Color:=dark;
+   f_getdss.font.Color:=middle;
+   f_printsetup.Color:=dark;
+   f_printsetup.font.Color:=middle;
+   if f_config<>nil then begin
+      f_config.Color:=dark;
+      f_config.font.Color:=middle;
+   end;
+end else begin
+   if cfgm.ThemeName<>'Default' then cfgm.ThemeName:='Silver';
+   SetButtonImage(1);
+   Color:=clButton;
+   font.Color:=clText;
+   MainMenu1.Color:=clButton;
+   quicksearch.Color:=clBase;
+   timeu.Color:=clBase;
+   timeval.Color:=clBase;
+   f_calendar.Color:=clButton;
+   f_calendar.font.Color:=clText;
+   f_detail.Color:=clButton;
+   f_detail.font.Color:=clText;
+   f_search.Color:=clButton;
+   f_search.font.Color:=clText;
+   f_zoom.Color:=clButton;
+   f_zoom.font.Color:=clText;
+   f_info.Color:=clButton;
+   f_info.font.Color:=clText;
+   f_position.Color:=clButton;
+   f_position.font.Color:=clText;
+   f_directory.Color:=clButton;
+   f_directory.font.Color:=clText;
+   f_getdss.Color:=clButton;
+   f_getdss.font.Color:=clText;
+   f_printsetup.Color:=clButton;
+   f_printsetup.font.Color:=clText;
+   if f_config<>nil then begin
+      f_config.Color:=clButton;
+      f_config.font.Color:=clText;
+   end;   
+end;
+SetTheme;
+end;
+
+procedure Tf_main.ToolButtonNightVisionClick(Sender: TObject);
+var i: integer;
+begin
+nightvision:= not nightvision;
+SetNightVision(nightvision);
+ToolButtonNightVision.Down:=nightvision;
+NightVision1.Checked:=nightvision;
+for i:=0 to MDIChildCount-1 do
+  if MDIChildren[i] is Tf_chart then
+    (MDIChildren[i] as Tf_chart).NightVision:=nightvision;
+end;
 
 end.
 

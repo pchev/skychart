@@ -82,6 +82,7 @@ object f_zoom: Tf_zoom
     Caption = 'OK'
     Default = True
     ModalResult = 1
+    ParentColor = True
     TabOrder = 1
     NumGlyphs = 2
   end
@@ -93,6 +94,7 @@ object f_zoom: Tf_zoom
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
+    ParentColor = True
     TabOrder = 2
     NumGlyphs = 2
   end
@@ -103,7 +105,7 @@ object f_zoom: Tf_zoom
     Height = 26
     Cursor = crIBeam
     TabStop = False
-    Color = clButton
+    ParentColor = True
     ReadOnly = True
     TabOrder = 3
   end

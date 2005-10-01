@@ -3,12 +3,12 @@ object f_about: Tf_about
   Top = 109
   BorderStyle = bsNone
   Caption = 'About'
-  ClientHeight = 311
-  ClientWidth = 431
+  ClientHeight = 253
+  ClientWidth = 350
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clBlack
-  Font.Height = -14
+  Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsStayOnTop
@@ -17,13 +17,13 @@ object f_about: Tf_about
   OnCreate = FormCreate
   OnPaint = FormPaint
   OnShow = FormShow
-  PixelsPerInch = 120
-  TextHeight = 16
+  PixelsPerInch = 96
+  TextHeight = 13
   object logo: TImage
     Left = 0
     Top = 0
-    Width = 431
-    Height = 311
+    Width = 350
+    Height = 253
     Align = alClient
     AutoSize = True
     Picture.Data = {
@@ -379,19 +379,20 @@ object f_about: Tf_about
       8C313C7A735D5D41E1B78F338D8BE407B75E9517863118211790D5D5D415DFC2
       90A445063702681CD757507FFFD9}
     Stretch = True
+    OnClick = logoDblClick
     OnDblClick = logoDblClick
   end
   object Label1: TLabel
-    Left = 192
-    Top = 38
-    Width = 210
-    Height = 91
+    Left = 160
+    Top = 31
+    Width = 167
+    Height = 37
     Alignment = taRightJustify
     Caption = 'Sky Charts'
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clSilver
-    Font.Height = -43
+    Font.Height = -35
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentColor = False
@@ -400,15 +401,15 @@ object f_about: Tf_about
     WordWrap = True
   end
   object Label2: TLabel
-    Left = 20
-    Top = 217
-    Width = 203
-    Height = 29
+    Left = 16
+    Top = 176
+    Width = 164
+    Height = 24
     Caption = 'Version 3 alpha 0'
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clSilver
-    Font.Height = -23
+    Font.Height = -19
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentColor = False
@@ -416,26 +417,26 @@ object f_about: Tf_about
     Transparent = True
   end
   object Label3: TLabel
-    Left = 20
-    Top = 283
-    Width = 396
-    Height = 17
+    Left = 16
+    Top = 230
+    Width = 322
+    Height = 14
     AutoSize = False
     Caption = 'Copyright (C) 2002-2005 Patrick Chevalley '
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clSilver
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'Arial'
     Font.Style = [fsItalic]
     ParentColor = False
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 20
-    Top = 249
-    Width = 396
-    Height = 34
+    Left = 16
+    Top = 202
+    Width = 322
+    Height = 28
     AutoSize = False
     Caption = 
       'This program is free software; you can redistribute it and/or mo' +
@@ -443,7 +444,7 @@ object f_about: Tf_about
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clSilver
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'Arial'
     Font.Style = [fsItalic]
     ParentColor = False
@@ -452,7 +453,7 @@ object f_about: Tf_about
   end
   object Timer1: TTimer
     Enabled = False
-    Interval = 5000
+    Interval = 2000
     OnTimer = Timer1Timer
     Left = 16
     Top = 24

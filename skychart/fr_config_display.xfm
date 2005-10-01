@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_rectangle
+    ActivePage = t_display
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -139,6 +139,7 @@ object f_config_display: Tf_config_display
           Width = 95
           Height = 25
           Caption = 'Default'
+          ParentColor = True
           TabOrder = 8
           OnClick = StarButton1Click
         end
@@ -148,6 +149,7 @@ object f_config_display: Tf_config_display
           Width = 95
           Height = 25
           Caption = 'Nacked Eye'
+          ParentColor = True
           TabOrder = 9
           OnClick = StarButton2Click
         end
@@ -157,6 +159,7 @@ object f_config_display: Tf_config_display
           Width = 95
           Height = 25
           Caption = 'High Color'
+          ParentColor = True
           TabOrder = 10
           OnClick = StarButton3Click
         end
@@ -166,6 +169,7 @@ object f_config_display: Tf_config_display
           Width = 95
           Height = 25
           Caption = 'Black/White'
+          ParentColor = True
           TabOrder = 11
           OnClick = StarButton4Click
         end
@@ -756,6 +760,7 @@ object f_config_display: Tf_config_display
         Width = 75
         Height = 25
         Caption = 'Default'
+        ParentColor = True
         TabOrder = 16
         OnClick = DefaultFontClick
       end
@@ -1374,6 +1379,7 @@ object f_config_display: Tf_config_display
         Width = 75
         Height = 25
         Caption = 'Reset'
+        ParentColor = True
         TabOrder = 6
         OnClick = Button3Click
       end
@@ -1517,6 +1523,7 @@ object f_config_display: Tf_config_display
         Width = 75
         Height = 25
         Caption = 'Default'
+        ParentColor = True
         TabOrder = 3
         OnClick = DefNebColorButtonClick
       end
@@ -1601,6 +1608,7 @@ object f_config_display: Tf_config_display
         Top = 172
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 6
         TabStop = False
         OnClick = ConstlFileBtnClick
@@ -1665,6 +1673,7 @@ object f_config_display: Tf_config_display
         Top = 260
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 10
         TabStop = False
         OnClick = ConstbfileBtnClick

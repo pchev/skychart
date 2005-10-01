@@ -2108,3 +2108,20 @@ sc.cfgsc.NumCircle:=0;
 Refresh;
 end;
 
+procedure Tf_chart.SetNightVision(value:boolean);
+var i:integer;
+begin
+if value=FNightVision then exit;
+FNightVision:=value;
+if FNightVision then begin
+   SaveColor:=sc.plot.cfgplot.color;
+   for i:=1 to numlabtype do SaveLabelColor[i]:=sc.plot.cfgplot.labelcolor[i];
+   sc.plot.cfgplot.color:=DfRedColor;
+   for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=$000000A0;
+end else begin
+   sc.plot.cfgplot.color:=SaveColor;
+   for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=SaveLabelColor[i];
+end;
+Refresh;
+end;
+

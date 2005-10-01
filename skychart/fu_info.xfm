@@ -53,6 +53,7 @@ object f_info: Tf_info
         Width = 452
         Height = 27
         Align = alBottom
+        ParentColor = True
         TabOrder = 1
         object Button2: TButton
           Left = 12
@@ -60,6 +61,7 @@ object f_info: Tf_info
           Width = 75
           Height = 25
           Caption = 'Refresh'
+          ParentColor = True
           TabOrder = 0
           OnClick = Button2Click
         end
@@ -97,6 +99,7 @@ object f_info: Tf_info
         Width = 452
         Height = 27
         Align = alBottom
+        ParentColor = True
         TabOrder = 1
         object Button3: TButton
           Left = 108
@@ -105,6 +108,7 @@ object f_info: Tf_info
           Height = 25
           Anchors = [akTop, akRight]
           Caption = 'Search'
+          ParentColor = True
           TabOrder = 0
           OnClick = Button3Click
         end
@@ -125,6 +129,7 @@ object f_info: Tf_info
           Height = 25
           Anchors = [akTop, akRight]
           Caption = 'Sort by RA'
+          ParentColor = True
           TabOrder = 2
           OnClick = Button5Click
         end
@@ -135,6 +140,7 @@ object f_info: Tf_info
           Height = 25
           Anchors = [akTop, akRight]
           Caption = 'Print'
+          ParentColor = True
           TabOrder = 3
           OnClick = Button6Click
         end
@@ -145,6 +151,7 @@ object f_info: Tf_info
           Height = 25
           Anchors = [akTop, akRight]
           Caption = 'Save'
+          ParentColor = True
           TabOrder = 4
           OnClick = Button7Click
         end
@@ -169,6 +176,7 @@ object f_info: Tf_info
     Width = 460
     Height = 27
     Align = alBottom
+    ParentColor = True
     TabOrder = 1
     object Button1: TButton
       Left = 280
@@ -178,6 +186,7 @@ object f_info: Tf_info
       Anchors = [akTop, akRight]
       Cancel = True
       Caption = 'Close'
+      ParentColor = True
       TabOrder = 0
       OnClick = Button1Click
     end
@@ -188,6 +197,7 @@ object f_info: Tf_info
       Height = 25
       Anchors = [akTop, akRight]
       Caption = 'Help'
+      ParentColor = True
       TabOrder = 1
     end
   end

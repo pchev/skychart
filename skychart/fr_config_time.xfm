@@ -9,7 +9,7 @@ object f_config_time: Tf_config_time
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_simulation
+    ActivePage = t_time
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -52,6 +52,7 @@ object f_config_time: Tf_config_time
         Top = 216
         Width = 409
         Height = 65
+        ParentColor = True
         TabOrder = 5
         object Label131: TLabel
           Left = 8
@@ -95,6 +96,7 @@ object f_config_time: Tf_config_time
         Top = 288
         Width = 409
         Height = 97
+        ParentColor = True
         TabOrder = 6
         object Label146: TLabel
           Left = 8
@@ -167,6 +169,7 @@ object f_config_time: Tf_config_time
         Top = 72
         Width = 409
         Height = 137
+        ParentColor = True
         TabOrder = 0
         object Label154: TLabel
           Left = 8
@@ -230,6 +233,7 @@ object f_config_time: Tf_config_time
           Width = 177
           Height = 25
           Caption = 'Actual system time'
+          ParentColor = True
           TabOrder = 0
           OnClick = BitBtn4Click
         end
@@ -309,16 +313,6 @@ object f_config_time: Tf_config_time
     object t_simulation: TTabSheet
       Caption = 't_simulation'
       ImageIndex = 1
-      object stepreset: TSpeedButton
-        Left = 256
-        Top = 236
-        Width = 145
-        Height = 25
-        Caption = 'Reset to single date'
-        Layout = blGlyphTop
-        NumGlyphs = 2
-        OnClick = stepresetClick
-      end
       object Label165: TLabel
         Left = 0
         Top = 0
@@ -430,6 +424,7 @@ object f_config_time: Tf_config_time
         Width = 75
         Height = 25
         Caption = 'All'
+        ParentColor = True
         TabOrder = 10
         OnClick = AllSimClick
       end
@@ -439,8 +434,19 @@ object f_config_time: Tf_config_time
         Width = 75
         Height = 25
         Caption = 'None'
+        ParentColor = True
         TabOrder = 11
         OnClick = NoSimClick
+      end
+      object ResetButton: TButton
+        Left = 256
+        Top = 240
+        Width = 145
+        Height = 25
+        Caption = 'Reset to single date'
+        ParentColor = True
+        TabOrder = 12
+        OnClick = stepresetClick
       end
     end
   end

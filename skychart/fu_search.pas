@@ -98,6 +98,7 @@ type
     procedure InitConst;
     procedure InitStarName;
     procedure InitNebName;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     NebNameAR : array of single;
@@ -119,5 +120,6 @@ implementation
 {$R *.xfm}
 
 {$include i_search.pas}
+
 
 end.

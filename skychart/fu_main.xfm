@@ -3,13 +3,13 @@ object f_main: Tf_main
   Left = 239
   Top = 194
   Width = 800
-  Height = 600
+  Height = 570
   HorzScrollBar.Range = 54
-  VertScrollBar.Range = 81
+  VertScrollBar.Range = 85
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
   Color = clBackground
-  Font.Color = clBlack
+  Font.Color = clText
   Font.Height = 10
   Font.Name = 'adobe-helvetica'
   Font.Pitch = fpVariable
@@ -2757,6 +2757,7 @@ object f_main: Tf_main
     Height = 51
     Align = alTop
     BevelOuter = bvNone
+    ParentColor = True
     TabOrder = 0
     object ToolBar1: TToolBar
       Left = 0
@@ -2765,7 +2766,9 @@ object f_main: Tf_main
       Height = 25
       ButtonHeight = 23
       Caption = 'ToolBar1'
-      EdgeBorders = [ebLeft, ebRight]
+      EdgeBorders = []
+      EdgeInner = esNone
+      EdgeOuter = esNone
       Flat = True
       Images = ImageList1
       ParentShowHint = False
@@ -2776,7 +2779,7 @@ object f_main: Tf_main
       OnMouseLeave = ToolBar1MouseLeave
       object ToolButtonNew: TToolButton
         HelpType = htContext
-        Left = 3
+        Left = 1
         Top = 2
         Height = 23
         Action = FileNew1
@@ -2784,7 +2787,7 @@ object f_main: Tf_main
       end
       object ToolButtonOpen: TToolButton
         HelpType = htContext
-        Left = 26
+        Left = 24
         Top = 2
         Height = 23
         Action = FileOpen1
@@ -2792,7 +2795,7 @@ object f_main: Tf_main
       end
       object ToolButtonSave: TToolButton
         HelpType = htContext
-        Left = 49
+        Left = 47
         Top = 2
         Height = 23
         Action = FileSaveAs1
@@ -2800,14 +2803,14 @@ object f_main: Tf_main
       end
       object ToolButtonPrint: TToolButton
         HelpType = htContext
-        Left = 72
+        Left = 70
         Top = 2
         Height = 23
         Action = Print1
         Caption = 'Print'
       end
       object ToolButton15: TToolButton
-        Left = 95
+        Left = 93
         Top = 2
         Width = 8
         Height = 23
@@ -2817,7 +2820,7 @@ object f_main: Tf_main
       end
       object ToolButtonCascade: TToolButton
         HelpType = htContext
-        Left = 103
+        Left = 101
         Top = 2
         Height = 23
         Action = WindowCascade1
@@ -2825,14 +2828,14 @@ object f_main: Tf_main
       end
       object ToolButtonTile: TToolButton
         HelpType = htContext
-        Left = 126
+        Left = 124
         Top = 2
         Height = 23
         Action = WindowTile1
         Caption = '&Tile'
       end
       object ToolButton18: TToolButton
-        Left = 149
+        Left = 170
         Top = 2
         Width = 8
         Height = 23
@@ -2842,7 +2845,7 @@ object f_main: Tf_main
       end
       object ToolButtonZoom: TToolButton
         HelpType = htContext
-        Left = 203
+        Left = 224
         Top = 2
         Height = 23
         Action = zoomplus
@@ -2850,14 +2853,14 @@ object f_main: Tf_main
       end
       object ToolButtonUnZomm: TToolButton
         HelpType = htContext
-        Left = 226
+        Left = 247
         Top = 2
         Height = 23
         Action = zoomminus
         Caption = 'Zoom Out'
       end
       object ToolButton7: TToolButton
-        Left = 295
+        Left = 316
         Top = 2
         Width = 8
         Height = 23
@@ -2866,7 +2869,7 @@ object f_main: Tf_main
         ImageIndex = 24
       end
       object quicksearch: TComboBox
-        Left = 303
+        Left = 324
         Top = 2
         Width = 70
         Height = 21
@@ -2881,7 +2884,7 @@ object f_main: Tf_main
       end
       object ToolButtonUndo: TToolButton
         HelpType = htContext
-        Left = 157
+        Left = 178
         Top = 2
         Height = 23
         Action = Undo
@@ -2889,14 +2892,14 @@ object f_main: Tf_main
       end
       object ToolButtonRedo: TToolButton
         HelpType = htContext
-        Left = 180
+        Left = 201
         Top = 2
         Height = 23
         Action = Redo
         Caption = 'Redo Last Change'
       end
       object ToolButton26: TToolButton
-        Left = 465
+        Left = 486
         Top = 2
         Width = 8
         Height = 23
@@ -2905,7 +2908,7 @@ object f_main: Tf_main
         ImageIndex = 25
       end
       object TimeVal: TSpinEdit
-        Left = 542
+        Left = 563
         Top = 2
         Width = 42
         Height = 21
@@ -2917,13 +2920,11 @@ object f_main: Tf_main
         Value = 1
       end
       object TimeU: TComboBox
-        Left = 584
+        Left = 605
         Top = 2
         Width = 85
         Height = 21
         Hint = 'Time Unit'
-        Style = csDropDownList
-        Color = clButton
         DropDownCount = 15
         ItemHeight = 15
         Items.Strings = (
@@ -2944,7 +2945,7 @@ object f_main: Tf_main
       end
       object ToolButtonTnow: TToolButton
         HelpType = htContext
-        Left = 496
+        Left = 517
         Top = 2
         Height = 23
         Action = TimeReset
@@ -2952,7 +2953,7 @@ object f_main: Tf_main
       end
       object ToolButtonTdec: TToolButton
         HelpType = htContext
-        Left = 473
+        Left = 494
         Top = 2
         Height = 23
         Action = TimeDec
@@ -2960,14 +2961,14 @@ object f_main: Tf_main
       end
       object ToolButtonTinc: TToolButton
         HelpType = htContext
-        Left = 519
+        Left = 540
         Top = 2
         Height = 23
         Action = TimeInc
         Caption = 'TimeInc'
       end
       object ToolButton40: TToolButton
-        Left = 669
+        Left = 690
         Top = 2
         Width = 8
         Height = 23
@@ -2977,7 +2978,7 @@ object f_main: Tf_main
       end
       object ToolButtonListObj: TToolButton
         HelpType = htContext
-        Left = 419
+        Left = 440
         Top = 2
         Height = 23
         Action = ListObj
@@ -2985,7 +2986,7 @@ object f_main: Tf_main
       end
       object TConnect: TToolButton
         HelpType = htContext
-        Left = 677
+        Left = 698
         Top = 2
         Height = 23
         Action = TelescopeConnect
@@ -2993,7 +2994,7 @@ object f_main: Tf_main
       end
       object TSlew: TToolButton
         HelpType = htContext
-        Left = 700
+        Left = 721
         Top = 2
         Height = 23
         Action = TelescopeSlew
@@ -3001,19 +3002,20 @@ object f_main: Tf_main
       end
       object TSync: TToolButton
         HelpType = htContext
-        Left = 723
+        Left = 744
         Top = 2
         Height = 23
         Action = TelescopeSync
         Caption = 'Sync'
       end
       object MagPanel: TPanel
-        Left = 272
+        Left = 293
         Top = 2
         Width = 23
         Height = 23
         Align = alCustom
         BevelOuter = bvNone
+        ParentColor = True
         TabOrder = 25
         object SpeedButtonMoreStar: TSpeedButton
           Left = 0
@@ -3161,7 +3163,7 @@ object f_main: Tf_main
       end
       object ToolButtonCal: TToolButton
         HelpType = htContext
-        Left = 442
+        Left = 463
         Top = 2
         Height = 23
         Action = Calendar
@@ -3169,7 +3171,7 @@ object f_main: Tf_main
       end
       object ToolButtonSearch: TToolButton
         HelpType = htContext
-        Left = 373
+        Left = 394
         Top = 2
         Height = 23
         Action = Search1
@@ -3177,7 +3179,7 @@ object f_main: Tf_main
       end
       object ToolButton1: TToolButton
         HelpType = htContext
-        Left = 396
+        Left = 417
         Top = 2
         Height = 23
         Action = Position
@@ -3185,11 +3187,19 @@ object f_main: Tf_main
       end
       object ToolButton3: TToolButton
         HelpType = htContext
-        Left = 249
+        Left = 270
         Top = 2
         Height = 23
         Action = ZoomBar
         Caption = 'ZoomBar'
+      end
+      object ToolButtonNightVision: TToolButton
+        Left = 147
+        Top = 2
+        Height = 23
+        Caption = 'ToolButtonNightVision'
+        ImageIndex = 82
+        OnClick = ToolButtonNightVisionClick
       end
     end
     object ToolBar4: TToolBar
@@ -3200,14 +3210,17 @@ object f_main: Tf_main
       AutoSize = True
       ButtonHeight = 23
       Caption = 'ToolBar4'
-      EdgeBorders = [ebLeft, ebRight]
+      EdgeBorders = []
+      EdgeInner = esNone
+      EdgeOuter = esNone
+      Flat = True
       Images = ImageList1
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       Wrapable = False
       object ButtonStarSize: TSpeedButton
-        Left = 555
+        Left = 553
         Top = 2
         Width = 12
         Height = 23
@@ -3231,7 +3244,7 @@ object f_main: Tf_main
         OnClick = ButtonStarSizeClick
       end
       object ToolButtonShowStars: TToolButton
-        Left = 3
+        Left = 1
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3239,7 +3252,7 @@ object f_main: Tf_main
         Caption = 'Show Stars'
       end
       object ToolButtonShowNebulae: TToolButton
-        Left = 26
+        Left = 24
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3247,7 +3260,7 @@ object f_main: Tf_main
         Caption = 'Show Nebulae'
       end
       object ToolButtonShowPictures: TToolButton
-        Left = 72
+        Left = 70
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3255,7 +3268,7 @@ object f_main: Tf_main
         Caption = 'Show Pictures'
       end
       object ToolButtonShowLines: TToolButton
-        Left = 49
+        Left = 47
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3263,7 +3276,7 @@ object f_main: Tf_main
         Caption = 'Show Lines'
       end
       object ToolButtonShowPlanets: TToolButton
-        Left = 141
+        Left = 139
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3271,7 +3284,7 @@ object f_main: Tf_main
         Caption = 'Show Planets'
       end
       object ToolButtonShowAsteroids: TToolButton
-        Left = 164
+        Left = 162
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3279,7 +3292,7 @@ object f_main: Tf_main
         Caption = 'Show Asteroids'
       end
       object ToolButtonShowComets: TToolButton
-        Left = 187
+        Left = 185
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3287,7 +3300,7 @@ object f_main: Tf_main
         Caption = 'Show Comets'
       end
       object ToolButtonShowMilkyWay: TToolButton
-        Left = 210
+        Left = 208
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3295,7 +3308,7 @@ object f_main: Tf_main
         Caption = 'Show Milky Way'
       end
       object ToolButtonShowConstellationLine: TToolButton
-        Left = 279
+        Left = 277
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3303,7 +3316,7 @@ object f_main: Tf_main
         Caption = 'Show Constellation Line'
       end
       object ToolButtonShowConstellationLimit: TToolButton
-        Left = 302
+        Left = 300
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3311,7 +3324,7 @@ object f_main: Tf_main
         Caption = 'Show Constellation Limit'
       end
       object ToolButtonShowGalacticEquator: TToolButton
-        Left = 325
+        Left = 323
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3319,7 +3332,7 @@ object f_main: Tf_main
         Caption = 'Show Galactic Equator'
       end
       object ToolButtonShowEcliptic: TToolButton
-        Left = 348
+        Left = 346
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3327,7 +3340,7 @@ object f_main: Tf_main
         Caption = 'Show Ecliptic'
       end
       object ToolButtonShowMark: TToolButton
-        Left = 371
+        Left = 369
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3335,7 +3348,7 @@ object f_main: Tf_main
         Caption = 'Show Mark'
       end
       object ToolButtonShowLabels: TToolButton
-        Left = 394
+        Left = 392
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3343,7 +3356,7 @@ object f_main: Tf_main
         Caption = 'Show Labels'
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
-        Left = 440
+        Left = 438
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3351,7 +3364,7 @@ object f_main: Tf_main
         Caption = 'Below the horizon'
       end
       object ToolButtonswitchbackground: TToolButton
-        Left = 463
+        Left = 461
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3359,7 +3372,7 @@ object f_main: Tf_main
         Caption = 'switchbackground'
       end
       object ToolButtonswitchstars: TToolButton
-        Left = 532
+        Left = 530
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3367,7 +3380,7 @@ object f_main: Tf_main
         Caption = 'switchstars'
       end
       object StarSizePanel: TPanel
-        Left = 567
+        Left = 565
         Top = 2
         Width = 100
         Height = 23
@@ -3437,7 +3450,7 @@ object f_main: Tf_main
       end
       object ToolButtonGrid: TToolButton
         HelpType = htContext
-        Left = 233
+        Left = 231
         Top = 2
         Height = 23
         Action = Grid
@@ -3445,7 +3458,7 @@ object f_main: Tf_main
       end
       object ToolButtonGridEq: TToolButton
         HelpType = htContext
-        Left = 256
+        Left = 254
         Top = 2
         Height = 23
         Action = GridEQ
@@ -3453,7 +3466,7 @@ object f_main: Tf_main
       end
       object ToolButtonShowBackgroundImage: TToolButton
         HelpType = htContext
-        Left = 118
+        Left = 116
         Top = 2
         Height = 23
         Action = ShowBackgroundImage
@@ -3461,7 +3474,7 @@ object f_main: Tf_main
       end
       object ToolButtonSyncChart: TToolButton
         HelpType = htContext
-        Left = 486
+        Left = 484
         Top = 2
         Height = 23
         Style = tbsCheck
@@ -3470,7 +3483,7 @@ object f_main: Tf_main
       end
       object ToolButton2: TToolButton
         HelpType = htContext
-        Left = 95
+        Left = 93
         Top = 2
         Height = 23
         Action = DSSImage
@@ -3478,7 +3491,7 @@ object f_main: Tf_main
       end
       object ToolButtonTrack: TToolButton
         HelpType = htContext
-        Left = 509
+        Left = 507
         Top = 2
         Height = 23
         Action = Track
@@ -3486,7 +3499,7 @@ object f_main: Tf_main
       end
       object ToolButtonEditLabels: TToolButton
         HelpType = htContext
-        Left = 417
+        Left = 415
         Top = 2
         Height = 23
         Action = EditLabels
@@ -3498,17 +3511,22 @@ object f_main: Tf_main
     Left = 0
     Top = 51
     Width = 27
-    Height = 489
+    Height = 455
     Align = alLeft
+    BevelOuter = bvNone
+    ParentColor = True
     TabOrder = 1
     object ToolBar2: TToolBar
-      Left = 1
-      Top = 1
-      Width = 25
-      Height = 211
+      Left = 0
+      Top = 0
+      Width = 27
+      Height = 209
       AutoSize = True
       ButtonHeight = 23
       Caption = 'ToolBar2'
+      EdgeBorders = []
+      EdgeInner = esNone
+      EdgeOuter = esNone
       Flat = True
       Images = ImageList1
       ParentShowHint = False
@@ -3517,14 +3535,14 @@ object f_main: Tf_main
       object ToolButtonConfig: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 4
+        Top = 2
         Height = 23
         Action = OpenConfig
         Caption = 'Configuration'
       end
       object ToolButtonEQ: TToolButton
         Left = 1
-        Top = 27
+        Top = 25
         Height = 23
         Style = tbsCheck
         Action = EquatorialProjection
@@ -3533,7 +3551,7 @@ object f_main: Tf_main
       end
       object ToolButtonAZ: TToolButton
         Left = 1
-        Top = 50
+        Top = 48
         Height = 23
         Style = tbsCheck
         Action = AltAzProjection
@@ -3542,7 +3560,7 @@ object f_main: Tf_main
       end
       object ToolButtonEC: TToolButton
         Left = 1
-        Top = 73
+        Top = 71
         Height = 23
         Style = tbsCheck
         Action = EclipticProjection
@@ -3551,7 +3569,7 @@ object f_main: Tf_main
       end
       object ToolButtonGL: TToolButton
         Left = 1
-        Top = 96
+        Top = 94
         Height = 23
         Style = tbsCheck
         Action = GalacticProjection
@@ -3561,7 +3579,7 @@ object f_main: Tf_main
       object FlipButtonX: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 119
+        Top = 117
         Height = 23
         Action = Flipx
         Caption = 'Mirror Horizontally'
@@ -3569,7 +3587,7 @@ object f_main: Tf_main
       object FlipButtonY: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 142
+        Top = 140
         Height = 23
         Action = Flipy
         Caption = 'Mirror Vertically'
@@ -3577,7 +3595,7 @@ object f_main: Tf_main
       object ToolButtonRotP: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 165
+        Top = 163
         Height = 23
         Action = rot_plus
         Caption = 'Rotate Right'
@@ -3585,7 +3603,7 @@ object f_main: Tf_main
       object ToolButtonRotM: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 188
+        Top = 186
         Height = 23
         Action = rot_minus
         Caption = 'Rotate Left'
@@ -3596,8 +3614,10 @@ object f_main: Tf_main
     Left = 773
     Top = 51
     Width = 27
-    Height = 489
+    Height = 455
     Align = alRight
+    BevelOuter = bvNone
+    ParentColor = True
     TabOrder = 2
     object Field1: TSpeedButton
       Left = 2
@@ -3758,6 +3778,9 @@ object f_main: Tf_main
       AutoSize = True
       ButtonHeight = 23
       Caption = 'ToolBar3'
+      EdgeBorders = []
+      EdgeInner = esNone
+      EdgeOuter = esNone
       Flat = True
       Font.CharSet = fcsLatin1
       Font.Color = clBlack
@@ -3774,7 +3797,7 @@ object f_main: Tf_main
       object ToolButtonToN: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 27
+        Top = 25
         Height = 23
         Action = toN
         Caption = 'North'
@@ -3782,7 +3805,7 @@ object f_main: Tf_main
       object ToolButtonToS: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 50
+        Top = 48
         Height = 23
         Action = toS
         Caption = 'South'
@@ -3790,7 +3813,7 @@ object f_main: Tf_main
       object ToolButtonToE: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 73
+        Top = 71
         Height = 23
         Action = toE
         Caption = 'East'
@@ -3798,7 +3821,7 @@ object f_main: Tf_main
       object ToolButtonToW: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 96
+        Top = 94
         Height = 23
         Action = toW
         Caption = 'West'
@@ -3806,7 +3829,7 @@ object f_main: Tf_main
       object ToolButtonToZ: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 119
+        Top = 117
         Height = 23
         Action = toZenith
         Caption = 'toZenith'
@@ -3814,7 +3837,7 @@ object f_main: Tf_main
       object ToolButtonAllSky: TToolButton
         HelpType = htContext
         Left = 1
-        Top = 4
+        Top = 2
         Height = 23
         Action = allSky
         Caption = 'Show All Sky'
@@ -3823,20 +3846,22 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Left = 0
-    Top = 540
+    Top = 506
     Width = 800
-    Height = 30
+    Height = 34
     Align = alBottom
     Alignment = taLeftJustify
     BevelOuter = bvNone
+    ParentColor = True
     TabOrder = 3
     object PPanels0: TPanel
       Left = 1
       Top = 1
       Width = 100
-      Height = 29
+      Height = 32
       Alignment = taLeftJustify
       BevelOuter = bvLowered
+      ParentColor = True
       TabOrder = 0
       object LPanels0: TLabel
         Left = 4
@@ -3850,9 +3875,10 @@ object f_main: Tf_main
       Left = 105
       Top = 1
       Width = 557
-      Height = 29
+      Height = 32
       Alignment = taLeftJustify
       BevelOuter = bvLowered
+      ParentColor = True
       TabOrder = 1
       object LPanels1: TLabel
         Left = 4
@@ -3932,6 +3958,40 @@ object f_main: Tf_main
         Action = SaveConfiguration
         GroupIndex = 9
       end
+      object N9: TMenuItem
+        Caption = '-'
+        GroupIndex = 9
+      end
+      object Themes1: TMenuItem
+        AutoHotkeys = maManual
+        Caption = 'Themes'
+        GroupIndex = 9
+        object Default1: TMenuItem
+          AutoHotkeys = maManual
+          Caption = 'Default'
+          GroupIndex = 102
+          RadioItem = True
+          OnClick = SetThemeClick
+        end
+      end
+      object Buttons1: TMenuItem
+        Caption = 'Buttons'
+        GroupIndex = 9
+        object Normal1: TMenuItem
+          Tag = 1
+          Caption = 'Normal'
+          GroupIndex = 101
+          RadioItem = True
+          OnClick = ButtonModeClick
+        end
+        object Reverse1: TMenuItem
+          Tag = 2
+          Caption = 'Red/Black'
+          GroupIndex = 101
+          RadioItem = True
+          OnClick = ButtonModeClick
+        end
+      end
       object N3: TMenuItem
         Caption = '-'
         GroupIndex = 9
@@ -3944,6 +4004,10 @@ object f_main: Tf_main
     object View1: TMenuItem
       Caption = 'View'
       GroupIndex = 9
+      object NightVision1: TMenuItem
+        Caption = 'Night Vision'
+        OnClick = ToolButtonNightVisionClick
+      end
       object oolBar1: TMenuItem
         Caption = 'Tool Bar'
         object ViewToolsBar1: TMenuItem
@@ -3970,52 +4034,13 @@ object f_main: Tf_main
           Action = ViewRightBar
           Checked = True
         end
-      end
-      object ViewStatusBar1: TMenuItem
-        Action = ViewStatus
-      end
-      object NightVision1: TMenuItem
-        AutoHotkeys = maManual
-        Caption = 'Night Vision'
-        object Useyourdesktopmanagertochangethecolor1: TMenuItem
-          Caption = 'Use your desktop manager'
-          Enabled = False
-        end
-        object tosetthecolor1: TMenuItem
-          Caption = 'to set the color'
-          Enabled = False
-        end
-        object N7: TMenuItem
-          Caption = '-'
-        end
-        object Buttons1: TMenuItem
-          Caption = 'Buttons'
-          object Normal1: TMenuItem
-            Tag = 1
-            Caption = 'Normal'
-            GroupIndex = 101
-            RadioItem = True
-            OnClick = ButtonModeClick
-          end
-          object Reverse1: TMenuItem
-            Tag = 2
-            Caption = 'Reverse'
-            GroupIndex = 101
-            RadioItem = True
-            OnClick = ButtonModeClick
-          end
+        object ViewStatusBar1: TMenuItem
+          Action = ViewStatus
+          Checked = True
         end
       end
-      object Themes1: TMenuItem
-        AutoHotkeys = maManual
-        Caption = 'Themes'
-        object Default1: TMenuItem
-          AutoHotkeys = maManual
-          Caption = 'Default'
-          GroupIndex = 102
-          RadioItem = True
-          OnClick = SetThemeClick
-        end
+      object N7: TMenuItem
+        Caption = '-'
       end
       object ViewInformation1: TMenuItem
         Action = ViewInfo

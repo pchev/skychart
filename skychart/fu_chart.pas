@@ -149,9 +149,13 @@ type
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove : integer;
     LockWheel,MovingCircle : boolean;
+    FNightVision: Boolean;
+    SaveColor: Starcolarray;
+    SaveLabelColor: array[1..numlabtype] of Tcolor;
     procedure TelescopeCoordChange(Sender: TObject);
     procedure TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
     procedure TelescopeGetMessage(Sender : TObject; const msg : string);
+    procedure SetNightVision(value:boolean);
   public
     { Public declarations }
     sc: Tskychart;
@@ -237,6 +241,7 @@ type
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
     property OnListInfo: Tstr1func read FListInfo write FListInfo;
     property OnChartMove: TnotifyEvent read FChartMove write FChartMove;
+    property NightVision: Boolean read FNightVision write SetNightVision;
   end;
 
 

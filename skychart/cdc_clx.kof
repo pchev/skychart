@@ -66,9 +66,10 @@ DebugCWD=
 /home/pch/source/GLScene/Kylix/GLSceneK3.so=GLScene - OpenGL 3D library
 
 [HistoryLists\hlConditionals]
-Count=2
+Count=3
 Item0=GPL:Themed
-Item1=GPL
+Item1=GPL:Themed:MENUBAR_THEMING
+Item2=GPL
 
 [HistoryLists\hlSearchPath]
 Count=3

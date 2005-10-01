@@ -30,10 +30,48 @@ begin
 end;
 
 procedure Tf_config_catalog.FormShow(Sender: TObject);
+{$ifdef linux}
+var i:integer;
+{$endif}
 begin
 ShowGCat;
 ShowCDCStar;
 ShowCDCNeb;
+{$ifdef linux}
+  if color=dark then begin
+     for i := 0 to ComponentCount-1 do begin
+        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
+           if color=clBase   then  color:=black;
+           if color=clButton then  color:=dark;
+        end;
+        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
+           if color=clBase   then  color:=black;
+           if color=clButton then  color:=dark;
+        end;
+        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
+           if color=clBase   then  color:=black;
+           if color=clButton then  color:=dark;
+           if fixedcolor=clButton then  fixedcolor:=dark;
+        end;
+     end;
+  end else begin
+     for i := 0 to ComponentCount-1 do begin
+        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
+           if color=black then color:=clBase;
+           if color=dark  then color:=clButton;
+        end;
+        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
+           if color=black then color:=clBase;
+           if color=dark  then color:=clButton;
+        end;
+        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
+           if color=black then color:=clBase;
+           if color=dark  then color:=clButton;
+           if fixedcolor=dark  then fixedcolor:=clButton;
+        end;
+     end;
+  end;
+{$endif}
 end;
 
 procedure Tf_config_catalog.ShowGCat;

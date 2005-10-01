@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 238
-  Top = 132
-  Width = 794
-  Height = 579
+  Left = 302
+  Top = 120
+  Width = 788
+  Height = 581
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  Color = clAppWorkSpace
+  Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clBlack
   Font.Height = -11
@@ -2649,9 +2649,9 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Top = 51
+    Top = 49
     Width = 23
-    Height = 444
+    Height = 448
     Align = alLeft
     AutoSize = True
     BevelOuter = bvNone
@@ -2671,6 +2671,7 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      Transparent = True
       Wrapable = False
       object ToolButtonConfig: TToolButton
         Left = 0
@@ -2732,10 +2733,10 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 763
-    Top = 51
+    Left = 757
+    Top = 49
     Width = 23
-    Height = 444
+    Height = 448
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
@@ -2952,8 +2953,8 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Left = 0
-    Top = 495
-    Width = 786
+    Top = 497
+    Width = 780
     Height = 30
     Align = alBottom
     BevelOuter = bvNone
@@ -2995,8 +2996,8 @@ object f_main: Tf_main
   object PanelTop: TPanel
     Left = 0
     Top = 0
-    Width = 786
-    Height = 51
+    Width = 780
+    Height = 49
     Align = alTop
     AutoSize = True
     BevelInner = bvRaised
@@ -3005,7 +3006,7 @@ object f_main: Tf_main
     object ToolBar1: TToolBar
       Left = 2
       Top = 2
-      Width = 782
+      Width = 776
       Height = 23
       AutoSize = True
       ButtonHeight = 23
@@ -3283,7 +3284,13 @@ object f_main: Tf_main
         Height = 22
         AutoComplete = False
         DropDownCount = 15
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clMenuText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
         ItemHeight = 14
+        ParentFont = False
         TabOrder = 0
         OnClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -3336,8 +3343,14 @@ object f_main: Tf_main
         Top = 0
         Width = 47
         Height = 23
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clMenuText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
         MaxValue = 1000
         MinValue = 1
+        ParentFont = False
         TabOrder = 1
         Value = 1
       end
@@ -3349,7 +3362,13 @@ object f_main: Tf_main
         Style = csDropDownList
         Color = clBtnFace
         DropDownCount = 11
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clMenuText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
         ItemHeight = 14
+        ParentFont = False
         TabOrder = 2
       end
       object ToolButton39: TToolButton
@@ -3379,11 +3398,12 @@ object f_main: Tf_main
     object ToolBar4: TToolBar
       Left = 2
       Top = 25
-      Width = 782
-      Height = 24
+      Width = 776
+      Height = 22
       AutoSize = True
       Caption = 'ToolBar4'
       EdgeBorders = [ebLeft, ebRight]
+      Flat = True
       Images = ImageList1
       ParentShowHint = False
       ShowHint = True
@@ -3391,147 +3411,147 @@ object f_main: Tf_main
       Wrapable = False
       object ToolButtonShowStars: TToolButton
         Left = 0
-        Top = 2
+        Top = 0
         Action = ShowStars
         Style = tbsCheck
       end
       object ToolButtonShowNebulae: TToolButton
         Left = 23
-        Top = 2
+        Top = 0
         Action = ShowNebulae
         Style = tbsCheck
       end
       object ToolButtonShowLines: TToolButton
         Left = 46
-        Top = 2
+        Top = 0
         Action = ShowLines
         Style = tbsCheck
       end
       object ToolButtonShowPictures: TToolButton
         Left = 69
-        Top = 2
+        Top = 0
         Action = ShowPictures
         Style = tbsCheck
       end
       object ToolButtonDSS: TToolButton
         Left = 92
-        Top = 2
+        Top = 0
         Action = DSSImage
       end
       object ToolButtonShowBackgroundImage: TToolButton
         Left = 115
-        Top = 2
+        Top = 0
         Action = ShowBackgroundImage
       end
       object ToolButtonShowPlanets: TToolButton
         Left = 138
-        Top = 2
+        Top = 0
         Action = ShowPlanets
         Style = tbsCheck
       end
       object ToolButtonShowAsteroids: TToolButton
         Left = 161
-        Top = 2
+        Top = 0
         Action = ShowAsteroids
         Style = tbsCheck
       end
       object ToolButtonShowComets: TToolButton
         Left = 184
-        Top = 2
+        Top = 0
         Action = ShowComets
         Style = tbsCheck
       end
       object ToolButtonShowMilkyWay: TToolButton
         Left = 207
-        Top = 2
+        Top = 0
         Action = ShowMilkyWay
         Style = tbsCheck
       end
       object ToolButtonGrid: TToolButton
         Left = 230
-        Top = 2
+        Top = 0
         Action = Grid
         Style = tbsCheck
       end
       object ToolButtonGridEq: TToolButton
         Left = 253
-        Top = 2
+        Top = 0
         Action = GridEQ
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLine: TToolButton
         Left = 276
-        Top = 2
+        Top = 0
         Action = ShowConstellationLine
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLimit: TToolButton
         Left = 299
-        Top = 2
+        Top = 0
         Action = ShowConstellationLimit
         Style = tbsCheck
       end
       object ToolButtonShowGalacticEquator: TToolButton
         Left = 322
-        Top = 2
+        Top = 0
         Action = ShowGalacticEquator
         Style = tbsCheck
       end
       object ToolButtonShowEcliptic: TToolButton
         Left = 345
-        Top = 2
+        Top = 0
         Action = ShowEcliptic
         Style = tbsCheck
       end
       object ToolButtonShowMark: TToolButton
         Left = 368
-        Top = 2
+        Top = 0
         Action = ShowMark
         Style = tbsCheck
       end
       object ToolButtonShowLabels: TToolButton
         Left = 391
-        Top = 2
+        Top = 0
         Action = ShowLabels
         Style = tbsCheck
       end
       object ToolButtonEditlabels: TToolButton
         Left = 414
-        Top = 2
+        Top = 0
         Action = EditLabels
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
         Left = 437
-        Top = 2
+        Top = 0
         Action = ShowObjectbelowHorizon
         Style = tbsCheck
       end
       object ToolButtonswitchbackground: TToolButton
         Left = 460
-        Top = 2
+        Top = 0
         Action = switchbackground
         Style = tbsCheck
       end
       object ToolButtonSyncChart: TToolButton
         Left = 483
-        Top = 2
+        Top = 0
         Action = SyncChart
         Style = tbsCheck
       end
       object ToolButtonTrack: TToolButton
         Left = 506
-        Top = 2
+        Top = 0
         Action = Track
       end
       object ToolButtonswitchstars: TToolButton
         Left = 529
-        Top = 2
+        Top = 0
         Action = switchstars
         Style = tbsCheck
       end
       object ButtonStarSize: TSpeedButton
         Left = 552
-        Top = 2
+        Top = 0
         Width = 12
         Height = 22
         Hint = 'Adjust Star Size'
@@ -3555,7 +3575,7 @@ object f_main: Tf_main
       end
       object StarSizePanel: TPanel
         Left = 564
-        Top = 2
+        Top = 0
         Width = 97
         Height = 22
         TabOrder = 0
@@ -3569,16 +3589,11 @@ object f_main: Tf_main
           Hint = 'Faint Stars Size '
           Max = 50
           Min = 1
-          Orientation = trHorizontal
           PageSize = 5
-          Frequency = 1
           Position = 1
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 0
           TabStop = False
           ThumbLength = 8
-          TickMarks = tmBottomRight
           TickStyle = tsNone
           OnChange = StarSizeChange
         end
@@ -3591,16 +3606,11 @@ object f_main: Tf_main
           Hint = 'Increment for Bright Stars'
           Max = 100
           Min = 10
-          Orientation = trHorizontal
           PageSize = 10
-          Frequency = 1
           Position = 10
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 1
           TabStop = False
           ThumbLength = 8
-          TickMarks = tmBottomRight
           TickStyle = tsNone
           OnChange = StarSizeChange
         end
@@ -3613,16 +3623,11 @@ object f_main: Tf_main
           Hint = 'Contrast'
           Max = 1000
           Min = 100
-          Orientation = trHorizontal
           PageSize = 100
-          Frequency = 1
           Position = 100
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 2
           TabStop = False
           ThumbLength = 8
-          TickMarks = tmBottomRight
           TickStyle = tsNone
           OnChange = StarSizeChange
         end
@@ -3634,16 +3639,11 @@ object f_main: Tf_main
           Height = 9
           Hint = 'Color saturation'
           Max = 255
-          Orientation = trHorizontal
           PageSize = 25
-          Frequency = 1
           Position = 5
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 3
           TabStop = False
           ThumbLength = 8
-          TickMarks = tmBottomRight
           TickStyle = tsNone
           OnChange = StarSizeChange
         end
@@ -3718,6 +3718,29 @@ object f_main: Tf_main
         Action = SaveConfiguration
         GroupIndex = 2
       end
+      object N8: TMenuItem
+        Caption = '-'
+        GroupIndex = 2
+      end
+      object Buttons1: TMenuItem
+        Caption = 'Buttons'
+        GroupIndex = 2
+        object Normal1: TMenuItem
+          Tag = 1
+          Caption = 'Normal'
+          Checked = True
+          GroupIndex = 101
+          RadioItem = True
+          OnClick = ButtonModeClick
+        end
+        object Reverse1: TMenuItem
+          Tag = 2
+          Caption = 'Red/Black'
+          GroupIndex = 101
+          RadioItem = True
+          OnClick = ButtonModeClick
+        end
+      end
       object N3: TMenuItem
         Caption = '-'
         GroupIndex = 2
@@ -3730,6 +3753,17 @@ object f_main: Tf_main
     object View1: TMenuItem
       Caption = 'View'
       GroupIndex = 2
+      object FullScreen1: TMenuItem
+        Caption = 'Full Screen'
+        GroupIndex = 2
+        ShortCut = 122
+        OnClick = FullScreen1Click
+      end
+      object NightVision1: TMenuItem
+        Caption = 'Night Vision'
+        GroupIndex = 2
+        OnClick = ToolButtonNightVisionClick
+      end
       object oolBar1: TMenuItem
         Caption = 'Tool Bar'
         GroupIndex = 2
@@ -3763,13 +3797,24 @@ object f_main: Tf_main
           Checked = True
           GroupIndex = 2
         end
+        object ViewStatusBar1: TMenuItem
+          Action = ViewStatus
+          Caption = 'Status Bar'
+          Checked = True
+          GroupIndex = 2
+        end
       end
-      object ViewStatusBar1: TMenuItem
-        Action = ViewStatus
+      object N9: TMenuItem
+        Caption = '-'
         GroupIndex = 2
       end
       object ViewInformation1: TMenuItem
         Action = ViewInfo
+        Caption = 'Server Information'
+        GroupIndex = 2
+      end
+      object N7: TMenuItem
+        Caption = '-'
         GroupIndex = 2
       end
       object ileVertically1: TMenuItem
@@ -3779,34 +3824,6 @@ object f_main: Tf_main
       object zoomminus1: TMenuItem
         Action = zoomminus
         GroupIndex = 2
-      end
-      object NightVision1: TMenuItem
-        Caption = 'Night Vision'
-        GroupIndex = 2
-        object RedColor1: TMenuItem
-          Caption = 'Red Color'
-          GroupIndex = 2
-          OnClick = ToolButtonNightVisionClick
-        end
-        object Buttons1: TMenuItem
-          Caption = 'Buttons'
-          GroupIndex = 2
-          object Normal1: TMenuItem
-            Tag = 1
-            Caption = 'Normal'
-            Checked = True
-            GroupIndex = 101
-            RadioItem = True
-            OnClick = ButtonModeClick
-          end
-          object Reverse1: TMenuItem
-            Tag = 2
-            Caption = 'Reverse'
-            GroupIndex = 101
-            RadioItem = True
-            OnClick = ButtonModeClick
-          end
-        end
       end
     end
     object Chart1: TMenuItem
@@ -7647,7 +7664,7 @@ object f_main: Tf_main
       000000000000}
   end
   object SaveDialog: TSaveDialog
-    Left = 152
+    Left = 144
     Top = 160
   end
   object Autorefresh: TTimer

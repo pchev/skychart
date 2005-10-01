@@ -57,6 +57,7 @@ object f_config_solsys: Tf_config_solsys
         Top = 59
         Width = 28
         Height = 28
+        ParentColor = True
         TabOrder = 4
         TabStop = False
         OnClick = PlanetDirSelClick
@@ -174,6 +175,7 @@ object f_config_solsys: Tf_config_solsys
         Width = 28
         Height = 28
         Hint = 'Get recent measurement from JUPOS'
+        ParentColor = True
         ParentShowHint = False
         ShowHint = True
         TabOrder = 7
@@ -324,9 +326,7 @@ object f_config_solsys: Tf_config_solsys
               Items.Strings = (
                 'Display as a symbol'
                 'Proportional to the magnitude ')
-              Color = clButton
               Columns = 2
-              ParentColor = False
               TabOrder = 3
               OnClick = comsymbolClick
             end
@@ -349,6 +349,7 @@ object f_config_solsys: Tf_config_solsys
             Width = 113
             Height = 25
             Caption = 'Database setting...'
+            ParentColor = True
             TabOrder = 1
             OnClick = comdbsetClick
           end
@@ -392,6 +393,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 97
               Height = 25
               Caption = 'Load file'
+              ParentColor = True
               TabOrder = 1
               OnClick = LoadcomClick
             end
@@ -401,6 +403,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 28
               Width = 28
               Height = 28
+              ParentColor = True
               TabOrder = 2
               TabStop = False
               OnClick = comfilebtnClick
@@ -477,6 +480,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 75
               Height = 25
               Caption = 'Delete'
+              ParentColor = True
               TabOrder = 1
               OnClick = DelComClick
             end
@@ -501,6 +505,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 75
               Height = 25
               Caption = 'Delete'
+              ParentColor = True
               TabOrder = 0
               OnClick = DelComAllClick
             end
@@ -711,6 +716,7 @@ object f_config_solsys: Tf_config_solsys
             Width = 75
             Height = 25
             Caption = 'Add'
+            ParentColor = True
             TabOrder = 11
             OnClick = AddComClick
           end
@@ -784,10 +790,8 @@ object f_config_solsys: Tf_config_solsys
               Items.Strings = (
                 'Display as a symbol'
                 'Proportional to the magnitude ')
-              Color = clButton
               Columns = 2
               ItemIndex = 1
-              ParentColor = False
               TabOrder = 3
               OnClick = astsymbolClick
             end
@@ -824,6 +828,7 @@ object f_config_solsys: Tf_config_solsys
             Width = 113
             Height = 25
             Caption = 'Database setting...'
+            ParentColor = True
             TabOrder = 1
             OnClick = astdbsetClick
           end
@@ -870,6 +875,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 97
               Height = 25
               Caption = 'Load file'
+              ParentColor = True
               TabOrder = 3
               OnClick = LoadMPCClick
             end
@@ -879,6 +885,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 32
               Width = 28
               Height = 28
+              ParentColor = True
               TabOrder = 4
               TabStop = False
               OnClick = mpcfilebtnClick
@@ -1007,6 +1014,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 75
               Height = 25
               Caption = 'Compute'
+              ParentColor = True
               TabOrder = 3
               OnClick = AstComputeClick
             end
@@ -1070,6 +1078,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 75
               Height = 25
               Caption = 'Delete'
+              ParentColor = True
               TabOrder = 1
               OnClick = delastClick
             end
@@ -1087,6 +1096,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 75
               Height = 25
               Caption = 'Delete'
+              ParentColor = True
               TabOrder = 0
               OnClick = delallastClick
             end
@@ -1138,6 +1148,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 75
               Height = 25
               Caption = 'Delete'
+              ParentColor = True
               TabOrder = 1
               OnClick = deldateastClick
             end
@@ -1371,6 +1382,7 @@ object f_config_solsys: Tf_config_solsys
             Width = 75
             Height = 25
             Caption = 'Add'
+            ParentColor = True
             TabOrder = 27
             OnClick = AddastClick
           end
