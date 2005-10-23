@@ -1,0 +1,144 @@
+   -- 22 Jul 2005: Patrick Chevalley build a shared library for Linux 
+getdss_lib.cpp by modifying a little getdss_dll.cpp. 
+The corresponding makefile is makefile.lib, all files are renamed to lower 
+case. All use of the times[] structure is suppressed.
+Problem: How to show a message to change the CD? for now it simply failed.
+   
+   -- 24 Apr 2002:  Patrick Chevalley pointed out that the library
+searches for .RSL ("RealSky Lump") files only in the current directory,
+rather than making use of the szPath data.  He added a few lines to
+extr_fit.cpp near line 382 and to getpiece.cpp near line 116 so that
+the code still looks in the current directory and,  if it doesn't
+find anything,  looks in the directory specified by szPath.
+
+   -- 22 Dec 2001:  I noticed that ESO DSS images contain both the "old"
+and "new" (matrix-style) WCS keywords,  and it appeared to me that
+putting both into Get_DSS images would not be too difficult.  ESO's
+images also include both CROTA1 and CROTA2;  that is,  they give the
+"rotation" for both the x and y axes.  (For some reason,  both are
+set to the same value in ESO images,  which makes little sense,  given
+the skew in the images.)
+
+   Therefore,  I modified 'extract_realsky_as_fits()' to include five
+new keywords:  CROTA2 and CD1_1, CD1_2, CD2_1, CD2_2.  I also took the
+opportunity to go ahead and compute CDELT1 as the length (in degrees)
+of a single pixel in the x direction,  and CDELT2 as the length (also
+in degrees) of a single pixel in the y direction,  as measured at
+the center of the extracted image.  (Previously,  we made use of the
+plate constants to get similar pixel sizes,  but for the center of
+the scanned plate.)
+
+   -- 20 Dec 2001:  Han Kleijn noticed that,  when using the WCS keywords,
+the images were off by .5 pixel in RA and a full pixel in declination,
+regardless of the 'subsamp' value.  The code to write WCS keywords (in
+'extract_realsky_as_fits()') has therefore been modified so that the
+value of CRPIX1 is incremented by .5,  and that of CRPIX2 by 1.  Han
+has tried this out,  and it appears to shift things correctly.
+
+   -- 19 Dec 2001:  I (BJG) added a few lines to 'extract_realsky_as_fits()'
+(in extr_fit.cpp) so that each image file written contains two header
+lines that look like this:
+
+COMMENT   Extracted with Get_DSS library Dec 19 2001 13:10:21
+COMMENT   File created Fri Dec 21 21:25:45 2001 = JD 2452265.60122
+
+   We've been making enough changes to the library that keeping track of
+versions may become an annoyance.  The first line gives the date/time
+the Get_DSS library was compiled.  The second line gives the date the
+FITS file was made.  (Adding in the JD was easy to do for the file
+creation date,  but would have been annoying for the Get_DSS date.)
+
+   -- 6 Dec 2001:  a few bugs were fixed by Nozomu Muto.  get_plate_list()
+in PLATELST.CPP didn't handle 6-letter plate names;  get_environment_data()
+in EXTR_FIT.CPP didn't initialize the szDrive field,  which can cause
+trouble if szDrive is not initialized through ENVIRON.DAT;  and he made
+some changes for Unix/Linux,  namely some #ifdef UNIX statements to handle
+'/' path separators instead of '\',  and different functions and include
+files.  See NOZOMU.TXT for details.
+
+   Also,  the plate names were left uppercase.  This was not a problem in
+DOS/Windows,  but in Linux,  opening the file /mnt/cdrom/XE355/XE355.M8
+fails;  the name should be /mnt/cdrom/xe355/xe355.m8.  This required two
+new strlwr( ) commands in platelst.cpp,  and fixing the extension meant
+a small change in getpiece.cpp.
+
+   Also,  I (BJG) added some #ifdef __cplusplus statements to ensure
+proper compilation as .c files,  for compilers lacking a C++ compiler.
+
+   -- Major change to most files:  the debugging used to be done by calls
+to fprintf( debug_file, ...).  Those have been replaced by calls to
+dss_debug_printf( ...).  There's a special function,   set_debug_file(),
+to start/stop debug logging.
+
+   -- Major change in most files:  functions that are intended to be called
+from outside the DSS library are marked as DLL_FUNC.  This was intended
+to simplify making all this into a DLL.  At present,  DLL_FUNC is
+#defined to be __stdcall in Win32,  and the functions in question are
+defined as extern "C".  This is needed to make DLL functions callable
+from Visual BASIC,  a fact I learned from a gent who wanted to make use
+of some of my other C++ code from VB.
+
+   I don't know if this is a factor with Patrick's DLL,  but I suspect
+that Pascal may be "brighter" about calling DLLs.  If somebody ever wants
+to call this DLL from VB,  it may be well if the functions use the
+__stdcall (to ensure "standard C calling") and are specified to be
+extern "C" (to avoid the name-mangling performed by C++ compilers.)
+
+   -- In EXTR_FIT.CPP:  if the 'szDrive' parameter in the ENVIRONMENT_DATA
+structure contains an empty string (*edata->szDrive == '\0'),  the
+extract_realsky_as_fits( ) function creates a header with no actual
+image data,  and the compressed image data from RealSky/DSS CDs is not
+actually needed.
+
+   Why do such a weird thing,  you ask?  A while back,  I revised my Guide
+software to take DSS images from the STScI server and display them in the
+background.  For FITS images,  that was easy;  these have FITS headers,
+and Guide could figure out where the images were in the sky.  For .GIFs,
+there was no such header.  So I rigged the software to use the .GIF for
+the image part and this "imageless header" to figure out where the image
+should go.
+
+   After I did all that,  Chris Marriott warned me that that might run
+afoul of the Unisys patent on .GIFs.  Sure enough,  this was a problem
+(I'd thought it only applied to _creating_ .GIFs,  not reading them.)
+So I removed .GIF display from Guide.  However,  the DSS library can still
+produce these imageless header files.
+
+   -- In EXTR_FIT.CPP:  the CROTA value is now computed by getting the
+RA/dec at a point _one_ pixel from the center,  not 100.  The CDELT1
+and CDELT2 values are computed as the vector lengths of the linear
+components of the "amd" arrays,  rather than by looking at one component
+of each array.  The previous methods work pretty well most of the time,
+but cause errors near the celestial poles.
+
+   The Right Way to do CDELT* values would really be to compute RA/decs
+for points one pixel above and one pixel left of the image center,  and
+to then compute just how far (in degrees) those points are from the
+RA/dec of the image center.  This would account for the fact that
+scale changes across the image.  (If you just look at the linear parts
+of the amd array,  you'd be led into thinking that CDELT* was the same
+everywhere in the image,  which is true to a good approximation,  but
+is not _exactly_ right.)  Also,  if we did things this way,  we could
+support the "new style" WCS headers (which use a 2x2 matrix instead of
+scaling and rotation) without immense difficulty.
+
+   -- In GET_DSS.CPP:  there's a new '-i' switch that causes the software
+not to overwrite existing .FITs files.  I added that because I wanted to
+process a few thousand DSS images of DSOs for Guide 8,  and it was handy
+to suspend processing.  This way,  I could run a slew of images,  stop,
+and pick up where I left off;  the program would recognize that those
+images had already been created and didn't attempt to recreate them.
+
+   -- In GETPIECE.CPP:  I had an odd CD-ROM drive that would occasionally
+fail when opening files the first time,  but would usually get it right
+the second or third time.  That's why,  if the call to fopen( ) a file on
+the CD fails,  there is a loop that calls fopen( ) for exactly the same
+file,  three more times,  before giving up.  Weird,  but it _does_ get
+you around the CD misbehavior.
+
+   -- In GETPIECE.CPP:  I added some #ifdef WRONG_WAY_BYTE_ORDER code to
+handle machines with the opposite byte order of Intel machines.  It doesn't
+affect Intel boxes at all,  but I _think_ it means we'll be all set should
+somebody compile on opposite-Endian boxes (I can never remember which is
+big-Endian and which is little...)
+
