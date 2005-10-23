@@ -83,6 +83,10 @@ try
       ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
       CreateMDIChild(GetUniqueName('Chart_',true) ,false,cfgs,cfgp);
     end;
+ if nightvision then begin
+    nightvision:=false;
+    ToolButtonNightVisionClick(self);
+ end;
 except
 end;
 end;

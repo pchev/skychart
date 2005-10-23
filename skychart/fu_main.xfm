@@ -3385,6 +3385,7 @@ object f_main: Tf_main
         Width = 100
         Height = 23
         Align = alCustom
+        ParentColor = True
         TabOrder = 0
         Visible = False
         OnMouseLeave = ToolBar1MouseLeave
