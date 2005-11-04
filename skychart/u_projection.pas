@@ -644,22 +644,20 @@ END ;
 
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; var c:conf_skychart);
 var
-   sinpi,dar,H,rde,a,b,d : double;
+   sinpi,H,a,b,d : double;
 const
      desinpi = 4.26345151e-5;
 begin
 // AR, DE may be standard epoch but paralaxe is to be computed with coordinates of the date.
 precession(c.JDchart,c.curjd,ar1,de1);
 H:=(SideralTime-ar1);
-rde:=de1;
 sinpi:=desinpi/dist;
-dar:=arctan2(-c.ObsRoCosPhi*sinpi*sin(H),(cos(rde)-c.ObsRoCosPhi*sinpi*cos(H)));
-ar :=ar1+dar;
-de :=arctan2((sin(rde)-c.ObsRoSinPhi*sinpi)*cos(dar),cos(rde)-c.ObsRoCosPhi*sinpi*cos(H));
-a := cos(rde)*sin(H);
-b := cos(rde)*cos(H)-c.ObsRoSinPhi*sinpi;
-d := sin(rde)-c.ObsRoSinPhi*sinpi;
+a := cos(de1)*sin(H);
+b := cos(de1)*cos(H)-c.ObsRoCosPhi*sinpi;
+d := sin(de1)-c.ObsRoSinPhi*sinpi;
 q := sqrt(a*a+b*b+d*d);
+ar:=SideralTime-arctan2(a,b);
+de:=arcsin(d/q);
 precession(c.curjd,c.JDchart,ar,de);
 end;
 
