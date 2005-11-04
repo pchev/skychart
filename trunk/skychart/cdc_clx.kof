@@ -57,7 +57,7 @@ UsePackages=0
 [Parameters]
 RunParams=-ns
 HostApplication=
-Launcher=/usr/X11R6/bin/xterm -T KylixDebuggerOutput -e bash -i -c %debuggee%
+Launcher=/usr/X11R6/bin/xterm -T KylixDebuggerOutput -e bash -i -c %debuggee% -ns
 UseLauncher=1
 DebugCWD=
 

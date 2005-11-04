@@ -32,7 +32,7 @@ uses cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   //{$IFDEF VER170} XPman, {$ENDIF}
   Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, Messages, ExtCtrls, ComCtrls, StdActns,
-  ActnList, ToolWin, ImgList, IniFiles, Spin, DdeMan, Clipbrd;
+  ActnList, ToolWin, ImgList, IniFiles, Spin, DdeMan, Clipbrd, cu_MultiForm, cu_MultiFormChild;
 
 type
   TTCPThrd = class(TThread)
@@ -83,26 +83,19 @@ type
     FileExitItem: TMenuItem;
     WindowCascadeItem: TMenuItem;
     WindowTileItem: TMenuItem;
-    WindowArrangeItem: TMenuItem;
     HelpAboutItem: TMenuItem;
     OpenDialog: TOpenDialog;
     FileSaveAsItem: TMenuItem;
     Edit1: TMenuItem;
     CopyItem: TMenuItem;
-    WindowMinimizeItem: TMenuItem;
     ActionList1: TActionList;
     EditCopy1: TEditCopy;
     FileNew1: TAction;
     FileExit1: TAction;
     FileOpen1: TAction;
     FileSaveAs1: TAction;
-    WindowCascade1: TWindowCascade;
-    WindowTileHorizontal1: TWindowTileHorizontal;
-    WindowArrangeAll1: TWindowArrange;
-    WindowMinimizeAll1: TWindowMinimizeAll;
     HelpAbout1: TAction;
     FileClose1: TWindowClose;
-    WindowTileVertical1: TWindowTileVertical;
     WindowTileItem2: TMenuItem;
     ImageList1: TImageList;
     Print1: TAction;
@@ -172,8 +165,6 @@ type
     SaveImage1: TMenuItem;
     ViewInfo: TAction;
     ViewInformation1: TMenuItem;
-    N4: TMenuItem;
-    topmessage: TMenuItem;
     toN: TAction;
     toE: TAction;
     toS: TAction;
@@ -370,13 +361,26 @@ type
     FullScreen1: TMenuItem;
     N8: TMenuItem;
     N9: TMenuItem;
+    MultiDoc1: TMultiForm;
+    PanelMenu: TPanel;
+    ToolBarMenu: TToolBar;
+    ChildControl: TPanel;
+    N10: TMenuItem;
+    Cascade1: TAction;
+    TileHorizontal1: TAction;
+    TileVertical1: TAction;
+    topmessage: TLabel;
+    BtnRestoreChild: TSpeedButton;
+    BtnCloseChild: TSpeedButton;
+    Maximize1: TMenuItem;
+    Maximize: TAction;
+    PanelStar: TPanel;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
     procedure FileExit1Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
@@ -408,8 +412,6 @@ type
     procedure switchbackgroundExecute(Sender: TObject);
     procedure SaveImageExecute(Sender: TObject);
     procedure ViewInfoExecute(Sender: TObject);
-    procedure topmessageDrawItem(Sender: TObject; ACanvas: TCanvas;
-      ARect: TRect; Selected: Boolean);
     procedure toNExecute(Sender: TObject);
     procedure toEExecute(Sender: TObject);
     procedure toSExecute(Sender: TObject);
@@ -470,9 +472,20 @@ type
     procedure ButtonModeClick(Sender: TObject);
     procedure EditLabelsExecute(Sender: TObject);
     procedure FullScreen1Click(Sender: TObject);
+    procedure MultiDoc1ActiveChildChange(Sender: TObject);
+    procedure MultiDoc1Maximize(Sender: TObject);
+    procedure BtnRestoreChildClick(Sender: TObject);
+    procedure BtnCloseChildClick(Sender: TObject);
+    procedure WindowCascade1Execute(Sender: TObject);
+    procedure WindowTileHorizontal1Execute(Sender: TObject);
+    procedure WindowTileVertical1Execute(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure MaximizeExecute(Sender: TObject);
   private
     { Private declarations }
-    cryptedpwd:string;
+    cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB : Boolean;
     InitialChartNum, ButtonImage: integer;
     nightvision : Boolean;
@@ -481,13 +494,14 @@ type
     Procedure ResetWinColor;
     procedure SetNightVision(night: boolean);
     procedure SetButtonImage(button: Integer);
-    function CreateMDIChild(const CName: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
+    function CreateChild(const CName: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     Procedure SyncChild;
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
     Procedure GetAppDir;
     procedure ViewTopPanel;
     procedure ApplyConfig(Sender: TObject);
+    procedure SetChildFocus(Sender: TObject);
   public
     { Public declarations }
     cfgm : conf_main;
@@ -512,7 +526,7 @@ type
     procedure UpdateConfig;
     procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
-    procedure SaveChartConfig(filename:string; chart: Tf_chart);
+    procedure SaveChartConfig(filename:string; child: TChildPanel);
     procedure SaveDefault;
     procedure SetDefault;
     procedure SetLang;
@@ -572,31 +586,7 @@ uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
 
 // windows vcl specific code:
 
-procedure Tf_main.FormMouseWheel(Sender: TObject; Shift: TShiftState;
-  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-begin
-// keep here because of focus problem with the child that have no text control
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
-   CMouseWheel(Shift,WheelDelta,MousePos,Handled);
-end;
-
-{ removed sep 19 2005: no more problem ?
-procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-// keep here because of focus problem with the child that have no text control
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do
-   CKeyDown(Key,Shift);
-end;}
-
-procedure Tf_main.topmessageDrawItem(Sender: TObject; ACanvas: TCanvas;
-  ARect: TRect; Selected: Boolean);
-begin
-// draw the message in the menu bar, avoiding to extent the menu on the next line
-ACanvas.TextOut(Arect.left,Arect.top+2,topmsg);
-end;
-
-// DDE server, windows only 
+// DDE server, windows only
 procedure Tf_main.DdeDataPokeData(Sender: TObject);
 var cmd : Tstringlist;
     cmdresult:string;
@@ -626,7 +616,7 @@ end;
 procedure Tf_main.DdeSkyChartOpen(Sender: TObject);
 begin
 Dde_active_chart:='Chart_1';
-if ActiveMdiChild is Tf_chart then with ActiveMdiChild as Tf_chart do Dde_active_chart:=caption;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveChild do Dde_active_chart:=caption;
 DDeOpen:=true;
 end;
 
@@ -634,6 +624,8 @@ procedure Tf_main.DdeSkyChartClose(Sender: TObject);
 begin
 DDeOpen:=false;
 end;
+
+// Nightvision change Windows system color
 
 Procedure Tf_main.SaveWinColor;
 var n : integer;
@@ -650,10 +642,11 @@ end;
 procedure Tf_main.SetNightVision(night: boolean);
 const light  = $004040ff;
       middle = $003030c0;
+      dim    = $00000060;
       dark   = $00000040;
       black  = $00000000;
       elem : array[0..30] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUBAR,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,25   ,26   ,27   ,28   ,29   );
-      rgb  : array[0..30] of Tcolor =  (black           ,dark         ,dark              ,dark  ,middle             ,middle       ,middle           ,dark           ,dark              ,light              ,black                ,black             ,dark                     ,black       ,middle        ,dark      ,dark         ,middle        ,black          ,black       ,middle          ,black            ,black           ,middle       ,black          ,dark          ,dark ,dark ,dark ,dark ,dark );
+      rgb  : array[0..30] of Tcolor =  (black           ,dark         ,dark              ,dark  ,dim                ,middle       ,middle           ,dark           ,dark              ,light              ,dark                 ,black             ,dark                     ,black       ,middle        ,dark      ,dark         ,middle        ,black          ,black       ,middle          ,black            ,black           ,middle       ,black          ,dark          ,dark ,dark ,dark ,dark ,dark );
 begin
 if night then begin
    SaveWinColor;
@@ -672,10 +665,12 @@ nightvision:= not nightvision;
 SetNightVision(nightvision);
 ToolButtonNightVision.Down:=nightvision;
 NightVision1.Checked:=nightvision;
-for i:=0 to MDIChildCount-1 do
-  if MDIChildren[i] is Tf_chart then
-    (MDIChildren[i] as Tf_chart).NightVision:=nightvision;
+for i:=0 to MultiDoc1.ChildCount-1 do
+  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+    (MultiDoc1.Childs[i].DockedObject as Tf_chart).NightVision:=nightvision;
 end;
+
+// View fullscreen without border
 
 procedure Tf_main.FullScreen1Click(Sender: TObject);
 var lPrevStyle: LongInt;

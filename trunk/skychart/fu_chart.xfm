@@ -1,8 +1,10 @@
 object f_chart: Tf_chart
-  Left = 232
-  Top = 308
+  Left = 375
+  Top = 150
   Width = 640
   Height = 480
+  HorzScrollBar.Range = 640
+  VertScrollBar.Range = 480
   Caption = 'Chart'
   Color = clButton
   Font.Color = clBlack
@@ -11,7 +13,6 @@ object f_chart: Tf_chart
   Font.Pitch = fpVariable
   Font.Style = []
   Font.Weight = 0
-  FormStyle = fsMDIChild
   Icon.Data = {
     424D360C00000000000036000000280000002000000020000000010018000000
     0000000C0000120B0000120B0000000000000000000000818300818300818300
@@ -113,17 +114,13 @@ object f_chart: Tf_chart
     00000000000000000000000000000000000000000000}
   KeyPreview = True
   ParentFont = False
-  Position = poDefaultPosOnly
-  Visible = True
-  OnActivate = FormActivate
+  Position = poDefault
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnMouseWheel = FormMouseWheel
-  OnResize = FormResize
-  OnShow = FormShow
   PixelsPerInch = 90
   TextHeight = 20
   TextWidth = 7
@@ -132,10 +129,10 @@ object f_chart: Tf_chart
     Top = 0
     Width = 640
     Height = 480
-    Align = alClient
     BevelOuter = bvNone
     Color = clBlack
     TabOrder = 0
+    OnResize = ChartResize
     object Image1: TImage
       Left = 0
       Top = 0

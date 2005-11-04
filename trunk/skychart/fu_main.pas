@@ -32,7 +32,8 @@ uses fu_chart, cu_catalog, cu_planet, cu_fits, cu_database, u_constant, u_util, 
      {$endif}
      SysUtils, Classes, QForms, QImgList, QStdActns, QActnList, QDialogs, Qt,
      QMenus, QTypes, QComCtrls, QControls, QExtCtrls, QGraphics,  QPrinters,
-     QStdCtrls, IniFiles, Types, QButtons, QFileCtrls, QClipbrd;
+     QStdCtrls, IniFiles, Types, QButtons, QFileCtrls, QClipbrd,
+  cu_MultiForm, cu_MultiFormChild;
 
 type
   TTCPThrd = class(TThread)
@@ -93,12 +94,8 @@ type
     FileExit1: TAction;
     FileOpen1: TAction;
     FileSaveAs1: TAction;
-    WindowCascade1: TWindowCascade;
-    WindowMinimizeAll1: TWindowMinimizeAll;
     HelpAbout1: TAction;
     FileClose1: TWindowClose;
-    WindowClose1: TWindowClose;
-    WindowTile1: TWindowTile;
     ImageList1: TImageList;
     starshape: TImage;
     OpenConfig: TAction;
@@ -277,7 +274,6 @@ type
     Content1: TMenuItem;
     ToolButtonGrid: TToolButton;
     ToolButtonGridEq: TToolButton;
-    ButtonStarSize: TSpeedButton;
     EditCopy1: TEditCopy;
     Field1: TSpeedButton;
     Field2: TSpeedButton;
@@ -372,6 +368,18 @@ type
     ToolButtonNightVision: TToolButton;
     NightVision1: TMenuItem;
     N7: TMenuItem;
+    MultiDoc1: TMultiForm;
+    WindowCascade1: TAction;
+    WindowTileHorizontal1: TAction;
+    WindowTileVertical1: TAction;
+    N10: TMenuItem;
+    Maximize: TAction;
+    Maximize1: TMenuItem;
+    PanelStar: TPanel;
+    ButtonStarSize: TSpeedButton;
+    ChildControl: TPanel;
+    BtnCloseChild: TSpeedButton;
+    BtnRestoreChild: TSpeedButton;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -379,7 +387,6 @@ type
     procedure FileExit1Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure FilePrintSetup1Execute(Sender: TObject);
@@ -469,20 +476,34 @@ type
     procedure EditLabelsExecute(Sender: TObject);
     procedure SetThemeClick(Sender: TObject);
     procedure ToolButtonNightVisionClick(Sender: TObject);
+    procedure MultiDoc1ActiveChildChange(Sender: TObject);
+    procedure MultiDoc1Maximize(Sender: TObject);
+    procedure BtnCloseChildClick(Sender: TObject);
+    procedure BtnRestoreChildClick(Sender: TObject);
+    procedure WindowCascade1Execute(Sender: TObject);
+    procedure WindowTileHorizontal1Execute(Sender: TObject);
+    procedure WindowTileVertical1Execute(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure MaximizeExecute(Sender: TObject);
+    procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 
   private
     { Private declarations }
-    cryptedpwd: string;
+    cryptedpwd,basecaption: string;
     NeedRestart,NeedToInitializeDB: Boolean;
     InitialChartNum, ButtonImage : integer;
     NightVision: boolean;
     procedure SetButtonImage(button: Integer);
-    function CreateMDIChild(const CName: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
+    function CreateChild(const CName: string; copyactive: boolean; cfg1 : conf_skychart; cfgp : conf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
     Procedure GetAppDir;
     procedure ViewTopPanel;
     procedure ApplyConfig(Sender: TObject);
+    procedure SetChildFocus(Sender: TObject);
   public
     { Public declarations }
     cfgm : conf_main;
@@ -502,7 +523,7 @@ type
     procedure UpdateConfig;
     procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
-    procedure SaveChartConfig(filename:string; chart: Tf_chart);
+    procedure SaveChartConfig(filename:string; child: TChildPanel);
     procedure SaveDefault;
     procedure SetDefault;
     procedure SetLang;
@@ -573,10 +594,11 @@ quicksearch.SetFocus;
 end;
 
 procedure Tf_main.ToolBar1MouseLeave(Sender: TObject);
-
 begin
 activecontrol:=nil;
 end;
+
+// use QThemed
 
 procedure Tf_main.InitTheme;
 var  sr: TSearchRec;
@@ -659,6 +681,7 @@ end;
  {$endif}
 end;
 
+// fullscreen without border
 {
 too tricky and windows manager dependant...
 beware that modal form get hiden and lock the app.
@@ -692,7 +715,7 @@ end else begin
 end;
 end;}
 
-// End of Linux specific CLX code:
+// nightvision apply only to the program window
 
 procedure Tf_main.SetNightVision(night: boolean);
 begin
@@ -727,7 +750,10 @@ if night then begin
       f_config.Color:=dark;
       f_config.font.Color:=middle;
    end;
-end else begin
+   MultiDoc1.InactiveBorderColor:=black;
+   MultiDoc1.TitleColor:=middle;
+   MultiDoc1.BorderColor:=dark;
+ end else begin
    if cfgm.ThemeName<>'Default' then cfgm.ThemeName:='Silver';
    SetButtonImage(1);
    Color:=clButton;
@@ -757,7 +783,10 @@ end else begin
    if f_config<>nil then begin
       f_config.Color:=clButton;
       f_config.font.Color:=clText;
-   end;   
+   end;
+   MultiDoc1.InactiveBorderColor:=clDisabledHighlight;
+   MultiDoc1.TitleColor:=clCaptionText;
+   MultiDoc1.BorderColor:=clHighlight;
 end;
 SetTheme;
 end;
@@ -769,10 +798,12 @@ nightvision:= not nightvision;
 SetNightVision(nightvision);
 ToolButtonNightVision.Down:=nightvision;
 NightVision1.Checked:=nightvision;
-for i:=0 to MDIChildCount-1 do
-  if MDIChildren[i] is Tf_chart then
-    (MDIChildren[i] as Tf_chart).NightVision:=nightvision;
+for i:=0 to MultiDoc1.ChildCount-1 do
+   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+      Tf_chart(MultiDoc1.Childs[i].DockedObject).NightVision:=nightvision;
 end;
+
+// End of Linux specific CLX code:
 
 end.
 
