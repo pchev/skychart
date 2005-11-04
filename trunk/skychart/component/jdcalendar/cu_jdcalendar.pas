@@ -71,13 +71,15 @@ type
     FMonth: TLongEdit;
     Julian: TFloatEdit;
     UpYear, DownYear, UpMonth, DownMonth: TSpeedButton;
-    Today: TSpeedButton;
+    Today, OKBtn: TSpeedButton;
     JDlabel: TLabel;
     jdt: double;
     Fday: integer;
     Flabels: TLabelsArray;
     lockdate: boolean;
     FonDateSelect: TNotifyEvent;
+    FonOKClick: TNotifyEvent;
+    FOKBtnVisible:boolean;
     procedure SetJD(Value: double);
     procedure SetYear(Value: integer);
     function ReadYear: integer;
@@ -94,6 +96,8 @@ type
     procedure DownYearClick(Sender: TObject);
     procedure UpMonthClick(Sender: TObject);
     procedure DownMonthClick(Sender: TObject);
+    procedure SetOKBtnVisible(value:boolean);
+    procedure OKbtnClick(Sender: TObject);
   public
     { Public declarations }
      constructor Create(Aowner:Tcomponent); override;
@@ -106,6 +110,8 @@ type
      property Day : integer read Fday write SetDay;
      property labels: TLabelsArray read Flabels write SetLabels;
      property onDateSelect: TNotifyEvent read FonDateSelect write FonDateSelect;
+     property onOKClick: TNotifyEvent read FonOKClick write FonOKClick;
+     property OKBtnVisible: boolean read FOKBtnVisible write SetOKBtnVisible;
   end;
 
 type
@@ -130,7 +136,7 @@ type
     function ReadLabels: TLabelsArray;
     procedure PaintBtn(Sender: TObject);
     procedure OpenCalendarClick(Sender: TObject);
-    procedure DateSelect(Sender: TObject);
+    procedure OKbtnClick(Sender: TObject);
     procedure CancelSelect(Sender: TObject);
   public
     { Public declarations }
@@ -167,6 +173,8 @@ function Jdd(annee,mois,jour :INTEGER; Heure:double):double;
 procedure Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
 
 implementation
+
+{$R cu_jdcalendar.dcr}
 
 procedure Register;
 begin
@@ -224,6 +232,8 @@ CancelButton.Width:=1;
 CancelButton.Height:=1;
 JDCalendar:=TJDMonthlyCalendar.Create(Self);
 JDCalendar.Parent:=CalendarDialog;
+JDCalendar.BevelOuter:=bvRaised;
+JDCalendar.BevelInner:=bvLowered;
 CalendarDialog.ClientWidth:=JDCalendar.Width;
 CalendarDialog.ClientHeight:=JDCalendar.Height;
 OpenCalendar:=TSpeedButton.Create(self);
@@ -237,7 +247,9 @@ OpenCalendar.Caption:='...';
 OpenCalendar.Left:=Width-Height; // -2;
 OpenCalendar.Top:=0;
 OpenCalendar.OnClick:=OpenCalendarClick;
-JDCalendar.onDateSelect:=DateSelect;
+JDCalendar.CalendarGrid.OnDblClick:=OKbtnClick;
+JDCalendar.onOKClick:=OKbtnClick;
+JDCalendar.OKBtnVisible:=true;
 onChange:=PaintBtn;
 CancelButton.sendtoback;
 end;
@@ -311,7 +323,7 @@ procedure TJDDatePicker.OpenCalendarClick(Sender: TObject);
 var P: TPoint;
 begin
 savejd:=JDCalendar.JD;
-P.x:=0;
+P.x:=-2;
 P.y:=Height;
 P:=clienttoscreen(P);
 CalendarDialog.Left:=P.x;
@@ -329,7 +341,7 @@ djd(JDCalendar.JD,yy,mm,dd,hh);
 Text:=inttostr(yy)+'.'+inttostr(mm)+'.'+inttostr(dd);
 end;
 
-procedure TJDDatePicker.DateSelect(Sender: TObject);
+procedure TJDDatePicker.OKbtnClick(Sender: TObject);
 begin
 CalendarDialog.ModalResult:=mrOK;
 end;
@@ -366,9 +378,9 @@ CalendarGrid:=TJDMonthlyCalendarGrid.Create(Self);
 CalendarGrid.Parent:=self;
 CalendarGrid.BorderStyle:=bsNone;
 CalendarGrid.Top:=TopPanel.Height;
-CalendarGrid.Left:=0;
-Width:=CalendarGrid.Width;
-Height:=TopPanel.Height+CalendarGrid.Height+BottomPanel.Height;
+CalendarGrid.Left:=2;
+Width:=CalendarGrid.Width+4;
+Height:=TopPanel.Height+CalendarGrid.Height+BottomPanel.Height+2;
 
 FYear:= TLongEdit.Create(self);
 FYear.Parent:=TopPanel;
@@ -442,6 +454,18 @@ JDLabel.Parent:=BottomPanel;
 JDLabel.Caption:='Julian Day = ';
 JDLabel.Left:=Julian.Left-JDLabel.Width-2;
 JDLabel.Top:=Julian.Top;
+OKbtn:=TSpeedButton.Create(self);
+OKbtn.Parent:=BottomPanel;
+OKbtn.Height:=Julian.Height;
+OKbtn.Width:=Julian.Height;
+OKbtn.Left:=2;
+OKbtn.Top:=4;
+OKbtn.Layout:=blGlyphBottom;
+OKbtn.Caption:='';
+OKbtn.OnClick:=OKbtnClick;
+OKBtn.Glyph.LoadFromResourceName(HInstance,'OKBTN');
+OKbtn.Visible:=false;
+FOKBtnVisible:=false;
 jdt:=CalendarGrid.JD;
 UpdVal;
 CalendarGrid.OnMouseUp:=CalendarGridMouseUp;
@@ -453,6 +477,7 @@ DownYear.OnClick:=DownYearClick;
 UpMonth.OnClick:=UpMonthClick;
 DownMonth.OnClick:=DownMonthClick;
 Today.OnClick:=TodayClick;
+
 lockdate:=false;
 end;
 
@@ -595,6 +620,17 @@ begin
  end
  else
    FMonth.Value:=FMonth.Value-1;
+end;
+
+procedure TJDMonthlyCalendar.OKbtnClick(Sender: TObject);
+begin
+  if assigned(FonOKClick) then FonOKClick(self);
+end;
+
+procedure TJDMonthlyCalendar.SetOKBtnVisible(value:boolean);
+begin
+OKBtn.Visible:=value;
+FOKBtnVisible:=value;
 end;
 
 /////////////////////////////////////////////////////

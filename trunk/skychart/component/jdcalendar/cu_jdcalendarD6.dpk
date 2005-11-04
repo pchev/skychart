@@ -1,7 +1,6 @@
 package cu_jdcalendarD6;
 
 {$R *.res}
-{$R 'cu_jdcalendar.dcr'}
 {$ALIGN 8}
 {$ASSERTIONS ON}
 {$BOOLEVAL OFF}
