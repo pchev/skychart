@@ -4,7 +4,7 @@ object Form1: TForm1
   Width = 696
   Height = 281
   HorzScrollBar.Range = 676
-  VertScrollBar.Range = 250
+  VertScrollBar.Range = 265
   Caption = 'Form1'
   Color = clButton
   Font.Color = clText
@@ -107,8 +107,8 @@ object Form1: TForm1
   object JDMonthlyCalendar1: TJDMonthlyCalendar
     Left = 384
     Top = 88
-    Width = 230
-    Height = 162
+    Width = 233
+    Height = 177
     BevelOuter = bvNone
     Caption = 'JDMonthlyCalendar1'
     TabOrder = 9
@@ -116,6 +116,7 @@ object Form1: TForm1
     Year = 2005
     Month = 4
     Day = 23
+    OKBtnVisible = False
   end
   object Button5: TButton
     Left = 488

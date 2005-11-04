@@ -14,17 +14,18 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object JDMonthlyCalendar1: TJDMonthlyCalendar
-    Left = 432
+    Left = 400
     Top = 32
-    Width = 202
-    Height = 153
-    BevelOuter = bvSpace
+    Width = 234
+    Height = 177
+    BevelOuter = bvNone
     Caption = 'JDMonthlyCalendar1'
     TabOrder = 0
-    JD = 2453462.5
+    JD = 2453462.500000000000000000
     Year = 2005
     Month = 4
     Day = 2
+    OKBtnVisible = False
   end
   object JDDatePicker1: TJDDatePicker
     Left = 40
@@ -35,7 +36,7 @@ object Form1: TForm1
     MaxLength = 12
     TabOrder = 1
     Text = '  2005. 4. 2'
-    JD = 2453462.5
+    JD = 2453462.500000000000000000
     Year = 2005
     Month = 4
     Day = 2
