@@ -53,6 +53,7 @@ Tskychart = class (TComponent)
     procedure DeleteLabel(lnum: integer);
     procedure DeleteAllLabel(lnum: integer);
     procedure LabelClick(lnum: integer);
+    procedure SetImage(value:TImage);
    public
     cfgsc : conf_skychart;
     labels: array[1..maxlabels] of Tobjlabel;
@@ -114,6 +115,7 @@ Tskychart = class (TComponent)
     procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
     function GetChartInfo(sep:string=' '):string;
+    property Image: TImage write SetImage;
 end;
 
 
@@ -158,8 +160,16 @@ end;
 
 destructor Tskychart.Destroy;
 begin
+try
  Fplot.free;
  inherited destroy;
+except
+end; 
+end;
+
+procedure Tskychart.SetImage(value:TImage);
+begin
+FPlot.Image:=value;
 end;
 
 function Tskychart.Refresh :boolean;

@@ -1,6 +1,6 @@
 {
 Copyright (C) 2002 Patrick Chevalley
-
+ 
 http://www.astrosurf.com/astropc
 pch@freesurf.ch
 
@@ -24,6 +24,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 procedure Tf_chart.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  RefreshTimer.Enabled:=false;
+{$ifdef mswindows}
+  TelescopeTimer.Enabled:=false;
+ {$endif}
   Action := caFree;
 end;
 
@@ -32,7 +36,9 @@ begin
 {$ifdef mswindows}
 // Image1.Picture.Bitmap.pixelformat:=pf32bit;
  {$endif}
- sc:=Tskychart.Create(Image1);
+ locked:=true;
+ sc:=Tskychart.Create(nil);
+ sc.Image:=Image1;
  with Image1.Canvas do begin
  Brush.Color:=sc.plot.cfgplot.Color[0];
  Pen.Color:=sc.plot.cfgplot.Color[0];
@@ -69,6 +75,7 @@ end;
 
 procedure Tf_chart.FormDestroy(Sender: TObject);
 begin
+try
  locked:=true;
  sc.free;
  if indi1<>nil then begin
@@ -76,7 +83,9 @@ begin
    indi1.onStatusChange:=nil;
    indi1.onMessage:=nil;
    indi1.terminate;
- end;                            
+ end;
+except
+end;
 end;
 
 procedure Tf_chart.FormKeyDown(Sender: TObject; var Key: Word;
@@ -90,8 +99,9 @@ begin
 // to restore focus to the chart that as no text control
 // it is also mandatory to keep the keydown and mousewheel
 // event to the main form.
+if assigned(FSetFocus) then FSetFocus(Self);
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
-setfocus;
+//setfocus;
 end;
 
 procedure Tf_chart.AutoRefresh;
@@ -137,6 +147,7 @@ finally
  if (not lastquick) and assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
+if assigned(FImageSetFocus) then FImageSetFocus(Self);
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
@@ -177,9 +188,9 @@ if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
 end;
 end;
 
-procedure Tf_chart.FormResize(Sender: TObject);
+procedure Tf_chart.ChartResize(Sender: TObject);
 begin
-if locked then exit;
+if locked or (fsCreating in FormState) then exit;
 RefreshTimer.Interval:=200;
 RefreshTimer.Enabled:=false;
 RefreshTimer.Enabled:=true;
@@ -200,14 +211,6 @@ procedure Tf_chart.RefreshTimerTimer(Sender: TObject);
 begin
 RefreshTimer.Enabled:=false;
 if locked then exit;
-{ maximize a new window now to avoid a Kylix bug
-  if WindowState is set to wsMaximized at creation }
-if maximize then begin
- { beware to pass here only for the first refresh to avoid to loop}
- maximize:=false;
- windowstate:=wsMaximized;
- Image1Click(nil);
-end;
 Image1.Picture.Bitmap.Width:=Image1.width;
 Image1.Picture.Bitmap.Height:=Image1.Height;
 if sc<>nil then sc.plot.init(Image1.width,Image1.height);
@@ -359,14 +362,7 @@ finally
 end;
 end;
 
-procedure Tf_chart.FormShow(Sender: TObject);
-begin
-{ update the chart after it is show a first time (part of the wsMaximized bug bypass) }
-RefreshTimer.enabled:=true;
-zoomstep:=0;
-end;
-
-procedure Tf_chart.FormActivate(Sender: TObject);
+procedure Tf_chart.ChartActivate;
 begin
 // code to execute when the chart get focus.
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -531,8 +527,8 @@ end;
 
 procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
 begin
- xcursor:=ScreenToClient(mouse.cursorpos).x;
- ycursor:=ScreenToClient(mouse.cursorpos).y;
+ xcursor:=Image1.ScreenToClient(mouse.cursorpos).x;
+ ycursor:=Image1.ScreenToClient(mouse.cursorpos).y;
  if sc.cfgsc.TrackOn then begin
     TrackOff1.visible:=true;
     TrackOn1.visible:=false;
@@ -595,9 +591,9 @@ else identlabel.Visible:=false;
 end;
 
 function Tf_chart.IdentXY(X, Y: Integer):boolean;
-var ra,dec,a,h,l,b,le,be,dx,lastra,lastdec,dist:double;
-    pa: integer;
-    txt,lastname: string;
+var ra,dec,a,h,l,b,le,be,dx,lastra,lastdec,lasttrra,lasttrde,dist:double;
+    pa,lasttype,lastobj: integer;
+    txt,lastname,lasttrname: string;
     showdist:boolean;
 begin
 result:=false;
@@ -606,6 +602,11 @@ showdist:=sc.cfgsc.FindOk;
 lastra:=sc.cfgsc.FindRA;
 lastdec:=sc.cfgsc.FindDEC;
 lastname:=sc.cfgsc.FindName;
+lasttrra:=sc.cfgsc.TrackRA;
+lasttrde:=sc.cfgsc.TrackDEC;
+lasttype:=sc.cfgsc.TrackType;
+lastobj:=sc.cfgsc.Trackobj;
+lasttrname:=sc.cfgsc.TrackName;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=abs(2/sc.cfgsc.BxGlb); // search a 2 pixel radius
@@ -628,6 +629,16 @@ if showdist then begin
       sc.cfgsc.FindNote:=sc.cfgsc.FindNote+txt+tab;
       skipmove:=10;
    end;
+end;
+if sc.cfgsc.TrackOn then begin
+  sc.cfgsc.FindRA:=lastra;
+  sc.cfgsc.FindDEC:=lastdec;
+  sc.cfgsc.FindName:=lastname;
+  sc.cfgsc.TrackRA:=lasttrra;
+  sc.cfgsc.TrackDEC:=lasttrde;
+  sc.cfgsc.TrackType:=lasttype;
+  sc.cfgsc.Trackobj:=lastobj;
+  sc.cfgsc.TrackName:=lasttrname;
 end;
 if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption,true,self);
 end;
@@ -685,6 +696,8 @@ case Button of
    mbLeft  : ZoomBox(1,X,Y);
    mbMiddle: screen.cursor:=crHandPoint;
 end;
+if assigned(FSetFocus) then FSetFocus(Self);
+if assigned(FImageSetFocus) then FImageSetFocus(Sender);
 end;
 
 procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -2130,4 +2143,3 @@ end else begin
 end;
 Refresh;
 end;
-

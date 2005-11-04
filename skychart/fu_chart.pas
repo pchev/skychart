@@ -87,11 +87,10 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure FormResize(Sender: TObject);
+    procedure ChartResize(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
-    procedure FormShow(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure MoveWestExecute(Sender: TObject);
@@ -110,7 +109,6 @@ type
     procedure zoomminusmoveExecute(Sender: TObject);
     procedure FlipxExecute(Sender: TObject);
     procedure FlipyExecute(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure GridExecute(Sender: TObject);
     procedure GridEQExecute(Sender: TObject);
     procedure rot_minusExecute(Sender: TObject);
@@ -140,6 +138,7 @@ type
   private
     { Private declarations }
     FImageSetFocus: TnotifyEvent;
+    FSetFocus: TnotifyEvent;
     FShowTopMessage: Tstr1func;
     FUpdateBtn: Tbtnfunc;
     FShowInfo : Tshowinfo;
@@ -234,8 +233,10 @@ type
     function cmd_SwitchConstL:string;
     function cmd_SwitchConstB:string;
 
+    procedure ChartActivate;
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnShowTopMessage: Tstr1func read FShowTopMessage write FShowTopMessage;
+    property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
     property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
@@ -301,7 +302,6 @@ end;
 
 
 // End of Linux specific CLX code
-
 
 end.
 

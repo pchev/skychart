@@ -88,11 +88,10 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure FormResize(Sender: TObject);
+    procedure ChartResize(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
-    procedure FormShow(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure MoveWestExecute(Sender: TObject);
@@ -109,7 +108,6 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure zoomminusmoveExecute(Sender: TObject);
     procedure zoomplusmoveExecute(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure FlipXExecute(Sender: TObject);
     procedure FlipYExecute(Sender: TObject);
     procedure UndoExecute(Sender: TObject);
@@ -119,8 +117,7 @@ type
     procedure GridEQExecute(Sender: TObject);
     procedure GridExecute(Sender: TObject);
     procedure identlabelClick(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Image1Click(Sender: TObject);
     procedure switchstarExecute(Sender: TObject);
     procedure switchbackgroundExecute(Sender: TObject);
@@ -141,6 +138,7 @@ type
     { Private declarations }
     Ftelescope: Ttelescope;
     FImageSetFocus: TnotifyEvent;
+    FSetFocus: TnotifyEvent;
     FShowTopMessage: Tstr1func;
     FUpdateBtn: Tbtnfunc;
     FShowInfo : Tshowinfo;
@@ -164,7 +162,7 @@ type
     { Public declarations }
     sc: Tskychart;
     indi1: TIndiClient;
-    maximize,locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh :boolean;
+    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh :boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
@@ -232,8 +230,10 @@ type
     function cmd_SwitchGridNum:string;
     function cmd_SwitchConstL:string;
     function cmd_SwitchConstB:string;
+    procedure ChartActivate;
     property telescopeplugin: Ttelescope read Ftelescope write Ftelescope;
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
+    property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
     property OnShowTopMessage: Tstr1func read FShowTopMessage write FShowTopMessage;
     property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;

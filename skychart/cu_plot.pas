@@ -84,6 +84,7 @@ type
      procedure labelMouseLeave(Sender: TObject);
      procedure Setstarshape(value:Tbitmap);
      procedure InitXPlanetRender;
+     procedure SetImage(value:Timage);
 //     procedure MapGRSlongitude(GRSlongitude: double); //  No more necessary with Xplanet 1.2.0 !
   protected
     { Protected declarations }
@@ -132,6 +133,7 @@ type
      Procedure DefaultLabel(Sender: TObject);
      Procedure Deletelabel(Sender: TObject);
      Procedure DeleteAlllabel(Sender: TObject);
+     property Image: TImage write SetImage;
   end;
 
   const cliparea = 10;
@@ -139,8 +141,6 @@ type
 Implementation
 
 constructor TSplot.Create(AOwner:TComponent);
-var i : integer;
-    MenuItem: TMenuItem;
 begin
  inherited Create(AOwner);
  imabmp:=tbitmap.Create;
@@ -150,7 +150,6 @@ begin
  imamask:=tbitmap.Create;
  imamask.PixelFormat:=pf32bit;
  starbmp:=Tbitmap.Create;
- destcnv:=(AOwner as Timage).Canvas;
  cbmp:=Tbitmap.Create;
  cnv:=cbmp.canvas;
  // set safe value
@@ -165,47 +164,7 @@ begin
  cfgchart.onprinter:=false;
  cfgchart.drawpen:=1;
  cfgchart.fontscale:=1;
- for i:=1 to maxlabels do begin
-    labels[i]:=Tlabel.Create((AOwner as Timage).parent);
-    labels[i].parent:=(AOwner as Timage).parent;
-    labels[i].tag:=i;                                
-    labels[i].transparent:=true;
-    labels[i].ShowAccelChar:=false;
-    {$ifdef linux} labels[i].Font.CharSet:=fcsAnyCharSet; {$endif}
-    {$ifdef mswindows} labels[i].Font.CharSet:=DEFAULT_CHARSET; {$endif}
-    labels[i].OnMouseDown:=labelmousedown;
-    labels[i].OnMouseUp:=labelmouseup;
-    labels[i].OnMouseMove:=labelmousemove;
-    labels[i].OnMouseLeave:=labelmouseleave;
- end;
- editlabelmenu:=Tpopupmenu.Create(AOwner);
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := '';
- MenuItem.Enabled:=false;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := '-';
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Move label';
- MenuItem.OnClick := MoveLabel;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Edit label';
- MenuItem.OnClick := EditLabelTxt;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Default label';
- MenuItem.OnClick := DefaultLabel;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Delete label';
- MenuItem.OnClick := DeleteLabel;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Reset all label';
- MenuItem.OnClick := DeleteAllLabel;
+
  InitPlanetRender;
  InitXPlanetRender;
  try
@@ -235,7 +194,8 @@ end;
 destructor TSplot.Destroy;
 var i:integer;
 begin
- for i:=1 to maxlabels do labels[i].Free;
+try
+ //for i:=1 to maxlabels do labels[i].Free;
  starbmp.Free;
  cbmp.Free;
  imabmp.Free;
@@ -250,6 +210,56 @@ begin
     ClosePlanetRender;
  end;
  inherited destroy;
+except
+end;
+end;
+
+procedure TSplot.SetImage(value:Timage);
+var i : integer;
+    MenuItem: TMenuItem;
+begin
+ destcnv:=value.Canvas;
+ for i:=1 to maxlabels do begin
+    labels[i]:=Tlabel.Create(nil);
+    labels[i].parent:=value.parent;
+    labels[i].tag:=i;                                
+    labels[i].transparent:=true;
+    labels[i].ShowAccelChar:=false;
+    {$ifdef linux} labels[i].Font.CharSet:=fcsAnyCharSet; {$endif}
+    {$ifdef mswindows} labels[i].Font.CharSet:=DEFAULT_CHARSET; {$endif}
+    labels[i].OnMouseDown:=labelmousedown;
+    labels[i].OnMouseUp:=labelmouseup;
+    labels[i].OnMouseMove:=labelmousemove;
+    labels[i].OnMouseLeave:=labelmouseleave;
+ end;
+ editlabelmenu:=Tpopupmenu.Create(self);
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := '';
+ MenuItem.Enabled:=false;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := '-';
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Move label';
+ MenuItem.OnClick := MoveLabel;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Edit label';
+ MenuItem.OnClick := EditLabelTxt;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Default label';
+ MenuItem.OnClick := DefaultLabel;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Delete label';
+ MenuItem.OnClick := DeleteLabel;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := 'Reset all label';
+ MenuItem.OnClick := DeleteAllLabel;
 end;
 
 function TSplot.Init(w,h : integer) : boolean;

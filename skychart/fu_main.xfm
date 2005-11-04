@@ -1,11 +1,11 @@
 object f_main: Tf_main
   Tag = 1
-  Left = 239
-  Top = 194
+  Left = 190
+  Top = 114
   Width = 800
   Height = 570
   HorzScrollBar.Range = 54
-  VertScrollBar.Range = 85
+  VertScrollBar.Range = 88
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
   Color = clBackground
@@ -15,7 +15,6 @@ object f_main: Tf_main
   Font.Pitch = fpVariable
   Font.Style = []
   Font.Weight = 0
-  FormStyle = fsMDIForm
   Icon.Data = {
     424D360C00000000000036000000280000002000000020000000010018000000
     0000000C0000120B0000120B0000000000000000000000000000000000000000
@@ -118,13 +117,15 @@ object f_main: Tf_main
   KeyPreview = True
   Menu = MainMenu1
   ParentFont = False
-  Position = poDefaultPosOnly
+  Position = poDefault
   Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
+  OnMouseWheel = FormMouseWheel
   OnResize = FormResize
-  OnShow = FormShow
   PixelsPerInch = 90
   TextHeight = 13
   TextWidth = 5
@@ -2754,7 +2755,7 @@ object f_main: Tf_main
     Left = 0
     Top = 0
     Width = 800
-    Height = 51
+    Height = 54
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
@@ -2766,7 +2767,6 @@ object f_main: Tf_main
       Height = 25
       ButtonHeight = 23
       Caption = 'ToolBar1'
-      EdgeBorders = []
       EdgeInner = esNone
       EdgeOuter = esNone
       Flat = True
@@ -2824,15 +2824,15 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = WindowCascade1
-        Caption = '&Cascade'
+        Caption = 'Cascade'
       end
       object ToolButtonTile: TToolButton
         HelpType = htContext
         Left = 124
         Top = 2
         Height = 23
-        Action = WindowTile1
-        Caption = '&Tile'
+        Action = WindowTileVertical1
+        Caption = 'Tile Vertically'
       end
       object ToolButton18: TToolButton
         Left = 170
@@ -2871,7 +2871,7 @@ object f_main: Tf_main
       object quicksearch: TComboBox
         Left = 324
         Top = 2
-        Width = 70
+        Width = 90
         Height = 21
         Hint = 'Quick Search'
         Constraints.MaxHeight = 22
@@ -2899,7 +2899,7 @@ object f_main: Tf_main
         Caption = 'Redo Last Change'
       end
       object ToolButton26: TToolButton
-        Left = 486
+        Left = 506
         Top = 2
         Width = 8
         Height = 23
@@ -2908,7 +2908,7 @@ object f_main: Tf_main
         ImageIndex = 25
       end
       object TimeVal: TSpinEdit
-        Left = 563
+        Left = 583
         Top = 2
         Width = 42
         Height = 21
@@ -2920,7 +2920,7 @@ object f_main: Tf_main
         Value = 1
       end
       object TimeU: TComboBox
-        Left = 605
+        Left = 625
         Top = 2
         Width = 85
         Height = 21
@@ -2945,7 +2945,7 @@ object f_main: Tf_main
       end
       object ToolButtonTnow: TToolButton
         HelpType = htContext
-        Left = 517
+        Left = 537
         Top = 2
         Height = 23
         Action = TimeReset
@@ -2953,7 +2953,7 @@ object f_main: Tf_main
       end
       object ToolButtonTdec: TToolButton
         HelpType = htContext
-        Left = 494
+        Left = 514
         Top = 2
         Height = 23
         Action = TimeDec
@@ -2961,14 +2961,14 @@ object f_main: Tf_main
       end
       object ToolButtonTinc: TToolButton
         HelpType = htContext
-        Left = 540
+        Left = 560
         Top = 2
         Height = 23
         Action = TimeInc
         Caption = 'TimeInc'
       end
       object ToolButton40: TToolButton
-        Left = 690
+        Left = 710
         Top = 2
         Width = 8
         Height = 23
@@ -2978,7 +2978,7 @@ object f_main: Tf_main
       end
       object ToolButtonListObj: TToolButton
         HelpType = htContext
-        Left = 440
+        Left = 460
         Top = 2
         Height = 23
         Action = ListObj
@@ -2986,7 +2986,7 @@ object f_main: Tf_main
       end
       object TConnect: TToolButton
         HelpType = htContext
-        Left = 698
+        Left = 718
         Top = 2
         Height = 23
         Action = TelescopeConnect
@@ -2994,7 +2994,7 @@ object f_main: Tf_main
       end
       object TSlew: TToolButton
         HelpType = htContext
-        Left = 721
+        Left = 741
         Top = 2
         Height = 23
         Action = TelescopeSlew
@@ -3002,7 +3002,7 @@ object f_main: Tf_main
       end
       object TSync: TToolButton
         HelpType = htContext
-        Left = 744
+        Left = 764
         Top = 2
         Height = 23
         Action = TelescopeSync
@@ -3163,7 +3163,7 @@ object f_main: Tf_main
       end
       object ToolButtonCal: TToolButton
         HelpType = htContext
-        Left = 463
+        Left = 483
         Top = 2
         Height = 23
         Action = Calendar
@@ -3171,7 +3171,7 @@ object f_main: Tf_main
       end
       object ToolButtonSearch: TToolButton
         HelpType = htContext
-        Left = 394
+        Left = 414
         Top = 2
         Height = 23
         Action = Search1
@@ -3179,7 +3179,7 @@ object f_main: Tf_main
       end
       object ToolButton1: TToolButton
         HelpType = htContext
-        Left = 417
+        Left = 437
         Top = 2
         Height = 23
         Action = Position
@@ -3204,13 +3204,13 @@ object f_main: Tf_main
     end
     object ToolBar4: TToolBar
       Left = 0
-      Top = 25
-      Width = 800
-      Height = 25
-      AutoSize = True
+      Top = 27
+      Width = 768
+      Height = 26
+      Align = alNone
+      Anchors = [akLeft, akRight, akBottom]
       ButtonHeight = 23
       Caption = 'ToolBar4'
-      EdgeBorders = []
       EdgeInner = esNone
       EdgeOuter = esNone
       Flat = True
@@ -3219,30 +3219,6 @@ object f_main: Tf_main
       ShowHint = True
       TabOrder = 1
       Wrapable = False
-      object ButtonStarSize: TSpeedButton
-        Left = 553
-        Top = 2
-        Width = 12
-        Height = 23
-        Hint = 'Star Size'
-        Glyph.Data = {
-          BA010000424DB601000000000000360000002800000008000000100000000100
-          18000000000080010000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFF395DBAE3E8F5FFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFF0040E23965F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF053AFF
-          AFBCFF3965F5E3E8F5FFFFFFFFFFFFFFFFFFFFFFFF0B39FFB1BEFF91A3FF3965
-          F5FFFFFFFFFFFFFFFFFFFFFFFF1541FFBFCAFFB1BEFFAFBCFF3965F5E3E8F5FF
-          FFFFFFFFFF1D42FFCDD5FFBBC6FFB1BEFF91A3FF3965F5FFFFFFFFFFFF294CFF
-          DFE4FFCDD5FFBFCAFF93A5FF3965F5FFFFFFFFFFFF2F51FFEBEEFFDBE1FFCDD5
-          FF396FF6E3E8F5FFFFFFFFFFFF3355FFFBFCFFC7D3FF3A72FFFFFFFFFFFFFFFF
-          FFFFFFFFFF3355FFFFFFFF4570FFE3E8F5FFFFFFFFFFFFFFFFFFFFFFFF1138FF
-          506CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3953D7E3E7F9FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Visible = False
-        OnClick = ButtonStarSizeClick
-      end
       object ToolButtonShowStars: TToolButton
         Left = 1
         Top = 2
@@ -3379,76 +3355,6 @@ object f_main: Tf_main
         Action = switchstars
         Caption = 'switchstars'
       end
-      object StarSizePanel: TPanel
-        Left = 565
-        Top = 2
-        Width = 100
-        Height = 23
-        Align = alCustom
-        ParentColor = True
-        TabOrder = 0
-        Visible = False
-        OnMouseLeave = ToolBar1MouseLeave
-        object TrackBar1: TTrackBar
-          Tag = 1
-          Left = 0
-          Top = 1
-          Width = 50
-          Height = 9
-          Hint = 'Faint Stars Size '
-          Max = 50
-          Min = 1
-          PageSize = 5
-          Position = 1
-          TabOrder = 0
-          TickStyle = tsNone
-          OnChange = StarSizeChange
-        end
-        object TrackBar2: TTrackBar
-          Tag = 2
-          Left = 0
-          Top = 11
-          Width = 50
-          Height = 9
-          Hint = 'Increment for Bright Stars'
-          Max = 100
-          Min = 10
-          PageSize = 10
-          Position = 10
-          TabOrder = 1
-          TickStyle = tsNone
-          OnChange = StarSizeChange
-        end
-        object TrackBar3: TTrackBar
-          Tag = 3
-          Left = 50
-          Top = 1
-          Width = 50
-          Height = 9
-          Hint = 'Contrast'
-          Max = 1000
-          Min = 100
-          PageSize = 100
-          Position = 10
-          TabOrder = 2
-          TickStyle = tsNone
-          OnChange = StarSizeChange
-        end
-        object TrackBar4: TTrackBar
-          Tag = 4
-          Left = 50
-          Top = 11
-          Width = 50
-          Height = 9
-          Hint = 'Color saturation'
-          Max = 255
-          PageSize = 25
-          Position = 5
-          TabOrder = 3
-          TickStyle = tsNone
-          OnChange = StarSizeChange
-        end
-      end
       object ToolButtonGrid: TToolButton
         HelpType = htContext
         Left = 231
@@ -3506,13 +3412,141 @@ object f_main: Tf_main
         Action = EditLabels
         Caption = 'Edit Labels'
       end
+      object PanelStar: TPanel
+        Left = 553
+        Top = 2
+        Width = 115
+        Height = 23
+        Align = alCustom
+        BevelOuter = bvNone
+        ParentColor = True
+        TabOrder = 24
+        object ButtonStarSize: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 12
+          Height = 23
+          Hint = 'Star Size'
+          Flat = True
+          Glyph.Data = {
+            BA010000424DB601000000000000360000002800000008000000100000000100
+            18000000000080010000120B0000120B00000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFF395DBAE3E8F5FFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFF0040E23965F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF053AFF
+            AFBCFF3965F5E3E8F5FFFFFFFFFFFFFFFFFFFFFFFF0B39FFB1BEFF91A3FF3965
+            F5FFFFFFFFFFFFFFFFFFFFFFFF1541FFBFCAFFB1BEFFAFBCFF3965F5E3E8F5FF
+            FFFFFFFFFF1D42FFCDD5FFBBC6FFB1BEFF91A3FF3965F5FFFFFFFFFFFF294CFF
+            DFE4FFCDD5FFBFCAFF93A5FF3965F5FFFFFFFFFFFF2F51FFEBEEFFDBE1FFCDD5
+            FF396FF6E3E8F5FFFFFFFFFFFF3355FFFBFCFFC7D3FF3A72FFFFFFFFFFFFFFFF
+            FFFFFFFFFF3355FFFFFFFF4570FFE3E8F5FFFFFFFFFFFFFFFFFFFFFFFF1138FF
+            506CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3953D7E3E7F9FFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+          Visible = False
+          OnClick = ButtonStarSizeClick
+        end
+        object StarSizePanel: TPanel
+          Left = 13
+          Top = 1
+          Width = 100
+          Height = 23
+          ParentColor = True
+          TabOrder = 0
+          Visible = False
+          OnMouseLeave = ToolBar1MouseLeave
+          object TrackBar1: TTrackBar
+            Tag = 1
+            Left = 0
+            Top = 1
+            Width = 50
+            Height = 9
+            Hint = 'Faint Stars Size '
+            Max = 50
+            Min = 1
+            PageSize = 5
+            Position = 1
+            TabOrder = 0
+            TickStyle = tsNone
+            OnChange = StarSizeChange
+          end
+          object TrackBar2: TTrackBar
+            Tag = 2
+            Left = 0
+            Top = 11
+            Width = 50
+            Height = 9
+            Hint = 'Increment for Bright Stars'
+            Max = 100
+            Min = 10
+            PageSize = 10
+            Position = 10
+            TabOrder = 1
+            TickStyle = tsNone
+            OnChange = StarSizeChange
+          end
+          object TrackBar3: TTrackBar
+            Tag = 3
+            Left = 50
+            Top = 1
+            Width = 50
+            Height = 9
+            Hint = 'Contrast'
+            Max = 1000
+            Min = 100
+            PageSize = 100
+            Position = 10
+            TabOrder = 2
+            TickStyle = tsNone
+            OnChange = StarSizeChange
+          end
+          object TrackBar4: TTrackBar
+            Tag = 4
+            Left = 50
+            Top = 11
+            Width = 50
+            Height = 9
+            Hint = 'Color saturation'
+            Max = 255
+            PageSize = 25
+            Position = 5
+            TabOrder = 3
+            TickStyle = tsNone
+            OnChange = StarSizeChange
+          end
+        end
+      end
+    end
+    object ChildControl: TPanel
+      Left = 768
+      Top = 25
+      Width = 32
+      Height = 29
+      Align = alRight
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 2
+      object BtnCloseChild: TSpeedButton
+        Left = 16
+        Top = 8
+        Width = 15
+        Height = 15
+        OnClick = BtnCloseChildClick
+      end
+      object BtnRestoreChild: TSpeedButton
+        Left = 1
+        Top = 8
+        Width = 15
+        Height = 15
+        OnClick = BtnRestoreChildClick
+      end
     end
   end
   object PanelLeft: TPanel
     Left = 0
-    Top = 51
+    Top = 54
     Width = 27
-    Height = 455
+    Height = 454
     Align = alLeft
     BevelOuter = bvNone
     ParentColor = True
@@ -3613,9 +3647,9 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 773
-    Top = 51
+    Top = 54
     Width = 27
-    Height = 455
+    Height = 454
     Align = alRight
     BevelOuter = bvNone
     ParentColor = True
@@ -3847,7 +3881,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Left = 0
-    Top = 506
+    Top = 508
     Width = 800
     Height = 34
     Align = alBottom
@@ -3890,6 +3924,22 @@ object f_main: Tf_main
         WordWrap = True
       end
     end
+  end
+  object MultiDoc1: TMultiForm
+    Left = 27
+    Top = 54
+    Width = 746
+    Height = 454
+    Align = alClient
+    BevelOuter = bvNone
+    BorderWidth = 3
+    Color = clBlack
+    TabOrder = 4
+    Maximized = False
+    TitleHeight = 12
+    onMaximize = MultiDoc1Maximize
+    onActiveChildChange = MultiDoc1ActiveChildChange
+    KeepLastChild = False
   end
   object MainMenu1: TMainMenu
     Left = 200
@@ -4238,11 +4288,17 @@ object f_main: Tf_main
       object WindowCascadeItem: TMenuItem
         Action = WindowCascade1
       end
-      object WindowTileItem: TMenuItem
-        Action = WindowTile1
-      end
       object WindowMinimizeItem: TMenuItem
-        Action = WindowMinimizeAll1
+        Action = WindowTileVertical1
+      end
+      object WindowTileItem: TMenuItem
+        Action = WindowTileHorizontal1
+      end
+      object Maximize1: TMenuItem
+        Action = Maximize
+      end
+      object N10: TMenuItem
+        Caption = '-'
       end
     end
     object Help1: TMenuItem
@@ -4316,17 +4372,6 @@ object f_main: Tf_main
       ImageIndex = 11
       OnExecute = FileExit1Execute
     end
-    object WindowCascade1: TWindowCascade
-      Category = 'Window'
-      Caption = '&Cascade'
-      Hint = 'Cascade'
-      ImageIndex = 4
-    end
-    object WindowMinimizeAll1: TWindowMinimizeAll
-      Category = 'Window'
-      Caption = '&Minimize All'
-      Hint = 'Minimize All'
-    end
     object HelpAbout1: TAction
       Category = 'Help'
       Caption = '&About...'
@@ -4334,18 +4379,6 @@ object f_main: Tf_main
         'About|Displays program information, version number, and copyrigh' +
         't'
       OnExecute = HelpAbout1Execute
-    end
-    object WindowClose1: TWindowClose
-      Category = 'Window'
-      Caption = 'C&lose'
-      Hint = 'Close'
-      ImageIndex = 13
-    end
-    object WindowTile1: TWindowTile
-      Category = 'Window'
-      Caption = '&Tile'
-      Hint = 'Tile'
-      ImageIndex = 14
     end
     object OpenConfig: TAction
       Category = 'Setup'
@@ -4840,6 +4873,29 @@ object f_main: Tf_main
       Hint = 'Edit Labels'
       ImageIndex = 83
       OnExecute = EditLabelsExecute
+    end
+    object WindowCascade1: TAction
+      Category = 'Window'
+      Caption = 'Cascade'
+      ImageIndex = 4
+      OnExecute = WindowCascade1Execute
+    end
+    object WindowTileHorizontal1: TAction
+      Category = 'Window'
+      Caption = 'Tile Horizontally'
+      ImageIndex = 5
+      OnExecute = WindowTileHorizontal1Execute
+    end
+    object WindowTileVertical1: TAction
+      Category = 'Window'
+      Caption = 'Tile Vertically'
+      ImageIndex = 14
+      OnExecute = WindowTileVertical1Execute
+    end
+    object Maximize: TAction
+      Category = 'Window'
+      Caption = 'Maximize'
+      OnExecute = MaximizeExecute
     end
   end
   object ImageList1: TImageList
@@ -7118,8 +7174,8 @@ object f_main: Tf_main
     Top = 136
   end
   object popupProj: TPopupMenu
-    Left = 32
-    Top = 64
+    Left = 40
+    Top = 88
     object Equatorial1: TMenuItem
       Caption = 'Equatorial'
     end
