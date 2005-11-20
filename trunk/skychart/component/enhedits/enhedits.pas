@@ -13,7 +13,6 @@ Linux port
 Remove DsgnIntf dependency
 
 Add automatic hint's with mini-maxi values
-
 --------------------------------------------------------------
 
 This unit contains the code for 4 enhanced edits. TRightEdit,
@@ -291,8 +290,13 @@ begin
       FValue := FMinValue;
     FormatText;
   end;
-  hint := Inttostr(MinValue)+'..'+Inttostr(MaxValue);
-  ShowHint:=true;
+  if MinValue<>MaxValue then begin
+     hint := Inttostr(MinValue)+'..'+Inttostr(MaxValue);
+     ShowHint:=true;
+  end else begin
+     hint := '';
+     ShowHint:=false;
+  end;
 end;
 
 { Method to set the FMaxValue property, check that
@@ -307,8 +311,13 @@ begin
       FValue := FMaxValue;
     FormatText;
   end;
-  hint := Inttostr(MinValue)+'..'+Inttostr(MaxValue);
-  ShowHint:=true;
+  if MinValue<>MaxValue then begin
+     hint := Inttostr(MinValue)+'..'+Inttostr(MaxValue);
+     ShowHint:=true;
+  end else begin
+     hint := '';
+     ShowHint:=false;
+  end;
 end;
 
 { Function to check the Value property is in range
@@ -415,7 +424,7 @@ var
   L: LongInt;
 begin
   L := StrToIntDef(Text,0);
-  if (L > MaxValue) or (L < MinValue) then
+  if ((FMinValue<>0) or (FMaxValue<>0)) and (L > FMaxValue) or (L < FMinValue) then
   begin
     Beep;
     SelectAll;
@@ -458,7 +467,7 @@ var
   L: double;
 begin
   L := GetAsDouble;
-  if (L > MaxValue) or (L < MinValue) then
+  if ((FMinValue<>0) or (FMaxValue<>0)) and (L > FMaxValue) or (L < FMinValue) then
   begin
     Beep;
     SelectAll;
@@ -504,8 +513,13 @@ begin
       FValue := FMinValue;
     FormatText;
   end;
-  hint := floattostr(MinValue)+'..'+floattostr(MaxValue);
-  ShowHint:=true;
+  if MinValue<>MaxValue then begin
+     hint := floattostr(MinValue)+'..'+floattostr(MaxValue);
+     ShowHint:=true;
+  end else begin
+     hint := '';
+     ShowHint:=false;
+  end;
 end;
 
 { Method to set the FMaxValue property, check that
@@ -520,8 +534,13 @@ begin
       FValue := FMaxValue;
     FormatText;
   end;
-  hint := floattostr(MinValue)+'..'+floattostr(MaxValue);
-  ShowHint:=true;
+  if MinValue<>MaxValue then begin
+     hint := floattostr(MinValue)+'..'+floattostr(MaxValue);
+     ShowHint:=true;
+  end else begin
+     hint := '';
+     ShowHint:=false;
+  end;
 end;
 
 { Function to check the Value property is in range
