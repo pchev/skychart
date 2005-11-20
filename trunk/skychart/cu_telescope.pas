@@ -112,6 +112,7 @@ end;
 Procedure TTelescope.UnloadScopeLibrary;
 var ok : boolean;
 begin
+try
 if Fscopelib<>0 then begin
    Fscopelibok:=false;
    FScopeDisconnect(ok);
@@ -119,10 +120,13 @@ if Fscopelib<>0 then begin
    Fscopelib:=0;
    CoUnInitialize;
 end;
+except
+end;
 end;
 
 Procedure TTelescope.InitScopeLibrary;
 begin
+try
 UnloadScopeLibrary;
 Fscopelib := LoadLibrary(Pchar(Fpluginpath+Fplugin));
 if Fscopelib<>0 then begin
@@ -146,6 +150,10 @@ if Fscopelib<>0 then begin
 end else begin
     Fscopelibok:=false;
     Showmessage('Error opening '+Fplugin);
+end;
+except
+ Fscopelibok:=false;
+ Showmessage('Error opening '+Fplugin);
 end;
 end;
 
