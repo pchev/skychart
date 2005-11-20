@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_display
+    ActivePage = t_nebcolor
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -18,8 +18,8 @@ object f_config_display: Tf_config_display
       object Label14: TLabel
         Left = 0
         Top = 0
-        Width = 84
-        Height = 20
+        Width = 70
+        Height = 18
         Caption = 'Display Setting'
       end
       object stardisplay: TRadioGroup
@@ -96,22 +96,22 @@ object f_config_display: Tf_config_display
         object Label75: TLabel
           Left = 24
           Top = 35
-          Width = 88
-          Height = 20
+          Width = 73
+          Height = 18
           Caption = 'Faint Stars Size'
         end
         object Label262: TLabel
           Left = 24
           Top = 103
-          Width = 46
-          Height = 20
+          Width = 42
+          Height = 18
           Caption = 'Contrast'
         end
         object Label263: TLabel
           Left = 24
           Top = 139
-          Width = 90
-          Height = 20
+          Width = 77
+          Height = 18
           Caption = 'Color Saturation'
         end
         object SizeContrastBar: TTrackBar
@@ -129,8 +129,8 @@ object f_config_display: Tf_config_display
         object Label264: TLabel
           Left = 24
           Top = 67
-          Width = 140
-          Height = 20
+          Width = 123
+          Height = 18
           Caption = 'Increment for Bright Stars'
         end
         object StarButton1: TButton
@@ -615,71 +615,71 @@ object f_config_display: Tf_config_display
       object Label51: TLabel
         Left = 0
         Top = 0
-        Width = 73
-        Height = 20
+        Width = 64
+        Height = 18
         Caption = 'Fonts Setting'
       end
       object Label121: TLabel
         Left = 16
         Top = 74
-        Width = 94
-        Height = 20
+        Width = 80
+        Height = 18
         Caption = 'Coordinates Grid'
       end
       object Label122: TLabel
         Left = 16
         Top = 40
-        Width = 37
-        Height = 20
+        Width = 30
+        Height = 18
         Caption = 'Object'
       end
       object Label123: TLabel
         Left = 16
         Top = 115
-        Width = 37
-        Height = 20
+        Width = 29
+        Height = 18
         Caption = 'Labels'
       end
       object Label124: TLabel
         Left = 16
         Top = 157
-        Width = 42
-        Height = 20
+        Width = 34
+        Height = 18
         Caption = 'Legend'
       end
       object Label125: TLabel
         Left = 16
         Top = 198
-        Width = 126
-        Height = 20
+        Width = 104
+        Height = 18
         Caption = 'Screen and Status Bar'
       end
       object Label126: TLabel
         Left = 16
         Top = 240
-        Width = 56
-        Height = 20
+        Width = 46
+        Height = 18
         Caption = 'Object list'
       end
       object Label127: TLabel
         Left = 16
         Top = 282
-        Width = 78
-        Height = 20
+        Width = 65
+        Height = 18
         Caption = 'Printer legend'
       end
       object Label128: TLabel
         Left = 192
         Top = 40
-        Width = 25
-        Height = 20
+        Width = 22
+        Height = 18
         Caption = 'Font'
       end
       object Label129: TLabel
         Left = 344
         Top = 40
-        Width = 38
-        Height = 20
+        Width = 32
+        Height = 18
         Caption = 'Modify'
       end
       object gridfont: TEdit
@@ -767,8 +767,8 @@ object f_config_display: Tf_config_display
       object Label235: TLabel
         Left = 16
         Top = 322
-        Width = 78
-        Height = 20
+        Width = 64
+        Height = 18
         Caption = 'Greek Symbol'
       end
       object symbfont: TEdit
@@ -798,8 +798,8 @@ object f_config_display: Tf_config_display
       object Label8: TLabel
         Left = 0
         Top = 0
-        Width = 72
-        Height = 20
+        Width = 63
+        Height = 18
         Caption = 'Color Setting'
       end
       object bg1: TPanel
@@ -882,64 +882,64 @@ object f_config_display: Tf_config_display
       object Label181: TLabel
         Left = 93
         Top = 26
-        Width = 22
-        Height = 20
+        Width = 19
+        Height = 18
         Caption = '-0.3'
       end
       object Label182: TLabel
         Left = 147
         Top = 26
-        Width = 22
-        Height = 20
+        Width = 19
+        Height = 18
         Caption = '-0.1'
       end
       object Label183: TLabel
         Left = 201
         Top = 26
-        Width = 17
-        Height = 20
+        Width = 15
+        Height = 18
         Caption = '0.2'
       end
       object Label184: TLabel
         Left = 254
         Top = 26
-        Width = 17
-        Height = 20
+        Width = 15
+        Height = 18
         Caption = '0.5'
       end
       object Label185: TLabel
         Left = 308
         Top = 26
-        Width = 17
-        Height = 20
+        Width = 15
+        Height = 18
         Caption = '0.8'
       end
       object Label186: TLabel
         Left = 362
         Top = 26
-        Width = 17
-        Height = 20
+        Width = 15
+        Height = 18
         Caption = '1.3'
       end
       object Label187: TLabel
         Left = 416
         Top = 26
-        Width = 7
-        Height = 20
+        Width = 6
+        Height = 18
         Caption = '>'
       end
       object Label188: TLabel
         Left = 40
         Top = 26
-        Width = 7
-        Height = 20
+        Width = 6
+        Height = 18
         Caption = '<'
       end
       object Label189: TLabel
         Left = 8
         Top = 26
-        Width = 25
-        Height = 20
+        Width = 21
+        Height = 18
         Caption = 'B-V:'
       end
       object bg2: TPanel
@@ -1022,50 +1022,50 @@ object f_config_display: Tf_config_display
         end
       end
       object Label190: TLabel
-        Left = 56
+        Left = 60
         Top = 90
-        Width = 39
-        Height = 20
+        Width = 31
+        Height = 18
         Alignment = taCenter
         Caption = 'Galaxy'
       end
       object Label191: TLabel
-        Left = 120
+        Left = 123
         Top = 90
-        Width = 39
-        Height = 20
+        Width = 33
+        Height = 18
         Alignment = taCenter
         Caption = 'Cluster'
       end
       object Label192: TLabel
-        Left = 185
+        Left = 189
         Top = 90
-        Width = 40
-        Height = 20
+        Width = 31
+        Height = 18
         Alignment = taCenter
         Caption = 'Nebula'
       end
       object Label193: TLabel
-        Left = 236
+        Left = 240
         Top = 90
-        Width = 61
-        Height = 20
+        Width = 53
+        Height = 18
         Alignment = taCenter
         Caption = 'Coord Grid'
       end
       object Label194: TLabel
-        Left = 307
+        Left = 310
         Top = 90
-        Width = 42
-        Height = 20
+        Width = 36
+        Height = 18
         Alignment = taCenter
         Caption = 'Eq Grid'
       end
       object Label195: TLabel
-        Left = 380
+        Left = 381
         Top = 90
-        Width = 27
-        Height = 20
+        Width = 24
+        Height = 18
         Alignment = taCenter
         Caption = 'Orbit'
       end
@@ -1135,34 +1135,34 @@ object f_config_display: Tf_config_display
         end
       end
       object Label197: TLabel
-        Left = 24
+        Left = 34
         Top = 154
-        Width = 112
-        Height = 20
+        Width = 92
+        Height = 18
         Alignment = taCenter
         Caption = 'Constellation Figure'
       end
       object Label198: TLabel
-        Left = 144
+        Left = 149
         Top = 154
-        Width = 58
-        Height = 20
+        Width = 47
+        Height = 18
         Alignment = taCenter
         Caption = ' Boundary'
       end
       object Label199: TLabel
-        Left = 226
+        Left = 232
         Top = 154
-        Width = 53
-        Height = 20
+        Width = 40
+        Height = 18
         Alignment = taCenter
         Caption = 'Eyepiece'
       end
       object Label196: TLabel
-        Left = 290
+        Left = 296
         Top = 154
-        Width = 64
-        Height = 20
+        Width = 51
+        Height = 18
         Alignment = taCenter
         Caption = 'Misc. Lines'
       end
@@ -1182,26 +1182,26 @@ object f_config_display: Tf_config_display
         OnClick = DefColorClick
       end
       object Label11: TLabel
-        Left = 374
+        Left = 377
         Top = 154
-        Width = 43
-        Height = 20
+        Width = 37
+        Height = 18
         Alignment = taCenter
         Caption = 'Horizon'
       end
       object Label256: TLabel
-        Left = 120
+        Left = 122
         Top = 218
-        Width = 35
-        Height = 20
+        Width = 31
+        Height = 18
         Alignment = taCenter
         Caption = 'Comet'
       end
       object Label257: TLabel
-        Left = 48
+        Left = 51
         Top = 218
-        Width = 46
-        Height = 20
+        Width = 39
+        Height = 18
         Alignment = taCenter
         Caption = 'Asteroid'
       end
@@ -1249,8 +1249,8 @@ object f_config_display: Tf_config_display
       object Label200: TLabel
         Left = 0
         Top = 0
-        Width = 97
-        Height = 20
+        Width = 83
+        Height = 18
         Caption = 'Sky Color Setting'
       end
       object skycolorbox: TRadioGroup
@@ -1387,145 +1387,514 @@ object f_config_display: Tf_config_display
     object t_nebcolor: TTabSheet
       Caption = 't_nebcolor'
       ImageIndex = 4
-      object Label201: TLabel
+      object lblDSO: TLabel
         Left = 0
         Top = 0
-        Width = 123
-        Height = 20
-        Caption = 'Nebulae Color Setting'
+        Width = 110
+        Height = 18
+        Caption = 'Deep-sky object colours'
       end
-      object NebGrayBar: TTrackBar
-        Left = 128
-        Top = 64
-        Width = 150
-        Height = 25
-        Frequency = 26
-        Max = 255
-        PageSize = 26
-        TabOrder = 0
-        OnChange = NebGrayBarChange
-      end
-      object NebBrightBar: TTrackBar
-        Left = 312
-        Top = 64
-        Width = 150
-        Height = 25
-        Frequency = 26
-        Max = 255
-        PageSize = 26
-        TabOrder = 1
-        OnChange = NebBrightBarChange
-      end
-      object Label1: TLabel
-        Left = 136
-        Top = 40
-        Width = 129
-        Height = 20
-        Caption = 'Low surface brightness'
-      end
-      object Label2: TLabel
-        Left = 320
-        Top = 40
-        Width = 132
-        Height = 20
-        Caption = 'High surface brightness'
-      end
-      object Label3: TLabel
-        Left = 40
-        Top = 144
-        Width = 39
-        Height = 20
-        Caption = 'Galaxy'
-      end
-      object Label4: TLabel
-        Left = 40
-        Top = 232
-        Width = 39
-        Height = 20
-        Caption = 'Cluster'
-      end
-      object Label5: TLabel
-        Left = 40
-        Top = 320
-        Width = 40
-        Height = 20
-        Caption = 'Nebula'
-      end
-      object NebColorPanel: TPanel
-        Left = 104
-        Top = 104
-        Width = 361
-        Height = 281
-        Color = clBlack
-        TabOrder = 2
-        object Shape29: TShape
-          Tag = 8
-          Left = 56
-          Top = 16
-          Width = 97
-          Height = 49
-          Brush.Color = clBase
-          Shape = stEllipse
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape30: TShape
-          Tag = 8
-          Left = 232
-          Top = 16
-          Width = 97
-          Height = 49
-          Brush.Color = clBase
-          Shape = stEllipse
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape31: TShape
-          Tag = 9
-          Left = 72
-          Top = 96
-          Width = 65
-          Height = 65
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape32: TShape
-          Tag = 9
-          Left = 248
-          Top = 96
-          Width = 65
-          Height = 65
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape33: TShape
-          Tag = 10
-          Left = 72
-          Top = 192
-          Width = 65
-          Height = 65
-          Brush.Color = clBase
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape34: TShape
-          Tag = 10
-          Left = 248
-          Top = 192
-          Width = 65
-          Height = 65
-          Brush.Color = clBase
-          OnMouseUp = NebShapeMouseUp
-        end
-      end
-      object DefNebColorButton: TButton
+      object lblDSOCScheme: TLabel
         Left = 16
-        Top = 64
-        Width = 75
-        Height = 25
-        Caption = 'Default'
-        ParentColor = True
+        Top = 24
+        Width = 132
+        Height = 18
+        Caption = 'Use a preset colour scheme :'
+      end
+      object gbDSOCOverrides: TGroupBox
+        Left = 16
+        Top = 80
+        Width = 465
+        Height = 193
+        Caption = ' Choose colours for object type  '
+        TabOrder = 2
+        object shpAst: TShape
+          Left = 120
+          Top = 44
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          Shape = stRoundRect
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpSN: TShape
+          Left = 360
+          Top = 44
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpRN: TShape
+          Left = 120
+          Top = 164
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpEN: TShape
+          Left = 120
+          Top = 144
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpDN: TShape
+          Left = 120
+          Top = 124
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpPNe: TShape
+          Left = 120
+          Top = 104
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGCl: TShape
+          Left = 120
+          Top = 84
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpOCl: TShape
+          Left = 120
+          Top = 64
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpNE: TShape
+          Left = 360
+          Top = 144
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGL: TShape
+          Left = 360
+          Top = 124
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpQ: TShape
+          Left = 360
+          Top = 104
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGxyCl: TShape
+          Left = 360
+          Top = 84
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGxy: TShape
+          Left = 360
+          Top = 64
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object lblAst: TLabel
+          Left = 16
+          Top = 44
+          Width = 40
+          Height = 18
+          Caption = 'Asterism'
+        end
+        object lblSN: TLabel
+          Left = 240
+          Top = 44
+          Width = 91
+          Height = 18
+          Caption = 'Supernova remnant'
+        end
+        object lblOCl: TLabel
+          Left = 16
+          Top = 64
+          Width = 58
+          Height = 18
+          Caption = 'Open cluster'
+        end
+        object lblGCl: TLabel
+          Left = 16
+          Top = 84
+          Width = 71
+          Height = 18
+          Caption = 'Globular cluster'
+        end
+        object lblPNe: TLabel
+          Left = 16
+          Top = 104
+          Width = 75
+          Height = 18
+          Caption = 'Planetary nebula'
+        end
+        object lblDN: TLabel
+          Left = 16
+          Top = 124
+          Width = 54
+          Height = 18
+          Caption = 'Dark nebula'
+        end
+        object lblEN: TLabel
+          Left = 16
+          Top = 144
+          Width = 73
+          Height = 18
+          Caption = 'Emission nebula'
+        end
+        object lblRN: TLabel
+          Left = 16
+          Top = 164
+          Width = 78
+          Height = 18
+          Caption = 'Reflection nebula'
+        end
+        object lblGxy: TLabel
+          Left = 240
+          Top = 64
+          Width = 31
+          Height = 18
+          Caption = 'Galaxy'
+        end
+        object lblGxyCl: TLabel
+          Left = 240
+          Top = 84
+          Width = 64
+          Height = 18
+          Caption = 'Galaxy cluster'
+        end
+        object lblQ: TLabel
+          Left = 240
+          Top = 104
+          Width = 32
+          Height = 18
+          Caption = 'Quasar'
+        end
+        object lblGL: TLabel
+          Left = 240
+          Top = 124
+          Width = 80
+          Height = 18
+          Caption = 'Gravitational lens'
+        end
+        object lblNE: TLabel
+          Left = 240
+          Top = 144
+          Width = 106
+          Height = 18
+          Caption = 'Non-existent/unknown'
+          WordWrap = True
+        end
+        object lblDSOType: TLabel
+          Left = 240
+          Top = 24
+          Width = 57
+          Height = 19
+          Caption = 'Object type'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblDSOColour: TLabel
+          Left = 360
+          Top = 24
+          Width = 33
+          Height = 19
+          Caption = 'Colour'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblDSOColourFill: TLabel
+          Left = 416
+          Top = 24
+          Width = 21
+          Height = 19
+          Caption = 'Fill?'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 16
+          Top = 24
+          Width = 57
+          Height = 19
+          Caption = 'Object type'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label12: TLabel
+          Left = 120
+          Top = 24
+          Width = 33
+          Height = 19
+          Caption = 'Colour'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label13: TLabel
+          Left = 176
+          Top = 24
+          Width = 21
+          Height = 19
+          Caption = 'Fill?'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object chkFillAst: TCheckBox
+          Left = 176
+          Top = 44
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 1
+          Visible = False
+          OnClick = chkFillAstClick
+        end
+        object chkFillOCl: TCheckBox
+          Left = 176
+          Top = 64
+          Width = 17
+          Height = 13
+          TabOrder = 2
+          OnClick = chkFillOClClick
+        end
+        object chkFillGCl: TCheckBox
+          Left = 176
+          Top = 84
+          Width = 17
+          Height = 13
+          TabOrder = 3
+          OnClick = chkFillGClClick
+        end
+        object chkFillPNe: TCheckBox
+          Left = 176
+          Top = 104
+          Width = 17
+          Height = 13
+          TabOrder = 4
+          OnClick = chkFillPNeClick
+        end
+        object chkFillDN: TCheckBox
+          Left = 176
+          Top = 124
+          Width = 17
+          Height = 13
+          TabOrder = 5
+          OnClick = chkFillDNClick
+        end
+        object chkFillEN: TCheckBox
+          Left = 176
+          Top = 144
+          Width = 17
+          Height = 13
+          TabOrder = 6
+          OnClick = chkFillENClick
+        end
+        object chkFillRN: TCheckBox
+          Left = 176
+          Top = 164
+          Width = 17
+          Height = 13
+          TabOrder = 7
+          OnClick = chkFillRNClick
+        end
+        object chkFillSN: TCheckBox
+          Left = 416
+          Top = 44
+          Width = 17
+          Height = 13
+          TabOrder = 8
+          OnClick = chkFillSNClick
+        end
+        object chkFillGxy: TCheckBox
+          Left = 416
+          Top = 64
+          Width = 17
+          Height = 13
+          TabOrder = 9
+          OnClick = chkFillGxyClick
+        end
+        object chkFillGxyCl: TCheckBox
+          Left = 416
+          Top = 84
+          Width = 17
+          Height = 13
+          TabOrder = 10
+          OnClick = chkFillGxyClClick
+        end
+        object chkFillQ: TCheckBox
+          Left = 416
+          Top = 104
+          Width = 17
+          Height = 13
+          TabOrder = 11
+          OnClick = chkFillQClick
+        end
+        object chkFillGL: TCheckBox
+          Left = 416
+          Top = 124
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 12
+          Visible = False
+          OnClick = chkFillGLClick
+        end
+        object chkFillNE: TCheckBox
+          Left = 416
+          Top = 144
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 0
+          Visible = False
+          OnClick = chkFillNEClick
+        end
+      end
+      object GroupBox2: TGroupBox
+        Left = 16
+        Top = 280
+        Width = 465
+        Height = 137
+        Caption = ' Adjust colour brightness '
         TabOrder = 3
-        OnClick = DefNebColorButtonClick
+        object Label1: TLabel
+          Left = 24
+          Top = 20
+          Width = 108
+          Height = 18
+          Caption = 'Low surface brightness'
+        end
+        object Label2: TLabel
+          Left = 248
+          Top = 20
+          Width = 110
+          Height = 18
+          Caption = 'High surface brightness'
+        end
+        object Label3: TLabel
+          Left = 16
+          Top = 68
+          Width = 205
+          Height = 18
+          Caption = 'Fainter                                           Brighter  '
+        end
+        object Label4: TLabel
+          Left = 240
+          Top = 68
+          Width = 211
+          Height = 18
+          Caption = 'Fainter                                             Brighter  '
+        end
+        object NebBrightBar: TTrackBar
+          Left = 232
+          Top = 40
+          Width = 217
+          Height = 25
+          Frequency = 26
+          Max = 255
+          PageSize = 26
+          TabOrder = 0
+          OnChange = NebBrightBarChange
+        end
+        object NebGrayBar: TTrackBar
+          Left = 8
+          Top = 40
+          Width = 209
+          Height = 25
+          Frequency = 26
+          Max = 255
+          PageSize = 26
+          TabOrder = 1
+          OnChange = NebGrayBarChange
+        end
+        object DefNebColorButton: TButton
+          Left = 384
+          Top = 88
+          Width = 75
+          Height = 25
+          Caption = 'Default'
+          TabOrder = 2
+          OnClick = DefNebColorButtonClick
+        end
+        object NebColorPanel: TPanel
+          Left = 112
+          Top = 88
+          Width = 233
+          Height = 41
+          TabOrder = 3
+          object Shape29: TShape
+            Left = 32
+            Top = 4
+            Width = 65
+            Height = 33
+            Brush.Color = clBase
+            Shape = stEllipse
+          end
+          object Shape30: TShape
+            Left = 136
+            Top = 4
+            Width = 65
+            Height = 33
+            Brush.Color = clBase
+            Shape = stEllipse
+          end
+        end
+      end
+      object lstDSOCScheme: TListBox
+        Left = 160
+        Top = 24
+        Width = 145
+        Height = 41
+        Items.Strings = (
+          'CdC v2 default'
+          'CdC v3 default')
+        Rows = 2
+        TabOrder = 4
+        OnClick = lstDSOCSchemeClick
       end
     end
     object t_lines: TTabSheet
@@ -1555,8 +1924,8 @@ object f_config_display: Tf_config_display
       object Label9: TLabel
         Left = 0
         Top = 0
-        Width = 72
-        Height = 20
+        Width = 61
+        Height = 18
         Caption = 'Lines Setting'
       end
       object EqGrid: TCheckBox
@@ -1590,7 +1959,7 @@ object f_config_display: Tf_config_display
         Left = 216
         Top = 172
         Width = 201
-        Height = 28
+        Height = 26
         Cursor = crIBeam
         TabOrder = 4
         OnChange = ConstlFileChange
@@ -1598,8 +1967,8 @@ object f_config_display: Tf_config_display
       object Label180: TLabel
         Left = 24
         Top = 176
-        Width = 184
-        Height = 20
+        Width = 148
+        Height = 18
         Caption = 'Constellation Figure File Name : '
       end
       object ConstlFileBtn: TBitBtn
@@ -1655,7 +2024,7 @@ object f_config_display: Tf_config_display
         Left = 216
         Top = 260
         Width = 201
-        Height = 28
+        Height = 26
         Cursor = crIBeam
         TabOrder = 8
         OnChange = ConstbFileChange
@@ -1663,8 +2032,8 @@ object f_config_display: Tf_config_display
       object Label56: TLabel
         Left = 16
         Top = 264
-        Width = 202
-        Height = 20
+        Width = 164
+        Height = 18
         Caption = 'Constellation Boundary File Name : '
       end
       object ConstbfileBtn: TBitBtn
@@ -1831,15 +2200,15 @@ object f_config_display: Tf_config_display
       object Label10: TLabel
         Left = 0
         Top = 0
-        Width = 79
-        Height = 20
+        Width = 66
+        Height = 18
         Caption = 'Labels Setting'
       end
       object Label236: TLabel
         Left = 40
         Top = 24
-        Width = 72
-        Height = 20
+        Width = 57
+        Height = 18
         Caption = 'Label Object'
       end
       object Label237: TLabel
@@ -1854,22 +2223,22 @@ object f_config_display: Tf_config_display
       object Label240: TLabel
         Left = 344
         Top = 24
-        Width = 31
-        Height = 20
+        Width = 24
+        Height = 18
         Caption = 'Label'
       end
       object Label252: TLabel
         Left = 344
         Top = 44
-        Width = 30
-        Height = 20
+        Width = 26
+        Height = 18
         Caption = 'Color'
       end
       object Label255: TLabel
         Left = 384
         Top = 44
-        Width = 24
-        Height = 20
+        Width = 19
+        Height = 18
         Caption = 'Size'
       end
       object labelsizeStar: TSpinEdit
@@ -1877,7 +2246,7 @@ object f_config_display: Tf_config_display
         Left = 384
         Top = 66
         Width = 41
-        Height = 28
+        Height = 26
         Max = 48
         Min = 6
         TabOrder = 6
@@ -1889,7 +2258,7 @@ object f_config_display: Tf_config_display
         Left = 264
         Top = 66
         Width = 41
-        Height = 28
+        Height = 26
         Max = 10
         TabOrder = 7
         OnChanged = labelmagChanged
@@ -1909,7 +2278,7 @@ object f_config_display: Tf_config_display
         Left = 384
         Top = 94
         Width = 41
-        Height = 28
+        Height = 26
         Max = 48
         Min = 6
         TabOrder = 9
@@ -1921,7 +2290,7 @@ object f_config_display: Tf_config_display
         Left = 264
         Top = 94
         Width = 41
-        Height = 28
+        Height = 26
         Max = 10
         TabOrder = 10
         OnChanged = labelmagChanged
@@ -1941,7 +2310,7 @@ object f_config_display: Tf_config_display
         Left = 384
         Top = 123
         Width = 41
-        Height = 28
+        Height = 26
         Max = 48
         Min = 6
         TabOrder = 12
@@ -1953,7 +2322,7 @@ object f_config_display: Tf_config_display
         Left = 264
         Top = 123
         Width = 41
-        Height = 28
+        Height = 26
         Max = 10
         TabOrder = 13
         OnChanged = labelmagChanged
@@ -1973,7 +2342,7 @@ object f_config_display: Tf_config_display
         Left = 384
         Top = 151
         Width = 41
-        Height = 28
+        Height = 26
         Max = 48
         Min = 6
         TabOrder = 15
@@ -1985,7 +2354,7 @@ object f_config_display: Tf_config_display
         Left = 264
         Top = 151
         Width = 41
-        Height = 28
+        Height = 26
         Max = 10
         TabOrder = 16
         OnChanged = labelmagChanged
@@ -2005,7 +2374,7 @@ object f_config_display: Tf_config_display
         Left = 384
         Top = 180
         Width = 41
-        Height = 28
+        Height = 26
         Max = 48
         Min = 6
         TabOrder = 18
@@ -2017,7 +2386,7 @@ object f_config_display: Tf_config_display
         Left = 264
         Top = 180
         Width = 41
-        Height = 28
+        Height = 26
         Max = 10
         TabOrder = 19
         OnChanged = labelmagChanged
@@ -2037,7 +2406,7 @@ object f_config_display: Tf_config_display
         Left = 384
         Top = 237
         Width = 41
-        Height = 28
+        Height = 26
         Max = 48
         Min = 6
         TabOrder = 21
@@ -2069,7 +2438,7 @@ object f_config_display: Tf_config_display
         Left = 384
         Top = 208
         Width = 41
-        Height = 28
+        Height = 26
         Max = 48
         Min = 6
         TabOrder = 24
@@ -2129,7 +2498,7 @@ object f_config_display: Tf_config_display
         Left = 384
         Top = 266
         Width = 41
-        Height = 28
+        Height = 26
         Max = 48
         Min = 6
         TabOrder = 29
@@ -2252,8 +2621,8 @@ object f_config_display: Tf_config_display
       object Label307: TLabel
         Left = 80
         Top = 8
-        Width = 175
-        Height = 20
+        Width = 136
+        Height = 18
         Caption = 'Finder circle (Eyepiece/Telrad)'
       end
       object Circlegrid: TStringGrid
@@ -2387,8 +2756,8 @@ object f_config_display: Tf_config_display
       object Label308: TLabel
         Left = 80
         Top = 8
-        Width = 186
-        Height = 20
+        Width = 153
+        Height = 18
         Caption = 'Finder rectangle (CCD / Camera)'
       end
       object RectangleGrid: TStringGrid
