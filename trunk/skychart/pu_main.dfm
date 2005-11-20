@@ -14,7 +14,6 @@ object f_main: Tf_main
   KeyPreview = True
   OldCreateOrder = False
   Position = poDefaultPosOnly
-  ScreenSnap = True
   WindowMenu = Window1
   OnClose = FormClose
   OnCreate = FormCreate
@@ -3604,11 +3603,16 @@ object f_main: Tf_main
             Hint = 'Faint Stars Size '
             Max = 50
             Min = 1
+            Orientation = trHorizontal
             PageSize = 5
+            Frequency = 1
             Position = 1
+            SelEnd = 0
+            SelStart = 0
             TabOrder = 0
             TabStop = False
             ThumbLength = 8
+            TickMarks = tmBottomRight
             TickStyle = tsNone
             OnChange = StarSizeChange
           end
@@ -3621,11 +3625,16 @@ object f_main: Tf_main
             Hint = 'Increment for Bright Stars'
             Max = 100
             Min = 10
+            Orientation = trHorizontal
             PageSize = 10
+            Frequency = 1
             Position = 10
+            SelEnd = 0
+            SelStart = 0
             TabOrder = 1
             TabStop = False
             ThumbLength = 8
+            TickMarks = tmBottomRight
             TickStyle = tsNone
             OnChange = StarSizeChange
           end
@@ -3638,11 +3647,16 @@ object f_main: Tf_main
             Hint = 'Contrast'
             Max = 1000
             Min = 100
+            Orientation = trHorizontal
             PageSize = 100
+            Frequency = 1
             Position = 100
+            SelEnd = 0
+            SelStart = 0
             TabOrder = 2
             TabStop = False
             ThumbLength = 8
+            TickMarks = tmBottomRight
             TickStyle = tsNone
             OnChange = StarSizeChange
           end
@@ -3654,11 +3668,16 @@ object f_main: Tf_main
             Height = 9
             Hint = 'Color saturation'
             Max = 255
+            Orientation = trHorizontal
             PageSize = 25
+            Frequency = 1
             Position = 5
+            SelEnd = 0
+            SelStart = 0
             TabOrder = 3
             TabStop = False
             ThumbLength = 8
+            TickMarks = tmBottomRight
             TickStyle = tsNone
             OnChange = StarSizeChange
           end
@@ -4092,6 +4111,9 @@ object f_main: Tf_main
       GroupIndex = 2
       object elescopeConnect1: TMenuItem
         Action = TelescopeConnect
+      end
+      object ControlPanel1: TMenuItem
+        Action = TelescopePanel
       end
       object elescopeSlew1: TMenuItem
         Action = TelescopeSlew
@@ -4708,6 +4730,12 @@ object f_main: Tf_main
       Category = 'Window'
       Caption = 'Maximize'
       OnExecute = MaximizeExecute
+    end
+    object TelescopePanel: TAction
+      Category = 'Telescope'
+      Caption = 'Control Panel'
+      Hint = 'Control Panel'
+      OnExecute = TelescopePanelExecute
     end
   end
   object ImageList1: TImageList

@@ -81,6 +81,40 @@ const cdcversion = 'Version 3 alpha 0.0.9';
       middle = $003030c0;
       dark   = $00000040;
       black  = $00000000;
+
+      //  deep-sky objects colour defaults - assume outline only and black (for the moment...)
+//  ToDo : populate colour fills with the CdC defaults
+
+      dfDSOColorFillAst : boolean = false;
+      dfDSOColorFillOCl  : boolean = false;
+      dfDSOColorFillGCl  : boolean = false;
+      dfDSOColorFillPNe  : boolean = false;
+      dfDSOColorFillDN  : boolean = false;
+      dfDSOColorFillEN  : boolean = false;
+      dfDSOColorFillRN  : boolean = false;
+      dfDSOColorFillSN  : boolean = false;
+      dfDSOColorFillGxy  : boolean = false;
+      dfDSOColorFillGxyCl  : boolean = false;
+      dfDSOColorFillQ  : boolean = false;
+      dfDSOColorFillGL  : boolean = false;
+      dfDSOColorFillNE  : boolean = false;
+
+      dfDSOColorAst : Tcolor = 0;
+      dfDSOColorOCl = 1;
+      dfDSOColorGCl = 2;
+      dfDSOColorPNe = 3;
+      dfDSOColorDN = 4;
+      dfDSOColorEN = 5;
+      dfDSOColorRN = 6;
+      dfDSOColorSN = 7;
+      dfDSOColorGxy = 8;
+      dfDSOColorGxyCl = 9;
+      dfDSOColorQ =  10;
+      dfDSOColorGL = 11;
+      dfDSOColorNE = 12;
+
+//  End of deep-sky objects colour
+
       crlf = chr(13)+chr(10);
       greek : array[1..2,1..24]of string=(('Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega'),
               ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
@@ -337,9 +371,16 @@ type
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
                 ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,ShowHorizonDepression : boolean;
-                CurTime,DT_UT_val,GRSlongitude: double;
+                CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY: double;
+                //  compass rose
+                ShowCRose : Boolean;
+                CRoseType : Integer;
+                //  end of compass rose
                 PMon,DrawPMon,ApparentPos : boolean; // use proper motion
-                LabelOrientation: integer;
+                LabelOrientation, ManualTelescopeType : integer;
+                IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
+                IndiAutostart,ShowCircle,IndiTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
+                BackgroundImage: string;
                 // working variable
                 HorizonMax,rap2000,dep2000,RefractionOffset : Double;
                 WindowRatio,BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta,x2: Double;
@@ -365,10 +406,7 @@ type
                 circleok : array [1..10] of boolean; circlelbl : array [1..10] of string;
                 rectangle : array [1..10,1..4] of single; // width, height, rotation, offset
                 rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
-                CircleLst : array[0..MaxCircle,1..2] of double; 
-                IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
-                IndiAutostart,ShowCircle,IndiTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
-                BackgroundImage: string;
+                CircleLst : array[0..MaxCircle,1..2] of double;
                 end;
      conf_plot = record
                 color : Starcolarray;
@@ -385,6 +423,37 @@ type
                 LabelSize : array[1..numlabtype] of integer;
                 outradius,contrast,saturation:integer;
                 partsize,magsize:single;
+
+//  deep-sky objects colour defaults filss are decalers as boolean - either fill or not
+                DSOColorFillAst: boolean;
+                DSOColorFillOCl: boolean;
+                DSOColorFillGCl: boolean;
+                DSOColorFillPNe: boolean;
+                DSOColorFillDN: boolean;
+                DSOColorFillEN: boolean;
+                DSOColorFillRN: boolean;
+                DSOColorFillSN: boolean;
+                DSOColorFillGxy: boolean;
+                DSOColorFillGxyCl: boolean;
+                DSOColorFillQ: boolean;
+                DSOColorFillGL: boolean;
+                DSOColorFillNE: boolean;
+
+                DSOColorAst: Tcolor;
+                DSOColorOCl: Tcolor;
+                DSOColorGCl: Tcolor;
+                DSOColorPNe: Tcolor;
+                DSOColorDN: Tcolor;
+                DSOColorEN: Tcolor;
+                DSOColorRN: Tcolor;
+                DSOColorSN: Tcolor;
+                DSOColorGxy: Tcolor;
+                DSOColorGxyCl: Tcolor;
+                DSOColorQ: Tcolor;
+                DSOColorGL: Tcolor;
+                DSOColorNE: Tcolor;
+//  End of deep-sky objects colour
+
                 end;
      conf_chart = record
                 onprinter : boolean;
@@ -398,7 +467,7 @@ type
                 savetop,saveleft,saveheight,savewidth: integer;
                 PrintLandscape, ShowChartInfo, SyncChart :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
-                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName : string;
+                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd : string;
                 ImageLuminosity, ImageContrast : double;
                 end;
      conf_dss  = record
@@ -454,10 +523,12 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
      tracefile:string =''; // to stdout
      LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
      OpenFileCMD:string = 'kfmclient exec';   // default KDE
+     dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
 {$endif}
 {$ifdef mswindows}
      tracefile:string = 'cdc_trace.txt';
      xplanet_dir: string = 'C:\Program Files\xplanet';
+     dcd_cmd: string = 'cmd /c "C: && cd C:\Program Files\dcd && dcd.py"';
      use_xplanet: boolean = false;
 {$endif}
 

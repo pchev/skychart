@@ -10,7 +10,7 @@ object f_config_system: Tf_config_system
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_system
+    ActivePage = t_telescope
     Align = alClient
     TabOrder = 0
     object t_system: TTabSheet
@@ -448,6 +448,13 @@ object f_config_system: Tf_config_system
           Height = 13
           Caption = 'Device Port '
         end
+        object Label2: TLabel
+          Left = 16
+          Top = 224
+          Width = 115
+          Height = 13
+          Caption = 'Control Panel command '
+        end
         object IndiServerHost: TEdit
           Left = 120
           Top = 24
@@ -522,6 +529,14 @@ object f_config_system: Tf_config_system
             'COM7'
             'COM8')
         end
+        object PanelCmd: TEdit
+          Left = 152
+          Top = 220
+          Width = 257
+          Height = 21
+          TabOrder = 7
+          OnChange = PanelCmdChange
+        end
       end
       object TelescopeSelect: TRadioGroup
         Left = 8
@@ -529,10 +544,10 @@ object f_config_system: Tf_config_system
         Width = 450
         Height = 65
         Caption = 'TelescopeSelect'
-        Columns = 2
-        ItemIndex = 0
+        Columns = 3
         Items.Strings = (
           'INDI'
+          'Manual'
           'CDC plugin')
         TabOrder = 1
         OnClick = TelescopeSelectClick
@@ -544,6 +559,7 @@ object f_config_system: Tf_config_system
         Height = 105
         Caption = 'CDC plugin setting'
         TabOrder = 2
+        Visible = False
         object Label155: TLabel
           Left = 24
           Top = 46
@@ -560,6 +576,185 @@ object f_config_system: Tf_config_system
           ItemHeight = 13
           TabOrder = 0
           OnChange = telescopepluginlistChange
+        end
+      end
+      object TelescopeManual: TGroupBox
+        Left = 8
+        Top = 112
+        Width = 449
+        Height = 297
+        Caption = 'Manual Mount'
+        TabOrder = 3
+        Visible = False
+        object Label7: TLabel
+          Left = 24
+          Top = 24
+          Width = 361
+          Height = 41
+          AutoSize = False
+          Caption = 
+            'Set how the mount move on each axis when you turn the driving kn' +
+            'ob.'#13#10'Then the Telescope button show you the turns you must do to' +
+            ' go from one object to another.'
+          WordWrap = True
+        end
+        object EquatorialMount: TPanel
+          Left = 24
+          Top = 112
+          Width = 361
+          Height = 161
+          TabOrder = 0
+          object Label3: TLabel
+            Left = 16
+            Top = 16
+            Width = 77
+            Height = 13
+            Caption = 'Right Ascension'
+          end
+          object Label4: TLabel
+            Left = 16
+            Top = 93
+            Width = 53
+            Height = 13
+            Caption = 'Declination'
+          end
+          object Label5: TLabel
+            Left = 240
+            Top = 16
+            Width = 55
+            Height = 13
+            Caption = 'turns / hour'
+          end
+          object Label6: TLabel
+            Left = 240
+            Top = 93
+            Width = 67
+            Height = 13
+            Caption = 'turns / degree'
+          end
+          object TurnsRa: TFloatEdit
+            Left = 128
+            Top = 11
+            Width = 81
+            Height = 22
+            ParentShowHint = False
+            ShowHint = False
+            TabOrder = 0
+            OnChange = TurnsRaChange
+          end
+          object TurnsDec: TFloatEdit
+            Left = 128
+            Top = 88
+            Width = 81
+            Height = 22
+            ParentShowHint = False
+            ShowHint = False
+            TabOrder = 1
+            OnChange = TurnsDecChange
+          end
+          object RevertTurnsRa: TCheckBox
+            Left = 128
+            Top = 40
+            Width = 177
+            Height = 17
+            Caption = 'Revert RA knob'
+            TabOrder = 2
+            OnClick = TurnsRaChange
+          end
+          object RevertTurnDec: TCheckBox
+            Left = 128
+            Top = 120
+            Width = 193
+            Height = 17
+            Caption = 'Revert DEC knob'
+            TabOrder = 3
+            OnClick = TurnsDecChange
+          end
+        end
+        object ManualMountType: TRadioGroup
+          Left = 24
+          Top = 64
+          Width = 361
+          Height = 41
+          Columns = 2
+          Items.Strings = (
+            'Equatorial'
+            'Alt / Az')
+          TabOrder = 1
+          OnClick = ManualMountTypeClick
+        end
+        object AltAzMount: TPanel
+          Left = 24
+          Top = 112
+          Width = 361
+          Height = 161
+          TabOrder = 2
+          object Label8: TLabel
+            Left = 16
+            Top = 16
+            Width = 37
+            Height = 13
+            Caption = 'Azimuth'
+          end
+          object Label9: TLabel
+            Left = 16
+            Top = 93
+            Width = 35
+            Height = 13
+            Caption = 'Altitude'
+          end
+          object Label10: TLabel
+            Left = 240
+            Top = 16
+            Width = 67
+            Height = 13
+            Caption = 'turns / degree'
+          end
+          object Label11: TLabel
+            Left = 240
+            Top = 93
+            Width = 67
+            Height = 13
+            Caption = 'turns / degree'
+          end
+          object TurnsAz: TFloatEdit
+            Left = 128
+            Top = 11
+            Width = 81
+            Height = 22
+            ParentShowHint = False
+            ShowHint = False
+            TabOrder = 0
+            OnChange = TurnsAzChange
+          end
+          object TurnsAlt: TFloatEdit
+            Left = 128
+            Top = 88
+            Width = 81
+            Height = 22
+            ParentShowHint = False
+            ShowHint = False
+            TabOrder = 1
+            OnChange = TurnsAltChange
+          end
+          object RevertTurnsAz: TCheckBox
+            Left = 128
+            Top = 40
+            Width = 177
+            Height = 17
+            Caption = 'Revert Az knob'
+            TabOrder = 2
+            OnClick = TurnsAzChange
+          end
+          object RevertTurnsAlt: TCheckBox
+            Left = 128
+            Top = 120
+            Width = 193
+            Height = 17
+            Caption = 'Revert Alt knob'
+            TabOrder = 3
+            OnClick = TurnsAltChange
+          end
         end
       end
     end

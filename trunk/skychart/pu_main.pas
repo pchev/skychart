@@ -375,6 +375,8 @@ type
     Maximize1: TMenuItem;
     Maximize: TAction;
     PanelStar: TPanel;
+    TelescopePanel: TAction;
+    ControlPanel1: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -483,6 +485,7 @@ type
       Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure MaximizeExecute(Sender: TObject);
+    procedure TelescopePanelExecute(Sender: TObject);
   private
     { Private declarations }
     cryptedpwd,basecaption :string;
@@ -574,6 +577,7 @@ implementation
 
 uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
+     pu_manualtelescope,
      passql, pasmysql, ShlObj ;
 
 // include all cross-platform common code.
@@ -701,5 +705,6 @@ end;
 
 
 // end of windows vcl specific code:
+
 
 end.

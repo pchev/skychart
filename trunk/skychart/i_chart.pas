@@ -591,7 +591,7 @@ else identlabel.Visible:=false;
 end;
 
 function Tf_chart.IdentXY(X, Y: Integer):boolean;
-var ra,dec,a,h,l,b,le,be,dx,lastra,lastdec,lasttrra,lasttrde,dist:double;
+var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,dist:double;
     pa,lasttype,lastobj: integer;
     txt,lastname,lasttrname: string;
     showdist:boolean;
@@ -622,18 +622,48 @@ if showdist then begin
       txt:=DEptoStr(dist)+' PA:'+inttostr(pa)+ldeg;
       dx:=rmod((rad2deg*(ra-lastra)/15)+24,24);
       if dx>12 then dx:=dx-24;
-      txt:=txt+crlf+artostr(dx)+' '+detostr(rad2deg*(dec-lastdec));
+      dy:=rad2deg*(dec-lastdec);
+      txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
       if assigned(Fshowcoord) then Fshowcoord(txt);
       txt:=stringreplace(sc.catalog.cfgshr.llabel[104]+' "'+lastname+'" '+sc.catalog.cfgshr.llabel[105]+' "'+sc.cfgsc.FindName+'"'+tab+sc.catalog.cfgshr.llabel[79]+': '+txt,crlf,tab+sc.catalog.cfgshr.llabel[106]+':',[]);
       if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
-      sc.cfgsc.FindNote:=sc.cfgsc.FindNote+txt+tab;
+      if sc.cfgsc.ManualTelescope then begin
+        case sc.cfgsc.ManualTelescopeType of
+         0 : begin
+             txt:=txt+tab+'RA turns:';
+             txt:=txt+blank+formatfloat(f2,abs(dx*sc.cfgsc.TelescopeTurnsX))+blank;
+             if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=txt+'CW'
+                else txt:=txt+'CCW';
+             txt:=txt+tab+'DEC turns:';
+             txt:=txt+blank+formatfloat(f2,abs(dy*sc.cfgsc.TelescopeTurnsY))+blank;
+             if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=txt+'CW'
+                else txt:=txt+'CCW';
+             end;
+         1 : begin
+             Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
+             Eq2Hz(sc.cfgsc.CurSt-lastra,lastdec,a1,h1,sc.cfgsc) ;
+             dx:=rmod((rad2deg*(a-a1))+360,360);
+             if dx>180 then dx:=dx-360;
+             dy:=rad2deg*(h-h1);
+             txt:=txt+tab+'Az turns:';
+             txt:=txt+blank+formatfloat(f2,abs(dx*sc.cfgsc.TelescopeTurnsX))+blank;
+             if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=txt+'CW'
+                else txt:=txt+'CCW';
+             txt:=txt+tab+'Alt turns:';
+             txt:=txt+blank+formatfloat(f2,abs(dy*sc.cfgsc.TelescopeTurnsY))+blank;
+             if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=txt+'CW'
+                else txt:=txt+'CCW';
+             end;
+          end;
+      end;
+      sc.cfgsc.FindNote:=txt+tab+sc.cfgsc.FindNote;
       skipmove:=10;
    end;
 end;
 if sc.cfgsc.TrackOn then begin
-  sc.cfgsc.FindRA:=lastra;
-  sc.cfgsc.FindDEC:=lastdec;
-  sc.cfgsc.FindName:=lastname;
+//  sc.cfgsc.FindRA:=lastra;
+//  sc.cfgsc.FindDEC:=lastdec;
+//  sc.cfgsc.FindName:=lastname;
   sc.cfgsc.TrackRA:=lasttrra;
   sc.cfgsc.TrackDEC:=lasttrde;
   sc.cfgsc.TrackType:=lasttype;
@@ -1065,6 +1095,7 @@ end;
 txt:=txt+htms_pre;
 // other notes
 buf:=sc.cfgsc.FindNote;
+txt:=txt+html_pre;
 repeat
   i:=pos(tab,buf);
   if i=0 then i:=length(buf)+1;
@@ -1077,6 +1108,8 @@ repeat
   end;
   txt:=txt+buf2+html_br;
 until buf='';
+txt:=txt+htms_pre;
+writetrace(txt);
 result:=txt+htms_f+html_br+htms_h;
 end;
 
@@ -1962,11 +1995,14 @@ procedure Tf_chart.Connect1Click(Sender: TObject);
 
 begin
 {$ifdef mswindows}
-if not sc.cfgsc.IndiTelescope then begin
+if sc.cfgsc.PluginTelescope then begin
    ConnectPlugin(Sender);
-end else
+end;
 {$endif}
-begin
+if sc.cfgsc.ManualTelescope then begin
+
+end;
+if sc.cfgsc.IndiTelescope then begin
 if Connect1.checked then begin
    indi1.terminate;
    sc.cfgsc.ScopeMark:=false;
@@ -2011,7 +2047,7 @@ begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+if not indi1.EquatorialOfDay then precession(sc.cfgsc.JDChart,jd2000,ra,dec);
 indi1.RA:=formatfloat(f6,ra*rad2deg/15);
 indi1.Dec:=formatfloat(f6,dec*rad2deg);
 Indi1.Slew;
@@ -2021,7 +2057,6 @@ else if assigned(Fshowinfo) then Fshowinfo('Telescope not connected');
 end;
 
 procedure Tf_chart.AbortSlew1Click(Sender: TObject);
-
 begin
 if Connect1.checked then begin
 {$ifdef mswindows}
@@ -2051,7 +2086,7 @@ begin
   ra:=sc.cfgsc.FindRA;
   dec:=sc.cfgsc.FindDec;
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-  precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+  if not indi1.EquatorialOfDay then precession(sc.cfgsc.JDChart,jd2000,ra,dec);
   indi1.RA:=formatfloat(f6,ra*rad2deg/15);
   indi1.Dec:=formatfloat(f6,dec*rad2deg);
   Indi1.Sync;
@@ -2064,7 +2099,7 @@ procedure Tf_chart.TelescopeCoordChange(Sender: TObject);
 var ra,dec:double;
     i:integer;
 begin
-if (indi1.RA='0')and(indi1.Dec='0') then exit;
+//if (indi1.RA='0')and(indi1.Dec='0') then exit;
 try
 val(indi1.RA,ra,i);
 if i<>0 then exit;
@@ -2072,7 +2107,7 @@ val(indi1.Dec,Dec,i);
 if i<>0 then exit;
 ra:=ra*15*deg2rad;
 dec:=dec*deg2rad;
-precession(jd2000,sc.cfgsc.JDChart,ra,dec);
+if not indi1.EquatorialOfDay then precession(jd2000,sc.cfgsc.JDChart,ra,dec);
 if sc.cfgsc.ApparentPos then apparent_equatorial(ra,dec,sc.cfgsc);
 identlabel.Visible:=false;
 sc.TelescopeMove(ra,dec);
@@ -2097,7 +2132,6 @@ if assigned(Fshowinfo) then Fshowinfo('Telescope: '+msg);
 end;
 
 procedure Tf_chart.NewFinderCircle1Click(Sender: TObject);
-
 begin
 if MovingCircle or (sc.cfgsc.NumCircle>=MaxCircle) then exit;
 mouse.CursorPos:=point(xcursor+ClientOrigin.x,ycursor+ClientOrigin.y);
@@ -2108,14 +2142,12 @@ end;
 
 
 procedure Tf_chart.RemoveLastCircle1Click(Sender: TObject);
-
 begin
 if sc.cfgsc.NumCircle>0 then dec(sc.cfgsc.NumCircle);
 Refresh;
 end;
 
 procedure Tf_chart.RemoveAllCircles1Click(Sender: TObject);
-
 begin
 sc.cfgsc.NumCircle:=0;
 Refresh;

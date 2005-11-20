@@ -260,6 +260,11 @@ c2.IndiDriver:=c1.IndiDriver;
 c2.IndiPort:=c1.IndiPort;
 c2.IndiDevice:=c1.IndiDevice;
 c2.IndiTelescope:=c1.IndiTelescope;
+c2.PluginTelescope:=c1.PluginTelescope;
+c2.ManualTelescope:=c1.ManualTelescope;
+c2.ManualTelescopeType:=c1.ManualTelescopeType;
+c2.TelescopeTurnsX:=c1.TelescopeTurnsX;
+c2.TelescopeTurnsY:=c1.TelescopeTurnsY;
 c2.ScopePlugin:=c1.ScopePlugin;
 //c2. := c1. ;
 end;
@@ -622,8 +627,22 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
 end;
 
 procedure Tf_main.TelescopeConnectExecute(Sender: TObject);
+var P : Tpoint;
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do Connect1Click(Sender);
+P:=point(0,0);
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   Connect1Click(Sender);
+   if sc.cfgsc.ManualTelescope then begin
+     if f_manualtelescope.visible then
+       f_manualtelescope.hide
+     else begin
+       formpos(f_manualtelescope,P.x,P.y);
+       f_manualtelescope.SetTurn(sc.cfgsc.FindNote);
+       f_manualtelescope.Show;
+       f_main.Setfocus;
+     end;
+   end;
+end;
 end;
 
 procedure Tf_main.TelescopeSlewExecute(Sender: TObject);
@@ -634,6 +653,11 @@ end;
 procedure Tf_main.TelescopeSyncExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do Sync1Click(Sender);
+end;
+
+procedure Tf_main.TelescopePanelExecute(Sender: TObject);
+begin
+execnowait(cfgm.IndiPanelCmd);
 end;
 
 procedure Tf_main.ListObjExecute(Sender: TObject);
@@ -1054,7 +1078,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_ch
   if sc.cfgsc.TrackOn then begin
      sc.cfgsc.TrackOn:=false;
      Refresh;
-  end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
+  end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6)
   then begin
      sc.cfgsc.TrackOn:=true;
      Refresh;
@@ -1279,12 +1303,13 @@ begin
     ConnectDB;
     Fits.min_sigma:=cfgm.ImageLuminosity;
     Fits.max_sigma:=cfgm.ImageContrast;
+    TelescopePanel.visible:=def_cfgsc.IndiTelescope;
     {$ifdef mswindows}
     if (telescope.scopelibok)and(def_cfgsc.IndiTelescope) then begin
        telescope.ScopeDisconnect;
        telescope.UnloadScopeLibrary;
     end;
-    if (telescope.scopelibok)and(not def_cfgsc.IndiTelescope)and(def_cfgsc.ScopePlugin<>telescope.plugin) then begin
+    if (telescope.scopelibok)and(def_cfgsc.PluginTelescope)and(def_cfgsc.ScopePlugin<>telescope.plugin) then begin
        telescope.ScopeDisconnect;
        telescope.UnloadScopeLibrary;
     end;
@@ -1418,6 +1443,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_ch
        ToolButtonTrack.Hint:='Lock on '+sc.cfgsc.Trackname
      else
        ToolButtonTrack.Hint:='No object to lock on';
+     if f_manualtelescope.visible then  f_manualtelescope.SetTurn(sc.cfgsc.FindNote);
 end;
 end;
 
@@ -1464,6 +1490,7 @@ cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
 cfgm.ServerIPaddr:='127.0.0.1';
 cfgm.ServerIPport:='3292'; // x'CDC' :o)
+cfgm.IndiPanelCmd:=dcd_cmd;
 cfgm.keepalive:=false;
 cfgm.AutostartServer:=true;
 cfgm.dbhost:='localhost';
@@ -1510,6 +1537,19 @@ def_cfgplot.bgColor:=dfColor[0];
 def_cfgplot.backgroundcolor:=def_cfgplot.color[0];
 def_cfgplot.Nebgray:=55;
 def_cfgplot.NebBright:=180;
+def_cfgplot.DSOColorAst:=8454143;
+def_cfgplot.DSOColorOCl:=8454143;
+def_cfgplot.DSOColorGCl:=16777088;
+def_cfgplot.DSOColorPNe:=8453888;
+def_cfgplot.DSOColorDN:=12632256;
+def_cfgplot.DSOColorEN:=255;
+def_cfgplot.DSOColorRN:=16744448;
+def_cfgplot.DSOColorSN:=0;
+def_cfgplot.DSOColorGxy:=255;
+def_cfgplot.DSOColorGxyCL:=255;
+def_cfgplot.DSOColorQ:=8421631;
+def_cfgplot.DSOColorGL:=16711808;
+def_cfgplot.DSOColorNE:=16777215;
 def_cfgplot.stardyn:=65;
 def_cfgplot.starsize:=13;
 def_cfgplot.starplot:=2;
@@ -1643,6 +1683,17 @@ def_cfgsc.IndiDriver:='lx200generic';
 def_cfgsc.IndiPort:='/dev/ttyS0';
 def_cfgsc.IndiDevice:='LX200 Generic';
 def_cfgsc.IndiTelescope:=false;
+def_cfgsc.PluginTelescope:=false;
+def_cfgsc.ManualTelescope:=false;
+def_cfgsc.ManualTelescopeType:=0;
+{$ifdef linux}
+   def_cfgsc.ManualTelescope:=true;
+{$endif}
+{$ifdef linux}
+   def_cfgsc.PluginTelescope:=true;
+{$endif}
+def_cfgsc.TelescopeTurnsX:=6;    // Vixen GP
+def_cfgsc.TelescopeTurnsY:=0.4;
 def_cfgsc.ScopePlugin:='Ascom.tid';
 catalog.cfgshr.ListStar:=false;
 catalog.cfgshr.ListNeb:=true;
@@ -2063,6 +2114,7 @@ cfgm.PlanetDir:=ReadString(section,'PlanetDir',cfgm.PlanetDir);
 cfgm.horizonfile:=ReadString(section,'horizonfile',cfgm.horizonfile);
 cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
+cfgm.IndiPanelCmd:=ReadString(section,'IndiPanelCmd',cfgm.IndiPanelCmd);
 cfgm.keepalive:=ReadBool(section,'keepalive',cfgm.keepalive);
 cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
 DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
@@ -2091,6 +2143,12 @@ def_cfgsc.IndiDriver:=ReadString(section,'IndiDriver',def_cfgsc.IndiDriver);
 def_cfgsc.IndiPort:=ReadString(section,'IndiPort',def_cfgsc.IndiPort);
 def_cfgsc.IndiDevice:=ReadString(section,'IndiDevice',def_cfgsc.IndiDevice);
 def_cfgsc.IndiTelescope:=ReadBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
+def_cfgsc.PluginTelescope:=ReadBool(section,'PluginTelescope',def_cfgsc.PluginTelescope);
+def_cfgsc.ManualTelescope:=ReadBool(section,'ManualTelescope',def_cfgsc.ManualTelescope);
+def_cfgsc.ManualTelescopeType:=ReadInteger(section,'ManualTelescopeType',def_cfgsc.ManualTelescopeType);
+def_cfgsc.TelescopeTurnsX:=ReadFloat(section,'TelescopeTurnsX',def_cfgsc.TelescopeTurnsX);
+def_cfgsc.TelescopeTurnsY:=ReadFloat(section,'TelescopeTurnsY',def_cfgsc.TelescopeTurnsY);
+TelescopePanel.visible:=def_cfgsc.IndiTelescope;
 def_cfgsc.ScopePlugin:=ReadString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
 toolbar1.visible:=ReadBool(section,'ViewMainBar',true);
 PanelLeft.visible:=ReadBool(section,'ViewLeftBar',true);
@@ -2431,6 +2489,7 @@ WriteString(section,'PlanetDir',cfgm.PlanetDir);
 WriteString(section,'horizonfile',cfgm.horizonfile);
 WriteString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 WriteString(section,'ServerIPport',cfgm.ServerIPport);
+WriteString(section,'IndiPanelCmd',cfgm.IndiPanelCmd);
 WriteBool(section,'keepalive',cfgm.keepalive);
 WriteBool(section,'AutostartServer',cfgm.AutostartServer);
 WriteInteger(section,'dbtype',ord(DBtype));
@@ -2452,6 +2511,11 @@ WriteString(section,'IndiDriver',def_cfgsc.IndiDriver);
 WriteString(section,'IndiPort',def_cfgsc.IndiPort);
 WriteString(section,'IndiDevice',def_cfgsc.IndiDevice);
 WriteBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
+WriteBool(section,'PluginTelescope',def_cfgsc.PluginTelescope);
+WriteBool(section,'ManualTelescope',def_cfgsc.ManualTelescope);
+WriteInteger(section,'ManualTelescopeType',def_cfgsc.ManualTelescopeType);
+WriteFloat(section,'TelescopeTurnsX',def_cfgsc.TelescopeTurnsX);
+WriteFloat(section,'TelescopeTurnsY',def_cfgsc.TelescopeTurnsY);
 WriteString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
 WriteBool(section,'ViewMainBar',toolbar1.visible);
 WriteBool(section,'ViewLeftBar',PanelLeft.visible);

@@ -90,6 +90,29 @@ type
     Label1: TLabel;
     dbnamesqlite: TEdit;
     DBtypeGroup: TRadioGroup;
+    Label2: TLabel;
+    PanelCmd: TEdit;
+    TelescopeManual: TGroupBox;
+    Label7: TLabel;
+    EquatorialMount: TPanel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    TurnsRa: TFloatEdit;
+    TurnsDec: TFloatEdit;
+    RevertTurnsRa: TCheckBox;
+    RevertTurnDec: TCheckBox;
+    ManualMountType: TRadioGroup;
+    AltAzMount: TPanel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    TurnsAz: TFloatEdit;
+    TurnsAlt: TFloatEdit;
+    RevertTurnsAz: TCheckBox;
+    RevertTurnsAlt: TCheckBox;
     procedure dbnameChange(Sender: TObject);
     procedure dbhostChange(Sender: TObject);
     procedure dbportChange(Sender: TObject);
@@ -121,6 +144,12 @@ type
     procedure FrameExit(Sender: TObject);
     procedure DBtypeGroupClick(Sender: TObject);
     procedure dbnamesqliteChange(Sender: TObject);
+    procedure PanelCmdChange(Sender: TObject);
+    procedure TurnsRaChange(Sender: TObject);
+    procedure TurnsDecChange(Sender: TObject);
+    procedure ManualMountTypeClick(Sender: TObject);
+    procedure TurnsAzChange(Sender: TObject);
+    procedure TurnsAltChange(Sender: TObject);
   private
     { Private declarations }
     FShowAsteroid: TNotifyEvent;
@@ -167,21 +196,12 @@ implementation
 
 // windows vcl specific code:
 
-procedure Tf_config_system.TelescopeSelectClick(Sender: TObject);
-begin
-csc.IndiTelescope:=Telescopeselect.itemindex=0;
-INDI.visible:=csc.IndiTelescope;
-TelescopePlugin.visible:=not csc.IndiTelescope;
-end;
-
 procedure Tf_config_system.telescopepluginlistChange(Sender: TObject);
 begin
 csc.ScopePlugin:=telescopepluginlist.text;
 end;
 
 // end of windows vcl specific code:
-
-
 
 end.
 
