@@ -58,7 +58,8 @@ uses
   pu_position in 'pu_position.pas' {f_position},
   pu_search in 'pu_search.pas' {f_search},
   pu_zoom in 'pu_zoom.pas' {f_zoom},
-  pu_getdss in 'pu_getdss.pas' {f_getdss};
+  pu_getdss in 'pu_getdss.pas' {f_getdss},
+  pu_manualtelescope in 'pu_manualtelescope.pas' {f_manualtelescope};
 
 {$R *.RES}
 
@@ -70,6 +71,7 @@ begin
   Application.CreateForm(Tf_search, f_search);
   Application.CreateForm(Tf_zoom, f_zoom);
   Application.CreateForm(Tf_getdss, f_getdss);
+  Application.CreateForm(Tf_manualtelescope, f_manualtelescope);
   f_about.ShowTimer:=true; f_about.Show;
   Application.CreateForm(Tf_detail, f_detail);
   Application.CreateForm(Tf_info, f_info);

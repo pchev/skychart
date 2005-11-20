@@ -64,7 +64,7 @@ type
     keepalive: TCheckBox;
     t_telescope: TTabSheet;
     Label13: TLabel;
-    GroupBox15: TGroupBox;
+    INDI: TGroupBox;
     Label68: TLabel;
     IndiServerHost: TEdit;
     Label86: TLabel;
@@ -78,6 +78,7 @@ type
     Label260: TLabel;
     Label261: TLabel;
     IndiPort: TEdit;
+    TelescopeSelect: TRadioGroup;
     GroupBox1: TGroupBox;
     chkdb: TButton;
     credb: TButton;
@@ -88,6 +89,30 @@ type
     SQLiteBox: TGroupBox;
     Label1: TLabel;
     dbnamesqlite: TEdit;
+    Label2: TLabel;
+    PanelCmd: TEdit;
+    TelescopePlugin: TGroupBox;
+    TelescopeManual: TGroupBox;
+    Label7: TLabel;
+    EquatorialMount: TPanel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    TurnsRa: TFloatEdit;
+    TurnsDec: TFloatEdit;
+    RevertTurnsRa: TCheckBox;
+    RevertTurnDec: TCheckBox;
+    ManualMountType: TRadioGroup;
+    AltAzMount: TPanel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    TurnsAz: TFloatEdit;
+    TurnsAlt: TFloatEdit;
+    RevertTurnsAz: TCheckBox;
+    RevertTurnsAlt: TCheckBox;
     procedure dbnameChange(Sender: TObject);
     procedure dbhostChange(Sender: TObject);
     procedure dbportChange(Sender: TObject);
@@ -110,6 +135,7 @@ type
     procedure IndiDevChange(Sender: TObject);
     procedure IndiDriverChange(Sender: TObject);
     procedure IndiPortChange(Sender: TObject);
+    procedure TelescopeSelectClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure prgdirChange(Sender: TObject);
     procedure persdirChange(Sender: TObject);
@@ -119,6 +145,12 @@ type
     procedure DBtypeGroupClick(Sender: TObject);
     procedure dbnamesqliteChange(Sender: TObject);
     procedure FrameExit(Sender: TObject);
+    procedure PanelCmdChange(Sender: TObject);
+    procedure TurnsRAChange(Sender: TObject);
+    procedure TurnsDecChange(Sender: TObject);
+    procedure ManualMountTypeClick(Sender: TObject);
+    procedure TurnsAzChange(Sender: TObject);
+    procedure TurnsAltChange(Sender: TObject);
   private
     { Private declarations }
     FShowAsteroid: TNotifyEvent;
@@ -165,5 +197,6 @@ implementation
 {$include i_config_system.pas}
 
 // end of common code
+
 
 end.

@@ -10,7 +10,7 @@ object f_config_system: Tf_config_system
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_system
+    ActivePage = t_telescope
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -19,8 +19,8 @@ object f_config_system: Tf_config_system
       object Label84: TLabel
         Left = 0
         Top = 0
-        Width = 82
-        Height = 20
+        Width = 71
+        Height = 18
         Caption = 'System Setting'
       end
       object MysqlBox: TGroupBox
@@ -34,7 +34,7 @@ object f_config_system: Tf_config_system
           Left = 80
           Top = 24
           Width = 65
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 0
           Text = 'cdc'
@@ -44,7 +44,8 @@ object f_config_system: Tf_config_system
           Left = 368
           Top = 26
           Width = 57
-          Height = 22
+          Height = 20
+          Cursor = crIBeam
           TabOrder = 1
           OnChange = dbportChange
           Value = 3306
@@ -53,7 +54,7 @@ object f_config_system: Tf_config_system
           Left = 240
           Top = 24
           Width = 65
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 2
           Text = 'dbhost'
@@ -62,29 +63,29 @@ object f_config_system: Tf_config_system
         object Label141: TLabel
           Left = 16
           Top = 28
-          Width = 56
-          Height = 20
+          Width = 47
+          Height = 18
           Caption = 'DB Name:'
         end
         object Label142: TLabel
           Left = 168
           Top = 28
-          Width = 64
-          Height = 20
+          Width = 55
+          Height = 18
           Caption = 'Host Name:'
         end
         object Label143: TLabel
           Left = 328
           Top = 28
-          Width = 25
-          Height = 20
+          Width = 24
+          Height = 18
           Caption = 'Port:'
         end
         object dbuser: TEdit
           Left = 80
           Top = 64
           Width = 100
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 6
           Text = 'dbuser'
@@ -94,7 +95,7 @@ object f_config_system: Tf_config_system
           Left = 272
           Top = 64
           Width = 100
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           EchoMode = emPassword
           TabOrder = 7
@@ -104,15 +105,15 @@ object f_config_system: Tf_config_system
         object Label144: TLabel
           Left = 16
           Top = 68
-          Width = 38
-          Height = 20
+          Width = 33
+          Height = 18
           Caption = 'Userid:'
         end
         object Label145: TLabel
           Left = 208
           Top = 68
-          Width = 54
-          Height = 20
+          Width = 46
+          Height = 18
           Caption = 'Password'
         end
       end
@@ -126,22 +127,22 @@ object f_config_system: Tf_config_system
         object Label73: TLabel
           Left = 8
           Top = 20
-          Width = 80
-          Height = 20
+          Width = 68
+          Height = 18
           Caption = 'Program Data '
         end
         object Label74: TLabel
           Left = 8
           Top = 56
-          Width = 77
-          Height = 20
+          Width = 63
+          Height = 18
           Caption = 'Personal data'
         end
         object prgdir: TEdit
           Left = 104
           Top = 16
           Width = 233
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 0
           OnChange = prgdirChange
@@ -150,7 +151,7 @@ object f_config_system: Tf_config_system
           Left = 104
           Top = 52
           Width = 233
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 1
           OnChange = persdirChange
@@ -247,9 +248,9 @@ object f_config_system: Tf_config_system
           Left = 24
           Top = 40
           Width = 89
-          Height = 28
+          Height = 26
           Style = csDropDownList
-          ItemHeight = 22
+          ItemHeight = 20
           Items.Strings = (
             'KDE'
             'GNOME'
@@ -263,7 +264,7 @@ object f_config_system: Tf_config_system
           Left = 168
           Top = 40
           Width = 185
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           Enabled = False
           TabOrder = 1
@@ -272,8 +273,8 @@ object f_config_system: Tf_config_system
         object Label272: TLabel
           Left = 168
           Top = 16
-          Width = 135
-          Height = 20
+          Width = 113
+          Height = 18
           Caption = 'URL Launch Command :'
         end
       end
@@ -362,15 +363,15 @@ object f_config_system: Tf_config_system
         object Label1: TLabel
           Left = 16
           Top = 48
-          Width = 81
-          Height = 20
+          Width = 64
+          Height = 18
           Caption = 'Database File:'
         end
         object dbnamesqlite: TEdit
           Left = 136
           Top = 44
           Width = 289
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           Color = clButton
           ReadOnly = True
@@ -385,8 +386,8 @@ object f_config_system: Tf_config_system
       object Label54: TLabel
         Left = 0
         Top = 0
-        Width = 79
-        Height = 20
+        Width = 68
+        Height = 18
         Caption = 'Server Setting'
       end
       object GroupBox3: TGroupBox
@@ -409,7 +410,7 @@ object f_config_system: Tf_config_system
           Left = 144
           Top = 100
           Width = 100
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 1
           Text = '127.0.0.1'
@@ -418,22 +419,22 @@ object f_config_system: Tf_config_system
         object Label55: TLabel
           Left = 16
           Top = 104
-          Width = 111
-          Height = 20
+          Width = 94
+          Height = 18
           Caption = 'Server IP Interface :'
         end
         object Label85: TLabel
           Left = 16
           Top = 140
-          Width = 85
-          Height = 20
+          Width = 74
+          Height = 18
           Caption = 'Server IP Port :'
         end
         object ipport: TEdit
           Left = 144
           Top = 136
           Width = 100
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 4
           Text = '3292'
@@ -453,32 +454,33 @@ object f_config_system: Tf_config_system
     object t_telescope: TTabSheet
       Caption = 't_telescope'
       ImageIndex = 2
-      object Label13: TLabel
-        Left = 0
-        Top = 0
-        Width = 100
-        Height = 20
-        Caption = 'Telescope Setting'
-      end
-      object GroupBox15: TGroupBox
+      object TelescopePlugin: TGroupBox
         Left = 8
-        Top = 48
+        Top = 112
         Width = 449
-        Height = 257
+        Height = 169
+        Caption = 'TelescopePlugin'
+        TabOrder = 3
+      end
+      object INDI: TGroupBox
+        Left = 8
+        Top = 112
+        Width = 449
+        Height = 273
         Caption = 'INDI Driver setting'
         TabOrder = 1
         object Label68: TLabel
           Left = 8
           Top = 28
-          Width = 98
-          Height = 20
+          Width = 85
+          Height = 18
           Caption = 'INDI Server Host '
         end
         object IndiServerHost: TEdit
           Left = 120
           Top = 24
           Width = 100
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 1
           OnChange = IndiServerHostChange
@@ -486,15 +488,15 @@ object f_config_system: Tf_config_system
         object Label86: TLabel
           Left = 240
           Top = 28
-          Width = 89
-          Height = 20
+          Width = 78
+          Height = 18
           Caption = 'INDI server Port'
         end
         object IndiServerPort: TEdit
           Left = 336
           Top = 24
           Width = 97
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 3
           OnChange = IndiServerPortChange
@@ -511,15 +513,15 @@ object f_config_system: Tf_config_system
         object Label258: TLabel
           Left = 8
           Top = 104
-          Width = 69
-          Height = 20
+          Width = 59
+          Height = 18
           Caption = 'INDI Server '
         end
         object IndiServerCmd: TEdit
           Left = 120
           Top = 100
           Width = 100
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 6
           OnChange = IndiServerCmdChange
@@ -527,15 +529,15 @@ object f_config_system: Tf_config_system
         object Label259: TLabel
           Left = 232
           Top = 136
-          Width = 96
-          Height = 20
+          Width = 81
+          Height = 18
           Caption = 'INDI Driver name'
         end
         object IndiDriver: TEdit
           Left = 336
           Top = 132
           Width = 100
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           Enabled = False
           ParentColor = True
@@ -546,9 +548,9 @@ object f_config_system: Tf_config_system
           Left = 336
           Top = 100
           Width = 100
-          Height = 28
+          Height = 26
           Style = csDropDownList
-          ItemHeight = 22
+          ItemHeight = 20
           Items.Strings = (
             '')
           ItemIndex = 0
@@ -558,26 +560,247 @@ object f_config_system: Tf_config_system
         object Label260: TLabel
           Left = 240
           Top = 104
-          Width = 86
-          Height = 20
+          Width = 67
+          Height = 18
           Caption = 'Telescope type'
         end
         object Label261: TLabel
-          Left = 8
+          Left = 16
           Top = 180
-          Width = 70
-          Height = 20
+          Width = 58
+          Height = 18
           Caption = 'Device Port '
         end
         object IndiPort: TEdit
           Left = 120
           Top = 176
           Width = 100
-          Height = 28
+          Height = 26
           Cursor = crIBeam
           TabOrder = 12
           Text = 'IndiPort'
           OnChange = IndiPortChange
+        end
+        object Label2: TLabel
+          Left = 16
+          Top = 224
+          Width = 127
+          Height = 18
+          Caption = 'Telescope Panel application '
+        end
+        object PanelCmd: TEdit
+          Left = 160
+          Top = 220
+          Width = 273
+          Height = 26
+          Cursor = crIBeam
+          TabOrder = 14
+          OnChange = PanelCmdChange
+        end
+      end
+      object Label13: TLabel
+        Left = 0
+        Top = 0
+        Width = 81
+        Height = 18
+        Caption = 'Telescope Setting'
+      end
+      object TelescopeSelect: TRadioGroup
+        Left = 8
+        Top = 32
+        Width = 450
+        Height = 65
+        Items.Strings = (
+          'INDI'
+          'Manual')
+        Caption = 'TelescopeSelect'
+        Columns = 3
+        TabOrder = 0
+        OnClick = TelescopeSelectClick
+      end
+      object TelescopeManual: TGroupBox
+        Left = 8
+        Top = 112
+        Width = 449
+        Height = 297
+        Caption = 'Manual Mount'
+        TabOrder = 4
+        Visible = False
+        object AltAzMount: TPanel
+          Left = 24
+          Top = 112
+          Width = 361
+          Height = 161
+          TabOrder = 2
+          object Label8: TLabel
+            Left = 16
+            Top = 16
+            Width = 37
+            Height = 18
+            Caption = 'Azimuth'
+          end
+          object Label9: TLabel
+            Left = 16
+            Top = 93
+            Width = 35
+            Height = 18
+            Caption = 'Altitude'
+          end
+          object Label10: TLabel
+            Left = 240
+            Top = 16
+            Width = 64
+            Height = 18
+            Caption = 'turns / degree'
+          end
+          object Label11: TLabel
+            Left = 240
+            Top = 93
+            Width = 64
+            Height = 18
+            Caption = 'turns / degree'
+          end
+          object TurnsAz: TFloatEdit
+            Left = 128
+            Top = 11
+            Width = 81
+            Height = 20
+            Cursor = crIBeam
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = TurnsAzChange
+          end
+          object TurnsAlt: TFloatEdit
+            Left = 128
+            Top = 88
+            Width = 81
+            Height = 20
+            Cursor = crIBeam
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            OnChange = TurnsAltChange
+          end
+          object RevertTurnsAz: TCheckBox
+            Left = 128
+            Top = 40
+            Width = 177
+            Height = 17
+            Caption = 'Revert Az knob'
+            TabOrder = 2
+            OnClick = TurnsAzChange
+          end
+          object RevertTurnsAlt: TCheckBox
+            Left = 128
+            Top = 120
+            Width = 193
+            Height = 17
+            Caption = 'Revert Alt knob'
+            TabOrder = 3
+            OnClick = TurnsAltChange
+          end
+        end
+        object EquatorialMount: TPanel
+          Left = 24
+          Top = 112
+          Width = 361
+          Height = 161
+          TabOrder = 0
+          object Label3: TLabel
+            Left = 16
+            Top = 16
+            Width = 75
+            Height = 18
+            Caption = 'Right Ascension'
+          end
+          object Label4: TLabel
+            Left = 16
+            Top = 93
+            Width = 51
+            Height = 18
+            Caption = 'Declination'
+          end
+          object Label5: TLabel
+            Left = 240
+            Top = 16
+            Width = 54
+            Height = 18
+            Caption = 'turns / hour'
+          end
+          object Label6: TLabel
+            Left = 240
+            Top = 93
+            Width = 64
+            Height = 18
+            Caption = 'turns / degree'
+          end
+          object TurnsRa: TFloatEdit
+            Left = 128
+            Top = 11
+            Width = 81
+            Height = 20
+            Cursor = crIBeam
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = TurnsRAChange
+            NumericType = ntFixed
+          end
+          object TurnsDec: TFloatEdit
+            Left = 128
+            Top = 88
+            Width = 81
+            Height = 20
+            Cursor = crIBeam
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            OnChange = TurnsDecChange
+            NumericType = ntFixed
+          end
+          object RevertTurnsRa: TCheckBox
+            Left = 128
+            Top = 40
+            Width = 177
+            Height = 17
+            Caption = 'Revert RA knob'
+            TabOrder = 2
+            OnClick = TurnsRAChange
+          end
+          object RevertTurnDec: TCheckBox
+            Left = 128
+            Top = 120
+            Width = 193
+            Height = 17
+            Caption = 'Revert DEC knob'
+            TabOrder = 3
+            OnClick = TurnsDecChange
+          end
+        end
+        object Label7: TLabel
+          Left = 24
+          Top = 24
+          Width = 361
+          Height = 41
+          AutoSize = False
+          Caption = 
+            'Set how the mount move on each axis when you turn the driving kn' +
+            'ob.'#13#10'Then the Telescope button show you the turns you must do to' +
+            ' go from one object to another.'
+          WordWrap = True
+        end
+        object ManualMountType: TRadioGroup
+          Left = 24
+          Top = 64
+          Width = 361
+          Height = 41
+          Items.Strings = (
+            'Equatorial'
+            'Alt / Az')
+          Columns = 2
+          TabOrder = 1
+          OnClick = ManualMountTypeClick
         end
       end
     end

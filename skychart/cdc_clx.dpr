@@ -59,7 +59,8 @@ uses
   fu_position in 'fu_position.pas' {f_position},
   fu_getdss in 'fu_getdss.pas' {f_getdss},
   fu_zoom in 'fu_zoom.pas' {f_zoom},
-  u_bitmap in 'u_bitmap.pas';
+  u_bitmap in 'u_bitmap.pas',
+  fu_manualtelescope in 'fu_manualtelescope.pas' {f_manualtelescope};
 
 {$R *.res}
 
@@ -69,6 +70,7 @@ begin
   Application.CreateForm(Tf_about, f_about);
   Application.CreateForm(Tf_position, f_position);
   Application.CreateForm(Tf_zoom, f_zoom);
+  Application.CreateForm(Tf_manualtelescope, f_manualtelescope);
   f_about.ShowTimer:=true; f_about.Show;
   Application.CreateForm(Tf_detail, f_detail);
   Application.CreateForm(Tf_printsetup, f_printsetup);

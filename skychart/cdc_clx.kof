@@ -50,7 +50,7 @@ PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage:component/xmlparser:component/jdcalendar
 Packages=rtl:visualclx
-Conditionals=GPL:Themed
+Conditionals=GPL:
 DebugSourceDirs=
 UsePackages=0
 
@@ -64,29 +64,4 @@ DebugCWD=
 [Excluded Packages]
 /home/cdc/dev/skychart/component/libsql/bpllibsql.so=LibSQL sqlite et mysql
 /home/pch/source/GLScene/Kylix/GLSceneK3.so=GLScene - OpenGL 3D library
-
-[HistoryLists\hlConditionals]
-Count=3
-Item0=GPL:Themed
-Item1=GPL:Themed:MENUBAR_THEMING
-Item2=GPL
-
-[HistoryLists\hlSearchPath]
-Count=3
-Item0=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage:component/xmlparser:component/jdcalendar
-Item1=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage:component/xmlparser
-Item2=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage
-
-[HistoryLists\hlUnitOutputDirectory]
-Count=4
-Item0=../dcu/
-Item1=/home/cdc/dev/dcu
-Item2=../../../dcu
-Item3=../dcu
-
-[HistoryLists\hlOutputDirectorry]
-Count=3
-Item0=/home/cdc
-Item1=../../../../
-Item2=../
 

@@ -132,12 +132,23 @@ IndiServerPort.text:=csc.IndiServerPort;
 IndiAutostart.checked:=csc.IndiAutostart;
 IndiServerCmd.text:=csc.IndiServerCmd;
 IndiDriver.text:=csc.IndiDriver;
+PanelCmd.text:=cmain.IndiPanelCmd;
+TurnsRa.value:=abs(csc.TelescopeTurnsX);
+TurnsDec.value:=abs(csc.TelescopeTurnsY);
+RevertTurnsRa.checked:=csc.TelescopeTurnsX<0;
+RevertTurnDec.checked:=csc.TelescopeTurnsY<0;
+TurnsAz.value:=abs(csc.TelescopeTurnsX);
+TurnsAlt.value:=abs(csc.TelescopeTurnsY);
+RevertTurnsAz.checked:=csc.TelescopeTurnsX<0;
+RevertTurnsAlt.checked:=csc.TelescopeTurnsY<0;
+ManualMountType.itemindex:=csc.ManualTelescopeType;
+if csc.IndiTelescope then Telescopeselect.itemindex:=0
+   else if csc.PluginTelescope then Telescopeselect.itemindex:=2
+   else Telescopeselect.itemindex:=1;
 {$ifdef linux}
 IndiPort.text:=csc.IndiPort;
 {$endif}
 {$ifdef mswindows}
-if csc.IndiTelescope then Telescopeselect.itemindex:=0
-                     else Telescopeselect.itemindex:=1;
 val(rightstr(csc.IndiPort,1),i,n);
 if n=0 then IndiPort.itemindex:=i
        else IndiPort.itemindex:=0;
@@ -357,6 +368,16 @@ begin
 cmain.ServerIPport:=ipport.Text;
 end;
 
+procedure Tf_config_system.TelescopeSelectClick(Sender: TObject);
+begin
+csc.IndiTelescope:=Telescopeselect.itemindex=0;
+csc.ManualTelescope:=Telescopeselect.itemindex=1;
+csc.PluginTelescope:=Telescopeselect.itemindex=2;
+INDI.visible:=csc.IndiTelescope;
+TelescopePlugin.visible:=csc.PluginTelescope;
+TelescopeManual.visible:=csc.ManualTelescope;
+end;
+
 procedure Tf_config_system.IndiServerHostChange(Sender: TObject);
 begin
 csc.IndiServerHost:=IndiServerHost.text;
@@ -403,4 +424,53 @@ csc.IndiPort:=IndiPort.text;
 csc.IndiPort:='/dev/ttyS'+inttostr(IndiPort.itemindex);
 {$endif}
 end;
+
+procedure Tf_config_system.PanelCmdChange(Sender: TObject);
+begin
+cmain.IndiPanelCmd:=PanelCmd.text;
+end;
+
+procedure Tf_config_system.TurnsRaChange(Sender: TObject);
+begin
+if RevertTurnsRa.checked then csc.TelescopeTurnsX:=-TurnsRa.value
+                         else csc.TelescopeTurnsX:=TurnsRa.value;
+end;
+
+procedure Tf_config_system.TurnsDecChange(Sender: TObject);
+begin
+if RevertTurnDec.checked then csc.TelescopeTurnsY:=-TurnsDec.value
+                         else csc.TelescopeTurnsY:=TurnsDec.value;
+end;
+
+procedure Tf_config_system.TurnsAzChange(Sender: TObject);
+begin
+if RevertTurnsAz.checked then csc.TelescopeTurnsX:=-TurnsAz.value
+                         else csc.TelescopeTurnsX:=TurnsAz.value;
+end;
+
+procedure Tf_config_system.TurnsAltChange(Sender: TObject);
+begin
+if RevertTurnsAlt.checked then csc.TelescopeTurnsY:=-TurnsAlt.value
+                          else csc.TelescopeTurnsY:=TurnsAlt.value;
+end;
+
+procedure Tf_config_system.ManualMountTypeClick(Sender: TObject);
+begin
+csc.ManualTelescopeType:=ManualMountType.ItemIndex;
+case csc.ManualTelescopeType of
+  0 : begin
+        AltAzMount.Visible:=false;
+        EquatorialMount.Visible:=true;
+        TurnsDecChange(Sender);
+        TurnsRaChange(Sender);
+      end;
+  1 : begin
+        AltAzMount.Visible:=true;
+        EquatorialMount.Visible:=false;
+        TurnsAzChange(Sender);
+        TurnsAltChange(Sender);
+      end;
+end;
+end;
+
 
