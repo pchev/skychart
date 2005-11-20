@@ -61,7 +61,7 @@ type
     Fserverstatus,Ftelescopestatus,Fcoordstatus: TIndiStatus;
     FTag,FCurrentTag,FDevice,FCurrentDevice,FName,FCurrentName,FMessage,FDevicePort,FRa,FDec: string;
     FWantDevice,FWantDevicePort,FWantRA,FWantDec: string;
-    FAutoconnect,FAutoStart,Ftrace,FServerStartedByMe :boolean;
+    FAutoconnect,FAutoStart,Ftrace,FServerStartedByMe,EOD :boolean;
     XmlScanner: TEasyXmlScanner;
     procedure DisplayMessagesyn;
     procedure ProcessDataSyn;
@@ -103,6 +103,7 @@ type
     property ServerStatus: TIndiStatus read FServerstatus;
     property TelescopeStatus: TIndiStatus read Ftelescopestatus;
     property CoordStatus: TIndiStatus read FCoordstatus;
+    property EquatorialOfDay: boolean read EOD;
     property RA : string read FRa write FWantRA;
     property Dec : string read FDec write FWantDec;
     property IndiServer : string read FIndiServer write FIndiServer;
@@ -344,15 +345,18 @@ else if status='Idle' then stat:=Idle
 else if status='Busy' then stat:=Busy
 else stat:=Alert;
 if (status<>'')and(FCurrentname='CONNECTION') then setstatus(telescope,stat);
-if (status<>'')and(FCurrentname='EQUATORIAL_COORD') then setstatus(coord,stat);
+if (status<>'')and(FCurrentname='EQUATORIAL_EOD_COORD') then begin EOD:=true; setstatus(coord,stat);end;
+if (status<>'')and(FCurrentname='EQUATORIAL_COORD') then begin EOD:=false; setstatus(coord,stat);end;
 end;
 
 procedure TIndiClient.XmlContent(Sender: TObject; Content: String);
 begin
 if FCurrentdevice='' then exit;
 if (FCurrentname='DEVICE_PORT')and(Fname='PORT') then FDevicePort:=Content;
-if (FCurrentname='EQUATORIAL_COORD')and(Fname='RA') then FRa:=Content;
-if (FCurrentname='EQUATORIAL_COORD')and(Fname='DEC') then FDec:=Content;
+if (FCurrentname='EQUATORIAL_EOD_COORD')and(Fname='RA') then begin EOD:=true; FRa:=Content; end;
+if (FCurrentname='EQUATORIAL_EOD_COORD')and(Fname='DEC') then begin EOD:=true; FDec:=Content; end;
+if (FCurrentname='EQUATORIAL_COORD')and(Fname='RA') then begin EOD:=false; FRa:=Content; end;
+if (FCurrentname='EQUATORIAL_COORD')and(Fname='DEC') then begin EOD:=false; FDec:=Content; end;
 if Ftrace then writetrace(FCurrentdevice+' '+FCurrentname+' '+FName+' '+Content);
 end;
 
@@ -361,6 +365,7 @@ begin
 if TagName=FTag then FTag:=''
 else if TagName=FCurrentTag then begin
      FCurrentTag:='';
+     if (FCurrentname='EQUATORIAL_EOD_COORD')and assigned(FonCoordChange) then FonCoordChange(self);
      if (FCurrentname='EQUATORIAL_COORD')and assigned(FonCoordChange) then FonCoordChange(self);
 end;
 end;
@@ -405,14 +410,20 @@ procedure TIndiClient.Sync;
 begin
 if FCurrentdevice='' then exit;
 Send('<newSwitchVector device="'+FCurrentdevice+'" name="ON_COORD_SET"><oneSwitch name="SLEW">Off</oneSwitch><oneSwitch name="TRACK">Off</oneSwitch><oneSwitch name="SYNC">On</oneSwitch></newSwitchVector>');
-Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>');
+if EOD then
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_EOD_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>')
+else
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>');
 end;
 
 procedure TIndiClient.Slew;
 begin
 if FCurrentdevice='' then exit;
 Send('<newSwitchVector device="'+FCurrentdevice+'" name="ON_COORD_SET"><oneSwitch name="TRACK">Off</oneSwitch><oneSwitch name="SYNC">Off</oneSwitch><oneSwitch name="SLEW">On</oneSwitch></newSwitchVector>');
-Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>');
+if EOD then
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_EOD_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>')
+else
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>');
 if assigned(FonStatusChange) then FonStatusChange(self,coord,busy);
 end;
 
