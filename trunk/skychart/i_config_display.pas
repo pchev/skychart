@@ -38,6 +38,8 @@ ShowDisplay;
 ShowFonts;
 ShowColor;
 ShowSkyColor;
+// changes for DSO Colors
+ShowDSOColor;
 ShowNebColor;
 ShowLine;
 Showlabel;
@@ -175,6 +177,94 @@ NebGrayBar.position:=cplot.NebGray;
 NebBrightBar.position:=cplot.NebBright;
 UpdNebColor;
 end;
+
+// ---dso color -----------------------
+procedure Tf_config_display.ShowDSOColor;
+var vTCBStateChecked,vTCBStateUnChecked: TCheckBoxState;
+begin
+{
+  Now show those objects for the active base catalogs
+  Allow user to change the colours of the objects that are active
+}
+
+//  if f_config_catalog1.pa_catalog.t_cdcneb.sacbox.Checked then   shpAst.Visible = False;
+
+
+//  Tf_config_catalog.sacbox.Checked then shpAst.Visible = False;
+{
+    pa_catalog: TPageControl;
+    t_catalog: TTabSheet;
+
+
+ngcbox.Checked:=ccat.NebCatDef[ngc-BaseNeb];
+lbnbox.Checked:=ccat.NebCatDef[lbn-BaseNeb];
+rc3box.Checked:=ccat.NebCatDef[rc3-BaseNeb];
+pgcbox.Checked:=ccat.NebCatDef[pgc-BaseNeb];
+oclbox.Checked:=ccat.NebCatDef[ocl-BaseNeb];
+gcmbox.Checked:=ccat.NebCatDef[gcm-BaseNeb];
+gpnbox.Checked:=ccat.NebCatDef[gpn-BaseNeb];
+}
+
+
+    shpAst.Brush.Color:=cplot.DSOColorAst;
+    shpOCl.Brush.Color:=cplot.DSOColorOCl;
+    shpGCl.Brush.Color:=cplot.DSOColorGCl;
+    shpPNe.Brush.Color:= cplot.DSOColorPNe;
+    shpDN.Brush.Color:=cplot.DSOColorDN;
+    shpEN.Brush.Color:=cplot.DSOColorEN;
+    shpRN.Brush.Color:=cplot.DSOColorRN;
+    shpSN.Brush.Color:=cplot.DSOColorSN;
+    shpGxy.Brush.Color:=cplot.DSOColorGxy;
+    shpGxyCl.Brush.Color:=cplot.DSOColorGxyCL;
+    shpQ.Brush.Color:=cplot.DSOColorQ;
+    shpGL.Brush.Color:=cplot.DSOColorGL;
+    shpNE.Brush.Color:=cplot.DSOColorNE;
+
+    vTCBStateChecked:=cbChecked;
+    vTCBStateUnChecked:=cbUnchecked;
+
+    If (cplot.DSOColorFillAst=true)
+       then chkFillAst.State:=vTCBStateChecked
+       else chkFillAst.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillOCl=true)
+        then chkFillOCl.State:=vTCBStateChecked
+        else chkFillOCl.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillGCl=true)
+        then chkFillGCl.State:=vTCBStateChecked
+        else chkFillGCl.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillPNe=true)
+        then chkFillPNe.State:=vTCBStateChecked
+        else chkFillPNe.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillDN=true)
+        then chkFillDN.State:=vTCBStateChecked
+        else chkFillDN.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillEN=true)
+        then chkFillEN.State:=vTCBStateChecked
+        else chkFillEN.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillRN=true)
+        then chkFillRN.State:=vTCBStateChecked
+        else chkFillRN.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillSN=true)
+        then chkFillSN.State:=vTCBStateChecked
+        else chkFillSN.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillGxy=true)
+        then chkFillGxy.State:=vTCBStateChecked
+        else chkFillGxy.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillGxyCl=true)
+        then chkFillGxyCl.State:=vTCBStateChecked
+        else chkFillGxyCl.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillQ=true)
+        then chkFillQ.State:=vTCBStateChecked
+        else chkFillQ.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillGL=true)
+        then chkFillGL.State:=vTCBStateChecked
+        else chkFillGL.State:=vTCBStateUnChecked;
+    If (cplot.DSOColorFillNE=true)
+        then chkFillNE.State:=vTCBStateChecked
+        else chkFillNE.State:=vTCBStateUnChecked;
+end;
+
+// ------------------------------------
 
 procedure Tf_config_display.ShowLine;
 begin
@@ -452,7 +542,94 @@ begin
 cplot.SkyColor:=dfSkyColor;
 ShowSkyColor;
 end;
-                     
+
+
+procedure Tf_config_display.ShapeDSOMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+if sender is TShape then
+   with sender as TShape do begin
+   ColorDialog1.color:=cplot.DSOColorAst;
+   if ColorDialog1.Execute then begin
+      if sender = shpAst then begin
+         cplot.DSOColorAst:=ColorDialog1.Color;
+         shpAst.Brush.Color:= cplot.DSOColorAst
+//         ShowSkyColor;
+      end;
+      if sender = shpOCl then begin
+          cplot.DSOColorOCl:=ColorDialog1.Color;
+          shpOCl.Brush.Color:= cplot.DSOColorOCl;
+//         ShowSkyColor;
+      end;
+      if sender = shpGCl then begin
+          cplot.DSOColorGCl:=ColorDialog1.Color;
+          shpGCl.Brush.Color:= cplot.DSOColorGCl;
+//         ShowSkyColor;
+      end;
+      if sender = shpPNe then begin
+          cplot.DSOColorPNe:=ColorDialog1.Color;
+          shpPNe.Brush.Color:= cplot.DSOColorPNe;
+//         ShowSkyColor;
+      end;
+      if sender = shpDN then begin
+          cplot.DSOColorDN:=ColorDialog1.Color;
+          shpDN.Brush.Color:= cplot.DSOColorDN;
+//         ShowSkyColor;
+      end;
+      if sender = shpEN then begin
+          cplot.DSOColorEN:=ColorDialog1.Color;
+          shpEN.Brush.Color:= cplot.DSOColorEN;
+//         ShowSkyColor;
+      end;
+      if sender = shpRN then begin
+          cplot.DSOColorRN:=ColorDialog1.Color;
+          shpRN.Brush.Color:= cplot.DSOColorRN;
+//         ShowSkyColor;
+      end;
+      if sender = shpSN then begin
+          cplot.DSOColorSN:=ColorDialog1.Color;
+          shpSN.Brush.Color:= cplot.DSOColorSN;
+//         ShowSkyColor;
+      end;
+      if sender = shpGxy then begin
+          cplot.DSOColorGxy:=ColorDialog1.Color;
+          shpGxy.Brush.Color:= cplot.DSOColorGxy
+//         ShowSkyColor;
+      end;
+      if sender = shpGxyCl then begin
+          cplot.DSOColorGxyCl:=ColorDialog1.Color;
+          shpGxyCl.Brush.Color:= cplot.DSOColorGxyCl;
+//         ShowSkyColor;
+      end;
+      if sender = shpQ then begin
+          cplot.DSOColorQ:=ColorDialog1.Color;
+          shpQ.Brush.Color:= cplot.DSOColorQ;
+//         ShowSkyColor;
+      end;
+      if sender = shpGL then begin
+          cplot.DSOColorGL:=ColorDialog1.Color;
+          shpGL.Brush.Color:= cplot.DSOColorGL;
+//         ShowSkyColor;
+      end;
+      if sender = shpNE then begin
+          cplot.DSOColorNE:=ColorDialog1.Color;
+          shpNE.Brush.Color:= cplot.DSOColorNE;
+//         ShowSkyColor;
+      end;
+   end;
+end;
+end;
+
+procedure Tf_config_display.FillDSOMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+if sender is TCheckBox then
+   with sender as TCheckBox do begin
+   cplot.DSOColorFillOCl:=false;
+   if sender = chkFillGCl then cplot.DSOColorFillOCl:=true;
+   end;
+end;
+
 procedure Tf_config_display.UpdNebColor;
   function SetColor(i,col:integer):Tcolor;
    var r,g,b: byte;
@@ -466,10 +643,6 @@ begin
 NebColorPanel.color:=cplot.Color[0];
 shape29.brush.color:=SetColor(8,cplot.NebGray);
 shape30.brush.color:=SetColor(8,cplot.NebBright);
-shape31.brush.color:=SetColor(9,cplot.NebGray);
-shape32.brush.color:=SetColor(9,cplot.NebBright);
-shape33.brush.color:=SetColor(10,cplot.NebGray);
-shape34.brush.color:=SetColor(10,cplot.NebBright);
 end;
 
 procedure Tf_config_display.NebShapeMouseUp(Sender: TObject;
@@ -765,8 +938,213 @@ case ACol of
 end;
 end;
 
-
 procedure Tf_config_display.rbClick(Sender: TObject);
 begin
 with Sender as TCheckBox do csc.rectangleok[tag]:=checked;
 end;
+
+
+procedure Tf_config_display.chkFillAstClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillAst.Checked
+    then cplot.DSOColorFillAst:=true
+    else cplot.DSOColorFillAst:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillOClClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillOCl.Checked
+    then cplot.DSOColorFillOCl:=true
+    else cplot.DSOColorFillOCl:=false;
+end;
+end;
+
+procedure Tf_config_display.chkFillPNeClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillPNe.Checked
+    then cplot.DSOColorFillPNe:=true
+    else cplot.DSOColorFillPNe:=false;
+end;
+end;
+
+procedure Tf_config_display.chkFillGClClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillGCl.Checked
+    then cplot.DSOColorFillGCl:=true
+    else cplot.DSOColorFillGCl:=false;
+end;
+end;
+
+procedure Tf_config_display.chkFillDNClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillDN.Checked
+    then cplot.DSOColorFillDN:=true
+    else cplot.DSOColorFillDN:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillENClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillEN.Checked
+    then cplot.DSOColorFillEN:=true
+    else cplot.DSOColorFillEN:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillRNClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillRN.Checked
+    then cplot.DSOColorFillRN:=true
+    else cplot.DSOColorFillRN:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillSNClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillSN.Checked
+    then cplot.DSOColorFillSN:=true
+    else cplot.DSOColorFillSN:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillGxyClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillGxy.Checked
+    then cplot.DSOColorFillGxy:=true
+    else cplot.DSOColorFillGxy:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillGxyClClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillGxyCl.Checked
+    then cplot.DSOColorFillGxyCl:=true
+    else cplot.DSOColorFillGxyCl:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillQClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillQ.Checked
+    then cplot.DSOColorFillQ:=true
+    else cplot.DSOColorFillQ:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillGLClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillGL.Checked
+    then cplot.DSOColorFillGL:=true
+    else cplot.DSOColorFillGL:=false;
+  end;
+end;
+
+procedure Tf_config_display.chkFillNEClick(Sender: TObject);
+begin
+with sender as TCheckbox do begin
+  if chkFillNE.Checked
+    then cplot.DSOColorFillNE:=true
+    else cplot.DSOColorFillNE:=false;
+  end;
+end;
+
+procedure Tf_config_display.lstDSOCSchemeClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  for i := 0 to (lstDSOCScheme.Items.Count - 1)
+    do begin
+      if lstDSOCScheme.Selected[i] then
+        case i of
+//        CdC v2.nn
+          0: begin //CdC v2.nn
+              shpAst.Brush.Color:=16776960;
+              shpOCl.Brush.Color:=16776960;
+              shpGCl.Brush.Color:=16776960;
+              shpPNe.Brush.Color:=8454016;
+              shpDN.Brush.Color:=12632256;
+              shpEN.Brush.Color:=8454016;
+              shpRN.Brush.Color:=8454016;
+              shpSN.Brush.Color:=0;
+              shpGxy.Brush.Color:=255;
+              shpGxyCl.Brush.Color:=255;
+              shpQ.Brush.Color:=0;
+              shpGL.Brush.Color:=0;
+              shpNE.Brush.Color:=16777215;
+             end;
+          1: begin //CdC v3.nn
+              shpAst.Brush.Color:=8454143;
+              shpOCl.Brush.Color:=8454143;
+              shpGCl.Brush.Color:=16777088;
+              shpPNe.Brush.Color:=8453888;
+              shpDN.Brush.Color:=12632256;
+              shpEN.Brush.Color:=255;
+              shpRN.Brush.Color:=16744448;
+              shpSN.Brush.Color:=0;
+              shpGxy.Brush.Color:=255;
+              shpGxyCl.Brush.Color:=255;
+              shpQ.Brush.Color:=8421631;
+              shpGL.Brush.Color:=16711808;
+              shpNE.Brush.Color:=16777215;
+             end;
+          2: begin //Tirion Sky Atlas 2000
+              shpAst.Brush.Color:=8454143;
+              shpOCl.Brush.Color:=8454143;
+              shpGCl.Brush.Color:=65535;
+              shpPNe.Brush.Color:=4259584;
+              shpDN.Brush.Color:=8421504;
+              shpEN.Brush.Color:=16711935;
+              shpRN.Brush.Color:=16711935;
+              shpSN.Brush.Color:=4227327;
+              shpGxy.Brush.Color:=255;
+              shpGxyCl.Brush.Color:=255;
+              shpQ.Brush.Color:=255;
+              shpGL.Brush.Color:=16776960;
+              shpNE.Brush.Color:=12632256;
+             end;
+          3: begin //Megastar
+              shpAst.Brush.Color:=4259584;
+              shpOCl.Brush.Color:=4259584;
+              shpGCl.Brush.Color:=4259584;
+              shpPNe.Brush.Color:=4259584;
+              shpDN.Brush.Color:=4259584;
+              shpEN.Brush.Color:=4259584;
+              shpRN.Brush.Color:=4259584;
+              shpSN.Brush.Color:=4259584;
+              shpGxy.Brush.Color:=4259584;
+              shpGxyCl.Brush.Color:=4259584;
+              shpQ.Brush.Color:=4259584;
+              shpGL.Brush.Color:=4259584;
+              shpNE.Brush.Color:=4259584;
+             end;
+          end;
+          cplot.DSOColorAst:=shpAst.Brush.Color;
+          cplot.DSOColorOCl:=shpOCl.Brush.Color;
+          cplot.DSOColorGCl:=shpGCl.Brush.Color;
+          cplot.DSOColorPNe:=shpPNe.Brush.Color;
+          cplot.DSOColorDN:=shpDN.Brush.Color;
+          cplot.DSOColorEN:=shpEN.Brush.Color;
+          cplot.DSOColorRN:=shpRN.Brush.Color;
+          cplot.DSOColorSN:=shpSN.Brush.Color;
+          cplot.DSOColorGxy:=shpGxy.Brush.Color;
+          cplot.DSOColorGxyCL:=shpGxyCl.Brush.Color;
+          cplot.DSOColorQ:=shpQ.Brush.Color;
+          cplot.DSOColorGL:=shpGL.Brush.Color;
+          cplot.DSOColorNE:=shpNE.Brush.Color;
+    end;
+  end;
+
+

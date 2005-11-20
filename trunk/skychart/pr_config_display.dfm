@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_color
+    ActivePage = t_nebcolor
     Align = alClient
     TabOrder = 0
     object t_display: TTabSheet
@@ -92,10 +92,15 @@ object f_config_display: Tf_config_display
           Height = 25
           Max = 50
           Min = 1
+          Orientation = trHorizontal
           PageSize = 5
           Frequency = 5
           Position = 1
+          SelEnd = 0
+          SelStart = 0
           TabOrder = 0
+          TickMarks = tmBottomRight
+          TickStyle = tsAuto
           OnChange = StarSizeBarChange
         end
         object StarContrastBar: TTrackBar
@@ -105,10 +110,15 @@ object f_config_display: Tf_config_display
           Height = 25
           Max = 1000
           Min = 100
+          Orientation = trHorizontal
           PageSize = 100
           Frequency = 100
           Position = 100
+          SelEnd = 0
+          SelStart = 0
           TabOrder = 1
+          TickMarks = tmBottomRight
+          TickStyle = tsAuto
           OnChange = StarContrastBarChange
         end
         object SaturationBar: TTrackBar
@@ -117,9 +127,15 @@ object f_config_display: Tf_config_display
           Width = 225
           Height = 25
           Max = 255
+          Orientation = trHorizontal
           PageSize = 28
           Frequency = 28
+          Position = 0
+          SelEnd = 0
+          SelStart = 0
           TabOrder = 2
+          TickMarks = tmBottomRight
+          TickStyle = tsAuto
           OnChange = SaturationBarChange
         end
         object SizeContrastBar: TTrackBar
@@ -129,10 +145,15 @@ object f_config_display: Tf_config_display
           Height = 25
           Max = 100
           Min = 10
+          Orientation = trHorizontal
           PageSize = 10
           Frequency = 10
           Position = 10
+          SelEnd = 0
+          SelStart = 0
           TabOrder = 3
+          TickMarks = tmBottomRight
+          TickStyle = tsAuto
           OnChange = SizeContrastBarChange
         end
         object StarButton1: TButton
@@ -1361,138 +1382,511 @@ object f_config_display: Tf_config_display
       Caption = 't_nebcolor'
       ImageIndex = 4
       TabVisible = False
-      object Label201: TLabel
+      object lblDSO: TLabel
         Left = 0
         Top = 0
-        Width = 103
+        Width = 114
         Height = 13
-        Caption = 'Nebulae Color Setting'
+        Caption = 'Deep-sky object colours'
       end
-      object Label1: TLabel
-        Left = 136
-        Top = 40
-        Width = 109
-        Height = 13
-        Caption = 'Low surface brightness'
-      end
-      object Label2: TLabel
-        Left = 320
-        Top = 40
-        Width = 111
-        Height = 13
-        Caption = 'High surface brightness'
-      end
-      object Label3: TLabel
-        Left = 40
-        Top = 144
-        Width = 32
-        Height = 13
-        Caption = 'Galaxy'
-      end
-      object Label4: TLabel
-        Left = 40
-        Top = 232
-        Width = 32
-        Height = 13
-        Caption = 'Cluster'
-      end
-      object Label5: TLabel
-        Left = 40
-        Top = 320
-        Width = 34
-        Height = 13
-        Caption = 'Nebula'
-      end
-      object NebGrayBar: TTrackBar
-        Left = 128
-        Top = 56
-        Width = 150
-        Height = 45
-        Max = 255
-        PageSize = 26
-        Frequency = 26
-        TabOrder = 0
-        OnChange = NebGrayBarChange
-      end
-      object NebBrightBar: TTrackBar
-        Left = 312
-        Top = 56
-        Width = 150
-        Height = 45
-        Max = 255
-        PageSize = 26
-        Frequency = 26
-        TabOrder = 1
-        OnChange = NebBrightBarChange
-      end
-      object NebColorPanel: TPanel
-        Left = 104
-        Top = 104
-        Width = 361
-        Height = 281
-        Color = clBlack
-        TabOrder = 2
-        object Shape29: TShape
-          Tag = 8
-          Left = 56
-          Top = 16
-          Width = 97
-          Height = 49
-          Shape = stEllipse
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape30: TShape
-          Tag = 8
-          Left = 232
-          Top = 16
-          Width = 97
-          Height = 49
-          Shape = stEllipse
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape31: TShape
-          Tag = 9
-          Left = 72
-          Top = 96
-          Width = 65
-          Height = 65
-          Shape = stCircle
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape32: TShape
-          Tag = 9
-          Left = 248
-          Top = 96
-          Width = 65
-          Height = 65
-          Shape = stCircle
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape33: TShape
-          Tag = 10
-          Left = 72
-          Top = 192
-          Width = 65
-          Height = 65
-          OnMouseUp = NebShapeMouseUp
-        end
-        object Shape34: TShape
-          Tag = 10
-          Left = 248
-          Top = 192
-          Width = 65
-          Height = 65
-          OnMouseUp = NebShapeMouseUp
-        end
-      end
-      object DefNebColorButton: TButton
+      object lblDSOCScheme: TLabel
         Left = 16
-        Top = 56
-        Width = 75
-        Height = 25
-        Caption = 'Default'
-        TabOrder = 3
-        OnClick = DefNebColorButtonClick
+        Top = 24
+        Width = 138
+        Height = 13
+        Caption = 'Use a preset colour scheme :'
+      end
+      object gbDSOCOverrides: TGroupBox
+        Left = 16
+        Top = 80
+        Width = 465
+        Height = 193
+        Caption = ' Choose colours for object type  '
+        TabOrder = 0
+        object lblAst: TLabel
+          Left = 16
+          Top = 44
+          Width = 39
+          Height = 13
+          Caption = 'Asterism'
+        end
+        object shpAst: TShape
+          Left = 120
+          Top = 44
+          Width = 33
+          Height = 13
+          Shape = stRoundRect
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object lblSN: TLabel
+          Left = 240
+          Top = 44
+          Width = 93
+          Height = 13
+          Caption = 'Supernova remnant'
+        end
+        object shpSN: TShape
+          Left = 360
+          Top = 44
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object lblOCl: TLabel
+          Left = 16
+          Top = 64
+          Width = 60
+          Height = 13
+          Caption = 'Open cluster'
+        end
+        object lblGCl: TLabel
+          Left = 16
+          Top = 84
+          Width = 73
+          Height = 13
+          Caption = 'Globular cluster'
+        end
+        object lblPNe: TLabel
+          Left = 16
+          Top = 104
+          Width = 79
+          Height = 13
+          Caption = 'Planetary nebula'
+        end
+        object lblDN: TLabel
+          Left = 16
+          Top = 124
+          Width = 58
+          Height = 13
+          Caption = 'Dark nebula'
+        end
+        object lblEN: TLabel
+          Left = 16
+          Top = 144
+          Width = 76
+          Height = 13
+          Caption = 'Emission nebula'
+        end
+        object lblRN: TLabel
+          Left = 16
+          Top = 164
+          Width = 83
+          Height = 13
+          Caption = 'Reflection nebula'
+        end
+        object shpRN: TShape
+          Left = 120
+          Top = 164
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpEN: TShape
+          Left = 120
+          Top = 144
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpDN: TShape
+          Left = 120
+          Top = 124
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpPNe: TShape
+          Left = 120
+          Top = 104
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGCl: TShape
+          Left = 120
+          Top = 84
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpOCl: TShape
+          Left = 120
+          Top = 64
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object lblGxy: TLabel
+          Left = 240
+          Top = 64
+          Width = 32
+          Height = 13
+          Caption = 'Galaxy'
+        end
+        object lblGxyCl: TLabel
+          Left = 240
+          Top = 84
+          Width = 66
+          Height = 13
+          Caption = 'Galaxy cluster'
+        end
+        object lblQ: TLabel
+          Left = 240
+          Top = 104
+          Width = 34
+          Height = 13
+          Caption = 'Quasar'
+        end
+        object lblGL: TLabel
+          Left = 240
+          Top = 124
+          Width = 81
+          Height = 13
+          Caption = 'Gravitational lens'
+        end
+        object lblNE: TLabel
+          Left = 240
+          Top = 144
+          Width = 108
+          Height = 13
+          Caption = 'Non-existent/unknown'
+          WordWrap = True
+        end
+        object shpNE: TShape
+          Left = 360
+          Top = 144
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGL: TShape
+          Left = 360
+          Top = 124
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpQ: TShape
+          Left = 360
+          Top = 104
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGxyCl: TShape
+          Left = 360
+          Top = 84
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGxy: TShape
+          Left = 360
+          Top = 64
+          Width = 33
+          Height = 13
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object lblDSOType: TLabel
+          Left = 240
+          Top = 24
+          Width = 66
+          Height = 13
+          Caption = 'Object type'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblDSOColour: TLabel
+          Left = 360
+          Top = 24
+          Width = 37
+          Height = 13
+          Caption = 'Colour'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblDSOColourFill: TLabel
+          Left = 416
+          Top = 24
+          Width = 24
+          Height = 13
+          Caption = 'Fill?'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 16
+          Top = 24
+          Width = 66
+          Height = 13
+          Caption = 'Object type'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label12: TLabel
+          Left = 120
+          Top = 24
+          Width = 37
+          Height = 13
+          Caption = 'Colour'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label13: TLabel
+          Left = 176
+          Top = 24
+          Width = 24
+          Height = 13
+          Caption = 'Fill?'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object chkFillAst: TCheckBox
+          Left = 176
+          Top = 44
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 1
+          Visible = False
+          OnClick = chkFillAstClick
+        end
+        object chkFillOCl: TCheckBox
+          Left = 176
+          Top = 64
+          Width = 17
+          Height = 13
+          TabOrder = 2
+          OnClick = chkFillOClClick
+        end
+        object chkFillGCl: TCheckBox
+          Left = 176
+          Top = 84
+          Width = 17
+          Height = 13
+          TabOrder = 3
+          OnClick = chkFillGClClick
+        end
+        object chkFillPNe: TCheckBox
+          Left = 176
+          Top = 104
+          Width = 17
+          Height = 13
+          TabOrder = 4
+          OnClick = chkFillPNeClick
+        end
+        object chkFillDN: TCheckBox
+          Left = 176
+          Top = 124
+          Width = 17
+          Height = 13
+          TabOrder = 5
+          OnClick = chkFillDNClick
+        end
+        object chkFillEN: TCheckBox
+          Left = 176
+          Top = 144
+          Width = 17
+          Height = 13
+          TabOrder = 6
+          OnClick = chkFillENClick
+        end
+        object chkFillRN: TCheckBox
+          Left = 176
+          Top = 164
+          Width = 17
+          Height = 13
+          TabOrder = 7
+          OnClick = chkFillRNClick
+        end
+        object chkFillSN: TCheckBox
+          Left = 416
+          Top = 44
+          Width = 17
+          Height = 13
+          TabOrder = 8
+          OnClick = chkFillSNClick
+        end
+        object chkFillGxy: TCheckBox
+          Left = 416
+          Top = 64
+          Width = 17
+          Height = 13
+          TabOrder = 9
+          OnClick = chkFillGxyClick
+        end
+        object chkFillGxyCl: TCheckBox
+          Left = 416
+          Top = 84
+          Width = 17
+          Height = 13
+          TabOrder = 10
+          OnClick = chkFillGxyClClick
+        end
+        object chkFillQ: TCheckBox
+          Left = 416
+          Top = 104
+          Width = 17
+          Height = 13
+          TabOrder = 11
+          OnClick = chkFillQClick
+        end
+        object chkFillGL: TCheckBox
+          Left = 416
+          Top = 124
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 12
+          Visible = False
+          OnClick = chkFillGLClick
+        end
+        object chkFillNE: TCheckBox
+          Left = 416
+          Top = 144
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 0
+          Visible = False
+          OnClick = chkFillNEClick
+        end
+      end
+      object GroupBox2: TGroupBox
+        Left = 16
+        Top = 280
+        Width = 465
+        Height = 137
+        Caption = ' Adjust colour brightness '
+        TabOrder = 1
+        object Label1: TLabel
+          Left = 24
+          Top = 20
+          Width = 109
+          Height = 13
+          Caption = 'Low surface brightness'
+        end
+        object Label2: TLabel
+          Left = 248
+          Top = 20
+          Width = 111
+          Height = 13
+          Caption = 'High surface brightness'
+        end
+        object Label3: TLabel
+          Left = 16
+          Top = 68
+          Width = 203
+          Height = 13
+          Caption = 'Fainter                                           Brighter  '
+        end
+        object Label4: TLabel
+          Left = 240
+          Top = 68
+          Width = 209
+          Height = 13
+          Caption = 'Fainter                                             Brighter  '
+        end
+        object NebBrightBar: TTrackBar
+          Left = 232
+          Top = 40
+          Width = 217
+          Height = 25
+          Max = 255
+          Orientation = trHorizontal
+          PageSize = 26
+          Frequency = 26
+          Position = 0
+          SelEnd = 0
+          SelStart = 0
+          TabOrder = 0
+          TickMarks = tmBottomRight
+          TickStyle = tsAuto
+          OnChange = NebBrightBarChange
+        end
+        object NebGrayBar: TTrackBar
+          Left = 8
+          Top = 40
+          Width = 209
+          Height = 25
+          Max = 255
+          Orientation = trHorizontal
+          PageSize = 26
+          Frequency = 26
+          Position = 0
+          SelEnd = 0
+          SelStart = 0
+          TabOrder = 1
+          TickMarks = tmBottomRight
+          TickStyle = tsAuto
+          OnChange = NebGrayBarChange
+        end
+        object DefNebColorButton: TButton
+          Left = 384
+          Top = 88
+          Width = 75
+          Height = 25
+          Caption = 'Default'
+          TabOrder = 2
+          OnClick = DefNebColorButtonClick
+        end
+        object NebColorPanel: TPanel
+          Left = 112
+          Top = 88
+          Width = 233
+          Height = 41
+          TabOrder = 3
+          object Shape29: TShape
+            Left = 32
+            Top = 4
+            Width = 65
+            Height = 33
+            Shape = stEllipse
+          end
+          object Shape30: TShape
+            Left = 136
+            Top = 4
+            Width = 65
+            Height = 33
+            Shape = stEllipse
+          end
+        end
+      end
+      object lstDSOCScheme: TListBox
+        Left = 160
+        Top = 24
+        Width = 145
+        Height = 41
+        ItemHeight = 13
+        Items.Strings = (
+          'CdC v2 default'
+          'CdC v3 default')
+        TabOrder = 2
+        OnClick = lstDSOCSchemeClick
       end
     end
     object t_lines: TTabSheet
@@ -2394,9 +2788,12 @@ object f_config_display: Tf_config_display
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
+    MinFontSize = 0
+    MaxFontSize = 0
     Left = 424
   end
   object ColorDialog1: TColorDialog
+    Ctl3D = True
     Left = 456
   end
 end

@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_constant, u_util, u_planetrender, u_bitmap,
-     Math, SysUtils, Classes, Types,
+     Math, SysUtils, Classes, Types, StrUtils,
 {$ifdef linux}
    Qt, Qmenus, QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
 {$endif}
@@ -108,6 +108,23 @@ type
      Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
      Procedure PlotGalaxie(x,y: single; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
+//--------------------------------------------
+      Procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String);
+      Procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string);
+      Procedure PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+      procedure PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+      procedure PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+      procedure PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+      Procedure PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+      procedure PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      procedure PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      procedure PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      procedure PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      Procedure PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      Procedure PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+      Procedure PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+      Procedure PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+//---------------------------------------------
      Procedure PlotLine(x1,y1,x2,y2:single; color,width: integer);
      Procedure PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg, Transparent :boolean; bmp:Tbitmap);
      procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
@@ -607,6 +624,71 @@ if not cfgplot.Invisible then
 end;
 end;
 
+Procedure TSplot.PlotDeepSkyObject(Axx,Ayy: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; Amorph : String);
+begin
+{
+  Here's where we break out the plot routines for each type of deep sky object
+  we do it this way so that we can (in future) plot using different symbol sets
+  it also clears the way for introducing more deep sky object types based on the CdS
+  heirarchy.
+
+  NOTE: We are using here a cut down version of the SACv7.1 list.
+        And the NGC2000,rather than Steinecke's NGC/IC lists.
+
+  confusingly the existing code sets up the rec.neb.nebtype array differently
+  for the SAC and NGC base catalogs
+  The default values for rec.neb.nebtype(1..18) is:
+    nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
+
+--------------------------------------------------------------------------------------------------------------------
+ The SAC read routine loads in:
+      nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
+   not found=-1,Gx=1,OC=2,Gb=3,Pl=4,Nb=5,C+N=6,*=7,D*=8,***=9,Ast=10,Kt=11,Gcl=12,Drk=13,'?'=0,spaces=0,'-'=-1,PD=-1;
+   (PD = plate defect. where has this come from (it's the NGC)..?)
+
+ The NGC read routine ignores 12 and 13:
+   not found=-1,Gx=1,OC=2,Gb=3,Pl=4,Nb=5,C+N=6,*=7,D*=8,***=9,Ast=10,Kt=11,?=0,spaces=0,'-'=-1,PD=-1;
+
+--------------------------------------------------------------------------------------------------------------------
+ For v3 we continue to use these old types
+ the case cconstruct is ordered by *** frequency *** of object occurence
+}
+  if not cfgplot.Invisible then  // if its above the horizon...
+    begin
+      case Atyp of
+//        1:  // galaxy - not called from here, they are plotted back in cu_skychart.DrawDeepSkyObject
+          2:  // open cluster
+            PlotDSOOcl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+          4:  // planetary
+            PlotDSOPNe(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+          3:  // globular cluster
+            PlotDSOGCl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+          5:  // bright nebula (emission and reflection)
+            PlotDSOBN(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+          6:  // cluster with nebula
+            PlotDSOClNb(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+          7:  // star
+            PlotDSOStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          8:  // double star
+            PlotDSODStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          9:  // triple star
+            PlotDSOTStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          10: // asterism
+            PlotDSOAst(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          11: // Knot (more accurately as an HII region e.g. in M101, M33 and the LMC)
+            PlotDSOHIIRegion(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          12: // galaxy cluster
+            PlotDSOGxyCl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+          13: // dark nebula
+            PlotDSODN(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+          0: // unknown - general case where catalog entry is '?' or spaces
+            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+         -1: // special case equating to catalog entry of '-' or 'PD'
+            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+      end;
+    end;
+end;
+
 Procedure TSplot.PlotGalaxie(x,y: single; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
 var
   x1,y1: Double;
@@ -960,6 +1042,10 @@ end;
 end;
 
 procedure TSplot.PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
+                          // xx,yy      ,op,lw,fs,rec.options.ObjType,cfgsc.x2   ,col
+{TODO: tie this routine into plotting outline colours depending on object type.
+ ie, different colours if we are plotting milky way, refelction or emmission nebula outlines
+}
 var xx,yy:integer;
 procedure addpoint(x,y:integer);
 begin
@@ -1035,6 +1121,12 @@ if not cfgplot.Invisible then begin
          if outlinecol=cfgplot.bgColor then outlinecol:=outlinecol xor clWhite;
          cnv.Pen.Mode:=pmCopy;
          cnv.Pen.Width:=outlinelw*cfgchart.drawpen;
+
+{ This needs careful thought. Ideally, the outline line colour needs to be the
+  same as the object type, eg SNRs, Barnards, and bright nebs.
+  TODO. Sort out what type of object is being plotted as MilkyWay will also be
+  displayed in this colour
+}
          cnv.Pen.Color:=outlinecol;
          cnv.Brush.Style:=bsSolid;
          cnv.Brush.Color:=outlinecol;
@@ -2024,6 +2116,913 @@ with cnv do begin
   end;
   Polyline(p);
 end;
+end;
+
+Procedure TSplot.PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string);
+{
+Plots galaxies - Arnuc comes thru as 0, Ab_vt and Ab_ve come thru as 100
+}
+const
+  RotationIncrement = 10;
+
+var
+  x1,y1: Double;
+  ds1,ds2,ds3,xx,yy : Integer;
+  ex,ey,th,rot : double;
+  n,ex1,ey1 : integer;
+  elp : array [1..44] of Tpoint;
+  co,nebcolor : Tcolor;
+  col,r,g,b : byte;
+  EllipsePoints : Array[0..89] of TPoint;
+  Total_Tics, cnt : Integer;
+  phi : Double;
+
+begin
+{ todo: Change this routine to reduce the diameter by a config-set value,
+        anywhere between 0.1 and 0.9.
+        Typically, the catalog diameters are set at the mag 25 sq arc sec, and
+        this leads to diameters wayyyyy too large for light polluted sites.
+        eg. 0.6 works well for SE England.
+}
+  xx:=round(Ax);
+  yy:=round(Ay);
+  ds1:=round(maxvalue([Apixscale*Ar1/2,cfgchart.drawpen]))+cfgchart.drawpen;
+  ds2:=round(maxvalue([Apixscale*Ar2/2,cfgchart.drawpen]))+cfgchart.drawpen;
+  ds3:=round(Apixscale*Arnuc/2);
+  if Ab_vt>1000 then
+    co:=cfgplot.Color[trunc(Ab_vt-1000)]
+  else
+    begin
+      case Round(Ab_vt*10) of
+             -999: co := $00000000 ;
+         -990..-3: co := cfgplot.Color[1];
+           -2..-1: co := cfgplot.Color[2];
+            0..2 : co := cfgplot.Color[3];
+            3..5 : co := cfgplot.Color[4];
+            6..8 : co := cfgplot.Color[5];
+            9..13: co := cfgplot.Color[6];
+          14..999: co := cfgplot.Color[7];
+            1000 : co := cfgplot.Color[8];
+          else co:=cfgplot.color[11]
+      end;
+      co:=cfgplot.DSOColorGxy;
+      cnv.Pen.Width := cfgchart.drawpen;
+      cnv.Brush.style:=bsSolid;
+      cnv.Pen.Mode:=pmCopy;
+      cnv.Pen.Color:=cfgplot.DSOColorGxy;
+
+      if cfgplot.nebplot = 0 then // line mode
+        begin
+          cnv.Brush.style:=bsClear;
+          if cfgplot.DSOColorFillGxy then
+            begin
+              cnv.Brush.Style := bsSolid;
+              cnv.Pen.Color := cfgplot.DSOColorGxy;
+              cnv.Brush.Color := cnv.Pen.Color;
+            end;
+        end;
+
+      if cfgplot.nebplot = 1 then // graphics mode
+        begin
+          if Asbr<0 then
+            begin
+              if Ar1<=0 then Ar1:=1;
+              if Ar2<=0 then Ar2:=Ar1;
+              Asbr:= Ama + 2.5*log10(Ar1*Ar2) - 0.26;
+            end;
+          col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,
+                        trunc(cfgplot.Nebbright-((Asbr-11)/4)*
+                             (cfgplot.Nebbright-cfgplot.Nebgray))])]);
+          r:=cfgplot.DSOColorGxy and $FF;
+          g:=(cfgplot.DSOColorGxy shr 8) and $FF;
+          b:=(cfgplot.DSOColorGxy shr 16) and $FF;
+          Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+          cnv.Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
+          cnv.Pen.Color := cnv.Brush.Color;
+          cnv.Brush.Style := bsSolid;
+        end;
+
+      th:=0;
+      for n:=1 to 44 do
+        begin
+          ex:=ds1*cos(th);
+          ey:=ds2*sin(th);
+          ex1:=round(ex*sin(Apa) - ey*cos(Apa)) + xx ;
+          ey1:=round(ex*cos(Apa) + ey*sin(Apa)) + yy ;
+          elp[n]:=Point(ex1,ey1);
+          th:=th+0.15;
+        end;
+      cnv.Polygon(elp);
+
+{      if Arnuc>0 then
+        begin
+//        different surface brightness and color for the nucleus, no more used with present catalog
+          case Round(Ab_ve*10) of
+               -999: co := $00000000 ;
+           -990..-3: co := cfgplot.Color[1];
+             -2..-1: co := cfgplot.Color[2];
+              0..2 : co := cfgplot.Color[3];
+              3..5 : co := cfgplot.Color[4];
+              6..8 : co := cfgplot.Color[5];
+              9..13: co := cfgplot.Color[6];
+            14..999: co := cfgplot.Color[7];
+            else co:=cfgplot.Color[11];
+          end;
+          case cfgplot.Nebplot of
+                0: begin
+                    cnv.Brush.Color := cfgplot.Color[0];
+                    if co=0 then
+                      cnv.Pen.Color := cfgplot.Color[11]
+                    else cnv.Pen.Color := co;
+                    cnv.Brush.Style := bsClear;
+                   end;
+                1: begin
+                    col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-1-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+                    r:=co and $FF;
+                    g:=(co shr 8) and $FF;
+                    b:=(co shr 16) and $FF;
+                    Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+                    cnv.Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
+                    cnv.Pen.Color := cnv.Brush.Color;
+                    cnv.Brush.Style := bsSolid;
+                  end;
+          end;
+          cnv.Ellipse(xx-ds3,yy-ds3,xx+ds3,yy+ds3);
+        end;}
+    end;
+
+end;
+
+Procedure TSplot.PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+{
+  Plot open clusters
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  cnv.Pen.Mode := pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Brush.Style := bsSolid;
+
+  if cfgplot.nebplot = 1 then // graphic mode
+    begin
+      if Asbr<=0 then
+        begin
+          if Adim<=+0 then
+            Adim:=1;
+          Asbr:= Ama + 5*log10(Adim) - 0.26;
+        end;
+//    adjust colour by using Asbr and UI options
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=cfgplot.DSOColorOCl and $FF;
+      g:=(cfgplot.DSOColorOCl shr 8) and $FF;
+      b:=(cfgplot.DSOColorOCl shr 16) and $FF;
+      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+//    in graphic mode, the obect is ALWAYS shown as filled.
+      cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
+      cnv.Brush.Color := cnv.Pen.Color;
+    end;
+
+  if cfgplot.nebplot = 0 then // line mode
+// line mode
+    begin
+      ds2:=round(ds*2/3);
+      ds:=ds+cfgchart.drawpen;
+      if cfgplot.DSOColorFillOCl then
+        begin
+          cnv.Brush.Style := bsSolid;
+          cnv.Pen.Color := cfgplot.DSOColorOCl;
+          cnv.Brush.Color := cnv.Pen.Color;
+        end
+      else
+        begin
+          cnv.Pen.Style := psDot;
+          cnv.Brush.Style := bsClear;
+        end;
+//      cnv.MoveTo(xx-ds,yy);
+    end;
+
+{ and draw it... we're using an ellipse, in future we may adjust this for non-circular clusters
+  use the symbol set from Display>Options
+}
+  cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+end;
+
+
+Procedure TSplot.PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+{
+  Plot planetary nebulae - currently these are shown as circular...
+  todo: change so that we can plot non-circular ones
+  Also, use Skiff's formula in DS to calc the SBr. This is fairly close
+  to the published OIII brightness.
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorPNe;
+  cnv.Brush.Style := bsSolid;
+
+  if cfgplot.nebplot = 1 then // graphic mode
+    begin
+      if Asbr<=0 then
+        begin
+          if Adim<=+0 then
+            Adim:=1;
+          Asbr:= Ama + 5*log10(Adim) - 0.26;
+        end;
+//    adjust colour by using Asbr and UI options
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);      r:=cfgplot.DSOColorPNe and $FF;
+      g:=(cfgplot.DSOColorPNe shr 8) and $FF;
+      b:=(cfgplot.DSOColorPNe shr 16) and $FF;
+      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+//    in graphic mode, the obect is ALWAYS shown as filled.
+      cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
+      cnv.Brush.Color := cnv.Pen.Color;
+    end;
+
+  if cfgplot.nebplot = 0 then // line mode
+    begin
+      ds2:=round(ds*2/3);
+      ds:=ds+cfgchart.drawpen;
+      if cfgplot.DSOColorFillPNe then
+        begin
+          cnv.Brush.Style := bsSolid;
+          cnv.Pen.Color := cfgplot.DSOColorPNe;
+          cnv.Brush.Color := cnv.Pen.Color;
+        end
+      else
+        begin
+          cnv.Brush.Style := bsClear;
+          cnv.Pen.Style := psSolid;
+        end;
+    end;
+
+// and draw it... we're using an circle, in future we may adjust this for non-circular planetaries
+
+  cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+  cnv.MoveTo((xx-ds)-2,yy);
+  cnv.LineTo((xx+ds)+2,yy);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+
+
+
+Procedure TSplot.PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+{
+  Plot globular clusters - currently these are shown as circular...
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorGCl;
+  cnv.Brush.Style := bsSolid;
+
+  if cfgplot.nebplot = 1 then // graphic mode
+    begin
+      if Asbr<=0 then
+        begin
+          if Adim<=+0 then
+            Adim:=1;
+          Asbr:= Ama + 5*log10(Adim) - 0.26;
+        end;
+//    adjust colour by using Asbr and UI options
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=cfgplot.DSOColorGCl and $FF;
+      g:=(cfgplot.DSOColorGCl shr 8) and $FF;
+      b:=(cfgplot.DSOColorGCl shr 16) and $FF;
+      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+//    in graphic mode, the obect is ALWAYS shown as filled.
+      cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
+      cnv.Brush.Color := cnv.Pen.Color;
+//    draw outer limit
+      cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+      cnv.Brush.Color := Addcolor(cnv.Brush.Color,$00202020);
+      cnv.Pen.Color :=cnv.Brush.Color;
+      ds2:=ds div 3; // a third looks more realistic
+//    draw core
+      cnv.Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
+    end;
+
+  if cfgplot.nebplot = 0 then // line mode
+    begin
+      ds2:=round(ds*2/3);
+      ds:=ds+cfgchart.drawpen;
+      if cfgplot.DSOColorFillGCl then
+        begin
+          cnv.Brush.Style := bsSolid;
+          cnv.Pen.Color := cfgplot.DSOColorGCl;
+          cnv.Brush.Color := cnv.Pen.Color;
+        end
+      else
+        begin
+          cnv.Brush.Style := bsClear;
+          cnv.Pen.Style := psSolid;
+        end;
+//    and draw it... we're using an circle, in future we may adjust this for non-circular planetaries
+      cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+      cnv.MoveTo(xx-ds,yy);
+      cnv.LineTo(xx+ds,yy);
+      cnv.MoveTo(xx,yy-ds);
+      cnv.LineTo(xx,yy+ds);
+    end;
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+
+
+
+
+Procedure TSplot.PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+{
+  Plot bright nebula - both emmission and reflection are plotted the same
+  in the future, we'll separate these out, maybe even for Herbig-Haro and variable nebulae
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+  ObjMorph:string;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+// emission of reflection nebula?
+  ObjMorph:=LeftStr(Amorph, 1);
+  if ObjMorph = 'R'
+  then cnv.Pen.Color := cfgplot.DSOColorRN
+  else cnv.Pen.Color := cfgplot.DSOColorEN;
+
+  cnv.Brush.Style := bsClear;
+
+  if cfgplot.nebplot = 1 then // graphic mode
+    begin
+      if Asbr<=0 then
+        begin
+          if Adim<=+0 then
+            Adim:=1;
+          Asbr:= Ama + 5*log10(Adim) - 0.26;
+        end;
+//    adjust colour by using Asbr and UI options
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=cnv.Pen.Color and $FF;
+      g:=(cnv.Pen.Color shr 8) and $FF;
+      b:=(cnv.Pen.Color shr 16) and $FF;
+      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+//    in graphic mode, the obect is ALWAYS shown as filled.
+      cnv.Brush.Style := bsSolid;
+      cnv.Brush.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
+      cnv.Pen.Color := cnv.Brush.Color;
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+    end;
+
+  if cfgplot.nebplot = 0 then // line mode
+    begin
+      ds2:=round(ds*2/3);
+      ds:=ds+cfgchart.drawpen;
+      cnv.Brush.Style := bsClear;
+      cnv.Pen.Style := psSolid;
+
+//emission nebula?
+  if ObjMorph = 'E' then
+      if cfgplot.DSOColorFillEN
+        then
+          begin
+            cnv.Brush.Style := bsSolid;
+            cnv.Brush.Color := cnv.Pen.Color;
+          end;
+
+//reflection nebula?
+  if ObjMorph = 'R' then
+      if cfgplot.DSOColorFillRN
+        then
+          begin
+            cnv.Brush.Style := bsSolid;
+            cnv.Brush.Color := cnv.Pen.Color;
+          end;
+
+//    and draw it... we're using an rectangle in the event that we don't have an outline
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+//      cnv.MoveTo(xx-ds,yy);
+//      cnv.LineTo(xx+ds,yy);
+//      cnv.MoveTo(xx,yy-ds);
+//      cnv.LineTo(xx,yy+ds);
+    end;
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+end;
+
+Procedure TSplot.PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+{
+  Plot nebula and cluster associations - e.g. M8, M42...
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+//  ds:=3*cfgchart.drawpen;
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorRN;
+  cnv.Brush.Style := bsSolid;
+
+  if cfgplot.nebplot = 1 then // graphic mode
+    begin
+      if Asbr<=0 then
+        begin
+          if Adim<=+0 then
+            Adim:=1;
+          Asbr:= Ama + 5*log10(Adim) - 0.26;
+        end;
+//    adjust colour by using Asbr and UI options
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=cfgplot.DSOColorRN and $FF;
+      g:=(cfgplot.DSOColorRN shr 8) and $FF;
+      b:=(cfgplot.DSOColorRN shr 16) and $FF;
+      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+//    in graphic mode, the obect is ALWAYS shown as filled.
+      cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
+      cnv.Brush.Color := cnv.Pen.Color;
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+    end;
+
+  if cfgplot.nebplot = 0 then // line mode
+    begin
+      ds2:=round(ds*2/3);
+      ds:=ds+cfgchart.drawpen;
+      if cfgplot.DSOColorFillRN then
+        begin
+          cnv.Brush.Style := bsSolid;
+          cnv.Pen.Color := cfgplot.DSOColorRN;
+          cnv.Brush.Color := cnv.Pen.Color;
+        end
+      else
+        begin
+          cnv.Brush.Style := bsClear;
+          cnv.Pen.Style := psSolid;
+        end;
+//    and draw it... we're using an rectangle in the event that we don't have an outline
+//    Ideally all extended nebulae should have an outline.
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.MoveTo(xx-ds,yy);
+      cnv.Pen.Color := cfgplot.DSOColorOCl;
+      cnv.LineTo(xx+ds,yy);
+      cnv.MoveTo(xx,yy-ds);
+      cnv.LineTo(xx,yy+ds);
+    end;
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+end;
+
+Procedure TSplot.PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+  Plot DSO that is actually a single star
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  Adim:=0.5;
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorOCl;
+
+// Plotted as an '+', so there's no difference between line and graphics mode
+// we use the same colour as for open clusters
+
+  cnv.MoveTo(xx-ds,yy);
+  cnv.LineTo(xx+ds,yy);
+  cnv.MoveTo(xx,yy-ds);
+  cnv.LineTo(xx,yy+ds);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+Procedure TSplot.PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+  Plot DSO that is actually a double star
+  DSO's as stars are slit into different routines as we may decide to use
+  different symbols for single, or multiple stars cataloged as DSOs.
+  ToDO: Implement user-definable symbol sets.
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  Adim:=0.5;
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorOCl;
+
+// Plotted as a '+', so there's no difference between line and graphics mode
+// we use the same colour as for open clusters
+
+  cnv.MoveTo(xx-ds,yy);
+  cnv.LineTo(xx+ds,yy);
+  cnv.MoveTo(xx,yy-ds);
+  cnv.LineTo(xx,yy+ds);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+Procedure TSplot.PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+ Plot DSO that is actually a triple star
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  Adim:=0.5;
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorOCl;
+
+// Plotted as a '+', so there's no difference between line and graphics mode
+// we use the same colour as for open clusters
+
+  cnv.MoveTo(xx-ds,yy);
+  cnv.LineTo(xx+ds,yy);
+  cnv.MoveTo(xx,yy-ds);
+  cnv.LineTo(xx,yy+ds);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+
+Procedure TSplot.PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+  Asterisms are chance? groupings of stars so plot as for open clusters apart from colour
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorAst;
+  cnv.Brush.Style := bsSolid;
+
+  if cfgplot.nebplot = 1 then // graphic mode
+    begin
+      if Asbr<=0 then
+        begin
+          if Adim<=+0 then
+            Adim:=1;
+          Asbr:= Ama + 5*log10(Adim) - 0.26;
+        end;
+//    adjust colour by using Asbr and UI options
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=cfgplot.DSOColorAst and $FF;
+      g:=(cfgplot.DSOColorAst shr 8) and $FF;
+      b:=(cfgplot.DSOColorAst shr 16) and $FF;
+      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+//    in graphic mode, the obect is ALWAYS shown as filled.
+      cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
+      cnv.Brush.Color := cnv.Pen.Color;
+    end;
+
+  if cfgplot.nebplot = 0 then // line mode
+// line mode
+    begin
+      ds2:=round(ds*2/3);
+      ds:=ds+cfgchart.drawpen;
+      if cfgplot.DSOColorFillAst then
+        begin
+          cnv.Brush.Style := bsSolid;
+          cnv.Pen.Color := cfgplot.DSOColorAst;
+          cnv.Brush.Color := cnv.Pen.Color;
+        end
+      else
+        begin
+          cnv.Pen.Style := psDot;
+          cnv.Brush.Style := bsClear;
+        end;
+//      cnv.MoveTo(xx-ds,yy);
+    end;
+
+// and draw it... we're using an ellipse, in future we may adjust this for non-circular asterisms
+  cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+end;
+
+Procedure TSplot.PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+  Plot HII regions. SAC has these catalogued as 'knots'. We plot them as if they
+  are emission nebulae (bright nebulae)
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorEN;
+  cnv.Brush.Style := bsSolid;
+
+  if cfgplot.nebplot = 1 then // graphic mode
+    begin
+      if Asbr<=0 then
+        begin
+          if Adim<=+0 then
+            Adim:=1;
+          Asbr:= Ama + 5*log10(Adim) - 0.26;
+        end;
+//    adjust colour by using Asbr and UI options
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=cfgplot.DSOColorEN and $FF;
+      g:=(cfgplot.DSOColorEN shr 8) and $FF;
+      b:=(cfgplot.DSOColorEN shr 16) and $FF;
+      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+//    in graphic mode, the obect is ALWAYS shown as filled.
+      cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
+      cnv.Brush.Color := cnv.Pen.Color;
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+    end;
+
+  if cfgplot.nebplot = 0 then // line mode
+    begin
+      ds2:=round(ds*2/3);
+      ds:=ds+cfgchart.drawpen;
+      if cfgplot.DSOColorFillEN then
+        begin
+          cnv.Brush.Style := bsSolid;
+          cnv.Pen.Color := cfgplot.DSOColorEN;
+          cnv.Brush.Color := cnv.Pen.Color;
+        end
+      else
+        begin
+          cnv.Brush.Style := bsClear;
+          cnv.Pen.Style := psSolid;
+        end;
+//    and draw it... we're using an rectangle in the event that we don't have an outline
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.MoveTo(xx-ds,yy);
+      cnv.LineTo(xx+ds,yy);
+      cnv.MoveTo(xx,yy-ds);
+      cnv.LineTo(xx,yy+ds);
+    end;
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+
+Procedure TSplot.PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+{
+  Plot galaxy cluster - in SAC they are the Abell clusters, the size is the Abell radius
+  confusingly, this is not the *angular* radius of the cluster
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psDot;
+  cnv.Pen.Color := cfgplot.DSOColorGxyCl;
+  cnv.Brush.Style := bsClear;
+
+{ Plotted as an open dashed circle, so there's no difference between line and
+  graphics mode
+}
+  ds2:=round(ds*2/3);
+  ds:=ds+cfgchart.drawpen;
+  cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+Procedure TSplot.PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+{
+  Plot dark nebula
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorDN;
+  cnv.Brush.Style := bsSolid;
+
+  if cfgplot.nebplot = 1 then // graphic mode
+    begin
+      if Asbr<=0 then
+        begin
+          if Adim<=+0 then
+            Adim:=1;
+          Asbr:= Ama + 5*log10(Adim) - 0.26;
+        end;
+//    adjust colour by using Asbr and UI options
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-(0.8)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=cfgplot.DSOColorDN and $FF;
+      g:=(cfgplot.DSOColorDN shr 8) and $FF;
+      b:=(cfgplot.DSOColorDN shr 16) and $FF;
+      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+//    in graphic mode, the obect is ALWAYS shown as filled.
+      cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
+      cnv.Brush.Color := cnv.Pen.Color;
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+    end;
+
+  if cfgplot.nebplot = 0 then // line mode
+    begin
+      ds2:=round(ds*2/3);
+      ds:=ds+cfgchart.drawpen;
+      if cfgplot.DSOColorFillDN then
+        begin
+          cnv.Brush.Style := bsSolid;
+          cnv.Pen.Color := cfgplot.DSOColorDN;
+          cnv.Brush.Color := cnv.Pen.Color;
+        end
+      else
+        begin
+          cnv.Brush.Style := bsClear;
+          cnv.Pen.Style := psSolid;
+        end;
+//    and draw it... we're using an rectangle in the event that we don't have an outline
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+    end;
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+Procedure TSplot.PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+ Plot unknown object?
+}
+var
+  sz: Double;
+  ds,ds2,xx,yy : Integer;
+  col,r,g,b : byte;
+  nebcolor : Tcolor;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  Adim:=0.5;
+  cnv.Pen.Width := cfgchart.drawpen;
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
+
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.DSOColorNE;
+
+// Plotted as an 'X', so there's no difference between line and graphics mode
+
+  cnv.MoveTo(xx-ds,yy-ds);
+  cnv.LineTo(xx+ds+1,yy+ds);
+  cnv.MoveTo(xx+ds,yy-ds);
+  cnv.LineTo(xx-ds,yy+ds+1);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
 end;
 
 end.

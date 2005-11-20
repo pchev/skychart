@@ -2,10 +2,10 @@ object f_main: Tf_main
   Tag = 1
   Left = 190
   Top = 114
-  Width = 800
+  Width = 826
   Height = 570
   HorzScrollBar.Range = 54
-  VertScrollBar.Range = 88
+  VertScrollBar.Range = 91
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
   Color = clBackground
@@ -118,6 +118,7 @@ object f_main: Tf_main
   Menu = MainMenu1
   ParentFont = False
   Position = poDefault
+  Scaled = False
   Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
@@ -126,9 +127,7 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnMouseWheel = FormMouseWheel
   OnResize = FormResize
-  PixelsPerInch = 90
-  TextHeight = 13
-  TextWidth = 5
+  PixelsPerInch = 88
   object starshape: TImage
     Left = 264
     Top = 160
@@ -2754,8 +2753,8 @@ object f_main: Tf_main
   object PanelTop: TPanel
     Left = 0
     Top = 0
-    Width = 800
-    Height = 54
+    Width = 826
+    Height = 57
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
@@ -2763,8 +2762,9 @@ object f_main: Tf_main
     object ToolBar1: TToolBar
       Left = 0
       Top = 0
-      Width = 800
+      Width = 826
       Height = 25
+      AutoSize = True
       ButtonHeight = 23
       Caption = 'ToolBar1'
       EdgeInner = esNone
@@ -3204,13 +3204,15 @@ object f_main: Tf_main
     end
     object ToolBar4: TToolBar
       Left = 0
-      Top = 27
-      Width = 768
+      Top = 29
+      Width = 794
       Height = 26
       Align = alNone
       Anchors = [akLeft, akRight, akBottom]
+      AutoSize = True
       ButtonHeight = 23
       Caption = 'ToolBar4'
+      EdgeBorders = [ebBottom]
       EdgeInner = esNone
       EdgeOuter = esNone
       Flat = True
@@ -3518,35 +3520,35 @@ object f_main: Tf_main
       end
     end
     object ChildControl: TPanel
-      Left = 768
+      Left = 790
       Top = 25
-      Width = 32
-      Height = 29
+      Width = 36
+      Height = 32
       Align = alRight
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 2
       object BtnCloseChild: TSpeedButton
-        Left = 16
+        Left = 18
         Top = 8
-        Width = 15
-        Height = 15
+        Width = 18
+        Height = 18
         OnClick = BtnCloseChildClick
       end
       object BtnRestoreChild: TSpeedButton
         Left = 1
         Top = 8
-        Width = 15
-        Height = 15
+        Width = 18
+        Height = 18
         OnClick = BtnRestoreChildClick
       end
     end
   end
   object PanelLeft: TPanel
     Left = 0
-    Top = 54
+    Top = 57
     Width = 27
-    Height = 454
+    Height = 451
     Align = alLeft
     BevelOuter = bvNone
     ParentColor = True
@@ -3646,10 +3648,10 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 773
-    Top = 54
+    Left = 799
+    Top = 57
     Width = 27
-    Height = 454
+    Height = 451
     Align = alRight
     BevelOuter = bvNone
     ParentColor = True
@@ -3882,7 +3884,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Top = 508
-    Width = 800
+    Width = 826
     Height = 34
     Align = alBottom
     Alignment = taLeftJustify
@@ -3927,9 +3929,9 @@ object f_main: Tf_main
   end
   object MultiDoc1: TMultiForm
     Left = 27
-    Top = 54
-    Width = 746
-    Height = 454
+    Top = 57
+    Width = 772
+    Height = 451
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -3939,7 +3941,7 @@ object f_main: Tf_main
     TitleHeight = 12
     onMaximize = MultiDoc1Maximize
     onActiveChildChange = MultiDoc1ActiveChildChange
-    KeepLastChild = False
+    KeepLastChild = True
   end
   object MainMenu1: TMainMenu
     Left = 200
@@ -4273,6 +4275,10 @@ object f_main: Tf_main
       GroupIndex = 9
       object Connect1: TMenuItem
         Action = TelescopeConnect
+      end
+      object TelescopePanel1: TMenuItem
+        Action = TelescopePanel
+        Caption = 'Control Panel'
       end
       object Slew1: TMenuItem
         Action = TelescopeSlew
@@ -4896,6 +4902,12 @@ object f_main: Tf_main
       Category = 'Window'
       Caption = 'Maximize'
       OnExecute = MaximizeExecute
+    end
+    object TelescopePanel: TAction
+      Category = 'Telescope'
+      Caption = 'Telescope Panel'
+      Hint = 'Telescope Panel'
+      OnExecute = TelescopePanelExecute
     end
   end
   object ImageList1: TImageList

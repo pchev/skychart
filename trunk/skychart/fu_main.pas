@@ -380,6 +380,8 @@ type
     ChildControl: TPanel;
     BtnCloseChild: TSpeedButton;
     BtnRestoreChild: TSpeedButton;
+    TelescopePanel: TAction;
+    TelescopePanel1: TMenuItem;
 
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -489,6 +491,7 @@ type
     procedure MaximizeExecute(Sender: TObject);
     procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure TelescopePanelExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -573,7 +576,7 @@ implementation
 
 uses fu_detail, fu_about, fu_config, fu_info, u_projection, passql, pasmysql,
      LibcExec,  // libc exec bug workaround by Andreas Hausladen
-     fu_zoom, fu_getdss,
+     fu_zoom, fu_getdss, fu_manualtelescope,
      fu_printsetup, fu_directory, fu_calendar, fu_search, fu_position;
 
 // include all cross-platform common code.
@@ -804,6 +807,7 @@ for i:=0 to MultiDoc1.ChildCount-1 do
 end;
 
 // End of Linux specific CLX code:
+
 
 end.
 

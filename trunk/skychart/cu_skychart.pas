@@ -77,6 +77,7 @@ Tskychart = class (TComponent)
     function DrawStars :boolean;
     function DrawVarStars :boolean;
     function DrawDblStars :boolean;
+    function DrawDeepSkyObject :boolean; //DrawNebulae :boolean;
     function DrawNebulae :boolean;
     function DrawNebImages :boolean;
     function DrawOutline :boolean;
@@ -100,6 +101,9 @@ Tskychart = class (TComponent)
     function DrawLabels:boolean;
     procedure DrawFinderMark(ra,de :double; moving:boolean) ;
     procedure DrawCircle;
+//  compass rose
+    procedure DrawCRose;
+//  end of compass rose
     function TelescopeMove(ra,dec:double):boolean;
     procedure GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
@@ -207,7 +211,8 @@ try
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque) then DrawHorizon;
     DrawComet;
-    if cfgsc.shownebulae or cfgsc.ShowImages then DrawNebulae;
+    if cfgsc.shownebulae or cfgsc.ShowImages then DrawDeepSkyObject;
+//    if cfgsc.shownebulae or cfgsc.ShowImages then DrawNebulae;
     if cfgsc.ShowBackgroundImage then DrawNebImages;
     if cfgsc.showline then DrawOutline;
   end;
@@ -561,6 +566,7 @@ if not cfgsc.quick then Fplanet.ComputePlanet(cfgsc);
          end;
      6 : begin
          // ra - dec
+//         cfgsc.TrackOn:=false;
          cfgsc.racentre:=cfgsc.TrackRA;
          cfgsc.decentre:=cfgsc.TrackDec;
          end;
@@ -733,6 +739,115 @@ else begin
   Proj3(cfgsc.rap2000,cfgsc.dep2000,ra,dec,x1,y1,cfgsc);
   result:=arctan2(x1,y1);
 end;
+end;
+
+function Tskychart.DrawDeepSkyObject :boolean;
+var rec:GcatRec;
+  x1,y1,x2,y2,rot,ra,de: Double;
+  x,y,xx,yy,sz:single;
+  lid, save_nebplot: integer;
+  imgfile: string;
+  stext: string;
+  bmp:Tbitmap;
+  save_col8,save_col9,save_col10,save_col11: TColor;
+
+  Procedure Drawing;
+    begin
+      stext:=rec.neb.morph;
+      if rec.neb.nebtype<>1 then
+        Fplot.PlotDeepSkyObject(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype,rec.neb.morph)
+      else
+        begin;    //   galaxies are the only rotatable objects, so rotate them and then plot...
+          projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
+          rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
+          if (not rec.neb.valid[vnPA])or(rec.neb.pa=-999)
+            then rec.neb.pa:=90
+            else rec.neb.pa:=rec.neb.pa-rad2deg*PoleRot2000(rec.ra,rec.dec);
+          rec.neb.pa:=rec.neb.pa*cfgsc.FlipX;
+          if cfgsc.FlipY<0 then rec.neb.pa:=180-rec.neb.pa;
+          rec.neb.pa:=Deg2Rad*rec.neb.pa+rot;
+          Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.morph);
+        end;
+      end;
+
+  Procedure Drawing_Gray;
+    begin
+      save_nebplot:=Fplot.cfgplot.nebplot;
+      save_col8:=Fplot.cfgplot.color[8];
+      save_col9:=Fplot.cfgplot.color[9];
+      save_col10:=Fplot.cfgplot.color[10];
+      save_col11:=Fplot.cfgplot.color[11];
+      Fplot.cfgplot.nebplot:=1;
+      Fplot.cfgplot.color[8]:=clSilver;
+      Fplot.cfgplot.color[9]:=clSilver;
+      Fplot.cfgplot.color[10]:=clSilver;
+      Fplot.cfgplot.color[11]:=clSilver;
+      Drawing;
+      Fplot.cfgplot.nebplot:=save_nebplot;
+      Fplot.cfgplot.color[8]:=save_col8;
+      Fplot.cfgplot.color[9]:=save_col9;
+      Fplot.cfgplot.color[10]:=save_col10;
+      Fplot.cfgplot.color[11]:=save_col11;
+    end;
+
+  begin
+    fillchar(rec,sizeof(rec),0);
+    bmp:=Tbitmap.Create;
+    try
+    if Fcatalog.OpenNeb then
+      while Fcatalog.readneb(rec) do
+        begin
+          lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
+          precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+          if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+          projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
+          WindowXY(x1,y1,xx,yy,cfgsc);
+          if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
+          if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
+          sz:=abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit*rec.neb.dim1/2;
+          if ((xx+sz)>cfgsc.Xmin) and
+             ((xx-sz)<cfgsc.Xmax) and
+             ((yy+sz)>cfgsc.Ymin) and
+             ((yy-sz)<cfgsc.Ymax) then
+            begin
+              if cfgsc.ShowImages and
+                 FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then
+                begin
+                  if (sz>6) then
+                    begin
+                      FFits.FileName:=imgfile;
+                      if FFits.Header.valid then
+                        if ((FFits.Img_Width*cfgsc.BxGlb/FFits.Header.naxis1)<10) then
+                          begin
+                            ra:=FFits.Center_RA;
+                            de:=FFits.Center_DE;
+                            precession(jd2000,cfgsc.JDChart,ra,de);
+                            if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
+                            projection(ra,de,x1,y1,true,cfgsc) ;
+                            WindowXY(x1,y1,x,y,cfgsc);
+                            FFits.GetBitmap(bmp);
+                            projection(ra,de+0.001,x2,y2,false,cfgsc) ;
+                            rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
+                            Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,true,bmp);
+                          end
+                        else Drawing_Gray;
+                    end
+                  else Drawing_Gray;
+                end
+              else
+                if cfgsc.shownebulae then
+                  begin
+                    Drawing;
+                  end;
+              if rec.neb.messierobject or (rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then
+              SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id);
+            end;
+        end;
+      result:=true;
+    finally
+      Fcatalog.CloseNeb;
+      bmp.Free;
+    end;
 end;
 
 function Tskychart.DrawNebulae :boolean;
@@ -2665,6 +2780,16 @@ end;
 //listed mark
 for i:=1 to cfgsc.NumCircle do DrawFinderMark(cfgsc.CircleLst[i,1],cfgsc.CircleLst[i,2],false);
 end;
+
+//  compass rose
+Procedure Tskychart.DrawCRose;
+var i : integer;
+begin
+//draw circle
+if cfgsc.ShowCRose then Fplot.PlotCircle(10,10,10,10,Fplot.cfgplot.Color[18],false);
+
+end;
+//  end of compass rose
 
 function Tskychart.TelescopeMove(ra,dec:double):boolean;
 var dist:double;
