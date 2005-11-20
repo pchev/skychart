@@ -10,13 +10,13 @@ object f_search: Tf_search
   Color = clButton
   Font.Color = clText
   Font.Height = 13
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Sans'
   Font.Pitch = fpVariable
   Font.Style = []
   Font.Weight = 0
   ParentFont = False
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 88
   TextHeight = 20
   TextWidth = 7
   object PlanetPanel: TPanel
