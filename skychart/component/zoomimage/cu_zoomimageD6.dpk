@@ -29,6 +29,6 @@ requires
   vcl;
 
 contains
-  cu_zoomimage in '\\STAR\WIN_E\cdc\dev\skychart\component\zoomimage\cu_zoomimage.pas';
+  cu_zoomimage in 'cu_zoomimage.pas';
 
 end.
