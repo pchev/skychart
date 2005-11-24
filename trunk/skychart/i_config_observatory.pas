@@ -158,7 +158,7 @@ strpcopy(nc.m_Name,utf8encode(citylist.text));
 nc.m_Coord[0]:=latsec.value+latmin.value*100+latdeg.value*10000;
 if hemis.itemindex=1 then nc.m_Coord[0]:=-nc.m_Coord[0];
 nc.m_Coord[1]:=longsec.value+longmin.value*100+longdeg.value*10000;
-if long.itemindex=1 then nc.m_Coord[1]:=-nc.m_Coord[1];
+if long.itemindex=0 then nc.m_Coord[1]:=-nc.m_Coord[1];
 if AddCity(@nc)>0 then begin;
    actual_country:='';
    cityfilter.text:=citylist.text;
@@ -240,7 +240,7 @@ strpcopy(nc.m_Name,utf8encode(citylist.text));
 nc.m_Coord[0]:=latsec.value+latmin.value*100+latdeg.value*10000;
 if hemis.itemindex=1 then nc.m_Coord[0]:=-nc.m_Coord[0];
 nc.m_Coord[1]:=longsec.value+longmin.value*100+longdeg.value*10000;
-if long.itemindex=1 then nc.m_Coord[1]:=-nc.m_Coord[1];
+if long.itemindex=0 then nc.m_Coord[1]:=-nc.m_Coord[1];
 if ModifyCity(i,@nc)>0 then begin;
    actual_country:='';
    cityfilter.text:=citylist.text;
@@ -503,43 +503,7 @@ end;
 end;
 
 procedure Tf_config_observatory.FormShow(Sender: TObject);
-{$ifdef linux}
-var i:integer;
-{$endif}
 begin
 ShowObservatory;
 ShowHorizon;
-{$ifdef linux}
-  if color=dark then begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-     end;
-  end;
-{$endif}
 end;
