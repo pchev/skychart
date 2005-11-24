@@ -61,9 +61,6 @@ if (RowClick>=0) and assigned(FKillTCP) then
 end;
 
 procedure Tf_info.FormShow(Sender: TObject);
-{$ifdef linux}
-var i:integer;
-{$endif}
 begin
 case Pagecontrol1.ActivepageIndex of
 0: begin
@@ -82,39 +79,6 @@ case Pagecontrol1.ActivepageIndex of
    f_info.ProgressMemo.clear;
    end;
 end;
-{$ifdef linux}
-  if color=dark then begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-     end;
-  end;
-{$endif}
 end;
 
 procedure Tf_info.setpage(n:integer);

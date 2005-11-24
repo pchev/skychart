@@ -23,47 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 
 procedure Tf_printsetup.FormShow(Sender: TObject);
-{$ifdef linux}
-var i:integer;
-{$endif}
 begin
 updprtsetup;
 prtcolor.ItemIndex:=cm.PrintColor;
 if cm.PrintLandscape then prtorient.ItemIndex:=1
                      else prtorient.ItemIndex:=0;
-{$ifdef linux}
-  if color=dark then begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-     end;
-  end;
-{$endif}
 end;
 
 procedure Tf_printsetup.updprtsetup;

@@ -17,7 +17,7 @@ object f_directory: Tf_directory
   ParentFont = False
   Scaled = False
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 88
   object DirectoryTreeView1: TDirectoryTreeView
     Left = 16
     Top = 32

@@ -258,6 +258,7 @@ object f_config: Tf_config
       Width = 201
       Height = 433
       AutoExpand = True
+      Color = clBase
       Columns = <>
       ItemMargin = 5
       Items.Data = {

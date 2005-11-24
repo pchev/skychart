@@ -46,29 +46,8 @@ end;
 
 
 procedure Tf_getdss.FormShow(Sender: TObject);
-{$ifdef linux}
-var i:integer;
-{$endif}
 begin
-{$ifdef linux}
-  ListBox1.font.color:=font.color;
-  Label1.font.color:=font.color;
-  if color=dark then begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-    end;
-  end;   
-{$endif}
+
 end;
 
 function Tf_getdss.GetDss(ra,de,fov,ratio:double):boolean;
