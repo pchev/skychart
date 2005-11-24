@@ -18,15 +18,15 @@ object f_config_time: Tf_config_time
       object Label50: TLabel
         Left = 224
         Top = 46
-        Width = 49
-        Height = 20
+        Width = 40
+        Height = 18
         Caption = 'Seconds'
       end
       object Label72: TLabel
         Left = 0
         Top = 0
-        Width = 68
-        Height = 20
+        Width = 57
+        Height = 18
         Caption = 'Time Setting'
       end
       object CheckBox1: TCheckBox
@@ -57,29 +57,30 @@ object f_config_time: Tf_config_time
         object Label131: TLabel
           Left = 8
           Top = 31
-          Width = 114
-          Height = 20
+          Width = 89
+          Height = 18
           Caption = 'Local Time   =  UT +'
         end
         object Label132: TLabel
           Left = 8
           Top = 8
-          Width = 60
-          Height = 20
+          Width = 47
+          Height = 18
           Caption = 'Time Zone'
         end
         object Label133: TLabel
           Left = 200
           Top = 31
-          Width = 167
-          Height = 20
+          Width = 140
+          Height = 18
           Caption = '(Negative West of Greenwich)'
         end
         object tz: TFloatEdit
           Left = 128
           Top = 30
           Width = 41
-          Height = 22
+          Height = 20
+          Cursor = crIBeam
           Hint = '-12..12'
           ParentShowHint = False
           ShowHint = True
@@ -101,29 +102,29 @@ object f_config_time: Tf_config_time
         object Label146: TLabel
           Left = 8
           Top = 33
-          Width = 59
-          Height = 20
+          Width = 48
+          Height = 18
           Caption = 'DT - UT  : '
         end
         object Tdt_Ut: TLabel
           Left = 77
           Top = 33
-          Width = 28
-          Height = 20
+          Width = 24
+          Height = 18
           Caption = '0000'
         end
         object Label152: TLabel
           Left = 115
           Top = 33
-          Width = 49
-          Height = 20
+          Width = 40
+          Height = 18
           Caption = 'Seconds'
         end
         object Label153: TLabel
           Left = 8
           Top = 8
-          Width = 250
-          Height = 20
+          Width = 203
+          Height = 18
           Caption = 'Dynamic Time difference with Universal Time'
         end
         object CheckBox4: TCheckBox
@@ -139,7 +140,8 @@ object f_config_time: Tf_config_time
           Left = 208
           Top = 61
           Width = 105
-          Height = 22
+          Height = 20
+          Cursor = crIBeam
           Hint = '-99999999..99999999'
           Enabled = False
           ParentShowHint = False
@@ -155,7 +157,8 @@ object f_config_time: Tf_config_time
         Left = 176
         Top = 45
         Width = 41
-        Height = 22
+        Height = 20
+        Cursor = crIBeam
         Hint = '0..86400'
         ParentShowHint = False
         ShowHint = True
@@ -174,57 +177,57 @@ object f_config_time: Tf_config_time
         object Label154: TLabel
           Left = 8
           Top = 70
-          Width = 26
-          Height = 20
+          Width = 20
+          Height = 18
           Caption = 'Time'
         end
         object Label158: TLabel
           Left = 112
           Top = 48
-          Width = 11
-          Height = 20
+          Width = 9
+          Height = 18
           Caption = 'M'
         end
         object Label159: TLabel
           Left = 152
           Top = 48
-          Width = 8
-          Height = 20
+          Width = 7
+          Height = 18
           Caption = 'S'
         end
         object Label160: TLabel
           Left = 56
           Top = 48
-          Width = 9
-          Height = 20
+          Width = 8
+          Height = 18
           Caption = 'H'
         end
         object Label161: TLabel
           Left = 56
           Top = 2
-          Width = 9
-          Height = 20
+          Width = 7
+          Height = 18
           Caption = 'Y'
         end
         object Label162: TLabel
           Left = 112
           Top = 2
-          Width = 11
-          Height = 20
+          Width = 9
+          Height = 18
           Caption = 'M'
         end
         object Label163: TLabel
           Left = 152
           Top = 2
-          Width = 9
-          Height = 20
+          Width = 8
+          Height = 18
           Caption = 'D'
         end
         object Label164: TLabel
           Left = 8
           Top = 22
-          Width = 26
-          Height = 20
+          Width = 22
+          Height = 18
           Caption = 'Date'
         end
         object BitBtn4: TBitBtn
@@ -253,7 +256,7 @@ object f_config_time: Tf_config_time
           Left = 56
           Top = 19
           Width = 57
-          Height = 28
+          Height = 26
           Max = 20000
           TabOrder = 2
           Value = 100
@@ -263,7 +266,7 @@ object f_config_time: Tf_config_time
           Left = 112
           Top = 19
           Width = 41
-          Height = 28
+          Height = 26
           Max = 12
           Min = 1
           TabOrder = 3
@@ -274,7 +277,7 @@ object f_config_time: Tf_config_time
           Left = 152
           Top = 19
           Width = 41
-          Height = 28
+          Height = 26
           Max = 31
           Min = 1
           TabOrder = 4
@@ -285,7 +288,7 @@ object f_config_time: Tf_config_time
           Left = 56
           Top = 65
           Width = 41
-          Height = 28
+          Height = 26
           Max = 23
           TabOrder = 5
           OnChanged = TimeChange
@@ -294,7 +297,7 @@ object f_config_time: Tf_config_time
           Left = 112
           Top = 65
           Width = 41
-          Height = 28
+          Height = 26
           Max = 59
           TabOrder = 6
           OnChanged = TimeChange
@@ -303,7 +306,7 @@ object f_config_time: Tf_config_time
           Left = 152
           Top = 65
           Width = 41
-          Height = 28
+          Height = 26
           Max = 59
           TabOrder = 7
           OnChanged = TimeChange
@@ -316,22 +319,22 @@ object f_config_time: Tf_config_time
       object Label165: TLabel
         Left = 0
         Top = 0
-        Width = 129
-        Height = 20
+        Width = 107
+        Height = 18
         Caption = 'Time Simulation Setting'
       end
       object Label167: TLabel
         Left = 8
         Top = 269
-        Width = 40
-        Height = 20
+        Width = 31
+        Height = 18
         Caption = 'every  '
       end
       object Label168: TLabel
         Left = 8
         Top = 213
-        Width = 128
-        Height = 20
+        Width = 109
+        Height = 18
         Caption = 'Number of computation'
       end
       object stepunit: TRadioGroup
@@ -361,15 +364,15 @@ object f_config_time: Tf_config_time
       object Label166: TLabel
         Left = 8
         Top = 32
-        Width = 315
-        Height = 20
+        Width = 263
+        Height = 18
         Caption = 'Plot the moving object for a number of consecutive date.'
       end
       object nbstep: TSpinEdit
         Left = 144
         Top = 209
         Width = 70
-        Height = 28
+        Height = 26
         Min = 1
         TabOrder = 6
         Value = 1
@@ -379,7 +382,7 @@ object f_config_time: Tf_config_time
         Left = 144
         Top = 265
         Width = 70
-        Height = 28
+        Height = 26
         Max = 999999
         Min = 1
         TabOrder = 7
@@ -414,8 +417,8 @@ object f_config_time: Tf_config_time
       object Label178: TLabel
         Left = 8
         Top = 80
-        Width = 137
-        Height = 20
+        Width = 115
+        Height = 18
         Caption = 'For the following objects'
       end
       object AllSim: TButton

@@ -3767,10 +3767,11 @@ object f_main: Tf_main
     end
   end
   object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
     Left = 216
     Top = 160
     object File1: TMenuItem
-      Caption = '&File'
+      Caption = 'File'
       Hint = 'File related commands'
       object FileNewItem: TMenuItem
         Action = FileNew1
@@ -3810,7 +3811,7 @@ object f_main: Tf_main
       end
     end
     object Edit1: TMenuItem
-      Caption = '&Edit'
+      Caption = 'Edit'
       GroupIndex = 2
       Hint = 'Edit commands'
       object CopyItem: TMenuItem
@@ -4123,7 +4124,7 @@ object f_main: Tf_main
       end
     end
     object Window1: TMenuItem
-      Caption = '&Window'
+      Caption = 'Window'
       GroupIndex = 2
       Hint = 'Window related commands'
       object WindowCascadeItem: TMenuItem
@@ -4152,7 +4153,7 @@ object f_main: Tf_main
       end
     end
     object Help1: TMenuItem
-      Caption = '&Help'
+      Caption = 'Help'
       GroupIndex = 2
       Hint = 'Help topics'
       object Content1: TMenuItem

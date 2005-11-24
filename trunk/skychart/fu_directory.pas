@@ -57,27 +57,8 @@ begin
 end;
 
 procedure Tf_directory.FormShow(Sender: TObject);
-var i:integer;
 begin
  label1.Caption:=DirectoryTreeView1.Directory;
-{$ifdef linux}
-  if color=dark then begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TDirectoryTreeView ) then with (Components[i] as TDirectoryTreeView) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TDirectoryTreeView ) then with (Components[i] as TDirectoryTreeView) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-    end;
-  end;   
-{$endif}
-
 end;
 
 end.

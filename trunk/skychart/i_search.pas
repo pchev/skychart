@@ -23,35 +23,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 
 procedure Tf_search.FormShow(Sender: TObject);
-{$ifdef linux}
-var i:integer;
-{$endif}
 begin
-{$ifdef linux}
-  if color=dark then begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is Tedit ) then with (Components[i] as Tedit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TComboBox ) then with (Components[i] as TComboBox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is Tedit ) then with (Components[i] as Tedit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TComboBox ) then with (Components[i] as TComboBox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-    end;
-  end;
-{$endif}
+
 end;
 
 procedure Tf_search.CatButtonClick(Sender: TObject);

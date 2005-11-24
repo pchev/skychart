@@ -37,11 +37,18 @@ f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
-{$ifdef linux}
-var i:integer;
-{$endif}
 begin
 locktree:=false;
+{$ifdef linux}
+SetFrameNightVision(f_config_time1, color=dark);
+SetFrameNightVision(f_config_observatory1, color=dark);
+SetFrameNightVision(f_config_chart1, color=dark);
+SetFrameNightVision(f_config_catalog1, color=dark);
+SetFrameNightVision(f_config_solsys1, color=dark);
+SetFrameNightVision(f_config_display1, color=dark);
+SetFrameNightVision(f_config_pictures1, color=dark);
+SetFrameNightVision(f_config_system1, color=dark);
+{$endif}
 f_config_time1.FormShow(Sender);
 f_config_observatory1.FormShow(Sender);
 f_config_chart1.FormShow(Sender);
@@ -55,23 +62,6 @@ Treeview1.selected:=Treeview1.items[cmain.configpage];
 Treeview1.selected.parent.expand(true);
 Treeview1.selected:=Treeview1.items[cmain.configpage];
 TreeView1Change(Sender,Treeview1.selected);
-{$ifdef linux}
-  if color=dark then begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-     end;
-  end;
-{$endif}
 end;
 
 procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);

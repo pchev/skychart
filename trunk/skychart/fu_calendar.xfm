@@ -1,6 +1,6 @@
 object f_calendar: Tf_calendar
-  Left = 449
-  Top = 74
+  Left = 370
+  Top = 164
   Width = 646
   Height = 435
   HorzScrollBar.Range = 217
@@ -217,6 +217,7 @@ object f_calendar: Tf_calendar
       Top = 41
       Width = 33
       Height = 22
+      Cursor = crIBeam
       Hint = '0..9999'
       ParentShowHint = False
       ShowHint = True
@@ -847,7 +848,8 @@ object f_calendar: Tf_calendar
         Left = 112
         Top = 0
         Width = 33
-        Height = 21
+        Height = 22
+        Cursor = crIBeam
         Hint = '0..99'
         MaxLength = 4
         ParentShowHint = False
@@ -877,7 +879,8 @@ object f_calendar: Tf_calendar
         Left = 192
         Top = 0
         Width = 33
-        Height = 21
+        Height = 22
+        Cursor = crIBeam
         Hint = '0..99'
         ParentShowHint = False
         ShowHint = True

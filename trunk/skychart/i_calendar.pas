@@ -58,65 +58,8 @@ if initial then begin
   initial:=false;
 end;
 {$ifdef linux}
-  if color=dark then begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-           if fixedcolor=clButton then  fixedcolor:=dark;
-        end;
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-           if fixedcolor=dark  then fixedcolor:=clButton;
-        end;
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-     end;
-  end;
-  ShowImage.color:=color;
-  ShowImage.font.color:=font.color;
+  SetFormNightVision(self,color=dark);
+  SetFormNightVision(ShowImage,color=dark);
 {$endif}
 end;
 
