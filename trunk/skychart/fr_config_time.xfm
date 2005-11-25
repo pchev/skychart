@@ -9,7 +9,7 @@ object f_config_time: Tf_config_time
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_time
+    ActivePage = t_simulation
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -231,9 +231,9 @@ object f_config_time: Tf_config_time
           Caption = 'Date'
         end
         object BitBtn4: TBitBtn
-          Left = 40
+          Left = 248
           Top = 104
-          Width = 177
+          Width = 137
           Height = 25
           Caption = 'Actual system time'
           ParentColor = True
@@ -324,54 +324,53 @@ object f_config_time: Tf_config_time
         Caption = 'Time Simulation Setting'
       end
       object Label167: TLabel
-        Left = 8
-        Top = 269
+        Left = 200
+        Top = 237
         Width = 31
         Height = 18
         Caption = 'every  '
       end
       object Label168: TLabel
         Left = 8
-        Top = 213
-        Width = 109
+        Top = 237
+        Width = 77
         Height = 18
-        Caption = 'Number of computation'
+        Caption = 'Number of steps'
       end
       object stepunit: TRadioGroup
-        Left = 8
-        Top = 304
-        Width = 417
-        Height = 49
+        Left = 312
+        Top = 184
+        Width = 153
+        Height = 113
         Items.Strings = (
           'Days'
           'Hours'
           'Minutes'
           'Seconds')
         Caption = 'Step unit'
-        Columns = 4
         TabOrder = 3
         OnClick = stepunitClick
       end
       object stepline: TCheckBox
-        Left = 8
-        Top = 376
-        Width = 417
+        Left = 128
+        Top = 320
+        Width = 265
         Height = 17
-        Caption = 'Connection lines between each position '
+        Caption = 'Connection lines between position '
         TabOrder = 4
         OnClick = steplineClick
       end
       object Label166: TLabel
         Left = 8
         Top = 32
-        Width = 263
+        Width = 131
         Height = 18
-        Caption = 'Plot the moving object for a number of consecutive date.'
+        Caption = 'Choose which object to plot'
       end
       object nbstep: TSpinEdit
-        Left = 144
-        Top = 209
-        Width = 70
+        Left = 128
+        Top = 233
+        Width = 65
         Height = 26
         Min = 1
         TabOrder = 6
@@ -379,9 +378,9 @@ object f_config_time: Tf_config_time
         OnChanged = nbstepChanged
       end
       object stepsize: TSpinEdit
-        Left = 144
-        Top = 265
-        Width = 70
+        Left = 240
+        Top = 233
+        Width = 65
         Height = 26
         Max = 999999
         Min = 1
@@ -390,8 +389,8 @@ object f_config_time: Tf_config_time
         OnChanged = stepsizeChanged
       end
       object SimObj: TCheckListBox
-        Left = 176
-        Top = 80
+        Left = 8
+        Top = 48
         Width = 249
         Height = 97
         Columns = 3
@@ -416,14 +415,14 @@ object f_config_time: Tf_config_time
       end
       object Label178: TLabel
         Left = 8
-        Top = 80
-        Width = 115
+        Top = 184
+        Width = 158
         Height = 18
-        Caption = 'For the following objects'
+        Caption = 'Plot the position of moving object'
       end
       object AllSim: TButton
-        Left = 72
-        Top = 112
+        Left = 288
+        Top = 64
         Width = 75
         Height = 25
         Caption = 'All'
@@ -432,8 +431,8 @@ object f_config_time: Tf_config_time
         OnClick = AllSimClick
       end
       object NoSim: TButton
-        Left = 72
-        Top = 144
+        Left = 288
+        Top = 96
         Width = 75
         Height = 25
         Caption = 'None'
@@ -442,11 +441,11 @@ object f_config_time: Tf_config_time
         OnClick = NoSimClick
       end
       object ResetButton: TButton
-        Left = 256
-        Top = 240
-        Width = 145
+        Left = 128
+        Top = 360
+        Width = 89
         Height = 25
-        Caption = 'Reset to single date'
+        Caption = 'Reset'
         ParentColor = True
         TabOrder = 12
         OnClick = stepresetClick

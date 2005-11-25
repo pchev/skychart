@@ -69,7 +69,7 @@ end;
 procedure Tf_config_display.ShowColor;
 begin
  bg1.color:=cplot.bgColor;
- bg2.color:=cplot.bgColor;
+// bg2.color:=cplot.bgColor;
  bg3.color:=cplot.bgColor;
  bg4.color:=cplot.bgColor;
  shape1.brush.color:=cplot.color[1];
@@ -79,12 +79,12 @@ begin
  shape5.brush.color:=cplot.color[5];
  shape6.brush.color:=cplot.color[6];
  shape7.brush.color:=cplot.color[7];
- shape8.pen.color:=cplot.color[8];
- shape8.brush.color:=cplot.bgColor;
- shape9.pen.color:=cplot.color[9];
- shape9.brush.color:=cplot.bgColor;
- shape10.pen.color:=cplot.color[10];
- shape10.brush.color:=cplot.bgColor;
+// shape8.pen.color:=cplot.color[8];
+// shape8.brush.color:=cplot.bgColor;
+// shape9.pen.color:=cplot.color[9];
+// shape9.brush.color:=cplot.bgColor;
+// shape10.pen.color:=cplot.color[10];
+// shape10.brush.color:=cplot.bgColor;
  shape11.pen.color:=cplot.color[12];
  shape11.brush.color:=cplot.bgColor;
  shape12.pen.color:=cplot.color[13];

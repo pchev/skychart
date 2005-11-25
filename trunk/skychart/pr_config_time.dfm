@@ -225,9 +225,9 @@ object f_config_time: Tf_config_time
           Caption = 'Date'
         end
         object BitBtn4: TBitBtn
-          Left = 40
+          Left = 256
           Top = 104
-          Width = 177
+          Width = 137
           Height = 25
           Caption = 'Actual system time'
           TabOrder = 0
@@ -325,18 +325,18 @@ object f_config_time: Tf_config_time
         Caption = 'Time Simulation Setting'
       end
       object stepreset: TSpeedButton
-        Left = 256
-        Top = 228
-        Width = 145
+        Left = 96
+        Top = 316
+        Width = 81
         Height = 25
-        Caption = 'Reset to single date'
+        Caption = 'Reset '
         Layout = blGlyphTop
         NumGlyphs = 2
         OnClick = stepresetClick
       end
       object Label178: TLabel
-        Left = 8
-        Top = 258
+        Left = 176
+        Top = 213
         Width = 32
         Height = 13
         Caption = 'every  '
@@ -344,33 +344,30 @@ object f_config_time: Tf_config_time
       object Label179: TLabel
         Left = 8
         Top = 213
-        Width = 110
+        Width = 77
         Height = 13
-        Caption = 'Number of computation'
+        Caption = 'Number of steps'
       end
       object Label180: TLabel
         Left = 8
-        Top = 56
-        Width = 306
+        Top = 32
+        Width = 136
         Height = 13
-        Caption = 
-          'Plot the moving object position for a number of consecutive date' +
-          '.'
+        Caption = 'Choose which objects to plot'
       end
       object Label56: TLabel
         Left = 8
-        Top = 96
-        Width = 115
+        Top = 152
+        Width = 159
         Height = 13
-        Caption = 'For the following object :'
+        Caption = 'Plot the position of moving object.'
       end
       object stepunit: TRadioGroup
-        Left = 8
-        Top = 296
-        Width = 417
-        Height = 49
+        Left = 304
+        Top = 171
+        Width = 153
+        Height = 89
         Caption = 'Step unit'
-        Columns = 4
         Items.Strings = (
           'Days'
           'Hours'
@@ -380,16 +377,16 @@ object f_config_time: Tf_config_time
         OnClick = stepunitClick
       end
       object stepline: TCheckBox
-        Left = 16
-        Top = 360
-        Width = 409
+        Left = 96
+        Top = 280
+        Width = 281
         Height = 17
         Caption = 'Connection lines between each position '
         TabOrder = 1
         OnClick = steplineClick
       end
       object nbstep: TSpinEdit
-        Left = 144
+        Left = 96
         Top = 208
         Width = 57
         Height = 22
@@ -400,8 +397,8 @@ object f_config_time: Tf_config_time
         OnChange = nbstepChanged
       end
       object stepsize: TSpinEdit
-        Left = 144
-        Top = 256
+        Left = 232
+        Top = 208
         Width = 57
         Height = 22
         MaxValue = 999999
@@ -411,8 +408,8 @@ object f_config_time: Tf_config_time
         OnChange = stepsizeChanged
       end
       object SimObj: TCheckListBox
-        Left = 144
-        Top = 96
+        Left = 8
+        Top = 48
         Width = 257
         Height = 84
         OnClickCheck = SimObjClickCheck
@@ -441,8 +438,8 @@ object f_config_time: Tf_config_time
         TabOrder = 4
       end
       object AllSim: TButton
-        Left = 56
-        Top = 120
+        Left = 296
+        Top = 56
         Width = 75
         Height = 25
         Caption = 'All'
@@ -450,8 +447,8 @@ object f_config_time: Tf_config_time
         OnClick = AllSimClick
       end
       object NoSim: TButton
-        Left = 56
-        Top = 152
+        Left = 296
+        Top = 88
         Width = 75
         Height = 25
         Caption = 'None'

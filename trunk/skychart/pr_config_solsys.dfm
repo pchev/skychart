@@ -1116,7 +1116,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 281
               Height = 21
               Style = csDropDownList
-              ItemHeight = 13
+              ItemHeight = 0
               TabOrder = 0
             end
             object delast: TButton

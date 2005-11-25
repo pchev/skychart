@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_nebcolor
+    ActivePage = t_display
     Align = alClient
     Style = tsNoTabs
     TabOrder = 0
@@ -172,6 +172,1674 @@ object f_config_display: Tf_config_display
           ParentColor = True
           TabOrder = 11
           OnClick = StarButton4Click
+        end
+      end
+    end
+    object t_color: TTabSheet
+      Caption = 't_color'
+      ImageIndex = 2
+      object Label8: TLabel
+        Left = 0
+        Top = 0
+        Width = 63
+        Height = 18
+        Caption = 'Color Setting'
+      end
+      object bg1: TPanel
+        Left = 32
+        Top = 88
+        Width = 401
+        Height = 38
+        TabOrder = 1
+        object Shape1: TShape
+          Tag = 1
+          Left = 24
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape2: TShape
+          Tag = 2
+          Left = 77
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape3: TShape
+          Tag = 3
+          Left = 130
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape4: TShape
+          Tag = 4
+          Left = 184
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape5: TShape
+          Tag = 5
+          Left = 237
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape6: TShape
+          Tag = 6
+          Left = 290
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape7: TShape
+          Tag = 7
+          Left = 344
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+      end
+      object Label181: TLabel
+        Left = 93
+        Top = 66
+        Width = 19
+        Height = 18
+        Caption = '-0.3'
+      end
+      object Label182: TLabel
+        Left = 147
+        Top = 66
+        Width = 19
+        Height = 18
+        Caption = '-0.1'
+      end
+      object Label183: TLabel
+        Left = 201
+        Top = 66
+        Width = 15
+        Height = 18
+        Caption = '0.2'
+      end
+      object Label184: TLabel
+        Left = 254
+        Top = 66
+        Width = 15
+        Height = 18
+        Caption = '0.5'
+      end
+      object Label185: TLabel
+        Left = 308
+        Top = 66
+        Width = 15
+        Height = 18
+        Caption = '0.8'
+      end
+      object Label186: TLabel
+        Left = 362
+        Top = 66
+        Width = 15
+        Height = 18
+        Caption = '1.3'
+      end
+      object Label187: TLabel
+        Left = 416
+        Top = 66
+        Width = 6
+        Height = 18
+        Caption = '>'
+      end
+      object Label188: TLabel
+        Left = 40
+        Top = 66
+        Width = 6
+        Height = 18
+        Caption = '<'
+      end
+      object Label189: TLabel
+        Left = 32
+        Top = 42
+        Width = 86
+        Height = 18
+        Caption = 'Star colour (B-V) :'
+      end
+      object Label190: TLabel
+        Left = 240
+        Top = 218
+        Width = 45
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Milky Way'
+      end
+      object Label193: TLabel
+        Left = 208
+        Top = 146
+        Width = 53
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Coord Grid'
+      end
+      object Label194: TLabel
+        Left = 294
+        Top = 146
+        Width = 36
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Eq Grid'
+      end
+      object Label195: TLabel
+        Left = 181
+        Top = 218
+        Width = 24
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Orbit'
+      end
+      object bg3: TPanel
+        Left = 32
+        Top = 168
+        Width = 401
+        Height = 38
+        TabOrder = 15
+        object Shape15: TShape
+          Tag = 16
+          Left = 32
+          Top = 4
+          Width = 33
+          Height = 30
+          Brush.Color = clBase
+          Pen.Color = clWhite
+          Pen.Width = 3
+          Shape = stSquare
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape16: TShape
+          Tag = 17
+          Left = 108
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Pen.Color = clWhite
+          Pen.Width = 3
+          Shape = stSquare
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape14: TShape
+          Tag = 15
+          Left = 336
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Pen.Color = clWhite
+          Pen.Width = 3
+          Shape = stSquare
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape12: TShape
+          Tag = 13
+          Left = 264
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Pen.Color = clWhite
+          Pen.Width = 3
+          Shape = stSquare
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape11: TShape
+          Tag = 12
+          Left = 188
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Pen.Color = clWhite
+          Pen.Width = 3
+          Shape = stSquare
+          OnMouseUp = ShapeMouseUp
+        end
+      end
+      object Label197: TLabel
+        Left = 49
+        Top = 146
+        Width = 61
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Constellation'
+      end
+      object Label198: TLabel
+        Left = 133
+        Top = 146
+        Width = 47
+        Height = 18
+        Alignment = taCenter
+        Caption = ' Boundary'
+      end
+      object Label199: TLabel
+        Left = 368
+        Top = 218
+        Width = 40
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Eyepiece'
+      end
+      object Label196: TLabel
+        Left = 360
+        Top = 146
+        Width = 51
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Misc. Lines'
+      end
+      object DefColor: TRadioGroup
+        Left = 32
+        Top = 304
+        Width = 401
+        Height = 89
+        Items.Strings = (
+          'Default'
+          'Red'
+          'White on Black'
+          'Black on White')
+        Caption = 'Standard  Color'
+        Columns = 2
+        TabOrder = 20
+        OnClick = DefColorClick
+      end
+      object Label11: TLabel
+        Left = 305
+        Top = 218
+        Width = 37
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Horizon'
+      end
+      object Label256: TLabel
+        Left = 122
+        Top = 218
+        Width = 31
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Comet'
+      end
+      object Label257: TLabel
+        Left = 51
+        Top = 218
+        Width = 39
+        Height = 18
+        Alignment = taCenter
+        Caption = 'Asteroid'
+      end
+      object bg4: TPanel
+        Left = 32
+        Top = 240
+        Width = 401
+        Height = 38
+        TabOrder = 24
+        object Shape26: TShape
+          Tag = 20
+          Left = 24
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape27: TShape
+          Tag = 21
+          Left = 87
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape28: TShape
+          Tag = 22
+          Left = 214
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stSquare
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape13: TShape
+          Tag = 14
+          Left = 150
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Pen.Color = clWhite
+          Pen.Width = 3
+          Shape = stSquare
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape25: TShape
+          Tag = 19
+          Left = 277
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Shape = stSquare
+          OnMouseUp = ShapeMouseUp
+        end
+        object Shape17: TShape
+          Tag = 18
+          Left = 341
+          Top = 4
+          Width = 30
+          Height = 30
+          Brush.Color = clBase
+          Pen.Color = clWhite
+          Pen.Width = 3
+          Shape = stCircle
+          OnMouseUp = ShapeMouseUp
+        end
+      end
+    end
+    object t_nebcolor: TTabSheet
+      Caption = 't_nebcolor'
+      ImageIndex = 4
+      object lblDSO: TLabel
+        Left = 0
+        Top = 0
+        Width = 110
+        Height = 18
+        Caption = 'Deep-sky object colours'
+      end
+      object lblDSOCScheme: TLabel
+        Left = 16
+        Top = 24
+        Width = 132
+        Height = 18
+        Caption = 'Use a preset colour scheme :'
+      end
+      object gbDSOCOverrides: TGroupBox
+        Left = 16
+        Top = 80
+        Width = 465
+        Height = 193
+        Caption = ' Choose colours for object type  '
+        TabOrder = 2
+        object shpAst: TShape
+          Left = 120
+          Top = 44
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          Shape = stRoundRect
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpSN: TShape
+          Left = 360
+          Top = 44
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpRN: TShape
+          Left = 120
+          Top = 164
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpEN: TShape
+          Left = 120
+          Top = 144
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpDN: TShape
+          Left = 120
+          Top = 124
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpPNe: TShape
+          Left = 120
+          Top = 104
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGCl: TShape
+          Left = 120
+          Top = 84
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpOCl: TShape
+          Left = 120
+          Top = 64
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpNE: TShape
+          Left = 360
+          Top = 144
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGL: TShape
+          Left = 360
+          Top = 124
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpQ: TShape
+          Left = 360
+          Top = 104
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGxyCl: TShape
+          Left = 360
+          Top = 84
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object shpGxy: TShape
+          Left = 360
+          Top = 64
+          Width = 33
+          Height = 13
+          Brush.Color = clBase
+          OnMouseUp = ShapeDSOMouseUp
+        end
+        object lblAst: TLabel
+          Left = 16
+          Top = 44
+          Width = 40
+          Height = 18
+          Caption = 'Asterism'
+        end
+        object lblSN: TLabel
+          Left = 240
+          Top = 44
+          Width = 91
+          Height = 18
+          Caption = 'Supernova remnant'
+        end
+        object lblOCl: TLabel
+          Left = 16
+          Top = 64
+          Width = 58
+          Height = 18
+          Caption = 'Open cluster'
+        end
+        object lblGCl: TLabel
+          Left = 16
+          Top = 84
+          Width = 71
+          Height = 18
+          Caption = 'Globular cluster'
+        end
+        object lblPNe: TLabel
+          Left = 16
+          Top = 104
+          Width = 75
+          Height = 18
+          Caption = 'Planetary nebula'
+        end
+        object lblDN: TLabel
+          Left = 16
+          Top = 124
+          Width = 54
+          Height = 18
+          Caption = 'Dark nebula'
+        end
+        object lblEN: TLabel
+          Left = 16
+          Top = 144
+          Width = 73
+          Height = 18
+          Caption = 'Emission nebula'
+        end
+        object lblRN: TLabel
+          Left = 16
+          Top = 164
+          Width = 78
+          Height = 18
+          Caption = 'Reflection nebula'
+        end
+        object lblGxy: TLabel
+          Left = 240
+          Top = 64
+          Width = 31
+          Height = 18
+          Caption = 'Galaxy'
+        end
+        object lblGxyCl: TLabel
+          Left = 240
+          Top = 84
+          Width = 64
+          Height = 18
+          Caption = 'Galaxy cluster'
+        end
+        object lblQ: TLabel
+          Left = 240
+          Top = 104
+          Width = 32
+          Height = 18
+          Caption = 'Quasar'
+        end
+        object lblGL: TLabel
+          Left = 240
+          Top = 124
+          Width = 80
+          Height = 18
+          Caption = 'Gravitational lens'
+        end
+        object lblNE: TLabel
+          Left = 240
+          Top = 144
+          Width = 106
+          Height = 18
+          Caption = 'Non-existent/unknown'
+          WordWrap = True
+        end
+        object lblDSOType: TLabel
+          Left = 240
+          Top = 24
+          Width = 57
+          Height = 19
+          Caption = 'Object type'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblDSOColour: TLabel
+          Left = 360
+          Top = 24
+          Width = 33
+          Height = 19
+          Caption = 'Colour'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblDSOColourFill: TLabel
+          Left = 416
+          Top = 24
+          Width = 21
+          Height = 19
+          Caption = 'Fill?'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 16
+          Top = 24
+          Width = 57
+          Height = 19
+          Caption = 'Object type'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label12: TLabel
+          Left = 120
+          Top = 24
+          Width = 33
+          Height = 19
+          Caption = 'Colour'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label13: TLabel
+          Left = 176
+          Top = 24
+          Width = 21
+          Height = 19
+          Caption = 'Fill?'
+          Font.Color = clText
+          Font.Height = 11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpVariable
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object chkFillAst: TCheckBox
+          Left = 176
+          Top = 44
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 1
+          Visible = False
+          OnClick = chkFillAstClick
+        end
+        object chkFillOCl: TCheckBox
+          Left = 176
+          Top = 64
+          Width = 17
+          Height = 13
+          TabOrder = 2
+          OnClick = chkFillOClClick
+        end
+        object chkFillGCl: TCheckBox
+          Left = 176
+          Top = 84
+          Width = 17
+          Height = 13
+          TabOrder = 3
+          OnClick = chkFillGClClick
+        end
+        object chkFillPNe: TCheckBox
+          Left = 176
+          Top = 104
+          Width = 17
+          Height = 13
+          TabOrder = 4
+          OnClick = chkFillPNeClick
+        end
+        object chkFillDN: TCheckBox
+          Left = 176
+          Top = 124
+          Width = 17
+          Height = 13
+          TabOrder = 5
+          OnClick = chkFillDNClick
+        end
+        object chkFillEN: TCheckBox
+          Left = 176
+          Top = 144
+          Width = 17
+          Height = 13
+          TabOrder = 6
+          OnClick = chkFillENClick
+        end
+        object chkFillRN: TCheckBox
+          Left = 176
+          Top = 164
+          Width = 17
+          Height = 13
+          TabOrder = 7
+          OnClick = chkFillRNClick
+        end
+        object chkFillSN: TCheckBox
+          Left = 416
+          Top = 44
+          Width = 17
+          Height = 13
+          TabOrder = 8
+          OnClick = chkFillSNClick
+        end
+        object chkFillGxy: TCheckBox
+          Left = 416
+          Top = 64
+          Width = 17
+          Height = 13
+          TabOrder = 9
+          OnClick = chkFillGxyClick
+        end
+        object chkFillGxyCl: TCheckBox
+          Left = 416
+          Top = 84
+          Width = 17
+          Height = 13
+          TabOrder = 10
+          OnClick = chkFillGxyClClick
+        end
+        object chkFillQ: TCheckBox
+          Left = 416
+          Top = 104
+          Width = 17
+          Height = 13
+          TabOrder = 11
+          OnClick = chkFillQClick
+        end
+        object chkFillGL: TCheckBox
+          Left = 416
+          Top = 124
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 12
+          Visible = False
+          OnClick = chkFillGLClick
+        end
+        object chkFillNE: TCheckBox
+          Left = 416
+          Top = 144
+          Width = 17
+          Height = 13
+          Enabled = False
+          TabOrder = 0
+          Visible = False
+          OnClick = chkFillNEClick
+        end
+      end
+      object GroupBox2: TGroupBox
+        Left = 16
+        Top = 280
+        Width = 465
+        Height = 137
+        Caption = ' Adjust colour brightness '
+        TabOrder = 3
+        object Label1: TLabel
+          Left = 24
+          Top = 20
+          Width = 108
+          Height = 18
+          Caption = 'Low surface brightness'
+        end
+        object Label2: TLabel
+          Left = 248
+          Top = 20
+          Width = 110
+          Height = 18
+          Caption = 'High surface brightness'
+        end
+        object Label3: TLabel
+          Left = 16
+          Top = 68
+          Width = 205
+          Height = 18
+          Caption = 'Fainter                                           Brighter  '
+        end
+        object Label4: TLabel
+          Left = 240
+          Top = 68
+          Width = 211
+          Height = 18
+          Caption = 'Fainter                                             Brighter  '
+        end
+        object NebBrightBar: TTrackBar
+          Left = 232
+          Top = 40
+          Width = 217
+          Height = 25
+          Frequency = 26
+          Max = 255
+          PageSize = 26
+          TabOrder = 0
+          OnChange = NebBrightBarChange
+        end
+        object NebGrayBar: TTrackBar
+          Left = 8
+          Top = 40
+          Width = 209
+          Height = 25
+          Frequency = 26
+          Max = 255
+          PageSize = 26
+          TabOrder = 1
+          OnChange = NebGrayBarChange
+        end
+        object DefNebColorButton: TButton
+          Left = 384
+          Top = 88
+          Width = 75
+          Height = 25
+          Caption = 'Default'
+          TabOrder = 2
+          OnClick = DefNebColorButtonClick
+        end
+        object NebColorPanel: TPanel
+          Left = 112
+          Top = 88
+          Width = 233
+          Height = 41
+          TabOrder = 3
+          object Shape29: TShape
+            Left = 32
+            Top = 4
+            Width = 65
+            Height = 33
+            Brush.Color = clBase
+            Shape = stEllipse
+          end
+          object Shape30: TShape
+            Left = 136
+            Top = 4
+            Width = 65
+            Height = 33
+            Brush.Color = clBase
+            Shape = stEllipse
+          end
+        end
+      end
+      object lstDSOCScheme: TListBox
+        Left = 184
+        Top = 24
+        Width = 145
+        Height = 49
+        Items.Strings = (
+          'CdC v2 default'
+          'CdC v3 default')
+        Rows = 2
+        TabOrder = 4
+        OnClick = lstDSOCSchemeClick
+      end
+    end
+    object t_skycolor: TTabSheet
+      Caption = 't_skycolor'
+      ImageIndex = 3
+      object Label200: TLabel
+        Left = 0
+        Top = 0
+        Width = 83
+        Height = 18
+        Caption = 'Sky Color Setting'
+      end
+      object skycolorbox: TRadioGroup
+        Left = 24
+        Top = 48
+        Width = 364
+        Height = 89
+        Items.Strings = (
+          'Fixed Black'
+          'Automatic')
+        Caption = 'Sky Color'
+        Columns = 2
+        TabOrder = 1
+        OnClick = skycolorboxClick
+      end
+      object Panel6: TPanel
+        Left = 24
+        Top = 168
+        Width = 364
+        Height = 97
+        TabOrder = 2
+        object Shape18: TShape
+          Tag = 1
+          Left = 0
+          Top = 0
+          Width = 52
+          Height = 97
+          Brush.Color = clBase
+          Pen.Color = clSilver
+          OnMouseUp = ShapeSkyMouseUp
+        end
+        object Shape19: TShape
+          Tag = 2
+          Left = 52
+          Top = 0
+          Width = 52
+          Height = 97
+          Brush.Color = clBase
+          Pen.Color = clSilver
+          OnMouseUp = ShapeSkyMouseUp
+        end
+        object Shape20: TShape
+          Tag = 3
+          Left = 104
+          Top = 0
+          Width = 52
+          Height = 97
+          Brush.Color = clBase
+          Pen.Color = clSilver
+          OnMouseUp = ShapeSkyMouseUp
+        end
+        object Shape21: TShape
+          Tag = 4
+          Left = 156
+          Top = 0
+          Width = 52
+          Height = 97
+          Brush.Color = clBase
+          Pen.Color = clSilver
+          OnMouseUp = ShapeSkyMouseUp
+        end
+        object Shape22: TShape
+          Tag = 5
+          Left = 208
+          Top = 0
+          Width = 52
+          Height = 97
+          Brush.Color = clBase
+          Pen.Color = clSilver
+          OnMouseUp = ShapeSkyMouseUp
+        end
+        object Shape23: TShape
+          Tag = 6
+          Left = 260
+          Top = 0
+          Width = 52
+          Height = 97
+          Brush.Color = clBase
+          Pen.Color = clSilver
+          OnMouseUp = ShapeSkyMouseUp
+        end
+        object Shape24: TShape
+          Tag = 7
+          Left = 312
+          Top = 0
+          Width = 52
+          Height = 97
+          Brush.Color = clBase
+          Pen.Color = clSilver
+          OnMouseUp = ShapeSkyMouseUp
+        end
+      end
+      object Label202: TLabel
+        Left = 24
+        Top = 272
+        Width = 50
+        Height = 57
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Day Time'
+        WordWrap = True
+      end
+      object Label205: TLabel
+        Left = 120
+        Top = 272
+        Width = 169
+        Height = 57
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Twilight'
+        WordWrap = True
+      end
+      object Label208: TLabel
+        Left = 320
+        Top = 272
+        Width = 81
+        Height = 57
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Astronomical Twilight'
+        WordWrap = True
+      end
+      object Button3: TButton
+        Left = 24
+        Top = 344
+        Width = 75
+        Height = 25
+        Caption = 'Reset'
+        ParentColor = True
+        TabOrder = 6
+        OnClick = Button3Click
+      end
+    end
+    object t_lines: TTabSheet
+      Caption = 't_lines'
+      ImageIndex = 5
+      object Label9: TLabel
+        Left = 0
+        Top = 0
+        Width = 61
+        Height = 18
+        Caption = 'Lines Setting'
+      end
+      object EqGrid: TCheckBox
+        Left = 8
+        Top = 56
+        Width = 152
+        Height = 30
+        Caption = 'Add Equatorial Grid'
+        TabOrder = 1
+        OnClick = EqGridClick
+      end
+      object CGrid: TCheckBox
+        Left = 8
+        Top = 24
+        Width = 152
+        Height = 30
+        Caption = 'ShowCoordinate Grid'
+        TabOrder = 2
+        OnClick = CGridClick
+      end
+      object ecliptic: TCheckBox
+        Left = 168
+        Top = 24
+        Width = 152
+        Height = 30
+        Caption = 'Show Ecliptic'
+        TabOrder = 3
+        OnClick = eclipticClick
+      end
+      object galactic: TCheckBox
+        Left = 168
+        Top = 56
+        Width = 152
+        Height = 30
+        Caption = 'Show Galactic Equator'
+        TabOrder = 4
+        OnClick = galacticClick
+      end
+      object GridNum: TCheckBox
+        Left = 328
+        Top = 24
+        Width = 152
+        Height = 30
+        Caption = 'Show Grid Label'
+        TabOrder = 5
+        OnClick = GridNumClick
+      end
+      object GroupBox1: TGroupBox
+        Left = 8
+        Top = 112
+        Width = 257
+        Height = 137
+        Caption = 'Constellation Figures'
+        TabOrder = 6
+        object ConstlFile: TEdit
+          Left = 8
+          Top = 84
+          Width = 201
+          Height = 26
+          Cursor = crIBeam
+          TabOrder = 0
+          OnChange = ConstlFileChange
+        end
+        object ConstlFileBtn: TBitBtn
+          Tag = 8
+          Left = 207
+          Top = 83
+          Width = 28
+          Height = 28
+          ParentColor = True
+          TabOrder = 1
+          TabStop = False
+          OnClick = ConstlFileBtnClick
+          Glyph.Data = {
+            3A030000424D3603000000000000360000002800000010000000100000000100
+            1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            0000000000000000000000000000000000000000000000000000000000000000
+            00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+            7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+            CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+            CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+            7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+          Layout = blGlyphTop
+          Margin = 0
+        end
+        object Label180: TLabel
+          Left = 8
+          Top = 64
+          Width = 148
+          Height = 18
+          Caption = 'Constellation Figure File Name : '
+        end
+        object Constl: TCheckBox
+          Left = 8
+          Top = 24
+          Width = 233
+          Height = 30
+          Caption = 'Show Constellation Figure'
+          TabOrder = 3
+          OnClick = ConstlClick
+        end
+      end
+      object GroupBox3: TGroupBox
+        Left = 8
+        Top = 256
+        Width = 257
+        Height = 137
+        Caption = 'Constellation Bondaries'
+        TabOrder = 7
+        object ConstbFile: TEdit
+          Left = 8
+          Top = 84
+          Width = 201
+          Height = 26
+          Cursor = crIBeam
+          TabOrder = 0
+          OnChange = ConstbFileChange
+        end
+        object ConstbfileBtn: TBitBtn
+          Tag = 8
+          Left = 207
+          Top = 83
+          Width = 28
+          Height = 28
+          ParentColor = True
+          TabOrder = 1
+          TabStop = False
+          OnClick = ConstbfileBtnClick
+          Glyph.Data = {
+            3A030000424D3603000000000000360000002800000010000000100000000100
+            1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            0000000000000000000000000000000000000000000000000000000000000000
+            00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+            7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+            CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
+            CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+            7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
+            7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
+            C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
+            CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
+            CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
+          Layout = blGlyphTop
+          Margin = 0
+        end
+        object Label56: TLabel
+          Left = 8
+          Top = 64
+          Width = 164
+          Height = 18
+          Caption = 'Constellation Boundary File Name : '
+        end
+        object Constb: TCheckBox
+          Left = 8
+          Top = 24
+          Width = 228
+          Height = 30
+          Caption = 'Show Constellation Boundary'
+          TabOrder = 3
+          OnClick = ConstbClick
+        end
+      end
+      object GroupBox4: TGroupBox
+        Left = 272
+        Top = 112
+        Width = 209
+        Height = 137
+        Caption = 'Milky Way'
+        TabOrder = 8
+        object fillmilkyway: TCheckBox
+          Left = 12
+          Top = 72
+          Width = 165
+          Height = 30
+          Caption = 'Fill Milky Way'
+          TabOrder = 0
+          OnClick = fillmilkywayClick
+        end
+        object milkyway: TCheckBox
+          Left = 12
+          Top = 32
+          Width = 157
+          Height = 30
+          Caption = 'Show Milky Way'
+          TabOrder = 1
+          OnClick = milkywayClick
+        end
+      end
+    end
+    object t_labels: TTabSheet
+      Caption = 't_labels'
+      ImageIndex = 6
+      object Label10: TLabel
+        Left = 0
+        Top = 0
+        Width = 66
+        Height = 18
+        Caption = 'Labels Setting'
+      end
+      object MagLabel: TRadioGroup
+        Left = 8
+        Top = 360
+        Width = 225
+        Height = 65
+        Items.Strings = (
+          'Name'
+          'Common Name'
+          'Magnitude')
+        Caption = 'Star Label'
+        Columns = 2
+        ItemIndex = 0
+        TabOrder = 1
+        OnClick = MagLabelClick
+      end
+      object constlabel: TRadioGroup
+        Left = 264
+        Top = 360
+        Width = 217
+        Height = 65
+        Items.Strings = (
+          'Full Name'
+          'Abbreviation')
+        Caption = 'Constellation Label'
+        Columns = 2
+        ItemIndex = 0
+        TabOrder = 2
+        OnClick = constlabelClick
+      end
+      object showlabelall: TCheckBox
+        Left = 24
+        Top = 24
+        Width = 185
+        Height = 21
+        Caption = 'Display the labels on the chart'
+        TabOrder = 3
+        OnClick = showlabelallClick
+      end
+      object ShowChartInfo: TCheckBox
+        Left = 232
+        Top = 20
+        Width = 241
+        Height = 30
+        Caption = 'Display the chart information in the menu bar.'
+        TabOrder = 4
+        OnClick = ShowChartInfoClick
+      end
+      object GroupBox5: TGroupBox
+        Left = 8
+        Top = 56
+        Width = 473
+        Height = 297
+        Caption = 'Label Object'
+        TabOrder = 5
+        object labelcolorStar: TShape
+          Tag = 1
+          Left = 328
+          Top = 64
+          Width = 33
+          Height = 17
+          Brush.Color = clBase
+          OnMouseUp = labelcolorMouseUp
+        end
+        object labelcolorVar: TShape
+          Tag = 2
+          Left = 328
+          Top = 92
+          Width = 33
+          Height = 17
+          Brush.Color = clBase
+          OnMouseUp = labelcolorMouseUp
+        end
+        object labelcolorMult: TShape
+          Tag = 3
+          Left = 328
+          Top = 121
+          Width = 33
+          Height = 17
+          Brush.Color = clBase
+          OnMouseUp = labelcolorMouseUp
+        end
+        object labelcolorNeb: TShape
+          Tag = 4
+          Left = 328
+          Top = 149
+          Width = 33
+          Height = 17
+          Brush.Color = clBase
+          OnMouseUp = labelcolorMouseUp
+        end
+        object labelcolorSol: TShape
+          Tag = 5
+          Left = 328
+          Top = 178
+          Width = 33
+          Height = 17
+          Brush.Color = clBase
+          OnMouseUp = labelcolorMouseUp
+        end
+        object labelcolorMisc: TShape
+          Tag = 7
+          Left = 328
+          Top = 235
+          Width = 33
+          Height = 17
+          Brush.Color = clBase
+          OnMouseUp = labelcolorMouseUp
+        end
+        object labelcolorConst: TShape
+          Tag = 6
+          Left = 328
+          Top = 206
+          Width = 33
+          Height = 17
+          Brush.Color = clBase
+          OnMouseUp = labelcolorMouseUp
+        end
+        object labelcolorChartInfo: TShape
+          Tag = 8
+          Left = 328
+          Top = 264
+          Width = 33
+          Height = 17
+          Brush.Color = clBase
+          OnMouseUp = labelcolorMouseUp
+        end
+        object showlabelStar: TCheckBox
+          Tag = 1
+          Left = 16
+          Top = 64
+          Width = 209
+          Height = 17
+          Caption = 'Stars'
+          TabOrder = 0
+          OnClick = showlabelClick
+        end
+        object showlabelVar: TCheckBox
+          Tag = 2
+          Left = 16
+          Top = 92
+          Width = 209
+          Height = 17
+          Caption = 'Variable Stars'
+          TabOrder = 1
+          OnClick = showlabelClick
+        end
+        object showlabelMult: TCheckBox
+          Tag = 3
+          Left = 16
+          Top = 121
+          Width = 209
+          Height = 17
+          Caption = 'Multiple Stars'
+          TabOrder = 2
+          OnClick = showlabelClick
+        end
+        object showlabelNeb: TCheckBox
+          Tag = 4
+          Left = 16
+          Top = 149
+          Width = 209
+          Height = 17
+          Caption = 'Nebulae'
+          TabOrder = 3
+          OnClick = showlabelClick
+        end
+        object showlabelSol: TCheckBox
+          Tag = 5
+          Left = 16
+          Top = 178
+          Width = 209
+          Height = 17
+          Caption = 'Solar System'
+          TabOrder = 4
+          OnClick = showlabelClick
+        end
+        object showlabelMisc: TCheckBox
+          Tag = 7
+          Left = 16
+          Top = 235
+          Width = 209
+          Height = 17
+          Caption = 'Other labels'
+          TabOrder = 5
+          OnClick = showlabelClick
+        end
+        object showlabelConst: TCheckBox
+          Tag = 6
+          Left = 16
+          Top = 206
+          Width = 209
+          Height = 17
+          Caption = 'Constellation name'
+          TabOrder = 6
+          OnClick = showlabelClick
+        end
+        object showlabelChartInfo: TCheckBox
+          Tag = 8
+          Left = 16
+          Top = 264
+          Width = 209
+          Height = 17
+          Caption = 'Chart Information'
+          TabOrder = 7
+          OnClick = showlabelClick
+        end
+        object Label237: TLabel
+          Left = 261
+          Top = 16
+          Width = 63
+          Height = 40
+          AutoSize = False
+          Caption = 'Magnitude difference'
+          WordWrap = True
+        end
+        object labelmagStar: TSpinEdit
+          Tag = 1
+          Left = 264
+          Top = 58
+          Width = 41
+          Height = 26
+          Max = 10
+          TabOrder = 9
+          OnChanged = labelmagChanged
+        end
+        object labelmagVar: TSpinEdit
+          Tag = 2
+          Left = 264
+          Top = 86
+          Width = 41
+          Height = 26
+          Max = 10
+          TabOrder = 10
+          OnChanged = labelmagChanged
+        end
+        object LabelmagMult: TSpinEdit
+          Tag = 3
+          Left = 264
+          Top = 115
+          Width = 41
+          Height = 26
+          Max = 10
+          TabOrder = 11
+          OnChanged = labelmagChanged
+        end
+        object labelmagNeb: TSpinEdit
+          Tag = 4
+          Left = 264
+          Top = 143
+          Width = 41
+          Height = 26
+          Max = 10
+          TabOrder = 12
+          OnChanged = labelmagChanged
+        end
+        object labelmagSol: TSpinEdit
+          Tag = 5
+          Left = 264
+          Top = 172
+          Width = 41
+          Height = 26
+          Max = 10
+          TabOrder = 13
+          OnChanged = labelmagChanged
+        end
+        object Label240: TLabel
+          Left = 332
+          Top = 16
+          Width = 24
+          Height = 18
+          Caption = 'Label'
+        end
+        object Label252: TLabel
+          Left = 331
+          Top = 36
+          Width = 26
+          Height = 18
+          Caption = 'Color'
+        end
+        object Label255: TLabel
+          Left = 384
+          Top = 36
+          Width = 19
+          Height = 18
+          Caption = 'Size'
+        end
+        object labelsizeStar: TSpinEdit
+          Tag = 1
+          Left = 384
+          Top = 58
+          Width = 41
+          Height = 26
+          Max = 48
+          Min = 6
+          TabOrder = 17
+          Value = 6
+          OnChanged = labelsizeChanged
+        end
+        object labelsizeVar: TSpinEdit
+          Tag = 2
+          Left = 384
+          Top = 86
+          Width = 41
+          Height = 26
+          Max = 48
+          Min = 6
+          TabOrder = 18
+          Value = 6
+          OnChanged = labelsizeChanged
+        end
+        object labelsizeMult: TSpinEdit
+          Tag = 3
+          Left = 384
+          Top = 115
+          Width = 41
+          Height = 26
+          Max = 48
+          Min = 6
+          TabOrder = 19
+          Value = 6
+          OnChanged = labelsizeChanged
+        end
+        object labelsizeNeb: TSpinEdit
+          Tag = 4
+          Left = 384
+          Top = 143
+          Width = 41
+          Height = 26
+          Max = 48
+          Min = 6
+          TabOrder = 20
+          Value = 6
+          OnChanged = labelsizeChanged
+        end
+        object labelsizeSol: TSpinEdit
+          Tag = 5
+          Left = 384
+          Top = 172
+          Width = 41
+          Height = 26
+          Max = 48
+          Min = 6
+          TabOrder = 21
+          Value = 6
+          OnChanged = labelsizeChanged
+        end
+        object labelsizeMisc: TSpinEdit
+          Tag = 7
+          Left = 384
+          Top = 229
+          Width = 41
+          Height = 26
+          Max = 48
+          Min = 6
+          TabOrder = 22
+          Value = 6
+          OnChanged = labelsizeChanged
+        end
+        object labelsizeConst: TSpinEdit
+          Tag = 6
+          Left = 384
+          Top = 200
+          Width = 41
+          Height = 26
+          Max = 48
+          Min = 6
+          TabOrder = 23
+          Value = 6
+          OnChanged = labelsizeChanged
+        end
+        object labelsizeChartInfo: TSpinEdit
+          Tag = 8
+          Left = 384
+          Top = 258
+          Width = 41
+          Height = 26
+          Max = 48
+          Min = 6
+          TabOrder = 24
+          Value = 6
+          OnChanged = labelsizeChanged
         end
       end
     end
@@ -790,1729 +2458,6 @@ object f_config_display: Tf_config_display
         ParentFont = False
         ReadOnly = True
         TabOrder = 18
-      end
-    end
-    object t_color: TTabSheet
-      Caption = 't_color'
-      ImageIndex = 2
-      object Label8: TLabel
-        Left = 0
-        Top = 0
-        Width = 63
-        Height = 18
-        Caption = 'Color Setting'
-      end
-      object bg1: TPanel
-        Left = 32
-        Top = 48
-        Width = 401
-        Height = 38
-        TabOrder = 1
-        object Shape1: TShape
-          Tag = 1
-          Left = 24
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape2: TShape
-          Tag = 2
-          Left = 77
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape3: TShape
-          Tag = 3
-          Left = 130
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape4: TShape
-          Tag = 4
-          Left = 184
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape5: TShape
-          Tag = 5
-          Left = 237
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape6: TShape
-          Tag = 6
-          Left = 290
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape7: TShape
-          Tag = 7
-          Left = 344
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-      end
-      object Label181: TLabel
-        Left = 93
-        Top = 26
-        Width = 19
-        Height = 18
-        Caption = '-0.3'
-      end
-      object Label182: TLabel
-        Left = 147
-        Top = 26
-        Width = 19
-        Height = 18
-        Caption = '-0.1'
-      end
-      object Label183: TLabel
-        Left = 201
-        Top = 26
-        Width = 15
-        Height = 18
-        Caption = '0.2'
-      end
-      object Label184: TLabel
-        Left = 254
-        Top = 26
-        Width = 15
-        Height = 18
-        Caption = '0.5'
-      end
-      object Label185: TLabel
-        Left = 308
-        Top = 26
-        Width = 15
-        Height = 18
-        Caption = '0.8'
-      end
-      object Label186: TLabel
-        Left = 362
-        Top = 26
-        Width = 15
-        Height = 18
-        Caption = '1.3'
-      end
-      object Label187: TLabel
-        Left = 416
-        Top = 26
-        Width = 6
-        Height = 18
-        Caption = '>'
-      end
-      object Label188: TLabel
-        Left = 40
-        Top = 26
-        Width = 6
-        Height = 18
-        Caption = '<'
-      end
-      object Label189: TLabel
-        Left = 8
-        Top = 26
-        Width = 21
-        Height = 18
-        Caption = 'B-V:'
-      end
-      object bg2: TPanel
-        Left = 32
-        Top = 112
-        Width = 401
-        Height = 38
-        TabOrder = 11
-        object Shape8: TShape
-          Tag = 8
-          Left = 24
-          Top = 7
-          Width = 33
-          Height = 25
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stEllipse
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape9: TShape
-          Tag = 9
-          Left = 88
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape10: TShape
-          Tag = 10
-          Left = 152
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape11: TShape
-          Tag = 12
-          Left = 216
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape12: TShape
-          Tag = 13
-          Left = 280
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape13: TShape
-          Tag = 14
-          Left = 344
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-      end
-      object Label190: TLabel
-        Left = 60
-        Top = 90
-        Width = 31
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Galaxy'
-      end
-      object Label191: TLabel
-        Left = 123
-        Top = 90
-        Width = 33
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Cluster'
-      end
-      object Label192: TLabel
-        Left = 189
-        Top = 90
-        Width = 31
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Nebula'
-      end
-      object Label193: TLabel
-        Left = 240
-        Top = 90
-        Width = 53
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Coord Grid'
-      end
-      object Label194: TLabel
-        Left = 310
-        Top = 90
-        Width = 36
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Eq Grid'
-      end
-      object Label195: TLabel
-        Left = 381
-        Top = 90
-        Width = 24
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Orbit'
-      end
-      object bg3: TPanel
-        Left = 32
-        Top = 176
-        Width = 401
-        Height = 38
-        TabOrder = 18
-        object Shape15: TShape
-          Tag = 16
-          Left = 32
-          Top = 4
-          Width = 33
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape16: TShape
-          Tag = 17
-          Left = 122
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape17: TShape
-          Tag = 18
-          Left = 197
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape14: TShape
-          Tag = 15
-          Left = 272
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Pen.Color = clWhite
-          Pen.Width = 3
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape25: TShape
-          Tag = 19
-          Left = 344
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-      end
-      object Label197: TLabel
-        Left = 34
-        Top = 154
-        Width = 92
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Constellation Figure'
-      end
-      object Label198: TLabel
-        Left = 149
-        Top = 154
-        Width = 47
-        Height = 18
-        Alignment = taCenter
-        Caption = ' Boundary'
-      end
-      object Label199: TLabel
-        Left = 232
-        Top = 154
-        Width = 40
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Eyepiece'
-      end
-      object Label196: TLabel
-        Left = 296
-        Top = 154
-        Width = 51
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Misc. Lines'
-      end
-      object DefColor: TRadioGroup
-        Left = 32
-        Top = 304
-        Width = 401
-        Height = 89
-        Items.Strings = (
-          'Default'
-          'Red'
-          'Black/White'
-          'White/Black')
-        Caption = 'Standard  Color'
-        Columns = 2
-        TabOrder = 23
-        OnClick = DefColorClick
-      end
-      object Label11: TLabel
-        Left = 377
-        Top = 154
-        Width = 37
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Horizon'
-      end
-      object Label256: TLabel
-        Left = 122
-        Top = 218
-        Width = 31
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Comet'
-      end
-      object Label257: TLabel
-        Left = 51
-        Top = 218
-        Width = 39
-        Height = 18
-        Alignment = taCenter
-        Caption = 'Asteroid'
-      end
-      object bg4: TPanel
-        Left = 32
-        Top = 240
-        Width = 401
-        Height = 38
-        TabOrder = 27
-        object Shape26: TShape
-          Tag = 20
-          Left = 24
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape27: TShape
-          Tag = 21
-          Left = 88
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stCircle
-          OnMouseUp = ShapeMouseUp
-        end
-        object Shape28: TShape
-          Tag = 22
-          Left = 152
-          Top = 4
-          Width = 30
-          Height = 30
-          Brush.Color = clBase
-          Shape = stSquare
-          OnMouseUp = ShapeMouseUp
-        end
-      end
-    end
-    object t_skycolor: TTabSheet
-      Caption = 't_skycolor'
-      ImageIndex = 3
-      object Label200: TLabel
-        Left = 0
-        Top = 0
-        Width = 83
-        Height = 18
-        Caption = 'Sky Color Setting'
-      end
-      object skycolorbox: TRadioGroup
-        Left = 24
-        Top = 48
-        Width = 364
-        Height = 89
-        Items.Strings = (
-          'Fixed Black'
-          'Automatic')
-        Caption = 'Sky Color'
-        Columns = 2
-        TabOrder = 1
-        OnClick = skycolorboxClick
-      end
-      object Panel6: TPanel
-        Left = 24
-        Top = 168
-        Width = 364
-        Height = 97
-        TabOrder = 2
-        object Shape18: TShape
-          Tag = 1
-          Left = 0
-          Top = 0
-          Width = 52
-          Height = 97
-          Brush.Color = clBase
-          Pen.Color = clSilver
-          OnMouseUp = ShapeSkyMouseUp
-        end
-        object Shape19: TShape
-          Tag = 2
-          Left = 52
-          Top = 0
-          Width = 52
-          Height = 97
-          Brush.Color = clBase
-          Pen.Color = clSilver
-          OnMouseUp = ShapeSkyMouseUp
-        end
-        object Shape20: TShape
-          Tag = 3
-          Left = 104
-          Top = 0
-          Width = 52
-          Height = 97
-          Brush.Color = clBase
-          Pen.Color = clSilver
-          OnMouseUp = ShapeSkyMouseUp
-        end
-        object Shape21: TShape
-          Tag = 4
-          Left = 156
-          Top = 0
-          Width = 52
-          Height = 97
-          Brush.Color = clBase
-          Pen.Color = clSilver
-          OnMouseUp = ShapeSkyMouseUp
-        end
-        object Shape22: TShape
-          Tag = 5
-          Left = 208
-          Top = 0
-          Width = 52
-          Height = 97
-          Brush.Color = clBase
-          Pen.Color = clSilver
-          OnMouseUp = ShapeSkyMouseUp
-        end
-        object Shape23: TShape
-          Tag = 6
-          Left = 260
-          Top = 0
-          Width = 52
-          Height = 97
-          Brush.Color = clBase
-          Pen.Color = clSilver
-          OnMouseUp = ShapeSkyMouseUp
-        end
-        object Shape24: TShape
-          Tag = 7
-          Left = 312
-          Top = 0
-          Width = 52
-          Height = 97
-          Brush.Color = clBase
-          Pen.Color = clSilver
-          OnMouseUp = ShapeSkyMouseUp
-        end
-      end
-      object Label202: TLabel
-        Left = 24
-        Top = 272
-        Width = 50
-        Height = 57
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Day Time'
-        WordWrap = True
-      end
-      object Label205: TLabel
-        Left = 120
-        Top = 272
-        Width = 169
-        Height = 57
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Twilight'
-        WordWrap = True
-      end
-      object Label208: TLabel
-        Left = 320
-        Top = 272
-        Width = 81
-        Height = 57
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Astronomical Twilight'
-        WordWrap = True
-      end
-      object Button3: TButton
-        Left = 24
-        Top = 344
-        Width = 75
-        Height = 25
-        Caption = 'Reset'
-        ParentColor = True
-        TabOrder = 6
-        OnClick = Button3Click
-      end
-    end
-    object t_nebcolor: TTabSheet
-      Caption = 't_nebcolor'
-      ImageIndex = 4
-      object lblDSO: TLabel
-        Left = 0
-        Top = 0
-        Width = 110
-        Height = 18
-        Caption = 'Deep-sky object colours'
-      end
-      object lblDSOCScheme: TLabel
-        Left = 16
-        Top = 24
-        Width = 132
-        Height = 18
-        Caption = 'Use a preset colour scheme :'
-      end
-      object gbDSOCOverrides: TGroupBox
-        Left = 16
-        Top = 80
-        Width = 465
-        Height = 193
-        Caption = ' Choose colours for object type  '
-        TabOrder = 2
-        object shpAst: TShape
-          Left = 120
-          Top = 44
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          Shape = stRoundRect
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpSN: TShape
-          Left = 360
-          Top = 44
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpRN: TShape
-          Left = 120
-          Top = 164
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpEN: TShape
-          Left = 120
-          Top = 144
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpDN: TShape
-          Left = 120
-          Top = 124
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpPNe: TShape
-          Left = 120
-          Top = 104
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpGCl: TShape
-          Left = 120
-          Top = 84
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpOCl: TShape
-          Left = 120
-          Top = 64
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpNE: TShape
-          Left = 360
-          Top = 144
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpGL: TShape
-          Left = 360
-          Top = 124
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpQ: TShape
-          Left = 360
-          Top = 104
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpGxyCl: TShape
-          Left = 360
-          Top = 84
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object shpGxy: TShape
-          Left = 360
-          Top = 64
-          Width = 33
-          Height = 13
-          Brush.Color = clBase
-          OnMouseUp = ShapeDSOMouseUp
-        end
-        object lblAst: TLabel
-          Left = 16
-          Top = 44
-          Width = 40
-          Height = 18
-          Caption = 'Asterism'
-        end
-        object lblSN: TLabel
-          Left = 240
-          Top = 44
-          Width = 91
-          Height = 18
-          Caption = 'Supernova remnant'
-        end
-        object lblOCl: TLabel
-          Left = 16
-          Top = 64
-          Width = 58
-          Height = 18
-          Caption = 'Open cluster'
-        end
-        object lblGCl: TLabel
-          Left = 16
-          Top = 84
-          Width = 71
-          Height = 18
-          Caption = 'Globular cluster'
-        end
-        object lblPNe: TLabel
-          Left = 16
-          Top = 104
-          Width = 75
-          Height = 18
-          Caption = 'Planetary nebula'
-        end
-        object lblDN: TLabel
-          Left = 16
-          Top = 124
-          Width = 54
-          Height = 18
-          Caption = 'Dark nebula'
-        end
-        object lblEN: TLabel
-          Left = 16
-          Top = 144
-          Width = 73
-          Height = 18
-          Caption = 'Emission nebula'
-        end
-        object lblRN: TLabel
-          Left = 16
-          Top = 164
-          Width = 78
-          Height = 18
-          Caption = 'Reflection nebula'
-        end
-        object lblGxy: TLabel
-          Left = 240
-          Top = 64
-          Width = 31
-          Height = 18
-          Caption = 'Galaxy'
-        end
-        object lblGxyCl: TLabel
-          Left = 240
-          Top = 84
-          Width = 64
-          Height = 18
-          Caption = 'Galaxy cluster'
-        end
-        object lblQ: TLabel
-          Left = 240
-          Top = 104
-          Width = 32
-          Height = 18
-          Caption = 'Quasar'
-        end
-        object lblGL: TLabel
-          Left = 240
-          Top = 124
-          Width = 80
-          Height = 18
-          Caption = 'Gravitational lens'
-        end
-        object lblNE: TLabel
-          Left = 240
-          Top = 144
-          Width = 106
-          Height = 18
-          Caption = 'Non-existent/unknown'
-          WordWrap = True
-        end
-        object lblDSOType: TLabel
-          Left = 240
-          Top = 24
-          Width = 57
-          Height = 19
-          Caption = 'Object type'
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblDSOColour: TLabel
-          Left = 360
-          Top = 24
-          Width = 33
-          Height = 19
-          Caption = 'Colour'
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblDSOColourFill: TLabel
-          Left = 416
-          Top = 24
-          Width = 21
-          Height = 19
-          Caption = 'Fill?'
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label7: TLabel
-          Left = 16
-          Top = 24
-          Width = 57
-          Height = 19
-          Caption = 'Object type'
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label12: TLabel
-          Left = 120
-          Top = 24
-          Width = 33
-          Height = 19
-          Caption = 'Colour'
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label13: TLabel
-          Left = 176
-          Top = 24
-          Width = 21
-          Height = 19
-          Caption = 'Fill?'
-          Font.Color = clText
-          Font.Height = 11
-          Font.Name = 'MS Sans Serif'
-          Font.Pitch = fpVariable
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object chkFillAst: TCheckBox
-          Left = 176
-          Top = 44
-          Width = 17
-          Height = 13
-          Enabled = False
-          TabOrder = 1
-          Visible = False
-          OnClick = chkFillAstClick
-        end
-        object chkFillOCl: TCheckBox
-          Left = 176
-          Top = 64
-          Width = 17
-          Height = 13
-          TabOrder = 2
-          OnClick = chkFillOClClick
-        end
-        object chkFillGCl: TCheckBox
-          Left = 176
-          Top = 84
-          Width = 17
-          Height = 13
-          TabOrder = 3
-          OnClick = chkFillGClClick
-        end
-        object chkFillPNe: TCheckBox
-          Left = 176
-          Top = 104
-          Width = 17
-          Height = 13
-          TabOrder = 4
-          OnClick = chkFillPNeClick
-        end
-        object chkFillDN: TCheckBox
-          Left = 176
-          Top = 124
-          Width = 17
-          Height = 13
-          TabOrder = 5
-          OnClick = chkFillDNClick
-        end
-        object chkFillEN: TCheckBox
-          Left = 176
-          Top = 144
-          Width = 17
-          Height = 13
-          TabOrder = 6
-          OnClick = chkFillENClick
-        end
-        object chkFillRN: TCheckBox
-          Left = 176
-          Top = 164
-          Width = 17
-          Height = 13
-          TabOrder = 7
-          OnClick = chkFillRNClick
-        end
-        object chkFillSN: TCheckBox
-          Left = 416
-          Top = 44
-          Width = 17
-          Height = 13
-          TabOrder = 8
-          OnClick = chkFillSNClick
-        end
-        object chkFillGxy: TCheckBox
-          Left = 416
-          Top = 64
-          Width = 17
-          Height = 13
-          TabOrder = 9
-          OnClick = chkFillGxyClick
-        end
-        object chkFillGxyCl: TCheckBox
-          Left = 416
-          Top = 84
-          Width = 17
-          Height = 13
-          TabOrder = 10
-          OnClick = chkFillGxyClClick
-        end
-        object chkFillQ: TCheckBox
-          Left = 416
-          Top = 104
-          Width = 17
-          Height = 13
-          TabOrder = 11
-          OnClick = chkFillQClick
-        end
-        object chkFillGL: TCheckBox
-          Left = 416
-          Top = 124
-          Width = 17
-          Height = 13
-          Enabled = False
-          TabOrder = 12
-          Visible = False
-          OnClick = chkFillGLClick
-        end
-        object chkFillNE: TCheckBox
-          Left = 416
-          Top = 144
-          Width = 17
-          Height = 13
-          Enabled = False
-          TabOrder = 0
-          Visible = False
-          OnClick = chkFillNEClick
-        end
-      end
-      object GroupBox2: TGroupBox
-        Left = 16
-        Top = 280
-        Width = 465
-        Height = 137
-        Caption = ' Adjust colour brightness '
-        TabOrder = 3
-        object Label1: TLabel
-          Left = 24
-          Top = 20
-          Width = 108
-          Height = 18
-          Caption = 'Low surface brightness'
-        end
-        object Label2: TLabel
-          Left = 248
-          Top = 20
-          Width = 110
-          Height = 18
-          Caption = 'High surface brightness'
-        end
-        object Label3: TLabel
-          Left = 16
-          Top = 68
-          Width = 205
-          Height = 18
-          Caption = 'Fainter                                           Brighter  '
-        end
-        object Label4: TLabel
-          Left = 240
-          Top = 68
-          Width = 211
-          Height = 18
-          Caption = 'Fainter                                             Brighter  '
-        end
-        object NebBrightBar: TTrackBar
-          Left = 232
-          Top = 40
-          Width = 217
-          Height = 25
-          Frequency = 26
-          Max = 255
-          PageSize = 26
-          TabOrder = 0
-          OnChange = NebBrightBarChange
-        end
-        object NebGrayBar: TTrackBar
-          Left = 8
-          Top = 40
-          Width = 209
-          Height = 25
-          Frequency = 26
-          Max = 255
-          PageSize = 26
-          TabOrder = 1
-          OnChange = NebGrayBarChange
-        end
-        object DefNebColorButton: TButton
-          Left = 384
-          Top = 88
-          Width = 75
-          Height = 25
-          Caption = 'Default'
-          TabOrder = 2
-          OnClick = DefNebColorButtonClick
-        end
-        object NebColorPanel: TPanel
-          Left = 112
-          Top = 88
-          Width = 233
-          Height = 41
-          TabOrder = 3
-          object Shape29: TShape
-            Left = 32
-            Top = 4
-            Width = 65
-            Height = 33
-            Brush.Color = clBase
-            Shape = stEllipse
-          end
-          object Shape30: TShape
-            Left = 136
-            Top = 4
-            Width = 65
-            Height = 33
-            Brush.Color = clBase
-            Shape = stEllipse
-          end
-        end
-      end
-      object lstDSOCScheme: TListBox
-        Left = 160
-        Top = 24
-        Width = 145
-        Height = 41
-        Items.Strings = (
-          'CdC v2 default'
-          'CdC v3 default')
-        Rows = 2
-        TabOrder = 4
-        OnClick = lstDSOCSchemeClick
-      end
-    end
-    object t_lines: TTabSheet
-      Caption = 't_lines'
-      ImageIndex = 5
-      object Bevel6: TBevel
-        Left = 8
-        Top = 128
-        Width = 449
-        Height = 81
-        Shape = bsFrame
-      end
-      object Bevel11: TBevel
-        Left = 8
-        Top = 216
-        Width = 449
-        Height = 81
-        Shape = bsFrame
-      end
-      object Bevel12: TBevel
-        Left = 8
-        Top = 304
-        Width = 449
-        Height = 57
-        Shape = bsFrame
-      end
-      object Label9: TLabel
-        Left = 0
-        Top = 0
-        Width = 61
-        Height = 18
-        Caption = 'Lines Setting'
-      end
-      object EqGrid: TCheckBox
-        Left = 24
-        Top = 56
-        Width = 185
-        Height = 30
-        Caption = 'Add Equatorial Grid'
-        TabOrder = 1
-        OnClick = EqGridClick
-      end
-      object CGrid: TCheckBox
-        Left = 24
-        Top = 24
-        Width = 185
-        Height = 30
-        Caption = 'ShowCoordinate Grid'
-        TabOrder = 2
-        OnClick = CGridClick
-      end
-      object Constl: TCheckBox
-        Left = 24
-        Top = 136
-        Width = 300
-        Height = 30
-        Caption = 'Show Constellation Figure'
-        TabOrder = 3
-        OnClick = ConstlClick
-      end
-      object ConstlFile: TEdit
-        Left = 216
-        Top = 172
-        Width = 201
-        Height = 26
-        Cursor = crIBeam
-        TabOrder = 4
-        OnChange = ConstlFileChange
-      end
-      object Label180: TLabel
-        Left = 24
-        Top = 176
-        Width = 148
-        Height = 18
-        Caption = 'Constellation Figure File Name : '
-      end
-      object ConstlFileBtn: TBitBtn
-        Tag = 8
-        Left = 415
-        Top = 172
-        Width = 28
-        Height = 28
-        ParentColor = True
-        TabOrder = 6
-        TabStop = False
-        OnClick = ConstlFileBtnClick
-        Glyph.Data = {
-          3A030000424D3603000000000000360000002800000010000000100000000100
-          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          0000000000000000000000000000000000000000000000000000000000000000
-          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
-        Layout = blGlyphTop
-        Margin = 0
-      end
-      object Constb: TCheckBox
-        Left = 24
-        Top = 224
-        Width = 300
-        Height = 30
-        Caption = 'Show Constellation Boundary'
-        TabOrder = 7
-        OnClick = ConstbClick
-      end
-      object ConstbFile: TEdit
-        Left = 216
-        Top = 260
-        Width = 201
-        Height = 26
-        Cursor = crIBeam
-        TabOrder = 8
-        OnChange = ConstbFileChange
-      end
-      object Label56: TLabel
-        Left = 16
-        Top = 264
-        Width = 164
-        Height = 18
-        Caption = 'Constellation Boundary File Name : '
-      end
-      object ConstbfileBtn: TBitBtn
-        Tag = 8
-        Left = 415
-        Top = 260
-        Width = 28
-        Height = 28
-        ParentColor = True
-        TabOrder = 10
-        TabStop = False
-        OnClick = ConstbfileBtnClick
-        Glyph.Data = {
-          3A030000424D3603000000000000360000002800000010000000100000000100
-          1800000000000003000000000000000000000000000000000000C0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          0000000000000000000000000000000000000000000000000000000000000000
-          00C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFFC0CFCF00FFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7FFFFFFF00FFFFC0CFCF00FFFFC0
-          CFCF00FFFFC0CFCF00FFFFC0CFCF7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
-          7F000000C0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F
-          7F7F7F7F7F7F7F7F7F7F7F7F7F7F000000C0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          7F7F7F00FFFFFFFFFF00FFFFFFFFFF7F7F7FC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF7F7F7F7F7F7F7F7F7F7F7F7FC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF
-          C0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CF
-          CFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0
-          CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCFC0CFCF}
-        Layout = blGlyphTop
-        Margin = 0
-      end
-      object ecliptic: TCheckBox
-        Left = 224
-        Top = 24
-        Width = 161
-        Height = 30
-        Caption = 'Show Ecliptic'
-        TabOrder = 11
-        OnClick = eclipticClick
-      end
-      object galactic: TCheckBox
-        Left = 224
-        Top = 56
-        Width = 161
-        Height = 30
-        Caption = 'Show Galactic Equator'
-        TabOrder = 12
-        OnClick = galacticClick
-      end
-      object milkyway: TCheckBox
-        Left = 24
-        Top = 312
-        Width = 185
-        Height = 30
-        Caption = 'Show Milky Way'
-        TabOrder = 13
-        OnClick = milkywayClick
-      end
-      object fillmilkyway: TCheckBox
-        Left = 224
-        Top = 312
-        Width = 193
-        Height = 30
-        Caption = 'Fill Milky Way'
-        TabOrder = 14
-        OnClick = fillmilkywayClick
-      end
-      object GridNum: TCheckBox
-        Left = 24
-        Top = 88
-        Width = 185
-        Height = 30
-        Caption = 'Show Grid Label'
-        TabOrder = 15
-        OnClick = GridNumClick
-      end
-    end
-    object t_labels: TTabSheet
-      Caption = 't_labels'
-      ImageIndex = 6
-      object labelcolorStar: TShape
-        Tag = 1
-        Left = 344
-        Top = 72
-        Width = 17
-        Height = 17
-        Brush.Color = clBase
-        OnMouseUp = labelcolorMouseUp
-      end
-      object labelcolorVar: TShape
-        Tag = 2
-        Left = 344
-        Top = 100
-        Width = 17
-        Height = 17
-        Brush.Color = clBase
-        OnMouseUp = labelcolorMouseUp
-      end
-      object labelcolorMult: TShape
-        Tag = 3
-        Left = 344
-        Top = 129
-        Width = 17
-        Height = 17
-        Brush.Color = clBase
-        OnMouseUp = labelcolorMouseUp
-      end
-      object labelcolorNeb: TShape
-        Tag = 4
-        Left = 344
-        Top = 157
-        Width = 17
-        Height = 17
-        Brush.Color = clBase
-        OnMouseUp = labelcolorMouseUp
-      end
-      object labelcolorSol: TShape
-        Tag = 5
-        Left = 344
-        Top = 186
-        Width = 17
-        Height = 17
-        Brush.Color = clBase
-        OnMouseUp = labelcolorMouseUp
-      end
-      object labelcolorMisc: TShape
-        Tag = 7
-        Left = 344
-        Top = 243
-        Width = 17
-        Height = 17
-        Brush.Color = clBase
-        OnMouseUp = labelcolorMouseUp
-      end
-      object labelcolorConst: TShape
-        Tag = 6
-        Left = 344
-        Top = 214
-        Width = 17
-        Height = 17
-        Brush.Color = clBase
-        OnMouseUp = labelcolorMouseUp
-      end
-      object labelcolorChartInfo: TShape
-        Tag = 8
-        Left = 344
-        Top = 272
-        Width = 17
-        Height = 17
-        Brush.Color = clBase
-        OnMouseUp = labelcolorMouseUp
-      end
-      object Label10: TLabel
-        Left = 0
-        Top = 0
-        Width = 66
-        Height = 18
-        Caption = 'Labels Setting'
-      end
-      object Label236: TLabel
-        Left = 40
-        Top = 24
-        Width = 57
-        Height = 18
-        Caption = 'Label Object'
-      end
-      object Label237: TLabel
-        Left = 264
-        Top = 24
-        Width = 63
-        Height = 40
-        AutoSize = False
-        Caption = 'Magnitude difference'
-        WordWrap = True
-      end
-      object Label240: TLabel
-        Left = 344
-        Top = 24
-        Width = 24
-        Height = 18
-        Caption = 'Label'
-      end
-      object Label252: TLabel
-        Left = 344
-        Top = 44
-        Width = 26
-        Height = 18
-        Caption = 'Color'
-      end
-      object Label255: TLabel
-        Left = 384
-        Top = 44
-        Width = 19
-        Height = 18
-        Caption = 'Size'
-      end
-      object labelsizeStar: TSpinEdit
-        Tag = 1
-        Left = 384
-        Top = 66
-        Width = 41
-        Height = 26
-        Max = 48
-        Min = 6
-        TabOrder = 6
-        Value = 6
-        OnChanged = labelsizeChanged
-      end
-      object labelmagStar: TSpinEdit
-        Tag = 1
-        Left = 264
-        Top = 66
-        Width = 41
-        Height = 26
-        Max = 10
-        TabOrder = 7
-        OnChanged = labelmagChanged
-      end
-      object showlabelStar: TCheckBox
-        Tag = 1
-        Left = 40
-        Top = 72
-        Width = 209
-        Height = 17
-        Caption = 'Stars'
-        TabOrder = 8
-        OnClick = showlabelClick
-      end
-      object labelsizeVar: TSpinEdit
-        Tag = 2
-        Left = 384
-        Top = 94
-        Width = 41
-        Height = 26
-        Max = 48
-        Min = 6
-        TabOrder = 9
-        Value = 6
-        OnChanged = labelsizeChanged
-      end
-      object labelmagVar: TSpinEdit
-        Tag = 2
-        Left = 264
-        Top = 94
-        Width = 41
-        Height = 26
-        Max = 10
-        TabOrder = 10
-        OnChanged = labelmagChanged
-      end
-      object showlabelVar: TCheckBox
-        Tag = 2
-        Left = 40
-        Top = 100
-        Width = 209
-        Height = 17
-        Caption = 'Variable Stars'
-        TabOrder = 11
-        OnClick = showlabelClick
-      end
-      object labelsizeMult: TSpinEdit
-        Tag = 3
-        Left = 384
-        Top = 123
-        Width = 41
-        Height = 26
-        Max = 48
-        Min = 6
-        TabOrder = 12
-        Value = 6
-        OnChanged = labelsizeChanged
-      end
-      object LabelmagMult: TSpinEdit
-        Tag = 3
-        Left = 264
-        Top = 123
-        Width = 41
-        Height = 26
-        Max = 10
-        TabOrder = 13
-        OnChanged = labelmagChanged
-      end
-      object showlabelMult: TCheckBox
-        Tag = 3
-        Left = 40
-        Top = 129
-        Width = 209
-        Height = 17
-        Caption = 'Multiple Stars'
-        TabOrder = 14
-        OnClick = showlabelClick
-      end
-      object labelsizeNeb: TSpinEdit
-        Tag = 4
-        Left = 384
-        Top = 151
-        Width = 41
-        Height = 26
-        Max = 48
-        Min = 6
-        TabOrder = 15
-        Value = 6
-        OnChanged = labelsizeChanged
-      end
-      object labelmagNeb: TSpinEdit
-        Tag = 4
-        Left = 264
-        Top = 151
-        Width = 41
-        Height = 26
-        Max = 10
-        TabOrder = 16
-        OnChanged = labelmagChanged
-      end
-      object showlabelNeb: TCheckBox
-        Tag = 4
-        Left = 40
-        Top = 157
-        Width = 209
-        Height = 17
-        Caption = 'Nebulae'
-        TabOrder = 17
-        OnClick = showlabelClick
-      end
-      object labelsizeSol: TSpinEdit
-        Tag = 5
-        Left = 384
-        Top = 180
-        Width = 41
-        Height = 26
-        Max = 48
-        Min = 6
-        TabOrder = 18
-        Value = 6
-        OnChanged = labelsizeChanged
-      end
-      object labelmagSol: TSpinEdit
-        Tag = 5
-        Left = 264
-        Top = 180
-        Width = 41
-        Height = 26
-        Max = 10
-        TabOrder = 19
-        OnChanged = labelmagChanged
-      end
-      object showlabelSol: TCheckBox
-        Tag = 5
-        Left = 40
-        Top = 186
-        Width = 209
-        Height = 17
-        Caption = 'Solar System'
-        TabOrder = 20
-        OnClick = showlabelClick
-      end
-      object labelsizeMisc: TSpinEdit
-        Tag = 7
-        Left = 384
-        Top = 237
-        Width = 41
-        Height = 26
-        Max = 48
-        Min = 6
-        TabOrder = 21
-        Value = 6
-        OnChanged = labelsizeChanged
-      end
-      object showlabelMisc: TCheckBox
-        Tag = 7
-        Left = 40
-        Top = 243
-        Width = 209
-        Height = 17
-        Caption = 'Other labels'
-        TabOrder = 22
-        OnClick = showlabelClick
-      end
-      object showlabelConst: TCheckBox
-        Tag = 6
-        Left = 40
-        Top = 214
-        Width = 209
-        Height = 17
-        Caption = 'Constellation name'
-        TabOrder = 23
-        OnClick = showlabelClick
-      end
-      object labelsizeConst: TSpinEdit
-        Tag = 6
-        Left = 384
-        Top = 208
-        Width = 41
-        Height = 26
-        Max = 48
-        Min = 6
-        TabOrder = 24
-        Value = 6
-        OnChanged = labelsizeChanged
-      end
-      object MagLabel: TRadioGroup
-        Left = 24
-        Top = 304
-        Width = 225
-        Height = 65
-        Items.Strings = (
-          'Name'
-          'Common Name'
-          'Magnitude')
-        Caption = 'Star Label'
-        Columns = 2
-        ItemIndex = 0
-        TabOrder = 25
-        OnClick = MagLabelClick
-      end
-      object constlabel: TRadioGroup
-        Left = 256
-        Top = 304
-        Width = 217
-        Height = 65
-        Items.Strings = (
-          'Full Name'
-          'Abbreviation')
-        Caption = 'Constellation Label'
-        Columns = 2
-        ItemIndex = 0
-        TabOrder = 26
-        OnClick = constlabelClick
-      end
-      object showlabelall: TCheckBox
-        Left = 40
-        Top = 384
-        Width = 257
-        Height = 21
-        Caption = 'Display the labels on the chart'
-        TabOrder = 27
-        OnClick = showlabelallClick
-      end
-      object showlabelChartInfo: TCheckBox
-        Tag = 8
-        Left = 40
-        Top = 272
-        Width = 209
-        Height = 17
-        Caption = 'Chart Information'
-        TabOrder = 28
-        OnClick = showlabelClick
-      end
-      object labelsizeChartInfo: TSpinEdit
-        Tag = 8
-        Left = 384
-        Top = 266
-        Width = 41
-        Height = 26
-        Max = 48
-        Min = 6
-        TabOrder = 29
-        Value = 6
-        OnChanged = labelsizeChanged
-      end
-      object ShowChartInfo: TCheckBox
-        Left = 40
-        Top = 404
-        Width = 377
-        Height = 30
-        Caption = 'Display the chart information in the menu bar.'
-        TabOrder = 30
-        OnClick = ShowChartInfoClick
       end
     end
     object t_circle: TTabSheet
