@@ -32,6 +32,7 @@ begin
     Fenabled:=true;
   end else begin
     Fenabled:=false;
+    writetrace(dsslibname+' not found');
   end;
 end;
 
@@ -59,6 +60,7 @@ var i : SImageConfig;
 begin
 try
   result:=false;
+  if not Fenabled then exit;
   datasource:=0;
   if cfgdss.dss102 then datasource:=3
   else if cfgdss.dssnorth and cfgdss.dsssouth then datasource:=4
