@@ -315,7 +315,7 @@ var i:integer;
 begin
 if Fcatalog.cfgshr.AutoStarFilter then Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
    else Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
-if cfgsc.quick then Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgcat.StarMagMax-3;
+if cfgsc.quick then Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgcat.StarMagMax-2;
 Fcatalog.cfgcat.NebMagMax:=Fcatalog.cfgshr.NebMagFilter[cfgsc.FieldNum];
 Fcatalog.cfgcat.NebSizeMin:=Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
 Fplot.cfgchart.min_ma:=1;
