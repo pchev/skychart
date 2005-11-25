@@ -9,7 +9,7 @@ object f_config_pictures: Tf_config_pictures
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_images
+    ActivePage = t_realsky
     Align = alClient
     TabOrder = 0
     object t_images: TTabSheet
@@ -25,9 +25,9 @@ object f_config_pictures: Tf_config_pictures
       object Label264: TLabel
         Left = 8
         Top = 46
-        Width = 63
+        Width = 74
         Height = 13
-        Caption = 'Pictures Path'
+        Caption = 'Image Directory'
       end
       object Label265: TLabel
         Left = 98

@@ -3569,6 +3569,7 @@ object f_main: Tf_main
           Width = 12
           Height = 22
           Hint = 'Adjust Star Size'
+          Flat = True
           Glyph.Data = {
             B6010000424DB601000000000000360000002800000008000000100000000100
             180000000000800100000A0B00000A0B00000000000000000000FFFFFFFFFFFF

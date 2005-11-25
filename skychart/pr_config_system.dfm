@@ -399,185 +399,6 @@ object f_config_system: Tf_config_system
         Height = 13
         Caption = 'Telescope Setting'
       end
-      object INDI: TGroupBox
-        Left = 8
-        Top = 112
-        Width = 450
-        Height = 257
-        Caption = 'INDI Driver setting'
-        TabOrder = 0
-        object Label75: TLabel
-          Left = 8
-          Top = 28
-          Width = 84
-          Height = 13
-          Caption = 'INDI Server Host '
-        end
-        object Label130: TLabel
-          Left = 248
-          Top = 28
-          Width = 76
-          Height = 13
-          Caption = 'INDI server Port'
-        end
-        object Label258: TLabel
-          Left = 8
-          Top = 104
-          Width = 108
-          Height = 13
-          Caption = 'INDI Server command '
-        end
-        object Label259: TLabel
-          Left = 248
-          Top = 136
-          Width = 82
-          Height = 13
-          Caption = 'INDI Driver name'
-        end
-        object Label260: TLabel
-          Left = 248
-          Top = 104
-          Width = 73
-          Height = 13
-          Caption = 'Telescope type'
-        end
-        object Label261: TLabel
-          Left = 8
-          Top = 180
-          Width = 59
-          Height = 13
-          Caption = 'Device Port '
-        end
-        object Label2: TLabel
-          Left = 16
-          Top = 224
-          Width = 115
-          Height = 13
-          Caption = 'Control Panel command '
-        end
-        object IndiServerHost: TEdit
-          Left = 120
-          Top = 24
-          Width = 100
-          Height = 21
-          TabOrder = 0
-          OnChange = IndiServerHostChange
-        end
-        object IndiServerPort: TEdit
-          Left = 336
-          Top = 24
-          Width = 97
-          Height = 21
-          TabOrder = 1
-          OnChange = IndiServerPortChange
-        end
-        object IndiAutostart: TCheckBox
-          Left = 8
-          Top = 64
-          Width = 401
-          Height = 30
-          Caption = 'Automatically start a local server if not already running'
-          TabOrder = 3
-          OnClick = IndiAutostartClick
-        end
-        object IndiServerCmd: TEdit
-          Left = 120
-          Top = 100
-          Width = 100
-          Height = 21
-          TabOrder = 5
-          OnChange = IndiServerCmdChange
-        end
-        object IndiDriver: TEdit
-          Left = 336
-          Top = 132
-          Width = 100
-          Height = 21
-          Enabled = False
-          TabOrder = 2
-          OnChange = IndiDriverChange
-        end
-        object IndiDev: TComboBox
-          Left = 336
-          Top = 100
-          Width = 100
-          Height = 21
-          Style = csDropDownList
-          ItemHeight = 13
-          ItemIndex = 0
-          TabOrder = 4
-          OnChange = IndiDevChange
-          Items.Strings = (
-            '')
-        end
-        object IndiPort: TComboBox
-          Left = 120
-          Top = 176
-          Width = 100
-          Height = 21
-          Style = csDropDownList
-          ItemHeight = 13
-          TabOrder = 6
-          OnChange = IndiPortChange
-          Items.Strings = (
-            'COM1'
-            'COM2'
-            'COM3'
-            'COM4'
-            'COM5'
-            'COM6'
-            'COM7'
-            'COM8')
-        end
-        object PanelCmd: TEdit
-          Left = 152
-          Top = 220
-          Width = 257
-          Height = 21
-          TabOrder = 7
-          OnChange = PanelCmdChange
-        end
-      end
-      object TelescopeSelect: TRadioGroup
-        Left = 8
-        Top = 32
-        Width = 450
-        Height = 65
-        Caption = 'TelescopeSelect'
-        Columns = 3
-        Items.Strings = (
-          'INDI'
-          'Manual'
-          'CDC plugin')
-        TabOrder = 1
-        OnClick = TelescopeSelectClick
-      end
-      object TelescopePlugin: TGroupBox
-        Left = 8
-        Top = 112
-        Width = 450
-        Height = 105
-        Caption = 'CDC plugin setting'
-        TabOrder = 2
-        Visible = False
-        object Label155: TLabel
-          Left = 24
-          Top = 46
-          Width = 85
-          Height = 13
-          Caption = 'Telescope Plugin '
-        end
-        object telescopepluginlist: TComboBox
-          Left = 144
-          Top = 42
-          Width = 145
-          Height = 21
-          Style = csDropDownList
-          ItemHeight = 13
-          TabOrder = 0
-          OnChange = telescopepluginlistChange
-        end
-      end
       object TelescopeManual: TGroupBox
         Left = 8
         Top = 112
@@ -755,6 +576,185 @@ object f_config_system: Tf_config_system
             TabOrder = 3
             OnClick = TurnsAltChange
           end
+        end
+      end
+      object INDI: TGroupBox
+        Left = 8
+        Top = 112
+        Width = 450
+        Height = 257
+        Caption = 'INDI Driver setting'
+        TabOrder = 0
+        object Label75: TLabel
+          Left = 8
+          Top = 28
+          Width = 84
+          Height = 13
+          Caption = 'INDI Server Host '
+        end
+        object Label130: TLabel
+          Left = 248
+          Top = 28
+          Width = 76
+          Height = 13
+          Caption = 'INDI server Port'
+        end
+        object Label258: TLabel
+          Left = 8
+          Top = 104
+          Width = 108
+          Height = 13
+          Caption = 'INDI Server command '
+        end
+        object Label259: TLabel
+          Left = 248
+          Top = 136
+          Width = 82
+          Height = 13
+          Caption = 'INDI Driver name'
+        end
+        object Label260: TLabel
+          Left = 248
+          Top = 104
+          Width = 73
+          Height = 13
+          Caption = 'Telescope type'
+        end
+        object Label261: TLabel
+          Left = 8
+          Top = 180
+          Width = 59
+          Height = 13
+          Caption = 'Device Port '
+        end
+        object Label2: TLabel
+          Left = 16
+          Top = 224
+          Width = 115
+          Height = 13
+          Caption = 'Control Panel command '
+        end
+        object IndiServerHost: TEdit
+          Left = 120
+          Top = 24
+          Width = 100
+          Height = 21
+          TabOrder = 0
+          OnChange = IndiServerHostChange
+        end
+        object IndiServerPort: TEdit
+          Left = 336
+          Top = 24
+          Width = 97
+          Height = 21
+          TabOrder = 1
+          OnChange = IndiServerPortChange
+        end
+        object IndiAutostart: TCheckBox
+          Left = 8
+          Top = 64
+          Width = 401
+          Height = 30
+          Caption = 'Automatically start a local server if not already running'
+          TabOrder = 3
+          OnClick = IndiAutostartClick
+        end
+        object IndiServerCmd: TEdit
+          Left = 120
+          Top = 100
+          Width = 100
+          Height = 21
+          TabOrder = 5
+          OnChange = IndiServerCmdChange
+        end
+        object IndiDriver: TEdit
+          Left = 336
+          Top = 132
+          Width = 100
+          Height = 21
+          Enabled = False
+          TabOrder = 2
+          OnChange = IndiDriverChange
+        end
+        object IndiDev: TComboBox
+          Left = 336
+          Top = 100
+          Width = 100
+          Height = 21
+          Style = csDropDownList
+          ItemHeight = 13
+          ItemIndex = 0
+          TabOrder = 4
+          OnChange = IndiDevChange
+          Items.Strings = (
+            '')
+        end
+        object IndiPort: TComboBox
+          Left = 120
+          Top = 176
+          Width = 100
+          Height = 21
+          Style = csDropDownList
+          ItemHeight = 13
+          TabOrder = 6
+          OnChange = IndiPortChange
+          Items.Strings = (
+            'COM1'
+            'COM2'
+            'COM3'
+            'COM4'
+            'COM5'
+            'COM6'
+            'COM7'
+            'COM8')
+        end
+        object PanelCmd: TEdit
+          Left = 152
+          Top = 220
+          Width = 257
+          Height = 21
+          TabOrder = 7
+          OnChange = PanelCmdChange
+        end
+      end
+      object TelescopeSelect: TRadioGroup
+        Left = 8
+        Top = 32
+        Width = 450
+        Height = 65
+        Caption = 'TelescopeSelect'
+        Columns = 3
+        Items.Strings = (
+          'INDI'
+          'Manual'
+          'CDC plugin')
+        TabOrder = 1
+        OnClick = TelescopeSelectClick
+      end
+      object TelescopePlugin: TGroupBox
+        Left = 8
+        Top = 112
+        Width = 450
+        Height = 105
+        Caption = 'CDC plugin setting'
+        TabOrder = 2
+        Visible = False
+        object Label155: TLabel
+          Left = 24
+          Top = 46
+          Width = 85
+          Height = 13
+          Caption = 'Telescope Plugin '
+        end
+        object telescopepluginlist: TComboBox
+          Left = 144
+          Top = 42
+          Width = 145
+          Height = 21
+          Style = csDropDownList
+          ItemHeight = 13
+          TabOrder = 0
+          OnChange = telescopepluginlistChange
         end
       end
     end
