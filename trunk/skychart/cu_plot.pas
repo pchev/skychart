@@ -2525,7 +2525,12 @@ begin
       cnv.Brush.Style := bsSolid;
       cnv.Brush.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Pen.Color := cnv.Brush.Color;
+      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      {$endif}
+      {$ifdef linux}
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
+      {$endif}
     end;
 
   if cfgplot.nebplot = 0 then // line mode
@@ -2554,7 +2559,12 @@ begin
           end;
 
 //    and draw it... we're using an rectangle in the event that we don't have an outline
+      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      {$endif}
+      {$ifdef linux}
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
+      {$endif}
 //      cnv.MoveTo(xx-ds,yy);
 //      cnv.LineTo(xx+ds,yy);
 //      cnv.MoveTo(xx,yy-ds);
@@ -2606,7 +2616,12 @@ begin
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Brush.Color := cnv.Pen.Color;
+      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      {$endif}
+      {$ifdef linux}
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
+      {$endif}
     end;
 
   if cfgplot.nebplot = 0 then // line mode
@@ -2626,7 +2641,12 @@ begin
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
 //    Ideally all extended nebulae should have an outline.
+      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      {$endif}
+      {$ifdef linux}
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
+      {$endif}
       cnv.MoveTo(xx-ds,yy);
       cnv.Pen.Color := cfgplot.DSOColorOCl;
       cnv.LineTo(xx+ds,yy);
@@ -2856,7 +2876,12 @@ begin
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Brush.Color := cnv.Pen.Color;
+      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      {$endif}
+      {$ifdef linux}
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
+      {$endif}
     end;
 
   if cfgplot.nebplot = 0 then // line mode
@@ -2875,7 +2900,12 @@ begin
           cnv.Pen.Style := psSolid;
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
+      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      {$endif}
+      {$ifdef linux}
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
+      {$endif}
       cnv.MoveTo(xx-ds,yy);
       cnv.LineTo(xx+ds,yy);
       cnv.MoveTo(xx,yy-ds);
@@ -2962,7 +2992,12 @@ begin
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Brush.Color := cnv.Pen.Color;
+      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      {$endif}
+      {$ifdef linux}
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
+      {$endif}
     end;
 
   if cfgplot.nebplot = 0 then // line mode
@@ -2981,7 +3016,12 @@ begin
           cnv.Pen.Style := psSolid;
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
+      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      {$endif}
+      {$ifdef linux}
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
+      {$endif}
     end;
 
 // reset brush and pen back to default ready for next object
