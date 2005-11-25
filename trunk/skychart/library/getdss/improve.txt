@@ -1,3 +1,12 @@
+   -- 25 Nov 2005: Patrick Chevalley correct extr_fit.cpp for wrong 
+CDELTx and CDx_y when subsampling is greater than one.
+
+   -- 25 Jul 2005: Use the return value from ImageExtract to tell the 
+main application which CD is required. The main application is responsible 
+to tell the user and retry.
+There is no compatibility problem as the other return code defined in 
+errcode.h are all negative
+
    -- 22 Jul 2005: Patrick Chevalley build a shared library for Linux 
 getdss_lib.cpp by modifying a little getdss_dll.cpp. 
 The corresponding makefile is makefile.lib, all files are renamed to lower 
