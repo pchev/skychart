@@ -637,15 +637,15 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       dist = sqrt( delta_ra * delta_ra + delta_dec * delta_dec);
       if( !i)     /* CDELT1 is negative... don't really understand why */
          dist = -dist;
-      sprintf( tptr, "CDELT%d  = %21.13E", i + 1, (180. / PI) * dist);
+      sprintf( tptr, "CDELT%d  = %21.13E", i + 1, (180. / PI) * dist * edata->subsamp);
       tptr += 80;
       crota = -atan2( delta_ra, delta_dec);
       if( !i)
          crota -= PI / 2.;
       sprintf( tptr, "CROTA%d  = %11.9lf", i + 1, crota * 180 / PI);
       tptr += 80;
-      new_wcs_matrix[i * 2    ] = delta_ra * 180. / PI;
-      new_wcs_matrix[i * 2 + 1] = delta_dec * 180. / PI;
+      new_wcs_matrix[i * 2    ] = delta_ra * 180. / PI * edata->subsamp;
+      new_wcs_matrix[i * 2 + 1] = delta_dec * 180. / PI * edata->subsamp;
       }
    /* end old-style WCS keywords */
    /* begin new-style WCS keywords: */
