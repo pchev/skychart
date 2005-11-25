@@ -489,15 +489,18 @@ begin
 if LockKeyboard then exit;
 try
 LockKeyboard:=true;
+movefactor:=40;
+zoomfactor:=1.1;
 if Shift = [ssShift] then begin
+   movefactor:=80;
+   zoomfactor:=1.05;
+end;
+if Shift = [ssCtrl] then begin
    movefactor:=8;
    zoomfactor:=1.5;
 end;
-if Shift = [ssCtrl] then begin
-   movefactor:=2;
-   zoomfactor:=3;
-end;
 ok:=true;
+sc.cfgsc.quick:=true;
 case key of
 key_upright   : MoveNorthWest.execute;
 key_downright : MoveSouthWest.execute;
@@ -509,9 +512,16 @@ key_right     : MoveWest.execute;
 key_down      : MoveSouth.execute;
 key_plus      : Zoomplus.execute;
 key_minus     : Zoomminus.execute;
-else ok:=false;
+else begin
+     ok:=false;
+     sc.cfgsc.quick:=false;
+     end;
 end;
-if ok then key:=0;
+if ok then begin
+   key:=0;
+   RefreshTimer.enabled:=false;
+   RefreshTimer.enabled:=true;
+end;
 movefactor:=4;
 zoomfactor:=2;
    {$ifdef linux}
