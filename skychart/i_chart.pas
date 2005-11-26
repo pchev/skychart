@@ -301,7 +301,8 @@ try
       fname:=slash(printpath)+'cdcprint.bmp';
       prtbmp.savetofile(fname);
       //cmd:='bmptopnm '+fname+' | pnmtops -equalpixels -dpi='+inttostr(printresol)+' -rle >'+changefileext(fname,'.ps');
-      cmd:='command.com /C bmptops.bat '+fname+' '+changefileext(fname,'.ps');
+//      cmd:='command.com /C bmptops.bat '+fname+' '+changefileext(fname,'.ps');
+      cmd:='bmptops.bat "'+fname+'" "'+changefileext(fname,'.ps')+'" '+inttostr(printresol);
       chdir(slash(appdir)+'plugins');
     {$endif}
     i:=exec(cmd);
@@ -309,7 +310,7 @@ try
     if i=0 then begin
        if assigned(Fshowinfo) then Fshowinfo('Send chart to printer.' ,caption);
        deletefile(fname);
-       execnowait(printcmd1+' '+changefileext(fname,'.ps'));
+       execnowait(printcmd1+' "'+changefileext(fname,'.ps')+'"');
     end else showmessage('Print failed, return code='+inttostr(i));
     end;
  2: begin
