@@ -9,7 +9,7 @@ object f_config_time: Tf_config_time
     Top = 0
     Width = 490
     Height = 440
-    ActivePage = t_time
+    ActivePage = t_simulation
     Align = alClient
     TabOrder = 0
     object t_time: TTabSheet
@@ -326,7 +326,7 @@ object f_config_time: Tf_config_time
       end
       object stepreset: TSpeedButton
         Left = 96
-        Top = 316
+        Top = 340
         Width = 81
         Height = 25
         Caption = 'Reset '
@@ -336,14 +336,14 @@ object f_config_time: Tf_config_time
       end
       object Label178: TLabel
         Left = 176
-        Top = 213
+        Top = 237
         Width = 32
         Height = 13
         Caption = 'every  '
       end
       object Label179: TLabel
         Left = 8
-        Top = 213
+        Top = 237
         Width = 77
         Height = 13
         Caption = 'Number of steps'
@@ -357,14 +357,14 @@ object f_config_time: Tf_config_time
       end
       object Label56: TLabel
         Left = 8
-        Top = 152
+        Top = 168
         Width = 159
         Height = 13
         Caption = 'Plot the position of moving object.'
       end
       object stepunit: TRadioGroup
         Left = 304
-        Top = 171
+        Top = 195
         Width = 153
         Height = 89
         Caption = 'Step unit'
@@ -378,7 +378,7 @@ object f_config_time: Tf_config_time
       end
       object stepline: TCheckBox
         Left = 96
-        Top = 280
+        Top = 304
         Width = 281
         Height = 17
         Caption = 'Connection lines between each position '
@@ -387,7 +387,7 @@ object f_config_time: Tf_config_time
       end
       object nbstep: TSpinEdit
         Left = 96
-        Top = 208
+        Top = 232
         Width = 57
         Height = 22
         MaxValue = 100
@@ -398,7 +398,7 @@ object f_config_time: Tf_config_time
       end
       object stepsize: TSpinEdit
         Left = 232
-        Top = 208
+        Top = 232
         Width = 57
         Height = 22
         MaxValue = 999999
@@ -410,8 +410,8 @@ object f_config_time: Tf_config_time
       object SimObj: TCheckListBox
         Left = 8
         Top = 48
-        Width = 257
-        Height = 84
+        Width = 305
+        Height = 100
         OnClickCheck = SimObjClickCheck
         Columns = 3
         Font.Charset = DEFAULT_CHARSET
@@ -438,7 +438,7 @@ object f_config_time: Tf_config_time
         TabOrder = 4
       end
       object AllSim: TButton
-        Left = 296
+        Left = 336
         Top = 56
         Width = 75
         Height = 25
@@ -447,7 +447,7 @@ object f_config_time: Tf_config_time
         OnClick = AllSimClick
       end
       object NoSim: TButton
-        Left = 296
+        Left = 336
         Top = 88
         Width = 75
         Height = 25
