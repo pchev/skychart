@@ -71,12 +71,15 @@ implementation
 
 procedure ClosePlanetRender;
 begin
+try
  dec(UseCount);
  if UseCount<=0 then begin
     if Prenderlib<>0 then RenderCloseLib;
     Prenderlib:=0;
     UseCount:=0;
  end;
+except
+end; 
 end;
 
 procedure InitPlanetRender;

@@ -4,17 +4,18 @@ interface
 
 uses
    SysUtils, Classes, Graphics, Forms, GLWin32Viewer,
-   GLScene, Math, Jpeg, GLTexture, GLMisc, GLObjects, Dialogs, Controls;
+   GLScene, Math, Jpeg, GLTexture, GLMisc, GLObjects, Dialogs, Controls,
+  GLGeomObjects;
 
 type
   TForm1 = class(TForm)
     GLScene1: TGLScene;
     GLCamera1: TGLCamera;
     GLLightSource1: TGLLightSource;
-    Sphere1: TSphere;
-    DummyCube1: TDummyCube;
-    Diskinf: TDisk;
-    Disksup: TDisk;
+    Sphere1: TGLSphere;
+    DummyCube1: TGLDummyCube;
+    Diskinf: TGLDisk;
+    Disksup: TGLDisk;
     GLMaterialLibrary1: TGLMaterialLibrary;
     GLMemoryViewer1: TGLMemoryViewer;
     procedure FormCreate(Sender: TObject);
@@ -317,7 +318,10 @@ end;
 
 Procedure CloseLib;stdcall;
 begin
+try
 Form1.Release;
+except
+end;
 end;
 
 end.
