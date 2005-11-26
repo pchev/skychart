@@ -2104,7 +2104,7 @@ cfgm.PrintMethod:=ReadInteger(section,'PrintMethod',cfgm.PrintMethod);
 cfgm.PrintCmd1:=ReadString(section,'PrintCmd1',cfgm.PrintCmd1);
 cfgm.PrintCmd2:=ReadString(section,'PrintCmd2',cfgm.PrintCmd2);
 cfgm.PrintTmpPath:=ReadString(section,'PrintTmpPath',cfgm.PrintTmpPath);
-if (ReadBool(section,'WinMaximize',false)) then f_main.WindowState:=wsMaximized;
+if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 cfgm.Constellationfile:=ReadString(section,'Constellationfile',cfgm.Constellationfile);
 cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
@@ -2226,7 +2226,7 @@ var i:integer;
     cplot:conf_plot ;
     csc:conf_skychart;
 begin
-if child.DockedObject is Tf_chart then with child.DockedObject as Tf_chart do begin
+if (child<>nil) and (child.DockedObject is Tf_chart) then with child.DockedObject as Tf_chart do begin
   cplot:=sc.plot.cfgplot;
   csc:=sc.cfgsc;
 end
@@ -2340,11 +2340,13 @@ WriteInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
 WriteString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
 WriteFloat(section,'DefaultJDchart',catalog.cfgshr.DefaultJDchart);
 section:='default_chart';
+if (child<>nil) then begin
   WriteInteger(section,'ChartWidth',child.Width);
   WriteInteger(section,'ChartHeight',child.Height);
   WriteInteger(section,'ChartTop',child.Top);
   WriteInteger(section,'Chartleft',child.Left);
   WriteBool(section,'ChartMaximized',child.Maximized);
+end;  
 WriteFloat(section,'racentre',csc.racentre);
 WriteFloat(section,'decentre',csc.decentre);
 WriteFloat(section,'acentre',csc.acentre);
