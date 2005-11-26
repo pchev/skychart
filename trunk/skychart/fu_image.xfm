@@ -1,6 +1,6 @@
 object f_image: Tf_image
-  Left = 363
-  Top = 106
+  Left = 367
+  Top = 126
   Width = 615
   Height = 407
   HorzScrollBar.Range = 482
@@ -20,13 +20,14 @@ object f_image: Tf_image
   OnKeyPress = FormKeyPress
   OnMouseWheel = FormMouseWheel
   OnResize = FormResize
-  PixelsPerInch = 90
+  PixelsPerInch = 81
   object Image1: TZoomImage
     Left = 0
     Top = 32
     Width = 465
     Height = 265
     Zoom = 1.000000000000000000
+    ZoomMin = 1.000000000000000000
     ZoomMax = 4.000000000000000000
     Xcentre = 0
     Ycentre = 0

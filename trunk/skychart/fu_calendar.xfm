@@ -14,12 +14,11 @@ object f_calendar: Tf_calendar
   Font.Style = []
   Font.Weight = 48
   ParentFont = False
+  Scaled = False
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  PixelsPerInch = 90
-  TextHeight = 18
-  TextWidth = 5
+  PixelsPerInch = 81
   object Memo1: TMemo
     Left = 32
     Top = 0

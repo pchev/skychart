@@ -1,6 +1,6 @@
 object f_detail: Tf_detail
-  Left = 408
-  Top = 175
+  Left = 416
+  Top = 215
   Width = 359
   Height = 356
   VertScrollBar.Range = 41
@@ -17,7 +17,7 @@ object f_detail: Tf_detail
   ParentFont = False
   Position = poDefault
   Scaled = False
-  PixelsPerInch = 90
+  PixelsPerInch = 81
   object Panel1: TPanel
     Left = 0
     Top = 0

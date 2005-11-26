@@ -1,6 +1,6 @@
 object f_manualtelescope: Tf_manualtelescope
-  Left = 220
-  Top = 196
+  Left = 224
+  Top = 216
   Width = 397
   Height = 109
   BorderStyle = fbsNone
@@ -14,12 +14,11 @@ object f_manualtelescope: Tf_manualtelescope
   FormStyle = fsStayOnTop
   ParentFont = False
   Position = poDefault
+  Scaled = False
   OnMouseDown = FormMouseDown
   OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
-  PixelsPerInch = 96
-  TextHeight = 18
-  TextWidth = 5
+  PixelsPerInch = 81
   object Panel1: TPanel
     Left = 0
     Top = 0
@@ -74,7 +73,7 @@ object f_manualtelescope: Tf_manualtelescope
     object Label4: TLabel
       Left = 16
       Top = 24
-      Width = 130
+      Width = 134
       Height = 48
       Caption = 'RA turns:'
       Font.Color = clRed
@@ -93,7 +92,7 @@ object f_manualtelescope: Tf_manualtelescope
     object Label5: TLabel
       Left = 16
       Top = 56
-      Width = 152
+      Width = 157
       Height = 48
       Caption = 'DEC turns:'
       Font.Color = clRed

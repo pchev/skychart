@@ -1,6 +1,6 @@
 object f_directory: Tf_directory
-  Left = 195
-  Top = 120
+  Left = 199
+  Top = 140
   Width = 320
   Height = 368
   HorzScrollBar.Range = 299
@@ -17,7 +17,7 @@ object f_directory: Tf_directory
   ParentFont = False
   Scaled = False
   OnShow = FormShow
-  PixelsPerInch = 88
+  PixelsPerInch = 81
   object DirectoryTreeView1: TDirectoryTreeView
     Left = 16
     Top = 32
