@@ -86,7 +86,7 @@ type
 
   Var f_getdss: Tf_getdss;
 
-  Const dsslibname = 'getdss.dll';
+  Const dsslibname = 'libgetdss.dll';
 
 
 implementation
