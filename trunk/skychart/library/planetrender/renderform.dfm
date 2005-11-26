@@ -18,13 +18,10 @@ object Form1: TForm1
   object GLScene1: TGLScene
     Left = 16
     Top = 16
-    object DummyCube1: TDummyCube
+    object DummyCube1: TGLDummyCube
       Position.Coordinates = {0000000000000000000048430000803F}
       CubeSize = 0.100000001490116
-      object Disksup: TDisk
-        ObjectsSorting = osRenderFarthestFirst
-        Direction.Coordinates = {000000000000803F0000000000000000}
-        Up.Coordinates = {0000000000000000000080BF00000000}
+      object Disksup: TGLDisk
         Material.BackProperties.Ambient.Color = {0000000000000000000000000000803F}
         Material.BackProperties.Diffuse.Color = {0000000000000000000000000000803F}
         Material.FrontProperties.Ambient.Color = {D1D0503DD1D0503DD1D0503D0000803F}
@@ -36,16 +33,16 @@ object Form1: TForm1
         Material.Texture.TextureWrap = twNone
         Material.Texture.Disabled = False
         Material.MaterialLibrary = GLMaterialLibrary1
+        ObjectsSorting = osRenderFarthestFirst
+        Direction.Coordinates = {000000000000803F0000000000000000}
+        Up.Coordinates = {0000000000000000000080BF00000000}
         InnerRadius = 0.3125
         Loops = 1
         OuterRadius = 0.5
         Slices = 72
         SweepAngle = 360
       end
-      object Diskinf: TDisk
-        ObjectsSorting = osRenderFarthestFirst
-        Direction.Coordinates = {00000000000080BF0000000000000000}
-        Up.Coordinates = {0000000000000000000080BF00000000}
+      object Diskinf: TGLDisk
         Material.BackProperties.Ambient.Color = {0000000000000000000000000000803F}
         Material.BackProperties.Diffuse.Color = {0000000000000000000000000000803F}
         Material.FrontProperties.Ambient.Color = {D1D0503DD1D0503DD1D0503D0000803F}
@@ -57,6 +54,9 @@ object Form1: TForm1
         Material.Texture.TextureWrap = twNone
         Material.Texture.Disabled = False
         Material.MaterialLibrary = GLMaterialLibrary1
+        ObjectsSorting = osRenderFarthestFirst
+        Direction.Coordinates = {00000000000080BF0000000000000000}
+        Up.Coordinates = {0000000000000000000080BF00000000}
         InnerRadius = 0.3125
         Loops = 1
         OuterRadius = 0.5
@@ -72,11 +72,7 @@ object Form1: TForm1
         SpotCutOff = 90
       end
     end
-    object Sphere1: TSphere
-      ObjectsSorting = osRenderFarthestFirst
-      Position.Coordinates = {0000000000000000000048430000803F}
-      Scale.Coordinates = {13F2E13E27A0C93E13F2E13E00000000}
-      Up.Coordinates = {000000000000803F0000008000000000}
+    object Sphere1: TGLSphere
       Material.BackProperties.Diffuse.Color = {0000803F0000803F0000803F0000803F}
       Material.FrontProperties.Diffuse.Color = {0000803F0000803F0000803F0000803F}
       Material.FrontProperties.Specular.Color = {0000803F0000803F0000803F0000803F}
@@ -84,6 +80,10 @@ object Form1: TForm1
       Material.Texture.TextureMode = tmModulate
       Material.Texture.Disabled = False
       Material.MaterialLibrary = GLMaterialLibrary1
+      ObjectsSorting = osRenderFarthestFirst
+      Position.Coordinates = {0000000000000000000048430000803F}
+      Scale.Coordinates = {13F2E13E27A0C93E13F2E13E00000000}
+      Up.Coordinates = {000000000000803F0000008000000000}
       Radius = 0.5
       Slices = 72
       Stacks = 31
