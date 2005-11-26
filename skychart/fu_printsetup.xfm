@@ -1,6 +1,6 @@
 object f_printsetup: Tf_printsetup
-  Left = 180
-  Top = 235
+  Left = 184
+  Top = 255
   Width = 471
   Height = 382
   HorzScrollBar.Range = 449
@@ -17,7 +17,7 @@ object f_printsetup: Tf_printsetup
   ParentFont = False
   Scaled = False
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 81
   object printmode: TRadioGroup
     Left = 24
     Top = 16
@@ -106,7 +106,8 @@ object f_printsetup: Tf_printsetup
       Left = 232
       Top = 24
       Width = 49
-      Height = 21
+      Height = 26
+      Cursor = crIBeam
       Hint = '0..600'
       ParentShowHint = False
       ShowHint = True

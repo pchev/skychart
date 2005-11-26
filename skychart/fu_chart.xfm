@@ -1,6 +1,6 @@
 object f_chart: Tf_chart
-  Left = 375
-  Top = 150
+  Left = 379
+  Top = 190
   Width = 640
   Height = 480
   HorzScrollBar.Range = 640
@@ -115,15 +115,14 @@ object f_chart: Tf_chart
   KeyPreview = True
   ParentFont = False
   Position = poDefault
+  Scaled = False
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnMouseWheel = FormMouseWheel
-  PixelsPerInch = 90
-  TextHeight = 20
-  TextWidth = 7
+  PixelsPerInch = 81
   object Panel1: TPanel
     Left = 0
     Top = 0

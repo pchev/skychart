@@ -1,6 +1,6 @@
 object f_about: Tf_about
-  Left = 447
-  Top = 297
+  Left = 455
+  Top = 337
   Width = 350
   Height = 253
   HorzScrollBar.Range = 338
@@ -24,7 +24,7 @@ object f_about: Tf_about
   Scaled = False
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 81
   object logo: TImage
     Left = 0
     Top = 0
@@ -4294,10 +4294,10 @@ object f_about: Tf_about
     OnDblClick = logoDblClick
   end
   object Label1: TLabel
-    Left = 200
+    Left = 206
     Top = 32
-    Width = 135
-    Height = 34
+    Width = 129
+    Height = 41
     Alignment = taRightJustify
     Caption = 'Sky Charts'
     Color = clBlack

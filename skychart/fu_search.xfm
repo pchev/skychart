@@ -15,10 +15,9 @@ object f_search: Tf_search
   Font.Style = []
   Font.Weight = 0
   ParentFont = False
+  Scaled = False
   OnShow = FormShow
-  PixelsPerInch = 88
-  TextHeight = 20
-  TextWidth = 7
+  PixelsPerInch = 81
   object PlanetPanel: TPanel
     Left = 8
     Top = 222

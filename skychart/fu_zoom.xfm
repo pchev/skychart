@@ -1,6 +1,6 @@
 object f_zoom: Tf_zoom
-  Left = 453
-  Top = 181
+  Left = 461
+  Top = 221
   Width = 310
   Height = 154
   HorzScrollBar.Range = 281
@@ -15,10 +15,9 @@ object f_zoom: Tf_zoom
   Font.Style = []
   Font.Weight = 0
   ParentFont = False
+  Scaled = False
   OnShow = FormShow
-  PixelsPerInch = 90
-  TextHeight = 18
-  TextWidth = 5
+  PixelsPerInch = 81
   object Label1: TLabel
     Left = 16
     Top = 8
