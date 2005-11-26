@@ -2783,7 +2783,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = FileNew1
-        Caption = '&New Chart'
+        Caption = 'New Chart'
       end
       object ToolButtonOpen: TToolButton
         HelpType = htContext
@@ -2791,7 +2791,7 @@ object f_main: Tf_main
         Top = 2
         Height = 23
         Action = FileOpen1
-        Caption = '&Open Chart'
+        Caption = 'Open Chart'
       end
       object ToolButtonSave: TToolButton
         HelpType = htContext
@@ -3944,10 +3944,11 @@ object f_main: Tf_main
     KeepLastChild = True
   end
   object MainMenu1: TMainMenu
+    AutoHotkeys = maManual
     Left = 200
     Top = 136
     object File1: TMenuItem
-      Caption = '&File'
+      Caption = 'File'
       Hint = 'File related commands'
       object FileNewItem: TMenuItem
         Action = FileNew1
@@ -3987,7 +3988,7 @@ object f_main: Tf_main
       end
     end
     object Edit1: TMenuItem
-      Caption = '&Edit'
+      Caption = 'Edit'
       GroupIndex = 9
       Hint = 'Edit commands'
       object Copy1: TMenuItem
@@ -4001,7 +4002,7 @@ object f_main: Tf_main
       end
     end
     object Setup1: TMenuItem
-      Caption = '&Setup'
+      Caption = 'Setup'
       GroupIndex = 9
       object Configuration1: TMenuItem
         Action = OpenConfig
@@ -4288,7 +4289,7 @@ object f_main: Tf_main
       end
     end
     object Window1: TMenuItem
-      Caption = '&Window'
+      Caption = 'Window'
       GroupIndex = 9
       Hint = 'Window related commands'
       object WindowCascadeItem: TMenuItem
@@ -4308,7 +4309,7 @@ object f_main: Tf_main
       end
     end
     object Help1: TMenuItem
-      Caption = '&Help'
+      Caption = 'Help'
       GroupIndex = 9
       Hint = 'Help topics'
       object Content1: TMenuItem
@@ -4344,7 +4345,7 @@ object f_main: Tf_main
     Top = 200
     object FileNew1: TAction
       Category = 'File'
-      Caption = '&New Chart'
+      Caption = 'New Chart'
       Hint = 'New Chart'
       ImageIndex = 0
       ShortCut = 16462
@@ -4352,7 +4353,7 @@ object f_main: Tf_main
     end
     object FileOpen1: TAction
       Category = 'File'
-      Caption = '&Open Chart'
+      Caption = 'Open Chart'
       Hint = 'Open Chart'
       ImageIndex = 1
       ShortCut = 16463
