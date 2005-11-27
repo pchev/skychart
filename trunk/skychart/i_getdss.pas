@@ -111,6 +111,7 @@ try
   i.pPrompt2:=Pchar('in drive');
   {$ifdef linux}
   exec('export LC_ALL=C');
+  chdir(TempDir);
   {$endif}
   if cfgdss.dssplateprompt then begin
     rc:=GetPlateList(addr(i),addr(pl));

@@ -1,6 +1,6 @@
 object f_chart: Tf_chart
   Left = 379
-  Top = 190
+  Top = 210
   Width = 640
   Height = 480
   HorzScrollBar.Range = 640
@@ -122,7 +122,7 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnMouseWheel = FormMouseWheel
-  PixelsPerInch = 81
+  PixelsPerInch = 80
   object Panel1: TPanel
     Left = 0
     Top = 0
