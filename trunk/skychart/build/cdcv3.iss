@@ -3,41 +3,41 @@
 
 [Setup]
 AppName=Cartes du Ciel V3.0
-AppVerName=Cartes du Ciel V3.0 alpha 3.0.0.8
+AppVerName=Cartes du Ciel V3.0 alpha 3.0.0.9
 AppPublisherURL=http://www.ap-i.net/skychart
 AppSupportURL=http://www.ap-i.net/skychart
 AppUpdatesURL=http://www.ap-i.net/skychart
 DefaultDirName={reg:HKCU\Software\Astro_PC\Ciel,Install_Dir|{pf}\Ciel}
-UsePreviousAppDir=no
+UsePreviousAppDir=false
 DefaultGroupName=Cartes du Ciel V3.0
-AllowNoIcons=yes
+AllowNoIcons=true
 InfoBeforeFile=main\Presetup\readme.txt
 OutputDir=output
-OutputBaseFilename=skychart_3.0.0.8
+OutputBaseFilename=skychart_3.0.0.9
 Compression=lzma
-SolidCompression=yes
-Uninstallable=yes
+SolidCompression=true
+Uninstallable=true
 UninstallLogMode=append
-
-[Languages]
-Name: "eng"; MessagesFile: "compiler:Default.isl,compiler:Languages\cdc_update.isl"
+DirExistsWarning=no
+ShowLanguageDialog=yes
+AppID={{A261F28E-6053-4414-9B84-AA8FE5F47AD4}
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
-Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}
+Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
 
 [Files]
-Source: "main\Data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: main\Data\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
-Root: HKCU; Subkey: "Software\Astro_PC\Ciel"; ValueType: string; ValueName: "Install_Dir"; ValueData: "{app}"
+Root: HKCU; Subkey: Software\Astro_PC\Ciel; ValueType: string; ValueName: Install_Dir; ValueData: {app}
 
 [Icons]
-Name: "{group}\Cartes du Ciel V3.0"; Filename: "{app}\cdc_vcl.exe"; WorkingDir: "{app}"
-Name: "{userdesktop}\Cartes du Ciel V3.0"; Filename: "{app}\cdc_vcl.exe"; WorkingDir: "{app}"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Cartes du Ciel V3.0"; Filename: "{app}\cdc_vcl.exe"; WorkingDir: "{app}"; Tasks: quicklaunchicon
+Name: {group}\Cartes du Ciel V3.0; Filename: {app}\cdc_vcl.exe; WorkingDir: {app}
+Name: {userdesktop}\Cartes du Ciel V3.0; Filename: {app}\cdc_vcl.exe; WorkingDir: {app}; Tasks: desktopicon
+Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\Cartes du Ciel V3.0; Filename: {app}\cdc_vcl.exe; WorkingDir: {app}; Tasks: quicklaunchicon
 
 [Run]
-Filename: "{app}\cdc_vcl.exe"; Description: "{cm:LaunchProgram,Cartes du Ciel V3.0}"; WorkingDir: "{app}"; Flags: nowait postinstall skipifsilent
+Filename: {app}\cdc_vcl.exe; Description: {cm:LaunchProgram,Cartes du Ciel V3.0}; WorkingDir: {app}; Flags: nowait postinstall skipifsilent
 
