@@ -17,10 +17,10 @@ object f_config: Tf_config
   FormStyle = fsMDIForm
   ParentFont = False
   Position = poDefault
-  Scaled = True
+  Scaled = False
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 81
   object Panel2: TPanel
     Left = 0
     Top = 466
@@ -32,7 +32,7 @@ object f_config: Tf_config
     object Applyall: TCheckBox
       Left = 16
       Top = 5
-      Width = 169
+      Width = 180
       Height = 17
       Caption = 'Apply Change To All Chart'
       Checked = True

@@ -285,6 +285,8 @@ type
     Shape17: TShape;
     Shape12: TShape;
     Shape11: TShape;
+    Label5: TLabel;
+    Label6: TLabel;
     procedure FormShow(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
