@@ -50,7 +50,7 @@ PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage:component/xmlparser:component/jdcalendar
 Packages=rtl:visualclx
-Conditionals=GPL:
+Conditionals=
 DebugSourceDirs=
 UsePackages=0
 
@@ -62,6 +62,22 @@ UseLauncher=1
 DebugCWD=
 
 [Excluded Packages]
-/home/cdc/dev/skychart/component/libsql/bpllibsql.so=LibSQL sqlite et mysql
+/home/cdc/dev/skychart/component/libsql/bpllibsql.so=(untitled)
 /home/pch/source/GLScene/Kylix/GLSceneK3.so=GLScene - OpenGL 3D library
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=GPL: Themed
+
+[HistoryLists\hlSearchPath]
+Count=1
+Item0=library/catalog:component/enhedits:component/libsql:component/synapse/source/lib:component/zoomimage:component/xmlparser:component/jdcalendar
+
+[HistoryLists\hlUnitOutputDirectory]
+Count=1
+Item0=../dcu/
+
+[HistoryLists\hlOutputDirectorry]
+Count=1
+Item0=/home/cdc
 

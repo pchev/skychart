@@ -10,8 +10,8 @@ object f_main: Tf_main
   Caption = 'Cartes du Ciel'
   Color = clBackground
   Font.Color = clText
-  Font.Height = 10
-  Font.Name = 'adobe-helvetica'
+  Font.Height = 11
+  Font.Name = 'sans'
   Font.Pitch = fpVariable
   Font.Style = []
   Font.Weight = 0
@@ -127,7 +127,7 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnMouseWheel = FormMouseWheel
   OnResize = FormResize
-  PixelsPerInch = 88
+  PixelsPerInch = 80
   object starshape: TImage
     Left = 264
     Top = 160
@@ -2872,12 +2872,12 @@ object f_main: Tf_main
         Left = 324
         Top = 2
         Width = 90
-        Height = 21
+        Height = 22
         Hint = 'Quick Search'
         Constraints.MaxHeight = 22
         DropDownCount = 15
         Duplicates = dupIgnore
-        ItemHeight = 15
+        ItemHeight = 20
         TabOrder = 11
         OnClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -2911,7 +2911,7 @@ object f_main: Tf_main
         Left = 583
         Top = 2
         Width = 42
-        Height = 21
+        Height = 26
         Hint = 'Time increment'
         Align = alCustom
         Max = 1000
@@ -2923,10 +2923,10 @@ object f_main: Tf_main
         Left = 625
         Top = 2
         Width = 85
-        Height = 21
+        Height = 26
         Hint = 'Time Unit'
         DropDownCount = 15
-        ItemHeight = 15
+        ItemHeight = 20
         Items.Strings = (
           'Hour'
           'Minute'
@@ -3548,7 +3548,7 @@ object f_main: Tf_main
     Left = 0
     Top = 57
     Width = 27
-    Height = 451
+    Height = 453
     Align = alLeft
     BevelOuter = bvNone
     ParentColor = True
@@ -3651,7 +3651,7 @@ object f_main: Tf_main
     Left = 799
     Top = 57
     Width = 27
-    Height = 451
+    Height = 453
     Align = alRight
     BevelOuter = bvNone
     ParentColor = True
@@ -3883,7 +3883,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Left = 0
-    Top = 508
+    Top = 510
     Width = 826
     Height = 34
     Align = alBottom
@@ -3904,7 +3904,7 @@ object f_main: Tf_main
         Left = 4
         Top = 2
         Width = 42
-        Height = 13
+        Height = 18
         Caption = 'LPanels0'
       end
     end
@@ -3921,7 +3921,7 @@ object f_main: Tf_main
         Left = 4
         Top = 2
         Width = 42
-        Height = 13
+        Height = 18
         Caption = 'LPanels1'
         WordWrap = True
       end
@@ -3931,7 +3931,7 @@ object f_main: Tf_main
     Left = 27
     Top = 57
     Width = 772
-    Height = 451
+    Height = 453
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
