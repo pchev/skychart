@@ -1,0 +1,699 @@
+{*******************************************************
+                Enhanced Edits [EnhEdits unit]
+
+--------------------------------------------------------------
+
+Change by P. Chevalley November 25 2002 :
+
+Linux port
+   Remove D16 support TRealEdit
+   change CMexit message to OnExit event
+   May 5 2005: Change TRightEdit ancestor to TCustomEdit on Linux to avoid strange cursor behavior.
+
+Remove DsgnIntf dependency
+
+Add automatic hint's with mini-maxi values
+--------------------------------------------------------------
+
+This unit contains the code for 4 enhanced edits. TRightEdit,
+TLongEdit, TRealEdit and TFloatEdit. TRightEdit is the base
+class for the other three and is written by Dr. Bob and
+released to the public domain in Issue three of the Delphi
+Magazine. Thanks Dr Bob!! (Note: I have not registered the
+TRightEdit because I don''t have a use for it right now. If
+you want to register it just include a line in the register
+procedure and include a bit map in EnhEdits.dcr)
+
+These edits, especially TRealEdit, were written to improve the
+already rich VCL. When Dr. Bob published his right aligned edit
+I re-wrote these edits as decendents of the TRightEdit which I
+feel completed the suite.
+
+TLongEdit allows Setting the unpublished Text property via a
+LongInt Value property. In addition there are AsString, AsInteger,
+AsWord and AsByte methods for runtime convenience.
+
+TRealEdit Gets and Sets the unpublished Text property via a
+TRealStr Value property. The input is checked for validity as
+a real before acceptance. Why do this?? The object inspector will
+not allow the use of reals so machines, like one of mine, without
+the 80x87 coprocessor can''t Set or Get floating point values at
+design time. Therefore, the TRealProperty property editor should
+be useful in many situations.
+
+TFloatEdit is an editor for machines with the80x87 coprocessor.
+With TFloatEdit you can use anything up to type extended. For
+convenience, there are AsString, AsSingle, AsDouble and AsReal
+methods.
+
+I hope you find this code useful. If you make improvements please
+e-mail me a copy. Enjoy.
+
+                Paul Warren
+       HomeGrown Software Development
+     (c) 1995 Langley British Columbia.
+              (604) 530-9097
+       e-mail:  hg_soft@uniserve.com
+  Home page: http://users.uniserve.com/~hg_soft
+
+********************************************************}
+
+unit enhedits;
+
+interface
+
+uses
+{$ifdef linux}
+  SysUtils, Classes,  QControls, QStdCtrls ;
+{$endif}
+{$ifdef mswindows}
+  SysUtils, Classes,  Controls, StdCtrls ;
+{$endif}
+
+type
+{$ifdef mswindows}
+  TRightEdit = class(TCustomMemo)
+{$endif}
+{$ifdef linux}
+  TRightEdit = class(TCustomEdit)
+{$endif}
+  private
+    { Private declarations }
+  protected
+    { Protected declarations }
+    property OnExit;
+  public
+    { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+    procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
+  published
+    { Published declarations }
+   {property AutoSelect;}
+  { property AutoSize; }
+    property BorderStyle;
+    property Color;
+    property Cursor;
+    property DragMode;
+    property Enabled;
+    property Font;
+    property Height;
+    property HelpContext;
+    property Hint;
+    property Left;
+    property MaxLength;
+    property Name;
+    property ParentColor;
+    property ParentFont;
+    property ParentShowHint;
+  { property PasswordChar; }
+    property PopupMenu;
+    property ReadOnly;
+    property ShowHint;
+    property TabOrder;
+    property Tag;
+  { property Text; }
+    property Top;
+    property Visible;
+    property Width;
+    property OnChange;
+    property OnClick;
+    property OnDblClick;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEndDrag;
+    property OnEnter;
+    property OnKeyDown;
+    property OnKeyPress;
+    property OnKeyUp;
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+{$ifdef mswindows}
+    property CharCase;
+    property Ctl3D;
+    property DragCursor;
+    property HideSelection;
+    property OEMConvert;
+    property ParentCtl3D;
+{$endif}    
+  end;
+
+  TLongEdit = class(TRightEdit)
+  private
+    { Private declarations }
+    FValue: LongInt;
+    FMinValue: LongInt;
+    FMaxValue: LongInt;
+    procedure SetValue(Value: LongInt);
+    function GetValue: Longint;
+    function CheckValue(NewValue: LongInt): LongInt;
+    procedure SetMaxValue(NewValue: LongInt);
+    procedure SetMinValue(NewValue: LongInt);
+    procedure SetAsString(NewValue: string);
+    function GetAsString: string;
+    procedure SetAsInteger(NewValue: integer);
+    function GetAsInteger: integer;
+    procedure SetAsWord(NewValue: word);
+    function GetAsWord: word;
+    procedure SetAsByte(NewValue: byte);
+    function GetAsByte: byte;
+    procedure FormatText;
+//    procedure CMExit(var Message: TCMExit); message CM_EXIT;
+    procedure CMExit(Sender: TObject);
+  protected
+    { Protected declarations }
+    procedure KeyPress(var Key: Char); override;
+  public
+    { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+    property AsString: string read GetAsString write SetAsString;
+    property AsInteger: integer read GetAsInteger write SetAsInteger;
+    property AsWord: word read GetAsWord write SetAsWord;
+    property AsByte: byte read GetAsByte write SetAsByte;
+  published
+    { Published declarations }
+    property Value: LongInt read GetValue write SetValue;
+    property MinValue: LongInt read FMinValue write SetMinValue default 0;
+    property MaxValue: LongInt read FMaxValue write SetMaxValue default 0;
+  end;
+
+  TNumericType = (ntGeneral, ntExponent, ntFixed);
+
+  TFloatEdit = class(TRightEdit)
+  private
+    { Private declarations }
+    FValue: Extended;
+    FDecimals: word;
+    FMinValue: Extended;
+    FMaxValue: Extended;
+    FDigits: word;
+    FNumericType: TNumericType;
+    procedure SetValue(Value: Extended);
+    function GetValue: Extended;
+    procedure SetMaxValue(NewValue: Extended);
+    procedure SetMinValue(NewValue: Extended);
+    function CheckValue(NewValue: Extended): Extended;
+    procedure SetDecimals(NewValue: word);
+    procedure SetDigits(NewValue: word);
+    procedure SetNumericType(Value: TNumericType);
+    procedure SetAsString(NewValue: string);
+    function GetAsString: string;
+    procedure SetAsDouble(NewValue: Double);
+    function GetAsDouble: Double;
+    procedure SetAsSingle(NewValue: Single);
+    function GetAsSingle: Single;
+    procedure SetAsReal(NewValue: real);
+    function GetAsReal: real;
+    procedure FormatText;
+    procedure CMExit(Sender: TObject);
+  protected
+    { Protected declarations }
+    procedure KeyPress(var Key: Char); override;
+  public
+    { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+    property AsString: string read GetAsString write SetAsString;
+    property AsDouble: Double read GetAsDouble write SetAsDouble;
+    property AsSingle: Single read GetAsSingle write SetAsSingle;
+    property AsReal: real read GetAsReal write SetAsReal;
+  published
+    { Published declarations }
+    property Value: Extended read GetValue write SetValue;
+    property Decimals: word read FDecimals write SetDecimals default 1;
+    property MinValue: Extended read FMinValue write SetMinValue;
+    property MaxValue: Extended read FMaxValue write SetMaxValue;
+    property Digits: word read FDigits write SetDigits default 12;
+    property NumericType: TNumericType read FNumericType write SetNumericType default ntGeneral;
+  end;
+
+procedure Register;
+
+implementation
+
+ {$R enhedits.res}
+
+constructor TRightEdit.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  Align := alNone;
+  Alignment := taRightJustify;
+{$ifdef mswindows}
+  ScrollBars := ssNone;
+  WantReturns := False;
+  WantTabs := False;
+  WordWrap := False;
+{$endif}
+end;
+
+procedure TRightEdit.SetBounds(ALeft, ATop, AWidth, AHeight: Integer);
+begin
+  if AHeight > (2 * abs(Font.Height)) then AHeight := 2 * abs(Font.Height);
+  inherited SetBounds(ALeft, ATop, AWidth, AHeight);
+end;
+
+{ Construct the TLongEdit }
+constructor TLongEdit.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FMinValue := 0;
+  FMaxValue := 0;
+  FValue := 0;
+  Text := '0';
+  onExit:=CMExit;
+end;
+
+{ Set the unpublished Text property to its string
+  representation. Check the value is in range. }
+procedure TLongEdit.SetValue(Value: LongInt);
+begin
+  FValue := Value;
+  FormatText;
+end;
+
+{ Get the Text property as a LongInt by converting
+  from its string representation. }
+function TLongEdit.GetValue: LongInt;
+begin
+  FValue := StrToIntDef(Text,0);
+  Result := CheckValue(FValue);
+end;
+
+{ Method to set the FMinValue property, check that
+  Value is still in range and update the Text }
+procedure TLongEdit.SetMinValue(NewValue: LongInt);
+begin
+  if FMinValue <> NewValue then
+  begin
+    FMinValue := NewValue;
+    if FMinValue > FMaxValue then FMinValue := FMaxValue;
+    if FValue < FMinValue then
+      FValue := FMinValue;
+    FormatText;
+  end;
+  if MinValue<>MaxValue then begin
+     hint := Inttostr(MinValue)+'..'+Inttostr(MaxValue);
+     ShowHint:=true;
+  end else begin
+     hint := '';
+     ShowHint:=false;
+  end;
+end;
+
+{ Method to set the FMaxValue property, check that
+  Value is still in range and update the Text }
+procedure TLongEdit.SetMaxValue(NewValue: LongInt);
+begin
+  if FMaxValue <> NewValue then
+  begin
+    FMaxValue := NewValue;
+    if FMaxValue < FMinValue then FMaxValue := FMinValue;
+    if FValue > FMaxValue then
+      FValue := FMaxValue;
+    FormatText;
+  end;
+  if MinValue<>MaxValue then begin
+     hint := Inttostr(MinValue)+'..'+Inttostr(MaxValue);
+     ShowHint:=true;
+  end else begin
+     hint := '';
+     ShowHint:=false;
+  end;
+end;
+
+{ Function to check the Value property is in range
+  Min < Value < Max. }
+function TLongEdit.CheckValue(NewValue: LongInt): LongInt;
+begin
+  Result := NewValue;
+  if (FMaxValue <> FMinValue) then
+  begin
+    if NewValue < FMinValue
+      then Result := FMinValue
+    else
+      if NewValue > FMaxValue then Result := FMaxValue;
+  end;
+end;
+
+{ Method to update the Text property }
+procedure TLongEdit.FormatText;
+var
+  L: LongInt;
+begin
+  L := FValue;
+  Text := IntToStr(L);
+end;
+
+{ Method to get Value as a string }
+function TLongEdit.GetAsString: string;
+begin
+  Result := Text;
+end;
+
+{ Method to Set Value as a string }
+procedure TLongEdit.SetAsString(NewValue: string);
+begin
+  FValue := CheckValue(StrToInt(NewValue));
+  FormatText;
+end;
+
+{ Method to get Value as an integer }
+function TLongEdit.GetAsInteger: integer;
+const
+  MaxInteger: integer = 32767;
+  MinInteger: integer = -32768;
+begin
+  Result := 0;
+  if (Text <> '') and not (Text = '-') then
+    FValue := StrToInt(Text);
+  if (FValue <= MaxInteger) and (FValue >= MinInteger) then
+     Result := FValue;
+end;
+
+{ Method to Set Value as an integer }
+procedure TLongEdit.SetAsInteger(NewValue: integer);
+begin
+  FValue := NewValue;
+  FormatText;
+end;
+
+{ Method to get Value as a word }
+function TLongEdit.GetAsWord: word;
+const
+  MaxWord: Word = 65535;
+  MinWord: Word = 0;
+begin
+  Result := 0;
+  if (Text <> '') and not (Text = '-') then
+    FValue := StrToInt(Text);
+  if (FValue <= MaxWord) and (FValue >= MinWord) then
+     Result := FValue;
+end;
+
+{ Method to Set Value as a word }
+procedure TLongEdit.SetAsWord(NewValue: word);
+begin
+  FValue := NewValue;
+  FormatText;
+end;
+
+{ Method to get Value as a byte }
+function TLongEdit.GetAsByte: byte;
+const
+  MaxByte: byte = 255;
+  MinByte: byte = 0;
+begin
+  Result := 0;
+  if (Text <> '') and not (Text = '-') then
+    FValue := StrToInt(Text);
+  if (FValue <= MaxByte) and (FValue >= MinByte) then
+     Result := FValue;
+end;
+
+{ Method to Set Value as a byte }
+procedure TLongEdit.SetAsByte(NewValue: byte);
+begin
+  FValue := NewValue;
+  FormatText;
+end;
+
+{ Check the Value property is in range before allowing
+  user to exit the edit.  }
+//procedure TLongEdit.CMExit(var Message: TCMExit);
+procedure TLongEdit.CMExit(Sender: TObject);
+var
+  L: LongInt;
+begin
+  L := StrToIntDef(Text,0);
+  if ((FMinValue<>0) or (FMaxValue<>0)) and (L > FMaxValue) or (L < FMinValue) then
+  begin
+    Beep;
+    SelectAll;
+    SetFocus;
+  end else
+  begin
+    FValue := L;
+//    inherited;
+  end;
+end;
+
+{ Don't accept invalid characters }
+procedure TLongEdit.KeyPress(var Key: Char);
+begin
+  if Key in ['0'..'9', '-', #8] then
+    inherited KeyPress(Key)
+  else begin
+    Key := #0;
+    Beep;
+  end;
+end;
+
+{ Construct the TFloatEdit }
+constructor TFloatEdit.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FDecimals := 1;
+  FDigits := 12;
+  FValue := 0.0;
+  FMinValue := 0;
+  FMaxValue := 0;
+  Text := '0.0';
+  onExit:=CMExit;
+end;
+
+{ Check the Value property is in range before allowing
+  user to exit the edit.  }
+procedure TFloatEdit.CMExit(Sender: TObject);
+var
+  L: double;
+begin
+  L := GetAsDouble;
+  if ((FMinValue<>0) or (FMaxValue<>0)) and (L > FMaxValue) or (L < FMinValue) then
+  begin
+    Beep;
+    SelectAll;
+    SetFocus;
+  end else
+  begin
+    FValue := L;
+    inherited;
+  end;
+end;
+
+{ Set the unpublished Text property to its string
+  representation. Check the value is in range. }
+procedure TFloatEdit.SetValue(Value: Extended);
+begin
+  FValue := Value;
+  FormatText;
+end;
+
+{ Get the Text property as a Floating type by
+  converting from its string representation. }
+function TFloatEdit.GetValue: Extended;
+begin
+try
+  if Text='' then FValue:=0
+             else FValue := StrToFloat(Text);
+  Result := CheckValue(FValue);
+except
+  FValue := 0;
+  Result := CheckValue(FValue);
+end;
+end;
+
+{ Method to set the FMinValue property, check that
+  Value is still in range and update the Text }
+procedure TFloatEdit.SetMinValue(NewValue: Extended);
+begin
+  if FMinValue <> NewValue then
+  begin
+    FMinValue := NewValue;
+    if FMinValue > FMaxValue then FMinValue := FMaxValue;
+    if FValue < FMinValue then
+      FValue := FMinValue;
+    FormatText;
+  end;
+  if MinValue<>MaxValue then begin
+     hint := floattostr(MinValue)+'..'+floattostr(MaxValue);
+     ShowHint:=true;
+  end else begin
+     hint := '';
+     ShowHint:=false;
+  end;
+end;
+
+{ Method to set the FMaxValue property, check that
+  Value is still in range and update the Text }
+procedure TFloatEdit.SetMaxValue(NewValue: Extended);
+begin
+  if FMaxValue <> NewValue then
+  begin
+    FMaxValue := NewValue;
+    if FMaxValue < FMinValue then FMaxValue := FMinValue;
+    if FValue > FMaxValue then
+      FValue := FMaxValue;
+    FormatText;
+  end;
+  if MinValue<>MaxValue then begin
+     hint := floattostr(MinValue)+'..'+floattostr(MaxValue);
+     ShowHint:=true;
+  end else begin
+     hint := '';
+     ShowHint:=false;
+  end;
+end;
+
+{ Function to check the Value property is in range
+  Min < Value < Max. }
+function TFloatEdit.CheckValue(NewValue: Extended): Extended;
+const
+  FMaxVal: Double = 1.7E308;
+  FMinVal: Double = -1.7E308;
+begin
+  Result := NewValue;
+  if (FMaxVal <> FMinVal) then
+  begin
+    if NewValue < FMinVal
+      then Result := FMinVal
+    else
+      if NewValue > FMaxVal then Result := FMaxVal;
+  end;
+end;
+
+{ Method to set FDecimal property. }
+procedure TFloatEdit.SetDecimals(NewValue: word);
+begin
+  if FDecimals <> NewValue then
+  begin
+    FDecimals := NewValue;
+    FormatText;
+  end;
+end;
+
+procedure TFloatEdit.SetDigits(NewValue: word);
+begin
+  if FDigits <> NewValue then
+  begin
+    FDigits := NewValue;
+    FormatText;
+  end;
+end;
+
+procedure TFloatEdit.SetNumericType(Value: TNumericType);
+begin
+  if FNumericType <> Value then
+  begin
+    FNumericType := Value;
+    FormatText;
+  end;
+end;
+
+{ Method to get Value as a string }
+function TFloatEdit.GetAsString: string;
+begin
+  Result := Text;
+end;
+
+{ Method to Set Value as a string }
+procedure TFloatEdit.SetAsString(NewValue: string);
+begin
+  FValue := CheckValue(StrToFloat(NewValue));
+  FormatText;
+end;
+
+{ Method to get Value as a double }
+function TFloatEdit.GetAsDouble: Double;
+const
+  MaxDouble: Double = 1.7E308;
+  MinDouble: Double = -1.7E308;
+begin
+  Result := 0;
+  if (Text <> '') and not (Text = '-') then
+    FValue := StrToFloat(Text);
+  if (FValue <= MaxDouble) and (FValue >= MinDouble) then
+     Result := FValue;
+end;
+
+{ Method to Set Value as a double }
+procedure TFloatEdit.SetAsDouble(NewValue: Double);
+begin
+  FValue := NewValue;
+  FormatText;
+end;
+
+{ Method to get Value as a single }
+function TFloatEdit.GetAsSingle: Single;
+const
+  MaxSingle: Single = 3.4E38;
+  MinSingle: Single = -3.4E38;
+begin
+  Result := 0;
+  if (Text <> '') and not (Text = '-') then
+    FValue := StrToFloat(Text);
+  if (FValue <= MaxSingle) and (FValue >= MinSingle) then
+     Result := FValue;
+end;
+
+{ Method to Set Value as a single }
+procedure TFloatEdit.SetAsSingle(NewValue: Single);
+begin
+  FValue := NewValue;
+  FormatText;
+end;
+
+{ Method to get Value as a real }
+function TFloatEdit.GetAsReal: real;
+const
+  MaxReal: real = 1.7E38;
+  MinReal: real = -1.7E38;
+begin
+  Result := 0;
+  if (Text <> '') and not (Text = '-') then
+    FValue := StrToFloat(Text);
+  if (FValue <= MaxReal) and (FValue >= MinReal) then
+     Result := FValue;
+end;
+
+{ Method to Set Value as a real }
+procedure TFloatEdit.SetAsReal(NewValue: real);
+begin
+  FValue := NewValue;
+  FormatText;
+end;
+
+procedure TFloatEdit.FormatText;
+var
+  X: extended;
+begin
+  X := FValue;
+  case FNumericType of
+    ntGeneral: Text := FloatToStrF(X, ffGeneral, FDigits, FDecimals);
+    ntExponent: Text := FloatToStrF(X, ffExponent, FDigits, FDecimals);
+    ntFixed: Text := FloatToStrF(X, ffFixed, FDigits, FDecimals);
+  end;
+end;
+
+{ Don't accept invalid characters }
+procedure TFloatEdit.KeyPress(var Key: Char);
+begin
+  if Key in ['0'..'9', '-', '+', 'e', 'E', DecimalSeparator, #8] then
+    inherited KeyPress(Key)
+  else begin
+    Key := #0;
+    Beep;
+  end;
+end;
+
+{ Register the property editor to apply to all types
+  TRealStr in all components regardless of the
+  property name }
+
+{ Register all the edits }
+procedure Register;
+begin
+  RegisterComponents('CDC', [TLongEdit]);
+  RegisterComponents('CDC', [TFloatEdit]);
+  RegisterComponents('CDC', [TRightEdit]);
+end;
+
+end.
