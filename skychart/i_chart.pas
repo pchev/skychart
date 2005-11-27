@@ -1120,7 +1120,7 @@ repeat
   txt:=txt+buf2+html_br;
 until buf='';
 txt:=txt+htms_pre;
-writetrace(txt);
+//writetrace(txt);
 result:=txt+htms_f+html_br+htms_h;
 end;
 
