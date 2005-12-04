@@ -377,6 +377,7 @@ type
     PanelStar: TPanel;
     TelescopePanel: TAction;
     ControlPanel1: TMenuItem;
+    ViewFullScreen: TAction;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
@@ -473,7 +474,6 @@ type
     procedure ToolButtonNightVisionClick(Sender: TObject);
     procedure ButtonModeClick(Sender: TObject);
     procedure EditLabelsExecute(Sender: TObject);
-    procedure FullScreen1Click(Sender: TObject);
     procedure MultiDoc1ActiveChildChange(Sender: TObject);
     procedure MultiDoc1Maximize(Sender: TObject);
     procedure BtnRestoreChildClick(Sender: TObject);
@@ -486,6 +486,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure MaximizeExecute(Sender: TObject);
     procedure TelescopePanelExecute(Sender: TObject);
+    procedure ViewFullScreenExecute(Sender: TObject);
   private
     { Private declarations }
     cryptedpwd,basecaption :string;
@@ -676,7 +677,7 @@ end;
 
 // View fullscreen without border
 
-procedure Tf_main.FullScreen1Click(Sender: TObject);
+procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 var lPrevStyle: LongInt;
 begin
 FullScreen1.Checked:=not FullScreen1.Checked;
@@ -705,6 +706,7 @@ end;
 
 
 // end of windows vcl specific code:
+
 
 
 end.

@@ -3872,10 +3872,8 @@ object f_main: Tf_main
       Caption = 'View'
       GroupIndex = 2
       object FullScreen1: TMenuItem
-        Caption = 'Full Screen'
+        Action = ViewFullScreen
         GroupIndex = 2
-        ShortCut = 122
-        OnClick = FullScreen1Click
       end
       object NightVision1: TMenuItem
         Caption = 'Night Vision'
@@ -4738,6 +4736,13 @@ object f_main: Tf_main
       Caption = 'Control Panel'
       Hint = 'Control Panel'
       OnExecute = TelescopePanelExecute
+    end
+    object ViewFullScreen: TAction
+      Category = 'View'
+      Caption = 'ViewFullScreen'
+      Hint = 'Full Screen'
+      ShortCut = 122
+      OnExecute = ViewFullScreenExecute
     end
   end
   object ImageList1: TImageList
