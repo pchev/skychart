@@ -74,7 +74,8 @@ begin
 try
  dec(UseCount);
  if UseCount<=0 then begin
-    if Prenderlib<>0 then RenderCloseLib;
+    //if Prenderlib<>0 then RenderCloseLib;
+    //freelibrary( Prenderlib );
     Prenderlib:=0;
     UseCount:=0;
  end;

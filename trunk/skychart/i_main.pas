@@ -27,6 +27,7 @@ var cfgs :conf_skychart;
     cfgp : conf_plot;
     i: integer;
 begin
+
 try
  // some initialisation that need to be done after all the forms are created. Kylix onShow is called immediatly after onCreate, not after application.run!
  f_info.onGetTCPinfo:=GetTCPInfo;
