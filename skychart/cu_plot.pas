@@ -218,13 +218,13 @@ try
  imabmp.Free;
  imacopy.Free;
  imamask.Free;
- if planetrender or Xplanetrender then begin
-    planetbmp.Free;
-    planetbmpmask.Free;
-    xplanetimg.Free;
- end;
  if planetrender then begin
     ClosePlanetRender;
+ end;
+ if planetrender or Xplanetrender then begin
+//    planetbmp.Free;
+    planetbmpmask.Free;
+    xplanetimg.Free;
  end;
  inherited destroy;
 except
