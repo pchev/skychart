@@ -253,6 +253,7 @@ try
    end;
    sc.plot.cfgplot.bgColor:=sc.plot.cfgplot.color[0];
  end;
+ if (printcolor=2)and(sc.plot.cfgplot.starplot=2) then sc.plot.cfgplot.starplot:=1;
  Case PrintMethod of
  0: begin
     GetPrinterResolution(prtname,resol);
@@ -263,7 +264,7 @@ try
     sc.plot.destcnv:=Printer.canvas;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 75]);
-    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawpen;
+    sc.plot.cfgchart.fontscale:=1; //sc.plot.cfgchart.drawpen;
     sc.plot.init(Printer.pagewidth,Printer.pageheight);
     sc.Refresh;
     Printer.EndDoc;
@@ -336,7 +337,7 @@ try
     prtbmp.savetofile(fname);
     if printcmd2<>'' then begin
        if assigned(Fshowinfo) then Fshowinfo('Open the bitmap.' ,caption);
-       execnowait(printcmd2+' '+fname,'',false);
+       execnowait(printcmd2+' "'+fname+'"','',false);
     end;
  end;
 end;

@@ -1788,7 +1788,7 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    Fplot.Plotline(xxp,yyp,xx,yy,col,0);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
@@ -1821,7 +1821,7 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    Fplot.Plotline(xxp,yyp,xx,yy,col,0);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
@@ -1907,7 +1907,7 @@ var x1,y1,al:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
-if (abs(a)<musec)or(abs(a-pi2)<musec)or(abs(a-pi)<musec) then w:=2 else w:=1;
+if (abs(a)<musec)or(abs(a-pi2)<musec)or(abs(a-pi)<musec) then w:=2 else w:=0;
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
@@ -1943,7 +1943,7 @@ var x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
-if h=0 then w:=2 else w:=1;
+if h=0 then w:=2 else w:=0;
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
@@ -2101,7 +2101,7 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    Fplot.Plotline(xxp,yyp,xx,yy,col,0);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
@@ -2123,7 +2123,7 @@ var x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
-w:=1;
+w:=0;
 proj2(a,h,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
@@ -2231,7 +2231,7 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,1);
+    Fplot.Plotline(xxp,yyp,xx,yy,col,0);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
@@ -2253,7 +2253,7 @@ var x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
-w:=1;
+w:=0;
 proj2(a,h,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;

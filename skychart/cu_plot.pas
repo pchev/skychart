@@ -283,9 +283,12 @@ function TSplot.Init(w,h : integer) : boolean;
 begin
 cfgchart.Width:=w;
 cfgchart.Height:=h;
-cbmp.Width:=w;
-cbmp.Height:=h;
-cnv:=cbmp.Canvas; // defered plot to bitmap
+if cfgchart.onprinter then cnv:=destcnv
+      else begin
+        cbmp.Width:=w;
+        cbmp.Height:=h;
+        cnv:=cbmp.Canvas; // defered plot to bitmap
+      end;  
 with cnv do begin
  Brush.Color:=cfgplot.Color[0];
  Pen.Color:=cfgplot.Color[0];
@@ -310,7 +313,7 @@ end;
 
 Procedure TSplot.Flush;
 begin
- destcnv.Draw(0,0,cbmp);
+ if not cfgchart.onprinter then destcnv.Draw(0,0,cbmp);
  cnv:=destcnv;  // direct plot to screen;
 end;
 
@@ -1029,7 +1032,8 @@ end;
 Procedure TSplot.PlotLine(x1,y1,x2,y2:single; color,width: integer);
 begin
 with cnv do begin
-  Pen.width:=width*cfgchart.drawpen;
+  if width=0 then Pen.width:=1
+     else Pen.width:=width*cfgchart.drawpen;
   Pen.Mode:=pmCopy;
   Pen.Color:=color;
   if (abs(x1-cfgchart.hw)<cfgplot.outradius)and(abs(y1-cfgchart.hh)<cfgplot.outradius) and
