@@ -37,6 +37,10 @@ begin
 case cm.PrintMethod of
 0: begin
    printmode.ItemIndex:=0;
+   if cm.PrintColor=2 then begin
+      cm.PrintColor:=0;
+      prtcolor.ItemIndex:=cm.PrintColor;
+   end;
    customoption.Visible:=false;
    qtoption.Visible:=true;
    GetPrinterResolution(cm.prtname,i);
@@ -125,6 +129,7 @@ end;
 
 procedure Tf_printsetup.prtcolorClick(Sender: TObject);
 begin
+if (cm.PrintMethod=0)and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
 cm.PrintColor:=prtcolor.ItemIndex;
 end;
 
