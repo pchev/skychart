@@ -1,0 +1,1686 @@
+object f_config_solsys: Tf_config_solsys
+  Left = 249
+  Height = 524
+  Top = 127
+  Width = 517
+  HorzScrollBar.Page = 516
+  VertScrollBar.Page = 523
+  ActiveControl = planetdir
+  Caption = 'f_config_solsys'
+  ClientHeight = 524
+  ClientWidth = 517
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  object MainPanel: TPanel
+    Left = 8
+    Height = 480
+    Top = 6
+    Width = 500
+    ClientHeight = 480
+    ClientWidth = 500
+    ParentColor = False
+    TabOrder = 0
+    object WizardNotebook1: TWizardNotebook
+      Left = 1
+      Height = 478
+      Top = 1
+      Width = 498
+      Align = alClient
+      PageIndex = 1
+      ShowTabs = False
+      object Page1: TPage
+        Caption = 'Page1'
+        ClientWidth = 490
+        ClientHeight = 470
+        object Label12: TLabel
+          Height = 13
+          Width = 116
+          Caption = 'Solar System Setting'
+          Color = clNone
+          ParentColor = False
+        end
+        object Label131: TLabel
+          Left = 40
+          Height = 13
+          Top = 64
+          Width = 65
+          Caption = 'Data Files :'
+          Color = clNone
+          ParentColor = False
+        end
+        object PlaParalaxe: TRadioGroup
+          Left = 40
+          Height = 81
+          Top = 120
+          Width = 329
+          AutoFill = True
+          Caption = 'Position'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 2
+          Columns = 2
+          Items.Strings = (
+            'Geocentric'
+            'TopoCentric'
+          )
+          OnClick = PlaParalaxeClick
+          TabOrder = 0
+        end
+        object planetdir: TEdit
+          Left = 104
+          Height = 21
+          Top = 59
+          Width = 225
+          OnChange = PlanetDirChange
+          TabOrder = 1
+          Text = '~/'
+        end
+        object planetdirsel: TBitBtn
+          Left = 328
+          Height = 26
+          Top = 56
+          Width = 26
+          BorderSpacing.InnerBorder = 2
+          Glyph.Data = {
+            BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+            69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
+            2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
+            222A20632023464646464646222C0A226120632023303030303030222C0A222E
+            2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+            2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+            2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
+            2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
+            2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
+            2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
+            612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+            2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
+            2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
+            2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
+          }
+          Layout = blGlyphTop
+          Margin = 0
+          NumGlyphs = 0
+          OnClick = PlanetDirSelClick
+          TabOrder = 2
+          TabStop = False
+        end
+      end
+      object Page2: TPage
+        Caption = 'Page2'
+        ClientWidth = 490
+        ClientHeight = 470
+        object Label5: TLabel
+          Height = 14
+          Width = 73
+          Caption = 'Planets Setting'
+          Color = clNone
+          ParentColor = False
+        end
+        object Label89: TLabel
+          Left = 40
+          Height = 14
+          Top = 314
+          Width = 111
+          Caption = 'Jupiter GRS longitude :'
+          Color = clNone
+          ParentColor = False
+        end
+        object Label53: TLabel
+          Left = 248
+          Height = 14
+          Top = 48
+          Width = 103
+          Caption = 'Computation Plugin : '
+          Color = clNone
+          ParentColor = False
+          Visible = False
+        end
+        object PlanetBox: TCheckBox
+          Left = 35
+          Height = 13
+          Hint = 'Planetary Ephemerides     (Chapront+ 1996)'
+          Top = 48
+          Width = 141
+          HelpContext = 107
+          Caption = 'Show Planet on the Chart'
+          Checked = True
+          OnClick = PlanetBoxClick
+          ParentShowHint = False
+          ShowHint = True
+          State = cbChecked
+          TabOrder = 0
+        end
+        object PlanetMode: TRadioGroup
+          Left = 40
+          Height = 145
+          Top = 80
+          Width = 329
+          AutoFill = True
+          Caption = 'Draw Planet As'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 1
+          Items.Strings = (
+            'Star'
+            'Line mode drawing'
+            'Realistics image'
+            'Symbol'
+          )
+          OnClick = PlanetModeClick
+          TabOrder = 1
+        end
+        object PlanetBox3: TCheckBox
+          Left = 40
+          Height = 13
+          Top = 368
+          Width = 197
+          Caption = 'Show Earth Shadow  (Lunar eclipses)'
+          OnClick = PlanetBox3Click
+          TabOrder = 2
+        end
+        object GRS: TFloatEdit
+          Name = 'GRS'
+          Left = 152
+          Height = 22
+          Hint = '0..360'
+          Top = 309
+          Width = 41
+          BorderStyle = bsSingle
+          ParentColor = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          OnChange = GRSChange
+          Value = 80
+          MaxValue = 360
+        end
+        object BitBtn37: TBitBtn
+          Left = 199
+          Height = 25
+          Hint = 'Get recent measurement from JUPOS'
+          Top = 308
+          Width = 27
+          BorderSpacing.InnerBorder = 2
+          Glyph.Data = {
+            011200002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+            69635B5D203D207B0A223234203234203230372032222C0A222E2E2063204E6F
+            6E65222C0A222E2C20632023303030303834222C0A222E2D2063202330323032
+            3834222C0A222E2A20632023303930393836222C0A222E612063202331353135
+            3837222C0A222E6220632023313831383837222C0A222E632063202331383138
+            3843222C0A222E6420632023313531353843222C0A222E652063202330383038
+            3835222C0A222E6620632023303430343834222C0A222E672063202332313231
+            3846222C0A222E6820632023344134423936222C0A222E692063202336373637
+            3935222C0A222E6A20632023373337373844222C0A222E6B2063202337333737
+            3845222C0A222E6C20632023373337373846222C0A222E6D2063202337373737
+            3934222C0A222E6E20632023363336373937222C0A222E6F2063202334413442
+            3937222C0A222E7020632023314131413845222C0A222E712063202330333033
+            3834222C0A222E7220632023304630463837222C0A222E732063202334413442
+            3935222C0A222E7420632023373737423935222C0A222E752063202337463835
+            3844222C0A222E7620632023374638343835222C0A222E772063202337423837
+            3837222C0A222E7820632023374238343834222C0A222E792063202337463835
+            3836222C0A222E7A20632023383538373843222C0A222E412063202337373742
+            3934222C0A222E4220632023343234333935222C0A222E432063202330413041
+            3836222C0A222E4420632023313031303837222C0A222E452063202336333633
+            3943222C0A222E4620632023384538443935222C0A222E472063202337463835
+            3835222C0A222E4820632023364637373737222C0A222E492063202338443934
+            3934222C0A222E4A20632023384639353935222C0A222E4B2063202338453935
+            3935222C0A222E4C20632023384338453845222C0A222E4D2063202339343937
+            3945222C0A222E4E20632023354635463946222C0A222E4F2063202331303130
+            3843222C0A222E5020632023353735373845222C0A222E512063202339363937
+            3945222C0A222E5220632023394539433943222C0A222E532063202338463845
+            3845222C0A222E5420632023373737423742222C0A222E552063202341354137
+            4137222C0A222E5620632023414641444144222C0A222E572063202341464146
+            4146222C0A222E5820632023424642444244222C0A222E592063202341374135
+            4135222C0A222E5A20632023383538443844222C0A222E302063202341374144
+            4144222C0A222E3120632023353235323935222C0A222E322063202334413441
+            3934222C0A222E3320632023383538373845222C0A222E342063202337423742
+            3742222C0A222E3520632023374237463746222C0A222E362063202337423737
+            3737222C0A222E3720632023373736463646222C0A222E382063202337423733
+            3733222C0A222E3920632023383438373837222C0A222E402063202342354237
+            4237222C0A222E2320632023393439363936222C0A222E3B2063202338343835
+            3935222C0A222E3A20632023343234323934222C0A222E3D2063202331393139
+            3844222C0A222E2B20632023383638363945222C0A222E252063202342374235
+            4235222C0A222E2420632023423742444244222C0A222E282063202342444244
+            4244222C0A222E2920632023424642374235222C0A222E5B2063202343453737
+            3646222C0A222E5D20632023443735333445222C0A222C2E2063202343453637
+            3633222C0A222C2C20632023433641444146222C0A222C2D2063202342444246
+            4246222C0A222C2A20632023423742374237222C0A222C612063202338343834
+            4135222C0A222C6220632023313431343844222C0A222C632063202330313031
+            3834222C0A222C6420632023333933393845222C0A222C652063202334463533
+            3542222C0A222C6620632023343234373437222C0A222C672063202334333436
+            3436222C0A222C6820632023343334373437222C0A222C692063202336373537
+            3536222C0A222C6A20632023433734373432222C0A222C6B2063202344463335
+            3246222C0A222C6C20632023443734413433222C0A222C6D2063202339343733
+            3733222C0A222C6E20632023354536333633222C0A222C6F2063202335413546
+            3546222C0A222C7020632023354135453545222C0A222C712063202336463646
+            3742222C0A222C7220632023333133313846222C0A222C732063202330353035
+            3835222C0A222C7420632023344534453836222C0A222C752063202333443432
+            3433222C0A222C7620632023324233333333222C0A222C772063202333353337
+            3337222C0A222C7820632023364635323533222C0A222C792063202339443546
+            3541222C0A222C7A20632023393637373733222C0A222C412063202338363835
+            3834222C0A222C4220632023383538373835222C0A222C432063202335413542
+            3937222C0A222C4420632023304230423836222C0A222C452063202337423742
+            4135222C0A222C4620632023414441444144222C0A222C472063202342354235
+            4235222C0A222C4820632023423542354237222C0A222C492063202341464146
+            4235222C0A222C4A20632023363736373943222C0A222C4B2063202330433043
+            3837222C0A222C4C20632023374637464137222C0A222C4D2063202342464246
+            4246222C0A222C4E20632023424643364336222C0A222C4F2063202342444244
+            4246222C0A222C5020632023414442354244222C0A222C512063202341464146
+            4244222C0A222C5220632023413541354146222C0A222C532063202339444135
+            4137222C0A222C5420632023423742374244222C0A222C552063202336373637
+            3944222C0A222C5620632023303630363835222C0A222C572063202335363537
+            3845222C0A222C5820632023344635363537222C0A222C592063202334323441
+            3441222C0A222C5A20632023343334423442222C0A222C302063202334323436
+            3437222C0A222C3120632023354136333637222C0A222C322063202341464235
+            4237222C0A222C3320632023353335363541222C0A222C342063202333393433
+            3436222C0A222C3520632023334634373437222C0A222C362063202335413545
+            3633222C0A222C3720632023353735373937222C0A222C382063202330333033
+            3835222C0A222C3920632023334233423837222C0A222C402063202333463433
+            3437222C0A222C2320632023324233313331222C0A222C3B2063202332423246
+            3246222C0A222C3A20632023323332313231222C0A222C3D2063202332393246
+            3246222C0A222C2B20632023324233313333222C0A222C252063202333353342
+            3342222C0A222C2420632023354636373637222C0A222C282063202336463733
+            3733222C0A222C2920632023354636333633222C0A222C5B2063202336373642
+            3642222C0A222C5D20632023363336373637222C0A222D2E2063202333333339
+            3339222C0A222D2C20632023344535323541222C0A222D2D2063202333353335
+            3844222C0A222D2A20632023323332333845222C0A222D612063202338363837
+            3936222C0A222D6220632023394541354135222C0A222D632063202339433943
+            3943222C0A222D6420632023383637333733222C0A222D652063202338343733
+            3733222C0A222D6620632023394639453945222C0A222D672063202339464135
+            4135222C0A222D6820632023383638373946222C0A222D692063202331433143
+            3846222C0A222D6A20632023303730373835222C0A222D6B2063202337373742
+            3746222C0A222D6C20632023373337373737222C0A222D6D2063202337423742
+            3834222C0A222D6E20632023344634463937222C0A222D6F2063202330343034
+            3835222C0A222D7020632023374237423944222C0A222D712063202341464235
+            4235222C0A222D7220632023414441464235222C0A222D732063202337333733
+            3943222C0A222D7420632023313531353844222C0A222D752063202332373237
+            3844222C0A222D7620632023374637463944222C0A222D772063202339363943
+            3945222C0A222D7820632023384639363936222C0A222D792063202338463936
+            3937222C0A222D7A20632023393439443944222C0A222D412063202337373737
+            4135222C0A222D4220632023314431443846222C0A222D432063202332333233
+            3843222C0A222D4420632023374638363843222C0A222D452063202337463836
+            3837222C0A222D4620632023374638363934222C0A222D472063202335453546
+            3935222C0A222D4820632023314331433845222C0A222D492063202330443044
+            3836222C0A222D4A20632023333933393846222C0A222D4B2063202336373637
+            3934222C0A222D4C20632023374237463936222C0A222D4D2063202337423834
+            3846222C0A222D4E20632023374638363844222C0A222D4F2063202337463837
+            3845222C0A222D5020632023374237463934222C0A222D512063202336333633
+            3935222C0A222D5220632023323932393846222C0A222D532063202333393342
+            3846222C0A222D5420632023323932393843222C0A222D552063202330383039
+            3836222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E
+            2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2E2C
+            2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C
+            2E2C2E2C2E2C2E2C2E2E222C0A222E2E2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2D
+            2E2A2E612E622E632E642E652E2D2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2E222C
+            0A222E2E2E2C2E2C2E2C2E2C2E2C2E662E672E682E692E6A2E6B2E6C2E6D2E6E
+            2E6F2E702E712E2C2E2C2E2C2E2C2E2C2E2E222C0A222E2E2E2C2E2C2E2C2E2C
+            2E722E732E742E752E762E772E782E782E782E792E7A2E412E422E432E2C2E2C
+            2E2C2E2C2E2E222C0A222E2E2E2C2E2C2E2C2E442E452E462E792E472E482E49
+            2E4A2E4A2E4B2E4B2E4C2E792E4D2E4E2E4F2E2C2E2C2E2C2E2E222C0A222E2E
+            2E2C2E2C2E722E502E512E522E532E492E542E552E562E562E572E582E592E5A
+            2E302E512E312E2A2E2C2E2C2E2E222C0A222E2E2E2C2E662E322E332E342E35
+            2E342E362E372E382E342E352E392E402E232E342E352E342E3B2E3A2E2D2E2C
+            2E2E222C0A222E2E2E2C2E3D2E2B2E252E242E282E292E5B2E5D2C2E2C2C2E28
+            2E282E282C2D2E282E282E242C2A2C612C622E2C2E2E222C0A222E2E2C632C64
+            2C652C662C672C682C692C6A2C6B2C6C2C6D2C6E2C6F2C6F2C6F2C6F2C6F2C6F
+            2C702C712C722E2C2E2E222C0A222E2E2C732C742C752C762C762C762C772C78
+            2C792C7A2C412E542E542E542E542E542E542E542E542C422C432E712E2E222C
+            0A222E2E2C442C452C462E572E572E572E572C472C2A2E252E252E252C2A2C48
+            2E402C2A2C2A2C472C2A2C492C4A2C732E2E222C0A222E2E2C4B2C4C2C4D2C4D
+            2C4E2C4E2C4E2C4E2C4E2C4E2C4D2C4F2C502C512C4D2C2D2C522C532E402C54
+            2C552C732E2E222C0A222E2E2C562C572C582C592C5A2C5A2C5A2C5A2C5A2C5A
+            2C592C302C312C322E552C332C342C352C682C362C372C382E2E222C0A222E2E
+            2E2D2C392C402C232C3B2C3A2C3A2C3D2C232C762C762C2B2C252C242C282C29
+            2C5B2C5D2D2E2D2C2D2D2E2C2E2E222C0A222E2E2E2C2D2A2D612D622D632D64
+            2D652D662D672D672D672D672D672E552E552E592E302E572E552D682D692E2C
+            2E2E222C0A222E2E2E2C2D6A2C372D6B2D6C2D6C2D6C2D6C2E542E542E542E54
+            2E542E542E542E542E542D6C2D6D2D6E2D6F2E2C2E2E222C0A222E2E2E2C2E2C
+            2E3D2D702D712E282C2D2C2D2C2D2C2D2C2D2C2D2C2D2C2D2C2D2C2D2E282D72
+            2D732D742E2C2E2C2E2E222C0A222E2E2E2C2E2C2C632D752D762D772D782D78
+            2D782D782D782D782D782D782D782D792D7A2D412D422E2C2E2C2E2C2E2E222C
+            0A222E2E2E2C2E2C2E2C2C632D432E6E2D442E792E782E782E782E782E782E78
+            2D452D462D472D482E2C2E2C2E2C2E2C2E2E222C0A222E2E2E2C2E2C2E2C2E2C
+            2E2C2D492D4A2D4B2D4C2D4D2D4E2D4F2E752D502D512C722E2A2E2C2E2C2E2C
+            2E2C2E2C2E2E222C0A222E2E2E2C2E2C2E2C2E2C2E2C2E2C2C632E432E702D52
+            2C642D532D542E3D2D552E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2E222C0A222E2E
+            2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C2E2C
+            2E2C2E2C2E2C2E2C2E2C2E2C2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E
+            2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E
+            2E2E227D0A
+          }
+          NumGlyphs = 0
+          OnClick = BitBtn37Click
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 4
+        end
+        object Edit2: TEdit
+          Left = 360
+          Height = 21
+          Top = 44
+          Width = 100
+          TabOrder = 5
+          Visible = False
+        end
+        object XplanetBox: TGroupBox
+          Left = 40
+          Height = 65
+          Top = 232
+          Width = 329
+          Caption = 'Image Options'
+          ClientHeight = 47
+          ClientWidth = 325
+          TabOrder = 6
+          object UseXplanet: TCheckBox
+            Left = 8
+            Height = 13
+            Top = 14
+            Width = 78
+            Caption = 'Use Xplanet'
+            OnClick = UseXplanetClick
+            TabOrder = 0
+          end
+          object XplanetDir: TEdit
+            Left = 104
+            Height = 21
+            Top = 14
+            Width = 177
+            OnChange = XplanetDirChange
+            TabOrder = 1
+          end
+          object XplanetBtn: TBitBtn
+            Left = 279
+            Height = 26
+            Top = 13
+            Width = 26
+            BorderSpacing.InnerBorder = 2
+            Glyph.Data = {
+              BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+              69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
+              2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
+              222A20632023464646464646222C0A226120632023303030303030222C0A222E
+              2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+              2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+              2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
+              2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
+              2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
+              2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
+              612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+              2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
+              2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
+              2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
+            }
+            Layout = blGlyphTop
+            Margin = 0
+            NumGlyphs = 0
+            OnClick = XplanetBtnClick
+            TabOrder = 2
+            TabStop = False
+          end
+        end
+      end
+      object Page3: TPage
+        Caption = 'Page3'
+        ClientWidth = 490
+        ClientHeight = 470
+        object ComPageControl: TPageControl
+          Height = 429
+          Top = 4
+          Width = 481
+          ActivePage = comsetting
+          TabIndex = 0
+          TabOrder = 0
+          object comsetting: TTabSheet
+            Caption = 'General Setting'
+            ImageIndex = 3
+            object GroupBox13: TGroupBox
+              Left = 8
+              Height = 175
+              Top = 10
+              Width = 441
+              Caption = 'Chart Setting'
+              ClientHeight = 175
+              ClientWidth = 441
+              TabOrder = 0
+              object Label154: TLabel
+                Left = 32
+                Height = 13
+                Top = 112
+                Width = 292
+                Caption = 'Do not take account of comet fainter than magnitude'
+                Color = clNone
+                ParentColor = False
+              end
+              object Label216: TLabel
+                Left = 32
+                Height = 13
+                Top = 144
+                Width = 69
+                Caption = 'Show comet'
+                Color = clNone
+                ParentColor = False
+              end
+              object Label231: TLabel
+                Left = 160
+                Height = 13
+                Top = 144
+                Width = 178
+                Caption = 'magnitude fainter than the stars.'
+                Color = clNone
+                ParentColor = False
+              end
+              object comlimitmag: TFloatEdit
+                Name = 'comlimitmag'
+                Left = 320
+                Height = 22
+                Hint = '0..99'
+                Top = 107
+                Width = 41
+                BorderStyle = bsSingle
+                ParentColor = False
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 0
+                OnChange = comlimitmagChange
+                MaxValue = 99
+              end
+              object showcom: TCheckBox
+                Left = 32
+                Height = 24
+                Top = 24
+                Width = 169
+                Caption = 'Show comets on the chart'
+                OnClick = showcomClick
+                TabOrder = 1
+              end
+              object comsymbol: TRadioGroup
+                Left = 24
+                Height = 41
+                Top = 56
+                Width = 393
+                AutoFill = True
+                ChildSizing.LeftRightSpacing = 6
+                ChildSizing.TopBottomSpacing = 6
+                ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+                ChildSizing.EnlargeVertical = crsHomogenousChildResize
+                ChildSizing.ShrinkHorizontal = crsScaleChilds
+                ChildSizing.ShrinkVertical = crsScaleChilds
+                ChildSizing.Layout = cclLeftToRightThenTopToBottom
+                ChildSizing.ControlsPerLine = 2
+                Color = clBtnFace
+                Columns = 2
+                ItemIndex = 1
+                Items.Strings = (
+                  'Display as a symbol'
+                  'Proportional to the tail length'
+                )
+                OnClick = comsymbolClick
+                ParentColor = False
+                TabOrder = 3
+              end
+              object commagdiff: TFloatEdit
+                Name = 'commagdiff'
+                Left = 112
+                Height = 22
+                Hint = '0..99'
+                Top = 139
+                Width = 41
+                BorderStyle = bsSingle
+                ParentColor = False
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 2
+                OnChange = commagdiffChange
+                MaxValue = 99
+              end
+            end
+            object comdbset: TButton
+              Left = 8
+              Height = 25
+              Top = 232
+              Width = 113
+              BorderSpacing.InnerBorder = 2
+              Caption = 'Database setting...'
+              OnClick = comdbsetClick
+              TabOrder = 1
+            end
+          end
+          object comload: TTabSheet
+            Caption = 'Load MPC File'
+            ImageIndex = 1
+            object Label232: TLabel
+              Left = 8
+              Height = 13
+              Top = 112
+              Width = 61
+              Caption = 'Messages:'
+              Color = clNone
+              ParentColor = False
+            end
+            object GroupBox14: TGroupBox
+              Left = 8
+              Height = 87
+              Top = 10
+              Width = 441
+              Caption = 'Load MPC format file'
+              ClientHeight = 87
+              ClientWidth = 441
+              TabOrder = 0
+              object Label233: TLabel
+                Left = 8
+                Height = 13
+                Top = 32
+                Width = 29
+                Caption = 'File :'
+                Color = clNone
+                ParentColor = False
+              end
+              object comfile: TEdit
+                Left = 32
+                Height = 21
+                Top = 28
+                Width = 241
+                OnClick = comfilebtnClick
+                TabOrder = 0
+                Text = 'COMET.DAT'
+              end
+              object Loadcom: TButton
+                Left = 328
+                Height = 25
+                Top = 26
+                Width = 97
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Load file'
+                OnClick = LoadcomClick
+                TabOrder = 1
+              end
+              object comfilebtn: TBitBtn
+                Tag = 8
+                Left = 275
+                Height = 26
+                Top = 25
+                Width = 26
+                BorderSpacing.InnerBorder = 2
+                Glyph.Data = {
+                  BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+                  69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
+                  2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
+                  222A20632023464646464646222C0A226120632023303030303030222C0A222E
+                  2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+                  2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+                  2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
+                  2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
+                  2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
+                  2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
+                  612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+                  2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
+                  2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
+                  2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
+                }
+                Layout = blGlyphTop
+                Margin = 0
+                NumGlyphs = 0
+                OnClick = comfilebtnClick
+                TabOrder = 2
+                TabStop = False
+              end
+            end
+            object MemoCom: TMemo
+              Left = 8
+              Height = 257
+              Top = 128
+              Width = 441
+              Color = clBtnFace
+              ScrollBars = ssBoth
+              TabOrder = 1
+            end
+          end
+          object comdelete: TTabSheet
+            Caption = 'Data Maintenance'
+            ImageIndex = 3
+            object Label238: TLabel
+              Left = 8
+              Height = 13
+              Top = 144
+              Width = 61
+              Caption = 'Messages:'
+              Color = clNone
+              ParentColor = False
+            end
+            object GroupBox16: TGroupBox
+              Left = 8
+              Height = 60
+              Top = 10
+              Width = 441
+              Caption = 'Delete MPC data selectively'
+              ClientHeight = 60
+              ClientWidth = 441
+              TabOrder = 0
+              object comelemlist: TComboBox
+                Left = 16
+                Height = 21
+                Top = 24
+                Width = 281
+                AutoCompleteText = [cbactSearchAscending]
+                ItemHeight = 13
+                MaxLength = 0
+                Style = csDropDownList
+                TabOrder = 0
+              end
+              object DelCom: TButton
+                Left = 328
+                Height = 25
+                Top = 24
+                Width = 75
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Delete'
+                OnClick = DelComClick
+                TabOrder = 1
+              end
+            end
+            object GroupBox17: TGroupBox
+              Left = 8
+              Height = 49
+              Top = 80
+              Width = 441
+              Caption = 'Quick Delete'
+              ClientHeight = 49
+              ClientWidth = 441
+              TabOrder = 1
+              object Label239: TLabel
+                Left = 24
+                Height = 13
+                Top = 19
+                Width = 206
+                Caption = 'Quickly delete all comet related data'
+                Color = clNone
+                ParentColor = False
+              end
+              object DelComAll: TButton
+                Left = 328
+                Height = 25
+                Top = 16
+                Width = 75
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Delete'
+                OnClick = DelComAllClick
+                TabOrder = 0
+              end
+            end
+            object DelComMemo: TMemo
+              Left = 8
+              Height = 217
+              Top = 168
+              Width = 441
+              Color = clBtnFace
+              ScrollBars = ssBoth
+              TabOrder = 2
+            end
+          end
+          object Addsinglecom: TTabSheet
+            Caption = 'Add'
+            ImageIndex = 4
+            object Label241: TLabel
+              Left = 8
+              Height = 13
+              Top = 8
+              Width = 345
+              Caption = 'Add a single element to the database. All field are mandatory.'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label242: TLabel
+              Left = 8
+              Height = 13
+              Top = 40
+              Width = 67
+              Caption = 'Designation'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label243: TLabel
+              Left = 8
+              Height = 13
+              Top = 232
+              Width = 122
+              Caption = 'H absolute magnitude'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label244: TLabel
+              Left = 160
+              Height = 13
+              Top = 232
+              Width = 103
+              Caption = 'G slope parameter'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label245: TLabel
+              Left = 160
+              Height = 13
+              Top = 168
+              Width = 65
+              Caption = 'Epoch (JD)'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label246: TLabel
+              Left = 160
+              Height = 13
+              Top = 40
+              Width = 85
+              Caption = 'Perihelion date'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label247: TLabel
+              Left = 160
+              Height = 13
+              Top = 104
+              Width = 127
+              Caption = 'Argument of perihelion'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label248: TLabel
+              Left = 312
+              Height = 13
+              Top = 104
+              Width = 152
+              Caption = 'Longitude ascending Node'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label249: TLabel
+              Left = 8
+              Height = 13
+              Top = 168
+              Width = 58
+              Caption = 'Inclination'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label250: TLabel
+              Left = 8
+              Height = 13
+              Top = 104
+              Width = 67
+              Caption = 'Eccentricity'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label251: TLabel
+              Left = 312
+              Height = 13
+              Top = 40
+              Width = 108
+              Caption = 'Perihelion distance'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label253: TLabel
+              Left = 312
+              Height = 13
+              Top = 168
+              Width = 46
+              Caption = 'Equinox'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label254: TLabel
+              Left = 8
+              Height = 13
+              Top = 296
+              Width = 33
+              Caption = 'Name'
+              Color = clNone
+              ParentColor = False
+            end
+            object comid: TEdit
+              Left = 8
+              Height = 21
+              Top = 64
+              Width = 100
+              TabOrder = 0
+            end
+            object comh: TEdit
+              Left = 8
+              Height = 21
+              Top = 256
+              Width = 100
+              TabOrder = 1
+              Text = '5'
+            end
+            object comg: TEdit
+              Left = 160
+              Height = 21
+              Top = 256
+              Width = 100
+              TabOrder = 2
+              Text = '10'
+            end
+            object comep: TEdit
+              Left = 160
+              Height = 21
+              Top = 192
+              Width = 100
+              TabOrder = 3
+            end
+            object comperi: TEdit
+              Left = 160
+              Height = 21
+              Top = 128
+              Width = 100
+              TabOrder = 4
+              Text = '0.0'
+            end
+            object comnode: TEdit
+              Left = 312
+              Height = 21
+              Top = 128
+              Width = 100
+              TabOrder = 5
+              Text = '0.0'
+            end
+            object comi: TEdit
+              Left = 8
+              Height = 21
+              Top = 192
+              Width = 100
+              TabOrder = 6
+              Text = '0.0'
+            end
+            object comec: TEdit
+              Left = 8
+              Height = 21
+              Top = 128
+              Width = 100
+              TabOrder = 7
+              Text = '0.0'
+            end
+            object comq: TEdit
+              Left = 312
+              Height = 21
+              Top = 64
+              Width = 100
+              TabOrder = 8
+              Text = '2'
+            end
+            object comnam: TEdit
+              Left = 8
+              Height = 21
+              Top = 320
+              Width = 257
+              TabOrder = 9
+            end
+            object comeq: TEdit
+              Left = 312
+              Height = 21
+              Top = 192
+              Width = 100
+              TabOrder = 10
+              Text = '2000'
+            end
+            object AddCom: TButton
+              Left = 312
+              Height = 25
+              Top = 320
+              Width = 75
+              BorderSpacing.InnerBorder = 2
+              Caption = 'Add'
+              OnClick = AddComClick
+              TabOrder = 11
+            end
+            object comt: TMaskEdit
+              Left = 160
+              Height = 21
+              Top = 64
+              Width = 91
+              EditMask = '!9999.99.00.0000;1;_'
+              MaxLength = 15
+              ParentColor = False
+              TabOrder = 12
+              Text = '    .  .  .    '
+            end
+          end
+        end
+      end
+      object Page4: TPage
+        Caption = 'Page4'
+        ClientWidth = 490
+        ClientHeight = 470
+        object AstPageControl: TPageControl
+          Height = 429
+          Top = 4
+          Width = 481
+          ActivePage = astsetting
+          TabIndex = 0
+          TabOrder = 0
+          object astsetting: TTabSheet
+            Caption = 'General Setting'
+            ImageIndex = 3
+            object GroupBox9: TGroupBox
+              Left = 8
+              Height = 175
+              Top = 10
+              Width = 441
+              Caption = 'Chart Setting'
+              ClientHeight = 175
+              ClientWidth = 441
+              TabOrder = 0
+              object Label203: TLabel
+                Left = 32
+                Height = 13
+                Top = 112
+                Width = 303
+                Caption = 'Do not take account of asteroid fainter than magnitude'
+                Color = clNone
+                ParentColor = False
+              end
+              object Label212: TLabel
+                Left = 32
+                Height = 13
+                Top = 144
+                Width = 80
+                Caption = 'Show asteroid'
+                Color = clNone
+                ParentColor = False
+              end
+              object Label213: TLabel
+                Left = 160
+                Height = 13
+                Top = 144
+                Width = 178
+                Caption = 'magnitude fainter than the stars.'
+                Color = clNone
+                ParentColor = False
+              end
+              object astlimitmag: TFloatEdit
+                Name = 'astlimitmag'
+                Left = 320
+                Height = 22
+                Hint = '0..99'
+                Top = 107
+                Width = 41
+                BorderStyle = bsSingle
+                ParentColor = False
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 0
+                OnChange = astlimitmagChange
+                MaxValue = 99
+              end
+              object showast: TCheckBox
+                Left = 32
+                Height = 24
+                Top = 24
+                Width = 180
+                Caption = 'Show asteroids on the chart'
+                OnClick = showastClick
+                TabOrder = 1
+              end
+              object astsymbol: TRadioGroup
+                Left = 24
+                Height = 41
+                Top = 56
+                Width = 393
+                AutoFill = True
+                ChildSizing.LeftRightSpacing = 6
+                ChildSizing.TopBottomSpacing = 6
+                ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+                ChildSizing.EnlargeVertical = crsHomogenousChildResize
+                ChildSizing.ShrinkHorizontal = crsScaleChilds
+                ChildSizing.ShrinkVertical = crsScaleChilds
+                ChildSizing.Layout = cclLeftToRightThenTopToBottom
+                ChildSizing.ControlsPerLine = 2
+                Color = clBtnFace
+                Columns = 2
+                ItemIndex = 1
+                Items.Strings = (
+                  'Display as a symbol'
+                  'Proportional to the magnitude '
+                )
+                OnClick = astsymbolClick
+                ParentColor = False
+                TabOrder = 3
+              end
+              object astmagdiff: TFloatEdit
+                Name = 'astmagdiff'
+                Left = 112
+                Height = 22
+                Hint = '0..99'
+                Top = 139
+                Width = 41
+                BorderStyle = bsSingle
+                ParentColor = False
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 2
+                OnChange = astmagdiffChange
+                MaxValue = 99
+              end
+            end
+            object astdbset: TButton
+              Left = 8
+              Height = 25
+              Top = 232
+              Width = 113
+              BorderSpacing.InnerBorder = 2
+              Caption = 'Database setting...'
+              OnClick = astdbsetClick
+              TabOrder = 1
+            end
+          end
+          object astload: TTabSheet
+            Caption = 'Load MPC File'
+            ImageIndex = 1
+            object Label206: TLabel
+              Left = 8
+              Height = 13
+              Top = 144
+              Width = 61
+              Caption = 'Messages:'
+              Color = clNone
+              ParentColor = False
+            end
+            object GroupBox7: TGroupBox
+              Left = 8
+              Height = 127
+              Top = 10
+              Width = 441
+              Caption = 'Load MPC format file'
+              ClientHeight = 127
+              ClientWidth = 441
+              TabOrder = 0
+              object Label204: TLabel
+                Left = 8
+                Height = 13
+                Top = 32
+                Width = 29
+                Caption = 'File :'
+                Color = clNone
+                ParentColor = False
+              end
+              object Label215: TLabel
+                Left = 208
+                Height = 13
+                Top = 101
+                Width = 121
+                Caption = 'Asteroids from the file'
+                Color = clNone
+                ParentColor = False
+              end
+              object mpcfile: TEdit
+                Left = 32
+                Height = 21
+                Top = 28
+                Width = 241
+                TabOrder = 0
+                Text = 'MPCORBcr.DAT'
+              end
+              object astnumbered: TCheckBox
+                Left = 30
+                Height = 24
+                Top = 56
+                Width = 164
+                Caption = 'Only numbered asteroids'
+                Checked = True
+                State = cbChecked
+                TabOrder = 1
+              end
+              object LoadMPC: TButton
+                Left = 328
+                Height = 25
+                Top = 26
+                Width = 97
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Load file'
+                OnClick = LoadMPCClick
+                TabOrder = 2
+              end
+              object mpcfilebtn: TBitBtn
+                Tag = 8
+                Left = 275
+                Height = 26
+                Top = 25
+                Width = 26
+                BorderSpacing.InnerBorder = 2
+                Glyph.Data = {
+                  BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+                  69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
+                  2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
+                  222A20632023464646464646222C0A226120632023303030303030222C0A222E
+                  2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+                  2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+                  2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
+                  2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
+                  2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
+                  2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
+                  612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+                  2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
+                  2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
+                  2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
+                }
+                Layout = blGlyphTop
+                Margin = 0
+                NumGlyphs = 0
+                OnClick = mpcfilebtnClick
+                TabOrder = 4
+                TabStop = False
+              end
+              object aststoperr: TCheckBox
+                Left = 196
+                Height = 24
+                Top = 56
+                Width = 142
+                Caption = 'Halt after 1000 errors'
+                Checked = True
+                State = cbChecked
+                TabOrder = 3
+              end
+              object astlimitbox: TCheckBox
+                Left = 30
+                Height = 24
+                Top = 92
+                Width = 128
+                Caption = 'Load only the first '
+                TabOrder = 5
+              end
+              object astlimit: TLongEdit
+                Name = 'astlimit'
+                Left = 152
+                Height = 22
+                Hint = '0..999999'
+                Top = 96
+                Width = 49
+                BorderStyle = bsSingle
+                ParentColor = False
+                ParentShowHint = False
+                ShowHint = True
+                TabOrder = 6
+                Value = 5000
+                MaxValue = 999999
+              end
+            end
+            object MemoMPC: TMemo
+              Left = 8
+              Height = 225
+              Top = 160
+              Width = 441
+              Color = clBtnFace
+              ScrollBars = ssBoth
+              TabOrder = 1
+            end
+          end
+          object astprepare: TTabSheet
+            Caption = 'Prepare Monthly Data'
+            ImageIndex = 2
+            object Label210: TLabel
+              Left = 8
+              Height = 13
+              Top = 104
+              Width = 61
+              Caption = 'Messages:'
+              Color = clNone
+              ParentColor = False
+            end
+            object GroupBox8: TGroupBox
+              Left = 8
+              Height = 79
+              Top = 10
+              Width = 441
+              Caption = 'Prepare data '
+              ClientHeight = 79
+              ClientWidth = 441
+              TabOrder = 0
+              object Label7: TLabel
+                Left = 8
+                Height = 13
+                Top = 36
+                Width = 65
+                Caption = 'Start Month'
+                Color = clNone
+                ParentColor = False
+              end
+              object Label207: TLabel
+                Left = 152
+                Height = 13
+                Top = 36
+                Width = 97
+                Caption = 'Number of Month'
+                Color = clNone
+                ParentColor = False
+              end
+              object aststrtdate: TMaskEdit
+                Left = 72
+                Height = 21
+                Top = 32
+                Width = 62
+                EditMask = '!9999.99;1;_'
+                MaxLength = 7
+                ParentColor = False
+                TabOrder = 0
+                Text = '2003.11'
+              end
+              object AstCompute: TButton
+                Left = 344
+                Height = 25
+                Top = 32
+                Width = 75
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Compute'
+                OnClick = AstComputeClick
+                TabOrder = 1
+              end
+              object astnummonth: TSpinEdit
+                Left = 240
+                Height = 22
+                Top = 32
+                Width = 49
+                MaxValue = 12
+                MinValue = 2
+                TabOrder = 2
+                Value = 2
+              end
+            end
+            object prepastmemo: TMemo
+              Left = 8
+              Height = 249
+              Top = 128
+              Width = 441
+              Color = clBtnFace
+              ScrollBars = ssBoth
+              TabOrder = 1
+            end
+          end
+          object astdelete: TTabSheet
+            Caption = 'Data Maintenance'
+            ImageIndex = 3
+            object Label211: TLabel
+              Left = 8
+              Height = 13
+              Top = 184
+              Width = 61
+              Caption = 'Messages:'
+              Color = clNone
+              ParentColor = False
+            end
+            object GroupBox10: TGroupBox
+              Left = 8
+              Height = 60
+              Top = 10
+              Width = 441
+              Caption = 'Delete MPC data selectively'
+              ClientHeight = 60
+              ClientWidth = 441
+              TabOrder = 0
+              object astelemlist: TComboBox
+                Left = 16
+                Height = 21
+                Top = 24
+                Width = 281
+                AutoCompleteText = [cbactSearchAscending]
+                MaxLength = 0
+                Style = csDropDownList
+                TabOrder = 0
+              end
+              object delast: TButton
+                Left = 328
+                Height = 25
+                Top = 24
+                Width = 75
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Delete'
+                OnClick = delastClick
+                TabOrder = 1
+              end
+            end
+            object GroupBox11: TGroupBox
+              Left = 8
+              Height = 49
+              Top = 128
+              Width = 441
+              Caption = 'Quick Delete'
+              ClientHeight = 49
+              ClientWidth = 441
+              TabOrder = 1
+              object Label209: TLabel
+                Left = 24
+                Height = 13
+                Top = 19
+                Width = 217
+                Caption = 'Quickly delete all asteroid related data'
+                Color = clNone
+                ParentColor = False
+              end
+              object delallast: TButton
+                Left = 328
+                Height = 25
+                Top = 16
+                Width = 75
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Delete'
+                OnClick = delallastClick
+                TabOrder = 0
+              end
+            end
+            object delastMemo: TMemo
+              Left = 8
+              Height = 177
+              Top = 208
+              Width = 441
+              Color = clBtnFace
+              ScrollBars = ssBoth
+              TabOrder = 3
+            end
+            object GroupBox12: TGroupBox
+              Left = 8
+              Height = 57
+              Top = 72
+              Width = 441
+              Caption = 'Delete Monthly data '
+              ClientHeight = 57
+              ClientWidth = 441
+              TabOrder = 2
+              object Label214: TLabel
+                Left = 16
+                Height = 13
+                Top = 24
+                Width = 178
+                Caption = 'Delete Monthly data older than '
+                Color = clNone
+                ParentColor = False
+              end
+              object astdeldate: TMaskEdit
+                Left = 232
+                Height = 21
+                Top = 20
+                Width = 62
+                EditMask = '!9999.99;1;_'
+                MaxLength = 7
+                ParentColor = False
+                TabOrder = 0
+                Text = '2002.11'
+              end
+              object deldateast: TButton
+                Left = 328
+                Height = 25
+                Top = 21
+                Width = 75
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Delete'
+                OnClick = deldateastClick
+                TabOrder = 1
+              end
+            end
+          end
+          object AddsingleAst: TTabSheet
+            Caption = 'Add'
+            ImageIndex = 4
+            object Label217: TLabel
+              Left = 8
+              Height = 13
+              Top = 8
+              Width = 345
+              Caption = 'Add a single element to the database. All field are mandatory.'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label218: TLabel
+              Left = 8
+              Height = 13
+              Top = 40
+              Width = 67
+              Caption = 'Designation'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label219: TLabel
+              Left = 160
+              Height = 13
+              Top = 40
+              Width = 122
+              Caption = 'H absolute magnitude'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label220: TLabel
+              Left = 312
+              Height = 13
+              Top = 40
+              Width = 103
+              Caption = 'G slope parameter'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label221: TLabel
+              Left = 8
+              Height = 13
+              Top = 104
+              Width = 65
+              Caption = 'Epoch (JD)'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label222: TLabel
+              Left = 160
+              Height = 13
+              Top = 104
+              Width = 84
+              Caption = 'Mean anomaly'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label223: TLabel
+              Left = 312
+              Height = 13
+              Top = 104
+              Width = 127
+              Caption = 'Argument of perihelion'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label224: TLabel
+              Left = 8
+              Height = 13
+              Top = 168
+              Width = 152
+              Caption = 'Longitude ascending Node'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label225: TLabel
+              Left = 160
+              Height = 13
+              Top = 168
+              Width = 58
+              Caption = 'Inclination'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label226: TLabel
+              Left = 312
+              Height = 13
+              Top = 168
+              Width = 67
+              Caption = 'Eccentricity'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label227: TLabel
+              Left = 8
+              Height = 13
+              Top = 232
+              Width = 86
+              Caption = 'Semimajor Axis'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label228: TLabel
+              Left = 160
+              Height = 13
+              Top = 232
+              Width = 58
+              Caption = 'Reference'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label229: TLabel
+              Left = 312
+              Height = 13
+              Top = 232
+              Width = 46
+              Caption = 'Equinox'
+              Color = clNone
+              ParentColor = False
+            end
+            object Label230: TLabel
+              Left = 8
+              Height = 13
+              Top = 296
+              Width = 33
+              Caption = 'Name'
+              Color = clNone
+              ParentColor = False
+            end
+            object astid: TEdit
+              Left = 8
+              Height = 21
+              Top = 64
+              Width = 100
+              TabOrder = 0
+            end
+            object asth: TEdit
+              Left = 160
+              Height = 21
+              Top = 64
+              Width = 100
+              TabOrder = 1
+              Text = '16'
+            end
+            object astg: TEdit
+              Left = 312
+              Height = 21
+              Top = 64
+              Width = 100
+              TabOrder = 2
+              Text = '0.15'
+            end
+            object astep: TEdit
+              Left = 8
+              Height = 21
+              Top = 128
+              Width = 100
+              TabOrder = 3
+              Text = '2453006.5'
+            end
+            object astma: TEdit
+              Left = 160
+              Height = 21
+              Top = 128
+              Width = 100
+              TabOrder = 4
+              Text = '0.0'
+            end
+            object astperi: TEdit
+              Left = 312
+              Height = 21
+              Top = 128
+              Width = 100
+              TabOrder = 5
+              Text = '0.0'
+            end
+            object astnode: TEdit
+              Left = 8
+              Height = 21
+              Top = 192
+              Width = 100
+              TabOrder = 6
+              Text = '0.0'
+            end
+            object asti: TEdit
+              Left = 160
+              Height = 21
+              Top = 192
+              Width = 100
+              TabOrder = 7
+              Text = '0.0'
+            end
+            object astec: TEdit
+              Left = 312
+              Height = 21
+              Top = 192
+              Width = 100
+              TabOrder = 8
+              Text = '0.0'
+            end
+            object astax: TEdit
+              Left = 8
+              Height = 21
+              Top = 256
+              Width = 100
+              TabOrder = 9
+              Text = '2'
+            end
+            object astref: TEdit
+              Left = 160
+              Height = 21
+              Top = 256
+              Width = 100
+              TabOrder = 10
+            end
+            object astnam: TEdit
+              Left = 8
+              Height = 21
+              Top = 320
+              Width = 257
+              TabOrder = 11
+            end
+            object asteq: TEdit
+              Left = 312
+              Height = 21
+              Top = 256
+              Width = 100
+              TabOrder = 12
+              Text = '2000'
+            end
+            object Addast: TButton
+              Left = 312
+              Height = 25
+              Top = 320
+              Width = 75
+              BorderSpacing.InnerBorder = 2
+              Caption = 'Add'
+              OnClick = AddastClick
+              TabOrder = 13
+            end
+          end
+        end
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Title = 'Open existing file'
+    FilterIndex = 0
+    left = 488
+    top = 8
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    Title = 'Select Directory'
+    FilterIndex = 0
+    left = 488
+    top = 48
+  end
+end

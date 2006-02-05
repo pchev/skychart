@@ -1,0 +1,4 @@
+An object pascal wrapper to multiple databases (mysql, sqlite, odbc).
+
+(C) 1999 - 2005 By René Tegel rene@dubaron.com
+
