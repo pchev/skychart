@@ -100,7 +100,7 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_main.lrs"/>
         <UnitName Value="pu_main"/>
-        <CursorPos X="41" Y="952"/>
+        <CursorPos X="64" Y="945"/>
         <TopLine Value="922"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="80"/>
@@ -452,128 +452,7 @@
         <UsageCount Value="52"/>
       </Unit35>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="25">
-      <Position1>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="501" Column="51" TopLine="474"/>
-      </Position1>
-      <Position2>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="530" Column="18" TopLine="513"/>
-      </Position2>
-      <Position3>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="567" Column="18" TopLine="550"/>
-      </Position3>
-      <Position4>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="922" Column="11" TopLine="924"/>
-      </Position4>
-      <Position5>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="1825" Column="10" TopLine="1808"/>
-      </Position5>
-      <Position6>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="1872" Column="14" TopLine="1855"/>
-      </Position6>
-      <Position7>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="3706" Column="21" TopLine="3706"/>
-      </Position7>
-      <Position8>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position8>
-      <Position9>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="567" Column="24" TopLine="550"/>
-      </Position9>
-      <Position10>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="911" Column="23" TopLine="905"/>
-      </Position10>
-      <Position11>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="919" Column="40" TopLine="906"/>
-      </Position11>
-      <Position12>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="924" Column="1" TopLine="907"/>
-      </Position12>
-      <Position13>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="925" Column="1" TopLine="908"/>
-      </Position13>
-      <Position14>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="926" Column="1" TopLine="909"/>
-      </Position14>
-      <Position15>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="927" Column="1" TopLine="910"/>
-      </Position15>
-      <Position16>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="928" Column="1" TopLine="911"/>
-      </Position16>
-      <Position17>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="929" Column="1" TopLine="912"/>
-      </Position17>
-      <Position18>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="930" Column="1" TopLine="913"/>
-      </Position18>
-      <Position19>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="931" Column="1" TopLine="914"/>
-      </Position19>
-      <Position20>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="932" Column="1" TopLine="915"/>
-      </Position20>
-      <Position21>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="933" Column="1" TopLine="916"/>
-      </Position21>
-      <Position22>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="934" Column="1" TopLine="917"/>
-      </Position22>
-      <Position23>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="935" Column="1" TopLine="918"/>
-      </Position23>
-      <Position24>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="942" Column="1" TopLine="925"/>
-      </Position24>
-      <Position25>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="888" Column="1" TopLine="871"/>
-      </Position25>
-      <Position26>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="887" Column="1" TopLine="870"/>
-      </Position26>
-      <Position27>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="922" Column="7" TopLine="922"/>
-      </Position27>
-      <Position28>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="1824" Column="10" TopLine="1807"/>
-      </Position28>
-      <Position29>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="1871" Column="14" TopLine="1854"/>
-      </Position29>
-      <Position30>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="3722" Column="28" TopLine="3706"/>
-      </Position30>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>
