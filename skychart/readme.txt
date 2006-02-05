@@ -47,6 +47,7 @@ the packages for the required component:
       libsql/libsql.lpk
 
 And the packages for the library src/skychart/library :
+(compile only)
 
       catalog/cdccatalog.lpk
       elp82/elp82.lpk
@@ -54,7 +55,7 @@ And the packages for the library src/skychart/library :
       series96/series96.lpk
 
 You can now open the main project files skychart\cdc.lpi and compile.
-To run in debug adjust Run-RunParameters-Worjing Directory to your CDC directory.
+To run in debug adjust Run-Run Parameters-Working Directory to your CDC directory.
 To reduce the executable size for production use strip and upx.
 
 Naming convention for the program source.
