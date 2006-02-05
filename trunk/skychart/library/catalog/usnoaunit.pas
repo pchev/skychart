@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses math,
@@ -33,12 +33,12 @@ Type USNOArec = record  id  : shortstring;
                         field,q,s: integer;
                 end;
 
-Function IsUSNOApath(path : shortstring) : Boolean; stdcall;
+Function IsUSNOApath(path : PChar) : Boolean; stdcall;
 Procedure OpenUSNOAwin(var ok : boolean); stdcall;
 Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall;
 procedure CloseUSNOA ; stdcall;
-procedure SetUSNOApath(path : shortstring); stdcall;
+procedure SetUSNOApath(path : PChar); stdcall;
 
 var USNOApath : string;
 
@@ -62,7 +62,7 @@ var
    demin,demax,armin,armax : double;
    fullwin : boolean;
 
-Function IsUSNOApath(path : shortstring) : Boolean;
+Function IsUSNOApath(path : PChar) : Boolean; stdcall;
 var p : string;
 begin
 p:=slash(path);
@@ -93,10 +93,9 @@ result:= FileExists(p+'zone0000.acc')
 end;
 
 
-procedure SetUSNOApath(path : shortstring);
+procedure SetUSNOApath(path : PChar); stdcall;
 begin
-path:=noslash(path);
-USNOApath:=path;
+USNOApath:=noslash(path);
 end;
 
 Procedure CloseRegion;
@@ -192,7 +191,7 @@ begin
   end;
 end;
 
-Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean);
+Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall;
 var
     cat:CatRec;
     ar,de : cardinal;
@@ -231,7 +230,7 @@ fok:=false;
    lin.id:=CurZone+'-'+padzeros(buf,8);
 end;
 
-procedure CloseUSNOA ;
+procedure CloseUSNOA ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
@@ -344,7 +343,7 @@ if (armax-armin)>300 then begin
 end;
 end;
 
-Procedure OpenUSNOAwin(var ok : boolean);
+Procedure OpenUSNOAwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -353,7 +352,7 @@ Sm := Smlst[curSM];
 OpenRegion(ok);
 end;
 
-Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

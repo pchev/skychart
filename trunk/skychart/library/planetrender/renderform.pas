@@ -29,18 +29,19 @@ type
   public
     { Déclarations publiques }
     Image1: TPicture;
+    bmp: TBitmap;
   end;
   Procedure SetTexturePath(path : shortstring);stdcall;
-  Procedure RenderMercury(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderVenus(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderMoon(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderMars(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderJupiter(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderSaturn(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderUranus(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderNeptune(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderPluto(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-  Procedure RenderSun(cm,pa,poleincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+  Procedure RenderMercury(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderVenus(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderMoon(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderMars(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderJupiter(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderSaturn(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderUranus(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderNeptune(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderPluto(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+  Procedure RenderSun(cm,pa,poleincl,mult : double; size : integer; fn:shortstring); stdcall;
   Procedure CloseLib;stdcall;
 
 var
@@ -58,11 +59,13 @@ var texturepath : string ='.\';
 procedure TForm1.FormCreate(Sender: TObject);
 begin
 Image1:=TPicture.Create;
+bmp:=TBitmap.Create;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
 Image1.Free;
+bmp.Free;
 end;
 
 Procedure Tform1.ResetSphere;
@@ -142,7 +145,7 @@ begin
 texturepath:=slash(path);
 end;
 
-Procedure RenderMercury(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderMercury(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -155,10 +158,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderVenus(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderVenus(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -171,10 +175,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderMoon(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderMoon(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -191,10 +196,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderMars(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderMars(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -207,10 +213,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderJupiter(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderJupiter(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -224,10 +231,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderSaturn(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderSaturn(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -247,10 +255,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderUranus(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderUranus(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -264,10 +273,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderNeptune(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderNeptune(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -281,10 +291,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderPluto(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderPluto(cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -297,10 +308,11 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 
-Procedure RenderSun(cm,pa,poleincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+Procedure RenderSun(cm,pa,poleincl,mult : double; size : integer; fn:shortstring); stdcall;
 begin
 with form1 do begin
 ResetSphere;
@@ -313,6 +325,7 @@ bmp.width:=size;
 bmp.height:=size;
 bmp.PixelFormat:=pf24bit;
 GLMemoryViewer1.Buffer.RenderToBitmap(bmp,96);
+bmp.SaveToFile(fn);
 end;
 end;
 

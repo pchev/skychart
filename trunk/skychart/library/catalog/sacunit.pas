@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -35,8 +35,8 @@ SACrec = record
             desc : string[120];
             clas : string[11];
          end;
-Function IsSACpath(path : shortstring) : Boolean; stdcall;
-procedure SetSACpath(path : shortstring); stdcall;
+Function IsSACpath(path : PChar) : Boolean; stdcall;
+procedure SetSACpath(path : PChar); stdcall;
 Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenSACwin(var ok : boolean); stdcall;
 Procedure ReadSAC(var lin : SACrec; var ok : boolean); stdcall;
@@ -64,17 +64,18 @@ var
    lastcache : integer = 0;
    chkfile : Boolean = true;
 
-Function IsSACpath(path : shortstring) : Boolean;
+Function IsSACpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetSACpath(path : shortstring);
+procedure SetSACpath(path : PChar); stdcall;
 var i : integer;
+    buf:string;
 begin
-path:=noslash(path);
-if path<>SACpath then for i:=1 to CacheNum do cachelst[i]:=0;
-SACpath:=path;
+buf:=noslash(path);
+if buf<>SACpath then for i:=1 to CacheNum do cachelst[i]:=0;
+SACpath:=buf;
 end;
 
 Procedure CloseRegion;
@@ -127,7 +128,7 @@ end;
 ok:=true;
 end;
 
-Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -151,7 +152,7 @@ end;
   end;
 end;
 
-Procedure ReadSAC(var lin : SACrec; var ok : boolean);
+Procedure ReadSAC(var lin : SACrec; var ok : boolean); stdcall;
 begin
 ok:=true;
 inc(Icache);
@@ -185,13 +186,13 @@ end else begin
 end;
 end;
 
-procedure CloseSAC ;
+procedure CloseSAC ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenSACwin(var ok : boolean);
+Procedure OpenSACwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

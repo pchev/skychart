@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -31,8 +31,8 @@ LBNrec = record ar,de :longint ;
                 color,bright : byte;
                 name : array[1..8] of char;
                 end;
-Function IsLBNpath(path : shortstring) : Boolean; stdcall;
-procedure SetLBNpath(path : shortstring); stdcall;
+Function IsLBNpath(path : PChar) : Boolean; stdcall;
+procedure SetLBNpath(path : PChar); stdcall;
 Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenLBNwin(var ok : boolean); stdcall;
 Procedure ReadLBN(var lin : LBNrec; var ok : boolean); stdcall;
@@ -52,15 +52,14 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsLBNpath(path : shortstring) : Boolean;
+Function IsLBNpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetLBNpath(path : shortstring);
+procedure SetLBNpath(path : PChar); stdcall;
 begin
-path:=noslash(path);
-LBNpath:=path;
+LBNpath:=noslash(path);
 end;
 
 Procedure CloseRegion;
@@ -88,7 +87,7 @@ reset(flbn);
 ok:=true ;
 end;
 
-Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -98,7 +97,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadLBN(var lin : LBNrec; var ok : boolean);
+Procedure ReadLBN(var lin : LBNrec; var ok : boolean); stdcall;
 var sm:integer;
 begin
 ok:=true;
@@ -114,13 +113,13 @@ end;
 if ok then  Read(flbn,lin);
 end;
 
-procedure CloseLBN ;
+procedure CloseLBN ;  stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenLBNwin(var ok : boolean);
+Procedure OpenLBNwin(var ok : boolean);  stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

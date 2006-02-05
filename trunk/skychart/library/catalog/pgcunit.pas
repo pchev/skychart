@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -32,8 +32,8 @@ PGCrec = record
                 pa    : byte;
                 maj,min,mb : smallint;
                 end;
-Function IsPGCpath(path : shortstring) : Boolean; stdcall;
-procedure SetPGCpath(path : shortstring); stdcall;
+Function IsPGCpath(path : PChar) : Boolean; stdcall;
+procedure SetPGCpath(path : PChar); stdcall;
 Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenPGCwin(var ok : boolean); stdcall;
 Procedure ReadPGC(var lin : PGCrec; var ok : boolean); stdcall;
@@ -53,15 +53,14 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsPGCpath(path : shortstring) : Boolean;
+Function IsPGCpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetPGCpath(path : shortstring);
+procedure SetPGCpath(path : PChar); stdcall;
 begin
-path:=noslash(path);
-PGCpath:=path;
+PGCpath:=noslash(path);
 end;
 
 Procedure CloseRegion;
@@ -89,7 +88,7 @@ reset(f);
 ok:=true;
 end;
 
-Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -99,7 +98,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadPGC(var lin : PGCrec; var ok : boolean);
+Procedure ReadPGC(var lin : PGCrec; var ok : boolean); stdcall;
 var sm:integer;
 begin
 ok:=true;
@@ -115,13 +114,13 @@ end;
 if ok then  Read(f,lin);
 end;
 
-procedure ClosePGC ;
+procedure ClosePGC ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenPGCwin(var ok : boolean);
+Procedure OpenPGCwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
