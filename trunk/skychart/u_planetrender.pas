@@ -20,32 +20,27 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {
-  Interface to libplanetrender
+  Interface to libfplanetrender
 }
+{$mode delphi}{$H+}
 
 interface
 
 Uses
-{$ifdef mswindows}
-   Windows, Graphics,
-{$endif}
-{$ifdef linux}
-   QGraphics,
-{$endif}
-Types;
+  dynlibs, Graphics, Types;
 
 Type
 TSetTexturePath = Procedure (path : shortstring); stdcall;
-TRenderMercury = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderVenus = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderMoon = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderMars = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderJupiter = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderSaturn = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderUranus = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderNeptune = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderPluto = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; bmp : tbitmap); stdcall;
-TRenderSun = Procedure (cm,pa,poleincl,mult : double; size : integer; bmp : tbitmap); stdcall;
+TRenderMercury = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderVenus = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderMoon = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderMars = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderJupiter = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderSaturn = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderUranus = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderNeptune = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderPluto = Procedure (cm,phase,pa,poleincl,sunincl,mult : double; size : integer; fn:shortstring); stdcall;
+TRenderSun = Procedure (cm,pa,poleincl,mult : double; size : integer; fn:shortstring); stdcall;
 TRenderCloselib = Procedure; stdcall;
 Var
 planetrender: boolean;
@@ -89,7 +84,7 @@ if Prenderlib=0 then begin
  planetrender:=false;
  {$ifdef mswindows}
  try
-  Prenderlib := LoadLibrary('libplanetrender.dll');
+  Prenderlib := LoadLibrary('libFPlanetRender.dll');
   if Prenderlib<>0 then begin
     RenderCloseLib:= TRenderCloseLib(GetProcAddress(Prenderlib, 'CloseLib'));
     SetTexturePath:= TSetTexturePath(GetProcAddress(Prenderlib, 'SetTexturePath'));

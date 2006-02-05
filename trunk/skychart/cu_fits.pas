@@ -1,14 +1,32 @@
 unit cu_fits;
+{
+Copyright (C) 2005 Patrick Chevalley
+
+http://www.astrosurf.com/astropc
+pch@freesurf.ch
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+}
+
+{$mode delphi}{$H+}
 
 interface
 
-uses u_util, u_constant, u_projection, SysUtils, Classes, Math, passql, pasmysql, passqlite, StrUtils,
-{$ifdef mswindows}
-Windows,  Graphics;
-{$endif}
-{$ifdef linux}
-Types, QGraphics;
-{$endif}
+uses
+  u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, StrUtils,
+  Graphics,Math, FPImage, LCLType, IntfGraphics;
 
 type Tfitsheader = record
                 bitpix,naxis,naxis1,naxis2,naxis3 : integer;
@@ -67,6 +85,7 @@ type
      Function GetFileName(catname,objectname:string; var filename:string):boolean;
      Procedure GetAllHeader(var result:Tstringlist);
      procedure GetBitmap(var imabmp:Tbitmap);
+     procedure GetIntfImg(var IntfImg: TLazIntfImage);
      Property Header : Tfitsheader read Fheader;
      Property FileName : string read FFileName write SetFile;
      Property Center_RA : double read Fra;
@@ -94,6 +113,7 @@ end;
 
 destructor  TFits.Destroy; 
 begin
+try
 db1.Free;
 setlength(imar64,0,0,0);
 setlength(imar32,0,0,0);
@@ -101,6 +121,9 @@ setlength(imai8,0,0,0);
 setlength(imai16,0,0,0);
 setlength(imai32,0,0,0);
 inherited destroy;
+except
+writetrace('error destroy '+name);
+end;
 end;
 
 procedure TFits.SetFile(value:string);
@@ -389,11 +412,11 @@ dmax:=-1.0E100;
 sum:=0; sum2:=0; ni:=0;
 if n_axis=3 then cur_axis:=1
 else begin
-  cur_axis:=trunc(minvalue([cur_axis,Fheader.naxis3]));
-  cur_axis:=trunc(maxvalue([cur_axis,1]));
+  cur_axis:=trunc(min(cur_axis,Fheader.naxis3));
+  cur_axis:=trunc(max(cur_axis,1));
 end;
-Fheight:=trunc(minvalue([maxl,Fheader.naxis2]));
-Fwidth:=trunc(minvalue([maxl,Fheader.naxis1]));
+Fheight:=trunc(min(maxl,Fheader.naxis2));
+Fwidth:=trunc(min(maxl,Fheader.naxis1));
 case Fheader.bitpix of
   -64 : begin
         setlength(imar64,n_axis,Fheight,Fwidth);
@@ -431,8 +454,8 @@ case Fheader.bitpix of
            if x=Fheader.blank then x:=0;
            if (ii<=maxl-1) and (j<=maxl-1) then imar64[k,ii,j] := x ;
            x:=Fheader.bzero+Fheader.bscale*x;
-           dmin:=minvalue([x,dmin]);
-           dmax:=maxvalue([x,dmax]);
+           dmin:=min(x,dmin);
+           dmax:=max(x,dmax);
            sum:=sum+x;
            sum2:=sum2+x*x;
            ni:=ni+1;
@@ -452,8 +475,8 @@ case Fheader.bitpix of
            if x=Fheader.blank then x:=0;
            if (ii<=maxl-1) and (j<=maxl-1) then imar32[k,ii,j] := x ;
            x:=Fheader.bzero+Fheader.bscale*x;
-           dmin:=minvalue([x,dmin]);
-           dmax:=maxvalue([x,dmax]);
+           dmin:=min(x,dmin);
+           dmax:=max(x,dmax);
            sum:=sum+x;
            sum2:=sum2+x*x;
            ni:=ni+1;
@@ -474,8 +497,8 @@ case Fheader.bitpix of
            if x=Fheader.blank then x:=0;
            if (ii<=maxl-1) and (j<=maxl-1) then imai8[k,ii,j] := round(x);
            x:=Fheader.bzero+Fheader.bscale*x;
-           dmin:=minvalue([x,dmin]);
-           dmax:=maxvalue([x,dmax]);
+           dmin:=min(x,dmin);
+           dmax:=max(x,dmax);
            sum:=sum+x;
            sum2:=sum2+x*x;
            ni:=ni+1;
@@ -495,8 +518,8 @@ case Fheader.bitpix of
            if x=Fheader.blank then x:=0;
            if (ii<=maxl-1) and (j<=maxl-1) then imai8[k,ii,j] := round(x);
            x:=Fheader.bzero+Fheader.bscale*x;
-           dmin:=minvalue([x,dmin]);
-           dmax:=maxvalue([x,dmax]);
+           dmin:=min(x,dmin);
+           dmax:=max(x,dmax);
            sum:=sum+x;
            sum2:=sum2+x*x;
            ni:=ni+1;
@@ -517,8 +540,8 @@ case Fheader.bitpix of
            if x=Fheader.blank then x:=0;
            if (ii<=maxl-1) and (j<=maxl-1) then imai16[k,ii,j] := round(x);
            x:=Fheader.bzero+Fheader.bscale*x;
-           dmin:=minvalue([x,dmin]);
-           dmax:=maxvalue([x,dmax]);
+           dmin:=min(x,dmin);
+           dmax:=max(x,dmax);
            sum:=sum+x;
            sum2:=sum2+x*x;
            ni:=ni+1;
@@ -538,8 +561,8 @@ case Fheader.bitpix of
            if x=Fheader.blank then x:=0;
            if (ii<=maxl-1) and (j<=maxl-1) then imai32[k,ii,j] := round(x);
            x:=Fheader.bzero+Fheader.bscale*x;
-           dmin:=minvalue([x,dmin]);
-           dmax:=maxvalue([x,dmax]);
+           dmin:=min(x,dmin);
+           dmax:=max(x,dmax);
            sum:=sum+x;
            sum2:=sum2+x*x;
            ni:=ni+1;
@@ -569,169 +592,180 @@ begin
 
 end;
 
-procedure TFits.GetBitmap(var imabmp:Tbitmap);
-var i,j : integer;
+procedure TFits.GetIntfImg(var IntfImg: TLazIntfImage);
+var i,j,row : integer;
     x,R,G,B : integer;
     xx: extended;
-    P : PbyteArray;
     c : double;
+    color: TFPColor;
 begin
 ReadFitsImage;
-imabmp.freeimage;
-imabmp.height:=Fheight;
-imabmp.width:=Fwidth;
-imabmp.pixelformat:=pf32bit;
+IntfImg.SetSize(Fwidth,Fheight);
 dmin:=Fheader.dmin+Fmin_sigma*Fsigma;
 dmax:=Fheader.dmax-Fmax_sigma*Fsigma;
 if dmin=dmax then dmax:=dmin+1;
 c:=255/(dmax-dmin);
+color.alpha:=65535;
 case Fheader.bitpix of
      -64 : for i:=0 to Fheight-1 do begin
-           if invertY then P:=imabmp.ScanLine[Fheight-1-i]
-                      else P:=imabmp.ScanLine[i];
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imar64[0,i,j];
-               x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                R:=itt[x];
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imar64[1,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  G:=itt[x];
                  xx:=Fheader.bzero+Fheader.bscale*imar64[2,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  B:=itt[x];
                end else begin
                  G:=R;
                  B:=R;
                end;
+               color.red:=R*256;
+               color.green:=G*256;
+               color.blue:=B*256;
                if invertX then begin
-                  P[4*(Fwidth-j)-1] := R;
-                  P[4*(Fwidth-j)-1+1] := G;
-                  P[4*(Fwidth-j)-1+2] := B;
+                  IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
-                  P[4*j] := R ;
-                  P[4*j+1] := G ;
-                  P[4*j+2] := B ;
+                  IntfImg.Colors[j,row]:=color;
                end;
            end;
            end;
      -32 : for i:=0 to Fheight-1 do begin
-           if invertY then P:=imabmp.ScanLine[Fheight-1-i]
-                      else P:=imabmp.ScanLine[i];
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imar32[0,i,j];
-               x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                R:=itt[x];
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imar32[1,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  G:=itt[x];
                  xx:=Fheader.bzero+Fheader.bscale*imar32[2,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  B:=itt[x];
                end else begin
                  G:=R;
                  B:=R;
                end;
+               color.red:=R*256;
+               color.green:=G*256;
+               color.blue:=B*256;
                if invertX then begin
-                  P[4*(Fwidth-j)-1] := R;
-                  P[4*(Fwidth-j)-1+1] := G;
-                  P[4*(Fwidth-j)-1+2] := B;
+                  IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
-                  P[4*j] := R ;
-                  P[4*j+1] := G ;
-                  P[4*j+2] := B ;
+                  IntfImg.Colors[j,row]:=color;
                end;
            end;
            end;
        8 : for i:=0 to Fheight-1 do begin
-           if invertY then P:=imabmp.ScanLine[Fheight-1-i]
-                      else P:=imabmp.ScanLine[i];
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imai8[0,i,j];
-               x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                R:=itt[x];
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imai8[1,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  G:=itt[x];
                  xx:=Fheader.bzero+Fheader.bscale*imai8[2,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  B:=itt[x];
                end else begin
                  G:=R;
                  B:=R;
                end;
+               color.red:=R*256;
+               color.green:=G*256;
+               color.blue:=B*256;
                if invertX then begin
-                  P[4*(Fwidth-j)-1] := R;
-                  P[4*(Fwidth-j)-1+1] := G;
-                  P[4*(Fwidth-j)-1+2] := B;
+                  IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
-                  P[4*j] := R ;
-                  P[4*j+1] := G ;
-                  P[4*j+2] := B ;
+                  IntfImg.Colors[j,row]:=color;
                end;
            end;
            end;
       16 : for i:=0 to Fheight-1 do begin
-           if invertY then P:=imabmp.ScanLine[Fheight-1-i]
-                      else P:=imabmp.ScanLine[i];
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imai16[0,i,j];
-               x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                R:=itt[x];
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imai16[1,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  G:=itt[x];
                  xx:=Fheader.bzero+Fheader.bscale*imai16[2,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  B:=itt[x];
                end else begin
                  G:=R;
                  B:=R;
                end;
+               color.red:=R*256;
+               color.green:=G*256;
+               color.blue:=B*256;
                if invertX then begin
-                  P[4*(Fwidth-j)-1] := R;
-                  P[4*(Fwidth-j)-1+1] := G;
-                  P[4*(Fwidth-j)-1+2] := B;
+                  IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
-                  P[4*j] := R ;
-                  P[4*j+1] := G ;
-                  P[4*j+2] := B ;
+                  IntfImg.Colors[j,row]:=color;
                end;
            end;
            end;
       32 : for i:=0 to Fheight-1 do begin
-           if invertY then P:=imabmp.ScanLine[Fheight-1-i]
-                      else P:=imabmp.ScanLine[i];
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imai32[0,i,j];
-               x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                R:=itt[x];
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imai32[1,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  G:=itt[x];
                  xx:=Fheader.bzero+Fheader.bscale*imai32[2,i,j];
-                 x:=trunc(maxvalue([0,minvalue([255,(xx-dmin) * c ])]) );
+                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
                  B:=itt[x];
                end else begin
                  G:=R;
                  B:=R;
                end;
+               color.red:=R*256;
+               color.green:=G*256;
+               color.blue:=B*256;
                if invertX then begin
-                  P[4*(Fwidth-j)-1] := R;
-                  P[4*(Fwidth-j)-1+1] := G;
-                  P[4*(Fwidth-j)-1+2] := B;
+                  IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
-                  P[4*j] := R ;
-                  P[4*j+1] := G ;
-                  P[4*j+2] := B ;
+                  IntfImg.Colors[j,row]:=color;
                end;
            end;
            end;
       end;
+end;
+
+procedure TFits.GetBitmap(var imabmp:Tbitmap);
+var IntfImg: TLazIntfImage;
+    ImgHandle,ImgMaskHandle: HBitmap;
+begin
+imabmp.freeimage;
+imabmp.height:=1;
+imabmp.width:=1;
+//imabmp.pixelformat:=pf32bit;
+IntfImg:=TLazIntfImage.Create(0,0);
+IntfImg.LoadFromBitmap(imabmp.Handle,0);
+GetIntfImg(IntfImg);
+IntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+imabmp.freeimage;
+imabmp.Handle:=ImgHandle;
+//imabmp.MaskHandle:=ImgMaskHandle;
+IntfImg.Free;
 end;
 
 Function TFits.ConnectDB(host,db,user,pass:string; port:integer):boolean;

@@ -22,24 +22,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  Type and constant declaration
 }
-
+{$mode objfpc}{$H+}
 interface
 
-uses Types, Classes, libcatalog,
-{$ifdef linux}
-    QForms,QGraphics;
-{$endif}
-{$ifdef mswindows}
-    Graphics;
-{$endif}
+uses gcatunit, {libcatalog,} // libcatalog statically linked
+     Types, Classes,
+     FPCanvas, Graphics;
 
-const MaxColor = 32;
+const MaxColor = 35;
 
-type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid
+type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[1..7]of Tcolor;
 
-const cdcversion = 'Version 3 alpha 0.0.9 b';
-      cdcver     = '3.0.0.9';
+const cdcversion = 'Version 3 alpha 0.1.0';
+      cdcver     = '3.0.1.0';
       MaxSim = 100 ;
       MaxComet = 200;
       MaxAsteroid = 500;
@@ -70,48 +66,19 @@ const cdcversion = 'Version 3 alpha 0.0.9 b';
       FovMax = pi2;
       DefaultPrtRes = 300;
       encryptpwd = 'zh6Tiq4h;90uA3.ert';
-      //                          0         1                                       5                                                 10                                                15                                                20                                                25                                                30                  32
-      //                          sky       -0.3      -0.1      0.2       0.5       0.8       1.3       1.3+      galaxy    cluster   neb       -white-   az grid   eq grid   orbit     const     boundary  eyepiece  misc      horizon   asteroid  comet     milkyway  ..        ..        ..
-      DfColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00202030,clYellow, $00FFC000,$00202020,clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
-      DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
-      DfRedColor : Starcolarray =(clBlack,  $00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$00000040,$00000040,$00000080,$00000040,$00000040,$000000A0,$00000080,$00000040,clYellow, $000000A0,$00000020,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
-      DfWBColor : Starcolarray = (clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack);
+      //                          0         1                                       5                                                 10                                                15                                                20                            23        24        25        26        27        28        29        30        31        32        33        34        35
+      //                          sky       -0.3      -0.1      0.2       0.5       0.8       1.3       1.3+      galaxy    cluster   neb       -white-   az grid   eq grid   orbit     const     boundary  eyepiece  misc      horizon   asteroid  comet     milkyway  ColorAst  ColorOCl  ColorGCl  ColorPNe  ColorDN   ColorEN   ColorRN   ColorSN   ColorGxy  ColorGxyCl ColorQ   ColorGL   ColorNE
+      DfColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00202030,clYellow, $00FFC000,$00202020,$0080FFFF,$0080FFFF,$00FFFF80,$0080FF00,$00C0C0C0,$000000FF,$00FF8000,$00000000,$000000FF,$000000FF,$008080FF,$00FF0080,$00FFFFFF);
+      DfGray : Starcolarray =    (clBlack,  clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clWhite,  clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver);
+      DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
+      DfRedColor : Starcolarray =(clBlack,  $00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$00000040,$00000040,$00000080,$00000040,$00000040,$000000A0,$00000080,$00000040,clYellow, $000000A0,$00000020,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
+      DfWBColor : Starcolarray = (clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack);
       dfskycolor : Tskycolor =   ($00f03c3c,$00c83232,$00a02828,$00780000,$00640010,$003c0010,$00000000);
       light  = $004040ff;
       middle = $003030c0;
       dark   = $00000040;
       black  = $00000000;
 
-      //  deep-sky objects colour defaults - assume outline only and black (for the moment...)
-//  ToDo : populate colour fills with the CdC defaults
-
-      dfDSOColorFillAst : boolean = false;
-      dfDSOColorFillOCl  : boolean = false;
-      dfDSOColorFillGCl  : boolean = false;
-      dfDSOColorFillPNe  : boolean = false;
-      dfDSOColorFillDN  : boolean = false;
-      dfDSOColorFillEN  : boolean = false;
-      dfDSOColorFillRN  : boolean = false;
-      dfDSOColorFillSN  : boolean = false;
-      dfDSOColorFillGxy  : boolean = false;
-      dfDSOColorFillGxyCl  : boolean = false;
-      dfDSOColorFillQ  : boolean = false;
-      dfDSOColorFillGL  : boolean = false;
-      dfDSOColorFillNE  : boolean = false;
-
-      dfDSOColorAst : Tcolor = 0;
-      dfDSOColorOCl = 1;
-      dfDSOColorGCl = 2;
-      dfDSOColorPNe = 3;
-      dfDSOColorDN = 4;
-      dfDSOColorEN = 5;
-      dfDSOColorRN = 6;
-      dfDSOColorSN = 7;
-      dfDSOColorGxy = 8;
-      dfDSOColorGxyCl = 9;
-      dfDSOColorQ =  10;
-      dfDSOColorGL = 11;
-      dfDSOColorNE = 12;
 
 //  End of deep-sky objects colour
 
@@ -226,41 +193,6 @@ const cdcversion = 'Version 3 alpha 0.0.9 b';
       DblLabel : Tlabellst =('RA','DEC','Id','m1','m2','sep','pa','date','Comp','sp','sp','desc','','','','Str1','Str2','Str3','Str4','Str5','Str6','Str7','Str8','Str9','Str10','Num1','Num2','Num3','Num4','Num5','Num6','Num7','Num8','Num9','Num10');
       NebLabel : Tlabellst =('RA','DEC','Id','NebTyp','m','sbr','D','D','Unit','pa','rv','class','desc','','','Str1','Str2','Str3','Str4','Str5','Str6','Str7','Str8','Str9','Str10','Num1','Num2','Num3','Num4','Num5','Num6','Num7','Num8','Num9','Num10');
       nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
-
-{$ifdef linux}
-      DefaultFontName='Helvetica';
-      DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
-      DefaultFontSize=10;
-      DefaultPrivateDir='~/cartes_du_ciel';
-      Defaultconfigfile='~/.cartesduciel.ini';
-      SharedDir='/usr/share/apps/skychart';
-      DefaultPrintCmd1='kghostview';
-      DefaultPrintCmd2='gimp';
-      DefaultTmpDir=DefaultPrivateDir+'/tmp';
-      Default_dssdrive='/mnt/cdrom';
-      key_cr = 4100;
-      key_plus =43;
-      key_minus=45;
-      key_left =4114;
-      key_right=4116;
-      key_up   =4115;
-      key_down =4117;
-      key_upleft =4112;
-      key_upright=4118;
-      key_downleft=4113;
-      key_downright =4119;
-      bsDialog=fbsDialog;
-{$endif}
-{$ifdef mswindows}
-      DefaultFontName='Arial';
-      DefaultFontSymbol='Symbol';
-      DefaultFontSize=8;
-      DefaultPrivateDir='Cartes du Ciel';
-      Defaultconfigfile='cartesduciel.ini';
-      DefaultPrintCmd1='gsview32.exe';
-      DefaultPrintCmd2='mspaint.exe';
-      DefaultTmpDir='tmp';
-      Default_dssdrive='D:\';
       key_cr   =13;
       key_plus =107;
       key_minus=109;
@@ -272,6 +204,29 @@ const cdcversion = 'Version 3 alpha 0.0.9 b';
       key_upright=33;
       key_downleft=35;
       key_downright =34;
+
+{$ifdef unix}
+      DefaultFontName='Helvetica';
+      DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
+      DefaultFontSize=10;
+      DefaultPrivateDir='~/cartes_du_ciel';
+      Defaultconfigfile='~/.cartesduciel.ini';
+      SharedDir='/usr/share/apps/skychart';
+      DefaultPrintCmd1='kghostview';
+      DefaultPrintCmd2='gimp';
+      DefaultTmpDir=DefaultPrivateDir+'/tmp';
+      Default_dssdrive='/mnt/cdrom';
+{$endif}
+{$ifdef mswindows}
+      DefaultFontName='Arial';
+      DefaultFontSymbol='Symbol';
+      DefaultFontSize=8;
+      DefaultPrivateDir='Cartes du Ciel';
+      Defaultconfigfile='cartesduciel.ini';
+      DefaultPrintCmd1='gsview32.exe';
+      DefaultPrintCmd2='mspaint.exe';
+      DefaultTmpDir='tmp';
+      Default_dssdrive='D:\';
 {$endif}
 
 type
@@ -293,12 +248,12 @@ type
             id:integer;
             x,y,r:smallint;
             labelnum,fontnum:byte;
-            txt:shortstring;
+            txt:string;  //txt:shortstring
             end;
      Tmodlabel = record
             id,dx,dy:integer;
             labelnum,fontnum:byte;
-            txt: shortstring;
+            txt: string;
             hiden: boolean;
             end;
 
@@ -306,25 +261,25 @@ type
                     min, max, magmax : single;
                     cattype:integer;
                     Actif,CatOn : boolean;
-                    shortname, name, path, version : shortstring;
+                    shortname, name, path, version : string;  //shortname, name, path, version : shortstring;
                  end;
      conf_catalog = record
                 GCatLst : array of TGCatLst;
                 GCatNum  : Integer;
                 StarmagMax,NebMagMax,NebSizeMin : double;            // limit to extract from catalog
-                StarCatPath : array [1..MaxStarCatalog] of shortstring;   // path to each catalog
+                StarCatPath : array [1..MaxStarCatalog] of string;   // path to each catalog
                 StarCatDef : array [1..MaxStarCatalog] of boolean;   // is the catalog defined
                 StarCatOn : array [1..MaxStarCatalog] of boolean;    // is the catalog used for current chart
                 StarCatField : array [1..MaxStarCatalog,1..2] of integer; // Field min and max the catalog is active
-                VarStarCatPath : array [1..MaxVarStarCatalog] of shortstring;   // path to each catalog
+                VarStarCatPath : array [1..MaxVarStarCatalog] of string;   // path to each catalog
                 VarStarCatDef : array [1..MaxVarStarCatalog] of boolean;   // is the catalog defined
                 VarStarCatOn : array [1..MaxVarStarCatalog] of boolean;    // is the catalog used for current chart
                 VarStarCatField : array [1..MaxVarStarCatalog,1..2] of integer; // Field min and max the catalog is active
-                DblStarCatPath : array [1..MaxDblStarCatalog] of shortstring;   // path to each catalog
+                DblStarCatPath : array [1..MaxDblStarCatalog] of string;   // path to each catalog
                 DblStarCatDef : array [1..MaxDblStarCatalog] of boolean;   // is the catalog defined
                 DblStarCatOn : array [1..MaxDblStarCatalog] of boolean;    // is the catalog used for current chart
                 DblStarCatField : array [1..MaxDblStarCatalog,1..2] of integer; // Field min and max the catalog is active
-                NebCatPath : array [1..MaxNebCatalog] of shortstring;   // path to each catalog
+                NebCatPath : array [1..MaxNebCatalog] of string;   // path to each catalog
                 NebCatDef : array [1..MaxNebCatalog] of boolean;   // is the catalog defined
                 NebCatOn : array [1..MaxNebCatalog] of boolean;    // is the catalog used for current chart
                 NebCatField : array [1..MaxNebCatalog,1..2] of integer; // Field min and max the catalog is active
@@ -345,10 +300,10 @@ type
                 DegreeGridSpacing : array [0..MaxField] of double;
                 EquinoxType : integer;
                 DefaultJDchart : double;
-                EquinoxChart : shortstring;
+                EquinoxChart : string;
                 AzNorth,ListNeb,ListStar,ListVar,ListDbl,ListPla : boolean;
-                llabel: array[1..NumLlabel] of shortstring;
-                ConstelName: array of array[1..2] of shortstring; // constellation three letter abbrev and name.
+                llabel: array[1..NumLlabel] of string;
+                ConstelName: array of array[1..2] of string; // constellation three letter abbrev and name.
                 ConstLnum,ConstBnum,ConstelNum,StarNameNum:integer;
                 ConstelPos:  array of Tconstpos;
                 ConstL: array of Tconstl;
@@ -372,6 +327,7 @@ type
                 ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
                 ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
+                StyleGrid,StyleConstL,StyleConstB:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY: double;
                 //  compass rose
@@ -416,7 +372,7 @@ type
                 backgroundcolor,bgcolor : Tcolor;
                 stardyn,starsize,prtres,starplot,nebplot,plaplot : integer;
                 Nebgray,NebBright,starshapesize,starshapew : integer;
-                Invisible,PlanetTransparent,AutoSkycolor : boolean;
+                Invisible,AutoSkycolor : boolean;
                 FontName : array [1..numfont] of string;    // 1=grid 2=label 3=legend 4=status 5=list 6=prt 7=symbol
                 FontSize : array [1..numfont] of integer;
                 FontBold : array [1..numfont] of boolean;
@@ -440,20 +396,6 @@ type
                 DSOColorFillQ: boolean;
                 DSOColorFillGL: boolean;
                 DSOColorFillNE: boolean;
-
-                DSOColorAst: Tcolor;
-                DSOColorOCl: Tcolor;
-                DSOColorGCl: Tcolor;
-                DSOColorPNe: Tcolor;
-                DSOColorDN: Tcolor;
-                DSOColorEN: Tcolor;
-                DSOColorRN: Tcolor;
-                DSOColorSN: Tcolor;
-                DSOColorGxy: Tcolor;
-                DSOColorGxyCl: Tcolor;
-                DSOColorQ: Tcolor;
-                DSOColorGL: Tcolor;
-                DSOColorNE: Tcolor;
 //  End of deep-sky objects colour
 
                 end;
@@ -477,21 +419,29 @@ type
                 dss102,dssnorth,dsssouth,dsssampling,dssplateprompt : boolean;
                 dssmaxsize : integer;
                 end;
+                
+     Pconf_catalog = ^conf_catalog;
+     Pconf_shared = ^conf_shared;
+     Pconf_skychart = ^conf_skychart;
+     Pconf_plot = ^conf_plot;
+     Pconf_chart = ^conf_chart;
+     Pconf_main = ^conf_main;
+     Pconf_dss = ^conf_dss;
 
 type
   TPrepareAsteroid = function (jdt:double; msg:Tstrings):boolean of object;
                   
 // external library
 const
-{$ifdef linux}
+{$ifdef unix}
       lib404   = 'libplan404.so';
-      libsatxy = 'libsatxy.so';
-      libsatxyfm='Satxyfm';
+//      libsatxy = 'libsatxy.so';
+//      libsatxyfm='Satxyfm';
 {$endif}
 {$ifdef mswindows}
       lib404 = 'libplan404.dll';
-      libsatxy = 'libsatxy.dll';
-      libsatxyfm='Satxyfm';
+//      libsatxy = 'libsatxy.dll';
+//      libsatxyfm='Satxyfm';
 {$endif}
 
 // libplan404
@@ -510,10 +460,10 @@ type
 Function Plan404( pla : PPlanetData):integer; cdecl; external lib404;
 
 // libsatxy
-type double8 = array[1..8] of double;
+{type double8 = array[1..8] of double;
      Pdouble8 = ^double8;
      TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
-
+}
 
 
 // pseudo-constant only here
@@ -521,11 +471,13 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
      Configfile, SysDecimalSeparator: string;
      ldeg,lmin,lsec : string;
      ThemePath:string ='data/Themes';
-{$ifdef linux}
-     tracefile:string =''; // to stdout
      LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
      OpenFileCMD:string = 'kfmclient exec';   // default KDE
+{$ifdef unix}
+     tracefile:string =''; // to stdout
      dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
+     use_xplanet: boolean = true;
+     xplanet_dir: string = '';
 {$endif}
 {$ifdef mswindows}
      tracefile:string = 'cdc_trace.txt';
@@ -536,7 +488,6 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
 
 // Text formating constant
 const
-{$ifdef linux}
      html_h        = '<HTML>';
      htms_h        = '</HTML>';
      html_ffx      = '<font face="fixed">';
@@ -551,24 +502,6 @@ const
      html_sp       = '&nbsp;';
      html_pre      = '<pre>';
      htms_pre      = '</pre>';
-{$endif}
-{$ifdef mswindows}
-// D6 Personal as no html viewer, so using RTF instead
-     html_h        = '{\rtf1\ansi\deff0{\fonttbl{\f0\fnil\fcharset0 MS Sans Serif;}{\f1\fnil MS Sans Serif;}{\f2\fmodern\fprq1\fcharset0 Courier New;}{\f3\fmodern\fprq1 Courier New;}}\f0\fs18';
-     htms_h        = '}';
-     html_ffx      = '\pard\f2\fs18 ';
-     htms_f        = '\pard\f0\fs18 ';
-     html_b        = '\b ';
-     htms_b        = '\b0 ';
-     html_h2       = '\pard\f0\fs24\b ';
-     htms_h2       = '\pard\f0\fs18\b0\par ';
-     html_p        = '\par ';
-     htms_p        = '';
-     html_br       = '\line ';
-     html_sp       = ' ';
-     html_pre      = '\pard\f2\fs18\par ';
-     htms_pre      = '\pard\f0\fs18\par ';
-{$endif}
 
 const msgTimeout='Timeout!';
       msgOK='OK!';
@@ -766,7 +699,7 @@ sqlindex : array[1..numsqlindex,1..2] of string =(
 const
    COUNTRIES      = 234;  // number of countries
    MAX_CITY_LENGTH= 120;  // length of longest city name (including '\0')
-   {$ifdef linux}
+   {$ifdef unix}
    citylib = 'libCities.so';
    {$endif}
    {$ifdef mswindows}

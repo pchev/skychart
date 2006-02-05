@@ -22,17 +22,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  Bitmap skychart drawing component
 }
-
+{$mode delphi}{$H+}
 interface
 
-uses u_constant, u_util, u_planetrender, u_bitmap,
-     Math, SysUtils, Classes, Types, StrUtils,
-{$ifdef linux}
-   Qt, Qmenus, QForms, QStdCtrls, QControls, QExtCtrls, QGraphics;
-{$endif}
-{$ifdef mswindows}
-   jpeg, Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Windows, Graphics;
-{$endif}
+uses
+  u_constant, u_util, u_planetrender, u_bitmap,
+  SysUtils, Types, StrUtils, FPImage, LCLType, IntfGraphics, FPCanvas,
+  Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics;
+
 
 type
 
@@ -59,22 +56,23 @@ type
      FDeleteAllLabel: Tintfunc;
      FLabelClick: Tintfunc;
      editlabelmenu: Tpopupmenu;
-     Planetbmpmask: Tbitmap;
+     PlanetBMPs: Tbitmap;
      PlanetBMP : Tbitmap;
      XplanetImg: TPicture;
      PlanetBMPjd,PlanetBMProt : double;
      PlanetBMPpla : integer;
      Xplanetrender: boolean;
+     IntfImgReady: boolean;
      OldGRSlong: double;
-     imabmp,imacopy,imamask:tbitmap;
+     TransparentColor : TFPColor;
      Procedure PlotStar0(x,y: single; ma,b_v : Double);
      Procedure PlotStar1(x,y: single; ma,b_v : Double);
      Procedure PlotStar2(x,y: single; ma,b_v : Double);
      Procedure PlotNebula0(x,y: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
      Procedure PlotNebula1(x,y: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
      procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
-     procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double);
-     procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double);
+     procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double;WhiteBg:boolean);
+     procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
@@ -84,27 +82,29 @@ type
      procedure labelMouseLeave(Sender: TObject);
      procedure Setstarshape(value:Tbitmap);
      procedure InitXPlanetRender;
-     procedure SetImage(value:Timage);
-//     procedure MapGRSlongitude(GRSlongitude: double); //  No more necessary with Xplanet 1.2.0 !
+     procedure SetImage(value:TCanvas);
   protected
     { Protected declarations }
   public
     { Public declarations }
-    cfgplot : conf_plot;
-    cfgchart: conf_chart;
+    cfgplot : Pconf_plot;
+    cfgchart: Pconf_chart;
     cbmp : Tbitmap;
     cnv, destcnv  : Tcanvas;
     Fstarshape,starbmp: Tbitmap;
     starbmpw:integer;
+    IntfImg : TLazIntfImage;
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
   published
     { Published declarations }
      function Init(w,h : integer) : boolean;
      function InitLabel : boolean;
-     Procedure Flush;
+     Procedure FlushCnv;
+     Procedure InitPixelImg;
+     Procedure ClosePixelImg;
      Procedure PlotStar(xx,yy: single; ma,b_v : Double);
-     Procedure PlotVarStar(x,y: single; max,min : Double);
+     Procedure PlotVarStar(x,y: single; vmax,vmin : Double);
      Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
      Procedure PlotGalaxie(x,y: single; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
      Procedure PlotNebula(xx,yy: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
@@ -125,19 +125,19 @@ type
       Procedure PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
       Procedure PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
 //---------------------------------------------
-     Procedure PlotLine(x1,y1,x2,y2:single; color,width: integer);
-     Procedure PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg, Transparent :boolean; bmp:Tbitmap);
-     procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
+     Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
+     Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap);
+     procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean);
      procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
      function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string):integer;
-     procedure PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
+     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
-     Procedure PlotCircle(x1,y1,x2,y2:single;color:integer;moving:boolean);
-     Procedure PlotPolyLine(p:array of Tpoint; color:integer; moving:boolean);
+     Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
+     Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
      property Starshape: TBitmap read Fstarshape write Setstarshape;
      property OnEditLabelPos: TEditLabelPos read FEditLabelPos write FEditLabelPos;
      property OnEditLabelTxt: TEditLabelPos read FEditLabelTxt write FEditLabelTxt;
@@ -150,7 +150,8 @@ type
      Procedure DefaultLabel(Sender: TObject);
      Procedure Deletelabel(Sender: TObject);
      Procedure DeleteAlllabel(Sender: TObject);
-     property Image: TImage write SetImage;
+     property Image: TCanvas write SetImage;
+
   end;
 
   const cliparea = 10;
@@ -158,21 +159,18 @@ type
 Implementation
 
 constructor TSplot.Create(AOwner:TComponent);
+var i : integer;
+    MenuItem: TMenuItem;
 begin
  inherited Create(AOwner);
- imabmp:=tbitmap.Create;
- imabmp.PixelFormat:=pf32bit;
- imacopy:=tbitmap.Create;
- imacopy.PixelFormat:=pf32bit;
- imamask:=tbitmap.Create;
- imamask.PixelFormat:=pf32bit;
  starbmp:=Tbitmap.Create;
  cbmp:=Tbitmap.Create;
  cnv:=cbmp.canvas;
+ new(cfgplot);
+ new(cfgchart);
  // set safe value
  starbmpw:=1;
  editlabel:=-1;
- cbmp.PixelFormat:=pf32bit;
  cbmp.width:=100;
  cbmp.height:=100;
  cfgchart.width:=100;
@@ -181,7 +179,11 @@ begin
  cfgchart.onprinter:=false;
  cfgchart.drawpen:=1;
  cfgchart.fontscale:=1;
-
+ TransparentColor.red:= 0;
+ TransparentColor.green:=0;
+ TransparentColor.blue:= 0;
+ TransparentColor.alpha:=65535;
+ IntfImgReady:=false;
  InitPlanetRender;
  InitXPlanetRender;
  try
@@ -189,61 +191,29 @@ begin
     planetbmp:=Tbitmap.create;
     planetbmp.Width:=450;
     planetbmp.Height:=450;
-    planetbmpmask:=Tbitmap.create;
-    planetbmpmask.Width:=450;
-    planetbmpmask.Height:=450;
+    planetbmps:=Tbitmap.create;
+    planetbmps.Width:=450;
+    planetbmps.Height:=450;
     xplanetimg:=TPicture.create;
  end;
  if planetrender then begin
     settexturepath(slash(appdir)+slash('data')+slash('planet'));
     // try if it work
     planetrender:=false;
-    RenderPluto(0,0,0,0,0,1,planetbmp.width, planetbmp);
+    RenderPluto(0,0,0,0,0,1,planetbmp.width,slash(Tempdir)+'planet.bmp');
     // we are here! so it don't crash, reset the value.
     planetrender:=true;
  end;
  except
    planetrender:=false;
-   if cfgplot.plaplot=2 then cfgplot.plaplot:=1;
  end;
-end;
-
-destructor TSplot.Destroy;
-var i:integer;
-begin
-try
- //for i:=1 to maxlabels do labels[i].Free;
- starbmp.Free;
- cbmp.Free;
- imabmp.Free;
- imacopy.Free;
- imamask.Free;
- if planetrender then begin
-    ClosePlanetRender;
- end;
- if planetrender or Xplanetrender then begin
-//    planetbmp.Free;
-    planetbmpmask.Free;
-    xplanetimg.Free;
- end;
- inherited destroy;
-except
-end;
-end;
-
-procedure TSplot.SetImage(value:Timage);
-var i : integer;
-    MenuItem: TMenuItem;
-begin
- destcnv:=value.Canvas;
  for i:=1 to maxlabels do begin
     labels[i]:=Tlabel.Create(nil);
-    labels[i].parent:=value.parent;
-    labels[i].tag:=i;                                
-    labels[i].transparent:=true;
+    labels[i].parent:=TPanel(AOwner);
+    labels[i].tag:=i;
+    labels[i].color:=clNone;
     labels[i].ShowAccelChar:=false;
-    {$ifdef linux} labels[i].Font.CharSet:=fcsAnyCharSet; {$endif}
-    {$ifdef mswindows} labels[i].Font.CharSet:=DEFAULT_CHARSET; {$endif}
+    labels[i].Font.CharSet:=DEFAULT_CHARSET;
     labels[i].OnMouseDown:=labelmousedown;
     labels[i].OnMouseUp:=labelmouseup;
     labels[i].OnMouseMove:=labelmousemove;
@@ -279,12 +249,42 @@ begin
  MenuItem.OnClick := DeleteAllLabel;
 end;
 
+destructor TSplot.Destroy;
+var i:integer;
+begin
+try
+ for i:=1 to maxlabels do labels[i].Free;
+ starbmp.Free;
+ cbmp.Free;
+ dispose(cfgplot);
+ dispose(cfgchart);
+ if planetrender then begin
+    ClosePlanetRender;
+ end;
+ if planetrender or Xplanetrender then begin
+    planetbmp.Free;
+    planetbmps.Free;
+    xplanetimg.Free;
+ end;
+ inherited destroy;
+except
+writetrace('error destroy '+name);
+end;
+end;
+
+procedure TSplot.SetImage(value:TCanvas);
+begin
+ destcnv:=value;
+end;
+
 function TSplot.Init(w,h : integer) : boolean;
 begin
 cfgchart.Width:=w;
 cfgchart.Height:=h;
 if cfgchart.onprinter then cnv:=destcnv
       else begin
+        cbmp.FreeImage;
+        cbmp.Transparent:=false;
         cbmp.Width:=w;
         cbmp.Height:=h;
         cnv:=cbmp.Canvas; // defered plot to bitmap
@@ -298,9 +298,9 @@ with cnv do begin
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
 end;
 InitLabel;
-if (cfgchart.drawpen<>starbmpw)and(Fstarshape<>nil) then begin
+if (cfgplot.starplot>0)and(cfgchart.drawpen<>starbmpw)and(Fstarshape<>nil) then begin
    starbmpw:=cfgchart.drawpen;
-   ImageResize(Fstarshape,starbmp,starbmpw);
+   BitmapResize(Fstarshape,starbmp,starbmpw);
 end;
 result:=true;
 end;
@@ -311,20 +311,39 @@ begin
  Xplanetrender:=true;
 end;
 
-Procedure TSplot.Flush;
+Procedure TSplot.InitPixelImg;
 begin
- if not cfgchart.onprinter then destcnv.Draw(0,0,cbmp);
- cnv:=destcnv;  // direct plot to screen;
+if (cfgplot.starplot=2) then begin
+  IntfImg:=cbmp.CreateIntfImage;
+  IntfImgReady:=true;
+end;
+end;
+
+Procedure TSplot.ClosePixelImg;
+var  ImgHandle,ImgMaskHandle: HBitmap;
+begin
+if IntfImgReady then begin
+  IntfImgReady:=false;
+  cbmp.FreeImage;
+  IntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+  cbmp.Handle:=ImgMaskHandle;
+  cbmp.FreeImage;
+  cbmp.Handle:=ImgHandle;
+  IntfImg.free;
+end;
+end;
+
+Procedure TSplot.FlushCnv;
+begin
+ destcnv.Draw(0,0,cbmp); // draw bitmap to screen
+ cnv:=destcnv;           // direct plot to screen;
 end;
 
 procedure TSplot.Setstarshape(value:Tbitmap);
 begin
 Fstarshape:=value;
 starbmpw:=1;
-starbmp.Width:=Fstarshape.Width;
-starbmp.Height:=Fstarshape.Height;
-starbmp.PixelFormat:=Fstarshape.PixelFormat;
-starbmp.Canvas.Draw(0,0,Fstarshape);
+starbmp.Assign(Fstarshape);
 end;
 
 function TSplot.InitLabel : boolean;
@@ -340,8 +359,6 @@ var
   ds,Icol : Integer;
   ico,isz,xx,yy : integer;
   DestR,SrcR :Trect;
-  co: TColor;
-  b : TBitmap;
 begin
 xx:=round(x);
 yy:=round(y);
@@ -358,7 +375,7 @@ with cnv do begin
           else ico:=2;
    end;
    if ma<-5 then ma:=-5;
-   ds := round(maxvalue([1,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)]));
+   ds := round(max(1,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)));
    case ds of
        1..2: isz:=10;
        3: isz:=9;
@@ -372,32 +389,10 @@ with cnv do begin
       11: isz:=1;
      else isz:=0;
    end;
-   if b_v>1000 then begin
-      co:=cfgplot.Color[trunc(b_v-1000)];
-      b:=Tbitmap.Create;
-      try
-      b.Width:=2*(cfgplot.starshapew+1)*starbmpw;
-      b.Height:=2*(cfgplot.starshapew+1)*starbmpw;
-      b.PixelFormat:=starbmp.PixelFormat;
-      b.Canvas.Brush.Color:=co;
-      b.Canvas.Rectangle(0,0,b.Width,b.height);
-      SrcR:=Rect(isz*cfgplot.starshapesize*starbmpw,ico*cfgplot.starshapesize*starbmpw,(isz+1)*cfgplot.starshapesize*starbmpw,(ico+1)*cfgplot.starshapesize*starbmpw);
-      DestR:=Rect(0,0,b.Width,b.Height);
-      b.canvas.copymode:=cmMergeCopy;
-      b.canvas.CopyRect(DestR,starbmp.canvas,SrcR);
-      SrcR:=DestR;
-      DestR:=Rect(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,xx+(cfgplot.starshapew+1)*starbmpw,yy+(cfgplot.starshapew+1)*starbmpw);
-      copymode:=cmSrcPaint;
-      CopyRect(DestR,b.canvas,SrcR);
-      finally
-      b.Free;
-      end;
-   end else begin
-     SrcR:=Rect(isz*cfgplot.starshapesize*starbmpw,ico*cfgplot.starshapesize*starbmpw,(isz+1)*cfgplot.starshapesize*starbmpw,(ico+1)*cfgplot.starshapesize*starbmpw);
-     DestR:=Rect(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,xx+(cfgplot.starshapew+1)*starbmpw,yy+(cfgplot.starshapew+1)*starbmpw);
-     copymode:=cmSrcPaint;
-     CopyRect(DestR,starbmp.canvas,SrcR);
-   end;
+   SrcR:=Rect(isz*cfgplot.starshapesize*starbmpw,ico*cfgplot.starshapesize*starbmpw,(isz+1)*cfgplot.starshapesize*starbmpw,(ico+1)*cfgplot.starshapesize*starbmpw);
+   DestR:=Rect(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,xx+(cfgplot.starshapew+1)*starbmpw,yy+(cfgplot.starshapew+1)*starbmpw);
+   copymode:=cmSrcPaint;
+   CopyRect(DestR,starbmp.canvas,SrcR);
 end;
 end;
 
@@ -427,7 +422,7 @@ with cnv do begin
      end;
      end;
      if ma<-5 then ma:=-5;
-     ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
+     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen);
      ds2:= round(ds/2);
      Brush.Color := co ;
      Brush.style:=bsSolid;
@@ -446,10 +441,8 @@ end;
 Procedure TSplot.PlotStar2(x,y: single; ma,b_v : Double);
 type
   TPos=single;
-  TColorArray = array[0..32767] of Longword;
-  PColorArray = ^TColorArray;
-var LineWidth,AAWidth,Lum,R,G,B  : TPos;
 var
+  LineWidth,AAWidth,Lum,R,G,B  : TPos;
   Alpha, UseContrast, Distance,
   OutLevelR, OutLevelG, OutLevelB : TPos;
   DX, DY : TPos; // Distance elements
@@ -457,13 +450,14 @@ var
   MinX, MinY, MaxX, MaxY, bmWidth : integer;
   ExistingPixelRed, ExistingPixelGreen, ExistingPixelBlue,
   NewPixelR, NewPixelG, NewPixelB : integer;
-  P : PColorArray;
-  Icol,Contrast : Integer;
-  co,px : Tcolor;
+  Icol : Integer;
+  co : Tcolor;
+  col: TFPColor;
 const
   PointAlpha : single = 0.2;  // Transparency at Solid;
 
 begin
+  if not IntfImgReady then exit;
   LineWidth:=0;
   if ma<0 then ma:=ma/10;                               // avoid Moon and Sun be too big
   Lum := (1.1*cfgchart.min_ma-ma)/cfgchart.min_ma;      // logarithmic luminosity proportional to magnitude
@@ -501,12 +495,11 @@ begin
   MinY := round(Y - LineWidth - AAWidth - 0.5);
   MaxY := round(Y + LineWidth + AAWidth + 0.5);
 
-  with cbmp do begin
+  with IntfImg do begin
   bmWidth := Width;
 
   for YCount := MinY to MaxY do
   if (YCount>=0) and (YCount<(Height)) then begin
-    P := ScanLine[YCount];
     for XCount := MinX to MaxX do begin
       if (XCount>=0) and (XCount<bmWidth) then begin
         DX := XCount - X;
@@ -521,29 +514,32 @@ begin
             Alpha := PointAlpha - PointAlpha * Distance / (LineWidth+AAWidth+0.5)
         end;
 
-        ExistingPixelBlue  :=  P[XCount] and $FF;
-        ExistingPixelGreen :=  (P[XCount] div $100) and $FF;
-        ExistingPixelRed   :=  (P[XCount] div $10000) and $FF;
+        col:=Colors[XCount,YCount];
+        ExistingPixelBlue  :=  col.blue;
+        ExistingPixelGreen :=  col.green;
+        ExistingPixelRed   :=  col.red;
 
-        OutLevelR := (ExistingPixelRed)*(1-Alpha) +  ((Lum*R*(Alpha)*UseContrast) /256 );
+        OutLevelR := (ExistingPixelRed)*(1-Alpha) +  ((Lum*R*(Alpha)*UseContrast) );
         NewPixelR := trunc(OutLevelR);
-        if NewPixelR>255 then NewPixelR := 255;
+        if NewPixelR>65535 then NewPixelR := 65535;
 
-        OutLevelG := (ExistingPixelGreen)*(1-Alpha) +  ((Lum*G*(Alpha)*UseContrast) /256 );
+        OutLevelG := (ExistingPixelGreen)*(1-Alpha) +  ((Lum*G*(Alpha)*UseContrast) );
         NewPixelG := trunc(OutLevelG);
-        if NewPixelG>255 then NewPixelG := 255;
+        if NewPixelG>65535 then NewPixelG := 65535;
 
-        OutLevelB := (ExistingPixelBlue)*(1-Alpha) +  ((Lum*B*(Alpha)*UseContrast) /256 );
+        OutLevelB := (ExistingPixelBlue)*(1-Alpha) +  ((Lum*B*(Alpha)*UseContrast) );
         NewPixelB := trunc(OutLevelB);
-        if NewPixelB>255 then NewPixelB := 255;
+        if NewPixelB>65535 then NewPixelB := 65535;
 
-        P[XCount] := (NewPixelB + NewPixelG*$100 + NewPixelR*$10000);
+        col.red:=NewPixelR;
+        col.green:=NewPixelG;
+        col.blue:=NewPixelB;
+        Colors[XCount,YCount]:=col;
       end;
     end;
   end;
   end;
 end;
-
 
 Procedure TSplot.PlotStar(xx,yy: single; ma,b_v : Double);
 begin
@@ -551,11 +547,12 @@ begin
       case cfgplot.starplot of
       0 : PlotStar0(xx,yy,ma,b_v);
       1 : PlotStar1(xx,yy,ma,b_v);
-      2 : PlotStar2(xx,yy,ma,b_v);
+      2 : if IntfImgReady then PlotStar2(xx,yy,ma,b_v)
+             else PlotStar1(xx,yy,ma,b_v);
       end;
 end;
 
-Procedure TSplot.PlotVarStar(x,y: single; max,min : Double);
+Procedure TSplot.PlotVarStar(x,y: single; vmax,vmin : Double);
 var
   ds,ds2,dsm,xx,yy : Integer;
 begin
@@ -563,7 +560,7 @@ xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then begin
   with cnv do begin
-     ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-max*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen)-cfgchart.drawpen;
+     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmax*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen)-cfgchart.drawpen;
      ds2:= trunc(ds/2)+cfgchart.drawpen;
      Brush.Color := cfgplot.Color[0];
      Brush.style:=bsSolid;
@@ -587,7 +584,7 @@ if not cfgplot.Invisible then begin
        7: Ellipse(xx-3,yy-3,xx+4,yy+4);
        else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
      end;
-     dsm := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-min*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
+     dsm := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmin*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen);
      if (ds-dsm)<2*cfgchart.drawpen then ds:=ds-2*cfgchart.drawpen
                    else ds:=dsm;
      ds2 := trunc(ds/2);
@@ -615,13 +612,13 @@ xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then
  with cnv do begin
-   ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
+   ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen);
    ds2:= trunc(ds/2);
    Pen.Width := 1;
    Pen.Color := cfgplot.Color[15];
    Brush.style:=bsSolid;
    Pen.Mode:=pmCopy;
-   rd:=max(r,ds2 + cfgchart.drawpen*(2+2*(0.7+ln(minvalue([50,maxvalue([0.5,sep])])))));
+   rd:=max(r,ds2 + cfgchart.drawpen*(2+2*(0.7+ln(min(50,max(0.5,sep))))));
    MoveTo(xx-round(rd*sin(pa)),yy-round(rd*cos(pa)));
    LineTo(xx,yy);
 end;
@@ -694,9 +691,8 @@ end;
 
 Procedure TSplot.PlotGalaxie(x,y: single; r1,r2,pa,rnuc,b_vt,b_ve,ma,sbr,pixscale : double);
 var
-  x1,y1: Double;
   ds1,ds2,ds3,xx,yy : Integer;
-  ex,ey,th,rot : double;
+  ex,ey,th : double;
   n,ex1,ey1 : integer;
   elp : array [1..22] of Tpoint;
   co,nebcolor : Tcolor;
@@ -705,8 +701,8 @@ begin
 xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then begin
-  ds1:=round(maxvalue([pixscale*r1/2,cfgchart.drawpen]))+cfgchart.drawpen;
-  ds2:=round(maxvalue([pixscale*r2/2,cfgchart.drawpen]))+cfgchart.drawpen;
+  ds1:=round(max(pixscale*r1/2,cfgchart.drawpen))+cfgchart.drawpen;
+  ds2:=round(max(pixscale*r2/2,cfgchart.drawpen))+cfgchart.drawpen;
   ds3:=round(pixscale*rnuc/2);
   if b_vt>1000 then co:=cfgplot.Color[trunc(b_vt-1000)]
   else begin
@@ -818,7 +814,7 @@ yy:=round(y);
 with cnv do begin
    Pen.Width := cfgchart.drawpen;
    sz:=PixScale*dim/2;
-   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+   ds:=round(max(sz,2*cfgchart.drawpen));
    if sbr<=0 then begin
      if dim<=0 then dim:=1;
      sbr:= ma + 5*log10(dim) - 0.26;
@@ -925,7 +921,7 @@ yy:=round(y);
 with cnv do begin
    Pen.Width := cfgchart.drawpen;
    sz:=PixScale*dim/2;
-   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+   ds:=round(max(sz,2*cfgchart.drawpen));
    ds2:=round(ds*2/3);
    Pen.Color := cfgplot.Color[0];
    Pen.Mode:=pmCopy;
@@ -1029,13 +1025,14 @@ begin
       end;
 end;
 
-Procedure TSplot.PlotLine(x1,y1,x2,y2:single; color,width: integer);
+Procedure TSplot.PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
 begin
 with cnv do begin
-  if width=0 then Pen.width:=1
-     else Pen.width:=width*cfgchart.drawpen;
+  if lwidth=0 then Pen.width:=1
+     else Pen.width:=lwidth*cfgchart.drawpen;
   Pen.Mode:=pmCopy;
-  Pen.Color:=color;
+  Pen.Color:=lcolor;
+  Pen.Style:=style;
   if (abs(x1-cfgchart.hw)<cfgplot.outradius)and(abs(y1-cfgchart.hh)<cfgplot.outradius) and
      (abs(x2-cfgchart.hw)<cfgplot.outradius)and(abs(y2-cfgchart.hh)<cfgplot.outradius)
      then begin
@@ -1046,9 +1043,9 @@ end;
 end;
 
 procedure TSplot.PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
-                          // xx,yy      ,op,lw,fs,rec.options.ObjType,cfgsc.x2   ,col
-{TODO: tie this routine into plotting outline colours depending on object type.
+{ tie this routine into plotting outline colours depending on object type.
  ie, different colours if we are plotting milky way, refelction or emmission nebula outlines
+ ----> no, this must be done at the generation of the catalog by catgen.
 }
 var xx,yy:integer;
 procedure addpoint(x,y:integer);
@@ -1128,8 +1125,9 @@ if not cfgplot.Invisible then begin
 
 { This needs careful thought. Ideally, the outline line colour needs to be the
   same as the object type, eg SNRs, Barnards, and bright nebs.
-  TODO. Sort out what type of object is being plotted as MilkyWay will also be
+  Sort out what type of object is being plotted as MilkyWay will also be
   displayed in this colour
+  ????
 }
          cnv.Pen.Color:=outlinecol;
          cnv.Brush.Style:=bsSolid;
@@ -1170,17 +1168,10 @@ end;
 p[m-2]:=LC(pts[n-2],pts[n-1],1,1/3);
 p[m-1]:=LC(pts[n-1],pts[0],1,1/3);
 p[m]:=pts[n-1];
-{$ifdef linux}
-for m:=0 to n-1 do begin
-  cnv.PolyBezier(p,3*m);
-end;
-{$endif}
-{$ifdef mswindows}
-  cnv.PolyBezier(p);
-{$endif}
+cnv.PolyBezier(p);
 end;
 
-procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double);
+procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean);
 var b_v:double;
     ds,n,xx,yy : integer;
 begin
@@ -1193,9 +1184,7 @@ if not cfgplot.Invisible then begin
   if (n=2) and ((ds<5)or(ds>1500)) then n:=1;
   if (n=1) and (ds<5)  then n:=0;
   if ((not planetrender)and(not Xplanetrender)) and (n=2) then n:=1;
-  {$ifdef linux}
-     if (n=2)and(ipla=10) then n:=1;
-  {$endif}
+  if use_Xplanet and (n=2)and(ipla=10) then n:=1; // xplanet Sun is not usable
   case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=1020;
@@ -1208,12 +1197,12 @@ if not cfgplot.Invisible then begin
       2 : begin // image
           {$ifdef mswindows}
           if use_Xplanet then
-             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1)
+             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg)
           else   
-             PlotPlanet2(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,phase,pa+rad2deg*rot,poleincl,sunincl,w,r1);
+             PlotPlanet2(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,phase,pa+rad2deg*rot,poleincl,sunincl,w,r1,WhiteBg);
           {$endif}
-          {$ifdef linux}
-             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1);
+          {$ifdef unix}
+             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg);
           {$endif}
           end;
       3 : begin // symbol
@@ -1227,7 +1216,7 @@ procedure TSplot.PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
 var ds,ico : integer;
 begin
 with cnv do begin
- ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
+ ds:=round(max(diam*pixscale/2,2*cfgchart.drawpen));
  if cfgplot.Color[11]>cfgplot.BgColor then begin
  case Ipla of
   1: begin ico := 4; end;
@@ -1246,8 +1235,7 @@ with cnv do begin
  Brush.Color := cfgplot.Color[ico+1] ;
  end
  else Brush.Color := cfgplot.BgColor ;
- if cfgplot.PlanetTransparent then Brush.style:=bsclear
-                              else Brush.style:=bssolid;
+ Brush.style:=bssolid;
  Pen.Width := cfgchart.drawpen;
  Pen.Color := cfgplot.Color[11];
  Pen.Mode:=pmCopy;
@@ -1259,202 +1247,121 @@ with cnv do begin
 end;
 end;
 
-Procedure TSplot.PlotImage(x,y: single; Width,Height,Rotation : double; flipx, flipy :integer; WhiteBg, Transparent : boolean; bmp:Tbitmap);
-var dsx,dsy,xx,yy : single;
-    DestR,SrcR :Trect;
+Procedure TSplot.PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean; var ibmp:TBitmap);
+var dsx,dsy,zoom : single;
+    DestX,DestY :integer;
+    SrcR: TRect;
+    memstream: TMemoryStream;
+    imabmp:Tbitmap;
+    rbmp: Tbitmap;
 begin
-if not transparent then BitmapNotZero(bmp);
-BitmapRotation(bmp,imabmp,Rotation,WhiteBg);
-//BitmapRotMask(imamask,imabmp,bmp,Rotation);
-BitmapBlackMask(imamask,imabmp);
-if (Width<=cfgchart.Width)and(Height<=cfgchart.Height) then begin
+zoom:=iWidth/ibmp.Width;
+imabmp:=Tbitmap.Create;
+rbmp:=Tbitmap.Create;
+memstream := TMemoryStream.create;
+try
+if (iWidth<=cfgchart.Width)and(iHeight<=cfgchart.Height) then begin
    // image smaller than chart, write in full
-   xx:=x;
-   yy:=y;
-   dsx:=(imabmp.Width/bmp.Width)*Width/2;
-   dsy:=(imabmp.Height/bmp.Height)*Height/2;
-   DestR:=Rect(round(xx-flipx*dsx),round(yy-flipy*dsy),round(xx+flipx*dsx),round(yy+flipy*dsy));
-   cnv.copymode:=cmSrcAnd;
-   cnv.StretchDraw(DestR,imamask);
-   cnv.copymode:=cmSrcPaint;
-   cnv.StretchDraw(DestR,imabmp);
+   if zoom>1 then begin
+      BitmapRotation(ibmp,rbmp,Rotation,WhiteBg);
+      dsx:=(rbmp.Width/ibmp.Width)*iWidth/2;
+      dsy:=(rbmp.Height/ibmp.Height)*iHeight/2;
+      BitmapResize(rbmp,imabmp,zoom);
+   end else begin
+      BitmapResize(ibmp,rbmp,zoom);
+      BitmapRotation(rbmp,imabmp,Rotation,WhiteBg);
+      dsx:=(imabmp.Width/rbmp.Width)*iWidth/2;
+      dsy:=(imabmp.Height/rbmp.Height)*iHeight/2;
+   end;
+   DestX:=round(xx-dsx);
+   DestY:=round(yy-dsy);
+   BitmapFlip(imabmp,(flipx<0),(flipy<0));
+   imabmp.SaveToStream(memstream);
+   memstream.position := 0;
+   imabmp.LoadFromStream(memstream);
+   imabmp.Transparent:=iTransparent;
+   imabmp.TransparentColor:=clBlack;
+   cnv.Draw(DestX,DestY,imabmp);
 end else begin
    // only a part of the image is displayed
-   xx:=(imabmp.Width/2)+flipx*((cfgchart.Width/2)-x)*bmp.Width/Width;
-   yy:=(imabmp.Height/2)+flipy*((cfgchart.Height/2)-y)*bmp.height/Height;
-   dsx:=(bmp.Width*cfgchart.Width/Width)/2;
+   BitmapRotation(ibmp,rbmp,Rotation,WhiteBg);
+   BitmapFlip(rbmp,(flipx<0),(flipy<0));
+   xx:=(rbmp.Width/2)+((cfgchart.Width/2)-xx)*ibmp.Width/iWidth;
+   yy:=(rbmp.Height/2)+((cfgchart.Height/2)-yy)*ibmp.height/iHeight;
+   dsx:=(ibmp.Width*cfgchart.Width/iWidth)/2;
    dsy:=dsx*cfgchart.height/cfgchart.width;
    SrcR:=Rect(round(xx-dsx),round(yy-dsy),round(xx+dsx),round(yy+dsy));
-   if (flipx>0)and(flipy>0) then DestR:=Rect(0,0,cfgchart.Width,cfgchart.Height)
-     else if (flipx<0)and(flipy<0) then DestR:=Rect(cfgchart.Width,cfgchart.Height,0,0)
-     else if flipx<0 then DestR:=Rect(cfgchart.Width,0,0,cfgchart.Height)
-     else if flipy<0 then DestR:=Rect(0,cfgchart.Height,cfgchart.Width,0);
-   imacopy.canvas.copymode:=cmSrcCopy;
-   imacopy.Width:=round(2*dsx);
-   imacopy.Height:=round(2*dsy);
+   imabmp.Width:=round(2*dsx);
+   imabmp.Height:=round(2*dsy);
    if WhiteBg then begin
-     imacopy.Canvas.Brush.Color:=clBlack;
-     imacopy.Canvas.Pen.Color:=clBlack;
+     imabmp.Canvas.Brush.Color:=clWhite;
+     imabmp.Canvas.Pen.Color:=clWhite;
    end else begin
-     imacopy.Canvas.Brush.Color:=clWhite;
-     imacopy.Canvas.Pen.Color:=clWhite;
+     imabmp.Canvas.Brush.Color:=clBlack;
+     imabmp.Canvas.Pen.Color:=clBlack;
    end;
-   imacopy.Canvas.Rectangle(0,0,imacopy.Width,imacopy.Height);
-   imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imamask.Canvas,SrcR);
-   cnv.copymode:=cmSrcAnd;
-   cnv.StretchDraw(DestR,imacopy);
-   cnv.copymode:=cmSrcPaint;
-   if WhiteBg then begin
-     imacopy.Canvas.Brush.Color:=clWhite;
-     imacopy.Canvas.Pen.Color:=clWhite;
-   end else begin
-     imacopy.Canvas.Brush.Color:=clBlack;
-     imacopy.Canvas.Pen.Color:=clBlack;
-   end;
-   imacopy.Canvas.Rectangle(0,0,imacopy.Width,imacopy.Height);
-   imacopy.canvas.CopyRect(Rect(0,0,imacopy.Width,imacopy.Height),imabmp.Canvas,SrcR);
-   cnv.StretchDraw(DestR,imacopy);
+   imabmp.Canvas.Rectangle(0,0,imabmp.Width,imabmp.Height);
+   imabmp.canvas.CopyRect(Rect(0,0,imabmp.Width,imabmp.Height),rbmp.Canvas,SrcR);
+   BitmapResize(imabmp,rbmp,zoom);
+   rbmp.SaveToStream(memstream);
+   memstream.position := 0;
+   rbmp.LoadFromStream(memstream);
+   rbmp.Transparent:=iTransparent;
+   rbmp.TransparentColor:=clBlack;
+   cnv.Draw(0,0,rbmp);
+end;
+finally
+  memstream.Free;
+  imabmp.Free;
+  rbmp.Free;
 end;
 end;
 
-procedure TSplot.PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double);
-var ds,i : integer;
-    DestR :Trect;
+procedure TSplot.PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double;WhiteBg:boolean);
+var ds : integer;
+    fn: shortstring;
 const planetsize=450;
       moonsize=1000;
 begin
-if ipla=6 then ds:=round(maxvalue([2.2261*diam*pixscale/2,2*cfgchart.drawpen]))
-          else ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
+fn:=slash(Tempdir)+'planet.bmp';
+if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
+          else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
 if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
  case ipla of
-  1 :  RenderMercury(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  2 :  RenderVenus(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  4 :  RenderMars(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  5 :  RenderJupiter(w-gw,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  6 :  RenderSaturn(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  7 :  RenderUranus(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  8 :  RenderNeptune(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  9 :  RenderPluto(w,phase,pa,poleincl,sunincl,1,planetsize, planetbmp);
-  10 : RenderSun(w,pa,poleincl,1,planetsize, planetbmp);
-  11 : RenderMoon(w,phase,pa,poleincl,sunincl,1,moonsize, planetbmp);
+  1 :  RenderMercury(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
+  2 :  RenderVenus(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
+  4 :  RenderMars(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
+  5 :  RenderJupiter(w-gw,phase,pa,poleincl,sunincl,1,planetsize, fn);
+  6 :  RenderSaturn(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
+  7 :  RenderUranus(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
+  8 :  RenderNeptune(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
+  9 :  RenderPluto(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
+  10 : RenderSun(w,pa,poleincl,1,planetsize, fn);
+  11 : RenderMoon(w,phase,pa,poleincl,sunincl,1,moonsize, fn);
  end;
+ planetbmp.LoadFromFile(fn);
  planetbmppla:=ipla;
  planetbmpjd:=jdt;
  planetbmprot:=pa;
 end;
-DestR:=Rect(xx-flipx*ds,yy-flipy*ds,xx+flipx*ds,yy+flipy*ds);
-if not cfgplot.planetTransparent then begin
-  i:=planetbmp.Width;
-  planetbmpmask.Width:=i;
-  planetbmpmask.Height:=i;
-  planetbmpmask.canvas.brush.color:=clwhite;
-  planetbmpmask.canvas.brush.style:=bssolid;
-  planetbmpmask.canvas.pen.color:=clwhite;
-  planetbmpmask.canvas.pen.width:=1;
-  planetbmpmask.canvas.rectangle(0,0,i,i);
-  planetbmpmask.canvas.pen.color:=clblack;
-  planetbmpmask.canvas.brush.color:=clblack;
-  case ipla of
-    5  : planetbmpmask.canvas.ellipse(0,round(i*0.0289),i,round(i*0.9689));
-    6  : planetbmpmask.canvas.ellipse(round(i*0.2756),round(i*0.2978),round(i*0.7244),round(i*0.7));
-    7  : planetbmpmask.canvas.ellipse(0,round(i*0.0133),i,round(i*0.9867));
-    8  : planetbmpmask.canvas.ellipse(0,round(i*0.0133),i,round(i*0.9867));
-    else planetbmpmask.canvas.ellipse(0,0,i,i);
-  end;
-  cnv.copymode:=cmSrcAnd;
-  cnv.StretchDraw(DestR,planetbmpmask);
-end;
-cnv.copymode:=cmSrcPaint;
-cnv.StretchDraw(DestR,planetbmp);
+PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp);
 end;
 
-(* procedure TSplot.MapGRSlongitude(GRSlongitude: double); //  No more necessary with Xplanet 1.2.0 !
-var jup: TPicture;
-    jup0: TPicture;
-   {$ifdef mswindows}
-      jupjpg: TJpegImage;
-   {$endif}
-    x0,i: integer;
-    fn: WideString;
-    f: textfile;
-    longfn,buf:string;
-begin
-longfn:=slash(tempdir)+'jupiter0.long';
-if  (OldGRSlong=-9999) and fileexists(longfn) then begin
-   {$I-}
-   assignfile(f,longfn);
-   reset(f);
-   readln(f,buf);
-   closefile(f);
-   {$I+}
-   val(buf,OldGRSlong,i);
-end;
-if abs(GRSlongitude-OldGRSlong)>1 then begin
-   jup:=TPicture.Create;
-   jup0:=TPicture.Create;
-   {$ifdef mswindows}
-      jupjpg:=TJpegImage.Create;
-   {$endif}
-   try
-   {$ifdef mswindows}
-      jupjpg.loadfromfile(slash(appdir)+slash('data')+slash('planet')+'jupiter.jpg');
-      jup.Bitmap.Assign(jupjpg);
-   {$endif}
-   {$ifdef linux}
-      jup.loadfromfile(slash(appdir)+slash('data')+slash('planet')+'jupiter.jpg');
-   {$endif}
-   x0:=round((jup.width/2)+(jup.width/360)*(180-GRSlongitude));
-   fn:=slash(tempdir)+'jupiter0.jpg';
-   jup0.bitmap.width:=jup.width;
-   jup0.bitmap.height:=jup.height;
-   jup0.bitmap.canvas.copyrect(rect(0,0,jup.width-x0,jup.height),jup.bitmap.canvas,rect(x0,0,jup.width,jup.height));
-   jup0.bitmap.canvas.copyrect(rect(jup.width-x0,0,jup.width,jup.height),jup.bitmap.canvas,rect(0,0,x0,jup.height));
-   {$ifdef linux}
-      QPixMap_save(jup0.Bitmap.Handle,@fn,PChar('JPEG'),30);
-   {$endif}
-   {$ifdef mswindows}
-      jupjpg.Assign(jup0.Bitmap);
-      jupjpg.CompressionQuality:=30;
-      jupjpg.SaveToFile(fn);
-   {$endif}
-   OldGRSlong:=GRSlongitude;
-   assignfile(f,longfn);
-   buf:=formatfloat(f1,GRSlongitude);
-   rewrite(f);
-   writeln(f,buf);
-   closefile(f);
-   finally
-   jup.free;
-   jup0.free;
-   {$ifdef mswindows}
-      jupjpg.free;
-   {$endif}
-   end;
-end;
-end; *)
-
-procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double);
-var ds,i : integer;
+procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
+var ds : integer;
     cmd, searchdir: string;
-    DestR :Trect;
 const planetsize=450;
       moonsize=1000;
 begin
-if ipla=6 then ds:=round(maxvalue([2.2261*diam*pixscale/2,2*cfgchart.drawpen]))
-          else ds:=round(maxvalue([diam*pixscale/2,2*cfgchart.drawpen]));
+if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
+          else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
 if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
-{ if ipla=5 then begin
-    MapGRSlongitude(gw);     //  No more necessary with Xplanet 1.2.0 !
-    searchdir:='"'+tempdir+'"';
-    if not fileexists(slash(tempdir)+'xplanet.config') then
-       exec('cp '+'"'+slash(appdir)+slash('data')+slash('planet')+'xplanet.config" '+'"'+slash(tempdir)+'xplanet.config"');
- end
- else}
  searchdir:='"'+slash(appdir)+slash('data')+'planet"';
- {$ifdef linux}
+ {$ifdef unix}
     cmd:='xplanet';
  {$endif}
  {$ifdef mswindows}
+    if not DirectoryExists(xplanet_dir) then exit;
     chdir(xplanet_dir);
     cmd:='xplanet.exe';
  {$endif}
@@ -1465,59 +1372,30 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
       ' -searchdir '+searchdir+
       ' -config xplanet.config -verbosity -1'+
       ' -radius 50'+
-      ' -geometry 450x450 -output "'+slash(Tempdir)+'planet.jpg'+'"';
+      ' -geometry 450x450 -output "'+slash(Tempdir)+'planet.png'+'"';
  if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,gw);
  exec(cmd);
- xplanetimg.LoadFromFile(slash(Tempdir)+'planet.jpg');
- {$ifdef linux}
-    planetbmp.Assign(xplanetimg);
- {$endif}
- {$ifdef mswindows}
-    chdir(appdir);
-    planetbmp.Canvas.Draw(0,0,xplanetimg.Graphic);
- {$endif}
+ xplanetimg.LoadFromFile(slash(Tempdir)+'planet.png');
+ chdir(appdir);
+ planetbmp.Assign(xplanetimg);
  planetbmppla:=ipla;
  planetbmpjd:=jdt;
  planetbmprot:=pa;
 end;
-DestR:=Rect(xx-flipx*ds,yy-flipy*ds,xx+flipx*ds,yy+flipy*ds);
-if not cfgplot.planetTransparent then begin
-  i:=planetbmp.Width;
-  planetbmpmask.Width:=i;
-  planetbmpmask.Height:=i;
-  planetbmpmask.canvas.brush.color:=clwhite;
-  planetbmpmask.canvas.brush.style:=bssolid;
-  planetbmpmask.canvas.pen.color:=clwhite;
-  planetbmpmask.canvas.pen.width:=1;
-  planetbmpmask.canvas.rectangle(0,0,i,i);
-  planetbmpmask.canvas.pen.color:=clblack;
-  planetbmpmask.canvas.brush.color:=clblack;
-  case ipla of
-    5  : planetbmpmask.canvas.ellipse(0,round(i*0.0289),i,round(i*0.9689));
-    6  : planetbmpmask.canvas.ellipse(round(i*0.2756),round(i*0.2978),round(i*0.7244),round(i*0.7));
-    7  : planetbmpmask.canvas.ellipse(0,round(i*0.0133),i,round(i*0.9867));
-    8  : planetbmpmask.canvas.ellipse(0,round(i*0.0133),i,round(i*0.9867));
-    else planetbmpmask.canvas.ellipse(0,0,i,i);
-  end;
-  cnv.copymode:=cmSrcAnd;
-  cnv.StretchDraw(DestR,planetbmpmask);
-end;
-cnv.copymode:=cmSrcPaint;
-cnv.StretchDraw(DestR,planetbmp);
+PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp);
 end;
 
 procedure TSplot.PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
 var
-   ds1,ds2,xx,yy,xm,ym,i,j : Integer;
+   ds1,ds2,xx,yy,xm,ym : Integer;
    mbmp,mask:tbitmap;
-   P,M: Pbytearray;
 begin
 xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then
 with cnv do begin
- ds1:=round(maxvalue([r1*pixscale/2,2*cfgchart.drawpen]));
- ds2:=round(maxvalue([r2*pixscale/2,2*cfgchart.drawpen]));
+ ds1:=round(max(r1*pixscale/2,2*cfgchart.drawpen));
+ ds2:=round(max(r2*pixscale/2,2*cfgchart.drawpen));
  if ((xx+ds2)>0) and ((xx-ds2)<cfgchart.Width) and ((yy+ds2)>0) and ((yy-ds2)<cfgchart.Height) then begin
   case  cfgplot.nebplot of
    0: begin
@@ -1531,56 +1409,29 @@ with cnv do begin
    1: begin
       mbmp:=Tbitmap.Create;
       mask:=Tbitmap.Create;
-      mask.PixelFormat:=pf32bit;
-      mbmp.PixelFormat:=pf32bit;
       mbmp.Width:=2*ds2;
       mbmp.Height:=mbmp.Width;
-      mask.Width:=mbmp.Width;
-      mask.Height:=mbmp.Height;
-      xm:=ds2;
-      ym:=ds2;
-      // mask=shadow to substract from the moon
-      mask.Canvas.Pen.Color:=clBlack;
-      mask.Canvas.Brush.Color:=clBlack;
-      mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
-      mask.Canvas.Pen.Color:=$080800;
-      mask.Canvas.Brush.Color:=$080800;
-      mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
-      mask.Canvas.Pen.Color:=$101000;
-      mask.Canvas.Brush.Color:=$101000;
-      mask.Canvas.Ellipse(xm-ds1,ym-ds1,xm+ds1,ym+ds1);
       // get source bitmap from the chart
       mbmp.Canvas.CopyRect(rect(0,0,mbmp.Width,mbmp.Height),cnv,rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2));
-      mask.PixelFormat:=pf32bit;
-      mbmp.PixelFormat:=pf32bit;
+      // mask=shadow to substract from the moon
+      xm:=ds2;
+      ym:=ds2;
+      mask.Width:=mbmp.Width;
+      mask.Height:=mbmp.Height;
+      mask.Canvas.Pen.Color:=clBlack;
+      mask.Canvas.Brush.Color:=clBlack;
+      mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
+      mask.Canvas.Pen.Color:=$202000;
+      mask.Canvas.Brush.Color:=$202000;
+      mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
+      mask.Canvas.Pen.Color:=$808000;
+      mask.Canvas.Brush.Color:=$808000;
+      mask.Canvas.Ellipse(xm-ds1,ym-ds1,xm+ds1,ym+ds1);
       // substract the shadow
-      for i:= 0 to mbmp.Height-1 do begin
-         P:=mbmp.ScanLine[i];
-         M:=mask.ScanLine[i];
-         for j:=0 to 4*(mbmp.Width-1) do begin
-            P[j]:=max(0,round((P[j]-M[j])));
-         end;
-      end;
-      // mask to erase anything outside the shadow
-      mask.Canvas.Pen.Color:=clBlack;
-      mask.Canvas.Brush.Color:=clBlack;
-      mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
-      mask.Canvas.Pen.Color:=clWhite;
-      mask.Canvas.Brush.Color:=clWhite;
-      mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
-      mbmp.Canvas.copymode:=cmSrcAnd;
-      mbmp.Canvas.copyrect(rect(xm-ds2,ym-ds2,xm+ds2,ym+ds2),mask.Canvas,rect(0,0,mbmp.Width,mbmp.Height));
-      // mask to clear the destination
-      mask.Canvas.Pen.Color:=clWhite;
-      mask.Canvas.Brush.Color:=clWhite;
-      mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
-      mask.Canvas.Pen.Color:=clBlack;
-      mask.Canvas.Brush.Color:=clBlack;
-      mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
-      copymode:=cmSrcAnd;
-      copyrect(rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2),mask.Canvas,rect(0,0,mbmp.Width,mbmp.Height));
+      BitmapSubstract(mbmp,mask);
       // finally copy back the image
-      copymode:=cmSrcPaint;
+      mbmp.Transparent:=false;
+      copymode:=cmSrcCopy;
       copyrect(rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2),mbmp.Canvas,rect(0,0,mbmp.Width,mbmp.Height));
       mbmp.Free;
       mask.Free;
@@ -1604,7 +1455,7 @@ if not (hidesat xor showhide) then
         Brush.style:=bsSolid;
         Pen.Mode := pmCopy;
         brush.color:=cfgplot.Color[11];
-        ds := round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen);
+        ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen);
         ds2:=round(diam*pixscale);
         if ds2>ds then begin
            ds:=ds2;
@@ -1635,8 +1486,8 @@ const fr : array [1..5] of double = (1,0.8801,0.8599,0.6650,0.5486);
 begin
 with cnv do begin
   pa:=deg2rad*pa+rot-pid2;
-  ds1:=round(maxvalue([pixscale*r1/2,cfgchart.drawpen]))+cfgchart.drawpen;
-  ds2:=round(maxvalue([pixscale*r2/2,cfgchart.drawpen]))+cfgchart.drawpen;
+  ds1:=round(max(pixscale*r1/2,cfgchart.drawpen))+cfgchart.drawpen;
+  ds2:=round(max(pixscale*r2/2,cfgchart.drawpen))+cfgchart.drawpen;
   R:=round(diam*pixscale/2);
   Pen.Width := cfgchart.drawpen;
   Brush.Color := cfgplot.Color[0];
@@ -1738,7 +1589,7 @@ with cnv do begin
       end;
    1: begin
         r:=sqrt(dx*dx+dy*dy);
-        r:=maxvalue([r,12*cfgchart.drawpen]);
+        r:=max(r,12*cfgchart.drawpen);
         a:=arctan2(dy,dx);
         if ma<5 then k:=1
         else if ma>18 then k:=0.5
@@ -1748,7 +1599,7 @@ with cnv do begin
         cb:=round(k*((cfgplot.Color[21] shr 16) and $FF));
         pen.Mode:=pmCopy;
         brush.Style:=bsSolid;
-        ds:=round(maxvalue([PixScale*diam/2,2*cfgchart.drawpen]));
+        ds:=round(max(PixScale*diam/2,2*cfgchart.drawpen));
         for i:=19 downto 0 do begin
           co:=max(0,255-i*10);
           Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
@@ -1794,9 +1645,9 @@ with cnv do begin
         PlotStar(xx,yy,ma,1021);
       end;
    2: begin
-        ds:=round(maxvalue([3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)])*cfgchart.drawpen/2);
+        ds:=round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen/2);
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-        ds:=round(maxvalue([PixScale*diam/2,2*cfgchart.drawpen]));
+        ds:=round(max(PixScale*diam/2,2*cfgchart.drawpen));
         Brush.style:=bsClear;
         Pen.Color := cfgplot.Color[21];
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
@@ -1805,7 +1656,7 @@ with cnv do begin
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
         Brush.style:=bsSolid;
         r:=sqrt(dx*dx+dy*dy);
-        r:=maxvalue([r,12*cfgchart.drawpen]);
+        r:=max(r,12*cfgchart.drawpen);
         a:=arctan2(dy,dx);
         cxx:=xx+round(r*cos(a));
         cyy:=yy+round(r*sin(a));
@@ -1834,15 +1685,14 @@ if (cfgchart.onprinter or forcetextlabel) then begin
 with cnv do begin
   Brush.Style:=bsClear;
   Pen.Mode:=pmCopy;
-  {$ifdef linux} Font.CharSet:=fcsAnyCharSet; {$endif}
-  {$ifdef mswindows} Font.CharSet:=DEFAULT_CHARSET; {$endif}
+  Font.CharSet:=DEFAULT_CHARSET;
   Font.Name:=cfgplot.FontName[fontnum];
   if WhiteBg then Font.Color:=clBlack
      else Font.Color:=cfgplot.LabelColor[labelnum];
   Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
-  ts:=cnv.TextExtent(txt);
+  ts:=TextExtent(txt);
   if r>=0 then begin
   case Xalign of
    laLeft   : xx:=xx+labspacing*cfgchart.drawpen+r;
@@ -1863,8 +1713,9 @@ if i>maxlabels then begin
   exit;
 end;
 with labels[i] do begin
-  Color:=cfgplot.Color[0];
-  Transparent:=true;
+//  Color:=cfgplot.Color[0];
+//  Transparent:=true;
+  color:=clNone;
   Font.Name:=cfgplot.FontName[fontnum];
   Font.Color:=cfgplot.LabelColor[labelnum];
   if WhiteBg and (Font.Color=clWhite) then Font.Color:=clBlack;
@@ -1893,7 +1744,7 @@ end;
 result:=0;
 end;
 
-procedure TSplot.PlotText(xx,yy,fontnum,color:integer; Xalign,Yalign:TLabelAlign; txt:string);
+procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string);
 var ts:TSize;
 begin
 with cnv do begin
@@ -1933,7 +1784,12 @@ if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
 Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
 if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
-ls:=cnv.TextHeight('A');
+{$ifdef unix}
+ls:=round(1.5*cnv.TextHeight('1'));
+{$endif}
+{$ifdef mswindows}
+ls:=round(1.1*cnv.TextHeight('1'));
+{$endif}
 repeat
   p:=pos(crlf,txt);
   if p=0 then buf:=txt
@@ -2045,7 +1901,8 @@ end;
 procedure TSplot.labelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
 if editlabel>0 then begin
-  labels[editlabel].Transparent:=true;
+//  labels[editlabel].Transparent:=true;
+  labels[editlabel].color:=clNone;
   labels[editlabel].Cursor:=crDefault;
   if editlabelmod and assigned(FEditLabelPos) then FEditLabelPos(editlabel,labels[editlabel].left,labels[editlabel].top);
 end;
@@ -2067,7 +1924,8 @@ Procedure TSplot.Movelabel(Sender: TObject);
 begin
 mouse.CursorPos:=point(editlabelx,editlabely);
 editlabel:=selectedlabel;
-labels[editlabel].Transparent:=false;
+//labels[editlabel].Transparent:=false;
+labels[editlabel].Color:=cfgplot.Color[0];
 labels[editlabel].Cursor:=crSizeAll;
 end;
 
@@ -2091,7 +1949,7 @@ begin
 if assigned(FDeleteAllLabel) then FDeleteAllLabel(0);
 end;
 
-Procedure TSplot.PlotCircle(x1,y1,x2,y2:single;color: integer;moving:boolean);
+Procedure TSplot.PlotCircle(x1,y1,x2,y2:single;lcolor: integer;moving:boolean);
 begin
 with cnv do begin
   Pen.Width:=cfgchart.drawpen;
@@ -2099,15 +1957,17 @@ with cnv do begin
      Pen.Color:=clWhite;
      Pen.Mode:=pmXor;
   end else begin
-     Pen.Color:=color;
+     Pen.Color:=lcolor;
      Pen.Mode:=pmCopy;
   end;
   Brush.Style:=bsClear;
   Ellipse(round(x1),round(y1),round(x2),round(y2));
+  Pen.Mode:=pmCopy;
+  brush.Style:=bsSolid;
 end;
 end;
 
-Procedure TSplot.PlotPolyLine(p:array of Tpoint; color:integer; moving:boolean);
+Procedure TSplot.PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
 begin
 with cnv do begin
   Pen.Width:=cfgchart.drawpen;
@@ -2115,10 +1975,11 @@ with cnv do begin
      Pen.Color:=clWhite;
      Pen.Mode:=pmXor;
   end else begin
-     Pen.Color:=color;
+     Pen.Color:=lcolor;
      Pen.Mode:=pmCopy;
   end;
   Polyline(p);
+  Pen.Mode:=pmCopy;
 end;
 end;
 
@@ -2130,50 +1991,31 @@ const
   RotationIncrement = 10;
 
 var
-  x1,y1: Double;
-  ds1,ds2,ds3,xx,yy : Integer;
-  ex,ey,th,rot : double;
+  ds1,ds2,xx,yy : Integer;
+  ex,ey,th : double;
   n,ex1,ey1 : integer;
   elp : array [1..44] of Tpoint;
-  co,nebcolor : Tcolor;
+  nebcolor : Tcolor;
   col,r,g,b : byte;
-  EllipsePoints : Array[0..89] of TPoint;
-  Total_Tics, cnt : Integer;
-  phi : Double;
 
 begin
-{ todo: Change this routine to reduce the diameter by a config-set value,
+{  Change this routine to reduce the diameter by a config-set value,
         anywhere between 0.1 and 0.9.
         Typically, the catalog diameters are set at the mag 25 sq arc sec, and
         this leads to diameters wayyyyy too large for light polluted sites.
         eg. 0.6 works well for SE England.
+
+  ----> This is unfortunatelly not possible as this greatly depend on each object
+        Only solution is to use Arnuc but it is only available with old RC3 catalog
 }
   xx:=round(Ax);
   yy:=round(Ay);
-  ds1:=round(maxvalue([Apixscale*Ar1/2,cfgchart.drawpen]))+cfgchart.drawpen;
-  ds2:=round(maxvalue([Apixscale*Ar2/2,cfgchart.drawpen]))+cfgchart.drawpen;
-  ds3:=round(Apixscale*Arnuc/2);
-  if Ab_vt>1000 then
-    co:=cfgplot.Color[trunc(Ab_vt-1000)]
-  else
-    begin
-      case Round(Ab_vt*10) of
-             -999: co := $00000000 ;
-         -990..-3: co := cfgplot.Color[1];
-           -2..-1: co := cfgplot.Color[2];
-            0..2 : co := cfgplot.Color[3];
-            3..5 : co := cfgplot.Color[4];
-            6..8 : co := cfgplot.Color[5];
-            9..13: co := cfgplot.Color[6];
-          14..999: co := cfgplot.Color[7];
-            1000 : co := cfgplot.Color[8];
-          else co:=cfgplot.color[11]
-      end;
-      co:=cfgplot.DSOColorGxy;
+  ds1:=round(max(Apixscale*Ar1/2,cfgchart.drawpen))+cfgchart.drawpen;
+  ds2:=round(max(Apixscale*Ar2/2,cfgchart.drawpen))+cfgchart.drawpen;
       cnv.Pen.Width := cfgchart.drawpen;
       cnv.Brush.style:=bsSolid;
       cnv.Pen.Mode:=pmCopy;
-      cnv.Pen.Color:=cfgplot.DSOColorGxy;
+      cnv.Pen.Color:=cfgplot.Color[31];
 
       if cfgplot.nebplot = 0 then // line mode
         begin
@@ -2181,7 +2023,7 @@ begin
           if cfgplot.DSOColorFillGxy then
             begin
               cnv.Brush.Style := bsSolid;
-              cnv.Pen.Color := cfgplot.DSOColorGxy;
+              cnv.Pen.Color := cfgplot.Color[31];
               cnv.Brush.Color := cnv.Pen.Color;
             end;
         end;
@@ -2197,9 +2039,9 @@ begin
           col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,
                         trunc(cfgplot.Nebbright-((Asbr-11)/4)*
                              (cfgplot.Nebbright-cfgplot.Nebgray))])]);
-          r:=cfgplot.DSOColorGxy and $FF;
-          g:=(cfgplot.DSOColorGxy shr 8) and $FF;
-          b:=(cfgplot.DSOColorGxy shr 16) and $FF;
+          r:=cfgplot.Color[31] and $FF;
+          g:=(cfgplot.Color[31] shr 8) and $FF;
+          b:=(cfgplot.Color[31] shr 16) and $FF;
           Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
           cnv.Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
           cnv.Pen.Color := cnv.Brush.Color;
@@ -2218,43 +2060,6 @@ begin
         end;
       cnv.Polygon(elp);
 
-{      if Arnuc>0 then
-        begin
-//        different surface brightness and color for the nucleus, no more used with present catalog
-          case Round(Ab_ve*10) of
-               -999: co := $00000000 ;
-           -990..-3: co := cfgplot.Color[1];
-             -2..-1: co := cfgplot.Color[2];
-              0..2 : co := cfgplot.Color[3];
-              3..5 : co := cfgplot.Color[4];
-              6..8 : co := cfgplot.Color[5];
-              9..13: co := cfgplot.Color[6];
-            14..999: co := cfgplot.Color[7];
-            else co:=cfgplot.Color[11];
-          end;
-          case cfgplot.Nebplot of
-                0: begin
-                    cnv.Brush.Color := cfgplot.Color[0];
-                    if co=0 then
-                      cnv.Pen.Color := cfgplot.Color[11]
-                    else cnv.Pen.Color := co;
-                    cnv.Brush.Style := bsClear;
-                   end;
-                1: begin
-                    col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-1-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-                    r:=co and $FF;
-                    g:=(co shr 8) and $FF;
-                    b:=(co shr 16) and $FF;
-                    Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
-                    cnv.Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
-                    cnv.Pen.Color := cnv.Brush.Color;
-                    cnv.Brush.Style := bsSolid;
-                  end;
-          end;
-          cnv.Ellipse(xx-ds3,yy-ds3,xx+ds3,yy+ds3);
-        end;}
-    end;
-
 end;
 
 Procedure TSplot.PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
@@ -2263,7 +2068,7 @@ Procedure TSplot.PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; At
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
+  ds,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -2273,10 +2078,10 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode := pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Pen.Color := cfgplot.Color[24];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2289,9 +2094,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorOCl and $FF;
-      g:=(cfgplot.DSOColorOCl shr 8) and $FF;
-      b:=(cfgplot.DSOColorOCl shr 16) and $FF;
+      r:=cfgplot.Color[24] and $FF;
+      g:=(cfgplot.Color[24] shr 8) and $FF;
+      b:=(cfgplot.Color[24] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2301,12 +2106,11 @@ begin
   if cfgplot.nebplot = 0 then // line mode
 // line mode
     begin
-      ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillOCl then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorOCl;
+          cnv.Pen.Color := cfgplot.Color[24];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2332,12 +2136,14 @@ Procedure TSplot.PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; At
 {
   Plot planetary nebulae - currently these are shown as circular...
   todo: change so that we can plot non-circular ones
+  ---> nice but where to find the information ????
+  
   Also, use Skiff's formula in DS to calc the SBr. This is fairly close
   to the published OIII brightness.
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
+  ds,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -2347,10 +2153,10 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorPNe;
+  cnv.Pen.Color := cfgplot.Color[26];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2362,9 +2168,9 @@ begin
           Asbr:= Ama + 5*log10(Adim) - 0.26;
         end;
 //    adjust colour by using Asbr and UI options
-      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);      r:=cfgplot.DSOColorPNe and $FF;
-      g:=(cfgplot.DSOColorPNe shr 8) and $FF;
-      b:=(cfgplot.DSOColorPNe shr 16) and $FF;
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);      r:=cfgplot.Color[26] and $FF;
+      g:=(cfgplot.Color[26] shr 8) and $FF;
+      b:=(cfgplot.Color[26] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2373,12 +2179,11 @@ begin
 
   if cfgplot.nebplot = 0 then // line mode
     begin
-      ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillPNe then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorPNe;
+          cnv.Pen.Color := cfgplot.Color[26];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2418,10 +2223,10 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorGCl;
+  cnv.Pen.Color := cfgplot.Color[25];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2434,9 +2239,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorGCl and $FF;
-      g:=(cfgplot.DSOColorGCl shr 8) and $FF;
-      b:=(cfgplot.DSOColorGCl shr 16) and $FF;
+      r:=cfgplot.Color[25] and $FF;
+      g:=(cfgplot.Color[25] shr 8) and $FF;
+      b:=(cfgplot.Color[25] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2457,7 +2262,7 @@ begin
       if cfgplot.DSOColorFillGCl then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorGCl;
+          cnv.Pen.Color := cfgplot.Color[25];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2489,7 +2294,7 @@ Procedure TSplot.PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Aty
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
+  ds,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
   ObjMorph:string;
@@ -2500,14 +2305,14 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
 // emission of reflection nebula?
   ObjMorph:=LeftStr(Amorph, 1);
   if ObjMorph = 'R'
-  then cnv.Pen.Color := cfgplot.DSOColorRN
-  else cnv.Pen.Color := cfgplot.DSOColorEN;
+  then cnv.Pen.Color := cfgplot.Color[29]
+  else cnv.Pen.Color := cfgplot.Color[28];
 
   cnv.Brush.Style := bsClear;
 
@@ -2529,17 +2334,11 @@ begin
       cnv.Brush.Style := bsSolid;
       cnv.Brush.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Pen.Color := cnv.Brush.Color;
-      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
-      {$endif}
-      {$ifdef linux}
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
-      {$endif}
     end;
 
   if cfgplot.nebplot = 0 then // line mode
     begin
-      ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
       cnv.Brush.Style := bsClear;
       cnv.Pen.Style := psSolid;
@@ -2563,16 +2362,7 @@ begin
           end;
 
 //    and draw it... we're using an rectangle in the event that we don't have an outline
-      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
-      {$endif}
-      {$ifdef linux}
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
-      {$endif}
-//      cnv.MoveTo(xx-ds,yy);
-//      cnv.LineTo(xx+ds,yy);
-//      cnv.MoveTo(xx,yy-ds);
-//      cnv.LineTo(xx,yy+ds);
     end;
 
 // reset brush and pen back to default ready for next object
@@ -2586,7 +2376,7 @@ Procedure TSplot.PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; A
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
+  ds,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -2596,11 +2386,11 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
 //  ds:=3*cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorRN;
+  cnv.Pen.Color := cfgplot.Color[29];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2613,29 +2403,23 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorRN and $FF;
-      g:=(cfgplot.DSOColorRN shr 8) and $FF;
-      b:=(cfgplot.DSOColorRN shr 16) and $FF;
+      r:=cfgplot.Color[29] and $FF;
+      g:=(cfgplot.Color[29] shr 8) and $FF;
+      b:=(cfgplot.Color[29] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Brush.Color := cnv.Pen.Color;
-      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
-      {$endif}
-      {$ifdef linux}
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
-      {$endif}
     end;
 
   if cfgplot.nebplot = 0 then // line mode
     begin
-      ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillRN then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorRN;
+          cnv.Pen.Color := cfgplot.Color[29];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2645,14 +2429,9 @@ begin
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
 //    Ideally all extended nebulae should have an outline.
-      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
-      {$endif}
-      {$ifdef linux}
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
-      {$endif}
       cnv.MoveTo(xx-ds,yy);
-      cnv.Pen.Color := cfgplot.DSOColorOCl;
+      cnv.Pen.Color := cfgplot.Color[24];
       cnv.LineTo(xx+ds,yy);
       cnv.MoveTo(xx,yy-ds);
       cnv.LineTo(xx,yy+ds);
@@ -2669,9 +2448,7 @@ Procedure TSplot.PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; A
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
-  col,r,g,b : byte;
-  nebcolor : Tcolor;
+  ds,xx,yy : Integer;
 begin
 // set defaults
   xx:=round(Ax);
@@ -2680,10 +2457,10 @@ begin
   Adim:=0.5;
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
+  ds:=round(max(sz,4*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Pen.Color := cfgplot.Color[24];
 
 // Plotted as an '+', so there's no difference between line and graphics mode
 // we use the same colour as for open clusters
@@ -2707,9 +2484,7 @@ Procedure TSplot.PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; 
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
-  col,r,g,b : byte;
-  nebcolor : Tcolor;
+  ds,xx,yy : Integer;
 begin
 // set defaults
   xx:=round(Ax);
@@ -2718,10 +2493,10 @@ begin
   Adim:=0.5;
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
+  ds:=round(max(sz,4*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Pen.Color := cfgplot.Color[24];
 
 // Plotted as a '+', so there's no difference between line and graphics mode
 // we use the same colour as for open clusters
@@ -2742,9 +2517,7 @@ Procedure TSplot.PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; 
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
-  col,r,g,b : byte;
-  nebcolor : Tcolor;
+  ds,xx,yy : Integer;
 begin
 // set defaults
   xx:=round(Ax);
@@ -2753,10 +2526,10 @@ begin
   Adim:=0.5;
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
+  ds:=round(max(sz,4*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Pen.Color := cfgplot.Color[24];
 
 // Plotted as a '+', so there's no difference between line and graphics mode
 // we use the same colour as for open clusters
@@ -2778,7 +2551,7 @@ Procedure TSplot.PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; At
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
+  ds,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -2788,10 +2561,10 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorAst;
+  cnv.Pen.Color := cfgplot.Color[23];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2804,9 +2577,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorAst and $FF;
-      g:=(cfgplot.DSOColorAst shr 8) and $FF;
-      b:=(cfgplot.DSOColorAst shr 16) and $FF;
+      r:=cfgplot.Color[23] and $FF;
+      g:=(cfgplot.Color[23] shr 8) and $FF;
+      b:=(cfgplot.Color[23] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2816,12 +2589,11 @@ begin
   if cfgplot.nebplot = 0 then // line mode
 // line mode
     begin
-      ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillAst then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorAst;
+          cnv.Pen.Color := cfgplot.Color[23];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2847,7 +2619,7 @@ Procedure TSplot.PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Doubl
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
+  ds,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -2857,10 +2629,10 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorEN;
+  cnv.Pen.Color := cfgplot.Color[28];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2873,29 +2645,23 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorEN and $FF;
-      g:=(cfgplot.DSOColorEN shr 8) and $FF;
-      b:=(cfgplot.DSOColorEN shr 16) and $FF;
+      r:=cfgplot.Color[28] and $FF;
+      g:=(cfgplot.Color[28] shr 8) and $FF;
+      b:=(cfgplot.Color[28] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Brush.Color := cnv.Pen.Color;
-      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
-      {$endif}
-      {$ifdef linux}
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
-      {$endif}
     end;
 
   if cfgplot.nebplot = 0 then // line mode
     begin
-      ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillEN then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorEN;
+          cnv.Pen.Color := cfgplot.Color[28];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2904,12 +2670,7 @@ begin
           cnv.Pen.Style := psSolid;
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
-      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
-      {$endif}
-      {$ifdef linux}
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
-      {$endif}
       cnv.MoveTo(xx-ds,yy);
       cnv.LineTo(xx+ds,yy);
       cnv.MoveTo(xx,yy-ds);
@@ -2929,9 +2690,7 @@ Procedure TSplot.PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; 
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
-  col,r,g,b : byte;
-  nebcolor : Tcolor;
+  ds,xx,yy : Integer;
 begin
 // set defaults
   xx:=round(Ax);
@@ -2939,16 +2698,15 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psDot;
-  cnv.Pen.Color := cfgplot.DSOColorGxyCl;
+  cnv.Pen.Color := cfgplot.Color[32];
   cnv.Brush.Style := bsClear;
 
 { Plotted as an open dashed circle, so there's no difference between line and
   graphics mode
 }
-  ds2:=round(ds*2/3);
   ds:=ds+cfgchart.drawpen;
   cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
 
@@ -2963,7 +2721,7 @@ Procedure TSplot.PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Aty
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
+  ds,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -2973,10 +2731,10 @@ begin
 
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
+  ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorDN;
+  cnv.Pen.Color := cfgplot.Color[27];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2989,29 +2747,23 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-(0.8)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorDN and $FF;
-      g:=(cfgplot.DSOColorDN shr 8) and $FF;
-      b:=(cfgplot.DSOColorDN shr 16) and $FF;
+      r:=cfgplot.Color[27] and $FF;
+      g:=(cfgplot.Color[27] shr 8) and $FF;
+      b:=(cfgplot.Color[27] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
-//    in graphic mode, the obect is ALWAYS shown as filled.
+//    do not fill the dark nebulae in graphic mode.
+      cnv.Brush.Style := bsClear;
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
-      cnv.Brush.Color := cnv.Pen.Color;
-      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
-      {$endif}
-      {$ifdef linux}
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
-      {$endif}
     end;
 
   if cfgplot.nebplot = 0 then // line mode
     begin
-      ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillDN then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorDN;
+          cnv.Pen.Color := cfgplot.Color[27];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -3020,12 +2772,7 @@ begin
           cnv.Pen.Style := psSolid;
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
-      {$ifdef mswindows}
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
-      {$endif}
-      {$ifdef linux}
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
-      {$endif}
     end;
 
 // reset brush and pen back to default ready for next object
@@ -3039,9 +2786,7 @@ Procedure TSplot.PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double 
 }
 var
   sz: Double;
-  ds,ds2,xx,yy : Integer;
-  col,r,g,b : byte;
-  nebcolor : Tcolor;
+  ds,xx,yy : Integer;
 begin
 // set defaults
   xx:=round(Ax);
@@ -3050,11 +2795,11 @@ begin
   Adim:=0.5;
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
+  ds:=round(max(sz,4*cfgchart.drawpen));
 
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorNE;
+  cnv.Pen.Color := cfgplot.Color[35];
 
 // Plotted as an 'X', so there's no difference between line and graphics mode
 

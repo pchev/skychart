@@ -22,17 +22,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  Utility functions
 }
-
+{$mode delphi}{$H+}
 interface
 
-uses Math, SysUtils, Classes, u_constant,
-{$ifdef linux}
-    Libc,QForms,QGraphics,QPrinters,QStdCtrls,QDialogs,QMask,QGrids,enhedits,
-    QMenus,QComCtrls,QFileCtrls, QCheckLst;
-{$endif}
-{$ifdef mswindows}
-    ShellApi,Windows,Forms,Graphics,Printers,Winspool,StdCtrls,ComCtrls,Dialogs;
-{$endif}
+uses Math, SysUtils, Classes, u_constant, LCLType,
+  {$ifdef mswindows}
+    Windows,
+  {$endif}
+  {$ifdef unix}
+    unix,baseunix,unixutil,
+ //   MaskEdit,Grids,enhedits,Menus,Spin,CheckLst,
+  {$endif}
+    Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
 
 function rmod(x,y:Double):Double;
 Function NormRA(ra : double):double;
@@ -48,6 +49,7 @@ function roundF(x:double;n:integer):double;
 Procedure InitTrace;
 Procedure WriteTrace( buf : string);
 procedure Splitarg(buf,sep:string; var arg: TStringList);
+function ExpandTab(str:string; tabwidth:integer):string;
 function words(str,sep : string; p,n : integer) : string;
 function wordspace(str:string):string;
 function pos2(sub,str:string;i:integer):integer;
@@ -81,8 +83,8 @@ function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 Function GetTimeZone : double;
-function SetCurrentTime(var cfgsc:conf_skychart):boolean;
-function DTminusUT(annee : integer; var c:conf_skychart) : double;
+function SetCurrentTime(cfgsc:Pconf_skychart):boolean;
+function DTminusUT(annee : integer; c:Pconf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
 Function Exec(cmd: string; hide: boolean=true): integer;
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
@@ -90,16 +92,11 @@ function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
 Function GreekLetter(gr : shortstring) : shortstring;
 function GetId(str:string):integer;
 Procedure GetPrinterResolution(var name : string; var resol : integer);
-Procedure ImageResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
 Function ExecuteFile(const FileName: string): integer;
-{$ifdef mswindows}
-procedure PrintMemo(Memo : TRichEdit);
-{$endif}
-{$ifdef linux}
+procedure PrintStrings(str: TStrings; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
+Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
+{$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
-procedure SetFormNightVision(form: TForm; onoff:boolean);
-procedure SetFrameNightVision(frame: TFrame; onoff:boolean);
-procedure PrintMemo(Memo : TMemo);
 {$endif}
 Function EncryptStr(Str,Pwd: String; Encode: Boolean=true): String;
 Function DecryptStr(Str,Pwd: String): String;
@@ -273,6 +270,26 @@ while pos(sep,buf)<>0 do begin
  end;
 end;
 arg.add(buf);
+end;
+
+function ExpandTab(str:string; tabwidth:integer):string;
+const tab=#09;
+var i,j,k:integer;
+    c:char;
+begin
+result:='';
+i:=0;
+for j:=1 to length(str) do begin
+    c:=str[j-1];
+    if c=tab then begin
+       k:=i mod tabwidth;
+       result:=result+StringOfChar(' ', tabwidth-k);
+       i:=i+tabwidth-k;
+    end else begin
+      result:=result+c;
+      inc(i);
+    end;
+end;
 end;
 
 function wordspace(str:string):string;
@@ -614,7 +631,7 @@ Function DEToStrmin(de: Double) : string;
 var dd: Double;
     d : string;
 begin
- if de<=0 then result:='0'+ldeg
+ if de<=0 then result:='0'
  else if de<1 then begin
     str((de*60):2:0,d);
     result := d+lmin;
@@ -622,7 +639,7 @@ begin
  else begin
     dd:=round(de);
     str(dd:2:0,d);
-    result := d+ldeg;
+    result := d;
  end;
 end;
 
@@ -825,14 +842,9 @@ begin
 end;
 
 Function GetTimeZone: double;
-var
 {$ifdef mswindows}
+var
   lt,st : TSystemTime;
-{$endif}
-{$ifdef linux}
-  t: TTime_T;
-  tv: TTimeVal;
-  lt: TUnixTime;
 {$endif}
 begin
 // return time zone in hour
@@ -840,30 +852,27 @@ begin
  GetLocalTime(lt);GetSystemTime(st);
  result:=round(24000000*(SystemTimeToDateTime(lt)-SystemTimeToDateTime(st)))/1000000;
 {$endif}
-{$ifdef linux}
-  gettimeofday(tv, nil);
-  t := tv.tv_sec;
-  localtime_r(@t, lt);
-  result:=lt.__tm_gmtoff / 3600;
+{$ifdef unix}
+  result:=TzSeconds / 3600;
 {$endif}
 end;
 
-function SetCurrentTime(var cfgsc:conf_skychart):boolean;
+function SetCurrentTime(cfgsc:Pconf_skychart):boolean;
 var y,m,d:word;
 begin
 decodedate(now,y,m,d);
-cfgsc.CurYear:=y;
-cfgsc.CurMonth:=m;
-cfgsc.CurDay:=d;
-cfgsc.CurTime:=frac(now)*24;
-cfgsc.TimeZone:=GetTimezone;
+cfgsc^.CurYear:=y;
+cfgsc^.CurMonth:=m;
+cfgsc^.CurDay:=d;
+cfgsc^.CurTime:=frac(now)*24;
+cfgsc^.TimeZone:=GetTimezone;
 result:=true;
 end;
 
-function DTminusUT(annee : integer; var c:conf_skychart) : double;
+function DTminusUT(annee : integer; c:Pconf_skychart) : double;
 var t : double;
 begin
-if c.Force_DT_UT then result:=c.DT_UT_val
+if c^.Force_DT_UT then result:=c^.DT_UT_val
 else begin
 case annee of
 { Atlas of Historical Eclipse Maps East Asia 1500 BC - AD 1900, Stephenson and Houlden (1986)
@@ -941,9 +950,7 @@ case annee of
 end;
 end;
 
-
 Function RotateBits(C: Char; Bits: Integer): Char;
-
 var
   SI : Word;
 begin
@@ -997,13 +1004,9 @@ begin
     end;
 end;
 
-
 Function DecryptStr(Str,Pwd: String): String;
-
 begin
-
 result:=trim(EncryptStr(Str,Pwd,false));
-
 end;
 
 Procedure FormPos(form : Tform; x,y : integer);
@@ -1021,10 +1024,9 @@ end;
 
 
 Function Exec(cmd: string; hide: boolean=true): integer;
-{$ifdef linux}
-// This not work from Kylix IDE without libcexec workaround.
+{$ifdef unix}
 begin
- result:=libc.system(pchar(cmd));
+ result:=fpSystem(cmd);
 end;
 {$endif}
 {$ifdef mswindows}
@@ -1060,10 +1062,9 @@ end;
 {$endif}
 
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
-{$ifdef linux}
-// This not work from Kylix IDE without libcexec workaround.
+{$ifdef unix}
 begin
- libc.system(pchar(cmd+' &'));
+ fpSystem(cmd+' &');
 end;
 {$endif}
 {$ifdef mswindows}
@@ -1099,7 +1100,7 @@ begin
   Result := ShellExecute(Application.MainForm.Handle, nil, StrPCopy(zFileName, FileName),
                          StrPCopy(zParams, ''), StrPCopy(zDir, ''), SW_SHOWNOACTIVATE);
 {$endif}
-{$ifdef linux}
+{$ifdef unix}
 var cmd,p1,p2,p3,p4: string;
 begin
   cmd:=trim(words(OpenFileCMD,blank,1,1));
@@ -1115,13 +1116,12 @@ begin
 {$endif}
 end;
 
-{$ifdef linux}
+{$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
-// This not work from Kylix IDE without libxexec workaround.
 var
   parg: array[1..7] of PChar;
 begin
-  result := fork;
+  result := fpFork;
   if result = 0 then
   begin
     parg[1] := Pchar(cmd);
@@ -1132,7 +1132,7 @@ begin
     if p5='' then parg[6]:=nil else parg[6] := PChar(p5);
     parg[7] := nil;
     writetrace('Try to launch '+cmd+blank+p1+blank+p2+blank+p3+blank+p4+blank+p5);
-    if execvp(Pchar(cmd),PPChar(@parg[1])) = -1 then
+    if fpExecVP(cmd,PPChar(@parg[1])) = -1 then
     begin
       writetrace('Could not launch '+cmd);
     end;
@@ -1196,374 +1196,179 @@ if w>1 then result:=trunc(v/w)
 end;
 
 Procedure GetPrinterResolution(var name : string; var resol : integer);
-{$ifdef linux}
 begin
-name:='';
+name:=Printer.Printers[Printer.PrinterIndex];
 resol:=Printer.XDPI;
 end;
-{$endif}
-{$ifdef mswindows}
-var
-  FDevice: PChar;
-  FDriver: PChar;
-  FPort: PChar;
-  DeviceMode: THandle;
-  DevMode: PDeviceMode;
-  hPrinter: THandle;
-begin
-  GetMem(FDevice, 128);
-  GetMem(FDriver, 128);
-  GetMem(FPort, 128);
-  Printer().GetPrinter(FDevice, FDriver, FPort, DeviceMode);
-  if DeviceMode = 0 then
-    Printer().GetPrinter(FDevice, FDriver, FPort, DeviceMode);
-  OpenPrinter(FDevice, hPrinter, nil);
-  DevMode := GlobalLock(DeviceMode);
-  resol:=DevMode^.dmYResolution;
-  if resol=0 then resol:=DevMode^.dmPrintQuality;
-  name:=DevMode^.dmDeviceName;
-//  if debugon then WriteDebug(Format('Printer %s  Resolution: %d', [name ,resol]));
-  if resol=0 then resol:=DefaultPrtRes;
-//  ShowMessage(Format('dmYResolution: %d', [resol]));
-  GlobalUnlock(DeviceMode);
-  FreeMem(FDevice, 128);
-  FreeMem(FDriver, 128);
-  FreeMem(FPort, 128);
-end;
-{$endif}
 
-Procedure ImageResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
-var i,j,k,l,s,c,nw,nh,color:integer;
-    p,p1,p2:pbytearray;
-    x,y,a,b:double;
-begin
-case img1.PixelFormat of
-  pf8bit: s:=1;
-  {$ifdef mswindows} pf24bit: s:=3;{$endif}
-  pf32bit: s:=4;
-  else raise exception.create('Invalid bitmap format');
-end;
-nh:=round(img1.Height*zoom);
-nw:=round(img1.Width*zoom);
-img2.Height:=nh;
-img2.Width:=nw;
-if zoom=1 then img2.Canvas.Draw(0,0,img1)
- else
-   for i:=0 to nh-1 do begin
-      p:=img2.ScanLine[i];
-      y:=i/zoom;
-      k:=trunc(y);
-      b:=y-k;
-      p1:=img1.ScanLine[k];
-      if k<(img1.Height-1) then p2:=img1.ScanLine[k+1]
-         else p2:=p1;                                  // last row, duplicate the previous one
-      for l:=0 to nw-1 do begin
-         x:=l/zoom;
-         j:=trunc(x);
-         a:=x-j;
-         if (abs(a)<1e-3)and(abs(b)<1e-3) then
-              for c:=0 to s-1 do begin          // pixel center, use the original value
-                p[l*s+c]:=p1[j*s+c]
-              end
-            else
-            if j<(img1.Width-1) then for c:=0 to s-1 do begin
-               color:=round( (1-a)*(1-b)*p1[j*s+c]+a*(1-b)*p1[j*s+s+c]+b*(1-a)*p2[j*s+c]+a*b*p2[j*s+s+c] );
-               p[l*s+c]:=color;
-            end
-            else for c:=0 to s-1 do begin
-                p[l*s+c]:=p1[j*s+c]            // last column, use the original last column
-            end;
-      end;
-   end;
-end;
-
-{$ifdef linux}
-
-procedure SetFormNightVision(form: TForm; onoff:boolean);
-var i: integer;
-begin
-with form do begin
-  if onoff then begin
-     color:=dark;
-     font.Color:=middle;
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-           if fixedcolor=clButton then  fixedcolor:=dark;
-        end;
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TMainMenu ) then with (Components[i] as TMainMenu) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TSpinEdit ) then with (Components[i] as TSpinEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TTextBrowser ) then with (Components[i] as TTextBrowser) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TDirectoryTreeView ) then with (Components[i] as TDirectoryTreeView) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TCheckListbox ) then with (Components[i] as TCheckListbox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     Color:=clButton;
-     font.Color:=clText;
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-           if fixedcolor=dark  then fixedcolor:=clButton;
-        end;
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TMainMenu ) then with (Components[i] as TMainMenu) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TSpinEdit ) then with (Components[i] as TSpinEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TTextBrowser ) then with (Components[i] as TTextBrowser) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TDirectoryTreeView ) then with (Components[i] as TDirectoryTreeView) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TCheckListbox ) then with (Components[i] as TCheckListbox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-     end;
-  end;
-end;
-end;
-
-procedure SetFrameNightVision(frame: TFrame; onoff:boolean);
-var i: integer;
-begin
-with frame do begin
-  if onoff then begin
-     color:=dark;
-     font.Color:=middle;
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-           if fixedcolor=clButton then  fixedcolor:=dark;
-        end;
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TMainMenu ) then with (Components[i] as TMainMenu) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TSpinEdit ) then with (Components[i] as TSpinEdit) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TTextBrowser ) then with (Components[i] as TTextBrowser) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TDirectoryTreeView ) then with (Components[i] as TDirectoryTreeView) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-        if  ( Components[i] is TCheckListbox ) then with (Components[i] as TCheckListbox) do begin
-           if color=clBase   then  color:=black;
-           if color=clButton then  color:=dark;
-        end;
-     end;
-  end else begin
-     Color:=clButton;
-     font.Color:=clText;
-     for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-           if fixedcolor=dark  then fixedcolor:=clButton;
-        end;
-        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TMainMenu ) then with (Components[i] as TMainMenu) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TSpinEdit ) then with (Components[i] as TSpinEdit) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TTextBrowser ) then with (Components[i] as TTextBrowser) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TDirectoryTreeView ) then with (Components[i] as TDirectoryTreeView) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-        if  ( Components[i] is TCheckListbox ) then with (Components[i] as TCheckListbox) do begin
-           if color=black then color:=clBase;
-           if color=dark  then color:=clButton;
-        end;
-     end;
-  end;
-end;
-end;
-
-procedure PrintMemo(Memo : TMemo);
-var
-  P : TextFile;
-  i : integer;
-begin
-Printer.Orientation:=poLandscape;
-Printer.Executesetup;
-Printer.Canvas.Font.Name:='courier';
-Printer.Canvas.Font.Color:=clBlack;
-Printer.Canvas.Font.size:=10;
-Printer.Canvas.Font.pitch:=fpFixed;
-with AssignPrn(P,Printer) do begin  {unit QPrinters Assign text file to PRN }
-  Rewrite(P);      { Open it    }
-  try
-    try
-     for i := 0 to Memo.Lines.Count - 1 do
-         Writeln(P,stringreplace(Memo.Lines[i],tab,blank,[rfReplaceAll]));
-    except on E:EInOutError do
-      MessageDlg('Can Not Print error: ' + IntToStr(E.ErrorCode), mtError, [mbOK], 0);
+procedure PrintStrings(str: TStrings; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
+ Var
+  pw,ph:Integer;
+  r:longint;
+  y:integer;
+  MargeLeft,Margetop,MargeRight:integer;
+  StrDate:String;
+  TextDown:integer;
+  Procedure PrintRow(r:longint);
+   begin
+    With Printer.Canvas do begin
+     TextOut(MargeLeft,y+10,str.Strings[r]);
+     inc(y,TextDown);
+     //MoveTo(MargeLeft,y); LineTo(MargeRight,y);
     end;
-  finally
-    system.CloseFile(P);
+   end;
+  Procedure Entete;
+   begin
+    With Printer.Canvas do begin
+     Font.Style:=[fsBold];
+     TextOut(MargeLeft,MargeTop,PrtText);
+     TextOut(MargeRight-TextWidth(StrDate),MargeTop,StrDate);
+     y:=MargeTop+TextDown;
+     MoveTo(MargeLeft,y); LineTo(MargeRight,y);
+     inc(y,TextDown);
+     Font.Style:=[];
+    end;
+   end;
+begin
+  StrDate:=PrtTextDate+DateToStr(Date);
+  With Printer do begin
+   Title:=PrtTitle;
+   Orientation:=orient;
+   {$ifdef mswindows}
+   pw:=XDPI*PageWidth div 254;
+   ph:=YDPI*PageHeight div 254;
+   {$endif}
+   {$ifdef unix}
+   pw:=PageWidth;
+   ph:=PageHeight;
+   {$endif}
+   BeginDoc;
+   With Canvas do begin
+    Font.Name:='courier';
+    Font.Pitch:=fpFixed;
+    Font.Size:=8;
+    Font.Color:=clBlack;
+    Pen.Color:=clBlack;
+    TextDown:=TextHeight(StrDate)*3 div 2;
+   end;
+   MargeLeft:=pw div 25;
+   MargeTop :=ph div 25;
+   MargeRight:=pw-MargeLeft;
+   Entete;
+   For r:=0 to str.Count-1 do begin
+    PrintRow(r);
+    if y>=(ph-MargeTop) then begin
+     NewPage;
+     Entete;
+    end;
+   end;
+   EndDoc;
   end;
 end;
-end;
-{$endif}
-{$ifdef mswindows}
-procedure PrintMemo(Memo : TRichEdit);
-var
-  PrinterSetup: TPrinterSetupDialog;
-begin
-Printer.Orientation:=poLandscape;
-PrinterSetup:=TPrinterSetupDialog.Create(nil);
-PrinterSetup.Execute;
-PrinterSetup.Free;
-memo.Print(' ');
-end;
-{$endif}
+
+{ By Paul Toth tothpaul@multimania.com }
+{ http://www.multimania.com/tothpaul  }
+{ Just a little Unit to print a Grid :) }
+Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
+ Type
+  TCols=Array[0..20] of integer;
+ Var
+  Rapport,pw,ph:Integer;
+  r,c:longint;
+  cols:^TCols;
+  y:integer;
+  MargeLeft,Margetop,MargeRight:integer;
+  StrDate:String;
+  TextDown:integer;
+  Procedure VerticalLines;
+   Var
+    c:LongInt;
+   begin
+     With Printer.Canvas do begin
+      For c:=0 to Grid.ColCount-1 do begin
+       MoveTo(Cols^[c],MargeTop+TextDown);
+       LineTo(Cols^[c],y);
+      end;
+      MoveTo(MargeRight,MargeTop+TextDown);
+      LineTo(MargeRight,y);
+     end;
+   end;
+  Procedure PrintRow(r:longint);
+   Var
+    c:longint;
+   begin
+    With Printer.Canvas do begin
+     For c:=0 to Grid.ColCount-1 do TextOut(Cols^[c]+10,y+10,Grid.Cells[c,r]);
+     inc(y,TextDown);
+     MoveTo(MargeLeft,y); LineTo(MargeRight,y);
+    end;
+   end;
+  Procedure Entete;
+   Var
+    rr:longint;
+   begin
+    With Printer.Canvas do begin
+     Font.Style:=[fsBold];
+
+     TextOut(MargeLeft,MargeTop,PrtText);
+     TextOut(MargeRight-TextWidth(StrDate),MargeTop,StrDate);
+     y:=MargeTop+TextDown;
+
+     Brush.Color:=clSilver;
+     FillRect(Classes.Rect(MargeLeft,y,MargeRight,y+TextDown*Grid.FixedRows));
+     MoveTo(MargeLeft,y); LineTo(MargeRight,y);
+     for rr:=0 to Grid.FixedRows-1 do PrintRow(rr);
+     Brush.Color:=clWhite;
+
+     Font.Style:=[];
+    end;
+   end;
+ begin
+  GetMem(Cols,Grid.ColCount*SizeOf(Integer));
+  StrDate:=PrtTextDate+DateToStr(Date);
+  With Printer do begin
+   Title:=PrtTitle;
+   Orientation:=orient;
+   {$ifdef mswindows}
+   pw:=XDPI*PageWidth div 254;
+   ph:=YDPI*PageHeight div 254;
+   {$endif}
+   {$ifdef unix}
+   pw:=PageWidth;
+   ph:=PageHeight;
+   {$endif}
+   MargeLeft:=pw div 25;
+   MargeTop :=ph div 25;
+   MargeRight:=pw-MargeLeft;
+   Rapport:=(MargeRight) div Grid.GridWidth;
+   BeginDoc;
+   With Canvas do begin
+    Font.Name:=Grid.Font.Name;
+    Font.Height:=Grid.Font.Height*Rapport;
+    if Font.Height=0  then Font.Height:=11*Rapport;
+    Font.Color:=clBlack;
+    Pen.Color:=clBlack;
+    TextDown:=TextHeight(StrDate)*3 div 2;
+   end;
+   { calcul des Cols }
+   Cols^[0]:=MargeLeft;
+   For c:=1 to Grid.ColCount-1 do begin
+     Cols^[c]:=round(Cols^[c-1]+Grid.ColWidths[c-1]*Rapport);
+   end;
+   Entete;
+   For r:=Grid.FixedRows to Grid.RowCount-1 do begin
+    PrintRow(r);
+    if y>=(ph-MargeTop) then begin
+     VerticalLines;
+     NewPage;
+     Entete;
+    end;
+   end;
+   VerticalLines;
+   EndDoc;
+  end;
+  FreeMem(Cols,Grid.ColCount*SizeOf(Integer));
+ end;
 
 end.
+

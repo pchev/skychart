@@ -1,4 +1,7 @@
 unit pu_zoom;
+
+{$MODE Delphi}
+
 {
 Copyright (C) 2005 Patrick Chevalley
 
@@ -25,9 +28,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Math, u_util,
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ComCtrls, Mask;
+uses u_util,
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Buttons, ComCtrls, MaskEdit, LResources, Math;
 
 type
   Tf_zoom = class(TForm)
@@ -55,8 +58,28 @@ var
 
 implementation
 
-{$R *.dfm}
 
-{$include i_zoom.pas}
+procedure Tf_zoom.TrackBar1Change(Sender: TObject);
+begin
+logfov:=TrackBar1.Position;
+fov:=power(10,logfov/100);
+fov:=min(360,fov);
+if fov>3 then fov:=round(fov);
+Edit1.text:=DeMtoStr(fov);
+end;
+
+procedure Tf_zoom.FormShow(Sender: TObject);
+begin
+logfov:=100*log10(fov);
+TrackBar1.Position := Round(logfov);
+Edit1.text:=DeMtoStr(fov);
+TrackBar1.SetTick(-78);
+TrackBar1.SetTick(0);
+TrackBar1.SetTick(100);
+TrackBar1.SetTick(200);
+end;
+
+initialization
+  {$i pu_zoom.lrs}
 
 end.

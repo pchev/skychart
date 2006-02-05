@@ -22,9 +22,15 @@ unit cu_telescope;
 {
   Windows specific telescope interface compatible with V2.75 drivers
 }
+{$mode objfpc}{$H+}
 interface
 
-Uses Types,Classes,Windows,Dialogs,ActiveX;
+Uses
+  {$ifdef mswindows}
+    ActiveX,
+  {$endif}
+  dynlibs,
+  u_util, Types,Classes,Dialogs;
 
 type
 
@@ -81,11 +87,11 @@ type
      procedure ScopeClose;
      procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
      procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
-     procedure ScopeGetName(var name : shortstring);
+     procedure ScopeGetName(var scopename : shortstring);
      procedure ScopeReset;
      function  ScopeConnected : boolean;
      function  ScopeInitialized : boolean;
-     procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
+     procedure ScopeGetInfo(var scopename : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
      procedure ScopeSetObs(latitude,longitude : double);
      procedure ScopeGoto(ar,de : double; var ok : boolean);
      property pluginpath : string read Fpluginpath write Fpluginpath;
@@ -105,8 +111,12 @@ end;
 
 destructor TTelescope.Destroy;
 begin
+try
  UnloadScopeLibrary;
  inherited destroy;
+except
+writetrace('error destroy '+name);
+end;
 end;
 
 Procedure TTelescope.UnloadScopeLibrary;
@@ -118,7 +128,9 @@ if Fscopelib<>0 then begin
    FScopeDisconnect(ok);
    FScopeClose;
    Fscopelib:=0;
-   CoUnInitialize;
+  {$ifdef mswindows}
+    CoUnInitialize;
+  {$endif}
 end;
 except
 end;
@@ -146,7 +158,9 @@ if Fscopelib<>0 then begin
     FScopeSetObs := TScopeSetObs(GetProcAddress(Fscopelib, 'ScopeSetObs'));
     FScopeGoto := TScopeGoto(GetProcAddress(Fscopelib, 'ScopeGoto'));
     Fscopelibok:=true;
+   {$ifdef mswindows}
     CoInitialize(nil);
+   {$endif}
 end else begin
     Fscopelibok:=false;
     Showmessage('Error opening '+Fplugin);
@@ -197,9 +211,9 @@ begin
 FScopeGetAltAz(alt,az,ok);
 end;
 
-procedure TTelescope.ScopeGetName(var name : shortstring);
+procedure TTelescope.ScopeGetName(var scopename : shortstring);
 begin
-FScopeGetName(name);
+FScopeGetName(scopename);
 end;
 
 procedure TTelescope.ScopeReset;
@@ -209,17 +223,17 @@ end;
 
 function  TTelescope.ScopeConnected : boolean;
 begin
-result:=FScopeConnected;
+result:=FScopeConnected();
 end;
 
 function  TTelescope.ScopeInitialized : boolean;
 begin
-result:=FScopeInitialized;
+result:=FScopeInitialized();
 end;
 
-procedure TTelescope.ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
+procedure TTelescope.ScopeGetInfo(var scopename : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
 begin
-FScopeGetInfo(Name,QueryOK,SyncOK,GotoOK,refreshrate);
+FScopeGetInfo(scopename,QueryOK,SyncOK,GotoOK,refreshrate);
 end;
 
 procedure TTelescope.ScopeSetObs(latitude,longitude : double);
