@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+ {$mode objfpc}{$H+}
 interface
 
 uses
@@ -34,11 +34,11 @@ uses
                      mult : char;
                      end;
 
-Function IsGSCpath(path : shortstring) : Boolean; stdcall;
-procedure SetGSCpath(path : shortstring); stdcall;
+Function IsGSCpath(path : PChar) : Boolean; stdcall;
+procedure SetGSCpath(path : PChar); stdcall;
 Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenGSCwin(var ok : boolean); stdcall;
-Procedure ReadGSC(var lin : GSCrec; var SMnum : shortstring ; var ok : boolean); stdcall;
+Procedure ReadGSC(var lin : GSCrec; var SMnum : PChar ; var ok : boolean); stdcall;
 Procedure NextGSC( var ok : boolean); stdcall;
 procedure CloseGSC ; stdcall;
 Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
@@ -59,7 +59,7 @@ var
    zonelst,SMlst : array[1..9537] of integer;
    FileIsOpen : Boolean = false;
 
-Function IsGSCpath(path : shortstring) : Boolean;
+Function IsGSCpath(path : PChar) : Boolean; stdcall;
 var p : string;
 begin
 p:=slash(path);
@@ -89,10 +89,9 @@ result:=    FileExists(p+'n0000'+slashchar+'0001.dat')
          or FileExists(p+'s8230'+slashchar+'9490.dat')
 end;
 
-procedure SetGSCpath(path : shortstring);
+procedure SetGSCpath(path : PChar); stdcall;
 begin
-path:=noslash(path);
-GSCpath:=path;
+GSCpath:=noslash(path);
 end;
 
 Procedure CloseRegion;
@@ -124,7 +123,7 @@ reset(fgsc);
 ok:=true;
 end;
 
-Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean);  stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -137,14 +136,14 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadGSC(var lin : GSCrec; var SMnum : shortstring ; var ok : boolean);
+Procedure ReadGSC(var lin : GSCrec; var SMnum : PChar ; var ok : boolean); stdcall;
 begin
 if eof(fgsc) then NextGSC(ok);
 if ok then  Read(fgsc,lin);
-SMnum:=SMname;
+SMnum:=PChar(SMname);
 end;
 
-Procedure NextGSC( var ok : boolean);
+Procedure NextGSC( var ok : boolean);  stdcall;
 begin
   CloseRegion;
   inc(curSM);
@@ -157,13 +156,13 @@ begin
   end;
 end;
 
-procedure CloseGSC ;
+procedure CloseGSC ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
 const dirlst : array [0..23,1..5] of char =
       ('s8230','s7500','s6730','s6000','s5230','s4500','s3730','s3000','s2230','s1500','s0730','s0000',
        'n0000','n0730','n1500','n2230','n3000','n3730','n4500','n5230','n6000','n6730','n7500','n8230');
@@ -200,7 +199,7 @@ end;
 Closeregion;
 end;
 
-Procedure OpenGSCwin(var ok : boolean);
+Procedure OpenGSCwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

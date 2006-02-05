@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -36,8 +36,8 @@ type
                     cons  : array [1..3] of char;
                     desc  : array[1..50] of char;
                  end;
-Function IsNGCpath(path : shortstring) : Boolean; stdcall;
-procedure SetNGCpath(path : shortstring); stdcall;
+Function IsNGCpath(path : PChar) : Boolean; stdcall;
+procedure SetNGCpath(path : PChar); stdcall;
 Procedure OpenNGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenNGCwin(var ok : boolean); stdcall;
 Procedure ReadNGC(var lin : NGCrec; var ok : boolean); stdcall;
@@ -57,15 +57,14 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsNGCpath(path : shortstring) : Boolean;
+Function IsNGCpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetNGCpath(path : shortstring);
+procedure SetNGCpath(path : PChar); stdcall;
 begin
-path:=noslash(path);
-NGCpath:=path;
+NGCpath:=noslash(path);
 end;
 
 Procedure CloseRegion;
@@ -93,7 +92,7 @@ reset(fngc);
 ok:=true;
 end;
 
-Procedure OpenNGC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenNGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -103,7 +102,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadNGC(var lin : NGCrec; var ok : boolean);
+Procedure ReadNGC(var lin : NGCrec; var ok : boolean); stdcall;
 var sm:integer;
 begin
 ok:=true;
@@ -119,13 +118,13 @@ end;
 if ok then  Read(fngc,lin);
 end;
 
-procedure CloseNGC ;
+procedure CloseNGC ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenNGCwin(var ok : boolean);
+Procedure OpenNGCwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

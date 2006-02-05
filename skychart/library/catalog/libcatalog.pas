@@ -5,9 +5,10 @@ unit libcatalog;
   Anyone can translate this ?
 }
 
+{$mode objfpc}{$h+}
 interface
 
-{$ifdef linux}
+{$ifdef unix}
 const lib_catalog='libcatalog.so';
 {$endif}
 {$ifdef win32}
@@ -58,8 +59,8 @@ BSCrec = record
 - bayer	: lettre de Bayer
 - sp	: classe spectrale
 }
-Function  IsBSCpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetBSCpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsBSCpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetBSCpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenBSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenBSCwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadBSC(var lin : BSCrec; var ok : boolean); stdcall; external lib_catalog;
@@ -92,8 +93,8 @@ SKYrec = record ar,de :longint ;
 - hd	: numéro du catalogue HD
 - sao	: numéro du catalogue SAO
 }
-Function  IsSKYpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetSKYpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsSKYpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetSKYpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenSKYwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadSKY(var lin : SKYrec; var ok : boolean); stdcall; external lib_catalog;
@@ -122,11 +123,11 @@ TYCrec = record
 - pmar  : mouvement propre en AR en milli-arcsecondes
 - pmde  : mouvement propre en DE en milli-arcsecondes
 }
-Function  IsTYCpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetTYCpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsTYCpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetTYCpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenTYC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenTYCwin(var ok : boolean); stdcall; external lib_catalog;
-Procedure ReadTYC(var lin : TYCrec; var SMnum : shortstring ; var ok : boolean); stdcall; external lib_catalog;
+Procedure ReadTYC(var lin : TYCrec; var SMnum : PChar ; var ok : boolean); stdcall; external lib_catalog;
 Procedure NextTYC( var ok : boolean); stdcall; external lib_catalog;
 procedure CloseTYC ; stdcall; external lib_catalog;
 
@@ -150,14 +151,14 @@ type  TY2rec = record
 - pmar  : mouvement propre en AR en milli-arcsecondes
 - pmde  : mouvement propre en DE en milli-arcsecondes
 }
-Function  IsTY2path(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetTY2path(path : shortstring); stdcall; external lib_catalog;
+Function  IsTY2path(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetTY2path(path : PChar); stdcall; external lib_catalog;
 { Parametre supplementaire pour OPEN de Tycho-2 en format binaire:
   ncat=1 : uniquement le fichier jusqu'a magnitude 11 (tyc2a.cat)
   ncat=2 : toute les etoiles (tyc2a.cat + tyc2b.cat)  }
 Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat :integer; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenTY2win(ncat :integer;var ok : boolean); stdcall; external lib_catalog;
-Procedure ReadTY2(var lin : TY2rec; var SMnum : shortstring ; var ok : boolean); stdcall; external lib_catalog;
+Procedure ReadTY2(var lin : TY2rec; var SMnum : PChar ; var ok : boolean); stdcall; external lib_catalog;
 Procedure NextTY2( var ok : boolean); stdcall; external lib_catalog;
 procedure CloseTY2 ; stdcall; external lib_catalog;
 
@@ -177,11 +178,11 @@ TICrec = record
 - mb	: magnitude B * 100 + flag16 * 10000
 - mv	: magnitude V * 100
 }
-Function  IsTICpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetTICpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsTICpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetTICpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenTIC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenTICwin(var ok : boolean); stdcall; external lib_catalog;
-Procedure ReadTIC(var lin : TICrec; var SMnum : shortstring ; var ok : boolean); stdcall; external lib_catalog;
+Procedure ReadTIC(var lin : TICrec; var SMnum : PChar ; var ok : boolean); stdcall; external lib_catalog;
 Procedure NextTIC( var ok : boolean); stdcall; external lib_catalog;
 procedure CloseTIC ; stdcall; external lib_catalog;
 
@@ -205,11 +206,11 @@ GSCrec = record
 - cl 	: classe d'objet
 - mult	: étoile multiple
 }
-Function  IsGSCpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetGSCpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsGSCpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetGSCpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenGSCwin(var ok : boolean); stdcall; external lib_catalog;
-Procedure ReadGSC(var lin : GSCrec; var SMnum : shortstring ; var ok : boolean); stdcall; external lib_catalog;
+Procedure ReadGSC(var lin : GSCrec; var SMnum : PChar ; var ok : boolean); stdcall; external lib_catalog;
 Procedure NextGSC( var ok : boolean); stdcall; external lib_catalog;
 procedure CloseGSC ; stdcall; external lib_catalog;
 
@@ -234,11 +235,11 @@ GSCFrec = packed record
 - plate : nom de la plaque
 - mult	: étoile multiple
 }
-Function  IsGSCFpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetGSCFpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsGSCFpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetGSCFpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenGSCF(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenGSCFwin(var ok : boolean); stdcall; external lib_catalog;
-Procedure ReadGSCF(var lin : GSCFrec; var SMnum : shortstring ; var ok : boolean); stdcall; external lib_catalog;
+Procedure ReadGSCF(var lin : GSCFrec; var SMnum : PChar ; var ok : boolean); stdcall; external lib_catalog;
 procedure CloseGSCF ; stdcall; external lib_catalog;
 
 // Guide Star catalog (version compacte du CDS)
@@ -256,11 +257,11 @@ GSCCrec = GSCFrec;
 - plate : nom de la plaque
 - mult	: étoile multiple
 }
-Function  IsGSCCpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetGSCCpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsGSCCpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetGSCCpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenGSCC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenGSCCwin(var ok : boolean); stdcall; external lib_catalog;
-Procedure ReadGSCC(var lin : GSCCrec; var SMnum : shortstring ; var ok : boolean); stdcall; external lib_catalog;
+Procedure ReadGSCC(var lin : GSCCrec; var SMnum : PChar ; var ok : boolean); stdcall; external lib_catalog;
 Procedure NextGSCC( var ok : boolean); stdcall; external lib_catalog;
 procedure CloseGSCC ; stdcall; external lib_catalog;
 
@@ -284,8 +285,8 @@ USNOArec = record
 - q     : qualité photométrique
 - s     : -1 = figure dans le catalogue de calibration (GSC ou ACT)
 }
-Function  IsUSNOApath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetUSNOApath(path : shortstring); stdcall; external lib_catalog;
+Function  IsUSNOApath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetUSNOApath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenUSNOAwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall; external lib_catalog;
@@ -305,8 +306,8 @@ MCTrec = record
 - mb	: magnitude "bleu"
 - mr    : magnitude "rouge"
 }
-Function  IsMCTpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetMCTpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsMCTpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetMCTpath(path : PChar); stdcall; external lib_catalog;
 { Parametre supplementaire pour OPEN de MicroCat :
   ncat=1 : catalog Tycho
   ncat=2 : catalog Tycho + GSC
@@ -342,8 +343,8 @@ SACrec = record
 - desc	: description
 - clas  : divers classes
 }
-Function  IsSACpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetSACpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsSACpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetSACpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenSACwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadSAC(var lin : SACrec; var ok : boolean); stdcall; external lib_catalog;
@@ -375,8 +376,8 @@ NGCrec = record
 - cons	: constellation
 - desc	: description
 }
-Function  IsNGCpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetNGCpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsNGCpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetNGCpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenNGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenNGCwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadNGC(var lin : NGCrec; var ok : boolean); stdcall; external lib_catalog;
@@ -403,8 +404,8 @@ LBNrec = record
 - bright: indice de luminosité
 - name	: nom
 }
-Function  IsLBNpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetLBNpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsLBNpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetLBNpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenLBNwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadLBN(var lin : LBNrec; var ok : boolean); stdcall; external lib_catalog;
@@ -439,8 +440,8 @@ RC3rec = record
 - m25	: magnitude / minute carrée moyenne * 100
 - me	: magnitude / minute carrée dans l'ouverture effective * 100
 }
-Function  IsRC3path(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetRC3path(path : shortstring); stdcall; external lib_catalog;
+Function  IsRC3path(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetRC3path(path : PChar); stdcall; external lib_catalog;
 Procedure OpenRC3(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenRC3win(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadRC3(var lin : RC3rec; var ok : boolean); stdcall; external lib_catalog;
@@ -467,8 +468,8 @@ PGCrec = record
 - min	: petit axe à l'isophote 25/'2 * 100
 - mb	: magnitude B * 100
 }
-Function  IsPGCpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetPGCpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsPGCpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetPGCpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenPGCwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadPGC(var lin : PGCrec; var ok : boolean); stdcall; external lib_catalog;
@@ -499,8 +500,8 @@ OCLrec = record
 - rich	: classe de richesse de Trumpler
 - neb	: classe de nébulosité de Trumpler
 }
-Function  IsOCLpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetOCLpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsOCLpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetOCLpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenOCL(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenOCLwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadOCL(var lin : OCLrec; var ok : boolean); stdcall; external lib_catalog;
@@ -529,8 +530,8 @@ GCMrec = record
 - name	: autre nom
 - SpT	: classe spectrale integrée
 }
-Function  IsGCMpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetGCMpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsGCMpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetGCMpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenGCM(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenGCMwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadGCM(var lin : GCMrec; var ok : boolean); stdcall; external lib_catalog;
@@ -563,8 +564,8 @@ GPNrec = record
 - pk	: identification Perek-Kohoutek
 - name	: autre nom de la nébuleuse planétaire
 }
-Function  IsGPNpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetGPNpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsGPNpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetGPNpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenGPN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenGPNwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadGPN(var lin : GPNrec; var ok : boolean); stdcall; external lib_catalog;
@@ -597,8 +598,8 @@ WDSrec = record
 - sp	: classe spectrale
 - note	: Notes
 }
-Function  IsWDSpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetWDSpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsWDSpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetWDSpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenWDS(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenWDSwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadWDS(var lin : WDSrec; var ok : boolean); stdcall; external lib_catalog;
@@ -627,8 +628,8 @@ GCVrec = record
 - gcvs	: identification de l'étoile variable
 - vartype: type de variable + année de nova
 }
-Function  IsGCVpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetGCVpath(path : shortstring); stdcall; external lib_catalog;
+Function  IsGCVpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetGCVpath(path : PChar); stdcall; external lib_catalog;
 Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenGCVwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadGCV(var lin : GCVrec; var ok : boolean); stdcall; external lib_catalog;
@@ -647,10 +648,10 @@ DSRec = record
 - de	: declinaison 2000
 - mag   : magnitude
 }
-Function  IsDSbasepath(path : shortstring):boolean; stdcall; external lib_catalog;
-Function  IsDStycpath(path : shortstring):boolean; stdcall; external lib_catalog;
-Function  IsDSgscpath(path : shortstring):boolean; stdcall; external lib_catalog;
-procedure SetDSpath(path,tycpath,gscpath : shortstring); stdcall; external lib_catalog;
+Function  IsDSbasepath(path : PChar):boolean; stdcall; external lib_catalog;
+Function  IsDStycpath(path : PChar):boolean; stdcall; external lib_catalog;
+Function  IsDSgscpath(path : PChar):boolean; stdcall; external lib_catalog;
+procedure SetDSpath(path,tycpath,gscpath : PChar); stdcall; external lib_catalog;
 Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenDSTYCwin(var ok : boolean); stdcall; external lib_catalog;
 Procedure ReadDSTYC(var dslin : DSrec; var ok : boolean); stdcall; external lib_catalog;
@@ -766,7 +767,7 @@ Type TCatHeader = packed record
                  Spare4   : array[1..20,0..10] of char;
                  end;
 
-procedure SetGCatpath(path,catshortname : shortstring); stdcall; external lib_catalog;
+procedure SetGCatpath(path,catshortname : PChar); stdcall; external lib_catalog;
 procedure GetGCatInfo(var h : TCatHeader; var version : integer; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall; external lib_catalog;
 Procedure OpenGCatwin(var ok : boolean); stdcall; external lib_catalog;
@@ -779,24 +780,24 @@ procedure CloseGCat ; stdcall; external lib_catalog;
 Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
 Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
 Procedure FindNumMessier(id:Integer ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumWDS(id:Shortstring ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumGCVS(id:shortstring ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumGSC(id : ShortString ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumGSCF(id : ShortString ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumGSCC(id : ShortString ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumWDS(id:PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumGCVS(id:PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumGSC(id : PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumGSCF(id : PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumGSCC(id : PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
 Procedure FindNumGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
 Procedure FindNumHR(id:Integer ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumBayer(id:Shortstring ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumFlam(id:Shortstring ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumBayer(id:PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumFlam(id:PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
 Procedure FindNumHD(id:Integer ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
 Procedure FindNumSAO(id:Integer ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumBD(id:ShortString ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumCD(id:ShortString ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumCPD(id:ShortString ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumBD(id:PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumCD(id:PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumCPD(id:PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
 Procedure FindNumPGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumSAC(id:ShortString ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumGcat(path,catshortname,id : ShortString ; keylen : integer; var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
-Procedure FindNumTYC2(id : ShortString ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumSAC(id:PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumGcat(path,catshortname,id : PChar ; keylen : integer; var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
+Procedure FindNumTYC2(id : PChar ;var ar,de:double; var ok:boolean); stdcall; external lib_catalog;
 
 implementation
 

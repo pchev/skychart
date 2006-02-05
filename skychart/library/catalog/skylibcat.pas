@@ -19,11 +19,10 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode delphi}{$H+}
 interface
 uses   gscconst,SysUtils,Math;
 
-Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall;
 Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall;
 Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
 procedure GetADxy(x,y:Integer ; var a,d : Double);
@@ -232,7 +231,7 @@ h:= radtodeg(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ))  ;
 A:= radtodeg(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+360,360);
 { refraction meeus91 15.4 }
-h:=minvalue([90,h+(1.02/tan(degtorad(h+10.3/(h+5.11))))/60]);
+h:=minvalue([90.0,h+(1.02/tan(degtorad(h+10.3/(h+5.11))))/60]);
 END ;
 
 Procedure Hz2Eq(A,h : double; var hh,de : double);
@@ -241,7 +240,7 @@ BEGIN
 l1:=degtorad(ObsLatitude);
 a1:=degtorad(A);
 { refraction meeus91 15.3 }
-h:=minvalue([90,h-(1/tan(degtorad(h+(7.31/(h+4.4)))))/60]);
+h:=minvalue([90.0,h-(1/tan(degtorad(h+(7.31/(h+4.4)))))/60]);
 h1:=degtorad(h);
 de:= radtodeg(arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) ))  ;
 hh:= radtodeg(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
@@ -342,7 +341,7 @@ case projtype of
 'C' : begin
     ar:=ac-x;
     de:=dc-y;
-    if de>0 then de:=minvalue([de,89.999]) else de:=maxvalue([de,-89.999]);
+    if de>0 then de:=min(89.999,de) else de:=max(-89.999,de);
     end;
 'S' : begin
     dc:=degtorad(dc);
@@ -1049,8 +1048,8 @@ var
    ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
-dar:=minvalue([10,(x2-x1)/2]); // plus petit que 15 pour etre sur de tout avoir
-dde:=minvalue([8,(y2-y1)/2]);  // ==
+dar:=min(10.0,(x2-x1)/2); // plus petit que 15 pour etre sur de tout avoir
+dde:=min(8.0,(y2-y1)/2);  // ==
 nSM:=0;
 i:=0;
 repeat
@@ -1232,11 +1231,6 @@ if gregorian then begin
    result:=result-u2+2;
    if (u<0)and((u/100)=floor(u/100))and((u/400)<>floor(u/400)) then result:=result-1;
 end;
-end;
-
-Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall;
-begin
-// no more used, added for compatibility with previous version
 end;
 
 Initialization

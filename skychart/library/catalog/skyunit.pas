@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -33,8 +33,8 @@ type
                    dm     : longint;
                    hd,sao   :longint ;
                    end;
-Function IsSKYpath(path : shortstring) : Boolean; stdcall;
-procedure SetSKYpath(path : shortstring); stdcall;
+Function IsSKYpath(path : PChar) : Boolean; stdcall;
+procedure SetSKYpath(path : PChar); stdcall;
 Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenSKYwin(var ok : boolean); stdcall;
 Procedure ReadSKY(var lin : SKYrec; var ok : boolean); stdcall;
@@ -62,17 +62,18 @@ var
    lastcache : integer = 0;
    chkfile : Boolean = true;
 
-Function IsSKYpath(path : shortstring) : Boolean;
+Function IsSKYpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'001.dat');
 end;
 
-procedure SetSKYpath(path : shortstring);
+procedure SetSKYpath(path : PChar); stdcall;
 var i : integer;
+    buf:string;
 begin
-path:=noslash(path);
-if path<>SKYpath then for i:=1 to CacheNum do cachelst[i]:=0;
-SKYpath:=path;
+buf:=noslash(path);
+if buf<>SKYpath then for i:=1 to CacheNum do cachelst[i]:=0;
+SKYpath:=buf;
 end;
 
 Procedure CloseRegion;
@@ -125,7 +126,7 @@ end;
 ok:=true;
 end;
 
-Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -136,7 +137,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadSKY(var lin : SKYrec; var ok : boolean);
+Procedure ReadSKY(var lin : SKYrec; var ok : boolean); stdcall;
 begin
 ok:=true;
 inc(Icache);
@@ -170,7 +171,7 @@ end else begin
 end;
 end;
 
-Procedure NextSKY( var ok : boolean);
+Procedure NextSKY( var ok : boolean); stdcall;
 begin
 if OnCache then begin
 end else begin
@@ -184,13 +185,13 @@ end;
   end;
 end;
 
-procedure CloseSKY ;
+procedure CloseSKY ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenSKYwin(var ok : boolean);
+Procedure OpenSKYwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -31,8 +31,8 @@ type
                 lmax,lmin,mcode : char;
                 gcvs,vartype : array[1..10] of char;
                 end;
-Function IsGCVpath(path : shortstring) : Boolean; stdcall;
-procedure SetGCVpath(path : shortstring); stdcall;
+Function IsGCVpath(path : PChar) : Boolean; stdcall;
+procedure SetGCVpath(path : PChar); stdcall;
 Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenGCVwin(var ok : boolean); stdcall;
 Procedure ReadGCV(var lin : GCVrec; var ok : boolean); stdcall;
@@ -53,15 +53,16 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsGCVpath(path : shortstring) : Boolean;
+Function IsGCVpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetGCVpath(path : shortstring);
+procedure SetGCVpath(path : PChar); stdcall;
+var buf:string;
 begin
-path:=noslash(path);
-GCVpath:=path;
+buf:=noslash(path);
+GCVpath:=buf;
 end;
 
 Procedure CloseRegion;
@@ -89,7 +90,7 @@ reset(fgcv);
 ok:=true;
 end;
 
-Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -99,14 +100,14 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadGCV(var lin : GCVrec; var ok : boolean);
+Procedure ReadGCV(var lin : GCVrec; var ok : boolean);stdcall;
 begin
 ok:=true;
 if eof(fgcv) then NextGCV(ok);
 if ok then  Read(fgcv,lin);
 end;
 
-Procedure NextGCV( var ok : boolean);
+Procedure NextGCV( var ok : boolean); stdcall;
 begin
   CloseRegion;
   inc(curSM);
@@ -117,13 +118,13 @@ begin
   end;
 end;
 
-procedure CloseGCV ;
+procedure CloseGCV ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenGCVwin(var ok : boolean);
+Procedure OpenGCVwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

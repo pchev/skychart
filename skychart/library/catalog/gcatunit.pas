@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -124,7 +124,7 @@ Type TCatHeader = packed record
                  Spare4   : array[1..20,0..10] of char;
                  end;
 
-procedure SetGCatpath(path,catshortname : shortstring); stdcall;
+procedure SetGCatpath(path,catshortname : PChar); stdcall;
 procedure GetGCatInfo(var h : TCatHeader; var version : integer; var ok : boolean); stdcall;
 Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenGCatwin(var ok : boolean); stdcall;
@@ -252,10 +252,9 @@ begin
   if catheader.flen[35]>0 then emptyrec.vnum[10]:=true;
 end;
 
-procedure SetGCatpath(path,catshortname : shortstring);
+procedure SetGCatpath(path,catshortname : PChar); stdcall;
 begin
-path:=noslash(path);
-GCatpath:=path;
+GCatpath:=noslash(path);
 CatName:=trim(catshortname);
 end;
 
@@ -373,7 +372,7 @@ OpenRegion(hemis,zone,Sm,ok);
 end;
 end;
 
-Procedure ReadGCat(var lin : GCatrec; var ok : boolean);
+Procedure ReadGCat(var lin : GCatrec; var ok : boolean); stdcall;
 var n : integer;
 begin
 ok:=true;
@@ -469,7 +468,7 @@ if ok then begin
 end;
 end;
 
-Procedure ReadGCat2(var lin : GCatrec; var ok : boolean);
+Procedure ReadGCat2(var lin : GCatrec; var ok : boolean); stdcall;
 // version plus rapide juste pour le dessin
 var n : integer;
 begin
@@ -535,7 +534,7 @@ if ok then begin
 end;
 end;
 
-Procedure NextGCat( var ok : boolean);
+Procedure NextGCat( var ok : boolean); stdcall;
 begin
   CloseRegion;
   inc(curSM);
@@ -548,13 +547,13 @@ begin
   end;
 end;
 
-procedure CloseGCat ;
+procedure CloseGCat ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenGCatwin(var ok : boolean);
+Procedure OpenGCatwin(var ok : boolean); stdcall;
 begin
 curSM:=1;
 ok:=ReadCatHeader;

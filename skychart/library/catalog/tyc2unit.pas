@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  correction of an error message if only the first part of the Tycho-2 catalog is installed.
 }
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -96,11 +97,11 @@ type  TY2rec = record
                bt,vt :word
                end;
 
-Function IsTY2path(path : shortstring) : Boolean; stdcall;
-procedure SetTY2path(path : shortstring); stdcall;
+Function IsTY2path(path : PChar) : Boolean; stdcall;
+procedure SetTY2path(path : PChar); stdcall;
 Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean); stdcall;
 Procedure OpenTY2win(ncat : integer;var ok : boolean); stdcall;
-Procedure ReadTY2(var lin : TY2rec; var SMnum : shortstring ; var ok : boolean); stdcall;
+Procedure ReadTY2(var lin : TY2rec; var SMnum : PChar ; var ok : boolean); stdcall;
 Procedure NextTY2( var ok : boolean); stdcall;
 procedure CloseTY2 ; stdcall;
 Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);stdcall;
@@ -139,17 +140,18 @@ var
    lastcache : integer = 0;
    maxbin : integer = 2;
 
-Function IsTY2path(path : shortstring) : Boolean;
+Function IsTY2path(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'tyc2idx.dat');
 end;
 
-procedure SetTY2path(path : shortstring);
+procedure SetTY2path(path : PChar); stdcall;
 var i : integer;
+    buf: string;
 begin
-path:=noslash(path);
-if path<>TY2path then for i:=1 to CacheNum do cachelst[i]:=0;
-TY2path:=path;
+buf:=noslash(path);
+if buf<>TY2path then for i:=1 to CacheNum do cachelst[i]:=0;
+TY2path:=buf;
 end;
 
 Procedure CloseRegion;
@@ -256,7 +258,7 @@ readsup:=false ;    // begin with first file
 ok:=true;
 end;
 
-Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
+Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 maxcat:=ncat;
@@ -271,7 +273,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadTY2(var lin : TY2rec; var SMnum : shortstring ; var ok : boolean);
+Procedure ReadTY2(var lin : TY2rec; var SMnum : PChar ; var ok : boolean); stdcall;
 begin
 inc(currec);
 inc(icache);
@@ -365,10 +367,10 @@ else
     if usecache then cache[ncache,icache]:=lin;
   end;
   end;
-SMnum:=SMname;
+SMnum:=PChar(SMname);
 end;
 
-Procedure NextTY2( var ok : boolean);
+Procedure NextTY2( var ok : boolean); stdcall;
 begin
   CloseRegion;
   inc(curSM);
@@ -381,13 +383,13 @@ begin
   end;
 end;
 
-procedure CloseTY2 ;
+procedure CloseTY2 ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenTY2win(ncat : integer; var ok : boolean);
+Procedure OpenTY2win(ncat : integer; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 maxcat:=ncat;
@@ -401,11 +403,11 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
 var L1,S1,zone,i,j : integer;
     hemis : char;
     fok : boolean;
-    buf:shortstring;
+    buf:PChar;
 begin
 ok:=false ;
 for i:=0 to 11 do begin

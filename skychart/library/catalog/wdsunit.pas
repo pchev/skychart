@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-
+{$mode objfpc}{$H+}
 interface
 
 uses
@@ -33,8 +33,8 @@ WDSrec = record ar,de,dm :longint ;
                 sp : array[1..9] of char;
                 note : array[1..2] of char;
                 end;
-Function IsWDSpath(path : shortstring) : Boolean; stdcall;
-procedure SetWDSpath(path : shortstring); stdcall;
+Function IsWDSpath(path : PChar) : Boolean; stdcall;
+procedure SetWDSpath(path : PChar); stdcall;
 Procedure OpenWDS(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure OpenWDSwin(var ok : boolean); stdcall;
 Procedure ReadWDS(var lin : WDSrec; var ok : boolean); stdcall;
@@ -55,12 +55,12 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsWDSpath(path : shortstring) : Boolean;
+Function IsWDSpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetWDSpath(path : shortstring);
+procedure SetWDSpath(path : PChar); stdcall;
 begin
 WDSpath:=noslash(path);
 end;
@@ -90,7 +90,7 @@ reset(fwds);
 ok:=true;
 end;
 
-Procedure OpenWDS(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenWDS(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -100,14 +100,14 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadWDS(var lin : WDSrec; var ok : boolean);
+Procedure ReadWDS(var lin : WDSrec; var ok : boolean); stdcall;
 begin
 ok:=true;
 if eof(fwds) then NextWDS(ok);
 if ok then  Read(fwds,lin);
 end;
 
-Procedure NextWDS( var ok : boolean);
+Procedure NextWDS( var ok : boolean); stdcall;
 begin
   CloseRegion;
   inc(curSM);
@@ -118,13 +118,13 @@ begin
   end;
 end;
 
-procedure CloseWDS ;
+procedure CloseWDS ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenWDSwin(var ok : boolean);
+Procedure OpenWDSwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

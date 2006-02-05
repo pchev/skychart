@@ -8,7 +8,7 @@ uses
 
 {$R *.RES}
 
-{$LIBPREFIX 'lib'}
+{$LIBPREFIX 'libF'}
 
 exports
       CloseLib,
