@@ -1,2 +1,0 @@
-
-TFolderDialog wraps the common Win95/98/WinNT4.0/2000? shell dialog 'Browse for Folder'. This release compiles up to D4(UP2). Derived from TCommonDialog. Properties: Title, Text, Directory, CustomButton (IDE assignable), Options, RootFolder, etc.
