@@ -1,0 +1,324 @@
+object f_printsetup: Tf_printsetup
+  BorderStyle = bsSizeToolWin
+  Caption = 'f_printsetup'
+  ClientHeight = 355
+  ClientWidth = 403
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnShow = FormShow
+  PixelsPerInch = 80
+  TextHeight = 13
+  HorzScrollBar.Page = 402
+  VertScrollBar.Page = 354
+  Left = 404
+  Height = 355
+  Top = 175
+  Width = 403
+  object qtoption: TPanel
+    BorderSpacing.OnChange = nil
+    ClientHeight = 110
+    ClientWidth = 367
+    FullRepaint = False
+    TabOrder = 0
+    Left = 18
+    Height = 110
+    Top = 83
+    Width = 367
+    object qtprintername: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = '                '
+      Color = clNone
+      Left = 197
+      Height = 13
+      Top = 49
+      Width = 48
+    end
+    object qtprintresol: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = '                   '
+      Color = clNone
+      Left = 197
+      Height = 13
+      Top = 71
+      Width = 57
+    end
+    object Label2: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = 'Printer:'
+      Color = clNone
+      Left = 120
+      Height = 13
+      Top = 49
+      Width = 33
+    end
+    object Label3: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = 'Resolution:'
+      Color = clNone
+      Left = 120
+      Height = 13
+      Top = 71
+      Width = 53
+    end
+    object Label7: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = 'Select the Windows printer and options you want to use'
+      Color = clNone
+      Left = 16
+      Height = 13
+      Top = 16
+      Width = 263
+    end
+    object qtsetup: TButton
+      BorderSpacing.OnChange = nil
+      BorderSpacing.InnerBorder = 2
+      Caption = 'Printer Setup'
+      OnClick = qtsetupClick
+      TabOrder = 0
+      Left = 12
+      Height = 25
+      Top = 58
+      Width = 85
+    end
+  end
+  object customoption: TPanel
+    BorderSpacing.OnChange = nil
+    ClientHeight = 110
+    ClientWidth = 367
+    FullRepaint = False
+    TabOrder = 2
+    Left = 18
+    Height = 110
+    Top = 83
+    Width = 367
+    object Label1: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = 'Raster Resolution'
+      Color = clNone
+      Left = 209
+      Height = 13
+      Top = 4
+      Width = 84
+    end
+    object Label4: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = 'Command to use to process the file.'
+      Color = clNone
+      Left = 8
+      Height = 13
+      Top = 62
+      Width = 168
+    end
+    object Label5: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = 'dpi for 8"x11" paper'
+      Color = clNone
+      Left = 256
+      Height = 13
+      Top = 28
+      Width = 95
+    end
+    object Label6: TLabel
+      BorderSpacing.OnChange = nil
+      Caption = 'Path to save the file :'
+      Color = clNone
+      Left = 9
+      Height = 13
+      Top = 4
+      Width = 100
+    end
+    object prtres: TLongEdit
+      Value = 75
+      MaxValue = 600
+      BorderStyle = bsSingle
+      Height = 22
+      Hint = '0..600'
+      Left = 208
+      Name = 'prtres'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      Top = 23
+      Width = 41
+      OnChange = prtresChange
+      Left = 208
+      Height = 22
+      Hint = '0..600'
+      Top = 23
+      Width = 41
+    end
+    object cmdreport: TEdit
+      BorderSpacing.OnChange = nil
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 1
+      Left = 8
+      Height = 21
+      Top = 84
+      Width = 345
+    end
+    object savepath: TEdit
+      BorderSpacing.OnChange = nil
+      OnChange = savepathChange
+      TabOrder = 2
+      Text = 'savepath'
+      Left = 8
+      Height = 21
+      Top = 24
+      Width = 161
+    end
+    object printcmd: TEdit
+      BorderSpacing.OnChange = nil
+      OnChange = printcmdChange
+      TabOrder = 3
+      Text = 'printcmd'
+      Left = 208
+      Height = 21
+      Top = 58
+      Width = 121
+    end
+    object savepathsel: TBitBtn
+      BorderSpacing.OnChange = nil
+      BorderSpacing.InnerBorder = 2
+      Glyph.Data = {
+        BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+        69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
+        2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
+        222A20632023464646464646222C0A226120632023303030303030222C0A222E
+        2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+        2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+        2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
+        2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
+        2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
+        2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
+        612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+        2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
+        2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
+        2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
+      }
+      Layout = blGlyphTop
+      Margin = 0
+      OnClick = savepathselClick
+      TabOrder = 4
+      TabStop = False
+      Left = 168
+      Height = 26
+      Top = 21
+      Width = 26
+    end
+    object printcmdsel: TBitBtn
+      BorderSpacing.OnChange = nil
+      BorderSpacing.InnerBorder = 2
+      Glyph.Data = {
+        BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+        69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
+        2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
+        222A20632023464646464646222C0A226120632023303030303030222C0A222E
+        2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+        2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+        2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
+        2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
+        2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
+        2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
+        612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+        2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
+        2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
+        2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
+      }
+      Layout = blGlyphTop
+      Margin = 0
+      OnClick = printcmdselClick
+      TabOrder = 5
+      TabStop = False
+      Left = 328
+      Height = 26
+      Top = 55
+      Width = 26
+    end
+  end
+  object printmode: TRadioGroup
+    BorderSpacing.OnChange = nil
+    Caption = 'Print method'
+    Columns = 3
+    Items.Strings = (
+      'Windows Printer'
+      'Postscript'
+      'Bitmap File'
+    )
+    OnClick = printmodeClick
+    ParentColor = True
+    Left = 18
+    Height = 61
+    Top = 12
+    Width = 367
+  end
+  object Ok: TButton
+    BorderSpacing.OnChange = nil
+    BorderSpacing.InnerBorder = 2
+    Caption = 'Ok'
+    ModalResult = 1
+    TabOrder = 3
+    Left = 110
+    Height = 25
+    Top = 294
+    Width = 75
+  end
+  object Cancel: TButton
+    BorderSpacing.OnChange = nil
+    BorderSpacing.InnerBorder = 2
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 4
+    Left = 228
+    Height = 25
+    Top = 294
+    Width = 75
+  end
+  object prtcolor: TRadioGroup
+    BorderSpacing.OnChange = nil
+    Caption = 'Color'
+    ItemIndex = 0
+    Items.Strings = (
+      'Color, Line mode'
+      'Black/White, Line mode'
+      'As on screen (black background!)'
+    )
+    OnClick = prtcolorClick
+    ParentColor = True
+    Left = 18
+    Height = 82
+    Top = 199
+    Width = 207
+  end
+  object prtorient: TRadioGroup
+    BorderSpacing.OnChange = nil
+    Caption = 'Orientation'
+    Items.Strings = (
+      'Portrait'
+      'Landscape'
+    )
+    OnClick = prtorientClick
+    ParentColor = True
+    Left = 240
+    Height = 82
+    Top = 199
+    Width = 149
+  end
+  object PrintDialog1: TPrintDialog
+    left = 376
+  end
+  object OpenDialog1: TOpenDialog
+    Title = 'Open existing file'
+    FilterIndex = 0
+    Title = 'Open existing file'
+    left = 376
+    top = 64
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    Title = 'Select Directory'
+    FilterIndex = 0
+    Title = 'Select Directory'
+    left = 328
+    top = 32
+  end
+end
