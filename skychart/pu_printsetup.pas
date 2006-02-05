@@ -1,4 +1,7 @@
 unit pu_printsetup;
+
+{$MODE Delphi}
+
 {
 Copyright (C) 2004 Patrick Chevalley
 
@@ -26,10 +29,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_constant, u_util,
-  SysUtils, Types, Classes, Variants, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, FoldrDlg, Buttons;
+  SysUtils, Types, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
+  LResources, PrintersDlgs;
 
 type
+
+  { Tf_printsetup }
+
   Tf_printsetup = class(TForm)
     printmode: TRadioGroup;
     qtoption: TPanel;
@@ -55,8 +62,8 @@ type
     printcmd: TEdit;
     savepathsel: TBitBtn;
     printcmdsel: TBitBtn;
-    FolderDialog1: TFolderDialog;
     OpenDialog1: TOpenDialog;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     procedure qtsetupClick(Sender: TObject);
     procedure printmodeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -80,16 +87,144 @@ var
 
 implementation
 
-{$R *.dfm}
 
 
-// include all cross-platform common code.
-// you can temporarily copy the file content here
-// to use the IDE facilities
+procedure Tf_printsetup.FormShow(Sender: TObject);
+begin
+updprtsetup;
+prtcolor.ItemIndex:=cm.PrintColor;
+if cm.PrintLandscape then prtorient.ItemIndex:=1
+                     else prtorient.ItemIndex:=0;
+end;
 
-{$include i_printsetup.pas}
+procedure Tf_printsetup.updprtsetup;
+var i:integer;
+    ok:boolean;
+begin
+case cm.PrintMethod of
+0: begin
+   printmode.ItemIndex:=0;
+   if cm.PrintColor=2 then begin
+      cm.PrintColor:=0;
+      prtcolor.ItemIndex:=cm.PrintColor;
+   end;
+   customoption.Visible:=false;
+   qtoption.Visible:=true;
+   GetPrinterResolution(cm.prtname,i);
+   qtprintername.Caption:=cm.prtname;
+   qtprintresol.Caption:=inttostr(i);
+   end;
+1: begin
+   printmode.ItemIndex:=1;
+   customoption.Visible:=true;
+   qtoption.Visible:=false;
+   printcmd.Text:=cm.PrintCmd1;
+   savepath.Text:=cm.PrintTmpPath;
+   prtres.Value:=cm.PrinterResolution;
+   {$ifdef unix}
+     ok:=(0=exec('which pnmtops'));
+   {$endif}
+   {$ifdef mswindows}
+     ok:=Fileexists(slash(appdir)+'plugins\bmptops.bat');
+   {$endif}
+   if ok then begin
+      cmdreport.text:='Netpbm package OK.';
+   end else begin
+      cmdreport.text:='Please install Netpbm package.';
+   end;
+   end;
+2: begin
+   printmode.ItemIndex:=2;
+   customoption.Visible:=true;
+   qtoption.Visible:=false;
+   printcmd.Text:=cm.PrintCmd2;
+   savepath.Text:=cm.PrintTmpPath;
+   prtres.Value:=cm.PrinterResolution;
+   if cm.PrintCmd2='' then cmdreport.text:=''
+   else begin
+     {$ifdef unix}
+       ok:=(0=exec('which '+cm.PrintCmd2));
+     {$endif}
+     {$ifdef mswindows}
+       ok:=Fileexists(cm.PrintCmd2);
+     {$endif}
+     if ok then begin
+        cmdreport.text:='Command found OK.';
+     end else begin
+        cmdreport.text:='Command not found!';
+     end;
+   end;
+   end;
+end;
+end;
 
-// end of common code
+procedure Tf_printsetup.qtsetupClick(Sender: TObject);
+begin
+  PrintDialog1.execute;
+  updprtsetup;
+end;
 
+procedure Tf_printsetup.printmodeClick(Sender: TObject);
+begin
+cm.PrintMethod:=printmode.ItemIndex;
+updprtsetup;
+end;
+
+procedure Tf_printsetup.prtresChange(Sender: TObject);
+begin
+cm.PrinterResolution:=prtres.value;
+end;
+
+procedure Tf_printsetup.printcmdChange(Sender: TObject);
+begin
+case cm.PrintMethod of
+1: cm.PrintCmd1:=printcmd.Text;
+2: cm.PrintCmd2:=printcmd.Text;
+end;
+updprtsetup;
+end;
+
+procedure Tf_printsetup.savepathChange(Sender: TObject);
+begin
+cm.PrintTmpPath:=savepath.Text;
+end;
+
+procedure Tf_printsetup.prtcolorClick(Sender: TObject);
+begin
+if (cm.PrintMethod=0)and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
+cm.PrintColor:=prtcolor.ItemIndex;
+end;
+
+procedure Tf_printsetup.prtorientClick(Sender: TObject);
+begin
+cm.PrintLandscape:=(prtorient.ItemIndex=1);
+end;
+
+procedure Tf_printsetup.savepathselClick(Sender: TObject);
+begin
+  SelectDirectoryDialog1.Filename:=savepath.Text;
+  if SelectDirectoryDialog1.execute then
+     savepath.Text:=SelectDirectoryDialog1.Filename;
+end;
+
+procedure Tf_printsetup.printcmdselClick(Sender: TObject);
+var f : string;
+begin
+f:=expandfilename(printcmd.Text);
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='All Files|*.*';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   printcmd.Text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
+initialization
+  {$i pu_printsetup.lrs}
 
 end.

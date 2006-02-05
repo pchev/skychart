@@ -1,4 +1,7 @@
 unit pu_about;
+
+{$MODE Delphi}
+
 {
 Copyright (C) 2002 Patrick Chevalley
 
@@ -26,8 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_constant,
-  Windows, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, jpeg;
+  LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
+  Buttons, ExtCtrls, LResources;
 
 type
   Tf_about = class(TForm)
@@ -53,8 +56,6 @@ var
   f_about: Tf_about;
 
 implementation
-
-{$R *.dfm}
 
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
@@ -92,6 +93,9 @@ if ShowTimer then begin
    Timer1.Enabled:=true;
 end;   
 end;
+
+initialization
+  {$i pu_about.lrs}
 
 end.
  

@@ -1,4 +1,7 @@
 unit pu_detail;
+
+{$MODE Delphi}
+
 {
 Copyright (C) 2002 Patrick Chevalley
 
@@ -26,16 +29,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList;
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
+  Buttons, SynEdit, IpHtml;
 
 type
   Tstr1func = procedure(txt:string) of object;
 
+  { Tf_detail }
+
   Tf_detail = class(TForm)
+    IpHtmlPanel1: TIpHtmlPanel;
     Panel1: TPanel;
     Button1: TButton;
-    memo: TRichEdit;
     ActionList1: TActionList;
     EditSelectAll1: TEditSelectAll;
     EditCopy1: TEditCopy;
@@ -47,13 +53,18 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure EditCopy1Execute(Sender: TObject);
+    procedure EditSelectAll1Execute(Sender: TObject);
   private
     { Private declarations }
     FCenter : Tstr1func;
     FNeighbor : Tstr1func;
+    FHTMLText: String;
+    procedure SetHTMLText(const value: string);
   public
     source_chart:string;
     { Public declarations }
+    property text: string read FHTMLText write SetHTMLText;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
     property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
   end;
@@ -63,7 +74,6 @@ var
 
 implementation
 
-{$R *.dfm}
 
 procedure Tf_detail.Button1Click(Sender: TObject);
 begin
@@ -79,5 +89,37 @@ procedure Tf_detail.Button3Click(Sender: TObject);
 begin
 if assigned(FNeighbor) then FNeighbor(source_chart);
 end;
+
+procedure Tf_detail.EditCopy1Execute(Sender: TObject);
+begin
+  IpHtmlPanel1.CopyToClipboard;
+end;
+
+procedure Tf_detail.EditSelectAll1Execute(Sender: TObject);
+begin
+  IpHtmlPanel1.SelectAll;
+end;
+
+procedure Tf_detail.SetHTMLText(const value: string);
+var
+  s: TStringStream;
+  NewHTML: TIpHtml;
+begin
+  try
+    s:=TStringStream.Create(value);
+    try
+      NewHTML:=TIpHtml.Create; // Beware: Will be freed automatically by IpHtmlPanel1
+      NewHTML.LoadFromStream(s);
+    finally
+      FHTMLText:=value;
+      s.Free;
+    end;
+    IpHtmlPanel1.SetHtml(NewHTML);
+  except
+  end;
+end;
+
+initialization
+  {$i pu_detail.lrs}
 
 end.

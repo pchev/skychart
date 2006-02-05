@@ -1,96 +1,70 @@
-How to install the source code to compile with Delphi/Kylix
------------------------------------------------------------
+How to install the source code to compile with Lazarus/Freepascal
+-----------------------------------------------------------------
 
-The simplest way is to add a ./dev directory to your existing cdc binary directory or
+The simplest way is to add a ./src directory to your existing cdc binary directory or
 to a new directory if you want to keep a separated stable version.
 
-Download the source file skychart_v3_alpha001_source.tar.gz to this directory 
+Download the source file skychart_XXX_source.tar.gz to this directory 
 and extract the file here. 
-On Linux the command is : tar xzf skychart_v3_alpha001_source.tar.gz
-
-Create a directory dev/dcu to hold the compilation result separated from the source.
+On Linux the command is : tar xzf skychart_v3_XXX_source.tar.gz
 
 Finally you must have something like that :
 
 cdc -|                                    < base directory containing the executable 
-     |- dev -|                            < devel directory 
+     |- src -|                            < devel directory 
              |- skychart |                < skychart module
                          |- component     < project component
                          |- library       < project library
                          |- ...
-             |- dcu                       < all compilation .dcu object go here
+             |- units                     < all compilation .dcu object go here
 
+Install Lazarus using a recent snapshot from http://lazarus.freepascal.org
 
-Launch Delphi or Kylix and go first to the dev/skychart/component directory to install
-the required component. 
+There is a lot of package to install. To install each package in Lazarus
+use File-Open to open the .lpk.
+Click "Open Package", "Compile", "Install".
+When the install tell you to rebuild Lazarus say NO.
+After all are installed click Tools-Build Lazarus.
 
-For Delphi install :
-             zoomimage\cu_zoomimageD6.dpk
-             enhedits\enheditsD6.dpk
-             foldrdg\FoldrDlgD6.dpk
-             pngimage\  (extract zip file first)
-             synapse\  (extract zip file first)
+Launch Lazarus and go first to lazarus/component to install the following 
+standard packages:
 
-For Kylix install:
-             zoomimage/zoomimageK3.dpk
-             enhedits/enheditsK3.dpk
-             synapse/  (extract zip file first)
+      printers/printer4lazarus.lpk
+      jpeg/jpegforlazarus.lpk
+      turbopower_ipro/turbopoweripro.lpk
 
-Now compile the library. 
-Open skychart/library/catalog/catalog.dpr, check in the project options the path for 
-the destination and the destination of the units.
-Compile the library and check that the file libcatalog.so for Linux or libcatalog.dll
-for Windows is created in your base cdc directory.
+Then from src/skychart/component directory install
+the packages for the required component:
 
-You can now open the main project file.
-For Windows this is skychart\cdc_vcl.dpr
-For Linux this is skychart/cdc_clx.dpr
+      enhedits/enhedit.lpk
+      jdcalendar/cdcjdcalendar.lpk
+      multidoc/multidocpackage.lpk
+      radec/radec.lpk
+      winxp/winxpstyle.lpk ( for Windows only )
+      xmlparser/xmlparser.lpk
+      zoomimage/zoomimage.lpk
+      wizardntb/wizardntb.lpk
+      libsql/libsql.lpk
 
-Also check the path in the project options. After that you can compile and run the
-program from the IDE.
+And the packages for the library src/skychart/library :
 
+      catalog/cdccatalog.lpk
+      elp82/elp82.lpk
+      satxy/satxy.lpk
+      series96/series96.lpk
 
+You can now open the main project files skychart\cdc.lpi and compile.
+To run in debug adjust Run-RunParameters-Worjing Directory to your CDC directory.
+To reduce the executable size for production use strip and upx.
 
 Naming convention for the program source.
 ----------------------------------------
-
 The following naming convention is use for the main project source code
 to allow to quickly recognise the destination of a unit.
 
-Some of this different file name are necessary to distinguish the Linux
-and the Windows files.
-This is because I choose to use the CLX only for the Linux project, the
-Windows project use the VCL.
-
-There is a few advantage for that:
-- We can use the cheap or even free Delphi or Kylix Personal Edition.
-- The native VCL Windows executable do not require to install Qt for Windows.
-- This clearly separate the code that depend of a specific GUI implementation,
-  a port to another compiler is simplified.
-
-The inconvenience is to maintain two version of the visual control, but with
-the proposed structure the extra work is keep at a minimum.
-
-Linux specific files:
-
-cdc_clx.dpr     : The main project
-fu_*.pas        : Form units with specific code only
-fu_*.xfm        : Form definition
-
-Windows specific files:
-
-cdc_vcl.dpr     : The main project
+cdc.lpi         : The main project
 pu_*.pas        : Form units with specific code only
-pu_*.dfm        : Form definition
-
-Common files:
-
-i_*.pas         : Include file with common form code.
+pu_*.lfm        : Form definition
 cu_*.pas        : Unit containing non-visual object.
 u_*.pas         : Unit with generic code.
 
-As most of the event declared in the fu_ or pu_ files are handled in the i_ file
-many automatic function of the IDE are not working. To solve this problem you 
-can temporarily copy the code from the i_ file at the indicated place in the fu_
-or pu_ file.
- 

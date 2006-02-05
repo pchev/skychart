@@ -22,16 +22,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  General database function. 
 }
+{$mode objfpc}{$H+}
 interface
 
-uses passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
-     {$ifdef linux}
-        QForms, QStdctrls, QComCtrls,    Qdialogs,
-     {$endif}
-     {$ifdef mswindows}
-        Forms, Stdctrls, ComCtrls,
-     {$endif}
-     Classes, Sysutils, StrUtils;
+uses
+  passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
+  Forms, Stdctrls, ComCtrls, Classes, Sysutils, StrUtils;
 
 
 type
@@ -63,8 +59,8 @@ type
      function AddAsteroid(astid,asth,astg,astep,astma,astperi,astnode,asti,astec,astax,astref,astnam,asteq: string): string;
      procedure TruncateDailyComet;
      procedure TruncateDailyAsteroid;
-     procedure GetCometList(filter:string; maxnumber:integer; list:Tstrings; var cometid: array of string);
-     procedure GetAsteroidList(filter:string; maxnumber:integer; list:Tstrings; var astid: array of string);
+     procedure GetCometList(filter:string; maxnumber:integer; list:TstringList; var cometid: array of string);
+     procedure GetAsteroidList(filter:string; maxnumber:integer; var list:TstringList; var astid: array of string);
      function GetCometEpoch(id:string; now_jd:double):double;
      function GetAsteroidEpoch(id:string; now_jd:double):double;
      Function GetAstElem(id: string; epoch:double; var h,g,ma,ap,an,ic,ec,sa,eq: double; var ref,nam,elem_id:string):boolean;  published
@@ -91,9 +87,13 @@ end;
 
 destructor TCDCdb.Destroy;
 begin
+try
  db.Free;
  FFits.Free;
  inherited destroy;
+except
+writetrace('error destroy '+name);
+end;
 end;
 
 Function TCDCdb.ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
@@ -280,7 +280,7 @@ end;
 
 procedure TCDCdb.LoadCometFile(comfile:string; memocom:Tmemo);
 var
-  buf,cmd,filedesc,filenum,edate :string;
+  buf,cmd,filedesc,filenum :string;
   t,ep,id,nam,ec,q,i,node,peri,eq,h,g  : string;
   y,m,d,nl: integer;
   hh:double;
@@ -318,7 +318,6 @@ if db.Active then begin
        hh:=0;
     end;
     ep:=formatfloat(f1,jd(y,m,d,hh));
-    if nl=1 then edate:=inttostr(y)+'.'+inttostr(m);
     q:=copy(buf,31,9);
     ec:=copy(buf,41,9);
     peri:=copy(buf,51,9);
@@ -501,7 +500,7 @@ end;
 
 function TCDCdb.LoadAsteroidFile(astfile:string; astnumbered,stoperr,limit: boolean; astlimit:integer;  memoast:Tmemo):boolean;
 var
-  buf,cmd,c,filedesc,filenum,edate :string;
+  buf,cmd,c,filedesc,filenum :string;
   ep,id,nam,ec,ax,i,node,peri,eq,ma,h,g,ref  : string;
   y,m,d,nl,prefl,lid,nerr: integer;
   hh:double;
@@ -562,7 +561,6 @@ if db.Active then begin
        memoast.lines.add('invalid epoch on line'+inttostr(nl+prefl)+' : '+buf);
        break;
      end;
-    if nl=1 then edate:=inttostr(y)+'.'+inttostr(m);
     ma:=copy(buf,27,9);
     peri:=copy(buf,38,9);
     node:=copy(buf,49,9);
@@ -832,11 +830,10 @@ begin
   LoadCometFile(slash(sampledir)+'Cometsample.dat',memo);
 end;
 
-procedure TCDCdb.GetCometList(filter:string; maxnumber:integer; list:Tstrings; var cometid: array of string);
+procedure TCDCdb.GetCometList(filter:string; maxnumber:integer; list:TstringList; var cometid: array of string);
 var qry: string;
     i: integer;
 begin
-list.Clear;
 qry:='SELECT distinct(id),name FROM cdc_com_elem where name like "%'+trim(Filter)+'%" limit '+inttostr(maxnumber);
 db.Query(qry);
 if db.Rowcount>0 then
@@ -846,11 +843,10 @@ if db.Rowcount>0 then
   end;
 end;
 
-procedure TCDCdb.GetAsteroidList(filter:string; maxnumber:integer; list:Tstrings; var astid: array of string);
+procedure TCDCdb.GetAsteroidList(filter:string; maxnumber:integer; var list:TstringList; var astid: array of string);
 var qry: string;
     i: integer;
 begin
-list.Clear;
 qry:='SELECT distinct(id),name FROM cdc_ast_elem where name like "%'+trim(Filter)+'%" limit '+inttostr(maxnumber);
 db.Query(qry);
 if db.Rowcount>0 then

@@ -22,16 +22,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
   Minimal INDI client object thread for Cartes du Ciel
 }
+{$mode objfpc}{$H+}
 
 interface
 
-uses u_util, blcksock, LibXmlParser, LibXmlComps, Classes, SysUtils,
-{$ifdef linux}
-    libc,QFileCtrls,QForms;
-{$endif}
-{$ifdef mswindows}
-    Windows,Messages,Forms;
-{$endif}
+uses
+  {$ifdef mswindows}
+    Windows,
+  {$endif}
+  {$ifdef unix}
+    baseunix,
+  {$endif}
+  u_util, blcksock, LibXmlParser, LibXmlComps,
+  Classes, SysUtils, Messages,Forms;
 
 type
   TTCPclient = class(TSynaClient)
@@ -84,7 +87,7 @@ type
     procedure Send(const Value: string);
     procedure getProperties;
     procedure SetPort(Value:string);
-  published
+  public
     procedure Connect;
     procedure Disconnect;
     procedure Sync;
@@ -123,8 +126,12 @@ end;
 
 destructor TTCPclient.Destroy;
 begin
+try
   FSock.Free;
   inherited Destroy;
+except
+writetrace('error destroy TCPclient');
+end;
 end;
 
 function TTCPclient.Connect: Boolean;
@@ -172,10 +179,10 @@ var buf,plugin:string;
     connected,localplugin: boolean;
 begin
 XmlScanner:=TEasyXmlScanner.Create(nil);
-XmlScanner.OnStartTag:=XmlStartTag;
-XmlScanner.OnContent:=XmlContent;
-XmlScanner.OnEndTag:=XmlEndTag;
-XmlScanner.OnEmptyTag:=XmlEmptyTag;
+XmlScanner.OnStartTag:=@XmlStartTag;
+XmlScanner.OnContent:=@XmlContent;
+XmlScanner.OnEndTag:=@XmlEndTag;
+XmlScanner.OnEmptyTag:=@XmlEmptyTag;
 tcpclient:=TTCPClient.Create;
 try
  tcpclient.TargetHost:=FTargetHost;
@@ -187,8 +194,8 @@ try
     try
       plugin:=slash('plugins');
       localplugin:=directoryexists(plugin);
-      {$ifdef linux}
-      plugin:=expanddirectoryname(plugin);
+      {$ifdef unix}
+      plugin:=expandfilename(plugin);
       if localplugin then chdir(plugin);
       localplugin:=localplugin and fileexists(plugin+FIndiServer) and fileexists(plugin+FIndiDriver);
       if localplugin then begin
@@ -226,7 +233,7 @@ try
         if tcpclient.Sock.lastError<>0 then break;
      end;
      if FAutoconnect then begin
-        Synchronize(Connect);
+        Synchronize(@Connect);
         FAutoconnect:=false;
      end;
    until false;
@@ -237,9 +244,9 @@ if FServerStartedByMe then begin
     writetrace('Kill '+inttostr(FIndiServerPid));
     if FIndiServerPid<>0 then PostMessage(FIndiServerPid,WM_CLOSE,0,0);
   {$endif}
-  {$ifdef linux}
+  {$ifdef unix}
     writetrace('Kill '+inttostr(FIndiServerPid));
-    if FIndiServerPid<>0 then libc.kill(FIndiServerPid,SIGKILL);
+    if FIndiServerPid<>0 then fpKill(FIndiServerPid,SIGKILL);
   {$endif}
 end;
 if terminated then DisplayMessage('Closing connection')
@@ -257,7 +264,7 @@ begin
 FErrorDesc:=msg;
 //if FErrorDesc='OK' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
 if FErrorDesc='' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
-Synchronize(DisplayMessageSyn);
+Synchronize(@DisplayMessageSyn);
 end;
 
 procedure TIndiClient.DisplayMessageSyn;
@@ -294,7 +301,7 @@ end;
 procedure TIndiClient.ProcessData(line:string);
 begin
 FRecvData:=line;
-Synchronize(ProcessDataSyn);
+Synchronize(@ProcessDataSyn);
 end;
 
 procedure TIndiClient.ProcessDataSyn;

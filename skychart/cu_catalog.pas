@@ -22,17 +22,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  Catalog interface component. Also contain shared resources.
 }
-
+{$mode delphi}{$H+}
 interface
 
-uses u_constant, libcatalog, u_util, u_projection,
-     SysUtils, Classes, Math,
-{$ifdef linux}
-   QDialogs, Qforms;
-{$endif}
-{$ifdef mswindows}
-   Dialogs, Forms;
-{$endif}
+uses  { libcatalog,}  // libcatalog statically linked
+    bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
+    gscconst, gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit,
+    sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, wdsunit,
+    rc3unit,          // libcatalog statically linked
+    u_constant, u_util, u_projection,
+    SysUtils, Classes, Math, Dialogs, Forms;
 
 type
 
@@ -91,7 +90,7 @@ type
      cfgshr : conf_shared;
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
-     function OpenCat(c: conf_skychart):boolean;
+     function OpenCat(c: Pconf_skychart):boolean;
      function CloseCat:boolean;
      function OpenStar:boolean;
      function CloseStar:boolean;
@@ -118,16 +117,16 @@ type
      function SearchVarStar(Num:string; var ar1,de1: double): boolean;
      function SearchLines(Num:string; var ar1,de1: double): boolean;
      function SearchConstellation(Num:string; var ar1,de1: double): boolean;
-     function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
-     function FindObj(x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
+     function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
+     function FindObj(x1,y1,x2,y2:double; nextobj : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
      procedure GetAltName(rec: GCatrec; var txt: string);
      function CheckPath(cat: integer; catpath:string):boolean;
-     function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:shortstring):boolean;
+     function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
      function GetMaxField(path,cat: string):string;
      Procedure LoadConstellation(fname:string);
      Procedure LoadConstL(fname:string);
      Procedure LoadConstB(fname:string);
-     Procedure LoadHorizon(fname:string; var cfgsc:conf_skychart);
+     Procedure LoadHorizon(fname:string; cfgsc:Pconf_skychart);
      Procedure LoadStarName(fname:string);
   published
     { Published declarations }
@@ -143,30 +142,34 @@ end;
 
 destructor Tcatalog.Destroy;
 begin
+try
  inherited destroy;
+except
+writetrace('error destroy '+name);
+end;
 end;
 
-Function Tcatalog.OpenCat(c: conf_skychart):boolean;
+Function Tcatalog.OpenCat(c: Pconf_skychart):boolean;
 var ac,dc: double;
 begin
 // get a lock before to do anything, libcatalog is NOT thread safe.
   while lockcat do application.ProcessMessages;
   lockcat:=true;
-  case c.ProjPole of
+  case c^.ProjPole of
   Gal   : begin
-          ac:=rad2deg*c.lcentre;
-          dc:=rad2deg*c.bcentre;
+          ac:=rad2deg*c^.lcentre;
+          dc:=rad2deg*c^.bcentre;
           end;
   Ecl   : begin
-          ac:=rad2deg*c.lecentre;
-          dc:=rad2deg*c.becentre;
+          ac:=rad2deg*c^.lecentre;
+          dc:=rad2deg*c^.becentre;
           end;
   else    begin
-          ac:=rad2deg*c.acentre;
-          dc:=rad2deg*c.hcentre;
+          ac:=rad2deg*c^.acentre;
+          dc:=rad2deg*c^.hcentre;
           end;
   end;
-  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*c.racentre/15,rad2deg*c.decentre,ac,dc,c.CurJD,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
+  InitCatWin(c^.axglb,c^.ayglb,c^.bxglb/rad2deg,c^.byglb/rad2deg,c^.sintheta,c^.costheta,rad2deg*c^.racentre/15,rad2deg*c^.decentre,ac,dc,c^.CurJD,c^.JDChart,rad2deg*c^.CurST/15,c^.ObsLatitude,c^.ProjPole,c^.xshift,c^.yshift,c^.xmin,c^.xmax,c^.ymin,c^.ymax,c^.projtype,northpole2000inmap(c),southpole2000inmap(c));
   result:=true;
 end;
 
@@ -242,19 +245,19 @@ end else begin
 end;
 InitRec(curcat);
 case curcat of
-   bsc     : begin SetBscPath(cfgcat.starcatpath[bsc-BaseStar]); OpenBSCwin(result); end;
-   sky2000 : begin SetSkyPath(cfgcat.starcatpath[sky2000-BaseStar]); OpenSkywin(result); end;
-   tyc     : begin SetTycPath(cfgcat.starcatpath[tyc-BaseStar]); OpenTYCwin(result); end;
-   tyc2    : begin SetTy2Path(cfgcat.starcatpath[tyc2-BaseStar]); OpenTY2win(nty2cat,result); end;
-   tic     : begin SetTicPath(cfgcat.starcatpath[tic-BaseStar]); OpenTICwin(result); end;
-   gscf    : begin SetGscfPath(cfgcat.starcatpath[gscf-BaseStar]); OpenGSCFwin(result); end;
-   gscc    : begin SetGsccPath(cfgcat.starcatpath[gscc-BaseStar]); OpenGSCCwin(result); end;
-   gsc     : begin SetGscPath(cfgcat.starcatpath[gsc-BaseStar]); OpenGSCwin(result); end;
-   usnoa   : begin SetUSNOAPath(cfgcat.starcatpath[usnoa-BaseStar]); OpenUSNOAwin(result); end;
-   microcat: begin SetMCTPath(cfgcat.starcatpath[microcat-BaseStar]); OpenMCTwin(nmctcat,result); end;
-   dsbase  : begin SetDSPath(cfgcat.starcatpath[dsbase-BaseStar],cfgcat.starcatpath[dstyc-BaseStar],cfgcat.starcatpath[dsgsc-BaseStar]); OpenDSbasewin(result); end;
-   dstyc   : begin SetDSPath(cfgcat.starcatpath[dsbase-BaseStar],cfgcat.starcatpath[dstyc-BaseStar],cfgcat.starcatpath[dsgsc-BaseStar]); OpenDStycwin(result); end;
-   dsgsc   : begin SetDSPath(cfgcat.starcatpath[dsbase-BaseStar],cfgcat.starcatpath[dstyc-BaseStar],cfgcat.starcatpath[dsgsc-BaseStar]); OpenDSgscwin(result); end;
+   bsc     : begin SetBscPath(PChar(cfgcat.starcatpath[bsc-BaseStar])); OpenBSCwin(result); end;
+   sky2000 : begin SetSkyPath(PChar(cfgcat.starcatpath[sky2000-BaseStar])); OpenSkywin(result); end;
+   tyc     : begin SetTycPath(PChar(cfgcat.starcatpath[tyc-BaseStar])); OpenTYCwin(result); end;
+   tyc2    : begin SetTy2Path(PChar(cfgcat.starcatpath[tyc2-BaseStar])); OpenTY2win(nty2cat,result); end;
+   tic     : begin SetTicPath(PChar(cfgcat.starcatpath[tic-BaseStar])); OpenTICwin(result); end;
+   gscf    : begin SetGscfPath(PChar(cfgcat.starcatpath[gscf-BaseStar])); OpenGSCFwin(result); end;
+   gscc    : begin SetGsccPath(PChar(cfgcat.starcatpath[gscc-BaseStar])); OpenGSCCwin(result); end;
+   gsc     : begin SetGscPath(PChar(cfgcat.starcatpath[gsc-BaseStar])); OpenGSCwin(result); end;
+   usnoa   : begin SetUSNOAPath(PChar(cfgcat.starcatpath[usnoa-BaseStar])); OpenUSNOAwin(result); end;
+   microcat: begin SetMCTPath(PChar(cfgcat.starcatpath[microcat-BaseStar])); OpenMCTwin(nmctcat,result); end;
+   dsbase  : begin SetDSPath(PChar(cfgcat.starcatpath[dsbase-BaseStar]),PChar(cfgcat.starcatpath[dstyc-BaseStar]),PChar(cfgcat.starcatpath[dsgsc-BaseStar])); OpenDSbasewin(result); end;
+   dstyc   : begin SetDSPath(PChar(cfgcat.starcatpath[dsbase-BaseStar]),PChar(cfgcat.starcatpath[dstyc-BaseStar]),PChar(cfgcat.starcatpath[dsgsc-BaseStar])); OpenDStycwin(result); end;
+   dsgsc   : begin SetDSPath(PChar(cfgcat.starcatpath[dsbase-BaseStar]),PChar(cfgcat.starcatpath[dstyc-BaseStar]),PChar(cfgcat.starcatpath[dsgsc-BaseStar])); OpenDSgscwin(result); end;
    gcstar  : begin VerGCat:=rtStar; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result);end;
    else result:=false;
 end;
@@ -327,7 +330,7 @@ function Tcatalog.OpenVarStarCat:boolean;
 begin
 InitRec(curcat);
 case curcat of
-   gcvs    : begin SetGCVPath(cfgcat.varstarcatpath[gcvs-BaseVar]); OpenGCVwin(result); end;
+   gcvs    : begin SetGCVPath(PChar(cfgcat.varstarcatpath[gcvs-BaseVar])); OpenGCVwin(result); end;
    gcvar   : begin VerGCat:=rtVar; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
    else result:=false;
 end;
@@ -388,7 +391,7 @@ function Tcatalog.OpenDblStarCat:boolean;
 begin
 InitRec(curcat);
 case curcat of
-   wds     : begin SetWDSPath(cfgcat.dblstarcatpath[wds-BaseDbl]); OpenWDSwin(result); end;
+   wds     : begin SetWDSPath(PChar(cfgcat.dblstarcatpath[wds-BaseDbl])); OpenWDSwin(result); end;
    gcdbl   : begin VerGCat:=rtDbl; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
    else result:=false;
 end;
@@ -456,14 +459,14 @@ function Tcatalog.OpenNebCat:boolean;
 begin
 InitRec(curcat);
 case curcat of
-   sac     : begin SetSacPath(cfgcat.nebcatpath[sac-BaseNeb]); OpenSACwin(result); end;
-   ngc     : begin SetngcPath(cfgcat.nebcatpath[ngc-BaseNeb]); Openngcwin(result); end;
-   lbn     : begin SetlbnPath(cfgcat.nebcatpath[lbn-BaseNeb]); Openlbnwin(result); end;
-   rc3     : begin Setrc3Path(cfgcat.nebcatpath[rc3-BaseNeb]); Openrc3win(result); end;
-   pgc     : begin SetpgcPath(cfgcat.nebcatpath[pgc-BaseNeb]); Openpgcwin(result); end;
-   ocl     : begin SetoclPath(cfgcat.nebcatpath[ocl-BaseNeb]); Openoclwin(result); end;
-   gcm     : begin SetgcmPath(cfgcat.nebcatpath[gcm-BaseNeb]); Opengcmwin(result); end;
-   gpn     : begin SetgpnPath(cfgcat.nebcatpath[gpn-BaseNeb]); Opengpnwin(result); end;
+   sac     : begin SetSacPath(PChar(cfgcat.nebcatpath[sac-BaseNeb])); OpenSACwin(result); end;
+   ngc     : begin SetngcPath(PChar(cfgcat.nebcatpath[ngc-BaseNeb])); Openngcwin(result); end;
+   lbn     : begin SetlbnPath(PChar(cfgcat.nebcatpath[lbn-BaseNeb])); Openlbnwin(result); end;
+   rc3     : begin Setrc3Path(PChar(cfgcat.nebcatpath[rc3-BaseNeb])); Openrc3win(result); end;
+   pgc     : begin SetpgcPath(PChar(cfgcat.nebcatpath[pgc-BaseNeb])); Openpgcwin(result); end;
+   ocl     : begin SetoclPath(PChar(cfgcat.nebcatpath[ocl-BaseNeb])); Openoclwin(result); end;
+   gcm     : begin SetgcmPath(PChar(cfgcat.nebcatpath[gcm-BaseNeb])); Opengcmwin(result); end;
+   gpn     : begin SetgpnPath(PChar(cfgcat.nebcatpath[gpn-BaseNeb])); Opengpnwin(result); end;
    gcneb  : begin VerGCat:=rtNeb; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
    else result:=false;
 end;
@@ -549,9 +552,9 @@ var GcatH : TCatHeader;
     v : integer;
 begin
  if fill then
-    SetGcatPath(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway','mwf')
+    SetGcatPath(PChar(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway'),'mwf')
  else
-    SetGcatPath(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway','mwl');
+    SetGcatPath(PChar(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway'),'mwl');
  GetGCatInfo(GcatH,v,result);
  if result then result:=(v=rtLin);
  if result then OpenGCatWin(result);
@@ -1070,16 +1073,16 @@ repeat
     break;
  end;
  if cfgcat.GCatLst[CurGCat-1].CatOn then begin
-   SetGcatPath(cfgcat.GCatLst[CurGCat-1].path,cfgcat.GCatLst[CurGCat-1].shortname);
+   SetGcatPath(PChar(cfgcat.GCatLst[CurGCat-1].path),PChar(cfgcat.GCatLst[CurGCat-1].shortname));
    GetGCatInfo(GcatH,v,result);
  end else result:=false;
 until result and (v=VerGCat);
 end;
 
-function Tcatalog.GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:shortstring):boolean;
+function Tcatalog.GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
 var GcatH : TCatHeader;
 begin
-SetGcatPath(path,shortname);
+SetGcatPath(PChar(path),PChar(shortname));
 GetGCatInfo(GcatH,v,result);
 magmax:=GcatH.MagMax;
 version:=GcatH.version;
@@ -1091,7 +1094,7 @@ var GCatH : TCatHeader;
     v : integer;
     ok : boolean;
 begin
-SetGcatPath(path,cat);
+SetGcatPath(PChar(path),PChar(cat));
 GetGCatInfo(GcatH,v,ok);
 case GcatH.FileNum of
   1    : result:='10';
@@ -1190,19 +1193,21 @@ repeat
 until not result;
 end;
 
-procedure Tcatalog.FindNGCat(id : shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
+procedure Tcatalog.FindNGCat(id:shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
 var
    H : TCatHeader;
    i,version : integer;
+   iid:PChar;
 begin
 ok:=false;
+iid:=PChar(string(id));
 for i:=0 to cfgcat.GCatNum-1 do begin
   if ((ctype=-1)or(cfgcat.GCatLst[i].cattype=ctype))
    and fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx')
    then begin
-     SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
+     SetGcatPath(PChar(cfgcat.GCatLst[i].path),PChar(cfgcat.GCatLst[i].shortname));
      GetGCatInfo(H,version,ok);
-     if ok then FindNumGcat(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,id,H.ixkeylen, ar,de,ok);
+     if ok then FindNumGcat(PChar(cfgcat.GCatLst[i].path),PChar(cfgcat.GCatLst[i].shortname),iid,H.ixkeylen, ar,de,ok);
      if ok then break;
   end;
 end;
@@ -1302,7 +1307,7 @@ end;
 
 function Tcatalog.GetTYC(var rec:GcatRec):boolean;
 var lin : TYCrec;
-   smnum : shortstring;
+   smnum : PChar;
 begin
 rec:=EmptyRec;
 result:=true;
@@ -1330,7 +1335,7 @@ end;
 
 function Tcatalog.GetTYC2(var rec:GcatRec):boolean;
 var lin : TY2rec;
-   smnum : shortstring;
+   smnum : PChar;
 begin
 rec:=EmptyRec;
 result:=true;
@@ -1356,7 +1361,7 @@ end;
 
 function Tcatalog.GetTIC(var rec:GcatRec):boolean;
 var lin : TICrec;
-    smnum : shortstring;
+    smnum : PChar;
 begin
 rec:=EmptyRec;
 result:=true;
@@ -1389,7 +1394,7 @@ end;
 
 function Tcatalog.GetGSCF(var rec:GcatRec):boolean;
 var lin : GSCFrec;
-    smnum : shortstring;
+    smnum : PChar;
 begin
 rec:=EmptyRec;
 result:=true;
@@ -1415,7 +1420,7 @@ end;
 
 function Tcatalog.GetGSCC(var rec:GcatRec):boolean;
 var lin : GSCCrec;
-    smnum : shortstring;
+    smnum : PChar;
 begin
 rec:=EmptyRec;
 result:=true;
@@ -1441,7 +1446,7 @@ end;
 
 function Tcatalog.GetGSC(var rec:GcatRec):boolean;
 var lin : GSCrec;
-    smnum : shortstring;
+    smnum : PChar;
 begin
 rec:=EmptyRec;
 result:=true;
@@ -1804,7 +1809,7 @@ result:=true;
 repeat
   ReadRC3(lin,result);
   if not result then break;
-  rec.neb.mag:=minvalue([90,abs(lin.mb/100)]);
+  rec.neb.mag:=min(90,abs(lin.mb/100));
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
   if lin.d25>=0 then rec.neb.dim1:=power(10,lin.d25/100)/10
                 else rec.neb.dim1:=0;
@@ -1841,7 +1846,7 @@ result:=true;
 repeat
   ReadPGC(lin,result);
   if not result then break;
-  rec.neb.mag:=minvalue([90,abs(lin.mb/100)]);
+  rec.neb.mag:=min(90,abs(lin.mb/100));
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
   if lin.maj>=0 then rec.neb.dim1:=lin.maj/100
                 else rec.neb.dim1:=0;
@@ -1958,76 +1963,76 @@ while lockcat do application.ProcessMessages;
 try
   lockcat:=true;
   case cat of
-        S_Messier  : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
-                     SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
+        S_Messier  : if IsNGCPath(PChar(cfgcat.NebCatPath[ngc-BaseNeb])) then begin
+                     SetNGCPath(PChar(cfgcat.NebCatPath[ngc-BaseNeb]));
                      FindNumMessier(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_NGC      : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
-                     SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
+        S_NGC      : if IsNGCPath(PChar(cfgcat.NebCatPath[ngc-BaseNeb])) then begin
+                     SetNGCPath(PChar(cfgcat.NebCatPath[ngc-BaseNeb]));
                      FindNumNGC(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_IC       : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
-                     SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
+        S_IC       : if IsNGCPath(PChar(cfgcat.NebCatPath[ngc-BaseNeb])) then begin
+                     SetNGCPath(PChar(cfgcat.NebCatPath[ngc-BaseNeb]));
                      FindNumIC(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_PGC      : if IsPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]) then begin
-                     SetPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]);
+        S_PGC      : if IsPGCPath(PChar(cfgcat.NebCatPath[pgc-BaseNeb])) then begin
+                     SetPGCPath(PChar(cfgcat.NebCatPath[pgc-BaseNeb]));
                      FindNumPGC(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_GCVS     : if IsGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]) then begin
-                     SetGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]);
-                     FindNumGCVS(id,ra,dec,result) ;
+        S_GCVS     : if IsGCVPath(PChar(cfgcat.VarStarCatPath[gcvs-BaseVar])) then begin
+                     SetGCVPath(PChar(cfgcat.VarStarCatPath[gcvs-BaseVar]));
+                     FindNumGCVS(PChar(id),ra,dec,result) ;
                      end;
-        S_GC       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
+        S_GC       : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
                      FindNumGC(strtointdef(id,0),ra,dec,result) ;
                      end;
         S_GSC      : begin
-                       SetGSCPath(cfgcat.StarCatPath[gsc-BaseStar]);
-                       SetGSCCPath(cfgcat.StarCatPath[gscc-BaseStar]);
-                       SetGSCFPath(cfgcat.StarCatPath[gscf-BaseStar]);
-                       if cfgcat.StarCatDef[gsc-BaseStar] then FindNumGSC(id,ra,dec,result)
-                       else if cfgcat.StarCatDef[gscf-BaseStar] then FindNumGSCF(id,ra,dec,result)
-                       else if cfgcat.StarCatDef[gscc-BaseStar] then FindNumGSCC(id,ra,dec,result) ;
+                       SetGSCPath(PChar(cfgcat.StarCatPath[gsc-BaseStar]));
+                       SetGSCCPath(PChar(cfgcat.StarCatPath[gscc-BaseStar]));
+                       SetGSCFPath(PChar(cfgcat.StarCatPath[gscf-BaseStar]));
+                       if cfgcat.StarCatDef[gsc-BaseStar] then FindNumGSC(PChar(id),ra,dec,result)
+                       else if cfgcat.StarCatDef[gscf-BaseStar] then FindNumGSCF(PChar(id),ra,dec,result)
+                       else if cfgcat.StarCatDef[gscc-BaseStar] then FindNumGSCC(PChar(id),ra,dec,result) ;
                      end;
-        S_SAO      : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
+        S_SAO      : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
                      FindNumSAO(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_HD       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
+        S_HD       : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
                      FindNumHD(strtointdef(id,0),ra,dec,result) ;
                      end;
-        S_BD       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
-                     FindNumBD(id,ra,dec,result) ;
+        S_BD       : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
+                     FindNumBD(PChar(id),ra,dec,result) ;
                      end;
-        S_CD       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
-                     FindNumCD(id,ra,dec,result) ;
+        S_CD       : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
+                     FindNumCD(PChar(id),ra,dec,result) ;
                      end;
-        S_CPD      : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
-                     FindNumCPD(id,ra,dec,result) ;
+        S_CPD      : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
+                     FindNumCPD(PChar(id),ra,dec,result) ;
                      end;
-        S_HR       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
+        S_HR       : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
                      FindNumHR(strtointdef(id,0),ra,dec,result) ;
                      end;
 {        S_Const    : begin
                      FindNumCon(strtointdef(id,0),ra,dec,result);
                      end; }
-        S_Bayer    : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
-                     FindNumBayer(id,ra,dec,result) ;
+        S_Bayer    : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
+                     FindNumBayer(PChar(id),ra,dec,result) ;
                      end;
-        S_Flam     : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
-                     FindNumFlam(id,ra,dec,result) ;
+        S_Flam     : if IsBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar])) then begin
+                     SetBSCPath(PChar(cfgcat.StarCatPath[bsc-BaseStar]));
+                     FindNumFlam(PChar(id),ra,dec,result) ;
                      end;
-        S_SAC      : if IsSACPath(cfgcat.NebCatPath[sac-BaseNeb]) then begin
-                     SetSACPath(cfgcat.NebCatPath[sac-BaseNeb]);
-                     FindNumSAC(id,ra,dec,result) ;
+        S_SAC      : if IsSACPath(PChar(cfgcat.NebCatPath[sac-BaseNeb])) then begin
+                     SetSACPath(PChar(cfgcat.NebCatPath[sac-BaseNeb]));
+                     FindNumSAC(PChar(id),ra,dec,result) ;
                      end;
 {       S_SIMBAD   : begin
                      FindNumSIMBAD(id,ra,dec,result) ;
@@ -2035,16 +2040,16 @@ try
         S_NED      : begin
                      FindNumNED(id,ra,dec,result) ;
                      end;}
-        S_WDS      : if IsWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]) then begin
-                     SetWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]);
-                     FindNumWDS(id,ra,dec,result) ;
+        S_WDS      : if IsWDSPath(PChar(cfgcat.DblStarCatPath[wds-BaseDbl])) then begin
+                     SetWDSPath(PChar(cfgcat.DblStarCatPath[wds-BaseDbl]));
+                     FindNumWDS(PChar(id),ra,dec,result) ;
                      end;
         S_GCat     : begin
                      FindNGcat(id,ra,dec,result) ;
                      end;
-        S_TYC2     : if IsTY2Path(cfgcat.StarCatPath[tyc2-BaseStar]) then begin
-                     SetTY2Path(cfgcat.StarCatPath[tyc2-BaseStar]);
-                     FindNumTYC2(id,ra,dec,result) ;
+        S_TYC2     : if IsTY2Path(PChar(cfgcat.StarCatPath[tyc2-BaseStar])) then begin
+                     SetTY2Path(PChar(cfgcat.StarCatPath[tyc2-BaseStar]));
+                     FindNumTYC2(PChar(id),ra,dec,result) ;
                      end;
 {       S_Common   : begin
                      FindNumObjectName(strtointdef(id,0),ra,dec,result);
@@ -2201,7 +2206,7 @@ begin
      end;
 end;
 
-function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
+function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
 var
    xx1,xx2,yy1,yy2,cyear,dyear : double;
    ok : boolean;
@@ -2210,7 +2215,7 @@ xx1:=rad2deg*x1/15;
 xx2:=rad2deg*x2/15;
 yy1:=rad2deg*y1;
 yy2:=rad2deg*y2;
-cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
+cyear:=cfgsc^.CurYear+cfgsc^.CurMonth/12;
 if not nextobj then begin
   InitRec(cat);
   case cat of
@@ -2309,14 +2314,14 @@ repeat
    else ok:=false;
   end;
   if not ok then break;
-  if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
+  if cfgsc^.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
     if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
                                else dyear:=cyear-rec.options.Epoch;
     rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*dyear;
     rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
   end;
-  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
-  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+  precession(rec.options.EquinoxJD,cfgsc^.JDChart,rec.ra,rec.dec);
+  if cfgsc^.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
   if truncate then begin
     if (rec.ra<x1) or (rec.ra>x2) then continue;
     if (rec.dec<y1) or (rec.dec>y2) then continue;
@@ -2326,7 +2331,7 @@ until false ;
 result:=ok;
 end;
 
-function Tcatalog.FindObj(x1,y1,x2,y2:double; nextobj : boolean;var cfgsc:conf_skychart; var rec: Gcatrec):boolean;
+function Tcatalog.FindObj(x1,y1,x2,y2:double; nextobj : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
 var
    ok : boolean;
 begin
@@ -2361,7 +2366,7 @@ begin
   if (not ok) and Catalog2Show then FindCatalogue2(ar,de,dx,dx,nextobj,ok,nom,ma,desc,notes);
   if (not ok) and ArtSatOn then FindSatellite(ar,de,dx,dx,nextobj,ok,nom,ma,desc);}
   result:=ok;
-  cfgsc.FindOK:=ok;
+  cfgsc^.FindOK:=ok;
 end;
 
 Procedure Tcatalog.GetAltName(rec: GCatrec; var txt: string);
@@ -2381,29 +2386,29 @@ end;
 function Tcatalog.CheckPath(cat: integer; catpath:string):boolean;
 begin
   case cat of
-   bsc     : result:=IsBSCPath(catpath);
-   sky2000 : result:=IsSkyPath(catpath);
-   tyc     : result:=IsTYCPath(catpath);
-   tyc2    : result:=IsTY2Path(catpath);
-   tic     : result:=IsTICPath(catpath);
-   gscf    : result:=IsGSCFPath(catpath);
-   gscc    : result:=IsGSCCPath(catpath);
-   gsc     : result:=IsGSCPath(catpath);
-   usnoa   : result:=IsUSNOAPath(catpath);
-   microcat: result:=IsMCTPath(catpath);
-   dsbase  : result:=IsDSbasePath(catpath);
-   dstyc   : result:=IsDSTycPath(catpath);
-   dsgsc   : result:=IsDSGscPath(catpath);
-   gcvs    : result:=IsGCVPath(catpath);
-   wds     : result:=IsWDSPath(catpath);
-   sac     : result:=IsSACPath(catpath);
-   ngc     : result:=IsNGCPath(catpath);
-   lbn     : result:=IsLBNPath(catpath);
-   rc3     : result:=IsRC3Path(catpath);
-   pgc     : result:=IsPGCPath(catpath);
-   ocl     : result:=IsOCLPath(catpath);
-   gcm     : result:=IsGCMPath(catpath);
-   gpn     : result:=IsGPNPath(catpath);
+   bsc     : result:=IsBSCPath(PChar(catpath));
+   sky2000 : result:=IsSkyPath(PChar(catpath));
+   tyc     : result:=IsTYCPath(PChar(catpath));
+   tyc2    : result:=IsTY2Path(PChar(catpath));
+   tic     : result:=IsTICPath(PChar(catpath));
+   gscf    : result:=IsGSCFPath(PChar(catpath));
+   gscc    : result:=IsGSCCPath(PChar(catpath));
+   gsc     : result:=IsGSCPath(PChar(catpath));
+   usnoa   : result:=IsUSNOAPath(PChar(catpath));
+   microcat: result:=IsMCTPath(PChar(catpath));
+   dsbase  : result:=IsDSbasePath(PChar(catpath));
+   dstyc   : result:=IsDSTycPath(PChar(catpath));
+   dsgsc   : result:=IsDSGscPath(PChar(catpath));
+   gcvs    : result:=IsGCVPath(PChar(catpath));
+   wds     : result:=IsWDSPath(PChar(catpath));
+   sac     : result:=IsSACPath(PChar(catpath));
+   ngc     : result:=IsNGCPath(PChar(catpath));
+   lbn     : result:=IsLBNPath(PChar(catpath));
+   rc3     : result:=IsRC3Path(PChar(catpath));
+   pgc     : result:=IsPGCPath(PChar(catpath));
+   ocl     : result:=IsOCLPath(PChar(catpath));
+   gcm     : result:=IsGCMPath(PChar(catpath));
+   gpn     : result:=IsGPNPath(PChar(catpath));
    else result:=false;
   end;
 end;
@@ -2465,7 +2470,7 @@ Procedure Tcatalog.LoadConstL(fname:string);
 var f : textfile;
     i,n:integer;
     ra1,ra2,de1,de2:single;
-    txt:string;
+    dummytxt:string;
 begin
    if not FileExists(fname) then begin
       cfgshr.ConstLNum := 0;
@@ -2478,7 +2483,7 @@ begin
    n:=0;
    // first loop to get the size
    repeat
-     readln(f,txt);
+     readln(f,dummytxt);
      inc(n);
    until eof(f);
    setlength(cfgshr.ConstL,n);
@@ -2535,13 +2540,13 @@ begin
    end;
 end;
 
-Procedure Tcatalog.LoadHorizon(fname:string; var cfgsc:conf_skychart);
+Procedure Tcatalog.LoadHorizon(fname:string; cfgsc:Pconf_skychart);
 var de,d0,d1,d2 : single;
     i,i1,i2 : integer;
     f : textfile;
     buf : string;
 begin
-cfgsc.HorizonMax:=musec;  // require in cfgsc for horizon clipping in u_projection
+cfgsc^.HorizonMax:=musec;  // require in cfgsc for horizon clipping in u_projection
 for i:=1 to 360 do cfgshr.horizonlist[i]:=0;
 if fileexists(fname) then begin
 i1:=0;i2:=0;d1:=0;d0:=0;
@@ -2575,7 +2580,7 @@ while (not eof(f))and(i2<359) do begin
     for i := i1 to i2 do begin
         de:=deg2rad*(d1+(i-i1)*(d2-d1)/(i2-i1));
         cfgshr.horizonlist[i+1]:=de;
-        cfgsc.HorizonMax:=maxvalue([cfgsc.HorizonMax,de]);
+        cfgsc^.HorizonMax:=max(cfgsc^.HorizonMax,de);
     end;
     i1:=i2;
     d1:=d2;
@@ -2587,13 +2592,12 @@ if i2<359 then begin
     for i:=i1 to 359 do begin
         de:=deg2rad*(d1+(i-i1)*(d0-d1)/(359-i1));
         cfgshr.horizonlist[i+1]:=de;
-        cfgsc.HorizonMax:=maxvalue([cfgsc.HorizonMax,de]);
+        cfgsc^.HorizonMax:=max(cfgsc^.HorizonMax,de);
     end;
 end;
-//cfgsc.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
 end;
 end;
-cfgsc.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
+cfgsc^.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
 
 end;
 
