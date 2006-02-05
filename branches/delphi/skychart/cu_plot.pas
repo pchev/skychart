@@ -2147,6 +2147,8 @@ begin
         Typically, the catalog diameters are set at the mag 25 sq arc sec, and
         this leads to diameters wayyyyy too large for light polluted sites.
         eg. 0.6 works well for SE England.
+
+        This is unfortunatelly not possible as this greatly depend on each object
 }
   xx:=round(Ax);
   yy:=round(Ay);
@@ -2169,11 +2171,11 @@ begin
             1000 : co := cfgplot.Color[8];
           else co:=cfgplot.color[11]
       end;
-      co:=cfgplot.DSOColorGxy;
+      co:=cfgplot.Color[31];
       cnv.Pen.Width := cfgchart.drawpen;
       cnv.Brush.style:=bsSolid;
       cnv.Pen.Mode:=pmCopy;
-      cnv.Pen.Color:=cfgplot.DSOColorGxy;
+      cnv.Pen.Color:=cfgplot.Color[31];
 
       if cfgplot.nebplot = 0 then // line mode
         begin
@@ -2181,7 +2183,7 @@ begin
           if cfgplot.DSOColorFillGxy then
             begin
               cnv.Brush.Style := bsSolid;
-              cnv.Pen.Color := cfgplot.DSOColorGxy;
+              cnv.Pen.Color := cfgplot.Color[31];
               cnv.Brush.Color := cnv.Pen.Color;
             end;
         end;
@@ -2197,9 +2199,9 @@ begin
           col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,
                         trunc(cfgplot.Nebbright-((Asbr-11)/4)*
                              (cfgplot.Nebbright-cfgplot.Nebgray))])]);
-          r:=cfgplot.DSOColorGxy and $FF;
-          g:=(cfgplot.DSOColorGxy shr 8) and $FF;
-          b:=(cfgplot.DSOColorGxy shr 16) and $FF;
+          r:=cfgplot.Color[31] and $FF;
+          g:=(cfgplot.Color[31] shr 8) and $FF;
+          b:=(cfgplot.Color[31] shr 16) and $FF;
           Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
           cnv.Brush.Color := Addcolor(Nebcolor,cfgplot.backgroundcolor);
           cnv.Pen.Color := cnv.Brush.Color;
@@ -2276,7 +2278,7 @@ begin
   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
   cnv.Pen.Mode := pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Pen.Color := cfgplot.Color[24];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2289,9 +2291,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorOCl and $FF;
-      g:=(cfgplot.DSOColorOCl shr 8) and $FF;
-      b:=(cfgplot.DSOColorOCl shr 16) and $FF;
+      r:=cfgplot.Color[24] and $FF;
+      g:=(cfgplot.Color[24] shr 8) and $FF;
+      b:=(cfgplot.Color[24] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2306,7 +2308,7 @@ begin
       if cfgplot.DSOColorFillOCl then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorOCl;
+          cnv.Pen.Color := cfgplot.Color[24];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2350,7 +2352,7 @@ begin
   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorPNe;
+  cnv.Pen.Color := cfgplot.Color[26];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2362,9 +2364,9 @@ begin
           Asbr:= Ama + 5*log10(Adim) - 0.26;
         end;
 //    adjust colour by using Asbr and UI options
-      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);      r:=cfgplot.DSOColorPNe and $FF;
-      g:=(cfgplot.DSOColorPNe shr 8) and $FF;
-      b:=(cfgplot.DSOColorPNe shr 16) and $FF;
+      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);      r:=cfgplot.Color[26] and $FF;
+      g:=(cfgplot.Color[26] shr 8) and $FF;
+      b:=(cfgplot.Color[26] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2378,7 +2380,7 @@ begin
       if cfgplot.DSOColorFillPNe then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorPNe;
+          cnv.Pen.Color := cfgplot.Color[26];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2421,7 +2423,7 @@ begin
   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorGCl;
+  cnv.Pen.Color := cfgplot.Color[25];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2434,9 +2436,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorGCl and $FF;
-      g:=(cfgplot.DSOColorGCl shr 8) and $FF;
-      b:=(cfgplot.DSOColorGCl shr 16) and $FF;
+      r:=cfgplot.Color[25] and $FF;
+      g:=(cfgplot.Color[25] shr 8) and $FF;
+      b:=(cfgplot.Color[25] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2457,7 +2459,7 @@ begin
       if cfgplot.DSOColorFillGCl then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorGCl;
+          cnv.Pen.Color := cfgplot.Color[25];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2506,8 +2508,8 @@ begin
 // emission of reflection nebula?
   ObjMorph:=LeftStr(Amorph, 1);
   if ObjMorph = 'R'
-  then cnv.Pen.Color := cfgplot.DSOColorRN
-  else cnv.Pen.Color := cfgplot.DSOColorEN;
+  then cnv.Pen.Color := cfgplot.Color[29]
+  else cnv.Pen.Color := cfgplot.Color[28];
 
   cnv.Brush.Style := bsClear;
 
@@ -2600,7 +2602,7 @@ begin
 //  ds:=3*cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorRN;
+  cnv.Pen.Color := cfgplot.Color[29];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2613,9 +2615,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorRN and $FF;
-      g:=(cfgplot.DSOColorRN shr 8) and $FF;
-      b:=(cfgplot.DSOColorRN shr 16) and $FF;
+      r:=cfgplot.Color[29] and $FF;
+      g:=(cfgplot.Color[29] shr 8) and $FF;
+      b:=(cfgplot.Color[29] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2635,7 +2637,7 @@ begin
       if cfgplot.DSOColorFillRN then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorRN;
+          cnv.Pen.Color := cfgplot.Color[29];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2652,7 +2654,7 @@ begin
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,50,50);
       {$endif}
       cnv.MoveTo(xx-ds,yy);
-      cnv.Pen.Color := cfgplot.DSOColorOCl;
+      cnv.Pen.Color := cfgplot.Color[24];
       cnv.LineTo(xx+ds,yy);
       cnv.MoveTo(xx,yy-ds);
       cnv.LineTo(xx,yy+ds);
@@ -2683,7 +2685,7 @@ begin
   ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Pen.Color := cfgplot.Color[24];
 
 // Plotted as an '+', so there's no difference between line and graphics mode
 // we use the same colour as for open clusters
@@ -2721,7 +2723,7 @@ begin
   ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Pen.Color := cfgplot.Color[24];
 
 // Plotted as a '+', so there's no difference between line and graphics mode
 // we use the same colour as for open clusters
@@ -2756,7 +2758,7 @@ begin
   ds:=round(maxvalue([sz,4*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorOCl;
+  cnv.Pen.Color := cfgplot.Color[24];
 
 // Plotted as a '+', so there's no difference between line and graphics mode
 // we use the same colour as for open clusters
@@ -2791,7 +2793,7 @@ begin
   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorAst;
+  cnv.Pen.Color := cfgplot.Color[23];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2804,9 +2806,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorAst and $FF;
-      g:=(cfgplot.DSOColorAst shr 8) and $FF;
-      b:=(cfgplot.DSOColorAst shr 16) and $FF;
+      r:=cfgplot.Color[23] and $FF;
+      g:=(cfgplot.Color[23] shr 8) and $FF;
+      b:=(cfgplot.Color[23] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2821,7 +2823,7 @@ begin
       if cfgplot.DSOColorFillAst then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorAst;
+          cnv.Pen.Color := cfgplot.Color[23];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2860,7 +2862,7 @@ begin
   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorEN;
+  cnv.Pen.Color := cfgplot.Color[28];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2873,9 +2875,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorEN and $FF;
-      g:=(cfgplot.DSOColorEN shr 8) and $FF;
-      b:=(cfgplot.DSOColorEN shr 16) and $FF;
+      r:=cfgplot.Color[28] and $FF;
+      g:=(cfgplot.Color[28] shr 8) and $FF;
+      b:=(cfgplot.Color[28] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -2895,7 +2897,7 @@ begin
       if cfgplot.DSOColorFillEN then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorEN;
+          cnv.Pen.Color := cfgplot.Color[28];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -2942,7 +2944,7 @@ begin
   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psDot;
-  cnv.Pen.Color := cfgplot.DSOColorGxyCl;
+  cnv.Pen.Color := cfgplot.Color[32];
   cnv.Brush.Style := bsClear;
 
 { Plotted as an open dashed circle, so there's no difference between line and
@@ -2976,7 +2978,7 @@ begin
   ds:=round(maxvalue([sz,2*cfgchart.drawpen]));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorDN;
+  cnv.Pen.Color := cfgplot.Color[27];
   cnv.Brush.Style := bsSolid;
 
   if cfgplot.nebplot = 1 then // graphic mode
@@ -2989,9 +2991,9 @@ begin
         end;
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-(0.8)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.DSOColorDN and $FF;
-      g:=(cfgplot.DSOColorDN shr 8) and $FF;
-      b:=(cfgplot.DSOColorDN shr 16) and $FF;
+      r:=cfgplot.Color[27] and $FF;
+      g:=(cfgplot.Color[27] shr 8) and $FF;
+      b:=(cfgplot.Color[27] shr 16) and $FF;
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
@@ -3011,7 +3013,7 @@ begin
       if cfgplot.DSOColorFillDN then
         begin
           cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.DSOColorDN;
+          cnv.Pen.Color := cfgplot.Color[27];
           cnv.Brush.Color := cnv.Pen.Color;
         end
       else
@@ -3054,7 +3056,7 @@ begin
 
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.DSOColorNE;
+  cnv.Pen.Color := cfgplot.Color[35];
 
 // Plotted as an 'X', so there's no difference between line and graphics mode
 

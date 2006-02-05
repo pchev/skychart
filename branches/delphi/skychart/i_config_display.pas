@@ -160,19 +160,19 @@ gpnbox.Checked:=ccat.NebCatDef[gpn-BaseNeb];
 }
 
 
-    shpAst.Brush.Color:=cplot.DSOColorAst;
-    shpOCl.Brush.Color:=cplot.DSOColorOCl;
-    shpGCl.Brush.Color:=cplot.DSOColorGCl;
-    shpPNe.Brush.Color:= cplot.DSOColorPNe;
-    shpDN.Brush.Color:=cplot.DSOColorDN;
-    shpEN.Brush.Color:=cplot.DSOColorEN;
-    shpRN.Brush.Color:=cplot.DSOColorRN;
-    shpSN.Brush.Color:=cplot.DSOColorSN;
-    shpGxy.Brush.Color:=cplot.DSOColorGxy;
-    shpGxyCl.Brush.Color:=cplot.DSOColorGxyCL;
-    shpQ.Brush.Color:=cplot.DSOColorQ;
-    shpGL.Brush.Color:=cplot.DSOColorGL;
-    shpNE.Brush.Color:=cplot.DSOColorNE;
+    shpAst.Brush.Color:=cplot.Color[23];
+    shpOCl.Brush.Color:=cplot.Color[24];
+    shpGCl.Brush.Color:=cplot.Color[25];
+    shpPNe.Brush.Color:= cplot.Color[26];
+    shpDN.Brush.Color:=cplot.Color[27];
+    shpEN.Brush.Color:=cplot.Color[28];
+    shpRN.Brush.Color:=cplot.Color[29];
+    shpSN.Brush.Color:=cplot.Color[30];
+    shpGxy.Brush.Color:=cplot.Color[31];
+    shpGxyCl.Brush.Color:=cplot.Color[32];
+    shpQ.Brush.Color:=cplot.Color[33];
+    shpGL.Brush.Color:=cplot.Color[34];
+    shpNE.Brush.Color:=cplot.Color[35];
 
     vTCBStateChecked:=cbChecked;
     vTCBStateUnChecked:=cbUnchecked;
@@ -503,71 +503,71 @@ procedure Tf_config_display.ShapeDSOMouseUp(Sender: TObject; Button: TMouseButto
 begin
 if sender is TShape then
    with sender as TShape do begin
-   ColorDialog1.color:=cplot.DSOColorAst;
+   ColorDialog1.color:=cplot.Color[23];
    if ColorDialog1.Execute then begin
       if sender = shpAst then begin
-         cplot.DSOColorAst:=ColorDialog1.Color;
-         shpAst.Brush.Color:= cplot.DSOColorAst
+         cplot.Color[23]:=ColorDialog1.Color;
+         shpAst.Brush.Color:= cplot.Color[23]
 //         ShowSkyColor;
       end;
       if sender = shpOCl then begin
-          cplot.DSOColorOCl:=ColorDialog1.Color;
-          shpOCl.Brush.Color:= cplot.DSOColorOCl;
+          cplot.Color[24]:=ColorDialog1.Color;
+          shpOCl.Brush.Color:= cplot.Color[24];
 //         ShowSkyColor;
       end;
       if sender = shpGCl then begin
-          cplot.DSOColorGCl:=ColorDialog1.Color;
-          shpGCl.Brush.Color:= cplot.DSOColorGCl;
+          cplot.Color[25]:=ColorDialog1.Color;
+          shpGCl.Brush.Color:= cplot.Color[25];
 //         ShowSkyColor;
       end;
       if sender = shpPNe then begin
-          cplot.DSOColorPNe:=ColorDialog1.Color;
-          shpPNe.Brush.Color:= cplot.DSOColorPNe;
+          cplot.Color[26]:=ColorDialog1.Color;
+          shpPNe.Brush.Color:= cplot.Color[26];
 //         ShowSkyColor;
       end;
       if sender = shpDN then begin
-          cplot.DSOColorDN:=ColorDialog1.Color;
-          shpDN.Brush.Color:= cplot.DSOColorDN;
+          cplot.Color[27]:=ColorDialog1.Color;
+          shpDN.Brush.Color:= cplot.Color[27];
 //         ShowSkyColor;
       end;
       if sender = shpEN then begin
-          cplot.DSOColorEN:=ColorDialog1.Color;
-          shpEN.Brush.Color:= cplot.DSOColorEN;
+          cplot.Color[28]:=ColorDialog1.Color;
+          shpEN.Brush.Color:= cplot.Color[28];
 //         ShowSkyColor;
       end;
       if sender = shpRN then begin
-          cplot.DSOColorRN:=ColorDialog1.Color;
-          shpRN.Brush.Color:= cplot.DSOColorRN;
+          cplot.Color[29]:=ColorDialog1.Color;
+          shpRN.Brush.Color:= cplot.Color[29];
 //         ShowSkyColor;
       end;
       if sender = shpSN then begin
-          cplot.DSOColorSN:=ColorDialog1.Color;
-          shpSN.Brush.Color:= cplot.DSOColorSN;
+          cplot.Color[30]:=ColorDialog1.Color;
+          shpSN.Brush.Color:= cplot.Color[30];
 //         ShowSkyColor;
       end;
       if sender = shpGxy then begin
-          cplot.DSOColorGxy:=ColorDialog1.Color;
-          shpGxy.Brush.Color:= cplot.DSOColorGxy
+          cplot.Color[31]:=ColorDialog1.Color;
+          shpGxy.Brush.Color:= cplot.Color[31]
 //         ShowSkyColor;
       end;
       if sender = shpGxyCl then begin
-          cplot.DSOColorGxyCl:=ColorDialog1.Color;
-          shpGxyCl.Brush.Color:= cplot.DSOColorGxyCl;
+          cplot.Color[32]:=ColorDialog1.Color;
+          shpGxyCl.Brush.Color:= cplot.Color[32];
 //         ShowSkyColor;
       end;
       if sender = shpQ then begin
-          cplot.DSOColorQ:=ColorDialog1.Color;
-          shpQ.Brush.Color:= cplot.DSOColorQ;
+          cplot.Color[33]:=ColorDialog1.Color;
+          shpQ.Brush.Color:= cplot.Color[33];
 //         ShowSkyColor;
       end;
       if sender = shpGL then begin
-          cplot.DSOColorGL:=ColorDialog1.Color;
-          shpGL.Brush.Color:= cplot.DSOColorGL;
+          cplot.Color[34]:=ColorDialog1.Color;
+          shpGL.Brush.Color:= cplot.Color[34];
 //         ShowSkyColor;
       end;
       if sender = shpNE then begin
-          cplot.DSOColorNE:=ColorDialog1.Color;
-          shpNE.Brush.Color:= cplot.DSOColorNE;
+          cplot.Color[35]:=ColorDialog1.Color;
+          shpNE.Brush.Color:= cplot.Color[35];
 //         ShowSkyColor;
       end;
    end;
@@ -1085,19 +1085,19 @@ begin
               shpNE.Brush.Color:=4259584;
              end;
           end;
-          cplot.DSOColorAst:=shpAst.Brush.Color;
-          cplot.DSOColorOCl:=shpOCl.Brush.Color;
-          cplot.DSOColorGCl:=shpGCl.Brush.Color;
-          cplot.DSOColorPNe:=shpPNe.Brush.Color;
-          cplot.DSOColorDN:=shpDN.Brush.Color;
-          cplot.DSOColorEN:=shpEN.Brush.Color;
-          cplot.DSOColorRN:=shpRN.Brush.Color;
-          cplot.DSOColorSN:=shpSN.Brush.Color;
-          cplot.DSOColorGxy:=shpGxy.Brush.Color;
-          cplot.DSOColorGxyCL:=shpGxyCl.Brush.Color;
-          cplot.DSOColorQ:=shpQ.Brush.Color;
-          cplot.DSOColorGL:=shpGL.Brush.Color;
-          cplot.DSOColorNE:=shpNE.Brush.Color;
+          cplot.Color[23]:=shpAst.Brush.Color;
+          cplot.Color[24]:=shpOCl.Brush.Color;
+          cplot.Color[25]:=shpGCl.Brush.Color;
+          cplot.Color[26]:=shpPNe.Brush.Color;
+          cplot.Color[27]:=shpDN.Brush.Color;
+          cplot.Color[28]:=shpEN.Brush.Color;
+          cplot.Color[29]:=shpRN.Brush.Color;
+          cplot.Color[30]:=shpSN.Brush.Color;
+          cplot.Color[31]:=shpGxy.Brush.Color;
+          cplot.Color[32]:=shpGxyCl.Brush.Color;
+          cplot.Color[33]:=shpQ.Brush.Color;
+          cplot.Color[34]:=shpGL.Brush.Color;
+          cplot.Color[35]:=shpNE.Brush.Color;
     end;
   end;
 

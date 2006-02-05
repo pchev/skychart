@@ -33,9 +33,9 @@ uses Types, Classes, libcatalog,
     Graphics;
 {$endif}
 
-const MaxColor = 32;
+const MaxColor = 35;
 
-type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid
+type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[1..7]of Tcolor;
 
 const cdcversion = 'Version 3 alpha 0.0.9 b';
@@ -70,12 +70,12 @@ const cdcversion = 'Version 3 alpha 0.0.9 b';
       FovMax = pi2;
       DefaultPrtRes = 300;
       encryptpwd = 'zh6Tiq4h;90uA3.ert';
-      //                          0         1                                       5                                                 10                                                15                                                20                                                25                                                30                  32
-      //                          sky       -0.3      -0.1      0.2       0.5       0.8       1.3       1.3+      galaxy    cluster   neb       -white-   az grid   eq grid   orbit     const     boundary  eyepiece  misc      horizon   asteroid  comet     milkyway  ..        ..        ..
-      DfColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00202030,clYellow, $00FFC000,$00202020,clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
-      DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
-      DfRedColor : Starcolarray =(clBlack,  $00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$00000040,$00000040,$00000080,$00000040,$00000040,$000000A0,$00000080,$00000040,clYellow, $000000A0,$00000020,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
-      DfWBColor : Starcolarray = (clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack);
+      //                          0         1                                       5                                                 10                                                15                                                20                            23        24        25        26        27        28        29        30        31        32        33        34        35
+      //                          sky       -0.3      -0.1      0.2       0.5       0.8       1.3       1.3+      galaxy    cluster   neb       -white-   az grid   eq grid   orbit     const     boundary  eyepiece  misc      horizon   asteroid  comet     milkyway  ColorAst  ColorOCl  ColorGCl  ColorPNe  ColorDN   ColorEN   ColorRN   ColorSN   ColorGxy  ColorGxyCl ColorQ   ColorGL   ColorNE
+      DfColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00202030,clYellow, $00FFC000,$00202020,$0080FFFF,$0080FFFF,$00FFFF80,$0080FF00,$00C0C0C0,$000000FF,$00FF8000,$00000000,$000000FF,$000000FF,$008080FF,$00FF0080,$00FFFFFF);
+      DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
+      DfRedColor : Starcolarray =(clBlack,  $00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$00000040,$00000040,$00000080,$00000040,$00000040,$000000A0,$00000080,$00000040,clYellow, $000000A0,$00000020,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
+      DfWBColor : Starcolarray = (clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack);
       dfskycolor : Tskycolor =   ($00f03c3c,$00c83232,$00a02828,$00780000,$00640010,$003c0010,$00000000);
       light  = $004040ff;
       middle = $003030c0;
@@ -85,7 +85,7 @@ const cdcversion = 'Version 3 alpha 0.0.9 b';
       //  deep-sky objects colour defaults - assume outline only and black (for the moment...)
 //  ToDo : populate colour fills with the CdC defaults
 
-      dfDSOColorFillAst : boolean = false;
+ {     dfDSOColorFillAst : boolean = false;
       dfDSOColorFillOCl  : boolean = false;
       dfDSOColorFillGCl  : boolean = false;
       dfDSOColorFillPNe  : boolean = false;
@@ -111,7 +111,7 @@ const cdcversion = 'Version 3 alpha 0.0.9 b';
       dfDSOColorGxyCl = 9;
       dfDSOColorQ =  10;
       dfDSOColorGL = 11;
-      dfDSOColorNE = 12;
+      dfDSOColorNE = 12;  }
 
 //  End of deep-sky objects colour
 
@@ -441,19 +441,22 @@ type
                 DSOColorFillGL: boolean;
                 DSOColorFillNE: boolean;
 
-                DSOColorAst: Tcolor;
-                DSOColorOCl: Tcolor;
-                DSOColorGCl: Tcolor;
-                DSOColorPNe: Tcolor;
-                DSOColorDN: Tcolor;
-                DSOColorEN: Tcolor;
-                DSOColorRN: Tcolor;
-                DSOColorSN: Tcolor;
-                DSOColorGxy: Tcolor;
-                DSOColorGxyCl: Tcolor;
-                DSOColorQ: Tcolor;
-                DSOColorGL: Tcolor;
-                DSOColorNE: Tcolor;
+{ replaced by default color array
+
+             23   DSOColorAst: Tcolor;
+             24   DSOColorOCl: Tcolor;
+             25   DSOColorGCl: Tcolor;
+             26   DSOColorPNe: Tcolor;
+             27   DSOColorDN: Tcolor;
+             28   DSOColorEN: Tcolor;
+             29   DSOColorRN: Tcolor;
+             30   DSOColorSN: Tcolor;
+             31   DSOColorGxy: Tcolor;
+             32   DSOColorGxyCl: Tcolor;
+             33   DSOColorQ: Tcolor;
+             34   DSOColorGL: Tcolor;
+             35   DSOColorNE: Tcolor;
+                }
 //  End of deep-sky objects colour
 
                 end;
