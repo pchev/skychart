@@ -1,4 +1,4 @@
-unit ixsat;
+unit ixsat_low;
 interface
 Type Tsatix = record
           idn : array [1..8] of integer;

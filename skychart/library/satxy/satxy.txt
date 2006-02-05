@@ -1,3 +1,6 @@
+// Modified 4 Jan 2006 P. Chevalley
+add a Lazarus package to link statically instead of creating a dynamic library
+
 // Modified 02-Sep-2000, J. Burton
 //
 // Modified program to allow the user to use either high or low precision
