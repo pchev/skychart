@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="2">
+    <Name Value="cdccatalog"/>
+    <CompilerOptions>
+      <Version Value="5"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
+      </SearchPaths>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Files Count="25">
+      <Item1>
+        <Filename Value="bscunit.pas"/>
+        <UnitName Value="bscunit"/>
+      </Item1>
+      <Item2>
+        <Filename Value="dscat.pas"/>
+        <UnitName Value="dscat"/>
+      </Item2>
+      <Item3>
+        <Filename Value="findunit.pas"/>
+        <UnitName Value="findunit"/>
+      </Item3>
+      <Item4>
+        <Filename Value="gcatunit.pas"/>
+        <UnitName Value="gcatunit"/>
+      </Item4>
+      <Item5>
+        <Filename Value="gcmunit.pas"/>
+        <UnitName Value="gcmunit"/>
+      </Item5>
+      <Item6>
+        <Filename Value="gcvunit.pas"/>
+        <UnitName Value="gcvunit"/>
+      </Item6>
+      <Item7>
+        <Filename Value="gpnunit.pas"/>
+        <UnitName Value="gpnunit"/>
+      </Item7>
+      <Item8>
+        <Filename Value="gsccompact.pas"/>
+        <UnitName Value="gsccompact"/>
+      </Item8>
+      <Item9>
+        <Filename Value="gscconst.pas"/>
+        <UnitName Value="gscconst"/>
+      </Item9>
+      <Item10>
+        <Filename Value="gscfits.pas"/>
+        <UnitName Value="gscfits"/>
+      </Item10>
+      <Item11>
+        <Filename Value="gscunit.pas"/>
+        <UnitName Value="gscunit"/>
+      </Item11>
+      <Item12>
+        <Filename Value="lbnunit.pas"/>
+        <UnitName Value="lbnunit"/>
+      </Item12>
+      <Item13>
+        <Filename Value="microcatunit.pas"/>
+        <UnitName Value="microcatunit"/>
+      </Item13>
+      <Item14>
+        <Filename Value="ngcunit.pas"/>
+        <UnitName Value="ngcunit"/>
+      </Item14>
+      <Item15>
+        <Filename Value="oclunit.pas"/>
+        <UnitName Value="oclunit"/>
+      </Item15>
+      <Item16>
+        <Filename Value="pgcunit.pas"/>
+        <UnitName Value="pgcunit"/>
+      </Item16>
+      <Item17>
+        <Filename Value="sacunit.pas"/>
+        <UnitName Value="sacunit"/>
+      </Item17>
+      <Item18>
+        <Filename Value="skylibcat.pas"/>
+        <UnitName Value="skylibcat"/>
+      </Item18>
+      <Item19>
+        <Filename Value="skyunit.pas"/>
+        <UnitName Value="skyunit"/>
+      </Item19>
+      <Item20>
+        <Filename Value="ticunit.pas"/>
+        <UnitName Value="ticunit"/>
+      </Item20>
+      <Item21>
+        <Filename Value="tyc2unit.pas"/>
+        <UnitName Value="tyc2unit"/>
+      </Item21>
+      <Item22>
+        <Filename Value="tycunit.pas"/>
+        <UnitName Value="tycunit"/>
+      </Item22>
+      <Item23>
+        <Filename Value="usnoaunit.pas"/>
+        <UnitName Value="usnoaunit"/>
+      </Item23>
+      <Item24>
+        <Filename Value="wdsunit.pas"/>
+        <UnitName Value="wdsunit"/>
+      </Item24>
+      <Item25>
+        <Filename Value="rc3unit.pas"/>
+        <UnitName Value="rc3unit"/>
+      </Item25>
+    </Files>
+    <RequiredPkgs Count="1">
+      <Item1>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)/"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
