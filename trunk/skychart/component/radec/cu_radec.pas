@@ -23,16 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  RA - DEC input.
 }
 
+{$mode objfpc}{$H+}
+
 interface
 
-uses
-    SysUtils, Classes, Math,  Types,
-{$ifdef linux}
-    QMask, QForms ;
-{$endif}
-{$ifdef mswindows}
-    Mask, Forms ;
-{$endif}
+Uses Classes, SysUtils, LResources, MaskEdit;
 
 type 
   Tradeckind=( RA, DE, Az, Alt );
@@ -42,9 +37,9 @@ type
   private
     { Private declarations }
     Fkind : Tradeckind;
-    procedure SetValue(Value: Double);
+    procedure SetValue(Val: Double);
     function ReadValue: Double;
-    procedure SetKind(Value: Tradeckind);
+    procedure SetKind(Val: Tradeckind);
   public
     { Public declarations }
      constructor Create(Aowner:Tcomponent); override;
@@ -63,6 +58,7 @@ procedure Register;
 begin
   RegisterComponents('CDC', [TRaDec]);
 end;
+
 //////////////////////////////////////////////////////////
 Function sgn(x:Double):Double ;
 begin
@@ -240,9 +236,9 @@ begin
 inherited destroy;
 end;
 
-procedure TRaDec.SetKind(Value: Tradeckind);
+procedure TRaDec.SetKind(Val: Tradeckind);
 begin
-Fkind:=Value;
+Fkind:=Val;
 case Fkind of
  RA: EditMask:='!99h99m99s;1; ';
  DE: EditMask:='!##9d99m99s;1; ';
@@ -251,13 +247,13 @@ case Fkind of
 end;
 end;
 
-procedure TRaDec.SetValue(Value: Double);
+procedure TRaDec.SetValue(Val: Double);
 begin
 case Fkind of
- RA: Text:=ARToStr(Value);
- DE: Text:=DEToStr(Value);
- Az: Text:=AzToStr(Value);
- Alt: Text:=AltToStr(Value);
+ RA: Text:=ARToStr(Val);
+ DE: Text:=DEToStr(Val);
+ Az: Text:=AzToStr(Val);
+ Alt: Text:=AltToStr(Val);
 end;
 end;
 
@@ -274,5 +270,7 @@ end;
 
 
 //////////////////////////////////////////////////////////
+initialization
+  {$I radec.lrs}
 
 end.
