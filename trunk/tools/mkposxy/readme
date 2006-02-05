@@ -1,0 +1,148 @@
+===========================                         ============================
+                         INSTITUT DE MECANIQUE CELESTE
+                              BUREAU DES LONGITUDES 
+
+		   	     /pub/ephem/satel/posxy
+
+                                1995, February 3
+===========================                         ============================
+
+
+
+SATEL/POSXY:      Ephemerides of the main planetary satellites:
+                  differential positions of the satellites of Mars,
+                  Jupiter,Saturn, Uranus, given under the form of developments
+                  in mixed functions.
+
+
+
+AUTHORS :         J.-E. Arlot, Ch. Ruatti, D.T. Vu and W. Thuillot
+
+
+ADDRESS :         Institut de Mecanique Celeste  URA707 EP1825 CNRS
+                  Obs. de Paris/Bureau des Longitudes 
+                  77 av. Denfert Rochereau, F-75014 PARIS
+                  Phone: (1) 40 51 21 28  
+                  Fax:   (1) 46 33 28 34 
+                  e-mail:arlot@bdl.fr, vu@bdl.fr, ruatti@bdl.fr, thuillot@bdl.fr
+
+CONTENTS:
+
+
+     diffpos.f  : FORTRAN source to be used with the files of satellites 
+                  ephemerides whose names are 'planet.year'. This algorithm 
+                  is founded on the mixed function representation by
+                  (Chapront and Vu, 1984).                               (12 Ko)
+
+     diffposAix : executable software issued from the compiling of
+                  diffpos.f with AIX 3.2.5 & X11R5 1.2.4 system          (31 Ko)
+
+     diffposSun : executable software issued from the compiling of
+                  diffpos.f with SunOS Release 4.1.3_U1                 (205 Ko)
+
+     marsbin.YY : Binary file of coefficients of the satellites of Mars, Phobos
+                  and Deimos, for the year YY. These coefficients are computed 
+                  from the Chapront-Touze's theory (Chapront-Touze, 1990).
+                                                                         (20 Ko)
+
+     jupibin.YY : Binary file of coefficients of the Galilean satellites 
+                  for the year YY. These coefficients are computed from 
+                  the original ephemeride is the G-5 ephemeride (Arlot, 1982)
+                  founded on the Sampson-Lieske theory (Sampson 1921, 
+                  Lieske, 1977)                                          (55 Ko)
+                     
+     satubin.YY : Binary file of coefficients of the first eight satellites of
+                  Saturn  for the year YY. These coefficients are computed from 
+                  the theories of Dourneau (1993), Rapaport (1977), 
+                  Kosai (1959) and Struve (1930).                        (55 Ko)
+                           
+     uranbin.YY : Binary file of coefficients of the five main satellites of 
+                  Uranus for the year YY. These coefficients are computed from 
+                  the theory of Laskar and Jacobson (Laskar and Jacobson, 1987).
+                                                                         (21 Ko)
+
+     example    : Example of an output data for several dates and satellites.
+                                                                         (11 Ko)
+
+     seqdir.f   : FORTRAN program for the conversion of ASCII files of 
+                  coefficients  in direct access binary files:
+                  this program transforms the files named  'planete asc.YY'
+                  into the files named 'planete bin.YY' and used by diffpos.f
+                                                                          (5 Ko)
+     seqdirAix  : executable software issued from the compiling of
+                  seqdir.f with AIX 3.2.5 & X11R5 1.2.4 system           (16 Ko)
+
+     seqdirSun  : executable software issued from the compiling of
+                  seqdir.f with SunOS Release 4.1.3_U1                  (188 Ko)
+
+     marsasc.YY : ASCII file of the coefficients of the satellites of Mars, 
+                  Phobos and Deimos, for the year YY.                    (40 Ko)
+                                                                      
+     jupiasc.YY : ASCII file of the coefficients of the Galilean satellites of
+                  Jupiter for the year YY.                              (110 Ko)
+
+     satuasc.YY : ASCII file of the coefficients of the first eight satellites of
+                  Saturn  for the year YY.                              (110 Ko)
+
+     uranasc.YY : ASCII file of the coefficients of the five main satellites of 
+                  Uranus for the year YY.                                (41 Ko)
+
+
+MORE...:
+
+     The input data of diffpos.f are:
+     - the date of a beginning of intervall in the Terrestrial Time scale (TT), 
+     - the step to use and the number of the planet concerned. 
+
+     The output data are the differential tangential coordinates of the 
+     satellites with respect to the center of the planet (in arceseconds). These 
+     coordinates are mean equatorial J2000 for all satellites.
+     The Y axis is set towards the pole of the equator (North), the X axis 
+     towards the increasing right ascensions (East).
+ 
+
+     The differences between TT and UTC are given in the following table:
+
+     --------------------------------
+     period            TT-UTC (sec.)
+     --------------------------------
+     1/7/94-1/1/96      61.184  
+     1/1/96-1/7/97      62.184
+     1/7/97-            63.184
+     --------------------------------
+ 
+
+BIBLIOGRAPHY:
+
+
+Arlot, J.-E.: 1982, Astron. Astrophys. 107, 305
+
+Chapront, J., Vu, D.T.: 1984,  Astron. Astrophys., 141, 131
+
+Chapront-Touze, M.: 1990, 1990, Astron. Astrophys., 240, 159
+
+Dourneau, G.: 1993, Astron. Astrophys., 267, 292
+
+Kosai, Y.: 1959, Astron. J. 64, 367
+
+Laskar, J., Jacobson, R.A.: 1987, Astron. Astrophys. 188, 212.
+
+Lieske, J.H.: 1977, Astron. Astrophys., 56, 333
+
+Rapaport, M.: 1977, Astron. Astrophys., 62, 235
+
+Sampson, R.A.: 1921, Mem. Roy. Astron. Soc. 63
+
+Struve, G.: 1930, Astron. Astrophys., Veroff. Univ. Sternw. Berlin Babelsberg 6.
+
+
+================================================================================
+User feed-back is encouraged. Unless otherwise specified, send comments and bug 
+reports to:                    E-mail     : comments@bdl.fr
+                               Fax        : (33) 1 46 33 28 34 
+                               Postal mail: Institut de Mecanique Celeste
+                                            Obs. de Paris/Bureau des longitudes
+                                            77 avenue Denfert Rochereau
+                                            F-75014 PARIS
+================================================================================
+
