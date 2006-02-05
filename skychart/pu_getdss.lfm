@@ -1,0 +1,69 @@
+object f_getdss: Tf_getdss
+  Caption = 'List of available plates'
+  ClientHeight = 246
+  ClientWidth = 509
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  FormStyle = fsStayOnTop
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  PixelsPerInch = 80
+  TextHeight = 13
+  HorzScrollBar.Page = 508
+  VertScrollBar.Page = 245
+  Left = 191
+  Height = 246
+  Top = 162
+  Width = 509
+  object Label1: TLabel
+    BorderSpacing.OnChange = nil
+    Caption = 'Label1'
+    Color = clNone
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Courier New'
+    Left = 12
+    Height = 18
+    Top = 8
+    Width = 60
+  end
+  object ListBox1: TListBox
+    BorderSpacing.OnChange = nil
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Courier New'
+    IntegralHeight = True
+    ItemHeight = 18
+    TabOrder = 0
+    TopIndex = -1
+    Left = 8
+    Height = 166
+    Top = 32
+    Width = 497
+  end
+  object BitBtn1: TBitBtn
+    BorderSpacing.OnChange = nil
+    BorderSpacing.InnerBorder = 2
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+    Left = 157
+    Height = 25
+    Top = 206
+    Width = 75
+  end
+  object BitBtn2: TBitBtn
+    BorderSpacing.OnChange = nil
+    BorderSpacing.InnerBorder = 2
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+    Left = 267
+    Height = 25
+    Top = 206
+    Width = 75
+  end
+end

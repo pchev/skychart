@@ -1,0 +1,121 @@
+object f_zoom: Tf_zoom
+  Left = 453
+  Height = 154
+  Top = 181
+  Width = 308
+  HorzScrollBar.Page = 307
+  VertScrollBar.Page = 153
+  ActiveControl = TrackBar1
+  BorderStyle = bsSizeToolWin
+  Caption = 'Set FOV'
+  ClientHeight = 154
+  ClientWidth = 308
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnShow = FormShow
+  PixelsPerInch = 80
+  TextHeight = 16
+  object Label1: TLabel
+    Left = 16
+    Height = 13
+    Top = 8
+    Width = 11
+    Caption = '1'''
+    Color = clNone
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 120
+    Height = 13
+    Top = 8
+    Width = 8
+    Caption = '1'
+    Color = clNone
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 172
+    Height = 13
+    Top = 8
+    Width = 15
+    Caption = '10'
+    Color = clNone
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 225
+    Height = 13
+    Top = 8
+    Width = 22
+    Caption = '100'
+    Color = clNone
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 254
+    Height = 13
+    Top = 8
+    Width = 22
+    Caption = '360'
+    Color = clNone
+    ParentColor = False
+  end
+  object Label6: TLabel
+    Left = 70
+    Height = 13
+    Top = 8
+    Width = 18
+    Caption = '10'''
+    Color = clNone
+    ParentColor = False
+  end
+  object TrackBar1: TTrackBar
+    Left = 8
+    Height = 33
+    Top = 24
+    Width = 273
+    Frequency = 1
+    Max = 260
+    Min = -178
+    OnChange = TrackBar1Change
+    PageSize = 10
+    ScalePos = trTop
+    TickMarks = tmTopLeft
+    TickStyle = tsManual
+    TabOrder = 0
+  end
+  object BitBtn1: TBitBtn
+    Left = 70
+    Height = 25
+    Top = 88
+    Width = 73
+    BorderSpacing.InnerBorder = 2
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    NumGlyphs = 0
+    TabOrder = 1
+  end
+  object BitBtn2: TBitBtn
+    Left = 158
+    Height = 25
+    Top = 88
+    Width = 73
+    BorderSpacing.InnerBorder = 2
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    NumGlyphs = 0
+    TabOrder = 2
+  end
+  object Edit1: TEdit
+    Left = 120
+    Height = 24
+    Top = 56
+    Width = 49
+    Color = clBtnFace
+    ReadOnly = True
+    TabStop = False
+    TabOrder = 3
+  end
+end

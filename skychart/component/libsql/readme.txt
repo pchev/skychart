@@ -1,5 +1,6 @@
+This component is copied here for convenience.
 
-Get libsql component for Mysql and Sqlite (at least release 0.21) from:
+Get a recent version of libsql from:
 
 http://wiki.sqlite.dubaron.com/
 or
