@@ -20,11 +20,10 @@ cdc -|                                    < base directory containing the execut
 
 Install Lazarus using a recent snapshot from http://lazarus.freepascal.org
 
-There is a lot of package to install. To install each package in Lazarus
-use File-Open to open the .lpk.
+There is a lot of package to install, do not compile Lazarus at each!
+To install each package in Lazarus use File-Open to open the .lpk
 Click "Open Package", "Compile", "Install".
 When the install tell you to rebuild Lazarus say NO.
-After all are installed click Tools-Build Lazarus.
 
 Launch Lazarus and go first to lazarus/component to install the following 
 standard packages:
@@ -54,9 +53,14 @@ And the packages for the library src/skychart/library :
       satxy/satxy.lpk
       series96/series96.lpk
 
+After all are installed click Tools-Build Lazarus.
+
 You can now open the main project files skychart\cdc.lpi and compile.
 To run in debug adjust Run-Run Parameters-Working Directory to your CDC directory.
 To reduce the executable size for production use strip and upx.
+
+A few Windows specific library and plugin are not yet ported to Lazarus,
+please use Delphi if you want to compile them.
 
 Naming convention for the program source.
 ----------------------------------------
