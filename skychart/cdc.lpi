@@ -100,8 +100,8 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_main.lrs"/>
         <UnitName Value="pu_main"/>
-        <CursorPos X="64" Y="945"/>
-        <TopLine Value="922"/>
+        <CursorPos X="29" Y="21"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="80"/>
         <Loaded Value="True"/>
@@ -452,14 +452,18 @@
         <UsageCount Value="52"/>
       </Unit35>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="1" HistoryIndex="0">
+      <Position1>
+        <Filename Value="pu_main.pas"/>
+        <Caret Line="932" Column="13" TopLine="922"/>
+      </Position1>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>
     <SearchPaths>
       <OtherUnitFiles Value="component/synapse/source/lib/;component/winxp/"/>
       <UnitOutputDirectory Value="units/"/>
-      <LCLWidgetType Value="gtk"/>
       <SrcPath Value="$(LazarusDir)/lcl/;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)/"/>
     </SearchPaths>
     <CodeGeneration>
