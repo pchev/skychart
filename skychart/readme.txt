@@ -1,8 +1,7 @@
 How to install the source code to compile with Lazarus/Freepascal
 -----------------------------------------------------------------
 
-The simplest way is to add a ./src directory to your existing cdc binary directory or
-to a new directory if you want to keep a separated stable version.
+The simplest way is to add a ./src directory to your existing cdc binary directory.
 
 Download the source file skychart_XXX_source.tar.gz to this directory 
 and extract the file here. 
@@ -16,18 +15,18 @@ cdc -|                                    < base directory containing the execut
                          |- component     < project component
                          |- library       < project library
                          |- ...
-             |- units                     < all compilation .dcu object go here
+                         |- units         < all compilation object go here
 
 Install Lazarus using a recent snapshot from http://lazarus.freepascal.org
 
-There is a lot of package to install, do not compile Lazarus at each!
+There is a lot of package to install, do not compile Lazarus for each!
 To install each package in Lazarus use File-Open to open the .lpk
 Click "Open Package", "Compile", "Install".
 When the install tell you to rebuild Lazarus say NO.
 
-Launch Lazarus and go first to lazarus/component to install the following 
-standard packages:
-
+Launch Lazarus and open Components-Configure Installed Packages
+Check that Printer4Lazarus, JPEGForLazarus and TurboPowerIPro are installed. 
+If not install them from lazarus/component 
       printers/printer4lazarus.lpk
       jpeg/jpegforlazarus.lpk
       turbopower_ipro/turbopoweripro.lpk
@@ -37,13 +36,12 @@ the packages for the required component:
 
       enhedits/enhedit.lpk
       jdcalendar/cdcjdcalendar.lpk
+      libsql/libsql.lpk
       multidoc/multidocpackage.lpk
       radec/radec.lpk
-      winxp/winxpstyle.lpk ( for Windows only )
+      wizardntb/wizardntb.lpk
       xmlparser/xmlparser.lpk
       zoomimage/zoomimage.lpk
-      wizardntb/wizardntb.lpk
-      libsql/libsql.lpk
 
 And the packages for the library src/skychart/library :
 (compile only)
