@@ -36,6 +36,7 @@ begin
   Application.CreateForm(Tf_info, f_info);
   Application.CreateForm(Tf_calendar, f_calendar);
   Application.CreateForm(Tf_printsetup, f_printsetup);
+  f_main.init;
   Application.Run;
   f_about.free;
 end.

@@ -1,7 +1,14 @@
 object f_getdss: Tf_getdss
+  Left = 243
+  Height = 260
+  Top = 156
+  Width = 420
+  HorzScrollBar.Page = 419
+  VertScrollBar.Page = 259
+  ActiveControl = ListBox1
   Caption = 'List of available plates'
-  ClientHeight = 246
-  ClientWidth = 509
+  ClientHeight = 260
+  ClientWidth = 420
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
@@ -10,60 +17,55 @@ object f_getdss: Tf_getdss
   OnShow = FormShow
   PixelsPerInch = 80
   TextHeight = 13
-  HorzScrollBar.Page = 508
-  VertScrollBar.Page = 245
-  Left = 191
-  Height = 246
-  Top = 162
-  Width = 509
   object Label1: TLabel
-    BorderSpacing.OnChange = nil
+    Left = 12
+    Height = 17
+    Top = 8
+    Width = 49
     Caption = 'Label1'
     Color = clNone
     Font.CharSet = ANSI_CHARSET
-    Font.Height = -16
-    Font.Name = 'Courier New'
-    Left = 12
-    Height = 18
-    Top = 8
-    Width = 60
+    Font.Height = -11
+    Font.Name = 'courier'
+    Font.Pitch = fpFixed
+    ParentColor = False
   end
   object ListBox1: TListBox
-    BorderSpacing.OnChange = nil
+    Left = 8
+    Height = 166
+    Top = 32
+    Width = 401
     Font.CharSet = ANSI_CHARSET
-    Font.Height = -16
-    Font.Name = 'Courier New'
+    Font.Height = -11
+    Font.Name = 'courier'
+    Font.Pitch = fpFixed
     IntegralHeight = True
     ItemHeight = 18
     TabOrder = 0
     TopIndex = -1
-    Left = 8
-    Height = 166
-    Top = 32
-    Width = 497
   end
   object BitBtn1: TBitBtn
-    BorderSpacing.OnChange = nil
+    Left = 104
+    Height = 25
+    Top = 208
+    Width = 75
     BorderSpacing.InnerBorder = 2
     Caption = 'OK'
     Default = True
     ModalResult = 1
+    NumGlyphs = 0
     TabOrder = 1
-    Left = 157
-    Height = 25
-    Top = 206
-    Width = 75
   end
   object BitBtn2: TBitBtn
-    BorderSpacing.OnChange = nil
+    Left = 214
+    Height = 25
+    Top = 208
+    Width = 75
     BorderSpacing.InnerBorder = 2
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
+    NumGlyphs = 0
     TabOrder = 2
-    Left = 267
-    Height = 25
-    Top = 206
-    Width = 75
   end
 end

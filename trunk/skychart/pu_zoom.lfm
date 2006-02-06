@@ -87,7 +87,7 @@ object f_zoom: Tf_zoom
   object BitBtn1: TBitBtn
     Left = 70
     Height = 25
-    Top = 88
+    Top = 96
     Width = 73
     BorderSpacing.InnerBorder = 2
     Caption = 'OK'
@@ -99,7 +99,7 @@ object f_zoom: Tf_zoom
   object BitBtn2: TBitBtn
     Left = 158
     Height = 25
-    Top = 88
+    Top = 96
     Width = 73
     BorderSpacing.InnerBorder = 2
     Cancel = True
@@ -111,7 +111,7 @@ object f_zoom: Tf_zoom
   object Edit1: TEdit
     Left = 120
     Height = 24
-    Top = 56
+    Top = 64
     Width = 49
     Color = clBtnFace
     ReadOnly = True

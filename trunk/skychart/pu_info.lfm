@@ -146,20 +146,20 @@ object f_info: Tf_info
   }
   OnClose = FormClose
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 80
   Position = poDefaultPosOnly
   TextHeight = 13
   object PageControl1: TPageControl
     Height = 370
     Width = 639
-    ActivePage = TabSheet2
+    ActivePage = ProgressMessages
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TCP/IP Connection'
-      ClientHeight = 344
-      ClientWidth = 631
+      ClientHeight = 348
+      ClientWidth = 639
       object StringGrid1: TStringGrid
         Height = 320
         Width = 639
@@ -176,8 +176,9 @@ object f_info: Tf_info
         RowCount = 10
         ScrollBars = ssVertical
         TabOrder = 0
+        TabStop = True
         VisibleColCount = 1
-        VisibleRowCount = 1
+        VisibleRowCount = 10
         OnMouseDown = StringGrid1MouseDown
       end
       object Panel2: TPanel
@@ -214,20 +215,20 @@ object f_info: Tf_info
     end
     object TabSheet2: TTabSheet
       Caption = 'Object List'
-      ClientHeight = 344
-      ClientWidth = 631
+      ClientHeight = 348
+      ClientWidth = 639
       ImageIndex = 1
       object Panel3: TPanel
         Height = 27
-        Top = 317
-        Width = 631
+        Top = 321
+        Width = 639
         Align = alBottom
         ClientHeight = 27
-        ClientWidth = 631
+        ClientWidth = 639
         FullRepaint = False
         TabOrder = 0
         object Button3: TButton
-          Left = 293
+          Left = 301
           Height = 25
           Top = 1
           Width = 75
@@ -238,7 +239,7 @@ object f_info: Tf_info
           TabOrder = 0
         end
         object Edit1: TEdit
-          Left = 203
+          Left = 211
           Height = 21
           Top = 3
           Width = 85
@@ -247,7 +248,7 @@ object f_info: Tf_info
           TabOrder = 1
         end
         object Button5: TButton
-          Left = 379
+          Left = 387
           Height = 25
           Top = 1
           Width = 75
@@ -258,7 +259,7 @@ object f_info: Tf_info
           TabOrder = 2
         end
         object Button6: TButton
-          Left = 467
+          Left = 475
           Height = 25
           Top = 1
           Width = 75
@@ -269,7 +270,7 @@ object f_info: Tf_info
           TabOrder = 3
         end
         object Button7: TButton
-          Left = 555
+          Left = 563
           Height = 25
           Width = 75
           Anchors = [akTop, akRight]
@@ -281,8 +282,8 @@ object f_info: Tf_info
       end
       object Memo1: TSynEdit
         Name = 'Memo1'
-        Height = 317
-        Width = 631
+        Height = 321
+        Width = 639
         Align = alClient
         Font.Height = -13
         Font.Name = 'courier'
@@ -292,9 +293,7 @@ object f_info: Tf_info
         TabOrder = 1
         OnDblClick = Memo1DblClick
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
-        Gutter.OnChange = nil
         Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
@@ -622,13 +621,12 @@ object f_info: Tf_info
         )
         Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
         ReadOnly = True
-        SelectedColor.OnChange = nil
       end
     end
     object ProgressMessages: TTabSheet
       Caption = 'Progress Messages'
-      ClientHeight = 344
-      ClientWidth = 631
+      ClientHeight = 348
+      ClientWidth = 639
       ImageIndex = 2
       object ProgressMemo: TMemo
         Height = 348
