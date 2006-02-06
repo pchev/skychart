@@ -1598,9 +1598,9 @@ Procedure Tf_calendar.SaveGrid(grid : tstringgrid);
 var buf,d : string;
     i,j : integer;
     x : double;
-    lst:TStrings;
+    lst:TStringList;
 begin
-lst:=TStrings.Create;
+lst:=TStringList.Create;
 buf:='"'+c.ObsName+'";"';
 x:=abs(c.ObsLongitude);
 if c.ObsLongitude>0 then d:=east else d:=west;

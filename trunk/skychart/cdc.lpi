@@ -100,7 +100,7 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_main.lrs"/>
         <UnitName Value="pu_main"/>
-        <CursorPos X="29" Y="21"/>
+        <CursorPos X="66" Y="26"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="80"/>
@@ -195,8 +195,8 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_calendar.lrs"/>
         <UnitName Value="pu_calendar"/>
-        <CursorPos X="2" Y="1501"/>
-        <TopLine Value="1498"/>
+        <CursorPos X="9" Y="1664"/>
+        <TopLine Value="1656"/>
         <UsageCount Value="98"/>
       </Unit11>
       <Unit12>
@@ -452,12 +452,7 @@
         <UsageCount Value="52"/>
       </Unit35>
     </Units>
-    <JumpHistory Count="1" HistoryIndex="0">
-      <Position1>
-        <Filename Value="pu_main.pas"/>
-        <Caret Line="932" Column="13" TopLine="922"/>
-      </Position1>
-    </JumpHistory>
+    <JumpHistory Count="0" HistoryIndex="-1"/>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>
@@ -467,17 +462,19 @@
       <SrcPath Value="$(LazarusDir)/lcl/;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)/"/>
     </SearchPaths>
     <CodeGeneration>
-      <SmartLinkUnit Value="True"/>
       <HeapSize Value="100000"/>
       <Generate Value="Faster"/>
-      <TargetProcessor Value="2"/>
       <Optimizations>
         <VariablesInRegisters Value="True"/>
         <OptimizationLevel Value="2"/>
       </Optimizations>
     </CodeGeneration>
     <Linking>
-      <LinkSmart Value="True"/>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
     </Linking>
     <Other>
       <Verbosity>
