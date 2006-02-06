@@ -39,7 +39,7 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, ToolWin, ImgList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, PrintersDlgs, PairSplitter;
+  LResources, PrintersDlgs, PairSplitter, TrayIcon;
 
 type
   TTCPThrd = class(TThread)
@@ -575,6 +575,7 @@ type
     procedure ConfigDBChange(Sender: TObject);
     procedure SaveAndRestart(Sender: TObject);
     procedure InitializeDB(Sender: TObject);
+    procedure Init;
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
     procedure ChartMove(Sender: TObject);
   end;
@@ -881,12 +882,23 @@ OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 end;
 
 procedure Tf_main.FormShow(Sender: TObject);
+var i:integer;
+begin
+ for i:=0 to MultiDoc1.ChildCount-1 do
+  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+     with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+        RefreshTimer.Enabled:=false;
+        RefreshTimer.Enabled:=true;
+     end;
+end;
+
+procedure Tf_main.Init;
 var cfgs :conf_skychart;
     cfgp : conf_plot;
     i: integer;
 begin
 try
- // some initialisation that need to be done after all the forms are created. Kylix onShow is called immediatly after onCreate, not after application.run!
+ // some initialisation that need to be done after all the forms are created.
  f_info.onGetTCPinfo:=GetTCPInfo;
  f_info.onKillTCP:=KillTCPClient;
  f_info.onPrintSetup:=PrintSetup;
@@ -943,12 +955,6 @@ try
     nightvision:=false;
     ToolButtonNightVisionClick(self);
  end;
- for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
-        RefreshTimer.Enabled:=false;
-        RefreshTimer.Enabled:=true;
-     end;
 except
 end;
 end;

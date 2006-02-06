@@ -191,7 +191,7 @@ object f_detail: Tf_detail
     Top = 50
     Width = 398
     Align = alClient
-    FixedTypeface = 'Courier New'
+    FixedTypeface = 'default'
     DefaultTypeFace = 'default'
     PopupMenu = PopupMenu1
     PrintSettings.MarginLeft = 0.5

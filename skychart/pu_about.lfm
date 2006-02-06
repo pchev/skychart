@@ -15,7 +15,6 @@ object f_about: Tf_about
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
-  OnPaint = FormPaint
   OnShow = FormShow
   PixelsPerInch = 80
   Position = poScreenCenter
@@ -4459,7 +4458,7 @@ object f_about: Tf_about
     Color = clNone
     Font.Color = clSilver
     Font.Height = -35
-    Font.Name = 'MS Sans Serif'
+    Font.Name = 'sans'
     Font.Style = [fsBold]
     ParentColor = False
   end
@@ -4472,7 +4471,7 @@ object f_about: Tf_about
     Color = clNone
     Font.Color = clSilver
     Font.Height = -19
-    Font.Name = 'MS Sans Serif'
+    Font.Name = 'sans'
     Font.Style = [fsBold]
     ParentColor = False
   end
@@ -4485,9 +4484,6 @@ object f_about: Tf_about
     Caption = 'Copyright (C) 2002-2005 Patrick Chevalley '
     Color = clBlack
     Font.Color = clSilver
-    Font.Height = -12
-    Font.Name = 'Arial'
-    Font.Style = [fsItalic]
     ParentColor = False
     Transparent = False
   end
@@ -4500,8 +4496,6 @@ object f_about: Tf_about
     Caption = 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License'
     Color = clBlack
     Font.Color = clSilver
-    Font.Height = -11
-    Font.Name = 'Arial'
     ParentColor = False
     Transparent = False
     WordWrap = True

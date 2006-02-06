@@ -157,91 +157,54 @@ object f_calendar: Tf_calendar
     FullRepaint = False
     TabOrder = 1
     object Label1: TLabel
-      Left = 3
-      Height = 12
+      Left = 8
+      Height = 13
       Top = 14
       Width = 29
       Caption = 'From'
       Color = clNone
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentColor = False
     end
     object Label2: TLabel
       Left = 184
-      Height = 12
+      Height = 13
       Top = 14
       Width = 11
       Caption = 'to'
       Color = clNone
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentColor = False
     end
     object Label5: TLabel
-      Left = 58
-      Height = 12
+      Left = 52
+      Height = 13
       Top = 46
-      Width = 1
-      Caption = 'à'
+      Width = 11
+      Caption = 'at'
       Color = clNone
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentColor = False
     end
     object Label3: TLabel
-      Left = 172
-      Height = 12
+      Left = 176
+      Height = 13
       Top = 46
-      Width = 19
+      Width = 21
       Caption = 'pas'
       Color = clNone
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentColor = False
     end
     object Label4: TLabel
       Left = 242
-      Height = 12
+      Height = 13
       Top = 46
-      Width = 27
+      Width = 28
       Caption = 'jours'
       Color = clNone
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentColor = False
-    end
-    object SatPanel: TPanel
-      Cursor = crHandPoint
-      Left = 8
-      Height = 35
-      Top = 32
-      Width = 273
-      Alignment = taLeftJustify
-      ClientHeight = 35
-      ClientWidth = 273
-      FullRepaint = False
-      TabOrder = 0
-      Visible = False
-      object Label9: TLabel
-        Left = 1
-        Height = 27
-        Hint = 'http://users2.ev1.net/~mmccants/'
-        Top = 1
-        Width = 231
-        Caption = 'Satellites calculation use QuickSat by Mike McCants, Iridium flare prediction use Iridflar by Robert Matson'
-        Color = clNone
-        Font.Height = -8
-        ParentColor = False
-        ParentShowHint = False
-        ShowHint = True
-        WordWrap = True
-      end
     end
     object EcliPanel: TPanel
       Cursor = crHandPoint
@@ -258,6 +221,32 @@ object f_calendar: Tf_calendar
       TabOrder = 11
       Visible = False
       OnClick = EcliPanelClick
+    end
+    object SatPanel: TPanel
+      Cursor = crHandPoint
+      Left = 8
+      Height = 35
+      Top = 32
+      Width = 273
+      Alignment = taLeftJustify
+      ClientHeight = 35
+      ClientWidth = 273
+      FullRepaint = False
+      TabOrder = 0
+      Visible = False
+      object Label9: TLabel
+        Left = 1
+        Height = 43
+        Hint = 'http://users2.ev1.net/~mmccants/'
+        Top = 4
+        Width = 262
+        Caption = 'Satellites calculation use QuickSat by Mike McCants, Iridium flare prediction use Iridflar by Robert Matson'
+        Color = clNone
+        ParentColor = False
+        ParentShowHint = False
+        ShowHint = True
+        WordWrap = True
+      end
     end
     object BitBtn1: TBitBtn
       Left = 314
@@ -333,7 +322,7 @@ object f_calendar: Tf_calendar
     end
     object step: TLongEdit
       Name = 'step'
-      Left = 200
+      Left = 205
       Height = 22
       Hint = '0..9999'
       Top = 41
@@ -347,9 +336,9 @@ object f_calendar: Tf_calendar
       MaxValue = 9999
     end
     object Time: TTimePicker
-      Left = 48
+      Left = 72
       Height = 23
-      Top = 41
+      Top = 42
       Width = 75
       EditMask = '!99:99:99;1; '
       MaxLength = 8
@@ -460,6 +449,7 @@ object f_calendar: Tf_calendar
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
+        TabStop = True
         VisibleColCount = 4
         VisibleRowCount = 1
         OnMouseUp = GridMouseUp
@@ -479,11 +469,11 @@ object f_calendar: Tf_calendar
         TabOrder = 0
         object Psoleil: TTabSheet
           Caption = 'Sun'
-          ClientHeight = 270
+          ClientHeight = 292
           ClientWidth = 635
           ImageIndex = 9
           object SoleilGrid: TStringGrid
-            Height = 270
+            Height = 292
             Width = 635
             Align = alClient
             ColCount = 11
@@ -495,8 +485,9 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
-            VisibleRowCount = 11
+            VisibleRowCount = 12
             OnMouseUp = GridMouseUp
             ColWidths = (
               75
@@ -530,6 +521,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -566,6 +558,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -602,6 +595,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -638,6 +632,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -674,6 +669,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -710,6 +706,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -746,6 +743,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -782,6 +780,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -818,6 +817,7 @@ object f_calendar: Tf_calendar
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
+            TabStop = True
             VisibleColCount = 9
             VisibleRowCount = 12
             OnMouseUp = GridMouseUp
@@ -858,6 +858,7 @@ object f_calendar: Tf_calendar
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
+        TabStop = True
         VisibleColCount = 9
         VisibleRowCount = 1
         OnMouseUp = GridMouseUp
@@ -934,6 +935,7 @@ object f_calendar: Tf_calendar
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
+        TabStop = True
         VisibleColCount = 8
         VisibleRowCount = 1
         OnMouseUp = GridMouseUp
@@ -1004,6 +1006,7 @@ object f_calendar: Tf_calendar
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
+        TabStop = True
         VisibleColCount = 10
         VisibleRowCount = 1
         OnMouseUp = GridMouseUp
@@ -1041,6 +1044,7 @@ object f_calendar: Tf_calendar
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
+        TabStop = True
         VisibleColCount = 8
         VisibleRowCount = 1
         OnMouseUp = GridMouseUp
@@ -1067,6 +1071,7 @@ object f_calendar: Tf_calendar
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
+        TabStop = True
         Visible = False
         VisibleColCount = 9
         VisibleRowCount = 1

@@ -172,6 +172,7 @@ object f_main: Tf_main
     ParentColor = False
     TabOrder = 4
     TitleHeight = 12
+    WireframeMoveResize = True
     onMaximize = MultiDoc1Maximize
     onActiveChildChange = MultiDoc1ActiveChildChange
     object starshape: TImage
@@ -2679,83 +2680,83 @@ object f_main: Tf_main
         Action = FileNew1
       end
       object ToolButtonOpen: TToolButton
-        Left = 23
+        Left = 24
         Hint = 'Open|Open a chart'
         Action = FileOpen1
       end
       object ToolButtonSave: TToolButton
-        Left = 46
+        Left = 47
         Hint = 'Save the current chart'
         Action = FileSaveAs1
       end
       object ToolButtonPrint: TToolButton
-        Left = 69
+        Left = 70
         Hint = 'Print the chart'
         Action = Print1
       end
       object ToolButtonNightVision: TToolButton
-        Left = 92
+        Left = 93
         Caption = 'ToolButtonNightVision'
         ImageIndex = 82
         OnClick = ToolButtonNightVisionClick
       end
       object ToolButton3: TToolButton
-        Left = 115
+        Left = 116
         Width = 8
         Caption = 'ToolButton3'
         ImageIndex = 2
         Style = tbsSeparator
       end
       object ToolButtonCascade: TToolButton
-        Left = 123
+        Left = 124
         Hint = 'Cascade'
         Caption = '&Cascade'
         ImageIndex = 4
         OnClick = WindowCascade1Execute
       end
       object ToolButtonTile: TToolButton
-        Left = 146
+        Left = 147
         Hint = 'Tile Vertically'
         Caption = 'Tile &Vertically'
         ImageIndex = 14
         OnClick = WindowTileVertical1Execute
       end
       object ToolButton5: TToolButton
-        Left = 169
+        Left = 170
         Width = 8
         Caption = 'ToolButton5'
         ImageIndex = 17
         Style = tbsSeparator
       end
       object ToolButtonUndo: TToolButton
-        Left = 177
+        Left = 178
         Hint = 'Undo Last Change'
         Action = Undo
       end
       object ToolButtonRedo: TToolButton
-        Left = 200
+        Left = 201
         Hint = 'Redo Last Change'
         Action = Redo
       end
       object ToolButtonZoom: TToolButton
-        Left = 223
+        Left = 224
         Hint = 'Zoom In'
         Action = zoomplus
       end
       object ToolButtonUnZoom: TToolButton
-        Left = 246
+        Left = 247
         Hint = 'Zoom Out'
         Action = zoomminus
       end
       object ToolButton1: TToolButton
-        Left = 269
+        Left = 270
         Hint = 'Set FOV'
         Action = ZoomBar
       end
       object quicksearch: TComboBox
-        Left = 315
+        Left = 316
         Height = 23
-        Width = 80
+        Width = 85
         ArrowKeysTraverseList = False
         AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
@@ -2770,12 +2771,12 @@ object f_main: Tf_main
         TabOrder = 0
       end
       object ToolButtonSearch: TToolButton
-        Left = 395
+        Left = 401
         Hint = 'Search'
         Action = Search1
       end
       object MagPanel: TPanel
-        Left = 292
+        Left = 293
         Height = 23
         Width = 23
         BevelOuter = bvNone
@@ -2900,53 +2901,53 @@ object f_main: Tf_main
         end
       end
       object ToolButtonPosition: TToolButton
-        Left = 418
+        Left = 424
         Hint = 'Position'
         Action = Position
       end
       object ToolButtonListObj: TToolButton
-        Left = 441
+        Left = 447
         Hint = 'Object List'
         Action = listobj
       end
       object ToolButtonCal: TToolButton
-        Left = 464
+        Left = 470
         Hint = 'Ephemeris Calendar'
         Action = Calendar
       end
       object ToolButton35: TToolButton
-        Left = 487
+        Left = 493
         Width = 8
         Caption = 'ToolButton35'
         ImageIndex = 8
         Style = tbsSeparator
       end
       object ToolButtonTdec: TToolButton
-        Left = 495
+        Left = 501
         Hint = 'Decrement Time'
         Action = TimeDec
       end
       object ToolButtonTnow: TToolButton
-        Left = 518
+        Left = 524
         Hint = 'Now'
         Action = TimeReset
       end
       object ToolButtonTinc: TToolButton
-        Left = 541
+        Left = 547
         Hint = 'Increment Time'
         Action = TimeInc
       end
       object TimeVal: TSpinEdit
-        Left = 564
+        Left = 570
         Height = 23
-        Width = 85
+        Width = 55
         MaxValue = 1000
         MinValue = 1
         TabOrder = 4
         Value = 1
       end
       object TimeU: TComboBox
-        Left = 649
+        Left = 625
         Height = 23
         Width = 85
         AutoCompleteText = [cbactSearchAscending]
@@ -2961,29 +2962,29 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ToolButton39: TToolButton
-        Left = 734
+        Left = 710
         Width = 8
         Caption = 'ToolButton39'
         ImageIndex = 45
         Style = tbsSeparator
       end
       object TConnect: TToolButton
-        Left = 742
+        Left = 718
         Hint = 'Connect Telescope'
         Action = TelescopeConnect
       end
       object TSlew: TToolButton
-        Left = 765
+        Left = 741
         Hint = 'Slew'
         Action = TelescopeSlew
       end
       object TSync: TToolButton
-        Left = 838
+        Left = 764
         Hint = 'Sync'
         Action = TelescopeSync
       end
       object ChildControl: TPanel
-        Left = 808
+        Left = 806
         Height = 25
         Width = 30
         Align = alRight
