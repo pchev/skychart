@@ -26,8 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_constant, u_util, cu_database,
-  StrUtils, Dialogs,
-  Controls, Buttons, enhedits, ComCtrls, Classes,
+  Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms,
   ExtCtrls, StdCtrls, LResources, WizardNotebook;
 

@@ -13,7 +13,7 @@ object f_position: Tf_position
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 106
   TextHeight = 13
   object Button1: TButton
     Left = 72
@@ -47,16 +47,16 @@ object f_position: Tf_position
     TabOrder = 2
     object coord1: TLabel
       Left = 8
-      Height = 14
+      Height = 16
       Top = 32
-      Width = 13
+      Width = 14
       Caption = 'Az'
       Color = clNone
       ParentColor = False
     end
     object coord2: TLabel
       Left = 152
-      Height = 14
+      Height = 16
       Top = 32
       Width = 14
       Caption = 'Alt'
@@ -65,9 +65,9 @@ object f_position: Tf_position
     end
     object coord: TLabel
       Left = 40
-      Height = 14
+      Height = 16
       Top = 4
-      Width = 28
+      Width = 32
       Caption = 'coord'
       Color = clNone
       ParentColor = False
@@ -110,27 +110,27 @@ object f_position: Tf_position
     TabOrder = 3
     object eq1: TLabel
       Left = 8
-      Height = 14
+      Height = 16
       Top = 32
-      Width = 15
+      Width = 17
       Caption = 'RA'
       Color = clNone
       ParentColor = False
     end
     object eq2: TLabel
       Left = 152
-      Height = 14
+      Height = 16
       Top = 32
-      Width = 14
+      Width = 18
       Caption = 'DE'
       Color = clNone
       ParentColor = False
     end
     object Equinox: TLabel
       Left = 40
-      Height = 14
+      Height = 16
       Top = 8
-      Width = 39
+      Width = 46
       Caption = 'Equinox'
       Color = clNone
       ParentColor = False
@@ -172,18 +172,18 @@ object f_position: Tf_position
     TabOrder = 4
     object Label3: TLabel
       Left = 8
-      Height = 14
+      Height = 16
       Top = 14
-      Width = 21
+      Width = 24
       Caption = 'FOV'
       Color = clNone
       ParentColor = False
     end
     object Label4: TLabel
       Left = 127
-      Height = 14
+      Height = 16
       Top = 14
-      Width = 42
+      Width = 47
       Caption = 'Rotation'
       Color = clNone
       ParentColor = False

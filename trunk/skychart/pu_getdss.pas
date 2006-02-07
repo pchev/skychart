@@ -30,8 +30,8 @@ interface
 
 uses
   dynlibs, u_constant, u_util, Math,
-  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, StdCtrls, Buttons, LResources;
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Buttons, LResources;
 
 // GetDss.dll interface
   type
@@ -203,7 +203,7 @@ try
       label1.caption:='Plate Id.    Date   Exp.  Margin  CD  Observatory';
       if pl.nplate>10 then pl.nplate:=10;
       for n:=1 to pl.nplate do begin
-        buf:=copy(pl.plate_name[n]+'   ',1,5)+' '+
+        buf:=copy(pl.plate_name[n]+'   ',1,5)+blank+
              copy(pl.gsc_plate_name[n]+'   ',1,5)+'  '+
              Formatfloat('0000',pl.year_imaged[n])+'   '+
              Formatfloat('000',pl.exposure[n])+'   '+

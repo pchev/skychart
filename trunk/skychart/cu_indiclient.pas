@@ -33,7 +33,7 @@ uses
   {$ifdef unix}
     baseunix,
   {$endif}
-  u_util, blcksock, LibXmlParser, LibXmlComps,
+  u_constant, u_util, blcksock, LibXmlParser, LibXmlComps,
   Classes, SysUtils, Messages,Forms;
 
 type
@@ -51,7 +51,7 @@ type
     property Sock: TTCPBlockSocket read FSock;
   end;
 
-  TDataEvent = procedure(Sender : TObject; const data : string) of object;
+  TIndiDataEvent = procedure(Sender : TObject; const data : string) of object;
   TIndiSource = (Server,Telescope,Coord);
   TIndiStatus = (Ok,Busy,Idle,Alert);
   TStatusInfo = procedure(Sender : Tobject; source: TIndiSource; status: TIndistatus) of object;
@@ -76,9 +76,9 @@ type
     procedure XmlEndTag(Sender: TObject; TagName: String);
     procedure XmlEmptyTag(Sender: TObject; TagName: String; Attributes: TAttrList);
   public
-    onSocketInfo: TDataEvent;
-    onReceiveData: TDataEvent;
-    FonMessage: TDataEvent;
+    onSocketInfo: TIndiDataEvent;
+    onReceiveData: TIndiDataEvent;
+    FonMessage: TIndiDataEvent;
     FonStatusChange: TStatusInfo;
     FonCoordChange: TNotifyEvent;
     TcpClient : TTcpclient;
@@ -113,7 +113,7 @@ type
     property IndiDriver : string read FIndiDriver write FIndiDriver;
     property onCoordChange: TNotifyEvent read FonCoordChange write FonCoordChange;
     property onStatusChange: TStatusInfo read FonStatusChange write FonStatusChange;
-    property onMessage: TDataEvent read FonMessage write FonMessage;
+    property onMessage: TIndiDataEvent read FonMessage write FonMessage;
   end;
 
 implementation
@@ -364,7 +364,7 @@ if (FCurrentname='EQUATORIAL_EOD_COORD')and(Fname='RA') then begin EOD:=true; FR
 if (FCurrentname='EQUATORIAL_EOD_COORD')and(Fname='DEC') then begin EOD:=true; FDec:=Content; end;
 if (FCurrentname='EQUATORIAL_COORD')and(Fname='RA') then begin EOD:=false; FRa:=Content; end;
 if (FCurrentname='EQUATORIAL_COORD')and(Fname='DEC') then begin EOD:=false; FDec:=Content; end;
-if Ftrace then writetrace(FCurrentdevice+' '+FCurrentname+' '+FName+' '+Content);
+if Ftrace then writetrace(FCurrentdevice+blank+FCurrentname+blank+FName+blank+Content);
 end;
 
 procedure TIndiClient.XmlEndTag(Sender: TObject; TagName: String);

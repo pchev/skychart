@@ -47,7 +47,7 @@ Tskychart = class (TComponent)
     procedure EditLabelTxt(lnum,x,y: integer);
     procedure DefaultLabel(lnum: integer);
     procedure DeleteLabel(lnum: integer);
-    procedure DeleteAllLabel(lnum: integer);
+    procedure DeleteAllLabel;
     procedure LabelClick(lnum: integer);
     procedure SetImage(value:TCanvas);
    public
@@ -114,7 +114,7 @@ Tskychart = class (TComponent)
     Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
     procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
-    function GetChartInfo(sep:string=' '):string;
+    function GetChartInfo(sep:string=blank):string;
     property Image: TCanvas write SetImage;
 end;
 
@@ -1542,15 +1542,15 @@ end else begin
 // search solar system object
    result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
    if result then begin
-      if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+' '+d; // add date to the name if simulation for more than one date
+      if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+blank+d; // add date to the name if simulation for more than one date
    end else begin
       result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
-         if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+' '+d;
+         if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+blank+d;
    end else begin
       result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
-         if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+' '+d;
+         if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+blank+d;
       end;
    end;
 end;
@@ -2644,7 +2644,7 @@ cfgsc^.modlabels[i].hiden:=true;
 DrawLabels;
 end;
 
-procedure Tskychart.DeleteAllLabel(lnum: integer);
+procedure Tskychart.DeleteAllLabel;
 begin
 cfgsc^.nummodlabels:=0;
 DrawLabels;
@@ -2802,7 +2802,7 @@ end;
 end;
 end;
 
-function Tskychart.GetChartInfo(sep:string=' '):string;
+function Tskychart.GetChartInfo(sep:string=blank):string;
 var cep,dat:string;
 begin
     cep:=trim(cfgsc^.EquinoxName);

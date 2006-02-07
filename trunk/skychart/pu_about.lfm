@@ -16,7 +16,7 @@ object f_about: Tf_about
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 106
   Position = poScreenCenter
   TextHeight = 13
   object logo: TImage
@@ -4448,10 +4448,10 @@ object f_about: Tf_about
     Transparent = True
   end
   object Label1: TLabel
-    Left = 160
-    Height = 36
+    Left = 153
+    Height = 42
     Top = 31
-    Width = 175
+    Width = 182
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Sky Charts'
@@ -4464,9 +4464,9 @@ object f_about: Tf_about
   end
   object Label2: TLabel
     Left = 16
-    Height = 19
+    Height = 23
     Top = 176
-    Width = 152
+    Width = 161
     Caption = 'Version 3 alpha 0'
     Color = clNone
     Font.Color = clSilver

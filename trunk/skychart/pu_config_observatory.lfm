@@ -11,7 +11,7 @@ object f_config_observatory: Tf_config_observatory
   ClientWidth = 567
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 106
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -31,15 +31,15 @@ object f_config_observatory: Tf_config_observatory
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Latitude: TGroupBox
           Left = 8
           Height = 68
           Top = 85
           Width = 185
           Caption = 'Latitude'
-          ClientHeight = 51
+          ClientHeight = 50
           ClientWidth = 181
           TabOrder = 0
           object Label58: TLabel
@@ -141,7 +141,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 85
           Width = 185
           Caption = 'Longitude'
-          ClientHeight = 51
+          ClientHeight = 50
           ClientWidth = 181
           TabOrder = 1
           object Label61: TLabel
@@ -243,7 +243,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 85
           Width = 81
           Caption = 'Altitude'
-          ClientHeight = 51
+          ClientHeight = 50
           ClientWidth = 77
           TabOrder = 2
           object Label70: TLabel
@@ -281,7 +281,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 153
           Width = 273
           Caption = 'Atmospheric Refraction'
-          ClientHeight = 51
+          ClientHeight = 50
           ClientWidth = 269
           TabOrder = 3
           object Label82: TLabel
@@ -343,7 +343,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 161
           Width = 177
           Caption = 'Time Zone'
-          ClientHeight = 43
+          ClientHeight = 42
           ClientWidth = 173
           TabOrder = 4
           object Label81: TLabel
@@ -18741,8 +18741,8 @@ object f_config_observatory: Tf_config_observatory
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object hor_l2: TLabel
           Height = 13
           Width = 86
@@ -18756,7 +18756,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 160
           Width = 457
           Caption = 'Want to track an object before it rise ?'
-          ClientHeight = 72
+          ClientHeight = 71
           ClientWidth = 453
           TabOrder = 0
           object horizonopaque: TCheckBox
@@ -18775,7 +18775,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 32
           Width = 457
           Caption = 'Local Horizon'
-          ClientHeight = 104
+          ClientHeight = 103
           ClientWidth = 453
           TabOrder = 1
           object hor_l1: TLabel
@@ -18842,7 +18842,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 256
           Width = 457
           Caption = 'Depression of the visible horizon'
-          ClientHeight = 104
+          ClientHeight = 103
           ClientWidth = 453
           TabOrder = 2
           object Label1: TLabel

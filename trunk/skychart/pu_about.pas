@@ -30,7 +30,7 @@ interface
 
 uses u_constant,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, LResources;
+  ExtCtrls, LResources;
 
 type
   Tf_about = class(TForm)

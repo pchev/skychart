@@ -283,7 +283,7 @@ for j:=1 to length(str) do begin
     c:=str[j-1];
     if c=tab then begin
        k:=i mod tabwidth;
-       result:=result+StringOfChar(' ', tabwidth-k);
+       result:=result+StringOfChar(blank, tabwidth-k);
        i:=i+tabwidth-k;
     end else begin
       result:=result+c;
@@ -296,11 +296,11 @@ function wordspace(str:string):string;
 var i : integer;
     c : char;
 begin
-c:=' ';
+c:=blank;
 result:='';
 for i:=1 to length(str) do begin
-  if str[i]=' ' then begin
-     if c<>' ' then result:=result+str[i];
+  if str[i]=blank then begin
+     if c<>blank then result:=result+str[i];
   end else result:=result+str[i];
   c:=str[i];
 end;
@@ -312,12 +312,12 @@ begin
 result:='';
 str:=trim(str);
 for i:=1 to p-1 do begin
- j:=pos(' ',str);
+ j:=pos(blank,str);
  if j=0 then j:=length(str)+1;
  str:=trim(copy(str,j,length(str)));
 end;
 for i:=1 to n do begin
- j:=pos(' ',str);
+ j:=pos(blank,str);
  if j=0 then j:=length(str)+1;
  result:=result+trim(copy(str,1,j))+sep;
  str:=trim(copy(str,j,length(str)));
@@ -589,7 +589,7 @@ begin
     end;
     str(abs(dd):2:0,d);
     if abs(dd)<10 then d:='0'+trim(d);
-    if dd<0 then d:='-'+d else d:=' '+d;
+    if dd<0 then d:='-'+d else d:=blank+d;
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:5:2,s);
@@ -739,7 +739,7 @@ var s,p : integer;
     t : string;
 begin
 try
-dms:=StringReplace(dms,' ','0',[rfReplaceAll]);
+dms:=StringReplace(dms,blank,'0',[rfReplaceAll]);
 if copy(dms,1,1)='-' then s:=-1 else s:=1;
 p:=pos('h',dms);
 t:=copy(dms,1,p-1); delete(dms,1,p);
@@ -760,7 +760,7 @@ var s,p : integer;
     t : string;
 begin
 try
-dms:=StringReplace(dms,' ','0',[rfReplaceAll]);
+dms:=StringReplace(dms,blank,'0',[rfReplaceAll]);
 if copy(dms,1,1)='-' then s:=-1 else s:=1;
 p:=pos('d',dms);
 t:=copy(dms,1,p-1); delete(dms,1,p);
@@ -1203,7 +1203,7 @@ end;
 
 procedure PrintStrings(str: TStrings; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
  Var
-  pw,ph:Integer;
+  pw,ph,marg:Integer;
   r:longint;
   y:integer;
   MargeLeft,Margetop,MargeRight:integer;
@@ -1234,6 +1234,8 @@ begin
   With Printer do begin
    Title:=PrtTitle;
    Orientation:=orient;
+   if Orientation=poLandscape then marg:=50
+      else marg:=25;
    {$ifdef mswindows}
    pw:=XDPI*PageWidth div 254;
    ph:=YDPI*PageHeight div 254;
@@ -1251,8 +1253,8 @@ begin
     Pen.Color:=clBlack;
     TextDown:=TextHeight(StrDate)*3 div 2;
    end;
-   MargeLeft:=pw div 25;
-   MargeTop :=ph div 25;
+   MargeLeft:=pw div marg;
+   MargeTop :=ph div marg;
    MargeRight:=pw-MargeLeft;
    Entete;
    For r:=0 to str.Count-1 do begin
@@ -1273,7 +1275,7 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
  Type
   TCols=Array[0..20] of integer;
  Var
-  Rapport,pw,ph:Integer;
+  Rapport,pw,ph,marg:Integer;
   r,c:longint;
   cols:^TCols;
   y:integer;
@@ -1329,6 +1331,8 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
   With Printer do begin
    Title:=PrtTitle;
    Orientation:=orient;
+   if Orientation=poLandscape then marg:=50
+      else marg:=25;
    {$ifdef mswindows}
    pw:=XDPI*PageWidth div 254;
    ph:=YDPI*PageHeight div 254;
@@ -1337,8 +1341,8 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
    pw:=PageWidth;
    ph:=PageHeight;
    {$endif}
-   MargeLeft:=pw div 25;
-   MargeTop :=ph div 25;
+   MargeLeft:=pw div marg;
+   MargeTop :=ph div marg;
    MargeRight:=pw-MargeLeft;
    Rapport:=(MargeRight) div Grid.GridWidth;
    BeginDoc;
