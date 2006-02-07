@@ -1,0 +1,25 @@
+# Minimal gtkrc file to set the font size.
+#
+# If you have some problem on your system with the GTK font size
+# try first to use your system tools to solve the problem.
+# If this still not work try the following:
+#
+# uncomment one of the font= line below 
+# type:
+# export GTK_RC_FILES=/pathtofile/safe_gtkrc
+# /pathtofile/cdc
+
+style "user-font"
+{
+# standard font 12
+  font="-*-*-medium-r-normal-*-*-120-*-*-p-*-iso8859-1"
+
+# smaller font 10
+#  font="-*-*-medium-r-normal-*-*-100-*-*-p-*-iso8859-1"
+
+# larger font 14
+#  font="-*-*-medium-r-normal-*-*-140-*-*-p-*-iso8859-1"
+
+}
+widget_class "*" style "user-font"
+
