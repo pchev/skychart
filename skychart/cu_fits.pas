@@ -166,7 +166,7 @@ repeat
       p1:=pos('=',header[i]);
       if p1=0 then p1:=9;
       keyword:=trim(copy(header[i],1,p1-1));
-      value:=trim(copy(header[i],p1+1,99))+' ';
+      value:=trim(copy(header[i],p1+1,99))+blank;
       if (not ItsFits) and (keyword='SIMPLE') and (value[1]='T') then itsFits:=true;
       if (keyword='END') then eoh:=true;
       result.add(header[i]);
@@ -837,7 +837,7 @@ if not db1.Active then result:=false
 else begin
   filename:=db1.QueryOne('SELECT filename from cdc_fits where '+
         'catalogname="'+uppercase(trim(catname))+'" and '+
-        'objectname="'+uppercase(stringreplace(objectname,' ','',[rfReplaceAll]))+'" ');
+        'objectname="'+uppercase(stringreplace(objectname,blank,'',[rfReplaceAll]))+'" ');
   result:=filename<>'';
 end;
 end;
@@ -847,7 +847,7 @@ var cmd:string;
 begin
 if not db1.Active then result:=false
 else begin
-      oname:=uppercase(stringreplace(oname,' ','',[rfReplaceAll]));
+      oname:=uppercase(stringreplace(oname,blank,'',[rfReplaceAll]));
       cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
         +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
         +',"'+uppercase(cname)+'"'
@@ -867,7 +867,7 @@ var cmd:string;
 begin
 if not db1.Active then result:=false
 else begin
-      oname:=uppercase(stringreplace(oname,' ','',[rfReplaceAll]));
+      oname:=uppercase(stringreplace(oname,blank,'',[rfReplaceAll]));
       cname:=uppercase(cname);
       cmd:='DELETE FROM cdc_fits WHERE catalogname="'+cname+'" AND objectname="'+oname+'"';
       result:= db1.query(cmd);

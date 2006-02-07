@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Math, u_constant, u_util, u_projection,
-  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+uses u_constant,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
-  StrUtils,  cu_fits, cu_catalog, cu_database,
+  cu_fits, cu_catalog, cu_database,
   pu_config_chart, pu_config_observatory, pu_config_time, pu_config_catalog,
   pu_config_system, pu_config_pictures, pu_config_display, pu_config_solsys,
   LResources, MultiDoc, ChildDoc;

@@ -167,7 +167,7 @@ LazarusResources.Add('Tf_detail','FORMDATA',[
   +'>>>'#255'>>>'#255'>>>'#255'>>>'#255'>>>'#255'P'#0'2'#255'P'#0'2'#255'P'#0'2'
   +#255'P'#0'2'#255'nnn'#255'>>>'#255'nnn'#255'>>>'#255'222'#255'JJJ'#255'nnn'
   +#255#134#134#134#255#158#158#158#255#164#160#160#255#164#160#160#255#164#160
-  +#160#255#13'PixelsPerInch'#2'P'#10'TextHeight'#2#16#0#6'TPanel'#6'Panel1'#6
+  +#160#255#13'PixelsPerInch'#2'j'#10'TextHeight'#2#16#0#6'TPanel'#6'Panel1'#6
   +'Height'#2'2'#5'Width'#3#142#1#5'Align'#7#5'alTop'#12'ClientHeight'#2'2'#11
   +'ClientWidth'#3#142#1#11'FullRepaint'#8#8'TabOrder'#2#0#0#7'TButton'#7'Butto'
   +'n1'#4'Left'#3#10#1#6'Height'#2#31#3'Top'#2#10#5'Width'#2'u'#25'BorderSpacin'

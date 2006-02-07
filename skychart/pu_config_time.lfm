@@ -11,7 +11,7 @@ object f_config_time: Tf_config_time
   ClientWidth = 519
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 106
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -31,8 +31,8 @@ object f_config_time: Tf_config_time
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Label142: TLabel
           Left = 224
           Height = 13
@@ -384,11 +384,11 @@ object f_config_time: Tf_config_time
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Label146: TLabel
-          Height = 13
-          Width = 130
+          Height = 16
+          Width = 132
           Caption = 'Time Simulation Setting'
           Color = clNone
           ParentColor = False
@@ -405,16 +405,16 @@ object f_config_time: Tf_config_time
         end
         object Label178: TLabel
           Left = 308
-          Height = 13
+          Height = 16
           Top = 100
-          Width = 41
+          Width = 35
           Caption = 'every  '
           Color = clNone
           ParentColor = False
         end
         object Label179: TLabel
           Left = 258
-          Height = 13
+          Height = 16
           Top = 60
           Width = 91
           Caption = 'Number of steps'
@@ -423,18 +423,18 @@ object f_config_time: Tf_config_time
         end
         object Label180: TLabel
           Left = 8
-          Height = 13
+          Height = 16
           Top = 32
-          Width = 163
+          Width = 156
           Caption = 'Choose which objects to plot'
           Color = clNone
           ParentColor = False
         end
         object Label56: TLabel
           Left = 255
-          Height = 13
+          Height = 16
           Top = 23
-          Width = 189
+          Width = 183
           Caption = 'Plot the position of moving object.'
           Color = clNone
           ParentColor = False
@@ -465,9 +465,9 @@ object f_config_time: Tf_config_time
         end
         object stepline: TCheckBox
           Left = 8
-          Height = 28
+          Height = 15
           Top = 279
-          Width = 261
+          Width = 213
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           TabOrder = 1
@@ -476,7 +476,7 @@ object f_config_time: Tf_config_time
           Left = 362
           Height = 22
           Top = 55
-          Width = 61
+          Width = 63
           MinValue = 1
           OnChange = nbstepChanged
           TabOrder = 2
@@ -486,7 +486,7 @@ object f_config_time: Tf_config_time
           Left = 362
           Height = 22
           Top = 95
-          Width = 61
+          Width = 63
           MaxValue = 999999
           MinValue = 1
           OnChange = stepsizeChanged

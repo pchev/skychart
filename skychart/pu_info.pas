@@ -270,6 +270,8 @@ begin
 list:=TStringList.create;
 for i:=0 to memo1.Lines.count-1 do begin
   buf:=memo1.Lines[i];
+  buf:=StringReplace(buf,tab,blank,[]); // remove first two tabs
+  buf:=StringReplace(buf,tab,blank,[]); // because coordinates are fixed column
   buf:=ExpandTab(buf,memo1.TabWidth);
   list.add(buf);
 end;

@@ -30,7 +30,7 @@ interface
 
 uses
   {$ifdef mswindows}
-    Winsock, Windows, WinXP,
+    Windows, WinXP,
   {$endif}
   {$ifdef unix}
   {$endif}
@@ -38,8 +38,8 @@ uses
   u_constant, u_util, blcksock, synsock, lazjpeg,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
-  ActnList, ToolWin, ImgList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, PrintersDlgs, PairSplitter, TrayIcon;
+  ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
+  LResources;
 
 type
   TTCPThrd = class(TThread)
@@ -589,8 +589,7 @@ implementation
 
 uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
-     pu_manualtelescope,
-     passql, pasmysql ;
+     pu_manualtelescope;
 
 
 function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
@@ -874,7 +873,7 @@ OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
     cfgp:=def_cfgplot;
     cfgs:=def_cfgsc;
     ReadChartConfig(OpenDialog.FileName,true,false,cfgp,cfgs);
-    nam:=stringreplace(extractfilename(OpenDialog.FileName),' ','_',[rfReplaceAll]);
+    nam:=stringreplace(extractfilename(OpenDialog.FileName),blank,'_',[rfReplaceAll]);
     p:=pos('.',nam);
     if p>0 then nam:=copy(nam,1,p-1);
     CreateChild(GetUniqueName(nam,false) ,false,cfgs,cfgp);
@@ -884,6 +883,9 @@ end;
 procedure Tf_main.FormShow(Sender: TObject);
 var i:integer;
 begin
+ SetButtonImage(ButtonImage);
+ InitFonts;
+ SetLpanel1('');
  for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
@@ -913,7 +915,6 @@ try
  Fits:=TFits.Create(self);
  cdcdb.onInitializeDB:=InitializeDB;
  planet.cdb:=cdcdb;
- SetButtonImage(ButtonImage);
  if nightvision then SetNightVision(nightvision);
  telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
  telescope.plugin:=def_cfgsc.ScopePlugin;
@@ -929,8 +930,6 @@ try
  f_search.cfgshr:=catalog.cfgshr;
  f_search.Init;
  SetLang;
- InitFonts;
- SetLpanel1('');
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
@@ -1234,7 +1233,7 @@ var buf:widestring;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
   sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,false,false,false);
-  f_info.Memo1.text:=buf;
+  f_info.Memo1.text:=blank+wordspace(buf);
   f_info.Memo1.selstart:=0;
   f_info.Memo1.selend:=0;
   f_info.setpage(1);
@@ -1993,13 +1992,13 @@ begin
    LPanels0.Caption:='Ra:22h22m22.22s +22°22''22"22';
    PanelBottom.height:=2*LPanels0.Height+8;
    PPanels0.Width:=LPanels0.width+8;
-   Lpanels0.Caption:='';
+   Lpanels0.Caption:=blank;
 end;
 
 Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
 begin
 LPanels1.width:=PPanels1.ClientWidth;
-LPanels1.Caption:=wordspace(stringreplace(txt,tab,' ',[rfReplaceall]));
+LPanels1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
 PPanels1.refresh;
 if sendmsg then SendInfo(Sender,origin,txt);
 if traceon then writetrace(txt);
@@ -3634,7 +3633,7 @@ begin
           //if s<>'' then writetrace(s);   // for debuging only, not thread safe!
           if lastError=0 then begin
              if (uppercase(s)='QUIT')or(uppercase(s)='EXIT') then break;
-             splitarg(s,' ',cmd);
+             splitarg(s,blank,cmd);
              for i:=cmd.count to MaxCmdArg do cmd.add('');
              Synchronize(ExecuteCmd);
              SendString(cmdresult+crlf);
@@ -4010,7 +4009,7 @@ while DDEenqueue do application.processmessages;
 try
 DdeEnqueue:=true;
 cmd:=TStringlist.create;
-splitarg(DdeData.text,' ',cmd);
+splitarg(DdeData.text,blank,cmd);
 for i:=cmd.count to MaxCmdArg do cmd.add('');
 cmdresult:=ExecuteCmd(Dde_active_chart,cmd);
 if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then Dde_active_chart:=cmd[1];

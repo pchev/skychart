@@ -29,8 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  u_constant, u_projection, u_util,
-  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, MaskEdit, cu_radec, enhedits, ExtCtrls, LResources, Buttons;
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons;
 
 type
   Tf_position = class(TForm)

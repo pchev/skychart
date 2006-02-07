@@ -4,10 +4,10 @@ object f_main: Tf_main
   Top = 134
   Width = 840
   HorzScrollBar.Page = 839
-  VertScrollBar.Page = 548
+  VertScrollBar.Page = 553
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 549
+  ClientHeight = 554
   ClientWidth = 840
   Font.CharSet = ANSI_CHARSET
   Font.Color = clBlack
@@ -154,18 +154,18 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 106
   TextHeight = 15
   object MultiDoc1: TMultiDoc
     Left = 23
-    Height = 464
+    Height = 469
     Top = 53
     Width = 792
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
     Caption = 'MultiDoc1'
-    ClientHeight = 464
+    ClientHeight = 469
     ClientWidth = 792
     Color = clBlack
     FullRepaint = False
@@ -2318,13 +2318,13 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 464
+    Height = 469
     Top = 53
     Width = 23
     Align = alLeft
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 464
+    ClientHeight = 469
     ClientWidth = 23
     FullRepaint = False
     TabOrder = 0
@@ -2343,11 +2343,13 @@ object f_main: Tf_main
       TabOrder = 0
       Wrapable = False
       object ToolButtonConfig: TToolButton
+        Left = 1
         Hint = 'Configure the program'
         Action = OpenConfig
         Wrap = True
       end
       object ToolButtonEQ: TToolButton
+        Left = 1
         Hint = 'Equatorial Coordinate'
         Top = 23
         Action = EquatorialProjection
@@ -2355,6 +2357,7 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonAZ: TToolButton
+        Left = 1
         Hint = 'Alt-Az Coordinate'
         Top = 46
         Action = AltAzProjection
@@ -2362,6 +2365,7 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonEC: TToolButton
+        Left = 1
         Hint = 'Ecliptic Coordinate'
         Top = 69
         Action = EclipticProjection
@@ -2369,6 +2373,7 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonGL: TToolButton
+        Left = 1
         Hint = 'Galactic Coordinate'
         Top = 92
         Action = GalacticProjection
@@ -2376,24 +2381,28 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object FlipButtonX: TToolButton
+        Left = 1
         Hint = 'Mirror Horizontally'
         Top = 115
         Action = FlipX
         Wrap = True
       end
       object FlipButtonY: TToolButton
+        Left = 1
         Hint = 'Mirror Vertically'
         Top = 138
         Action = FlipY
         Wrap = True
       end
       object ToolButtonRotP: TToolButton
+        Left = 1
         Hint = 'Rotate Right'
         Top = 161
         Action = rot_plus
         Wrap = True
       end
       object ToolButtonRotM: TToolButton
+        Left = 1
         Hint = 'Rotate Left'
         Top = 184
         Action = rot_minus
@@ -2402,13 +2411,13 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 815
-    Height = 464
+    Height = 469
     Top = 53
     Width = 25
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 464
+    ClientHeight = 469
     ClientWidth = 25
     FullRepaint = False
     TabOrder = 1
@@ -2551,35 +2560,41 @@ object f_main: Tf_main
       TabOrder = 0
       Wrapable = False
       object ToolButtonAllSky: TToolButton
+        Left = 1
         Hint = 'Show All Sky'
         Action = allSky
         Wrap = True
       end
       object ToolButtonToN: TToolButton
+        Left = 1
         Hint = 'North'
         Top = 23
         Action = toN
         Wrap = True
       end
       object ToolButtonToS: TToolButton
+        Left = 1
         Hint = 'South'
         Top = 46
         Action = toS
         Wrap = True
       end
       object ToolButtonToE: TToolButton
+        Left = 1
         Hint = 'East'
         Top = 69
         Action = toE
         Wrap = True
       end
       object ToolButtonToW: TToolButton
+        Left = 1
         Hint = 'West'
         Top = 92
         Action = toW
         Wrap = True
       end
       object ToolButtonToZ: TToolButton
+        Left = 1
         Top = 115
         Action = toZenith
       end
@@ -2587,7 +2602,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 517
+    Top = 522
     Width = 840
     Align = alBottom
     BevelOuter = bvNone
@@ -2622,7 +2637,7 @@ object f_main: Tf_main
       TabOrder = 0
       object LPanels0: TLabel
         Left = 3
-        Height = 13
+        Height = 16
         Top = 3
         Width = 53
         Caption = 'LPanels0'
@@ -2643,9 +2658,9 @@ object f_main: Tf_main
       TabOrder = 1
       object LPanels1: TLabel
         Left = 4
-        Height = 28
+        Height = 16
         Top = 3
-        Width = 40
+        Width = 53
         Caption = 'LPanels1'
         Color = clNone
         ParentColor = False
@@ -2676,6 +2691,7 @@ object f_main: Tf_main
       TabOrder = 0
       Wrapable = False
       object ToolButtonNew: TToolButton
+        Left = 1
         Hint = 'New|Create a new chart'
         Action = FileNew1
       end
@@ -2940,14 +2956,14 @@ object f_main: Tf_main
       object TimeVal: TSpinEdit
         Left = 570
         Height = 23
-        Width = 55
+        Width = 57
         MaxValue = 1000
         MinValue = 1
         TabOrder = 4
         Value = 1
       end
       object TimeU: TComboBox
-        Left = 625
+        Left = 627
         Height = 23
         Width = 85
         AutoCompleteText = [cbactSearchAscending]
@@ -2962,29 +2978,29 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ToolButton39: TToolButton
-        Left = 710
+        Left = 712
         Width = 8
         Caption = 'ToolButton39'
         ImageIndex = 45
         Style = tbsSeparator
       end
       object TConnect: TToolButton
-        Left = 718
+        Left = 720
         Hint = 'Connect Telescope'
         Action = TelescopeConnect
       end
       object TSlew: TToolButton
-        Left = 741
+        Left = 743
         Hint = 'Slew'
         Action = TelescopeSlew
       end
       object TSync: TToolButton
-        Left = 764
+        Left = 766
         Hint = 'Sync'
         Action = TelescopeSync
       end
       object ChildControl: TPanel
-        Left = 806
+        Left = 809
         Height = 25
         Width = 30
         Align = alRight
@@ -3027,9 +3043,9 @@ object f_main: Tf_main
       TabOrder = 1
       Wrapable = False
       object topmessage: TLabel
-        Left = 663
+        Left = 664
         Height = 24
-        Width = 5
+        Width = 4
         Caption = ' '
         Color = clNone
         ParentColor = False
@@ -3040,144 +3056,144 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonShowNebulae: TToolButton
-        Left = 23
+        Left = 24
         Hint = 'Show Nebulae'
         Action = ShowNebulae
         Style = tbsCheck
       end
       object ToolButtonShowLines: TToolButton
-        Left = 46
+        Left = 47
         Hint = 'Show Lines'
         Action = ShowLines
         Style = tbsCheck
       end
       object ToolButtonShowPictures: TToolButton
-        Left = 69
+        Left = 70
         Hint = 'Show Pictures'
         Action = ShowPictures
         Style = tbsCheck
       end
       object ToolButtonDSS: TToolButton
-        Left = 92
+        Left = 93
         Hint = 'Get DSS Image'
         Action = DSSImage
       end
       object ToolButtonShowBackgroundImage: TToolButton
-        Left = 115
+        Left = 116
         Hint = 'Show Background Image'
         Action = ShowBackgroundImage
         Style = tbsCheck
       end
       object ToolButtonShowPlanets: TToolButton
-        Left = 138
+        Left = 139
         Hint = 'Show Planets'
         Action = ShowPlanets
         Style = tbsCheck
       end
       object ToolButtonShowAsteroids: TToolButton
-        Left = 161
+        Left = 162
         Hint = 'Show Asteroids'
         Action = ShowAsteroids
         Style = tbsCheck
       end
       object ToolButtonShowComets: TToolButton
-        Left = 184
+        Left = 185
         Hint = 'Show Comets'
         Action = ShowComets
         Style = tbsCheck
       end
       object ToolButtonShowMilkyWay: TToolButton
-        Left = 207
+        Left = 208
         Hint = 'Show Milky Way'
         Action = ShowMilkyWay
         Style = tbsCheck
       end
       object ToolButtonGrid: TToolButton
-        Left = 230
+        Left = 231
         Hint = 'Show Coordinate Grid'
         Action = Grid
         Style = tbsCheck
       end
       object ToolButtonGridEq: TToolButton
-        Left = 253
+        Left = 254
         Hint = 'Add Equatorial Grid'
         Action = GridEQ
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLine: TToolButton
-        Left = 276
+        Left = 277
         Hint = 'Show Constellation Line'
         Action = ShowConstellationLine
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLimit: TToolButton
-        Left = 299
+        Left = 300
         Hint = 'Show Constellation Limit'
         Action = ShowConstellationLimit
         Style = tbsCheck
       end
       object ToolButtonShowGalacticEquator: TToolButton
-        Left = 322
+        Left = 323
         Hint = 'Show Galactic Equator'
         Action = ShowGalacticEquator
         Style = tbsCheck
       end
       object ToolButtonShowEcliptic: TToolButton
-        Left = 345
+        Left = 346
         Hint = 'Show Ecliptic'
         Action = ShowEcliptic
         Style = tbsCheck
       end
       object ToolButtonShowMark: TToolButton
-        Left = 368
+        Left = 369
         Hint = 'Show Mark'
         Action = ShowMark
         Style = tbsCheck
       end
       object ToolButtonShowLabels: TToolButton
-        Left = 391
+        Left = 392
         Hint = 'Show Labels'
         Action = ShowLabels
         Style = tbsCheck
       end
       object ToolButtonEditlabels: TToolButton
-        Left = 414
+        Left = 415
         Hint = 'Edit Labels'
         Action = EditLabels
         Style = tbsCheck
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
-        Left = 437
+        Left = 438
         Hint = 'Show Object below the horizon'
         Action = ShowObjectbelowHorizon
         Style = tbsCheck
       end
       object ToolButtonswitchbackground: TToolButton
-        Left = 460
+        Left = 461
         Hint = 'Sky Background Color'
         Action = switchbackground
         Style = tbsCheck
       end
       object ToolButtonSyncChart: TToolButton
-        Left = 483
+        Left = 484
         Hint = 'Link All Chart'
         Action = SyncChart
         Style = tbsCheck
       end
       object ToolButtonTrack: TToolButton
-        Left = 506
+        Left = 507
         Hint = 'Track'
         Action = Track
         Style = tbsCheck
       end
       object ToolButtonswitchstars: TToolButton
-        Left = 529
+        Left = 530
         Hint = 'Change Drawing Mode'
         Action = switchstars
         Style = tbsCheck
       end
       object PanelStar: TPanel
-        Left = 552
+        Left = 553
         Height = 24
         Width = 111
         BevelOuter = bvNone

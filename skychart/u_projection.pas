@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 interface
 uses u_constant, u_util,
-     Math, Types, Inifiles, SysUtils, Graphics;
+     Math, SysUtils, Graphics;
 
 Procedure ScaleWindow(c: Pconf_skychart);
 Function RotationAngle(x1,y1,x2,y2: double; c: Pconf_skychart): double;

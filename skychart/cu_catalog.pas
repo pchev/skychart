@@ -27,7 +27,7 @@ interface
 
 uses  { libcatalog,}  // libcatalog statically linked
     bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
-    gscconst, gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit,
+    gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit,
     sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, wdsunit,
     rc3unit,          // libcatalog statically linked
     u_constant, u_util, u_projection,
@@ -1237,7 +1237,7 @@ if result then begin
    rec.star.pmdec:=deg2rad*lin.pmde/1000/3600;
    rec.star.sp:=lin.sp;
    if lin.flam>0 then rec.star.id:=copy(inttostr(lin.flam)+blank15,1,3) else rec.star.id:='';
-   rec.star.id:=rec.star.id+' '+ lin.bayer+' '+lin.cons;
+   rec.star.id:=rec.star.id+blank+ lin.bayer+blank+lin.cons;
    rec.str[1]:=inttostr(lin.bs);
    if lin.hd>0 then rec.str[2]:=inttostr(lin.hd) else rec.str[2]:='';
    if trim(lin.bayer)<>'' then begin
@@ -1287,7 +1287,7 @@ if result then begin
      p:=length(n)-4;
      if p>0 then n:=s+copy(n,1,p-1)+'.'+copy(n,p,p+5)
             else n:=s+'0.'+padzeros(n,5);
-     n:=' '+lin.dm_cat+n;
+     n:=blank+lin.dm_cat+n;
    end
    else n:='';
    rec.star.id:=n;
@@ -1606,9 +1606,9 @@ if result then begin
    str(lin.num:7,rec.str[1]);
    if copy(lin.vartype,7,3)='NSV' then rec.str[1]:='NSV'+rec.str[1];
    rec.variable.period:=lin.period;
-   rec.variable.vartype:=stringreplace(lin.vartype,':',' ',[rfReplaceAll]);
+   rec.variable.vartype:=stringreplace(lin.vartype,':',blank,[rfReplaceAll]);
    rec.variable.magcode:=lin.mcode;
-   rec.str[2]:=lin.lmin+' '+lin.lmax;
+   rec.str[2]:=lin.lmin+blank+lin.lmax;
 end;
 end;
 
@@ -2556,8 +2556,8 @@ reset(f);
 // get first point
 repeat readln(f,buf) until eof(f)or((trim(buf)<>'')and(buf[1]<>'#'));
 if (trim(buf)='')or(buf[1]='#') then exit;
-i1:=strtoint(trim(words(buf,' ',1,1)));
-d1:=strtofloat(trim(words(buf,' ',2,1)));
+i1:=strtoint(trim(words(buf,blank,1,1)));
+d1:=strtofloat(trim(words(buf,blank,2,1)));
 if d1>90 then d1:=90;
 if d1<0 then d1:=0;
 if i1<>0 then begin
@@ -2571,8 +2571,8 @@ d0:=d1;
 while (not eof(f))and(i2<359) do begin
     repeat readln(f,buf) until eof(f)or((trim(buf)<>'')and(buf[1]<>'#'));
     if (trim(buf)='')or(buf[1]='#') then break;
-    i2:=strtoint(trim(words(buf,' ',1,1)));
-    d2:=strtofloat(trim(words(buf,' ',2,1)));
+    i2:=strtoint(trim(words(buf,blank,1,1)));
+    d2:=strtofloat(trim(words(buf,blank,2,1)));
     if i2>359 then i2:=359;
     if i1>=i2 then continue;
     if d2>90 then d2:=90;

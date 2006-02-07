@@ -74,7 +74,7 @@ begin
   delete(txt,1,i);
   i:=pos(tab,txt);
   if i=0 then exit;
-  label2.Caption:=label2.Caption+' '+copy(txt,1,i-1);
+  label2.Caption:=label2.Caption+blank+copy(txt,1,i-1);
   delete(txt,1,i);
   i:=pos(tab,txt);
   if i=0 then exit;

@@ -31,7 +31,7 @@ uses
   series96main, // series 96 statically linked
   elp82main,    // elp82 statically linked
   cu_database, u_constant, u_util, u_projection,
-  Classes, Sysutils, StrUtils, passql, pasmysql, passqlite, Forms, Math;
+  Classes, Sysutils, passql, pasmysql, passqlite, Forms, Math;
 
 type Tastelem = record
   Oaa,Obb,Occ,Oa,Ob,Oc,Ot,Oq,Oe,Oomi : Double;     (* parametres de l'orbite   *)
@@ -970,7 +970,7 @@ if result then begin
 //  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
-  date:=Date2Str(yy,mm,dd)+' '+shh;
+  date:=Date2Str(yy,mm,dd)+blank+shh;
   jd0:=jd(yy,mm,dd,0);
   st0:=SidTim(jd0,hh-cfgsc^.TimeZone,cfgsc^.ObsLongitude);
 end;
@@ -994,9 +994,9 @@ if result and (currentplanet<10) then begin
           +'  P'+tab+nom+tab
           +date+tab
           +'m:'+smagn+tab
-          +'diam:'+sdiam+' '+lsec+tab
+          +'diam:'+sdiam+blank+lsec+tab
           +'illum:'+sillum+tab
-          +'phase:'+sphase+' '+ldeg+tab
+          +'phase:'+sphase+blank+ldeg+tab
           +'dist:'+sdist+' au'+tab
           +'rsol:'+sdp+' au'+tab;
   PlanetOrientation(jdt,CurrentPlanet,p,pde,pds,w1,w2,w3);
@@ -1014,7 +1014,7 @@ if result and (currentplanet<10) then begin
      if w1>0 then shh:=ARmtoStr(w1);
      repeat
         w1:=w1+24*360/870.27003539;
-        if (w1>0)and(w1<24) then shh:=shh+' '+ARmtoStr(w1);
+        if (w1>0)and(w1<24) then shh:=shh+blank+ARmtoStr(w1);
      until w1>24;
      Desc:=Desc+'GRStr:'+shh+tab;
   end else begin
@@ -1030,7 +1030,7 @@ if result and (currentplanet=10) then begin
   Desc := sar+tab+sde+tab
           +'  P'+tab+nom+tab
           +date+tab
-          +'diam:'+sdiam+' '+lmin+tab
+          +'diam:'+sdiam+blank+lmin+tab
           +'dist:'+sdist+' au'+tab;
   PlanetOrientation(jdt,CurrentPlanet,p,pde,pds,w1,w2,w3);
   Desc:=Desc+'pa:'+formatfloat(d1,p)+tab
@@ -1059,9 +1059,9 @@ if result and (currentplanet=11) then begin
           +'  P'+tab+nom+tab
           +date+tab
           +'m:'+smagn+tab
-          +'diam:'+sdiam+' '+lmin+tab
+          +'diam:'+sdiam+blank+lmin+tab
           +'illum:'+sillum+tab
-          +'phase:'+sphase+' '+ldeg+tab
+          +'phase:'+sphase+blank+ldeg+tab
           +'dist:'+sdist+' km'+tab;
   MoonOrientation(jdt,ar,de,dist,p,pde,pds,w1);
   Desc := Desc+'pa:'+formatfloat(d1,p)+tab
@@ -1074,7 +1074,7 @@ if result and (currentplanet=32) then begin   // Earth umbra
 //  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
   shh := ARmtoStr(rmod(hh,24));
-  date:=Date2Str(yy,mm,dd)+' '+shh;
+  date:=Date2Str(yy,mm,dd)+blank+shh;
   cfgsc^.TrackType:=1;
   cfgsc^.TrackObj:=CurrentPlanet;
   cfgsc^.TrackName:='Earth umbra';
@@ -1092,7 +1092,7 @@ if result and (currentplanet>11) and (currentplanet<=15) then begin
   Desc := sar+tab+sde+tab
           +' Ps'+tab+nom+tab
           +date+tab
-          +'diam:'+sdiam+' '+lsec+tab
+          +'diam:'+sdiam+blank+lsec+tab
           +'m:'+smagn+tab;
 end;
 if result and (currentplanet>15) and (currentplanet<=23) then begin
@@ -1103,7 +1103,7 @@ if result and (currentplanet>15) and (currentplanet<=23) then begin
   Desc := sar+tab+sde+tab
           +' Ps'+tab+nom+tab
           +date+tab
-          +'diam:'+sdiam+' '+lsec+tab
+          +'diam:'+sdiam+blank+lsec+tab
           +'m:'+smagn+tab;
 end;
 if result and (currentplanet>23) and (currentplanet<=28) then begin
@@ -1114,7 +1114,7 @@ if result and (currentplanet>23) and (currentplanet<=28) then begin
   Desc := sar+tab+sde+tab
           +' Ps'+tab+nom+tab
           +date+tab
-          +'diam:'+sdiam+' '+lsec+tab
+          +'diam:'+sdiam+blank+lsec+tab
           +'m:'+smagn+tab;
 end;
 if result and (currentplanet>28) and (currentplanet<=30) then begin
@@ -1125,7 +1125,7 @@ if result and (currentplanet>28) and (currentplanet<=30) then begin
   Desc := sar+tab+sde+tab
           +' Ps'+tab+nom+tab
           +date+tab
-          +'diam:'+sdiam+' '+lsec+tab
+          +'diam:'+sdiam+blank+lsec+tab
           +'m:'+smagn+tab;
 end;
 cfgsc^.FindName:=nom;
@@ -1868,7 +1868,7 @@ if result then begin
 //  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
-  date:=Date2Str(yy,mm,dd)+' '+shh;
+  date:=Date2Str(yy,mm,dd)+blank+shh;
   cdb.GetAstElem(cfgsc^.AsteroidName[CurrentAstStep,CurrentAsteroid,1],cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id);
   InitAsteroid(cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,nam);
   Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn);
@@ -1881,7 +1881,7 @@ if result then begin
           +' As'+tab+nom+tab
           +date+tab
           +'m:'+mag+tab
-          +'phase:'+sphase+' '+ldeg+tab
+          +'phase:'+sphase+blank+ldeg+tab
           +'dist:'+sdist+'au'+tab
           +'rsol:'+sdp+'au'+tab
           +'ref:'+ref;
@@ -1939,7 +1939,7 @@ if result then begin
   jdt:=cfgsc^.CometLst[CurrentComStep,CurrentComet,7];
   djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
-  date:=Date2Str(yy,mm,dd)+' '+shh;
+  date:=Date2Str(yy,mm,dd)+blank+shh;
   cdb.GetComElem(cfgsc^.CometName[CurrentComStep,CurrentComet,1],cfgsc^.CometLst[CurrentComStep,CurrentComet,8],tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id);
   InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
   Comet(jdt,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
@@ -1952,7 +1952,7 @@ if result then begin
           +' Cm'+tab+nom+tab
           +date+tab
           +'m:'+mag+tab
-          +'phase:'+sphase+' '+ldeg+tab
+          +'phase:'+sphase+blank+ldeg+tab
           +'dist:'+sdist+'au'+tab
           +'rsol:'+sdp+'au'+tab
           +'tl:'+formatfloat(f2,lc)+'au'+tab

@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
-     Printers, Math, cu_telescope, lazjpeg, pscanvas,IntfGraphics,
+     Printers, Math, cu_telescope, lazjpeg, IntfGraphics,
      LCLIntf, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList, SysUtils, LResources;
      
@@ -545,7 +545,7 @@ try
       fname:=slash(printpath)+'cdcprint.bmp';
       prtbmp.savetofile(fname);
       //cmd:='bmptopnm '+fname+' | pnmtops -equalpixels -dpi='+inttostr(printresol)+' -rle >'+changefileext(fname,'.ps');
-//      cmd:='command.com /C bmptops.bat '+fname+' '+changefileext(fname,'.ps');
+//      cmd:='command.com /C bmptops.bat '+fname+blank+changefileext(fname,'.ps');
       cmd:='bmptops.bat "'+fname+'" "'+changefileext(fname,'.ps')+'" '+inttostr(printresol);
       chdir(slash(appdir)+'plugins');
     i:=exec(cmd);
@@ -1015,22 +1015,22 @@ end else begin
    sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
    case sc.cfgsc.projpole of
    AltAz: begin
-          txt:='Az:'+deptostr(rad2deg*a)+' '+deptostr(rad2deg*h)+crlf
-              +'Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+          txt:='Az:'+deptostr(rad2deg*a)+blank+deptostr(rad2deg*h)+crlf
+              +'Ra:'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
           end;
    Equat: begin
           ra:=rmod(ra+pi2,pi2);
-          txt:='Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+          txt:='Ra:'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
           end;
    Gal:   begin
           l:=rmod(l+pi2,pi2);
-          txt:='L:'+deptostr(rad2deg*l)+' '+deptostr(rad2deg*b)+crlf
-              +'Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+          txt:='L:'+deptostr(rad2deg*l)+blank+deptostr(rad2deg*b)+crlf
+              +'Ra:'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
           end;
    Ecl:   begin
           le:=rmod(le+pi2,pi2);
-          txt:='L:'+deptostr(rad2deg*le)+' '+deptostr(rad2deg*be)+crlf
-              +'Ra:'+arptostr(rad2deg*ra/15)+' '+deptostr(rad2deg*dec);
+          txt:='L:'+deptostr(rad2deg*le)+blank+deptostr(rad2deg*be)+crlf
+              +'Ra:'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
           end;
    end;
    if assigned(Fshowcoord) then Fshowcoord(txt);
@@ -1308,7 +1308,7 @@ txt:=txt+html_b+'Galactic '+htms_b+' L: '+detostr(rad2deg*a)+'   B:'+detostr(rad
 txt:=txt+htms_f+html_br;
 // local position
 txt:=txt+html_b+sc.catalog.cfgshr.llabel[103]+':'+htms_b+html_br;
-txt:=txt+sc.cfgsc.ObsName+' '+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+' '+ArToStr3(sc.cfgsc.Curtime)+'  ( UT + '+ArmtoStr(sc.cfgsc.TimeZone)+' )';
+txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( UT + '+ArmtoStr(sc.cfgsc.TimeZone)+' )';
 txt:=txt+html_pre;
 djd(sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24,y,m,d,h);
 txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[102]+blank15,1,17)+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h)+html_br;

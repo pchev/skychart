@@ -198,7 +198,7 @@ try
       end;
       if sqltable[i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then begin
          ok:=false;
-         result:=result+crlf+'Error creating table '+sqltable[i,1]+' '+msg;
+         result:=result+crlf+'Error creating table '+sqltable[i,1]+blank+msg;
          break;
       end;
     end;
@@ -1125,7 +1125,7 @@ while j=0 do begin
       objn:=extractfilename(f.Name);
       p:=pos(extractfileext(objn),objn);
       objn:=copy(objn,1,p-1);
-      objn:=uppercase(stringreplace(objn,' ','',[rfReplaceAll]));
+      objn:=uppercase(stringreplace(objn,blank,'',[rfReplaceAll]));
       cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
         +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
         +',"'+uppercase(c.Name)+'"'

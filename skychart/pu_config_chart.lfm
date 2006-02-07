@@ -11,7 +11,7 @@ object f_config_chart: Tf_config_chart
   ClientWidth = 525
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 106
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -30,11 +30,11 @@ object f_config_chart: Tf_config_chart
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Label31: TLabel
-          Height = 13
-          Width = 73
+          Height = 16
+          Width = 71
           Caption = 'Chart Setting'
           Color = clNone
           ParentColor = False
@@ -51,36 +51,36 @@ object f_config_chart: Tf_config_chart
           TabOrder = 0
           object Label68: TLabel
             Left = 404
-            Height = 13
+            Height = 16
             Top = 74
-            Width = 32
+            Width = 30
             Caption = 'years'
             Color = clNone
             ParentColor = False
           end
           object Label113: TLabel
             Left = 8
-            Height = 13
+            Height = 16
             Top = 16
-            Width = 306
+            Width = 297
             Caption = 'Stars proper motion options (if available in the catalog)'
             Color = clNone
             ParentColor = False
           end
           object PMBox: TCheckBox
             Left = 8
-            Height = 28
+            Height = 15
             Top = 40
-            Width = 390
+            Width = 324
             Caption = 'Use the proper motion to correct the position for the current date'
             OnClick = PMBoxClick
             TabOrder = 0
           end
           object DrawPmBox: TCheckBox
             Left = 8
-            Height = 28
+            Height = 15
             Top = 72
-            Width = 348
+            Width = 287
             Caption = 'Draw a line that represent the proper motion for the next '
             OnClick = DrawPmBoxClick
             TabOrder = 1
@@ -112,7 +112,7 @@ object f_config_chart: Tf_config_chart
           TabOrder = 1
           object EquinoxLabel: TLabel
             Left = 192
-            Height = 13
+            Height = 16
             Top = 46
             Width = 49
             Caption = 'Equinox:'
@@ -234,8 +234,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Label30: TLabel
           Height = 13
           Width = 124
@@ -648,8 +648,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Bevel8: TBevel
           Name = 'Bevel8'
           Left = 208
@@ -1061,8 +1061,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Label29: TLabel
           Height = 13
           Width = 112
@@ -1076,8 +1076,8 @@ object f_config_chart: Tf_config_chart
           Top = 16
           Width = 449
           Caption = 'Stars Filter'
-          ClientHeight = 167
-          ClientWidth = 445
+          ClientHeight = 184
+          ClientWidth = 449
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
@@ -1444,8 +1444,8 @@ object f_config_chart: Tf_config_chart
           Top = 208
           Width = 449
           Caption = 'Nebulae Filter'
-          ClientHeight = 183
-          ClientWidth = 445
+          ClientHeight = 200
+          ClientWidth = 449
           TabOrder = 1
           object BigNebUnit: TLabel
             Left = 376
@@ -1959,8 +1959,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TPage
         Caption = 'Page5'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Bevel9: TBevel
           Name = 'Bevel9'
           Left = 8
@@ -2422,8 +2422,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page6: TPage
         Caption = 'Page6'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 470
         object Label95: TLabel
           Height = 13
           Width = 103

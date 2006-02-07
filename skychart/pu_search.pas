@@ -324,7 +324,7 @@ ConstBox.Clear;
 for i:=0 to cfgshr.ConstelNum-1 do
   ConstBox.Items.Add(cfgshr.ConstelName[i,2]);
 if ConstBox.items.Count=0 then
-   ConstBox.items.add(' ');
+   ConstBox.items.add(blank);
 ConstBox.ItemIndex:=0;
 end;
 
@@ -336,7 +336,7 @@ starnamebox.Clear;
 for i:=0 to cfgshr.StarNameNum-1 do
    starnamebox.items.Add(cfgshr.StarName[i]);
 if starnamebox.items.Count=0 then
-   starnamebox.items.add(' ');
+   starnamebox.items.add(blank);
 starnamebox.itemindex:=0;
 end;
 
@@ -383,7 +383,7 @@ if FileExists(fn) then begin
 end;
 finally
 if NebNameBox.items.Count=0 then begin
-  NebNameBox.items.add(' ');
+  NebNameBox.items.add(blank);
 end;
 NebNameBox.ItemIndex:=0;
 end;

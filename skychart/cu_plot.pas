@@ -37,6 +37,7 @@ type
   TSideSet = set of TSide;
   TEditLabelPos = procedure(lnum,left,top: integer) of object;
   Tintfunc = procedure(i: integer) of object;
+  Tvoidfunc = procedure of object;
 
   TSplot = class(TComponent)
   private
@@ -53,7 +54,7 @@ type
      FEditLabelTxt: TEditLabelPos;
      FDefaultLabel: Tintfunc;
      FDeleteLabel: Tintfunc;
-     FDeleteAllLabel: Tintfunc;
+     FDeleteAllLabel: Tvoidfunc;
      FLabelClick: Tintfunc;
      editlabelmenu: Tpopupmenu;
      PlanetBMPs: Tbitmap;
@@ -142,8 +143,8 @@ type
      property OnEditLabelPos: TEditLabelPos read FEditLabelPos write FEditLabelPos;
      property OnEditLabelTxt: TEditLabelPos read FEditLabelTxt write FEditLabelTxt;
      property OnDefaultLabel: Tintfunc read FDefaultLabel write FDefaultLabel;
-     property OnDeleteLabel: Tintfunc read FDeleteLabel write FDeleteLabel;
-     property OnDeleteAllLabel: Tintfunc read FDeleteAllLabel write FDeleteAllLabel;
+     property OnDeleteLabel: Tintfunc  read FDeleteLabel write FDeleteLabel;
+     property OnDeleteAllLabel: Tvoidfunc read FDeleteAllLabel write FDeleteAllLabel;
      property OnLabelClick: Tintfunc read FLabelClick write FLabelClick;
      Procedure Movelabel(Sender: TObject);
      Procedure EditlabelTxt(Sender: TObject);
@@ -1350,8 +1351,6 @@ end;
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
 var ds : integer;
     cmd, searchdir: string;
-const planetsize=450;
-      moonsize=1000;
 begin
 if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
           else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
@@ -1946,7 +1945,7 @@ end;
 
 Procedure TSplot.DeleteAlllabel(Sender: TObject);
 begin
-if assigned(FDeleteAllLabel) then FDeleteAllLabel(0);
+if assigned(FDeleteAllLabel) then FDeleteAllLabel;
 end;
 
 Procedure TSplot.PlotCircle(x1,y1,x2,y2:single;lcolor: integer;moving:boolean);

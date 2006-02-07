@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses Math, cu_database, Printers,
-  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, MaskEdit, Inifiles,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, Inifiles,
   jdcalendar, cu_planet, u_constant, pu_image, Buttons, ExtCtrls,
   ActnList, StdActns, LResources;
 
@@ -152,7 +152,7 @@ type
     Feclipsepath: string;
     deltajd: double;
     dat11,dat12,dat13,dat21,dat22,dat23,dat31,dat32,dat33 : double ;
-    dat41,dat51,dat61,dat71,dat72,dat73 : double ;
+    dat41,dat51,{dat61,}dat71,dat72,dat73 : double ;
     dat14,dat24,dat34,dat74,tz,west,east,title : string;
     century_Solar, century_Lunar: string;
     appmsg: array[1..nummsg] of string;
@@ -277,7 +277,7 @@ with inifile do begin
     SatChartBox.caption:=ReadString(section,'t_15',deftxt);
     IridiumBox.caption:=ReadString(section,'t_16',deftxt);
     ResetBtn.Caption:=ReadString(section,'t_17',deftxt);
-//    TLEbtn.hint:=ReadString(section,'t_18',deftxt)+' '+slash(appdir)+satpath;
+//    TLEbtn.hint:=ReadString(section,'t_18',deftxt)+blank+slash(appdir)+satpath;
     tz:=ReadString(section,'t_19',deftxt);
     west:=ReadString(section,'t_20',deftxt);
     east:=ReadString(section,'t_21',deftxt);
@@ -670,7 +670,7 @@ with solargrid do begin
   cells[9,i]:=copy(buf,60,2);
   cells[10,i]:=copy(buf,63,4);
   cells[11,i]:=copy(buf,69,6);
-  pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,i],' ','',[rfReplaceAll])+copy(cells[3,i],1,1)+'.png';
+  pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,i],blank,'',[rfReplaceAll])+copy(cells[3,i],1,1)+'.png';
   if fileexists(pathimage) then cells[1,i]:=appmsg[47]
                            else cells[1,i]:='';
   a:=strtointdef(copy(cells[0,i],1,5),-9999);
@@ -802,7 +802,7 @@ begin
    else
     if c.timezone<0 then d:=east
       else d:=west;
-  caption:=title+' '+c.Obsname+' '+tz+'='+timtostr(abs(c.timezone))+' '+d;
+  caption:=title+blank+c.Obsname+blank+tz+'='+timtostr(abs(c.timezone))+blank+d;
 end;
 
 procedure Tf_calendar.RefreshTwilight;
@@ -825,7 +825,7 @@ jd1:=jd(a,m,d,h);
 djd(date2.JD,a,m,d,hh);
 jd2:=jd(a,m,d,h);
 nj:=round((jd2-jd1)/s);
-if nj>maxstep then if MessageDlg(appmsg[19]+' '+inttostr(nj)+' '+appmsg[20],
+if nj>maxstep then if MessageDlg(appmsg[19]+blank+inttostr(nj)+blank+appmsg[20],
     mtConfirmation,[mbOk, mbCancel], 0) <> mrOK then exit;
 jda:=jd1;
 i:=2;
@@ -912,7 +912,7 @@ jd1:=jd(a,m,d,h);
 djd(date2.JD,a,m,d,hh);
 jd2:=jd(a,m,d,h);
 nj:=round((jd2-jd1)/s);
-if nj>maxstep then if MessageDlg(appmsg[19]+' '+inttostr(nj)+' '+appmsg[20],
+if nj>maxstep then if MessageDlg(appmsg[19]+blank+inttostr(nj)+blank+appmsg[20],
     mtConfirmation,[mbOk, mbCancel], 0) <> mrOK then exit;
 jda:=jd1;
 i:=2;
@@ -955,7 +955,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -998,7 +998,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1041,7 +1041,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1084,7 +1084,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1127,7 +1127,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1170,7 +1170,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1213,7 +1213,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1256,7 +1256,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1300,7 +1300,7 @@ case ipla of
   az:=rmod(az+pi,pi2);
   illum:=1;
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1347,7 +1347,7 @@ case ipla of
   Eq2Hz((st0-ar),de,az,ha,c);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -1380,16 +1380,16 @@ case ipla of
     if hs>24 then begin ms:='d+1'; hs:=hs-24; jdcor:=1; end;
     case irc of
        0 : begin
-           cells[6,i]:=mr+' '+armtostr(hr);
-           cells[7,i]:=mt+' '+armtostr(ht);
-           cells[8,i]:=ms+' '+armtostr(hs);
+           cells[6,i]:=mr+blank+armtostr(hr);
+           cells[7,i]:=mt+blank+armtostr(ht);
+           cells[8,i]:=ms+blank+armtostr(hs);
            objects[6,i]:=SetObjCoord(jda+jdcor+(hr-c.timezone-h)/24,ar,de);
            objects[7,i]:=SetObjCoord(jda+jdcor+(ht-c.timezone-h)/24,ar,de);
            objects[8,i]:=SetObjCoord(jda+jdcor+(hs-c.timezone-h)/24,ar,de);
            end;
        1 : begin
            cells[6,i]:='-';
-           cells[7,i]:=mt+' '+armtostr(ht);
+           cells[7,i]:=mt+blank+armtostr(ht);
            cells[8,i]:='-';
            objects[7,i]:=SetObjCoord(jda+jdcor+(ht-c.timezone-h)/24,ar,de);
            objects[6,i]:=nil;
@@ -1435,7 +1435,7 @@ if c.timezone=0 then d:=''
   else
    if c.timezone<0 then d:=east
      else d:=west;
-caption:=title+' '+c.Obsname+' '+tz+'='+timtostr(abs(c.timezone))+' '+d;
+caption:=title+blank+c.Obsname+blank+tz+'='+timtostr(abs(c.timezone))+blank+d;
 case pagecontrol1.ActivePage.TabIndex of
      0 : RefreshTwilight;
      1 : RefreshPlanet;
@@ -1475,10 +1475,10 @@ if (row>=0)and(Column>=0) then begin
     djd(p.jd+c.timezone/24,csc.CurYear,csc.CurMonth,csc.CurDay,csc.CurTime);
     if Sender = solargrid then  begin      // Solar eclipse
        if (Column=1) then begin   // image map
-         pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,row],' ','',[rfReplaceAll])+copy(cells[3,row],1,1)+'.png';
+         pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,row],blank,'',[rfReplaceAll])+copy(cells[3,row],1,1)+'.png';
          if fileexists(pathimage) then begin
             ShowImage.labeltext:=eclipanel.caption;
-            ShowImage.titre:=solar.Caption+' '+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
+            ShowImage.titre:=solar.Caption+blank+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
             ShowImage.LoadImage(pathimage);
             ShowImage.ClientHeight:=min(screen.Height-80,ShowImage.imageheight+ShowImage.Panel1.Height+ShowImage.HScrollBar.Height);
             ShowImage.ClientWidth:=min(screen.Width-50,ShowImage.imagewidth+ShowImage.VScrollBar.Width);
@@ -1752,12 +1752,12 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    djd(date2.JD,a,m,d,hhh);
    jd2:=jd(a,m,d,h);
    nj:=round((jd2-jd1)/s);
-   if nj>maxstep then if MessageDlg(appmsg[19]+' '+inttostr(nj)+' '+appmsg[20],
+   if nj>maxstep then if MessageDlg(appmsg[19]+blank+inttostr(nj)+blank+appmsg[20],
        mtConfirmation,[mbOk, mbCancel], 0) <> mrOK then exit;
    jda:=jd1;
    i:=2;
    Cometgrid.cells[0,0]:=trim(nam);
-   Cometgrid.cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+   Cometgrid.cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
    Cometgrid.cells[0,1]:=trim(armtostr(h))+' UT';
    repeat
       djd(jda,a,m,d,h);
@@ -1933,12 +1933,12 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    djd(date2.JD,a,m,d,hhh);
    jd2:=jd(a,m,d,h);
    nj:=round((jd2-jd1)/s);
-   if nj>maxstep then if MessageDlg(appmsg[19]+' '+inttostr(nj)+' '+appmsg[20],
+   if nj>maxstep then if MessageDlg(appmsg[19]+blank+inttostr(nj)+blank+appmsg[20],
        mtConfirmation,[mbOk, mbCancel], 0) <> mrOK then exit;
    jda:=jd1;
    i:=2;
    Asteroidgrid.cells[0,0]:=trim(nam);
-   Asteroidgrid.cells[1,0]:=trim(c.EquinoxName)+' '+appmsg[46];
+   Asteroidgrid.cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
    Asteroidgrid.cells[0,1]:=trim(armtostr(h))+' UT';
    repeat
       djd(jda,a,m,d,h);
