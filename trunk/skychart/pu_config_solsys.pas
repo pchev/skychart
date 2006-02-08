@@ -40,6 +40,8 @@ type
     Page2: TPage;
     Page3: TPage;
     Page4: TPage;
+    MPCDownloadPanel: TPanel;
+    MPCDownloadPanel2: TPanel;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     Label12: TLabel;
     Label131: TLabel;
@@ -192,6 +194,7 @@ type
     XplanetDir: TEdit;
     XplanetBtn: TBitBtn;
     procedure FormCreate(Sender: TObject);
+    procedure MPCDownloadPanelClick(Sender: TObject);
     procedure PlanetDirChange(Sender: TObject);
     procedure PlanetDirSelClick(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
@@ -325,6 +328,11 @@ end;
 procedure Tf_config_solsys.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
+end;
+
+procedure Tf_config_solsys.MPCDownloadPanelClick(Sender: TObject);
+begin
+  ExecuteFile('http://www.astro.cz/mpcorb/');
 end;
 
 procedure Tf_config_solsys.PlanetDirSelClick(Sender: TObject);
