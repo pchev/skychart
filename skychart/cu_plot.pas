@@ -1592,15 +1592,15 @@ with cnv do begin
         a:=arctan2(dy,dx);
         if ma<5 then k:=1
         else if ma>18 then k:=0.5
-        else k:=1-(ma-5)*0.0385;
+        else k:=1-(ma-5)*0.05;
         cr:=round(k*(cfgplot.Color[21] and $FF));
         cg:=round(k*((cfgplot.Color[21] shr 8) and $FF));
         cb:=round(k*((cfgplot.Color[21] shr 16) and $FF));
         pen.Mode:=pmCopy;
         brush.Style:=bsSolid;
         ds:=round(max(PixScale*diam/2,2*cfgchart.drawpen));
-        for i:=19 downto 0 do begin
-          co:=max(0,255-i*10);
+        for i:=19 downto 0 do begin  // coma
+          co:=max(0,255-i*13);
           Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
           Col:=Addcolor(Col,cfgplot.backgroundcolor);
           pen.Color:=Col;
@@ -1608,6 +1608,10 @@ with cnv do begin
           ds1:=round((i+1)*ds/20);
           Ellipse(xx-ds1,yy-ds1,xx+ds1,yy+ds1);
         end;
+        if r>30 then begin  // tail
+        cr:=cr div 2;
+        cg:=cg div 2;
+        cb:=cb div 2;
         if (dx<>0)or(dy<>0) then for i:=0 to 9 do begin
          cp1[2].X:=xx;
          cp1[2].Y:=yy;
@@ -1616,7 +1620,7 @@ with cnv do begin
          cp2:=cp1;
          r:=0.99*r;
          for j:=0 to 19 do begin
-          co:=max(0,255-i*14-j*10);
+          co:=max(0,255-i*20-j*13);
           Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
           Col:=Addcolor(Col,cfgplot.backgroundcolor);
           pen.Color:=Col;
@@ -1629,7 +1633,7 @@ with cnv do begin
           cp1[2].Y:=yy+round((j+1)*r/20*sin(a+0.015*(i)));
           cp1[3].X:=xx+round((j+1)*0.99*r/20*cos(a+0.015*(i+1)));
           cp1[3].Y:=yy+round((j+1)*0.99*r/20*sin(a+0.015*(i+1)));
-          polygon(cp1);
+          if (cp1[2].X<>cp1[3].X)or(cp1[2].Y<>cp1[3].Y) then polygon(cp1);
           cp2[0].X:=cp2[3].X;
           cp2[0].Y:=cp2[3].Y;
           cp2[1].X:=cp2[2].X;
@@ -1638,10 +1642,11 @@ with cnv do begin
           cp2[2].Y:=yy+round((j+1)*r/20*sin(a-0.015*(i)));
           cp2[3].X:=xx+round((j+1)*0.99*r/20*cos(a-0.015*(i+1)));
           cp2[3].Y:=yy+round((j+1)*0.99*r/20*sin(a-0.015*(i+1)));
-          polygon(cp2);
+          if (cp2[2].X<>cp2[3].X)or(cp2[2].Y<>cp2[3].Y) then polygon(cp2);
          end;
         end;
-        PlotStar(xx,yy,ma,1021);
+        end;
+        PlotStar(xx,yy,ma+3,1021);
       end;
    2: begin
         ds:=round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen/2);

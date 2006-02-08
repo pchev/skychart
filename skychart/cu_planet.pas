@@ -907,6 +907,7 @@ end;
 function TPlanet.FindPlanetName(planetname: String; var ra,de:double; cfgsc: Pconf_skychart):boolean;
 var i : integer;
 begin
+result:=false;
    for i:=1 to 30 do begin
      if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) then begin
          FindNumPla(i,ra,de,result,cfgsc);
