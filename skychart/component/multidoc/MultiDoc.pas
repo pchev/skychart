@@ -187,6 +187,7 @@ end;
 constructor TMultiDoc.Create(AOwner:TComponent);
 begin
 inherited Create(AOwner);
+DoubleBuffered:=true;
 FChildIndex:=-1;
 FActiveChild:=-1;
 FWindowListOffset:=0;
