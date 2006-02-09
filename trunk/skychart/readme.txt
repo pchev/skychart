@@ -17,7 +17,7 @@ cdc -|                                    < base directory containing the execut
                          |- ...
                          |- units         < all compilation object go here
 
-Install Lazarus using a recent snapshot from http://lazarus.freepascal.org
+Install Lazarus using at least the version 0.9.12 from http://lazarus.freepascal.org
 
 There is a lot of package to install, do not compile Lazarus for each!
 To install each package in Lazarus use File-Open to open the .lpk
@@ -25,7 +25,8 @@ Click "Open Package", "Compile", "Install".
 When the install tell you to rebuild Lazarus say NO.
 
 Launch Lazarus and open Components-Configure Installed Packages
-Check that Printer4Lazarus, JPEGForLazarus and TurboPowerIPro are installed. 
+Check that Printer4Lazarus, JPEGForLazarus and TurboPowerIPro are installed, 
+this is normally the case with the version 0.9.12.
 If not install them from lazarus/component 
       printers/printer4lazarus.lpk
       jpeg/jpegforlazarus.lpk
@@ -42,6 +43,7 @@ the packages for the required component:
       wizardntb/wizardntb.lpk
       xmlparser/xmlparser.lpk
       zoomimage/zoomimage.lpk
+For the last one reply YES to rebuild Lazarus.
 
 And the packages for the library src/skychart/library :
 (compile only)
@@ -51,7 +53,6 @@ And the packages for the library src/skychart/library :
       satxy/satxy.lpk
       series96/series96.lpk
 
-After all are installed click Tools-Build Lazarus.
 
 You can now open the main project files skychart\cdc.lpi and compile.
 To run in debug adjust Run-Run Parameters-Working Directory to your CDC directory.
