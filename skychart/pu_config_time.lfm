@@ -11,7 +11,7 @@ object f_config_time: Tf_config_time
   ClientWidth = 519
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 80
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -27,16 +27,16 @@ object f_config_time: Tf_config_time
       Top = 1
       Width = 498
       Align = alClient
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label142: TLabel
-          Left = 224
+          Left = 231
           Height = 13
-          Top = 50
+          Top = 63
           Width = 50
           Caption = 'Seconds'
           Color = clNone
@@ -61,7 +61,7 @@ object f_config_time: Tf_config_time
         object CheckBox2: TCheckBox
           Left = 40
           Height = 28
-          Top = 48
+          Top = 55
           Width = 142
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
@@ -70,7 +70,7 @@ object f_config_time: Tf_config_time
         object Panel7: TPanel
           Left = 32
           Height = 65
-          Top = 216
+          Top = 231
           Width = 409
           ClientHeight = 65
           ClientWidth = 409
@@ -96,7 +96,7 @@ object f_config_time: Tf_config_time
           object Label149: TLabel
             Left = 200
             Height = 13
-            Top = 32
+            Top = 31
             Width = 170
             Caption = '(Negative West of GreenWich)'
             Color = clNone
@@ -123,10 +123,10 @@ object f_config_time: Tf_config_time
         end
         object Panel8: TPanel
           Left = 32
-          Height = 97
-          Top = 288
+          Height = 113
+          Top = 303
           Width = 409
-          ClientHeight = 97
+          ClientHeight = 113
           ClientWidth = 409
           TabOrder = 3
           object Label135: TLabel
@@ -168,7 +168,7 @@ object f_config_time: Tf_config_time
           object CheckBox4: TCheckBox
             Left = 8
             Height = 28
-            Top = 64
+            Top = 62
             Width = 175
             Caption = 'Use another DT-UT value'
             OnClick = CheckBox4Click
@@ -179,7 +179,7 @@ object f_config_time: Tf_config_time
             Left = 208
             Height = 22
             Hint = '-99999999..99999999'
-            Top = 61
+            Top = 65
             Width = 105
             BorderStyle = bsSingle
             Enabled = False
@@ -197,7 +197,7 @@ object f_config_time: Tf_config_time
           Left = 176
           Height = 22
           Hint = '0..86400'
-          Top = 45
+          Top = 58
           Width = 41
           BorderStyle = bsSingle
           ParentColor = False
@@ -211,7 +211,7 @@ object f_config_time: Tf_config_time
         object Panel9: TPanel
           Left = 32
           Height = 137
-          Top = 72
+          Top = 87
           Width = 409
           ClientHeight = 137
           ClientWidth = 409
@@ -384,11 +384,11 @@ object f_config_time: Tf_config_time
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label146: TLabel
-          Height = 16
-          Width = 132
+          Height = 13
+          Width = 130
           Caption = 'Time Simulation Setting'
           Color = clNone
           ParentColor = False
@@ -396,7 +396,7 @@ object f_config_time: Tf_config_time
         object stepreset: TSpeedButton
           Left = 338
           Height = 25
-          Top = 239
+          Top = 247
           Width = 81
           Caption = 'Reset '
           Layout = blGlyphTop
@@ -405,16 +405,16 @@ object f_config_time: Tf_config_time
         end
         object Label178: TLabel
           Left = 308
-          Height = 16
+          Height = 13
           Top = 100
-          Width = 35
+          Width = 41
           Caption = 'every  '
           Color = clNone
           ParentColor = False
         end
         object Label179: TLabel
           Left = 258
-          Height = 16
+          Height = 13
           Top = 60
           Width = 91
           Caption = 'Number of steps'
@@ -423,18 +423,18 @@ object f_config_time: Tf_config_time
         end
         object Label180: TLabel
           Left = 8
-          Height = 16
+          Height = 13
           Top = 32
-          Width = 156
+          Width = 163
           Caption = 'Choose which objects to plot'
           Color = clNone
           ParentColor = False
         end
         object Label56: TLabel
           Left = 255
-          Height = 16
+          Height = 13
           Top = 23
-          Width = 183
+          Width = 189
           Caption = 'Plot the position of moving object.'
           Color = clNone
           ParentColor = False
@@ -464,10 +464,10 @@ object f_config_time: Tf_config_time
           TabOrder = 0
         end
         object stepline: TCheckBox
-          Left = 8
-          Height = 15
-          Top = 279
-          Width = 213
+          Left = 6
+          Height = 28
+          Top = 311
+          Width = 261
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           TabOrder = 1
@@ -522,7 +522,7 @@ object f_config_time: Tf_config_time
         object AllSim: TButton
           Left = 6
           Height = 25
-          Top = 239
+          Top = 247
           Width = 75
           BorderSpacing.InnerBorder = 2
           Caption = 'All'
@@ -532,7 +532,7 @@ object f_config_time: Tf_config_time
         object NoSim: TButton
           Left = 121
           Height = 25
-          Top = 239
+          Top = 247
           Width = 75
           BorderSpacing.InnerBorder = 2
           Caption = 'None'

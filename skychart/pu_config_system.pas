@@ -222,6 +222,9 @@ ShowSYS;
 ShowServer;
 ShowTelescope;
 LockChange:=false;
+{$ifdef mswindows}
+GroupBoxLinux.Visible:=false;
+{$endif}
 end;
 
 procedure Tf_config_system.ShowSYS;
@@ -291,6 +294,7 @@ ManualMountType.itemindex:=csc.ManualTelescopeType;
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
    else if csc.PluginTelescope then Telescopeselect.itemindex:=2
    else Telescopeselect.itemindex:=1;
+TelescopeselectClick(self);
 {$ifdef linux}
 IndiPort.text:=csc.IndiPort;
 {$endif}

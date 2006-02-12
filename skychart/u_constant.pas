@@ -52,6 +52,8 @@ const cdcversion = 'Version 3 alpha 0.1.0';
       km_au = 149597870.691 ;
       clight = 299792.458 ;
       tlight = km_au/clight/3600/24;
+      footpermeter = 0.3048;
+      kmperdegree=111.1111;
       eps2000 = 23.439291111;
       deg2rad = pi/180;
       rad2deg = 180/pi;
@@ -204,6 +206,13 @@ const cdcversion = 'Version 3 alpha 0.1.0';
       key_upright=33;
       key_downleft=35;
       key_downright =34;
+      
+      //Observatory database
+      CdcMinLocid='99999999';
+      MaxCityList=100;
+      // Location database source url
+      baseurl_us = 'http://geonames.usgs.gov/stategaz/';
+      baseurl_world = 'http://earth-info.nga.mil/gns/html/cntyfile/';
 
 {$ifdef unix}
       DefaultFontName='Helvetica';
@@ -407,7 +416,7 @@ type
      conf_main = record
                 prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
-                PrinterResolution,PrintMethod,PrintColor,configpage,autorefreshdelay,MaxChildID,dbport : integer;
+                PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
                 savetop,saveleft,saveheight,savewidth: integer;
                 PrintLandscape, ShowChartInfo, SyncChart :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
@@ -646,7 +655,7 @@ create_table_com_day=' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) 
 create_table_com_day_pos='( id varchar(12) NOT NULL default "", epoch double NOT NULL default "0",'+
                          'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
                          'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag))';
-numsqltable=8;
+numsqltable=10;
 sqltable : array[1..numsqltable,1..3] of string =(
            ('cdc_ast_name',' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'+
                            'PRIMARY KEY (id))',''),
@@ -685,272 +694,27 @@ sqltable : array[1..numsqltable,1..3] of string =(
                            'width double NOT NULL default "0", '+
                            'height double NOT NULL default "0", '+
                            'rotation  double NOT NULL default "0", '+
-                           'PRIMARY KEY (ra,de)'+
-                           ')','2')
+                           'PRIMARY KEY (ra,de))','2'),
+           ('cdc_country','(country varchar(5) NOT NULL default "",'+
+                           'name varchar(50) NOT NULL default "",'+
+                           'PRIMARY KEY (country))',''),
+           ('cdc_location','(locid integer NOT NULL ,'+
+                           'country varchar(5) NOT NULL ,'+
+                           'location varchar(50) NOT NULL ,'+
+                           'type varchar(5) NOT NULL ,'+
+                           'latitude double NOT NULL ,'+
+                           'longitude double NOT NULL ,'+
+                           'elevation double NOT NULL ,'+
+                           'timezone double NOT NULL ,'+
+                           'PRIMARY KEY (locid))','3,4')
                            );
-numsqlindex=2;
+numsqlindex=4;
 sqlindex : array[1..numsqlindex,1..2] of string =(
            ('ast_mag_idx','cdc_ast_mag (mag)'),
-           ('cdc_fits_objname','cdc_fits (objectname)')
+           ('cdc_fits_objname','cdc_fits (objectname)'),
+           ('cdc_location_idx1','cdc_location(country,location)'),
+           ('cdc_location_idx2','cdc_location(latitude,longitude)')
            );
-
-// World cities
-// must equate cities.h
-const
-   COUNTRIES      = 234;  // number of countries
-   MAX_CITY_LENGTH= 120;  // length of longest city name (including '\0')
-   {$ifdef unix}
-   citylib = 'libCities.so';
-   {$endif}
-   {$ifdef mswindows}
-   citylib = 'Cities.dll';
-   {$endif}
-
-type
-   City = record
-          m_Name: array[0..MAX_CITY_LENGTH-1] of char;  // city name
-	  m_Coord: array[0..1] of integer;              // geogr. latitude and longitude
-          end;
-   Cities = array[0..999999] of City; // never allocate!
-   PCity = ^City;
-   PCities = ^Cities;
-
-const Country: array[0..COUNTRIES-1] of string =(
-	'Afghanistan',
-	'Albania',
-	'Algeria',
-	'Andorra',
-	'Angola',
-	'Anguilla',
-	'Antigua and Barbuda',
-	'Argentina',
-	'Armenia',
-	'Aruba',
-	'Australia',
-	'Austria',
-	'Azerbaijan',
-	'Bahamas, The',
-	'Bahrain',
-	'Bangladesh',
-	'Barbados',
-	'Belarus',
-	'Belgium',
-	'Belize',
-	'Benin',
-	'Bermuda',
-	'Bhutan',
-	'Bolivia',
-	'Bosnia and Herzegovina',
-	'Botswana',
-	'Brazil',
-	'British Virgin Islands',
-	'Brunei',
-	'Bulgaria',
-	'Burkina Faso',
-	'Burma',
-	'Burundi',
-	'Cambodia',
-	'Cameroon',
-	'Canada',
-	'Cap Verde',
-	'Cayman Islands',
-	'Central African Republic',
-	'Chad',
-	'Chile',
-	'China',
-	'Chistmas Island',
-	'Cocos (Keeling) Islands',
-	'Colombia',
-	'Comoros',
-	'Congo',
-	'Congo, Democratic Republic of The',
-	'Cook Islands',
-	'Costa Rica',
-	'Cote d''Ivoire',
-	'Croatia',
-	'Cuba',
-	'Cyprus',
-	'Czech Republic',
-	'Denmark',
-	'Djibouti',
-	'Dominica',
-	'Dominican Republic',
-	'East Timor',
-	'Ecuador',
-	'Egypt',
-	'El Salvador',
-	'Equatorial Guinea',
-	'Eritrea',
-	'Estonia',
-	'Ethiopia',
-	'Falkland Islands',
-	'Faroe Islands',
-	'Fiji',
-	'Finland',
-	'France',
-	'French Guiana',
-	'French Polynesia',
-	'French Southern and Antarctic Lands',
-	'Gabon',
-	'Gambia, The',
-	'Gaza Strip',
-	'Georgia',
-	'Germany',
-	'Ghana',
-	'Gibraltar',
-	'Greece',
-	'Greenland',
-	'Grenada',
-	'Guadeloupe',
-	'Guatemala',
-	'Guernsey',
-	'Guinea',
-	'Guinea-Bisseau',
-	'Guyana',
-	'Haiti',
-	'Honduras',
-	'Hong Kong',
-	'Hungary',
-	'Iceland',
-	'India',
-	'Indonesia',
-	'Iran',
-	'Iraq',
-	'Ireland',
-	'Isle of Man',
-	'Israel',
-	'Italy',
-	'Jamaica',
-	'Japan',
-	'Jersey',
-	'Jordan',
-	'Kazakhstan',
-	'Kenya',
-	'Kiribati',
-	'Kuwait',
-	'Kyrgyzstan',
-	'Laos',
-	'Latvia',
-	'Lebanon',
-	'Lesotho',
-	'Liberia',
-	'Libya',
-	'Liechtenstein',
-	'Lithuania',
-	'Luxembourg',
-	'Macau',
-	'Macedonia, The Former Yugoslav Republic of',
-	'Madagascar',
-	'Malawi',
-	'Malaysia',
-	'Maldives',
-	'Mali',
-	'Malta',
-	'Marshall Islands',
-	'Martinique',
-	'Mauritania',
-	'Mauritius',
-	'Mayotte',
-	'Mexico',
-	'Micronesia, Federated States of',
-	'Moldova',
-	'Monaco',
-	'Mongolia',
-	'Montserrat',
-	'Morocco',
-	'Mozambique',
-	'Namibia',
-	'Nauru',
-	'Nepal',
-	'Netherlands',
-	'Netherlands Antilles',
-	'New Caledonia',
-	'New Zealand',
-	'Nicaragua',
-	'Niger',
-	'Nigeria',
-	'Niue',
-	'No Man''s Land',
-	'Norfolk Island',
-	'North Korea',
-	'Norway',
-	'Oman',
-	'Pakistan',
-	'Palau',
-	'Panama',
-	'Papua New Guinea',
-	'Paraguay',
-	'Peru',
-	'Philippines',
-	'Pitcairn Islands',
-	'Poland',
-	'Portugal',
-	'Qatar',
-	'Reunion',
-	'Romania',
-	'Russia',
-	'Rwanda',
-	'Saint Helena',
-	'Saint Kitts and Nevis',
-	'Saint Lucia',
-	'Saint Pierre and Miquelon',
-	'Saint Vincent and the Grenadines',
-	'Samoa',
-	'San Marino',
-	'Sao Tome and Principe',
-	'Saudi Arabia',
-	'Senegal',
-	'Seychelles',
-	'Sierra Leone',
-	'Singapore',
-	'Slovakia',
-	'Slovenia',
-	'Solomon Islands',
-	'Somalia',
-	'South Africa',
-	'South Georgia and The South Sandwich Islands',
-	'South Korea',
-	'Spain',
-	'Spratly Islands',
-	'Sri Lanka',
-	'Sudan',
-	'Suriname',
-	'Svalbard',
-	'Swaziland',
-	'Sweden',
-	'Switzerland',
-	'Syria',
-	'Taiwan',
-	'Tajikistan',
-	'Tanzania',
-	'Thailand',
-	'Togo',
-	'Tokelau',
-	'Tonga',
-	'Trinidad and Tobago',
-	'Tunisia',
-	'Turkey',
-	'Turkmenistan',
-	'Turks and Caicos Islands',
-	'Tuvalu',
-	'Uganda',
-	'Ukraine',
-	'United Arab Emirates',
-	'United Kingdom',
-	'United States of America',
-	'Uruguay',
-	'Uzbekistan',
-	'Vanuatu',
-	'Venezuela',
-	'Vietnam',
-	'Wallis and Futuna',
-	'West Bank',
-	'Western Sahara',
-	'Yemen',
-	'Yugoslavia',
-	'Zambia',
-	'Zimbabwe');
-
 
 implementation
 

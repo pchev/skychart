@@ -49,6 +49,7 @@ function roundF(x:double;n:integer):double;
 Procedure InitTrace;
 Procedure WriteTrace( buf : string);
 procedure Splitarg(buf,sep:string; var arg: TStringList);
+procedure SplitRec(buf,sep:string; var arg: TStringList);
 function ExpandTab(str:string; tabwidth:integer):string;
 function words(str,sep : string; p,n : integer) : string;
 function wordspace(str:string):string;
@@ -240,6 +241,7 @@ end;
 result:=r+256*v+65536*b;
 end;
 
+// same as SplitRec but remove empty strings
 procedure Splitarg(buf,sep:string; var arg: TStringList);
 var i,j,k,l:integer;
 begin
@@ -266,6 +268,24 @@ while pos(sep,buf)<>0 do begin
       delete(buf,1,i-1+l);
       break;
     end;
+  end;
+ end;
+end;
+arg.add(buf);
+end;
+
+// same as SplitArg but keep empty strings
+procedure SplitRec(buf,sep:string; var arg: TStringList);
+var i,j,k,l:integer;
+begin
+arg.clear;
+l:=length(sep);
+while pos(sep,buf)<>0 do begin
+ for i:=1 to length(buf) do begin
+  if copy(buf,i,l) = sep then begin
+      arg.add(copy(buf,1,i-1));
+      delete(buf,1,i-1+l);
+      break;
   end;
  end;
 end;
@@ -934,12 +954,11 @@ case annee of
               end;
        1997 : result:=62/3600;
        1998 : result:=63/3600;
-       1999 : result:=63/3600;
-       2000 : result:=64/3600;
-       2001 : result:=64/3600;
- 2002..2020 : begin
-              t:=(annee-2000)/100;
-              result:=(63+123.5*t+32.5*t*t)/3600;
+ 1999..2005 : result:=64/3600;
+       2006 : result:=65/3600;
+ 2007..2020 : begin
+              t:=(annee-2006)/100;
+              result:=(65+123.5*t+32.5*t*t)/3600;
               end;
  2021..99999 : begin
               t:=(annee-1875.1)/100;

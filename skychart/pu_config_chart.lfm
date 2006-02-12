@@ -11,7 +11,7 @@ object f_config_chart: Tf_config_chart
   ClientWidth = 525
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 80
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -30,11 +30,11 @@ object f_config_chart: Tf_config_chart
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label31: TLabel
-          Height = 16
-          Width = 71
+          Height = 13
+          Width = 73
           Caption = 'Chart Setting'
           Color = clNone
           ParentColor = False
@@ -51,36 +51,36 @@ object f_config_chart: Tf_config_chart
           TabOrder = 0
           object Label68: TLabel
             Left = 404
-            Height = 16
+            Height = 13
             Top = 74
-            Width = 30
+            Width = 32
             Caption = 'years'
             Color = clNone
             ParentColor = False
           end
           object Label113: TLabel
             Left = 8
-            Height = 16
+            Height = 13
             Top = 16
-            Width = 297
+            Width = 306
             Caption = 'Stars proper motion options (if available in the catalog)'
             Color = clNone
             ParentColor = False
           end
           object PMBox: TCheckBox
             Left = 8
-            Height = 15
+            Height = 28
             Top = 40
-            Width = 324
+            Width = 390
             Caption = 'Use the proper motion to correct the position for the current date'
             OnClick = PMBoxClick
             TabOrder = 0
           end
           object DrawPmBox: TCheckBox
             Left = 8
-            Height = 15
+            Height = 28
             Top = 72
-            Width = 287
+            Width = 348
             Caption = 'Draw a line that represent the proper motion for the next '
             OnClick = DrawPmBoxClick
             TabOrder = 1
@@ -112,10 +112,19 @@ object f_config_chart: Tf_config_chart
           TabOrder = 1
           object EquinoxLabel: TLabel
             Left = 192
-            Height = 16
+            Height = 13
             Top = 46
             Width = 49
             Caption = 'Equinox:'
+            Color = clNone
+            ParentColor = False
+          end
+          object Label1: TLabel
+            Left = 16
+            Height = 13
+            Top = 8
+            Width = 285
+            Caption = 'Equatorial and Ecliptic Chart  Coordinates Equinox'
             Color = clNone
             ParentColor = False
           end
@@ -234,15 +243,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 490
-        ClientHeight = 470
-        object Label30: TLabel
-          Height = 13
-          Width = 124
-          Caption = 'Field of Vision Setting'
-          Color = clNone
-          ParentColor = False
-        end
+        ClientWidth = 498
+        ClientHeight = 478
         object Bevel1: TBevel
           Name = 'Bevel1'
           Left = 16
@@ -250,6 +252,13 @@ object f_config_chart: Tf_config_chart
           Top = 56
           Width = 169
           Shape = bsFrame
+        end
+        object Label30: TLabel
+          Height = 13
+          Width = 124
+          Caption = 'Field of Vision Setting'
+          Color = clNone
+          ParentColor = False
         end
         object Bevel2: TBevel
           Name = 'Bevel2'
@@ -266,8 +275,6 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '1'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label97: TLabel
@@ -277,8 +284,6 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '2'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label98: TLabel
@@ -288,8 +293,6 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '3'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label99: TLabel
@@ -299,8 +302,6 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '4'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label101: TLabel
@@ -310,8 +311,6 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '6'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label102: TLabel
@@ -321,8 +320,6 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '7'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label103: TLabel
@@ -332,8 +329,6 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '8'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label104: TLabel
@@ -343,19 +338,15 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '9'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label105: TLabel
           Left = 255
           Height = 13
           Top = 216
-          Width = 13
+          Width = 15
           Caption = '10'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label106: TLabel
@@ -384,8 +375,6 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '0'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label57: TLabel
@@ -414,19 +403,15 @@ object f_config_chart: Tf_config_chart
           Width = 7
           Caption = '5'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label2: TLabel
           Left = 255
           Height = 13
           Top = 245
-          Width = 13
+          Width = 15
           Caption = '11'
           Color = clNone
-          Font.Height = 12
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object fw1: TFloatEdit
@@ -648,8 +633,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Bevel8: TBevel
           Name = 'Bevel8'
           Left = 208
@@ -680,9 +665,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '1 - 2'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp2: TLabel
@@ -692,9 +674,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '2 - 3'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp3: TLabel
@@ -704,9 +683,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '3 - 4'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp4: TLabel
@@ -716,9 +692,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '4 - 5'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label165: TLabel
@@ -738,9 +711,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '0 - 1'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp5: TLabel
@@ -750,9 +720,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '5 - 6'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp6: TLabel
@@ -762,9 +729,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '6 - 7'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp7: TLabel
@@ -774,9 +738,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '7 - 8'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp8: TLabel
@@ -786,33 +747,24 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '8 - 9'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp9: TLabel
-          Left = 240
-          Height = 12
+          Left = 242
+          Height = 13
           Top = 210
-          Width = 43
+          Width = 35
           Caption = '9 - 10'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Labelp10: TLabel
-          Left = 232
-          Height = 12
+          Left = 235
+          Height = 13
           Top = 239
-          Width = 50
+          Width = 42
           Caption = '10 - 11'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label171: TLabel
@@ -840,15 +792,6 @@ object f_config_chart: Tf_config_chart
           Top = 64
           Width = 57
           Caption = 'Projection'
-          Color = clNone
-          ParentColor = False
-        end
-        object Label151: TLabel
-          Left = 16
-          Height = 13
-          Top = 8
-          Width = 285
-          Caption = 'Equatorial and Ecliptic Chart  Coordinates Equinox'
           Color = clNone
           ParentColor = False
         end
@@ -1061,8 +1004,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label29: TLabel
           Height = 13
           Width = 112
@@ -1076,8 +1019,8 @@ object f_config_chart: Tf_config_chart
           Top = 16
           Width = 449
           Caption = 'Stars Filter'
-          ClientHeight = 184
-          ClientWidth = 449
+          ClientHeight = 167
+          ClientWidth = 445
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
@@ -1444,8 +1387,8 @@ object f_config_chart: Tf_config_chart
           Top = 208
           Width = 449
           Caption = 'Nebulae Filter'
-          ClientHeight = 200
-          ClientWidth = 449
+          ClientHeight = 183
+          ClientWidth = 445
           TabOrder = 1
           object BigNebUnit: TLabel
             Left = 376
@@ -1959,8 +1902,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TPage
         Caption = 'Page5'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Bevel9: TBevel
           Name = 'Bevel9'
           Left = 8
@@ -2010,9 +1953,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '1 - 2'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label162: TLabel
@@ -2022,9 +1962,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '2 - 3'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label163: TLabel
@@ -2034,9 +1971,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '3 - 4'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label164: TLabel
@@ -2046,9 +1980,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '4 - 5'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label166: TLabel
@@ -2058,9 +1989,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '0 - 1'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label167: TLabel
@@ -2070,9 +1998,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '5 - 6'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label168: TLabel
@@ -2082,9 +2007,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '6 - 7'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label169: TLabel
@@ -2094,9 +2016,6 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '7 - 8'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label170: TLabel
@@ -2106,33 +2025,24 @@ object f_config_chart: Tf_config_chart
           Width = 36
           Caption = '8 - 9'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label174: TLabel
           Left = 40
-          Height = 12
+          Height = 13
           Top = 316
-          Width = 43
+          Width = 35
           Caption = '9 - 10'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object Label177: TLabel
-          Left = 32
-          Height = 12
+          Left = 33
+          Height = 13
           Top = 345
-          Width = 50
+          Width = 42
           Caption = '10 - 11'
           Color = clNone
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
           ParentColor = False
         end
         object MaskEdit1: TMaskEdit
@@ -2422,8 +2332,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page6: TPage
         Caption = 'Page6'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label95: TLabel
           Height = 13
           Width = 103
@@ -2433,12 +2343,12 @@ object f_config_chart: Tf_config_chart
         end
         object GroupBox5: TGroupBox
           Left = 24
-          Height = 217
+          Height = 223
           Top = 40
           Width = 369
           Caption = 'Type of object to add to the list'
-          ClientHeight = 217
-          ClientWidth = 369
+          ClientHeight = 206
+          ClientWidth = 365
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32
