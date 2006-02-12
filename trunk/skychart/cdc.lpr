@@ -16,14 +16,14 @@ uses
   pu_config_system, pu_config_solsys, pu_config_pictures, pu_config_observatory,
   pu_config_display, pu_config_chart, pu_config_time, libsql,
   radec, XmlParser, zoomimage, JPEGForLazarus, CDCjdcalendar, cdccatalog, satxy,
-  series96, elp82, Printer4Lazarus;
+  series96, elp82, Printer4Lazarus, downldialog, synapse;
 
 begin
   Application.Title:='Cartes du Ciel';
   Application.Initialize;
 
   f_about := Tf_about.Create(nil);
-  f_about.ShowTimer:=true; f_about.Show; f_about.Paint;
+//  f_about.ShowTimer:=true; f_about.Show; f_about.Paint;
   Application.ProcessMessages;
 
   Application.CreateForm(Tf_main, f_main);

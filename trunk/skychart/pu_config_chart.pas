@@ -34,6 +34,7 @@ type
   { Tf_config_chart }
 
   Tf_config_chart = class(TForm)
+    Label1: TLabel;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;
@@ -49,7 +50,6 @@ type
     DrawPmBox: TCheckBox;
     lDrawPMy: TLongEdit;
     Panel10: TPanel;
-    Label151: TLabel;
     EquinoxLabel: TLabel;
     equinoxtype: TRadioGroup;
     equinox2: TFloatEdit;

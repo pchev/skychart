@@ -99,7 +99,8 @@ type
     procedure LoadMPCSample(Sender: TObject);
     procedure SysDBChange(Sender: TObject);
     procedure SysSaveAndRestart(Sender: TObject);
-    function SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    function  SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    procedure ShowPage(i,j:Integer);
   public
     { Déclarations publiques }
     property ccat : conf_catalog read Fccat write SetCcat;
@@ -183,9 +184,9 @@ f_config_solsys1.FormShow(Sender);
 f_config_display1.FormShow(Sender);
 f_config_pictures1.FormShow(Sender);
 f_config_system1.FormShow(Sender);
+ShowPage(cmain.configpage_i,cmain.configpage_j);
 TreeView1.FullCollapse;
 Treeview1.selected:=Treeview1.items[cmain.configpage];
-Treeview1.Refresh;
 end;
 
 procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
@@ -199,17 +200,9 @@ end else begin
    locktree:=true;
    i:=node.parent.index;
    j:=node.index;
-   MultiDoc1.SetActiveChild(i);
-   case i of
-     0 : begin f_config_time1.WizardNotebook1.PageIndex:=j;        f_config_time1.FormShow(Sender); end;
-     1 : begin f_config_observatory1.WizardNotebook1.PageIndex:=j; f_config_observatory1.FormShow(Sender); end;
-     2 : begin f_config_chart1.WizardNotebook1.PageIndex:=j;       f_config_chart1.FormShow(Sender); end;
-     3 : begin f_config_catalog1.WizardNotebook1.PageIndex:=j;     f_config_catalog1.FormShow(Sender); end;
-     4 : begin f_config_solsys1.WizardNotebook1.PageIndex:=j;      f_config_solsys1.FormShow(Sender); end;
-     5 : begin f_config_display1.WizardNotebook1.PageIndex:=j;     f_config_display1.FormShow(Sender); end;
-     6 : begin f_config_pictures1.WizardNotebook1.PageIndex:=j;    f_config_pictures1.FormShow(Sender); end;
-     7 : begin f_config_system1.WizardNotebook1.PageIndex:=j;      f_config_system1.FormShow(Sender); end;
-   end;
+   ShowPage(i,j);
+   TreeView1.FullCollapse;
+   node.Parent.Expand(true);
 end;
 application.processmessages;
 finally
@@ -217,16 +210,34 @@ locktree:=false;
 end;
 end;
 
-procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+procedure Tf_config.ShowPage(i,j:Integer);
 begin
-  cmain.configpage:=f_config.Treeview1.selected.absoluteindex;
+   MultiDoc1.SetActiveChild(i);
+   case i of
+     0 : begin f_config_time1.WizardNotebook1.PageIndex:=j;        f_config_time1.FormShow(self); end;
+     1 : begin f_config_observatory1.WizardNotebook1.PageIndex:=j; f_config_observatory1.FormShow(self); end;
+     2 : begin f_config_chart1.WizardNotebook1.PageIndex:=j;       f_config_chart1.FormShow(self); end;
+     3 : begin f_config_catalog1.WizardNotebook1.PageIndex:=j;     f_config_catalog1.FormShow(self); end;
+     4 : begin f_config_solsys1.WizardNotebook1.PageIndex:=j;      f_config_solsys1.FormShow(self); end;
+     5 : begin f_config_display1.WizardNotebook1.PageIndex:=j;     f_config_display1.FormShow(self); end;
+     6 : begin f_config_pictures1.WizardNotebook1.PageIndex:=j;    f_config_pictures1.FormShow(self); end;
+     7 : begin f_config_system1.WizardNotebook1.PageIndex:=j;      f_config_system1.FormShow(self); end;
+   end;
+   cmain.configpage_i:=i;
+   cmain.configpage_j:=j;
+end;
+
+procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+var i:integer;
+begin
+  i:=f_config.Treeview1.selected.absoluteindex;
+  cmain.configpage:=i;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);
 begin
 if Treeview1.selected.absoluteindex< Treeview1.items.count-1 then begin
  Treeview1.selected:=Treeview1.selected.GetNext;
-// Treeview1.selected.parent.expand(true);
  treeview1.topitem:=Treeview1.selected;
  TreeView1Change(Sender,Treeview1.selected);
 end;
@@ -241,7 +252,6 @@ if Treeview1.selected.absoluteindex>1 then begin
  if Treeview1.selected.level=0 then Treeview1.selected:=Treeview1.selected.GetPrev;
  i:=Treeview1.selected.absoluteindex;
  locktree:=false;
-// Treeview1.selected.parent.expand(true);
  Treeview1.selected:=Treeview1.items[i];
  treeview1.topitem:=Treeview1.selected;
  TreeView1Change(Sender,Treeview1.selected);
@@ -320,6 +330,7 @@ begin
 f_config_system1.cdb:=value;
 f_config_solsys1.cdb:=value;
 f_config_pictures1.cdb:=value;
+f_config_observatory1.cdb:=value;
 end;
 
 procedure Tf_config.SetCcat(value: conf_catalog);

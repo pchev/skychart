@@ -46,6 +46,16 @@ type
      function checkDBConfig(cmain: conf_main): string;
      Function ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
      function CheckDB:boolean;
+     procedure LoadCountryList(locfile:string; memo:Tmemo);
+     procedure LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo);
+     procedure LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo);
+     procedure GetCountryList(codelist,countrylist:Tstrings);
+     procedure GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
+     procedure GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
+     function  GetCityLoc(locid:string; var loctype,latitude,longitude,elevation,timezone: string):boolean;
+     function  UpdateCity(locid:integer; country,location,loctype,lat,lon,elev,tz:string):string;
+     function  DeleteCity(locid:integer):string;
+     function  DeleteCountry(country:string; deleteall: boolean):string;
      procedure GetCometFileList(cmain:conf_main; list:Tstrings);
      procedure GetAsteroidFileList(cmain:conf_main; list:Tstrings);
      procedure LoadCometFile(comfile:string; memocom:Tmemo);
@@ -111,22 +121,30 @@ end;
 end;
 
 function TCDCdb.Checkdb:boolean;
-var i,j:integer;
+var i,j,k:integer;
    ok,creatednow:boolean;
+   indexlist: TStringlist;
+   buf:string;
 begin
 creatednow:=false;
 if db.Active then begin
+  indexlist:=TStringlist.Create;
   result:=true;
   for i:=1 to numsqltable do begin
      ok:=(sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
      if not ok then begin  // try to create the missing table
-       if DBtype=sqlite then
-           db.Query('CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]))
-       else
+        if DBtype=sqlite then begin
+           buf:='CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]);
+           buf:=stringreplace(buf,'double','REAL',[rfReplaceAll]);
+           db.Query(buf);
+        end else
            db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
        if sqltable[i,3]>'' then begin   // create the index
-          j:=strtoint(sqltable[i,3]);
-          db.Query('CREATE INDEX '+sqlindex[j,1]+' on '+sqlindex[j,2]);
+          SplitRec(sqltable[i,3],',',indexlist);
+          for j:=0 to indexlist.Count-1 do begin
+            k:=strtoint(indexlist[j]);
+            db.Query('CREATE INDEX '+sqlindex[k,1]+' on '+sqlindex[k,2]);
+          end;
        end;
        ok:=(sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
        if ok then begin
@@ -137,6 +155,7 @@ if db.Active then begin
      end;
      result:=result and ok;
   end;
+  indexlist.Free;
 end
  else result:=false;
 if creatednow and (Assigned(FInitializeDB)) then FInitializeDB(self);
@@ -169,8 +188,9 @@ end;
 end;
 
 function TCDCdb.createDB(cmain: conf_main; var ok:boolean): string;
-var msg:string;
-    i,j:integer;
+var msg,buf:string;
+    i,j,k:integer;
+    indexlist: TStringlist;
 begin
 ok:=false;
 result:='';
@@ -185,16 +205,22 @@ try
   end;
   if db.database<>cmain.db then db.Use(cmain.db);
   if db.database=cmain.db then begin
+    indexlist:=TStringlist.Create;
     ok:=true;
     for i:=1 to numsqltable do begin
-      if DBtype=sqlite then
-          db.Query('CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]))
-      else
+      if DBtype=sqlite then begin
+          buf:='CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]);
+          buf:=stringreplace(buf,'double','REAL',[rfReplaceAll]);
+          db.Query(buf);
+      end else
           db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
       msg:=trim(db.ErrorMessage);
       if sqltable[i,3]>'' then begin   // create the index
-         j:=strtoint(sqltable[i,3]);
-         db.Query('CREATE INDEX '+sqlindex[j,1]+' on '+sqlindex[j,2]);
+         SplitRec(sqltable[i,3],',',indexlist);
+         for j:=0 to indexlist.Count-1 do begin
+           k:=strtoint(indexlist[j]);
+           db.Query('CREATE INDEX '+sqlindex[k,1]+' on '+sqlindex[k,2]);
+         end;
       end;
       if sqltable[i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then begin
          ok:=false;
@@ -202,6 +228,7 @@ try
          break;
       end;
     end;
+    indexlist.Free;
   end else begin
      ok:=false;
      result:=result+crlf+trim(db.ErrorMessage);
@@ -828,6 +855,10 @@ begin
   LoadAsteroidFile(slash(sampledir)+'MPCsample.dat',true,false,false,1000,memo);
   // load sample comet data
   LoadCometFile(slash(sampledir)+'Cometsample.dat',memo);
+  // load location
+  LoadCountryList(slash(sampledir)+'country.dat',memo);
+  LoadWorldLocation(slash(sampledir)+'world.dat','',false,memo);
+  LoadUSLocation(slash(sampledir)+'us.dat',false,memo);
 end;
 
 procedure TCDCdb.GetCometList(filter:string; maxnumber:integer; list:TstringList; var cometid: array of string);
@@ -1152,6 +1183,286 @@ finally
   findclose(c);
   findclose(f);
 end;
+end;
+
+procedure TCDCdb.LoadCountryList(locfile:string; memo:Tmemo);
+var f: textfile;
+    buf,sql: string;
+    rec: TStringList;
+begin
+Memo.clear;
+if not fileexists(locfile) then begin
+  Memo.lines.add('File not found!');
+  exit;
+end;
+try
+if db.Active then begin
+  rec:= TStringList.Create;
+  assignfile(f,locfile);
+  reset(f);
+  db.StartTransaction;
+  repeat
+    readln(f,buf);
+    SplitRec(buf,tab,rec);
+    sql:='insert into cdc_country (country,name)'+
+       'values ('+
+       '"'+rec[0]+'",'+
+       '"'+rec[1]+'")';
+    if not db.Query(sql) then Memo.lines.add(db.ErrorMessage);
+  until(eof(f));
+  db.Commit;
+  db.flush('tables');
+  closefile(f);
+  rec.Free;
+end;
+application.ProcessMessages;
+except
+end;
+end;
+
+procedure TCDCdb.LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo);
+var f: textfile;
+    buf,sql,cc: string;
+    rec: TStringList;
+    nl: integer;
+    force_country: boolean;
+begin
+Memo.clear;
+if not fileexists(locfile) then begin
+  Memo.lines.add('File not found!');
+  exit;
+end;
+try
+if db.Active then begin
+  rec:= TStringList.Create;
+  nl:=0;
+  force_country:=(country<>'');
+  assignfile(f,locfile);
+  reset(f);
+  readln(f,buf); // heading
+  if isnumber(copy(buf,1,1)) then reset(f);
+  db.starttransaction;
+  db.LockTables('cdc_location WRITE');
+  repeat
+    readln(f,buf);
+    if (nl mod 10000)=0 then begin Memo.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
+    SplitRec(buf,tab,rec);
+    if (rec[17]<>'V') and  // skip alternate name
+       ((not  city_only)  // all names
+          or ((rec[9]='P')and(rec[10]<>'PPLQ')and(rec[10]<>'PPLW'))  // populated place only
+        )
+     then begin
+       if force_country then cc:=country
+          else cc:=rec[12];
+       sql:='insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
+         'values ('+
+         rec[2]+','+
+         '"'+cc+'",'+
+         '"'+rec[22]+'",'+
+         '"'+rec[10]+'",'+
+         rec[3]+','+
+         rec[4]+','+
+         '0,'+
+         '0)';
+       if not db.Query(sql) then Memo.lines.add(db.ErrorMessage)
+          else inc(nl);
+    end;
+  until(eof(f));
+  closefile(f);
+  rec.Free;
+  db.UnLockTables;
+  db.commit;
+  db.flush('tables');
+  Memo.lines.add('Processing ended. Total number of location :'+inttostr(nl));
+  application.ProcessMessages;
+end;
+except
+end;
+end;
+
+procedure TCDCdb.LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo);
+var f: textfile;
+    buf,sql: string;
+    rec: TStringList;
+    nl: integer;
+    elev:double;
+begin
+Memo.clear;
+if not fileexists(locfile) then begin
+  Memo.lines.add('File not found!');
+  exit;
+end;
+try
+if db.Active then begin
+  rec:= TStringList.Create;
+  nl:=0;
+  assignfile(f,locfile);
+  reset(f);
+  readln(f,buf); // heading
+  if isnumber(copy(buf,1,1)) then reset(f);
+  db.starttransaction;
+  db.LockTables('cdc_location WRITE');
+  repeat
+    if (nl mod 10000)=0 then begin Memo.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
+    readln(f,buf);
+    SplitRec(buf,'|',rec);
+     if ((not city_only)  // all names
+          or (rec[3]='ppl')  // populated place only
+        )
+     then begin
+      elev:=strtointdef(rec[15],0)*footpermeter;
+      if rec[4]<>rec[2] then rec[2]:=rec[2]+', '+rec[4];
+      sql:='insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
+         'values ('+
+         rec[0]+','+
+         '"US-'+rec[1]+'",'+
+         '"'+rec[2]+'",'+
+         '"'+rec[3]+'",'+
+         rec[9]+','+
+         rec[10]+','+
+         formatfloat('0.0',elev)+','+
+         '0)';
+       if not db.Query(sql) then Memo.lines.add(db.ErrorMessage)
+          else inc(nl);
+    end;
+  until(eof(f));
+  closefile(f);
+  rec.Free;
+  db.UnLockTables;
+  db.commit;
+  db.flush('tables');
+  Memo.lines.add('Processing ended. Total number of location :'+inttostr(nl));
+  Application.ProcessMessages;
+end;
+except
+end;
+end;
+
+procedure TCDCdb.GetCountryList(codelist,countrylist:Tstrings);
+var i:integer;
+    buf:string;
+begin
+countrylist.Clear;
+codelist.Clear;
+db.Query('select country,name from cdc_country');
+i:=0;
+while i<db.RowCount do begin
+  codelist.add(db.results[i][0]);
+  buf:=db.results[i][1];
+  countrylist.add(utf8decode(buf));
+  inc(i);
+end;
+end;
+
+procedure TCDCdb.GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
+var i:integer;
+    buf:string;
+begin
+citylist.Clear;
+codelist.Clear;
+filter:=utf8encode(filter);
+buf:='select locid,location from cdc_location where country = "'+countrycode+'" ';
+if filter<>'' then buf:=buf+' and location like "'+filter+'" ';
+buf:=buf+' order by location limit '+inttostr(limit);
+db.Query(buf);
+i:=0;
+while i<db.RowCount do begin
+  codelist.add(db.results[i][0]);
+  buf:=db.results[i][1];
+  citylist.add(utf8decode(buf));
+  inc(i);
+end;
+end;
+
+procedure TCDCdb.GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
+var lo1,lo2,la1,la2,buf:string;
+    i: integer;
+begin
+la1:=floattostr(lat1);
+la2:=floattostr(lat2);
+lo1:=floattostr(lon1);
+lo2:=floattostr(lon2);
+db.Query('select locid,location from cdc_location where '+
+        'country="'+country+'" and '+
+        '(latitude between '+la1+' and '+la2+') and '+
+        '(longitude between '+lo1+' and '+lo2+') order by location limit '+inttostr(limit));
+i:=0;
+while i<db.RowCount do begin
+  codelist.add(db.results[i][0]);
+  buf:=db.results[i][1];
+  citylist.add(utf8decode(buf));
+  inc(i);
+end;
+end;
+
+function TCDCdb.GetCityLoc(locid:string; var loctype,latitude,longitude,elevation,timezone: string):boolean;
+begin
+db.Query('select type,latitude,longitude,elevation,timezone from cdc_location where locid="'+locid+'"');
+if db.RowCount>0 then begin
+  loctype:=db.results[0][0];
+  latitude:=db.results[0][1];
+  longitude:=db.results[0][2];
+  elevation:=db.results[0][3];
+  timezone:=db.results[0][4];
+  result:=true;
+end
+else result:=false;
+end;
+
+function TCDCdb.UpdateCity(locid:integer; country,location,loctype,lat,lon,elev,tz:string):string;
+var id,buf:string;
+begin
+if locid=0 then begin // Add new location
+  id:=CdcMinLocid;
+  buf:=db.QueryOne('select max(locid) from cdc_location where locid>='+id);
+  if buf<>'' then begin
+    id:=inttostr(strtoint(buf)+1)
+  end;
+  db.StartTransaction;
+  db.Query('insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
+       'values ('+
+       id+','+
+       '"'+country+'",'+
+       '"'+location+'",'+
+       '"'+loctype+'",'+
+       lat+','+
+       lon+','+
+       elev+','+
+       tz+')');
+  result:=db.ErrorMessage;
+  db.Commit;
+end
+else begin  // update location
+  id:=inttostr(locid);
+  db.StartTransaction;
+  db.Query('update cdc_location set '+
+           'latitude='+lat+','+
+           'longitude='+lon+','+
+           'elevation='+elev+','+
+           'timezone='+tz+
+           ' where locid='+id);
+  result:=db.ErrorMessage;
+  db.Commit;
+end;
+end;
+
+function TCDCdb.DeleteCity(locid:integer):string;
+begin
+db.StartTransaction;
+db.Query('delete from cdc_location where locid="'+inttostr(locid)+'"');
+result:=db.ErrorMessage;
+db.Commit;
+end;
+
+function TCDCdb.DeleteCountry(country:string; deleteall: boolean):string;
+var sql: string;
+begin
+sql:='delete from cdc_location where country="'+country+'"';
+if not deleteall then sql:=sql+' and locid<'+CdcMinLocid;
+db.StartTransaction;
+db.Query(sql);
+result:=db.ErrorMessage;
+db.Commit;
 end;
 
 end.

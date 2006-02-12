@@ -1,7 +1,7 @@
 object f_config: Tf_config
-  Left = 315
+  Left = 311
   Height = 521
-  Top = 191
+  Top = 186
   Width = 700
   HorzScrollBar.Page = 699
   VertScrollBar.Page = 520
@@ -147,7 +147,7 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Height = 480
@@ -162,7 +162,7 @@ object f_config: Tf_config
       Top = 4
       Width = 189
       AutoExpand = True
-      DefaultItemHeight = 17
+      DefaultItemHeight = 15
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True
@@ -271,9 +271,9 @@ object f_config: Tf_config
     TabOrder = 1
     object Applyall: TCheckBox
       Left = 16
-      Height = 15
+      Height = 13
       Top = 12
-      Width = 146
+      Width = 144
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
