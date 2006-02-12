@@ -40,6 +40,8 @@ the packages for the required component:
       libsql/libsql.lpk
       multidoc/multidocpackage.lpk
       radec/radec.lpk
+      synapse/source/lib/synapse.lpk
+      downloaddialog/downldialog.lpk  (after synapse)
       wizardntb/wizardntb.lpk
       xmlparser/xmlparser.lpk
       zoomimage/zoomimage.lpk
