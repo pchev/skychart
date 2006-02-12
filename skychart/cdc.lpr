@@ -23,7 +23,7 @@ begin
   Application.Initialize;
 
   f_about := Tf_about.Create(nil);
-//  f_about.ShowTimer:=true; f_about.Show; f_about.Paint;
+  f_about.ShowTimer:=true; f_about.Show; f_about.Paint;
   Application.ProcessMessages;
 
   Application.CreateForm(Tf_main, f_main);
