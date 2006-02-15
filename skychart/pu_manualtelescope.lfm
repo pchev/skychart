@@ -16,7 +16,7 @@ object f_manualtelescope: Tf_manualtelescope
   OnMouseDown = FormMouseDown
   OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
-  PixelsPerInch = 106
+  PixelsPerInch = 80
   TextHeight = 13
   object Panel1: TPanel
     Height = 107
@@ -33,9 +33,9 @@ object f_manualtelescope: Tf_manualtelescope
     OnMouseUp = FormMouseUp
     object Label1: TLabel
       Left = 16
-      Height = 14
+      Height = 12
       Top = 4
-      Width = 89
+      Width = 93
       Caption = 'Manual Telescope'
       Color = clNone
       Font.Color = clRed
@@ -49,9 +49,9 @@ object f_manualtelescope: Tf_manualtelescope
     end
     object Label2: TLabel
       Left = 16
-      Height = 14
+      Height = 12
       Top = 20
-      Width = 58
+      Width = 39
       Caption = '                   '
       Color = clNone
       Font.Color = clRed
@@ -65,9 +65,9 @@ object f_manualtelescope: Tf_manualtelescope
     end
     object Label4: TLabel
       Left = 16
-      Height = 38
+      Height = 1
       Top = 32
-      Width = 135
+      Width = 1
       Caption = 'RA turns:'
       Color = clNone
       Font.Color = clRed
@@ -81,9 +81,9 @@ object f_manualtelescope: Tf_manualtelescope
     end
     object Label5: TLabel
       Left = 16
-      Height = 38
+      Height = 1
       Top = 64
-      Width = 158
+      Width = 1
       Caption = 'DEC turns:'
       Color = clNone
       Font.Color = clRed

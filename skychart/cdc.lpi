@@ -17,6 +17,7 @@
     <LazDoc Paths=""/>
     <PublishOptions>
       <Version Value="2"/>
+      <DestinationDirectory Value="$(ProjPath)/published/"/>
       <IgnoreBinaries Value="False"/>
       <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
       <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
@@ -27,62 +28,68 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
         <WorkingDirectory Value="/home/cdc/"/>
       </local>
+      <environment>
+        <UserOverrides Count="2">
+          <Variable0 Name="GTK_RC_FILES_1" Value="/home/cdc/data/gtk_cdc/Wireframe/gtk/gtkrc"/>
+          <Variable1 Name="GTK_RC_FILES_2" Value="/home/cdc/data/gtk_cdc/Blackness/gtkrc"/>
+        </UserOverrides>
+      </environment>
     </RunParams>
     <RequiredPackages Count="19">
       <Item1>
-        <PackageName Value="downldialog"/>
+        <PackageName Value="zoomimage"/>
       </Item1>
       <Item2>
-        <PackageName Value="synapse"/>
+        <PackageName Value="XmlParser"/>
       </Item2>
       <Item3>
-        <PackageName Value="zoomimage"/>
+        <PackageName Value="wizardntb"/>
       </Item3>
       <Item4>
-        <PackageName Value="XmlParser"/>
-      </Item4>
-      <Item5>
-        <PackageName Value="wizardntb"/>
-      </Item5>
-      <Item6>
         <PackageName Value="TurboPowerIPro"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item6>
-      <Item7>
+      </Item4>
+      <Item5>
         <PackageName Value="SynEdit"/>
         <MinVersion Major="1" Valid="True"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="synapse"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="series96"/>
       </Item7>
       <Item8>
-        <PackageName Value="series96"/>
+        <PackageName Value="satxy"/>
       </Item8>
       <Item9>
-        <PackageName Value="satxy"/>
+        <PackageName Value="radec"/>
       </Item9>
       <Item10>
-        <PackageName Value="radec"/>
-      </Item10>
-      <Item11>
         <PackageName Value="Printer4Lazarus"/>
         <MinVersion Build="1" Valid="True"/>
-      </Item11>
-      <Item12>
+      </Item10>
+      <Item11>
         <PackageName Value="MultiDocPackage"/>
         <MinVersion Valid="True"/>
+      </Item11>
+      <Item12>
+        <PackageName Value="libsql"/>
       </Item12>
       <Item13>
-        <PackageName Value="libsql"/>
+        <PackageName Value="LCL"/>
       </Item13>
       <Item14>
-        <PackageName Value="LCL"/>
+        <PackageName Value="JPEGForLazarus"/>
       </Item14>
       <Item15>
-        <PackageName Value="JPEGForLazarus"/>
+        <PackageName Value="enhedit"/>
       </Item15>
       <Item16>
-        <PackageName Value="enhedit"/>
+        <PackageName Value="elp82"/>
       </Item16>
       <Item17>
-        <PackageName Value="elp82"/>
+        <PackageName Value="downldialog"/>
       </Item17>
       <Item18>
         <PackageName Value="CDCjdcalendar"/>
@@ -91,14 +98,14 @@
         <PackageName Value="cdccatalog"/>
       </Item19>
     </RequiredPackages>
-    <Units Count="36">
+    <Units Count="35">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cdc"/>
-        <CursorPos X="3" Y="26"/>
-        <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="1" Y="22"/>
+        <TopLine Value="11"/>
+        <UsageCount Value="146"/>
       </Unit0>
       <Unit1>
         <Filename Value="pu_main.pas"/>
@@ -107,31 +114,32 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_main.lrs"/>
         <UnitName Value="pu_main"/>
-        <CursorPos X="59" Y="14"/>
-        <TopLine Value="1"/>
+        <CursorPos X="30" Y="4235"/>
+        <TopLine Value="4220"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="107"/>
+        <UsageCount Value="128"/>
+        <Bookmarks Count="1">
+          <Item0 X="24" Y="3890" ID="1"/>
+        </Bookmarks>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="cu_telescope.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_telescope"/>
-        <CursorPos X="2" Y="161"/>
-        <TopLine Value="144"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit2>
       <Unit3>
         <Filename Value="cu_database.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_database"/>
-        <CursorPos X="46" Y="1406"/>
-        <TopLine Value="1382"/>
-        <UsageCount Value="125"/>
-        <Bookmarks Count="3">
-          <Item0 X="7" Y="1225" ID="1"/>
-          <Item1 X="1" Y="381" ID="2"/>
-          <Item2 X="3" Y="1329" ID="3"/>
+        <CursorPos X="46" Y="1113"/>
+        <TopLine Value="1097"/>
+        <UsageCount Value="146"/>
+        <Bookmarks Count="1">
+          <Item0 X="3" Y="1329" ID="3"/>
         </Bookmarks>
       </Unit3>
       <Unit4>
@@ -140,7 +148,7 @@
         <UnitName Value="cu_fits"/>
         <CursorPos X="2" Y="28"/>
         <TopLine Value="11"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit4>
       <Unit5>
         <Filename Value="cu_indiclient.pas"/>
@@ -148,42 +156,39 @@
         <UnitName Value="cu_indiclient"/>
         <CursorPos X="28" Y="36"/>
         <TopLine Value="17"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit5>
       <Unit6>
         <Filename Value="cu_planet.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_planet"/>
-        <CursorPos X="31" Y="1975"/>
-        <TopLine Value="1956"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit6>
       <Unit7>
         <Filename Value="cu_plot.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_plot"/>
-        <CursorPos X="28" Y="1656"/>
-        <TopLine Value="1670"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit7>
       <Unit8>
         <Filename Value="cu_skychart.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_skychart"/>
-        <CursorPos X="66" Y="207"/>
-        <TopLine Value="196"/>
-        <UsageCount Value="125"/>
-        <Bookmarks Count="1">
-          <Item0 X="1" Y="190" ID="1"/>
-        </Bookmarks>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit8>
       <Unit9>
         <Filename Value="cu_catalog.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_catalog"/>
-        <CursorPos X="43" Y="148"/>
-        <TopLine Value="139"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit9>
       <Unit10>
         <Filename Value="pu_zoom.pas"/>
@@ -192,9 +197,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_zoom.lrs"/>
         <UnitName Value="pu_zoom"/>
-        <CursorPos X="12" Y="3"/>
+        <CursorPos X="15" Y="3"/>
         <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit10>
       <Unit11>
         <Filename Value="pu_calendar.pas"/>
@@ -203,9 +208,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_calendar.lrs"/>
         <UnitName Value="pu_calendar"/>
-        <CursorPos X="3" Y="1699"/>
-        <TopLine Value="1682"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="21" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit11>
       <Unit12>
         <Filename Value="pu_chart.pas"/>
@@ -214,12 +219,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_chart.lrs"/>
         <UnitName Value="pu_chart"/>
-        <CursorPos X="23" Y="1067"/>
-        <TopLine Value="1056"/>
-        <UsageCount Value="125"/>
-        <Bookmarks Count="1">
-          <Item0 X="3" Y="451" ID="2"/>
-        </Bookmarks>
+        <CursorPos X="20" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit12>
       <Unit13>
         <Filename Value="pu_detail.pas"/>
@@ -228,9 +230,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_detail.lrs"/>
         <UnitName Value="pu_detail"/>
-        <CursorPos X="22" Y="26"/>
+        <CursorPos X="20" Y="3"/>
         <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit13>
       <Unit14>
         <Filename Value="pu_getdss.pas"/>
@@ -239,9 +241,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_getdss.lrs"/>
         <UnitName Value="pu_getdss"/>
-        <CursorPos X="47" Y="25"/>
+        <CursorPos X="20" Y="3"/>
         <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit14>
       <Unit15>
         <Filename Value="pu_image.pas"/>
@@ -250,9 +252,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_image.lrs"/>
         <UnitName Value="pu_image"/>
-        <CursorPos X="4" Y="3"/>
+        <CursorPos X="20" Y="3"/>
         <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit15>
       <Unit16>
         <Filename Value="pu_info.pas"/>
@@ -261,9 +263,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_info.lrs"/>
         <UnitName Value="pu_info"/>
-        <CursorPos X="9" Y="267"/>
-        <TopLine Value="251"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="20" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit16>
       <Unit17>
         <Filename Value="pu_manualtelescope.pas"/>
@@ -272,9 +274,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_manualtelescope.lrs"/>
         <UnitName Value="pu_manualtelescope"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="20" Y="3"/>
         <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit17>
       <Unit18>
         <Filename Value="pu_position.pas"/>
@@ -283,9 +285,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_position.lrs"/>
         <UnitName Value="pu_position"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="20" Y="3"/>
         <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit18>
       <Unit19>
         <Filename Value="pu_printsetup.pas"/>
@@ -294,9 +296,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_printsetup.lrs"/>
         <UnitName Value="pu_printsetup"/>
-        <CursorPos X="2" Y="145"/>
-        <TopLine Value="128"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="20" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit19>
       <Unit20>
         <Filename Value="pu_search.pas"/>
@@ -305,9 +307,9 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_search.lrs"/>
         <UnitName Value="pu_search"/>
-        <CursorPos X="3" Y="5"/>
+        <CursorPos X="20" Y="3"/>
         <TopLine Value="1"/>
-        <UsageCount Value="125"/>
+        <UsageCount Value="146"/>
       </Unit20>
       <Unit21>
         <Filename Value="pu_about.pas"/>
@@ -316,149 +318,144 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_about.lrs"/>
         <UnitName Value="pu_about"/>
-        <CursorPos X="13" Y="58"/>
-        <TopLine Value="38"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="20" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit21>
       <Unit22>
         <Filename Value="u_util.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="u_util"/>
-        <CursorPos X="1" Y="160"/>
-        <TopLine Value="144"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="35" Y="284"/>
+        <TopLine Value="265"/>
+        <UsageCount Value="146"/>
       </Unit22>
       <Unit23>
         <Filename Value="u_constant.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="u_constant"/>
-        <CursorPos X="81" Y="412"/>
-        <TopLine Value="396"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="30" Y="483"/>
+        <TopLine Value="478"/>
+        <UsageCount Value="146"/>
+        <Bookmarks Count="1">
+          <Item0 X="1" Y="79" ID="0"/>
+        </Bookmarks>
       </Unit23>
       <Unit24>
         <Filename Value="u_planetrender.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="u_planetrender"/>
-        <CursorPos X="2" Y="90"/>
-        <TopLine Value="73"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit24>
       <Unit25>
         <Filename Value="u_projection.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="u_projection"/>
-        <CursorPos X="43" Y="138"/>
-        <TopLine Value="125"/>
-        <UsageCount Value="125"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="146"/>
       </Unit25>
       <Unit26>
-        <Filename Value="u_bitmap.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="u_bitmap"/>
-        <CursorPos X="2" Y="32"/>
-        <TopLine Value="15"/>
-        <UsageCount Value="125"/>
-      </Unit26>
-      <Unit27>
         <Filename Value="pu_config_catalog.pas"/>
         <ComponentName Value="f_config_catalog"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config_catalog.lrs"/>
         <UnitName Value="pu_config_catalog"/>
-        <CursorPos X="14" Y="38"/>
-        <TopLine Value="35"/>
-        <UsageCount Value="85"/>
-      </Unit27>
-      <Unit28>
+        <CursorPos X="20" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="106"/>
+      </Unit26>
+      <Unit27>
         <Filename Value="pu_config.pas"/>
         <ComponentName Value="f_config"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config.lrs"/>
         <UnitName Value="pu_config"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
-        <UsageCount Value="85"/>
-      </Unit28>
-      <Unit29>
+        <CursorPos X="1" Y="138"/>
+        <TopLine Value="121"/>
+        <UsageCount Value="106"/>
+      </Unit27>
+      <Unit28>
         <Filename Value="pu_config_time.pas"/>
         <ComponentName Value="f_config_time"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config_time.lrs"/>
         <UnitName Value="pu_config_time"/>
-        <CursorPos X="20" Y="239"/>
-        <TopLine Value="229"/>
-        <UsageCount Value="79"/>
-      </Unit29>
-      <Unit30>
+        <CursorPos X="20" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="100"/>
+      </Unit28>
+      <Unit29>
         <Filename Value="pu_config_system.pas"/>
         <ComponentName Value="f_config_system"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config_system.lrs"/>
         <UnitName Value="pu_config_system"/>
-        <CursorPos X="36" Y="202"/>
-        <TopLine Value="186"/>
-        <UsageCount Value="79"/>
-      </Unit30>
-      <Unit31>
+        <CursorPos X="9" Y="305"/>
+        <TopLine Value="288"/>
+        <UsageCount Value="100"/>
+      </Unit29>
+      <Unit30>
         <Filename Value="pu_config_pictures.pas"/>
         <ComponentName Value="f_config_pictures"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config_pictures.lrs"/>
         <UnitName Value="pu_config_pictures"/>
-        <CursorPos X="1" Y="241"/>
-        <TopLine Value="224"/>
-        <UsageCount Value="79"/>
-      </Unit31>
-      <Unit32>
+        <CursorPos X="97" Y="204"/>
+        <TopLine Value="197"/>
+        <UsageCount Value="100"/>
+      </Unit30>
+      <Unit31>
         <Filename Value="pu_config_display.pas"/>
         <ComponentName Value="f_config_display"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config_display.lrs"/>
         <UnitName Value="pu_config_display"/>
-        <CursorPos X="69" Y="1234"/>
-        <TopLine Value="1215"/>
-        <UsageCount Value="79"/>
-      </Unit32>
-      <Unit33>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="100"/>
+      </Unit31>
+      <Unit32>
         <Filename Value="pu_config_solsys.pas"/>
         <ComponentName Value="f_config_solsys"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config_solsys.lrs"/>
         <UnitName Value="pu_config_solsys"/>
-        <CursorPos X="1" Y="245"/>
-        <TopLine Value="228"/>
-        <UsageCount Value="79"/>
-      </Unit33>
-      <Unit34>
+        <CursorPos X="20" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="100"/>
+      </Unit32>
+      <Unit33>
         <Filename Value="pu_config_chart.pas"/>
         <ComponentName Value="f_config_chart"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config_chart.lrs"/>
         <UnitName Value="pu_config_chart"/>
-        <CursorPos X="77" Y="50"/>
-        <TopLine Value="36"/>
-        <UsageCount Value="79"/>
-      </Unit34>
-      <Unit35>
+        <CursorPos X="20" Y="3"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="100"/>
+      </Unit33>
+      <Unit34>
         <Filename Value="pu_config_observatory.pas"/>
         <ComponentName Value="f_config_observatory"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_config_observatory.lrs"/>
         <UnitName Value="pu_config_observatory"/>
-        <CursorPos X="90" Y="52"/>
+        <CursorPos X="86" Y="38"/>
         <TopLine Value="37"/>
-        <UsageCount Value="79"/>
-      </Unit35>
+        <UsageCount Value="100"/>
+      </Unit34>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -472,7 +469,7 @@
       <HeapSize Value="100000"/>
       <Generate Value="Faster"/>
       <Optimizations>
-        <OptimizationLevel Value="2"/>
+        <OptimizationLevel Value="0"/>
       </Optimizations>
     </CodeGeneration>
     <Linking>

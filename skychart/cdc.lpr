@@ -39,5 +39,6 @@ begin
   f_main.init;
   Application.Run;
   f_about.free;
+
 end.
 

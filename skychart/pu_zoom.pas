@@ -1,6 +1,6 @@
 unit pu_zoom;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2005 Patrick Chevalley
@@ -28,11 +28,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_util,
+uses u_util, u_constant,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ComCtrls, LResources, Math;
 
 type
+
+  { Tf_zoom }
+
   Tf_zoom = class(TForm)
     TrackBar1: TTrackBar;
     BitBtn1: TBitBtn;
@@ -44,10 +47,12 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    procedure FormCreate(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     { Déclarations privées }
+    Fnightvision:boolean;
   public
     { Déclarations publiques }
     fov,logfov : double;
@@ -68,8 +73,19 @@ if fov>3 then fov:=round(fov);
 Edit1.text:=DeMtoStr(fov);
 end;
 
+procedure Tf_zoom.FormCreate(Sender: TObject);
+begin
+  Fnightvision:=false;
+end;
+
 procedure Tf_zoom.FormShow(Sender: TObject);
 begin
+{$ifdef WIN32}
+if Fnightvision<>nightvision then begin
+   SetFormNightVision(self,nightvision);
+   Fnightvision:=nightvision;
+end;
+{$endif}
 logfov:=100*log10(fov);
 TrackBar1.Position := Round(logfov);
 Edit1.text:=DeMtoStr(fov);

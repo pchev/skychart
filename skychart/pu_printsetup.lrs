@@ -1,53 +1,49 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_printsetup','FORMDATA',[
-  'TPF0'#13'Tf_printsetup'#12'f_printsetup'#11'BorderStyle'#7#13'bsSizeToolWin'
-  +#7'Caption'#6#12'f_printsetup'#12'ClientHeight'#3'c'#1#11'ClientWidth'#3#147
-  +#1#11'Font.Height'#2#245#9'Font.Name'#6#13'MS Sans Serif'#6'OnShow'#7#8'Form'
-  +'Show'#13'PixelsPerInch'#2'P'#10'TextHeight'#2#13#18'HorzScrollBar.Page'#3
-  +#146#1#18'VertScrollBar.Page'#3'b'#1#4'Left'#3#148#1#6'Height'#3'c'#1#3'Top'
-  +#3#175#0#5'Width'#3#147#1#0#6'TPanel'#8'qtoption'#22'BorderSpacing.OnChange'
-  +#13#12'ClientHeight'#2'n'#11'ClientWidth'#3'o'#1#11'FullRepaint'#8#8'TabOrde'
-  +'r'#2#0#4'Left'#2#18#6'Height'#2'n'#3'Top'#2'S'#5'Width'#3'o'#1#0#6'TLabel'
-  +#13'qtprintername'#22'BorderSpacing.OnChange'#13#7'Caption'#6#16'           '
-  +'     '#5'Color'#7#6'clNone'#4'Left'#3#197#0#6'Height'#2#13#3'Top'#2'1'#5'Wi'
-  +'dth'#2'0'#0#0#6'TLabel'#12'qtprintresol'#22'BorderSpacing.OnChange'#13#7'Ca'
-  +'ption'#6#19'                   '#5'Color'#7#6'clNone'#4'Left'#3#197#0#6'Hei'
-  +'ght'#2#13#3'Top'#2'G'#5'Width'#2'9'#0#0#6'TLabel'#6'Label2'#22'BorderSpacin'
-  +'g.OnChange'#13#7'Caption'#6#8'Printer:'#5'Color'#7#6'clNone'#4'Left'#2'x'#6
-  +'Height'#2#13#3'Top'#2'1'#5'Width'#2'!'#0#0#6'TLabel'#6'Label3'#22'BorderSpa'
-  +'cing.OnChange'#13#7'Caption'#6#11'Resolution:'#5'Color'#7#6'clNone'#4'Left'
-  +#2'x'#6'Height'#2#13#3'Top'#2'G'#5'Width'#2'5'#0#0#6'TLabel'#6'Label7'#22'Bo'
-  +'rderSpacing.OnChange'#13#7'Caption'#6'6Select the Windows printer and optio'
-  +'ns you want to use'#5'Color'#7#6'clNone'#4'Left'#2#16#6'Height'#2#13#3'Top'
-  +#2#16#5'Width'#3#7#1#0#0#7'TButton'#7'qtsetup'#22'BorderSpacing.OnChange'#13
-  +#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#13'Printer Setup'#7'OnClick'
-  +#7#12'qtsetupClick'#8'TabOrder'#2#0#4'Left'#2#12#6'Height'#2#25#3'Top'#2':'#5
-  +'Width'#2'U'#0#0#0#6'TPanel'#12'customoption'#22'BorderSpacing.OnChange'#13
-  +#12'ClientHeight'#2'n'#11'ClientWidth'#3'o'#1#11'FullRepaint'#8#8'TabOrder'#2
-  +#2#4'Left'#2#18#6'Height'#2'n'#3'Top'#2'S'#5'Width'#3'o'#1#0#6'TLabel'#6'Lab'
-  +'el1'#22'BorderSpacing.OnChange'#13#7'Caption'#6#17'Raster Resolution'#5'Col'
-  +'or'#7#6'clNone'#4'Left'#3#209#0#6'Height'#2#13#3'Top'#2#4#5'Width'#2'T'#0#0
-  +#6'TLabel'#6'Label4'#22'BorderSpacing.OnChange'#13#7'Caption'#6'#Command to '
-  +'use to process the file.'#5'Color'#7#6'clNone'#4'Left'#2#8#6'Height'#2#13#3
-  +'Top'#2'>'#5'Width'#3#168#0#0#0#6'TLabel'#6'Label5'#22'BorderSpacing.OnChang'
-  +'e'#13#7'Caption'#6#20'dpi for 8"x11" paper'#5'Color'#7#6'clNone'#4'Left'#3#0
-  +#1#6'Height'#2#13#3'Top'#2#28#5'Width'#2'_'#0#0#6'TLabel'#6'Label6'#22'Borde'
-  +'rSpacing.OnChange'#13#7'Caption'#6#23'Path to save the file :'#5'Color'#7#6
-  +'clNone'#4'Left'#2#9#6'Height'#2#13#3'Top'#2#4#5'Width'#2'd'#0#0#9'TLongEdit'
-  +#6'prtres'#5'Value'#2'K'#8'MaxValue'#3'X'#2#11'BorderStyle'#7#8'bsSingle'#6
-  +'Height'#2#22#4'Hint'#6#6'0..600'#4'Left'#3#208#0#4'Name'#6#6'prtres'#14'Par'
-  +'entShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#3'Top'#2#23#5'Width'#2')'#8'On'
-  +'Change'#7#12'prtresChange'#4'Left'#3#208#0#6'Height'#2#22#4'Hint'#6#6'0..60'
-  +'0'#3'Top'#2#23#5'Width'#2')'#0#0#5'TEdit'#9'cmdreport'#22'BorderSpacing.OnC'
-  +'hange'#13#5'Color'#7#9'clBtnFace'#8'ReadOnly'#9#8'TabOrder'#2#1#4'Left'#2#8
-  +#6'Height'#2#21#3'Top'#2'T'#5'Width'#3'Y'#1#0#0#5'TEdit'#8'savepath'#22'Bord'
-  +'erSpacing.OnChange'#13#8'OnChange'#7#14'savepathChange'#8'TabOrder'#2#2#4'T'
-  +'ext'#6#8'savepath'#4'Left'#2#8#6'Height'#2#21#3'Top'#2#24#5'Width'#3#161#0#0
-  +#0#5'TEdit'#8'printcmd'#22'BorderSpacing.OnChange'#13#8'OnChange'#7#14'print'
-  +'cmdChange'#8'TabOrder'#2#3#4'Text'#6#8'printcmd'#4'Left'#3#208#0#6'Height'#2
-  +#21#3'Top'#2':'#5'Width'#2'y'#0#0#7'TBitBtn'#11'savepathsel'#22'BorderSpacin'
-  +'g.OnChange'#13#25'BorderSpacing.InnerBorder'#2#2#10'Glyph.Data'#10#190#1#0#0
+  'TPF0'#13'Tf_printsetup'#12'f_printsetup'#4'Left'#3#148#1#6'Height'#3'c'#1#3
+  +'Top'#3#175#0#5'Width'#3#147#1#18'HorzScrollBar.Page'#3#146#1#18'VertScrollB'
+  +'ar.Page'#3'b'#1#13'ActiveControl'#7#7'qtsetup'#11'BorderStyle'#7#13'bsSizeT'
+  +'oolWin'#7'Caption'#6#12'f_printsetup'#12'ClientHeight'#3'c'#1#11'ClientWidt'
+  +'h'#3#147#1#11'Font.Height'#2#245#9'Font.Name'#6#13'MS Sans Serif'#6'OnShow'
+  +#7#8'FormShow'#13'PixelsPerInch'#2'P'#10'TextHeight'#2#13#0#6'TPanel'#8'qtop'
+  +'tion'#4'Left'#2#18#6'Height'#2'n'#3'Top'#2'S'#5'Width'#3'o'#1#12'ClientHeig'
+  +'ht'#2'n'#11'ClientWidth'#3'o'#1#11'FullRepaint'#8#8'TabOrder'#2#0#0#6'TLabe'
+  +'l'#13'qtprintername'#4'Left'#3#197#0#6'Height'#2#13#3'Top'#2'1'#5'Width'#2
+  +'A'#7'Caption'#6#16'                '#5'Color'#7#6'clNone'#11'ParentColor'#8
+  +#0#0#6'TLabel'#12'qtprintresol'#4'Left'#3#197#0#6'Height'#2#13#3'Top'#2'G'#5
+  +'Width'#2'M'#7'Caption'#6#19'                   '#5'Color'#7#6'clNone'#11'Pa'
+  +'rentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2'x'#6'Height'#2#13#3'Top'#2'1'
+  +#5'Width'#2'('#7'Caption'#6#8'Printer:'#5'Color'#7#6'clNone'#11'ParentColor'
+  +#8#0#0#6'TLabel'#6'Label3'#4'Left'#2'x'#6'Height'#2#13#3'Top'#2'G'#5'Width'#2
+  +'>'#7'Caption'#6#11'Resolution:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6
+  +'TLabel'#6'Label7'#4'Left'#2#16#6'Height'#2#13#3'Top'#2#16#5'Width'#3'8'#1#7
+  +'Caption'#6'6Select the Windows printer and options you want to use'#5'Color'
+  +#7#6'clNone'#11'ParentColor'#8#0#0#7'TButton'#7'qtsetup'#4'Left'#2#12#6'Heig'
+  +'ht'#2#25#3'Top'#2':'#5'Width'#2'U'#25'BorderSpacing.InnerBorder'#2#2#7'Capt'
+  +'ion'#6#13'Printer Setup'#7'OnClick'#7#12'qtsetupClick'#8'TabOrder'#2#0#0#0#0
+  +#6'TPanel'#12'customoption'#4'Left'#2#18#6'Height'#2'n'#3'Top'#2'S'#5'Width'
+  +#3'o'#1#12'ClientHeight'#2'n'#11'ClientWidth'#3'o'#1#11'FullRepaint'#8#8'Tab'
+  +'Order'#2#2#0#6'TLabel'#6'Label1'#4'Left'#3#209#0#6'Height'#2#13#3'Top'#2#4#5
+  +'Width'#2'b'#7'Caption'#6#17'Raster Resolution'#5'Color'#7#6'clNone'#11'Pare'
+  +'ntColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#2#8#6'Height'#2#13#3'Top'#2'>'#5
+  +'Width'#3#200#0#7'Caption'#6'#Command to use to process the file.'#5'Color'#7
+  +#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'Label5'#4'Left'#3#0#1#6'Height'
+  +#2#13#3'Top'#2#28#5'Width'#2'q'#7'Caption'#6#20'dpi for 8"x11" paper'#5'Colo'
+  +'r'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'Label6'#4'Left'#2#9#6'Heig'
+  +'ht'#2#13#3'Top'#2#4#5'Width'#2'w'#7'Caption'#6#23'Path to save the file :'#5
+  +'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TLongEdit'#6'prtres'#4'Name'#6#6
+  +'prtres'#4'Left'#3#208#0#6'Height'#2#22#4'Hint'#6#6'0..600'#3'Top'#2#23#5'Wi'
+  +'dth'#2')'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'
+  +#8#8'ShowHint'#9#8'TabOrder'#2#0#8'OnChange'#7#12'prtresChange'#5'Value'#2'K'
+  +#8'MaxValue'#3'X'#2#0#0#5'TEdit'#9'cmdreport'#4'Left'#2#8#6'Height'#2#21#3'T'
+  +'op'#2'T'#5'Width'#3'Y'#1#5'Color'#7#9'clBtnFace'#8'ReadOnly'#9#8'TabOrder'#2
+  +#1#0#0#5'TEdit'#8'savepath'#4'Left'#2#8#6'Height'#2#21#3'Top'#2#24#5'Width'#3
+  +#161#0#8'OnChange'#7#14'savepathChange'#8'TabOrder'#2#2#4'Text'#6#8'savepath'
+  +#0#0#5'TEdit'#8'printcmd'#4'Left'#3#208#0#6'Height'#2#21#3'Top'#2':'#5'Width'
+  +#2'y'#8'OnChange'#7#14'printcmdChange'#8'TabOrder'#2#3#4'Text'#6#8'printcmd'
+  +#0#0#7'TBitBtn'#11'savepathsel'#4'Left'#3#168#0#6'Height'#2#26#3'Top'#2#21#5
+  +'Width'#2#26#25'BorderSpacing.InnerBorder'#2#2#10'Glyph.Data'#10#190#1#0#0
   +#186#1#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"16 16 5 1",'#10'". '
   +'c None",'#10'", c #7F7F7F",'#10'"- c #FFFF00",'#10'"* c #FFFFFF",'#10'"a c '
   +'#000000",'#10'"................",'#10'"................",'#10'"............'
@@ -55,40 +51,53 @@ LazarusResources.Add('Tf_printsetup','FORMDATA',[
   +'.",'#10'"..,,,,,,,,,,a...",'#10'"..,*********,a..",'#10'"..,*-.-.-.-.,a..",'
   +#10'"..,*.-.-.-.-,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10
   +'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaaaa...",'#10'"................",'#10'"..'
-  +'.............."}'#10#6'Layout'#7#10'blGlyphTop'#6'Margin'#2#0#7'OnClick'#7
-  +#16'savepathselClick'#8'TabOrder'#2#4#7'TabStop'#8#4'Left'#3#168#0#6'Height'
-  +#2#26#3'Top'#2#21#5'Width'#2#26#0#0#7'TBitBtn'#11'printcmdsel'#22'BorderSpac'
-  +'ing.OnChange'#13#25'BorderSpacing.InnerBorder'#2#2#10'Glyph.Data'#10#190#1#0
-  +#0#186#1#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"16 16 5 1",'#10'"'
-  +'. c None",'#10'", c #7F7F7F",'#10'"- c #FFFF00",'#10'"* c #FFFFFF",'#10'"a '
-  +'c #000000",'#10'"................",'#10'"................",'#10'"..........'
-  +'......",'#10'"................",'#10'"...,,,,.........",'#10'"..,-*-*,.....'
-  +'...",'#10'"..,,,,,,,,,,a...",'#10'"..,*********,a..",'#10'"..,*-.-.-.-.,a..'
-  +'",'#10'"..,*.-.-.-.-,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'
-  ,#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaaaa...",'#10'"................",'#10
-  +'"................"}'#10#6'Layout'#7#10'blGlyphTop'#6'Margin'#2#0#7'OnClick'
-  +#7#16'printcmdselClick'#8'TabOrder'#2#5#7'TabStop'#8#4'Left'#3'H'#1#6'Height'
-  +#2#26#3'Top'#2'7'#5'Width'#2#26#0#0#0#11'TRadioGroup'#9'printmode'#22'Border'
-  +'Spacing.OnChange'#13#7'Caption'#6#12'Print method'#7'Columns'#2#3#13'Items.'
-  +'Strings'#1#6#15'Windows Printer'#6#10'Postscript'#6#11'Bitmap File'#0#7'OnC'
-  +'lick'#7#14'printmodeClick'#11'ParentColor'#9#4'Left'#2#18#6'Height'#2'='#3
-  +'Top'#2#12#5'Width'#3'o'#1#0#0#7'TButton'#2'Ok'#22'BorderSpacing.OnChange'#13
-  +#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#2'Ok'#11'ModalResult'#2#1#8
-  +'TabOrder'#2#3#4'Left'#2'n'#6'Height'#2#25#3'Top'#3'&'#1#5'Width'#2'K'#0#0#7
-  +'TButton'#6'Cancel'#22'BorderSpacing.OnChange'#13#25'BorderSpacing.InnerBord'
-  +'er'#2#2#7'Caption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#4#4'Left'#3
-  +#228#0#6'Height'#2#25#3'Top'#3'&'#1#5'Width'#2'K'#0#0#11'TRadioGroup'#8'prtc'
-  +'olor'#22'BorderSpacing.OnChange'#13#7'Caption'#6#5'Color'#9'ItemIndex'#2#0
-  +#13'Items.Strings'#1#6#16'Color, Line mode'#6#22'Black/White, Line mode'#6' '
-  +'As on screen (black background!)'#0#7'OnClick'#7#13'prtcolorClick'#11'Paren'
-  +'tColor'#9#4'Left'#2#18#6'Height'#2'R'#3'Top'#3#199#0#5'Width'#3#207#0#0#0#11
-  +'TRadioGroup'#9'prtorient'#22'BorderSpacing.OnChange'#13#7'Caption'#6#11'Ori'
-  +'entation'#13'Items.Strings'#1#6#8'Portrait'#6#9'Landscape'#0#7'OnClick'#7#14
-  +'prtorientClick'#11'ParentColor'#9#4'Left'#3#240#0#6'Height'#2'R'#3'Top'#3
-  +#199#0#5'Width'#3#149#0#0#0#12'TPrintDialog'#12'PrintDialog1'#4'left'#3'x'#1
-  +#0#0#11'TOpenDialog'#11'OpenDialog1'#5'Title'#6#18'Open existing file'#11'Fi'
-  +'lterIndex'#2#0#5'Title'#6#18'Open existing file'#4'left'#3'x'#1#3'top'#2'@'
-  +#0#0#22'TSelectDirectoryDialog'#22'SelectDirectoryDialog1'#5'Title'#6#16'Sel'
-  +'ect Directory'#11'FilterIndex'#2#0#5'Title'#6#16'Select Directory'#4'left'#3
+  +'.............."}'#10#6'Layout'#7#10'blGlyphTop'#6'Margin'#2#0#9'NumGlyphs'#2
+  +#0#7'OnClick'#7#16'savepathselClick'#8'TabOrder'#2#4#7'TabStop'#8#0#0#7'TBit'
+  +'Btn'#11'printcmdsel'#4'Left'#3'H'#1#6'Height'#2#26#3'Top'#2'7'#5'Width'#2#26
+  +#25'BorderSpacing.InnerBorder'#2#2#10'Glyph.Data'#10#190#1#0#0#186#1#0#0'/* '
+  +'XPM */'#10'static char *graphic[] = {'#10'"16 16 5 1",'#10'". c None",'#10
+  +'", c #7F7F7F",'#10'"- c #FFFF00",'#10'"* c #FFFFFF",'#10'"a c #000000",'#10
+  +'"................",'#10'"................",'#10'"................",'#10'"..'
+  +'..............",'#10'"...,,,,.........",'#10'"..,-*-*,........",'#10'"..,,,'
+  +',,,,,,,a...",'#10'"..,*********,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-'
+  +'.-.-,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,,,,,,,,,'
+  +',,a..",'#10'"..aaaaaaaaaaa...",'#10'"................",'#10'"..............'
+  +'.."}'#10#6'Layout'#7#10'blGlyphTop'#6'Margin'#2#0#9'NumGlyphs'#2#0#7'OnClic'
+  +'k'#7#16'printcmdselClick'#8'TabOrder'#2#5#7'TabStop'#8#0#0#0#11'TRadioGroup'
+  +#9'printmode'#4'Left'#2#18#6'Height'#2'='#3'Top'#2#12#5'Width'#3'o'#1#8'Auto'
+  ,'Fill'#9#7'Caption'#6#12'Print method'#28'ChildSizing.LeftRightSpacing'#2#6
+  +#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24
+  +'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenou'
+  +'sChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'Chil'
+  +'dSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cc'
+  +'lLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#3#7'Columns'
+  +#2#3#13'Items.Strings'#1#6#15'Windows Printer'#6#10'Postscript'#6#11'Bitmap '
+  +'File'#0#7'OnClick'#7#14'printmodeClick'#8'TabOrder'#2#1#0#0#7'TButton'#2'Ok'
+  +#4'Left'#2'n'#6'Height'#2#25#3'Top'#3'&'#1#5'Width'#2'K'#25'BorderSpacing.In'
+  +'nerBorder'#2#2#7'Caption'#6#2'Ok'#11'ModalResult'#2#1#8'TabOrder'#2#3#0#0#7
+  +'TButton'#6'Cancel'#4'Left'#3#228#0#6'Height'#2#25#3'Top'#3'&'#1#5'Width'#2
+  +'K'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#6'Cancel'#11'ModalResult'
+  +#2#2#8'TabOrder'#2#4#0#0#11'TRadioGroup'#8'prtcolor'#4'Left'#2#18#6'Height'#2
+  +'R'#3'Top'#3#199#0#5'Width'#3#207#0#8'AutoFill'#9#7'Caption'#6#5'Color'#28'C'
+  +'hildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'Ch'
+  +'ildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.'
+  +'EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizo'
+  +'ntal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChil'
+  +'ds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizi'
+  +'ng.ControlsPerLine'#2#1#9'ItemIndex'#2#0#13'Items.Strings'#1#6#16'Color, Li'
+  +'ne mode'#6#22'Black/White, Line mode'#6' As on screen (black background!)'#0
+  +#7'OnClick'#7#13'prtcolorClick'#8'TabOrder'#2#5#0#0#11'TRadioGroup'#9'prtori'
+  +'ent'#4'Left'#3#240#0#6'Height'#2'R'#3'Top'#3#199#0#5'Width'#3#149#0#8'AutoF'
+  +'ill'#9#7'Caption'#6#11'Orientation'#28'ChildSizing.LeftRightSpacing'#2#6#28
+  +'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'cr'
+  +'sHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousC'
+  +'hildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildS'
+  +'izing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclL'
+  +'eftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#1#13'Items.Str'
+  +'ings'#1#6#8'Portrait'#6#9'Landscape'#0#7'OnClick'#7#14'prtorientClick'#8'Ta'
+  +'bOrder'#2#6#0#0#12'TPrintDialog'#12'PrintDialog1'#4'left'#3'x'#1#0#0#11'TOp'
+  +'enDialog'#11'OpenDialog1'#5'Title'#6#18'Open existing file'#11'FilterIndex'
+  +#2#0#4'left'#3'x'#1#3'top'#2'@'#0#0#22'TSelectDirectoryDialog'#22'SelectDire'
+  +'ctoryDialog1'#5'Title'#6#16'Select Directory'#11'FilterIndex'#2#0#4'left'#3
   +'H'#1#3'top'#2' '#0#0#0
 ]);

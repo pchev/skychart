@@ -1,6 +1,6 @@
 unit pu_search;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2005 Patrick Chevalley
@@ -33,6 +33,9 @@ uses u_constant, u_util,
   Dialogs, StdCtrls, ExtCtrls, Buttons, LResources;
 
 type
+
+  { Tf_search }
+
   Tf_search = class(TForm)
     RadioGroup1: TRadioGroup;
     IDPanel: TPanel;
@@ -88,6 +91,7 @@ type
     ConstPanel: TPanel;
     Label5: TLabel;
     ConstBox: TComboBox;
+    procedure FormCreate(Sender: TObject);
     procedure NumButtonClick(Sender: TObject);
     procedure SpeedButton11Click(Sender: TObject);
     procedure SpeedButton13Click(Sender: TObject);
@@ -107,6 +111,7 @@ type
     NebNameAR : array of single;
     NebNameDE : array of single;
     numNebName : integer;
+    Fnightvision:boolean;
   public
     { Public declarations }
     Num : string;
@@ -123,7 +128,12 @@ implementation
 
 procedure Tf_search.FormShow(Sender: TObject);
 begin
-
+{$ifdef WIN32}
+if Fnightvision<>nightvision then begin
+   SetFormNightVision(self,nightvision);
+   Fnightvision:=nightvision;
+end;
+{$endif}
 end;
 
 procedure Tf_search.CatButtonClick(Sender: TObject);
@@ -141,6 +151,12 @@ with sender as TspeedButton do begin
 end;
 Id.SelStart:=length(Id.Text);
 end;
+
+procedure Tf_search.FormCreate(Sender: TObject);
+begin
+  Fnightvision:=false;
+end;
+
 
 procedure Tf_search.SpeedButton11Click(Sender: TObject);
 var buf : string;

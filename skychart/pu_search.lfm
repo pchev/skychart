@@ -1,7 +1,7 @@
 object f_search: Tf_search
-  Left = 337
+  Left = 435
   Height = 326
-  Top = 118
+  Top = 113
   Width = 433
   HorzScrollBar.Page = 432
   VertScrollBar.Page = 325
@@ -12,8 +12,9 @@ object f_search: Tf_search
   ClientWidth = 433
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object PlanetPanel: TPanel
     Left = 7
@@ -24,11 +25,12 @@ object f_search: Tf_search
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 3
+    Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 39
+      Width = 34
       Caption = 'Planet '
       Color = clNone
       ParentColor = False
@@ -53,11 +55,12 @@ object f_search: Tf_search
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 4
+    Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 41
+      Width = 34
       Caption = 'Nebula'
       Color = clNone
       ParentColor = False
@@ -82,11 +85,12 @@ object f_search: Tf_search
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 5
+    Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 23
+      Width = 21
       Caption = 'Star'
       Color = clNone
       ParentColor = False
@@ -111,11 +115,12 @@ object f_search: Tf_search
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 7
+    Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 72
+      Width = 63
       Caption = 'Constellation'
       Color = clNone
       ParentColor = False
@@ -142,9 +147,9 @@ object f_search: Tf_search
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 73
+      Width = 63
       Caption = 'Object Name'
       Color = clNone
       ParentColor = False
@@ -158,6 +163,7 @@ object f_search: Tf_search
       ClientWidth = 73
       FullRepaint = False
       TabOrder = 5
+      Visible = False
       object SpeedButton30: TSpeedButton
         Height = 18
         Top = 2
@@ -185,6 +191,7 @@ object f_search: Tf_search
       ClientWidth = 73
       FullRepaint = False
       TabOrder = 4
+      Visible = False
       object SpeedButton21: TSpeedButton
         Height = 18
         Top = 2
@@ -256,6 +263,7 @@ object f_search: Tf_search
       ClientWidth = 73
       FullRepaint = False
       TabOrder = 3
+      Visible = False
       object SpeedButton19: TSpeedButton
         Height = 18
         Top = 2
@@ -495,6 +503,7 @@ object f_search: Tf_search
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
     Columns = 2
+    ItemIndex = 0
     Items.Strings = (
       'Nebulae'
       'Nebula Common Name'

@@ -1,5 +1,5 @@
 object f_detail: Tf_detail
-  Left = 521
+  Left = 525
   Height = 391
   Top = 108
   Width = 398
@@ -144,7 +144,7 @@ object f_detail: Tf_detail
     32FF500032FF500032FF6E6E6EFF3E3E3EFF6E6E6EFF3E3E3EFF323232FF4A4A
     4AFF6E6E6EFF868686FF9E9E9EFFA4A0A0FFA4A0A0FFA4A0A0FF
   }
-  PixelsPerInch = 106
+  PixelsPerInch = 80
   TextHeight = 16
   object Panel1: TPanel
     Height = 50
@@ -191,8 +191,8 @@ object f_detail: Tf_detail
     Top = 50
     Width = 398
     Align = alClient
-    FixedTypeface = 'default'
-    DefaultTypeFace = 'default'
+    FixedTypeface = 'fixed'
+    DefaultTypeFace = 'sans'
     PopupMenu = PopupMenu1
     PrintSettings.MarginLeft = 0.5
     PrintSettings.MarginTop = 0.5

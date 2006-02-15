@@ -1,6 +1,6 @@
 unit pu_chart;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2002 Patrick Chevalley
@@ -1244,7 +1244,8 @@ end;
 begin
 desc:=sc.cfgsc.FindDesc;
 // header
-txt:=html_h;
+if NightVision then txt:=html_h_nv
+               else txt:=html_h;
 // object type
 p:=pos(tab,desc);
 p:=pos2(tab,desc,p+1);
@@ -1308,8 +1309,8 @@ txt:=txt+html_b+'Galactic '+htms_b+' L: '+detostr(rad2deg*a)+'   B:'+detostr(rad
 txt:=txt+htms_f+html_br;
 // local position
 txt:=txt+html_b+sc.catalog.cfgshr.llabel[103]+':'+htms_b+html_br;
-txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( UT + '+ArmtoStr(sc.cfgsc.TimeZone)+' )';
-txt:=txt+html_pre;
+txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( UT + '+ArmtoStr(sc.cfgsc.TimeZone)+' )'+html_br;
+//txt:=txt+html_pre;
 djd(sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24,y,m,d,h);
 txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[102]+blank15,1,17)+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h)+html_br;
 ra:=sc.cfgsc.FindRA;
@@ -1352,7 +1353,7 @@ else begin
     txt:=txt+sc.catalog.cfgshr.llabel[97]+html_br;
     end;
 end;
-txt:=txt+htms_pre;
+//txt:=txt+htms_pre;
 // other notes
 buf:=sc.cfgsc.FindNote;
 txt:=txt+html_pre;

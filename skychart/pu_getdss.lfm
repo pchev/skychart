@@ -15,13 +15,13 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 80
   TextHeight = 13
   object Label1: TLabel
     Left = 12
-    Height = 14
+    Height = 11
     Top = 8
-    Width = 49
+    Width = 43
     Caption = 'Label1'
     Color = clNone
     Font.CharSet = ANSI_CHARSET
@@ -42,6 +42,7 @@ object f_getdss: Tf_getdss
     IntegralHeight = True
     ItemHeight = 18
     TabOrder = 0
+    TopIndex = -1
   end
   object BitBtn1: TBitBtn
     Left = 104

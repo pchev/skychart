@@ -1,6 +1,6 @@
 unit pu_printsetup;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2004 Patrick Chevalley

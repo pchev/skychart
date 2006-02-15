@@ -1,6 +1,6 @@
 unit pu_config_pictures;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2005 Patrick Chevalley

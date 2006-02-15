@@ -1,6 +1,6 @@
 unit pu_info;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2003 Patrick Chevalley
@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_constant, u_util,
-  SysUtils, Types, Classes, Controls, Forms, Printers,
+  SysUtils, Types, Classes, Controls, Forms, Printers, Graphics,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList,
   LResources, Buttons, SynEdit;
 
@@ -75,6 +75,7 @@ type
     procedure closeconnectionClick(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
     procedure EditSelectAll1Execute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure Memo1DblClick(Sender: TObject);
     procedure StringGrid1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -95,6 +96,7 @@ type
     FPrintSetup: TNotifyEvent;
     Fdetailinfo: Tdetinfo;
     RowClick,ColClick :integer;
+    Fnightvision:boolean;
   public
     { Public declarations }
     source_chart:string;
@@ -159,6 +161,11 @@ begin
  memo1.SelectAll;
 end;
 
+procedure Tf_info.FormCreate(Sender: TObject);
+begin
+ Fnightvision:=false
+end;
+
 procedure Tf_info.Memo1DblClick(Sender: TObject);
  var linnum,p : integer;
     ra,dec : double;
@@ -182,7 +189,15 @@ end;
 end;
 
 procedure Tf_info.FormShow(Sender: TObject);
+var
+  i: Integer;
 begin
+{$ifdef WIN32}
+if Fnightvision<>nightvision then begin
+   SetFormNightVision(self,nightvision);
+   Fnightvision:=nightvision;
+end;
+{$endif}
 case Pagecontrol1.ActivepageIndex of
 0: begin
    panel1.visible:=true;
@@ -191,6 +206,7 @@ case Pagecontrol1.ActivepageIndex of
    end;
 1: begin
    panel1.visible:=true;
+   for i:=memo1.Lines.Count to memo1.LinesInWindow do memo1.Lines.Add(' ');
    memo1.setfocus;
    memo1.SelStart:=0;
    memo1.SelEnd:=0;
@@ -208,6 +224,7 @@ begin
 Pagecontrol1.ActivepageIndex:=n;
 for i:=0 to Pagecontrol1.pagecount-1 do begin
   Pagecontrol1.pages[i].tabvisible:=(i=n);
+  Pagecontrol1.pages[i].Visible:=(i=n);
 end;
 end;
 
