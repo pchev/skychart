@@ -1,6 +1,6 @@
 unit pu_getdss;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2005 Patrick Chevalley

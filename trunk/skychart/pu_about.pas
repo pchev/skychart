@@ -1,6 +1,6 @@
 unit pu_about;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2002 Patrick Chevalley

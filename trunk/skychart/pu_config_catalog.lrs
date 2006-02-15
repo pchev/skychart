@@ -5,15 +5,15 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +#16#2#3'Top'#3#158#0#5'Width'#3#14#2#18'HorzScrollBar.Page'#3#13#2#18'VertSc'
   +'rollBar.Page'#3#15#2#13'ActiveControl'#7#6'addcat'#7'Caption'#6#16'f_config'
   +'_catalog'#12'ClientHeight'#3#16#2#11'ClientWidth'#3#14#2#8'OnCreate'#7#10'F'
-  +'ormCreate'#6'OnShow'#7#8'FormShow'#13'PixelsPerInch'#2'j'#0#6'TPanel'#9'Mai'
+  +'ormCreate'#6'OnShow'#7#8'FormShow'#13'PixelsPerInch'#2'P'#0#6'TPanel'#9'Mai'
   +'nPanel'#4'Left'#2#8#6'Height'#3#224#1#3'Top'#2#8#5'Width'#3#244#1#12'Client'
   +'Height'#3#224#1#11'ClientWidth'#3#244#1#11'ParentColor'#8#8'TabOrder'#2#0#0
   +#15'TWizardNotebook'#15'WizardNotebook1'#4'Left'#2#1#6'Height'#3#222#1#3'Top'
   +#2#1#5'Width'#3#242#1#5'Align'#7#8'alClient'#9'PageIndex'#2#0#8'ShowTabs'#8#0
-  +#5'TPage'#5'Page1'#7'Caption'#6#5'Page1'#11'ClientWidth'#3#234#1#12'ClientHe'
-  +'ight'#3#214#1#0#6'TLabel'#6'Label1'#6'Height'#2#16#5'Width'#3#130#0#7'Capti'
+  +#5'TPage'#5'Page1'#7'Caption'#6#5'Page1'#11'ClientWidth'#3#242#1#12'ClientHe'
+  +'ight'#3#222#1#0#6'TLabel'#6'Label1'#6'Height'#2#13#5'Width'#3#134#0#7'Capti'
   +'on'#6#23'Generic Catalog Setting'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0
-  +#6'TLabel'#7'Label37'#4'Left'#2#4#6'Height'#2#16#3'Top'#2#28#5'Width'#3'^'#1
+  +#6'TLabel'#7'Label37'#4'Left'#2#4#6'Height'#2#13#3'Top'#2#28#5'Width'#3'j'#1
   +#7'Caption'#6'<Stars and Nebulae catalogs prepared with the CATGEN software'
   +#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#7'TBitBtn'#6'addcat'#4'Left'#3
   +#144#0#6'Height'#2#25#3'Top'#3'x'#1#5'Width'#2'K'#25'BorderSpacing.InnerBord'
@@ -31,7 +31,7 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'Up'#7#18'StringGrid3MouseUp'#12'OnSelectCell'#7#21'StringGrid3SelectCell'#13
   +'OnSetEditText'#7#22'StringGrid3SetEditText'#9'ColWidths'#1#2#18#2'6'#2'6'#2
   +'6'#3#4#1#2#18#0#0#0#0#5'TPage'#5'Page2'#7'Caption'#6#5'Page2'#11'ClientWidt'
-  +'h'#3#234#1#12'ClientHeight'#3#214#1#0#6'TLabel'#6'Label2'#6'Height'#2#13#5
+  +'h'#3#242#1#12'ClientHeight'#3#222#1#0#6'TLabel'#6'Label2'#6'Height'#2#13#5
   +'Width'#3#149#0#7'Caption'#6#25'CDC Stars Catalog Setting'#5'Color'#7#6'clNo'
   +'ne'#11'ParentColor'#8#0#0#6'TLabel'#7'Label65'#4'Left'#2'H'#6'Height'#2#13#3
   +'Top'#2'&'#5'Width'#2#17#7'Caption'#6#2'pm'#5'Color'#7#6'clNone'#11'ParentCo'
@@ -331,8 +331,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'gton Visual Double Star Catalog    (USNO, 2000)'#3'Top'#3#30#1#5'Width'#3
   +#168#0#11'HelpContext'#2'j'#7'Caption'#6#22'Washington Double Star'#7'OnClic'
   +'k'#7#11'WDSboxClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2'8'#0#0
-  +#0#5'TPage'#5'Page3'#7'Caption'#6#5'Page3'#11'ClientWidth'#3#234#1#12'Client'
-  +'Height'#3#214#1#0#6'TBevel'#6'Bevel5'#4'Name'#6#6'Bevel5'#4'Left'#2#1#6'Hei'
+  +#0#5'TPage'#5'Page3'#7'Caption'#6#5'Page3'#11'ClientWidth'#3#242#1#12'Client'
+  +'Height'#3#222#1#0#6'TBevel'#6'Bevel5'#4'Name'#6#6'Bevel5'#4'Left'#2#1#6'Hei'
   +'ght'#3#233#0#3'Top'#3#136#0#5'Width'#3#233#1#5'Style'#7#8'bsRaised'#0#0#6'T'
   +'Bevel'#6'Bevel3'#4'Name'#6#6'Bevel3'#4'Left'#2#2#6'Height'#2')'#3'Top'#2'('
   +#5'Width'#3#229#1#5'Style'#7#8'bsRaised'#0#0#6'TBevel'#6'Bevel4'#4'Name'#6#6
@@ -562,8 +562,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'-.-.-.-,a..",'#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaaaa...",'#10'"........'
   +'........",'#10'"................"}'#10#6'Margin'#2#0#9'NumGlyphs'#2#0#7'OnC'
   +'lick'#7#18'CDCNebSelPathClick'#8'TabOrder'#2''''#7'TabStop'#8#0#0#0#5'TPage'
-  +#5'Page4'#7'Caption'#6#5'Page4'#11'ClientWidth'#3#234#1#12'ClientHeight'#3
-  +#214#1#0#6'TLabel'#7'Label88'#6'Height'#2#13#5'Width'#3#28#1#7'Caption'#6'1C'
+  +#5'Page4'#7'Caption'#6#5'Page4'#11'ClientWidth'#3#242#1#12'ClientHeight'#3
+  +#222#1#0#6'TLabel'#7'Label88'#6'Height'#2#13#5'Width'#3#28#1#7'Caption'#6'1C'
   +'DC Obsolete Catalog (but you can still use them)'#5'Color'#7#6'clNone'#11'P'
   +'arentColor'#8#0#0#6'TLabel'#7'Label67'#4'Left'#2'H'#6'Height'#2#13#3'Top'#2
   +''''#5'Width'#2#17#7'Caption'#6#2'pm'#5'Color'#7#6'clNone'#11'ParentColor'#8
@@ -676,7 +676,7 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'aaaaaaaa...",'#10'"................",'#10'"................"}'#10#6'Margin'
   +#2#0#9'NumGlyphs'#2#0#7'OnClick'#7#19'CDCStarSelPathClick'#8'TabOrder'#2#19#7
   +'TabStop'#8#0#0#0#5'TPage'#5'Page5'#7'Caption'#6#5'Page5'#11'ClientWidth'#3
-  +#234#1#12'ClientHeight'#3#214#1#0#6'TLabel'#6'Label4'#6'Height'#2#13#5'Width'
+  +#242#1#12'ClientHeight'#3#222#1#0#6'TLabel'#6'Label4'#6'Height'#2#13#5'Width'
   +#3#135#0#7'Caption'#6#24'External Catalog Setting'#5'Color'#7#6'clNone'#11'P'
   +'arentColor'#8#0#0#6'TLabel'#7'Label52'#6'Height'#2#13#3'Top'#2#20#5'Width'#3
   +#155#0#7'Caption'#6#26'According to the magnitude'#5'Color'#7#6'clNone'#11'P'
@@ -691,8 +691,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +#0#7'Options'#11#15'goFixedVertLine'#15'goFixedHorzLine'#10'goVertLine'#10'g'
   +'oHorzLine'#13'goRangeSelect'#19'goDrawFocusSelected'#9'goEditing'#6'goTabs'
   +#0#8'RowCount'#2#20#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'#2#0#7'TabSto'
-  +'p'#9#7'Visible'#8#15'VisibleColCount'#2#1#15'VisibleRowCount'#2#1#9'ColWidt'
-  +'hs'#1#2#30#2'+'#2'k'#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('
+  +'p'#9#7'Visible'#8#15'VisibleColCount'#2#10#15'VisibleRowCount'#2#7#9'ColWid'
+  +'ths'#1#2#30#2'+'#2'k'#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('
   +#2'('#2'('#2'('#2'('#2'('#2'('#0#0#0#9'TCheckBox'#7'Cat1Box'#6'Height'#2#28#3
   +'Top'#2'&'#5'Width'#3#138#0#11'HelpContext'#2'k'#7'Caption'#6#18'Show this c'
   +'atalogs'#14'ParentShowHint'#8#8'TabOrder'#2#1#7'Visible'#8#0#0#5'TEdit'#5'E'
@@ -706,8 +706,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +#0#7'Options'#11#15'goFixedVertLine'#15'goFixedHorzLine'#10'goVertLine'#10'g'
   +'oHorzLine'#13'goRangeSelect'#19'goDrawFocusSelected'#9'goEditing'#6'goTabs'
   ,#0#8'RowCount'#2#20#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'#2#4#7'TabSto'
-  +'p'#9#7'Visible'#8#15'VisibleColCount'#2#1#15'VisibleRowCount'#2#1#9'ColWidt'
-  +'hs'#1#2#30#2'+'#2'k'#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('
+  +'p'#9#7'Visible'#8#15'VisibleColCount'#2#10#15'VisibleRowCount'#2#7#9'ColWid'
+  +'ths'#1#2#30#2'+'#2'k'#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('
   +#2'('#2'('#2'('#2'('#2'('#2'('#2'('#2'('#0#0#0#0#0#0#11'TOpenDialog'#11'Open'
   +'Dialog1'#5'Title'#6#18'Open existing file'#11'FilterIndex'#2#0#4'left'#3#240
   +#1#3'top'#2#24#0#0#22'TSelectDirectoryDialog'#22'SelectDirectoryDialog1'#5'T'

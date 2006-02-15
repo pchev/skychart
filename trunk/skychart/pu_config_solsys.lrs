@@ -144,8 +144,8 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +'ShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#4#0#0#5'TEdit'#5'Edit2'#4'Left'#3'/'
   +#1#6'Height'#2#21#3'Top'#2#17#5'Width'#2'd'#8'TabOrder'#2#5#7'Visible'#8#0#0
   +#9'TGroupBox'#10'XplanetBox'#4'Left'#2'('#6'Height'#2'A'#3'Top'#3#232#0#5'Wi'
-  +'dth'#3'I'#1#7'Caption'#6#13'Image Options'#12'ClientHeight'#2'0'#11'ClientW'
-  +'idth'#3'E'#1#8'TabOrder'#2#6#0#9'TCheckBox'#10'UseXplanet'#4'Left'#2#8#6'He'
+  +'dth'#3'I'#1#7'Caption'#6#13'Image Options'#12'ClientHeight'#2'A'#11'ClientW'
+  +'idth'#3'I'#1#8'TabOrder'#2#6#0#9'TCheckBox'#10'UseXplanet'#4'Left'#2#8#6'He'
   +'ight'#2#28#3'Top'#2#14#5'Width'#2'e'#7'Caption'#6#11'Use Xplanet'#7'OnClick'
   +#7#15'UseXplanetClick'#8'TabOrder'#2#0#0#0#5'TEdit'#10'XplanetDir'#4'Left'#2
   +'h'#6'Height'#2#21#3'Top'#2#14#5'Width'#3#177#0#8'OnChange'#7#16'XplanetDirC'
@@ -231,7 +231,7 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +#2#13#3'Top'#3#151#0#5'Width'#2'='#7'Caption'#6#9'Messages:'#5'Color'#7#6'cl'
   +'None'#11'ParentColor'#8#0#0#9'TGroupBox'#10'GroupBox16'#4'Left'#2#8#6'Heigh'
   +'t'#2'<'#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#27'Delete MPC data select'
-  +'ively'#12'ClientHeight'#2'+'#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#9'TC'
+  +'ively'#12'ClientHeight'#2'<'#11'ClientWidth'#3#185#1#8'TabOrder'#2#0#0#9'TC'
   +'omboBox'#11'comelemlist'#4'Left'#2#16#6'Height'#2#21#3'Top'#2#6#5'Width'#3
   +#25#1#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#10'ItemHeight'#2#13
   +#9'MaxLength'#2#0#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#7'TButto'
@@ -398,7 +398,7 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +'op'#3#184#0#5'Width'#2'='#7'Caption'#6#9'Messages:'#5'Color'#7#6'clNone'#11
   +'ParentColor'#8#0#0#9'TGroupBox'#10'GroupBox10'#4'Left'#2#8#6'Height'#2'<'#3
   +'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#27'Delete MPC data selectively'#12
-  +'ClientHeight'#2'+'#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#9'TComboBox'#11
+  +'ClientHeight'#2'<'#11'ClientWidth'#3#185#1#8'TabOrder'#2#0#0#9'TComboBox'#11
   +'astelemlist'#4'Left'#2#16#6'Height'#2#21#3'Top'#2#14#5'Width'#3#25#1#16'Aut'
   +'oCompleteText'#11#20'cbactSearchAscending'#0#9'MaxLength'#2#0#5'Style'#7#14
   +'csDropDownList'#8'TabOrder'#2#0#0#0#7'TButton'#6'delast'#4'Left'#3'H'#1#6'H'

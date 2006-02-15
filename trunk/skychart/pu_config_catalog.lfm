@@ -11,7 +11,7 @@ object f_config_catalog: Tf_config_catalog
   ClientWidth = 526
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 80
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -31,20 +31,20 @@ object f_config_catalog: Tf_config_catalog
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label1: TLabel
-          Height = 16
-          Width = 130
+          Height = 13
+          Width = 134
           Caption = 'Generic Catalog Setting'
           Color = clNone
           ParentColor = False
         end
         object Label37: TLabel
           Left = 4
-          Height = 16
+          Height = 13
           Top = 28
-          Width = 350
+          Width = 362
           Caption = 'Stars and Nebulae catalogs prepared with the CATGEN software'
           Color = clNone
           ParentColor = False
@@ -104,8 +104,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label2: TLabel
           Height = 13
           Width = 149
@@ -1182,8 +1182,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Bevel5: TBevel
           Name = 'Bevel5'
           Left = 1
@@ -2017,8 +2017,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label88: TLabel
           Height = 13
           Width = 284
@@ -2428,8 +2428,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page5: TPage
         Caption = 'Page5'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 498
+        ClientHeight = 478
         object Label4: TLabel
           Height = 13
           Width = 135
@@ -2482,8 +2482,8 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 0
           TabStop = True
           Visible = False
-          VisibleColCount = 1
-          VisibleRowCount = 1
+          VisibleColCount = 10
+          VisibleRowCount = 7
           ColWidths = (
             30
             43
@@ -2553,8 +2553,8 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 4
           TabStop = True
           Visible = False
-          VisibleColCount = 1
-          VisibleRowCount = 1
+          VisibleColCount = 10
+          VisibleRowCount = 7
           ColWidths = (
             30
             43

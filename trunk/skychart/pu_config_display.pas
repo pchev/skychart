@@ -1,6 +1,6 @@
 unit pu_config_display;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2005 Patrick Chevalley
@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant,
+uses  u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
   WizardNotebook;
@@ -35,6 +35,8 @@ type
   { Tf_config_display }
 
   Tf_config_display = class(TForm)
+    GroupBox6: TGroupBox;
+    ThemeList: TComboBox;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;
@@ -46,6 +48,8 @@ type
     Page8: TPage;
     Page9: TPage;
     Label14: TLabel;
+    NightButton: TRadioGroup;
+    StandardButton: TRadioGroup;
     stardisplay: TRadioGroup;
     nebuladisplay: TRadioGroup;
     starvisual: TGroupBox;
@@ -88,7 +92,6 @@ type
     prtfont: TEdit;
     Button1: TButton;
     symbfont: TEdit;
-    Label8: TLabel;
     Label181: TLabel;
     Label182: TLabel;
     Label183: TLabel;
@@ -295,6 +298,9 @@ type
     WizardNotebook1: TWizardNotebook;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure NightButtonClick(Sender: TObject);
+    procedure StandardButtonClick(Sender: TObject);
+    procedure ThemeListChange(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
     procedure StarSizeBarChange(Sender: TObject);
@@ -432,6 +438,22 @@ ShowRectangle;
 LockChange:=false;
 end;
 
+procedure Tf_config_display.NightButtonClick(Sender: TObject);
+begin
+  cmain.ButtonNight:=NightButton.ItemIndex+1;
+end;
+
+procedure Tf_config_display.StandardButtonClick(Sender: TObject);
+begin
+  cmain.ButtonStandard:=StandardButton.ItemIndex+1;
+end;
+
+procedure Tf_config_display.ThemeListChange(Sender: TObject);
+begin
+if LockChange then exit;
+  cmain.ThemeName:=ThemeList.Text;
+end;
+
 procedure Tf_config_display.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
@@ -460,9 +482,11 @@ begin
 end;
 
 procedure Tf_config_display.ShowColor;
+var fs : TSearchRec;
+    buf : string;
+    i,n: integer;
 begin
  bg1.color:=cplot.bgColor;
-// bg2.color:=cplot.bgColor;
  bg3.color:=cplot.bgColor;
  bg4.color:=cplot.bgColor;
  shape1.brush.color:=cplot.color[1];
@@ -472,12 +496,6 @@ begin
  shape5.brush.color:=cplot.color[5];
  shape6.brush.color:=cplot.color[6];
  shape7.brush.color:=cplot.color[7];
-// shape8.pen.color:=cplot.color[8];
-// shape8.brush.color:=cplot.bgColor;
-// shape9.pen.color:=cplot.color[9];
-// shape9.brush.color:=cplot.bgColor;
-// shape10.pen.color:=cplot.color[10];
-// shape10.brush.color:=cplot.bgColor;
  shape11.pen.color:=cplot.color[12];
  shape11.brush.color:=cplot.bgColor;
  shape12.pen.color:=cplot.color[13];
@@ -496,6 +514,21 @@ begin
  shape26.brush.color:=cplot.color[20];
  shape27.brush.color:=cplot.color[21];
  shape28.brush.color:=cplot.color[22];
+ StandardButton.ItemIndex:=cmain.ButtonStandard-1;
+ NightButton.ItemIndex:=cmain.ButtonNight-1;
+ ThemeList.clear;
+ n:=0;
+ i:=findfirst(slash(appdir)+slash('data')+slash('Themes')+'*',faDirectory,fs);
+ while i=0 do begin
+   if ((fs.attr and faDirectory)<>0)and(fs.Name<>'.')and(fs.Name<>'..') then begin
+     buf:=extractfilename(fs.name);
+     ThemeList.items.Add(buf);
+     if cmain.ThemeName=buf then ThemeList.itemindex:=n;
+     inc(n);
+   end;
+   i:=findnext(fs);
+ end;
+ findclose(fs);
 end;
 
 procedure Tf_config_display.ShowSkyColor;
@@ -808,11 +841,13 @@ end;
 procedure Tf_config_display.SetFonts(ctrl:Tedit;num:integer);
 begin
  ctrl.Text:=cplot.FontName[num];
+{$ifdef mswindows}
  ctrl.Font.Name:=cplot.FontName[num];
  ctrl.Font.Size:=cplot.FontSize[num];
  if cplot.FontBold[num] then ctrl.Font.Style:=[fsBold]
                         else ctrl.Font.Style:=[];
  if cplot.FontItalic[num] then ctrl.Font.Style:=ctrl.Font.Style+[fsItalic];
+{$endif}
 end;
 
 procedure Tf_config_display.SelectFontClick(Sender: TObject);

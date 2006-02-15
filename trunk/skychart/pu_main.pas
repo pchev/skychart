@@ -1,6 +1,6 @@
 unit pu_main;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2002 Patrick Chevalley
@@ -30,7 +30,8 @@ interface
 
 uses
   {$ifdef mswindows}
-    Windows, WinXP,
+    Windows,
+    //WinXP, // XP theme still not working with night vision
   {$endif}
   {$ifdef unix}
   {$endif}
@@ -94,6 +95,7 @@ type
     ToolButton2: TToolButton;
     ToolButton4: TToolButton;
     ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
     topmessage: TLabel;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
@@ -169,7 +171,6 @@ type
     SaveConfigurationNow1: TMenuItem;
     SaveConfigOnExit: TAction;
     SaveConfigurationOnExit1: TMenuItem;
-    N3: TMenuItem;
     ToolButtonUndo: TToolButton;
     Undo: TAction;
     Redo: TAction;
@@ -368,9 +369,6 @@ type
     ToolButtonDSS: TToolButton;
     ToolButtonNightVision: TToolButton;
     ImageList2: TImageList;
-    Buttons1: TMenuItem;
-    Normal1: TMenuItem;
-    Reverse1: TMenuItem;
     NightVision1: TMenuItem;
     ToolButtonEditlabels: TToolButton;
     EditLabels: TAction;
@@ -483,7 +481,6 @@ type
     procedure TrackExecute(Sender: TObject);
     procedure ZoomBarExecute(Sender: TObject);
     procedure DSSImageExecute(Sender: TObject);
-    procedure ButtonModeClick(Sender: TObject);
     procedure EditLabelsExecute(Sender: TObject);
     procedure MultiDoc1ActiveChildChange(Sender: TObject);
     procedure MultiDoc1Maximize(Sender: TObject);
@@ -499,12 +496,12 @@ type
     procedure TelescopePanelExecute(Sender: TObject);
     procedure ToolButtonNightVisionClick(Sender: TObject);
     procedure ViewFullScreenExecute(Sender: TObject);
+    procedure SetTheme;
   private
     { Private declarations }
     cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB : Boolean;
-    InitialChartNum, ButtonImage: integer;
-    nightvision : Boolean;
+    InitialChartNum: integer;
   {$ifdef mswindows}
     savwincol  : array[0..30] of Tcolor;
   {$endif}
@@ -589,6 +586,9 @@ var
 
 implementation
 
+{$ifdef win32}
+   {$R cdc_icon.res}
+{$endif}
 //todo: lazarus cursor {$R cursbmp.res}
 
 uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
@@ -887,7 +887,7 @@ end;
 procedure Tf_main.FormShow(Sender: TObject);
 var i:integer;
 begin
- SetButtonImage(ButtonImage);
+ if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
  InitFonts;
  SetLpanel1('');
  for i:=0 to MultiDoc1.ChildCount-1 do
@@ -919,7 +919,6 @@ try
  Fits:=TFits.Create(self);
  cdcdb.onInitializeDB:=InitializeDB;
  planet.cdb:=cdcdb;
- if nightvision then SetNightVision(nightvision);
  telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
  telescope.plugin:=def_cfgsc.ScopePlugin;
  if def_cfgsc.BackgroundImage='' then begin
@@ -1052,6 +1051,7 @@ begin
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
+ImageListCount:=ImageNormal.Count;
 {$ifdef mswindows}
   configfile:=Defaultconfigfile;
 {$endif}
@@ -1237,6 +1237,8 @@ var buf:widestring;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
   sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,false,false,false);
+  f_info.Memo1.Font.Name:=def_cfgplot.FontName[5];
+  f_info.Memo1.Font.Size:=def_cfgplot.FontSize[5];
   f_info.Memo1.text:=blank+wordspace(buf);
   f_info.Memo1.selstart:=0;
   f_info.Memo1.selend:=0;
@@ -1776,12 +1778,6 @@ if f_config=nil then begin
    f_config.Fits:=fits;
    f_config.catalog:=catalog;
    f_config.db:=cdcdb;
-   {$ifdef unix}
-     if nightvision then begin
-        f_config.Color:=dark;
-        f_config.font.Color:=middle;
-     end;
-   {$endif}
 end;
 try
  f_config.ccat:=catalog.cfgcat;
@@ -1846,8 +1842,15 @@ end;
 
 procedure Tf_main.activateconfig;
 var i:integer;
+  themechange: Boolean;
 begin
+    if (cfgm.ButtonNight <> f_config.cmain.ButtonNight) or
+       (cfgm.ButtonStandard <> f_config.cmain.ButtonStandard) or
+       (cfgm.ThemeName <> f_config.cmain.ThemeName)
+       then themechange:=true
+       else themechange:=false;
     cfgm:=f_config.cmain;
+    if themechange then SetTheme;
     cfgm.updall:=f_config.applyall.checked;
     if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
     if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
@@ -1989,10 +1992,12 @@ end;
 
 Procedure Tf_main.InitFonts;
 begin
+{$ifdef mswindows}
    font.name:=def_cfgplot.fontname[4];
    font.size:=def_cfgplot.fontsize[4];
    if def_cfgplot.FontBold[4] then font.style:=[fsBold] else font.style:=[];
    if def_cfgplot.FontItalic[4] then font.style:=font.style+[fsItalic];
+{$endif}
    LPanels0.Caption:='Ra:22h22m22.22s +22°22''22"22';
    PanelBottom.height:=2*LPanels0.Height+8;
    PPanels0.Width:=LPanels0.width+8;
@@ -2042,7 +2047,6 @@ procedure Tf_main.SetDefault;
 var i:integer;
 begin
 nightvision:=false;
-ButtonImage:=1;
 ldeg:='°';
 lmin:='''';
 lsec:='"';
@@ -2077,6 +2081,9 @@ cfgm.ImageLuminosity:=0;
 cfgm.ImageContrast:=0;
 cfgm.ShowChartInfo:=false;
 cfgm.SyncChart:=false;
+cfgm.ThemeName:='default';
+cfgm.ButtonStandard:=1;
+cfgm.ButtonNight:=2;
 for i:=1 to numfont do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
    def_cfgplot.FontSize[i]:=DefaultFontSize;
@@ -2657,7 +2664,6 @@ OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 use_xplanet:=ReadBool(section,'use_xplanet',use_xplanet);
 xplanet_dir:=ReadString(section,'xplanet_dir',xplanet_dir);
 {$endif}
-ButtonImage:=ReadInteger(section,'ButtonImage',ButtonImage);
 NightVision:=ReadBool(section,'NightVision',NightVision);
 cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
 cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterResolution);
@@ -2667,6 +2673,7 @@ cfgm.PrintMethod:=ReadInteger(section,'PrintMethod',cfgm.PrintMethod);
 cfgm.PrintCmd1:=ReadString(section,'PrintCmd1',cfgm.PrintCmd1);
 cfgm.PrintCmd2:=ReadString(section,'PrintCmd2',cfgm.PrintCmd2);
 cfgm.PrintTmpPath:=ReadString(section,'PrintTmpPath',cfgm.PrintTmpPath);
+cfgm.ThemeName:=ReadString(section,'Theme',cfgm.ThemeName);
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 cfgm.Constellationfile:=ReadString(section,'Constellationfile',cfgm.Constellationfile);
@@ -2692,6 +2699,8 @@ cfgm.ImageLuminosity:=ReadFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
 cfgm.ImageContrast:=ReadFloat(section,'ImageContrast',cfgm.ImageContrast);
 cfgm.ShowChartInfo:=ReadBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
 cfgm.SyncChart:=ReadBool(section,'SyncChart',cfgm.SyncChart);
+cfgm.ButtonStandard:=ReadInteger(section,'ButtonStandard',cfgm.ButtonStandard);
+cfgm.ButtonNight:=ReadInteger(section,'ButtonNight',cfgm.ButtonNight);
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 catalog.cfgshr.ListStar:=ReadBool(section,'ListStar',catalog.cfgshr.ListStar);
 catalog.cfgshr.ListNeb:=ReadBool(section,'ListNeb',catalog.cfgshr.ListNeb);
@@ -3025,7 +3034,6 @@ WriteString(section,'OpenFileCMD',OpenFileCMD);
 WriteBool(section,'use_xplanet',use_xplanet);
 WriteString(section,'xplanet_dir',xplanet_dir);
 {$endif}
-WriteInteger(section,'ButtonImage',ButtonImage);
 WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
 WriteString(section,'prtname',cfgm.prtname);
@@ -3036,7 +3044,7 @@ WriteInteger(section,'PrintMethod',cfgm.PrintMethod);
 WriteString(section,'PrintCmd1',cfgm.PrintCmd1);
 WriteString(section,'PrintCmd2',cfgm.PrintCmd2);
 WriteString(section,'PrintTmpPath',cfgm.PrintTmpPath);
-WriteString(section,'ThemeName',cfgm.ThemeName);
+WriteString(section,'Theme',cfgm.ThemeName);
 WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 WriteBool(section,'ListStar',catalog.cfgshr.ListStar);
@@ -3067,6 +3075,8 @@ WriteFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
 WriteFloat(section,'ImageContrast',cfgm.ImageContrast);
 WriteBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
 WriteBool(section,'SyncChart',cfgm.SyncChart);
+WriteInteger(section,'ButtonStandard',cfgm.ButtonStandard);
+WriteInteger(section,'ButtonNight',cfgm.ButtonNight);
 WriteBool(section,'IndiAutostart',def_cfgsc.IndiAutostart);
 WriteString(section,'IndiServerHost',def_cfgsc.IndiServerHost);
 WriteString(section,'IndiServerPort',def_cfgsc.IndiServerPort);
@@ -3872,9 +3882,19 @@ if f_printsetup.showmodal=mrOK then begin
 end;
 end;
 
+procedure Tf_main.SetTheme;
+begin
+ if nightvision then
+    SetNightVision(true)
+ else
+    SetButtonImage(cfgm.ButtonStandard);
+end;
+
 procedure Tf_main.SetButtonImage(button: Integer);
 var btn : TBitmap;
     col: Tcolor;
+    i: Integer;
+    iconpath: String;
 begin
 btn:=TBitmap.Create;
 btn.canvas.pen.color:=clBlack;
@@ -3883,12 +3903,22 @@ btn.canvas.brush.style:=bsSolid;
 col:=clNavy;
 try
 case button of
- 1:begin
+ 1:begin    // color
+   ImageNormal.Clear;
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_color');
+     for i:=0 to ImageListCount-1 do begin
+       btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+       ImageNormal.Add(btn,nil);
+       btn:=TBitmap.Create;
+     end;
    ActionList1.Images:=ImageNormal;
    Toolbar1.Images:=ImageNormal;
    Toolbar2.Images:=ImageNormal;
    Toolbar3.Images:=ImageNormal;
    Toolbar4.Images:=ImageNormal;
+   ButtonStarSize.Glyph.LoadFromFile(iconpath+'a1.xpm');
+   BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
+   BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
    ImageNormal.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
    btn.canvas.rectangle(0,0,btn.width,btn.height);
    ImageNormal.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
@@ -3896,9 +3926,18 @@ case button of
    ImageNormal.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
    btn.canvas.rectangle(0,0,btn.width,btn.height);
    ImageNormal.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
-   Normal1.Checked:=true;
    end;
- 2:begin
+ 2:begin  // red
+   ImageList2.Clear;
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_red');
+     for i:=0 to ImageListCount-1 do begin
+       btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+       ImageList2.Add(btn,nil);
+       btn:=TBitmap.Create;
+     end;
+   ButtonStarSize.Glyph.LoadFromFile(iconpath+'a1.xpm');
+   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
+   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
    col:=$acb5f5;
    ActionList1.Images:=ImageList2;
    Toolbar1.Images:=ImageList2;
@@ -3912,9 +3951,58 @@ case button of
    ImageList2.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
    btn.canvas.rectangle(0,0,btn.width,btn.height);
    ImageList2.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
-   Reverse1.Checked:=true;
+   end;
+ 3:begin   // blue
+   ImageList2.Clear;
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_blue');
+     for i:=0 to ImageListCount-1 do begin
+       btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+       ImageList2.Add(btn,nil);
+       btn:=TBitmap.Create;
+     end;
+   ButtonStarSize.Glyph.LoadFromFile(iconpath+'a1.xpm');
+   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
+   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
+   ActionList1.Images:=ImageList2;
+   Toolbar1.Images:=ImageList2;
+   Toolbar2.Images:=ImageList2;
+   Toolbar3.Images:=ImageList2;
+   Toolbar4.Images:=ImageList2;
+   ImageList2.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
+   btn.canvas.rectangle(0,0,btn.width,btn.height);
+   ImageList2.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
+   btn.canvas.rectangle(0,0,btn.width,btn.height);
+   ImageList2.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
+   btn.canvas.rectangle(0,0,btn.width,btn.height);
+   ImageList2.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
+   end;
+ 4:begin   // Green
+   ImageList2.Clear;
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_green');
+     for i:=0 to ImageListCount-1 do begin
+       btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+       ImageList2.Add(btn,nil);
+       btn:=TBitmap.Create;
+     end;
+   ButtonStarSize.Glyph.LoadFromFile(iconpath+'a1.xpm');
+   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
+   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
+   col:=clLime;
+   ActionList1.Images:=ImageList2;
+   Toolbar1.Images:=ImageList2;
+   Toolbar2.Images:=ImageList2;
+   Toolbar3.Images:=ImageList2;
+   Toolbar4.Images:=ImageList2;
+   ImageList2.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
+   btn.canvas.rectangle(0,0,btn.width,btn.height);
+   ImageList2.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
+   btn.canvas.rectangle(0,0,btn.width,btn.height);
+   ImageList2.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
+   btn.canvas.rectangle(0,0,btn.width,btn.height);
+   ImageList2.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
    end;
 end;
+ChildControl.Left:=ToolBar1.Width-ChildControl.Width;
 Field1.font.color:=col;
 Field2.font.color:=col;
 Field3.font.color:=col;
@@ -3929,12 +4017,13 @@ finally
  btn.Free;
 end;
 end;
+{ code to save the image list to individual files
+   for i:=0 to ImageNormal.Count-1 do begin
+     ImageNormal.GetBitmap(i,btn);
+     btn.SavetoFile('/home/cdc/src/skychart/bitmaps/icon_color/i'+inttostr(i)+'.xpm');
+   end;
+}
 
-procedure Tf_main.ButtonModeClick(Sender: TObject);
-begin
-ButtonImage:=(sender as TMenuItem).Tag;
-SetButtonImage(ButtonImage);
-end;
 
 procedure Tf_main.MultiDoc1ActiveChildChange(Sender: TObject);
 begin
@@ -4004,6 +4093,157 @@ begin
 MultiDoc1.Maximized:=true;
 end;
 
+
+procedure Tf_main.ToolButtonNightVisionClick(Sender: TObject);
+var i: integer;
+begin
+nightvision:= not nightvision;
+SetNightVision(nightvision);
+ToolButtonNightVision.Down:=nightvision;
+NightVision1.Checked:=nightvision;
+for i:=0 to MultiDoc1.ChildCount-1 do
+  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+    (MultiDoc1.Childs[i].DockedObject as Tf_chart).NightVision:=nightvision;
+end;
+
+{$ifdef mswindows}
+// Nightvision change Windows system color
+Procedure Tf_main.SaveWinColor;
+var n : integer;
+begin
+   for n:=0 to 30 do savwincol[n]:=getsyscolor(n);
+end;
+
+Procedure Tf_main.ResetWinColor;
+const elem31 : array[0..30] of integer=(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+begin
+setsyscolors(31,elem31,savwincol);
+end;
+
+procedure Tf_main.SetNightVision(night: boolean);
+const elem : array[0..30] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,30,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,25   ,26   ,27   ,28   ,29   );
+      rgb  : array[0..30] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_dark          ,nv_middle      ,nv_black    ,nv_black        ,nv_middle        ,nv_black        ,nv_black     ,nv_middle      ,nv_black      ,nv_dark,nv_dark,nv_dark,nv_dark,nv_dark,nv_dark);
+begin
+if night then begin
+   SaveWinColor;
+   setsyscolors(sizeof(elem),elem,rgb);
+   SetButtonImage(cfgm.ButtonNight);
+   Color:=nv_dark;
+   Font.Color:=nv_middle;
+   quicksearch.Color:=nv_dark;
+   quicksearch.Font.Color:=nv_middle;
+   timeu.Color:=nv_dark;
+   timeu.Font.Color:=nv_middle;
+   timeval.Color:=nv_dark;
+   timeval.Font.Color:=nv_middle;
+   f_zoom.Color:=nv_dark;
+   f_zoom.Font.Color:=nv_middle;
+   f_calendar.Color:=nv_dark;
+   f_calendar.Font.Color:=nv_middle;
+   f_detail.Color:=nv_dark;
+   f_detail.Font.Color:=nv_middle;
+   f_getdss.Color:=nv_dark;
+   f_getdss.Font.Color:=nv_middle;
+   f_position.Color:=nv_dark;
+   f_position.Font.Color:=nv_middle;
+   f_search.Color:=nv_dark;
+   f_search.Font.Color:=nv_middle;
+   f_info.Color:=nv_dark;
+   f_info.Font.Color:=nv_middle;
+   f_printsetup.Color:=nv_dark;
+   f_printsetup.Font.Color:=nv_middle;
+   if f_config<>nil then begin
+      f_config.Color:=nv_dark;
+      f_config.Font.Color:=nv_middle;
+   end;
+end else begin
+   ResetWinColor;
+   SetButtonImage(cfgm.ButtonStandard);
+   Color:=clBtnFace;
+   Font.Color:=clWindowText;
+   quicksearch.Color:=clBtnFace;
+   quicksearch.Font.Color:=clWindowText;
+   timeu.Color:=clBtnFace;
+   timeu.Font.Color:=clWindowText;
+   timeval.Color:=clBtnFace;
+   timeval.Font.Color:=clWindowText;
+   f_zoom.Color:=clBtnFace;
+   f_zoom.Font.Color:=clWindowText;
+   f_calendar.Color:=clBtnFace;
+   f_calendar.Font.Color:=clWindowText;
+   f_detail.Color:=clBtnFace;
+   f_detail.Font.Color:=clWindowText;
+   f_getdss.Color:=clBtnFace;
+   f_getdss.Font.Color:=clWindowText;
+   f_position.Color:=clBtnFace;
+   f_position.Font.Color:=clWindowText;
+   f_search.Color:=clBtnFace;
+   f_search.Font.Color:=clWindowText;
+   f_info.Color:=clBtnFace;
+   f_info.Font.Color:=clWindowText;
+   f_printsetup.Color:=clBtnFace;
+   f_printsetup.Font.Color:=clWindowText;
+   if f_config<>nil then begin
+      f_config.Color:=clBtnFace;
+      f_config.Font.Color:=clWindowText;
+   end;
+end;
+end;
+
+// View fullscreen without border
+procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
+var lPrevStyle: LongInt;
+begin
+FullScreen1.Checked:=not FullScreen1.Checked;
+if FullScreen1.Checked then begin
+   cfgm.savetop:=top;
+   cfgm.saveleft:=left;
+   cfgm.savewidth:=width;
+   cfgm.saveheight:=height;
+   lPrevStyle := GetWindowLong(f_main.handle, GWL_STYLE);
+   SetWindowLong(f_main.handle, GWL_STYLE, (lPrevStyle And (Not WS_THICKFRAME) And (Not WS_BORDER) And (Not WS_CAPTION) And (Not WS_MINIMIZEBOX) And (Not WS_MAXIMIZEBOX)));
+   SetWindowPos(f_main.handle, 0, 0, 0, 0, 0, SWP_FRAMECHANGED Or SWP_NOMOVE Or SWP_NOSIZE Or SWP_NOZORDER);
+   top:=0;
+   left:=0;
+   width:=screen.Width;
+   height:=screen.Height;
+end else begin
+   lPrevStyle := GetWindowLong(f_main.handle, GWL_STYLE);
+   SetWindowLong(f_main.handle, GWL_STYLE, (lPrevStyle Or WS_THICKFRAME Or WS_BORDER Or WS_CAPTION Or WS_MINIMIZEBOX Or WS_MAXIMIZEBOX));
+   SetWindowPos(f_main.handle, 0, 0, 0, 0, 0, SWP_FRAMECHANGED Or SWP_NOMOVE Or SWP_NOSIZE Or SWP_NOZORDER);
+   top:=cfgm.savetop;
+   left:=cfgm.saveleft;
+   width:=cfgm.savewidth;
+   height:=cfgm.saveheight;
+end;
+end;
+// end of windows specific code:
+{$endif}
+
+{$ifdef unix}
+procedure Tf_main.SetNightVision(night: boolean);
+begin
+if night then begin
+   SetButtonImage(cfgm.ButtonNight);
+   MultiDoc1.InactiveBorderColor:=nv_black;
+   MultiDoc1.TitleColor:=nv_middle;
+   MultiDoc1.BorderColor:=nv_dark;
+ end else begin
+   SetButtonImage(cfgm.ButtonStandard);
+   MultiDoc1.InactiveBorderColor:=clDisabledHighlight;
+   MultiDoc1.TitleColor:=clCaptionText;
+   MultiDoc1.BorderColor:=clHighlight;
+end;
+end;
+
+procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
+begin
+//Too tricky and windows manager dependant...
+//Beware that modal form get hiden and lock the app.
+//Is this really useful ? better to use a theme with small border.
+end;
+{$endif}
+
 // DDE server, windows only
 //todo: any DDE for Lazarus? if not create a separate app that relay to tcp/ip
 {procedure Tf_main.DdeDataPokeData(Sender: TObject);
@@ -4043,107 +4283,6 @@ procedure Tf_main.DdeSkyChartClose(Sender: TObject);
 begin
 DDeOpen:=false;
 end; }
-
-procedure Tf_main.ToolButtonNightVisionClick(Sender: TObject);
-var i: integer;
-begin
-nightvision:= not nightvision;
-SetNightVision(nightvision);
-ToolButtonNightVision.Down:=nightvision;
-NightVision1.Checked:=nightvision;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-    (MultiDoc1.Childs[i].DockedObject as Tf_chart).NightVision:=nightvision;
-end;
-
-{$ifdef mswindows}
-// Nightvision change Windows system color
-Procedure Tf_main.SaveWinColor;
-var n : integer;
-begin
-   for n:=0 to 30 do savwincol[n]:=getsyscolor(n);
-end;
-
-Procedure Tf_main.ResetWinColor;
-const elem31 : array[0..30] of integer=(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
-begin
-setsyscolors(31,elem31,savwincol);
-end;
-
-procedure Tf_main.SetNightVision(night: boolean);
-const light  = $004040ff;
-      middle = $003030c0;
-      dim    = $00000060;
-      dark   = $00000040;
-      black  = $00000000;
-      elem : array[0..30] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,30,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,25   ,26   ,27   ,28   ,29   );
-      rgb  : array[0..30] of Tcolor =  (black           ,dark         ,dark              ,dark  ,dim                ,middle       ,middle           ,dark           ,dark              ,light              ,dark                 ,black             ,dark                     ,black       ,middle        ,dark      ,dark         ,middle        ,black          ,black       ,middle          ,black            ,black           ,middle       ,black          ,dark          ,dark ,dark ,dark ,dark ,dark );
-begin
-if night then begin
-   SaveWinColor;
-   setsyscolors(sizeof(elem),elem,rgb);
-   SetButtonImage(2);
-end else begin
-   ResetWinColor;
-   SetButtonImage(ButtonImage);
-end;
-end;
-
-// View fullscreen without border
-procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
-var lPrevStyle: LongInt;
-begin
-FullScreen1.Checked:=not FullScreen1.Checked;
-if FullScreen1.Checked then begin
-   cfgm.savetop:=top;
-   cfgm.saveleft:=left;
-   cfgm.savewidth:=width;
-   cfgm.saveheight:=height;
-   lPrevStyle := GetWindowLong(f_main.handle, GWL_STYLE);
-   SetWindowLong(f_main.handle, GWL_STYLE, (lPrevStyle And (Not WS_THICKFRAME) And (Not WS_BORDER) And (Not WS_CAPTION) And (Not WS_MINIMIZEBOX) And (Not WS_MAXIMIZEBOX)));
-   SetWindowPos(f_main.handle, 0, 0, 0, 0, 0, SWP_FRAMECHANGED Or SWP_NOMOVE Or SWP_NOSIZE Or SWP_NOZORDER);
-   top:=0;
-   left:=0;
-   width:=screen.Width;
-   height:=screen.Height;
-end else begin
-   lPrevStyle := GetWindowLong(f_main.handle, GWL_STYLE);
-   SetWindowLong(f_main.handle, GWL_STYLE, (lPrevStyle Or WS_THICKFRAME Or WS_BORDER Or WS_CAPTION Or WS_MINIMIZEBOX Or WS_MAXIMIZEBOX));
-   SetWindowPos(f_main.handle, 0, 0, 0, 0, 0, SWP_FRAMECHANGED Or SWP_NOMOVE Or SWP_NOSIZE Or SWP_NOZORDER);
-   top:=cfgm.savetop;
-   left:=cfgm.saveleft;
-   width:=cfgm.savewidth;
-   height:=cfgm.saveheight;
-end;
-end;
-// end of windows specific code:
-{$endif}
-
-{$ifdef unix}
-procedure Tf_main.SetNightVision(night: boolean);
-begin
-if night then begin
-   if cfgm.ThemeName<>'Default' then cfgm.ThemeName:='Red';
-   SetButtonImage(2);
-   MultiDoc1.InactiveBorderColor:=black;
-   MultiDoc1.TitleColor:=middle;
-   MultiDoc1.BorderColor:=dark;
- end else begin
-   if cfgm.ThemeName<>'Default' then cfgm.ThemeName:='Silver';
-   SetButtonImage(1);
-   MultiDoc1.InactiveBorderColor:=clDisabledHighlight;
-   MultiDoc1.TitleColor:=clCaptionText;
-   MultiDoc1.BorderColor:=clHighlight;
-end;
-end;
-
-procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
-begin
-//Too tricky and windows manager dependant...
-//Beware that modal form get hiden and lock the app.
-//Is this really useful ? better to use a theme with small border.
-end;
-{$endif}
 
 initialization
   {$i pu_main.lrs}

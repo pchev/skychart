@@ -1,6 +1,6 @@
 unit pu_config;
 
-{$MODE Delphi}
+{$MODE Delphi}{$H+}
 
 {
 Copyright (C) 2002 Patrick Chevalley
@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant,
+uses u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
   cu_fits, cu_catalog, cu_database,
@@ -68,6 +68,7 @@ type
     Fcplot : conf_plot;
     Fcmain : conf_main;
     Fcdss : conf_dss;
+    Fnightvision: boolean;
     astpage,compage,dbpage: integer;
     FApplyConfig: TNotifyEvent;
     FDBChange: TNotifyEvent;
@@ -123,14 +124,13 @@ var
 
 implementation
 
-
-
 procedure Tf_config.FormCreate(Sender: TObject);
 var Child: TChildDoc;
 begin
 compage:=22;
 astpage:=23;
 dbpage:=38;
+Fnightvision:=false;
 
 Child:=MultiDoc1.NewChild;
 f_config_time1:=Tf_config_time.Create(Child);
@@ -174,8 +174,24 @@ f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
+var i:integer;
 begin
 locktree:=false;
+{$ifdef WIN32}
+if Fnightvision<>nightvision then begin
+   for i:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[i].Color:=nv_dark;
+   SetFormNightVision(self,nightvision);
+   SetFormNightVision(f_config_time1,nightvision);
+   SetFormNightVision(f_config_observatory1,nightvision);
+   SetFormNightVision(f_config_chart1,nightvision);
+   SetFormNightVision(f_config_catalog1,nightvision);
+   SetFormNightVision(f_config_solsys1,nightvision);
+   SetFormNightVision(f_config_display1,nightvision);
+   SetFormNightVision(f_config_pictures1,nightvision);
+   SetFormNightVision(f_config_system1,nightvision);
+   Fnightvision:=nightvision;
+end;
+{$endif}
 f_config_time1.FormShow(Sender);
 f_config_observatory1.FormShow(Sender);
 f_config_chart1.FormShow(Sender);

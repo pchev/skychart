@@ -1,11 +1,11 @@
 object f_info: Tf_info
-  Left = 303
+  Left = 317
   Height = 397
-  Top = 159
+  Top = 136
   Width = 639
   HorzScrollBar.Page = 638
   VertScrollBar.Page = 396
-  ActiveControl = ProgressMemo
+  ActiveControl = Button3
   BorderStyle = bsSizeToolWin
   Caption = 'Info'
   ClientHeight = 397
@@ -145,8 +145,9 @@ object f_info: Tf_info
     4AFF6E6E6EFF868686FF9E9E9EFFA4A0A0FFA4A0A0FFA4A0A0FF
   }
   OnClose = FormClose
+  OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   Position = poDefaultPosOnly
   TextHeight = 13
   object PageControl1: TPageControl
@@ -285,9 +286,9 @@ object f_info: Tf_info
         Height = 317
         Width = 631
         Align = alClient
+        Color = clBtnHighlight
         Font.Height = -13
         Font.Name = 'courier'
-        Font.Pitch = fpFixed
         ParentColor = False
         PopupMenu = PopupMenu2
         TabOrder = 1
@@ -623,6 +624,7 @@ object f_info: Tf_info
         )
         Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
         ReadOnly = True
+        RightEdge = 0
         SelectedColor.OnChange = nil
         TabWidth = 10
       end
@@ -633,8 +635,8 @@ object f_info: Tf_info
       ClientWidth = 631
       ImageIndex = 2
       object ProgressMemo: TMemo
-        Height = 344
-        Width = 631
+        Height = 348
+        Width = 639
         Align = alClient
         TabOrder = 0
       end

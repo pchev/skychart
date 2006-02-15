@@ -26,13 +26,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses Math, SysUtils, Classes, u_constant, LCLType,
-  {$ifdef mswindows}
+  {$ifdef win32}
     Windows,
   {$endif}
   {$ifdef unix}
     unix,baseunix,unixutil,
- //   MaskEdit,Grids,enhedits,Menus,Spin,CheckLst,
   {$endif}
+    MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons,WizardNotebook, ExtCtrls,
     Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
 
 function rmod(x,y:Double):Double;
@@ -96,11 +96,14 @@ Procedure GetPrinterResolution(var name : string; var resol : integer);
 Function ExecuteFile(const FileName: string): integer;
 procedure PrintStrings(str: TStrings; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
 Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
+Function EncryptStr(Str,Pwd: String; Encode: Boolean=true): String;
+Function DecryptStr(Str,Pwd: String): String;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 {$endif}
-Function EncryptStr(Str,Pwd: String; Encode: Boolean=true): String;
-Function DecryptStr(Str,Pwd: String): String;
+{$ifdef win32}
+procedure SetFormNightVision(form: TForm; onoff:boolean);
+{$endif}
 
 var traceon : boolean;
 
@@ -276,7 +279,7 @@ end;
 
 // same as SplitArg but keep empty strings
 procedure SplitRec(buf,sep:string; var arg: TStringList);
-var i,j,k,l:integer;
+var i,l:integer;
 begin
 arg.clear;
 l:=length(sep);
@@ -862,13 +865,13 @@ begin
 end;
 
 Function GetTimeZone: double;
-{$ifdef mswindows}
+{$ifdef win32}
 var
   lt,st : TSystemTime;
 {$endif}
 begin
 // return time zone in hour
-{$ifdef mswindows}
+{$ifdef win32}
  GetLocalTime(lt);GetSystemTime(st);
  result:=round(24000000*(SystemTimeToDateTime(lt)-SystemTimeToDateTime(st)))/1000000;
 {$endif}
@@ -1048,7 +1051,7 @@ begin
  result:=fpSystem(cmd);
 end;
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
 var
    bchExec: array[0..1024] of char;
    pchEXEC: Pchar;
@@ -1086,7 +1089,7 @@ begin
  fpSystem(cmd+' &');
 end;
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
 var
    bchExec: array[0..1024] of char;
    pchEXEC: Pchar;
@@ -1112,7 +1115,7 @@ end;
 {$endif}
 
 Function ExecuteFile(const FileName: string): integer;
-{$ifdef mswindows}
+{$ifdef win32}
 var
   zFileName, zParams, zDir: array[0..255] of Char;
 begin
@@ -1255,7 +1258,7 @@ begin
    Orientation:=orient;
    if Orientation=poLandscape then marg:=50
       else marg:=25;
-   {$ifdef mswindows}
+   {$ifdef win32}
    pw:=XDPI*PageWidth div 254;
    ph:=YDPI*PageHeight div 254;
    {$endif}
@@ -1352,7 +1355,7 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
    Orientation:=orient;
    if Orientation=poLandscape then marg:=50
       else marg:=25;
-   {$ifdef mswindows}
+   {$ifdef win32}
    pw:=XDPI*PageWidth div 254;
    ph:=YDPI*PageHeight div 254;
    {$endif}
@@ -1392,6 +1395,148 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
   end;
   FreeMem(Cols,Grid.ColCount*SizeOf(Integer));
  end;
+
+{$ifdef win32}
+procedure SetFormNightVision(form: TForm; onoff:boolean);
+var i: integer;
+begin
+with form do begin
+  if onoff then begin
+     color:=nv_dark;
+     font.Color:=nv_middle;
+     for i := 0 to ComponentCount-1 do begin
+        if  ( Components[i] is TWizardNotebook ) then with (Components[i] as TWizardNotebook) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TPageControl ) then with (Components[i] as TPageControl) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TButton ) then with (Components[i] as TButton) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TBitBtn ) then with (Components[i] as TBitBtn) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+           if fixedcolor=clBtnFace then  fixedcolor:=nv_dark;
+        end;
+        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TMainMenu ) then with (Components[i] as TMainMenu) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TSpinEdit ) then with (Components[i] as TSpinEdit) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+        if  ( Components[i] is TCheckListbox ) then with (Components[i] as TCheckListbox) do begin
+           if color=clWindow   then  color:=nv_black;
+           if color=clBtnFace then  color:=nv_dark;
+        end;
+     end;
+  end else begin
+     Color:=clBtnFace;
+     font.Color:=clText;
+     for i := 0 to ComponentCount-1 do begin
+        if  ( Components[i] is TWizardNotebook ) then with (Components[i] as TWizardNotebook) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TPageControl ) then with (Components[i] as TPageControl) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TBitBtn ) then with (Components[i] as TBitBtn) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TButton ) then with (Components[i] as TButton) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+           if fixedcolor=nv_dark  then fixedcolor:=clBtnFace;
+        end;
+        if  ( Components[i] is TRightEdit ) then with (Components[i] as TRightEdit) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TMainMenu ) then with (Components[i] as TMainMenu) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TSpinEdit ) then with (Components[i] as TSpinEdit) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+        if  ( Components[i] is TCheckListbox ) then with (Components[i] as TCheckListbox) do begin
+           if color=nv_black then color:=clWindow;
+           if color=nv_dark  then color:=clBtnFace;
+        end;
+     end;
+  end;
+end;
+end;
+{$endif}
 
 end.
 

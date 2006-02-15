@@ -76,10 +76,11 @@ const cdcversion = 'Version 3 alpha 0.1.0';
       DfRedColor : Starcolarray =(clBlack,  $00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$00000040,$00000040,$00000080,$00000040,$00000040,$000000A0,$00000080,$00000040,clYellow, $000000A0,$00000020,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
       DfWBColor : Starcolarray = (clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack);
       dfskycolor : Tskycolor =   ($00f03c3c,$00c83232,$00a02828,$00780000,$00640010,$003c0010,$00000000);
-      light  = $004040ff;
-      middle = $003030c0;
-      dark   = $00000040;
-      black  = $00000000;
+      nv_light  = $004040ff;
+      nv_middle = $003030c0;
+      nv_dim    = $00000060;
+      nv_dark   = $00000040;
+      nv_black  = $00000000;
 
 
 //  End of deep-sky objects colour
@@ -418,6 +419,7 @@ type
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
                 PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
                 savetop,saveleft,saveheight,savewidth: integer;
+                ButtonStandard,ButtonNight: integer;
                 PrintLandscape, ShowChartInfo, SyncChart :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
                 ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd : string;
@@ -479,6 +481,8 @@ Function Plan404( pla : PPlanetData):integer; cdecl; external lib404;
 Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
      Configfile, SysDecimalSeparator: string;
      ldeg,lmin,lsec : string;
+     ImageListCount: integer;
+     nightvision : Boolean;
      ThemePath:string ='data/Themes';
      LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
      OpenFileCMD:string = 'kfmclient exec';   // default KDE
@@ -497,8 +501,9 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
 
 // Text formating constant
 const
-     html_h        = '<HTML>';
-     htms_h        = '</HTML>';
+     html_h        = '<HTML><body bgcolor="#FFFFFF" text="#000000">';
+     html_h_nv     = '<HTML><body bgcolor="#000000" text="#C03030">';
+     htms_h        = '</body></HTML>';
      html_ffx      = '<font face="fixed">';
      htms_f        = '</font>';
      html_b        = '<b>';

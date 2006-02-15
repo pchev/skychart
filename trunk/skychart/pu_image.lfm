@@ -18,7 +18,7 @@ object f_image: Tf_image
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   OnResize = FormResize
-  PixelsPerInch = 106
+  PixelsPerInch = 80
   Position = poScreenCenter
   TextHeight = 13
   object Image1: TZoomImage
@@ -43,7 +43,7 @@ object f_image: Tf_image
     TabStop = True
     object Label1: TLabel
       Left = 241
-      Height = 16
+      Height = 13
       Top = 7
       Width = 39
       Caption = 'Label1'
@@ -82,10 +82,10 @@ object f_image: Tf_image
     end
   end
   object VScrollBar: TScrollBar
-    Left = 251
+    Left = 600
     Height = 364
     Top = 28
-    Width = 364
+    Width = 15
     Align = alRight
     Kind = sbVertical
     TabOrder = 1

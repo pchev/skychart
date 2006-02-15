@@ -1,6 +1,6 @@
 unit pu_calendar;
 
-{$MODE Delphi}
+{$MODE Delphi} {$H+}
 
 {
 Copyright (C) 2005 Patrick Chevalley
@@ -45,6 +45,12 @@ type
   { Tf_calendar }
 
   Tf_calendar = class(TForm)
+    BtnRefresh: TButton;
+    BtnHelp: TButton;
+    BtnClose: TButton;
+    BtnSave: TButton;
+    BtnPrint: TButton;
+    BtnReset: TButton;
     SatChartBox:TCheckBox;
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
@@ -74,12 +80,6 @@ type
     Panel4: TPanel;
     SatPanel: TPanel;
     Label9: TLabel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
-    BitBtn4: TBitBtn;
-    BitBtn5: TBitBtn;
-    ResetBtn: TBitBtn;
     PageControl1: TPageControl;
     Time: TTimePicker;
     tle1: TEdit;
@@ -123,22 +123,22 @@ type
     SaveDialog1: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
+    procedure BtnRefreshClick(Sender: TObject);
+    procedure BtnCloseClick(Sender: TObject);
     procedure GridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormDestroy(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
-    procedure BitBtn5Click(Sender: TObject);
+    procedure BtnSaveClick(Sender: TObject);
     procedure EcliPanelClick(Sender: TObject);
-    procedure ResetBtnClick(Sender: TObject);
+    procedure BtnResetClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
     procedure HelpContents1Execute(Sender: TObject);
-    procedure BitBtn3Click(Sender: TObject);
-    procedure BitBtn4Click(Sender: TObject);
+    procedure BtnHelpClick(Sender: TObject);
+    procedure BtnPrintClick(Sender: TObject);
     procedure Date1Change(Sender: TObject);
     procedure Date2Change(Sender: TObject);
   private
@@ -146,6 +146,7 @@ type
     initial: boolean;
     ShowImage: Tf_image;
     Fplanet : Tplanet;
+    Fnightvision: boolean;
     FGetChartConfig: TScFunc;
     Fupdchart: TScFunc;
     c: Pconf_skychart;
@@ -203,6 +204,7 @@ procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
 begin
 new(c);
+Fnightvision:=false;
 ShowImage:=Tf_image.Create(self);
 decodedate(now,yy,mm,dd);
 date1.JD:=jdd(yy,mm,dd,0);
@@ -211,7 +213,8 @@ time.Time:=now;
 initial:=true;
 PageControl1.Align:=alClient;
 end;
-                       
+
+
 procedure Tf_calendar.FormDestroy(Sender: TObject);
 begin
 try
@@ -224,6 +227,13 @@ end;
 
 procedure Tf_calendar.FormShow(Sender: TObject);
 begin
+{$ifdef WIN32}
+if Fnightvision<>nightvision then begin
+   SetFormNightVision(self,nightvision);
+   Fnightvision:=nightvision;
+   PageControl1.Invalidate;
+end;
+{$endif}
 if initial then begin
   date1.JD:=trunc(c.CurJD)+0.5;
   date2.JD:=date1.JD+5;
@@ -276,17 +286,17 @@ with inifile do begin
     label6.caption:=ReadString(section,'t_14',deftxt);
     SatChartBox.caption:=ReadString(section,'t_15',deftxt);
     IridiumBox.caption:=ReadString(section,'t_16',deftxt);
-    ResetBtn.Caption:=ReadString(section,'t_17',deftxt);
+    BtnReset.Caption:=ReadString(section,'t_17',deftxt);
 //    TLEbtn.hint:=ReadString(section,'t_18',deftxt)+blank+slash(appdir)+satpath;
     tz:=ReadString(section,'t_19',deftxt);
     west:=ReadString(section,'t_20',deftxt);
     east:=ReadString(section,'t_21',deftxt);
     EcliPanel.Hint:=ReadString(section,'t_22',deftxt);
-    BitBtn5.Caption:=ReadString(section,'t_23',deftxt);
-    BitBtn1.Caption:=ReadString('buttons','refresh',deftxt);
-    BitBtn2.Caption:=ReadString('buttons','close',deftxt);
-    BitBtn3.Caption:=ReadString('buttons','help',deftxt);
-    BitBtn4.Caption:=ReadString('buttons','print',deftxt);
+    BtnSave.Caption:=ReadString(section,'t_23',deftxt);
+    BtnRefresh.Caption:=ReadString('buttons','refresh',deftxt);
+    BtnClose.Caption:=ReadString('buttons','close',deftxt);
+    BtnHelp.Caption:=ReadString('buttons','help',deftxt);
+    BtnPrint.Caption:=ReadString('buttons','print',deftxt);
     mercure.caption:=pla[1];
     venus.caption:=pla[2];
     mars.caption:=pla[4];
@@ -1427,7 +1437,7 @@ PlutonGrid.Visible:=true;
 end;
 end;
 
-procedure Tf_calendar.BitBtn1Click(Sender: TObject);
+procedure Tf_calendar.BtnRefreshClick(Sender: TObject);
 var d: string;
 begin
 chdir(appdir);
@@ -1447,7 +1457,7 @@ case pagecontrol1.ActivePage.TabIndex of
 end;
 end;
 
-procedure Tf_calendar.BitBtn2Click(Sender: TObject);
+procedure Tf_calendar.BtnCloseClick(Sender: TObject);
 begin
 Close;
 end;
@@ -1545,7 +1555,7 @@ procedure Tf_calendar.PageControl1Change(Sender: TObject);
    time.visible:=onoff;
    EcliPanel.visible:=false;
    SatPanel.visible:=false;
-   Resetbtn.visible:=true;
+   BtnReset.visible:=true;
    end;
 begin
 case pagecontrol1.ActivePage.TabIndex of
@@ -1629,7 +1639,7 @@ end;
 lst.free;
 end;
 
-procedure Tf_calendar.BitBtn5Click(Sender: TObject);
+procedure Tf_calendar.BtnSaveClick(Sender: TObject);
 begin
 case pagecontrol1.ActivePage.TabIndex of
  0 : SaveGrid(TwilightGrid);
@@ -1670,7 +1680,7 @@ else
   PrtGrid(Grid,'CdC',buf,'',poPortrait);
 end;
 
-procedure Tf_calendar.BitBtn4Click(Sender: TObject);
+procedure Tf_calendar.BtnPrintClick(Sender: TObject);
 begin
 case pagecontrol1.ActivePage.TabIndex of
  0 : GridtoPrinter(TwilightGrid);
@@ -1700,7 +1710,7 @@ begin
 ExecuteFile(EcliPanel.Hint);
 end;
 
-procedure Tf_calendar.ResetBtnClick(Sender: TObject);
+procedure Tf_calendar.BtnResetClick(Sender: TObject);
 begin
 if assigned(Fupdchart) then Fupdchart(c^);
 end;
@@ -2005,7 +2015,7 @@ screen.cursor:=crDefault;
 end;
 end;
 
-procedure Tf_calendar.BitBtn3Click(Sender: TObject);
+procedure Tf_calendar.BtnHelpClick(Sender: TObject);
 begin
 HelpContents1.Execute;
 end;

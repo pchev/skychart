@@ -1,5 +1,5 @@
 object f_chart: Tf_chart
-  Left = 493
+  Left = 497
   Height = 338
   Top = 135
   Width = 508
@@ -15,7 +15,7 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = True
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Cursor = crCross

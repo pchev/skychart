@@ -272,7 +272,7 @@ object f_config_chart: Tf_config_chart
           Left = 72
           Height = 13
           Top = 128
-          Width = 7
+          Width = 8
           Caption = '1'
           Color = clNone
           ParentColor = False
@@ -281,7 +281,7 @@ object f_config_chart: Tf_config_chart
           Left = 72
           Height = 13
           Top = 157
-          Width = 7
+          Width = 8
           Caption = '2'
           Color = clNone
           ParentColor = False
@@ -290,7 +290,7 @@ object f_config_chart: Tf_config_chart
           Left = 72
           Height = 13
           Top = 186
-          Width = 7
+          Width = 8
           Caption = '3'
           Color = clNone
           ParentColor = False
@@ -299,7 +299,7 @@ object f_config_chart: Tf_config_chart
           Left = 72
           Height = 13
           Top = 215
-          Width = 7
+          Width = 8
           Caption = '4'
           Color = clNone
           ParentColor = False
@@ -308,7 +308,7 @@ object f_config_chart: Tf_config_chart
           Left = 263
           Height = 13
           Top = 100
-          Width = 7
+          Width = 8
           Caption = '6'
           Color = clNone
           ParentColor = False
@@ -317,7 +317,7 @@ object f_config_chart: Tf_config_chart
           Left = 263
           Height = 13
           Top = 129
-          Width = 7
+          Width = 8
           Caption = '7'
           Color = clNone
           ParentColor = False
@@ -326,7 +326,7 @@ object f_config_chart: Tf_config_chart
           Left = 263
           Height = 13
           Top = 158
-          Width = 7
+          Width = 8
           Caption = '8'
           Color = clNone
           ParentColor = False
@@ -335,7 +335,7 @@ object f_config_chart: Tf_config_chart
           Left = 263
           Height = 13
           Top = 187
-          Width = 7
+          Width = 8
           Caption = '9'
           Color = clNone
           ParentColor = False
@@ -372,7 +372,7 @@ object f_config_chart: Tf_config_chart
           Left = 72
           Height = 13
           Top = 100
-          Width = 7
+          Width = 8
           Caption = '0'
           Color = clNone
           ParentColor = False
@@ -400,7 +400,7 @@ object f_config_chart: Tf_config_chart
           Left = 72
           Height = 13
           Top = 244
-          Width = 7
+          Width = 8
           Caption = '5'
           Color = clNone
           ParentColor = False
@@ -660,36 +660,36 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp1: TLabel
           Left = 56
-          Height = 12
+          Height = 13
           Top = 123
-          Width = 36
+          Width = 28
           Caption = '1 - 2'
           Color = clNone
           ParentColor = False
         end
         object Labelp2: TLabel
           Left = 56
-          Height = 12
+          Height = 13
           Top = 152
-          Width = 36
+          Width = 28
           Caption = '2 - 3'
           Color = clNone
           ParentColor = False
         end
         object Labelp3: TLabel
           Left = 56
-          Height = 12
+          Height = 13
           Top = 181
-          Width = 36
+          Width = 28
           Caption = '3 - 4'
           Color = clNone
           ParentColor = False
         end
         object Labelp4: TLabel
           Left = 56
-          Height = 12
+          Height = 13
           Top = 210
-          Width = 36
+          Width = 28
           Caption = '4 - 5'
           Color = clNone
           ParentColor = False
@@ -706,45 +706,45 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp0: TLabel
           Left = 56
-          Height = 12
+          Height = 13
           Top = 94
-          Width = 36
+          Width = 28
           Caption = '0 - 1'
           Color = clNone
           ParentColor = False
         end
         object Labelp5: TLabel
           Left = 248
-          Height = 12
+          Height = 13
           Top = 94
-          Width = 36
+          Width = 28
           Caption = '5 - 6'
           Color = clNone
           ParentColor = False
         end
         object Labelp6: TLabel
           Left = 248
-          Height = 12
+          Height = 13
           Top = 123
-          Width = 36
+          Width = 28
           Caption = '6 - 7'
           Color = clNone
           ParentColor = False
         end
         object Labelp7: TLabel
           Left = 248
-          Height = 12
+          Height = 13
           Top = 152
-          Width = 36
+          Width = 28
           Caption = '7 - 8'
           Color = clNone
           ParentColor = False
         end
         object Labelp8: TLabel
           Left = 248
-          Height = 12
+          Height = 13
           Top = 181
-          Width = 36
+          Width = 28
           Caption = '8 - 9'
           Color = clNone
           ParentColor = False
@@ -1948,81 +1948,81 @@ object f_config_chart: Tf_config_chart
         end
         object Label161: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 86
-          Width = 36
+          Width = 28
           Caption = '1 - 2'
           Color = clNone
           ParentColor = False
         end
         object Label162: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 115
-          Width = 36
+          Width = 28
           Caption = '2 - 3'
           Color = clNone
           ParentColor = False
         end
         object Label163: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 144
-          Width = 36
+          Width = 28
           Caption = '3 - 4'
           Color = clNone
           ParentColor = False
         end
         object Label164: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 172
-          Width = 36
+          Width = 28
           Caption = '4 - 5'
           Color = clNone
           ParentColor = False
         end
         object Label166: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 58
-          Width = 36
+          Width = 28
           Caption = '0 - 1'
           Color = clNone
           ParentColor = False
         end
         object Label167: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 201
-          Width = 36
+          Width = 28
           Caption = '5 - 6'
           Color = clNone
           ParentColor = False
         end
         object Label168: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 230
-          Width = 36
+          Width = 28
           Caption = '6 - 7'
           Color = clNone
           ParentColor = False
         end
         object Label169: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 258
-          Width = 36
+          Width = 28
           Caption = '7 - 8'
           Color = clNone
           ParentColor = False
         end
         object Label170: TLabel
           Left = 48
-          Height = 12
+          Height = 13
           Top = 287
-          Width = 36
+          Width = 28
           Caption = '8 - 9'
           Color = clNone
           ParentColor = False
@@ -2347,8 +2347,8 @@ object f_config_chart: Tf_config_chart
           Top = 40
           Width = 369
           Caption = 'Type of object to add to the list'
-          ClientHeight = 206
-          ClientWidth = 365
+          ClientHeight = 223
+          ClientWidth = 369
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32
