@@ -222,7 +222,7 @@ ShowSYS;
 ShowServer;
 ShowTelescope;
 LockChange:=false;
-{$ifdef mswindows}
+{$ifdef win32}
 GroupBoxLinux.Visible:=false;
 {$endif}
 end;
@@ -270,7 +270,7 @@ end;
 
 procedure Tf_config_system.ShowTelescope;
 var i:integer;
-{$ifdef mswindows}
+{$ifdef win32}
     n:integer;
     fs : TSearchRec;
     buf : string;
@@ -295,10 +295,10 @@ if csc.IndiTelescope then Telescopeselect.itemindex:=0
    else if csc.PluginTelescope then Telescopeselect.itemindex:=2
    else Telescopeselect.itemindex:=1;
 TelescopeselectClick(self);
-{$ifdef linux}
+{$ifdef unix}
 IndiPort.text:=csc.IndiPort;
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
 val(rightstr(csc.IndiPort,1),i,n);
 if n=0 then IndiPort.itemindex:=i
        else IndiPort.itemindex:=0;
@@ -571,10 +571,10 @@ end;
 procedure Tf_config_system.IndiPortChange(Sender: TObject);
 begin
 if LockChange then exit;
-{$ifdef linux}
+{$ifdef unix}
 csc.IndiPort:=IndiPort.text;
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
 csc.IndiPort:='/dev/ttyS'+inttostr(IndiPort.itemindex);
 {$endif}
 end;

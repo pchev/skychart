@@ -90,7 +90,7 @@ type
 
   Var f_getdss: Tf_getdss;
 
-  {$ifdef mswindows}
+  {$ifdef win32}
   Const dsslibname = 'libgetdss.dll';
   {$endif}
   {$ifdef unix}

@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  {$ifdef mswindows}
+  {$ifdef win32}
     Windows,
   {$endif}
   {$ifdef unix}
@@ -204,7 +204,7 @@ try
       end;
       FIndiServerPid:=ExecFork(FIndiServer,'-p',FTargetPort,'-r','0',FIndiDriver);
       {$endif}
-      {$ifdef mswindows}
+      {$ifdef win32}
       if localplugin then chdir(plugin);
       ExecNoWait(FIndiServer+' -p '+FTargetPort+' -r 0 '+FIndiDriver,'IndiServer');
       {$endif}
@@ -239,7 +239,7 @@ try
    until false;
  end;
 if FServerStartedByMe then begin
-  {$ifdef mswindows}
+  {$ifdef win32}
     FIndiServerPid:=findwindow(nil,Pchar('IndiServer'));
     writetrace('Kill '+inttostr(FIndiServerPid));
     if FIndiServerPid<>0 then PostMessage(FIndiServerPid,WM_CLOSE,0,0);

@@ -82,7 +82,7 @@ procedure InitPlanetRender;
 begin
 if Prenderlib=0 then begin
  planetrender:=false;
- {$ifdef mswindows}
+ {$ifdef win32}
  try
   Prenderlib := LoadLibrary('libFPlanetRender.dll');
   if Prenderlib<>0 then begin
