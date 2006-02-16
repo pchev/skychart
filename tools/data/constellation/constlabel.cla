@@ -1,0 +1,93 @@
+; Name of the constellation for Cartes du Ciel
+; Official Latin name
+; For a translation copy this file to constlabel_XX.dat where XX is the specific language code
+;
+00.567 ;  39.250 ; And ; Andromeda          
+10.117 ; -33.350 ; Ant ; Antlia             
+16.133 ; -76.583 ; Aps ; Apus               
+22.700 ; -10.467 ; Aqr ; Aquarius           
+19.683 ;  03.367 ; Aql ; Aquila             
+17.233 ; -51.117 ; Ara ; Ara                
+02.683 ;  22.567 ; Ari ; Aries              
+05.950 ;  42.817 ; Aur ; Auriga             
+14.683 ;  32.333 ; Boo ; Bootes             
+04.717 ; -38.167 ; Cae ; Caelum             
+06.150 ;  71.967 ; Cam ; Camelopardalis     
+08.667 ;  22.000 ; Cnc ; Cancer             
+13.017 ;  42.350 ; CVn ; Canes Venatici     
+06.833 ; -22.317 ; CMa ; Canis Major        
+07.617 ;  06.767 ; CMi ; Canis Minor        
+21.050 ; -19.350 ; Cap ; Capricornus        
+08.833 ; -60.500 ; Car ; Carina             
+00.867 ;  60.300 ; Cas ; Cassiopeia         
+12.950 ; -44.000 ; Cen ; Centaurus          
+22.417 ;  72.567 ; Cep ; Cepheus            
+01.717 ; -06.367 ; Cet ; Cetus              
+12.000 ; -81.017 ; Cha ; Chamaeleon         
+14.533 ; -67.300 ; Cir ; Circinus           
+05.700 ; -37.917 ; Col ; Columba            
+12.750 ;  22.650 ; Com ; Coma Berenices     
+18.650 ; -41.750 ; CrA ; Corona Australis   
+15.883 ;  32.633 ; CrB ; Corona Borealis    
+12.383 ; -18.633 ; Crv ; Corvus             
+11.350 ; -13.750 ; Crt ; Crater             
+12.483 ; -60.300 ; Cru ; Crux               
+20.583 ;  44.000 ; Cyg ; Cygnus             
+20.667 ;  12.100 ; Del ; Delphinus          
+05.333 ; -63.017 ; Dor ; Dorado             
+17.950 ;  66.067 ; Dra ; Draco              
+21.250 ;  07.933 ; Equ ; Equuleus           
+03.883 ; -17.983 ; Eri ; Eridanus           
+02.767 ; -31.000 ; For ; Fornax             
+06.850 ;  24.817 ; Gem ; Gemini             
+22.450 ; -45.133 ; Gru ; Grus               
+17.433 ;  31.233 ; Her ; Hercules           
+03.217 ; -52.000 ; Hor ; Horologium         
+09.133 ; -11.683 ; Hya ; Hydra              
+02.583 ; -72.917 ; Hyi ; Hydrus             
+21.133 ; -52.317 ; Ind ; Indus              
+22.517 ;  46.667 ; Lac ; Lacerta            
+10.667 ;  17.000 ; Leo ; Leo                
+10.317 ;  33.233 ; LMi ; Leo Minor          
+05.433 ; -19.650 ; Lep ; Lepus              
+15.183 ; -15.550 ; Lib ; Libra              
+15.383 ; -42.717 ; Lup ; Lupus              
+07.733 ;  47.833 ; Lyn ; Lynx               
+18.900 ;  40.650 ; Lyr ; Lyra               
+05.500 ; -79.017 ; Men ; Mensa              
+20.950 ; -36.800 ; Mic ; Microscopium       
+06.967 ; -03.267 ; Mon ; Monoceros          
+12.467 ; -69.133 ; Mus ; Musca              
+16.050 ; -52.717 ; Nor ; Norma              
+22.167 ; -84.267 ; Oct ; Octans             
+17.033 ; -02.350 ; Oph ; Ophiuchus          
+05.567 ;  03.583 ; Ori ; Orion              
+19.167 ; -65.867 ; Pav ; Pavo               
+22.617 ;  19.650 ; Peg ; Pegasus            
+03.517 ;  44.883 ; Per ; Perseus            
+00.733 ; -48.767 ; Phe ; Phoenix            
+05.383 ; -51.367 ; Pic ; Pictor             
+00.883 ;  15.483 ; Psc ; Pisces             
+22.417 ; -31.567 ; PsA ; Piscis Australis   
+07.867 ; -32.617 ; Pup ; Puppis             
+08.883 ; -29.783 ; Pyx ; Pyxis              
+03.900 ; -60.517 ; Ret ; Reticulum          
+19.667 ;  17.000 ; Sge ; Sagitta            
+19.383 ; -29.883 ; Sgr ; Sagittarius        
+16.867 ; -35.333 ; Sco ; Scorpius           
+00.500 ; -31.000 ; Scl ; Sculptor           
+18.650 ; -10.883 ; Sct ; Scutum             
+15.733 ;  10.850 ; Ser ; Serpens Caput      
+17.800 ; -13.483 ; Ser ; Serpens Cauda
+10.100 ; -01.133 ; Sex ; Sextans            
+04.100 ;  17.333 ; Tau ; Taurus             
+19.250 ; -51.467 ; Tel ; Telescopium        
+02.050 ;  32.333 ; Tri ; Triangulum         
+16.117 ; -65.100 ; TrA ; Triangulum Australe
+23.833 ; -64.933 ; Tuc ; Tucana             
+11.333 ;  57.500 ; UMa ; Ursa Major         
+14.967 ;  75.033 ; UMi ; Ursa Minor         
+09.333 ; -48.483 ; Vel ; Vela               
+13.350 ; -03.517 ; Vir ; Virgo              
+07.667 ; -69.617 ; Vol ; Volans             
+20.367 ;  25.033 ; Vul ; Vulpecula          
