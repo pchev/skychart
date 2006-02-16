@@ -1,0 +1,19 @@
+# use imagemagick to convert the color icon to red
+
+cp -f ../icon_color/*.xpm .
+
+# image list
+convert -size 10x100  gradient:\#C03030-\#400000 color.png
+ls i*.xpm | xargs -i+ -n1 convert + -fx intensity +
+ls i*.xpm | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' +
+
+# individual button
+ls a*.xpm | xargs -i+ -n1 convert + -fx intensity +
+ls a*.xpm | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' +
+
+# special open/close button
+convert -size 10x100  gradient:\#FF3030-\#000000 color.png
+ls b*.xpm | xargs -i+ -n1 convert + -fx intensity +
+ls b*.xpm | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' +
+
+rm color.png
