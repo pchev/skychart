@@ -259,7 +259,7 @@ implementation
 procedure Tf_chart.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   RefreshTimer.Enabled:=false;
-{$ifdef mswindows}
+{$ifdef win32}
   TelescopeTimer.Enabled:=false;
  {$endif}
   Action := caFree;
@@ -515,7 +515,7 @@ try
     sc.plot.cfgchart.fontscale:=1;
     sc.cfgsc^.xshift:=printer.PaperSize.PaperRect.WorkRect.Left;
     sc.cfgsc^.yshift:=printer.PaperSize.PaperRect.WorkRect.Top;
-    {$ifdef mswindows}
+    {$ifdef win32}
     sc.plot.init(resol*Printer.PageWidth div 254,resol*Printer.pageheight div 254);
     {$endif}
     {$ifdef unix}
@@ -2255,7 +2255,7 @@ end;
 procedure Tf_chart.Connect1Click(Sender: TObject);
 
 begin
-{$ifdef mswindows}
+{$ifdef win32}
 if sc.cfgsc.PluginTelescope then begin
    ConnectPlugin(Sender);
 end;
@@ -2299,7 +2299,7 @@ procedure Tf_chart.Slew1Click(Sender: TObject);
 var ra,dec:double;
 begin
 if Connect1.checked then begin
-{$ifdef mswindows}
+{$ifdef win32}
 if not sc.cfgsc.IndiTelescope then begin
    SlewPlugin(Sender);
 end else
@@ -2320,7 +2320,7 @@ end;
 procedure Tf_chart.AbortSlew1Click(Sender: TObject);
 begin
 if Connect1.checked then begin
-{$ifdef mswindows}
+{$ifdef win32}
 if not sc.cfgsc.IndiTelescope then begin
    AbortSlewPlugin(Sender);
 end else
@@ -2338,7 +2338,7 @@ begin
 if Connect1.checked and
    (mrYes=MessageDlg('Please confirm that the telescope is centered to '+sc.cfgsc.FindName, mtConfirmation, [mbYes,mbNo], 0))
 then begin
-{$ifdef mswindows}
+{$ifdef win32}
 if not sc.cfgsc.IndiTelescope then begin
    SyncPlugin(Sender);
 end else

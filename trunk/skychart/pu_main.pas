@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  {$ifdef mswindows}
+  {$ifdef win32}
     Windows,
     //WinXP, // XP theme still not working with night vision
   {$endif}
@@ -502,7 +502,7 @@ type
     cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB : Boolean;
     InitialChartNum: integer;
-  {$ifdef mswindows}
+  {$ifdef win32}
     savwincol  : array[0..30] of Tcolor;
   {$endif}
     procedure SetButtonImage(button: Integer);
@@ -515,7 +515,7 @@ type
     procedure ApplyConfig(Sender: TObject);
     procedure SetChildFocus(Sender: TObject);
     procedure SetNightVision(night: boolean);
-  {$ifdef mswindows}
+  {$ifdef win32}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
   {$endif}
@@ -640,7 +640,7 @@ begin
   Child.sc.Fits:=Fits;
   Child.sc.planet:=planet;
   Child.sc.cdb:=cdcdb;
-  {$ifdef mswindows}
+  {$ifdef win32}
   Child.telescopeplugin:=telescope;
   {$endif}
   Child.sc.plot.cfgplot^:=cfgp;
@@ -1005,7 +1005,7 @@ end;
 Procedure Tf_main.GetAppDir;
 var inif: TMemIniFile;
     buf: string;
-{$ifdef mswindows}
+{$ifdef win32}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
 const CSIDL_PERSONAL = $0005;
@@ -1019,7 +1019,7 @@ appdir:=expandfilename(appdir);
 privatedir:=expandfilename(PrivateDir);
 Tempdir:=expandfilename(Tempdir);
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
 SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
 privatedir:=slash(Folder)+privatedir;
@@ -1052,7 +1052,7 @@ SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
 ImageListCount:=ImageNormal.Count;
-{$ifdef mswindows}
+{$ifdef win32}
   configfile:=Defaultconfigfile;
 {$endif}
 {$ifdef unix}
@@ -1092,7 +1092,7 @@ procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
 var i:integer;
 begin
 try
-{$ifdef mswindows}
+{$ifdef win32}
 if nightvision then ResetWinColor;
 {$endif}
 writetrace('Exiting ...');
@@ -1882,7 +1882,7 @@ begin
     Fits.min_sigma:=cfgm.ImageLuminosity;
     Fits.max_sigma:=cfgm.ImageContrast;
     TelescopePanel.visible:=def_cfgsc.IndiTelescope;
-    {$ifdef mswindows}
+    {$ifdef win32}
     if (telescope.scopelibok)and(def_cfgsc.IndiTelescope) then begin
        telescope.ScopeDisconnect;
        telescope.UnloadScopeLibrary;
@@ -1992,7 +1992,7 @@ end;
 
 Procedure Tf_main.InitFonts;
 begin
-{$ifdef mswindows}
+{$ifdef win32}
    font.name:=def_cfgplot.fontname[4];
    font.size:=def_cfgplot.fontsize[4];
    if def_cfgplot.FontBold[4] then font.style:=[fsBold] else font.style:=[];
@@ -2259,7 +2259,7 @@ def_cfgsc.ManualTelescope:=false;
 {$ifdef unix}
    def_cfgsc.ManualTelescope:=true;
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
    def_cfgsc.PluginTelescope:=true;
 {$endif}
 def_cfgsc.ManualTelescopeType:=0;
@@ -2660,7 +2660,7 @@ cfgm.language:=ReadString(section,'language',cfgm.language);
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
 use_xplanet:=ReadBool(section,'use_xplanet',use_xplanet);
 xplanet_dir:=ReadString(section,'xplanet_dir',xplanet_dir);
 {$endif}
@@ -3030,7 +3030,7 @@ WriteString(section,'PrivateDir',privatedir);
 WriteInteger(section,'LinuxDesktop',LinuxDesktop);
 WriteString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
 WriteBool(section,'use_xplanet',use_xplanet);
 WriteString(section,'xplanet_dir',xplanet_dir);
 {$endif}
@@ -3130,7 +3130,7 @@ procedure Tf_main.SaveQuickSearch(filename:string);
 var i,j:integer;
     inif: TMemIniFile;
     section : string;
-    {$ifdef mswindows}
+    {$ifdef win32}
     instini: TIniFile;
     {$endif}
 begin
@@ -3146,7 +3146,7 @@ end;
 finally
  inif.Free;
 end;
-{$ifdef mswindows}
+{$ifdef win32}
  // hard to locate the main .ini file, the location depend on the Windows version
  // put this one in the system default location (C:\windows) to locate the install path
  // To be read by external software only
@@ -3495,7 +3495,7 @@ for i:=1 to Maxwindow do
     and(TCPDaemon.TCPThrd[i].Fsock<>nil)
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
-{$ifdef mswindows}
+{$ifdef win32}
 {if DDEopen then begin
    DdeInfo[0]:=formatdatetime('c',now);
    DdeInfo[2]:='> '+origin+' : '+str;
@@ -4106,7 +4106,7 @@ for i:=0 to MultiDoc1.ChildCount-1 do
     (MultiDoc1.Childs[i].DockedObject as Tf_chart).NightVision:=nightvision;
 end;
 
-{$ifdef mswindows}
+{$ifdef win32}
 // Nightvision change Windows system color
 Procedure Tf_main.SaveWinColor;
 var n : integer;

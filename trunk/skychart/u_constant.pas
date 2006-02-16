@@ -227,7 +227,7 @@ const cdcversion = 'Version 3 alpha 0.1.0';
       DefaultTmpDir=DefaultPrivateDir+'/tmp';
       Default_dssdrive='/mnt/cdrom';
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
       DefaultFontName='Arial';
       DefaultFontSymbol='Symbol';
       DefaultFontSize=8;
@@ -449,7 +449,7 @@ const
 //      libsatxy = 'libsatxy.so';
 //      libsatxyfm='Satxyfm';
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
       lib404 = 'libplan404.dll';
 //      libsatxy = 'libsatxy.dll';
 //      libsatxyfm='Satxyfm';
@@ -492,7 +492,7 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
      use_xplanet: boolean = true;
      xplanet_dir: string = '';
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
      tracefile:string = 'cdc_trace.txt';
      xplanet_dir: string = 'C:\Program Files\xplanet';
      dcd_cmd: string = 'cmd /c "C: && cd C:\Program Files\dcd && dcd.py"';

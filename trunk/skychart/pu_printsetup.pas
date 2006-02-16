@@ -124,7 +124,7 @@ case cm.PrintMethod of
    {$ifdef unix}
      ok:=(0=exec('which pnmtops'));
    {$endif}
-   {$ifdef mswindows}
+   {$ifdef win32}
      ok:=Fileexists(slash(appdir)+'plugins\bmptops.bat');
    {$endif}
    if ok then begin
@@ -145,7 +145,7 @@ case cm.PrintMethod of
      {$ifdef unix}
        ok:=(0=exec('which '+cm.PrintCmd2));
      {$endif}
-     {$ifdef mswindows}
+     {$ifdef win32}
        ok:=Fileexists(cm.PrintCmd2);
      {$endif}
      if ok then begin

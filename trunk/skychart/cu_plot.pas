@@ -1196,7 +1196,7 @@ if not cfgplot.Invisible then begin
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,be );
           end;
       2 : begin // image
-          {$ifdef mswindows}
+          {$ifdef win32}
           if use_Xplanet then
              PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg)
           else   
@@ -1359,7 +1359,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
  {$ifdef unix}
     cmd:='xplanet';
  {$endif}
- {$ifdef mswindows}
+ {$ifdef win32}
     if not DirectoryExists(xplanet_dir) then exit;
     chdir(xplanet_dir);
     cmd:='xplanet.exe';
@@ -1791,7 +1791,7 @@ if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
 {$ifdef unix}
 ls:=round(1.5*cnv.TextHeight('1'));
 {$endif}
-{$ifdef mswindows}
+{$ifdef win32}
 ls:=round(1.1*cnv.TextHeight('1'));
 {$endif}
 repeat

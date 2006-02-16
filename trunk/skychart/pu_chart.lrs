@@ -6,12 +6,12 @@ LazarusResources.Add('Tf_chart','FORMDATA',[
   +#1#7'Caption'#6#5'Chart'#12'ClientHeight'#3'R'#1#11'ClientWidth'#3#252#1#10
   +'KeyPreview'#9#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#9'OnDe'
   +'stroy'#7#11'FormDestroy'#9'OnKeyDown'#7#11'FormKeyDown'#10'OnKeyPress'#7#12
-  +'FormKeyPress'#10'ParentFont'#9#13'PixelsPerInch'#2'`'#10'TextHeight'#2#13#0
+  +'FormKeyPress'#10'ParentFont'#9#13'PixelsPerInch'#2'P'#10'TextHeight'#2#13#0
   +#6'TPanel'#6'Panel1'#6'Cursor'#7#7'crCross'#6'Height'#3','#1#5'Width'#3#244#1
   +#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#3','#1#11'ClientWidth'#3#244#1#5
   +'Color'#7#7'clBlack'#11'FullRepaint'#8#11'ParentColor'#8#8'TabOrder'#2#0#8'O'
   +'nResize'#7#11'ChartResize'#0#6'TLabel'#10'identlabel'#6'Cursor'#7#11'crHand'
-  +'Point'#4'Left'#3#136#0#6'Height'#2#14#3'Top'#2'x'#5'Width'#2'1'#7'Caption'#6
+  +'Point'#4'Left'#3#136#0#6'Height'#2#11#3'Top'#2'x'#5'Width'#2'C'#7'Caption'#6
   +#11'identlabel '#5'Color'#7#7'clBlack'#10'Font.Color'#7#7'clWhite'#11'Font.H'
   +'eight'#2#244#9'Font.Name'#6#13'MS Sans Serif'#11'ParentColor'#8#13'ShowAcce'
   +'lChar'#8#11'Transparent'#8#7'Visible'#8#7'OnClick'#7#15'identlabelClick'#0#0

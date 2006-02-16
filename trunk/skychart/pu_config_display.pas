@@ -841,7 +841,7 @@ end;
 procedure Tf_config_display.SetFonts(ctrl:Tedit;num:integer);
 begin
  ctrl.Text:=cplot.FontName[num];
-{$ifdef mswindows}
+{$ifdef win32}
  ctrl.Font.Name:=cplot.FontName[num];
  ctrl.Font.Size:=cplot.FontSize[num];
  if cplot.FontBold[num] then ctrl.Font.Style:=[fsBold]
