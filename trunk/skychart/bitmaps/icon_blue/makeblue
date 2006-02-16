@@ -1,0 +1,19 @@
+# use imagemagick to convert the color icon to blue
+
+cp -f ../icon_color/*.xpm .
+
+# image list
+convert -size 10x100  gradient:\#4040F0-\#202080 color.png
+ls i*.xpm | xargs -i+ -n1 convert + -fx intensity +
+ls i*.xpm | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' +
+
+# individual button
+ls a*.xpm | xargs -i+ -n1 convert + -fx intensity +
+ls a*.xpm | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' +
+
+# special open/close button
+convert -size 10x100  gradient:\#4040FF-\#000000 color.png
+ls b*.xpm | xargs -i+ -n1 convert + -fx intensity +
+ls b*.xpm | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' +
+
+rm color.png
