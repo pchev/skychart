@@ -27,7 +27,7 @@ interface
 
 uses
   passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
-  Forms, Stdctrls, ComCtrls, Classes, Sysutils, StrUtils;
+  Forms, Stdctrls, ComCtrls, Classes, Dialogs, Sysutils, StrUtils;
 
 
 type
@@ -1316,7 +1316,7 @@ if db.Active then begin
          'values ('+
          rec[0]+','+
          '"US-'+rec[1]+'",'+
-         '"'+rec[2]+'",'+
+         '"'+utf8encode(rec[2])+'",'+
          '"'+rec[3]+'",'+
          rec[9]+','+
          rec[10]+','+
@@ -1356,7 +1356,7 @@ end;
 
 procedure TCDCdb.GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
 var i:integer;
-    buf:string;
+    buf,bufutf8:string;
 begin
 citylist.Clear;
 codelist.Clear;
@@ -1369,7 +1369,8 @@ i:=0;
 while i<db.RowCount do begin
   codelist.add(db.results[i][0]);
   buf:=db.results[i][1];
-  citylist.add(utf8decode(buf));
+  bufutf8:=utf8decode(buf);
+  citylist.add(bufutf8);
   inc(i);
 end;
 end;
@@ -1423,7 +1424,7 @@ if locid=0 then begin // Add new location
        'values ('+
        id+','+
        '"'+country+'",'+
-       '"'+location+'",'+
+       '"'+utf8encode(location)+'",'+
        '"'+loctype+'",'+
        lat+','+
        lon+','+
