@@ -147,7 +147,7 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 80
   TextHeight = 13
   object Panel1: TPanel
     Height = 480
@@ -164,7 +164,7 @@ object f_config: Tf_config
       AutoExpand = True
       BackgroundColor = clBtnHighlight
       Color = clBtnHighlight
-      DefaultItemHeight = 15
+      DefaultItemHeight = 14
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True
@@ -273,9 +273,9 @@ object f_config: Tf_config
     TabOrder = 1
     object Applyall: TCheckBox
       Left = 16
-      Height = 13
+      Height = 28
       Top = 12
-      Width = 144
+      Width = 185
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked

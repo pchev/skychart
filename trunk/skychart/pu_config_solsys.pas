@@ -26,22 +26,23 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  u_constant, u_util, u_projection, cu_database,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, unzip,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, MaskEdit,
-  WizardNotebook;
+  WizardNotebook, downloaddialog;
 
 type
 
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TForm)
+    DownloadAsteroid: TButton;
+    DownloadComet: TButton;
+    DownloadDialog1: TDownloadDialog;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;
     Page3: TPage;
     Page4: TPage;
-    MPCDownloadPanel: TPanel;
-    MPCDownloadPanel2: TPanel;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     Label12: TLabel;
     Label131: TLabel;
@@ -193,8 +194,9 @@ type
     UseXplanet: TCheckBox;
     XplanetDir: TEdit;
     XplanetBtn: TBitBtn;
+    procedure DownloadAsteroidClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure MPCDownloadPanelClick(Sender: TObject);
+    procedure DownloadCometClick(Sender: TObject);
     procedure PlanetDirChange(Sender: TObject);
     procedure PlanetDirSelClick(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
@@ -330,9 +332,34 @@ begin
   LockChange:=true;
 end;
 
-procedure Tf_config_solsys.MPCDownloadPanelClick(Sender: TObject);
+procedure Tf_config_solsys.DownloadAsteroidClick(Sender: TObject);
+var fn,url: string;
 begin
-  ExecuteFile('http://www.astro.cz/mpcorb/');
+ url:='http://www.astro.cz/mpcorb/MPCORB.DAT';
+ fn:=slash(privatedir)+slash('MPC')+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
+ DownloadDialog1.URL:=url;
+ DownloadDialog1.SaveToFile:=fn;
+ if DownloadDialog1.Execute then begin
+     mpcfile.Text:=fn;
+     application.ProcessMessages;
+     LoadMPCClick(Sender);
+ end else
+   Showmessage('Cancel '+DownloadDialog1.ResponseText);
+end;
+
+procedure Tf_config_solsys.DownloadCometClick(Sender: TObject);
+var fn,url: string;
+begin
+ url:='http://www.astro.cz/mpcorb/COMET.DAT';
+ fn:=slash(privatedir)+slash('MPC')+'COMET-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
+ DownloadDialog1.URL:=url;
+ DownloadDialog1.SaveToFile:=fn;
+ if DownloadDialog1.Execute then begin
+    comfile.Text:=fn;
+    application.ProcessMessages;
+    LoadcomClick(Sender);
+ end else
+   Showmessage('Cancel '+DownloadDialog1.ResponseText);
 end;
 
 procedure Tf_config_solsys.PlanetDirSelClick(Sender: TObject);

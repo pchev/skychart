@@ -5,11 +5,11 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +#2#3'Top'#2''#5'Width'#3#5#2#18'HorzScrollBar.Page'#3#4#2#18'VertScrollBar.'
   +'Page'#3#11#2#13'ActiveControl'#7#9'planetdir'#7'Caption'#6#15'f_config_sols'
   +'ys'#12'ClientHeight'#3#12#2#11'ClientWidth'#3#5#2#8'OnCreate'#7#10'FormCrea'
-  +'te'#6'OnShow'#7#8'FormShow'#13'PixelsPerInch'#2'P'#0#6'TPanel'#9'MainPanel'
+  +'te'#6'OnShow'#7#8'FormShow'#13'PixelsPerInch'#2'Z'#0#6'TPanel'#9'MainPanel'
   +#4'Left'#2#8#6'Height'#3#224#1#3'Top'#2#6#5'Width'#3#244#1#12'ClientHeight'#3
   +#224#1#11'ClientWidth'#3#244#1#11'ParentColor'#8#8'TabOrder'#2#0#0#15'TWizar'
   +'dNotebook'#15'WizardNotebook1'#4'Left'#2#1#6'Height'#3#222#1#3'Top'#2#1#5'W'
-  +'idth'#3#242#1#5'Align'#7#8'alClient'#9'PageIndex'#2#0#8'ShowTabs'#8#0#5'TPa'
+  +'idth'#3#242#1#5'Align'#7#8'alClient'#9'PageIndex'#2#3#8'ShowTabs'#8#0#5'TPa'
   +'ge'#5'Page1'#7'Caption'#6#5'Page1'#11'ClientWidth'#3#242#1#12'ClientHeight'
   +#3#222#1#0#6'TLabel'#7'Label12'#6'Height'#2#13#5'Width'#2't'#7'Caption'#6#20
   +'Solar System Setting'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8
@@ -203,279 +203,280 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TGroupBox'#10'GroupBox14'#4'Left'
   +#2#8#6'Height'#2'p'#3'Top'#2#15#5'Width'#3#185#1#7'Caption'#6#20'Load MPC fo'
   +'rmat file'#12'ClientHeight'#2'_'#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6
-  +'TLabel'#8'Label233'#4'Left'#2#5#6'Height'#2#13#3'Top'#2'8'#5'Width'#2#29#7
-  +'Caption'#6#6'File :'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#7
-  +'comfile'#4'Left'#2#29#6'Height'#2#21#3'Top'#2'4'#5'Width'#3#241#0#7'OnClick'
-  +#7#15'comfilebtnClick'#8'TabOrder'#2#0#4'Text'#6#9'COMET.DAT'#0#0#7'TButton'
-  +#7'Loadcom'#4'Left'#3'E'#1#6'Height'#2#25#3'Top'#2'2'#5'Width'#2'a'#25'Borde'
-  +'rSpacing.InnerBorder'#2#2#7'Caption'#6#9'Load file'#7'OnClick'#7#12'Loadcom'
-  +'Click'#8'TabOrder'#2#1#0#0#7'TBitBtn'#10'comfilebtn'#3'Tag'#2#8#4'Left'#3#16
-  +#1#6'Height'#2#26#3'Top'#2'1'#5'Width'#2#26#25'BorderSpacing.InnerBorder'#2#2
-  +#10'Glyph.Data'#10#190#1#0#0#186#1#0#0'/* XPM */'#10'static char *graphic[] '
-  +'= {'#10'"16 16 5 1",'#10'". c None",'#10'", c #7F7F7F",'#10'"- c #FFFF00",'
-  +#10'"* c #FFFFFF",'#10'"a c #000000",'#10'"................",'#10'".........'
-  +'.......",'#10'"................",'#10'"................",'#10'"...,,,,.....'
-  +'....",'#10'"..,-*-*,........",'#10'"..,,,,,,,,,,a...",'#10'"..,*********,a.'
-  +'.",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,*-.-.-.-.,a..",'
-  +#10'"..,*.-.-.-.-,a..",'#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaaaa...",'#10
-  +'"................",'#10'"................"}'#10#6'Layout'#7#10'blGlyphTop'#6
-  +'Margin'#2#0#9'NumGlyphs'#2#0#7'OnClick'#7#15'comfilebtnClick'#8'TabOrder'#2
-  +#2#7'TabStop'#8#0#0#6'TPanel'#16'MPCDownloadPanel'#6'Cursor'#7#11'crHandPoin'
-  +'t'#4'Left'#2#29#6'Height'#2#28#3'Top'#2#9#5'Width'#3#156#0#7'Caption'#6#17
-  +'Download new file'#12'ClientHeight'#2#28#11'ClientWidth'#3#156#0#8'TabOrder'
-  +#2#3#7'OnClick'#7#21'MPCDownloadPanelClick'#0#0#0#5'TMemo'#7'MemoCom'#4'Left'
-  +#2#8#6'Height'#3#218#0#3'Top'#3#167#0#5'Width'#3#185#1#5'Color'#7#9'clBtnFac'
-  +'e'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#1#0#0#0#9'TTabSheet'#9'comdelet'
-  +'e'#7'Caption'#6#16'Data Maintenance'#12'ClientHeight'#3#151#1#11'ClientWidt'
-  +'h'#3#225#1#10'ImageIndex'#2#3#0#6'TLabel'#8'Label238'#4'Left'#2#8#6'Height'
-  +#2#13#3'Top'#3#151#0#5'Width'#2'='#7'Caption'#6#9'Messages:'#5'Color'#7#6'cl'
-  +'None'#11'ParentColor'#8#0#0#9'TGroupBox'#10'GroupBox16'#4'Left'#2#8#6'Heigh'
-  +'t'#2'<'#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#27'Delete MPC data select'
-  +'ively'#12'ClientHeight'#2'<'#11'ClientWidth'#3#185#1#8'TabOrder'#2#0#0#9'TC'
-  +'omboBox'#11'comelemlist'#4'Left'#2#16#6'Height'#2#21#3'Top'#2#6#5'Width'#3
-  +#25#1#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#10'ItemHeight'#2#13
+  +'TLabel'#8'Label233'#4'Left'#2#5#6'Height'#2#13#3'Top'#2'8'#5'Width'#2'@'#7
+  +'Caption'#6#12'Local File :'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#5'TE'
+  +'dit'#7'comfile'#4'Left'#2'M'#6'Height'#2#21#3'Top'#2'4'#5'Width'#3#193#0#7
+  +'OnClick'#7#15'comfilebtnClick'#8'TabOrder'#2#0#4'Text'#6#9'COMET.DAT'#0#0#7
+  +'TButton'#7'Loadcom'#4'Left'#3'E'#1#6'Height'#2#25#3'Top'#2'2'#5'Width'#2'a'
+  +#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#9'Load file'#7'OnClick'#7#12
+  +'LoadcomClick'#8'TabOrder'#2#1#0#0#7'TBitBtn'#10'comfilebtn'#3'Tag'#2#8#4'Le'
+  +'ft'#3#16#1#6'Height'#2#26#3'Top'#2'1'#5'Width'#2#26#25'BorderSpacing.InnerB'
+  +'order'#2#2#10'Glyph.Data'#10#190#1#0#0#186#1#0#0'/* XPM */'#10'static char '
+  +'*graphic[] = {'#10'"16 16 5 1",'#10'". c None",'#10'", c #7F7F7F",'#10'"- c'
+  +' #FFFF00",'#10'"* c #FFFFFF",'#10'"a c #000000",'#10'"................",'#10
+  +'"................",'#10'"................",'#10'"................",'#10'"..'
+  +'.,,,,.........",'#10'"..,-*-*,........",'#10'"..,,,,,,,,,,a...",'#10'"..,**'
+  +'*******,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,*-.-.'
+  +'-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaa'
+  +'aa...",'#10'"................",'#10'"................"}'#10#6'Layout'#7#10
+  +'blGlyphTop'#6'Margin'#2#0#9'NumGlyphs'#2#0#7'OnClick'#7#15'comfilebtnClick'
+  +#8'TabOrder'#2#2#7'TabStop'#8#0#0#7'TButton'#13'DownloadComet'#4'Left'#2'M'#6
+  +'Height'#2#25#3'Top'#2#9#5'Width'#3#192#0#25'BorderSpacing.InnerBorder'#2#2#7
+  +'Caption'#6#17'Download new file'#7'OnClick'#7#18'DownloadCometClick'#8'TabO'
+  +'rder'#2#3#0#0#0#5'TMemo'#7'MemoCom'#4'Left'#2#8#6'Height'#3#218#0#3'Top'#3
+  +#167#0#5'Width'#3#185#1#5'Color'#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8
+  +'TabOrder'#2#1#0#0#0#9'TTabSheet'#9'comdelete'#7'Caption'#6#16'Data Maintena'
+  +'nce'#12'ClientHeight'#3#151#1#11'ClientWidth'#3#225#1#10'ImageIndex'#2#3#0#6
+  +'TLabel'#8'Label238'#4'Left'#2#8#6'Height'#2#13#3'Top'#3#151#0#5'Width'#2'='
+  +#7'Caption'#6#9'Messages:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TGro'
+  +'upBox'#10'GroupBox16'#4'Left'#2#8#6'Height'#2'<'#3'Top'#2#10#5'Width'#3#185
+  +#1#7'Caption'#6#27'Delete MPC data selectively'#12'ClientHeight'#2'<'#11'Cli'
+  +'entWidth'#3#185#1#8'TabOrder'#2#0#0#9'TComboBox'#11'comelemlist'#4'Left'#2
+  +#16#6'Height'#2#21#3'Top'#2#6#5'Width'#3#25#1#16'AutoCompleteText'#11#20'cba'
+  +'ctSearchAscending'#0#10'ItemHeight'#2#13#9'MaxLength'#2#0#5'Style'#7#14'csD'
+  +'ropDownList'#8'TabOrder'#2#0#0#0#7'TButton'#6'DelCom'#4'Left'#3'H'#1#6'Heig'
+  +'ht'#2#25#3'Top'#2#6#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#2#7'Capti'
+  +'on'#6#6'Delete'#7'OnClick'#7#11'DelComClick'#8'TabOrder'#2#1#0#0#0#9'TGroup'
+  +'Box'#10'GroupBox17'#4'Left'#2#8#6'Height'#2'?'#3'Top'#2'P'#5'Width'#3#185#1
+  +#7'Caption'#6#12'Quick Delete'#12'ClientHeight'#2'.'#11'ClientWidth'#3#181#1
+  +#8'TabOrder'#2#1#0#6'TLabel'#8'Label239'#4'Left'#2#24#6'Height'#2#13#3'Top'#2
+  +#16#5'Width'#3#206#0#7'Caption'#6'%Quickly delete all comet related data'#5
+  +'Color'#7#6'clNone'#11'ParentColor'#8#0#0#7'TButton'#9'DelComAll'#4'Left'#3
+  +'H'#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2
+  +#2#7'Caption'#6#6'Delete'#7'OnClick'#7#14'DelComAllClick'#8'TabOrder'#2#0#0#0
+  +#0#5'TMemo'#10'DelComMemo'#4'Left'#2#8#6'Height'#3#209#0#3'Top'#3#176#0#5'Wi'
+  +'dth'#3#185#1#5'Color'#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'
+  +#2#2#0#0#0#9'TTabSheet'#12'Addsinglecom'#7'Caption'#6#3'Add'#12'ClientHeight'
+  +#3#151#1#11'ClientWidth'#3#225#1#10'ImageIndex'#2#4#0#6'TLabel'#8'Label241'#4
+  +'Left'#2#8#6'Height'#2#13#3'Top'#2#8#5'Width'#3'Y'#1#7'Caption'#6'>Add a sin'
+  +'gle element to the database. All field are mandatory.'#5'Color'#7#6'clNone'
+  +#11'ParentColor'#8#0#0#6'TLabel'#8'Label242'#4'Left'#2#8#6'Height'#2#13#3'To'
+  +'p'#2'('#5'Width'#2'C'#7'Caption'#6#11'Designation'#5'Color'#7#6'clNone'#11
+  +'ParentColor'#8#0#0#6'TLabel'#8'Label243'#4'Left'#2#8#6'Height'#2#13#3'Top'#3
+  +#232#0#5'Width'#2'z'#7'Caption'#6#20'H absolute magnitude'#5'Color'#7#6'clNo'
+  +'ne'#11'ParentColor'#8#0#0#6'TLabel'#8'Label244'#4'Left'#3#160#0#6'Height'#2
+  +#13#3'Top'#3#232#0#5'Width'#2'g'#7'Caption'#6#17'G slope parameter'#5'Color'
+  +#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label245'#4'Left'#3#160#0#6'H'
+  ,'eight'#2#13#3'Top'#3#168#0#5'Width'#2'A'#7'Caption'#6#10'Epoch (JD)'#5'Colo'
+  +'r'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label246'#4'Left'#3#160#0#6
+  +'Height'#2#13#3'Top'#2'('#5'Width'#2'U'#7'Caption'#6#15'Perihelion date'#5'C'
+  +'olor'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label247'#4'Left'#3#160
+  +#0#6'Height'#2#13#3'Top'#2'h'#5'Width'#2''#7'Caption'#6#22'Argument of peri'
+  +'helion'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label248'#4
+  +'Left'#3'8'#1#6'Height'#2#13#3'Top'#2'h'#5'Width'#3#152#0#7'Caption'#6#24'Lo'
+  +'ngitude ascending Node'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'
+  +#8'Label249'#4'Left'#2#8#6'Height'#2#13#3'Top'#3#168#0#5'Width'#2':'#7'Capti'
+  +'on'#6#11'Inclination'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8
+  +'Label250'#4'Left'#2#8#6'Height'#2#13#3'Top'#2'h'#5'Width'#2'C'#7'Caption'#6
+  +#12'Eccentricity'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Lab'
+  +'el251'#4'Left'#3'8'#1#6'Height'#2#13#3'Top'#2'('#5'Width'#2'l'#7'Caption'#6
+  +#19'Perihelion distance'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'
+  +#8'Label253'#4'Left'#3'8'#1#6'Height'#2#13#3'Top'#3#168#0#5'Width'#2'.'#7'Ca'
+  +'ption'#6#7'Equinox'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8
+  +'Label254'#4'Left'#2#8#6'Height'#2#13#3'Top'#3'('#1#5'Width'#2'!'#7'Caption'
+  +#6#4'Name'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#5'comid'#4'Le'
+  +'ft'#2#8#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'd'#8'TabOrder'#2#0#0#0#5'TEdi'
+  +'t'#4'comh'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'
+  +#2#1#4'Text'#6#1'5'#0#0#5'TEdit'#4'comg'#4'Left'#3#160#0#6'Height'#2#21#3'To'
+  +'p'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#2#4'Text'#6#2'10'#0#0#5'TEdit'#5'comep'
+  +#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#3
+  +#0#0#5'TEdit'#7'comperi'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3#128#0#5'Wid'
+  +'th'#2'd'#8'TabOrder'#2#4#4'Text'#6#3'0.0'#0#0#5'TEdit'#7'comnode'#4'Left'#3
+  +'8'#1#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2#5#4'Text'#6#3
+  +'0.0'#0#0#5'TEdit'#4'comi'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#192#0#5'Width'
+  +#2'd'#8'TabOrder'#2#6#4'Text'#6#3'0.0'#0#0#5'TEdit'#5'comec'#4'Left'#2#8#6'H'
+  +'eight'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2#7#4'Text'#6#3'0.0'#0
+  +#0#5'TEdit'#4'comq'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'd'#8
+  +'TabOrder'#2#8#4'Text'#6#1'2'#0#0#5'TEdit'#6'comnam'#4'Left'#2#8#6'Height'#2
+  +#21#3'Top'#3'@'#1#5'Width'#3#1#1#8'TabOrder'#2#9#0#0#5'TEdit'#5'comeq'#4'Lef'
+  +'t'#3'8'#1#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#10#4'Te'
+  +'xt'#6#4'2000'#0#0#7'TButton'#6'AddCom'#4'Left'#3'8'#1#6'Height'#2#25#3'Top'
+  +#3'@'#1#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#3'Add'#7
+  +'OnClick'#7#11'AddComClick'#8'TabOrder'#2#11#0#0#9'TMaskEdit'#4'comt'#4'Left'
+  +#3#160#0#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'['#8'EditMask'#6#20'!9999.99.'
+  +'00.0000;1;_'#9'MaxLength'#2#15#11'ParentColor'#8#8'TabOrder'#2#12#4'Text'#6
+  +#15'    .  .  .    '#0#0#0#0#0#5'TPage'#5'Page4'#7'Caption'#6#5'Page4'#11'Cl'
+  +'ientWidth'#3#242#1#12'ClientHeight'#3#222#1#0#12'TPageControl'#14'AstPageCo'
+  +'ntrol'#6'Height'#3#173#1#3'Top'#2#4#5'Width'#3#225#1#10'ActivePage'#7#7'ast'
+  +'load'#8'TabIndex'#2#1#8'TabOrder'#2#0#0#9'TTabSheet'#10'astsetting'#7'Capti'
+  +'on'#6#15'General Setting'#12'ClientHeight'#3#151#1#11'ClientWidth'#3#225#1
+  +#10'ImageIndex'#2#3#0#9'TGroupBox'#9'GroupBox9'#4'Left'#2#8#6'Height'#3#229#0
+  +#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#13'Chart Setting'#12'ClientHeight'
+  +#3#212#0#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6'TLabel'#8'Label203'#4'L'
+  +'eft'#2' '#6'Height'#2#13#3'Top'#2'{'#5'Width'#3'/'#1#7'Caption'#6'6Do not t'
+  +'ake account of asteroid fainter than magnitude'#5'Color'#7#6'clNone'#11'Par'
+  +'entColor'#8#0#0#6'TLabel'#8'Label212'#4'Left'#2' '#6'Height'#2#13#3'Top'#3
+  +#171#0#5'Width'#2'P'#7'Caption'#6#13'Show asteroid'#5'Color'#7#6'clNone'#11
+  +'ParentColor'#8#0#0#6'TLabel'#8'Label213'#4'Left'#3#189#0#6'Height'#2#13#3'T'
+  +'op'#3#171#0#5'Width'#3#178#0#7'Caption'#6'!magnitude fainter than the stars'
+  +'.'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#10'TFloatEdit'#11'astlimitmag'
+  +#4'Name'#6#11'astlimitmag'#4'Left'#3'U'#1#6'Height'#2#22#4'Hint'#6#5'0..99'#3
+  +'Top'#2'v'#5'Width'#2')'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14
+  +'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'OnChange'#7#17'astlimitma'
+  +'gChange'#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#9'TCheckBox'#7'showast'#4
+  +'Left'#2' '#6'Height'#2#28#3'Top'#2#22#5'Width'#3#189#0#7'Caption'#6#27'Show'
+  +' asteroids on the chart'#7'OnClick'#7#12'showastClick'#8'TabOrder'#2#1#0#0
+  +#11'TRadioGroup'#9'astsymbol'#4'Left'#2#24#6'Height'#2')'#3'Top'#2'8'#5'Widt'
+  +'h'#3#137#1#8'AutoFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizin'
+  +'g.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenou'
+  +'sChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'
+  +#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.Shrink'
+  ,'Vertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightTh'
+  +'enTopToBottom'#27'ChildSizing.ControlsPerLine'#2#2#5'Color'#7#9'clBtnFace'#7
+  +'Columns'#2#2#9'ItemIndex'#2#1#13'Items.Strings'#1#6#19'Display as a symbol'
+  +#6#30'Proportional to the magnitude '#0#7'OnClick'#7#14'astsymbolClick'#11'P'
+  +'arentColor'#8#8'TabOrder'#2#3#0#0#10'TFloatEdit'#10'astmagdiff'#4'Name'#6#10
+  +'astmagdiff'#4'Left'#2'}'#6'Height'#2#22#4'Hint'#6#5'0..99'#3'Top'#3#166#0#5
+  +'Width'#2')'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHi'
+  +'nt'#8#8'ShowHint'#9#8'TabOrder'#2#2#8'OnChange'#7#16'astmagdiffChange'#8'Ma'
+  +'xValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#0#7'TButton'#8'astdbset'#4'Left'#2''''
+  +#6'Height'#2#25#3'Top'#3#15#1#5'Width'#2'q'#25'BorderSpacing.InnerBorder'#2#2
+  +#7'Caption'#6#19'Database setting...'#7'OnClick'#7#13'astdbsetClick'#8'TabOr'
+  +'der'#2#1#0#0#0#9'TTabSheet'#7'astload'#7'Caption'#6#13'Load MPC File'#12'Cl'
+  +'ientHeight'#3#151#1#11'ClientWidth'#3#225#1#10'ImageIndex'#2#1#0#6'TLabel'#8
+  +'Label206'#4'Left'#2#8#6'Height'#2#13#3'Top'#3#191#0#5'Width'#2'='#7'Caption'
+  +#6#9'Messages:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TGroupBox'#9'Gr'
+  +'oupBox7'#4'Left'#2#8#6'Height'#3#165#0#3'Top'#2#10#5'Width'#3#185#1#7'Capti'
+  +'on'#6#20'Load MPC format file'#12'ClientHeight'#3#148#0#11'ClientWidth'#3
+  +#181#1#8'TabOrder'#2#0#0#6'TLabel'#8'Label204'#4'Left'#2#8#6'Height'#2#13#3
+  +'Top'#2'/'#5'Width'#2'@'#7'Caption'#6#12'Local File :'#5'Color'#7#6'clNone'
+  +#11'ParentColor'#8#0#0#6'TLabel'#8'Label215'#4'Left'#3#226#0#6'Height'#2#13#3
+  +'Top'#2'r'#5'Width'#2'y'#7'Caption'#6#23'Asteroids from the file'#5'Color'#7
+  +#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#7'mpcfile'#4'Left'#2'M'#6'Height'#2
+  +#21#3'Top'#2')'#5'Width'#3#196#0#8'TabOrder'#2#0#4'Text'#6#12'MPCORBcr.DAT'#0
+  +#0#9'TCheckBox'#11'astnumbered'#4'Left'#2#30#6'Height'#2#28#3'Top'#2'E'#5'Wi'
+  +'dth'#3#173#0#7'Caption'#6#23'Only numbered asteroids'#7'Checked'#9#5'State'
+  +#7#9'cbChecked'#8'TabOrder'#2#1#0#0#7'TButton'#7'LoadMPC'#4'Left'#3'E'#1#6'H'
+  +'eight'#2#25#3'Top'#2''''#5'Width'#2'a'#25'BorderSpacing.InnerBorder'#2#2#7
+  +'Caption'#6#9'Load file'#7'OnClick'#7#12'LoadMPCClick'#8'TabOrder'#2#2#0#0#7
+  +'TBitBtn'#10'mpcfilebtn'#3'Tag'#2#8#4'Left'#3#19#1#6'Height'#2#26#3'Top'#2'&'
+  +#5'Width'#2#26#25'BorderSpacing.InnerBorder'#2#2#10'Glyph.Data'#10#190#1#0#0
+  +#186#1#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"16 16 5 1",'#10'". '
+  +'c None",'#10'", c #7F7F7F",'#10'"- c #FFFF00",'#10'"* c #FFFFFF",'#10'"a c '
+  +'#000000",'#10'"................",'#10'"................",'#10'"............'
+  +'....",'#10'"................",'#10'"...,,,,.........",'#10'"..,-*-*,.......'
+  +'.",'#10'"..,,,,,,,,,,a...",'#10'"..,*********,a..",'#10'"..,*-.-.-.-.,a..",'
+  +#10'"..,*.-.-.-.-,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10
+  +'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaaaa...",'#10'"................",'#10'"..'
+  +'.............."}'#10#6'Layout'#7#10'blGlyphTop'#6'Margin'#2#0#9'NumGlyphs'#2
+  +#0#7'OnClick'#7#15'mpcfilebtnClick'#8'TabOrder'#2#4#7'TabStop'#8#0#0#9'TChec'
+  +'kBox'#10'aststoperr'#4'Left'#3#196#0#6'Height'#2#28#3'Top'#2'E'#5'Width'#3
+  +#151#0#7'Caption'#6#22'Halt after 1000 errors'#7'Checked'#9#5'State'#7#9'cbC'
+  +'hecked'#8'TabOrder'#2#3#0#0#9'TCheckBox'#11'astlimitbox'#4'Left'#2#30#6'Hei'
+  +'ght'#2#28#3'Top'#2'i'#5'Width'#3#137#0#7'Caption'#6#20'Load only the first '
+  +#8'TabOrder'#2#5#0#0#9'TLongEdit'#8'astlimit'#4'Name'#6#8'astlimit'#4'Left'#3
+  +#165#0#6'Height'#2#22#4'Hint'#6#9'0..999999'#3'Top'#2'm'#5'Width'#2'1'#11'Bo'
+  +'rderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'
+  +#9#8'TabOrder'#2#6#5'Value'#3#136#19#8'MaxValue'#4'?B'#15#0#0#0#7'TButton'#16
+  +'DownloadAsteroid'#4'Left'#2'M'#6'Height'#2#25#3'Top'#2#8#5'Width'#3#196#0#25
+  +'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#16'DownloadAsteroid'#7'OnClick'
+  +#7#21'DownloadAsteroidClick'#8'TabOrder'#2#7#0#0#0#5'TMemo'#7'MemoMPC'#4'Lef'
+  +'t'#2#8#6'Height'#3#185#0#3'Top'#3#216#0#5'Width'#3#185#1#5'Color'#7#9'clBtn'
+  +'Face'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#1#0#0#0#9'TTabSheet'#10'astp'
+  +'repare'#7'Caption'#6#20'Prepare Monthly Data'#12'ClientHeight'#3#151#1#11'C'
+  +'lientWidth'#3#225#1#10'ImageIndex'#2#2#0#6'TLabel'#8'Label210'#4'Left'#2#8#6
+  +'Height'#2#13#3'Top'#2'h'#5'Width'#2'='#7'Caption'#6#9'Messages:'#5'Color'#7
+  +#6'clNone'#11'ParentColor'#8#0#0#9'TGroupBox'#9'GroupBox8'#4'Left'#2#8#6'Hei'
+  +'ght'#2'O'#3'Top'#2#7#5'Width'#3#185#1#7'Caption'#6#13'Prepare data '#12'Cli'
+  +'entHeight'#2'>'#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6'TLabel'#6'Label'
+  +'7'#4'Left'#2#8#6'Height'#2#13#3'Top'#2#30#5'Width'#2'A'#7'Caption'#6#11'Sta'
+  +'rt Month'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label207'#4
+  +'Left'#3#152#0#6'Height'#2#13#3'Top'#2#30#5'Width'#2'a'#7'Caption'#6#15'Numb'
+  +'er of Month'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TMaskEdit'#11'ast'
+  +'strtdate'#4'Left'#2'M'#6'Height'#2#21#3'Top'#2#25#5'Width'#2'>'#8'EditMask'
+  +#6#12'!9999.99;1;_'#9'MaxLength'#2#7#11'ParentColor'#8#8'TabOrder'#2#0#4'Tex'
+  ,'t'#6#7'2003.11'#0#0#7'TButton'#10'AstCompute'#4'Left'#3'X'#1#6'Height'#2#25
+  +#3'Top'#2#25#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#7
+  +'Compute'#7'OnClick'#7#15'AstComputeClick'#8'TabOrder'#2#1#0#0#9'TSpinEdit'
+  +#11'astnummonth'#4'Left'#3#5#1#6'Height'#2#22#3'Top'#2#25#5'Width'#2'1'#8'Ma'
+  +'xValue'#2#12#8'MinValue'#2#2#8'TabOrder'#2#2#5'Value'#2#2#0#0#0#5'TMemo'#11
+  +'prepastmemo'#4'Left'#2#8#6'Height'#3#249#0#3'Top'#3#128#0#5'Width'#3#185#1#5
+  +'Color'#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#1#0#0#0#9'TT'
+  +'abSheet'#9'astdelete'#7'Caption'#6#16'Data Maintenance'#12'ClientHeight'#3
+  +#151#1#11'ClientWidth'#3#225#1#10'ImageIndex'#2#3#0#6'TLabel'#8'Label211'#4
+  +'Left'#2#8#6'Height'#2#13#3'Top'#3#184#0#5'Width'#2'='#7'Caption'#6#9'Messag'
+  +'es:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TGroupBox'#10'GroupBox10'
+  +#4'Left'#2#8#6'Height'#2'<'#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#27'Del'
+  +'ete MPC data selectively'#12'ClientHeight'#2'<'#11'ClientWidth'#3#185#1#8'T'
+  +'abOrder'#2#0#0#9'TComboBox'#11'astelemlist'#4'Left'#2#16#6'Height'#2#21#3'T'
+  +'op'#2#14#5'Width'#3#25#1#16'AutoCompleteText'#11#20'cbactSearchAscending'#0
   +#9'MaxLength'#2#0#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#7'TButto'
-  +'n'#6'DelCom'#4'Left'#3'H'#1#6'Height'#2#25#3'Top'#2#6#5'Width'#2'K'#25'Bord'
-  +'erSpacing.InnerBorder'#2#2#7'Caption'#6#6'Delete'#7'OnClick'#7#11'DelComCli'
-  +'ck'#8'TabOrder'#2#1#0#0#0#9'TGroupBox'#10'GroupBox17'#4'Left'#2#8#6'Height'
-  +#2'?'#3'Top'#2'P'#5'Width'#3#185#1#7'Caption'#6#12'Quick Delete'#12'ClientHe'
-  +'ight'#2'.'#11'ClientWidth'#3#181#1#8'TabOrder'#2#1#0#6'TLabel'#8'Label239'#4
-  +'Left'#2#24#6'Height'#2#13#3'Top'#2#16#5'Width'#3#206#0#7'Caption'#6'%Quickl'
-  +'y delete all comet related data'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0
-  +#7'TButton'#9'DelComAll'#4'Left'#3'H'#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2
-  +'K'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#6'Delete'#7'OnClick'#7#14
-  +'DelComAllClick'#8'TabOrder'#2#0#0#0#0#5'TMemo'#10'DelComMemo'#4'Left'#2#8#6
-  +'Height'#3#209#0#3'Top'#3#176#0#5'Width'#3#185#1#5'Color'#7#9'clBtnFace'#10
-  +'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#2#0#0#0#9'TTabSheet'#12'Addsinglecom'
-  +#7'Caption'#6#3'Add'#12'ClientHeight'#3#151#1#11'ClientWidth'#3#225#1#10'Ima'
-  +'geIndex'#2#4#0#6'TLabel'#8'Label241'#4'Left'#2#8#6'Height'#2#13#3'Top'#2#8#5
-  +'Width'#3'Y'#1#7'Caption'#6'>Add a single element to the database. All field'
-  +' are mandatory.'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Lab'
-  +'el242'#4'Left'#2#8#6'Height'#2#13#3'Top'#2'('#5'Width'#2'C'#7'Caption'#6#11
-  +'Designation'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label24'
-  +'3'#4'Left'#2#8#6'Height'#2#13#3'Top'#3#232#0#5'Width'#2'z'#7'Caption'#6#20
-  +'H absolute magnitude'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8
-  +'Label244'#4'Left'#3#160#0#6'Height'#2#13#3'Top'#3#232#0#5'Width'#2'g'#7'Cap'
-  +'tion'#6#17'G slope parameter'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6
-  ,'TLabel'#8'Label245'#4'Left'#3#160#0#6'Height'#2#13#3'Top'#3#168#0#5'Width'#2
-  +'A'#7'Caption'#6#10'Epoch (JD)'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6
-  +'TLabel'#8'Label246'#4'Left'#3#160#0#6'Height'#2#13#3'Top'#2'('#5'Width'#2'U'
-  +#7'Caption'#6#15'Perihelion date'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0
-  +#6'TLabel'#8'Label247'#4'Left'#3#160#0#6'Height'#2#13#3'Top'#2'h'#5'Width'#2
-  +''#7'Caption'#6#22'Argument of perihelion'#5'Color'#7#6'clNone'#11'ParentCo'
-  +'lor'#8#0#0#6'TLabel'#8'Label248'#4'Left'#3'8'#1#6'Height'#2#13#3'Top'#2'h'#5
-  +'Width'#3#152#0#7'Caption'#6#24'Longitude ascending Node'#5'Color'#7#6'clNon'
-  +'e'#11'ParentColor'#8#0#0#6'TLabel'#8'Label249'#4'Left'#2#8#6'Height'#2#13#3
-  +'Top'#3#168#0#5'Width'#2':'#7'Caption'#6#11'Inclination'#5'Color'#7#6'clNone'
-  +#11'ParentColor'#8#0#0#6'TLabel'#8'Label250'#4'Left'#2#8#6'Height'#2#13#3'To'
-  +'p'#2'h'#5'Width'#2'C'#7'Caption'#6#12'Eccentricity'#5'Color'#7#6'clNone'#11
-  +'ParentColor'#8#0#0#6'TLabel'#8'Label251'#4'Left'#3'8'#1#6'Height'#2#13#3'To'
-  +'p'#2'('#5'Width'#2'l'#7'Caption'#6#19'Perihelion distance'#5'Color'#7#6'clN'
-  +'one'#11'ParentColor'#8#0#0#6'TLabel'#8'Label253'#4'Left'#3'8'#1#6'Height'#2
-  +#13#3'Top'#3#168#0#5'Width'#2'.'#7'Caption'#6#7'Equinox'#5'Color'#7#6'clNone'
-  +#11'ParentColor'#8#0#0#6'TLabel'#8'Label254'#4'Left'#2#8#6'Height'#2#13#3'To'
-  +'p'#3'('#1#5'Width'#2'!'#7'Caption'#6#4'Name'#5'Color'#7#6'clNone'#11'Parent'
-  +'Color'#8#0#0#5'TEdit'#5'comid'#4'Left'#2#8#6'Height'#2#21#3'Top'#2'@'#5'Wid'
-  +'th'#2'd'#8'TabOrder'#2#0#0#0#5'TEdit'#4'comh'#4'Left'#2#8#6'Height'#2#21#3
-  +'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#1#4'Text'#6#1'5'#0#0#5'TEdit'#4'comg'
-  +#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#2#4
-  +'Text'#6#2'10'#0#0#5'TEdit'#5'comep'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3
-  +#192#0#5'Width'#2'd'#8'TabOrder'#2#3#0#0#5'TEdit'#7'comperi'#4'Left'#3#160#0
-  +#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2#4#4'Text'#6#3'0.0'
-  +#0#0#5'TEdit'#7'comnode'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#128#0#5'Widt'
-  +'h'#2'd'#8'TabOrder'#2#5#4'Text'#6#3'0.0'#0#0#5'TEdit'#4'comi'#4'Left'#2#8#6
-  +'Height'#2#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#6#4'Text'#6#3'0.0'#0
-  +#0#5'TEdit'#5'comec'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'
-  +#8'TabOrder'#2#7#4'Text'#6#3'0.0'#0#0#5'TEdit'#4'comq'#4'Left'#3'8'#1#6'Heig'
-  +'ht'#2#21#3'Top'#2'@'#5'Width'#2'd'#8'TabOrder'#2#8#4'Text'#6#1'2'#0#0#5'TEd'
-  +'it'#6'comnam'#4'Left'#2#8#6'Height'#2#21#3'Top'#3'@'#1#5'Width'#3#1#1#8'Tab'
-  +'Order'#2#9#0#0#5'TEdit'#5'comeq'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#192
-  +#0#5'Width'#2'd'#8'TabOrder'#2#10#4'Text'#6#4'2000'#0#0#7'TButton'#6'AddCom'
-  +#4'Left'#3'8'#1#6'Height'#2#25#3'Top'#3'@'#1#5'Width'#2'K'#25'BorderSpacing.'
-  +'InnerBorder'#2#2#7'Caption'#6#3'Add'#7'OnClick'#7#11'AddComClick'#8'TabOrde'
-  +'r'#2#11#0#0#9'TMaskEdit'#4'comt'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#2'@'
-  +#5'Width'#2'['#8'EditMask'#6#20'!9999.99.00.0000;1;_'#9'MaxLength'#2#15#11'P'
-  +'arentColor'#8#8'TabOrder'#2#12#4'Text'#6#15'    .  .  .    '#0#0#0#0#0#5'TP'
-  +'age'#5'Page4'#7'Caption'#6#5'Page4'#11'ClientWidth'#3#242#1#12'ClientHeight'
-  +#3#222#1#0#12'TPageControl'#14'AstPageControl'#6'Height'#3#173#1#3'Top'#2#4#5
-  +'Width'#3#225#1#10'ActivePage'#7#10'astsetting'#8'TabIndex'#2#0#8'TabOrder'#2
-  +#0#0#9'TTabSheet'#10'astsetting'#7'Caption'#6#15'General Setting'#12'ClientH'
-  +'eight'#3#151#1#11'ClientWidth'#3#225#1#10'ImageIndex'#2#3#0#9'TGroupBox'#9
-  +'GroupBox9'#4'Left'#2#8#6'Height'#3#229#0#3'Top'#2#10#5'Width'#3#185#1#7'Cap'
-  +'tion'#6#13'Chart Setting'#12'ClientHeight'#3#212#0#11'ClientWidth'#3#181#1#8
-  +'TabOrder'#2#0#0#6'TLabel'#8'Label203'#4'Left'#2' '#6'Height'#2#13#3'Top'#2
-  +'{'#5'Width'#3'/'#1#7'Caption'#6'6Do not take account of asteroid fainter th'
-  +'an magnitude'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label2'
-  +'12'#4'Left'#2' '#6'Height'#2#13#3'Top'#3#171#0#5'Width'#2'P'#7'Caption'#6#13
-  +'Show asteroid'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label'
-  +'213'#4'Left'#3#189#0#6'Height'#2#13#3'Top'#3#171#0#5'Width'#3#178#0#7'Capti'
-  +'on'#6'!magnitude fainter than the stars.'#5'Color'#7#6'clNone'#11'ParentCol'
-  +'or'#8#0#0#10'TFloatEdit'#11'astlimitmag'#4'Name'#6#11'astlimitmag'#4'Left'#3
-  +'U'#1#6'Height'#2#22#4'Hint'#6#5'0..99'#3'Top'#2'v'#5'Width'#2')'#11'BorderS'
-  +'tyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8
-  +'TabOrder'#2#0#8'OnChange'#7#17'astlimitmagChange'#8'MaxValue'#5#0#0#0#0#0#0
-  +#0#198#5'@'#0#0#9'TCheckBox'#7'showast'#4'Left'#2' '#6'Height'#2#28#3'Top'#2
-  +#22#5'Width'#3#189#0#7'Caption'#6#27'Show asteroids on the chart'#7'OnClick'
-  +#7#12'showastClick'#8'TabOrder'#2#1#0#0#11'TRadioGroup'#9'astsymbol'#4'Left'
-  +#2#24#6'Height'#2')'#3'Top'#2'8'#5'Width'#3#137#1#8'AutoFill'#9#28'ChildSizi'
-  +'ng.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizin'
-  +'g.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeV'
-  +'ertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7
-  ,#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'C'
-  +'hildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Contr'
-  +'olsPerLine'#2#2#5'Color'#7#9'clBtnFace'#7'Columns'#2#2#9'ItemIndex'#2#1#13
-  +'Items.Strings'#1#6#19'Display as a symbol'#6#30'Proportional to the magnitu'
-  +'de '#0#7'OnClick'#7#14'astsymbolClick'#11'ParentColor'#8#8'TabOrder'#2#3#0#0
-  +#10'TFloatEdit'#10'astmagdiff'#4'Name'#6#10'astmagdiff'#4'Left'#2'}'#6'Heigh'
-  +'t'#2#22#4'Hint'#6#5'0..99'#3'Top'#3#166#0#5'Width'#2')'#11'BorderStyle'#7#8
-  +'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2
-  +#2#8'OnChange'#7#16'astmagdiffChange'#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0
-  +#0#0#7'TButton'#8'astdbset'#4'Left'#2''''#6'Height'#2#25#3'Top'#3#15#1#5'Wid'
-  +'th'#2'q'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#19'Database setting'
-  +'...'#7'OnClick'#7#13'astdbsetClick'#8'TabOrder'#2#1#0#0#0#9'TTabSheet'#7'as'
-  +'tload'#7'Caption'#6#13'Load MPC File'#12'ClientHeight'#3#151#1#11'ClientWid'
-  +'th'#3#225#1#10'ImageIndex'#2#1#0#6'TLabel'#8'Label206'#4'Left'#2#8#6'Height'
-  +#2#13#3'Top'#3#191#0#5'Width'#2'='#7'Caption'#6#9'Messages:'#5'Color'#7#6'cl'
-  +'None'#11'ParentColor'#8#0#0#9'TGroupBox'#9'GroupBox7'#4'Left'#2#8#6'Height'
-  +#3#165#0#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#20'Load MPC format file'
-  +#12'ClientHeight'#3#148#0#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6'TLabel'
-  +#8'Label204'#4'Left'#2#8#6'Height'#2#13#3'Top'#2'/'#5'Width'#2#29#7'Caption'
-  +#6#6'File :'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label215'
-  +#4'Left'#3#226#0#6'Height'#2#13#3'Top'#2'r'#5'Width'#2'y'#7'Caption'#6#23'As'
-  +'teroids from the file'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#7
-  +'mpcfile'#4'Left'#2' '#6'Height'#2#21#3'Top'#2')'#5'Width'#3#241#0#8'TabOrde'
-  +'r'#2#0#4'Text'#6#12'MPCORBcr.DAT'#0#0#9'TCheckBox'#11'astnumbered'#4'Left'#2
-  +#30#6'Height'#2#28#3'Top'#2'E'#5'Width'#3#173#0#7'Caption'#6#23'Only numbere'
-  +'d asteroids'#7'Checked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#1#0#0#7'TBu'
-  +'tton'#7'LoadMPC'#4'Left'#3'E'#1#6'Height'#2#25#3'Top'#2''''#5'Width'#2'a'#25
-  +'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#9'Load file'#7'OnClick'#7#12'Lo'
-  +'adMPCClick'#8'TabOrder'#2#2#0#0#7'TBitBtn'#10'mpcfilebtn'#3'Tag'#2#8#4'Left'
-  +#3#19#1#6'Height'#2#26#3'Top'#2'&'#5'Width'#2#26#25'BorderSpacing.InnerBorde'
-  +'r'#2#2#10'Glyph.Data'#10#190#1#0#0#186#1#0#0'/* XPM */'#10'static char *gra'
-  +'phic[] = {'#10'"16 16 5 1",'#10'". c None",'#10'", c #7F7F7F",'#10'"- c #FF'
-  +'FF00",'#10'"* c #FFFFFF",'#10'"a c #000000",'#10'"................",'#10'".'
-  +'...............",'#10'"................",'#10'"................",'#10'"...,'
-  +',,,.........",'#10'"..,-*-*,........",'#10'"..,,,,,,,,,,a...",'#10'"..,****'
-  +'*****,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,*-.-.-.'
-  +'-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaaaa'
-  +'...",'#10'"................",'#10'"................"}'#10#6'Layout'#7#10'bl'
-  +'GlyphTop'#6'Margin'#2#0#9'NumGlyphs'#2#0#7'OnClick'#7#15'mpcfilebtnClick'#8
-  +'TabOrder'#2#4#7'TabStop'#8#0#0#9'TCheckBox'#10'aststoperr'#4'Left'#3#196#0#6
-  +'Height'#2#28#3'Top'#2'E'#5'Width'#3#151#0#7'Caption'#6#22'Halt after 1000 e'
-  +'rrors'#7'Checked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#3#0#0#9'TCheckBox'
-  +#11'astlimitbox'#4'Left'#2#30#6'Height'#2#28#3'Top'#2'i'#5'Width'#3#137#0#7
-  +'Caption'#6#20'Load only the first '#8'TabOrder'#2#5#0#0#9'TLongEdit'#8'astl'
-  +'imit'#4'Name'#6#8'astlimit'#4'Left'#3#165#0#6'Height'#2#22#4'Hint'#6#9'0..9'
-  +'99999'#3'Top'#2'm'#5'Width'#2'1'#11'BorderStyle'#7#8'bsSingle'#11'ParentCol'
-  +'or'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#6#5'Value'#3#136#19#8
-  +'MaxValue'#4'?B'#15#0#0#0#6'TPanel'#17'MPCDownloadPanel2'#4'Left'#2' '#6'Hei'
-  +'ght'#2#28#3'Top'#2#6#5'Width'#3#156#0#7'Caption'#6#17'Download new file'#12
-  +'ClientHeight'#2#28#11'ClientWidth'#3#156#0#8'TabOrder'#2#7#7'OnClick'#7#21
-  +'MPCDownloadPanelClick'#0#0#0#5'TMemo'#7'MemoMPC'#4'Left'#2#8#6'Height'#3#185
-  +#0#3'Top'#3#216#0#5'Width'#3#185#1#5'Color'#7#9'clBtnFace'#10'ScrollBars'#7#6
-  +'ssBoth'#8'TabOrder'#2#1#0#0#0#9'TTabSheet'#10'astprepare'#7'Caption'#6#20'P'
-  +'repare Monthly Data'#12'ClientHeight'#3#151#1#11'ClientWidth'#3#225#1#10'Im'
-  +'ageIndex'#2#2#0#6'TLabel'#8'Label210'#4'Left'#2#8#6'Height'#2#13#3'Top'#2'h'
-  +#5'Width'#2'='#7'Caption'#6#9'Messages:'#5'Color'#7#6'clNone'#11'ParentColor'
-  +#8#0#0#9'TGroupBox'#9'GroupBox8'#4'Left'#2#8#6'Height'#2'O'#3'Top'#2#7#5'Wid'
-  +'th'#3#185#1#7'Caption'#6#13'Prepare data '#12'ClientHeight'#2'>'#11'ClientW'
-  +'idth'#3#181#1#8'TabOrder'#2#0#0#6'TLabel'#6'Label7'#4'Left'#2#8#6'Height'#2
-  +#13#3'Top'#2#30#5'Width'#2'A'#7'Caption'#6#11'Start Month'#5'Color'#7#6'clNo'
-  +'ne'#11'ParentColor'#8#0#0#6'TLabel'#8'Label207'#4'Left'#3#152#0#6'Height'#2
-  +#13#3'Top'#2#30#5'Width'#2'a'#7'Caption'#6#15'Number of Month'#5'Color'#7#6
-  +'clNone'#11'ParentColor'#8#0#0#9'TMaskEdit'#11'aststrtdate'#4'Left'#2'M'#6'H'
-  +'eight'#2#21#3'Top'#2#25#5'Width'#2'>'#8'EditMask'#6#12'!9999.99;1;_'#9'MaxL'
-  ,'ength'#2#7#11'ParentColor'#8#8'TabOrder'#2#0#4'Text'#6#7'2003.11'#0#0#7'TBu'
-  +'tton'#10'AstCompute'#4'Left'#3'X'#1#6'Height'#2#25#3'Top'#2#25#5'Width'#2'K'
-  +#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#7'Compute'#7'OnClick'#7#15'A'
-  +'stComputeClick'#8'TabOrder'#2#1#0#0#9'TSpinEdit'#11'astnummonth'#4'Left'#3#5
-  +#1#6'Height'#2#22#3'Top'#2#25#5'Width'#2'1'#8'MaxValue'#2#12#8'MinValue'#2#2
-  +#8'TabOrder'#2#2#5'Value'#2#2#0#0#0#5'TMemo'#11'prepastmemo'#4'Left'#2#8#6'H'
-  +'eight'#3#249#0#3'Top'#3#128#0#5'Width'#3#185#1#5'Color'#7#9'clBtnFace'#10'S'
-  +'crollBars'#7#6'ssBoth'#8'TabOrder'#2#1#0#0#0#9'TTabSheet'#9'astdelete'#7'Ca'
-  +'ption'#6#16'Data Maintenance'#12'ClientHeight'#3#151#1#11'ClientWidth'#3#225
-  +#1#10'ImageIndex'#2#3#0#6'TLabel'#8'Label211'#4'Left'#2#8#6'Height'#2#13#3'T'
-  +'op'#3#184#0#5'Width'#2'='#7'Caption'#6#9'Messages:'#5'Color'#7#6'clNone'#11
-  +'ParentColor'#8#0#0#9'TGroupBox'#10'GroupBox10'#4'Left'#2#8#6'Height'#2'<'#3
-  +'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#27'Delete MPC data selectively'#12
-  +'ClientHeight'#2'<'#11'ClientWidth'#3#185#1#8'TabOrder'#2#0#0#9'TComboBox'#11
-  +'astelemlist'#4'Left'#2#16#6'Height'#2#21#3'Top'#2#14#5'Width'#3#25#1#16'Aut'
-  +'oCompleteText'#11#20'cbactSearchAscending'#0#9'MaxLength'#2#0#5'Style'#7#14
-  +'csDropDownList'#8'TabOrder'#2#0#0#0#7'TButton'#6'delast'#4'Left'#3'H'#1#6'H'
-  +'eight'#2#25#3'Top'#2#14#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#2#7'C'
-  +'aption'#6#6'Delete'#7'OnClick'#7#11'delastClick'#8'TabOrder'#2#1#0#0#0#9'TG'
-  +'roupBox'#10'GroupBox11'#4'Left'#2#8#6'Height'#2'1'#3'Top'#3#128#0#5'Width'#3
-  +#185#1#7'Caption'#6#12'Quick Delete'#12'ClientHeight'#2' '#11'ClientWidth'#3
-  +#181#1#8'TabOrder'#2#1#0#6'TLabel'#8'Label209'#4'Left'#2#16#6'Height'#2#13#3
-  +'Top'#2#8#5'Width'#3#217#0#7'Caption'#6'(Quickly delete all asteroid related'
-  +' data'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#7'TButton'#9'delallast'#4
-  +'Left'#3'H'#1#6'Height'#2#25#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#2
-  +#7'Caption'#6#6'Delete'#7'OnClick'#7#14'delallastClick'#8'TabOrder'#2#0#0#0#0
-  +#5'TMemo'#10'delastMemo'#4'Left'#2#8#6'Height'#3#177#0#3'Top'#3#208#0#5'Widt'
-  +'h'#3#185#1#5'Color'#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2
-  +#3#0#0#9'TGroupBox'#10'GroupBox12'#4'Left'#2#8#6'Height'#2'9'#3'Top'#2'H'#5
-  +'Width'#3#185#1#7'Caption'#6#20'Delete Monthly data '#12'ClientHeight'#2'('
-  +#11'ClientWidth'#3#181#1#8'TabOrder'#2#2#0#6'TLabel'#8'Label214'#4'Left'#2#16
-  +#6'Height'#2#13#3'Top'#2#16#5'Width'#3#178#0#7'Caption'#6#31'Delete Monthly '
-  +'data older than '#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TMaskEdit'#10
-  +'astdeldate'#4'Left'#3#235#0#6'Height'#2#21#3'Top'#2#8#5'Width'#2'>'#8'EditM'
-  +'ask'#6#12'!9999.99;1;_'#9'MaxLength'#2#7#11'ParentColor'#8#8'TabOrder'#2#0#4
-  +'Text'#6#7'2002.11'#0#0#7'TButton'#10'deldateast'#4'Left'#3'H'#1#6'Height'#2
-  +#25#3'Top'#2#8#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#6
-  +'Delete'#7'OnClick'#7#15'deldateastClick'#8'TabOrder'#2#1#0#0#0#0#9'TTabShee'
-  +'t'#12'AddsingleAst'#7'Caption'#6#3'Add'#12'ClientHeight'#3#151#1#11'ClientW'
-  +'idth'#3#225#1#10'ImageIndex'#2#4#0#6'TLabel'#8'Label217'#4'Left'#2#8#6'Heig'
-  +'ht'#2#13#3'Top'#2#8#5'Width'#3'Y'#1#7'Caption'#6'>Add a single element to t'
-  +'he database. All field are mandatory.'#5'Color'#7#6'clNone'#11'ParentColor'
-  +#8#0#0#6'TLabel'#8'Label218'#4'Left'#2#8#6'Height'#2#13#3'Top'#2'('#5'Width'
-  +#2'C'#7'Caption'#6#11'Designation'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0
-  +#6'TLabel'#8'Label219'#4'Left'#3#160#0#6'Height'#2#13#3'Top'#2'('#5'Width'#2
-  +'z'#7'Caption'#6#20'H absolute magnitude'#5'Color'#7#6'clNone'#11'ParentColo'
-  +'r'#8#0#0#6'TLabel'#8'Label220'#4'Left'#3'8'#1#6'Height'#2#13#3'Top'#2'('#5
-  +'Width'#2'g'#7'Caption'#6#17'G slope parameter'#5'Color'#7#6'clNone'#11'Pare'
-  +'ntColor'#8#0#0#6'TLabel'#8'Label221'#4'Left'#2#8#6'Height'#2#13#3'Top'#2'h'
-  +#5'Width'#2'A'#7'Caption'#6#10'Epoch (JD)'#5'Color'#7#6'clNone'#11'ParentCol'
-  +'or'#8#0#0#6'TLabel'#8'Label222'#4'Left'#3#160#0#6'Height'#2#13#3'Top'#2'h'#5
-  +'Width'#2'T'#7'Caption'#6#12'Mean anomaly'#5'Color'#7#6'clNone'#11'ParentCol'
-  +'or'#8#0#0#6'TLabel'#8'Label223'#4'Left'#3'8'#1#6'Height'#2#13#3'Top'#2'h'#5
-  +'Width'#2''#7'Caption'#6#22'Argument of perihelion'#5'Color'#7#6'clNone'#11
-  +'ParentColor'#8#0#0#6'TLabel'#8'Label224'#4'Left'#2#8#6'Height'#2#13#3'Top'#3
-  +#168#0#5'Width'#3#152#0#7'Caption'#6#24'Longitude ascending Node'#5'Color'#7
-  +#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label225'#4'Left'#3#160#0#6'Hei'
-  +'ght'#2#13#3'Top'#3#168#0#5'Width'#2':'#7'Caption'#6#11'Inclination'#5'Color'
-  +#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label226'#4'Left'#3'8'#1#6'He'
-  +'ight'#2#13#3'Top'#3#168#0#5'Width'#2'C'#7'Caption'#6#12'Eccentricity'#5'Col'
-  +'or'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label227'#4'Left'#2#8#6'H'
-  +'eight'#2#13#3'Top'#3#232#0#5'Width'#2'V'#7'Caption'#6#14'Semimajor Axis'#5
-  +'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label228'#4'Left'#3#160
-  +#0#6'Height'#2#13#3'Top'#3#232#0#5'Width'#2':'#7'Caption'#6#9'Reference'#5'C'
-  ,'olor'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label229'#4'Left'#3'8'#1
-  +#6'Height'#2#13#3'Top'#3#232#0#5'Width'#2'.'#7'Caption'#6#7'Equinox'#5'Color'
-  +#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label230'#4'Left'#2#8#6'Heigh'
-  +'t'#2#13#3'Top'#3'('#1#5'Width'#2'!'#7'Caption'#6#4'Name'#5'Color'#7#6'clNon'
-  +'e'#11'ParentColor'#8#0#0#5'TEdit'#5'astid'#4'Left'#2#8#6'Height'#2#21#3'Top'
-  +#2'@'#5'Width'#2'd'#8'TabOrder'#2#0#0#0#5'TEdit'#4'asth'#4'Left'#3#160#0#6'H'
-  +'eight'#2#21#3'Top'#2'@'#5'Width'#2'd'#8'TabOrder'#2#1#4'Text'#6#2'16'#0#0#5
-  +'TEdit'#4'astg'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'd'#8'Ta'
-  +'bOrder'#2#2#4'Text'#6#4'0.15'#0#0#5'TEdit'#5'astep'#4'Left'#2#8#6'Height'#2
-  +#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2#3#4'Text'#6#9'2453006.5'#0#0#5
-  +'TEdit'#5'astma'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'
-  +#8'TabOrder'#2#4#4'Text'#6#3'0.0'#0#0#5'TEdit'#7'astperi'#4'Left'#3'8'#1#6'H'
-  +'eight'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2#5#4'Text'#6#3'0.0'#0
-  +#0#5'TEdit'#7'astnode'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2
-  +'d'#8'TabOrder'#2#6#4'Text'#6#3'0.0'#0#0#5'TEdit'#4'asti'#4'Left'#3#160#0#6
-  +'Height'#2#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#7#4'Text'#6#3'0.0'#0
-  +#0#5'TEdit'#5'astec'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2
-  +'d'#8'TabOrder'#2#8#4'Text'#6#3'0.0'#0#0#5'TEdit'#5'astax'#4'Left'#2#8#6'Hei'
-  +'ght'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#9#4'Text'#6#1'2'#0#0#5'T'
-  +'Edit'#6'astref'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8
-  +'TabOrder'#2#10#0#0#5'TEdit'#6'astnam'#4'Left'#2#8#6'Height'#2#21#3'Top'#3'@'
-  +#1#5'Width'#3#1#1#8'TabOrder'#2#11#0#0#5'TEdit'#5'asteq'#4'Left'#3'8'#1#6'He'
-  +'ight'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#12#4'Text'#6#4'2000'#0#0
-  +#7'TButton'#6'Addast'#4'Left'#3'8'#1#6'Height'#2#25#3'Top'#3'@'#1#5'Width'#2
-  +'K'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#3'Add'#7'OnClick'#7#11'Ad'
-  +'dastClick'#8'TabOrder'#2#13#0#0#0#0#0#0#0#11'TOpenDialog'#11'OpenDialog1'#5
-  +'Title'#6#18'Open existing file'#11'FilterIndex'#2#0#4'left'#3#232#1#3'top'#2
-  +#8#0#0#22'TSelectDirectoryDialog'#22'SelectDirectoryDialog1'#5'Title'#6#16'S'
-  +'elect Directory'#11'FilterIndex'#2#0#4'left'#3#232#1#3'top'#2'0'#0#0#0
+  +'n'#6'delast'#4'Left'#3'H'#1#6'Height'#2#25#3'Top'#2#14#5'Width'#2'K'#25'Bor'
+  +'derSpacing.InnerBorder'#2#2#7'Caption'#6#6'Delete'#7'OnClick'#7#11'delastCl'
+  +'ick'#8'TabOrder'#2#1#0#0#0#9'TGroupBox'#10'GroupBox11'#4'Left'#2#8#6'Height'
+  +#2'1'#3'Top'#3#128#0#5'Width'#3#185#1#7'Caption'#6#12'Quick Delete'#12'Clien'
+  +'tHeight'#2' '#11'ClientWidth'#3#181#1#8'TabOrder'#2#1#0#6'TLabel'#8'Label20'
+  +'9'#4'Left'#2#16#6'Height'#2#13#3'Top'#2#8#5'Width'#3#217#0#7'Caption'#6'(Qu'
+  +'ickly delete all asteroid related data'#5'Color'#7#6'clNone'#11'ParentColor'
+  +#8#0#0#7'TButton'#9'delallast'#4'Left'#3'H'#1#6'Height'#2#25#5'Width'#2'K'#25
+  +'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#6'Delete'#7'OnClick'#7#14'delal'
+  +'lastClick'#8'TabOrder'#2#0#0#0#0#5'TMemo'#10'delastMemo'#4'Left'#2#8#6'Heig'
+  +'ht'#3#177#0#3'Top'#3#208#0#5'Width'#3#185#1#5'Color'#7#9'clBtnFace'#10'Scro'
+  +'llBars'#7#6'ssBoth'#8'TabOrder'#2#3#0#0#9'TGroupBox'#10'GroupBox12'#4'Left'
+  +#2#8#6'Height'#2'9'#3'Top'#2'H'#5'Width'#3#185#1#7'Caption'#6#20'Delete Mont'
+  +'hly data '#12'ClientHeight'#2'('#11'ClientWidth'#3#181#1#8'TabOrder'#2#2#0#6
+  +'TLabel'#8'Label214'#4'Left'#2#16#6'Height'#2#13#3'Top'#2#16#5'Width'#3#178#0
+  +#7'Caption'#6#31'Delete Monthly data older than '#5'Color'#7#6'clNone'#11'Pa'
+  +'rentColor'#8#0#0#9'TMaskEdit'#10'astdeldate'#4'Left'#3#235#0#6'Height'#2#21
+  +#3'Top'#2#8#5'Width'#2'>'#8'EditMask'#6#12'!9999.99;1;_'#9'MaxLength'#2#7#11
+  +'ParentColor'#8#8'TabOrder'#2#0#4'Text'#6#7'2002.11'#0#0#7'TButton'#10'delda'
+  +'teast'#4'Left'#3'H'#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2'K'#25'BorderSpac'
+  +'ing.InnerBorder'#2#2#7'Caption'#6#6'Delete'#7'OnClick'#7#15'deldateastClick'
+  +#8'TabOrder'#2#1#0#0#0#0#9'TTabSheet'#12'AddsingleAst'#7'Caption'#6#3'Add'#12
+  +'ClientHeight'#3#151#1#11'ClientWidth'#3#225#1#10'ImageIndex'#2#4#0#6'TLabel'
+  +#8'Label217'#4'Left'#2#8#6'Height'#2#13#3'Top'#2#8#5'Width'#3'Y'#1#7'Caption'
+  +#6'>Add a single element to the database. All field are mandatory.'#5'Color'
+  +#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label218'#4'Left'#2#8#6'Heigh'
+  +'t'#2#13#3'Top'#2'('#5'Width'#2'C'#7'Caption'#6#11'Designation'#5'Color'#7#6
+  +'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label219'#4'Left'#3#160#0#6'Heigh'
+  +'t'#2#13#3'Top'#2'('#5'Width'#2'z'#7'Caption'#6#20'H absolute magnitude'#5'C'
+  +'olor'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label220'#4'Left'#3'8'#1
+  +#6'Height'#2#13#3'Top'#2'('#5'Width'#2'g'#7'Caption'#6#17'G slope parameter'
+  +#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label221'#4'Left'#2#8
+  +#6'Height'#2#13#3'Top'#2'h'#5'Width'#2'A'#7'Caption'#6#10'Epoch (JD)'#5'Colo'
+  +'r'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label222'#4'Left'#3#160#0#6
+  +'Height'#2#13#3'Top'#2'h'#5'Width'#2'T'#7'Caption'#6#12'Mean anomaly'#5'Colo'
+  +'r'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label223'#4'Left'#3'8'#1#6
+  +'Height'#2#13#3'Top'#2'h'#5'Width'#2''#7'Caption'#6#22'Argument of periheli'
+  +'on'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label224'#4'Left'
+  +#2#8#6'Height'#2#13#3'Top'#3#168#0#5'Width'#3#152#0#7'Caption'#6#24'Longitud'
+  +'e ascending Node'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'La'
+  +'bel225'#4'Left'#3#160#0#6'Height'#2#13#3'Top'#3#168#0#5'Width'#2':'#7'Capti'
+  +'on'#6#11'Inclination'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8
+  +'Label226'#4'Left'#3'8'#1#6'Height'#2#13#3'Top'#3#168#0#5'Width'#2'C'#7'Capt'
+  +'ion'#6#12'Eccentricity'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'
+  +#8'Label227'#4'Left'#2#8#6'Height'#2#13#3'Top'#3#232#0#5'Width'#2'V'#7'Capti'
+  +'on'#6#14'Semimajor Axis'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabe'
+  +'l'#8'Label228'#4'Left'#3#160#0#6'Height'#2#13#3'Top'#3#232#0#5'Width'#2':'#7
+  +'Caption'#6#9'Reference'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'
+  ,#8'Label229'#4'Left'#3'8'#1#6'Height'#2#13#3'Top'#3#232#0#5'Width'#2'.'#7'Ca'
+  +'ption'#6#7'Equinox'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8
+  +'Label230'#4'Left'#2#8#6'Height'#2#13#3'Top'#3'('#1#5'Width'#2'!'#7'Caption'
+  +#6#4'Name'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#5'astid'#4'Le'
+  +'ft'#2#8#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'd'#8'TabOrder'#2#0#0#0#5'TEdi'
+  +'t'#4'asth'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'd'#8'TabOr'
+  +'der'#2#1#4'Text'#6#2'16'#0#0#5'TEdit'#4'astg'#4'Left'#3'8'#1#6'Height'#2#21
+  +#3'Top'#2'@'#5'Width'#2'd'#8'TabOrder'#2#2#4'Text'#6#4'0.15'#0#0#5'TEdit'#5
+  +'astep'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2
+  +#3#4'Text'#6#9'2453006.5'#0#0#5'TEdit'#5'astma'#4'Left'#3#160#0#6'Height'#2
+  +#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2#4#4'Text'#6#3'0.0'#0#0#5'TEdi'
+  +'t'#7'astperi'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8
+  +'TabOrder'#2#5#4'Text'#6#3'0.0'#0#0#5'TEdit'#7'astnode'#4'Left'#2#8#6'Height'
+  +#2#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#6#4'Text'#6#3'0.0'#0#0#5'TE'
+  +'dit'#4'asti'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2'd'#8
+  +'TabOrder'#2#7#4'Text'#6#3'0.0'#0#0#5'TEdit'#5'astec'#4'Left'#3'8'#1#6'Heigh'
+  +'t'#2#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#8#4'Text'#6#3'0.0'#0#0#5
+  +'TEdit'#5'astax'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'Tab'
+  +'Order'#2#9#4'Text'#6#1'2'#0#0#5'TEdit'#6'astref'#4'Left'#3#160#0#6'Height'#2
+  +#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#10#0#0#5'TEdit'#6'astnam'#4'Lef'
+  +'t'#2#8#6'Height'#2#21#3'Top'#3'@'#1#5'Width'#3#1#1#8'TabOrder'#2#11#0#0#5'T'
+  +'Edit'#5'asteq'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'T'
+  +'abOrder'#2#12#4'Text'#6#4'2000'#0#0#7'TButton'#6'Addast'#4'Left'#3'8'#1#6'H'
+  +'eight'#2#25#3'Top'#3'@'#1#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#2#7
+  +'Caption'#6#3'Add'#7'OnClick'#7#11'AddastClick'#8'TabOrder'#2#13#0#0#0#0#0#0
+  +#0#11'TOpenDialog'#11'OpenDialog1'#5'Title'#6#18'Open existing file'#11'Filt'
+  +'erIndex'#2#0#4'left'#3#232#1#3'top'#2#8#0#0#22'TSelectDirectoryDialog'#22'S'
+  +'electDirectoryDialog1'#5'Title'#6#16'Select Directory'#11'FilterIndex'#2#0#4
+  +'left'#3#232#1#3'top'#2'0'#0#0#15'TDownloadDialog'#15'DownloadDialog1'#12'Ft'
+  +'pFwPassive'#9#4'left'#3#233#1#3'top'#2'X'#0#0#0
 ]);

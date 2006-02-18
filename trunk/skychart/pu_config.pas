@@ -174,7 +174,7 @@ f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
-var i:integer;
+{$ifdef WIN32}var i:integer;{$endif}
 begin
 locktree:=false;
 {$ifdef WIN32}

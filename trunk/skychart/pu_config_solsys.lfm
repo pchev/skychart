@@ -11,7 +11,7 @@ object f_config_solsys: Tf_config_solsys
   ClientWidth = 517
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -27,7 +27,7 @@ object f_config_solsys: Tf_config_solsys
       Top = 1
       Width = 498
       Align = alClient
-      PageIndex = 0
+      PageIndex = 3
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
@@ -585,16 +585,16 @@ object f_config_solsys: Tf_config_solsys
                 Left = 5
                 Height = 13
                 Top = 56
-                Width = 29
-                Caption = 'File :'
+                Width = 64
+                Caption = 'Local File :'
                 Color = clNone
                 ParentColor = False
               end
               object comfile: TEdit
-                Left = 29
+                Left = 77
                 Height = 21
                 Top = 52
-                Width = 241
+                Width = 193
                 OnClick = comfilebtnClick
                 TabOrder = 0
                 Text = 'COMET.DAT'
@@ -639,17 +639,15 @@ object f_config_solsys: Tf_config_solsys
                 TabOrder = 2
                 TabStop = False
               end
-              object MPCDownloadPanel: TPanel
-                Cursor = crHandPoint
-                Left = 29
-                Height = 28
+              object DownloadComet: TButton
+                Left = 77
+                Height = 25
                 Top = 9
-                Width = 156
+                Width = 192
+                BorderSpacing.InnerBorder = 2
                 Caption = 'Download new file'
-                ClientHeight = 28
-                ClientWidth = 156
+                OnClick = DownloadCometClick
                 TabOrder = 3
-                OnClick = MPCDownloadPanelClick
               end
             end
             object MemoCom: TMemo
@@ -985,8 +983,8 @@ object f_config_solsys: Tf_config_solsys
           Height = 429
           Top = 4
           Width = 481
-          ActivePage = astsetting
-          TabIndex = 0
+          ActivePage = astload
+          TabIndex = 1
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
@@ -1132,8 +1130,8 @@ object f_config_solsys: Tf_config_solsys
                 Left = 8
                 Height = 13
                 Top = 47
-                Width = 29
-                Caption = 'File :'
+                Width = 64
+                Caption = 'Local File :'
                 Color = clNone
                 ParentColor = False
               end
@@ -1147,10 +1145,10 @@ object f_config_solsys: Tf_config_solsys
                 ParentColor = False
               end
               object mpcfile: TEdit
-                Left = 32
+                Left = 77
                 Height = 21
                 Top = 41
-                Width = 241
+                Width = 196
                 TabOrder = 0
                 Text = 'MPCORBcr.DAT'
               end
@@ -1237,16 +1235,15 @@ object f_config_solsys: Tf_config_solsys
                 Value = 5000
                 MaxValue = 999999
               end
-              object MPCDownloadPanel2: TPanel
-                Left = 32
-                Height = 28
-                Top = 6
-                Width = 156
-                Caption = 'Download new file'
-                ClientHeight = 28
-                ClientWidth = 156
+              object DownloadAsteroid: TButton
+                Left = 77
+                Height = 25
+                Top = 8
+                Width = 196
+                BorderSpacing.InnerBorder = 2
+                Caption = 'DownloadAsteroid'
+                OnClick = DownloadAsteroidClick
                 TabOrder = 7
-                OnClick = MPCDownloadPanelClick
               end
             end
             object MemoMPC: TMemo
@@ -1722,5 +1719,10 @@ object f_config_solsys: Tf_config_solsys
     FilterIndex = 0
     left = 488
     top = 48
+  end
+  object DownloadDialog1: TDownloadDialog
+    FtpFwPassive = True
+    left = 489
+    top = 88
   end
 end

@@ -376,7 +376,7 @@ if db.Active then begin
         +',"'+nam+'"'
         +',"'+eq+'"'
         +',"'+filenum+'"'+')';
-    if not db.query(cmd) then begin
+    if (not db.query(cmd))and(db.LastError<>19) then begin
        MemoCom.lines.add('insert failed line '+inttostr(nl)+' : '+trim(db.ErrorMessage));
     end;
     cmd:='INSERT INTO cdc_com_name (name, id) VALUES ('
@@ -620,7 +620,7 @@ if db.Active then begin
         +',"'+nam+'"'
         +',"'+eq+'"'
         +',"'+filenum+'"'+')';
-    if not db.query(cmd) then begin
+    if (not db.query(cmd))and(db.LastError<>19) then begin
        memoast.lines.add('insert failed line '+inttostr(nl+prefl)+' : '+trim(db.ErrorMessage));
        inc(nerr);
        if stoperr and (nerr>1000) then begin

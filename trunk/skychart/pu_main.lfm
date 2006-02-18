@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 144
+  Left = 239
   Height = 573
-  Top = 129
+  Top = 119
   Width = 871
   HorzScrollBar.Page = 870
   VertScrollBar.Page = 548
@@ -151,7 +151,7 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   TextHeight = 15
   object MultiDoc1: TMultiDoc
     Left = 23
@@ -2472,6 +2472,7 @@ object f_main: Tf_main
       end
       object ToolButtonToZ: TToolButton
         Left = 1
+        Hint = 'Zenith'
         Top = 115
         Action = toZenith
       end
@@ -2486,6 +2487,7 @@ object f_main: Tf_main
       TabOrder = 1
       object Field1: TSpeedButton
         Height = 24
+        Hint = 'Set FOV to'
         Width = 24
         Caption = '10'''
         Flat = True
@@ -2493,21 +2495,28 @@ object f_main: Tf_main
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field2: TSpeedButton
         Tag = 1
+        Left = 1
         Height = 23
-        Top = 25
+        Hint = 'Set FOV to'
+        Top = 27
         Width = 24
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field3: TSpeedButton
         Tag = 2
         Height = 24
+        Hint = 'Set FOV to'
         Top = 50
         Width = 24
         Flat = True
@@ -2515,10 +2524,13 @@ object f_main: Tf_main
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field4: TSpeedButton
         Tag = 3
         Height = 24
+        Hint = 'Set FOV to'
         Top = 75
         Width = 24
         Flat = True
@@ -2526,10 +2538,13 @@ object f_main: Tf_main
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field5: TSpeedButton
         Tag = 4
         Height = 23
+        Hint = 'Set FOV to'
         Top = 100
         Width = 24
         Flat = True
@@ -2537,10 +2552,13 @@ object f_main: Tf_main
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field6: TSpeedButton
         Tag = 5
         Height = 24
+        Hint = 'Set FOV to'
         Top = 125
         Width = 24
         Flat = True
@@ -2548,10 +2566,13 @@ object f_main: Tf_main
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field7: TSpeedButton
         Tag = 6
         Height = 23
+        Hint = 'Set FOV to'
         Top = 150
         Width = 24
         Flat = True
@@ -2559,10 +2580,13 @@ object f_main: Tf_main
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field8: TSpeedButton
         Tag = 7
         Height = 23
+        Hint = 'Set FOV to'
         Top = 175
         Width = 24
         Flat = True
@@ -2570,10 +2594,13 @@ object f_main: Tf_main
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field9: TSpeedButton
         Tag = 8
         Height = 24
+        Hint = 'Set FOV to'
         Top = 200
         Width = 24
         Flat = True
@@ -2581,17 +2608,22 @@ object f_main: Tf_main
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
       object Field10: TSpeedButton
         Tag = 9
         Height = 23
-        Top = 225
+        Hint = 'Set FOV to'
+        Top = 227
         Width = 24
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
       end
     end
   end
@@ -2709,6 +2741,7 @@ object f_main: Tf_main
       end
       object ToolButtonNightVision: TToolButton
         Left = 92
+        Hint = 'Night vision color'
         Top = 2
         Caption = 'ToolButtonNightVision'
         ImageIndex = 82
@@ -2779,9 +2812,11 @@ object f_main: Tf_main
       object quicksearch: TComboBox
         Left = 316
         Height = 23
+        Hint = 'Search'
         Top = 2
         Width = 85
         ArrowKeysTraverseList = False
+        AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
         Font.CharSet = ANSI_CHARSET
@@ -2793,7 +2828,7 @@ object f_main: Tf_main
       end
       object ToolButtonSearch: TToolButton
         Left = 401
-        Hint = 'Search'
+        Hint = 'Advanced Search'
         Top = 2
         Action = Search1
       end
@@ -2974,6 +3009,7 @@ object f_main: Tf_main
       object TimeVal: TSpinEdit
         Left = 570
         Height = 23
+        Hint = 'Time'
         Top = 2
         Width = 59
         MaxValue = 1000
@@ -2984,6 +3020,7 @@ object f_main: Tf_main
       object TimeU: TComboBox
         Left = 629
         Height = 23
+        Hint = 'Time Units'
         Top = 2
         Width = 85
         AutoCompleteText = [cbactSearchAscending]
@@ -3079,7 +3116,7 @@ object f_main: Tf_main
       TabOrder = 1
       Wrapable = False
       object topmessage: TLabel
-        Left = 680
+        Left = 679
         Height = 24
         Top = 2
         Width = 5
@@ -3094,167 +3131,167 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonShowNebulae: TToolButton
-        Left = 24
+        Left = 23
         Hint = 'Show Nebulae'
         Top = 2
         Action = ShowNebulae
         Style = tbsCheck
       end
       object ToolButtonShowLines: TToolButton
-        Left = 47
+        Left = 46
         Hint = 'Show Lines'
         Top = 2
         Action = ShowLines
         Style = tbsCheck
       end
       object ToolButtonShowPictures: TToolButton
-        Left = 70
+        Left = 69
         Hint = 'Show Pictures'
         Top = 2
         Action = ShowPictures
         Style = tbsCheck
       end
       object ToolButtonDSS: TToolButton
-        Left = 93
+        Left = 92
         Hint = 'Get DSS Image'
         Top = 2
         Action = DSSImage
       end
       object ToolButtonShowBackgroundImage: TToolButton
-        Left = 116
+        Left = 115
         Hint = 'Show Background Image'
         Top = 2
         Action = ShowBackgroundImage
         Style = tbsCheck
       end
       object ToolButtonShowPlanets: TToolButton
-        Left = 139
+        Left = 138
         Hint = 'Show Planets'
         Top = 2
         Action = ShowPlanets
         Style = tbsCheck
       end
       object ToolButtonShowAsteroids: TToolButton
-        Left = 162
+        Left = 161
         Hint = 'Show Asteroids'
         Top = 2
         Action = ShowAsteroids
         Style = tbsCheck
       end
       object ToolButtonShowComets: TToolButton
-        Left = 185
+        Left = 184
         Hint = 'Show Comets'
         Top = 2
         Action = ShowComets
         Style = tbsCheck
       end
       object ToolButtonShowMilkyWay: TToolButton
-        Left = 208
+        Left = 207
         Hint = 'Show Milky Way'
         Top = 2
         Action = ShowMilkyWay
         Style = tbsCheck
       end
       object ToolButtonGrid: TToolButton
-        Left = 231
+        Left = 230
         Hint = 'Show Coordinate Grid'
         Top = 2
         Action = Grid
         Style = tbsCheck
       end
       object ToolButtonGridEq: TToolButton
-        Left = 254
+        Left = 253
         Hint = 'Add Equatorial Grid'
         Top = 2
         Action = GridEQ
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLine: TToolButton
-        Left = 277
+        Left = 276
         Hint = 'Show Constellation Line'
         Top = 2
         Action = ShowConstellationLine
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLimit: TToolButton
-        Left = 300
+        Left = 299
         Hint = 'Show Constellation Limit'
         Top = 2
         Action = ShowConstellationLimit
         Style = tbsCheck
       end
       object ToolButtonShowGalacticEquator: TToolButton
-        Left = 323
+        Left = 322
         Hint = 'Show Galactic Equator'
         Top = 2
         Action = ShowGalacticEquator
         Style = tbsCheck
       end
       object ToolButtonShowEcliptic: TToolButton
-        Left = 346
+        Left = 345
         Hint = 'Show Ecliptic'
         Top = 2
         Action = ShowEcliptic
         Style = tbsCheck
       end
       object ToolButtonShowMark: TToolButton
-        Left = 369
+        Left = 368
         Hint = 'Show Mark'
         Top = 2
         Action = ShowMark
         Style = tbsCheck
       end
       object ToolButtonShowLabels: TToolButton
-        Left = 392
+        Left = 391
         Hint = 'Show Labels'
         Top = 2
         Action = ShowLabels
         Style = tbsCheck
       end
       object ToolButtonEditlabels: TToolButton
-        Left = 415
+        Left = 414
         Hint = 'Edit Labels'
         Top = 2
         Action = EditLabels
         Style = tbsCheck
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
-        Left = 438
+        Left = 437
         Hint = 'Show Object below the horizon'
         Top = 2
         Action = ShowObjectbelowHorizon
         Style = tbsCheck
       end
       object ToolButtonswitchbackground: TToolButton
-        Left = 461
+        Left = 460
         Hint = 'Sky Background Color'
         Top = 2
         Action = switchbackground
         Style = tbsCheck
       end
       object ToolButtonSyncChart: TToolButton
-        Left = 492
+        Left = 491
         Hint = 'Link All Chart'
         Top = 2
         Action = SyncChart
         Style = tbsCheck
       end
       object ToolButtonTrack: TToolButton
-        Left = 515
+        Left = 514
         Hint = 'Track'
         Top = 2
         Action = Track
         Style = tbsCheck
       end
       object ToolButtonswitchstars: TToolButton
-        Left = 546
+        Left = 545
         Hint = 'Change Drawing Mode'
         Top = 2
         Action = switchstars
         Style = tbsCheck
       end
       object PanelStar: TPanel
-        Left = 569
+        Left = 568
         Height = 24
         Top = 2
         Width = 111
@@ -3382,14 +3419,14 @@ object f_main: Tf_main
         end
       end
       object ToolButton2: TToolButton
-        Left = 538
+        Left = 537
         Top = 2
         Width = 8
         Caption = 'ToolButton2'
         Style = tbsDivider
       end
       object ToolButton4: TToolButton
-        Left = 484
+        Left = 483
         Top = 2
         Width = 8
         Caption = 'ToolButton4'
@@ -4079,6 +4116,7 @@ object f_main: Tf_main
     object toZenith: TAction
       Category = 'chart'
       Caption = 'toZenith'
+      Hint = 'Zenith'
       ImageIndex = 41
       OnExecute = toZenithExecute
     end
