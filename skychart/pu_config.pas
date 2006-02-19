@@ -228,6 +228,14 @@ end;
 
 procedure Tf_config.ShowPage(i,j:Integer);
 begin
+   // before the page change:
+   if MultiDoc1.ActiveObject=f_config_catalog1 then begin
+     if f_config_catalog1.WizardNotebook1.ActivePage='Page1' then f_config_catalog1.ActivateGCat;
+   end;
+   if MultiDoc1.ActiveObject=f_config_system1 then begin
+     if f_config_system1.WizardNotebook1.ActivePage='Page1' then f_config_system1.ActivateDBchange;
+   end;
+   // page change
    MultiDoc1.SetActiveChild(i);
    case i of
      0 : begin f_config_time1.WizardNotebook1.PageIndex:=j;        f_config_time1.FormShow(self); end;
@@ -248,6 +256,12 @@ var i:integer;
 begin
   i:=f_config.Treeview1.selected.absoluteindex;
   cmain.configpage:=i;
+  if MultiDoc1.ActiveObject=f_config_catalog1 then begin
+    if f_config_catalog1.WizardNotebook1.ActivePage='Page1' then f_config_catalog1.ActivateGCat;
+  end;
+  if MultiDoc1.ActiveObject=f_config_system1 then begin
+    if f_config_system1.WizardNotebook1.ActivePage='Page1' then f_config_system1.ActivateDBchange;
+  end;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);

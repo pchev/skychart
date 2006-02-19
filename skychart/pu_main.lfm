@@ -3097,7 +3097,7 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Time'
         Top = 2
-        Width = 63
+        Width = 65
       end
       object TimeU: TComboBox
         AutoCompleteText = [cbactSearchAscending]
@@ -3107,7 +3107,7 @@ object f_main: Tf_main
         MaxLength = 0
         Style = csDropDownList
         TabOrder = 2
-        Left = 634
+        Left = 636
         Height = 23
         Hint = 'Time Units'
         Top = 2
@@ -3118,14 +3118,14 @@ object f_main: Tf_main
         ImageIndex = 45
         Style = tbsDivider
         Width = 8
-        Left = 719
+        Left = 721
         Height = 23
         Top = 2
         Width = 8
       end
       object TConnect: TToolButton
         Action = TelescopeConnect
-        Left = 727
+        Left = 729
         Height = 23
         Hint = 'Connect Telescope'
         Top = 2
@@ -3133,7 +3133,7 @@ object f_main: Tf_main
       end
       object TSlew: TToolButton
         Action = TelescopeSlew
-        Left = 773
+        Left = 775
         Height = 23
         Hint = 'Slew'
         Top = 2
@@ -3141,7 +3141,7 @@ object f_main: Tf_main
       end
       object TSync: TToolButton
         Action = TelescopeSync
-        Left = 750
+        Left = 752
         Height = 23
         Hint = 'Sync'
         Top = 2
@@ -3178,7 +3178,7 @@ object f_main: Tf_main
         Caption = 'ToolButton6'
         Style = tbsDivider
         Width = 8
-        Left = 796
+        Left = 798
         Height = 23
         Top = 2
         Width = 8
@@ -3188,7 +3188,7 @@ object f_main: Tf_main
         Caption = 'ToolButton7'
         Style = tbsSeparator
         Width = 23
-        Left = 804
+        Left = 806
         Height = 23
         Top = 2
         Width = 23
