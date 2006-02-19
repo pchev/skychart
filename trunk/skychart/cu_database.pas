@@ -1252,13 +1252,15 @@ if db.Active then begin
           or ((rec[9]='P')and(rec[10]<>'PPLQ')and(rec[10]<>'PPLW'))  // populated place only
         )
      then begin
+       if not IsNumber(rec[3]) then continue;
+       if not IsNumber(rec[4]) then continue;
        if force_country then cc:=country
           else cc:=rec[12];
        sql:='insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
          'values ('+
          rec[2]+','+
          '"'+cc+'",'+
-         '"'+rec[22]+'",'+
+         '"'+trim(rec[22])+'",'+
          '"'+rec[10]+'",'+
          rec[3]+','+
          rec[4]+','+
@@ -1310,13 +1312,15 @@ if db.Active then begin
           or (rec[3]='ppl')  // populated place only
         )
      then begin
+      if not IsNumber(rec[9]) then continue;
+      if not IsNumber(rec[10]) then continue;
       elev:=strtointdef(rec[15],0)*footpermeter;
       if rec[4]<>rec[2] then rec[2]:=rec[2]+', '+rec[4];
       sql:='insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
          'values ('+
          rec[0]+','+
          '"US-'+rec[1]+'",'+
-         '"'+utf8encode(rec[2])+'",'+
+         '"'+utf8encode(trim(rec[2]))+'",'+
          '"'+rec[3]+'",'+
          rec[9]+','+
          rec[10]+','+

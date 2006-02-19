@@ -28,7 +28,7 @@ interface
 uses  u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, unzip,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, MaskEdit,
-  WizardNotebook, downloaddialog;
+  WizardNotebook, downloaddialog, EditBtn;
 
 type
 
@@ -38,6 +38,9 @@ type
     DownloadAsteroid: TButton;
     DownloadComet: TButton;
     DownloadDialog1: TDownloadDialog;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;

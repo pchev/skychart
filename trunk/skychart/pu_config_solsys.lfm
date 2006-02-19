@@ -585,16 +585,25 @@ object f_config_solsys: Tf_config_solsys
                 Left = 5
                 Height = 13
                 Top = 56
-                Width = 64
-                Caption = 'Local File :'
+                Width = 108
+                Caption = 'Or use a local file :'
+                Color = clNone
+                ParentColor = False
+              end
+              object Label2: TLabel
+                Left = 5
+                Height = 13
+                Top = 14
+                Width = 191
+                Caption = 'Download latest COMET.DAT file '
                 Color = clNone
                 ParentColor = False
               end
               object comfile: TEdit
-                Left = 77
+                Left = 109
                 Height = 21
                 Top = 52
-                Width = 193
+                Width = 169
                 OnClick = comfilebtnClick
                 TabOrder = 0
                 Text = 'COMET.DAT'
@@ -611,7 +620,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object comfilebtn: TBitBtn
                 Tag = 8
-                Left = 272
+                Left = 280
                 Height = 26
                 Top = 49
                 Width = 26
@@ -640,12 +649,12 @@ object f_config_solsys: Tf_config_solsys
                 TabStop = False
               end
               object DownloadComet: TButton
-                Left = 77
+                Left = 325
                 Height = 25
-                Top = 9
-                Width = 192
+                Top = 4
+                Width = 97
                 BorderSpacing.InnerBorder = 2
-                Caption = 'Download new file'
+                Caption = 'Download'
                 OnClick = DownloadCometClick
                 TabOrder = 3
               end
@@ -983,8 +992,8 @@ object f_config_solsys: Tf_config_solsys
           Height = 429
           Top = 4
           Width = 481
-          ActivePage = astload
-          TabIndex = 1
+          ActivePage = astsetting
+          TabIndex = 0
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
@@ -1111,7 +1120,7 @@ object f_config_solsys: Tf_config_solsys
             object Label206: TLabel
               Left = 8
               Height = 13
-              Top = 191
+              Top = 203
               Width = 61
               Caption = 'Messages:'
               Color = clNone
@@ -1119,48 +1128,38 @@ object f_config_solsys: Tf_config_solsys
             end
             object GroupBox7: TGroupBox
               Left = 8
-              Height = 165
+              Height = 97
               Top = 10
               Width = 441
               Caption = 'Load MPC format file'
-              ClientHeight = 148
+              ClientHeight = 80
               ClientWidth = 437
               TabOrder = 0
               object Label204: TLabel
                 Left = 8
                 Height = 13
                 Top = 47
-                Width = 64
-                Caption = 'Local File :'
+                Width = 108
+                Caption = 'Or use a local file :'
                 Color = clNone
                 ParentColor = False
               end
-              object Label215: TLabel
-                Left = 226
+              object Label1: TLabel
+                Left = 8
                 Height = 13
-                Top = 114
-                Width = 121
-                Caption = 'Asteroids from the file'
+                Top = 6
+                Width = 231
+                Caption = 'Download latest MPCORB.DAT (> 50Mb)'
                 Color = clNone
                 ParentColor = False
               end
               object mpcfile: TEdit
-                Left = 77
+                Left = 117
                 Height = 21
                 Top = 41
-                Width = 196
+                Width = 164
                 TabOrder = 0
-                Text = 'MPCORBcr.DAT'
-              end
-              object astnumbered: TCheckBox
-                Left = 30
-                Height = 28
-                Top = 69
-                Width = 173
-                Caption = 'Only numbered asteroids'
-                Checked = True
-                State = cbChecked
-                TabOrder = 1
+                Text = 'MPCORB.DAT'
               end
               object LoadMPC: TButton
                 Left = 325
@@ -1170,11 +1169,11 @@ object f_config_solsys: Tf_config_solsys
                 BorderSpacing.InnerBorder = 2
                 Caption = 'Load file'
                 OnClick = LoadMPCClick
-                TabOrder = 2
+                TabOrder = 1
               end
               object mpcfilebtn: TBitBtn
                 Tag = 8
-                Left = 275
+                Left = 283
                 Height = 26
                 Top = 38
                 Width = 26
@@ -1199,61 +1198,92 @@ object f_config_solsys: Tf_config_solsys
                 Margin = 0
                 NumGlyphs = 0
                 OnClick = mpcfilebtnClick
-                TabOrder = 4
+                TabOrder = 2
                 TabStop = False
               end
-              object aststoperr: TCheckBox
-                Left = 196
+              object DownloadAsteroid: TButton
+                Left = 325
+                Height = 25
+                Top = 1
+                Width = 97
+                BorderSpacing.InnerBorder = 2
+                Caption = 'Download'
+                OnClick = DownloadAsteroidClick
+                TabOrder = 3
+              end
+            end
+            object MemoMPC: TMemo
+              Left = 8
+              Height = 174
+              Top = 219
+              Width = 441
+              Color = clBtnFace
+              ScrollBars = ssBoth
+              TabOrder = 1
+            end
+            object GroupBox1: TGroupBox
+              Left = 8
+              Height = 88
+              Top = 107
+              Width = 441
+              Caption = 'Options'
+              ClientHeight = 71
+              ClientWidth = 437
+              TabOrder = 2
+              object Label215: TLabel
+                Left = 258
+                Height = 13
+                Top = 40
+                Width = 121
+                Caption = 'Asteroids from the file'
+                Color = clNone
+                ParentColor = False
+              end
+              object astnumbered: TCheckBox
+                Left = 62
                 Height = 28
-                Top = 69
+                Top = 6
+                Width = 173
+                Caption = 'Only numbered asteroids'
+                Checked = True
+                State = cbChecked
+                TabOrder = 0
+              end
+              object aststoperr: TCheckBox
+                Left = 228
+                Height = 28
+                Top = 6
                 Width = 151
                 Caption = 'Halt after 1000 errors'
                 Checked = True
                 State = cbChecked
-                TabOrder = 3
+                TabOrder = 1
               end
               object astlimitbox: TCheckBox
-                Left = 30
+                Left = 61
                 Height = 28
-                Top = 105
+                Top = 40
                 Width = 137
                 Caption = 'Load only the first '
-                TabOrder = 5
+                Checked = True
+                State = cbChecked
+                TabOrder = 2
               end
               object astlimit: TLongEdit
                 Name = 'astlimit'
-                Left = 165
+                Left = 197
                 Height = 22
                 Hint = '0..999999'
-                Top = 109
+                Top = 36
                 Width = 49
                 BorderStyle = bsSingle
                 ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
-                TabOrder = 6
+                TabOrder = 3
                 Value = 5000
                 MaxValue = 999999
               end
-              object DownloadAsteroid: TButton
-                Left = 77
-                Height = 25
-                Top = 8
-                Width = 196
-                BorderSpacing.InnerBorder = 2
-                Caption = 'DownloadAsteroid'
-                OnClick = DownloadAsteroidClick
-                TabOrder = 7
-              end
-            end
-            object MemoMPC: TMemo
-              Left = 8
-              Height = 185
-              Top = 216
-              Width = 441
-              Color = clBtnFace
-              ScrollBars = ssBoth
-              TabOrder = 1
             end
           end
           object astprepare: TTabSheet
@@ -1322,7 +1352,7 @@ object f_config_solsys: Tf_config_solsys
                 Left = 261
                 Height = 22
                 Top = 25
-                Width = 49
+                Width = 51
                 MaxValue = 12
                 MinValue = 2
                 TabOrder = 2
