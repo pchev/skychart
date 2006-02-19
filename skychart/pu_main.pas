@@ -39,7 +39,7 @@ uses
   u_constant, u_util, blcksock, synsock, lazjpeg,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
-  ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
+  ActnList, CDC_IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
   LResources;
 
 type

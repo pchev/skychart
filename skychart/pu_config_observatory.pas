@@ -424,10 +424,6 @@ if MessageDlg('This action replace all the database content for the country '+co
        end else
           Showmessage('Cancel '+DownloadDialog1.ResponseText);
     end;
-    if ok then begin // refresh list
-      cityfilter.Text:='';
-      citysearchClick(Sender);
-    end;
 end;
 end;
 
