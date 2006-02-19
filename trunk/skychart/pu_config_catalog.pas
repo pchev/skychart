@@ -243,7 +243,7 @@ type
     procedure CDCNebField2Change(Sender: TObject);
     procedure CDCNebPathChange(Sender: TObject);
     procedure CDCNebSelPathClick(Sender: TObject);
-    procedure FrameExit(Sender: TObject);
+    procedure ActivateGCat;
 
   private
     { Private declarations }
@@ -439,42 +439,65 @@ if (Acol=0)and(Arow>0) then begin
   if (cells[acol,arow]='1')then begin
     Canvas.Brush.Color := clLime;
     Canvas.FillRect(Rect);
-  end else if (cells[acol,arow]='0')then begin
+  end else begin
     Canvas.Brush.Color := clRed;
     Canvas.FillRect(Rect);
   end;
-  end;
-if (Acol=1)and(Arow>0) then
+end else if (Acol=1)and(Arow>0) then begin
   if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
     Canvas.rectangle(Rect);
     cells[0,arow]:='0';
+  end else begin
+    Canvas.Pen.Color := clWindow;
+    Canvas.Brush.style := bsSolid;
+    Canvas.rectangle(Rect);
   end;
-if (Acol=2)and(Arow>0) then
+end else if (Acol=2)and(Arow>0) then begin
   if not IsNumber(cells[acol,arow]) then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
     Canvas.rectangle(Rect);
     cells[0,arow]:='0';
+  end else begin
+    Canvas.Pen.Color := clWindow;
+    Canvas.Brush.style := bsSolid;
+    Canvas.rectangle(Rect);
   end;
-if (Acol=3)and(Arow>0) then
+end else if (Acol=3)and(Arow>0) then begin
   if not IsNumber(cells[acol,arow]) then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
     Canvas.rectangle(Rect);
     cells[0,arow]:='0';
+  end else begin
+    Canvas.Pen.Color := clWindow;
+    Canvas.Brush.style := bsSolid;
+    Canvas.rectangle(Rect);
   end;
-if (Acol=4)and(Arow>0) then
+end else if (Acol=4)and(Arow>0) then begin
   if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
     Canvas.rectangle(Rect);
     cells[0,arow]:='0';
+  end else begin
+    Canvas.Pen.Color := clWindow;
+    Canvas.Brush.style := bsSolid;
+    Canvas.rectangle(Rect);
   end;
-if (Acol=5)and(Arow>0) then begin
+end else if (Acol=5)and(Arow>0) then begin
     Canvas.draw(Rect.left,Rect.top,BitBtn9.Glyph);
-  end;
+end else if (Arow=0) then begin
+    Canvas.Pen.Color := clBtnFace;
+    Canvas.Brush.style := bsSolid;
+    Canvas.rectangle(Rect);
+end else begin
+    Canvas.Pen.Color := clWindow;
+    Canvas.Brush.style := bsSolid;
+    Canvas.rectangle(Rect);
+end;
 end;
 end;
 
@@ -769,8 +792,7 @@ if sender is TBitBtn then with sender as TBitBtn do begin
 end;
 end;
 
-
-procedure Tf_config_catalog.FrameExit(Sender: TObject);
+procedure Tf_config_catalog.ActivateGCat;
 var i,x,v:integer;
 begin
 ccat.GCatNum:=stringgrid3.RowCount-1;

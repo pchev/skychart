@@ -154,7 +154,7 @@ type
     procedure persdirChange(Sender: TObject);
     procedure AstDBClick(Sender: TObject);
     procedure CometDBClick(Sender: TObject);
-    procedure FrameExit(Sender: TObject);
+    procedure ActivateDBchange;
     procedure DBtypeGroupClick(Sender: TObject);
     procedure dbnamesqliteChange(Sender: TObject);
     procedure PanelCmdChange(Sender: TObject);
@@ -197,8 +197,6 @@ type
 
 implementation
 
-
-
 constructor Tf_config_system.Create(AOwner:TComponent);
 begin
  csc:=@mycsc;
@@ -209,7 +207,7 @@ begin
  inherited Create(AOwner);
 end;
 
-procedure Tf_config_system.FrameExit(Sender: TObject);
+procedure Tf_config_system.ActivateDBchange;
 begin
  if dbchanged and Assigned(FDBChange) then FDBChange(self);
 end;
