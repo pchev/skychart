@@ -171,6 +171,18 @@ f_config_system1.onShowComet:=ShowCometSetting;
 f_config_system1.onLoadMPCSample:=LoadMPCSample;
 f_config_system1.onDBChange:=SysDBChange;
 f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
+
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_time1,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_observatory1,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_chart1,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_catalog1,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_solsys1,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_display1,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_pictures1,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_system1,Screen.PixelsPerInch/96);
+{$endif}
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);

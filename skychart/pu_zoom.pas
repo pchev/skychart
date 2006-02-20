@@ -76,6 +76,9 @@ end;
 procedure Tf_zoom.FormCreate(Sender: TObject);
 begin
   Fnightvision:=false;
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
 end;
 
 procedure Tf_zoom.FormShow(Sender: TObject);

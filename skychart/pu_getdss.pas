@@ -103,6 +103,9 @@ implementation
 
 procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
   dsslib := LoadLibrary(dsslibname);
   if dsslib<>0 then begin
     ImageExtract:= TImageExtract(GetProcAddress(dsslib, 'ImageExtract'));

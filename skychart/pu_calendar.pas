@@ -203,6 +203,9 @@ const maxstep = 100;
 procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
 begin
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
 new(c);
 Fnightvision:=false;
 ShowImage:=Tf_image.Create(self);

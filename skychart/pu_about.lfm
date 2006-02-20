@@ -16,7 +16,7 @@ object f_about: Tf_about
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   Position = poScreenCenter
   TextHeight = 13
   object logo: TImage

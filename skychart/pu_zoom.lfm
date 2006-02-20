@@ -1,71 +1,71 @@
 object f_zoom: Tf_zoom
   Left = 453
-  Height = 154
+  Height = 142
   Top = 181
   Width = 308
   HorzScrollBar.Page = 307
-  VertScrollBar.Page = 153
+  VertScrollBar.Page = 141
   ActiveControl = TrackBar1
   BorderStyle = bsSizeToolWin
   Caption = 'Set FOV'
-  ClientHeight = 154
+  ClientHeight = 142
   ClientWidth = 308
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 16
   object Label1: TLabel
     Left = 16
-    Height = 14
+    Height = 13
     Top = 8
-    Width = 9
+    Width = 11
     Caption = '1'''
     Color = clNone
     ParentColor = False
   end
   object Label2: TLabel
     Left = 120
-    Height = 14
+    Height = 13
     Top = 8
-    Width = 7
+    Width = 8
     Caption = '1'
     Color = clNone
     ParentColor = False
   end
   object Label3: TLabel
     Left = 172
-    Height = 14
+    Height = 13
     Top = 8
-    Width = 13
+    Width = 15
     Caption = '10'
     Color = clNone
     ParentColor = False
   end
   object Label4: TLabel
     Left = 225
-    Height = 14
+    Height = 13
     Top = 8
-    Width = 19
+    Width = 22
     Caption = '100'
     Color = clNone
     ParentColor = False
   end
   object Label5: TLabel
     Left = 254
-    Height = 14
+    Height = 13
     Top = 8
-    Width = 19
+    Width = 22
     Caption = '360'
     Color = clNone
     ParentColor = False
   end
   object Label6: TLabel
     Left = 70
-    Height = 14
+    Height = 13
     Top = 8
-    Width = 15
+    Width = 18
     Caption = '10'''
     Color = clNone
     ParentColor = False
@@ -86,9 +86,9 @@ object f_zoom: Tf_zoom
     TabOrder = 0
   end
   object BitBtn1: TBitBtn
-    Left = 70
+    Left = 64
     Height = 25
-    Top = 96
+    Top = 104
     Width = 73
     BorderSpacing.InnerBorder = 2
     Caption = 'OK'
@@ -98,9 +98,9 @@ object f_zoom: Tf_zoom
     TabOrder = 1
   end
   object BitBtn2: TBitBtn
-    Left = 158
+    Left = 160
     Height = 25
-    Top = 96
+    Top = 104
     Width = 73
     BorderSpacing.InnerBorder = 2
     Cancel = True

@@ -12,8 +12,9 @@ object f_printsetup: Tf_printsetup
   ClientWidth = 403
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   TextHeight = 13
   object qtoption: TPanel
     Left = 18

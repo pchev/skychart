@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses
+uses u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
   Buttons, SynEdit, IpHtml;
@@ -55,6 +55,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
     procedure EditSelectAll1Execute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     FCenter : Tstr1func;
@@ -98,6 +99,13 @@ end;
 procedure Tf_detail.EditSelectAll1Execute(Sender: TObject);
 begin
   IpHtmlPanel1.SelectAll;
+end;
+
+procedure Tf_detail.FormCreate(Sender: TObject);
+begin
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
 end;
 
 procedure Tf_detail.SetHTMLText(const value: string);

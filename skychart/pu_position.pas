@@ -33,6 +33,9 @@ uses  u_constant, u_projection, u_util,
   Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons;
 
 type
+
+  { Tf_position }
+
   Tf_position = class(TForm)
     Button1: TButton;
     Button2: TButton;
@@ -53,6 +56,7 @@ type
     Label4: TLabel;
     Fov: TRaDec;
     rot: TFloatEdit;
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure EqChange(Sender: TObject);
     procedure CoordChange(Sender: TObject);
@@ -103,6 +107,13 @@ case cfgsc.projpole of
   else Panel1.visible:=false;
 end;
 EqChange(self);
+end;
+
+procedure Tf_position.FormCreate(Sender: TObject);
+begin
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
 end;
 
 procedure Tf_position.EqChange(Sender: TObject);

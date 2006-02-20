@@ -32,6 +32,7 @@ uses Math, SysUtils, Classes, u_constant, LCLType,
   {$ifdef unix}
     unix,baseunix,unixutil,
   {$endif}
+    Controls,
     MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons,WizardNotebook, ExtCtrls,
     Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
 
@@ -102,6 +103,7 @@ Function DecryptStr(Str,Pwd: String): String;
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 {$endif}
 {$ifdef win32}
+procedure ScaleForm(form: TForm; scale: single);
 procedure SetFormNightVision(form: TForm; onoff:boolean);
 {$endif}
 
@@ -1397,6 +1399,24 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
  end;
 
 {$ifdef win32}
+procedure ScaleForm(form: TForm; scale: single);
+var i: integer;
+begin
+if abs(1-scale)<=0.1 then exit; // do not scale for 10%
+with form do begin
+   width := round( width * scale );
+   height := round( height * scale );
+   for i := 0 to ComponentCount-1 do begin
+      if ( Components[i] is TControl ) then with (Components[i] as TControl) do begin
+         width := round( width * scale );
+         height := round( height * scale );
+         top := round( top * scale );
+         left := round( left * scale );
+      end;
+   end;
+end;
+end;
+
 procedure SetFormNightVision(form: TForm; onoff:boolean);
 var i: integer;
 begin

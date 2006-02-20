@@ -155,8 +155,10 @@ end;
 procedure Tf_search.FormCreate(Sender: TObject);
 begin
   Fnightvision:=false;
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
 end;
-
 
 procedure Tf_search.SpeedButton11Click(Sender: TObject);
 var buf : string;
