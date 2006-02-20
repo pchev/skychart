@@ -18,7 +18,7 @@ object f_image: Tf_image
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   OnResize = FormResize
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   Position = poScreenCenter
   TextHeight = 13
   object Image1: TZoomImage

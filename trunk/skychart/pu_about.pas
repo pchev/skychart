@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant,
+uses u_constant, u_util,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
   ExtCtrls, LResources;
 
@@ -58,6 +58,9 @@ implementation
 
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
  ShowTimer:=false;
  label2.caption:=cdcversion;
 end;

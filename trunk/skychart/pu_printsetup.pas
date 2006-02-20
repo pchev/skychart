@@ -64,6 +64,7 @@ type
     printcmdsel: TBitBtn;
     OpenDialog1: TOpenDialog;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
+    procedure FormCreate(Sender: TObject);
     procedure qtsetupClick(Sender: TObject);
     procedure printmodeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -162,6 +163,13 @@ procedure Tf_printsetup.qtsetupClick(Sender: TObject);
 begin
   PrintDialog1.execute;
   updprtsetup;
+end;
+
+procedure Tf_printsetup.FormCreate(Sender: TObject);
+begin
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
 end;
 
 procedure Tf_printsetup.printmodeClick(Sender: TObject);

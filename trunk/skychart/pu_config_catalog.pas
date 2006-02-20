@@ -28,7 +28,7 @@ interface
 uses  u_constant, u_util, cu_catalog,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
-  WizardNotebook;
+  WizardNotebook, EditBtn;
 
 type
 
@@ -247,7 +247,7 @@ type
 
   private
     { Private declarations }
-    catalogempty, LockChange: boolean;
+    catalogempty, LockChange,LockCatPath: boolean;
     procedure ShowGCat;
     procedure ShowCDCStar;                                
     procedure ShowCDCNeb;
@@ -286,6 +286,7 @@ end;
 
 procedure Tf_config_catalog.FormShow(Sender: TObject);
 begin
+LockCatPath:=false;
 LockChange:=true;
 ShowGCat;
 ShowCDCStar;
@@ -296,6 +297,7 @@ end;
 procedure Tf_config_catalog.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
+  LockCatPath:=true;
 end;
 
 procedure Tf_config_catalog.ShowGCat;
@@ -641,15 +643,20 @@ end;
 
 procedure Tf_config_catalog.CDCStarPathChange(Sender: TObject);
 begin
-if LockChange then exit;
+if LockCatPath then exit;
+try
+LockCatPath:=true;
 if sender is TEdit then with sender as TEdit do begin
   Text:=trim(Text);
   ccat.StarCatPath[tag]:=Text;
   if ccat.StarCatDef[tag] then
-     if catalog.checkpath(tag+BaseStar,text)
+     if catalog.checkpath(tag+BaseStar,Text)
         then color:=clWindow
         else color:=clRed
      else color:=clWindow;
+end;
+finally
+LockCatPath:=false;
 end;
 end;
 
@@ -688,7 +695,9 @@ end;
 
 procedure Tf_config_catalog.gcv3Change(Sender: TObject);
 begin
-if LockChange then exit;
+if LockCatPath then exit;
+try
+LockCatPath:=true;
   gcv3.Text:=trim(gcv3.Text);
   ccat.VarStarCatPath[gcvs-BaseVar]:=gcv3.Text;
   if ccat.VarStarCatDef[gcvs-BaseVar] then
@@ -696,6 +705,9 @@ if LockChange then exit;
         then gcv3.color:=clWindow
         else gcv3.color:=clRed
      else gcv3.color:=clWindow;
+finally
+LockCatPath:=false;
+end;
 end;
 
 procedure Tf_config_catalog.BitBtn14Click(Sender: TObject);
@@ -726,7 +738,9 @@ end;
 
 procedure Tf_config_catalog.wds3Change(Sender: TObject);
 begin
-if LockChange then exit;
+if LockCatPath then exit;
+try
+LockCatPath:=true;
   wds3.Text:=trim(wds3.Text);
   ccat.DblStarCatPath[wds-BaseDbl]:=wds3.Text;
   if ccat.DblStarCatDef[wds-BaseDbl] then
@@ -734,6 +748,9 @@ if LockChange then exit;
         then wds3.color:=clWindow
         else wds3.color:=clRed
      else wds3.color:=clWindow;
+finally
+LockCatPath:=false;
+end;
 end;
 
 procedure Tf_config_catalog.BitBtn15Click(Sender: TObject);
@@ -770,7 +787,9 @@ end;
 
 procedure Tf_config_catalog.CDCNebPathChange(Sender: TObject);
 begin
-if LockChange then exit;
+if LockCatPath then exit;
+try
+LockCatPath:=true;
 if sender is TEdit then with sender as TEdit do begin
   Text:=trim(Text);
   ccat.NebCatPath[tag]:=Text;
@@ -779,6 +798,9 @@ if sender is TEdit then with sender as TEdit do begin
         then color:=clWindow
         else color:=clRed
      else color:=clWindow;
+end;
+finally
+LockCatPath:=false;
 end;
 end;
 

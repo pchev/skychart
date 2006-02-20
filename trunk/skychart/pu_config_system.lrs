@@ -63,8 +63,8 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +'.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaa'
   +'aaaaa...",'#10'"................",'#10'"................"}'#10#6'Layout'#7
   +#10'blGlyphTop'#6'Margin'#2#0#9'NumGlyphs'#2#0#7'OnClick'#7#12'BitBtn1Click'
-  +#8'TabOrder'#2#2#7'TabStop'#8#4'Left'#3'R'#1#6'Height'#2#26#3'Top'#2#17#5'Wi'
-  +'dth'#2#26#3'Tag'#2#8#0#0#7'TBitBtn'#7'BitBtn2'#25'BorderSpacing.InnerBorder'
+  +#8'TabOrder'#2#2#7'TabStop'#8#4'Left'#3'R'#1#6'Height'#2#21#3'Top'#2#20#5'Wi'
+  +'dth'#2#21#3'Tag'#2#8#0#0#7'TBitBtn'#7'BitBtn2'#25'BorderSpacing.InnerBorder'
   ,#2#2#10'Glyph.Data'#10#190#1#0#0#186#1#0#0'/* XPM */'#10'static char *graphi'
   +'c[] = {'#10'"16 16 5 1",'#10'". c None",'#10'", c #7F7F7F",'#10'"- c #FFFF0'
   +'0",'#10'"* c #FFFFFF",'#10'"a c #000000",'#10'"................",'#10'"....'
@@ -74,8 +74,8 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +'a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaaaa...'
   +'",'#10'"................",'#10'"................"}'#10#6'Layout'#7#10'blGly'
   +'phTop'#6'Margin'#2#0#9'NumGlyphs'#2#0#7'OnClick'#7#12'BitBtn2Click'#8'TabOr'
-  +'der'#2#3#7'TabStop'#8#4'Left'#3'R'#1#6'Height'#2#26#3'Top'#2'='#5'Width'#2
-  +#26#3'Tag'#2#8#0#0#0#9'TGroupBox'#9'GroupBox1'#12'ClientHeight'#2'P'#11'Clie'
+  +'der'#2#3#7'TabStop'#8#4'Left'#3'R'#1#6'Height'#2#21#3'Top'#2'@'#5'Width'#2
+  +#21#3'Tag'#2#8#0#0#0#9'TGroupBox'#9'GroupBox1'#12'ClientHeight'#2'P'#11'Clie'
   +'ntWidth'#3#181#1#8'TabOrder'#2#2#4'Left'#2#16#6'Height'#2'b'#3'Top'#3#144#0
   +#5'Width'#3#185#1#0#7'TButton'#5'chkdb'#25'BorderSpacing.InnerBorder'#2#2#7
   +'Caption'#6#5'Check'#7'OnClick'#7#10'chkdbClick'#8'TabOrder'#2#0#4'Left'#2#16
@@ -137,8 +137,8 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +#7'Caption'#6#159'Set how the mount move on each axis when you turn the driv'
   +'ing knob.'#13#10'Then the Telescope button show you the turns you must do t'
   +'o go from one object to another.'#5'Color'#7#6'clNone'#11'ParentColor'#8#8
-  +'WordWrap'#9#4'Left'#2#24#6'Height'#2')'#3'Top'#2#24#5'Width'#3'i'#1#0#0#6'T'
-  +'Panel'#15'EquatorialMount'#12'ClientHeight'#3#161#0#11'ClientWidth'#3'i'#1#8
+  +'WordWrap'#9#4'Left'#2#24#6'Height'#2'>'#3'Top'#2#3#5'Width'#3'i'#1#0#0#6'TP'
+  +'anel'#15'EquatorialMount'#12'ClientHeight'#3#161#0#11'ClientWidth'#3'i'#1#8
   +'TabOrder'#2#0#4'Left'#2#24#6'Height'#3#161#0#3'Top'#2'p'#5'Width'#3'i'#1#0#6
   +'TLabel'#6'Label3'#7'Caption'#6#15'Right Ascension'#5'Color'#7#6'clNone'#11
   +'ParentColor'#8#4'Left'#2#16#6'Height'#2#14#3'Top'#2#16#5'Width'#2'M'#0#0#6

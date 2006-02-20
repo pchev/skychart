@@ -15,7 +15,7 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   TextHeight = 13
   object Label1: TLabel
     Left = 12

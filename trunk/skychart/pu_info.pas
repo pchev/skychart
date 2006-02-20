@@ -163,7 +163,10 @@ end;
 
 procedure Tf_info.FormCreate(Sender: TObject);
 begin
- Fnightvision:=false
+ Fnightvision:=false;
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
 end;
 
 procedure Tf_info.Memo1DblClick(Sender: TObject);

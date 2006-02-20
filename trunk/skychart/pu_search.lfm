@@ -14,7 +14,7 @@ object f_search: Tf_search
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 13
   object PlanetPanel: TPanel
     Left = 7
@@ -28,9 +28,9 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 14
+      Height = 13
       Top = 14
-      Width = 34
+      Width = 40
       Caption = 'Planet '
       Color = clNone
       ParentColor = False
@@ -58,9 +58,9 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 14
+      Height = 13
       Top = 14
-      Width = 34
+      Width = 41
       Caption = 'Nebula'
       Color = clNone
       ParentColor = False
@@ -88,9 +88,9 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 14
+      Height = 13
       Top = 14
-      Width = 21
+      Width = 23
       Caption = 'Star'
       Color = clNone
       ParentColor = False
@@ -118,9 +118,9 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 14
+      Height = 13
       Top = 14
-      Width = 63
+      Width = 73
       Caption = 'Constellation'
       Color = clNone
       ParentColor = False
@@ -147,9 +147,9 @@ object f_search: Tf_search
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 14
+      Height = 13
       Top = 14
-      Width = 63
+      Width = 74
       Caption = 'Object Name'
       Color = clNone
       ParentColor = False

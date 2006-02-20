@@ -12,8 +12,9 @@ object f_position: Tf_position
   ClientWidth = 291
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   TextHeight = 13
   object Button1: TButton
     Left = 72

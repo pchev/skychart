@@ -248,9 +248,9 @@ object f_config_system: Tf_config_system
             TabOrder = 2
             TabStop = False
             Left = 338
-            Height = 26
-            Top = 17
-            Width = 26
+            Height = 21
+            Top = 20
+            Width = 21
             Tag = 8
           end
           object BitBtn2: TBitBtn
@@ -278,9 +278,9 @@ object f_config_system: Tf_config_system
             TabOrder = 3
             TabStop = False
             Left = 338
-            Height = 26
-            Top = 61
-            Width = 26
+            Height = 21
+            Top = 64
+            Width = 21
             Tag = 8
           end
         end
@@ -516,8 +516,8 @@ object f_config_system: Tf_config_system
             ParentColor = False
             WordWrap = True
             Left = 24
-            Height = 41
-            Top = 24
+            Height = 62
+            Top = 3
             Width = 361
           end
           object EquatorialMount: TPanel

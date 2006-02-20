@@ -1,4 +1,10 @@
 object f_config: Tf_config
+  Left = 311
+  Height = 521
+  Top = 186
+  Width = 700
+  HorzScrollBar.Page = 699
+  VertScrollBar.Page = 520
   ActiveControl = TreeView1
   BorderStyle = bsSizeToolWin
   Caption = 'Configuration'
@@ -141,26 +147,24 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 13
-  HorzScrollBar.Page = 699
-  VertScrollBar.Page = 520
-  Left = 311
-  Height = 521
-  Top = 186
-  Width = 700
   object Panel1: TPanel
+    Height = 480
+    Width = 200
     Align = alLeft
     ClientHeight = 480
     ClientWidth = 200
     TabOrder = 0
-    Height = 480
-    Width = 200
     object TreeView1: TTreeView
+      Left = 4
+      Height = 421
+      Top = 4
+      Width = 189
       AutoExpand = True
       BackgroundColor = clBtnHighlight
       Color = clBtnHighlight
-      DefaultItemHeight = 15
+      DefaultItemHeight = 14
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True
@@ -237,106 +241,101 @@ object f_config: Tf_config
         65727665720000000000000000FFFFFFFFFFFFFFFF0000000000000000000000
         00000C000000332D2054656C6573636F7065
       }
-      Left = 4
-      Height = 421
-      Top = 4
-      Width = 189
     end
     object previous: TButton
-      BorderSpacing.InnerBorder = 2
-      Caption = '<'
-      OnClick = previousClick
-      TabOrder = 1
       Left = 56
       Height = 25
       Top = 428
       Width = 25
+      BorderSpacing.InnerBorder = 2
+      Caption = '<'
+      OnClick = previousClick
+      TabOrder = 1
     end
     object next: TButton
-      BorderSpacing.InnerBorder = 2
-      Caption = '>'
-      OnClick = nextClick
-      TabOrder = 2
       Left = 104
       Height = 25
       Top = 428
       Width = 25
+      BorderSpacing.InnerBorder = 2
+      Caption = '>'
+      OnClick = nextClick
+      TabOrder = 2
     end
   end
   object Panel2: TPanel
+    Height = 41
+    Top = 480
+    Width = 700
     Align = alBottom
     ClientHeight = 41
     ClientWidth = 700
     TabOrder = 1
-    Height = 41
-    Top = 480
-    Width = 700
     object Applyall: TCheckBox
+      Left = 16
+      Height = 28
+      Top = 12
+      Width = 185
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
       TabOrder = 0
-      Left = 16
-      Height = 13
-      Top = 12
-      Width = 144
     end
     object OKBtn: TButton
+      Left = 270
+      Height = 25
+      Top = 8
+      Width = 75
       BorderSpacing.InnerBorder = 2
       Caption = 'OK'
       Default = True
       ModalResult = 1
       TabOrder = 1
-      Left = 270
-      Height = 25
-      Top = 8
-      Width = 75
     end
     object Apply: TButton
-      BorderSpacing.InnerBorder = 2
-      Caption = 'Apply'
-      OnClick = ApplyClick
-      TabOrder = 2
       Left = 358
       Height = 25
       Top = 8
       Width = 75
+      BorderSpacing.InnerBorder = 2
+      Caption = 'Apply'
+      OnClick = ApplyClick
+      TabOrder = 2
     end
     object CancelBtn: TButton
+      Left = 446
+      Height = 25
+      Top = 8
+      Width = 75
       BorderSpacing.InnerBorder = 2
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 3
-      Left = 446
-      Height = 25
-      Top = 8
-      Width = 75
     end
     object HelpBtn: TButton
-      BorderSpacing.InnerBorder = 2
-      Caption = '&Help'
-      TabOrder = 4
       Left = 534
       Height = 25
       Top = 8
       Width = 75
+      BorderSpacing.InnerBorder = 2
+      Caption = '&Help'
+      TabOrder = 4
     end
   end
   object MultiDoc1: TMultiDoc
-    Maximized = True
-    BorderWidth = 3
-    TitleHeight = 12
+    Left = 200
+    Height = 480
+    Width = 500
     Align = alClient
     BevelOuter = bvNone
+    BorderWidth = 3
     ClientHeight = 480
     ClientWidth = 500
     Color = clBlack
     ParentColor = False
     TabOrder = 2
-    OnResize = nil
-    Left = 200
-    Height = 480
-    Width = 500
+    Maximized = True
+    TitleHeight = 12
   end
 end
