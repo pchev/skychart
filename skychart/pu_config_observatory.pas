@@ -28,7 +28,7 @@ interface
 uses  u_constant, u_util, cu_database, Math, dynlibs, lazjpeg, unzip,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
-  WizardNotebook, Spin, downloaddialog;
+  WizardNotebook, Spin, downloaddialog, EditBtn;
 
 type
 
@@ -36,7 +36,9 @@ type
 
   Tf_config_observatory = class(TForm)
     DownloadDialog1: TDownloadDialog;
+    horizonfile: TFileNameEdit;
     Memo1: TMemo;
+    OpenDialog1: TOpenDialog;
     vicinity: TButton;
     LocCode: TEdit;
     Label2: TLabel;
@@ -88,17 +90,16 @@ type
     updcity: TButton;
     delcity: TButton;
     hor_l2: TLabel;
-    OpenDialog1: TOpenDialog;
     GroupBox2: TGroupBox;
     horizonopaque: TCheckBox;
     GroupBox1: TGroupBox;
-    horizonfile: TEdit;
     hor_l1: TLabel;
-    horizonfileBtn: TBitBtn;
     displayhorizon: TCheckBox;
     GroupBox3: TGroupBox;
     horizondepression: TCheckBox;
     Label1: TLabel;
+    procedure cityfilterKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
     procedure countrylistChange(Sender: TObject);
     procedure citysearchClick(Sender: TObject);
     procedure citylistChange(Sender: TObject);
@@ -123,7 +124,6 @@ type
     procedure ObsmapClick(Sender: TObject);
     procedure horizonopaqueClick(Sender: TObject);
     procedure horizonfileChange(Sender: TObject);
-    procedure horizonfileBtnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure displayhorizonClick(Sender: TObject);
     procedure horizondepressionClick(Sender: TObject);
@@ -174,6 +174,9 @@ end;
 
 procedure Tf_config_observatory.FormCreate(Sender: TObject);
 begin
+{$ifdef linux}
+  countrylist.Style:=csDropDown;
+{$endif}
   countrycode:=TStringList.Create;
   citycode:=TStringList.Create;
   LockChange:=true;
@@ -279,9 +282,17 @@ except
 end;
 end;
 
+procedure Tf_config_observatory.cityfilterKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+ if key=key_cr then citysearchClick(Sender);
+end;
+
 procedure Tf_config_observatory.citysearchClick(Sender: TObject);
 var code,filter: string;
 begin
+screen.Cursor:=crHourGlass;
+try
 if countrylist.ItemIndex<0 then exit;
 lockChange:=true;
 code:=countrycode[countrylist.ItemIndex];
@@ -291,6 +302,9 @@ cdb.GetCityList(code,filter,citycode,citylist.Items,MaxCityList);
 if citylist.Items.Count>0 then citylist.Text:=citylist.Items[0];
 lockChange:=false;
 citylistChange(self);
+finally
+screen.Cursor:=crDefault;
+end;
 end;
 
 procedure Tf_config_observatory.citylistChange(Sender: TObject);
@@ -372,7 +386,6 @@ end;
 
 procedure Tf_config_observatory.downloadcityClick(Sender: TObject);
 var country,fn,fnzip,buf:string;
-    ok: boolean;
 begin
 if countrylist.ItemIndex<0 then exit;
 if MessageDlg('This action replace all the database content for the country '+countrylist.Text+' using fresh data from NGA and GNIS.'+crlf+
@@ -396,7 +409,6 @@ if MessageDlg('This action replace all the database content for the country '+co
           application.ProcessMessages;
           sleep(2000);
           memo1.Visible:=false;
-          ok:=true;
        end else
           Showmessage('Cancel '+DownloadDialog1.ResponseText);
     end else begin  // World
@@ -418,7 +430,6 @@ if MessageDlg('This action replace all the database content for the country '+co
              application.ProcessMessages;
              sleep(2000);
              memo1.Visible:=false;
-             ok:=true;
           end
           else Showmessage('Cancel, wrong zip file ?? '+fnzip);
        end else
@@ -602,6 +613,7 @@ procedure Tf_config_observatory.ShowHorizon;
 begin
 horizonopaque.checked:=not csc.horizonopaque;
 horizonfile.text:=cmain.horizonfile;
+horizonfile.InitialDir:=slash(appdir)+'data'+pathdelim+'horizon';
 displayhorizon.Checked:=csc.ShowHorizon;
 horizondepression.Checked:=csc.ShowHorizonDepression;
 end;
@@ -625,28 +637,6 @@ procedure Tf_config_observatory.horizonfileChange(Sender: TObject);
 begin
 if LockChange then exit;
 cmain.horizonfile:=horizonfile.text;
-end;
-
-procedure Tf_config_observatory.horizonfileBtnClick(Sender: TObject);
-begin
-if fileexists(cmain.horizonfile) then begin
-   opendialog1.InitialDir:=extractfilepath(cmain.horizonfile);
-   opendialog1.filename:=extractfilename(cmain.horizonfile);
-end else begin
-   opendialog1.InitialDir:=slash(appdir)+'data'+pathdelim+'horizon';
-   opendialog1.filename:='horizon.txt';
-end;
-opendialog1.Filter:='All|*.*';
-try
-if opendialog1.execute
-   and(fileexists(opendialog1.filename))
-   then begin
-   horizonfile.text:=opendialog1.filename;
-   cmain.horizonfile:=opendialog1.filename;
-end;
-finally
-   chdir(appdir);
-end;
 end;
 
 initialization

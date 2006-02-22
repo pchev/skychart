@@ -28,13 +28,15 @@ interface
 uses u_constant, u_util, cu_database,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms,
-  ExtCtrls, StdCtrls, LResources, WizardNotebook;
+  ExtCtrls, StdCtrls, LResources, WizardNotebook, EditBtn;
 
 type
 
   { Tf_config_system }
 
   Tf_config_system = class(TForm)
+    prgdir: TDirectoryEdit;
+    persdir: TDirectoryEdit;
     Label12: TLabel;
     LinuxCmd: TEdit;
     LinuxDesktopBox: TComboBox;
@@ -43,7 +45,6 @@ type
     Page1: TPage;
     Page2: TPage;
     Page3: TPage;
-    SelectDirectoryDialog1: TSelectDirectoryDialog;
     Label153: TLabel;
     MysqlBox: TGroupBox;
     Label77: TLabel;
@@ -59,10 +60,6 @@ type
     GroupBoxDir: TGroupBox;
     Label156: TLabel;
     Label157: TLabel;
-    prgdir: TEdit;
-    persdir: TEdit;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
     GroupBox3: TGroupBox;
     Label54: TLabel;
     Label55: TLabel;
@@ -425,6 +422,16 @@ if messagedlg('Warning!'+crlf+'You are about to destroy the database '+cmain.db+
 end;
 end;
 
+procedure Tf_config_system.BitBtn1Click(Sender: TObject);
+begin
+
+end;
+
+procedure Tf_config_system.BitBtn2Click(Sender: TObject);
+begin
+
+end;
+
 procedure Tf_config_system.AstDBClick(Sender: TObject);
 begin
  if Assigned(FShowAsteroid) then FShowAsteroid(self);
@@ -433,20 +440,6 @@ end;
 procedure Tf_config_system.CometDBClick(Sender: TObject);
 begin
  if Assigned(FShowComet) then FShowComet(self);
-end;
-
-procedure Tf_config_system.BitBtn1Click(Sender: TObject);
-begin
-  SelectDirectoryDialog1.InitialDir:=expandfilename(prgdir.Text);
-  if SelectDirectoryDialog1.execute then
-     prgdir.Text:=SelectDirectoryDialog1.Filename;
-end;
-
-procedure Tf_config_system.BitBtn2Click(Sender: TObject);
-begin
-  SelectDirectoryDialog1.InitialDir:=expandfilename(persdir.Text);
-  if SelectDirectoryDialog1.execute then
-     persdir.Text:=SelectDirectoryDialog1.Filename;
 end;
 
 procedure Tf_config_system.prgdirChange(Sender: TObject);

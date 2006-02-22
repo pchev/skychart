@@ -28,13 +28,15 @@ interface
 uses  u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
-  WizardNotebook;
+  WizardNotebook, EditBtn;
 
 type
 
   { Tf_config_display }
 
   Tf_config_display = class(TForm)
+    ConstlFile: TFileNameEdit;
+    ConstbFile: TFileNameEdit;
     GroupBox6: TGroupBox;
     ThemeList: TComboBox;
     MainPanel: TPanel;
@@ -178,7 +180,6 @@ type
     rb10: TCheckBox;
     RectangleGrid: TStringGrid;
     CenterMark2: TCheckBox;
-    OpenDialog1: TOpenDialog;
     FontDialog1: TFontDialog;
     ColorDialog1: TColorDialog;
     Showlabelall: TCheckBox;
@@ -246,13 +247,9 @@ type
     GroupBox1: TGroupBox;
     Constl: TCheckBox;
     Label132: TLabel;
-    ConstlFile: TEdit;
-    ConstlFileBtn: TBitBtn;
     GroupBox3: TGroupBox;
     Constb: TCheckBox;
     Label72: TLabel;
-    ConstbFile: TEdit;
-    ConstbfileBtn: TBitBtn;
     GroupBox4: TGroupBox;
     milkyway: TCheckBox;
     fillmilkyway: TCheckBox;
@@ -327,10 +324,8 @@ type
     procedure galacticClick(Sender: TObject);
     procedure ConstlClick(Sender: TObject);
     procedure ConstlFileChange(Sender: TObject);
-    procedure ConstlFileBtnClick(Sender: TObject);
     procedure ConstbClick(Sender: TObject);
     procedure ConstbFileChange(Sender: TObject);
-    procedure ConstbfileBtnClick(Sender: TObject);
     procedure milkywayClick(Sender: TObject);
     procedure fillmilkywayClick(Sender: TObject);
     procedure showlabelClick(Sender: TObject);
@@ -1133,23 +1128,6 @@ if LockChange then exit;
   cmain.ConstLfile:=expandfilename(ConstlFile.Text);
 end;
 
-procedure Tf_config_display.ConstlFileBtnClick(Sender: TObject);
-var f : string;
-begin
-f:=expandfilename(ConstlFile.Text);
-opendialog1.InitialDir:=extractfilepath(f);
-opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='Constellation Figure|*.cln';
-opendialog1.DefaultExt:='';
-try
-if opendialog1.execute then begin
-   ConstlFile.Text:=opendialog1.FileName;
-end;
-finally
- chdir(appdir);
-end;
-end;
-
 procedure Tf_config_display.ConstbClick(Sender: TObject);
 begin
   csc.ShowConstb:=ConstB.Checked;
@@ -1159,23 +1137,6 @@ procedure Tf_config_display.ConstbFileChange(Sender: TObject);
 begin
 if LockChange then exit;
   cmain.ConstBfile:=expandfilename(ConstbFile.Text);
-end;
-
-procedure Tf_config_display.ConstbfileBtnClick(Sender: TObject);
-var f : string;
-begin
-f:=expandfilename(ConstbFile.Text);
-opendialog1.InitialDir:=extractfilepath(f);
-opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='Constellation Boundary|*.cby';
-opendialog1.DefaultExt:='';
-try
-if opendialog1.execute then begin
-   ConstbFile.Text:=opendialog1.FileName;
-end;
-finally
- chdir(appdir);
-end;
 end;
 
 procedure Tf_config_display.milkywayClick(Sender: TObject);

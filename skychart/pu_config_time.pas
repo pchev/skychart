@@ -192,11 +192,13 @@ if csc.SimS>0 then begin
 end;
 stepline.checked:=csc.SimLine;
 for i:=0 to SimObj.Items.Count-1 do begin
-  if i=0 then j:=10         // sun
-  else if i=3 then j:=11    // moon
-  else if i=10 then j:=12   // ast
-  else if i=11 then j:=13   // com
+  case i of
+  0 : j:=10;   // sun
+  3 : j:=11;   // moon
+  10: j:=12;   // asteroid
+  11: j:=13;   // comet
   else j:=i;
+  end;
   SimObj.checked[i]:=csc.SimObject[j];
 end;
 end;
@@ -246,6 +248,7 @@ csc.DT_UT:=DTminusUT(csc.curyear,csc);
 Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
 end;
+
 
 procedure Tf_config_time.TimeChange(Sender: TObject);
 begin
@@ -300,11 +303,13 @@ procedure Tf_config_time.SimObjClickCheck(Sender: TObject);
 var i,j:integer;
 begin
 for i:=0 to SimObj.Items.Count-1 do begin
-  if i=0 then j:=10         // sun
-  else if i=3 then j:=11    // moon
-  else if i=10 then j:=12   // ast
-  else if i=11 then j:=13   // com
+  case i of
+  0 : j:=10;   // sun
+  3 : j:=11;   // moon
+  10: j:=12;   // asteroid
+  11: j:=13;   // comet
   else j:=i;
+  end;
   csc.SimObject[j]:=SimObj.checked[i];
 end;
 end;
@@ -356,8 +361,10 @@ end;
 procedure Tf_config_time.stepresetClick(Sender: TObject);
 begin
 nbstep.value:=1;
+nbstepChanged(Sender);
 stepsize.value:=1;
 stepunit.ItemIndex:=0;
+stepunitClick(Sender);
 end;
 
 procedure Tf_config_time.nbstepChanged(Sender: TObject);
