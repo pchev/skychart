@@ -260,11 +260,6 @@ type
     ToolButtonShowObjectbelowHorizon: TToolButton;
     ToolButtonswitchbackground: TToolButton;
     ToolButtonswitchstars: TToolButton;
-    StarSizePanel: TPanel;
-    TrackBar1: TTrackBar;
-    TrackBar2: TTrackBar;
-    TrackBar3: TTrackBar;
-    TrackBar4: TTrackBar;
     ToolButtonEQ: TToolButton;
     ToolButtonAZ: TToolButton;
     ToolButtonEC: TToolButton;
@@ -287,7 +282,6 @@ type
     Calendar: TAction;
     ToolButtonSearch: TToolButton;
     Content1: TMenuItem;
-    ButtonStarSize: TSpeedButton;
     Field1: TSpeedButton;
     Field2: TSpeedButton;
     Field3: TSpeedButton;
@@ -385,7 +379,6 @@ type
     BtnCloseChild: TSpeedButton;
     Maximize1: TMenuItem;
     Maximize: TAction;
-    PanelStar: TPanel;
     TelescopePanel: TAction;
     ControlPanel1: TMenuItem;
     ViewFullScreen: TAction;
@@ -460,7 +453,6 @@ type
     procedure ShowEclipticExecute(Sender: TObject);
     procedure ShowMarkExecute(Sender: TObject);
     procedure ShowObjectbelowHorizonExecute(Sender: TObject);
-    procedure StarSizeChange(Sender: TObject);
     procedure EquatorialProjectionExecute(Sender: TObject);
     procedure AltAzProjectionExecute(Sender: TObject);
     procedure EclipticProjectionExecute(Sender: TObject);
@@ -471,7 +463,6 @@ type
     procedure ViewRightBarExecute(Sender: TObject);
     procedure CalendarExecute(Sender: TObject);
     procedure HelpContents1Execute(Sender: TObject);
-    procedure ButtonStarSizeClick(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
     procedure SetFovExecute(Sender: TObject);
     procedure ShowBackgroundImageExecute(Sender: TObject);
@@ -1582,21 +1573,6 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.horizonopaque:=not sc.cfgsc.horizonopaque;
    Refresh;
 end;
-end;
-
-procedure Tf_main.StarSizeChange(Sender: TObject);
-begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-  case Ttrackbar(sender).tag of
-    1: sc.plot.cfgplot.partsize:=trackbar1.position/10;
-    2: sc.plot.cfgplot.magsize:=trackbar2.position/10;
-    3: sc.plot.cfgplot.contrast:=trackbar3.position;
-    4: sc.plot.cfgplot.saturation:=trackbar4.position;
-  end;
-  RefreshTimer.Interval:=1000;
-  RefreshTimer.Enabled:=false;
-  RefreshTimer.Enabled:=true;
-end;  
 end;
 
 procedure Tf_main.EquatorialProjectionExecute(Sender: TObject);
@@ -3348,14 +3324,10 @@ if MultiDoc1.ActiveObject=sender then begin
      else
        ToolButtonTrack.Hint:='No object to lock on';
     case sc.plot.cfgplot.starplot of
-    0: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=true; ButtonStarSize.visible:=false; starsizepanel.Visible:=false; end;
-    1: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=false; ButtonStarSize.visible:=false; starsizepanel.Visible:=false; end;
-    2: begin ToolButtonswitchstars.down:=false; ToolButtonswitchstars.marked:=false; ButtonStarSize.visible:=true; end;
+    0: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=true; end;
+    1: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=false; end;
+    2: begin ToolButtonswitchstars.down:=false; ToolButtonswitchstars.marked:=false; end;
     end;
-    trackbar1.position:=round(sc.plot.cfgplot.partsize*10);
-    trackbar2.position:=round(sc.plot.cfgplot.magsize*10);
-    trackbar3.position:=sc.plot.cfgplot.contrast;
-    trackbar4.position:=sc.plot.cfgplot.saturation;
     toolbuttonEQ.down:= (sc.cfgsc.projpole=Equat);
     toolbuttonAZ.down:= (sc.cfgsc.projpole=AltAz);
     toolbuttonEC.down:= (sc.cfgsc.projpole=Ecl);
@@ -3394,15 +3366,6 @@ if MultiDoc1.ActiveObject=sender then begin   // active chart refresh
   application.processmessages; 
   if cfgm.SyncChart then SyncChild;
 end;
-end;
-
-procedure Tf_main.ButtonStarSizeClick(Sender: TObject);
-begin
-starsizepanel.Visible:= not starsizepanel.Visible;
-if starsizepanel.Visible then
-   PanelStar.width:=starsizepanel.width+ButtonStarSize.width
-else
-   PanelStar.width:=ButtonStarSize.width;
 end;
 
 Function Tf_main.NewChart(cname:string):string;
@@ -3818,17 +3781,9 @@ begin
   quicksearch.Enabled:=false;   // add all main form focusable control here
   TimeVal.Enabled:=false;
   TimeU.Enabled:=false;
-  TrackBar1.Enabled:=false;
-  TrackBar2.Enabled:=false;
-  TrackBar3.Enabled:=false;
-  TrackBar4.Enabled:=false;
   quicksearch.Enabled:=true;
   TimeVal.Enabled:=true;
   TimeU.Enabled:=true;
-  TrackBar1.Enabled:=true;
-  TrackBar2.Enabled:=true;
-  TrackBar3.Enabled:=true;
-  TrackBar4.Enabled:=true;
 end;
 
 procedure Tf_main.ListInfo(buf:string);
@@ -3916,7 +3871,6 @@ case button of
    Toolbar2.Images:=ImageNormal;
    Toolbar3.Images:=ImageNormal;
    Toolbar4.Images:=ImageNormal;
-   ButtonStarSize.Glyph.LoadFromFile(iconpath+'a1.xpm');
    BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
    BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
    ImageNormal.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
@@ -3935,7 +3889,6 @@ case button of
        ImageList2.Add(btn,nil);
        btn:=TBitmap.Create;
      end;
-   ButtonStarSize.Glyph.LoadFromFile(iconpath+'a1.xpm');
    BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
    BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
    col:=$acb5f5;
@@ -3960,7 +3913,6 @@ case button of
        ImageList2.Add(btn,nil);
        btn:=TBitmap.Create;
      end;
-   ButtonStarSize.Glyph.LoadFromFile(iconpath+'a1.xpm');
    BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
    BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
    ActionList1.Images:=ImageList2;
@@ -3984,7 +3936,6 @@ case button of
        ImageList2.Add(btn,nil);
        btn:=TBitmap.Create;
      end;
-   ButtonStarSize.Glyph.LoadFromFile(iconpath+'a1.xpm');
    BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
    BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
    col:=clLime;
