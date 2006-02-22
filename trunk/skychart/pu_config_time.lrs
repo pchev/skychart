@@ -59,16 +59,16 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'Width'#3#153#1#0#6'TLabel'#8'Label137'#7'Caption'#6#4'Time'#5'Color'#7#6'cl'
   +'None'#11'ParentColor'#8#4'Left'#2#8#6'Height'#2#14#3'Top'#2'F'#5'Width'#2#23
   +#0#0#6'TLabel'#8'Label139'#7'Caption'#6#1'M'#5'Color'#7#6'clNone'#11'ParentC'
-  +'olor'#8#4'Left'#2'p'#6'Height'#2#14#3'Top'#2'4'#5'Width'#2#9#0#0#6'TLabel'#8
+  +'olor'#8#4'Left'#2''#6'Height'#2#14#3'Top'#2'4'#5'Width'#2#9#0#0#6'TLabel'#8
   +'Label141'#7'Caption'#6#1'S'#5'Color'#7#6'clNone'#11'ParentColor'#8#4'Left'#3
-  +#152#0#6'Height'#2#14#3'Top'#2'4'#5'Width'#2#7#0#0#6'TLabel'#8'Label138'#7'C'
+  +#195#0#6'Height'#2#14#3'Top'#2'4'#5'Width'#2#7#0#0#6'TLabel'#8'Label138'#7'C'
   +'aption'#6#1'H'#5'Color'#7#6'clNone'#11'ParentColor'#8#4'Left'#2'8'#6'Height'
   +#2#14#3'Top'#2'4'#5'Width'#2#8#0#0#6'TLabel'#8'Label143'#7'Caption'#6#1'Y'#5
   +'Color'#7#6'clNone'#11'ParentColor'#8#4'Left'#2'8'#6'Height'#2#14#3'Top'#2#6
   ,#5'Width'#2#7#0#0#6'TLabel'#8'Label144'#7'Caption'#6#1'M'#5'Color'#7#6'clNon'
-  +'e'#11'ParentColor'#8#4'Left'#2'p'#6'Height'#2#14#3'Top'#2#6#5'Width'#2#9#0#0
+  +'e'#11'ParentColor'#8#4'Left'#2''#6'Height'#2#14#3'Top'#2#6#5'Width'#2#9#0#0
   +#6'TLabel'#8'Label145'#7'Caption'#6#1'D'#5'Color'#7#6'clNone'#11'ParentColor'
-  +#8#4'Left'#3#152#0#6'Height'#2#14#3'Top'#2#6#5'Width'#2#8#0#0#6'TLabel'#8'La'
+  +#8#4'Left'#3#196#0#6'Height'#2#14#3'Top'#2#6#5'Width'#2#8#0#0#6'TLabel'#8'La'
   +'bel140'#7'Caption'#6#4'Date'#5'Color'#7#6'clNone'#11'ParentColor'#8#4'Left'
   +#2#8#6'Height'#2#14#3'Top'#2#22#5'Width'#2#24#0#0#7'TBitBtn'#7'BitBtn4'#25'B'
   +'orderSpacing.InnerBorder'#2#2#7'Caption'#6#18'Actual system time'#9'NumGlyp'
@@ -83,17 +83,17 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'BC'#0#7'OnClick'#7#10'DateChange'#8'TabOrder'#2#1#4'Left'#3#11#1#6'Height'#2
   +''''#3'Top'#2#6#5'Width'#2't'#0#0#9'TSpinEdit'#6'd_year'#8'MaxValue'#3' N'#8
   +'OnChange'#7#10'DateChange'#8'TabOrder'#2#2#5'Value'#3#211#7#4'Left'#2'8'#6
-  +'Height'#2#22#3'Top'#2#19#5'Width'#2'M'#0#0#9'TSpinEdit'#7'd_month'#8'MaxVal'
+  +'Height'#2#22#3'Top'#2#19#5'Width'#2'A'#0#0#9'TSpinEdit'#7'd_month'#8'MaxVal'
   +'ue'#2#12#8'MinValue'#2#1#8'OnChange'#7#10'DateChange'#8'TabOrder'#2#3#5'Val'
-  +'ue'#2#1#4'Left'#2''#6'Height'#2#22#3'Top'#2#19#5'Width'#2'G'#0#0#9'TSpinEd'
+  +'ue'#2#1#4'Left'#2''#6'Height'#2#22#3'Top'#2#19#5'Width'#2'2'#0#0#9'TSpinEd'
   +'it'#5'd_day'#8'MaxValue'#2#31#8'MinValue'#2#1#8'OnChange'#7#10'DateChange'#8
   +'TabOrder'#2#4#5'Value'#2#1#4'Left'#3#195#0#6'Height'#2#22#3'Top'#2#19#5'Wid'
-  +'th'#2'G'#0#0#9'TSpinEdit'#6't_hour'#8'MaxValue'#2#23#8'OnChange'#7#10'TimeC'
-  +'hange'#8'TabOrder'#2#5#4'Left'#2'8'#6'Height'#2#22#3'Top'#2'A'#5'Width'#2'K'
+  +'th'#2'2'#0#0#9'TSpinEdit'#6't_hour'#8'MaxValue'#2#23#8'OnChange'#7#10'TimeC'
+  +'hange'#8'TabOrder'#2#5#4'Left'#2'8'#6'Height'#2#22#3'Top'#2'A'#5'Width'#2'2'
   +#0#0#9'TSpinEdit'#5't_min'#8'MaxValue'#2';'#8'OnChange'#7#10'TimeChange'#8'T'
-  +'abOrder'#2#6#4'Left'#2''#6'Height'#2#22#3'Top'#2'A'#5'Width'#2'G'#0#0#9'TS'
+  +'abOrder'#2#6#4'Left'#2''#6'Height'#2#22#3'Top'#2'A'#5'Width'#2'2'#0#0#9'TS'
   +'pinEdit'#5't_sec'#8'MaxValue'#2';'#8'OnChange'#7#10'TimeChange'#8'TabOrder'
-  +#2#7#4'Left'#3#195#0#6'Height'#2#22#3'Top'#2'A'#5'Width'#2'G'#0#0#0#9'TCheck'
+  +#2#7#4'Left'#3#195#0#6'Height'#2#22#3'Top'#2'A'#5'Width'#2'2'#0#0#0#9'TCheck'
   +'Box'#9'CheckBox1'#7'Caption'#6#15'Use system time'#7'OnClick'#7#14'CheckBox'
   +'1Click'#8'TabOrder'#2#5#4'Left'#2'('#6'Height'#2#13#3'Top'#2#24#5'Width'#2
   +'`'#0#0#0#5'TPage'#5'Page2'#7'Caption'#6#5'Page2'#11'ClientWidth'#3#236#1#12
@@ -123,10 +123,10 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'each position '#7'OnClick'#7#13'steplineClick'#8'TabOrder'#2#1#4'Left'#2#6#6
   +'Height'#2#13#3'Top'#3'7'#1#5'Width'#3#211#0#0#0#9'TSpinEdit'#6'nbstep'#8'Mi'
   +'nValue'#2#1#8'OnChange'#7#13'nbstepChanged'#8'TabOrder'#2#2#5'Value'#2#1#4
-  +'Left'#3'j'#1#6'Height'#2#22#3'Top'#2'7'#5'Width'#2'A'#0#0#9'TSpinEdit'#8'st'
+  +'Left'#3'j'#1#6'Height'#2#22#3'Top'#2'7'#5'Width'#2'C'#0#0#9'TSpinEdit'#8'st'
   +'epsize'#8'MaxValue'#4'?B'#15#0#8'MinValue'#2#1#8'OnChange'#7#15'stepsizeCha'
   +'nged'#8'TabOrder'#2#3#5'Value'#2#1#4'Left'#3'j'#1#6'Height'#2#22#3'Top'#2'_'
-  +#5'Width'#2'A'#0#0#13'TCheckListBox'#6'SimObj'#13'Items.Strings'#1#6#3'Sun'#6
+  +#5'Width'#2'C'#0#0#13'TCheckListBox'#6'SimObj'#13'Items.Strings'#1#6#3'Sun'#6
   +#8'Mercury '#6#5'Venus'#6#4'Moon'#6#4'Mars'#6#7'Jupiter'#6#6'Saturn'#6#6'Ura'
   +'nus'#6#7'Neptune'#6#5'Pluto'#6#9'Asteroids'#6#6'Comets'#0#10'ItemHeight'#2
   ,#16#7'OnClick'#7#16'SimObjClickCheck'#8'TabOrder'#2#4#4'Left'#2#6#6'Height'#3

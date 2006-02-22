@@ -1,85 +1,80 @@
 object f_config_observatory: Tf_config_observatory
+  Left = 286
+  Height = 538
+  Top = 143
+  Width = 595
+  HorzScrollBar.Page = 594
+  VertScrollBar.Page = 537
   ActiveControl = latdeg
   Caption = 'f_config_observatory'
-  ClientHeight = 525
-  ClientWidth = 567
+  ChildSizing.LeftRightSpacing = 525
+  ClientHeight = 538
+  ClientWidth = 595
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
-  HorzScrollBar.Page = 566
-  VertScrollBar.Page = 524
-  Left = 286
-  Height = 525
-  Top = 143
-  Width = 567
+  PixelsPerInch = 90
   object MainPanel: TPanel
-    ClientHeight = 480
-    ClientWidth = 500
-    ParentColor = False
-    TabOrder = 0
     Left = 8
     Height = 480
     Top = 8
     Width = 500
+    ClientHeight = 480
+    ClientWidth = 500
+    ParentColor = False
+    TabOrder = 0
     object WizardNotebook1: TWizardNotebook
-      Align = alClient
-      PageIndex = 0
-      ShowTabs = False
       Left = 1
       Height = 478
       Top = 1
       Width = 498
+      Align = alClient
+      PageIndex = 0
+      ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 490
-        ClientHeight = 470
-        Height = 470
-        Width = 490
-        object Memo1: TMemo
-          TabOrder = 11
-          Visible = False
-          Left = 8
-          Height = 141
-          Top = 107
-          Width = 449
-        end
+        ClientWidth = 498
+        ClientHeight = 478
         object Latitude: TGroupBox
-          Caption = 'Latitude'
-          ClientHeight = 50
-          ClientWidth = 181
-          TabOrder = 0
           Left = 8
           Height = 68
           Top = 111
           Width = 185
+          Caption = 'Latitude'
+          ClientHeight = 68
+          ClientWidth = 185
+          TabOrder = 0
           object Label58: TLabel
-            Caption = 'Degree'
-            Color = clNone
-            ParentColor = False
             Left = 4
             Height = 14
             Top = 4
             Width = 36
-          end
-          object Label59: TLabel
-            Caption = 'Min.'
+            Caption = 'Degree'
             Color = clNone
             ParentColor = False
+          end
+          object Label59: TLabel
             Left = 48
             Height = 14
             Top = 4
             Width = 21
-          end
-          object Label60: TLabel
-            Caption = 'Sec.'
+            Caption = 'Min.'
             Color = clNone
             ParentColor = False
+          end
+          object Label60: TLabel
             Left = 80
             Height = 14
             Top = 4
             Width = 22
+            Caption = 'Sec.'
+            Color = clNone
+            ParentColor = False
           end
           object hemis: TComboBox
+            Left = 112
+            Height = 21
+            Top = 21
+            Width = 65
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 13
             ItemIndex = 0
@@ -91,112 +86,97 @@ object f_config_observatory: Tf_config_observatory
             OnChange = latdegChange
             TabOrder = 3
             Text = 'North'
-            Left = 112
-            Height = 21
-            Top = 21
-            Width = 65
           end
           object latdeg: TLongEdit
-            MaxValue = 90
-            BorderStyle = bsSingle
+            Name = 'latdeg'
+            Left = 4
             Height = 22
             Hint = '0..90'
-            Left = 4
+            Top = 20
+            Width = 33
+            BorderStyle = bsSingle
             MaxLength = 2
-            Name = 'latdeg'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            Top = 20
-            Width = 33
             OnChange = latdegChange
-            Left = 4
-            Height = 22
-            Hint = '0..90'
-            Top = 20
-            Width = 33
+            MaxValue = 90
           end
           object latmin: TLongEdit
-            MaxValue = 59
-            BorderStyle = bsSingle
+            Name = 'latmin'
+            Left = 48
             Height = 22
             Hint = '0..59'
-            Left = 48
+            Top = 20
+            Width = 25
+            BorderStyle = bsSingle
             MaxLength = 2
-            Name = 'latmin'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
-            Top = 20
-            Width = 25
             OnChange = latdegChange
-            Left = 48
-            Height = 22
-            Hint = '0..59'
-            Top = 20
-            Width = 25
+            MaxValue = 59
           end
           object latsec: TLongEdit
-            MaxValue = 59
-            BorderStyle = bsSingle
+            Name = 'latsec'
+            Left = 80
             Height = 22
             Hint = '0..59'
-            Left = 80
+            Top = 20
+            Width = 25
+            BorderStyle = bsSingle
             MaxLength = 2
-            Name = 'latsec'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
-            Top = 20
-            Width = 25
             OnChange = latdegChange
-            Left = 80
-            Height = 22
-            Hint = '0..59'
-            Top = 20
-            Width = 25
+            MaxValue = 59
           end
         end
         object Longitude: TGroupBox
-          Caption = 'Longitude'
-          ClientHeight = 50
-          ClientWidth = 181
-          TabOrder = 1
           Left = 192
           Height = 68
           Top = 111
           Width = 185
+          Caption = 'Longitude'
+          ClientHeight = 68
+          ClientWidth = 185
+          TabOrder = 1
           object Label61: TLabel
-            Caption = 'Degree'
-            Color = clNone
-            ParentColor = False
             Left = 4
             Height = 14
             Top = 4
             Width = 36
-          end
-          object Label62: TLabel
-            Caption = 'Min.'
+            Caption = 'Degree'
             Color = clNone
             ParentColor = False
+          end
+          object Label62: TLabel
             Left = 48
             Height = 14
             Top = 4
             Width = 21
-          end
-          object Label63: TLabel
-            Caption = 'Sec.'
+            Caption = 'Min.'
             Color = clNone
             ParentColor = False
+          end
+          object Label63: TLabel
             Left = 80
             Height = 14
             Top = 4
             Width = 22
+            Caption = 'Sec.'
+            Color = clNone
+            ParentColor = False
           end
           object long: TComboBox
+            Left = 112
+            Height = 21
+            Top = 21
+            Width = 65
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 13
             ItemIndex = 1
@@ -208,263 +188,167 @@ object f_config_observatory: Tf_config_observatory
             OnChange = longdegChange
             TabOrder = 3
             Text = 'East'
-            Left = 112
-            Height = 21
-            Top = 21
-            Width = 65
           end
           object longdeg: TLongEdit
-            MaxValue = 180
-            BorderStyle = bsSingle
+            Name = 'longdeg'
+            Left = 4
             Height = 22
             Hint = '0..180'
-            Left = 4
+            Top = 20
+            Width = 33
+            BorderStyle = bsSingle
             MaxLength = 4
-            Name = 'longdeg'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            Top = 20
-            Width = 33
             OnChange = longdegChange
-            Left = 4
-            Height = 22
-            Hint = '0..180'
-            Top = 20
-            Width = 33
+            MaxValue = 180
           end
           object longmin: TLongEdit
-            MaxValue = 59
-            BorderStyle = bsSingle
+            Name = 'longmin'
+            Left = 48
             Height = 22
             Hint = '0..59'
-            Left = 48
+            Top = 20
+            Width = 25
+            BorderStyle = bsSingle
             MaxLength = 2
-            Name = 'longmin'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
-            Top = 20
-            Width = 25
             OnChange = longdegChange
-            Left = 48
-            Height = 22
-            Hint = '0..59'
-            Top = 20
-            Width = 25
+            MaxValue = 59
           end
           object longsec: TLongEdit
-            MaxValue = 59
-            BorderStyle = bsSingle
+            Name = 'longsec'
+            Left = 80
             Height = 22
             Hint = '0..59'
-            Left = 80
+            Top = 20
+            Width = 25
+            BorderStyle = bsSingle
             MaxLength = 2
-            Name = 'longsec'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
-            Top = 20
-            Width = 25
             OnChange = longdegChange
-            Left = 80
-            Height = 22
-            Hint = '0..59'
-            Top = 20
-            Width = 25
+            MaxValue = 59
           end
         end
         object Altitude: TGroupBox
-          Caption = 'Altitude'
-          ClientHeight = 50
-          ClientWidth = 77
-          TabOrder = 2
           Left = 376
           Height = 68
           Top = 111
           Width = 81
+          Caption = 'Altitude'
+          ClientHeight = 68
+          ClientWidth = 81
+          TabOrder = 2
           object Label70: TLabel
-            Caption = 'Meters'
-            Color = clNone
-            ParentColor = False
             Left = 8
             Height = 14
             Top = 4
             Width = 34
+            Caption = 'Meters'
+            Color = clNone
+            ParentColor = False
           end
           object altmeter: TFloatEdit
+            Name = 'altmeter'
+            Left = 4
+            Height = 22
+            Hint = '-500..9000'
+            Top = 20
+            Width = 65
+            BorderStyle = bsSingle
+            ParentColor = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = altmeterChange
             Decimals = 0
             MinValue = -500
             MaxValue = 9000
             Digits = 5
             NumericType = ntFixed
-            BorderStyle = bsSingle
-            Height = 22
-            Hint = '-500..9000'
-            Left = 4
-            Name = 'altmeter'
-            ParentColor = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-            Top = 20
-            Width = 65
-            OnChange = altmeterChange
-            Left = 4
-            Height = 22
-            Hint = '-500..9000'
-            Top = 20
-            Width = 65
-          end
-        end
-        object refraction: TGroupBox
-          Caption = 'Atmospheric Refraction'
-          ClientHeight = 42
-          ClientWidth = 269
-          TabOrder = 3
-          Left = 8
-          Height = 60
-          Top = 186
-          Width = 273
-          object Label82: TLabel
-            Caption = 'Pressure (millibar)'
-            Color = clNone
-            ParentColor = False
-            Left = 21
-            Height = 14
-            Top = 4
-            Width = 86
-          end
-          object Label83: TLabel
-            Caption = 'Temperature (Celsius)'
-            Color = clNone
-            ParentColor = False
-            Left = 141
-            Height = 14
-            Top = 4
-            Width = 107
-          end
-          object pressure: TFloatEdit
-            Decimals = 0
-            MaxValue = 1500
-            NumericType = ntFixed
-            BorderStyle = bsSingle
-            Height = 22
-            Hint = '0..1500'
-            Left = 21
-            Name = 'pressure'
-            ParentColor = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 1
-            Top = 18
-            Width = 65
-            OnChange = pressureChange
-            Left = 21
-            Height = 22
-            Hint = '0..1500'
-            Top = 18
-            Width = 65
-          end
-          object temperature: TFloatEdit
-            MinValue = -100
-            MaxValue = 100
-            NumericType = ntFixed
-            BorderStyle = bsSingle
-            Height = 22
-            Hint = '-100..100'
-            Left = 141
-            Name = 'temperature'
-            ParentColor = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-            Top = 18
-            Width = 65
-            OnChange = temperatureChange
-            Left = 141
-            Height = 22
-            Hint = '-100..100'
-            Top = 18
-            Width = 65
           end
         end
         object timezone: TGroupBox
-          Caption = 'Time Zone'
-          ClientHeight = 42
-          ClientWidth = 173
-          TabOrder = 4
           Left = 280
           Height = 60
           Top = 186
           Width = 177
+          Caption = 'Time Zone'
+          ClientHeight = 60
+          ClientWidth = 177
+          TabOrder = 4
           object Label81: TLabel
-            Caption = 'Local Time =  UTC +'
-            Color = clNone
-            ParentColor = False
             Left = 4
             Height = 14
             Top = 20
             Width = 98
+            Caption = 'Local Time =  UTC +'
+            Color = clNone
+            ParentColor = False
           end
           object timez: TFloatEdit
-            MinValue = -12
-            MaxValue = 12
-            Digits = 3
-            NumericType = ntFixed
-            BorderStyle = bsSingle
+            Name = 'timez'
+            Left = 124
             Height = 22
             Hint = '-12..12'
-            Left = 124
-            Name = 'timez'
+            Top = 15
+            Width = 37
+            BorderStyle = bsSingle
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            Top = 15
-            Width = 37
             OnChange = timezChange
-            Left = 124
-            Height = 22
-            Hint = '-12..12'
-            Top = 15
-            Width = 37
+            MinValue = -12
+            MaxValue = 12
+            Digits = 3
+            NumericType = ntFixed
           end
         end
         object Obszp: TButton
-          BorderSpacing.InnerBorder = 2
-          Caption = '+'
-          OnClick = ObszpClick
-          TabOrder = 5
           Left = 3
           Height = 25
           Top = 283
           Width = 41
+          BorderSpacing.InnerBorder = 2
+          Caption = '+'
+          OnClick = ObszpClick
+          TabOrder = 5
         end
         object Obszm: TButton
-          BorderSpacing.InnerBorder = 2
-          Caption = '-'
-          OnClick = ObszmClick
-          TabOrder = 6
           Left = 3
           Height = 25
           Top = 323
           Width = 41
+          BorderSpacing.InnerBorder = 2
+          Caption = '-'
+          OnClick = ObszmClick
+          TabOrder = 6
         end
         object Obsmap: TButton
-          BorderSpacing.InnerBorder = 2
-          Caption = 'Load'
-          OnClick = ObsmapClick
-          TabOrder = 7
           Left = 3
           Height = 25
           Top = 363
           Width = 41
+          BorderSpacing.InnerBorder = 2
+          Caption = 'Load'
+          OnClick = ObsmapClick
+          TabOrder = 7
         end
         object ZoomImage1: TZoomImage
+          Cursor = crCross
+          Left = 47
+          Height = 200
+          Top = 251
+          Width = 400
           Canvas.Brush.Color = clBtnFace
           Canvas.Color = clBtnFace
           Picture.Data = {
@@ -5634,59 +5518,58 @@ object f_config_observatory: Tf_config_observatory
           OnMouseUp = ZoomImage1MouseUp
           OnPaint = ZoomImage1Paint
           OnPosChange = ZoomImage1PosChange
-          Cursor = crCross
-          Left = 47
-          Height = 200
-          Top = 251
-          Width = 400
         end
         object HScrollBar: TScrollBar
-          PageSize = 1
-          TabOrder = 8
-          OnChange = HScrollBarChange
           Left = 47
           Height = 15
           Top = 452
           Width = 400
+          PageSize = 1
+          TabOrder = 8
+          OnChange = HScrollBarChange
         end
         object VScrollBar: TScrollBar
-          Kind = sbVertical
-          PageSize = 1
-          TabOrder = 9
-          OnChange = VScrollBarChange
           Left = 448
           Height = 15
           Top = 251
           Width = 15
+          Kind = sbVertical
+          PageSize = 1
+          TabOrder = 9
+          OnChange = VScrollBarChange
         end
         object obsname: TGroupBox
-          Caption = 'Observatory Database'
-          ClientHeight = 105
-          ClientWidth = 449
-          TabOrder = 10
           Left = 8
           Height = 105
           Top = -1
           Width = 449
+          Caption = 'Observatory Database'
+          ClientHeight = 105
+          ClientWidth = 449
+          TabOrder = 10
           object Label2: TLabel
-            Caption = '+/-'
-            Color = clNone
-            ParentColor = False
             Left = 314
             Height = 14
             Top = 35
             Width = 17
-          end
-          object Label3: TLabel
-            Caption = 'Km.'
+            Caption = '+/-'
             Color = clNone
             ParentColor = False
+          end
+          object Label3: TLabel
             Left = 409
             Height = 14
             Top = 35
             Width = 19
+            Caption = 'Km.'
+            Color = clNone
+            ParentColor = False
           end
           object citylist: TComboBox
+            Left = 8
+            Height = 21
+            Top = 31
+            Width = 233
             AutoComplete = True
             AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
             ItemHeight = 13
@@ -5694,244 +5577,284 @@ object f_config_observatory: Tf_config_observatory
             OnChange = citylistChange
             TabOrder = 0
             Text = '...'
-            Left = 8
-            Height = 21
-            Top = 31
-            Width = 233
           end
           object citysearch: TButton
+            Left = 365
+            Height = 25
+            Width = 76
             BorderSpacing.InnerBorder = 2
             Caption = 'Search'
             Default = True
             OnClick = citysearchClick
             TabOrder = 1
-            Left = 365
-            Height = 25
-            Width = 76
           end
           object countrylist: TComboBox
-            AutoComplete = True
-            AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
-            ItemHeight = 13
-            MaxLength = 0
-            OnChange = countrylistChange
-            TabOrder = 2
             Left = 8
             Height = 21
             Top = 1
-            Width = 233
+            Width = 234
+            AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+            DropDownCount = 10
+            ItemHeight = 13
+            MaxLength = 0
+            OnChange = countrylistChange
+            Style = csDropDownList
+            TabOrder = 2
           end
           object cityfilter: TEdit
-            TabOrder = 3
             Left = 248
             Height = 21
             Top = 1
             Width = 104
+            OnKeyDown = cityfilterKeyDown
+            TabOrder = 3
           end
           object downloadcity: TButton
-            BorderSpacing.InnerBorder = 2
-            Caption = 'Download country details'
-            OnClick = downloadcityClick
-            TabOrder = 4
             Left = 249
             Height = 25
             Top = 60
             Width = 192
+            BorderSpacing.InnerBorder = 2
+            Caption = 'Download country details'
+            OnClick = downloadcityClick
+            TabOrder = 4
           end
           object updcity: TButton
-            BorderSpacing.InnerBorder = 2
-            Caption = 'Update'
-            OnClick = updcityClick
-            TabOrder = 5
             Left = 93
             Height = 25
             Top = 60
             Width = 60
+            BorderSpacing.InnerBorder = 2
+            Caption = 'Update'
+            OnClick = updcityClick
+            TabOrder = 5
           end
           object delcity: TButton
-            BorderSpacing.InnerBorder = 2
-            Caption = 'Delete'
-            OnClick = delcityClick
-            TabOrder = 6
             Left = 165
             Height = 25
             Top = 60
             Width = 60
+            BorderSpacing.InnerBorder = 2
+            Caption = 'Delete'
+            OnClick = delcityClick
+            TabOrder = 6
           end
           object LocCode: TEdit
-            Color = clBtnFace
-            OnClick = LocCodeClick
-            ReadOnly = True
-            TabOrder = 7
             Cursor = crHandPoint
             Left = 8
             Height = 23
+            Hint = 'Designation Code'
             Top = 60
             Width = 80
+            Color = clBtnFace
+            OnClick = LocCodeClick
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 7
           end
           object vicinity: TButton
-            BorderSpacing.InnerBorder = 2
-            Caption = 'Vicinity'
-            OnClick = vicinityClick
-            TabOrder = 8
             Left = 248
             Height = 25
             Top = 28
             Width = 60
+            BorderSpacing.InnerBorder = 2
+            Caption = 'Vicinity'
+            OnClick = vicinityClick
+            TabOrder = 8
           end
           object vicinityrange: TSpinEdit
-            MaxValue = 500
-            TabOrder = 9
-            Value = 10
             Left = 341
             Height = 21
             Top = 31
-            Width = 59
+            Width = 61
+            MaxValue = 500
+            TabOrder = 9
+            Value = 10
           end
+        end
+        object refraction: TGroupBox
+          Left = 8
+          Height = 60
+          Top = 186
+          Width = 273
+          Caption = 'Atmospheric Refraction'
+          ClientHeight = 60
+          ClientWidth = 273
+          TabOrder = 3
+          object Label82: TLabel
+            Left = 21
+            Height = 14
+            Top = 4
+            Width = 86
+            Caption = 'Pressure (millibar)'
+            Color = clNone
+            ParentColor = False
+          end
+          object Label83: TLabel
+            Left = 141
+            Height = 14
+            Top = 4
+            Width = 107
+            Caption = 'Temperature (Celsius)'
+            Color = clNone
+            ParentColor = False
+          end
+          object pressure: TFloatEdit
+            Name = 'pressure'
+            Left = 21
+            Height = 22
+            Hint = '0..1500'
+            Top = 18
+            Width = 65
+            BorderStyle = bsSingle
+            ParentColor = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            OnChange = pressureChange
+            Decimals = 0
+            MaxValue = 1500
+            NumericType = ntFixed
+          end
+          object temperature: TFloatEdit
+            Name = 'temperature'
+            Left = 141
+            Height = 22
+            Hint = '-100..100'
+            Top = 18
+            Width = 65
+            BorderStyle = bsSingle
+            ParentColor = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = temperatureChange
+            MinValue = -100
+            MaxValue = 100
+            NumericType = ntFixed
+          end
+        end
+        object Memo1: TMemo
+          Left = 8
+          Height = 141
+          Top = 105
+          Width = 449
+          TabOrder = 11
+          Visible = False
         end
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 490
-        ClientHeight = 452
-        Height = 452
-        Width = 490
+        ClientWidth = 498
+        ClientHeight = 478
         object hor_l2: TLabel
+          Height = 14
+          Width = 74
           Caption = 'Horizon Setting'
           Color = clNone
           ParentColor = False
-          Height = 14
-          Width = 74
         end
         object GroupBox2: TGroupBox
-          Caption = 'Want to track an object before it rise ?'
-          ClientHeight = 89
-          ClientWidth = 457
-          TabOrder = 0
           Left = 8
           Height = 89
           Top = 160
           Width = 457
+          Caption = 'Want to track an object before it rise ?'
+          ClientHeight = 89
+          ClientWidth = 457
+          TabOrder = 0
           object horizonopaque: TCheckBox
-            Caption = 'Show Object below the horizon'
-            OnClick = horizonopaqueClick
-            TabOrder = 0
             Left = 13
             Height = 13
             Top = 24
             Width = 167
+            Caption = 'Show Object below the horizon'
+            OnClick = horizonopaqueClick
+            TabOrder = 0
           end
         end
         object GroupBox1: TGroupBox
-          Caption = 'Local Horizon'
-          ClientHeight = 121
-          ClientWidth = 457
-          TabOrder = 1
           Left = 8
           Height = 121
           Top = 32
           Width = 457
+          Caption = 'Local Horizon'
+          ClientHeight = 121
+          ClientWidth = 457
+          TabOrder = 1
           object hor_l1: TLabel
-            Caption = 'Local Horizon File Name : '
-            Color = clNone
-            ParentColor = False
             Left = 13
             Height = 14
             Top = 64
             Width = 123
-          end
-          object horizonfile: TEdit
-            OnChange = horizonfileChange
-            TabOrder = 0
-            Cursor = crIBeam
-            Left = 184
-            Height = 21
-            Top = 56
-            Width = 201
-          end
-          object horizonfileBtn: TBitBtn
-            BorderSpacing.InnerBorder = 2
-            Glyph.Data = {
-              BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
-              69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
-              2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
-              222A20632023464646464646222C0A226120632023303030303030222C0A222E
-              2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
-              2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
-              2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
-              2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
-              2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
-              2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
-              612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
-              2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
-              2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
-              2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
-            }
-            Layout = blGlyphTop
-            Margin = 0
-            NumGlyphs = 0
-            OnClick = horizonfileBtnClick
-            TabOrder = 2
-            TabStop = False
-            Left = 383
-            Height = 22
-            Top = 56
-            Width = 22
-            Tag = 8
+            Caption = 'Local Horizon File Name : '
+            Color = clNone
+            ParentColor = False
           end
           object displayhorizon: TCheckBox
-            Caption = 'Display the local horizon line'
-            OnClick = displayhorizonClick
-            TabOrder = 1
             Left = 13
             Height = 13
             Top = 16
             Width = 153
+            Caption = 'Display the local horizon line'
+            OnClick = displayhorizonClick
+            TabOrder = 0
+          end
+          object horizonfile: TFileNameEdit
+            Left = 197
+            Height = 23
+            Top = 56
+            Width = 208
+            OnChange = horizonfileChange
+            TabOrder = 1
+            ButtonWidth = 23
+            NumGlyphs = 1
+            ParentColor = False
           end
         end
         object GroupBox3: TGroupBox
-          Caption = 'Depression of the visible horizon'
-          ClientHeight = 121
-          ClientWidth = 457
-          TabOrder = 2
           Left = 8
           Height = 121
           Top = 256
           Width = 457
+          Caption = 'Depression of the visible horizon'
+          ClientHeight = 121
+          ClientWidth = 457
+          TabOrder = 2
           object Label1: TLabel
+            Left = 13
+            Height = 48
+            Top = 16
+            Width = 415
             AutoSize = False
             Caption = 'You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon.'
             Color = clNone
             ParentColor = False
             WordWrap = True
-            Left = 13
-            Height = 48
-            Top = 16
-            Width = 415
           end
           object horizondepression: TCheckBox
-            Caption = 'Draw the apparent depressed horizon line'
-            OnClick = horizondepressionClick
-            TabOrder = 0
             Left = 13
             Height = 13
             Top = 72
             Width = 216
+            Caption = 'Draw the apparent depressed horizon line'
+            OnClick = horizondepressionClick
+            TabOrder = 0
           end
         end
       end
     end
   end
-  object OpenDialog1: TOpenDialog
-    Title = 'Open existing file'
-    FilterIndex = 0
-    Title = 'Open existing file'
-    left = 16
-    top = 528
-  end
   object DownloadDialog1: TDownloadDialog
     FtpFwPassive = True
     left = 56
     top = 528
+  end
+  object OpenDialog1: TOpenDialog
+    Title = 'Open existing file'
+    FilterIndex = 0
+    left = 22
+    top = 530
   end
 end

@@ -212,8 +212,8 @@ f_config_solsys1.FormShow(Sender);
 f_config_display1.FormShow(Sender);
 f_config_pictures1.FormShow(Sender);
 f_config_system1.FormShow(Sender);
-ShowPage(cmain.configpage_i,cmain.configpage_j);
 TreeView1.FullCollapse;
+Treeview1.selected:=Treeview1.items[0];
 Treeview1.selected:=Treeview1.items[cmain.configpage];
 end;
 
@@ -274,6 +274,10 @@ begin
   if MultiDoc1.ActiveObject=f_config_system1 then begin
     if f_config_system1.WizardNotebook1.ActivePage='Page1' then f_config_system1.ActivateDBchange;
   end;
+  
+  // todo: remove after correction of Lazarus bug 905
+  f_config_time1.SimObjClickCheck(nil);
+
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);
@@ -303,21 +307,15 @@ end;
 procedure Tf_config.ShowDBSetting(Sender: TObject);
 begin
 Treeview1.selected:=Treeview1.items[dbpage];
-Treeview1.selected.parent.expand(true);
-Treeview1.selected:=Treeview1.items[dbpage];
 end;
 
 procedure Tf_config.ShowCometSetting(Sender: TObject);
 begin
 Treeview1.selected:=Treeview1.items[compage];
-Treeview1.selected.parent.expand(true);
-Treeview1.selected:=Treeview1.items[compage];
 end;
 
 procedure Tf_config.ShowAsteroidSetting(Sender: TObject);
 begin
-Treeview1.selected:=Treeview1.items[astpage];
-Treeview1.selected.parent.expand(true);
 Treeview1.selected:=Treeview1.items[astpage];
 end;
 

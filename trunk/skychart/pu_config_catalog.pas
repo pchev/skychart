@@ -35,13 +35,36 @@ type
   { Tf_config_catalog }
 
   Tf_config_catalog = class(TForm)
+    bsc3: TDirectoryEdit;
+    ocl3: TDirectoryEdit;
+    gcm3: TDirectoryEdit;
+    gpn3: TDirectoryEdit;
+    pgc3: TDirectoryEdit;
+    rc33: TDirectoryEdit;
+    lbn3: TDirectoryEdit;
+    ngc3: TDirectoryEdit;
+    sac3: TDirectoryEdit;
+    tyc3: TDirectoryEdit;
+    tic3: TDirectoryEdit;
+    gsc3: TDirectoryEdit;
+    mct3: TDirectoryEdit;
+    wds3: TDirectoryEdit;
+    gcv3: TDirectoryEdit;
+    dsgsc3: TDirectoryEdit;
+    dstyc3: TDirectoryEdit;
+    dsbase3: TDirectoryEdit;
+    DirOpenImg: TImage;
+    usn3: TDirectoryEdit;
+    gscc3: TDirectoryEdit;
+    gscf3: TDirectoryEdit;
+    ty23: TDirectoryEdit;
+    sky3: TDirectoryEdit;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;
     Page3: TPage;
     Page4: TPage;
     Page5: TPage;
-    SelectDirectoryDialog1: TSelectDirectoryDialog;
     Label1: TLabel;
     Label37: TLabel;
     addcat: TBitBtn;
@@ -62,18 +85,12 @@ type
     BSCbox: TCheckBox;
     Fbsc1: TLongEdit;
     Fbsc2: TLongEdit;
-    bsc3: TEdit;
-    BitBtn9: TBitBtn;
     SKYbox: TCheckBox;
     Fsky1: TLongEdit;
     Fsky2: TLongEdit;
-    sky3: TEdit;
-    BitBtn10: TBitBtn;
     TY2Box: TCheckBox;
     Fty21: TLongEdit;
     Fty22: TLongEdit;
-    ty23: TEdit;
-    BitBtn12: TBitBtn;
     GSCFBox: TCheckBox;
     GSCCbox: TCheckBox;
     USNbox: TCheckBox;
@@ -93,22 +110,6 @@ type
     fusn2: TLongEdit;
     fgscc2: TLongEdit;
     fgscf2: TLongEdit;
-    gscf3: TEdit;
-    gscc3: TEdit;
-    usn3: TEdit;
-    dsbase3: TEdit;
-    dstyc3: TEdit;
-    dsgsc3: TEdit;
-    BitBtn22: TBitBtn;
-    BitBtn21: TBitBtn;
-    BitBtn20: TBitBtn;
-    BitBtn19: TBitBtn;
-    BitBtn17: TBitBtn;
-    BitBtn16: TBitBtn;
-    BitBtn14: TBitBtn;
-    BitBtn15: TBitBtn;
-    wds3: TEdit;
-    gcv3: TEdit;
     Fgcv2: TLongEdit;
     Fwds2: TLongEdit;
     Fwds1: TLongEdit;
@@ -138,16 +139,8 @@ type
     GCMbox: TCheckBox;
     GPNbox: TCheckBox;
     LBNbox: TCheckBox;
-    ngc3: TEdit;
-    rc33: TEdit;
-    lbn3: TEdit;
-    ocl3: TEdit;
-    gcm3: TEdit;
-    gpn3: TEdit;
     PGCBox: TCheckBox;
-    pgc3: TEdit;
     SACbox: TCheckBox;
-    sac3: TEdit;
     fngc1: TLongEdit;
     fngc2: TLongEdit;
     fsac1: TLongEdit;
@@ -164,14 +157,6 @@ type
     fgcm2: TLongEdit;
     fgpn1: TLongEdit;
     fgpn2: TLongEdit;
-    BitBtn23: TBitBtn;
-    BitBtn24: TBitBtn;
-    BitBtn25: TBitBtn;
-    BitBtn26: TBitBtn;
-    BitBtn27: TBitBtn;
-    BitBtn28: TBitBtn;
-    BitBtn29: TBitBtn;
-    BitBtn30: TBitBtn;
     Label88: TLabel;
     Label67: TLabel;
     Label91: TLabel;
@@ -182,23 +167,15 @@ type
     TYCbox: TCheckBox;
     Ftyc1: TLongEdit;
     Ftyc2: TLongEdit;
-    tyc3: TEdit;
-    BitBtn11: TBitBtn;
     TICbox: TCheckBox;
     Ftic1: TLongEdit;
     Ftic2: TLongEdit;
-    tic3: TEdit;
-    BitBtn13: TBitBtn;
     GSCbox: TCheckBox;
     fgsc1: TLongEdit;
     fgsc2: TLongEdit;
-    gsc3: TEdit;
-    BitBtn18: TBitBtn;
     MCTBox: TCheckBox;
     fmct1: TLongEdit;
     fmct2: TLongEdit;
-    mct3: TEdit;
-    BitBtn32: TBitBtn;
     Label4: TLabel;
     Label52: TLabel;
     Label71: TLabel;
@@ -226,18 +203,15 @@ type
     procedure CDCStarField1Change(Sender: TObject);
     procedure CDCStarField2Change(Sender: TObject);
     procedure CDCStarPathChange(Sender: TObject);
-    procedure CDCStarSelPathClick(Sender: TObject);
     procedure GCVBoxClick(Sender: TObject);
     procedure IRVarClick(Sender: TObject);
     procedure Fgcv1Change(Sender: TObject);
     procedure Fgcv2Change(Sender: TObject);
     procedure gcv3Change(Sender: TObject);
-    procedure BitBtn14Click(Sender: TObject);
     procedure WDSboxClick(Sender: TObject);
     procedure Fwds1Change(Sender: TObject);
     procedure Fwds2Change(Sender: TObject);
     procedure wds3Change(Sender: TObject);
-    procedure BitBtn15Click(Sender: TObject);
     procedure CDCNebSelClick(Sender: TObject);
     procedure CDCNebField1Change(Sender: TObject);
     procedure CDCNebField2Change(Sender: TObject);
@@ -490,7 +464,7 @@ end else if (Acol=4)and(Arow>0) then begin
     Canvas.rectangle(Rect);
   end;
 end else if (Acol=5)and(Arow>0) then begin
-    Canvas.draw(Rect.left,Rect.top,BitBtn9.Glyph);
+    Canvas.draw(Rect.left,Rect.top,DirOpenImg.Picture.Bitmap);
 end else if (Arow=0) then begin
     Canvas.Pen.Color := clBtnFace;
     Canvas.Brush.style := bsSolid;
@@ -646,7 +620,7 @@ begin
 if LockCatPath then exit;
 try
 LockCatPath:=true;
-if sender is TEdit then with sender as TEdit do begin
+if sender is TDirectoryEdit then with sender as TDirectoryEdit do begin
   Text:=trim(Text);
   ccat.StarCatPath[tag]:=Text;
   if ccat.StarCatDef[tag] then
@@ -657,16 +631,6 @@ if sender is TEdit then with sender as TEdit do begin
 end;
 finally
 LockCatPath:=false;
-end;
-end;
-
-procedure Tf_config_catalog.CDCStarSelPathClick(Sender: TObject);
-begin
-if sender is TBitBtn then with sender as TBitBtn do begin
-  SelectDirectoryDialog1.InitialDir:=ExpandFileName(ccat.StarCatPath[tag]);
-  if SelectDirectoryDialog1.execute then
-     ccat.StarCatPath[tag]:=SelectDirectoryDialog1.FileName;
-  ShowCDCStar;
 end;
 end;
 
@@ -710,14 +674,6 @@ LockCatPath:=false;
 end;
 end;
 
-procedure Tf_config_catalog.BitBtn14Click(Sender: TObject);
-begin
-  SelectDirectoryDialog1.InitialDir:=ExpandFileName(ccat.VarStarCatPath[gcvs-BaseVar]);
-  if SelectDirectoryDialog1.execute then
-     ccat.VarStarCatPath[gcvs-BaseVar]:=SelectDirectoryDialog1.FileName;
-  ShowCDCStar;
-end;
-
 procedure Tf_config_catalog.WDSboxClick(Sender: TObject);
 begin
 ccat.DblStarCatDef[wds-BaseDbl]:=WDSbox.Checked;
@@ -751,14 +707,6 @@ LockCatPath:=true;
 finally
 LockCatPath:=false;
 end;
-end;
-
-procedure Tf_config_catalog.BitBtn15Click(Sender: TObject);
-begin
-  SelectDirectoryDialog1.InitialDir:=ExpandFileName(ccat.DblStarCatPath[wds-BaseDbl]);
-  if SelectDirectoryDialog1.execute then
-     ccat.DblStarCatPath[wds-BaseDbl]:=SelectDirectoryDialog1.FileName;
-  ShowCDCStar;
 end;
 
 procedure Tf_config_catalog.CDCNebSelClick(Sender: TObject);
@@ -806,12 +754,7 @@ end;
 
 procedure Tf_config_catalog.CDCNebSelPathClick(Sender: TObject);
 begin
-if sender is TBitBtn then with sender as TBitBtn do begin
-  SelectDirectoryDialog1.InitialDir:=ExpandFileName(ccat.NebCatPath[tag]);
-  if SelectDirectoryDialog1.execute then
-     ccat.NebCatPath[tag]:=SelectDirectoryDialog1.FileName;
-  ShowCDCNeb;
-end;
+
 end;
 
 procedure Tf_config_catalog.ActivateGCat;

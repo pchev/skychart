@@ -152,7 +152,7 @@ type
     FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove : integer;
-    MovingCircle,FNightVision,StartCircle: Boolean;
+    MovingCircle,FNightVision,StartCircle,lockkey: Boolean;
     SaveColor: Starcolarray;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     procedure TelescopeCoordChange(Sender: TObject);
@@ -268,6 +268,7 @@ end;
 procedure Tf_chart.FormCreate(Sender: TObject);
 begin
  locked:=true;
+ lockkey:=false;
  Image1:= TChartDrawingControl.Create(Self);
  Image1.Parent := Panel1;
  IdentLabel.Parent:=Image1;
@@ -2131,7 +2132,42 @@ end;
 
 procedure Tf_chart.FormKeyPress(Sender: TObject; var Key: Char);
 begin
+if lockkey then exit;
+lockkey:=true;
+try
 case key of
+#17 : if sc.plot.cfgplot.partsize<=4.8 then begin  // ctrl+q
+       sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize+0.2;
+       Refresh;
+     end;
+#1 : if sc.plot.cfgplot.partsize>=0.3 then begin  // ctrl+a
+       sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize-0.2;
+       Refresh;
+     end;
+#23 : if sc.plot.cfgplot.magsize<=9.5  then begin   // ctrl+w
+       sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize+0.5;
+       Refresh;
+     end;
+#19 : if sc.plot.cfgplot.magsize>=1.5   then begin   // ctrl+s
+       sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize-0.5;
+       Refresh;
+     end;
+#5  : if sc.plot.cfgplot.contrast<=980 then begin   // ctrl+e
+       sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast+20;
+       Refresh;
+     end;
+#4  : if sc.plot.cfgplot.contrast>=120  then begin   // ctrl+d
+       sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast-20;
+       Refresh;
+     end;
+#18 : if sc.plot.cfgplot.saturation<=250 then begin  // ctrl+r
+       sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation+20;
+       Refresh;
+     end;
+#6  : if sc.plot.cfgplot.saturation>=5 then begin  // ctrl+f
+       sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation-20;
+       Refresh;
+     end;
 '1' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[0]);
 '2' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[1]);
 '3' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[2]);
@@ -2161,6 +2197,10 @@ case key of
 //'+' : SpeedButton2Click(Sender);
 //'-' : SpeedButton3Click(Sender);
 //' ' : HideMenu(not menu_on);
+end;
+Application.ProcessMessages;
+finally
+lockkey:=false;
 end;
 end;
 

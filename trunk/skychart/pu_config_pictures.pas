@@ -27,25 +27,25 @@ interface
 
 uses  u_constant, u_util, cu_fits, cu_database, 
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources, WizardNotebook;
+  StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources, WizardNotebook,
+  EditBtn;
 
 type
 
   { Tf_config_pictures }
 
   Tf_config_pictures = class(TForm)
+    backimg: TFileNameEdit;
+    imgpath: TDirectoryEdit;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;
     Page3: TPage;
-    SelectDirectoryDialog1: TSelectDirectoryDialog;
     Label50: TLabel;
     Label264: TLabel;
     Label265: TLabel;
     nimages: TLabel;
     Label267: TLabel;
-    imgpath: TEdit;
-    BitBtn3: TBitBtn;
     ScanImages: TButton;
     Panel11: TPanel;
     Label266: TLabel;
@@ -59,10 +59,7 @@ type
     Label270: TLabel;
     Label271: TLabel;
     backimginfo: TLabel;
-    backimg: TEdit;
-    BitBtn5: TBitBtn;
     ShowBackImg: TCheckBox;
-    OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     ImgLumBar2: TTrackBar;
     Image1: TImage;
@@ -188,19 +185,15 @@ if LockChange then exit;
 cmain.ImagePath:=imgpath.text;
 end;
 
+procedure Tf_config_pictures.BitBtn3Click(Sender: TObject);
+begin
+
+end;
+
 procedure Tf_config_pictures.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
 end;
-
-procedure Tf_config_pictures.BitBtn3Click(Sender: TObject);
-begin
-  SelectDirectoryDialog1.InitialDir:=expandfilename(imgpath.text);
-  if SelectDirectoryDialog1.execute then
-     imgpath.text:=SelectDirectoryDialog1.FileName;
-end;
-
-
 
 procedure Tf_config_pictures.ScanImagesClick(Sender: TObject);
 begin
@@ -272,6 +265,11 @@ else begin
 end;
 end;
 
+procedure Tf_config_pictures.BitBtn5Click(Sender: TObject);
+begin
+
+end;
+
 Procedure  Tf_config_pictures.RefreshImage;
 var bmp: TBitmap;
     c1,c2:double;
@@ -297,23 +295,6 @@ begin
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
   Image1.canvas.stretchdraw(rect(x,y,x+dx,y+dy),bmp);
   bmp.Free;
-end;
-
-procedure Tf_config_pictures.BitBtn5Click(Sender: TObject);
-var f : string;
-begin
-f:=expandfilename(backimg.text);
-opendialog1.InitialDir:=extractfilepath(f);
-opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='FITS Files|*.fit';
-opendialog1.DefaultExt:='';
-try
-if opendialog1.execute then begin
-   backimg.text:=opendialog1.FileName;
-end;
-finally
- chdir(appdir);
-end;
 end;
 
 procedure Tf_config_pictures.ShowBackImgClick(Sender: TObject);

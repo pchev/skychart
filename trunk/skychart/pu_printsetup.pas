@@ -31,13 +31,15 @@ interface
 uses u_constant, u_util,
   SysUtils, Types, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
-  LResources, PrintersDlgs;
+  LResources, PrintersDlgs, EditBtn;
 
 type
 
   { Tf_printsetup }
 
   Tf_printsetup = class(TForm)
+    printcmd: TFileNameEdit;
+    savepath: TDirectoryEdit;
     printmode: TRadioGroup;
     qtoption: TPanel;
     customoption: TPanel;
@@ -56,14 +58,8 @@ type
     cmdreport: TEdit;
     Label4: TLabel;
     Label5: TLabel;
-    savepath: TEdit;
     Label6: TLabel;
     Label7: TLabel;
-    printcmd: TEdit;
-    savepathsel: TBitBtn;
-    printcmdsel: TBitBtn;
-    OpenDialog1: TOpenDialog;
-    SelectDirectoryDialog1: TSelectDirectoryDialog;
     procedure FormCreate(Sender: TObject);
     procedure qtsetupClick(Sender: TObject);
     procedure printmodeClick(Sender: TObject);
@@ -73,8 +69,6 @@ type
     procedure prtcolorClick(Sender: TObject);
     procedure prtorientClick(Sender: TObject);
     procedure savepathChange(Sender: TObject);
-    procedure savepathselClick(Sender: TObject);
-    procedure printcmdselClick(Sender: TObject);
   private
     { Private declarations }
     procedure updprtsetup;
@@ -206,30 +200,6 @@ end;
 procedure Tf_printsetup.prtorientClick(Sender: TObject);
 begin
 cm.PrintLandscape:=(prtorient.ItemIndex=1);
-end;
-
-procedure Tf_printsetup.savepathselClick(Sender: TObject);
-begin
-  SelectDirectoryDialog1.Filename:=savepath.Text;
-  if SelectDirectoryDialog1.execute then
-     savepath.Text:=SelectDirectoryDialog1.Filename;
-end;
-
-procedure Tf_printsetup.printcmdselClick(Sender: TObject);
-var f : string;
-begin
-f:=expandfilename(printcmd.Text);
-opendialog1.InitialDir:=extractfilepath(f);
-opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='All Files|*.*';
-opendialog1.DefaultExt:='';
-try
-if opendialog1.execute then begin
-   printcmd.Text:=opendialog1.FileName;
-end;
-finally
- chdir(appdir);
-end;
 end;
 
 initialization

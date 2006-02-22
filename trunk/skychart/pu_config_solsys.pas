@@ -35,6 +35,9 @@ type
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TForm)
+    comfile: TFileNameEdit;
+    mpcfile: TFileNameEdit;
+    planetdir: TDirectoryEdit;
     DownloadAsteroid: TButton;
     DownloadComet: TButton;
     DownloadDialog1: TDownloadDialog;
@@ -46,12 +49,9 @@ type
     Page2: TPage;
     Page3: TPage;
     Page4: TPage;
-    SelectDirectoryDialog1: TSelectDirectoryDialog;
     Label12: TLabel;
     Label131: TLabel;
     PlaParalaxe: TRadioGroup;
-    planetdir: TEdit;
-    planetdirsel: TBitBtn;
     Label5: TLabel;
     Label89: TLabel;
     Label53: TLabel;
@@ -76,9 +76,7 @@ type
     Label232: TLabel;
     GroupBox14: TGroupBox;
     Label233: TLabel;
-    comfile: TEdit;
     Loadcom: TButton;
-    comfilebtn: TBitBtn;
     MemoCom: TMemo;
     comdelete: TTabSheet;
     Label238: TLabel;
@@ -132,10 +130,8 @@ type
     GroupBox7: TGroupBox;
     Label204: TLabel;
     Label215: TLabel;
-    mpcfile: TEdit;
     astnumbered: TCheckBox;
     LoadMPC: TButton;
-    mpcfilebtn: TBitBtn;
     aststoperr: TCheckBox;
     astlimitbox: TCheckBox;
     astlimit: TLongEdit;
@@ -213,7 +209,6 @@ type
     procedure comsymbolClick(Sender: TObject);
     procedure comlimitmagChange(Sender: TObject);
     procedure commagdiffChange(Sender: TObject);
-    procedure comfilebtnClick(Sender: TObject);
     procedure LoadcomClick(Sender: TObject);
     procedure DelComClick(Sender: TObject);
     procedure DelComAllClick(Sender: TObject);
@@ -224,7 +219,6 @@ type
     procedure astlimitmagChange(Sender: TObject);
     procedure astmagdiffChange(Sender: TObject);
     procedure astdbsetClick(Sender: TObject);
-    procedure mpcfilebtnClick(Sender: TObject);
     procedure LoadMPCClick(Sender: TObject);
     procedure AstComputeClick(Sender: TObject);
     procedure delastClick(Sender: TObject);
@@ -311,6 +305,7 @@ comsymbol.itemindex:=csc.ComSymbol;
 comlimitmag.value:=csc.CommagMax;
 commagdiff.value:=csc.CommagDiff;
 if csc.ShowComet then UpdComList;
+comfile.InitialDir:=slash(privatedir)+slash('MPC');
 end;
 
 procedure Tf_config_solsys.ShowAsteroid;
@@ -322,12 +317,18 @@ astmagdiff.value:=csc.AstmagDiff;
 aststrtdate.text:=inttostr(csc.curyear)+'.'+inttostr(csc.curmonth);
 astdeldate.text:=inttostr(csc.curyear-1)+'.'+inttostr(csc.curmonth);
 if csc.ShowAsteroid then UpdAstList;
+mpcfile.InitialDir:=slash(privatedir)+slash('MPC');
 end;
 
 procedure Tf_config_solsys.PlanetDirChange(Sender: TObject);
 begin
 if LockChange then exit;
 cmain.planetdir:=planetdir.text;
+end;
+
+procedure Tf_config_solsys.PlanetDirSelClick(Sender: TObject);
+begin
+
 end;
 
 procedure Tf_config_solsys.FormCreate(Sender: TObject);
@@ -363,14 +364,6 @@ begin
     LoadcomClick(Sender);
  end else
    Showmessage('Cancel '+DownloadDialog1.ResponseText);
-end;
-
-procedure Tf_config_solsys.PlanetDirSelClick(Sender: TObject);
-begin
-  SelectDirectoryDialog1.InitialDir:=expandfilename(planetdir.text);
-  if SelectDirectoryDialog1.execute then
-     planetdir.text:=SelectDirectoryDialog1.Filename;
-
 end;
 
 procedure Tf_config_solsys.PlaParalaxeClick(Sender: TObject);
@@ -432,24 +425,6 @@ procedure Tf_config_solsys.commagdiffChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.CommagDiff:=commagdiff.value;
-end;
-
-procedure Tf_config_solsys.comfilebtnClick(Sender: TObject);
-var f : string;
-begin
-f:=comFile.Text;
-opendialog1.InitialDir:=extractfilepath(f);
-if opendialog1.InitialDir='' then opendialog1.InitialDir:=slash(privatedir)+slash('MPC');
-opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
-opendialog1.DefaultExt:='';
-try
-if opendialog1.execute then begin
-   comFile.Text:=opendialog1.FileName;
-end;
-finally
- chdir(appdir);
-end;
 end;
 
 procedure Tf_config_solsys.LoadcomClick(Sender: TObject);
@@ -523,24 +498,6 @@ end;
 procedure Tf_config_solsys.astdbsetClick(Sender: TObject);
 begin
 if Assigned(FShowDB) then FShowDB(self);
-end;
-
-procedure Tf_config_solsys.mpcfilebtnClick(Sender: TObject);
-var f : string;
-begin
-f:=mpcFile.Text;
-opendialog1.InitialDir:=extractfilepath(f);
-if opendialog1.InitialDir='' then opendialog1.InitialDir:=slash(privatedir)+slash('MPC');
-opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
-opendialog1.DefaultExt:='';
-try
-if opendialog1.execute then begin
-   mpcFile.Text:=opendialog1.FileName;
-end;
-finally
- chdir(appdir);
-end;
 end;
 
 procedure Tf_config_solsys.LoadMPCClick(Sender: TObject);

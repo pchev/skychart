@@ -236,7 +236,7 @@ object f_config_time: Tf_config_time
             Caption = 'M'
             Color = clNone
             ParentColor = False
-            Left = 112
+            Left = 127
             Height = 14
             Top = 52
             Width = 9
@@ -245,7 +245,7 @@ object f_config_time: Tf_config_time
             Caption = 'S'
             Color = clNone
             ParentColor = False
-            Left = 152
+            Left = 195
             Height = 14
             Top = 52
             Width = 7
@@ -272,7 +272,7 @@ object f_config_time: Tf_config_time
             Caption = 'M'
             Color = clNone
             ParentColor = False
-            Left = 112
+            Left = 127
             Height = 14
             Top = 6
             Width = 9
@@ -281,7 +281,7 @@ object f_config_time: Tf_config_time
             Caption = 'D'
             Color = clNone
             ParentColor = False
-            Left = 152
+            Left = 196
             Height = 14
             Top = 6
             Width = 8
@@ -336,7 +336,7 @@ object f_config_time: Tf_config_time
             Left = 56
             Height = 22
             Top = 19
-            Width = 77
+            Width = 65
           end
           object d_month: TSpinEdit
             MaxValue = 12
@@ -347,7 +347,7 @@ object f_config_time: Tf_config_time
             Left = 127
             Height = 22
             Top = 19
-            Width = 71
+            Width = 50
           end
           object d_day: TSpinEdit
             MaxValue = 31
@@ -358,7 +358,7 @@ object f_config_time: Tf_config_time
             Left = 195
             Height = 22
             Top = 19
-            Width = 71
+            Width = 50
           end
           object t_hour: TSpinEdit
             MaxValue = 23
@@ -367,7 +367,7 @@ object f_config_time: Tf_config_time
             Left = 56
             Height = 22
             Top = 65
-            Width = 75
+            Width = 50
           end
           object t_min: TSpinEdit
             MaxValue = 59
@@ -376,7 +376,7 @@ object f_config_time: Tf_config_time
             Left = 127
             Height = 22
             Top = 65
-            Width = 71
+            Width = 50
           end
           object t_sec: TSpinEdit
             MaxValue = 59
@@ -385,7 +385,7 @@ object f_config_time: Tf_config_time
             Left = 195
             Height = 22
             Top = 65
-            Width = 71
+            Width = 50
           end
         end
         object CheckBox1: TCheckBox
@@ -498,7 +498,7 @@ object f_config_time: Tf_config_time
           Left = 362
           Height = 22
           Top = 55
-          Width = 65
+          Width = 67
         end
         object stepsize: TSpinEdit
           MaxValue = 999999
@@ -509,7 +509,7 @@ object f_config_time: Tf_config_time
           Left = 362
           Height = 22
           Top = 95
-          Width = 65
+          Width = 67
         end
         object SimObj: TCheckListBox
           Items.Strings = (
