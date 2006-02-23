@@ -124,34 +124,28 @@ function TCDCdb.Checkdb:boolean;
 var i,j,k:integer;
    ok,creatednow:boolean;
    indexlist: TStringlist;
-   buf:string;
 begin
 creatednow:=false;
 if db.Active then begin
   indexlist:=TStringlist.Create;
   result:=true;
   for i:=1 to numsqltable do begin
-     ok:=(sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
+     ok:=(sqltable[dbtype,i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"'));
      if not ok then begin  // try to create the missing table
-        if DBtype=sqlite then begin
-           buf:='CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]);
-           buf:=stringreplace(buf,'double','REAL',[rfReplaceAll]);
-           db.Query(buf);
-        end else
-           db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
-       if sqltable[i,3]>'' then begin   // create the index
-          SplitRec(sqltable[i,3],',',indexlist);
+       db.Query('CREATE TABLE '+sqltable[dbtype,i,1]+sqltable[dbtype,i,2]);
+       if sqltable[dbtype,i,3]>'' then begin   // create the index
+          SplitRec(sqltable[dbtype,i,3],',',indexlist);
           for j:=0 to indexlist.Count-1 do begin
             k:=strtoint(indexlist[j]);
-            db.Query('CREATE INDEX '+sqlindex[k,1]+' on '+sqlindex[k,2]);
+            db.Query('CREATE INDEX '+sqlindex[dbtype,k,1]+' on '+sqlindex[dbtype,k,2]);
           end;
        end;
-       ok:=(sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
+       ok:=(sqltable[dbtype,i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"'));
        if ok then begin
-           writetrace('Create table '+sqltable[i,1]+' ... Ok');
+           writetrace('Create table '+sqltable[dbtype,i,1]+' ... Ok');
            creatednow:=true;
            end
-        else writetrace('Create table '+sqltable[i,1]+' ... Failed');
+        else writetrace('Create table '+sqltable[dbtype,i,1]+' ... Failed');
      end;
      result:=result and ok;
   end;
@@ -176,8 +170,8 @@ try
   if ((db.database=cmain.db)or db.use(cmain.db)) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
      else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.ErrorMessage)+crlf; goto dmsg;end;
   for i:=1 to numsqltable do begin
-     if sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then msg:=msg+'Table exist '+sqltable[i,1]+crlf
-        else begin msg:=msg+'Table '+sqltable[i,1]+' do not exist! '+crlf+'Please correct the error and retry.' ; goto dmsg;end;
+     if sqltable[dbtype,i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"') then msg:=msg+'Table exist '+sqltable[dbtype,i,1]+crlf
+        else begin msg:=msg+'Table '+sqltable[dbtype,i,1]+' do not exist! '+crlf+'Please correct the error and retry.' ; goto dmsg;end;
   end;
   msg:=msg+'All tables structure exists.';
 dmsg:
@@ -188,7 +182,7 @@ end;
 end;
 
 function TCDCdb.createDB(cmain: conf_main; var ok:boolean): string;
-var msg,buf:string;
+var msg:string;
     i,j,k:integer;
     indexlist: TStringlist;
 begin
@@ -208,23 +202,18 @@ try
     indexlist:=TStringlist.Create;
     ok:=true;
     for i:=1 to numsqltable do begin
-      if DBtype=sqlite then begin
-          buf:='CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]);
-          buf:=stringreplace(buf,'double','REAL',[rfReplaceAll]);
-          db.Query(buf);
-      end else
-          db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
+      db.Query('CREATE TABLE '+sqltable[dbtype,i,1]+sqltable[dbtype,i,2]);
       msg:=trim(db.ErrorMessage);
-      if sqltable[i,3]>'' then begin   // create the index
-         SplitRec(sqltable[i,3],',',indexlist);
+      if sqltable[dbtype,i,3]>'' then begin   // create the index
+         SplitRec(sqltable[dbtype,i,3],',',indexlist);
          for j:=0 to indexlist.Count-1 do begin
            k:=strtoint(indexlist[j]);
-           db.Query('CREATE INDEX '+sqlindex[k,1]+' on '+sqlindex[k,2]);
+           db.Query('CREATE INDEX '+sqlindex[dbtype,k,1]+' on '+sqlindex[dbtype,k,2]);
          end;
       end;
-      if sqltable[i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then begin
+      if sqltable[dbtype,i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"') then begin
          ok:=false;
-         result:=result+crlf+'Error creating table '+sqltable[i,1]+blank+msg;
+         result:=result+crlf+'Error creating table '+sqltable[dbtype,i,1]+blank+msg;
          break;
       end;
     end;
