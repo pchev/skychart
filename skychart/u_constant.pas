@@ -600,7 +600,7 @@ const
      ('SETTZ','53'),           // 0.0
      ('GETTZ','54'),
      // V2.7 compatibility DDE command
-     ('MOVE' ,'55'),           // obsolete, RA: 00h00m00.00s DEC:+00°00'00.0" FOV:+00°00'00"
+     ('MOVE' ,'55'),           // obsolete, RA: 00h00m00.00s DEC:+0000'00.0" FOV:+0000'00"
      ('DATE' ,'52'),           // obsolete, same as SETDATE
      ('OBSL' ,'30'),           // obsolete, same as SETOBS
      ('RFSH' ,'39'),           // obsolete, same as REDRAW
@@ -661,7 +661,8 @@ create_table_com_day_pos='( id varchar(12) NOT NULL default "", epoch double NOT
                          'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
                          'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag))';
 numsqltable=10;
-sqltable : array[1..numsqltable,1..3] of string =(
+sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
+           (  // mysql tables
            ('cdc_ast_name',' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'+
                            'PRIMARY KEY (id))',''),
            ('cdc_ast_elem_list',' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'+
@@ -712,14 +713,73 @@ sqltable : array[1..numsqltable,1..3] of string =(
                            'elevation double NOT NULL ,'+
                            'timezone double NOT NULL ,'+
                            'PRIMARY KEY (locid))','3,4')
-                           );
+           ),
+           (   // sqlite tables
+
+           ('cdc_ast_name',' ( id TEXT NOT NULL default "0", name TEXT NOT NULL default "",'+
+                           'PRIMARY KEY (id))',''),
+           ('cdc_ast_elem_list',' ( elem_id INTEGER NOT NULL default "0", filedesc TEXT NOT NULL default "",'+
+                           'PRIMARY KEY (elem_id))',''),
+           ('cdc_ast_elem',' ( id TEXT NOT NULL default "0",'+
+                           'h REAL NOT NULL default "0", g REAL NOT NULL default "0",'+
+                           'epoch REAL NOT NULL default "0", mean_anomaly REAL NOT NULL default "0",'+
+                           'arg_perihelion REAL NOT NULL default "0", asc_node REAL NOT NULL default "0",'+
+                           'inclination REAL NOT NULL default "0", eccentricity REAL NOT NULL default "0",'+
+                           'semi_axis REAL NOT NULL default "0", ref TEXT NOT NULL default "",'+
+                           'name TEXT NOT NULL default "", equinox INTEGER NOT NULL default "0",'+
+                           'elem_id INTEGER NOT NULL default "0", PRIMARY KEY (id,epoch))',''),
+           ('cdc_ast_mag',' ( id TEXT NOT NULL default "",'+
+                          'jd REAL NOT NULL default "0", epoch REAL NOT NULL default "0",'+
+                          'mag INTEGER NOT NULL default "0", elem_id INTEGER NOT NULL default "0",'+
+                          'PRIMARY KEY (jd,id))','1'),
+           ('cdc_com_name',' ( id TEXT NOT NULL default "0", name TEXT NOT NULL default "",'+
+                           'PRIMARY KEY (id))',''),
+           ('cdc_com_elem_list',' ( elem_id INTEGER NOT NULL default "0", filedesc TEXT NOT NULL default "",'+
+                           'PRIMARY KEY (elem_id))',''),
+           ('cdc_com_elem',' ( id TEXT NOT NULL default "0",'+
+                           'peri_epoch REAL NOT NULL default "0", peri_dist REAL NOT NULL default "0",'+
+                           'eccentricity REAL NOT NULL default "0",'+
+                           'arg_perihelion REAL NOT NULL default "0", asc_node REAL NOT NULL default "0",'+
+                           'inclination REAL NOT NULL default "0",'+
+                           'epoch REAL NOT NULL default "0",'+
+                           'h REAL NOT NULL default "0", g REAL NOT NULL default "0",'+
+                           'name TEXT NOT NULL default "", equinox INTEGER NOT NULL default "0",'+
+                           'elem_id INTEGER NOT NULL default "0", PRIMARY KEY (id,epoch))',''),
+           ('cdc_fits',' (filename TEXT NOT NULL default "", '+
+                           'catalogname TEXT  NOT NULL default "", '+
+                           'objectname TEXT NOT NULL default "", '+
+                           'ra REAL NOT NULL default "0",'+
+                           'de REAL NOT NULL default "0", '+
+                           'width REAL NOT NULL default "0", '+
+                           'height REAL NOT NULL default "0", '+
+                           'rotation  REAL NOT NULL default "0", '+
+                           'PRIMARY KEY (ra,de))','2'),
+           ('cdc_country','(country TEXT NOT NULL default "",'+
+                           'name TEXT NOT NULL default "",'+
+                           'PRIMARY KEY (country))',''),
+           ('cdc_location','(locid INTEGER NOT NULL ,'+
+                           'country TEXT NOT NULL ,'+
+                           'location TEXT NOT NULL ,'+
+                           'type TEXT NOT NULL ,'+
+                           'latitude REAL NOT NULL ,'+
+                           'longitude REAL NOT NULL ,'+
+                           'elevation REAL NOT NULL ,'+
+                           'timezone REAL NOT NULL ,'+
+                           'PRIMARY KEY (locid))','3,4')
+           ));
 numsqlindex=4;
-sqlindex : array[1..numsqlindex,1..2] of string =(
+sqlindex : array[mysql..sqlite,1..numsqlindex,1..2] of string =(
+           (
            ('ast_mag_idx','cdc_ast_mag (mag)'),
            ('cdc_fits_objname','cdc_fits (objectname)'),
            ('cdc_location_idx1','cdc_location(country,location)'),
            ('cdc_location_idx2','cdc_location(latitude,longitude)')
-           );
+           ),(
+           ('ast_mag_idx','cdc_ast_mag (mag)'),
+           ('cdc_fits_objname','cdc_fits (objectname)'),
+           ('cdc_location_idx1','cdc_location(country,location)'),
+           ('cdc_location_idx2','cdc_location(latitude,longitude)')
+           ));
 
 implementation
 
