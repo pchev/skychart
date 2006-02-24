@@ -933,10 +933,10 @@ try
  if cfgm.AutostartServer then StartServer;
  f_calendar.planet:=planet;
  f_calendar.cdb:=cdcdb;
- f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
  f_calendar.setlang(slash(appdir)+slash('data')+slash('language')+'cdclang_'+trim(cfgm.language)+'.ini');
+ f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
  if InitialChartNum>1 then
     for i:=1 to InitialChartNum-1 do begin
       cfgp:=def_cfgplot;

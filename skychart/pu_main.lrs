@@ -1235,38 +1235,38 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'rmal'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'Wrapable'#8#0#11
   +'TToolButton'#13'ToolButtonNew'#4'Hint'#6#22'New|Create a new chart'#3'Top'#2
   +#2#6'Action'#7#8'FileNew1'#0#0#11'TToolButton'#14'ToolButtonOpen'#4'Left'#2
-  +#24#4'Hint'#6#17'Open|Open a chart'#3'Top'#2#2#6'Action'#7#9'FileOpen1'#0#0
-  +#11'TToolButton'#14'ToolButtonSave'#4'Left'#2'/'#4'Hint'#6#22'Save the curre'
+  +#23#4'Hint'#6#17'Open|Open a chart'#3'Top'#2#2#6'Action'#7#9'FileOpen1'#0#0
+  +#11'TToolButton'#14'ToolButtonSave'#4'Left'#2'.'#4'Hint'#6#22'Save the curre'
   +'nt chart'#3'Top'#2#2#6'Action'#7#11'FileSaveAs1'#0#0#11'TToolButton'#15'Too'
-  +'lButtonPrint'#4'Left'#2'F'#4'Hint'#6#15'Print the chart'#3'Top'#2#2#6'Actio'
-  +'n'#7#6'Print1'#0#0#11'TToolButton'#21'ToolButtonNightVision'#4'Left'#2']'#4
+  +'lButtonPrint'#4'Left'#2'E'#4'Hint'#6#15'Print the chart'#3'Top'#2#2#6'Actio'
+  +'n'#7#6'Print1'#0#0#11'TToolButton'#21'ToolButtonNightVision'#4'Left'#2'\'#4
   +'Hint'#6#18'Night vision color'#3'Top'#2#2#7'Caption'#6#21'ToolButtonNightVi'
   +'sion'#10'ImageIndex'#2'R'#7'OnClick'#7#26'ToolButtonNightVisionClick'#0#0#11
-  +'TToolButton'#11'ToolButton3'#4'Left'#2't'#3'Top'#2#2#5'Width'#2#8#7'Caption'
+  +'TToolButton'#11'ToolButton3'#4'Left'#2's'#3'Top'#2#2#5'Width'#2#8#7'Caption'
   +#6#11'ToolButton3'#10'ImageIndex'#2#2#5'Style'#7#10'tbsDivider'#0#0#11'TTool'
-  +'Button'#17'ToolButtonCascade'#4'Left'#2'|'#4'Hint'#6#7'Cascade'#3'Top'#2#2#7
+  +'Button'#17'ToolButtonCascade'#4'Left'#2'{'#4'Hint'#6#7'Cascade'#3'Top'#2#2#7
   +'Caption'#6#8'&Cascade'#10'ImageIndex'#2#4#7'OnClick'#7#21'WindowCascade1Exe'
-  +'cute'#0#0#11'TToolButton'#14'ToolButtonTile'#4'Left'#3#147#0#4'Hint'#6#15'T'
+  +'cute'#0#0#11'TToolButton'#14'ToolButtonTile'#4'Left'#3#146#0#4'Hint'#6#15'T'
   +'ile Vertically'#3'Top'#2#2#7'Caption'#6#16'Tile &Vertically'#10'ImageIndex'
   +#2#14#7'OnClick'#7#26'WindowTileVertical1Execute'#0#0#11'TToolButton'#11'Too'
-  +'lButton5'#4'Left'#3#170#0#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#11'ToolButto'
+  +'lButton5'#4'Left'#3#169#0#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#11'ToolButto'
   +'n5'#10'ImageIndex'#2#17#5'Style'#7#10'tbsDivider'#0#0#11'TToolButton'#14'To'
-  +'olButtonUndo'#4'Left'#3#178#0#4'Hint'#6#16'Undo Last Change'#3'Top'#2#2#6'A'
-  +'ction'#7#4'Undo'#0#0#11'TToolButton'#14'ToolButtonRedo'#4'Left'#3#201#0#4'H'
+  +'olButtonUndo'#4'Left'#3#177#0#4'Hint'#6#16'Undo Last Change'#3'Top'#2#2#6'A'
+  +'ction'#7#4'Undo'#0#0#11'TToolButton'#14'ToolButtonRedo'#4'Left'#3#200#0#4'H'
   +'int'#6#16'Redo Last Change'#3'Top'#2#2#6'Action'#7#4'Redo'#0#0#11'TToolButt'
-  +'on'#14'ToolButtonZoom'#4'Left'#3#224#0#4'Hint'#6#7'Zoom In'#3'Top'#2#2#6'Ac'
-  +'tion'#7#8'zoomplus'#0#0#11'TToolButton'#16'ToolButtonUnZoom'#4'Left'#3#247#0
+  +'on'#14'ToolButtonZoom'#4'Left'#3#223#0#4'Hint'#6#7'Zoom In'#3'Top'#2#2#6'Ac'
+  +'tion'#7#8'zoomplus'#0#0#11'TToolButton'#16'ToolButtonUnZoom'#4'Left'#3#246#0
   +#4'Hint'#6#8'Zoom Out'#3'Top'#2#2#6'Action'#7#9'zoomminus'#0#0#11'TToolButto'
-  +'n'#11'ToolButton1'#4'Left'#3#14#1#4'Hint'#6#7'Set FOV'#3'Top'#2#2#6'Action'
-  +#7#7'ZoomBar'#0#0#9'TComboBox'#11'quicksearch'#4'Left'#3'='#1#6'Height'#2#23
+  +'n'#11'ToolButton1'#4'Left'#3#13#1#4'Hint'#6#7'Set FOV'#3'Top'#2#2#6'Action'
+  +#7#7'ZoomBar'#0#0#9'TComboBox'#11'quicksearch'#4'Left'#3'<'#1#6'Height'#2#23
   +#4'Hint'#6#6'Search'#3'Top'#2#2#5'Width'#2'U'#21'ArrowKeysTraverseList'#8#12
   +'AutoComplete'#9#16'AutoCompleteText'#11#12'cbactEnabled'#22'cbactEndOfLineC'
   +'omplete'#20'cbactSearchAscending'#0#13'DropDownCount'#2#15#12'Font.CharSet'
   +#7#12'ANSI_CHARSET'#10'ItemHeight'#2#14#9'MaxLength'#2#0#10'OnDblClick'#7#16
   +'quicksearchClick'#9'OnKeyDown'#7#18'quicksearchKeyDown'#8'TabOrder'#2#0#0#0
-  +#11'TToolButton'#16'ToolButtonSearch'#4'Left'#3#146#1#4'Hint'#6#15'Advanced '
+  +#11'TToolButton'#16'ToolButtonSearch'#4'Left'#3#145#1#4'Hint'#6#15'Advanced '
   +'Search'#3'Top'#2#2#6'Action'#7#7'Search1'#0#0#6'TPanel'#8'MagPanel'#4'Left'
-  +#3'%'#1#6'Height'#2#23#3'Top'#2#2#5'Width'#2#24#10'BevelOuter'#7#6'bvNone'#12
+  +#3'$'#1#6'Height'#2#23#3'Top'#2#2#5'Width'#2#24#10'BevelOuter'#7#6'bvNone'#12
   +'ClientHeight'#2#23#11'ClientWidth'#2#24#11'FullRepaint'#8#8'TabOrder'#2#3#0
   +#6'TImage'#14'ButtonMoreStar'#6'Height'#2#11#4'Hint'#6#10'More Stars'#5'Widt'
   +'h'#2#11#7'OnClick'#7#15'MoreStarExecute'#12'Picture.Data'#10#182#3#0#0#7'TB'
@@ -1319,46 +1319,46 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'9D",'#10'"j c #FF7B8F",'#10'"k c #FF6F84",'#10'".........,",'#10'".........'
   +',",'#10'"...--....,",'#10'"..*abcd..,",'#10'"..efffg..,",'#10'"..hijkd..,",'
   +#10'".........,",'#10'".........,",'#10'".........,",'#10'",,,,,,,,,,"}'#10
-  +#11'Transparent'#9#0#0#0#11'TToolButton'#18'ToolButtonPosition'#4'Left'#3#169
+  +#11'Transparent'#9#0#0#0#11'TToolButton'#18'ToolButtonPosition'#4'Left'#3#168
   +#1#4'Hint'#6#8'Position'#3'Top'#2#2#6'Action'#7#8'Position'#0#0#11'TToolButt'
-  +'on'#17'ToolButtonListObj'#4'Left'#3#192#1#4'Hint'#6#11'Object List'#3'Top'#2
-  +#2#6'Action'#7#7'listobj'#0#0#11'TToolButton'#13'ToolButtonCal'#4'Left'#3#215
+  +'on'#17'ToolButtonListObj'#4'Left'#3#191#1#4'Hint'#6#11'Object List'#3'Top'#2
+  +#2#6'Action'#7#7'listobj'#0#0#11'TToolButton'#13'ToolButtonCal'#4'Left'#3#214
   +#1#4'Hint'#6#18'Ephemeris Calendar'#3'Top'#2#2#6'Action'#7#8'Calendar'#0#0#11
-  +'TToolButton'#12'ToolButton35'#4'Left'#3#238#1#3'Top'#2#2#5'Width'#2#8#7'Cap'
+  +'TToolButton'#12'ToolButton35'#4'Left'#3#237#1#3'Top'#2#2#5'Width'#2#8#7'Cap'
   +'tion'#6#12'ToolButton35'#10'ImageIndex'#2#8#5'Style'#7#10'tbsDivider'#0#0#11
-  +'TToolButton'#14'ToolButtonTdec'#4'Left'#3#246#1#4'Hint'#6#14'Decrement Time'
+  +'TToolButton'#14'ToolButtonTdec'#4'Left'#3#245#1#4'Hint'#6#14'Decrement Time'
   +#3'Top'#2#2#6'Action'#7#7'TimeDec'#0#0#11'TToolButton'#14'ToolButtonTnow'#4
-  +'Left'#3#13#2#4'Hint'#6#3'Now'#3'Top'#2#2#6'Action'#7#9'TimeReset'#0#0#11'TT'
-  +'oolButton'#14'ToolButtonTinc'#4'Left'#3'$'#2#4'Hint'#6#14'Increment Time'#3
-  +'Top'#2#2#6'Action'#7#7'TimeInc'#0#0#9'TSpinEdit'#7'TimeVal'#4'Left'#3';'#2#6
+  +'Left'#3#12#2#4'Hint'#6#3'Now'#3'Top'#2#2#6'Action'#7#9'TimeReset'#0#0#11'TT'
+  +'oolButton'#14'ToolButtonTinc'#4'Left'#3'#'#2#4'Hint'#6#14'Increment Time'#3
+  +'Top'#2#2#6'Action'#7#7'TimeInc'#0#0#9'TSpinEdit'#7'TimeVal'#4'Left'#3':'#2#6
   +'Height'#2#23#4'Hint'#6#4'Time'#3'Top'#2#2#5'Width'#2'<'#8'MaxValue'#3#232#3
   +#8'MinValue'#2#1#8'TabOrder'#2#4#5'Value'#2#1#0#0#9'TComboBox'#5'TimeU'#4'Le'
-  +'ft'#3'w'#2#6'Height'#2#23#4'Hint'#6#10'Time Units'#3'Top'#2#2#5'Width'#2'U'
+  +'ft'#3'v'#2#6'Height'#2#23#4'Hint'#6#10'Time Units'#3'Top'#2#2#5'Width'#2'U'
   +#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#13'DropDownCount'#2#11#12
   +'Font.CharSet'#7#12'ANSI_CHARSET'#10'ItemHeight'#2#14#9'MaxLength'#2#0#5'Sty'
   +'le'#7#14'csDropDownList'#8'TabOrder'#2#2#0#0#11'TToolButton'#12'ToolButton3'
-  +'9'#4'Left'#3#204#2#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#12'ToolButton39'#10
+  +'9'#4'Left'#3#203#2#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#12'ToolButton39'#10
   +'ImageIndex'#2'-'#5'Style'#7#10'tbsDivider'#0#0#11'TToolButton'#8'TConnect'#4
-  +'Left'#3#212#2#4'Hint'#6#17'Connect Telescope'#3'Top'#2#2#6'Action'#7#16'Tel'
-  +'escopeConnect'#0#0#11'TToolButton'#5'TSlew'#4'Left'#3''''#3#4'Hint'#6#4'Sle'
-  +'w'#3'Top'#2#2#6'Action'#7#13'TelescopeSlew'#0#0#11'TToolButton'#5'TSync'#4
-  +'Left'#3#16#3#4'Hint'#6#4'Sync'#3'Top'#2#2#6'Action'#7#13'TelescopeSync'#0#0
-  +#6'TPanel'#12'ChildControl'#4'Left'#3#242#2#6'Height'#2#23#3'Top'#2#2#5'Widt'
-  +'h'#2#30#5'Align'#7#7'alRight'#8'AutoSize'#9#10'BevelOuter'#7#6'bvNone'#12'C'
-  ,'lientHeight'#2#23#11'ClientWidth'#2#30#8'TabOrder'#2#1#0#12'TSpeedButton'#15
-  +'BtnRestoreChild'#6'Height'#2#15#5'Width'#2#15#4'Flat'#9#9'NumGlyphs'#2#0#7
-  +'OnClick'#7#20'BtnRestoreChildClick'#0#0#12'TSpeedButton'#13'BtnCloseChild'#4
-  +'Left'#2#15#6'Height'#2#15#5'Width'#2#15#4'Flat'#9#9'NumGlyphs'#2#0#7'OnClic'
-  +'k'#7#18'BtnCloseChildClick'#0#0#0#11'TToolButton'#11'ToolButton6'#4'Left'#3
-  +'>'#3#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#11'ToolButton6'#5'Style'#7#10'tbs'
-  +'Divider'#0#0#11'TToolButton'#11'ToolButton7'#4'Left'#3'F'#3#3'Top'#2#2#5'Wi'
-  +'dth'#2#23#8'AutoSize'#9#7'Caption'#6#11'ToolButton7'#5'Style'#7#12'tbsSepar'
-  +'ator'#0#0#0#8'TToolBar'#8'ToolBar4'#6'Height'#2#28#3'Top'#2#25#5'Width'#3'g'
-  +#3#5'Align'#7#8'alBottom'#8'AutoSize'#9#12'ButtonHeight'#2#24#7'Caption'#6#8
-  +'ToolBar4'#11'EdgeBorders'#11#5'ebTop'#8'ebBottom'#0#4'Flat'#9#6'Images'#7#11
-  +'ImageNormal'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#8'Wrapable'
-  +#8#0#6'TLabel'#10'topmessage'#4'Left'#3'9'#2#6'Height'#2#24#3'Top'#2#2#5'Wid'
-  +'th'#2#5#7'Caption'#6#1' '#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#11'TTo'
+  +'Left'#3#211#2#4'Hint'#6#17'Connect Telescope'#3'Top'#2#2#6'Action'#7#16'Tel'
+  +'escopeConnect'#0#0#11'TToolButton'#5'TSlew'#4'Left'#3#1#3#4'Hint'#6#4'Slew'
+  +#3'Top'#2#2#6'Action'#7#13'TelescopeSlew'#0#0#11'TToolButton'#5'TSync'#4'Lef'
+  +'t'#3#234#2#4'Hint'#6#4'Sync'#3'Top'#2#2#6'Action'#7#13'TelescopeSync'#0#0#6
+  +'TPanel'#12'ChildControl'#4'Left'#3'G'#3#6'Height'#2#23#3'Top'#2#2#5'Width'#2
+  +#30#5'Align'#7#7'alRight'#8'AutoSize'#9#10'BevelOuter'#7#6'bvNone'#12'Client'
+  ,'Height'#2#23#11'ClientWidth'#2#30#8'TabOrder'#2#1#0#12'TSpeedButton'#15'Btn'
+  +'RestoreChild'#6'Height'#2#15#5'Width'#2#15#4'Flat'#9#9'NumGlyphs'#2#0#7'OnC'
+  +'lick'#7#20'BtnRestoreChildClick'#0#0#12'TSpeedButton'#13'BtnCloseChild'#4'L'
+  +'eft'#2#15#6'Height'#2#15#5'Width'#2#15#4'Flat'#9#9'NumGlyphs'#2#0#7'OnClick'
+  +#7#18'BtnCloseChildClick'#0#0#0#11'TToolButton'#11'ToolButton6'#4'Left'#3#24
+  +#3#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#11'ToolButton6'#5'Style'#7#10'tbsDiv'
+  +'ider'#0#0#11'TToolButton'#11'ToolButton7'#4'Left'#3' '#3#3'Top'#2#2#5'Width'
+  +#2#23#8'AutoSize'#9#7'Caption'#6#11'ToolButton7'#5'Style'#7#12'tbsSeparator'
+  +#0#0#0#8'TToolBar'#8'ToolBar4'#6'Height'#2#28#3'Top'#2#25#5'Width'#3'g'#3#5
+  +'Align'#7#8'alBottom'#8'AutoSize'#9#12'ButtonHeight'#2#24#7'Caption'#6#8'Too'
+  +'lBar4'#11'EdgeBorders'#11#5'ebTop'#8'ebBottom'#0#4'Flat'#9#6'Images'#7#11'I'
+  +'mageNormal'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#8'Wrapable'#8
+  +#0#6'TLabel'#10'topmessage'#4'Left'#3'9'#2#6'Height'#2#24#3'Top'#2#2#5'Width'
+  +#2#17#7'Caption'#6#4'    '#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#11'TTo'
   +'olButton'#19'ToolButtonShowStars'#4'Hint'#6#10'Show Stars'#3'Top'#2#2#6'Act'
   +'ion'#7#9'ShowStars'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#21'ToolButto'
   +'nShowNebulae'#4'Left'#2#24#4'Hint'#6#12'Show Nebulae'#3'Top'#2#2#6'Action'#7

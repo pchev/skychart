@@ -36,9 +36,22 @@ type
 
   Tf_config_catalog = class(TForm)
     bsc3: TDirectoryEdit;
+    fw4: TLabel;
+    fw5: TLabel;
+    fw6: TLabel;
+    fw7: TLabel;
+    fw8: TLabel;
+    fw9: TLabel;
+    fw0: TLabel;
+    fw1: TLabel;
+    fw2: TLabel;
+    fw3: TLabel;
+    Label5: TLabel;
+    fw10: TLabel;
     ocl3: TDirectoryEdit;
     gcm3: TDirectoryEdit;
     gpn3: TDirectoryEdit;
+    FOVPanel: TPanel;
     pgc3: TDirectoryEdit;
     rc33: TDirectoryEdit;
     lbn3: TDirectoryEdit;
@@ -218,6 +231,7 @@ type
     procedure CDCNebPathChange(Sender: TObject);
     procedure CDCNebSelPathClick(Sender: TObject);
     procedure ActivateGCat;
+    procedure ShowFov;
 
   private
     { Private declarations }
@@ -265,6 +279,7 @@ LockChange:=true;
 ShowGCat;
 ShowCDCStar;
 ShowCDCNeb;
+ShowFov;
 LockChange:=false;
 end;
 
@@ -404,7 +419,20 @@ dstyc3.Text:=ccat.StarCatPath[dstyc-BaseStar]+blank;
 dsgsc3.Text:=ccat.StarCatPath[dsgsc-BaseStar]+blank;
 end;
 
-
+procedure Tf_config_catalog.ShowFov;
+begin
+fw0.Caption:='0: 0 - '+formatfloat(f1s,cshr.fieldnum[0]);
+fw1.Caption:='1: '+formatfloat(f1s,cshr.fieldnum[0])+' - '+formatfloat(f1s,cshr.fieldnum[1]);
+fw2.Caption:='2: '+formatfloat(f1s,cshr.fieldnum[1])+' - '+formatfloat(f1s,cshr.fieldnum[2]);
+fw3.Caption:='3: '+formatfloat(f1s,cshr.fieldnum[2])+' - '+formatfloat(f1s,cshr.fieldnum[3]);
+fw4.Caption:='4: '+formatfloat(f1s,cshr.fieldnum[3])+' - '+formatfloat(f1s,cshr.fieldnum[4]);
+fw5.Caption:='5: '+formatfloat(f1s,cshr.fieldnum[4])+' - '+formatfloat(f1s,cshr.fieldnum[5]);
+fw6.Caption:='6: '+formatfloat(f1s,cshr.fieldnum[5])+' - '+formatfloat(f1s,cshr.fieldnum[6]);
+fw7.Caption:='7: '+formatfloat(f1s,cshr.fieldnum[6])+' - '+formatfloat(f1s,cshr.fieldnum[7]);
+fw8.Caption:='8: '+formatfloat(f1s,cshr.fieldnum[7])+' - '+formatfloat(f1s,cshr.fieldnum[8]);
+fw9.Caption:='9: '+formatfloat(f1s,cshr.fieldnum[8])+' - '+formatfloat(f1s,cshr.fieldnum[9]);
+fw10.Caption:='10: '+formatfloat(f1s,cshr.fieldnum[9])+' - '+formatfloat(f1s,cshr.fieldnum[10]);
+end;
 
 procedure Tf_config_catalog.StringGrid3DrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);

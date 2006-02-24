@@ -1,7 +1,7 @@
 object f_config_catalog: Tf_config_catalog
-  Left = 278
+  Left = 408
   Height = 528
-  Top = 158
+  Top = 242
   Width = 526
   HorzScrollBar.Page = 525
   VertScrollBar.Page = 527
@@ -48,7 +48,7 @@ object f_config_catalog: Tf_config_catalog
     TabOrder = 0
     object WizardNotebook1: TWizardNotebook
       Left = 1
-      Height = 478
+      Height = 424
       Top = 1
       Width = 498
       Align = alClient
@@ -57,7 +57,7 @@ object f_config_catalog: Tf_config_catalog
       object Page1: TPage
         Caption = 'Page1'
         ClientWidth = 498
-        ClientHeight = 478
+        ClientHeight = 424
         object Label1: TLabel
           Height = 13
           Width = 134
@@ -129,7 +129,7 @@ object f_config_catalog: Tf_config_catalog
       object Page2: TPage
         Caption = 'Page2'
         ClientWidth = 498
-        ClientHeight = 478
+        ClientHeight = 424
         object Label2: TLabel
           Height = 13
           Width = 149
@@ -910,7 +910,7 @@ object f_config_catalog: Tf_config_catalog
       object Page3: TPage
         Caption = 'Page3'
         ClientWidth = 498
-        ClientHeight = 478
+        ClientHeight = 424
         object Bevel5: TBevel
           Name = 'Bevel5'
           Left = 1
@@ -1177,7 +1177,7 @@ object f_config_catalog: Tf_config_catalog
           Tag = 2
           Left = 279
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 96
           Width = 30
           BorderStyle = bsSingle
@@ -1186,14 +1186,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 8
           OnChange = CDCNebField1Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fngc2: TLongEdit
           Name = 'fngc2'
           Tag = 2
           Left = 319
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 96
           Width = 30
           BorderStyle = bsSingle
@@ -1202,14 +1202,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 9
           OnChange = CDCNebField2Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fsac1: TLongEdit
           Name = 'fsac1'
           Tag = 1
           Left = 279
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 49
           Width = 30
           BorderStyle = bsSingle
@@ -1218,14 +1218,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 10
           OnChange = CDCNebField1Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fsac2: TLongEdit
           Name = 'fsac2'
           Tag = 1
           Left = 319
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 49
           Width = 30
           BorderStyle = bsSingle
@@ -1234,15 +1234,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 11
           OnChange = CDCNebField2Change
-          Value = 360
-          MaxValue = 360
+          MaxValue = 10
         end
         object flbn1: TLongEdit
           Name = 'flbn1'
           Tag = 3
           Left = 279
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 145
           Width = 30
           BorderStyle = bsSingle
@@ -1251,14 +1250,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 12
           OnChange = CDCNebField1Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object flbn2: TLongEdit
           Name = 'flbn2'
           Tag = 3
           Left = 319
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 145
           Width = 30
           BorderStyle = bsSingle
@@ -1267,14 +1266,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 13
           OnChange = CDCNebField2Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object frc31: TLongEdit
           Name = 'frc31'
           Tag = 4
           Left = 279
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 185
           Width = 30
           BorderStyle = bsSingle
@@ -1283,14 +1282,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 14
           OnChange = CDCNebField1Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object frc32: TLongEdit
           Name = 'frc32'
           Tag = 4
           Left = 319
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 185
           Width = 30
           BorderStyle = bsSingle
@@ -1299,14 +1298,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 15
           OnChange = CDCNebField2Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fpgc1: TLongEdit
           Name = 'fpgc1'
           Tag = 5
           Left = 279
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 210
           Width = 30
           BorderStyle = bsSingle
@@ -1315,14 +1314,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 16
           OnChange = CDCNebField1Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fpgc2: TLongEdit
           Name = 'fpgc2'
           Tag = 5
           Left = 319
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 210
           Width = 30
           BorderStyle = bsSingle
@@ -1331,14 +1330,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 17
           OnChange = CDCNebField2Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object focl1: TLongEdit
           Name = 'focl1'
           Tag = 6
           Left = 279
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 250
           Width = 30
           BorderStyle = bsSingle
@@ -1347,14 +1346,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 18
           OnChange = CDCNebField1Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object focl2: TLongEdit
           Name = 'focl2'
           Tag = 6
           Left = 319
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 250
           Width = 30
           BorderStyle = bsSingle
@@ -1363,14 +1362,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 19
           OnChange = CDCNebField2Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fgcm1: TLongEdit
           Name = 'fgcm1'
           Tag = 7
           Left = 279
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 290
           Width = 30
           BorderStyle = bsSingle
@@ -1379,14 +1378,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 20
           OnChange = CDCNebField1Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fgcm2: TLongEdit
           Name = 'fgcm2'
           Tag = 7
           Left = 319
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 290
           Width = 30
           BorderStyle = bsSingle
@@ -1395,14 +1394,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 21
           OnChange = CDCNebField2Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fgpn1: TLongEdit
           Name = 'fgpn1'
           Tag = 8
           Left = 279
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 330
           Width = 30
           BorderStyle = bsSingle
@@ -1411,14 +1410,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 22
           OnChange = CDCNebField1Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object fgpn2: TLongEdit
           Name = 'fgpn2'
           Tag = 8
           Left = 319
           Height = 22
-          Hint = '0..360'
+          Hint = '0..10'
           Top = 330
           Width = 30
           BorderStyle = bsSingle
@@ -1427,7 +1426,7 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 23
           OnChange = CDCNebField2Change
-          MaxValue = 360
+          MaxValue = 10
         end
         object sac3: TDirectoryEdit
           Tag = 1
@@ -1529,7 +1528,7 @@ object f_config_catalog: Tf_config_catalog
       object Page4: TPage
         Caption = 'Page4'
         ClientWidth = 498
-        ClientHeight = 478
+        ClientHeight = 424
         object Label88: TLabel
           Height = 13
           Width = 284
@@ -1832,7 +1831,7 @@ object f_config_catalog: Tf_config_catalog
       object Page5: TPage
         Caption = 'Page5'
         ClientWidth = 498
-        ClientHeight = 478
+        ClientHeight = 424
         object Label4: TLabel
           Height = 13
           Width = 135
@@ -1983,6 +1982,136 @@ object f_config_catalog: Tf_config_catalog
             40
           )
         end
+      end
+    end
+    object FOVPanel: TPanel
+      Left = 1
+      Height = 54
+      Top = 425
+      Width = 498
+      Align = alBottom
+      ClientHeight = 54
+      ClientWidth = 498
+      TabOrder = 1
+      object fw0: TLabel
+        Left = 91
+        Height = 13
+        Top = 8
+        Width = 78
+        AutoSize = False
+        Caption = 'fw0'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw1: TLabel
+        Left = 171
+        Height = 17
+        Top = 8
+        Width = 78
+        AutoSize = False
+        Caption = 'fw1'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw2: TLabel
+        Left = 251
+        Height = 17
+        Top = 8
+        Width = 78
+        AutoSize = False
+        Caption = 'fw2'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw3: TLabel
+        Left = 331
+        Height = 17
+        Top = 8
+        Width = 78
+        AutoSize = False
+        Caption = 'fw3'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw4: TLabel
+        Left = 411
+        Height = 17
+        Top = 8
+        Width = 78
+        AutoSize = False
+        Caption = 'fw4'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw5: TLabel
+        Left = 7
+        Height = 17
+        Top = 32
+        Width = 78
+        AutoSize = False
+        Caption = 'fw5'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw6: TLabel
+        Left = 87
+        Height = 17
+        Top = 32
+        Width = 78
+        AutoSize = False
+        Caption = 'fw6'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw7: TLabel
+        Left = 167
+        Height = 17
+        Top = 32
+        Width = 78
+        AutoSize = False
+        Caption = 'fw7'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw8: TLabel
+        Left = 247
+        Height = 17
+        Top = 32
+        Width = 78
+        AutoSize = False
+        Caption = 'fw8'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw9: TLabel
+        Left = 327
+        Height = 17
+        Top = 32
+        Width = 78
+        AutoSize = False
+        Caption = 'fw9'
+        Color = clNone
+        ParentColor = False
+      end
+      object Label5: TLabel
+        Left = 11
+        Height = 13
+        Top = 8
+        Width = 78
+        AutoSize = False
+        Caption = 'FOV:'
+        Color = clNone
+        ParentColor = False
+      end
+      object fw10: TLabel
+        Left = 407
+        Height = 17
+        Top = 32
+        Width = 78
+        AutoSize = False
+        Caption = 'fw10'
+        Color = clNone
+        ParentColor = False
       end
     end
   end
