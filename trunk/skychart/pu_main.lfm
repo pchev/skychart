@@ -2722,25 +2722,25 @@ object f_main: Tf_main
         Action = FileNew1
       end
       object ToolButtonOpen: TToolButton
-        Left = 24
+        Left = 23
         Hint = 'Open|Open a chart'
         Top = 2
         Action = FileOpen1
       end
       object ToolButtonSave: TToolButton
-        Left = 47
+        Left = 46
         Hint = 'Save the current chart'
         Top = 2
         Action = FileSaveAs1
       end
       object ToolButtonPrint: TToolButton
-        Left = 70
+        Left = 69
         Hint = 'Print the chart'
         Top = 2
         Action = Print1
       end
       object ToolButtonNightVision: TToolButton
-        Left = 93
+        Left = 92
         Hint = 'Night vision color'
         Top = 2
         Caption = 'ToolButtonNightVision'
@@ -2748,7 +2748,7 @@ object f_main: Tf_main
         OnClick = ToolButtonNightVisionClick
       end
       object ToolButton3: TToolButton
-        Left = 116
+        Left = 115
         Top = 2
         Width = 8
         Caption = 'ToolButton3'
@@ -2756,7 +2756,7 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButtonCascade: TToolButton
-        Left = 124
+        Left = 123
         Hint = 'Cascade'
         Top = 2
         Caption = '&Cascade'
@@ -2764,7 +2764,7 @@ object f_main: Tf_main
         OnClick = WindowCascade1Execute
       end
       object ToolButtonTile: TToolButton
-        Left = 147
+        Left = 146
         Hint = 'Tile Vertically'
         Top = 2
         Caption = 'Tile &Vertically'
@@ -2772,7 +2772,7 @@ object f_main: Tf_main
         OnClick = WindowTileVertical1Execute
       end
       object ToolButton5: TToolButton
-        Left = 170
+        Left = 169
         Top = 2
         Width = 8
         Caption = 'ToolButton5'
@@ -2780,37 +2780,37 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButtonUndo: TToolButton
-        Left = 178
+        Left = 177
         Hint = 'Undo Last Change'
         Top = 2
         Action = Undo
       end
       object ToolButtonRedo: TToolButton
-        Left = 201
+        Left = 200
         Hint = 'Redo Last Change'
         Top = 2
         Action = Redo
       end
       object ToolButtonZoom: TToolButton
-        Left = 224
+        Left = 223
         Hint = 'Zoom In'
         Top = 2
         Action = zoomplus
       end
       object ToolButtonUnZoom: TToolButton
-        Left = 247
+        Left = 246
         Hint = 'Zoom Out'
         Top = 2
         Action = zoomminus
       end
       object ToolButton1: TToolButton
-        Left = 270
+        Left = 269
         Hint = 'Set FOV'
         Top = 2
         Action = ZoomBar
       end
       object quicksearch: TComboBox
-        Left = 317
+        Left = 316
         Height = 23
         Hint = 'Search'
         Top = 2
@@ -2827,13 +2827,13 @@ object f_main: Tf_main
         TabOrder = 0
       end
       object ToolButtonSearch: TToolButton
-        Left = 402
+        Left = 401
         Hint = 'Advanced Search'
         Top = 2
         Action = Search1
       end
       object MagPanel: TPanel
-        Left = 293
+        Left = 292
         Height = 23
         Top = 2
         Width = 24
@@ -2963,25 +2963,25 @@ object f_main: Tf_main
         end
       end
       object ToolButtonPosition: TToolButton
-        Left = 425
+        Left = 424
         Hint = 'Position'
         Top = 2
         Action = Position
       end
       object ToolButtonListObj: TToolButton
-        Left = 448
+        Left = 447
         Hint = 'Object List'
         Top = 2
         Action = listobj
       end
       object ToolButtonCal: TToolButton
-        Left = 471
+        Left = 470
         Hint = 'Ephemeris Calendar'
         Top = 2
         Action = Calendar
       end
       object ToolButton35: TToolButton
-        Left = 494
+        Left = 493
         Top = 2
         Width = 8
         Caption = 'ToolButton35'
@@ -2989,25 +2989,25 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButtonTdec: TToolButton
-        Left = 502
+        Left = 501
         Hint = 'Decrement Time'
         Top = 2
         Action = TimeDec
       end
       object ToolButtonTnow: TToolButton
-        Left = 525
+        Left = 524
         Hint = 'Now'
         Top = 2
         Action = TimeReset
       end
       object ToolButtonTinc: TToolButton
-        Left = 548
+        Left = 547
         Hint = 'Increment Time'
         Top = 2
         Action = TimeInc
       end
       object TimeVal: TSpinEdit
-        Left = 571
+        Left = 570
         Height = 23
         Hint = 'Time'
         Top = 2
@@ -3018,7 +3018,7 @@ object f_main: Tf_main
         Value = 1
       end
       object TimeU: TComboBox
-        Left = 631
+        Left = 630
         Height = 23
         Hint = 'Time Units'
         Top = 2
@@ -3032,7 +3032,7 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ToolButton39: TToolButton
-        Left = 716
+        Left = 715
         Top = 2
         Width = 8
         Caption = 'ToolButton39'
@@ -3040,25 +3040,25 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 724
+        Left = 723
         Hint = 'Connect Telescope'
         Top = 2
         Action = TelescopeConnect
       end
       object TSlew: TToolButton
-        Left = 807
+        Left = 769
         Hint = 'Slew'
         Top = 2
         Action = TelescopeSlew
       end
       object TSync: TToolButton
-        Left = 784
+        Left = 746
         Hint = 'Sync'
         Top = 2
         Action = TelescopeSync
       end
       object ChildControl: TPanel
-        Left = 754
+        Left = 839
         Height = 23
         Top = 2
         Width = 30
@@ -3085,14 +3085,14 @@ object f_main: Tf_main
         end
       end
       object ToolButton6: TToolButton
-        Left = 830
+        Left = 792
         Top = 2
         Width = 8
         Caption = 'ToolButton6'
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 838
+        Left = 800
         Top = 2
         Width = 23
         AutoSize = True
@@ -3119,8 +3119,8 @@ object f_main: Tf_main
         Left = 569
         Height = 24
         Top = 2
-        Width = 5
-        Caption = ' '
+        Width = 17
+        Caption = '    '
         Color = clNone
         ParentColor = False
       end

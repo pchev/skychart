@@ -110,6 +110,7 @@ const cdcversion = 'Version 3 alpha 0.1.0';
       deftxt = '?';
       f0='0';
       f1='0.0';
+      f1s='0.#';
       f2='0.00';
       f5='0.00000';
       f6='0.000000';
