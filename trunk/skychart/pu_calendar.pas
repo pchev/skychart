@@ -168,7 +168,7 @@ type
     function SetObjCoord(jd,ra,dec: double) : Tobject;
     procedure FreeCoord(var gr : Tstringgrid);
     procedure InitRiseCell(var gr : Tstringgrid);
-    procedure PlanetRiseCell(var gr : Tstringgrid; i,irc : integer; hr,ht,hs,azr,azs,jda,h,ar,de : double);
+//    procedure PlanetRiseCell(var gr : Tstringgrid; i,irc : integer; hr,ht,hs,azr,azs,jda,h,ar,de : double);
     procedure SaveGrid(grid : tstringgrid);
     procedure Gridtoprinter(grid : tstringgrid);
     procedure RefreshAll;
@@ -181,6 +181,7 @@ type
   public
     { Public declarations }
     cdb: Tcdcdb;
+    AzNorth: boolean;
     procedure SetLang(languagefile:string);
     property planet: Tplanet read Fplanet write Fplanet;
     property config: Pconf_skychart read c write c;
@@ -208,6 +209,7 @@ begin
 {$endif}
 new(c);
 Fnightvision:=false;
+AzNorth:=true;
 ShowImage:=Tf_image.Create(self);
 decodedate(now,yy,mm,dd);
 date1.JD:=jdd(yy,mm,dd,0);
@@ -597,7 +599,7 @@ with gr do
         end;
 end;
 
-Procedure Tf_calendar.PlanetRiseCell(var gr : Tstringgrid; i,irc : integer; hr,ht,hs,azr,azs,jda,h,ar,de : double);
+{Procedure Tf_calendar.PlanetRiseCell(var gr : Tstringgrid; i,irc : integer; hr,ht,hs,azr,azs,jda,h,ar,de : double);
 var ir,ic,it : integer;
     jdcor : double;
 begin
@@ -639,7 +641,7 @@ with gr do begin
            end;
   end;
 end;
-end;
+end;  }
 
 procedure Tf_calendar.RefreshSolarEclipse;
 var f : textfile;
@@ -894,6 +896,174 @@ end;
 end;
 
 procedure Tf_calendar.RefreshPlanet;
+var ar,de,dist,illum,phase,diam,jda,magn,dkm,q,az,ha,dp : double;
+    i,ipla,nj: integer;
+    s,a,m,d,irc : integer;
+    jd1,jd2,jd0,h,jdr,jdt,jds,st0,jdcor,hh : double;
+    am1,am2,dm1,dm2,am3,dm3,rar,der,rat,det,ras,des : double;
+    jdt_ut : double;
+    mr,mt,ms,azr,azs : string;
+
+procedure ComputeRow(gr:TstringGrid; ipla:integer);
+begin
+with gr do begin
+  RowCount:=i+1;
+  case ipla of
+  1..9: begin
+    planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
+    precession(jd2000,c.jdchart,ar,de);
+    if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
+    if c.ApparentPos then apparent_equatorial(ar,de,c);
+    end;
+  10: begin
+    Planet.Sun(jda+jdt_ut,ar,de,dist,diam);
+    precession(jd2000,c.jdchart,ar,de);
+    if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
+    if c.ApparentPos then apparent_equatorial(ar,de,c);
+    illum:=1;
+    end;
+  11: begin
+    planet.Moon(jda+jdt_ut,ar,de,dist,dkm,diam,phase,illum);
+    precession(jd2000,c.jdchart,ar,de);
+    if c.PlanetParalaxe then begin
+       Paralaxe(st0,dist,ar,de,ar,de,q,c);
+       diam:=diam/q;
+    end;
+    if c.ApparentPos then apparent_equatorial(ar,de,c);
+    magn:=planet.MoonMag(phase);
+    end;
+  end;
+  ar:=rmod(ar+pi2,pi2);
+  objects[0,i]:=SetObjCoord(jda,ar,de);
+  Eq2Hz((st0-ar),de,az,ha,c);
+  az:=rmod(az+pi,pi2);
+  cells[0,0]:=pla[ipla];
+  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
+  cells[0,1]:=trim(armtostr(h))+' UT';
+  cells[0,i]:=isodate(a,m,d);
+  cells[1,i]:=artostr(rad2deg*ar/15);
+  cells[2,i]:=detostr(rad2deg*de);
+  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
+  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
+  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
+  cells[9,i]:=demtostr(rad2deg*az);
+  cells[10,i]:=demtostr(rad2deg*ha);
+  Planet.PlanetRiseSet(ipla,jd0,AzNorth,mr,mt,ms,azr,azs,jdr,jdt,jds,rar,der,rat,det,ras,des,irc,c);
+  case irc of
+       0 : begin
+           cells[6,i]:=mr; cells[7,i]:=mt; cells[8,i]:=ms;
+           if trim(mr)>'' then objects[6,i]:=SetObjCoord(jdr,rar,der)
+                          else objects[6,i]:=nil;
+           if trim(mt)>'' then objects[7,i]:=SetObjCoord(jdt,rat,det)
+                          else objects[7,i]:=nil;
+           if trim(ms)>'' then objects[8,i]:=SetObjCoord(jds,ras,des)
+                          else objects[8,i]:=nil;
+           end;
+       1 : begin
+           cells[6,i]:='-'; cells[7,i]:=mt; cells[8,i]:='-';
+           objects[6,i]:=nil;
+           if trim(mt)>'' then objects[7,i]:=SetObjCoord(jdt,rat,det)
+                          else objects[7,i]:=nil;
+           objects[8,i]:=nil;
+           end;
+       2 : begin
+           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
+           objects[6,i]:=nil;
+           objects[7,i]:=nil;
+           objects[8,i]:=nil;
+           end;
+  end;
+end;
+end;
+
+// RefreshPlanet
+begin
+screen.cursor:=crHourGlass;
+try
+SoleilGrid.Visible:=false;
+MercureGrid.Visible:=false;
+VenusGrid.Visible:=false;
+LuneGrid.Visible:=false;
+MarsGrid.Visible:=false;
+JupiterGrid.Visible:=false;
+SaturneGrid.Visible:=false;
+UranusGrid.Visible:=false;
+NeptuneGrid.Visible:=false;
+PlutonGrid.Visible:=false;
+dat21:=date1.JD;
+dat22:=date2.JD;
+dat23:=time.time;
+dat24:=step.text;
+s:=strtoint(step.text);
+djd(date1.JD,a,m,d,hh);
+h:=frac(Time.time)*24-c.TimeZone;
+jd1:=jd(a,m,d,h);
+djd(date2.JD,a,m,d,hh);
+jd2:=jd(a,m,d,h);
+nj:=round((jd2-jd1)/s);
+if nj>maxstep then if MessageDlg(appmsg[19]+blank+inttostr(nj)+blank+appmsg[20],
+    mtConfirmation,[mbOk, mbCancel], 0) <> mrOK then exit;
+jda:=jd1;
+i:=2;
+InitRiseCell(SoleilGrid);
+InitRiseCell(MercureGrid);
+InitRiseCell(VenusGrid);
+InitRiseCell(LuneGrid);
+InitRiseCell(MarsGrid);
+InitRiseCell(JupiterGrid);
+InitRiseCell(SaturneGrid);
+InitRiseCell(UranusGrid);
+InitRiseCell(NeptuneGrid);
+InitRiseCell(PlutonGrid);
+FreeCoord(SoleilGrid);
+FreeCoord(MercureGrid);
+FreeCoord(VenusGrid);
+FreeCoord(LuneGrid);
+FreeCoord(MarsGrid);
+FreeCoord(JupiterGrid);
+FreeCoord(SaturneGrid);
+FreeCoord(UranusGrid);
+FreeCoord(NeptuneGrid);
+FreeCoord(PlutonGrid);
+repeat
+djd(jda,a,m,d,h);
+jd0:=jd(a,m,d,0);
+jdt_ut:=DTminusUT(a,c)/24;
+st0:=SidTim(jd0,h,c.ObsLongitude);
+for ipla:=1 to 11 do begin
+ if ipla=3 then continue;
+case ipla of
+ 1 : ComputeRow(Mercuregrid,ipla);
+ 2 : ComputeRow(Venusgrid,ipla);
+ 4 : ComputeRow(Marsgrid,ipla);
+ 5 : ComputeRow(Jupitergrid,ipla);
+ 6 : ComputeRow(Saturnegrid,ipla);
+ 7 : ComputeRow(Uranusgrid,ipla);
+ 8 : ComputeRow(Neptunegrid,ipla);
+ 9 : ComputeRow(Plutongrid,ipla);
+ 10 : ComputeRow(Soleilgrid,ipla);
+ 11 : ComputeRow(Lunegrid,ipla);
+ end;
+end;
+jda:=jda+s;
+i:=i+1;
+until jda>jd2;
+finally
+screen.cursor:=crDefault;
+SoleilGrid.Visible:=true;
+MercureGrid.Visible:=true;
+VenusGrid.Visible:=true;
+LuneGrid.Visible:=true;
+MarsGrid.Visible:=true;
+JupiterGrid.Visible:=true;
+SaturneGrid.Visible:=true;
+UranusGrid.Visible:=true;
+NeptuneGrid.Visible:=true;
+PlutonGrid.Visible:=true;
+end;
+end;
+
+{procedure Tf_calendar.RefreshPlanet;
 var ar,de,dist,illum,phase,diam,jda,magn,dkm,q,az,ha,dp : double;
     i,ipla,nj: integer;
     s,a,m,d,irc : integer;
@@ -1323,7 +1493,8 @@ case ipla of
   cells[5,i]:=floattostrf(illum,ffFixed,6,2);
   cells[9,i]:=demtostr(rad2deg*az);
   cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(2,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
+  Planet.PlanetRiseSet(ipla,jd0,AzNorth,hr,ht,hs,azr,azs,irc,c);
+//  RiseSet(2,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
   case irc of
        0 : begin
            cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
@@ -1418,7 +1589,7 @@ case ipla of
            end;
     end;
   end;
- end;    
+ end;
 end;
 end;
 jda:=jda+s;
@@ -1438,7 +1609,7 @@ UranusGrid.Visible:=true;
 NeptuneGrid.Visible:=true;
 PlutonGrid.Visible:=true;
 end;
-end;
+end;}
 
 procedure Tf_calendar.BtnRefreshClick(Sender: TObject);
 var d: string;

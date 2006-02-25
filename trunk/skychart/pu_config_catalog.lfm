@@ -2099,7 +2099,7 @@ object f_config_catalog: Tf_config_catalog
         Top = 8
         Width = 78
         AutoSize = False
-        Caption = 'FOV:'
+        Caption = 'fov number'
         Color = clNone
         ParentColor = False
       end

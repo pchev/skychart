@@ -261,7 +261,7 @@ type
     procedure lDrawPMyChange(Sender: TObject);
     procedure ApparentTypeClick(Sender: TObject);
     procedure projectiontypeClick(Sender: TObject);
-    procedure FWChange(Sender: TObject);
+    procedure FWExit(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ProjectionChange(Sender: TObject);
     procedure StarBoxClick(Sender: TObject);
@@ -562,6 +562,16 @@ end;
 procedure Tf_config_chart.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
+  fw0.OnExit:=FWExit;
+  fw1.OnExit:=FWExit;
+  fw2.OnExit:=FWExit;
+  fw3.OnExit:=FWExit;
+  fw4.OnExit:=FWExit;
+  fw5.OnExit:=FWExit;
+  fw6.OnExit:=FWExit;
+  fw7.OnExit:=FWExit;
+  fw8.OnExit:=FWExit;
+  fw9.OnExit:=FWExit;
 end;
 
 procedure Tf_config_chart.equinox2Change(Sender: TObject);
@@ -635,7 +645,7 @@ case cshr.EquinoxType of
 end;
 end;
 
-procedure Tf_config_chart.FWChange(Sender: TObject);
+procedure Tf_config_chart.FWExit(Sender: TObject);
 begin
 if LockChange then exit;
 if sender is TFloatEdit then with sender as TFloatEdit do begin

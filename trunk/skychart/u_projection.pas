@@ -89,7 +89,7 @@ Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; c: Pconf_skychart );
              hp2      :  heure soir
            *)
 
-procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs:double;var irc:integer; c: Pconf_skychart);
+procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Pconf_skychart);
 
 
 implementation
@@ -952,14 +952,17 @@ c:= b - a;
 result:= y2 + n/2*(a + b + n*c);
 end;
 
-procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs:double;var irc:integer; c: Pconf_skychart);
-const ho : array[1..3] of Double = (-0.5667,-0.8333,0.125) ;
+procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Pconf_skychart);
+const ho : array[1..3] of Double = (-0.5667,-0.8733,0.125) ;
 var hs0,chh0,hh0,m0,m1,m2,a0,n,hsg,aa,dd,hl,h,dm,longref : double;
 begin
 if ar1>pi then begin
    if ar2<pi then ar2:=ar2+pi2;
    if ar3<pi then ar3:=ar3+pi2;
 end;
+rar:=ar2; der:=de2;
+rat:=ar2; det:=de2;
+ras:=ar2; des:=de2;
 longref:=-c^.timezone*15;
 hs0 := sidtim(jd0,-c^.timezone,longref);
 chh0 :=(sin(deg2rad*ho[typobj])-sin(deg2rad*c^.ObsLatitude)*sin(de2))/(cos(deg2rad*c^.ObsLatitude)*cos(de2)) ;
@@ -979,6 +982,7 @@ if abs(chh0)<=1 then begin
    n:= m1 ;
    aa:=int3(n,ar1,ar2,ar3);
    dd:=int3(n,de1,de2,de3);
+   rar:=aa; der:=dd;
    hl:= hsg - deg2rad*c^.Obslongitude + deg2rad*longref - aa;
    h:= rad2deg*(arcsin(sin(deg2rad*c^.Obslatitude) * sin(dd) + cos(deg2rad*c^.Obslatitude) * cos(dd) * cos(hl) ));
    dm:= (h - ho[typobj]) / (360 * cos(dd) * cos(deg2rad*c^.Obslatitude) * sin(hl) );
@@ -989,6 +993,8 @@ if abs(chh0)<=1 then begin
    hsg:= hs0 + deg2rad*360.985647 * m0;
    n:= m0 ;
    aa:=int3(n,ar1,ar2,ar3);
+   dd:=int3(n,de1,de2,de3);
+   rat:=aa; det:=dd;
    hl:= hsg - deg2rad*c^.Obslongitude + deg2rad*longref - aa;
    dm:= -(hl / pi2);
    ht:=rmod((m0+dm)*24+24,24);
@@ -999,6 +1005,7 @@ if abs(chh0)<=1 then begin
    n:= m2 ;
    aa:=int3(n,ar1,ar2,ar3);
    dd:=int3(n,de1,de2,de3);
+   ras:=aa; des:=dd;
    hl:= hsg - deg2rad*c^.Obslongitude + deg2rad*longref - aa;
    h:= rad2deg*(arcsin(sin(deg2rad*c^.Obslatitude) * sin(dd) + cos(deg2rad*c^.Obslatitude) * cos(dd) * cos(hl) ));
    dm:= (h - ho[typobj]) / (360 * cos(dd) * cos(deg2rad*c^.Obslatitude) * sin(hl) );
@@ -1013,6 +1020,8 @@ end else begin
       hsg:= hs0 + deg2rad*360.985647 * m0;
       n:= m0 + c^.DT_UT / 24;
       aa:=int3(n,ar1,ar2,ar3);
+      dd:=int3(n,de1,de2,de3);
+      rat:=aa; det:=dd;
       hl:= hsg - deg2rad*c^.ObsLongitude - aa;
       dm:= -(hl / pi2);
       ht:=rmod((m0+dm)*24+c^.Timezone+24,24);
