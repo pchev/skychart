@@ -403,7 +403,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
-          OnChange = FWChange
           Value = 1
           MaxValue = 360
           NumericType = ntFixed
@@ -421,7 +420,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          OnChange = FWChange
           Value = 2
           MaxValue = 360
           NumericType = ntFixed
@@ -439,7 +437,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
-          OnChange = FWChange
           Value = 5
           MaxValue = 360
           NumericType = ntFixed
@@ -457,7 +454,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
-          OnChange = FWChange
           Value = 10
           MaxValue = 360
           NumericType = ntFixed
@@ -475,7 +471,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
-          OnChange = FWChange
           Value = 15
           MaxValue = 360
           NumericType = ntFixed
@@ -493,7 +488,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
-          OnChange = FWChange
           Value = 25
           MaxValue = 360
           NumericType = ntFixed
@@ -511,7 +505,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
-          OnChange = FWChange
           Value = 45
           MaxValue = 360
           NumericType = ntFixed
@@ -529,7 +522,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
-          OnChange = FWChange
           Value = 90
           MaxValue = 360
           NumericType = ntFixed
@@ -547,7 +539,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
-          OnChange = FWChange
           Value = 180
           MaxValue = 360
           NumericType = ntFixed
@@ -564,7 +555,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
-          OnChange = FWChange
           Value = 0.5
           MaxValue = 360
           NumericType = ntFixed
@@ -2412,8 +2402,8 @@ object f_config_chart: Tf_config_chart
           Top = 40
           Width = 369
           Caption = 'Type of object to add to the list'
-          ClientHeight = 206
-          ClientWidth = 365
+          ClientHeight = 223
+          ClientWidth = 369
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32
@@ -2489,7 +2479,7 @@ object f_config_chart: Tf_config_chart
         Top = 8
         Width = 78
         AutoSize = False
-        Caption = 'FOV:'
+        Caption = 'fov number:'
         Color = clNone
         ParentColor = False
       end

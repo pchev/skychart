@@ -1,4 +1,4 @@
-{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+{ This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_calendar','FORMDATA',[
   'TPF0'#11'Tf_calendar'#10'f_calendar'#4'Left'#3#22#1#6'Height'#3#137#1#3'Top'

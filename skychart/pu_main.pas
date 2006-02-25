@@ -1619,6 +1619,7 @@ procedure Tf_main.CalendarExecute(Sender: TObject);
 begin
   if MultiDoc1.ActiveObject is Tf_chart then f_calendar.config^:= Tf_chart(MultiDoc1.ActiveObject).sc.cfgsc^
      else f_calendar.config^:=def_cfgsc;
+  f_calendar.AzNorth:=catalog.cfgshr.AzNorth;
   formpos(f_calendar,mouse.cursorpos.x,mouse.cursorpos.y);
   f_calendar.show;
 end;

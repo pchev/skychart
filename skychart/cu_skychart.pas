@@ -476,7 +476,7 @@ begin
 fov:=rad2deg*fov;
 if fov>360 then fov:=360;
 result:=MaxField;
-for i:=0 to MaxField do if Fcatalog.cfgshr.FieldNum[i]>=fov then begin
+for i:=0 to MaxField do if Fcatalog.cfgshr.FieldNum[i]>fov then begin
        result:=i;
        break;
     end;

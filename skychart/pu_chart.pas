@@ -1231,7 +1231,7 @@ function Tf_chart.FormatDesc:string;
 var desc,buf,buf2,otype,oname,txt: string;
     thr,tht,ths,tazr,tazs: string;
     i,p,l,y,m,d : integer;
-    ra,dec,a,h,hr,ht,hs,azr,azs :double;
+    ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des :double;
 function Bold(s:string):string;
 var k:integer;
 begin
@@ -1325,7 +1325,7 @@ txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[91]+blank15,1,17)+':'+htms_b+demto
 txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[92]+blank15,1,17)+':'+htms_b+demtostr(rad2deg*h)+html_br;
 // rise/set time
 if (otype='P') then begin // planet
-   sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,sc.cfgsc.jd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,i,sc.cfgsc);
+   sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,sc.cfgsc.jd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
 end
 // todo: rise/set time comet, asteroid, satellites, ...
 else begin // fixed object

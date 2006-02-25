@@ -106,7 +106,7 @@ type
      Procedure NewComDayCallback(Sender:TObject; Row:TResultRow);
      function FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Pconf_skychart; var nom,mag,date,desc:string):boolean;
      function FindCometName(comname: String; var ra,de:double; cfgsc: Pconf_skychart):boolean;
-     procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var i: integer; cfgsc: Pconf_skychart);
+     procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ; var i: integer; cfgsc: Pconf_skychart);
   end;
 
 implementation
@@ -2031,30 +2031,32 @@ begin
     if (n_ast mod 10000)=0 then begin smsg.Add('Processing... '+inttostr(n_ast)); application.processmessages; end;
 end;
 
-procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var i: integer; cfgsc: Pconf_skychart);
-var am1,am2,am3,dm1,dm2,dm3,dm4,dm5,dm6,dm7,dm8,dm9,hr,ht,hs,azr,azs,hrm,htm,hsm : double;
+procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ;var i: integer; cfgsc: Pconf_skychart);
+var jd0t,am1,am2,am3,dm1,dm2,dm3,dm4,dm5,dm6,dm7,dm8,dm9,hr,ht,hs,azr,azs,hrm,htm,hsm,st0,q : double;
     t: integer;
 const b6='      ';
       b7='       ';
       na='      ';
 begin
+jdr:=0;jdt:=0;jds:=0;
+jd0t:=jd0-(cfgsc^.TimeZone+cfgsc^.DT_UT)/24;
 case pla of
 1..9:begin
-     Planet(pla,jd0-cfgsc^.TimeZone/24-1,am1,dm1,dm4,dm5,dm6,dm7,dm8,dm9);
-     Planet(pla,jd0-cfgsc^.TimeZone/24,am2,dm2,dm4,dm5,dm6,dm7,dm8,dm9);
-     Planet(pla,jd0-cfgsc^.TimeZone/24+1,am3,dm3,dm4,dm5,dm6,dm7,dm8,dm9);
+     Planet(pla,jd0t-1,am1,dm1,dm4,dm5,dm6,dm7,dm8,dm9);
+     Planet(pla,jd0t,am2,dm2,dm4,dm5,dm6,dm7,dm8,dm9);
+     Planet(pla,jd0t+1,am3,dm3,dm4,dm5,dm6,dm7,dm8,dm9);
      t:=1;
      end;
 10 : begin
-     Sun(jd0-cfgsc^.TimeZone/24-1,am1,dm1,dm4,dm5);
-     Sun(jd0-cfgsc^.TimeZone/24,am2,dm2,dm4,dm5);
-     Sun(jd0-cfgsc^.TimeZone/24+1,am3,dm3,dm4,dm5);
+     Sun(jd0t-1,am1,dm1,dm4,dm5);
+     Sun(jd0t,am2,dm2,dm4,dm5);
+     Sun(jd0t+1,am3,dm3,dm4,dm5);
      t:=2;
      end;
 11 : begin
-     Moon(jd0-cfgsc^.TimeZone/24-1,am1,dm1,dm4,dm5,dm6,dm7,dm8);
-     Moon(jd0-cfgsc^.TimeZone/24,am2,dm2,dm4,dm5,dm6,dm7,dm8);
-     Moon(jd0-cfgsc^.TimeZone/24+1,am3,dm3,dm4,dm5,dm6,dm7,dm8);
+     Moon(jd0t-1,am1,dm1,dm4,dm5,dm6,dm7,dm8);
+     Moon(jd0t,am2,dm2,dm4,dm5,dm6,dm7,dm8);
+     Moon(jd0t+1,am3,dm3,dm4,dm5,dm6,dm7,dm8);
      t:=3;
      end;
 else begin i:=2; exit; end;
@@ -2070,7 +2072,7 @@ end;
 if (am1<0) then am1:=am1+pi2;
 if (am2<0) then am2:=am2+pi2;
 if (am3<0) then am3:=am3+pi2;
-RiseSetInt(t,jd0,am1,dm1,am2,dm2,am3,dm3,hr,ht,hs,azr,azs,i,cfgsc);
+RiseSetInt(t,jd0,am1,dm1,am2,dm2,am3,dm3,hr,ht,hs,azr,azs,rar,der,rat,det,ras,des,i,cfgsc);
 case i of
 0 : begin
     thr:=armtostr(hr);
@@ -2083,11 +2085,14 @@ case i of
     tazr:=demtostr(rad2deg*Azr);
     tazs:=demtostr(rad2deg*Azs);
     if hr<0 then begin thr:=b6; tazr:=b7; end;  // d-1
-    if hr>24 then begin thr:=b6; tazr:=b7; end; //d+1
+    if hr>24 then begin thr:=b6; tazr:=b7;; end; //d+1
     if ht<0 then begin tht:=b6; end; // d-1
     if ht>24 then begin tht:=b6; end; //d+1
     if hs<0 then begin ths:=b6; tazs:=b7; end; // d-1
     if hs>24 then begin ths:=b6; tazs:=b7; end; //d+1
+    jdr:=jd0+(hr-cfgsc^.TimeZone)/24;
+    jdt:=jd0+(ht-cfgsc^.TimeZone)/24;
+    jds:=jd0+(hs-cfgsc^.TimeZone)/24;
     end;
 1 : begin
     thr:=na;
@@ -2097,6 +2102,7 @@ case i of
     tht:=armtostr(ht);
     if ht<0 then begin tht:=b6; end; // d-1
     if ht>24 then begin tht:=b6; end; //d+1
+    jdt:=jd0+(ht-cfgsc^.TimeZone)/24;
     end;
 2 : begin
     thr:=na;
@@ -2106,29 +2112,62 @@ case i of
     tazs:=na;
     end;
 end;
-// For the Moon the interpolation is not sufficient, do again the using previous approximate time.
+// the Moon is a peculiar beast that need specific attention
 if pla=11 then begin
    if trim(thr)>'' then begin
-      Moon(jd0+(hr-cfgsc^.TimeZone+cfgsc^.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
-      precession(jd2000,jd0,am1,dm1);
-      RiseSet(3,jd0,am1,dm1,hrm,htm,hsm,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5746*cfgsc^.ObsRefractionCor-dm6/2/3600); // paralaxe - refraction - semi-diameter
-      thr:=armtostr(hrm);
-      if AzNorth then Azr:=rmod(Azr+pi,pi2);
-      tazr:=demtostr(rad2deg*Azr);
+     Moon(jdr-(cfgsc^.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
+     precession(jd2000,jd0,am1,dm1);
+     if cfgsc^.ApparentPos then apparent_equatorial(am1,dm1,cfgsc);
+     Riseset(3,jd0,am1,dm1,hr,ht,hs,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5748*cfgsc^.ObsRefractionCor-dm6/2/3600-0.04);
+     thr:=armtostr(hr);
+     if AzNorth then Azr:=rmod(Azr+pi,pi2);
+     tazr:=demtostr(rad2deg*Azr);
+     if hr<0 then begin thr:=b6; tazr:=b7; end;  // d-1
+     if hr>24 then begin thr:=b6; tazr:=b7;; end; //d+1
+     jdr:=jd0+(hr-cfgsc^.TimeZone)/24;
+     if cfgsc^.PlanetParalaxe then begin
+        st0:=SidTim(jd0,hr-cfgsc^.TimeZone,cfgsc^.ObsLongitude);
+        Paralaxe(st0,dm4,am1,dm1,rar,der,q,cfgsc);
+     end else begin
+        rar:=am1;
+        der:=dm1;
+     end;
    end;
    if trim(tht)>'' then begin
-      Moon(jd0+(ht-cfgsc^.TimeZone+cfgsc^.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
-      precession(jd2000,jd0,am1,dm1);
-      RiseSet(3,jd0,am1,dm1,hrm,htm,hsm,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5746*cfgsc^.ObsRefractionCor-dm6/2/3600); // paralaxe - refraction - semi-diameter
-      tht:=armtostr(htm);
+     Moon(jdt-(cfgsc^.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
+     precession(jd2000,jd0,am1,dm1);
+     if cfgsc^.ApparentPos then apparent_equatorial(am1,dm1,cfgsc);
+     Riseset(3,jd0,am1,dm1,hr,ht,hs,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5748*cfgsc^.ObsRefractionCor-dm6/2/3600);
+     tht:=armtostr(ht);
+     if ht<0 then begin tht:=b6; end; // d-1
+     if ht>24 then begin tht:=b6; end; //d+1
+     jdt:=jd0+(ht-cfgsc^.TimeZone)/24;
+     if cfgsc^.PlanetParalaxe then begin
+        st0:=SidTim(jd0,ht-cfgsc^.TimeZone,cfgsc^.ObsLongitude);
+        Paralaxe(st0,dm4,am1,dm1,rat,det,q,cfgsc);
+     end else begin
+        rat:=am1;
+        det:=dm1;
+     end;
    end;
    if trim(ths)>'' then begin
-      Moon(jd0+(hs-cfgsc^.TimeZone+cfgsc^.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
-      precession(jd2000,jd0,am1,dm1);
-      RiseSet(3,jd0,am1,dm1,hrm,htm,hsm,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5746*cfgsc^.ObsRefractionCor-dm6/2/3600); // paralaxe - refraction - semi-diameter
-      ths:=armtostr(hsm);
-      if AzNorth then Azs:=rmod(Azs+pi,pi2);
-      tazs:=demtostr(rad2deg*Azs);
+     Moon(jds-(cfgsc^.DT_UT)/24,am1,dm1,dm4,dm5,dm6,dm7,dm8);
+     precession(jd2000,jd0,am1,dm1);
+     if cfgsc^.ApparentPos then apparent_equatorial(am1,dm1,cfgsc);
+     Riseset(3,jd0,am1,dm1,hr,ht,hs,azr,azs,i,cfgsc,(8.794/dm4/3600)-0.5748*cfgsc^.ObsRefractionCor-dm6/2/3600-0.06);
+     ths:=armtostr(hs);
+     if AzNorth then Azs:=rmod(Azs+pi,pi2);
+     tazs:=demtostr(rad2deg*Azs);
+     if hs<0 then begin ths:=b6; tazs:=b7; end; // d-1
+     if hs>24 then begin ths:=b6; tazs:=b7; end; //d+1
+     jds:=jd0+(hs-cfgsc^.TimeZone)/24;
+     if cfgsc^.PlanetParalaxe then begin
+        st0:=SidTim(jd0,hs-cfgsc^.TimeZone,cfgsc^.ObsLongitude);
+        Paralaxe(st0,dm4,am1,dm1,ras,des,q,cfgsc);
+     end else begin
+        ras:=am1;
+        des:=dm1;
+     end;
    end;
 end;
 end;
