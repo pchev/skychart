@@ -76,15 +76,12 @@ type
     { Private declarations }
   protected
     { Protected declarations }
-    property OnExit;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
     procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
   published
     { Published declarations }
-   {property AutoSelect;}
-  { property AutoSize; }
     property BorderStyle;
     property Color;
     property Cursor;
@@ -100,16 +97,15 @@ type
     property ParentColor;
     property ParentFont;
     property ParentShowHint;
-  { property PasswordChar; }
     property PopupMenu;
     property ReadOnly;
     property ShowHint;
     property TabOrder;
     property Tag;
-  { property Text; }
     property Top;
     property Visible;
     property Width;
+    property OnExit;
     property OnChange;
     property OnClick;
     property OnDblClick;
@@ -131,6 +127,7 @@ type
   TLongEdit = class(TRightEdit)
   private
     { Private declarations }
+    FOnExit : TNotifyEvent;
     FValue: LongInt;
     FMinValue: LongInt;
     FMaxValue: LongInt;
@@ -148,7 +145,6 @@ type
     procedure SetAsByte(NewValue: byte);
     function GetAsByte: byte;
     procedure FormatText;
-//    procedure CMExit(var Message: TCMExit); message CM_EXIT;
     procedure CMExit(Sender: TObject);
   protected
     { Protected declarations }
@@ -165,6 +161,7 @@ type
     property Value: LongInt read GetValue write SetValue;
     property MinValue: LongInt read FMinValue write SetMinValue default 0;
     property MaxValue: LongInt read FMaxValue write SetMaxValue default 0;
+    property OnExit: TNotifyEvent read FOnExit write FOnExit;
   end;
 
   TNumericType = (ntGeneral, ntExponent, ntFixed);
@@ -172,6 +169,7 @@ type
   TFloatEdit = class(TRightEdit)
   private
     { Private declarations }
+    FOnExit : TNotifyEvent;
     FValue: Extended;
     FDecimals: word;
     FMinValue: Extended;
@@ -214,6 +212,7 @@ type
     property MaxValue: Extended read FMaxValue write SetMaxValue;
     property Digits: word read FDigits write SetDigits default 12;
     property NumericType: TNumericType read FNumericType write SetNumericType default ntGeneral;
+    property OnExit: TNotifyEvent read FOnExit write FOnExit;
   end;
 
 procedure Register;
@@ -241,7 +240,8 @@ begin
   FMaxValue := 0;
   FValue := 0;
   Text := '0';
-  onExit:=@CMExit;
+  FOnExit:=nil;
+  Inherited onExit:=@CMExit;
 end;
 
 { Set the unpublished Text property to its string
@@ -415,6 +415,7 @@ begin
   begin
     FValue := L;
 //    inherited;
+    if Assigned(FOnExit) then  FOnExit(Sender);
   end;
 end;
 
@@ -439,7 +440,8 @@ begin
   FMinValue := 0;
   FMaxValue := 0;
   Text := '0.0';
-  onExit:=@CMExit;
+  FOnExit:=nil;
+  Inherited onExit:=@CMExit;
 end;
 
 { Check the Value property is in range before allowing
@@ -458,6 +460,7 @@ begin
   begin
     FValue := L;
     inherited;
+    if Assigned(FOnExit) then  FOnExit(Sender);
   end;
 end;
 
