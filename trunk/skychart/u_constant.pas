@@ -34,7 +34,7 @@ const MaxColor = 35;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[1..7]of Tcolor;
 
-const cdcversion = 'Version 3 alpha 0.1.0';
+const cdcversion = 'Version 3 beta 0.1.0';
       cdcver     = '3.0.1.0';
       MaxSim = 100 ;
       MaxComet = 200;
