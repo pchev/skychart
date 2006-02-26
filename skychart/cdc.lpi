@@ -177,8 +177,8 @@
         <Filename Value="cu_skychart.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_skychart"/>
-        <CursorPos X="53" Y="1197"/>
-        <TopLine Value="1174"/>
+        <CursorPos X="66" Y="1543"/>
+        <TopLine Value="1522"/>
         <UsageCount Value="184"/>
       </Unit8>
       <Unit9>
@@ -320,7 +320,7 @@
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_about.lrs"/>
         <UnitName Value="pu_about"/>
-        <CursorPos X="1" Y="64"/>
+        <CursorPos X="57" Y="65"/>
         <TopLine Value="42"/>
         <UsageCount Value="184"/>
       </Unit21>
@@ -336,8 +336,8 @@
         <Filename Value="u_constant.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="u_constant"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="6" Y="26"/>
+        <TopLine Value="18"/>
         <UsageCount Value="184"/>
         <Bookmarks Count="1">
           <Item0 X="1" Y="79" ID="0"/>
