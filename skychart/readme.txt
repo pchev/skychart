@@ -17,7 +17,7 @@ cdc -|                                    < base directory containing the execut
                          |- ...
                          |- units         < all compilation object go here
              |- tools | - data            < the "data" directory structure require to run the progran
-                      | - ...             < various tools not necessarily useful to the end user.                                            
+                      | - ...             < various tools not necessarily useful to the end user
 
 Install Lazarus using at least the version 0.9.12 from http://lazarus.freepascal.org
 
