@@ -90,13 +90,14 @@ type
     ButtonMoreNeb: TImage;
     ButtonLessNeb: TImage;
     ImageNormal: TImageList;
+    topmessage: TMenuItem;
     MultiDoc1: TMultiDoc;
     PanelFieldSize: TPanel;
     ToolButton2: TToolButton;
     ToolButton4: TToolButton;
     ToolButton6: TToolButton;
     ToolButton7: TToolButton;
-    topmessage: TLabel;
+    topmessage1: TLabel;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
     FileNewItem: TMenuItem;
