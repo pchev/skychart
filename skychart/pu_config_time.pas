@@ -269,6 +269,7 @@ begin
  t_min.value:=n;
  t_sec.value:=s;
  tz.value:=GetTimezone;
+ TimeChange(Sender);
 end;
 
 procedure Tf_config_time.tzChange(Sender: TObject);
