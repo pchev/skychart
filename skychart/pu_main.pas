@@ -1019,13 +1019,15 @@ configfile:=slash(privatedir)+configfile;
 tracefile:=slash(privatedir)+tracefile;
 Tempdir:=slash(privatedir)+DefaultTmpDir;
 {$endif}
-inif:=TMeminifile.create(configfile);
-try
-buf:=inif.ReadString('main','AppDir',appdir);
-if Directoryexists(buf) then appdir:=buf;
-privatedir:=inif.ReadString('main','PrivateDir',privatedir);
-finally
- inif.Free;
+if fileexists(configfile) then begin
+  inif:=TMeminifile.create(configfile);
+  try
+  buf:=inif.ReadString('main','AppDir',appdir);
+  if Directoryexists(buf) then appdir:=buf;
+  privatedir:=inif.ReadString('main','PrivateDir',privatedir);
+  finally
+   inif.Free;
+  end;
 end;
 if not directoryexists(privatedir) then forcedirectories(privatedir);
 if not directoryexists(slash(privatedir)+'MPC') then forcedirectories(slash(privatedir)+'MPC');
