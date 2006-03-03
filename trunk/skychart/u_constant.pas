@@ -34,8 +34,8 @@ const MaxColor = 35;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[1..7]of Tcolor;
 
-const cdcversion = 'Version 3 beta 0.1.0';
-      cdcver     = '3.0.1.0';
+const cdcversion = 'Version 3 beta 0.1.1svn ';
+      cdcver     = '3.0.1.1';
       MaxSim = 100 ;
       MaxComet = 200;
       MaxAsteroid = 500;
@@ -383,7 +383,7 @@ type
                 backgroundcolor,bgcolor : Tcolor;
                 stardyn,starsize,prtres,starplot,nebplot,plaplot : integer;
                 Nebgray,NebBright,starshapesize,starshapew : integer;
-                Invisible,AutoSkycolor : boolean;
+                Invisible,AutoSkycolor,TransparentPlanet : boolean;
                 FontName : array [1..numfont] of string;    // 1=grid 2=label 3=legend 4=status 5=list 6=prt 7=symbol
                 FontSize : array [1..numfont] of integer;
                 FontBold : array [1..numfont] of boolean;
