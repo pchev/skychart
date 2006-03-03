@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_about','FORMDATA',[
   'TPF0'#8'Tf_about'#7'f_about'#4'Left'#3#165#1#6'Height'#3#253#0#3'Top'#2'n'#5
   +'Width'#3'^'#1#18'HorzScrollBar.Page'#3']'#1#18'VertScrollBar.Page'#3#252#0
@@ -1942,6 +1944,9 @@ LazarusResources.Add('Tf_about','FORMDATA',[
   +#8'AutoSize'#8#7'Caption'#6'yThis program is free software; you can redistri'
   +'bute it and/or modify it under the terms of the GNU General Public License'
   +#5'Color'#7#7'clBlack'#10'Font.Color'#7#8'clSilver'#11'ParentColor'#8#11'Tra'
-  +'nsparent'#8#8'WordWrap'#9#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#8'Interval'#3
-  +#208#7#7'OnTimer'#7#11'Timer1Timer'#4'left'#2#16#3'top'#2#24#0#0#0
+  +'nsparent'#8#8'WordWrap'#9#0#0#6'TLabel'#9'DateLabel'#4'Left'#3'<'#1#6'Heigh'
+  +'t'#2#13#3'Top'#3#182#0#5'Width'#2#27#7'Anchors'#11#5'akTop'#7'akRight'#0#7
+  +'Caption'#6#4'Date'#5'Color'#7#6'clNone'#10'Font.Color'#7#8'clSilver'#11'Par'
+  +'entColor'#8#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#8'Interval'#3#208#7#7'OnTi'
+  +'mer'#7#11'Timer1Timer'#4'left'#2#16#3'top'#2#24#0#0#0
 ]);

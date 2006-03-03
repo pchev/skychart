@@ -4500,6 +4500,17 @@ object f_about: Tf_about
     Transparent = False
     WordWrap = True
   end
+  object DateLabel: TLabel
+    Left = 316
+    Height = 13
+    Top = 182
+    Width = 27
+    Anchors = [akTop, akRight]
+    Caption = 'Date'
+    Color = clNone
+    Font.Color = clSilver
+    ParentColor = False
+  end
   object Timer1: TTimer
     Enabled = False
     Interval = 2000

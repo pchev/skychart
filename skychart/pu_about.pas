@@ -33,7 +33,11 @@ uses u_constant, u_util,
   ExtCtrls, LResources;
 
 type
+
+  { Tf_about }
+
   Tf_about = class(TForm)
+    DateLabel: TLabel;
     logo: TImage;
     Label1: TLabel;
     Label2: TLabel;
@@ -48,6 +52,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    compile_time:string;
     ShowTimer: Boolean;
   end;
 
@@ -67,6 +72,7 @@ end;
 
 procedure Tf_about.FormShow(Sender: TObject);
 begin
+DateLabel.Caption:=compile_time;
 if ShowTimer then begin
    Timer1.Enabled:=true;
 end else begin
