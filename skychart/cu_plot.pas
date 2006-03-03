@@ -1236,7 +1236,8 @@ with cnv do begin
  Brush.Color := cfgplot.Color[ico+1] ;
  end
  else Brush.Color := cfgplot.BgColor ;
- Brush.style:=bssolid;
+ if cfgplot.TransparentPlanet then Brush.style:=bsclear
+                              else Brush.style:=bssolid;
  Pen.Width := cfgchart.drawpen;
  Pen.Color := cfgplot.Color[11];
  Pen.Mode:=pmCopy;

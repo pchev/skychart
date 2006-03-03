@@ -27,7 +27,7 @@ object f_config_solsys: Tf_config_solsys
       Top = 1
       Width = 498
       Align = alClient
-      PageIndex = 2
+      PageIndex = 1
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
@@ -352,8 +352,8 @@ object f_config_solsys: Tf_config_solsys
           Top = 232
           Width = 329
           Caption = 'Image Options'
-          ClientHeight = 65
-          ClientWidth = 329
+          ClientHeight = 48
+          ClientWidth = 325
           TabOrder = 6
           object UseXplanet: TCheckBox
             Left = 8
@@ -401,6 +401,15 @@ object f_config_solsys: Tf_config_solsys
             TabOrder = 2
             TabStop = False
           end
+        end
+        object TransparentPlanet: TCheckBox
+          Left = 40
+          Height = 28
+          Top = 417
+          Width = 230
+          Caption = 'Transparent line mode (occultation)'
+          OnClick = TransparentPlanetClick
+          TabOrder = 7
         end
       end
       object Page3: TPage

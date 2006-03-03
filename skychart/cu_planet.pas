@@ -2032,7 +2032,7 @@ begin
 end;
 
 procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ;var i: integer; cfgsc: Pconf_skychart);
-var jd0t,am1,am2,am3,dm1,dm2,dm3,dm4,dm5,dm6,dm7,dm8,dm9,hr,ht,hs,azr,azs,hrm,htm,hsm,st0,q : double;
+var jd0t,am1,am2,am3,dm1,dm2,dm3,dm4,dm5,dm6,dm7,dm8,dm9,hr,ht,hs,azr,azs,st0,q : double;
     t: integer;
 const b6='      ';
       b7='       ';

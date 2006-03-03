@@ -35,6 +35,7 @@ type
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TForm)
+    TransparentPlanet: TCheckBox;
     comfile: TFileNameEdit;
     mpcfile: TFileNameEdit;
     planetdir: TDirectoryEdit;
@@ -228,6 +229,7 @@ type
     procedure XplanetBtnClick(Sender: TObject);
     procedure XplanetDirChange(Sender: TObject);
     procedure UseXplanetClick(Sender: TObject);
+    procedure TransparentPlanetClick(Sender: TObject);
   private
     { Private declarations }
     FShowDB: TNotifyEvent;
@@ -292,6 +294,7 @@ PlanetBox3.checked:=csc.ShowEarthShadow;
 Planetdir.Text:=cmain.planetdir;
 XplanetDir.text:=xplanet_dir;
 UseXplanet.checked:=use_xplanet;
+TransparentPlanet.Checked:=cplot.TransparentPlanet;
 {$ifdef unix}
  XplanetDir.Visible:=false;
  XplanetBtn.Visible:=false;
@@ -371,6 +374,10 @@ begin
 csc.PlanetParalaxe:=(PlaParalaxe.itemindex=1);
 end;
 
+procedure Tf_config_solsys.TransparentPlanetClick(Sender: TObject);
+begin
+cplot.TransparentPlanet:=TransparentPlanet.checked;
+end;
 
 procedure Tf_config_solsys.PlanetBoxClick(Sender: TObject);
 begin
