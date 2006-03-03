@@ -2005,8 +2005,10 @@ procedure Tf_chart.cmd_MoreStar;
 begin
 if sc.catalog.cfgshr.AutoStarFilter then
    sc.catalog.cfgshr.AutoStarFilterMag:=min(16,sc.catalog.cfgshr.AutoStarFilterMag+0.5)
-else
-   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=min(16,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]+0.5);
+else begin
+   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=min(sc.plot.cfgchart^.max_catalog_mag,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]+0.5);
+   if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>sc.plot.cfgchart^.max_catalog_mag then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=99;
+end;
 refresh;
 end;
 
@@ -2014,8 +2016,10 @@ procedure Tf_chart.cmd_LessStar;
 begin
 if sc.catalog.cfgshr.AutoStarFilter then
    sc.catalog.cfgshr.AutoStarFilterMag:=max(1,sc.catalog.cfgshr.AutoStarFilterMag-0.5)
-else
-   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=max(1,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]-0.5);
+else begin
+   if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>=99 then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=sc.plot.cfgchart^.min_ma
+      else sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=max(1,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]-0.5);
+end;
 refresh;
 end;
 

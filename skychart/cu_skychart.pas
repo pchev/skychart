@@ -267,7 +267,7 @@ end;
 
 function Tskychart.InitCatalog:boolean;
 var i:integer;
-    mag:double;
+    mag,magmax:double;
   procedure InitStarC(cat:integer;defaultmag:double);
   { determine if the star catalog is active at this scale }
   begin
@@ -275,6 +275,7 @@ var i:integer;
     (cfgsc^.FieldNum>=Fcatalog.cfgcat.starcatfield[cat-BaseStar,1]) and
     (cfgsc^.FieldNum<=Fcatalog.cfgcat.starcatfield[cat-BaseStar,2]) then begin
      Fcatalog.cfgcat.starcaton[cat-BaseStar]:=true;
+     magmax:=max(magmax,defaultmag);
      if Fcatalog.cfgshr.StarFilter then mag:=minvalue([defaultmag,Fcatalog.cfgcat.StarMagMax])
         else mag:=defaultmag;
      Fplot.cfgchart^.min_ma:=maxvalue([Fplot.cfgchart^.min_ma,mag]);
@@ -315,6 +316,7 @@ if cfgsc^.quick then Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgcat.StarMagMax-2;
 Fcatalog.cfgcat.NebMagMax:=Fcatalog.cfgshr.NebMagFilter[cfgsc^.FieldNum];
 Fcatalog.cfgcat.NebSizeMin:=Fcatalog.cfgshr.NebSizeFilter[cfgsc^.FieldNum];
 Fplot.cfgchart^.min_ma:=1;
+magmax:=1;
 { activate the star catalog}
 InitStarC(dsbase,5.5);
 InitStarC(bsc,6.5);
@@ -352,6 +354,7 @@ for i:=1 to Fcatalog.cfgcat.GCatNum do
          Fcatalog.cfgcat.GCatLst[i-1].CatOn:=true;
          case Fcatalog.cfgcat.GCatLst[i-1].cattype of
           rtstar: begin
+                  magmax:=max(magmax,Fcatalog.cfgcat.GCatLst[i-1].magmax);
                   Fcatalog.cfgcat.starcaton[gcstar-BaseStar]:=true;
                   if Fcatalog.cfgshr.StarFilter then mag:=min(Fcatalog.cfgcat.GCatLst[i-1].magmax,Fcatalog.cfgcat.StarMagMax)
                                                 else mag:=Fcatalog.cfgcat.GCatLst[i-1].magmax;
@@ -364,6 +367,7 @@ for i:=1 to Fcatalog.cfgcat.GCatNum do
          end;
   end else Fcatalog.cfgcat.GCatLst[i-1].CatOn:=false;
 // Store mag limit for this chart
+Fplot.cfgchart^.max_catalog_mag:=magmax;
 cfgsc^.StarFilter:=Fcatalog.cfgshr.StarFilter;
 cfgsc^.StarMagMax:=Fcatalog.cfgcat.StarMagMax;
 cfgsc^.NebFilter:=Fcatalog.cfgshr.NebFilter;
