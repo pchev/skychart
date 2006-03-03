@@ -899,8 +899,8 @@ procedure Tf_calendar.RefreshPlanet;
 var ar,de,dist,illum,phase,diam,jda,magn,dkm,q,az,ha,dp : double;
     i,ipla,nj: integer;
     s,a,m,d,irc : integer;
-    jd1,jd2,jd0,h,jdr,jdt,jds,st0,jdcor,hh : double;
-    am1,am2,dm1,dm2,am3,dm3,rar,der,rat,det,ras,des : double;
+    jd1,jd2,jd0,h,jdr,jdt,jds,st0,hh : double;
+    rar,der,rat,det,ras,des : double;
     jdt_ut : double;
     mr,mt,ms,azr,azs : string;
 
@@ -1639,7 +1639,7 @@ end;
 procedure Tf_calendar.GridMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
-  Column, Row: Longint;
+  aColumn, aRow: Longint;
   csc: conf_skychart;
   p : TObjCoord;
   pathimage: string;
@@ -1647,10 +1647,10 @@ var
 begin
 try
 with Tstringgrid(sender) do begin
-MouseToCell(X, Y, Column, Row);
-if (row>=0)and(Column>=0) then begin
-  p:=TObjCoord(Objects[Column,Row]);
-  if p=nil then p:=TObjCoord(Objects[0,row]);
+MouseToCell(X, Y, aColumn, aRow);
+if (aRow>=0)and(aColumn>=0) then begin
+  p:=TObjCoord(Objects[aColumn,aRow]);
+  if p=nil then p:=TObjCoord(Objects[0,aRow]);
   if p<>nil then begin
     if assigned(FGetChartConfig) then FGetChartConfig(csc)
                                  else csc:=c^;
@@ -1658,8 +1658,8 @@ if (row>=0)and(Column>=0) then begin
     csc.ObsTZ:=csc.Timezone;
     djd(p.jd+c.timezone/24,csc.CurYear,csc.CurMonth,csc.CurDay,csc.CurTime);
     if Sender = solargrid then  begin      // Solar eclipse
-       if (Column=1) then begin   // image map
-         pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,row],blank,'',[rfReplaceAll])+copy(cells[3,row],1,1)+'.png';
+       if (aColumn=1) then begin   // image map
+         pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,aRow],blank,'',[rfReplaceAll])+copy(cells[3,aRow],1,1)+'.png';
          if fileexists(pathimage) then begin
             ShowImage.labeltext:=eclipanel.caption;
             ShowImage.titre:=solar.Caption+blank+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
@@ -1677,11 +1677,11 @@ if (row>=0)and(Column>=0) then begin
        csc.TrackObj:=10;
        csc.PlanetParalaxe:=true;
        csc.ShowPlanet:=true;
-       if (Column=6)or(Column=7) then begin         // change location to eclipse maxima
-         d:=strtofloat(copy(cells[7,row],1,4));
-         if copy(cells[7,row],5,1)='S' then d:=-d;
-         a:=strtofloat(copy(cells[8,row],1,5));
-         if copy(cells[8,row],6,1)='E' then a:=-a;
+       if (aColumn=6)or(aColumn=7) then begin         // change location to eclipse maxima
+         d:=strtofloat(copy(cells[7,aRow],1,4));
+         if copy(cells[7,aRow],5,1)='S' then d:=-d;
+         a:=strtofloat(copy(cells[8,aRow],1,5));
+         if copy(cells[8,aRow],6,1)='E' then a:=-a;
          csc.ObsLatitude:=d;
          csc.ObsLongitude:=a;
          csc.ObsName:='Max. Solar Eclipse '+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
