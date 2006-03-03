@@ -413,7 +413,7 @@ type
      conf_chart = record
                 onprinter : boolean;
                 width,height,drawpen,fontscale,hw,hh : integer;
-                min_ma : double;
+                min_ma, max_catalog_mag : double;
                 end;
      conf_main = record
                 prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
