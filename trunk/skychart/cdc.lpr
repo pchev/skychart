@@ -18,11 +18,14 @@ uses
   radec, XmlParser, zoomimage, JPEGForLazarus, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse;
 
+const compile_time={$I %DATE%}+' '+{$I %TIME%} ;
+
 begin
   Application.Title:='Cartes du Ciel';
   Application.Initialize;
 
   f_about := Tf_about.Create(nil);
+  f_about.compile_time:=compile_time;
   f_about.ShowTimer:=true; f_about.Show; f_about.Paint;
   Application.ProcessMessages;
 
