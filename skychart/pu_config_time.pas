@@ -42,7 +42,6 @@ type
     Page1: TPage;
     Page2: TPage;
     Label142: TLabel;
-    Label147: TLabel;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     Panel1: TPanel;
@@ -76,7 +75,6 @@ type
     t_hour: TSpinEdit;
     t_min: TSpinEdit;
     t_sec: TSpinEdit;
-    Label146: TLabel;
     stepreset: TSpeedButton;
     Label178: TLabel;
     Label179: TLabel;
