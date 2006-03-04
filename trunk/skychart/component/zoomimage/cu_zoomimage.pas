@@ -125,7 +125,7 @@ if lockPicture then begin
    // do not loop when replacing the picture by a bitmap (windows only)
    exit;
 end;
-if FPicture.Width=0 then raise exception.create('Invalid image!');
+if FPicture.Width=0 then exit;
 FSizeX:=FPicture.Width;
 FSizeY:=FPicture.Height;
 FZoomMin:=Width / FSizeX;
@@ -178,7 +178,12 @@ begin
 if assigned(FPicture.Graphic) then begin
 Canvas.Draw(0,0,TmpBmp);
 if Assigned(FOnPaint) then FOnPaint(Self);
+end
+else begin
+  Canvas.Brush.Color:=clBlack;
+  Canvas.Rectangle(Rect(0,0,width,height));
 end;
+Inherited Paint;
 end;
 
 function TZoomImage.Wrld2ScrX(X: integer): integer;
