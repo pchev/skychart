@@ -1806,8 +1806,12 @@ end;
 
 procedure Tf_main.SetupTimeExecute(Sender: TObject);
 begin
-ConfigTime:=Tf_config_time.Create(self);
-try
+if ConfigTime=nil then begin
+   ConfigTime:=Tf_config_time.Create(self);
+   ConfigTime.WizardNotebook1.ShowTabs:=true;
+   ConfigTime.WizardNotebook1.PageIndex:=0;
+   ConfigTime.onApplyConfig:=ApplyConfigTime;
+end;
 ConfigTime.ccat^:=catalog.cfgcat;
 ConfigTime.cshr^:=catalog.cfgshr;
 ConfigTime.cplot^:=def_cfgplot;
@@ -1820,14 +1824,9 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigTime.cmain^:=cfgm;
 formpos(ConfigTime,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigTime.WizardNotebook1.ShowTabs:=true;
-ConfigTime.onApplyConfig:=ApplyConfigTime;
 ConfigTime.showmodal;
 if ConfigTime.ModalResult=mrOK then begin
  activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
-end;
-finally
-ConfigTime.Free;
 end;
 end;
 
@@ -1838,8 +1837,12 @@ end;
 
 procedure Tf_main.SetupObsevartoryExecute(Sender: TObject);
 begin
-ConfigObservatory:=Tf_config_observatory.Create(self);
-try
+if ConfigObservatory=nil then begin
+   ConfigObservatory:=Tf_config_observatory.Create(self);
+   ConfigObservatory.WizardNotebook1.ShowTabs:=true;
+   ConfigObservatory.WizardNotebook1.PageIndex:=0;
+   ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
+end;
 ConfigObservatory.cdb:=cdcdb;
 ConfigObservatory.ccat^:=catalog.cfgcat;
 ConfigObservatory.cshr^:=catalog.cfgshr;
@@ -1853,15 +1856,9 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigObservatory.cmain^:=cfgm;
 formpos(ConfigObservatory,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigObservatory.WizardNotebook1.ShowTabs:=true;
-ConfigObservatory.WizardNotebook1.PageIndex:=0;
-ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
 ConfigObservatory.showmodal;
 if ConfigObservatory.ModalResult=mrOK then begin
  activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
-end;
-finally
-ConfigObservatory.Free;
 end;
 end;
 
