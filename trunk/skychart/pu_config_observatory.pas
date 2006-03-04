@@ -93,7 +93,6 @@ type
     downloadcity: TButton;
     updcity: TButton;
     delcity: TButton;
-    hor_l2: TLabel;
     GroupBox2: TGroupBox;
     horizonopaque: TCheckBox;
     GroupBox1: TGroupBox;
