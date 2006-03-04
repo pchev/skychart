@@ -35,10 +35,14 @@ type
   { Tf_config_observatory }
 
   Tf_config_observatory = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     DownloadDialog1: TDownloadDialog;
     horizonfile: TFileNameEdit;
     Memo1: TMemo;
     OpenDialog1: TOpenDialog;
+    Panel1: TPanel;
     vicinity: TButton;
     LocCode: TEdit;
     Label2: TLabel;
@@ -98,6 +102,7 @@ type
     GroupBox3: TGroupBox;
     horizondepression: TCheckBox;
     Label1: TLabel;
+    procedure Button2Click(Sender: TObject);
     procedure cityfilterKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure countrylistChange(Sender: TObject);
@@ -131,6 +136,7 @@ type
     procedure vicinityClick(Sender: TObject);
   private
     { Private declarations }
+    FApplyConfig: TNotifyEvent;
     scrolllock,obslock,LockChange:boolean;
     Obsposx,Obsposy : integer;
     scrollw, scrollh : integer;
@@ -158,6 +164,7 @@ type
     cplot : ^conf_plot;
     cmain : ^conf_main;
     constructor Create(AOwner:TComponent); override;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
@@ -177,6 +184,7 @@ begin
 {$ifdef linux}
   countrylist.Style:=csDropDown;
 {$endif}
+//  Panel1.Align:=alBottom;
   countrycode:=TStringList.Create;
   citycode:=TStringList.Create;
   LockChange:=true;
@@ -192,8 +200,8 @@ HScrollBar.Width:=ZoomImage1.Width;
 HScrollBar.Left:=ZoomImage1.Left;
 HScrollBar.Top:=ZoomImage1.Top+ZoomImage1.Height;
 if countrylist.Items.Count=0 then cdb.GetCountryList(countrycode,countrylist.Items);
-ShowObservatory;
 ShowHorizon;
+ShowObservatory;
 cityfilter.text:=copy(csc.obsname,1,3);
 LockChange:=false;
 end;
@@ -286,6 +294,11 @@ procedure Tf_config_observatory.cityfilterKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
  if key=key_cr then citysearchClick(Sender);
+end;
+
+procedure Tf_config_observatory.Button2Click(Sender: TObject);
+begin
+ if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
 procedure Tf_config_observatory.citysearchClick(Sender: TObject);

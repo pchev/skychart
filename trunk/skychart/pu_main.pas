@@ -36,6 +36,7 @@ uses
   {$ifdef unix}
   {$endif}
   cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
+  pu_config_time, pu_config_observatory,
   u_constant, u_util, blcksock, synsock, lazjpeg,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
@@ -83,6 +84,11 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    ObsConfig1: TMenuItem;
+    N11: TMenuItem;
+    SetupObsevartory: TAction;
+    DateConfig1: TMenuItem;
+    SetupTime: TAction;
     Bevel1: TBevel;
     FileClose1: TAction;
     ButtonMoreStar: TImage;
@@ -393,6 +399,8 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
+    procedure SetupObsevartoryExecute(Sender: TObject);
+    procedure SetupTimeExecute(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
@@ -491,6 +499,8 @@ type
     procedure SetTheme;
   private
     { Private declarations }
+    ConfigTime: Tf_config_time;
+    ConfigObservatory: Tf_config_observatory;
     cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB : Boolean;
     InitialChartNum: integer;
@@ -505,6 +515,8 @@ type
     Procedure GetAppDir;
     procedure ViewTopPanel;
     procedure ApplyConfig(Sender: TObject);
+    procedure ApplyConfigTime(Sender: TObject);
+    procedure ApplyConfigObservatory(Sender: TObject);
     procedure SetChildFocus(Sender: TObject);
     procedure SetNightVision(night: boolean);
   {$ifdef win32}
@@ -539,7 +551,7 @@ type
     procedure SetDefault;
     procedure SetLang;
     Procedure InitFonts;
-    Procedure ActivateConfig;
+    Procedure activateconfig(cmain:Pconf_main; csc:Pconf_skychart; ccat:Pconf_catalog; cshr:Pconf_shared; cplot:Pconf_plot; cdss:Pconf_dss; applyall:boolean );
     Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string);
@@ -1779,7 +1791,7 @@ try
  f_config.next.enabled:=true;
  f_config.showmodal;
  if f_config.ModalResult=mrOK then begin
-   activateconfig;
+   activateconfig(@f_config.cmain,@f_config.csc,@f_config.ccat,@f_config.cshr,@f_config.cplot,@f_config.cdss,f_config.Applyall.Checked);
  end;
 
 finally
@@ -1787,14 +1799,80 @@ screen.cursor:=crDefault;
 end;
 end;
 
+procedure Tf_main.ApplyConfig(Sender: TObject);
+begin
+ activateconfig(@f_config.cmain,@f_config.csc,@f_config.ccat,@f_config.cshr,@f_config.cplot,@f_config.cdss,f_config.Applyall.Checked);
+end;
+
+procedure Tf_main.SetupTimeExecute(Sender: TObject);
+begin
+ConfigTime:=Tf_config_time.Create(self);
+try
+ConfigTime.ccat^:=catalog.cfgcat;
+ConfigTime.cshr^:=catalog.cfgshr;
+ConfigTime.cplot^:=def_cfgplot;
+ConfigTime.csc^:=def_cfgsc;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigTime.csc^:=sc.cfgsc^;
+   ConfigTime.cplot^:=sc.plot.cfgplot^;
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigTime.cmain^:=cfgm;
+formpos(ConfigTime,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigTime.WizardNotebook1.ShowTabs:=true;
+ConfigTime.onApplyConfig:=ApplyConfigTime;
+ConfigTime.showmodal;
+if ConfigTime.ModalResult=mrOK then begin
+ activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
+end;
+finally
+ConfigTime.Free;
+end;
+end;
+
+procedure Tf_main.ApplyConfigTime(Sender: TObject);
+begin
+ activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
+end;
+
+procedure Tf_main.SetupObsevartoryExecute(Sender: TObject);
+begin
+ConfigObservatory:=Tf_config_observatory.Create(self);
+try
+ConfigObservatory.cdb:=cdcdb;
+ConfigObservatory.ccat^:=catalog.cfgcat;
+ConfigObservatory.cshr^:=catalog.cfgshr;
+ConfigObservatory.cplot^:=def_cfgplot;
+ConfigObservatory.csc^:=def_cfgsc;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigObservatory.csc^:=sc.cfgsc^;
+   ConfigObservatory.cplot^:=sc.plot.cfgplot^;
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigObservatory.cmain^:=cfgm;
+formpos(ConfigObservatory,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigObservatory.WizardNotebook1.ShowTabs:=true;
+ConfigObservatory.WizardNotebook1.PageIndex:=0;
+ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
+ConfigObservatory.showmodal;
+if ConfigObservatory.ModalResult=mrOK then begin
+ activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
+end;
+finally
+ConfigObservatory.Free;
+end;
+end;
+
+procedure Tf_main.ApplyConfigObservatory(Sender: TObject);
+begin
+ activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
+end;
+
 function Tf_main.PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
 begin
  result:=planet.PrepareAsteroid(jdt,msg);
-end;
-
-procedure Tf_main.ApplyConfig(Sender: TObject);
-begin
- activateconfig;
 end;
 
 procedure Tf_main.ConfigDBChange(Sender: TObject);
@@ -1820,37 +1898,41 @@ NeedRestart:=true;
 Close;
 end;
 
-procedure Tf_main.activateconfig;
+procedure Tf_main.activateconfig(cmain:Pconf_main; csc:Pconf_skychart; ccat:Pconf_catalog; cshr:Pconf_shared; cplot:Pconf_plot; cdss:Pconf_dss; applyall:boolean );
 var i:integer;
   themechange: Boolean;
 begin
-    if (cfgm.ButtonNight <> f_config.cmain.ButtonNight) or
-       (cfgm.ButtonStandard <> f_config.cmain.ButtonStandard) or
-       (cfgm.ThemeName <> f_config.cmain.ThemeName)
-       then themechange:=true
-       else themechange:=false;
-    cfgm:=f_config.cmain;
+    themechange:=false;
+    if cmain<>nil then begin
+      if (cfgm.ButtonNight <> cmain^.ButtonNight) or
+         (cfgm.ButtonStandard <> cmain^.ButtonStandard) or
+         (cfgm.ThemeName <> cmain^.ThemeName)
+         then themechange:=true;
+      cfgm:=cmain^;
+    end;
     if themechange then SetTheme;
-    cfgm.updall:=f_config.applyall.checked;
+    cfgm.updall:=applyall;
     if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
     if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
-    for i:=0 to f_config.ccat.GCatNum-1 do begin
-    if f_config.ccat.GCatLst[i].Actif then begin
-      if not
-      catalog.GetInfo(f_config.ccat.GCatLst[i].path,
-                      f_config.ccat.GCatLst[i].shortname,
-                      f_config.ccat.GCatLst[i].magmax,
-                      f_config.ccat.GCatLst[i].cattype,
-                      f_config.ccat.GCatLst[i].version,
-                      f_config.ccat.GCatLst[i].name)
-      then f_config.ccat.GCatLst[i].Actif:=false;
+    if ccat<>nil then begin
+      for i:=0 to ccat^.GCatNum-1 do begin
+        if ccat^.GCatLst[i].Actif then begin
+          if not
+          catalog.GetInfo(ccat^.GCatLst[i].path,
+                          ccat^.GCatLst[i].shortname,
+                          ccat^.GCatLst[i].magmax,
+                          ccat^.GCatLst[i].cattype,
+                          ccat^.GCatLst[i].version,
+                          ccat^.GCatLst[i].name)
+          then ccat^.GCatLst[i].Actif:=false;
+        end;
+      end;
+      catalog.cfgcat:=ccat^;
     end;
-    end;
-    f_getdss.cfgdss:=f_config.cdss;
-    catalog.cfgcat:=f_config.ccat;
-    catalog.cfgshr:=f_config.cshr;
-    def_cfgsc:=f_config.csc;
-    def_cfgplot:=f_config.cplot;
+    if cdss<>nil then f_getdss.cfgdss:=cdss^;
+    if cshr<>nil then catalog.cfgshr:=cshr^;
+    if csc<>nil  then def_cfgsc:=csc^;
+    if cplot<>nil then def_cfgplot:=cplot^;
     def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
     InitFonts;
