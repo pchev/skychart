@@ -28,13 +28,16 @@ interface
 uses u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
-  WizardNotebook;
+  WizardNotebook, ButtonPanel;
 
 type
 
   { Tf_config_time }
 
   Tf_config_time = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;
@@ -42,6 +45,7 @@ type
     Label147: TLabel;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    Panel1: TPanel;
     Panel7: TPanel;
     Label134: TLabel;
     Label148: TLabel;
@@ -86,6 +90,7 @@ type
     AllSim: TButton;
     NoSim: TButton;
     WizardNotebook1: TWizardNotebook;
+    procedure Button2Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -108,6 +113,7 @@ type
   private
     { Private declarations }
     LockChange: boolean;
+    FApplyConfig: TNotifyEvent;
     procedure ShowTime;
   public
     { Public declarations }
@@ -122,6 +128,7 @@ type
     cplot : Pconf_plot;
     cmain : Pconf_main;
     constructor Create(AOwner:TComponent); override;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
@@ -217,6 +224,11 @@ t_sec.enabled:=d_year.enabled;
 bitbtn4.enabled:=d_year.enabled;
 tz.enabled:=d_year.enabled;
 ShowTime;
+end;
+
+procedure Tf_config_time.Button2Click(Sender: TObject);
+begin
+  if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
 procedure Tf_config_time.CheckBox2Click(Sender: TObject);

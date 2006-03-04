@@ -1,5 +1,5 @@
 object f_main: Tf_main
-  Left = 239
+  Left = 273
   Height = 573
   Top = 119
   Width = 871
@@ -3397,6 +3397,17 @@ object f_main: Tf_main
         GroupIndex = 2
         OnClick = SaveConfigOnExitExecute
       end
+      object N11: TMenuItem
+        Caption = '-'
+      end
+      object DateConfig1: TMenuItem
+        Action = SetupTime
+        OnClick = SetupTimeExecute
+      end
+      object ObsConfig1: TMenuItem
+        Action = SetupObsevartory
+        OnClick = SetupObsevartoryExecute
+      end
     end
     object View1: TMenuItem
       Caption = 'View'
@@ -4323,6 +4334,17 @@ object f_main: Tf_main
       Caption = 'Close Chart'
       Hint = 'Close Chart'
       OnExecute = FileClose1Execute
+    end
+    object SetupTime: TAction
+      Category = 'Setup'
+      Caption = 'Date / Time'
+      Hint = 'Set date and time'
+      OnExecute = SetupTimeExecute
+    end
+    object SetupObsevartory: TAction
+      Category = 'Setup'
+      Caption = 'Obsevartory'
+      OnExecute = SetupObsevartoryExecute
     end
   end
   object SaveDialog: TSaveDialog
