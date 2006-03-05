@@ -1,45 +1,37 @@
 object f_config_display: Tf_config_display
   Left = 240
-  Height = 536
+  Height = 532
   Top = 127
-  Width = 524
-  HorzScrollBar.Page = 523
-  VertScrollBar.Page = 535
+  Width = 523
+  HorzScrollBar.Page = 522
+  VertScrollBar.Page = 531
   ActiveControl = StarSizeBar
   Caption = 'f_config_display'
-  ClientHeight = 536
-  ClientWidth = 524
+  ClientHeight = 532
+  ClientWidth = 523
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 90
   object MainPanel: TPanel
-    Left = 8
-    Height = 480
-    Top = 5
-    Width = 500
-    ClientHeight = 480
-    ClientWidth = 500
+    Height = 482
+    Width = 523
+    Align = alClient
+    ClientHeight = 482
+    ClientWidth = 523
     ParentColor = False
     TabOrder = 0
     object WizardNotebook1: TWizardNotebook
       Left = 1
-      Height = 478
+      Height = 480
       Top = 1
-      Width = 498
+      Width = 521
       Align = alClient
       PageIndex = 0
       ShowTabs = False
       object Page1: TPage
-        Caption = 'Page1'
-        ClientWidth = 498
-        ClientHeight = 478
-        object Label14: TLabel
-          Height = 13
-          Width = 85
-          Caption = 'Display Setting'
-          Color = clNone
-          ParentColor = False
-        end
+        Caption = 'Display'
+        ClientWidth = 521
+        ClientHeight = 480
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -230,9 +222,9 @@ object f_config_display: Tf_config_display
         end
       end
       object Page2: TPage
-        Caption = 'Page2'
-        ClientWidth = 498
-        ClientHeight = 478
+        Caption = 'Colour'
+        ClientWidth = 521
+        ClientHeight = 480
         object Label181: TLabel
           Left = 86
           Height = 13
@@ -728,16 +720,9 @@ object f_config_display: Tf_config_display
         end
       end
       object Page3: TPage
-        Caption = 'Page3'
-        ClientWidth = 498
-        ClientHeight = 478
-        object lblDSO: TLabel
-          Height = 13
-          Width = 138
-          Caption = 'Deep-sky object colours'
-          Color = clNone
-          ParentColor = False
-        end
+        Caption = 'Deep-sky colour'
+        ClientWidth = 521
+        ClientHeight = 480
         object lblDSOCScheme: TLabel
           Left = 16
           Height = 13
@@ -1255,16 +1240,9 @@ object f_config_display: Tf_config_display
         end
       end
       object Page4: TPage
-        Caption = 'Page4'
-        ClientWidth = 498
-        ClientHeight = 478
-        object Label200: TLabel
-          Height = 13
-          Width = 98
-          Caption = 'Sky Color Setting'
-          Color = clNone
-          ParentColor = False
-        end
+        Caption = 'Sky colour'
+        ClientWidth = 521
+        ClientHeight = 480
         object Label202: TLabel
           Left = 24
           Height = 57
@@ -1400,16 +1378,9 @@ object f_config_display: Tf_config_display
         end
       end
       object Page5: TPage
-        Caption = 'Page5'
-        ClientWidth = 498
-        ClientHeight = 478
-        object Label9: TLabel
-          Height = 13
-          Width = 73
-          Caption = 'Lines Setting'
-          Color = clNone
-          ParentColor = False
-        end
+        Caption = 'Lines'
+        ClientWidth = 521
+        ClientHeight = 480
         object EqGrid: TCheckBox
           Left = 16
           Height = 28
@@ -1565,16 +1536,9 @@ object f_config_display: Tf_config_display
         end
       end
       object Page6: TPage
-        Caption = 'Page6'
-        ClientWidth = 498
-        ClientHeight = 478
-        object Label10: TLabel
-          Height = 13
-          Width = 80
-          Caption = 'Labels Setting'
-          Color = clNone
-          ParentColor = False
-        end
+        Caption = 'Labels'
+        ClientWidth = 521
+        ClientHeight = 480
         object MagLabel: TRadioGroup
           Left = 16
           Height = 73
@@ -1982,9 +1946,9 @@ object f_config_display: Tf_config_display
         end
       end
       object Page7: TPage
-        Caption = 'Page7'
-        ClientWidth = 498
-        ClientHeight = 478
+        Caption = 'Fonts'
+        ClientWidth = 521
+        ClientHeight = 480
         object Bevel10: TBevel
           Name = 'Bevel10'
           Left = 8
@@ -1992,13 +1956,6 @@ object f_config_display: Tf_config_display
           Top = 32
           Width = 393
           Shape = bsFrame
-        end
-        object Label51: TLabel
-          Height = 13
-          Width = 74
-          Caption = 'Fonts Setting'
-          Color = clNone
-          ParentColor = False
         end
         object Label121: TLabel
           Left = 16
@@ -2396,9 +2353,9 @@ object f_config_display: Tf_config_display
         end
       end
       object Page8: TPage
-        Caption = 'Page8'
-        ClientWidth = 498
-        ClientHeight = 478
+        Caption = 'Finder circle'
+        ClientWidth = 521
+        ClientHeight = 480
         object Label307: TLabel
           Left = 80
           Height = 13
@@ -2539,9 +2496,9 @@ object f_config_display: Tf_config_display
         end
       end
       object Page9: TPage
-        Caption = 'Page9'
-        ClientWidth = 498
-        ClientHeight = 478
+        Caption = 'Finder rectangle'
+        ClientWidth = 521
+        ClientHeight = 480
         object Label308: TLabel
           Left = 80
           Height = 13
@@ -2652,7 +2609,7 @@ object f_config_display: Tf_config_display
           TabOrder = 9
         end
         object RectangleGrid: TStringGrid
-          Left = 87
+          Left = 95
           Height = 349
           Top = 50
           Width = 380
@@ -2683,16 +2640,60 @@ object f_config_display: Tf_config_display
       end
     end
   end
+  object Panel1: TPanel
+    Height = 50
+    Top = 482
+    Width = 523
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 523
+    TabOrder = 1
+    object Button2: TButton
+      Left = 203
+      Height = 25
+      Top = 10
+      Width = 77
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 2
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button4: TButton
+      Left = 307
+      Height = 25
+      Top = 10
+      Width = 77
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 2
+      Caption = 'Apply'
+      OnClick = Button4Click
+      TabOrder = 1
+    end
+    object Button5: TButton
+      Left = 416
+      Height = 25
+      Top = 10
+      Width = 77
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 2
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
+    end
+  end
   object FontDialog1: TFontDialog
     Title = 'Select a font'
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
-    left = 504
-    top = 48
+    left = 496
+    top = 32
   end
   object ColorDialog1: TColorDialog
     Title = 'Select color'
-    left = 504
+    left = 496
     top = 96
   end
 end
