@@ -36,7 +36,7 @@ uses
   {$ifdef unix}
   {$endif}
   cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
-  pu_config_time, pu_config_observatory,
+  pu_config_time, pu_config_observatory, pu_config_display,
   u_constant, u_util, blcksock, synsock, lazjpeg,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
@@ -84,9 +84,21 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    SetupDisplay: TAction;
+    SetupColour: TAction;
+    SetupLines: TAction;
+    SetupLabels: TAction;
+    SetupFonts: TAction;
+    SetupFinder: TAction;
     ObsConfig1: TMenuItem;
     N11: TMenuItem;
-    SetupObsevartory: TAction;
+    SetupObservatory: TAction;
     DateConfig1: TMenuItem;
     SetupTime: TAction;
     Bevel1: TBevel;
@@ -399,7 +411,13 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
-    procedure SetupObsevartoryExecute(Sender: TObject);
+    procedure SetupColourExecute(Sender: TObject);
+    procedure SetupDisplayExecute(Sender: TObject);
+    procedure SetupFinderExecute(Sender: TObject);
+    procedure SetupFontsExecute(Sender: TObject);
+    procedure SetupLabelsExecute(Sender: TObject);
+    procedure SetupLinesExecute(Sender: TObject);
+    procedure SetupObservatoryExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
@@ -501,6 +519,7 @@ type
     { Private declarations }
     ConfigTime: Tf_config_time;
     ConfigObservatory: Tf_config_observatory;
+    ConfigDisplay: Tf_config_display;
     cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB : Boolean;
     InitialChartNum: integer;
@@ -517,8 +536,12 @@ type
     procedure ApplyConfig(Sender: TObject);
     procedure ApplyConfigTime(Sender: TObject);
     procedure ApplyConfigObservatory(Sender: TObject);
+    procedure ApplyConfigDisplay(Sender: TObject);
     procedure SetChildFocus(Sender: TObject);
     procedure SetNightVision(night: boolean);
+    procedure SetupObservatoryPage(page:integer);
+    procedure SetupTimePage(page:integer);
+    procedure SetupDisplayPage(pagegroup:integer);
   {$ifdef win32}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -1806,6 +1829,11 @@ end;
 
 procedure Tf_main.SetupTimeExecute(Sender: TObject);
 begin
+SetupTimePage(0);
+end;
+
+procedure Tf_main.SetupTimePage(page:integer);
+begin
 if ConfigTime=nil then begin
    ConfigTime:=Tf_config_time.Create(self);
    ConfigTime.WizardNotebook1.ShowTabs:=true;
@@ -1824,6 +1852,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigTime.cmain^:=cfgm;
 formpos(ConfigTime,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigTime.WizardNotebook1.PageIndex:=page;
 ConfigTime.showmodal;
 if ConfigTime.ModalResult=mrOK then begin
  activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
@@ -1835,7 +1864,12 @@ begin
  activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
 end;
 
-procedure Tf_main.SetupObsevartoryExecute(Sender: TObject);
+procedure Tf_main.SetupObservatoryExecute(Sender: TObject);
+begin
+SetupObservatoryPage(0);
+end;
+
+procedure Tf_main.SetupObservatoryPage(page:integer);
 begin
 if ConfigObservatory=nil then begin
    ConfigObservatory:=Tf_config_observatory.Create(self);
@@ -1856,6 +1890,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigObservatory.cmain^:=cfgm;
 formpos(ConfigObservatory,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigObservatory.WizardNotebook1.PageIndex:=page;
 ConfigObservatory.showmodal;
 if ConfigObservatory.ModalResult=mrOK then begin
  activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
@@ -1865,6 +1900,142 @@ end;
 procedure Tf_main.ApplyConfigObservatory(Sender: TObject);
 begin
  activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
+end;
+
+
+procedure Tf_main.SetupColourExecute(Sender: TObject);
+begin
+SetupDisplayPage(1);
+end;
+
+procedure Tf_main.SetupDisplayExecute(Sender: TObject);
+begin
+SetupDisplayPage(0);
+end;
+
+procedure Tf_main.SetupFinderExecute(Sender: TObject);
+begin
+SetupDisplayPage(5);
+end;
+
+procedure Tf_main.SetupFontsExecute(Sender: TObject);
+begin
+SetupDisplayPage(4);
+end;
+
+procedure Tf_main.SetupLabelsExecute(Sender: TObject);
+begin
+SetupDisplayPage(3);
+end;
+
+procedure Tf_main.SetupLinesExecute(Sender: TObject);
+begin
+SetupDisplayPage(2);
+end;
+
+procedure Tf_main.SetupDisplayPage(pagegroup:integer);
+begin
+if ConfigDisplay=nil then begin
+   ConfigDisplay:=Tf_config_display.Create(self);
+   ConfigDisplay.WizardNotebook1.ShowTabs:=true;
+   ConfigDisplay.WizardNotebook1.PageIndex:=0;
+   ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
+end;
+ConfigDisplay.ccat^:=catalog.cfgcat;
+ConfigDisplay.cshr^:=catalog.cfgshr;
+ConfigDisplay.cplot^:=def_cfgplot;
+ConfigDisplay.csc^:=def_cfgsc;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigDisplay.csc^:=sc.cfgsc^;
+   ConfigDisplay.cplot^:=sc.plot.cfgplot^;
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigDisplay.cmain^:=cfgm;
+formpos(ConfigDisplay,mouse.cursorpos.x,mouse.cursorpos.y);
+case pagegroup of
+ 0 : begin  //display mode
+     ConfigDisplay.WizardNotebook1.Page[0].Visible:=true;
+     ConfigDisplay.WizardNotebook1.Page[1].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     ConfigDisplay.WizardNotebook1.PageIndex:=0;
+     end;
+ 1 : begin  //colours
+     ConfigDisplay.WizardNotebook1.Page[0].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[1].Visible:=true;
+     ConfigDisplay.WizardNotebook1.Page[2].Visible:=true;
+     ConfigDisplay.WizardNotebook1.Page[3].Visible:=true;
+     ConfigDisplay.WizardNotebook1.Page[4].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     ConfigDisplay.WizardNotebook1.PageIndex:=1;
+     end;
+ 2 : begin  //lines
+     ConfigDisplay.WizardNotebook1.Page[0].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[1].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].Visible:=true;
+     ConfigDisplay.WizardNotebook1.Page[5].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     ConfigDisplay.WizardNotebook1.PageIndex:=4;
+     end;
+ 3 : begin  //labels
+     ConfigDisplay.WizardNotebook1.Page[0].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[1].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].Visible:=true;
+     ConfigDisplay.WizardNotebook1.Page[6].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     ConfigDisplay.WizardNotebook1.PageIndex:=5;
+     end;
+ 4 : begin  //fonts
+     ConfigDisplay.WizardNotebook1.Page[0].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[1].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].Visible:=true;
+     ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     ConfigDisplay.WizardNotebook1.PageIndex:=6;
+     end;
+ 5 : begin  //finder
+     ConfigDisplay.WizardNotebook1.Page[0].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[1].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].Visible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].Visible:=true;
+     ConfigDisplay.WizardNotebook1.Page[8].Visible:=true;
+     ConfigDisplay.WizardNotebook1.PageIndex:=7;
+     end;
+end;
+ConfigDisplay.showmodal;
+if ConfigDisplay.ModalResult=mrOK then begin
+ activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
+end;
+end;
+
+procedure Tf_main.ApplyConfigDisplay(Sender: TObject);
+begin
+ activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
 end;
 
 function Tf_main.PrepareAsteroid(jdt:double; msg:Tstrings):boolean;

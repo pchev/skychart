@@ -35,9 +35,13 @@ type
   { Tf_config_display }
 
   Tf_config_display = class(TForm)
+    Button2: TButton;
+    Button4: TButton;
+    Button5: TButton;
     ConstlFile: TFileNameEdit;
     ConstbFile: TFileNameEdit;
     GroupBox6: TGroupBox;
+    Panel1: TPanel;
     ThemeList: TComboBox;
     MainPanel: TPanel;
     Page1: TPage;
@@ -49,7 +53,6 @@ type
     Page7: TPage;
     Page8: TPage;
     Page9: TPage;
-    Label14: TLabel;
     NightButton: TRadioGroup;
     StandardButton: TRadioGroup;
     stardisplay: TRadioGroup;
@@ -68,7 +71,6 @@ type
     StarButton3: TButton;
     StarButton4: TButton;
     Bevel10: TBevel;
-    Label51: TLabel;
     Label121: TLabel;
     Label122: TLabel;
     Label123: TLabel;
@@ -131,7 +133,6 @@ type
     Shape26: TShape;
     Shape27: TShape;
     Shape28: TShape;
-    Label200: TLabel;
     Label202: TLabel;
     Label205: TLabel;
     Label208: TLabel;
@@ -145,13 +146,11 @@ type
     Shape23: TShape;
     Shape24: TShape;
     Button3: TButton;
-    Label9: TLabel;
     EqGrid: TCheckBox;
     CGrid: TCheckBox;
     ecliptic: TCheckBox;
     galactic: TCheckBox;
     GridNum: TCheckBox;
-    Label10: TLabel;
     MagLabel: TRadioGroup;
     constlabel: TRadioGroup;
     Label307: TLabel;
@@ -184,7 +183,6 @@ type
     ColorDialog1: TColorDialog;
     Showlabelall: TCheckBox;
     ShowChartInfo: TCheckBox;
-    lblDSO: TLabel;
     lblDSOCScheme: TLabel;
     gbDSOCOverrides: TGroupBox;
     lblAst: TLabel;
@@ -293,6 +291,7 @@ type
     Shape12: TShape;
     Shape11: TShape;
     WizardNotebook1: TWizardNotebook;
+    procedure Button4Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure NightButtonClick(Sender: TObject);
@@ -374,6 +373,7 @@ type
 //  End of deep-sky objects colour
   private
     { Private declarations }
+    FApplyConfig: TNotifyEvent;
     LockChange: boolean;
     procedure ShowDisplay;
     procedure ShowFonts;
@@ -401,6 +401,7 @@ type
     cplot : ^conf_plot;
     cmain : ^conf_main;
     constructor Create(AOwner:TComponent); override;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
@@ -452,6 +453,11 @@ end;
 procedure Tf_config_display.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
+end;
+
+procedure Tf_config_display.Button4Click(Sender: TObject);
+begin
+  if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
 procedure Tf_config_display.ShowDisplay;
