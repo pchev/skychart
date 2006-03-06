@@ -27,7 +27,7 @@ interface
 
 uses  u_constant, u_util, cu_fits, cu_database, 
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources, WizardNotebook,
+  StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
   EditBtn;
 
 type
@@ -83,7 +83,7 @@ type
     reallist: TCheckBox;
     realskymax: TLongEdit;
     realskymb: TLongEdit;
-    WizardNotebook1: TWizardNotebook;
+    Notebook1: TNotebook;
     procedure FormCreate(Sender: TObject);
     procedure imgpathChange(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);

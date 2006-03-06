@@ -46,7 +46,7 @@ object f_config_catalog: Tf_config_catalog
     ClientWidth = 500
     ParentColor = False
     TabOrder = 0
-    object WizardNotebook1: TWizardNotebook
+    object Notebook1: TNotebook
       Left = 1
       Height = 424
       Top = 1

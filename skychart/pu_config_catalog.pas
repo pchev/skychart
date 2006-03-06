@@ -28,7 +28,7 @@ interface
 uses  u_constant, u_util, cu_catalog,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
-  WizardNotebook, EditBtn;
+  EditBtn;
 
 type
 
@@ -199,7 +199,7 @@ type
     Cat2Box: TCheckBox;
     StringGrid2: TStringGrid;
     OpenDialog1: TOpenDialog;
-    WizardNotebook1: TWizardNotebook;
+    Notebook1: TNotebook;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure StringGrid3DrawCell(Sender: TObject; ACol, ARow: Integer;
@@ -269,7 +269,7 @@ begin
  cplot:=@mycplot;
  cmain:=@mycmain;
  inherited Create(AOwner);
- WizardNotebook1.ShowTabs:=false;
+ Notebook1.ShowTabs:=false;
 end;
 
 procedure Tf_config_catalog.FormShow(Sender: TObject);

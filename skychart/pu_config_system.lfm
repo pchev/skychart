@@ -21,7 +21,7 @@ object f_config_system: Tf_config_system
     ClientWidth = 500
     ParentColor = False
     TabOrder = 0
-    object WizardNotebook1: TWizardNotebook
+    object Notebook1: TNotebook
       Left = 1
       Height = 478
       Top = 1

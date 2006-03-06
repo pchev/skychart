@@ -5,6 +5,7 @@ object f_config_pictures: Tf_config_pictures
   Width = 526
   HorzScrollBar.Page = 525
   VertScrollBar.Page = 534
+  ActiveControl = ScanImages
   Caption = 'f_config_pictures'
   ClientHeight = 535
   ClientWidth = 526
@@ -20,7 +21,7 @@ object f_config_pictures: Tf_config_pictures
     ClientWidth = 500
     ParentColor = False
     TabOrder = 0
-    object WizardNotebook1: TWizardNotebook
+    object Notebook1: TNotebook
       Left = 1
       Height = 478
       Top = 1

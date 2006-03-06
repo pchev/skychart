@@ -27,7 +27,7 @@ interface
 
 uses u_constant, u_projection, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources, MaskEdit, WizardNotebook,
+  StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources, MaskEdit,
   Buttons;
 
 type
@@ -250,9 +250,9 @@ type
     projectiontype: TRadioGroup;
     StarAutoBox: TCheckBox;
     StarBox: TCheckBox;
-    WizardNotebook1: TWizardNotebook;
+    Notebook1: TNotebook;
     procedure Button1Click(Sender: TObject);
-    procedure WizardNotebook1PageChanged(Sender: TObject);
+    procedure Notebook1PageChanged(Sender: TObject);
     procedure equinoxtypeClick(Sender: TObject);
     procedure equinox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -541,11 +541,11 @@ cshr.FieldNum[10]:=360;
 ShowField;
 end;
 
-procedure Tf_config_chart.WizardNotebook1PageChanged(Sender: TObject);
+procedure Tf_config_chart.Notebook1PageChanged(Sender: TObject);
 begin
-if (WizardNotebook1.ActivePage='Page3') or
-   (WizardNotebook1.ActivePage='Page4') or
-   (WizardNotebook1.ActivePage='Page5')
+if (Notebook1.ActivePage='Page3') or
+   (Notebook1.ActivePage='Page4') or
+   (Notebook1.ActivePage='Page5')
 then
    FOVPanel.Visible:=true
 else
