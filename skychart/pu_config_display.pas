@@ -28,7 +28,7 @@ interface
 uses  u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
-  WizardNotebook, EditBtn;
+  EditBtn;
 
 type
 
@@ -290,7 +290,7 @@ type
     Shape17: TShape;
     Shape12: TShape;
     Shape11: TShape;
-    WizardNotebook1: TWizardNotebook;
+    WizardNotebook1: TNotebook;
     procedure Button4Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -395,11 +395,11 @@ type
     mycshr : conf_shared;
     mycplot : conf_plot;
     mycmain : conf_main;
-    csc : ^conf_skychart;
-    ccat : ^conf_catalog;
-    cshr : ^conf_shared;
-    cplot : ^conf_plot;
-    cmain : ^conf_main;
+    csc : Pconf_skychart;
+    ccat : Pconf_catalog;
+    cshr : Pconf_shared;
+    cplot : Pconf_plot;
+    cmain : Pconf_main;
     constructor Create(AOwner:TComponent); override;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
@@ -462,7 +462,7 @@ end;
 
 procedure Tf_config_display.ShowDisplay;
 begin
- stardisplay.itemindex:=cplot.starplot;
+ stardisplay.itemindex:=cplot^.starplot;
  nebuladisplay.itemindex:=cplot.nebplot;
  StarSizeBar.position:=round(cplot.partsize*10);
  StarContrastBar.position:=cplot.contrast;
@@ -779,8 +779,9 @@ end;
 
 procedure Tf_config_display.stardisplayClick(Sender: TObject);
 begin
- cplot.starplot:=stardisplay.itemindex;
- starvisual.visible:= (cplot.starplot=2);
+if LockChange then exit;
+cplot.starplot:=stardisplay.itemindex;
+starvisual.visible:= (cplot.starplot=2);
 end;
 
 procedure Tf_config_display.StarSizeBarChange(Sender: TObject);
