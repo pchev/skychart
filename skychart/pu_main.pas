@@ -1836,10 +1836,12 @@ procedure Tf_main.SetupTimePage(page:integer);
 begin
 if ConfigTime=nil then begin
    ConfigTime:=Tf_config_time.Create(self);
+   {$ifdef win32}ScaleForm(ConfigTime,Screen.PixelsPerInch/96);{$endif}
    ConfigTime.Notebook1.ShowTabs:=true;
    ConfigTime.Notebook1.PageIndex:=0;
    ConfigTime.onApplyConfig:=ApplyConfigTime;
 end;
+{$ifdef win32}SetFormNightVision(ConfigTime,nightvision);{$endif}
 ConfigTime.ccat^:=catalog.cfgcat;
 ConfigTime.cshr^:=catalog.cfgshr;
 ConfigTime.cplot^:=def_cfgplot;
@@ -1873,10 +1875,12 @@ procedure Tf_main.SetupObservatoryPage(page:integer);
 begin
 if ConfigObservatory=nil then begin
    ConfigObservatory:=Tf_config_observatory.Create(self);
+   {$ifdef win32} ScaleForm(ConfigObservatory,Screen.PixelsPerInch/96);{$endif}
    ConfigObservatory.Notebook1.ShowTabs:=true;
    ConfigObservatory.Notebook1.PageIndex:=0;
    ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
 end;
+{$ifdef win32}SetFormNightVision(ConfigObservatory,nightvision);{$endif}
 ConfigObservatory.cdb:=cdcdb;
 ConfigObservatory.ccat^:=catalog.cfgcat;
 ConfigObservatory.cshr^:=catalog.cfgshr;
@@ -1937,10 +1941,12 @@ procedure Tf_main.SetupDisplayPage(pagegroup:integer);
 begin
 if ConfigDisplay=nil then begin
    ConfigDisplay:=Tf_config_display.Create(self);
+   {$ifdef win32} ScaleForm(ConfigDisplay,Screen.PixelsPerInch/96);{$endif}
    ConfigDisplay.Notebook1.ShowTabs:=true;
    ConfigDisplay.Notebook1.PageIndex:=0;
    ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
 end;
+{$ifdef win32}SetFormNightVision(ConfigDisplay,nightvision);{$endif}
 ConfigDisplay.ccat^:=catalog.cfgcat;
 ConfigDisplay.cshr^:=catalog.cfgshr;
 ConfigDisplay.cplot^:=def_cfgplot;
