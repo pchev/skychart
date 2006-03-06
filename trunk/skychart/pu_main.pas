@@ -1964,6 +1964,17 @@ case pagegroup of
      ConfigDisplay.WizardNotebook1.Page[6].Visible:=false;
      ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
      ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     {$ifdef win32}
+     ConfigDisplay.WizardNotebook1.Page[0].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.Page[1].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].TabVisible:=false;
+     {$endif}
      ConfigDisplay.WizardNotebook1.PageIndex:=0;
      end;
  1 : begin  //colours
@@ -1977,6 +1988,18 @@ case pagegroup of
      ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
      ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
      ConfigDisplay.WizardNotebook1.PageIndex:=1;
+     {$ifdef win32}
+     ConfigDisplay.WizardNotebook1.Page[0].Free;
+     ConfigDisplay.WizardNotebook1.Page[0].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.Page[1].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.Page[2].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.Page[3].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.PageIndex:=0;
+     {$endif}
      end;
  2 : begin  //lines
      ConfigDisplay.WizardNotebook1.Page[0].Visible:=false;
@@ -1988,6 +2011,17 @@ case pagegroup of
      ConfigDisplay.WizardNotebook1.Page[6].Visible:=false;
      ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
      ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     {$ifdef win32}
+     ConfigDisplay.WizardNotebook1.Page[0].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[1].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.Page[5].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].TabVisible:=false;
+     {$endif}
      ConfigDisplay.WizardNotebook1.PageIndex:=4;
      end;
  3 : begin  //labels
@@ -2000,6 +2034,17 @@ case pagegroup of
      ConfigDisplay.WizardNotebook1.Page[6].Visible:=false;
      ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
      ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     {$ifdef win32}
+     ConfigDisplay.WizardNotebook1.Page[0].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[1].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.Page[6].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[7].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].TabVisible:=false;
+     {$endif}
      ConfigDisplay.WizardNotebook1.PageIndex:=5;
      end;
  4 : begin  //fonts
@@ -2012,6 +2057,17 @@ case pagegroup of
      ConfigDisplay.WizardNotebook1.Page[6].Visible:=true;
      ConfigDisplay.WizardNotebook1.Page[7].Visible:=false;
      ConfigDisplay.WizardNotebook1.Page[8].Visible:=false;
+     {$ifdef win32}
+     ConfigDisplay.WizardNotebook1.Page[0].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[1].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[2].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[3].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[4].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[5].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[6].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.Page[7].TabVisible:=false;
+     ConfigDisplay.WizardNotebook1.Page[8].TabVisible:=false;
+     {$endif}
      ConfigDisplay.WizardNotebook1.PageIndex:=6;
      end;
  5 : begin  //finder
@@ -2025,12 +2081,28 @@ case pagegroup of
      ConfigDisplay.WizardNotebook1.Page[7].Visible:=true;
      ConfigDisplay.WizardNotebook1.Page[8].Visible:=true;
      ConfigDisplay.WizardNotebook1.PageIndex:=7;
+     {$ifdef win32}
+     ConfigDisplay.WizardNotebook1.Page[0].Free;
+     ConfigDisplay.WizardNotebook1.Page[0].Free;
+     ConfigDisplay.WizardNotebook1.Page[0].Free;
+     ConfigDisplay.WizardNotebook1.Page[0].Free;
+     ConfigDisplay.WizardNotebook1.Page[0].Free;
+     ConfigDisplay.WizardNotebook1.Page[0].Free;
+     ConfigDisplay.WizardNotebook1.Page[0].Free;
+     ConfigDisplay.WizardNotebook1.Page[0].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.Page[1].TabVisible:=true;
+     ConfigDisplay.WizardNotebook1.PageIndex:=0;
+     {$endif}
      end;
 end;
 ConfigDisplay.showmodal;
 if ConfigDisplay.ModalResult=mrOK then begin
  activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
 end;
+{$ifdef win32} // todo: remove all ifdef after correcting TNotebook.page[].visible
+ConfigDisplay.Free;
+ConfigDisplay:=nil;
+{$endif}
 end;
 
 procedure Tf_main.ApplyConfigDisplay(Sender: TObject);
