@@ -2600,7 +2600,10 @@ if Ftelescope.scopelibok then begin
       dec:=dec*deg2rad;
       precession(jd2000,sc.cfgsc.JDChart,ra,dec);
       if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
-      if sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
+      if sc.cfgsc.moved then begin
+         Image1.Invalidate;
+         if assigned(FChartMove) then FChartMove(self);
+      end;
       TelescopeTimer.Interval:=500;
       TelescopeTimer.Enabled:=true;
    end;
