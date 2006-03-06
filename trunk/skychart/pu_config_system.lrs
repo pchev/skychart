@@ -1,4 +1,4 @@
-{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+{ This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_config_system','FORMDATA',[
   'TPF0'#16'Tf_config_system'#15'f_config_system'#4'Left'#3#17#1#6'Height'#3#16
@@ -7,42 +7,42 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +'m'#12'ClientHeight'#3#16#2#11'ClientWidth'#3#29#2#8'OnCreate'#7#10'FormCrea'
   +'te'#6'OnShow'#7#8'FormShow'#13'PixelsPerInch'#2'Z'#0#6'TPanel'#9'MainPanel'
   +#4'Left'#2#8#6'Height'#3#224#1#3'Top'#2#8#5'Width'#3#244#1#12'ClientHeight'#3
-  +#224#1#11'ClientWidth'#3#244#1#11'ParentColor'#8#8'TabOrder'#2#0#0#15'TWizar'
-  +'dNotebook'#15'WizardNotebook1'#4'Left'#2#1#6'Height'#3#222#1#3'Top'#2#1#5'W'
-  +'idth'#3#242#1#5'Align'#7#8'alClient'#9'PageIndex'#2#0#8'ShowTabs'#8#0#5'TPa'
-  +'ge'#5'Page1'#7'Caption'#6#5'Page1'#11'ClientWidth'#3#242#1#12'ClientHeight'
-  +#3#222#1#0#6'TLabel'#8'Label153'#6'Height'#2#13#5'Width'#2'S'#7'Caption'#6#14
-  +'System Setting'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TGroupBox'#8'M'
-  +'ysqlBox'#4'Left'#2#16#6'Height'#2'a'#3'Top'#2'0'#5'Width'#3#185#1#7'Caption'
-  +#6#15'MySQL  Database'#12'ClientHeight'#2'P'#11'ClientWidth'#3#181#1#8'TabOr'
-  +'der'#2#0#0#6'TLabel'#7'Label77'#4'Left'#2#16#6'Height'#2#13#3'Top'#2#12#5'W'
-  +'idth'#2'9'#7'Caption'#6#8'DB Name:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0
-  +#0#6'TLabel'#7'Label84'#4'Left'#3#168#0#6'Height'#2#13#3'Top'#2#12#5'Width'#2
-  +'A'#7'Caption'#6#10'Host Name:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6
-  +'TLabel'#7'Label85'#4'Left'#3'H'#1#6'Height'#2#13#3'Top'#2#12#5'Width'#2#26#7
-  +'Caption'#6#5'Port:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7
-  +'Label86'#4'Left'#2#16#6'Height'#2#13#3'Top'#2'4'#5'Width'#2''''#7'Caption'#6
-  +#7'Userid:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label133'
-  +#4'Left'#3#208#0#6'Height'#2#13#3'Top'#2'4'#5'Width'#2'7'#7'Caption'#6#8'Pas'
-  +'sword'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#6'dbname'#4'Left'
-  +#2'P'#6'Height'#2#21#3'Top'#2#8#5'Width'#2'A'#8'OnChange'#7#12'dbnameChange'
-  +#8'TabOrder'#2#0#0#0#9'TLongEdit'#6'dbport'#4'Name'#6#6'dbport'#4'Left'#3'p'
-  +#1#6'Height'#2#22#3'Top'#2#10#5'Width'#2'9'#11'BorderStyle'#7#8'bsSingle'#11
-  +'ParentColor'#8#8'TabOrder'#2#1#8'OnChange'#7#12'dbportChange'#5'Value'#3#234
-  +#12#0#0#5'TEdit'#6'dbhost'#4'Left'#3#240#0#6'Height'#2#21#3'Top'#2#8#5'Width'
-  +#2'A'#8'OnChange'#7#12'dbhostChange'#8'TabOrder'#2#2#4'Text'#6#6'dbhost'#0#0
-  +#5'TEdit'#6'dbuser'#4'Left'#2'P'#6'Height'#2#21#3'Top'#2'0'#5'Width'#2'd'#8
-  +'OnChange'#7#12'dbuserChange'#8'TabOrder'#2#3#4'Text'#6#6'dbuser'#0#0#5'TEdi'
-  +'t'#6'dbpass'#4'Left'#3#16#1#6'Height'#2#21#3'Top'#2'0'#5'Width'#2'd'#8'OnCh'
-  +'ange'#7#12'dbpassChange'#12'PasswordChar'#6#1'*'#8'TabOrder'#2#4#4'Text'#6#6
-  +'dbpass'#0#0#0#9'TGroupBox'#9'SqliteBox'#4'Left'#2#16#6'Height'#2'a'#3'Top'#2
-  +'0'#5'Width'#3#185#1#7'Caption'#6#15'Sqlite Database'#12'ClientHeight'#2'P'
-  +#11'ClientWidth'#3#181#1#8'TabOrder'#2#3#7'Visible'#8#0#6'TLabel'#6'Label1'#4
-  +'Left'#2#13#6'Height'#2#13#3'Top'#2'$'#5'Width'#2'Q'#7'Caption'#6#15'Databas'
-  +'e file: '#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#12'dbnamesqli'
-  +'te'#4'Left'#2'}'#6'Height'#2#21#3'Top'#2' '#5'Width'#3#25#1#5'Color'#7#9'cl'
-  +'BtnFace'#8'OnChange'#7#18'dbnamesqliteChange'#8'ReadOnly'#9#8'TabOrder'#2#0
-  +#4'Text'#6#12'dbnamesqlite'#0#0#0#9'TGroupBox'#11'GroupBoxDir'#4'Left'#2#16#6
+  +#224#1#11'ClientWidth'#3#244#1#11'ParentColor'#8#8'TabOrder'#2#0#0#9'TNotebo'
+  +'ok'#9'Notebook1'#4'Left'#2#1#6'Height'#3#222#1#3'Top'#2#1#5'Width'#3#242#1#5
+  +'Align'#7#8'alClient'#9'PageIndex'#2#0#8'ShowTabs'#8#0#5'TPage'#5'Page1'#7'C'
+  +'aption'#6#5'Page1'#11'ClientWidth'#3#242#1#12'ClientHeight'#3#222#1#0#6'TLa'
+  +'bel'#8'Label153'#6'Height'#2#13#5'Width'#2'S'#7'Caption'#6#14'System Settin'
+  +'g'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TGroupBox'#8'MysqlBox'#4'Le'
+  +'ft'#2#16#6'Height'#2'a'#3'Top'#2'0'#5'Width'#3#185#1#7'Caption'#6#15'MySQL '
+  +' Database'#12'ClientHeight'#2'P'#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6
+  +'TLabel'#7'Label77'#4'Left'#2#16#6'Height'#2#13#3'Top'#2#12#5'Width'#2'9'#7
+  +'Caption'#6#8'DB Name:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'
+  +#7'Label84'#4'Left'#3#168#0#6'Height'#2#13#3'Top'#2#12#5'Width'#2'A'#7'Capti'
+  +'on'#6#10'Host Name:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7
+  +'Label85'#4'Left'#3'H'#1#6'Height'#2#13#3'Top'#2#12#5'Width'#2#26#7'Caption'
+  +#6#5'Port:'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Label86'#4
+  +'Left'#2#16#6'Height'#2#13#3'Top'#2'4'#5'Width'#2''''#7'Caption'#6#7'Userid:'
+  +#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label133'#4'Left'#3
+  +#208#0#6'Height'#2#13#3'Top'#2'4'#5'Width'#2'7'#7'Caption'#6#8'Password'#5'C'
+  +'olor'#7#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#6'dbname'#4'Left'#2'P'#6'H'
+  +'eight'#2#21#3'Top'#2#8#5'Width'#2'A'#8'OnChange'#7#12'dbnameChange'#8'TabOr'
+  +'der'#2#0#0#0#9'TLongEdit'#6'dbport'#4'Name'#6#6'dbport'#4'Left'#3'p'#1#6'He'
+  +'ight'#2#22#3'Top'#2#10#5'Width'#2'9'#11'BorderStyle'#7#8'bsSingle'#11'Paren'
+  +'tColor'#8#8'TabOrder'#2#1#8'OnChange'#7#12'dbportChange'#5'Value'#3#234#12#0
+  +#0#5'TEdit'#6'dbhost'#4'Left'#3#240#0#6'Height'#2#21#3'Top'#2#8#5'Width'#2'A'
+  +#8'OnChange'#7#12'dbhostChange'#8'TabOrder'#2#2#4'Text'#6#6'dbhost'#0#0#5'TE'
+  +'dit'#6'dbuser'#4'Left'#2'P'#6'Height'#2#21#3'Top'#2'0'#5'Width'#2'd'#8'OnCh'
+  +'ange'#7#12'dbuserChange'#8'TabOrder'#2#3#4'Text'#6#6'dbuser'#0#0#5'TEdit'#6
+  +'dbpass'#4'Left'#3#16#1#6'Height'#2#21#3'Top'#2'0'#5'Width'#2'd'#8'OnChange'
+  +#7#12'dbpassChange'#12'PasswordChar'#6#1'*'#8'TabOrder'#2#4#4'Text'#6#6'dbpa'
+  +'ss'#0#0#0#9'TGroupBox'#9'SqliteBox'#4'Left'#2#16#6'Height'#2'a'#3'Top'#2'0'
+  +#5'Width'#3#185#1#7'Caption'#6#15'Sqlite Database'#12'ClientHeight'#2'P'#11
+  +'ClientWidth'#3#181#1#8'TabOrder'#2#3#7'Visible'#8#0#6'TLabel'#6'Label1'#4'L'
+  +'eft'#2#13#6'Height'#2#13#3'Top'#2'$'#5'Width'#2'Q'#7'Caption'#6#15'Database'
+  +' file: '#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#5'TEdit'#12'dbnamesqlit'
+  +'e'#4'Left'#2'}'#6'Height'#2#21#3'Top'#2' '#5'Width'#3#25#1#5'Color'#7#9'clB'
+  +'tnFace'#8'OnChange'#7#18'dbnamesqliteChange'#8'ReadOnly'#9#8'TabOrder'#2#0#4
+  +'Text'#6#12'dbnamesqlite'#0#0#0#9'TGroupBox'#11'GroupBoxDir'#4'Left'#2#16#6
   +'Height'#2'i'#3'Top'#3#0#1#5'Width'#3#185#1#7'Caption'#6#9'Directory'#12'Cli'
   +'entHeight'#2'X'#11'ClientWidth'#3#181#1#8'TabOrder'#2#1#0#6'TLabel'#8'Label'
   +'156'#4'Left'#2#11#6'Height'#2#13#3'Top'#2#24#5'Width'#2'Q'#7'Caption'#6#13

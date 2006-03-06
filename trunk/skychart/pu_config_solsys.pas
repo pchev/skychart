@@ -28,7 +28,7 @@ interface
 uses  u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, unzip,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, MaskEdit,
-  WizardNotebook, downloaddialog, EditBtn;
+  downloaddialog, EditBtn;
 
 type
 
@@ -189,7 +189,7 @@ type
     asteq: TEdit;
     Addast: TButton;
     OpenDialog1: TOpenDialog;
-    WizardNotebook1: TWizardNotebook;
+    Notebook1: TNotebook;
     XplanetBox: TGroupBox;
     UseXplanet: TCheckBox;
     XplanetDir: TEdit;

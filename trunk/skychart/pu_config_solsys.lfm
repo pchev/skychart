@@ -21,7 +21,7 @@ object f_config_solsys: Tf_config_solsys
     ClientWidth = 500
     ParentColor = False
     TabOrder = 0
-    object WizardNotebook1: TWizardNotebook
+    object Notebook1: TNotebook
       Left = 1
       Height = 478
       Top = 1
@@ -355,8 +355,8 @@ object f_config_solsys: Tf_config_solsys
           Top = 232
           Width = 329
           Caption = 'Image Options'
-          ClientHeight = 48
-          ClientWidth = 325
+          ClientHeight = 65
+          ClientWidth = 329
           TabOrder = 6
           object UseXplanet: TCheckBox
             Left = 8

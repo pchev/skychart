@@ -28,7 +28,7 @@ interface
 uses  u_constant, u_util, cu_database, Math, dynlibs, lazjpeg, unzip,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
-  WizardNotebook, Spin, downloaddialog, EditBtn;
+  Spin, downloaddialog, EditBtn;
 
 type
 
@@ -81,7 +81,7 @@ type
     Obszp: TButton;
     Obszm: TButton;
     Obsmap: TButton;
-    WizardNotebook1: TWizardNotebook;
+    Notebook1: TNotebook;
     ZoomImage1: TZoomImage;
     HScrollBar: TScrollBar;
     VScrollBar: TScrollBar;

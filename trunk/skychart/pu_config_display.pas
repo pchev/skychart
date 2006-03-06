@@ -290,7 +290,7 @@ type
     Shape17: TShape;
     Shape12: TShape;
     Shape11: TShape;
-    WizardNotebook1: TNotebook;
+    Notebook1: TNotebook;
     procedure Button4Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);

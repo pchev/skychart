@@ -28,7 +28,7 @@ interface
 uses u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
-  WizardNotebook, ButtonPanel;
+  ButtonPanel;
 
 type
 
@@ -87,7 +87,7 @@ type
     SimObj: TCheckListBox;
     AllSim: TButton;
     NoSim: TButton;
-    WizardNotebook1: TWizardNotebook;
+    Notebook1: TNotebook;
     procedure Button2Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);

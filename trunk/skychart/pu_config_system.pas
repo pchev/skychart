@@ -28,7 +28,7 @@ interface
 uses u_constant, u_util, cu_database,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms,
-  ExtCtrls, StdCtrls, LResources, WizardNotebook, EditBtn;
+  ExtCtrls, StdCtrls, LResources, EditBtn;
 
 type
 
@@ -119,7 +119,7 @@ type
     TurnsAlt: TFloatEdit;
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
-    WizardNotebook1: TWizardNotebook;
+    Notebook1: TNotebook;
     procedure FormCreate(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
