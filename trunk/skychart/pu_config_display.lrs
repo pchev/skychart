@@ -1,5 +1,3 @@
-{ Ceci est un fichier ressource généré automatiquement par Lazarus }
-
 LazarusResources.Add('Tf_config_display','FORMDATA',[
   'TPF0'#17'Tf_config_display'#16'f_config_display'#4'Left'#3#240#0#6'Height'#3
   +#20#2#3'Top'#2''#5'Width'#3#11#2#18'HorzScrollBar.Page'#3#10#2#18'VertScrol'

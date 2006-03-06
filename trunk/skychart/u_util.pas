@@ -33,7 +33,7 @@ uses Math, SysUtils, Classes, u_constant, LCLType,
     unix,baseunix,unixutil,
   {$endif}
     Controls,
-    MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons,WizardNotebook, ExtCtrls,
+    MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons, ExtCtrls,
     Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
 
 function rmod(x,y:Double):Double;
@@ -1425,7 +1425,7 @@ with form do begin
      color:=nv_dark;
      font.Color:=nv_middle;
      for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TWizardNotebook ) then with (Components[i] as TWizardNotebook) do begin
+        if  ( Components[i] is TNotebook ) then with (Components[i] as TNotebook) do begin
            if color=clWindow   then  color:=nv_black;
            if color=clBtnFace then  color:=nv_dark;
         end;
@@ -1491,7 +1491,7 @@ with form do begin
      Color:=clBtnFace;
      font.Color:=clText;
      for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TWizardNotebook ) then with (Components[i] as TWizardNotebook) do begin
+        if  ( Components[i] is TNotebook ) then with (Components[i] as TNotebook) do begin
            if color=nv_black then color:=clWindow;
            if color=nv_dark  then color:=clBtnFace;
         end;
