@@ -2015,6 +2015,7 @@ begin
 }
   xx:=round(Ax);
   yy:=round(Ay);
+  if Ar2=0 then Ar2:=Ar1/2;
   ds1:=round(max(Apixscale*Ar1/2,cfgchart.drawpen))+cfgchart.drawpen;
   ds2:=round(max(Apixscale*Ar2/2,cfgchart.drawpen))+cfgchart.drawpen;
       cnv.Pen.Width := cfgchart.drawpen;
