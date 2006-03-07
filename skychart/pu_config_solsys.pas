@@ -342,8 +342,10 @@ end;
 procedure Tf_config_solsys.DownloadAsteroidClick(Sender: TObject);
 var fn,url: string;
 begin
- url:='http://www.astro.cz/mpcorb/MPCORB.DAT';
+ url:='ftp://cfa-ftp.harvard.edu/pub/MPCORB/MPCORB.DAT';
  fn:=slash(privatedir)+slash('MPC')+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
+ DownloadDialog1.FtpUserName:='anonymous';
+ DownloadDialog1.FtpPassword:='skychart@';
  DownloadDialog1.URL:=url;
  DownloadDialog1.SaveToFile:=fn;
  if DownloadDialog1.Execute then begin
@@ -357,8 +359,10 @@ end;
 procedure Tf_config_solsys.DownloadCometClick(Sender: TObject);
 var fn,url: string;
 begin
- url:='http://www.astro.cz/mpcorb/COMET.DAT';
+ url:='ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
  fn:=slash(privatedir)+slash('MPC')+'COMET-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
+ DownloadDialog1.FtpUserName:='anonymous';
+ DownloadDialog1.FtpPassword:='skychart@';
  DownloadDialog1.URL:=url;
  DownloadDialog1.SaveToFile:=fn;
  if DownloadDialog1.Execute then begin

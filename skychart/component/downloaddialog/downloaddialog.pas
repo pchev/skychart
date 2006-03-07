@@ -59,7 +59,7 @@ type
     Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
     FFWMode : Integer;
     FFWpassive : Boolean;
-    FFWhost, FFWport, FFWUsername, FFWPassword : string;
+    FUsername, FPassword, FFWhost, FFWport, FFWUsername, FFWPassword : string;
     DF:TForm;
     okButton,cancelButton:TButton;
     progress : Tedit;
@@ -85,6 +85,8 @@ type
     property HttpProxyPort : string read Fproxyport  write Fproxyport ;
     property HttpProxyUser : string read Fproxyuser  write Fproxyuser ;
     property HttpProxyPass : string read Fproxypass  write Fproxypass ;
+    property FtpUserName : string read FUsername  write FUsername ;
+    property FtpPassword : string read FPassword  write FPassword ;
     property FtpFwMode : integer read FFWMode write FFWMode ;
     property FtpFwPassive : Boolean read FFWpassive write FFWpassive ;
     property FtpFwHost : string read FFWhost  write FFWhost  ;
@@ -258,6 +260,8 @@ end else begin                // FTP protocol
   i:=pos('/',buf);
   ftp.Targethost:=copy(buf,1,i-1);
   ftp.PassiveMode:=FFWpassive;
+  ftp.UserName:=FUserName;
+  ftp.Password:=FPassword;
   ftp.FWMode:=FFWMode;
   if FFWhost<>'' then ftp.FWHost:=FFWHost;
   if FFWport<>'' then ftp.FWPort:=FFWPort;
@@ -341,7 +345,6 @@ if protocol=prHttp then begin
 end;
 if protocol=prFtp then begin
   pftp^.OnStatus:=@FTPStatus;
-  pftp^.Sock.OnStatus:=@SockStatus;
   if pftp^.Login then begin
     pftp^.ChangeWorkingDir(Dftpdir);
     ok:=pftp^.RetrieveFile(Dftpfile,false);
