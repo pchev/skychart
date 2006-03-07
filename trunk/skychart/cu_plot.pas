@@ -1634,7 +1634,8 @@ with cnv do begin
           cp1[2].Y:=yy+round((j+1)*r/20*sin(a+0.015*(i)));
           cp1[3].X:=xx+round((j+1)*0.99*r/20*cos(a+0.015*(i+1)));
           cp1[3].Y:=yy+round((j+1)*0.99*r/20*sin(a+0.015*(i+1)));
-          if (cp1[2].X<>cp1[3].X)or(cp1[2].Y<>cp1[3].Y) then polygon(cp1);
+          if (abs(cp1[2].X-cp1[3].X)>1)or(abs(cp1[2].Y-cp1[3].Y)>1) then polygon(cp1)
+             else line(cp1[0].X,cp1[0].Y,cp1[2].X,cp1[2].Y);
           cp2[0].X:=cp2[3].X;
           cp2[0].Y:=cp2[3].Y;
           cp2[1].X:=cp2[2].X;
@@ -1643,7 +1644,8 @@ with cnv do begin
           cp2[2].Y:=yy+round((j+1)*r/20*sin(a-0.015*(i)));
           cp2[3].X:=xx+round((j+1)*0.99*r/20*cos(a-0.015*(i+1)));
           cp2[3].Y:=yy+round((j+1)*0.99*r/20*sin(a-0.015*(i+1)));
-          if (cp2[2].X<>cp2[3].X)or(cp2[2].Y<>cp2[3].Y) then polygon(cp2);
+          if (abs(cp2[2].X-cp2[3].X)>1)or(abs(cp2[2].Y-cp2[3].Y)>1) then polygon(cp2)
+             else line(cp2[0].X,cp2[0].Y,cp2[2].X,cp2[2].Y);
          end;
         end;
         end;
