@@ -31,8 +31,8 @@ Procedure ScaleWindow(c: Pconf_skychart);
 Function RotationAngle(x1,y1,x2,y2: double; c: Pconf_skychart): double;
 Procedure WindowXY(x,y:Double; var WindowX,WindowY: single; c: Pconf_skychart);
 Procedure XYWindow( x,y: Integer; var Xwindow,Ywindow: double; c: Pconf_skychart);
-PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; c: Pconf_skychart; tohrz:boolean=false);
-PROCEDURE Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Pconf_skychart );
+function Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; c: Pconf_skychart; tohrz:boolean=false):boolean;
+function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Pconf_skychart ):boolean;
 PROCEDURE Proj3(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Pconf_skychart );
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double; c: Pconf_skychart );
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; c: Pconf_skychart );
@@ -142,9 +142,10 @@ Begin
    ywindow:= (y-c^.yshift-c^.AyGlb)/c^.ByGlb;
 end ;
 
-PROCEDURE Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Pconf_skychart );
+function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Pconf_skychart ):boolean;
 Var r,hh,s1,s2,s3,c1,c2,c3,xx,yy : Extended ;
 BEGIN
+result:=false;
 case c^.projtype of              // AIPS memo 27
 'A' : begin                   //  ARC
     hh := ac-ar ;
@@ -157,6 +158,7 @@ case c^.projtype of              // AIPS memo 27
     if r<>0 then r:= (r/sin(r));
     xx:= r*c2*s3;
     yy:= r*(s2*c1-c2*s1*c3);
+    result:=true;
     end;
 'C' : begin                 // CAR
     ar:=rmod(ar+pi4,pi2);
@@ -166,6 +168,7 @@ case c^.projtype of              // AIPS memo 27
     ac:=rmod(hh-ac+pi2,pi2);
     xx:=ac-ar;
     yy:=de-dc;
+    result:=true;
     end;
 'S' : begin                 // SIN
     hh := ar-ac ;
@@ -179,6 +182,7 @@ case c^.projtype of              // AIPS memo 27
     end else begin
       xx:= -(c2*s3);
       yy:= s2*c1-c2*s1*c3;
+      result:=true;
     end;
     if xx>200 then xx:=200
      else if xx<-200 then xx:=-200;
@@ -197,7 +201,8 @@ case c^.projtype of              // AIPS memo 27
     end else begin
       xx := -( c2*s3/r );
       yy := (s2*c1-c2*s1*c3)/r ;
-    end;
+      result:=true;
+  end;
     if xx>200 then xx:=200
      else if xx<-200 then xx:=-200;
     if yy>200 then yy:=200
@@ -215,6 +220,7 @@ else begin
     r:= (r/sin(r));
     xx:= r*c2*sin(hh);
     yy:= r*(s2*c1-c2*s1*c3);
+    result:=true;
     end;
 end;
 X:=xx*c^.costheta+yy*c^.sintheta;
@@ -300,10 +306,11 @@ X:=xx;
 Y:=yy;
 END ;
 
-PROCEDURE Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; c: Pconf_skychart; tohrz:boolean=false);
+function Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; c: Pconf_skychart; tohrz:boolean=false):boolean;
 Var a,h,ac,dc,d1,d2 : Double ;
     a1,a2,i1,i2 : integer;
 BEGIN
+result:=false;
 case c^.Projpole of
 AltAz: begin
        Eq2Hz(c^.CurST-ar,de,a,h,c) ;
@@ -338,7 +345,7 @@ if clip and (c^.projpole=AltAz) and c^.horizonopaque and (h<=c^.HorizonMax) then
   if (h<(c^.ObsHorizonDepression-musec)) then begin
      if tohrz and (h>(-30*deg2rad)) then begin
        de:=-secarc;
-       Proj2(ar,de,ac,dc,X,Y,c);
+       result:=Proj2(ar,de,ac,dc,X,Y,c);
      end else begin
        X:=200;
        Y:=200;
@@ -347,7 +354,6 @@ if clip and (c^.projpole=AltAz) and c^.horizonopaque and (h<=c^.HorizonMax) then
     if (not c^.ShowHorizon) or (c^.horizonlist=nil) then
        if c^.ShowHorizonDepression then h:=c^.ObsHorizonDepression
           else h:=0
-//    if c^.horizonlist=nil then h:=0
     else begin
       a:=rmod(-rad2deg*ar+181+360,360);
       a1:=trunc(a);
@@ -361,14 +367,14 @@ if clip and (c^.projpole=AltAz) and c^.horizonopaque and (h<=c^.HorizonMax) then
     if de<h-musec then begin
      if tohrz then begin
         de:=h-secarc;
-        Proj2(ar,de,ac,dc,X,Y,c);
+        result:=Proj2(ar,de,ac,dc,X,Y,c);
      end else begin
         X:=200;
         Y:=200;
      end;
-    end else Proj2(ar,de,ac,dc,X,Y,c);
+    end else result:=Proj2(ar,de,ac,dc,X,Y,c);
   end;
-end else Proj2(ar,de,ac,dc,X,Y,c);
+end else result:=Proj2(ar,de,ac,dc,X,Y,c);
 END ;
 
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; c: Pconf_skychart);

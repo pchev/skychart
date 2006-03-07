@@ -1205,8 +1205,9 @@ if cfgsc^.ShowComet then begin
          sz:=round(abs(cfgsc^.BxGlb)*deg2rad/60*cfgsc^.CometLst[j,i,4]/2);
          SetLabel(lid,xx,yy,sz,2,5,cfgsc^.CometName[j,i,2]);
       end;
-      projection(cfgsc^.CometLst[j,i,5],cfgsc^.CometLst[j,i,6],x1,y1,true,cfgsc);
-      WindowXY(x1,y1,cxx,cyy,cfgsc);
+      if projection(cfgsc^.CometLst[j,i,5],cfgsc^.CometLst[j,i,6],x1,y1,true,cfgsc) then
+         WindowXY(x1,y1,cxx,cyy,cfgsc)
+      else begin cxx:=xx; cyy:=yy; end;
       Fplot.PlotComet(xx,yy,cxx,cyy,cfgsc^.Comsymbol, cfgsc^.CometLst[j,i,3],cfgsc^.CometLst[j,i,4],abs(cfgsc^.BxGlb)*deg2rad/60);
     end;
   end;
