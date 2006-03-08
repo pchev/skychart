@@ -29,8 +29,11 @@ uses
   Classes, SysUtils, Dialogs, Buttons, Graphics, Forms, Controls, StdCtrls, ExtCtrls;
 
 type
+
   TDownloadProtocol=(prHttp,prFtp);
   TDownloadProc= procedure of object;
+  TDownloadFeedback = procedure (txt:string) of object;
+  
   TDownloadDaemon = class(TThread)
   private
     FonDownloadComplete: TDownloadProc;
@@ -53,6 +56,7 @@ type
   TDownloadDialog = class(TCommonDialog)
   private
     DownloadDaemon: TDownloadDaemon;
+    FDownloadFeedback: TDownloadFeedback;
     Furl:string;
     Ffile: string;
     FResponse: string;
@@ -93,6 +97,7 @@ type
     property FtpFwPort : string read FFWport  write FFWport  ;
     property FtpFwUserName : string read FFWUsername  write FFWUsername ;
     property FtpFwPassword : string read FFWPassword  write FFWPassword ;
+    property onFeedback : TDownloadFeedback read FDownloadFeedback write FDownloadFeedback;
   end;
 
 procedure Register;
@@ -326,6 +331,7 @@ end;
 procedure TDownloadDialog.progressreport;
 begin
   progress.text:=DownloadDaemon.progresstext;
+  if assigned(FDownloadFeedback) then FDownloadFeedback(progress.text);
 end;
 
 Constructor TDownloadDaemon.Create;

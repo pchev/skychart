@@ -302,7 +302,7 @@ var
   hh:double;
   f : textfile;
 begin
-MemoCom.clear;
+//MemoCom.clear;
 if not fileexists(comfile) then begin
   MemoCom.lines.add('File not found!');
   exit;

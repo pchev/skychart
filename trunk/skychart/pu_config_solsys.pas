@@ -240,6 +240,8 @@ type
     procedure UpdComList;
     procedure ShowAsteroid;
     procedure UpdAstList;
+    procedure AsteroidFeedback(txt:string);
+    procedure CometFeedback(txt:string);
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -346,8 +348,10 @@ begin
  fn:=slash(privatedir)+slash('MPC')+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
  DownloadDialog1.FtpUserName:='anonymous';
  DownloadDialog1.FtpPassword:='skychart@';
+ DownloadDialog1.FtpFwPassive:=true;
  DownloadDialog1.URL:=url;
  DownloadDialog1.SaveToFile:=fn;
+ DownloadDialog1.onFeedback:=AsteroidFeedback;
  if DownloadDialog1.Execute then begin
      mpcfile.Text:=fn;
      application.ProcessMessages;
@@ -356,21 +360,36 @@ begin
    Showmessage('Cancel '+DownloadDialog1.ResponseText);
 end;
 
+procedure Tf_config_solsys.AsteroidFeedback(txt:string);
+begin
+memompc.Lines.Add(txt);
+memompc.SelStart:=length(memompc.Text)-1;
+end;
+
 procedure Tf_config_solsys.DownloadCometClick(Sender: TObject);
 var fn,url: string;
 begin
+ memocom.clear;
  url:='ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
  fn:=slash(privatedir)+slash('MPC')+'COMET-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
  DownloadDialog1.FtpUserName:='anonymous';
  DownloadDialog1.FtpPassword:='skychart@';
+ DownloadDialog1.FtpFwPassive:=true;
  DownloadDialog1.URL:=url;
  DownloadDialog1.SaveToFile:=fn;
+ DownloadDialog1.onFeedback:=CometFeedback;
  if DownloadDialog1.Execute then begin
     comfile.Text:=fn;
     application.ProcessMessages;
     LoadcomClick(Sender);
  end else
    Showmessage('Cancel '+DownloadDialog1.ResponseText);
+end;
+
+procedure Tf_config_solsys.CometFeedback(txt:string);
+begin
+memocom.Lines.Add(txt);
+memocom.SelStart:=length(memocom.Text)-1;
 end;
 
 procedure Tf_config_solsys.PlaParalaxeClick(Sender: TObject);
@@ -442,6 +461,7 @@ procedure Tf_config_solsys.LoadcomClick(Sender: TObject);
 begin
 screen.cursor:=crHourGlass;
 cdb.LoadCometFile(comfile.text,MemoCom);
+memocom.SelStart:=length(memocom.Text)-1;
 UpdComList;
 screen.cursor:=crDefault;
 end;
