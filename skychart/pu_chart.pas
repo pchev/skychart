@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  Chart child form 
 }
+{$define showtime}
 
 interface
 
@@ -350,7 +351,9 @@ Refresh;
 end;
 
 procedure Tf_chart.Refresh;
+var starttime:TDateTime;
 begin
+starttime:=now;
 try
 if locked then exit;
 if lock_refresh then exit;
@@ -382,6 +385,9 @@ finally
  if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
 if assigned(FImageSetFocus) then FImageSetFocus(Self);
+{$ifdef showtime}
+if assigned(Fshowinfo) then Fshowinfo('Drawing time: '+formatfloat(f2,(now-starttime)*86400));
+{$endif}
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
