@@ -279,6 +279,7 @@ begin
  t_min.value:=n;
  t_sec.value:=s;
  tz.value:=GetTimezone;
+ DateChange(Sender);
  TimeChange(Sender);
 end;
 
