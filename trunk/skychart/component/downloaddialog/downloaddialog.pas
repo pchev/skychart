@@ -64,6 +64,7 @@ type
     FFWMode : Integer;
     FFWpassive : Boolean;
     FUsername, FPassword, FFWhost, FFWport, FFWUsername, FFWPassword : string;
+    FConfirmDownload: Boolean;
     DF:TForm;
     okButton,cancelButton:TButton;
     progress : Tedit;
@@ -97,6 +98,7 @@ type
     property FtpFwPort : string read FFWport  write FFWport  ;
     property FtpFwUserName : string read FFWUsername  write FFWUsername ;
     property FtpFwPassword : string read FFWPassword  write FFWPassword ;
+    property ConfirmDownload : Boolean read FConfirmDownload  write FConfirmDownload ;
     property onFeedback : TDownloadFeedback read FDownloadFeedback write FDownloadFeedback;
   end;
 
@@ -109,6 +111,19 @@ begin
   RegisterComponents('CDC',[TDownloadDialog]);
 end;
 
+Procedure FormPos(form : Tform; x,y : integer);
+const bot=36; //minimal distance from screen bottom
+begin
+with Form do begin
+  left:=x;
+  if left+width>Screen.Width then left:=Screen.Width-width;
+  if left<0 then left:=0;
+  top:=y;
+  if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
+  if top<0 then top:=0;
+end;
+end;
+
 constructor TDownloadDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
@@ -117,6 +132,7 @@ begin
   HttpProxy:='';
   FFWMode:=0;
   FFWpassive:=true;
+  FConfirmDownload:=true;
 end;
 
 destructor TDownloadDialog.Destroy;
@@ -136,8 +152,7 @@ begin
   DF.BorderStyle:=bsDialog;
   DF.AutoSize:=true;
   pos:=mouse.CursorPos;
-  DF.Left:=pos.x;
-  DF.Top:=pos.y;
+  FormPos(DF,pos.x,pos.y);
   DF.OnClose:=@FormClose;
 
   urltxt:=TLabeledEdit.Create(self);
@@ -195,6 +210,8 @@ begin
     Cancel:=True;
   end;
 
+  if not FConfirmDownload then DF.OnShow:=@BtnDownload;
+  
   Result:=DF.ShowModal=mrOK;
 
   FreeAndNil(urltxt);
@@ -300,11 +317,13 @@ begin
     then begin  // success
       http.Document.Position:=0;
       http.Document.SaveToFile(FFile);
-      FResponse:=progress.text;
+      FResponse:='Finished: '+progress.text;
     end else begin // error
-      FResponse:=progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
+      ok:=false;
+      FResponse:='Finished: '+progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
       progress.Text:=FResponse;
  end;
+ if assigned(FDownloadFeedback) then FDownloadFeedback(FResponse);
  okButton.Visible:=true;
  http.Clear;
  if ok then DF.modalresult:=mrOK
@@ -316,12 +335,15 @@ var ok:boolean;
 begin
  ok:=DownloadDaemon.ok;
  FResponse:=progress.text;
- ftp.logout;
- if not ok then begin
-       FResponse:=progress.text+' / Error: '+inttostr(ftp.ResultCode)+' '+ftp.ResultString;
-       progress.Text:=FResponse;
-       application.processmessages;
-       sleep(1000);
+ if ok then begin
+    ftp.Sock.onStatus:=nil;
+    ftp.onStatus:=nil;
+    ftp.logout;
+ end else begin
+    ftp.Sock.onStatus:=nil;
+    ftp.onStatus:=nil;
+    ftp.abort;
+    progress.Text:=FResponse;
  end;
  okButton.Visible:=true;
  if ok then DF.modalresult:=mrOK
