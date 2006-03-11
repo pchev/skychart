@@ -13,7 +13,7 @@ object f_config_time: Tf_config_time
   ClientWidth = 474
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   object MainPanel: TPanel
     Height = 477
     Width = 474
@@ -32,22 +32,22 @@ object f_config_time: Tf_config_time
       ShowTabs = False
       object Page1: TPage
         Caption = 'Time'
-        ClientWidth = 474
-        ClientHeight = 477
+        ClientWidth = 466
+        ClientHeight = 469
         object Label142: TLabel
           Left = 231
-          Height = 13
+          Height = 14
           Top = 55
-          Width = 50
+          Width = 41
           Caption = 'Seconds'
           Color = clNone
           ParentColor = False
         end
         object CheckBox2: TCheckBox
           Left = 40
-          Height = 28
+          Height = 13
           Top = 56
-          Width = 142
+          Width = 109
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
           TabOrder = 0
@@ -62,27 +62,27 @@ object f_config_time: Tf_config_time
           TabOrder = 1
           object Label134: TLabel
             Left = 8
-            Height = 13
+            Height = 14
             Top = 31
-            Width = 115
+            Width = 97
             Caption = 'Local Time   =  UT +'
             Color = clNone
             ParentColor = False
           end
           object Label148: TLabel
             Left = 8
-            Height = 13
+            Height = 14
             Top = 8
-            Width = 61
+            Width = 50
             Caption = 'Time Zone'
             Color = clNone
             ParentColor = False
           end
           object Label149: TLabel
             Left = 212
-            Height = 13
+            Height = 14
             Top = 31
-            Width = 170
+            Width = 148
             Caption = '(Negative West of GreenWich)'
             Color = clNone
             ParentColor = False
@@ -116,45 +116,45 @@ object f_config_time: Tf_config_time
           TabOrder = 2
           object Label135: TLabel
             Left = 8
-            Height = 13
+            Height = 14
             Top = 33
-            Width = 60
+            Width = 50
             Caption = 'DT - UT  : '
             Color = clNone
             ParentColor = False
           end
           object Tdt_Ut: TLabel
             Left = 77
-            Height = 13
+            Height = 14
             Top = 33
-            Width = 29
+            Width = 25
             Caption = '0000'
             Color = clNone
             ParentColor = False
           end
           object Label136: TLabel
             Left = 115
-            Height = 13
+            Height = 14
             Top = 33
-            Width = 50
+            Width = 41
             Caption = 'Seconds'
             Color = clNone
             ParentColor = False
           end
           object Label150: TLabel
             Left = 8
-            Height = 13
+            Height = 14
             Top = 8
-            Width = 251
+            Width = 213
             Caption = 'Dynamic Time difference with Universal Time'
             Color = clNone
             ParentColor = False
           end
           object CheckBox4: TCheckBox
             Left = 8
-            Height = 28
+            Height = 13
             Top = 62
-            Width = 175
+            Width = 143
             Caption = 'Use another DT-UT value'
             OnClick = CheckBox4Click
             TabOrder = 0
@@ -203,72 +203,72 @@ object f_config_time: Tf_config_time
           TabOrder = 4
           object Label137: TLabel
             Left = 8
-            Height = 13
+            Height = 14
             Top = 70
-            Width = 27
+            Width = 23
             Caption = 'Time'
             Color = clNone
             ParentColor = False
           end
           object Label139: TLabel
             Left = 127
-            Height = 13
+            Height = 14
             Top = 52
-            Width = 12
+            Width = 9
             Caption = 'M'
             Color = clNone
             ParentColor = False
           end
           object Label141: TLabel
             Left = 195
-            Height = 13
+            Height = 14
             Top = 52
-            Width = 9
+            Width = 7
             Caption = 'S'
             Color = clNone
             ParentColor = False
           end
           object Label138: TLabel
             Left = 56
-            Height = 13
+            Height = 14
             Top = 52
-            Width = 10
+            Width = 8
             Caption = 'H'
             Color = clNone
             ParentColor = False
           end
           object Label143: TLabel
             Left = 56
-            Height = 13
+            Height = 14
             Top = 6
-            Width = 10
+            Width = 7
             Caption = 'Y'
             Color = clNone
             ParentColor = False
           end
           object Label144: TLabel
             Left = 127
-            Height = 13
+            Height = 14
             Top = 6
-            Width = 12
+            Width = 9
             Caption = 'M'
             Color = clNone
             ParentColor = False
           end
           object Label145: TLabel
             Left = 196
-            Height = 13
+            Height = 14
             Top = 6
-            Width = 10
+            Width = 8
             Caption = 'D'
             Color = clNone
             ParentColor = False
           end
           object Label140: TLabel
             Left = 8
-            Height = 13
+            Height = 14
             Top = 22
-            Width = 27
+            Width = 24
             Caption = 'Date'
             Color = clNone
             ParentColor = False
@@ -310,7 +310,7 @@ object f_config_time: Tf_config_time
             Left = 56
             Height = 22
             Top = 19
-            Width = 69
+            Width = 71
             MaxValue = 20000
             OnChange = DateChange
             TabOrder = 2
@@ -320,7 +320,7 @@ object f_config_time: Tf_config_time
             Left = 127
             Height = 22
             Top = 19
-            Width = 54
+            Width = 56
             MaxValue = 12
             MinValue = 1
             OnChange = DateChange
@@ -331,7 +331,7 @@ object f_config_time: Tf_config_time
             Left = 195
             Height = 22
             Top = 19
-            Width = 54
+            Width = 56
             MaxValue = 31
             MinValue = 1
             OnChange = DateChange
@@ -342,7 +342,7 @@ object f_config_time: Tf_config_time
             Left = 56
             Height = 22
             Top = 65
-            Width = 54
+            Width = 56
             MaxValue = 23
             OnChange = TimeChange
             TabOrder = 5
@@ -351,7 +351,7 @@ object f_config_time: Tf_config_time
             Left = 127
             Height = 22
             Top = 65
-            Width = 54
+            Width = 56
             MaxValue = 59
             OnChange = TimeChange
             TabOrder = 6
@@ -360,7 +360,7 @@ object f_config_time: Tf_config_time
             Left = 195
             Height = 22
             Top = 65
-            Width = 54
+            Width = 56
             MaxValue = 59
             OnChange = TimeChange
             TabOrder = 7
@@ -368,9 +368,9 @@ object f_config_time: Tf_config_time
         end
         object CheckBox1: TCheckBox
           Left = 40
-          Height = 28
+          Height = 13
           Top = 24
-          Width = 122
+          Width = 96
           Caption = 'Use system time'
           OnClick = CheckBox1Click
           TabOrder = 5
@@ -378,8 +378,8 @@ object f_config_time: Tf_config_time
       end
       object Page2: TPage
         Caption = 'Simulation'
-        ClientWidth = 474
-        ClientHeight = 477
+        ClientWidth = 466
+        ClientHeight = 469
         object stepreset: TSpeedButton
           Left = 338
           Height = 25
