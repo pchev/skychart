@@ -14,7 +14,7 @@ uses
   u_planetrender, u_constant, u_util, MultiDocPackage, pu_main,
   TurboPowerIPro, pu_config, enhedit, pu_config_catalog,
   pu_config_system, pu_config_solsys, pu_config_pictures, pu_config_observatory,
-  pu_config_display, pu_config_chart, pu_config_time, libsql,
+  pu_config_display, pu_config_chart, pu_config_internet, libsql,
   radec, XmlParser, zoomimage, JPEGForLazarus, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse;
 

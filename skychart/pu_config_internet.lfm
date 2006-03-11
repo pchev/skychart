@@ -1,0 +1,283 @@
+object f_config_internet: Tf_config_internet
+  ActiveControl = httpproxy
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsToolWindow
+  Caption = 'Date / Time'
+  ClientHeight = 480
+  ClientWidth = 500
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  HorzScrollBar.Page = 499
+  VertScrollBar.Page = 479
+  Left = 352
+  Height = 480
+  Top = 114
+  Width = 500
+  object MainPanel: TPanel
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 480
+    ClientWidth = 500
+    ParentColor = False
+    TabOrder = 0
+    Height = 480
+    Width = 500
+    object Notebook1: TNotebook
+      Align = alClient
+      Anchors = [akLeft, akRight, akBottom]
+      PageIndex = 0
+      ShowTabs = False
+      Height = 480
+      Width = 500
+      object Page1: TPage
+        Caption = 'Proxy'
+        ClientWidth = 492
+        ClientHeight = 472
+        Height = 472
+        Width = 492
+        object GroupBox1: TGroupBox
+          Caption = 'HTTP Proxy'
+          ClientHeight = 183
+          ClientWidth = 397
+          TabOrder = 0
+          Left = 20
+          Height = 201
+          Top = 12
+          Width = 401
+          object httpproxy: TCheckBox
+            Caption = 'Use HTTP Proxy'
+            OnClick = httpproxyClick
+            TabOrder = 0
+            Left = 30
+            Height = 13
+            Top = 11
+            Width = 100
+          end
+          object GroupBox3: TGroupBox
+            ClientHeight = 119
+            ClientWidth = 365
+            TabOrder = 1
+            Left = 14
+            Height = 137
+            Top = 40
+            Width = 369
+            object Label2: TLabel
+              Caption = 'Proxy host'
+              Color = clNone
+              ParentColor = False
+              Left = 22
+              Height = 14
+              Top = 4
+              Width = 53
+            end
+            object Label3: TLabel
+              Caption = 'Proxy port'
+              Color = clNone
+              ParentColor = False
+              Left = 200
+              Height = 14
+              Top = 4
+              Width = 52
+            end
+            object Label4: TLabel
+              Caption = 'User Name'
+              Color = clNone
+              ParentColor = False
+              Left = 22
+              Height = 14
+              Top = 48
+              Width = 53
+            end
+            object Label5: TLabel
+              Caption = 'Password'
+              Color = clNone
+              ParentColor = False
+              Left = 22
+              Height = 14
+              Top = 92
+              Width = 47
+            end
+            object proxyhost: TEdit
+              OnChange = proxyhostChange
+              TabOrder = 0
+              Left = 94
+              Height = 23
+              Width = 90
+            end
+            object proxyport: TEdit
+              OnChange = proxyportChange
+              TabOrder = 1
+              Left = 278
+              Height = 23
+              Width = 40
+            end
+            object proxyuser: TEdit
+              OnChange = proxyuserChange
+              TabOrder = 2
+              Left = 95
+              Height = 23
+              Top = 44
+              Width = 90
+            end
+            object proxypass: TEdit
+              OnChange = proxypassChange
+              TabOrder = 3
+              Left = 94
+              Height = 23
+              Top = 88
+              Width = 90
+            end
+          end
+        end
+        object GroupBox2: TGroupBox
+          Caption = 'FTP '
+          ClientHeight = 126
+          ClientWidth = 397
+          TabOrder = 1
+          Left = 20
+          Height = 144
+          Top = 228
+          Width = 401
+          object Label1: TLabel
+            Caption = 'Anonymous password'
+            Color = clNone
+            ParentColor = False
+            Left = 39
+            Height = 14
+            Top = 60
+            Width = 106
+          end
+          object ftppassive: TCheckBox
+            Caption = 'FTP Passive Mode'
+            OnClick = ftppassiveClick
+            TabOrder = 0
+            Left = 39
+            Height = 13
+            Top = 18
+            Width = 110
+          end
+          object anonpass: TEdit
+            OnChange = anonpassChange
+            TabOrder = 1
+            Left = 166
+            Height = 23
+            Top = 56
+            Width = 144
+          end
+        end
+      end
+      object Page2: TPage
+        Caption = 'Orbital Elements'
+        ClientWidth = 492
+        ClientHeight = 472
+        Height = 472
+        Width = 492
+        object Label6: TLabel
+          Caption = 'Comet elements in MPC format (one URL by line) '
+          Color = clNone
+          ParentColor = False
+          Left = 28
+          Height = 14
+          Top = 23
+          Width = 236
+        end
+        object Label7: TLabel
+          Caption = 'Asteroid elements in MPC format (one URL by line)'
+          Color = clNone
+          ParentColor = False
+          Left = 28
+          Height = 14
+          Top = 196
+          Width = 242
+        end
+        object CometUrlList: TMemo
+          OnExit = CometUrlListExit
+          TabOrder = 0
+          Left = 28
+          Height = 90
+          Top = 52
+          Width = 414
+        end
+        object AsteroidUrlList: TMemo
+          OnExit = AsteroidUrlListExit
+          TabOrder = 1
+          Left = 28
+          Height = 90
+          Top = 228
+          Width = 414
+        end
+        object comdefault: TButton
+          BorderSpacing.InnerBorder = 2
+          Caption = 'Default'
+          OnClick = comdefaultClick
+          TabOrder = 2
+          Left = 367
+          Height = 25
+          Top = 148
+          Width = 75
+        end
+        object astdefault: TButton
+          BorderSpacing.InnerBorder = 2
+          Caption = 'Default'
+          OnClick = astdefaultClick
+          TabOrder = 3
+          Left = 367
+          Height = 25
+          Top = 324
+          Width = 75
+        end
+        object brightneo: TButton
+          BorderSpacing.InnerBorder = 2
+          Caption = 'Bright + NEO'
+          OnClick = brightneoClick
+          TabOrder = 4
+          Left = 254
+          Height = 25
+          Top = 324
+          Width = 100
+        end
+        object mpcorb: TButton
+          BorderSpacing.InnerBorder = 2
+          Caption = 'MPCORB > 50Mb!'
+          OnClick = mpcorbClick
+          TabOrder = 5
+          Left = 28
+          Height = 25
+          Top = 324
+          Width = 100
+        end
+        object comhttp: TButton
+          BorderSpacing.InnerBorder = 2
+          Caption = 'MPC Http'
+          OnClick = comhttpClick
+          TabOrder = 6
+          Left = 276
+          Height = 25
+          Top = 148
+          Width = 75
+        end
+        object comftp: TButton
+          BorderSpacing.InnerBorder = 2
+          Caption = 'MPC Ftp'
+          OnClick = comftpClick
+          TabOrder = 7
+          Left = 180
+          Height = 25
+          Top = 148
+          Width = 75
+        end
+        object astcdc: TButton
+          BorderSpacing.InnerBorder = 2
+          Caption = 'First 5000'
+          OnClick = astcdcClick
+          TabOrder = 8
+          Left = 141
+          Height = 25
+          Top = 324
+          Width = 100
+        end
+      end
+    end
+  end
+end

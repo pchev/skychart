@@ -342,52 +342,145 @@ begin
 end;
 
 procedure Tf_config_solsys.DownloadAsteroidClick(Sender: TObject);
-var fn,url: string;
+var fn,tmpfn,buf: string;
+    i,n: integer;
+    ok: boolean;
+    fi,fo: Textfile;
 begin
- url:='ftp://cfa-ftp.harvard.edu/pub/MPCORB/MPCORB.DAT';
+ MemoMpc.Clear;
+ n:=cmain.AsteroidUrlList.Count;
+ if n=0 then begin showmessage('Please configure the orbital element URL!');exit;end;
  fn:=slash(privatedir)+slash('MPC')+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
+ tmpfn:=slash(TempDir)+'mpc.tmp';
+ if cmain.HttpProxy then begin
+    DownloadDialog1.HttpProxy:=cmain.ProxyHost;
+    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+ end else begin
+    DownloadDialog1.HttpProxy:='';
+    DownloadDialog1.HttpProxyPort:='';
+    DownloadDialog1.HttpProxyUser:='';
+    DownloadDialog1.HttpProxyPass:='';
+ end;
  DownloadDialog1.FtpUserName:='anonymous';
- DownloadDialog1.FtpPassword:='skychart@';
- DownloadDialog1.FtpFwPassive:=true;
- DownloadDialog1.URL:=url;
- DownloadDialog1.SaveToFile:=fn;
+ DownloadDialog1.FtpPassword:=cmain.AnonPass;
+ DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
  DownloadDialog1.onFeedback:=AsteroidFeedback;
- if DownloadDialog1.Execute then begin
-     mpcfile.Text:=fn;
-     application.ProcessMessages;
-     LoadMPCClick(Sender);
- end else
-   Showmessage('Cancel '+DownloadDialog1.ResponseText);
+ ok:=false;
+ for i:=1 to n do begin
+    DownloadDialog1.URL:=cmain.AsteroidUrlList[i-1];
+    MemoMpc.Lines.Add('Download '+DownloadDialog1.URL);
+    if i=1 then begin
+       DownloadDialog1.SaveToFile:=fn;
+       DownloadDialog1.ConfirmDownload:=true;
+    end else begin
+       DownloadDialog1.SaveToFile:=tmpfn;
+       DownloadDialog1.ConfirmDownload:=false;
+    end;
+    if DownloadDialog1.Execute then begin
+       ok:=true;
+       if i>1 then begin
+          assignfile(fi,tmpfn);
+          assignfile(fo,fn);
+          reset(fi);
+          append(fo);
+          repeat
+            readln(fi,buf);
+            writeln(fo,buf);
+          until eof(fi);
+          Closefile(fi);
+          Closefile(fo);
+          DeleteFile(tmpfn);
+       end;
+    end else begin
+       Showmessage('Cancel '+DownloadDialog1.ResponseText);
+       ok:=false;
+       break;
+    end;
+ end;
+ if ok then begin
+    mpcfile.Text:=fn;
+    application.ProcessMessages;
+    LoadMPCClick(Sender);
+ end;
 end;
 
 procedure Tf_config_solsys.AsteroidFeedback(txt:string);
 begin
+if copy(txt,1,9)='Read Byte' then exit;
 memompc.Lines.Add(txt);
 memompc.SelStart:=length(memompc.Text)-1;
 end;
 
 procedure Tf_config_solsys.DownloadCometClick(Sender: TObject);
-var fn,url: string;
+var fn,tmpfn,buf: string;
+    i,n: integer;
+    ok: boolean;
+    fi,fo: Textfile;
 begin
- memocom.clear;
- url:='ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
+ MemoCom.Clear;
+ n:=cmain.CometUrlList.Count;
+ if n=0 then begin showmessage('Please configure the orbital element URL!');exit;end;
  fn:=slash(privatedir)+slash('MPC')+'COMET-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
+ tmpfn:=slash(TempDir)+'mpc.tmp';
+ if cmain.HttpProxy then begin
+    DownloadDialog1.HttpProxy:=cmain.ProxyHost;
+    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+ end else begin
+    DownloadDialog1.HttpProxy:='';
+    DownloadDialog1.HttpProxyPort:='';
+    DownloadDialog1.HttpProxyUser:='';
+    DownloadDialog1.HttpProxyPass:='';
+ end;
  DownloadDialog1.FtpUserName:='anonymous';
- DownloadDialog1.FtpPassword:='skychart@';
- DownloadDialog1.FtpFwPassive:=true;
- DownloadDialog1.URL:=url;
- DownloadDialog1.SaveToFile:=fn;
+ DownloadDialog1.FtpPassword:=cmain.AnonPass;
+ DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
  DownloadDialog1.onFeedback:=CometFeedback;
- if DownloadDialog1.Execute then begin
+ ok:=false;
+ for i:=1 to n do begin
+    DownloadDialog1.URL:=cmain.CometUrlList[i-1];
+    MemoCom.Lines.Add('Download '+DownloadDialog1.URL);
+    if i=1 then begin
+       DownloadDialog1.SaveToFile:=fn;
+       DownloadDialog1.ConfirmDownload:=true;
+    end else begin
+       DownloadDialog1.SaveToFile:=tmpfn;
+       DownloadDialog1.ConfirmDownload:=false;
+    end;
+    if DownloadDialog1.Execute then begin
+       ok:=true;
+       if i>1 then begin
+          assignfile(fi,tmpfn);
+          assignfile(fo,fn);
+          reset(fi);
+          append(fo);
+          repeat
+            readln(fi,buf);
+            writeln(fo,buf);
+          until eof(fi);
+          Closefile(fi);
+          Closefile(fo);
+          DeleteFile(tmpfn);
+       end;
+    end else begin
+       Showmessage('Cancel '+DownloadDialog1.ResponseText);
+       ok:=false;
+       break;
+    end;
+ end;
+ if ok then begin
     comfile.Text:=fn;
     application.ProcessMessages;
     LoadcomClick(Sender);
- end else
-   Showmessage('Cancel '+DownloadDialog1.ResponseText);
+ end;
 end;
 
 procedure Tf_config_solsys.CometFeedback(txt:string);
 begin
+if copy(txt,1,9)='Read Byte' then exit;
 memocom.Lines.Add(txt);
 memocom.SelStart:=length(memocom.Text)-1;
 end;
@@ -459,6 +552,7 @@ end;
 
 procedure Tf_config_solsys.LoadcomClick(Sender: TObject);
 begin
+if Sender=LoadCom then MemoCom.Clear;
 screen.cursor:=crHourGlass;
 cdb.LoadCometFile(comfile.text,MemoCom);
 memocom.SelStart:=length(memocom.Text)-1;
@@ -534,6 +628,7 @@ end;
 procedure Tf_config_solsys.LoadMPCClick(Sender: TObject);
 var ok:boolean;
 begin
+if Sender=LoadMPC then MemoMpc.Clear;
 screen.cursor:=crHourGlass;
 ok:=cdb.LoadAsteroidFile(mpcfile.text,astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
 UpdAstList;

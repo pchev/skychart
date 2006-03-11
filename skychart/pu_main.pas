@@ -2353,6 +2353,7 @@ end;
 
 procedure Tf_main.SetDefault;
 var i:integer;
+    buf:string;
 begin
 nightvision:=false;
 ldeg:='°';
@@ -2392,6 +2393,20 @@ cfgm.SyncChart:=false;
 cfgm.ThemeName:='default';
 cfgm.ButtonStandard:=1;
 cfgm.ButtonNight:=2;
+cfgm.HttpProxy:=false;
+cfgm.FtpPassive:=true;
+cfgm.ProxyHost:='';
+cfgm.ProxyPort:='';
+cfgm.ProxyUser:='';
+cfgm.ProxyPass:='';
+cfgm.AnonPass:='skychart@';
+cfgm.CometUrlList:=TStringList.Create;
+cfgm.CometUrlList.Add(URL_HTTPCometElements);
+cfgm.AsteroidUrlList:=TStringList.Create;
+buf:=stringreplace(URL_HTTPAsteroidElements1,'$$$$',FormatDateTime('yyyy',now),[]);
+cfgm.AsteroidUrlList.Add(buf);
+buf:=stringreplace(URL_HTTPAsteroidElements2,'$$$$',FormatDateTime('yyyy',now),[]);
+cfgm.AsteroidUrlList.Add(buf);
 for i:=1 to numfont do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
    def_cfgplot.FontSize[i]:=DefaultFontSize;
@@ -3011,6 +3026,23 @@ cfgm.ShowChartInfo:=ReadBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
 cfgm.SyncChart:=ReadBool(section,'SyncChart',cfgm.SyncChart);
 cfgm.ButtonStandard:=ReadInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 cfgm.ButtonNight:=ReadInteger(section,'ButtonNight',cfgm.ButtonNight);
+cfgm.HttpProxy:=ReadBool(section,'HttpProxy',cfgm.HttpProxy);
+cfgm.FtpPassive:=ReadBool(section,'FtpPassive',cfgm.FtpPassive);
+cfgm.ProxyHost:=ReadString(section,'ProxyHost',cfgm.ProxyHost);
+cfgm.ProxyPort:=ReadString(section,'ProxyPort',cfgm.ProxyPort);
+cfgm.ProxyUser:=ReadString(section,'ProxyUser',cfgm.ProxyUser);
+cfgm.ProxyPass:=ReadString(section,'ProxyPass',cfgm.ProxyPass);
+cfgm.AnonPass:=ReadString(section,'AnonPass',cfgm.AnonPass);
+j:=ReadInteger(section,'CometUrlCount',0);
+if j>0 then begin
+   cfgm.CometUrlList.Clear;
+   for i:=1 to j do cfgm.CometUrlList.Add(ReadString(section,'CometUrl'+inttostr(i),''));
+end;
+j:=ReadInteger(section,'AsteroidUrlCount',0);
+if j>0 then begin
+   cfgm.AsteroidUrlList.Clear;
+   for i:=1 to j do cfgm.AsteroidUrlList.Add(ReadString(section,'AsteroidUrl'+inttostr(i),''));
+end;
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 catalog.cfgshr.ListStar:=ReadBool(section,'ListStar',catalog.cfgshr.ListStar);
 catalog.cfgshr.ListNeb:=ReadBool(section,'ListNeb',catalog.cfgshr.ListNeb);
@@ -3326,7 +3358,7 @@ end;
 end;
 
 procedure Tf_main.SavePrivateConfig(filename:string);
-var i:integer;
+var i,j:integer;
     inif: TMemIniFile;
     section : string;
 begin
@@ -3388,6 +3420,23 @@ WriteBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
 WriteBool(section,'SyncChart',cfgm.SyncChart);
 WriteInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 WriteInteger(section,'ButtonNight',cfgm.ButtonNight);
+WriteBool(section,'HttpProxy',cfgm.HttpProxy);
+WriteBool(section,'FtpPassive',cfgm.FtpPassive);
+WriteString(section,'ProxyHost',cfgm.ProxyHost);
+WriteString(section,'ProxyPort',cfgm.ProxyPort);
+WriteString(section,'ProxyUser',cfgm.ProxyUser);
+WriteString(section,'ProxyPass',cfgm.ProxyPass);
+WriteString(section,'AnonPass',cfgm.AnonPass);
+j:=cfgm.CometUrlList.Count;
+WriteInteger(section,'CometUrlCount',j);
+if j>0 then begin
+   for i:=1 to j do WriteString(section,'CometUrl'+inttostr(i),cfgm.CometUrlList[i-1]);
+end;
+j:=cfgm.AsteroidUrlList.Count;
+WriteInteger(section,'AsteroidUrlCount',j);
+if j>0 then begin
+   for i:=1 to j do WriteString(section,'AsteroidUrl'+inttostr(i),cfgm.AsteroidUrlList[i-1]);
+end;
 WriteBool(section,'IndiAutostart',def_cfgsc.IndiAutostart);
 WriteString(section,'IndiServerHost',def_cfgsc.IndiServerHost);
 WriteString(section,'IndiServerPort',def_cfgsc.IndiServerPort);

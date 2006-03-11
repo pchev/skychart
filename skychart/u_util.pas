@@ -1034,7 +1034,7 @@ result:=trim(EncryptStr(Str,Pwd,false));
 end;
 
 Procedure FormPos(form : Tform; x,y : integer);
-const bot=25; //minimal distance from screen bottom
+const bot=40; //minimal distance from screen bottom
 begin
 with Form do begin
   left:=x;
