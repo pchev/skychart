@@ -302,7 +302,6 @@ var
   hh:double;
   f : textfile;
 begin
-//MemoCom.clear;
 if not fileexists(comfile) then begin
   MemoCom.lines.add('File not found!');
   exit;
@@ -524,7 +523,6 @@ var
 begin
 nerr:=1;
 result:=false;
-memoast.clear;
 if not fileexists(astfile) then begin
   memoast.lines.add('File not found!');
   exit;

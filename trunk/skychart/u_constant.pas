@@ -208,13 +208,22 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       key_upright=33;
       key_downleft=35;
       key_downright =34;
-      
+
       //Observatory database
       CdcMinLocid='99999999';
       MaxCityList=100;
       // Location database source url
       baseurl_us = 'http://geonames.usgs.gov/stategaz/';
       baseurl_world = 'http://earth-info.nga.mil/gns/html/cntyfile/';
+      
+      //Default URL
+      URL_HTTPCometElements = 'http://cfa-www.harvard.edu/iau/Ephemerides/Comets/Soft00Cmt.txt';
+      URL_FTPCometElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
+      URL_HTTPAsteroidElements1 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Bright/$$$$/Soft00Bright.txt';
+      URL_HTTPAsteroidElements2 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Unusual/Soft00Unusual.txt';
+      URL_MPCORBAsteroidElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/MPCORB.DAT';
+      URL_CDCAsteroidElements = 'http://www.ap-i.net/skychart/data/mpc5000.dat';
+      
 
 {$ifdef unix}
       DefaultFontName='Helvetica';
@@ -425,6 +434,9 @@ type
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
                 ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd : string;
                 ImageLuminosity, ImageContrast : double;
+                ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass: string;
+                FtpPassive, HttpProxy : Boolean;
+                CometUrlList, AsteroidUrlList : TStringList;
                 end;
      conf_dss  = record
                 dssdir,dssdrive,dssfile : string;

@@ -34,6 +34,7 @@ uses u_constant, u_util,
   cu_fits, cu_catalog, cu_database,
   pu_config_chart, pu_config_observatory, pu_config_time, pu_config_catalog,
   pu_config_system, pu_config_pictures, pu_config_display, pu_config_solsys,
+  pu_config_internet,
   LResources, MultiDoc, ChildDoc;
 
 type
@@ -82,6 +83,7 @@ type
     f_config_pictures1: Tf_config_pictures;
     f_config_system1: Tf_config_system;
     f_config_time1: Tf_config_time;
+    f_config_internet1: Tf_config_internet;
     function GetFits: TFits;
     procedure SetFits(value: TFits);
     function GetCatalog: Tcatalog;
@@ -164,6 +166,10 @@ Child:=MultiDoc1.NewChild;
 f_config_system1:=Tf_config_system.Create(Child);
 Child.DockedPanel:=f_config_system1.MainPanel;
 
+Child:=MultiDoc1.NewChild;
+f_config_internet1:=Tf_config_internet.Create(Child);
+Child.DockedPanel:=f_config_internet1.MainPanel;
+
 f_config_solsys1.onShowDB:=ShowDBSetting;
 f_config_solsys1.onPrepareAsteroid:=SolSysPrepareAsteroid;
 f_config_system1.onShowAsteroid:=ShowAsteroidSetting;
@@ -182,6 +188,7 @@ f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
  ScaleForm(f_config_display1,Screen.PixelsPerInch/96);
  ScaleForm(f_config_pictures1,Screen.PixelsPerInch/96);
  ScaleForm(f_config_system1,Screen.PixelsPerInch/96);
+ ScaleForm(f_config_internet1,Screen.PixelsPerInch/96);
 {$endif}
 end;
 
@@ -201,6 +208,7 @@ if Fnightvision<>nightvision then begin
    SetFormNightVision(f_config_display1,nightvision);
    SetFormNightVision(f_config_pictures1,nightvision);
    SetFormNightVision(f_config_system1,nightvision);
+   SetFormNightVision(f_config_internet1,nightvision);
    Fnightvision:=nightvision;
 end;
 {$endif}
@@ -212,6 +220,7 @@ f_config_solsys1.FormShow(Sender);
 f_config_display1.FormShow(Sender);
 f_config_pictures1.FormShow(Sender);
 f_config_system1.FormShow(Sender);
+f_config_internet1.FormShow(Sender);
 TreeView1.FullCollapse;
 Treeview1.selected:=Treeview1.items[0];
 Treeview1.selected:=Treeview1.items[cmain.configpage];
@@ -258,6 +267,7 @@ begin
      5 : begin f_config_display1.Notebook1.PageIndex:=j;     f_config_display1.FormShow(self); end;
      6 : begin f_config_pictures1.Notebook1.PageIndex:=j;    f_config_pictures1.FormShow(self); end;
      7 : begin f_config_system1.Notebook1.PageIndex:=j;      f_config_system1.FormShow(self); end;
+     8 : begin f_config_internet1.Notebook1.PageIndex:=j;    f_config_internet1.FormShow(self); end;
    end;
    cmain.configpage_i:=i;
    cmain.configpage_j:=j;
@@ -436,6 +446,7 @@ f_config_solsys1.cmain:=@Fcmain;
 f_config_display1.cmain:=@Fcmain;
 f_config_pictures1.cmain:=@Fcmain;
 f_config_system1.cmain:=@Fcmain;
+f_config_internet1.cmain:=@Fcmain;
 end;
 
 procedure Tf_config.SetCdss(value: conf_dss);
