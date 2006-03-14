@@ -180,10 +180,6 @@ end;
 
 procedure Tf_config_observatory.FormCreate(Sender: TObject);
 begin
-{$ifdef linux}
-  countrylist.Style:=csDropDown;
-{$endif}
-//  Panel1.Align:=alBottom;
   countrycode:=TStringList.Create;
   citycode:=TStringList.Create;
   LockChange:=true;

@@ -724,6 +724,7 @@ object f_config_observatory: Tf_config_observatory
   end
   object DownloadDialog1: TDownloadDialog
     FtpFwPassive = True
+    ConfirmDownload = True
     left = 128
     top = 296
   end
