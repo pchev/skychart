@@ -100,9 +100,9 @@ var X1,x2,Y1,Y2 : Integer;
 begin
    X1 := c^.Xmin+c^.LeftMargin ; X2 := c^.Xmax-c^.RightMargin;
    Y1 := c^.Ymin+c^.TopMargin ; Y2 := c^.Ymax-c^.BottomMargin;
-   c^.WindowRatio := (X2-X1) / (Y2-Y1) ;
-   c^.Xcentre:=round((x2-x1)/2);
-   c^.Ycentre:=round((y2-y1)/2);
+   c^.WindowRatio := double(X2-X1) / double(Y2-Y1) ;
+   c^.Xcentre:=round(double(x2-x1)/2);
+   c^.Ycentre:=round(double(y2-y1)/2);
    c^.Xwrldmin := -c^.fov/2;
    c^.Ywrldmin := -c^.fov/c^.WindowRatio/2;
    c^.Xwrldmax := c^.fov/2;
@@ -115,9 +115,9 @@ begin
    c^.sintheta:=sin(c^.theta);
    c^.costheta:=cos(c^.theta);
    if c^.fov>pid2 then
-      if c^.WindowRatio>1 then c^.x2:=intpower(y2-y1,2)
-                         else c^.x2:=intpower(x2-x1,2)
-   else c^.x2:=intpower(c^.BxGlb*pid2,2);
+      if c^.WindowRatio>1 then c^.x2:=double(intpower(y2-y1,2))
+                         else c^.x2:=double(intpower(x2-x1,2))
+   else c^.x2:=double(intpower(c^.BxGlb*pid2,2));
 end;
 
 Function RotationAngle(x1,y1,x2,y2: double; c: Pconf_skychart): double;
@@ -126,7 +126,7 @@ x1:=c^.AxGlb+c^.BxGlb*x1+c^.Xshift;
 y1:=c^.AyGlb+c^.ByGlb*y1+c^.Yshift;
 x2:=c^.AxGlb+c^.BxGlb*x2+c^.Xshift;
 y2:=c^.AyGlb+c^.ByGlb*y2+c^.Yshift;
-result:=arctan2((x1-x2),(y1-y2));
+result:=double(arctan2((x1-x2),(y1-y2)));
 if c^.FlipY<0 then result:=result-pi;
 end;      
 
@@ -146,6 +146,7 @@ function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Pconf_skychart ):bool
 Var r,hh,s1,s2,s3,c1,c2,c3,xx,yy : Extended ;
 BEGIN
 result:=false;
+s1:=0;s2:=0;s3:=0;c1:=0;c2:=0;c3:=0;
 case c^.projtype of              // AIPS memo 27
 'A' : begin                   //  ARC
     hh := ac-ar ;
@@ -230,6 +231,7 @@ END ;
 PROCEDURE Proj3(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Pconf_skychart );
 Var r,hh,s1,s2,s3,c1,c2,c3,xx,yy : Extended ;
 BEGIN
+s1:=0;s2:=0;s3:=0;c1:=0;c2:=0;c3:=0;
 case c^.projtype of              // AIPS memo 27
 'A' : begin                   //  ARC
     hh := ac-ar ;
@@ -302,14 +304,15 @@ else begin
     yy:= r*(s2*c1-c2*s1*c3);
     end;
 end;
-X:=xx;
-Y:=yy;
+X:=double(xx);
+Y:=double(yy);
 END ;
 
 function Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; c: Pconf_skychart; tohrz:boolean=false):boolean;
 Var a,h,ac,dc,d1,d2 : Double ;
     a1,a2,i1,i2 : integer;
 BEGIN
+a:=0;h:=0;
 result:=false;
 case c^.Projpole of
 AltAz: begin
@@ -380,6 +383,7 @@ END ;
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; c: Pconf_skychart);
 Var a,r,hh,s1,c1,s2,c2,s3,c3,x,y : Extended ;
 Begin
+s1:=0;c1:=0;s2:=0;c2:=0;s3:=0;c3:=0;
 x:=(xx*c^.costheta-yy*c^.sintheta) ;     // AIPS memo 27
 y:=(-yy*c^.costheta-xx*c^.sintheta);
 case c^.projtype of
@@ -396,7 +400,7 @@ case c^.projtype of
 'C' : begin
     ar:=ac-x;
     de:=dc-y;
-    if de>0 then de:=min(de,pid2-0.00002) else de:=max(de,-pid2-0.00002);
+    if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
     end;
 'S' : begin
     sincos(dc,s1,c1);
@@ -404,7 +408,7 @@ case c^.projtype of
     y:=-(y);
     r:=sqrt(1-x*x-y*y);
     ar:=ac+(arctan2(x,(c1*r-y*s1)));
-    de:=(arcsin(y*c1+s1*r));
+    de:=double(arcsin(y*c1+s1*r));
     end;
 'T' : begin
     sincos(dc,s1,c1);
@@ -427,6 +431,7 @@ end ;
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double; c: Pconf_skychart);
 Var a,hh,ac,dc : Double ;
 Begin
+a:=0;hh:=0;
 case c^.Projpole of
 Altaz: begin
        ac:=-c^.acentre;
@@ -470,6 +475,7 @@ procedure GetADxy(x,y:Integer ; var a,d : Double; c: Pconf_skychart);
 var
    x1,y1: Double;
 begin
+x1:=0;y1:=0;
   XYwindow(x,y,x1,y1,c);
   InvProj (x1,y1,a,d,c);
 end;
@@ -478,6 +484,7 @@ procedure GetAHxy(x,y:Integer ; var a,h : Double; c: Pconf_skychart);
 var
    x1,y1: Double;
 begin
+x1:=0;y1:=0;
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,-c^.acentre,c^.hcentre,a,h,c);
   a:=rmod(pi4-a,pi2);
@@ -487,6 +494,7 @@ procedure GetAHxyF(x,y:Integer ; var a,h : Double; c: Pconf_skychart);
 var
    x1,y1: Double;
 begin
+x1:=0;y1:=0;
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,-c^.acentre,c^.hcentre,a,h,c);
   a:=-a;
@@ -496,6 +504,7 @@ procedure GetLBxy(x,y:Integer ; var l,b : Double; c: Pconf_skychart);
 var
    x1,y1: Double;
 begin
+x1:=0;y1:=0;
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,c^.lcentre,c^.bcentre,l,b,c);
   l:=rmod(pi4+l,pi2);
@@ -505,6 +514,7 @@ procedure GetLBExy(x,y:Integer ; var le,be : Double; c: Pconf_skychart);
 var
    x1,y1: Double;
 begin
+x1:=0;y1:=0;
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,c^.lecentre,c^.becentre,le,be,c);
   le:=rmod(pi4+le,pi2);
@@ -514,6 +524,7 @@ function NorthPoleInMap(c: Pconf_skychart) : Boolean;
 var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=0 ; d:=pid2;
+x1:=0;y1:=0;xx:=0;yy:=0;
 projection(a,d,x1,y1,false,c) ;
 windowxy(x1,y1,xx,yy,c);
 Result:=(xx>=c^.xmin) and (xx<=c^.xmax) and (yy>=c^.ymin) and (yy<=c^.ymax);
@@ -523,6 +534,7 @@ function SouthPoleInMap(c: Pconf_skychart) : Boolean;
 var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=0 ; d:=-pid2;
+x1:=0;y1:=0;xx:=0;yy:=0;
 projection(a,d,x1,y1,false,c) ;
 windowxy(x1,y1,xx,yy,c);
 Result:=(xx>=c^.xmin) and (xx<=c^.xmax) and (yy>=c^.ymin) and (yy<=c^.ymax);
@@ -532,6 +544,7 @@ function NorthPole2000InMap(c: Pconf_skychart) : Boolean;
 var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=c^.rap2000 ; d:=c^.dep2000;
+x1:=0;y1:=0;xx:=0;yy:=0;
 projection(a,d,x1,y1,false,c) ;
 windowxy(x1,y1,xx,yy,c);
 Result:=(xx>=c^.xmin) and (xx<=c^.xmax) and (yy>=c^.ymin) and (yy<=c^.ymax);
@@ -542,6 +555,7 @@ var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=0;
 d:=-pid2;
+x1:=0;y1:=0;xx:=0;yy:=0;
 precession(jd2000,c^.JDChart,a,d);
 projection(a,d,x1,y1,false,c) ;
 windowxy(x1,y1,xx,yy,c);
@@ -551,6 +565,7 @@ end;
 function ZenithInMap(c: Pconf_skychart) : Boolean;
 var x1,y1: Double; xx,yy : single;
 begin
+x1:=0;y1:=0;xx:=0;yy:=0;
 proj2(1.0,pid2,c^.acentre,c^.hcentre,x1,y1,c) ;
 windowxy(x1,y1,xx,yy,c);
 Result:=(xx>=c^.xmin) and (xx<=c^.xmax) and (yy>=c^.ymin) and (yy<=c^.ymax);
@@ -559,6 +574,7 @@ end;
 function NadirInMap(c: Pconf_skychart) : Boolean;
 var x1,y1: Double; xx,yy : single;
 begin
+x1:=0;y1:=0;xx:=0;yy:=0;
 proj2(1.0,-pid2,c^.acentre,c^.hcentre,x1,y1,c) ;
 windowxy(x1,y1,xx,yy,c);
 Result:=(xx>=c^.xmin) and (xx<=c^.xmax) and (yy>=c^.ymin) and (yy<=c^.ymax);
@@ -567,6 +583,7 @@ end;
 Function AngularDistance(ar1,de1,ar2,de2 : Double) : Double;
 var s1,s2,c1,c2,c3: extended;
 begin
+s1:=0;s2:=0;c1:=0;c2:=0;
 try
 if (ar1=ar2) and (de1=de2) then result:=0.0
 else begin
@@ -574,7 +591,7 @@ else begin
     sincos(de2,s2,c2);
     c3:=(s1*s2)+(c1*c2*cos((ar1-ar2)));
     if abs(c3)<=1 then
-       result:=arccos(c3)
+       result:=double(arccos(c3))
     else
        result:=pi2;
 end;    
@@ -586,6 +603,7 @@ end;
 function PositionAngle(ac,dc,ar,de:double):double;
 var hh,s1,s2,s3,c1,c2,c3 : extended;
 begin
+s1:=0;s2:=0;s3:=0;c1:=0;c2:=0;c3:=0;
     hh := (ac-ar) ;
     sincos(dc,s1,c1);
     sincos(de,s2,c2);
@@ -658,7 +676,7 @@ b := cos(de1)*cos(H)-c^.ObsRoCosPhi*sinpi;
 d := sin(de1)-c^.ObsRoSinPhi*sinpi;
 q := sqrt(a*a+b*b+d*d);
 ar:=SideralTime-arctan2(a,b);
-de:=arcsin(d/q);
+de:=double(arcsin(d/q));
 precession(c^.curjd,c^.JDchart,ar,de);
 end;
 
@@ -672,8 +690,8 @@ var i1,i2,i3,i4,i5,i6,i7 : double ;
       I5:=deg2rad*((2004.682-8.35E-1*I1)-(4.2E-2*I2+4.26E-1)*I2)*I2/3600.0 ;
       I6:=COS(DEI)*SIN(ARI+I3) ;
       I7:=COS(I5)*COS(DEI)*COS(ARI+I3)-SIN(I5)*SIN(DEI) ;
-      DEI:=ArcSIN(SIN(I5)*COS(DEI)*COS(ARI+I3)+COS(I5)*SIN(DEI)) ;
-      ARI:=ARCTAN2(I6,I7) ;
+      DEI:=double(ArcSIN(SIN(I5)*COS(DEI)*COS(ARI+I3)+COS(I5)*SIN(DEI))) ;
+      ARI:=double(ARCTAN2(I6,I7)) ;
       ARI:=ARI+I4   ;
       ARI:=RMOD(ARI+pi2,pi2);
    END  ;
@@ -692,8 +710,8 @@ var i1,i2,i3,i4,i5,i6,i7 : double ;
       i1:=(SIN(I5)*COS(DEI)*COS(ARI+I3)+COS(I5)*SIN(DEI));
       if i1>1 then i1:=1;
       if i1<-1 then i1:=-1;
-      DEI:=ArcSIN(i1);
-      ARI:=ARCTAN2(I6,I7) ;
+      DEI:=double(ArcSIN(i1));
+      ARI:=double(ARCTAN2(I6,I7)) ;
       ARI:=ARI+I4;
       ARI:=RMOD(ARI+pi2,pi2);
    END  ;
@@ -710,7 +728,7 @@ i6:=cos(i3)*cos(b)*sin(i4-l)-sin(i3)*sin(b);
 i7:=cos(b)*cos(i4-l);
 i8:=cos(i3)*sin(b)+sin(i3)*cos(b)*sin(i4-l);
 l:=i5+i4-arctan2(i6,i7);
-b:=arcsin(i8);
+b:=double(arcsin(i8));
 l:=rmod(l+pi2,pi2);
 end;
 
@@ -720,8 +738,8 @@ BEGIN
 l1:=deg2rad*c^.ObsLatitude;
 d1:=DE;
 h1:=HH;
-h:= arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) );
-A:= arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1));
+h:= double(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ));
+A:= double(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+pi2,pi2);
 END ;
 
@@ -731,12 +749,12 @@ BEGIN
 l1:=deg2rad*c^.ObsLatitude;
 d1:=DE;
 h1:=HH;
-h:= arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) );
-A:= arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1));
+h:= double(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ));
+A:= double(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+pi2,pi2);
 { refraction meeus91 15.4 }
 h1:=rad2deg*h;
-if h1>-1 then h:=minvalue([pid2,h+deg2rad*c^.ObsRefractionCor*(1.02/tan(deg2rad*(h1+10.3/(h1+5.11))))/60])
+if h1>-1 then h:=double(minvalue([pid2,h+deg2rad*c^.ObsRefractionCor*(1.02/tan(deg2rad*(h1+10.3/(h1+5.11))))/60]))
          else h:=h+deg2rad*0.64658062088;
 END ;
 
@@ -748,11 +766,11 @@ a1:=A;
 h:=h-c^.RefractionOffset; // correction for the refraction equation reversibility at the chart center
 { refraction meeus91 15.3 }
 h1:=rad2deg*h;
-if h1>-0.3534193791 then h:=minvalue([pid2,h-deg2rad*c^.ObsRefractionCor*(1/tan(deg2rad*(h1+(7.31/(h1+4.4)))))/60])
+if h1>-0.3534193791 then h:=double(minvalue([pid2,h-deg2rad*c^.ObsRefractionCor*(1/tan(deg2rad*(h1+(7.31/(h1+4.4)))))/60]))
                     else h:=h-deg2rad*0.64658062088;
 h1:=h;
-de:= arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) );
-hh:= arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1));
+de:= double(arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) ));
+hh:= double(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
 hh:=Rmod(hh+pi2,pi2);
 END ;
 
@@ -801,6 +819,7 @@ procedure apparent_equatorial(var ra,de:double; c: Pconf_skychart);
 var da,dd,l,b: double;
     cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
 begin
+cra:=0;sra:=0;cde:=0;sde:=0;ce:=0;se:=0;cp:=0;sp:=0;cls:=0;sls:=0;l:=0;b:=0;
 sincos(ra,sra,cra);
 sincos(de,sde,cde);
 sincos(c^.e,se,ce);
@@ -830,6 +849,7 @@ procedure mean_equatorial(var ra,de:double; c: Pconf_skychart);
 var da,dd,l,b: double;
     cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
 begin
+cra:=0;sra:=0;cde:=0;sde:=0;ce:=0;se:=0;cp:=0;sp:=0;cls:=0;sls:=0;l:=0;b:=0;
 sincos(ra,sra,cra);
 sincos(de,sde,cde);
 sincos(c^.e,se,ce);
@@ -857,14 +877,14 @@ end;
 
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 begin
-ar:=arctan2(sin(l)*cos(e)-tan(b)*sin(e),cos(l));
-de:=arcsin(sin(b)*cos(e)+cos(b)*sin(e)*sin(l));
+ar:=double(arctan2(sin(l)*cos(e)-tan(b)*sin(e),cos(l)));
+de:=double(arcsin(sin(b)*cos(e)+cos(b)*sin(e)*sin(l)));
 end;
 
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
 begin
-l:=arctan2(sin(ar)*cos(e)+tan(de)*sin(e),cos(ar));
-b:=arcsin(sin(de)*cos(e)-cos(de)*sin(e)*sin(ar));
+l:=double(arctan2(sin(ar)*cos(e)+tan(de)*sin(e),cos(ar)));
+b:=double(arcsin(sin(de)*cos(e)-cos(de)*sin(e)*sin(ar)));
 end;
 
 Procedure Gal2Eq(l,b: double; var ar,de : double; c: Pconf_skychart);
@@ -873,7 +893,7 @@ begin
 l:=l-deg2rad*123;
 dp:=deg2rad*27.4;
 ar:=deg2rad*12.25+arctan2(sin(l),cos(l)*sin(dp)-tan(b)*cos(dp));
-de:=arcsin(sin(b)*sin(dp)+cos(b)*cos(dp)*cos(l));
+de:=double(arcsin(sin(b)*sin(dp)+cos(b)*cos(dp)*cos(l)));
 precession(jd1950,c^.JDchart,ar,de);
 end;
 
@@ -885,7 +905,7 @@ ar:=deg2rad*192.25-ar;
 dp:=deg2rad*27.4;
 l:=deg2rad*303-arctan2(sin(ar),cos(ar)*sin(dp)-tan(de)*cos(dp));
 l:=rmod(l+pi2,pi2);
-b:=arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar));
+b:=double(arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar)));
 end;
 
 procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; c: Pconf_skychart; dho:double=9999);
@@ -899,7 +919,7 @@ longref:=-c^.timezone*15;
 hs0 := sidtim(jd0,-c^.timezone,longref);
 chh0 :=(sin(deg2rad*hoo)-sin(deg2rad*c^.ObsLatitude)*sin(de))/(cos(deg2rad*c^.ObsLatitude)*cos(de)) ;
 if abs(chh0)<=1 then begin
-   hh0:=arccos(chh0);
+   hh0:=double(arccos(chh0));
    m0:=(ar+deg2rad*c^.ObsLongitude-deg2rad*longref-hs0)/pi2;
    m1:=m0-hh0/pi2;
    m2:=m0+hh0/pi2;
@@ -929,7 +949,7 @@ if abs(chh0)<=1 then begin
    dm:= (h - hoo) / (360 * cos(de) * cos(deg2rad*c^.Obslatitude) * sin(hl) );
    hs:=(m2+dm)*24;
    // azimuth
-   a0:= arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c^.Obslatitude)-tan(de)*cos(deg2rad*c^.Obslatitude));
+   a0:= double(arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c^.Obslatitude)-tan(de)*cos(deg2rad*c^.Obslatitude)));
    azr:=pi2-a0;
    azs:=a0;
    irc:=0;
@@ -973,7 +993,7 @@ longref:=-c^.timezone*15;
 hs0 := sidtim(jd0,-c^.timezone,longref);
 chh0 :=(sin(deg2rad*ho[typobj])-sin(deg2rad*c^.ObsLatitude)*sin(de2))/(cos(deg2rad*c^.ObsLatitude)*cos(de2)) ;
 if abs(chh0)<=1 then begin
-   hh0:=arccos(chh0);
+   hh0:=double(arccos(chh0));
    m0:=(ar2+deg2rad*c^.ObsLongitude-deg2rad*longref-hs0)/pi2;
    m1:=m0-hh0/pi2;
    m2:=m0+hh0/pi2;
@@ -993,7 +1013,7 @@ if abs(chh0)<=1 then begin
    h:= rad2deg*(arcsin(sin(deg2rad*c^.Obslatitude) * sin(dd) + cos(deg2rad*c^.Obslatitude) * cos(dd) * cos(hl) ));
    dm:= (h - ho[typobj]) / (360 * cos(dd) * cos(deg2rad*c^.Obslatitude) * sin(hl) );
    hr:=(m1+dm)*24;
-   a0:= arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c^.Obslatitude)-tan(dd)*cos(deg2rad*c^.Obslatitude));
+   a0:= double(arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c^.Obslatitude)-tan(dd)*cos(deg2rad*c^.Obslatitude)));
    azr:=pi2-a0;
    // transit
    hsg:= hs0 + deg2rad*360.985647 * m0;
@@ -1016,7 +1036,7 @@ if abs(chh0)<=1 then begin
    h:= rad2deg*(arcsin(sin(deg2rad*c^.Obslatitude) * sin(dd) + cos(deg2rad*c^.Obslatitude) * cos(dd) * cos(hl) ));
    dm:= (h - ho[typobj]) / (360 * cos(dd) * cos(deg2rad*c^.Obslatitude) * sin(hl) );
    hs:=(m2+dm)*24;
-   a0:= arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c^.Obslatitude)-tan(dd)*cos(deg2rad*c^.Obslatitude));
+   a0:= double(arctan2(sin(hh0),cos(hh0)*sin(deg2rad*c^.Obslatitude)-tan(dd)*cos(deg2rad*c^.Obslatitude)));
    azs:=a0;
    irc:=0;
 end else begin
@@ -1044,7 +1064,7 @@ VAR hh,st,st0 : Double ;
 BEGIN
 hh := (sin(deg2rad*h)-sin(deg2rad*c^.ObsLatitude)*sin(de))/(cos(deg2rad*c^.ObsLatitude)*cos(de)) ;
 if abs(hh)<=1 then begin
-     hh := arccos(hh) ;
+     hh := double(arccos(hh)) ;
      st0 := rad2deg*sidtim(jd,0.0,c^.ObsLongitude)/15 ;
      st := rad2deg*(ar-hh)/15 ;
      hp1 := rmod((st-st0)/1.002737908+24,24) ;
