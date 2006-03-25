@@ -1,8 +1,8 @@
 object f_main: Tf_main
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 553
-  ClientWidth = 871
+  ClientHeight = 560
+  ClientWidth = 895
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
     36100000424D3610000000000000360000002800000020000000200000000100
@@ -147,12 +147,12 @@ object f_main: Tf_main
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 15
-  HorzScrollBar.Page = 870
-  VertScrollBar.Page = 552
+  HorzScrollBar.Page = 894
+  VertScrollBar.Page = 559
   Left = 240
-  Height = 573
+  Height = 580
   Top = 133
-  Width = 871
+  Width = 895
   object MultiDoc1: TMultiDoc
     BorderWidth = 1
     TitleHeight = 12
@@ -162,17 +162,17 @@ object f_main: Tf_main
     Align = alClient
     BevelOuter = bvNone
     Caption = 'MultiDoc1'
-    ClientHeight = 468
-    ClientWidth = 824
+    ClientHeight = 475
+    ClientWidth = 847
     Color = clBlack
     FullRepaint = False
     ParentColor = False
     TabOrder = 4
     OnResize = nil
-    Left = 23
-    Height = 468
+    Left = 24
+    Height = 475
     Top = 53
-    Width = 824
+    Width = 847
     object starshape: TImage
       AutoSize = True
       Picture.Data = {
@@ -2317,35 +2317,52 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Align = alLeft
-    AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 468
-    ClientWidth = 23
+    ClientHeight = 475
+    ClientWidth = 24
     FullRepaint = False
     TabOrder = 0
-    Height = 468
+    Height = 475
     Top = 53
-    Width = 23
+    Width = 24
     object ToolBar2: TToolBar
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar2'
       EdgeBorders = [ebBottom]
       Flat = True
-      Height = 468
+      Height = 475
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Wrapable = False
-      Height = 468
-      Width = 23
+      Height = 475
+      Width = 24
+      object ToolButton8: TToolButton
+        Action = SetupTime
+        Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Set date and time'
+        Width = 23
+      end
+      object ToolButton9: TToolButton
+        Action = SetupObservatory
+        Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Set observatory location'
+        Top = 23
+        Width = 23
+      end
       object ToolButtonConfig: TToolButton
         Action = OpenConfig
         Wrap = True
         Left = 1
         Height = 23
         Hint = 'Configure the program'
+        Top = 46
         Width = 23
       end
       object ToolButtonEQ: TToolButton
@@ -2355,7 +2372,7 @@ object f_main: Tf_main
         Left = 1
         Height = 23
         Hint = 'Equatorial Coordinate'
-        Top = 23
+        Top = 69
         Width = 23
       end
       object ToolButtonAZ: TToolButton
@@ -2365,7 +2382,7 @@ object f_main: Tf_main
         Left = 1
         Height = 23
         Hint = 'Alt-Az Coordinate'
-        Top = 46
+        Top = 92
         Width = 23
       end
       object ToolButtonEC: TToolButton
@@ -2375,7 +2392,7 @@ object f_main: Tf_main
         Left = 1
         Height = 23
         Hint = 'Ecliptic Coordinate'
-        Top = 69
+        Top = 115
         Width = 23
       end
       object ToolButtonGL: TToolButton
@@ -2385,7 +2402,7 @@ object f_main: Tf_main
         Left = 1
         Height = 23
         Hint = 'Galactic Coordinate'
-        Top = 92
+        Top = 138
         Width = 23
       end
       object FlipButtonX: TToolButton
@@ -2394,7 +2411,7 @@ object f_main: Tf_main
         Left = 1
         Height = 23
         Hint = 'Mirror Horizontally'
-        Top = 115
+        Top = 161
         Width = 23
       end
       object FlipButtonY: TToolButton
@@ -2403,7 +2420,7 @@ object f_main: Tf_main
         Left = 1
         Height = 23
         Hint = 'Mirror Vertically'
-        Top = 138
+        Top = 184
         Width = 23
       end
       object ToolButtonRotP: TToolButton
@@ -2412,15 +2429,16 @@ object f_main: Tf_main
         Left = 1
         Height = 23
         Hint = 'Rotate Right'
-        Top = 161
+        Top = 207
         Width = 23
       end
       object ToolButtonRotM: TToolButton
         Action = rot_minus
+        Wrap = True
         Left = 1
         Height = 23
         Hint = 'Rotate Left'
-        Top = 184
+        Top = 230
         Width = 23
       end
     end
@@ -2429,12 +2447,12 @@ object f_main: Tf_main
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 468
+    ClientHeight = 475
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 1
-    Left = 847
-    Height = 468
+    Left = 871
+    Height = 475
     Top = 53
     Width = 24
     object ToolBar3: TToolBar
@@ -2448,13 +2466,13 @@ object f_main: Tf_main
       Font.Height = -10
       Font.Name = 'Default'
       Font.Pitch = fpVariable
-      Height = 218
+      Height = 225
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Wrapable = False
-      Height = 218
+      Height = 225
       Top = 250
       Width = 24
       object ToolButtonAllSky: TToolButton
@@ -2664,12 +2682,12 @@ object f_main: Tf_main
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 32
-    ClientWidth = 871
+    ClientWidth = 895
     FullRepaint = False
     TabOrder = 2
     Height = 32
-    Top = 521
-    Width = 871
+    Top = 528
+    Width = 895
     object Bevel1: TBevel
       Align = alLeft
       Height = 32
@@ -2713,12 +2731,12 @@ object f_main: Tf_main
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 32
-      ClientWidth = 712
+      ClientWidth = 736
       FullRepaint = False
       TabOrder = 1
       Left = 159
       Height = 32
-      Width = 712
+      Width = 736
       object LPanels1: TLabel
         Caption = 'LPanels1'
         Color = clNone
@@ -2736,11 +2754,11 @@ object f_main: Tf_main
     AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 53
-    ClientWidth = 871
+    ClientWidth = 895
     FullRepaint = False
     TabOrder = 3
     Height = 53
-    Width = 871
+    Width = 895
     object ToolBar1: TToolBar
       AutoSize = True
       ButtonHeight = 23
@@ -2752,10 +2770,9 @@ object f_main: Tf_main
       TabOrder = 0
       Wrapable = False
       Height = 25
-      Width = 871
+      Width = 895
       object ToolButtonNew: TToolButton
         Action = FileNew1
-        Left = 1
         Height = 23
         Hint = 'New|Create a new chart'
         Top = 2
@@ -2890,11 +2907,11 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Search'
         Top = 2
-        Width = 85
+        Width = 68
       end
       object ToolButtonSearch: TToolButton
         Action = Search1
-        Left = 402
+        Left = 385
         Height = 23
         Hint = 'Advanced Search'
         Top = 2
@@ -3032,7 +3049,7 @@ object f_main: Tf_main
       end
       object ToolButtonPosition: TToolButton
         Action = Position
-        Left = 425
+        Left = 408
         Height = 23
         Hint = 'Position'
         Top = 2
@@ -3040,7 +3057,7 @@ object f_main: Tf_main
       end
       object ToolButtonListObj: TToolButton
         Action = listobj
-        Left = 448
+        Left = 431
         Height = 23
         Hint = 'Object List'
         Top = 2
@@ -3048,7 +3065,7 @@ object f_main: Tf_main
       end
       object ToolButtonCal: TToolButton
         Action = Calendar
-        Left = 471
+        Left = 454
         Height = 23
         Hint = 'Ephemeris Calendar'
         Top = 2
@@ -3059,14 +3076,14 @@ object f_main: Tf_main
         ImageIndex = 8
         Style = tbsDivider
         Width = 8
-        Left = 494
+        Left = 477
         Height = 23
         Top = 2
         Width = 8
       end
       object ToolButtonTdec: TToolButton
         Action = TimeDec
-        Left = 502
+        Left = 485
         Height = 23
         Hint = 'Decrement Time'
         Top = 2
@@ -3074,7 +3091,7 @@ object f_main: Tf_main
       end
       object ToolButtonTnow: TToolButton
         Action = TimeReset
-        Left = 525
+        Left = 508
         Height = 23
         Hint = 'Now'
         Top = 2
@@ -3082,7 +3099,7 @@ object f_main: Tf_main
       end
       object ToolButtonTinc: TToolButton
         Action = TimeInc
-        Left = 548
+        Left = 531
         Height = 23
         Hint = 'Increment Time'
         Top = 2
@@ -3093,11 +3110,11 @@ object f_main: Tf_main
         MinValue = 1
         TabOrder = 4
         Value = 1
-        Left = 571
+        Left = 554
         Height = 23
         Hint = 'Time'
         Top = 2
-        Width = 86
+        Width = 54
       end
       object TimeU: TComboBox
         AutoCompleteText = [cbactSearchAscending]
@@ -3107,7 +3124,7 @@ object f_main: Tf_main
         MaxLength = 0
         Style = csDropDownList
         TabOrder = 2
-        Left = 657
+        Left = 608
         Height = 23
         Hint = 'Time Units'
         Top = 2
@@ -3118,14 +3135,14 @@ object f_main: Tf_main
         ImageIndex = 45
         Style = tbsDivider
         Width = 8
-        Left = 742
+        Left = 693
         Height = 23
         Top = 2
         Width = 8
       end
       object TConnect: TToolButton
         Action = TelescopeConnect
-        Left = 750
+        Left = 701
         Height = 23
         Hint = 'Connect Telescope'
         Top = 2
@@ -3133,7 +3150,7 @@ object f_main: Tf_main
       end
       object TSlew: TToolButton
         Action = TelescopeSlew
-        Left = 796
+        Left = 747
         Height = 23
         Hint = 'Slew'
         Top = 2
@@ -3141,7 +3158,7 @@ object f_main: Tf_main
       end
       object TSync: TToolButton
         Action = TelescopeSync
-        Left = 773
+        Left = 724
         Height = 23
         Hint = 'Sync'
         Top = 2
@@ -3154,7 +3171,7 @@ object f_main: Tf_main
         ClientHeight = 23
         ClientWidth = 30
         TabOrder = 1
-        Left = 840
+        Left = 863
         Height = 23
         Top = 2
         Width = 30
@@ -3178,7 +3195,7 @@ object f_main: Tf_main
         Caption = 'ToolButton6'
         Style = tbsDivider
         Width = 8
-        Left = 819
+        Left = 770
         Height = 23
         Top = 2
         Width = 8
@@ -3188,7 +3205,7 @@ object f_main: Tf_main
         Caption = 'ToolButton7'
         Style = tbsSeparator
         Width = 23
-        Left = 870
+        Left = 778
         Height = 23
         Top = 2
         Width = 23
@@ -3209,7 +3226,7 @@ object f_main: Tf_main
       Wrapable = False
       Height = 28
       Top = 25
-      Width = 871
+      Width = 895
       object topmessage1: TLabel
         Caption = '    '
         Color = clNone
@@ -3222,7 +3239,6 @@ object f_main: Tf_main
       object ToolButtonShowStars: TToolButton
         Action = ShowStars
         Style = tbsCheck
-        Left = 1
         Height = 24
         Hint = 'Show Stars'
         Top = 2
@@ -4205,7 +4221,7 @@ object f_main: Tf_main
     object TimeReset: TAction
       Caption = 'TimeReset'
       Hint = 'Now'
-      ImageIndex = 45
+      ImageIndex = 84
       OnExecute = TimeResetExecute
       Category = 'chart'
     end
@@ -4511,11 +4527,14 @@ object f_main: Tf_main
     object SetupTime: TAction
       Caption = 'Date / Time'
       Hint = 'Set date and time'
+      ImageIndex = 45
       OnExecute = SetupTimeExecute
       Category = 'Setup'
     end
     object SetupObservatory: TAction
       Caption = 'Observatory'
+      Hint = 'Set observatory location'
+      ImageIndex = 85
       OnExecute = SetupObservatoryExecute
       Category = 'Setup'
     end
@@ -4573,7 +4592,7 @@ object f_main: Tf_main
     left = 280
     top = 160
     Bitmap = {
-      6C69540000001000000010000000600200002F2A2058504D202A2F0A73746174
+      6C69560000001000000010000000600200002F2A2058504D202A2F0A73746174
       69632063686172202A677261706869635B5D203D207B0A223136203136203136
       2031222C0A222E2063204E6F6E65222C0A222C20632023423539344546222C0A
       222D20632023364236423943222C0A222A20632023423538434537222C0A2261
@@ -7039,7 +7058,51 @@ object f_main: Tf_main
       6A6B6C62222C0A222E2E2E2E2E2E2E2E2E632A2E6D6E6F70222C0A222E2E2E2E
       2E2E2E2E2E6366716C64676A222C0A222E2E2E2E2E2E2E2E2E63727369747562
       222C0A222E2E2E2E2E2E2E2E2E687670776C7861222C0A222E2E2E2E2E2E2E2E
-      2E626261797A6B62227D0A
+      2E626261797A6B62227D0ABE0200002F2A2058504D202A2F0A73746174696320
+      63686172202A6938345B5D203D207B0A2F2A2077696474682068656967687420
+      6E756D5F636F6C6F72732063686172735F7065725F706978656C202A2F0A2220
+      2020203136202020203136202020202020203136202020202020202020202020
+      31222C0A2F2A20636F6C6F7273202A2F0A226020632023623538636537222C0A
+      222E20632023363336333934222C0A22232063204E6F6E65222C0A2261206320
+      23363336336537222C0A226220632023646565666666222C0A22632063202364
+      3665666666222C0A226420632023636565376666222C0A226520632023643665
+      376666222C0A226620632023633665376666222C0A2267206320236666666666
+      66222C0A226820632023303030303030222C0A22692063202330303030303022
+      2C0A226A20632023303030303030222C0A226B20632023303030303030222C0A
+      226C20632023303030303030222C0A226D20632023303030303030222C0A2F2A
+      20706978656C73202A2F0A2223232323232323232323232323232323222C0A22
+      23232323232323232323232323232323222C0A222323232E602E602E602E602E
+      602E2323222C0A2223232361232323232323232323612323222C0A222323232E
+      2323232323232323232E2323222C0A2223232361232323232323232323612323
+      222C0A2223232361232323232323622363612323222C0A222323232E23232323
+      23232323232E2323222C0A2223232361232323236223632365612323222C0A22
+      2323232E2323232323632323232E2323222C0A22232323612323622363236423
+      66612323222C0A222323232E2323236323232364672E2323222C0A222323232E
+      602E602E602E602E60612323222C0A2223232323232323232323232323232323
+      222C0A2223232323232323232323232323232323222C0A222323232323232323
+      2323232323232323220A7D3B0ABE0200002F2A2058504D202A2F0A7374617469
+      632063686172202A6938355B5D203D207B0A2F2A207769647468206865696768
+      74206E756D5F636F6C6F72732063686172735F7065725F706978656C202A2F0A
+      2220202020313620202020313620202020202020313620202020202020202020
+      202031222C0A2F2A20636F6C6F7273202A2F0A22602063204E6F6E65222C0A22
+      2E20632023333961356365222C0A222320632023343234323432222C0A226120
+      632023643665666666222C0A226220632023666666666666222C0A2263206320
+      23666666666666222C0A226420632023666666666666222C0A22652063202366
+      6666666666222C0A226620632023666666666666222C0A226720632023666666
+      666666222C0A226820632023666666666666222C0A2269206320236666666666
+      66222C0A226A20632023666666666666222C0A226B2063202366666666666622
+      2C0A226C20632023666666666666222C0A226D20632023666666666666222C0A
+      2F2A20706978656C73202A2F0A2260606060606060606060606060606060222C
+      0A22606060606060602E2E2E606060606060222C0A2260606060602E2E232E23
+      2E2E60606060222C0A22606060602E61232E232E61612E606060222C0A226060
+      602E61612E232E616161612E6060222C0A226060602E612E232E23616161612E
+      6060222C0A2260602E6161232E236161616161612E60222C0A2260602E61612E
+      232E6161616161612E60222C0A2260602E612E612E612E612E612E612E60222C
+      0A2260602E2E2E2E2E2E2E2E2E2E2E2E2E60222C0A226060602E61616161612E
+      612E612E6060222C0A226060602E6161616161612E612E2E6060222C0A226060
+      602E61616161612E612E612E6060222C0A226060602E616161612E612E612E2E
+      6060222C0A226060602E2E2E2E2E2E2E2E2E2E2E6060222C0A22606060606060
+      60606060606060606060220A7D3B0A
     }
   end
 end
