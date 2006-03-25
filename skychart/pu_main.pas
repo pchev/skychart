@@ -4138,6 +4138,7 @@ for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].caption=chart then with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
      sc.cfgsc.racentre:=sc.cfgsc.FindRa;
      sc.cfgsc.decentre:=sc.cfgsc.FindDec;
+     sc.cfgsc.TrackOn:=false;
      Refresh;
      break;
 end;

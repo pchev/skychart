@@ -1275,6 +1275,7 @@ end;
 
 procedure Tskychart.MoveChart(ns,ew:integer; movefactor:double);
 begin
+ cfgsc^.TrackOn:=false;
  if cfgsc^.Projpole=AltAz then begin
     cfgsc^.acentre:=rmod(cfgsc^.acentre-ew*cfgsc^.fov/movefactor/cos(cfgsc^.hcentre)+pi2,pi2);
     cfgsc^.hcentre:=cfgsc^.hcentre+ns*cfgsc^.fov/movefactor/cfgsc^.windowratio;
