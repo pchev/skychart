@@ -29,7 +29,7 @@ uses u_constant, u_util,
 
 Procedure ScaleWindow(c: Pconf_skychart);
 Function RotationAngle(x1,y1,x2,y2: double; c: Pconf_skychart): double;
-Procedure WindowXY(x,y:Double; var WindowX,WindowY: single; c: Pconf_skychart);
+Procedure WindowXY(x,y:Double; out WindowX,WindowY: single; c: Pconf_skychart);
 Procedure XYWindow( x,y: Integer; var Xwindow,Ywindow: double; c: Pconf_skychart);
 function Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; c: Pconf_skychart; tohrz:boolean=false):boolean;
 function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Pconf_skychart ):boolean;
@@ -130,7 +130,7 @@ result:=double(arctan2((x1-x2),(y1-y2)));
 if c^.FlipY<0 then result:=result-pi;
 end;      
 
-Procedure WindowXY(x,y:Double; var WindowX,WindowY: single; c: Pconf_skychart);
+Procedure WindowXY(x,y:Double; out WindowX,WindowY: single; c: Pconf_skychart);
 BEGIN
  WindowX:=c^.AxGlb+c^.BxGlb*x+c^.Xshift;
  WindowY:=c^.AyGlb+c^.ByGlb*y+c^.Yshift;

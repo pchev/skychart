@@ -1102,6 +1102,14 @@ BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
 starshape.Picture.Bitmap.Transparent:=false;
 //todo: Screen.Cursors[crRetic] := LoadCursorFromFile('retic.cur');
+zlib:=LoadLibrary(libzlib);
+if zlib<>0 then begin
+  gzopen:= Tgzopen(GetProcAddress(zlib,'gzopen'));
+  gzread:= Tgzread(GetProcAddress(zlib,'gzread'));
+  gzclose:= Tgzclose(GetProcAddress(zlib,'gzclose'));
+  gzeof:= Tgzeof(GetProcAddress(zlib,'gzeof'));
+  zlibok:=true;
+end else zlibok:=false;
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -1471,7 +1479,8 @@ procedure Tf_main.DSSImageExecute(Sender: TObject);
 begin
 if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
   then with MultiDoc1.ActiveObject as Tf_chart do begin
-   if f_getdss.GetDss(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov,sc.cfgsc.windowratio) then begin
+   f_getdss.cmain:=@cfgm;
+   if f_getdss.GetDss(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
       sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
       if sc.Fits.Header.valid then begin
          sc.Fits.DeleteDB('OTHER','BKG');
@@ -2409,6 +2418,30 @@ buf:=stringreplace(URL_HTTPAsteroidElements1,'$$$$',FormatDateTime('yyyy',now),[
 cfgm.AsteroidUrlList.Add(buf);
 buf:=stringreplace(URL_HTTPAsteroidElements2,'$$$$',FormatDateTime('yyyy',now),[]);
 cfgm.AsteroidUrlList.Add(buf);
+for i:=1 to MaxDSSurl do begin
+  f_getdss.cfgdss.DSSurl[i,0]:='';
+  f_getdss.cfgdss.DSSurl[i,1]:='';
+end;
+f_getdss.cfgdss.DSSurl[1,0]:=URL_DSS_NAME1;
+f_getdss.cfgdss.DSSurl[1,1]:=URL_DSS1;
+f_getdss.cfgdss.DSSurl[2,0]:=URL_DSS_NAME2;
+f_getdss.cfgdss.DSSurl[2,1]:=URL_DSS2;
+f_getdss.cfgdss.DSSurl[3,0]:=URL_DSS_NAME3;
+f_getdss.cfgdss.DSSurl[3,1]:=URL_DSS3;
+f_getdss.cfgdss.DSSurl[4,0]:=URL_DSS_NAME4;
+f_getdss.cfgdss.DSSurl[4,1]:=URL_DSS4;
+f_getdss.cfgdss.DSSurl[5,0]:=URL_DSS_NAME5;
+f_getdss.cfgdss.DSSurl[5,1]:=URL_DSS5;
+f_getdss.cfgdss.DSSurl[6,0]:=URL_DSS_NAME6;
+f_getdss.cfgdss.DSSurl[6,1]:=URL_DSS6;
+f_getdss.cfgdss.DSSurl[7,0]:=URL_DSS_NAME7;
+f_getdss.cfgdss.DSSurl[7,1]:=URL_DSS7;
+f_getdss.cfgdss.DSSurl[8,0]:=URL_DSS_NAME8;
+f_getdss.cfgdss.DSSurl[8,1]:=URL_DSS8;
+f_getdss.cfgdss.DSSurl[9,0]:=URL_DSS_NAME9;
+f_getdss.cfgdss.DSSurl[9,1]:=URL_DSS9;
+f_getdss.cfgdss.OnlineDSS:=true;
+f_getdss.cfgdss.OnlineDSSid:=1;
 for i:=1 to numfont do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
    def_cfgplot.FontSize[i]:=DefaultFontSize;
@@ -3100,6 +3133,12 @@ f_getdss.cfgdss.dssmaxsize:=ReadInteger(section,'dssmaxsize',2048);
 f_getdss.cfgdss.dssdir:=ReadString(section,'dssdir',slash('cat')+'RealSky');
 f_getdss.cfgdss.dssdrive:=ReadString(section,'dssdrive',default_dssdrive);
 f_getdss.cfgdss.dssfile:=ReadString(section,'dssfile',slash(privatedir)+slash('pictures')+'$temp.fit');
+for i:=1 to MaxDSSurl do begin
+  f_getdss.cfgdss.DSSurl[i,0]:=ReadString(section,'DSSurlName'+inttostr(i),f_getdss.cfgdss.DSSurl[i,0]);
+  f_getdss.cfgdss.DSSurl[i,1]:=ReadString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
+end;
+f_getdss.cfgdss.OnlineDSS:=ReadBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
+f_getdss.cfgdss.OnlineDSSid:=ReadInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
 section:='quicksearch';
 j:=min(MaxQuickSearch,ReadInteger(section,'count',0));
 for i:=1 to j do quicksearch.Items.Add(ReadString(section,'item'+inttostr(i),''));
@@ -3481,6 +3520,12 @@ WriteInteger(section,'dssmaxsize',f_getdss.cfgdss.dssmaxsize);
 WriteString(section,'dssdir',f_getdss.cfgdss.dssdir);
 WriteString(section,'dssdrive',f_getdss.cfgdss.dssdrive);
 WriteString(section,'dssfile',f_getdss.cfgdss.dssfile);
+for i:=1 to MaxDSSurl do begin
+  WriteString(section,'DSSurlName'+inttostr(i),f_getdss.cfgdss.DSSurl[i,0]);
+  WriteString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
+end;
+WriteBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
+WriteInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
 Updatefile;
 end;
 finally

@@ -31,7 +31,7 @@ interface
 uses
   dynlibs, u_constant, u_util, Math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, LResources;
+  StdCtrls, Buttons, LResources, downloaddialog, IpHtml;
 
 // GetDss.dll interface
   type
@@ -64,16 +64,25 @@ uses
   TGetPlateList=function( img : PImageConfig; pl : PPlate_data): Integer; cdecl;
   TImageExtractFromPlate=function( img : PImageConfig; ReqPlateName : Pchar): Integer; cdecl;
 
+type
+  TSimpleIpHtml = class(TIpHtml)
+  public
+    property OnGetImageX;
+  end;
 
 type
+
+  { Tf_getdss }
+
   Tf_getdss = class(TForm)
+    DownloadDialog1: TDownloadDialog;
+    IpHtmlPanel1: TIpHtmlPanel;
     ListBox1: TListBox;
     Label1: TLabel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     dsslib: Dword;
@@ -81,11 +90,12 @@ type
     ImageExtract: TImageExtract;
     GetPlateList: TGetPlateList;
     ImageExtractFromPlate: TImageExtractFromPlate;
+    procedure HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
   public
     { Public declarations }
     cfgdss: conf_dss;
-    function GetDss(ra,de,fov,ratio:double):boolean;
-    property enabled: boolean read Fenabled;
+    cmain: PConf_Main;
+    function GetDss(ra,de,fov,ratio:double; imgx:integer):boolean;
   end;
 
   Var f_getdss: Tf_getdss;
@@ -131,22 +141,103 @@ writetrace('error destroy '+name);
 end;
 end;
 
-
-procedure Tf_getdss.FormShow(Sender: TObject);
-begin
-
-end;
-
-function Tf_getdss.GetDss(ra,de,fov,ratio:double):boolean;
+function Tf_getdss.GetDss(ra,de,fov,ratio:double; imgx:integer):boolean;
 var i : SImageConfig;
     pl: Plate_data;
-    rc,datasource,subsample,n : integer;
+    rc,datasource,subsample,n,l,imgy : integer;
     width,height,npix,imgsize : double;
-    ima,app,platename,buf : string;
+    ima,app,platename,buf,dd,mm,ss : string;
+    firstrec: boolean;
+    gzf:longint;
+    fitsfile:file;
+    gzbuf : array[0..4095]of char;
+    NewHTML: TSimpleIpHtml;
+    s: TMemoryStream;
 begin
 try
-  result:=false;
-  if not Fenabled then exit;
+result:=false;
+if cfgdss.OnlineDSS then begin // Online DSS
+  if cmain.HttpProxy then begin
+    DownloadDialog1.HttpProxy:=cmain.ProxyHost;
+    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+  end else begin
+    DownloadDialog1.HttpProxy:='';
+    DownloadDialog1.HttpProxyPort:='';
+    DownloadDialog1.HttpProxyUser:='';
+    DownloadDialog1.HttpProxyPass:='';
+  end;
+  DownloadDialog1.FtpUserName:='anonymous';
+  DownloadDialog1.FtpPassword:=cmain.AnonPass;
+  DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
+  buf:=cfgdss.DSSurl[cfgdss.OnlineDSSid,1];
+  width:=fov*rad2deg*60;
+  height:=width/ratio;
+  imgy:=round(imgx/ratio);
+  buf:=StringReplace(buf,'$XSZ',formatfloat(f1s,width),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$YSZ',formatfloat(f1s,height),[rfReplaceAll]);
+  ArToStr2(rad2deg*ra/15,dd,mm,ss);
+  buf:=StringReplace(buf,'$RAH',dd,[rfReplaceAll]);
+  buf:=StringReplace(buf,'$RAM',mm,[rfReplaceAll]);
+  buf:=StringReplace(buf,'$RAS',ss,[rfReplaceAll]);
+  DeToStr2(rad2deg*de,dd,mm,ss);
+  buf:=StringReplace(buf,'$DED',dd,[rfReplaceAll]);
+  buf:=StringReplace(buf,'$DEM',mm,[rfReplaceAll]);
+  buf:=StringReplace(buf,'$DES',ss,[rfReplaceAll]);
+  buf:=StringReplace(buf,'$FOVF',formatfloat(f5,rad2deg*fov),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$RAF',formatfloat(f5,rad2deg*ra),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$DEF',formatfloat(f5,rad2deg*de),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$PIXX',inttostr(imgx),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$PIXY',inttostr(imgy),[rfReplaceAll]);
+  DownloadDialog1.URL:=buf;
+  DownloadDialog1.SaveToFile:=ExpandFileName(cfgdss.dssfile+'.gz');
+  if DownloadDialog1.Execute then begin
+     gzf:=gzopen(pchar(DownloadDialog1.SaveToFile),pchar('rb'));
+     assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
+     rewrite(fitsfile,1);
+     firstrec:=true;
+     repeat
+       l:=gzread(gzf,@gzbuf,length(gzbuf));
+       blockwrite(fitsfile,gzbuf,l,n);
+       if firstrec then begin
+          firstrec:=false;
+          if copy(gzbuf,1,6)='SIMPLE' then result:=true;
+       end;
+     until gzeof(gzf)=1;
+     gzclose(gzf);
+     CloseFile(fitsfile);
+  end
+  else begin
+     assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
+     rewrite(fitsfile,1);
+     buf:=html_h+DownloadDialog1.ResponseText;
+     buf:=buf+html_p+'Please check your Internet connection and the URL definition'+htms_p;
+     buf:=buf+htms_h;
+     gzbuf:=buf;
+     blockwrite(fitsfile,gzbuf,length(buf),n);
+     CloseFile(fitsfile);
+  end;
+  if (DownloadDialog1.ResponseText<>'')and(not result) then begin
+     caption:='Error';
+     Label1.Caption:=DownloadDialog1.ResponseText;
+     s:=TMemoryStream.Create;
+     s.LoadFromFile(ExpandFileName(cfgdss.dssfile));
+     NewHTML:=TSimpleIpHtml.Create; // Beware: Will be freed automatically by IpHtmlPanel1
+     NewHTML.OnGetImageX:=HTMLGetImageX;
+     NewHTML.LoadFromStream(s);
+     s.free;
+     IpHtmlPanel1.SetHtml(NewHTML);
+     IpHtmlPanel1.visible:=true;
+     ListBox1.Visible:=false;
+     BitBtn1.Visible:=false;
+     showmodal;
+     IpHtmlPanel1.visible:=false;
+     ListBox1.Visible:=true;
+     BitBtn1.Visible:=true;
+  end;
+
+end else if Fenabled then begin    // RealSky cdrom
   datasource:=0;
   if cfgdss.dss102 then datasource:=3
   else if cfgdss.dssnorth and cfgdss.dsssouth then datasource:=4
@@ -203,6 +294,7 @@ try
     rc:=GetPlateList(addr(i),addr(pl));
     if (rc<>0) then exit;
       listbox1.clear;
+      caption:='List of available plates';
       label1.caption:='Plate Id.    Date   Exp.  Margin  CD  Observatory';
       if pl.nplate>10 then pl.nplate:=10;
       for n:=1 to pl.nplate do begin
@@ -246,9 +338,30 @@ try
     {$endif}
   end;
   result:=(rc=0);
+end;
 finally
   chdir(appdir);
 end;
+end;
+
+procedure Tf_getdss.HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
+var
+  PicCreated: boolean;
+begin
+  try
+    if FileExists(URL) then begin
+      PicCreated := False;
+      if Picture=nil then begin
+        Picture:=TPicture.Create;
+        PicCreated := True;
+      end;
+      Picture.LoadFromFile(URL);
+    end;
+  except
+    if PicCreated then
+      Picture.Free;
+    Picture := nil;
+  end;
 end;
 
 initialization

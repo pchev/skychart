@@ -36,6 +36,9 @@ type
 
   Tf_config_pictures = class(TForm)
     backimg: TFileNameEdit;
+    OnlineDSS: TCheckBox;
+    OnlineDSSList: TComboBox;
+    GroupBox1: TGroupBox;
     imgpath: TDirectoryEdit;
     MainPanel: TPanel;
     Page1: TPage;
@@ -88,6 +91,8 @@ type
     procedure imgpathChange(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure OnlineDSSChange(Sender: TObject);
+    procedure OnlineDSSListChange(Sender: TObject);
     procedure ScanImagesClick(Sender: TObject);
     procedure ImgLumBarChange(Sender: TObject);
     procedure ImgContrastBarChange(Sender: TObject);
@@ -155,6 +160,7 @@ end;
 
 procedure Tf_config_pictures.ShowImages;
 var save:boolean;
+  i: Integer;
 begin
 imgpath.text:=cmain.ImagePath;
 ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
@@ -177,6 +183,12 @@ realskyfile.text:=cdss.dssfile;
 reallist.checked:=cdss.dssplateprompt;
 usesubsample.checked:=cdss.dsssampling;
 realskymax.value:=cdss.dssmaxsize;
+OnlineDSS.Checked:=cdss.OnlineDSS;
+OnlineDSSList.Clear;
+for i:=1 to MaxDSSurl do
+  if cdss.DSSurl[i,1]<>'' then
+     OnlineDSSList.Items.Add(cdss.DSSurl[i,0]);
+OnlineDSSList.ItemIndex:=cdss.OnlineDSSid-1;
 end;
 
 procedure Tf_config_pictures.imgpathChange(Sender: TObject);
@@ -366,6 +378,16 @@ end;
 procedure Tf_config_pictures.usesubsampleClick(Sender: TObject);
 begin
 cdss.dsssampling:=usesubsample.checked;
+end;
+
+procedure Tf_config_pictures.OnlineDSSChange(Sender: TObject);
+begin
+cdss.OnlineDSS:=OnlineDSS.Checked;
+end;
+
+procedure Tf_config_pictures.OnlineDSSListChange(Sender: TObject);
+begin
+cdss.OnlineDSSid:=OnlineDSSList.ItemIndex+1;
 end;
 
 initialization

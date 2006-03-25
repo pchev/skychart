@@ -45,6 +45,7 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       maxlabels = 300; //maximum number of label to a chart
       maxmodlabels = 500; //maximum number of modified labels before older one are replaced
       MaxCircle = 100;
+      MaxDSSurl = 20;
       crRetic = 5;
       jd2000 =2451545.0 ;
       jd1950 =2433282.4235;
@@ -219,11 +220,29 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       //Default URL
       URL_HTTPCometElements = 'http://cfa-www.harvard.edu/iau/Ephemerides/Comets/Soft00Cmt.txt';
       URL_FTPCometElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
-      URL_HTTPAsteroidElements1 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Bright/$$$$/Soft00Bright.txt';
+      URL_HTTPAsteroidElements1 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
       URL_HTTPAsteroidElements2 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Unusual/Soft00Unusual.txt';
       URL_MPCORBAsteroidElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/MPCORB.DAT';
       URL_CDCAsteroidElements = 'http://www.ap-i.net/skychart/data/mpc5000.dat';
       
+      URL_DSS_NAME1 = 'DSS 1';
+      URL_DSS1 = 'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS1&mime-type=display/gz-fits';
+      URL_DSS_NAME2 = 'DSS 2 Red';
+      URL_DSS2 = 'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS2-red&mime-type=display/gz-fits';
+      URL_DSS_NAME3 = 'DSS 2 Blue';
+      URL_DSS3 = 'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS2-blue&mime-type=display/gz-fits';
+      URL_DSS_NAME4 = 'DSS 2 Infrared';
+      URL_DSS4 = 'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS2-infrared&mime-type=display/gz-fits';
+      URL_DSS_NAME5 = 'SkyView DSS';
+      URL_DSS5 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=Digitized%20Sky%20Survey&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS_NAME6 = 'SkyView H-alpha Full Sky Map';
+      URL_DSS6 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=H-ALPHA%20COMP&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS_NAME7 = 'SkyView  Sloan Digital Sky Survey R';
+      URL_DSS7 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=SDSS%20R&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS_NAME8 = 'SkyView Two Micron All Sky Survey J';
+      URL_DSS8 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=2MASS-J&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS_NAME9 = 'SkyView IRAS 12 micron';
+      URL_DSS9 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=IRAS%2012%20micron&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
 
 {$ifdef unix}
       DefaultFontName='Helvetica';
@@ -442,6 +461,9 @@ type
                 dssdir,dssdrive,dssfile : string;
                 dss102,dssnorth,dsssouth,dsssampling,dssplateprompt : boolean;
                 dssmaxsize : integer;
+                OnlineDSS : Boolean;
+                OnlineDSSid: integer;
+                DSSurl: array[1..MaxDSSurl,0..1] of String;
                 end;
                 
      Pconf_catalog = ^conf_catalog;
@@ -459,11 +481,13 @@ type
 const
 {$ifdef unix}
       lib404   = 'libplan404.so';
+      libzlib = 'libzlib.so';
 //      libsatxy = 'libsatxy.so';
 //      libsatxyfm='Satxyfm';
 {$endif}
 {$ifdef win32}
       lib404 = 'libplan404.dll';
+      libzlib = 'zlib.dll';
 //      libsatxy = 'libsatxy.dll';
 //      libsatxyfm='Satxyfm';
 {$endif}
@@ -483,12 +507,24 @@ type
      PPlanetData = ^TPlanetData;
 Function Plan404( pla : PPlanetData):integer; cdecl; external lib404;
 
+//  zlib
+type
+ Tgzopen =Function(path,mode :pchar): integer ; Stdcall;
+ Tgzread =Function(gzFile: integer; buf : pchar; len:cardinal): integer; Stdcall;
+ Tgzeof =Function(gzFile: integer): integer; Stdcall;
+ Tgzclose =Function(gzFile: integer): integer; Stdcall;
+var gzopen : Tgzopen;
+    gzread : Tgzread;
+    gzeof : Tgzeof;
+    gzclose : Tgzclose;
+    zlibok: boolean;
+    zlib: longword;
+
 // libsatxy
 {type double8 = array[1..8] of double;
      Pdouble8 = ^double8;
      TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
 }
-
 
 // pseudo-constant only here
 Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
