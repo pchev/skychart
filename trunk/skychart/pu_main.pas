@@ -108,6 +108,8 @@ type
     ButtonMoreNeb: TImage;
     ButtonLessNeb: TImage;
     ImageNormal: TImageList;
+    ToolButton8: TToolButton;
+    ToolButton9: TToolButton;
     topmessage: TMenuItem;
     MultiDoc1: TMultiDoc;
     PanelFieldSize: TPanel;

@@ -1,0 +1,39 @@
+/* XPM */
+static char *i85[] = {
+/* width height num_colors chars_per_pixel */
+"    16    16       16            1",
+/* colors */
+"` c None",
+". c #39a5ce",
+"# c #424242",
+"a c #d6efff",
+"b c #ffffff",
+"c c #ffffff",
+"d c #ffffff",
+"e c #ffffff",
+"f c #ffffff",
+"g c #ffffff",
+"h c #ffffff",
+"i c #ffffff",
+"j c #ffffff",
+"k c #ffffff",
+"l c #ffffff",
+"m c #ffffff",
+/* pixels */
+"````````````````",
+"```````...``````",
+"`````..#.#..````",
+"````.a#.#.aa.```",
+"```.aa.#.aaaa.``",
+"```.a.#.#aaaa.``",
+"``.aa#.#aaaaaa.`",
+"``.aa.#.aaaaaa.`",
+"``.a.a.a.a.a.a.`",
+"``.............`",
+"```.aaaaa.a.a.``",
+"```.aaaaaa.a..``",
+"```.aaaaa.a.a.``",
+"```.aaaa.a.a..``",
+"```...........``",
+"````````````````"
+};
