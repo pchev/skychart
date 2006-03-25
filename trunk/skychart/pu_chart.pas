@@ -405,6 +405,7 @@ if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
   Image1.Invalidate;
+  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
   if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
   if assigned(FChartMove) then FChartMove(self);
 end;
@@ -425,6 +426,7 @@ if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
   Image1.Invalidate;
+  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
   if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
   if assigned(FChartMove) then FChartMove(self);
 end;
@@ -675,6 +677,7 @@ procedure Tf_chart.zoomplusmoveExecute(Sender: TObject);
 begin
 sc.zoom(zoomfactor);
 sc.MovetoXY(xcursor,ycursor);
+sc.cfgsc.TrackOn:=false;
 Refresh;
 end;
 
@@ -682,6 +685,7 @@ procedure Tf_chart.zoomminusmoveExecute(Sender: TObject);
 begin
 sc.zoom(1/zoomfactor);
 sc.MovetoXY(xcursor,ycursor);
+sc.cfgsc.TrackOn:=false;
 Refresh;
 end;
 
@@ -816,6 +820,7 @@ end;
 procedure Tf_chart.CentreExecute(Sender: TObject);
 begin
   sc.MovetoXY(xcursor,ycursor);
+  sc.cfgsc.TrackOn:=false;
   Refresh;
 end;
 
@@ -2234,6 +2239,7 @@ sc.cfgsc.hcentre:=pid2;
 Hz2Eq(sc.cfgsc.acentre,sc.cfgsc.hcentre,a,d,sc.cfgsc);
 sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
 sc.cfgsc.decentre:=d;
+sc.cfgsc.TrackOn:=false;
 if field>0 then begin
    setaz(az,redraw);
    end
@@ -2249,6 +2255,7 @@ if sc.cfgsc.Fov<pi then Hz2Eq(Az,a/2.3,a,d,sc.cfgsc)
 sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
 sc.cfgsc.decentre:=d;
 sc.cfgsc.ProjPole:=Altaz;
+sc.cfgsc.TrackOn:=false;
 if redraw then Refresh;
 end;
 
