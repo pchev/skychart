@@ -453,6 +453,7 @@ procedure Tf_config.SetCdss(value: conf_dss);
 begin
 Fcdss:=value;
 f_config_pictures1.cdss:=@Fcdss;
+f_config_internet1.cdss:=@Fcdss;
 end;
 
 procedure Tf_config.applyClick(Sender: TObject);

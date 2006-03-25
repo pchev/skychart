@@ -28,7 +28,7 @@ interface
 uses u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel;
+  ButtonPanel, Grids;
 
 type
 
@@ -36,11 +36,13 @@ type
 
   Tf_config_internet = class(TForm)
     astcdc: TButton;
+    DefaultDSS: TButton;
     comhttp: TButton;
     comftp: TButton;
     comdefault: TButton;
     astdefault: TButton;
     brightneo: TButton;
+    Label8: TLabel;
     mpcorb: TButton;
     ftppassive: TCheckBox;
     httpproxy: TCheckBox;
@@ -49,6 +51,7 @@ type
     Label7: TLabel;
     CometUrlList: TMemo;
     AsteroidUrlList: TMemo;
+    Page3: TPage;
     proxyhost: TEdit;
     proxyport: TEdit;
     proxyuser: TEdit;
@@ -65,6 +68,7 @@ type
     Page1: TPage;
     Notebook1: TNotebook;
     Page2: TPage;
+    DSSpictures: TStringGrid;
     procedure anonpassChange(Sender: TObject);
     procedure astcdcClick(Sender: TObject);
     procedure AsteroidUrlListExit(Sender: TObject);
@@ -73,6 +77,8 @@ type
     procedure brightneoClick(Sender: TObject);
     procedure comftpClick(Sender: TObject);
     procedure comhttpClick(Sender: TObject);
+    procedure DefaultDSSClick(Sender: TObject);
+    procedure DSSpicturesEditingDone(Sender: TObject);
     procedure mpcorbClick(Sender: TObject);
     procedure CometUrlListExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -88,10 +94,13 @@ type
     LockChange: boolean;
     procedure ShowProxy;
     procedure ShowOrbitalElements;
+    procedure ShowDSS;
   public
     { Public declarations }
     mycmain : conf_main;
+    mycdss : conf_dss;
     cmain : Pconf_main;
+    cdss : Pconf_dss;
     constructor Create(AOwner:TComponent); override;
   end;
 
@@ -100,6 +109,7 @@ implementation
 constructor Tf_config_internet.Create(AOwner:TComponent);
 begin
  cmain:=@mycmain;
+ cdss:=@mycdss;
  inherited Create(AOwner);
 end;
 
@@ -108,6 +118,7 @@ begin
 LockChange:=true;
 ShowProxy;
 ShowOrbitalElements;
+ShowDSS;
 LockChange:=false;
 end;
 
@@ -127,6 +138,19 @@ procedure Tf_config_internet.ShowOrbitalElements;
 begin
 CometUrlList.Lines.Assign(cmain.CometUrlList);
 AsteroidUrlList.Lines.Assign(cmain.AsteroidUrlList);
+end;
+
+procedure Tf_config_internet.ShowDSS;
+var i:integer;
+begin
+DSSpictures.RowCount:=MaxDSSurl+1;
+DSSpictures.ColWidths[1]:=DSSpictures.ClientWidth-DSSpictures.ColWidths[0];
+DSSpictures.Cells[0,0]:='Name';
+DSSpictures.Cells[1,0]:='URL';
+for i:=1 to MaxDSSurl do begin
+  DSSpictures.Cells[0,i]:=cdss.DSSurl[i,0];
+  DSSpictures.Cells[1,i]:=cdss.DSSurl[i,1];
+end;
 end;
 
 procedure Tf_config_internet.ftppassiveClick(Sender: TObject);
@@ -198,9 +222,9 @@ procedure Tf_config_internet.brightneoClick(Sender: TObject);
 var buf: string;
 begin
 AsteroidUrlList.Clear;
-buf:=stringreplace(URL_HTTPAsteroidElements1,'$$$$',FormatDateTime('yyyy',now),[]);
+buf:=stringreplace(URL_HTTPAsteroidElements1,'$YYYY',FormatDateTime('yyyy',now),[]);
 AsteroidUrlList.Lines.Add(buf);
-buf:=stringreplace(URL_HTTPAsteroidElements2,'$$$$',FormatDateTime('yyyy',now),[]);
+buf:=stringreplace(URL_HTTPAsteroidElements2,'$YYYY',FormatDateTime('yyyy',now),[]);
 AsteroidUrlList.Lines.Add(buf);
 AsteroidUrlListExit(Sender);
 end;
@@ -217,6 +241,45 @@ begin
 CometUrlList.Clear;
 CometUrlList.Lines.Add(URL_HTTPCometElements);
 CometUrlListExit(Sender);
+end;
+
+procedure Tf_config_internet.DefaultDSSClick(Sender: TObject);
+var
+  i: Integer;
+begin
+for i:=1 to MaxDSSurl do begin
+  cdss.DSSurl[i,0]:='';
+  cdss.DSSurl[i,1]:='';
+end;
+cdss.DSSurl[1,0]:=URL_DSS_NAME1;
+cdss.DSSurl[1,1]:=URL_DSS1;
+cdss.DSSurl[2,0]:=URL_DSS_NAME2;
+cdss.DSSurl[2,1]:=URL_DSS2;
+cdss.DSSurl[3,0]:=URL_DSS_NAME3;
+cdss.DSSurl[3,1]:=URL_DSS3;
+cdss.DSSurl[4,0]:=URL_DSS_NAME4;
+cdss.DSSurl[4,1]:=URL_DSS4;
+cdss.DSSurl[5,0]:=URL_DSS_NAME5;
+cdss.DSSurl[5,1]:=URL_DSS5;
+cdss.DSSurl[6,0]:=URL_DSS_NAME6;
+cdss.DSSurl[6,1]:=URL_DSS6;
+cdss.DSSurl[7,0]:=URL_DSS_NAME7;
+cdss.DSSurl[7,1]:=URL_DSS7;
+cdss.DSSurl[8,0]:=URL_DSS_NAME8;
+cdss.DSSurl[8,1]:=URL_DSS8;
+cdss.DSSurl[9,0]:=URL_DSS_NAME9;
+cdss.DSSurl[9,1]:=URL_DSS9;
+ShowDSS;
+end;
+
+procedure Tf_config_internet.DSSpicturesEditingDone(Sender: TObject);
+var
+  i: Integer;
+begin
+for i:=1 to MaxDSSurl do begin
+  cdss.DSSurl[i,0]:=DSSpictures.Cells[0,i];
+  cdss.DSSurl[i,1]:=DSSpictures.Cells[1,i];
+end;
 end;
 
 procedure Tf_config_internet.mpcorbClick(Sender: TObject);
