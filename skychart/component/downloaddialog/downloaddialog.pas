@@ -146,6 +146,7 @@ function TDownloadDialog.Execute:boolean;
 var urltxt,filetxt: TLabeledEdit;
     pos: TPoint;
 begin
+  FResponse:='';
   DF:=TForm.Create(Self);
   DF.Caption:='Download File';
   DF.FormStyle:=fsStayOnTop;
