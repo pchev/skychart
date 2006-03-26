@@ -159,9 +159,9 @@ begin
   urltxt:=TLabeledEdit.Create(self);
   with urltxt do begin
     Parent:=DF;
-    width:=300;
+    width:=400;
     text:=Furl;
-    EditLabel.Caption:='Copy from:';
+    EditLabel.Caption:=' Copy from:';
     top:=Editlabel.Height+4;
     left:=8;
     readonly:=true;
@@ -171,9 +171,9 @@ begin
   filetxt:=TLabeledEdit.Create(self);
   with filetxt do begin
     Parent:=DF;
-    width:=300;
+    width:=400;
     text:=Ffile;
-    EditLabel.Caption:='to file:';
+    EditLabel.Caption:=' to file:';
     top:=Editlabel.Height+urltxt.Top+urltxt.Height+4;
     left:=8;
     readonly:=true;
@@ -183,7 +183,7 @@ begin
   progress:=TEdit.Create(self);
   with progress do begin
     Parent:=DF;
-    width:=300;
+    width:=400;
     text:='';
     top:=filetxt.Top+filetxt.Height+4;
     left:=8;
@@ -207,7 +207,7 @@ begin
     Caption:='Cancel';
     onClick:=@BtnCancel;
     top:=okButton.top;
-    left:=DF.ClientWidth-cancelButton.Width-8;
+    left:=progress.Width-cancelButton.Width-8;
     Cancel:=True;
   end;
 
