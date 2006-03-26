@@ -487,7 +487,7 @@ const
 {$endif}
 {$ifdef win32}
       lib404 = 'libplan404.dll';
-      libz = 'zlib.dll';
+      libz = 'zlib1.dll';
 //      libsatxy = 'libsatxy.dll';
 //      libsatxyfm='Satxyfm';
 {$endif}
