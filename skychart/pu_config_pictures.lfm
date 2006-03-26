@@ -1,284 +1,271 @@
 object f_config_pictures: Tf_config_pictures
+  Left = 236
+  Height = 535
+  Top = 134
+  Width = 526
+  HorzScrollBar.Page = 525
+  VertScrollBar.Page = 534
   ActiveControl = ScanImages
   Caption = 'f_config_pictures'
   ClientHeight = 535
   ClientWidth = 526
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
-  HorzScrollBar.Page = 525
-  VertScrollBar.Page = 534
-  Left = 236
-  Height = 535
-  Top = 134
-  Width = 526
+  PixelsPerInch = 90
   object MainPanel: TPanel
-    ClientHeight = 480
-    ClientWidth = 500
-    ParentColor = False
-    TabOrder = 0
     Left = 8
     Height = 480
     Top = 8
     Width = 500
+    ClientHeight = 480
+    ClientWidth = 500
+    ParentColor = False
+    TabOrder = 0
     object Notebook1: TNotebook
-      Align = alClient
-      PageIndex = 1
-      ShowTabs = False
       Left = 1
       Height = 478
       Top = 1
       Width = 498
+      Align = alClient
+      OnPageChanged = Notebook1PageChanged
+      PageIndex = 1
+      ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 490
-        ClientHeight = 470
-        Height = 470
-        Width = 490
+        ClientWidth = 498
+        ClientHeight = 478
         object Label50: TLabel
+          Left = 2
+          Height = 13
+          Top = 2
+          Width = 197
           Caption = 'Display image of cataloged objects'
           Color = clNone
           ParentColor = False
-          Left = 2
-          Height = 14
-          Top = 2
-          Width = 167
         end
         object Label264: TLabel
+          Left = 15
+          Height = 13
+          Top = 46
+          Width = 89
           Caption = 'Image Directory'
           Color = clNone
           ParentColor = False
-          Left = 15
-          Height = 14
-          Top = 46
-          Width = 78
         end
         object Label265: TLabel
+          Left = 98
+          Height = 13
+          Top = 80
+          Width = 50
           Caption = 'There is '
           Color = clNone
           ParentColor = False
-          Left = 98
-          Height = 14
-          Top = 80
-          Width = 42
         end
         object nimages: TLabel
+          Left = 150
+          Height = 13
+          Top = 80
+          Width = 47
           Caption = 'nimages'
           Color = clNone
           ParentColor = False
-          Left = 150
-          Height = 14
-          Top = 80
-          Width = 40
         end
         object Label267: TLabel
+          Left = 205
+          Height = 13
+          Top = 80
+          Width = 106
           Caption = 'catalogued images'
           Color = clNone
           ParentColor = False
-          Left = 205
-          Height = 14
-          Top = 80
-          Width = 90
         end
         object ScanImages: TButton
-          BorderSpacing.InnerBorder = 2
-          Caption = 'Scan directory'
-          OnClick = ScanImagesClick
-          TabOrder = 0
           Left = 98
           Height = 25
           Top = 104
           Width = 113
+          BorderSpacing.InnerBorder = 2
+          Caption = 'Scan directory'
+          OnClick = ScanImagesClick
+          TabOrder = 0
         end
         object Panel11: TPanel
-          ClientHeight = 145
-          ClientWidth = 401
-          TabOrder = 1
           Left = 16
           Height = 145
           Top = 168
           Width = 401
+          ClientHeight = 145
+          ClientWidth = 401
+          TabOrder = 1
           object Label266: TLabel
+            Left = 32
+            Height = 13
+            Top = 32
+            Width = 60
             Caption = 'Luminosity'
             Color = clNone
             ParentColor = False
-            Left = 32
-            Height = 14
-            Top = 32
-            Width = 51
           end
           object Label268: TLabel
+            Left = 40
+            Height = 13
+            Top = 96
+            Width = 47
             Caption = 'Contrast'
             Color = clNone
             ParentColor = False
-            Left = 40
-            Height = 14
-            Top = 96
-            Width = 43
           end
           object ImgLumBar: TTrackBar
-            Frequency = 5
-            Max = 30
-            Min = -30
-            OnChange = ImgLumBarChange
-            PageSize = 5
-            ScalePos = trTop
-            TabOrder = 0
-            Frequency = 5
-            Max = 30
-            Min = -30
-            OnChange = ImgLumBarChange
-            PageSize = 5
-            ScalePos = trTop
             Left = 120
             Height = 45
             Top = 24
             Width = 222
+            Frequency = 5
+            Max = 30
+            Min = -30
+            OnChange = ImgLumBarChange
+            PageSize = 5
+            ScalePos = trTop
+            TabOrder = 0
           end
           object ImgContrastBar: TTrackBar
-            Frequency = 5
-            Max = 30
-            Min = -30
-            OnChange = ImgContrastBarChange
-            PageSize = 5
-            ScalePos = trTop
-            TabOrder = 1
-            Frequency = 5
-            Max = 30
-            Min = -30
-            OnChange = ImgContrastBarChange
-            PageSize = 5
-            ScalePos = trTop
             Left = 120
             Height = 45
             Top = 88
             Width = 222
+            Frequency = 5
+            Max = 30
+            Min = -30
+            OnChange = ImgContrastBarChange
+            PageSize = 5
+            ScalePos = trTop
+            TabOrder = 1
           end
         end
         object ShowImagesBox: TCheckBox
+          Left = 32
+          Height = 28
+          Top = 344
+          Width = 221
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           TabOrder = 3
-          Left = 32
-          Height = 13
-          Top = 344
-          Width = 179
         end
         object ProgressPanel: TPanel
-          ClientHeight = 73
-          ClientWidth = 401
-          TabOrder = 2
-          Visible = False
           Left = 16
           Height = 73
           Top = 80
           Width = 401
+          ClientHeight = 73
+          ClientWidth = 401
+          TabOrder = 2
+          Visible = False
           object ProgressCat: TLabel
+            Left = 187
+            Height = 13
+            Top = 8
+            Width = 32
             Caption = 'Other'
             Color = clNone
             ParentColor = False
-            Left = 187
-            Height = 14
-            Top = 8
-            Width = 29
           end
           object ProgressBar1: TProgressBar
-            Max = 100
-            TabOrder = 0
             Left = 24
             Height = 17
             Top = 40
             Width = 361
+            Max = 100
+            TabOrder = 0
           end
         end
         object imgpath: TDirectoryEdit
-          ButtonWidth = 23
-          NumGlyphs = 1
-          ParentColor = False
-          TabOrder = 4
-          OnChange = imgpathChange
-          OnChange = imgpathChange
-          TabOrder = 4
           Left = 127
           Height = 23
           Top = 39
           Width = 264
+          OnChange = imgpathChange
+          TabOrder = 4
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
         end
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 490
-        ClientHeight = 470
-        Height = 470
-        Width = 490
+        ClientWidth = 498
+        ClientHeight = 478
         object Label270: TLabel
+          Height = 13
+          Width = 111
           Caption = 'Background Picture'
           Color = clNone
           ParentColor = False
-          Height = 14
-          Width = 93
         end
         object Label271: TLabel
+          Left = 8
+          Height = 13
+          Top = 22
+          Width = 52
           Caption = 'FITS File'
           Color = clNone
           ParentColor = False
-          Left = 8
-          Height = 14
-          Top = 22
-          Width = 42
         end
         object backimginfo: TLabel
+          Left = 8
+          Height = 13
+          Top = 47
+          Width = 67
           Caption = 'backimginfo'
           Color = clNone
           ParentColor = False
-          Left = 8
-          Height = 14
-          Top = 43
-          Width = 57
         end
         object Image1: TImage
-          Stretch = True
-          Transparent = True
           Height = 313
           Top = 123
           Width = 481
+          Stretch = True
+          Transparent = True
         end
         object ShowBackImg: TCheckBox
+          Left = 8
+          Height = 28
+          Top = 80
+          Width = 129
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           TabOrder = 0
-          Left = 8
-          Height = 13
-          Top = 80
-          Width = 101
         end
         object Panel1: TPanel
-          ClientHeight = 45
-          ClientWidth = 305
-          TabOrder = 1
           Left = 176
           Height = 45
           Top = 67
           Width = 305
+          ClientHeight = 45
+          ClientWidth = 305
+          TabOrder = 1
           object Label1: TLabel
+            Left = 54
+            Height = 13
+            Top = 4
+            Width = 60
             Caption = 'Luminosity'
             Color = clNone
             ParentColor = False
-            Left = 54
-            Height = 14
-            Top = 2
-            Width = 51
           end
           object Label2: TLabel
+            Left = 203
+            Height = 13
+            Top = 4
+            Width = 47
             Caption = 'Contrast'
             Color = clNone
             ParentColor = False
-            Left = 203
-            Height = 14
-            Top = 2
-            Width = 43
           end
           object ImgLumBar2: TTrackBar
+            Left = 8
+            Height = 18
+            Top = 18
+            Width = 140
             Frequency = 5
             Max = 30
             Min = -30
@@ -286,250 +273,220 @@ object f_config_pictures: Tf_config_pictures
             PageSize = 5
             ScalePos = trTop
             TabOrder = 0
-            Frequency = 5
-            Max = 30
-            Min = -30
-            OnChange = ImgLumBar2Change
-            PageSize = 5
-            ScalePos = trTop
-            Left = 8
-            Height = 18
-            Top = 18
-            Width = 140
           end
           object ImgContrastBar2: TTrackBar
-            Frequency = 5
-            Max = 30
-            Min = -30
-            OnChange = ImgContrastBar2Change
-            PageSize = 5
-            ScalePos = trTop
-            TabOrder = 1
-            Frequency = 5
-            Max = 30
-            Min = -30
-            OnChange = ImgContrastBar2Change
-            PageSize = 5
-            ScalePos = trTop
             Left = 152
             Height = 18
             Top = 18
             Width = 140
+            Frequency = 5
+            Max = 30
+            Min = -30
+            OnChange = ImgContrastBar2Change
+            PageSize = 5
+            ScalePos = trTop
+            TabOrder = 1
           end
         end
         object backimg: TFileNameEdit
-          Filter = 'FITS Files|*.fit'
-          ButtonWidth = 23
-          NumGlyphs = 1
-          ParentColor = False
-          TabOrder = 2
-          OnChange = backimgChange
-          OnChange = backimgChange
-          TabOrder = 2
           Left = 95
           Height = 23
           Top = 15
           Width = 360
+          OnChange = backimgChange
+          TabOrder = 2
+          Filter = 'FITS Files|*.fit'
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
         end
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 490
-        ClientHeight = 470
-        Height = 470
-        Width = 490
+        ClientWidth = 498
+        ClientHeight = 478
         object GroupBox3: TGroupBox
-          Caption = 'RealSky®'
-          ClientHeight = 337
-          ClientWidth = 477
-          TabOrder = 0
           Left = 1
           Height = 355
           Top = 8
           Width = 481
+          Caption = 'RealSky®'
+          ClientHeight = 338
+          ClientWidth = 477
+          TabOrder = 0
           object Label72: TLabel
+            Left = 8
+            Height = 13
+            Top = 100
+            Width = 76
             Caption = 'Auxiliary files'
             Color = clNone
             ParentColor = False
-            Left = 8
-            Height = 14
-            Top = 100
-            Width = 64
           end
           object Label73: TLabel
+            Left = 8
+            Height = 13
+            Top = 152
+            Width = 104
             Caption = 'Data Files, CDrom'
             Color = clNone
             ParentColor = False
-            Left = 8
-            Height = 14
-            Top = 152
-            Width = 87
           end
           object Label74: TLabel
+            Left = 8
+            Height = 13
+            Top = 196
+            Width = 76
             Caption = 'temporary file'
             Color = clNone
             ParentColor = False
-            Left = 8
-            Height = 14
-            Top = 196
-            Width = 68
           end
           object Label75: TLabel
+            Left = 416
+            Height = 13
+            Top = 272
+            Width = 33
             Caption = 'pixels'
             Color = clNone
             ParentColor = False
-            Left = 416
-            Height = 14
-            Top = 272
-            Width = 28
           end
           object Label77: TLabel
+            Left = 416
+            Height = 13
+            Top = 308
+            Width = 43
             Caption = 'MBytes'
             Color = clNone
             ParentColor = False
-            Left = 416
-            Height = 14
-            Top = 308
-            Width = 36
           end
           object realskydir: TEdit
-            OnChange = realskydirChange
-            TabOrder = 0
-            Text = 'cat\RealSky\'
             Left = 144
             Height = 21
             Top = 96
             Width = 169
+            OnChange = realskydirChange
+            TabOrder = 0
+            Text = 'cat\RealSky\'
           end
           object realskydrive: TEdit
-            OnChange = realskydriveChange
-            TabOrder = 1
-            Text = 'X:\'
             Left = 144
             Height = 21
             Top = 148
             Width = 169
+            OnChange = realskydriveChange
+            TabOrder = 1
+            Text = 'X:\'
           end
           object realskyfile: TEdit
-            OnChange = realskyfileChange
-            TabOrder = 2
-            Text = 'images\$TEMP.FIT'
             Left = 144
             Height = 21
             Top = 192
             Width = 169
+            OnChange = realskyfileChange
+            TabOrder = 2
+            Text = 'images\$TEMP.FIT'
           end
           object RealSkyNorth: TCheckBox
+            Left = 8
+            Height = 28
+            Top = 26
+            Width = 113
             Caption = 'RealSky North'
             OnClick = RealSkyNorthClick
             TabOrder = 3
-            Left = 8
-            Height = 13
-            Top = 26
-            Width = 89
           end
           object RealSkySouth: TCheckBox
+            Left = 8
+            Height = 28
+            Top = 62
+            Width = 115
             Caption = 'RealSky South'
             OnClick = RealSkySouthClick
             TabOrder = 4
-            Left = 8
-            Height = 13
-            Top = 62
-            Width = 91
           end
           object DSS102CD: TCheckBox
+            Left = 184
+            Height = 28
+            Top = 26
+            Width = 105
             Caption = '102 CD DSS'
             OnClick = DSS102CDClick
             TabOrder = 5
-            Left = 184
-            Height = 13
-            Top = 26
-            Width = 81
           end
           object usesubsample: TCheckBox
+            Left = 8
+            Height = 28
+            Top = 272
+            Width = 243
             Caption = 'Use subsampling to limit image size to'
             Checked = True
             OnClick = usesubsampleClick
             State = cbChecked
             TabOrder = 6
-            Left = 8
-            Height = 13
-            Top = 272
-            Width = 196
           end
           object reallist: TCheckBox
+            Left = 8
+            Height = 28
+            Top = 240
+            Width = 145
             Caption = 'Select plate from list'
             Checked = True
             OnClick = reallistClick
             State = cbChecked
             TabOrder = 7
-            Left = 8
-            Height = 13
-            Top = 240
-            Width = 114
           end
           object realskymax: TLongEdit
-            BorderStyle = bsSingle
-            Height = 22
-            Left = 336
             Name = 'realskymax'
+            Left = 336
+            Height = 22
+            Top = 268
+            Width = 65
+            BorderStyle = bsSingle
             ParentColor = False
             TabOrder = 8
-            Top = 268
-            Width = 65
-            OnExit = nil
             OnChange = realskymaxChange
-            Left = 336
-            Height = 22
-            Top = 268
-            Width = 65
           end
           object realskymb: TLongEdit
+            Name = 'realskymb'
+            Left = 336
+            Height = 22
+            Top = 304
+            Width = 65
             BorderStyle = bsSingle
             Color = clBtnFace
-            Height = 22
-            Left = 336
-            Name = 'realskymb'
             ParentColor = False
             ReadOnly = True
             TabOrder = 9
-            Top = 304
-            Width = 65
-            OnExit = nil
-            Left = 336
-            Height = 22
-            Top = 304
-            Width = 65
           end
         end
         object GroupBox1: TGroupBox
-          Caption = 'Online DSS'
-          ClientHeight = 67
-          ClientWidth = 477
-          TabOrder = 1
           Left = 1
           Height = 85
           Top = 374
           Width = 481
+          Caption = 'Online DSS'
+          ClientHeight = 85
+          ClientWidth = 481
+          TabOrder = 1
           object OnlineDSS: TCheckBox
+            Left = 17
+            Height = 28
+            Top = 20
+            Width = 229
             Caption = 'Use online DSS instead of RealSky'
             OnChange = OnlineDSSChange
             TabOrder = 0
-            Left = 17
-            Height = 13
-            Top = 20
-            Width = 187
           end
           object OnlineDSSList: TComboBox
+            Left = 227
+            Height = 21
+            Top = 18
+            Width = 225
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
             MaxLength = 0
             OnChange = OnlineDSSListChange
             TabOrder = 1
             Text = 'OnlineDSSList'
-            Left = 227
-            Height = 21
-            Top = 18
-            Width = 225
           end
         end
       end
@@ -537,7 +494,7 @@ object f_config_pictures: Tf_config_pictures
   end
   object ImageTimer1: TTimer
     Enabled = False
-    Interval = 200
+    Interval = 500
     OnTimer = ImageTimer1Timer
     left = 496
     top = 24

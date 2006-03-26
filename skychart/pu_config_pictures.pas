@@ -88,8 +88,8 @@ type
     realskymb: TLongEdit;
     Notebook1: TNotebook;
     procedure FormCreate(Sender: TObject);
+    procedure Notebook1PageChanged(Sender: TObject);
     procedure imgpathChange(Sender: TObject);
-    procedure BitBtn3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure OnlineDSSChange(Sender: TObject);
     procedure OnlineDSSListChange(Sender: TObject);
@@ -163,10 +163,10 @@ var save:boolean;
   i: Integer;
 begin
 imgpath.text:=cmain.ImagePath;
-ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
-ImgContrastBar.position:=round(10*cmain.ImageContrast);
-ImgLumBar2.position:=-round(10*cmain.ImageLuminosity);
-ImgContrastBar2.position:=round(10*cmain.ImageContrast);
+ImgLumBar.position:=-round({10*}cmain.ImageLuminosity);
+ImgContrastBar.position:=round({10*}cmain.ImageContrast);
+ImgLumBar2.position:=-round({10*}cmain.ImageLuminosity);
+ImgContrastBar2.position:=round({10*}cmain.ImageContrast);
 ShowImagesBox.checked:=csc.ShowImages;
 nimages.caption:=inttostr(cdb.CountImages);
 save:=csc.ShowBackgroundImage;
@@ -197,14 +197,14 @@ if LockChange then exit;
 cmain.ImagePath:=imgpath.text;
 end;
 
-procedure Tf_config_pictures.BitBtn3Click(Sender: TObject);
-begin
-
-end;
-
 procedure Tf_config_pictures.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
+end;
+
+procedure Tf_config_pictures.Notebook1PageChanged(Sender: TObject);
+begin
+if Notebook1.PageIndex=1 then backimgChange(Sender);
 end;
 
 procedure Tf_config_pictures.ScanImagesClick(Sender: TObject);
@@ -221,13 +221,13 @@ end;
 procedure Tf_config_pictures.ImgLumBarChange(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageLuminosity:=-ImgLumBar.position/10;
+cmain.ImageLuminosity:=-ImgLumBar.position; // /10;
 end;
 
 procedure Tf_config_pictures.ImgContrastBarChange(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageContrast:=ImgContrastBar.position/10;
+cmain.ImageContrast:=ImgContrastBar.position; // /10;
 end;
 
 procedure Tf_config_pictures.ShowImagesBoxClick(Sender: TObject);
@@ -238,7 +238,7 @@ end;
 procedure Tf_config_pictures.ImgContrastBar2Change(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageContrast:=ImgContrastBar2.position/10;
+cmain.ImageContrast:=ImgContrastBar2.position; // /10;
 FFits.max_sigma:=cmain.ImageContrast;
 ImageTimer1.enabled:=true;
 end;
@@ -246,7 +246,7 @@ end;
 procedure Tf_config_pictures.ImgLumBar2Change(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageLuminosity:=-ImgLumBar2.position/10;
+cmain.ImageLuminosity:=-ImgLumBar2.position; // /10;
 FFits.min_sigma:=cmain.ImageLuminosity;
 ImageTimer1.enabled:=true;
 end;
@@ -264,7 +264,7 @@ csc.BackgroundImage:=backimg.text;
 Ffits.filename:=csc.BackgroundImage;
 if Ffits.header.coordinate_valid then begin
   cmain.NewBackgroundImage:=true;
-  ShowBackImg.checked:=true;
+  if Sender=backimg then ShowBackImg.checked:=true;
   backimginfo.caption:=extractfilename(csc.BackgroundImage)+' RA:'+ARtoStr(Ffits.center_ra*rad2deg/15)+' DEC:'+DEtoStr(Ffits.center_de*rad2deg)+' FOV:'+DEtoStr(Ffits.img_width*rad2deg);
   RefreshImage;
 end
@@ -372,21 +372,25 @@ end;
 
 procedure Tf_config_pictures.reallistClick(Sender: TObject);
 begin
+if LockChange then exit;
 cdss.dssplateprompt:=reallist.checked;
 end;
 
 procedure Tf_config_pictures.usesubsampleClick(Sender: TObject);
 begin
+if LockChange then exit;
 cdss.dsssampling:=usesubsample.checked;
 end;
 
 procedure Tf_config_pictures.OnlineDSSChange(Sender: TObject);
 begin
+if LockChange then exit;
 cdss.OnlineDSS:=OnlineDSS.Checked;
 end;
 
 procedure Tf_config_pictures.OnlineDSSListChange(Sender: TObject);
 begin
+if LockChange then exit;
 cdss.OnlineDSSid:=OnlineDSSList.ItemIndex+1;
 end;
 

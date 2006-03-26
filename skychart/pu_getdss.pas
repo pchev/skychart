@@ -148,7 +148,7 @@ var i : SImageConfig;
     width,height,npix,imgsize : double;
     ima,app,platename,buf,dd,mm,ss : string;
     firstrec: boolean;
-    gzf:longint;
+    gzf:pointer;
     fitsfile:file;
     gzbuf : array[0..4095]of char;
     NewHTML: TSimpleIpHtml;
@@ -156,7 +156,7 @@ var i : SImageConfig;
 begin
 try
 result:=false;
-if cfgdss.OnlineDSS then begin // Online DSS
+if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   if cmain.HttpProxy then begin
     DownloadDialog1.HttpProxy:=cmain.ProxyHost;
     DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
@@ -204,7 +204,7 @@ if cfgdss.OnlineDSS then begin // Online DSS
           firstrec:=false;
           if copy(gzbuf,1,6)='SIMPLE' then result:=true;
        end;
-     until gzeof(gzf)=1;
+     until gzeof(gzf);
      gzclose(gzf);
      CloseFile(fitsfile);
   end

@@ -37,7 +37,7 @@ uses
   {$endif}
   cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display,
-  u_constant, u_util, blcksock, synsock, lazjpeg,
+  u_constant, u_util, blcksock, synsock, lazjpeg, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, CDC_IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
@@ -1102,7 +1102,7 @@ BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
 starshape.Picture.Bitmap.Transparent:=false;
 //todo: Screen.Cursors[crRetic] := LoadCursorFromFile('retic.cur');
-zlib:=LoadLibrary(libzlib);
+zlib:=LoadLibrary(libz);
 if zlib<>0 then begin
   gzopen:= Tgzopen(GetProcAddress(zlib,'gzopen'));
   gzread:= Tgzread(GetProcAddress(zlib,'gzread'));
