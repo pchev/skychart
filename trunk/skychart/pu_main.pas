@@ -530,6 +530,7 @@ type
     cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB : Boolean;
     InitialChartNum: integer;
+    AutoRefreshLock: Boolean;
   {$ifdef win32}
     savwincol  : array[0..30] of Tcolor;
   {$endif}
@@ -864,11 +865,19 @@ end;
 procedure Tf_main.AutorefreshTimer(Sender: TObject);
 var i: integer;
 begin
+if AutoRefreshLock then exit;
+try
+AutoRefreshLock:=true;
+Autorefresh.enabled:=false;
 for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
       if sc.cfgsc.autorefresh then AutoRefresh;
      end;
+finally
+AutoRefreshLock:=false;
+Autorefresh.enabled:=true;
+end;
 end;
 
 function Tf_main.GetUniqueName(cname:string; forcenumeric:boolean):string;
@@ -973,7 +982,8 @@ try
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
  CreateChild(GetUniqueName('Chart_',true),true,def_cfgsc,def_cfgplot,true);
- Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
+ Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
+ AutoRefreshLock:=false;
  Autorefresh.enabled:=true;
  if cfgm.AutostartServer then StartServer;
  f_calendar.planet:=planet;
@@ -2287,7 +2297,8 @@ begin
     cfgm.NewBackgroundImage:=false;
     RefreshAllChild(cfgm.updall);
     Autorefresh.enabled:=false;
-    Autorefresh.Interval:=cfgm.autorefreshdelay*1000;
+    Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
+    AutoRefreshLock:=false;
     Autorefresh.enabled:=true;
 end;
 
