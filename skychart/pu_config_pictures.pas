@@ -36,6 +36,9 @@ type
 
   Tf_config_pictures = class(TForm)
     backimg: TFileNameEdit;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     OnlineDSS: TCheckBox;
     OnlineDSSList: TComboBox;
     GroupBox1: TGroupBox;
@@ -49,6 +52,7 @@ type
     Label265: TLabel;
     nimages: TLabel;
     Label267: TLabel;
+    Panel2: TPanel;
     ScanImages: TButton;
     Panel11: TPanel;
     Label266: TLabel;
@@ -87,6 +91,8 @@ type
     realskymax: TLongEdit;
     realskymb: TLongEdit;
     Notebook1: TNotebook;
+    procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure Notebook1PageChanged(Sender: TObject);
     procedure imgpathChange(Sender: TObject);
@@ -116,6 +122,7 @@ type
     { Private declarations }
     LockChange: boolean;
     FFits: TFits;
+    FApplyConfig: TNotifyEvent;
     procedure ShowImages;
     procedure RefreshImage;
   public
@@ -135,6 +142,7 @@ type
     cdss : ^conf_dss;
     constructor Create(AOwner:TComponent); override;
     property Fits: TFits read FFits write FFits;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
@@ -200,6 +208,17 @@ end;
 procedure Tf_config_pictures.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
+end;
+
+procedure Tf_config_pictures.Button2Click(Sender: TObject);
+begin
+  if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_pictures.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+ LockChange:=true;
 end;
 
 procedure Tf_config_pictures.Notebook1PageChanged(Sender: TObject);
