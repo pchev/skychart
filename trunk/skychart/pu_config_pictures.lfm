@@ -1,39 +1,39 @@
 object f_config_pictures: Tf_config_pictures
-  Left = 236
+  Left = 279
   Height = 535
-  Top = 134
-  Width = 526
-  HorzScrollBar.Page = 525
+  Top = 201
+  Width = 513
+  HorzScrollBar.Page = 512
   VertScrollBar.Page = 534
   ActiveControl = ScanImages
   Caption = 'f_config_pictures'
   ClientHeight = 535
-  ClientWidth = 526
+  ClientWidth = 513
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 90
   object MainPanel: TPanel
-    Left = 8
-    Height = 480
-    Top = 8
-    Width = 500
-    ClientHeight = 480
-    ClientWidth = 500
+    Height = 485
+    Width = 513
+    Align = alClient
+    ClientHeight = 485
+    ClientWidth = 513
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
-      Height = 478
+      Height = 483
       Top = 1
-      Width = 498
+      Width = 511
       Align = alClient
       OnPageChanged = Notebook1PageChanged
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       object Page1: TPage
-        Caption = 'Page1'
-        ClientWidth = 498
-        ClientHeight = 478
+        Caption = 'Objects'
+        ClientWidth = 511
+        ClientHeight = 483
         object Label50: TLabel
           Left = 2
           Height = 13
@@ -191,9 +191,9 @@ object f_config_pictures: Tf_config_pictures
         end
       end
       object Page2: TPage
-        Caption = 'Page2'
-        ClientWidth = 498
-        ClientHeight = 478
+        Caption = 'Background'
+        ClientWidth = 511
+        ClientHeight = 483
         object Label270: TLabel
           Height = 13
           Width = 111
@@ -237,16 +237,16 @@ object f_config_pictures: Tf_config_pictures
         end
         object Panel1: TPanel
           Left = 176
-          Height = 45
+          Height = 48
           Top = 67
           Width = 305
-          ClientHeight = 45
+          ClientHeight = 48
           ClientWidth = 305
           TabOrder = 1
           object Label1: TLabel
             Left = 54
             Height = 13
-            Top = 4
+            Top = 6
             Width = 60
             Caption = 'Luminosity'
             Color = clNone
@@ -255,7 +255,7 @@ object f_config_pictures: Tf_config_pictures
           object Label2: TLabel
             Left = 203
             Height = 13
-            Top = 4
+            Top = 6
             Width = 47
             Caption = 'Contrast'
             Color = clNone
@@ -264,7 +264,7 @@ object f_config_pictures: Tf_config_pictures
           object ImgLumBar2: TTrackBar
             Left = 8
             Height = 18
-            Top = 18
+            Top = 20
             Width = 140
             Frequency = 5
             Max = 30
@@ -277,7 +277,7 @@ object f_config_pictures: Tf_config_pictures
           object ImgContrastBar2: TTrackBar
             Left = 152
             Height = 18
-            Top = 18
+            Top = 20
             Width = 140
             Frequency = 5
             Max = 30
@@ -302,9 +302,9 @@ object f_config_pictures: Tf_config_pictures
         end
       end
       object Page3: TPage
-        Caption = 'Page3'
-        ClientWidth = 498
-        ClientHeight = 478
+        Caption = 'DSS - Realsky'
+        ClientWidth = 511
+        ClientHeight = 483
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355
@@ -465,11 +465,11 @@ object f_config_pictures: Tf_config_pictures
           Top = 374
           Width = 481
           Caption = 'Online DSS'
-          ClientHeight = 85
-          ClientWidth = 481
+          ClientHeight = 68
+          ClientWidth = 477
           TabOrder = 1
           object OnlineDSS: TCheckBox
-            Left = 17
+            Left = 8
             Height = 28
             Top = 20
             Width = 229
@@ -478,10 +478,10 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 0
           end
           object OnlineDSSList: TComboBox
-            Left = 227
+            Left = 259
             Height = 21
-            Top = 18
-            Width = 225
+            Top = 20
+            Width = 193
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
             MaxLength = 0
             OnChange = OnlineDSSListChange
@@ -490,6 +490,50 @@ object f_config_pictures: Tf_config_pictures
           end
         end
       end
+    end
+  end
+  object Panel2: TPanel
+    Height = 50
+    Top = 485
+    Width = 513
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 513
+    TabOrder = 1
+    object Button1: TButton
+      Left = 208
+      Height = 25
+      Top = 11
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 2
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 312
+      Height = 25
+      Top = 11
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 2
+      Caption = 'Apply'
+      OnClick = Button2Click
+      TabOrder = 1
+    end
+    object Button3: TButton
+      Left = 408
+      Height = 25
+      Top = 11
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 2
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
     end
   end
   object ImageTimer1: TTimer

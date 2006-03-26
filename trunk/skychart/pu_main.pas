@@ -36,7 +36,7 @@ uses
   {$ifdef unix}
   {$endif}
   cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
-  pu_config_time, pu_config_observatory, pu_config_display,
+  pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   u_constant, u_util, blcksock, synsock, lazjpeg, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
@@ -84,6 +84,9 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    SetupPictures: TAction;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
@@ -420,6 +423,7 @@ type
     procedure SetupLabelsExecute(Sender: TObject);
     procedure SetupLinesExecute(Sender: TObject);
     procedure SetupObservatoryExecute(Sender: TObject);
+    procedure SetupPicturesExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
@@ -522,6 +526,7 @@ type
     ConfigTime: Tf_config_time;
     ConfigObservatory: Tf_config_observatory;
     ConfigDisplay: Tf_config_display;
+    ConfigPictures: Tf_config_pictures;
     cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB : Boolean;
     InitialChartNum: integer;
@@ -539,11 +544,13 @@ type
     procedure ApplyConfigTime(Sender: TObject);
     procedure ApplyConfigObservatory(Sender: TObject);
     procedure ApplyConfigDisplay(Sender: TObject);
+    procedure ApplyConfigPictures(Sender: TObject);
     procedure SetChildFocus(Sender: TObject);
     procedure SetNightVision(night: boolean);
     procedure SetupObservatoryPage(page:integer);
     procedure SetupTimePage(page:integer);
     procedure SetupDisplayPage(pagegroup:integer);
+    procedure SetupPicturesPage(page:integer);
   {$ifdef win32}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -1876,6 +1883,52 @@ procedure Tf_main.ApplyConfigTime(Sender: TObject);
 begin
  activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
 end;
+
+procedure Tf_main.SetupPicturesExecute(Sender: TObject);
+begin
+SetupPicturesPage(1);
+end;
+
+procedure Tf_main.SetupPicturesPage(page:integer);
+begin
+if ConfigPictures=nil then begin
+   ConfigPictures:=Tf_config_pictures.Create(self);
+   {$ifdef win32}ScaleForm(ConfigPictures,Screen.PixelsPerInch/96);{$endif}
+   ConfigPictures.Notebook1.ShowTabs:=true;
+   ConfigPictures.Notebook1.PageIndex:=0;
+   ConfigPictures.onApplyConfig:=ApplyConfigPictures;
+end;
+{$ifdef win32}SetFormNightVision(ConfigPictures,nightvision);{$endif}
+ConfigPictures.cdb:=cdcdb;
+ConfigPictures.cdss^:=f_getdss.cfgdss;
+ConfigPictures.Fits:=Fits;
+ConfigPictures.ccat^:=catalog.cfgcat;
+ConfigPictures.cshr^:=catalog.cfgshr;
+ConfigPictures.cplot^:=def_cfgplot;
+ConfigPictures.csc^:=def_cfgsc;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigPictures.csc^:=sc.cfgsc^;
+   ConfigPictures.cplot^:=sc.plot.cfgplot^;
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigPictures.cmain^:=cfgm;
+formpos(ConfigPictures,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigPictures.Notebook1.PageIndex:=page;
+ConfigPictures.show;
+ConfigPictures.backimgChange(self);
+ConfigPictures.hide;
+ConfigPictures.showmodal;
+if ConfigPictures.ModalResult=mrOK then begin
+ activateconfig(ConfigPictures.cmain,ConfigPictures.csc,ConfigPictures.ccat,ConfigPictures.cshr,ConfigPictures.cplot,ConfigPictures.cdss,false);
+end;
+end;
+
+procedure Tf_main.ApplyConfigPictures(Sender: TObject);
+begin
+ activateconfig(ConfigPictures.cmain,ConfigPictures.csc,ConfigPictures.ccat,ConfigPictures.cshr,ConfigPictures.cplot,ConfigPictures.cdss,false);
+end;
+
 
 procedure Tf_main.SetupObservatoryExecute(Sender: TObject);
 begin
@@ -3713,7 +3766,6 @@ if MultiDoc1.ActiveObject=sender then begin
     toolbuttonshowNebulae.down:=sc.cfgsc.shownebulae;
     ShowNebulae1.checked:=sc.cfgsc.shownebulae;
     toolbuttonShowPictures.down:=sc.cfgsc.ShowImages;
-    ToolButtonShowBackgroundImage.down:=sc.cfgsc.ShowBackgroundImage;
     ShowPictures1.checked:=sc.cfgsc.ShowImages;
     toolbuttonShowLines.down:=sc.cfgsc.ShowLine;
     ShowLines1.checked:=sc.cfgsc.ShowLine;
