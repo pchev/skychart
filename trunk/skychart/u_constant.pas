@@ -235,13 +235,13 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       URL_DSS4 = 'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS2-infrared&mime-type=display/gz-fits';
       URL_DSS_NAME5 = 'SkyView DSS';
       URL_DSS5 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=Digitized%20Sky%20Survey&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
-      URL_DSS_NAME6 = 'SkyView H-alpha Full Sky Map';
+      URL_DSS_NAME6 = 'H-alpha Full Sky Map';
       URL_DSS6 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=H-ALPHA%20COMP&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
-      URL_DSS_NAME7 = 'SkyView  Sloan Digital Sky Survey R';
-      URL_DSS7 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=SDSS%20R&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
-      URL_DSS_NAME8 = 'SkyView Two Micron All Sky Survey J';
-      URL_DSS8 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=2MASS-J&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
-      URL_DSS_NAME9 = 'SkyView IRAS 12 micron';
+      URL_DSS_NAME7 = '2MASS J';
+      URL_DSS7 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=2MASS-J&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS_NAME8 = '2MASS H';
+      URL_DSS8 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=2MASS-H&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS_NAME9 = 'IRAS 12 micron';
       URL_DSS9 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=IRAS%2012%20micron&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
 
 {$ifdef unix}
@@ -481,13 +481,13 @@ type
 const
 {$ifdef unix}
       lib404   = 'libplan404.so';
-      libzlib = 'libzlib.so';
+      libz = 'libz.so';
 //      libsatxy = 'libsatxy.so';
 //      libsatxyfm='Satxyfm';
 {$endif}
 {$ifdef win32}
       lib404 = 'libplan404.dll';
-      libzlib = 'zlib.dll';
+      libz = 'zlib.dll';
 //      libsatxy = 'libsatxy.dll';
 //      libsatxyfm='Satxyfm';
 {$endif}
@@ -509,10 +509,10 @@ Function Plan404( pla : PPlanetData):integer; cdecl; external lib404;
 
 //  zlib
 type
- Tgzopen =Function(path,mode :pchar): integer ; Stdcall;
- Tgzread =Function(gzFile: integer; buf : pchar; len:cardinal): integer; Stdcall;
- Tgzeof =Function(gzFile: integer): integer; Stdcall;
- Tgzclose =Function(gzFile: integer): integer; Stdcall;
+ Tgzopen =Function(path,mode :pchar): pointer ; cdecl;
+ Tgzread =Function(gzFile: pointer; buf : pointer; len:cardinal): longint; cdecl;
+ Tgzeof =Function(gzFile: pointer): longbool; cdecl;
+ Tgzclose =Function(gzFile: pointer): longint; cdecl;
 var gzopen : Tgzopen;
     gzread : Tgzread;
     gzeof : Tgzeof;

@@ -603,7 +603,7 @@ ReadFitsImage;
 IntfImg.SetSize(Fwidth,Fheight);
 dmin:=Fheader.dmin+Fmin_sigma*Fsigma;
 dmax:=Fheader.dmax-Fmax_sigma*Fsigma;
-if dmin=dmax then dmax:=dmin+1;
+if dmin>=dmax then dmax:=dmin+1;
 c:=255/(dmax-dmin);
 color.alpha:=65535;
 case Fheader.bitpix of
