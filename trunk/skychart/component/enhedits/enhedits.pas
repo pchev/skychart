@@ -267,7 +267,7 @@ begin
   if FMinValue <> NewValue then
   begin
     FMinValue := NewValue;
-    if FMinValue > FMaxValue then FMinValue := FMaxValue;
+//    if FMinValue > FMaxValue then FMinValue := FMaxValue;
     if FValue < FMinValue then
       FValue := FMinValue;
     FormatText;
@@ -288,7 +288,7 @@ begin
   if FMaxValue <> NewValue then
   begin
     FMaxValue := NewValue;
-    if FMaxValue < FMinValue then FMaxValue := FMinValue;
+//    if FMaxValue < FMinValue then FMaxValue := FMinValue;
     if FValue > FMaxValue then
       FValue := FMaxValue;
     FormatText;
@@ -493,7 +493,7 @@ begin
   if FMinValue <> NewValue then
   begin
     FMinValue := NewValue;
-    if FMinValue > FMaxValue then FMinValue := FMaxValue;
+//    if FMinValue > FMaxValue then FMinValue := FMaxValue;
     if FValue < FMinValue then
       FValue := FMinValue;
     FormatText;
@@ -514,7 +514,7 @@ begin
   if FMaxValue <> NewValue then
   begin
     FMaxValue := NewValue;
-    if FMaxValue < FMinValue then FMaxValue := FMinValue;
+//    if FMaxValue < FMinValue then FMaxValue := FMinValue;
     if FValue > FMaxValue then
       FValue := FMaxValue;
     FormatText;
