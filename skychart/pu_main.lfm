@@ -2,7 +2,7 @@ object f_main: Tf_main
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
   ClientHeight = 560
-  ClientWidth = 895
+  ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
     36100000424D3610000000000000360000002800000020000000200000000100
@@ -147,12 +147,12 @@ object f_main: Tf_main
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 15
-  HorzScrollBar.Page = 894
+  HorzScrollBar.Page = 859
   VertScrollBar.Page = 559
-  Left = 249
+  Left = 273
   Height = 580
-  Top = 119
-  Width = 895
+  Top = 105
+  Width = 860
   object MultiDoc1: TMultiDoc
     BorderWidth = 1
     TitleHeight = 12
@@ -163,7 +163,7 @@ object f_main: Tf_main
     BevelOuter = bvNone
     Caption = 'MultiDoc1'
     ClientHeight = 475
-    ClientWidth = 847
+    ClientWidth = 812
     Color = clBlack
     FullRepaint = False
     ParentColor = False
@@ -172,7 +172,7 @@ object f_main: Tf_main
     Left = 24
     Height = 475
     Top = 53
-    Width = 847
+    Width = 812
     object starshape: TImage
       AutoSize = True
       Picture.Data = {
@@ -2451,7 +2451,7 @@ object f_main: Tf_main
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 1
-    Left = 871
+    Left = 836
     Height = 475
     Top = 53
     Width = 24
@@ -2682,46 +2682,41 @@ object f_main: Tf_main
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 32
-    ClientWidth = 895
+    ClientWidth = 860
     FullRepaint = False
     TabOrder = 2
     Height = 32
     Top = 528
-    Width = 895
-    object Bevel1: TBevel
-      Align = alLeft
-      Height = 32
-      Left = 154
-      Name = 'Bevel1'
-      Shape = bsLeftLine
-      Width = 5
-      Left = 154
-      Height = 32
-      Width = 5
-    end
+    Width = 860
     object PPanels0: TPanel
       Align = alLeft
       Alignment = taLeftJustify
-      BorderSpacing.Left = 1
-      BorderSpacing.Top = 1
-      BorderSpacing.Right = 1
-      BorderSpacing.Around = 1
-      BorderSpacing.InnerBorder = 1
       BevelOuter = bvNone
-      ClientHeight = 29
+      ClientHeight = 32
       ClientWidth = 150
       FullRepaint = False
       TabOrder = 0
-      Left = 2
-      Height = 29
-      Top = 2
+      Height = 32
       Width = 150
-      object LPanels0: TLabel
-        Caption = 'LPanels0'
+      object LPanels01: TLabel
+        Caption = 'LPanels01'
         Color = clNone
         ParentColor = False
         Height = 14
-        Width = 43
+        Width = 49
+      end
+      object LPanels0: TMemo
+        Align = alClient
+        Color = clBtnFace
+        Lines.Strings = (
+          ''
+        )
+        ReadOnly = True
+        TabOrder = 0
+        TabStop = False
+        WordWrap = False
+        Height = 32
+        Width = 150
       end
     end
     object PPanels1: TPanel
@@ -2729,21 +2724,20 @@ object f_main: Tf_main
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 32
-      ClientWidth = 736
+      ClientWidth = 710
       FullRepaint = False
       TabOrder = 1
-      Left = 159
+      Left = 150
       Height = 32
-      Width = 736
-      object LPanels1: TLabel
-        Caption = 'LPanels1'
-        Color = clNone
-        ParentColor = False
-        WordWrap = True
-        Left = 4
-        Height = 14
-        Top = 3
-        Width = 43
+      Width = 710
+      object LPanels1: TMemo
+        Align = alClient
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 0
+        TabStop = False
+        Height = 32
+        Width = 710
       end
     end
   end
@@ -2752,11 +2746,11 @@ object f_main: Tf_main
     AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 53
-    ClientWidth = 895
+    ClientWidth = 860
     FullRepaint = False
     TabOrder = 3
     Height = 53
-    Width = 895
+    Width = 860
     object ToolBar1: TToolBar
       AutoSize = True
       ButtonHeight = 23
@@ -2768,10 +2762,9 @@ object f_main: Tf_main
       TabOrder = 0
       Wrapable = False
       Height = 25
-      Width = 895
+      Width = 860
       object ToolButtonNew: TToolButton
         Action = FileNew1
-        Left = 1
         Height = 23
         Hint = 'New|Create a new chart'
         Top = 2
@@ -3113,7 +3106,7 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Time'
         Top = 2
-        Width = 60
+        Width = 66
       end
       object TimeU: TComboBox
         AutoCompleteText = [cbactSearchAscending]
@@ -3123,7 +3116,7 @@ object f_main: Tf_main
         MaxLength = 0
         Style = csDropDownList
         TabOrder = 2
-        Left = 614
+        Left = 620
         Height = 23
         Hint = 'Time Units'
         Top = 2
@@ -3134,14 +3127,14 @@ object f_main: Tf_main
         ImageIndex = 45
         Style = tbsDivider
         Width = 8
-        Left = 699
+        Left = 705
         Height = 23
         Top = 2
         Width = 8
       end
       object TConnect: TToolButton
         Action = TelescopeConnect
-        Left = 707
+        Left = 713
         Height = 23
         Hint = 'Connect Telescope'
         Top = 2
@@ -3149,7 +3142,7 @@ object f_main: Tf_main
       end
       object TSlew: TToolButton
         Action = TelescopeSlew
-        Left = 753
+        Left = 759
         Height = 23
         Hint = 'Slew'
         Top = 2
@@ -3157,7 +3150,7 @@ object f_main: Tf_main
       end
       object TSync: TToolButton
         Action = TelescopeSync
-        Left = 730
+        Left = 736
         Height = 23
         Hint = 'Sync'
         Top = 2
@@ -3170,7 +3163,7 @@ object f_main: Tf_main
         ClientHeight = 23
         ClientWidth = 30
         TabOrder = 1
-        Left = 864
+        Left = 828
         Height = 23
         Top = 2
         Width = 30
@@ -3194,7 +3187,7 @@ object f_main: Tf_main
         Caption = 'ToolButton6'
         Style = tbsDivider
         Width = 8
-        Left = 776
+        Left = 782
         Height = 23
         Top = 2
         Width = 8
@@ -3204,7 +3197,7 @@ object f_main: Tf_main
         Caption = 'ToolButton7'
         Style = tbsSeparator
         Width = 23
-        Left = 784
+        Left = 790
         Height = 23
         Top = 2
         Width = 23
@@ -3225,7 +3218,7 @@ object f_main: Tf_main
       Wrapable = False
       Height = 28
       Top = 25
-      Width = 895
+      Width = 860
       object topmessage1: TLabel
         Caption = '    '
         Color = clNone
