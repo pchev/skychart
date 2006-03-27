@@ -84,10 +84,11 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
-    LPanels0: TMemo;
-    LPanels1: TMemo;
+    Bevel1: TBevel;
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
+    LPanels0: TPanel;
+    LPanels1: TPanel;
     SetupPictures: TAction;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -2385,13 +2386,12 @@ begin
    PanelBottom.height:=2*LPanels01.Height+8;
    PPanels0.Width:=LPanels01.width+8;
    Lpanels01.Caption:='';
-   Lpanels0.Clear;
+   Lpanels0.Caption:='';
 end;
 
 Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
 begin
-LPanels1.Text:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
-LPanels1.SelStart:=0;
+LPanels1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
 if sendmsg then SendInfo(Sender,origin,txt);
 if traceon then writetrace(txt);
 // refresh tracking object
@@ -2409,8 +2409,7 @@ end;
 
 Procedure Tf_main.SetLPanel0(txt:string);
 begin
-LPanels0.Text:=txt;
-LPanels0.SelStart:=0;
+LPanels0.Caption:=txt;
 end;
 
 Procedure Tf_main.SetTopMessage(txt:string);
@@ -3925,8 +3924,8 @@ case n of
  3 : result:=SelectChart(arg[1]);
  4 : result:=ListChart;
  5 : if Genericsearch(cname,arg[1]) then result:=msgOK else result:=msgNotFound;
- 6 : result:=msgOK+blank+LPanels1.Text;
- 7 : result:=msgOK+blank+LPanels0.Text;
+ 6 : result:=msgOK+blank+LPanels1.Caption;
+ 7 : result:=msgOK+blank+LPanels0.Caption;
  8 : result:=msgOK+blank+topmsg;
  9 :  ;// find
  10 : ;// save
