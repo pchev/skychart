@@ -102,6 +102,7 @@ type
     horizondepression: TCheckBox;
     Label1: TLabel;
     procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure cityfilterKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure countrylistChange(Sender: TObject);
@@ -294,6 +295,12 @@ end;
 procedure Tf_config_observatory.Button2Click(Sender: TObject);
 begin
  if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_observatory.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  LockChange:=true;
 end;
 
 procedure Tf_config_observatory.citysearchClick(Sender: TObject);

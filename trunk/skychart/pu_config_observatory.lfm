@@ -12,6 +12,7 @@ object f_config_observatory: Tf_config_observatory
   ChildSizing.LeftRightSpacing = 525
   ClientHeight = 545
   ClientWidth = 473
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 90

@@ -120,6 +120,7 @@ type
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
     Notebook1: TNotebook;
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
@@ -481,6 +482,12 @@ OpenFileCMD:=LinuxCmd.Text;
 end;
 
 procedure Tf_config_system.FormCreate(Sender: TObject);
+begin
+  LockChange:=true;
+end;
+
+procedure Tf_config_system.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
 begin
   LockChange:=true;
 end;

@@ -252,6 +252,7 @@ type
     StarBox: TCheckBox;
     Notebook1: TNotebook;
     procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure Notebook1PageChanged(Sender: TObject);
     procedure equinoxtypeClick(Sender: TObject);
     procedure equinox1Change(Sender: TObject);
@@ -539,6 +540,12 @@ cshr.FieldNum[8]:=180;
 cshr.FieldNum[9]:=310;
 cshr.FieldNum[10]:=360;
 ShowField;
+end;
+
+procedure Tf_config_chart.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  LockChange:=true;
 end;
 
 procedure Tf_config_chart.Notebook1PageChanged(Sender: TObject);

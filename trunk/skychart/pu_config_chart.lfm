@@ -9,6 +9,7 @@ object f_config_chart: Tf_config_chart
   Caption = 'f_config_chart'
   ClientHeight = 495
   ClientWidth = 525
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 90

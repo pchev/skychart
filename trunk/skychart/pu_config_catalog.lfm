@@ -9,6 +9,7 @@ object f_config_catalog: Tf_config_catalog
   Caption = 'f_config_catalog'
   ClientHeight = 528
   ClientWidth = 526
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 90

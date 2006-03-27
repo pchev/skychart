@@ -292,6 +292,7 @@ type
     Shape11: TShape;
     Notebook1: TNotebook;
     procedure Button4Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure NightButtonClick(Sender: TObject);
@@ -458,6 +459,12 @@ end;
 procedure Tf_config_display.Button4Click(Sender: TObject);
 begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_display.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  LockChange:=true;
 end;
 
 procedure Tf_config_display.ShowDisplay;

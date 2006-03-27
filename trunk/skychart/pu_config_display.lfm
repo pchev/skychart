@@ -9,6 +9,7 @@ object f_config_display: Tf_config_display
   Caption = 'f_config_display'
   ClientHeight = 532
   ClientWidth = 523
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 90
