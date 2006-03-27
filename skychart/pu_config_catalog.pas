@@ -200,6 +200,7 @@ type
     StringGrid2: TStringGrid;
     OpenDialog1: TOpenDialog;
     Notebook1: TNotebook;
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure StringGrid3DrawCell(Sender: TObject; ACol, ARow: Integer;
@@ -287,6 +288,12 @@ procedure Tf_config_catalog.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
   LockCatPath:=true;
+end;
+
+procedure Tf_config_catalog.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  LockChange:=true;
 end;
 
 procedure Tf_config_catalog.ShowGCat;

@@ -9,6 +9,7 @@ object f_config_solsys: Tf_config_solsys
   Caption = 'f_config_solsys'
   ClientHeight = 524
   ClientWidth = 517
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 90
@@ -1680,6 +1681,7 @@ object f_config_solsys: Tf_config_solsys
   end
   object DownloadDialog1: TDownloadDialog
     FtpFwPassive = True
+    ConfirmDownload = True
     left = 489
     top = 64
   end

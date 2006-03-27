@@ -195,6 +195,7 @@ type
     XplanetDir: TEdit;
     XplanetBtn: TBitBtn;
     procedure DownloadAsteroidClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure DownloadCometClick(Sender: TObject);
     procedure PlanetDirChange(Sender: TObject);
@@ -404,6 +405,12 @@ begin
     application.ProcessMessages;
     LoadMPCClick(Sender);
  end;
+end;
+
+procedure Tf_config_solsys.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+LockChange:=true;
 end;
 
 procedure Tf_config_solsys.AsteroidFeedback(txt:string);

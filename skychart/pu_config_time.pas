@@ -91,6 +91,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
     procedure DateChange(Sender: TObject);
@@ -232,6 +233,12 @@ end;
 procedure Tf_config_time.CheckBox2Click(Sender: TObject);
 begin
 csc.AutoRefresh:=checkbox2.checked;
+end;
+
+procedure Tf_config_time.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+ LockChange:=true;
 end;
 
 procedure Tf_config_time.FormCreate(Sender: TObject);

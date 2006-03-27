@@ -69,6 +69,7 @@ type
     Notebook1: TNotebook;
     Page2: TPage;
     DSSpictures: TStringGrid;
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure anonpassChange(Sender: TObject);
     procedure astcdcClick(Sender: TObject);
     procedure AsteroidUrlListExit(Sender: TObject);
@@ -194,6 +195,12 @@ procedure Tf_config_internet.anonpassChange(Sender: TObject);
 begin
 if lockchange then exit;
 cmain.AnonPass:=anonpass.text;
+end;
+
+procedure Tf_config_internet.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+LockChange:=true;
 end;
 
 procedure Tf_config_internet.astcdcClick(Sender: TObject);
