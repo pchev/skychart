@@ -84,7 +84,6 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
-    Bevel1: TBevel;
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     LPanels0: TPanel;
@@ -113,6 +112,7 @@ type
     ButtonMoreNeb: TImage;
     ButtonLessNeb: TImage;
     ImageNormal: TImageList;
+    Shape1: TShape;
     ToolButton8: TToolButton;
     ToolButton9: TToolButton;
     topmessage: TMenuItem;
@@ -4581,6 +4581,8 @@ if night then begin
    timeu.Font.Color:=nv_middle;
    timeval.Color:=nv_dark;
    timeval.Font.Color:=nv_middle;
+   Shape1.Pen.Color:=nv_black;
+   Shape1.Brush.Color:=nv_black;
    f_zoom.Color:=nv_dark;
    f_zoom.Font.Color:=nv_middle;
    f_calendar.Color:=nv_dark;
@@ -4612,6 +4614,8 @@ end else begin
    timeu.Font.Color:=clWindowText;
    timeval.Color:=clBtnFace;
    timeval.Font.Color:=clWindowText;
+   Shape1.Pen.Color:=clBtnShadow;
+   Shape1.Brush.Color:=clBtnShadow;
    f_zoom.Color:=clBtnFace;
    f_zoom.Font.Color:=clWindowText;
    f_calendar.Color:=clBtnFace;
