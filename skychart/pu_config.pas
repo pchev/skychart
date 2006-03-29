@@ -285,18 +285,6 @@ begin
     if f_config_system1.Notebook1.ActivePage='Page1' then f_config_system1.ActivateDBchange;
   end;
   
-// todo: remove after correction of combobox bug
-// work with last patch but still not in svn
-{f_config_time1.FormClose(Sender,CloseAction);
-f_config_observatory1.FormClose(Sender,CloseAction);
-f_config_chart1.FormClose(Sender,CloseAction);
-f_config_catalog1.FormClose(Sender,CloseAction);
-f_config_solsys1.FormClose(Sender,CloseAction);
-f_config_display1.FormClose(Sender,CloseAction);
-f_config_pictures1.FormClose(Sender,CloseAction);
-f_config_system1.FormClose(Sender,CloseAction);
-f_config_internet1.FormClose(Sender,CloseAction);}
-
   // todo: remove after correction of Lazarus bug 905
   f_config_time1.SimObjClickCheck(nil);
 
