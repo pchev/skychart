@@ -128,6 +128,7 @@ type
     procedure GridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormDestroy(Sender: TObject);
+    procedure GridDblClick(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure BtnSaveClick(Sender: TObject);
     procedure EcliPanelClick(Sender: TObject);
@@ -143,7 +144,7 @@ type
     procedure Date2Change(Sender: TObject);
   private
     { Private declarations }
-    initial: boolean;
+    initial, lockclick: boolean;
     ShowImage: Tf_image;
     Fplanet : Tplanet;
     Fnightvision: boolean;
@@ -248,6 +249,7 @@ if initial then begin
   RefreshAll;
   initial:=false;
 end;
+lockclick:=true;
 end;
 
 procedure Tf_calendar.Date1Change(Sender: TObject);
@@ -1636,6 +1638,11 @@ begin
 Close;
 end;
 
+procedure Tf_calendar.GridDblClick(Sender: TObject);
+begin
+lockclick:=false;
+end;
+
 procedure Tf_calendar.GridMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
@@ -1645,6 +1652,8 @@ var
   pathimage: string;
   a,d: double;
 begin
+if lockclick then exit;
+lockclick:=true;
 try
 with Tstringgrid(sender) do begin
 MouseToCell(X, Y, aColumn, aRow);
