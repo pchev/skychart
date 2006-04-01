@@ -4356,9 +4356,12 @@ case button of
    ImageNormal.Clear;
    iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_color');
      for i:=0 to ImageListCount-1 do begin
-       btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
-       ImageNormal.Add(btn,nil);
-       btn:=TBitmap.Create;
+       try
+         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+         ImageNormal.Add(btn,nil);
+         btn:=TBitmap.Create;
+       except
+       end;
      end;
    ActionList1.Images:=ImageNormal;
    Toolbar1.Images:=ImageNormal;
@@ -4379,9 +4382,12 @@ case button of
    ImageList2.Clear;
    iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_red');
      for i:=0 to ImageListCount-1 do begin
-       btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
-       ImageList2.Add(btn,nil);
-       btn:=TBitmap.Create;
+       try
+         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+         ImageList2.Add(btn,nil);
+         btn:=TBitmap.Create;
+       except
+       end;
      end;
    BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
    BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
@@ -4403,9 +4409,12 @@ case button of
    ImageList2.Clear;
    iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_blue');
      for i:=0 to ImageListCount-1 do begin
-       btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
-       ImageList2.Add(btn,nil);
-       btn:=TBitmap.Create;
+       try
+         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+         ImageList2.Add(btn,nil);
+         btn:=TBitmap.Create;
+       except
+       end;
      end;
    BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
    BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
@@ -4426,9 +4435,12 @@ case button of
    ImageList2.Clear;
    iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_green');
      for i:=0 to ImageListCount-1 do begin
-       btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
-       ImageList2.Add(btn,nil);
-       btn:=TBitmap.Create;
+       try
+         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+         ImageList2.Add(btn,nil);
+         btn:=TBitmap.Create;
+       except
+       end;
      end;
    BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
    BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
@@ -4458,8 +4470,8 @@ Field7.font.color:=col;
 Field8.font.color:=col;
 Field9.font.color:=col;
 Field10.font.color:=col;
-finally
- btn.Free;
+btn.Free;
+except
 end;
 end;
 { code to save the image list to individual files
@@ -4571,8 +4583,8 @@ const elem : array[0..30] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACT
 begin
 if night then begin
    SaveWinColor;
-   setsyscolors(sizeof(elem),elem,rgb);
    SetButtonImage(cfgm.ButtonNight);
+   setsyscolors(sizeof(elem),elem,rgb);
    Color:=nv_dark;
    Font.Color:=nv_middle;
    quicksearch.Color:=nv_dark;
