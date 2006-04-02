@@ -487,7 +487,7 @@ for i:=0 to MaxField do if Fcatalog.cfgshr.FieldNum[i]>fov then begin
 end;
 
 function Tskychart.InitCoordinates:boolean;
-var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9 : double;
+var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,saveaz,saveh : double;
     s1,s2,s3: string;
 begin
 cfgsc^.scopemark:=false;
@@ -587,7 +587,13 @@ if cfgsc^.lastJDchart<>cfgsc^.JDchart then
    precession(cfgsc^.lastJDchart,cfgsc^.JDchart,cfgsc^.racentre,cfgsc^.decentre);
 cfgsc^.lastJDchart:=cfgsc^.JDchart;
 // get alt/az center
+saveaz:= cfgsc^.acentre;
+saveh:= cfgsc^.hcentre;
 Eq2Hz(cfgsc^.CurST-cfgsc^.racentre,cfgsc^.decentre,cfgsc^.acentre,cfgsc^.hcentre,cfgsc) ;
+if abs(cfgsc^.hcentre-pid2)<deg2rad then begin
+   cfgsc^.acentre:=saveaz;
+   cfgsc^.hcentre:=saveh;
+end;
 // compute refraction error at the chart center
 Hz2Eq(cfgsc^.acentre,cfgsc^.hcentre,a,d,cfgsc);
 Eq2Hz(a,d,w,h,cfgsc) ;
