@@ -1135,17 +1135,33 @@ cfgsc^.FindNote:='';
 end;
 
 PROCEDURE Kepler(VAR E1:Double; e,m:Double; precision:double=1.0E-11);
- VAR e0,c:Double;
+ VAR a,b,c,qr,s0,s,z:Double;
+     n: integer;
  BEGIN
-{ meeus  22.3 }
-    e0:=e;
-    E1:=m;
+{ meeus91  29.8 }
+  if (e>0.97)and(abs(m)<0.55) then begin
+    a:=(1-e)/(4*e+0.5);
+    b:=m/(8*e+1);
+    qr:=b + sign(b)*sqrt(b*b+a*a*a);
+    if qr>0 then begin
+      z:=power(qr,1/3);
+      s0:=z-a/2;
+      s:=s0 - (0.078*intpower(s0,5))/(1+e);
+      E1:=m + e*(3*s-4*s*s*s);
+    end
+    else E1:=m;
+   end
+   else E1:=m;
+{ meeus91  29.7 }
+    n:=0;
     REPEAT
-      c := (m+e0*sin(E1) - E1) / (1.0 - e*cos(E1)) ;
+      c := (m + e*sin(E1) - E1) / (1.0 - e*cos(E1)) ;
       E1:= E1 + c ;
+      inc(n);
+      if n>10000 then raise exception.Create('Kepler equation not solved after 10000 loop. e='+floattostr(e)+' M='+floattostr(m));
     UNTIL ABS(c) < precision ;
  END ;
-
+ 
 Procedure RectToPol(x,y : double; var r,alpha : double);
 begin
 r:=sqrt(x*x+y*y);
