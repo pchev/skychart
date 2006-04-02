@@ -2252,6 +2252,7 @@ begin
 a := minvalue([sc.cfgsc.Fov,sc.cfgsc.Fov/sc.cfgsc.windowratio]);
 if sc.cfgsc.Fov<pi then Hz2Eq(Az,a/2.3,a,d,sc.cfgsc)
                    else Hz2Eq(Az,sc.cfgsc.hcentre,a,d,sc.cfgsc);
+sc.cfgsc.acentre:=Az;
 sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
 sc.cfgsc.decentre:=d;
 sc.cfgsc.ProjPole:=Altaz;

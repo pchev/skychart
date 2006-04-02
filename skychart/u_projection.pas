@@ -699,7 +699,7 @@ var i1,i2,i3,i4,i5,i6,i7 : double ;
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);  // ICRS
 var i1,i2,i3,i4,i5,i6,i7 : double ;
    BEGIN
-   if ti=tf then exit;
+   if abs(ti-tf)<0.01 then exit;
       I1:=(TI-2451545.0)/36525 ;
       I2:=(TF-TI)/36525;
       I3:=deg2rad*((2306.2181+1.39656*i1-1.39e-4*i1*i1)*i2+(0.30188-3.44e-4*i1)*i2*i2+1.7998e-2*i2*i2*i2)/3600 ;
