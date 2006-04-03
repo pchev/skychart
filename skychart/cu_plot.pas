@@ -1281,8 +1281,8 @@ if (iWidth<=cfgchart.Width)and(iHeight<=cfgchart.Height) then begin
    imabmp.SaveToStream(memstream);
    memstream.position := 0;
    imabmp.LoadFromStream(memstream);
-   imabmp.Transparent:=iTransparent;
-   imabmp.TransparentColor:=clBlack;
+//   imabmp.Transparent:=iTransparent; // do not work after laz svn 9067 ?
+//   imabmp.TransparentColor:=clBlack;
    cnv.Draw(DestX,DestY,imabmp);
 end else begin
    // only a part of the image is displayed
@@ -1308,8 +1308,8 @@ end else begin
    rbmp.SaveToStream(memstream);
    memstream.position := 0;
    rbmp.LoadFromStream(memstream);
-   rbmp.Transparent:=iTransparent;
-   rbmp.TransparentColor:=clBlack;
+//   rbmp.Transparent:=iTransparent;  // do not work after laz svn 9067 ?
+//   rbmp.TransparentColor:=clBlack;
    cnv.Draw(0,0,rbmp);
 end;
 finally
