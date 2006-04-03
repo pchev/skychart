@@ -91,10 +91,10 @@ object f_config_pictures: Tf_config_pictures
         end
         object Panel11: TPanel
           Left = 16
-          Height = 145
+          Height = 183
           Top = 168
           Width = 401
-          ClientHeight = 145
+          ClientHeight = 183
           ClientWidth = 401
           TabOrder = 1
           object Label266: TLabel
@@ -121,8 +121,8 @@ object f_config_pictures: Tf_config_pictures
             Top = 24
             Width = 222
             Frequency = 5
-            Max = 30
-            Min = -30
+            Max = 100
+            Min = -100
             OnChange = ImgLumBarChange
             PageSize = 5
             ScalePos = trTop
@@ -134,18 +134,28 @@ object f_config_pictures: Tf_config_pictures
             Top = 88
             Width = 222
             Frequency = 5
-            Max = 30
-            Min = -30
+            Max = 100
+            Min = -100
             OnChange = ImgContrastBarChange
             PageSize = 5
             ScalePos = trTop
             TabOrder = 1
           end
+          object ResetLum: TButton
+            Left = 191
+            Height = 25
+            Top = 147
+            Width = 75
+            BorderSpacing.InnerBorder = 2
+            Caption = 'Reset'
+            OnClick = ResetLumClick
+            TabOrder = 2
+          end
         end
         object ShowImagesBox: TCheckBox
-          Left = 32
+          Left = 31
           Height = 28
-          Top = 344
+          Top = 375
           Width = 221
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
@@ -267,8 +277,8 @@ object f_config_pictures: Tf_config_pictures
             Top = 20
             Width = 140
             Frequency = 5
-            Max = 30
-            Min = -30
+            Max = 100
+            Min = -100
             OnChange = ImgLumBar2Change
             PageSize = 5
             ScalePos = trTop
@@ -280,8 +290,8 @@ object f_config_pictures: Tf_config_pictures
             Top = 20
             Width = 140
             Frequency = 5
-            Max = 30
-            Min = -30
+            Max = 100
+            Min = -100
             OnChange = ImgContrastBar2Change
             PageSize = 5
             ScalePos = trTop
@@ -465,8 +475,8 @@ object f_config_pictures: Tf_config_pictures
           Top = 374
           Width = 481
           Caption = 'Online DSS'
-          ClientHeight = 68
-          ClientWidth = 477
+          ClientHeight = 85
+          ClientWidth = 481
           TabOrder = 1
           object OnlineDSS: TCheckBox
             Left = 8

@@ -39,6 +39,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    ResetLum: TButton;
     OnlineDSS: TCheckBox;
     OnlineDSSList: TComboBox;
     GroupBox1: TGroupBox;
@@ -92,6 +93,7 @@ type
     realskymb: TLongEdit;
     Notebook1: TNotebook;
     procedure Button2Click(Sender: TObject);
+    procedure ResetLumClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure Notebook1PageChanged(Sender: TObject);
@@ -104,7 +106,6 @@ type
     procedure ImgContrastBarChange(Sender: TObject);
     procedure ShowImagesBoxClick(Sender: TObject);
     procedure backimgChange(Sender: TObject);
-    procedure BitBtn5Click(Sender: TObject);
     procedure ShowBackImgClick(Sender: TObject);
     procedure ImgLumBar2Change(Sender: TObject);
     procedure ImgContrastBar2Change(Sender: TObject);
@@ -171,10 +172,10 @@ var save:boolean;
   i: Integer;
 begin
 imgpath.text:=cmain.ImagePath;
-ImgLumBar.position:=-round({10*}cmain.ImageLuminosity);
-ImgContrastBar.position:=round({10*}cmain.ImageContrast);
-ImgLumBar2.position:=-round({10*}cmain.ImageLuminosity);
-ImgContrastBar2.position:=round({10*}cmain.ImageContrast);
+ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
+ImgContrastBar.position:=round(10*cmain.ImageContrast);
+ImgLumBar2.position:=-round(10*cmain.ImageLuminosity);
+ImgContrastBar2.position:=round(10*cmain.ImageContrast);
 ShowImagesBox.checked:=csc.ShowImages;
 nimages.caption:=inttostr(cdb.CountImages);
 save:=csc.ShowBackgroundImage;
@@ -215,6 +216,22 @@ begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
+procedure Tf_config_pictures.ResetLumClick(Sender: TObject);
+begin
+LockChange:=true;
+try
+ImgContrastBar.position:=0;
+ImgLumBar.position:=0;
+cmain.ImageContrast:=0;
+cmain.ImageLuminosity:=0;
+FFits.max_sigma:=0;
+FFits.min_sigma:=0;
+ImageTimer1.enabled:=true;
+finally
+LockChange:=false;
+end;
+end;
+
 procedure Tf_config_pictures.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
@@ -240,13 +257,13 @@ end;
 procedure Tf_config_pictures.ImgLumBarChange(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageLuminosity:=-ImgLumBar.position; // /10;
+cmain.ImageLuminosity:=-ImgLumBar.position/10;
 end;
 
 procedure Tf_config_pictures.ImgContrastBarChange(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageContrast:=ImgContrastBar.position; // /10;
+cmain.ImageContrast:=ImgContrastBar.position/10;
 end;
 
 procedure Tf_config_pictures.ShowImagesBoxClick(Sender: TObject);
@@ -257,7 +274,7 @@ end;
 procedure Tf_config_pictures.ImgContrastBar2Change(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageContrast:=ImgContrastBar2.position; // /10;
+cmain.ImageContrast:=ImgContrastBar2.position/10;
 FFits.max_sigma:=cmain.ImageContrast;
 ImageTimer1.enabled:=true;
 end;
@@ -265,7 +282,7 @@ end;
 procedure Tf_config_pictures.ImgLumBar2Change(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageLuminosity:=-ImgLumBar2.position; // /10;
+cmain.ImageLuminosity:=-ImgLumBar2.position/10;
 FFits.min_sigma:=cmain.ImageLuminosity;
 ImageTimer1.enabled:=true;
 end;
@@ -278,7 +295,7 @@ end;
 
 procedure Tf_config_pictures.backimgChange(Sender: TObject);
 begin
-if LockChange then exit;
+if LockChange or (not ShowBackImg.Checked) then exit;
 csc.BackgroundImage:=backimg.text;
 Ffits.filename:=csc.BackgroundImage;
 if Ffits.header.coordinate_valid then begin
@@ -294,11 +311,6 @@ else begin
   Image1.canvas.pen.color:=clBlack;
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
 end;
-end;
-
-procedure Tf_config_pictures.BitBtn5Click(Sender: TObject);
-begin
-
 end;
 
 Procedure  Tf_config_pictures.RefreshImage;
@@ -332,6 +344,7 @@ procedure Tf_config_pictures.ShowBackImgClick(Sender: TObject);
 begin
 csc.ShowBackgroundImage:=ShowBackImg.checked;
 cmain.NewBackgroundImage:=csc.ShowBackgroundImage;
+backimgChange(Sender);
 end;
 
 procedure Tf_config_pictures.DSS102CDClick(Sender: TObject);
