@@ -2477,9 +2477,9 @@ cfgm.AnonPass:='skychart@';
 cfgm.CometUrlList:=TStringList.Create;
 cfgm.CometUrlList.Add(URL_HTTPCometElements);
 cfgm.AsteroidUrlList:=TStringList.Create;
-buf:=stringreplace(URL_HTTPAsteroidElements1,'$$$$',FormatDateTime('yyyy',now),[]);
+buf:=stringreplace(URL_HTTPAsteroidElements1,'$YYYY',FormatDateTime('yyyy',now),[]);
 cfgm.AsteroidUrlList.Add(buf);
-buf:=stringreplace(URL_HTTPAsteroidElements2,'$$$$',FormatDateTime('yyyy',now),[]);
+buf:=stringreplace(URL_HTTPAsteroidElements2,'$YYYY',FormatDateTime('yyyy',now),[]);
 cfgm.AsteroidUrlList.Add(buf);
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:='';
