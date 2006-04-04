@@ -1779,8 +1779,8 @@ if chart is Tf_chart then with chart as Tf_chart do begin
         f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
         if f_search.SearchKind in [0,2,3,4,5,8] then begin
           i:=quicksearch.Items.IndexOf(f_search.Num);
-          if i=-1 then i:=MaxQuickSearch-1;
-          quicksearch.Items.Delete(i);
+          if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
+          if i>=0 then quicksearch.Items.Delete(i);
           quicksearch.Items.Insert(0,f_search.Num);
           quicksearch.ItemIndex:=0;
         end;
@@ -3696,8 +3696,8 @@ Num:=trim(quicksearch.text);
 ok:=GenericSearch('',num);
 if ok then begin
       i:=quicksearch.Items.IndexOf(Num);
-      if i=-1 then i:=MaxQuickSearch-1;
-      quicksearch.Items.Delete(i);
+      if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
+      if i>=0 then quicksearch.Items.Delete(i);
       quicksearch.Items.Insert(0,Num);
       quicksearch.ItemIndex:=0;
    end
