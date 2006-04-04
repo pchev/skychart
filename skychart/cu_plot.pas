@@ -1759,7 +1759,7 @@ Brush.Color:=cfgplot.Color[0];
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Font.Name:=cfgplot.FontName[fontnum];
-Font.Color:=color;
+Font.Color:=lcolor;
 if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
 Font.Size:=cfgplot.FontSize[fontnum]*cfgchart.fontscale;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];

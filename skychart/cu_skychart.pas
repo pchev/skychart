@@ -1741,15 +1741,15 @@ if n<1 then n:=1;
 xp:=cfgsc^.xmin+sticksize;
 y:=cfgsc^.ymax-sticksize;
 FPlot.PlotLine(xp,y,xp,y-sticksize,Fplot.cfgplot^.Color[12],1);
-FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot^.Color[12],laCenter,laBottom,'0');
+FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'0');
 for i:=1 to n do begin
   x:=xp+round(s*u*cfgsc^.bxglb);
   FPlot.PlotLine(xp,y,x,y,Fplot.cfgplot^.Color[12],1);
   FPlot.PlotLine(x,y,x,y-sticksize,Fplot.cfgplot^.Color[12],1);
-  if i=1 then FPlot.PlotText(x,y-sticksize,1,Fplot.cfgplot^.Color[12],laCenter,laBottom,l1);
+  if i=1 then FPlot.PlotText(x,y-sticksize,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,l1);
   xp:=x;
 end;
-if n>1 then FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot^.Color[12],laCenter,laBottom,l2);
+if n>1 then FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,l2);
 end;
 
 Procedure Tskychart.LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
@@ -1839,7 +1839,7 @@ Fplot.cnv.Brush.Color:=Fplot.cfgplot^.backgroundcolor;
 Fplot.cnv.Brush.Style:=bsSolid;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot^.FontName[1];
-Fplot.cnv.Font.Color:=col;
+Fplot.cnv.Font.Color:=Fplot.cfgplot^.LabelColor[7];
 Fplot.cnv.Font.Size:=Fplot.cfgplot^.FontSize[1]*Fplot.cfgchart^.fontscale;
 if Fplot.cfgplot^.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot^.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
@@ -1972,7 +1972,7 @@ Fplot.cnv.Brush.Color:=Fplot.cfgplot^.backgroundcolor;
 Fplot.cnv.Brush.Style:=bsSolid;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot^.FontName[1];
-Fplot.cnv.Font.Color:=col;
+Fplot.cnv.Font.Color:=Fplot.cfgplot^.LabelColor[7];
 Fplot.cnv.Font.Size:=Fplot.cfgplot^.FontSize[1]*Fplot.cfgchart^.fontscale;
 if Fplot.cfgplot^.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot^.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
@@ -2152,7 +2152,7 @@ Fplot.cnv.Brush.Color:=Fplot.cfgplot^.backgroundcolor;
 Fplot.cnv.Brush.Style:=bsSolid;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot^.FontName[1];
-Fplot.cnv.Font.Color:=col;
+Fplot.cnv.Font.Color:=Fplot.cfgplot^.LabelColor[7];
 Fplot.cnv.Font.Size:=Fplot.cfgplot^.FontSize[1]*Fplot.cfgchart^.fontscale;
 if Fplot.cfgplot^.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot^.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
@@ -2282,7 +2282,7 @@ Fplot.cnv.Brush.Color:=Fplot.cfgplot^.backgroundcolor;
 Fplot.cnv.Brush.Style:=bsSolid;
 // todo: replace by plottext()
 Fplot.cnv.Font.Name:=Fplot.cfgplot^.FontName[1];
-Fplot.cnv.Font.Color:=col;
+Fplot.cnv.Font.Color:=Fplot.cfgplot^.LabelColor[7];
 Fplot.cnv.Font.Size:=Fplot.cfgplot^.FontSize[1]*Fplot.cfgchart^.fontscale;
 if Fplot.cfgplot^.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
 if Fplot.cfgplot^.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
