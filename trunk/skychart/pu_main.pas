@@ -2521,6 +2521,7 @@ end;
 def_cfgsc.LabelMagDiff[1]:=3;
 def_cfgsc.LabelMagDiff[5]:=2;
 def_cfgplot.LabelColor[6]:=clYellow;
+def_cfgplot.LabelColor[7]:=clSilver;
 def_cfgplot.LabelSize[6]:=12;
 def_cfgplot.contrast:=400;
 def_cfgplot.partsize:=1.2;
