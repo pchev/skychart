@@ -2019,7 +2019,7 @@ end;
 
 function Tskychart.DrawHorizon:boolean;
 var az,h,x1,y1 : double;
-    i: integer;
+    i,xx,yy: integer;
     x,y,xh,yh,xp,yp,x0,y0,xph,yph,x0h,y0h :single;
     first:boolean;
 begin
@@ -2070,6 +2070,23 @@ if cfgsc^.ProjPole=Altaz then begin
        xp:=x;
        yp:=y;
      end;
+  end;
+  az:=0; h:=0;
+  for i:=1 to 8 do begin
+     proj2(-deg2rad*az,h,-cfgsc^.acentre,cfgsc^.hcentre,x1,y1,cfgsc) ;
+     WindowXY(x1,y1,x,y,cfgsc);
+     xx:=round(x); yy:=round(y);
+     case round(az) of
+       0  : FPlot.PlotText(xx,yy,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'S');
+       45 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'SW');
+       90 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'W');
+       135: FPlot.PlotText(xx,yy,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'NW');
+       180: FPlot.PlotText(xx,yy,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'N');
+       225: FPlot.PlotText(xx,yy,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'NE');
+       270: FPlot.PlotText(xx,yy,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'E');
+       315: FPlot.PlotText(xx,yy,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,'SE');
+     end;
+     az:=az+45;
   end;
 end;
 result:=true;
