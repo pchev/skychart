@@ -1,7 +1,7 @@
 object f_main: Tf_main
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 560
+  ClientHeight = 561
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
@@ -145,10 +145,10 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 106
   TextHeight = 15
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 559
+  VertScrollBar.Page = 560
   Left = 273
   Height = 580
   Top = 105
@@ -162,7 +162,7 @@ object f_main: Tf_main
     Align = alClient
     BevelOuter = bvNone
     Caption = 'MultiDoc1'
-    ClientHeight = 475
+    ClientHeight = 476
     ClientWidth = 812
     Color = clBlack
     FullRepaint = False
@@ -170,7 +170,7 @@ object f_main: Tf_main
     TabOrder = 4
     OnResize = nil
     Left = 24
-    Height = 475
+    Height = 476
     Top = 53
     Width = 812
     object starshape: TImage
@@ -2318,11 +2318,11 @@ object f_main: Tf_main
   object PanelLeft: TPanel
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 475
+    ClientHeight = 476
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 0
-    Height = 475
+    Height = 476
     Top = 53
     Width = 24
     object ToolBar2: TToolBar
@@ -2331,13 +2331,13 @@ object f_main: Tf_main
       Caption = 'ToolBar2'
       EdgeBorders = [ebBottom]
       Flat = True
-      Height = 475
+      Height = 476
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Wrapable = False
-      Height = 475
+      Height = 476
       Width = 24
       object ToolButton8: TToolButton
         Action = SetupTime
@@ -2447,12 +2447,12 @@ object f_main: Tf_main
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 475
+    ClientHeight = 476
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 1
     Left = 836
-    Height = 475
+    Height = 476
     Top = 53
     Width = 24
     object ToolBar3: TToolBar
@@ -2466,13 +2466,13 @@ object f_main: Tf_main
       Font.Height = -10
       Font.Name = 'Default'
       Font.Pitch = fpVariable
-      Height = 225
+      Height = 226
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Wrapable = False
-      Height = 225
+      Height = 226
       Top = 250
       Width = 24
       object ToolButtonAllSky: TToolButton
@@ -2687,7 +2687,7 @@ object f_main: Tf_main
     ParentFont = True
     TabOrder = 2
     Height = 32
-    Top = 528
+    Top = 529
     Width = 860
     object Shape1: TShape
       Align = alLeft
@@ -2713,8 +2713,8 @@ object f_main: Tf_main
         Color = clNone
         ParentColor = False
         ParentFont = True
-        Height = 14
-        Width = 49
+        Height = 16
+        Width = 60
       end
       object LPanels0: TPanel
         Align = alClient
@@ -3119,7 +3119,7 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Time'
         Top = 2
-        Width = 70
+        Width = 72
       end
       object TimeU: TComboBox
         AutoCompleteText = [cbactSearchAscending]
@@ -3129,7 +3129,7 @@ object f_main: Tf_main
         MaxLength = 0
         Style = csDropDownList
         TabOrder = 2
-        Left = 624
+        Left = 626
         Height = 23
         Hint = 'Time Units'
         Top = 2
@@ -3140,14 +3140,14 @@ object f_main: Tf_main
         ImageIndex = 45
         Style = tbsDivider
         Width = 8
-        Left = 709
+        Left = 711
         Height = 23
         Top = 2
         Width = 8
       end
       object TConnect: TToolButton
         Action = TelescopeConnect
-        Left = 717
+        Left = 719
         Height = 23
         Hint = 'Connect Telescope'
         Top = 2
@@ -3155,7 +3155,7 @@ object f_main: Tf_main
       end
       object TSlew: TToolButton
         Action = TelescopeSlew
-        Left = 763
+        Left = 765
         Height = 23
         Hint = 'Slew'
         Top = 2
@@ -3163,7 +3163,7 @@ object f_main: Tf_main
       end
       object TSync: TToolButton
         Action = TelescopeSync
-        Left = 740
+        Left = 742
         Height = 23
         Hint = 'Sync'
         Top = 2
@@ -3200,7 +3200,7 @@ object f_main: Tf_main
         Caption = 'ToolButton6'
         Style = tbsDivider
         Width = 8
-        Left = 786
+        Left = 788
         Height = 23
         Top = 2
         Width = 8
@@ -3210,7 +3210,7 @@ object f_main: Tf_main
         Caption = 'ToolButton7'
         Style = tbsSeparator
         Width = 23
-        Left = 794
+        Left = 796
         Height = 23
         Top = 2
         Width = 23
