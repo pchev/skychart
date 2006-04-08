@@ -1005,6 +1005,7 @@ try
     ToolButtonNightVisionClick(self);
  end;
 except
+ on E: Exception do SetLPanel1(E.Message);
 end;
 end;
 
@@ -2391,9 +2392,9 @@ end;
 
 Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
 begin
+if traceon then writetrace(txt);
 LPanels1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
 if sendmsg then SendInfo(Sender,origin,txt);
-if traceon then writetrace(txt);
 // refresh tracking object
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
     if sc.cfgsc.TrackOn then
