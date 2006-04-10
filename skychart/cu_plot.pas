@@ -1196,6 +1196,7 @@ if not cfgplot.Invisible then begin
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,be );
           end;
       2 : begin // image
+          rot:=rot*FlipX*FlipY;
           {$ifdef win32}
           if use_Xplanet then
              PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg)
