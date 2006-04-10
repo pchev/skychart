@@ -1106,11 +1106,9 @@ for j:=0 to cfgsc^.SimNb-1 do begin
            end;
       6 :  begin
             if (fov<=2) and (cfgsc^.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc^.Planetlst[j,i+15,1],cfgsc^.Planetlst[j,i+15,2],cfgsc^.Planetlst[j,i+15,5],cfgsc^.Planetlst[j,i+15,4],pixscale,cfgsc^.Planetlst[j,i+15,6]>1.0,true);
-            pa:=cfgsc^.Planetlst[j,31,1]*cfgsc^.FlipX;
             r1:=cfgsc^.Planetlst[j,31,2];
             r2:=cfgsc^.Planetlst[j,31,3];
             be:=cfgsc^.Planetlst[j,31,4];
-            if cfgsc^.FlipY<0 then pa:=180-pa;
             Fplot.PlotPlanet(xx,yy,cfgsc^.FlipX,cfgsc^.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,r1,r2,be,cfgsc^.WhiteBg);
             if (fov<=2) and (cfgsc^.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc^.Planetlst[j,i+15,1],cfgsc^.Planetlst[j,i+15,2],cfgsc^.Planetlst[j,i+15,5],cfgsc^.Planetlst[j,i+15,4],pixscale,cfgsc^.Planetlst[j,i+15,6]>1.0,false);
            end;
