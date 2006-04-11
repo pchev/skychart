@@ -1,13 +1,7 @@
 object f_main: Tf_main
-  Left = 273
-  Height = 580
-  Top = 105
-  Width = 860
-  HorzScrollBar.Page = 859
-  VertScrollBar.Page = 555
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 556
+  ClientHeight = 560
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
@@ -151,32 +145,35 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 15
+  HorzScrollBar.Page = 859
+  VertScrollBar.Page = 559
+  Left = 273
+  Height = 580
+  Top = 105
+  Width = 860
   object MultiDoc1: TMultiDoc
-    Left = 24
-    Height = 471
-    Top = 53
-    Width = 812
+    BorderWidth = 1
+    TitleHeight = 12
+    WireframeMoveResize = True
+    onMaximize = MultiDoc1Maximize
+    onActiveChildChange = MultiDoc1ActiveChildChange
     Align = alClient
     BevelOuter = bvNone
-    BorderWidth = 1
     Caption = 'MultiDoc1'
-    ClientHeight = 471
+    ClientHeight = 475
     ClientWidth = 812
     Color = clBlack
     FullRepaint = False
     ParentColor = False
     TabOrder = 4
-    TitleHeight = 12
-    WireframeMoveResize = True
-    onMaximize = MultiDoc1Maximize
-    onActiveChildChange = MultiDoc1ActiveChildChange
+    OnResize = nil
+    Left = 24
+    Height = 475
+    Top = 53
+    Width = 812
     object starshape: TImage
-      Left = 283
-      Height = 133
-      Top = 171
-      Width = 209
       AutoSize = True
       Picture.Data = {
         07544269746D6170210A01002F2A2058504D202A2F0A73746174696320636861
@@ -2312,129 +2309,153 @@ object f_main: Tf_main
       }
       Transparent = True
       Visible = False
+      Left = 283
+      Height = 133
+      Top = 171
+      Width = 209
     end
   end
   object PanelLeft: TPanel
-    Height = 471
-    Top = 53
-    Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 471
+    ClientHeight = 475
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 0
+    Height = 475
+    Top = 53
+    Width = 24
     object ToolBar2: TToolBar
-      Height = 471
-      Width = 24
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar2'
       EdgeBorders = [ebBottom]
       Flat = True
+      Height = 475
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Wrapable = False
+      Height = 475
+      Width = 24
       object ToolButton8: TToolButton
-        Left = 1
-        Hint = 'Set date and time'
         Action = SetupTime
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Set date and time'
+        Width = 23
       end
       object ToolButton9: TToolButton
-        Left = 1
-        Hint = 'Set observatory location'
-        Top = 23
         Action = SetupObservatory
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Set observatory location'
+        Top = 23
+        Width = 23
       end
       object ToolButtonConfig: TToolButton
-        Left = 1
-        Hint = 'Configure the program'
-        Top = 46
         Action = OpenConfig
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Configure the program'
+        Top = 46
+        Width = 23
       end
       object ToolButtonEQ: TToolButton
-        Left = 1
-        Hint = 'Equatorial Coordinate'
-        Top = 69
         Action = EquatorialProjection
         Wrap = True
         Style = tbsCheck
+        Left = 1
+        Height = 23
+        Hint = 'Equatorial Coordinate'
+        Top = 69
+        Width = 23
       end
       object ToolButtonAZ: TToolButton
-        Left = 1
-        Hint = 'Alt-Az Coordinate'
-        Top = 92
         Action = AltAzProjection
         Wrap = True
         Style = tbsCheck
+        Left = 1
+        Height = 23
+        Hint = 'Alt-Az Coordinate'
+        Top = 92
+        Width = 23
       end
       object ToolButtonEC: TToolButton
-        Left = 1
-        Hint = 'Ecliptic Coordinate'
-        Top = 115
         Action = EclipticProjection
         Wrap = True
         Style = tbsCheck
+        Left = 1
+        Height = 23
+        Hint = 'Ecliptic Coordinate'
+        Top = 115
+        Width = 23
       end
       object ToolButtonGL: TToolButton
-        Left = 1
-        Hint = 'Galactic Coordinate'
-        Top = 138
         Action = GalacticProjection
         Wrap = True
         Style = tbsCheck
+        Left = 1
+        Height = 23
+        Hint = 'Galactic Coordinate'
+        Top = 138
+        Width = 23
       end
       object FlipButtonX: TToolButton
-        Left = 1
-        Hint = 'Mirror Horizontally'
-        Top = 161
         Action = FlipX
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Mirror Horizontally'
+        Top = 161
+        Width = 23
       end
       object FlipButtonY: TToolButton
-        Left = 1
-        Hint = 'Mirror Vertically'
-        Top = 184
         Action = FlipY
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Mirror Vertically'
+        Top = 184
+        Width = 23
       end
       object ToolButtonRotP: TToolButton
-        Left = 1
-        Hint = 'Rotate Right'
-        Top = 207
         Action = rot_plus
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Rotate Right'
+        Top = 207
+        Width = 23
       end
       object ToolButtonRotM: TToolButton
-        Left = 1
-        Hint = 'Rotate Left'
-        Top = 230
         Action = rot_minus
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Rotate Left'
+        Top = 230
+        Width = 23
       end
     end
   end
   object PanelRight: TPanel
-    Left = 836
-    Height = 471
-    Top = 53
-    Width = 24
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 471
+    ClientHeight = 475
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 1
+    Left = 836
+    Height = 475
+    Top = 53
+    Width = 24
     object ToolBar3: TToolBar
-      Height = 221
-      Top = 250
-      Width = 24
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar3'
@@ -2445,64 +2466,77 @@ object f_main: Tf_main
       Font.Height = -10
       Font.Name = 'Default'
       Font.Pitch = fpVariable
+      Height = 225
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Wrapable = False
+      Height = 225
+      Top = 250
+      Width = 24
       object ToolButtonAllSky: TToolButton
-        Left = 1
-        Hint = 'Show All Sky'
         Action = allSky
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'Show All Sky'
+        Width = 23
       end
       object ToolButtonToN: TToolButton
-        Left = 1
-        Hint = 'North'
-        Top = 23
         Action = toN
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'North'
+        Top = 23
+        Width = 23
       end
       object ToolButtonToS: TToolButton
-        Left = 1
-        Hint = 'South'
-        Top = 46
         Action = toS
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'South'
+        Top = 46
+        Width = 23
       end
       object ToolButtonToE: TToolButton
-        Left = 1
-        Hint = 'East'
-        Top = 69
         Action = toE
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'East'
+        Top = 69
+        Width = 23
       end
       object ToolButtonToW: TToolButton
-        Left = 1
-        Hint = 'West'
-        Top = 92
         Action = toW
         Wrap = True
+        Left = 1
+        Height = 23
+        Hint = 'West'
+        Top = 92
+        Width = 23
       end
       object ToolButtonToZ: TToolButton
+        Action = toZenith
         Left = 1
+        Height = 23
         Hint = 'Zenith'
         Top = 115
-        Action = toZenith
+        Width = 23
       end
     end
     object PanelFieldSize: TPanel
-      Height = 250
-      Width = 24
       Align = alTop
       BevelOuter = bvNone
       ClientHeight = 250
       ClientWidth = 24
       TabOrder = 1
+      Height = 250
+      Width = 24
       object Field1: TSpeedButton
-        Height = 24
-        Hint = 'Set FOV to'
-        Width = 24
         Caption = '10'''
         Flat = True
         Font.Color = clNavy
@@ -2511,14 +2545,26 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
+        Height = 24
+        Hint = 'Set FOV to'
+        Width = 24
       end
       object Field2: TSpeedButton
-        Tag = 1
+        Flat = True
+        Font.Color = clNavy
+        Font.Style = [fsBold]
+        NumGlyphs = 0
+        OnClick = SetFOVClick
+        ShowHint = True
+        ParentShowHint = False
         Left = 1
         Height = 23
         Hint = 'Set FOV to'
         Top = 27
         Width = 24
+        Tag = 1
+      end
+      object Field3: TSpeedButton
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2526,13 +2572,13 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
-      end
-      object Field3: TSpeedButton
-        Tag = 2
         Height = 24
         Hint = 'Set FOV to'
         Top = 50
         Width = 24
+        Tag = 2
+      end
+      object Field4: TSpeedButton
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2540,13 +2586,13 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
-      end
-      object Field4: TSpeedButton
-        Tag = 3
         Height = 24
         Hint = 'Set FOV to'
         Top = 75
         Width = 24
+        Tag = 3
+      end
+      object Field5: TSpeedButton
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2554,13 +2600,13 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
-      end
-      object Field5: TSpeedButton
-        Tag = 4
         Height = 23
         Hint = 'Set FOV to'
         Top = 100
         Width = 24
+        Tag = 4
+      end
+      object Field6: TSpeedButton
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2568,13 +2614,13 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
-      end
-      object Field6: TSpeedButton
-        Tag = 5
         Height = 24
         Hint = 'Set FOV to'
         Top = 125
         Width = 24
+        Tag = 5
+      end
+      object Field7: TSpeedButton
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2582,13 +2628,13 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
-      end
-      object Field7: TSpeedButton
-        Tag = 6
         Height = 23
         Hint = 'Set FOV to'
         Top = 150
         Width = 24
+        Tag = 6
+      end
+      object Field8: TSpeedButton
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2596,13 +2642,13 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
-      end
-      object Field8: TSpeedButton
-        Tag = 7
         Height = 23
         Hint = 'Set FOV to'
         Top = 175
         Width = 24
+        Tag = 7
+      end
+      object Field9: TSpeedButton
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2610,13 +2656,13 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
-      end
-      object Field9: TSpeedButton
-        Tag = 8
         Height = 24
         Hint = 'Set FOV to'
         Top = 200
         Width = 24
+        Tag = 8
+      end
+      object Field10: TSpeedButton
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2624,27 +2670,15 @@ object f_main: Tf_main
         OnClick = SetFOVClick
         ShowHint = True
         ParentShowHint = False
-      end
-      object Field10: TSpeedButton
-        Tag = 9
         Height = 23
         Hint = 'Set FOV to'
         Top = 227
         Width = 24
-        Flat = True
-        Font.Color = clNavy
-        Font.Style = [fsBold]
-        NumGlyphs = 0
-        OnClick = SetFOVClick
-        ShowHint = True
-        ParentShowHint = False
+        Tag = 9
       end
     end
   end
   object PanelBottom: TPanel
-    Height = 32
-    Top = 524
-    Width = 860
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 32
@@ -2652,17 +2686,18 @@ object f_main: Tf_main
     FullRepaint = False
     ParentFont = True
     TabOrder = 2
+    Height = 32
+    Top = 528
+    Width = 860
     object Shape1: TShape
-      Left = 150
-      Height = 32
-      Width = 2
       Align = alLeft
       Brush.Color = clBtnShadow
       Pen.Color = clBtnShadow
+      Left = 150
+      Height = 32
+      Width = 2
     end
     object PPanels0: TPanel
-      Height = 32
-      Width = 150
       Align = alLeft
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -2671,17 +2706,17 @@ object f_main: Tf_main
       FullRepaint = False
       ParentFont = True
       TabOrder = 0
+      Height = 32
+      Width = 150
       object LPanels01: TLabel
-        Height = 13
-        Width = 60
         Caption = 'LPanels01'
         Color = clNone
         ParentColor = False
         ParentFont = True
+        Height = 14
+        Width = 49
       end
       object LPanels0: TPanel
-        Height = 32
-        Width = 150
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
@@ -2689,12 +2724,11 @@ object f_main: Tf_main
         ClientWidth = 150
         ParentFont = True
         TabOrder = 0
+        Height = 32
+        Width = 150
       end
     end
     object PPanels1: TPanel
-      Left = 152
-      Height = 32
-      Width = 708
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -2703,9 +2737,10 @@ object f_main: Tf_main
       FullRepaint = False
       ParentFont = True
       TabOrder = 1
+      Left = 152
+      Height = 32
+      Width = 708
       object LPanels1: TPanel
-        Height = 32
-        Width = 708
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
@@ -2713,12 +2748,12 @@ object f_main: Tf_main
         ClientWidth = 708
         ParentFont = True
         TabOrder = 0
+        Height = 32
+        Width = 708
       end
     end
   end
   object PanelTop: TPanel
-    Height = 53
-    Width = 860
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
@@ -2726,116 +2761,143 @@ object f_main: Tf_main
     ClientWidth = 860
     FullRepaint = False
     TabOrder = 3
+    Height = 53
+    Width = 860
     object ToolBar1: TToolBar
-      Height = 25
-      Width = 860
       AutoSize = True
       ButtonHeight = 23
       Flat = True
+      Height = 25
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Wrapable = False
+      Height = 25
+      Width = 860
       object ToolButtonNew: TToolButton
+        Action = FileNew1
+        Left = 1
+        Height = 23
         Hint = 'New|Create a new chart'
         Top = 2
-        Action = FileNew1
+        Width = 23
       end
       object ToolButtonOpen: TToolButton
+        Action = FileOpen1
         Left = 24
+        Height = 23
         Hint = 'Open|Open a chart'
         Top = 2
-        Action = FileOpen1
+        Width = 23
       end
       object ToolButtonSave: TToolButton
+        Action = FileSaveAs1
         Left = 47
+        Height = 23
         Hint = 'Save the current chart'
         Top = 2
-        Action = FileSaveAs1
+        Width = 23
       end
       object ToolButtonPrint: TToolButton
+        Action = Print1
         Left = 70
+        Height = 23
         Hint = 'Print the chart'
         Top = 2
-        Action = Print1
+        Width = 23
       end
       object ToolButtonNightVision: TToolButton
-        Left = 93
-        Hint = 'Night vision color'
-        Top = 2
         Caption = 'ToolButtonNightVision'
         ImageIndex = 82
         OnClick = ToolButtonNightVisionClick
+        Left = 93
+        Height = 23
+        Hint = 'Night vision color'
+        Top = 2
+        Width = 23
       end
       object ToolButton3: TToolButton
-        Left = 116
-        Top = 2
-        Width = 8
         Caption = 'ToolButton3'
         ImageIndex = 2
         Style = tbsDivider
+        Width = 8
+        Left = 116
+        Height = 23
+        Top = 2
+        Width = 8
       end
       object ToolButtonCascade: TToolButton
-        Left = 124
-        Hint = 'Cascade'
-        Top = 2
         Caption = '&Cascade'
         ImageIndex = 4
         OnClick = WindowCascade1Execute
+        Left = 124
+        Height = 23
+        Hint = 'Cascade'
+        Top = 2
+        Width = 23
       end
       object ToolButtonTile: TToolButton
-        Left = 147
-        Hint = 'Tile Vertically'
-        Top = 2
         Caption = 'Tile &Vertically'
         ImageIndex = 14
         OnClick = WindowTileVertical1Execute
+        Left = 147
+        Height = 23
+        Hint = 'Tile Vertically'
+        Top = 2
+        Width = 23
       end
       object ToolButton5: TToolButton
-        Left = 170
-        Top = 2
-        Width = 8
         Caption = 'ToolButton5'
         ImageIndex = 17
         Style = tbsDivider
+        Width = 8
+        Left = 170
+        Height = 23
+        Top = 2
+        Width = 8
       end
       object ToolButtonUndo: TToolButton
+        Action = Undo
         Left = 178
+        Height = 23
         Hint = 'Undo Last Change'
         Top = 2
-        Action = Undo
+        Width = 23
       end
       object ToolButtonRedo: TToolButton
+        Action = Redo
         Left = 201
+        Height = 23
         Hint = 'Redo Last Change'
         Top = 2
-        Action = Redo
+        Width = 23
       end
       object ToolButtonZoom: TToolButton
+        Action = zoomplus
         Left = 224
+        Height = 23
         Hint = 'Zoom In'
         Top = 2
-        Action = zoomplus
+        Width = 23
       end
       object ToolButtonUnZoom: TToolButton
+        Action = zoomminus
         Left = 247
+        Height = 23
         Hint = 'Zoom Out'
         Top = 2
-        Action = zoomminus
+        Width = 23
       end
       object ToolButton1: TToolButton
+        Action = ZoomBar
         Left = 270
+        Height = 23
         Hint = 'Set FOV'
         Top = 2
-        Action = ZoomBar
+        Width = 23
       end
       object quicksearch: TComboBox
-        Left = 317
-        Height = 23
-        Hint = 'Search'
-        Top = 2
-        Width = 68
         ArrowKeysTraverseList = False
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
@@ -2847,27 +2909,31 @@ object f_main: Tf_main
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
         TabOrder = 0
+        Left = 317
+        Height = 23
+        Hint = 'Search'
+        Top = 2
+        Width = 68
       end
       object ToolButtonSearch: TToolButton
+        Action = Search1
         Left = 385
+        Height = 23
         Hint = 'Advanced Search'
         Top = 2
-        Action = Search1
+        Width = 23
       end
       object MagPanel: TPanel
-        Left = 293
-        Height = 23
-        Top = 2
-        Width = 24
         BevelOuter = bvNone
         ClientHeight = 23
         ClientWidth = 24
         FullRepaint = False
         TabOrder = 3
+        Left = 293
+        Height = 23
+        Top = 2
+        Width = 24
         object ButtonMoreStar: TImage
-          Height = 11
-          Hint = 'More Stars'
-          Width = 11
           OnClick = MoreStarExecute
           Picture.Data = {
             07544269746D6170AA0300002F2A2058504D202A2F0A73746174696320636861
@@ -2902,12 +2968,11 @@ object f_main: Tf_main
             6F522E2E61222C0A2261616161616161616161227D0A
           }
           Transparent = True
+          Height = 11
+          Hint = 'More Stars'
+          Width = 11
         end
         object ButtonLessStar: TImage
-          Left = 12
-          Height = 11
-          Hint = 'Less Stars'
-          Width = 11
           OnClick = LessStarExecute
           Picture.Data = {
             07544269746D6170E80100002F2A2058504D202A2F0A73746174696320636861
@@ -2928,12 +2993,12 @@ object f_main: Tf_main
             2E2E2C222C0A222C2C2C2C2C2C2C2C2C2C227D0A
           }
           Transparent = True
+          Left = 12
+          Height = 11
+          Hint = 'Less Stars'
+          Width = 11
         end
         object ButtonMoreNeb: TImage
-          Height = 11
-          Hint = 'More Nebulae'
-          Top = 12
-          Width = 11
           OnClick = MoreNebExecute
           Picture.Data = {
             07544269746D6170420200002F2A2058504D202A2F0A73746174696320636861
@@ -2957,13 +3022,12 @@ object f_main: Tf_main
             222C2C2C2C2C2C2C2C2C2C227D0A
           }
           Transparent = True
-        end
-        object ButtonLessNeb: TImage
-          Left = 12
           Height = 11
-          Hint = 'Less Nebulae'
+          Hint = 'More Nebulae'
           Top = 12
           Width = 11
+        end
+        object ButtonLessNeb: TImage
           OnClick = LessNebExecute
           Picture.Data = {
             07544269746D61709D0100002F2A2058504D202A2F0A73746174696320636861
@@ -2982,69 +3046,83 @@ object f_main: Tf_main
             2C2C2C2C2C2C227D0A
           }
           Transparent = True
+          Left = 12
+          Height = 11
+          Hint = 'Less Nebulae'
+          Top = 12
+          Width = 11
         end
       end
       object ToolButtonPosition: TToolButton
+        Action = Position
         Left = 408
+        Height = 23
         Hint = 'Position'
         Top = 2
-        Action = Position
+        Width = 23
       end
       object ToolButtonListObj: TToolButton
+        Action = listobj
         Left = 431
+        Height = 23
         Hint = 'Object List'
         Top = 2
-        Action = listobj
+        Width = 23
       end
       object ToolButtonCal: TToolButton
+        Action = Calendar
         Left = 454
+        Height = 23
         Hint = 'Ephemeris Calendar'
         Top = 2
-        Action = Calendar
+        Width = 23
       end
       object ToolButton35: TToolButton
-        Left = 477
-        Top = 2
-        Width = 8
         Caption = 'ToolButton35'
         ImageIndex = 8
         Style = tbsDivider
+        Width = 8
+        Left = 477
+        Height = 23
+        Top = 2
+        Width = 8
       end
       object ToolButtonTdec: TToolButton
+        Action = TimeDec
         Left = 485
+        Height = 23
         Hint = 'Decrement Time'
         Top = 2
-        Action = TimeDec
+        Width = 23
       end
       object ToolButtonTnow: TToolButton
+        Action = TimeReset
         Left = 508
+        Height = 23
         Hint = 'Now'
         Top = 2
-        Action = TimeReset
+        Width = 23
       end
       object ToolButtonTinc: TToolButton
+        Action = TimeInc
         Left = 531
+        Height = 23
         Hint = 'Increment Time'
         Top = 2
-        Action = TimeInc
+        Width = 23
       end
       object TimeVal: TSpinEdit
-        Left = 554
-        Height = 23
-        Hint = 'Time'
-        Top = 2
-        Width = 60
         MaxValue = 1000
         MinValue = 1
         TabOrder = 4
         Value = 1
+        Left = 554
+        Height = 23
+        Hint = 'Time'
+        Top = 2
+        Width = 64
       end
       object TimeU: TComboBox
-        Left = 614
-        Height = 23
-        Hint = 'Time Units'
-        Top = 2
-        Width = 85
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
@@ -3052,278 +3130,349 @@ object f_main: Tf_main
         MaxLength = 0
         Style = csDropDownList
         TabOrder = 2
+        Left = 618
+        Height = 23
+        Hint = 'Time Units'
+        Top = 2
+        Width = 85
       end
       object ToolButton39: TToolButton
-        Left = 699
-        Top = 2
-        Width = 8
         Caption = 'ToolButton39'
         ImageIndex = 45
         Style = tbsDivider
-      end
-      object TConnect: TToolButton
-        Left = 707
-        Hint = 'Connect Telescope'
-        Top = 2
-        Action = TelescopeConnect
-      end
-      object TSlew: TToolButton
-        Left = 753
-        Hint = 'Slew'
-        Top = 2
-        Action = TelescopeSlew
-      end
-      object TSync: TToolButton
-        Left = 730
-        Hint = 'Sync'
-        Top = 2
-        Action = TelescopeSync
-      end
-      object ChildControl: TPanel
-        Left = 827
+        Width = 8
+        Left = 703
         Height = 23
         Top = 2
-        Width = 30
+        Width = 8
+      end
+      object TConnect: TToolButton
+        Action = TelescopeConnect
+        Left = 711
+        Height = 23
+        Hint = 'Connect Telescope'
+        Top = 2
+        Width = 23
+      end
+      object TSlew: TToolButton
+        Action = TelescopeSlew
+        Left = 757
+        Height = 23
+        Hint = 'Slew'
+        Top = 2
+        Width = 23
+      end
+      object TSync: TToolButton
+        Action = TelescopeSync
+        Left = 734
+        Height = 23
+        Hint = 'Sync'
+        Top = 2
+        Width = 23
+      end
+      object ChildControl: TPanel
         Align = alRight
         AutoSize = True
         BevelOuter = bvNone
         ClientHeight = 23
         ClientWidth = 30
         TabOrder = 1
+        Left = 829
+        Height = 23
+        Top = 2
+        Width = 30
         object BtnRestoreChild: TSpeedButton
-          Height = 15
-          Width = 15
           Flat = True
           NumGlyphs = 0
           OnClick = BtnRestoreChildClick
-        end
-        object BtnCloseChild: TSpeedButton
-          Left = 15
           Height = 15
           Width = 15
+        end
+        object BtnCloseChild: TSpeedButton
           Flat = True
           NumGlyphs = 0
           OnClick = BtnCloseChildClick
+          Left = 15
+          Height = 15
+          Width = 15
         end
       end
       object ToolButton6: TToolButton
-        Left = 776
-        Top = 2
-        Width = 8
         Caption = 'ToolButton6'
         Style = tbsDivider
+        Width = 8
+        Left = 780
+        Height = 23
+        Top = 2
+        Width = 8
       end
       object ToolButton7: TToolButton
-        Left = 784
-        Top = 2
-        Width = 23
         AutoSize = True
         Caption = 'ToolButton7'
         Style = tbsSeparator
+        Width = 23
+        Left = 788
+        Height = 23
+        Top = 2
+        Width = 23
       end
     end
     object ToolBar4: TToolBar
-      Height = 28
-      Top = 25
-      Width = 860
       Align = alBottom
       AutoSize = True
       ButtonHeight = 24
       Caption = 'ToolBar4'
       EdgeBorders = [ebTop, ebBottom]
       Flat = True
+      Height = 28
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       Wrapable = False
+      Height = 28
+      Top = 25
+      Width = 860
       object topmessage1: TLabel
-        Left = 569
-        Height = 24
-        Top = 2
-        Width = 17
         Caption = '    '
         Color = clNone
         ParentColor = False
+        Left = 569
+        Height = 24
+        Top = 2
+        Width = 13
       end
       object ToolButtonShowStars: TToolButton
-        Hint = 'Show Stars'
-        Top = 2
         Action = ShowStars
         Style = tbsCheck
+        Left = 1
+        Height = 24
+        Hint = 'Show Stars'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowNebulae: TToolButton
-        Left = 24
-        Hint = 'Show Nebulae'
-        Top = 2
         Action = ShowNebulae
         Style = tbsCheck
+        Left = 24
+        Height = 24
+        Hint = 'Show Nebulae'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowLines: TToolButton
-        Left = 47
-        Hint = 'Show Lines'
-        Top = 2
         Action = ShowLines
         Style = tbsCheck
+        Left = 47
+        Height = 24
+        Hint = 'Show Lines'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowPictures: TToolButton
-        Left = 70
-        Hint = 'Show Pictures'
-        Top = 2
         Action = ShowPictures
         Style = tbsCheck
+        Left = 70
+        Height = 24
+        Hint = 'Show Pictures'
+        Top = 2
+        Width = 23
       end
       object ToolButtonDSS: TToolButton
+        Action = DSSImage
         Left = 93
+        Height = 24
         Hint = 'Get DSS Image'
         Top = 2
-        Action = DSSImage
+        Width = 23
       end
       object ToolButtonShowBackgroundImage: TToolButton
+        Action = SetupPictures
         Left = 116
+        Height = 24
         Hint = 'Change pictures display'
         Top = 2
-        Action = SetupPictures
+        Width = 23
       end
       object ToolButtonShowPlanets: TToolButton
-        Left = 139
-        Hint = 'Show Planets'
-        Top = 2
         Action = ShowPlanets
         Style = tbsCheck
+        Left = 139
+        Height = 24
+        Hint = 'Show Planets'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowAsteroids: TToolButton
-        Left = 162
-        Hint = 'Show Asteroids'
-        Top = 2
         Action = ShowAsteroids
         Style = tbsCheck
+        Left = 162
+        Height = 24
+        Hint = 'Show Asteroids'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowComets: TToolButton
-        Left = 185
-        Hint = 'Show Comets'
-        Top = 2
         Action = ShowComets
         Style = tbsCheck
+        Left = 185
+        Height = 24
+        Hint = 'Show Comets'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowMilkyWay: TToolButton
-        Left = 208
-        Hint = 'Show Milky Way'
-        Top = 2
         Action = ShowMilkyWay
         Style = tbsCheck
+        Left = 208
+        Height = 24
+        Hint = 'Show Milky Way'
+        Top = 2
+        Width = 23
       end
       object ToolButtonGrid: TToolButton
-        Left = 231
-        Hint = 'Show Coordinate Grid'
-        Top = 2
         Action = Grid
         Style = tbsCheck
+        Left = 231
+        Height = 24
+        Hint = 'Show Coordinate Grid'
+        Top = 2
+        Width = 23
       end
       object ToolButtonGridEq: TToolButton
-        Left = 254
-        Hint = 'Add Equatorial Grid'
-        Top = 2
         Action = GridEQ
         Style = tbsCheck
+        Left = 254
+        Height = 24
+        Hint = 'Add Equatorial Grid'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowConstellationLine: TToolButton
-        Left = 277
-        Hint = 'Show Constellation Line'
-        Top = 2
         Action = ShowConstellationLine
         Style = tbsCheck
+        Left = 277
+        Height = 24
+        Hint = 'Show Constellation Line'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowConstellationLimit: TToolButton
-        Left = 300
-        Hint = 'Show Constellation Limit'
-        Top = 2
         Action = ShowConstellationLimit
         Style = tbsCheck
+        Left = 300
+        Height = 24
+        Hint = 'Show Constellation Limit'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowGalacticEquator: TToolButton
-        Left = 323
-        Hint = 'Show Galactic Equator'
-        Top = 2
         Action = ShowGalacticEquator
         Style = tbsCheck
+        Left = 323
+        Height = 24
+        Hint = 'Show Galactic Equator'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowEcliptic: TToolButton
-        Left = 346
-        Hint = 'Show Ecliptic'
-        Top = 2
         Action = ShowEcliptic
         Style = tbsCheck
+        Left = 346
+        Height = 24
+        Hint = 'Show Ecliptic'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowMark: TToolButton
-        Left = 369
-        Hint = 'Show Mark'
-        Top = 2
         Action = ShowMark
         Style = tbsCheck
+        Left = 369
+        Height = 24
+        Hint = 'Show Mark'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowLabels: TToolButton
-        Left = 392
-        Hint = 'Show Labels'
-        Top = 2
         Action = ShowLabels
         Style = tbsCheck
+        Left = 392
+        Height = 24
+        Hint = 'Show Labels'
+        Top = 2
+        Width = 23
       end
       object ToolButtonEditlabels: TToolButton
-        Left = 415
-        Hint = 'Edit Labels'
-        Top = 2
         Action = EditLabels
         Style = tbsCheck
+        Left = 415
+        Height = 24
+        Hint = 'Edit Labels'
+        Top = 2
+        Width = 23
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
-        Left = 438
-        Hint = 'Show Object below the horizon'
-        Top = 2
         Action = ShowObjectbelowHorizon
         Style = tbsCheck
+        Left = 438
+        Height = 24
+        Hint = 'Show Object below the horizon'
+        Top = 2
+        Width = 23
       end
       object ToolButtonswitchbackground: TToolButton
-        Left = 461
-        Hint = 'Sky Background Color'
-        Top = 2
         Action = switchbackground
         Style = tbsCheck
+        Left = 461
+        Height = 24
+        Hint = 'Sky Background Color'
+        Top = 2
+        Width = 23
       end
       object ToolButtonSyncChart: TToolButton
-        Left = 492
-        Hint = 'Link All Chart'
-        Top = 2
         Action = SyncChart
         Style = tbsCheck
+        Left = 492
+        Height = 24
+        Hint = 'Link All Chart'
+        Top = 2
+        Width = 23
       end
       object ToolButtonTrack: TToolButton
-        Left = 515
-        Hint = 'Track'
-        Top = 2
         Action = Track
         Style = tbsCheck
+        Left = 515
+        Height = 24
+        Hint = 'Track'
+        Top = 2
+        Width = 23
       end
       object ToolButtonswitchstars: TToolButton
-        Left = 546
-        Hint = 'Change Drawing Mode'
-        Top = 2
         Action = switchstars
         Style = tbsCheck
+        Left = 546
+        Height = 24
+        Hint = 'Change Drawing Mode'
+        Top = 2
+        Width = 23
       end
       object ToolButton2: TToolButton
-        Left = 538
-        Top = 2
-        Width = 8
         Caption = 'ToolButton2'
         Style = tbsDivider
-      end
-      object ToolButton4: TToolButton
-        Left = 484
+        Width = 8
+        Left = 538
+        Height = 24
         Top = 2
         Width = 8
+      end
+      object ToolButton4: TToolButton
         Caption = 'ToolButton4'
         Style = tbsDivider
+        Width = 8
+        Left = 484
+        Height = 24
+        Top = 2
+        Width = 8
       end
     end
   end
@@ -3596,49 +3745,49 @@ object f_main: Tf_main
           OnClick = SetFovExecute
         end
         object SetFov2: TMenuItem
-          Tag = 1
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 1
         end
         object SetFov3: TMenuItem
-          Tag = 2
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 2
         end
         object SetFov4: TMenuItem
-          Tag = 3
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 3
         end
         object SetFov5: TMenuItem
-          Tag = 4
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 4
         end
         object SetFov6: TMenuItem
-          Tag = 5
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 5
         end
         object SetFov7: TMenuItem
-          Tag = 6
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 6
         end
         object SetFov8: TMenuItem
-          Tag = 7
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 7
         end
         object SetFov9: TMenuItem
-          Tag = 8
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 8
         end
         object SetFov10: TMenuItem
-          Tag = 9
           Caption = 'SetFov'
           OnClick = SetFovExecute
+          Tag = 9
         end
         object allSky1: TMenuItem
           Action = allSky
@@ -3808,9 +3957,10 @@ object f_main: Tf_main
     end
   end
   object OpenDialog: TOpenDialog
+    Options = [ofEnableSizing]
     Title = 'Open existing file'
     FilterIndex = 0
-    Options = [ofEnableSizing]
+    Title = 'Open existing file'
     left = 184
     top = 160
   end
@@ -3819,630 +3969,631 @@ object f_main: Tf_main
     left = 336
     top = 160
     object FileNew1: TAction
-      Category = 'File'
       Caption = 'New Chart'
       Hint = 'New|Create a new chart'
       ImageIndex = 0
       OnExecute = FileNew1Execute
+      Category = 'File'
     end
     object FileOpen1: TAction
-      Category = 'File'
       Caption = 'Open '
       Hint = 'Open|Open a chart'
       ImageIndex = 1
       OnExecute = FileOpen1Execute
+      Category = 'File'
     end
     object FileSaveAs1: TAction
-      Category = 'File'
       Caption = 'Save As...'
       Hint = 'Save the current chart'
       ImageIndex = 2
       OnExecute = FileSaveAs1Execute
+      Category = 'File'
     end
     object FileExit1: TAction
-      Category = 'File'
       Caption = 'Exit'
       Hint = 'Exit|Exit application'
       ImageIndex = 11
       OnExecute = FileExit1Execute
+      Category = 'File'
     end
     object Print1: TAction
-      Category = 'File'
       Caption = 'Print'
       Hint = 'Print the chart'
       ImageIndex = 3
       OnExecute = Print1Execute
+      Category = 'File'
     end
     object EditCopy1: TEditCopy
-      Category = 'Edit'
       Caption = 'Copy'
       Hint = 'Copy|Copies the selection and puts it on the Clipboard'
       OnExecute = EditCopy1Execute
       ShortCut = 16451
+      Category = 'Edit'
     end
     object FilePrintSetup1: TAction
-      Category = 'File'
       Caption = 'Print Setup'
       ImageIndex = 47
       OnExecute = FilePrintSetup1Execute
+      Category = 'File'
     end
     object HelpAbout1: TAction
-      Category = 'Help'
       Caption = 'About...'
       Hint = 'About|Displays program information, version number, and copyright'
       OnExecute = HelpAbout1Execute
+      Category = 'Help'
     end
     object OpenConfig: TAction
-      Category = 'Setup'
       Caption = 'Configuration'
       Hint = 'Configure the program'
       ImageIndex = 10
       OnExecute = OpenConfigExecute
+      Category = 'Setup'
     end
     object HelpContents1: THelpContents
-      Category = 'Help'
       Caption = 'Help contents'
       Hint = 'Help contents'
       ImageIndex = 12
       OnExecute = HelpContents1Execute
       ShortCut = 112
+      Category = 'Help'
     end
     object Search1: TAction
-      Category = 'Search'
       Caption = 'Search'
       Hint = 'Search'
       ImageIndex = 76
       OnExecute = Search1Execute
+      Category = 'Search'
     end
     object ViewBar: TAction
-      Category = 'View'
       Caption = 'View Tools Bar'
       Hint = 'View Tools Bar'
       OnExecute = ViewBarExecute
       ShortCut = 16450
+      Category = 'View'
     end
     object zoomplus: TAction
-      Category = 'chart'
       Caption = 'Zoom In'
       Hint = 'Zoom In'
       ImageIndex = 6
       OnExecute = zoomplusExecute
+      Category = 'chart'
     end
     object zoomminus: TAction
-      Category = 'chart'
       Caption = 'Zoom Out'
       Hint = 'Zoom Out'
       ImageIndex = 7
       OnExecute = zoomminusExecute
+      Category = 'chart'
     end
     object ZoomBar: TAction
-      Category = 'chart'
       Caption = 'ZoomBar'
       Hint = 'Set FOV'
       ImageIndex = 8
       OnExecute = ZoomBarExecute
+      Category = 'chart'
     end
     object FlipX: TAction
-      Category = 'chart'
       Caption = 'Mirror Horizontally'
       Hint = 'Mirror Horizontally'
       ImageIndex = 15
       OnExecute = FlipXExecute
+      Category = 'chart'
     end
     object FlipY: TAction
-      Category = 'chart'
       Caption = 'Mirror Vertically'
       Hint = 'Mirror Vertically'
       ImageIndex = 17
       OnExecute = FlipYExecute
+      Category = 'chart'
     end
     object ViewStatus: TAction
-      Category = 'View'
       Caption = 'View Status Bar'
       Hint = 'View the status bar'
       OnExecute = ViewStatusExecute
+      Category = 'View'
     end
     object SaveConfiguration: TAction
-      Category = 'Setup'
       Caption = 'Save Configuration Now'
       Hint = 'The the default configuration'
       OnExecute = SaveConfigurationExecute
+      Category = 'Setup'
     end
     object SaveConfigOnExit: TAction
-      Category = 'Setup'
       Caption = 'Save Configuration On Exit'
       Checked = True
       Hint = 'Save the configuration when the program close'
       OnExecute = SaveConfigOnExitExecute
+      Category = 'Setup'
     end
     object Undo: TAction
-      Category = 'Undo'
       Caption = 'Undo'
       Hint = 'Undo Last Change'
       ImageIndex = 19
       OnExecute = UndoExecute
+      Category = 'Undo'
     end
     object Redo: TAction
-      Category = 'Undo'
       Caption = 'Redo'
       Hint = 'Redo Last Change'
       ImageIndex = 20
       OnExecute = RedoExecute
+      Category = 'Undo'
     end
     object rot_plus: TAction
-      Category = 'chart'
       Caption = 'Rotate Right'
       Hint = 'Rotate Right'
       ImageIndex = 21
       OnExecute = rot_plusExecute
+      Category = 'chart'
     end
     object rot_minus: TAction
-      Category = 'chart'
       Caption = 'Rotate Left'
       Hint = 'Rotate Left'
       ImageIndex = 22
       OnExecute = rot_minusExecute
+      Category = 'chart'
     end
     object GridEQ: TAction
-      Category = 'chart'
       Caption = 'Add Equatorial Grid'
       Hint = 'Add Equatorial Grid'
       ImageIndex = 24
       OnExecute = GridEQExecute
+      Category = 'chart'
     end
     object Grid: TAction
-      Category = 'chart'
       Caption = 'Show Coordinate Grid'
       Hint = 'Show Coordinate Grid'
       ImageIndex = 25
       OnExecute = GridExecute
+      Category = 'chart'
     end
     object switchstars: TAction
-      Category = 'chart'
       Caption = 'switchstars'
       Hint = 'Change Drawing Mode'
       ImageIndex = 34
       OnExecute = switchstarsExecute
+      Category = 'chart'
     end
     object switchbackground: TAction
-      Category = 'chart'
       Caption = 'switchbackground'
       Hint = 'Sky Background Color'
       ImageIndex = 35
       OnExecute = switchbackgroundExecute
+      Category = 'chart'
     end
     object SaveImage: TAction
-      Category = 'File'
       Caption = 'Save Image...'
       ImageIndex = 36
       OnExecute = SaveImageExecute
+      Category = 'File'
     end
     object ViewInfo: TAction
-      Category = 'View'
       Caption = 'View Information'
       OnExecute = ViewInfoExecute
+      Category = 'View'
     end
     object toN: TAction
-      Category = 'chart'
       Caption = 'North'
       Hint = 'North'
       ImageIndex = 38
       OnExecute = toNExecute
+      Category = 'chart'
     end
     object toE: TAction
-      Category = 'chart'
       Caption = 'East'
       Hint = 'East'
       ImageIndex = 37
       OnExecute = toEExecute
+      Category = 'chart'
     end
     object toS: TAction
-      Category = 'chart'
       Caption = 'South'
       Hint = 'South'
       ImageIndex = 39
       OnExecute = toSExecute
+      Category = 'chart'
     end
     object toW: TAction
-      Category = 'chart'
       Caption = 'West'
       Hint = 'West'
       ImageIndex = 40
       OnExecute = toWExecute
+      Category = 'chart'
     end
     object toZenith: TAction
-      Category = 'chart'
       Caption = 'toZenith'
       Hint = 'Zenith'
       ImageIndex = 41
       OnExecute = toZenithExecute
+      Category = 'chart'
     end
     object allSky: TAction
-      Category = 'chart'
       Caption = 'Show All Sky'
       Hint = 'Show All Sky'
       ImageIndex = 42
       OnExecute = allSkyExecute
+      Category = 'chart'
     end
     object TimeInc: TAction
-      Tag = 1
-      Category = 'chart'
       Caption = 'TimeInc'
       Hint = 'Increment Time'
       ImageIndex = 44
       OnExecute = TimeIncExecute
+      Category = 'chart'
+      Tag = 1
     end
     object TimeDec: TAction
-      Tag = -1
-      Category = 'chart'
       Caption = 'TimeDec'
       Hint = 'Decrement Time'
       ImageIndex = 43
       OnExecute = TimeIncExecute
+      Category = 'chart'
+      Tag = -1
     end
     object TimeReset: TAction
-      Category = 'chart'
       Caption = 'TimeReset'
       Hint = 'Now'
       ImageIndex = 84
       OnExecute = TimeResetExecute
+      Category = 'chart'
     end
     object listobj: TAction
-      Category = 'chart'
       Caption = 'listobj'
       Hint = 'Object List'
       ImageIndex = 46
       OnExecute = listobjExecute
+      Category = 'chart'
     end
     object TelescopeConnect: TAction
-      Category = 'Telescope'
       Caption = 'Connect'
       Hint = 'Connect Telescope'
       ImageIndex = 48
       OnExecute = TelescopeConnectExecute
+      Category = 'Telescope'
     end
     object TelescopeSlew: TAction
-      Category = 'Telescope'
       Caption = 'Slew'
       Hint = 'Slew'
       ImageIndex = 50
       OnExecute = TelescopeSlewExecute
+      Category = 'Telescope'
     end
     object TelescopeSync: TAction
-      Category = 'Telescope'
       Caption = 'Sync'
       Hint = 'Sync'
       ImageIndex = 51
       OnExecute = TelescopeSyncExecute
+      Category = 'Telescope'
     end
     object MoreStar: TAction
-      Category = 'chart'
       Hint = 'More Star'
       ImageIndex = 52
       OnExecute = MoreStarExecute
+      Category = 'chart'
     end
     object LessStar: TAction
-      Category = 'chart'
       Hint = 'Less Star'
       ImageIndex = 53
       OnExecute = LessStarExecute
+      Category = 'chart'
     end
     object MoreNeb: TAction
-      Category = 'chart'
       Hint = 'More Nebula'
       ImageIndex = 54
       OnExecute = MoreNebExecute
+      Category = 'chart'
     end
     object LessNeb: TAction
-      Category = 'chart'
       Hint = 'Less Nebula'
       ImageIndex = 55
       OnExecute = LessNebExecute
+      Category = 'chart'
     end
     object ShowStars: TAction
-      Category = 'chart'
       Caption = 'Show Stars'
       Hint = 'Show Stars'
       ImageIndex = 56
       OnExecute = ShowStarsExecute
+      Category = 'chart'
     end
     object ShowNebulae: TAction
-      Category = 'chart'
       Caption = 'Show Nebulae'
       Hint = 'Show Nebulae'
       ImageIndex = 57
       OnExecute = ShowNebulaeExecute
+      Category = 'chart'
     end
     object ShowPictures: TAction
-      Category = 'chart'
       Caption = 'Show Pictures'
       Hint = 'Show Pictures'
       ImageIndex = 58
       OnExecute = ShowPicturesExecute
+      Category = 'chart'
     end
     object ShowLines: TAction
-      Category = 'chart'
       Caption = 'Show Lines'
       Hint = 'Show Lines'
       ImageIndex = 59
       OnExecute = ShowLinesExecute
+      Category = 'chart'
     end
     object ShowPlanets: TAction
-      Category = 'chart'
       Caption = 'Show Planets'
       Hint = 'Show Planets'
       ImageIndex = 62
       OnExecute = ShowPlanetsExecute
+      Category = 'chart'
     end
     object ShowAsteroids: TAction
-      Category = 'chart'
       Caption = 'Show Asteroids'
       Hint = 'Show Asteroids'
       ImageIndex = 60
       OnExecute = ShowAsteroidsExecute
+      Category = 'chart'
     end
     object ShowComets: TAction
-      Category = 'chart'
       Caption = 'Show Comets'
       Hint = 'Show Comets'
       ImageIndex = 61
       OnExecute = ShowCometsExecute
+      Category = 'chart'
     end
     object ShowMilkyWay: TAction
-      Category = 'chart'
       Caption = 'Show Milky Way'
       Hint = 'Show Milky Way'
       ImageIndex = 63
       OnExecute = ShowMilkyWayExecute
+      Category = 'chart'
     end
     object ShowLabels: TAction
-      Category = 'chart'
       Caption = 'Show Labels'
       Hint = 'Show Labels'
       ImageIndex = 64
       OnExecute = ShowLabelsExecute
+      Category = 'chart'
     end
     object ShowConstellationLine: TAction
-      Category = 'chart'
       Caption = 'Show Constellation Line'
       Hint = 'Show Constellation Line'
       ImageIndex = 65
       OnExecute = ShowConstellationLineExecute
+      Category = 'chart'
     end
     object ShowConstellationLimit: TAction
-      Category = 'chart'
       Caption = 'Show Constellation Limit'
       Hint = 'Show Constellation Limit'
       ImageIndex = 66
       OnExecute = ShowConstellationLimitExecute
+      Category = 'chart'
     end
     object ShowGalacticEquator: TAction
-      Category = 'chart'
       Caption = 'Show Galactic Equator'
       Hint = 'Show Galactic Equator'
       ImageIndex = 67
       OnExecute = ShowGalacticEquatorExecute
+      Category = 'chart'
     end
     object ShowEcliptic: TAction
-      Category = 'chart'
       Caption = 'Show Ecliptic'
       Hint = 'Show Ecliptic'
       ImageIndex = 68
       OnExecute = ShowEclipticExecute
+      Category = 'chart'
     end
     object ShowMark: TAction
-      Category = 'chart'
       Caption = 'Show Mark'
       Hint = 'Show Mark'
       ImageIndex = 69
       OnExecute = ShowMarkExecute
+      Category = 'chart'
     end
     object ShowObjectbelowHorizon: TAction
-      Category = 'chart'
       Caption = 'Show Object below the horizon'
       Hint = 'Show Object below the horizon'
       ImageIndex = 70
       OnExecute = ShowObjectbelowHorizonExecute
+      Category = 'chart'
     end
     object EquatorialProjection: TAction
-      Category = 'chart'
       Caption = 'Equatorial Coordinate'
       Hint = 'Equatorial Coordinate'
       ImageIndex = 71
       OnExecute = EquatorialProjectionExecute
+      Category = 'chart'
     end
     object AltAzProjection: TAction
-      Category = 'chart'
       Caption = 'Alt-Az Coordinate'
       Hint = 'Alt-Az Coordinate'
       ImageIndex = 72
       OnExecute = AltAzProjectionExecute
+      Category = 'chart'
     end
     object EclipticProjection: TAction
-      Category = 'chart'
       Caption = 'EclipticProjection'
       Hint = 'Ecliptic Coordinate'
       ImageIndex = 73
       OnExecute = EclipticProjectionExecute
+      Category = 'chart'
     end
     object GalacticProjection: TAction
-      Category = 'chart'
       Caption = 'GalacticProjection'
       Hint = 'Galactic Coordinate'
       ImageIndex = 74
       OnExecute = GalacticProjectionExecute
+      Category = 'chart'
     end
     object ViewMainBar: TAction
-      Category = 'View'
       Caption = 'Main Bar'
       OnExecute = ViewMainBarExecute
+      Category = 'View'
     end
     object ViewObjectBar: TAction
-      Category = 'View'
       Caption = 'Object Bar'
       OnExecute = ViewObjectBarExecute
+      Category = 'View'
     end
     object ViewLeftBar: TAction
-      Category = 'View'
       Caption = 'Left Bar'
       OnExecute = ViewLeftBarExecute
+      Category = 'View'
     end
     object ViewRightBar: TAction
-      Category = 'View'
       Caption = 'Right Bar'
       OnExecute = ViewRightBarExecute
+      Category = 'View'
     end
     object Calendar: TAction
-      Category = 'File'
       Caption = 'Calendar'
       Hint = 'Ephemeris Calendar'
       ImageIndex = 75
       OnExecute = CalendarExecute
+      Category = 'File'
     end
     object ShowBackgroundImage: TAction
-      Category = 'chart'
       Caption = 'Show/Hide DSS image'
       Hint = 'Show Background Image'
       ImageIndex = 77
       OnExecute = ShowBackgroundImageExecute
       ShortCut = 16457
+      Category = 'chart'
     end
     object Position: TAction
-      Category = 'Search'
       Caption = 'Position'
       Hint = 'Position'
       ImageIndex = 78
       OnExecute = PositionExecute
+      Category = 'Search'
     end
     object SyncChart: TAction
-      Category = 'chart'
       Caption = 'SyncChart'
       Hint = 'Link All Chart'
       ImageIndex = 79
       OnExecute = SyncChartExecute
+      Category = 'chart'
     end
     object Track: TAction
-      Category = 'chart'
       Caption = 'Track'
       Hint = 'Track'
       ImageIndex = 80
       OnExecute = TrackExecute
+      Category = 'chart'
     end
     object DSSImage: TAction
-      Category = 'chart'
       Caption = 'DSSImage'
       Hint = 'Get DSS Image'
       ImageIndex = 81
       OnExecute = DSSImageExecute
+      Category = 'chart'
     end
     object EditLabels: TAction
-      Category = 'chart'
       Caption = 'Edit Labels'
       Hint = 'Edit Labels'
       ImageIndex = 83
       OnExecute = EditLabelsExecute
+      Category = 'chart'
     end
     object Cascade1: TAction
-      Category = 'Window'
       Caption = 'Cascade'
       Hint = 'Cascade'
       ImageIndex = 4
       OnExecute = WindowCascade1Execute
+      Category = 'Window'
     end
     object TileHorizontal1: TAction
-      Category = 'Window'
       Caption = 'Tile Horizontal'
       Hint = 'Tile Horizontally'
       ImageIndex = 5
       OnExecute = WindowTileHorizontal1Execute
+      Category = 'Window'
     end
     object TileVertical1: TAction
-      Category = 'Window'
       Caption = 'TileVertical'
       Hint = 'Tile Vertically'
       ImageIndex = 14
       OnExecute = WindowTileVertical1Execute
+      Category = 'Window'
     end
     object Maximize: TAction
-      Category = 'Window'
       Caption = 'Maximize'
       OnExecute = MaximizeExecute
+      Category = 'Window'
     end
     object TelescopePanel: TAction
-      Category = 'Telescope'
       Caption = 'Control Panel'
       Hint = 'Control Panel'
       OnExecute = TelescopePanelExecute
+      Category = 'Telescope'
     end
     object ViewFullScreen: TAction
-      Category = 'View'
       Caption = 'ViewFullScreen'
       Hint = 'Full Screen'
       OnExecute = ViewFullScreenExecute
       ShortCut = 122
+      Category = 'View'
     end
     object FileClose1: TAction
-      Category = 'File'
       Caption = 'Close Chart'
       Hint = 'Close Chart'
       OnExecute = FileClose1Execute
+      Category = 'File'
     end
     object SetupTime: TAction
-      Category = 'Setup'
       Caption = 'Date / Time'
       Hint = 'Set date and time'
       ImageIndex = 45
       OnExecute = SetupTimeExecute
+      Category = 'Setup'
     end
     object SetupObservatory: TAction
-      Category = 'Setup'
       Caption = 'Observatory'
       Hint = 'Set observatory location'
       ImageIndex = 85
       OnExecute = SetupObservatoryExecute
+      Category = 'Setup'
     end
     object SetupDisplay: TAction
-      Category = 'Setup'
       Caption = 'Display mode'
       OnExecute = SetupDisplayExecute
+      Category = 'Setup'
     end
     object SetupColour: TAction
-      Category = 'Setup'
       Caption = 'Colours'
       OnExecute = SetupColourExecute
+      Category = 'Setup'
     end
     object SetupLines: TAction
-      Category = 'Setup'
       Caption = 'Lines'
       OnExecute = SetupLinesExecute
+      Category = 'Setup'
     end
     object SetupLabels: TAction
-      Category = 'Setup'
       Caption = 'Labels'
       OnExecute = SetupLabelsExecute
+      Category = 'Setup'
     end
     object SetupFonts: TAction
-      Category = 'Setup'
       Caption = 'Fonts'
       OnExecute = SetupFontsExecute
+      Category = 'Setup'
     end
     object SetupFinder: TAction
-      Category = 'Setup'
       Caption = 'Finder mark'
       ImageIndex = 77
       OnExecute = SetupFinderExecute
+      Category = 'Setup'
     end
     object SetupPictures: TAction
-      Category = 'Setup'
       Caption = 'Pictures'
       Hint = 'Change pictures display'
       ImageIndex = 77
       OnExecute = SetupPicturesExecute
+      Category = 'Setup'
     end
   end
   object SaveDialog: TSaveDialog
     Title = 'Save file as'
     FilterIndex = 0
+    Title = 'Save file as'
     left = 144
     top = 160
   end

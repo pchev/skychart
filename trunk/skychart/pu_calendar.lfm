@@ -144,7 +144,7 @@ object f_calendar: Tf_calendar
   TextHeight = 13
   HorzScrollBar.Page = 642
   VertScrollBar.Page = 392
-  Left = 278
+  Left = 290
   Height = 393
   Top = 110
   Width = 643
@@ -949,7 +949,8 @@ object f_calendar: Tf_calendar
         object ComboBox1: TComboBox
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           MaxLength = 0
-          OnChange = ComboBox1Change
+          OnCloseUp = ComboBox1Change
+          OnKeyUp = ComboBox1KeyUp
           Style = csDropDownList
           TabOrder = 2
           Left = 216
@@ -1008,7 +1009,8 @@ object f_calendar: Tf_calendar
         object ComboBox2: TComboBox
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           MaxLength = 0
-          OnChange = ComboBox2Change
+          OnCloseUp = ComboBox2Change
+          OnKeyUp = ComboBox2KeyUp
           Style = csDropDownList
           TabOrder = 0
           Left = 216

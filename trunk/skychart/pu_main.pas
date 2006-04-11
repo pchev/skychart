@@ -1693,6 +1693,7 @@ begin
   f_calendar.AzNorth:=catalog.cfgshr.AzNorth;
   formpos(f_calendar,mouse.cursorpos.x,mouse.cursorpos.y);
   f_calendar.show;
+  f_calendar.bringtofront;
 end;
 
 procedure Tf_main.TrackExecute(Sender: TObject);
@@ -4223,6 +4224,7 @@ procedure Tf_main.ViewInfoExecute(Sender: TObject);
 begin
 f_info.setpage(0);
 f_info.show;
+f_info.bringtofront;
 end;
 
 procedure Tf_main.showdetailinfo(chart:string;ra,dec:double;nm,desc:string);
@@ -4293,6 +4295,7 @@ f_info.Memo1.selend:=0;
 f_info.setpage(1);
 f_info.source_chart:=caption;
 f_info.show;
+f_info.bringtofront;
 end;
 
 procedure Tf_main.GetTCPInfo(i:integer; var buf:string);
