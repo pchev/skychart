@@ -1193,7 +1193,7 @@ if not cfgplot.Invisible then begin
           end;
       1 : begin // diam
           PlotPlanet1(xx,yy,ipla,pixscale,diam);
-          if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,be );
+          if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,flipy*be );
           end;
       2 : begin // image
           rot:=rot*FlipX*FlipY;
