@@ -1,32 +1,31 @@
 { Ceci est un fichier ressource généré automatiquement par Lazarus }
 
 LazarusResources.Add('Tf_image','FORMDATA',[
-  'TPF0'#8'Tf_image'#7'f_image'#4'Left'#3'k'#1#6'Height'#3#151#1#3'Top'#2'j'#5
-  +'Width'#3'g'#2#23'HorzScrollBar.Increment'#2'='#18'HorzScrollBar.Page'#3'f'#2
-  +#20'HorzScrollBar.Smooth'#9#23'VertScrollBar.Increment'#2'('#18'VertScrollBa'
-  +'r.Page'#3#150#1#20'VertScrollBar.Smooth'#9#13'ActiveControl'#7#7'Button1'#7
-  +'Caption'#6#13'Taille r'#233'elle'#12'ClientHeight'#3#151#1#11'ClientWidth'#3
-  +'g'#2#11'Font.Height'#2#245#9'Font.Name'#6#13'MS Sans Serif'#8'OnCreate'#7#10
-  +'FormCreate'#10'OnKeyPress'#7#12'FormKeyPress'#8'OnResize'#7#10'FormResize'
-  +#13'PixelsPerInch'#2'Z'#8'Position'#7#14'poScreenCenter'#10'TextHeight'#2#13
-  +#0#10'TZoomImage'#6'Image1'#6'Height'#3#9#1#3'Top'#2' '#5'Width'#3#209#1#18
-  +'Canvas.Brush.Color'#7#9'clBtnFace'#12'Canvas.Color'#7#9'clBtnFace'#4'Zoom'#5
-  +#0#0#0#0#0#0#0#128#255'?'#7'ZoomMin'#5#0#0#0#0#0#0#0#128#255'?'#7'ZoomMax'#5
-  +#0#0#0#0#0#0#0#128#1'@'#0#0#6'TPanel'#6'Panel1'#6'Height'#2#28#5'Width'#3'g'
-  +#2#5'Align'#7#5'alTop'#8'AutoSize'#9#12'ClientHeight'#2#28#11'ClientWidth'#3
-  +'g'#2#11'FullRepaint'#8#8'TabOrder'#2#0#7'TabStop'#9#0#6'TLabel'#6'Label1'#4
-  +'Left'#3#241#0#6'Height'#2#13#3'Top'#2#7#5'Width'#2''''#7'Caption'#6#6'Label'
-  +'1'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#7'TButton'#7'Button1'#4'Left'
-  +#2#1#6'Height'#2#25#3'Top'#2#2#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2
-  +#2#7'Caption'#6#5'Close'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#0#0#0#7
-  +'TButton'#7'Button2'#4'Left'#2'Q'#6'Height'#2#25#3'Top'#2#1#5'Width'#2'K'#25
-  +'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#6'Zoom +'#7'OnClick'#7#12'Butto'
-  +'n2Click'#8'TabOrder'#2#1#0#0#7'TButton'#7'Button3'#4'Left'#3#161#0#6'Height'
-  +#2#25#3'Top'#2#2#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6
-  +#6'Zoom -'#7'OnClick'#7#12'Button3Click'#8'TabOrder'#2#2#0#0#0#10'TScrollBar'
-  +#10'VScrollBar'#4'Left'#3'X'#2#6'Height'#3'l'#1#3'Top'#2#28#5'Width'#2#15#5
-  +'Align'#7#7'alRight'#4'Kind'#7#10'sbVertical'#8'TabOrder'#2#1#8'OnChange'#7
-  +#16'VScrollBarChange'#0#0#10'TScrollBar'#10'HScrollBar'#6'Height'#2#15#3'Top'
-  +#3#136#1#5'Width'#3'g'#2#5'Align'#7#8'alBottom'#8'TabOrder'#2#2#8'OnChange'#7
-  +#16'HScrollBarChange'#0#0#0
+  'TPF0'#8'Tf_image'#7'f_image'#13'ActiveControl'#7#7'Button1'#7'Caption'#6#13
+  +'Taille r'#233'elle'#12'ClientHeight'#3#151#1#11'ClientWidth'#3'g'#2#11'Font'
+  +'.Height'#2#245#9'Font.Name'#6#13'MS Sans Serif'#8'OnCreate'#7#10'FormCreate'
+  +#10'OnKeyPress'#7#12'FormKeyPress'#8'OnResize'#7#10'FormResize'#13'PixelsPer'
+  +'Inch'#2'`'#8'Position'#7#14'poScreenCenter'#10'TextHeight'#2#13#23'HorzScro'
+  +'llBar.Increment'#2'='#18'HorzScrollBar.Page'#3'f'#2#20'HorzScrollBar.Smooth'
+  +#9#23'VertScrollBar.Increment'#2'('#18'VertScrollBar.Page'#3#150#1#20'VertSc'
+  +'rollBar.Smooth'#9#4'Left'#3'k'#1#6'Height'#3#151#1#3'Top'#2'j'#5'Width'#3'g'
+  +#2#0#10'TZoomImage'#6'Image1'#18'Canvas.Brush.Color'#7#7'clBlack'#4'Zoom'#5#0
+  +#0#0#0#0#0#0#128#255'?'#7'ZoomMin'#5#0#0#0#0#0#0#0#128#255'?'#7'ZoomMax'#5#0
+  +#0#0#0#0#0#0#128#1'@'#6'Height'#3#9#1#3'Top'#2' '#5'Width'#3#209#1#0#0#6'TPa'
+  +'nel'#6'Panel1'#5'Align'#7#5'alTop'#8'AutoSize'#9#12'ClientHeight'#2#28#11'C'
+  +'lientWidth'#3'g'#2#11'FullRepaint'#8#8'TabOrder'#2#0#7'TabStop'#9#6'Height'
+  +#2#28#5'Width'#3'g'#2#0#6'TLabel'#6'Label1'#7'Caption'#6#6'Label1'#5'Color'#7
+  +#6'clNone'#11'ParentColor'#8#4'Left'#3#241#0#6'Height'#2#14#3'Top'#2#7#5'Wid'
+  +'th'#2' '#0#0#7'TButton'#7'Button1'#25'BorderSpacing.InnerBorder'#2#2#7'Capt'
+  +'ion'#6#5'Close'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#0#4'Left'#2#1#6
+  +'Height'#2#25#3'Top'#2#2#5'Width'#2'K'#0#0#7'TButton'#7'Button2'#25'BorderSp'
+  +'acing.InnerBorder'#2#2#7'Caption'#6#6'Zoom +'#7'OnClick'#7#12'Button2Click'
+  +#8'TabOrder'#2#1#4'Left'#2'Q'#6'Height'#2#25#3'Top'#2#1#5'Width'#2'K'#0#0#7
+  +'TButton'#7'Button3'#25'BorderSpacing.InnerBorder'#2#2#7'Caption'#6#6'Zoom -'
+  +#7'OnClick'#7#12'Button3Click'#8'TabOrder'#2#2#4'Left'#3#161#0#6'Height'#2#25
+  +#3'Top'#2#2#5'Width'#2'K'#0#0#0#10'TScrollBar'#10'VScrollBar'#5'Align'#7#7'a'
+  +'lRight'#4'Kind'#7#10'sbVertical'#8'TabOrder'#2#1#8'OnChange'#7#16'VScrollBa'
+  +'rChange'#4'Left'#3'X'#2#6'Height'#3'l'#1#3'Top'#2#28#5'Width'#2#15#0#0#10'T'
+  +'ScrollBar'#10'HScrollBar'#5'Align'#7#8'alBottom'#8'TabOrder'#2#2#8'OnChange'
+  +#7#16'HScrollBarChange'#6'Height'#2#15#3'Top'#3#136#1#5'Width'#3'g'#2#0#0#0
 ]);

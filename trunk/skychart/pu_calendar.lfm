@@ -431,8 +431,8 @@ object f_calendar: Tf_calendar
     end
   end
   object PageControl1: TPageControl
-    ActivePage = twilight
-    TabIndex = 0
+    ActivePage = Asteroids
+    TabIndex = 3
     TabOrder = 0
     OnChange = PageControl1Change
     Height = 314
@@ -949,8 +949,7 @@ object f_calendar: Tf_calendar
         object ComboBox1: TComboBox
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           MaxLength = 0
-          OnCloseUp = ComboBox1Change
-          OnKeyUp = ComboBox1KeyUp
+          OnSelect = ComboBox1Change
           Style = csDropDownList
           TabOrder = 2
           Left = 216
@@ -1009,8 +1008,7 @@ object f_calendar: Tf_calendar
         object ComboBox2: TComboBox
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           MaxLength = 0
-          OnCloseUp = ComboBox2Change
-          OnKeyUp = ComboBox2KeyUp
+          OnSelect = ComboBox2Change
           Style = csDropDownList
           TabOrder = 0
           Left = 216

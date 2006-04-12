@@ -462,6 +462,7 @@ object f_config_observatory: Tf_config_observatory
             ItemHeight = 13
             MaxLength = 0
             OnChange = citylistChange
+            OnSelect = citylistChange
             TabOrder = 0
             Text = '...'
             Left = 8
@@ -484,7 +485,7 @@ object f_config_observatory: Tf_config_observatory
             DropDownCount = 10
             ItemHeight = 13
             MaxLength = 0
-            OnChange = countrylistChange
+            OnSelect = countrylistChange
             Style = csDropDownList
             TabOrder = 2
             Left = 8
@@ -561,7 +562,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 341
             Height = 21
             Top = 31
-            Width = 67
+            Width = 69
           end
         end
         object refraction: TGroupBox
