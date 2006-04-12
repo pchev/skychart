@@ -121,10 +121,6 @@ type
     ActionList1: TActionList;
     HelpContents1: THelpContents;
     SaveDialog1: TSaveDialog;
-    procedure ComboBox1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState
-      );
-    procedure ComboBox2KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState
-      );
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BtnRefreshClick(Sender: TObject);
@@ -223,19 +219,6 @@ time.Time:=now;
 initial:=true;
 PageControl1.Align:=alClient;
 end;
-
-procedure Tf_calendar.ComboBox2KeyUp(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-ComboBox2Change(Sender);
-end;
-
-procedure Tf_calendar.ComboBox1KeyUp(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-ComboBox1Change(Sender);
-end;
-
 
 procedure Tf_calendar.FormDestroy(Sender: TObject);
 begin

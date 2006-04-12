@@ -9,7 +9,7 @@ object f_config_display: Tf_config_display
   PixelsPerInch = 96
   HorzScrollBar.Page = 522
   VertScrollBar.Page = 531
-  Left = 240
+  Left = 272
   Height = 532
   Top = 127
   Width = 523
@@ -23,7 +23,7 @@ object f_config_display: Tf_config_display
     Width = 523
     object Notebook1: TNotebook
       Align = alClient
-      PageIndex = 5
+      PageIndex = 0
       ShowTabs = False
       Left = 1
       Height = 480
@@ -693,7 +693,7 @@ object f_config_display: Tf_config_display
           object ThemeList: TComboBox
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
             MaxLength = 0
-            OnChange = ThemeListChange
+            OnSelect = ThemeListChange
             TabOrder = 0
             Left = 101
             Height = 21
@@ -1857,7 +1857,7 @@ object f_config_display: Tf_config_display
             Left = 256
             Height = 22
             Top = 53
-            Width = 53
+            Width = 55
             Tag = 1
           end
           object labelmagVar: TSpinEdit
@@ -1867,7 +1867,7 @@ object f_config_display: Tf_config_display
             Left = 256
             Height = 22
             Top = 77
-            Width = 53
+            Width = 55
             Tag = 2
           end
           object LabelmagMult: TSpinEdit
@@ -1877,7 +1877,7 @@ object f_config_display: Tf_config_display
             Left = 256
             Height = 22
             Top = 101
-            Width = 53
+            Width = 55
             Tag = 3
           end
           object labelmagNeb: TSpinEdit
@@ -1887,7 +1887,7 @@ object f_config_display: Tf_config_display
             Left = 256
             Height = 22
             Top = 125
-            Width = 53
+            Width = 55
             Tag = 4
           end
           object labelmagSol: TSpinEdit
@@ -1897,7 +1897,7 @@ object f_config_display: Tf_config_display
             Left = 256
             Height = 22
             Top = 149
-            Width = 53
+            Width = 55
             Tag = 5
           end
           object labelsizeStar: TSpinEdit
@@ -1909,7 +1909,7 @@ object f_config_display: Tf_config_display
             Left = 384
             Height = 22
             Top = 53
-            Width = 53
+            Width = 55
             Tag = 1
           end
           object labelsizechartinfo: TSpinEdit
@@ -1921,7 +1921,7 @@ object f_config_display: Tf_config_display
             Left = 384
             Height = 22
             Top = 221
-            Width = 53
+            Width = 55
             Tag = 8
           end
           object labelsizeMisc: TSpinEdit
@@ -1933,7 +1933,7 @@ object f_config_display: Tf_config_display
             Left = 384
             Height = 22
             Top = 197
-            Width = 53
+            Width = 55
             Tag = 7
           end
           object labelsizeConst: TSpinEdit
@@ -1945,7 +1945,7 @@ object f_config_display: Tf_config_display
             Left = 384
             Height = 22
             Top = 173
-            Width = 53
+            Width = 55
             Tag = 6
           end
           object labelsizeSol: TSpinEdit
@@ -1957,7 +1957,7 @@ object f_config_display: Tf_config_display
             Left = 384
             Height = 22
             Top = 149
-            Width = 53
+            Width = 55
             Tag = 5
           end
           object labelsizeNeb: TSpinEdit
@@ -1969,7 +1969,7 @@ object f_config_display: Tf_config_display
             Left = 384
             Height = 22
             Top = 125
-            Width = 53
+            Width = 55
             Tag = 4
           end
           object labelsizeMult: TSpinEdit
@@ -1981,7 +1981,7 @@ object f_config_display: Tf_config_display
             Left = 384
             Height = 22
             Top = 101
-            Width = 53
+            Width = 55
             Tag = 3
           end
           object labelsizeVar: TSpinEdit
@@ -1993,7 +1993,7 @@ object f_config_display: Tf_config_display
             Left = 384
             Height = 22
             Top = 77
-            Width = 53
+            Width = 55
             Tag = 2
           end
         end

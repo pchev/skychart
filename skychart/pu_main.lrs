@@ -1280,25 +1280,25 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'Box'#11'quicksearch'#21'ArrowKeysTraverseList'#8#12'AutoComplete'#9#16'Auto'
   +'CompleteText'#11#12'cbactEnabled'#22'cbactEndOfLineComplete'#20'cbactSearch'
   +'Ascending'#0#13'DropDownCount'#2#15#12'Font.CharSet'#7#12'ANSI_CHARSET'#10
-  +'ItemHeight'#2#14#9'MaxLength'#2#0#9'OnCloseUp'#7#16'quicksearchClick'#10'On'
-  ,'DblClick'#7#16'quicksearchClick'#9'OnKeyDown'#7#18'quicksearchKeyDown'#8'Ta'
-  +'bOrder'#2#0#4'Left'#3'='#1#6'Height'#2#23#4'Hint'#6#6'Search'#3'Top'#2#2#5
-  +'Width'#2'D'#0#0#11'TToolButton'#16'ToolButtonSearch'#6'Action'#7#7'Search1'
-  +#4'Left'#3#129#1#6'Height'#2#23#4'Hint'#6#15'Advanced Search'#3'Top'#2#2#5'W'
-  +'idth'#2#23#0#0#6'TPanel'#8'MagPanel'#10'BevelOuter'#7#6'bvNone'#12'ClientHe'
-  +'ight'#2#23#11'ClientWidth'#2#24#11'FullRepaint'#8#8'TabOrder'#2#3#4'Left'#3
-  +'%'#1#6'Height'#2#23#3'Top'#2#2#5'Width'#2#24#0#6'TImage'#14'ButtonMoreStar'
-  +#7'OnClick'#7#15'MoreStarExecute'#12'Picture.Data'#10#182#3#0#0#7'TBitmap'
-  +#170#3#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"10 10 50 1",'#10'".'
-  +' c #FFFFFF",'#10'", c #E7E7FF",'#10'"- c #D7DEFF",'#10'"* c #CFCFFF",'#10'"'
-  +'a c None",'#10'"b c #DEE7FF",'#10'"c c #B7BDFF",'#10'"d c #8E97FF",'#10'"e '
-  +'c #7B84FF",'#10'"f c #8D96FF",'#10'"g c #BDBFFF",'#10'"h c #E7EFFF",'#10'"i'
-  +' c #6F7BF7",'#10'"j c #3142F7",'#10'"k c #2133F7",'#10'"l c #3746F7",'#10'"'
-  +'m c #7784FF",'#10'"n c #C7C7FF",'#10'"o c #EFEFFF",'#10'"p c #DFDFFF",'#10
-  +'"q c #979FFF",'#10'"r c #394AF7",'#10'"s c #0C21F7",'#10'"t c #071BF7",'#10
-  +'"u c #0E23F7",'#10'"v c #4253F7",'#10'"w c #A7AFFF",'#10'"x c #8D95FF",'#10
-  +'"y c #2D3DF7",'#10'"z c #081CF7",'#10'"A c #091DF7",'#10'"B c #3547F7",'#10
-  +'"C c #9EA7FF",'#10'"D c #A5ADFF",'#10'"E c #4657F7",'#10'"F c #1427F7",'#10
+  +'ItemHeight'#2#14#9'MaxLength'#2#0#10'OnDblClick'#7#16'quicksearchClick'#9'O'
+  ,'nKeyDown'#7#18'quicksearchKeyDown'#8'OnSelect'#7#16'quicksearchClick'#8'Tab'
+  +'Order'#2#0#4'Left'#3'='#1#6'Height'#2#23#4'Hint'#6#6'Search'#3'Top'#2#2#5'W'
+  +'idth'#2'D'#0#0#11'TToolButton'#16'ToolButtonSearch'#6'Action'#7#7'Search1'#4
+  +'Left'#3#129#1#6'Height'#2#23#4'Hint'#6#15'Advanced Search'#3'Top'#2#2#5'Wid'
+  +'th'#2#23#0#0#6'TPanel'#8'MagPanel'#10'BevelOuter'#7#6'bvNone'#12'ClientHeig'
+  +'ht'#2#23#11'ClientWidth'#2#24#11'FullRepaint'#8#8'TabOrder'#2#3#4'Left'#3'%'
+  +#1#6'Height'#2#23#3'Top'#2#2#5'Width'#2#24#0#6'TImage'#14'ButtonMoreStar'#7
+  +'OnClick'#7#15'MoreStarExecute'#12'Picture.Data'#10#182#3#0#0#7'TBitmap'#170
+  +#3#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"10 10 50 1",'#10'". c #'
+  +'FFFFFF",'#10'", c #E7E7FF",'#10'"- c #D7DEFF",'#10'"* c #CFCFFF",'#10'"a c '
+  +'None",'#10'"b c #DEE7FF",'#10'"c c #B7BDFF",'#10'"d c #8E97FF",'#10'"e c #7'
+  +'B84FF",'#10'"f c #8D96FF",'#10'"g c #BDBFFF",'#10'"h c #E7EFFF",'#10'"i c #'
+  +'6F7BF7",'#10'"j c #3142F7",'#10'"k c #2133F7",'#10'"l c #3746F7",'#10'"m c '
+  +'#7784FF",'#10'"n c #C7C7FF",'#10'"o c #EFEFFF",'#10'"p c #DFDFFF",'#10'"q c'
+  +' #979FFF",'#10'"r c #394AF7",'#10'"s c #0C21F7",'#10'"t c #071BF7",'#10'"u '
+  +'c #0E23F7",'#10'"v c #4253F7",'#10'"w c #A7AFFF",'#10'"x c #8D95FF",'#10'"y'
+  +' c #2D3DF7",'#10'"z c #081CF7",'#10'"A c #091DF7",'#10'"B c #3547F7",'#10'"'
+  +'C c #9EA7FF",'#10'"D c #A5ADFF",'#10'"E c #4657F7",'#10'"F c #1427F7",'#10
   +'"G c #0B1FF7",'#10'"H c #1629F7",'#10'"I c #535FF7",'#10'"J c #ADB7FF",'#10
   +'"K c #C7CFFF",'#10'"L c #8795FF",'#10'"M c #4F5FF7",'#10'"N c #3D4EF7",'#10
   +'"O c #5663F7",'#10'"P c #949CFF",'#10'"Q c #CFD6FF",'#10'"R c #F7F7FF",'#10
@@ -1355,18 +1355,18 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'ght'#2#23#4'Hint'#6#14'Increment Time'#3'Top'#2#2#5'Width'#2#23#0#0#9'TSpin'
   +'Edit'#7'TimeVal'#8'MaxValue'#3#232#3#8'MinValue'#2#1#8'TabOrder'#2#4#5'Valu'
   +'e'#2#1#4'Left'#3'*'#2#6'Height'#2#23#4'Hint'#6#4'Time'#3'Top'#2#2#5'Width'#2
-  +'@'#0#0#9'TComboBox'#5'TimeU'#16'AutoCompleteText'#11#20'cbactSearchAscendin'
+  +'B'#0#0#9'TComboBox'#5'TimeU'#16'AutoCompleteText'#11#20'cbactSearchAscendin'
   +'g'#0#13'DropDownCount'#2#11#12'Font.CharSet'#7#12'ANSI_CHARSET'#10'ItemHeig'
   +'ht'#2#14#9'MaxLength'#2#0#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#2#4'L'
-  +'eft'#3'j'#2#6'Height'#2#23#4'Hint'#6#10'Time Units'#3'Top'#2#2#5'Width'#2'U'
+  +'eft'#3'l'#2#6'Height'#2#23#4'Hint'#6#10'Time Units'#3'Top'#2#2#5'Width'#2'U'
   +#0#0#11'TToolButton'#12'ToolButton39'#7'Caption'#6#12'ToolButton39'#10'Image'
-  +'Index'#2'-'#5'Style'#7#10'tbsDivider'#5'Width'#2#8#4'Left'#3#191#2#6'Height'
+  +'Index'#2'-'#5'Style'#7#10'tbsDivider'#5'Width'#2#8#4'Left'#3#193#2#6'Height'
   +#2#23#3'Top'#2#2#5'Width'#2#8#0#0#11'TToolButton'#8'TConnect'#6'Action'#7#16
-  +'TelescopeConnect'#4'Left'#3#199#2#6'Height'#2#23#4'Hint'#6#17'Connect Teles'
+  +'TelescopeConnect'#4'Left'#3#201#2#6'Height'#2#23#4'Hint'#6#17'Connect Teles'
   +'cope'#3'Top'#2#2#5'Width'#2#23#0#0#11'TToolButton'#5'TSlew'#6'Action'#7#13
-  +'TelescopeSlew'#4'Left'#3#245#2#6'Height'#2#23#4'Hint'#6#4'Slew'#3'Top'#2#2#5
+  +'TelescopeSlew'#4'Left'#3#247#2#6'Height'#2#23#4'Hint'#6#4'Slew'#3'Top'#2#2#5
   +'Width'#2#23#0#0#11'TToolButton'#5'TSync'#6'Action'#7#13'TelescopeSync'#4'Le'
-  +'ft'#3#222#2#6'Height'#2#23#4'Hint'#6#4'Sync'#3'Top'#2#2#5'Width'#2#23#0#0#6
+  +'ft'#3#224#2#6'Height'#2#23#4'Hint'#6#4'Sync'#3'Top'#2#2#5'Width'#2#23#0#0#6
   +'TPanel'#12'ChildControl'#5'Align'#7#7'alRight'#8'AutoSize'#9#10'BevelOuter'
   +#7#6'bvNone'#12'ClientHeight'#2#23#11'ClientWidth'#2#30#8'TabOrder'#2#1#4'Le'
   +'ft'#3'='#3#6'Height'#2#23#3'Top'#2#2#5'Width'#2#30#0#12'TSpeedButton'#15'Bt'
@@ -1374,10 +1374,10 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'ick'#6'Height'#2#15#5'Width'#2#15#0#0#12'TSpeedButton'#13'BtnCloseChild'#4
   +'Flat'#9#9'NumGlyphs'#2#0#7'OnClick'#7#18'BtnCloseChildClick'#4'Left'#2#15#6
   +'Height'#2#15#5'Width'#2#15#0#0#0#11'TToolButton'#11'ToolButton6'#7'Caption'
-  +#6#11'ToolButton6'#5'Style'#7#10'tbsDivider'#5'Width'#2#8#4'Left'#3#12#3#6'H'
+  +#6#11'ToolButton6'#5'Style'#7#10'tbsDivider'#5'Width'#2#8#4'Left'#3#14#3#6'H'
   +'eight'#2#23#3'Top'#2#2#5'Width'#2#8#0#0#11'TToolButton'#11'ToolButton7'#8'A'
   +'utoSize'#9#7'Caption'#6#11'ToolButton7'#5'Style'#7#12'tbsSeparator'#5'Width'
-  +#2#23#4'Left'#3#20#3#6'Height'#2#23#3'Top'#2#2#5'Width'#2#23#0#0#0#8'TToolBa'
+  +#2#23#4'Left'#3#22#3#6'Height'#2#23#3'Top'#2#2#5'Width'#2#23#0#0#0#8'TToolBa'
   +'r'#8'ToolBar4'#5'Align'#7#8'alBottom'#8'AutoSize'#9#12'ButtonHeight'#2#24#7
   +'Caption'#6#8'ToolBar4'#11'EdgeBorders'#11#5'ebTop'#8'ebBottom'#0#4'Flat'#9#6
   +'Height'#2#28#6'Images'#7#11'ImageNormal'#14'ParentShowHint'#8#8'ShowHint'#9
