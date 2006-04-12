@@ -1121,7 +1121,7 @@ BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
 starshape.Picture.Bitmap.Transparent:=false;
 TimeVal.Width:= 60;
-quicksearch.Width:=68;
+quicksearch.Width:=75;
 TimeU.Width:=80;
 //todo: Screen.Cursors[crRetic] := LoadCursorFromFile('retic.cur');
 zlib:=LoadLibrary(libz);
