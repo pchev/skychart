@@ -84,10 +84,12 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    CatGen1: TAction;
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     LPanels0: TPanel;
     LPanels1: TPanel;
+    MenuItem9: TMenuItem;
     SetupPictures: TAction;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -407,6 +409,7 @@ type
     TelescopePanel: TAction;
     ControlPanel1: TMenuItem;
     ViewFullScreen: TAction;
+    procedure CatGen1Execute(Sender: TObject);
     procedure FileClose1Execute(Sender: TObject);
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -631,7 +634,7 @@ implementation
 
 uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
-     pu_manualtelescope;
+     pu_manualtelescope,pu_catgen, pu_catgenadv, pu_progressbar;
 
 
 function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
@@ -909,6 +912,15 @@ procedure Tf_main.FileClose1Execute(Sender: TObject);
 begin
   if (MultiDoc1.ActiveObject is Tf_chart)and(MultiDoc1.ChildCount>1) then
    MultiDoc1.ActiveChild.close;
+end;
+
+procedure Tf_main.CatGen1Execute(Sender: TObject);
+begin
+if f_catgen=nil then f_catgen:=Tf_catgen.create(self);
+if f_catgenadv=nil then f_catgenadv:=Tf_catgenadv.Create(self);
+if f_progress=nil then f_progress:=Tf_progress.Create(self);
+FormPos(f_catgen,mouse.CursorPos.x,mouse.CursorPos.y);
+f_catgen.ShowModal;
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
@@ -3676,7 +3688,7 @@ TimeU.Items.Add('Month');
 TimeU.Items.Add('Year');
 TimeU.Items.Add('Julian Year');
 TimeU.Items.Add('Tropical Year');
-TimeU.Items.Add('Sideral Day');
+TimeU.Items.Add('Sidereal Day');
 TimeU.Items.Add('Synodic Month');
 TimeU.Items.Add('Saros');
 TimeU.ItemIndex:=0;
