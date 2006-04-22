@@ -21,7 +21,7 @@ unit mwFixedRecSort;
 interface
 
 uses
-  Windows,
+  //Windows,
   SysUtils,
   Classes;
 

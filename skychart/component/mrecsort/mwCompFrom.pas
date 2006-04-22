@@ -19,7 +19,8 @@ unit mwCompFrom;
 interface
 
 uses
-  Windows, SysUtils;
+  //Windows,
+  SysUtils;
 function CompareFrom(Const Item1, Item2; P, Count: Integer): Integer;
 function CompareTextFrom(Const Item1, Item2; P, Count: Integer): Integer;
 function StrCompfrom(Const Item1, Item2; P, Count: Integer): Integer;
