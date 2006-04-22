@@ -223,11 +223,13 @@ end;
 Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double);
 var i,j,k,k2,l,nw,nh:integer;
     x,y,a,b:double;
+    pixelized: boolean;
     color,color1,color2,color3,color4: TFPColor;
 begin
    nh:=round(OriginalIntfImg.Height*zoom);
    nw:=round(OriginalIntfImg.Width*zoom);
    ResizedIntfImg.SetSize(nw,nh);
+   pixelized:=zoom<=1;
    for i:=0 to nh-1 do begin
       y:=i/zoom;
       k:=trunc(y);
@@ -238,7 +240,7 @@ begin
          x:=l/zoom;
          j:=trunc(x);
          a:=x-j;
-         if (abs(a)<1e-3)and(abs(b)<1e-3) then        // pixel center, use the original value
+         if pixelized or ((abs(a)<1e-3)and(abs(b)<1e-3)) then        // pixel center, use the original value
                 ResizedIntfImg.Colors[l,i]:=OriginalIntfImg.Colors[j,k]
             else
             if j<(OriginalIntfImg.Width-1) then begin
