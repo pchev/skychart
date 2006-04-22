@@ -40,6 +40,7 @@ type
     { Private declarations }
     LockCat : boolean;
     NumCat,CurCat,CurGCat,VerGCat : integer;
+    GcatFilter: boolean;
     EmptyRec : GCatRec;
   protected
     { Protected declarations }
@@ -555,7 +556,7 @@ begin
     SetGcatPath(PChar(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway'),'mwf')
  else
     SetGcatPath(PChar(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway'),'mwl');
- GetGCatInfo(GcatH,v,result);
+ GetGCatInfo(GcatH,v,GCatFilter,result);
  if result then result:=(v=rtLin);
  if result then OpenGCatWin(result);
 end;
@@ -1074,7 +1075,7 @@ repeat
  end;
  if cfgcat.GCatLst[CurGCat-1].CatOn then begin
    SetGcatPath(PChar(cfgcat.GCatLst[CurGCat-1].path),PChar(cfgcat.GCatLst[CurGCat-1].shortname));
-   GetGCatInfo(GcatH,v,result);
+   GetGCatInfo(GcatH,v,GCatFilter,result);
  end else result:=false;
 until result and (v=VerGCat);
 end;
@@ -1083,7 +1084,7 @@ function Tcatalog.GetInfo(path,shortname:string; var magmax:single;var v:integer
 var GcatH : TCatHeader;
 begin
 SetGcatPath(PChar(path),PChar(shortname));
-GetGCatInfo(GcatH,v,result);
+GetGCatInfo(GcatH,v,GCatFilter,result);
 magmax:=GcatH.MagMax;
 version:=GcatH.version;
 longname:=GcatH.LongName;
@@ -1095,7 +1096,7 @@ var GCatH : TCatHeader;
     ok : boolean;
 begin
 SetGcatPath(PChar(path),PChar(cat));
-GetGCatInfo(GcatH,v,ok);
+GetGCatInfo(GcatH,v,GCatFilter,ok);
 case GcatH.FileNum of
   1    : result:='10';
   50   : result:='10';
@@ -1113,7 +1114,7 @@ repeat
   ReadGCat(rec,result);
   if not result then break;
   if cfgshr.StarFilter and (rec.star.magv>cfgcat.StarMagMax) then begin
-             NextGCat(result);
+             if GCatFilter then NextGCat(result);
              if result then continue;
   end;
   rec.ra:=deg2rad*rec.ra;
@@ -1131,7 +1132,7 @@ repeat
   ReadGCat(rec,result);
   if not result then break;
   if cfgshr.StarFilter and (rec.variable.magmax>cfgcat.StarMagMax) then begin
-             NextGCat(result);
+             if GCatFilter then NextGCat(result);
              if result then continue;
   end;
   rec.ra:=deg2rad*rec.ra;
@@ -1147,7 +1148,7 @@ repeat
   ReadGCat(rec,result);
   if not result then break;
   if cfgshr.StarFilter and (rec.double.mag1>cfgcat.StarMagMax) then begin
-             NextGCat(result);
+             if GCatFilter then NextGCat(result);
              if result then continue;
   end;
   rec.ra:=deg2rad*rec.ra;
@@ -1165,7 +1166,7 @@ repeat
   if cfgshr.NebFilter and
      rec.neb.valid[vnMag] and
     (rec.neb.mag>cfgcat.NebMagMax) then begin
-             NextGCat(result);
+             if GCatFilter then NextGCat(result);
              if result then continue;
   end;
   if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
@@ -1206,7 +1207,7 @@ for i:=0 to cfgcat.GCatNum-1 do begin
    and fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx')
    then begin
      SetGcatPath(PChar(cfgcat.GCatLst[i].path),PChar(cfgcat.GCatLst[i].shortname));
-     GetGCatInfo(H,version,ok);
+     GetGCatInfo(H,version,GCatFilter,ok);
      if ok then FindNumGcat(PChar(cfgcat.GCatLst[i].path),PChar(cfgcat.GCatLst[i].shortname),iid,H.ixkeylen, ar,de,ok);
      if ok then break;
   end;
