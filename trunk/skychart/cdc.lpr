@@ -36,7 +36,8 @@ uses
   pu_config_system, pu_config_solsys, pu_config_pictures, pu_config_observatory,
   pu_config_display, pu_config_chart, pu_config_internet, libsql,
   radec, XmlParser, zoomimage, JPEGForLazarus, CDCjdcalendar, cdccatalog, satxy,
-  series96, elp82, Printer4Lazarus, downldialog, synapse;
+  series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
+  pu_catgenadv, pu_progressbar, mrecsort;
 
 const compile_time={$I %DATE%}+' '+{$I %TIME%} ;
 
