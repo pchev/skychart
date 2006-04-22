@@ -13,14 +13,14 @@ object f_catgenadv: Tf_catgenadv
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   Position = poMainFormCenter
   TextHeight = 13
   object Label1: TLabel
     Left = 72
-    Height = 17
+    Height = 12
     Top = 90
-    Width = 9
+    Width = 8
     Caption = 'x'
     Color = clNone
     Font.Height = -13
@@ -30,9 +30,9 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label2: TLabel
     Left = 72
-    Height = 17
+    Height = 12
     Top = 126
-    Width = 10
+    Width = 8
     Caption = '+'
     Color = clNone
     Font.Height = -13
@@ -42,9 +42,9 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label3: TLabel
     Left = 72
-    Height = 21
+    Height = 14
     Top = 160
-    Width = 12
+    Width = 9
     Caption = '='
     Color = clNone
     Font.Height = -16
@@ -54,9 +54,9 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label4: TLabel
     Left = 8
-    Height = 49
+    Height = 43
     Top = 8
-    Width = 184
+    Width = 176
     Caption = 'Indicate here how to compute '#13#10'the require value from the data '#13#10'stored in the catalog text file.'
     Color = clNone
     ParentColor = False

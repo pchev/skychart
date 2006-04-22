@@ -1006,7 +1006,7 @@ end;
 
 Procedure Tf_catgen.BuildTxtHeader;
 var i,j,n : integer;
-    nextpos,curpos : integer;
+    curpos : integer;
     buf : shortstring;
 begin
 for i:=1 to 20 do catheader.Spare1[i]:=0;
