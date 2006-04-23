@@ -2,28 +2,27 @@ object f_manualtelescope: Tf_manualtelescope
   Left = 222
   Height = 107
   Top = 198
-  Width = 361
-  HorzScrollBar.Page = 360
+  Width = 390
+  HorzScrollBar.Page = 389
   VertScrollBar.Page = 106
+  BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Manual Telescope'
   ClientHeight = 107
-  ClientWidth = 361
+  ClientWidth = 390
   Color = clBlack
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnMouseDown = FormMouseDown
   OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
-  PixelsPerInch = 80
+  PixelsPerInch = 90
   TextHeight = 13
   object Panel1: TPanel
     Height = 107
-    Width = 361
+    Width = 390
     Align = alClient
     ClientHeight = 107
-    ClientWidth = 361
+    ClientWidth = 390
     Color = clBlack
     ParentColor = False
     TabOrder = 0
@@ -34,13 +33,12 @@ object f_manualtelescope: Tf_manualtelescope
     object Label1: TLabel
       Left = 16
       Height = 12
-      Top = 4
+      Top = 8
       Width = 93
       Caption = 'Manual Telescope'
       Color = clNone
       Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
+      Font.Height = -12
       ParentColor = False
       OnDblClick = Panel1DblClick
       OnMouseDown = FormMouseDown
@@ -49,14 +47,13 @@ object f_manualtelescope: Tf_manualtelescope
     end
     object Label2: TLabel
       Left = 16
-      Height = 12
-      Top = 20
-      Width = 39
-      Caption = '                   '
+      Height = 13
+      Top = 24
+      Width = 97
+      Caption = 'sep                   '
       Color = clNone
       Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
+      Font.Height = -12
       ParentColor = False
       OnDblClick = Panel1DblClick
       OnMouseDown = FormMouseDown
@@ -65,14 +62,13 @@ object f_manualtelescope: Tf_manualtelescope
     end
     object Label4: TLabel
       Left = 16
-      Height = 1
-      Top = 32
-      Width = 1
-      Caption = 'RA turns:'
+      Height = 13
+      Top = 44
+      Width = 56
+      Caption = 'RA turns: '
       Color = clNone
       Font.Color = clRed
-      Font.Height = -32
-      Font.Name = 'MS Sans Serif'
+      Font.Height = -20
       ParentColor = False
       OnDblClick = Panel1DblClick
       OnMouseDown = FormMouseDown
@@ -81,14 +77,13 @@ object f_manualtelescope: Tf_manualtelescope
     end
     object Label5: TLabel
       Left = 16
-      Height = 1
-      Top = 64
-      Width = 1
-      Caption = 'DEC turns:'
+      Height = 13
+      Top = 72
+      Width = 65
+      Caption = 'DEC turns: '
       Color = clNone
       Font.Color = clRed
-      Font.Height = -32
-      Font.Name = 'MS Sans Serif'
+      Font.Height = -20
       ParentColor = False
       OnDblClick = Panel1DblClick
       OnMouseDown = FormMouseDown
