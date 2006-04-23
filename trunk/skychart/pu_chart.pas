@@ -855,7 +855,7 @@ end;
 function Tf_chart.IdentXY(X, Y: Integer):boolean;
 var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,dist:double;
     pa,lasttype,lastobj: integer;
-    txt,lastname,lasttrname: string;
+    txt,lastname,lasttrname,buf: string;
     showdist:boolean;
 begin
 result:=false;
@@ -887,7 +887,8 @@ if showdist then begin
       dy:=rad2deg*(dec-lastdec);
       txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
       if assigned(Fshowcoord) then Fshowcoord(txt);
-      txt:=stringreplace(sc.catalog.cfgshr.llabel[104]+' "'+lastname+'" '+sc.catalog.cfgshr.llabel[105]+' "'+sc.cfgsc.FindName+'"'+tab+sc.catalog.cfgshr.llabel[79]+': '+txt,crlf,tab+sc.catalog.cfgshr.llabel[106]+':',[]);
+      buf:=sc.catalog.cfgshr.llabel[104]+' "'+lastname+'" '+sc.catalog.cfgshr.llabel[105]+' "'+sc.cfgsc.FindName+'"'+tab+sc.catalog.cfgshr.llabel[79]+': '+txt;
+      txt:=stringreplace(buf,crlf,tab+sc.catalog.cfgshr.llabel[106]+':',[]);
       if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
       if sc.cfgsc.ManualTelescope then begin
         case sc.cfgsc.ManualTelescopeType of
