@@ -511,7 +511,7 @@ with sender as Tfloatedit do begin
   csc.obstz:=value;
 end;
 // same value in Time and Observatory panel
-if timez<>nil then timez.value:=csc.obstz;
+csc.timezone:=csc.obstz;
 end;
 
 procedure Tf_config_observatory.ZoomImage1MouseUp(Sender: TObject;

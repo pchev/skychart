@@ -39,6 +39,14 @@ object f_config_observatory: Tf_config_observatory
         ClientHeight = 483
         Height = 483
         Width = 464
+        object Memo1: TMemo
+          TabOrder = 11
+          Visible = False
+          Left = 8
+          Height = 141
+          Top = 105
+          Width = 449
+        end
         object Latitude: TGroupBox
           Caption = 'Latitude'
           ClientHeight = 50
@@ -78,7 +86,6 @@ object f_config_observatory: Tf_config_observatory
           object hemis: TComboBox
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 13
-            ItemIndex = 0
             Items.Strings = (
               'North'
               'South'
@@ -198,7 +205,6 @@ object f_config_observatory: Tf_config_observatory
           object long: TComboBox
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 13
-            ItemIndex = 1
             Items.Strings = (
               'West'
               'East'
@@ -344,7 +350,6 @@ object f_config_observatory: Tf_config_observatory
           object timez: TFloatEdit
             MinValue = -12
             MaxValue = 12
-            Digits = 3
             NumericType = ntFixed
             BorderStyle = bsSingle
             Height = 22
@@ -638,14 +643,6 @@ object f_config_observatory: Tf_config_observatory
             Top = 18
             Width = 65
           end
-        end
-        object Memo1: TMemo
-          TabOrder = 11
-          Visible = False
-          Left = 8
-          Height = 141
-          Top = 105
-          Width = 449
         end
       end
       object Page2: TPage
