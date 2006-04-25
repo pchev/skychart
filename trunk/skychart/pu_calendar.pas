@@ -922,6 +922,7 @@ with gr do begin
     if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
     if c.ApparentPos then apparent_equatorial(ar,de,c);
     illum:=1;
+    magn:=-26.7;
     end;
   11: begin
     planet.Moon(jda+jdt_ut,ar,de,dist,dkm,diam,phase,illum);
