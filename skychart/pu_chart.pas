@@ -53,6 +53,8 @@ type
   
   { Tf_chart }
   Tf_chart = class(TForm)
+    About2: TMenuItem;
+    About1: TMenuItem;
     RefreshTimer: TTimer;
     ActionList1: TActionList;
     zoomplus: TAction;
@@ -98,6 +100,7 @@ type
     N3: TMenuItem;
     TrackOn1: TMenuItem;
     TrackOff1: TMenuItem;
+    procedure About1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -789,17 +792,26 @@ procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
 begin
  xcursor:=Image1.ScreenToClient(mouse.cursorpos).x;
  ycursor:=Image1.ScreenToClient(mouse.cursorpos).y;
+ IdentXY(xcursor, ycursor);
  if sc.cfgsc.TrackOn then begin
     TrackOff1.visible:=true;
     TrackOn1.visible:=false;
  end else begin
     TrackOff1.visible:=false;
-    IdentXY(xcursor, ycursor);
     if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6) then begin
       TrackOn1.Caption:='Lock on '+sc.cfgsc.TrackName;
       TrackOn1.visible:=true;
     end
     else TrackOn1.visible:=false;
+ end;
+ if sc.cfgsc.FindName>'' then begin
+   About1.Caption:='About '+sc.cfgsc.FindName;
+   About1.visible:=true;
+   About2.visible:=true;
+ end
+ else begin
+   About1.visible:=false;
+   About2.visible:=false;
  end;
 end;
 
@@ -1228,6 +1240,11 @@ try
 finally
 LockTrackCursor:=false;
 end;
+end;
+
+procedure Tf_chart.About1Click(Sender: TObject);
+begin
+  identlabelClick(Sender);
 end;
 
 procedure Tf_chart.identlabelClick(Sender: TObject);
