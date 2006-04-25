@@ -174,7 +174,10 @@ artostr2(csc.curtime,h,n,s);
 t_hour.value:=strtoint(h);
 t_min.value:=strtoint(n);
 t_sec.value:=strtoint(s);
-tz.value:=csc.timezone;
+if csc.UseSystemTime then
+   tz.value:=GetTimezone
+else
+   tz.value:=csc.ObsTZ;
 Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
 if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
@@ -294,11 +297,10 @@ procedure Tf_config_time.tzChange(Sender: TObject);
 begin
 if LockChange then exit;
 with sender as Tfloatedit do begin
-  csc.obstz:=value;
+  csc.timezone:=value;
 end;
 // same value in Time and Observatory panel
-if tz<>nil then tz.value:=csc.obstz;
-//if timez<>nil then timez.value:=csc.obstz;
+if not csc.UseSystemTime then csc.obstz:=csc.timezone;
 end;
 
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);
