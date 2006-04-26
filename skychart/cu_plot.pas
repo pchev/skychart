@@ -133,9 +133,9 @@ type
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
-     function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string):integer;
-     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string);
-     procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string);
+     function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
+     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true);
+     procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; opaque:boolean=true);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
      Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
@@ -1684,14 +1684,16 @@ with cnv do begin
 end;
 end;
 
-function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string):integer;
+function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
 var ts:TSize;
+    arect: TRect;
 begin
 // If drawing to the printer force to plot the text label to the canvas
 // even if label editing is selected
 if (cfgchart.onprinter or forcetextlabel) then begin
 with cnv do begin
-  Brush.Style:=bsClear;
+  TextStyle.Opaque:=opaque;
+  Brush.Style:=bsSolid;
   Pen.Mode:=pmCopy;
   Font.CharSet:=DEFAULT_CHARSET;
   Font.Name:=cfgplot.FontName[fontnum];
@@ -1712,7 +1714,8 @@ with cnv do begin
    laCenter : yy:=yy-(ts.cy div 2);
   end;
   end;
-  textout(xx,yy,txt);
+  arect:=Bounds(xx,yy,ts.cx,ts.cy);
+  textRect(arect,xx,yy,txt);
 end;
 // If drawing to the screen use movable label 
 end else begin
@@ -1752,10 +1755,12 @@ end;
 result:=0;
 end;
 
-procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string);
+procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true);
 var ts:TSize;
+    arect: TRect;
 begin
 with cnv do begin
+TextStyle.Opaque:=opaque;
 Brush.Color:=cfgplot.Color[0];
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
@@ -1774,15 +1779,19 @@ case Yalign of
  laBottom : yy:=yy-ts.cy;
  laCenter : yy:=yy-(ts.cy div 2);
 end;
-textout(xx,yy,txt);
+arect:=Bounds(xx,yy,ts.cx,ts.cy);
+textRect(arect,xx,yy,txt);
 end;
 end;
 
-procedure TSplot.PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string);
+procedure TSplot.PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; opaque:boolean=true);
 var ls,p:Integer;
     buf: string;
+    arect: TRect;
+    ts: TSize;
 begin
 with cnv do begin
+TextStyle.Opaque:=opaque;
 Brush.Color:=cfgplot.backgroundcolor;
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
@@ -1805,7 +1814,9 @@ repeat
       buf:=copy(txt,1,p-1);
       delete(txt,1,p+1);
   end;
-  textout(xx,yy,buf);
+  ts:=TextExtent(buf);
+  arect:=Bounds(xx,yy,ts.cx,ts.cy);
+  textRect(arect,xx,yy,buf);
   yy:=yy+ls;
 until p=0;
 end;
