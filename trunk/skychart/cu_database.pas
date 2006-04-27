@@ -112,6 +112,9 @@ try
  if DBtype=mysql then begin
    db.SetPort(port);
    db.Connect(host,user,pass,dbn);
+ end
+ else if DBtype=sqlite then begin
+   dbn:=UTF8Encode(dbn);
  end;
  if db.database<>dbn then db.Use(dbn);
  result:=db.Active;
