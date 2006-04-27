@@ -2023,7 +2023,7 @@ var az,h,x1,y1 : double;
 begin
 if cfgsc^.ProjPole=Altaz then begin
   if cfgsc^.hcentre<-(cfgsc^.fov/6) then
-     Fplot.PlotText((cfgsc^.xmax-cfgsc^.xmin)div 2,(cfgsc^.ymax-cfgsc^.ymin)div 2,2,Fplot.cfgplot^.Color[12],laCenter,laCenter,' Below the horizon ');
+     Fplot.PlotText((cfgsc^.xmax-cfgsc^.xmin)div 2,(cfgsc^.ymax-cfgsc^.ymin)div 2,2,Fplot.cfgplot^.LabelColor[7],laCenter,laCenter,' Below the horizon ');
   if cfgsc^.ShowHorizon and (cfgsc^.HorizonMax>0)and(cfgsc^.horizonlist<>nil) then begin
      first:=true; xp:=0;yp:=0;x0:=0;y0:=0; xph:=0;yph:=0;x0h:=0;y0h:=0;
      for i:=1 to 360 do begin
