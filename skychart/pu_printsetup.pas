@@ -71,6 +71,7 @@ type
     procedure savepathChange(Sender: TObject);
   private
     { Private declarations }
+    lockupd: boolean;
     procedure updprtsetup;
   public
     { Public declarations }
@@ -96,6 +97,8 @@ procedure Tf_printsetup.updprtsetup;
 var i:integer;
     ok:boolean;
 begin
+try
+lockupd:=true;
 case cm.PrintMethod of
 0: begin
    printmode.ItemIndex:=0;
@@ -151,6 +154,9 @@ case cm.PrintMethod of
    end;
    end;
 end;
+finally
+lockupd:=false;
+end;
 end;
 
 procedure Tf_printsetup.qtsetupClick(Sender: TObject);
@@ -174,11 +180,13 @@ end;
 
 procedure Tf_printsetup.prtresChange(Sender: TObject);
 begin
+if lockupd then exit;
 cm.PrinterResolution:=prtres.value;
 end;
 
 procedure Tf_printsetup.printcmdChange(Sender: TObject);
 begin
+if lockupd then exit;
 case cm.PrintMethod of
 1: cm.PrintCmd1:=printcmd.Text;
 2: cm.PrintCmd2:=printcmd.Text;
@@ -188,6 +196,7 @@ end;
 
 procedure Tf_printsetup.savepathChange(Sender: TObject);
 begin
+if lockupd then exit;
 cm.PrintTmpPath:=savepath.Text;
 end;
 
