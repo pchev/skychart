@@ -127,6 +127,7 @@ function TCDCdb.Checkdb:boolean;
 var i,j,k:integer;
    ok,creatednow:boolean;
    indexlist: TStringlist;
+   emsg: string;
 begin
 creatednow:=false;
 if db.Active then begin
@@ -136,6 +137,7 @@ if db.Active then begin
      ok:=(sqltable[dbtype,i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"'));
      if not ok then begin  // try to create the missing table
        db.Query('CREATE TABLE '+sqltable[dbtype,i,1]+sqltable[dbtype,i,2]);
+       emsg:=db.ErrorMessage;
        if sqltable[dbtype,i,3]>'' then begin   // create the index
           SplitRec(sqltable[dbtype,i,3],',',indexlist);
           for j:=0 to indexlist.Count-1 do begin
@@ -148,7 +150,7 @@ if db.Active then begin
            writetrace('Create table '+sqltable[dbtype,i,1]+' ... Ok');
            creatednow:=true;
            end
-        else writetrace('Create table '+sqltable[dbtype,i,1]+' ... Failed');
+        else writetrace('Create table '+sqltable[dbtype,i,1]+' ... Failed: '+emsg);
      end;
      result:=result and ok;
   end;
@@ -159,18 +161,21 @@ if creatednow and (Assigned(FInitializeDB)) then FInitializeDB(self);
 end;
 
 function TCDCdb.checkDBConfig(cmain: conf_main):string;
-var msg: string;
+var msg,dbn: string;
     i:integer;
 label dmsg;
 begin
 try
   if DBtype=mysql then begin
+    dbn:=cmain.db;
     db.SetPort(cmain.dbport);
     db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
     if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
        else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+trim(db.ErrorMessage)+crlf+'Verify if the MySQL Server is running and control the Userid/Password'; goto dmsg;end;
+  end else if DBtype=sqlite then begin
+    dbn:=UTF8Encode(cmain.db);
   end;
-  if ((db.database=cmain.db)or db.use(cmain.db)) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
+  if ((db.database=dbn)or db.use(dbn)) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
      else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.ErrorMessage)+crlf; goto dmsg;end;
   for i:=1 to numsqltable do begin
      if sqltable[dbtype,i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"') then msg:=msg+'Table exist '+sqltable[dbtype,i,1]+crlf
@@ -185,7 +190,7 @@ end;
 end;
 
 function TCDCdb.createDB(cmain: conf_main; var ok:boolean): string;
-var msg:string;
+var msg,dbn:string;
     i,j,k:integer;
     indexlist: TStringlist;
 begin
@@ -193,15 +198,18 @@ ok:=false;
 result:='';
 try
   if DBtype=mysql then begin
+     dbn:=cmain.db;
      db.SetPort(cmain.dbport);
      db.database:='';
      db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
      if db.Active then db.Query('Create Database if not exists '+cmain.db);
      result:=trim(db.ErrorMessage);
      db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
+  end else if DBtype=sqlite then begin
+    dbn:=UTF8Encode(cmain.db);
   end;
-  if db.database<>cmain.db then db.Use(cmain.db);
-  if db.database=cmain.db then begin
+  if db.database<>dbn then db.Use(dbn);
+  if db.database=dbn then begin
     indexlist:=TStringlist.Create;
     ok:=true;
     for i:=1 to numsqltable do begin

@@ -1401,7 +1401,9 @@ try
    db1.Connect(host,user,pass,db);
    db2.SetPort(port);
    db2.Connect(host,user,pass,db);
- end;
+  end else if DBtype=sqlite then begin
+   db:=UTF8Encode(db);
+  end;
  if db1.database<>db then db1.Use(db);
  if db2.database<>db then db2.Use(db);
  result:=db1.Active and db2.Active;
