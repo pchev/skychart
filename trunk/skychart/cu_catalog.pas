@@ -2336,6 +2336,8 @@ function Tcatalog.FindObj(x1,y1,x2,y2:double; nextobj : boolean;cfgsc:Pconf_skyc
 var
    ok : boolean;
 begin
+ok:=false;
+if cfgsc^.shownebulae then begin
   ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
@@ -2345,6 +2347,8 @@ begin
   if (not ok) and cfgcat.nebcaton[ocl-BaseNeb] then ok:=FindAtPos(ocl,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[gcm-BaseNeb] then ok:=FindAtPos(gcm,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[gpn-BaseNeb] then ok:=FindAtPos(gpn,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
+end;
+if cfgsc^.showstars then begin
   if (not ok) then ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.varstarcaton[gcvs-BaseVar] then ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) then ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
@@ -2363,11 +2367,12 @@ begin
   if (not ok) and cfgcat.starcaton[dsgsc-BaseStar] then ok:=FindAtPos(dsgsc,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.starcaton[usnoa-BaseStar] then ok:=FindAtPos(usnoa,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
   if (not ok) and cfgcat.starcaton[microcat-BaseStar] then ok:=FindAtPos(microcat,x1,y1,x2,y2,nextobj,true,cfgsc,rec);
+end;
 { if (not ok) and Catalog1Show then FindCatalogue1(ar,de,dx,dx,nextobj,ok,nom,ma,desc);
   if (not ok) and Catalog2Show then FindCatalogue2(ar,de,dx,dx,nextobj,ok,nom,ma,desc,notes);
   if (not ok) and ArtSatOn then FindSatellite(ar,de,dx,dx,nextobj,ok,nom,ma,desc);}
-  result:=ok;
-  cfgsc^.FindOK:=ok;
+result:=ok;
+cfgsc^.FindOK:=ok;
 end;
 
 Procedure Tcatalog.GetAltName(rec: GCatrec; var txt: string);

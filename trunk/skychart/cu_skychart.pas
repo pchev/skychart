@@ -1548,15 +1548,15 @@ if result then begin
    cfgsc^.TrackDec:=rec.dec;
 end else begin
 // search solar system object
-   result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+   if cfgsc^.ShowPlanet then result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
    if result then begin
       if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+blank+d; // add date to the name if simulation for more than one date
    end else begin
-      result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+      if cfgsc^.ShowAsteroid then result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+blank+d;
    end else begin
-      result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+      if cfgsc^.ShowComet then result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc^.SimNb>1 then cfgsc^.FindName:=cfgsc^.FindName+blank+d;
       end;

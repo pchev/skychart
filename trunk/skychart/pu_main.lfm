@@ -2787,7 +2787,6 @@ object f_main: Tf_main
       Width = 860
       object ToolButtonNew: TToolButton
         Action = FileNew1
-        Left = 1
         Height = 23
         Hint = 'New|Create a new chart'
         Top = 2
@@ -2919,14 +2918,15 @@ object f_main: Tf_main
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
         TabOrder = 0
-        Left = 1
+        Left = 317
         Height = 23
         Hint = 'Search'
         Top = 2
+        Width = 80
       end
       object ToolButtonSearch: TToolButton
         Action = Search1
-        Left = 317
+        Left = 397
         Height = 23
         Hint = 'Advanced Search'
         Top = 2
@@ -3064,7 +3064,7 @@ object f_main: Tf_main
       end
       object ToolButtonPosition: TToolButton
         Action = Position
-        Left = 340
+        Left = 420
         Height = 23
         Hint = 'Position'
         Top = 2
@@ -3072,7 +3072,7 @@ object f_main: Tf_main
       end
       object ToolButtonListObj: TToolButton
         Action = listobj
-        Left = 363
+        Left = 443
         Height = 23
         Hint = 'Object List'
         Top = 2
@@ -3080,7 +3080,7 @@ object f_main: Tf_main
       end
       object ToolButtonCal: TToolButton
         Action = Calendar
-        Left = 386
+        Left = 466
         Height = 23
         Hint = 'Ephemeris Calendar'
         Top = 2
@@ -3091,14 +3091,14 @@ object f_main: Tf_main
         ImageIndex = 8
         Style = tbsDivider
         Width = 8
-        Left = 409
+        Left = 489
         Height = 23
         Top = 2
         Width = 8
       end
       object ToolButtonTdec: TToolButton
         Action = TimeDec
-        Left = 417
+        Left = 497
         Height = 23
         Hint = 'Decrement Time'
         Top = 2
@@ -3106,7 +3106,7 @@ object f_main: Tf_main
       end
       object ToolButtonTnow: TToolButton
         Action = TimeReset
-        Left = 440
+        Left = 520
         Height = 23
         Hint = 'Now'
         Top = 2
@@ -3114,7 +3114,7 @@ object f_main: Tf_main
       end
       object ToolButtonTinc: TToolButton
         Action = TimeInc
-        Left = 463
+        Left = 543
         Height = 23
         Hint = 'Increment Time'
         Top = 2
@@ -3125,7 +3125,7 @@ object f_main: Tf_main
         MinValue = 1
         TabOrder = 4
         Value = 1
-        Left = 486
+        Left = 566
         Height = 23
         Hint = 'Time'
         Top = 2
@@ -3139,24 +3139,25 @@ object f_main: Tf_main
         MaxLength = 0
         Style = csDropDownList
         TabOrder = 2
-        Left = 1
+        Left = 636
         Height = 23
         Hint = 'Time Units'
         Top = 2
+        Width = 80
       end
       object ToolButton39: TToolButton
         Caption = 'ToolButton39'
         ImageIndex = 45
         Style = tbsDivider
         Width = 8
-        Left = 556
+        Left = 716
         Height = 23
         Top = 2
         Width = 8
       end
       object TConnect: TToolButton
         Action = TelescopeConnect
-        Left = 564
+        Left = 724
         Height = 23
         Hint = 'Connect Telescope'
         Top = 2
@@ -3164,7 +3165,7 @@ object f_main: Tf_main
       end
       object TSlew: TToolButton
         Action = TelescopeSlew
-        Left = 610
+        Left = 770
         Height = 23
         Hint = 'Slew'
         Top = 2
@@ -3172,7 +3173,7 @@ object f_main: Tf_main
       end
       object TSync: TToolButton
         Action = TelescopeSync
-        Left = 587
+        Left = 747
         Height = 23
         Hint = 'Sync'
         Top = 2
@@ -3185,7 +3186,7 @@ object f_main: Tf_main
         ClientHeight = 23
         ClientWidth = 30
         TabOrder = 1
-        Left = 830
+        Left = 815
         Height = 23
         Top = 2
         Width = 30
@@ -3211,7 +3212,7 @@ object f_main: Tf_main
         Caption = 'ToolButton6'
         Style = tbsDivider
         Width = 8
-        Left = 633
+        Left = 793
         Height = 23
         Top = 2
         Width = 8
@@ -3221,7 +3222,7 @@ object f_main: Tf_main
         Caption = 'ToolButton7'
         Style = tbsSeparator
         Width = 23
-        Left = 641
+        Left = 845
         Height = 23
         Top = 2
         Width = 23
