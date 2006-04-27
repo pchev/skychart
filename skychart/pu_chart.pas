@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  Chart child form 
 }
-{$define showtime}
+//{$define showtime}
 
 interface
 
@@ -390,6 +390,8 @@ end;
 if assigned(FImageSetFocus) then FImageSetFocus(Self);
 {$ifdef showtime}
 if assigned(Fshowinfo) then Fshowinfo('Drawing time: '+formatfloat(f2,(now-starttime)*86400));
+{$else}
+if assigned(Fshowinfo) then Fshowinfo('');
 {$endif}
 end;
 
