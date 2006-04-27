@@ -388,11 +388,16 @@ finally
  if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
 if assigned(FImageSetFocus) then FImageSetFocus(Self);
-{$ifdef showtime}
-if assigned(Fshowinfo) then Fshowinfo('Drawing time: '+formatfloat(f2,(now-starttime)*86400));
-{$else}
-if assigned(Fshowinfo) then Fshowinfo('');
-{$endif}
+if assigned(Fshowinfo) then begin
+  {$ifdef showtime}
+   Fshowinfo('Drawing time: '+formatfloat(f2,(now-starttime)*86400));
+  {$else}
+  if sc.cfgsc.TrackOn then
+    IdentXY(Image1.Width div 2, Image1.Height div 2)
+  else
+    Fshowinfo('');
+  {$endif}
+end;
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
