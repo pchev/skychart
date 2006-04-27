@@ -1714,7 +1714,7 @@ with cnv do begin
    laCenter : yy:=yy-(ts.cy div 2);
   end;
   end;
-  arect:=Bounds(xx,yy,ts.cx,ts.cy);
+  arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
   textRect(arect,xx,yy,txt);
 end;
 // If drawing to the screen use movable label 
@@ -1779,7 +1779,7 @@ case Yalign of
  laBottom : yy:=yy-ts.cy;
  laCenter : yy:=yy-(ts.cy div 2);
 end;
-arect:=Bounds(xx,yy,ts.cx,ts.cy);
+arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
 textRect(arect,xx,yy,txt);
 end;
 end;
@@ -1815,7 +1815,7 @@ repeat
       delete(txt,1,p+1);
   end;
   ts:=TextExtent(buf);
-  arect:=Bounds(xx,yy,ts.cx,ts.cy);
+  arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
   textRect(arect,xx,yy,buf);
   yy:=yy+ls;
 until p=0;
