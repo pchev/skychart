@@ -85,6 +85,11 @@ type
 
   Tf_main = class(TForm)
     CatGen1: TAction;
+    HomePage1: TMenuItem;
+    Maillist1: TMenuItem;
+    BugReport1: TMenuItem;
+    MenuItem10: TMenuItem;
+    MenuItem11: TMenuItem;
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     LPanels0: TPanel;
@@ -409,6 +414,7 @@ type
     TelescopePanel: TAction;
     ControlPanel1: TMenuItem;
     ViewFullScreen: TAction;
+    procedure BugReport1Click(Sender: TObject);
     procedure CatGen1Execute(Sender: TObject);
     procedure FileClose1Execute(Sender: TObject);
     procedure FileNew1Execute(Sender: TObject);
@@ -418,6 +424,8 @@ type
     procedure FileExit1Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure HomePage1Click(Sender: TObject);
+    procedure Maillist1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
     procedure SetupColourExecute(Sender: TObject);
@@ -1055,6 +1063,21 @@ end;
 procedure Tf_main.HelpContents1Execute(Sender: TObject);
 begin
    ExecuteFile(slash(helpdir)+'index.html');
+end;
+
+procedure Tf_main.HomePage1Click(Sender: TObject);
+begin
+   ExecuteFile(URL_WebHome);
+end;
+
+procedure Tf_main.Maillist1Click(Sender: TObject);
+begin
+   ExecuteFile(URL_Maillist);
+end;
+
+procedure Tf_main.BugReport1Click(Sender: TObject);
+begin
+   ExecuteFile(URL_BugTracker);
 end;
 
 procedure Tf_main.FileExit1Execute(Sender: TObject);
