@@ -1636,7 +1636,7 @@ end;
 d:=maxvalue([0.6*cfgsc^.fov,0.02]);
 da:=d/cos(cfgsc^.decentre);
 qry:='SELECT id,epoch from '+cfgsc^.ast_daypos+' where';
-if cfgsc^.StarFilter then qry:=qry+' mag<='+inttostr(round((cfgsc^.StarMagMax+cfgsc^.AstMagDiff)*10))+' and';
+qry:=qry+' mag<='+inttostr(round((cfgsc^.StarMagMax+cfgsc^.AstMagDiff)*10))+' and';
 if cfgsc^.NP or cfgsc^.SP then
    qry:=qry+' (ra>0 and ra<'+inttostr(round(1000*(pi2)))+')'
 else if (cfgsc^.racentre+da)>pi2 then
