@@ -1339,7 +1339,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
   f_info.Memo1.selstart:=0;
   f_info.Memo1.selend:=0;
   f_info.setpage(1);
-  f_info.source_chart:=caption;
+  f_info.source_chart:=MultiDoc1.ActiveChild.Caption;
   f_info.show;
   f_info.BringToFront;
 end;
@@ -4328,7 +4328,7 @@ f_info.Memo1.text:=buf;
 f_info.Memo1.selstart:=0;
 f_info.Memo1.selend:=0;
 f_info.setpage(1);
-f_info.source_chart:=caption;
+f_info.source_chart:=MultiDoc1.ActiveChild.caption;
 f_info.show;
 f_info.bringtofront;
 end;
