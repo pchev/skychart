@@ -918,15 +918,20 @@ end;
 
 function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Pconf_skychart; var nom,ma,date,desc:string):boolean;
 var
-   yy,mm,dd : integer;
+   yy,mm,dd,i : integer;
    tar,tde,ar,de : double;
-   dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q : double;
+   dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q,distmin : double;
    sar,sde,sdist,sillum,sphase,sdiam,smagn,shh,sdp : string;
+   distancetocenter: array[1..31] of double;
 const d1='0.0'; d2='0.00';
 begin
 ar:=(x2+x1)/2;
 de:=(y2+y1)/2;
-if not nextobj then  begin CurrentStep:=0;CurrentPlanet:=0; end;
+if not nextobj then  begin
+   CurrentStep:=0;
+   CurrentPlanet:=0;
+   for i:=1 to 31 do distancetocenter[i]:=maxdouble;
+end;
 result := false;
 desc:='';tar:=1;tde:=1;jdt:=0;
 repeat
@@ -952,21 +957,33 @@ repeat
      ((CurrentPlanet>11)and (currentplanet<32)and cfgsc^.StarFilter and (cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc^.StarMagMax))
      then begin
         // no
-        result:=false;
+        //result:=false;
         // but ok if the cursor is inside the planetary disk
-        if (CurrentPlanet<32)and((3600*rad2deg*angulardistance(ar,de,tar,tde))<=(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]/2))
-           then result:=true;
+        if (CurrentPlanet<32) then begin
+           distancetocenter[CurrentPlanet]:=3600*rad2deg*angulardistance(ar,de,tar,tde);
+           if distancetocenter[CurrentPlanet]<=(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]/2)
+              then result:=true;
+        end;
      end
      else result := true;
-until result ;
+until result and (CurrentPlanet>=31);
 st0:=0;
 cfgsc^.FindOK:=result;
 if result then begin
+  if CurrentPlanet<=31 then begin // search the planet nearest to position
+     distmin:=maxdouble;
+     for i:=1 to 31 do begin
+       if distancetocenter[i]<distmin then begin
+          distmin:=distancetocenter[i];
+          CurrentPlanet:=i;
+       end;
+     end;
+  end;
   cfgsc^.FindSize:=deg2rad*cfgsc^.Planetlst[CurrentStep,CurrentPlanet,4]/3600;
-  cfgsc^.FindRA:=tar;
-  cfgsc^.FindDec:=tde;
-  sar := ARpToStr(rad2deg*tar/15) ;
-  sde := DEpToStr(rad2deg*tde) ;
+  cfgsc^.FindRA:=NormRa(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,1]);
+  cfgsc^.FindDec:=cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,2];
+  sar := ARpToStr(rad2deg*cfgsc^.FindRA/15) ;
+  sde := DEpToStr(rad2deg*cfgsc^.FindDec) ;
   jdt:=cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,3];
 //  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
@@ -1047,7 +1064,7 @@ if result and (currentplanet=11) then begin
     dist:=dist*q;
     dkm:=dkm*q;
   end;
-  ar:=tar ; de:=tde;    // reset original position value
+  ar:=cfgsc^.FindRA ; de:=cfgsc^.FindDEC;    // reset original position value
   str(dkm:8:1,sdist);
   str(diam/60:5:1,sdiam);
   str(illum:5:3,sillum);
