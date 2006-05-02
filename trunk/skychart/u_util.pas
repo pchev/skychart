@@ -99,6 +99,8 @@ procedure PrintStrings(str: TStrings; PrtTitle, PrtText, PrtTextDate:string; ori
 Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
 Function EncryptStr(Str,Pwd: String; Encode: Boolean=true): String;
 Function DecryptStr(Str,Pwd: String): String;
+function strtohex(str:string):string;
+function hextostr(str:string):string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 {$endif}
@@ -1031,6 +1033,31 @@ end;
 Function DecryptStr(Str,Pwd: String): String;
 begin
 result:=trim(EncryptStr(Str,Pwd,false));
+end;
+
+function strtohex(str:string):string;
+var
+  i: Integer;
+begin
+result:='';
+for i:=1 to length(str) do
+  result:=result+inttohex(ord(str[i]),2);
+end;
+
+function hextostr(str:string):string;
+var
+  i,k: Integer;
+begin
+result:='';
+for i:=0 to (length(str)-1) div 2 do begin
+  k:=strtointdef('$'+str[2*i+1]+str[2*i+2],-1);
+  if k>0 then
+     result:=result+char(k)
+  else begin
+     result:=str;   // if not numeric default to the input string
+     break;
+  end;
+end;
 end;
 
 Procedure FormPos(form : Tform; x,y : integer);
