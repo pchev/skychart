@@ -922,6 +922,7 @@ var
    tar,tde,ar,de : double;
    dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q,distmin : double;
    sar,sde,sdist,sillum,sphase,sdiam,smagn,shh,sdp : string;
+   directfind: boolean;
    distancetocenter: array[1..31] of double;
 const d1='0.0'; d2='0.00';
 begin
@@ -933,6 +934,7 @@ if not nextobj then  begin
    for i:=1 to 31 do distancetocenter[i]:=maxdouble;
 end;
 result := false;
+directfind := false;
 desc:='';tar:=1;tde:=1;jdt:=0;
 repeat
   inc(CurrentPlanet);
@@ -942,7 +944,7 @@ repeat
   if (CurrentPlanet=32)and not cfgsc^.showearthshadow then continue;
   if CurrentPlanet>32 then begin;
      inc(CurrentStep);
-     if nextobj or (CurrentStep>cfgsc^.SimNb) then
+     if nextobj or (CurrentStep>=cfgsc^.SimNb) then
         break
      else begin CurrentPlanet:=0;continue;end;
   end;
@@ -957,20 +959,23 @@ repeat
      ((CurrentPlanet>11)and (currentplanet<32)and cfgsc^.StarFilter and (cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc^.StarMagMax))
      then begin
         // no
-        //result:=false;
         // but ok if the cursor is inside the planetary disk
         if (CurrentPlanet<32) then begin
            distancetocenter[CurrentPlanet]:=3600*rad2deg*angulardistance(ar,de,tar,tde);
            if distancetocenter[CurrentPlanet]<=(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]/2)
-              then result:=true;
+              then result:=true
+              else distancetocenter[CurrentPlanet]:=maxdouble;
         end;
      end
-     else result := true;
-until result and (CurrentPlanet>=31);
+     else begin
+        result := true;
+        directfind:=true;
+     end;
+until directfind;
 st0:=0;
 cfgsc^.FindOK:=result;
 if result then begin
-  if CurrentPlanet<=31 then begin // search the planet nearest to position
+  if not directfind then begin // search the planet nearest to position
      distmin:=maxdouble;
      for i:=1 to 31 do begin
        if distancetocenter[i]<distmin then begin
