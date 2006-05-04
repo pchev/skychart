@@ -942,11 +942,15 @@ repeat
   if CurrentPlanet=3 then continue;    // skip Earth
   if CurrentPlanet=31 then continue;   // skip Saturn ring
   if (CurrentPlanet=32)and not cfgsc^.showearthshadow then continue;
-  if CurrentPlanet>32 then begin;
+  if CurrentPlanet>32 then begin
      inc(CurrentStep);
-     if nextobj or (CurrentStep>=cfgsc^.SimNb) then
-        break
-     else begin CurrentPlanet:=0;continue;end;
+     if nextobj or (CurrentStep>=cfgsc^.SimNb) then begin
+        dec(CurrentStep);
+        break;
+     end else begin
+        CurrentPlanet:=0;
+        continue;
+     end;
   end;
   // not planetary satellites for large field of vision or if hiden by the planet
   if (currentplanet>11) and (currentplanet<32) and((rad2deg*cfgsc^.fov>1.5) or (cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,6]>90)) then continue;
