@@ -1366,10 +1366,8 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
     chdir(xplanet_dir);
     cmd:='xplanet.exe';
  {$endif}
- cmd:=cmd+' -target '+pla[ipla]+' -origin earth -rotate '+
-      stringreplace(formatfloat(f1,pa),'.',SysDecimalSeparator,[]) +
-      ' -light_time -tt -num_times 1 -jd '+
-      stringreplace(formatfloat(f5,jdt),'.',SysDecimalSeparator,[]) +
+ cmd:=cmd+' -target '+pla[ipla]+' -origin earth -rotate '+ formatfloat(f1,pa) +
+      ' -light_time -tt -num_times 1 -jd '+ formatfloat(f5,jdt) +
       ' -searchdir '+searchdir+
       ' -config xplanet.config -verbosity -1'+
       ' -radius 50'+
