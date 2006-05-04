@@ -1359,7 +1359,7 @@ if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
 if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
  searchdir:='"'+slash(appdir)+slash('data')+'planet"';
  {$ifdef unix}
-    cmd:='xplanet';
+    cmd:='export LC_ALL=C; xplanet';
  {$endif}
  {$ifdef win32}
     if not DirectoryExists(xplanet_dir) then exit;
