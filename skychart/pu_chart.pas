@@ -2286,9 +2286,10 @@ if redraw then Refresh;
 end;
 
 procedure Tf_chart.SetDate(y,m,d,h,n,s:integer);
-var jj,hh: double;
+var jj,hh,sn: double;
 begin
-hh:=h+n/60+s/3600;
+sn:=sign(h);
+hh:=h+sn*n/60+sn*s/3600;
 jj:=jd(y,m,d,hh);
 djd(jj,y,m,d,hh);
 sc.cfgsc.UseSystemTime:=false;

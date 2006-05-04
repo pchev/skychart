@@ -1445,20 +1445,16 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    DtoS(hh+sc.cfgsc.TimeZone-sc.cfgsc.DT_UT,h,n,s);
    case TimeU.itemindex of
    0 : begin
-       inc(h,mult);
-       SetDate(y,m,d,h,n,s);
+       SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult/24);
        end;
    1 : begin
-       inc(n,mult);
-       SetDate(y,m,d,h,n,s);
+       SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult/1440);
        end;
    2 : begin
-       inc(s,mult);
-       SetDate(y,m,d,h,n,s);
+       SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult/86400);
        end;
    3 : begin
-       inc(d,mult);
-       SetDate(y,m,d,h,n,s);
+       SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult);
        end;
    4 : begin
        inc(m,mult);
