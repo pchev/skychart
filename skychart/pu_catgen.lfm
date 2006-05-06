@@ -1,21 +1,22 @@
 object f_catgen: Tf_catgen
+  Left = 421
+  Height = 479
+  Top = 103
+  Width = 503
+  HorzScrollBar.Page = 502
+  VertScrollBar.Page = 478
   ActiveControl = CheckListBox1
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
   ClientWidth = 503
   OnCreate = FormCreate
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   Position = poDefaultPosOnly
   TextHeight = 13
-  HorzScrollBar.Page = 502
-  VertScrollBar.Page = 478
-  Left = 421
-  Height = 479
-  Top = 103
-  Width = 503
   object Image1: TImage
+    Height = 438
+    Width = 114
     Align = alLeft
-    OnClick = Image1Click
     Picture.Data = {
       07545069786D6170E46601002F2A2058504D202A2F0A73746174696320636861
       72202A6369656C636174325B5D203D207B0A2F2A207769647468206865696768
@@ -2892,60 +2893,62 @@ object f_catgen: Tf_catgen
     }
     Stretch = True
     Transparent = True
-    Height = 414
-    Width = 114
   end
   object PageControl1: TNotebook
-    Align = alClient
-    PageIndex = 2
-    ShowTabs = False
     Left = 114
-    Height = 414
+    Height = 438
     Width = 389
+    Align = alClient
+    OnPageChanged = PageControl1PageChanged
+    PageIndex = 0
+    ShowTabs = False
     object TabSheet1: TPage
       Caption = '1'
-      ClientWidth = 381
-      ClientHeight = 406
-      Height = 406
-      Width = 381
+      ClientWidth = 389
+      ClientHeight = 438
       object Label6: TLabel
+        Left = 14
+        Height = 49
+        Top = 24
+        Width = 102
         Caption = 'Select the type of object in your catalog'
         Color = clNone
         ParentColor = False
         WordWrap = True
-        Left = 8
-        Height = 49
-        Top = 56
-        Width = 90
       end
       object Label8: TLabel
+        Left = 14
+        Height = 17
+        Top = 224
+        Width = 104
         Caption = 'Input Catalog files'
         Color = clNone
         ParentColor = False
-        Left = 24
-        Height = 17
-        Top = 220
-        Width = 104
       end
       object Label10: TLabel
-        Caption = 'Catalog short name'
-        Color = clNone
-        ParentColor = False
-        Left = 24
+        Left = 14
         Height = 17
         Top = 164
         Width = 113
+        Caption = 'Catalog short name'
+        Color = clNone
+        ParentColor = False
       end
       object Label13: TLabel
+        Left = 14
+        Height = 17
+        Top = 192
+        Width = 108
         Caption = 'Catalog long name'
         Color = clNone
         ParentColor = False
-        Left = 24
-        Height = 17
-        Top = 188
-        Width = 108
       end
       object SpeedButton1: TSpeedButton
+        Left = 102
+        Height = 25
+        Top = 248
+        Width = 25
+        Color = clBtnFace
         Glyph.Data = {
           0E060000424D0E06000000000000360000002800000016000000160000000100
           180000000000D805000000000000000000000000000000000000CFD0D0CFD0D0
@@ -2999,12 +3002,23 @@ object f_catgen: Tf_catgen
         }
         NumGlyphs = 0
         OnClick = SpeedButton1Click
-        Left = 103
-        Height = 25
-        Top = 244
-        Width = 25
+      end
+      object Label22: TLabel
+        Left = 15
+        Height = 73
+        Top = 358
+        Width = 345
+        AutoSize = False
+        Caption = 'For a large catalog always select "Binary". For a small dataset that change frequently select "Text", this let you edit the file and see the result immediatly on the chart without the need to rerun this utility.'
+        Color = clNone
+        ParentColor = False
+        WordWrap = True
       end
       object RadioGroup1: TRadioGroup
+        Left = 134
+        Height = 137
+        Top = 8
+        Width = 227
         AutoFill = True
         Caption = 'Catalog type'
         ChildSizing.LeftRightSpacing = 6
@@ -3025,98 +3039,122 @@ object f_catgen: Tf_catgen
         )
         OnClick = RadioGroup1Click
         TabOrder = 0
-        Left = 120
-        Height = 105
-        Top = 48
-        Width = 201
       end
       object Edit4: TEdit
-        MaxLength = 4
-        TabOrder = 1
-        Left = 146
+        Left = 145
         Height = 21
         Top = 160
         Width = 49
+        MaxLength = 4
+        TabOrder = 1
       end
       object Edit5: TEdit
+        Left = 145
+        Height = 21
+        Top = 188
+        Width = 201
         MaxLength = 50
         TabOrder = 2
-        Left = 146
-        Height = 21
-        Top = 184
-        Width = 201
       end
       object ListBox1: TListBox
-        OnDblClick = SpeedButton1Click
-        TabOrder = 3
-        Left = 146
+        Left = 145
         Height = 56
         Top = 220
         Width = 201
+        OnDblClick = SpeedButton1Click
+        TabOrder = 3
+        TopIndex = -1
+      end
+      object binarycat: TRadioGroup
+        Left = 14
+        Height = 56
+        Top = 296
+        Width = 347
+        AutoFill = True
+        Caption = 'Output Catalog Type'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 2
+        Columns = 2
+        ItemIndex = 0
+        Items.Strings = (
+          'Binary indexed catalog'
+          'Text file catalog'
+        )
+        OnClick = binarycatChange
+        TabOrder = 4
       end
     end
     object TabSheet2: TPage
       Caption = '2'
-      ClientWidth = 381
-      ClientHeight = 406
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 4
-      Height = 406
-      Width = 381
       object Label2: TLabel
-        Caption = 'General catalog options'
-        Color = clNone
-        ParentColor = False
         Left = 16
         Height = 17
         Top = 8
         Width = 135
+        Caption = 'General catalog options'
+        Color = clNone
+        ParentColor = False
       end
       object GroupBox5: TGroupBox
-        Caption = 'Default Nebulae parameters'
-        ClientHeight = 142
-        ClientWidth = 341
-        TabOrder = 5
         Left = 16
-        Height = 160
-        Top = 216
+        Height = 192
+        Top = 224
         Width = 345
+        Caption = 'Default Nebulae parameters'
+        ClientHeight = 192
+        ClientWidth = 345
+        TabOrder = 5
         object Label11: TLabel
+          Left = 8
+          Height = 17
+          Top = 17
+          Width = 117
           Caption = 'Dimension and Units'
           Color = clNone
           ParentColor = False
-          Left = 8
-          Height = 17
-          Top = 21
-          Width = 117
         end
         object Label12: TLabel
+          Left = 8
+          Height = 17
+          Top = 88
+          Width = 66
           Caption = 'Object type'
           Color = clNone
           ParentColor = False
-          Left = 8
-          Height = 17
-          Top = 69
-          Width = 66
         end
         object Label15: TLabel
-          Caption = 'Recognize Units or'#13#10'Object type from the file'
+          Left = 9
+          Height = 13
+          Top = 120
+          Width = 246
+          Caption = 'Recognize Units or Object type from the file:'
           Color = clNone
           ParentColor = False
-          Left = 8
-          Height = 33
-          Top = 101
-          Width = 140
         end
         object Label16: TLabel
-          Caption = '(useful if the size scale represent a flux)'
+          Left = 134
+          Height = 13
+          Top = 48
+          Width = 146
+          Caption = '(useful to represent a flux)'
           Color = clNone
           ParentColor = False
-          Left = 152
-          Height = 17
-          Top = 40
-          Width = 231
+          WordWrap = True
         end
         object ComboBox1: TComboBox
+          Left = 204
+          Height = 21
+          Top = 12
+          Width = 89
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemHeight = 13
           Items.Strings = (
@@ -3127,43 +3165,38 @@ object f_catgen: Tf_catgen
           MaxLength = 0
           OnChange = ComboBox1Change
           TabOrder = 1
-          Left = 184
-          Height = 21
-          Top = 16
-          Width = 89
         end
         object LongEdit1: TLongEdit
-          Value = 1
-          MaxValue = 3600
-          BorderStyle = bsSingle
+          Name = 'LongEdit1'
+          Left = 140
           Height = 22
           Hint = '0..3600'
-          Left = 120
-          Name = 'LongEdit1'
+          Top = 12
+          Width = 41
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
-          Top = 16
-          Width = 41
-          OnExit = nil
-          Left = 120
-          Height = 22
-          Hint = '0..3600'
-          Top = 16
-          Width = 41
+          Value = 1
+          MaxValue = 3600
         end
         object CheckBox1: TCheckBox
-          Caption = 'Use a logarithmic scale'
-          TabOrder = 2
-          Left = 8
-          Height = 15
+          Left = 4
+          Height = 28
           Top = 40
           Width = 131
+          Caption = 'Logarithmic scale'
+          TabOrder = 2
         end
         object ComboBox3: TComboBox
+          Left = 120
+          Height = 21
+          Top = 80
+          Width = 113
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemHeight = 13
+          ItemIndex = 14
           Items.Strings = (
             'Galaxy'
             'Galaxy Cluster'
@@ -3187,108 +3220,102 @@ object f_catgen: Tf_catgen
           MaxLength = 0
           TabOrder = 3
           Text = 'Unknow'
-          Left = 120
-          Height = 21
-          Top = 64
-          Width = 113
         end
         object Button3: TButton
+          Left = 9
+          Height = 25
+          Top = 136
+          Width = 123
           BorderSpacing.InnerBorder = 2
           Caption = 'Edit Object Types'
           OnClick = Button3Click
           TabOrder = 4
-          Left = 128
-          Height = 25
-          Top = 102
-          Width = 97
         end
         object Button6: TButton
+          Left = 156
+          Height = 25
+          Top = 136
+          Width = 121
           BorderSpacing.InnerBorder = 2
           Caption = 'Edit Units'
           OnClick = Button6Click
           TabOrder = 5
-          Left = 232
-          Height = 25
-          Top = 102
-          Width = 97
         end
       end
       object GroupBox7: TGroupBox
-        Caption = 'Default Outline parameters'
-        ClientHeight = 142
-        ClientWidth = 341
-        TabOrder = 6
-        Left = 14
-        Height = 160
-        Top = 216
+        Left = 16
+        Height = 192
+        Top = 225
         Width = 345
+        Caption = 'Default Outline parameters'
+        ClientHeight = 192
+        ClientWidth = 345
+        TabOrder = 6
         object Label18: TLabel
+          Left = 148
+          Height = 17
+          Top = 80
+          Width = 63
           Caption = 'Line width '
           Color = clNone
           ParentColor = False
-          Left = 216
-          Height = 17
-          Top = 61
-          Width = 63
         end
         object Label19: TLabel
+          Left = 156
+          Height = 17
+          Top = 152
+          Width = 35
           Caption = 'Color '
           Color = clNone
           ParentColor = False
-          Left = 248
-          Height = 17
-          Top = 93
-          Width = 35
         end
         object Shape1: TShape
-          OnMouseUp = Shape1MouseUp
-          Left = 304
+          Left = 220
           Height = 22
-          Top = 88
+          Top = 144
           Width = 22
+          OnMouseUp = Shape1MouseUp
         end
         object Button9: TButton
+          Left = 9
+          Height = 25
+          Top = 109
+          Width = 124
           BorderSpacing.InnerBorder = 2
           Caption = 'Edit Line operation'
           OnClick = Button9Click
           TabOrder = 0
-          Left = 8
-          Height = 25
-          Top = 94
-          Width = 113
         end
         object LongEdit2: TLongEdit
-          Value = 1
-          MaxValue = 99
-          BorderStyle = bsSingle
+          Name = 'LongEdit2'
+          Left = 220
           Height = 22
           Hint = '0..99'
-          Left = 288
-          Name = 'LongEdit2'
+          Top = 75
+          Width = 41
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          Top = 56
-          Width = 41
-          OnExit = nil
-          Left = 288
-          Height = 22
-          Hint = '0..99'
-          Top = 56
-          Width = 41
+          Value = 1
+          MaxValue = 99
         end
         object Button11: TButton
+          Left = 8
+          Height = 25
+          Top = 144
+          Width = 125
           BorderSpacing.InnerBorder = 2
           Caption = 'Edit Color'
           OnClick = Button11Click
           TabOrder = 2
-          Left = 128
-          Height = 25
-          Top = 94
-          Width = 113
         end
         object RadioGroup6: TRadioGroup
+          Left = 8
+          Height = 57
+          Top = 8
+          Width = 316
           AutoFill = True
           Caption = 'Drawing Type'
           ChildSizing.LeftRightSpacing = 6
@@ -3307,23 +3334,23 @@ object f_catgen: Tf_catgen
             'Surface'
           )
           TabOrder = 3
-          Left = 8
-          Height = 57
-          Top = 24
-          Width = 193
         end
         object CheckBox7: TCheckBox
+          Left = 4
+          Height = 28
+          Top = 72
+          Width = 118
           Caption = 'Closed contour'
           Checked = True
           State = cbChecked
           TabOrder = 4
-          Left = 216
-          Height = 15
-          Top = 32
-          Width = 93
         end
       end
       object RadioGroup2: TRadioGroup
+        Left = 8
+        Height = 105
+        Top = 40
+        Width = 180
         AutoFill = True
         Caption = 'RA options'
         ChildSizing.LeftRightSpacing = 6
@@ -3343,12 +3370,12 @@ object f_catgen: Tf_catgen
         )
         OnClick = RadioGroup1Click
         TabOrder = 0
-        Left = 16
-        Height = 105
-        Top = 40
-        Width = 169
       end
       object RadioGroup3: TRadioGroup
+        Left = 190
+        Height = 105
+        Top = 40
+        Width = 192
         AutoFill = True
         Caption = 'DEC options'
         ChildSizing.LeftRightSpacing = 6
@@ -3367,134 +3394,117 @@ object f_catgen: Tf_catgen
         )
         OnClick = RadioGroup1Click
         TabOrder = 1
-        Left = 184
-        Height = 105
-        Top = 40
-        Width = 177
       end
       object GroupBox1: TGroupBox
-        Caption = 'Coordinates Equinox'
-        ClientHeight = 42
-        ClientWidth = 111
-        TabOrder = 2
-        Left = 16
-        Height = 60
+        Left = 8
+        Height = 57
         Top = 152
-        Width = 115
+        Width = 130
+        Caption = 'Coordinates Equinox'
+        ClientHeight = 57
+        ClientWidth = 130
+        TabOrder = 2
         object FloatEdit1: TFloatEdit
-          Value = 2000
-          BorderStyle = bsSingle
-          Height = 22
-          Left = 8
           Name = 'FloatEdit1'
+          Left = 8
+          Height = 22
+          Top = 12
+          Width = 57
+          BorderStyle = bsSingle
           ParentColor = False
           TabOrder = 0
-          Top = 12
-          Width = 57
-          OnExit = nil
-          Left = 8
-          Height = 22
-          Top = 12
-          Width = 57
+          Value = 2000
         end
       end
       object GroupBox4: TGroupBox
-        Caption = 'Maximum magnitude'
-        ClientHeight = 39
-        ClientWidth = 111
-        TabOrder = 4
-        Left = 244
+        Left = 254
         Height = 57
         Top = 152
-        Width = 115
+        Width = 128
+        Caption = 'Maximum magnitude'
+        ClientHeight = 57
+        ClientWidth = 128
+        TabOrder = 4
         object FloatEdit2: TFloatEdit
-          Value = 12
-          BorderStyle = bsSingle
-          Height = 22
-          Left = 12
           Name = 'FloatEdit2'
+          Left = 12
+          Height = 22
+          Top = 12
+          Width = 57
+          BorderStyle = bsSingle
           ParentColor = False
           TabOrder = 0
-          Top = 12
-          Width = 57
-          OnExit = nil
-          Left = 12
-          Height = 22
-          Top = 12
-          Width = 57
+          Value = 12
         end
       end
       object GroupBox2: TGroupBox
-        Caption = 'Position Epoch'
-        ClientHeight = 39
-        ClientWidth = 111
-        TabOrder = 3
-        Left = 130
+        Left = 142
         Height = 57
         Top = 152
-        Width = 115
+        Width = 107
+        Caption = 'Position Epoch'
+        ClientHeight = 57
+        ClientWidth = 107
+        TabOrder = 3
         object FloatEdit3: TFloatEdit
-          Value = 2000
-          BorderStyle = bsSingle
-          Height = 22
-          Left = 8
           Name = 'FloatEdit3'
+          Left = 8
+          Height = 22
+          Top = 12
+          Width = 57
+          BorderStyle = bsSingle
           ParentColor = False
           TabOrder = 0
-          Top = 12
-          Width = 57
-          OnExit = nil
-          Left = 8
-          Height = 22
-          Top = 12
-          Width = 57
+          Value = 2000
         end
       end
     end
     object TabSheet3: TPage
       Caption = '3'
-      ClientWidth = 381
-      ClientHeight = 406
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 1
-      Height = 406
-      Width = 381
       object Label4: TLabel
-        Caption = 'First Char'
-        Color = clNone
-        ParentColor = False
-        Left = 128
+        Left = 134
         Height = 17
         Top = 252
         Width = 57
-      end
-      object Label5: TLabel
-        Caption = 'Length'
+        Caption = 'First Char'
         Color = clNone
         ParentColor = False
-        Left = 248
+      end
+      object Label5: TLabel
+        Left = 270
         Height = 17
         Top = 252
         Width = 39
-      end
-      object Label7: TLabel
-        Caption = 'Select the fields to use and their position in the text file'
+        Caption = 'Length'
         Color = clNone
         ParentColor = False
+      end
+      object Label7: TLabel
         Left = 24
         Height = 17
         Top = 16
         Width = 316
-      end
-      object Label3: TLabel
-        Caption = 'Label'
+        Caption = 'Select the fields to use and their position in the text file'
         Color = clNone
         ParentColor = False
-        Left = 24
+      end
+      object Label3: TLabel
+        Left = 18
         Height = 17
         Top = 252
         Width = 31
+        Caption = 'Label'
+        Color = clNone
+        ParentColor = False
       end
       object CheckListBox1: TCheckListBox
+        Left = 18
+        Height = 199
+        Top = 40
+        Width = 345
         Items.Strings = (
           'RA'
           'DEC'
@@ -3503,73 +3513,69 @@ object f_catgen: Tf_catgen
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
-        Left = 24
-        Height = 199
-        Top = 40
-        Width = 321
         Data = {
           020000000000
         }
       end
       object Edit1: TEdit
+        Left = 202
+        Height = 21
+        Top = 248
+        Width = 45
         OnChange = Edit1Change
         TabOrder = 2
-        Left = 176
-        Height = 21
-        Top = 248
-        Width = 57
       end
       object Edit2: TEdit
-        OnChange = Edit2Change
-        TabOrder = 3
-        Left = 288
+        Left = 318
         Height = 21
         Top = 248
-        Width = 57
+        Width = 45
+        OnChange = Edit2Change
+        TabOrder = 3
       end
       object Edit3: TEdit
+        Left = 62
+        Height = 21
+        Top = 248
+        Width = 55
         MaxLength = 10
         OnChange = Edit3Change
         TabOrder = 1
-        Left = 56
-        Height = 21
-        Top = 248
-        Width = 57
       end
       object CheckBox2: TCheckBox
+        Left = 18
+        Height = 28
+        Top = 280
+        Width = 229
         Caption = 'Use this field as an Alternate Name'
         OnClick = CheckBox2Click
         TabOrder = 4
         Visible = False
-        Left = 56
-        Height = 15
-        Top = 272
-        Width = 187
       end
       object Button7: TButton
+        Left = 288
+        Height = 25
+        Top = 280
+        Width = 75
         BorderSpacing.InnerBorder = 2
         Caption = 'Advanced'
         OnClick = Button7Click
         TabOrder = 5
-        Left = 270
-        Height = 20
-        Top = 272
-        Width = 75
       end
       object Memo1: TSynEdit
+        Name = 'Memo1'
+        Left = 18
+        Height = 82
+        Top = 320
+        Width = 345
         Font.Height = -11
         Font.Name = 'Courier'
         Font.Pitch = fpFixed
-        Height = 82
-        Name = 'Memo1'
         ParentColor = False
         TabOrder = 6
-        Width = 345
         OnMouseUp = Memo1MouseUp
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
-        Gutter.OnChange = nil
         Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
@@ -3894,31 +3900,27 @@ object f_catgen: Tf_catgen
           end>
         ReadOnly = True
         ScrollBars = ssHorizontal
-        SelectedColor.OnChange = nil
-        Cursor = crIBeam
-        Left = 18
-        Height = 82
-        Top = 308
-        Width = 345
       end
     end
     object TabSheet4: TPage
       Caption = '4'
-      ClientWidth = 381
-      ClientHeight = 406
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 2
-      Height = 406
-      Width = 381
       object Label1: TLabel
-        Caption = 'Output catalog options'
-        Color = clNone
-        ParentColor = False
         Left = 24
         Height = 17
         Top = 16
         Width = 129
+        Caption = 'Output catalog options'
+        Color = clNone
+        ParentColor = False
       end
       object RadioGroup4: TRadioGroup
+        Left = 24
+        Height = 121
+        Top = 40
+        Width = 321
         AutoFill = True
         Caption = 'Number of files'
         ChildSizing.LeftRightSpacing = 6
@@ -3936,111 +3938,97 @@ object f_catgen: Tf_catgen
           '732 (recommended up to 5''000''000 objects)'
           '9537 (larger dataset)'
         )
-        TabOrder = 0
-        Left = 24
-        Height = 105
-        Top = 60
-        Width = 321
+        TabOrder = 2
       end
       object GroupBox3: TGroupBox
-        Caption = 'Output Directory'
-        ClientHeight = 78
-        ClientWidth = 317
-        TabOrder = 2
         Left = 24
         Height = 96
-        Top = 284
+        Top = 296
         Width = 321
+        Caption = 'Output Directory'
+        ClientHeight = 96
+        ClientWidth = 321
+        TabOrder = 0
         object DirectoryEdit1: TDirectoryEdit
+          Left = 16
+          Height = 21
+          Top = 16
+          Width = 240
+          TabOrder = 0
+          Text = 'C:\testcat'
           Directory = 'C:\testcat'
           OnAcceptDirectory = DirectoryEdit1AcceptDirectory
           ButtonWidth = 20
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 0
-          TabOrder = 0
-          Text = 'C:\testcat'
-          Left = 16
-          Height = 21
-          Top = 16
-          Width = 240
         end
         object CheckBox6: TCheckBox
-          Caption = 'Append to an existing catalog '
-          TabOrder = 1
           Left = 16
           Height = 15
           Top = 48
           Width = 165
+          Caption = 'Append to an existing catalog '
+          TabOrder = 1
         end
       end
       object GroupBox6: TGroupBox
-        Caption = 'Search Index'
-        ClientHeight = 82
-        ClientWidth = 317
-        TabOrder = 1
         Left = 24
         Height = 100
-        Top = 172
+        Top = 176
         Width = 321
+        Caption = 'Search Index'
+        ClientHeight = 100
+        ClientWidth = 321
+        TabOrder = 1
         object CheckBox3: TCheckBox
-          Caption = 'Create a search index file'
-          Checked = True
-          State = cbChecked
-          TabOrder = 0
           Left = 16
           Height = 15
           Top = 12
           Width = 141
+          Caption = 'Create a search index file'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
         end
         object CheckBox4: TCheckBox
-          Caption = 'Add the alternate names to the index'
-          TabOrder = 1
           Left = 16
           Height = 15
           Top = 36
           Width = 195
+          Caption = 'Add the alternate names to the index'
+          TabOrder = 1
         end
         object CheckBox5: TCheckBox
-          Caption = 'Prefix the alternate names with their label'
-          Checked = True
-          State = cbChecked
-          TabOrder = 2
           Left = 16
           Height = 15
           Top = 60
           Width = 214
+          Caption = 'Prefix the alternate names with their label'
+          Checked = True
+          State = cbChecked
+          TabOrder = 2
         end
-      end
-      object binarycat: TCheckBox
-        Caption = 'Build a binary catalog'
-        Checked = True
-        OnChange = binarycatChange
-        State = cbChecked
-        TabOrder = 3
-        Left = 33
-        Height = 15
-        Top = 36
-        Width = 123
       end
     end
     object TabSheet5: TPage
       Caption = '5'
-      ClientWidth = 381
-      ClientHeight = 406
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 4
-      Height = 406
-      Width = 381
       object Label9: TLabel
+        Left = 24
+        Height = 17
+        Top = 24
+        Width = 300
         Caption = 'Indicate the string identifier for each type of object :'
         Color = clNone
         ParentColor = False
-        Left = 24
-        Height = 17
-        Top = 8
-        Width = 300
       end
       object StringGrid1: TStringGrid
+        Left = 24
+        Height = 292
+        Top = 64
+        Width = 320
         ColCount = 2
         DefaultColWidth = 120
         DefaultRowHeight = 18
@@ -4053,43 +4041,41 @@ object f_catgen: Tf_catgen
         TabStop = True
         VisibleColCount = 1
         VisibleRowCount = 14
-        Left = 24
-        Height = 292
-        Top = 32
-        Width = 320
         ColWidths = (
           120
           193
         )
       end
       object Button4: TButton
+        Left = 134
+        Height = 25
+        Top = 376
+        Width = 75
         BorderSpacing.InnerBorder = 2
         Caption = 'Return'
         OnClick = Button4Click
         TabOrder = 1
-        Left = 136
-        Height = 25
-        Top = 332
-        Width = 75
       end
     end
     object TabSheet6: TPage
       Caption = '6'
-      ClientWidth = 381
-      ClientHeight = 406
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 5
-      Height = 406
-      Width = 381
       object Label14: TLabel
+        Left = 22
+        Height = 17
+        Top = 40
+        Width = 269
         Caption = 'Indicate how to recognize the object size unit :'
         Color = clNone
         ParentColor = False
-        Left = 24
-        Height = 17
-        Top = 8
-        Width = 269
       end
       object StringGrid2: TStringGrid
+        Left = 22
+        Height = 292
+        Top = 72
+        Width = 320
         ColCount = 2
         DefaultColWidth = 120
         DefaultRowHeight = 18
@@ -4102,43 +4088,41 @@ object f_catgen: Tf_catgen
         TabStop = True
         VisibleColCount = 1
         VisibleRowCount = 3
-        Left = 24
-        Height = 292
-        Top = 32
-        Width = 320
         ColWidths = (
           120
           193
         )
       end
       object Button5: TButton
+        Left = 134
+        Height = 25
+        Top = 384
+        Width = 75
         BorderSpacing.InnerBorder = 2
         Caption = 'Return'
         OnClick = Button4Click
         TabOrder = 1
-        Left = 138
-        Height = 25
-        Top = 340
-        Width = 75
       end
     end
     object TabSheet7: TPage
       Caption = '7'
-      ClientWidth = 381
-      ClientHeight = 406
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 6
-      Height = 406
-      Width = 381
       object Label17: TLabel
+        Left = 30
+        Height = 17
+        Top = 40
+        Width = 246
         Caption = 'Indicate the string for each draw operation'
         Color = clNone
         ParentColor = False
-        Left = 24
-        Height = 17
-        Top = 8
-        Width = 246
       end
       object StringGrid3: TStringGrid
+        Left = 30
+        Height = 292
+        Top = 72
+        Width = 320
         ColCount = 2
         DefaultColWidth = 120
         DefaultRowHeight = 18
@@ -4151,132 +4135,129 @@ object f_catgen: Tf_catgen
         TabStop = True
         VisibleColCount = 1
         VisibleRowCount = 4
-        Left = 24
-        Height = 292
-        Top = 32
-        Width = 320
         ColWidths = (
           120
           193
         )
       end
       object Button8: TButton
+        Left = 136
+        Height = 25
+        Top = 376
+        Width = 75
         BorderSpacing.InnerBorder = 2
         Caption = 'Return'
         OnClick = Button4Click
         TabOrder = 1
-        Left = 136
-        Height = 25
-        Top = 340
-        Width = 75
       end
     end
     object TabSheet8: TPage
       Caption = '8'
-      ClientWidth = 381
-      ClientHeight = 406
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 7
-      Height = 406
-      Width = 381
       object Label20: TLabel
+        Left = 70
+        Height = 17
+        Top = 24
+        Width = 187
         Caption = 'Indicate the string for each color'
         Color = clNone
         ParentColor = False
-        Left = 24
-        Height = 17
-        Top = 8
-        Width = 187
       end
       object Shape2: TShape
-        OnMouseUp = Shape1MouseUp
         Left = 48
         Height = 25
-        Top = 60
+        Top = 88
         Width = 81
+        OnMouseUp = Shape1MouseUp
       end
       object Shape3: TShape
+        Left = 48
+        Height = 25
+        Top = 114
+        Width = 81
         Brush.Color = clSilver
         OnMouseUp = Shape1MouseUp
-        Left = 48
-        Height = 25
-        Top = 86
-        Width = 81
       end
       object Shape4: TShape
+        Left = 48
+        Height = 25
+        Top = 140
+        Width = 81
         Brush.Color = clGray
         OnMouseUp = Shape1MouseUp
-        Left = 48
-        Height = 25
-        Top = 112
-        Width = 81
       end
       object Shape5: TShape
+        Left = 48
+        Height = 25
+        Top = 166
+        Width = 81
         Brush.Color = 3158064
         OnMouseUp = Shape1MouseUp
-        Left = 48
-        Height = 25
-        Top = 138
-        Width = 81
       end
       object Shape6: TShape
+        Left = 48
+        Height = 25
+        Top = 192
+        Width = 81
         Brush.Color = clRed
         OnMouseUp = Shape1MouseUp
-        Left = 48
-        Height = 25
-        Top = 164
-        Width = 81
       end
       object Shape7: TShape
+        Left = 48
+        Height = 25
+        Top = 218
+        Width = 81
         Brush.Color = clLime
         OnMouseUp = Shape1MouseUp
-        Left = 48
-        Height = 25
-        Top = 190
-        Width = 81
       end
       object Shape8: TShape
+        Left = 48
+        Height = 25
+        Top = 244
+        Width = 81
         Brush.Color = clYellow
         OnMouseUp = Shape1MouseUp
-        Left = 48
-        Height = 25
-        Top = 216
-        Width = 81
       end
       object Shape9: TShape
+        Left = 48
+        Height = 25
+        Top = 270
+        Width = 81
         Brush.Color = clBlue
         OnMouseUp = Shape1MouseUp
-        Left = 48
-        Height = 25
-        Top = 242
-        Width = 81
       end
       object Shape10: TShape
+        Left = 48
+        Height = 25
+        Top = 296
+        Width = 81
         Brush.Color = clFuchsia
         OnMouseUp = Shape1MouseUp
-        Left = 48
-        Height = 25
-        Top = 268
-        Width = 81
       end
       object Shape11: TShape
-        Brush.Color = clAqua
-        OnMouseUp = Shape1MouseUp
         Left = 48
         Height = 25
-        Top = 294
+        Top = 322
         Width = 81
+        Brush.Color = clAqua
+        OnMouseUp = Shape1MouseUp
       end
       object Label21: TLabel
-        Caption = 'Click to change the color'
+        Left = 6
+        Height = 13
+        Top = 64
+        Width = 146
+        Caption = 'Click to change the color '
         Color = clNone
         ParentColor = False
-        WordWrap = True
-        Left = 34
-        Height = 36
-        Top = 28
-        Width = 98
       end
       object StringGrid4: TStringGrid
+        Left = 158
+        Height = 300
+        Top = 61
+        Width = 208
         ColCount = 1
         DefaultColWidth = 200
         DefaultRowHeight = 26
@@ -4290,127 +4271,127 @@ object f_catgen: Tf_catgen
         TabStop = True
         VisibleColCount = 1
         VisibleRowCount = 10
-        Left = 136
-        Height = 300
-        Top = 32
-        Width = 208
       end
       object Button10: TButton
+        Left = 134
+        Height = 25
+        Top = 384
+        Width = 75
         BorderSpacing.InnerBorder = 2
         Caption = 'Return'
         OnClick = Button4Click
         TabOrder = 1
-        Left = 136
-        Height = 25
-        Top = 340
-        Width = 75
       end
     end
   end
   object Panel1: TPanel
+    Height = 41
+    Top = 438
+    Width = 503
     Align = alBottom
     BevelOuter = bvNone
-    ClientHeight = 65
+    ClientHeight = 41
     ClientWidth = 503
     ParentColor = False
+    ParentFont = True
     TabOrder = 1
-    Height = 65
-    Top = 414
-    Width = 503
     object Exitbt: TButton
+      Left = 406
+      Height = 25
+      Top = 2
+      Width = 75
       BorderSpacing.InnerBorder = 2
       Caption = 'Close'
       OnClick = ExitbtClick
       TabOrder = 3
       Visible = False
-      Left = 406
-      Height = 25
-      Top = 20
-      Width = 75
     end
     object prevbt: TButton
+      Left = 260
+      Height = 25
+      Top = 4
+      Width = 67
       BorderSpacing.InnerBorder = 2
       Caption = '<<   Prev'
       OnClick = prevbtClick
+      ParentFont = True
       TabOrder = 0
-      Left = 246
-      Height = 25
-      Top = 20
-      Width = 75
     end
     object nextbt: TButton
+      Left = 331
+      Height = 25
+      Top = 4
+      Width = 65
       BorderSpacing.InnerBorder = 2
       Caption = 'Next   >>'
       OnClick = nextbtClick
+      ParentFont = True
       TabOrder = 1
-      Left = 326
-      Height = 25
-      Top = 20
-      Width = 76
     end
     object Endbt: TButton
+      Left = 400
+      Height = 25
+      Top = 4
+      Width = 91
       BorderSpacing.InnerBorder = 2
       Caption = 'Build Catalog'
       Enabled = False
       OnClick = EndbtClick
+      ParentFont = True
       TabOrder = 2
-      Left = 406
-      Height = 25
-      Top = 18
-      Width = 75
     end
     object Button2: TButton
+      Left = 170
+      Height = 25
+      Top = 4
+      Width = 86
       BorderSpacing.InnerBorder = 2
       Caption = 'Load project'
       OnClick = Button2Click
+      ParentFont = True
       TabOrder = 4
-      Left = 167
-      Height = 25
-      Top = 20
-      Width = 75
     end
     object Button1: TButton
+      Left = 79
+      Height = 25
+      Top = 4
+      Width = 87
       BorderSpacing.InnerBorder = 2
       Caption = 'Save Project'
       OnClick = Button1Click
+      ParentFont = True
       TabOrder = 5
-      Left = 87
-      Height = 25
-      Top = 20
-      Width = 75
     end
     object Button12: TButton
+      Left = 8
+      Height = 25
+      Top = 4
+      Width = 67
       BorderSpacing.InnerBorder = 2
       Caption = 'Help'
       OnClick = Button12Click
+      ParentFont = True
       TabOrder = 6
-      Left = 8
-      Height = 25
-      Top = 20
-      Width = 75
     end
   end
   object OpenDialog1: TOpenDialog
-    Options = [ofHideReadOnly, ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     Title = 'Open existing file'
     Filter = 'All files|*.*|Project files|*.prj'
     FilterIndex = 0
-    Title = 'Open existing file'
-    left = 48
-    top = 456
+    Options = [ofHideReadOnly, ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    left = 184
+    top = 8
   end
   object SaveDialog1: TSaveDialog
     Title = 'Save file as'
     Filter = 'All files|*.*|Project files|*.prj'
     FilterIndex = 0
-    Title = 'Save file as'
-    left = 8
-    top = 456
+    left = 144
+    top = 8
   end
   object ColorDialog1: TColorDialog
     Title = 'Select color'
-    Title = 'Select color'
-    left = 88
-    top = 456
+    left = 224
+    top = 8
   end
 end

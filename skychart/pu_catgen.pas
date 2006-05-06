@@ -26,8 +26,8 @@ interface
 
 uses  u_constant, u_util, pu_progressbar, pu_catgenadv, GSCconst, skylibcat, gcatunit,
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits, Registry,
-  Buttons, Math, Inifiles, Grids, mwFixedRecSort, mwCompFrom,
+  StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
+  Buttons, Math, CDC_Inifiles, Grids, mwFixedRecSort, mwCompFrom,
   LResources, EditBtn, SynEdit;
 
 const
@@ -38,10 +38,11 @@ type
   { Tf_catgen }
 
   Tf_catgen = class(TForm)
-    binarycat: TCheckBox;
+    Label22: TLabel;
     ListBox1: TListBox;
     PageControl1: TNoteBook;
     Memo1: TSynEdit;
+    binarycat: TRadioGroup;
     TabSheet1: TPage;
     TabSheet2: TPage;
     TabSheet3: TPage;
@@ -141,6 +142,7 @@ type
     RadioGroup6: TRadioGroup;
     CheckBox7: TCheckBox;
     Button12: TButton;
+    procedure PageControl1PageChanged(Sender: TObject);
     procedure binarycatChange(Sender: TObject);
     procedure DirectoryEdit1AcceptDirectory(Sender: TObject; var Value: String);
     procedure FormCreate(Sender: TObject);
@@ -167,7 +169,6 @@ type
     procedure Button6Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
-    procedure Image1Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
     procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -175,7 +176,6 @@ type
     procedure Button12Click(Sender: TObject);
   private
     { Déclarations privées }
-    language : string;
     textpos : array [0..40] of array[1..2] of integer;
     calc : array[0..40,1..2] of double;
     Lra,Lde,ListIndex,nebulaesizescale,l_fixe,nbalt : integer;
@@ -188,7 +188,7 @@ type
     ixfn, destdir : string;
     freject : textfile;
     rejectopen : boolean;
-    appdir,fillstring,inl : string;
+    fillstring,inl : string;
     flabel : array [1..35] of string;
     Ft : textfile;
     catrec,catsize : integer;
@@ -201,7 +201,6 @@ type
     usealt : array[0..10] of record i:integer; l : string; end;
     Procedure SetFieldlist(field : array of string; n : integer);
     Procedure BuildFieldList;
-    procedure GetLang;
     procedure OpenCatalog(filename : string);
     Procedure CloseCatalog;
     Procedure ReadCatalog(out line : string);
@@ -247,7 +246,6 @@ type
     Procedure SortIXfile;
     Procedure BuildBinCat;
     Procedure BuildTxtCat;
-    Function Slash(nom : string) : string;
     procedure ProgressAbort(Sender: TObject);
   public
     { Déclarations publiques }
@@ -299,20 +297,6 @@ const
   pageUnits=5;
   pageLine=6;
   pageColor=7;
-
-procedure Tf_catgen.GetLang;
-var
-    Registry1: TRegistry;
-begin
-language:='UK';
-Registry1 := TRegistry.Create;
-with Registry1 do begin
-  Openkey('Software\Astro_PC\Ciel\Config',false);
-  if valueexists('Language') then language:=ReadString('Language');
-  CloseKey;
-end;
-Registry1.Free;
-end;
 
 Procedure Tf_catgen.SetFieldlist(field : array of string; n : integer);
 var i : integer;
@@ -377,20 +361,8 @@ end;
 procedure Tf_catgen.FormCreate(Sender: TObject);
 var i : integer;
 begin
-decimalseparator:='.';
-appdir:=getcurrentdir;
 rejectopen := false;
 for i:=1 to l_sup do altname[i]:=0;
-
-getlang;
-{TabSheet1.TabVisible:=false;
-TabSheet2.TabVisible:=false;
-TabSheet3.TabVisible:=false;
-TabSheet4.TabVisible:=false;
-TabSheet5.TabVisible:=false;
-TabSheet6.TabVisible:=false;
-TabSheet7.TabVisible:=false;
-TabSheet8.TabVisible:=false;}
 pagecontrol1.PageIndex:=pageFiles;
 nextbt.enabled:=true;
 prevbt.enabled:=false;
@@ -1805,12 +1777,6 @@ BuildTxtHeader;
 CreateTxtfiles;
 end;
 
-Function Tf_catgen.Slash(nom : string) : string;
-begin
-result:=trim(nom);
-if copy(result,length(nom),1)<>'\' then result:=result+'\';
-end;
-
 procedure Tf_catgen.EndbtClick(Sender: TObject);
 begin
 abort:=false;
@@ -1825,7 +1791,7 @@ try
   destdir:=slash(directoryedit1.Text);
   panel1.enabled:=false;
   if not directoryexists(destdir) then Forcedirectories(destdir);
-  if binarycat.Checked then
+  if binarycat.ItemIndex=0 then
      BuildBinCat
   else
      BuildTxtCat;
@@ -1967,7 +1933,8 @@ opendialog1.filterindex:=2;
 opendialog1.DefaultExt:='.prj';
 opendialog1.filename:='';
 if opendialog1.execute then begin
-  ini:=Tinifile.Create(opendialog1.filename);
+ showmessage(opendialog1.Files[0]);
+  ini:=Tinifile.Create(opendialog1.Files[0]);
   RadioGroup1.itemindex:=ini.ReadInteger('Page1','type',RadioGroup1.itemindex);
   edit4.text:=ini.readString('Page1','shortname',edit4.text);
   edit5.text:=ini.readString('Page1','longname',edit5.text);
@@ -2043,9 +2010,14 @@ end;
 
 procedure Tf_catgen.binarycatChange(Sender: TObject);
 begin
-  RadioGroup4.Visible:=binarycat.Checked;
-  GroupBox6.Visible:=binarycat.Checked;
-  CheckBox6.Visible:=binarycat.Checked;
+  RadioGroup4.Visible:=binarycat.ItemIndex=0;
+  GroupBox6.Visible:=binarycat.ItemIndex=0;
+  CheckBox6.Visible:=binarycat.ItemIndex=0;
+end;
+
+procedure Tf_catgen.PageControl1PageChanged(Sender: TObject);
+begin
+  Panel1.Visible:=PageControl1.PageIndex<=pageBuild;
 end;
 
 procedure Tf_catgen.Button3Click(Sender: TObject);
@@ -2090,11 +2062,6 @@ if f_catgenadv.ModalResult=mrOK then begin
 end;
 end;
 
-procedure Tf_catgen.Image1Click(Sender: TObject);
-begin
-Showmessage('Cartes du Ciel Catalog Generation Tool'+crlf+'Version 1.3 2002/09/22'+crlf+'by Patrick Chevalley'+crlf+'http://www.astrosurf.com/astropc');
-end;
-
 procedure Tf_catgen.Button9Click(Sender: TObject);
 begin
 panel1.enabled:=false;
@@ -2119,8 +2086,7 @@ procedure Tf_catgen.Button12Click(Sender: TObject);
 var fn:string;
 begin
 chdir(appdir);
-fn:=appdir+'\doc\'+language+'_catgen.html';
-if not fileexists(fn) then fn:=appdir+'\doc\UK_catgen.html';
+fn:=appdir+'\doc\UK_catgen.html';
 ExecuteFile(fn);
 end;
 
