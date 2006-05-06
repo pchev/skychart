@@ -469,10 +469,8 @@ procedure Tf_config_chart.ShowProjection;
    begin
      cb.items.clear;
      cb.items.add('ARC');
-     if cshr.fieldnum[n]<=89 then begin
-        cb.items.add('TAN');
-        cb.items.add('SIN');
-     end;
+     if cshr.fieldnum[n]<=140 then cb.items.add('TAN');
+     if cshr.fieldnum[n]<=90 then cb.items.add('SIN');
      cb.items.add('CAR');
      cb.text:=csc.projname[n]
    end;
