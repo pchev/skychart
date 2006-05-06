@@ -625,6 +625,7 @@ cyear:=cfgsc^.CurYear+cfgsc^.CurMonth/12;
 dyear:=0;
 first:=true;
 saveplot:=Fplot.cfgplot^.starplot;
+if cfgsc^.DrawPMon and (Fplot.cfgplot^.starplot=2) then Fplot.cfgplot^.starplot:=1;
 try
 Fplot.InitPixelImg;
 if Fcatalog.OpenStar then
@@ -653,10 +654,7 @@ if Fcatalog.OpenStar then
        projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
        WindowXY(x1,y1,xxp,yyp,cfgsc);
        Fplot.PlotLine(xx,yy,xxp,yyp,Fplot.cfgplot^.Color[15],1);
-       Fplot.cfgplot^.starplot:=1;
-    end
-    else
-       Fplot.cfgplot^.starplot:=saveplot;
+    end;
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
     if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc^.StarmagMax-cfgsc^.LabelMagDiff[1]) then begin
        if cfgsc^.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv))
@@ -668,9 +666,9 @@ if Fcatalog.OpenStar then
 end;
 result:=true;
 finally
-Fplot.cfgplot^.starplot:=saveplot;
 Fcatalog.CloseStar;
 Fplot.ClosePixelImg;
+Fplot.cfgplot^.starplot:=saveplot;
 end;
 end;
 
