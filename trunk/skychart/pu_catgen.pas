@@ -180,6 +180,7 @@ type
     calc : array[0..40,1..2] of double;
     Lra,Lde,ListIndex,nebulaesizescale,l_fixe,nbalt : integer;
     catheader : Tcatheader;
+    catinfo : TCatHdrInfo;
     datarec : array [0..4096] of byte;
     indexrec : array [0..1024] of byte;
     ff : array [1..9537] of file;
@@ -1385,13 +1386,42 @@ end;
 end;
 
 Procedure Tf_catgen.CreateTxtfiles;
-var n : integer;
+var i,n : integer;
     f : file;
 begin
 filemode:=2;
 assignfile(f,destdir+lowercase(trim(catheader.ShortName))+'.hdr');
 rewrite(f,1);
 blockwrite(f,catheader,catheader.hdrl,n);
+Closefile(f);
+for i:=1 to 15 do catinfo.neblst[i]:=neblst[i];
+for i:=1 to 15 do catinfo.nebtype[i]:=nebtype[i];
+for i:=1 to 3 do catinfo.nebunit[i]:=nebunit[i];
+for i:=1 to 3 do catinfo.nebunits[i]:=nebunits[i];
+for i:=1 to 4 do catinfo.Linelst[i]:=Linelst[i];
+for i:=1 to 4 do catinfo.Linetype[i]:=Linetype[i];
+for i:=1 to 10 do catinfo.Colorlst[i]:=Colorlst[i];
+for i:=1 to 10 do begin
+     case i of
+      1 : catinfo.Color[i]:=shape2.brush.color;
+      2 : catinfo.Color[i]:=shape3.brush.color;
+      3 : catinfo.Color[i]:=shape4.brush.color;
+      4 : catinfo.Color[i]:=shape5.brush.color;
+      5 : catinfo.Color[i]:=shape6.brush.color;
+      6 : catinfo.Color[i]:=shape7.brush.color;
+      7 : catinfo.Color[i]:=shape8.brush.color;
+      8 : catinfo.Color[i]:=shape9.brush.color;
+      9 : catinfo.Color[i]:=shape10.brush.color;
+      10: catinfo.Color[i]:=shape11.brush.color;
+      end;
+end;
+for i:=0 to 40 do begin
+  catinfo.calc[i,1]:=calc[i,1];
+  catinfo.calc[i,2]:=calc[i,2];
+end;
+assignfile(f,destdir+lowercase(trim(catheader.ShortName))+'.info2');
+rewrite(f,1);
+blockwrite(f,catinfo,sizeof(catinfo),n);
 Closefile(f);
 end;
 
@@ -1438,10 +1468,6 @@ var
     buf: string;
 begin
 f_progress.progressbar1.max:=ListBox1.Items.count;
-for i:=1 to 15 do neblst[i]:=trim(stringgrid1.cells[1,i])+',';
-for i:=1 to 3  do nebunit[i]:=trim(stringgrid2.cells[1,i])+',';
-for i:=1 to 3  do linelst[i]:=trim(stringgrid3.cells[1,i])+',';
-for i:=1 to 10  do colorlst[i]:=trim(stringgrid4.cells[0,i])+',';
 fillstring:=StringOfChar(' ',255);
 for n:=0 to ListBox1.Items.count-1 do begin
 f_progress.label1.caption:='Convert catalog file '+ListBox1.Items[n];
@@ -1778,6 +1804,7 @@ CreateTxtfiles;
 end;
 
 procedure Tf_catgen.EndbtClick(Sender: TObject);
+var i:integer;
 begin
 abort:=false;
 chdir(appdir);
@@ -1791,6 +1818,10 @@ try
   destdir:=slash(directoryedit1.Text);
   panel1.enabled:=false;
   if not directoryexists(destdir) then Forcedirectories(destdir);
+  for i:=1 to 15 do neblst[i]:=trim(stringgrid1.cells[1,i])+',';
+  for i:=1 to 3  do nebunit[i]:=trim(stringgrid2.cells[1,i])+',';
+  for i:=1 to 3  do linelst[i]:=trim(stringgrid3.cells[1,i])+',';
+  for i:=1 to 10  do colorlst[i]:=trim(stringgrid4.cells[0,i])+',';
   if binarycat.ItemIndex=0 then
      BuildBinCat
   else
