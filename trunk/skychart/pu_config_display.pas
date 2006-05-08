@@ -42,6 +42,7 @@ type
     ConstbFile: TFileNameEdit;
     GroupBox6: TGroupBox;
     Panel1: TPanel;
+    Panel2: TPanel;
     ThemeList: TComboBox;
     MainPanel: TPanel;
     Page1: TPage;
@@ -543,6 +544,7 @@ procedure Tf_config_display.ShowSkyColor;
 begin
  if cplot.autoskycolor then skycolorbox.itemindex:=1
                        else skycolorbox.itemindex:=0;
+ panel2.visible:=cplot.autoskycolor;
  shape18.pen.color:=cplot.skycolor[1];
  shape18.brush.color:=cplot.skycolor[1];
  shape19.pen.color:=cplot.skycolor[2];
@@ -918,6 +920,7 @@ end;
 procedure Tf_config_display.skycolorboxClick(Sender: TObject);
 begin
 cplot.autoskycolor:=(skycolorbox.itemindex=1);
+panel2.visible:=cplot.autoskycolor;
 end;
 
 procedure Tf_config_display.ShapeSkyMouseUp(Sender: TObject;
