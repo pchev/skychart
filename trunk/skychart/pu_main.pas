@@ -3844,6 +3844,7 @@ if MultiDoc1.ActiveObject=sender then begin
     ToolButtonShowObjectbelowHorizon.down:=not sc.cfgsc.horizonopaque;
     ShowObjectbelowthehorizon1.checked:=not sc.cfgsc.horizonopaque;
     ToolButtonswitchbackground.down:= sc.plot.cfgplot.autoskycolor;
+    ToolButtonswitchbackground.Enabled:=(sc.cfgsc.Projpole=altaz);
     ToolButtonSyncChart.down:=cfgm.SyncChart;
     ToolButtonTrack.down:=sc.cfgsc.TrackOn;
     if sc.cfgsc.TrackOn then
