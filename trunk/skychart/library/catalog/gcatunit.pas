@@ -437,10 +437,13 @@ end;
 Procedure CloseRegion;
 begin
 {$I-}
+try
 if fileisopen then begin
 FileisOpen:=false;
 if cattype=1 then closefile(f)
              else closefile(ft);
+end;
+except
 end;
 {$I+}
 end;
