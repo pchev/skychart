@@ -25,19 +25,22 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util,
+uses u_constant, u_util, u_projection,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel;
+  ButtonPanel, jdcalendar;
 
 type
 
   { Tf_config_time }
 
   Tf_config_time = class(TForm)
+    BitBtn1: TBitBtn;
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    JDEdit: TFloatEdit;
+    Label1: TLabel;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;
@@ -88,11 +91,13 @@ type
     AllSim: TButton;
     NoSim: TButton;
     Notebook1: TNotebook;
+    procedure BitBtn1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure JDEditChange(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
     procedure DateChange(Sender: TObject);
     procedure TimeChange(Sender: TObject);
@@ -111,8 +116,9 @@ type
     procedure NoSimClick(Sender: TObject);
   private
     { Private declarations }
-    LockChange: boolean;
+    LockChange, LockJD: boolean;
     FApplyConfig: TNotifyEvent;
+    JDCalendarDialog1: TJDCalendarDialog;
     procedure ShowTime;
   public
     { Public declarations }
@@ -127,12 +133,11 @@ type
     cplot : Pconf_plot;
     cmain : Pconf_main;
     constructor Create(AOwner:TComponent); override;
+    destructor Destroy; override;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
-
-
 
 constructor Tf_config_time.Create(AOwner:TComponent);
 begin
@@ -142,10 +147,19 @@ begin
  cplot:=@mycplot;
  cmain:=@mycmain;
  inherited Create(AOwner);
+ JDCalendarDialog1:=TJDCalendarDialog.Create(nil);
+ BitBtn1.Glyph.LoadFromLazarusResource('BtnDatePicker');
+end;
+
+destructor Tf_config_time.Destroy;
+begin
+JDCalendarDialog1.Free;
+inherited Destroy;
 end;
 
 procedure Tf_config_time.FormShow(Sender: TObject);
 begin
+LockJD:=false;
 LockChange:=true;
 ShowTime;
 LockChange:=false;
@@ -155,6 +169,7 @@ procedure Tf_config_time.ShowTime;
 var h,n,s:string;
     y,m,d,i,j:integer;
 begin
+if not lockJD then JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 y:=csc.curyear;
 m:=csc.curmonth;
 d:=csc.curday;
@@ -225,12 +240,33 @@ t_min.enabled:=d_year.enabled;
 t_sec.enabled:=d_year.enabled;
 bitbtn4.enabled:=d_year.enabled;
 tz.enabled:=d_year.enabled;
+JDedit.enabled:=d_year.enabled;
+BitBtn1.enabled:=d_year.enabled;
 ShowTime;
 end;
 
 procedure Tf_config_time.Button2Click(Sender: TObject);
 begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_time.BitBtn1Click(Sender: TObject);
+begin
+JDCalendarDialog1.JD:=JDEdit.Value;
+if JDCalendarDialog1.Execute then begin
+   JDEdit.Value:=JDCalendarDialog1.JD+csc.CurTime/24-csc.timezone/24;
+end;
+end;
+
+procedure Tf_config_time.JDEditChange(Sender: TObject);
+begin
+if LockChange or LockJD then exit;
+Djd(JDEdit.Value+csc.timezone/24,csc.curyear,csc.curmonth,csc.curday,csc.CurTime);
+LockChange:=true;
+LockJD:=true;
+ShowTime;
+LockChange:=false;
+LockJD:=false;
 end;
 
 procedure Tf_config_time.CheckBox2Click(Sender: TObject);
@@ -267,13 +303,18 @@ csc.curday:=d_day.value;
 csc.DT_UT:=DTminusUT(csc.curyear,csc);
 Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
+LockChange:=true;
+JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
+LockChange:=false;
 end;
-
 
 procedure Tf_config_time.TimeChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.curtime:=t_hour.value+t_min.value/60+t_sec.value/3600;
+LockChange:=true;
+JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
+LockChange:=false;
 end;
 
 procedure Tf_config_time.BitBtn4Click(Sender: TObject);
@@ -299,6 +340,9 @@ if LockChange then exit;
 with sender as Tfloatedit do begin
   csc.timezone:=value;
 end;
+LockChange:=true;
+JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
+LockChange:=false;
 // same value in Time and Observatory panel
 if not csc.UseSystemTime then csc.obstz:=csc.timezone;
 end;
