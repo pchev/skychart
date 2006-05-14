@@ -68,14 +68,14 @@ type
     FYear: TLongEdit;
     FMonth: TLongEdit;
     Julian: TFloatEdit;
-    UpYear, DownYear, UpMonth, DownMonth: TSpeedButton;
-    Today: TSpeedButton;
+    UpYear, DownYear, UpMonth, DownMonth: TButton;
+    Today: TButton;
     JDlabel: TLabel;
     jdt: double;
     Fday: integer;
     Flabels: TDatesLabelsArray;
     lockdate: boolean;
-    FonDateSelect: TNotifyEvent;
+    FonDateSelect, FonDblClick: TNotifyEvent;
     procedure SetJD(Value: double);
     procedure SetYear(Value: integer);
     function ReadYear: integer;
@@ -85,6 +85,7 @@ type
     procedure SetLabels(Value: TDatesLabelsArray);
     procedure UpdVal;
     procedure CalendarGridMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure CalendarGridDblClick(Sender: TObject);
     procedure DateChange(Sender: TObject);
     procedure JDChange(Sender: TObject);
     procedure TodayClick(Sender: TObject);
@@ -104,6 +105,7 @@ type
      property Month : integer read ReadMonth write SetMonth;
      property Day : integer read Fday write SetDay;
      property onDateSelect: TNotifyEvent read FonDateSelect write FonDateSelect;
+     property onDblClick: TNotifyEvent read FonDblClick write FonDblClick;
   end;
 
 { TJDCalendarDialog }
@@ -111,10 +113,12 @@ type
   TJDCalendarDialog = class(TCommonDialog)
   private
     savejd:double;
+    DF:TForm;
     Flabels: TDatesLabelsArray;
     AnchorComponent: TControl;
     FBorderStyle: TFormBorderStyle;
     JDCalendar:TJDMonthlyCalendar;
+    procedure CalendarDblClick(Sender: TObject);
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -141,7 +145,7 @@ type
     destructor Destroy; override;
     property labels: TDatesLabelsArray read Flabels write Flabels;
   published
-    property ReadOnly default false;
+    property ReadOnly default true;
     property JD : double read savejd write SetJD;
   end;
   
@@ -187,7 +191,7 @@ TopPanel:=Tpanel.Create(self);
 TopPanel.Parent:=self;
 TopPanel.Top:=0;
 TopPanel.Left:=0;
-TopPanel.Height:=21;
+TopPanel.Height:=25;
 TopPanel.Align:=alTop;
 TopPanel.BevelOuter:=bvNone;
 BottomPanel:=Tpanel.Create(self);
@@ -211,22 +215,21 @@ FYear.MaxValue:=20000;
 FYear.MinValue:=-20000;
 FYear.Top:=2;
 FYear.Width:=40;
+FYear.Height:=21;
 //FYear.Height:=abs(FYear.Font.Height)+3;
 FYear.BorderStyle:=bsNone;
-DownYear:=TSpeedButton.Create(self);
+DownYear:=TButton.Create(self);
 DownYear.Parent:=TopPanel;
-DownYear.Height:=FYear.Height;
+DownYear.Height:=21;
 DownYear.Width:=DownYear.Height;
-DownYear.Layout:=blGlyphBottom;
 DownYear.Caption:='<';
 DownYear.Left:=2;
-DownYear.Top:=FYear.Top-(DownYear.Height-FYear.Height)div 2;
+DownYear.Top:=FYear.Top;
 FYear.Left:=DownYear.Left+DownYear.Width+2;
-UpYear:=TSpeedButton.Create(self);
+UpYear:=TButton.Create(self);
 UpYear.Parent:=TopPanel;
-UpYear.Height:=FYear.Height;
+UpYear.Height:=DownYear.Height;
 UpYear.Width:=UpYear.Height;
-UpYear.Layout:=blGlyphBottom;
 UpYear.Caption:='>';
 UpYear.Left:=FYear.Left+FYear.Width+2;
 UpYear.Top:=DownYear.Top;
@@ -238,49 +241,48 @@ FMonth.Top:=FYear.Top;
 FMonth.Width:=20;
 //FMonth.Height:=abs(FMonth.Font.Height)+3;
 FMonth.BorderStyle:=bsNone;
-UpMonth:=TSpeedButton.Create(self);
+UpMonth:=TButton.Create(self);
 UpMonth.Parent:=TopPanel;
-UpMonth.Height:=FMonth.Height;
+UpMonth.Height:=DownYear.Height;
 UpMonth.Width:=UpMonth.Height;
-UpMonth.Layout:=blGlyphBottom;
 UpMonth.Caption:='>';
 UpMonth.Left:=Width-UpMonth.Width-2;
-UpMonth.Top:=UpYear.Top;
+UpMonth.Top:=DownYear.Top;
 FMonth.Left:=UpMonth.Left-FMonth.Width-2;
-DownMonth:=TSpeedButton.Create(self);
+DownMonth:=TButton.Create(self);
 DownMonth.Parent:=TopPanel;
-DownMonth.Height:=FMonth.Height;
+DownMonth.Height:=DownYear.Height;
 DownMonth.Width:=DownMonth.Height;
-DownMonth.Layout:=blGlyphBottom;
 DownMonth.Caption:='<';
 DownMonth.Left:=FMonth.Left-DownMonth.Width-2;
-DownMonth.Top:=UpMonth.Top;
+DownMonth.Top:=DownYear.Top;
 
-Today:=TSpeedButton.Create(self);
+Today:=TButton.Create(self);
 Today.Parent:=TopPanel;
-Today.Height:=UpYear.Height;
+Today.Height:=DownYear.Height;
 Today.Width:=DownMonth.Left-UpYear.Left-UpYear.Width-8;
 Today.Left:=UpYear.Left+UpYear.Width+4;
-Today.Top:=UpYear.Top;
-Today.Layout:=blGlyphBottom;
+Today.Top:=DownYear.Top;
 Today.Caption:='Today';
 
-Julian:= TFloatEdit.Create(self);
-Julian.Parent:=BottomPanel;
-Julian.Top:=4;
-Julian.Width:=80;
-Julian.Left:=Width-Julian.Width-4;
-//Julian.Height:=abs(Julian.Font.Height)+3;
-Julian.BorderStyle:=bsNone;
 JDLabel:=TLabel.Create(self);
 JDLabel.Parent:=BottomPanel;
 JDLabel.Caption:='Julian Day = ';
-JDLabel.Left:=Julian.Left-JDLabel.Width-2;
-JDLabel.Top:=Julian.Top;
+JDLabel.Left:=4;
+JDLabel.Top:=4;
+
+Julian:= TFloatEdit.Create(self);
+Julian.Parent:=BottomPanel;
+Julian.Top:=JDLabel.Top;
+Julian.Width:=80;
+Julian.Left:=JDLabel.Left+JDLabel.Width+4;
+Julian.BorderStyle:=bsNone;
+
 jdt:=CalendarGrid.JD;
 UpdVal;
 if not ( csDesignInstance in ComponentState ) then begin
 CalendarGrid.OnMouseUp:=@CalendarGridMouseUp;
+CalendarGrid.OnDblClick:=@CalendarGridDblClick;
 FYear.OnChange:=@DateChange;
 FMonth.OnChange:=@DateChange;
 Julian.OnChange:=@JDChange;
@@ -378,6 +380,11 @@ if Button=mbLeft then begin
     if assigned(FonDateSelect) then FonDateSelect(self);
  end;
 end;
+end;
+
+procedure TJDMonthlyCalendar.CalendarGridDblClick(Sender: TObject);
+begin
+ if assigned(FonDblClick) then FonDblClick(self);
 end;
 
 procedure TJDMonthlyCalendar.DateChange(Sender: TObject);
@@ -588,22 +595,26 @@ begin
   inherited Destroy;
 end;
 
+procedure TJDCalendarDialog.CalendarDblClick(Sender: TObject);
+begin
+  DF.modalresult:=mrOK;
+end;
+
 function TJDCalendarDialog.Execute:boolean;
-var DF:TForm;
-    okButton,cancelButton:TBitBtn;
+var okButton:TBitBtn;
+    cancelButton:TBitBtn;
     pos:TPoint;
 begin
   DF:=TForm.Create(Self);
   DF.Caption:='JD calendar';
-//  DF.Position:=poMainFormCenter;
   DF.BorderStyle:=FBorderStyle;
   DF.FormStyle:=fsStayOnTop;
-  //DF.AutoSize:=true;
 
   JDCalendar:=TJDMonthlyCalendar.Create(Self);
   with JDCalendar do begin
     Parent:=DF;
     Align:=alTop;
+    onDblClick:=@CalendarDblClick;
   end;
   JDCalendar.JD:=savejd;
   if Flabels.mon<>'' then JDCalendar.labels:=labels;
@@ -628,10 +639,10 @@ begin
     Width:=20;
     Height:=20;
     ModalResult:=mrOK;
-    Align:=alLeft;
     Default:=True;
+    top:=2;
+    left:=JDCalendar.width-width-2;
   end;
-
   cancelButton:=TBitBtn.Create(Self);
   with cancelButton do begin
     Parent:=JDCalendar.BottomPanel;
@@ -640,8 +651,9 @@ begin
     ModalResult:=mrCancel;
     Width:=20;
     Height:=20;
-    Align:=alLeft;
     Cancel:=True;
+    top:=2;
+    left:=okButton.left-width-5;
   end;
 
   Result:=DF.ShowModal=mrOK;
@@ -681,7 +693,7 @@ begin
   CD:=TJDCalendarDialog.Create(Self);
   CD.JD:=savejd;
   if Flabels.mon<>'' then CD.labels:=Flabels;
-  CD.BorderStyle:=bsNone;
+//  CD.BorderStyle:=bsNone;
   try
     if CD.Execute then begin
       savejd:=CD.JD;
