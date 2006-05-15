@@ -14,7 +14,7 @@ object f_config_time: Tf_config_time
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   object MainPanel: TPanel
     Height = 477
     Width = 474
@@ -33,8 +33,8 @@ object f_config_time: Tf_config_time
       ShowTabs = False
       object Page1: TPage
         Caption = 'Time'
-        ClientWidth = 466
-        ClientHeight = 469
+        ClientWidth = 474
+        ClientHeight = 477
         object Label142: TLabel
           Left = 231
           Height = 13
@@ -357,6 +357,7 @@ object f_config_time: Tf_config_time
             MaxValue = 23
             OnChange = TimeChange
             TabOrder = 5
+            Value = 1
           end
           object t_min: TSpinEdit
             Left = 127
@@ -366,6 +367,7 @@ object f_config_time: Tf_config_time
             MaxValue = 59
             OnChange = TimeChange
             TabOrder = 6
+            Value = 1
           end
           object t_sec: TSpinEdit
             Left = 195
@@ -375,6 +377,7 @@ object f_config_time: Tf_config_time
             MaxValue = 59
             OnChange = TimeChange
             TabOrder = 7
+            Value = 1
           end
           object JDEdit: TFloatEdit
             Name = 'JDEdit'
@@ -392,7 +395,7 @@ object f_config_time: Tf_config_time
           end
           object BitBtn1: TBitBtn
             Left = 196
-            Height = 24
+            Height = 25
             Top = 104
             Width = 32
             BorderSpacing.InnerBorder = 2
@@ -413,8 +416,8 @@ object f_config_time: Tf_config_time
       end
       object Page2: TPage
         Caption = 'Simulation'
-        ClientWidth = 466
-        ClientHeight = 469
+        ClientWidth = 474
+        ClientHeight = 477
         object stepreset: TSpeedButton
           Left = 338
           Height = 25
@@ -581,7 +584,6 @@ object f_config_time: Tf_config_time
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 2
       Caption = 'OK'
-      Default = True
       ModalResult = 1
       TabOrder = 0
     end

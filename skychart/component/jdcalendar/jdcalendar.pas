@@ -198,7 +198,7 @@ BottomPanel:=Tpanel.Create(self);
 BottomPanel.Parent:=self;
 BottomPanel.Top:=0;
 BottomPanel.Left:=0;
-BottomPanel.Height:=21;
+BottomPanel.Height:=25;
 BottomPanel.Align:=alBottom;
 BottomPanel.BevelOuter:=bvNone;
 CalendarGrid:=TJDMonthlyCalendarGrid.Create(Self);
@@ -267,15 +267,19 @@ Today.Caption:='Today';
 
 JDLabel:=TLabel.Create(self);
 JDLabel.Parent:=BottomPanel;
-JDLabel.Caption:='Julian Day = ';
+JDLabel.Caption:='Julian Day =';
 JDLabel.Left:=4;
-JDLabel.Top:=4;
+JDLabel.Top:=8;
 
 Julian:= TFloatEdit.Create(self);
 Julian.Parent:=BottomPanel;
-Julian.Top:=JDLabel.Top;
+Julian.Decimals:=1;
+Julian.Digits:=5;
+Julian.NumericType:=ntFixed;
+Julian.Top:=4;
 Julian.Width:=80;
-Julian.Left:=JDLabel.Left+JDLabel.Width+4;
+Julian.Height:=21;
+Julian.Left:=JDLabel.Left+JDLabel.Width+12;
 Julian.BorderStyle:=bsNone;
 
 jdt:=CalendarGrid.JD;
@@ -313,8 +317,8 @@ end;
 
 procedure TJDMonthlyCalendar.SetJD(Value: double);
 begin
- jdt:=value;
- CalendarGrid.JD:=jdt;
+ CalendarGrid.JD:=value;
+ jdt:=CalendarGrid.JD;
  UpdVal;
 end;
 
@@ -486,6 +490,7 @@ var ro,co: integer;
 begin
 jdt:=value;
 djd(jdt,cy,cm,cd,ch);
+jdt:=jdd(cy,cm,cd,0);
 for ro:=1 to Rowcount-1 do
   for co:=0 to colcount-1 do
      cells[co,ro]:='';
@@ -636,8 +641,9 @@ begin
     Parent:=JDCalendar.BottomPanel;
     Kind:=bkOK;
     Caption:='';
-    Width:=20;
-    Height:=20;
+    layout:=blGlyphTop;
+    Width:=30;
+    Height:=25;
     ModalResult:=mrOK;
     Default:=True;
     top:=2;
@@ -648,9 +654,10 @@ begin
     Parent:=JDCalendar.BottomPanel;
     Kind:=bkCancel;
     Caption:='';
+    layout:=blGlyphTop;
     ModalResult:=mrCancel;
-    Width:=20;
-    Height:=20;
+    Width:=30;
+    Height:=25;
     Cancel:=True;
     top:=2;
     left:=okButton.left-width-5;
