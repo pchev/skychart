@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 273
+  Left = 266
   Height = 580
-  Top = 105
+  Top = 117
   Width = 860
   HorzScrollBar.Page = 859
   VertScrollBar.Page = 555
@@ -3433,10 +3433,6 @@ object f_main: Tf_main
       object N11: TMenuItem
         Caption = '-'
       end
-      object MenuItem9: TMenuItem
-        Action = CatGen1
-        OnClick = CatGen1Execute
-      end
       object DateConfig1: TMenuItem
         Action = SetupTime
         OnClick = SetupTimeExecute
@@ -3444,6 +3440,10 @@ object f_main: Tf_main
       object ObsConfig1: TMenuItem
         Action = SetupObservatory
         OnClick = SetupObservatoryExecute
+      end
+      object MenuItem9: TMenuItem
+        Action = SetupCatalog
+        OnClick = SetupCatalogExecute
       end
       object MenuItem1: TMenuItem
         Action = SetupDisplay
@@ -4473,10 +4473,10 @@ object f_main: Tf_main
       ImageIndex = 77
       OnExecute = SetupPicturesExecute
     end
-    object CatGen1: TAction
+    object SetupCatalog: TAction
       Category = 'Setup'
-      Caption = 'Prepare a catalog'
-      OnExecute = CatGen1Execute
+      Caption = 'Catalog'
+      OnExecute = SetupCatalogExecute
     end
   end
   object SaveDialog: TSaveDialog

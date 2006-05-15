@@ -36,6 +36,10 @@ type
 
   Tf_config_catalog = class(TForm)
     bsc3: TDirectoryEdit;
+    CatgenButton: TButton;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     fw4: TLabel;
     fw5: TLabel;
     fw6: TLabel;
@@ -52,6 +56,7 @@ type
     gcm3: TDirectoryEdit;
     gpn3: TDirectoryEdit;
     FOVPanel: TPanel;
+    Panel1: TPanel;
     pgc3: TDirectoryEdit;
     rc33: TDirectoryEdit;
     lbn3: TDirectoryEdit;
@@ -77,8 +82,6 @@ type
     Page2: TPage;
     Page3: TPage;
     Page4: TPage;
-    Page5: TPage;
-    Label1: TLabel;
     Label37: TLabel;
     addcat: TBitBtn;
     delcat: TBitBtn;
@@ -189,17 +192,10 @@ type
     MCTBox: TCheckBox;
     fmct1: TLongEdit;
     fmct2: TLongEdit;
-    Label4: TLabel;
-    Label52: TLabel;
-    Label71: TLabel;
-    Label64: TLabel;
-    StringGrid1: TStringGrid;
-    Cat1Box: TCheckBox;
-    Edit1: TEdit;
-    Cat2Box: TCheckBox;
-    StringGrid2: TStringGrid;
     OpenDialog1: TOpenDialog;
     Notebook1: TNotebook;
+    procedure Button2Click(Sender: TObject);
+    procedure CatgenClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -237,6 +233,7 @@ type
   private
     { Private declarations }
     catalogempty, LockChange,LockCatPath: boolean;
+    FApplyConfig: TNotifyEvent;
     procedure ShowGCat;
     procedure ShowCDCStar;                                
     procedure ShowCDCNeb;
@@ -256,11 +253,12 @@ type
     cplot : ^conf_plot;
     cmain : ^conf_main;
     constructor Create(AOwner:TComponent); override;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
 
-
+Uses pu_catgen, pu_catgenadv, pu_progressbar;
 
 constructor Tf_config_catalog.Create(AOwner:TComponent);
 begin
@@ -294,6 +292,20 @@ procedure Tf_config_catalog.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   LockChange:=true;
+end;
+
+procedure Tf_config_catalog.CatgenClick(Sender: TObject);
+begin
+if f_catgen=nil then f_catgen:=Tf_catgen.create(self);
+if f_catgenadv=nil then f_catgenadv:=Tf_catgenadv.Create(self);
+if f_progress=nil then f_progress:=Tf_progress.Create(self);
+FormPos(f_catgen,mouse.CursorPos.x,mouse.CursorPos.y);
+f_catgen.ShowModal;
+end;
+
+procedure Tf_config_catalog.Button2Click(Sender: TObject);
+begin
+  if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
 procedure Tf_config_catalog.ShowGCat;

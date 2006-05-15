@@ -1,43 +1,18 @@
 object f_config_catalog: Tf_config_catalog
   Left = 408
-  Height = 528
-  Top = 242
+  Height = 539
+  Top = 231
   Width = 526
   HorzScrollBar.Page = 525
-  VertScrollBar.Page = 527
+  VertScrollBar.Page = 538
   ActiveControl = addcat
   Caption = 'f_config_catalog'
-  ClientHeight = 528
+  ClientHeight = 539
   ClientWidth = 526
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 90
-  object DirOpenImg: TImage
-    Left = 72
-    Height = 16
-    Top = 504
-    Width = 16
-    AutoSize = True
-    Picture.Data = {
-      07545069786D6170BA0100002F2A2058504D202A2F0A73746174696320636861
-      72202A677261706869635B5D203D207B0A22313620313620352031222C0A222E
-      2063204E6F6E65222C0A222C20632023374637463746222C0A222D2063202346
-      4646463030222C0A222A20632023464646464646222C0A226120632023303030
-      303030222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
-      2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E22
-      2C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E
-      2E2E2E2E2E2E2E222C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E
-      2E2C2C2C2C2C2C2C2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C
-      612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
-      2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E22
-      2C0A222E2E2C2A2E2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C
-      2C2C2C2C612E2E222C0A222E2E61616161616161616161612E2E2E222C0A222E
-      2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
-      2E2E2E227D0A
-    }
-    Transparent = True
-  end
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -56,22 +31,15 @@ object f_config_catalog: Tf_config_catalog
       PageIndex = 0
       ShowTabs = False
       object Page1: TPage
-        Caption = 'Page1'
+        Caption = 'Catalog'
         ClientWidth = 498
         ClientHeight = 424
-        object Label1: TLabel
-          Height = 13
-          Width = 134
-          Caption = 'Generic Catalog Setting'
-          Color = clNone
-          ParentColor = False
-        end
         object Label37: TLabel
           Left = 4
           Height = 13
-          Top = 28
-          Width = 362
-          Caption = 'Stars and Nebulae catalogs prepared with the CATGEN software'
+          Top = 23
+          Width = 240
+          Caption = 'Stars and Nebulae catalogs prepared with '
           Color = clNone
           ParentColor = False
         end
@@ -100,7 +68,7 @@ object f_config_catalog: Tf_config_catalog
         object StringGrid3: TStringGrid
           Height = 321
           Top = 48
-          Width = 474
+          Width = 482
           ColCount = 6
           DefaultColWidth = 18
           DefaultRowHeight = 18
@@ -126,13 +94,24 @@ object f_config_catalog: Tf_config_catalog
             18
           )
         end
+        object CatgenButton: TButton
+          Left = 255
+          Height = 25
+          Top = 16
+          Width = 96
+          BorderSpacing.InnerBorder = 2
+          Caption = 'CatGen'
+          OnClick = CatgenClick
+          TabOrder = 3
+        end
       end
       object Page2: TPage
-        Caption = 'Page2'
+        Caption = 'CdC Stars'
         ClientWidth = 498
         ClientHeight = 424
         object Label2: TLabel
           Height = 13
+          Top = 7
           Width = 149
           Caption = 'CDC Stars Catalog Setting'
           Color = clNone
@@ -909,7 +888,7 @@ object f_config_catalog: Tf_config_catalog
         end
       end
       object Page3: TPage
-        Caption = 'Page3'
+        Caption = 'CdC Nebulae'
         ClientWidth = 498
         ClientHeight = 424
         object Bevel5: TBevel
@@ -937,7 +916,9 @@ object f_config_catalog: Tf_config_catalog
           Style = bsRaised
         end
         object Label3: TLabel
+          Left = 1
           Height = 13
+          Top = 7
           Width = 168
           Caption = 'CDC Nebulae Catalog Setting'
           Color = clNone
@@ -1527,11 +1508,12 @@ object f_config_catalog: Tf_config_catalog
         end
       end
       object Page4: TPage
-        Caption = 'Page4'
+        Caption = 'Obsolete'
         ClientWidth = 498
         ClientHeight = 424
         object Label88: TLabel
           Height = 13
+          Top = 7
           Width = 284
           Caption = 'CDC Obsolete Catalog (but you can still use them)'
           Color = clNone
@@ -1829,161 +1811,6 @@ object f_config_catalog: Tf_config_catalog
           ParentColor = False
         end
       end
-      object Page5: TPage
-        Caption = 'Page5'
-        ClientWidth = 498
-        ClientHeight = 424
-        object Label4: TLabel
-          Height = 13
-          Width = 135
-          Caption = 'External Catalog Setting'
-          Color = clNone
-          ParentColor = False
-        end
-        object Label52: TLabel
-          Height = 13
-          Top = 20
-          Width = 155
-          Caption = 'According to the magnitude'
-          Color = clNone
-          ParentColor = False
-          Visible = False
-        end
-        object Label71: TLabel
-          Left = 320
-          Height = 13
-          Top = 32
-          Width = 104
-          Alignment = taRightJustify
-          Caption = 'Highest magnitude'
-          Color = clNone
-          ParentColor = False
-          Visible = False
-        end
-        object Label64: TLabel
-          Height = 13
-          Top = 220
-          Width = 120
-          Caption = 'According to the size'
-          Color = clNone
-          ParentColor = False
-          Visible = False
-        end
-        object StringGrid1: TStringGrid
-          Height = 153
-          Top = 56
-          Width = 466
-          ColCount = 20
-          DefaultColWidth = 40
-          DefaultRowHeight = 18
-          FixedColor = clBtnFace
-          FixedCols = 0
-          GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goTabs]
-          RowCount = 20
-          ScrollBars = ssAutoBoth
-          TabOrder = 0
-          TabStop = True
-          Visible = False
-          VisibleColCount = 10
-          VisibleRowCount = 7
-          ColWidths = (
-            30
-            43
-            107
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-          )
-        end
-        object Cat1Box: TCheckBox
-          Height = 28
-          Top = 38
-          Width = 138
-          HelpContext = 107
-          Caption = 'Show this catalogs'
-          ParentShowHint = False
-          TabOrder = 1
-          Visible = False
-        end
-        object Edit1: TEdit
-          Left = 417
-          Height = 21
-          Top = 28
-          Width = 41
-          Color = clBtnFace
-          ReadOnly = True
-          TabOrder = 2
-          Visible = False
-        end
-        object Cat2Box: TCheckBox
-          Height = 28
-          Top = 238
-          Width = 138
-          HelpContext = 107
-          Caption = 'Show this catalogs'
-          ParentShowHint = False
-          TabOrder = 3
-          Visible = False
-        end
-        object StringGrid2: TStringGrid
-          Height = 153
-          Top = 256
-          Width = 465
-          ColCount = 22
-          DefaultColWidth = 40
-          DefaultRowHeight = 18
-          FixedColor = clBtnFace
-          FixedCols = 0
-          GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goTabs]
-          RowCount = 20
-          ScrollBars = ssAutoBoth
-          TabOrder = 4
-          TabStop = True
-          Visible = False
-          VisibleColCount = 10
-          VisibleRowCount = 7
-          ColWidths = (
-            30
-            43
-            107
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-            40
-          )
-        end
-      end
     end
     object FOVPanel: TPanel
       Left = 1
@@ -2114,6 +1941,71 @@ object f_config_catalog: Tf_config_catalog
         Color = clNone
         ParentColor = False
       end
+    end
+  end
+  object Panel1: TPanel
+    Height = 50
+    Top = 489
+    Width = 526
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 526
+    TabOrder = 1
+    object DirOpenImg: TImage
+      Left = 8
+      Height = 16
+      Top = 15
+      Width = 16
+      AutoSize = True
+      Picture.Data = {
+        07545069786D6170BA0100002F2A2058504D202A2F0A73746174696320636861
+        72202A677261706869635B5D203D207B0A22313620313620352031222C0A222E
+        2063204E6F6E65222C0A222C20632023374637463746222C0A222D2063202346
+        4646463030222C0A222A20632023464646464646222C0A226120632023303030
+        303030222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+        2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E22
+        2C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E
+        2E2E2E2E2E2E2E222C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E
+        2E2C2C2C2C2C2C2C2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C
+        612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+        2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E22
+        2C0A222E2E2C2A2E2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C
+        2C2C2C2C612E2E222C0A222E2E61616161616161616161612E2E2E222C0A222E
+        2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+        2E2E2E227D0A
+      }
+      Transparent = True
+      Visible = False
+    end
+    object Button1: TButton
+      Left = 240
+      Height = 25
+      Top = 15
+      Width = 75
+      BorderSpacing.InnerBorder = 2
+      Caption = 'OK'
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 336
+      Height = 25
+      Top = 15
+      Width = 75
+      BorderSpacing.InnerBorder = 2
+      Caption = 'Apply'
+      OnClick = Button2Click
+      TabOrder = 1
+    end
+    object Button3: TButton
+      Left = 432
+      Height = 25
+      Top = 15
+      Width = 75
+      BorderSpacing.InnerBorder = 2
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
     end
   end
   object OpenDialog1: TOpenDialog

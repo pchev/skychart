@@ -129,9 +129,9 @@ implementation
 procedure Tf_config.FormCreate(Sender: TObject);
 var Child: TChildDoc;
 begin
-compage:=22;
-astpage:=23;
-dbpage:=38;
+compage:=21;
+astpage:=22;
+dbpage:=37;
 Fnightvision:=false;
 
 Child:=MultiDoc1.NewChild;
