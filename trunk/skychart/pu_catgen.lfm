@@ -1,7 +1,7 @@
 object f_catgen: Tf_catgen
-  Left = 421
+  Left = 605
   Height = 479
-  Top = 103
+  Top = 105
   Width = 503
   HorzScrollBar.Page = 502
   VertScrollBar.Page = 478
@@ -9,7 +9,8 @@ object f_catgen: Tf_catgen
   ClientHeight = 479
   ClientWidth = 503
   OnCreate = FormCreate
-  PixelsPerInch = 96
+  OnShow = FormShow
+  PixelsPerInch = 90
   Position = poDefaultPosOnly
   TextHeight = 13
   object Image1: TImage
@@ -2903,8 +2904,8 @@ object f_catgen: Tf_catgen
     ShowTabs = False
     object TabSheet1: TPage
       Caption = '1'
-      ClientWidth = 381
-      ClientHeight = 430
+      ClientWidth = 389
+      ClientHeight = 438
       object Label6: TLabel
         Left = 14
         Height = 40
@@ -3062,6 +3063,7 @@ object f_catgen: Tf_catgen
         Width = 201
         OnDblClick = SpeedButton1Click
         TabOrder = 3
+        TopIndex = -1
       end
       object binarycat: TRadioGroup
         Left = 14
@@ -3090,8 +3092,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet2: TPage
       Caption = '2'
-      ClientWidth = 381
-      ClientHeight = 430
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 4
       object Label2: TLabel
         Left = 16
@@ -3459,8 +3461,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet3: TPage
       Caption = '3'
-      ClientWidth = 381
-      ClientHeight = 430
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 1
       object Label4: TLabel
         Left = 134
@@ -3573,9 +3575,7 @@ object f_catgen: Tf_catgen
         TabOrder = 6
         OnMouseUp = Memo1MouseUp
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
-        Gutter.OnChange = nil
         Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
@@ -3900,13 +3900,12 @@ object f_catgen: Tf_catgen
           end>
         ReadOnly = True
         ScrollBars = ssHorizontal
-        SelectedColor.OnChange = nil
       end
     end
     object TabSheet4: TPage
       Caption = '4'
-      ClientWidth = 381
-      ClientHeight = 430
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 2
       object Label1: TLabel
         Left = 24
@@ -4013,8 +4012,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet5: TPage
       Caption = '5'
-      ClientWidth = 381
-      ClientHeight = 430
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 4
       object Label9: TLabel
         Left = 24
@@ -4041,7 +4040,7 @@ object f_catgen: Tf_catgen
         TabOrder = 0
         TabStop = True
         VisibleColCount = 1
-        VisibleRowCount = 1
+        VisibleRowCount = 14
         ColWidths = (
           120
           193
@@ -4060,8 +4059,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet6: TPage
       Caption = '6'
-      ClientWidth = 381
-      ClientHeight = 430
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 5
       object Label14: TLabel
         Left = 22
@@ -4088,7 +4087,7 @@ object f_catgen: Tf_catgen
         TabOrder = 0
         TabStop = True
         VisibleColCount = 1
-        VisibleRowCount = 1
+        VisibleRowCount = 3
         ColWidths = (
           120
           193
@@ -4107,8 +4106,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet7: TPage
       Caption = '7'
-      ClientWidth = 381
-      ClientHeight = 430
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 6
       object Label17: TLabel
         Left = 30
@@ -4135,7 +4134,7 @@ object f_catgen: Tf_catgen
         TabOrder = 0
         TabStop = True
         VisibleColCount = 1
-        VisibleRowCount = 1
+        VisibleRowCount = 4
         ColWidths = (
           120
           193
@@ -4154,8 +4153,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet8: TPage
       Caption = '8'
-      ClientWidth = 381
-      ClientHeight = 430
+      ClientWidth = 389
+      ClientHeight = 438
       ImageIndex = 7
       object Label20: TLabel
         Left = 70
@@ -4271,7 +4270,7 @@ object f_catgen: Tf_catgen
         TabOrder = 0
         TabStop = True
         VisibleColCount = 1
-        VisibleRowCount = 1
+        VisibleRowCount = 10
       end
       object Button10: TButton
         Left = 134
@@ -4299,7 +4298,7 @@ object f_catgen: Tf_catgen
     object Exitbt: TButton
       Left = 406
       Height = 25
-      Top = 2
+      Top = 4
       Width = 75
       BorderSpacing.InnerBorder = 2
       Caption = 'Close'

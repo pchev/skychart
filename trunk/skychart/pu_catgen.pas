@@ -142,6 +142,7 @@ type
     RadioGroup6: TRadioGroup;
     CheckBox7: TCheckBox;
     Button12: TButton;
+    procedure FormShow(Sender: TObject);
     procedure PageControl1PageChanged(Sender: TObject);
     procedure binarycatChange(Sender: TObject);
     procedure DirectoryEdit1AcceptDirectory(Sender: TObject; var Value: String);
@@ -234,7 +235,6 @@ type
     Procedure FindRegion15(ar,de : double; var lg : integer);
     Procedure FindRegion7(ar,de : double; var hemis : char ; var zone,S : integer);
     Procedure FindRegion(ar,de : double; var hemis : char ; var zone,S : integer);
-    Function PadZeros(x : string ; l :integer) : string;
     Procedure Createfiles;
     Procedure CreateTxtfiles;
     Procedure Closefiles;
@@ -604,7 +604,6 @@ pageDefault : begin
      GroupBox7.Visible:=(RadioGroup1.ItemIndex=4);
     end;
 pageDetails : begin
-//     ListIndex:=0;
      getsampledata(ListBox1.Items[0]);
      SetListIndex;
     end;
@@ -615,9 +614,6 @@ pageBuild : begin
      if radiogroup1.ItemIndex=4 then begin
        radiogroup4.Visible:=false;
        groupbox6.Visible:=false;
-     end else begin
-       radiogroup4.Visible:=true;
-       groupbox6.Visible:=true;
      end;
     end;
 end;
@@ -1331,15 +1327,6 @@ S  := S1+j1*k+j2;
 zone := Trunc(abs(del))*100 + Trunc(Frac(abs(del))*60) ;
 end;
 
-Function Tf_catgen.PadZeros(x : string ; l :integer) : string;
-const zero = '000000000000';
-var p : integer;
-begin
-x:=trim(x);
-p:=l-length(x);
-result:=copy(zero,1,p)+x;
-end;
-
 Procedure Tf_catgen.Createfiles;
 var i,n,m : integer;
     f : file;
@@ -1893,6 +1880,7 @@ if savedialog1.execute then begin
     renamefile(savedialog1.filename,savedialog1.filename+'.old');
   end;
   ini:=Tinifile.Create(savedialog1.filename);
+  ini.writeInteger('Page1','binarycat',binarycat.itemindex);
   ini.writeInteger('Page1','type',RadioGroup1.itemindex);
   ini.writeString('Page1','shortname',edit4.text);
   ini.writeString('Page1','longname',edit5.text);
@@ -1964,8 +1952,8 @@ opendialog1.filterindex:=2;
 opendialog1.DefaultExt:='.prj';
 opendialog1.filename:='';
 if opendialog1.execute then begin
- showmessage(opendialog1.Files[0]);
   ini:=Tinifile.Create(opendialog1.Files[0]);
+  binarycat.itemindex:=ini.ReadInteger('Page1','binarycat',0);
   RadioGroup1.itemindex:=ini.ReadInteger('Page1','type',RadioGroup1.itemindex);
   edit4.text:=ini.readString('Page1','shortname',edit4.text);
   edit5.text:=ini.readString('Page1','longname',edit5.text);
@@ -2049,6 +2037,16 @@ end;
 procedure Tf_catgen.PageControl1PageChanged(Sender: TObject);
 begin
   Panel1.Visible:=PageControl1.PageIndex<=pageBuild;
+end;
+
+procedure Tf_catgen.FormShow(Sender: TObject);
+begin
+pagecontrol1.PageIndex:=pageFiles;
+nextbt.enabled:=true;
+prevbt.enabled:=false;
+exitbt.Visible:=true;
+endbt.Visible:=false;
+endbt.enabled:=false;
 end;
 
 procedure Tf_catgen.Button3Click(Sender: TObject);

@@ -37,7 +37,7 @@ uses
   {$endif}
   cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
-  u_constant, u_util, blcksock, synsock, lazjpeg, dynlibs,
+  pu_config_catalog, u_constant, u_util, blcksock, synsock, lazjpeg, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, CDC_IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
@@ -84,7 +84,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
-    CatGen1: TAction;
+    SetupCatalog: TAction;
     HomePage1: TMenuItem;
     Maillist1: TMenuItem;
     BugReport1: TMenuItem;
@@ -415,7 +415,6 @@ type
     ControlPanel1: TMenuItem;
     ViewFullScreen: TAction;
     procedure BugReport1Click(Sender: TObject);
-    procedure CatGen1Execute(Sender: TObject);
     procedure FileClose1Execute(Sender: TObject);
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -428,6 +427,7 @@ type
     procedure Maillist1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
+    procedure SetupCatalogExecute(Sender: TObject);
     procedure SetupColourExecute(Sender: TObject);
     procedure SetupDisplayExecute(Sender: TObject);
     procedure SetupFinderExecute(Sender: TObject);
@@ -539,6 +539,7 @@ type
     ConfigObservatory: Tf_config_observatory;
     ConfigDisplay: Tf_config_display;
     ConfigPictures: Tf_config_pictures;
+    ConfigCatalog: Tf_config_catalog;
     cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB : Boolean;
     InitialChartNum: integer;
@@ -558,12 +559,14 @@ type
     procedure ApplyConfigObservatory(Sender: TObject);
     procedure ApplyConfigDisplay(Sender: TObject);
     procedure ApplyConfigPictures(Sender: TObject);
+    procedure ApplyConfigCatalog(Sender: TObject);
     procedure SetChildFocus(Sender: TObject);
     procedure SetNightVision(night: boolean);
     procedure SetupObservatoryPage(page:integer);
     procedure SetupTimePage(page:integer);
     procedure SetupDisplayPage(pagegroup:integer);
     procedure SetupPicturesPage(page:integer);
+    procedure SetupCatalogPage(page:integer);
   {$ifdef win32}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -642,7 +645,7 @@ implementation
 
 uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
-     pu_manualtelescope,pu_catgen, pu_catgenadv, pu_progressbar;
+     pu_manualtelescope;
 
 
 function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
@@ -920,15 +923,6 @@ procedure Tf_main.FileClose1Execute(Sender: TObject);
 begin
   if (MultiDoc1.ActiveObject is Tf_chart)and(MultiDoc1.ChildCount>1) then
    MultiDoc1.ActiveChild.close;
-end;
-
-procedure Tf_main.CatGen1Execute(Sender: TObject);
-begin
-if f_catgen=nil then f_catgen:=Tf_catgen.create(self);
-if f_catgenadv=nil then f_catgenadv:=Tf_catgenadv.Create(self);
-if f_progress=nil then f_progress:=Tf_progress.Create(self);
-FormPos(f_catgen,mouse.CursorPos.x,mouse.CursorPos.y);
-f_catgen.ShowModal;
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
@@ -2017,6 +2011,46 @@ begin
  activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
 end;
 
+procedure Tf_main.SetupCatalogExecute(Sender: TObject);
+begin
+SetupCatalogPage(0);
+end;
+
+procedure Tf_main.SetupCatalogPage(page:integer);
+begin
+if ConfigCatalog=nil then begin
+   ConfigCatalog:=Tf_config_catalog.Create(self);
+   {$ifdef win32} ScaleForm(ConfigCatalog,Screen.PixelsPerInch/96);{$endif}
+   ConfigCatalog.Notebook1.ShowTabs:=true;
+   ConfigCatalog.Notebook1.PageIndex:=0;
+   ConfigCatalog.onApplyConfig:=ApplyConfigCatalog;
+end;
+{$ifdef win32}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
+ConfigCatalog.ccat^:=catalog.cfgcat;
+ConfigCatalog.cshr^:=catalog.cfgshr;
+ConfigCatalog.cplot^:=def_cfgplot;
+ConfigCatalog.csc^:=def_cfgsc;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigCatalog.csc^:=sc.cfgsc^;
+   ConfigCatalog.cplot^:=sc.plot.cfgplot^;
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigCatalog.cmain^:=cfgm;
+formpos(ConfigCatalog,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigCatalog.Notebook1.PageIndex:=page;
+ConfigCatalog.showmodal;
+if ConfigCatalog.ModalResult=mrOK then begin
+ ConfigCatalog.ActivateGCat;
+ activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
+end;
+end;
+
+procedure Tf_main.ApplyConfigCatalog(Sender: TObject);
+begin
+ ConfigCatalog.ActivateGCat;
+ activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
+end;
 
 procedure Tf_main.SetupColourExecute(Sender: TObject);
 begin
