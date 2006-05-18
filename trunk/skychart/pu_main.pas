@@ -4056,9 +4056,7 @@ f_main.SetLpanel1('Socket error '+inttostr(sock.lasterror)+'.  '+sock.GetErrorDe
 end;
 
 procedure TTCPDaemon.ShowSocket;
-
 var locport:string;
-
 begin
 sock.GetSins;
 locport:=inttostr(sock.GetLocalSinPort);
@@ -4289,6 +4287,7 @@ end;
 procedure Tf_main.ViewInfoExecute(Sender: TObject);
 begin
 f_info.setpage(0);
+f_info.serverinfo.Caption:=f_main.serverinfo;
 f_info.show;
 f_info.bringtofront;
 end;

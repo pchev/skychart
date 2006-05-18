@@ -153,9 +153,9 @@ object f_info: Tf_info
   object PageControl1: TPageControl
     Height = 370
     Width = 639
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TCP/IP Connection'
@@ -191,10 +191,18 @@ object f_info: Tf_info
         ClientWidth = 639
         FullRepaint = False
         TabOrder = 1
+        object serverinfo: TLabel
+          Left = 232
+          Height = 14
+          Top = 10
+          Width = 57
+          Color = clNone
+          ParentColor = False
+        end
         object Button2: TButton
           Left = 12
           Height = 25
-          Top = 1
+          Top = 2
           Width = 75
           BorderSpacing.InnerBorder = 2
           Caption = 'Refresh'
@@ -202,7 +210,7 @@ object f_info: Tf_info
           TabOrder = 0
         end
         object CheckBox1: TCheckBox
-          Left = 136
+          Left = 104
           Height = 28
           Top = 2
           Width = 101
@@ -294,9 +302,7 @@ object f_info: Tf_info
         TabOrder = 1
         OnDblClick = Memo1DblClick
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
-        Gutter.OnChange = nil
         Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
@@ -625,7 +631,6 @@ object f_info: Tf_info
         Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
         ReadOnly = True
         RightEdge = 0
-        SelectedColor.OnChange = nil
         TabWidth = 10
       end
     end
