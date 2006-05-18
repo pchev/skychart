@@ -41,6 +41,7 @@ type
   { Tf_info }
 
   Tf_info = class(TForm)
+    serverinfo: TLabel;
     PageControl1: TPageControl;
     Panel1: TPanel;
     Button1: TButton;
