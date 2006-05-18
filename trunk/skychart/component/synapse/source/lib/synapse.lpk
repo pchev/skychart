@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <CONFIG>
   <Package Version="2">
-    <PathDelim Value="\"/>
     <Name Value="synapse"/>
     <CompilerOptions>
       <Version Value="5"/>
-      <PathDelim Value="\"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
       <CodeGeneration>
         <Generate Value="Faster"/>
@@ -16,7 +14,7 @@
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Files Count="26">
+    <Files Count="28">
       <Item1>
         <Filename Value="asn1util.pas"/>
         <UnitName Value="asn1util"/>
@@ -121,6 +119,14 @@
         <Filename Value="tlntsend.pas"/>
         <UnitName Value="tlntsend"/>
       </Item26>
+      <Item27>
+        <Filename Value="clamsend.pas"/>
+        <UnitName Value="clamsend"/>
+      </Item27>
+      <Item28>
+        <Filename Value="synaser.pas"/>
+        <UnitName Value="synaser"/>
+      </Item28>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="1">

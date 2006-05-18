@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.007.002 |
+| Project : Ararat Synapse                                       | 002.007.023 |
 |==============================================================================|
 | Content: MIME support procedures and functions                               |
 |==============================================================================|
@@ -61,13 +61,7 @@ interface
 
 uses
   SysUtils, Classes,
-{$IFDEF LINUX}
-  {$IFDEF FPC}
   synafpc,
-  {$ENDIF}
-{$ELSE}
-  Windows,
-{$ENDIF}
   synachar, synacode, synautil, mimeinln;
 
 type

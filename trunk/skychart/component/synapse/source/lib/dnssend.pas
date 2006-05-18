@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.007.000 |
+| Project : Ararat Synapse                                       | 002.007.001 |
 |==============================================================================|
 | Content: DNS client                                                          |
 |==============================================================================|
@@ -251,25 +251,13 @@ end;
 
 function TDNSSend.ReverseIP6(Value: AnsiString): AnsiString;
 var
-  ip6: TSockAddrIn6;
+  ip6: TIp6bytes;
+  n: integer;
 begin
-  ip6 := FSock.StrToIP6(Value);
-  Result := ip6.sin6_addr.S_un_b.s_b16
-    + '.' + ip6.sin6_addr.S_un_b.s_b15
-    + '.' + ip6.sin6_addr.S_un_b.s_b14
-    + '.' + ip6.sin6_addr.S_un_b.s_b13
-    + '.' + ip6.sin6_addr.S_un_b.s_b12
-    + '.' + ip6.sin6_addr.S_un_b.s_b11
-    + '.' + ip6.sin6_addr.S_un_b.s_b10
-    + '.' + ip6.sin6_addr.S_un_b.s_b9
-    + '.' + ip6.sin6_addr.S_un_b.s_b8
-    + '.' + ip6.sin6_addr.S_un_b.s_b7
-    + '.' + ip6.sin6_addr.S_un_b.s_b6
-    + '.' + ip6.sin6_addr.S_un_b.s_b5
-    + '.' + ip6.sin6_addr.S_un_b.s_b4
-    + '.' + ip6.sin6_addr.S_un_b.s_b3
-    + '.' + ip6.sin6_addr.S_un_b.s_b2
-    + '.' + ip6.sin6_addr.S_un_b.s_b1;
+  ip6 := StrToIP6(Value);
+  Result := char(ip6[15]);
+  for n := 14 downto 0 do
+    Result := Result + '.' + char(ip6[n]);
 end;
 
 function TDNSSend.CompressName(const Value: AnsiString): AnsiString;
@@ -363,7 +351,7 @@ var
   RType, Len, j, x, y, z, n: Integer;
   R: AnsiString;
   t1, t2, ttl: integer;
-  ip6: TSockAddrIn6;
+  ip6: TIp6bytes;
 begin
   Result := '';
   R := '';
@@ -393,28 +381,9 @@ begin
         end;
       QTYPE_AAAA:
         begin
-//          FillChar(ip6, SizeOf(ip6), 0);
-          ip6.sin6_addr.S_un_b.s_b1 := Char(FBuffer[j]);
-          ip6.sin6_addr.S_un_b.s_b2 := Char(FBuffer[j + 1]);
-          ip6.sin6_addr.S_un_b.s_b3 := Char(FBuffer[j + 2]);
-          ip6.sin6_addr.S_un_b.s_b4 := Char(FBuffer[j + 3]);
-          ip6.sin6_addr.S_un_b.s_b5 := Char(FBuffer[j + 4]);
-          ip6.sin6_addr.S_un_b.s_b6 := Char(FBuffer[j + 5]);
-          ip6.sin6_addr.S_un_b.s_b7 := Char(FBuffer[j + 6]);
-          ip6.sin6_addr.S_un_b.s_b8 := Char(FBuffer[j + 7]);
-          ip6.sin6_addr.S_un_b.s_b9 := Char(FBuffer[j + 8]);
-          ip6.sin6_addr.S_un_b.s_b10 := Char(FBuffer[j + 9]);
-          ip6.sin6_addr.S_un_b.s_b11 := Char(FBuffer[j + 10]);
-          ip6.sin6_addr.S_un_b.s_b12 := Char(FBuffer[j + 11]);
-          ip6.sin6_addr.S_un_b.s_b13 := Char(FBuffer[j + 12]);
-          ip6.sin6_addr.S_un_b.s_b14 := Char(FBuffer[j + 13]);
-          ip6.sin6_addr.S_un_b.s_b15 := Char(FBuffer[j + 14]);
-          ip6.sin6_addr.S_un_b.s_b16 := Char(FBuffer[j + 15]);
-          ip6.sin6_family := word(AF_INET6);
-          ip6.sin6_port := 0;
-          ip6.sin6_flowinfo := 0;
-          ip6.sin6_scope_id := 0;
-          R := FSock.IP6ToStr(ip6);
+          for n := 0 to 15 do
+            ip6[n] := ord(FBuffer[j + n]);
+          R := IP6ToStr(ip6);
         end;
       QTYPE_NS, QTYPE_MD, QTYPE_MF, QTYPE_CNAME, QTYPE_MB,
         QTYPE_MG, QTYPE_MR, QTYPE_PTR, QTYPE_X25, QTYPE_NSAP,
