@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 004.008.001 |
+| Project : Ararat Synapse                                       | 004.009.001 |
 |==============================================================================|
 | Content: support procedures and functions                                    |
 |==============================================================================|
-| Copyright (c)1999-2004, Lukas Gebauer                                        |
+| Copyright (c)1999-2005, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c) 1999-2004.               |
+| Portions created by Lukas Gebauer are Copyright (c) 1999-2005.               |
 | Portions created by Hernan Sanchez are Copyright (c) 2000.                   |
 | All Rights Reserved.                                                         |
 |==============================================================================|
@@ -58,15 +58,25 @@ unit synautil;
 interface
 
 uses
-{$IFDEF LINUX}
-  Libc,
-{$ELSE}
+{$IFDEF WIN32}
   Windows,
+{$ELSE}
+  {$IFDEF FPC}
+  UnixUtil, Unix, BaseUnix,
+  {$ELSE}
+  Libc,
+  {$ENDIF}
 {$ENDIF}
 {$IFDEF CIL}
   System.IO,
 {$ENDIF}
-  SysUtils, Classes;
+  SysUtils, Classes, SynaFpc;
+
+type
+{:binary form of IPv6 adress (for string conversion routines)}
+  TIp6Bytes = array [0..15] of Byte;
+{:binary form of IPv6 adress (for string conversion routines)}
+  TIp6Words = array [0..7] of Word;
 
 {:Return your timezone bias from UTC time in minutes.}
 function TimeZoneBias: integer;
@@ -131,11 +141,11 @@ function SetUTTime(Newdt: TDateTime): Boolean;
 
 {:Return current value of system timer with precizion 1 millisecond. Good for
  measure time difference.}
-function GetTick: ULong;
+function GetTick: LongWord;
 
 {:Return difference between two timestamps. It working fine only for differences
  smaller then maxint. (difference must be smaller then 24 days.)}
-function TickDelta(TickOld, TickNew: ULong): ULong;
+function TickDelta(TickOld, TickNew: LongWord): LongWord;
 
 {:Return two characters, which ordinal values represents the value in byte
  format. (High-endian)}
@@ -161,6 +171,18 @@ function IsIP6(const Value: string): Boolean;
 
 {:Returns a string with the "Host" ip address converted to binary form.}
 function IPToID(Host: string): string;
+
+{:Convert IPv6 address from their string form to binary byte array.}
+function StrToIp6(value: string): TIp6Bytes;
+
+{:Convert IPv6 address from binary byte array to string form.}
+function Ip6ToStr(value: TIp6Bytes): string;
+
+{:Convert IPv4 address from their string form to binary.}
+function StrToIp(value: string): integer;
+
+{:Convert IPv4 address from binary to string form.}
+function IpToStr(value: integer): string;
 
 {:Dump binary buffer stored in a string to a result string.}
 function DumpStr(const Buffer: Ansistring): string;
@@ -341,19 +363,18 @@ var
 {==============================================================================}
 
 function TimeZoneBias: integer;
-{$IFDEF LINUX}
+{$IFNDEF WIN32}
+{$IFNDEF FPC}
 var
   t: TTime_T;
   UT: TUnixTime;
 begin
-{$IFNDEF FPC}
   __time(@T);
   localtime_r(@T, UT);
   Result := ut.__tm_gmtoff div 60;
 {$ELSE}
-  __time(T);
-  localtime_r(T, UT);
-  Result := ut.tm_gmtoff div 60;
+begin
+  Result := TZSeconds div 60;
 {$ENDIF}
 {$ELSE}
 var
@@ -688,7 +709,7 @@ end;
 {==============================================================================}
 
 function GetUTTime: TDateTime;
-{$IFNDEF LINUX}
+{$IFDEF WIN32}
 {$IFNDEF FPC}
 var
   st: TSystemTime;
@@ -711,23 +732,26 @@ begin
   result := SystemTimeToDateTime(st);
 {$ENDIF}
 {$ELSE}
+{$IFNDEF FPC}
 var
   TV: TTimeVal;
-  TZ: Ttimezone;
-  PZ: PTimeZone;
 begin
-  TZ.tz_minuteswest := 0;
-  TZ.tz_dsttime := 0;
-  PZ := @TZ;
-  gettimeofday(TV, PZ);
+  gettimeofday(TV, nil);
   Result := UnixDateDelta + (TV.tv_sec + TV.tv_usec / 1000000) / 86400;
+{$ELSE}
+var
+  TV: TimeVal;
+begin
+  fpgettimeofday(@TV, nil);
+  Result := UnixDateDelta + (TV.tv_sec + TV.tv_usec / 1000000) / 86400;
+{$ENDIF}
 {$ENDIF}
 end;
 
 {==============================================================================}
 
 function SetUTTime(Newdt: TDateTime): Boolean;
-{$IFNDEF LINUX}
+{$IFDEF WIN32}
 {$IFNDEF FPC}
 var
   st: TSystemTime;
@@ -750,6 +774,7 @@ begin
   Result := SetSystemTime(stw);
 {$ENDIF}
 {$ELSE}
+{$IFNDEF FPC}
 var
   TV: TTimeVal;
   d: double;
@@ -764,13 +789,23 @@ begin
   TV.tv_sec := trunc(d);
   TV.tv_usec := trunc(frac(d) * 1000000);
   Result := settimeofday(TV, TZ) <> -1;
+{$ELSE}
+var
+  TV: TimeVal;
+  d: double;
+begin
+  d := (newdt - UnixDateDelta) * 86400;
+  TV.tv_sec := trunc(d);
+  TV.tv_usec := trunc(frac(d) * 1000000);
+  Result := fpsettimeofday(@TV, nil) <> -1;
+{$ENDIF}
 {$ENDIF}
 end;
 
 {==============================================================================}
 
-{$IFDEF LINUX}
-function GetTick: ULong;
+{$IFNDEF WIN32}
+function GetTick: LongWord;
 var
   Stamp: TTimeStamp;
 begin
@@ -778,15 +813,31 @@ begin
   Result := Stamp.Time;
 end;
 {$ELSE}
-function GetTick: ULong;
+function GetTick: LongWord;
+var
+  tick, freq: TLargeInteger;
+{$IFDEF VER100}
+  x: TLargeInteger;
+{$ENDIF}
 begin
-  Result := Windows.GetTickCount;
+  if Windows.QueryPerformanceFrequency(freq) then
+  begin
+    Windows.QueryPerformanceCounter(tick);
+{$IFDEF VER100}
+    x.QuadPart := (tick.QuadPart / freq.QuadPart) * 1000;
+    Result := x.LowPart;
+{$ELSE}
+    Result := Trunc((tick / freq) * 1000) and High(LongWord)
+{$ENDIF}
+  end
+  else
+    Result := Windows.GetTickCount;
 end;
 {$ENDIF}
 
 {==============================================================================}
 
-function TickDelta(TickOld, TickNew: ULong): ULong;
+function TickDelta(TickOld, TickNew: LongWord): LongWord;
 begin
 //if DWord is signed type (older Deplhi),
 // then it not work properly on differencies larger then maxint!
@@ -795,8 +846,8 @@ begin
   begin
     if TickNew < TickOld then
     begin
-      TickNew := TickNew + ULong(MaxInt) + 1;
-      TickOld := TickOld + ULong(MaxInt) + 1;
+      TickNew := TickNew + LongWord(MaxInt) + 1;
+      TickOld := TickOld + LongWord(MaxInt) + 1;
     end;
     Result := TickNew - TickOld;
     if TickNew < TickOld then
@@ -954,21 +1005,183 @@ begin
 end;
 
 {==============================================================================}
-//Hernan Sanchez
 function IPToID(Host: string): string;
 var
   s: string;
   i, x: Integer;
 begin
   Result := '';
-  for x := 1 to 3 do
+  for x := 0 to 3 do
   begin
     s := Fetch(Host, '.');
     i := StrToIntDef(s, 0);
     Result := Result + Chr(i);
   end;
-  i := StrToIntDef(Host, 0);
-  Result := Result + Chr(i);
+end;
+
+{==============================================================================}
+
+function StrToIp(value: string): integer;
+var
+  s: string;
+  i, x: Integer;
+begin
+  Result := 0;
+  for x := 0 to 3 do
+  begin
+    s := Fetch(value, '.');
+    i := StrToIntDef(s, 0);
+    Result := (256 * Result) + i;
+  end;
+end;
+
+{==============================================================================}
+
+function IpToStr(value: integer): string;
+var
+  x1, x2: word;
+  y1, y2: byte;
+begin
+  Result := '';
+  x1 := value div $10000;
+  x2 := value mod $10000;
+  y1 := x1 div $100;
+  y2 := x1 mod $100;
+  Result := inttostr(y1) + '.' + inttostr(y2) + '.';
+  y1 := x2 div $100;
+  y2 := x2 mod $100;
+  Result := Result + inttostr(y1) + '.' + inttostr(y2);
+end;
+
+{==============================================================================}
+
+function StrToIp6(Value: string): TIp6Bytes;
+var
+ IPv6: TIp6Words;
+ Index: Integer;
+ ZeroAt: Integer;
+ n: integer;
+ b1, b2: byte;
+ s: string;
+ x: integer;
+begin
+  for n := 0 to 15 do
+    Result[n] := 0;
+  for n := 0 to 7 do
+    Ipv6[n] := 0;
+  Index := 0;
+  ZeroAt := -1;
+
+  while Value <> '' do
+  begin
+    if Index > 7 then
+      Exit;
+    s := fetch(value, ':');
+    if s = '@' then
+      break;
+    if s = '' then
+    begin
+      ZeroAt := Index;
+      IPv6[Index] := 0;
+    end
+    else
+    begin
+      x := StrToIntDef('$' + s, -1);
+      if (x > 65535) or (x < 0) then
+        Exit;
+      IPv6[Index] := x;
+    end;
+    Inc(Index);
+  end;
+  if ZeroAt >= 0 then
+  Begin
+    x := Index - ZeroAt - 1;
+    for n := 1 to x do
+      IPv6[7 - n + 1] := Ipv6[ZeroAt + x - 1 + n];
+    for n := ZeroAt + 1 to Index - 1 do
+      IPv6[n] := 0;
+  End;
+  for n := 0 to 7 do
+  begin
+    b1 := ipv6[n] div 256;
+    b2 := ipv6[n] mod 256;
+    Result[n * 2] := b1;
+    Result[(n * 2) + 1] := b2;
+  end;
+end;
+
+{==============================================================================}
+//based on routine by the Free Pascal development team
+function Ip6ToStr(value: TIp6Bytes): string;
+var
+  i, x: byte;
+  zr1,zr2: set of byte;
+  zc1,zc2: byte;
+  have_skipped: boolean;
+  ip6w: TIp6words;
+begin
+  zr1 := [];
+  zr2 := [];
+  zc1 := 0;
+  zc2 := 0;
+  for i := 0 to 7 do
+  begin
+    x := i * 2;
+    ip6w[i] := value[x] * 256 + value[x + 1];
+    if ip6w[i] = 0 then
+    begin
+      include(zr2, i);
+      inc(zc2);
+    end
+    else
+    begin
+      if zc1 < zc2 then
+      begin
+        zc1 := zc2;
+        zr1 := zr2;
+        zc2 := 0;
+        zr2 := [];
+      end;
+    end;
+  end;
+  if zc1 < zc2 then
+  begin
+    zc1 := zc2;
+    zr1 := zr2;
+  end;
+  SetLength(Result, 8*5-1);
+  SetLength(Result, 0);
+  have_skipped := false;
+  for i := 0 to 7 do
+  begin
+    if not(i in zr1) then
+    begin
+      if have_skipped then
+      begin
+        if Result = '' then
+          Result := '::'
+        else
+          Result := Result + ':';
+        have_skipped := false;
+      end;
+      Result := Result + IntToHex(Ip6w[i], 1) + ':';
+    end
+    else
+    begin
+      have_skipped := true;
+    end;
+  end;
+  if have_skipped then
+    if Result = '' then
+      Result := '::0'
+    else
+      Result := Result + ':';
+
+  if Result = '' then
+    Result := '::0';
+  if not (7 in zr1) then
+    SetLength(Result, Length(Result)-1);
+  Result := LowerCase(result);
 end;
 
 {==============================================================================}
@@ -1471,38 +1684,26 @@ end;
 
 function PosCRLF(const Value: AnsiString; var Terminator: AnsiString): integer;
 var
-  p1, p2, p3, p4: integer;
-const
-  t1 = #$0d + #$0a;
-  t2 = #$0a + #$0d;
-  t3 = #$0d;
-  t4 = #$0a;
+  n, l: integer;
 begin
+  Result := -1;
   Terminator := '';
-  p1 := Pos(t1, Value);
-  p2 := Pos(t2, Value);
-  p3 := Pos(t3, Value);
-  p4 := Pos(t4, Value);
-  if p1 > 0 then
-    Terminator := t1;
-  Result := p1;
-  if (p2 > 0) then
-    if (Result = 0) or (p2 < Result) then
+  l := length(value);
+  for n := 1 to l do
+    if value[n] in [#$0d, #$0a] then
     begin
-      Result := p2;
-      Terminator := t2;
-    end;
-  if (p3 > 0) then
-    if (Result = 0) or (p3 < Result) then
-    begin
-      Result := p3;
-      Terminator := t3;
-    end;
-  if (p4 > 0) then
-    if (Result = 0) or (p4 < Result) then
-    begin
-      Result := p4;
-      Terminator := t4;
+      Result := n;
+      Terminator := Value[n];
+      if n <> l then
+        case value[n] of
+          #$0d:
+            if value[n + 1] = #$0a then
+              Terminator := #$0d + #$0a;
+          #$0a:
+            if value[n + 1] = #$0d then
+              Terminator := #$0a + #$0d;
+        end;
+      Break;
     end;
 end;
 
@@ -1553,7 +1754,7 @@ end;
 {$IFNDEF CIL}
 function IncPoint(const p: pointer; Value: integer): pointer;
 begin
-  Result := pointer(integer(p) + Value);
+  Result := PChar(p) + Value;
 end;
 {$ENDIF}
 
@@ -1775,7 +1976,7 @@ end;
 {==============================================================================}
 function GetTempFile(const Dir, prefix: AnsiString): AnsiString;
 {$IFNDEF FPC}
-{$IFNDEF LINUX}
+{$IFDEF WIN32}
 var
   Path: AnsiString;
   x: integer;
@@ -1785,7 +1986,7 @@ begin
 {$IFDEF FPC}
   Result := GetTempFileName(Dir, Prefix);
 {$ELSE}
-  {$IFDEF LINUX}
+  {$IFNDEF WIN32}
     Result := tempnam(Pointer(Dir), Pointer(prefix));
   {$ELSE}
     {$IFDEF CIL}

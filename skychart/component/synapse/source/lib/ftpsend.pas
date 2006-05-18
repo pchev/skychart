@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 003.004.005 |
+| Project : Ararat Synapse                                       | 003.004.007 |
 |==============================================================================|
 | Content: FTP client                                                          |
 |==============================================================================|
@@ -1738,14 +1738,14 @@ begin
     if Value[1] = '+' then
     begin
       os := Value;
+      Delete(Value, 1, 1);
       flr := TFTPListRec.create;
+      flr.FileName := SeparateRight(Value, #9);
       s := Fetch(Value, ',');
       while s <> '' do
       begin
         if s[1] = #9 then
-        begin
-          flr.FileName := Copy(s, 2, Length(s) - 1);
-        end;
+          Break;
         case s[1] of
           '/':
             flr.Directory := true;
