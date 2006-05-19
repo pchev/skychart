@@ -101,7 +101,7 @@ Function EncryptStr(Str,Pwd: String; Encode: Boolean=true): String;
 Function DecryptStr(Str,Pwd: String): String;
 function strtohex(str:string):string;
 function hextostr(str:string):string;
-{$ifdef unix}
+{$ifdef linux}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 {$endif}
 {$ifdef win32}
@@ -879,8 +879,12 @@ begin
  GetLocalTime(lt);GetSystemTime(st);
  result:=round(24000000*(SystemTimeToDateTime(lt)-SystemTimeToDateTime(st)))/1000000;
 {$endif}
-{$ifdef unix}
+{$ifdef linux}
   result:=TzSeconds / 3600;
+{$endif}
+{$ifdef darwin}
+  //todo: darwin
+  result:=0;
 {$endif}
 end;
 
@@ -1040,6 +1044,7 @@ var
   i: Integer;
 begin
 result:='';
+if str='' then exit;
 for i:=1 to length(str) do
   result:=result+inttohex(ord(str[i]),2);
 end;
@@ -1049,6 +1054,7 @@ var
   i,k: Integer;
 begin
 result:='';
+if str='' then exit;
 for i:=0 to (length(str)-1) div 2 do begin
   k:=strtointdef('$'+str[2*i+1]+str[2*i+2],-1);
   if k>0 then
@@ -1075,9 +1081,15 @@ end;
 
 
 Function Exec(cmd: string; hide: boolean=true): integer;
-{$ifdef unix}
+{$ifdef linux}
 begin
  result:=fpSystem(cmd);
+end;
+{$endif}
+{$ifdef darwin}
+begin
+ //toto: darwin
+ result:=0;
 end;
 {$endif}
 {$ifdef win32}
@@ -1113,9 +1125,14 @@ end;
 {$endif}
 
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
-{$ifdef unix}
+{$ifdef linux}
 begin
  fpSystem(cmd+' &');
+end;
+{$endif}
+{$ifdef darwin}
+begin
+ //toto: darwin
 end;
 {$endif}
 {$ifdef win32}
@@ -1151,7 +1168,7 @@ begin
   Result := ShellExecute(Application.MainForm.Handle, nil, StrPCopy(zFileName, FileName),
                          StrPCopy(zParams, ''), StrPCopy(zDir, ''), SW_SHOWNOACTIVATE);
 {$endif}
-{$ifdef unix}
+{$ifdef linux}
 var cmd,p1,p2,p3,p4: string;
 begin
   cmd:=trim(words(OpenFileCMD,blank,1,1));
@@ -1165,9 +1182,14 @@ begin
   else if p4='' then result:=ExecFork(cmd,p1,p2,p3,FileName)
   else result:=ExecFork(cmd,p1,p2,p3,p4,FileName);
 {$endif}
+{$ifdef darwin}
+begin
+ //toto: darwin
+ result:=0;
+{$endif}
 end;
 
-{$ifdef unix}
+{$ifdef linux}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 var
   parg: array[1..7] of PChar;

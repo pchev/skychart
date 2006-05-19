@@ -5,6 +5,10 @@ unit passqlite;
 {$H+}
 {$ENDIF}
 
+{$IFDEF darwin}
+{$DEFINE LINUX}
+{$ENDIF}
+
 {$IFNDEF LINUX}
 {$DEFINE WIN32}
 {$ELSE}
@@ -31,7 +35,7 @@ unit passqlite;
 interface
 
 uses
-  //{$IFDEF FPC}LCLIntf, {$ENDIF}
+  {$IFDEF FPC}LCLIntf, {$ENDIF}
     {$IFDEF WIN32}Windows, {$ENDIF}
     Classes, SysUtils, SyncObjs,
     libsqlite,

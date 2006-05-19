@@ -248,7 +248,7 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       URL_DSS_NAME9 = 'IRAS 12 micron';
       URL_DSS9 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=IRAS%2012%20micron&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
 
-{$ifdef unix}
+{$ifdef linux}
       DefaultFontName='Helvetica';
       DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
       DefaultFontSize=10;
@@ -259,6 +259,18 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       DefaultPrintCmd2='gimp';
       DefaultTmpDir=DefaultPrivateDir+'/tmp';
       Default_dssdrive='/mnt/cdrom';
+{$endif}
+{$ifdef darwin}
+      DefaultFontName='Helvetica';
+      DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
+      DefaultFontSize=10;
+      DefaultPrivateDir='~/cartes_du_ciel';
+      Defaultconfigfile='~/.cartesduciel.ini';
+      SharedDir='/usr/share/skychart';
+      DefaultPrintCmd1='kghostview';
+      DefaultPrintCmd2='gimp';
+      DefaultTmpDir=DefaultPrivateDir+'/tmp';
+      Default_dssdrive='/Volumes';
 {$endif}
 {$ifdef win32}
       DefaultFontName='Arial';
@@ -483,11 +495,15 @@ type
                   
 // external library
 const
-{$ifdef unix}
+{$ifdef linux}
       lib404   = 'libplan404.so';
       libz = 'libz.so';
 //      libsatxy = 'libsatxy.so';
 //      libsatxyfm='Satxyfm';
+{$endif}
+{$ifdef darwin}
+      lib404   = 'libplan404.dylib';
+      libz = 'libz.dylib';
 {$endif}
 {$ifdef win32}
       lib404 = 'libplan404.dll';
@@ -509,7 +525,10 @@ type
          ipla : integer;
      end;
      PPlanetData = ^TPlanetData;
-Function Plan404( pla : PPlanetData):integer; cdecl; external lib404;
+     TPlan404=Function( pla : PPlanetData):integer; cdecl;
+var Plan404 : TPlan404;
+    Plan404ok: boolean;
+    Plan404lib: longword;
 
 //  zlib
 type

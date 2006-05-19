@@ -103,10 +103,16 @@ type
   {$ifdef win32}
   Const dsslibname = 'libgetdss.dll';
   {$endif}
-  {$ifdef unix}
+  {$ifdef linux}
   Const dsslibname = 'libgetdss.so';
   {$endif}
+  {$ifdef darwin}
+  Const dsslibname = 'libgetdss.dylib';
+  {$endif}
 
+{$ifdef unix}
+{$DEFINE RETRY_MOUNT}
+{$endif}
 
 implementation
 
@@ -312,11 +318,11 @@ end else if Fenabled then begin    // RealSky cdrom
       showmodal;
       if ModalResult<>mrOK then exit;
       platename:=pl.plate_name[listbox1.itemindex+1];
-    {$ifdef unix}
+    {$ifdef RETRY_MOUNT}
     repeat
     {$endif}
     rc:=ImageExtractFromPlate(addr(i),Pchar(platename));
-    {$ifdef unix}
+    {$ifdef RETRY_MOUNT}
     if rc>0 then begin
       if (MessageDlg(i.pPrompt1+blank+inttostr(rc)+crlf+i.pPrompt2+blank+cfgdss.dssdrive,mtConfirmation,[mbOK, mbCancel],0)<>mrOK) then
          rc:=-999;
@@ -325,11 +331,11 @@ end else if Fenabled then begin    // RealSky cdrom
     {$endif}
   end
   else begin
-   {$ifdef unix}
+   {$ifdef RETRY_MOUNT}
     repeat
     {$endif}
      rc:=ImageExtract(addr(i));
-    {$ifdef unix}
+    {$ifdef RETRY_MOUNT}
     if rc>0 then begin
       if (MessageDlg(i.pPrompt1+blank+inttostr(rc)+crlf+i.pPrompt2+blank+cfgdss.dssdrive,mtConfirmation,[mbOK, mbCancel],0)<>mrOK) then
          rc:=-999;

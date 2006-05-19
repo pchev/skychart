@@ -4,6 +4,11 @@ unit pasodbc;
 {$MODE Delphi}
 {$H+}
 {$ENDIF}
+
+{$IFDEF darwin}
+{$DEFINE LINUX}
+{$ENDIF}
+
 {$IFDEF LINUX}
 {$DEFINE UNIX}
 {$ELSE}

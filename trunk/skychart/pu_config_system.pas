@@ -249,7 +249,7 @@ dbuser.Text:=cmain.dbuser;
 dbpass.Text:=cmain.dbpass;
 prgdir.text:=cmain.prgdir;
 persdir.text:=cmain.persdir;
-{$ifdef unix}
+{$ifdef linux}
 LinuxDesktopBox.itemIndex:=LinuxDesktop;
 LinuxCmd.Text:=OpenFileCMD;
 if LinuxDesktopBox.itemIndex<>2 then LinuxCmd.Enabled:=false;

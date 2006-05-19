@@ -101,6 +101,9 @@ Function Slash(nom : string) : string;
 {$ifdef linux}
 const slashchar='/';
 {$endif}
+{$ifdef darwin}
+const slashchar='/';
+{$endif}
 {$ifdef mswindows}
 const slashchar='\';
 {$endif}

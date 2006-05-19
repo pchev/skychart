@@ -33,8 +33,6 @@ uses
     Windows,
     //WinXP, // XP theme still not working with night vision
   {$endif}
-  {$ifdef unix}
-  {$endif}
   cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, u_constant, u_util, blcksock, synsock, lazjpeg, dynlibs,
@@ -1161,6 +1159,11 @@ if zlib<>0 then begin
   gzeof:= Tgzeof(GetProcAddress(zlib,'gzeof'));
   zlibok:=true;
 end else zlibok:=false;
+Plan404lib:=LoadLibrary(lib404);
+if Plan404lib<>0 then begin
+  Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
+  Plan404ok:=true;
+end else Plan404ok:=false;
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -3150,7 +3153,7 @@ section:='main';
 Config_Version:=ReadString(section,'version','0');
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 cfgm.language:=ReadString(section,'language',cfgm.language);
-{$ifdef unix}
+{$ifdef linux}
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
@@ -3544,7 +3547,7 @@ section:='main';
 WriteString(section,'version',cdcver);
 WriteString(section,'AppDir',appdir);
 WriteString(section,'PrivateDir',privatedir);
-{$ifdef unix}
+{$ifdef linux}
 WriteInteger(section,'LinuxDesktop',LinuxDesktop);
 WriteString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
