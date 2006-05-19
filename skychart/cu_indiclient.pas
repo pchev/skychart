@@ -194,7 +194,7 @@ try
     try
       plugin:=slash('plugins');
       localplugin:=directoryexists(plugin);
-      {$ifdef unix}
+      {$ifdef linux}
       plugin:=expandfilename(plugin);
       if localplugin then chdir(plugin);
       localplugin:=localplugin and fileexists(plugin+FIndiServer) and fileexists(plugin+FIndiDriver);
@@ -203,6 +203,9 @@ try
          FIndiDriver:='./'+FIndiDriver;
       end;
       FIndiServerPid:=ExecFork(FIndiServer,'-p',FTargetPort,'-r','0',FIndiDriver);
+      {$endif}
+      {$ifdef darwin}
+      // todo: darwin
       {$endif}
       {$ifdef win32}
       if localplugin then chdir(plugin);
@@ -244,7 +247,10 @@ if FServerStartedByMe then begin
     writetrace('Kill '+inttostr(FIndiServerPid));
     if FIndiServerPid<>0 then PostMessage(FIndiServerPid,WM_CLOSE,0,0);
   {$endif}
-  {$ifdef unix}
+  {$ifdef darwin}
+  // todo: darwin
+  {$endif}
+  {$ifdef linux}
     writetrace('Kill '+inttostr(FIndiServerPid));
     if FIndiServerPid<>0 then fpKill(FIndiServerPid,SIGKILL);
   {$endif}

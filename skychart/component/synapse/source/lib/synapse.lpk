@@ -14,119 +14,19 @@
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Files Count="28">
+    <Files Count="3">
       <Item1>
-        <Filename Value="asn1util.pas"/>
-        <UnitName Value="asn1util"/>
-      </Item1>
-      <Item2>
         <Filename Value="blcksock.pas"/>
         <UnitName Value="blcksock"/>
-      </Item2>
-      <Item3>
-        <Filename Value="dnssend.pas"/>
-        <UnitName Value="dnssend"/>
-      </Item3>
-      <Item4>
+      </Item1>
+      <Item2>
         <Filename Value="ftpsend.pas"/>
         <UnitName Value="ftpsend"/>
-      </Item4>
-      <Item5>
-        <Filename Value="ftptsend.pas"/>
-        <UnitName Value="ftptsend"/>
-      </Item5>
-      <Item6>
+      </Item2>
+      <Item3>
         <Filename Value="httpsend.pas"/>
         <UnitName Value="httpsend"/>
-      </Item6>
-      <Item7>
-        <Filename Value="imapsend.pas"/>
-        <UnitName Value="imapsend"/>
-      </Item7>
-      <Item8>
-        <Filename Value="ldapsend.pas"/>
-        <UnitName Value="ldapsend"/>
-      </Item8>
-      <Item9>
-        <Filename Value="mimeinln.pas"/>
-        <UnitName Value="mimeinln"/>
-      </Item9>
-      <Item10>
-        <Filename Value="mimemess.pas"/>
-        <UnitName Value="mimemess"/>
-      </Item10>
-      <Item11>
-        <Filename Value="mimepart.pas"/>
-        <UnitName Value="mimepart"/>
-      </Item11>
-      <Item12>
-        <Filename Value="nntpsend.pas"/>
-        <UnitName Value="nntpsend"/>
-      </Item12>
-      <Item13>
-        <Filename Value="pingsend.pas"/>
-        <UnitName Value="pingsend"/>
-      </Item13>
-      <Item14>
-        <Filename Value="pop3send.pas"/>
-        <UnitName Value="pop3send"/>
-      </Item14>
-      <Item15>
-        <Filename Value="slogsend.pas"/>
-        <UnitName Value="slogsend"/>
-      </Item15>
-      <Item16>
-        <Filename Value="smtpsend.pas"/>
-        <UnitName Value="smtpsend"/>
-      </Item16>
-      <Item17>
-        <Filename Value="snmpsend.pas"/>
-        <UnitName Value="snmpsend"/>
-      </Item17>
-      <Item18>
-        <Filename Value="sntpsend.pas"/>
-        <UnitName Value="sntpsend"/>
-      </Item18>
-      <Item19>
-        <Filename Value="synachar.pas"/>
-        <UnitName Value="synachar"/>
-      </Item19>
-      <Item20>
-        <Filename Value="synacode.pas"/>
-        <UnitName Value="synacode"/>
-      </Item20>
-      <Item21>
-        <Filename Value="synafpc.pas"/>
-        <UnitName Value="synafpc"/>
-      </Item21>
-      <Item22>
-        <Filename Value="synaicnv.pas"/>
-        <UnitName Value="synaicnv"/>
-      </Item22>
-      <Item23>
-        <Filename Value="synamisc.pas"/>
-        <UnitName Value="synamisc"/>
-      </Item23>
-      <Item24>
-        <Filename Value="synautil.pas"/>
-        <UnitName Value="synautil"/>
-      </Item24>
-      <Item25>
-        <Filename Value="synsock.pas"/>
-        <UnitName Value="synsock"/>
-      </Item25>
-      <Item26>
-        <Filename Value="tlntsend.pas"/>
-        <UnitName Value="tlntsend"/>
-      </Item26>
-      <Item27>
-        <Filename Value="clamsend.pas"/>
-        <UnitName Value="clamsend"/>
-      </Item27>
-      <Item28>
-        <Filename Value="synaser.pas"/>
-        <UnitName Value="synaser"/>
-      </Item28>
+      </Item3>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="1">
