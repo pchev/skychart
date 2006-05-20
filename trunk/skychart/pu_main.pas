@@ -977,6 +977,7 @@ try
  Fits:=TFits.Create(self);
  cdcdb.onInitializeDB:=InitializeDB;
  planet.cdb:=cdcdb;
+ f_search.cdb:=cdcdb;
  telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
  telescope.plugin:=def_cfgsc.ScopePlugin;
  if def_cfgsc.BackgroundImage='' then begin
@@ -1810,7 +1811,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
                              else sc.FindatRaDec(ar1,de1,0.00005,true);
         ShowIdentLabel;
         f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
-        if f_search.SearchKind in [0,2,3,4,5,8] then begin
+        if f_search.SearchKind in [0,2,3,4,5,6,7,8] then begin
           i:=quicksearch.Items.IndexOf(f_search.Num);
           if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
           if i>=0 then quicksearch.Items.Delete(i);

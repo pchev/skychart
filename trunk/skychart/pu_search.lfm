@@ -1,7 +1,7 @@
 object f_search: Tf_search
-  Left = 435
+  Left = 236
   Height = 326
-  Top = 113
+  Top = 105
   Width = 433
   HorzScrollBar.Page = 432
   VertScrollBar.Page = 325
@@ -14,8 +14,78 @@ object f_search: Tf_search
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 13
+  object CometPanel: TPanel
+    Left = 8
+    Height = 41
+    Top = 232
+    Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
+    TabOrder = 8
+    object CometFilter: TEdit
+      Left = 8
+      Height = 23
+      Top = 10
+      Width = 99
+      TabOrder = 0
+    end
+    object Button3: TButton
+      Left = 112
+      Height = 25
+      Top = 8
+      Width = 75
+      BorderSpacing.InnerBorder = 2
+      Caption = 'Filter ->'
+      OnClick = Button3Click
+      TabOrder = 1
+    end
+    object CometList: TComboBox
+      Left = 192
+      Height = 21
+      Top = 10
+      Width = 216
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      MaxLength = 0
+      TabOrder = 2
+    end
+  end
+  object AsteroidPanel: TPanel
+    Left = 8
+    Height = 41
+    Top = 232
+    Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
+    TabOrder = 9
+    object AsteroidFilter: TEdit
+      Left = 8
+      Height = 23
+      Top = 10
+      Width = 99
+      TabOrder = 0
+    end
+    object Button4: TButton
+      Left = 112
+      Height = 25
+      Top = 8
+      Width = 75
+      BorderSpacing.InnerBorder = 2
+      Caption = 'Filter ->'
+      OnClick = Button4Click
+      TabOrder = 1
+    end
+    object AsteroidList: TComboBox
+      Left = 192
+      Height = 21
+      Top = 10
+      Width = 216
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      MaxLength = 0
+      TabOrder = 2
+    end
+  end
   object PlanetPanel: TPanel
     Left = 7
     Height = 41
@@ -169,6 +239,7 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'ADS'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -178,6 +249,7 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'STF'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -197,6 +269,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'R'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -206,6 +279,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'S'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -214,6 +288,7 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = 'V'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -223,6 +298,7 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'NSV'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -232,6 +308,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'T'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -241,6 +318,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'U'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -250,6 +328,7 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = 'W'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -269,6 +348,7 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'TYC'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -278,6 +358,7 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'GSC'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -286,6 +367,7 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'HD'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -295,6 +377,7 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'BD'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -322,6 +405,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '1'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -331,6 +415,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '2'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -340,6 +425,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '3'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -349,6 +435,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '4'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -358,6 +445,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '5'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -366,6 +454,7 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '6'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -375,6 +464,7 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '7'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -384,6 +474,7 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '8'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -393,6 +484,7 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '9'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -402,6 +494,7 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '0'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -411,6 +504,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '<-'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = SpeedButton11Click
       end
@@ -420,6 +514,7 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = ' '
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -429,6 +524,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'C'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = SpeedButton13Click
       end
@@ -447,6 +543,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'M'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -456,6 +553,7 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'NGC'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -465,6 +563,7 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'IC'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -473,6 +572,7 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'PGC'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -482,6 +582,7 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'PK'
+        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
