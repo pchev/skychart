@@ -793,15 +793,15 @@ sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
            ('cdc_ast_elem_list',' ( elem_id INTEGER NOT NULL default "0", filedesc TEXT NOT NULL default "",'+
                            'PRIMARY KEY (elem_id))',''),
            ('cdc_ast_elem',' ( id TEXT NOT NULL default "0",'+
-                           'h REAL NOT NULL default "0", g REAL NOT NULL default "0",'+
-                           'epoch REAL NOT NULL default "0", mean_anomaly REAL NOT NULL default "0",'+
-                           'arg_perihelion REAL NOT NULL default "0", asc_node REAL NOT NULL default "0",'+
-                           'inclination REAL NOT NULL default "0", eccentricity REAL NOT NULL default "0",'+
-                           'semi_axis REAL NOT NULL default "0", ref TEXT NOT NULL default "",'+
+                           'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0",'+
+                           'epoch NUMERIC NOT NULL default "0", mean_anomaly NUMERIC NOT NULL default "0",'+
+                           'arg_perihelion NUMERIC NOT NULL default "0", asc_node NUMERIC NOT NULL default "0",'+
+                           'inclination NUMERIC NOT NULL default "0", eccentricity NUMERIC NOT NULL default "0",'+
+                           'semi_axis NUMERIC NOT NULL default "0", ref TEXT NOT NULL default "",'+
                            'name TEXT NOT NULL default "", equinox INTEGER NOT NULL default "0",'+
                            'elem_id INTEGER NOT NULL default "0", PRIMARY KEY (id,epoch))',''),
            ('cdc_ast_mag',' ( id TEXT NOT NULL default "",'+
-                          'jd REAL NOT NULL default "0", epoch REAL NOT NULL default "0",'+
+                          'jd NUMERIC NOT NULL default "0", epoch NUMERIC NOT NULL default "0",'+
                           'mag INTEGER NOT NULL default "0", elem_id INTEGER NOT NULL default "0",'+
                           'PRIMARY KEY (jd,id))','1'),
            ('cdc_com_name',' ( id TEXT NOT NULL default "0", name TEXT NOT NULL default "",'+
@@ -809,22 +809,22 @@ sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
            ('cdc_com_elem_list',' ( elem_id INTEGER NOT NULL default "0", filedesc TEXT NOT NULL default "",'+
                            'PRIMARY KEY (elem_id))',''),
            ('cdc_com_elem',' ( id TEXT NOT NULL default "0",'+
-                           'peri_epoch REAL NOT NULL default "0", peri_dist REAL NOT NULL default "0",'+
-                           'eccentricity REAL NOT NULL default "0",'+
-                           'arg_perihelion REAL NOT NULL default "0", asc_node REAL NOT NULL default "0",'+
-                           'inclination REAL NOT NULL default "0",'+
-                           'epoch REAL NOT NULL default "0",'+
-                           'h REAL NOT NULL default "0", g REAL NOT NULL default "0",'+
+                           'peri_epoch NUMERIC NOT NULL default "0", peri_dist NUMERIC NOT NULL default "0",'+
+                           'eccentricity NUMERIC NOT NULL default "0",'+
+                           'arg_perihelion NUMERIC NOT NULL default "0", asc_node NUMERIC NOT NULL default "0",'+
+                           'inclination NUMERIC NOT NULL default "0",'+
+                           'epoch NUMERIC NOT NULL default "0",'+
+                           'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0",'+
                            'name TEXT NOT NULL default "", equinox INTEGER NOT NULL default "0",'+
                            'elem_id INTEGER NOT NULL default "0", PRIMARY KEY (id,epoch))',''),
            ('cdc_fits',' (filename TEXT NOT NULL default "", '+
                            'catalogname TEXT  NOT NULL default "", '+
                            'objectname TEXT NOT NULL default "", '+
-                           'ra REAL NOT NULL default "0",'+
-                           'de REAL NOT NULL default "0", '+
-                           'width REAL NOT NULL default "0", '+
-                           'height REAL NOT NULL default "0", '+
-                           'rotation  REAL NOT NULL default "0", '+
+                           'ra NUMERIC NOT NULL default "0",'+
+                           'de NUMERIC NOT NULL default "0", '+
+                           'width NUMERIC NOT NULL default "0", '+
+                           'height NUMERIC NOT NULL default "0", '+
+                           'rotation  NUMERIC NOT NULL default "0", '+
                            'PRIMARY KEY (ra,de))','2'),
            ('cdc_country','(country TEXT NOT NULL default "",'+
                            'name TEXT NOT NULL default "",'+
@@ -833,10 +833,10 @@ sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
                            'country TEXT NOT NULL ,'+
                            'location TEXT NOT NULL ,'+
                            'type TEXT NOT NULL ,'+
-                           'latitude REAL NOT NULL ,'+
-                           'longitude REAL NOT NULL ,'+
-                           'elevation REAL NOT NULL ,'+
-                           'timezone REAL NOT NULL ,'+
+                           'latitude NUMERIC NOT NULL ,'+
+                           'longitude NUMERIC NOT NULL ,'+
+                           'elevation NUMERIC NOT NULL ,'+
+                           'timezone NUMERIC NOT NULL ,'+
                            'PRIMARY KEY (locid))','3,4')
            ));
 numsqlindex=4;
