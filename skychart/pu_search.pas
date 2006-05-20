@@ -28,15 +28,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util,
+uses u_constant, u_util, cu_database,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Buttons, LResources;
+
+const maxcombo = 50;
 
 type
 
   { Tf_search }
 
   Tf_search = class(TForm)
+    Button3: TButton;
+    Button4: TButton;
+    AsteroidList: TComboBox;
+    CometList: TComboBox;
+    CometPanel: TPanel;
+    CometFilter: TEdit;
+    AsteroidPanel: TPanel;
+    AsteroidFilter: TEdit;
     RadioGroup1: TRadioGroup;
     IDPanel: TPanel;
     Button1: TButton;
@@ -91,6 +101,8 @@ type
     ConstPanel: TPanel;
     Label5: TLabel;
     ConstBox: TComboBox;
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure NumButtonClick(Sender: TObject);
     procedure SpeedButton11Click(Sender: TObject);
@@ -108,12 +120,14 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
+    cometid, astid : array[0..maxcombo] of string;
     NebNameAR : array of single;
     NebNameDE : array of single;
     numNebName : integer;
     Fnightvision:boolean;
   public
     { Public declarations }
+    cdb: Tcdcdb;
     Num : string;
     ra,de: double;
     SearchKind : integer;
@@ -158,6 +172,26 @@ begin
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
+CometFilter.Text:='C/'+FormatDateTime('yyyy',now);
+RadioGroup1Click(Sender);
+end;
+
+procedure Tf_search.Button3Click(Sender: TObject);
+var list: TStringList;
+begin
+list:=TStringList.Create;
+Cdb.GetCometList(CometFilter.Text,maxcombo,list,cometid);
+CometList.Items.Assign(list);
+CometList.ItemIndex:=0;
+end;
+
+procedure Tf_search.Button4Click(Sender: TObject);
+var list: TStringList;
+begin
+list:=TStringList.Create;
+Cdb.GetAsteroidList(AsteroidFilter.Text,maxcombo,list,Astid);
+AsteroidList.Items.Assign(list);
+AsteroidList.ItemIndex:=0;
 end;
 
 procedure Tf_search.SpeedButton11Click(Sender: TObject);
@@ -184,6 +218,8 @@ case searchkind of
       de:=NebNameDE[NebNameBox.itemindex];
       end;
   3 : num:='HR'+inttostr(cfgshr.StarNameHR[starnamebox.itemindex]);
+  6 : num:=CometList.Text;
+  7 : num:=AsteroidList.Text;
   8 : num:=PlanetBox.Text;
   9 : num:=ConstBox.Text;
   else num:=Id.text;
@@ -212,6 +248,8 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
   1 : begin                      //neb name
       IDPanel.Visible:=false;
@@ -219,6 +257,8 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=true;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
   2 : begin                      //star
       IDPanel.Visible:=true;
@@ -231,6 +271,8 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
   3 : begin                      //star name
       IDPanel.Visible:=false;
@@ -238,6 +280,8 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=true;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
   4 : begin                      //var
       IDPanel.Visible:=true;
@@ -250,6 +294,8 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
   5 : begin                      //dbl
       IDPanel.Visible:=true;
@@ -262,30 +308,26 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
   6 : begin                      //comet
-      IDPanel.Visible:=true;
-      NumPanel.Visible:=false;
-      NebPanel.Visible:=false;
-      StarPanel.Visible:=false;
-      VarPanel.Visible:=false;
-      DblPanel.Visible:=false;
+      IDPanel.Visible:=false;
       PlanetPanel.Visible:=false;
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=true;
+      AsteroidPanel.Visible:=false;
       end;
   7 : begin                      //asteroid
-      IDPanel.Visible:=true;
-      NumPanel.Visible:=false;
-      NebPanel.Visible:=false;
-      StarPanel.Visible:=false;
-      VarPanel.Visible:=false;
-      DblPanel.Visible:=false;
+      IDPanel.Visible:=false;
       PlanetPanel.Visible:=false;
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=true;
       end;
   8 : begin                      //planet
       IDPanel.Visible:=false;
@@ -293,6 +335,8 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
   9 : begin                      //const
       IDPanel.Visible:=false;
@@ -300,6 +344,8 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=true;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
   10 : begin                      //Other Line Catalog , not active at the moment as Catgen do not allow to create the index for line cat. 
       IDPanel.Visible:=true;
@@ -312,6 +358,8 @@ case RadioGroup1.itemindex of
       NebNamePanel.Visible:=false;
       StarNamePanel.Visible:=false;
       ConstPanel.Visible:=false;
+      CometPanel.Visible:=false;
+      AsteroidPanel.Visible:=false;
       end;
 end;
 end;
