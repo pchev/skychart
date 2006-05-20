@@ -147,7 +147,7 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Height = 480
@@ -164,7 +164,7 @@ object f_config: Tf_config
       AutoExpand = True
       BackgroundColor = clBtnHighlight
       Color = clBtnHighlight
-      DefaultItemHeight = 14
+      DefaultItemHeight = 15
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True

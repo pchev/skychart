@@ -279,10 +279,10 @@ begin
   i:=f_config.Treeview1.selected.absoluteindex;
   cmain.configpage:=i;
   if MultiDoc1.ActiveObject=f_config_catalog1 then begin
-    if f_config_catalog1.Notebook1.ActivePage='Page1' then f_config_catalog1.ActivateGCat;
+    if f_config_catalog1.Notebook1.ActivePage=f_config_catalog1.Notebook1.Page[0].Caption then f_config_catalog1.ActivateGCat;
   end;
   if MultiDoc1.ActiveObject=f_config_system1 then begin
-    if f_config_system1.Notebook1.ActivePage='Page1' then f_config_system1.ActivateDBchange;
+    if f_config_system1.Notebook1.ActivePage=f_config_system1.Notebook1.Page[0].Caption then f_config_system1.ActivateDBchange;
   end;
   
   // todo: remove after correction of Lazarus bug 905
