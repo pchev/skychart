@@ -1,18 +1,14 @@
 unit pasodbc;
 
 {$IFDEF FPC}
-{$MODE Delphi}
-{$H+}
-{$ENDIF}
-
-{$IFDEF darwin}
-{$DEFINE LINUX}
-{$ENDIF}
-
-{$IFDEF LINUX}
-{$DEFINE UNIX}
+  {$MODE Delphi}
+  {$H+}
 {$ELSE}
-{$DEFINE WIN32}
+  {$IFNDEF LINUX}
+    {$DEFINE WIN32}
+  {$ELSE}
+    {$DEFINE UNIX}
+  {$ENDIF}
 {$ENDIF}
 
 //ODBC-32 interface for libsql

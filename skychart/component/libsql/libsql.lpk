@@ -5,6 +5,7 @@
     <CompilerOptions>
       <Version Value="5"/>
       <SearchPaths>
+        <OtherUnitFiles Value="jansql/"/>
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(Target_OS)"/>
       </SearchPaths>
       <CodeGeneration>

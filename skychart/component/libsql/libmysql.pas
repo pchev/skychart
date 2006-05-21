@@ -2,11 +2,13 @@
 unit libmysql;
 
 {$IFDEF FPC}
-{$MODE Delphi}
-{$H+}
+  {$MODE Delphi}
+  {$H+}
 {$ELSE}
   {$IFNDEF LINUX}
-  {$DEFINE WIN32}
+    {$DEFINE WIN32}
+  {$ELSE}
+    {$DEFINE UNIX}
   {$ENDIF}
 {$ENDIF}
 
@@ -77,11 +79,18 @@ const
   //The embedded mysql daemon
   MYSQLD_DLL_LOCATION = 'libmysqld.dll';
 {$ELSE}
+{$IFDEF darwin}
+  //libmysql client
+  DEFAULT_DLL_LOCATION = 'libmysqlclient.dylib';
+  //The embedded mysql daemon
+  MYSQLD_DLL_LOCATION = 'libmysqld.dylib';
+{$ELSE}
   DEFAULT_DLL_LOCATION = 'libmysqlclient.so';
   //embedded mysql on unix, not really sure:
   MYSQLD_DLL_LOCATION = 'libmysqld.so'; // ?
   //you may want to specify a full path like:
   //DEFAULT_DLL_LOCATION = '/usr/local/lib/mysql/libmysqlclient.so';
+{$ENDIF}
 {$ENDIF}
 
 
@@ -935,31 +944,31 @@ begin
   else
     LibraryPath := DLL;
 
-  if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+  if hDLL = 0 then
   begin
     //check if library exists
     {$IFNDEF FPC}
     hDLL := GetModuleHandle(PChar(DLL));
     {$ENDIF}
-    if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+    if hDLL = 0 then
       LibLoaded := False
     else LibLoaded := True;
-    if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+    if not LibLoaded then
     begin //Now retry with other API
       hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL)){$ELSE}LoadLibrary(DLL){$ENDIF};
       {$IFNDEF WIN32}
          // try version specific library, some distribution do not provide the generic link
          {$IFDEF MYSQL4}
-         if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+         if hDLL = 0 then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.14')){$ELSE}LoadLibrary(DLL+'.14'){$ENDIF}; // mysql 4.1, 5.0
-         if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+         if hDLL = 0 then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.12')){$ELSE}LoadLibrary(DLL+'.12'){$ENDIF}; // mysql 4.0
          {$ELSE}
-         if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+         if hDLL = 0 then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.10')){$ELSE}LoadLibrary(DLL+'.10'){$ENDIF}; // mysql 3.23
          {$ENDIF}
       {$ENDIF}
-      if hDLL <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+      if hDLL <> 0 then
         LibLoaded := True;
     end;
     Result := LibLoaded;
@@ -975,7 +984,7 @@ begin
       end;
   end;
 
-  if hDLL <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+  if hDLL <> 0 then
     with MyFunc do
       begin
         mysql_server_init := nil;
@@ -1134,9 +1143,8 @@ end;
 
 initialization
 
-
 finalization
-  if (hDLLClient <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF}) and ClientLoaded then
+  if (hDLLClient <> 0) and ClientLoaded then
     try
       if Assigned (myprocs.mysql_server_end) then
         try
@@ -1149,7 +1157,7 @@ finalization
       {$ENDIF};
     except //should not happen, but if debugging, find out why.
     end;
-  if (hDLLEmbedded <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF}) and EmbeddedLoaded then
+  if (hDLLEmbedded <> 0) and EmbeddedLoaded then
     try
       //embedded mysql has unloading issues//
       //temporary fix: just don't unload (...)

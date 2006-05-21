@@ -15,7 +15,7 @@ uses {$IFDEF WIN32}Windows, {$ENDIF} Classes, SysUtils{, DateUtils}{, System};
 //{$IFDEF FPC}, LCLIntf{$ENDIF};
 
 type
-  TDBMajorType = (dbANSI, dbMySQL, dbSQLite, dbODBC);
+  TDBMajorType = (dbANSI, dbMySQL, dbSQLite, dbODBC, dbJanSQL);
   TDBSubType = (dbDefault, dbSqlite2, dbSqlite3, dbSqlite3W, dbODBC32);
 
 const

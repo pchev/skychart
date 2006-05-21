@@ -1,19 +1,17 @@
 unit passqlite;
 
 {$IFDEF FPC}
-{$MODE Delphi}
-{$H+}
-{$ENDIF}
-
-{$IFDEF darwin}
-{$DEFINE LINUX}
-{$ENDIF}
-
-{$IFNDEF LINUX}
-{$DEFINE WIN32}
+  {$MODE Delphi}
+  {$H+}
 {$ELSE}
-{$DEFINE UNIX}
+  {$IFNDEF LINUX}
+    {$DEFINE WIN32}
+  {$ELSE}
+    {$DEFINE UNIX}
+  {$ENDIF}
 {$ENDIF}
+
+//{$DEFINE SQLITE3_STATIC}
 
 {
  februari 17. 2004
@@ -35,11 +33,15 @@ unit passqlite;
 interface
 
 uses
-  {$IFDEF FPC}LCLIntf, {$ENDIF}
+  //{$IFDEF FPC}LCLIntf, {$ENDIF}
     {$IFDEF WIN32}Windows, {$ENDIF}
     Classes, SysUtils, SyncObjs,
     libsqlite,
+    {$IFNDEF SQLITE3_STATIC}
     libsqlite3,
+    {$ELSE}
+    staticsqlite3,
+    {$ENDIF}
     utf8util,
     passql,
     sqlsupport;
@@ -66,6 +68,35 @@ type
   //it'll just try to load both.
   TSQLiteVersion = (svAuto, sv2 {v2_1..v2_8}, sv3{v3_0});
 
+  TBooleanPragmas = (
+    bpAutoVacuum, bpCaseSensitiveLike, bpCountChanges,
+    bdDefaultSynchronous, bpEmptyResultCallbacks,
+    bpFullColumnNames, bpShortColumnNames);
+
+  const
+  TBooleanPragmaNames: array [TBooleanPragmas{0..6}] of String = (
+    'auto_vacuum', 'case_sensitive_like', 'count_changes',
+    'default_synchronous', 'empty_result_callbacks',
+    'full_column_names', 'short_column_names');
+
+  type
+  TBooleanPragmaSet = set of TBooleanPragmas;
+
+  TSynchronousPragmaValues = (spOff, spNormal, spFull);
+  TTempStorePragmaValues = (tpDefault, tpFile, tpMemory);
+
+  TSQLitePragmas = record
+    BooleanPragmas: TBooleanPragmaSet;
+    //integer and string pragma's:
+    CacheSize,
+    DefaultCacheSize,
+    Pagesize: Integer;
+    Synchronous: TSynchronousPragmaValues;
+    TempStore: TTempStorePragmaValues;
+    Encoding,
+    TempStoreDirectory: String;
+  end;
+
   TLiteDB = class (TSQLDB)
   private
     FPort: Integer;
@@ -85,11 +116,20 @@ type
     function FetchRowW3 (Handle: THandle; var row: TResultRow): Boolean;
     procedure FreeResult2 (Handle: THandle);
     procedure FreeResult3 (Handle: THandle);
+    procedure SetBooleanPragmas(const Value: TBooleanPragmaSet);
+    procedure SetPragmaCacheSize(const Value: Integer);
+    procedure SetPragmaDefaultCacheSize(const Value: Integer);
+    procedure SetPragmaEncoding(const Value: String);
+    procedure SetPragmaPagesize(const Value: Integer);
+    procedure SetPragmaSynchronous(const Value: TSynchronousPragmaValues);
+    procedure SetPragmaTempStore(const Value: TTempStorePragmaValues);
+    procedure SetPragmaTempStoreDirectory(const Value: String);
 
 
   protected
     FBaseInfo:TBaseInfo; //keep track of open databases for thread-safety
     Fsv: TSQLiteVersion;
+    FSQLitePragmas: TSQLitePragmas;
     procedure FillDBInfo; override;
     procedure StoreFields3 (Fields: TStrings; Stmt: Pointer);
     procedure StoreRow3 (row: TResultRow; Stmt: Pointer; Wide: Boolean; var QS: Integer);
@@ -99,6 +139,11 @@ type
 
     function Query (SQL:String):Boolean; override;
     function QueryW (SQL:WideString):Boolean; override;
+
+    //testing new query implementations by Dak_Alpha
+    {Params is List of TMemoryStream blob objects!}
+    function Query3 (SQL:String; Params: TList = nil):Boolean;
+    function Query3W (SQL:WideString):Boolean;
 
     function Execute (SQL: String): THandle; override;
     function ExecuteW (SQL: WideString): THandle; override;
@@ -113,7 +158,7 @@ type
     function Connect (Host, User, Pass:String; DataBase:String=''):Boolean; override;
     procedure Close; override;
     procedure StartTransaction; override;
-    procedure Commit; override;
+    procedure Commit; override;                   
     procedure Rollback; override;
     function GetErrorMessage:String; override;
     function GetErrorMessageW:WideString; overload;
@@ -125,7 +170,25 @@ type
     function DumpDatabase (Table:String): Boolean; override;
     function ShowTables: Boolean; override;
     function Vacuum: Boolean; override;
-    constructor Create (AOwner:TComponent; DataBase:String=''); reintroduce; overload;
+
+    function SetPragma (Pragma: String; Value: Boolean): Boolean; overload;
+    function SetPragma (Pragma: String; Value: Integer): Boolean; overload;
+    function SetPragma (Pragma: String; Value: String): Boolean; overload;
+
+    function GetPragma (Pragma: String): String;
+    function GetPragmaInt (Pragma: String): Integer;
+    function GetPragmaBool (Pragma: String): Boolean;
+
+    function RefreshPragmas: Boolean;
+
+    //By Dak_Alpha
+    function GetUserVersion(DataBase: string=''): integer;                         //Dak_Alpha
+    function SetUserVersion(Version: integer; Database: string=''): Boolean;       //Dak_Alpha
+    function TableExists(const TableName: string; DataBase: string=''): Boolean;   //Dak_Alpha
+    function AddSQLFunction(const FuncName: string; const nArg: Integer; SQLFuncion: TSQLFunction): Boolean;   //Dak_Alpha
+    
+    constructor Create (AOwner:TComponent);  overload; override;
+    constructor Create (AOwner:TComponent; DataBase:String); reintroduce; overload;
     destructor  Destroy; override;
   published
     //hide these properties by making them read-only
@@ -134,6 +197,19 @@ type
     property User:String read FUser;
     property Password:String read FPass;
     property SQLiteVersion: TSQLiteVersion read Fsv write SetSQLiteVersion;
+
+    property PragmasBoolean: TBooleanPragmaSet read FSQLitePragmas.BooleanPragmas write SetBooleanPragmas;
+
+    property PragmaCacheSize: Integer read FSQLitePragmas.CacheSize write SetPragmaCacheSize;
+    property PragmaDefaultCacheSize: Integer read FSQLitePragmas.DefaultCacheSize write SetPragmaDefaultCacheSize;
+    property PragmaPagesize: Integer read FSQLitePragmas.Pagesize write SetPragmaPagesize;
+    property PragmaSynchronous: TSynchronousPragmaValues read FSQLitePragmas.Synchronous write SetPragmaSynchronous;
+    property PragmaTempStore: TTempStorePragmaValues read FSQLitePragmas.TempStore write SetPragmaTempStore;
+    property PragmaEncoding: String read FSQLitePragmas.Encoding write SetPragmaEncoding;
+    property PragmaTempStoreDirectory: String read FSQLitePragmas.TempStoreDirectory write SetPragmaTempStoreDirectory;
+
+
+
   end;
 
 
@@ -193,7 +269,7 @@ end;
 
 function QueryCallback(Sender: TObject; Columns: Integer; ColumnValues: Pointer; ColumnNames: Pointer): integer; cdecl;
 var S:TResultRow;
-    FieldName, Value:^PChar;
+    FieldNames, Value:^PChar;
     i,j:Integer;
 begin
   //nice, we got a row. get it.
@@ -219,7 +295,7 @@ begin
           end;
         if Columns > 0 then
           begin
-            FieldName := ColumnNames;
+            FieldNames := ColumnNames;
             Value := ColumnValues;
             for i := 0 to Columns - 1 do
               begin
@@ -231,17 +307,17 @@ begin
             if FFields.Count = 0 then //do only once per query
               for i := 0 to Columns - 1 do
                 begin
-                  j:=FFields.AddObject(FieldName^, TFieldDesc.Create);
+                  j:=FFields.AddObject(FieldNames^, TFieldDesc.Create);
                   with TFieldDesc (FFields.Objects [j]) do
                     begin
-                      name := FieldName^;
+                      name := FieldNames^;
   //                    table := '';
                       // etc.
                       //newer versions of sqlite contain more metainfo in next fields
                       //0..n, n+1..2n etc.
                       //todo...
                     end;
-                  inc(FieldName);
+                  inc(FieldNames);
                 end;
             if Assigned (FOnFetchRow) then
               try
@@ -320,6 +396,8 @@ begin
   inherited Create(AOwner);
   PrimaryKey := 'primary key';
   FDataBaseType := dbSqlite;
+  //don't. nasty side-effects and pretty useless anyhow:
+  //FDatabase := ':memory:'; //open memory database when set to active
   if DataBase<>'' then
     Use (DataBase);
 end;
@@ -334,6 +412,12 @@ function TLiteDB.Query(SQL: String): Boolean;
 var P,Q:PChar;
     i:Integer;
 begin
+  if Fsv = sv3 then
+    begin
+      Result := Query3(SQL);
+      exit;
+    end;
+
   Result := False;
   with FCurrentSet do
     begin
@@ -342,6 +426,7 @@ begin
          (FBaseInfo = nil) then
         begin
           FLastErrorText := 'Failed to load dll library';
+          FLastError := -1; //No SQLite error code                                 //Dak_Alpha
           if Assigned (OnError) then
             OnError (Self);
           exit;
@@ -445,11 +530,19 @@ var S, Q: Pointer;
     i: Integer;
     sr,qr: Integer;
 begin
+  (*
+  if Fsv = sv3 then
+    begin
+      Result := Query3W(SQL);
+      exit;
+    end;
+  *)
   if Fsv<>sv3 then //not sqlite version 3?
     begin //normal query
       Result := Query (EncodeUTF8(SQL));
       exit;
     end;
+    
   Result := False;
   with FCurrentSet do
     begin
@@ -458,6 +551,7 @@ begin
          (FBaseInfo = nil) then
         begin
           FLastErrorText := 'Failed to load dll library';
+          FLastError := -1; //No SQLite error code                                 //Dak_Alpha
           if Assigned (OnError) then
             OnError (Self);
           exit;
@@ -564,7 +658,7 @@ var B:TBaseInfo;
     P:PChar;
     FS: TFileStream;
     Header: String;
-
+    FLastError: Integer;                                      //Dak_Alpha
 begin
   Result := False;
   FActive := False;
@@ -663,9 +757,15 @@ begin
         sv3:
           begin
             if FUniCode then
-              SQLite3_open16(PWChar (DecodeUTF8(DataBase)), B.FHandle)
+              FLastError := SQLite3_open16(PWChar (DecodeUTF8(DataBase)), B.FHandle)
             else
-              SQLite3_open(PChar (DataBase), B.FHandle);
+              FLastError := SQLite3_open(PChar (DataBase), B.FHandle);
+            if FLastError <> SQLite_OK then
+            begin
+              P := SQLite3_errormsg(B.FHandle);
+              SQLite3_Close(B.FHandle);                                            //Dak_Alpha
+              b.FHandle := nil;                                                    //Dak_Alpha
+            end;
           end;
       end;
       if Assigned (B.FHandle) then
@@ -689,6 +789,7 @@ begin
       else
         begin
           FCurrentSet.FLastErrorText := P;
+          FCurrentSet.FLastError := -1; //No SQLite error code                     //Dak_Alpha
           B.Free;
           B := nil;
           Databases.Delete (Databases.IndexOf (Database));
@@ -707,11 +808,14 @@ begin
       else
         FBaseInfo := nil;
     end;
-  FDataBase := DataBase;
+  //leave name of property intact when setting active to false
+  if Database <> '' then
+    FDataBase := DataBase;
   CSConnect.Leave;
   if FActive then
     begin
       FillDBInfo;
+      RefreshPragmas;
       if FActive and Assigned(FOnOpen) then
         FOnOpen(Self);
     end;
@@ -724,6 +828,12 @@ begin
   Result := '';
   if FCurrentSet.FLastError = 0 then
     exit;
+  //Internal LibSQL error                                                          //Dak_Alpha
+  if FCurrentSet.FLastError < 0 then                                               //Dak_Alpha
+  begin                                                                            //Dak_Alpha
+    Result := FCurrentSet.FLastErrorText;                                          //Dak_Alpha
+    Exit;                                                                          //Dak_Alpha
+  end;                                                                             //Dak_Alpha
   if Assigned (FBaseInfo) then
     case Fsv of
       sv2:
@@ -906,8 +1016,12 @@ begin
 end;
 
 procedure TLiteDB.FillDBInfo;
+var
+  TempSet: TResultSet;                                                             //Dak_Alpha
 begin
   inherited; //clears tables and indexes
+  TempSet := FCurrentSet;                                                          //Dak_Alpha
+  UseResultSet(UniqueSetName);                                                     //Dak_Alpha
   //Miha:
   //get tables list
   if Query('SELECT name FROM sqlite_master WHERE type=''table'' ORDER BY name') then
@@ -915,6 +1029,9 @@ begin
   //get indexes list
   if Query('SELECT name FROM sqlite_master WHERE type=''index'' ORDER BY name') then
     Indexes := GetColumnAsStrings;
+    
+  DeleteResultSet(FCurrentSet.FName);                                              //Dak_Alpha
+  UseResultSet(TempSet);                                                           //Dak_Alpha
 end;
 
 function TLiteDB.Execute2(SQL: String): THandle;
@@ -1170,7 +1287,8 @@ begin
             SQLite_Float:   datatype := dtFloat;
             SQLite_Text:    datatype := dtWideString; //WideString
             SQLite_Blob:    datatype := dtBlob; //string
-            SQLite_Null:    datatype := dtNull;
+            //SQLITE_NULL seems to mean: untyped.
+            SQLite_Null:    datatype := dtString; //dtNull;
           else
             datatype := dtUnknown; //should not happen
           end;
@@ -1237,6 +1355,604 @@ begin
     end;
 end;
 
+//By Dak_Alpha
+function TLiteDB.GetUserVersion(DataBase: string=''): integer;
+var
+  ResultPtr: Pointer;
+  ResultStr: ^Pointer;
+  RowCount, ColCount: Integer;
+  ErrMsg: PChar;
+begin
+  if FActive and Assigned(FBaseInfo.FHandle) then
+    begin
+      FBaseInfo.CS.Enter;
+      try
+        if DataBase<>'' then DataBase := DataBase+'.';
+        SQLite3_GetTable(FBaseInfo.FHandle, PAnsiChar('PRAGMA '+DataBase+'user_version'),
+                         ResultPtr, RowCount, ColCount, ErrMsg);
+        if Assigned(ResultPtr) and (RowCount>0) and (ColCount>0) then
+        begin
+          ResultStr := ResultPtr;
+          Inc(ResultStr);
+          Result := StrToIntDef(PAnsiChar(ResultStr^), 0);
+        end
+        else
+        begin
+          Result := -1;
+        end;
+      finally
+        if Assigned(ErrMsg) then SQLite3_Free(ErrMsg);
+        if Assigned(ResultPtr) then SQLite3_FreeTable(ResultPtr);
+        FBaseInfo.CS.Leave;
+      end;
+    end
+  else
+    Result := -1;
+end;
+
+//By Dak_Alpha
+function TLiteDB.SetUserVersion(Version: integer; Database: string=''): Boolean;
+var
+  iTmp: Integer;
+  ErrMsg,SQLQuery:PAnsiChar;
+begin
+  Result := False;
+  if FActive and Assigned(FBaseInfo.FHandle) then
+  begin
+    FBaseInfo.CS.Enter;
+    if DataBase<>'' then DataBase := DataBase+'.';
+    //go around ResultSet machinery
+//    FormatQuery ('PRAGMA %uuser_version=%d', [Database, Version]);
+    ErrMsg := nil;
+    SQLQuery := PAnsiChar('PRAGMA '+DataBase+'user_version='+IntToStr(Version)+';');
+    iTmp := SQLite3_exec (FBaseInfo.FHandle, SQLQuery, nil, nil, ErrMsg);
+    if iTmp = SQLite_OK then Result := True;
+    if Assigned(ErrMsg) then SQLite_freemem(ErrMsg);
+    FBaseInfo.CS.Leave;
+  end;
+end;
+
+//By Dak_Alpha
+function TLiteDB.TableExists(const TableName: string; DataBase: string): Boolean;
+var
+  ResultPtr: Pointer;
+  ResultStr: ^Pointer;
+  RowCount, ColCount: Integer;
+  ErrMsg: PChar;
+begin
+  Result := False;
+  if FActive and Assigned(FBaseInfo.FHandle) then
+  begin
+    FBaseInfo.CS.Enter;
+    try
+      if DataBase<>'' then DataBase := DataBase+'.';
+      SQLite3_GetTable(FBaseInfo.FHandle, PAnsiChar('SELECT name FROM '+DataBase+'sqlite_master WHERE type LIKE ''table'' AND name LIKE '+QuotedStr(TableName)),
+                       ResultPtr, RowCount, ColCount, ErrMsg);
+      if Assigned(ResultPtr) and (RowCount>0) and (ColCount>0) then
+      begin
+        ResultStr := ResultPtr;
+        Inc(ResultStr);
+        Result := AnsiSameText(string(PAnsiChar(ResultStr^)), TableName);
+      end
+      else
+      begin
+        Result := False;
+      end;
+    finally
+      if Assigned(ErrMsg) then SQLite3_Free(ErrMsg);
+      if Assigned(ResultPtr) then SQLite3_FreeTable(ResultPtr);
+      FBaseInfo.CS.Leave;
+    end;
+  end;
+end;
+
+//by Dak_Alpha
+function TLiteDB.AddSQLFunction(const FuncName: string; const nArg: Integer;       //Dak_Alpha
+  SQLFuncion: TSQLFunction): Boolean;
+begin
+  Result := SQLite3_Create_Function(FBaseInfo.FHandle,PAnsiChar(FuncName),nArg,SQLITE_ANY,nil,@SQLFuncion,nil,nil) = SQLITE_OK;
+end;
+
+function TLiteDB.GetPragma(Pragma: String): String;
+begin
+  if FormatQuery ('PRAGMA %u', [Pragma]) then
+    Result := Results[0][0]
+  else
+    Result := '';
+end;
+
+function TLiteDB.GetPragmaBool(Pragma: String): Boolean;
+begin
+  if FormatQuery ('PRAGMA %u', [Pragma]) then
+    Result := Results[0].Format[0].AsBoolean
+  else
+    Result := False;
+end;
+
+function TLiteDB.GetPragmaInt(Pragma: String): Integer;
+//var s: String;
+begin
+  if FormatQuery ('PRAGMA %u', [Pragma]) then
+    begin
+      //s := Results[0][0];
+      //Result := StrToIntDef(s,0);
+      Result := Results[0].Format[0].AsInteger;
+    end
+  else
+    Result := -1;
+end;
+
+function TLiteDB.SetPragma(Pragma: String; Value: Boolean): Boolean;
+begin
+  Result := FormatQuery ('PRAGMA %u=%b', [Pragma, Value]);
+end;
+
+function TLiteDB.SetPragma(Pragma: String; Value: Integer): Boolean;
+begin
+  Result := FormatQuery ('PRAGMA %u=%d', [Pragma, Value]);
+end;
+
+function TLiteDB.SetPragma(Pragma, Value: String): Boolean;
+begin
+  Result := FormatQuery ('PRAGMA %u=%u', [Pragma, Value]);
+end;
+
+function TLiteDB.RefreshPragmas: Boolean;
+var i: TBooleanPragmas;
+begin
+  //Query all pragma information
+  with FSQLitePragmas do
+    begin
+      BooleanPragmas := [];
+      for i := low(TBooleanPragmas) to high(TBooleanPragmas) do
+        if GetPragmaBool(TBooleanPragmaNames[i]) then
+          BooleanPragmas := BooleanPragmas + [i];
+      CacheSize := GetPragmaInt('cache_size');
+      DefaultCacheSize := GetPragmaInt('default_cache_size');
+      Pagesize := GetPragmaInt('page_size');
+      Synchronous := TSynchronousPragmaValues(GetPragmaInt('synchronous'));
+      TempStore := TTempStorePragmaValues(GetPragmaInt('temp_store'));
+      Encoding := GetPragma('encoding');
+      TempStoreDirectory := GetPragma ('temp_store_directory');
+    end;
+  Result := True;
+end;
+
+
+//alternative quory methods as suggested by Dak_alfa
+(*
+function TLiteDB.DakQuery3(SQL: String): Boolean;
+var
+  SQLStatement: PAnsiChar;
+  Stmt: Pointer;
+  sr,qr: Integer;
+  FLastError: Integer;
+  Tail: Pointer;
+  i, columns,d: Integer;
+  rr: TResultRow;
+begin
+  Result := False;
+  with FCurrentSet do
+    begin
+      FHasResult := False;
+      if not DllLoaded or
+         (FBaseInfo = nil) then
+        begin
+          FLastErrorText := 'Failed to load dll library';
+          if Assigned (OnError) then
+            OnError (Self);
+          exit;
+        end;
+      Clear;
+
+      FSQL:=SQL;
+      if Assigned (OnBeforeQuery) then
+        OnBeforeQuery(Self, FSQL);
+      SQL:=FSQL;
+
+
+
+  SQLStatement := PAnsiChar(SQL);
+  
+  repeat
+
+    try
+      Clear;
+      FLastError := SQLite3_prepare(FBaseInfo.FHandle, SQLStatement, -1, Stmt, Tail{SQLStatement});
+      if FLastError = SQLite_OK then
+      begin
+        //This must be first, to get definition of columns even if table is include no rows
+        //This one you execute very pretty in function StoreFields3, but this must be first!
+        //if Not FieldDef then
+        StoreFields3 (FFields, Stmt);
+        {
+        begin
+          Columns := SQLite3_Column_count(Stmt);
+          for i := 0 to Columns - 1 do
+          begin
+            name := Sqlite3_Column_Name(Stmt, i);
+            _datatype := Sqlite3_Column_Type (Stmt, i);
+          end;
+        end;
+        }
+        sr := SQLite3_step (Stmt);
+
+        while sr=SQLITE_BUSY do
+        begin
+          sleep(0);
+          sr := SQLite3_step (Stmt);
+        end;
+
+        while sr=SQLITE_ROW do
+        begin
+          rr := TResultRow.Create;
+          rr.FFields := FFields; //copy pointer to ffields array
+          FRowList.Add(rr);
+          StoreRow3 (rr, Stmt, False, d);
+          //Geting simple fields of current row
+          //This one you execute very pretty in function StoreRow3
+          {
+          Columns := SQLite3_Column_count(Stmt);
+          for i := 0 to Columns - 1 do
+          begin
+            Value := SQLite3_Column_Text(Stmt, i);
+          end;
+          }
+          sr := SQLite3_step(Stmt);
+          while sr=SQLITE_BUSY do
+          begin
+            sleep(0);
+            sr := SQLite3_step (Stmt);
+          end;
+        end;
+
+        if sr in [SQLITE_ERROR, SQLITE_MISUSE] then
+          begin
+            FLastErrorText := SQLite3_errormsg(FBaseInfo.FHandle);
+            FLastError := SQLite3_errcode(FBaseInfo.FHandle);
+          end
+        else
+          begin
+            FLastErrorText := '';
+            FLastError := 0;
+          end;
+      end
+      else
+        FLastErrorText := SQLite3_errormsg (FBaseInfo.FHandle);
+        
+    finally
+      //I see this finalisation in others SQLite wrappers and works well
+      SQLite3_reset(Stmt); 
+      SQLite3_finalize(Stmt);
+    end;
+    SQLStatement := Tail;
+  until SQLStatement^ = #0; //This one solve problem with SQL Multi-Statement
+  end;
+    
+end;
+*)
+
+{Params is List of TMemoryStream blob objects!}
+function TLiteDB.Query3(SQL: String; Params: TList = nil): Boolean;
+var
+  SQLStatement,TmpSQL: PAnsiChar;
+  Stmt: Pointer;
+  sr: Integer;
+  Tail: Pointer;
+  i,d: Integer;
+  rr: TResultRow;
+  MStream: TObject;
+  BindCount, BindOffset: Integer;
+begin
+  Result := False;
+
+  BindOffset := 0;
+
+  with FCurrentSet do
+    begin
+      FHasResult := False;
+      if not DllLoaded or
+         (FBaseInfo = nil) then
+        begin
+          FLastErrorText := 'Failed to load dll library';
+          FLastError := -1; //No SQLite error code                                 //Dak_Alpha
+          if Assigned (OnError) then
+            OnError (Self);
+          exit;
+        end;
+      Clear;
+
+      if Assigned (OnBeforeQuery) then
+        begin
+          FSQL:=SQL;
+          OnBeforeQuery(Self, FSQL);
+          SQL:=FSQL;
+        end;
+
+      SQLStatement := PAnsiChar(SQL);
+
+      repeat
+        try
+          TmpSQL := SQLStatement;
+
+          FLastError := SQLite3_prepare(FBaseInfo.FHandle, SQLStatement, -1, Stmt, Tail{SQLStatement});
+          if FLastError = SQLite_OK then
+          begin
+
+            //Blobs processing
+            if Assigned(Params) and (Params.Count>0) then
+            begin
+              BindCount := SQLite3_BindParameterCount(Stmt);
+              if BindCount>(Params.Count-BindOffset) then
+              begin
+                FLastErrorText := 'Incorrect Params list count';
+                FLastError := -1; //No SQLite error code
+              end
+              else
+              begin
+                for i := 0 to BindCount-1 do
+                begin
+                  MStream := TObject(Params.Items[BindOffset]);
+                  if (MStream is TMemoryStream) then
+                  begin
+                    FLastError := SQLite3_Bind_Blob(Stmt, i+1, PChar(TMemoryStream(MStream).Memory), TMemoryStream(MStream).Size, nil);
+                    if FLastError <> SQLite_OK then
+                    begin
+                      FLastErrorText := SQLite3_errormsg(FBaseInfo.FHandle);
+                      Break;
+                    end;
+                    Inc(BindOffset);
+                  end
+                  else
+                  begin
+                    FLastErrorText := 'All items of Params list must be TMemoryStream objects';
+                    FLastError := -1; //No SQLite error code
+                    Break;
+                  end;
+                end;
+              end;
+              if FLastError <> SQLite_OK then
+              begin
+                FRowsAffected := 0;
+                FLastInsertID := 0;
+                Result := False;
+                FHasResult := False;
+                SQLite3_reset(Stmt);
+                SQLite3_finalize(Stmt);
+                Break;
+              end;
+            end;
+
+            sr := SQLite3_step (Stmt);
+            while sr=SQLITE_BUSY do
+            begin
+              sleep(0);
+              sr := SQLite3_step (Stmt);
+            end;
+
+            //Store ResultSet only if last query is executed
+            if PAnsiChar(Tail)^ = #0 then
+            begin
+              Clear;
+              FSQL := string(TmpSQL);
+
+              FCurrentSet.FColCount :=  SQLite3_Column_count(stmt);
+              StoreFields3 (FFields, Stmt);
+
+              while sr=SQLITE_ROW do
+              begin
+                Inc(FRowCount);
+                rr := TResultRow.Create;
+                rr.FFields := FFields; //copy pointer to ffields array
+                FRowList.Add(rr);
+                StoreRow3 (rr, Stmt, False, d);
+                sr := SQLite3_step(Stmt);
+                while sr=SQLITE_BUSY do
+                begin
+                  sleep(0);
+                  sr := SQLite3_step (Stmt);
+                end;
+              end;
+            end
+            else
+            begin
+              while sr=SQLITE_ROW do
+              begin
+                sr := SQLite3_step(Stmt);
+                while sr=SQLITE_BUSY do
+                begin
+                  sleep(0);
+                  sr := SQLite3_step (Stmt);
+                end;
+              end;
+            end;
+
+            if sr in [SQLITE_ERROR, SQLITE_MISUSE] then
+            begin
+              FLastErrorText := SQLite3_errormsg(FBaseInfo.FHandle);
+              FLastError := SQLite3_errcode(FBaseInfo.FHandle);
+              FRowsAffected := 0;
+              FLastInsertID := 0;
+              Result := False;
+              FHasResult := False;
+            end
+            else
+            begin
+              FRowsAffected := SQLite3_Changes(FBaseInfo.FHandle);
+              FLastInsertID := SQLite3_lastinsertrowid(FBaseInfo.FHandle);
+              FLastErrorText := '';
+              FLastError := 0;
+              Result := True;
+              FHasResult := True;
+            end;
+          end
+          else
+          begin
+            FLastErrorText := SQLite3_errormsg(FBaseInfo.FHandle);
+            FLastError := SQLite3_errcode(FBaseInfo.FHandle);
+            Result := False;
+            FHasResult := False;
+          end;
+
+        finally
+          //SQLite3_reset(Stmt); not needed according to docs.
+          SQLite3_finalize(Stmt);
+        end;
+        SQLStatement := Tail;
+      until (SQLStatement^ = #0) or (Result = False); //This one solve problem with SQL Multi-Statement
+
+      if FHasResult then
+      begin
+        if Assigned (FOnQueryComplete) then
+          try
+            FOnQueryComplete(Self);
+          except end;
+        if Assigned (FOnSuccess) then
+          try
+            FOnSuccess(Self);
+          except end;
+      end
+      else
+      begin
+        if Assigned (FOnError) then
+          try
+            FOnError(Self);
+          except end;
+      end;
+    end;
+end;
+
+function TLiteDB.Query3W(SQL: WideString): Boolean;
+//var
+//  SQLStatement: PWideChar;
+//  Stmt: Pointer;
+//  sr,qr: Integer;
+//  FLastError: Integer;
+begin
+//  SQLStatement := PWideChar(SQL);
+  {
+  repeat
+  
+    try
+      FLastError := SQLite3_prepare16 (FBaseInfo.FHandle, SQLStatement, -1,
+                                       Stmt, SQLStatement);
+    
+      if FLastError = SQLite_OK then
+      begin
+        //This must be first, to get definition of columns even if table is include no rows
+        //This one you execute very pretty in function StoreFields3, but this must be first!
+        if Not FieldDef then
+        begin
+          Columns := SQLite3_Column_count(Stmt);
+          for i := 0 to Columns - 1 do
+          begin
+            name := Sqlite3_Column_Name16(Stmt, i);
+            _datatype := Sqlite3_Column_Type (Stmt, i);
+          end;
+        end;       
+
+        sr := SQLite3_step (Stmt);
+        
+        while sr=SQLITE_BUSY do
+        begin
+          sleep(0);
+          sr := SQLite3_step (Stmt);
+        end;
+        
+        while sr=SQLITE_ROW do
+        begin
+          //Geting simple fields of current row
+          //This one you execute very pretty in function StoreRow3
+          Columns := SQLite3_Column_count(Stmt);
+          for i := 0 to Columns - 1 do
+          begin
+            Value := SQLite3_Column_Text16(Stmt, i);
+          end;
+          sr := SQLite3_step(Stmt);
+          while sr=SQLITE_BUSY do
+          begin
+            sleep(0);
+            sr := SQLite3_step (Stmt);
+          end;
+        end;
+        
+        if sr in [SQLITE_ERROR, SQLITE_MISUSE] then
+          begin
+            FLastErrorText := SQLite3_errormsg16(FBaseInfo.FHandle);
+            FLastError := SQLite3_errcode(FBaseInfo.FHandle);
+          end
+        else
+          begin
+            FLastErrorText := '';
+            FLastError := 0;
+          end;
+      end
+      else
+        FLastErrorText := SQLite3_errormsg16 (FBaseInfo.FHandle);
+        
+    finally
+      //I see this finalisation in others SQLite wrappers and works well
+      SQLite3_reset(Stmt);
+      SQLite3_finalize(Stmt);
+    end;
+
+  until SQLStatement^ = #0; //This one solve problem with SQL Multi-Statement
+  }
+end;
+
+procedure TLiteDB.SetBooleanPragmas(const Value: TBooleanPragmaSet);
+var i: TBooleanPragmas;
+begin
+  //test all pragma's
+  //for inclusion or exclusion
+  for i := low(TBooleanPragmas) to high(TBooleanPragmas) do
+    begin
+
+    end;
+  FSQLitePragmas.BooleanPragmas := Value;
+end;
+
+procedure TLiteDB.SetPragmaCacheSize(const Value: Integer);
+begin
+  SetPragma ('cache_size', Value);
+end;
+
+procedure TLiteDB.SetPragmaDefaultCacheSize(const Value: Integer);
+begin
+  SetPragma ('default_cache_size', Value);
+end;
+
+procedure TLiteDB.SetPragmaEncoding(const Value: String);
+begin
+  SetPragma ('encoding', Value);
+end;
+
+procedure TLiteDB.SetPragmaPagesize(const Value: Integer);
+begin
+  SetPragma ('page_size', Value);
+end;
+
+procedure TLiteDB.SetPragmaSynchronous(
+  const Value: TSynchronousPragmaValues);
+begin
+  SetPragma ('synchronous', Integer(Value));
+end;
+
+procedure TLiteDB.SetPragmaTempStore(const Value: TTempStorePragmaValues);
+begin
+  SetPragma ('temp_store', Integer(Value));
+end;
+
+procedure TLiteDB.SetPragmaTempStoreDirectory(const Value: String);
+begin
+  SetPragma ('temp_store_directory', Value);
+end;
+
+constructor TLiteDB.Create(AOwner: TComponent);
+begin
+  Create(AOwner, '');
+end;
+
 initialization
   DataBases := TStringList.Create;
   CSConnect := TCriticalSection.Create;
@@ -1246,49 +1962,6 @@ finalization
   DataBases.Free;
   CSConnect.Free;
 end.
-
-
-(* suggested support functions
-
-//Additional sqlite-specific support functions by Dak
-function TLiteDB.GetUserVersion(DataBase: string=''): integer;
-var
-  ResultPtr: Pointer;
-  ResultStr: ^Pointer;
-  RowCount, ColCount: Integer;
-  ErrMsg: PChar;
-  i: integer;
-  intDataBase: string;
-begin
-  if Assigned(FBaseInfo.FHandle) then
-  begin
-    if DataBase<>'' then intDataBase := DataBase+'.' else intDataBase := '';
-    SQLite3_GetTable(FBaseInfo.FHandle, PAnsiChar('PRAGMA '+intDataBase+'user_version'),
-                     ResultPtr, RowCount, ColCount, ErrMsg);
-    ResultStr := ResultPtr;
-    Inc(ResultStr);
-    Result := StrToInt(PAnsiChar(ResultStr^));
-  end
-  else
-  begin
-    Result := -1;
-  end;
-end;
-
-//Additional sqlite-specific support functions by Dak
-procedure TLiteDB.SetUserVersion(Version: integer; Database: string='');      //Dak..
-var
-  intDataBase: string;
-begin
-  if Assigned(FBaseInfo.FHandle) then
-  begin
-    if DataBase<>'' then intDataBase := DataBase+'.' else intDataBase := '';
-    Query('PRAGMA '+intDataBase+'user_version='+IntToStr(Version));
-  end;
-end;
-
-*)
-
 
 
 

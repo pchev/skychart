@@ -27,16 +27,13 @@ package libsql;
 
 requires
   rtl,
-  vcl,
-  vclx,
-  dbrtl;
+  vcl;
 
 contains
-  sqlcomponents in 'sqlcomponents.pas',
+  sqlcomponentsK3 in 'sqlcomponentsK3.pas',
   sqlsupport in 'sqlsupport.pas',
   utf8util in 'utf8util.pas',
   vclsql in 'vclsql.pas',
-  ASyncDB in 'ASyncDB.pas',
   libmysql in 'libmysql.pas',
   libodbc32 in 'libodbc32.pas',
   libsqlite3 in 'libsqlite3.pas',
@@ -44,17 +41,6 @@ contains
   pasmysql in 'pasmysql.pas',
   pasodbc in 'pasodbc.pas',
   passql in 'passql.pas',
-  passqlite in 'passqlite.pas',
-  pasjansql in 'pasjansql.pas',
-  janSQL in 'jansql\janSQL.pas',
-  janSQLExpression2 in 'jansql\janSQLExpression2.pas',
-  janSQLStrings in 'jansql\janSQLstrings.pas',
-  janSQLTokenizer in 'jansql\janSQLTokenizer.pas',
-  mwStringHashList in 'jansql\mwStringHashList.pas',
-  lsdatasettable in 'lsdatasettable.pas',
-  lsdatasetbase in 'lsdatasetbase.pas',
-  lsdatasetquery in 'lsdatasetquery.pas',
-  pasthreadedsqlite in 'pasthreadedsqlite.pas',
-  staticsqlite3 in 'staticsqlite3.pas';
+  passqlite in 'passqlite.pas';
 
 end.

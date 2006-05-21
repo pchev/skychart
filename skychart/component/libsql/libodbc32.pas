@@ -523,7 +523,7 @@ var ODBC32LibsLoaded: Boolean = False;
 
 implementation
 
-var ODBCDLLHandle: {$IFDEF FPC}TLibHandle = 0{$ELSE}THandle = 0{$ENDIF}; //THandle
+var ODBCDLLHandle:{$IFDEF FPC}TLibHandle = 0;{$ELSE}THandle = 0;{$ENDIF} //THandle
 
 {$IFDEF FPC}
 //FPC Support function helping typecasting:
@@ -548,7 +548,7 @@ begin
 
   ODBCDLLHandle := {$IFNDEF FPC}LoadLibrary(PChar(LibraryName)){$ELSE}LoadLibrary(LibraryName){$ENDIF};
 
-  if ODBCDLLHandle <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+  if ODBCDLLHandle <> 0 then
     begin
       SQLAllocEnv:=GetProcAddress (ODBCDLLHandle, 'SQLAllocEnv');
       SQLAllocConnect:=GetProcAddress (ODBCDLLHandle, 'SQLAllocConnect');
@@ -616,7 +616,7 @@ end;
 //http://www.cs.uofs.edu/~beidler/Ada/win32/win32-sqlext.html
 
 (*
--- $Source$ 
+-- $Source: /cvsroot/libsql/libsql/libodbc32.pas,v $ 
 -- $Revision$ $Date$ $Author$ 
 -- See end of file for Copyright (c) information.
 

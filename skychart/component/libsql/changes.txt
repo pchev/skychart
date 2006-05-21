@@ -1,8 +1,72 @@
+0.75
+* Implemented basics for TDataSet compliancy
+* Created TlsQuery class that is TDataSet compatible and can present a read-only view to the results of an SQL query.
+  TlsQuery class takes a SQL query string as paramter. FormatQuery also supported.
+* Moved some methods, introduced in 0.73, FieldType, FieldName, FieldTypeName from TResultRow to TResultSet. This makes much more sense, TResultRow was the wrong place for those methods.
+* Modified sqlite interface a tiny bit due to naming conflict as a result of above.
+* Added TlsTable class, a database compatible class that allows browsing and updating a table. Key on updating this table is the availability of an integer typed primary key (!). SQLite will have no isseus (rowid is available).
+  TlsTable supports editing, deleting
+* Added class function 'DatabaseType' that returns database type enumeration based on class (name).
+* Modified TResultSet so that it does not alter the selected result set of the database class. Usefull when (multiple) result sets are accesing the database, while the database is also accessed directly. Should be transparent and backward compatible, with very minor performance penalty.
+* Modified sqlite class to report string type field if sqlite reports datatyp NULL (which is as much as undefined). Note on this: seems sqlite reports different datatypes for each row encountered...
+
+
+
+0.74
+* Fixed two new sqlite issues in testing:
+  * Fixed issue in new TLiteDB.query3 method
+  * Removed default database ':memory:' from sqlite
+* Fixed possible AV with TMyDB.Execute method, needs some more attention.
+* Added additional properties to easify PRAGMA setting/getting on sqlite
+* Fixed a freeing bug in TJanSQL
+* Made sure TJanDB behaved well as component
+* Added TJanDB/TJanSQL to the package
+* Some minor issues
+
+
+0.73
+Some functionality added to sqlite (Daniel)
+* Added get/set sqlite userversion methods
+* Added get/set pragma methods
+* Made test version of query method as proposed by Daniel
+* Started implementing some pragma methods
+* Added additional properties to TResultRow:
+    property FieldName[Index: Integer]: String;
+    property FieldType[Index: Variant]: TSQLDataTypes;
+    property FieldTypeName[Index: Variant]: String;
+    property Field[Index: Variant]: TFieldDesc;
+  This should allow you to fetch field types and/or other available information.
+  Note: not all databases return all info, also some things
+  may be dependant on settings (ini, pragma etc).
+  TFieldDesc class may hold information about table name, field type etc.
+* Renamed "experimental" DakQuery3 to Query3. Query method will check sqlite version, if it is sqlite v3.nn Query3 is called.
+  Do _not_ call query3 directly when using a sqlite2 database.
+
+Important notes:
+* Sqlite widestring querying must be looked after (it also affects table names etc).
+* Sqlite3 query does not do callbacks and/or callbackonly.
+
+
+Things to think over:
+1. Since coming of Execute/Fetchrow methods it is questionable if we need CallBacks and CallBackOnly at all.
+2. Since coming of TResultSet class that can be used 'independantly' it is questionable if we need named result sets at all.
+For first question, i vote to keep it in. There is no real performance penalty doing so.
+For second question, doing so would make some parts of the code (especially result set handling) a lot cleaner. On the other hand, now it is working correctly, why remove it?
+
+
+
+0.72
+Static interface with sqlite. works with object libraries by Albert Drent and Gianpaolo Avallone from http://www.aducom.com/sqlite/download/alpha/asgsqliteobj.zip (current: sqlite 3.2.1)
+
+also busy getting to work with home-build .obj using bcc55.
+
+no issues detected with libsql. Static seems just as compatible as the dll. Performance seems some better. 
+
 0.64
 Probably the Last memory leak solved thanks to Andry!
 
 0.71
-* Fixed anether memory leak in sqlite execute wethod, if query returned no results.
+* Fixed another memory leak in sqlite execute method, if query returned no results.
 * Altered jansql to accept a semicolumn in the data.
 i plan to modify jansql to use comma-seperated files instead of (european cvs style) semicolumn seperated files. advantage may be the use of a TStrings CommaText method.
 
@@ -130,6 +194,13 @@ This happen to be "stable" version. On my system. No guarantees.
 * Next release will contain additional sqlite class that provides a threading mechanism to allow multiple threads on some unix systems redirected to a single thread for the file system to work correctly.
 * Some minor bug fixes.
 
+around 0.59-0.60
+* Flyman has made an brief how-to to enable the PostGreSQL server via odbc on a linux box using libsql. Thanks!
+
+changes in 0.59
+Libsql 0.59 is the latest testing release for libsql. It implements improved usage of multiple result sets, the execute/fetchrow/freeresult method triplet for fetching on a per-row base, and support for ODBC32.
+This version will get bugfixed and is scheduled to be released as 0.60 stable soon.
+
 changes in 0.57
 * formatquery adjustments - floating point issues
 * result set freeing (fixes shutdown error)
@@ -152,4 +223,67 @@ The db class keeps track of used result sets. Things may both speed up and get l
 TResultSet has now almost all methods that originally were found in db. While both ways will work, there are now many ways how to perform a query.
 however, i think i favourize giving TResultSet a central (obliged?) place.But doing so, would remove 'ease-of-use' of the db component itself.
 Anyhow, stuff is working ok, it is nicely put together, i don't see any major mistakes but as said, complexity of code may make things less maintainable.
+
+Libsql 0.45 Released
+This release fixes the dll version issues. It can load any (common) version of libmysql.dll, and sqlite 2 and 3. Also support for embedded mysql is now stable (based on 4.1 libmysqld.dll).
+* loads any dll of any library (sqlite 2/3, mysql 3.23/4/4.1/5.0)
+* loads embedded mysql 4.1. embedded mysql now stable.
+* autodetects libsql database version if necessary
+* fixed multiple result sets. usable now
+* added unicode support: QueryW, FormatQueryW, Results[n].Wide
+* automatic conversion of widestring to utf-8 on databases not
+supporting 16-bit interface
+* re-done sqlite query (QueryW) to be native 16-bit WideString
+* full support for delphi and freepascal (win32)
+ 
+
+Libsql 0.41 Released
+* Support for embedded MySQL 4 (reworked)
+* Multiple result sets
+* Freepascal compatability
+* Sqlite 3 compatability
+
+Libsql For Sqlite 3
+Miha has made a succesfull port to pascal of the sqlite 3 api. Also, he adjusted the TLiteDB class to work with sqlite 3. The sources are available at http://sourceforge.net/projects/libsql and will be merged with libsql.
+
+Libsql 0.32 Released
+* Support for Embedded MySQL
+* Compatible with FreePascal
+* Bugfixed the FormatQuery method (had bugs on strings)
+The download is split into pascal source files and the SQLite / MySQL / EmbeddedMysql dll files.
+
+Libsql 0.21 Released
+* Libsql is now compatible with Kylix, thanks to Patrick!
+* Some bugfixes
+
+Libsql 0.2 Released
+*some bugfixes to version 0.1 (thanks Lloyd!)
+*Some fixes when installed as component, published properties are more sensefull now and act more rational.
+*some more bugfixes
+*implemented callback and callbackonly for !TMyDB
+
+* !TLiteDB 0.2 + !TMyDB 0.3 => libsql
+TLiteDB, welcome sister TMyDB. The code has merged. This wiki now also hosts the !TMyDB documentation. For a quick start and capabilities, see the _Documentation_ , email support is at the !TMyDB mailing list http://groups.yahoo.com/group/libsql . Libsql is also on sourceforge http://sourceforge.net/projects/libsql .
+* Currently i'm working on implementing EmbeddedMysql .
+
+About The Merge
+I've merged my TMyDB and TLiteDB libraries. The common TSqlDB class implements all data. It's all put in a new library LibSQL. Also, TLiteDB is split up in a api unit and teh class declaration.
+
+Compatability With Previous Version:
+For TLiteDB usage, hardly anything has been changed. There is some meta field information, but that's premature. Also some support functions are added.
+Usage of TLiteDB 0.2 should be the same as for version 0.1. For TMyDB, there changed a lot more.. Previous code may well be incompatible.
+Anyhow, syntax for TMyDB and TLiteDB is almost identical. Only difference is the Connect method, !TLiteDB does not need to connect first, you can just call Use. But you can also call connect with empty logon credentials and the database name. Optionally in the future one could set SMB/NFS logon credentials or something there.
+
+
+Download Previous Versions
+libsql.zip version 0.21 containing !TLiteDB 0.2 and !TMyDB 0.3. Zip includes libmysql.dll(4.0) and sqlite.dll (2.8)
+sqlite.pas version 0.1: http://sqlite.dubaron.com/SQLite.pas note: SqLite01
+readme: http://sqlite.dubaron.com/litedb_howtouse.txt
+both above zipped: http://sqlite.dubaron.com/sqlite0.1.zip
+libsql 0.1 http://dubaron.com/files/libsql.0.1.zip
+
+
+TLiteDB is made as a wrapper for SQLite. The purpose of it is to make querying as easy and flexible as possible, while maintaining full functionality.
+The unit is succesfully compiled with delphi 5 and delphi 7, but i expect delphi2+ and maybe freepascal to work with it.
+
 

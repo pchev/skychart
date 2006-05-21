@@ -1,11 +1,13 @@
 unit libsqlite;
 
 {$IFDEF FPC}
-{$MODE Delphi}
-{$H+}
-{ELSE}
+  {$MODE Delphi}
+  {$H+}
+{$ELSE}
   {$IFNDEF LINUX}
-  {$DEFINE WIN32}
+    {$DEFINE WIN32}
+  {$ELSE}
+    {$DEFINE UNIX}
   {$ENDIF}
 {$ENDIF}
 
@@ -61,7 +63,7 @@ const
 
 
 
-  SQLITEDLL: PChar  = {$IFNDEF WIN32}'libsqlite.so' {$ELSE} 'sqlite.dll'{$ENDIF};
+  SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite.so'{$ENDIF}{$IFDEF WIN32}'sqlite.dll'{$ENDIF}{$IFDEF darwin}'libsqlite.dylib'{$ENDIF};
 
 function LoadLibSqlite2 (var LibraryPath: String): Boolean;
 
@@ -171,7 +173,7 @@ begin
   {$ENDIF}
   {$IFNDEF WIN32}
       // try other possible library name
-      if DLLHandle = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then begin
+      if DLLHandle = 0 then begin
          libname := libname + '.0';
          {$IFDEF FPC}
          DLLHandle := LoadLibrary(libname);
@@ -181,7 +183,7 @@ begin
       end;
   {$ENDIF}
 
-  if DLLHandle <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+  if DLLHandle <> 0 then
   begin
 	  Result := True; //assume everything ok unless..
     LibraryPath := LibName;
@@ -272,7 +274,7 @@ initialization
 
 //  MsgNoError := SystemErrorMsg(0);
 finalization
-  if DLLHandle <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
+  if DLLHandle <> 0 then
     {$IFNDEF FPC}FreeLibrary (DllHandle){$ELSE}UnloadLibrary(DllHandle){$ENDIF};
 
 
