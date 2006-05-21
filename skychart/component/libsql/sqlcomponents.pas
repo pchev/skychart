@@ -6,7 +6,7 @@ unit sqlcomponents;
 
 interface
 
-uses Classes, passql, pasmysql, passqlite, pasthreadedsqlite, pasodbc {$IFNDEF UNIX}, pasjansql, lsdatasetbase, lsdatasetquery, lsdatasettable{$ENDIF};
+uses Classes, passql, pasmysql, passqlite, pasthreadedsqlite, pasodbc {$IFNDEF FPC}{$IFNDEF UNIX}, pasjansql, lsdatasetbase, lsdatasetquery, lsdatasettable{$ENDIF}{$ENDIF};
 
 procedure Register;
 
@@ -14,7 +14,7 @@ implementation
 
 procedure Register;
 begin
-  RegisterComponents('libsql', [TMyDB, TLiteDB, TODBCDB, {$IFNDEF UNIX}TJanDB, TlsTable, TlsQuery,{$ENDIF} TMLiteDB]);
+  RegisterComponents('libsql', [TMyDB, TLiteDB, TODBCDB, {$IFNDEF FPC}{$IFNDEF UNIX}TJanDB, TlsTable, TlsQuery,{$ENDIF}{$ENDIF} TMLiteDB]);
 end;
 
 
