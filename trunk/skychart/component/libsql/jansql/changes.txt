@@ -1,0 +1,29 @@
+Changes
+
+1.2
+JanSQL has some remarkable simularities with libsql, like multiple result sets. However, they have no unique handle, but are indexed. This leads to issues when deleting a result set.
+also there seems lack of some kind of cursor. but hej, since it is open source and nat actively maintained afaics, i feel free to hack a little here and there to the code.
+Library seems also some buggy, bad sql statements may well end up in an AV.
+
+Pos and cons of JanSQL
+Cons:
+* Do not use on large datasets
+* Non-standard sql syntax
+* Semicolumn is disallowed character in data
+
+Pros:
+* Very suitable for small in-application databases
+* Support for relative complex queries (jeining tables etc)
+* Mozilla 1.1 license allows you pretty much what to do with it, as lang as you p,oint to source (of the sibrary) and some credits.
+* Very usable if you accept limitations of sql `dialect` and non-indexed databases
+* Flat file format more-or-less compatible with csv files.
+
+
+
+
+1.1
+Added Rollback support
+Modified "delete from" statement to be more ansi compliant (i.e. "delete from tablename" deletes all records from the table).
+
+1.0
+Initial release (1.0) by Jan Verhoeven 2002

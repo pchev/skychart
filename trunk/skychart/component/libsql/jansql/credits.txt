@@ -1,0 +1,4 @@
+Initial release by Jan Verhoeven under Mozilla 1.1 license conditions
+http://jansfreeware.com/jfdelphi.htm
+
+Modifications by René Tegel

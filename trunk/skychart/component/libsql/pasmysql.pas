@@ -720,8 +720,11 @@ begin
       Result := Integer (mf.mysql_store_result(@MyHandle));
       UseResultSet (Result);
       FCurrentSet.Clear;
-      FillFieldInfo (PMYSQL_RES(Result));
-      FCurrentSet.FColCount := mf.mysql_num_fields(PMYSQL_RES(Result));
+      if Result <> 0 then
+        begin
+          FillFieldInfo (PMYSQL_RES(Result));
+          FCurrentSet.FColCount := mf.mysql_num_fields(PMYSQL_RES(Result));
+        end;
     end;
 end;
 
@@ -809,6 +812,25 @@ begin
                   decimals:=PMysql_field_50(field).decimals;
                 end;
             end;
+            //map mysql flags to some properties
+            //just hope this is compatible across all mysql versions
+            //afaik this is 4.1 (3.2 compatible) flag specification
+            IsNullable := 0 <> (Flags and NOT_NULL_FLAG);
+            IsPrimaryKey := 0 <> (Flags and PRI_KEY_FLAG);
+            IsUnique := 0 <> (Flags and UNIQUE_KEY_FLAG);
+            IsKey := 0 <> (Flags and MULTIPLE_KEY_FLAG);
+            IsBlob := 0 <> (Flags and BLOB_FLAG);
+            IsUnsigned := 0 <> (Flags and UNSIGNED_FLAG);
+            IsAutoIncrement := 0 <> (Flags and AUTO_INCREMENT_FLAG);
+            IsNumeric := 0 <> (Flags and NUM_FLAG);
+(*
+  non mapped flags:
+  ZEROFILL_FLAG   { Field is zerofill }
+  BINARY_FLAG     { Field is binary }
+  ENUM_FLAG       { Field is an enum }
+  TIMESTAMP_FLAG  { Field is a timestamp }
+  SET_FLAG        { Field is a set }
+*)
           end;
         end;
     end;

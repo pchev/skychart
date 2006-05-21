@@ -1,11 +1,13 @@
 unit libsqlite3;
 
 {$IFDEF FPC}
-{$MODE Delphi}
-{$H+}
+  {$MODE Delphi}
+  {$H+}
 {$ELSE}
   {$IFNDEF LINUX}
-  {$DEFINE WIN32}
+    {$DEFINE WIN32}
+  {$ELSE}
+    {$DEFINE UNIX}
   {$ENDIF}
 {$ENDIF}
 
@@ -31,7 +33,6 @@ interface
 {$ENDIF}
 
 uses {$IFNDEF FPC}{$IFDEF WIN32}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
-
 
 {$IFDEF WTYPES}
 type
@@ -82,7 +83,7 @@ const SQLITE_TEXT       = 3;
 const SQLITE_BLOB       = 4;
 const SQLITE_NULL       = 5;
 
-const SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite3.so' {$ELSE} 'sqlite3.dll'{$ENDIF};
+const SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite3.so'{$ENDIF}{$IFDEF WIN32}'sqlite3.dll'{$ENDIF}{$IFDEF darwin}'libsqlite3.dylib'{$ENDIF};
 
 function LoadLibSqlite3(var libraryName: String): Boolean;
 
@@ -118,6 +119,12 @@ The buffer allocated is freed automatically by SQLite*)
   #define SQLITE_STATIC      ((void(*)(void *))0)
   #define SQLITE_TRANSIENT   ((void(*)(void *))-1)
 }
+
+type TDestructorProc = procedure (APointer: Pointer);                              //Dak_Alpha
+type PDestructorProc = ^TDestructorProc;                                           //Dak_Alpha
+const SQLITE_STATIC = PDestructorProc(0);                                          //Dak_Alpha
+const SQLITE_TRANSIENT = PDestructorProc(-1);                                      //Dak_Alpha
+
 (*In the SQL strings input to sqlite3_prepare() and sqlite3_prepare16(), one or more literals can be replace by a wildcard "?" or ":N:" where N is an integer. The value of these wildcard literals can be set using these routines.
 
 The first parameter is a pointer to the sqlite3_stmt structure returned from sqlite3_prepare(). The second parameter is the index of the wildcard. The first "?" has an index of 1. ":N:" wildcards use the index N.
@@ -126,6 +133,7 @@ The fifth parameter to sqlite3_bind_blob(), sqlite3_bind_text(), and sqlite3_bin
 
 The sqlite3_bind_*() routine must be called after sqlite3_prepare() or sqlite3_reset() and before sqlite3_step(). Bindings are not reset by the sqlite3_reset() routine. Unbound wildcards are interpreted as NULL.
 *)
+var SQLite3_Bind_Blob: function(hstatement: Pointer; iCol: integer; buf: PAnsiChar; n: integer; DestroyPtr: Pointer): integer; cdecl;  //Dak_Alpha
 
 var SQLite3_BindParameterCount: function(hstatement: Pointer): Integer; cdecl;
 var SQLite3_BindParameterName: function(hstatement: Pointer; paramNo: Integer): PChar; cdecl;
@@ -167,6 +175,10 @@ var SQLite3_Complete16: function(const sql: PWChar): Integer; cdecl;
 //pCtx <- what is that?
 var SQLite3_Create_Collation: function(db: Pointer; CollName: PChar; eTextRep: Integer; pCtx: Pointer; compareFuncPtr: Pointer): Integer; cdecl;
 var SQLite3_Create_Collation16: function(db: Pointer; CollName: PWChar; eTextRep: Integer; pCtx: Pointer; compareFuncPtr: Pointer): Integer; cdecl;
+
+type TSQLFunction = procedure (sqlite3_context: Pointer; nArg: Integer;sqlite3_value: Pointer); cdecl;
+type PSQLFunction = ^TSQLFunction;
+var SQLite3_Create_Function: function (db: Pointer;{const} zFunctionName: PAnsiChar; nArg: Integer; eTextRep: Integer; UserData: Pointer; xFunc: PSQLFunction; xStep: Pointer; xFinal: Pointer): Integer; cdecl; //Dak_Alpha
 {int sqlite3_create_function16(
   sqlite3*,
   const void *zFunctionName,
@@ -248,6 +260,13 @@ To remove the progress callback altogether, pass NULL as the third argument to t
 If the progress callback returns a result other than 0, then the current query is immediately terminated and any database changes rolled back. If the query was part of a larger transaction, then the transaction is not rolled back and remains active. The sqlite3_exec() call returns SQLITE_ABORT.
 *)
 var SQLite3_Reset: function(hstatement: Pointer): Integer; cdecl;
+
+var SQLite3_Result_Double: procedure(sqlite3_context: Pointer; aDouble: Double); cdecl;      //Dak_Alpha
+var SQLite3_Result_Int: procedure(sqlite3_context: Pointer; aInteger: Integer); cdecl;       //Dak_Alpha
+var SQLite3_Result_Int64: procedure(sqlite3_context: Pointer; aInt64: Int64); cdecl;         //Dak_Alpha
+var SQLite3_Result_Text: procedure(sqlite3_context: Pointer; aChar: PAnsiChar; n: Integer; destr: Pointer); cdecl;  //Dak_Alpha
+var SQLite3_Result_Value: procedure(sqlite3_context: Pointer; sqlite3_value: Pointer); cdecl;//Dak_Alpha
+
 {void sqlite3_result_blob(sqlite3_context*, const void*, int n, void(*)(void*));
 void sqlite3_result_double(sqlite3_context*, double);
 void sqlite3_result_error(sqlite3_context*, const char*, int);
@@ -317,6 +336,15 @@ var SQLite3_Total_Changes: function(db: Pointer): Integer; cdecl;
 {void *sqlite3_user_data(sqlite3_context*);}
 (*The pUserData parameter to the sqlite3_create_function() and sqlite3_create_function16() routines used to register user functions is available to the implementation of the function using this call.
 *)
+
+var SQLite3_Value_Blob: function(sqlite3_value: Pointer): Pointer; cdecl;          //Dak_Alpha
+var SQLite3_Value_Bytes: function(sqlite3_value: Pointer): Integer; cdecl;         //Dak_Alpha
+var SQLite3_Value_Double: function(sqlite3_value: Pointer): Double; cdecl;         //Dak_Alpha
+var SQLite3_Value_Int: function(sqlite3_value: Pointer): Integer; cdecl;           //Dak_Alpha
+var SQLite3_Value_Int64: function(sqlite3_value: Pointer): Int64; cdecl;           //Dak_Alpha
+var SQLite3_Value_Text: function(sqlite3_value: Pointer): PAnsiChar; cdecl;        //Dak_Alpha
+var SQLite3_Value_Type: function(sqlite3_value: Pointer): Integer; cdecl;          //Dak_Alpha
+
 {const void *sqlite3_value_blob(sqlite3_value*);
 int sqlite3_value_bytes(sqlite3_value*);
 int sqlite3_value_bytes16(sqlite3_value*);
@@ -347,10 +375,10 @@ implementation
 
 {$IFDEF FPC}
 //FPC Support function helping typecasting:
-{function GetProcAddress(hModule: HMODULE; lpProcName: PChar): Pointer;
+function GetProcAddress(hModule: HMODULE; lpProcName: PChar): Pointer;
 begin
   Result := GetProcedureAddress(hModule, lpProcName);
-end; }
+end;
 {$ENDIF}
 
 function LoadLibSqlite3(var libraryName: String): Boolean;
@@ -374,7 +402,7 @@ begin
   {$ENDIF}
   {$IFNDEF WIN32}
       // try other possible library name
-      if DLLHandle ={$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then begin
+      if DLLHandle = 0 then begin
          libname := libname + '.0';
          {$IFDEF FPC}
          DLLHandle := LoadLibrary(libname);
@@ -400,6 +428,9 @@ begin
   #define SQLITE_STATIC      ((void(*)(void *))0)
   #define SQLITE_TRANSIENT   ((void(*)(void *))-1)
 }
+  @SQLite3_Bind_Blob := GetProcAddress(DLLHandle, 'sqlite3_bind_blob');            //Dak_Alpha
+  if not Assigned(@SQLite3_Bind_Blob) then Result := False;                        //Dak_Alpha
+
   @SQLite3_BindParameterCount := GetProcAddress(DLLHandle, 'sqlite3_bind_parameter_count');
   if not Assigned(@SQLite3_BindParameterCount) then Result := False;
 
@@ -455,6 +486,8 @@ begin
   if not Assigned(@SQLite3_Create_Collation) then Result := False;
   @SQLite3_Create_Collation16 := GetProcAddress(DLLHandle, 'sqlite3_create_collation16');
   if not Assigned(@SQLite3_Create_Collation16) then Result := False;
+  @SQLite3_Create_Function := GetProcAddress(DLLHandle, 'sqlite3_create_function');//Dak_Alpha
+  if not Assigned(@SQLite3_Create_Function) then Result := False;                  //Dak_Alpha
 {int sqlite3_create_function(
   sqlite3 *,
   const char *zFunctionName,
@@ -511,6 +544,19 @@ char *sqlite3_vmprintf(const char*, va_list);
 {void sqlite3_progress_handler(sqlite3*, int, int(*)(void*), void*);}
   @SQLite3_Reset := GetProcAddress(DLLHandle, 'sqlite3_reset');
   if not Assigned(@SQLite3_Reset) then Result := False;
+
+  @SQLite3_Result_Double := GetProcAddress(DLLHandle, 'sqlite3_result_double');    //Dak_Alpha
+  if not Assigned(@SQLite3_Result_Double) then Result := False;                    //Dak_Alpha
+  @SQLite3_Result_Int := GetProcAddress(DLLHandle, 'sqlite3_result_int');          //Dak_Alpha
+  if not Assigned(@SQLite3_Result_Int) then Result := False;                       //Dak_Alpha
+  @SQLite3_Result_Int64 := GetProcAddress(DLLHandle, 'sqlite3_result_int64');      //Dak_Alpha
+  if not Assigned(@SQLite3_Result_Int64) then Result := False;                     //Dak_Alpha
+  @SQLite3_Result_Text := GetProcAddress(DLLHandle, 'sqlite3_result_text');        //Dak_Alpha
+  if not Assigned(@SQLite3_Result_Text) then Result := False;                      //Dak_Alpha
+  @SQLite3_Result_Value := GetProcAddress(DLLHandle, 'sqlite3_result_value');      //Dak_Alpha
+  if not Assigned(@SQLite3_Result_Value) then Result := False;                     //Dak_Alpha
+
+
 {void sqlite3_result_blob(sqlite3_context*, const void*, int n, void(*)(void*));
 void sqlite3_result_double(sqlite3_context*, double);
 void sqlite3_result_error(sqlite3_context*, const char*, int);
@@ -536,6 +582,21 @@ void sqlite3_result_value(sqlite3_context*, sqlite3_value*);
   if not Assigned(@SQLite3_Total_Changes) then Result := False;
   @SQLite3_LibVersion := GetProcAddress(DLLHandle, 'sqlite3_libversion');
   if not Assigned(@SQLite3_LibVersion) then Result := False;
+
+  @SQLite3_Value_Blob := GetProcAddress(DLLHandle, 'sqlite3_value_blob');          //Dak_Alpha
+  if not Assigned(@SQLite3_Value_Blob) then Result := False;                       //Dak_Alpha
+  @SQLite3_Value_Bytes := GetProcAddress(DLLHandle, 'sqlite3_value_bytes');        //Dak_Alpha
+  if not Assigned(@SQLite3_Value_Bytes) then Result := False;                      //Dak_Alpha
+  @SQLite3_Value_Double := GetProcAddress(DLLHandle, 'sqlite3_value_double');      //Dak_Alpha
+  if not Assigned(@SQLite3_Value_Double) then Result := False;                     //Dak_Alpha
+  @SQLite3_Value_Int := GetProcAddress(DLLHandle, 'sqlite3_value_int');            //Dak_Alpha
+  if not Assigned(@SQLite3_Value_Int) then Result := False;                        //Dak_Alpha
+  @SQLite3_Value_Int64 := GetProcAddress(DLLHandle, 'sqlite3_value_int64');        //Dak_Alpha
+  if not Assigned(@SQLite3_Value_Int64) then Result := False;                      //Dak_Alpha
+  @SQLite3_Value_Text := GetProcAddress(DLLHandle, 'sqlite3_value_text');          //Dak_Alpha
+  if not Assigned(@SQLite3_Value_Text) then Result := False;                       //Dak_Alpha
+  @SQLite3_Value_Type := GetProcAddress(DLLHandle, 'sqlite3_value_type');          //Dak_Alpha
+  if not Assigned(@SQLite3_Value_Type) then Result := False;                       //Dak_Alpha
 
 {void *sqlite3_trace(sqlite3*, void(*xTrace)(void*,const char*), void*);
 }
