@@ -33,7 +33,7 @@ type
 var
   Form1: TForm1; 
   
-const DBtype=0;
+const DBtype=1;
       dbn='test1';
 
 implementation
