@@ -21,6 +21,7 @@ type
     FEditRowIndex: Integer;
 
     procedure SetTable(const Value: String);
+    procedure ClearEditRow;
   protected
     procedure InternalDelete; override;
 
@@ -47,7 +48,6 @@ implementation
 
 procedure TlsTable.InternalDelete;
 begin
-  // todo: support deleting
   if FPrimaryKeyIndex >= 0 then
     begin
       //delete from table
@@ -64,83 +64,181 @@ begin
     end;
 end;
 
-// III: Move data from field to record buffer
 procedure TlsTable.SetFieldData(Field: TField; Buffer: Pointer);
 var sValue: String;
     iValue: Integer;
     fValue: Double;
     bValue: Boolean;
     tValue: TDateTime;
+    row: TResultRow;
 begin
+  row := PRecInfo(ActiveBuffer).Row;
+
+  if not Assigned(Row) then
+    exit;
+
   case Field.DataType of
     ftString:
       begin
         sValue := PChar (Buffer);
-        if FHelperSet.FormatQuery('update %u set %u=%s where %u=%d',
-             [FTable, Field.FieldName,
-              sValue,
-              FResultSet.FieldName[FPrimaryKeyIndex], FResultSet.Row[FCurrent].Format[FPrimaryKeyIndex].AsInteger
-             ]) then
-          FResultSet.Row[FCurrent].Strings[FFieldOffset + Field.Index] := sValue;
+        row.Strings[FFieldOffset + Field.Index] := sValue;
       end;
     ftInteger:
       begin
-        Move (Buffer, iValue, SizeOf(iValue));
-        if FHelperSet.FormatQuery('update %u set %u=%d where %u=%d',
-             [FTable, Field.FieldName,
-              iValue,
-              FResultSet.FieldName[FPrimaryKeyIndex], FResultSet.Row[FCurrent].Format[FPrimaryKeyIndex].AsInteger
-             ]) then
-          FResultSet.Row[FCurrent].Strings[FFieldOffset + Field.Index] := IntToStr(iValue);
+        Move (Buffer^, iValue, SizeOf(iValue));
+        Row.Strings[FFieldOffset + Field.Index] := IntToStr(iValue);
       end;
     ftFloat:
       begin
-        Move (Buffer, fValue, SizeOf(fValue));
-        if FHelperSet.FormatQuery('update %u set %u=%f where %u=%d',
-             [FTable, Field.FieldName,
-              fValue,
-              FResultSet.FieldName[FPrimaryKeyIndex], FResultSet.Row[FCurrent].Format[FPrimaryKeyIndex].AsInteger
-             ]) then
-          FResultSet.Row[FCurrent].Strings[FFieldOffset + Field.Index] := FloatToStr(fValue);
+        Move (Buffer^, fValue, SizeOf(fValue));
+        Row.Strings[FFieldOffset + Field.Index] := FloatToStr(fValue);
       end;
   end;
+
 end;
 
 procedure TlsTable.InternalInsert;
+var P: PChar;
+    i: Integer;
 begin
-  // todo: support inserting
-  //need to add an extra record here...
-
-  //db specs ?
-//  if FEditing then
-//    InternalPost;
+  //ActiveRecord should provide us
+  //access to the buffer
+  //that was just fetched by the base class
+  //row is (supposed to be) nil here, we set it to editrow
+  ClearEditRow;
+  PRecInfo(ActiveBuffer).Row := FEditRow;
   FInserting := True;
-  InternalEdit;
-  //SetState (dsEdit);
 end;
 
 procedure TlsTable.InternalEdit;
 begin
-  if FEditing then
-    exit; //or post? or raise exception?
   FEditing := True;
-  //issue here.. what if multiple components want to archieve edit state?
-  
-  FHelperSet.SQLDB.StartTransaction;
+  //make sure we have empty and corresponding fields
+  ClearEditRow;
+  //Copy contents of the row we are editing (dirty workaround - ignores any widestrings)
+  FEditRow.Assign (PRecInfo(ActiveBuffer).Row);
+  FEditRow.FNulls.Assign(PRecInfo(ActiveBuffer).Row.FNulls);
 
+  //issue here.. what if multiple components want to archieve edit state?
+  //seems datasource handles this nicely.
+  //since all dataaware components follow the same cursor
+  //but multiple writers on same database object
+  //may have inconsistencies in nested transactions.
+//  FHelperSet.SQLDB.StartTransaction;
 end;
 
 procedure TlsTable.InternalPost;
+//Examine the stuff being edited
+//build a nice query of the now values
+//and update or insert, depending on edit mode
+  function FormatValue (dt: TSQLDataTypes; c: TResultCell): String;
+  begin
+    case dt of
+      dtString  : Result := FDatabase.FormatSql('%s', [c.AsString]);
+      dtInteger : Result := FDatabase.FormatSql('%d', [c.AsInteger]);
+      dtFloat   : Result := FDatabase.FormatSql('%f', [c.AsFloat]);
+    //todo: other datatypes
+    else
+      Result := 'NULL';
+    end;
+  end;
+
+var i: Integer;
+    row: TResultRow;
+    q,n,v: String;
+    fd: TFieldDesc;
 begin
-  // TODO: support editing
+  row := PRecInfo(ActiveBuffer).Row;
+  if FEditing then
+    begin
+      //update modified fields
+      q := 'update ' + FTable + ' set ';
+      v := '';
+      for i:=FFieldOffset to row.FFields.Count - 1 do
+        begin
+          if v<>'' then
+            v := v + ', ';
+          v := v + FResultSet.FieldName [i] + '=';
+          fd := FResultSet.FieldDescriptor[i];
+          case fd.datatype of
+            dtString, dtNull  : v := v + FDatabase.FormatSql('%s', [row.Format[i].AsString]);
+            dtInteger : v := v + FDatabase.FormatSql('%d', [row.Format[i].AsInteger]);
+            dtFloat   : v := v + FDatabase.FormatSql('%f', [row.Format[i].AsFloat]);
+          //todo: other datatypes
+          else
+            v := v + 'NULL';
+          end;
+        end;
+      q := q + v + ' where ' + FResultSet.FieldName[FPrimaryKeyIndex] + '=' + IntToStr(FEditRow.Format[FPrimaryKeyIndex].AsInteger);
+      //q now holds query
+      if FHelperSet.Query(q) then
+        //all ok, row is modified
+        begin
+          //nothing to do, current row holds info
+        end
+      else
+        begin
+          //restore contents that were backed up in editrow
+          row.Assign(FEditRow);
+          row.FNulls.Assign(FEditRow.FNulls);
+          row.FFields := FEditRow.FFields;
+        end;
+    end;
+
+  if FInserting then
+    begin
+      q := 'insert into '+FTable;
+      n := '';
+      v := '';
+      for i := FFieldOffset to row.FFields.Count - 1 do
+        begin
+          if i = FPrimaryKeyIndex then
+            continue;
+          if n<>'' then
+            n := n + ', ';
+          n := n + FResultSet.FieldName [i];
+          if v<>'' then
+            v := v + ', ';
+          fd := FResultSet.FieldDescriptor[i];  
+          case fd.datatype of
+            dtString  : v := v + FDatabase.FormatSql('%s', [row.Format[i].AsString]);
+            dtInteger : v := v + FDatabase.FormatSql('%d', [row.Format[i].AsInteger]);
+            dtFloat   : v := v + FDatabase.FormatSql('%f', [row.Format[i].AsFloat]);
+          //todo: other datatypes
+          else
+            v := v + 'NULL';
+          end;
+        end;
+      q := q + '(' + n + ') values (' + v + ')';
+      if FHelperSet.Query(q) then
+        begin
+          if FPrimaryKeyIndex >= 0 then
+            FEditRow.Strings [FPrimaryKeyIndex] := IntToStr (FHelperSet.FLastInsertID);
+          FResultSet.FRowList.Insert(ActiveRecord {FCurrent}, FEditRow);
+          //FResultSet.FRowList.Add(FEditRow);
+          FEditRow := TResultRow.Create;
+          FEditRow.FFields := FResultSet.FFields;
+        end
+      else
+        begin
+          //insert failed, do nothing
+        end;
+    end;
   FEditing := False;
   FInserting := False;
+//  FHelperSet.SQLDB.Commit;
 end;
 
 procedure TlsTable.InternalCancel;
 begin
+  if FEditing then //not inserting
+    begin
+      PRecInfo(ActiveBuffer).Row.Assign (FEditRow );
+      PRecInfo(ActiveBuffer).Row.FNulls.Assign(FEditRow.FNulls);
+    end;
   FEditing := False;
   FInserting := False;
+//  FHelperSet.SQLDB.Rollback;
 end;
 
 procedure TlsTable.InternalAddRecord(Buffer: Pointer; Append: Boolean);
@@ -195,6 +293,7 @@ begin
   inherited;
   FTables := TStringList.Create;
   FEditRow := TResultRow.Create;
+  FEditRow.FFields := FResultSet.FFields;
 end;
 
 destructor TlsTable.Destroy;
@@ -210,12 +309,12 @@ var i: Integer;
 begin
   if Assigned(FDatabase) then
     begin
-      FQuery := 'select * from '+FTable;
+      FInternalQuery := 'select * from '+FTable;
       FFieldOffset := 0;
       FPrimaryKeyIndex := -1;
       if FDatabase is TLiteDB then
         begin
-          FQuery := 'select rowid, * from '+FTable;
+          FInternalQuery := 'select rowid, * from '+FTable;
           FFieldOffset := 1;
           FPrimaryKeyIndex := 0;
         end;
@@ -241,6 +340,18 @@ procedure TlsTable.SetDatabase(const Value: TSqlDB);
 begin
   inherited;
   CheckDBMakeQuery;
+end;
+
+procedure TlsTable.ClearEditRow;
+var i: Integer;
+begin
+  FEditRow.Clear;
+  FEditRow.FFields := FResultSet.FFields;
+  for i := 0 to FEditRow.FFields.Count do
+    begin
+      FEditRow.Add('');
+      FEditRow.FNulls.Add(nil);
+    end;
 end;
 
 end.
