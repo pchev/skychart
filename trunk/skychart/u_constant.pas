@@ -557,7 +557,11 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
      nightvision : Boolean;
      ThemePath:string ='data/Themes';
      LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
+{$ifdef darwin}
+     OpenFileCMD:string = 'open';   //
+{$else}
      OpenFileCMD:string = 'kfmclient exec';   // default KDE
+{$endif}
 {$ifdef unix}
      tracefile:string =''; // to stdout
      dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
