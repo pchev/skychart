@@ -261,7 +261,7 @@ begin
       if FRealConnect then
         try
           PMyHandle:= mf.mysql_real_connect(@MyHandle, PChar(String(Host)), PChar(String(User)), PChar(String(Pass)),
-                     PChar(String(FDataBase)), FPort, nil {PChar(String(FUnixSock))}, 0{ FConnectOptions});
+                     PChar(String(FDataBase)), FPort, nil {PChar(String(FUnixSock))}, Integer(CLIENT_COMPRESS){ FConnectOptions});
           FActive := PMyHandle<>nil;
           if not FActive then
             begin
@@ -495,10 +495,12 @@ begin
 
           //Perform actual query:
           if 0=mf.mysql_query(@MyHandle, PChar(SQL)) then
+          //seems noor version of libmysql
+          //returns on, even on failure (...)
             begin
               StoreResult(mf.mysql_store_result(@MyHandle));
-              Result := true;
-              FLastError := 0;
+              FLastError := mf.mysql_errno(@MyHandle);
+              Result := FLastError=0;
               FLastErrorText := '';
               FHasResult := True;
             end
