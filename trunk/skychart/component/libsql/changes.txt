@@ -1,4 +1,7 @@
 0.75
+* Compile on Mac OSX with FPC, tested with Mysql and Sqlite.
+* Fix FPC/UNIX $IFDEF's.
+* Add lazarus package libsql.lpk.
 * Implemented basics for TDataSet compliancy
 * Created TlsQuery class that is TDataSet compatible and can present a read-only view to the results of an SQL query.
   TlsQuery class takes a SQL query string as paramter. FormatQuery also supported.
