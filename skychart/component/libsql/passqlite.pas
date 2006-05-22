@@ -412,7 +412,7 @@ function TLiteDB.Query(SQL: String): Boolean;
 var P,Q:PChar;
     i:Integer;
 begin
-  if Fsv = sv3 then
+  if (not FCallBackOnly) and(Fsv = sv3) then // new method break callbackonly-onFetchRow processing
     begin
       Result := Query3(SQL);
       exit;
