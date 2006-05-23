@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 266
+  Left = 270
   Height = 580
-  Top = 117
+  Top = 105
   Width = 860
   HorzScrollBar.Page = 859
   VertScrollBar.Page = 555
@@ -3286,6 +3286,7 @@ object f_main: Tf_main
         Hint = 'Edit Labels'
         Top = 2
         Action = EditLabels
+        PopupMenu = PopupMenu1
         Style = tbsCheck
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
@@ -7010,5 +7011,13 @@ object f_main: Tf_main
       2C272C272C272C272C272020222C0A2220202020202020202020202020202020
       227D3B0A
     }
+  end
+  object PopupMenu1: TPopupMenu
+    left = 72
+    top = 416
+    object ResetAllLabels1: TMenuItem
+      Caption = 'Reset All Labels'
+      OnClick = ResetAllLabels1Click
+    end
   end
 end
