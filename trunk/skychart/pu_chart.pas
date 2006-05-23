@@ -55,6 +55,10 @@ type
   Tf_chart = class(TForm)
     About2: TMenuItem;
     About1: TMenuItem;
+    AddLabel1: TMenuItem;
+    MenuItem1: TMenuItem;
+    RemoveLastLabel1: TMenuItem;
+    RemoveAllLabel1: TMenuItem;
     RefreshTimer: TTimer;
     ActionList1: TActionList;
     zoomplus: TAction;
@@ -101,11 +105,14 @@ type
     TrackOn1: TMenuItem;
     TrackOff1: TMenuItem;
     procedure About1Click(Sender: TObject);
+    procedure AddLabel1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ChartResize(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
+    procedure RemoveAllLabel1Click(Sender: TObject);
+    procedure RemoveLastLabel1Click(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure MoveWestExecute(Sender: TObject);
@@ -480,6 +487,25 @@ begin
 RefreshTimer.Enabled:=false;
 if locked then exit;
 if sc<>nil then sc.plot.init(Image1.width,Image1.height);
+Refresh;
+end;
+
+procedure Tf_chart.RemoveAllLabel1Click(Sender: TObject);
+begin
+sc.cfgsc.poscustomlabels:=0;
+sc.cfgsc.numcustomlabels:=0;
+Refresh;
+end;
+
+procedure Tf_chart.RemoveLastLabel1Click(Sender: TObject);
+var i,j: integer;
+begin
+if sc.cfgsc.poscustomlabels>0 then begin
+  for j:=sc.cfgsc.poscustomlabels+1 to sc.cfgsc^.numcustomlabels do
+      sc.cfgsc^.customlabels[j-1]:=sc.cfgsc^.customlabels[j];
+  dec(sc.cfgsc^.numcustomlabels);
+  sc.cfgsc^.poscustomlabels:=sc.cfgsc^.numcustomlabels;
+end;
 Refresh;
 end;
 
@@ -1252,6 +1278,13 @@ end;
 procedure Tf_chart.About1Click(Sender: TObject);
 begin
   identlabelClick(Sender);
+end;
+
+procedure Tf_chart.AddLabel1Click(Sender: TObject);
+var ra,dec: double;
+begin
+GetAdXy(Xcursor,Ycursor,ra,dec,sc.cfgsc);
+sc.AddNewLabel(ra,dec);
 end;
 
 procedure Tf_chart.identlabelClick(Sender: TObject);

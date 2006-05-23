@@ -56,7 +56,6 @@ type
      FDeleteLabel: Tintfunc;
      FDeleteAllLabel: Tvoidfunc;
      FLabelClick: Tintfunc;
-     editlabelmenu: Tpopupmenu;
      PlanetBMPs: Tbitmap;
      PlanetBMP : Tbitmap;
      XplanetImg: TPicture;
@@ -95,6 +94,7 @@ type
     Fstarshape,starbmp: Tbitmap;
     starbmpw:integer;
     IntfImg : TLazIntfImage;
+    editlabelmenu: Tpopupmenu;
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
   published
@@ -242,7 +242,7 @@ begin
  MenuItem.OnClick := DefaultLabel;
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Delete label';
+ MenuItem.Caption := 'Hide label';
  MenuItem.OnClick := DeleteLabel;
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);

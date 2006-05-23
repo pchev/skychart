@@ -47,13 +47,14 @@ Tskychart = class (TComponent)
     procedure EditLabelTxt(lnum,x,y: integer);
     procedure DefaultLabel(lnum: integer);
     procedure DeleteLabel(lnum: integer);
-    procedure DeleteAllLabel;
     procedure LabelClick(lnum: integer);
     procedure SetImage(value:TCanvas);
    public
     cfgsc : Pconf_skychart;
     labels: array[1..maxlabels] of Tobjlabel;
     numlabels: integer;
+    procedure ResetAllLabel;
+    procedure AddNewLabel(ra,dec: double);
     constructor Create(AOwner:Tcomponent); override;
     destructor  Destroy; override;
    published
@@ -70,6 +71,7 @@ Tskychart = class (TComponent)
     function GetFieldNum(fov:double):integer;
     function InitCoordinates : boolean;
     function InitObservatory : boolean;
+    function DrawCustomlabel :boolean;
     function DrawStars :boolean;
     function DrawVarStars :boolean;
     function DrawDblStars :boolean;
@@ -152,12 +154,15 @@ begin
  cfgsc^.AsteroidLstSize:=0;
  cfgsc^.CometLstSize:=0;
  cfgsc^.nummodlabels:=0;
+ cfgsc^.posmodlabels:=0;
+ cfgsc^.numcustomlabels:=0;
+ cfgsc^.poscustomlabels:=0;
  Fplot:=TSplot.Create(AOwner);
  Fplot.OnEditLabelPos:=@EditLabelPos;
  Fplot.OnEditLabelTxt:=@EditLabelTxt;
  Fplot.OnDefaultLabel:=@DefaultLabel;
  Fplot.OnDeleteLabel:=@DeleteLabel;
- Fplot.OnDeleteAllLabel:=@DeleteAllLabel;
+ Fplot.OnDeleteAllLabel:=@ResetAllLabel;
  Fplot.OnLabelClick:=@LabelClick;
 end;
 
@@ -610,6 +615,24 @@ if not cfgsc^.quick then begin
   cfgsc^.deprev:=cfgsc^.decentre;
 end;  
 result:=true;
+end;
+
+function Tskychart.DrawCustomLabel :boolean;
+var
+  ra,dec,x1,y1: Double;
+  xx,yy : single;
+  lid,i : integer;
+begin
+for i:=1 to cfgsc^.numcustomlabels do begin
+ ra:=cfgsc^.customlabels[i].ra;
+ dec:=cfgsc^.customlabels[i].dec;
+ lid:=trunc(1e5*ra)+trunc(1e5*dec);
+ projection(ra,dec,x1,y1,true,cfgsc) ;
+ WindowXY(x1,y1,xx,yy,cfgsc);
+ if (xx>cfgsc^.Xmin) and (xx<cfgsc^.Xmax) and (yy>cfgsc^.Ymin) and (yy<cfgsc^.Ymax) then begin
+    SetLabel(lid,xx,yy,0,2,7,cfgsc^.customlabels[i].txt);
+ end;
+end;
 end;
 
 function Tskychart.DrawStars :boolean;
@@ -2550,9 +2573,12 @@ for j:=1 to cfgsc^.nummodlabels do
        break;
      end;
 if i<0 then begin
-  inc(cfgsc^.nummodlabels);
-  if cfgsc^.nummodlabels>maxmodlabels then cfgsc^.nummodlabels:=1;
-  i:=cfgsc^.nummodlabels;
+   if cfgsc^.nummodlabels<maxmodlabels then inc(cfgsc^.nummodlabels);
+   if cfgsc^.posmodlabels<maxmodlabels then
+     inc(cfgsc^.posmodlabels)
+   else
+     cfgsc^.posmodlabels:=1;
+   i:=cfgsc^.posmodlabels;
 end;
 cfgsc^.modlabels[i].dx:=x-labels[lnum].x;
 cfgsc^.modlabels[i].dy:=y-labels[lnum].y;
@@ -2615,9 +2641,12 @@ formpos(f1,x,y);
 if f1.ShowModal=mrOK then begin
    txt:=e1.Text;
    if i<0 then begin
-     inc(cfgsc^.nummodlabels);
-     if cfgsc^.nummodlabels>maxmodlabels then cfgsc^.nummodlabels:=1;
-     i:=cfgsc^.nummodlabels;
+     if cfgsc^.nummodlabels<maxmodlabels then inc(cfgsc^.nummodlabels);
+     if cfgsc^.posmodlabels<maxmodlabels then
+       inc(cfgsc^.posmodlabels)
+     else
+       cfgsc^.posmodlabels:=1;
+     i:=cfgsc^.posmodlabels;
      cfgsc^.modlabels[i].dx:=0;
      cfgsc^.modlabels[i].dy:=0;
    end;
@@ -2627,6 +2656,72 @@ if f1.ShowModal=mrOK then begin
    cfgsc^.modlabels[i].id:=id;
    cfgsc^.modlabels[i].hiden:=false;
    DrawLabels;
+end;
+finally
+e1.Free;
+b1.Free;
+b2.Free;
+f1.Free;
+end;
+end;
+
+procedure Tskychart.AddNewLabel(ra,dec: double);
+var i,j,lid: integer;
+    x1,y1: double;
+    x,y: single;
+    labelnum,fontnum:byte;
+    txt: string;
+    f1:Tform;
+    e1:Tedit;
+    b1,b2:Tbutton;
+begin
+lid:=trunc(1e5*ra)+trunc(1e5*dec);
+projection(ra,dec,x1,y1,true,cfgsc) ;
+ra:=NormRA(ra);
+WindowXY(x1,y1,x,y,cfgsc);
+fontnum:=2;
+labelnum:=7;
+f1:=Tform.Create(self);
+e1:=Tedit.Create(f1);
+b1:=Tbutton.Create(f1);
+b2:=Tbutton.Create(f1);
+try
+e1.Parent:=f1;
+b1.Parent:=f1;
+b2.Parent:=f1;
+e1.Font.Name:=fplot.cfgplot^.FontName[fontnum];
+e1.Top:=8;
+e1.Left:=8;
+e1.Width:=150;
+b1.Width:=65;
+b2.Width:=65;
+b1.Top:=e1.Top+e1.Height+8;
+b2.Top:=b1.Top;
+b1.Left:=8;
+b2.Left:=b1.Left+b2.Width+8;
+b1.Caption:='Ok';
+b2.Caption:='Cancel';
+b1.ModalResult:=mrOk;
+b2.ModalResult:=mrCancel;
+f1.ClientWidth:=e1.Width+16;
+f1.ClientHeight:=b1.top+b1.Height+8;
+e1.Text:=txt;
+f1.BorderStyle:=bsDialog;
+f1.Caption:='Add Label';
+formpos(f1,trunc(x),trunc(y));
+if f1.ShowModal=mrOK then begin
+   txt:=e1.Text;
+   if cfgsc^.numcustomlabels<maxmodlabels then inc(cfgsc^.numcustomlabels);
+   if cfgsc^.poscustomlabels<maxmodlabels then
+     inc(cfgsc^.poscustomlabels)
+   else
+     cfgsc^.poscustomlabels:=1;
+   i:=cfgsc^.poscustomlabels;
+   cfgsc^.customlabels[i].ra:=ra;
+   cfgsc^.customlabels[i].dec:=dec;
+   cfgsc^.customlabels[i].txt:=txt;
+   SetLabel(lid,x,y,0,fontnum,labelnum,txt);
+   Refresh;
 end;
 finally
 e1.Free;
@@ -2655,9 +2750,12 @@ for j:=1 to cfgsc^.nummodlabels do
        break;
      end;
 if i<0 then begin
-  inc(cfgsc^.nummodlabels);
-  if cfgsc^.nummodlabels>maxmodlabels then cfgsc^.nummodlabels:=1;
-  i:=cfgsc^.nummodlabels;
+   if cfgsc^.nummodlabels<maxmodlabels then inc(cfgsc^.nummodlabels);
+   if cfgsc^.posmodlabels<maxmodlabels then
+     inc(cfgsc^.posmodlabels)
+   else
+     cfgsc^.posmodlabels:=1;
+   i:=cfgsc^.posmodlabels;
 end;
 cfgsc^.modlabels[i].dx:=0;
 cfgsc^.modlabels[i].dy:=0;
@@ -2669,9 +2767,10 @@ cfgsc^.modlabels[i].hiden:=true;
 DrawLabels;
 end;
 
-procedure Tskychart.DeleteAllLabel;
+procedure Tskychart.ResetAllLabel;
 begin
 cfgsc^.nummodlabels:=0;
+cfgsc^.posmodlabels:=0;
 DrawLabels;
 end;
 
@@ -2688,6 +2787,7 @@ for j:=1 to cfgsc^.nummodlabels do
 if i<0 then exit;
 for j:=i+1 to cfgsc^.nummodlabels do cfgsc^.modlabels[j-1]:=cfgsc^.modlabels[j];
 dec(cfgsc^.nummodlabels);
+cfgsc^.posmodlabels:=cfgsc^.nummodlabels;
 DrawLabels;
 end;
 
@@ -2705,6 +2805,7 @@ var i,j,x,y,r: integer;
     txt:string;
     skiplabel:boolean;
 begin
+DrawCustomlabel;
 Fplot.InitLabel;
 for i:=1 to numlabels do begin
   skiplabel:=false;

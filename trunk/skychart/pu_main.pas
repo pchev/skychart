@@ -82,6 +82,8 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    ResetAllLabels1: TMenuItem;
+    PopupMenu1: TPopupMenu;
     SetupCatalog: TAction;
     HomePage1: TMenuItem;
     Maillist1: TMenuItem;
@@ -425,6 +427,7 @@ type
     procedure Maillist1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
+    procedure ResetAllLabels1Click(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
     procedure SetupColourExecute(Sender: TObject);
     procedure SetupDisplayExecute(Sender: TObject);
@@ -1619,6 +1622,12 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
 end;
 end;
 
+procedure Tf_main.ResetAllLabels1Click(Sender: TObject);
+begin
+if MultiDoc1.ActiveObject is Tf_chart then
+      Tf_chart(MultiDoc1.ActiveObject).sc.ResetAllLabel;
+end;
+
 procedure Tf_main.EditLabelsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
@@ -2707,6 +2716,9 @@ def_cfgsc.GRSlongitude:=92;
 def_cfgsc.LabelOrientation:=1;
 def_cfgsc.FindOk:=false;
 def_cfgsc.nummodlabels:=0;
+def_cfgsc.posmodlabels:=0;
+def_cfgsc.numcustomlabels:=0;
+def_cfgsc.poscustomlabels:=0;
 for i:=1 to 10 do def_cfgsc.circle[i,1]:=0;
 for i:=1 to 10 do def_cfgsc.circle[i,2]:=0;
 for i:=1 to 10 do def_cfgsc.circle[i,3]:=0;
@@ -3126,6 +3138,7 @@ csc.DT_UT_val:=ReadFloat(section,'DT_UT_val',csc.DT_UT_val);
 section:='projection';
 for i:=1 to maxfield do csc.projname[i]:=ReadString(section,'ProjName'+inttostr(i),csc.projname[i] );
 section:='labels';
+csc.posmodlabels:=ReadInteger(section,'poslabels',0);
 csc.nummodlabels:=ReadInteger(section,'numlabels',0);
 for i:=1 to csc.nummodlabels do begin
    csc.modlabels[i].id:=ReadInteger(section,'labelid'+inttostr(i),0);
@@ -3135,6 +3148,14 @@ for i:=1 to csc.nummodlabels do begin
    csc.modlabels[i].fontnum:=ReadInteger(section,'labelfont'+inttostr(i),2);
    csc.modlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
    csc.modlabels[i].hiden:=ReadBool(section,'labelhiden'+inttostr(i),false);
+end;
+section:='custom_labels';
+csc.poscustomlabels:=ReadInteger(section,'poslabels',0);
+csc.numcustomlabels:=ReadInteger(section,'numlabels',0);
+for i:=1 to csc.numcustomlabels do begin
+   csc.customlabels[i].ra:=ReadFloat(section,'labelra'+inttostr(i),0);
+   csc.customlabels[i].dec:=ReadFloat(section,'labeldec'+inttostr(i),0);
+   csc.customlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
 end;
 end;
 finally
@@ -3519,6 +3540,7 @@ section:='projection';
 for i:=1 to maxfield do WriteString(section,'ProjName'+inttostr(i),csc.projname[i] );
 section:='labels';
 EraseSection(section);
+WriteInteger(section,'poslabels',csc.posmodlabels);
 WriteInteger(section,'numlabels',csc.nummodlabels);
 for i:=1 to csc.nummodlabels do begin
    WriteInteger(section,'labelid'+inttostr(i),csc.modlabels[i].id);
@@ -3528,6 +3550,14 @@ for i:=1 to csc.nummodlabels do begin
    WriteInteger(section,'labelfont'+inttostr(i),csc.modlabels[i].fontnum);
    WriteString(section,'labeltxt'+inttostr(i),csc.modlabels[i].txt);
    WriteBool(section,'labelhiden'+inttostr(i),csc.modlabels[i].hiden);
+end;
+section:='custom_labels';
+WriteInteger(section,'poslabels',csc.poscustomlabels);
+WriteInteger(section,'numlabels',csc.numcustomlabels);
+for i:=1 to csc.numcustomlabels do begin
+   WriteFloat(section,'labelra'+inttostr(i),csc.customlabels[i].ra);
+   WriteFloat(section,'labeldec'+inttostr(i),csc.customlabels[i].dec);
+   WriteString(section,'labeltxt'+inttostr(i),csc.customlabels[i].txt);
 end;
 Updatefile;
 end;

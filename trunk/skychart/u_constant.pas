@@ -311,6 +311,10 @@ type
             txt: string;
             hiden: boolean;
             end;
+     Tcustomlabel = record
+            ra,dec: double;
+            txt: string;
+            end;
 
      TGCatLst =  record
                     min, max, magmax : single;
@@ -411,8 +415,9 @@ type
                 AsteroidName: TasteroidName;
                 CometName: Tcometname;
                 horizonlist : Phorizonlist;
-                nummodlabels: integer;
+                nummodlabels, posmodlabels, numcustomlabels, poscustomlabels: integer;
                 modlabels: array[1..maxmodlabels] of Tmodlabel;
+                customlabels: array[1..maxmodlabels] of Tcustomlabel;
                 LabelMagDiff : array[1..numlabtype] of double;
                 ShowLabel : array[1..numlabtype] of boolean;
                 circle : array [1..10,1..3] of single; // radius, rotation, offset
