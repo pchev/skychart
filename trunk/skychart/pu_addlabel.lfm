@@ -5,26 +5,28 @@ object f_addlabel: Tf_addlabel
   Width = 214
   HorzScrollBar.Page = 213
   VertScrollBar.Page = 105
+  ActiveControl = Edit1
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Add Label'
   ClientHeight = 106
   ClientWidth = 214
-  PixelsPerInch = 90
+  OnShow = FormShow
+  PixelsPerInch = 96
   object Label1: TLabel
     Left = 12
-    Height = 13
+    Height = 14
     Top = 16
-    Width = 35
+    Width = 30
     Caption = 'Label:'
     Color = clNone
     ParentColor = False
   end
   object Label2: TLabel
     Left = 12
-    Height = 13
+    Height = 14
     Top = 45
-    Width = 32
+    Width = 29
     Caption = 'Type:'
     Color = clNone
     ParentColor = False
@@ -39,11 +41,10 @@ object f_addlabel: Tf_addlabel
   end
   object ComboBox1: TComboBox
     Left = 56
-    Height = 25
+    Height = 21
     Top = 40
     Width = 150
     AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-    ItemIndex = 0
     Items.Strings = (
       'Star'
       'Variable Star'
