@@ -12,7 +12,7 @@ object f_config_display: Tf_config_display
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   object MainPanel: TPanel
     Height = 482
     Width = 523
@@ -27,12 +27,12 @@ object f_config_display: Tf_config_display
       Top = 1
       Width = 521
       Align = alClient
-      PageIndex = 0
+      PageIndex = 5
       ShowTabs = False
       object Page1: TPage
         Caption = 'Display'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -86,7 +86,7 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 441
           Caption = 'Star Display  Properties'
-          ClientHeight = 224
+          ClientHeight = 225
           ClientWidth = 437
           TabOrder = 2
           Visible = False
@@ -185,7 +185,6 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 192
             Width = 95
-            BorderSpacing.InnerBorder = 2
             Caption = 'Default'
             OnClick = StarButton1Click
             TabOrder = 4
@@ -195,7 +194,6 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 192
             Width = 95
-            BorderSpacing.InnerBorder = 2
             Caption = 'Naked Eye'
             OnClick = StarButton2Click
             TabOrder = 5
@@ -205,7 +203,6 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 192
             Width = 95
-            BorderSpacing.InnerBorder = 2
             Caption = 'High Color'
             OnClick = StarButton3Click
             TabOrder = 6
@@ -215,7 +212,6 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 192
             Width = 95
-            BorderSpacing.InnerBorder = 2
             Caption = 'Black/White'
             OnClick = StarButton4Click
             TabOrder = 7
@@ -224,8 +220,8 @@ object f_config_display: Tf_config_display
       end
       object Page2: TPage
         Caption = 'Colour'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object Label181: TLabel
           Left = 86
           Height = 14
@@ -722,8 +718,8 @@ object f_config_display: Tf_config_display
       end
       object Page3: TPage
         Caption = 'Deep-sky colour'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object lblDSOCScheme: TLabel
           Left = 16
           Height = 14
@@ -1197,7 +1193,6 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 88
             Width = 75
-            BorderSpacing.InnerBorder = 2
             Caption = 'Default'
             OnClick = DefNebColorButtonClick
             TabOrder = 2
@@ -1242,8 +1237,8 @@ object f_config_display: Tf_config_display
       end
       object Page4: TPage
         Caption = 'Sky colour'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object skycolorbox: TRadioGroup
           Left = 24
           Height = 89
@@ -1378,7 +1373,6 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 152
             Width = 107
-            BorderSpacing.InnerBorder = 2
             Caption = 'Default color'
             OnClick = Button3Click
             TabOrder = 1
@@ -1387,8 +1381,8 @@ object f_config_display: Tf_config_display
       end
       object Page5: TPage
         Caption = 'Lines'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object EqGrid: TCheckBox
           Left = 16
           Height = 13
@@ -1545,8 +1539,8 @@ object f_config_display: Tf_config_display
       end
       object Page6: TPage
         Caption = 'Labels'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object MagLabel: TRadioGroup
           Left = 16
           Height = 73
@@ -1620,8 +1614,8 @@ object f_config_display: Tf_config_display
           Top = 64
           Width = 449
           Caption = 'Label Object'
-          ClientHeight = 273
-          ClientWidth = 449
+          ClientHeight = 256
+          ClientWidth = 445
           TabOrder = 4
           object Label237: TLabel
             Left = 244
@@ -1814,6 +1808,7 @@ object f_config_display: Tf_config_display
             MaxValue = 10
             OnChange = labelmagChanged
             TabOrder = 8
+            Value = 1
           end
           object labelmagVar: TSpinEdit
             Tag = 2
@@ -1824,6 +1819,7 @@ object f_config_display: Tf_config_display
             MaxValue = 10
             OnChange = labelmagChanged
             TabOrder = 9
+            Value = 1
           end
           object LabelmagMult: TSpinEdit
             Tag = 3
@@ -1834,6 +1830,7 @@ object f_config_display: Tf_config_display
             MaxValue = 10
             OnChange = labelmagChanged
             TabOrder = 10
+            Value = 1
           end
           object labelmagNeb: TSpinEdit
             Tag = 4
@@ -1844,6 +1841,7 @@ object f_config_display: Tf_config_display
             MaxValue = 10
             OnChange = labelmagChanged
             TabOrder = 11
+            Value = 1
           end
           object labelmagSol: TSpinEdit
             Tag = 5
@@ -1854,6 +1852,7 @@ object f_config_display: Tf_config_display
             MaxValue = 10
             OnChange = labelmagChanged
             TabOrder = 12
+            Value = 1
           end
           object labelsizeStar: TSpinEdit
             Tag = 1
@@ -1955,8 +1954,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TPage
         Caption = 'Fonts'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object Bevel10: TBevel
           Name = 'Bevel10'
           Left = 8
@@ -2351,7 +2350,6 @@ object f_config_display: Tf_config_display
           Height = 25
           Top = 376
           Width = 75
-          BorderSpacing.InnerBorder = 2
           Caption = 'Default'
           OnClick = DefaultFontClick
           TabOrder = 6
@@ -2369,8 +2367,8 @@ object f_config_display: Tf_config_display
       end
       object Page8: TPage
         Caption = 'Finder circle'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object Label307: TLabel
           Left = 80
           Height = 14
@@ -2496,8 +2494,8 @@ object f_config_display: Tf_config_display
           ScrollBars = ssAutoBoth
           TabOrder = 10
           TabStop = True
-          VisibleColCount = 1
-          VisibleRowCount = 1
+          VisibleColCount = 4
+          VisibleRowCount = 10
           OnSetEditText = CirclegridSetEditText
         end
         object CenterMark1: TCheckBox
@@ -2512,8 +2510,8 @@ object f_config_display: Tf_config_display
       end
       object Page9: TPage
         Caption = 'Finder rectangle'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 521
+        ClientHeight = 480
         object Label308: TLabel
           Left = 80
           Height = 14
@@ -2639,8 +2637,8 @@ object f_config_display: Tf_config_display
           ScrollBars = ssAutoBoth
           TabOrder = 10
           TabStop = True
-          VisibleColCount = 1
-          VisibleRowCount = 1
+          VisibleColCount = 5
+          VisibleRowCount = 10
           OnSetEditText = RectangleGridSetEditText
         end
         object CenterMark2: TCheckBox
@@ -2669,7 +2667,6 @@ object f_config_display: Tf_config_display
       Top = 10
       Width = 77
       Anchors = [akTop, akRight]
-      BorderSpacing.InnerBorder = 2
       Caption = 'OK'
       Default = True
       ModalResult = 1
@@ -2681,7 +2678,6 @@ object f_config_display: Tf_config_display
       Top = 10
       Width = 77
       Anchors = [akTop, akRight]
-      BorderSpacing.InnerBorder = 2
       Caption = 'Apply'
       OnClick = Button4Click
       TabOrder = 1
@@ -2692,7 +2688,6 @@ object f_config_display: Tf_config_display
       Top = 10
       Width = 77
       Anchors = [akTop, akRight]
-      BorderSpacing.InnerBorder = 2
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
