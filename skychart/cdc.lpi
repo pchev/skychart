@@ -15,7 +15,6 @@
       <TargetFileExt Value=".exe"/>
       <Title Value="Cartes du Ciel"/>
     </General>
-    <LazDoc Paths=""/>
     <PublishOptions>
       <Version Value="2"/>
       <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
@@ -94,7 +93,7 @@
         <PackageName Value="cdccatalog"/>
       </Item20>
     </RequiredPackages>
-    <Units Count="39">
+    <Units Count="40">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -368,6 +367,14 @@
         <ResourceFilename Value="pu_progressbar.lrs"/>
         <UnitName Value="pu_progressbar"/>
       </Unit38>
+      <Unit39>
+        <Filename Value="pu_addlabel.pas"/>
+        <ComponentName Value="f_addlabel"/>
+        <HasResources Value="True"/>
+        <IsPartOfProject Value="True"/>
+        <ResourceFilename Value="pu_addlabel.lrs"/>
+        <UnitName Value="pu_addlabel"/>
+      </Unit39>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

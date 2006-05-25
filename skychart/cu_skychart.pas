@@ -2692,6 +2692,7 @@ if f_addlabel.ShowModal=mrOK then begin
    cfgsc^.customlabels[i].labelnum:=f_addlabel.labelnum;
    cfgsc^.customlabels[i].txt:=txt;
    SetLabel(lid,x,y,0,fontnum,cfgsc^.customlabels[i].labelnum,txt);
+   DrawLabels;
    Refresh;
 end;
 end;
@@ -2770,8 +2771,8 @@ var i,j,x,y,r: integer;
     txt:string;
     skiplabel:boolean;
 begin
-DrawCustomlabel;
 Fplot.InitLabel;
+DrawCustomlabel;
 for i:=1 to numlabels do begin
   skiplabel:=false;
   x:=labels[i].x;

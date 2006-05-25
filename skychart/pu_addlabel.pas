@@ -21,6 +21,7 @@ type
     Label2: TLabel;
     procedure ComboBox1Select(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { private declarations }
   public
@@ -39,6 +40,12 @@ implementation
 procedure Tf_addlabel.Edit1Change(Sender: TObject);
 begin
   txt:=edit1.Text;
+end;
+
+procedure Tf_addlabel.FormShow(Sender: TObject);
+begin
+  txt:=edit1.Text;
+  labelnum:=ComboBox1.ItemIndex+1;
 end;
 
 procedure Tf_addlabel.ComboBox1Select(Sender: TObject);
