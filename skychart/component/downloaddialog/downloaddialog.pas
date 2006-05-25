@@ -310,6 +310,8 @@ end;
 
 procedure TDownloadDialog.HTTPComplete;
 var ok:boolean;
+    i: integer;
+    newurl:string;
 begin
  ok:=DownloadDaemon.ok;
  if ok
@@ -319,7 +321,24 @@ begin
       http.Document.Position:=0;
       http.Document.SaveToFile(FFile);
       FResponse:='Finished: '+progress.text;
-    end else begin // error
+    end else if http.ResultCode=302 then begin
+      for i:=0 to http.Headers.Count-1 do begin
+         if copy(http.Headers[i],1,9)='Location:' then begin
+            newurl:=trim(copy(http.Headers[i],10,9999));
+            if Furl=newurl then ok:=false
+              else begin
+                progress.text:='Redirect to: '+newurl;
+                if assigned(FDownloadFeedback) then FDownloadFeedback(progress.text);
+                Furl:=newurl;
+                StartDownload;
+                exit;
+              end;
+         end;
+      end;
+      http.Document.SaveToFile(FFile);
+      ok:=false;
+    end else
+    begin // error
       ok:=false;
       FResponse:='Finished: '+progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
       progress.Text:=FResponse;
