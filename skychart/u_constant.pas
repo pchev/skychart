@@ -313,6 +313,7 @@ type
             end;
      Tcustomlabel = record
             ra,dec: double;
+            labelnum: byte;
             txt: string;
             end;
 

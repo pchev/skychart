@@ -3155,6 +3155,7 @@ csc.numcustomlabels:=ReadInteger(section,'numlabels',0);
 for i:=1 to csc.numcustomlabels do begin
    csc.customlabels[i].ra:=ReadFloat(section,'labelra'+inttostr(i),0);
    csc.customlabels[i].dec:=ReadFloat(section,'labeldec'+inttostr(i),0);
+   csc.customlabels[i].labelnum:=ReadInteger(section,'labelnum'+inttostr(i),7);
    csc.customlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
 end;
 end;
@@ -3557,6 +3558,7 @@ WriteInteger(section,'numlabels',csc.numcustomlabels);
 for i:=1 to csc.numcustomlabels do begin
    WriteFloat(section,'labelra'+inttostr(i),csc.customlabels[i].ra);
    WriteFloat(section,'labeldec'+inttostr(i),csc.customlabels[i].dec);
+   WriteInteger(section,'labelnum'+inttostr(i),csc.customlabels[i].labelnum);
    WriteString(section,'labeltxt'+inttostr(i),csc.customlabels[i].txt);
 end;
 Updatefile;

@@ -1,0 +1,82 @@
+object f_addlabel: Tf_addlabel
+  Left = 239
+  Height = 106
+  Top = 214
+  Width = 214
+  HorzScrollBar.Page = 213
+  VertScrollBar.Page = 105
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Add Label'
+  ClientHeight = 106
+  ClientWidth = 214
+  PixelsPerInch = 90
+  object Label1: TLabel
+    Left = 12
+    Height = 13
+    Top = 16
+    Width = 35
+    Caption = 'Label:'
+    Color = clNone
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 12
+    Height = 13
+    Top = 45
+    Width = 32
+    Caption = 'Type:'
+    Color = clNone
+    ParentColor = False
+  end
+  object Edit1: TEdit
+    Left = 56
+    Height = 23
+    Top = 8
+    Width = 150
+    OnChange = Edit1Change
+    TabOrder = 0
+  end
+  object ComboBox1: TComboBox
+    Left = 56
+    Height = 25
+    Top = 40
+    Width = 150
+    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    ItemIndex = 0
+    Items.Strings = (
+      'Star'
+      'Variable Star'
+      'Multiple Star'
+      'Nebula'
+      'Solar System'
+      'Constellation'
+      'Other label'
+      'Chart Information'
+    )
+    MaxLength = 0
+    OnSelect = ComboBox1Select
+    TabOrder = 1
+    Text = 'Star'
+  end
+  object Button1: TButton
+    Left = 56
+    Height = 25
+    Top = 72
+    Width = 65
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Ok'
+    ModalResult = 1
+    TabOrder = 2
+  end
+  object Button2: TButton
+    Left = 141
+    Height = 25
+    Top = 72
+    Width = 65
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+end

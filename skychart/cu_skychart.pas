@@ -27,7 +27,7 @@ interface
 
 uses gcatunit, {libcatalog,} // libcatalog statically linked
      cu_plot, cu_catalog, cu_fits, u_constant, cu_planet, cu_database, u_projection, u_util,
-     SysUtils, Classes, Math, Types, Buttons,
+     pu_addlabel, SysUtils, Classes, Math, Types, Buttons,
      Forms, StdCtrls, Controls, ExtCtrls, Graphics, FPImage, LCLType, IntfGraphics;
 type
   Tint2func = procedure(i,j: integer) of object;
@@ -630,7 +630,7 @@ for i:=1 to cfgsc^.numcustomlabels do begin
  projection(ra,dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc^.Xmin) and (xx<cfgsc^.Xmax) and (yy>cfgsc^.Ymin) and (yy<cfgsc^.Ymax) then begin
-    SetLabel(lid,xx,yy,0,2,7,cfgsc^.customlabels[i].txt);
+    SetLabel(lid,xx,yy,0,2,cfgsc^.customlabels[i].labelnum,cfgsc^.customlabels[i].txt);
  end;
 end;
 end;
@@ -2669,48 +2669,18 @@ procedure Tskychart.AddNewLabel(ra,dec: double);
 var i,j,lid: integer;
     x1,y1: double;
     x,y: single;
-    labelnum,fontnum:byte;
+    fontnum:byte;
     txt: string;
-    f1:Tform;
-    e1:Tedit;
-    b1,b2:Tbutton;
 begin
 lid:=trunc(1e5*ra)+trunc(1e5*dec);
 projection(ra,dec,x1,y1,true,cfgsc) ;
 ra:=NormRA(ra);
 WindowXY(x1,y1,x,y,cfgsc);
 fontnum:=2;
-labelnum:=7;
-f1:=Tform.Create(self);
-e1:=Tedit.Create(f1);
-b1:=Tbutton.Create(f1);
-b2:=Tbutton.Create(f1);
-try
-e1.Parent:=f1;
-b1.Parent:=f1;
-b2.Parent:=f1;
-e1.Font.Name:=fplot.cfgplot^.FontName[fontnum];
-e1.Top:=8;
-e1.Left:=8;
-e1.Width:=150;
-b1.Width:=65;
-b2.Width:=65;
-b1.Top:=e1.Top+e1.Height+8;
-b2.Top:=b1.Top;
-b1.Left:=8;
-b2.Left:=b1.Left+b2.Width+8;
-b1.Caption:='Ok';
-b2.Caption:='Cancel';
-b1.ModalResult:=mrOk;
-b2.ModalResult:=mrCancel;
-f1.ClientWidth:=e1.Width+16;
-f1.ClientHeight:=b1.top+b1.Height+8;
-e1.Text:=txt;
-f1.BorderStyle:=bsDialog;
-f1.Caption:='Add Label';
-formpos(f1,trunc(x),trunc(y));
-if f1.ShowModal=mrOK then begin
-   txt:=e1.Text;
+if f_addlabel=nil then f_addlabel:=Tf_addlabel.Create(application);
+formpos(f_addlabel,trunc(x),trunc(y));
+if f_addlabel.ShowModal=mrOK then begin
+   txt:=f_addlabel.txt;
    if cfgsc^.numcustomlabels<maxmodlabels then inc(cfgsc^.numcustomlabels);
    if cfgsc^.poscustomlabels<maxmodlabels then
      inc(cfgsc^.poscustomlabels)
@@ -2719,15 +2689,10 @@ if f1.ShowModal=mrOK then begin
    i:=cfgsc^.poscustomlabels;
    cfgsc^.customlabels[i].ra:=ra;
    cfgsc^.customlabels[i].dec:=dec;
+   cfgsc^.customlabels[i].labelnum:=f_addlabel.labelnum;
    cfgsc^.customlabels[i].txt:=txt;
-   SetLabel(lid,x,y,0,fontnum,labelnum,txt);
+   SetLabel(lid,x,y,0,fontnum,cfgsc^.customlabels[i].labelnum,txt);
    Refresh;
-end;
-finally
-e1.Free;
-b1.Free;
-b2.Free;
-f1.Free;
 end;
 end;
 
