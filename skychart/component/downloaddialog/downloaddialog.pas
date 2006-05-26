@@ -57,7 +57,7 @@ type
   private
     DownloadDaemon: TDownloadDaemon;
     FDownloadFeedback: TDownloadFeedback;
-    Furl:string;
+    Furl,Ffirsturl:string;
     Ffile: string;
     FResponse: string;
     Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
@@ -147,6 +147,7 @@ var urltxt,filetxt: TLabeledEdit;
     pos: TPoint;
 begin
   FResponse:='';
+  Ffirsturl:=Furl;
   DF:=TForm.Create(Self);
   DF.Caption:='Download File';
   DF.FormStyle:=fsStayOnTop;
@@ -321,11 +322,11 @@ begin
       http.Document.Position:=0;
       http.Document.SaveToFile(FFile);
       FResponse:='Finished: '+progress.text;
-    end else if http.ResultCode=302 then begin
+    end else if (http.ResultCode=301)or(http.ResultCode=302)or(http.ResultCode=307) then begin
       for i:=0 to http.Headers.Count-1 do begin
-         if copy(http.Headers[i],1,9)='Location:' then begin
+         if uppercase(copy(http.Headers[i],1,9))='LOCATION:' then begin
             newurl:=trim(copy(http.Headers[i],10,9999));
-            if Furl=newurl then ok:=false
+            if (newurl=Furl)or(newurl=Ffirsturl) then ok:=false
               else begin
                 progress.text:='Redirect to: '+newurl;
                 if assigned(FDownloadFeedback) then FDownloadFeedback(progress.text);
@@ -335,7 +336,6 @@ begin
               end;
          end;
       end;
-      http.Document.SaveToFile(FFile);
       ok:=false;
     end else
     begin // error
