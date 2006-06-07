@@ -61,6 +61,8 @@ type
     RemoveAllLabel1: TMenuItem;
     RefreshTimer: TTimer;
     ActionList1: TActionList;
+    VertScrollBar: TScrollBar;
+    HorScrollBar: TScrollBar;
     zoomplus: TAction;
     zoomminus: TAction;
     MoveWest: TAction;
@@ -110,9 +112,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ChartResize(Sender: TObject);
+    procedure HorScrollBarChange(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
+    procedure VertScrollBarChange(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure MoveWestExecute(Sender: TObject);
@@ -180,12 +184,13 @@ type
     procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
     procedure Image1MouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure Image1Paint(Sender: TObject);
+    procedure SetScrollBar;
   public
     { Public declarations }
     Image1 : TChartDrawingControl;
     sc: Tskychart;
     indi1: TIndiClient;
-    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh :boolean;
+    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar :boolean;
     undolist : array[1..maxundo] of conf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
@@ -317,6 +322,16 @@ begin
  Image1.Cursor := crCross;
  lock_refresh:=false;
  MovingCircle:=false;
+ VertScrollBar.Max:=90*3600;   // arcsecond position precision
+ VertScrollBar.Min:=-90*3600;
+ VertScrollBar.SmallChange:=3600;
+ VertScrollBar.LargeChange:=10*VertScrollBar.SmallChange;
+ VertScrollBar.PageSize:=VertScrollBar.LargeChange;
+ HorScrollBar.Max:=360*3600;
+ HorScrollBar.Min:=0;
+ HorScrollBar.SmallChange:=3600;
+ HorScrollBar.LargeChange:=10*HorScrollBar.SmallChange;
+ HorScrollBar.PageSize:=HorScrollBar.LargeChange;
 end;
 
 procedure Tf_chart.FormDestroy(Sender: TObject);
@@ -384,10 +399,11 @@ if lock_refresh then exit;
     curundo:=lastundo;
     Identlabel.color:=sc.plot.cfgplot.color[0];
     Identlabel.font.color:=sc.plot.cfgplot.color[11];
-    Panel1.color:=sc.plot.cfgplot.color[0];
+//    Panel1.color:=sc.plot.cfgplot.color[0];
     if sc.cfgsc.FindOk then ShowIdentLabel;
     if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
- end;
+    SetScrollBar;
+end;
 finally
  lock_refresh:=false;
  screen.cursor:=crDefault;
@@ -425,6 +441,7 @@ if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
   if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
   if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
   if assigned(FChartMove) then FChartMove(self);
+  SetScrollBar;
 end;
 end;
 
@@ -446,6 +463,7 @@ if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
   if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
   if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
   if assigned(FChartMove) then FChartMove(self);
+  SetScrollBar;
 end;
 end;
 
@@ -463,6 +481,109 @@ with Image1.Canvas do begin
  Rectangle(0,0,Image1.Width,Image1.Height);
 end;
 if sc<>nil then sc.plot.init(Image1.width,Image1.height);
+end;
+
+procedure Tf_chart.SetScrollBar;
+var i: integer;
+begin
+lockscrollbar:=true;
+try
+with sc do begin
+ if cfgsc^.Projpole=AltAz then begin
+    HorScrollBar.Position:=round(rmod(cfgsc^.acentre+pi2,pi2)*rad2deg*3600);
+    VertScrollBar.Position:=-round(cfgsc^.hcentre*rad2deg*3600);
+ end
+ else if cfgsc^.Projpole=Gal then begin
+    HorScrollBar.Position:=round(rmod(cfgsc^.lcentre+pi2,pi2)*rad2deg*3600);
+    VertScrollBar.Position:=-round(cfgsc^.bcentre*rad2deg*3600);
+ end
+ else if cfgsc^.Projpole=Ecl then begin
+    HorScrollBar.Position:=round(rmod(cfgsc^.lecentre+pi2,pi2)*rad2deg*3600);
+    VertScrollBar.Position:=-round(cfgsc^.becentre*rad2deg*3600);
+ end
+ else begin // Equ
+    HorScrollBar.Position:=round(rmod(cfgsc^.racentre+pi2,pi2)*rad2deg*3600);
+    VertScrollBar.Position:=-round(cfgsc^.decentre*rad2deg*3600);
+ end;
+ i:=round(rad2deg*3600*cfgsc^.fov/90);
+ if i<1 then i:=1;
+ if i>3600 then i:=3600;
+ VertScrollBar.SmallChange:=i;
+ VertScrollBar.LargeChange:=10*VertScrollBar.SmallChange;
+ VertScrollBar.PageSize:=VertScrollBar.LargeChange;
+ HorScrollBar.SmallChange:=i;
+ HorScrollBar.LargeChange:=10*HorScrollBar.SmallChange;
+ HorScrollBar.PageSize:=HorScrollBar.LargeChange;
+end;
+finally
+lockscrollbar:=false;
+end;
+end;
+
+procedure Tf_chart.HorScrollBarChange(Sender: TObject);
+begin
+if lockscrollbar then exit;
+lockscrollbar:=true;
+try
+with sc do begin
+ cfgsc^.TrackOn:=false;
+ if cfgsc^.Projpole=AltAz then begin
+    cfgsc^.acentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    Hz2Eq(cfgsc^.acentre,cfgsc^.hcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
+    cfgsc^.racentre:=cfgsc^.CurST-cfgsc^.racentre;
+ end
+ else if cfgsc^.Projpole=Gal then begin
+    cfgsc^.lcentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    Gal2Eq(cfgsc^.lcentre,cfgsc^.bcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
+ end
+ else if cfgsc^.Projpole=Ecl then begin
+    cfgsc^.lecentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    Ecl2Eq(cfgsc^.lecentre,cfgsc^.becentre,cfgsc^.e,cfgsc^.racentre,cfgsc^.decentre);
+ end
+ else begin // Equ
+    cfgsc^.racentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+end;
+end;
+Refresh;
+application.processmessages;
+finally
+lockscrollbar:=false;
+end;
+end;
+
+procedure Tf_chart.VertScrollBarChange(Sender: TObject);
+begin
+if lockscrollbar then exit;
+lockscrollbar:=true;
+try
+with sc do begin
+ cfgsc^.TrackOn:=false;
+ if cfgsc^.Projpole=AltAz then begin
+    cfgsc^.hcentre:=-deg2rad*VertScrollBar.Position/3600;
+    if cfgsc^.hcentre>pid2 then cfgsc^.hcentre:=pi-cfgsc^.hcentre;
+    Hz2Eq(cfgsc^.acentre,cfgsc^.hcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
+    cfgsc^.racentre:=cfgsc^.CurST-cfgsc^.racentre;
+ end
+ else if cfgsc^.Projpole=Gal then begin
+    cfgsc^.bcentre:=-deg2rad*VertScrollBar.Position/3600;
+    if cfgsc^.bcentre>pid2 then cfgsc^.bcentre:=pi-cfgsc^.bcentre;
+    Gal2Eq(cfgsc^.lcentre,cfgsc^.bcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
+ end
+ else if cfgsc^.Projpole=Ecl then begin
+    cfgsc^.becentre:=-deg2rad*VertScrollBar.Position/3600;
+    if cfgsc^.becentre>pid2 then cfgsc^.becentre:=pi-cfgsc^.becentre;
+    Ecl2Eq(cfgsc^.lecentre,cfgsc^.becentre,cfgsc^.e,cfgsc^.racentre,cfgsc^.decentre);
+ end
+ else begin // Equ
+    cfgsc^.decentre:=-deg2rad*VertScrollBar.Position/3600;
+    if cfgsc^.decentre>pid2 then cfgsc^.decentre:=pi-cfgsc^.decentre;
+end;
+end;
+Refresh;
+application.processmessages;
+finally
+lockscrollbar:=false;
+end;
 end;
 
 procedure Tf_chart.Image1Paint(Sender: TObject);
@@ -648,6 +769,7 @@ finally
  sc.plot.init(Image1.width,Image1.height);
  sc.Refresh;
  Image1.Invalidate;
+ SetScrollBar;
 end;
 end;
 
@@ -724,7 +846,6 @@ sc.MovetoXY(xcursor,ycursor);
 sc.cfgsc.TrackOn:=false;
 Refresh;
 end;
-
 
 procedure Tf_chart.MoveWestExecute(Sender: TObject);
 begin
@@ -1018,6 +1139,7 @@ else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ListXY(x,y);
 end
 else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift)) then begin
+   Image1.Cursor:=crCross;
    Refresh;
 end;
 end;
@@ -1032,7 +1154,7 @@ lasty:=y;
 lastyzoom:=y;
 case Button of
    mbLeft  : ZoomBox(1,X,Y);
-   mbMiddle: screen.cursor:=crHandPoint;
+   mbMiddle: image1.cursor:=crHandPoint;
 end;
 if assigned(FSetFocus) then FSetFocus(Self);
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
@@ -1241,7 +1363,7 @@ begin
 if LockTrackCursor then exit;
 try
    LockTrackCursor:=true;
-   screen.cursor:=crHandPoint;
+   image1.cursor:=crHandPoint;
    xx:=sc.cfgsc.xcentre-(x-lastx);
    yy:=sc.cfgsc.ycentre-(y-lasty);
    lastx:=x;
@@ -1252,7 +1374,7 @@ try
    if sc.cfgsc.racentre<0 then sc.cfgsc.racentre:=sc.cfgsc.racentre+pi2;
    sc.cfgsc.quick:=true;
    Refresh;
-   screen.cursor:=crHandPoint;
+   image1.cursor:=crHandPoint;
    application.processmessages;  // very important to empty the mouse event queue before to unlock
 finally
 LockTrackCursor:=false;
@@ -2542,6 +2664,7 @@ if FNightVision then begin
    for i:=1 to numlabtype do SaveLabelColor[i]:=sc.plot.cfgplot.labelcolor[i];
    sc.plot.cfgplot.color:=DfRedColor;
    for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=$000000A0;
+   Panel1.Color:=nv_dark;
 end else begin
    if (Savecolor[2]=DfRedColor[2])and(Savecolor[11]=DfRedColor[11]) then begin // started with night vision, return to default color as save is also red. 
       sc.plot.cfgplot.color:=DfColor;
@@ -2551,6 +2674,7 @@ end else begin
       sc.plot.cfgplot.color:=SaveColor;
       for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=SaveLabelColor[i];
    end;
+   Panel1.Color:=clGray;
 end;
 Refresh;
 end;
@@ -2607,6 +2731,7 @@ finally
 if savelabel then begin
    sc.cfgsc^.Editlabels:=true;
    sc.Refresh;
+   SetScrollBar;
 end;
 end;
 end;

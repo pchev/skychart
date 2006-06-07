@@ -24,7 +24,7 @@ object f_chart: Tf_chart
     BevelOuter = bvNone
     ClientHeight = 300
     ClientWidth = 500
-    Color = clBlack
+    Color = clGray
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
@@ -45,6 +45,31 @@ object f_chart: Tf_chart
       Transparent = False
       Visible = False
       OnClick = identlabelClick
+    end
+    object VertScrollBar: TScrollBar
+      Left = 485
+      Height = 285
+      Width = 15
+      Align = alRight
+      Kind = sbVertical
+      LargeChange = 10
+      Max = 50
+      Min = -50
+      PageSize = 10
+      TabOrder = 0
+      OnChange = VertScrollBarChange
+    end
+    object HorScrollBar: TScrollBar
+      Height = 15
+      Top = 285
+      Width = 500
+      Align = alBottom
+      LargeChange = 10
+      Max = 50
+      Min = -50
+      PageSize = 10
+      TabOrder = 1
+      OnChange = HorScrollBarChange
     end
   end
   object RefreshTimer: TTimer
