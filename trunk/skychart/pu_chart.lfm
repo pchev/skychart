@@ -15,7 +15,7 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = True
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Cursor = crCross
@@ -47,6 +47,7 @@ object f_chart: Tf_chart
       OnClick = identlabelClick
     end
     object VertScrollBar: TScrollBar
+      Cursor = crArrow
       Left = 485
       Height = 285
       Width = 15
@@ -60,6 +61,7 @@ object f_chart: Tf_chart
       OnChange = VertScrollBarChange
     end
     object HorScrollBar: TScrollBar
+      Cursor = crArrow
       Height = 15
       Top = 285
       Width = 500
