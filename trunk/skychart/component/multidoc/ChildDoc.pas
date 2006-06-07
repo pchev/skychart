@@ -78,7 +78,7 @@ type
     procedure SetTitleColor(col:TColor);
     procedure SetBorderColor(col:TColor);
     procedure SetTitleHeight(x:integer);
-    procedure SetBorderWidth(x:integer);
+    procedure SetBorderWdth(x:integer);
     procedure RestoreSize;
     property onMaximize: TNotifyEvent read FonMaximize write FonMaximize;
     property onRestore: TNotifyEvent read FonRestore write FonRestore;
@@ -495,7 +495,7 @@ begin
  BotBar.Visible:=true;
  LeftBar.Visible:=true;
  RightBar.Visible:=true;
- SetBorderWidth(BorderW);
+ SetBorderWdth(BorderW);
  if assigned(FonRestore) then FonRestore(self);
 end;
 
@@ -554,7 +554,7 @@ ButtonClose.Height:=TitleHeight-2;
 Title.Font.Height:=-(TitleHeight-2);
 end;
 
-procedure TChildDoc.SetBorderWidth(x:integer);
+procedure TChildDoc.SetBorderWdth(x:integer);
 begin
 TopLeftBar.SendtoBack;
 TopRightBar.SendtoBack;
