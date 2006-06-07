@@ -82,6 +82,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    ViewScrollBar1: TMenuItem;
     ResetAllLabels1: TMenuItem;
     PopupMenu1: TPopupMenu;
     SetupCatalog: TAction;
@@ -439,6 +440,7 @@ type
     procedure SetupPicturesExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
+    procedure ViewScrollBar1Click(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -687,6 +689,8 @@ begin
   if locked then Child.lock_refresh:=true;
   inc(cfgm.MaxChildID);
   Child.tag:=cfgm.MaxChildID;
+  Child.VertScrollBar.Visible:=ViewScrollBar1.Checked;
+  Child.HorScrollBar.Visible:=ViewScrollBar1.Checked;
   cp.Caption:=CName;
   Child.Caption:=CName;
   Child.sc.catalog:=catalog;
@@ -2415,6 +2419,18 @@ ViewStatusBar1.checked:=ToolBar1.visible;
 ViewTopPanel;
 end;
 
+procedure Tf_main.ViewScrollBar1Click(Sender: TObject);
+var i: Integer;
+begin
+ViewScrollBar1.Checked:=not ViewScrollBar1.Checked;
+for i:=0 to MultiDoc1.ChildCount-1 do
+  if MultiDoc1.Childs[i].DockedObject is Tf_chart then begin
+    (MultiDoc1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=ViewScrollBar1.Checked;
+    (MultiDoc1.Childs[i].DockedObject as Tf_chart).HorScrollBar.Visible:=ViewScrollBar1.Checked;
+    (MultiDoc1.Childs[i].DockedObject as Tf_chart).Refresh;
+  end;
+end;
+
 procedure Tf_main.ViewMainBarExecute(Sender: TObject);
 begin
 ToolBar1.visible:=not ToolBar1.visible;
@@ -3263,6 +3279,7 @@ toolbar1.visible:=ReadBool(section,'ViewMainBar',true);
 PanelLeft.visible:=ReadBool(section,'ViewLeftBar',true);
 PanelRight.visible:=ReadBool(section,'ViewRightBar',true);
 toolbar4.visible:=ReadBool(section,'ViewObjectBar',true);
+ViewScrollBar1.Checked:=ReadBool(section,'ViewScrollBar',true);
 MainBar1.checked:=ToolBar1.visible;
 ObjectBar1.checked:=ToolBar4.visible;
 LeftBar1.checked:=PanelLeft.visible;
@@ -3666,6 +3683,7 @@ WriteBool(section,'ViewMainBar',toolbar1.visible);
 WriteBool(section,'ViewLeftBar',PanelLeft.visible);
 WriteBool(section,'ViewRightBar',PanelRight.visible);
 WriteBool(section,'ViewObjectBar',toolbar4.visible);
+WriteBool(section,'ViewScrollBar',ViewScrollBar1.Checked);
 WriteInteger(section,'NumChart',MultiDoc1.ChildCount);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin

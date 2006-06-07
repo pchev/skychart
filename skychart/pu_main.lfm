@@ -4,10 +4,10 @@ object f_main: Tf_main
   Top = 105
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 555
+  VertScrollBar.Page = 553
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 556
+  ClientHeight = 554
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
@@ -155,14 +155,14 @@ object f_main: Tf_main
   TextHeight = 15
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 471
+    Height = 469
     Top = 53
     Width = 812
     Align = alClient
     BevelOuter = bvNone
-    BorderWidth = 1
+    BorderWidth = 2
     Caption = 'MultiDoc1'
-    ClientHeight = 471
+    ClientHeight = 469
     ClientWidth = 812
     Color = clBlack
     FullRepaint = False
@@ -2315,17 +2315,17 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 471
+    Height = 469
     Top = 53
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 471
+    ClientHeight = 469
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 0
     object ToolBar2: TToolBar
-      Height = 471
+      Height = 469
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2421,18 +2421,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 836
-    Height = 471
+    Height = 469
     Top = 53
     Width = 24
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 471
+    ClientHeight = 469
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 1
     object ToolBar3: TToolBar
-      Height = 221
+      Height = 219
       Top = 250
       Width = 24
       Align = alClient
@@ -2653,7 +2653,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 524
+    Top = 522
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -2682,8 +2682,8 @@ object f_main: Tf_main
       ParentFont = True
       TabOrder = 0
       object LPanels01: TLabel
-        Height = 17
-        Width = 58
+        Height = 15
+        Width = 68
         Caption = 'LPanels01'
         Color = clNone
         ParentColor = False
@@ -3537,6 +3537,10 @@ object f_main: Tf_main
           GroupIndex = 2
           OnClick = ViewStatusExecute
         end
+      end
+      object ViewScrollBar1: TMenuItem
+        Caption = 'Scroll Bar'
+        OnClick = ViewScrollBar1Click
       end
       object N9: TMenuItem
         Caption = '-'
