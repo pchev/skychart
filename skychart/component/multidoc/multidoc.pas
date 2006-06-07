@@ -226,7 +226,7 @@ inc(FChildIndex);
 setlength(FChild,FChildIndex+1);
 FChild[FChildIndex]:=TChildDoc.Create(self);
 FChild[FChildIndex].Parent:=self;
-FChild[FChildIndex].SetBorderWidth(BorderWidth);
+FChild[FChildIndex].SetBorderWdth(BorderWidth);
 FChild[FChildIndex].SetBorderColor(BorderColor);
 FChild[FChildIndex].SetTitleHeight(TitleHeight);
 FChild[FChildIndex].SetTitleColor(TitleColor);
