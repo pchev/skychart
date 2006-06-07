@@ -327,6 +327,7 @@ begin
  VertScrollBar.SmallChange:=3600;
  VertScrollBar.LargeChange:=10*VertScrollBar.SmallChange;
  VertScrollBar.PageSize:=VertScrollBar.LargeChange;
+ VertScrollBar.Width:=HorScrollBar.Height;
  HorScrollBar.Max:=360*3600;
  HorScrollBar.Min:=0;
  HorScrollBar.SmallChange:=3600;
@@ -402,7 +403,6 @@ if lock_refresh then exit;
 //    Panel1.color:=sc.plot.cfgplot.color[0];
     if sc.cfgsc.FindOk then ShowIdentLabel;
     if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
-    SetScrollBar;
 end;
 finally
  lock_refresh:=false;
@@ -421,6 +421,7 @@ if assigned(Fshowinfo) then begin
     Fshowinfo('');
   {$endif}
 end;
+SetScrollBar;
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
@@ -494,15 +495,15 @@ with sc do begin
     VertScrollBar.Position:=-round(cfgsc^.hcentre*rad2deg*3600);
  end
  else if cfgsc^.Projpole=Gal then begin
-    HorScrollBar.Position:=round(rmod(cfgsc^.lcentre+pi2,pi2)*rad2deg*3600);
+    HorScrollBar.Position:=round(rmod(pi2-cfgsc^.lcentre+pi2,pi2)*rad2deg*3600);
     VertScrollBar.Position:=-round(cfgsc^.bcentre*rad2deg*3600);
  end
  else if cfgsc^.Projpole=Ecl then begin
-    HorScrollBar.Position:=round(rmod(cfgsc^.lecentre+pi2,pi2)*rad2deg*3600);
+    HorScrollBar.Position:=round(rmod(pi2-cfgsc^.lecentre+pi2,pi2)*rad2deg*3600);
     VertScrollBar.Position:=-round(cfgsc^.becentre*rad2deg*3600);
  end
  else begin // Equ
-    HorScrollBar.Position:=round(rmod(cfgsc^.racentre+pi2,pi2)*rad2deg*3600);
+    HorScrollBar.Position:=round(rmod(pi2-cfgsc^.racentre+pi2,pi2)*rad2deg*3600);
     VertScrollBar.Position:=-round(cfgsc^.decentre*rad2deg*3600);
  end;
  i:=round(rad2deg*3600*cfgsc^.fov/90);
@@ -514,6 +515,7 @@ with sc do begin
  HorScrollBar.SmallChange:=i;
  HorScrollBar.LargeChange:=10*HorScrollBar.SmallChange;
  HorScrollBar.PageSize:=HorScrollBar.LargeChange;
+ application.ProcessMessages;
 end;
 finally
 lockscrollbar:=false;
@@ -527,25 +529,28 @@ lockscrollbar:=true;
 try
 with sc do begin
  cfgsc^.TrackOn:=false;
+ cfgsc^.Quick:=true;
  if cfgsc^.Projpole=AltAz then begin
     cfgsc^.acentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
     Hz2Eq(cfgsc^.acentre,cfgsc^.hcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
     cfgsc^.racentre:=cfgsc^.CurST-cfgsc^.racentre;
  end
  else if cfgsc^.Projpole=Gal then begin
-    cfgsc^.lcentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    cfgsc^.lcentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
     Gal2Eq(cfgsc^.lcentre,cfgsc^.bcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
  end
  else if cfgsc^.Projpole=Ecl then begin
-    cfgsc^.lecentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    cfgsc^.lecentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
     Ecl2Eq(cfgsc^.lecentre,cfgsc^.becentre,cfgsc^.e,cfgsc^.racentre,cfgsc^.decentre);
  end
  else begin // Equ
-    cfgsc^.racentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    cfgsc^.racentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
 end;
 end;
 Refresh;
 application.processmessages;
+RefreshTimer.enabled:=false;
+RefreshTimer.enabled:=true;
 finally
 lockscrollbar:=false;
 end;
@@ -558,6 +563,7 @@ lockscrollbar:=true;
 try
 with sc do begin
  cfgsc^.TrackOn:=false;
+ cfgsc^.Quick:=true;
  if cfgsc^.Projpole=AltAz then begin
     cfgsc^.hcentre:=-deg2rad*VertScrollBar.Position/3600;
     if cfgsc^.hcentre>pid2 then cfgsc^.hcentre:=pi-cfgsc^.hcentre;
@@ -581,6 +587,8 @@ end;
 end;
 Refresh;
 application.processmessages;
+RefreshTimer.enabled:=false;
+RefreshTimer.enabled:=true;
 finally
 lockscrollbar:=false;
 end;
