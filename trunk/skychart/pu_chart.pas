@@ -57,6 +57,7 @@ type
     About1: TMenuItem;
     AddLabel1: TMenuItem;
     MenuItem1: TMenuItem;
+    Panel1: TPanel;
     RemoveLastLabel1: TMenuItem;
     RemoveAllLabel1: TMenuItem;
     RefreshTimer: TTimer;
@@ -82,7 +83,6 @@ type
     zoomminusmove: TAction;
     FlipX: TAction;
     FlipY: TAction;
-    Panel1: TPanel;
     Undo: TAction;
     Redo: TAction;
     rot_plus: TAction;
@@ -403,6 +403,7 @@ if lock_refresh then exit;
 //    Panel1.color:=sc.plot.cfgplot.color[0];
     if sc.cfgsc.FindOk then ShowIdentLabel;
     if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
+    Image1.Cursor:=crCross;
 end;
 finally
  lock_refresh:=false;
@@ -1382,7 +1383,7 @@ try
    if sc.cfgsc.racentre<0 then sc.cfgsc.racentre:=sc.cfgsc.racentre+pi2;
    sc.cfgsc.quick:=true;
    Refresh;
-   image1.cursor:=crHandPoint;
+//   image1.cursor:=crHandPoint;
    application.processmessages;  // very important to empty the mouse event queue before to unlock
 finally
 LockTrackCursor:=false;
@@ -2672,7 +2673,7 @@ if FNightVision then begin
    for i:=1 to numlabtype do SaveLabelColor[i]:=sc.plot.cfgplot.labelcolor[i];
    sc.plot.cfgplot.color:=DfRedColor;
    for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=$000000A0;
-   Panel1.Color:=nv_dark;
+//   Panel1.Color:=nv_dark;
 end else begin
    if (Savecolor[2]=DfRedColor[2])and(Savecolor[11]=DfRedColor[11]) then begin // started with night vision, return to default color as save is also red. 
       sc.plot.cfgplot.color:=DfColor;
@@ -2682,7 +2683,7 @@ end else begin
       sc.plot.cfgplot.color:=SaveColor;
       for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=SaveLabelColor[i];
    end;
-   Panel1.Color:=clGray;
+//   Panel1.Color:=clBtnFace;
 end;
 Refresh;
 end;
