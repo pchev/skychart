@@ -15,16 +15,15 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = True
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 13
   object Panel1: TPanel
-    Cursor = crCross
-    Height = 300
-    Width = 500
-    BevelOuter = bvNone
-    ClientHeight = 300
-    ClientWidth = 500
-    Color = clGray
+    Left = 8
+    Height = 272
+    Top = 8
+    Width = 480
+    ClientHeight = 272
+    ClientWidth = 480
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
@@ -48,8 +47,9 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 485
-      Height = 285
+      Left = 464
+      Height = 255
+      Top = 1
       Width = 15
       Align = alRight
       Kind = sbVertical
@@ -62,9 +62,10 @@ object f_chart: Tf_chart
     end
     object HorScrollBar: TScrollBar
       Cursor = crArrow
+      Left = 1
       Height = 15
-      Top = 285
-      Width = 500
+      Top = 256
+      Width = 478
       Align = alBottom
       LargeChange = 10
       Max = 50
