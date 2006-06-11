@@ -114,6 +114,7 @@ type
      function FindNum(cat: integer; id: string; var ra,dec: double):boolean ;
      function SearchNebulae(Num:string; var ar1,de1: double): boolean;
      function SearchStar(Num:string; var ar1,de1: double): boolean;
+     function SearchStarName(Num:string; var ar1,de1: double): boolean;
      function SearchDblStar(Num:string; var ar1,de1: double): boolean;
      function SearchVarStar(Num:string; var ar1,de1: double): boolean;
      function SearchLines(Num:string; var ar1,de1: double): boolean;
@@ -2094,6 +2095,21 @@ begin
       de1:=deg2rad*de1;
       exit;
    end;
+end;
+
+function Tcatalog.SearchStarName(Num:string; var ar1,de1: double): boolean;
+var i: integer;
+    buf: string;
+begin
+buf:=uppercase(Num);
+result:=false;
+for i:=0 to cfgshr.StarNameNum-1 do begin
+   if pos(buf,uppercase(cfgshr.StarName[i]))>0 then begin
+      Num:='HR'+inttostr(cfgshr.StarNameHR[i]);
+      result:=SearchStar(Num,ar1,de1);
+      break;
+   end;
+end;
 end;
 
 function Tcatalog.SearchStar(Num:string; var ar1,de1: double): boolean;

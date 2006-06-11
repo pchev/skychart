@@ -132,6 +132,7 @@ type
     ra,de: double;
     SearchKind : integer;
     cfgshr: conf_shared;
+    function SearchNebName(Num:string; var ar1,de1: double): boolean;
   end;
 
 var
@@ -206,6 +207,22 @@ end;
 procedure Tf_search.SpeedButton13Click(Sender: TObject);
 begin
 Id.text:='';
+end;
+
+function Tf_search.SearchNebName(Num:string; var ar1,de1: double): boolean;
+var i: integer;
+    buf: string;
+begin
+buf:=uppercase(Num);
+result:=false;
+for i:=0 to NebNameBox.Items.Count-1 do begin
+   if pos(buf,uppercase(NebNameBox.Items[i]))>0 then begin
+      ar1:=NebNameAR[i];
+      de1:=NebNameDE[i];
+      result:=true;
+      break;
+   end;
+end;
 end;
 
 procedure Tf_search.Button1Click(Sender: TObject);

@@ -3864,6 +3864,10 @@ if chart is Tf_chart then with chart as Tf_chart do begin
    if ok then goto findit;
    ok:=planet.FindCometName(trim(Num),ar1,de1,sc.cfgsc);
    if ok then goto findit;
+   ok:=catalog.SearchStarName(Num,ar1,de1) ;
+   if ok then goto findit;
+   ok:=f_search.SearchNebName(Num,ar1,de1) ;
+   if ok then goto findit;
 
 Findit:
    result:=ok;
