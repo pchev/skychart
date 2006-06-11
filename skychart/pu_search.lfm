@@ -14,7 +14,7 @@ object f_search: Tf_search
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 13
   object CometPanel: TPanel
     Left = 8
@@ -36,7 +36,6 @@ object f_search: Tf_search
       Height = 25
       Top = 8
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Caption = 'Filter ->'
       OnClick = Button3Click
       TabOrder = 1
@@ -71,7 +70,6 @@ object f_search: Tf_search
       Height = 25
       Top = 8
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Caption = 'Filter ->'
       OnClick = Button4Click
       TabOrder = 1
@@ -626,7 +624,6 @@ object f_search: Tf_search
     Height = 25
     Top = 288
     Width = 75
-    BorderSpacing.InnerBorder = 2
     Caption = 'Find'
     OnClick = Button1Click
     TabOrder = 1
@@ -636,7 +633,6 @@ object f_search: Tf_search
     Height = 25
     Top = 288
     Width = 75
-    BorderSpacing.InnerBorder = 2
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
