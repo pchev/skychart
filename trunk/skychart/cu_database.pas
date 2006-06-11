@@ -361,7 +361,7 @@ if db.Active then begin
        if not db.Query('Insert into cdc_com_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")') then
               MemoCom.lines.add(trim(db.ErrorMessage));
     end;
-    cmd:='INSERT INTO cdc_com_elem (id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id) VALUES ('
+    cmd:='REPLACE INTO cdc_com_elem (id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id) VALUES ('
         +'"'+id+'"'
         +',"'+t+'"'
         +',"'+q+'"'
@@ -378,7 +378,7 @@ if db.Active then begin
     if (not db.query(cmd))and(db.LastError<>19) then begin
        MemoCom.lines.add('insert failed line '+inttostr(nl)+' : '+trim(db.ErrorMessage));
     end;
-    cmd:='INSERT INTO cdc_com_name (name, id) VALUES ('
+    cmd:='REPLACE INTO cdc_com_name (name, id) VALUES ('
         +'"'+nam+'"'
         +',"'+id+'"'+')';
     db.query(cmd);
@@ -603,7 +603,7 @@ if db.Active then begin
        if not db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")') then
               memoast.lines.add(trim(db.ErrorMessage));
     end;
-    cmd:='INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
+    cmd:='REPLACE INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
         +'"'+id+'"'
         +',"'+h+'"'
         +',"'+g+'"'
@@ -626,7 +626,7 @@ if db.Active then begin
           break;
        end;
     end;
-    cmd:='INSERT INTO cdc_ast_name (name, id) VALUES ('
+    cmd:='REPLACE INTO cdc_ast_name (name, id) VALUES ('
         +'"'+nam+'"'
         +',"'+id+'"'+')';
     db.query(cmd);
