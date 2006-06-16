@@ -185,6 +185,7 @@ type
     procedure Image1MouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure Image1Paint(Sender: TObject);
     procedure SetScrollBar;
+    procedure ShowCoord(x,y: Integer);
   public
     { Public declarations }
     Image1 : TChartDrawingControl;
@@ -517,6 +518,7 @@ with sc do begin
  HorScrollBar.LargeChange:=10*HorScrollBar.SmallChange;
  HorScrollBar.PageSize:=HorScrollBar.LargeChange;
  application.ProcessMessages;
+ ShowCoord(Image1.Width div 2, Image1.Height div 2);
 end;
 finally
 lockscrollbar:=false;
@@ -1200,6 +1202,14 @@ end else if shift=[ssMiddle,ssCtrl] then begin
      lastyzoom:=y;
 end else begin
    if lastquick then Refresh; //the mouse as leave during a quick refresh
+   ShowCoord(x,y);
+end;
+end;
+
+Procedure Tf_chart.ShowCoord(x,y: Integer);
+var ra,dec,a,h,l,b,le,be,c:double;
+    txt:string;
+begin
    {show the coordinates}
    sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
    case sc.cfgsc.projpole of
@@ -1223,7 +1233,6 @@ end else begin
           end;
    end;
    if assigned(Fshowcoord) then Fshowcoord(txt);
-end;
 end;
 
 Procedure Tf_chart.ZoomBox(action,x,y:integer);
