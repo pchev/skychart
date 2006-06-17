@@ -357,6 +357,7 @@ if MessageDlg('Update or add the current location to the database ?',mtWarning,[
     location:=citylist.Text;
     buf:=cdb.UpdateCity(curobsid,country,location,'user',lat,lon,elev,tz);
     if buf='' then buf:='Updated successfully!';
+    vicinityClick(Sender);
     showmessage(buf);
   end;
 end;
@@ -369,6 +370,8 @@ if MessageDlg('Delete the current location from the database ?',mtWarning,[mbYes
   then begin
       buf:=cdb.DeleteCity(curobsid);
       if buf='' then buf:='Deleted successfully!';
+      vicinityClick(Sender);
+      if citylist.items.count=0 then citysearchClick(Sender);
       showmessage(buf);
   end;
 end;
