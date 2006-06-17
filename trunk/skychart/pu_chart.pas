@@ -722,15 +722,25 @@ try
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
     sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
+    sc.cfgsc^.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
+    sc.cfgsc^.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
+    sc.cfgsc^.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
+    sc.cfgsc^.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+    sc.cfgsc^.xshift:=sc.cfgsc^.LeftMargin;
+    sc.cfgsc^.yshift:=sc.cfgsc^.TopMargin;
     sc.plot.init(prtbmp.width,prtbmp.height);
     sc.Refresh;
     // convert the bitmap to Postscript
       fname:=slash(printpath)+'cdcprint.bmp';
       prtbmp.savetofile(fname);
-      //cmd:='bmptopnm '+fname+' | pnmtops -equalpixels -dpi='+inttostr(printresol)+' -rle >'+changefileext(fname,'.ps');
-//      cmd:='command.com /C bmptops.bat '+fname+blank+changefileext(fname,'.ps');
-      cmd:='bmptops.bat "'+fname+'" "'+changefileext(fname,'.ps')+'" '+inttostr(printresol);
-      chdir(slash(appdir)+'plugins');
+      {$ifdef unix}
+        cmd:='bmptopnm '+fname+' | pnmtops -equalpixels -dpi='+inttostr(printresol)+' -rle >'+changefileext(fname,'.ps');
+      {$endif}
+      {$ifdef win32}
+        //cmd:='command.com /C bmptops.bat '+fname+blank+changefileext(fname,'.ps');
+        cmd:='bmptops.bat "'+fname+'" "'+changefileext(fname,'.ps')+'" '+inttostr(printresol);
+        chdir(slash(appdir)+'plugins');
+      {$endif}
     i:=exec(cmd);
     chdir(appdir);
     if i=0 then begin
@@ -755,6 +765,12 @@ try
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
     sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
+    sc.cfgsc^.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
+    sc.cfgsc^.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
+    sc.cfgsc^.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
+    sc.cfgsc^.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+    sc.cfgsc^.xshift:=sc.cfgsc^.LeftMargin;
+    sc.cfgsc^.yshift:=sc.cfgsc^.TopMargin;
     sc.plot.init(prtbmp.width,prtbmp.height);
     sc.Refresh;
     // save the bitmap
