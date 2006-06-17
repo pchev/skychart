@@ -39,6 +39,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    DST: TCheckBox;
     JDEdit: TFloatEdit;
     Label1: TLabel;
     MainPanel: TPanel;
@@ -95,6 +96,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
+    procedure DSTChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure JDEditChange(Sender: TObject);
@@ -189,10 +191,13 @@ artostr2(csc.curtime,h,n,s);
 t_hour.value:=strtoint(h);
 t_min.value:=strtoint(n);
 t_sec.value:=strtoint(s);
-if csc.UseSystemTime then
-   tz.value:=GetTimezone
-else
+if csc.UseSystemTime then begin
+   tz.value:=GetTimezone;
+   DST.Checked:=false;
+end else begin
    tz.value:=csc.ObsTZ;
+   DST.Checked:=csc.DST;
+end;
 Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
 if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
@@ -240,6 +245,7 @@ t_min.enabled:=d_year.enabled;
 t_sec.enabled:=d_year.enabled;
 bitbtn4.enabled:=d_year.enabled;
 tz.enabled:=d_year.enabled;
+DST.enabled:=d_year.enabled;
 JDedit.enabled:=d_year.enabled;
 BitBtn1.enabled:=d_year.enabled;
 ShowTime;
@@ -272,6 +278,13 @@ end;
 procedure Tf_config_time.CheckBox2Click(Sender: TObject);
 begin
 csc.AutoRefresh:=checkbox2.checked;
+end;
+
+procedure Tf_config_time.DSTChange(Sender: TObject);
+begin
+if LockChange then exit;
+csc.DST:=DST.Checked;
+tzChange(tz);
 end;
 
 procedure Tf_config_time.FormClose(Sender: TObject;
@@ -335,16 +348,19 @@ begin
 end;
 
 procedure Tf_config_time.tzChange(Sender: TObject);
+var tzone:double;
 begin
 if LockChange then exit;
 with sender as Tfloatedit do begin
-  csc.timezone:=value;
+  tzone:=value;
 end;
+csc.timezone:=tzone;
+if csc.DST then csc.timezone:=csc.timezone+1 ;
 LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
 // same value in Time and Observatory panel
-if not csc.UseSystemTime then csc.obstz:=csc.timezone;
+if not csc.UseSystemTime then csc.obstz:=tzone;
 end;
 
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);

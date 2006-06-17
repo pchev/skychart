@@ -389,6 +389,7 @@ if cfgsc^.UseSystemTime then begin
    cfgsc^.TimeZone:=GetTimezone
 end else begin
    cfgsc^.TimeZone:=cfgsc^.ObsTZ;
+   if cfgsc^.DST then cfgsc^.timezone:=cfgsc^.timezone+1 ;
 end;
 cfgsc^.DT_UT:=DTminusUT(cfgsc^.CurYear,cfgsc);
 cfgsc^.CurJD:=jd(cfgsc^.CurYear,cfgsc^.CurMonth,cfgsc^.CurDay,cfgsc^.CurTime-cfgsc^.TimeZone+cfgsc^.DT_UT);

@@ -1665,6 +1665,7 @@ if (aRow>=0)and(aColumn>=0) then begin
                                  else csc:=c^;
     csc.UseSystemTime:=false;
     csc.ObsTZ:=csc.Timezone;
+    if csc.DST then csc.ObsTZ:=csc.ObsTZ-1 ;
     djd(p.jd+c.timezone/24,csc.CurYear,csc.CurMonth,csc.CurDay,csc.CurTime);
     if Sender = solargrid then  begin      // Solar eclipse
        if (aColumn=1) then begin   // image map

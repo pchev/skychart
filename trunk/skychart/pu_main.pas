@@ -748,6 +748,7 @@ c2.ObsLongitude := c1.ObsLongitude ;
 c2.ObsAltitude := c1.ObsAltitude ;
 c2.ObsTZ := c1.ObsTZ ;
 c2.TimeZone := c1.TimeZone ;
+c2.DST := c1.DST ;
 c2.ObsTemperature := c1.ObsTemperature ;
 c2.ObsPressure := c1.ObsPressure ;
 c2.ObsName := c1.ObsName ;
@@ -852,7 +853,7 @@ end;
 procedure Tf_main.SyncChild;
 var i,y,m,d: integer;
     ra,de,jda,t,tz: double;
-    st: boolean;
+    st,dst: boolean;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then begin
  ra:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.racentre;
@@ -863,6 +864,7 @@ if MultiDoc1.ActiveObject is Tf_chart then begin
  d:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curday;
  t:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curtime;
  tz:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.ObsTZ;
+ dst:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.DST;
  st:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.UseSystemTime;
  for i:=0 to MultiDoc1.ChildCount-1 do
   if (MultiDoc1.Childs[i].DockedObject is Tf_chart) and (MultiDoc1.Childs[i].DockedObject<>MultiDoc1.ActiveObject) then
@@ -874,6 +876,7 @@ if MultiDoc1.ActiveObject is Tf_chart then begin
       sc.cfgsc.curday:=d;
       sc.cfgsc.curtime:=t;
       sc.cfgsc.ObsTZ:=tz;
+      sc.cfgsc.DST:=dst;
       sc.cfgsc.TrackOn:=false;
       sc.cfgsc.racentre:=ra;
       sc.cfgsc.decentre:=de;
@@ -2675,6 +2678,7 @@ def_cfgsc.ObsLatitude := 46.2 ;
 def_cfgsc.ObsLongitude := -6.1 ;
 def_cfgsc.ObsAltitude := 0 ;
 def_cfgsc.ObsTZ := GetTimezone ;
+def_cfgsc.DST := false;
 def_cfgsc.ObsTemperature := 10 ;
 def_cfgsc.ObsPressure := 1010 ;
 def_cfgsc.ObsName := 'Genève' ;
@@ -3151,6 +3155,7 @@ csc.CurTime:=ReadFloat(section,'CurTime',csc.CurTime);
 csc.autorefresh:=ReadBool(section,'autorefresh',csc.autorefresh);
 csc.Force_DT_UT:=ReadBool(section,'Force_DT_UT',csc.Force_DT_UT);
 csc.DT_UT_val:=ReadFloat(section,'DT_UT_val',csc.DT_UT_val);
+csc.DST:=ReadBool(section,'DST',csc.DST);
 section:='projection';
 for i:=1 to maxfield do csc.projname[i]:=ReadString(section,'ProjName'+inttostr(i),csc.projname[i] );
 section:='labels';
@@ -3554,6 +3559,7 @@ WriteFloat(section,'CurTime',csc.CurTime);
 WriteBool(section,'autorefresh',csc.autorefresh);
 WriteBool(section,'Force_DT_UT',csc.Force_DT_UT);
 WriteFloat(section,'DT_UT_val',csc.DT_UT_val);
+WriteBool(section,'DST',csc.DST);
 section:='projection';
 for i:=1 to maxfield do WriteString(section,'ProjName'+inttostr(i),csc.projname[i] );
 section:='labels';
