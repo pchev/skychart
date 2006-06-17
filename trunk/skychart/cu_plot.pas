@@ -179,6 +179,7 @@ begin
  cfgchart.min_ma:=6;
  cfgchart.onprinter:=false;
  cfgchart.drawpen:=1;
+ cfgchart.drawsize:=1;
  cfgchart.fontscale:=1;
  TransparentColor.red:= 0;
  TransparentColor.green:=0;
@@ -299,8 +300,8 @@ with cnv do begin
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
 end;
 InitLabel;
-if (cfgplot.starplot>0)and(cfgchart.drawpen<>starbmpw)and(Fstarshape<>nil) then begin
-   starbmpw:=cfgchart.drawpen;
+if (cfgplot.starplot>0)and(cfgchart.drawsize<>starbmpw)and(Fstarshape<>nil) then begin
+   starbmpw:=cfgchart.drawsize;
    BitmapResize(Fstarshape,starbmp,starbmpw);
 end;
 result:=true;
@@ -423,7 +424,7 @@ with cnv do begin
      end;
      end;
      if ma<-5 then ma:=-5;
-     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen);
+     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
      ds2:= round(ds/2);
      Brush.Color := co ;
      Brush.style:=bsSolid;
@@ -463,7 +464,7 @@ begin
   if ma<0 then ma:=ma/10;                               // avoid Moon and Sun be too big
   Lum := (1.1*cfgchart.min_ma-ma)/cfgchart.min_ma;      // logarithmic luminosity proportional to magnitude
   if Lum<0.1 then Lum:=0.1;                             // for object fainter than the limit (asteroid)
-  AAwidth:=cfgchart.drawpen*cfgplot.partsize*power(cfgplot.magsize,Lum); // particle size also depend on the magnitude
+  AAwidth:=cfgchart.drawsize*cfgplot.partsize*power(cfgplot.magsize,Lum); // particle size also depend on the magnitude
 
   if b_v>1000 then co:=cfgplot.Color[trunc(b_v-1000)]   // Use direct color table indice
   else begin
@@ -561,7 +562,7 @@ xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then begin
   with cnv do begin
-     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmax*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen)-cfgchart.drawpen;
+     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmax*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize)-cfgchart.drawpen;
      ds2:= trunc(ds/2)+cfgchart.drawpen;
      Brush.Color := cfgplot.Color[0];
      Brush.style:=bsSolid;
@@ -585,7 +586,7 @@ if not cfgplot.Invisible then begin
        7: Ellipse(xx-3,yy-3,xx+4,yy+4);
        else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
      end;
-     dsm := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmin*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen);
+     dsm := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmin*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
      if (ds-dsm)<2*cfgchart.drawpen then ds:=ds-2*cfgchart.drawpen
                    else ds:=dsm;
      ds2 := trunc(ds/2);
@@ -613,13 +614,13 @@ xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then
  with cnv do begin
-   ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen);
+   ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
    ds2:= trunc(ds/2);
    Pen.Width := 1;
    Pen.Color := cfgplot.Color[15];
    Brush.style:=bsSolid;
    Pen.Mode:=pmCopy;
-   rd:=max(r,ds2 + cfgchart.drawpen*(2+2*(0.7+ln(min(50,max(0.5,sep))))));
+   rd:=max(r,ds2 + cfgchart.drawsize*(2+2*(0.7+ln(min(50,max(0.5,sep))))));
    MoveTo(xx-round(rd*sin(pa)),yy-round(rd*cos(pa)));
    LineTo(xx,yy);
 end;
@@ -860,7 +861,7 @@ with cnv do begin
            end;
    7..10:  begin
            SetColor(9);
-           ds:=3*cfgchart.drawpen;
+           ds:=3*cfgchart.drawsize;
            MoveTo(xx-ds+1,yy);
            LineTo(xx+ds,yy);
            MoveTo(xx,yy-ds+1);
@@ -966,7 +967,7 @@ with cnv do begin
            LineTo(xx,yy+ds);
            end;
    7..10:  begin
-           ds:=3*cfgchart.drawpen;
+           ds:=3*cfgchart.drawsize;
            Pen.Color := cfgplot.Color[9];
            MoveTo(xx-ds+1,yy);
            LineTo(xx+ds,yy);
@@ -1180,7 +1181,7 @@ xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then begin
  n:=cfgplot.plaplot;
- ds:=round(diam*pixscale/2)*cfgchart.drawpen;
+ ds:=round(diam*pixscale/2)*cfgchart.drawsize;
  if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then begin
   if (n=2) and ((ds<5)or(ds>1500)) then n:=1;
   if (n=1) and (ds<5)  then n:=0;
@@ -1454,7 +1455,7 @@ if not (hidesat xor showhide) then
         Brush.style:=bsSolid;
         Pen.Mode := pmCopy;
         brush.color:=cfgplot.Color[11];
-        ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen);
+        ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
         ds2:=round(diam*pixscale);
         if ds2>ds then begin
            ds:=ds2;
@@ -1540,7 +1541,7 @@ with cnv do begin
    Brush.style:=bsSolid;
    case symbol of
    0 : begin
-     ds:=3*cfgchart.drawpen;
+     ds:=3*cfgchart.drawsize;
      diamond[0]:=point(xx,yy-ds);
      diamond[1]:=point(xx+ds,yy);
      diamond[2]:=point(xx,yy+ds);
@@ -1576,7 +1577,7 @@ with cnv do begin
    if (symbol=1)and(cfgplot.nebplot=0) then symbol:=2;
    case symbol of
    0: begin
-        ds:=2*cfgchart.drawpen;
+        ds:=2*cfgchart.drawsize;
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
         Pen.Color := cfgplot.Color[21];
         moveto(xx,yy);
@@ -1651,7 +1652,7 @@ with cnv do begin
         PlotStar(xx,yy,ma+3,1021);
       end;
    2: begin
-        ds:=round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawpen/2);
+        ds:=round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize/2);
         Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
         ds:=round(max(PixScale*diam/2,2*cfgchart.drawpen));
         Brush.style:=bsClear;

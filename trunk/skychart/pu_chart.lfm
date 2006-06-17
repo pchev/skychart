@@ -5,6 +5,7 @@ object f_chart: Tf_chart
   Width = 508
   HorzScrollBar.Page = 507
   VertScrollBar.Page = 337
+  ActiveControl = VertScrollBar
   Caption = 'Chart'
   ClientHeight = 338
   ClientWidth = 508
@@ -15,7 +16,7 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = True
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 8
@@ -47,10 +48,10 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 464
+      Left = 224
       Height = 255
       Top = 1
-      Width = 15
+      Width = 255
       Align = alRight
       Kind = sbVertical
       LargeChange = 10

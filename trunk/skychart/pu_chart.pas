@@ -688,7 +688,8 @@ try
     Printer.BeginDoc;
     sc.plot.destcnv:=Printer.canvas;
     sc.plot.cfgchart.onprinter:=true;
-    sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 75]);
+    sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 150]);
+    sc.plot.cfgchart.drawsize:=maxintvalue([1,resol div 100]);
     sc.plot.cfgchart.fontscale:=1;
     sc.cfgsc^.xshift:=printer.PaperSize.PaperRect.WorkRect.Left;
     sc.cfgsc^.yshift:=printer.PaperSize.PaperRect.WorkRect.Top;
@@ -714,8 +715,9 @@ try
    // draw the chart to the bitmap
     sc.plot.destcnv:=prtbmp.canvas;
     sc.plot.cfgchart.onprinter:=true;
-    sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 75]);
-    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawpen; // because we cannot set a dpi property for the bitmap
+    sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
+    sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
+    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
     sc.plot.init(prtbmp.width,prtbmp.height);
     sc.Refresh;
     // convert the bitmap to Postscript
@@ -746,8 +748,9 @@ try
    // draw the chart to the bitmap
     sc.plot.destcnv:=prtbmp.canvas;
     sc.plot.cfgchart.onprinter:=true;
-    sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 75]);
-    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawpen; // because we cannot set a dpi property for the bitmap
+    sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
+    sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
+    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
     sc.plot.init(prtbmp.width,prtbmp.height);
     sc.Refresh;
     // save the bitmap
@@ -776,6 +779,7 @@ finally
  sc.plot.destcnv:=Image1.canvas;
  sc.plot.cfgchart.onprinter:=false;
  sc.plot.cfgchart.drawpen:=1;
+ sc.plot.cfgchart.drawsize:=1;
  sc.plot.cfgchart.fontscale:=1;
  sc.plot.init(Image1.width,Image1.height);
  sc.Refresh;
