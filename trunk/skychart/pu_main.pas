@@ -648,7 +648,7 @@ implementation
 
 uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
-     pu_manualtelescope;
+     pu_manualtelescope, pu_print;
 
 
 function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
@@ -1242,9 +1242,14 @@ end;
 
 procedure Tf_main.Print1Execute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then
+f_print.cm:=cfgm;
+formpos(f_print,mouse.cursorpos.x,mouse.cursorpos.y);
+if f_print.showmodal=mrOK then begin
+ cfgm:=f_print.cm;
+ if MultiDoc1.ActiveObject is Tf_chart then
    with MultiDoc1.ActiveObject as Tf_chart do
-      PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath);
+      PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm);
+end;
 end;
 
 procedure Tf_main.UndoExecute(Sender: TObject);
@@ -2548,6 +2553,10 @@ cfgm.PrintMethod:=0;
 cfgm.PrintCmd1:=DefaultPrintCmd1;
 cfgm.PrintCmd2:=DefaultPrintCmd2;
 cfgm.PrintTmpPath:=expandfilename(TempDir);
+cfgm.PrtLeftMargin:=15;
+cfgm.PrtRightMargin:=15;
+cfgm.PrtTopMargin:=10;
+cfgm.PrtBottomMargin:=5;
 cfgm.maximized:=true;
 cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
@@ -3214,6 +3223,10 @@ cfgm.PrintMethod:=ReadInteger(section,'PrintMethod',cfgm.PrintMethod);
 cfgm.PrintCmd1:=ReadString(section,'PrintCmd1',cfgm.PrintCmd1);
 cfgm.PrintCmd2:=ReadString(section,'PrintCmd2',cfgm.PrintCmd2);
 cfgm.PrintTmpPath:=ReadString(section,'PrintTmpPath',cfgm.PrintTmpPath);
+cfgm.PrtLeftMargin:=ReadInteger(section,'PrtLeftMargin',cfgm.PrtLeftMargin);
+cfgm.PrtRightMargin:=ReadInteger(section,'PrtRightMargin',cfgm.PrtRightMargin);
+cfgm.PrtTopMargin:=ReadInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
+cfgm.PrtBottomMargin:=ReadInteger(section,'PrtBottomMargin',cfgm.PrtBottomMargin);
 cfgm.ThemeName:=ReadString(section,'Theme',cfgm.ThemeName);
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
@@ -3621,6 +3634,10 @@ WriteInteger(section,'PrintMethod',cfgm.PrintMethod);
 WriteString(section,'PrintCmd1',cfgm.PrintCmd1);
 WriteString(section,'PrintCmd2',cfgm.PrintCmd2);
 WriteString(section,'PrintTmpPath',cfgm.PrintTmpPath);
+WriteInteger(section,'PrtLeftMargin',cfgm.PrtLeftMargin);
+WriteInteger(section,'PrtRightMargin',cfgm.PrtRightMargin);
+WriteInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
+WriteInteger(section,'PrtBottomMargin',cfgm.PrtBottomMargin);
 WriteString(section,'Theme',cfgm.ThemeName);
 WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
@@ -4748,6 +4765,8 @@ if night then begin
    f_info.Font.Color:=nv_middle;
    f_printsetup.Color:=nv_dark;
    f_printsetup.Font.Color:=nv_middle;
+   f_print.Color:=nv_dark;
+   f_print.Font.Color:=nv_middle;
    if f_config<>nil then begin
       f_config.Color:=nv_dark;
       f_config.Font.Color:=nv_middle;
@@ -4781,6 +4800,8 @@ end else begin
    f_info.Font.Color:=clWindowText;
    f_printsetup.Color:=clBtnFace;
    f_printsetup.Font.Color:=clWindowText;
+   f_print.Color:=clBtnFace;
+   f_print.Font.Color:=clWindowText;
    if f_config<>nil then begin
       f_config.Color:=clBtnFace;
       f_config.Font.Color:=clWindowText;

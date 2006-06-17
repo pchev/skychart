@@ -104,6 +104,7 @@ type
      Procedure FlushCnv;
      Procedure InitPixelImg;
      Procedure ClosePixelImg;
+     Procedure PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integer);
      Procedure PlotStar(xx,yy: single; ma,b_v : Double);
      Procedure PlotVarStar(x,y: single; vmax,vmin : Double);
      Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
@@ -135,7 +136,7 @@ type
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
      function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
      procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true);
-     procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; opaque:boolean=true);
+     procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
      Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
@@ -305,6 +306,35 @@ if (cfgplot.starplot>0)and(cfgchart.drawsize<>starbmpw)and(Fstarshape<>nil) then
    BitmapResize(Fstarshape,starbmp,starbmpw);
 end;
 result:=true;
+end;
+
+Procedure TSplot.PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integer);
+var xmin,xmax,ymin,ymax: integer;
+begin
+  if (LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0) then begin
+      with cnv do begin
+        Pen.Color := clWhite;
+        Pen.Width := 1;
+        Pen.Mode := pmCopy;
+        Brush.Color := clWhite;
+        Brush.Style := bsSolid;
+        xmin:=0; ymin:=0;
+        xmax:=cfgchart^.width;
+        ymax:=cfgchart^.height;
+        Rectangle(xmin,ymin,xmin+LeftMargin-5,ymax);
+        Rectangle(xmax-RightMargin+8,ymin,xmax,ymax);
+        Rectangle(xmin,ymin,xmax,ymin+TopMargin-5);
+        Rectangle(xmin,ymax-BottomMargin+8,xmax,ymax);
+        Pen.Color := clBlack;
+        Pen.Width := 2*cfgchart.drawpen;
+        Brush.Color := clWhite;
+        Polyline([Point(xmin+LeftMargin,ymin+TopMargin),
+                  Point(xmin+LeftMargin,ymax-BottomMargin),
+                  Point(xmax-RightMargin,ymax-BottomMargin),
+                  Point(xmax-RightMargin,ymin+TopMargin),
+                  Point(xmin+LeftMargin,ymin+TopMargin)]);
+      end;
+  end;
 end;
 
 procedure TSplot.InitXPlanetRender;
@@ -1783,7 +1813,7 @@ textRect(arect,xx,yy,txt);
 end;
 end;
 
-procedure TSplot.PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; opaque:boolean=true);
+procedure TSplot.PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true);
 var ls,p:Integer;
     buf: string;
     arect: TRect;
@@ -1795,7 +1825,8 @@ Brush.Color:=cfgplot.backgroundcolor;
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Font.Name:=cfgplot.FontName[fontnum];
-Font.Color:=cfgplot.LabelColor[labelnum];
+if WhiteBg then Font.Color:=clBlack
+           else Font.Color:=cfgplot.LabelColor[labelnum];
 if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
 Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];

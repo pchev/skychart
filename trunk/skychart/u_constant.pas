@@ -469,6 +469,7 @@ type
                 prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
                 PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
+                PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin: integer;
                 savetop,saveleft,saveheight,savewidth: integer;
                 ButtonStandard,ButtonNight: integer;
                 PrintLandscape, ShowChartInfo, SyncChart :boolean;

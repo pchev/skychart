@@ -98,8 +98,8 @@ implementation
 Procedure ScaleWindow(c: Pconf_skychart);
 var X1,x2,Y1,Y2 : Integer;
 begin
-   X1 := c^.Xmin+c^.LeftMargin ; X2 := c^.Xmax-c^.RightMargin;
-   Y1 := c^.Ymin+c^.TopMargin ; Y2 := c^.Ymax-c^.BottomMargin;
+   X1 := c^.Xmin ; X2 := c^.Xmax;
+   Y1 := c^.Ymin ; Y2 := c^.Ymax;
    c^.WindowRatio := double(X2-X1) / double(Y2-Y1) ;
    c^.Xcentre:=round(double(x2-x1)/2);
    c^.Ycentre:=round(double(y2-y1)/2);

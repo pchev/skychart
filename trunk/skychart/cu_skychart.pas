@@ -91,6 +91,7 @@ Tskychart = class (TComponent)
     procedure DrawGalGrid;
     procedure DrawEclGrid;
     Procedure DrawScale;
+    Procedure DrawBorder;
     function DrawConstL :boolean;
     function DrawConstB :boolean;
     function DrawHorizon:boolean;
@@ -157,6 +158,10 @@ begin
  cfgsc^.posmodlabels:=0;
  cfgsc^.numcustomlabels:=0;
  cfgsc^.poscustomlabels:=0;
+ cfgsc^.LeftMargin:=0;
+ cfgsc^.RightMargin:=0;
+ cfgsc^.TopMargin:=0;
+ cfgsc^.BottomMargin:=0;
  Fplot:=TSplot.Create(AOwner);
  Fplot.OnEditLabelPos:=@EditLabelPos;
  Fplot.OnEditLabelTxt:=@EditLabelTxt;
@@ -256,6 +261,8 @@ try
      DrawFinderMark(cfgsc^.ScopeRa,cfgsc^.ScopeDec,true);
      cfgsc^.ScopeMark:=true;
   end;
+  // Draw the chart border
+  DrawBorder;
   result:=true;
   //writetrace('Draw end');
 finally
@@ -432,10 +439,10 @@ end;
 function Tskychart.InitChart:boolean;
 begin
 // do not add more function here as this is also called at the chart create
-cfgsc^.xmin:=0;
-cfgsc^.ymin:=0;
-cfgsc^.xmax:=Fplot.cfgchart^.width;
-cfgsc^.ymax:=Fplot.cfgchart^.height;
+cfgsc^.xmin:=cfgsc^.LeftMargin;
+cfgsc^.ymin:=cfgsc^.TopMargin;
+cfgsc^.xmax:=Fplot.cfgchart^.width-cfgsc^.RightMargin;
+cfgsc^.ymax:=Fplot.cfgchart^.height-cfgsc^.BottomMargin;
 ScaleWindow(cfgsc);
 result:=true;
 end;
@@ -476,7 +483,10 @@ if Fplot.cfgplot^.AutoSkyColor and (cfgsc^.Projpole=AltAz) then begin
 end else Fplot.cfgplot^.color[0]:=Fplot.cfgplot^.bgColor;
 Fplot.cfgplot^.backgroundcolor:=Fplot.cfgplot^.color[0];
 Fplot.init(Fplot.cfgchart^.width,Fplot.cfgchart^.height);
-if Fplot.cfgchart^.onprinter and (Fplot.cfgplot^.starplot=0) and (Fplot.cfgplot^.color[1]<>clBlack) then Fplot.cfgplot^.color[0]:=clBlack;
+if Fplot.cfgchart^.onprinter and (Fplot.cfgplot^.starplot=0) and (Fplot.cfgplot^.color[1]<>clBlack) then begin
+   Fplot.cfgplot^.color[0]:=clBlack;
+   Fplot.cfgplot^.color[11]:=clWhite;
+end;
 result:=true;
 end;
 
@@ -1772,6 +1782,11 @@ end;
 if n>1 then FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot^.LabelColor[7],laCenter,laBottom,l2);
 end;
 
+Procedure Tskychart.DrawBorder;
+begin
+Fplot.PlotBorder(cfgsc^.LeftMargin,cfgsc^.RightMargin,cfgsc^.TopMargin,cfgsc^.BottomMargin);
+end;
+
 Procedure Tskychart.LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
 begin
 x:=xx;
@@ -2795,7 +2810,7 @@ for i:=1 to numlabels do begin
      end;
   if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,cfgsc^.WhiteBg,(not cfgsc^.Editlabels),txt);
 end;
-if cfgsc^.showlabel[8] then plot.PlotTextCR(cfgsc^.xshift+5,cfgsc^.yshift+5,2,8,GetChartInfo(crlf));
+if cfgsc^.showlabel[8] then plot.PlotTextCR(cfgsc^.xshift+5,cfgsc^.yshift+5,2,8,GetChartInfo(crlf),cfgsc^.WhiteBg);
 result:=true;
 end;
 

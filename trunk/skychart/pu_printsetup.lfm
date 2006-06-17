@@ -1,20 +1,20 @@
 object f_printsetup: Tf_printsetup
-  Left = 404
-  Height = 355
-  Top = 175
+  Left = 185
+  Height = 258
+  Top = 123
   Width = 403
   HorzScrollBar.Page = 402
-  VertScrollBar.Page = 354
+  VertScrollBar.Page = 257
   ActiveControl = qtsetup
   BorderStyle = bsSizeToolWin
   Caption = 'Printer Setup'
-  ClientHeight = 355
+  ClientHeight = 258
   ClientWidth = 403
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 13
   object qtoption: TPanel
     Left = 18
@@ -75,6 +75,7 @@ object f_printsetup: Tf_printsetup
       Height = 25
       Top = 58
       Width = 85
+      BorderSpacing.InnerBorder = 4
       Caption = 'Printer Setup'
       OnClick = qtsetupClick
       TabOrder = 0
@@ -200,8 +201,9 @@ object f_printsetup: Tf_printsetup
   object Ok: TButton
     Left = 110
     Height = 25
-    Top = 294
+    Top = 216
     Width = 75
+    BorderSpacing.InnerBorder = 4
     Caption = 'Ok'
     ModalResult = 1
     TabOrder = 3
@@ -209,59 +211,15 @@ object f_printsetup: Tf_printsetup
   object Cancel: TButton
     Left = 228
     Height = 25
-    Top = 294
+    Top = 216
     Width = 75
+    BorderSpacing.InnerBorder = 4
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 4
   end
-  object prtcolor: TRadioGroup
-    Left = 18
-    Height = 82
-    Top = 199
-    Width = 207
-    AutoFill = True
-    Caption = 'Color'
-    ChildSizing.LeftRightSpacing = 6
-    ChildSizing.TopBottomSpacing = 6
-    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-    ChildSizing.EnlargeVertical = crsHomogenousChildResize
-    ChildSizing.ShrinkHorizontal = crsScaleChilds
-    ChildSizing.ShrinkVertical = crsScaleChilds
-    ChildSizing.Layout = cclLeftToRightThenTopToBottom
-    ChildSizing.ControlsPerLine = 1
-    ItemIndex = 0
-    Items.Strings = (
-      'Color, Line mode'
-      'Black/White, Line mode'
-      'As on screen (black background!)'
-    )
-    OnClick = prtcolorClick
-    TabOrder = 5
-  end
-  object prtorient: TRadioGroup
-    Left = 240
-    Height = 82
-    Top = 199
-    Width = 149
-    AutoFill = True
-    Caption = 'Orientation'
-    ChildSizing.LeftRightSpacing = 6
-    ChildSizing.TopBottomSpacing = 6
-    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-    ChildSizing.EnlargeVertical = crsHomogenousChildResize
-    ChildSizing.ShrinkHorizontal = crsScaleChilds
-    ChildSizing.ShrinkVertical = crsScaleChilds
-    ChildSizing.Layout = cclLeftToRightThenTopToBottom
-    ChildSizing.ControlsPerLine = 1
-    Items.Strings = (
-      'Portrait'
-      'Landscape'
-    )
-    OnClick = prtorientClick
-    TabOrder = 6
-  end
   object PrintDialog1: TPrintDialog
-    left = 376
+    left = 208
+    top = 8
   end
 end
