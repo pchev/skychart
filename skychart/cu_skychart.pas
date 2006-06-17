@@ -476,7 +476,7 @@ if Fplot.cfgplot^.AutoSkyColor and (cfgsc^.Projpole=AltAz) then begin
 end else Fplot.cfgplot^.color[0]:=Fplot.cfgplot^.bgColor;
 Fplot.cfgplot^.backgroundcolor:=Fplot.cfgplot^.color[0];
 Fplot.init(Fplot.cfgchart^.width,Fplot.cfgchart^.height);
-if Fplot.cfgchart^.onprinter and (Fplot.cfgplot^.starplot=0) then Fplot.cfgplot^.color[0]:=clBlack;
+if Fplot.cfgchart^.onprinter and (Fplot.cfgplot^.starplot=0) and (Fplot.cfgplot^.color[1]<>clBlack) then Fplot.cfgplot^.color[0]:=clBlack;
 result:=true;
 end;
 
@@ -2788,8 +2788,8 @@ for i:=1 to numlabels do begin
         txt:=cfgsc^.modlabels[j].txt;
         labelnum:=cfgsc^.modlabels[j].labelnum;
         fontnum:=cfgsc^.modlabels[j].fontnum;
-        x:=x+cfgsc^.modlabels[j].dx*Fplot.cfgchart^.drawpen;
-        y:=y+cfgsc^.modlabels[j].dy*Fplot.cfgchart^.drawpen;
+        x:=x+cfgsc^.modlabels[j].dx*Fplot.cfgchart^.drawsize;
+        y:=y+cfgsc^.modlabels[j].dy*Fplot.cfgchart^.drawsize;
         if (cfgsc^.modlabels[j].dx<>0)or(cfgsc^.modlabels[j].dy<>0) then r:=-1;
         break;
      end;
