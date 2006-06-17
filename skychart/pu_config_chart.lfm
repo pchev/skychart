@@ -1,7 +1,7 @@
 object f_config_chart: Tf_config_chart
-  Left = 270
+  Left = 379
   Height = 495
-  Top = 282
+  Top = 257
   Width = 525
   HorzScrollBar.Page = 524
   VertScrollBar.Page = 494
@@ -12,7 +12,7 @@ object f_config_chart: Tf_config_chart
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   object MainPanel: TPanel
     Left = 8
     Height = 480
@@ -28,12 +28,12 @@ object f_config_chart: Tf_config_chart
       Width = 498
       Align = alClient
       OnPageChanged = Notebook1PageChanged
-      PageIndex = 2
+      PageIndex = 3
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 490
-        ClientHeight = 416
+        ClientWidth = 494
+        ClientHeight = 420
         object Label31: TLabel
           Height = 14
           Width = 65
@@ -179,6 +179,7 @@ object f_config_chart: Tf_config_chart
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 13
+            ItemIndex = 0
             Items.Strings = (
               'J2000'
               'B1950'
@@ -243,8 +244,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 490
-        ClientHeight = 416
+        ClientWidth = 494
+        ClientHeight = 420
         object Label30: TLabel
           Height = 14
           Width = 103
@@ -724,7 +725,6 @@ object f_config_chart: Tf_config_chart
           Height = 25
           Top = 415
           Width = 83
-          BorderSpacing.InnerBorder = 2
           Caption = 'Default'
           OnClick = Button1Click
           TabOrder = 22
@@ -732,8 +732,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 490
-        ClientHeight = 416
+        ClientWidth = 494
+        ClientHeight = 420
         object Bevel7: TBevel
           Name = 'Bevel7'
           Left = 15
@@ -1076,8 +1076,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 490
-        ClientHeight = 416
+        ClientWidth = 494
+        ClientHeight = 420
         object Label29: TLabel
           Height = 14
           Width = 97
@@ -1091,8 +1091,8 @@ object f_config_chart: Tf_config_chart
           Top = 16
           Width = 449
           Caption = 'Stars Filter'
-          ClientHeight = 184
-          ClientWidth = 449
+          ClientHeight = 165
+          ClientWidth = 445
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
@@ -1409,10 +1409,10 @@ object f_config_chart: Tf_config_chart
               TabOrder = 0
               object Label110: TLabel
                 Left = 8
-                Height = 14
+                Height = 15
                 Top = 12
-                Width = 107
-                Caption = 'Nacked eye reference'
+                Width = 134
+                Caption = 'Naked eye reference'
                 Color = clNone
                 ParentColor = False
               end
@@ -1450,8 +1450,8 @@ object f_config_chart: Tf_config_chart
           Top = 208
           Width = 449
           Caption = 'Nebulae Filter'
-          ClientHeight = 200
-          ClientWidth = 449
+          ClientHeight = 181
+          ClientWidth = 445
           TabOrder = 1
           object BigNebUnit: TLabel
             Left = 376
@@ -1473,10 +1473,10 @@ object f_config_chart: Tf_config_chart
           end
           object BigNebBox: TCheckBox
             Left = 160
-            Height = 13
+            Height = 22
             Top = 18
-            Width = 135
-            Caption = 'Hide object widther than'
+            Width = 167
+            Caption = 'Hide object wider than'
             OnClick = BigNebBoxClick
             TabOrder = 1
           end
@@ -1956,8 +1956,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TPage
         Caption = 'Page5'
-        ClientWidth = 490
-        ClientHeight = 416
+        ClientWidth = 494
+        ClientHeight = 420
         object Bevel9: TBevel
           Name = 'Bevel9'
           Left = 8
@@ -2386,8 +2386,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page6: TPage
         Caption = 'Page6'
-        ClientWidth = 490
-        ClientHeight = 416
+        ClientWidth = 494
+        ClientHeight = 420
         object Label95: TLabel
           Height = 14
           Width = 89
