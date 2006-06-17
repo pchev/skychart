@@ -15,7 +15,7 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = True
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 13
   object Panel1: TPanel
     Left = 8
