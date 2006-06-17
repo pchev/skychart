@@ -197,7 +197,7 @@ type
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
-    procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string);
+    procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:conf_main);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
     function  IdentXY(X, Y: Integer):boolean;
@@ -641,7 +641,7 @@ end;
 Refresh;
 end;
 
-procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string);
+procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:conf_main);
 var savecolor: Starcolarray;
     savesplot,savenplot,savepplot,savebgcolor,resol: integer;
     saveskycolor: boolean;
@@ -691,8 +691,12 @@ try
     sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,resol div 100]);
     sc.plot.cfgchart.fontscale:=1;
-    sc.cfgsc^.xshift:=printer.PaperSize.PaperRect.WorkRect.Left;
-    sc.cfgsc^.yshift:=printer.PaperSize.PaperRect.WorkRect.Top;
+    sc.cfgsc^.LeftMargin:=mm2pi(cm.PrtLeftMargin,resol);
+    sc.cfgsc^.RightMargin:=mm2pi(cm.PrtRightMargin,resol);
+    sc.cfgsc^.TopMargin:=mm2pi(cm.PrtTopMargin,resol);
+    sc.cfgsc^.BottomMargin:=mm2pi(cm.PrtBottomMargin,resol);
+    sc.cfgsc^.xshift:=printer.PaperSize.PaperRect.WorkRect.Left+sc.cfgsc^.LeftMargin;
+    sc.cfgsc^.yshift:=printer.PaperSize.PaperRect.WorkRect.Top+sc.cfgsc^.TopMargin;
     {$ifdef win32}
     sc.plot.init(resol*Printer.PageWidth div 254,resol*Printer.pageheight div 254);
     {$endif}
@@ -775,6 +779,10 @@ finally
  sc.plot.cfgplot.bgColor:=savebgcolor;
  sc.cfgsc^.xshift:=0;
  sc.cfgsc^.yshift:=0;
+ sc.cfgsc^.LeftMargin:=0;
+ sc.cfgsc^.RightMargin:=0;
+ sc.cfgsc^.TopMargin:=0;
+ sc.cfgsc^.BottomMargin:=0;
  // redraw to screen
  sc.plot.destcnv:=Image1.canvas;
  sc.plot.cfgchart.onprinter:=false;

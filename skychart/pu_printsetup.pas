@@ -49,8 +49,6 @@ type
     Ok: TButton;
     Cancel: TButton;
     Label1: TLabel;
-    prtcolor: TRadioGroup;
-    prtorient: TRadioGroup;
     Label2: TLabel;
     Label3: TLabel;
     PrintDialog1: TPrintDialog;
@@ -66,8 +64,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure prtresChange(Sender: TObject);
     procedure printcmdChange(Sender: TObject);
-    procedure prtcolorClick(Sender: TObject);
-    procedure prtorientClick(Sender: TObject);
     procedure savepathChange(Sender: TObject);
   private
     { Private declarations }
@@ -88,9 +84,6 @@ implementation
 procedure Tf_printsetup.FormShow(Sender: TObject);
 begin
 updprtsetup;
-prtcolor.ItemIndex:=cm.PrintColor;
-if cm.PrintLandscape then prtorient.ItemIndex:=1
-                     else prtorient.ItemIndex:=0;
 end;
 
 procedure Tf_printsetup.updprtsetup;
@@ -102,10 +95,6 @@ lockupd:=true;
 case cm.PrintMethod of
 0: begin
    printmode.ItemIndex:=0;
-   if cm.PrintColor=2 then begin
-      cm.PrintColor:=0;
-      prtcolor.ItemIndex:=cm.PrintColor;
-   end;
    customoption.Visible:=false;
    qtoption.Visible:=true;
    GetPrinterResolution(cm.prtname,i);
@@ -198,17 +187,6 @@ procedure Tf_printsetup.savepathChange(Sender: TObject);
 begin
 if lockupd then exit;
 cm.PrintTmpPath:=savepath.Text;
-end;
-
-procedure Tf_printsetup.prtcolorClick(Sender: TObject);
-begin
-if (cm.PrintMethod=0)and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
-cm.PrintColor:=prtcolor.ItemIndex;
-end;
-
-procedure Tf_printsetup.prtorientClick(Sender: TObject);
-begin
-cm.PrintLandscape:=(prtorient.ItemIndex=1);
 end;
 
 initialization
