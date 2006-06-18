@@ -114,7 +114,7 @@ Tskychart = class (TComponent)
     procedure FormatCatRec(rec:Gcatrec; var desc:string);
     function FindatRaDec(ra,dec,dx: double;showall:boolean=false):boolean;
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
-    Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
+//    Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
     procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
     function GetChartInfo(sep:string=blank):string;
@@ -443,6 +443,10 @@ cfgsc^.xmin:=cfgsc^.LeftMargin;
 cfgsc^.ymin:=cfgsc^.TopMargin;
 cfgsc^.xmax:=Fplot.cfgchart^.width-cfgsc^.RightMargin;
 cfgsc^.ymax:=Fplot.cfgchart^.height-cfgsc^.BottomMargin;
+Fplot.cfgplot^.xmin:= cfgsc^.xmin;
+Fplot.cfgplot^.ymin:= cfgsc^.ymin;
+Fplot.cfgplot^.xmax:= cfgsc^.xmax;
+Fplot.cfgplot^.ymax:= cfgsc^.ymax;
 ScaleWindow(cfgsc);
 result:=true;
 end;
@@ -1787,7 +1791,7 @@ begin
 Fplot.PlotBorder(cfgsc^.LeftMargin,cfgsc^.RightMargin,cfgsc^.TopMargin,cfgsc^.BottomMargin);
 end;
 
-Procedure Tskychart.LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
+{Procedure Tskychart.LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
 begin
 x:=xx;
 y:=yy;
@@ -1795,11 +1799,11 @@ if yy<cfgsc^.ymin then y:=cfgsc^.ymin+marge;
 if (yy+h+marge)>cfgsc^.ymax then y:=cfgsc^.ymax-h-marge;
 if xx<cfgsc^.xmin then x:=cfgsc^.xmin+marge;
 if (xx+w+marge)>cfgsc^.xmax then x:=cfgsc^.xmax-w-marge;
-end;
+end;}
 
 procedure Tskychart.DrawEqGrid;
 var ra1,de1,ac,dc,dra,dde:double;
-    col,n,lw,lh,lx,ly:integer;
+    col,n:integer;
     ok,labelok:boolean;
 function DrawRAline(ra,de,dd:double):boolean;
 var x1,y1:double;
@@ -1822,9 +1826,8 @@ repeat
     if (xx>0)and(xx<cfgsc^.Xmax)and(yy>0)and(yy<cfgsc^.Ymax) then plotok:=true;
  end;
  if (cfgsc^.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc^.Xmax)or(yy<0)or(yy>cfgsc^.Ymax)) then begin
-    LabelPos(round(xx),round(yy)+lh,lw,lh,5,lx,ly);
-    if dra<=15*minarc then Fplot.cnv.TextOut(lx,ly,artostr3(rmod(ra+pi2,pi2)*rad2deg/15))
-                      else Fplot.cnv.TextOut(lx,ly,armtostr(rmod(ra+pi2,pi2)*rad2deg/15));
+    if dra<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot^.LabelColor[7],laCenter,laTop,artostr3(rmod(ra+pi2,pi2)*rad2deg/15),true,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot^.LabelColor[7],laCenter,laTop,armtostr(rmod(ra+pi2,pi2)*rad2deg/15),true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -1855,9 +1858,8 @@ repeat
     if (xx>0)and(xx<cfgsc^.Xmax)and(yy>0)and(yy<cfgsc^.Ymax) then plotok:=true;
  end;
  if (cfgsc^.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc^.Xmax)or(yy<0)or(yy>cfgsc^.Ymax)) then begin
-    LabelPos(round(xx),round(yy),lw,lh,5,lx,ly);
-    if dde<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(de*rad2deg))
-                     else Fplot.cnv.TextOut(lx,ly,demtostr(de*rad2deg));
+    if dde<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot^.LabelColor[7],laLeft,laBottom,detostr(de*rad2deg),true,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot^.LabelColor[7],laLeft,laBottom,demtostr(de*rad2deg),true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -1870,16 +1872,6 @@ end;
 begin
 if (cfgsc^.projpole=Equat)and(not cfgsc^.ShowEqGrid) then col:=Fplot.cfgplot^.Color[12]
                   else col:=Fplot.cfgplot^.Color[13];
-Fplot.cnv.Brush.Color:=Fplot.cfgplot^.backgroundcolor;
-Fplot.cnv.Brush.Style:=bsSolid;
-// todo: replace by plottext()
-Fplot.cnv.Font.Name:=Fplot.cfgplot^.FontName[1];
-Fplot.cnv.Font.Color:=Fplot.cfgplot^.LabelColor[7];
-Fplot.cnv.Font.Size:=Fplot.cfgplot^.FontSize[1]*Fplot.cfgchart^.fontscale;
-if Fplot.cfgplot^.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
-if Fplot.cfgplot^.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
-lh:=Fplot.cnv.TextHeight('22h22m');
-lw:=Fplot.cnv.TextWidth('22h22m');
 n:=GetFieldNum(cfgsc^.fov/cos(cfgsc^.decentre));
 dra:=Fcatalog.cfgshr.HourGridSpacing[n];
 dde:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc^.FieldNum];
@@ -1929,7 +1921,7 @@ end;
 
 procedure Tskychart.DrawAzGrid;
 var a1,h1,ac,hc,dda,ddh:double;
-    col,n,lw,lh,lx,ly:integer;
+    col,n:integer;
     ok,labelok:boolean;
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1,al:double;
@@ -1954,10 +1946,9 @@ repeat
     if (xx>0)and(xx<cfgsc^.Xmax)and(yy>0)and(yy<cfgsc^.Ymax) then plotok:=true;
  end;
  if (cfgsc^.ShowGridNum)and(plotok)and(not labelok)and((abs(h)<minarc)or(xx<0)or(xx>cfgsc^.Xmax)or(yy<0)or(yy>cfgsc^.Ymax)) then begin
-    LabelPos(round(xx),round(yy)+lh,lw,lh,5,lx,ly);
     if Fcatalog.cfgshr.AzNorth then al:=rmod(a+pi+pi2,pi2) else al:=rmod(a+pi2,pi2);
-    if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(al*rad2deg))
-                      else Fplot.cnv.TextOut(lx,ly,lonmtostr(al*rad2deg));
+    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot^.LabelColor[7],laCenter,laTop,lontostr(al*rad2deg),true,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot^.LabelColor[7],laCenter,laTop,lonmtostr(al*rad2deg),true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -1989,9 +1980,8 @@ repeat
     if (xx>0)and(xx<cfgsc^.Xmax)and(yy>0)and(yy<cfgsc^.Ymax) then plotok:=true;
  end;
  if (cfgsc^.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc^.Xmax)or(yy<0)or(yy>cfgsc^.Ymax)) then begin
-    LabelPos(round(xx),round(yy),lw,lh,5,lx,ly);
-    if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
-                     else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
+    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot^.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),true,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot^.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2003,16 +1993,6 @@ result:=(n>1);
 end;
 begin
 col:=Fplot.cfgplot^.Color[12];
-Fplot.cnv.Brush.Color:=Fplot.cfgplot^.backgroundcolor;
-Fplot.cnv.Brush.Style:=bsSolid;
-// todo: replace by plottext()
-Fplot.cnv.Font.Name:=Fplot.cfgplot^.FontName[1];
-Fplot.cnv.Font.Color:=Fplot.cfgplot^.LabelColor[7];
-Fplot.cnv.Font.Size:=Fplot.cfgplot^.FontSize[1]*Fplot.cfgchart^.fontscale;
-if Fplot.cfgplot^.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
-if Fplot.cfgplot^.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
-lh:=Fplot.cnv.TextHeight('222h22m');
-lw:=Fplot.cnv.TextWidth('222h22m');
 n:=GetFieldNum(cfgsc^.fov/cos(cfgsc^.hcentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
 ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc^.FieldNum];
@@ -2131,7 +2111,7 @@ end;
 
 procedure Tskychart.DrawGalGrid;
 var a1,h1,ac,hc,dda,ddh:double;
-    col,n,lw,lh,lx,ly:integer;
+    col,n:integer;
     ok,labelok:boolean;
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1:double;
@@ -2154,9 +2134,8 @@ repeat
     if (xx>0)and(xx<cfgsc^.Xmax)and(yy>0)and(yy<cfgsc^.Ymax) then plotok:=true;
  end;
  if (cfgsc^.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc^.Xmax)or(yy<0)or(yy>cfgsc^.Ymax)) then begin
-    LabelPos(round(xx),round(yy)+lh,lw,lh,5,lx,ly);
-    if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(rmod(a+pi2,pi2)*rad2deg))
-                      else Fplot.cnv.TextOut(lx,ly,lonmtostr(rmod(a+pi2,pi2)*rad2deg));
+    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot^.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),true,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot^.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2188,9 +2167,8 @@ repeat
     if (xx>0)and(xx<cfgsc^.Xmax)and(yy>0)and(yy<cfgsc^.Ymax) then plotok:=true;
  end;
  if (cfgsc^.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc^.Xmax)or(yy<0)or(yy>cfgsc^.Ymax)) then begin
-    LabelPos(round(xx),round(yy),lw,lh,5,lx,ly);
-    if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
-                     else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
+    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot^.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),true,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot^.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2202,16 +2180,6 @@ result:=(n>1);
 end;
 begin
 col:=Fplot.cfgplot^.Color[12];
-Fplot.cnv.Brush.Color:=Fplot.cfgplot^.backgroundcolor;
-Fplot.cnv.Brush.Style:=bsSolid;
-// todo: replace by plottext()
-Fplot.cnv.Font.Name:=Fplot.cfgplot^.FontName[1];
-Fplot.cnv.Font.Color:=Fplot.cfgplot^.LabelColor[7];
-Fplot.cnv.Font.Size:=Fplot.cfgplot^.FontSize[1]*Fplot.cfgchart^.fontscale;
-if Fplot.cfgplot^.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
-if Fplot.cfgplot^.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
-lh:=Fplot.cnv.TextHeight('222h22m');
-lw:=Fplot.cnv.TextWidth('222h22m');
 n:=GetFieldNum(cfgsc^.fov/cos(cfgsc^.bcentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
 ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc^.FieldNum];
@@ -2261,7 +2229,7 @@ end;
 
 procedure Tskychart.DrawEclGrid;
 var a1,h1,ac,hc,dda,ddh:double;
-    col,n,lw,lh,lx,ly:integer;
+    col,n:integer;
     ok,labelok:boolean;
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1:double;
@@ -2284,9 +2252,8 @@ repeat
     if (xx>0)and(xx<cfgsc^.Xmax)and(yy>0)and(yy<cfgsc^.Ymax) then plotok:=true;
  end;
  if (cfgsc^.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc^.Xmax)or(yy<0)or(yy>cfgsc^.Ymax)) then begin
-    LabelPos(round(xx),round(yy)+lh,lw,lh,5,lx,ly);
-    if dda<=15*minarc then Fplot.cnv.TextOut(lx,ly,lontostr(rmod(a+pi2,pi2)*rad2deg))
-                      else Fplot.cnv.TextOut(lx,ly,lonmtostr(rmod(a+pi2,pi2)*rad2deg));
+    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot^.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),true,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot^.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2318,9 +2285,8 @@ repeat
     if (xx>0)and(xx<cfgsc^.Xmax)and(yy>0)and(yy<cfgsc^.Ymax) then plotok:=true;
  end;
  if (cfgsc^.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc^.Xmax)or(yy<0)or(yy>cfgsc^.Ymax)) then begin
-    LabelPos(round(xx),round(yy),lw,lh,5,lx,ly);
-    if ddh<=5*minarc then Fplot.cnv.TextOut(lx,ly,detostr(h*rad2deg))
-                     else Fplot.cnv.TextOut(lx,ly,demtostr(h*rad2deg));
+    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot^.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),true,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot^.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2332,16 +2298,6 @@ result:=(n>1);
 end;
 begin
 col:=Fplot.cfgplot^.Color[12];
-Fplot.cnv.Brush.Color:=Fplot.cfgplot^.backgroundcolor;
-Fplot.cnv.Brush.Style:=bsSolid;
-// todo: replace by plottext()
-Fplot.cnv.Font.Name:=Fplot.cfgplot^.FontName[1];
-Fplot.cnv.Font.Color:=Fplot.cfgplot^.LabelColor[7];
-Fplot.cnv.Font.Size:=Fplot.cfgplot^.FontSize[1]*Fplot.cfgchart^.fontscale;
-if Fplot.cfgplot^.FontBold[1] then Fplot.cnv.Font.Style:=[fsBold] else Fplot.cnv.Font.Style:=[];
-if Fplot.cfgplot^.FontItalic[1] then Fplot.cnv.font.style:=Fplot.cnv.font.style+[fsItalic];
-lh:=Fplot.cnv.TextHeight('222h22m');
-lw:=Fplot.cnv.TextWidth('222h22m');
 n:=GetFieldNum(cfgsc^.fov/cos(cfgsc^.becentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
 ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc^.FieldNum];
