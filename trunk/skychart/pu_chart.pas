@@ -645,6 +645,7 @@ procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,pri
 var savecolor: Starcolarray;
     savesplot,savenplot,savepplot,savebgcolor,resol: integer;
     saveskycolor: boolean;
+    saveLabelColor : array[1..numlabtype] of Tcolor;
     prtname:string;
     prtbmp:Tbitmap;
     fname:WideString;
@@ -659,6 +660,7 @@ var savecolor: Starcolarray;
  savepplot:=sc.plot.cfgplot.plaplot;
  saveskycolor:=sc.plot.cfgplot.autoskycolor;
  savebgcolor:=sc.plot.cfgplot.bgColor;
+ for i:=1 to numlabtype do saveLabelColor[i]:=sc.plot.cfgplot.LabelColor[i];
  prtbmp:=Tbitmap.create;
 try
  screen.cursor:=crHourGlass;
@@ -674,6 +676,7 @@ try
      sc.plot.cfgplot.color[11]:=clBlack;
    end else begin
      sc.plot.cfgplot.color:=DfWBColor;
+     for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=clBlack;
    end;
    sc.plot.cfgplot.bgColor:=sc.plot.cfgplot.color[0];
  end;
@@ -793,6 +796,7 @@ finally
  sc.plot.cfgplot.plaplot:=savepplot;
  sc.plot.cfgplot.autoskycolor:=saveskycolor;
  sc.plot.cfgplot.bgColor:=savebgcolor;
+ for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=saveLabelColor[i];
  sc.cfgsc^.xshift:=0;
  sc.cfgsc^.yshift:=0;
  sc.cfgsc^.LeftMargin:=0;
