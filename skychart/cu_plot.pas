@@ -135,7 +135,7 @@ type
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
      function  PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
-     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true);
+     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true; clip:boolean=false; marge: integer=5);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
@@ -1783,7 +1783,7 @@ end;
 result:=0;
 end;
 
-procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true);
+procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true; clip:boolean=false; marge: integer=5);
 var ts:TSize;
     arect: TRect;
 begin
@@ -1806,6 +1806,12 @@ end;
 case Yalign of
  laBottom : yy:=yy-ts.cy;
  laCenter : yy:=yy-(ts.cy div 2);
+end;
+if clip then begin
+  if yy<cfgplot^.ymin then yy:=cfgplot^.ymin+marge;
+  if (yy+ts.cy+marge)>cfgplot^.ymax then yy:=cfgplot^.ymax-ts.cy-marge;
+  if xx<cfgplot^.xmin then xx:=cfgplot^.xmin+marge;
+  if (xx+ts.cx+marge)>cfgplot^.xmax then xx:=cfgplot^.xmax-ts.cx-marge;
 end;
 arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
 textRect(arect,xx,yy,txt);

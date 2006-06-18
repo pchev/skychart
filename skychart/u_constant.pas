@@ -441,6 +441,7 @@ type
                 LabelColor : array[1..numlabtype] of Tcolor;   // 1=star 2=var 3=mult 4=neb 5=solsys 6=const 7=misc 8=chart info 
                 LabelSize : array[1..numlabtype] of integer;
                 outradius,contrast,saturation:integer;
+                xmin,xmax,ymin,ymax: integer;
                 partsize,magsize:single;
 
 //  deep-sky objects colour defaults filss are decalers as boolean - either fill or not
