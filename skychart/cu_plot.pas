@@ -321,10 +321,10 @@ begin
         xmin:=0; ymin:=0;
         xmax:=cfgchart^.width;
         ymax:=cfgchart^.height;
-        Rectangle(xmin,ymin,xmin+LeftMargin-5,ymax);
-        Rectangle(xmax-RightMargin+8,ymin,xmax,ymax);
-        Rectangle(xmin,ymin,xmax,ymin+TopMargin-5);
-        Rectangle(xmin,ymax-BottomMargin+8,xmax,ymax);
+        Rectangle(xmin,ymin,xmin+LeftMargin,ymax);
+        Rectangle(xmax-RightMargin,ymin,xmax,ymax);
+        Rectangle(xmin,ymin,xmax,ymin+TopMargin);
+        Rectangle(xmin,ymax-BottomMargin,xmax,ymax);
         Pen.Color := clBlack;
         Pen.Width := 2*cfgchart.drawpen;
         Brush.Color := clWhite;
@@ -1726,8 +1726,7 @@ with cnv do begin
   Pen.Mode:=pmCopy;
   Font.CharSet:=DEFAULT_CHARSET;
   Font.Name:=cfgplot.FontName[fontnum];
-  if WhiteBg then Font.Color:=clBlack
-     else Font.Color:=cfgplot.LabelColor[labelnum];
+  Font.Color:=cfgplot.LabelColor[labelnum];
   Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
@@ -1825,8 +1824,7 @@ Brush.Color:=cfgplot.backgroundcolor;
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Font.Name:=cfgplot.FontName[fontnum];
-if WhiteBg then Font.Color:=clBlack
-           else Font.Color:=cfgplot.LabelColor[labelnum];
+Font.Color:=cfgplot.LabelColor[labelnum];
 if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
 Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
