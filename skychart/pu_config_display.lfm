@@ -27,12 +27,12 @@ object f_config_display: Tf_config_display
       Top = 1
       Width = 521
       Align = alClient
-      PageIndex = 5
+      PageIndex = 4
       ShowTabs = False
       object Page1: TPage
         Caption = 'Display'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -86,7 +86,7 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 441
           Caption = 'Star Display  Properties'
-          ClientHeight = 225
+          ClientHeight = 227
           ClientWidth = 437
           TabOrder = 2
           Visible = False
@@ -185,6 +185,7 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 192
             Width = 95
+            BorderSpacing.InnerBorder = 4
             Caption = 'Default'
             OnClick = StarButton1Click
             TabOrder = 4
@@ -194,6 +195,7 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 192
             Width = 95
+            BorderSpacing.InnerBorder = 4
             Caption = 'Naked Eye'
             OnClick = StarButton2Click
             TabOrder = 5
@@ -203,6 +205,7 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 192
             Width = 95
+            BorderSpacing.InnerBorder = 4
             Caption = 'High Color'
             OnClick = StarButton3Click
             TabOrder = 6
@@ -212,6 +215,7 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 192
             Width = 95
+            BorderSpacing.InnerBorder = 4
             Caption = 'Black/White'
             OnClick = StarButton4Click
             TabOrder = 7
@@ -220,8 +224,8 @@ object f_config_display: Tf_config_display
       end
       object Page2: TPage
         Caption = 'Colour'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object Label181: TLabel
           Left = 86
           Height = 14
@@ -718,8 +722,8 @@ object f_config_display: Tf_config_display
       end
       object Page3: TPage
         Caption = 'Deep-sky colour'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object lblDSOCScheme: TLabel
           Left = 16
           Height = 14
@@ -1193,6 +1197,7 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 88
             Width = 75
+            BorderSpacing.InnerBorder = 4
             Caption = 'Default'
             OnClick = DefNebColorButtonClick
             TabOrder = 2
@@ -1237,8 +1242,8 @@ object f_config_display: Tf_config_display
       end
       object Page4: TPage
         Caption = 'Sky colour'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object skycolorbox: TRadioGroup
           Left = 24
           Height = 89
@@ -1373,6 +1378,7 @@ object f_config_display: Tf_config_display
             Height = 25
             Top = 152
             Width = 107
+            BorderSpacing.InnerBorder = 4
             Caption = 'Default color'
             OnClick = Button3Click
             TabOrder = 1
@@ -1381,12 +1387,12 @@ object f_config_display: Tf_config_display
       end
       object Page5: TPage
         Caption = 'Lines'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object EqGrid: TCheckBox
           Left = 16
           Height = 13
-          Top = 64
+          Top = 101
           Width = 111
           Caption = 'Add Equatorial Grid'
           OnClick = EqGridClick
@@ -1413,7 +1419,7 @@ object f_config_display: Tf_config_display
         object galactic: TCheckBox
           Left = 184
           Height = 13
-          Top = 64
+          Top = 101
           Width = 129
           Caption = 'Show Galactic Equator'
           OnClick = galacticClick
@@ -1430,17 +1436,17 @@ object f_config_display: Tf_config_display
         end
         object GroupBox1: TGroupBox
           Left = 8
-          Height = 113
-          Top = 120
+          Height = 140
+          Top = 173
           Width = 273
           Caption = 'Constellation Figures'
-          ClientHeight = 113
-          ClientWidth = 273
+          ClientHeight = 125
+          ClientWidth = 269
           TabOrder = 5
           object Label132: TLabel
             Left = 29
             Height = 14
-            Top = 51
+            Top = 75
             Width = 155
             Caption = 'Constellation Figure File Name : '
             Color = clNone
@@ -1449,7 +1455,7 @@ object f_config_display: Tf_config_display
           object Constl: TCheckBox
             Left = 8
             Height = 13
-            Top = 19
+            Top = 11
             Width = 142
             Caption = 'Show Constellation Figure'
             OnClick = ConstlClick
@@ -1458,7 +1464,7 @@ object f_config_display: Tf_config_display
           object ConstlFile: TFileNameEdit
             Left = 29
             Height = 23
-            Top = 67
+            Top = 90
             Width = 208
             OnChange = ConstlFileChange
             TabOrder = 1
@@ -1467,20 +1473,41 @@ object f_config_display: Tf_config_display
             NumGlyphs = 1
             ParentColor = False
           end
+          object CFStyle: TComboBox
+            Left = 29
+            Height = 25
+            Top = 32
+            Width = 100
+            AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+            ItemIndex = 0
+            Items.Strings = (
+              'Line'
+              'Dash'
+              'Dot'
+              'Dash Dot'
+              'Dash Dot Dot'
+            )
+            MaxLength = 0
+            OnChange = CFStyleChange
+            OnDrawItem = StyleDrawItem
+            Style = csOwnerDrawFixed
+            TabOrder = 2
+            Text = 'Line'
+          end
         end
         object GroupBox3: TGroupBox
           Left = 8
-          Height = 113
-          Top = 248
+          Height = 140
+          Top = 325
           Width = 273
           Caption = 'Constellation Boundaries'
-          ClientHeight = 113
-          ClientWidth = 273
+          ClientHeight = 125
+          ClientWidth = 269
           TabOrder = 6
           object Label72: TLabel
             Left = 29
             Height = 14
-            Top = 48
+            Top = 75
             Width = 171
             Caption = 'Constellation Boundary File Name : '
             Color = clNone
@@ -1489,7 +1516,7 @@ object f_config_display: Tf_config_display
           object Constb: TCheckBox
             Left = 8
             Height = 13
-            Top = 16
+            Top = 11
             Width = 158
             Caption = 'Show Constellation Boundary'
             OnClick = ConstbClick
@@ -1498,7 +1525,7 @@ object f_config_display: Tf_config_display
           object ConstbFile: TFileNameEdit
             Left = 29
             Height = 23
-            Top = 67
+            Top = 90
             Width = 208
             OnChange = ConstbFileChange
             TabOrder = 1
@@ -1507,15 +1534,36 @@ object f_config_display: Tf_config_display
             NumGlyphs = 1
             ParentColor = False
           end
+          object CBStyle: TComboBox
+            Left = 29
+            Height = 25
+            Top = 32
+            Width = 100
+            AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+            ItemIndex = 0
+            Items.Strings = (
+              'Line'
+              'Dash'
+              'Dot'
+              'Dash Dot'
+              'Dash Dot Dot'
+            )
+            MaxLength = 0
+            OnChange = CBStyleChange
+            OnDrawItem = StyleDrawItem
+            Style = csOwnerDrawFixed
+            TabOrder = 2
+            Text = 'Line'
+          end
         end
         object GroupBox4: TGroupBox
-          Left = 288
-          Height = 105
-          Top = 120
+          Left = 301
+          Height = 140
+          Top = 173
           Width = 185
           Caption = 'Milky Way'
-          ClientHeight = 105
-          ClientWidth = 185
+          ClientHeight = 125
+          ClientWidth = 181
           TabOrder = 7
           object milkyway: TCheckBox
             Left = 8
@@ -1536,11 +1584,95 @@ object f_config_display: Tf_config_display
             TabOrder = 1
           end
         end
+        object GridStyle: TComboBox
+          Left = 39
+          Height = 25
+          Top = 53
+          Width = 100
+          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemIndex = 0
+          Items.Strings = (
+            'Line'
+            'Dash'
+            'Dot'
+            'Dash Dot'
+            'Dash Dot Dot'
+          )
+          MaxLength = 0
+          OnChange = GridStyleChange
+          OnDrawItem = StyleDrawItem
+          Style = csOwnerDrawFixed
+          TabOrder = 8
+          Text = 'Line'
+        end
+        object EclipticStyle: TComboBox
+          Left = 205
+          Height = 25
+          Top = 53
+          Width = 100
+          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemIndex = 0
+          Items.Strings = (
+            'Line'
+            'Dash'
+            'Dot'
+            'Dash Dot'
+            'Dash Dot Dot'
+          )
+          MaxLength = 0
+          OnChange = EclipticStyleChange
+          OnDrawItem = StyleDrawItem
+          Style = csOwnerDrawFixed
+          TabOrder = 9
+          Text = 'Line'
+        end
+        object EqGridStyle: TComboBox
+          Left = 39
+          Height = 25
+          Top = 125
+          Width = 100
+          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemIndex = 0
+          Items.Strings = (
+            'Line'
+            'Dash'
+            'Dot'
+            'Dash Dot'
+            'Dash Dot Dot'
+          )
+          MaxLength = 0
+          OnChange = EqGridStyleChange
+          OnDrawItem = StyleDrawItem
+          Style = csOwnerDrawFixed
+          TabOrder = 10
+          Text = 'Line'
+        end
+        object GalEqStyle: TComboBox
+          Left = 205
+          Height = 25
+          Top = 125
+          Width = 100
+          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemIndex = 0
+          Items.Strings = (
+            'Line'
+            'Dash'
+            'Dot'
+            'Dash Dot'
+            'Dash Dot Dot'
+          )
+          MaxLength = 0
+          OnChange = GalEqStyleChange
+          OnDrawItem = StyleDrawItem
+          Style = csOwnerDrawFixed
+          TabOrder = 11
+          Text = 'Line'
+        end
       end
       object Page6: TPage
         Caption = 'Labels'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object MagLabel: TRadioGroup
           Left = 16
           Height = 73
@@ -1614,8 +1746,8 @@ object f_config_display: Tf_config_display
           Top = 64
           Width = 449
           Caption = 'Label Object'
-          ClientHeight = 256
-          ClientWidth = 445
+          ClientHeight = 273
+          ClientWidth = 449
           TabOrder = 4
           object Label237: TLabel
             Left = 244
@@ -1954,8 +2086,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TPage
         Caption = 'Fonts'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object Bevel10: TBevel
           Name = 'Bevel10'
           Left = 8
@@ -2350,6 +2482,7 @@ object f_config_display: Tf_config_display
           Height = 25
           Top = 376
           Width = 75
+          BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = DefaultFontClick
           TabOrder = 6
@@ -2367,8 +2500,8 @@ object f_config_display: Tf_config_display
       end
       object Page8: TPage
         Caption = 'Finder circle'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object Label307: TLabel
           Left = 80
           Height = 14
@@ -2510,8 +2643,8 @@ object f_config_display: Tf_config_display
       end
       object Page9: TPage
         Caption = 'Finder rectangle'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object Label308: TLabel
           Left = 80
           Height = 14
@@ -2667,6 +2800,7 @@ object f_config_display: Tf_config_display
       Top = 10
       Width = 77
       Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
       Caption = 'OK'
       Default = True
       ModalResult = 1
@@ -2678,6 +2812,7 @@ object f_config_display: Tf_config_display
       Top = 10
       Width = 77
       Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button4Click
       TabOrder = 1
@@ -2688,6 +2823,7 @@ object f_config_display: Tf_config_display
       Top = 10
       Width = 77
       Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2

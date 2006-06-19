@@ -38,6 +38,12 @@ type
     Button2: TButton;
     Button4: TButton;
     Button5: TButton;
+    GridStyle: TComboBox;
+    EclipticStyle: TComboBox;
+    EqGridStyle: TComboBox;
+    GalEqStyle: TComboBox;
+    CFStyle: TComboBox;
+    CBStyle: TComboBox;
     ConstlFile: TFileNameEdit;
     ConstbFile: TFileNameEdit;
     GroupBox6: TGroupBox;
@@ -293,9 +299,17 @@ type
     Shape11: TShape;
     Notebook1: TNotebook;
     procedure Button4Click(Sender: TObject);
+    procedure CBStyleChange(Sender: TObject);
+    procedure CFStyleChange(Sender: TObject);
+    procedure EclipticStyleChange(Sender: TObject);
+    procedure EqGridStyleChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure GalEqStyleChange(Sender: TObject);
+    procedure GridStyleChange(Sender: TObject);
+    procedure StyleDrawItem(Control: TWinControl; Index: Integer;
+      ARect: TRect; State: TOwnerDrawState);
     procedure NightButtonClick(Sender: TObject);
     procedure StandardButtonClick(Sender: TObject);
     procedure ThemeListChange(Sender: TObject);
@@ -434,6 +448,48 @@ Showlabel;
 ShowCircle;
 ShowRectangle;
 LockChange:=false;
+end;
+
+procedure Tf_config_display.GridStyleChange(Sender: TObject);
+begin
+csc.StyleGrid:=TPenStyle(GridStyle.itemindex);
+end;
+
+procedure Tf_config_display.EqGridStyleChange(Sender: TObject);
+begin
+csc.StyleEqGrid:=TPenStyle(EqGridStyle.itemindex);
+end;
+
+procedure Tf_config_display.CFStyleChange(Sender: TObject);
+begin
+csc.StyleConstL:=TPenStyle(CFStyle.itemindex);
+end;
+
+procedure Tf_config_display.GalEqStyleChange(Sender: TObject);
+begin
+csc.StyleGalEq:=TPenStyle(GalEqStyle.itemindex);
+end;
+
+procedure Tf_config_display.EclipticStyleChange(Sender: TObject);
+begin
+csc.StyleEcliptic:=TPenStyle(EclipticStyle.itemindex);
+end;
+
+procedure Tf_config_display.CBStyleChange(Sender: TObject);
+begin
+csc.StyleConstB:=TPenStyle(CBStyle.itemindex);
+end;
+
+procedure Tf_config_display.StyleDrawItem(Control: TWinControl;
+  Index: Integer; ARect: TRect; State: TOwnerDrawState);
+var tw: integer;
+begin
+with  TComboBox(Control).Canvas do begin
+  Pen.Style:=TPenStyle(index);
+  tw:=TextWidth(TComboBox(Control).Items[index])+5;
+  moveto(ARect.Left+tw,(ARect.Top+ARect.Bottom) div 2);
+  lineto(ARect.Right,(ARect.Top+ARect.Bottom) div 2);
+end;
 end;
 
 procedure Tf_config_display.NightButtonClick(Sender: TObject);
@@ -669,6 +725,12 @@ ConstL.Checked:=csc.ShowConstl;
 ConstB.Checked:=csc.ShowConstb;
 milkyway.Checked:=csc.ShowMilkyWay;
 fillmilkyway.Checked:=csc.FillMilkyWay;
+GridStyle.ItemIndex:=ord(csc.StyleGrid);
+EqGridStyle.ItemIndex:=ord(csc.StyleEqGrid);
+EclipticStyle.ItemIndex:=ord(csc.StyleEcliptic);
+GalEqStyle.ItemIndex:=ord(csc.StyleGalEq);
+CBStyle.ItemIndex:=ord(csc.StyleConstB);
+CFStyle.ItemIndex:=ord(csc.StyleConstL);
 end;
 
 procedure Tf_config_display.showlabelcolor;

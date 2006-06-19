@@ -1071,6 +1071,7 @@ with cnv do begin
         MoveTo(round(x1),round(y1));
         LineTo(round(x2),round(y2));
   end;
+  Pen.Style:=psSolid;
 end;
 end;
 
@@ -1789,7 +1790,7 @@ var ts:TSize;
 begin
 with cnv do begin
 TextStyle.Opaque:=opaque;
-Brush.Color:=cfgplot.Color[0];
+Brush.Color:=cfgplot.backgroundcolor;
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Font.Name:=cfgplot.FontName[fontnum];
