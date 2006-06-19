@@ -2454,7 +2454,7 @@ for i:=0 to 360 do begin
   if first then
      first:=false
   else
-     FPlot.PlotLine(x1,y1,x2,y2,color,1);
+     FPlot.PlotLine(x1,y1,x2,y2,color,1,cfgsc^.StyleEcliptic);
   x1:=x2;
   y1:=y2;
 end;
@@ -2482,7 +2482,7 @@ for i:=0 to 360 do begin
   if first then begin
      first:=false;
   end else
-     FPlot.PlotLine(x1,y1,x2,y2,color,1);
+     FPlot.PlotLine(x1,y1,x2,y2,color,1,cfgsc^.StyleGalEq);
   x1:=x2;
   y1:=y2;
 end;

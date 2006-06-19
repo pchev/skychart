@@ -676,8 +676,8 @@ try
      sc.plot.cfgplot.color[11]:=clBlack;
    end else begin
      sc.plot.cfgplot.color:=DfWBColor;
-     for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=clBlack;
    end;
+   if printcolor<2 then for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=clBlack;
    sc.plot.cfgplot.bgColor:=sc.plot.cfgplot.color[0];
  end;
  if (printcolor=2)and(sc.plot.cfgplot.starplot=2) then sc.plot.cfgplot.starplot:=1;
