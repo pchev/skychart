@@ -15,78 +15,77 @@ LazarusResources.Add('Tf_chart','FORMDATA',[
   +'entlabel '#5'Color'#7#7'clBlack'#10'Font.Color'#7#7'clWhite'#11'Font.Height'
   +#2#244#9'Font.Name'#6#13'MS Sans Serif'#11'ParentColor'#8#13'ShowAccelChar'#8
   +#11'Transparent'#8#7'Visible'#8#7'OnClick'#7#15'identlabelClick'#0#0#10'TScr'
-  +'ollBar'#13'VertScrollBar'#6'Cursor'#7#7'crArrow'#4'Left'#3#208#1#6'Height'#3
-  +#255#0#3'Top'#2#1#5'Width'#2#15#5'Align'#7#7'alRight'#4'Kind'#7#10'sbVertica'
-  +'l'#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8'PageSize'#2#10#8'TabOrde'
-  +'r'#2#0#8'OnChange'#7#19'VertScrollBarChange'#0#0#10'TScrollBar'#12'HorScrol'
-  +'lBar'#6'Cursor'#7#7'crArrow'#4'Left'#2#1#6'Height'#2#15#3'Top'#3#0#1#5'Widt'
-  +'h'#3#222#1#5'Align'#7#8'alBottom'#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2
-  +#206#8'PageSize'#2#10#8'TabOrder'#2#1#8'OnChange'#7#18'HorScrollBarChange'#0
-  +#0#0#6'TTimer'#12'RefreshTimer'#7'Enabled'#8#8'Interval'#3','#1#7'OnTimer'#7
-  +#17'RefreshTimerTimer'#4'left'#3'0'#1#3'top'#2#24#0#0#11'TActionList'#11'Act'
-  +'ionList1'#4'left'#3'0'#1#3'top'#2'@'#0#7'TAction'#8'zoomplus'#8'Category'#6
-  +#4'zoom'#7'Caption'#6#6'Zoom +'#10'ImageIndex'#2#6#9'OnExecute'#7#15'zoomplu'
-  +'sExecute'#0#0#7'TAction'#9'zoomminus'#8'Category'#6#4'zoom'#7'Caption'#6#6
-  +'Zoom -'#10'ImageIndex'#2#7#9'OnExecute'#7#16'zoomminusExecute'#0#0#7'TActio'
-  +'n'#8'MoveWest'#8'Category'#6#4'move'#7'Caption'#6#9'Move West'#9'OnExecute'
-  +#7#15'MoveWestExecute'#0#0#7'TAction'#8'MoveEast'#8'Category'#6#4'move'#7'Ca'
-  +'ption'#6#9'Move East'#9'OnExecute'#7#15'MoveEastExecute'#0#0#7'TAction'#9'M'
-  +'oveNorth'#8'Category'#6#4'move'#7'Caption'#6#10'Move North'#9'OnExecute'#7
-  +#16'MoveNorthExecute'#0#0#7'TAction'#9'MoveSouth'#8'Category'#6#4'move'#7'Ca'
-  +'ption'#6#10'Move South'#9'OnExecute'#7#16'MoveSouthExecute'#0#0#7'TAction'
-  +#13'MoveNorthWest'#8'Category'#6#4'move'#7'Caption'#6#15'Move North-West'#9
-  +'OnExecute'#7#20'MoveNorthWestExecute'#0#0#7'TAction'#13'MoveNorthEast'#8'Ca'
-  +'tegory'#6#4'move'#7'Caption'#6#15'Move North-East'#9'OnExecute'#7#20'MoveNo'
-  +'rthEastExecute'#0#0#7'TAction'#13'MoveSouthWest'#8'Category'#6#4'move'#7'Ca'
-  +'ption'#6#15'Move South-West'#9'OnExecute'#7#20'MoveSouthWestExecute'#0#0#7
-  +'TAction'#13'MoveSouthEast'#8'Category'#6#4'move'#7'Caption'#6#15'Move South'
-  +'-East'#9'OnExecute'#7#20'MoveSouthEastExecute'#0#0#7'TAction'#6'Centre'#8'C'
-  +'ategory'#6#4'move'#7'Caption'#6#6'Centre'#9'OnExecute'#7#13'CentreExecute'#0
-  +#0#7'TAction'#12'zoomplusmove'#8'Category'#6#4'zoom'#7'Caption'#6#13'Zoom + '
-  +'Centre'#10'ImageIndex'#2#6#9'OnExecute'#7#19'zoomplusmoveExecute'#0#0#7'TAc'
-  +'tion'#13'zoomminusmove'#8'Category'#6#4'zoom'#7'Caption'#6#13'Zoom - Centre'
-  +#10'ImageIndex'#2#7#9'OnExecute'#7#20'zoomminusmoveExecute'#0#0#7'TAction'#5
-  +'FlipX'#8'Category'#6#8'rotation'#7'Caption'#6#5'FlipX'#10'ImageIndex'#2#15#9
-  +'OnExecute'#7#12'FlipXExecute'#0#0#7'TAction'#5'FlipY'#8'Category'#6#8'rotat'
-  +'ion'#7'Caption'#6#5'FlipY'#10'ImageIndex'#2#17#9'OnExecute'#7#12'FlipYExecu'
-  +'te'#0#0#7'TAction'#4'Undo'#8'Category'#6#4'Undo'#7'Caption'#6#4'Undo'#9'OnE'
-  +'xecute'#7#11'UndoExecute'#0#0#7'TAction'#4'Redo'#8'Category'#6#4'Undo'#7'Ca'
-  +'ption'#6#4'Redo'#9'OnExecute'#7#11'RedoExecute'#0#0#7'TAction'#8'rot_plus'#8
-  +'Category'#6#8'rotation'#7'Caption'#6#8'rot_plus'#10'ImageIndex'#2#21#9'OnEx'
-  +'ecute'#7#15'rot_plusExecute'#0#0#7'TAction'#9'rot_minus'#8'Category'#6#8'ro'
-  +'tation'#7'Caption'#6#9'rot_minus'#10'ImageIndex'#2#22#9'OnExecute'#7#16'rot'
-  +'_minusExecute'#0#0#7'TAction'#6'GridEQ'#8'Category'#6#4'Grid'#7'Caption'#6#6
-  +'GridEQ'#10'ImageIndex'#2#24#9'OnExecute'#7#13'GridEQExecute'#0#0#7'TAction'
-  +#4'Grid'#8'Category'#6#4'Grid'#7'Caption'#6#4'Grid'#10'ImageIndex'#2#25#9'On'
-  +'Execute'#7#11'GridExecute'#0#0#7'TAction'#16'switchbackground'#7'Caption'#6
-  +#16'switchbackground'#9'OnExecute'#7#23'switchbackgroundExecute'#0#0#7'TActi'
-  +'on'#10'switchstar'#7'Caption'#6#10'switchstar'#9'OnExecute'#7#17'switchstar'
-  +'Execute'#0#0#0#10'TPopupMenu'#10'PopupMenu1'#7'OnPopup'#7#15'PopupMenu1Popu'
-  +'p'#4'left'#3'0'#1#3'top'#2'h'#0#9'TMenuItem'#6'About1'#7'Caption'#6#5'About'
-  +#7'Visible'#8#7'OnClick'#7#11'About1Click'#0#0#9'TMenuItem'#6'About2'#7'Capt'
-  +'ion'#6#1'-'#7'Visible'#8#0#0#9'TMenuItem'#7'Centre1'#6'Action'#7#6'Centre'#7
-  ,'OnClick'#7#13'CentreExecute'#0#0#9'TMenuItem'#5'Zoom1'#6'Action'#7#12'zoomp'
-  +'lusmove'#7'OnClick'#7#19'zoomplusmoveExecute'#0#0#9'TMenuItem'#5'Zoom2'#6'A'
-  +'ction'#7#13'zoomminusmove'#7'OnClick'#7#20'zoomminusmoveExecute'#0#0#9'TMen'
-  +'uItem'#2'N1'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#16'NewFinderCircle1'#7'Capt'
-  +'ion'#6#17'New Finder Circle'#7'OnClick'#7#21'NewFinderCircle1Click'#0#0#9'T'
-  +'MenuItem'#17'RemoveLastCircle1'#7'Caption'#6#18'Remove Last Circle'#7'OnCli'
-  +'ck'#7#22'RemoveLastCircle1Click'#0#0#9'TMenuItem'#17'RemoveAllCircles1'#7'C'
-  +'aption'#6#18'Remove All Circles'#7'OnClick'#7#22'RemoveAllCircles1Click'#0#0
-  +#9'TMenuItem'#9'MenuItem1'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#9'AddLabel1'#7
-  +'Caption'#6#9'New Label'#7'OnClick'#7#14'AddLabel1Click'#0#0#9'TMenuItem'#16
-  +'RemoveLastLabel1'#7'Caption'#6#17'Remove Last Label'#7'OnClick'#7#21'Remove'
-  +'LastLabel1Click'#0#0#9'TMenuItem'#15'RemoveAllLabel1'#7'Caption'#6#17'Remov'
-  +'e All Labels'#7'OnClick'#7#20'RemoveAllLabel1Click'#0#0#9'TMenuItem'#2'N2'#7
-  +'Caption'#6#1'-'#0#0#9'TMenuItem'#9'elescope1'#7'Caption'#6#9'Telescope'#0#9
-  +'TMenuItem'#5'Slew1'#7'Caption'#6#4'Slew'#7'OnClick'#7#10'Slew1Click'#0#0#9
-  +'TMenuItem'#5'Sync1'#7'Caption'#6#4'Sync'#7'OnClick'#7#10'Sync1Click'#0#0#9
-  +'TMenuItem'#8'Connect1'#7'Caption'#6#7'Connect'#7'OnClick'#7#13'Connect1Clic'
-  +'k'#0#0#9'TMenuItem'#10'AbortSlew1'#7'Caption'#6#10'Abort Slew'#7'OnClick'#7
-  +#15'AbortSlew1Click'#0#0#0#9'TMenuItem'#2'N3'#7'Caption'#6#1'-'#0#0#9'TMenuI'
-  +'tem'#8'TrackOn1'#7'Caption'#6#7'Lock on'#7'OnClick'#7#13'TrackOn1Click'#0#0
-  +#9'TMenuItem'#9'TrackOff1'#7'Caption'#6#12'Unlock Chart'#7'OnClick'#7#14'Tra'
-  +'ckOff1Click'#0#0#0#6'TTimer'#14'TelescopeTimer'#7'Enabled'#8#8'Interval'#3
-  +#244#1#7'OnTimer'#7#19'TelescopeTimerTimer'#4'left'#3'0'#1#3'top'#3#152#0#0#0
-  +#0
+  +'ollBar'#13'VertScrollBar'#6'Cursor'#7#7'crArrow'#4'Left'#3#210#1#6'Height'#3
+  +#1#1#3'Top'#2#1#5'Width'#2#13#5'Align'#7#7'alRight'#4'Kind'#7#10'sbVertical'
+  +#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8'PageSize'#2#10#8'TabOrder'#2
+  +#0#8'OnChange'#7#19'VertScrollBarChange'#0#0#10'TScrollBar'#12'HorScrollBar'
+  +#6'Cursor'#7#7'crArrow'#4'Left'#2#1#6'Height'#2#13#3'Top'#3#2#1#5'Width'#3
+  +#222#1#5'Align'#7#8'alBottom'#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8
+  +'PageSize'#2#10#8'TabOrder'#2#1#8'OnChange'#7#18'HorScrollBarChange'#0#0#0#6
+  +'TTimer'#12'RefreshTimer'#7'Enabled'#8#8'Interval'#3','#1#7'OnTimer'#7#17'Re'
+  +'freshTimerTimer'#4'left'#3'0'#1#3'top'#2#24#0#0#11'TActionList'#11'ActionLi'
+  +'st1'#4'left'#3'0'#1#3'top'#2'@'#0#7'TAction'#8'zoomplus'#8'Category'#6#4'zo'
+  +'om'#7'Caption'#6#6'Zoom +'#10'ImageIndex'#2#6#9'OnExecute'#7#15'zoomplusExe'
+  +'cute'#0#0#7'TAction'#9'zoomminus'#8'Category'#6#4'zoom'#7'Caption'#6#6'Zoom'
+  +' -'#10'ImageIndex'#2#7#9'OnExecute'#7#16'zoomminusExecute'#0#0#7'TAction'#8
+  +'MoveWest'#8'Category'#6#4'move'#7'Caption'#6#9'Move West'#9'OnExecute'#7#15
+  +'MoveWestExecute'#0#0#7'TAction'#8'MoveEast'#8'Category'#6#4'move'#7'Caption'
+  +#6#9'Move East'#9'OnExecute'#7#15'MoveEastExecute'#0#0#7'TAction'#9'MoveNort'
+  +'h'#8'Category'#6#4'move'#7'Caption'#6#10'Move North'#9'OnExecute'#7#16'Move'
+  +'NorthExecute'#0#0#7'TAction'#9'MoveSouth'#8'Category'#6#4'move'#7'Caption'#6
+  +#10'Move South'#9'OnExecute'#7#16'MoveSouthExecute'#0#0#7'TAction'#13'MoveNo'
+  +'rthWest'#8'Category'#6#4'move'#7'Caption'#6#15'Move North-West'#9'OnExecute'
+  +#7#20'MoveNorthWestExecute'#0#0#7'TAction'#13'MoveNorthEast'#8'Category'#6#4
+  +'move'#7'Caption'#6#15'Move North-East'#9'OnExecute'#7#20'MoveNorthEastExecu'
+  +'te'#0#0#7'TAction'#13'MoveSouthWest'#8'Category'#6#4'move'#7'Caption'#6#15
+  +'Move South-West'#9'OnExecute'#7#20'MoveSouthWestExecute'#0#0#7'TAction'#13
+  +'MoveSouthEast'#8'Category'#6#4'move'#7'Caption'#6#15'Move South-East'#9'OnE'
+  +'xecute'#7#20'MoveSouthEastExecute'#0#0#7'TAction'#6'Centre'#8'Category'#6#4
+  +'move'#7'Caption'#6#6'Centre'#9'OnExecute'#7#13'CentreExecute'#0#0#7'TAction'
+  +#12'zoomplusmove'#8'Category'#6#4'zoom'#7'Caption'#6#13'Zoom + Centre'#10'Im'
+  +'ageIndex'#2#6#9'OnExecute'#7#19'zoomplusmoveExecute'#0#0#7'TAction'#13'zoom'
+  +'minusmove'#8'Category'#6#4'zoom'#7'Caption'#6#13'Zoom - Centre'#10'ImageInd'
+  +'ex'#2#7#9'OnExecute'#7#20'zoomminusmoveExecute'#0#0#7'TAction'#5'FlipX'#8'C'
+  +'ategory'#6#8'rotation'#7'Caption'#6#5'FlipX'#10'ImageIndex'#2#15#9'OnExecut'
+  +'e'#7#12'FlipXExecute'#0#0#7'TAction'#5'FlipY'#8'Category'#6#8'rotation'#7'C'
+  +'aption'#6#5'FlipY'#10'ImageIndex'#2#17#9'OnExecute'#7#12'FlipYExecute'#0#0#7
+  +'TAction'#4'Undo'#8'Category'#6#4'Undo'#7'Caption'#6#4'Undo'#9'OnExecute'#7
+  +#11'UndoExecute'#0#0#7'TAction'#4'Redo'#8'Category'#6#4'Undo'#7'Caption'#6#4
+  +'Redo'#9'OnExecute'#7#11'RedoExecute'#0#0#7'TAction'#8'rot_plus'#8'Category'
+  +#6#8'rotation'#7'Caption'#6#8'rot_plus'#10'ImageIndex'#2#21#9'OnExecute'#7#15
+  +'rot_plusExecute'#0#0#7'TAction'#9'rot_minus'#8'Category'#6#8'rotation'#7'Ca'
+  +'ption'#6#9'rot_minus'#10'ImageIndex'#2#22#9'OnExecute'#7#16'rot_minusExecut'
+  +'e'#0#0#7'TAction'#6'GridEQ'#8'Category'#6#4'Grid'#7'Caption'#6#6'GridEQ'#10
+  +'ImageIndex'#2#24#9'OnExecute'#7#13'GridEQExecute'#0#0#7'TAction'#4'Grid'#8
+  +'Category'#6#4'Grid'#7'Caption'#6#4'Grid'#10'ImageIndex'#2#25#9'OnExecute'#7
+  +#11'GridExecute'#0#0#7'TAction'#16'switchbackground'#7'Caption'#6#16'switchb'
+  +'ackground'#9'OnExecute'#7#23'switchbackgroundExecute'#0#0#7'TAction'#10'swi'
+  +'tchstar'#7'Caption'#6#10'switchstar'#9'OnExecute'#7#17'switchstarExecute'#0
+  +#0#0#10'TPopupMenu'#10'PopupMenu1'#7'OnPopup'#7#15'PopupMenu1Popup'#4'left'#3
+  +'0'#1#3'top'#2'h'#0#9'TMenuItem'#6'About1'#7'Caption'#6#5'About'#7'Visible'#8
+  +#7'OnClick'#7#11'About1Click'#0#0#9'TMenuItem'#6'About2'#7'Caption'#6#1'-'#7
+  +'Visible'#8#0#0#9'TMenuItem'#7'Centre1'#6'Action'#7#6'Centre'#7'OnClick'#7#13
+  ,'CentreExecute'#0#0#9'TMenuItem'#5'Zoom1'#6'Action'#7#12'zoomplusmove'#7'OnC'
+  +'lick'#7#19'zoomplusmoveExecute'#0#0#9'TMenuItem'#5'Zoom2'#6'Action'#7#13'zo'
+  +'omminusmove'#7'OnClick'#7#20'zoomminusmoveExecute'#0#0#9'TMenuItem'#2'N1'#7
+  +'Caption'#6#1'-'#0#0#9'TMenuItem'#16'NewFinderCircle1'#7'Caption'#6#17'New F'
+  +'inder Circle'#7'OnClick'#7#21'NewFinderCircle1Click'#0#0#9'TMenuItem'#17'Re'
+  +'moveLastCircle1'#7'Caption'#6#18'Remove Last Circle'#7'OnClick'#7#22'Remove'
+  +'LastCircle1Click'#0#0#9'TMenuItem'#17'RemoveAllCircles1'#7'Caption'#6#18'Re'
+  +'move All Circles'#7'OnClick'#7#22'RemoveAllCircles1Click'#0#0#9'TMenuItem'#9
+  +'MenuItem1'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#9'AddLabel1'#7'Caption'#6#9'N'
+  +'ew Label'#7'OnClick'#7#14'AddLabel1Click'#0#0#9'TMenuItem'#16'RemoveLastLab'
+  +'el1'#7'Caption'#6#17'Remove Last Label'#7'OnClick'#7#21'RemoveLastLabel1Cli'
+  +'ck'#0#0#9'TMenuItem'#15'RemoveAllLabel1'#7'Caption'#6#17'Remove All Labels'
+  +#7'OnClick'#7#20'RemoveAllLabel1Click'#0#0#9'TMenuItem'#2'N2'#7'Caption'#6#1
+  +'-'#0#0#9'TMenuItem'#9'elescope1'#7'Caption'#6#9'Telescope'#0#9'TMenuItem'#5
+  +'Slew1'#7'Caption'#6#4'Slew'#7'OnClick'#7#10'Slew1Click'#0#0#9'TMenuItem'#5
+  +'Sync1'#7'Caption'#6#4'Sync'#7'OnClick'#7#10'Sync1Click'#0#0#9'TMenuItem'#8
+  +'Connect1'#7'Caption'#6#7'Connect'#7'OnClick'#7#13'Connect1Click'#0#0#9'TMen'
+  +'uItem'#10'AbortSlew1'#7'Caption'#6#10'Abort Slew'#7'OnClick'#7#15'AbortSlew'
+  +'1Click'#0#0#0#9'TMenuItem'#2'N3'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#8'Track'
+  +'On1'#7'Caption'#6#7'Lock on'#7'OnClick'#7#13'TrackOn1Click'#0#0#9'TMenuItem'
+  +#9'TrackOff1'#7'Caption'#6#12'Unlock Chart'#7'OnClick'#7#14'TrackOff1Click'#0
+  +#0#0#6'TTimer'#14'TelescopeTimer'#7'Enabled'#8#8'Interval'#3#244#1#7'OnTimer'
+  +#7#19'TelescopeTimerTimer'#4'left'#3'0'#1#3'top'#3#152#0#0#0#0
 ]);
