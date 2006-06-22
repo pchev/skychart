@@ -650,7 +650,7 @@ var savecolor: Starcolarray;
     prtbmp:Tbitmap;
     fname:WideString;
     cmd:string;
-    i:integer;
+    i,w,h :integer;
  begin
  zoomstep:=0;
  // save current state
@@ -684,6 +684,7 @@ try
  Case PrintMethod of
  0: begin    // to printer
     GetPrinterResolution(prtname,resol);
+    Printer.SetPrinter(prtname); // temporary fix for Lazarus bug  7076
     if PrintLandscape then Printer.Orientation:=poLandscape
                    else Printer.Orientation:=poPortrait;
     // print
@@ -700,12 +701,16 @@ try
     sc.cfgsc^.BottomMargin:=mm2pi(cm.PrtBottomMargin,resol);
     sc.cfgsc^.xshift:=printer.PaperSize.PaperRect.WorkRect.Left+sc.cfgsc^.LeftMargin;
     sc.cfgsc^.yshift:=printer.PaperSize.PaperRect.WorkRect.Top+sc.cfgsc^.TopMargin;
+    w:=Printer.PageWidth;
+    h:=Printer.PageHeight;
     {$ifdef win32}
-    sc.plot.init(resol*Printer.PageWidth div 254,resol*Printer.pageheight div 254);
+    if PrintLandscape then begin   // temporary fix for Lazarus bug  7077
+      i:=w;
+      w:=h;
+      h:=i;
+    end;
     {$endif}
-    {$ifdef unix}
-    sc.plot.init(Printer.PageWidth-sc.cfgsc^.xshift,Printer.PageHeight-sc.cfgsc^.yshift);
-    {$endif}
+    sc.plot.init(w,h);
     sc.Refresh;
     Printer.EndDoc;
     end;
