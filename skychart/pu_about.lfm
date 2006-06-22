@@ -4448,10 +4448,10 @@ object f_about: Tf_about
     Transparent = True
   end
   object Label1: TLabel
-    Left = 160
-    Height = 36
+    Left = 114
+    Height = 38
     Top = 31
-    Width = 175
+    Width = 221
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Sky Charts'
@@ -4464,9 +4464,9 @@ object f_about: Tf_about
   end
   object Label2: TLabel
     Left = 16
-    Height = 19
+    Height = 20
     Top = 176
-    Width = 87
+    Width = 90
     Caption = 'Version 3 '
     Color = clNone
     Font.Color = clSilver
@@ -4501,15 +4501,16 @@ object f_about: Tf_about
     WordWrap = True
   end
   object DateLabel: TLabel
-    Left = 316
-    Height = 13
-    Top = 182
-    Width = 27
+    Left = 315
+    Height = 11
+    Top = 185
+    Width = 23
     Anchors = [akTop, akRight]
     Caption = 'Date'
-    Color = clNone
-    Font.Color = clSilver
+    Color = clBlack
+    Font.Color = clWhite
     ParentColor = False
+    Transparent = False
   end
   object Timer1: TTimer
     Enabled = False

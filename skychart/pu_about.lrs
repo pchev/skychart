@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_about','FORMDATA',[
   'TPF0'#8'Tf_about'#7'f_about'#4'Left'#3#165#1#6'Height'#3#253#0#3'Top'#2'n'#5
   +'Width'#3'^'#1#18'HorzScrollBar.Page'#3']'#1#18'VertScrollBar.Page'#3#252#0
@@ -1927,24 +1929,24 @@ LazarusResources.Add('Tf_about','FORMDATA',[
   +'705705705705705705705705705705705705705705705705705705705705705705705705705'
   +'705705705705705705705705705705705705705705705705705705705705705705705705705'
   +'7057057057057057057057057057057057057"'#13#10'};'#13#10#7'Stretch'#9#11'Tra'
-  +'nsparent'#9#0#0#6'TLabel'#6'Label1'#4'Left'#3#160#0#6'Height'#2'$'#3'Top'#2
-  +#31#5'Width'#3#175#0#9'Alignment'#7#14'taRightJustify'#7'Anchors'#11#5'akTop'
-  +#7'akRight'#0#7'Caption'#6#10'Sky Charts'#5'Color'#7#6'clNone'#10'Font.Color'
-  +#7#8'clSilver'#11'Font.Height'#2#221#9'Font.Name'#6#4'sans'#10'Font.Style'#11
-  +#6'fsBold'#0#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#16#6'Height'
-  +#2#19#3'Top'#3#176#0#5'Width'#2'W'#7'Caption'#6#10'Version 3 '#5'Color'#7#6
-  +'clNone'#10'Font.Color'#7#8'clSilver'#11'Font.Height'#2#237#9'Font.Name'#6#4
-  +'sans'#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8#0#0#6'TLabel'#6'Label'
-  +'3'#4'Left'#2#16#6'Height'#2#14#3'Top'#3#230#0#5'Width'#3'B'#1#8'AutoSize'#8
-  +#7'Caption'#6'*Copyright (C) 2002-2005 Patrick Chevalley '#5'Color'#7#7'clBl'
-  +'ack'#10'Font.Color'#7#8'clSilver'#11'ParentColor'#8#11'Transparent'#8#0#0#6
-  +'TLabel'#6'Label4'#4'Left'#2#16#6'Height'#2#30#3'Top'#3#200#0#5'Width'#3'B'#1
+  +'nsparent'#9#0#0#6'TLabel'#6'Label1'#4'Left'#2'r'#6'Height'#2'&'#3'Top'#2#31
+  +#5'Width'#3#221#0#9'Alignment'#7#14'taRightJustify'#7'Anchors'#11#5'akTop'#7
+  +'akRight'#0#7'Caption'#6#10'Sky Charts'#5'Color'#7#6'clNone'#10'Font.Color'#7
+  +#8'clSilver'#11'Font.Height'#2#221#9'Font.Name'#6#4'sans'#10'Font.Style'#11#6
+  +'fsBold'#0#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#16#6'Height'#2
+  +#20#3'Top'#3#176#0#5'Width'#2'Z'#7'Caption'#6#10'Version 3 '#5'Color'#7#6'cl'
+  +'None'#10'Font.Color'#7#8'clSilver'#11'Font.Height'#2#237#9'Font.Name'#6#4's'
+  +'ans'#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'
+  +#4'Left'#2#16#6'Height'#2#14#3'Top'#3#230#0#5'Width'#3'B'#1#8'AutoSize'#8#7
+  +'Caption'#6'*Copyright (C) 2002-2005 Patrick Chevalley '#5'Color'#7#7'clBlac'
+  +'k'#10'Font.Color'#7#8'clSilver'#11'ParentColor'#8#11'Transparent'#8#0#0#6'T'
+  +'Label'#6'Label4'#4'Left'#2#16#6'Height'#2#30#3'Top'#3#200#0#5'Width'#3'B'#1
   +#8'AutoSize'#8#7'Caption'#6'yThis program is free software; you can redistri'
   +'bute it and/or modify it under the terms of the GNU General Public License'
   +#5'Color'#7#7'clBlack'#10'Font.Color'#7#8'clSilver'#11'ParentColor'#8#11'Tra'
-  +'nsparent'#8#8'WordWrap'#9#0#0#6'TLabel'#9'DateLabel'#4'Left'#3'<'#1#6'Heigh'
-  +'t'#2#13#3'Top'#3#182#0#5'Width'#2#27#7'Anchors'#11#5'akTop'#7'akRight'#0#7
-  +'Caption'#6#4'Date'#5'Color'#7#6'clNone'#10'Font.Color'#7#8'clSilver'#11'Par'
-  +'entColor'#8#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#8'Interval'#3#208#7#7'OnTi'
-  +'mer'#7#11'Timer1Timer'#4'left'#2#16#3'top'#2#24#0#0#0
+  +'nsparent'#8#8'WordWrap'#9#0#0#6'TLabel'#9'DateLabel'#4'Left'#3';'#1#6'Heigh'
+  +'t'#2#11#3'Top'#3#185#0#5'Width'#2#23#7'Anchors'#11#5'akTop'#7'akRight'#0#7
+  +'Caption'#6#4'Date'#5'Color'#7#7'clBlack'#10'Font.Color'#7#7'clWhite'#11'Par'
+  +'entColor'#8#11'Transparent'#8#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#8'Interv'
+  +'al'#3#208#7#7'OnTimer'#7#11'Timer1Timer'#4'left'#2#16#3'top'#2#24#0#0#0
 ]);
