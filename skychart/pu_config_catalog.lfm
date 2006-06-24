@@ -6,7 +6,7 @@ object f_config_catalog: Tf_config_catalog
   HorzScrollBar.Page = 525
   VertScrollBar.Page = 538
   ActiveControl = addcat
-  Caption = 'f_config_catalog'
+  Caption = 'Catalog'
   ClientHeight = 539
   ClientWidth = 526
   OnClose = FormClose
@@ -32,8 +32,8 @@ object f_config_catalog: Tf_config_catalog
       ShowTabs = False
       object Page1: TPage
         Caption = 'Catalog'
-        ClientWidth = 498
-        ClientHeight = 424
+        ClientWidth = 496
+        ClientHeight = 422
         object Label37: TLabel
           Left = 4
           Height = 13
@@ -99,7 +99,6 @@ object f_config_catalog: Tf_config_catalog
           Height = 25
           Top = 16
           Width = 96
-          BorderSpacing.InnerBorder = 2
           Caption = 'CatGen'
           OnClick = CatgenClick
           TabOrder = 3
@@ -107,8 +106,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page2: TPage
         Caption = 'CdC Stars'
-        ClientWidth = 498
-        ClientHeight = 424
+        ClientWidth = 496
+        ClientHeight = 422
         object Label2: TLabel
           Height = 13
           Top = 7
@@ -889,8 +888,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TPage
         Caption = 'CdC Nebulae'
-        ClientWidth = 498
-        ClientHeight = 424
+        ClientWidth = 496
+        ClientHeight = 422
         object Bevel5: TBevel
           Name = 'Bevel5'
           Left = 1
@@ -1509,8 +1508,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TPage
         Caption = 'Obsolete'
-        ClientWidth = 498
-        ClientHeight = 424
+        ClientWidth = 496
+        ClientHeight = 422
         object Label88: TLabel
           Height = 13
           Top = 7
@@ -1982,7 +1981,6 @@ object f_config_catalog: Tf_config_catalog
       Height = 25
       Top = 15
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Caption = 'OK'
       ModalResult = 1
       TabOrder = 0
@@ -1992,7 +1990,6 @@ object f_config_catalog: Tf_config_catalog
       Height = 25
       Top = 15
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Caption = 'Apply'
       OnClick = Button2Click
       TabOrder = 1
@@ -2002,7 +1999,6 @@ object f_config_catalog: Tf_config_catalog
       Height = 25
       Top = 15
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2
