@@ -684,7 +684,6 @@ try
  Case PrintMethod of
  0: begin    // to printer
     GetPrinterResolution(prtname,resol);
-    Printer.SetPrinter(prtname); // temporary fix for Lazarus bug  7076
     if PrintLandscape then Printer.Orientation:=poLandscape
                    else Printer.Orientation:=poPortrait;
     // print
@@ -703,13 +702,6 @@ try
     sc.cfgsc^.yshift:=printer.PaperSize.PaperRect.WorkRect.Top+sc.cfgsc^.TopMargin;
     w:=Printer.PageWidth;
     h:=Printer.PageHeight;
-    {$ifdef win32}
-    if PrintLandscape then begin   // temporary fix for Lazarus bug  7077
-      i:=w;
-      w:=h;
-      h:=i;
-    end;
-    {$endif}
     sc.plot.init(w,h);
     sc.Refresh;
     Printer.EndDoc;

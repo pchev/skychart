@@ -2172,7 +2172,7 @@ begin
       else
         begin
           cnv.Pen.Style := psDot;
-          {$ifdef win32}Pen.width:=1;{$endif}
+          {$ifdef win32}cnv.Pen.width:=1;{$endif}
           cnv.Brush.Style := bsClear;
         end;
 //      cnv.MoveTo(xx-ds,yy);
@@ -2656,7 +2656,7 @@ begin
       else
         begin
           cnv.Pen.Style := psDot;
-          {$ifdef win32}Pen.width:=1;{$endif}
+          {$ifdef win32}cnv.Pen.width:=1;{$endif}
           cnv.Brush.Style := bsClear;
         end;
 //      cnv.MoveTo(xx-ds,yy);
