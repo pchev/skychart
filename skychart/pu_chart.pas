@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
-     Printers, Math, cu_telescope, lazjpeg, IntfGraphics,
+     Printers, Math, cu_telescope, lazjpeg, IntfGraphics, PostscriptCanvas,
      LCLIntf, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList, SysUtils, LResources;
      
@@ -651,6 +651,7 @@ var savecolor: Starcolarray;
     fname:WideString;
     cmd:string;
     i,w,h :integer;
+    ps:TPostscriptCanvas;
  begin
  zoomstep:=0;
  // save current state
@@ -706,18 +707,19 @@ try
     sc.Refresh;
     Printer.EndDoc;
     end;
- 1: begin  // to postscript (netpbm)
-    if assigned(Fshowinfo) then Fshowinfo('Create raster chart at '+inttostr(printresol)+' dpi. Please wait...' ,caption);
-    //prtbmp.pixelformat:=pf32bit;
+ 1: begin  // to postscript canvas
+    if assigned(Fshowinfo) then Fshowinfo('Create postscript chart. Please wait...' ,caption);
+    ps:=TPostscriptCanvas.Create;
     if PrintLandscape then begin
-       prtbmp.width:=11*printresol;
-       prtbmp.height:=8*printresol;
+       ps.pagewidth:=11*printresol;
+       ps.pageheight:=8*printresol;
     end else begin
-       prtbmp.width:=8*printresol;
-       prtbmp.height:=11*printresol;
+       ps.pagewidth:=8*printresol;
+       ps.pageheight:=11*printresol;
     end;
-   // draw the chart to the bitmap
-    sc.plot.destcnv:=prtbmp.canvas;
+   // draw the chart
+    ps.begindoc;
+    sc.plot.destcnv:=ps;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
@@ -728,26 +730,14 @@ try
     sc.cfgsc^.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
     sc.cfgsc^.xshift:=sc.cfgsc^.LeftMargin;
     sc.cfgsc^.yshift:=sc.cfgsc^.TopMargin;
-    sc.plot.init(prtbmp.width,prtbmp.height);
+    sc.plot.init(ps.pagewidth,ps.pageheight);
     sc.Refresh;
-    // convert the bitmap to Postscript
-      fname:=slash(printpath)+'cdcprint.bmp';
-      prtbmp.savetofile(fname);
-      {$ifdef unix}
-        cmd:='bmptopnm '+fname+' | pnmtops -equalpixels -dpi='+inttostr(printresol)+' -rle >'+changefileext(fname,'.ps');
-      {$endif}
-      {$ifdef win32}
-        //cmd:='command.com /C bmptops.bat '+fname+blank+changefileext(fname,'.ps');
-        cmd:='bmptops.bat "'+fname+'" "'+changefileext(fname,'.ps')+'" '+inttostr(printresol);
-        chdir(slash(appdir)+'plugins');
-      {$endif}
-    i:=exec(cmd);
+    ps.enddoc;
+    fname:=slash(printpath)+'cdcprint.ps';
+    ps.savetofile(fname);
     chdir(appdir);
-    if i=0 then begin
-       if assigned(Fshowinfo) then Fshowinfo('Send chart to printer.' ,caption);
-       deletefile(fname);
-       execnowait(printcmd1+' "'+changefileext(fname,'.ps')+'"');
-    end else showmessage('Print failed, return code='+inttostr(i));
+    if assigned(Fshowinfo) then Fshowinfo('Send chart to printer.' ,caption);
+    execnowait(printcmd1+' "'+fname+'"');
     end;
  2: begin  // to bitmap
     if assigned(Fshowinfo) then Fshowinfo('Create raster chart at '+inttostr(printresol)+' dpi. Please wait...' ,caption);

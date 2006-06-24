@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  u_constant, u_util, u_planetrender, u_bitmap,
+  u_constant, u_util, u_planetrender, u_bitmap, PostscriptCanvas,
   SysUtils, Types, StrUtils, FPImage, LCLType, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics;
 
@@ -328,11 +328,14 @@ begin
         Pen.Color := clBlack;
         Pen.Width := 2*cfgchart.drawpen;
         Brush.Color := clWhite;
-        Polyline([Point(xmin+LeftMargin,ymin+TopMargin),
-                  Point(xmin+LeftMargin,ymax-BottomMargin),
-                  Point(xmax-RightMargin,ymax-BottomMargin),
-                  Point(xmax-RightMargin,ymin+TopMargin),
-                  Point(xmin+LeftMargin,ymin+TopMargin)]);
+        moveto(xmin+LeftMargin,ymin+TopMargin);
+        lineto(xmin+LeftMargin,ymax-BottomMargin);
+        moveto(xmin+LeftMargin,ymax-BottomMargin);  // Postscriptcanvas do not move after line
+        lineto(xmax-RightMargin,ymax-BottomMargin);
+        moveto(xmax-RightMargin,ymax-BottomMargin);
+        lineto(xmax-RightMargin,ymin+TopMargin);
+        moveto(xmax-RightMargin,ymin+TopMargin);
+        lineto(xmin+LeftMargin,ymin+TopMargin);
       end;
   end;
 end;
@@ -1744,8 +1747,12 @@ with cnv do begin
    laCenter : yy:=yy-(ts.cy div 2);
   end;
   end;
-  arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-  textRect(arect,xx,yy,txt);
+  if cnv is TPostscriptCanvas then begin
+    TextOut(xx,yy,txt);
+  end else begin
+    arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
+    textRect(arect,xx,yy,txt);
+  end;
 end;
 // If drawing to the screen use movable label 
 end else begin
@@ -1815,8 +1822,12 @@ if clip then begin
   if xx<cfgplot^.xmin then xx:=cfgplot^.xmin+marge;
   if (xx+ts.cx+marge)>cfgplot^.xmax then xx:=cfgplot^.xmax-ts.cx-marge;
 end;
-arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-textRect(arect,xx,yy,txt);
+if cnv is TPostscriptCanvas then begin
+  TextOut(xx,yy,txt);
+end else begin
+  arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
+  textRect(arect,xx,yy,txt);
+end;
 end;
 end;
 
@@ -1851,8 +1862,12 @@ repeat
       delete(txt,1,p+1);
   end;
   ts:=TextExtent(buf);
-  arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-  textRect(arect,xx,yy,buf);
+  if cnv is TPostscriptCanvas then begin
+     TextOut(xx,yy,buf);
+  end else begin
+     arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
+     textRect(arect,xx,yy,buf);
+  end;
   yy:=yy+ls;
 until p=0;
 end;
