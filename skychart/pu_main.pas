@@ -2148,14 +2148,14 @@ case pagegroup of
      ConfigDisplay.Notebook1.Page[8].Visible:=false;
      {$ifdef win32}
      ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[1].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[2].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[3].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[4].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[5].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[6].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[7].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[8].TabVisible:=false;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
      {$endif}
      ConfigDisplay.Notebook1.PageIndex:=0;
      end;
@@ -2175,11 +2175,11 @@ case pagegroup of
      ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
      ConfigDisplay.Notebook1.Page[1].TabVisible:=true;
      ConfigDisplay.Notebook1.Page[2].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[3].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[4].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[5].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[6].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[7].TabVisible:=false;
+     ConfigDisplay.Notebook1.Page[3].Free;
+     ConfigDisplay.Notebook1.Page[3].Free;
+     ConfigDisplay.Notebook1.Page[3].Free;
+     ConfigDisplay.Notebook1.Page[3].Free;
+     ConfigDisplay.Notebook1.Page[3].Free;
      ConfigDisplay.Notebook1.PageIndex:=0;
      {$endif}
      end;
@@ -2193,18 +2193,19 @@ case pagegroup of
      ConfigDisplay.Notebook1.Page[6].Visible:=false;
      ConfigDisplay.Notebook1.Page[7].Visible:=false;
      ConfigDisplay.Notebook1.Page[8].Visible:=false;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[1].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[2].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[3].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[4].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[5].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[6].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[7].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[8].TabVisible:=false;
-     {$endif}
      ConfigDisplay.Notebook1.PageIndex:=4;
+     {$ifdef win32}
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.PageIndex:=0;
+     {$endif}
      end;
  3 : begin  //labels
      ConfigDisplay.Notebook1.Page[0].Visible:=false;
@@ -2216,18 +2217,19 @@ case pagegroup of
      ConfigDisplay.Notebook1.Page[6].Visible:=false;
      ConfigDisplay.Notebook1.Page[7].Visible:=false;
      ConfigDisplay.Notebook1.Page[8].Visible:=false;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[1].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[2].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[3].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[4].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[5].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[6].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[7].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[8].TabVisible:=false;
-     {$endif}
      ConfigDisplay.Notebook1.PageIndex:=5;
+     {$ifdef win32}
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.PageIndex:=0;
+     {$endif}
      end;
  4 : begin  //fonts
      ConfigDisplay.Notebook1.Page[0].Visible:=false;
@@ -2239,18 +2241,19 @@ case pagegroup of
      ConfigDisplay.Notebook1.Page[6].Visible:=true;
      ConfigDisplay.Notebook1.Page[7].Visible:=false;
      ConfigDisplay.Notebook1.Page[8].Visible:=false;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[1].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[2].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[3].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[4].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[5].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[6].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[7].TabVisible:=false;
-     ConfigDisplay.Notebook1.Page[8].TabVisible:=false;
-     {$endif}
      ConfigDisplay.Notebook1.PageIndex:=6;
+     {$ifdef win32}
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].Free;
+     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.PageIndex:=0;
+     {$endif}
      end;
  5 : begin  //finder
      ConfigDisplay.Notebook1.Page[0].Visible:=false;
