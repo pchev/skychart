@@ -108,16 +108,19 @@ case cm.PrintMethod of
    printcmd.Text:=cm.PrintCmd1;
    savepath.Text:=cm.PrintTmpPath;
    prtres.Value:=cm.PrinterResolution;
-   {$ifdef unix}
-     ok:=(0=exec('which pnmtops'));
-   {$endif}
-   {$ifdef win32}
-     ok:=Fileexists(slash(appdir)+'plugins\bmptops.bat');
-   {$endif}
-   if ok then begin
-      cmdreport.text:='Netpbm package OK.';
-   end else begin
-      cmdreport.text:='Please install Netpbm package.';
+   if cm.PrintCmd1='' then cmdreport.text:=''
+   else begin
+     {$ifdef unix}
+       ok:=(0=exec('which '+cm.PrintCmd1));
+     {$endif}
+     {$ifdef win32}
+       ok:=Fileexists(cm.PrintCmd1);
+     {$endif}
+     if ok then begin
+        cmdreport.text:='Command found OK.';
+     end else begin
+        cmdreport.text:='Command not found!';
+     end;
    end;
    end;
 2: begin
