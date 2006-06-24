@@ -147,7 +147,7 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 13
   object Panel1: TPanel
     Height = 480
@@ -164,7 +164,7 @@ object f_config: Tf_config
       AutoExpand = True
       BackgroundColor = clBtnHighlight
       Color = clBtnHighlight
-      DefaultItemHeight = 15
+      DefaultItemHeight = 12
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True
@@ -252,7 +252,6 @@ object f_config: Tf_config
       Height = 25
       Top = 428
       Width = 25
-      BorderSpacing.InnerBorder = 2
       Caption = '<'
       OnClick = previousClick
       TabOrder = 1
@@ -262,7 +261,6 @@ object f_config: Tf_config
       Height = 25
       Top = 428
       Width = 25
-      BorderSpacing.InnerBorder = 2
       Caption = '>'
       OnClick = nextClick
       TabOrder = 2
@@ -291,7 +289,6 @@ object f_config: Tf_config
       Height = 25
       Top = 8
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Caption = 'OK'
       ModalResult = 1
       TabOrder = 1
@@ -301,7 +298,6 @@ object f_config: Tf_config
       Height = 25
       Top = 8
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Caption = 'Apply'
       OnClick = ApplyClick
       TabOrder = 2
@@ -311,7 +307,6 @@ object f_config: Tf_config
       Height = 25
       Top = 8
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
@@ -322,7 +317,6 @@ object f_config: Tf_config
       Height = 25
       Top = 8
       Width = 75
-      BorderSpacing.InnerBorder = 2
       Caption = '&Help'
       TabOrder = 4
     end

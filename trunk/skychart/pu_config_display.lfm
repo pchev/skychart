@@ -5,8 +5,7 @@ object f_config_display: Tf_config_display
   Width = 523
   HorzScrollBar.Page = 522
   VertScrollBar.Page = 531
-  ActiveControl = skycolorbox.RadioButton0
-  Caption = 'f_config_display'
+  Caption = 'Display'
   ClientHeight = 532
   ClientWidth = 523
   OnClose = FormClose
@@ -31,8 +30,8 @@ object f_config_display: Tf_config_display
       ShowTabs = False
       object Page1: TPage
         Caption = 'Display'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -86,8 +85,8 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 441
           Caption = 'Star Display  Properties'
-          ClientHeight = 227
-          ClientWidth = 437
+          ClientHeight = 228
+          ClientWidth = 439
           TabOrder = 2
           Visible = False
           object Label256: TLabel
@@ -224,8 +223,8 @@ object f_config_display: Tf_config_display
       end
       object Page2: TPage
         Caption = 'Colour'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object Label181: TLabel
           Left = 86
           Height = 14
@@ -722,8 +721,8 @@ object f_config_display: Tf_config_display
       end
       object Page3: TPage
         Caption = 'Deep-sky colour'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object lblDSOCScheme: TLabel
           Left = 16
           Height = 14
@@ -1242,8 +1241,8 @@ object f_config_display: Tf_config_display
       end
       object Page4: TPage
         Caption = 'Sky colour'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object skycolorbox: TRadioGroup
           Left = 24
           Height = 89
@@ -1387,8 +1386,8 @@ object f_config_display: Tf_config_display
       end
       object Page5: TPage
         Caption = 'Lines'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object EqGrid: TCheckBox
           Left = 16
           Height = 13
@@ -1440,8 +1439,8 @@ object f_config_display: Tf_config_display
           Top = 173
           Width = 273
           Caption = 'Constellation Figures'
-          ClientHeight = 125
-          ClientWidth = 269
+          ClientHeight = 126
+          ClientWidth = 271
           TabOrder = 5
           object Label132: TLabel
             Left = 29
@@ -1501,8 +1500,8 @@ object f_config_display: Tf_config_display
           Top = 325
           Width = 273
           Caption = 'Constellation Boundaries'
-          ClientHeight = 125
-          ClientWidth = 269
+          ClientHeight = 126
+          ClientWidth = 271
           TabOrder = 6
           object Label72: TLabel
             Left = 29
@@ -1562,8 +1561,8 @@ object f_config_display: Tf_config_display
           Top = 173
           Width = 185
           Caption = 'Milky Way'
-          ClientHeight = 125
-          ClientWidth = 181
+          ClientHeight = 126
+          ClientWidth = 183
           TabOrder = 7
           object milkyway: TCheckBox
             Left = 8
@@ -1671,8 +1670,8 @@ object f_config_display: Tf_config_display
       end
       object Page6: TPage
         Caption = 'Labels'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object MagLabel: TRadioGroup
           Left = 16
           Height = 73
@@ -2086,8 +2085,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TPage
         Caption = 'Fonts'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object Bevel10: TBevel
           Name = 'Bevel10'
           Left = 8
@@ -2500,8 +2499,8 @@ object f_config_display: Tf_config_display
       end
       object Page8: TPage
         Caption = 'Finder circle'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object Label307: TLabel
           Left = 80
           Height = 14
@@ -2643,8 +2642,8 @@ object f_config_display: Tf_config_display
       end
       object Page9: TPage
         Caption = 'Finder rectangle'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 519
+        ClientHeight = 478
         object Label308: TLabel
           Left = 80
           Height = 14
