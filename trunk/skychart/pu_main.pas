@@ -2138,156 +2138,83 @@ formpos(ConfigDisplay,mouse.cursorpos.x,mouse.cursorpos.y);
 case pagegroup of
  0 : begin  //display mode
      ConfigDisplay.Notebook1.Page[0].Visible:=true;
-     ConfigDisplay.Notebook1.Page[1].Visible:=false;
-     ConfigDisplay.Notebook1.Page[2].Visible:=false;
-     ConfigDisplay.Notebook1.Page[3].Visible:=false;
-     ConfigDisplay.Notebook1.Page[4].Visible:=false;
-     ConfigDisplay.Notebook1.Page[5].Visible:=false;
-     ConfigDisplay.Notebook1.Page[6].Visible:=false;
-     ConfigDisplay.Notebook1.Page[7].Visible:=false;
-     ConfigDisplay.Notebook1.Page[8].Visible:=false;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     {$endif}
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
      ConfigDisplay.Notebook1.PageIndex:=0;
      end;
  1 : begin  //colours
-     ConfigDisplay.Notebook1.Page[0].Visible:=false;
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Page[0].Visible:=true;
      ConfigDisplay.Notebook1.Page[1].Visible:=true;
      ConfigDisplay.Notebook1.Page[2].Visible:=true;
-     ConfigDisplay.Notebook1.Page[3].Visible:=true;
-     ConfigDisplay.Notebook1.Page[4].Visible:=false;
-     ConfigDisplay.Notebook1.Page[5].Visible:=false;
-     ConfigDisplay.Notebook1.Page[6].Visible:=false;
-     ConfigDisplay.Notebook1.Page[7].Visible:=false;
-     ConfigDisplay.Notebook1.Page[8].Visible:=false;
-     ConfigDisplay.Notebook1.PageIndex:=1;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[1].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[2].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[3].Free;
-     ConfigDisplay.Notebook1.Page[3].Free;
-     ConfigDisplay.Notebook1.Page[3].Free;
-     ConfigDisplay.Notebook1.Page[3].Free;
-     ConfigDisplay.Notebook1.Page[3].Free;
+     ConfigDisplay.Notebook1.Pages.Delete(3);
+     ConfigDisplay.Notebook1.Pages.Delete(3);
+     ConfigDisplay.Notebook1.Pages.Delete(3);
+     ConfigDisplay.Notebook1.Pages.Delete(3);
+     ConfigDisplay.Notebook1.Pages.Delete(3);
      ConfigDisplay.Notebook1.PageIndex:=0;
-     {$endif}
      end;
  2 : begin  //lines
-     ConfigDisplay.Notebook1.Page[0].Visible:=false;
-     ConfigDisplay.Notebook1.Page[1].Visible:=false;
-     ConfigDisplay.Notebook1.Page[2].Visible:=false;
-     ConfigDisplay.Notebook1.Page[3].Visible:=false;
-     ConfigDisplay.Notebook1.Page[4].Visible:=true;
-     ConfigDisplay.Notebook1.Page[5].Visible:=false;
-     ConfigDisplay.Notebook1.Page[6].Visible:=false;
-     ConfigDisplay.Notebook1.Page[7].Visible:=false;
-     ConfigDisplay.Notebook1.Page[8].Visible:=false;
-     ConfigDisplay.Notebook1.PageIndex:=4;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Page[0].Visible:=true;
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
      ConfigDisplay.Notebook1.PageIndex:=0;
-     {$endif}
      end;
  3 : begin  //labels
-     ConfigDisplay.Notebook1.Page[0].Visible:=false;
-     ConfigDisplay.Notebook1.Page[1].Visible:=false;
-     ConfigDisplay.Notebook1.Page[2].Visible:=false;
-     ConfigDisplay.Notebook1.Page[3].Visible:=false;
-     ConfigDisplay.Notebook1.Page[4].Visible:=false;
-     ConfigDisplay.Notebook1.Page[5].Visible:=true;
-     ConfigDisplay.Notebook1.Page[6].Visible:=false;
-     ConfigDisplay.Notebook1.Page[7].Visible:=false;
-     ConfigDisplay.Notebook1.Page[8].Visible:=false;
-     ConfigDisplay.Notebook1.PageIndex:=5;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Page[0].Visible:=true;
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
      ConfigDisplay.Notebook1.PageIndex:=0;
-     {$endif}
      end;
  4 : begin  //fonts
-     ConfigDisplay.Notebook1.Page[0].Visible:=false;
-     ConfigDisplay.Notebook1.Page[1].Visible:=false;
-     ConfigDisplay.Notebook1.Page[2].Visible:=false;
-     ConfigDisplay.Notebook1.Page[3].Visible:=false;
-     ConfigDisplay.Notebook1.Page[4].Visible:=false;
-     ConfigDisplay.Notebook1.Page[5].Visible:=false;
-     ConfigDisplay.Notebook1.Page[6].Visible:=true;
-     ConfigDisplay.Notebook1.Page[7].Visible:=false;
-     ConfigDisplay.Notebook1.Page[8].Visible:=false;
-     ConfigDisplay.Notebook1.PageIndex:=6;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[1].Free;
-     ConfigDisplay.Notebook1.Page[1].Free;
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Page[0].Visible:=true;
+     ConfigDisplay.Notebook1.Pages.Delete(1);
+     ConfigDisplay.Notebook1.Pages.Delete(1);
      ConfigDisplay.Notebook1.PageIndex:=0;
-     {$endif}
      end;
  5 : begin  //finder
-     ConfigDisplay.Notebook1.Page[0].Visible:=false;
-     ConfigDisplay.Notebook1.Page[1].Visible:=false;
-     ConfigDisplay.Notebook1.Page[2].Visible:=false;
-     ConfigDisplay.Notebook1.Page[3].Visible:=false;
-     ConfigDisplay.Notebook1.Page[4].Visible:=false;
-     ConfigDisplay.Notebook1.Page[5].Visible:=false;
-     ConfigDisplay.Notebook1.Page[6].Visible:=false;
-     ConfigDisplay.Notebook1.Page[7].Visible:=true;
-     ConfigDisplay.Notebook1.Page[8].Visible:=true;
-     ConfigDisplay.Notebook1.PageIndex:=7;
-     {$ifdef win32}
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].Free;
-     ConfigDisplay.Notebook1.Page[0].TabVisible:=true;
-     ConfigDisplay.Notebook1.Page[1].TabVisible:=true;
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Pages.Delete(0);
+     ConfigDisplay.Notebook1.Page[0].Visible:=true;
+     ConfigDisplay.Notebook1.Page[1].Visible:=true;
      ConfigDisplay.Notebook1.PageIndex:=0;
-     {$endif}
      end;
 end;
 ConfigDisplay.showmodal;
 if ConfigDisplay.ModalResult=mrOK then begin
  activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
 end;
-{$ifdef win32} // todo: remove all ifdef after correcting TNotebook.page[].visible
 ConfigDisplay.Free;
 ConfigDisplay:=nil;
-{$endif}
 end;
 
 procedure Tf_main.ApplyConfigDisplay(Sender: TObject);
