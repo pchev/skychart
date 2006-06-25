@@ -447,6 +447,7 @@ ShowLine;
 Showlabel;
 ShowCircle;
 ShowRectangle;
+Application.ProcessMessages;
 LockChange:=false;
 end;
 
@@ -533,6 +534,7 @@ begin
  SaturationBar.position:=cplot.saturation;
  starvisual.visible:= (cplot.starplot=2);
  SizeContrastBar.position:=round(cplot.magsize*10);
+ Application.ProcessMessages;
 end;
 
 procedure Tf_config_display.ShowFonts;
@@ -845,6 +847,7 @@ end;
 
 procedure Tf_config_display.nebuladisplayClick(Sender: TObject);
 begin
+if LockChange then exit;
  cplot.nebplot:=nebuladisplay.itemindex;
 end;
 

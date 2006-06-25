@@ -2209,6 +2209,25 @@ case pagegroup of
      ConfigDisplay.Notebook1.PageIndex:=0;
      end;
 end;
+
+{$ifdef win32}
+// Problem with initialization
+ConfigDisplay.show;
+ConfigDisplay.hide;
+ConfigDisplay.ccat^:=catalog.cfgcat;
+ConfigDisplay.cshr^:=catalog.cfgshr;
+ConfigDisplay.cplot^:=def_cfgplot;
+ConfigDisplay.csc^:=def_cfgsc;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigDisplay.csc^:=sc.cfgsc^;
+   ConfigDisplay.cplot^:=sc.plot.cfgplot^;
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigDisplay.cmain^:=cfgm;
+///////////////////////////////
+{$endif}
+
 ConfigDisplay.showmodal;
 if ConfigDisplay.ModalResult=mrOK then begin
  activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
