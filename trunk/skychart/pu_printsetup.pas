@@ -39,6 +39,8 @@ type
 
   Tf_printsetup = class(TForm)
     printcmd: TFileNameEdit;
+    PrintDialog1: TPrintDialog;
+    PrinterSetupDialog1: TPrinterSetupDialog;
     savepath: TDirectoryEdit;
     printmode: TRadioGroup;
     qtoption: TPanel;
@@ -51,7 +53,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    PrintDialog1: TPrintDialog;
     prtres: TLongEdit;
     cmdreport: TEdit;
     Label4: TLabel;
@@ -153,7 +154,12 @@ end;
 
 procedure Tf_printsetup.qtsetupClick(Sender: TObject);
 begin
+{$ifdef win32}
+  PrinterSetupDialog1.execute;
+{$endif}
+{$ifdef unix}
   PrintDialog1.execute;
+{$endif}
   updprtsetup;
 end;
 
