@@ -14,7 +14,7 @@ object f_printsetup: Tf_printsetup
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 13
   object qtoption: TPanel
     Left = 18
@@ -218,8 +218,12 @@ object f_printsetup: Tf_printsetup
     ModalResult = 2
     TabOrder = 4
   end
+  object PrinterSetupDialog1: TPrinterSetupDialog
+    left = 216
+    top = 24
+  end
   object PrintDialog1: TPrintDialog
-    left = 208
-    top = 8
+    left = 216
+    top = 64
   end
 end
