@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_util, cu_database, Math, dynlibs, lazjpeg, unzip,
+uses u_translation, u_constant, u_util, cu_database, Math, dynlibs, lazjpeg, unzip,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
   Spin, downloaddialog, EditBtn;
@@ -163,11 +163,54 @@ type
     cshr : ^conf_shared;
     cplot : ^conf_plot;
     cmain : ^conf_main;
+    procedure SetLang;
     constructor Create(AOwner:TComponent); override;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
+
+procedure Tf_config_observatory.SetLang;
+begin
+Caption:=rsObservatory;
+Page1.caption:=rsObservatory;
+Label58.caption:=rsDegree;
+Label59.caption:=rsMin3;
+Label60.caption:=rsSec2;
+hemis.items[0]:=rsNorth;
+hemis.items[1]:=rsSouth;
+Label61.caption:=rsDegree;
+Label62.caption:=rsMin3;
+Label63.caption:=rsSec2;
+long.items[0]:=rsWest;
+long.items[1]:=rsEast;
+Label70.caption:=rsMeters;
+timezone.caption:=rsTimeZone;
+Label81.caption:=rsLocalTime+rsUT+' +';
+Obsmap.caption:=rsLoad;
+obsname.caption:=rsObservatoryD;
+Label3.caption:=rsKm;
+citysearch.caption:=rsSearch;
+downloadcity.caption:=rsDownloadCoun;
+updcity.caption:=rsUpdate1;
+delcity.caption:=rsDelete;
+vicinity.caption:=rsVicinity;
+refraction.caption:=rsAtmosphericR;
+Label82.caption:=rsPressureMill;
+Label83.caption:=rsTemperatureC;
+Page2.caption:=rsHorizon;
+GroupBox2.caption:=rsWantToTrackA;
+horizonopaque.caption:=rsShowObjectBe;
+GroupBox1.caption:=rsLocalHorizon;
+hor_l1.caption:=rsLocalHorizon2;
+displayhorizon.caption:=rsDisplayTheLo;
+GroupBox3.caption:=rsDepressionOf;
+Label1.caption:=rsYouLiveOnABi;
+horizondepression.caption:=rsDrawTheAppar;
+Button1.caption:=rsOK;
+Button2.caption:=rsApply;
+Button3.caption:=rsCancel;
+end;
 
 constructor Tf_config_observatory.Create(AOwner:TComponent);
 begin
@@ -181,6 +224,7 @@ end;
 
 procedure Tf_config_observatory.FormCreate(Sender: TObject);
 begin
+SetLang;
   countrycode:=TStringList.Create;
   citycode:=TStringList.Create;
   LockChange:=true;
@@ -347,7 +391,7 @@ procedure Tf_config_observatory.updcityClick(Sender: TObject);
 var country,location,lat,lon,elev,tz,buf: string;
 begin
 if countrylist.ItemIndex<0 then exit;
-if MessageDlg('Update or add the current location to the database ?',mtWarning,[mbYes,mbNo],0) = mrYes
+if MessageDlg(rsUpdateOrAddT, mtWarning, [mbYes, mbNo], 0) = mrYes
   then begin
     lat:=floattostr(csc.ObsLatitude);
     lon:=floattostr(-csc.ObsLongitude);
@@ -356,7 +400,7 @@ if MessageDlg('Update or add the current location to the database ?',mtWarning,[
     country:=countrycode[countrylist.ItemIndex];
     location:=citylist.Text;
     buf:=cdb.UpdateCity(curobsid,country,location,'user',lat,lon,elev,tz);
-    if buf='' then buf:='Updated successfully!';
+    if buf='' then buf:=rsUpdatedSucce;
     vicinityClick(Sender);
     showmessage(buf);
   end;
@@ -366,10 +410,10 @@ procedure Tf_config_observatory.delcityClick(Sender: TObject);
 var buf: string;
 begin
 if curobsid=0 then exit;
-if MessageDlg('Delete the current location from the database ?',mtWarning,[mbYes,mbNo],0) = mrYes
+if MessageDlg(rsDeleteTheCur, mtWarning, [mbYes, mbNo], 0) = mrYes
   then begin
       buf:=cdb.DeleteCity(curobsid);
-      if buf='' then buf:='Deleted successfully!';
+      if buf='' then buf:=rsDeletedSucce;
       vicinityClick(Sender);
       if citylist.items.count=0 then citysearchClick(Sender);
       showmessage(buf);
@@ -406,9 +450,8 @@ procedure Tf_config_observatory.downloadcityClick(Sender: TObject);
 var country,fn,fnzip,buf:string;
 begin
 if countrylist.ItemIndex<0 then exit;
-if MessageDlg('This action replace all the database content for the country '+countrylist.Text+' using fresh data from NGA and GNIS.'+crlf+
-              'All your editing for this country will be lost except the location you added with a new name that will be kept.'+crlf+
-              'Do you want to continue ?',mtWarning,[mbYes,mbNo],0) = mrYes
+if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
+  mtWarning, [mbYes, mbNo], 0) = mrYes
   then begin
     country:=countrycode[countrylist.ItemIndex];
     if copy(country,1,3)='US-' then begin // US States
@@ -428,7 +471,7 @@ if MessageDlg('This action replace all the database content for the country '+co
           sleep(2000);
           memo1.Visible:=false;
        end else
-          Showmessage('Cancel '+DownloadDialog1.ResponseText);
+          Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
     end else begin  // World
        fnzip:=lowercase(country)+'.zip';
        fn:=ChangeFileExt(fnzip,'.txt');
@@ -449,9 +492,9 @@ if MessageDlg('This action replace all the database content for the country '+co
              sleep(2000);
              memo1.Visible:=false;
           end
-          else Showmessage('Cancel, wrong zip file ?? '+fnzip);
+          else Showmessage(Format(rsCancelWrongZ, [fnzip]));
        end else
-          Showmessage('Cancel '+DownloadDialog1.ResponseText);
+          Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
     end;
 end;
 end;

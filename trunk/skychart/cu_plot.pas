@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode delphi}{$H+}
 interface
 
-uses
+uses u_translation,
   u_constant, u_util, u_planetrender, u_bitmap, PostscriptCanvas,
   SysUtils, Types, StrUtils, FPImage, LCLType, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics;
@@ -232,23 +232,23 @@ begin
  MenuItem.Caption := '-';
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Move label';
+ MenuItem.Caption := rsMoveLabel;
  MenuItem.OnClick := MoveLabel;
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Edit label';
+ MenuItem.Caption := rsEditLabel;
  MenuItem.OnClick := EditLabelTxt;
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Default label';
+ MenuItem.Caption := rsDefaultLabel;
  MenuItem.OnClick := DefaultLabel;
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Hide label';
+ MenuItem.Caption := rsHideLabel;
  MenuItem.OnClick := DeleteLabel;
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := 'Reset all label';
+ MenuItem.Caption := rsResetAllLabe;
  MenuItem.OnClick := DeleteAllLabel;
 end;
 

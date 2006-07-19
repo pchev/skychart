@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_util, cu_catalog,
+uses u_translation, u_constant, u_util, cu_catalog,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
   EditBtn;
@@ -253,12 +253,65 @@ type
     cplot : ^conf_plot;
     cmain : ^conf_main;
     constructor Create(AOwner:TComponent); override;
+    procedure SetLang;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
 
 Uses pu_catgen, pu_catgenadv, pu_progressbar;
+
+procedure Tf_config_catalog.SetLang;
+begin
+Caption:=rsCatalog;
+Page1.caption:=rsCatalog;
+Label37.caption:=rsStarsAndNebu;
+addcat.caption:=rsAdd;
+delcat.caption:=rsDelete;
+Page2.caption:=rsCdCStars;
+Label2.caption:=rsCDCStarsCata;
+Label65.caption:=rsPm;
+Label66.caption:=rsPm;
+Label87.caption:=rsPm;
+Label16.caption:=rsMin2;
+Label28.caption:=rsFieldNumber;
+Label17.caption:=rsMax2;
+Label27.caption:=rsFilesPath;
+Label18.caption:=rsStars;
+Label19.caption:=rsVariables;
+Label20.caption:=rsDoubles;
+USNBright.caption:=rsBrightStars;
+IRVar.caption:=rsShowIRVariab;
+Page3.caption:=rsCdCNebulae;
+Label3.caption:=rsCDCNebulaeCa;
+Label22.caption:=rsNebulae;
+Label23.caption:=rsGalaxies;
+Label24.caption:=rsOpenCluster;
+Label25.caption:=rsGlobularClus;
+Label26.caption:=rsPlanetaryNeb2;
+Label69.caption:=rsGeneral;
+Label15.caption:=rsFieldNumber;
+Label116.caption:=rsMin2;
+Label117.caption:=rsMax2;
+Label118.caption:=rsFilesPath;
+Label119.caption:=rsDefault;
+Label120.caption:=rsUseOnlyCatal;
+Page4.caption:=rsObsolete;
+Label88.caption:=rsCDCObsoleteC;
+Label67.caption:=rsPm;
+Label91.caption:=rsReplacedBy+' Tycho-2';
+Label92.caption:=rsReplacedBy+' Tycho-2';
+Label93.caption:=rsCdCFormatPre;
+Label94.caption:=rsNotAvailable;
+Label90.caption:=rsStars;
+Label5.caption:=rsFovNumber;
+Button1.caption:=rsOK;
+Button2.caption:=rsApply;
+Button3.caption:=rsCancel;
+if f_progress<>nil then f_progress.SetLang;
+if f_catgen<>nil then f_catgen.SetLang;
+if f_catgenadv<>nil then f_catgenadv.SetLang;
+end;
 
 constructor Tf_config_catalog.Create(AOwner:TComponent);
 begin
@@ -286,6 +339,7 @@ procedure Tf_config_catalog.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
   LockCatPath:=true;
+  SetLang;
 end;
 
 procedure Tf_config_catalog.FormClose(Sender: TObject;
@@ -313,10 +367,10 @@ var i,j:integer;
 begin
 stringgrid3.RowCount:=2;
 stringgrid3.cells[0,0]:='x';
-stringgrid3.cells[1,0]:='Cat.';
-stringgrid3.cells[2,0]:='Min.';
-stringgrid3.cells[3,0]:='Max.';
-stringgrid3.cells[4,0]:='Path';
+stringgrid3.cells[1, 0]:=rsCat;
+stringgrid3.cells[2, 0]:=rsMin3;
+stringgrid3.cells[3, 0]:=rsMax;
+stringgrid3.cells[4, 0]:=rsPath;
 stringgrid3.cells[0,1]:='';
 stringgrid3.cells[1,1]:='';
 stringgrid3.cells[2,1]:='';

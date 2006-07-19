@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util, u_projection,
+uses u_translation, u_constant, u_util, u_projection,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
   ButtonPanel, jdcalendar;
@@ -134,12 +134,79 @@ type
     cshr : Pconf_shared;
     cplot : Pconf_plot;
     cmain : Pconf_main;
+    procedure SetLang;
     constructor Create(AOwner:TComponent); override;
     destructor Destroy; override;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
+
+procedure Tf_config_time.SetLang;
+begin
+Caption:=rsDateTime;
+Page1.caption:=rsTime;
+Label142.caption:=rsSeconds;
+CheckBox2.caption:=rsAutoRefreshE;
+Label134.caption:=rsLocalTime+rsUT+' +';
+Label148.caption:=rsTimeZone;
+Label149.caption:=rsNegativeWest;
+DST.caption:=rsDaylightSavi;
+Label135.caption:=rsDTUT;
+Label136.caption:=rsSeconds;
+Label150.caption:=rsDynamicTimeD;
+CheckBox4.caption:=rsUseAnotherDT;
+Label137.caption:=rsTime;
+Label138.caption:=rsSHour;
+Label139.caption:=rsSMinute;
+Label141.caption:=rsSSecond;
+Label143.caption:=rsSYear;
+Label144.caption:=rsSMonth;
+Label145.caption:=rsSDay;
+Label140.caption:=rsDate;
+Label1.caption:=rsJD;
+BitBtn4.caption:=rsActualSystem;
+CheckBox1.caption:=rsUseSystemTim;
+Page2.caption:=rsSimulation;
+stepreset.caption:=rsReset;
+Label178.caption:=rsEvery;
+Label179.caption:=rsNumberOfStep;
+Label180.caption:=rsChooseWhichO;
+Label56.caption:=rsPlotThePosit;
+stepunit.caption:=rsStepUnit;
+stepunit.items[0]:=rsDay;
+stepunit.items[1]:=rsHour;
+stepunit.items[2]:=rsMinute;
+stepunit.items[3]:=rsSecond;
+stepline.caption:=rsConnectionLi;
+SimObj.items[0]:=rsSun;
+SimObj.items[1]:=rsMercury;
+SimObj.items[2]:=rsVenus;
+SimObj.items[3]:=rsMoon;
+SimObj.items[4]:=rsMars;
+SimObj.items[5]:=rsJupiter;
+SimObj.items[6]:=rsSaturn;
+SimObj.items[7]:=rsUranus;
+SimObj.items[8]:=rsNeptune;
+SimObj.items[9]:=rsPluto;
+SimObj.items[10]:=rsAsteroid;
+SimObj.items[11]:=rsComet;
+AllSim.caption:=rsAll;
+NoSim.caption:=rsNone1;
+Button1.caption:=rsOK;
+Button2.caption:=rsApply;
+Button3.caption:=rsCancel;
+JDCalendarDialog1.Caption:=rsJDCalendar;
+JDCalendarDialog1.labels.Mon:=rsMonday;
+JDCalendarDialog1.labels.Tue:=rsTuesday;
+JDCalendarDialog1.labels.Wed:=rsWednesday;
+JDCalendarDialog1.labels.Thu:=rsThursday;
+JDCalendarDialog1.labels.Fri:=rsFriday;
+JDCalendarDialog1.labels.Sat:=rsSaturday;
+JDCalendarDialog1.labels.Sun:=rsSunday;
+JDCalendarDialog1.labels.jd:=rsJulianDay;
+JDCalendarDialog1.labels.today:=rsToday;
+end;
 
 constructor Tf_config_time.Create(AOwner:TComponent);
 begin
@@ -149,8 +216,6 @@ begin
  cplot:=@mycplot;
  cmain:=@mycmain;
  inherited Create(AOwner);
- JDCalendarDialog1:=TJDCalendarDialog.Create(nil);
- BitBtn1.Glyph.LoadFromLazarusResource('BtnDatePicker');
 end;
 
 destructor Tf_config_time.Destroy;
@@ -295,7 +360,10 @@ end;
 
 procedure Tf_config_time.FormCreate(Sender: TObject);
 begin
-  LockChange:=true;
+LockChange:=true;
+JDCalendarDialog1:=TJDCalendarDialog.Create(nil);
+BitBtn1.Glyph.LoadFromLazarusResource('BtnDatePicker');
+SetLang;
 end;
 
 procedure Tf_config_time.LongEdit2Change(Sender: TObject);

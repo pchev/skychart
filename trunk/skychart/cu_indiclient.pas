@@ -33,7 +33,7 @@ uses
   {$ifdef unix}
     baseunix,
   {$endif}
-  u_constant, u_util, blcksock, LibXmlParser, LibXmlComps,
+  u_translation, u_constant, u_util, blcksock, LibXmlParser, LibXmlComps,
   Classes, SysUtils, Messages,Forms;
 
 type
@@ -255,7 +255,7 @@ if FServerStartedByMe then begin
     if FIndiServerPid<>0 then fpKill(FIndiServerPid,SIGKILL);
   {$endif}
 end;
-if terminated then DisplayMessage('Closing connection')
+if terminated then DisplayMessage(rsClosingConne)
               else DisplayMessage(tcpclient.GetErrorDesc);
 finally
 terminate;

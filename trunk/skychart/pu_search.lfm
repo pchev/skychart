@@ -1,10 +1,4 @@
 object f_search: Tf_search
-  Left = 236
-  Height = 326
-  Top = 105
-  Width = 433
-  HorzScrollBar.Page = 432
-  VertScrollBar.Page = 325
   ActiveControl = Id
   BorderStyle = bsToolWindow
   Caption = 'Search'
@@ -14,583 +8,588 @@ object f_search: Tf_search
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 13
-  object CometPanel: TPanel
-    Left = 8
-    Height = 41
-    Top = 232
-    Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
-    TabOrder = 8
-    object CometFilter: TEdit
-      Left = 8
-      Height = 23
-      Top = 10
-      Width = 99
-      TabOrder = 0
-    end
-    object Button3: TButton
-      Left = 112
-      Height = 25
-      Top = 8
-      Width = 75
-      Caption = 'Filter ->'
-      OnClick = Button3Click
-      TabOrder = 1
-    end
-    object CometList: TComboBox
-      Left = 192
-      Height = 21
-      Top = 10
-      Width = 216
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      MaxLength = 0
-      TabOrder = 2
-    end
-  end
-  object AsteroidPanel: TPanel
-    Left = 8
-    Height = 41
-    Top = 232
-    Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
-    TabOrder = 9
-    object AsteroidFilter: TEdit
-      Left = 8
-      Height = 23
-      Top = 10
-      Width = 99
-      TabOrder = 0
-    end
-    object Button4: TButton
-      Left = 112
-      Height = 25
-      Top = 8
-      Width = 75
-      Caption = 'Filter ->'
-      OnClick = Button4Click
-      TabOrder = 1
-    end
-    object AsteroidList: TComboBox
-      Left = 192
-      Height = 21
-      Top = 10
-      Width = 216
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      MaxLength = 0
-      TabOrder = 2
-    end
-  end
+  HorzScrollBar.Page = 432
+  VertScrollBar.Page = 325
+  Left = 291
+  Height = 326
+  Top = 114
+  Width = 433
   object PlanetPanel: TPanel
-    Left = 7
-    Height = 41
-    Top = 232
-    Width = 416
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 3
     Visible = False
-    object Label2: TLabel
-      Left = 13
-      Height = 13
-      Top = 14
-      Width = 40
-      Caption = 'Planet '
-      Color = clNone
-      ParentColor = False
-    end
-    object PlanetBox: TComboBox
-      Left = 88
-      Height = 21
-      Top = 11
-      Width = 114
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
-      MaxLength = 0
-      TabOrder = 0
-    end
-  end
-  object NebNamePanel: TPanel
     Left = 7
     Height = 41
     Top = 232
     Width = 416
+    object Label2: TLabel
+      Caption = 'Planet '
+      Color = clNone
+      ParentColor = False
+      Left = 13
+      Height = 13
+      Top = 14
+      Width = 40
+    end
+    object PlanetBox: TComboBox
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      DropDownCount = 10
+      ItemHeight = 13
+      MaxLength = 0
+      TabOrder = 0
+      Left = 97
+      Height = 21
+      Top = 12
+      Width = 146
+    end
+  end
+  object CometPanel: TPanel
+    ClientHeight = 41
+    ClientWidth = 416
+    TabOrder = 8
+    Left = 7
+    Height = 41
+    Top = 232
+    Width = 416
+    object CometFilter: TEdit
+      TabOrder = 0
+      Left = 8
+      Height = 23
+      Top = 10
+      Width = 99
+    end
+    object Button3: TButton
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Filter ->'
+      OnClick = Button3Click
+      TabOrder = 1
+      Left = 112
+      Height = 25
+      Top = 8
+      Width = 75
+    end
+    object CometList: TComboBox
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      MaxLength = 0
+      TabOrder = 2
+      Left = 192
+      Height = 21
+      Top = 10
+      Width = 216
+    end
+  end
+  object AsteroidPanel: TPanel
+    ClientHeight = 41
+    ClientWidth = 416
+    TabOrder = 9
+    Left = 8
+    Height = 41
+    Top = 232
+    Width = 416
+    object AsteroidFilter: TEdit
+      TabOrder = 0
+      Left = 8
+      Height = 23
+      Top = 10
+      Width = 99
+    end
+    object Button4: TButton
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Filter ->'
+      OnClick = Button4Click
+      TabOrder = 1
+      Left = 112
+      Height = 25
+      Top = 8
+      Width = 75
+    end
+    object AsteroidList: TComboBox
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      MaxLength = 0
+      TabOrder = 2
+      Left = 192
+      Height = 21
+      Top = 10
+      Width = 216
+    end
+  end
+  object NebNamePanel: TPanel
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 4
     Visible = False
-    object Label3: TLabel
-      Left = 13
-      Height = 13
-      Top = 14
-      Width = 41
-      Caption = 'Nebula'
-      Color = clNone
-      ParentColor = False
-    end
-    object NebNameBox: TComboBox
-      Left = 88
-      Height = 21
-      Top = 11
-      Width = 296
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
-      MaxLength = 0
-      TabOrder = 0
-    end
-  end
-  object StarNamePanel: TPanel
     Left = 7
     Height = 41
     Top = 232
     Width = 416
+    object Label3: TLabel
+      Caption = 'Nebula'
+      Color = clNone
+      ParentColor = False
+      Left = 13
+      Height = 13
+      Top = 14
+      Width = 41
+    end
+    object NebNameBox: TComboBox
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      ItemHeight = 13
+      MaxLength = 0
+      TabOrder = 0
+      Left = 104
+      Height = 21
+      Top = 11
+      Width = 280
+    end
+  end
+  object StarNamePanel: TPanel
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 5
     Visible = False
-    object Label4: TLabel
-      Left = 13
-      Height = 13
-      Top = 14
-      Width = 23
-      Caption = 'Star'
-      Color = clNone
-      ParentColor = False
-    end
-    object StarNameBox: TComboBox
-      Left = 88
-      Height = 21
-      Top = 11
-      Width = 290
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
-      MaxLength = 0
-      TabOrder = 0
-    end
-  end
-  object ConstPanel: TPanel
     Left = 7
     Height = 41
     Top = 232
     Width = 416
+    object Label4: TLabel
+      Caption = 'Star'
+      Color = clNone
+      ParentColor = False
+      Left = 13
+      Height = 13
+      Top = 14
+      Width = 23
+    end
+    object StarNameBox: TComboBox
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      ItemHeight = 13
+      MaxLength = 0
+      TabOrder = 0
+      Left = 97
+      Height = 21
+      Top = 11
+      Width = 281
+    end
+  end
+  object ConstPanel: TPanel
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 7
     Visible = False
-    object Label5: TLabel
-      Left = 13
-      Height = 13
-      Top = 14
-      Width = 73
-      Caption = 'Constellation'
-      Color = clNone
-      ParentColor = False
-    end
-    object ConstBox: TComboBox
-      Left = 88
-      Height = 21
-      Top = 11
-      Width = 290
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
-      MaxLength = 0
-      TabOrder = 0
-    end
-  end
-  object IDPanel: TPanel
     Left = 7
     Height = 41
     Top = 232
     Width = 416
+    object Label5: TLabel
+      Caption = 'Constellation'
+      Color = clNone
+      ParentColor = False
+      Left = 13
+      Height = 13
+      Top = 14
+      Width = 73
+    end
+    object ConstBox: TComboBox
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      ItemHeight = 13
+      MaxLength = 0
+      TabOrder = 0
+      Left = 113
+      Height = 21
+      Top = 11
+      Width = 265
+    end
+  end
+  object IDPanel: TPanel
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
     TabOrder = 0
+    Left = 7
+    Height = 41
+    Top = 232
+    Width = 416
     object Label1: TLabel
-      Left = 8
-      Height = 13
-      Top = 14
-      Width = 74
       Caption = 'Object Name'
       Color = clNone
       ParentColor = False
+      Left = 6
+      Height = 13
+      Top = 14
+      Width = 74
     end
     object DblPanel: TPanel
-      Left = 210
-      Height = 39
-      Top = 1
-      Width = 73
       ClientHeight = 39
       ClientWidth = 73
       FullRepaint = False
       TabOrder = 5
       Visible = False
-      object SpeedButton30: TSpeedButton
-        Height = 18
-        Top = 2
-        Width = 36
-        Caption = 'ADS'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = CatButtonClick
-      end
-      object SpeedButton31: TSpeedButton
-        Left = 36
-        Height = 18
-        Top = 2
-        Width = 36
-        Caption = 'STF'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = CatButtonClick
-      end
-    end
-    object VarPanel: TPanel
       Left = 210
       Height = 39
       Top = 1
       Width = 73
+      object SpeedButton30: TSpeedButton
+        Caption = 'ADS'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = CatButtonClick
+        Height = 18
+        Top = 2
+        Width = 36
+      end
+      object SpeedButton31: TSpeedButton
+        Caption = 'STF'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = CatButtonClick
+        Left = 36
+        Height = 18
+        Top = 2
+        Width = 36
+      end
+    end
+    object VarPanel: TPanel
       ClientHeight = 39
       ClientWidth = 73
       FullRepaint = False
       TabOrder = 4
       Visible = False
-      object SpeedButton21: TSpeedButton
-        Height = 18
-        Top = 2
-        Width = 18
-        Caption = 'R'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = NumButtonClick
-      end
-      object SpeedButton24: TSpeedButton
-        Left = 18
-        Height = 18
-        Top = 2
-        Width = 18
-        Caption = 'S'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = NumButtonClick
-      end
-      object SpeedButton25: TSpeedButton
-        Height = 18
-        Top = 20
-        Width = 18
-        Caption = 'V'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = NumButtonClick
-      end
-      object SpeedButton26: TSpeedButton
-        Left = 36
-        Height = 18
-        Top = 20
-        Width = 36
-        Caption = 'NSV'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = CatButtonClick
-      end
-      object SpeedButton27: TSpeedButton
-        Left = 36
-        Height = 18
-        Top = 2
-        Width = 18
-        Caption = 'T'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = NumButtonClick
-      end
-      object SpeedButton28: TSpeedButton
-        Left = 54
-        Height = 18
-        Top = 2
-        Width = 18
-        Caption = 'U'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = NumButtonClick
-      end
-      object SpeedButton29: TSpeedButton
-        Left = 18
-        Height = 18
-        Top = 20
-        Width = 18
-        Caption = 'W'
-        Color = clBtnFace
-        NumGlyphs = 0
-        OnClick = NumButtonClick
-      end
-    end
-    object StarPanel: TPanel
       Left = 210
       Height = 39
       Top = 1
       Width = 73
+      object SpeedButton21: TSpeedButton
+        Caption = 'R'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = NumButtonClick
+        Height = 18
+        Top = 2
+        Width = 18
+      end
+      object SpeedButton24: TSpeedButton
+        Caption = 'S'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = NumButtonClick
+        Left = 18
+        Height = 18
+        Top = 2
+        Width = 18
+      end
+      object SpeedButton25: TSpeedButton
+        Caption = 'V'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = NumButtonClick
+        Height = 18
+        Top = 20
+        Width = 18
+      end
+      object SpeedButton26: TSpeedButton
+        Caption = 'NSV'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = CatButtonClick
+        Left = 36
+        Height = 18
+        Top = 20
+        Width = 36
+      end
+      object SpeedButton27: TSpeedButton
+        Caption = 'T'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = NumButtonClick
+        Left = 36
+        Height = 18
+        Top = 2
+        Width = 18
+      end
+      object SpeedButton28: TSpeedButton
+        Caption = 'U'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = NumButtonClick
+        Left = 54
+        Height = 18
+        Top = 2
+        Width = 18
+      end
+      object SpeedButton29: TSpeedButton
+        Caption = 'W'
+        Color = clBtnFace
+        NumGlyphs = 0
+        OnClick = NumButtonClick
+        Left = 18
+        Height = 18
+        Top = 20
+        Width = 18
+      end
+    end
+    object StarPanel: TPanel
       ClientHeight = 39
       ClientWidth = 73
       FullRepaint = False
       TabOrder = 3
       Visible = False
+      Left = 210
+      Height = 39
+      Top = 1
+      Width = 73
       object SpeedButton19: TSpeedButton
-        Height = 18
-        Top = 2
-        Width = 36
         Caption = 'TYC'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
-      end
-      object SpeedButton20: TSpeedButton
-        Left = 36
         Height = 18
         Top = 2
         Width = 36
+      end
+      object SpeedButton20: TSpeedButton
         Caption = 'GSC'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
+        Left = 36
+        Height = 18
+        Top = 2
+        Width = 36
       end
       object SpeedButton22: TSpeedButton
-        Height = 18
-        Top = 20
-        Width = 36
         Caption = 'HD'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
-      end
-      object SpeedButton23: TSpeedButton
-        Left = 36
         Height = 18
         Top = 20
         Width = 36
+      end
+      object SpeedButton23: TSpeedButton
         Caption = 'BD'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
+        Left = 36
+        Height = 18
+        Top = 20
+        Width = 36
       end
     end
     object Id: TEdit
-      Left = 88
-      Height = 21
-      Top = 10
-      Width = 113
       OnKeyDown = IdKeyDown
       TabOrder = 0
+      Left = 105
+      Height = 21
+      Top = 10
+      Width = 96
     end
     object NumPanel: TPanel
-      Left = 288
-      Height = 39
-      Top = 1
-      Width = 128
       BevelOuter = bvNone
       ClientHeight = 39
       ClientWidth = 128
       FullRepaint = False
       TabOrder = 1
+      Left = 288
+      Height = 39
+      Top = 1
+      Width = 128
       object SpeedButton1: TSpeedButton
-        Height = 18
-        Top = 2
-        Width = 18
         Caption = '1'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
-      end
-      object SpeedButton2: TSpeedButton
-        Left = 18
         Height = 18
         Top = 2
         Width = 18
+      end
+      object SpeedButton2: TSpeedButton
         Caption = '2'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
-      end
-      object SpeedButton3: TSpeedButton
-        Left = 36
+        Left = 18
         Height = 18
         Top = 2
         Width = 18
+      end
+      object SpeedButton3: TSpeedButton
         Caption = '3'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
-      end
-      object SpeedButton4: TSpeedButton
-        Left = 54
+        Left = 36
         Height = 18
         Top = 2
         Width = 18
+      end
+      object SpeedButton4: TSpeedButton
         Caption = '4'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
-      end
-      object SpeedButton5: TSpeedButton
-        Left = 72
+        Left = 54
         Height = 18
         Top = 2
         Width = 18
+      end
+      object SpeedButton5: TSpeedButton
         Caption = '5'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
+        Left = 72
+        Height = 18
+        Top = 2
+        Width = 18
       end
       object SpeedButton6: TSpeedButton
-        Height = 18
-        Top = 20
-        Width = 18
         Caption = '6'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
-      end
-      object SpeedButton7: TSpeedButton
-        Left = 18
         Height = 18
         Top = 20
         Width = 18
+      end
+      object SpeedButton7: TSpeedButton
         Caption = '7'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
-      end
-      object SpeedButton8: TSpeedButton
-        Left = 36
+        Left = 18
         Height = 18
         Top = 20
         Width = 18
+      end
+      object SpeedButton8: TSpeedButton
         Caption = '8'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
-      end
-      object SpeedButton9: TSpeedButton
-        Left = 54
+        Left = 36
         Height = 18
         Top = 20
         Width = 18
+      end
+      object SpeedButton9: TSpeedButton
         Caption = '9'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
-      end
-      object SpeedButton10: TSpeedButton
-        Left = 72
+        Left = 54
         Height = 18
         Top = 20
         Width = 18
+      end
+      object SpeedButton10: TSpeedButton
         Caption = '0'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
+        Left = 72
+        Height = 18
+        Top = 20
+        Width = 18
       end
       object SpeedButton11: TSpeedButton
-        Left = 90
-        Height = 18
-        Top = 2
-        Width = 18
         Caption = '<-'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = SpeedButton11Click
-      end
-      object SpeedButton12: TSpeedButton
         Left = 90
         Height = 18
-        Top = 20
-        Width = 36
+        Top = 2
+        Width = 18
+      end
+      object SpeedButton12: TSpeedButton
         Caption = ' '
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
+        Left = 90
+        Height = 18
+        Top = 20
+        Width = 36
       end
       object SpeedButton13: TSpeedButton
-        Left = 108
-        Height = 18
-        Top = 2
-        Width = 18
         Caption = 'C'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = SpeedButton13Click
+        Left = 108
+        Height = 18
+        Top = 2
+        Width = 18
       end
     end
     object NebPanel: TPanel
-      Left = 210
-      Height = 39
-      Top = 1
-      Width = 73
       ClientHeight = 39
       ClientWidth = 73
       FullRepaint = False
       TabOrder = 2
+      Left = 210
+      Height = 39
+      Top = 1
+      Width = 73
       object SpeedButton14: TSpeedButton
-        Height = 18
-        Top = 2
-        Width = 18
         Caption = 'M'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
-      end
-      object SpeedButton15: TSpeedButton
-        Left = 18
         Height = 18
         Top = 2
-        Width = 36
+        Width = 18
+      end
+      object SpeedButton15: TSpeedButton
         Caption = 'NGC'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
-      end
-      object SpeedButton16: TSpeedButton
-        Left = 54
+        Left = 18
         Height = 18
         Top = 2
-        Width = 18
+        Width = 36
+      end
+      object SpeedButton16: TSpeedButton
         Caption = 'IC'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
+        Left = 54
+        Height = 18
+        Top = 2
+        Width = 18
       end
       object SpeedButton17: TSpeedButton
-        Height = 18
-        Top = 20
-        Width = 36
         Caption = 'PGC'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
-      end
-      object SpeedButton18: TSpeedButton
-        Left = 36
         Height = 18
         Top = 20
         Width = 36
+      end
+      object SpeedButton18: TSpeedButton
         Caption = 'PK'
         Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
+        Left = 36
+        Height = 18
+        Top = 20
+        Width = 36
       end
     end
   end
   object RadioGroup1: TRadioGroup
-    Left = 7
-    Height = 217
-    Top = 8
-    Width = 416
     AutoFill = True
     Caption = 'Search for '
     ChildSizing.LeftRightSpacing = 6
@@ -618,24 +617,30 @@ object f_search: Tf_search
     )
     OnClick = RadioGroup1Click
     TabOrder = 6
+    Left = 7
+    Height = 217
+    Top = 8
+    Width = 416
   end
   object Button1: TButton
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Find'
+    OnClick = Button1Click
+    TabOrder = 1
     Left = 128
     Height = 25
     Top = 288
     Width = 75
-    Caption = 'Find'
-    OnClick = Button1Click
-    TabOrder = 1
   end
   object Button2: TButton
-    Left = 232
-    Height = 25
-    Top = 288
-    Width = 75
+    BorderSpacing.InnerBorder = 4
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 2
+    Left = 232
+    Height = 25
+    Top = 288
+    Width = 75
   end
 end

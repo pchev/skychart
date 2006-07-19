@@ -93,7 +93,7 @@
         <PackageName Value="cdccatalog"/>
       </Item20>
     </RequiredPackages>
-    <Units Count="41">
+    <Units Count="42">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -382,6 +382,11 @@
         <ResourceFilename Value="pu_print.lrs"/>
         <UnitName Value="pu_print"/>
       </Unit40>
+      <Unit41>
+        <Filename Value="u_translation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="u_translation"/>
+      </Unit41>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

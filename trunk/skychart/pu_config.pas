@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util,
+uses u_translation, u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
   cu_fits, cu_catalog, cu_database,
@@ -106,6 +106,7 @@ type
     procedure ShowPage(i,j:Integer);
   public
     { Déclarations publiques }
+    procedure SetLang;
     property ccat : conf_catalog read Fccat write SetCcat;
     property cshr : conf_shared read Fcshr write SetCshr;
     property csc  : conf_skychart read Fcsc write SetCsc;
@@ -126,9 +127,74 @@ var
 
 implementation
 
+procedure Tf_config.SetLang;
+begin
+Caption:=rsConfiguratio;
+TreeView1.items[0].text:='1- '+rsDateTime2;
+TreeView1.items[1].text:='1- '+rsDateTime2;
+TreeView1.items[2].text:='2- '+rsTimeSimulati;
+TreeView1.items[3].text:='2- '+rsObservatory;
+TreeView1.items[4].text:='1- '+rsObservatory;
+TreeView1.items[5].text:='2- '+rsHorizon;
+TreeView1.items[6].text:='3- '+rsChartCoordin;
+TreeView1.items[7].text:='1- '+rsChartCoordin;
+TreeView1.items[8].text:='2- '+rsFieldOfVisio;
+TreeView1.items[9].text:='3- '+rsProjection;
+TreeView1.items[10].text:='4- '+rsObjectFilter;
+TreeView1.items[11].text:='5- '+rsGridSpacing;
+TreeView1.items[12].text:='6- '+rsObjectList;
+TreeView1.items[13].text:='4- '+rsCatalog;
+TreeView1.items[14].text:='1- '+rsCatalog;
+TreeView1.items[15].text:='2- '+rsCdCStars;
+TreeView1.items[16].text:='3- '+rsCdCNebulae;
+TreeView1.items[17].text:='4- '+rsObsolete;
+TreeView1.items[18].text:='5- '+rsSolarSystem;
+TreeView1.items[19].text:='1- '+rsSolarSystem;
+TreeView1.items[20].text:='2- '+rsPlanet;
+TreeView1.items[21].text:='3- '+rsComet;
+TreeView1.items[22].text:='4- '+rsAsteroid;
+TreeView1.items[23].text:='6- '+rsDisplay;
+TreeView1.items[24].text:='1- '+rsDisplay;
+TreeView1.items[25].text:='2- '+rsDisplayColou;
+TreeView1.items[26].text:='3- '+rsDeepSkyObjec;
+TreeView1.items[27].text:='4- '+rsSkyBackgroun;
+TreeView1.items[28].text:='5- '+rsLines;
+TreeView1.items[29].text:='6- '+rsLabels;
+TreeView1.items[30].text:='7- '+rsFonts;
+TreeView1.items[31].text:='8- '+rsFinderCircle;
+TreeView1.items[32].text:='9- '+rsFinderRectan;
+TreeView1.items[33].text:='7- '+rsPictures;
+TreeView1.items[34].text:='1- '+rsObject;
+TreeView1.items[35].text:='2- '+rsBackground;
+TreeView1.items[36].text:='3- '+rsDSSRealSky;
+TreeView1.items[37].text:='8- '+rsSystem;
+TreeView1.items[38].text:='1- '+rsSystem;
+TreeView1.items[39].text:='2- '+rsServer;
+TreeView1.items[40].text:='3- '+rsTelescope;
+TreeView1.items[41].text:='4- '+rsLanguage2;
+TreeView1.items[42].text:='9- '+rsInternet;
+TreeView1.items[43].text:='1- '+rsProxy;
+TreeView1.items[44].text:='2- '+rsOrbitalEleme;
+TreeView1.items[45].text:='3- '+rsOnlineDSSPic;
+Applyall.caption:=rsApplyChangeT;
+OKBtn.caption:=rsOK;
+CancelBtn.caption:=rsCancel;
+HelpBtn.caption:=rsHelp;
+if f_config_catalog1<>nil then f_config_catalog1.SetLang;
+if f_config_chart1<>nil then f_config_chart1.SetLang;
+if f_config_display1<>nil then f_config_display1.SetLang;
+if f_config_internet1<>nil then f_config_internet1.SetLang;
+if f_config_observatory1<>nil then f_config_observatory1.SetLang;
+if f_config_pictures1<>nil then f_config_pictures1.SetLang;
+if f_config_solsys1<>nil then f_config_solsys1.SetLang;
+if f_config_system1<>nil then f_config_system1.SetLang;
+if f_config_time1<>nil then f_config_time1.SetLang;
+end;
+
 procedure Tf_config.FormCreate(Sender: TObject);
 var Child: TChildDoc;
 begin
+SetLang;
 compage:=21;
 astpage:=22;
 dbpage:=37;

@@ -101,6 +101,7 @@ Function EncryptStr(Str,Pwd: String; Encode: Boolean=true): String;
 Function DecryptStr(Str,Pwd: String): String;
 function strtohex(str:string):string;
 function hextostr(str:string):string;
+procedure GetTranslationString(form: TForm; var f: textfile);
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 {$endif}
@@ -1586,6 +1587,159 @@ with form do begin
 end;
 end;
 {$endif}
+
+procedure GetTranslationString(form: TForm; var f: textfile);
+var i,j: integer;
+    cname,cprop,ctext : string;
+begin
+with form do begin
+     writeln(f);
+     writeln(f,'Form: '+name);
+     for i := 0 to ComponentCount-1 do begin
+        cname:=''; cprop:=''; ctext:='';
+        if  ( Components[i] is TNotebook ) then with (Components[i] as TNotebook) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TPageControl ) then with (Components[i] as TPageControl) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TTabSheet ) then with (Components[i] as TTabSheet) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TPage ) then with (Components[i] as TPage) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TButton ) then with (Components[i] as TButton) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TLabel ) then with (Components[i] as TLabel) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TToolButton ) then with (Components[i] as TToolButton) do begin
+           cname:=name;
+           cprop:='hint';
+           ctext:=hint;
+        end;
+        if  ( Components[i] is TBitBtn ) then with (Components[i] as TBitBtn) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TSpeedButton ) then with (Components[i] as TSpeedButton) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TMemo ) then with (Components[i] as TMemo) do begin
+           cname:=name;
+           cprop:='text';
+           ctext:=text;
+        end;
+        if  ( Components[i] is TEdit ) then with (Components[i] as TEdit) do begin
+           cname:=name;
+           cprop:='text';
+           ctext:=text;
+        end;
+        if  ( Components[i] is TMaskEdit ) then with (Components[i] as TMaskEdit) do begin
+           cname:=name;
+           cprop:='text';
+           ctext:=text;
+        end;
+        if  ( Components[i] is TStringGrid ) then with (Components[i] as TStringGrid) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TCombobox ) then with (Components[i] as TCombobox) do begin
+           for j:=0 to Items.Count-1 do begin
+              cname:=name+'.items['+inttostr(j)+']';
+              ctext:=Items[j];
+              writeln(f,cname+':='''+ctext+''';');
+           end;
+           ctext:='';
+        end;
+        if  ( Components[i] is TMenuItem ) then with (Components[i] as TMenuItem) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TSpinEdit ) then with (Components[i] as TSpinEdit) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TTreeView ) then with (Components[i] as TTreeView) do begin
+           for j:=0 to Items.Count-1 do begin
+              cname:=name+'.items['+inttostr(j)+'].text';
+              ctext:=Items[j].Text;
+              writeln(f,cname+':='''+ctext+''';');
+           end;
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TListBox ) then with (Components[i] as TListBox) do begin
+           for j:=0 to Items.Count-1 do begin
+              cname:=name+'.items['+inttostr(j)+']';
+              ctext:=Items[j];
+              writeln(f,cname+':='''+ctext+''';');
+           end;
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TCheckListbox ) then with (Components[i] as TCheckListbox) do begin
+           for j:=0 to Items.Count-1 do begin
+              cname:=name+'.items['+inttostr(j)+']';
+              ctext:=Items[j];
+              writeln(f,cname+':='''+ctext+''';');
+           end;
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TGroupBox ) then with (Components[i] as TGroupBox) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TRadioGroup ) then with (Components[i] as TRadioGroup) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TCheckGroup ) then with (Components[i] as TCheckGroup) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TCheckBox ) then with (Components[i] as TCheckBox) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if  ( Components[i] is TRadioButton ) then with (Components[i] as TRadioButton) do begin
+           cname:=name;
+           cprop:='caption';
+           ctext:=caption;
+        end;
+        if (ctext<>'')and(ctext<>'-')and(ctext<>cname)and(not IsNumber(ctext))then
+           writeln(f,cname+'.'+cprop+':='''+ctext+''';');
+     end;
+end;
+end;
 
 end.
 

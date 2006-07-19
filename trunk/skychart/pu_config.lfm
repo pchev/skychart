@@ -1,10 +1,4 @@
 object f_config: Tf_config
-  Left = 239
-  Height = 521
-  Top = 119
-  Width = 700
-  HorzScrollBar.Page = 699
-  VertScrollBar.Page = 520
   ActiveControl = TreeView1
   BorderStyle = bsSizeToolWin
   Caption = 'Configuration'
@@ -147,24 +141,26 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 13
+  HorzScrollBar.Page = 699
+  VertScrollBar.Page = 520
+  Left = 239
+  Height = 521
+  Top = 119
+  Width = 700
   object Panel1: TPanel
-    Height = 480
-    Width = 200
     Align = alLeft
     ClientHeight = 480
     ClientWidth = 200
     TabOrder = 0
+    Height = 480
+    Width = 200
     object TreeView1: TTreeView
-      Left = 4
-      Height = 421
-      Top = 4
-      Width = 189
       AutoExpand = True
       BackgroundColor = clBtnHighlight
       Color = clBtnHighlight
-      DefaultItemHeight = 12
+      DefaultItemHeight = 18
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True
@@ -233,107 +229,119 @@ object f_config: Tf_config
         4F626A6563740000000000000000FFFFFFFFFFFFFFFF00000000000000000000
         0000000D000000322D204261636B67726F756E640000000000000000FFFFFFFF
         FFFFFFFF000000000000000000000000000E000000332D20445353205265616C
-        536B79FFFFFFFFFFFFFFFFA0A975410000000000000000030000000000000001
+        536B79FFFFFFFFFFFFFFFFA0A975410000000000000000040000000000000001
         09000000382D2053797374656D0000000000000000FFFFFFFFFFFFFFFF000000
         0000000000000000000009000000312D2053797374656DFFFFFFFFFFFFFFFFA0
         A97541000000000000000000000000000000000009000000322D205365727665
         720000000000000000FFFFFFFFFFFFFFFF000000000000000000000000000C00
         0000332D2054656C6573636F70650000000000000000FFFFFFFFFFFFFFFF0000
-        00000300000000000000010B000000392D20496E7465726E6574000000000000
-        0000FFFFFFFFFFFFFFFF000000000000000000000000000500000050726F7879
-        0000000000000000FFFFFFFFFFFFFFFF00000000000000000000000000100000
-        004F72626974616C20456C656D656E74730000000000000000FFFFFFFFFFFFFF
-        FF00000000000000000000000000130000004F6E6C696E652044535320706963
-        7475726573
+        00000000000000000000000B000000342D204C616E6775616765000000000000
+        0000FFFFFFFFFFFFFFFF000000000300000000000000010B000000392D20496E
+        7465726E65740000000000000000FFFFFFFFFFFFFFFF00000000000000000000
+        00000008000000312D2050726F78790000000000000000FFFFFFFFFFFFFFFF00
+        00000000000000000000000013000000322D204F72626974616C20456C656D65
+        6E74730000000000000000FFFFFFFFFFFFFFFF00000000000000000000000000
+        16000000332D204F6E6C696E6520445353207069637475726573
       }
+      Left = 4
+      Height = 421
+      Top = 4
+      Width = 189
     end
     object previous: TButton
+      BorderSpacing.InnerBorder = 4
+      Caption = '<'
+      OnClick = previousClick
+      TabOrder = 1
       Left = 56
       Height = 25
       Top = 428
       Width = 25
-      Caption = '<'
-      OnClick = previousClick
-      TabOrder = 1
     end
     object next: TButton
+      BorderSpacing.InnerBorder = 4
+      Caption = '>'
+      OnClick = nextClick
+      TabOrder = 2
       Left = 104
       Height = 25
       Top = 428
       Width = 25
-      Caption = '>'
-      OnClick = nextClick
-      TabOrder = 2
     end
   end
   object Panel2: TPanel
-    Height = 41
-    Top = 480
-    Width = 700
     Align = alBottom
     ClientHeight = 41
     ClientWidth = 700
     TabOrder = 1
+    Height = 41
+    Top = 480
+    Width = 700
     object Applyall: TCheckBox
-      Left = 16
-      Height = 28
-      Top = 12
-      Width = 185
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
       TabOrder = 0
+      Left = 16
+      Height = 28
+      Top = 12
+      Width = 185
     end
     object OKBtn: TButton
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      ModalResult = 1
+      TabOrder = 1
       Left = 270
       Height = 25
       Top = 8
       Width = 75
-      Caption = 'OK'
-      ModalResult = 1
-      TabOrder = 1
     end
     object Apply: TButton
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Apply'
+      OnClick = ApplyClick
+      TabOrder = 2
       Left = 358
       Height = 25
       Top = 8
       Width = 75
-      Caption = 'Apply'
-      OnClick = ApplyClick
-      TabOrder = 2
     end
     object CancelBtn: TButton
-      Left = 446
-      Height = 25
-      Top = 8
-      Width = 75
+      BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 3
+      Left = 446
+      Height = 25
+      Top = 8
+      Width = 75
     end
     object HelpBtn: TButton
+      BorderSpacing.InnerBorder = 4
+      Caption = '&Help'
+      TabOrder = 4
       Left = 534
       Height = 25
       Top = 8
       Width = 75
-      Caption = '&Help'
-      TabOrder = 4
     end
   end
   object MultiDoc1: TMultiDoc
-    Left = 200
-    Height = 480
-    Width = 500
+    Maximized = True
+    BorderWidth = 3
+    TitleHeight = 12
     Align = alClient
     BevelOuter = bvNone
-    BorderWidth = 3
     ClientHeight = 480
     ClientWidth = 500
     Color = clBlack
     ParentColor = False
     TabOrder = 2
-    Maximized = True
-    TitleHeight = 12
+    OnResize = nil
+    Left = 200
+    Height = 480
+    Width = 500
   end
 end

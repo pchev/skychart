@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util,
+uses u_translation, u_constant, u_util,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
   ExtCtrls, LResources;
 
@@ -54,6 +54,7 @@ type
     { Public declarations }
     compile_time:string;
     ShowTimer: Boolean;
+    procedure SetLang;
   end;
 
 var
@@ -61,8 +62,16 @@ var
 
 implementation
 
+procedure Tf_about.SetLang;
+begin
+Caption:=rsAbout;
+Label1.caption:=rsSkyCharts;
+Label4.caption:=rsThisProgramI;
+end;
+
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
+SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}

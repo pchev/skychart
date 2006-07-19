@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 interface
 
-uses
+uses u_translation,
   passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
   Forms, Stdctrls, ComCtrls, Classes, Dialogs, Sysutils, StrUtils;
 
@@ -170,22 +170,29 @@ try
     dbn:=cmain.db;
     db.SetPort(cmain.dbport);
     db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
-    if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
-       else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+trim(db.ErrorMessage)+crlf+'Verify if the MySQL Server is running and control the Userid/Password'; goto dmsg;end;
+    if db.Active then msg:=Format(rsConnectToSuc, [cmain.dbhost, inttostr(
+      cmain.dbport), crlf])
+       else begin msg:=Format(rsConnectToFai, [cmain.dbhost, inttostr(
+         cmain.dbport), trim(db.ErrorMessage)+crlf]); goto dmsg; end;
   end else if DBtype=sqlite then begin
     dbn:=UTF8Encode(cmain.db);
   end;
-  if ((db.database=dbn)or db.use(dbn)) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
-     else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.ErrorMessage)+crlf; goto dmsg;end;
+  if ((db.database=dbn)or db.use(dbn)) then msg:=Format(rsDatabaseOpen, [msg,
+    cmain.db, crlf])
+     else begin msg:=Format(rsCannotOpenDa, [msg, cmain.db, trim(db.ErrorMessage
+       )+crlf]); goto dmsg; end;
   for i:=1 to numsqltable do begin
-     if sqltable[dbtype,i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"') then msg:=msg+'Table exist '+sqltable[dbtype,i,1]+crlf
-        else begin msg:=msg+'Table '+sqltable[dbtype,i,1]+' do not exist! '+crlf+'Please correct the error and retry.' ; goto dmsg;end;
+     if sqltable[dbtype, i, 1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[
+       dbtype, i, 1]+'"') then msg:=Format(rsTableExist, [msg, sqltable[dbtype,
+       i, 1]+crlf])
+        else begin msg:=Format(rsTableDoNotEx, [msg, sqltable[dbtype, i, 1],
+          crlf]) ; goto dmsg; end;
   end;
-  msg:=msg+'All tables structure exists.';
+  msg:=Format(rsAllTablesStr, [msg]);
 dmsg:
   result:=msg;
 except
-  result:='SQL database software is probably not installed!';
+  result:=rsSQLDatabaseS;
 end;
 end;
 
@@ -224,7 +231,8 @@ try
       end;
       if sqltable[dbtype,i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"') then begin
          ok:=false;
-         result:=result+crlf+'Error creating table '+sqltable[dbtype,i,1]+blank+msg;
+         result:=Format(rsErrorCreatin, [result+crlf, sqltable[dbtype, i, 1]+
+           blank+msg]);
          break;
       end;
     end;
@@ -314,7 +322,7 @@ var
   f : textfile;
 begin
 if not fileexists(comfile) then begin
-  MemoCom.lines.add('File not found!');
+  MemoCom.lines.add(rsFileNotFound);
   exit;
 end;
 try
@@ -329,7 +337,8 @@ if db.Active then begin
     readln(f,buf);
     inc(nl);
     if trim(buf)='' then continue;
-    if (nl mod 10000)=0 then begin MemoCom.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
+    if (nl mod 10000)=0 then begin MemoCom.lines.add(Format(rsProcessingLi, [
+      inttostr(nl)])); application.processmessages; end;
     id:=trim(copy(buf,1,12));
     y:=strtoint(trim(copy(buf,15,4)));
     m:=strtoint(trim(copy(buf,20,2)));
@@ -376,7 +385,8 @@ if db.Active then begin
         +',"'+eq+'"'
         +',"'+filenum+'"'+')';
     if (not db.query(cmd))and(db.LastError<>19) then begin
-       MemoCom.lines.add('insert failed line '+inttostr(nl)+' : '+trim(db.ErrorMessage));
+       MemoCom.lines.add(Format(rsInsertFailed, [inttostr(nl), trim(
+         db.ErrorMessage)]));
     end;
     cmd:='REPLACE INTO cdc_com_name (name, id) VALUES ('
         +'"'+nam+'"'
@@ -384,7 +394,7 @@ if db.Active then begin
     db.query(cmd);
   until eof(f);
   closefile(f);
-  MemoCom.lines.add('Processing ended. Total number of comet :'+inttostr(nl));
+  MemoCom.lines.add(Format(rsProcessingEn, [inttostr(nl)]));
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then MemoCom.lines.add(buf);
@@ -408,21 +418,21 @@ try
 if db.Active then begin
   db.starttransaction;
   db.LockTables('cdc_com_elem WRITE, cdc_com_elem_list WRITE');
-  memocom.lines.add('Delete from element table...');
+  memocom.lines.add(rsDeleteFromEl);
   application.processmessages;
   if not db.Query('Delete from cdc_com_elem where elem_id='+elem_id) then
-     memocom.lines.add('Failed : '+trim(db.ErrorMessage));
+     memocom.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
   memocom.lines.add('Delete from element list...');
   application.processmessages;
   if not db.Query('Delete from cdc_com_elem_list where elem_id='+elem_id) then
-     memocom.lines.add('Failed : '+trim(db.ErrorMessage));
+     memocom.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
   db.UnLockTables;
   db.commit;
   db.flush('tables');
-  memocom.lines.add('Delete daily data');
+  memocom.lines.add(rsDeleteDailyD);
   TruncateDailyComet;
   db.Vacuum;
-  memocom.lines.add('Delete completed');
+  memocom.lines.add(rsDeleteComple);
 end;
 except
 end;
@@ -435,20 +445,20 @@ try
 if db.Active then begin
   db.UnLockTables;
   db.starttransaction;
-  memocom.lines.add('Delete from element table...');
+  memocom.lines.add(rsDeleteFromEl);
   application.processmessages;
   db.TruncateTable('cdc_com_elem');
-  memocom.lines.add('Delete from element list...');
+  memocom.lines.add(rsDeleteFromEl2);
   application.processmessages;
   db.TruncateTable('cdc_com_elem_list');
-  memocom.lines.add('Delete from name list...');
+  memocom.lines.add(rsDeleteFromNa);
   application.processmessages;
   db.TruncateTable('cdc_com_name');
   db.commit;
-  memocom.lines.add('Delete daily data');
+  memocom.lines.add(rsDeleteDailyD);
   TruncateDailyComet;
   db.Vacuum;
-  memocom.lines.add('Delete completed');
+  memocom.lines.add(rsDeleteComple);
 end;
 except
 end;
@@ -514,7 +524,7 @@ if db.Active then begin
            +',"'+id+'"'+')';
        db.query(cmd);
        result:='OK!'
-    end else result:='Insert failed! '+trim(db.ErrorMessage);
+    end else result:=Format(rsInsertFailed2, [trim(db.ErrorMessage)]);
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then result:=buf;
@@ -535,7 +545,7 @@ begin
 nerr:=1;
 result:=false;
 if not fileexists(astfile) then begin
-  memoast.lines.add('File not found!');
+  memoast.lines.add(rsFileNotFound);
   exit;
 end;
 try
@@ -556,10 +566,10 @@ if db.Active then begin
              inc(nl);
           until eof(f) or (copy(buf,1,5)='-----');
   if eof(f) then begin
-     memoast.lines.add('This file was not recognized as a MPCORB file.');
+     memoast.lines.add(rsThisFileWasN);
      raise exception.create('');
   end;
-  memoast.lines.add('Data start on line '+inttostr(nl+1));
+  memoast.lines.add(Format(rsDataStartOnL, [inttostr(nl+1)]));
   prefl:=nl;
   db.starttransaction;
   db.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_name WRITE');
@@ -572,7 +582,7 @@ if db.Active then begin
       if astnumbered then break
                      else continue;
     end;
-    if (nl mod 10000)=0 then begin memoast.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
+    if (nl mod 10000)=0 then begin memoast.lines.add(Format(rsProcessingLi, [inttostr(nl)])); application.processmessages; end;
     id:=trim(copy(buf,1,7));
     lid:=length(id);
     if lid<7 then id:=StringofChar('0',7-lid)+id;
@@ -583,7 +593,7 @@ if db.Active then begin
        ep:=floattostr(jd(y,m,d,hh))
      else begin
        inc(nerr);
-       memoast.lines.add('invalid epoch on line'+inttostr(nl+prefl)+' : '+buf);
+       memoast.lines.add(Format(rsInvalidEpoch, [inttostr(nl+prefl), buf]));
        break;
      end;
     ma:=copy(buf,27,9);
@@ -619,10 +629,11 @@ if db.Active then begin
         +',"'+eq+'"'
         +',"'+filenum+'"'+')';
     if (not db.query(cmd))and(db.LastError<>19) then begin
-       memoast.lines.add('insert failed line '+inttostr(nl+prefl)+' : '+trim(db.ErrorMessage));
+       memoast.lines.add(Format(rsInsertFailed, [inttostr(nl+prefl), trim(
+         db.ErrorMessage)]));
        inc(nerr);
        if stoperr and (nerr>1000) then begin
-          memoast.lines.add('More than 1000 errors! Process aborted.');
+          memoast.lines.add(rsMoreThan1000);
           break;
        end;
     end;
@@ -633,7 +644,7 @@ if db.Active then begin
     if limit and (nl>=astlimit) then break;
   until eof(f);
   closefile(f);
-  memoast.lines.add('Processing ended. Total number of asteroid :'+inttostr(nl));
+  memoast.lines.add(Format(rsProcessingEn2, [inttostr(nl)]));
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then memoast.lines.add(buf);
@@ -658,25 +669,25 @@ try
 if db.Active then begin
   db.starttransaction;
   db.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_mag WRITE');
-  memoast.lines.add('Delete from element table...');
+  memoast.lines.add(rsDeleteFromEl);
   application.processmessages;
   if not db.Query('Delete from cdc_ast_elem where elem_id='+elem_id) then
-     memoast.lines.add('Failed : '+trim(db.ErrorMessage));
-  memoast.lines.add('Delete from element list...');
+     memoast.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
+  memoast.lines.add(rsDeleteFromEl2);
   application.processmessages;
   if not db.Query('Delete from cdc_ast_elem_list where elem_id='+elem_id) then
-     memoast.lines.add('Failed : '+trim(db.ErrorMessage));
-  memoast.lines.add('Delete from monthly table...');
+     memoast.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
+  memoast.lines.add(rsDeleteFromMo);
   application.processmessages;
   if not db.Query('Delete from cdc_ast_mag where elem_id='+elem_id) then
-     memoast.lines.add('Failed : '+trim(db.ErrorMessage));
+     memoast.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
   db.UnLockTables;
   db.commit;
   db.flush('tables');
-  memoast.lines.add('Delete daily data');
+  memoast.lines.add(rsDeleteDailyD);
   TruncateDailyAsteroid;
   db.Vacuum;
-  memoast.lines.add('Delete completed');
+  memoast.lines.add(rsDeleteComple);
 end;
 except
 end;
@@ -695,15 +706,15 @@ try
 if db.Active then begin
   db.starttransaction;
   db.LockTables('cdc_ast_mag WRITE');
-  memoast.lines.add('Delete from monthly table for jd<'+jds);
+  memoast.lines.add(Format(rsDeleteFromMo2, [jds]));
   application.processmessages;
   if not db.Query('Delete from cdc_ast_mag where jd<'+jds) then
-     memoast.lines.add('Failed : '+trim(db.ErrorMessage));
+     memoast.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
   db.UnLockTables;
   db.commit;
   db.flush('tables');
   db.Vacuum;
-  memoast.lines.add('Delete completed');
+  memoast.lines.add(rsDeleteComple);
 end;
 except
 end;
@@ -716,23 +727,23 @@ try
 if db.Active then begin
   db.UnLockTables;
   db.starttransaction;
-  memoast.lines.add('Delete from element table...');
+  memoast.lines.add(rsDeleteFromEl);
   application.processmessages;
   db.TruncateTable('cdc_ast_elem');
-  memoast.lines.add('Delete from element list...');
+  memoast.lines.add(rsDeleteFromEl2);
   application.processmessages;
   db.TruncateTable('cdc_ast_elem_list');
-  memoast.lines.add('Delete from name list...');
+  memoast.lines.add(rsDeleteFromNa);
   application.processmessages;
   db.TruncateTable('cdc_ast_name');
-  memoast.lines.add('Delete from monthly table...');
+  memoast.lines.add(rsDeleteFromMo);
   application.processmessages;
   db.TruncateTable('cdc_ast_mag');
   db.commit;
-  memoast.lines.add('Delete daily data');
+  memoast.lines.add(rsDeleteDailyD);
   TruncateDailyAsteroid;
   db.Vacuum;
-  memoast.lines.add('Delete completed');
+  memoast.lines.add(rsDeleteComple);
 end;
 except
 end;
@@ -787,7 +798,7 @@ if db.Active then begin
            +',"'+id+'"'+')';
        db.query(cmd);
        result:='OK!'
-    end else result:='Insert failed! '+trim(db.ErrorMessage);
+    end else result:=Format(rsInsertFailed2, [trim(db.ErrorMessage)]);
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then result:=buf;
@@ -1166,9 +1177,9 @@ while j=0 do begin
         +',"'+formatfloat(f5,r)+'"'
         +')';
       if not db.query(cmd) then
-         writetrace('DB insert failed for '+f.Name+' :'+db.ErrorMessage);
+         writetrace(Format(rsDBInsertFail, [f.Name, db.ErrorMessage]));
     end
-    else writetrace('Invalid FITS file: '+f.Name);
+    else writetrace(Format(rsInvalidFITSF, [f.Name]));
     i:=findnext(f);
   end;
   db.commit;
@@ -1190,7 +1201,7 @@ var f: textfile;
 begin
 Memo.clear;
 if not fileexists(locfile) then begin
-  Memo.lines.add('File not found!');
+  Memo.lines.add(rsFileNotFound);
   exit;
 end;
 try
@@ -1227,7 +1238,7 @@ var f: textfile;
 begin
 Memo.clear;
 if not fileexists(locfile) then begin
-  Memo.lines.add('File not found!');
+  Memo.lines.add(rsFileNotFound);
   exit;
 end;
 try
@@ -1243,7 +1254,8 @@ if db.Active then begin
   db.LockTables('cdc_location WRITE');
   repeat
     readln(f,buf);
-    if (nl mod 10000)=0 then begin Memo.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
+    if (nl mod 10000)=0 then begin Memo.lines.add(Format(rsProcessingLi, [
+      inttostr(nl)])); application.processmessages; end;
     SplitRec(buf,tab,rec);
     if (rec[17]<>'V') and  // skip alternate name
        ((not  city_only)  // all names
@@ -1273,7 +1285,7 @@ if db.Active then begin
   db.UnLockTables;
   db.commit;
   db.flush('tables');
-  Memo.lines.add('Processing ended. Total number of location :'+inttostr(nl));
+  Memo.lines.add(Format(rsProcessingEn3, [inttostr(nl)]));
   application.ProcessMessages;
 end;
 except
@@ -1289,7 +1301,7 @@ var f: textfile;
 begin
 Memo.clear;
 if not fileexists(locfile) then begin
-  Memo.lines.add('File not found!');
+  Memo.lines.add(rsFileNotFound);
   exit;
 end;
 try
@@ -1303,7 +1315,8 @@ if db.Active then begin
   db.starttransaction;
   db.LockTables('cdc_location WRITE');
   repeat
-    if (nl mod 10000)=0 then begin Memo.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
+    if (nl mod 10000)=0 then begin Memo.lines.add(Format(rsProcessingLi, [
+      inttostr(nl)])); application.processmessages; end;
     readln(f,buf);
     SplitRec(buf,'|',rec);
      if ((not city_only)  // all names
@@ -1333,7 +1346,7 @@ if db.Active then begin
   db.UnLockTables;
   db.commit;
   db.flush('tables');
-  Memo.lines.add('Processing ended. Total number of location :'+inttostr(nl));
+  Memo.lines.add(Format(rsProcessingEn3, [inttostr(nl)]));
   Application.ProcessMessages;
 end;
 except

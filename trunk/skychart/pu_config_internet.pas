@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util,
+uses u_translation, u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
   ButtonPanel, Grids;
@@ -102,10 +102,39 @@ type
     mycdss : conf_dss;
     cmain : Pconf_main;
     cdss : Pconf_dss;
+    procedure SetLang;
     constructor Create(AOwner:TComponent); override;
   end;
 
 implementation
+
+procedure Tf_config_internet.SetLang;
+begin
+Caption:=rsInternet;
+Page1.caption:=rsProxy;
+GroupBox1.caption:=rsHTTPProxy;
+httpproxy.caption:=rsUseHTTPProxy;
+Label2.caption:=rsProxyHost;
+Label3.caption:=rsProxyPort;
+Label4.caption:=rsUserName;
+Label5.caption:=rsPassword;
+GroupBox2.caption:=rsFTP;
+Label1.caption:=rsAnonymousPas;
+ftppassive.caption:=rsFTPPassiveMo;
+Page2.caption:=rsOrbitalEleme;
+Label6.caption:=rsCometElement;
+Label7.caption:=rsAsteroidElem;
+comdefault.caption:=rsDefault;
+astdefault.caption:=rsDefault;
+brightneo.caption:=rsBrightNEO;
+mpcorb.caption:=rsMPCORB50Mb;
+comhttp.caption:=rsMPCHttp;
+comftp.caption:=rsMPCFtp;
+astcdc.caption:=rsFirst5000;
+Page3.caption:=rsOnlineDSS;
+Label8.caption:=rsOnlinePictur;
+DefaultDSS.caption:=rsDefault;
+end;
 
 constructor Tf_config_internet.Create(AOwner:TComponent);
 begin
@@ -146,8 +175,8 @@ var i:integer;
 begin
 DSSpictures.RowCount:=MaxDSSurl+1;
 DSSpictures.ColWidths[1]:=DSSpictures.ClientWidth-DSSpictures.ColWidths[0];
-DSSpictures.Cells[0,0]:='Name';
-DSSpictures.Cells[1,0]:='URL';
+DSSpictures.Cells[0, 0]:=rsName;
+DSSpictures.Cells[1, 0]:=rsURL;
 for i:=1 to MaxDSSurl do begin
   DSSpictures.Cells[0,i]:=cdss.DSSurl[i,0];
   DSSpictures.Cells[1,i]:=cdss.DSSurl[i,1];
@@ -213,6 +242,7 @@ end;
 procedure Tf_config_internet.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
+  SetLang;
 end;
 
 procedure Tf_config_internet.comdefaultClick(Sender: TObject);

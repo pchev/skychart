@@ -24,11 +24,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses
-  {Windows,} Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+uses  u_translation,
+  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, LResources;
 
 type
+
+  { Tf_catgenadv }
+
   Tf_catgenadv = class(TForm)
     Button1: TButton;
     Button2: TButton;
@@ -40,6 +43,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
     procedure Edit3Change(Sender: TObject);
@@ -49,6 +53,7 @@ type
   public
     { Déclarations publiques }
     A,B,X,R : double;
+    procedure SetLang;
   end;
 
 var
@@ -57,6 +62,14 @@ var
 implementation
 
 const fformat = '0.###############';
+
+procedure Tf_catgenadv.SetLang;
+begin
+Caption:=rsComputeField;
+Label4.caption:=rsIndicateHere;
+Button1.caption:=rsOK;
+Button2.caption:=rsCancel;
+end;
 
 Procedure Tf_catgenadv.RefreshCalc;
 var buf:string;
@@ -80,6 +93,11 @@ edit2.text:=buf;
 buf:=formatfloat(fformat,B);
 edit3.text:=buf;
 RefreshCalc;
+end;
+
+procedure Tf_catgenadv.FormCreate(Sender: TObject);
+begin
+  SetLang;
 end;
 
 procedure Tf_catgenadv.Edit1Change(Sender: TObject);

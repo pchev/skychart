@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util,
+uses u_translation, u_constant, u_util,
   SysUtils, Types, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
   LResources, PrintersDlgs, EditBtn;
@@ -73,6 +73,7 @@ type
   public
     { Public declarations }
     cm: conf_main;
+    procedure SetLang;
   end;
 
 var
@@ -80,7 +81,24 @@ var
 
 implementation
 
-
+procedure Tf_printsetup.SetLang;
+begin
+Caption:=rsPrinterSetup;
+Label2.caption:=rsPrinter;
+Label3.caption:=rsResolution;
+Label7.caption:=rsSelectTheSys;
+qtsetup.caption:=rsPrinterSetup;
+Label1.caption:=rsRasterResolu;
+Label4.caption:=rsCommandToUse;
+Label5.caption:=rsDpiFor8X11Pa;
+Label6.caption:=rsPathToSaveTh;
+printmode.caption:=rsPrintMethod;
+printmode.Items[0]:=rsSystemPrinte;
+printmode.Items[1]:=rsPostscript;
+printmode.Items[2]:=rsBitmapFile;
+Ok.Caption:=rsOK;
+Cancel.Caption:=rsCancel;
+end;
 
 procedure Tf_printsetup.FormShow(Sender: TObject);
 begin
@@ -118,9 +136,9 @@ case cm.PrintMethod of
        ok:=Fileexists(cm.PrintCmd1);
      {$endif}
      if ok then begin
-        cmdreport.text:='Command found OK.';
+        cmdreport.text:=rsCommandFound;
      end else begin
-        cmdreport.text:='Command not found!';
+        cmdreport.text:=rsCommandNotFo;
      end;
    end;
    end;
@@ -140,9 +158,9 @@ case cm.PrintMethod of
        ok:=Fileexists(cm.PrintCmd2);
      {$endif}
      if ok then begin
-        cmdreport.text:='Command found OK.';
+        cmdreport.text:=rsCommandFound;
      end else begin
-        cmdreport.text:='Command not found!';
+        cmdreport.text:=rsCommandNotFo;
      end;
    end;
    end;
@@ -165,6 +183,7 @@ end;
 
 procedure Tf_printsetup.FormCreate(Sender: TObject);
 begin
+SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}

@@ -1,10 +1,4 @@
 object f_manualtelescope: Tf_manualtelescope
-  Left = 222
-  Height = 107
-  Top = 198
-  Width = 390
-  HorzScrollBar.Page = 389
-  VertScrollBar.Page = 106
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Manual Telescope'
@@ -12,14 +6,19 @@ object f_manualtelescope: Tf_manualtelescope
   ClientWidth = 390
   Color = clBlack
   FormStyle = fsStayOnTop
+  OnCreate = FormCreate
   OnMouseDown = FormMouseDown
   OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   TextHeight = 13
+  HorzScrollBar.Page = 389
+  VertScrollBar.Page = 106
+  Left = 222
+  Height = 107
+  Top = 198
+  Width = 390
   object Panel1: TPanel
-    Height = 107
-    Width = 390
     Align = alClient
     ClientHeight = 107
     ClientWidth = 390
@@ -30,11 +29,9 @@ object f_manualtelescope: Tf_manualtelescope
     OnMouseDown = FormMouseDown
     OnMouseMove = FormMouseMove
     OnMouseUp = FormMouseUp
+    Height = 107
+    Width = 390
     object Label1: TLabel
-      Left = 16
-      Height = 12
-      Top = 8
-      Width = 93
       Caption = 'Manual Telescope'
       Color = clNone
       Font.Color = clRed
@@ -44,12 +41,12 @@ object f_manualtelescope: Tf_manualtelescope
       OnMouseDown = FormMouseDown
       OnMouseMove = FormMouseMove
       OnMouseUp = FormMouseUp
+      Left = 16
+      Height = 12
+      Top = 8
+      Width = 93
     end
     object Label2: TLabel
-      Left = 16
-      Height = 13
-      Top = 24
-      Width = 97
       Caption = 'sep                   '
       Color = clNone
       Font.Color = clRed
@@ -59,12 +56,12 @@ object f_manualtelescope: Tf_manualtelescope
       OnMouseDown = FormMouseDown
       OnMouseMove = FormMouseMove
       OnMouseUp = FormMouseUp
-    end
-    object Label4: TLabel
       Left = 16
       Height = 13
-      Top = 44
-      Width = 56
+      Top = 24
+      Width = 97
+    end
+    object Label4: TLabel
       Caption = 'RA turns: '
       Color = clNone
       Font.Color = clRed
@@ -74,12 +71,12 @@ object f_manualtelescope: Tf_manualtelescope
       OnMouseDown = FormMouseDown
       OnMouseMove = FormMouseMove
       OnMouseUp = FormMouseUp
-    end
-    object Label5: TLabel
       Left = 16
       Height = 13
-      Top = 72
-      Width = 65
+      Top = 44
+      Width = 56
+    end
+    object Label5: TLabel
       Caption = 'DEC turns: '
       Color = clNone
       Font.Color = clRed
@@ -89,6 +86,10 @@ object f_manualtelescope: Tf_manualtelescope
       OnMouseDown = FormMouseDown
       OnMouseMove = FormMouseMove
       OnMouseUp = FormMouseUp
+      Left = 16
+      Height = 13
+      Top = 72
+      Width = 65
     end
   end
 end

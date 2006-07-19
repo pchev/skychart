@@ -1,10 +1,4 @@
 object f_about: Tf_about
-  Left = 421
-  Height = 253
-  Top = 110
-  Width = 350
-  HorzScrollBar.Page = 349
-  VertScrollBar.Page = 252
   BorderStyle = bsNone
   Caption = 'About'
   ClientHeight = 253
@@ -16,12 +10,16 @@ object f_about: Tf_about
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   Position = poScreenCenter
   TextHeight = 13
+  HorzScrollBar.Page = 349
+  VertScrollBar.Page = 252
+  Left = 421
+  Height = 253
+  Top = 110
+  Width = 350
   object logo: TImage
-    Height = 253
-    Width = 350
     Align = alClient
     Center = True
     OnClick = logoDblClick
@@ -4446,12 +4444,10 @@ object f_about: Tf_about
     }
     Stretch = True
     Transparent = True
+    Height = 253
+    Width = 350
   end
   object Label1: TLabel
-    Left = 114
-    Height = 38
-    Top = 31
-    Width = 221
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Sky Charts'
@@ -4461,12 +4457,12 @@ object f_about: Tf_about
     Font.Name = 'sans'
     Font.Style = [fsBold]
     ParentColor = False
+    Left = 153
+    Height = 42
+    Top = 31
+    Width = 182
   end
   object Label2: TLabel
-    Left = 16
-    Height = 20
-    Top = 176
-    Width = 90
     Caption = 'Version 3 '
     Color = clNone
     Font.Color = clSilver
@@ -4474,24 +4470,24 @@ object f_about: Tf_about
     Font.Name = 'sans'
     Font.Style = [fsBold]
     ParentColor = False
+    Left = 16
+    Height = 23
+    Top = 176
+    Width = 94
   end
   object Label3: TLabel
-    Left = 16
-    Height = 14
-    Top = 230
-    Width = 322
     AutoSize = False
     Caption = 'Copyright (C) 2002-2005 Patrick Chevalley '
     Color = clBlack
     Font.Color = clSilver
     ParentColor = False
     Transparent = False
+    Left = 16
+    Height = 14
+    Top = 230
+    Width = 322
   end
   object Label4: TLabel
-    Left = 16
-    Height = 30
-    Top = 200
-    Width = 322
     AutoSize = False
     Caption = 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License'
     Color = clBlack
@@ -4499,18 +4495,22 @@ object f_about: Tf_about
     ParentColor = False
     Transparent = False
     WordWrap = True
+    Left = 16
+    Height = 30
+    Top = 200
+    Width = 322
   end
   object DateLabel: TLabel
-    Left = 315
-    Height = 11
-    Top = 185
-    Width = 23
     Anchors = [akTop, akRight]
     Caption = 'Date'
     Color = clBlack
     Font.Color = clWhite
     ParentColor = False
     Transparent = False
+    Left = 311
+    Height = 17
+    Top = 185
+    Width = 27
   end
   object Timer1: TTimer
     Enabled = False

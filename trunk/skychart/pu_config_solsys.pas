@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_util, u_projection, cu_database,
+uses u_translation, u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, unzip,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, MaskEdit,
   downloaddialog, EditBtn;
@@ -258,6 +258,7 @@ type
     cplot : ^conf_plot;
     cmain : ^conf_main;
     constructor Create(AOwner:TComponent); override;
+    procedure SetLang;
     procedure LoadSampleData;
     property onShowDB: TNotifyEvent read FShowDB write FShowDB;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
@@ -265,7 +266,118 @@ type
 
 implementation
 
-
+procedure Tf_config_solsys.SetLang;
+begin
+Caption:=rsSolarSystem;
+Label12.caption:=rsSolarSystemS;
+Label131.caption:=rsDataFiles;
+PlaParalaxe.caption:=rsPosition;
+PlaParalaxe.Items[0]:=rsGeocentric;
+PlaParalaxe.Items[1]:=rsTopoCentric;
+Label5.caption:=rsPlanetsSetti;
+Label89.caption:=rsJupiterGRSLo;
+PlanetBox.caption:=rsShowPlanetOn;
+PlanetMode.caption:=rsDrawPlanetAs;
+PlanetMode.Items[0]:=rsStar;
+PlanetMode.Items[1]:=rsLineModeDraw;
+PlanetMode.Items[2]:=rsRealisticsIm;
+PlanetMode.Items[3]:=rsSymbol;
+PlanetBox3.caption:=rsShowEarthSha;
+XplanetBox.caption:=rsImageOptions;
+UseXplanet.caption:=rsUseXplanet;
+TransparentPlanet.caption:=rsTransparentL;
+comsetting.caption:=rsGeneralSetti;
+GroupBox13.caption:=rsChartSetting;
+Label154.caption:=rsDoNotTakeAcc;
+Label216.caption:=rsShowComets;
+Label231.caption:=rsMagnitudeFai;
+showcom.caption:=rsShowCometsOn;
+comdbset.caption:=rsDatabaseSett;
+comload.caption:=rsLoadMPCFile;
+Label232.caption:=rsMessages;
+Label233.caption:=rsOrUseALocalF;
+GroupBox14.caption:=rsLoadMPCForma;
+Label2.caption:=rsDownloadLate;
+DownloadComet.caption:=rsDownload;
+Loadcom.caption:=rsLoadFile;
+comdelete.caption:=rsDataMaintena;
+Label238.caption:=rsMessages;
+GroupBox16.caption:=rsDeleteMPCDat;
+DelCom.caption:=rsDelete;
+GroupBox17.caption:=rsQuickDelete;
+Label239.caption:=rsQuicklyDelet;
+DelComAll.caption:=rsDelete;
+Addsinglecom.caption:=rsAdd;
+Label241.caption:=rsAddASingleEl;
+Label242.caption:=rsDesignation;
+Label243.caption:=rsHAbsoluteMag;
+Label244.caption:=rsGSlopeParame;
+Label245.caption:=rsEpochJD;
+Label246.caption:=rsPerihelionDa;
+Label247.caption:=rsArgumentOfPe;
+Label248.caption:=rsLongitudeAsc;
+Label249.caption:=rsInclination;
+Label250.caption:=rsEccentricity;
+Label251.caption:=rsPerihelionDi;
+Label253.caption:=rsEquinox2;
+Label254.caption:=rsName;
+AddCom.caption:=rsAdd;
+astsetting.caption:=rsGeneralSetti;
+GroupBox9.caption:=rsChartSetting;
+Label203.caption:=rsDoNotTakeAcc2;
+Label212.caption:=rsShowAsteroid;
+Label213.caption:=rsMagnitudeFai;
+showast.caption:=rsShowAsteroid3;
+astdbset.caption:=rsDatabaseSett;
+astload.caption:=rsLoadMPCFile;
+Label206.caption:=rsMessages;
+Label204.caption:=rsOrUseALocalF;
+GroupBox7.caption:=rsLoadMPCForma;
+Label1.caption:=rsDownloadLate;
+DownloadAsteroid.caption:=rsDownload;
+GroupBox1.caption:=rsOptions;
+Label215.caption:=rsAsteroidsFro;
+astnumbered.caption:=rsOnlyNumbered;
+aststoperr.caption:=rsHaltAfter100;
+astlimitbox.caption:=rsLoadOnlyTheF;
+LoadMPC.caption:=rsLoadFile;
+astprepare.caption:=rsPrepareMonth;
+Label210.caption:=rsMessages;
+GroupBox8.caption:=rsPrepareData;
+Label7.caption:=rsStartMonth;
+Label207.caption:=rsNumberOfMont;
+AstCompute.caption:=rsCompute;
+astdelete.caption:=rsDataMaintena;
+Label211.caption:=rsMessages;
+GroupBox10.caption:=rsDeleteMPCDat;
+delast.caption:=rsDelete;
+GroupBox11.caption:=rsQuickDelete;
+Label209.caption:=rsQuicklyDelet2;
+delallast.caption:=rsDelete;
+GroupBox12.caption:=rsDeleteMonthl;
+Label214.caption:=rsDeleteMonthl2;
+deldateast.caption:=rsDelete;
+AddsingleAst.caption:=rsAdd;
+Label217.caption:=rsAddASingleEl2;
+Label218.caption:=rsDesignation;
+Label219.caption:=rsHAbsoluteMag;
+Label220.caption:=rsGSlopeParame;
+Label221.caption:=rsEpochJD;
+Label222.caption:=rsMeanAnomaly;
+Label223.caption:=rsArgumentOfPe;
+Label224.caption:=rsLongitudeAsc;
+Label225.caption:=rsInclination;
+Label226.caption:=rsEccentricity;
+Label227.caption:=rsSemimajorAxi;
+Label228.caption:=rsReference;
+Label229.caption:=rsEquinox2;
+Label230.caption:=rsName;
+Addast.caption:=rsAdd;
+comsymbol.Items[0]:=rsDisplayAsASy;
+comsymbol.Items[1]:=rsProportional;
+astsymbol.Items[0]:=rsDisplayAsASy;
+astsymbol.Items[1]:=rsProportional2;
+end;
 
 constructor Tf_config_solsys.Create(AOwner:TComponent);
 begin
@@ -339,6 +451,7 @@ end;
 
 procedure Tf_config_solsys.FormCreate(Sender: TObject);
 begin
+SetLang;
   LockChange:=true;
 end;
 
@@ -350,7 +463,7 @@ var fn,tmpfn,buf: string;
 begin
  MemoMpc.Clear;
  n:=cmain.AsteroidUrlList.Count;
- if n=0 then begin showmessage('Please configure the orbital element URL!');exit;end;
+ if n=0 then begin showmessage(rsPleaseConfig2); exit; end;
  fn:=slash(privatedir)+slash('MPC')+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
  tmpfn:=slash(TempDir)+'mpc.tmp';
  if cmain.HttpProxy then begin
@@ -371,7 +484,7 @@ begin
  ok:=false;
  for i:=1 to n do begin
     DownloadDialog1.URL:=cmain.AsteroidUrlList[i-1];
-    MemoMpc.Lines.Add('Download '+DownloadDialog1.URL);
+    MemoMpc.Lines.Add(Format(rsDownload2, [DownloadDialog1.URL]));
     if i=1 then begin
        DownloadDialog1.SaveToFile:=fn;
        DownloadDialog1.ConfirmDownload:=true;
@@ -395,7 +508,7 @@ begin
           DeleteFile(tmpfn);
        end;
     end else begin
-       Showmessage('Cancel '+DownloadDialog1.ResponseText);
+       Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
        ok:=false;
        break;
     end;
@@ -428,7 +541,7 @@ var fn,tmpfn,buf: string;
 begin
  MemoCom.Clear;
  n:=cmain.CometUrlList.Count;
- if n=0 then begin showmessage('Please configure the orbital element URL!');exit;end;
+ if n=0 then begin showmessage(rsPleaseConfig2); exit; end;
  fn:=slash(privatedir)+slash('MPC')+'COMET-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
  tmpfn:=slash(TempDir)+'mpc.tmp';
  if cmain.HttpProxy then begin
@@ -449,7 +562,7 @@ begin
  ok:=false;
  for i:=1 to n do begin
     DownloadDialog1.URL:=cmain.CometUrlList[i-1];
-    MemoCom.Lines.Add('Download '+DownloadDialog1.URL);
+    MemoCom.Lines.Add(Format(rsDownload2, [DownloadDialog1.URL]));
     if i=1 then begin
        DownloadDialog1.SaveToFile:=fn;
        DownloadDialog1.ConfirmDownload:=true;
@@ -473,7 +586,7 @@ begin
           DeleteFile(tmpfn);
        end;
     end else begin
-       Showmessage('Cancel '+DownloadDialog1.ResponseText);
+       Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
        ok:=false;
        break;
     end;
@@ -643,7 +756,7 @@ screen.cursor:=crDefault;
 if ok then begin
   if autoprocess then AstComputeClick(Sender)
   else begin
-     Showmessage('To use this new data you must now compute the Monthly Data');
+     Showmessage(rsToUseThisNew);
      AstPageControl.activepage:=astprepare;
   end;
 end;
@@ -664,7 +777,7 @@ for i:=1 to astnummonth.value do begin
   jdt:=jd(y,m,1,0);
   if not FPrepareAsteroid(jdt,prepastmemo.lines) then begin
      screen.cursor:=crDefault;
-     ShowMessage('No Asteroid data found!'+crlf+'Please load a MPC file first.');
+     ShowMessage(Format(rsNoAsteroidDa, [crlf]));
      AstPageControl.activepage:=astload;
      exit;
   end;
@@ -674,7 +787,7 @@ for i:=1 to astnummonth.value do begin
      m:=1;
   end;
 end;
-prepastmemo.lines.Add('You are now ready to display the asteroid for this time period.');
+prepastmemo.lines.Add(rsYouAreNowRea);
 screen.cursor:=crDefault;
 showast.checked:=true;
 end

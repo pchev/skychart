@@ -25,17 +25,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses
+uses u_translation,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, LResources;
 
 type
+
+  { Tf_manualtelescope }
+
   Tf_manualtelescope = class(TForm)
     Panel1: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     Label4: TLabel;
     Label5: TLabel;
+    procedure FormCreate(Sender: TObject);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -50,6 +54,7 @@ type
   public
     { Public declarations }
     procedure SetTurn(txt:string);
+    procedure SetLang;
   end;
 
 var
@@ -59,7 +64,14 @@ implementation
 
 uses u_constant;
 
-
+procedure Tf_manualtelescope.SetLang;
+begin
+Caption:=rsManualTelesc;
+Label1.caption:=rsManualTelesc;
+Label4.caption:=rsRATurns;
+Label5.caption:=rsDECTurns;
+Label2.Caption:='';
+end;
 
 procedure Tf_manualtelescope.SetTurn(txt:string);
 var i:integer;
@@ -84,6 +96,7 @@ begin
   if i=0 then exit;
   label5.Caption:=copy(txt,1,i-1);
   delete(txt,1,i);
+if (label2.width+label2.left+8)>width then width:=label2.width+label2.left+8;
 end;
 
 procedure Tf_manualtelescope.FormMouseDown(Sender: TObject;
@@ -92,6 +105,11 @@ begin
 startpoint:=clienttoscreen(point(X,Y));
 moving:=true;
 lockmove:=false;
+end;
+
+procedure Tf_manualtelescope.FormCreate(Sender: TObject);
+begin
+  SetLang;
 end;
 
 procedure Tf_manualtelescope.FormMouseMove(Sender: TObject;

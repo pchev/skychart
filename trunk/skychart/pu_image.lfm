@@ -1,6 +1,5 @@
 object f_image: Tf_image
   ActiveControl = Button1
-  Caption = 'Taille réelle'
   ClientHeight = 407
   ClientWidth = 615
   Font.Height = -11
@@ -50,7 +49,7 @@ object f_image: Tf_image
       Width = 32
     end
     object Button1: TButton
-      BorderSpacing.InnerBorder = 2
+      BorderSpacing.InnerBorder = 4
       Caption = 'Close'
       OnClick = Button1Click
       TabOrder = 0
@@ -60,7 +59,7 @@ object f_image: Tf_image
       Width = 75
     end
     object Button2: TButton
-      BorderSpacing.InnerBorder = 2
+      BorderSpacing.InnerBorder = 4
       Caption = 'Zoom +'
       OnClick = Button2Click
       TabOrder = 1
@@ -70,7 +69,7 @@ object f_image: Tf_image
       Width = 75
     end
     object Button3: TButton
-      BorderSpacing.InnerBorder = 2
+      BorderSpacing.InnerBorder = 4
       Caption = 'Zoom -'
       OnClick = Button3Click
       TabOrder = 2

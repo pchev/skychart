@@ -30,7 +30,7 @@ Uses
     ActiveX,
   {$endif}
   dynlibs,
-  u_util, Types,Classes,Dialogs;
+  u_translation, u_util, SysUtils, Types,Classes,Dialogs;
 
 type
 
@@ -163,11 +163,11 @@ if Fscopelib<>0 then begin
    {$endif}
 end else begin
     Fscopelibok:=false;
-    Showmessage('Error opening '+Fplugin);
+    Showmessage(Format(rsErrorOpening, [Fplugin]));
 end;
 except
  Fscopelibok:=false;
- Showmessage('Error opening '+Fplugin);
+ Showmessage(Format(rsErrorOpening, [Fplugin]));
 end;
 end;
 

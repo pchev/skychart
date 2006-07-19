@@ -21,54 +21,54 @@ object f_zoom: Tf_zoom
     Color = clNone
     ParentColor = False
     Left = 16
-    Height = 14
+    Height = 17
     Top = 8
-    Width = 9
+    Width = 11
   end
   object Label2: TLabel
     Caption = '1'
     Color = clNone
     ParentColor = False
     Left = 120
-    Height = 14
+    Height = 17
     Top = 8
-    Width = 7
+    Width = 8
   end
   object Label3: TLabel
     Caption = '10'
     Color = clNone
     ParentColor = False
     Left = 172
-    Height = 14
+    Height = 17
     Top = 8
-    Width = 13
+    Width = 15
   end
   object Label4: TLabel
     Caption = '100'
     Color = clNone
     ParentColor = False
     Left = 225
-    Height = 14
+    Height = 17
     Top = 8
-    Width = 19
+    Width = 22
   end
   object Label5: TLabel
     Caption = '360'
     Color = clNone
     ParentColor = False
     Left = 254
-    Height = 14
+    Height = 17
     Top = 8
-    Width = 19
+    Width = 22
   end
   object Label6: TLabel
     Caption = '10'''
     Color = clNone
     ParentColor = False
     Left = 70
-    Height = 14
+    Height = 17
     Top = 8
-    Width = 15
+    Width = 18
   end
   object TrackBar1: TTrackBar
     Max = 260

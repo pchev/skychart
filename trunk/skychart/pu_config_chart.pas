@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                             
 interface
 
-uses u_constant, u_projection, u_util,
+uses u_translation, u_constant, u_projection, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources, MaskEdit,
   Buttons;
@@ -306,12 +306,70 @@ type
     cshr : ^conf_shared;
     cplot : ^conf_plot;
     cmain : ^conf_main;
-    constructor Create(AOwner:TComponent); override;
+    procedure SetLang;
+   constructor Create(AOwner:TComponent); override;
   end;
   
 implementation
 
 
+procedure Tf_config_chart.SetLang;
+begin
+Caption:=rsCharts;
+Label31.caption:=rsChartSetting;
+Label68.caption:=rsYears;
+Label113.caption:=rsStarsProperM;
+PMBox.caption:=rsUseTheProper;
+DrawPmBox.caption:=rsDrawALineTha;
+EquinoxLabel.caption:=rsEquinox;
+Label1.caption:=rsEquatorialAn;
+projectiontype.caption:=rsChartCoordin2;
+ApparentType.caption:=rsNutationAber;
+Label30.caption:=rsFieldOfVisio3;
+Label106.caption:=rsFieldNumber;
+Label107.caption:=rsFieldOfVisio;
+Label57.caption:=rsFrom;
+Label5.caption:=rsTo;
+Button1.caption:=rsDefault;
+Label158.caption:=rsProjectionSe;
+Label165.caption:=rsFieldNumber;
+Label172.caption:=rsProjection;
+Label29.caption:=rsObjectFilter2;
+GroupBox2.caption:=rsStarsFilter;
+StarBox.caption:=rsFilterStars;
+Label108.caption:=rsFieldOfVisio5;
+Label109.caption:=rsLimitingMagn2;
+Label110.caption:=rsNakedEyeRefe;
+StarAutoBox.caption:=rsAutomatic;
+GroupBox1.caption:=rsNebulaeFilte;
+BigNebUnit.caption:=rsMinutes;
+NebBox.caption:=rsFilterNebula;
+BigNebBox.caption:=rsHideObjectWi;
+Label48.caption:=rsLimitingMagn2;
+Label49.caption:=rsLimitingSize;
+Label112.caption:=rsFieldOfVisio5;
+Label159.caption:=rsGridSetting;
+Label160.caption:=rsFieldNumber;
+Label176.caption:=rsDegreeGridSp;
+Label175.caption:=rsHourGridSpac;
+Label95.caption:=rsObjectListSe;
+GroupBox5.caption:=rsTypeOfObject;
+liststar.caption:=rsStars;
+listneb.caption:=rsNebulae;
+listpla.caption:=rsSolarSystemO;
+listvar.caption:=rsVariableStar;
+listdbl.caption:=rsDoubleStar;
+Label2.caption:=rsFovNumber2;
+equinoxtype.items[0]:=rsStandardEqui;
+equinoxtype.items[1]:=rsFixedEquinox;
+equinoxtype.items[2]:=rsEquinoxOfThe;
+ApparentType.Items[0]:=rsMeanPosition;
+ApparentType.Items[1]:=rsTruePosition;
+projectiontype.Items[0]:=rsEquatorialCo;
+projectiontype.Items[1]:=rsAzimuthalCoo;
+projectiontype.Items[2]:=rsGalacticCoor;
+projectiontype.Items[3]:=rsEclipticCoor;
+end;
 
 constructor Tf_config_chart.Create(AOwner:TComponent);
 begin
@@ -338,7 +396,7 @@ end;
 procedure Tf_config_chart.ShowChart;
 var i : integer;
 begin
-equinox2.text:=stringreplace(stringreplace(stringreplace(cshr.EquinoxChart,'J','',[]),'B','',[]),'Date','2000.0',[]);
+equinox2.text:=stringreplace(stringreplace(stringreplace(cshr.EquinoxChart,'J','',[]),'B','',[]),rsDate,'2000.0',[]);
 equinox1.itemindex:=0;
 for i:=0 to equinox1.items.count-1 do
   if equinox1.items[i]=cshr.EquinoxChart then
@@ -566,6 +624,7 @@ end;
 
 procedure Tf_config_chart.FormCreate(Sender: TObject);
 begin
+  SetLang;
   LockChange:=true;
   fw0.OnExit:=FWExit;
   fw1.OnExit:=FWExit;
@@ -641,7 +700,7 @@ case cshr.EquinoxType of
      EquinoxLabel.Visible:=true;
     end;
 2 : begin
-     cshr.EquinoxChart:='Date ';
+     cshr.EquinoxChart:=rsDate;
      cshr.DefaultJDChart:=jd2000;
      equinox1.Visible:=false;
      equinox2.Visible:=false;

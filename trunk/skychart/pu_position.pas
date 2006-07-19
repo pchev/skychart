@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_projection, u_util,
+uses  u_translation, u_constant, u_projection, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons;
 
@@ -67,6 +67,7 @@ type
     { Public declarations }
     AzNorth: boolean;
     cfgsc: Pconf_skychart;
+    procedure SetLang;
   end;
 
 var
@@ -74,6 +75,18 @@ var
 
 implementation
 
+procedure Tf_position.SetLang;
+begin
+Caption:=rsPosition;
+Button1.caption:=rsOK;
+Button2.caption:=rsCancel;
+coord1.caption:=rsAz;
+coord2.caption:=rsAlt;
+eq1.caption:=rsRA;
+eq2.caption:=rsDE;
+Label3.caption:=rsFOV;
+Label4.caption:=rsRotation;
+end;
 
 procedure Tf_position.FormShow(Sender: TObject);
 begin
@@ -81,28 +94,28 @@ ra.value:=rad2deg*cfgsc.racentre/15;
 de.value:=rad2deg*cfgsc.decentre;
 fov.value:=rad2deg*cfgsc.fov;
 rot.value:=rad2deg*cfgsc.theta;
-Equinox.Caption:='Equatorial coordinates, equinox: '+cfgsc.EquinoxName;
+Equinox.Caption:=Format(rsEquatorialCo2, [cfgsc.EquinoxName]);
 case cfgsc.projpole of
     Equat : begin
             Panel1.visible:=false;
             end;
     AltAz : begin
             Panel1.visible:=true;
-            coord.Caption:='Alt/AZ Coord. ';
-            coord1.caption:='Az';
-            coord2.caption:='Alt';
+            coord.Caption:=rsAltAZCoord;
+            coord1.caption:=rsAz;
+            coord2.caption:=rsAlt;
             end;
     Gal :   begin
             Panel1.visible:=true;
-            coord.Caption:='Galactic Coord.';
-            coord1.caption:='LII';
-            coord2.caption:='BII';
+            coord.Caption:=rsGalacticCoor2;
+            coord1.caption:=rsLII;
+            coord2.caption:=rsBII;
             end;
     Ecl :   begin
             Panel1.visible:=true;
-            coord.Caption:='Ecliptic Coord. ';
-            coord1.caption:='L';
-            coord2.caption:='B';
+            coord.Caption:=rsEclipticCoor3;
+            coord1.caption:=rsL;
+            coord2.caption:=rsB;
             end;
   else Panel1.visible:=false;
 end;
@@ -111,6 +124,7 @@ end;
 
 procedure Tf_position.FormCreate(Sender: TObject);
 begin
+SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}

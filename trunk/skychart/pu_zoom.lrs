@@ -1,5 +1,3 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('Tf_zoom','FORMDATA',[
   'TPF0'#7'Tf_zoom'#6'f_zoom'#13'ActiveControl'#7#9'TrackBar1'#11'BorderStyle'#7
   +#13'bsSizeToolWin'#7'Caption'#6#7'Set FOV'#12'ClientHeight'#3#142#0#11'Clien'
@@ -8,16 +6,16 @@ LazarusResources.Add('Tf_zoom','FORMDATA',[
   +'extHeight'#2#16#18'HorzScrollBar.Page'#3'3'#1#18'VertScrollBar.Page'#3#141#0
   +#4'Left'#3#197#1#6'Height'#3#142#0#3'Top'#3#181#0#5'Width'#3'4'#1#0#6'TLabel'
   +#6'Label1'#7'Caption'#6#2'1'''#5'Color'#7#6'clNone'#11'ParentColor'#8#4'Left'
-  +#2#16#6'Height'#2#14#3'Top'#2#8#5'Width'#2#9#0#0#6'TLabel'#6'Label2'#7'Capti'
-  +'on'#6#1'1'#5'Color'#7#6'clNone'#11'ParentColor'#8#4'Left'#2'x'#6'Height'#2
-  +#14#3'Top'#2#8#5'Width'#2#7#0#0#6'TLabel'#6'Label3'#7'Caption'#6#2'10'#5'Col'
-  +'or'#7#6'clNone'#11'ParentColor'#8#4'Left'#3#172#0#6'Height'#2#14#3'Top'#2#8
-  +#5'Width'#2#13#0#0#6'TLabel'#6'Label4'#7'Caption'#6#3'100'#5'Color'#7#6'clNo'
-  +'ne'#11'ParentColor'#8#4'Left'#3#225#0#6'Height'#2#14#3'Top'#2#8#5'Width'#2
-  +#19#0#0#6'TLabel'#6'Label5'#7'Caption'#6#3'360'#5'Color'#7#6'clNone'#11'Pare'
-  +'ntColor'#8#4'Left'#3#254#0#6'Height'#2#14#3'Top'#2#8#5'Width'#2#19#0#0#6'TL'
+  +#2#16#6'Height'#2#17#3'Top'#2#8#5'Width'#2#11#0#0#6'TLabel'#6'Label2'#7'Capt'
+  +'ion'#6#1'1'#5'Color'#7#6'clNone'#11'ParentColor'#8#4'Left'#2'x'#6'Height'#2
+  +#17#3'Top'#2#8#5'Width'#2#8#0#0#6'TLabel'#6'Label3'#7'Caption'#6#2'10'#5'Col'
+  +'or'#7#6'clNone'#11'ParentColor'#8#4'Left'#3#172#0#6'Height'#2#17#3'Top'#2#8
+  +#5'Width'#2#15#0#0#6'TLabel'#6'Label4'#7'Caption'#6#3'100'#5'Color'#7#6'clNo'
+  +'ne'#11'ParentColor'#8#4'Left'#3#225#0#6'Height'#2#17#3'Top'#2#8#5'Width'#2
+  +#22#0#0#6'TLabel'#6'Label5'#7'Caption'#6#3'360'#5'Color'#7#6'clNone'#11'Pare'
+  +'ntColor'#8#4'Left'#3#254#0#6'Height'#2#17#3'Top'#2#8#5'Width'#2#22#0#0#6'TL'
   +'abel'#6'Label6'#7'Caption'#6#3'10'''#5'Color'#7#6'clNone'#11'ParentColor'#8
-  +#4'Left'#2'F'#6'Height'#2#14#3'Top'#2#8#5'Width'#2#15#0#0#9'TTrackBar'#9'Tra'
+  +#4'Left'#2'F'#6'Height'#2#17#3'Top'#2#8#5'Width'#2#18#0#0#9'TTrackBar'#9'Tra'
   +'ckBar1'#3'Max'#3#4#1#3'Min'#3'N'#255#8'OnChange'#7#15'TrackBar1Change'#8'Pa'
   +'geSize'#2#10#8'ScalePos'#7#5'trTop'#8'TabOrder'#2#0#9'TickMarks'#7#9'tmTopL'
   +'eft'#9'TickStyle'#7#6'tsNone'#3'Max'#3#4#1#3'Min'#3'N'#255#8'OnChange'#7#15

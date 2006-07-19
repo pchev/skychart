@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_util, cu_fits, cu_database, 
+uses u_translation, u_constant, u_util, cu_fits, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
   EditBtn;
@@ -141,6 +141,7 @@ type
     cplot : ^conf_plot;
     cmain : ^conf_main;
     cdss : ^conf_dss;
+    procedure SetLang;
     constructor Create(AOwner:TComponent); override;
     property Fits: TFits read FFits write FFits;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
@@ -148,6 +149,43 @@ type
 
 implementation
 
+procedure Tf_config_pictures.SetLang;
+begin
+Caption:=rsPictures;
+Page1.caption:=rsObjects;
+Label50.caption:=rsDisplayImage;
+Label264.caption:=rsImageDirecto;
+Label265.caption:=rsThereIs;
+Label267.caption:=rsCataloguedIm;
+ScanImages.caption:=rsScanDirector;
+Label266.caption:=rsLuminosity;
+Label268.caption:=rsContrast;
+ResetLum.caption:=rsReset;
+ShowImagesBox.caption:=rsShowObjectPi;
+ProgressCat.caption:=rsOther;
+Page2.caption:=rsBackground;
+Label270.caption:=rsBackgroundPi;
+Label271.caption:=rsFITSFile;
+ShowBackImg.caption:=rsShowThisPict;
+Label1.caption:=rsLuminosity;
+Label2.caption:=rsContrast;
+Page3.caption:=rsDSSRealsky;
+Label72.caption:=rsAuxiliaryFil;
+Label73.caption:=rsDataFilesCDr;
+Label74.caption:=rsTemporaryFil;
+Label75.caption:=rsPixels;
+Label77.caption:=rsMBytes;
+RealSkyNorth.caption:=rsRealSkyNorth;
+RealSkySouth.caption:=rsRealSkySouth;
+DSS102CD.caption:=rs102CDDSS;
+usesubsample.caption:=rsUseSubsampli;
+reallist.caption:=rsSelectPlateF;
+GroupBox1.caption:=rsOnlineDSS;
+OnlineDSS.caption:=rsUseOnlineDSS;
+Button1.caption:=rsOK;
+Button2.caption:=rsApply;
+Button3.caption:=rsCancel;
+end;
 
 constructor Tf_config_pictures.Create(AOwner:TComponent);
 begin
@@ -208,6 +246,7 @@ end;
 
 procedure Tf_config_pictures.FormCreate(Sender: TObject);
 begin
+ SetLang;
   LockChange:=true;
 end;
 
@@ -301,11 +340,14 @@ Ffits.filename:=csc.BackgroundImage;
 if Ffits.header.coordinate_valid then begin
   cmain.NewBackgroundImage:=true;
   if Sender=backimg then ShowBackImg.checked:=true;
-  backimginfo.caption:=extractfilename(csc.BackgroundImage)+' RA:'+ARtoStr(Ffits.center_ra*rad2deg/15)+' DEC:'+DEtoStr(Ffits.center_de*rad2deg)+' FOV:'+DEtoStr(Ffits.img_width*rad2deg);
+  backimginfo.caption:=extractfilename(csc.BackgroundImage)+blank+rsRA+':'+
+    ARtoStr(Ffits.center_ra*rad2deg/15)+blank+''+rsDEC+''+':'+DEtoStr(
+      Ffits.center_de*
+    rad2deg)+blank+rsFOV+':'+DEtoStr(Ffits.img_width*rad2deg);
   RefreshImage;
 end
 else begin
-  backimginfo.caption:='No picture';
+  backimginfo.caption:=rsNoPicture;
   ShowBackImg.checked:=false;
   Image1.canvas.brush.color:=clBlack;
   Image1.canvas.pen.color:=clBlack;

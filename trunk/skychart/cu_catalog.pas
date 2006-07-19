@@ -30,7 +30,7 @@ uses  { libcatalog,}  // libcatalog statically linked
     gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit,
     sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, wdsunit,
     rc3unit,          // libcatalog statically linked
-    u_constant, u_util, u_projection,
+    u_translation, u_constant, u_util, u_projection,
     SysUtils, Classes, Math, Dialogs, Forms;
 
 type
@@ -133,7 +133,7 @@ type
   published
     { Published declarations }
   end;
-
+  
 Implementation
 
 constructor Tcatalog.Create(AOwner:TComponent);
@@ -593,7 +593,7 @@ begin
              EmptyRec.options.altname[2]:=true;
              EmptyRec.options.flabel[16]:='HR';
              EmptyRec.options.flabel[17]:='HD';
-             EmptyRec.options.flabel[18]:='Common Name';
+             EmptyRec.options.flabel[18]:=rsCommonName;
              Emptyrec.star.valid[vsId]:=true;
              Emptyrec.star.valid[vsMagv]:=true;
              Emptyrec.star.valid[vsB_v]:=true;
