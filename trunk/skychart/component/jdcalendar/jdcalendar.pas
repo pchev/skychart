@@ -115,6 +115,7 @@ type
     savejd:double;
     DF:TForm;
     Flabels: TDatesLabelsArray;
+    Fcaption:string;
     AnchorComponent: TControl;
     FBorderStyle: TFormBorderStyle;
     JDCalendar:TJDMonthlyCalendar;
@@ -128,6 +129,7 @@ type
   published
     property JD : double read savejd write savejd;
     property BorderStyle: TFormBorderStyle read FBorderStyle write FBorderStyle;
+    property Caption: string read Fcaption write Fcaption;
   end;
 
 { TJDDatePicker }
@@ -136,6 +138,7 @@ type
   private
     savejd:double;
     Flabels: TDatesLabelsArray;
+    Fcaption:string;
     procedure UpdDate;
   protected
     procedure DoButtonClick (Sender: TObject); override;
@@ -146,6 +149,7 @@ type
     property labels: TDatesLabelsArray read Flabels write Flabels;
   published
     property ReadOnly default true;
+    property Caption: string read Fcaption write Fcaption;
     property JD : double read savejd write SetJD;
   end;
   
@@ -268,8 +272,8 @@ Today.Caption:='Today';
 JDLabel:=TLabel.Create(self);
 JDLabel.Parent:=BottomPanel;
 JDLabel.Caption:='Julian Day =';
-JDLabel.Left:=4;
-JDLabel.Top:=8;
+JDLabel.Left:=0;
+JDLabel.Top:=6;
 
 Julian:= TFloatEdit.Create(self);
 Julian.Parent:=BottomPanel;
@@ -593,6 +597,7 @@ begin
   savejd:=Jdd(y,m,d,0);
   FBorderStyle:=bsDialog;
   AnchorComponent:=TControl(AOwner);
+  Fcaption:='JD calendar';
 end;
 
 destructor TJDCalendarDialog.Destroy;
@@ -611,7 +616,7 @@ var okButton:TBitBtn;
     pos:TPoint;
 begin
   DF:=TForm.Create(Self);
-  DF.Caption:='JD calendar';
+  DF.Caption:=Fcaption;
   DF.BorderStyle:=FBorderStyle;
   DF.FormStyle:=fsStayOnTop;
 
@@ -680,6 +685,7 @@ begin
   inherited Create(AOwner);
   DecodeDate(now,y,m,d);
   savejd:=Jdd(y,m,d,0);
+  Fcaption:='JD calendar';
   Color:=clBtnFace;
   ReadOnly:=true;
   Button.Glyph.LoadFromLazarusResource('BtnDatePicker');
@@ -700,6 +706,7 @@ begin
   CD:=TJDCalendarDialog.Create(Self);
   CD.JD:=savejd;
   if Flabels.mon<>'' then CD.labels:=Flabels;
+  CD.Caption:=Fcaption;
 //  CD.BorderStyle:=bsNone;
   try
     if CD.Execute then begin
