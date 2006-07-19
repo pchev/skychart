@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses
+uses u_translation,
   u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, StrUtils,
   Graphics,Math, FPImage, LCLType, IntfGraphics;
 
@@ -171,7 +171,8 @@ repeat
       if (keyword='END') then eoh:=true;
       result.add(header[i]);
    end;
-   if not ItsFits then begin result.Add('Not a FITS file, "SIMPLE = T" keyword missing');Closefile(f);Exit;end;
+   if not ItsFits then begin result.Add(rsNotAFITSFile); Closefile(f); Exit;
+     end;
 until eoh;
 Closefile(f);
 end;

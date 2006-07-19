@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_util,
+uses u_translation, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
   Buttons, SynEdit, IpHtml;
@@ -68,6 +68,7 @@ type
     property text: string read FHTMLText write SetHTMLText;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
     property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
+    procedure SetLang;
   end;
 
 var
@@ -75,6 +76,15 @@ var
 
 implementation
 
+procedure Tf_detail.SetLang;
+begin
+Caption:=rsDetails;
+Button1.caption:=rsClose;
+Button2.caption:=rsCenterObject;
+Button3.caption:=rsNeighbor;
+SelectAll1.caption:=rsSelectAll;
+Copy1.caption:=rsCopy;
+end;
 
 procedure Tf_detail.Button1Click(Sender: TObject);
 begin
@@ -103,6 +113,7 @@ end;
 
 procedure Tf_detail.FormCreate(Sender: TObject);
 begin
+SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}

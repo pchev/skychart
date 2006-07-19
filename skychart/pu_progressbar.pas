@@ -24,23 +24,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses
+uses u_translation,
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, Buttons, LResources;
 
 type
+
+  { Tf_progress }
+
   Tf_progress = class(TForm)
     ProgressBar1: TProgressBar;
     ProgressBar2: TProgressBar;
     Label1: TLabel;
     Label2: TLabel;
     SpeedButton2: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
   private
     { Déclarations privées }
     Fabort: TNotifyEvent;
   public
     { Déclarations publiques }
+    procedure SetLang;
     property onAbortClick: TNotifyEvent read Fabort write Fabort;
   end;
 
@@ -49,9 +54,20 @@ var
 
 implementation
 
+procedure Tf_progress.SetLang;
+begin
+Caption:=rsProgress;
+SpeedButton2.caption:=rsAbort;
+end;
+
 procedure Tf_progress.SpeedButton2Click(Sender: TObject);
 begin
 if assigned(Fabort) then Fabort(self);
+end;
+
+procedure Tf_progress.FormCreate(Sender: TObject);
+begin
+  SetLang;
 end;
 
 initialization

@@ -1,10 +1,4 @@
 object f_config_time: Tf_config_time
-  Left = 301
-  Height = 527
-  Top = 105
-  Width = 474
-  HorzScrollBar.Page = 473
-  VertScrollBar.Page = 526
   ActiveControl = CheckBox2
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
@@ -14,301 +8,323 @@ object f_config_time: Tf_config_time
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
+  HorzScrollBar.Page = 473
+  VertScrollBar.Page = 526
+  Left = 301
+  Height = 527
+  Top = 105
+  Width = 474
   object MainPanel: TPanel
-    Height = 477
-    Width = 474
     Align = alClient
     BevelOuter = bvNone
     ClientHeight = 477
     ClientWidth = 474
     ParentColor = False
     TabOrder = 0
+    Height = 477
+    Width = 474
     object Notebook1: TNotebook
-      Height = 477
-      Width = 474
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       PageIndex = 0
       ShowTabs = False
+      Height = 477
+      Width = 474
       object Page1: TPage
         Caption = 'Time'
-        ClientWidth = 470
-        ClientHeight = 473
+        ClientWidth = 466
+        ClientHeight = 469
+        Height = 469
+        Width = 466
         object Label142: TLabel
+          Caption = 'Seconds'
+          Color = clNone
+          ParentColor = False
           Left = 286
           Height = 13
           Top = 62
           Width = 50
-          Caption = 'Seconds'
-          Color = clNone
-          ParentColor = False
         end
         object CheckBox2: TCheckBox
+          Caption = 'Auto-refresh every '
+          OnClick = CheckBox2Click
+          TabOrder = 0
           Left = 40
           Height = 28
           Top = 56
           Width = 142
-          Caption = 'Auto-refresh every '
-          OnClick = CheckBox2Click
-          TabOrder = 0
         end
         object Panel7: TPanel
+          ClientHeight = 87
+          ClientWidth = 409
+          TabOrder = 1
           Left = 32
           Height = 87
           Top = 231
           Width = 409
-          ClientHeight = 87
-          ClientWidth = 409
-          TabOrder = 1
           object Label134: TLabel
+            Caption = 'Local Time   =  UT +'
+            Color = clNone
+            ParentColor = False
             Left = 8
             Height = 13
             Top = 31
             Width = 115
-            Caption = 'Local Time   =  UT +'
-            Color = clNone
-            ParentColor = False
           end
           object Label148: TLabel
+            Caption = 'Time Zone'
+            Color = clNone
+            ParentColor = False
             Left = 8
             Height = 13
             Top = 8
             Width = 99
-            Caption = 'Time Zone'
-            Color = clNone
-            ParentColor = False
           end
           object Label149: TLabel
+            Caption = '(Negative West of GreenWich)'
+            Color = clNone
+            ParentColor = False
             Left = 198
             Height = 13
             Top = 31
             Width = 210
-            Caption = '(Negative West of GreenWich)'
-            Color = clNone
-            ParentColor = False
           end
           object tz: TFloatEdit
+            MinValue = -12
+            MaxValue = 12
+            Digits = 3
+            NumericType = ntFixed
+            BorderStyle = bsSingle
+            Height = 22
+            Hint = '-12..12'
+            Left = 140
             Name = 'tz'
+            ParentColor = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            Top = 26
+            Width = 41
+            OnExit = nil
+            OnChange = tzChange
             Left = 140
             Height = 22
             Hint = '-12..12'
             Top = 26
             Width = 41
-            BorderStyle = bsSingle
-            ParentColor = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-            OnChange = tzChange
-            MinValue = -12
-            MaxValue = 12
-            Digits = 3
-            NumericType = ntFixed
           end
           object DST: TCheckBox
+            Caption = 'Daylight Saving Time in effect '
+            OnChange = DSTChange
+            TabOrder = 1
             Left = 8
             Height = 22
             Top = 55
             Width = 218
-            Caption = 'Daylight Saving Time in effect '
-            OnChange = DSTChange
-            TabOrder = 1
           end
         end
         object Panel8: TPanel
+          ClientHeight = 113
+          ClientWidth = 409
+          TabOrder = 2
           Left = 32
           Height = 113
           Top = 334
           Width = 409
-          ClientHeight = 113
-          ClientWidth = 409
-          TabOrder = 2
           object Label135: TLabel
+            Caption = 'DT - UT  : '
+            Color = clNone
+            ParentColor = False
             Left = 8
             Height = 13
             Top = 33
             Width = 68
-            Caption = 'DT - UT  : '
-            Color = clNone
-            ParentColor = False
           end
           object Tdt_Ut: TLabel
+            Caption = '0000'
+            Color = clNone
+            ParentColor = False
             Left = 85
             Height = 13
             Top = 33
             Width = 38
-            Caption = '0000'
-            Color = clNone
-            ParentColor = False
           end
           object Label136: TLabel
+            Caption = 'Seconds'
+            Color = clNone
+            ParentColor = False
             Left = 142
             Height = 13
             Top = 33
             Width = 50
-            Caption = 'Seconds'
-            Color = clNone
-            ParentColor = False
           end
           object Label150: TLabel
+            Caption = 'Dynamic Time difference with Universal Time'
+            Color = clNone
+            ParentColor = False
             Left = 8
             Height = 13
             Top = 8
             Width = 251
-            Caption = 'Dynamic Time difference with Universal Time'
-            Color = clNone
-            ParentColor = False
           end
           object CheckBox4: TCheckBox
+            Caption = 'Use another DT-UT value'
+            OnClick = CheckBox4Click
+            TabOrder = 0
             Left = 8
             Height = 22
             Top = 62
             Width = 188
-            Caption = 'Use another DT-UT value'
-            OnClick = CheckBox4Click
-            TabOrder = 0
           end
           object dt_ut: TLongEdit
+            MinValue = -99999999
+            MaxValue = 99999999
+            BorderStyle = bsSingle
+            Enabled = False
+            Height = 22
+            Hint = '-99999999..99999999'
+            Left = 246
             Name = 'dt_ut'
+            ParentColor = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            Top = 62
+            Width = 105
+            OnExit = nil
+            OnChange = dt_utChange
             Left = 246
             Height = 22
             Hint = '-99999999..99999999'
             Top = 62
             Width = 105
-            BorderStyle = bsSingle
-            Enabled = False
-            ParentColor = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 1
-            OnChange = dt_utChange
-            MinValue = -99999999
-            MaxValue = 99999999
           end
         end
         object LongEdit2: TLongEdit
+          Value = 10
+          MinValue = 10
+          MaxValue = 86400
+          BorderStyle = bsSingle
+          Height = 22
+          Hint = '10..86400'
+          Left = 230
           Name = 'LongEdit2'
+          ParentColor = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          Top = 56
+          Width = 41
+          OnExit = nil
+          OnChange = LongEdit2Change
           Left = 230
           Height = 22
           Hint = '10..86400'
           Top = 56
           Width = 41
-          BorderStyle = bsSingle
-          ParentColor = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          OnChange = LongEdit2Change
-          Value = 10
-          MinValue = 10
-          MaxValue = 86400
         end
         object Panel9: TPanel
+          ClientHeight = 137
+          ClientWidth = 409
+          TabOrder = 4
           Left = 32
           Height = 137
           Top = 87
           Width = 409
-          ClientHeight = 137
-          ClientWidth = 409
-          TabOrder = 4
           object Label137: TLabel
+            Caption = 'Time'
+            Color = clNone
+            ParentColor = False
             Left = 8
             Height = 13
             Top = 70
             Width = 27
-            Caption = 'Time'
-            Color = clNone
-            ParentColor = False
           end
           object Label139: TLabel
+            Caption = 'M'
+            Color = clNone
+            ParentColor = False
             Left = 127
             Height = 13
             Top = 52
             Width = 12
-            Caption = 'M'
-            Color = clNone
-            ParentColor = False
           end
           object Label141: TLabel
+            Caption = 'S'
+            Color = clNone
+            ParentColor = False
             Left = 195
             Height = 13
             Top = 52
             Width = 9
-            Caption = 'S'
-            Color = clNone
-            ParentColor = False
           end
           object Label138: TLabel
+            Caption = 'H'
+            Color = clNone
+            ParentColor = False
             Left = 56
             Height = 13
             Top = 52
             Width = 10
-            Caption = 'H'
-            Color = clNone
-            ParentColor = False
           end
           object Label143: TLabel
+            Caption = 'Y'
+            Color = clNone
+            ParentColor = False
             Left = 56
             Height = 13
             Top = 6
             Width = 10
-            Caption = 'Y'
-            Color = clNone
-            ParentColor = False
           end
           object Label144: TLabel
+            Caption = 'M'
+            Color = clNone
+            ParentColor = False
             Left = 127
             Height = 13
             Top = 6
             Width = 12
-            Caption = 'M'
-            Color = clNone
-            ParentColor = False
           end
           object Label145: TLabel
+            Caption = 'D'
+            Color = clNone
+            ParentColor = False
             Left = 196
             Height = 13
             Top = 6
             Width = 10
-            Caption = 'D'
-            Color = clNone
-            ParentColor = False
           end
           object Label140: TLabel
+            Caption = 'Date'
+            Color = clNone
+            ParentColor = False
             Left = 8
             Height = 13
             Top = 22
             Width = 27
-            Caption = 'Date'
-            Color = clNone
-            ParentColor = False
           end
           object Label1: TLabel
+            Caption = 'JD:'
+            Color = clNone
+            ParentColor = False
             Left = 8
             Height = 14
             Top = 109
             Width = 17
-            Caption = 'JD:'
-            Color = clNone
-            ParentColor = False
           end
           object BitBtn4: TBitBtn
-            Left = 267
-            Height = 25
-            Top = 104
-            Width = 137
             BorderSpacing.InnerBorder = 2
             Caption = 'Actual system time'
             NumGlyphs = 0
             OnClick = BitBtn4Click
             TabOrder = 0
+            Left = 267
+            Height = 25
+            Top = 104
+            Width = 137
           end
           object ADBC: TRadioGroup
-            Left = 267
-            Height = 39
-            Top = 6
-            Width = 116
             AutoFill = True
             ChildSizing.LeftRightSpacing = 6
             ChildSizing.TopBottomSpacing = 6
@@ -325,160 +341,167 @@ object f_config_time: Tf_config_time
             )
             OnClick = DateChange
             TabOrder = 1
+            Left = 267
+            Height = 39
+            Top = 6
+            Width = 116
           end
           object d_year: TSpinEdit
-            Left = 56
-            Height = 22
-            Top = 19
-            Width = 75
             MaxValue = 20000
             OnChange = DateChange
             TabOrder = 2
             Value = 2003
-          end
-          object d_month: TSpinEdit
-            Left = 127
+            Left = 56
             Height = 22
             Top = 19
-            Width = 60
+            Width = 75
+          end
+          object d_month: TSpinEdit
             MaxValue = 12
             MinValue = 1
             OnChange = DateChange
             TabOrder = 3
             Value = 1
-          end
-          object d_day: TSpinEdit
-            Left = 195
+            Left = 127
             Height = 22
             Top = 19
             Width = 60
+          end
+          object d_day: TSpinEdit
             MaxValue = 31
             MinValue = 1
             OnChange = DateChange
             TabOrder = 4
             Value = 1
+            Left = 195
+            Height = 22
+            Top = 19
+            Width = 60
           end
           object t_hour: TSpinEdit
-            Left = 56
-            Height = 22
-            Top = 65
-            Width = 60
             MaxValue = 23
             OnChange = TimeChange
             TabOrder = 5
             Value = 1
-          end
-          object t_min: TSpinEdit
-            Left = 127
+            Left = 56
             Height = 22
             Top = 65
             Width = 60
+          end
+          object t_min: TSpinEdit
             MaxValue = 59
             OnChange = TimeChange
             TabOrder = 6
             Value = 1
-          end
-          object t_sec: TSpinEdit
-            Left = 195
+            Left = 127
             Height = 22
             Top = 65
             Width = 60
+          end
+          object t_sec: TSpinEdit
             MaxValue = 59
             OnChange = TimeChange
             TabOrder = 7
             Value = 1
+            Left = 195
+            Height = 22
+            Top = 65
+            Width = 60
           end
           object JDEdit: TFloatEdit
+            Decimals = 6
+            Digits = 6
+            NumericType = ntFixed
+            BorderStyle = bsSingle
+            Height = 23
+            Left = 56
             Name = 'JDEdit'
+            ParentColor = False
+            TabOrder = 8
+            Top = 104
+            Width = 131
+            OnExit = nil
+            OnChange = JDEditChange
             Left = 56
             Height = 23
             Top = 104
             Width = 131
-            BorderStyle = bsSingle
-            ParentColor = False
-            TabOrder = 8
-            OnChange = JDEditChange
-            Decimals = 6
-            Digits = 6
-            NumericType = ntFixed
           end
           object BitBtn1: TBitBtn
-            Left = 196
-            Height = 25
-            Top = 104
-            Width = 32
             BorderSpacing.InnerBorder = 2
             NumGlyphs = 0
             OnClick = BitBtn1Click
             TabOrder = 9
+            Left = 196
+            Height = 25
+            Top = 104
+            Width = 32
           end
         end
         object CheckBox1: TCheckBox
+          Caption = 'Use system time'
+          OnClick = CheckBox1Click
+          TabOrder = 5
           Left = 40
           Height = 22
           Top = 24
           Width = 130
-          Caption = 'Use system time'
-          OnClick = CheckBox1Click
-          TabOrder = 5
         end
       end
       object Page2: TPage
         Caption = 'Simulation'
-        ClientWidth = 470
-        ClientHeight = 473
+        ClientWidth = 466
+        ClientHeight = 469
+        Height = 469
+        Width = 466
         object stepreset: TSpeedButton
-          Left = 338
-          Height = 25
-          Top = 247
-          Width = 81
           Caption = 'Reset '
           Color = clBtnFace
           Layout = blGlyphTop
           NumGlyphs = 2
           OnClick = stepresetClick
+          Left = 338
+          Height = 25
+          Top = 247
+          Width = 81
         end
         object Label178: TLabel
+          Caption = 'every  '
+          Color = clNone
+          ParentColor = False
           Left = 308
           Height = 13
           Top = 100
           Width = 41
-          Caption = 'every  '
-          Color = clNone
-          ParentColor = False
         end
         object Label179: TLabel
-          Left = 258
-          Height = 13
-          Top = 60
-          Width = 91
           Caption = 'Number of steps'
           Color = clNone
           ParentColor = False
+          Left = 220
+          Height = 13
+          Top = 60
+          Width = 91
         end
         object Label180: TLabel
+          Caption = 'Choose which objects to plot'
+          Color = clNone
+          ParentColor = False
           Left = 8
           Height = 13
           Top = 32
           Width = 163
-          Caption = 'Choose which objects to plot'
-          Color = clNone
-          ParentColor = False
         end
         object Label56: TLabel
-          Left = 255
-          Height = 13
-          Top = 23
-          Width = 189
           Caption = 'Plot the position of moving object.'
           Color = clNone
           ParentColor = False
+          Left = 220
+          Height = 13
+          Top = 23
+          Width = 189
         end
         object stepunit: TRadioGroup
-          Left = 266
-          Height = 112
-          Top = 127
-          Width = 153
           AutoFill = True
           Caption = 'Step unit'
           ChildSizing.LeftRightSpacing = 6
@@ -497,42 +520,42 @@ object f_config_time: Tf_config_time
           )
           OnClick = stepunitClick
           TabOrder = 0
+          Left = 284
+          Height = 112
+          Top = 127
+          Width = 153
         end
         object stepline: TCheckBox
+          Caption = 'Connection lines between each position '
+          OnClick = steplineClick
+          TabOrder = 1
           Left = 6
           Height = 28
           Top = 311
           Width = 261
-          Caption = 'Connection lines between each position '
-          OnClick = steplineClick
-          TabOrder = 1
         end
         object nbstep: TSpinEdit
-          Left = 362
-          Height = 22
-          Top = 55
-          Width = 75
           MinValue = 1
           OnChange = nbstepChanged
           TabOrder = 2
           Value = 1
-        end
-        object stepsize: TSpinEdit
           Left = 362
           Height = 22
-          Top = 95
+          Top = 55
           Width = 75
+        end
+        object stepsize: TSpinEdit
           MaxValue = 999999
           MinValue = 1
           OnChange = stepsizeChanged
           TabOrder = 3
           Value = 1
+          Left = 362
+          Height = 22
+          Top = 95
+          Width = 75
         end
         object SimObj: TCheckListBox
-          Left = 6
-          Height = 215
-          Top = 23
-          Width = 190
           Items.Strings = (
             'Sun'
             'Mercury '
@@ -550,74 +573,78 @@ object f_config_time: Tf_config_time
           ItemHeight = 16
           OnClick = SimObjClickCheck
           TabOrder = 4
+          Left = 6
+          Height = 215
+          Top = 23
+          Width = 190
           Data = {
             0C000000000000000000000000000000
           }
         end
         object AllSim: TButton
-          Left = 6
-          Height = 25
-          Top = 247
-          Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'All'
           OnClick = AllSimClick
           TabOrder = 5
-        end
-        object NoSim: TButton
-          Left = 121
+          Left = 6
           Height = 25
           Top = 247
           Width = 75
+        end
+        object NoSim: TButton
           BorderSpacing.InnerBorder = 4
           Caption = 'None'
           OnClick = NoSimClick
           TabOrder = 6
+          Left = 121
+          Height = 25
+          Top = 247
+          Width = 75
         end
       end
     end
   end
   object Panel1: TPanel
-    Height = 50
-    Top = 477
-    Width = 474
     Align = alBottom
     ClientHeight = 50
     ClientWidth = 474
     TabOrder = 1
+    Height = 50
+    Top = 477
+    Width = 474
     object Button1: TButton
-      Left = 176
-      Height = 25
-      Top = 12
-      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
       ModalResult = 1
       TabOrder = 0
-    end
-    object Button2: TButton
-      Left = 272
+      Left = 176
       Height = 25
       Top = 12
       Width = 75
+    end
+    object Button2: TButton
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button2Click
       TabOrder = 1
-    end
-    object Button3: TButton
-      Left = 376
+      Left = 272
       Height = 25
       Top = 12
       Width = 75
+    end
+    object Button3: TButton
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2
+      Left = 376
+      Height = 25
+      Top = 12
+      Width = 75
     end
   end
 end

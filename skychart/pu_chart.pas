@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
+uses u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
      Printers, Math, cu_telescope, lazjpeg, IntfGraphics, PostscriptCanvas,
      LCLIntf, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList, SysUtils, LResources;
@@ -258,6 +258,7 @@ type
     function cmd_SwitchGridNum:string;
     function cmd_SwitchConstL:string;
     function cmd_SwitchConstB:string;
+    procedure SetLang;
     procedure ChartActivate;
     property telescopeplugin: Ttelescope read Ftelescope write Ftelescope;
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
@@ -273,6 +274,27 @@ type
 
 implementation
 
+procedure Tf_chart.SetLang;
+begin
+About1.caption:=rsAbout;
+Centre1.caption:=rsCentre;
+Zoom1.caption:=rsZoomCentre;
+Zoom2.caption:=rsZoomCentre2;
+NewFinderCircle1.caption:=rsNewFinderCir;
+RemoveLastCircle1.caption:=rsRemoveLastCi;
+RemoveAllCircles1.caption:=rsRemoveAllCir;
+AddLabel1.caption:=rsNewLabel;
+RemoveLastLabel1.caption:=rsRemoveLastLa;
+RemoveAllLabel1.caption:=rsRemoveAllLab;
+elescope1.caption:=rsTelescope;
+Slew1.caption:=rsSlew;
+Sync1.caption:=rsSync;
+Connect1.caption:=rsConnect;
+AbortSlew1.caption:=rsAbortSlew;
+TrackOff1.caption:=rsUnlockChart;
+if sc<>nil then sc.SetLang;
+end;
+
 procedure Tf_chart.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   RefreshTimer.Enabled:=false;
@@ -286,6 +308,7 @@ procedure Tf_chart.FormCreate(Sender: TObject);
 begin
  locked:=true;
  lockkey:=false;
+ SetLang;
  Image1:= TChartDrawingControl.Create(Self);
  Image1.Parent := Panel1;
  IdentLabel.Parent:=Image1;
@@ -708,7 +731,7 @@ try
     Printer.EndDoc;
     end;
  1: begin  // to postscript canvas
-    if assigned(Fshowinfo) then Fshowinfo('Create postscript chart. Please wait...' ,caption);
+    if assigned(Fshowinfo) then Fshowinfo(rsCreatePostsc , caption);
     ps:=TPostscriptCanvas.Create;
     if PrintLandscape then begin
        ps.pagewidth:=11*printresol;
@@ -736,11 +759,12 @@ try
     fname:=slash(printpath)+'cdcprint.ps';
     ps.savetofile(fname);
     chdir(appdir);
-    if assigned(Fshowinfo) then Fshowinfo('Send chart to printer.' ,caption);
+    if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
     execnowait(printcmd1+' "'+fname+'"');
     end;
  2: begin  // to bitmap
-    if assigned(Fshowinfo) then Fshowinfo('Create raster chart at '+inttostr(printresol)+' dpi. Please wait...' ,caption);
+    if assigned(Fshowinfo) then Fshowinfo(Format(rsCreateRaster, [inttostr(
+      printresol)]) , caption);
     //prtbmp.pixelformat:=pf32bit;
     if PrintLandscape then begin
        prtbmp.width:=11*printresol;
@@ -767,7 +791,7 @@ try
     fname:=slash(printpath)+'cdcprint.bmp';
     prtbmp.savetofile(fname);
     if printcmd2<>'' then begin
-       if assigned(Fshowinfo) then Fshowinfo('Open the bitmap.' ,caption);
+       if assigned(Fshowinfo) then Fshowinfo(rsOpenTheBitma , caption);
        execnowait(printcmd2+' "'+fname+'"','',false);
     end;
  end;
@@ -983,13 +1007,13 @@ begin
  end else begin
     TrackOff1.visible:=false;
     if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6) then begin
-      TrackOn1.Caption:='Lock on '+sc.cfgsc.TrackName;
+      TrackOn1.Caption:=Format(rsLockOn, [sc.cfgsc.TrackName]);
       TrackOn1.visible:=true;
     end
     else TrackOn1.visible:=false;
  end;
  if sc.cfgsc.FindName>'' then begin
-   About1.Caption:='About '+sc.cfgsc.FindName;
+   About1.Caption:=Format(rsAbout2, [sc.cfgsc.FindName]);
    About1.visible:=true;
    About2.visible:=true;
  end
@@ -1083,20 +1107,20 @@ if showdist then begin
       dy:=rad2deg*(dec-lastdec);
       txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
       if assigned(Fshowcoord) then Fshowcoord(txt);
-      buf:=sc.catalog.cfgshr.llabel[104]+' "'+lastname+'" '+sc.catalog.cfgshr.llabel[105]+' "'+sc.cfgsc.FindName+'"'+tab+sc.catalog.cfgshr.llabel[79]+': '+txt;
-      txt:=stringreplace(buf,crlf,tab+sc.catalog.cfgshr.llabel[106]+':',[]);
+      buf:=rsFrom+' "'+lastname+'" '+rsTo+' "'+sc.cfgsc.FindName+'"'+tab+rsSeparation+': '+txt;
+      txt:=stringreplace(buf,crlf,tab+rsOffset+':',[]);
       if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
       if sc.cfgsc.ManualTelescope then begin
         case sc.cfgsc.ManualTelescopeType of
          0 : begin
-             txt:=txt+tab+'RA turns:';
+             txt:=Format(rsRATurns2, [txt+tab]);
              txt:=txt+blank+formatfloat(f2,abs(dx*sc.cfgsc.TelescopeTurnsX))+blank;
-             if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=txt+'CW'
-                else txt:=txt+'CCW';
-             txt:=txt+tab+'DEC turns:';
+             if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=Format(rsCW, [txt])
+                else txt:=Format(rsCCW, [txt]);
+             txt:=Format(rsDECTurns2, [txt+tab]);
              txt:=txt+blank+formatfloat(f2,abs(dy*sc.cfgsc.TelescopeTurnsY))+blank;
-             if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=txt+'CW'
-                else txt:=txt+'CCW';
+             if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=Format(rsCW, [txt])
+                else txt:=Format(rsCCW, [txt]);
              end;
          1 : begin
              Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
@@ -1104,14 +1128,14 @@ if showdist then begin
              dx:=rmod((rad2deg*(a-a1))+360,360);
              if dx>180 then dx:=dx-360;
              dy:=rad2deg*(h-h1);
-             txt:=txt+tab+'Az turns:';
+             txt:=Format(rsAzTurns, [txt+tab]);
              txt:=txt+blank+formatfloat(f2,abs(dx*sc.cfgsc.TelescopeTurnsX))+blank;
-             if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=txt+'CW'
-                else txt:=txt+'CCW';
-             txt:=txt+tab+'Alt turns:';
+             if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=Format(rsCW, [txt])
+                else txt:=Format(rsCCW, [txt]);
+             txt:=Format(rsAltTurns, [txt+tab]);
              txt:=txt+blank+formatfloat(f2,abs(dy*sc.cfgsc.TelescopeTurnsY))+blank;
-             if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=txt+'CW'
-                else txt:=txt+'CCW';
+             if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=Format(rsCW, [txt])
+                else txt:=Format(rsCCW, [txt]);
              end;
           end;
       end;
@@ -1233,22 +1257,22 @@ begin
    sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
    case sc.cfgsc.projpole of
    AltAz: begin
-          txt:='Az:'+deptostr(rad2deg*a)+blank+deptostr(rad2deg*h)+crlf
-              +'Ra:'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
+          txt:=rsAz+':'+deptostr(rad2deg*a)+blank+deptostr(rad2deg*h)+crlf
+              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
           end;
    Equat: begin
           ra:=rmod(ra+pi2,pi2);
-          txt:='Ra:'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
+          txt:=rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
           end;
    Gal:   begin
           l:=rmod(l+pi2,pi2);
-          txt:='L:'+deptostr(rad2deg*l)+blank+deptostr(rad2deg*b)+crlf
-              +'Ra:'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
+          txt:=rsL+':'+deptostr(rad2deg*l)+blank+deptostr(rad2deg*b)+crlf
+              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
           end;
    Ecl:   begin
           le:=rmod(le+pi2,pi2);
-          txt:='L:'+deptostr(rad2deg*le)+blank+deptostr(rad2deg*be)+crlf
-              +'Ra:'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
+          txt:=rsL+':'+deptostr(rad2deg*le)+blank+deptostr(rad2deg*be)+crlf
+              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
           end;
    end;
    if assigned(Fshowcoord) then Fshowcoord(txt);
@@ -1497,7 +1521,7 @@ repeat
   i:=pos(':',buf2);
   if i>0 then begin
      buf2:=stringreplace(buf2,':',': ',[]);
-     if copy(buf2,1,5)='desc:' then buf2:=stringreplace(buf2,';',html_br+html_sp+html_sp+html_sp,[rfReplaceAll]);
+     if copy(buf2, 1, 5)=rsDesc then buf2:=stringreplace(buf2, ';', html_br+html_sp+html_sp+html_sp, [rfReplaceAll]);
      txt:=txt+bold(LongLabel(buf2));
   end
   else
@@ -1506,51 +1530,51 @@ repeat
 until buf='';
 // coordinates
 txt:=txt+html_ffx+html_br;
-txt:=txt+html_b+sc.cfgsc.EquinoxName+htms_b+'RA: '+arptostr(rad2deg*sc.cfgsc.FindRA/15)+'   DE:'+deptostr(rad2deg*sc.cfgsc.FindDec)+html_br;
+txt:=txt+html_b+sc.cfgsc.EquinoxName+blank+htms_b+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec)+html_br;
 if (sc.cfgsc.EquinoxName<>'J2000') then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-   txt:=txt+html_b+'J2000'+htms_b+' RA: '+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+'J2000'+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra/15)+'   '+rsDE+':'+deptostr(rad2deg*dec)+html_br;
 end;
-if (sc.cfgsc.EquinoxName<>'Date ') then begin
+if (sc.cfgsc.EquinoxName<>rsDate) then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
-   txt:=txt+html_b+'Date '+htms_b+'RA: '+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+rsDate+blank+htms_b+rsRA+': '+arptostr(rad2deg*ra/15)+'   '+rsDE+':'+deptostr(rad2deg*dec)+html_br;
 end;
-if (sc.cfgsc.EquinoxName='Date ')and(sc.catalog.cfgshr.EquinoxChart<>'J2000')and(sc.cfgsc.EquinoxName<>sc.catalog.cfgshr.EquinoxChart) then begin
+if (sc.cfgsc.EquinoxName=rsDate)and(sc.catalog.cfgshr.EquinoxChart<>'J2000')and(sc.cfgsc.EquinoxName<>sc.catalog.cfgshr.EquinoxChart) then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,sc.catalog.cfgshr.DefaultJDchart,ra,dec);
-   txt:=txt+html_b+sc.catalog.cfgshr.EquinoxChart+htms_b+' RA: '+arptostr(rad2deg*ra/15)+'   DE:'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+sc.catalog.cfgshr.EquinoxChart+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra/15)+'   '+rsDE+':'+deptostr(rad2deg*dec)+html_br;
 end;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 Eq2Ecl(ra,dec,sc.cfgsc.e,a,h) ;
-txt:=txt+html_b+'Ecliptic '+htms_b+' L: '+detostr(rad2deg*a)+'   B:'+detostr(rad2deg*h)+html_br;
+txt:=txt+html_b+rsEcliptic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,jd2000,ra,dec);
 Eq2Gal(ra,dec,a,h,sc.cfgsc) ;
-txt:=txt+html_b+'Galactic '+htms_b+' L: '+detostr(rad2deg*a)+'   B:'+detostr(rad2deg*h)+html_br;
+txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
 txt:=txt+htms_f+html_br;
 // local position
-txt:=txt+html_b+sc.catalog.cfgshr.llabel[103]+':'+htms_b+html_br;
-txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( UT + '+ArmtoStr(sc.cfgsc.TimeZone)+' )'+html_br;
+txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
+txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( '+rsUT+' + '+ArmtoStr(sc.cfgsc.TimeZone)+' )'+html_br;
 //txt:=txt+html_pre;
 djd(sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24,y,m,d,h);
-txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[102]+blank15,1,17)+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h)+html_br;
+txt:=txt+html_b+copy(rsUniversalTim+blank15,1,17)+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
 if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
-txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[99]+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*sc.cfgsc.CurSt/15+24,24))+html_br;
-txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[100]+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24))+html_br;
-txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[91]+blank15,1,17)+':'+htms_b+demtostr(rad2deg*a)+html_br;
-txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[92]+blank15,1,17)+':'+htms_b+demtostr(rad2deg*h)+html_br;
+txt:=txt+html_b+copy(rsSideralTime+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*sc.cfgsc.CurSt/15+24,24))+html_br;
+txt:=txt+html_b+copy(rsHourAngle+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24))+html_br;
+txt:=txt+html_b+copy(rsAzimuth+blank15,1,17)+':'+htms_b+demtostr(rad2deg*a)+html_br;
+txt:=txt+html_b+copy(rsAltitude+blank15,1,17)+':'+htms_b+demtostr(rad2deg*h)+html_br;
 // rise/set time
 if (otype='P') then begin // planet
    sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,sc.cfgsc.jd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
@@ -1570,16 +1594,16 @@ else begin // fixed object
 end;
 case i of
 0 : begin
-    txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[93]+blank15,1,17)+':'+htms_b+thr+blank+sc.catalog.cfgshr.llabel[91]+tAzr+html_br;
-    txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[94]+blank15,1,17)+':'+htms_b+tht+html_br;
-    txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[95]+blank15,1,17)+':'+htms_b+ths+blank+sc.catalog.cfgshr.llabel[91]+tAzs+html_br;
+    txt:=txt+html_b+copy(rsRise+blank15,1,17)+':'+htms_b+thr+blank+rsAzimuth+tAzr+html_br;
+    txt:=txt+html_b+copy(rsCulmination+blank15,1,17)+':'+htms_b+tht+html_br;
+    txt:=txt+html_b+copy(rsSet+blank15,1,17)+':'+htms_b+ths+blank+rsAzimuth+tAzs+html_br;
     end;
 1 : begin
-    txt:=txt+sc.catalog.cfgshr.llabel[96]+html_br;
-    txt:=txt+html_b+copy(sc.catalog.cfgshr.llabel[94]+blank15,1,17)+':'+htms_b+tht+html_br;
+    txt:=txt+rsCircumpolar+html_br;
+    txt:=txt+html_b+copy(rsCulmination+blank15,1,17)+':'+htms_b+tht+html_br;
     end;
 else begin
-    txt:=txt+sc.catalog.cfgshr.llabel[97]+html_br;
+    txt:=txt+rsInvisibleAtT+html_br;
     end;
 end;
 //txt:=txt+htms_pre;
@@ -1605,29 +1629,29 @@ end;
 
 function Tf_chart.LongLabelObj(txt:string):string;
 begin
-if txt='OC' then txt:=sc.catalog.cfgshr.llabel[45]
-else if txt='Gb' then txt:=sc.catalog.cfgshr.llabel[46]
-else if txt='Gx' then txt:=sc.catalog.cfgshr.llabel[47]
-else if txt='Nb' then txt:=sc.catalog.cfgshr.llabel[48]
-else if txt='Pl' then txt:=sc.catalog.cfgshr.llabel[49]
-else if txt='C+N' then txt:=sc.catalog.cfgshr.llabel[50]
-else if txt='*' then txt:=sc.catalog.cfgshr.llabel[51]
-else if txt='**' then txt:=sc.catalog.cfgshr.llabel[52]
-else if txt='***' then txt:=sc.catalog.cfgshr.llabel[53]
-else if txt='D*' then txt:=sc.catalog.cfgshr.llabel[54]
-else if txt='V*' then txt:=sc.catalog.cfgshr.llabel[55]
-else if txt='Ast' then txt:=sc.catalog.cfgshr.llabel[56]
-else if txt='Kt' then txt:=sc.catalog.cfgshr.llabel[57]
-else if txt='?' then txt:=sc.catalog.cfgshr.llabel[58]
-else if txt='' then txt:=sc.catalog.cfgshr.llabel[59]
-else if txt='-' then txt:=sc.catalog.cfgshr.llabel[60]
-else if txt='PD' then txt:=sc.catalog.cfgshr.llabel[61]
-else if txt='P' then txt:=sc.catalog.cfgshr.llabel[62]
-else if txt='Ps' then txt:=sc.catalog.cfgshr.llabel[101]
-else if txt='As' then txt:=sc.catalog.cfgshr.llabel[63]
-else if txt='Cm' then txt:=sc.catalog.cfgshr.llabel[64]
-else if txt='C1' then txt:=sc.catalog.cfgshr.llabel[65]
-else if txt='C2' then txt:=sc.catalog.cfgshr.llabel[66];
+if txt='OC' then txt:=rsOpenCluster
+else if txt='Gb' then txt:=rsGlobularClus
+else if txt='Gx' then txt:=rsGalaxy
+else if txt='Nb' then txt:=rsNebula
+else if txt='Pl' then txt:=rsPlanetaryNeb
+else if txt='C+N' then txt:=rsClusterAndNe
+else if txt='*' then txt:=rsStar
+else if txt='**' then txt:=rsDoubleStar
+else if txt='***' then txt:=rsTripleStar
+else if txt='D*' then txt:=rsDoubleStar
+else if txt='V*' then txt:=rsVariableStar
+else if txt='Ast' then txt:=rsAsterism
+else if txt='Kt' then txt:=rsKnot
+else if txt='?' then txt:=rsUnknowObject
+else if txt='' then txt:=rsUnknowObject
+else if txt='-' then txt:=rsPlateDefect
+else if txt='PD' then txt:=rsPlateDefect
+else if txt='P' then txt:=rsPlanet
+else if txt='Ps' then txt:=rsPlanetarySat
+else if txt='As' then txt:=rsAsteroid
+else if txt='Cm' then txt:=rsComet
+else if txt='C1' then txt:=rsExternalCata
+else if txt='C2' then txt:=rsExternalCata;
 result:=txt;
 end;
 
@@ -1640,77 +1664,76 @@ i:=pos(':',txt);
 if i>0 then begin
   key:=uppercase(trim(copy(txt,1,i-1)));
   value:=copy(txt,i+1,9999);
-  if key='MB' then result:=sc.catalog.cfgshr.llabel[1]+d+value
-  else if key='MV' then result:=sc.catalog.cfgshr.llabel[2]+d+value
-  else if key='MR' then result:=sc.catalog.cfgshr.llabel[3]+d+value
-  else if key='M' then result:=sc.catalog.cfgshr.llabel[4]+d+value
-  else if key='BT' then result:=sc.catalog.cfgshr.llabel[5]+d+value
-  else if key='VT' then result:=sc.catalog.cfgshr.llabel[6]+d+value
-  else if key='B-V' then result:=sc.catalog.cfgshr.llabel[7]+d+value
-  else if key='SP' then result:=sc.catalog.cfgshr.llabel[8]+d+value
-  else if key='PM' then result:=sc.catalog.cfgshr.llabel[9]+d+value
-  else if key='CLASS' then result:=sc.catalog.cfgshr.llabel[10]+d+value
-  else if key='N' then result:=sc.catalog.cfgshr.llabel[11]+d+value
-  else if key='T' then result:=sc.catalog.cfgshr.llabel[12]+d+value
-  else if key='P' then result:=sc.catalog.cfgshr.llabel[13]+d+value
-  else if key='BAND' then result:=sc.catalog.cfgshr.llabel[14]+d+value
-  else if key='PLATE' then result:=sc.catalog.cfgshr.llabel[15]+d+value
-  else if key='MULT' then result:=sc.catalog.cfgshr.llabel[16]+d+value
-  else if key='FIELD' then result:=sc.catalog.cfgshr.llabel[17]+d+value
-  else if key='Q' then result:=sc.catalog.cfgshr.llabel[18]+d+value
-  else if key='S' then result:=sc.catalog.cfgshr.llabel[19]+d+value
-  else if key='DIM' then result:=sc.catalog.cfgshr.llabel[20]+d+value
-  else if key='CONST' then result:=sc.catalog.cfgshr.llabel[21]+d+longlabelconst(value)
-  else if key='SBR' then result:=sc.catalog.cfgshr.llabel[22]+d+value
-  else if key='DESC' then result:=sc.catalog.cfgshr.llabel[23]+d+value
-  else if key='RV' then result:=sc.catalog.cfgshr.llabel[24]+d+value
-  else if key='SURFACE' then result:=sc.catalog.cfgshr.llabel[25]+d+value
-  else if key='COLOR' then result:=sc.catalog.cfgshr.llabel[26]+d+value
-  else if key='BRIGHT' then result:=sc.catalog.cfgshr.llabel[27]+d+value
-  else if key='TR' then result:=sc.catalog.cfgshr.llabel[28]+d+value
-  else if key='DIST' then result:=sc.catalog.cfgshr.llabel[29]+d+value
-  else if key='M*' then result:=sc.catalog.cfgshr.llabel[30]+d+value
-  else if key='N*' then result:=sc.catalog.cfgshr.llabel[31]+d+value
-  else if key='AGE' then result:=sc.catalog.cfgshr.llabel[32]+d+value
-  else if key='RT' then result:=sc.catalog.cfgshr.llabel[33]+d+value
-  else if key='RH' then result:=sc.catalog.cfgshr.llabel[34]+d+value
-  else if key='RC' then result:=sc.catalog.cfgshr.llabel[35]+d+value
-  else if key='MHB' then result:=sc.catalog.cfgshr.llabel[36]+d+value
-  else if key='C*B' then result:=sc.catalog.cfgshr.llabel[37]+d+value
-  else if key='C*V' then result:=sc.catalog.cfgshr.llabel[38]+d+value
-  else if key='DIAM' then result:=sc.catalog.cfgshr.llabel[39]+d+value
-  else if key='ILLUM' then result:=sc.catalog.cfgshr.llabel[40]+d+value
-  else if key='PHASE' then result:=sc.catalog.cfgshr.llabel[41]+d+value
-  else if key='TL' then result:=sc.catalog.cfgshr.llabel[42]+d+value
-  else if key='EL' then result:=sc.catalog.cfgshr.llabel[43]+d+value
-  else if key='RSOL' then result:=sc.catalog.cfgshr.llabel[44]+d+value
-  else if key='D1' then result:=sc.catalog.cfgshr.llabel[23]+' 1'+d+value
-  else if key='D2' then result:=sc.catalog.cfgshr.llabel[23]+' 2'+d+value
-  else if key='D3' then result:=sc.catalog.cfgshr.llabel[23]+' 3'+d+value
-  else if key='FL' then result:=sc.catalog.cfgshr.llabel[67]+d+value
-  else if key='BA' then result:=sc.catalog.cfgshr.llabel[68]+d+LongLabelGreek(value)
-  else if key='PX' then result:=sc.catalog.cfgshr.llabel[69]+d+value
-  else if key='PA' then result:=sc.catalog.cfgshr.llabel[70]+d+value
-  else if key='PMRA' then result:=sc.catalog.cfgshr.llabel[71]+d+value
-  else if key='PMDE' then result:=sc.catalog.cfgshr.llabel[72]+d+value
-  else if key='MMAX' then result:=sc.catalog.cfgshr.llabel[73]+d+value
-  else if key='MMIN' then result:=sc.catalog.cfgshr.llabel[74]+d+value
-  else if key='MEPOCH' then result:=sc.catalog.cfgshr.llabel[75]+d+value
-  else if key='RISE' then result:=sc.catalog.cfgshr.llabel[76]+d+value
-  else if key='M1' then result:=sc.catalog.cfgshr.llabel[77]+d+value
-  else if key='M2' then result:=sc.catalog.cfgshr.llabel[78]+d+value
-  else if key='SEP' then result:=sc.catalog.cfgshr.llabel[79]+d+value
-  else if key='DATE' then result:=sc.catalog.cfgshr.llabel[80]+d+value
-  else if sc.catalog.cfgshr.llabel[85]='?' then result:=txt
-  else if key='POLEINCL' then result:=sc.catalog.cfgshr.llabel[85]+d+value
-  else if key='SUNINCL' then result:=sc.catalog.cfgshr.llabel[86]+d+value
-  else if key='CM' then result:=sc.catalog.cfgshr.llabel[87]+d+value
-  else if key='CMI' then result:=sc.catalog.cfgshr.llabel[87]+' I'+d+value
-  else if key='CMII' then result:=sc.catalog.cfgshr.llabel[87]+' II'+d+value
-  else if key='CMIII' then result:=sc.catalog.cfgshr.llabel[87]+' III'+d+value
-  else if key='GRSTR' then result:=sc.catalog.cfgshr.llabel[88]+d+value
-  else if key='LLAT' then result:=sc.catalog.cfgshr.llabel[89]+d+value
-  else if key='LLON' then result:=sc.catalog.cfgshr.llabel[90]+d+value
+  if key='MB' then result:=rsBlueMagnitud+d+value
+  else if key='MV' then result:=rsVisualMagnit+d+value
+  else if key='MR' then result:=rsRedMagnitude+d+value
+  else if key='M' then result:=rsMagnitude+d+value
+  else if key='BT' then result:=rsMagnitudeTyc+d+value
+  else if key='VT' then result:=rsMagnitudeTyc2+d+value
+  else if key='B-V' then result:=rsColorIndex+d+value
+  else if key='SP' then result:=rsSpectralClas+d+value
+  else if key='PM' then result:=rsAnnualProper+d+value
+  else if key='CLASS' then result:=rsClass+d+value
+  else if key='N' then result:=rsNote+d+value
+  else if key='T' then result:=rsTypeOfVariab+d+value
+  else if key='P' then result:=rsPeriod+d+value
+  else if key='BAND' then result:=rsMagnitudeBan+d+value
+  else if key='PLATE' then result:=rsPhotographic+d+value
+  else if key='MULT' then result:=rsMultipleFlag+d+value
+  else if key='FIELD' then result:=rsFieldNumber+d+value
+  else if key='Q' then result:=rsMagnitudeErr+d+value
+  else if key='S' then result:=rsCorrelated+d+value
+  else if key='DIM' then result:=rsDimension+d+value
+  else if key='CONST' then result:=rsConstellatio+d+longlabelconst(value)
+  else if key='SBR' then result:=rsSurfaceBrigh+d+value
+  else if key='DESC' then result:=rsDescription+d+value
+  else if key='RV' then result:=rsRadialVeloci+d+value
+  else if key='SURFACE' then result:=rsSurface+d+value
+  else if key='COLOR' then result:=rsColor+d+value
+  else if key='BRIGHT' then result:=rsBrightness+d+value
+  else if key='TR' then result:=rsTrumplerClas+d+value
+  else if key='DIST' then result:=rsDistance+d+value
+  else if key='M*' then result:=rsBrightestSta+d+value
+  else if key='N*' then result:=rsNumberOfStar+d+value
+  else if key='AGE' then result:=rsAge+d+value
+  else if key='RT' then result:=rsTotalRadius+d+value
+  else if key='RH' then result:=rsHalfMassRadi+d+value
+  else if key='RC' then result:=rsCoreRadius+d+value
+  else if key='MHB' then result:=rsHbetaMagnitu+d+value
+  else if key='C*B' then result:=rsCentralStarB+d+value
+  else if key='C*V' then result:=rsCentralStarV+d+value
+  else if key='DIAM' then result:=rsDiameter+d+value
+  else if key='ILLUM' then result:=rsIlluminatedF+d+value
+  else if key='PHASE' then result:=rsPhase+d+value
+  else if key='TL' then result:=rsEstimatedTai+d+value
+  else if key='EL' then result:=rsSolarElongat+d+value
+  else if key='RSOL' then result:=rsSolarDistanc+d+value
+  else if key='D1' then result:=rsDescription+' 1'+d+value
+  else if key='D2' then result:=rsDescription+' 2'+d+value
+  else if key='D3' then result:=rsDescription+' 3'+d+value
+  else if key='FL' then result:=rsFlamsteedNum+d+value
+  else if key='BA' then result:=rsBayerLetter+d+LongLabelGreek(value)
+  else if key='PX' then result:=rsParallax+d+value
+  else if key='PA' then result:=rsPositionAngl+d+value
+  else if key='PMRA' then result:=rsProperMotion+d+value
+  else if key='PMDE' then result:=rsProperMotion2+d+value
+  else if key='MMAX' then result:=rsMagnitudeAtM+d+value
+  else if key='MMIN' then result:=rsMagnitudeAtM2+d+value
+  else if key='MEPOCH' then result:=rsEpochOfMaxim+d+value
+  else if key='RISE' then result:=rsRiseTime+d+value
+  else if key='M1' then result:=rsComponent1Ma+d+value
+  else if key='M2' then result:=rsComponent2Ma+d+value
+  else if key='SEP' then result:=rsSeparation+d+value
+  else if key='DATE' then result:=rsDate+d+value
+  else if key='POLEINCL' then result:=rsPoleInclinat+d+value
+  else if key='SUNINCL' then result:=rsSunInclinati+d+value
+  else if key='CM' then result:=rsCentralMerid+d+value
+  else if key='CMI' then result:=rsCentralMerid+' I'+d+value
+  else if key='CMII' then result:=rsCentralMerid+' II'+d+value
+  else if key='CMIII' then result:=rsCentralMerid+' III'+d+value
+  else if key='GRSTR' then result:=rsGRSTransit+d+value
+  else if key='LLAT' then result:=rsLibrationInL+d+value
+  else if key='LLON' then result:=rsLibrationInL2+d+value
   else result:=txt;
 end
 else result:=txt;
@@ -2552,7 +2575,7 @@ if (indi1=nil)or(indi1.Terminated) then begin
    indi1.TargetPort:=sc.cfgsc.IndiServerPort;
    indi1.Timeout := 500;
    indi1.TelescopePort:=sc.cfgsc.IndiPort;
-   if sc.cfgsc.IndiDevice='Other' then indi1.Device:=''
+   if sc.cfgsc.IndiDevice=rsOther then indi1.Device:=''
       else indi1.Device:=sc.cfgsc.IndiDevice;
    indi1.IndiServer:=sc.cfgsc.IndiServerCmd;
    indi1.IndiDriver:=sc.cfgsc.IndiDriver;
@@ -2590,7 +2613,7 @@ indi1.Dec:=formatfloat(f6,dec*rad2deg);
 Indi1.Slew;
 end;
 end
-else if assigned(Fshowinfo) then Fshowinfo('Telescope not connected');
+else if assigned(Fshowinfo) then Fshowinfo(rsTelescopeNot);
 end;
 
 procedure Tf_chart.AbortSlew1Click(Sender: TObject);
@@ -2612,7 +2635,8 @@ procedure Tf_chart.Sync1Click(Sender: TObject);
 var ra,dec:double;
 begin
 if Connect1.checked and
-   (mrYes=MessageDlg('Please confirm that the telescope is centered to '+sc.cfgsc.FindName, mtConfirmation, [mbYes,mbNo], 0))
+   (mrYes=MessageDlg(Format(rsPleaseConfir, [sc.cfgsc.FindName]),
+     mtConfirmation, [mbYes, mbNo], 0))
 then begin
 {$ifdef win32}
 if not sc.cfgsc.IndiTelescope then begin
@@ -2629,7 +2653,7 @@ begin
   Indi1.Sync;
 end;
 end
-else if assigned(Fshowinfo) then Fshowinfo('Telescope not connected');
+else if assigned(Fshowinfo) then Fshowinfo(rsTelescopeNot);
 end;
 
 procedure Tf_chart.TelescopeCoordChange(Sender: TObject);
@@ -2665,7 +2689,7 @@ end;
 
 procedure Tf_chart.TelescopeGetMessage(Sender : TObject; const msg : string);
 begin
-if assigned(Fshowinfo) then Fshowinfo('Telescope: '+msg);
+if assigned(Fshowinfo) then Fshowinfo(Format(rsTelescope2, [msg]));
 end;
 
 procedure Tf_chart.NewFinderCircle1Click(Sender: TObject);

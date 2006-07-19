@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_util, u_constant,
+uses u_translation, u_util, u_constant,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ComCtrls, LResources, Math;
 
@@ -56,6 +56,7 @@ type
   public
     { Déclarations publiques }
     fov,logfov : double;
+    procedure SetLang;
   end;
 
 var
@@ -63,6 +64,12 @@ var
 
 implementation
 
+procedure Tf_zoom.SetLang;
+begin
+Caption:=rsSetFOV;
+BitBtn1.caption:=rsOK;
+BitBtn2.caption:=rsCancel;
+end;
 
 procedure Tf_zoom.TrackBar1Change(Sender: TObject);
 begin
@@ -75,6 +82,7 @@ end;
 
 procedure Tf_zoom.FormCreate(Sender: TObject);
 begin
+SetLang;
   Fnightvision:=false;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);

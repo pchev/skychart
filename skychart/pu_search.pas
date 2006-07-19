@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util, cu_database,
+uses u_translation, u_constant, u_util, cu_database,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Buttons, LResources;
 
@@ -132,6 +132,7 @@ type
     ra,de: double;
     SearchKind : integer;
     cfgshr: conf_shared;
+    procedure SetLang;
     function SearchNebName(Num:string; var ar1,de1: double): boolean;
   end;
 
@@ -140,6 +141,31 @@ var
 
 implementation
 
+procedure Tf_search.SetLang;
+begin
+Caption:=rsSearch;
+Button3.caption:=rsFilter;
+Button4.caption:=rsFilter;
+Label2.caption:=rsPlanet;
+Label3.caption:=rsNebula;
+Label4.caption:=rsStar;
+Label5.caption:=rsConstellatio;
+Label1.caption:=rsObjectName;
+RadioGroup1.caption:=rsSearchFor;
+RadioGroup1.Items[0]:=rsNebula;
+RadioGroup1.Items[1]:=rsNebulaCommon;
+RadioGroup1.Items[2]:=rsStar;
+RadioGroup1.Items[3]:=rsStarCommonNa;
+RadioGroup1.Items[4]:=rsVariableStar;
+RadioGroup1.Items[5]:=rsDoubleStar;
+RadioGroup1.Items[6]:=rsComet;
+RadioGroup1.Items[7]:=rsAsteroid;
+RadioGroup1.Items[8]:=rsPlanet;
+RadioGroup1.Items[9]:=rsConstellatio;
+RadioGroup1.Items[10]:=rsOtherLinesCa;
+Button1.caption:=rsFind;
+Button2.caption:=rsCancel;
+end;
 
 procedure Tf_search.FormShow(Sender: TObject);
 begin
@@ -169,6 +195,7 @@ end;
 
 procedure Tf_search.FormCreate(Sender: TObject);
 begin
+SetLang;
   Fnightvision:=false;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
@@ -241,7 +268,7 @@ case searchkind of
   9 : num:=ConstBox.Text;
   else num:=Id.text;
 end;
-if trim(num)='' then ShowMessage('Please enter an object identifier.')
+if trim(num)='' then ShowMessage(rsPleaseEnterA)
                 else ModalResult := mrOk;
 end;
 

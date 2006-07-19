@@ -1,0 +1,3999 @@
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2006-07-09 23:34+0100\n"
+"Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: u_translation:rsnotfoundinan
+msgid "%s  Not found in any installed catalog index."
+msgstr ""
+
+#: u_translation:rsdifferenttha
+msgid "%s (different than configured port, maybe busy or other error.)"
+msgstr ""
+
+#: u_translation:rsconnectedfro
+msgid "%s connected from %s, using chart %s, connect time:%s"
+msgstr ""
+
+#: u_translation:rsnotconnected
+msgid "%s not connected."
+msgstr ""
+
+#: u_translation:rsnotfound
+msgid "%s not found"
+msgstr ""
+
+#: u_translation:rsnotfoundmayb
+msgid "%s Not found!%sMaybe the catalog is not installed, or wrong path in catalog setting."
+msgstr ""
+
+#: u_translation:rsalltablesstr
+msgid "%sAll tables structure exists."
+msgstr ""
+
+#: u_translation:rsalsobesureth
+msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
+msgstr ""
+
+#: u_translation:rsaltturns
+msgid "%sAlt turns:"
+msgstr ""
+
+#: u_translation:rsazturns
+msgid "%sAz turns:"
+msgstr ""
+
+#: u_translation:rscannotopenda
+msgid "%sCannot open database %s! %s"
+msgstr ""
+
+#: u_translation:rsccw
+msgid "%sCCW"
+msgstr ""
+
+#: u_translation:rscw
+msgid "%sCW"
+msgstr ""
+
+#: u_translation:rsdatabaseopen
+msgid "%sDatabase %s opened.%s"
+msgstr ""
+
+#: u_translation:rsdecturns2
+msgid "%sDEC turns:"
+msgstr ""
+
+#: u_translation:rserrorcreatin
+msgid "%sError creating table %s"
+msgstr ""
+
+#: u_translation:rspleasechecky
+msgid "%sPlease check your Internet connection and the URL definition%s"
+msgstr ""
+
+#: u_translation:rsraturns2
+msgid "%sRA turns:"
+msgstr ""
+
+#: u_translation:rstabledonotex
+msgid "%sTable %s do not exist! %sPlease correct the error and retry."
+msgstr ""
+
+#: u_translation:rstableexist
+msgid "%sTable exist %s"
+msgstr ""
+
+#: u_translation:rsnegativewest
+msgid "(Negative West of GreenWich)"
+msgstr ""
+
+#: u_translation:rsusefultorepr
+msgid "(useful to represent a flux)"
+msgstr ""
+
+#: u_translation:rsprev
+msgid "<<   Prev"
+msgstr ""
+
+#: u_translation:rs102cddss
+msgid "102 CD DSS"
+msgstr ""
+
+#: u_translation:rs184recommend
+msgid "184 (recommended up to 1'000'000 objects)"
+msgstr ""
+
+#: u_translation:rs50recommende
+msgid "50   (recommended up to 100'000 objects)"
+msgstr ""
+
+#: u_translation:rs732recommend
+msgid "732 (recommended up to 5'000'000 objects)"
+msgstr ""
+
+#: u_translation:rs9537largerda
+msgid "9537 (larger dataset)"
+msgstr ""
+
+#: u_translation:rsabbreviation
+msgid "Abbreviation"
+msgstr ""
+
+#: u_translation:rsabort
+msgid "Abort"
+msgstr ""
+
+#: u_translation:rsabortslew
+msgid "Abort Slew"
+msgstr ""
+
+#: u_translation:rsabortedbyuse
+msgid "Aborted by user"
+msgstr ""
+
+#: u_translation:rsabout
+msgid "About"
+msgstr ""
+
+#: u_translation:rsabout2
+msgid "About %s"
+msgstr ""
+
+#: u_translation:rsactualsystem
+msgid "Actual system time"
+msgstr ""
+
+#: u_translation:rsadd
+msgid "Add"
+msgstr ""
+
+#: u_translation:rsaddasingleel
+msgid "Add a single element to the database. All field are mandatory."
+msgstr ""
+
+#: u_translation:rsaddequatoria
+msgid "Add Equatorial Grid"
+msgstr ""
+
+#: u_translation:rsaddlabel
+msgid "Add Label"
+msgstr ""
+
+#: u_translation:rsaddthealtern
+msgid "Add the alternate names to the index"
+msgstr ""
+
+#: u_translation:rsadjustcolour
+msgid "Adjust colour brightness"
+msgstr ""
+
+#: u_translation:rsadvanced
+msgid "Advanced"
+msgstr ""
+
+#: u_translation:rsadvancedsear
+msgid "Advanced Search"
+msgstr ""
+
+#: u_translation:rsage
+msgid "Age"
+msgstr ""
+
+#: u_translation:rsall
+msgid "All"
+msgstr ""
+
+#: u_translation:rsalltoolsbar
+msgid "All Tools Bar"
+msgstr ""
+
+#: u_translation:rsalt
+msgid "Alt"
+msgstr ""
+
+#: u_translation:rsaltazcoord2
+msgid "Alt/AZ Coord."
+msgstr ""
+
+#: u_translation:rsaltazcoord
+msgid "Alt/AZ Coord. "
+msgstr ""
+
+#: u_translation:rsaltazmount
+msgid "Alt/Az Mount"
+msgstr ""
+
+#: u_translation:rsaltazcoordin
+msgid "Alt-Az Coordinate"
+msgstr ""
+
+#: u_translation:rsaltitude
+msgid "Altitude"
+msgstr ""
+
+#: u_translation:rsannualproper
+msgid "Annual Proper Motion"
+msgstr ""
+
+#: u_translation:rsanonymouspas
+msgid "Anonymous password"
+msgstr ""
+
+#: u_translation:rsappendtoanex
+msgid "Append to an existing catalog "
+msgstr ""
+
+#: u_translation:rsapply
+msgid "Apply"
+msgstr ""
+
+#: u_translation:rsapplychanget
+msgid "Apply Change To All Chart"
+msgstr ""
+
+#: u_translation:rsargumentofpe
+msgid "Argument of perihelion"
+msgstr ""
+
+#: u_translation:rsartificialsa
+msgid "Artificial Satellites"
+msgstr ""
+
+#: u_translation:rsasonscreenbl
+msgid "As on screen (black background!)"
+msgstr ""
+
+#: u_translation:rsasterism
+msgid "Asterism"
+msgstr ""
+
+#: u_translation:rsasteroid
+msgid "Asteroid"
+msgstr ""
+
+#: u_translation:rsasteroidelem
+msgid "Asteroid elements in MPC format (one URL by line)"
+msgstr ""
+
+#: u_translation:rsasteroidsett
+msgid "Asteroid Setting"
+msgstr ""
+
+#: u_translation:rsasteroidsfro
+msgid "Asteroids from the file"
+msgstr ""
+
+#: u_translation:rsastronomical
+msgid "Astronomical"
+msgstr ""
+
+#: u_translation:rsastronomical2
+msgid "Astronomical Twilight"
+msgstr ""
+
+#: u_translation:rsat
+msgid "at"
+msgstr ""
+
+#: u_translation:rsatmosphericr
+msgid "Atmospheric Refraction"
+msgstr ""
+
+#: u_translation:rsautomatic
+msgid "Automatic"
+msgstr ""
+
+#: u_translation:rsautomaticall
+msgid "Automatically start a local server if not already running"
+msgstr ""
+
+#: u_translation:rsautorefresh
+msgid "AutoRefresh"
+msgstr ""
+
+#: u_translation:rsautorefreshe
+msgid "Auto-refresh every "
+msgstr ""
+
+#: u_translation:rsauxiliaryfil
+msgid "Auxiliary files"
+msgstr ""
+
+#: u_translation:rsaz
+msgid "Az"
+msgstr ""
+
+#: u_translation:rsazimuth
+msgid "Azimuth"
+msgstr ""
+
+#: u_translation:rsazimuthalcoo
+msgid "Azimuthal Coordinate"
+msgstr ""
+
+#: u_translation:rsb
+msgid "B"
+msgstr ""
+
+#: u_translation:rsbackground
+msgid "Background"
+msgstr ""
+
+#: u_translation:rsbackgroundpi
+msgid "Background Picture"
+msgstr ""
+
+#: u_translation:rsbayerletter
+msgid "Bayer Letter"
+msgstr ""
+
+#: u_translation:rsbeginprocess
+msgid "Begin processing for jd=%s / %s"
+msgstr ""
+
+#: u_translation:rsbelowthehori
+msgid "Below the horizon"
+msgstr ""
+
+#: u_translation:rsbii
+msgid "BII"
+msgstr ""
+
+#: u_translation:rsbinaryindexe
+msgid "Binary indexed catalog"
+msgstr ""
+
+#: u_translation:rsbitmap
+msgid "Bitmap"
+msgstr ""
+
+#: u_translation:rsbitmapfile
+msgid "Bitmap File"
+msgstr ""
+
+#: u_translation:rsblackonwhite
+msgid "Black on White"
+msgstr ""
+
+#: u_translation:rsblackwhite
+msgid "Black/White"
+msgstr ""
+
+#: u_translation:rsblackwhiteli
+msgid "Black/White, Line mode"
+msgstr ""
+
+#: u_translation:rsblue
+msgid "Blue"
+msgstr ""
+
+#: u_translation:rsbluemagnitud
+msgid "Blue Magnitude"
+msgstr ""
+
+#: u_translation:rsbottom
+msgid "Bottom"
+msgstr ""
+
+#: u_translation:rsboundary
+msgid "Boundary"
+msgstr ""
+
+#: u_translation:rsbrightneo
+msgid "Bright + NEO"
+msgstr ""
+
+#: u_translation:rsbrightstars
+msgid "Bright stars"
+msgstr ""
+
+#: u_translation:rsbrighter
+msgid "Brighter"
+msgstr ""
+
+#: u_translation:rsbrighteststa
+msgid "Brightest Star Magnitude"
+msgstr ""
+
+#: u_translation:rsbrightness
+msgid "Brightness"
+msgstr ""
+
+#: u_translation:rsbuildcatalog
+msgid "Build Catalog"
+msgstr ""
+
+#: u_translation:rsby
+msgid "by"
+msgstr ""
+
+#: u_translation:rscalendar
+msgid "Calendar"
+msgstr ""
+
+#: u_translation:rscancel
+msgid "Cancel"
+msgstr ""
+
+#: u_translation:rscancel2
+msgid "Cancel %s"
+msgstr ""
+
+#: u_translation:rscancelwrongz
+msgid "Cancel, wrong zip file ?? %s"
+msgstr ""
+
+#: u_translation:rscascade
+msgid "Cascade"
+msgstr ""
+
+#: u_translation:rscat
+msgid "Cat."
+msgstr ""
+
+#: u_translation:rscatalog
+msgid "Catalog"
+msgstr ""
+
+#: u_translation:rscataloglongn
+msgid "Catalog long name"
+msgstr ""
+
+#: u_translation:rscatalogshort
+msgid "Catalog short name"
+msgstr ""
+
+#: u_translation:rscatalogstrin
+msgid "Catalog string"
+msgstr ""
+
+#: u_translation:rscatalogtype
+msgid "Catalog type"
+msgstr ""
+
+#: u_translation:rscataloguedim
+msgid "catalogued images"
+msgstr ""
+
+#: u_translation:rscdcformatpre
+msgid "CdC format, prefere the compact version"
+msgstr ""
+
+#: u_translation:rscdcnebulae
+msgid "CdC Nebulae"
+msgstr ""
+
+#: u_translation:rscdcnebulaeca
+msgid "CDC Nebulae Catalog Setting"
+msgstr ""
+
+#: u_translation:rscdcobsoletec
+msgid "CDC Obsolete Catalog (but you can still use them)"
+msgstr ""
+
+#: u_translation:rscdcpluginset
+msgid "CDC plugin setting"
+msgstr ""
+
+#: u_translation:rscdcstars
+msgid "CdC Stars"
+msgstr ""
+
+#: u_translation:rscdcstarscata
+msgid "CDC Stars Catalog Setting"
+msgstr ""
+
+#: u_translation:rscenterobject
+msgid "Center Object"
+msgstr ""
+
+#: u_translation:rscentralmerid
+msgid "Central meridian"
+msgstr ""
+
+#: u_translation:rscentralstarb
+msgid "Central Star B Magnitude"
+msgstr ""
+
+#: u_translation:rscentralstarv
+msgid "Central Star V Magnitude"
+msgstr ""
+
+#: u_translation:rscentre
+msgid "Centre"
+msgstr ""
+
+#: u_translation:rschangedrawin
+msgid "Change Drawing Mode"
+msgstr ""
+
+#: u_translation:rschangepictur
+msgid "Change pictures display"
+msgstr ""
+
+#: u_translation:rschart
+msgid "Chart"
+msgstr ""
+
+#: u_translation:rschart2
+msgid "chart :"
+msgstr ""
+
+#: u_translation:rschartcoordin2
+msgid "Chart Coordinate System"
+msgstr ""
+
+#: u_translation:rschartinforma
+msgid "Chart Information"
+msgstr ""
+
+#: u_translation:rschartsetting
+msgid "Chart Setting"
+msgstr ""
+
+#: u_translation:rschartcoordin
+msgid "Chart, Coordinates"
+msgstr ""
+
+#: u_translation:rschart_
+msgid "Chart_"
+msgstr ""
+
+#: u_translation:rscharts
+msgid "Charts"
+msgstr ""
+
+#: u_translation:rscheck
+msgid "Check"
+msgstr ""
+
+#: u_translation:rschoosecolour
+msgid "Choose colours for object type"
+msgstr ""
+
+#: u_translation:rschoosewhicho
+msgid "Choose which objects to plot"
+msgstr ""
+
+#: u_translation:rscircle
+msgid "Circle"
+msgstr ""
+
+#: u_translation:rscircumpolar
+msgid "Circumpolar"
+msgstr ""
+
+#: u_translation:rsclass
+msgid "Class"
+msgstr ""
+
+#: u_translation:rsclicktochang
+msgid "Click to change the color "
+msgstr ""
+
+#: u_translation:rsclientconnec
+msgid "Client Connection Keep Alive"
+msgstr ""
+
+#: u_translation:rsclose
+msgid "Close"
+msgstr ""
+
+#: u_translation:rsclosechart
+msgid "Close Chart"
+msgstr ""
+
+#: u_translation:rscloseconnect
+msgid "Close Connection"
+msgstr ""
+
+#: u_translation:rsclosefiles
+msgid "Close files"
+msgstr ""
+
+#: u_translation:rsclosedcontou
+msgid "Closed contour"
+msgstr ""
+
+#: u_translation:rsclosingconne
+msgid "Closing connection"
+msgstr ""
+
+#: u_translation:rsclusterandne
+msgid "Cluster and Nebula"
+msgstr ""
+
+#: u_translation:rscolor
+msgid "Color"
+msgstr ""
+
+#: u_translation:rscolorindex
+msgid "Color Index"
+msgstr ""
+
+#: u_translation:rscolorsaturat
+msgid "Color saturation"
+msgstr ""
+
+#: u_translation:rscolorlinemod
+msgid "Color, Line mode"
+msgstr ""
+
+#: u_translation:rscomet
+msgid "Comet"
+msgstr ""
+
+#: u_translation:rscometelement
+msgid "Comet elements in MPC format (one URL by line) "
+msgstr ""
+
+#: u_translation:rscometsetting
+msgid "Comet Setting"
+msgstr ""
+
+#: u_translation:rscommandfound
+msgid "Command found OK."
+msgstr ""
+
+#: u_translation:rscommandnotfo
+msgid "Command not found!"
+msgstr ""
+
+#: u_translation:rscommandtouse
+msgid "Command to use to process the file."
+msgstr ""
+
+#: u_translation:rscommonname
+msgid "Common Name"
+msgstr ""
+
+#: u_translation:rscomponent1ma
+msgid "Component 1 Magnitude"
+msgstr ""
+
+#: u_translation:rscomponent2ma
+msgid "Component 2 Magnitude"
+msgstr ""
+
+#: u_translation:rscompute
+msgid "Compute"
+msgstr ""
+
+#: u_translation:rscomputeaster
+msgid "Compute asteroid data for this month"
+msgstr ""
+
+#: u_translation:rscomputefield
+msgid "Compute Field"
+msgstr ""
+
+#: u_translation:rsconfiguratio
+msgid "Configuration"
+msgstr ""
+
+#: u_translation:rsconfigurethe
+msgid "Configure the program"
+msgstr ""
+
+#: u_translation:rsconnect
+msgid "Connect"
+msgstr ""
+
+#: u_translation:rsconnectteles
+msgid "Connect Telescope"
+msgstr ""
+
+#: u_translation:rsconnecttofai
+msgid "Connect to %s, %s failed! %sVerify if the MySQL Server is running and control the Userid/Password"
+msgstr ""
+
+#: u_translation:rsconnecttosuc
+msgid "Connect to %s, %s successful.%s"
+msgstr ""
+
+#: u_translation:rsconnectedtos
+msgid "Connected to SQL database %s"
+msgstr ""
+
+#: u_translation:rsconnectionli
+msgid "Connection lines between each position"
+msgstr ""
+
+#: u_translation:rsconstellatio
+msgid "Constellation"
+msgstr ""
+
+#: u_translation:rsconstellatio4
+msgid "Constellation Boundaries"
+msgstr ""
+
+#: u_translation:rsconstellatio5
+msgid "Constellation Boundary File Name : "
+msgstr ""
+
+#: u_translation:rsconstellatio3
+msgid "Constellation Figure File Name : "
+msgstr ""
+
+#: u_translation:rsconstellatio2
+msgid "Constellation Figures"
+msgstr ""
+
+#: u_translation:rsconstellatio6
+msgid "Constellation Label"
+msgstr ""
+
+#: u_translation:rsconstellatio7
+msgid "Constellation name"
+msgstr ""
+
+#: u_translation:rscontrast
+msgid "Contrast"
+msgstr ""
+
+#: u_translation:rscontrolpanel
+msgid "Control Panel"
+msgstr ""
+
+#: u_translation:rscontrolpanel2
+msgid "Control Panel command "
+msgstr ""
+
+#: u_translation:rsconvertcatal
+msgid "Convert catalog file %s"
+msgstr ""
+
+#: u_translation:rsconvertcatal2
+msgid "Convert catalog files"
+msgstr ""
+
+#: u_translation:rscoord
+msgid "Coord."
+msgstr ""
+
+#: u_translation:rscoordgrid
+msgid "Coord. Grid"
+msgstr ""
+
+#: u_translation:rscoordinatese
+msgid "Coordinates Equinox"
+msgstr ""
+
+#: u_translation:rscoordinatesg
+msgid "Coordinates Grid"
+msgstr ""
+
+#: u_translation:rscopy
+msgid "Copy"
+msgstr ""
+
+#: u_translation:rscoreradius
+msgid "Core Radius"
+msgstr ""
+
+#: u_translation:rscorrelated
+msgid "Correlated"
+msgstr ""
+
+#: u_translation:rscreateanewch
+msgid "Create a new chart"
+msgstr ""
+
+#: u_translation:rscreateasearc
+msgid "Create a search index file"
+msgstr ""
+
+#: u_translation:rscreatedataba
+msgid "Create Database"
+msgstr ""
+
+#: u_translation:rscreatefiles
+msgid "Create files"
+msgstr ""
+
+#: u_translation:rscreateheader
+msgid "Create header"
+msgstr ""
+
+#: u_translation:rscreatepostsc
+msgid "Create postscript chart. Please wait..."
+msgstr ""
+
+#: u_translation:rscreateraster
+msgid "Create raster chart at %s dpi. Please wait..."
+msgstr ""
+
+#: u_translation:rsculmination
+msgid "Culmination"
+msgstr ""
+
+#: u_translation:rsdeg
+msgid "d"
+msgstr "°"
+
+#: u_translation:rssday
+msgid "D"
+msgstr ""
+
+#: u_translation:rsdarknebula2
+msgid "Dark nebula"
+msgstr ""
+
+#: u_translation:rsdarknebula
+msgid "Dark Nebula"
+msgstr ""
+
+#: u_translation:rsdash1
+msgid "Dash"
+msgstr ""
+
+#: u_translation:rsdashdot1
+msgid "Dash Dot"
+msgstr ""
+
+#: u_translation:rsdashdotdot1
+msgid "Dash Dot Dot"
+msgstr ""
+
+#: u_translation:rsdatafiles
+msgid "Data Files :"
+msgstr ""
+
+#: u_translation:rsdatafilescdr
+msgid "Data Files, CDrom"
+msgstr ""
+
+#: u_translation:rsdatamaintena
+msgid "Data Maintenance"
+msgstr ""
+
+#: u_translation:rsdatastartonl
+msgid "Data start on line %s"
+msgstr ""
+
+#: u_translation:rsdatabasefile
+msgid "Database file: "
+msgstr ""
+
+#: u_translation:rsdatabasesett
+msgid "Database setting..."
+msgstr ""
+
+#: u_translation:rsdatabasetype
+msgid "Database Type"
+msgstr ""
+
+#: u_translation:rsdate
+msgid "Date"
+msgstr ""
+
+#: u_translation:rsdatetime
+msgid "Date / Time"
+msgstr ""
+
+#: u_translation:rsdatefrom
+msgid "Date from"
+msgstr ""
+
+#: u_translation:rsdatetime2
+msgid "Date/Time"
+msgstr ""
+
+#: u_translation:rsdatesmaytake
+msgid "dates may take a long time. Do you want to continue ?"
+msgstr ""
+
+#: u_translation:rsday
+msgid "Day"
+msgstr ""
+
+#: u_translation:rsdaytime
+msgid "Day Time"
+msgstr ""
+
+#: u_translation:rsdaylightsavi
+msgid "Daylight Saving Time in effect "
+msgstr ""
+
+#: u_translation:rsdays
+msgid "days"
+msgstr ""
+
+#: u_translation:rsdbinsertfail
+msgid "DB insert failed for %s :%s"
+msgstr ""
+
+#: u_translation:rsdbname
+msgid "DB Name:"
+msgstr ""
+
+#: u_translation:rsde
+msgid "DE"
+msgstr ""
+
+#: u_translation:rsdec
+msgid "DEC"
+msgstr ""
+
+#: u_translation:rsdecoptions
+msgid "DEC options"
+msgstr ""
+
+#: u_translation:rsdecturns
+msgid "DEC turns: "
+msgstr ""
+
+#: u_translation:rsdecimaldegre
+msgid "Decimal degrees"
+msgstr ""
+
+#: u_translation:rsdecimalhours
+msgid "Decimal hours"
+msgstr ""
+
+#: u_translation:rsdecimalsouth
+msgid "Decimal South Polar Distance"
+msgstr ""
+
+#: u_translation:rsdeclination
+msgid "Declination"
+msgstr ""
+
+#: u_translation:rsdecrementtim
+msgid "Decrement Time"
+msgstr ""
+
+#: u_translation:rsdeepskyobjec
+msgid "Deep sky object colour"
+msgstr ""
+
+#: u_translation:rsdeepskycolou
+msgid "Deep-sky colour"
+msgstr ""
+
+#: u_translation:rsdefault
+msgid "Default"
+msgstr ""
+
+#: u_translation:rsdefaultbutto
+msgid "Default Button"
+msgstr ""
+
+#: u_translation:rsdefaultcolor
+msgid "Default color"
+msgstr ""
+
+#: u_translation:rsdefaultlabel
+msgid "Default label"
+msgstr ""
+
+#: u_translation:rsdefaultmargi
+msgid "Default Margin"
+msgstr ""
+
+#: u_translation:rsdefaultnebul
+msgid "Default Nebulae parameters"
+msgstr ""
+
+#: u_translation:rsdefaultoutli
+msgid "Default Outline parameters"
+msgstr ""
+
+#: u_translation:rsdegree
+msgid "Degree"
+msgstr ""
+
+#: u_translation:rsdegreegridsp
+msgid "Degree Grid Spacing"
+msgstr ""
+
+#: u_translation:rsdegrees
+msgid "degrees"
+msgstr ""
+
+#: u_translation:rsdegreesminut
+msgid "Degrees, minutes, secondes"
+msgstr ""
+
+#: u_translation:rsdelete
+msgid "Delete"
+msgstr ""
+
+#: u_translation:rsdeletecomple
+msgid "Delete completed"
+msgstr ""
+
+#: u_translation:rsdeletedailyd
+msgid "Delete daily data"
+msgstr ""
+
+#: u_translation:rsdeletefromel2
+msgid "Delete from element list..."
+msgstr ""
+
+#: u_translation:rsdeletefromel
+msgid "Delete from element table..."
+msgstr ""
+
+#: u_translation:rsdeletefrommo2
+msgid "Delete from monthly table for jd<%s"
+msgstr ""
+
+#: u_translation:rsdeletefrommo
+msgid "Delete from monthly table..."
+msgstr ""
+
+#: u_translation:rsdeletefromna
+msgid "Delete from name list..."
+msgstr ""
+
+#: u_translation:rsdeletemonthl
+msgid "Delete Monthly data "
+msgstr ""
+
+#: u_translation:rsdeletemonthl2
+msgid "Delete Monthly data older than "
+msgstr ""
+
+#: u_translation:rsdeletempcdat
+msgid "Delete MPC data selectively"
+msgstr ""
+
+#: u_translation:rsdeleteprevio
+msgid "Delete previous data for this date."
+msgstr ""
+
+#: u_translation:rsdeletethecur
+msgid "Delete the current location from the database ?"
+msgstr ""
+
+#: u_translation:rsdeletedsucce
+msgid "Deleted successfully!"
+msgstr ""
+
+#: u_translation:rsdepressionof
+msgid "Depression of the visible horizon"
+msgstr ""
+
+#: u_translation:rsdesc
+msgid "desc:"
+msgstr ""
+
+#: u_translation:rsdescription
+msgid "Description"
+msgstr ""
+
+#: u_translation:rsdesignation
+msgid "Designation"
+msgstr ""
+
+#: u_translation:rsdesktopenvir
+msgid "Desktop environment"
+msgstr ""
+
+#: u_translation:rsdetails
+msgid "Details"
+msgstr ""
+
+#: u_translation:rsdeviceport
+msgid "Device Port "
+msgstr ""
+
+#: u_translation:rsdiam
+msgid "Diam."
+msgstr ""
+
+#: u_translation:rsdiameter
+msgid "Diameter"
+msgstr ""
+
+#: u_translation:rsdimension
+msgid "Dimension"
+msgstr ""
+
+#: u_translation:rsdimensionand
+msgid "Dimension and Units"
+msgstr ""
+
+#: u_translation:rsdir
+msgid "Dir"
+msgstr ""
+
+#: u_translation:rsdirectory
+msgid "Directory"
+msgstr ""
+
+#: u_translation:rsdisconnectte
+msgid "Disconnect Telescope"
+msgstr ""
+
+#: u_translation:rsdisplay
+msgid "Display"
+msgstr ""
+
+#: u_translation:rsdisplayasasy
+msgid "Display as a symbol"
+msgstr ""
+
+#: u_translation:rsdisplaycolou
+msgid "Display colour"
+msgstr ""
+
+#: u_translation:rsdisplayimage
+msgid "Display image of cataloged objects"
+msgstr ""
+
+#: u_translation:rsdisplaymode
+msgid "Display mode"
+msgstr ""
+
+#: u_translation:rsdisplaythech
+msgid "Display the chart information in the menu bar."
+msgstr ""
+
+#: u_translation:rsdisplaythela
+msgid "Display the labels to the chart"
+msgstr ""
+
+#: u_translation:rsdisplaythelo
+msgid "Display the local horizon line"
+msgstr ""
+
+#: u_translation:rsdistance
+msgid "Distance"
+msgstr ""
+
+#: u_translation:rsdistancetoth
+msgid "Distance to the last object"
+msgstr ""
+
+#: u_translation:rsdonottakeacc2
+msgid "Do not take account of asteroid fainter than magnitude"
+msgstr ""
+
+#: u_translation:rsdonottakeacc
+msgid "Do not take account of comet fainter than magnitude"
+msgstr ""
+
+#: u_translation:rsdoyouwanttos
+msgid "Do you want to save the program setting now?"
+msgstr ""
+
+#: u_translation:rsdot1
+msgid "Dot"
+msgstr ""
+
+#: u_translation:rsdoublestar
+msgid "Double Star"
+msgstr ""
+
+#: u_translation:rsdoubles
+msgid "Doubles"
+msgstr ""
+
+#: u_translation:rsdownload
+msgid "Download"
+msgstr ""
+
+#: u_translation:rsdownload2
+msgid "Download %s"
+msgstr ""
+
+#: u_translation:rsdownloadcoun
+msgid "Download country details"
+msgstr ""
+
+#: u_translation:rsdownloadlate
+msgid "Download latest orbital elements"
+msgstr ""
+
+#: u_translation:rsdpifor8x11pa
+msgid "dpi for 8x11 paper"
+msgstr ""
+
+#: u_translation:rsdrawalinetha
+msgid "Draw a line that represent the proper motion for the next "
+msgstr ""
+
+#: u_translation:rsdrawline
+msgid "Draw line"
+msgstr ""
+
+#: u_translation:rsdrawplanetas
+msgid "Draw Planet As"
+msgstr ""
+
+#: u_translation:rsdrawtheappar
+msgid "Draw the apparent depressed horizon line"
+msgstr ""
+
+#: u_translation:rsdrawingtype
+msgid "Drawing Type"
+msgstr ""
+
+#: u_translation:rsdrivername
+msgid "Driver name"
+msgstr ""
+
+#: u_translation:rsdropdatabase
+msgid "Drop Database"
+msgstr ""
+
+#: u_translation:rsdssrealsky
+msgid "DSS RealSky"
+msgstr ""
+
+#: u_translation:rsdtut
+msgid "DT - UT  : "
+msgstr ""
+
+#: u_translation:rsduration
+msgid "Duration"
+msgstr ""
+
+#: u_translation:rsdynamictimed
+msgid "Dynamic Time difference with Universal Time"
+msgstr ""
+
+#: u_translation:rsearthshadow
+msgid "Earth shadow"
+msgstr ""
+
+#: u_translation:rseast
+msgid "East"
+msgstr ""
+
+#: u_translation:rseccentricity
+msgid "Eccentricity"
+msgstr ""
+
+#: u_translation:rseclipse
+msgid "Eclipse"
+msgstr ""
+
+#: u_translation:rsecliptic
+msgid "Ecliptic"
+msgstr ""
+
+#: u_translation:rseclipticcoor3
+msgid "Ecliptic Coord."
+msgstr ""
+
+#: u_translation:rseclipticcoor
+msgid "Ecliptic Coordinate"
+msgstr ""
+
+#: u_translation:rsedit
+msgid "Edit"
+msgstr ""
+
+#: u_translation:rseditcolor
+msgid "Edit Color"
+msgstr ""
+
+#: u_translation:rseditlabel
+msgid "Edit Label"
+msgstr ""
+
+#: u_translation:rseditlineoper
+msgid "Edit Line operation"
+msgstr ""
+
+#: u_translation:rseditobjectty
+msgid "Edit Object Types"
+msgstr ""
+
+#: u_translation:rseditunits
+msgid "Edit Units"
+msgstr ""
+
+#: u_translation:rselong
+msgid "Elong."
+msgstr ""
+
+#: u_translation:rsemissionnebu
+msgid "Emission nebula"
+msgstr ""
+
+#: u_translation:rsendofobject
+msgid "End of object"
+msgstr ""
+
+#: u_translation:rsendprocessin
+msgid "End processing: %s asteroids"
+msgstr ""
+
+#: u_translation:rsephemeriscal
+msgid "Ephemeris Calendar"
+msgstr ""
+
+#: u_translation:rsepochjd
+msgid "Epoch (JD)"
+msgstr ""
+
+#: u_translation:rsepochofmaxim
+msgid "Epoch of maxima"
+msgstr ""
+
+#: u_translation:rseqgrid
+msgid "Eq. Grid"
+msgstr ""
+
+#: u_translation:rsequatorialan
+msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
+msgstr ""
+
+#: u_translation:rsequatorialco3
+msgid "Equatorial Coord."
+msgstr ""
+
+#: u_translation:rsequatorialco
+msgid "Equatorial Coordinate"
+msgstr ""
+
+#: u_translation:rsequatorialco2
+msgid "Equatorial coordinates, equinox: %s"
+msgstr ""
+
+#: u_translation:rsequatorialmo
+msgid "Equatorial Mount"
+msgstr ""
+
+#: u_translation:rsequinox2
+msgid "Equinox"
+msgstr ""
+
+#: u_translation:rsequinoxofthe
+msgid "Equinox of the date"
+msgstr ""
+
+#: u_translation:rsequinox
+msgid "Equinox:"
+msgstr ""
+
+#: u_translation:rserror
+msgid "Error"
+msgstr ""
+
+#: u_translation:rserroropening
+msgid "Error opening %s"
+msgstr ""
+
+#: u_translation:rserrorpleasec2
+msgid "Error! Please check the database parameters and load the comete data file."
+msgstr ""
+
+#: u_translation:rserrorpleasec3
+msgid "Error! Please check the database parameters and load the picture package."
+msgstr ""
+
+#: u_translation:rserrorpleasec
+msgid "Error! Please check the database parameters."
+msgstr ""
+
+#: u_translation:rsestimatedfil
+msgid "Estimated file size: %sMB %sDo you want to continue ?"
+msgstr ""
+
+#: u_translation:rsestimatedtai
+msgid "Estimated tail length"
+msgstr ""
+
+#: u_translation:rsevening
+msgid "Evening"
+msgstr ""
+
+#: u_translation:rseveningtwili
+msgid "Evening twilight"
+msgstr ""
+
+#: u_translation:rsevery
+msgid "every "
+msgstr ""
+
+#: u_translation:rsexit
+msgid "Exit"
+msgstr ""
+
+#: u_translation:rsexiting
+msgid "Exiting ..."
+msgstr ""
+
+#: u_translation:rsexternalcata
+msgid "External catalog object"
+msgstr ""
+
+#: u_translation:rseyepiece
+msgid "Eyepiece"
+msgstr ""
+
+#: u_translation:rsfailed
+msgid "Failed : %s"
+msgstr ""
+
+#: u_translation:rsfaintstarssi
+msgid "Faint Stars Size "
+msgstr ""
+
+#: u_translation:rsfainter
+msgid "Fainter"
+msgstr ""
+
+#: u_translation:rsfieldnumber
+msgid "Field Number"
+msgstr ""
+
+#: u_translation:rsfieldofvisio
+msgid "Field of Vision"
+msgstr ""
+
+#: u_translation:rsfieldofvisio5
+msgid "Field of vision number :"
+msgstr ""
+
+#: u_translation:rsfieldofvisio3
+msgid "Field of Vision Setting"
+msgstr ""
+
+#: u_translation:rsfieldtoowidt
+msgid "Field too width! Maximum is %s"
+msgstr ""
+
+#: u_translation:rsfile
+msgid "File"
+msgstr ""
+
+#: u_translation:rsfilenotfound
+msgid "File not found!"
+msgstr ""
+
+#: u_translation:rsfilespath
+msgid "Files Path"
+msgstr ""
+
+#: u_translation:rsfillmilkyway
+msgid "Fill Milky Way"
+msgstr ""
+
+#: u_translation:rsfill
+msgid "Fill?"
+msgstr ""
+
+#: u_translation:rsfilter
+msgid "Filter ->"
+msgstr ""
+
+#: u_translation:rsfilternebula
+msgid "Filter nebulae"
+msgstr ""
+
+#: u_translation:rsfilterstars
+msgid "Filter stars "
+msgstr ""
+
+#: u_translation:rsfind
+msgid "Find"
+msgstr ""
+
+#: u_translation:rsfindercircle
+msgid "Finder circle (Eyepiece)"
+msgstr ""
+
+#: u_translation:rsfindermark
+msgid "Finder mark"
+msgstr ""
+
+#: u_translation:rsfinderrectan
+msgid "Finder rectangle (CCD)"
+msgstr ""
+
+#: u_translation:rsfirst5000
+msgid "First 5000"
+msgstr ""
+
+#: u_translation:rsfirstchar
+msgid "First Char"
+msgstr ""
+
+#: u_translation:rsfitsfile
+msgid "FITS File"
+msgstr ""
+
+#: u_translation:rsfixedblack
+msgid "Fixed Black"
+msgstr ""
+
+#: u_translation:rsfixedequinox
+msgid "Fixed Equinox"
+msgstr ""
+
+#: u_translation:rsflamsteednum
+msgid "Flamsteed Number"
+msgstr ""
+
+#: u_translation:rsfonts
+msgid "Fonts"
+msgstr ""
+
+#: u_translation:rsforalargecat
+msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
+msgstr ""
+
+#: u_translation:rsfov
+msgid "FOV"
+msgstr ""
+
+#: u_translation:rsfovnumber
+msgid "fov number"
+msgstr ""
+
+#: u_translation:rsfovnumber2
+msgid "fov number:"
+msgstr ""
+
+#: u_translation:rsfov2
+msgid "FOV:"
+msgstr ""
+
+#: u_translation:rsfriday
+msgid "Fri."
+msgstr ""
+
+#: u_translation:rsfrom
+msgid "From"
+msgstr ""
+
+#: u_translation:rsftp
+msgid "FTP "
+msgstr ""
+
+#: u_translation:rsftppassivemo
+msgid "FTP Passive Mode"
+msgstr ""
+
+#: u_translation:rsfullname
+msgid "Full Name"
+msgstr ""
+
+#: u_translation:rsgslopeparame
+msgid "G slope parameter"
+msgstr ""
+
+#: u_translation:rsgalactic
+msgid "Galactic"
+msgstr ""
+
+#: u_translation:rsgalacticcoor2
+msgid "Galactic Coord."
+msgstr ""
+
+#: u_translation:rsgalacticcoor
+msgid "Galactic Coordinate"
+msgstr ""
+
+#: u_translation:rsgalaxies
+msgid "Galaxies"
+msgstr ""
+
+#: u_translation:rsgalaxy
+msgid "Galaxy"
+msgstr ""
+
+#: u_translation:rsgalaxycluste2
+msgid "Galaxy cluster"
+msgstr ""
+
+#: u_translation:rsgalaxycluste
+msgid "Galaxy Cluster"
+msgstr ""
+
+#: u_translation:rsgamma
+msgid "Gamma"
+msgstr ""
+
+#: u_translation:rsgeneral
+msgid "General"
+msgstr ""
+
+#: u_translation:rsgeneralcatal
+msgid "General catalog options"
+msgstr ""
+
+#: u_translation:rsgeneralsetti
+msgid "General Setting"
+msgstr ""
+
+#: u_translation:rsgeocentric
+msgid "Geocentric"
+msgstr ""
+
+#: u_translation:rsgetasteroidl
+msgid "Get Asteroid list."
+msgstr ""
+
+#: u_translation:rsgetdssimage
+msgid "Get DSS Image"
+msgstr ""
+
+#: u_translation:rsglobularclus
+msgid "Globular Cluster"
+msgstr ""
+
+#: u_translation:rsgraphic
+msgid "Graphic"
+msgstr ""
+
+#: u_translation:rsgravitationa
+msgid "Gravitational lens"
+msgstr ""
+
+#: u_translation:rsgreatest
+msgid "Greatest"
+msgstr ""
+
+#: u_translation:rsgreeksymbol
+msgid "Greek symbol"
+msgstr ""
+
+#: u_translation:rsgreen
+msgid "Green"
+msgstr ""
+
+#: u_translation:rsgridsetting
+msgid "Grid Setting"
+msgstr ""
+
+#: u_translation:rsgridspacing
+msgid "Grid Spacing"
+msgstr ""
+
+#: u_translation:rsgrstransit
+msgid "GRS transit"
+msgstr ""
+
+#: u_translation:rsshour
+msgid "H"
+msgstr ""
+
+#: u_translation:rshabsolutemag
+msgid "H absolute magnitude"
+msgstr ""
+
+#: u_translation:rshalfmassradi
+msgid "Half-Mass Radius"
+msgstr ""
+
+#: u_translation:rshaltafter100
+msgid "Halt after 1000 errors"
+msgstr ""
+
+#: u_translation:rshbetamagnitu
+msgid "Hbeta Magnitude"
+msgstr ""
+
+#: u_translation:rsheight
+msgid "Height"
+msgstr ""
+
+#: u_translation:rshelp
+msgid "Help"
+msgstr ""
+
+#: u_translation:rshelpcontents
+msgid "Help contents"
+msgstr ""
+
+#: u_translation:rshidelabel
+msgid "Hide label"
+msgstr ""
+
+#: u_translation:rshideobjectwi
+msgid "Hide object wider than"
+msgstr ""
+
+#: u_translation:rshighcolor
+msgid "High Color"
+msgstr ""
+
+#: u_translation:rshighsurfaceb
+msgid "High surface brightness"
+msgstr ""
+
+#: u_translation:rshorizon
+msgid "Horizon"
+msgstr ""
+
+#: u_translation:rshostname
+msgid "Host Name:"
+msgstr ""
+
+#: u_translation:rshour
+msgid "Hour"
+msgstr ""
+
+#: u_translation:rshourangle
+msgid "Hour Angle"
+msgstr ""
+
+#: u_translation:rshourgridspac
+msgid "Hour Grid Spacing"
+msgstr ""
+
+#: u_translation:rshoursminutes
+msgid "Hours, minutes, secondes"
+msgstr ""
+
+#: u_translation:rshttpproxy
+msgid "HTTP Proxy"
+msgstr ""
+
+#: u_translation:rsillum
+msgid "Illum."
+msgstr ""
+
+#: u_translation:rsilluminatedf
+msgid "Illuminated Fraction"
+msgstr ""
+
+#: u_translation:rsimagedirecto
+msgid "Image Directory"
+msgstr ""
+
+#: u_translation:rsimageoptions
+msgid "Image Options"
+msgstr ""
+
+#: u_translation:rsindrive
+msgid "in drive"
+msgstr ""
+
+#: u_translation:rsinclination
+msgid "Inclination"
+msgstr ""
+
+#: u_translation:rsinclination2
+msgid "Inclination="
+msgstr ""
+
+#: u_translation:rsincrementfor
+msgid "Increment for Bright Stars"
+msgstr ""
+
+#: u_translation:rsincrementtim
+msgid "Increment Time"
+msgstr ""
+
+#: u_translation:rsindidriverse
+msgid "INDI Driver setting"
+msgstr ""
+
+#: u_translation:rsindiserverho
+msgid "INDI Server Host "
+msgstr ""
+
+#: u_translation:rsindiserverpo
+msgid "INDI server Port"
+msgstr ""
+
+#: u_translation:rsindicatehere
+msgid "Indicate here how to compute the require value from the data stored in the catalog text file."
+msgstr ""
+
+#: u_translation:rsindicatehowt
+msgid "Indicate how to recognize the object size unit :"
+msgstr ""
+
+#: u_translation:rsindicatethes3
+msgid "Indicate the string for each color"
+msgstr ""
+
+#: u_translation:rsindicatethes2
+msgid "Indicate the string for each draw operation"
+msgstr ""
+
+#: u_translation:rsindicatethes
+msgid "Indicate the string identifier for each type of object :"
+msgstr ""
+
+#: u_translation:rsinfo
+msgid "Information"
+msgstr ""
+
+#: u_translation:rsinitializeda
+msgid "Initialize Database"
+msgstr ""
+
+#: u_translation:rsinputcatalog
+msgid "Input Catalog files"
+msgstr ""
+
+#: u_translation:rsinsertfailed
+msgid "insert failed line %s : %s"
+msgstr ""
+
+#: u_translation:rsinsertfailed2
+msgid "Insert failed! %s"
+msgstr ""
+
+#: u_translation:rslanguage
+msgid "Internal language"
+msgstr "English"
+
+#: u_translation:rsinternet
+msgid "Internet"
+msgstr ""
+
+#: u_translation:rsinvalidepoch
+msgid "invalid epoch on line%s : %s"
+msgstr ""
+
+#: u_translation:rsinvalidfitsf
+msgid "Invalid FITS file: %s"
+msgstr ""
+
+#: u_translation:rsinvisibleatt
+msgid "Invisible at this latitude"
+msgstr ""
+
+#: u_translation:rsiscoordinate
+msgid "Is coordinates epoch really %s ?"
+msgstr ""
+
+#: u_translation:rsjdcalendar
+msgid "JD calendar"
+msgstr ""
+
+#: u_translation:rsjd
+msgid "JD:"
+msgstr ""
+
+#: u_translation:rsjulianday
+msgid "Julian Day ="
+msgstr ""
+
+#: u_translation:rsjulianyear
+msgid "Julian Year"
+msgstr ""
+
+#: u_translation:rsjupiter
+msgid "Jupiter"
+msgstr ""
+
+#: u_translation:rsjupitergrslo
+msgid "Jupiter GRS longitude :"
+msgstr ""
+
+#: u_translation:rskm
+msgid "Km."
+msgstr ""
+
+#: u_translation:rsknot
+msgid "Knot"
+msgstr ""
+
+#: u_translation:rsl
+msgid "L"
+msgstr ""
+
+#: u_translation:rslabel2
+msgid "Label"
+msgstr ""
+
+#: u_translation:rslabelobject
+msgid "Label Object"
+msgstr ""
+
+#: u_translation:rslabel
+msgid "Label:"
+msgstr ""
+
+#: u_translation:rslabels
+msgid "Labels"
+msgstr ""
+
+#: u_translation:rslandscape
+msgid "Landscape"
+msgstr ""
+
+#: u_translation:rslanguage2
+msgid "Language"
+msgstr ""
+
+#: u_translation:rslanguagesele
+msgid "Language selection"
+msgstr ""
+
+#: u_translation:rslatitude
+msgid "Latitude"
+msgstr ""
+
+#: u_translation:rsleft
+msgid "Left"
+msgstr ""
+
+#: u_translation:rsleftbar
+msgid "Left Bar"
+msgstr ""
+
+#: u_translation:rslegend
+msgid "Legend"
+msgstr ""
+
+#: u_translation:rslength
+msgid "Length"
+msgstr ""
+
+#: u_translation:rslessnebulae
+msgid "Less Nebulae"
+msgstr ""
+
+#: u_translation:rslessstars
+msgid "Less Stars"
+msgstr ""
+
+#: u_translation:rslibrationinl
+msgid "Libration in latitude"
+msgstr ""
+
+#: u_translation:rslibrationinl2
+msgid "Libration in longitude"
+msgstr ""
+
+#: u_translation:rslightyears
+msgid "light years"
+msgstr ""
+
+#: u_translation:rslii
+msgid "LII"
+msgstr ""
+
+#: u_translation:rslimitingmagn2
+msgid "Limiting magnitude :"
+msgstr ""
+
+#: u_translation:rslimitingmagn
+msgid "Limiting magnitude, list :"
+msgstr ""
+
+#: u_translation:rslimitingsize
+msgid "Limiting Size (arcminutes) :"
+msgstr ""
+
+#: u_translation:rsline1
+msgid "Line"
+msgstr ""
+
+#: u_translation:rslinemode
+msgid "Line mode"
+msgstr ""
+
+#: u_translation:rslinemodedraw
+msgid "Line mode drawing"
+msgstr ""
+
+#: u_translation:rslineoperatio
+msgid "Line operation"
+msgstr ""
+
+#: u_translation:rslinewidth
+msgid "Line width "
+msgstr ""
+
+#: u_translation:rslines
+msgid "Lines"
+msgstr ""
+
+#: u_translation:rslinesgrid
+msgid "Lines / Grid"
+msgstr ""
+
+#: u_translation:rslinkallchart
+msgid "Link All Chart"
+msgstr ""
+
+#: u_translation:rslistofavaila
+msgid "List of available plates"
+msgstr ""
+
+#: u_translation:rslistenonport
+msgid "Listen on port: %s"
+msgstr ""
+
+#: u_translation:rsload
+msgid "Load"
+msgstr ""
+
+#: u_translation:rsloadfile
+msgid "Load file"
+msgstr ""
+
+#: u_translation:rsloadmpcfile
+msgid "Load MPC File"
+msgstr ""
+
+#: u_translation:rsloadmpcforma
+msgid "Load MPC format file"
+msgstr ""
+
+#: u_translation:rsloadonlythef
+msgid "Load only the first "
+msgstr ""
+
+#: u_translation:rsloadproject
+msgid "Load project"
+msgstr ""
+
+#: u_translation:rslocalhorizon
+msgid "Local Horizon"
+msgstr ""
+
+#: u_translation:rslocalhorizon2
+msgid "Local Horizon File Name : "
+msgstr ""
+
+#: u_translation:rslocaltime
+msgid "Local Time = "
+msgstr ""
+
+#: u_translation:rslockon
+msgid "Lock on %s"
+msgstr ""
+
+#: u_translation:rslogarithmics
+msgid "Logarithmic scale"
+msgstr ""
+
+#: u_translation:rslongitude
+msgid "Longitude"
+msgstr ""
+
+#: u_translation:rslongitudeasc
+msgid "Longitude ascending Node"
+msgstr ""
+
+#: u_translation:rslosange
+msgid "Losange"
+msgstr ""
+
+#: u_translation:rslowsurfacebr
+msgid "Low surface brightness"
+msgstr ""
+
+#: u_translation:rsluminosity
+msgid "Luminosity"
+msgstr ""
+
+#: u_translation:rslunareclipse
+msgid "Lunar Eclipses"
+msgstr ""
+
+#: u_translation:rsmin
+msgid "m"
+msgstr "'"
+
+#: u_translation:rssminute
+msgid "M"
+msgstr ""
+
+#: u_translation:rsmag
+msgid "Mag:"
+msgstr ""
+
+#: u_translation:rsmagn
+msgid "Magn."
+msgstr ""
+
+#: u_translation:rsmagnitude
+msgid "Magnitude"
+msgstr ""
+
+#: u_translation:rsmagnitudeatm
+msgid "Magnitude at maxima"
+msgstr ""
+
+#: u_translation:rsmagnitudeatm2
+msgid "Magnitude at minima"
+msgstr ""
+
+#: u_translation:rsmagnitudeban
+msgid "Magnitude Band"
+msgstr ""
+
+#: u_translation:rsmagnitudedif
+msgid "Magnitude difference"
+msgstr ""
+
+#: u_translation:rsmagnitudeerr
+msgid "Magnitude Error"
+msgstr ""
+
+#: u_translation:rsmagnitudefai
+msgid "magnitude fainter than the stars."
+msgstr ""
+
+#: u_translation:rsmagnitudetyc
+msgid "Magnitude Tycho BT"
+msgstr ""
+
+#: u_translation:rsmagnitudetyc2
+msgid "Magnitude Tycho VT"
+msgstr ""
+
+#: u_translation:rsmaillist
+msgid "MailList"
+msgstr ""
+
+#: u_translation:rsmainbar
+msgid "Main Bar"
+msgstr ""
+
+#: u_translation:rsmanualmount
+msgid "Manual Mount"
+msgstr ""
+
+#: u_translation:rsmanualtelesc
+msgid "Manual Telescope"
+msgstr ""
+
+#: u_translation:rsmap
+msgid "Map"
+msgstr ""
+
+#: u_translation:rsmarkthechart
+msgid "Mark the chart center "
+msgstr ""
+
+#: u_translation:rsmars
+msgid "Mars"
+msgstr ""
+
+#: u_translation:rsmax2
+msgid "max"
+msgstr ""
+
+#: u_translation:rsmax
+msgid "Max."
+msgstr ""
+
+#: u_translation:rsmaximize
+msgid "Maximize"
+msgstr ""
+
+#: u_translation:rsmaximummagni
+msgid "Maximum magnitude"
+msgstr ""
+
+#: u_translation:rsmbytes
+msgid "MBytes"
+msgstr ""
+
+#: u_translation:rsmeananomaly
+msgid "Mean anomaly"
+msgstr ""
+
+#: u_translation:rsmeanposition
+msgid "Mean position"
+msgstr ""
+
+#: u_translation:rsmercury
+msgid "Mercury"
+msgstr ""
+
+#: u_translation:rsmessages
+msgid "Messages:"
+msgstr ""
+
+#: u_translation:rsmeters
+msgid "Meters"
+msgstr ""
+
+#: u_translation:rsmilkyway
+msgid "Milky Way"
+msgstr ""
+
+#: u_translation:rsmin2
+msgid "min"
+msgstr ""
+
+#: u_translation:rsmin3
+msgid "Min."
+msgstr ""
+
+#: u_translation:rsminute
+msgid "Minute"
+msgstr ""
+
+#: u_translation:rsminutes
+msgid "minutes"
+msgstr ""
+
+#: u_translation:rsmirrorhorizo
+msgid "Mirror Horizontally"
+msgstr ""
+
+#: u_translation:rsmirrorvertic
+msgid "Mirror Vertically"
+msgstr ""
+
+#: u_translation:rsmisclines
+msgid "Misc. Lines"
+msgstr ""
+
+#: u_translation:rsmodify
+msgid "Modify"
+msgstr ""
+
+#: u_translation:rsmonday
+msgid "Mon."
+msgstr ""
+
+#: u_translation:rsmonth
+msgid "Month"
+msgstr ""
+
+#: u_translation:rsmoon
+msgid "Moon"
+msgstr ""
+
+#: u_translation:rsmorenebulae
+msgid "More Nebulae"
+msgstr ""
+
+#: u_translation:rsmorestars
+msgid "More Stars"
+msgstr ""
+
+#: u_translation:rsmorethanobje
+msgid "More than %s objects, result truncated."
+msgstr ""
+
+#: u_translation:rsmorethan1000
+msgid "More than 1000 errors! Process aborted."
+msgstr ""
+
+#: u_translation:rsmorning
+msgid "Morning"
+msgstr ""
+
+#: u_translation:rsmorningtwili
+msgid "Morning twilight"
+msgstr ""
+
+#: u_translation:rsmovelabel
+msgid "Move label"
+msgstr ""
+
+#: u_translation:rsmpcftp
+msgid "MPC Ftp"
+msgstr ""
+
+#: u_translation:rsmpchttp
+msgid "MPC Http"
+msgstr ""
+
+#: u_translation:rsmpcorb50mb
+msgid "MPCORB > 50Mb!"
+msgstr ""
+
+#: u_translation:rsmultipleflag
+msgid "Multiple Flag"
+msgstr ""
+
+#: u_translation:rsmultiplestar
+msgid "Multiple Star"
+msgstr ""
+
+#: u_translation:rsmysqldatabas
+msgid "MySQL Database"
+msgstr ""
+
+#: u_translation:rsnakedeye
+msgid "Naked Eye"
+msgstr ""
+
+#: u_translation:rsnakedeyerefe
+msgid "Naked eye reference"
+msgstr ""
+
+#: u_translation:rsname
+msgid "Name"
+msgstr ""
+
+#: u_translation:rsnautical
+msgid "Nautical"
+msgstr ""
+
+#: u_translation:rsnebula
+msgid "Nebula"
+msgstr ""
+
+#: u_translation:rsnebulacommon
+msgid "Nebula Common Name"
+msgstr ""
+
+#: u_translation:rsnebuladispla
+msgid "Nebula Display"
+msgstr ""
+
+#: u_translation:rsnebulae
+msgid "Nebulae"
+msgstr ""
+
+#: u_translation:rsnebulaefilte
+msgid "Nebulae Filter"
+msgstr ""
+
+#: u_translation:rsnebulaeoroth
+msgid "Nebulae or other objects"
+msgstr ""
+
+#: u_translation:rsnebulaeoutli
+msgid "Nebulae outlines"
+msgstr ""
+
+#: u_translation:rsneighbor
+msgid "Neighbor"
+msgstr ""
+
+#: u_translation:rsneptune
+msgid "Neptune"
+msgstr ""
+
+#: u_translation:rsnewchart
+msgid "New Chart"
+msgstr ""
+
+#: u_translation:rsnewfindercir
+msgid "New Finder Circle"
+msgstr ""
+
+#: u_translation:rsnewlabel
+msgid "New Label"
+msgstr ""
+
+#: u_translation:rsnext
+msgid "Next   >>"
+msgstr ""
+
+#: u_translation:rsnightvision
+msgid "Night Vision"
+msgstr ""
+
+#: u_translation:rsnightvisionb
+msgid "Night Vision Button"
+msgstr ""
+
+#: u_translation:rsnightvisionc
+msgid "Night vision color"
+msgstr ""
+
+#: u_translation:rsnoasteroidda
+msgid "No Asteroid data found!%sPlease load a MPC file first."
+msgstr ""
+
+#: u_translation:rsnomargin
+msgid "No Margin"
+msgstr ""
+
+#: u_translation:rsnoobjecttolo
+msgid "No object to lock on"
+msgstr ""
+
+#: u_translation:rsnopicture
+msgid "No picture"
+msgstr ""
+
+#: u_translation:rsno
+msgid "No."
+msgstr ""
+
+#: u_translation:rsnonexistant
+msgid "Non Existant"
+msgstr ""
+
+#: u_translation:rsnone1
+msgid "None"
+msgstr ""
+
+#: u_translation:rsnonexistentu
+msgid "Non-existent/unknown"
+msgstr ""
+
+#: u_translation:rsnormalcolor
+msgid "Normal (color)"
+msgstr ""
+
+#: u_translation:rsnorth
+msgid "North"
+msgstr ""
+
+#: u_translation:rsnotafitsfile
+msgid "Not a FITS file, SIMPLE = T keyword missing"
+msgstr ""
+
+#: u_translation:rsnotavailable
+msgid "Not available"
+msgstr ""
+
+#: u_translation:rsnote
+msgid "Note"
+msgstr ""
+
+#: u_translation:rsnow
+msgid "Now"
+msgstr ""
+
+#: u_translation:rsnumberoffile
+msgid "Number of files"
+msgstr ""
+
+#: u_translation:rsnumberofmont
+msgid "Number of Month"
+msgstr ""
+
+#: u_translation:rsnumberofstar
+msgid "Number of Stars"
+msgstr ""
+
+#: u_translation:rsnumberofstep
+msgid "Number of steps"
+msgstr ""
+
+#: u_translation:rsnutationaber
+msgid "Nutation ,  Aberration"
+msgstr ""
+
+#: u_translation:rsobject
+msgid "Object"
+msgstr ""
+
+#: u_translation:rsobjectbar
+msgid "Object Bar"
+msgstr ""
+
+#: u_translation:rsobjectfilter
+msgid "Object Filter"
+msgstr ""
+
+#: u_translation:rsobjectfilter2
+msgid "Object Filter Setting"
+msgstr ""
+
+#: u_translation:rsobjectlist
+msgid "Object List"
+msgstr ""
+
+#: u_translation:rsobjectlistse
+msgid "Object List Setting"
+msgstr ""
+
+#: u_translation:rsobjectname
+msgid "Object Name"
+msgstr ""
+
+#: u_translation:rsobjectsizeun
+msgid "Object size unit"
+msgstr ""
+
+#: u_translation:rsobjecttype
+msgid "Object type"
+msgstr ""
+
+#: u_translation:rsobjects
+msgid "Objects"
+msgstr ""
+
+#: u_translation:rsobservatory
+msgid "Observatory"
+msgstr ""
+
+#: u_translation:rsobservatoryd
+msgid "Observatory Database"
+msgstr ""
+
+#: u_translation:rsobsolete
+msgid "Obsolete"
+msgstr ""
+
+#: u_translation:rsoffset
+msgid "Offset"
+msgstr ""
+
+#: u_translation:rsok
+msgid "OK"
+msgstr ""
+
+#: u_translation:rsonlinedss
+msgid "Online DSS"
+msgstr ""
+
+#: u_translation:rsonlinedsspic
+msgid "Online DSS pictures"
+msgstr ""
+
+#: u_translation:rsonlinepictur
+msgid "Online pictures servers"
+msgstr ""
+
+#: u_translation:rsonlynumbered
+msgid "Only numbered asteroids"
+msgstr ""
+
+#: u_translation:rsopen
+msgid "Open"
+msgstr ""
+
+#: u_translation:rsopenachart
+msgid "Open a chart"
+msgstr ""
+
+#: u_translation:rsopencluster
+msgid "Open Cluster"
+msgstr ""
+
+#: u_translation:rsopenthebitma
+msgid "Open the bitmap."
+msgstr ""
+
+#: u_translation:rsoptions
+msgid "Options"
+msgstr ""
+
+#: u_translation:rsorusealocalf
+msgid "Or use a local file :"
+msgstr ""
+
+#: u_translation:rsorbit
+msgid "Orbit"
+msgstr ""
+
+#: u_translation:rsorbitaleleme
+msgid "Orbital Elements"
+msgstr ""
+
+#: u_translation:rsorientation
+msgid "Orientation"
+msgstr ""
+
+#: u_translation:rsother
+msgid "Other"
+msgstr ""
+
+#: u_translation:rsotherlabel
+msgid "Other label"
+msgstr ""
+
+#: u_translation:rsotherlinesca
+msgid "Other Lines Catalogs"
+msgstr ""
+
+#: u_translation:rsoutputcatalo2
+msgid "Output catalog options"
+msgstr ""
+
+#: u_translation:rsoutputcatalo
+msgid "Output Catalog Type"
+msgstr ""
+
+#: u_translation:rsoutputdirect
+msgid "Output Directory"
+msgstr ""
+
+#: u_translation:rspagemarginin
+msgid "Page Margin in millimeter"
+msgstr ""
+
+#: u_translation:rsparallax
+msgid "Parallax"
+msgstr ""
+
+#: u_translation:rsparametric
+msgid "Parametric"
+msgstr ""
+
+#: u_translation:rspartial
+msgid "Partial"
+msgstr ""
+
+#: u_translation:rspassword
+msgid "Password"
+msgstr ""
+
+#: u_translation:rspath
+msgid "Path"
+msgstr ""
+
+#: u_translation:rspathtosaveth
+msgid "Path to save the file :"
+msgstr ""
+
+#: u_translation:rspathwidth
+msgid "Path Width"
+msgstr ""
+
+#: u_translation:rspenumbra
+msgid "Penumbra"
+msgstr ""
+
+#: u_translation:rsperihelionda
+msgid "Perihelion date"
+msgstr ""
+
+#: u_translation:rsperiheliondi
+msgid "Perihelion distance"
+msgstr ""
+
+#: u_translation:rsperiod
+msgid "Period"
+msgstr ""
+
+#: u_translation:rspersonaldata
+msgid "Personal data"
+msgstr ""
+
+#: u_translation:rsphase
+msgid "Phase"
+msgstr ""
+
+#: u_translation:rsphotographic2
+msgid "Photographic"
+msgstr ""
+
+#: u_translation:rsphotographic
+msgid "Photographic Plate"
+msgstr ""
+
+#: u_translation:rspictures
+msgid "Pictures"
+msgstr ""
+
+#: u_translation:rspixels
+msgid "pixels"
+msgstr ""
+
+#: u_translation:rsplanet
+msgid "Planet"
+msgstr ""
+
+#: u_translation:rsplanetaryneb3
+msgid "Planetary nebula"
+msgstr ""
+
+#: u_translation:rsplanetaryneb
+msgid "Planetary Nebula"
+msgstr ""
+
+#: u_translation:rsplanetaryneb2
+msgid "Planetary nebulae"
+msgstr ""
+
+#: u_translation:rsplanetarysat
+msgid "Planetary satellite"
+msgstr ""
+
+#: u_translation:rsplanetssetti
+msgid "Planets Setting"
+msgstr ""
+
+#: u_translation:rsplatedefect
+msgid "Plate Defect"
+msgstr ""
+
+#: u_translation:rsplateiddatee
+msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
+msgstr ""
+
+#: u_translation:rspleaseconfig2
+msgid "Please configure the orbital element URL!"
+msgstr ""
+
+#: u_translation:rspleaseconfig
+msgid "Please configure your DSS file path first."
+msgstr ""
+
+#: u_translation:rspleaseconfir
+msgid "Please confirm that the telescope is centered to %s"
+msgstr ""
+
+#: u_translation:rspleaseentera
+msgid "Please enter an object identifier."
+msgstr ""
+
+#: u_translation:rspleaseindica2
+msgid "Please indicate a catalog long name"
+msgstr ""
+
+#: u_translation:rspleaseindica
+msgid "Please indicate a catalog short name"
+msgstr ""
+
+#: u_translation:rspleaseindica3
+msgid "Please indicate the directory where the catalog must to be build"
+msgstr ""
+
+#: u_translation:rspleasemountr
+msgid "Please mount RealSky\256 CD number"
+msgstr ""
+
+#: u_translation:rsplottheposit
+msgid "Plot the position of moving object."
+msgstr ""
+
+#: u_translation:rspluto
+msgid "Pluto"
+msgstr ""
+
+#: u_translation:rspm
+msgid "pm"
+msgstr ""
+
+#: u_translation:rspoleinclinat
+msgid "Pole inclination"
+msgstr ""
+
+#: u_translation:rsport
+msgid "Port:"
+msgstr ""
+
+#: u_translation:rsportrait
+msgid "Portrait"
+msgstr ""
+
+#: u_translation:rsposition
+msgid "Position"
+msgstr ""
+
+#: u_translation:rspositionangl
+msgid "Position Angle"
+msgstr ""
+
+#: u_translation:rspositionepoc
+msgid "Position Epoch"
+msgstr ""
+
+#: u_translation:rspostscript
+msgid "Postscript"
+msgstr ""
+
+#: u_translation:rsprefixthealt
+msgid "Prefix the alternate names with their label"
+msgstr ""
+
+#: u_translation:rsprepareacata
+msgid "Prepare a catalog CatGen"
+msgstr ""
+
+#: u_translation:rspreparedata
+msgid "Prepare data "
+msgstr ""
+
+#: u_translation:rspreparemonth
+msgid "Prepare Monthly Data"
+msgstr ""
+
+#: u_translation:rspressuremill
+msgid "Pressure (millibar)"
+msgstr ""
+
+#: u_translation:rsprint
+msgid "Print"
+msgstr ""
+
+#: u_translation:rsprintchart
+msgid "Print Chart"
+msgstr ""
+
+#: u_translation:rsprintmethod
+msgid "Print method"
+msgstr ""
+
+#: u_translation:rsprintthechar
+msgid "Print the chart"
+msgstr ""
+
+#: u_translation:rsprinterlegen
+msgid "Printer legend"
+msgstr ""
+
+#: u_translation:rsprintersetup
+msgid "Printer Setup"
+msgstr ""
+
+#: u_translation:rsprinter
+msgid "Printer:"
+msgstr ""
+
+#: u_translation:rsprocessingen2
+msgid "Processing ended. Total number of asteroid :%s"
+msgstr ""
+
+#: u_translation:rsprocessingen
+msgid "Processing ended. Total number of comet :%s"
+msgstr ""
+
+#: u_translation:rsprocessingen3
+msgid "Processing ended. Total number of location :%s"
+msgstr ""
+
+#: u_translation:rsprocessingli
+msgid "Processing line %s"
+msgstr ""
+
+#: u_translation:rsprocessing
+msgid "Processing... %s"
+msgstr ""
+
+#: u_translation:rsprogramdata
+msgid "Program Data "
+msgstr ""
+
+#: u_translation:rsprogress
+msgid "Progress"
+msgstr ""
+
+#: u_translation:rsprogressmess
+msgid "Progress Messages"
+msgstr ""
+
+#: u_translation:rsprojection
+msgid "Projection"
+msgstr ""
+
+#: u_translation:rsprojectionse
+msgid "Projection Setting"
+msgstr ""
+
+#: u_translation:rspropermotion2
+msgid "Proper Motion in Declination"
+msgstr ""
+
+#: u_translation:rspropermotion
+msgid "Proper Motion in Right ascension"
+msgstr ""
+
+#: u_translation:rsproportional2
+msgid "Proportional to the magnitude"
+msgstr ""
+
+#: u_translation:rsproportional
+msgid "Proportional to the tail length"
+msgstr ""
+
+#: u_translation:rsproxy
+msgid "Proxy"
+msgstr ""
+
+#: u_translation:rsproxyhost
+msgid "Proxy host"
+msgstr ""
+
+#: u_translation:rsproxyport
+msgid "Proxy port"
+msgstr ""
+
+#: u_translation:rsquasar
+msgid "Quasar"
+msgstr ""
+
+#: u_translation:rsquickdelete
+msgid "Quick Delete"
+msgstr ""
+
+#: u_translation:rsquicklydelet2
+msgid "Quickly delete all asteroid related data"
+msgstr ""
+
+#: u_translation:rsquicklydelet
+msgid "Quickly delete all comet related data"
+msgstr ""
+
+#: u_translation:rsra
+msgid "RA"
+msgstr ""
+
+#: u_translation:rsraoptions
+msgid "RA options"
+msgstr ""
+
+#: u_translation:rsraturns
+msgid "RA turns: "
+msgstr ""
+
+#: u_translation:rsradialveloci
+msgid "Radial Velocity"
+msgstr ""
+
+#: u_translation:rsrange
+msgid "Range"
+msgstr ""
+
+#: u_translation:rsrasterresolu
+msgid "Raster Resolution"
+msgstr ""
+
+#: u_translation:rsrealisticsim
+msgid "Realistics image"
+msgstr ""
+
+#: u_translation:rsrealskynorth
+msgid "RealSky North"
+msgstr ""
+
+#: u_translation:rsrealskysouth
+msgid "RealSky South"
+msgstr ""
+
+#: u_translation:rsrecognizeuni
+msgid "Recognize Units or Object type from the file:"
+msgstr ""
+
+#: u_translation:rsred
+msgid "Red"
+msgstr ""
+
+#: u_translation:rsredmagnitude
+msgid "Red Magnitude"
+msgstr ""
+
+#: u_translation:rsredo
+msgid "Redo"
+msgstr ""
+
+#: u_translation:rsredolastchan
+msgid "Redo Last Change"
+msgstr ""
+
+#: u_translation:rsreference
+msgid "Reference"
+msgstr ""
+
+#: u_translation:rsreflectionne
+msgid "Reflection nebula"
+msgstr ""
+
+#: u_translation:rsrefresh
+msgid "Refresh"
+msgstr ""
+
+#: u_translation:rsremoveallcir
+msgid "Remove All Circles"
+msgstr ""
+
+#: u_translation:rsremovealllab
+msgid "Remove All Labels"
+msgstr ""
+
+#: u_translation:rsremovelastci
+msgid "Remove Last Circle"
+msgstr ""
+
+#: u_translation:rsremovelastla
+msgid "Remove Last Label"
+msgstr ""
+
+#: u_translation:rsreplacedby
+msgid "Replaced by"
+msgstr ""
+
+#: u_translation:rsreportaprobl
+msgid "Report a problem"
+msgstr ""
+
+#: u_translation:rsrequiredfiel
+msgid "Required field missing !"
+msgstr ""
+
+#: u_translation:rsreset
+msgid "Reset"
+msgstr ""
+
+#: u_translation:rsresetalllabe
+msgid "Reset All Labels"
+msgstr ""
+
+#: u_translation:rsresetchart
+msgid "Reset Chart"
+msgstr ""
+
+#: u_translation:rsresolution
+msgid "Resolution:"
+msgstr ""
+
+#: u_translation:rsreturn
+msgid "Return"
+msgstr ""
+
+#: u_translation:rsrevertaltkno
+msgid "Revert Alt knob"
+msgstr ""
+
+#: u_translation:rsrevertazknob
+msgid "Revert Az knob"
+msgstr ""
+
+#: u_translation:rsrevertdeckno
+msgid "Revert DEC knob"
+msgstr ""
+
+#: u_translation:rsrevertraknob
+msgid "Revert RA knob"
+msgstr ""
+
+#: u_translation:rsright
+msgid "Right"
+msgstr ""
+
+#: u_translation:rsrightascensi
+msgid "Right Ascension"
+msgstr ""
+
+#: u_translation:rsrightbar
+msgid "Right Bar"
+msgstr ""
+
+#: u_translation:rsrise
+msgid "Rise"
+msgstr ""
+
+#: u_translation:rsrisetime
+msgid "Rise time"
+msgstr ""
+
+#: u_translation:rsrotateleft
+msgid "Rotate Left"
+msgstr ""
+
+#: u_translation:rsrotateright
+msgid "Rotate Right"
+msgstr ""
+
+#: u_translation:rsrotation
+msgid "Rotation"
+msgstr ""
+
+#: u_translation:rssec
+msgid "s"
+msgstr "\""
+
+#: u_translation:rsssecond
+msgid "S"
+msgstr ""
+
+#: u_translation:rssaros
+msgid "Saros"
+msgstr ""
+
+#: u_translation:rssaturday
+msgid "Sat."
+msgstr ""
+
+#: u_translation:rssatring
+msgid "Sat.Ring"
+msgstr ""
+
+#: u_translation:rssatellite
+msgid "Satellite"
+msgstr ""
+
+#: u_translation:rssaturn
+msgid "Saturn"
+msgstr ""
+
+#: u_translation:rssave
+msgid "Save"
+msgstr ""
+
+#: u_translation:rssaveas
+msgid "Save As..."
+msgstr ""
+
+#: u_translation:rssaveconfigur
+msgid "Save Configuration Now"
+msgstr ""
+
+#: u_translation:rssaveconfigur2
+msgid "Save Configuration On Exit"
+msgstr ""
+
+#: u_translation:rssaveimage
+msgid "Save Image..."
+msgstr ""
+
+#: u_translation:rssaveproject
+msgid "Save Project"
+msgstr ""
+
+#: u_translation:rssavethecurre
+msgid "Save the current chart"
+msgstr ""
+
+#: u_translation:rssavetofile
+msgid "Save to File"
+msgstr ""
+
+#: u_translation:rsscandirector
+msgid "Scan directory"
+msgstr ""
+
+#: u_translation:rsscreenandsta
+msgid "Screen and Status Bar"
+msgstr ""
+
+#: u_translation:rsscrollbar
+msgid "Scroll Bar"
+msgstr ""
+
+#: u_translation:rssearch
+msgid "Search"
+msgstr ""
+
+#: u_translation:rssearchfor
+msgid "Search for"
+msgstr ""
+
+#: u_translation:rssearchindex
+msgid "Search Index"
+msgstr ""
+
+#: u_translation:rssec2
+msgid "Sec."
+msgstr ""
+
+#: u_translation:rssecond
+msgid "Second"
+msgstr ""
+
+#: u_translation:rsseconds
+msgid "Seconds"
+msgstr ""
+
+#: u_translation:rsselectall
+msgid "Select All"
+msgstr ""
+
+#: u_translation:rsselectplatef
+msgid "Select plate from list"
+msgstr ""
+
+#: u_translation:rsselectthefie
+msgid "Select the fields to use and their position in the text file"
+msgstr ""
+
+#: u_translation:rsselectthesys
+msgid "Select the system printer and options you want to use"
+msgstr ""
+
+#: u_translation:rsselectthetyp
+msgid "Select the type of object in your catalog"
+msgstr ""
+
+#: u_translation:rssemi
+msgid "Semi"
+msgstr ""
+
+#: u_translation:rssemimajoraxi
+msgid "Semimajor Axis"
+msgstr ""
+
+#: u_translation:rssendcharttop
+msgid "Send chart to printer."
+msgstr ""
+
+#: u_translation:rsseparation
+msgid "Separation"
+msgstr ""
+
+#: u_translation:rsserver
+msgid "Server"
+msgstr ""
+
+#: u_translation:rsservercomman
+msgid "Server command "
+msgstr ""
+
+#: u_translation:rsserverinform
+msgid "Server Information"
+msgstr ""
+
+#: u_translation:rsserveripinte
+msgid "Server IP Interface :"
+msgstr ""
+
+#: u_translation:rsserveripport
+msgid "Server IP Port :"
+msgstr ""
+
+#: u_translation:rsset
+msgid "Set"
+msgstr ""
+
+#: u_translation:rssetdateandti
+msgid "Set date and time"
+msgstr ""
+
+#: u_translation:rssetfov
+msgid "Set FOV"
+msgstr ""
+
+#: u_translation:rssetfovto
+msgid "Set FOV to"
+msgstr ""
+
+#: u_translation:rssethowthemou
+msgid "Set how the mount move on each axis when you turn the driving knob. Then the Telescope button show you the turns you must do to go from one object to another."
+msgstr ""
+
+#: u_translation:rssetobservato
+msgid "Set observatory location"
+msgstr ""
+
+#: u_translation:rssetup
+msgid "Setup"
+msgstr ""
+
+#: u_translation:rsshowallsky
+msgid "Show All Sky"
+msgstr ""
+
+#: u_translation:rsshowasteroid
+msgid "Show Asteroids"
+msgstr ""
+
+#: u_translation:rsshowasteroid3
+msgid "Show asteroids on the chart"
+msgstr ""
+
+#: u_translation:rsshowcomets
+msgid "Show Comets"
+msgstr ""
+
+#: u_translation:rsshowcometson
+msgid "Show comets on the chart"
+msgstr ""
+
+#: u_translation:rsshowconstell4
+msgid "Show Constellation Boundary"
+msgstr ""
+
+#: u_translation:rsshowconstell3
+msgid "Show Constellation Figure"
+msgstr ""
+
+#: u_translation:rsshowconstell2
+msgid "Show Constellation Limit"
+msgstr ""
+
+#: u_translation:rsshowconstell
+msgid "Show Constellation Line"
+msgstr ""
+
+#: u_translation:rsshowcoordina
+msgid "Show Coordinate Grid"
+msgstr ""
+
+#: u_translation:rsshowearthsha
+msgid "Show Earth Shadow  (Lunar eclipses)"
+msgstr ""
+
+#: u_translation:rsshowecliptic
+msgid "Show Ecliptic"
+msgstr ""
+
+#: u_translation:rsshowgalactic
+msgid "Show Galactic Equator"
+msgstr ""
+
+#: u_translation:rsshowgridlabe
+msgid "Show Grid Label"
+msgstr ""
+
+#: u_translation:rsshowirvariab
+msgid "Show IR variables"
+msgstr ""
+
+#: u_translation:rsshowlabels
+msgid "Show Labels"
+msgstr ""
+
+#: u_translation:rsshowlines
+msgid "Show Lines"
+msgstr ""
+
+#: u_translation:rsshowmark
+msgid "Show Mark"
+msgstr ""
+
+#: u_translation:rsshowmilkyway
+msgid "Show Milky Way"
+msgstr ""
+
+#: u_translation:rsshownebulae
+msgid "Show Nebulae"
+msgstr ""
+
+#: u_translation:rsshowobjectbe
+msgid "Show Object below the horizon"
+msgstr ""
+
+#: u_translation:rsshowobjectpi
+msgid "Show object pictures on the chart"
+msgstr ""
+
+#: u_translation:rsshowobjects
+msgid "Show Objects"
+msgstr ""
+
+#: u_translation:rsshowpictures
+msgid "Show Pictures"
+msgstr ""
+
+#: u_translation:rsshowplaneton
+msgid "Show Planet on the Chart"
+msgstr ""
+
+#: u_translation:rsshowplanets
+msgid "Show Planets"
+msgstr ""
+
+#: u_translation:rsshowstars
+msgid "Show Stars"
+msgstr ""
+
+#: u_translation:rsshowthispict
+msgid "Show this picture"
+msgstr ""
+
+#: u_translation:rsshowhidedssi
+msgid "Show/Hide DSS image"
+msgstr ""
+
+#: u_translation:rssideraltime
+msgid "Sideral Time"
+msgstr ""
+
+#: u_translation:rssiderealday
+msgid "Sidereal Day"
+msgstr ""
+
+#: u_translation:rssimulation
+msgid "Simulation"
+msgstr ""
+
+#: u_translation:rssize
+msgid "Size"
+msgstr ""
+
+#: u_translation:rsskybackgroun
+msgid "Sky Background Color"
+msgstr ""
+
+#: u_translation:rsskycharts
+msgid "Sky Charts"
+msgstr ""
+
+#: u_translation:rsskycolour
+msgid "Sky Colour"
+msgstr ""
+
+#: u_translation:rsskycharthome
+msgid "Skychart Homepage"
+msgstr ""
+
+#: u_translation:rsslew
+msgid "Slew"
+msgstr ""
+
+#: u_translation:rssocketerror
+msgid "Socket error %s.  %s"
+msgstr ""
+
+#: u_translation:rssolardistanc
+msgid "Solar Distance"
+msgstr ""
+
+#: u_translation:rssolareclipse
+msgid "Solar Eclipses"
+msgstr ""
+
+#: u_translation:rssolarelongat
+msgid "Solar Elongation"
+msgstr ""
+
+#: u_translation:rssolarsystem
+msgid "Solar System"
+msgstr ""
+
+#: u_translation:rssolarsystemo
+msgid "Solar System object"
+msgstr ""
+
+#: u_translation:rssolarsystems
+msgid "Solar System Setting"
+msgstr ""
+
+#: u_translation:rssomerecordsw
+msgid "Some records where rejected, see file %sreject.txt for details"
+msgstr ""
+
+#: u_translation:rssortbyra
+msgid "Sort by RA"
+msgstr ""
+
+#: u_translation:rssortingfiles
+msgid "Sorting files by magnitude"
+msgstr ""
+
+#: u_translation:rssortingthein
+msgid "Sorting the index file "
+msgstr ""
+
+#: u_translation:rssouth
+msgid "South"
+msgstr ""
+
+#: u_translation:rsspectralclas
+msgid "Spectral Class"
+msgstr ""
+
+#: u_translation:rsspline
+msgid "Spline"
+msgstr ""
+
+#: u_translation:rssqldatabasen
+msgid "SQL database not available."
+msgstr ""
+
+#: u_translation:rssqldatabases
+msgid "SQL database software is probably not installed!"
+msgstr ""
+
+#: u_translation:rssqlitedataba
+msgid "Sqlite Database"
+msgstr ""
+
+#: u_translation:rssquare
+msgid "Square"
+msgstr ""
+
+#: u_translation:rsstandardcolo
+msgid "Standard  Color"
+msgstr ""
+
+#: u_translation:rsstandardequi
+msgid "Standard Equinox"
+msgstr ""
+
+#: u_translation:rsstar
+msgid "Star"
+msgstr ""
+
+#: u_translation:rsstarcolourbv
+msgid "Star colour (B-V) :"
+msgstr ""
+
+#: u_translation:rsstarcommonna
+msgid "Star Common Name"
+msgstr ""
+
+#: u_translation:rsstardisplay
+msgid "Star Display"
+msgstr ""
+
+#: u_translation:rsstardisplayp
+msgid "Star Display  Properties"
+msgstr ""
+
+#: u_translation:rsstarlabel
+msgid "Star Label"
+msgstr ""
+
+#: u_translation:rsstars
+msgid "Stars"
+msgstr ""
+
+#: u_translation:rsstarsandnebu
+msgid "Stars and Nebulae catalogs prepared with "
+msgstr ""
+
+#: u_translation:rsstarsfilter
+msgid "Stars Filter"
+msgstr ""
+
+#: u_translation:rsstarsproperm
+msgid "Stars proper motion options (if available in the catalog)"
+msgstr ""
+
+#: u_translation:rsstartmonth
+msgid "Start Month"
+msgstr ""
+
+#: u_translation:rsstartofobjec
+msgid "Start of object"
+msgstr ""
+
+#: u_translation:rsstatusbar
+msgid "Status Bar"
+msgstr ""
+
+#: u_translation:rsstepunit
+msgid "Step unit"
+msgstr ""
+
+#: u_translation:rssun
+msgid "Sun"
+msgstr ""
+
+#: u_translation:rssunalt
+msgid "Sun alt."
+msgstr ""
+
+#: u_translation:rssuninclinati
+msgid "Sun inclination"
+msgstr ""
+
+#: u_translation:rssunday
+msgid "Sun."
+msgstr ""
+
+#: u_translation:rssupernovarem
+msgid "Supernova remnant"
+msgstr ""
+
+#: u_translation:rssurface
+msgid "Surface"
+msgstr ""
+
+#: u_translation:rssurfacebrigh
+msgid "Surface Brightness"
+msgstr ""
+
+#: u_translation:rssymbol
+msgid "Symbol"
+msgstr ""
+
+#: u_translation:rssync
+msgid "Sync"
+msgstr ""
+
+#: u_translation:rssynodicmonth
+msgid "Synodic Month"
+msgstr ""
+
+#: u_translation:rssystem
+msgid "System"
+msgstr ""
+
+#: u_translation:rssystemprinte
+msgid "System Printer"
+msgstr ""
+
+#: u_translation:rssystemsettin
+msgid "System Setting"
+msgstr ""
+
+#: u_translation:rstcpipconnect
+msgid "TCP/IP Connection"
+msgstr ""
+
+#: u_translation:rstcpipserver
+msgid "TCP/IP Server"
+msgstr ""
+
+#: u_translation:rstcpipservice
+msgid "TCP/IP service not available."
+msgstr ""
+
+#: u_translation:rstelescope
+msgid "Telescope"
+msgstr ""
+
+#: u_translation:rstelescopenot
+msgid "Telescope not connected"
+msgstr ""
+
+#: u_translation:rstelescopeplu
+msgid "Telescope Plugin "
+msgstr ""
+
+#: u_translation:rstelescopeset
+msgid "Telescope Setting"
+msgstr ""
+
+#: u_translation:rstelescopetyp
+msgid "Telescope type"
+msgstr ""
+
+#: u_translation:rstelescope2
+msgid "Telescope: %s"
+msgstr ""
+
+#: u_translation:rstemperaturec
+msgid "Temperature (Celsius)"
+msgstr ""
+
+#: u_translation:rstemporaryfil
+msgid "temporary file"
+msgstr ""
+
+#: u_translation:rstextfilecata
+msgid "Text file catalog"
+msgstr ""
+
+#: u_translation:rstheme
+msgid "Theme"
+msgstr ""
+
+#: u_translation:rsthereis
+msgid "There is "
+msgstr ""
+
+#: u_translation:rsthereisobjec
+msgid "There is %s objects in this field."
+msgstr ""
+
+#: u_translation:rsthisactionre
+msgid "This action replace all the database content for the country %s using fresh data from NGA and GNIS.%sAll your editing for this country will be lost except the location you added with a new name that will be kept.%sDo you want to continue ?"
+msgstr ""
+
+#: u_translation:rsthisfilewasn
+msgid "This file was not recognized as a MPCORB file."
+msgstr ""
+
+#: u_translation:rsthisprogrami
+msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
+msgstr ""
+
+#: u_translation:rsthursday
+msgid "Thu."
+msgstr ""
+
+#: u_translation:rstilehorizont
+msgid "Tile Horizontally"
+msgstr ""
+
+#: u_translation:rstilevertical
+msgid "Tile Vertically"
+msgstr ""
+
+#: u_translation:rstime
+msgid "Time"
+msgstr ""
+
+#: u_translation:rstimesimulati
+msgid "Time Simulation"
+msgstr ""
+
+#: u_translation:rstimeunits
+msgid "Time Units"
+msgstr ""
+
+#: u_translation:rstimezone
+msgid "Time Zone"
+msgstr ""
+
+#: u_translation:rsto
+msgid "to"
+msgstr ""
+
+#: u_translation:rstousethisnew
+msgid "To use this new data you must now compute the Monthly Data"
+msgstr ""
+
+#: u_translation:rstoday
+msgid "Today"
+msgstr ""
+
+#: u_translation:rstoomanyopenw
+msgid "Too many open window, please close some chart."
+msgstr ""
+
+#: u_translation:rstoolbar
+msgid "Tool Bar"
+msgstr ""
+
+#: u_translation:rstop
+msgid "Top"
+msgstr ""
+
+#: u_translation:rstopocentric
+msgid "TopoCentric"
+msgstr ""
+
+#: u_translation:rstotal
+msgid "Total"
+msgstr ""
+
+#: u_translation:rstotalradius
+msgid "Total Radius"
+msgstr ""
+
+#: u_translation:rstransformati
+msgid "Transformation"
+msgstr ""
+
+#: u_translation:rstransparentl
+msgid "Transparent line mode (occultation)"
+msgstr ""
+
+#: u_translation:rstriplestar
+msgid "Triple Star"
+msgstr ""
+
+#: u_translation:rstropicalyear
+msgid "Tropical Year"
+msgstr ""
+
+#: u_translation:rstrueposition
+msgid "True position"
+msgstr ""
+
+#: u_translation:rstrumplerclas
+msgid "Trumpler Class"
+msgstr ""
+
+#: u_translation:rstuesday
+msgid "Tue."
+msgstr ""
+
+#: u_translation:rsturnsdegree
+msgid "turns / degree"
+msgstr ""
+
+#: u_translation:rsturnshour
+msgid "turns / hour"
+msgstr ""
+
+#: u_translation:rstwilight
+msgid "Twilight"
+msgstr ""
+
+#: u_translation:rstype
+msgid "Type"
+msgstr ""
+
+#: u_translation:rstypeofobject
+msgid "Type of object to add to the list"
+msgstr ""
+
+#: u_translation:rstypeofvariab
+msgid "Type of Variability"
+msgstr ""
+
+#: u_translation:rstype2
+msgid "Type:"
+msgstr ""
+
+#: u_translation:rsumbra
+msgid "Umbra"
+msgstr ""
+
+#: u_translation:rsundo
+msgid "Undo"
+msgstr ""
+
+#: u_translation:rsundolastchan
+msgid "Undo Last Change"
+msgstr ""
+
+#: u_translation:rsuniversaltim
+msgid "Universal Time"
+msgstr ""
+
+#: u_translation:rsunknow
+msgid "Unknow"
+msgstr ""
+
+#: u_translation:rsunknowobject
+msgid "Unknow object"
+msgstr ""
+
+#: u_translation:rsunlockchart
+msgid "Unlock Chart"
+msgstr ""
+
+#: u_translation:rsupdate1
+msgid "Update"
+msgstr ""
+
+#: u_translation:rsupdateoraddt
+msgid "Update or add the current location to the database ?"
+msgstr ""
+
+#: u_translation:rsupdatedsucce
+msgid "Updated successfully!"
+msgstr ""
+
+#: u_translation:rsuranus
+msgid "Uranus"
+msgstr ""
+
+#: u_translation:rsurl
+msgid "URL"
+msgstr ""
+
+#: u_translation:rsurllaunchcom
+msgid "URL launch command"
+msgstr ""
+
+#: u_translation:rsuseapresetco
+msgid "Use a preset colour scheme :"
+msgstr ""
+
+#: u_translation:rsuseanotherdt
+msgid "Use another DT-UT value"
+msgstr ""
+
+#: u_translation:rsusehttpproxy
+msgid "Use HTTP Proxy"
+msgstr ""
+
+#: u_translation:rsuseonlinedss
+msgid "Use online DSS instead of RealSky"
+msgstr ""
+
+#: u_translation:rsuseonlycatal
+msgid "Use only catalog from one of the three block at the same time"
+msgstr ""
+
+#: u_translation:rsusesubsampli
+msgid "Use subsampling to limit image size to"
+msgstr ""
+
+#: u_translation:rsusesystemtim
+msgid "Use system time"
+msgstr ""
+
+#: u_translation:rsusetcpipserv
+msgid "Use TCP/IP Server"
+msgstr ""
+
+#: u_translation:rsusetheproper
+msgid "Use the proper motion to correct the position for the current date"
+msgstr ""
+
+#: u_translation:rsusethisfield
+msgid "Use this field as an Alternate Name"
+msgstr ""
+
+#: u_translation:rsusexplanet
+msgid "Use Xplanet"
+msgstr ""
+
+#: u_translation:rsusername
+msgid "User Name"
+msgstr ""
+
+#: u_translation:rsuserid
+msgid "Userid:"
+msgstr ""
+
+#: u_translation:rsut
+msgid "UT"
+msgstr ""
+
+#: u_translation:rsvariablestar
+msgid "Variable Star"
+msgstr ""
+
+#: u_translation:rsvariables
+msgid "Variables"
+msgstr ""
+
+#: u_translation:rsvenus
+msgid "Venus"
+msgstr ""
+
+#: u_translation:rsvicinity
+msgid "Vicinity"
+msgstr ""
+
+#: u_translation:rsview
+msgid "View"
+msgstr ""
+
+#: u_translation:rsviewhorizon
+msgid "View Horizon"
+msgstr ""
+
+#: u_translation:rsviewfullscre
+msgid "ViewFullScreen"
+msgstr ""
+
+#: u_translation:rsvisibilityfo
+msgid "Visibility for observatory"
+msgstr ""
+
+#: u_translation:rsvisualmagnit
+msgid "Visual Magnitude"
+msgstr ""
+
+#: u_translation:rswanttotracka
+msgid "Want to track an object before it rise ?"
+msgstr ""
+
+#: u_translation:rswarningyouha
+msgid "WARNING !%sYou have choose to append the data to an existing catalog.%sThe existing catalog and index must be exactly of the same format, otherwise it will be corrupted.%sIt is a good idea to backup the actual files before this operation.%sDo you want to continue ?"
+msgstr ""
+
+#: u_translation:rswarningcalcu
+msgid "Warning! Calculation of"
+msgstr ""
+
+#: u_translation:rswarningyouar
+msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
+msgstr ""
+
+#: u_translation:rswednesday
+msgid "Wed."
+msgstr ""
+
+#: u_translation:rswest
+msgid "West"
+msgstr ""
+
+#: u_translation:rswhiteonblack
+msgid "White on Black"
+msgstr ""
+
+#: u_translation:rswidth
+msgid "Width"
+msgstr ""
+
+#: u_translation:rswindow
+msgid "Window"
+msgstr ""
+
+#: u_translation:rssyear
+msgid "Y"
+msgstr ""
+
+#: u_translation:rsyear
+msgid "Year"
+msgstr ""
+
+#: u_translation:rsyears
+msgid "years"
+msgstr ""
+
+#: u_translation:rsyouarenowrea
+msgid "You are now ready to display the asteroid for this time period."
+msgstr ""
+
+#: u_translation:rsyouliveonabi
+msgid "You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon."
+msgstr ""
+
+#: u_translation:rszenith
+msgid "Zenith"
+msgstr ""
+
+#: u_translation:rszoom2
+msgid "Zoom -"
+msgstr ""
+
+#: u_translation:rszoomcentre2
+msgid "Zoom - Centre"
+msgstr ""
+
+#: u_translation:rszoom
+msgid "Zoom +"
+msgstr ""
+
+#: u_translation:rszoomcentre
+msgid "Zoom + Centre"
+msgstr ""
+
+#: u_translation:rszoomin
+msgid "Zoom In"
+msgstr ""
+
+#: u_translation:rszoomout
+msgid "Zoom Out"
+msgstr ""
+

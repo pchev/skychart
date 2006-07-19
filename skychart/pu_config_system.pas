@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util, cu_database,
+uses u_translation, u_constant, u_util, cu_database,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms,
   ExtCtrls, StdCtrls, LResources, EditBtn;
@@ -35,6 +35,10 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TForm)
+    LanguageList: TComboBox;
+    Label14: TLabel;
+    Language: TPage;
+    Page4: TPage;
     prgdir: TDirectoryEdit;
     persdir: TDirectoryEdit;
     Label12: TLabel;
@@ -122,6 +126,7 @@ type
     Notebook1: TNotebook;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure LanguageListSelect(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
     procedure dbnameChange(Sender: TObject);
@@ -172,6 +177,7 @@ type
     procedure ShowSYS;
     procedure ShowServer;
     procedure ShowTelescope;
+    procedure ShowLanguage;
   public
     { Public declarations }
     cdb:Tcdcdb;
@@ -186,6 +192,7 @@ type
     cplot : ^conf_plot;
     cmain : ^conf_main;
     constructor Create(AOwner:TComponent); override;
+    procedure SetLang;
     property onShowAsteroid: TNotifyEvent read FShowAsteroid write FShowAsteroid;
     property onShowComet: TNotifyEvent read FShowComet write FShowComet;
     property onLoadMPCSample: TNotifyEvent read FLoadMPCSample write FLoadMPCSample;
@@ -194,6 +201,66 @@ type
   end;
 
 implementation
+
+procedure Tf_config_system.SetLang;
+begin
+Caption:=rsSystem;
+Label153.caption:=rsSystemSettin;
+MysqlBox.caption:=rsMySQLDatabas;
+Label77.caption:=rsDBName;
+Label84.caption:=rsHostName;
+Label85.caption:=rsPort;
+Label86.caption:=rsUserid;
+Label133.caption:=rsPassword;
+SqliteBox.caption:=rsSqliteDataba;
+Label1.caption:=rsDatabaseFile;
+GroupBoxDir.caption:=rsDirectory;
+Label156.caption:=rsProgramData;
+Label157.caption:=rsPersonalData;
+chkdb.caption:=rsCheck;
+credb.caption:=rsCreateDataba;
+dropdb.caption:=rsDropDatabase;
+CometDB.caption:=rsCometSetting;
+AstDB.caption:=rsAsteroidSett;
+DBtypeGroup.caption:=rsDatabaseType;
+GroupBoxLinux.caption:=rsDesktopEnvir;
+Label12.caption:=rsURLLaunchCom;
+LinuxDesktopBox.items[2]:=rsOther;
+GroupBox3.caption:=rsTCPIPServer;
+Label54.caption:=rsServerIPInte;
+Label55.caption:=rsServerIPPort;
+UseIPserver.caption:=rsUseTCPIPServ;
+keepalive.caption:=rsClientConnec;
+Label13.caption:=rsTelescopeSet;
+TelescopeManual.caption:=rsManualMount;
+Label7.caption:=rsSetHowTheMou;
+Label3.caption:=rsRightAscensi;
+Label4.caption:=rsDeclination;
+Label5.caption:=rsTurnsHour;
+Label6.caption:=rsTurnsDegree;
+RevertTurnsRa.caption:=rsRevertRAKnob;
+RevertTurnDec.caption:=rsRevertDECKno;
+Label8.caption:=rsAzimuth;
+Label9.caption:=rsAltitude;
+Label10.caption:=rsTurnsDegree;
+Label11.caption:=rsTurnsDegree;
+RevertTurnsAz.caption:=rsRevertAzKnob;
+RevertTurnsAlt.caption:=rsRevertAltKno;
+TelescopePlugin.caption:=rsCDCPluginSet;
+Label155.caption:=rsTelescopePlu;
+INDI.caption:=rsINDIDriverSe;
+Label75.caption:=rsINDIServerHo;
+Label130.caption:=rsINDIServerPo;
+Label258.caption:=rsServerComman;
+Label259.caption:=rsDriverName;
+Label260.caption:=rsTelescopeTyp;
+Label261.caption:=rsDevicePort;
+Label2.caption:=rsControlPanel2;
+IndiAutostart.caption:=rsAutomaticall;
+Label14.caption:=rsLanguageSele;
+ManualMountType.Items[0]:=rsEquatorialMo;
+ManualMountType.Items[1]:=rsAltAzMount;
+end;
 
 constructor Tf_config_system.Create(AOwner:TComponent);
 begin
@@ -214,6 +281,7 @@ procedure Tf_config_system.FormShow(Sender: TObject);
 begin
 LockChange:=true;
 dbchanged:=false;
+ShowLanguage;
 ShowSYS;
 ShowServer;
 ShowTelescope;
@@ -221,6 +289,45 @@ LockChange:=false;
 {$ifdef win32}
 GroupBoxLinux.Visible:=false;
 {$endif}
+end;
+
+procedure Tf_config_system.ShowLanguage;
+var i,n: integer;
+    fs : TSearchRec;
+    f: textfile;
+    dir,buf,buf1,buf2: string;
+begin
+LanguageList.clear;
+LanguageList.Items.Add(rsDefault+' ('+GetDefaultLanguage+')');
+LanguageList.itemindex:=0;
+n:=1;
+dir:=slash(appdir)+slash('data')+slash('language');
+i:=findfirst(dir+'*.po',0,fs);
+while i=0 do begin
+  buf:=fs.name;
+  buf:=extractfilename(buf);
+  buf:=StringReplace(buf,'skychart.','',[]);
+  buf:=trim(StringReplace(buf,'.po','',[]));
+  buf2:='';
+  try
+  AssignFile(f,dir+'skychart.lang');
+  Reset(f);
+  repeat
+    Readln(f,buf1);
+    if words(buf1,'',1,1)=buf then begin
+       buf2:=UTF8Decode(trim(StringReplace(words(buf1,'',2,1),'"','',[rfReplaceAll])));
+       break;
+    end;
+  until eof(f);
+  CloseFile(f);
+  except
+  end;
+  LanguageList.items.Add(buf+blank+'-'+blank+buf2);
+  if cmain.language=buf then LanguageList.itemindex:=n;
+  inc(n);
+  i:=findnext(fs);
+end;
+findclose(fs);
 end;
 
 procedure Tf_config_system.ShowSYS;
@@ -321,7 +428,8 @@ if skipDBtypeGroupClick then begin
    skipDBtypeGroupClick:=false;
    exit;
 end;
-if messageDlg(DBtypeGroup.hint+crlf+crlf+'Also be sure the require database software is installed.'+crlf+'Please consult the documentation if you are unsure.'+crlf+'Do you want to continue?',mtConfirmation,[mbYes,mbNo],0)=mrYes then begin
+if messageDlg(Format(rsAlsoBeSureTh, [DBtypeGroup.hint+crlf+crlf, crlf, crlf]),
+  mtConfirmation, [mbYes, mbNo], 0)=mrYes then begin
  case DBtypeGroup.ItemIndex of
   0 : begin
         DBtype:=sqlite;
@@ -414,7 +522,7 @@ end;
 procedure Tf_config_system.dropdbClick(Sender: TObject);
 var msg:string;
 begin
-if messagedlg('Warning!'+crlf+'You are about to destroy the database '+cmain.db+' and all it''s content, even if this content is not related to this program.'+crlf+'Are you sure you want to continue?',
+if messagedlg(Format(rsWarningYouAr, [crlf, cmain.db, crlf]),
               mtWarning, [mbYes,mbNo], 0)=mrYes then begin
   msg:=cdb.dropdb(cmain^);
   if msg<>'' then showmessage(msg);
@@ -483,7 +591,15 @@ end;
 
 procedure Tf_config_system.FormCreate(Sender: TObject);
 begin
+SetLang;
   LockChange:=true;
+end;
+
+procedure Tf_config_system.LanguageListSelect(Sender: TObject);
+begin
+if LockChange then exit;
+  if LanguageList.ItemIndex=0 then cmain.language:=''
+     else cmain.language:=words(LanguageList.Text,'',1,1);
 end;
 
 procedure Tf_config_system.FormClose(Sender: TObject;

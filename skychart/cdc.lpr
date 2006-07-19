@@ -37,7 +37,7 @@ uses
   pu_config_display, pu_config_chart, pu_config_internet, libsql,
   radec, XmlParser, zoomimage, JPEGForLazarus, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
-  pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print;
+  pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation;
 
 const compile_time={$I %DATE%}+' '+{$I %TIME%} ;
 
@@ -45,11 +45,11 @@ begin
   Application.Title:='Cartes du Ciel';
   Application.Initialize;
 
+  Application.CreateForm(Tf_main, f_main);
   f_about := Tf_about.Create(nil);
   f_about.compile_time:=compile_time;
   f_about.ShowTimer:=true; f_about.Show; f_about.Paint;
   Application.ProcessMessages;
-  Application.CreateForm(Tf_main, f_main);
   Application.CreateForm(Tf_position, f_position);
   Application.CreateForm(Tf_search, f_search);
   Application.CreateForm(Tf_zoom, f_zoom);

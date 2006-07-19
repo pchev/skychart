@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_util,
+uses u_translation, u_constant, u_util,
   SysUtils, Types, Classes, Controls, Forms, Printers, Graphics,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList,
   LResources, Buttons, SynEdit;
@@ -102,6 +102,7 @@ type
     { Public declarations }
     source_chart:string;
     procedure setpage(n:integer);
+    procedure SetLang;
     property OnGetTCPinfo: Tistrfunc read FGetTCPinfo write FGetTCPinfo;
     property OnKillTCP: Tint1func read FKillTCP write FKillTCP;
     property OnPrintSetup: TNotifyEvent read FPrintSetup write FPrintSetup;
@@ -113,6 +114,24 @@ var
 
 implementation
 
+procedure Tf_info.SetLang;
+begin
+Caption:=rsInfo;
+TabSheet1.caption:=rsTCPIPConnect;
+Button2.caption:=rsRefresh;
+CheckBox1.caption:=rsAutoRefresh;
+TabSheet2.caption:=rsObjectList;
+Button3.caption:=rsSearch;
+Button5.caption:=rsSortByRA;
+Button6.caption:=rsPrint;
+Button7.caption:=rsSave;
+ProgressMessages.caption:=rsProgressMess;
+Button1.caption:=rsClose;
+Button4.caption:=rsHelp;
+closeconnection.caption:=rsCloseConnect;
+outslectionner1.caption:=rsSelectAll;
+Copier1.caption:=rsCopy;
+end;
 
 procedure Tf_info.Button1Click(Sender: TObject);
 begin
@@ -164,6 +183,7 @@ end;
 
 procedure Tf_info.FormCreate(Sender: TObject);
 begin
+ SetLang;
  Fnightvision:=false;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
@@ -256,7 +276,7 @@ end;
 procedure Tf_info.Button3Click(Sender: TObject);
 begin
 if memo1.SearchReplace(Edit1.text,'',[])=0
-   then showmessage(Edit1.text+' Not Found!');
+   then showmessage(Format(rsNotFound, [Edit1.text]));
 end;
 
 procedure Tf_info.Edit1KeyUp(Sender: TObject; var Key: Word;
@@ -296,7 +316,7 @@ for i:=0 to memo1.Lines.count-1 do begin
   buf:=ExpandTab(buf,memo1.TabWidth);
   list.add(buf);
 end;
-PrintStrings(list,'CdC','Object List','',poLandscape);
+PrintStrings(list, 'CdC', rsObjectList, '', poLandscape);
 list.free;
 end;
 
@@ -305,6 +325,7 @@ begin
 try
 Savedialog1.DefaultExt:='.csv';
 Savedialog1.filter:='Tab Separated File (*.csv)|*.csv';
+Savedialog1.Title:=rsSaveToFile;
 Savedialog1.Initialdir:=privatedir;
 if SaveDialog1.Execute then
    memo1.Lines.SavetoFile(savedialog1.Filename);

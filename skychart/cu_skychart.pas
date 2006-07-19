@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 interface
 
-uses gcatunit, {libcatalog,} // libcatalog statically linked
+uses u_translation, gcatunit, {libcatalog,} // libcatalog statically linked
      cu_plot, cu_catalog, cu_fits, u_constant, cu_planet, cu_database, u_projection, u_util,
      pu_addlabel, SysUtils, Classes, Math, Types, Buttons,
      Forms, StdCtrls, Controls, ExtCtrls, Graphics, FPImage, LCLType, IntfGraphics;
@@ -55,6 +55,7 @@ Tskychart = class (TComponent)
     numlabels: integer;
     procedure ResetAllLabel;
     procedure AddNewLabel(ra,dec: double);
+    procedure SetLang;
     constructor Create(AOwner:Tcomponent); override;
     destructor  Destroy; override;
    published
@@ -180,6 +181,11 @@ try
 except
 writetrace('error destroy '+name);
 end; 
+end;
+
+procedure Tskychart.SetLang;
+begin
+if f_addlabel<>nil then f_addlabel.SetLang;
 end;
 
 procedure Tskychart.SetImage(value:TCanvas);
@@ -408,7 +414,7 @@ end;
 cfgsc^.LastJD:=cfgsc^.CurJD;
 if (Fcatalog.cfgshr.Equinoxtype=2)or(cfgsc^.projpole=altaz) then begin  // use equinox of the date
    cfgsc^.JDChart:=cfgsc^.CurJD;
-   cfgsc^.EquinoxName:='Date ';
+   cfgsc^.EquinoxName:=rsDate;
 end else begin
    cfgsc^.JDChart:=Fcatalog.cfgshr.DefaultJDChart;
    cfgsc^.EquinoxName:=fcatalog.cfgshr.EquinoxChart;
@@ -696,7 +702,7 @@ if Fcatalog.OpenStar then
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
     if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc^.StarmagMax-cfgsc^.LabelMagDiff[1]) then begin
        if cfgsc^.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv))
-       else if ((cfgsc^.NameLabel) and rec.vstr[3] and (rec.options.flabel[18]='Common Name')) then SetLabel(lid,xx,yy,0,2,1,rec.str[3])
+       else if ((cfgsc^.NameLabel) and rec.vstr[3] and (rec.options.flabel[18]=rsCommonName)) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3])
        else if rec.star.valid[vsGreekSymbol] then SetLabel(lid,xx,yy,0,7,1,rec.star.greeksymbol)
           else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
     end;
@@ -1730,8 +1736,8 @@ try
      if Fcatalog.cfgcat.starcaton[usnoa-BaseStar] then FindAtPosCat(usnoa);
      if Fcatalog.cfgcat.starcaton[microcat-BaseStar] then FindAtPosCat(microcat);
   end;
-  if i>maxln then desc:='More than '+inttostr(maxln)+' objects, result truncated.'
-             else desc:='There is '+inttostr(i)+' objects in this field.';
+  if i>maxln then desc:=Format(rsMoreThanObje, [inttostr(maxln)])
+             else desc:=Format(rsThereIsObjec, [inttostr(i)]);
   text:=text+desc+crlf;
 finally
   Fcatalog.CloseCat;
@@ -2040,7 +2046,9 @@ var az,h,x1,y1 : double;
 begin
 if cfgsc^.ProjPole=Altaz then begin
   if cfgsc^.hcentre<-(cfgsc^.fov/6) then
-     Fplot.PlotText((cfgsc^.xmax-cfgsc^.xmin)div 2,(cfgsc^.ymax-cfgsc^.ymin)div 2,2,Fplot.cfgplot^.LabelColor[7],laCenter,laCenter,' Below the horizon ');
+     Fplot.PlotText((cfgsc^.xmax-cfgsc^.xmin)div 2, (cfgsc^.ymax-cfgsc^.ymin)
+       div 2, 2, Fplot.cfgplot^.LabelColor[7], laCenter, laCenter,
+       rsBelowTheHori);
   if cfgsc^.ShowHorizon and (cfgsc^.HorizonMax>0)and(cfgsc^.horizonlist<>nil) then begin
      first:=true; xp:=0;yp:=0;x0:=0;y0:=0; xph:=0;yph:=0;x0h:=0;y0h:=0;
      for i:=1 to 360 do begin
@@ -2600,15 +2608,15 @@ b1.Top:=e1.Top+e1.Height+8;
 b2.Top:=b1.Top;
 b1.Left:=8;
 b2.Left:=b1.Left+b2.Width+8;
-b1.Caption:='Ok';
-b2.Caption:='Cancel';
+b1.Caption:=rsOK;
+b2.Caption:=rsCancel;
 b1.ModalResult:=mrOk;
 b2.ModalResult:=mrCancel;
 f1.ClientWidth:=e1.Width+16;
 f1.ClientHeight:=b1.top+b1.Height+8;
 e1.Text:=txt;
 f1.BorderStyle:=bsDialog;
-f1.Caption:='Edit Label';
+f1.Caption:=rsEditLabel;
 formpos(f1,x,y);
 if f1.ShowModal=mrOK then begin
    txt:=e1.Text;
@@ -2845,7 +2853,7 @@ result:=false;
 cfgsc^.moved:=false;
 if (ra<>cfgsc^.ScopeRa)or(dec<>cfgsc^.ScopeDec) then begin
 cfgsc^.TrackType:=6;
-cfgsc^.TrackName:='Telescope';
+cfgsc^.TrackName:=rsTelescope;
 cfgsc^.TrackRA:=ra;
 cfgsc^.TrackDec:=dec;
 if cfgsc^.scopemark then DrawFinderMark(cfgsc^.ScopeRa,cfgsc^.ScopeDec,true);
@@ -2876,13 +2884,15 @@ begin
     else
        dat:=dat+' ('+trim(ArmtoStr(cfgsc^.TimeZone))+')';
     case cfgsc^.projpole of
-    Equat : result:='Equatorial Coord. '+cep+sep+dat;
-    AltAz : result:='Alt/AZ Coord.'+sep+trim(cfgsc^.ObsName)+sep+dat;
-    Gal :   result:='Galactic Coord.'+sep+dat;
-    Ecl :   result:='Ecliptic Coord. '+cep+sep+dat+sep+'Inclination='+detostr(cfgsc^.e*rad2deg);
+    Equat : result:=rsEquatorialCo3+blank+cep+sep+dat;
+    AltAz : result:=rsAltAZCoord2+sep+trim(cfgsc^.ObsName)+sep+dat;
+    Gal :    result:=rsGalacticCoor2+sep+dat;
+    Ecl :     result:=rsEclipticCoor3+blank+cep+sep+dat+sep+rsInclination2+
+      detostr(cfgsc^.e*rad2deg);
     else result:='';
     end;
-    result:=result+sep+'Mag:'+formatfloat(f1,plot.cfgchart^.min_ma)+sep+'FOV:'+detostr(cfgsc^.fov*rad2deg);
+    result:=result+sep+rsMag+formatfloat(f1, plot.cfgchart^.min_ma)+sep+rsFOV2+
+      detostr(cfgsc^.fov*rad2deg);
 end;
 
 end.

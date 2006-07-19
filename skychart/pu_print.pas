@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_util,
+uses  u_translation, u_constant, u_util,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   Buttons, StdCtrls, enhedits;
 
@@ -52,6 +52,7 @@ type
     prtorient: TRadioGroup;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LongEdit1Change(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
@@ -66,7 +67,8 @@ type
   public
     { public declarations }
     cm: conf_main;
-  end; 
+    procedure SetLang;
+  end;
 
 var
   f_print: Tf_print;
@@ -74,6 +76,28 @@ var
 implementation
 
 uses pu_printsetup;
+
+procedure Tf_print.SetLang;
+begin
+Caption:=rsPrintChart;
+prtcolor.caption:=rsColor;
+prtcolor.Items[0]:=rsColorLineMod;
+prtcolor.Items[1]:=rsBlackWhiteLi;
+prtcolor.Items[2]:=rsAsOnScreenBl;
+prtorient.caption:=rsOrientation;
+prtorient.Items[0]:=rsPortrait;
+prtorient.Items[1]:=rsLandscape;
+GroupBox1.caption:=rsPageMarginIn;
+Label1.caption:=rsLeft;
+Label2.caption:=rsRight;
+Label3.caption:=rsTop;
+Label4.caption:=rsBottom;
+Button1.caption:=rsNoMargin;
+Button2.caption:=rsDefaultMargi;
+Setup.caption:=rsSetup;
+Print.caption:=rsPrint;
+Cancel.Caption:=rsCancel;
+end;
 
 procedure Tf_print.FormShow(Sender: TObject);
 begin
@@ -103,6 +127,14 @@ LongEdit3.Value:=10;
 LongEdit4.Value:=5;
 end;
 
+procedure Tf_print.FormCreate(Sender: TObject);
+begin
+  SetLang;
+{$ifdef win32}
+ ScaleForm(self,Screen.PixelsPerInch/96);
+{$endif}
+end;
+
 procedure Tf_print.LongEdit1Change(Sender: TObject);
 begin
 cm.PrtLeftMargin:=LongEdit1.Value;
@@ -129,13 +161,13 @@ begin
 case cm.PrintMethod of
 0 : begin
     GetPrinterResolution(cm.prtname,i);
-    PrinterInfo.Caption:='Printer: '+cm.prtname+' @ '+inttostr(i)+' DPI';
+    PrinterInfo.Caption:=rsprinter+blank+cm.prtname+' @ '+inttostr(i)+' DPI';
     end;
 1 : begin
-    PrinterInfo.Caption:='Postscript @ '+inttostr(cm.PrinterResolution)+' DPI';
+    PrinterInfo.Caption:=rsPostscript+' @ '+inttostr(cm.PrinterResolution)+' DPI';
     end;
 2 : begin
-    PrinterInfo.Caption:='Bitmap  @ '+inttostr(cm.PrinterResolution)+' DPI';
+    PrinterInfo.Caption:=rsBitmap+'  @ '+inttostr(cm.PrinterResolution)+' DPI';
     end;
 end;
 end;

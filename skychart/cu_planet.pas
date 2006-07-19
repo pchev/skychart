@@ -30,7 +30,7 @@ uses
   satxymain,    // satxy statically linked
   series96main, // series 96 statically linked
   elp82main,    // elp82 statically linked
-  cu_database, u_constant, u_util, u_projection,
+  u_translation, cu_database, u_constant, u_util, u_projection,
   Classes, Sysutils, passql, pasmysql, passqlite, Forms, Math;
 
 type Tastelem = record
@@ -1104,7 +1104,7 @@ if result and (currentplanet=32) then begin   // Earth umbra
   date:=Date2Str(yy,mm,dd)+blank+shh;
   cfgsc^.TrackType:=1;
   cfgsc^.TrackObj:=CurrentPlanet;
-  cfgsc^.TrackName:='Earth umbra';
+  cfgsc^.TrackName:=rsEarthShadow;
   nom:=cfgsc^.Trackname;
   ma:='';
   Desc := sar+tab+sde+tab
@@ -2019,13 +2019,13 @@ var jds,qry : string;
 begin
 try
 jds:=formatfloat(f1,jdt);
-msg.Add('Begin processing for jd='+jds+' / '+jddate(jdt));
+msg.Add(Format(rsBeginProcess, [jds, jddate(jdt)]));
 db1.StartTransaction;
 db1.LockTables('cdc_ast_mag WRITE, cdc_ast_elem READ');
-msg.Add('Delete previous data for this date.');
+msg.Add(rsDeletePrevio);
 application.processmessages;
 db1.Query('DELETE from cdc_ast_mag where jd='+jds);
-msg.Add('Get Asteroid list.');
+msg.Add(rsGetAsteroidL);
 application.processmessages;
 qry:='SELECT distinct(id) from cdc_ast_elem';
 db2.CallBackOnly:=true;
@@ -2040,15 +2040,15 @@ db1.UnLockTables;
 db1.Commit;
 db1.flush('tables');
 cdb.TruncateDailyAsteroid;
-msg.Add('End processing: '+inttostr(n_ast)+' asteroids');
+msg.Add(Format(rsEndProcessin, [inttostr(n_ast)]));
 result:=(n_ast>0);
 if not result then begin
-   msg.Add('Error! please check the database parameters.');
+   msg.Add(rsErrorPleaseC);
    sleep(3000);
 end;
 except
   result:=false;
-  msg.Add('Error! please check the database parameters.');
+  msg.Add(rsErrorPleaseC);
   db2.CallBackOnly:=false;
 end;
 end;
@@ -2072,7 +2072,8 @@ begin
              +',"'+elem_id+'"'+')';
          db1.Query(qry);
       end;
-    if (n_ast mod 10000)=0 then begin smsg.Add('Processing... '+inttostr(n_ast)); application.processmessages; end;
+    if (n_ast mod 10000)=0 then begin smsg.Add(Format(rsProcessing, [inttostr(
+      n_ast)])); application.processmessages; end;
 end;
 
 procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ;var i: integer; cfgsc: Pconf_skychart);

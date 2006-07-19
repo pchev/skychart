@@ -1,30 +1,27 @@
 object f_print: Tf_print
-  Left = 241
-  Height = 300
-  Top = 340
-  Width = 410
-  HorzScrollBar.Page = 409
-  VertScrollBar.Page = 299
   ActiveControl = prtcolor.RadioButton0
   Caption = 'Print Chart'
   ClientHeight = 300
   ClientWidth = 410
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
+  HorzScrollBar.Page = 409
+  VertScrollBar.Page = 299
+  Left = 252
+  Height = 300
+  Top = 281
+  Width = 410
   object PrinterInfo: TLabel
-    Left = 27
-    Height = 14
-    Top = 14
-    Width = 53
     Caption = 'PrinterInfo'
     Color = clNone
     ParentColor = False
+    Left = 27
+    Height = 17
+    Top = 14
+    Width = 61
   end
   object prtcolor: TRadioGroup
-    Left = 16
-    Height = 82
-    Top = 48
-    Width = 207
     AutoFill = True
     Caption = 'Color'
     ChildSizing.LeftRightSpacing = 6
@@ -43,12 +40,12 @@ object f_print: Tf_print
     )
     OnClick = prtcolorClick
     TabOrder = 0
-  end
-  object prtorient: TRadioGroup
-    Left = 240
+    Left = 16
     Height = 82
     Top = 48
-    Width = 149
+    Width = 207
+  end
+  object prtorient: TRadioGroup
     AutoFill = True
     Caption = 'Orientation'
     ChildSizing.LeftRightSpacing = 6
@@ -65,163 +62,191 @@ object f_print: Tf_print
     )
     OnClick = prtorientClick
     TabOrder = 1
+    Left = 240
+    Height = 82
+    Top = 48
+    Width = 149
   end
   object Print: TButton
-    Left = 96
-    Height = 25
-    Top = 248
-    Width = 75
     BorderSpacing.InnerBorder = 4
     Caption = 'Print'
     Default = True
     ModalResult = 1
     TabOrder = 2
-  end
-  object Cancel: TButton
-    Left = 224
+    Left = 96
     Height = 25
     Top = 248
     Width = 75
+  end
+  object Cancel: TButton
     BorderSpacing.InnerBorder = 4
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 3
+    Left = 224
+    Height = 25
+    Top = 248
+    Width = 75
   end
   object Setup: TButton
-    Left = 314
-    Height = 25
-    Top = 8
-    Width = 75
     BorderSpacing.InnerBorder = 4
     Caption = 'Setup'
     OnClick = SetupClick
     TabOrder = 4
+    Left = 304
+    Height = 25
+    Top = 8
+    Width = 85
   end
   object GroupBox1: TGroupBox
-    Left = 9
-    Height = 82
-    Top = 144
-    Width = 380
     Caption = 'Page Margin in millimeter'
     ClientHeight = 64
     ClientWidth = 376
     TabOrder = 5
+    Left = 9
+    Height = 82
+    Top = 144
+    Width = 380
     object Label1: TLabel
+      Caption = 'Left'
+      Color = clNone
+      ParentColor = False
       Left = 23
       Height = 14
       Top = 14
       Width = 20
-      Caption = 'Left'
-      Color = clNone
-      ParentColor = False
     end
     object Label2: TLabel
-      Left = 89
-      Height = 14
-      Top = 17
-      Width = 26
       Caption = 'Right'
       Color = clNone
       ParentColor = False
+      Left = 89
+      Height = 14
+      Top = 14
+      Width = 26
     end
     object Label3: TLabel
-      Left = 153
-      Height = 14
-      Top = 18
-      Width = 19
       Caption = 'Top'
       Color = clNone
       ParentColor = False
+      Left = 153
+      Height = 14
+      Top = 14
+      Width = 19
     end
     object Label4: TLabel
-      Left = 215
-      Height = 14
-      Top = 18
-      Width = 35
       Caption = 'Bottom'
       Color = clNone
       ParentColor = False
+      Left = 216
+      Height = 14
+      Top = 14
+      Width = 35
     end
     object LongEdit1: TLongEdit
+      MaxValue = 100
+      BorderStyle = bsSingle
+      Height = 23
+      Hint = '0..100'
+      Left = 21
       Name = 'LongEdit1'
+      ParentColor = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      Top = 34
+      Width = 40
+      OnExit = nil
+      OnChange = LongEdit1Change
       Left = 21
       Height = 23
       Hint = '0..100'
       Top = 34
       Width = 40
+    end
+    object LongEdit2: TLongEdit
+      MaxValue = 100
       BorderStyle = bsSingle
+      Height = 23
+      Hint = '0..100'
+      Left = 86
+      Name = 'LongEdit2'
       ParentColor = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
-      OnChange = LongEdit1Change
-      MaxValue = 100
-    end
-    object LongEdit2: TLongEdit
-      Name = 'LongEdit2'
+      TabOrder = 1
+      Top = 34
+      Width = 40
+      OnExit = nil
+      OnChange = LongEdit2Change
       Left = 86
       Height = 23
       Hint = '0..100'
       Top = 34
       Width = 40
+    end
+    object LongEdit3: TLongEdit
+      MaxValue = 100
       BorderStyle = bsSingle
+      Height = 23
+      Hint = '0..100'
+      Left = 151
+      Name = 'LongEdit3'
       ParentColor = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
-      OnChange = LongEdit2Change
-      MaxValue = 100
-    end
-    object LongEdit3: TLongEdit
-      Name = 'LongEdit3'
+      TabOrder = 2
+      Top = 35
+      Width = 40
+      OnExit = nil
+      OnChange = LongEdit3Change
       Left = 151
       Height = 23
       Hint = '0..100'
       Top = 35
       Width = 40
+    end
+    object LongEdit4: TLongEdit
+      MaxValue = 100
       BorderStyle = bsSingle
+      Height = 23
+      Hint = '0..100'
+      Left = 216
+      Name = 'LongEdit4'
       ParentColor = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
-      OnChange = LongEdit3Change
-      MaxValue = 100
-    end
-    object LongEdit4: TLongEdit
-      Name = 'LongEdit4'
+      TabOrder = 3
+      Top = 34
+      Width = 40
+      OnExit = nil
+      OnChange = LongEdit4Change
       Left = 216
       Height = 23
       Hint = '0..100'
       Top = 34
       Width = 40
-      BorderStyle = bsSingle
-      ParentColor = False
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 3
-      OnChange = LongEdit4Change
-      MaxValue = 100
     end
     object Button1: TButton
-      Left = 277
-      Height = 25
-      Top = 2
-      Width = 91
       BorderSpacing.InnerBorder = 4
       Caption = 'No Margin'
       OnClick = Button1Click
       TabOrder = 4
-    end
-    object Button2: TButton
       Left = 277
       Height = 25
-      Top = 32
+      Top = 2
       Width = 91
+    end
+    object Button2: TButton
       BorderSpacing.InnerBorder = 4
       Caption = 'Default Margin'
       OnClick = Button2Click
       TabOrder = 5
+      Left = 277
+      Height = 25
+      Top = 32
+      Width = 91
     end
   end
 end

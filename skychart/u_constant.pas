@@ -119,7 +119,6 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       labspacing=10;
       numlabtype=8;
       numfont=7;
-      NumLlabel = 106;
       NumSimObject = 13;
       MaxField = 10;
       Equat = 0;
@@ -250,6 +249,7 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
 
 {$ifdef linux}
       DefaultFontName='Helvetica';
+      DefaultFontFixed='Courier';
       DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
       DefaultFontSize=10;
       DefaultPrivateDir='~/cartes_du_ciel';
@@ -262,6 +262,7 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
 {$endif}
 {$ifdef darwin}
       DefaultFontName='Helvetica';
+      DefaultFontFixed='Courier';
       DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
       DefaultFontSize=10;
       DefaultPrivateDir='~/cartes_du_ciel';
@@ -274,6 +275,7 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
 {$endif}
 {$ifdef win32}
       DefaultFontName='Arial';
+      DefaultFontFixed='Courier';
       DefaultFontSymbol='Symbol';
       DefaultFontSize=8;
       DefaultPrivateDir='Cartes du Ciel';
@@ -362,7 +364,6 @@ type
                 DefaultJDchart : double;
                 EquinoxChart : string;
                 AzNorth,ListNeb,ListStar,ListVar,ListDbl,ListPla : boolean;
-                llabel: array[1..NumLlabel] of string;
                 ConstelName: array of array[1..2] of string; // constellation three letter abbrev and name.
                 ConstLnum,ConstBnum,ConstelNum,StarNameNum:integer;
                 ConstelPos:  array of Tconstpos;

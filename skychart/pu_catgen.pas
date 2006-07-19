@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_constant, u_util, pu_progressbar, pu_catgenadv, GSCconst, skylibcat, gcatunit,
+uses u_translation, u_constant, u_util, pu_progressbar, pu_catgenadv, GSCconst, skylibcat, gcatunit,
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
   Buttons, Math, CDC_Inifiles, Grids, mwFixedRecSort, mwCompFrom,
@@ -176,7 +176,6 @@ type
     procedure Button11Click(Sender: TObject);
     procedure Button12Click(Sender: TObject);
   private
-    { Déclarations privées }
     textpos : array [0..40] of array[1..2] of integer;
     calc : array[0..40,1..2] of double;
     Lra,Lde,ListIndex,nebulaesizescale,l_fixe,nbalt : integer;
@@ -249,12 +248,14 @@ type
     Procedure BuildTxtCat;
     procedure ProgressAbort(Sender: TObject);
   public
-    { Déclarations publiques }
+    procedure SetLang;
+
   end;
 
 Var
   f_catgen: Tf_catgen;
   keypos,ixlen : integer;
+  
 
 implementation
 
@@ -359,6 +360,147 @@ nextpos:=nextpos+l_sup;
 for i:=1 to l_sup do flabel[i+nextpos]:=lab_num[i];
 end;
 
+procedure Tf_catgen.SetLang;
+begin
+Caption:=rsPrepareACata+' 3.0';
+Label6.caption:=rsSelectTheTyp;
+Label8.caption:=rsInputCatalog;
+Label10.caption:=rsCatalogShort;
+Label13.caption:=rsCatalogLongN;
+Label22.caption:=rsForALargeCat;
+RadioGroup1.caption:=rsCatalogType;
+RadioGroup1.Items[0]:=rsStars;
+RadioGroup1.Items[1]:=rsVariableStar;
+RadioGroup1.Items[2]:=rsDoubleStar;
+RadioGroup1.Items[3]:=rsNebulaeOrOth;
+RadioGroup1.Items[4]:=rsNebulaeOutli;
+binarycat.caption:=rsOutputCatalo;
+binarycat.Items[0]:=rsBinaryIndexe;
+binarycat.Items[1]:=rsTextFileCata;
+Label2.caption:=rsGeneralCatal;
+GroupBox5.caption:=rsDefaultNebul;
+Label11.caption:=rsDimensionAnd;
+Label12.caption:=rsObjectType;
+Label15.caption:=rsRecognizeUni;
+Label16.caption:=rsUsefulToRepr;
+ComboBox1.items[0]:=rsDegree;
+ComboBox1.items[1]:=rsMinute;
+ComboBox1.items[2]:=rsSecond;
+CheckBox1.caption:=rsLogarithmicS;
+ComboBox3.items[0]:=rsGalaxy;
+ComboBox3.items[1]:=rsGalaxyCluste;
+ComboBox3.items[2]:=rsOpenCluster;
+ComboBox3.items[3]:=rsGlobularClus;
+ComboBox3.items[4]:=rsPlanetaryNeb;
+ComboBox3.items[5]:=rsNebula;
+ComboBox3.items[6]:=rsDarkNebula;
+ComboBox3.items[7]:=rsClusterAndNe;
+ComboBox3.items[8]:=rsKnot;
+ComboBox3.items[9]:=rsStar;
+ComboBox3.items[10]:=rsDoubleStar;
+ComboBox3.items[11]:=rsTripleStar;
+ComboBox3.items[12]:=rsAsterism;
+ComboBox3.items[13]:=rsNonExistant;
+ComboBox3.items[14]:=rsUnknow;
+ComboBox3.items[15]:=rsCircle;
+ComboBox3.items[16]:=rsSquare;
+ComboBox3.items[17]:=rsLosange;
+Button3.caption:=rsEditObjectTy;
+Button6.caption:=rsEditUnits;
+GroupBox7.caption:=rsDefaultOutli;
+Label18.caption:=rsLineWidth;
+Label19.caption:=rsColor;
+Button9.caption:=rsEditLineOper;
+Button11.caption:=rsEditColor;
+RadioGroup6.caption:=rsDrawingType;
+CheckBox7.caption:=rsClosedContou;
+RadioGroup2.caption:=rsRAOptions;
+RadioGroup2.Items[0]:=rsHoursMinutes;
+RadioGroup2.Items[1]:=rsDecimalHours;
+RadioGroup2.Items[2]:=rsDegreesMinut;
+RadioGroup2.Items[3]:=rsDecimalDegre;
+RadioGroup3.caption:=rsDECOptions;
+RadioGroup3.Items[0]:=rsDegreesMinut;
+RadioGroup3.Items[1]:=rsDecimalDegre;
+RadioGroup3.Items[2]:=rsDecimalSouth;
+RadioGroup6.Items[0]:=rsLine1;
+RadioGroup6.Items[1]:=rsSpline;
+RadioGroup6.Items[2]:=rsSurface;
+GroupBox1.caption:=rsCoordinatesE;
+GroupBox4.caption:=rsMaximumMagni;
+GroupBox2.caption:=rsPositionEpoc;
+Label4.caption:=rsFirstChar;
+Label5.caption:=rsLength;
+Label7.caption:=rsSelectTheFie;
+Label3.caption:=rsLabel2;
+CheckBox2.caption:=rsUseThisField;
+Button7.caption:=rsAdvanced;
+Label1.caption:=rsOutputCatalo2;
+RadioGroup4.caption:=rsNumberOfFile;
+RadioGroup4.Items[0]:=rs50Recommende;
+RadioGroup4.Items[1]:=rs184Recommend;
+RadioGroup4.Items[2]:=rs732Recommend;
+RadioGroup4.Items[3]:=rs9537LargerDa;
+GroupBox3.caption:=rsOutputDirect;
+CheckBox6.caption:=rsAppendToAnEx;
+GroupBox6.caption:=rsSearchIndex;
+CheckBox3.caption:=rsCreateASearc;
+CheckBox4.caption:=rsAddTheAltern;
+CheckBox5.caption:=rsPrefixTheAlt;
+Label9.caption:=rsIndicateTheS;
+Button4.caption:=rsReturn;
+Label14.caption:=rsIndicateHowT;
+Button5.caption:=rsReturn;
+Label17.caption:=rsIndicateTheS2;
+Button8.caption:=rsReturn;
+Label20.caption:=rsIndicateTheS3;
+Label21.caption:=rsClickToChang;
+Button10.caption:=rsReturn;
+Exitbt.caption:=rsClose;
+prevbt.caption:=rsPrev;
+nextbt.caption:=rsNext;
+Endbt.caption:=rsBuildCatalog;
+Button2.caption:=rsLoadProject;
+Button1.caption:=rsSaveProject;
+Button12.caption:=rsHelp;
+with stringgrid1 do begin
+cells[0, 0]:=rsObjectType;
+cells[1, 0]:=rsCatalogStrin;
+cells[0, 1]:=rsGalaxy;
+cells[0, 2]:=rsGalaxyCluste;
+cells[0, 3]:=rsOpenCluster;
+cells[0, 4]:=rsGlobularClus;
+cells[0, 5]:=rsPlanetaryNeb;
+cells[0, 6]:=rsNebula;
+cells[0, 7]:=rsDarkNebula2;
+cells[0, 8]:=rsClusterAndNe;
+cells[0, 9]:=rsKnot;
+cells[0, 10]:=rsStar;
+cells[0, 11]:=rsDoubleStar;
+cells[0, 12]:=rsTripleStar;
+cells[0, 13]:=rsAsterism;
+cells[0, 14]:=rsNonExistant;
+cells[0, 15]:=rsUnknow;
+end;
+with stringgrid2 do begin
+cells[0, 0]:=rsObjectSizeUn;
+cells[1, 0]:=rsCatalogStrin;
+cells[0, 1]:=rsDegree;
+cells[0, 2]:=rsMinute;
+cells[0, 3]:=rsSecond;
+end;
+with stringgrid3 do begin
+cells[0, 0]:=rsLineOperatio;
+cells[1, 0]:=rsCatalogStrin;
+cells[0, 1]:=rsStartOfObjec;
+cells[0, 2]:=rsEndOfObject;
+cells[0, 3]:=rsDrawLine;
+end;
+with stringgrid4 do begin
+cells[0, 0]:=rsCatalogStrin;
+end;
+end;
+
 procedure Tf_catgen.FormCreate(Sender: TObject);
 var i : integer;
 begin
@@ -379,62 +521,34 @@ for i:=0 to 40 do begin
 end;
 with stringgrid1 do begin
 rowcount:=16;
-cells[0,0]:='Object type';
-cells[1,0]:='Catalog string';
-cells[0,1]:='Galaxy';
 cells[1,1]:='Gx,GALXY,QUASR';
-cells[0,2]:='Galaxy Cluster';
 cells[1,2]:='GALCL';
-cells[0,3]:='Open Cluster';
 cells[1,3]:='OC,OPNCL,LMCOC,SMCOC';
-cells[0,4]:='Globular Cluster';
 cells[1,4]:='Gb,GLOCL,GX+GC,LMCGC,SMCGC';
-cells[0,5]:='Planetary Nebula';
 cells[1,5]:='Pl,PLNNB';
-cells[0,6]:='Nebula';
 cells[1,6]:='Nb,BRTNB,GX+DN,LMCDN,SMCDN,SNREM';
-cells[0,7]:='Dark nebula';
 cells[1,7]:='Drk,DRKNB';
-cells[0,8]:='Cluster and Nebula';
 cells[1,8]:='C+N,CL+NB,G+C+N,LMCCN,SMCCN';
-cells[0,9]:='Knot';
 cells[1,9]:='Kt';
-cells[0,10]:='Star';
 cells[1,10]:='*,1STAR';
-cells[0,11]:='Double Star';
 cells[1,11]:='D*,2STAR';
-cells[0,12]:='Triple star';
 cells[1,12]:='***,3STAR';
-cells[0,13]:='Asterism';
 cells[1,13]:='Ast,ASTER,4STAR,5STAR,6STAR,7STAR,8STAR';
-cells[0,14]:='Non Existant';
 cells[1,14]:='-,PD,NONEX';
-cells[0,15]:='Unknow';
 cells[1,15]:=' ,?';
 end;
 with stringgrid2 do begin
-cells[0,0]:='Object size unit';
-cells[1,0]:='Catalog string';
-cells[0,1]:='Degree';
 cells[1,1]:='d,°';
-cells[0,2]:='Minute';
 cells[1,2]:='m,''';
-cells[0,3]:='Second';
 cells[1,3]:='s,"';
 end;
 with stringgrid3 do begin
-cells[0,0]:='Line operation';
-cells[1,0]:='Catalog string';
-cells[0,1]:='Start of object';
 cells[1,1]:='start,0';
-cells[0,2]:='End of object';
 cells[1,2]:='end,1';
-cells[0,3]:='Draw line';
 cells[1,3]:='vertex, ,2';
 end;
 with stringgrid4 do begin
 rowcount:=11;
-cells[0,0]:='Catalog string';
 cells[0,1]:='White,W,1';
 cells[0,2]:='LightGray,LG,2';
 cells[0,3]:='Gray,G,3';
@@ -446,6 +560,7 @@ cells[0,8]:='Blue,B,8';
 cells[0,9]:='Magenta,M,9';
 cells[0,10]:='Turquoise,T,10';
 end;
+SetLang;
 end;
 
 
@@ -523,22 +638,23 @@ pageFiles : begin
        if (ListBox1.Items.Count>0)and(fileexists(ListBox1.Items[0])) then result:=true
           else begin
                result:=false;
-               ShowMessage('File not found');
+               ShowMessage(rsFileNotFound);
        end;
        if result and (trim(edit4.text)='') then begin
                result:=false;
-               ShowMessage('Please indicate a catalog short name');
+               ShowMessage(rsPleaseIndica);
                edit4.SetFocus;
        end;
        if result and (trim(edit5.text)='') then begin
                result:=false;
-               ShowMessage('Please indicate a catalog long name');
+               ShowMessage(rsPleaseIndica2);
                edit5.SetFocus;
        end;
     end;
 pageDefault : begin
     if (FloatEdit1.Value>2100)or(FloatEdit1.Value<1800) then begin
-       if mrOK=MessageDlg('Is coordinates epoch really '+FloatEdit1.text+' ?', mtConfirmation,mbOkCancel,0) then result:=true
+       if mrOK=MessageDlg(Format(rsIsCoordinate, [FloatEdit1.text]),
+         mtConfirmation, mbOkCancel, 0) then result:=true
           else result:=false;
     end else result:=true;
     end;
@@ -547,7 +663,7 @@ pageDetails : begin
     for n:=0 to CheckListBox1.Items.Count-1 do begin
        if (not CheckListBox1.Checked[n])and(copy(CheckListBox1.items[n],1,1)='[') then result:=false;
     end;
-    if result=false then Showmessage('Required field missing !');
+    if result=false then Showmessage(rsRequiredFiel);
     end;
 else result:=true;
 end;
@@ -1347,7 +1463,7 @@ if createindex then begin
                              else rewrite(ixf,1);
 end;
 for i:=1 to catheader.FileNum do begin
-  if abort then raise exception.create('Aborted by user');
+  if abort then raise exception.create(rsAbortedByUse);
   f_progress.ProgressBar2.Position:=i;
   f_progress.label2.caption:=inttostr(i);
   f_progress.invalidate;
@@ -1457,7 +1573,7 @@ begin
 f_progress.progressbar1.max:=ListBox1.Items.count;
 fillstring:=StringOfChar(' ',255);
 for n:=0 to ListBox1.Items.count-1 do begin
-f_progress.label1.caption:='Convert catalog file '+ListBox1.Items[n];
+f_progress.label1.caption:=Format(rsConvertCatal, [ListBox1.Items[n]]);
 f_progress.progressbar1.position:=n+1;
 f_progress.invalidate;
 OpenCatalog(ListBox1.Items[n]);
@@ -1467,7 +1583,7 @@ i:=0;
 repeat
   inc(i);
   if (i mod 1000)=0 then begin
-     if abort then raise exception.create('Aborted by user');
+     if abort then raise exception.create(rsAbortedByUse);
      f_progress.progressbar2.position:=GetCatalogPos;
      f_progress.progressbar2.invalidate;
      application.processmessages;
@@ -1694,7 +1810,7 @@ var i : integer;
     Sorter: TFixRecSort;
 begin
 for i:=1 to catheader.FileNum do begin
-  if abort then raise exception.create('Aborted by user');
+  if abort then raise exception.create(rsAbortedByUse);
   f_progress.ProgressBar2.Position:=i;
   f_progress.label2.caption:=inttostr(i);
   f_progress.invalidate;
@@ -1714,7 +1830,7 @@ var
 begin
 f_progress.progressbar2.max:=2;
 f_progress.progressbar2.position:=1;
-f_progress.label1.caption:='Sorting the index file ';
+f_progress.label1.caption:=rsSortingTheIn;
 f_progress.label2.caption:='';
 application.processmessages;
 Sorter:=TFixRecSort.Create(ixlen+8);
@@ -1734,14 +1850,14 @@ f_progress.progressbar1.max:=4;
 f_progress.progressbar1.position:=0;
 f_progress.progressbar2.max:=1;
 f_progress.progressbar2.position:=0;
-f_progress.label1.caption:='Create header';
+f_progress.label1.caption:=rsCreateHeader;
 f_progress.label2.caption:='';
 f_progress.show;
 application.processmessages;
 BuildHeader;
 f_progress.progressbar2.position:=1;
 f_progress.invalidate;
-f_progress.label1.caption:='Create files';
+f_progress.label1.caption:=rsCreateFiles;
 f_progress.progressbar1.position:=1;
 f_progress.progressbar2.max:=catheader.filenum;
 f_progress.progressbar2.position:=0;
@@ -1749,7 +1865,7 @@ f_progress.label2.caption:='';
 f_progress.invalidate;
 application.processmessages;
 CreateFiles;
-f_progress.label1.caption:='Convert catalog files';
+f_progress.label1.caption:=rsConvertCatal2;
 f_progress.progressbar1.position:=2;
 f_progress.progressbar2.max:=1;
 f_progress.progressbar2.position:=0;
@@ -1757,7 +1873,7 @@ f_progress.label2.caption:='';
 f_progress.invalidate;
 application.processmessages;
 BuildFiles;
-f_progress.label1.caption:='Close files';
+f_progress.label1.caption:=rsCloseFiles;
 f_progress.progressbar1.max:=4;
 f_progress.progressbar1.position:=3;
 f_progress.progressbar2.max:=catheader.filenum;
@@ -1767,7 +1883,7 @@ f_progress.invalidate;
 application.processmessages;
 CloseFiles;
 if radiogroup1.ItemIndex<4 then begin
- f_progress.label1.caption:='Sorting files by magnitude';
+ f_progress.label1.caption:=rsSortingFiles;
  f_progress.progressbar1.position:=4;
  f_progress.progressbar2.max:=catheader.filenum;
  f_progress.progressbar2.position:=0;
@@ -1780,7 +1896,7 @@ if createindex then SortIXfile;
 if rejectopen then begin
    rejectopen:=false;
    closefile(freject);
-   showmessage('Some records where rejected, see file '+destdir+'reject.txt for details');
+   showmessage(Format(rsSomeRecordsW, [destdir]));
 end;
 end;
 
@@ -1796,11 +1912,12 @@ begin
 abort:=false;
 chdir(appdir);
 if directoryedit1.Text='' then begin
-  Showmessage('Please indicate the directory where the catalog must to be build');
+  Showmessage(rsPleaseIndica3);
   directoryedit1.SetFocus;
   exit;
 end;
-if checkbox6.checked and (messagedlg('WARNING !'+crlf+'You have choose to append the data to an existing catalog.'+crlf+'The existing catalog and index must be exactly of the same format, otherwise it will be corrupted.'+crlf+'It is a good idea to backup the actual files before this operation.'+crlf+'Do you want to continue ?',mtConfirmation,[mbYes,mbNo],0)<>mrYes) then exit;
+if checkbox6.checked and (messagedlg(Format(rsWARNINGYouHa, [crlf, crlf, crlf,
+  crlf]), mtConfirmation, [mbYes, mbNo], 0)<>mrYes) then exit;
 try
   destdir:=slash(directoryedit1.Text);
   panel1.enabled:=false;

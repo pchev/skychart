@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, u_util,
+uses Math, u_util, u_translation,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, Buttons, ComCtrls, cu_zoomimage,
   LResources;
@@ -58,6 +58,7 @@ type
     { Public declarations }
     titre,labeltext: string;
     imagewidth,imageheight: integer;
+    procedure SetLang;
     Procedure LoadImage(f : string);
     Procedure ZoomN(n:double);
     Procedure Zoomplus;
@@ -69,6 +70,13 @@ var
   f_image: Tf_image;
 
 implementation
+
+procedure Tf_image.SetLang;
+begin
+Button1.caption:=rsClose;
+Button2.caption:=rsZoom;
+Button3.caption:=rsZoom2;
+end;
 
 Procedure Tf_image.LoadImage(f : string);
 begin
@@ -142,6 +150,7 @@ end;
 
 procedure Tf_image.FormCreate(Sender: TObject);
 begin
+SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}

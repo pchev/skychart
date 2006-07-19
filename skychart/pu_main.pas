@@ -33,7 +33,7 @@ uses
     Windows,
     //WinXP, // XP theme still not working with night vision
   {$endif}
-  cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
+  u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, u_constant, u_util, blcksock, synsock, lazjpeg, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
@@ -555,6 +555,7 @@ type
     Procedure RefreshAllChild(applydef:boolean);
     Procedure SyncChild;
     procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
+    procedure GetLanguage;
     Procedure GetAppDir;
     procedure ViewTopPanel;
     procedure ApplyConfig(Sender: TObject);
@@ -601,6 +602,7 @@ type
     procedure SaveDefault;
     procedure SetDefault;
     procedure SetLang;
+    procedure ChangeLanguage(lang:string);
     Procedure InitFonts;
     Procedure activateconfig(cmain:Pconf_main; csc:Pconf_skychart; ccat:Pconf_catalog; cshr:Pconf_shared; cplot:Pconf_plot; cdss:Pconf_dss; applyall:boolean );
     Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
@@ -646,7 +648,8 @@ implementation
 {$endif}
 //todo: lazarus cursor {$R cursbmp.res}
 
-uses pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
+uses
+     pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_manualtelescope, pu_print;
 
@@ -660,7 +663,7 @@ var
 begin
   // allow for a reasonable number of chart 
   if (MultiDoc1.ChildCount>=MaxWindow) then begin
-     SetLpanel1('Too many open window, please close some chart.');
+     SetLpanel1(rsTooManyOpenW);
      result:=false;
      exit;
   end;
@@ -930,7 +933,7 @@ end;
 
 procedure Tf_main.FileNew1Execute(Sender: TObject);
 begin
-  CreateChild(GetUniqueName('Chart_',true),true,def_cfgsc,def_cfgplot);
+  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot);
 end;
 
 procedure Tf_main.FileClose1Execute(Sender: TObject);
@@ -947,6 +950,7 @@ var cfgs :conf_skychart;
 begin
 if Opendialog.InitialDir='' then Opendialog.InitialDir:=privatedir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
+OpenDialog.Title:=rsOpenAChart;
   if OpenDialog.Execute then begin
     cfgp:=def_cfgplot;
     cfgs:=def_cfgsc;
@@ -1007,11 +1011,10 @@ try
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
  f_search.cfgshr:=catalog.cfgshr;
  f_search.Init;
- SetLang;
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
- CreateChild(GetUniqueName('Chart_',true),true,def_cfgsc,def_cfgplot,true);
+ CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
  AutoRefreshLock:=false;
  Autorefresh.enabled:=true;
@@ -1020,14 +1023,13 @@ try
  f_calendar.cdb:=cdcdb;
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
- f_calendar.setlang(slash(appdir)+slash('data')+slash('language')+'cdclang_'+trim(cfgm.language)+'.ini');
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
  if InitialChartNum>1 then
     for i:=1 to InitialChartNum-1 do begin
       cfgp:=def_cfgplot;
       cfgs:=def_cfgsc;
       ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
-      CreateChild(GetUniqueName('Chart_',true) ,false,cfgs,cfgp);
+      CreateChild(GetUniqueName(rsChart_, true) , false, cfgs, cfgp);
     end;
  if nightvision then begin
     nightvision:=false;
@@ -1043,6 +1045,7 @@ begin
 Savedialog.DefaultExt:='cdc3';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
 savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
+savedialog.Title:=rsSaveTheCurre;
 if MultiDoc1.ActiveObject is Tf_chart then
   if SaveDialog.Execute then SaveChartConfig(SaveDialog.Filename,MultiDoc1.ActiveChild);
 end;
@@ -1053,6 +1056,7 @@ begin
 Savedialog.DefaultExt:='bmp';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
 savedialog.Filter:='BMP|*.bmp|JPEG|*.jpg|PNG|*.png';
+savedialog.Title:=rsSaveImage;
 if MultiDoc1.ActiveObject  is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do
   if SaveDialog.Execute then begin
@@ -1092,6 +1096,21 @@ end;
 procedure Tf_main.FileExit1Execute(Sender: TObject);
 begin
   Close;
+end;
+
+Procedure Tf_main.GetLanguage;
+var inif: TMemIniFile;
+    buf: string;
+begin
+if fileexists(configfile) then begin
+  inif:=TMeminifile.create(configfile);
+  try
+  cfgm.language:=inif.ReadString('main','language','');
+  if cfgm.language='UK' then cfgm.language:=''; // migration pre-beta 2
+  finally
+   inif.Free;
+  end;
+end;
 end;
 
 Procedure Tf_main.GetAppDir;
@@ -1156,7 +1175,10 @@ GetAppDir;
 chdir(appdir);
 InitTrace;
 traceon:=true;
+GetLanguage;
+u_translation.translate(cfgm.language,'en');
 catalog:=Tcatalog.Create(self);
+SetLang;
 telescope:=Ttelescope.Create(self);
 basecaption:=caption;
 MultiDoc1.WindowList:=Window1;
@@ -1164,9 +1186,9 @@ ChildControl.visible:=false;
 BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
 starshape.Picture.Bitmap.Transparent:=false;
-TimeVal.Width:= 60;
-quicksearch.Width:=75;
-TimeU.Width:=80;
+TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
+quicksearch.Width:=round( 75 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
+TimeU.Width:=round( 95 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 //todo: Screen.Cursors[crRetic] := LoadCursorFromFile('retic.cur');
 zlib:=LoadLibrary(libz);
 if zlib<>0 then begin
@@ -1205,11 +1227,11 @@ try
 {$ifdef win32}
 if nightvision then ResetWinColor;
 {$endif}
-writetrace('Exiting ...');
+writetrace(rsExiting);
 Autorefresh.Enabled:=false;
 SaveQuickSearch(configfile);
 if SaveConfigOnExit.checked and
-   (MessageDlg('Do you want to save the program setting now?',mtConfirmation,[mbYes, mbNo],0)=mrYes) then
+   (MessageDlg(rsDoYouWantToS, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then
       SaveDefault;
 for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
@@ -1527,7 +1549,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.ShowImages:=not sc.cfgsc.ShowImages;
    if sc.cfgsc.ShowImages and (not Fits.dbconnected) then begin
       sc.cfgsc.ShowImages:=false;
-      showmessage('Error! Please check the database parameters and load the picture package.');
+      showmessage(rsErrorPleaseC3);
    end;
    Refresh;
 end;
@@ -1539,7 +1561,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
    if sc.cfgsc.ShowBackgroundImage and (not Fits.dbconnected) then begin
       sc.cfgsc.ShowBackgroundImage:=false;
-      showmessage('Error! Please check the database parameters.');
+      showmessage(rsErrorPleaseC);
    end;
    Refresh;
 end;
@@ -1603,7 +1625,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    if showast<>sc.cfgsc.ShowAsteroid then begin
       f_info.setpage(2);
       f_info.show;
-      f_info.ProgressMemo.lines.add('Compute asteroid data for this month');
+      f_info.ProgressMemo.lines.add(rsComputeAster);
       if Planet.PrepareAsteroid(sc.cfgsc.curjd, f_info.ProgressMemo.lines) then begin
          sc.cfgsc.ShowAsteroid:=true;
          Refresh;
@@ -1620,7 +1642,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
    showcom:=sc.cfgsc.ShowComet;
    Refresh;
-   if showcom<>sc.cfgsc.ShowComet then showmessage('Error! Please check the database parameters and load the comete data file.');
+   if showcom<>sc.cfgsc.ShowComet then showmessage(rsErrorPleaseC2);
 end;
 end;
 
@@ -1847,7 +1869,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
         end;
       end
       else begin
-        ShowMessage(f_search.Num+' Not found!'+crlf+'Maybe the catalog is not installed, or wrong path in catalog setting.' );
+        ShowMessage(Format(rsNotFoundMayb, [f_search.Num, crlf]) );
       end;
    end;
    until ok or (f_search.ModalResult<>mrOk);
@@ -2052,6 +2074,7 @@ begin
 if ConfigCatalog=nil then begin
    ConfigCatalog:=Tf_config_catalog.Create(self);
    {$ifdef win32} ScaleForm(ConfigCatalog,Screen.PixelsPerInch/96);{$endif}
+   ConfigCatalog.catalog:=catalog;
    ConfigCatalog.Notebook1.ShowTabs:=true;
    ConfigCatalog.Notebook1.PageIndex:=0;
    ConfigCatalog.onApplyConfig:=ApplyConfigCatalog;
@@ -2271,9 +2294,13 @@ end;
 
 procedure Tf_main.activateconfig(cmain:Pconf_main; csc:Pconf_skychart; ccat:Pconf_catalog; cshr:Pconf_shared; cplot:Pconf_plot; cdss:Pconf_dss; applyall:boolean );
 var i:integer;
-  themechange: Boolean;
+  themechange,langchange: Boolean;
 begin
-    themechange:=false;
+    themechange:=false; langchange:=false;
+    if cmain<>nil then begin
+      if (cfgm.language <> cmain^.language) then langchange:=true;
+    end;
+    if langchange then ChangeLanguage(cmain^.language);
     if cmain<>nil then begin
       if (cfgm.ButtonNight <> cmain^.ButtonNight) or
          (cfgm.ButtonStandard <> cmain^.ButtonStandard) or
@@ -2459,12 +2486,12 @@ if sendmsg then SendInfo(Sender,origin,txt);
 // refresh tracking object
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
     if sc.cfgsc.TrackOn then
-       ToolButtonTrack.Hint:='Unlock Chart'
+       ToolButtonTrack.Hint:=rsUnlockChart
      else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
      then
-       ToolButtonTrack.Hint:='Lock on '+sc.cfgsc.Trackname
+       ToolButtonTrack.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname])
      else
-       ToolButtonTrack.Hint:='No object to lock on';
+       ToolButtonTrack.Hint:=rsNoObjectToLo;
      if f_manualtelescope.visible then  f_manualtelescope.SetTurn(sc.cfgsc.FindNote);
 end;
 end;
@@ -2496,7 +2523,6 @@ ldeg:='°';
 lmin:='''';
 lsec:='"';
 cfgm.MaxChildID:=0;
-cfgm.language:='UK';
 cfgm.prtname:='';
 cfgm.configpage:=0;
 cfgm.configpage_i:=0;
@@ -2577,6 +2603,7 @@ for i:=1 to numfont do begin
    def_cfgplot.FontBold[i]:=false;
    def_cfgplot.FontItalic[i]:=false;
 end;
+def_cfgplot.FontName[5]:=DefaultFontFixed;
 def_cfgplot.FontName[7]:=DefaultFontSymbol;
 for i:=1 to numlabtype do begin
    def_cfgplot.LabelColor[i]:=clWhite;
@@ -2799,6 +2826,24 @@ catalog.cfgcat.starcatfield[sky2000-BaseStar,2]:=7;
 catalog.cfgcat.starcatpath[tyc2-BaseStar]:=catalog.cfgcat.starcatpath[tyc2-BaseStar]+PathDelim+'tycho2';
 catalog.cfgcat.starcatfield[tyc2-BaseStar,1]:=0;
 catalog.cfgcat.starcatfield[tyc2-BaseStar,2]:=5;
+catalog.cfgcat.starcatpath[gscf-BaseStar]:=catalog.cfgcat.starcatpath[gscf-BaseStar]+PathDelim+'gsc';
+catalog.cfgcat.starcatfield[gscf-BaseStar,1]:=0;
+catalog.cfgcat.starcatfield[gscf-BaseStar,2]:=3;
+catalog.cfgcat.starcatpath[gscc-BaseStar]:=catalog.cfgcat.starcatpath[gscc-BaseStar]+PathDelim+'gsc';
+catalog.cfgcat.starcatfield[gscc-BaseStar,1]:=0;
+catalog.cfgcat.starcatfield[gscc-BaseStar,2]:=3;
+catalog.cfgcat.starcatpath[usnoa-BaseStar]:=catalog.cfgcat.starcatpath[usnoa-BaseStar]+PathDelim+'usnoa';
+catalog.cfgcat.starcatfield[usnoa-BaseStar,1]:=0;
+catalog.cfgcat.starcatfield[usnoa-BaseStar,2]:=1;
+catalog.cfgcat.starcatpath[dsbase-BaseStar]:=PathDelim+'Deepsky2000';
+catalog.cfgcat.starcatfield[dsbase-BaseStar,1]:=0;
+catalog.cfgcat.starcatfield[dsbase-BaseStar,2]:=10;
+catalog.cfgcat.starcatpath[dstyc-BaseStar]:=PathDelim+'Deepsky2000';
+catalog.cfgcat.starcatfield[dstyc-BaseStar,1]:=0;
+catalog.cfgcat.starcatfield[dstyc-BaseStar,2]:=5;
+catalog.cfgcat.starcatpath[dsgsc-BaseStar]:=PathDelim+'Deepsky2000';
+catalog.cfgcat.starcatfield[dsgsc-BaseStar,1]:=0;
+catalog.cfgcat.starcatfield[dsgsc-BaseStar,2]:=3;
 for i:=1 to maxvarstarcatalog do begin
    catalog.cfgcat.varstarcatpath[i]:=slash(appdir)+'cat';
    catalog.cfgcat.varstarcatdef[i]:=false;
@@ -2806,6 +2851,9 @@ for i:=1 to maxvarstarcatalog do begin
    catalog.cfgcat.varstarcatfield[i,1]:=0;
    catalog.cfgcat.varstarcatfield[i,2]:=0;
 end;
+catalog.cfgcat.varstarcatpath[gcvs-BaseVar]:=catalog.cfgcat.varstarcatpath[gcvs-BaseVar]+PathDelim+'gcvs';
+catalog.cfgcat.varstarcatfield[gcvs-BaseVar,1]:=0;
+catalog.cfgcat.varstarcatfield[gcvs-BaseVar,2]:=10;
 for i:=1 to maxdblstarcatalog do begin
    catalog.cfgcat.dblstarcatpath[i]:=slash(appdir)+'cat';
    catalog.cfgcat.dblstarcatdef[i]:=false;
@@ -2813,6 +2861,9 @@ for i:=1 to maxdblstarcatalog do begin
    catalog.cfgcat.dblstarcatfield[i,1]:=0;
    catalog.cfgcat.dblstarcatfield[i,2]:=0;
 end;
+catalog.cfgcat.dblstarcatpath[wds-BaseDbl]:=catalog.cfgcat.dblstarcatpath[wds-BaseDbl]+PathDelim+'wds';
+catalog.cfgcat.dblstarcatfield[wds-BaseDbl,1]:=0;
+catalog.cfgcat.dblstarcatfield[wds-BaseDbl,2]:=10;
 for i:=1 to maxnebcatalog do begin
    catalog.cfgcat.nebcatpath[i]:=slash(appdir)+'cat';
    catalog.cfgcat.nebcatdef[i]:=false;
@@ -2824,6 +2875,19 @@ catalog.cfgcat.nebcatpath[sac-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'sac';
 catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
 catalog.cfgcat.nebcatfield[sac-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatpath[ngc-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'ngc2000';
+catalog.cfgcat.nebcatfield[ngc-BaseNeb,2]:=10;
+catalog.cfgcat.nebcatpath[lbn-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'lbn';
+catalog.cfgcat.nebcatfield[lbn-BaseNeb,2]:=5;
+catalog.cfgcat.nebcatpath[rc3-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'rc3';
+catalog.cfgcat.nebcatfield[rc3-BaseNeb,2]:=5;
+catalog.cfgcat.nebcatpath[pgc-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'pgc';
+catalog.cfgcat.nebcatfield[pgc-BaseNeb,2]:=5;
+catalog.cfgcat.nebcatpath[ocl-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'ocl';
+catalog.cfgcat.nebcatfield[ocl-BaseNeb,2]:=5;
+catalog.cfgcat.nebcatpath[gcm-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'gcm';
+catalog.cfgcat.nebcatfield[gcm-BaseNeb,2]:=5;
+catalog.cfgcat.nebcatpath[gpn-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'gpn';
+catalog.cfgcat.nebcatfield[gpn-BaseNeb,2]:=5;
 catalog.cfgshr.FieldNum[0]:=0.5;
 catalog.cfgshr.FieldNum[1]:=1;
 catalog.cfgshr.FieldNum[2]:=2;
@@ -3169,7 +3233,6 @@ with inif do begin
 section:='main';
 Config_Version:=ReadString(section,'version','0');
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
-cfgm.language:=ReadString(section,'language',cfgm.language);
 {$ifdef linux}
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
@@ -3761,40 +3824,250 @@ finally
 end;
 end;
 
-procedure Tf_main.SetLang;
-var i:integer;
-    inif: TMemIniFile;
-    section : string;
+procedure Tf_main.ChangeLanguage(lang:string);
+var inif: TMemIniFile;
+    i: integer;
 begin
-helpdir:=slash(appdir)+slash('doc')+slash(trim(cfgm.language));
-inif:=TMeminifile.create(slash(appdir)+slash('data')+slash('language')+'cdclang_'+trim(cfgm.language)+'.ini');
+cfgm.language:=lang;
+inif:=TMeminifile.create(configfile);
 try
 with inif do begin
-section:='main';
-ldeg:=ReadString(section,'ldeg',ldeg);
-lmin:=ReadString(section,'lmin',lmin);
-lsec:=ReadString(section,'lsec',lsec);
-section:='detail_label';
-for i:=1 to NumLlabel do begin
-  catalog.cfgshr.llabel[i]:=ReadString(section,'m_'+trim(inttostr(i)),deftxt);
+  WriteString('main','language',cfgm.language);
+  Updatefile;
 end;
-end;
-TimeU.Items.Clear;
-TimeU.Items.Add('Hour');
-TimeU.Items.Add('Minute');
-TimeU.Items.Add('Second');
-TimeU.Items.Add('Day');
-TimeU.Items.Add('Month');
-TimeU.Items.Add('Year');
-TimeU.Items.Add('Julian Year');
-TimeU.Items.Add('Tropical Year');
-TimeU.Items.Add('Sidereal Day');
-TimeU.Items.Add('Synodic Month');
-TimeU.Items.Add('Saros');
-TimeU.ItemIndex:=0;
 finally
  inif.Free;
 end;
+u_translation.translate(cfgm.language,'en');
+SetLang;
+f_position.SetLang;
+f_search.SetLang;
+f_zoom.SetLang;
+f_getdss.SetLang;
+f_manualtelescope.SetLang;
+f_detail.SetLang;
+f_info.SetLang;
+f_calendar.SetLang;
+f_printsetup.SetLang;
+f_print.SetLang;
+for i:=0 to MultiDoc1.ChildCount-1 do
+  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+     Tf_chart(MultiDoc1.Childs[i].DockedObject).SetLang;
+if f_about<>nil then f_about.SetLang;
+if f_config<>nil then f_config.SetLang;
+
+end;
+
+procedure Tf_main.SetLang;
+var i:integer;
+begin
+if cfgm.language='' then helpdir:=slash(appdir)+slash('doc')+slash('en')
+   else helpdir:=slash(appdir)+slash('doc')+slash(trim(cfgm.language));
+ldeg:=rsdeg;
+lmin:=rsmin;
+lsec:=rssec;
+TimeU.Items.Clear;
+TimeU.Items.Add(rsHour);
+TimeU.Items.Add(rsMinute);
+TimeU.Items.Add(rsSecond);
+TimeU.Items.Add(rsDay);
+TimeU.Items.Add(rsMonth);
+TimeU.Items.Add(rsYear);
+TimeU.Items.Add(rsJulianYear);
+TimeU.Items.Add(rsTropicalYear);
+TimeU.Items.Add(rsSiderealDay);
+TimeU.Items.Add(rsSynodicMonth);
+TimeU.Items.Add(rsSaros);
+TimeU.ItemIndex:=0;
+ToolButton8.hint:=rsSetDateAndTi;
+ToolButton9.hint:=rsSetObservato;
+ToolButtonConfig.hint:=rsConfigureThe;
+ToolButtonEQ.hint:=rsEquatorialCo;
+ToolButtonAZ.hint:=rsAltAzCoordin;
+ToolButtonEC.hint:=rsEclipticCoor;
+ToolButtonGL.hint:=rsGalacticCoor;
+FlipButtonX.hint:=rsMirrorHorizo;
+FlipButtonY.hint:=rsMirrorVertic;
+ToolButtonRotP.hint:=rsRotateRight;
+ToolButtonRotM.hint:=rsRotateLeft;
+ToolButtonAllSky.hint:=rsShowAllSky;
+ToolButtonToN.hint:=rsNorth;
+ToolButtonToS.hint:=rsSouth;
+ToolButtonToE.hint:=rsEast;
+ToolButtonToW.hint:=rsWest;
+ToolButtonToZ.hint:=rsZenith;
+ToolButtonNew.hint:=rsCreateANewCh;
+ToolButtonOpen.hint:=rsOpenAChart;
+ToolButtonSave.hint:=rsSaveTheCurre;
+ToolButtonPrint.hint:=rsPrintTheChar;
+ToolButtonNightVision.hint:=rsNightVisionC;
+ToolButtonCascade.hint:=rsCascade;
+ToolButtonTile.hint:=rsTileVertical;
+ToolButtonUndo.hint:=rsUndoLastChan;
+ToolButtonRedo.hint:=rsRedoLastChan;
+ToolButtonZoom.hint:=rsZoomIn;
+ToolButtonUnZoom.hint:=rsZoomOut;
+ToolButton1.hint:=rsSetFOV;
+ToolButtonSearch.hint:=rsAdvancedSear;
+ToolButtonPosition.hint:=rsPosition;
+ToolButtonListObj.hint:=rsObjectList;
+ToolButtonCal.hint:=rsEphemerisCal;
+ToolButtonTdec.hint:=rsDecrementTim;
+ToolButtonTnow.hint:=rsNow;
+ToolButtonTinc.hint:=rsIncrementTim;
+TConnect.hint:=rsConnectTeles;
+TSlew.hint:=rsSlew;
+TSync.hint:=rsSync;
+ToolButtonShowStars.hint:=rsShowStars;
+ToolButtonShowNebulae.hint:=rsShowNebulae;
+ToolButtonShowLines.hint:=rsShowLines;
+ToolButtonShowPictures.hint:=rsShowPictures;
+ToolButtonDSS.hint:=rsGetDSSImage;
+ToolButtonShowBackgroundImage.hint:=rsChangePictur;
+ToolButtonShowPlanets.hint:=rsShowPlanets;
+ToolButtonShowAsteroids.hint:=rsShowAsteroid;
+ToolButtonShowComets.hint:=rsShowComets;
+ToolButtonShowMilkyWay.hint:=rsShowMilkyWay;
+ToolButtonGrid.hint:=rsShowCoordina;
+ToolButtonGridEq.hint:=rsAddEquatoria;
+ToolButtonShowConstellationLine.hint:=rsShowConstell;
+ToolButtonShowConstellationLimit.hint:=rsShowConstell2;
+ToolButtonShowGalacticEquator.hint:=rsShowGalactic;
+ToolButtonShowEcliptic.hint:=rsShowEcliptic;
+ToolButtonShowMark.hint:=rsShowMark;
+ToolButtonShowLabels.hint:=rsShowLabels;
+ToolButtonEditlabels.hint:=rsEditLabel;
+ToolButtonShowObjectbelowHorizon.hint:=rsShowObjectBe;
+ToolButtonswitchbackground.hint:=rsSkyBackgroun;
+ToolButtonSyncChart.hint:=rsLinkAllChart;
+ToolButtonTrack.hint:=rsNoObjectToLo;
+ToolButtonswitchstars.hint:=rsChangeDrawin;
+File1.caption:=rsFile;
+FileNewItem.caption:=rsNewChart;
+FileOpenItem.caption:=rsOpen;
+FileSaveAsItem.caption:=rsSaveAs;
+SaveImage1.caption:=rsSaveImage;
+FileCloseItem.caption:=rsCloseChart;
+Calendar1.caption:=rsCalendar;
+Print2.caption:=rsPrint;
+PrintSetup2.caption:=rsPrinterSetup;
+FileExitItem.caption:=rsExit;
+Edit1.caption:=rsEdit;
+CopyItem.caption:=rsCopy;
+Undo1.caption:=rsUndo;
+Redo1.caption:=rsRedo;
+Setup1.caption:=rsSetup;
+Configuration1.caption:=rsconfigurethe;
+SaveConfigurationNow1.caption:=rsSaveConfigur;
+SaveConfigurationOnExit1.caption:=rsSaveConfigur2;
+DateConfig1.caption:=rsDateTime;
+ObsConfig1.caption:=rsObservatory;
+MenuItem1.caption:=rsDisplayMode;
+MenuItem2.caption:=rsColor;
+MenuItem3.caption:=rsLines;
+MenuItem4.caption:=rsLabels;
+MenuItem5.caption:=rsFonts;
+MenuItem6.caption:=rsFinderMark;
+MenuItem7.caption:=rsPictures;
+MenuItem8.caption:=rsShowHideDSSI;
+MenuItem9.caption:=rsCatalog;
+View1.caption:=rsView;
+FullScreen1.caption:=rsViewFullScre;
+NightVision1.caption:=rsNightVision;
+oolBar1.caption:=rsToolBar;
+ViewToolsBar1.caption:=rsAllToolsBar;
+MainBar1.caption:=rsMainBar;
+ObjectBar1.caption:=rsObjectBar;
+LeftBar1.caption:=rsLeftBar;
+RightBar1.caption:=rsRightBar;
+ViewStatusBar1.caption:=rsStatusBar;
+ViewScrollBar1.caption:=rsScrollBar;
+ViewInformation1.caption:=rsServerInform;
+ileVertically1.caption:=rsZoomIn;
+zoomminus1.caption:=rsZoomOut;
+Chart1.caption:=rsChart;
+Projection1.caption:=rsProjection;
+EquatorialCoordinate1.caption:=rsEquatorialCo;
+AltAzProjection1.caption:=rsAltAzCoordin;
+EclipticProjection1.caption:=rsEclipticCoor;
+GalacticProjection1.caption:=rsGalacticCoor;
+ransformation1.caption:=rsTransformati;
+FlipX1.caption:=rsMirrorHorizo;
+FlipY1.caption:=rsMirrorVertic;
+rotplus1.caption:=rsRotateRight;
+rotminus1.caption:=rsRotateLeft;
+FieldofVision1.caption:=rsFieldOfVisio;
+allSky1.caption:=rsShowAllSky;
+ShowHorizon1.caption:=rsViewHorizon;
+toN1.caption:=rsNorth;
+toS1.caption:=rsSouth;
+toE1.caption:=rsEast;
+toW1.caption:=rsWest;
+ShowObjects1.caption:=rsShowObjects;
+ShowStars1.caption:=rsShowStars;
+ShowNebulae1.caption:=rsShowNebulae;
+ShowPictures1.caption:=rsShowPictures;
+ShowLines1.caption:=rsShowLines;
+ShowPlanets1.caption:=rsShowPlanets;
+ShowAsteroids1.caption:=rsShowAsteroid;
+ShowComets1.caption:=rsShowComets;
+ShowMilkyWay1.caption:=rsShowMilkyWay;
+ShowGrid1.caption:=rsLinesGrid;
+Grid1.caption:=rsShowCoordina;
+GridEQ1.caption:=rsAddEquatoria;
+ShowConstellationLine1.caption:=rsShowConstell;
+ShowConstellationLimit1.caption:=rsShowConstell2;
+ShowGalacticEquator1.caption:=rsShowGalactic;
+ShowEcliptic1.caption:=rsShowEcliptic;
+ShowMark1.caption:=rsShowMark;
+ShowLabels1.caption:=rsShowLabels;
+ShowObjectbelowthehorizon1.caption:=rsBelowTheHori;
+elescope1.caption:=rsTelescope;
+elescopeConnect1.caption:=rsConnect;
+ControlPanel1.caption:=rsControlPanel;
+elescopeSlew1.caption:=rsSlew;
+elescopeSync1.caption:=rsSync;
+Window1.caption:=rsWindow;
+WindowCascadeItem.caption:=rsCascade;
+WindowTileItem.caption:=rsTileHorizont;
+WindowTileItem2.caption:=rsTileVertical;
+Maximize1.caption:=rsMaximize;
+Help1.caption:=rsHelp;
+Content1.caption:=rsHelpContents;
+HomePage1.caption:=rsSkychartHome;
+Maillist1.caption:=rsMailList;
+BugReport1.caption:=rsReportAProbl;
+HelpAboutItem.caption:=rsAbout;
+ButtonMoreStar.Hint:=rsMoreStars;
+ButtonLessStar.Hint:=rsLessStars;
+ButtonMoreNeb.Hint:=rsMoreNebulae;
+ButtonLessNeb.Hint:=rsLessNebulae;
+ResetAllLabels1.caption:=rsResetAllLabe;
+quicksearch.Hint:=rsSearch;
+TimeVal.Hint:=rsTime;
+TimeU.Hint:=rsTimeUnits;
+Field1.Hint:=rsSetFOVTo;
+Field2.Hint:=rsSetFOVTo;
+Field3.Hint:=rsSetFOVTo;
+Field4.Hint:=rsSetFOVTo;
+Field5.Hint:=rsSetFOVTo;
+Field6.Hint:=rsSetFOVTo;
+Field7.Hint:=rsSetFOVTo;
+Field8.Hint:=rsSetFOVTo;
+Field9.Hint:=rsSetFOVTo;
+Field10.Hint:=rsSetFOVTo;
+pla[1]:=rsMercury;
+pla[2]:=rsVenus;
+pla[4]:=rsMars;
+pla[5]:=rsJupiter;
+pla[6]:=rsSaturn;
+pla[7]:=rsUranus;
+pla[8]:=rsNeptune;
+pla[9]:=rsPluto;
+pla[10]:=rsSun;
+pla[11]:=rsMoon;
+pla[31]:=rsSatRing;
+pla[32]:=rsEarthShadow;
 end;
 
 procedure Tf_main.quicksearchClick(Sender: TObject);
@@ -3820,7 +4093,7 @@ if ok then begin
       quicksearch.ItemIndex:=0;
    end
    else begin
-      SetLPanel1(Num+'  Not found in any installed catalog index.');
+      SetLPanel1(Format(rsNotFoundInAn, [Num]));
    end;
 end;
 
@@ -3887,10 +4160,10 @@ if MultiDoc1.ActiveObject=sender then begin
           else begin FlipButtonY.ImageIndex:=18 ; Flipy1.checked:=true; end;
   if tc   then begin
                TConnect.ImageIndex:=49;
-               TelescopeConnect.Hint:='Disconnect Telescope';
+               TelescopeConnect.Hint:=rsDisconnectTe;
           end else begin
                TConnect.ImageIndex:=48;
-               TelescopeConnect.Hint:='Connect Telescope';
+               TelescopeConnect.Hint:=rsConnectTeles;
           end;
   with MultiDoc1.ActiveObject as Tf_chart do begin
     toolbuttonshowStars.down:=sc.cfgsc.showstars;
@@ -3933,12 +4206,12 @@ if MultiDoc1.ActiveObject=sender then begin
     ToolButtonSyncChart.down:=cfgm.SyncChart;
     ToolButtonTrack.down:=sc.cfgsc.TrackOn;
     if sc.cfgsc.TrackOn then
-       ToolButtonTrack.Hint:='Unlock Chart'
+       ToolButtonTrack.Hint:=rsUnlockChart
      else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
      then
-       ToolButtonTrack.Hint:='Lock on '+sc.cfgsc.Trackname
+       ToolButtonTrack.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname])
      else
-       ToolButtonTrack.Hint:='No object to lock on';
+       ToolButtonTrack.Hint:=rsNoObjectToLo;
     case sc.plot.cfgplot.starplot of
     0: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=true; end;
     1: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=false; end;
@@ -3962,16 +4235,26 @@ if MultiDoc1.ActiveObject=sender then begin
     Field8.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[7]);
     Field9.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[8]);
     Field10.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[9]);
-    SetFov1.caption:=Field1.caption;
-    SetFov2.caption:=Field2.caption;
-    SetFov3.caption:=Field3.caption;
-    SetFov4.caption:=Field4.caption;
-    SetFov5.caption:=Field5.caption;
-    SetFov6.caption:=Field6.caption;
-    SetFov7.caption:=Field7.caption;
-    SetFov8.caption:=Field8.caption;
-    SetFov9.caption:=Field9.caption;
-    SetFov10.caption:=Field10.caption;
+    Field1.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[0]);
+    Field2.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[1]);
+    Field3.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[2]);
+    Field4.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[3]);
+    Field5.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[4]);
+    Field6.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[5]);
+    Field7.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[6]);
+    Field8.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[7]);
+    Field9.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[8]);
+    Field10.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[9]);
+    SetFov1.caption:=Field1.hint;
+    SetFov2.caption:=Field2.hint;
+    SetFov3.caption:=Field3.hint;
+    SetFov4.caption:=Field4.hint;
+    SetFov5.caption:=Field5.hint;
+    SetFov6.caption:=Field6.hint;
+    SetFov7.caption:=Field7.hint;
+    SetFov8.caption:=Field8.hint;
+    SetFov9.caption:=Field9.hint;
+    SetFov10.caption:=Field10.hint;
   end;
 end;
 end;
@@ -3986,7 +4269,7 @@ end;
 
 Function Tf_main.NewChart(cname:string):string;
 begin
-if cname='' then cname:='Chart_' + IntToStr(MultiDoc1.ChildCount + 1);
+if cname='' then cname:=rsChart_ + IntToStr(MultiDoc1.ChildCount + 1);
 cname:=GetUniqueName(cname,false);
 if CreateChild(cname,true,def_cfgsc,def_cfgplot) then result:=msgOK+blank+cname
   else result:=msgFailed;
@@ -4103,7 +4386,8 @@ end;
 
 procedure TTCPDaemon.ShowError;
 begin
-f_main.SetLpanel1('Socket error '+inttostr(sock.lasterror)+'.  '+sock.GetErrorDesc(sock.lasterror));
+f_main.SetLpanel1(Format(rsSocketError, [inttostr(sock.lasterror),
+  sock.GetErrorDesc(sock.lasterror)]));
 end;
 
 procedure TTCPDaemon.ShowSocket;
@@ -4111,8 +4395,9 @@ var locport:string;
 begin
 sock.GetSins;
 locport:=inttostr(sock.GetLocalSinPort);
-if locport<>f_main.cfgm.ServerIPport then locport:=locport+' (different than configured port, maybe busy or other error.)';
-f_main.serverinfo:='Listen on port: '+locport;
+if locport<>f_main.cfgm.ServerIPport then locport:=Format(rsDifferentTha, [
+  locport]);
+f_main.serverinfo:=Format(rsListenOnPort, [locport]);
 f_main.SetLpanel1(f_main.serverinfo);
 end;
 
@@ -4275,7 +4560,7 @@ begin
  TCPDaemon:=TTCPDaemon.create;
  TCPDaemon.keepalive:=cfgm.keepalive;
  except
-  SetLpanel1('TCP/IP service not available.');
+  SetLpanel1(rsTCPIPService);
  end;
 end;
 
@@ -4309,9 +4594,9 @@ try
        and cdcdb.CheckDB) then begin
           planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
-          SetLpanel1('Connected to SQL database '+cfgm.db);
+          SetLpanel1(Format(rsConnectedToS, [cfgm.db]));
     end else begin
-          SetLpanel1('SQL database not available.');
+          SetLpanel1(rsSQLDatabaseN);
           def_cfgsc.ShowAsteroid:=false;
           def_cfgsc.ShowComet:=false;
           def_cfgsc.ShowImages:=false;
@@ -4319,14 +4604,14 @@ try
     if NeedToInitializeDB then begin
        f_info.setpage(2);
        f_info.show;
-       f_info.ProgressMemo.lines.add('Initialize Database');
+       f_info.ProgressMemo.lines.add(rsInitializeDa);
        cdcdb.LoadSampleData(f_info.ProgressMemo);
        Planet.PrepareAsteroid(DateTimetoJD(now), f_info.ProgressMemo.lines);
        def_cfgsc.ShowAsteroid:=true;
        f_info.close;
     end;
 except
-  SetLpanel1('SQL database not available.');
+  SetLpanel1(rsSQLDatabaseN);
 end;
 end;
 
@@ -4423,10 +4708,12 @@ if (TCPDaemon<>nil) then
      or(TCPThrd[i].sock=nil)
      or(TCPThrd[i].terminated)
      then begin
-       buf:=inttostr(i)+' not connected.';
+       buf:=Format(rsNotConnected, [inttostr(i)]);
      end
      else begin
-       buf:=inttostr(i)+' connected from '+TCPThrd[i].RemoteIP+blank+TCPThrd[i].RemotePort+', using chart '+TCPThrd[i].active_chart+', connect time:'+datetimetostr(TCPThrd[i].connecttime);
+       buf:=Format(rsConnectedFro, [inttostr(i), TCPThrd[i].RemoteIP+blank+
+         TCPThrd[i].RemotePort, TCPThrd[i].active_chart, datetimetostr(TCPThrd[i
+         ].connecttime)]);
      end;
  end
    else buf:='';    
@@ -4872,6 +5159,44 @@ procedure Tf_main.DdeSkyChartClose(Sender: TObject);
 begin
 DDeOpen:=false;
 end; }
+
+// one time use function to extract all text to translate from component object
+//uses pu_addlabel, pu_catgen, pu_catgenadv, pu_config_chart, pu_config_internet, pu_config_solsys, pu_config_system,pu_image, pu_progressbar,
+{procedure Tf_main.MenuItem12Click(Sender: TObject);
+//var f: textfile;
+begin
+AssignFile(f,'translation.txt');
+rewrite(f);
+GetTranslationString(f_main,f);
+GetTranslationString(f_position,f);
+GetTranslationString(f_search,f);
+GetTranslationString(f_zoom,f);
+GetTranslationString(f_getdss,f);
+GetTranslationString(f_manualtelescope,f);
+GetTranslationString(f_detail,f);
+GetTranslationString(f_info,f);
+GetTranslationString(f_calendar,f);
+GetTranslationString(f_printsetup,f);
+GetTranslationString(f_print,f);
+GetTranslationString(Tf_chart(MultiDoc1.ActiveObject),f);
+GetTranslationString(Tf_about.Create(self),f);
+GetTranslationString(Tf_addlabel.Create(self),f);
+GetTranslationString(Tf_catgen.Create(self),f);
+GetTranslationString(Tf_catgenadv.Create(self),f);
+GetTranslationString(Tf_config.Create(self),f);
+GetTranslationString(Tf_config_catalog.Create(self),f);
+GetTranslationString(Tf_config_chart.Create(self),f);
+GetTranslationString(Tf_config_display.Create(self),f);
+GetTranslationString(Tf_config_internet.Create(self),f);
+GetTranslationString(Tf_config_observatory.Create(self),f);
+GetTranslationString(Tf_config_pictures.Create(self),f);
+GetTranslationString(Tf_config_solsys.Create(self),f);
+GetTranslationString(Tf_config_system.Create(self),f);
+GetTranslationString(Tf_config_time.Create(self),f);
+GetTranslationString(Tf_image.Create(self),f);
+GetTranslationString(Tf_progress.Create(self),f);
+closefile(f);
+end;}
 
 initialization
   {$i pu_main.lrs}

@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses
+uses u_translation,
   dynlibs, u_constant, u_util, Math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, LResources, downloaddialog, IpHtml;
@@ -96,6 +96,7 @@ type
     cfgdss: conf_dss;
     cmain: PConf_Main;
     function GetDss(ra,de,fov,ratio:double; imgx:integer):boolean;
+    procedure SetLang;
   end;
 
   Var f_getdss: Tf_getdss;
@@ -116,9 +117,16 @@ type
 
 implementation
 
+procedure Tf_getdss.SetLang;
+begin
+Caption:=rsListOfAvaila;
+BitBtn1.caption:=rsOK;
+BitBtn2.caption:=rsCancel;
+end;
 
 procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
+SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
@@ -130,7 +138,7 @@ begin
     Fenabled:=true;
   end else begin
     Fenabled:=false;
-    writetrace(dsslibname+' not found');
+    writetrace(Format(rsNotFound, [dsslibname]));
   end;
 end;
 
@@ -218,14 +226,14 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
      assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
      rewrite(fitsfile,1);
      buf:=html_h+DownloadDialog1.ResponseText;
-     buf:=buf+html_p+'Please check your Internet connection and the URL definition'+htms_p;
+     buf:=Format(rsPleaseCheckY, [buf+html_p, htms_p]);
      buf:=buf+htms_h;
      gzbuf:=buf;
      blockwrite(fitsfile,gzbuf,length(buf),n);
      CloseFile(fitsfile);
   end;
   if (DownloadDialog1.ResponseText<>'')and(not result) then begin
-     caption:='Error';
+     caption:=rsError;
      Label1.Caption:=DownloadDialog1.ResponseText;
      s:=TMemoryStream.Create;
      s.LoadFromFile(ExpandFileName(cfgdss.dssfile));
@@ -249,7 +257,7 @@ end else if Fenabled then begin    // RealSky cdrom
   else if cfgdss.dssnorth and cfgdss.dsssouth then datasource:=4
   else if cfgdss.dssnorth then datasource:=1
   else if cfgdss.dsssouth then datasource:=2;
-  if datasource=0 then begin ShowMessage('Please configure your DSS file path first.'); exit; end;
+  if datasource=0 then begin ShowMessage(rsPleaseConfig); exit; end;
   ima:=ExpandFileName(cfgdss.dssfile);
   i.pDir:=Pchar(slash(expandfilename(cfgdss.dssdir)));
   i.pDrive:=Pchar(slash(cfgdss.dssdrive));
@@ -258,7 +266,8 @@ end else if Fenabled then begin    // RealSky cdrom
   i.PromptForDisk:=true;
   width:=fov*rad2deg*60;
   height:=width/ratio;
-  if min(width,height) > 420 then begin ShowMessage('Field too width! Maximum is 7'+ldeg); exit; end;
+  if min(width, height) > 420 then begin ShowMessage(Format(rsFieldTooWidt, [
+    '7'+ldeg])); exit; end;
   width:=min(width,400);
   height:=min(height,400);
   if cfgdss.dsssampling then begin
@@ -278,7 +287,8 @@ end else if Fenabled then begin    // RealSky cdrom
       subsample:=1;
       imgsize:=(width*60/1.7/subsample)*(height*60/1.7/subsample)*2/1024/1024;
       if imgsize>8 then begin
-         if MessageDlg('Estimated file size: '+floattostrf(imgsize,ffFixed,6,0)+'MB '+crlf+'Do you want to continue ?',
+         if MessageDlg(Format(rsEstimatedFil, [floattostrf(imgsize, ffFixed, 6,
+           0), crlf]),
             mtWarning,[mbOk, mbCancel],0)<>mrOK then exit;
       end;
   end;
@@ -290,8 +300,8 @@ end else if Fenabled then begin    // RealSky cdrom
   i.Sender:=integer(handle);
   app:=application.title;
   i.pApplication:=Pchar(app);
-  i.pPrompt1:=Pchar('Please mount RealSky® CD number');
-  i.pPrompt2:=Pchar('in drive');
+  i.pPrompt1:=Pchar(rsPleaseMountR);
+  i.pPrompt2:=Pchar(rsInDrive);
   {$ifdef unix}
   exec('export LC_ALL=C');
   chdir(TempDir);
@@ -300,8 +310,8 @@ end else if Fenabled then begin    // RealSky cdrom
     rc:=GetPlateList(addr(i),addr(pl));
     if (rc<>0) then exit;
       listbox1.clear;
-      caption:='List of available plates';
-      label1.caption:='Plate Id.    Date   Exp.  Margin  CD  Observatory';
+      caption:=rsListOfAvaila;
+      label1.caption:=rsPlateIdDateE;
       if pl.nplate>10 then pl.nplate:=10;
       for n:=1 to pl.nplate do begin
         buf:=copy(pl.plate_name[n]+'   ',1,5)+blank+

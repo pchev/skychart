@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Math, cu_database, Printers,
+uses u_translation, Math, cu_database, Printers,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, CDC_IniFiles,
   jdcalendar, cu_planet, u_constant, pu_image, Buttons, ExtCtrls,
@@ -183,7 +183,7 @@ type
     { Public declarations }
     cdb: Tcdcdb;
     AzNorth: boolean;
-    procedure SetLang(languagefile:string);
+    procedure SetLang;
     property planet: Tplanet read Fplanet write Fplanet;
     property config: Pconf_skychart read c write c;
     property EclipsePath: string read Feclipsepath write Feclipsepath;
@@ -205,6 +205,7 @@ const maxstep = 100;
 procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
 begin
+SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
@@ -265,59 +266,117 @@ if date2.JD<=date1.JD then date1.JD:=date2.JD-deltajd;
 deltajd:=date2.JD-date1.JD;
 end;
 
-Procedure Tf_calendar.SetLang(languagefile:string);
-var section : string;
-    inifile : Tmeminifile;
-    i : integer;
-const blank = '        ';
-const deftxt = '?';
+Procedure Tf_calendar.SetLang;
 begin
-inifile:=Tmeminifile.create(languagefile);
-section:='calendar';
-with inifile do begin
-    Caption:=ReadString(section,'title',deftxt);
-    label1.caption:=ReadString(section,'t_1',deftxt);
-    label2.caption:=ReadString(section,'t_2',deftxt);
-    label5.caption:=ReadString(section,'t_3',deftxt);
-    label3.caption:=ReadString(section,'t_4',deftxt);
-    label4.caption:=ReadString(section,'t_5',deftxt);
-    twilight.caption:=ReadString(section,'t_6',deftxt);
-    planets.caption:=ReadString(section,'t_7',deftxt);
-    comet.caption:=ReadString(section,'t_8',deftxt);
-    solar.caption:=ReadString(section,'t_9',deftxt);
-    lunar.caption:=ReadString(section,'t_10',deftxt);
-    Satellites.caption:=ReadString(section,'t_11',deftxt);
-    label7.caption:=ReadString(section,'t_12',deftxt);
-    label8.caption:=ReadString(section,'t_13',deftxt);
-    label6.caption:=ReadString(section,'t_14',deftxt);
-    SatChartBox.caption:=ReadString(section,'t_15',deftxt);
-    IridiumBox.caption:=ReadString(section,'t_16',deftxt);
-    BtnReset.Caption:=ReadString(section,'t_17',deftxt);
-//    TLEbtn.hint:=ReadString(section,'t_18',deftxt)+blank+slash(appdir)+satpath;
-    tz:=ReadString(section,'t_19',deftxt);
-    west:=ReadString(section,'t_20',deftxt);
-    east:=ReadString(section,'t_21',deftxt);
-    EcliPanel.Hint:=ReadString(section,'t_22',deftxt);
-    BtnSave.Caption:=ReadString(section,'t_23',deftxt);
-    BtnRefresh.Caption:=ReadString('buttons','refresh',deftxt);
-    BtnClose.Caption:=ReadString('buttons','close',deftxt);
-    BtnHelp.Caption:=ReadString('buttons','help',deftxt);
-    BtnPrint.Caption:=ReadString('buttons','print',deftxt);
-    mercure.caption:=pla[1];
-    venus.caption:=pla[2];
-    mars.caption:=pla[4];
-    jupiter.caption:=pla[5];
-    saturne.caption:=pla[6];
-    uranus.caption:=pla[7];
-    neptune.caption:=pla[8];
-    pluton.caption:=pla[9];
-    psoleil.caption:=pla[10];
-    plune.caption:=pla[11];
-    for i:=1 to nummsg do begin
-       appmsg[i]:=ReadString(section,'m_'+trim(inttostr(i)),deftxt);
-    end;
-end;
-inifile.free;
+Caption:=rsCalendar;
+Date1.Caption:=rsJDCalendar;
+Date1.labels.Mon:=rsMonday;
+Date1.labels.Tue:=rsTuesday;
+Date1.labels.Wed:=rsWednesday;
+Date1.labels.Thu:=rsThursday;
+Date1.labels.Fri:=rsFriday;
+Date1.labels.Sat:=rsSaturday;
+Date1.labels.Sun:=rsSunday;
+Date1.labels.jd:=rsJulianDay;
+Date1.labels.today:=rsToday;
+Date2.Caption:=rsJDCalendar;
+Date2.labels.Mon:=rsMonday;
+Date2.labels.Tue:=rsTuesday;
+Date2.labels.Wed:=rsWednesday;
+Date2.labels.Thu:=rsThursday;
+Date2.labels.Fri:=rsFriday;
+Date2.labels.Sat:=rsSaturday;
+Date2.labels.Sun:=rsSunday;
+Date2.labels.jd:=rsJulianDay;
+Date2.labels.today:=rsToday;
+tz:=rsTimeZone;
+east:=rsEast;
+west:=rsWest;
+EcliPanel.Hint:='http://sunearth.gsfc.nasa.gov/eclipse/eclipse.html';
+mercure.caption:=pla[1];
+venus.caption:=pla[2];
+mars.caption:=pla[4];
+jupiter.caption:=pla[5];
+saturne.caption:=pla[6];
+uranus.caption:=pla[7];
+neptune.caption:=pla[8];
+pluton.caption:=pla[9];
+psoleil.caption:=pla[10];
+plune.caption:=pla[11];
+Label1.caption:=rsDateFrom;
+Label2.caption:=rsTo;
+Label5.caption:=rsAt;
+Label3.caption:=rsBy;
+Label4.caption:=rsDays;
+Label9.caption:='Satellites calculation use QuickSat by Mike McCants, Iridium flare prediction use Iridflar by Robert Matson';
+BtnRefresh.caption:=rsRefresh;
+BtnHelp.caption:=rsHelp;
+BtnClose.caption:=rsClose;
+BtnSave.caption:=rsSaveToFile;
+BtnPrint.caption:=rsPrint;
+BtnReset.caption:=rsResetChart;
+twilight.caption:=rsTwilight;
+planets.caption:=rsPlanet;
+comet.caption:=rsComet;
+Button1.caption:=rsFilter;
+Button2.caption:=rsFilter;
+Solar.caption:=rsSolarEclipse;
+Lunar.caption:=rsLunarEclipse;
+Satellites.caption:=rsArtificialSa;
+Label8.caption:=rsChart2;
+Label7.caption:=rsLimitingMagn;
+Label6.caption:='TLE';
+tle1.text:='Visual.tle';
+fullday.caption:='Include day time pass';
+IridiumBox.caption:='Include Iridium flare';
+SatChartBox.caption:='For current chart only';
+appmsg[1]:=rsRA;
+appmsg[2]:=rsDE;
+appmsg[3]:=rsMagn;
+appmsg[4]:=rsDiam;
+appmsg[5]:=rsIllum;
+appmsg[6]:=rsRise;
+appmsg[7]:=rsCulmination;
+appmsg[8]:=rsSet;
+appmsg[9]:=rsMorningTwili;
+appmsg[10]:=rsEveningTwili;
+appmsg[11]:=rsDate;
+appmsg[12]:=rsAstronomical;
+appmsg[13]:=rsNautical;
+appmsg[14]:=rsTwilight;
+appmsg[15]:=rsMorning;
+appmsg[16]:=rsEvening;
+appmsg[17]:=rsElong;
+appmsg[18]:=rsPhase;
+appmsg[19]:=rsWarningCalcu;
+appmsg[20]:=rsDatesMayTake;
+appmsg[21]:=rsAz;
+appmsg[22]:=rsAlt;
+appmsg[23]:=rsUT;
+appmsg[24]:=rsMax;
+appmsg[25]:=rsType;
+appmsg[26]:=rsSaros;
+appmsg[27]:=rsGamma;
+appmsg[28]:=rsMagnitude;
+appmsg[29]:=rsGreatest;
+appmsg[30]:=rsEclipse;
+appmsg[31]:=rsLatitude;
+appmsg[32]:=rsLongitude;
+appmsg[33]:=rsSunAlt;
+appmsg[34]:=rsPathWidth;
+appmsg[35]:=rsDuration;
+appmsg[36]:=rsPenumbra;
+appmsg[37]:=rsUmbra;
+appmsg[38]:=rsSemi;
+appmsg[39]:=rsDuration;
+appmsg[40]:=rsPartial;
+appmsg[41]:=rsTotal;
+appmsg[42]:=rsSatellite;
+appmsg[43]:=rsRange;
+appmsg[44]:='+/-';
+appmsg[45]:=rsDir;
+appmsg[46]:=rsCoord;
+appmsg[47]:=rsMap;
 title:=caption;
 crepusculetitle;
 cometetitle;
@@ -326,6 +385,7 @@ planettitle;
 Solartitle;
 LunarTitle;
 SatTitle; 
+if ShowImage<>nil then ShowImage.SetLang;
 end;
 
 Procedure Tf_calendar.cometetitle;
@@ -600,50 +660,6 @@ with gr do
         end;
 end;
 
-{Procedure Tf_calendar.PlanetRiseCell(var gr : Tstringgrid; i,irc : integer; hr,ht,hs,azr,azs,jda,h,ar,de : double);
-var ir,ic,it : integer;
-    jdcor : double;
-begin
-with gr do begin
-  ir:=i;
-  jdcor:=0;
-  if hr<0 then begin ir:=i-1 ; hr:=hr+24; jdcor:=-1; end;
-  if hr>24 then begin ir:=i+1; hr:=hr-24; jdcor:=1; end;
-  it:=i;
-  if ht<0 then begin  it:=i-1; ht:=ht+24; jdcor:=-1; end;
-  if ht>24 then begin it:=i+1; ht:=ht-24; jdcor:=1; end;
-  ic:=i;
-  if hs<0 then begin ic:=i-1; hs:=hs+24; jdcor:=-1; end;
-  if hs>24 then begin ic:=i+1; hs:=hs-24; jdcor:=-1; end;
-  case irc of
-       0 : begin
-           if (ir>1)and(ir<rowcount) then cells[6,ir]:=armtostr(hr);
-           if (it>1)and(it<rowcount) then cells[7,it]:=armtostr(ht);
-           if (ic>1)and(ic<rowcount) then cells[8,ic]:=armtostr(hs);
-           objects[6,ir]:=SetObjCoord(jda+jdcor+(hr-c.timezone-h)/24,ar,de);
-           objects[7,it]:=SetObjCoord(jda+jdcor+(ht-c.timezone-h)/24,ar,de);
-           objects[8,ic]:=SetObjCoord(jda+jdcor+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           if (ir>1)and(ir<rowcount) then cells[6,ir]:='-';
-           if (it>1)and(it<rowcount) then cells[7,it]:=armtostr(ht);
-           if (ic>1)and(ic<rowcount) then cells[8,ic]:='-';
-           objects[7,ir].free;
-           objects[7,it]:=SetObjCoord(jda+jdcor+(ht-c.timezone-h)/24,ar,de);
-           objects[7,ic].free;
-           end;
-       2 : begin
-           if (ir>1)and(ir<rowcount) then cells[6,ir]:='-';
-           if (it>1)and(it<rowcount) then cells[7,it]:='-';
-           if (ic>1)and(ic<rowcount) then cells[8,ic]:='-';
-           objects[7,ir].free;
-           objects[7,it].free;
-           objects[7,ic].free;
-           end;
-  end;
-end;
-end;  }
-
 procedure Tf_calendar.RefreshSolarEclipse;
 var f : textfile;
     buf,mm,century,pathimage : string;
@@ -816,8 +832,8 @@ begin
   RefreshLunarEclipse;
   if c.timezone=0 then d:=''
    else
-    if c.timezone<0 then d:=east
-      else d:=west;
+    if c.timezone<0 then d:=west
+      else d:=east;
   caption:=title+blank+c.Obsname+blank+tz+'='+timtostr(abs(c.timezone))+blank+d;
 end;
 
@@ -1065,562 +1081,14 @@ PlutonGrid.Visible:=true;
 end;
 end;
 
-{procedure Tf_calendar.RefreshPlanet;
-var ar,de,dist,illum,phase,diam,jda,magn,dkm,q,az,ha,dp : double;
-    i,ipla,nj: integer;
-    s,a,m,d,irc : integer;
-    jd1,jd2,jd0,h,hr,ht,hs,azr,azs,st0,jdcor,hh : double;
-    am1,am2,dm1,dm2,am3,dm3 : double;
-    jdt_ut : double;
-    mr,mt,ms : string;
-begin
-screen.cursor:=crHourGlass;
-try
-SoleilGrid.Visible:=false;
-MercureGrid.Visible:=false;
-VenusGrid.Visible:=false;
-LuneGrid.Visible:=false;
-MarsGrid.Visible:=false;
-JupiterGrid.Visible:=false;
-SaturneGrid.Visible:=false;
-UranusGrid.Visible:=false;
-NeptuneGrid.Visible:=false;
-PlutonGrid.Visible:=false;
-dat21:=date1.JD;
-dat22:=date2.JD;
-dat23:=time.time;
-dat24:=step.text;
-s:=strtoint(step.text);
-djd(date1.JD,a,m,d,hh);
-h:=frac(Time.time)*24-c.TimeZone;
-jd1:=jd(a,m,d,h);
-djd(date2.JD,a,m,d,hh);
-jd2:=jd(a,m,d,h);
-nj:=round((jd2-jd1)/s);
-if nj>maxstep then if MessageDlg(appmsg[19]+blank+inttostr(nj)+blank+appmsg[20],
-    mtConfirmation,[mbOk, mbCancel], 0) <> mrOK then exit;
-jda:=jd1;
-i:=2;
-InitRiseCell(SoleilGrid);
-InitRiseCell(MercureGrid);
-InitRiseCell(VenusGrid);
-InitRiseCell(LuneGrid);
-InitRiseCell(MarsGrid);
-InitRiseCell(JupiterGrid);
-InitRiseCell(SaturneGrid);
-InitRiseCell(UranusGrid);
-InitRiseCell(NeptuneGrid);
-InitRiseCell(PlutonGrid);
-FreeCoord(SoleilGrid);
-FreeCoord(MercureGrid);
-FreeCoord(VenusGrid);
-FreeCoord(LuneGrid);
-FreeCoord(MarsGrid);
-FreeCoord(JupiterGrid);
-FreeCoord(SaturneGrid);
-FreeCoord(UranusGrid);
-FreeCoord(NeptuneGrid);
-FreeCoord(PlutonGrid);
-repeat
-djd(jda,a,m,d,h);
-jd0:=jd(a,m,d,0);
-jdt_ut:=DTminusUT(a,c)/24;
-st0:=SidTim(jd0,h,c.ObsLongitude);
-for ipla:=1 to 11 do begin
- if ipla=3 then continue;
-case ipla of
- 1 : with Mercuregrid do begin
-  RowCount:=i+1;
-  planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(1,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
- 2 : with Venusgrid do begin
-  RowCount:=i+1;
-  planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(1,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
- 4 : with Marsgrid do begin
-  RowCount:=i+1;
-  planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(1,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
- 5 : with Jupitergrid do begin
-  RowCount:=i+1;
-  planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(1,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
- 6 : with Saturnegrid do begin
-  RowCount:=i+1;
-  planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(1,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
- 7 : with Uranusgrid do begin
-  RowCount:=i+1;
-  planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(1,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
- 8 : with Neptunegrid do begin
-  RowCount:=i+1;
-  planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(1,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
- 9 : with Plutongrid do begin
-  RowCount:=i+1;
-  planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  RiseSet(1,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-          end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
-10 : with Soleilgrid do begin
-  RowCount:=i+1;
-  Planet.Sun(jda+jdt_ut,ar,de,dist,diam);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  illum:=1;
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:='-';
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  Planet.PlanetRiseSet(ipla,jd0,AzNorth,hr,ht,hs,azr,azs,irc,c);
-//  RiseSet(2,jd0,ar,de,hr,ht,hs,azr,azs,irc,c);
-  case irc of
-       0 : begin
-           cells[6,i]:=armtostr(hr); cells[7,i]:=armtostr(ht); cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-'; cells[7,i]:=armtostr(ht); cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-'; cells[7,i]:='-'; cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-  end;
- end;
-11 : with Lunegrid do begin
-  RowCount:=i+2;
-  planet.Moon(jda+jdt_ut,ar,de,dist,dkm,diam,phase,illum);
-  precession(jd2000,c.jdchart,ar,de);
-  if c.PlanetParalaxe then begin
-     Paralaxe(st0,dist,ar,de,ar,de,q,c);
-     diam:=diam/q;
-  end;
-  if c.ApparentPos then apparent_equatorial(ar,de,c);
-  ar:=rmod(ar+pi2,pi2);
-  magn:=planet.MoonMag(phase);
-  objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
-  az:=rmod(az+pi,pi2);
-  cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
-  cells[0,1]:=trim(armtostr(h))+' UT';
-  cells[0,i]:=isodate(a,m,d);
-  cells[1,i]:=artostr(rad2deg*ar/15);
-  cells[2,i]:=detostr(rad2deg*de);
-  cells[3,i]:=floattostrf(magn,ffFixed,5,1);
-  cells[4,i]:=floattostrf(diam,ffFixed,6,1);
-  cells[5,i]:=floattostrf(illum,ffFixed,6,2);
-  cells[9,i]:=demtostr(rad2deg*az);
-  cells[10,i]:=demtostr(rad2deg*ha);
-  planet.Moon(jd0-c.timezone/24-1,am1,dm1,dist,dkm,diam,phase,illum);
-  precession(jd2000,c.jdchart,am1,dm1);
-  if (am1<0) then am1:=am1+pi2;
-  planet.Moon(jd0-c.timezone/24,am2,dm2,dist,dkm,diam,phase,illum);
-  precession(jd2000,c.jdchart,am2,dm2);
-  if (am2<0) then am2:=am2+pi2;
-  planet.Moon(jd0-c.timezone/24+1,am3,dm3,dist,dkm,diam,phase,illum);
-  precession(jd2000,c.jdchart,am3,dm3);
-  if (am3<0) then am3:=am3+pi2;
-  RiseSetInt(3,jd0,am1,dm1,am2,dm2,am3,dm3,hr,ht,hs,azr,azs,irc,c);
-  if s=1 then begin
-    PlanetRiseCell(Lunegrid,i,irc,hr,ht,hs,azr,azs,jda,h,ar,de);
-  end else begin
-    jdcor:=0;
-    mr:='   ';mt:='   ';ms:='   ';
-    if hr<0 then begin mr:='d-1'; hr:=hr+24; jdcor:=-1; end;
-    if hr>24 then begin mr:='d+1'; hr:=hr-24; jdcor:=1; end;
-    if ht<0 then begin mt:='d-1'; ht:=ht+24; jdcor:=-1; end;
-    if ht>24 then begin mt:='d+1'; ht:=ht-24; jdcor:=1; end;
-    if hs<0 then begin ms:='d-1'; hs:=hs+24; jdcor:=-1; end;
-    if hs>24 then begin ms:='d+1'; hs:=hs-24; jdcor:=1; end;
-    case irc of
-       0 : begin
-           cells[6,i]:=mr+blank+armtostr(hr);
-           cells[7,i]:=mt+blank+armtostr(ht);
-           cells[8,i]:=ms+blank+armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+jdcor+(hr-c.timezone-h)/24,ar,de);
-           objects[7,i]:=SetObjCoord(jda+jdcor+(ht-c.timezone-h)/24,ar,de);
-           objects[8,i]:=SetObjCoord(jda+jdcor+(hs-c.timezone-h)/24,ar,de);
-           end;
-       1 : begin
-           cells[6,i]:='-';
-           cells[7,i]:=mt+blank+armtostr(ht);
-           cells[8,i]:='-';
-           objects[7,i]:=SetObjCoord(jda+jdcor+(ht-c.timezone-h)/24,ar,de);
-           objects[6,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-       2 : begin
-           cells[6,i]:='-';
-           cells[7,i]:='-';
-           cells[8,i]:='-';
-           objects[6,i]:=nil;
-           objects[7,i]:=nil;
-           objects[8,i]:=nil;
-           end;
-    end;
-  end;
- end;
-end;
-end;
-jda:=jda+s;
-i:=i+1;
-until jda>jd2;
-LuneGrid.RowCount:=LuneGrid.Rowcount-1;
-finally
-screen.cursor:=crDefault;
-SoleilGrid.Visible:=true;
-MercureGrid.Visible:=true;
-VenusGrid.Visible:=true;
-LuneGrid.Visible:=true;
-MarsGrid.Visible:=true;
-JupiterGrid.Visible:=true;
-SaturneGrid.Visible:=true;
-UranusGrid.Visible:=true;
-NeptuneGrid.Visible:=true;
-PlutonGrid.Visible:=true;
-end;
-end;}
-
 procedure Tf_calendar.BtnRefreshClick(Sender: TObject);
 var d: string;
 begin
 chdir(appdir);
 if c.timezone=0 then d:=''
   else
-   if c.timezone<0 then d:=east
-     else d:=west;
+   if c.timezone<0 then d:=west
+     else d:=east;
 caption:=title+blank+c.Obsname+blank+tz+'='+timtostr(abs(c.timezone))+blank+d;
 case pagecontrol1.ActivePage.TabIndex of
      0 : RefreshTwilight;
@@ -1797,10 +1265,10 @@ begin
 lst:=TStringList.Create;
 buf:='"'+c.ObsName+'";"';
 x:=abs(c.ObsLongitude);
-if c.ObsLongitude>0 then d:=east else d:=west;
+if c.ObsLongitude>0 then d:=west else d:=east;
 buf:=buf+appmsg[32]+'='+stringreplace(copy(detostr(x),2,99),'"','""',[rfReplaceAll])+d+'";"'+appmsg[31]+'='+stringreplace(detostr(c.ObsLatitude),'"','""',[rfReplaceAll])+'";"';
 x:=abs(c.TimeZone);
-if c.TimeZone<0 then d:=east else d:=west;
+if c.TimeZone<0 then d:=west else d:=east;
 buf:=buf+tz+'='+timtostr(x)+d+'"';
 lst.Add(buf);
 for i:=0 to grid.RowCount-1 do begin
@@ -1853,10 +1321,10 @@ var buf,d : string;
 begin
 buf:=c.ObsName;
 x:=abs(c.ObsLongitude);
-if c.ObsLongitude>0 then d:=east else d:=west;
+if c.ObsLongitude>0 then d:=west else d:=east;
 buf:=buf+blank+appmsg[32]+'='+copy(detostr(x),2,99)+d+blank+appmsg[31]+'='+detostr(c.ObsLatitude);
 x:=abs(c.TimeZone);
-if c.TimeZone<0 then d:=east else d:=west;
+if c.TimeZone<0 then d:=west else d:=east;
 buf:=buf+blank+tz+'='+timtostr(x)+d;
 if grid=cometgrid then
   PrtGrid(Grid,'CdC',buf,'',poLandscape)
