@@ -367,7 +367,7 @@ resourcestring
   rsUmbra = 'Umbra';
   rsSemi = 'Semi';
   rsPartial = 'Partial';
-  rsTotal = 'Total';
+  rsTotal = 'Totality';
   rsSatellite = 'Satellite';
   rsRange = 'Range';
   rsDir = 'Dir';
@@ -573,7 +573,7 @@ resourcestring
   rsReplacedBy = 'Replaced by';
   rsCdCFormatPre = 'CdC format, prefere the compact version';
   rsNotAvailable = 'Not available';
-  rsFovNumber = 'fov number';
+  rsFovNumber = 'fov number:';
   rsApply = 'Apply';
   rsCat = 'Cat.';
   rsMin3 = 'Min.';
@@ -607,7 +607,6 @@ resourcestring
   rsObjectListSe = 'Object List Setting';
   rsTypeOfObject = 'Type of object to add to the list';
   rsSolarSystemO = 'Solar System object';
-  rsFovNumber2 = 'fov number:';
   rsStarDisplay = 'Star Display';
   rsNebulaDispla = 'Nebula Display';
   rsStarDisplayP = 'Star Display  Properties';
@@ -666,7 +665,7 @@ resourcestring
   rsFillMilkyWay = 'Fill Milky Way';
   rsStarLabel = 'Star Label';
   rsConstellatio6 = 'Constellation Label';
-  rsDisplayTheLa = 'Display the labels to the chart';
+  rsDisplayTheLa = 'Display the labels';
   rsDisplayTheCh = 'Display the chart information in the menu bar.';
   rsLabelObject = 'Label Object';
   rsMagnitudeDif = 'Magnitude difference';
@@ -1044,6 +1043,11 @@ resourcestring
   rsJulianDay = 'Julian Day =';
   rsToday = 'Today';
   rsJDCalendar = 'JD calendar';
+  rsWarningTheCu = 'Warning! The current date and the observatory location '
+    +'may have changed from the default value. You must reply No and use the %'
+    +'s button now to return to your default values, otherwise they may be '
+    +'lost. Do you want to continue ?';
+  rsCoordinates = 'Coordinates:';
 
 
 implementation
@@ -1060,6 +1064,9 @@ procedure Translate(lang : string = ''; lang2 : string = '');
 begin
  if lang='' then lang:=GetDefaultLanguage;
  writetrace('Try language: '+lang+', '+lang2);
+ // translate LCL messages
+ TranslateUnitResourceStrings('LCLStrConsts',slash(appdir)+slash('data')+slash('language')+'lcl.%s.po',lang,lang2);
+ // translate CDC messages
  TranslateUnitResourceStrings('u_translation',slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',lang,lang2);
  writetrace('Language: '+rsLanguage);
 end;

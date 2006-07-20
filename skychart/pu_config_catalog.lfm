@@ -1,4 +1,10 @@
 object f_config_catalog: Tf_config_catalog
+  Left = 408
+  Height = 539
+  Top = 231
+  Width = 526
+  HorzScrollBar.Page = 525
+  VertScrollBar.Page = 538
   ActiveControl = addcat
   Caption = 'Catalog'
   ClientHeight = 539
@@ -6,68 +12,63 @@ object f_config_catalog: Tf_config_catalog
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
-  HorzScrollBar.Page = 525
-  VertScrollBar.Page = 538
-  Left = 408
-  Height = 539
-  Top = 231
-  Width = 526
+  PixelsPerInch = 90
   object MainPanel: TPanel
-    ClientHeight = 480
-    ClientWidth = 500
-    ParentColor = False
-    TabOrder = 0
     Left = 12
     Height = 480
     Top = 8
     Width = 500
+    ClientHeight = 480
+    ClientWidth = 500
+    ParentColor = False
+    TabOrder = 0
     object Notebook1: TNotebook
-      Align = alClient
-      PageIndex = 0
-      ShowTabs = False
       Left = 1
       Height = 424
       Top = 1
       Width = 498
+      Align = alClient
+      PageIndex = 2
+      ShowTabs = False
       object Page1: TPage
         Caption = 'Catalog'
-        ClientWidth = 490
-        ClientHeight = 416
-        Height = 416
-        Width = 490
+        ClientWidth = 496
+        ClientHeight = 422
         object Label37: TLabel
-          Caption = 'Stars and Nebulae catalogs prepared with '
-          Color = clNone
-          ParentColor = False
           Left = 4
           Height = 13
           Top = 23
           Width = 240
+          Caption = 'Stars and Nebulae catalogs prepared with '
+          Color = clNone
+          ParentColor = False
         end
         object addcat: TBitBtn
+          Left = 144
+          Height = 25
+          Top = 376
+          Width = 75
           BorderSpacing.InnerBorder = 2
           Caption = 'Add'
           NumGlyphs = 0
           OnClick = AddCatClick
           TabOrder = 0
-          Left = 144
+        end
+        object delcat: TBitBtn
+          Left = 248
           Height = 25
           Top = 376
           Width = 75
-        end
-        object delcat: TBitBtn
           BorderSpacing.InnerBorder = 2
           Caption = 'Delete'
           NumGlyphs = 0
           OnClick = DelCatClick
           TabOrder = 1
-          Left = 248
-          Height = 25
-          Top = 376
-          Width = 75
         end
         object StringGrid3: TStringGrid
+          Height = 321
+          Top = 48
+          Width = 482
           ColCount = 6
           DefaultColWidth = 18
           DefaultRowHeight = 18
@@ -84,9 +85,6 @@ object f_config_catalog: Tf_config_catalog
           OnMouseUp = StringGrid3MouseUp
           OnSelectCell = StringGrid3SelectCell
           OnSetEditText = StringGrid3SetEditText
-          Height = 321
-          Top = 48
-          Width = 482
           ColWidths = (
             18
             54
@@ -97,2255 +95,1856 @@ object f_config_catalog: Tf_config_catalog
           )
         end
         object CatgenButton: TButton
-          BorderSpacing.InnerBorder = 4
-          Caption = 'CatGen'
-          OnClick = CatgenClick
-          TabOrder = 3
           Left = 255
           Height = 25
           Top = 16
           Width = 96
+          BorderSpacing.InnerBorder = 4
+          Caption = 'CatGen'
+          OnClick = CatgenClick
+          TabOrder = 3
         end
       end
       object Page2: TPage
         Caption = 'CdC Stars'
-        ClientWidth = 490
-        ClientHeight = 416
-        Height = 416
-        Width = 490
+        ClientWidth = 496
+        ClientHeight = 422
         object Label2: TLabel
+          Height = 13
+          Top = 7
+          Width = 151
           Caption = 'CDC Stars Catalog Setting'
           Color = clNone
           ParentColor = False
-          Height = 13
-          Top = 7
-          Width = 149
         end
         object Label65: TLabel
-          Caption = 'pm'
-          Color = clNone
-          ParentColor = False
           Left = 68
           Height = 13
           Top = 38
-          Width = 17
-        end
-        object Label66: TLabel
+          Width = 19
           Caption = 'pm'
           Color = clNone
           ParentColor = False
+        end
+        object Label66: TLabel
           Left = 68
           Height = 13
           Top = 68
-          Width = 17
-        end
-        object Label87: TLabel
+          Width = 19
           Caption = 'pm'
           Color = clNone
           ParentColor = False
+        end
+        object Label87: TLabel
           Left = 68
           Height = 13
           Top = 94
-          Width = 17
-        end
-        object Label16: TLabel
-          Caption = ' min'
+          Width = 19
+          Caption = 'pm'
           Color = clNone
           ParentColor = False
+        end
+        object Label16: TLabel
           Left = 266
           Height = 13
           Top = 23
-          Width = 24
+          Width = 26
+          Caption = ' min'
+          Color = clNone
+          ParentColor = False
         end
         object Label28: TLabel
+          Left = 267
+          Height = 13
+          Top = 7
+          Width = 75
           Alignment = taRightJustify
           Caption = 'Field number'
           Color = clNone
           ParentColor = False
-          Left = 267
-          Height = 13
-          Top = 7
-          Width = 74
         end
         object Label17: TLabel
-          Caption = ' max'
-          Color = clNone
-          ParentColor = False
           Left = 303
           Height = 13
           Top = 23
-          Width = 27
-        end
-        object Label27: TLabel
-          Caption = 'Files Path'
+          Width = 29
+          Caption = ' max'
           Color = clNone
           ParentColor = False
+        end
+        object Label27: TLabel
           Left = 340
           Height = 13
           Top = 23
-          Width = 57
-        end
-        object Label18: TLabel
-          Caption = 'Stars'
+          Width = 56
+          Caption = 'Files Path'
           Color = clNone
           ParentColor = False
+        end
+        object Label18: TLabel
           Left = 8
           Height = 13
           Top = 38
-          Width = 29
+          Width = 32
+          Caption = 'Stars'
+          Color = clNone
+          ParentColor = False
         end
         object Label21: TLabel
+          Left = 8
+          Height = 28
+          Top = 330
+          Width = 49
           Caption = 'Deepsky 2000'
           Color = clNone
           ParentColor = False
           WordWrap = True
-          Left = 8
-          Height = 33
-          Top = 330
-          Width = 48
         end
         object Label19: TLabel
+          Left = 8
+          Height = 13
+          Top = 235
+          Width = 54
           Caption = 'Variables'
           Color = clNone
           ParentColor = False
-          Left = 8
-          Height = 17
-          Top = 235
-          Width = 54
         end
         object Label20: TLabel
-          Caption = 'Doubles'
-          Color = clNone
-          ParentColor = False
           Left = 8
           Height = 13
           Top = 287
           Width = 47
+          Caption = 'Doubles'
+          Color = clNone
+          ParentColor = False
         end
         object BSCbox: TCheckBox
-          Caption = 'Bright Star Catalog'
+          Tag = 1
+          Left = 92
+          Height = 19
           Hint = 'Bright Stars Catalog 5th Edition  (Hoffleit 1991)'
+          Top = 38
+          Width = 130
+          HelpContext = 100
+          Caption = 'Bright Star Catalog'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
-          Left = 92
-          Height = 28
-          Hint = 'Bright Stars Catalog 5th Edition  (Hoffleit 1991)'
-          Top = 38
-          Width = 138
-          HelpContext = 100
-          Tag = 1
         end
         object Fbsc1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fbsc1'
+          Tag = 1
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'Fbsc1'
+          Top = 38
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          Tag = 1
-          Top = 38
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 38
-          Width = 30
-          Tag = 1
+          MaxValue = 10
         end
         object Fbsc2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fbsc2'
+          Tag = 1
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'Fbsc2'
+          Top = 38
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
-          Tag = 1
-          Top = 38
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 38
-          Width = 30
-          Tag = 1
+          MaxValue = 10
         end
         object SKYbox: TCheckBox
-          Caption = 'SKY2000'
+          Tag = 2
+          Left = 92
+          Height = 19
           Hint = 'SKY2000 - Master Star Catalog  (Sande+ 1998)'
+          Top = 68
+          Width = 71
+          HelpContext = 101
+          Caption = 'SKY2000'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
-          Left = 92
-          Height = 28
-          Hint = 'SKY2000 - Master Star Catalog  (Sande+ 1998)'
-          Top = 68
-          Width = 86
-          HelpContext = 101
-          Tag = 2
         end
         object Fsky1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fsky1'
+          Tag = 2
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'Fsky1'
+          Top = 66
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
-          Tag = 2
-          Top = 66
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 66
-          Width = 30
-          Tag = 2
+          MaxValue = 10
         end
         object Fsky2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fsky2'
+          Tag = 2
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'Fsky2'
+          Top = 66
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
-          Tag = 2
-          Top = 66
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 66
-          Width = 30
-          Tag = 2
+          MaxValue = 10
         end
         object TY2Box: TCheckBox
-          Caption = 'Tycho 2 Catalog'
+          Tag = 4
+          Left = 92
+          Height = 19
           Hint = 'The Tycho-2 Catalogue (Hog+ 2000)'
+          Top = 94
+          Width = 112
+          HelpContext = 102
+          Caption = 'Tycho 2 Catalog'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
-          Left = 92
-          Height = 28
-          Hint = 'The Tycho-2 Catalogue (Hog+ 2000)'
-          Top = 94
-          Width = 126
-          HelpContext = 102
-          Tag = 4
         end
         object Fty21: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fty21'
+          Tag = 4
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'Fty21'
+          Top = 94
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
-          Tag = 4
-          Top = 94
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 94
-          Width = 30
-          Tag = 4
+          MaxValue = 10
         end
         object Fty22: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fty22'
+          Tag = 4
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'Fty22'
+          Top = 94
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
-          Tag = 4
-          Top = 94
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 94
-          Width = 30
-          Tag = 4
+          MaxValue = 10
         end
         object GSCFBox: TCheckBox
-          Caption = 'HST GSC original FITS'
+          Tag = 6
+          Left = 92
+          Height = 19
           Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  original FITS CDROM'
+          Top = 122
+          Width = 147
+          HelpContext = 104
+          Caption = 'HST GSC original FITS'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
-          Left = 92
-          Height = 28
-          Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  original FITS CDROM'
-          Top = 122
-          Width = 162
-          HelpContext = 104
-          Tag = 6
         end
         object GSCCbox: TCheckBox
-          Caption = 'HST GSC compact'
+          Tag = 7
+          Left = 92
+          Height = 19
           Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  Compact CDS version '
+          Top = 152
+          Width = 125
+          HelpContext = 104
+          Caption = 'HST GSC compact'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
-          Left = 92
-          Height = 28
-          Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  Compact CDS version '
-          Top = 152
-          Width = 138
-          HelpContext = 104
-          Tag = 7
         end
         object USNbox: TCheckBox
-          Caption = 'USNO-A'
+          Tag = 9
+          Left = 92
+          Height = 19
           Hint = '- USNO-SA1.0 '#13#10'- USNO-A1.0 '#13#10'- USNO-A2.0'#13#10'  U.S. Naval Observatory CDROM''s'
+          Top = 181
+          Width = 65
+          HelpContext = 113
+          Caption = 'USNO-A'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 11
-          Left = 92
-          Height = 28
-          Hint = '- USNO-SA1.0 '#13#10'- USNO-A1.0 '#13#10'- USNO-A2.0'#13#10'  U.S. Naval Observatory CDROM''s'
-          Top = 180
-          Width = 82
-          HelpContext = 113
-          Tag = 9
         end
         object dsbasebox: TCheckBox
-          Caption = 'Deepsky 2000 base'
+          Tag = 11
+          Left = 92
+          Height = 19
           Hint = 'Deepsky 2000 base directory with stars to magnitude 5.5'
+          Top = 330
+          Width = 133
+          HelpContext = 104
+          Caption = 'Deepsky 2000 base'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 12
-          Left = 92
-          Height = 28
-          Hint = 'Deepsky 2000 base directory with stars to magnitude 5.5'
-          Top = 330
-          Width = 145
-          HelpContext = 104
-          Tag = 11
         end
         object dstycBox: TCheckBox
-          Caption = 'Deepsky 2000 Super Tycho'
+          Tag = 12
+          Left = 91
+          Height = 19
           Hint = 'Tycho Catalog from Deepsky 2000 CDROM'
+          Top = 358
+          Width = 176
+          HelpContext = 104
+          Caption = 'Deepsky 2000 Super Tycho'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 13
-          Left = 91
-          Height = 28
-          Hint = 'Tycho Catalog from Deepsky 2000 CDROM'
-          Top = 358
-          Width = 190
-          HelpContext = 104
-          Tag = 12
         end
         object dsgscBox: TCheckBox
-          Caption = 'Deepsky 2000 HST GSC'
+          Tag = 13
+          Left = 91
+          Height = 19
           Hint = 'The Hubble Space Telescope Guide Star Catalog from Deepsky 2000 CDROM'
+          Top = 386
+          Width = 157
+          HelpContext = 104
+          Caption = 'Deepsky 2000 HST GSC'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
-          Left = 91
-          Height = 28
-          Hint = 'The Hubble Space Telescope Guide Star Catalog from Deepsky 2000 CDROM'
-          Top = 386
-          Width = 172
-          HelpContext = 104
-          Tag = 13
         end
         object USNBright: TCheckBox
+          Tag = 9
+          Left = 164
+          Height = 19
+          Top = 181
+          Width = 89
           Caption = 'Bright stars'
           OnClick = USNBrightClick
           TabOrder = 15
-          Left = 179
-          Height = 28
-          Top = 180
-          Width = 95
-          Tag = 9
         end
         object fgscf1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgscf1'
+          Tag = 6
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'fgscf1'
+          Top = 122
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 16
-          Tag = 6
-          Top = 122
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 122
-          Width = 30
-          Tag = 6
+          MaxValue = 10
         end
         object fgscc1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgscc1'
+          Tag = 7
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'fgscc1'
+          Top = 150
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 17
-          Tag = 7
-          Top = 150
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 150
-          Width = 30
-          Tag = 7
+          MaxValue = 10
         end
         object fusn1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fusn1'
+          Tag = 9
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'fusn1'
+          Top = 178
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 18
-          Tag = 9
-          Top = 178
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 178
-          Width = 30
-          Tag = 9
+          MaxValue = 10
         end
         object dsbase1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'dsbase1'
+          Tag = 11
+          Left = 267
           Height = 22
           Hint = '0..10'
-          Left = 267
-          Name = 'dsbase1'
+          Top = 330
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 19
-          Tag = 11
-          Top = 330
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 267
-          Height = 22
-          Hint = '0..10'
-          Top = 330
-          Width = 30
-          Tag = 11
+          MaxValue = 10
         end
         object dstyc1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'dstyc1'
+          Tag = 12
+          Left = 267
           Height = 22
           Hint = '0..10'
-          Left = 267
-          Name = 'dstyc1'
+          Top = 358
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 20
-          Tag = 12
-          Top = 358
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 267
-          Height = 22
-          Hint = '0..10'
-          Top = 358
-          Width = 30
-          Tag = 12
+          MaxValue = 10
         end
         object dsgsc1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'dsgsc1'
+          Tag = 13
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'dsgsc1'
+          Top = 386
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 21
-          Tag = 13
-          Top = 386
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 386
-          Width = 30
-          Tag = 13
+          MaxValue = 10
         end
         object dsgsc2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'dsgsc2'
+          Tag = 13
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'dsgsc2'
+          Top = 386
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 22
-          Tag = 13
-          Top = 386
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 386
-          Width = 30
-          Tag = 13
+          MaxValue = 10
         end
         object dstyc2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'dstyc2'
+          Tag = 12
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'dstyc2'
+          Top = 358
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 23
-          Tag = 12
-          Top = 358
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 358
-          Width = 30
-          Tag = 12
+          MaxValue = 10
         end
         object dsbase2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'dsbase2'
+          Tag = 11
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'dsbase2'
+          Top = 330
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 24
-          Tag = 11
-          Top = 330
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 330
-          Width = 30
-          Tag = 11
+          MaxValue = 10
         end
         object fusn2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fusn2'
+          Tag = 9
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'fusn2'
+          Top = 178
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 25
-          Tag = 9
-          Top = 178
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 178
-          Width = 30
-          Tag = 9
+          MaxValue = 10
         end
         object fgscc2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgscc2'
+          Tag = 7
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'fgscc2'
+          Top = 150
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 26
-          Tag = 7
-          Top = 150
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 150
-          Width = 30
-          Tag = 7
+          MaxValue = 10
         end
         object fgscf2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgscf2'
+          Tag = 6
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'fgscf2'
+          Top = 122
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 27
-          Tag = 6
-          Top = 122
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 122
-          Width = 30
-          Tag = 6
+          MaxValue = 10
         end
         object Fgcv2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fgcv2'
+          Tag = 1
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'Fgcv2'
+          Top = 235
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 28
-          Tag = 1
-          Top = 235
-          Width = 30
-          OnExit = nil
           OnChange = Fgcv2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 235
-          Width = 30
-          Tag = 1
+          MaxValue = 10
         end
         object Fwds2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fwds2'
+          Tag = 1
+          Left = 306
           Height = 22
           Hint = '0..10'
-          Left = 306
-          Name = 'Fwds2'
+          Top = 286
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 29
-          Tag = 1
-          Top = 286
-          Width = 30
-          OnExit = nil
           OnChange = Fwds2Change
-          Left = 306
-          Height = 22
-          Hint = '0..10'
-          Top = 286
-          Width = 30
-          Tag = 1
+          MaxValue = 10
         end
         object Fwds1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fwds1'
+          Tag = 1
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'Fwds1'
+          Top = 286
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 30
-          Tag = 1
-          Top = 286
-          Width = 30
-          OnExit = nil
           OnChange = Fwds1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 286
-          Width = 30
-          Tag = 1
+          MaxValue = 10
         end
         object Fgcv1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Fgcv1'
+          Tag = 1
+          Left = 266
           Height = 22
           Hint = '0..10'
-          Left = 266
-          Name = 'Fgcv1'
+          Top = 235
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 31
-          Tag = 1
-          Top = 235
-          Width = 30
-          OnExit = nil
           OnChange = Fgcv1Change
-          Left = 266
-          Height = 22
-          Hint = '0..10'
-          Top = 235
-          Width = 30
-          Tag = 1
+          MaxValue = 10
         end
         object GCVBox: TCheckBox
-          Caption = 'Gen. Cat. Variable Star'
+          Tag = 1
+          Left = 92
+          Height = 19
           Hint = 'General Catalog of Variable Stars    (Kholopov+ 1998)'
+          Top = 231
+          Width = 153
+          HelpContext = 105
+          Caption = 'Gen. Cat. Variable Star'
           OnClick = GCVBoxClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 32
-          Left = 92
-          Height = 28
-          Hint = 'General Catalog of Variable Stars    (Kholopov+ 1998)'
-          Top = 231
-          Width = 162
-          HelpContext = 105
-          Tag = 1
         end
         object IRVar: TCheckBox
+          Tag = 1
+          Left = 92
+          Height = 19
+          Top = 255
+          Width = 122
           Caption = 'Show IR variables'
           OnClick = IRVarClick
           TabOrder = 33
-          Left = 92
-          Height = 28
-          Top = 255
-          Width = 134
-          Tag = 1
         end
         object WDSbox: TCheckBox
-          Caption = 'Washington Double Star'
+          Tag = 1
+          Left = 91
+          Height = 19
           Hint = 'The Washington Visual Double Star Catalog    (USNO, 2000)'
+          Top = 286
+          Width = 157
+          HelpContext = 106
+          Caption = 'Washington Double Star'
           OnClick = WDSboxClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 34
-          Left = 91
-          Height = 28
-          Hint = 'The Washington Visual Double Star Catalog    (USNO, 2000)'
-          Top = 286
-          Width = 168
-          HelpContext = 106
-          Tag = 1
         end
         object bsc3: TDirectoryEdit
-          ButtonWidth = 23
-          NumGlyphs = 1
-          ParentColor = False
-          TabOrder = 35
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 35
+          Tag = 1
           Left = 343
           Height = 21
           Top = 38
           Width = 111
-          Tag = 1
-        end
-        object sky3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 35
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 36
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 36
+        end
+        object sky3: TDirectoryEdit
+          Tag = 2
           Left = 343
           Height = 21
           Top = 67
           Width = 111
-          Tag = 2
-        end
-        object ty23: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 36
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 37
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 37
+        end
+        object ty23: TDirectoryEdit
+          Tag = 4
           Left = 343
           Height = 21
           Top = 94
           Width = 111
-          Tag = 4
-        end
-        object gscf3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 37
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 38
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 38
+        end
+        object gscf3: TDirectoryEdit
+          Tag = 6
           Left = 343
           Height = 21
           Top = 122
           Width = 111
-          Tag = 6
-        end
-        object gscc3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 38
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 39
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 39
+        end
+        object gscc3: TDirectoryEdit
+          Tag = 7
           Left = 343
           Height = 21
           Top = 150
           Width = 111
-          Tag = 7
-        end
-        object usn3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 39
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 40
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 40
+        end
+        object usn3: TDirectoryEdit
+          Tag = 9
           Left = 343
           Height = 21
           Top = 179
           Width = 111
-          Tag = 9
-        end
-        object dsbase3: TDirectoryEdit
-          ButtonWidth = 21
+          OnChange = CDCStarPathChange
+          TabOrder = 40
+          ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 41
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 41
+        end
+        object dsbase3: TDirectoryEdit
+          Tag = 11
           Left = 343
           Height = 21
           Top = 330
           Width = 111
-          Tag = 11
-        end
-        object dstyc3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 41
           ButtonWidth = 21
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 42
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 42
+        end
+        object dstyc3: TDirectoryEdit
+          Tag = 12
           Left = 343
           Height = 21
           Top = 359
           Width = 111
-          Tag = 12
-        end
-        object dsgsc3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 42
           ButtonWidth = 21
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 43
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 43
+        end
+        object dsgsc3: TDirectoryEdit
+          Tag = 13
           Left = 343
           Height = 21
           Top = 386
           Width = 111
-          Tag = 13
-        end
-        object gcv3: TDirectoryEdit
-          ButtonWidth = 23
+          OnChange = CDCStarPathChange
+          TabOrder = 43
+          ButtonWidth = 21
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 44
-          OnChange = gcv3Change
-          OnChange = gcv3Change
-          TabOrder = 44
+        end
+        object gcv3: TDirectoryEdit
+          Tag = 1
           Left = 343
           Height = 21
           Top = 235
           Width = 111
-          Tag = 1
-        end
-        object wds3: TDirectoryEdit
+          OnChange = gcv3Change
+          TabOrder = 44
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 45
-          OnChange = wds3Change
-          OnChange = wds3Change
-          TabOrder = 45
+        end
+        object wds3: TDirectoryEdit
+          Tag = 1
           Left = 343
           Height = 21
           Top = 287
           Width = 111
-          Tag = 1
+          OnChange = wds3Change
+          TabOrder = 45
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
         end
       end
       object Page3: TPage
         Caption = 'CdC Nebulae'
-        ClientWidth = 490
-        ClientHeight = 416
-        Height = 416
-        Width = 490
+        ClientWidth = 496
+        ClientHeight = 422
         object Bevel5: TBevel
-          Height = 233
-          Left = 1
           Name = 'Bevel5'
-          Top = 136
-          Style = bsRaised
-          Width = 489
           Left = 1
           Height = 233
           Top = 136
           Width = 489
+          Shape = bsFrame
+          Style = bsRaised
         end
         object Bevel3: TBevel
-          Height = 41
-          Left = 2
           Name = 'Bevel3'
-          Top = 40
-          Style = bsRaised
-          Width = 485
           Left = 2
           Height = 41
           Top = 40
           Width = 485
+          Shape = bsFrame
+          Style = bsRaised
         end
         object Bevel4: TBevel
-          Height = 41
-          Left = 1
           Name = 'Bevel4'
-          Top = 88
-          Style = bsRaised
-          Width = 488
           Left = 1
           Height = 41
           Top = 88
           Width = 488
+          Shape = bsFrame
+          Style = bsRaised
         end
         object Label3: TLabel
-          Caption = 'CDC Nebulae Catalog Setting'
-          Color = clNone
-          ParentColor = False
           Left = 1
           Height = 13
           Top = 7
-          Width = 168
+          Width = 166
+          Caption = 'CDC Nebulae Catalog Setting'
+          Color = clNone
+          ParentColor = False
         end
         object Label22: TLabel
+          Left = 8
+          Height = 40
+          Top = 147
+          Width = 81
           AutoSize = False
           Caption = 'Nebulae'
           Color = clNone
           ParentColor = False
           WordWrap = True
-          Left = 8
-          Height = 40
-          Top = 147
-          Width = 81
         end
         object Label23: TLabel
+          Left = 7
+          Height = 44
+          Top = 187
+          Width = 82
+          AutoSize = False
           Caption = 'Galaxies'
           Color = clNone
           ParentColor = False
           WordWrap = True
-          Left = 7
-          Height = 17
-          Top = 187
-          Width = 48
         end
         object Label24: TLabel
+          Left = 8
+          Height = 43
+          Top = 252
+          Width = 82
+          AutoSize = False
           Caption = 'Open clusters'
           Color = clNone
           ParentColor = False
           WordWrap = True
-          Left = 8
-          Height = 33
-          Top = 252
-          Width = 45
         end
         object Label25: TLabel
+          Left = 8
+          Height = 28
+          Top = 292
+          Width = 49
           Caption = 'Globular clusters'
           Color = clNone
           ParentColor = False
           WordWrap = True
-          Left = 8
-          Height = 33
-          Top = 292
-          Width = 52
         end
         object Label26: TLabel
+          Left = 8
+          Height = 28
+          Top = 332
+          Width = 78
+          AutoSize = False
           Caption = 'Planetary nebulae'
           Color = clNone
           ParentColor = False
           WordWrap = True
-          Left = 8
-          Height = 33
-          Top = 332
-          Width = 58
         end
         object Label69: TLabel
-          Caption = 'General'
-          Color = clNone
-          ParentColor = False
           Left = 8
           Height = 13
           Top = 98
-          Width = 45
+          Width = 46
+          Caption = 'General'
+          Color = clNone
+          ParentColor = False
         end
         object Label15: TLabel
+          Left = 279
+          Height = 13
+          Width = 75
           Alignment = taRightJustify
           Caption = 'Field number'
           Color = clNone
           ParentColor = False
-          Left = 279
-          Height = 13
-          Width = 74
         end
         object Label116: TLabel
+          Left = 279
+          Height = 13
+          Top = 16
+          Width = 26
           Caption = ' min'
           Color = clNone
           ParentColor = False
-          Left = 279
-          Height = 13
-          Top = 16
-          Width = 24
         end
         object Label117: TLabel
-          Caption = ' max'
-          Color = clNone
-          ParentColor = False
           Left = 319
           Height = 13
           Top = 16
-          Width = 27
-        end
-        object Label118: TLabel
-          Caption = 'Files Path'
+          Width = 29
+          Caption = ' max'
           Color = clNone
           ParentColor = False
+        end
+        object Label118: TLabel
           Left = 355
           Height = 13
           Top = 16
-          Width = 57
-        end
-        object Label119: TLabel
-          Caption = 'Default'
+          Width = 56
+          Caption = 'Files Path'
           Color = clNone
           ParentColor = False
+        end
+        object Label119: TLabel
           Left = 8
           Height = 13
           Top = 49
-          Width = 40
+          Width = 41
+          Caption = 'Default'
+          Color = clNone
+          ParentColor = False
         end
         object Label120: TLabel
+          Left = 7
+          Height = 13
+          Top = 381
+          Width = 357
           Alignment = taCenter
           Caption = 'Use only catalog from one of the three block at the same time'
           Color = clNone
           ParentColor = False
-          Left = 7
-          Height = 13
-          Top = 381
-          Width = 342
         end
         object NGCbox: TCheckBox
-          Caption = 'New General Catalog'
+          Tag = 2
+          Left = 94
+          Height = 19
           Hint = 'New General Catalogue of Nebulae and Cluster of Stars (Dreyer 1888) (Sky Pub. Corp. 1988)'
+          Top = 96
+          Width = 141
+          HelpContext = 107
+          Caption = 'New General Catalog'
           OnClick = CDCNebSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
-          Left = 94
-          Height = 28
-          Hint = 'New General Catalogue of Nebulae and Cluster of Stars (Dreyer 1888) (Sky Pub. Corp. 1988)'
-          Top = 96
-          Width = 153
-          HelpContext = 107
-          Tag = 2
         end
         object RC3box: TCheckBox
-          Caption = '3'' Ref. Cat. Bright Galaxies'
+          Tag = 4
+          Left = 94
+          Height = 19
           Hint = 'Third Reference Catalogue of Bright Galaxies (RC3) (de Vaucouleurs+ 1991)'
+          Top = 187
+          Width = 175
+          HelpContext = 109
+          Caption = '3'' Ref. Cat. Bright Galaxies'
           OnClick = CDCNebSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          Left = 94
-          Height = 28
-          Hint = 'Third Reference Catalogue of Bright Galaxies (RC3) (de Vaucouleurs+ 1991)'
-          Top = 187
-          Width = 182
-          HelpContext = 109
-          Tag = 4
         end
         object OCLbox: TCheckBox
-          Caption = 'Open Cluster Data'
+          Tag = 6
+          Left = 94
+          Height = 19
           Hint = 'Open Cluster Data 5th Edition    (Lynga 1987)'
+          Top = 252
+          Width = 126
+          HelpContext = 110
+          Caption = 'Open Cluster Data'
           OnClick = CDCNebSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
-          Left = 94
-          Height = 28
-          Hint = 'Open Cluster Data 5th Edition    (Lynga 1987)'
-          Top = 252
-          Width = 137
-          HelpContext = 110
-          Tag = 6
         end
         object GCMbox: TCheckBox
-          Caption = 'Globular Cl. in the Milky Way'
+          Tag = 7
+          Left = 94
+          Height = 19
           Hint = 'Globular Clusters in the Milky Way (Harris, 1997)'
+          Top = 292
+          Width = 181
+          HelpContext = 111
+          Caption = 'Globular Cl. in the Milky Way'
           OnClick = CDCNebSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
-          Left = 94
-          Height = 28
-          Hint = 'Globular Clusters in the Milky Way (Harris, 1997)'
-          Top = 292
-          Width = 197
-          HelpContext = 111
-          Tag = 7
         end
         object GPNbox: TCheckBox
-          Caption = 'Cat, Galactic Planetary Neb. '
+          Tag = 8
+          Left = 94
+          Height = 19
           Hint = 'Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)'
+          Top = 332
+          Width = 184
+          HelpContext = 112
+          Caption = 'Cat, Galactic Planetary Neb. '
           OnClick = CDCNebSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
-          Left = 94
-          Height = 28
-          Hint = 'Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)'
-          Top = 332
-          Width = 197
-          HelpContext = 112
-          Tag = 8
         end
         object LBNbox: TCheckBox
-          Caption = 'Lynds Bright Nebulae'
+          Tag = 3
+          Left = 94
+          Height = 19
           Hint = 'Lynds'' Catalogue of Bright Nebulae    (Lynds 1965)'
+          Top = 147
+          Width = 142
+          HelpContext = 108
+          Caption = 'Lynds Bright Nebulae'
           OnClick = CDCNebSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
-          Left = 94
-          Height = 28
-          Hint = 'Lynds'' Catalogue of Bright Nebulae    (Lynds 1965)'
-          Top = 147
-          Width = 154
-          HelpContext = 108
-          Tag = 3
         end
         object PGCBox: TCheckBox
-          Caption = 'Cat. of Principal Galaxies'
+          Tag = 5
+          Left = 94
+          Height = 19
           Hint = 'Catalogue of Principal Galaxies (PGC)   (Paturel+ 1999)'
+          Top = 212
+          Width = 164
+          HelpContext = 116
+          Caption = 'Cat. of Principal Galaxies'
           OnClick = CDCNebSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
-          Left = 94
-          Height = 28
-          Hint = 'Catalogue of Principal Galaxies (PGC)   (Paturel+ 1999)'
-          Top = 212
-          Width = 174
-          HelpContext = 116
-          Tag = 5
         end
         object SACbox: TCheckBox
-          Caption = 'SAC '
+          Tag = 1
+          Left = 94
+          Height = 19
           Hint = 'Saguaro Astronomy Club Database  7.2'
+          Top = 49
+          Width = 48
+          HelpContext = 107
+          Caption = 'SAC '
           OnClick = CDCNebSelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
-          Left = 94
-          Height = 28
-          Hint = 'Saguaro Astronomy Club Database  7.2'
-          Top = 49
-          Width = 63
-          HelpContext = 107
-          Tag = 1
         end
         object fngc1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fngc1'
+          Tag = 2
+          Left = 279
           Height = 22
           Hint = '0..10'
-          Left = 279
-          Name = 'fngc1'
+          Top = 96
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
-          Tag = 2
-          Top = 96
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField1Change
-          Left = 279
-          Height = 22
-          Hint = '0..10'
-          Top = 96
-          Width = 30
-          Tag = 2
+          MaxValue = 10
         end
         object fngc2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fngc2'
+          Tag = 2
+          Left = 319
           Height = 22
           Hint = '0..10'
-          Left = 319
-          Name = 'fngc2'
+          Top = 96
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
-          Tag = 2
-          Top = 96
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField2Change
-          Left = 319
-          Height = 22
-          Hint = '0..10'
-          Top = 96
-          Width = 30
-          Tag = 2
+          MaxValue = 10
         end
         object fsac1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fsac1'
+          Tag = 1
+          Left = 279
           Height = 22
           Hint = '0..10'
-          Left = 279
-          Name = 'fsac1'
+          Top = 49
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
-          Tag = 1
-          Top = 49
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField1Change
-          Left = 279
-          Height = 22
-          Hint = '0..10'
-          Top = 49
-          Width = 30
-          Tag = 1
+          MaxValue = 10
         end
         object fsac2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fsac2'
+          Tag = 1
+          Left = 319
           Height = 22
           Hint = '0..10'
-          Left = 319
-          Name = 'fsac2'
+          Top = 49
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 11
-          Tag = 1
-          Top = 49
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField2Change
-          Left = 319
-          Height = 22
-          Hint = '0..10'
-          Top = 49
-          Width = 30
-          Tag = 1
+          MaxValue = 10
         end
         object flbn1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'flbn1'
+          Tag = 3
+          Left = 279
           Height = 22
           Hint = '0..10'
-          Left = 279
-          Name = 'flbn1'
+          Top = 145
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 12
-          Tag = 3
-          Top = 145
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField1Change
-          Left = 279
-          Height = 22
-          Hint = '0..10'
-          Top = 145
-          Width = 30
-          Tag = 3
+          MaxValue = 10
         end
         object flbn2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'flbn2'
+          Tag = 3
+          Left = 319
           Height = 22
           Hint = '0..10'
-          Left = 319
-          Name = 'flbn2'
+          Top = 145
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 13
-          Tag = 3
-          Top = 145
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField2Change
-          Left = 319
-          Height = 22
-          Hint = '0..10'
-          Top = 145
-          Width = 30
-          Tag = 3
+          MaxValue = 10
         end
         object frc31: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'frc31'
+          Tag = 4
+          Left = 279
           Height = 22
           Hint = '0..10'
-          Left = 279
-          Name = 'frc31'
+          Top = 185
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
-          Tag = 4
-          Top = 185
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField1Change
-          Left = 279
-          Height = 22
-          Hint = '0..10'
-          Top = 185
-          Width = 30
-          Tag = 4
+          MaxValue = 10
         end
         object frc32: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'frc32'
+          Tag = 4
+          Left = 319
           Height = 22
           Hint = '0..10'
-          Left = 319
-          Name = 'frc32'
+          Top = 185
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 15
-          Tag = 4
-          Top = 185
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField2Change
-          Left = 319
-          Height = 22
-          Hint = '0..10'
-          Top = 185
-          Width = 30
-          Tag = 4
+          MaxValue = 10
         end
         object fpgc1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fpgc1'
+          Tag = 5
+          Left = 279
           Height = 22
           Hint = '0..10'
-          Left = 279
-          Name = 'fpgc1'
+          Top = 210
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 16
-          Tag = 5
-          Top = 210
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField1Change
-          Left = 279
-          Height = 22
-          Hint = '0..10'
-          Top = 210
-          Width = 30
-          Tag = 5
+          MaxValue = 10
         end
         object fpgc2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fpgc2'
+          Tag = 5
+          Left = 319
           Height = 22
           Hint = '0..10'
-          Left = 319
-          Name = 'fpgc2'
+          Top = 210
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 17
-          Tag = 5
-          Top = 210
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField2Change
-          Left = 319
-          Height = 22
-          Hint = '0..10'
-          Top = 210
-          Width = 30
-          Tag = 5
+          MaxValue = 10
         end
         object focl1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'focl1'
+          Tag = 6
+          Left = 279
           Height = 22
           Hint = '0..10'
-          Left = 279
-          Name = 'focl1'
+          Top = 250
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 18
-          Tag = 6
-          Top = 250
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField1Change
-          Left = 279
-          Height = 22
-          Hint = '0..10'
-          Top = 250
-          Width = 30
-          Tag = 6
+          MaxValue = 10
         end
         object focl2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'focl2'
+          Tag = 6
+          Left = 319
           Height = 22
           Hint = '0..10'
-          Left = 319
-          Name = 'focl2'
+          Top = 250
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 19
-          Tag = 6
-          Top = 250
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField2Change
-          Left = 319
-          Height = 22
-          Hint = '0..10'
-          Top = 250
-          Width = 30
-          Tag = 6
+          MaxValue = 10
         end
         object fgcm1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgcm1'
+          Tag = 7
+          Left = 279
           Height = 22
           Hint = '0..10'
-          Left = 279
-          Name = 'fgcm1'
+          Top = 290
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 20
-          Tag = 7
-          Top = 290
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField1Change
-          Left = 279
-          Height = 22
-          Hint = '0..10'
-          Top = 290
-          Width = 30
-          Tag = 7
+          MaxValue = 10
         end
         object fgcm2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgcm2'
+          Tag = 7
+          Left = 319
           Height = 22
           Hint = '0..10'
-          Left = 319
-          Name = 'fgcm2'
+          Top = 290
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 21
-          Tag = 7
-          Top = 290
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField2Change
-          Left = 319
-          Height = 22
-          Hint = '0..10'
-          Top = 290
-          Width = 30
-          Tag = 7
+          MaxValue = 10
         end
         object fgpn1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgpn1'
+          Tag = 8
+          Left = 279
           Height = 22
           Hint = '0..10'
-          Left = 279
-          Name = 'fgpn1'
+          Top = 330
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 22
-          Tag = 8
-          Top = 330
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField1Change
-          Left = 279
-          Height = 22
-          Hint = '0..10'
-          Top = 330
-          Width = 30
-          Tag = 8
+          MaxValue = 10
         end
         object fgpn2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgpn2'
+          Tag = 8
+          Left = 319
           Height = 22
           Hint = '0..10'
-          Left = 319
-          Name = 'fgpn2'
+          Top = 330
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 23
-          Tag = 8
-          Top = 330
-          Width = 30
-          OnExit = nil
           OnChange = CDCNebField2Change
-          Left = 319
-          Height = 22
-          Hint = '0..10'
-          Top = 330
-          Width = 30
-          Tag = 8
+          MaxValue = 10
         end
         object sac3: TDirectoryEdit
-          ButtonWidth = 23
-          NumGlyphs = 1
-          ParentColor = False
-          TabOrder = 24
-          OnChange = CDCNebPathChange
-          OnChange = CDCNebPathChange
-          TabOrder = 24
+          Tag = 1
           Left = 355
           Height = 21
           Top = 49
           Width = 104
-          Tag = 1
-        end
-        object ngc3: TDirectoryEdit
+          OnChange = CDCNebPathChange
+          TabOrder = 24
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 25
-          OnChange = CDCNebPathChange
-          OnChange = CDCNebPathChange
-          TabOrder = 25
+        end
+        object ngc3: TDirectoryEdit
+          Tag = 2
           Left = 355
           Height = 19
           Top = 98
           Width = 104
-          Tag = 2
-        end
-        object lbn3: TDirectoryEdit
+          OnChange = CDCNebPathChange
+          TabOrder = 25
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 26
-          OnChange = CDCNebPathChange
-          OnChange = CDCNebPathChange
-          TabOrder = 26
+        end
+        object lbn3: TDirectoryEdit
+          Tag = 3
           Left = 355
           Height = 19
           Top = 147
           Width = 104
-          Tag = 3
-        end
-        object rc33: TDirectoryEdit
+          OnChange = CDCNebPathChange
+          TabOrder = 26
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 27
-          OnChange = CDCNebPathChange
-          OnChange = CDCNebPathChange
-          TabOrder = 27
+        end
+        object rc33: TDirectoryEdit
+          Tag = 4
           Left = 355
           Height = 19
           Top = 187
           Width = 104
-          Tag = 4
-        end
-        object pgc3: TDirectoryEdit
+          OnChange = CDCNebPathChange
+          TabOrder = 27
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 28
-          OnChange = CDCNebPathChange
-          OnChange = CDCNebPathChange
-          TabOrder = 28
+        end
+        object pgc3: TDirectoryEdit
+          Tag = 5
           Left = 355
           Height = 19
           Top = 212
           Width = 104
-          Tag = 5
-        end
-        object ocl3: TDirectoryEdit
+          OnChange = CDCNebPathChange
+          TabOrder = 28
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 29
-          OnChange = CDCNebPathChange
-          OnChange = CDCNebPathChange
-          TabOrder = 29
+        end
+        object ocl3: TDirectoryEdit
+          Tag = 6
           Left = 355
           Height = 19
           Top = 252
           Width = 104
-          Tag = 6
-        end
-        object gcm3: TDirectoryEdit
+          OnChange = CDCNebPathChange
+          TabOrder = 29
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 30
-          OnChange = CDCNebPathChange
-          OnChange = CDCNebPathChange
-          TabOrder = 30
+        end
+        object gcm3: TDirectoryEdit
+          Tag = 7
           Left = 355
           Height = 19
           Top = 292
           Width = 104
-          Tag = 7
-        end
-        object gpn3: TDirectoryEdit
+          OnChange = CDCNebPathChange
+          TabOrder = 30
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 31
-          OnChange = CDCNebPathChange
-          OnChange = CDCNebPathChange
-          TabOrder = 31
+        end
+        object gpn3: TDirectoryEdit
+          Tag = 8
           Left = 355
           Height = 19
           Top = 332
           Width = 104
-          Tag = 8
+          OnChange = CDCNebPathChange
+          TabOrder = 31
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
         end
       end
       object Page4: TPage
         Caption = 'Obsolete'
-        ClientWidth = 490
-        ClientHeight = 416
-        Height = 416
-        Width = 490
+        ClientWidth = 496
+        ClientHeight = 422
         object Label88: TLabel
-          Caption = 'CDC Obsolete Catalog (but you can still use them)'
-          Color = clNone
-          ParentColor = False
           Height = 13
           Top = 7
           Width = 284
-        end
-        object Label67: TLabel
-          Caption = 'pm'
+          Caption = 'CDC Obsolete Catalog (but you can still use them)'
           Color = clNone
           ParentColor = False
+        end
+        object Label67: TLabel
           Left = 63
           Height = 13
           Top = 45
           Width = 17
-        end
-        object Label91: TLabel
-          Caption = 'Replaced by Tycho-2'
+          Caption = 'pm'
           Color = clNone
           ParentColor = False
+        end
+        object Label91: TLabel
           Left = 103
           Height = 13
           Top = 67
           Width = 123
-        end
-        object Label92: TLabel
           Caption = 'Replaced by Tycho-2'
           Color = clNone
           ParentColor = False
+        end
+        object Label92: TLabel
           Left = 103
           Height = 13
           Top = 131
           Width = 123
-        end
-        object Label93: TLabel
-          Caption = 'CdC format, prefere the compact version'
+          Caption = 'Replaced by Tycho-2'
           Color = clNone
           ParentColor = False
-          WordWrap = True
+        end
+        object Label93: TLabel
           Left = 103
           Height = 49
           Top = 195
           Width = 162
-        end
-        object Label94: TLabel
-          Caption = 'Not available'
+          Caption = 'CdC format, prefere the compact version'
           Color = clNone
           ParentColor = False
+          WordWrap = True
+        end
+        object Label94: TLabel
           Left = 103
           Height = 13
           Top = 267
           Width = 75
-        end
-        object Label90: TLabel
-          Caption = 'Stars'
+          Caption = 'Not available'
           Color = clNone
           ParentColor = False
+        end
+        object Label90: TLabel
           Left = 8
           Height = 13
           Top = 45
           Width = 29
+          Caption = 'Stars'
+          Color = clNone
+          ParentColor = False
         end
         object TYCbox: TCheckBox
-          Caption = 'Tycho Catalog'
-          Hint = 'The Tycho Catalogue (ESA 1997)'
-          OnClick = CDCStarSelClick
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
+          Tag = 3
           Left = 87
           Height = 28
           Hint = 'The Tycho Catalogue (ESA 1997)'
           Top = 39
           Width = 115
           HelpContext = 102
-          Tag = 3
+          Caption = 'Tycho Catalog'
+          OnClick = CDCStarSelClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
         end
         object Ftyc1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Ftyc1'
+          Tag = 3
+          Left = 235
           Height = 22
           Hint = '0..10'
-          Left = 235
-          Name = 'Ftyc1'
+          Top = 43
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          Tag = 3
-          Top = 43
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 235
-          Height = 22
-          Hint = '0..10'
-          Top = 43
-          Width = 30
-          Tag = 3
+          MaxValue = 10
         end
         object Ftyc2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Ftyc2'
+          Tag = 3
+          Left = 275
           Height = 22
           Hint = '0..10'
-          Left = 275
-          Name = 'Ftyc2'
+          Top = 43
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
-          Tag = 3
-          Top = 43
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 275
-          Height = 22
-          Hint = '0..10'
-          Top = 43
-          Width = 30
-          Tag = 3
+          MaxValue = 10
         end
         object TICbox: TCheckBox
-          Caption = 'Tycho  Input Catalog'
-          Hint = 'Tycho Input Catalog  (Revised Version) (Egret+ 1992)'
-          OnClick = CDCStarSelClick
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
+          Tag = 5
           Left = 87
           Height = 28
           Hint = 'Tycho Input Catalog  (Revised Version) (Egret+ 1992)'
           Top = 106
           Width = 150
           HelpContext = 103
-          Tag = 5
+          Caption = 'Tycho  Input Catalog'
+          OnClick = CDCStarSelClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
         end
         object Ftic1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Ftic1'
+          Tag = 5
+          Left = 235
           Height = 22
           Hint = '0..10'
-          Left = 235
-          Name = 'Ftic1'
+          Top = 104
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
-          Tag = 5
-          Top = 104
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 235
-          Height = 22
-          Hint = '0..10'
-          Top = 104
-          Width = 30
-          Tag = 5
+          MaxValue = 10
         end
         object Ftic2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'Ftic2'
+          Tag = 5
+          Left = 275
           Height = 22
           Hint = '0..10'
-          Left = 275
-          Name = 'Ftic2'
+          Top = 104
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
-          Tag = 5
-          Top = 104
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 275
-          Height = 22
-          Hint = '0..10'
-          Top = 104
-          Width = 30
-          Tag = 5
+          MaxValue = 10
         end
         object GSCbox: TCheckBox
-          Caption = 'HST Guide Star Catalog'
-          Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)'
-          OnClick = CDCStarSelClick
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 6
+          Tag = 8
           Left = 87
           Height = 28
           Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)'
           Top = 170
           Width = 167
           HelpContext = 104
-          Tag = 8
+          Caption = 'HST Guide Star Catalog'
+          OnClick = CDCStarSelClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 6
         end
         object fgsc1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgsc1'
+          Tag = 8
+          Left = 235
           Height = 22
           Hint = '0..10'
-          Left = 235
-          Name = 'fgsc1'
+          Top = 168
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
-          Tag = 8
-          Top = 168
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 235
-          Height = 22
-          Hint = '0..10'
-          Top = 168
-          Width = 30
-          Tag = 8
+          MaxValue = 10
         end
         object fgsc2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fgsc2'
+          Tag = 8
+          Left = 275
           Height = 22
           Hint = '0..10'
-          Left = 275
-          Name = 'fgsc2'
+          Top = 168
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
-          Tag = 8
-          Top = 168
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 275
-          Height = 22
-          Hint = '0..10'
-          Top = 168
-          Width = 30
-          Tag = 8
+          MaxValue = 10
         end
         object MCTBox: TCheckBox
-          Caption = 'AUDE MicroCat'
-          Hint = 'AUDE MicroCat CDROM'
-          OnClick = CDCStarSelClick
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 9
+          Tag = 10
           Left = 87
           Height = 28
           Hint = 'AUDE MicroCat CDROM'
           Top = 237
           Width = 122
           HelpContext = 113
-          Tag = 10
+          Caption = 'AUDE MicroCat'
+          OnClick = CDCStarSelClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 9
         end
         object fmct1: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fmct1'
+          Tag = 10
+          Left = 235
           Height = 22
           Hint = '0..10'
-          Left = 235
-          Name = 'fmct1'
+          Top = 237
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
-          Tag = 10
-          Top = 237
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField1Change
-          Left = 235
-          Height = 22
-          Hint = '0..10'
-          Top = 237
-          Width = 30
-          Tag = 10
+          MaxValue = 10
         end
         object fmct2: TLongEdit
-          MaxValue = 10
-          BorderStyle = bsSingle
+          Name = 'fmct2'
+          Tag = 10
+          Left = 275
           Height = 22
           Hint = '0..10'
-          Left = 275
-          Name = 'fmct2'
+          Top = 237
+          Width = 30
+          BorderStyle = bsSingle
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 11
-          Tag = 10
-          Top = 237
-          Width = 30
-          OnExit = nil
           OnChange = CDCStarField2Change
-          Left = 275
-          Height = 22
-          Hint = '0..10'
-          Top = 237
-          Width = 30
-          Tag = 10
+          MaxValue = 10
         end
         object tyc3: TDirectoryEdit
-          ButtonWidth = 23
-          NumGlyphs = 1
-          ParentColor = False
-          TabOrder = 12
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 12
+          Tag = 3
           Left = 315
           Height = 21
           Top = 45
           Width = 108
-          Tag = 3
-        end
-        object tic3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 12
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 13
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 13
+        end
+        object tic3: TDirectoryEdit
+          Tag = 5
           Left = 315
           Height = 21
           Top = 106
           Width = 108
-          Tag = 5
-        end
-        object gsc3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 13
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 14
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 14
+        end
+        object gsc3: TDirectoryEdit
+          Tag = 8
           Left = 315
           Height = 21
           Top = 170
           Width = 108
-          Tag = 8
-        end
-        object mct3: TDirectoryEdit
+          OnChange = CDCStarPathChange
+          TabOrder = 14
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 15
-          OnChange = CDCStarPathChange
-          OnChange = CDCStarPathChange
-          TabOrder = 15
+        end
+        object mct3: TDirectoryEdit
+          Tag = 10
           Left = 315
           Height = 21
           Top = 237
           Width = 108
-          Tag = 10
+          OnChange = CDCStarPathChange
+          TabOrder = 15
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
         end
       end
     end
     object FOVPanel: TPanel
-      Align = alBottom
-      ClientHeight = 54
-      ClientWidth = 498
-      TabOrder = 1
       Left = 1
       Height = 54
       Top = 425
       Width = 498
+      Align = alBottom
+      ClientHeight = 54
+      ClientWidth = 498
+      TabOrder = 1
       object fw0: TLabel
-        AutoSize = False
-        Caption = 'fw0'
-        Color = clNone
-        ParentColor = False
         Left = 91
         Height = 13
         Top = 8
         Width = 78
-      end
-      object fw1: TLabel
         AutoSize = False
-        Caption = 'fw1'
+        Caption = 'fw0'
         Color = clNone
         ParentColor = False
+      end
+      object fw1: TLabel
         Left = 171
         Height = 17
         Top = 8
         Width = 78
-      end
-      object fw2: TLabel
         AutoSize = False
-        Caption = 'fw2'
+        Caption = 'fw1'
         Color = clNone
         ParentColor = False
+      end
+      object fw2: TLabel
         Left = 251
         Height = 17
         Top = 8
         Width = 78
-      end
-      object fw3: TLabel
         AutoSize = False
-        Caption = 'fw3'
+        Caption = 'fw2'
         Color = clNone
         ParentColor = False
+      end
+      object fw3: TLabel
         Left = 331
         Height = 17
         Top = 8
         Width = 78
-      end
-      object fw4: TLabel
         AutoSize = False
-        Caption = 'fw4'
+        Caption = 'fw3'
         Color = clNone
         ParentColor = False
+      end
+      object fw4: TLabel
         Left = 411
         Height = 17
         Top = 8
         Width = 78
-      end
-      object fw5: TLabel
         AutoSize = False
-        Caption = 'fw5'
+        Caption = 'fw4'
         Color = clNone
         ParentColor = False
+      end
+      object fw5: TLabel
         Left = 7
         Height = 17
         Top = 32
         Width = 78
-      end
-      object fw6: TLabel
         AutoSize = False
-        Caption = 'fw6'
+        Caption = 'fw5'
         Color = clNone
         ParentColor = False
+      end
+      object fw6: TLabel
         Left = 87
         Height = 17
         Top = 32
         Width = 78
-      end
-      object fw7: TLabel
         AutoSize = False
-        Caption = 'fw7'
+        Caption = 'fw6'
         Color = clNone
         ParentColor = False
+      end
+      object fw7: TLabel
         Left = 167
         Height = 17
         Top = 32
         Width = 78
-      end
-      object fw8: TLabel
         AutoSize = False
-        Caption = 'fw8'
+        Caption = 'fw7'
         Color = clNone
         ParentColor = False
+      end
+      object fw8: TLabel
         Left = 247
         Height = 17
         Top = 32
         Width = 78
-      end
-      object fw9: TLabel
         AutoSize = False
-        Caption = 'fw9'
+        Caption = 'fw8'
         Color = clNone
         ParentColor = False
+      end
+      object fw9: TLabel
         Left = 327
         Height = 17
         Top = 32
         Width = 78
-      end
-      object Label5: TLabel
         AutoSize = False
-        Caption = 'fov number'
+        Caption = 'fw9'
         Color = clNone
         ParentColor = False
+      end
+      object Label5: TLabel
         Left = 11
         Height = 13
         Top = 8
         Width = 78
-      end
-      object fw10: TLabel
         AutoSize = False
-        Caption = 'fw10'
+        Caption = 'fov number'
         Color = clNone
         ParentColor = False
+      end
+      object fw10: TLabel
         Left = 407
         Height = 17
         Top = 32
         Width = 78
+        AutoSize = False
+        Caption = 'fw10'
+        Color = clNone
+        ParentColor = False
       end
     end
   end
   object Panel1: TPanel
+    Height = 50
+    Top = 489
+    Width = 526
     Align = alBottom
     ClientHeight = 50
     ClientWidth = 526
     TabOrder = 1
-    Height = 50
-    Top = 489
-    Width = 526
     object DirOpenImg: TImage
+      Left = 8
+      Height = 16
+      Top = 15
+      Width = 16
       AutoSize = True
       Picture.Data = {
         07545069786D6170BA0100002F2A2058504D202A2F0A73746174696320636861
@@ -2364,48 +1963,42 @@ object f_config_catalog: Tf_config_catalog
         2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
         2E2E2E227D0A
       }
-      Transparent = True
       Visible = False
-      Left = 8
-      Height = 16
-      Top = 15
-      Width = 16
     end
     object Button1: TButton
-      BorderSpacing.InnerBorder = 4
-      Caption = 'OK'
-      ModalResult = 1
-      TabOrder = 0
       Left = 240
       Height = 25
       Top = 15
       Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      ModalResult = 1
+      TabOrder = 0
     end
     object Button2: TButton
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Apply'
-      OnClick = Button2Click
-      TabOrder = 1
       Left = 336
       Height = 25
       Top = 15
       Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Apply'
+      OnClick = Button2Click
+      TabOrder = 1
     end
     object Button3: TButton
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Cancel'
-      ModalResult = 2
-      TabOrder = 2
       Left = 432
       Height = 25
       Top = 15
       Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
     end
   end
   object OpenDialog1: TOpenDialog
     Title = 'Open existing file'
     FilterIndex = 0
-    Title = 'Open existing file'
     left = 496
     top = 24
   end

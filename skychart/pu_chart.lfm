@@ -1,4 +1,10 @@
 object f_chart: Tf_chart
+  Left = 497
+  Height = 338
+  Top = 135
+  Width = 508
+  HorzScrollBar.Page = 507
+  VertScrollBar.Page = 337
   ActiveControl = VertScrollBar
   Caption = 'Chart'
   ClientHeight = 338
@@ -10,26 +16,25 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = True
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   TextHeight = 13
-  HorzScrollBar.Page = 507
-  VertScrollBar.Page = 337
-  Left = 497
-  Height = 338
-  Top = 135
-  Width = 508
   object Panel1: TPanel
+    Left = 8
+    Height = 272
+    Top = 8
+    Width = 480
     ClientHeight = 272
     ClientWidth = 480
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
     OnResize = ChartResize
-    Left = 8
-    Height = 272
-    Top = 8
-    Width = 480
     object identlabel: TLabel
+      Cursor = crHandPoint
+      Left = 136
+      Height = 11
+      Top = 120
+      Width = 67
       Caption = 'identlabel '
       Color = clBlack
       Font.Color = clWhite
@@ -40,13 +45,13 @@ object f_chart: Tf_chart
       Transparent = False
       Visible = False
       OnClick = identlabelClick
-      Cursor = crHandPoint
-      Left = 136
-      Height = 11
-      Top = 120
-      Width = 67
     end
     object VertScrollBar: TScrollBar
+      Cursor = crArrow
+      Left = 466
+      Height = 257
+      Top = 1
+      Width = 13
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -55,13 +60,13 @@ object f_chart: Tf_chart
       PageSize = 10
       TabOrder = 0
       OnChange = VertScrollBarChange
-      Cursor = crArrow
-      Left = 464
-      Height = 257
-      Top = 1
-      Width = 15
     end
     object HorScrollBar: TScrollBar
+      Cursor = crArrow
+      Left = 1
+      Height = 13
+      Top = 258
+      Width = 478
       Align = alBottom
       LargeChange = 10
       Max = 50
@@ -69,11 +74,6 @@ object f_chart: Tf_chart
       PageSize = 10
       TabOrder = 1
       OnChange = HorScrollBarChange
-      Cursor = crArrow
-      Left = 1
-      Height = 13
-      Top = 258
-      Width = 478
     end
   end
   object RefreshTimer: TTimer
@@ -87,119 +87,119 @@ object f_chart: Tf_chart
     left = 304
     top = 64
     object zoomplus: TAction
+      Category = 'zoom'
       Caption = 'Zoom +'
       ImageIndex = 6
       OnExecute = zoomplusExecute
-      Category = 'zoom'
     end
     object zoomminus: TAction
+      Category = 'zoom'
       Caption = 'Zoom -'
       ImageIndex = 7
       OnExecute = zoomminusExecute
-      Category = 'zoom'
     end
     object MoveWest: TAction
+      Category = 'move'
       Caption = 'Move West'
       OnExecute = MoveWestExecute
-      Category = 'move'
     end
     object MoveEast: TAction
+      Category = 'move'
       Caption = 'Move East'
       OnExecute = MoveEastExecute
-      Category = 'move'
     end
     object MoveNorth: TAction
+      Category = 'move'
       Caption = 'Move North'
       OnExecute = MoveNorthExecute
-      Category = 'move'
     end
     object MoveSouth: TAction
+      Category = 'move'
       Caption = 'Move South'
       OnExecute = MoveSouthExecute
-      Category = 'move'
     end
     object MoveNorthWest: TAction
+      Category = 'move'
       Caption = 'Move North-West'
       OnExecute = MoveNorthWestExecute
-      Category = 'move'
     end
     object MoveNorthEast: TAction
+      Category = 'move'
       Caption = 'Move North-East'
       OnExecute = MoveNorthEastExecute
-      Category = 'move'
     end
     object MoveSouthWest: TAction
+      Category = 'move'
       Caption = 'Move South-West'
       OnExecute = MoveSouthWestExecute
-      Category = 'move'
     end
     object MoveSouthEast: TAction
+      Category = 'move'
       Caption = 'Move South-East'
       OnExecute = MoveSouthEastExecute
-      Category = 'move'
     end
     object Centre: TAction
+      Category = 'move'
       Caption = 'Centre'
       OnExecute = CentreExecute
-      Category = 'move'
     end
     object zoomplusmove: TAction
+      Category = 'zoom'
       Caption = 'Zoom + Centre'
       ImageIndex = 6
       OnExecute = zoomplusmoveExecute
-      Category = 'zoom'
     end
     object zoomminusmove: TAction
+      Category = 'zoom'
       Caption = 'Zoom - Centre'
       ImageIndex = 7
       OnExecute = zoomminusmoveExecute
-      Category = 'zoom'
     end
     object FlipX: TAction
+      Category = 'rotation'
       Caption = 'FlipX'
       ImageIndex = 15
       OnExecute = FlipXExecute
-      Category = 'rotation'
     end
     object FlipY: TAction
+      Category = 'rotation'
       Caption = 'FlipY'
       ImageIndex = 17
       OnExecute = FlipYExecute
-      Category = 'rotation'
     end
     object Undo: TAction
+      Category = 'Undo'
       Caption = 'Undo'
       OnExecute = UndoExecute
-      Category = 'Undo'
     end
     object Redo: TAction
+      Category = 'Undo'
       Caption = 'Redo'
       OnExecute = RedoExecute
-      Category = 'Undo'
     end
     object rot_plus: TAction
+      Category = 'rotation'
       Caption = 'rot_plus'
       ImageIndex = 21
       OnExecute = rot_plusExecute
-      Category = 'rotation'
     end
     object rot_minus: TAction
+      Category = 'rotation'
       Caption = 'rot_minus'
       ImageIndex = 22
       OnExecute = rot_minusExecute
-      Category = 'rotation'
     end
     object GridEQ: TAction
+      Category = 'Grid'
       Caption = 'GridEQ'
       ImageIndex = 24
       OnExecute = GridEQExecute
-      Category = 'Grid'
     end
     object Grid: TAction
+      Category = 'Grid'
       Caption = 'Grid'
       ImageIndex = 25
       OnExecute = GridExecute
-      Category = 'Grid'
     end
     object switchbackground: TAction
       Caption = 'switchbackground'

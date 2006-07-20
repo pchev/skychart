@@ -1,4 +1,10 @@
 object f_info: Tf_info
+  Left = 317
+  Height = 397
+  Top = 136
+  Width = 639
+  HorzScrollBar.Page = 638
+  VertScrollBar.Page = 396
   ActiveControl = StringGrid1
   BorderStyle = bsSizeToolWin
   Caption = 'Info'
@@ -141,29 +147,23 @@ object f_info: Tf_info
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
+  PixelsPerInch = 90
   Position = poDefaultPosOnly
   TextHeight = 13
-  HorzScrollBar.Page = 638
-  VertScrollBar.Page = 396
-  Left = 317
-  Height = 397
-  Top = 136
-  Width = 639
   object PageControl1: TPageControl
+    Height = 370
+    Width = 639
     ActivePage = TabSheet1
     Align = alClient
     TabIndex = 0
     TabOrder = 0
-    Height = 370
-    Width = 639
     object TabSheet1: TTabSheet
       Caption = 'TCP/IP Connection'
       ClientHeight = 344
-      ClientWidth = 631
-      Height = 344
-      Width = 631
+      ClientWidth = 637
       object StringGrid1: TStringGrid
+        Height = 316
+        Width = 637
         Align = alClient
         ColCount = 1
         DefaultColWidth = 800
@@ -181,132 +181,132 @@ object f_info: Tf_info
         VisibleColCount = 1
         VisibleRowCount = 10
         OnMouseDown = StringGrid1MouseDown
-        Height = 316
-        Width = 631
       end
       object Panel2: TPanel
-        Align = alBottom
-        ClientHeight = 28
-        ClientWidth = 631
-        FullRepaint = False
-        TabOrder = 1
         Height = 28
         Top = 316
-        Width = 631
+        Width = 637
+        Align = alBottom
+        ClientHeight = 28
+        ClientWidth = 637
+        FullRepaint = False
+        TabOrder = 1
         object serverinfo: TLabel
+          Left = 559
+          Height = 15
+          Top = 6
+          Width = 58
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
           Color = clNone
           ParentColor = False
-          Left = 232
-          Height = 14
-          Top = 10
-          Width = 57
         end
         object Button2: TButton
-          BorderSpacing.InnerBorder = 4
-          Caption = 'Refresh'
-          OnClick = Button2Click
-          TabOrder = 0
           Left = 12
           Height = 25
           Top = 2
           Width = 75
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Refresh'
+          OnClick = Button2Click
+          TabOrder = 0
         end
         object CheckBox1: TCheckBox
+          Left = 104
+          Height = 19
+          Top = 2
+          Width = 90
           Caption = 'AutoRefresh'
           Checked = True
           OnClick = CheckBox1Click
           State = cbChecked
           TabOrder = 1
-          Left = 104
-          Height = 28
-          Top = 2
-          Width = 101
         end
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Object List'
       ClientHeight = 344
-      ClientWidth = 631
+      ClientWidth = 637
       ImageIndex = 1
-      Height = 344
-      Width = 631
       object Panel3: TPanel
-        Align = alBottom
-        ClientHeight = 27
-        ClientWidth = 631
-        FullRepaint = False
-        TabOrder = 0
         Height = 27
         Top = 317
-        Width = 631
+        Width = 637
+        Align = alBottom
+        ClientHeight = 27
+        ClientWidth = 637
+        FullRepaint = False
+        TabOrder = 0
         object Button3: TButton
+          Left = 299
+          Height = 25
+          Top = 1
+          Width = 75
           Anchors = [akTop, akRight]
           BorderSpacing.InnerBorder = 4
           Caption = 'Search'
           OnClick = Button3Click
           TabOrder = 0
-          Left = 293
-          Height = 25
-          Top = 1
-          Width = 75
         end
         object Edit1: TEdit
-          Anchors = [akTop, akRight]
-          OnKeyUp = Edit1KeyUp
-          TabOrder = 1
-          Left = 203
+          Left = 209
           Height = 21
           Top = 3
           Width = 85
+          Anchors = [akTop, akRight]
+          OnKeyUp = Edit1KeyUp
+          TabOrder = 1
         end
         object Button5: TButton
+          Left = 385
+          Height = 25
+          Top = 1
+          Width = 75
           Anchors = [akTop, akRight]
           BorderSpacing.InnerBorder = 4
           Caption = 'Sort by RA'
           OnClick = Button5Click
           TabOrder = 2
-          Left = 379
+        end
+        object Button6: TButton
+          Left = 473
           Height = 25
           Top = 1
           Width = 75
-        end
-        object Button6: TButton
           Anchors = [akTop, akRight]
           BorderSpacing.InnerBorder = 4
           Caption = 'Print'
           OnClick = Button6Click
           TabOrder = 3
-          Left = 467
-          Height = 25
-          Top = 1
-          Width = 75
         end
         object Button7: TButton
+          Left = 561
+          Height = 25
+          Width = 75
           Anchors = [akTop, akRight]
           BorderSpacing.InnerBorder = 4
           Caption = 'Save'
           OnClick = Button7Click
           TabOrder = 4
-          Left = 555
-          Height = 25
-          Width = 75
         end
       end
       object Memo1: TSynEdit
+        Name = 'Memo1'
+        Height = 317
+        Width = 637
         Align = alClient
         Color = clBtnHighlight
         Font.Height = -13
         Font.Name = 'courier'
-        Height = 317
-        Name = 'Memo1'
         ParentColor = False
         PopupMenu = PopupMenu2
         TabOrder = 1
-        Width = 631
         OnDblClick = Memo1DblClick
         BookMarkOptions.Xoffset = -18
+        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
+        Gutter.OnChange = nil
         Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
@@ -635,56 +635,52 @@ object f_info: Tf_info
         Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
         ReadOnly = True
         RightEdge = 0
+        SelectedColor.OnChange = nil
         TabWidth = 10
-        Cursor = crIBeam
-        Height = 317
-        Width = 631
       end
     end
     object ProgressMessages: TTabSheet
       Caption = 'Progress Messages'
       ClientHeight = 344
-      ClientWidth = 631
+      ClientWidth = 637
       ImageIndex = 2
-      Height = 344
-      Width = 631
       object ProgressMemo: TMemo
+        Height = 344
+        Width = 637
         Align = alClient
         TabOrder = 0
-        Height = 344
-        Width = 631
       end
     end
   end
   object Panel1: TPanel
+    Height = 27
+    Top = 370
+    Width = 639
     Align = alBottom
     ClientHeight = 27
     ClientWidth = 639
     FullRepaint = False
     TabOrder = 1
-    Height = 27
-    Top = 370
-    Width = 639
     object Button1: TButton
+      Left = 471
+      Height = 25
+      Top = 1
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Close'
       OnClick = Button1Click
       TabOrder = 0
-      Left = 471
-      Height = 25
-      Top = 1
-      Width = 75
     end
     object Button4: TButton
+      Left = 559
+      Height = 25
+      Width = 76
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Help'
       TabOrder = 1
-      Left = 559
-      Height = 25
-      Width = 76
     end
   end
   object PopupMenu1: TPopupMenu
@@ -718,25 +714,24 @@ object f_info: Tf_info
     left = 72
     top = 176
     object EditSelectAll1: TEditSelectAll
+      Category = 'Edition'
       Caption = '&Tout sélectionner'
       Hint = 'Tout sélectionner|Sélectionner l''intégralité du document'
       OnExecute = EditSelectAll1Execute
       ShortCut = 16449
-      Category = 'Edition'
     end
     object EditCopy1: TEditCopy
+      Category = 'Edition'
       Caption = '&Copier'
       Hint = 'Copier|Copier la sélection et la mettre dans le Presse-papiers'
       ImageIndex = 1
       OnExecute = EditCopy1Execute
       ShortCut = 16451
-      Category = 'Edition'
     end
   end
   object SaveDialog1: TSaveDialog
     Title = 'Save file as'
     FilterIndex = 0
-    Title = 'Save file as'
     left = 72
     top = 136
   end

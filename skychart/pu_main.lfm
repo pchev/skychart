@@ -4,10 +4,10 @@ object f_main: Tf_main
   Top = 105
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 561
+  VertScrollBar.Page = 559
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 562
+  ClientHeight = 560
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
@@ -155,14 +155,14 @@ object f_main: Tf_main
   TextHeight = 15
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 477
+    Height = 475
     Top = 53
     Width = 812
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
     Caption = 'MultiDoc1'
-    ClientHeight = 477
+    ClientHeight = 475
     ClientWidth = 812
     Color = clBlack
     FullRepaint = False
@@ -2310,22 +2310,21 @@ object f_main: Tf_main
         2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E
         2E2E2E2E2E2E2E2E2E2E227D0A
       }
-      Transparent = True
       Visible = False
     end
   end
   object PanelLeft: TPanel
-    Height = 477
+    Height = 475
     Top = 53
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 477
+    ClientHeight = 475
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 0
     object ToolBar2: TToolBar
-      Height = 477
+      Height = 475
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2421,18 +2420,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 836
-    Height = 477
+    Height = 475
     Top = 53
     Width = 24
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 477
+    ClientHeight = 475
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 1
     object ToolBar3: TToolBar
-      Height = 227
+      Height = 225
       Top = 250
       Width = 24
       Align = alClient
@@ -2653,7 +2652,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 530
+    Top = 528
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -2682,8 +2681,8 @@ object f_main: Tf_main
       ParentFont = True
       TabOrder = 0
       object LPanels01: TLabel
-        Height = 11
-        Width = 49
+        Height = 13
+        Width = 59
         Caption = 'LPanels01'
         Color = clNone
         ParentColor = False
@@ -2911,7 +2910,6 @@ object f_main: Tf_main
             4B4C4D4E4F50515261222C0A222E6F514A4453546F2E61222C0A222E2E6F682C
             6F522E2E61222C0A2261616161616161616161227D0A
           }
-          Transparent = True
         end
         object ButtonLessStar: TImage
           Left = 12
@@ -2937,7 +2935,6 @@ object f_main: Tf_main
             2A702D2E2E2E2C222C0A222E2E2E2E2E2E2E2E2E2C222C0A222E2E2E2E2E2E2E
             2E2E2C222C0A222C2C2C2C2C2C2C2C2C2C227D0A
           }
-          Transparent = True
         end
         object ButtonMoreNeb: TImage
           Height = 11
@@ -2966,7 +2963,6 @@ object f_main: Tf_main
             2C222C0A222E2E2E2E2E2E2E2E2E2C222C0A222E2E2E2E2E2E2E2E2E2C222C0A
             222C2C2C2C2C2C2C2C2C2C227D0A
           }
-          Transparent = True
         end
         object ButtonLessNeb: TImage
           Left = 12
@@ -2991,7 +2987,6 @@ object f_main: Tf_main
             2E2E2E2E2E2E2E2E2E2C222C0A222E2E2E2E2E2E2E2E2E2C222C0A222C2C2C2C
             2C2C2C2C2C2C227D0A
           }
-          Transparent = True
         end
       end
       object ToolButtonPosition: TToolButton

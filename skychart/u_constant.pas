@@ -96,6 +96,12 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       'Io      ','Europa  ','Ganymede','Callisto','Mimas   ','Encelade','Tethys  ','Dione   ',
       'Rhea    ','Titan   ','Hyperion','Iapetus ','Miranda ','Ariel   ','Umbriel ','Titania ',
       'Oberon  ','Phobos  ','Deimos  ','Sat.Ring','E.Shadow');
+      // the same but always with English name
+      epla : array[1..32] of string[8] = ('Mercury ','Venus   ','*       ','Mars    ','Jupiter ',
+      'Saturn  ','Uranus  ','Neptune ','Pluto   ','Sun     ','Moon    ',
+      'Io      ','Europa  ','Ganymede','Callisto','Mimas   ','Encelade','Tethys  ','Dione   ',
+      'Rhea    ','Titan   ','Hyperion','Iapetus ','Miranda ','Ariel   ','Umbriel ','Titania ',
+      'Oberon  ','Phobos  ','Deimos  ','Sat.Ring','E.Shadow');
       planetcolor: array[1..11]of double=(0.7,0,0,1.5,0.7,0.7,-1.5,-1.5,0,0.7,0);
       V0mar : array [1..2] of double = (11.80,12.89);
       V0jup : array [1..4] of double = (-1.68,-1.41,-2.09,-1.05);
