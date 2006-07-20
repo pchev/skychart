@@ -302,7 +302,7 @@ LanguageList.Items.Add(rsDefault+' ('+GetDefaultLanguage+')');
 LanguageList.itemindex:=0;
 n:=1;
 dir:=slash(appdir)+slash('data')+slash('language');
-i:=findfirst(dir+'*.po',0,fs);
+i:=findfirst(dir+'skychart.*.po',0,fs);
 while i=0 do begin
   buf:=fs.name;
   buf:=extractfilename(buf);

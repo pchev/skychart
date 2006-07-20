@@ -121,6 +121,7 @@ type
     ActionList1: TActionList;
     HelpContents1: THelpContents;
     SaveDialog1: TSaveDialog;
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BtnRefreshClick(Sender: TObject);
@@ -221,6 +222,15 @@ initial:=true;
 PageControl1.Align:=alClient;
 end;
 
+procedure Tf_calendar.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+CanClose:=true;
+if BtnReset.Visible then begin
+   if MessageDlg(Format(rsWarningTheCu, [rsResetChart]), mtWarning, mbYesNo, 0)
+     = mrNo then CanClose:=false;
+end;
+end;
+
 procedure Tf_calendar.FormDestroy(Sender: TObject);
 begin
 try
@@ -249,6 +259,7 @@ if initial then begin
   RefreshAll;
   initial:=false;
 end;
+BtnReset.visible:=false;
 lockclick:=true;
 end;
 
@@ -1155,7 +1166,7 @@ if (aRow>=0)and(aColumn>=0) then begin
        csc.TrackObj:=10;
        csc.PlanetParalaxe:=true;
        csc.ShowPlanet:=true;
-       if (aColumn=6)or(aColumn=7) then begin         // change location to eclipse maxima
+       if (aColumn=7)or(aColumn=8) then begin         // change location to eclipse maxima
          d:=strtofloat(copy(cells[7,aRow],1,4));
          if copy(cells[7,aRow],5,1)='S' then d:=-d;
          a:=strtofloat(copy(cells[8,aRow],1,5));
@@ -1164,6 +1175,7 @@ if (aRow>=0)and(aColumn>=0) then begin
          csc.ObsLongitude:=a;
          csc.ObsName:='Max. Solar Eclipse '+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
        end;
+       BtnReset.visible:=true;
        if assigned(Fupdchart) then Fupdchart(csc);
     end else if sender = lunargrid then begin
        csc.TrackOn:=true;         // Lunar eclipse
@@ -1172,6 +1184,7 @@ if (aRow>=0)and(aColumn>=0) then begin
        csc.PlanetParalaxe:=true;
        csc.ShowPlanet:=true;
        csc.ShowEarthShadow:=true;
+       BtnReset.visible:=true;
        if assigned(Fupdchart) then Fupdchart(csc);
     end else if sender = Satgrid then begin    // Satellites
            // .....
@@ -1182,6 +1195,7 @@ if (aRow>=0)and(aColumn>=0) then begin
          csc.TrackOn:=true;
          csc.TrackType:=4;
        end;
+       BtnReset.visible:=true;
        if assigned(Fupdchart) then Fupdchart(csc);
     end;
   end; // p<>nil
@@ -1207,7 +1221,6 @@ procedure Tf_calendar.PageControl1Change(Sender: TObject);
    time.visible:=onoff;
    EcliPanel.visible:=false;
    SatPanel.visible:=false;
-   BtnReset.visible:=true;
    end;
 begin
 case pagecontrol1.ActivePage.TabIndex of
@@ -1365,6 +1378,7 @@ end;
 procedure Tf_calendar.BtnResetClick(Sender: TObject);
 begin
 if assigned(Fupdchart) then Fupdchart(c^);
+BtnReset.visible:=false;
 end;
 
 procedure Tf_calendar.Button1Click(Sender: TObject);

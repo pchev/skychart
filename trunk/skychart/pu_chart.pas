@@ -1529,7 +1529,7 @@ repeat
   txt:=txt+html_br;
 until buf='';
 // coordinates
-txt:=txt+html_ffx+html_br;
+txt:=txt+html_br+html_b+rsCoordinates+htms_b+html_br+html_ffx;
 txt:=txt+html_b+sc.cfgsc.EquinoxName+blank+htms_b+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec)+html_br;
 if (sc.cfgsc.EquinoxName<>'J2000') then begin
    ra:=sc.cfgsc.FindRA;

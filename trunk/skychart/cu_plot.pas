@@ -1387,9 +1387,11 @@ PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp);
 end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
-var ds : integer;
+var ds,i : integer;
     cmd, searchdir: string;
+    ok: boolean;
 begin
+ok:=true;
 if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
           else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
 if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
@@ -1402,22 +1404,31 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
     chdir(xplanet_dir);
     cmd:='xplanet.exe';
  {$endif}
- cmd:=cmd+' -target '+pla[ipla]+' -origin earth -rotate '+ formatfloat(f1,pa) +
+ cmd:=cmd+' -target '+epla[ipla]+' -origin earth -rotate '+ formatfloat(f1,pa) +
       ' -light_time -tt -num_times 1 -jd '+ formatfloat(f5,jdt) +
       ' -searchdir '+searchdir+
       ' -config xplanet.config -verbosity -1'+
       ' -radius 50'+
       ' -geometry 450x450 -output "'+slash(Tempdir)+'planet.png'+'"';
  if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,gw);
- exec(cmd);
- xplanetimg.LoadFromFile(slash(Tempdir)+'planet.png');
- chdir(appdir);
- planetbmp.Assign(xplanetimg);
- planetbmppla:=ipla;
- planetbmpjd:=jdt;
- planetbmprot:=pa;
+ DeleteFile(slash(Tempdir)+'planet.png');
+ i:=exec(cmd);
+ if i=0 then begin
+   xplanetimg.LoadFromFile(slash(Tempdir)+'planet.png');
+   chdir(appdir);
+   planetbmp.Assign(xplanetimg);
+   planetbmppla:=ipla;
+   planetbmpjd:=jdt;
+   planetbmprot:=pa;
+ end
+ else begin // something go wrong with xplanet
+    writetrace('Return code '+inttostr(i)+' from '+cmd);
+    PlotPlanet1(xx,yy,ipla,pixscale,diam);
+    ok:=false;
+    planetbmpjd:=0;
+ end;
 end;
-PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp);
+if ok then PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp);
 end;
 
 procedure TSplot.PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
