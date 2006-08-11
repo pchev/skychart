@@ -1182,6 +1182,7 @@ SetLang;
 telescope:=Ttelescope.Create(self);
 basecaption:=caption;
 MultiDoc1.WindowList:=Window1;
+MultiDoc1.KeepLastChild:=true;
 ChildControl.visible:=false;
 BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
