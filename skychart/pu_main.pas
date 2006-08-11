@@ -2508,7 +2508,7 @@ begin
 // set the message that appear in the menu bar
 topmsg:=txt;
 if cfgm.ShowChartInfo then topmessage.caption:=topmsg
-   else topmessage.caption:='';
+   else topmessage.caption:=' ';
 end;
 
 procedure Tf_main.FormResize(Sender: TObject);
