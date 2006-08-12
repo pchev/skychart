@@ -130,7 +130,6 @@ type
     ToolButton4: TToolButton;
     ToolButton6: TToolButton;
     ToolButton7: TToolButton;
-    topmessage1: TLabel;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
     FileNewItem: TMenuItem;
