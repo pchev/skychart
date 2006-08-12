@@ -4996,6 +4996,7 @@ const elem : array[0..30] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACT
       rgb  : array[0..30] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_dark          ,nv_middle      ,nv_black    ,nv_black        ,nv_middle        ,nv_black        ,nv_black     ,nv_middle      ,nv_black      ,nv_dark,nv_dark,nv_dark,nv_dark,nv_dark,nv_dark);
 begin
 if night then begin
+ if (Color<>nv_dark) then begin
    SaveWinColor;
    SetButtonImage(cfgm.ButtonNight);
    setsyscolors(sizeof(elem),elem,rgb);
@@ -5031,6 +5032,7 @@ if night then begin
       f_config.Color:=nv_dark;
       f_config.Font.Color:=nv_middle;
    end;
+ end;
 end else begin
    ResetWinColor;
    SetButtonImage(cfgm.ButtonStandard);
