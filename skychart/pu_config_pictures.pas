@@ -218,6 +218,7 @@ ShowImagesBox.checked:=csc.ShowImages;
 nimages.caption:=inttostr(cdb.CountImages);
 save:=csc.ShowBackgroundImage;
 backimg.text:=csc.BackgroundImage;
+{$ifdef win32}if rightstr(backimg.text,1)=PathDelim then backimg.text:=backimg.text+'*';{$endif}
 ShowBackImg.checked:=save;
 cmain.NewBackgroundImage:=false;
 ImageTimer1.enabled:=false;
