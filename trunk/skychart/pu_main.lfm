@@ -3838,7 +3838,7 @@ object f_main: Tf_main
       end
     end
     object topmessage: TMenuItem
-      Caption = ' '
+      Caption = '                                                                                                                         '
     end
   end
   object OpenDialog: TOpenDialog
