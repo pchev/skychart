@@ -968,6 +968,7 @@ begin
  if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
  InitFonts;
  SetLpanel1('');
+ TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
  for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
