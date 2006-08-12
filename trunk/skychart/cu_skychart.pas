@@ -853,7 +853,7 @@ var rec:GcatRec;
                   if (sz>6) then
                     begin
                       FFits.FileName:=imgfile;
-                      if FFits.Header.valid then
+                      if FFits.Header.valid then begin
                         if ((FFits.Img_Width*cfgsc^.BxGlb/FFits.Header.naxis1)<10) then
                           begin
                             ra:=FFits.Center_RA;
@@ -868,6 +868,8 @@ var rec:GcatRec;
                             Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc^.BxGlb),abs(FFits.Img_Height*cfgsc^.ByGlb),rot,cfgsc^.FlipX,cfgsc^.FlipY,cfgsc^.WhiteBg,true,bmp);
                           end
                         else Drawing_Gray;
+                      end
+                      else Drawing_Gray;
                     end
                   else Drawing_Gray;
                 end

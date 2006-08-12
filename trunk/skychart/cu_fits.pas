@@ -129,6 +129,9 @@ end;
 procedure TFits.SetFile(value:string);
 begin
 try
+{$ifdef win32} // Win98 do not accept \\ as path delimiter
+value:=StringReplace(value,'\\','\',[rfReplaceAll]);
+{$endif}
 Fheader.valid:=false;
 Fheader.coordinate_valid:=false;
 if fileexists(value) and (rightstr(value,1)<>PathDelim) then begin
@@ -209,7 +212,7 @@ repeat
       keyword:=trim(copy(header[i],1,p1-1));
       buf:=trim(copy(header[i],p1+1,p2-p1-1));
       if (keyword='SIMPLE') then if (copy(buf,1,1)<>'T') then begin valid:=false;Break;end
-                                                         else valid:=true;
+                                                         else begin valid:=true;end;
       if (keyword='BITPIX') then bitpix:=strtoint(buf);
       if (keyword='NAXIS')  then naxis:=strtoint(buf);
       if (keyword='NAXIS1') then naxis1:=strtoint(buf);
