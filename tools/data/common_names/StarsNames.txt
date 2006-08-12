@@ -2,61 +2,61 @@
 ; For a translation copy this file to starsname_XX.dat where XX is the specific language code
 ; the first column is the HR number
 ;
-  897    ACAMAR
-  472    ACHERNAR
+  897    Acamar
+  472    Achernar
   219    Achird
- 4730    ACRUX
+ 4730    Acrux
  3572    Acubens; Sertan; Sartan
- 2618    ADARA; ADHARA
+ 2618    Adara; Adhara
  4031    Adhafera; Aldhafara; Aldhafera
   390    Adhil
- 5267    AGENA; HADAR
- 7116    Ain al Rami
+ 5267    Agena; Hadar
+ 7116    Ain Al Rami
  1409    Ain; Oculus Boreus
  1605    Al Anz; Almaaz
- 8591    Al Kalb al Rai
- 3418    Al Minliar al Shuja; Minchir
- 3731    Al Minliar al Asad
+ 8591    Al Kalb Al Rai
+ 3418    Al Minliar Al Shuja; Minchir
+ 3731    Al Minliar Al Asad
  7298    Aladfar
  6903    Alathfar; Al Athfar
  7264    Albaldah; Al Baldah
  7950    Albali; Al Bali
- 7417    ALBIREO
- 4623    Alchiba; Alchita; Al Minliar al Ghurab; Al Chiba
- 5062    ALCOR; Saidak
- 1165    ALCYONE
- 1457    ALDEBARAN; Cor Tauri; Parilicium.
- 8162    ALDERAMIN; Alderaimin.
+ 7417    Albireo
+ 4623    Alchiba; Alchita; Al Minliar Al Ghurab; Al Chiba
+ 5062    Alcor; Saidak
+ 1165    Alcyone
+ 1457    Aldebaran; Cor Tauri; Parilicium.
+ 8162    Alderamin; Alderaimin.
  6396    Aldhibah; Eldsib
  7254    Alfecca Meridiana
  8238    Alfirk; Alphirk
-   39    ALGENIB
- 4057    ALGIEBA; Algeiba; Al Gieba
-  936    ALGOL; Gorgona; Gorgonea Prima; Demon Star; El Ghoul
+   39    Algenib
+ 4057    Algieba; Algeiba; Al Gieba
+  936    Algol; Gorgona; Gorgonea Prima; Demon Star; El Ghoul
  4757    Algorab; Algores; Algoral; Algorel
- 2421    ALHENA
- 4905    ALIOTH; Aliath
- 5191    ALKAID; Benetnash; Benetnasch; Elkeid
+ 2421    Alhena
+ 4905    Alioth; Aliath
+ 5191    Alkaid; Benetnash; Benetnasch; Elkeid
  5733    Alkalurops; Inkalunis; Icalurus; Clava; Venabulum
  4287    Alkes
  8417    Alkurhah; Al Kirdah; Kurhah
-  603    ALMAAK; Almach; Alamak; Almak; Almaach
- 8425    ALNAIR; Al Nair
- 1791    ALNATH; EL NATH; Nath
- 1903    ALNILAM; Alnihan; Alnitam
- 1948    ALNITAK; Alnitah
+  603    Almaak; Almach; Alamak; Almak; Almaach
+ 8425    Alnair; Al Nair
+ 1791    Alnath; El Nath; Nath
+ 1903    Alnilam; Alnihan; Alnitam
+ 1948    Alnitak; Alnitah
  6084    Alniyat; Al Niyat
- 3748    ALPHARD; Alfard; Alphart; Kalbelaphard; Cor Hydrae
- 5793    ALPHEKKA; Alphecca; Alphacca; Gemma; Gnosia; The Jewel; Gnosia Stella Coronae; Ashtaroth
-   15    ALPHERATZ; Alpherat; Sirrah; Sirah
+ 3748    Alphard; Alfard; Alphart; Kalbelaphard; Cor Hydrae
+ 5793    Alphekka; Alphecca; Alphacca; Gemma; Gnosia; The Jewel; Gnosia Stella Coronae; Ashtaroth
+   15    Alpheratz; Alpherat; Sirrah; Sirah
  8974    Alrai; Arrai; Errai; Er Rai
   596    Alrisha; Alrischa; Alrescha; El Rischa; Al Richa; Rescha; Okda; Kaitain
  7462    Alsafi; Athafi
  3275    Alsciaukat; Mabsuthat
- 7602    ALSHAIN; Alschairn
+ 7602    Alshain; Alschairn
  7773    Alshat
- 3634    Alsuhail; Al Suhail al Wazn; Suhail
- 7557    ALTAIR; Atair
+ 3634    Alsuhail; Al Suhail Al Wazn; Suhail
+ 7557    Altair; Atair
  3249    Altarf; Al Tarf
  3773    Alterf
  2827    Aludra
@@ -65,14 +65,14 @@
  7141    Alya; Alga
  2484    Alzirr
  8499    Ancha
-  850    Angetenar; Al Anchat al Nahr; Anchat
-   99    ANKAA; Nair al Zaurak; Cymbae; Lucida Cymbae; Head of Phoenix
+  850    Angetenar; Al Anchat Al Nahr; Anchat
+   99    Ankaa; Nair Al Zaurak; Cymbae; Lucida Cymbae; Head Of Phoenix
  7405    Anser
- 6134    ANTARES; Cor Scorpii; Kalb al Akrab; Vespertilio
- 5340    ARCTURUS; Haris-el-sema
- 7343    Arkab Posterior; Arkab or Urkab
- 7337    Arkab Prior; Arkab or Urkab
- 1865    ARNEB
+ 6134    Antares; Cor Scorpii; Kalb Al Akrab; Vespertilio
+ 5340    Arcturus; Haris-El-Sema
+ 7343    Arkab Posterior; Arkab Or Urkab
+ 7337    Arkab Prior; Arkab Or Urkab
+ 1865    Arneb
  6370    Arrakis; Errakis; Al Rakis; El Rakis
  7194    Ascella
  3461    Asellus Australis
@@ -90,43 +90,43 @@
  3045    Azmidiske; Asmidiske
  8450    Baham; Biham
   539    Baten Kaitos
- 4853    Becrux; MIMOSA
+ 4853    Becrux; Mimosa
  1298    Beid
- 1790    BELLATRIX; the Amazon Star
- 2061    BETELGEUSE; Betelguex; Betelgeuze; Beteiguex; Al Mankib
+ 1790    Bellatrix; The Amazon Star
+ 2061    Betelgeuse; Betelguex; Betelgeuze; Beteiguex; Al Mankib
  5958    Blaze Star
   951    Botein
- 5603    Brachium; Cornu; Zuben el Genubi; Zuban al Akrab; Zuben Hakrabi
- 2326    CANOPUS; Suhel; Suhail
- 1708    CAPELLA; Alhajoth
-   21    Caph; Chaph; Kaff; Al Sanam al Nakah
- 2891    CASTOR; Apollo
- 6603    Cebalrai; Kelb Alrai; Kabalrai; Cheleb; Celb-al-Rai
+ 5603    Brachium; Cornu; Zuben El Genubi; Zuban Al Akrab; Zuben Hakrabi
+ 2326    Canopus; Suhel; Suhail
+ 1708    Capella; Alhajoth
+   21    Caph; Chaph; Kaff; Al Sanam Al Nakah
+ 2891    Castor; Apollo
+ 6603    Cebalrai; Kelb Alrai; Kabalrai; Cheleb; Celb-Al-Rai
  1140    Celaeno; Celieno; Celeno; Lost Pleiad
  4785    Chara 
  4359    Chort; Coxa; Chertan
- 4915    COR CAROLI
+ 4915    Cor Caroli
  1666    Cursa; Dhalim; Kursa
  7776    Dabih. Beta1 = Dabih Major; Beta2 = Dabih Minor
  8322    Deneb Algedi; Deneb Algiedi; Scheddi; Sheddi
- 7852    Deneb Dulfim; Deneb el Delphinus
- 7176    Deneb el Okab; Deneb
- 7235    Deneb el Okab; Deneb
+ 7852    Deneb Dulfim; Deneb El Delphinus
+ 7176    Deneb El Okab; Deneb
+ 7235    Deneb El Okab; Deneb
    74    Deneb Kaitos Shemali; Deneb Kaitos Al Shamaliyy
- 7924    DENEB; Deneb Cygni; Deneb el Adige; Arided; Aridif; Gallina; Arrioph
- 4534    DENEBOLA; Deneb Aleet
+ 7924    Deneb; Deneb Cygni; Deneb El Adige; Arided; Aridif; Gallina; Arrioph
+ 4534    Denebola; Deneb Aleet
   334    Dheneb; Deneb; Deneb Algenubi
  4968    Diadem
-  188    DIPHDA; Deneb Kaitos; Difda; Difda al Thani; Rana Secunda, the Second Frog
+  188    Diphda; Deneb Kaitos; Difda; Difda Al Thani; Rana Secunda, The Second Frog
  5953    Dschubba; Iclarkrau
  6636    Dsiban; Dziban
- 4301    DUBHE; Dubb; Ak
+ 4301    Dubhe; Dubb; Ak
  5744    Ed Asich; Eldsich; Al Dhiba; Al Dhihi
  1142    Electra
- 8308    ENIF; Enf; Enir; Al Anf; Os Pegasi; Fom
- 6705    ETAMIN; Etanin; Ettanin; Rastaban; Rasaben; Zenith Star
- 8728    FOMALHAUT; Os Piscis Meridiani; Os Piscis Notii; Difda al Auwel; the First Frog
- 8773    Fum al Samakah
+ 8308    Enif; Enf; Enir; Al Anf; Os Pegasi; Fom
+ 6705    Etamin; Etanin; Ettanin; Rastaban; Rasaben; Zenith Star
+ 8728    Fomalhaut; Os Piscis Meridiani; Os Piscis Notii; Difda Al Auwel; The First Frog
+ 8773    Fum Al Samakah
  2282    Furud; Phurud
  4763    Gacrux
  4434    Gianfar; Giansar; Gaiusar; Giauzar; Juza
@@ -140,28 +140,28 @@
  5978    Grafias
  4550    Groombridge 1830
  6688    Grumium; Genam; Nodus I
- 1612    Haedi; Haedus; Hoedus I; the kids; Sadatoni; Saclateni
- 1641    Hoedus II; the kids
-  617    HAMAL; Hemal; Hamul; Ras Hammel; El Nath
+ 1612    Haedi; Haedus; Hoedus I; The Kids; Sadatoni; Saclateni
+ 1641    Hoedus Ii; The Kids
+  617    Hamal; Hemal; Hamul; Ras Hammel; El Nath
  1577    Hassaleh
-  591    Head of Hydrus
+  591    Head Of Hydrus
  8316    Garnet Star
  5107    Heze
  8634    Homam; Homan; Humam; Al Hammam
  1346    Hyadum I
- 1373    Hyadum II
- 5506    IZAR; Mirac; Mirak; Mirach; Mizar; Pulcherrima
+ 1373    Hyadum Ii
+ 5506    Izar; Mirac; Mirak; Mirach; Mizar; Pulcherrima
  6027    Jabbah
-  804    Kaffaljidhma; Al Kaff al Jidhmah
+  804    Kaffaljidhma; Al Kaff Al Jidhmah
  6117    Kajam; Cujam; Cajam; Caiam
- 6879    KAUS AUSTRALIS
+ 6879    Kaus Australis
  6913    Kaus Borealis
  6859    Kaus Meridionalis; Kaus Media; Media
  1325    Keid; Kied
  8131    Kitalpha; Kitel Phard; Kitalphar
- 5563    KOCAB; Kochab; Kochah; Guards of the Pole
+ 5563    Kocab; Kochab; Kochah; Guards Of The Pole
  6148    Kornephoros; Korneforos; Rutilicus
- 4786    Kraz in Becvar
+ 4786    Kraz In Becvar
  6555    Kuma
  6508    Lesath; Lesuth
  6526    Maasym; Masym; Misam
@@ -170,110 +170,110 @@
   343    Marfak
  6149    Marfic; Marfik; Marsic
  6008    Marfik; Marsik; Mirfak; Marfak
- 8781    MARKAB; Marchab
+ 8781    Markab; Marchab
  2948    Markab; Markeb
  8650    Matar
  2473    Mebsuta; Melucta; Meboula
- 4660    MEGREZ; Kaffa
+ 4660    Megrez; Kaffa
  1879    Meissa; Heka
  2650    Mekbuda
  2088    Menkalinan; Menkalina
-  911    MENKAR; Mekab; Menkab; Monkar
+  911    Menkar; Mekab; Menkab; Monkar
   896    Menkar
  5288    Menkent
  1228    Menkib; Menkhib; Menchib
- 4295    MERAK; Mirak
- 5533    Merga; Marrha; El Mara el Musalsela; Falx Italica
+ 4295    Merak; Mirak
+ 5533    Merga; Marrha; El Mara El Musalsela; Falx Italica
  1156    Merope
-  546    Mesarthim; Mesartim; First Star in Aries
-  544    Metallah; Mothallah; Atria; Caput Trianguli; Ras al Muthallah; Elmuthalleth
+  546    Mesarthim; Mesartim; First Star In Aries
+  544    Metallah; Mothallah; Atria; Caput Trianguli; Ras Al Muthallah; Elmuthalleth
  3685    Miaplacidus
  4630    Minkar
- 1852    MINTAKA; Mintika
-  681    MIRA
-  337    MIRACH; Merach; Mirac; Mirak; al Mizar
+ 1852    Mintaka; Mintika
+  681    Mira
+  337    Mirach; Merach; Mirac; Mirak; Al Mizar
   834    Miram
- 1017    MIRPHAK; Mirfak; Marfak; Algenib
- 5054    MIZAR; Mizat; Mirza
+ 1017    Mirphak; Mirfak; Marfak; Algenib
+ 5054    Mizar; Mizat; Mirza
  5235    Mufrid; Muphrid; Mufride; Muphride
  2657    Muliphen; Muliphein; Isis; Mirza
  2294    Murzim; Mirzam; Mirza
  3323    Muscida
  3391    Muscida
  3403    Muscida
- 1899    Nair al Saif; Hatysa
+ 1899    Nair Al Saif; Hatysa
  3165    Naos; Suhail Hadar
- 6746    Nash; Alnasl; Alwazl; Zujj al Nushshabah; Nushaba
+ 6746    Nash; Alnasl; Alwazl; Zujj Al Nushshabah; Nushaba
  8278    Nashira
  5602    Nekkar; Merez; Meres
- 1829    NIHAL; Nibal
+ 1829    Nihal; Nibal
  7310    Nodus Secundus; Altais; Aldib
- 7121    NUNKI; Sadira
+ 7121    Nunki; Sadira
  5747    Nusakan
  7790    Peacock
- 4554    PHAD; Phecda; Phekda; Phegda; Phekha; Phacd
+ 4554    Phad; Phecda; Phekda; Phegda; Phekha; Phacd
  1956    Phaet; Phakt; Phact; Phad
  5714    Pherkad Minor
  5735    Pherkad; Pherkad Major
- 2422    Plaskett's star
+ 2422    Plaskett'S Star
  1180    Pleione
  7228    Polaris Australis
-  424    POLARIS; Alruccabah; Cynosura; Phoenice; Lodestar; Pole Star; Tramontana; Angel Stern; Navigatoria; Star of Arcady;Yilduz; Mismar
- 2990    POLLUX; Hercules
+  424    Polaris; Alruccabah; Cynosura; Phoenice; Lodestar; Pole Star; Tramontana; Angel Stern; Navigatoria; Star Of Arcady;Yilduz; Mismar
+ 2990    Pollux; Hercules
  4825    Porrima; Arich
  4247    Praecipua
  7747    Prima Giedi; Algiedi Prima; Algedi
- 2943    PROCYON; Elgomaisa; Algomeysa; Antecanis
+ 2943    Procyon; Elgomaisa; Algomeysa; Antecanis
  2216    Propus; Praepes; Tejat Prior
  2134    Propus
  2821    Propus
  1136    Rana 
- 3873    Ras Elased Australis; Al Ras al Asad al Janubiyyah; Algenubi; Al Ashfar
- 3905    Ras Elased Borealis; Rasalas; Ras al Asad al Shamaliyy; Alshemali; Al Ashfar
- 6406    RASALGETHI; Ras Algethi; Rasalegti
- 6556    RASALHAGUE; Ras Alhague
+ 3873    Ras Elased Australis; Al Ras Al Asad Al Janubiyyah; Algenubi; Al Ashfar
+ 3905    Ras Elased Borealis; Rasalas; Ras Al Asad Al Shamaliyy; Alshemali; Al Ashfar
+ 6406    Rasalgethi; Ras Algethi; Rasalegti
+ 6556    Rasalhague; Ras Alhague
  6536    Rastaban; Alwaid; Asuia; Rastaben
- 3982    REGULUS; Cor Leonis; Rex; Al Kalb al Asad; Kabeleced
- 5459    Rigel Kentaurus; RIGIL KENT; Toliman
- 1713    RIGEL; Algebar; Elgebar
- 5487    Rijl al Awwa
+ 3982    Regulus; Cor Leonis; Rex; Al Kalb Al Asad; Kabeleced
+ 5459    Rigel Kentaurus; Rigil Kent; Toliman
+ 1713    Rigel; Algebar; Elgebar
+ 5487    Rijl Al Awwa
  7882    Rotanev; Rotanen; Venator
- 7851    Ruchba; Rukbat al-dajajah; Al Rukbah al Dajajah
+ 7851    Ruchba; Rukbat Al-Dajajah; Al Rukbah Al Dajajah
   403    Ruchbah; Rucba; Rucha; Ksora
- 7348    Rukbat; Rucba; Rukbat al Rami; Alrami
+ 7348    Rukbat; Rucba; Rukbat Al Rami; Alrami
  6378    Sabik
  8518    Sadalachbia; Sadachbia
- 8414    SADALMELIK; Sadalmelek; Sadlamulk; El Melik; Saad el Melik
- 8232    Sadalsuud; Sadalsud; Sad es Saud; Sadalsund; Saad el Sund
+ 8414    Sadalmelik; Sadalmelek; Sadlamulk; El Melik; Saad El Melik
+ 8232    Sadalsuud; Sadalsud; Sad Es Saud; Sadalsund; Saad El Sund
  7796    Sadr; Sador; Sadir
- 2004    SAIPH
- 8880    Salm; Kerb; Markab; El khereb
+ 2004    Saiph
+ 8880    Salm; Kerb; Markab; El Khereb
  6553    Sargas
  6410    Sarin
  1481    Sceptrum
- 8775    SCHEAT; Sheat; Seat Alpheras; Menkib
+ 8775    Scheat; Sheat; Seat Alpheras; Menkib
  7754    Secunda Giedi; Algiedi Secunda; Gredi; Algedi
  5435    Seginus; Ceginus; Haris
  7479    Sham; Alsahm
   553    Sharatan; Sheratan; Al Sharatain
- 6527    SHAULA
-  168    SHEDIR; Schedar; Schedir
+ 6527    Shaula
+  168    Shedir; Schedar; Schedir
  7106    Sheliak; Shelyak; Shiliak
- 2491    SIRIUS; Canicula; Dog Star; Aschere
+ 2491    Sirius; Canicula; Dog Star; Aschere
  8610    Situla
  8709    Skat; Scheat; Sheat
- 5056    SPICA; Azimech; Spica Virginis; Alaraph
- 1152    Sterope II
+ 5056    Spica; Azimech; Spica Virginis; Alaraph
+ 1152    Sterope Ii
  7906    Sualocin; Scalovin; Svalocin; Nicolaus
  3852    Subra
- 3207    Suhail al Muhlif; Al Suhail al Muhlif
+ 3207    Suhail Al Muhlif; Al Suhail Al Muhlif
  7178    Sulafat; Sulaphat
  5338    Syrma
  1543    Tabit
  3569    Talitha; Talita
  4069    Tania Australis
- 4033    Tania Borealis; Al Kafzah al Thaniyah.
- 7525    TARAZED; Reda
+ 4033    Tania Borealis; Al Kafzah Al Thaniyah.
+ 7525    Tarazed; Reda
  1145    Taygeta; Taygete
  3208    Tegmen; Tegmine
  2286    Tejat Posterior; Calx; Pish Pai
@@ -281,13 +281,13 @@
  7604    Terebellum
  1855    Thabit; Tabit
  1464    Theemim; Beemin
- 5291    THUBAN; Adib; Dragon's Tail
+ 5291    Thuban; Adib; Dragon'S Tail
   510    Torcularis Septentrionalis
  3699    Turais; Tureis; Scutulum; Aspidiske
  7582    Tyl
- 5854    UNUKALHAI; Unuk al Hay; Unuk Elhaia; Unuk; Unukalhay; Cor Serpentis
- 7001    VEGA; Wega; Fidis; Harp Star
- 4932    VINDEMIATRIX; Vindemiator; Vendemiatrix; Almuredin; Provindemiator; Protrigetrix; Protrygetor; Alaraph
+ 5854    Unukalhai; Unuk Al Hay; Unuk Elhaia; Unuk; Unukalhay; Cor Serpentis
+ 7001    Vega; Wega; Fidis; Harp Star
+ 4932    Vindemiatrix; Vindemiator; Vendemiatrix; Almuredin; Provindemiator; Protrigetrix; Protrygetor; Alaraph
  2777    Wasat; Wesat
  2693    Wezen; Alwazn; Wesen; Al Wazor
  2040    Wezn; Wazn
@@ -299,7 +299,7 @@
  4540    Zavijah; Zavijava; Zavyava; Zawijah; Zarijan; Minelauva; Alaraph
   984    Zibal 
  4357    Zosma; Zozma; Zosca; Zozca; Duhr; Dhur; Zubra
- 5787    Zuben Elakrab; Zuben Hakraki; Zuben el Hakrabi
+ 5787    Zuben Elakrab; Zuben Hakraki; Zuben El Hakrabi
  5586    Zuben Elakribi
  5531    Zuben Elgenubi; Zubenelgenubi; Kiffa Australis; Elkhiffa Australis
- 5685    Zuben Elschemali; Zuben Eschamali; Zuben el Chamali; Zubenesch; Zubenelg; Kiffa Borealis
+ 5685    Zuben Elschemali; Zuben Eschamali; Zuben El Chamali; Zubenesch; Zubenelg; Kiffa Borealis
