@@ -336,9 +336,10 @@ end;
 procedure TChildDoc.MenuBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
 onEnter(self);
-startpoint:=clienttoscreen(point(X,Y));
+startpoint:=clienttoscreen(point(X,titleheight div 2));
 moving:=true;
 if WireframeMoveResize then dockedpanel.Hide;
+MenuBarMouseMove(Sender,Shift,X, Y);
 end;
 
 procedure TChildDoc.MenuBarMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
