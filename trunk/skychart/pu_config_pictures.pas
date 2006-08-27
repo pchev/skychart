@@ -50,9 +50,7 @@ type
     Page3: TPage;
     Label50: TLabel;
     Label264: TLabel;
-    Label265: TLabel;
     nimages: TLabel;
-    Label267: TLabel;
     Panel2: TPanel;
     ScanImages: TButton;
     Panel11: TPanel;
@@ -155,8 +153,6 @@ Caption:=rsPictures;
 Page1.caption:=rsObjects;
 Label50.caption:=rsDisplayImage;
 Label264.caption:=rsImageDirecto;
-Label265.caption:=rsThereIs;
-Label267.caption:=rsCataloguedIm;
 ScanImages.caption:=rsScanDirector;
 Label266.caption:=rsLuminosity;
 Label268.caption:=rsContrast;
@@ -215,7 +211,7 @@ ImgContrastBar.position:=round(10*cmain.ImageContrast);
 ImgLumBar2.position:=-round(10*cmain.ImageLuminosity);
 ImgContrastBar2.position:=round(10*cmain.ImageContrast);
 ShowImagesBox.checked:=csc.ShowImages;
-nimages.caption:=inttostr(cdb.CountImages);
+nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
 save:=csc.ShowBackgroundImage;
 backimg.text:=csc.BackgroundImage;
 {$ifdef win32}if rightstr(backimg.text,1)=PathDelim then backimg.text:=backimg.text+'*';{$endif}
@@ -291,7 +287,7 @@ Cdb.ScanImagesDirectory(cmain.ImagePath,ProgressCat,ProgressBar1 );
 ShowImagesBox.checked:=true;
 screen.cursor:=crDefault;
 ProgressPanel.visible:=false;
-nimages.caption:=inttostr(cdb.CountImages);
+nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
 end;
 
 procedure Tf_config_pictures.ImgLumBarChange(Sender: TObject);

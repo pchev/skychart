@@ -566,10 +566,9 @@ resourcestring
   rsGalaxies = 'Galaxies';
   rsPlanetaryNeb2 = 'Planetary nebulae';
   rsGeneral = 'General';
-  rsUseOnlyCatal = 'Use only catalog from one of the three block at the same '
-    +'time';
+  rsUseOnlyCatal = 'Use only the catalog from the same group';
   rsDefault = 'Default';
-  rsCDCObsoleteC = 'CDC Obsolete Catalog (but you can still use them)';
+  rsCDCObsoleteC = 'Obsolete CDC Catalog (but you can still use them)';
   rsReplacedBy = 'Replaced by';
   rsCdCFormatPre = 'CdC format, prefere the compact version';
   rsNotAvailable = 'Not available';
@@ -734,8 +733,7 @@ resourcestring
   rsObjects = 'Objects';
   rsDisplayImage = 'Display image of cataloged objects';
   rsImageDirecto = 'Image Directory';
-  rsThereIs = 'There is ';
-  rsCataloguedIm = 'catalogued images';
+  rsThereAreCata = 'There are %s catalogued images';
   rsScanDirector = 'Scan directory';
   rsLuminosity = 'Luminosity';
   rsReset = 'Reset';
@@ -782,7 +780,7 @@ resourcestring
   rsDeleteMPCDat = 'Delete MPC data selectively';
   rsQuickDelete = 'Quick Delete';
   rsQuicklyDelet = 'Quickly delete all comet related data';
-  rsAddASingleEl = 'Add a single element to the database. All field are '
+  rsAddASingleEl = 'Add a single element to the database. All fields are '
     +'mandatory.';
   rsDesignation = 'Designation';
   rsHAbsoluteMag = 'H absolute magnitude';
@@ -810,8 +808,6 @@ resourcestring
   rsQuicklyDelet2 = 'Quickly delete all asteroid related data';
   rsDeleteMonthl = 'Delete Monthly data ';
   rsDeleteMonthl2 = 'Delete Monthly data older than ';
-  rsAddASingleEl2 = 'Add a single element to the database. All field are '
-    +'mandatory.';
   rsMeanAnomaly = 'Mean anomaly';
   rsSemimajorAxi = 'Semimajor Axis';
   rsReference = 'Reference';
@@ -917,7 +913,7 @@ resourcestring
   rsErrorPleaseC3 = 'Error! Please check the database parameters and load the '
     +'picture package.';
   rsMoreThanObje = 'More than %s objects, result truncated.';
-  rsThereIsObjec = 'There is %s objects in this field.';
+  rsThereAreObjec = 'There are %s objects in this field.';
   rsEditLabel = 'Edit Label';
   rsEquatorialCo3 = 'Equatorial Coord.';
   rsAltAZCoord2 = 'Alt/AZ Coord.';
@@ -1012,7 +1008,7 @@ resourcestring
   rsGeocentric = 'Geocentric';
   rsTopoCentric = 'TopoCentric';
   rsLineModeDraw = 'Line mode drawing';
-  rsRealisticsIm = 'Realistics image';
+  rsRealisticsIm = 'Realistic images';
   rsSymbol = 'Symbol';
   rsDisplayAsASy = 'Display as a symbol';
   rsProportional = 'Proportional to the tail length';

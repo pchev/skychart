@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-07-20 11:25+0200\n"
+"PO-Revision-Date: 2006-08-27 15:37+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -165,7 +165,7 @@ msgid "Add Label"
 msgstr "Ajout d'un label"
 
 #: u_translation:rsaddasingleel
-msgid "Add a single element to the database. All field are mandatory."
+msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Ajout d'un élément à la base de donnée. Tout les champs sont requis."
 
 #: u_translation:rsaddthealtern
@@ -411,10 +411,6 @@ msgstr "Construire le catalogue"
 #: u_translation:rscdcnebulaeca
 msgid "CDC Nebulae Catalog Setting"
 msgstr "Catalogue de nébuleuse CDC"
-
-#: u_translation:rscdcobsoletec
-msgid "CDC Obsolete Catalog (but you can still use them)"
-msgstr "Catalogues obsolètes (mais vous pouvez toujours les utiliser)"
 
 #: u_translation:rscdcstarscata
 msgid "CDC Stars Catalog Setting"
@@ -2424,6 +2420,10 @@ msgstr "Base de donnée"
 msgid "Obsolete"
 msgstr "Obsolète"
 
+#: u_translation:rscdcobsoletec
+msgid "Obsolete CDC Catalog (but you can still use them)"
+msgstr "Catalogues obsolètes (mais vous pouvez toujours les utiliser)"
+
 #: u_translation:rsoffset
 msgid "Offset"
 msgstr "Décalage"
@@ -2837,7 +2837,7 @@ msgid "RealSky South"
 msgstr "Realsky sud"
 
 #: u_translation:rsrealisticsim
-msgid "Realistics image"
+msgid "Realistic images"
 msgstr "Image réaliste"
 
 #: u_translation:rsrecognizeuni
@@ -3532,12 +3532,12 @@ msgstr "Catalogue en fichier texte"
 msgid "Theme"
 msgstr "Thème"
 
-#: u_translation:rsthereis
-msgid "There is "
-msgstr "Il y a "
+#: u_translation:rstherearecata
+msgid "There are %s catalogued images"
+msgstr "Il y a %s images cataloguées"
 
-#: u_translation:rsthereisobjec
-msgid "There is %s objects in this field."
+#: u_translation:rsthereareobjec
+msgid "There are %s objects in this field."
 msgstr "Il y a %s objets dans ce champ."
 
 #: u_translation:rsthisactionre
@@ -3741,7 +3741,7 @@ msgid "Use online DSS instead of RealSky"
 msgstr "Utilise le DSS en ligne à la place de Realsky"
 
 #: u_translation:rsuseonlycatal
-msgid "Use only catalog from one of the three block at the same time"
+msgid "Use only the catalog from the same group"
 msgstr "Utilisez seulement les catalogues du même groupe"
 
 #: u_translation:rsusesubsampli
@@ -3895,10 +3895,6 @@ msgstr "à"
 #: u_translation:rsby
 msgid "by"
 msgstr "par"
-
-#: u_translation:rscataloguedim
-msgid "catalogued images"
-msgstr "images cataloguées"
 
 #: u_translation:rschart2
 msgid "chart :"
