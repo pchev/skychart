@@ -12,7 +12,7 @@ object f_config_pictures: Tf_config_pictures
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
+  PixelsPerInch = 96
   object MainPanel: TPanel
     Height = 485
     Width = 513
@@ -32,8 +32,8 @@ object f_config_pictures: Tf_config_pictures
       ShowTabs = False
       object Page1: TPage
         Caption = 'Objects'
-        ClientWidth = 509
-        ClientHeight = 481
+        ClientWidth = 503
+        ClientHeight = 475
         object Label50: TLabel
           Left = 2
           Height = 13
@@ -184,8 +184,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TPage
         Caption = 'Background'
-        ClientWidth = 509
-        ClientHeight = 481
+        ClientWidth = 503
+        ClientHeight = 475
         object Label270: TLabel
           Height = 14
           Width = 93
@@ -294,8 +294,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TPage
         Caption = 'DSS - Realsky'
-        ClientWidth = 509
-        ClientHeight = 481
+        ClientWidth = 503
+        ClientHeight = 475
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355
