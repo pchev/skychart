@@ -1739,7 +1739,7 @@ try
      if Fcatalog.cfgcat.starcaton[microcat-BaseStar] then FindAtPosCat(microcat);
   end;
   if i>maxln then desc:=Format(rsMoreThanObje, [inttostr(maxln)])
-             else desc:=Format(rsThereIsObjec, [inttostr(i)]);
+             else desc:=Format(rsThereAreObjec, [inttostr(i)]);
   text:=text+desc+crlf;
 finally
   Fcatalog.CloseCat;

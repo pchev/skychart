@@ -164,7 +164,7 @@ msgid "Add Label"
 msgstr ""
 
 #: u_translation:rsaddasingleel
-msgid "Add a single element to the database. All field are mandatory."
+msgid "Add a single element to the database. All fields are mandatory."
 msgstr ""
 
 #: u_translation:rsaddthealtern
@@ -409,10 +409,6 @@ msgstr ""
 
 #: u_translation:rscdcnebulaeca
 msgid "CDC Nebulae Catalog Setting"
-msgstr ""
-
-#: u_translation:rscdcobsoletec
-msgid "CDC Obsolete Catalog (but you can still use them)"
 msgstr ""
 
 #: u_translation:rscdcstarscata
@@ -2423,6 +2419,10 @@ msgstr ""
 msgid "Obsolete"
 msgstr ""
 
+#: u_translation:rscdcobsoletec
+msgid "Obsolete CDC Catalog (but you can still use them)"
+msgstr ""
+
 #: u_translation:rsoffset
 msgid "Offset"
 msgstr ""
@@ -2836,7 +2836,7 @@ msgid "RealSky South"
 msgstr ""
 
 #: u_translation:rsrealisticsim
-msgid "Realistics image"
+msgid "Realistic images"
 msgstr ""
 
 #: u_translation:rsrecognizeuni
@@ -3531,12 +3531,12 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: u_translation:rsthereis
-msgid "There is "
+#: u_translation:rstherearecata
+msgid "There are %s catalogued images"
 msgstr ""
 
-#: u_translation:rsthereisobjec
-msgid "There is %s objects in this field."
+#: u_translation:rsthereareobjec
+msgid "There are %s objects in this field."
 msgstr ""
 
 #: u_translation:rsthisactionre
@@ -3740,7 +3740,7 @@ msgid "Use online DSS instead of RealSky"
 msgstr ""
 
 #: u_translation:rsuseonlycatal
-msgid "Use only catalog from one of the three block at the same time"
+msgid "Use only the catalog from the same group"
 msgstr ""
 
 #: u_translation:rsusesubsampli
@@ -3893,10 +3893,6 @@ msgstr ""
 
 #: u_translation:rsby
 msgid "by"
-msgstr ""
-
-#: u_translation:rscataloguedim
-msgid "catalogued images"
 msgstr ""
 
 #: u_translation:rschart2
