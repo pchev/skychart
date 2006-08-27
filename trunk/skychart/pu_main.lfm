@@ -168,7 +168,7 @@ object f_main: Tf_main
     FullRepaint = False
     ParentColor = False
     TabOrder = 4
-    TitleHeight = 12
+    TitleHeight = 15
     WireframeMoveResize = True
     onMaximize = MultiDoc1Maximize
     onActiveChildChange = MultiDoc1ActiveChildChange
