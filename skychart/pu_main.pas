@@ -1204,6 +1204,11 @@ if Plan404lib<>0 then begin
   Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
   Plan404ok:=true;
 end else Plan404ok:=false;
+{$ifdef unix}
+   MultiDoc1.InactiveBorderColor:=$404040;
+   MultiDoc1.TitleColor:=clWhite;
+   MultiDoc1.BorderColor:=$808080;
+{$endif}
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -5103,6 +5108,7 @@ end;
 
 {$ifdef unix}
 procedure Tf_main.SetNightVision(night: boolean);
+var i: integer;
 begin
 if night then begin
    SetButtonImage(cfgm.ButtonNight);
@@ -5111,10 +5117,15 @@ if night then begin
    MultiDoc1.BorderColor:=nv_dark;
  end else begin
    SetButtonImage(cfgm.ButtonStandard);
-   MultiDoc1.InactiveBorderColor:=clDisabledHighlight;
-   MultiDoc1.TitleColor:=clCaptionText;
-   MultiDoc1.BorderColor:=clHighlight;
+   MultiDoc1.InactiveBorderColor:=$404040;
+   MultiDoc1.TitleColor:=clWhite;
+   MultiDoc1.BorderColor:=$808080;
 end;
+for i:=0 to MultiDoc1.ChildCount-1 do
+  if MultiDoc1.Childs[i]=MultiDoc1.ActiveChild then
+     MultiDoc1.Childs[i].SetBorderColor(MultiDoc1.BorderColor)
+  else
+     MultiDoc1.Childs[i].SetBorderColor(MultiDoc1.InactiveBorderColor);
 end;
 
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
