@@ -4761,34 +4761,31 @@ end;
 procedure Tf_main.SetButtonImage(button: Integer);
 var btn : TBitmap;
     col: Tcolor;
-    i: Integer;
     iconpath: String;
+procedure SetButtonImage1(imagelist:Timagelist);
+var i: Integer;
 begin
-btn:=TBitmap.Create;
-btn.canvas.pen.color:=clBlack;
-btn.canvas.brush.color:=clBlack;
-btn.canvas.brush.style:=bsSolid;
-col:=clNavy;
-try
-case button of
- 1:begin    // color
-   ImageNormal.Clear;
-   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_color');
+   imagelist.Clear;
      for i:=0 to ImageListCount-1 do begin
        try
-         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
-         ImageNormal.Add(btn,nil);
          btn:=TBitmap.Create;
+         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+         imagelist.Add(btn,nil);
+         btn.Free;
        except
        end;
      end;
-   ActionList1.Images:=ImageNormal;
-   Toolbar1.Images:=ImageNormal;
-   Toolbar2.Images:=ImageNormal;
-   Toolbar3.Images:=ImageNormal;
-   Toolbar4.Images:=ImageNormal;
-   BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
-   BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
+   ActionList1.Images:=imagelist;
+   Toolbar1.Images:=imagelist;
+   Toolbar2.Images:=imagelist;
+   Toolbar3.Images:=imagelist;
+   Toolbar4.Images:=imagelist;
+   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
+   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
+   btn:=TBitmap.Create;
+   btn.canvas.pen.color:=clBlack;
+   btn.canvas.brush.color:=clBlack;
+   btn.canvas.brush.style:=bsSolid;
    ImageNormal.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
    btn.canvas.rectangle(0,0,btn.width,btn.height);
    ImageNormal.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
@@ -4796,86 +4793,30 @@ case button of
    ImageNormal.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
    btn.canvas.rectangle(0,0,btn.width,btn.height);
    ImageNormal.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
+   btn.free;
+end;
+begin
+try
+case button of
+ 1:begin    // color
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_color');
+   col:=clNavy;
+   SetButtonImage1(ImageNormal);
    end;
  2:begin  // red
-   ImageList2.Clear;
    iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_red');
-     for i:=0 to ImageListCount-1 do begin
-       try
-         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
-         ImageList2.Add(btn,nil);
-         btn:=TBitmap.Create;
-       except
-       end;
-     end;
-   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
-   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
    col:=$acb5f5;
-   ActionList1.Images:=ImageList2;
-   Toolbar1.Images:=ImageList2;
-   Toolbar2.Images:=ImageList2;
-   Toolbar3.Images:=ImageList2;
-   Toolbar4.Images:=ImageList2;
-   ImageList2.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
+   SetButtonImage1(ImageList2);
    end;
  3:begin   // blue
-   ImageList2.Clear;
    iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_blue');
-     for i:=0 to ImageListCount-1 do begin
-       try
-         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
-         ImageList2.Add(btn,nil);
-         btn:=TBitmap.Create;
-       except
-       end;
-     end;
-   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
-   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
-   ActionList1.Images:=ImageList2;
-   Toolbar1.Images:=ImageList2;
-   Toolbar2.Images:=ImageList2;
-   Toolbar3.Images:=ImageList2;
-   Toolbar4.Images:=ImageList2;
-   ImageList2.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
+   col:=clNavy;
+   SetButtonImage1(ImageList2);
    end;
  4:begin   // Green
-   ImageList2.Clear;
    iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_green');
-     for i:=0 to ImageListCount-1 do begin
-       try
-         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
-         ImageList2.Add(btn,nil);
-         btn:=TBitmap.Create;
-       except
-       end;
-     end;
-   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
-   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
    col:=clLime;
-   ActionList1.Images:=ImageList2;
-   Toolbar1.Images:=ImageList2;
-   Toolbar2.Images:=ImageList2;
-   Toolbar3.Images:=ImageList2;
-   Toolbar4.Images:=ImageList2;
-   ImageList2.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
-   btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageList2.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
+   SetButtonImage1(ImageList2);
    end;
 end;
 ChildControl.Left:=ToolBar1.Width-ChildControl.Width;
@@ -4889,7 +4830,6 @@ Field7.font.color:=col;
 Field8.font.color:=col;
 Field9.font.color:=col;
 Field10.font.color:=col;
-btn.Free;
 except
 end;
 end;
