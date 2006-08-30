@@ -136,6 +136,19 @@ type
   
 Implementation
 
+// compute nebula radius
+function GetRadius(var rec:Gcatrec):double;
+var nebunit:double;
+begin
+  result:=0;
+  if rec.neb.valid[vnNebunit] then nebunit:=rec.neb.nebunit
+                              else nebunit:=rec.options.Units;
+  if nebunit<>0 then begin
+     result:=minarc*rec.neb.dim1*60/2/nebunit;
+     if result=0 then result:=minarc*rec.neb.dim2*60/2/nebunit;
+  end;
+end;
+
 constructor Tcatalog.Create(AOwner:TComponent);
 begin
  inherited Create(AOwner);
@@ -2225,9 +2238,11 @@ end;
 
 function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
 var
-   xx1,xx2,yy1,yy2,cyear,dyear : double;
-   ok : boolean;
+   xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius : double;
+   ok,found : boolean;
 begin
+xxc:=(x1+x2)/2;
+yyc:=(y1+y2)/2;
 xx1:=rad2deg*x1/15;
 xx2:=rad2deg*x2/15;
 yy1:=rad2deg*y1;
@@ -2268,6 +2283,7 @@ if not nextobj then begin
   if not ok then begin result:=false; exit; end;
 end;
 repeat
+  radius:=0;
   case cat of
    bsc     : ok:=GetBSC(rec);
    sky2000 : ok:=GetSky2000(rec);
@@ -2284,14 +2300,38 @@ repeat
    dsgsc   : ok:=GetDSGsc(rec);
    gcvs    : ok:=GetGCVS(rec);
    wds     : ok:=GetWDS(rec);
-   sac     : ok:=GetSAC(rec);
-   ngc     : ok:=GetNGC(rec);
-   lbn     : ok:=GetLBN(rec);
-   rc3     : ok:=GetRC3(rec);
-   pgc     : ok:=GetPGC(rec);
-   ocl     : ok:=GetOCL(rec);
-   gcm     : ok:=GetGCM(rec);
-   gpn     : ok:=GetGPN(rec);
+   sac     : begin
+             ok:=GetSAC(rec);
+             radius:=GetRadius(rec);
+             end;
+   ngc     : begin
+             ok:=GetNGC(rec);
+             radius:=GetRadius(rec);
+             end;
+   lbn     : begin
+             ok:=GetLBN(rec);
+             radius:=GetRadius(rec);
+             end;
+   rc3     : begin
+             ok:=GetRC3(rec);
+             radius:=GetRadius(rec);
+             end;
+   pgc     : begin
+             ok:=GetPGC(rec);
+             radius:=GetRadius(rec);
+             end;
+   ocl     : begin
+             ok:=GetOCL(rec);
+             radius:=GetRadius(rec);
+             end;
+   gcm     : begin
+             ok:=GetGCM(rec);
+             radius:=GetRadius(rec);
+             end;
+   gpn     : begin
+             ok:=GetGPN(rec);
+             radius:=GetRadius(rec);
+             end;
    gcstar  : begin
              ok:=GetGcatS(rec);
              while not ok do begin
@@ -2327,6 +2367,7 @@ repeat
                 OpenGCat(xx1,xx2,yy1,yy2,ok);
                 if ok then ok:=GetGcatN(rec);
              end;
+             radius:=GetRadius(rec);
              end;
    else ok:=false;
   end;
@@ -2339,9 +2380,14 @@ repeat
   end;
   precession(rec.options.EquinoxJD,cfgsc^.JDChart,rec.ra,rec.dec);
   if cfgsc^.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+  found:=true;
   if truncate then begin
-    if (rec.ra<x1) or (rec.ra>x2) then continue;
-    if (rec.dec<y1) or (rec.dec>y2) then continue;
+    if (rec.ra<x1) or (rec.ra>x2) then found:=false;
+    if (rec.dec<y1) or (rec.dec>y2) then found:=false;
+    if (not found)and(radius>0) then begin
+       if AngularDistance(xxc,yyc,rec.ra,rec.dec)<radius then found:=true;
+    end;
+    if not found then continue;
   end;
   break;
 until false ;
