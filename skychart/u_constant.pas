@@ -30,12 +30,16 @@ uses gcatunit, {libcatalog,} // libcatalog statically linked
      FPCanvas, Graphics;
 
 const MaxColor = 35;
+      crlf = chr(13)+chr(10);
 
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[1..7]of Tcolor;
 
 const cdcversion = 'Version 3 beta 0.1.1svn ';
       cdcver     = '3.0.1.1';
+      cdccpy = 'Copyright (C) 2002-2006 Patrick Chevalley';
+      cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
+                   'Peter Dean,' ;
       MaxSim = 100 ;
       MaxComet = 200;
       MaxAsteroid = 1000;
@@ -86,7 +90,6 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
 
 //  End of deep-sky objects colour
 
-      crlf = chr(13)+chr(10);
       greek : array[1..2,1..24]of string=(('Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega'),
               ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
       greeksymbol : array[1..2,1..24]of string=(('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'),
@@ -567,6 +570,7 @@ var gzopen : Tgzopen;
 // pseudo-constant only here
 Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
      Configfile, SysDecimalSeparator: string;
+     compile_time:string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
      nightvision : Boolean;

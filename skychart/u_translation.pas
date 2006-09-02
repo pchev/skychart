@@ -1044,7 +1044,12 @@ resourcestring
     +'s button now to return to your default values, otherwise they may be '
     +'lost. Do you want to continue ?';
   rsCoordinates = 'Coordinates:';
-
+  rsPleaseReport = 'Please report any problem to:';
+  rsProgrammer ='Programmer:';
+  rsTranslator ='Translator:';
+  rsCDCTranslator ='CDCTranslator';
+  rsAuthors = 'Authors';
+  rsLicenseAgree = 'License Agreement';
 
 implementation
 

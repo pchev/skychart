@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-08-27 15:37+0200\n"
+"PO-Revision-Date: 2006-09-02 22:50+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -284,6 +284,10 @@ msgstr "Crépuscule astronomique"
 msgid "Atmospheric Refraction"
 msgstr "Réfraction atmosphérique"
 
+#: u_translation:rsauthors
+msgid "Authors"
+msgstr "Auteurs"
+
 #: u_translation:rsautorefreshe
 msgid "Auto-refresh every "
 msgstr "Rafraichit tout les"
@@ -419,6 +423,10 @@ msgstr "Catalogue d'étoile CDC"
 #: u_translation:rscdcpluginset
 msgid "CDC plugin setting"
 msgstr "Paramètre du plugin CDC"
+
+#: u_translation:rscdctranslator
+msgid "CDCTranslator"
+msgstr "Patrick Chevalley"
 
 #: u_translation:rscalendar
 msgid "Calendar"
@@ -1888,6 +1896,10 @@ msgstr "Libration en latitude"
 msgid "Libration in longitude"
 msgstr "Libration en longitude"
 
+#: u_translation:rslicenseagree
+msgid "License Agreement"
+msgstr "Accord de Licence"
+
 #: u_translation:rslimitingsize
 msgid "Limiting Size (arcminutes) :"
 msgstr "Taille limite (minutes) :"
@@ -2636,6 +2648,10 @@ msgstr "Veuillez indiquer le répertoire où construire le catalogue"
 msgid "Please mount RealSky\256 CD number"
 msgstr "Veuillez monter le CDrom Realsky\256 numéro"
 
+#: u_translation:rspleasereport
+msgid "Please report any problem to:"
+msgstr "Veuillez signaler les problèmes à:"
+
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
 msgstr "Dessine la position des objets en mouvement."
@@ -2743,6 +2759,10 @@ msgstr "Traitement... %s"
 #: u_translation:rsprogramdata
 msgid "Program Data "
 msgstr "Données programme"
+
+#: u_translation:rsprogrammer
+msgid "Programmer:"
+msgstr "Programmeur:"
 
 #: u_translation:rsprogress
 msgid "Progress"
@@ -3615,6 +3635,10 @@ msgstr "Totalité"
 #: u_translation:rstransformati
 msgid "Transformation"
 msgstr "Transformation"
+
+#: u_translation:rstranslator
+msgid "Translator:"
+msgstr "Traducteur:"
 
 #: u_translation:rstransparentl
 msgid "Transparent line mode (occultation)"

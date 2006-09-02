@@ -29,7 +29,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms, cu_catalog, cu_skychart, cu_plot, cu_planet,
   cu_indiclient, cu_fits, cu_database, cu_telescope, pu_info, pu_image,
-  pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_about, pu_search,
+  pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection,
   u_planetrender, u_constant, u_util, MultiDocPackage, pu_main,
   TurboPowerIPro, pu_config, enhedit, pu_config_catalog,
@@ -37,18 +37,19 @@ uses
   pu_config_display, pu_config_chart, pu_config_internet, libsql,
   radec, XmlParser, zoomimage, JPEGForLazarus, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
-  pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation;
-
-const compile_time={$I %DATE%}+' '+{$I %TIME%} ;
+  pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
+  pu_splash, pu_about;
+  
+const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
 
 begin
+  compile_time:=compile_t;
   Application.Title:='Cartes du Ciel';
   Application.Initialize;
 
   Application.CreateForm(Tf_main, f_main);
-  f_about := Tf_about.Create(nil);
-  f_about.compile_time:=compile_time;
-  f_about.ShowTimer:=true; f_about.Show; f_about.Paint;
+  f_splash := Tf_splash.Create(nil);
+  f_splash.ShowTimer:=true; f_splash.Show; f_splash.Paint;
   Application.ProcessMessages;
   Application.CreateForm(Tf_position, f_position);
   Application.CreateForm(Tf_search, f_search);
@@ -60,9 +61,10 @@ begin
   Application.CreateForm(Tf_calendar, f_calendar);
   Application.CreateForm(Tf_printsetup, f_printsetup);
   Application.CreateForm(Tf_print, f_print);
+  Application.CreateForm(Tf_about, f_about);
   f_main.init;
   Application.Run;
-  f_about.free;
+  f_splash.free;
 
 end.
 
