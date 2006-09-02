@@ -30,21 +30,37 @@ interface
 
 uses u_translation, u_constant, u_util,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources;
+  ExtCtrls, LResources, Buttons, SynEdit;
 
 type
 
   { Tf_about }
 
   Tf_about = class(TForm)
-    DateLabel: TLabel;
-    logo: TImage;
+    Button1: TButton;
+    Image2: TImage;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Notebook1: TNotebook;
+    Page1: TPage;
+    Page2: TPage;
+    Page3: TPage;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel0: TPanel;
+    Panel4: TPanel;
+    SynEdit1: TSynEdit;
+    SynEdit2: TSynEdit;
     Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
+    procedure Label1Click(Sender: TObject);
+    procedure Label4Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure logoDblClick(Sender: TObject);
@@ -52,7 +68,6 @@ type
     { Private declarations }
   public
     { Public declarations }
-    compile_time:string;
     ShowTimer: Boolean;
     procedure SetLang;
   end;
@@ -65,8 +80,15 @@ implementation
 procedure Tf_about.SetLang;
 begin
 Caption:=rsAbout;
-Label1.caption:=rsSkyCharts;
-Label4.caption:=rsThisProgramI;
+if rsSkyCharts='Cartes du Ciel' then  Label5.caption:=''
+   else Label5.caption:=rsSkyCharts;
+Label7.caption:=rsThisProgramI;
+Button1.Caption:=rsClose;
+Label8.caption:=cdccpy;
+Label3.caption:=rsPleaseReport;
+page1.Caption:=rsAbout;
+page2.Caption:=rsAuthors;
+page3.Caption:=rsLicenseAgree;
 end;
 
 procedure Tf_about.FormCreate(Sender: TObject);
@@ -76,17 +98,28 @@ SetLang;
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
  ShowTimer:=false;
- label2.caption:=cdcversion;
+ Label1.caption:=URL_WebHome;
+ Label4.caption:=URL_BugTracker;
+ label2.caption:=cdcversion+blank+compile_time;
+ SynEdit1.Font.Name:='default';
+ SynEdit1.Font.Size:=0;
+ SynEdit2.Font.Name:='default';
+ SynEdit2.Font.Size:=0;
+ SynEdit2.Text:=rsProgrammer+crlf+cdcauthors+crlf+crlf+rsTranslator+crlf+rsCDCTranslator+crlf+crlf;
+end;
+
+procedure Tf_about.Label1Click(Sender: TObject);
+begin
+  ExecuteFile(URL_WebHome);
+end;
+
+procedure Tf_about.Label4Click(Sender: TObject);
+begin
+  ExecuteFile(URL_BugTracker);
 end;
 
 procedure Tf_about.FormShow(Sender: TObject);
 begin
-DateLabel.Caption:=compile_time;
-if ShowTimer then begin
-   Timer1.Enabled:=true;
-end else begin
-   Timer1.Enabled:=false;
-end;
 end;
 
 procedure Tf_about.Timer1Timer(Sender: TObject);
@@ -94,7 +127,6 @@ begin
 Timer1.Enabled:=false;
 ShowTimer:=false;
 BorderStyle:=bsToolWindow;
-ClientHeight:=253;
 Close;
 end;
 
