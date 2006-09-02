@@ -37,7 +37,6 @@ type
   { Tf_splash }
 
   Tf_splash = class(TForm)
-    DateLabel: TLabel;
     Image1: TImage;
     Label1: TLabel;
     Label2: TLabel;
@@ -73,17 +72,16 @@ end;
 
 procedure Tf_splash.FormCreate(Sender: TObject);
 begin
+label2.caption:=cdcversion;
 SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
  ShowTimer:=false;
- label2.caption:=cdcversion;
 end;
 
 procedure Tf_splash.FormShow(Sender: TObject);
 begin
-DateLabel.Caption:=compile_time;
 if ShowTimer then begin
    Timer1.Enabled:=true;
 end else begin
