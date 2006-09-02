@@ -7,24 +7,18 @@ object f_splash: Tf_splash
   VertScrollBar.Page = 262
   BorderStyle = bsNone
   Caption = 'About'
-  ClientHeight = 263
-  ClientWidth = 496
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
   Position = poScreenCenter
-  TextHeight = 13
   object Panel1: TPanel
     Height = 263
     Width = 496
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 263
-    ClientWidth = 496
     TabOrder = 0
     object Image1: TImage
       Height = 263
@@ -8402,9 +8396,9 @@ object f_splash: Tf_splash
     end
     object Label1: TLabel
       Left = 260
-      Height = 38
+      Height = 43
       Top = 88
-      Width = 221
+      Width = 188
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = 'Sky Charts'
@@ -8416,9 +8410,9 @@ object f_splash: Tf_splash
     end
     object Label2: TLabel
       Left = 18
-      Height = 20
+      Height = 24
       Top = 176
-      Width = 90
+      Width = 97
       Caption = 'Version 3 '
       Color = clNone
       Font.Color = clSilver
@@ -8452,18 +8446,6 @@ object f_splash: Tf_splash
       ParentColor = False
       Transparent = False
       WordWrap = True
-    end
-    object DateLabel: TLabel
-      Left = 454
-      Height = 13
-      Top = 180
-      Width = 27
-      Anchors = [akTop, akRight]
-      Caption = 'Date'
-      Color = clBlack
-      Font.Color = clWhite
-      ParentColor = False
-      Transparent = False
     end
   end
   object Timer1: TTimer

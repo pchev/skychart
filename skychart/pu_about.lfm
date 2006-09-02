@@ -8,32 +8,24 @@ object f_about: Tf_about
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
   Caption = 'About'
-  ClientHeight = 263
-  ClientWidth = 496
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
   Position = poScreenCenter
-  TextHeight = 13
   object Panel2: TPanel
     Height = 263
     Width = 496
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 263
-    ClientWidth = 496
     TabOrder = 0
     object Panel0: TPanel
       Height = 263
       Width = 130
       Align = alLeft
       BevelOuter = bvNone
-      ClientHeight = 263
-      ClientWidth = 130
       TabOrder = 0
       object Image2: TImage
         Height = 263
@@ -2399,8 +2391,6 @@ object f_about: Tf_about
       Height = 263
       Width = 366
       Align = alClient
-      ClientHeight = 263
-      ClientWidth = 366
       TabOrder = 1
       object Panel3: TPanel
         Left = 1
@@ -2408,8 +2398,6 @@ object f_about: Tf_about
         Top = 223
         Width = 364
         Align = alBottom
-        ClientHeight = 39
-        ClientWidth = 364
         TabOrder = 0
         object Button1: TButton
           Left = 149
@@ -2431,8 +2419,6 @@ object f_about: Tf_about
         PageIndex = 0
         object Page1: TPage
           Caption = 'About'
-          ClientWidth = 362
-          ClientHeight = 196
           object Label5: TLabel
             Left = 20
             Height = 13
@@ -2498,13 +2484,11 @@ object f_about: Tf_about
         end
         object Page2: TPage
           Caption = 'Authors'
-          ClientWidth = 362
-          ClientHeight = 196
           object Label3: TLabel
             Left = 11
-            Height = 13
+            Height = 14
             Top = 6
-            Width = 172
+            Width = 144
             Caption = 'Please report any problem to:'
             Color = clNone
             ParentColor = False
@@ -2512,9 +2496,9 @@ object f_about: Tf_about
           object Label4: TLabel
             Cursor = crHandPoint
             Left = 12
-            Height = 13
+            Height = 14
             Top = 22
-            Width = 38
+            Width = 32
             Caption = 'Label4'
             Color = clNone
             Font.Color = clBlue
@@ -2523,21 +2507,17 @@ object f_about: Tf_about
             OnClick = Label4Click
           end
           object SynEdit2: TSynEdit
-            Name = 'SynEdit2'
             Left = 12
             Height = 142
             Top = 46
             Width = 344
             Color = clBtnFace
-            Font.Height = -15
-            Font.Name = 'courier'
             Font.Pitch = fpVariable
             ParentColor = False
             TabOrder = 0
             BookMarkOptions.Xoffset = -18
-            BookMarkOptions.OnChange = nil
+            BorderStyle = bsNone
             Gutter.Visible = False
-            Gutter.OnChange = nil
             Gutter.CodeFoldingWidth = 14
             Keystrokes = <            
               item
@@ -2867,25 +2847,22 @@ object f_about: Tf_about
             ReadOnly = True
             RightEdgeColor = clBtnFace
             ScrollBars = ssAutoBoth
-            SelectedColor.OnChange = nil
           end
         end
         object Page3: TPage
           Caption = 'License Agreement'
-          ClientWidth = 362
-          ClientHeight = 196
           object SynEdit1: TSynEdit
-            Name = 'SynEdit1'
             Height = 196
-            Width = 362
+            Width = 356
             Align = alClient
             Color = clBtnFace
-            Font.Height = -15
-            Font.Name = 'courier'
             ParentColor = False
             TabOrder = 0
             BookMarkOptions.Xoffset = -18
+            BookMarkOptions.OnChange = nil
+            BorderStyle = bsNone
             Gutter.Visible = False
+            Gutter.OnChange = nil
             Gutter.CodeFoldingWidth = 14
             Keystrokes = <            
               item
@@ -3552,6 +3529,7 @@ object f_about: Tf_about
               ''
             )
             ReadOnly = True
+            SelectedColor.OnChange = nil
           end
         end
       end
