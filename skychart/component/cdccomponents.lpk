@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="2">
+    <PathDelim Value="\"/>
+    <Name Value="CDCcomponents"/>
+    <CompilerOptions>
+      <Version Value="5"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="Requires packages for Cartes di Ciel"/>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="11">
+      <Item1>
+        <PackageName Value="zoomimage"/>
+        <DefaultFilename Value="zoomimage\zoomimage.lpk"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="XmlParser"/>
+        <DefaultFilename Value="xmlparser\xmlparser.lpk"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="synapse"/>
+        <DefaultFilename Value="synapse\source\lib\synapse.lpk"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="radec"/>
+        <DefaultFilename Value="radec\radec.lpk"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="MultiDocPackage"/>
+        <DefaultFilename Value="multidoc\multidocpackage.lpk"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="mrecsort"/>
+        <DefaultFilename Value="mrecsort\mrecsort.lpk"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="libsql"/>
+        <DefaultFilename Value="libsql\libsql.lpk"/>
+      </Item7>
+      <Item8>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item8>
+      <Item9>
+        <PackageName Value="enhedit"/>
+        <DefaultFilename Value="enhedits\enhedit.lpk"/>
+      </Item9>
+      <Item10>
+        <PackageName Value="downldialog"/>
+        <DefaultFilename Value="downloaddialog\downldialog.lpk"/>
+      </Item10>
+      <Item11>
+        <PackageName Value="CDCjdcalendar"/>
+        <DefaultFilename Value="jdcalendar\cdcjdcalendar.lpk"/>
+      </Item11>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)\"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
