@@ -57,18 +57,13 @@ type
     Panel3: TPanel;
     Panel0: TPanel;
     Panel4: TPanel;
-    Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure Label1Click(Sender: TObject);
     procedure Label4Click(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure logoDblClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    ShowTimer: Boolean;
     procedure SetLang;
   end;
 
@@ -97,7 +92,6 @@ SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
- ShowTimer:=false;
  Label1.caption:=URL_WebHome;
  Label4.caption:=URL_BugTracker;
  label2.caption:=cdcversion+blank+compile_time;
@@ -112,23 +106,6 @@ end;
 procedure Tf_about.Label4Click(Sender: TObject);
 begin
   ExecuteFile(URL_BugTracker);
-end;
-
-procedure Tf_about.FormShow(Sender: TObject);
-begin
-end;
-
-procedure Tf_about.Timer1Timer(Sender: TObject);
-begin
-Timer1.Enabled:=false;
-ShowTimer:=false;
-BorderStyle:=bsToolWindow;
-Close;
-end;
-
-procedure Tf_about.logoDblClick(Sender: TObject);
-begin
-Timer1Timer(Sender);
 end;
 
 initialization
