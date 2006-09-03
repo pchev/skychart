@@ -226,9 +226,9 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       baseurl_world = 'http://earth-info.nga.mil/gns/html/cntyfile/';
       
       //Default URL
-      URL_WebHome = 'http://ap-i.net/skychart';
+      URL_WebHome = 'http://www.ap-i.net/skychart';
       URL_Maillist = 'http://groups.yahoo.com/group/skychart-discussion/';
-      URL_BugTracker = 'http://ap-i.net/mantis';
+      URL_BugTracker = 'http://www.ap-i.net/mantis/';
       
       URL_HTTPCometElements = 'http://cfa-www.harvard.edu/iau/Ephemerides/Comets/Soft00Cmt.txt';
       URL_FTPCometElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';

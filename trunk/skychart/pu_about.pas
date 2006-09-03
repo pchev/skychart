@@ -30,7 +30,7 @@ interface
 
 uses u_translation, u_constant, u_util,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources, Buttons, SynEdit;
+  ExtCtrls, LResources, Buttons;
 
 type
 
@@ -47,6 +47,8 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
+    Memo1: TMemo;
+    Memo2: TMemo;
     Notebook1: TNotebook;
     Page1: TPage;
     Page2: TPage;
@@ -55,8 +57,6 @@ type
     Panel3: TPanel;
     Panel0: TPanel;
     Panel4: TPanel;
-    SynEdit1: TSynEdit;
-    SynEdit2: TSynEdit;
     Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure Label1Click(Sender: TObject);
@@ -101,11 +101,7 @@ SetLang;
  Label1.caption:=URL_WebHome;
  Label4.caption:=URL_BugTracker;
  label2.caption:=cdcversion+blank+compile_time;
- SynEdit1.Font.Name:='default';
- SynEdit1.Font.Size:=0;
- SynEdit2.Font.Name:='default';
- SynEdit2.Font.Size:=0;
- SynEdit2.Text:=rsProgrammer+crlf+cdcauthors+crlf+crlf+rsTranslator+crlf+rsCDCTranslator+crlf+crlf;
+ memo1.Text:=rsProgrammer+crlf+cdcauthors+crlf+crlf+rsTranslator+crlf+rsCDCTranslator+crlf+crlf;
 end;
 
 procedure Tf_about.Label1Click(Sender: TObject);
