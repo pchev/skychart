@@ -7,31 +7,23 @@ object f_about: Tf_about
   VertScrollBar.Page = 262
   BorderStyle = bsSizeToolWin
   Caption = 'About'
-  ClientHeight = 263
-  ClientWidth = 496
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
-  OnShow = FormShow
-  PixelsPerInch = 90
   Position = poScreenCenter
   object Panel2: TPanel
     Height = 263
     Width = 496
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 263
-    ClientWidth = 496
     TabOrder = 0
     object Panel0: TPanel
       Height = 263
       Width = 130
       Align = alLeft
       BevelOuter = bvNone
-      ClientHeight = 263
-      ClientWidth = 130
       TabOrder = 0
       object Image2: TImage
         Height = 263
@@ -8701,8 +8693,6 @@ object f_about: Tf_about
       Height = 263
       Width = 366
       Align = alClient
-      ClientHeight = 263
-      ClientWidth = 366
       TabOrder = 1
       object Panel3: TPanel
         Left = 1
@@ -8710,8 +8700,6 @@ object f_about: Tf_about
         Top = 223
         Width = 364
         Align = alBottom
-        ClientHeight = 39
-        ClientWidth = 364
         TabOrder = 0
         object Button1: TButton
           Left = 149
@@ -8719,8 +8707,9 @@ object f_about: Tf_about
           Top = 8
           Width = 75
           BorderSpacing.InnerBorder = 4
+          Cancel = True
           Caption = 'Close'
-          OnClick = logoDblClick
+          ModalResult = 1
           TabOrder = 0
         end
       end
@@ -8733,8 +8722,6 @@ object f_about: Tf_about
         PageIndex = 0
         object Page1: TPage
           Caption = 'About'
-          ClientWidth = 362
-          ClientHeight = 196
           object Label5: TLabel
             Left = 20
             Height = 13
@@ -8800,8 +8787,6 @@ object f_about: Tf_about
         end
         object Page2: TPage
           Caption = 'Authors'
-          ClientWidth = 362
-          ClientHeight = 196
           object Label3: TLabel
             Left = 11
             Height = 13
@@ -8841,11 +8826,9 @@ object f_about: Tf_about
         end
         object Page3: TPage
           Caption = 'License Agreement'
-          ClientWidth = 362
-          ClientHeight = 196
           object Memo2: TMemo
             Height = 196
-            Width = 362
+            Width = 356
             Align = alClient
             Color = clBtnFace
             Lines.Strings = (
@@ -8853,7 +8836,8 @@ object f_about: Tf_about
               #9#9'       Version 2, June 1991'
               ''
               ' Copyright (C) 1989, 1991 Free Software Foundation, Inc.'
-              '                       59 Temple Place, Suite 330, Boston, MA  02111-1307  USA'
+              '                       59 Temple Place, Suite 330, Boston, MA  02111-1307  '
+              'USA'
               ' Everyone is permitted to copy and distribute verbatim copies'
               ' of this license document, but changing it is not allowed.'
               ''
@@ -8861,16 +8845,19 @@ object f_about: Tf_about
               ''
               '  The licenses for most software are designed to take away your'
               'freedom to share and change it.  By contrast, the GNU General Public'
-              'License is intended to guarantee your freedom to share and change free'
+              'License is intended to guarantee your freedom to share and change '
+              'free'
               'software--to make sure the software is free for all its users.  This'
               'General Public License applies to most of the Free Software'
-              'Foundation''s software and to any other program whose authors commit to'
+              'Foundation''s software and to any other program whose authors commit '
+              'to'
               'using it.  (Some other Free Software Foundation software is covered by'
               'the GNU Library General Public License instead.)  You can apply it to'
               'your programs, too.'
               ''
               '  When we speak of free software, we are referring to freedom, not'
-              'price.  Our General Public Licenses are designed to make sure that you'
+              'price.  Our General Public Licenses are designed to make sure that '
+              'you'
               'have the freedom to distribute copies of free software (and charge for'
               'this service if you wish), that you receive source code or can get it'
               'if you want it, that you can change the software or use pieces of it'
@@ -8893,7 +8880,8 @@ object f_about: Tf_about
               ''
               '  Also, for each author''s protection and ours, we want to make certain'
               'that everyone understands that there is no warranty for this free'
-              'software.  If the software is modified by someone else and passed on, we'
+              'software.  If the software is modified by someone else and passed on, '
+              'we'
               'want its recipients to know that what they have is not the original, so'
               'that any problems introduced by others will not reflect on the original'
               'authors'' reputations.'
@@ -8906,14 +8894,16 @@ object f_about: Tf_about
               ''
               '  The precise terms and conditions for copying, distribution and'
               'modification follow.'
-              ''
+              #12
               #9#9'    GNU GENERAL PUBLIC LICENSE'
-              '   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION'
+              '   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND '
+              'MODIFICATION'
               ''
               '  0. This License applies to any program or other work which contains'
               'a notice placed by the copyright holder saying it may be distributed'
               'under the terms of this General Public License.  The "Program", below,'
-              'refers to any such program or work, and a "work based on the Program"'
+              'refers to any such program or work, and a "work based on the '
+              'Program"'
               'means either the Program or any derivative work under copyright law:'
               'that is to say, a work containing the Program or a portion of it,'
               'either verbatim or with modifications and/or translated into another'
@@ -8961,7 +8951,7 @@ object f_about: Tf_about
               '    License.  (Exception: if the Program itself is interactive but'
               '    does not normally print such an announcement, your work based on'
               '    the Program is not required to print an announcement.)'
-              ''
+              #12
               'These requirements apply to the modified work as a whole.  If'
               'identifiable sections of that work are not derived from the Program,'
               'and can be reasonably considered independent and separate works in'
@@ -8970,15 +8960,18 @@ object f_about: Tf_about
               'distribute the same sections as part of a whole which is a work based'
               'on the Program, the distribution of the whole must be on the terms of'
               'this License, whose permissions for other licensees extend to the'
-              'entire whole, and thus to each and every part regardless of who wrote it.'
+              'entire whole, and thus to each and every part regardless of who wrote '
+              'it.'
               ''
               'Thus, it is not the intent of this section to claim rights or contest'
               'your rights to work written entirely by you; rather, the intent is to'
               'exercise the right to control the distribution of derivative or'
               'collective works based on the Program.'
               ''
-              'In addition, mere aggregation of another work not based on the Program'
-              'with the Program (or with a work based on the Program) on a volume of'
+              'In addition, mere aggregation of another work not based on the '
+              'Program'
+              'with the Program (or with a work based on the Program) on a volume '
+              'of'
               'a storage or distribution medium does not bring the other work under'
               'the scope of this License.'
               ''
@@ -8988,7 +8981,8 @@ object f_about: Tf_about
               ''
               '    a) Accompany it with the complete corresponding machine-readable'
               '    source code, which must be distributed under the terms of Sections'
-              '    1 and 2 above on a medium customarily used for software interchange; or,'
+              '    1 and 2 above on a medium customarily used for software '
+              'interchange; or,'
               ''
               '    b) Accompany it with a written offer, valid for at least three'
               '    years, to give any third party, for a charge no more than your'
@@ -9011,7 +9005,8 @@ object f_about: Tf_about
               'special exception, the source code distributed need not include'
               'anything that is normally distributed (in either source or binary'
               'form) with the major components (compiler, kernel, and so on) of the'
-              'operating system on which the executable runs, unless that component'
+              'operating system on which the executable runs, unless that '
+              'component'
               'itself accompanies the executable.'
               ''
               'If distribution of executable or object code is made by offering'
@@ -9019,7 +9014,7 @@ object f_about: Tf_about
               'access to copy the source code from the same place counts as'
               'distribution of the source code, even though third parties are not'
               'compelled to copy the source along with the object code.'
-              ''
+              #12
               '  4. You may not copy, modify, sublicense, or distribute the Program'
               'except as expressly provided under this License.  Any attempt'
               'otherwise to copy, modify, sublicense or distribute the Program is'
@@ -9051,7 +9046,8 @@ object f_about: Tf_about
               'otherwise) that contradict the conditions of this License, they do not'
               'excuse you from the conditions of this License.  If you cannot'
               'distribute so as to satisfy simultaneously your obligations under this'
-              'License and any other pertinent obligations, then as a consequence you'
+              'License and any other pertinent obligations, then as a consequence '
+              'you'
               'may not distribute the Program at all.  For example, if a patent'
               'license would not permit royalty-free redistribution of the Program by'
               'all those who receive copies directly or indirectly through you, then'
@@ -9076,7 +9072,7 @@ object f_about: Tf_about
               ''
               'This section is intended to make thoroughly clear what is believed to'
               'be a consequence of the rest of this License.'
-              ''
+              #12
               '  8. If the distribution and/or use of the Program is restricted in'
               'certain countries either by patents or by copyrighted interfaces, the'
               'original copyright holder who places the Program under this License'
@@ -9085,46 +9081,147 @@ object f_about: Tf_about
               'countries not thus excluded.  In such case, this License incorporates'
               'the limitation as if written in the body of this License.'
               ''
-              '  9. The Free Software Foundation may publish revised and/or new versions'
-              'of the General Public License from time to time.  Such new versions will'
+              '  9. The Free Software Foundation may publish revised and/or new '
+              'versions'
+              'of the General Public License from time to time.  Such new versions '
+              'will'
               'be similar in spirit to the present version, but may differ in detail to'
               'address new problems or concerns.'
               ''
               'Each version is given a distinguishing version number.  If the Program'
               'specifies a version number of this License which applies to it and "any'
-              'later version", you have the option of following the terms and conditions'
+              'later version", you have the option of following the terms and '
+              'conditions'
               'either of that version or of any later version published by the Free'
-              'Software Foundation.  If the Program does not specify a version number of'
-              'this License, you may choose any version ever published by the Free Software'
+              'Software Foundation.  If the Program does not specify a version '
+              'number of'
+              'this License, you may choose any version ever published by the Free '
+              'Software'
               'Foundation.'
               ''
               '  10. If you wish to incorporate parts of the Program into other free'
               'programs whose distribution conditions are different, write to the author'
               'to ask for permission.  For software which is copyrighted by the Free'
-              'Software Foundation, write to the Free Software Foundation; we sometimes'
+              'Software Foundation, write to the Free Software Foundation; we '
+              'sometimes'
               'make exceptions for this.  Our decision will be guided by the two goals'
               'of preserving the free status of all derivatives of our free software and'
               'of promoting the sharing and reuse of software generally.'
               ''
               #9#9#9'    NO WARRANTY'
               ''
-              '  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY'
-              'FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN'
-              'OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES'
-              'PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED'
-              'OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF'
-              'MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS'
-              'TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE'
-              'PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,'
+              '  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, '
+              'THERE IS NO WARRANTY'
+              'FOR THE PROGRAM, TO THE EXTENT PERMITTED BY '
+              'APPLICABLE LAW.  EXCEPT WHEN'
+              'OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS '
+              'AND/OR OTHER PARTIES'
+              'PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF '
+              'ANY KIND, EITHER EXPRESSED'
+              'OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED '
+              'WARRANTIES OF'
+              'MERCHANTABILITY AND FITNESS FOR A PARTICULAR '
+              'PURPOSE.  THE ENTIRE RISK AS'
+              'TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS '
+              'WITH YOU.  SHOULD THE'
+              'PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL '
+              'NECESSARY SERVICING,'
               'REPAIR OR CORRECTION.'
               ''
-              '  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING'
-              'WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR'
-              'REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,'
-              'INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING'
-              'OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED'
-              'TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY'
-              'YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM '
+              '  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR '
+              'AGREED TO IN WRITING'
+              'WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO '
+              'MAY MODIFY AND/OR'
+              'REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE '
+              'LIABLE TO YOU FOR DAMAGES,'
+              'INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR '
+              'CONSEQUENTIAL DAMAGES ARISING'
+              'OUT OF THE USE OR INABILITY TO USE THE PROGRAM '
+              '(INCLUDING BUT NOT LIMITED'
+              'TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE '
+              'OR LOSSES SUSTAINED BY'
+              'YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO '
+              'OPERATE WITH ANY OTHER'
+              'PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS '
+              'BEEN ADVISED OF THE'
+              'POSSIBILITY OF SUCH DAMAGES.'
+              ''
+              #9#9'     END OF TERMS AND CONDITIONS'
+              #12
+              #9'    How to Apply These Terms to Your New Programs'
+              ''
+              '  If you develop a new program, and you want it to be of the greatest'
+              'possible use to the public, the best way to achieve this is to make it'
+              'free software which everyone can redistribute and change under these '
+              'terms.'
+              ''
+              '  To do so, attach the following notices to the program.  It is safest'
+              'to attach them to the start of each source file to most effectively'
+              'convey the exclusion of warranty; and each file should have at least'
+              'the "copyright" line and a pointer to where the full notice is found.'
+              ''
+              '    <one line to give the program''s name and a brief idea of what it '
+              'does.>'
+              '    Copyright (C) <year>  <name of author>'
+              ''
+              '    This program is free software; you can redistribute it and/or modify'
+              '    it under the terms of the GNU General Public License as published '
+              'by'
+              '    the Free Software Foundation; either version 2 of the License, or'
+              '    (at your option) any later version.'
+              ''
+              '    This program is distributed in the hope that it will be useful,'
+              '    but WITHOUT ANY WARRANTY; without even the implied '
+              'warranty of'
+              '    MERCHANTABILITY or FITNESS FOR A PARTICULAR '
+              'PURPOSE.  See the'
+              '    GNU General Public License for more details.'
+              ''
+              '    You should have received a copy of the GNU General Public '
+              'License'
+              '    along with this program; if not, write to the Free Software'
+              '    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  '
+              '02111-1307  USA'
+              ''
+              ''
+              'Also add information on how to contact you by electronic and paper '
+              'mail.'
+              ''
+              'If the program is interactive, make it output a short notice like this'
+              'when it starts in an interactive mode:'
+              ''
+              '    Gnomovision version 69, Copyright (C) year name of author'
+              '    Gnomovision comes with ABSOLUTELY NO WARRANTY; for '
+              'details type `show w''.'
+              '    This is free software, and you are welcome to redistribute it'
+              '    under certain conditions; type `show c'' for details.'
+              ''
+              'The hypothetical commands `show w'' and `show c'' should show the '
+              'appropriate'
+              'parts of the General Public License.  Of course, the commands you '
+              'use may'
+              'be called something other than `show w'' and `show c''; they could '
+              'even be'
+              'mouse-clicks or menu items--whatever suits your program.'
+              ''
+              'You should also get your employer (if you work as a programmer) or '
+              'your'
+              'school, if any, to sign a "copyright disclaimer" for the program, if'
+              'necessary.  Here is a sample; alter the names:'
+              ''
+              '  Yoyodyne, Inc., hereby disclaims all copyright interest in the program'
+              '  `Gnomovision'' (which makes passes at compilers) written by James '
+              'Hacker.'
+              ''
+              '  <signature of Ty Coon>, 1 April 1989'
+              '  Ty Coon, President of Vice'
+              ''
+              'This General Public License does not permit incorporating your '
+              'program into'
+              'proprietary programs.  If your program is a subroutine library, you may'
+              'consider it more useful to permit linking proprietary applications with the'
+              'library.  If this is what you want to do, use the GNU Library General'
+              'Public License instead of this License.'
             )
             ReadOnly = True
             ScrollBars = ssBoth
@@ -9133,12 +9230,5 @@ object f_about: Tf_about
         end
       end
     end
-  end
-  object Timer1: TTimer
-    Enabled = False
-    Interval = 2000
-    OnTimer = Timer1Timer
-    left = 16
-    top = 24
   end
 end
