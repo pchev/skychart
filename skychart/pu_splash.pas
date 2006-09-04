@@ -42,6 +42,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    LabelDate: TLabel;
     Panel1: TPanel;
     Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
@@ -73,6 +74,12 @@ end;
 procedure Tf_splash.FormCreate(Sender: TObject);
 begin
 label2.caption:=cdcversion;
+if pos('svn',cdcversion)>0 then begin
+   LabelDate.caption:=compile_time;
+   LabelDate.Left:=label2.Left+label2.Canvas.TextWidth(cdcversion)+8;
+   LabelDate.Visible:=true;
+end else
+   LabelDate.Visible:=false;
 SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
