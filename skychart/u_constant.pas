@@ -234,6 +234,7 @@ const cdcversion = 'Version 3 beta 0.1.1svn ';
       URL_FTPCometElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
       URL_HTTPAsteroidElements1 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
       URL_HTTPAsteroidElements2 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Unusual/Soft00Unusual.txt';
+      URL_HTTPAsteroidElements3 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Distant/Soft00Distant.txt';
       URL_MPCORBAsteroidElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/MPCORB.DAT';
       URL_CDCAsteroidElements = 'http://www.ap-i.net/skychart/data/mpc5000.dat';
       
@@ -396,7 +397,7 @@ type
                 ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
                 ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
-                ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
+                ShowPluto, ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY: double;

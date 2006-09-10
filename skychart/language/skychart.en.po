@@ -388,7 +388,7 @@ msgid "Boundary"
 msgstr ""
 
 #: u_translation:rsbrightneo
-msgid "Bright + NEO"
+msgid "Bright + NEO + TNO"
 msgstr ""
 
 #: u_translation:rsbrightstars
@@ -2659,6 +2659,10 @@ msgstr ""
 msgid "Pluto"
 msgstr ""
 
+#: u_translation:rsplutoisaplan
+msgid "Pluto is a planet."
+msgstr ""
+
 #: u_translation:rspoleinclinat
 msgid "Pole inclination"
 msgstr ""
@@ -3697,6 +3701,10 @@ msgstr ""
 
 #: u_translation:rsumbra
 msgid "Umbra"
+msgstr ""
+
+#: u_translation:rsunchecktoavo
+msgid "Uncheck to avoid duplicate with minor planet 134340"
 msgstr ""
 
 #: u_translation:rsundo

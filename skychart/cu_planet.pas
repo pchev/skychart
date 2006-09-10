@@ -909,6 +909,7 @@ var i : integer;
 begin
 result:=false;
    for i:=1 to 30 do begin
+     if (i=9) and (not cfgsc^.ShowPluto) then continue;
      if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) then begin
          FindNumPla(i,ra,de,result,cfgsc);
          break;
@@ -940,6 +941,7 @@ repeat
   inc(CurrentPlanet);
   if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc^.SimObject[CurrentPlanet]) then continue;
   if CurrentPlanet=3 then continue;    // skip Earth
+  if (CurrentPlanet=9) and (not cfgsc^.ShowPluto) then continue; // skip Pluto
   if CurrentPlanet=31 then continue;   // skip Saturn ring
   if (CurrentPlanet=32)and not cfgsc^.showearthshadow then continue;
   if CurrentPlanet>32 then begin

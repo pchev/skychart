@@ -352,7 +352,7 @@ begin
   end;
   
   // todo: remove after correction of Lazarus bug 905
-  f_config_time1.SimObjClickCheck(nil);
+  //f_config_time1.SimObjClickCheck(nil);
 
 end;
 
