@@ -35,6 +35,8 @@ type
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TForm)
+    CheckBoxPluto: TCheckBox;
+    Label3: TLabel;
     TransparentPlanet: TCheckBox;
     comfile: TFileNameEdit;
     mpcfile: TFileNameEdit;
@@ -194,6 +196,7 @@ type
     UseXplanet: TCheckBox;
     XplanetDir: TEdit;
     XplanetBtn: TBitBtn;
+    procedure CheckBoxPlutoChange(Sender: TObject);
     procedure DownloadAsteroidClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -274,6 +277,8 @@ Label131.caption:=rsDataFiles;
 PlaParalaxe.caption:=rsPosition;
 PlaParalaxe.Items[0]:=rsGeocentric;
 PlaParalaxe.Items[1]:=rsTopoCentric;
+CheckBoxPluto.Caption:=rsPlutoIsAPlan;
+Label3.caption:=rsUncheckToAvo;
 Label5.caption:=rsPlanetsSetti;
 Label89.caption:=rsJupiterGRSLo;
 PlanetBox.caption:=rsShowPlanetOn;
@@ -402,6 +407,7 @@ procedure Tf_config_solsys.ShowPlanet;
 begin
 if csc.PlanetParalaxe then PlaParalaxe.itemindex:=1
                       else PlaParalaxe.itemindex:=0;
+CheckBoxPluto.checked:=csc.ShowPluto;
 PlanetBox.checked:=csc.ShowPlanet;
 PlanetMode.itemindex:=cplot.plaplot;
 grs.value:=csc.GRSlongitude;
@@ -518,6 +524,12 @@ begin
     application.ProcessMessages;
     LoadMPCClick(Sender);
  end;
+end;
+
+procedure Tf_config_solsys.CheckBoxPlutoChange(Sender: TObject);
+begin
+if LockChange then exit;
+  csc.ShowPluto:=CheckBoxPluto.checked;
 end;
 
 procedure Tf_config_solsys.FormClose(Sender: TObject;

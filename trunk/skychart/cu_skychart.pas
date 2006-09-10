@@ -1125,6 +1125,7 @@ for j:=0 to cfgsc^.SimNb-1 do begin
     ipla:=draworder[n];
     if (j>0) and (not cfgsc^.SimObject[ipla]) then continue;
     if ipla=3 then continue;
+    if (ipla=9) and (not cfgsc^.ShowPluto) then continue;
     ra:=cfgsc^.Planetlst[j,ipla,1];
     dec:=cfgsc^.Planetlst[j,ipla,2];
     jdt:=cfgsc^.Planetlst[j,ipla,3];

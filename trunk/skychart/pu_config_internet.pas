@@ -263,6 +263,8 @@ buf:=stringreplace(URL_HTTPAsteroidElements1,'$YYYY',FormatDateTime('yyyy',now),
 AsteroidUrlList.Lines.Add(buf);
 buf:=stringreplace(URL_HTTPAsteroidElements2,'$YYYY',FormatDateTime('yyyy',now),[]);
 AsteroidUrlList.Lines.Add(buf);
+buf:=stringreplace(URL_HTTPAsteroidElements3,'$YYYY',FormatDateTime('yyyy',now),[]);
+AsteroidUrlList.Lines.Add(buf);
 AsteroidUrlListExit(Sender);
 end;
 

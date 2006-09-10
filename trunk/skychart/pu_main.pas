@@ -837,6 +837,7 @@ c2.StyleConstL:=c1.StyleConstL;
 c2.StyleConstB:=c1.StyleConstB;
 c2.StyleEcliptic:=c1.StyleEcliptic;
 c2.StyleGalEq:=c1.StyleGalEq;
+c2.ShowPluto := c1.ShowPluto ;
 //c2. := c1. ;
 end;
 
@@ -1010,6 +1011,7 @@ try
  catalog.LoadHorizon(cfgm.horizonfile,@def_cfgsc);
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
  f_search.cfgshr:=catalog.cfgshr;
+ f_search.cfgsc:=@def_cfgsc;
  f_search.Init;
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
@@ -1837,6 +1839,8 @@ if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject
    end;
 if chart is Tf_chart then with chart as Tf_chart do begin
    formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
+   f_search.cfgsc:=sc.cfgsc;
+   f_search.InitPlanet;
    repeat
    f_search.showmodal;
    if f_search.modalresult=mrOk then begin
@@ -2581,6 +2585,8 @@ buf:=stringreplace(URL_HTTPAsteroidElements1,'$YYYY',FormatDateTime('yyyy',now),
 cfgm.AsteroidUrlList.Add(buf);
 buf:=stringreplace(URL_HTTPAsteroidElements2,'$YYYY',FormatDateTime('yyyy',now),[]);
 cfgm.AsteroidUrlList.Add(buf);
+buf:=stringreplace(URL_HTTPAsteroidElements3,'$YYYY',FormatDateTime('yyyy',now),[]);
+cfgm.AsteroidUrlList.Add(buf);
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:='';
   f_getdss.cfgdss.DSSurl[i,1]:='';
@@ -2683,6 +2689,7 @@ def_cfgsc.ObsPressure := 1010 ;
 def_cfgsc.ObsName := 'Genève' ;
 def_cfgsc.ObsCountry := 'Switzerland' ;
 def_cfgsc.horizonopaque:=true;
+def_cfgsc.ShowPluto:=true;
 def_cfgsc.ShowHorizon:=false;
 def_cfgsc.ShowHorizonDepression:=false;
 def_cfgsc.HorizonMax:=0;
@@ -3147,6 +3154,7 @@ csc.ShowEcliptic:=ReadBool(section,'ShowEcliptic',csc.ShowEcliptic);
 csc.ShowGalactic:=ReadBool(section,'ShowGalactic',csc.ShowGalactic); 
 csc.ShowMilkyWay:=ReadBool(section,'ShowMilkyWay',csc.ShowMilkyWay);
 csc.FillMilkyWay:=ReadBool(section,'FillMilkyWay',csc.FillMilkyWay);
+csc.ShowPluto:=ReadBool(section,'ShowPluto',csc.ShowPluto);
 csc.ShowPlanet:=ReadBool(section,'ShowPlanet',csc.ShowPlanet);
 csc.ShowAsteroid:=ReadBool(section,'ShowAsteroid',csc.ShowAsteroid);
 csc.ShowComet:=ReadBool(section,'ShowComet',csc.ShowComet);
@@ -3560,6 +3568,7 @@ WriteBool(section,'ShowEcliptic',csc.ShowEcliptic);
 WriteBool(section,'ShowGalactic',csc.ShowGalactic);
 WriteBool(section,'ShowMilkyWay',csc.ShowMilkyWay);
 WriteBool(section,'FillMilkyWay',csc.FillMilkyWay);
+WriteBool(section,'ShowPluto',csc.ShowPluto);
 WriteBool(section,'ShowPlanet',csc.ShowPlanet);
 WriteBool(section,'ShowAsteroid',csc.ShowAsteroid);
 WriteBool(section,'ShowComet',csc.ShowComet);

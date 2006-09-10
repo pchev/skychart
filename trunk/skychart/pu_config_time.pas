@@ -102,12 +102,12 @@ type
     procedure JDEditChange(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
     procedure DateChange(Sender: TObject);
+    procedure SimObjItemClick(Sender: TObject; Index: LongInt);
     procedure TimeChange(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
     procedure tzChange(Sender: TObject);
     procedure CheckBox4Click(Sender: TObject);
     procedure dt_utChange(Sender: TObject);
-    procedure SimObjClickCheck(Sender: TObject);
     procedure nbstepChanged(Sender: TObject);
     procedure stepsizeChanged(Sender: TObject);
     procedure stepunitClick(Sender: TObject);
@@ -228,6 +228,8 @@ procedure Tf_config_time.FormShow(Sender: TObject);
 begin
 LockJD:=false;
 LockChange:=true;
+if csc.ShowPluto then SimObj.items[9]:=rsPluto
+                 else SimObj.items[9]:='';
 ShowTime;
 LockChange:=false;
 end;
@@ -293,7 +295,8 @@ for i:=0 to SimObj.Items.Count-1 do begin
   11: j:=13;   // comet
   else j:=i;
   end;
-  SimObj.checked[i]:=csc.SimObject[j];
+  if (i=9) and (not csc.ShowPluto) then SimObj.checked[9]:=false
+     else SimObj.checked[i]:=csc.SimObject[j];
 end;
 end;
 
@@ -448,27 +451,29 @@ csc.DT_UT:=csc.DT_UT_val;
 Tdt_ut.caption:=dt_ut.text;
 end;
 
-procedure Tf_config_time.SimObjClickCheck(Sender: TObject);
+procedure Tf_config_time.SimObjItemClick(Sender: TObject; Index: LongInt);
 var i,j:integer;
 begin
-for i:=0 to SimObj.Items.Count-1 do begin
-  case i of
+//for i:=0 to SimObj.Items.Count-1 do begin
+  case index of
   0 : j:=10;   // sun
   3 : j:=11;   // moon
   10: j:=12;   // asteroid
   11: j:=13;   // comet
-  else j:=i;
+  else j:=index;
   end;
-  csc.SimObject[j]:=SimObj.checked[i];
-end;
+  if (index=9) and (not csc.ShowPluto) then SimObj.checked[index]:=false;
+  csc.SimObject[j]:=SimObj.checked[index];
 end;
 
 procedure Tf_config_time.AllSimClick(Sender: TObject);
 var i:integer;
 begin
-for i:=0 to SimObj.Items.Count-1 do
-    SimObj.checked[i]:=true;
-SimObjClickCheck(Sender);
+for i:=0 to SimObj.Items.Count-1 do begin
+  if (i=9) and (not csc.ShowPluto) then SimObj.checked[i]:=false
+    else SimObj.checked[i]:=true;
+end;
+//SimObjItemClick(Sender);
 end;
 
 procedure Tf_config_time.NoSimClick(Sender: TObject);
@@ -476,7 +481,7 @@ var i:integer;
 begin
 for i:=0 to SimObj.Items.Count-1 do
     SimObj.checked[i]:=false;
-SimObjClickCheck(Sender);
+//SimObjClickCheck(Sender);
 end;
 
 procedure Tf_config_time.stepunitClick(Sender: TObject);

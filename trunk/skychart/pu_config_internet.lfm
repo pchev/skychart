@@ -46,9 +46,9 @@ object f_config_internet: Tf_config_internet
           TabOrder = 0
           object httpproxy: TCheckBox
             Left = 30
-            Height = 13
+            Height = 19
             Top = 11
-            Width = 100
+            Width = 111
             Caption = 'Use HTTP Proxy'
             OnClick = httpproxyClick
             TabOrder = 0
@@ -63,9 +63,9 @@ object f_config_internet: Tf_config_internet
             TabOrder = 1
             object Label2: TLabel
               Left = 22
-              Height = 14
+              Height = 13
               Top = 4
-              Width = 53
+              Width = 61
               Caption = 'Proxy host'
               Color = clNone
               ParentColor = False
@@ -81,18 +81,18 @@ object f_config_internet: Tf_config_internet
             end
             object Label4: TLabel
               Left = 22
-              Height = 14
+              Height = 13
               Top = 48
-              Width = 53
+              Width = 65
               Caption = 'User Name'
               Color = clNone
               ParentColor = False
             end
             object Label5: TLabel
               Left = 22
-              Height = 14
+              Height = 13
               Top = 92
-              Width = 47
+              Width = 57
               Caption = 'Password'
               Color = clNone
               ParentColor = False
@@ -140,18 +140,18 @@ object f_config_internet: Tf_config_internet
           TabOrder = 1
           object Label1: TLabel
             Left = 39
-            Height = 14
+            Height = 13
             Top = 60
-            Width = 106
+            Width = 127
             Caption = 'Anonymous password'
             Color = clNone
             ParentColor = False
           end
           object ftppassive: TCheckBox
             Left = 39
-            Height = 13
+            Height = 19
             Top = 18
-            Width = 110
+            Width = 123
             Caption = 'FTP Passive Mode'
             OnClick = ftppassiveClick
             TabOrder = 0
@@ -172,18 +172,18 @@ object f_config_internet: Tf_config_internet
         ClientHeight = 478
         object Label6: TLabel
           Left = 28
-          Height = 14
+          Height = 13
           Top = 23
-          Width = 236
+          Width = 282
           Caption = 'Comet elements in MPC format (one URL by line) '
           Color = clNone
           ParentColor = False
         end
         object Label7: TLabel
           Left = 28
-          Height = 14
+          Height = 13
           Top = 196
-          Width = 242
+          Width = 288
           Caption = 'Asteroid elements in MPC format (one URL by line)'
           Color = clNone
           ParentColor = False
@@ -207,7 +207,7 @@ object f_config_internet: Tf_config_internet
           TabOrder = 1
         end
         object comdefault: TButton
-          Left = 390
+          Left = 393
           Height = 25
           Top = 148
           Width = 75
@@ -217,7 +217,7 @@ object f_config_internet: Tf_config_internet
           TabOrder = 2
         end
         object astdefault: TButton
-          Left = 390
+          Left = 393
           Height = 25
           Top = 324
           Width = 75
@@ -227,12 +227,12 @@ object f_config_internet: Tf_config_internet
           TabOrder = 3
         end
         object brightneo: TButton
-          Left = 272
+          Left = 254
           Height = 25
           Top = 324
-          Width = 100
+          Width = 130
           BorderSpacing.InnerBorder = 4
-          Caption = 'Bright + NEO'
+          Caption = 'Bright + NEO + TNO'
           OnClick = brightneoClick
           TabOrder = 4
         end
@@ -267,7 +267,7 @@ object f_config_internet: Tf_config_internet
           TabOrder = 7
         end
         object astcdc: TButton
-          Left = 154
+          Left = 145
           Height = 25
           Top = 324
           Width = 100
