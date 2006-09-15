@@ -27,7 +27,7 @@ interface
 
 uses u_translation,
   u_constant, u_util, u_planetrender, u_bitmap, PostscriptCanvas,
-  SysUtils, Types, StrUtils, FPImage, LCLType, IntfGraphics, FPCanvas,
+  SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics;
 
 
@@ -281,6 +281,7 @@ begin
 end;
 
 function TSplot.Init(w,h : integer) : boolean;
+var Rgn : HRGN;
 begin
 cfgchart.Width:=w;
 cfgchart.Height:=h;
@@ -299,6 +300,8 @@ with cnv do begin
  Pen.Mode:=pmCopy;
  Pen.Style:=psSolid;
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
+ Rgn:=CreateRectRgn(cfgplot^.xmin, cfgplot^.ymin, cfgplot^.xmax, cfgplot^.ymax);
+ SelectClipRgn(cnv.Handle, Rgn);
 end;
 InitLabel;
 if (cfgplot.starplot>0)and(cfgchart.drawsize<>starbmpw)and(Fstarshape<>nil) then begin
