@@ -1594,9 +1594,13 @@ else begin // fixed object
 end;
 case i of
 0 : begin
-    txt:=txt+html_b+copy(rsRise+blank15,1,17)+':'+htms_b+thr+blank+rsAzimuth+tAzr+html_br;
-    txt:=txt+html_b+copy(rsCulmination+blank15,1,17)+':'+htms_b+tht+html_br;
-    txt:=txt+html_b+copy(rsSet+blank15,1,17)+':'+htms_b+ths+blank+rsAzimuth+tAzs+html_br;
+    txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;
+    if trim(tazr)>'' then txt:=txt+rsAzimuth+tAzr+html_br
+                     else txt:=txt+html_br;
+    txt:=txt+html_b+rsCulmination+':'+htms_b+tht+html_br;
+    txt:=txt+html_b+rsSet+':'+htms_b+ths+blank;
+    if trim(tazs)>'' then txt:=txt+rsAzimuth+tAzs+html_br
+                     else txt:=txt+html_br;
     end;
 1 : begin
     txt:=txt+rsCircumpolar+html_br;
