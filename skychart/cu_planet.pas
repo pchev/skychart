@@ -2089,13 +2089,13 @@ case pla of
 11 :  Moon(jdt,ra,de,dm4,dm5,dm6,dm7,dm8,false);
 end;
 precession(jd2000,jd0,ra,de);
-har:=sidtim(jd0, hh-cfgsc^.TimeZone, cfgsc^.Obslongitude) - ra;
+har:=rmod(sidtim(jd0, hh-cfgsc^.TimeZone, cfgsc^.Obslongitude) - ra + pi2, pi2);
 sina:=(sin(deg2rad*cfgsc^.Obslatitude) * sin(de) + cos(deg2rad*cfgsc^.Obslatitude) * cos(de) * cos(har));
 end;
 
 procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ;var i: integer; cfgsc: Pconf_skychart);
 var hr,ht,hs,h1,h2,azr,azs,dist,q,diam : double;
-    ho,sinho,dt,hh,y1,y2,y3,x1,x2,x3,xmax,ymax,ymax0,ra,de,dm5,dm6,dm7,dm8,dm9: double;
+    ho,sinho,dt,hh,y1,y2,y3,x1,x2,x3,xmax,ymax,xmax2,ymax2,ymax0,ra,de,dm5,dm6,dm7,dm8,dm9: double;
     frise,fset,ftransit: boolean;
     n: integer;
 const  na='      ';
@@ -2114,12 +2114,15 @@ sinho:=sin(deg2rad*ho);
 dt := jd0;
 hh:=1;
 PlanetAltitude(pla,dt,hh-1.0,cfgsc,x1,y1);
+if x1>pi then x1:=x1-pi2;
 y1:=y1-sinho;
 // loop for event
 while ( (hh < 25) and ( (fset=false) or (frise=false) or (ftransit=false) )) do begin
    PlanetAltitude(pla,dt,hh,cfgsc,x2,y2);
+   if x2>pi then x2:=x2-pi2;
    y2:=y2-sinho;
    PlanetAltitude(pla,dt,hh+1.0,cfgsc,x3,y3);
+   if x3>pi then x3:=x3-pi2;
    y3:=y3-sinho;
    int4(y1,y2,y3,n,h1,h2,xmax,ymax);
    // one rise/set
@@ -2143,10 +2146,15 @@ while ( (hh < 25) and ( (fset=false) or (frise=false) or (ftransit=false) )) do 
       end;
    end;
    // transit
-   int4(x1,x2,x3,n,h1,h2,xmax,ymax);
-   if (n=1) then begin
-      ht := hh + h1;
-      ftransit := true;
+   if ((abs(xmax)<1) and (ymax>ymax0)) or
+      ((hh<23) and (hh>1) and (abs(xmax)<1.5) and (ymax>ymax0)) //this one to correct for some imprecision in the extrema when very near to a time boundary
+      then begin
+         int4(x1,x2,x3,n,h1,h2,xmax2,ymax2);
+         if (n=1) then begin
+            ht := hh + h1;
+            ymax0:=ymax;
+            ftransit := true;
+         end;
    end;
    y1 := y3;
    x1 := x3;
