@@ -3627,6 +3627,6 @@ LazarusResources.Add('Tf_splash','FORMDATA',[
   +#8'WordWrap'#9#0#0#6'TLabel'#9'LabelDate'#4'Left'#3#128#0#6'Height'#2#15#3'T'
   +'op'#3#170#0#5'Width'#2'%'#7'Caption'#6#4'Date'#5'Color'#7#6'clNone'#10'Font'
   +'.Color'#7#7'clWhite'#11'Font.Height'#2#241#11'ParentColor'#8#7'Visible'#8#0
-  +#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#8'Interval'#3#136#19#7'OnTimer'#7#11'T'
+  +#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#8'Interval'#3#184#11#7'OnTimer'#7#11'T'
   +'imer1Timer'#4'left'#2#8#3'top'#2#16#0#0#0
 ]);

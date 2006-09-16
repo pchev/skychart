@@ -68,6 +68,8 @@ Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
 Procedure Gal2Eq(l,b: double; var ar,de : double; c: Pconf_skychart);
 Procedure Eq2Gal(ar,de : double; var l,b: double; c: Pconf_skychart);
+//Function int3(n,y1,y2,y3 : double): double;
+Procedure int4(y1,y2,y3:double; var n: integer; var x1,x2,xmax,ymax: double);
 Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; c: Pconf_skychart; dho:double=9999);
           (* typeobj = 1 etoile ; typeobj = 2 soleil,lune
             ar,de equinox of the date
@@ -89,7 +91,7 @@ Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; c: Pconf_skychart );
              hp2      :  heure soir
            *)
 
-procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Pconf_skychart);
+//procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Pconf_skychart);
 
 
 implementation
@@ -969,16 +971,36 @@ end else begin
 end;
 end;
 
-Function int3(n,y1,y2,y3 : double): double;
+{Function int3(n,y1,y2,y3 : double): double;
 var a,b,c : double;
 begin
 a:= y2 - y1;
 b:= y3 - y2;
 c:= b - a;
 result:= y2 + n/2*(a + b + n*c);
+end;}
+
+procedure int4(y1,y2,y3:double; var n: integer; var x1,x2,xmax,ymax: double);
+var a, b, c, d, dx: double;
+begin
+n:=0;
+a:=(y1+y3)/2-y2;
+b:=(y3-y1)/2;
+c:=y2;
+xmax:=-b/(2*a);
+ymax:=(a*xmax+b)*xmax+c;
+d:=b*b-4.0*a*c;
+if (d>0) then begin
+   dx:=sqrt(d)/abs(a)/2;
+   x1:=xmax-dx;
+   x2:=xmax+dx;
+   if (abs(x1)<=1) then inc(n);
+   if (abs(x2)<=1) then inc(n);
+   if (x1<-1) then x1:=x2;
+end;
 end;
 
-procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Pconf_skychart);
+{procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Pconf_skychart);
 const ho : array[1..3] of Double = (-0.5667,-0.8733,0.125) ;
 var hs0,chh0,hh0,m0,m1,m2,a0,n,hsg,aa,dd,hl,h,dm,longref : double;
 begin
@@ -1057,7 +1079,7 @@ end else begin
       irc:=2;
     end;
 end;
-end;
+end;}
 
 Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; c: Pconf_skychart );
 VAR hh,st,st0 : Double ;

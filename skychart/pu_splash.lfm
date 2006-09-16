@@ -8465,7 +8465,7 @@ object f_splash: Tf_splash
   end
   object Timer1: TTimer
     Enabled = False
-    Interval = 5000
+    Interval = 3000
     OnTimer = Timer1Timer
     left = 8
     top = 16

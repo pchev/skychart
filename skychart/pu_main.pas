@@ -1102,7 +1102,6 @@ end;
 
 Procedure Tf_main.GetLanguage;
 var inif: TMemIniFile;
-    buf: string;
 begin
 if fileexists(configfile) then begin
   inif:=TMeminifile.create(configfile);
@@ -3876,7 +3875,6 @@ if f_config<>nil then f_config.SetLang;
 end;
 
 procedure Tf_main.SetLang;
-var i:integer;
 begin
 if cfgm.language='' then helpdir:=slash(appdir)+slash('doc')+slash('en')
    else helpdir:=slash(appdir)+slash('doc')+slash(trim(cfgm.language));
