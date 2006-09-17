@@ -1865,6 +1865,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
         sc.cfgsc.TrackOn:=false;
         IdentLabel.visible:=false;
         precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
+        if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc);
         sc.movetoradec(ar1,de1);
         Refresh;
         if sc.cfgsc.fov>0.17 then sc.FindatRaDec(ar1,de1,0.0005,true)
@@ -4156,6 +4157,7 @@ Findit:
       sc.cfgsc.TrackOn:=false;
       IdentLabel.visible:=false;
       precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
+      if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc);
       sc.movetoradec(ar1,de1);
       Refresh;
       if sc.cfgsc.fov>0.17 then sc.FindatRaDec(ar1,de1,0.0005,true)
