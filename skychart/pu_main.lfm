@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 283
+  Left = 284
   Height = 580
-  Top = 125
+  Top = 105
   Width = 860
   HorzScrollBar.Page = 859
   VertScrollBar.Page = 559
