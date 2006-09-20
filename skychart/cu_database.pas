@@ -1370,8 +1370,8 @@ end;
 end;
 
 procedure TCDCdb.GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
-var i:integer;
-    buf,bufutf8:string;
+var i,k:integer;
+    prev,buf,bufutf8:string;
 begin
 citylist.Clear;
 codelist.Clear;
@@ -1381,9 +1381,18 @@ if filter<>'' then buf:=buf+' and location like "'+filter+'" ';
 buf:=buf+' order by location limit '+inttostr(limit);
 db.Query(buf);
 i:=0;
+k:=0;
+prev:='';
 while i<db.RowCount do begin
   codelist.add(db.results[i][0]);
   buf:=db.results[i][1];
+  if buf=prev then begin
+    inc(k);
+    buf:=buf+'--'+inttostr(k);
+  end else begin
+    prev:=buf;
+    k:=0;
+  end;
   bufutf8:=utf8decode(buf);
   citylist.add(bufutf8);
   inc(i);

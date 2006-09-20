@@ -368,9 +368,12 @@ end;
 
 procedure Tf_config_observatory.citylistChange(Sender: TObject);
 var id,loctype,latitude,longitude,elevation,timezone:string;
+    p:integer;
 begin
 if LockChange then exit;
 csc.obsname:=citylist.text;
+p:=pos('--',csc.obsname);
+if p>0 then delete(csc.obsname,p,99);
 if citylist.ItemIndex<0 then begin curobsid:=0; exit; end;
 id:=citycode[citylist.ItemIndex];
 if cdb.GetCityLoc(id,loctype,latitude,longitude,elevation,timezone) then begin
