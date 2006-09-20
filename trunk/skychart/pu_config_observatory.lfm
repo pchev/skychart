@@ -56,27 +56,27 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 0
           object Label58: TLabel
             Left = 4
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 36
+            Width = 42
             Caption = 'Degree'
             Color = clNone
             ParentColor = False
           end
           object Label59: TLabel
             Left = 48
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 21
+            Width = 24
             Caption = 'Min.'
             Color = clNone
             ParentColor = False
           end
           object Label60: TLabel
             Left = 80
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 22
+            Width = 26
             Caption = 'Sec.'
             Color = clNone
             ParentColor = False
@@ -158,27 +158,27 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 1
           object Label61: TLabel
             Left = 4
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 36
+            Width = 42
             Caption = 'Degree'
             Color = clNone
             ParentColor = False
           end
           object Label62: TLabel
             Left = 48
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 21
+            Width = 24
             Caption = 'Min.'
             Color = clNone
             ParentColor = False
           end
           object Label63: TLabel
             Left = 80
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 22
+            Width = 26
             Caption = 'Sec.'
             Color = clNone
             ParentColor = False
@@ -260,9 +260,9 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 2
           object Label70: TLabel
             Left = 8
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 34
+            Width = 40
             Caption = 'Meters'
             Color = clNone
             ParentColor = False
@@ -298,9 +298,9 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 4
           object Label81: TLabel
             Left = 4
-            Height = 14
+            Height = 13
             Top = 20
-            Width = 98
+            Width = 119
             Caption = 'Local Time =  UTC +'
             Color = clNone
             ParentColor = False
@@ -378,7 +378,7 @@ object f_config_observatory: Tf_config_observatory
         end
         object VScrollBar: TScrollBar
           Left = 448
-          Height = 15
+          Height = 13
           Top = 251
           Width = 13
           Kind = sbVertical
@@ -397,18 +397,18 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 10
           object Label2: TLabel
             Left = 314
-            Height = 14
+            Height = 13
             Top = 35
-            Width = 17
+            Width = 18
             Caption = '+/-'
             Color = clNone
             ParentColor = False
           end
           object Label3: TLabel
             Left = 409
-            Height = 14
+            Height = 13
             Top = 35
-            Width = 19
+            Width = 23
             Caption = 'Km.'
             Color = clNone
             ParentColor = False
@@ -533,18 +533,18 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 3
           object Label82: TLabel
             Left = 21
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 86
+            Width = 107
             Caption = 'Pressure (millibar)'
             Color = clNone
             ParentColor = False
           end
           object Label83: TLabel
             Left = 141
-            Height = 14
+            Height = 13
             Top = 4
-            Width = 107
+            Width = 129
             Caption = 'Temperature (Celsius)'
             Color = clNone
             ParentColor = False
