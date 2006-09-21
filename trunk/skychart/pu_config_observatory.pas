@@ -372,7 +372,7 @@ var id,loctype,latitude,longitude,elevation,timezone:string;
 begin
 if LockChange then exit;
 csc.obsname:=citylist.text;
-p:=pos('--',csc.obsname);
+p:=pos(' -- ',csc.obsname);
 if p>0 then delete(csc.obsname,p,99);
 if citylist.ItemIndex<0 then begin curobsid:=0; exit; end;
 id:=citycode[citylist.ItemIndex];
@@ -392,6 +392,7 @@ end;
 
 procedure Tf_config_observatory.updcityClick(Sender: TObject);
 var country,location,lat,lon,elev,tz,buf: string;
+    p: integer;
 begin
 if countrylist.ItemIndex<0 then exit;
 if MessageDlg(rsUpdateOrAddT, mtWarning, [mbYes, mbNo], 0) = mrYes
@@ -402,6 +403,8 @@ if MessageDlg(rsUpdateOrAddT, mtWarning, [mbYes, mbNo], 0) = mrYes
     tz:=floattostr(csc.ObsTZ);
     country:=countrycode[countrylist.ItemIndex];
     location:=citylist.Text;
+    p:=pos(' -- ',location);
+    if p>0 then delete(location,p,99);
     buf:=cdb.UpdateCity(curobsid,country,location,'user',lat,lon,elev,tz);
     if buf='' then buf:=rsUpdatedSucce;
     vicinityClick(Sender);
@@ -427,10 +430,12 @@ end;
 procedure Tf_config_observatory.vicinityClick(Sender: TObject);
 var lon,lat,dd:double;
     country,oldcity:string;
-    i: integer;
+    i,p: integer;
 begin
 if countrylist.ItemIndex<0 then exit;
 oldcity:=trim(citylist.Text);
+p:=pos(' -- ',oldcity);
+if p>0 then delete(oldcity,p,99);
 lockChange:=true;
 citylist.Clear;
 citycode.Clear;
