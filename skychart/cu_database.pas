@@ -1388,7 +1388,7 @@ while i<db.RowCount do begin
   buf:=db.results[i][1];
   if buf=prev then begin
     inc(k);
-    buf:=buf+'--'+inttostr(k);
+    buf:=buf+' -- '+inttostr(k);
   end else begin
     prev:=buf;
     k:=0;
@@ -1400,8 +1400,8 @@ end;
 end;
 
 procedure TCDCdb.GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
-var lo1,lo2,la1,la2,buf:string;
-    i: integer;
+var lo1,lo2,la1,la2,buf,prev:string;
+    i,k: integer;
 begin
 la1:=floattostr(lat1);
 la2:=floattostr(lat2);
@@ -1412,9 +1412,18 @@ db.Query('select locid,location from cdc_location where '+
         '(latitude between '+la1+' and '+la2+') and '+
         '(longitude between '+lo1+' and '+lo2+') order by location limit '+inttostr(limit));
 i:=0;
+k:=0;
+prev:='';
 while i<db.RowCount do begin
   codelist.add(db.results[i][0]);
   buf:=db.results[i][1];
+  if buf=prev then begin
+    inc(k);
+    buf:=buf+' -- '+inttostr(k);
+  end else begin
+    prev:=buf;
+    k:=0;
+  end;
   citylist.add(utf8decode(buf));
   inc(i);
 end;

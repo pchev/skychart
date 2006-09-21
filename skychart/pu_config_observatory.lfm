@@ -15,7 +15,6 @@ object f_config_observatory: Tf_config_observatory
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
   object MainPanel: TPanel
     Height = 493
     Top = 8
@@ -99,7 +98,6 @@ object f_config_observatory: Tf_config_observatory
             Text = 'North'
           end
           object latdeg: TLongEdit
-            Name = 'latdeg'
             Left = 4
             Height = 22
             Hint = '0..90'
@@ -115,7 +113,6 @@ object f_config_observatory: Tf_config_observatory
             MaxValue = 90
           end
           object latmin: TLongEdit
-            Name = 'latmin'
             Left = 48
             Height = 22
             Hint = '0..59'
@@ -131,7 +128,6 @@ object f_config_observatory: Tf_config_observatory
             MaxValue = 59
           end
           object latsec: TLongEdit
-            Name = 'latsec'
             Left = 80
             Height = 22
             Hint = '0..59'
@@ -201,7 +197,6 @@ object f_config_observatory: Tf_config_observatory
             Text = 'East'
           end
           object longdeg: TLongEdit
-            Name = 'longdeg'
             Left = 4
             Height = 22
             Hint = '0..180'
@@ -217,7 +212,6 @@ object f_config_observatory: Tf_config_observatory
             MaxValue = 180
           end
           object longmin: TLongEdit
-            Name = 'longmin'
             Left = 48
             Height = 22
             Hint = '0..59'
@@ -233,7 +227,6 @@ object f_config_observatory: Tf_config_observatory
             MaxValue = 59
           end
           object longsec: TLongEdit
-            Name = 'longsec'
             Left = 80
             Height = 22
             Hint = '0..59'
@@ -268,7 +261,6 @@ object f_config_observatory: Tf_config_observatory
             ParentColor = False
           end
           object altmeter: TFloatEdit
-            Name = 'altmeter'
             Left = 4
             Height = 22
             Hint = '-500..9000'
@@ -306,7 +298,6 @@ object f_config_observatory: Tf_config_observatory
             ParentColor = False
           end
           object timez: TFloatEdit
-            Name = 'timez'
             Left = 124
             Height = 22
             Hint = '-12..12'
@@ -550,7 +541,6 @@ object f_config_observatory: Tf_config_observatory
             ParentColor = False
           end
           object pressure: TFloatEdit
-            Name = 'pressure'
             Left = 21
             Height = 22
             Hint = '0..1500'
@@ -567,7 +557,6 @@ object f_config_observatory: Tf_config_observatory
             NumericType = ntFixed
           end
           object temperature: TFloatEdit
-            Name = 'temperature'
             Left = 141
             Height = 22
             Hint = '-100..100'
