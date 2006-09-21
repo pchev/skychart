@@ -27,7 +27,7 @@ interface
 
 uses u_translation, Math, cu_database, Printers,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, CDC_IniFiles,
+  Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, IniFiles,
   jdcalendar, cu_planet, u_constant, pu_image, Buttons, ExtCtrls,
   ActnList, StdActns, LResources;
 

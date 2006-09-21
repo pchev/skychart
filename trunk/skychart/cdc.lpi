@@ -106,7 +106,7 @@
         <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
       </Item20>
     </RequiredPackages>
-    <Units Count="44">
+    <Units Count="43">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -393,26 +393,21 @@
         <UnitName Value="u_translation"/>
       </Unit40>
       <Unit41>
-        <Filename Value="cdc_inifiles.pp"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="CDC_IniFiles"/>
-      </Unit41>
-      <Unit42>
         <Filename Value="pu_about.pas"/>
         <ComponentName Value="f_about"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_about.lrs"/>
         <UnitName Value="pu_about"/>
-      </Unit42>
-      <Unit43>
+      </Unit41>
+      <Unit42>
         <Filename Value="pu_splash.pas"/>
         <ComponentName Value="f_splash"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceFilename Value="pu_splash.lrs"/>
         <UnitName Value="pu_splash"/>
-      </Unit43>
+      </Unit42>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
