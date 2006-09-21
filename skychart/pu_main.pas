@@ -38,7 +38,7 @@ uses
   pu_config_catalog, u_constant, u_util, blcksock, synsock, lazjpeg, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
-  ActnList, CDC_IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
+  ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
   LResources;
 
 type

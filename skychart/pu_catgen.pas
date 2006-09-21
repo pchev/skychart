@@ -27,7 +27,7 @@ interface
 uses u_translation, u_constant, u_util, pu_progressbar, pu_catgenadv, GSCconst, skylibcat, gcatunit,
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
-  Buttons, Math, CDC_Inifiles, Grids, mwFixedRecSort, mwCompFrom,
+  Buttons, Math, Inifiles, Grids, mwFixedRecSort, mwCompFrom,
   LResources, EditBtn, SynEdit;
 
 const

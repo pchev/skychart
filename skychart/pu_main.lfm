@@ -151,8 +151,6 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  PixelsPerInch = 90
-  TextHeight = 15
   object MultiDoc1: TMultiDoc
     Left = 24
     Height = 475
@@ -3086,7 +3084,7 @@ object f_main: Tf_main
         Action = TelescopeSync
       end
       object ChildControl: TPanel
-        Left = 829
+        Left = 830
         Height = 23
         Top = 2
         Width = 30
