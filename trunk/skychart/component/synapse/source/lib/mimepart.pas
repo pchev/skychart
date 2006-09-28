@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.007.023 |
+| Project : Ararat Synapse                                       | 002.007.005 |
 |==============================================================================|
 | Content: MIME support procedures and functions                               |
 |==============================================================================|
@@ -536,6 +536,7 @@ begin
   Result.DefaultCharset := FDefaultCharset;
   FSubParts.Add(Result);
   Result.SubLevel := FSubLevel + 1;
+  Result.MaxSubLevel := FMaxSubLevel;  
 end;
 
 {==============================================================================}
@@ -756,12 +757,16 @@ begin
   if FConvertCharset and (FPrimaryCode = MP_TEXT) then
     if (not FForcedHTMLConvert) and (uppercase(FSecondary) = 'HTML') then
     begin
+      b := false;
       t := uppercase(s);
       t := SeparateLeft(t, '</HEAD>');
-      t := SeparateRight(t, '<HEAD>');
-      t := ReplaceString(t, '"', '');
-      t := ReplaceString(t, ' ', '');
-      b := Pos('HTTP-EQUIV=CONTENT-TYPE', t) > 0;
+      if length(t) <> length(s) then
+      begin
+        t := SeparateRight(t, '<HEAD>');
+        t := ReplaceString(t, '"', '');
+        t := ReplaceString(t, ' ', '');
+        b := Pos('HTTP-EQUIV=CONTENT-TYPE', t) > 0;
+      end;
       if not b then
         s := CharsetConversion(s, FCharsetCode, FTargetCharset);
     end
