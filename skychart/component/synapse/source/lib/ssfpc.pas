@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 001.000.000 |
+| Project : Ararat Synapse                                       | 001.000.003 |
 |==============================================================================|
 | Content: Socket Independent Platform Layer - FreePascal definition include   |
 |==============================================================================|
@@ -79,8 +79,10 @@ function DestroySocketInterface: Boolean;
 const
   DLLStackName = '';
   WinsockLevel = $0202;
-  
-  cAnyHost = '127.0.0.1';
+
+  cLocalHost = '127.0.0.1';
+  cAnyHost = '0.0.0.0';
+  c6AnyHost = '::0';
 
 type
   TSocket = longint;
@@ -148,68 +150,66 @@ const
   SOCKET_ERROR			= -1;
 
 Const
-  IP_TOS             = 1;  { int; IP type of service and precedence.  }
-  IP_TTL             = 2;  { int; IP time to live.  }
-  IP_HDRINCL         = 3;  { int; Header is included with data.  }
-  IP_OPTIONS         = 4;  { ip_opts; IP per-packet options.  }
-  IP_ROUTER_ALERT    = 5;  { bool }
-  IP_RECVOPTS        = 6;  { bool }
-  IP_RETOPTS         = 7;  { bool }
-  IP_PKTINFO         = 8;  { bool }
-  IP_PKTOPTIONS      = 9;
-  IP_PMTUDISC        = 10; { obsolete name? }
-  IP_MTU_DISCOVER    = 10; { int; see below }
-  IP_RECVERR         = 11; { bool }
-  IP_RECVTTL         = 12; { bool }
-  IP_RECVTOS         = 13; { bool }
-  IP_MULTICAST_IF    = 32; { in_addr; set/get IP multicast i/f }
-  IP_MULTICAST_TTL   = 33; { u_char; set/get IP multicast ttl }
-  IP_MULTICAST_LOOP  = 34; { i_char; set/get IP multicast loopback }
-  IP_ADD_MEMBERSHIP  = 35; { ip_mreq; add an IP group membership }
-  IP_DROP_MEMBERSHIP = 36; { ip_mreq; drop an IP group membership }
+  IP_TOS             = sockets.IP_TOS;             { int; IP type of service and precedence.  }
+  IP_TTL             = sockets.IP_TTL;             { int; IP time to live.  }
+  IP_HDRINCL         = sockets.IP_HDRINCL;         { int; Header is included with data.  }
+  IP_OPTIONS         = sockets.IP_OPTIONS;         { ip_opts; IP per-packet options.  }
+//  IP_ROUTER_ALERT    = sockets.IP_ROUTER_ALERT;    { bool }
+  IP_RECVOPTS        = sockets.IP_RECVOPTS;        { bool }
+  IP_RETOPTS         = sockets.IP_RETOPTS;         { bool }
+//  IP_PKTINFO         = sockets.IP_PKTINFO;         { bool }
+//  IP_PKTOPTIONS      = sockets.IP_PKTOPTIONS;
+//  IP_PMTUDISC        = sockets.IP_PMTUDISC;        { obsolete name? }
+//  IP_MTU_DISCOVER    = sockets.IP_MTU_DISCOVER;    { int; see below }
+//  IP_RECVERR         = sockets.IP_RECVERR;         { bool }
+//  IP_RECVTTL         = sockets.IP_RECVTTL;         { bool }
+//  IP_RECVTOS         = sockets.IP_RECVTOS;         { bool }
+  IP_MULTICAST_IF    = sockets.IP_MULTICAST_IF;    { in_addr; set/get IP multicast i/f }
+  IP_MULTICAST_TTL   = sockets.IP_MULTICAST_TTL;   { u_char; set/get IP multicast ttl }
+  IP_MULTICAST_LOOP  = sockets.IP_MULTICAST_LOOP;  { i_char; set/get IP multicast loopback }
+  IP_ADD_MEMBERSHIP  = sockets.IP_ADD_MEMBERSHIP;  { ip_mreq; add an IP group membership }
+  IP_DROP_MEMBERSHIP = sockets.IP_DROP_MEMBERSHIP; { ip_mreq; drop an IP group membership }
 
-  SOL_SOCKET    = 1;
+  SOL_SOCKET    = sockets.SOL_SOCKET;
 
-  SO_DEBUG      = 1;
-  SO_REUSEADDR  = 2;
-  SO_TYPE       = 3;
-  SO_ERROR      = 4;
-  SO_DONTROUTE  = 5;
-  SO_BROADCAST  = 6;
-  SO_SNDBUF     = 7;
-  SO_RCVBUF     = 8;
-  SO_KEEPALIVE  = 9;
-  SO_OOBINLINE  = 10;
-  SO_NO_CHECK   = 11;
-  SO_PRIORITY   = 12;
-  SO_LINGER     = 13;
-  SO_BSDCOMPAT  = 14;
-  SO_REUSEPORT  = 15;
-  SO_PASSCRED   = 16;
-  SO_PEERCRED   = 17;
-  SO_RCVLOWAT   = 18;
-  SO_SNDLOWAT   = 19;
-  SO_RCVTIMEO   = 20;
-  SO_SNDTIMEO   = 21;
+  SO_DEBUG      = sockets.SO_DEBUG;
+  SO_REUSEADDR  = sockets.SO_REUSEADDR;
+  SO_TYPE       = sockets.SO_TYPE;
+  SO_ERROR      = sockets.SO_ERROR;
+  SO_DONTROUTE  = sockets.SO_DONTROUTE;
+  SO_BROADCAST  = sockets.SO_BROADCAST;
+  SO_SNDBUF     = sockets.SO_SNDBUF;
+  SO_RCVBUF     = sockets.SO_RCVBUF;
+  SO_KEEPALIVE  = sockets.SO_KEEPALIVE;
+  SO_OOBINLINE  = sockets.SO_OOBINLINE;
+//  SO_NO_CHECK   = sockets.SO_NO_CHECK;
+//  SO_PRIORITY   = sockets.SO_PRIORITY;
+  SO_LINGER     = sockets.SO_LINGER;
+//  SO_BSDCOMPAT  = sockets.SO_BSDCOMPAT;
+//  SO_REUSEPORT  = sockets.SO_REUSEPORT;
+//  SO_PASSCRED   = sockets.SO_PASSCRED;
+//  SO_PEERCRED   = sockets.SO_PEERCRED;
+  SO_RCVLOWAT   = sockets.SO_RCVLOWAT;
+  SO_SNDLOWAT   = sockets.SO_SNDLOWAT;
+  SO_RCVTIMEO   = sockets.SO_RCVTIMEO;
+  SO_SNDTIMEO   = sockets.SO_SNDTIMEO;
 { Security levels - as per NRL IPv6 - don't actually do anything }
-  SO_SECURITY_AUTHENTICATION       = 22;
-  SO_SECURITY_ENCRYPTION_TRANSPORT = 23;
-  SO_SECURITY_ENCRYPTION_NETWORK   = 24;
-  SO_BINDTODEVICE                  = 25;
+//  SO_SECURITY_AUTHENTICATION       = sockets.SO_SECURITY_AUTHENTICATION;
+//  SO_SECURITY_ENCRYPTION_TRANSPORT = sockets.SO_SECURITY_ENCRYPTION_TRANSPORT;
+//  SO_SECURITY_ENCRYPTION_NETWORK   = sockets.SO_SECURITY_ENCRYPTION_NETWORK;
+//  SO_BINDTODEVICE                  = sockets.SO_BINDTODEVICE;
 { Socket filtering }
-  SO_ATTACH_FILTER = 26;
-  SO_DETACH_FILTER = 27;
+//  SO_ATTACH_FILTER = sockets.SO_ATTACH_FILTER;
+//  SO_DETACH_FILTER = sockets.SO_DETACH_FILTER;
 
   SOMAXCONN       = 1024;
 
-  IPV6_UNICAST_HOPS     = 16;
-  IPV6_MULTICAST_IF     = 17;
-  IPV6_MULTICAST_HOPS   = 18;
-  IPV6_MULTICAST_LOOP   = 19;
-  IPV6_JOIN_GROUP       = 20;
-  IPV6_LEAVE_GROUP      = 21;
-
-  MSG_NOSIGNAL  = $4000;                // Do not generate SIGPIPE.
+  IPV6_UNICAST_HOPS     = sockets.IPV6_UNICAST_HOPS;
+  IPV6_MULTICAST_IF     = sockets.IPV6_MULTICAST_IF;
+  IPV6_MULTICAST_HOPS   = sockets.IPV6_MULTICAST_HOPS;
+  IPV6_MULTICAST_LOOP   = sockets.IPV6_MULTICAST_LOOP;
+  IPV6_JOIN_GROUP       = sockets.IPV6_JOIN_GROUP;
+  IPV6_LEAVE_GROUP      = sockets.IPV6_LEAVE_GROUP;
 
 const
   SOCK_STREAM     = 1;               { stream socket }
@@ -238,14 +238,15 @@ type
 { Structure used for manipulating linger option. }
   PLinger = ^TLinger;
   TLinger = packed record
-    l_onoff: word;
-    l_linger: word;
+    l_onoff: integer;
+    l_linger: integer;
   end;
 
 const
 
-  MSG_OOB       = $01;                  // Process out-of-band data.
-  MSG_PEEK      = $02;                  // Peek at incoming messages.
+  MSG_OOB       = sockets.MSG_OOB;      // Process out-of-band data.
+  MSG_PEEK      = sockets.MSG_PEEK;     // Peek at incoming messages.
+  MSG_NOSIGNAL  = sockets.MSG_NOSIGNAL; // Do not generate SIGPIPE.
 
 const
   WSAEINTR = ESysEINTR;
@@ -657,7 +658,7 @@ function SetVarSin(var Sin: TVarSin; IP, Port: string; Family, SockProtocol, Soc
 var
   TwoPass: boolean;
   f1, f2: integer;
-  
+
   function GetAddr(f:integer): integer;
   var
     a4: array [1..1] of in_addr;
@@ -667,30 +668,46 @@ var
     case f of
       AF_INET:
         begin
-          a4[1].s_addr := 0;
-          Result := WSAHOST_NOT_FOUND;
-          a4[1] := StrTonetAddr(IP);
-          if a4[1].s_addr = INADDR_ANY then
-            Resolvename(ip, a4);
-          if a4[1].s_addr <> INADDR_ANY then
+          if IP = cAnyHost then
           begin
             Sin.sin_family := AF_INET;
-            sin.sin_addr := a4[1];
             Result := 0;
+          end
+          else
+          begin
+            a4[1].s_addr := 0;
+            Result := WSAHOST_NOT_FOUND;
+            a4[1] := StrTonetAddr(IP);
+            if a4[1].s_addr = INADDR_ANY then
+              Resolvename(ip, a4);
+            if a4[1].s_addr <> INADDR_ANY then
+            begin
+              Sin.sin_family := AF_INET;
+              sin.sin_addr := a4[1];
+              Result := 0;
+            end;
           end;
         end;
       AF_INET6:
         begin
-          Result := WSAHOST_NOT_FOUND;
-          SET_IN6_IF_ADDR_ANY(@a6[1]);
-          a6[1] := StrTonetAddr6(IP);
-          if IN6_IS_ADDR_UNSPECIFIED(@a6[1]) then
-            Resolvename6(ip, a6);
-          if IN6_IS_ADDR_UNSPECIFIED(@a6[1]) then
+          if IP = c6AnyHost then
           begin
             Sin.sin_family := AF_INET6;
-            sin.sin6_addr := a6[1];
             Result := 0;
+          end
+          else
+          begin
+            Result := WSAHOST_NOT_FOUND;
+            SET_IN6_IF_ADDR_ANY(@a6[1]);
+            a6[1] := StrTonetAddr6(IP);
+            if IN6_IS_ADDR_UNSPECIFIED(@a6[1]) then
+              Resolvename6(ip, a6);
+            if IN6_IS_ADDR_UNSPECIFIED(@a6[1]) then
+            begin
+              Sin.sin_family := AF_INET6;
+              sin.sin6_addr := a6[1];
+              Result := 0;
+            end;
           end;
         end;
     end;
@@ -776,7 +793,7 @@ begin
   end;
   
   if IPList.Count = 0 then
-    IPList.Add(cAnyHost);
+    IPList.Add(cLocalHost);
 end;
 
 function ResolvePort(Port: string; Family, SockProtocol, SockType: integer): Word;

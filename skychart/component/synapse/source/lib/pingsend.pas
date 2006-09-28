@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 003.001.007 |
+| Project : Ararat Synapse                                       | 003.001.008 |
 |==============================================================================|
 | Content: PING sender                                                         |
 |==============================================================================|
@@ -287,6 +287,12 @@ begin
       IPHeadPtr := Pointer(FBuffer);
       IpHdrLen := (IPHeadPtr^.VerLen and $0F) * 4;
       IcmpEchoHeaderPtr := @FBuffer[IpHdrLen + 1];
+    end;
+  //check for timeout
+    if TickDelta(x, GetTick) > FTimeout then
+    begin
+      t := false;
+      Break;
     end;
   //it discard sometimes possible 'echoes' of previosly sended packet
   //or other unwanted ICMP packets...

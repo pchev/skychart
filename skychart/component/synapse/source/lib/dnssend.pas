@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.007.001 |
+| Project : Ararat Synapse                                       | 002.007.003 |
 |==============================================================================|
 | Content: DNS client                                                          |
 |==============================================================================|
@@ -60,7 +60,7 @@ interface
 
 uses
   SysUtils, Classes,
-  blcksock, synautil, synsock;
+  blcksock, synautil, synaip, synsock;
 
 const
   cDnsProtocol = 'domain';
@@ -120,13 +120,11 @@ type
     FSock: TUDPBlockSocket;
     FTCPSock: TTCPBlockSocket;
     FUseTCP: Boolean;
-    FAnsferInfo: TStringList;
+    FAnswerInfo: TStringList;
     FNameserverInfo: TStringList;
     FAdditionalInfo: TStringList;
     FAuthoritative: Boolean;
     FTruncated: Boolean;
-    function ReverseIP(Value: AnsiString): AnsiString;
-    function ReverseIP6(Value: AnsiString): AnsiString;
     function CompressName(const Value: AnsiString): AnsiString;
     function CodeHeader: AnsiString;
     function CodeQuery(const Name: AnsiString; QType: Integer): AnsiString;
@@ -177,16 +175,16 @@ type
       4-not implemented, 5-refused.}
     property RCode: Integer read FRCode;
 
-    {:@True, if ansfer is authoritative.}
+    {:@True, if answer is authoritative.}
     property Authoritative: Boolean read FAuthoritative;
 
-    {:@True, if ansfer is truncated to 512 bytes.}
+    {:@True, if answer is truncated to 512 bytes.}
     property Truncated: Boolean read FTRuncated;
 
     {:Detailed informations from name server reply. One record per line. Record
      have comma delimited entries with type number, TTL and data filelds.
      This information contains detailed information about query reply.}
-    property AnsferInfo: TStringList read FAnsferInfo;
+    property AnswerInfo: TStringList read FAnswerInfo;
 
     {:Detailed informations from name server reply. One record per line. Record
      have comma delimited entries with type number, TTL and data filelds.
@@ -218,7 +216,7 @@ begin
   FUseTCP := False;
   FTimeout := 10000;
   FTargetPort := cDnsProtocol;
-  FAnsferInfo := TStringList.Create;
+  FAnswerInfo := TStringList.Create;
   FNameserverInfo := TStringList.Create;
   FAdditionalInfo := TStringList.Create;
   Randomize;
@@ -226,38 +224,12 @@ end;
 
 destructor TDNSSend.Destroy;
 begin
-  FAnsferInfo.Free;
+  FAnswerInfo.Free;
   FNameserverInfo.Free;
   FAdditionalInfo.Free;
   FTCPSock.Free;
   FSock.Free;
   inherited Destroy;
-end;
-
-function TDNSSend.ReverseIP(Value: AnsiString): AnsiString;
-var
-  x: Integer;
-begin
-  Result := '';
-  repeat
-    x := LastDelimiter('.', Value);
-    Result := Result + '.' + Copy(Value, x + 1, Length(Value) - x);
-    Delete(Value, x, Length(Value) - x + 1);
-  until x < 1;
-  if Length(Result) > 0 then
-    if Result[1] = '.' then
-      Delete(Result, 1, 1);
-end;
-
-function TDNSSend.ReverseIP6(Value: AnsiString): AnsiString;
-var
-  ip6: TIp6bytes;
-  n: integer;
-begin
-  ip6 := StrToIP6(Value);
-  Result := char(ip6[15]);
-  for n := 14 downto 0 do
-    Result := Result + '.' + char(ip6[n]);
 end;
 
 function TDNSSend.CompressName(const Value: AnsiString): AnsiString;
@@ -483,7 +455,7 @@ var
 begin
   Result := False;
   Reply.Clear;
-  FAnsferInfo.Clear;
+  FAnswerInfo.Clear;
   FNameserverInfo.Clear;
   FAdditionalInfo.Clear;
   FAuthoritative := False;
@@ -511,7 +483,7 @@ begin
       if (ancount > 0) and (Length(Buf) > i) then // decode reply
         for n := 1 to ancount do
         begin
-          s := DecodeResource(i, FAnsferInfo, QType);
+          s := DecodeResource(i, FAnswerInfo, QType);
           if s <> '' then
             Reply.Add(s);
         end;
@@ -557,11 +529,11 @@ begin
     try
       repeat
         b := DecodeResponse(FBuffer, Reply, QType);
-        if (t.Count > 1) and (AnsferInfo.Count > 0) then  //find end of transfer
-          b := b and (t[0] <> AnsferInfo[AnsferInfo.count - 1]);
+        if (t.Count > 1) and (AnswerInfo.Count > 0) then  //find end of transfer
+          b := b and (t[0] <> AnswerInfo[AnswerInfo.count - 1]);
         if b then
         begin
-          t.AddStrings(AnsferInfo);
+          t.AddStrings(AnswerInfo);
           FBuffer := RecvTCPResponse(WorkSock);
           if FBuffer = '' then
             Break;

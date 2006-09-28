@@ -58,7 +58,7 @@ interface
 
 uses
   SysUtils, Classes,
-  blcksock, synautil, synacode, synsock;
+  blcksock, synautil, synaip, synacode, synsock;
 
 const
   cHttpProtocol = '80';

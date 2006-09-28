@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 003.004.007 |
+| Project : Ararat Synapse                                       | 003.004.008 |
 |==============================================================================|
 | Content: FTP client                                                          |
 |==============================================================================|
@@ -59,7 +59,7 @@ interface
 
 uses
   SysUtils, Classes,
-  blcksock, synautil, synsock;
+  blcksock, synautil, synaip, synsock;
 
 const
   cFtpProtocol = 'ftp';
@@ -1220,6 +1220,7 @@ begin
   //VMS
   FMasks.add('v*$  DD TTT YYYY hh mm');
   FMasks.add('v*$!DD TTT YYYY hh mm');
+  FMasks.add('n*$                 YYYY MM DD hh mm$S*');
   //AS400
   FMasks.add('!S*$MM DD YY hh mm ss !n*');
   FMasks.add('!S*$DD MM YY hh mm ss !n*');
@@ -1246,7 +1247,7 @@ begin
   //tandem
   FMasks.add('nnnnnnnn                   SSSSSSS DD TTT YY hh mm ss');
   //MVS
-  FMasks.add('-             YYYY MM DD                     SSSSS   d=O  n*');
+  FMasks.add('-             YYYY MM DD                     SSSSS   d=O n*');
   //BullGCOS8
   FMasks.add('             $S* MM DD YY hh mm ss  !n*');
   FMasks.add('d            $S* MM DD YY           !n*');

@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.000.006 |
+| Project : Ararat Synapse                                       | 002.000.007 |
 |==============================================================================|
 | Content: Socket Independent Platform Layer - Linux definition include        |
 |==============================================================================|
@@ -356,8 +356,8 @@ type
 { Structure used for manipulating linger option. }
   PLinger = ^TLinger;
   TLinger = packed record
-    l_onoff: u_short;
-    l_linger: u_short;
+    l_onoff: integer;
+    l_linger: integer;
   end;
 
 const

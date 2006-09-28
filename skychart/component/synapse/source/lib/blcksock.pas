@@ -1,5 +1,5 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 009.001.000 |
+| Project : Ararat Synapse                                       | 009.001.003 |
 |==============================================================================|
 | Content: Library base                                                        |
 |==============================================================================|
@@ -89,7 +89,7 @@ interface
 uses
   SysUtils, Classes,
   synafpc,
-  synsock, synautil, synacode
+  synsock, synautil, synacode, synaip
 {$IFDEF CIL}
   ,System.Net
   ,System.Net.Sockets
@@ -99,7 +99,7 @@ uses
 
 const
 
-  SynapseRelease = '37b4';
+  SynapseRelease = '37';
 
   cLocalhost = '127.0.0.1';
   cAnyHost = '0.0.0.0';
@@ -289,7 +289,6 @@ type
     procedure SetNonBlockMode(Value: Boolean);
     procedure SetTTL(TTL: integer);
     function GetTTL:integer;
-    function IsNewApi: Boolean;
     procedure SetFamily(Value: TSocketFamily); virtual;
     procedure SetSocket(Value: TSocket); virtual;
     function GetWsaData: TWSAData;
@@ -312,6 +311,7 @@ type
     procedure LimitBandwidth(Length: Integer; MaxB: integer; var Next: LongWord);
     procedure SetBandwidth(Value: Integer);
     function TestStopFlag: Boolean;
+    procedure InternalSendStream(const Stream: TStream; WithSize, Indy: boolean); virtual;
   public
     constructor Create;
 
@@ -758,8 +758,8 @@ type
      specify if is used IPv4 (dafault - @true) or IPv6.}
     property PreferIP4: Boolean read FPreferIP4 Write FPreferIP4;
 
-    {:By dafault (@false) is all timeouts used as timeout between two packets in
-     reading operations. If you set this to @true, then Timeouts is for overall
+    {:By default (@true) is all timeouts used as timeout between two packets in
+     reading operations. If you set this to @false, then Timeouts is for overall
      reading operation!}
     property InterPacketTimeout: Boolean read FInterPacketTimeout Write FInterPacketTimeout;
 
@@ -1444,11 +1444,6 @@ begin
   inherited Destroy;
 end;
 
-function TBlockSocket.IsNewApi: Boolean;
-begin
-  Result := synsock.IsNewApi(FamilyToAF(FFamily));
-end;
-
 function TBlockSocket.FamilyToAF(f: TSocketFamily): TAddrFamily;
 begin
   case f of
@@ -1919,22 +1914,30 @@ begin
 end;
 
 procedure TBlockSocket.SendBlock(const Data: AnsiString);
+var
+  i: integer;
 begin
-  SendInteger(Length(data));
-  SendString(Data);
+  i := SwapBytes(Length(data));
+  SendString(Codelongint(i) + Data);
 end;
 
-procedure TBlockSocket.SendStreamRaw(const Stream: TStream);
+procedure TBlockSocket.InternalSendStream(const Stream: TStream; WithSize, Indy: boolean);
 var
-  si: integer;
+  si, l: integer;
   x, y, yr: integer;
   s: AnsiString;
+  b: boolean;
 {$IFDEF CIL}
   buf: TMemory;
 {$ENDIF}
 begin
   si := Stream.Size - Stream.Position;
+  if not indy then
+    l := SwapBytes(si)
+  else
+    l := si;
   x := 0;
+  b := true;
   while x < si do
   begin
     y := si - x;
@@ -1945,6 +1948,11 @@ begin
     yr := Stream.read(buf, y);
     if yr > 0 then
     begin
+      if WithSize and b then
+      begin
+        b := false;
+        SendString(CodeLongInt(l));
+      end;
       SendBuffer(buf, yr);
       if FLastError <> 0 then
         break;
@@ -1958,7 +1966,13 @@ begin
     if yr > 0 then
     begin
       SetLength(s, yr);
-      SendString(s);
+      if WithSize and b then
+      begin
+        b := false;
+        SendString(CodeLongInt(l) + s);
+      end
+      else
+        SendString(s);
       if FLastError <> 0 then
         break;
       Inc(x, yr);
@@ -1969,23 +1983,19 @@ begin
   end;
 end;
 
-procedure TBlockSocket.SendStreamIndy(const Stream: TStream);
-var
-  si: integer;
+procedure TBlockSocket.SendStreamRaw(const Stream: TStream);
 begin
-  si := Stream.Size - Stream.Position;
-  si := synsock.HToNL(si);
-  SendInteger(si);
-  SendStreamRaw(Stream);
+  InternalSendStream(Stream, false, false);
+end;
+
+procedure TBlockSocket.SendStreamIndy(const Stream: TStream);
+begin
+  InternalSendStream(Stream, true, true);
 end;
 
 procedure TBlockSocket.SendStream(const Stream: TStream);
-var
-  si: integer;
 begin
-  si := Stream.Size - Stream.Position;
-  SendInteger(si);
-  SendStreamRaw(Stream);
+  InternalSendStream(Stream, true, false);
 end;
 
 function TBlockSocket.RecvBuffer(Buffer: TMemory; Length: Integer): Integer;
@@ -2107,8 +2117,10 @@ begin
   end
   else
   begin
+    {$IFDEF WIN32}
     //not drain CPU on large downloads...
     Sleep(0);
+    {$ENDIF}
     x := WaitingData;
     if x > 0 then
     begin
@@ -2155,6 +2167,15 @@ begin
       else
         FLastError := WSAETIMEDOUT;
     end;
+  end;
+  if FConvertLineEnd and (Result <> '') then
+  begin
+    if FLastCR and (Result[1] = LF) then
+      Delete(Result, 1, 1);
+    if FLastLF and (Result[1] = CR) then
+      Delete(Result, 1, 1);
+    FLastCR := False;
+    FLastLF := False;
   end;
   ExceptCheck;
 end;
@@ -2213,12 +2234,6 @@ begin
     if Length(s) > 0 then
       if CorCRLF then
       begin
-        if FLastCR and (s[1] = LF) then
-          Delete(s, 1, 1);
-        if FLastLF and (s[1] = CR) then
-          Delete(s, 1, 1);
-        FLastCR := False;
-        FLastLF := False;
         t := '';
         x := PosCRLF(s, t);
         tl := Length(t);
