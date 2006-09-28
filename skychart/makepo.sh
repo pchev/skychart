@@ -5,5 +5,5 @@
 
 # Update first the path to your Lazarus installation and run "make" in lazarus/tools
 
-~/lazarus/pp/bin/rstconv -i units/u_translation.rst -o language/skychart.po
+rstconv -i units/linux/u_translation.rst -o language/skychart.po
 ~/lazarus/tools/updatepofiles language/skychart.po
