@@ -1,5 +1,3 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('Tf_calendar','FORMDATA',[
   'TPF0'#11'Tf_calendar'#10'f_calendar'#4'Left'#3'"'#1#6'Height'#3#137#1#3'Top'
   +#2'n'#5'Width'#3#131#2#18'HorzScrollBar.Page'#3#130#2#18'VertScrollBar.Page'
@@ -199,7 +197,7 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#9#8'TabOrder'#2#1#5'Value'#2#1#8'MaxValue'#3#15''''#0#0#11'TTimePicker'#4'T'
   +'ime'#4'Left'#2'H'#6'Height'#2#23#3'Top'#2'*'#5'Width'#2'K'#8'EditMask'#6#13
   +'!99:99:99;1; '#9'MaxLength'#2#8#11'ParentColor'#8#8'TabOrder'#2#2#4'Text'#6
-  +#8'19:57:01'#4'Time'#5#0'@'#211#17#251#142#205#212#254'?'#0#0#13'TJDDatePick'
+  +#8'19:57:01'#4'Time'#5#0'8'#211#17#251#142#205#212#254'?'#0#0#13'TJDDatePick'
   +'er'#5'Date1'#4'Left'#2'H'#6'Height'#2#23#3'Top'#2#8#5'Width'#2'P'#5'Color'#7
   +#9'clBtnFace'#8'OnChange'#7#11'Date1Change'#8'TabOrder'#2#4#4'Text'#6#10'200'
   +'6.02.01'#11'ButtonWidth'#2#23#10'Glyph.Data'#10#154#2#0#0#150#2#0#0'/* XPM '
@@ -428,16 +426,15 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#0#10'TFloatEdit'#8'magchart'#4'Left'#3#232#0#6'Height'#2#21#4'Hint'#6#5'0..'
   +'99'#5'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'Parent'
   +'ShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#4#5'Value'#5#0#0#0#0#0#0#0#208#1'@'
-  +#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#9'TCheckBox'#11'SatChartBox'#4'Lef'
-  +'t'#3#208#1#6'Height'#2#13#5'Width'#2'q'#7'Caption'#6#21'in current chart on'
-  +'ly'#8'TabOrder'#2#3#0#0#10'TFloatEdit'#8'maglimit'#4'Left'#3#144#0#6'Height'
-  +#2#21#4'Hint'#6#5'0..99'#5'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'#9'MaxLe'
-  +'ngth'#2#4#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2
-  +#1#5'Value'#5#0#0#0#0#0#0#0#128#1'@'#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0
-  +#0#0#0#11'TActionList'#11'ActionList1'#4'left'#3#136#1#3'top'#2#8#0#13'THelp'
-  +'Contents'#13'HelpContents1'#8'Category'#6#4'Help'#7'Caption'#6#9'&Contents'
-  +#7'Enabled'#8#4'Hint'#6#13'Help Contents'#10'ImageIndex'#2'('#9'OnExecute'#7
-  +#20'HelpContents1Execute'#8'ShortCut'#2'p'#0#0#0#11'TSaveDialog'#11'SaveDial'
-  +'og1'#5'Title'#6#12'Save file as'#11'FilterIndex'#2#0#4'left'#3#136#1#3'top'
-  +#2'@'#0#0#0
+  +#8'MaxValue'#2'c'#0#0#9'TCheckBox'#11'SatChartBox'#4'Left'#3#208#1#6'Height'
+  +#2#13#5'Width'#2'q'#7'Caption'#6#21'in current chart only'#8'TabOrder'#2#3#0
+  +#0#10'TFloatEdit'#8'maglimit'#4'Left'#3#144#0#6'Height'#2#21#4'Hint'#6#5'0..'
+  +'99'#5'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#4#11'ParentC'
+  +'olor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#5'Value'#2#4#8'M'
+  +'axValue'#2'c'#0#0#0#0#0#11'TActionList'#11'ActionList1'#4'left'#3#136#1#3't'
+  +'op'#2#8#0#13'THelpContents'#13'HelpContents1'#8'Category'#6#4'Help'#7'Capti'
+  +'on'#6#9'&Contents'#7'Enabled'#8#4'Hint'#6#13'Help Contents'#10'ImageIndex'#2
+  +'('#9'OnExecute'#7#20'HelpContents1Execute'#8'ShortCut'#2'p'#0#0#0#11'TSaveD'
+  +'ialog'#11'SaveDialog1'#5'Title'#6#12'Save file as'#11'FilterIndex'#2#0#4'le'
+  +'ft'#3#136#1#3'top'#2'@'#0#0#0
 ]);

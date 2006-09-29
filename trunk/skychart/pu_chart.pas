@@ -200,7 +200,7 @@ type
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:conf_main);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
-    function  IdentXY(X, Y: Integer):boolean;
+    function  IdentXY(X, Y: Integer;searchcenter: boolean= true):boolean;
     procedure Identdetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
     function  LongLabel(txt:string):string;
@@ -1072,7 +1072,7 @@ end
 else identlabel.Visible:=false;
 end;
 
-function Tf_chart.IdentXY(X, Y: Integer):boolean;
+function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean=true):boolean;
 var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,dist:double;
     pa,lasttype,lastobj: integer;
     txt,lastname,lasttrname,buf: string;
@@ -1092,8 +1092,8 @@ lasttrname:=sc.cfgsc.TrackName;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=abs(2/sc.cfgsc.BxGlb); // search a 2 pixel radius
-result:=sc.FindatRaDec(ra,dec,dx);
-if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx);  //else 6 pixel
+result:=sc.FindatRaDec(ra,dec,dx,searchcenter);
+if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter);  //else 6 pixel
 ShowIdentLabel;
 if showdist then begin
    ra:=sc.cfgsc.FindRA;
@@ -1182,11 +1182,14 @@ if MovingCircle then begin
    end;
 end
 else
-if (button=mbLeft)and(not(ssShift in shift)) then begin
+if (button=mbLeft)and((shift=[])or(shift=[ssLeft])) then begin
    if zoomstep>0 then
      ZoomBox(3,X,Y)
    else
      IdentXY(x,y);
+end
+else if (button=mbLeft)and(ssCtrl in shift) then begin
+   IdentXY(x,y,false);
 end
 else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ZoomBox(4,0,0);
@@ -2547,7 +2550,7 @@ if locked then exit;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=1/sc.cfgsc.BxGlb; // search a 1 pixel radius
-sc.FindatRaDec(ra,dec,dx);
+sc.FindatRaDec(ra,dec,dx,true);
 if sc.cfgsc.FindDesc>'' then begin
    if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption,true,self);
    identlabelClick(Self);

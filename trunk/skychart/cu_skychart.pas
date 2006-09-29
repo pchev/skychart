@@ -113,7 +113,7 @@ Tskychart = class (TComponent)
     procedure SetFOV(f:double);
     function PoleRot2000(ra,dec:double):double;
     procedure FormatCatRec(rec:Gcatrec; var desc:string);
-    function FindatRaDec(ra,dec,dx: double;showall:boolean=false):boolean;
+    function FindatRaDec(ra,dec,dx: double; searchcenter: boolean; showall:boolean=false):boolean;
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 //    Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
     procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
@@ -1555,7 +1555,7 @@ begin
  cfgsc^.FindNote:='';
 end;
 
-function Tskychart.FindatRaDec(ra,dec,dx: double;showall:boolean=false):boolean;
+function Tskychart.FindatRaDec(ra,dec,dx: double;searchcenter: boolean; showall:boolean=false):boolean;
 var x1,x2,y1,y2:double;
     rec: Gcatrec;
     desc,n,m,d: string;
@@ -1577,7 +1577,7 @@ if showall then begin
 end;
 // search catalog object
 try
-  result:=fcatalog.Findobj(x1,y1,x2,y2,false,cfgsc,rec);
+  result:=fcatalog.Findobj(x1,y1,x2,y2,false,searchcenter,cfgsc,rec);
 finally
   Fcatalog.CloseCat;
   if showall then begin
@@ -1621,7 +1621,7 @@ var x1,x2,y1,y2,xx1,yy1:double;
 const maxln : integer = 2000;
 Procedure FindatPosCat(cat:integer);
 begin
- ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,false,trunc,cfgsc,rec);
+ ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,false,trunc,true,cfgsc,rec);
  while ok do begin
    if i>maxln then break;
    projection(rec.ra,rec.dec,xx1,yy1,true,cfgsc) ;
@@ -1631,7 +1631,7 @@ begin
       text:=text+desc+crlf;
       inc(i);
    end;   
-   ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,true,trunc,cfgsc,rec);
+   ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,true,trunc,true,cfgsc,rec);
  end;
  fcatalog.CloseCat;
 end;
