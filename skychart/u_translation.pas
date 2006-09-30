@@ -1052,6 +1052,11 @@ resourcestring
   rsLicenseAgree = 'License Agreement';
   rsPlutoIsAPlan = 'Pluto is a planet.';
   rsUncheckToAvo = 'Uncheck to avoid duplicate with minor planet 134340';
+  rsDirectoryNot = 'Directory not found %s';
+  rsXplanetRetur = '%s, xplanet return %s';
+  rsXplanetIsNot = 'Xplanet is not compiled with JPEG support';
+  rsRequireXplan = '(require Xplanet 1.2.0)';
+  rsXplanetIsPro = 'Xplanet is probably not installed!';
 
 implementation
 

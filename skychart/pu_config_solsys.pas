@@ -28,7 +28,7 @@ interface
 uses u_translation, u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, unzip,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, MaskEdit,
-  downloaddialog, EditBtn;
+  downloaddialog, EditBtn, Process;
 
 type
 
@@ -37,6 +37,7 @@ type
   Tf_config_solsys = class(TForm)
     CheckBoxPluto: TCheckBox;
     Label3: TLabel;
+    XplanetMsg: TLabel;
     TransparentPlanet: TCheckBox;
     comfile: TFileNameEdit;
     mpcfile: TFileNameEdit;
@@ -246,6 +247,7 @@ type
     procedure UpdAstList;
     procedure AsteroidFeedback(txt:string);
     procedure CometFeedback(txt:string);
+    function CheckXplanet: boolean;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -287,6 +289,9 @@ PlanetMode.Items[0]:=rsStar;
 PlanetMode.Items[1]:=rsLineModeDraw;
 PlanetMode.Items[2]:=rsRealisticsIm;
 PlanetMode.Items[3]:=rsSymbol;
+{$ifdef unix}
+PlanetMode.Items[2]:=PlanetMode.Items[2]+blank+rsRequireXplan;
+{$endif}
 PlanetBox3.caption:=rsShowEarthSha;
 XplanetBox.caption:=rsImageOptions;
 UseXplanet.caption:=rsUseXplanet;
@@ -401,6 +406,8 @@ ShowPlanet;
 ShowComet;
 ShowAsteroid;
 LockChange:=false;
+if Notebook1.ActivePageComponent=page2 then
+   PlanetModeClick(Sender);
 end;
 
 procedure Tf_config_solsys.ShowPlanet;
@@ -413,12 +420,13 @@ PlanetMode.itemindex:=cplot.plaplot;
 grs.value:=csc.GRSlongitude;
 PlanetBox3.checked:=csc.ShowEarthShadow;
 Planetdir.Text:=cmain.planetdir;
+XplanetMsg.Caption:=blank;
 XplanetDir.text:=xplanet_dir;
 UseXplanet.checked:=use_xplanet;
 TransparentPlanet.Checked:=cplot.TransparentPlanet;
-{$ifdef unix}
- XplanetDir.Visible:=false;
- XplanetBtn.Visible:=false;
+{$ifndef mswindows}
+ XplanetBox.Visible:=false;
+ use_xplanet:=true;
 {$endif}
 end;
 
@@ -634,6 +642,11 @@ end;
 
 procedure Tf_config_solsys.PlanetModeClick(Sender: TObject);
 begin
+if LockChange and (Notebook1.ActivePageComponent<>Page2) then exit;
+if (PlanetMode.itemindex=2)and Use_Xplanet then begin
+   if not CheckXplanet then
+     PlanetMode.itemindex:=1;
+end;
 cplot.plaplot:=PlanetMode.itemindex;
 end;
 
@@ -857,6 +870,58 @@ begin
   csc.ShowAsteroid:=true;
 end;
 
+function Tf_config_solsys.CheckXplanet: boolean;
+var cmd,buf: string;
+    i,j: integer;
+    r: Tstringlist;
+begin
+result:=false;
+r:=TstringList.Create;
+try
+ {$ifdef unix}
+    cmd:='xplanet';
+ {$endif}
+ {$ifdef win32}
+    if not DirectoryExists(xplanet_dir) then begin
+       XplanetMsg.Caption:=Format(rsDirectoryNot, [xplanet_dir]);
+       exit;
+    end;
+    chdir(xplanet_dir);
+    cmd:='xplanet.exe';
+ {$endif}
+ cmd:=cmd+' --version';
+
+ i:=exec(cmd);  // first test if the command run, otherwise this may crash the application
+ if i=0 then begin
+ 
+ i:=execprocess(cmd,r);
+ if (i=0)and(r.Count>0) then begin
+   for j:=0 to r.Count-1 do begin
+     buf:=r[j];
+     if trim(buf)='JPEG' then begin
+       result:=true;
+       break;
+     end;
+   end;
+   if result then XplanetMsg.Caption:=blank
+             else XplanetMsg.Caption:=rsXplanetIsNot;
+ end else begin
+   if r.Count>0 then begin
+     buf:='';
+     for j:=0 to r.Count-1 do  buf:=buf+r[j];
+   end else buf:='';
+   XplanetMsg.Caption:=Format(rsXplanetRetur, [buf, inttostr(i)]);
+ end;
+ 
+ end
+ else XplanetMsg.Caption:=rsXplanetIsPro;
+ 
+finally
+ chdir(appdir);
+ r.Free;
+end;
+end;
+
 // windows specific code:
 procedure Tf_config_solsys.XplanetBtnClick(Sender: TObject);
 var f : string;
@@ -883,6 +948,10 @@ end;
 
 procedure Tf_config_solsys.UseXplanetClick(Sender: TObject);
 begin
+if LockChange and (Notebook1.ActivePageComponent<>Page2) then exit;
+if UseXplanet.checked then begin
+     UseXplanet.checked:=CheckXplanet;
+end;
 use_xplanet:=UseXplanet.checked;
 end;
 

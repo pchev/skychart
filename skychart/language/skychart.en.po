@@ -1,7 +1,7 @@
-# translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-09-02 22:38+0200\n"
+"PO-Revision-Date: 2006-09-28 22:25+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -33,6 +33,10 @@ msgstr ""
 
 #: u_translation:rsnotfound
 msgid "%s not found"
+msgstr ""
+
+#: u_translation:rsxplanetretur
+msgid "%s, xplanet return %s"
 msgstr ""
 
 #: u_translation:rsalltablesstr
@@ -93,6 +97,10 @@ msgstr ""
 
 #: u_translation:rsnegativewest
 msgid "(Negative West of GreenWich)"
+msgstr ""
+
+#: u_translation:rsrequirexplan
+msgid "(require Xplanet 1.2.0)"
 msgstr ""
 
 #: u_translation:rsusefultorepr
@@ -1089,6 +1097,10 @@ msgstr ""
 
 #: u_translation:rsdirectory
 msgid "Directory"
+msgstr ""
+
+#: u_translation:rsdirectorynot
+msgid "Directory not found %s"
 msgstr ""
 
 #: u_translation:rsdisconnectte
@@ -3873,6 +3885,14 @@ msgstr ""
 
 #: u_translation:rswindow
 msgid "Window"
+msgstr ""
+
+#: u_translation:rsxplanetisnot
+msgid "Xplanet is not compiled with JPEG support"
+msgstr ""
+
+#: u_translation:rsxplanetispro
+msgid "Xplanet is probably not installed!"
 msgstr ""
 
 #: u_translation:rssyear
