@@ -373,6 +373,7 @@ end;
 
 Procedure TSplot.FlushCnv;
 begin
+ destcnv.CopyMode:=cmSrcCopy;
  destcnv.Draw(0,0,cbmp); // draw bitmap to screen
  cnv:=destcnv;           // direct plot to screen;
 end;
@@ -1321,8 +1322,11 @@ if (iWidth<=cfgchart.Width)and(iHeight<=cfgchart.Height) then begin
    imabmp.SaveToStream(memstream);
    memstream.position := 0;
    imabmp.LoadFromStream(memstream);
-//   imabmp.Transparent:=iTransparent; // do not work after laz svn 9067 ?
-//   imabmp.TransparentColor:=clBlack;
+   {$ifndef mswindows}       // transparent produce weird output on Windows
+      imabmp.Transparent:=iTransparent;
+      imabmp.TransparentColor:=clBlack;
+   {$endif}
+   cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(DestX,DestY,imabmp);
 end else begin
    // only a part of the image is displayed
@@ -1348,8 +1352,11 @@ end else begin
    rbmp.SaveToStream(memstream);
    memstream.position := 0;
    rbmp.LoadFromStream(memstream);
-//   rbmp.Transparent:=iTransparent;  // do not work after laz svn 9067 ?
-//   rbmp.TransparentColor:=clBlack;
+   {$ifndef mswindows}       // transparent produce weird output on Windows
+      rbmp.Transparent:=iTransparent;
+      rbmp.TransparentColor:=clBlack;
+   {$endif}
+   cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(0,0,rbmp);
 end;
 finally
