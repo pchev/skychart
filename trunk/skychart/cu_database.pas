@@ -1376,7 +1376,7 @@ begin
 citylist.Clear;
 codelist.Clear;
 filter:=utf8encode(filter);
-buf:='select locid,location from cdc_location where country = "'+countrycode+'" ';
+buf:='select locid,location,type from cdc_location where country = "'+countrycode+'" ';
 if filter<>'' then buf:=buf+' and location like "'+filter+'" ';
 buf:=buf+' order by location limit '+inttostr(limit);
 db.Query(buf);
@@ -1386,6 +1386,8 @@ prev:='';
 while i<db.RowCount do begin
   codelist.add(db.results[i][0]);
   buf:=db.results[i][1];
+  if copy(db.results[i][2],1,3)<>'PPL' then
+     buf:=buf+' -- '+db.results[i][2];
   if buf=prev then begin
     inc(k);
     buf:=buf+' -- '+inttostr(k);
@@ -1407,7 +1409,7 @@ la1:=floattostr(lat1);
 la2:=floattostr(lat2);
 lo1:=floattostr(lon1);
 lo2:=floattostr(lon2);
-db.Query('select locid,location from cdc_location where '+
+db.Query('select locid,location,type from cdc_location where '+
         'country="'+country+'" and '+
         '(latitude between '+la1+' and '+la2+') and '+
         '(longitude between '+lo1+' and '+lo2+') order by location limit '+inttostr(limit));
@@ -1417,6 +1419,8 @@ prev:='';
 while i<db.RowCount do begin
   codelist.add(db.results[i][0]);
   buf:=db.results[i][1];
+  if copy(db.results[i][2],1,3)<>'PPL' then
+     buf:=buf+' -- '+db.results[i][2];
   if buf=prev then begin
     inc(k);
     buf:=buf+' -- '+inttostr(k);
