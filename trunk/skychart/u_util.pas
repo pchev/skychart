@@ -32,7 +32,7 @@ uses Math, SysUtils, Classes, u_constant, LCLType,
   {$ifdef unix}
     unix,baseunix,unixutil,
   {$endif}
-    Controls,
+    Controls, Process,
     MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons, ExtCtrls,
     Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
 
@@ -88,6 +88,7 @@ Function GetTimeZone : double;
 function SetCurrentTime(cfgsc:Pconf_skychart):boolean;
 function DTminusUT(annee : integer; c:Pconf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
+Function ExecProcess(cmd: string; output: TStringList): integer;
 Function Exec(cmd: string; hide: boolean=true): integer;
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
 function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
@@ -1076,6 +1077,49 @@ with Form do begin
 end;
 end;
 
+Function ExecProcess(cmd: string; output: TStringList): integer;
+const READ_BYTES = 2048;
+var
+  M: TMemoryStream;
+  P: TProcess;
+  n: LongInt;
+  BytesRead: LongInt;
+  TotalBytesAvailable: integer;
+begin
+M := TMemoryStream.Create;
+P := TProcess.Create(nil);
+result:=999;
+try
+  BytesRead := 0;
+  P.CommandLine := cmd;
+  P.Options := [poUsePipes, poStdErrToOutPut, poNoConsole];
+  P.Execute;
+  while P.Running do begin
+    Application.ProcessMessages;
+    if P.Output<>nil then begin
+      M.SetSize(BytesRead + READ_BYTES);
+      n := P.Output.Read((M.Memory + BytesRead)^, READ_BYTES);
+      if n > 0 then inc(BytesRead, n);
+    end;
+  end;
+  result:=P.ExitStatus;
+  if (result<>127)and(P.Output<>nil) then repeat
+    M.SetSize(BytesRead + READ_BYTES);
+    n := P.Output.Read((M.Memory + BytesRead)^, READ_BYTES);
+    if n > 0
+    then begin
+      Inc(BytesRead, n);
+    end;
+  until (n<=0)or(P.Output=nil);
+  M.SetSize(BytesRead);
+  output.LoadFromStream(M);
+  P.Free;
+  M.Free;
+except
+  P.Free;
+  M.Free;
+end;
+end;
 
 Function Exec(cmd: string; hide: boolean=true): integer;
 {$ifdef unix}
