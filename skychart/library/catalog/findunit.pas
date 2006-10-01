@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {$mode objfpc}{$H+}
 interface
-Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gscc,bscunit,pgcunit,sacunit,tyc2unit;
+Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gsccompact,bscunit,pgcunit,sacunit,tyc2unit;
 
 Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
 Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
@@ -169,7 +169,7 @@ var smnum,num,p : integer;
 begin
 ok:=false;
 buf:=trim(id);
-p:=pos(' ',buf);
+p:=pos('-',buf);
 if p>0 then begin
    smnum:=strtoint(copy(buf,1,p-1));
    num:=strtoint(copy(buf,p+1,5));
@@ -183,7 +183,7 @@ var smnum,num,p : integer;
 begin
 ok:=false;
 buf:=trim(id);
-p:=pos(' ',buf);
+p:=pos('-',buf);
 if p>0 then begin
    smnum:=strtoint(copy(buf,1,p-1));
    num:=strtoint(copy(buf,p+1,5));
@@ -198,7 +198,7 @@ var smnum,num : integer;
 begin
 ok:=false;
 buf:=trim(id);
-p:=pos(' ',buf);
+p:=pos('-',buf);
 if p>0 then begin
    smnum:=strtoint(copy(buf,1,p-1));
    num:=strtoint(copy(buf,p+1,5));
@@ -213,10 +213,13 @@ var smnum,num : integer;
 begin
 ok:=false;
 buf:=trim(id);
-p:=pos(' ',buf);
+p:=pos('-',buf);
 if p>0 then begin
    smnum:=strtoint(copy(buf,1,p-1));
-   num:=strtoint(copy(buf,p+1,5));
+   buf:=copy(buf,p+1,5);
+   p:=pos('-',buf);
+   if p>0 then delete(buf,p,5);
+   num:=strtoint(buf);
    FindTYC2num(smnum,num,ar,de,ok);
 end;
 end;

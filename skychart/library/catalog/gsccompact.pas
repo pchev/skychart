@@ -272,16 +272,18 @@ end;
 hemis:=dirlst[i,1];
 zone:=strtoint(copy(dirlst[i],2,4));
 OpenRegion(hemis,zone,Smnum,ok);
-ok:=false;
-repeat
-    ReadGsccRec(lin,fok);
-    if lin.gscn=num then begin ok:=true; break; end;
-until eof(fgsc);
 if ok then begin
-  ar:=lin.ar/15;
-  de:=lin.de;
+  ok:=false;
+  repeat
+      ReadGsccRec(lin,fok);
+      if lin.gscn=num then begin ok:=true; break; end;
+  until eof(fgsc);
+  if ok then begin
+    ar:=lin.ar/15;
+    de:=lin.de;
+  end;
+  Closeregion;
 end;
-Closeregion;
 end;
 
 Procedure OpenGSCCwin(var ok : boolean); stdcall;
