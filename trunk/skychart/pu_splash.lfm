@@ -15,7 +15,6 @@ object f_splash: Tf_splash
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
   Position = poScreenCenter
   object Panel1: TPanel
     Height = 263
@@ -8452,9 +8451,9 @@ object f_splash: Tf_splash
     end
     object LabelDate: TLabel
       Left = 128
-      Height = 15
+      Height = 16
       Top = 170
-      Width = 37
+      Width = 30
       Caption = 'Date'
       Color = clNone
       Font.Color = clWhite
