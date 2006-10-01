@@ -49,7 +49,7 @@ begin
 
   Application.CreateForm(Tf_main, f_main);
   f_splash := Tf_splash.Create(nil);
-  f_splash.ShowTimer:=true; f_splash.Show; f_splash.Paint;
+  f_splash.Show; f_splash.Invalidate;
   Application.ProcessMessages;
   Application.CreateForm(Tf_position, f_position);
   Application.CreateForm(Tf_search, f_search);

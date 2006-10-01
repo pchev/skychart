@@ -53,7 +53,6 @@ type
     { Private declarations }
   public
     { Public declarations }
-    ShowTimer: Boolean;
     procedure SetLang;
   end;
 
@@ -84,23 +83,16 @@ SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
- ShowTimer:=false;
 end;
 
 procedure Tf_splash.FormShow(Sender: TObject);
 begin
-if ShowTimer then begin
    Timer1.Enabled:=true;
-end else begin
-   Timer1.Enabled:=false;
-   BorderStyle:=bsToolWindow;
-end;
 end;
 
 procedure Tf_splash.Timer1Timer(Sender: TObject);
 begin
 Timer1.Enabled:=false;
-ShowTimer:=false;
 BorderStyle:=bsToolWindow;
 Close;
 end;
