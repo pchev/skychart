@@ -1344,7 +1344,7 @@ if result then begin
    rec.star.b_v:=lin.b_v/100;
    rec.star.pmra:=deg2rad*lin.pmar/1000/3600;
    rec.star.pmdec:=deg2rad*lin.pmde/1000/3600;
-   rec.star.id:=inttostr(lin.gscz)+'.'+inttostr(lin.gscn)+'.'+inttostr(lin.tycn);
+   rec.star.id:=inttostr(lin.gscz)+'-'+inttostr(lin.gscn)+'-'+inttostr(lin.tycn);
 end;
 end;
 
@@ -1370,7 +1370,7 @@ if result then begin
                                 else rec.star.b_v:=0;
    rec.star.pmra:=deg2rad*lin.pmar/1000/3600;
    rec.star.pmdec:=deg2rad*lin.pmde/1000/3600;
-   rec.star.id:=inttostr(lin.gscz)+'.'+inttostr(lin.gscn)+'.'+inttostr(lin.tycn);
+   rec.star.id:=inttostr(lin.gscz)+'-'+inttostr(lin.gscn)+'-'+inttostr(lin.tycn);
 end;
 end;
 
@@ -1403,7 +1403,7 @@ if result then begin
    rec.dec:=deg2rad*lin.de/100000;
    if (rec.star.magv<90) and (rec.star.magb<90) then rec.star.b_v:=rec.star.magb-rec.star.magv
                          else rec.star.b_v:=99;
-   rec.star.id:=inttostr(lin.gscz)+'.'+inttostr(lin.gscn);
+   rec.star.id:=inttostr(lin.gscz)+'-'+inttostr(lin.gscn);
 end;
 end;
 
@@ -1423,7 +1423,7 @@ until not result;
 if result then begin
    rec.ra:=deg2rad*lin.ar;
    rec.dec:=deg2rad*lin.de;
-   rec.star.id:=smnum+'.'+inttostr(lin.gscn);
+   rec.star.id:=smnum+'-'+inttostr(lin.gscn);
    rec.num[1]:=lin.pe;
    rec.num[2]:=lin.me;
    rec.str[1]:=inttostr(lin.mb);
@@ -1449,7 +1449,7 @@ until not result;
 if result then begin
    rec.ra:=deg2rad*lin.ar;
    rec.dec:=deg2rad*lin.de;
-   rec.star.id:=smnum+'.'+inttostr(lin.gscn);
+   rec.star.id:=smnum+'-'+inttostr(lin.gscn);
    rec.num[1]:=lin.pe;
    rec.num[2]:=lin.me;
    rec.str[1]:=inttostr(lin.mb);
@@ -1478,7 +1478,7 @@ until not result;
 if result then begin
    rec.ra:=deg2rad*lin.ar/100000;
    rec.dec:=deg2rad*lin.de/100000;
-   rec.star.id:=smnum+'.'+inttostr(lin.gscn);
+   rec.star.id:=smnum+'-'+inttostr(lin.gscn);
    rec.num[1]:=lin.pe;
    rec.num[2]:=lin.me;
    rec.str[1]:=inttostr(lin.mb);

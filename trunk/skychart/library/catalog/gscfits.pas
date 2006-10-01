@@ -232,16 +232,18 @@ end;
 hemis:=dirlst[i,1];
 zone:=strtoint(copy(dirlst[i],2,4));
 OpenRegion(hemis,zone,Smnum,ok);
-ok:=false;
-for i:=1 to nrecs do begin
-    ReadFITSRec(recsz,rec);
-    if strtoint(copy(rec,1,5))=num then begin ok:=true; break; end;
-end;
 if ok then begin
-  ar:=strtofloat(copy(rec,6,9))/15;
-  de:=strtofloat(copy(rec,15,9));
+  ok:=false;
+  for i:=1 to nrecs do begin
+      ReadFITSRec(recsz,rec);
+      if strtoint(copy(rec,1,5))=num then begin ok:=true; break; end;
+  end;
+  if ok then begin
+    ar:=strtofloat(copy(rec,6,9))/15;
+    de:=strtofloat(copy(rec,15,9));
+  end;
+  Closeregion;
 end;
-Closeregion;
 end;
 
 Procedure OpenGSCFwin(var ok : boolean); stdcall;
