@@ -1077,7 +1077,7 @@ end;
 
 procedure Tf_main.HelpContents1Execute(Sender: TObject);
 begin
-   ExecuteFile(slash(helpdir)+'index.html');
+   ExecuteFile(slash(helpdir)+slash('wiki_doc')+rsDocumentatio);
 end;
 
 procedure Tf_main.HomePage1Click(Sender: TObject);
@@ -1177,7 +1177,7 @@ chdir(appdir);
 InitTrace;
 traceon:=true;
 GetLanguage;
-u_translation.translate(cfgm.language,'en');
+lang:=u_translation.translate(cfgm.language,'en');
 catalog:=Tcatalog.Create(self);
 SetLang;
 telescope:=Ttelescope.Create(self);
@@ -2534,6 +2534,7 @@ nightvision:=false;
 ldeg:='°';
 lmin:='''';
 lsec:='"';
+helpdir:=slash(appdir)+slash('doc');
 cfgm.MaxChildID:=0;
 cfgm.prtname:='';
 cfgm.configpage:=0;
@@ -3855,7 +3856,7 @@ end;
 finally
  inif.Free;
 end;
-u_translation.translate(cfgm.language,'en');
+lang:=u_translation.translate(cfgm.language,'en');
 SetLang;
 f_position.SetLang;
 f_search.SetLang;
@@ -3877,8 +3878,6 @@ end;
 
 procedure Tf_main.SetLang;
 begin
-if cfgm.language='' then helpdir:=slash(appdir)+slash('doc')+slash('en')
-   else helpdir:=slash(appdir)+slash('doc')+slash(trim(cfgm.language));
 ldeg:=rsdeg;
 lmin:=rsmin;
 lsec:=rssec;

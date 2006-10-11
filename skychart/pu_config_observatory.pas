@@ -519,15 +519,19 @@ end;
 
 procedure Tf_config_observatory.LocCodeClick(Sender: TObject);
 var us: boolean;
-    country: string;
+    country,desigfile: string;
 begin
 us:=false;
 if countrylist.ItemIndex>=0 then begin
    country:=countrycode[countrylist.ItemIndex];
    if copy(country,1,3)='US-' then us:=true;
 end;
-if us then ExecuteFile(slash(helpdir)+'Location_US_Designations.html')
-      else ExecuteFile(slash(helpdir)+'Location_World_Designations.html');
+if us then country:='Location_US_Designations.html'
+      else country:='Location_World_Designations.html';
+desigfile:=slash(helpdir)+slash('html_doc')+slash(lang)+country;
+if not FileExists(desigfile) then
+   desigfile:=slash(helpdir)+slash('html_doc')+slash('en')+country;
+ExecuteFile(desigfile);
 end;
 
 procedure Tf_config_observatory.longdegChange(Sender: TObject);

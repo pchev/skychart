@@ -570,7 +570,7 @@ var gzopen : Tgzopen;
 
 // pseudo-constant only here
 Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
-     Configfile, SysDecimalSeparator: string;
+     Configfile, SysDecimalSeparator, Lang : string;
      compile_time:string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
