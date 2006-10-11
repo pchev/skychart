@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-10-01 22:40+0200\n"
+"PO-Revision-Date: 2006-10-03 01:06+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ua\n"
 "POT-Creation-Date: \n"
@@ -11,7 +11,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 "X-Poedit-Country: UKRAINE\n"
-"X-Poedit-Language: Ukrainian\n"
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any installed catalog index."
@@ -27,7 +26,7 @@ msgstr "%s Не знайдено!%sМожливо каталог не встан
 
 #: u_translation:rsconnectedfro
 msgid "%s connected from %s, using chart %s, connect time:%s"
-msgstr ""
+msgstr "%s під'єднано до %s, використання діаграми %s, час з'єднання:%s"
 
 #: u_translation:rsnotconnected
 msgid "%s not connected."
@@ -39,7 +38,7 @@ msgstr "%s не знайдено"
 
 #: u_translation:rsxplanetretur
 msgid "%s, xplanet return %s"
-msgstr ""
+msgstr "%s, xplanet рапортує %s"
 
 #: u_translation:rsalltablesstr
 msgid "%sAll tables structure exists."
@@ -47,7 +46,7 @@ msgstr "%sСтруктура всіх таблиць існує."
 
 #: u_translation:rsalsobesureth
 msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr ""
+msgstr "%sТакож пересвідчитися, що необхідне програмне забезпечення бази данних установлено. % s Будь-ласка зверніться до документації, якщо ви не впевнені. % s Ви хочете продовжити? "
 
 #: u_translation:rsaltturns
 msgid "%sAlt turns:"
@@ -103,11 +102,11 @@ msgstr "(Мінусовий західніше від Грінвічу)"
 
 #: u_translation:rsrequirexplan
 msgid "(require Xplanet 1.2.0)"
-msgstr ""
+msgstr "(потребувати Xplanet 1.2.0)"
 
 #: u_translation:rsusefultorepr
 msgid "(useful to represent a flux)"
-msgstr ""
+msgstr "(придатно зображувати потоки) "
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -127,7 +126,7 @@ msgstr "732 (рекомендовано для більше 5'000'000 об'єк�
 
 #: u_translation:rs9537largerda
 msgid "9537 (larger dataset)"
-msgstr ""
+msgstr "9537 (великий набір даних) "
 
 #: u_translation:rsprev
 msgid "<<   Prev"
@@ -311,7 +310,7 @@ msgstr "Автоматичний"
 
 #: u_translation:rsautomaticall
 msgid "Automatically start a local server if not already running"
-msgstr ""
+msgstr "Автоматично включити локальний сервер, якщо він не в постійній дії"
 
 #: u_translation:rsauxiliaryfil
 msgid "Auxiliary files"
@@ -355,11 +354,11 @@ msgstr "Початок обробки для jd=%s / %s"
 
 #: u_translation:rsbelowthehori
 msgid "Below the horizon"
-msgstr "Нижче горизонту"
+msgstr "Нижче обрію"
 
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Двійковий індексований каталог"
+msgstr "Бінарно індексований каталог"
 
 #: u_translation:rsbitmap
 msgid "Bitmap"
@@ -411,7 +410,7 @@ msgstr "Яскравіше"
 
 #: u_translation:rsbrighteststa
 msgid "Brightest Star Magnitude"
-msgstr ""
+msgstr "Найяскравіша зоряна величина"
 
 #: u_translation:rsbrightness
 msgid "Brightness"
@@ -443,15 +442,15 @@ msgstr "Календар"
 
 #: u_translation:rscancel
 msgid "Cancel"
-msgstr "Відміна"
+msgstr "Скасувати"
 
 #: u_translation:rscancel2
 msgid "Cancel %s"
-msgstr "Відміна %s"
+msgstr "Скасувати %s"
 
 #: u_translation:rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
-msgstr "Відміна, неправильний zip файл ?? %s"
+msgstr "Скасувати, неправильний zip файл ?? %s"
 
 #: u_translation:rscascade
 msgid "Cascade"
@@ -691,7 +690,7 @@ msgstr "Підключити телескоп"
 
 #: u_translation:rsconnecttofai
 msgid "Connect to %s, %s failed! %sVerify if the MySQL Server is running and control the Userid/Password"
-msgstr ""
+msgstr "З'єднання із %s, %s невдале! %sПеревірте, якщо MySQL сервер функціонує, Ідент.Користувача/Пароль"
 
 #: u_translation:rsconnecttosuc
 msgid "Connect to %s, %s successful.%s"
@@ -743,7 +742,7 @@ msgstr "Контрольна панель"
 
 #: u_translation:rscontrolpanel2
 msgid "Control Panel command "
-msgstr ""
+msgstr "Команда контрольної панелі"
 
 #: u_translation:rsconvertcatal
 msgid "Convert catalog file %s"
@@ -807,7 +806,7 @@ msgstr "Створити заголовок"
 
 #: u_translation:rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr ""
+msgstr "Створення postscript діаграми. Будь-ласка почекайте..."
 
 #: u_translation:rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
@@ -827,7 +826,7 @@ msgstr "DB назва:"
 
 #: u_translation:rsdbinsertfail
 msgid "DB insert failed for %s :%s"
-msgstr ""
+msgstr "БД включає невдалість для %s :%s"
 
 #: u_translation:rsde
 msgid "DE"
@@ -867,11 +866,11 @@ msgstr "Тире"
 
 #: u_translation:rsdashdot1
 msgid "Dash Dot"
-msgstr ""
+msgstr "Тире-крапка"
 
 #: u_translation:rsdashdotdot1
 msgid "Dash Dot Dot"
-msgstr ""
+msgstr "Тире-крапка-крапка"
 
 #: u_translation:rsdatafiles
 msgid "Data Files :"
@@ -887,7 +886,7 @@ msgstr "Використання даних"
 
 #: u_translation:rsdatastartonl
 msgid "Data start on line %s"
-msgstr ""
+msgstr "Інші каталоги абрисів"
 
 #: u_translation:rsdatabasetype
 msgid "Database Type"
@@ -975,7 +974,7 @@ msgstr "Вбудовані параметри туманностей"
 
 #: u_translation:rsdefaultoutli
 msgid "Default Outline parameters"
-msgstr ""
+msgstr "Встроєні параметри схеми"
 
 #: u_translation:rsdefaultcolor
 msgid "Default color"
@@ -1055,7 +1054,7 @@ msgstr "Видалено успішно!"
 
 #: u_translation:rsdepressionof
 msgid "Depression of the visible horizon"
-msgstr "Послабити місцевий горизонт"
+msgstr "Послабити місцевий обрій"
 
 #: u_translation:rsdescription
 msgid "Description"
@@ -1067,7 +1066,7 @@ msgstr "Позначення"
 
 #: u_translation:rsdesktopenvir
 msgid "Desktop environment"
-msgstr ""
+msgstr "Настольне середовище"
 
 #: u_translation:rsdetails
 msgid "Details"
@@ -1103,7 +1102,7 @@ msgstr "Директорія"
 
 #: u_translation:rsdirectorynot
 msgid "Directory not found %s"
-msgstr ""
+msgstr "Директорія не знайдена %s"
 
 #: u_translation:rsdisconnectte
 msgid "Disconnect Telescope"
@@ -1139,7 +1138,7 @@ msgstr "Відобразити мітки"
 
 #: u_translation:rsdisplaythelo
 msgid "Display the local horizon line"
-msgstr "Відобразити абрис місцевого горизонту"
+msgstr "Відобразити абрис місцевого обрію"
 
 #: u_translation:rsdistance
 msgid "Distance"
@@ -1203,7 +1202,7 @@ msgstr "Навести лінію"
 
 #: u_translation:rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "Нарисувати контур ослабленого горизонту"
+msgstr "Нарисувати контур ослабленого обрію"
 
 #: u_translation:rsdrawingtype
 msgid "Drawing Type"
@@ -1215,7 +1214,7 @@ msgstr "Назва драйверу"
 
 #: u_translation:rsdropdatabase
 msgid "Drop Database"
-msgstr ""
+msgstr "Падіння бази даних"
 
 #: u_translation:rsduration
 msgid "Duration"
@@ -1267,7 +1266,7 @@ msgstr "Ред. мітки"
 
 #: u_translation:rseditlineoper
 msgid "Edit Line operation"
-msgstr ""
+msgstr "Редагувати оператор лінії"
 
 #: u_translation:rseditobjectty
 msgid "Edit Object Types"
@@ -1355,7 +1354,7 @@ msgstr "Помилка! Будь-ласка перевірте параметр�
 
 #: u_translation:rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
-msgstr ""
+msgstr "Помилка! Будь-ласка перевірте параметри бази даних та завантажтепакет картинок."
 
 #: u_translation:rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -1519,7 +1518,7 @@ msgstr "Шрифти"
 
 #: u_translation:rsforalargecat
 msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
-msgstr "Для великого каталогу, завжди вибирайте бінарний тип. Для малих каталогів"
+msgstr "Для великого каталогу, завжди вибирайте Бінарний тип. Для малих каталогів, котрі часто міняються, виберіть Текстовий, що дозволить вам редагувати файл та бачити результат безпосередньо на мапі, без необхідності повторного звертання до CatGen 3.0"
 
 #: u_translation:rsfriday
 msgid "Fri."
@@ -1535,7 +1534,7 @@ msgstr "Повна назва"
 
 #: u_translation:rsgslopeparame
 msgid "G slope parameter"
-msgstr ""
+msgstr "G спеціальний параметр"
 
 #: u_translation:rsgrstransit
 msgid "GRS transit"
@@ -1683,7 +1682,7 @@ msgstr "Висока поверхнева яскравість"
 
 #: u_translation:rshorizon
 msgid "Horizon"
-msgstr "Горизонт"
+msgstr "Обрій"
 
 #: u_translation:rshostname
 msgid "Host Name:"
@@ -1707,7 +1706,7 @@ msgstr "Години, хвилини, секунди"
 
 #: u_translation:rsindidriverse
 msgid "INDI Driver setting"
-msgstr ""
+msgstr "Установки INDI драйверу"
 
 #: u_translation:rsindiserverho
 msgid "INDI Server Host "
@@ -1751,11 +1750,11 @@ msgstr "Приріст для яскравих зірок"
 
 #: u_translation:rsindicatehere
 msgid "Indicate here how to compute the require value from the data stored in the catalog text file."
-msgstr ""
+msgstr "Тут вкажіть, як обчислювати потрібну величину із даних, розташованих текстовому файлі каталогу."
 
 #: u_translation:rsindicatehowt
 msgid "Indicate how to recognize the object size unit :"
-msgstr ""
+msgstr "Вкажіть, як визнавати величину розміру об'єкту :"
 
 #: u_translation:rsindicatethes3
 msgid "Indicate the string for each color"
@@ -1763,11 +1762,11 @@ msgstr "вкажіть лінію для кожного кольору"
 
 #: u_translation:rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr ""
+msgstr "Вказати лінію для кожної операції рисування"
 
 #: u_translation:rsindicatethes
 msgid "Indicate the string identifier for each type of object :"
-msgstr ""
+msgstr "Вкажіть індентифкатор лінії для кожного типу об'єкту:"
 
 #: u_translation:rsinfo
 msgid "Information"
@@ -1939,7 +1938,7 @@ msgstr "Метод рисування лінії"
 
 #: u_translation:rslineoperatio
 msgid "Line operation"
-msgstr ""
+msgstr "Оператор лінії"
 
 #: u_translation:rslinewidth
 msgid "Line width "
@@ -1959,11 +1958,11 @@ msgstr "Зв'язати всі мапи"
 
 #: u_translation:rslistofavaila
 msgid "List of available plates"
-msgstr ""
+msgstr "Список наявних пластинок"
 
 #: u_translation:rslistenonport
 msgid "Listen on port: %s"
-msgstr ""
+msgstr "Прослуховування порту: %s"
 
 #: u_translation:rsload
 msgid "Load"
@@ -1995,7 +1994,7 @@ msgstr "Місцевий горихонт"
 
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
-msgstr "Назва файлу місцевого горизонту:"
+msgstr "Назва файлу місцевого обрію:"
 
 #: u_translation:rslocaltime
 msgid "Local Time = "
@@ -2019,7 +2018,7 @@ msgstr "Довгота висхідного вузла"
 
 #: u_translation:rslosange
 msgid "Losange"
-msgstr ""
+msgstr "Ромб"
 
 #: u_translation:rslowsurfacebr
 msgid "Low surface brightness"
@@ -2067,7 +2066,7 @@ msgstr "Блиск"
 
 #: u_translation:rsmagnitudeban
 msgid "Magnitude Band"
-msgstr ""
+msgstr "Діапазон величини"
 
 #: u_translation:rsmagnitudeerr
 msgid "Magnitude Error"
@@ -2223,7 +2222,7 @@ msgstr "Більше міток"
 
 #: u_translation:rsmultipleflag
 msgid "Multiple Flag"
-msgstr ""
+msgstr "Ознака кратності"
 
 #: u_translation:rsmultiplestar
 msgid "Multiple Star"
@@ -2323,7 +2322,7 @@ msgstr "Без поля"
 
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
-msgstr ""
+msgstr "Нема об'єкту для опорного замикання"
 
 #: u_translation:rsnopicture
 msgid "No picture"
@@ -2355,7 +2354,7 @@ msgstr "Північ"
 
 #: u_translation:rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
-msgstr ""
+msgstr "Нема FITS файлу, SIMPLE = T втрата ключового слова"
 
 #: u_translation:rsnotavailable
 msgid "Not available"
@@ -2371,7 +2370,7 @@ msgstr "Зараз"
 
 #: u_translation:rsnumberofmont
 msgid "Number of Month"
-msgstr "для числа місяців"
+msgstr "Кількість місяців"
 
 #: u_translation:rsnumberofstar
 msgid "Number of Stars"
@@ -2423,7 +2422,7 @@ msgstr "Назва об'єкту"
 
 #: u_translation:rsobjectsizeun
 msgid "Object size unit"
-msgstr ""
+msgstr "Одиниця розміру об'єкту"
 
 #: u_translation:rsobjecttype
 msgid "Object type"
@@ -2511,7 +2510,7 @@ msgstr "Інше"
 
 #: u_translation:rsotherlinesca
 msgid "Other Lines Catalogs"
-msgstr ""
+msgstr "Інші каталоги абрисів"
 
 #: u_translation:rsotherlabel
 msgid "Other label"
@@ -2627,11 +2626,11 @@ msgstr "Дефект пластинки"
 
 #: u_translation:rsplateiddatee
 msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
-msgstr ""
+msgstr "Ідент. пластинки   Дата   Експ.  Поле   CD   Обсерваторія"
 
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
-msgstr ""
+msgstr "Будь-ласка сконфігуруйте  URL орбітального елементу!"
 
 #: u_translation:rspleaseconfig
 msgid "Please configure your DSS file path first."
@@ -2659,7 +2658,7 @@ msgstr "Будь-ласка вкажіть директорію, в котрій
 
 #: u_translation:rspleasemountr
 msgid "Please mount RealSky\256 CD number"
-msgstr ""
+msgstr "Будь-ласка встановіть число RealSky\256 CD "
 
 #: u_translation:rspleasereport
 msgid "Please report any problem to:"
@@ -2707,7 +2706,7 @@ msgstr "Postscript"
 
 #: u_translation:rsprefixthealt
 msgid "Prefix the alternate names with their label"
-msgstr ""
+msgstr "Префікс альтернативних назв із їх мітками"
 
 #: u_translation:rspreparemonth
 msgid "Prepare Monthly Data"
@@ -2859,7 +2858,7 @@ msgstr "Радіальна швидкість"
 
 #: u_translation:rsrange
 msgid "Range"
-msgstr ""
+msgstr "Діапазон"
 
 #: u_translation:rsrasterresolu
 msgid "Raster Resolution"
@@ -2879,7 +2878,7 @@ msgstr "Реальні зображення"
 
 #: u_translation:rsrecognizeuni
 msgid "Recognize Units or Object type from the file:"
-msgstr ""
+msgstr "Розпізнання одиниць або типу об'єкту із файлу:"
 
 #: u_translation:rsred
 msgid "Red"
@@ -2899,7 +2898,7 @@ msgstr "Відновити останню зміну"
 
 #: u_translation:rsreference
 msgid "Reference"
-msgstr ""
+msgstr "Співвідношення"
 
 #: u_translation:rsreflectionne
 msgid "Reflection nebula"
@@ -3095,7 +3094,7 @@ msgstr "Знайти для"
 
 #: u_translation:rssec2
 msgid "Sec."
-msgstr ""
+msgstr "Сек."
 
 #: u_translation:rssecond
 msgid "Second"
@@ -3179,7 +3178,7 @@ msgstr "Установка дати та часу"
 
 #: u_translation:rssethowthemou
 msgid "Set how the mount move on each axis when you turn the driving knob. Then the Telescope button show you the turns you must do to go from one object to another."
-msgstr ""
+msgstr "Установіть, як коректно ходять осі монтування , коли ви натискаєте на кнопку запуску. Потім натискаючи кнопку показу об'єктів, повинен бути перебіг із об'єкту на об'єкт."
 
 #: u_translation:rssetobservato
 msgid "Set observatory location"
@@ -3251,7 +3250,7 @@ msgstr "Показати лінії"
 
 #: u_translation:rsshowmark
 msgid "Show Mark"
-msgstr "Показати мітку"
+msgstr "Показати окуляр"
 
 #: u_translation:rsshowmilkyway
 msgid "Show Milky Way"
@@ -3263,7 +3262,7 @@ msgstr "Показати туманності"
 
 #: u_translation:rsshowobjectbe
 msgid "Show Object below the horizon"
-msgstr "Показувати об'єкт нижче горизонту"
+msgstr "Показувати об'єкт нижче обрію"
 
 #: u_translation:rsshowobjects
 msgid "Show Objects"
@@ -3355,7 +3354,7 @@ msgstr "Сонячні затьмарення"
 
 #: u_translation:rssolarelongat
 msgid "Solar Elongation"
-msgstr ""
+msgstr "Сонячна елонгація"
 
 #: u_translation:rssolarsystem
 msgid "Solar System"
@@ -3395,7 +3394,7 @@ msgstr "Спектральний клас"
 
 #: u_translation:rsspline
 msgid "Spline"
-msgstr ""
+msgstr "Паз"
 
 #: u_translation:rssqlitedataba
 msgid "Sqlite Database"
@@ -3579,7 +3578,7 @@ msgstr "Присутні %s об'єктів на даному полі."
 
 #: u_translation:rsthisactionre
 msgid "This action replace all the database content for the country %s using fresh data from NGA and GNIS.%sAll your editing for this country will be lost except the location you added with a new name that will be kept.%sDo you want to continue ?"
-msgstr ""
+msgstr "Ця дія замінює весь вміст бази даних для країни %s, використовуючи свіжі дані від NGA та GNIS.%Всі ваші редагування інформації про цю країну будуть втрачені, за виключенням того пункту, який ви додали із новою назвою, що буде збережено.%Хочете продовжувати?"
 
 #: u_translation:rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -3675,7 +3674,7 @@ msgstr "Істинне положення"
 
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
-msgstr ""
+msgstr "Клас Трамплера"
 
 #: u_translation:rstuesday
 msgid "Tue."
@@ -3707,7 +3706,7 @@ msgstr "URL"
 
 #: u_translation:rsurllaunchcom
 msgid "URL launch command"
-msgstr ""
+msgstr "Команда запусвку URL"
 
 #: u_translation:rsut
 msgid "UT"
@@ -3719,7 +3718,7 @@ msgstr "Повна тінь"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr ""
+msgstr "Відмітити, щоб запобігти схожості із малою планетою 134340"
 
 #: u_translation:rsundo
 msgid "Undo"
@@ -3787,7 +3786,7 @@ msgstr "Використати online DSS замість RealSky"
 
 #: u_translation:rsuseonlycatal
 msgid "Use only the catalog from the same group"
-msgstr ""
+msgstr "Використовуйте тільки каталог із тої самої групи"
 
 #: u_translation:rsusesubsampli
 msgid "Use subsampling to limit image size to"
@@ -3811,7 +3810,7 @@ msgstr "І'мя користувача"
 
 #: u_translation:rsuserid
 msgid "Userid:"
-msgstr "Userid:"
+msgstr "Ідент.Користувача:"
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"
@@ -3835,7 +3834,7 @@ msgstr "Вид"
 
 #: u_translation:rsviewhorizon
 msgid "View Horizon"
-msgstr "Показати горизонт"
+msgstr "Показати обрій"
 
 #: u_translation:rsviewfullscre
 msgid "ViewFullScreen"
@@ -3851,7 +3850,7 @@ msgstr "Візуальна величина"
 
 #: u_translation:rswarningyouha
 msgid "WARNING !%sYou have choose to append the data to an existing catalog.%sThe existing catalog and index must be exactly of the same format, otherwise it will be corrupted.%sIt is a good idea to backup the actual files before this operation.%sDo you want to continue ?"
-msgstr ""
+msgstr "ПОПЕРЕДЖЕННЯ! %sУ вас є вибір добавити дані в існуючий каталог.% Існуючий каталог та індекси повинні бути в одному форматі, бо інакше будуть перекручування.% Дуже добра ідея зробити копії актуальних файлів перед цією операцією.% sВи хочете продовжити? "
 
 #: u_translation:rswanttotracka
 msgid "Want to track an object before it rise ?"
@@ -3863,11 +3862,11 @@ msgstr "Увага! Обчислення"
 
 #: u_translation:rswarningthecu
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
-msgstr ""
+msgstr "Попередження! Поточна дата та місцезнаходження обсерваторії, можливо змінилися від значень по умовчанню. Ви повинні відповісти \"Ні\" та використати %s кнопку, щоб повернутися до ваших значень по умовчанню, а інакше вони можуть втратитись. Ви хочете продовжити? "
 
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr ""
+msgstr "Попередження! %sВи збираєтеся зруйнувати базу даних %sта весь вміст,навіть якщо він і не має відношення до цієї програми. % sЧи ви впевнені, що хочете продовжити? "
 
 #: u_translation:rswednesday
 msgid "Wed."
@@ -3891,11 +3890,11 @@ msgstr "Вікно"
 
 #: u_translation:rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
-msgstr ""
+msgstr "Xplane не компільовано для підтримки JPEG "
 
 #: u_translation:rsxplanetispro
 msgid "Xplanet is probably not installed!"
-msgstr ""
+msgstr "Xplanet ймовірно не установлено!"
 
 #: u_translation:rssyear
 msgid "Y"
@@ -3911,7 +3910,7 @@ msgstr "Тепер ви готові відобразити астероїди �
 
 #: u_translation:rsyouliveonabi
 msgid "You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon."
-msgstr "Ви живете на високій горі на океанському узбережжі і вам подобається спостерігати спотворений образ об'єкту нижче горизонту."
+msgstr "Ви живете на високій горі на океанському узбережжі і вам подобається спостерігати спотворений образ об'єкту нижче обрію."
 
 #: u_translation:rszenith
 msgid "Zenith"
@@ -3919,19 +3918,19 @@ msgstr "Зеніт"
 
 #: u_translation:rszoom
 msgid "Zoom +"
-msgstr "Збільшити"
+msgstr "Збільшення"
 
 #: u_translation:rszoomcentre
 msgid "Zoom + Centre"
-msgstr "Збільшити - Центр"
+msgstr "Збільшення - Центр"
 
 #: u_translation:rszoom2
 msgid "Zoom -"
-msgstr "Зменшити"
+msgstr "Зменшення"
 
 #: u_translation:rszoomcentre2
 msgid "Zoom - Centre"
-msgstr "Зменшити - Центр"
+msgstr "Зменшення - Центр"
 
 #: u_translation:rszoomin
 msgid "Zoom In"
@@ -3975,6 +3974,10 @@ msgstr "опис:"
 
 #: u_translation:rsdpifor8x11pa
 msgid "dpi for 8x11 paper"
+msgstr "dpi для паперу форматом 8x11\""
+
+#: u_translation:rsdocumentatio
+msgid "en/documentation/start.html"
 msgstr ""
 
 #: u_translation:rsevery
@@ -3991,7 +3994,7 @@ msgstr "в русі"
 
 #: u_translation:rsinsertfailed
 msgid "insert failed line %s : %s"
-msgstr ""
+msgstr "включити невдалу лінію %s : %s"
 
 #: u_translation:rsinvalidepoch
 msgid "invalid epoch on line%s : %s"

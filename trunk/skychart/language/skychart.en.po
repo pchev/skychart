@@ -3975,6 +3975,10 @@ msgstr ""
 msgid "dpi for 8x11 paper"
 msgstr ""
 
+#: u_translation:rsdocumentatio
+msgid "en/documentation/start.html"
+msgstr ""
+
 #: u_translation:rsevery
 msgid "every "
 msgstr ""

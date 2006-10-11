@@ -1,7 +1,7 @@
-# translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-09-30 22:37+0200\n"
+"PO-Revision-Date: 2006-10-10 22:11+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -3974,6 +3974,10 @@ msgstr "desc:"
 #: u_translation:rsdpifor8x11pa
 msgid "dpi for 8x11 paper"
 msgstr "dpi,  papier 8x11"
+
+#: u_translation:rsdocumentatio
+msgid "en/documentation/start.html"
+msgstr "fr/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

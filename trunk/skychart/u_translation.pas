@@ -8,7 +8,7 @@ uses gettext, translations, u_constant, u_util,
   Classes, SysUtils;
 
 function GetDefaultLanguage:string;
-procedure Translate(lang : string = ''; lang2 : string = '');
+function Translate(lang : string = ''; lang2 : string = ''):string;
 
 resourcestring
   rsLanguage = 'Internal language';
@@ -1057,6 +1057,7 @@ resourcestring
   rsXplanetIsNot = 'Xplanet is not compiled with JPEG support';
   rsRequireXplan = '(require Xplanet 1.2.0)';
   rsXplanetIsPro = 'Xplanet is probably not installed!';
+  rsDocumentatio = 'en/documentation/start.html';
 
 implementation
 
@@ -1068,13 +1069,17 @@ begin
     else result:=buf1;
 end;
 
-procedure Translate(lang : string = ''; lang2 : string = '');
+function Translate(lang : string = ''; lang2 : string = ''):string;
+var pofile: string;
 begin
  if lang='' then lang:=GetDefaultLanguage;
  writetrace('Try language: '+lang+', '+lang2);
  // translate LCL messages
  TranslateUnitResourceStrings('LCLStrConsts',slash(appdir)+slash('data')+slash('language')+'lcl.%s.po',lang,lang2);
  // translate CDC messages
+ pofile:=format(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',[lang]);
+ if FileExists(pofile) then result:=lang
+                       else result:=lang2;
  TranslateUnitResourceStrings('u_translation',slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',lang,lang2);
  writetrace('Language: '+rsLanguage);
 end;
