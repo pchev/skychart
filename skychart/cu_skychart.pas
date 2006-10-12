@@ -125,6 +125,19 @@ end;
 
 implementation
 
+function doSimLabel(simnb,step,simlabel:integer):boolean;
+begin
+  result:=false;
+  case simlabel of
+    0 : result:=true;            // every one
+    1 : result:=((step mod 2)=0);// one of two
+    2 : result:=((step mod 3)=0);// one of three
+    3 : result:=(step=0);        // first
+    4 : result:=(step=simnb-1);  // last
+    5 : result:=false;           // none
+  end;
+end;
+
 constructor Tskychart.Create(AOwner:Tcomponent);
 begin
  inherited Create(AOwner);
@@ -1104,6 +1117,7 @@ var
   xx,yy:single;
   i,j,n,ipla: integer;
   draworder : array[1..11] of integer;
+  ltxt: string;
 begin
 fov:=rad2deg*cfgsc^.fov;
 pixscale:=abs(cfgsc^.BxGlb)*deg2rad/3600;
@@ -1137,7 +1151,18 @@ for j:=0 to cfgsc^.SimNb-1 do begin
     projection(ra,dec+0.001,x2,y2,false,cfgsc) ;
     rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
     if (ipla<>3)and(ipla<=10) then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
-    if (j=0)and(ipla<=11) then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
+    if (doSimLabel(cfgsc^.SimNb,j,cfgsc^.SimLabel))and(ipla<=11) then begin
+       if cfgsc^.SimNameLabel then
+          ltxt:=pla[ipla]+blank
+         else
+          ltxt:='';
+       if cfgsc^.SimDateLabel then
+          ltxt:=ltxt+jddatetime(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24)+blank;
+       if cfgsc^.SimMagLabel then
+          if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
+             else ltxt:=ltxt+formatfloat(f1,magn);
+       SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,ltxt);
+    end;
     case ipla of
       4 :  begin
             if (fov<=1.5) and (cfgsc^.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc^.Planetlst[j,i+28,1],cfgsc^.Planetlst[j,i+28,2],cfgsc^.Planetlst[j,i+28,5],cfgsc^.Planetlst[j,i+28,4],pixscale,cfgsc^.Planetlst[j,i+28,6]>1.0,true);
@@ -1209,6 +1234,7 @@ var
   x1,y1,ra,dec,magn: Double;
   xx,yy:single;
   i,j,lid: integer;
+  ltxt:string;
 begin
 if cfgsc^.ShowAsteroid then begin
   Fplanet.ComputeAsteroid(cfgsc);
@@ -1221,9 +1247,17 @@ if cfgsc^.ShowAsteroid then begin
       projection(ra,dec,x1,y1,true,cfgsc);
       WindowXY(x1,y1,xx,yy,cfgsc);
       Fplot.PlotAsteroid(xx,yy,cfgsc^.AstSymbol,magn);
-      if (j=0)and(magn<cfgsc^.StarMagMax+cfgsc^.AstMagDiff-cfgsc^.LabelMagDiff[5]) then begin
+      if (doSimLabel(cfgsc^.SimNb,j,cfgsc^.SimLabel))and(magn<cfgsc^.StarMagMax+cfgsc^.AstMagDiff-cfgsc^.LabelMagDiff[5]) then begin
          lid:=GetId(cfgsc^.AsteroidName[j,i,1]);
-         SetLabel(lid,xx,yy,0,2,5,cfgsc^.AsteroidName[j,i,2]);
+         if cfgsc^.SimNameLabel then
+            ltxt:=cfgsc^.AsteroidName[j,i,2]+blank
+           else
+            ltxt:='';
+         if cfgsc^.SimDateLabel then
+            ltxt:=ltxt+jddatetime(cfgsc^.AsteroidLst[j,i,4]+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24)+blank;
+         if cfgsc^.SimMagLabel then
+            ltxt:=ltxt+formatfloat(f1,magn);
+         SetLabel(lid,xx,yy,0,2,5,ltxt);
       end;
     end;
   end;
@@ -1239,6 +1273,7 @@ var
   x1,y1: Double;
   xx,yy,cxx,cyy:single;
   i,j,lid,sz : integer;
+  ltxt:string;
 begin
 if cfgsc^.ShowComet then begin
   Fplanet.ComputeComet(cfgsc);
@@ -1247,10 +1282,18 @@ if cfgsc^.ShowComet then begin
     for i:=1 to cfgsc^.CometNb do begin
       projection(cfgsc^.CometLst[j,i,1],cfgsc^.CometLst[j,i,2],x1,y1,true,cfgsc);
       WindowXY(x1,y1,xx,yy,cfgsc);
-      if (j=0)and(cfgsc^.CometLst[j,i,3]<cfgsc^.StarMagMax+cfgsc^.ComMagDiff-cfgsc^.LabelMagDiff[5]) then begin
+      if (doSimLabel(cfgsc^.SimNb,j,cfgsc^.SimLabel))and(cfgsc^.CometLst[j,i,3]<cfgsc^.StarMagMax+cfgsc^.ComMagDiff-cfgsc^.LabelMagDiff[5]) then begin
          lid:=GetId(cfgsc^.CometName[j,i,1]);
          sz:=round(abs(cfgsc^.BxGlb)*deg2rad/60*cfgsc^.CometLst[j,i,4]/2);
-         SetLabel(lid,xx,yy,sz,2,5,cfgsc^.CometName[j,i,2]);
+         if cfgsc^.SimNameLabel then
+            ltxt:=cfgsc^.CometName[j,i,2]+blank
+           else
+            ltxt:='';
+         if cfgsc^.SimDateLabel then
+            ltxt:=ltxt+jddatetime(cfgsc^.CometLst[j,i,7]+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24)+blank;
+         if cfgsc^.SimMagLabel then
+            ltxt:=ltxt+formatfloat(f1,cfgsc^.CometLst[j,i,3]);
+         SetLabel(lid,xx,yy,sz,2,5,ltxt);
       end;
       if projection(cfgsc^.CometLst[j,i,5],cfgsc^.CometLst[j,i,6],x1,y1,true,cfgsc) then
          WindowXY(x1,y1,cxx,cyy,cfgsc)

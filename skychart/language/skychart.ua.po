@@ -816,6 +816,10 @@ msgstr "Створення растрової мапи %s dpi. Будь-ласк
 msgid "Culmination"
 msgstr "Кульмінація"
 
+#: u_translation:rscurrentdate
+msgid "Current Date"
+msgstr ""
+
 #: u_translation:rssday
 msgid "D"
 msgstr "Число"
@@ -1376,6 +1380,10 @@ msgstr "Вечір"
 msgid "Evening twilight"
 msgstr "Вечірні сутінки"
 
+#: u_translation:rseverypositio
+msgid "Every position"
+msgstr ""
+
 #: u_translation:rsexit
 msgid "Exit"
 msgstr "Вихід"
@@ -1851,6 +1859,10 @@ msgstr "Мітка"
 #: u_translation:rslabelobject
 msgid "Label Object"
 msgstr "Тип об'єкту"
+
+#: u_translation:rslabeltext
+msgid "Label Text"
+msgstr ""
 
 #: u_translation:rslabel
 msgid "Label:"
@@ -2452,6 +2464,14 @@ msgstr "Застарілі CDC каталоги (але можете їх вик
 msgid "Offset"
 msgstr "Компенсація"
 
+#: u_translation:rsoneofthree
+msgid "One of three"
+msgstr ""
+
+#: u_translation:rsoneoftwo
+msgid "One of two"
+msgstr ""
+
 #: u_translation:rsonlinedss
 msgid "Online DSS"
 msgstr "Online DSS"
@@ -2467,6 +2487,14 @@ msgstr "Online сервери картинок"
 #: u_translation:rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Тільки пронумеровані астероїди"
+
+#: u_translation:rsonlythefirst
+msgid "Only the first"
+msgstr ""
+
+#: u_translation:rsonlythelast
+msgid "Only the last"
+msgstr ""
 
 #: u_translation:rsopen
 msgid "Open"

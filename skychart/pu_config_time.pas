@@ -39,6 +39,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    CheckGroup1: TCheckGroup;
     DST: TCheckBox;
     JDEdit: TFloatEdit;
     Label1: TLabel;
@@ -53,6 +54,7 @@ type
     Label134: TLabel;
     Label148: TLabel;
     Label149: TLabel;
+    RadioGroup1: TRadioGroup;
     tz: TFloatEdit;
     Panel8: TPanel;
     Label135: TLabel;
@@ -96,12 +98,14 @@ type
     procedure Button2Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
+    procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
     procedure DSTChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure JDEditChange(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
     procedure DateChange(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
     procedure SimObjItemClick(Sender: TObject; Index: LongInt);
     procedure TimeChange(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
@@ -206,6 +210,17 @@ JDCalendarDialog1.labels.Sat:=rsSaturday;
 JDCalendarDialog1.labels.Sun:=rsSunday;
 JDCalendarDialog1.labels.jd:=rsJulianDay;
 JDCalendarDialog1.labels.today:=rsToday;
+RadioGroup1.Caption:=rsShowLabels;
+RadioGroup1.Items[0]:=rsEveryPositio;
+RadioGroup1.Items[1]:=rsOneOfTwo;
+RadioGroup1.Items[2]:=rsOneOfThree;
+RadioGroup1.Items[3]:=rsOnlyTheFirst;
+RadioGroup1.Items[4]:=rsOnlyTheLast;
+RadioGroup1.Items[5]:=rsNone1;
+CheckGroup1.Caption:=rsLabelText;
+CheckGroup1.Items[0]:=rsObjectName;
+CheckGroup1.Items[1]:=rsCurrentDate;
+CheckGroup1.Items[2]:=rsMagnitude;
 end;
 
 constructor Tf_config_time.Create(AOwner:TComponent);
@@ -298,6 +313,9 @@ for i:=0 to SimObj.Items.Count-1 do begin
   if (i=9) and (not csc.ShowPluto) then SimObj.checked[9]:=false
      else SimObj.checked[i]:=csc.SimObject[j];
 end;
+RadioGroup1.ItemIndex:=csc.SimLabel;
+CheckGroup1.Checked[0]:=csc.SimNameLabel;
+CheckGroup1.Checked[1]:=csc.SimDateLabel;
 end;
 
 procedure Tf_config_time.CheckBox1Click(Sender: TObject);
@@ -348,6 +366,15 @@ begin
 csc.AutoRefresh:=checkbox2.checked;
 end;
 
+procedure Tf_config_time.CheckGroup1ItemClick(Sender: TObject; Index: integer);
+begin
+if (not CheckGroup1.Checked[0])and(not CheckGroup1.Checked[1])and(not CheckGroup1.Checked[2])
+  then CheckGroup1.Checked[abs(Index-1)]:=true;
+csc.SimNameLabel:=CheckGroup1.Checked[0];
+csc.SimDateLabel:=CheckGroup1.Checked[1];
+csc.SimMagLabel:=CheckGroup1.Checked[2];
+end;
+
 procedure Tf_config_time.DSTChange(Sender: TObject);
 begin
 if LockChange then exit;
@@ -390,6 +417,12 @@ dt_ut.text:=Tdt_Ut.caption;
 LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
+end;
+
+procedure Tf_config_time.RadioGroup1Click(Sender: TObject);
+begin
+if LockChange then exit;
+csc.SimLabel:=RadioGroup1.ItemIndex;
 end;
 
 procedure Tf_config_time.TimeChange(Sender: TObject);
@@ -452,9 +485,8 @@ Tdt_ut.caption:=dt_ut.text;
 end;
 
 procedure Tf_config_time.SimObjItemClick(Sender: TObject; Index: LongInt);
-var i,j:integer;
+var j:integer;
 begin
-//for i:=0 to SimObj.Items.Count-1 do begin
   case index of
   0 : j:=10;   // sun
   3 : j:=11;   // moon

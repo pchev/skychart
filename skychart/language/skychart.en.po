@@ -815,6 +815,10 @@ msgstr ""
 msgid "Culmination"
 msgstr ""
 
+#: u_translation:rscurrentdate
+msgid "Current Date"
+msgstr ""
+
 #: u_translation:rssday
 msgid "D"
 msgstr ""
@@ -1375,6 +1379,10 @@ msgstr ""
 msgid "Evening twilight"
 msgstr ""
 
+#: u_translation:rseverypositio
+msgid "Every position"
+msgstr ""
+
 #: u_translation:rsexit
 msgid "Exit"
 msgstr ""
@@ -1849,6 +1857,10 @@ msgstr ""
 
 #: u_translation:rslabelobject
 msgid "Label Object"
+msgstr ""
+
+#: u_translation:rslabeltext
+msgid "Label Text"
 msgstr ""
 
 #: u_translation:rslabel
@@ -2451,6 +2463,14 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
+#: u_translation:rsoneofthree
+msgid "One of three"
+msgstr ""
+
+#: u_translation:rsoneoftwo
+msgid "One of two"
+msgstr ""
+
 #: u_translation:rsonlinedss
 msgid "Online DSS"
 msgstr ""
@@ -2465,6 +2485,14 @@ msgstr ""
 
 #: u_translation:rsonlynumbered
 msgid "Only numbered asteroids"
+msgstr ""
+
+#: u_translation:rsonlythefirst
+msgid "Only the first"
+msgstr ""
+
+#: u_translation:rsonlythelast
+msgid "Only the last"
 msgstr ""
 
 #: u_translation:rsopen

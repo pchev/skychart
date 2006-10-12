@@ -81,6 +81,7 @@ Function Str3ToDE(dms : string) : double;
 Function DEToStr4(de: Double) : string;
 function isodate(a,m,d : integer) : string;
 function jddate(jd: double) : string;
+function jddatetime(jd: double) : string;
 function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
@@ -808,6 +809,14 @@ end;
 function isodate(a,m,d : integer) : string;
 begin
 result:=padzeros(inttostr(a),4)+'-'+padzeros(inttostr(m),2)+'-'+padzeros(inttostr(d),2);
+end;
+
+function jddatetime(jd: double) : string;
+var a,m,d : integer;
+    h:double;
+begin
+djd(jd,a,m,d,h);
+result:=isodate(a,m,d)+blank+ARtoStr3(rmod(h,24));
 end;
 
 function jddate(jd: double) : string;

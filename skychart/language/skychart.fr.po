@@ -1,7 +1,7 @@
-# translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.fr.po
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-10-10 22:11+0200\n"
+"PO-Revision-Date: 2006-10-12 18:38+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -815,6 +815,10 @@ msgstr "Création du fichier raster à %s dpi..."
 msgid "Culmination"
 msgstr "Culmination"
 
+#: u_translation:rscurrentdate
+msgid "Current Date"
+msgstr "Date courante"
+
 #: u_translation:rssday
 msgid "D"
 msgstr "J"
@@ -1375,6 +1379,10 @@ msgstr "Soir"
 msgid "Evening twilight"
 msgstr "Crépuscule soir"
 
+#: u_translation:rseverypositio
+msgid "Every position"
+msgstr "Chaque position"
+
 #: u_translation:rsexit
 msgid "Exit"
 msgstr "Sortie"
@@ -1850,6 +1858,10 @@ msgstr "Label"
 #: u_translation:rslabelobject
 msgid "Label Object"
 msgstr "Label les objets"
+
+#: u_translation:rslabeltext
+msgid "Label Text"
+msgstr "Texte du label"
 
 #: u_translation:rslabel
 msgid "Label:"
@@ -2451,6 +2463,14 @@ msgstr "Catalogues obsolètes (mais vous pouvez toujours les utiliser)"
 msgid "Offset"
 msgstr "Décalage"
 
+#: u_translation:rsoneofthree
+msgid "One of three"
+msgstr "Un sur trois"
+
+#: u_translation:rsoneoftwo
+msgid "One of two"
+msgstr "Un sur deux"
+
 #: u_translation:rsonlinedss
 msgid "Online DSS"
 msgstr "DSS en ligne"
@@ -2466,6 +2486,14 @@ msgstr "Serveurs d'images"
 #: u_translation:rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Seulement les numérotés"
+
+#: u_translation:rsonlythefirst
+msgid "Only the first"
+msgstr "Seulement le premier"
+
+#: u_translation:rsonlythelast
+msgid "Only the last"
+msgstr "Seulement le dernier"
 
 #: u_translation:rsopen
 msgid "Open"
