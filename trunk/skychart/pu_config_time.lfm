@@ -1,7 +1,7 @@
 object f_config_time: Tf_config_time
-  Left = 301
+  Left = 629
   Height = 527
-  Top = 105
+  Top = 139
   Width = 474
   HorzScrollBar.Page = 473
   VertScrollBar.Page = 526
@@ -14,7 +14,6 @@ object f_config_time: Tf_config_time
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
   object MainPanel: TPanel
     Height = 477
     Width = 474
@@ -89,7 +88,6 @@ object f_config_time: Tf_config_time
             ParentColor = False
           end
           object tz: TFloatEdit
-            Name = 'tz'
             Left = 140
             Height = 22
             Hint = '-12..12'
@@ -170,7 +168,6 @@ object f_config_time: Tf_config_time
             TabOrder = 0
           end
           object dt_ut: TLongEdit
-            Name = 'dt_ut'
             Left = 246
             Height = 22
             Hint = '-99999999..99999999'
@@ -188,7 +185,6 @@ object f_config_time: Tf_config_time
           end
         end
         object LongEdit2: TLongEdit
-          Name = 'LongEdit2'
           Left = 230
           Height = 22
           Hint = '10..86400'
@@ -389,7 +385,6 @@ object f_config_time: Tf_config_time
             Value = 1
           end
           object JDEdit: TFloatEdit
-            Name = 'JDEdit'
             Left = 56
             Height = 23
             Top = 104
@@ -439,7 +434,7 @@ object f_config_time: Tf_config_time
           OnClick = stepresetClick
         end
         object Label178: TLabel
-          Left = 308
+          Left = 223
           Height = 13
           Top = 100
           Width = 40
@@ -501,7 +496,7 @@ object f_config_time: Tf_config_time
         object stepline: TCheckBox
           Left = 6
           Height = 19
-          Top = 311
+          Top = 287
           Width = 251
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
@@ -573,6 +568,60 @@ object f_config_time: Tf_config_time
           Caption = 'None'
           OnClick = NoSimClick
           TabOrder = 6
+        end
+        object RadioGroup1: TRadioGroup
+          Left = 8
+          Height = 72
+          Top = 311
+          Width = 433
+          AutoFill = True
+          Caption = 'Show Labels'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 3
+          Columns = 3
+          Items.Strings = (
+            'Every position'
+            'One of two'
+            'One of three'
+            'Only the first'
+            'Only the last'
+            'None'
+          )
+          OnClick = RadioGroup1Click
+          TabOrder = 7
+        end
+        object CheckGroup1: TCheckGroup
+          Left = 8
+          Height = 48
+          Top = 391
+          Width = 433
+          AutoFill = True
+          Caption = 'Label Text'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 3
+          Columns = 3
+          Items.Strings = (
+            'Object Name'
+            'Current Date'
+            'Magnitude'
+          )
+          OnItemClick = CheckGroup1ItemClick
+          TabOrder = 8
+          Data = {
+            03000000020202
+          }
         end
       end
     end

@@ -390,9 +390,9 @@ type
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
                 FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
-                SimNb,SimD,SimH,SimM,SimS : Integer;
+                SimNb,SimD,SimH,SimM,SimS,SimLabel : Integer;
                 SimObject: array[1..NumSimObject] of boolean;
-                SimLine,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet : Boolean;
+                SimLine,SimDateLabel,SimNameLabel,SimMagLabel,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet : Boolean;
                 ObsLatitude,ObsLongitude,ObsAltitude,ObsTZ : double;
                 ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
                 ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;

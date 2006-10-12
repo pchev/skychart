@@ -1058,6 +1058,13 @@ resourcestring
   rsRequireXplan = '(require Xplanet 1.2.0)';
   rsXplanetIsPro = 'Xplanet is probably not installed!';
   rsDocumentatio = 'en/documentation/start.html';
+  rsEveryPositio = 'Every position';
+  rsOneOfTwo = 'One of two';
+  rsOneOfThree = 'One of three';
+  rsOnlyTheFirst = 'Only the first';
+  rsOnlyTheLast = 'Only the last';
+  rsLabelText = 'Label Text';
+  rsCurrentDate = 'Current Date';
 
 implementation
 
