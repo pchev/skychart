@@ -505,7 +505,9 @@ for i:=0 to SimObj.Items.Count-1 do begin
   if (i=9) and (not csc.ShowPluto) then SimObj.checked[i]:=false
     else SimObj.checked[i]:=true;
 end;
-//SimObjItemClick(Sender);
+{$ifdef win32}
+ for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);
+{$endif}
 end;
 
 procedure Tf_config_time.NoSimClick(Sender: TObject);
@@ -513,7 +515,9 @@ var i:integer;
 begin
 for i:=0 to SimObj.Items.Count-1 do
     SimObj.checked[i]:=false;
-//SimObjClickCheck(Sender);
+{$ifdef win32}
+ for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);
+{$endif}
 end;
 
 procedure Tf_config_time.stepunitClick(Sender: TObject);
