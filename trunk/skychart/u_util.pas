@@ -1485,6 +1485,8 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
 procedure ScaleForm(form: TForm; scale: single);
 var i: integer;
 begin
+if scale<=0 then exit; // must not arise but we don't know what a strange screen can do
+if scale>3 then exit; // >288 dpi! sure?
 if abs(1-scale)<=0.1 then exit; // do not scale for 10%
 with form do begin
    width := round( width * scale );
