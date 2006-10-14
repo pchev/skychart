@@ -673,12 +673,12 @@ try
 ScrollLock:=true;
 scrollw:=round(ZoomImage1.Width/ZoomImage1.zoom/2);
 posmax:=max(scrollw,ZoomImage1.SizeX-scrollw);
-Hscrollbar.SetParams(Hscrollbar.Position, scrollw, posmax);
+Hscrollbar.SetParams(Hscrollbar.Position, scrollw, posmax,1);
 Hscrollbar.LargeChange:=scrollw;
 Hscrollbar.SmallChange:=scrollw div 10;
 scrollh:=round(ZoomImage1.Height/ZoomImage1.zoom/2);
 posmax:=max(scrollh,ZoomImage1.SizeY-scrollh);
-Vscrollbar.SetParams(Vscrollbar.Position, scrollh, posmax);
+Vscrollbar.SetParams(Vscrollbar.Position, scrollh, posmax,1);
 Vscrollbar.LargeChange:=scrollh;
 Vscrollbar.SmallChange:=scrollh div 10;
 finally

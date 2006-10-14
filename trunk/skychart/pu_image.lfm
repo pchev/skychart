@@ -1,5 +1,16 @@
 object f_image: Tf_image
+  Left = 363
+  Height = 407
+  Top = 106
+  Width = 615
+  HorzScrollBar.Increment = 61
+  HorzScrollBar.Page = 614
+  HorzScrollBar.Smooth = True
+  VertScrollBar.Increment = 40
+  VertScrollBar.Page = 406
+  VertScrollBar.Smooth = True
   ActiveControl = Button1
+  Caption = 'f_image'
   ClientHeight = 407
   ClientWidth = 615
   Font.Height = -11
@@ -7,29 +18,19 @@ object f_image: Tf_image
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   OnResize = FormResize
-  PixelsPerInch = 96
   Position = poScreenCenter
-  TextHeight = 13
-  HorzScrollBar.Increment = 61
-  HorzScrollBar.Page = 614
-  HorzScrollBar.Smooth = True
-  VertScrollBar.Increment = 40
-  VertScrollBar.Page = 406
-  VertScrollBar.Smooth = True
-  Left = 363
-  Height = 407
-  Top = 106
-  Width = 615
   object Image1: TZoomImage
+    Height = 265
+    Top = 32
+    Width = 465
     Canvas.Brush.Color = clBlack
     Zoom = 1
     ZoomMin = 1
     ZoomMax = 4
-    Height = 265
-    Top = 32
-    Width = 465
   end
   object Panel1: TPanel
+    Height = 28
+    Width = 615
     Align = alTop
     AutoSize = True
     ClientHeight = 28
@@ -37,64 +38,62 @@ object f_image: Tf_image
     FullRepaint = False
     TabOrder = 0
     TabStop = True
-    Height = 28
-    Width = 615
     object Label1: TLabel
+      Left = 241
+      Height = 13
+      Top = 7
+      Width = 38
       Caption = 'Label1'
       Color = clNone
       ParentColor = False
-      Left = 241
-      Height = 14
-      Top = 7
-      Width = 32
     end
     object Button1: TButton
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Close'
-      OnClick = Button1Click
-      TabOrder = 0
       Left = 1
       Height = 25
       Top = 2
       Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Close'
+      OnClick = Button1Click
+      TabOrder = 0
     end
     object Button2: TButton
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Zoom +'
-      OnClick = Button2Click
-      TabOrder = 1
       Left = 81
       Height = 25
       Top = 1
       Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Zoom +'
+      OnClick = Button2Click
+      TabOrder = 1
     end
     object Button3: TButton
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Zoom -'
-      OnClick = Button3Click
-      TabOrder = 2
       Left = 161
       Height = 25
       Top = 2
       Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Zoom -'
+      OnClick = Button3Click
+      TabOrder = 2
     end
   end
   object VScrollBar: TScrollBar
+    Left = 602
+    Height = 366
+    Top = 28
+    Width = 13
     Align = alRight
     Kind = sbVertical
     TabOrder = 1
     OnChange = VScrollBarChange
-    Left = 600
-    Height = 364
-    Top = 28
-    Width = 15
   end
   object HScrollBar: TScrollBar
+    Height = 13
+    Top = 394
+    Width = 615
     Align = alBottom
     TabOrder = 2
     OnChange = HScrollBarChange
-    Height = 15
-    Top = 392
-    Width = 615
   end
 end
