@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-10-03 01:06+0200\n"
+"PO-Revision-Date: 2006-10-14 15:13+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ua\n"
 "POT-Creation-Date: \n"
@@ -750,7 +750,7 @@ msgstr "Конвертація файлу каталогу %s"
 
 #: u_translation:rsconvertcatal2
 msgid "Convert catalog files"
-msgstr "Конвертувати фали каталогу"
+msgstr "Конвертувати файли каталогу"
 
 #: u_translation:rscoord
 msgid "Coord."
@@ -818,7 +818,7 @@ msgstr "Кульмінація"
 
 #: u_translation:rscurrentdate
 msgid "Current Date"
-msgstr ""
+msgstr "Поточна дата"
 
 #: u_translation:rssday
 msgid "D"
@@ -1370,7 +1370,7 @@ msgstr "Передбачуваний розмір файлу: %sMB %sХочет�
 
 #: u_translation:rsestimatedtai
 msgid "Estimated tail length"
-msgstr "Предбачувана довжина хвоста"
+msgstr "Передбачувана довжина хвоста"
 
 #: u_translation:rsevening
 msgid "Evening"
@@ -1382,7 +1382,7 @@ msgstr "Вечірні сутінки"
 
 #: u_translation:rseverypositio
 msgid "Every position"
-msgstr ""
+msgstr "Кожне положення"
 
 #: u_translation:rsexit
 msgid "Exit"
@@ -1862,7 +1862,7 @@ msgstr "Тип об'єкту"
 
 #: u_translation:rslabeltext
 msgid "Label Text"
-msgstr ""
+msgstr "Текст мітки"
 
 #: u_translation:rslabel
 msgid "Label:"
@@ -2466,11 +2466,11 @@ msgstr "Компенсація"
 
 #: u_translation:rsoneofthree
 msgid "One of three"
-msgstr ""
+msgstr "Одне із трьох"
 
 #: u_translation:rsoneoftwo
 msgid "One of two"
-msgstr ""
+msgstr "Одне из двох"
 
 #: u_translation:rsonlinedss
 msgid "Online DSS"
@@ -2490,11 +2490,11 @@ msgstr "Тільки пронумеровані астероїди"
 
 #: u_translation:rsonlythefirst
 msgid "Only the first"
-msgstr ""
+msgstr "Тільки перше"
 
 #: u_translation:rsonlythelast
 msgid "Only the last"
-msgstr ""
+msgstr "Тільки останнє"
 
 #: u_translation:rsopen
 msgid "Open"
@@ -2862,11 +2862,11 @@ msgstr "Швидко видалити"
 
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
-msgstr "Швидко видалити всі звязані із астероїдами дані."
+msgstr "Швидко видалити всі зв'язані із астероїдами дані."
 
 #: u_translation:rsquicklydelet
 msgid "Quickly delete all comet related data"
-msgstr "Швидко видалити всі звязані із кометами дані."
+msgstr "Швидко видалити всі зв'язані із кометами дані."
 
 #: u_translation:rsra
 msgid "RA"
