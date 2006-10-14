@@ -173,11 +173,11 @@ begin
 try
 ScrollLock:=true;
 scrollw:=min(Image1.SizeX-1,round(Image1.Width/Image1.zoom)) div 2;
-Hscrollbar.SetParams(Hscrollbar.Position, scrollw, Image1.SizeX-scrollw);
+Hscrollbar.SetParams(Hscrollbar.Position, scrollw, Image1.SizeX-scrollw,1);
 Hscrollbar.LargeChange:=scrollw;
 Hscrollbar.SmallChange:=scrollw div 10;
 scrollh:=min(Image1.SizeY-1,round(Image1.Height/Image1.zoom)) div 2;
-Vscrollbar.SetParams(Vscrollbar.Position, scrollh, Image1.SizeY-scrollh);
+Vscrollbar.SetParams(Vscrollbar.Position, scrollh, Image1.SizeY-scrollh,1);
 Vscrollbar.LargeChange:=scrollh;
 Vscrollbar.SmallChange:=scrollh div 10;
 finally
