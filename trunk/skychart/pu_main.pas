@@ -645,9 +645,13 @@ implementation
 {$ifdef win32}
    {$R cdc_icon.res}
 {$endif}
+
 //todo: lazarus cursor {$R cursbmp.res}
 
 uses
+{$ifdef LCLgtk}
+     gtkproc,
+{$endif}
      pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_manualtelescope, pu_print;
@@ -1968,6 +1972,7 @@ if ConfigTime=nil then begin
    ConfigTime.Notebook1.ShowTabs:=true;
    ConfigTime.Notebook1.PageIndex:=0;
    ConfigTime.onApplyConfig:=ApplyConfigTime;
+   ConfigTime.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigTime,nightvision);{$endif}
 ConfigTime.ccat^:=catalog.cfgcat;
@@ -2007,6 +2012,7 @@ if ConfigPictures=nil then begin
    ConfigPictures.Notebook1.ShowTabs:=true;
    ConfigPictures.Notebook1.PageIndex:=0;
    ConfigPictures.onApplyConfig:=ApplyConfigPictures;
+   ConfigPictures.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigPictures,nightvision);{$endif}
 ConfigPictures.cdb:=cdcdb;
@@ -2053,6 +2059,7 @@ if ConfigObservatory=nil then begin
    ConfigObservatory.Notebook1.ShowTabs:=true;
    ConfigObservatory.Notebook1.PageIndex:=0;
    ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
+   ConfigObservatory.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigObservatory,nightvision);{$endif}
 ConfigObservatory.cdb:=cdcdb;
@@ -2094,6 +2101,7 @@ if ConfigCatalog=nil then begin
    ConfigCatalog.Notebook1.ShowTabs:=true;
    ConfigCatalog.Notebook1.PageIndex:=0;
    ConfigCatalog.onApplyConfig:=ApplyConfigCatalog;
+   ConfigCatalog.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
 ConfigCatalog.ccat^:=catalog.cfgcat;
@@ -2160,6 +2168,7 @@ if ConfigDisplay=nil then begin
    ConfigDisplay.Notebook1.ShowTabs:=true;
    ConfigDisplay.Notebook1.PageIndex:=0;
    ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
+   ConfigDisplay.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigDisplay,nightvision);{$endif}
 ConfigDisplay.ccat^:=catalog.cfgcat;
@@ -4003,7 +4012,7 @@ MenuItem7.caption:=rsPictures;
 MenuItem8.caption:=rsShowHideDSSI;
 MenuItem9.caption:=rsCatalog;
 View1.caption:=rsView;
-FullScreen1.caption:=rsViewFullScre;
+FullScreen1.caption:=rsFullScreen;
 NightVision1.caption:=rsNightVision;
 oolBar1.caption:=rsToolBar;
 ViewToolsBar1.caption:=rsAllToolsBar;
@@ -5094,9 +5103,11 @@ end;
 
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 begin
-//Too tricky and windows manager dependant...
-//Beware that modal form get hiden and lock the app.
-//Is this really useful ? better to use a theme with small border.
+FullScreen1.Checked:=not FullScreen1.Checked;
+// Finally something that seem to work
+{$ifdef LCLgtk}
+  SetWindowFullScreen(f_main,FullScreen1.Checked);
+{$endif}
 end;
 {$endif}
 
