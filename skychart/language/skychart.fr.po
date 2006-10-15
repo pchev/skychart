@@ -1,7 +1,7 @@
-# translation of skychart.fr.po
+# translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-10-12 18:38+0200\n"
+"PO-Revision-Date: 2006-10-15 15:15+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -1538,6 +1538,10 @@ msgstr "De"
 #: u_translation:rsfullname
 msgid "Full Name"
 msgstr "Nom complet"
+
+#: u_translation:rsfullscreen
+msgid "Full Screen"
+msgstr "Affichage plein écran"
 
 #: u_translation:rsgslopeparame
 msgid "G slope parameter"
@@ -3862,10 +3866,6 @@ msgstr "Voir"
 #: u_translation:rsviewhorizon
 msgid "View Horizon"
 msgstr "Voir l'horizon"
-
-#: u_translation:rsviewfullscre
-msgid "ViewFullScreen"
-msgstr "Affichage plein écran"
 
 #: u_translation:rsvisibilityfo
 msgid "Visibility for observatory"
