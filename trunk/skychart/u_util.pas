@@ -1204,12 +1204,14 @@ Function ExecuteFile(const FileName: string): integer;
 var
   zFileName, zParams, zDir: array[0..255] of Char;
 begin
+  writetrace('Try to launch: '+FileName);
   Result := ShellExecute(Application.MainForm.Handle, nil, StrPCopy(zFileName, FileName),
                          StrPCopy(zParams, ''), StrPCopy(zDir, ''), SW_SHOWNOACTIVATE);
 {$endif}
 {$ifdef unix}
 var cmd,p1,p2,p3,p4: string;
 begin
+  writetrace('Try to launch: '+FileName);
   cmd:=trim(words(OpenFileCMD,blank,1,1));
   p1:=trim(words(OpenFileCMD,blank,2,1));
   p2:=trim(words(OpenFileCMD,blank,3,1));

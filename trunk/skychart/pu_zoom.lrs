@@ -1,5 +1,3 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('Tf_zoom','FORMDATA',[
   'TPF0'#7'Tf_zoom'#6'f_zoom'#4'Left'#3#197#1#6'Height'#3#142#0#3'Top'#3#181#0#5
   +'Width'#3'4'#1#18'HorzScrollBar.Page'#3'3'#1#18'VertScrollBar.Page'#3#141#0

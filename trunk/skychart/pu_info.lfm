@@ -147,9 +147,7 @@ object f_info: Tf_info
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
   Position = poDefaultPosOnly
-  TextHeight = 13
   object PageControl1: TPageControl
     Height = 370
     Width = 639
@@ -178,8 +176,6 @@ object f_info: Tf_info
         ScrollBars = ssVertical
         TabOrder = 0
         TabStop = True
-        VisibleColCount = 1
-        VisibleRowCount = 10
         OnMouseDown = StringGrid1MouseDown
       end
       object Panel2: TPanel
@@ -192,10 +188,10 @@ object f_info: Tf_info
         FullRepaint = False
         TabOrder = 1
         object serverinfo: TLabel
-          Left = 559
-          Height = 15
+          Left = 553
+          Height = 22
           Top = 6
-          Width = 58
+          Width = 65
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Color = clNone
@@ -292,7 +288,6 @@ object f_info: Tf_info
         end
       end
       object Memo1: TSynEdit
-        Name = 'Memo1'
         Height = 317
         Width = 637
         Align = alClient
@@ -304,9 +299,7 @@ object f_info: Tf_info
         TabOrder = 1
         OnDblClick = Memo1DblClick
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
-        Gutter.OnChange = nil
         Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
@@ -635,7 +628,6 @@ object f_info: Tf_info
         Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
         ReadOnly = True
         RightEdge = 0
-        SelectedColor.OnChange = nil
         TabWidth = 10
       end
     end
@@ -662,7 +654,7 @@ object f_info: Tf_info
     FullRepaint = False
     TabOrder = 1
     object Button1: TButton
-      Left = 471
+      Left = 552
       Height = 25
       Top = 1
       Width = 75
@@ -672,15 +664,6 @@ object f_info: Tf_info
       Caption = 'Close'
       OnClick = Button1Click
       TabOrder = 0
-    end
-    object Button4: TButton
-      Left = 559
-      Height = 25
-      Width = 76
-      Anchors = [akTop, akRight]
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Help'
-      TabOrder = 1
     end
   end
   object PopupMenu1: TPopupMenu

@@ -59,7 +59,6 @@ type
     Button3: TButton;
     Edit1: TEdit;
     Button5: TButton;
-    Button4: TButton;
     PopupMenu2: TPopupMenu;
     ActionList1: TActionList;
     EditSelectAll1: TEditSelectAll;
@@ -127,7 +126,6 @@ Button6.caption:=rsPrint;
 Button7.caption:=rsSave;
 ProgressMessages.caption:=rsProgressMess;
 Button1.caption:=rsClose;
-Button4.caption:=rsHelp;
 closeconnection.caption:=rsCloseConnect;
 outslectionner1.caption:=rsSelectAll;
 Copier1.caption:=rsCopy;
