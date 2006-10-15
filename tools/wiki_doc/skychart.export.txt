@@ -1,0 +1,37 @@
+Export HTML Skychart wiki from a local copy (do not work from the real wiki)
+
+- copy all
+----------------
+
+copy /web/skychart
+copy bin -> /web/skychart/bin
+copy conf -> /web/skychart/conf
+copy data -> /web/skychart/data
+
+cd web/skychart
+chmod -R 777 data
+
+change .htaccess with doku.php?do=export_html (see htaccess.export file here)
+
+change savedir in local.php
+$conf['savedir'] = '/home/www/ap-i/web/skychart/data';
+
+
+- Update the new content
+------------------------
+
+erase + download /data/pages /data/meta /data/media + chmod
+
+- export content
+----------------
+
+erase /data/cache
+
+erase the old doc_en, doc_fr, ...
+
+change /etc/hosts to fake missing link to real wiki:
+127.0.0.1 localhost ap-i.net
+
+./getdoc.sh
+
+

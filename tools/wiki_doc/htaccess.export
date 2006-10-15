@@ -1,0 +1,30 @@
+# Dokuwiki generates a lot of notices... best prevent reporting them
+# in .htaccess files E_ALL, E_NOTICE have no effect, you must use the
+# values from http://w.php.net/manual/en/function.error-reporting.php
+# E_ALL & ~E_NOTCE => 2047 - 8 => 2039
+php_flag error_reporting 2039
+
+## Enable this to restrict editing to logged in users only
+
+## You should disable Indexes and MultiViews either here or in the
+## global config. Symlinks maybe needed for URL rewriting.
+Options -Indexes -MultiViews +FollowSymLinks
+
+## Uncomment these rules if you want to have nice URLs using
+## $conf['rewrite'] = 1 - not needed for rewrite mode 2
+RewriteEngine on
+#
+## Not all installations will require the following line.  If you do, 
+## change "/dokuwiki" to the path to your dokuwiki directory relative
+## to your document root.
+RewriteBase /skychart
+
+RewriteRule ^$                        404.html
+RewriteRule ^_media/(.*)              lib/exe/fetch.php?media=$1  [QSA,L]
+RewriteRule ^_detail/(.*)             lib/exe/detail.php?media=$1  [QSA,L]
+RewriteRule ^_export/([^/]+)/(.*)     doku.php?do=export_$1&id=$2  [QSA,L]
+RewriteRule ^$                        doku.php  [L]
+RewriteCond %{REQUEST_FILENAME}       !-f
+RewriteCond %{REQUEST_FILENAME}       !-d
+RewriteRule (.*)                      doku.php?do=export_html&id=$1  [QSA,L]
+RewriteRule ^index.php$               doku.php?do=export_html
