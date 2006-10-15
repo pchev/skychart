@@ -1540,6 +1540,10 @@ msgstr "De"
 msgid "Full Name"
 msgstr "Nom complet"
 
+#: u_translation:rsfullscreen
+msgid "Full Screen"
+msgstr "Pantalla completa"
+
 #: u_translation:rsgslopeparame
 msgid "G slope parameter"
 msgstr "Paràmetre de pendent G"
@@ -3863,10 +3867,6 @@ msgstr "Veure"
 #: u_translation:rsviewhorizon
 msgid "View Horizon"
 msgstr "Mostra l'horitzó"
-
-#: u_translation:rsviewfullscre
-msgid "ViewFullScreen"
-msgstr "Pantalla completa"
 
 #: u_translation:rsvisibilityfo
 msgid "Visibility for observatory"

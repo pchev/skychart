@@ -1539,6 +1539,10 @@ msgstr ""
 msgid "Full Name"
 msgstr ""
 
+#: u_translation:rsfullscreen
+msgid "Full Screen"
+msgstr ""
+
 #: u_translation:rsgslopeparame
 msgid "G slope parameter"
 msgstr ""
@@ -3861,10 +3865,6 @@ msgstr ""
 
 #: u_translation:rsviewhorizon
 msgid "View Horizon"
-msgstr ""
-
-#: u_translation:rsviewfullscre
-msgid "ViewFullScreen"
 msgstr ""
 
 #: u_translation:rsvisibilityfo
