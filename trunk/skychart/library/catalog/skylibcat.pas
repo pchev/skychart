@@ -925,7 +925,7 @@ step:=minvalue([ra,de,step]);
 nSM:=0;
 de:=y1;
 repeat
-  if abs(de) >= 90 then continue;
+  if abs(de) < 90 then begin
   ra:=x1;
   repeat
     ar:=ra;
@@ -947,6 +947,7 @@ repeat
     end;
     ra:=ra+step/cos(degtorad(de));
   until ra>x2;
+  end;
   de:=de+step;
 until de>y2;
 end;
