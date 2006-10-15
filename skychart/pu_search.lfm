@@ -12,10 +12,9 @@ object f_search: Tf_search
   ClientWidth = 433
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
+  FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
-  TextHeight = 13
   object PlanetPanel: TPanel
     Left = 7
     Height = 41

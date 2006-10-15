@@ -116,7 +116,7 @@ resourcestring
   rsShowHideDSSI = 'Show/Hide DSS image';
   rsCatalog = 'Catalog';
   rsView = 'View';
-  rsViewFullScre = 'ViewFullScreen';
+  rsFullScreen = 'Full Screen';
   rsNightVision = 'Night Vision';
   rsToolBar = 'Tool Bar';
   rsAllToolsBar = 'All Tools Bar';
