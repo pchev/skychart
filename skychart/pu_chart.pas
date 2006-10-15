@@ -1480,6 +1480,7 @@ if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.
 f_detail.source_chart:=caption;
 f_detail.show;
 f_detail.setfocus;
+f_detail.BringToFront;
 end;
 
 function Tf_chart.FormatDesc:string;
