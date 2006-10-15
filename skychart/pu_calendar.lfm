@@ -435,8 +435,6 @@ object f_calendar: Tf_calendar
         ScrollBars = ssAutoBoth
         TabOrder = 0
         TabStop = True
-        VisibleColCount = 4
-        VisibleRowCount = 1
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
       end
@@ -472,8 +470,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -509,8 +505,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -547,8 +541,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -585,8 +577,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -623,8 +613,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -661,8 +649,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -699,8 +685,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -737,8 +721,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -775,8 +757,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -813,8 +793,6 @@ object f_calendar: Tf_calendar
             ScrollBars = ssAutoBoth
             TabOrder = 0
             TabStop = True
-            VisibleColCount = 9
-            VisibleRowCount = 12
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
             ColWidths = (
@@ -855,8 +833,6 @@ object f_calendar: Tf_calendar
         ScrollBars = ssAutoBoth
         TabOrder = 0
         TabStop = True
-        VisibleColCount = 9
-        VisibleRowCount = 1
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
         ColWidths = (
@@ -933,8 +909,6 @@ object f_calendar: Tf_calendar
         ScrollBars = ssAutoBoth
         TabOrder = 0
         TabStop = True
-        VisibleColCount = 8
-        VisibleRowCount = 1
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
         ColWidths = (
@@ -1005,8 +979,6 @@ object f_calendar: Tf_calendar
         ScrollBars = ssAutoBoth
         TabOrder = 0
         TabStop = True
-        VisibleColCount = 10
-        VisibleRowCount = 1
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
         ColWidths = (
@@ -1044,8 +1016,6 @@ object f_calendar: Tf_calendar
         ScrollBars = ssAutoBoth
         TabOrder = 0
         TabStop = True
-        VisibleColCount = 8
-        VisibleRowCount = 1
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
       end
@@ -1073,8 +1043,6 @@ object f_calendar: Tf_calendar
         TabOrder = 0
         TabStop = True
         Visible = False
-        VisibleColCount = 1
-        VisibleRowCount = 1
         ColWidths = (
           132
           100
@@ -1197,23 +1165,10 @@ object f_calendar: Tf_calendar
       end
     end
   end
-  object ActionList1: TActionList
-    left = 392
-    top = 8
-    object HelpContents1: THelpContents
-      Category = 'Help'
-      Caption = '&Contents'
-      Enabled = False
-      Hint = 'Help Contents'
-      ImageIndex = 40
-      OnExecute = HelpContents1Execute
-      ShortCut = 112
-    end
-  end
   object SaveDialog1: TSaveDialog
     Title = 'Save file as'
     FilterIndex = 0
-    left = 392
-    top = 64
+    left = 366
+    top = 16
   end
 end

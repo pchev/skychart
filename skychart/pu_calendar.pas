@@ -118,8 +118,6 @@ type
     step: TLongEdit;
     Asteroids: TTabSheet;
     AsteroidGrid: TStringGrid;
-    ActionList1: TActionList;
-    HelpContents1: THelpContents;
     SaveDialog1: TSaveDialog;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
@@ -138,7 +136,6 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
-    procedure HelpContents1Execute(Sender: TObject);
     procedure BtnHelpClick(Sender: TObject);
     procedure BtnPrintClick(Sender: TObject);
     procedure Date1Change(Sender: TObject);
@@ -1683,14 +1680,8 @@ end;
 
 procedure Tf_calendar.BtnHelpClick(Sender: TObject);
 begin
-HelpContents1.Execute;
+ExecuteFile(slash(helpdir)+slash('wiki_doc')+stringreplace(rsDocumentatio,'/',PathDelim,[rfReplaceAll]));
 end;
-
-procedure Tf_calendar.HelpContents1Execute(Sender: TObject);
-begin
-ExecuteFile(slash(helpdir)+'calendar.html');
-end;
-
 
 initialization
   {$i pu_calendar.lrs}

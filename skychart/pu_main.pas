@@ -1085,7 +1085,7 @@ end;
 
 procedure Tf_main.HelpContents1Execute(Sender: TObject);
 begin
-   ExecuteFile(slash(helpdir)+slash('wiki_doc')+rsDocumentatio);
+   ExecuteFile(slash(helpdir)+slash('wiki_doc')+stringreplace(rsDocumentatio,'/',PathDelim,[rfReplaceAll]));
 end;
 
 procedure Tf_main.HomePage1Click(Sender: TObject);
