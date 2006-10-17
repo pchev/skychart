@@ -147,8 +147,6 @@ object f_config: Tf_config
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
-  TextHeight = 13
   object Panel1: TPanel
     Height = 480
     Width = 200
