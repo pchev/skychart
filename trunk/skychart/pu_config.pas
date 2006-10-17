@@ -177,6 +177,7 @@ TreeView1.items[43].text:='1- '+rsProxy;
 TreeView1.items[44].text:='2- '+rsOrbitalEleme;
 TreeView1.items[45].text:='3- '+rsOnlineDSSPic;
 Applyall.caption:=rsApplyChangeT;
+Apply.Caption:=rsApply;
 OKBtn.caption:=rsOK;
 CancelBtn.caption:=rsCancel;
 HelpBtn.caption:=rsHelp;

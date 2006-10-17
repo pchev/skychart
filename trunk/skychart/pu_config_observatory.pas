@@ -174,6 +174,9 @@ procedure Tf_config_observatory.SetLang;
 begin
 Caption:=rsObservatory;
 Page1.caption:=rsObservatory;
+Latitude.Caption:=rsLatitude;
+Longitude.Caption:=rsLongitude;
+Altitude.Caption:=rsAltitude;
 Label58.caption:=rsDegree;
 Label59.caption:=rsMin3;
 Label60.caption:=rsSec2;

@@ -463,17 +463,17 @@ object f_config_observatory: Tf_config_observatory
             Left = 93
             Height = 25
             Top = 60
-            Width = 60
+            Width = 72
             BorderSpacing.InnerBorder = 4
             Caption = 'Update'
             OnClick = updcityClick
             TabOrder = 5
           end
           object delcity: TButton
-            Left = 165
+            Left = 169
             Height = 25
             Top = 60
-            Width = 60
+            Width = 72
             BorderSpacing.InnerBorder = 4
             Caption = 'Delete'
             OnClick = delcityClick
