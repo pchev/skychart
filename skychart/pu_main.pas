@@ -418,6 +418,7 @@ type
     procedure FileClose1Execute(Sender: TObject);
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
     procedure FileExit1Execute(Sender: TObject);
@@ -968,6 +969,11 @@ OpenDialog.Title:=rsOpenAChart;
     if p>0 then nam:=copy(nam,1,p-1);
     CreateChild(GetUniqueName(nam,false) ,false,cfgs,cfgp);
   end;
+end;
+
+procedure Tf_main.FormActivate(Sender: TObject);
+begin
+  ImageSetFocus(Sender);
 end;
 
 procedure Tf_main.FormShow(Sender: TObject);
