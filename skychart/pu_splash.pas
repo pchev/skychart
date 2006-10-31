@@ -46,6 +46,8 @@ type
     Panel1: TPanel;
     Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
+    procedure FormMouseUp(Sender: TOBject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure logoDblClick(Sender: TObject);
@@ -93,13 +95,18 @@ end;
 procedure Tf_splash.Timer1Timer(Sender: TObject);
 begin
 Timer1.Enabled:=false;
-BorderStyle:=bsToolWindow;
 Close;
 end;
 
 procedure Tf_splash.logoDblClick(Sender: TObject);
 begin
 Timer1Timer(Sender);
+end;
+
+procedure Tf_splash.FormMouseUp(Sender: TOBject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+logoDblClick(Sender);
 end;
 
 initialization
