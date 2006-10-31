@@ -48,7 +48,7 @@ begin
   Application.Initialize;
 
   Application.CreateForm(Tf_main, f_main);
-  f_splash := Tf_splash.Create(nil);
+  Application.CreateForm(Tf_splash, f_splash);
   f_splash.Show; f_splash.Invalidate;
   Application.ProcessMessages;
   Application.CreateForm(Tf_position, f_position);
@@ -64,7 +64,6 @@ begin
   Application.CreateForm(Tf_about, f_about);
   f_main.init;
   Application.Run;
-  f_splash.free;
 
 end.
 
