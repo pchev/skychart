@@ -1468,6 +1468,10 @@ msgstr "Directori"
 msgid "Fill Milky Way"
 msgstr "Reomple la via làctia"
 
+#: u_translation:rsfillwithhori
+msgid "Fill with horizon color"
+msgstr ""
+
 #: u_translation:rsfill
 msgid "Fill?"
 msgstr "Reomplir?"
@@ -3937,7 +3941,7 @@ msgid "You are now ready to display the asteroid for this time period."
 msgstr "Ara ja esteu preparat per mostrar els asteroides per aquest període."
 
 #: u_translation:rsyouliveonabi
-msgid "You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon."
+msgid "You live on a big mountain near the ocean shore and you like to observe the distorted image of the object below the horizon."
 msgstr "Viviu en una muntanya alta,prop del mar i voleu observar la imatge distorsionada dels objectes per sota de l'horitzó."
 
 #: u_translation:rszenith

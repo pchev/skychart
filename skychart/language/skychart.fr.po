@@ -1,7 +1,7 @@
-# translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-10-15 15:15+0200\n"
+"PO-Revision-Date: 2006-10-31 20:01+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -1466,6 +1466,10 @@ msgstr "Répertoire"
 #: u_translation:rsfillmilkyway
 msgid "Fill Milky Way"
 msgstr "Remplire la voie lactée"
+
+#: u_translation:rsfillwithhori
+msgid "Fill with horizon color"
+msgstr "Remplir avec la couleur de l'horizon"
 
 #: u_translation:rsfill
 msgid "Fill?"
@@ -3936,7 +3940,7 @@ msgid "You are now ready to display the asteroid for this time period."
 msgstr "Vous êtes mantenant prêt à afficher les astéroïdes pour cette période."
 
 #: u_translation:rsyouliveonabi
-msgid "You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon."
+msgid "You live on a big mountain near the ocean shore and you like to observe the distorted image of the object below the horizon."
 msgstr "Vous vivez sur une haute montagne près de l'océan et vous aimez observer l'image distordue des objets sous l'horizon."
 
 #: u_translation:rszenith

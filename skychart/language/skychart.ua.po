@@ -1468,6 +1468,10 @@ msgstr "Шлях файлів"
 msgid "Fill Milky Way"
 msgstr "Заповнити Чумацький Шлях"
 
+#: u_translation:rsfillwithhori
+msgid "Fill with horizon color"
+msgstr ""
+
 #: u_translation:rsfill
 msgid "Fill?"
 msgstr "Залити?"
@@ -3937,7 +3941,7 @@ msgid "You are now ready to display the asteroid for this time period."
 msgstr "Тепер ви готові відобразити астероїди на цей період часу."
 
 #: u_translation:rsyouliveonabi
-msgid "You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon."
+msgid "You live on a big mountain near the ocean shore and you like to observe the distorted image of the object below the horizon."
 msgstr "Ви живете на високій горі на океанському узбережжі і вам подобається спостерігати спотворений образ об'єкту нижче обрію."
 
 #: u_translation:rszenith
