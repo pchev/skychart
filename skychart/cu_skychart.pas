@@ -2118,19 +2118,27 @@ if cfgsc^.ProjPole=Altaz then begin
           x0:=x; x0h:=xh;
           y0:=y; y0h:=yh;
        end else begin
-          Fplot.PlotOutline(xp,yp,0,1,2,1,cfgsc^.x2,Fplot.cfgplot^.Color[19]);
-          Fplot.PlotOutline(x,y,2,1,2,1,cfgsc^.x2,Fplot.cfgplot^.Color[19]);
-          Fplot.PlotOutline(xh,yh,2,1,2,1,cfgsc^.x2,Fplot.cfgplot^.Color[19]);
-          Fplot.PlotOutline(xph,yph,1,1,2,1,cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+          if cfgsc^.FillHorizon then begin
+             Fplot.PlotOutline(xp,yp,0,1,2,1,99*cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+             Fplot.PlotOutline(x,y,2,1,2,1,99*cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+             Fplot.PlotOutline(xh,yh,2,1,2,1,99*cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+             Fplot.PlotOutline(xph,yph,1,1,2,1,99*cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+          end else begin
+             Fplot.Plotline(xp,yp,x,y,Fplot.cfgplot^.Color[19],1);
+          end;
           Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot^.Color[12],2);
        end;
        xp:=x; xph:=xh;
        yp:=y; yph:=yh;
      end;
-     Fplot.PlotOutline(x,y,0,1,2,1,cfgsc^.x2,Fplot.cfgplot^.Color[19]);
-     Fplot.PlotOutline(x0,y0,2,1,2,1,cfgsc^.x2,Fplot.cfgplot^.Color[19]);
-     Fplot.PlotOutline(x0h,y0h,2,1,2,1,cfgsc^.x2,Fplot.cfgplot^.Color[19]);
-     Fplot.PlotOutline(xh,yh,1,1,2,1,cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+     if cfgsc^.FillHorizon then begin
+        Fplot.PlotOutline(x,y,0,1,2,1,99*cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+        Fplot.PlotOutline(x0,y0,2,1,2,1,99*cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+        Fplot.PlotOutline(x0h,y0h,2,1,2,1,99*cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+        Fplot.PlotOutline(xh,yh,1,1,2,1,99*cfgsc^.x2,Fplot.cfgplot^.Color[19]);
+     end else begin
+        Fplot.Plotline(x,y,x0,y0,Fplot.cfgplot^.Color[19],1);
+     end;
      Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot^.Color[12],2);
   end;
   if cfgsc^.ShowHorizonDepression then begin

@@ -38,6 +38,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    fillhorizon: TCheckBox;
     DownloadDialog1: TDownloadDialog;
     horizonfile: TFileNameEdit;
     Memo1: TMemo;
@@ -102,6 +103,7 @@ type
     horizondepression: TCheckBox;
     Label1: TLabel;
     procedure Button2Click(Sender: TObject);
+    procedure fillhorizonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure cityfilterKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -207,6 +209,7 @@ horizonopaque.caption:=rsShowObjectBe;
 GroupBox1.caption:=rsLocalHorizon;
 hor_l1.caption:=rsLocalHorizon2;
 displayhorizon.caption:=rsDisplayTheLo;
+fillhorizon.caption:=rsFillWithHori;
 GroupBox3.caption:=rsDepressionOf;
 Label1.caption:=rsYouLiveOnABi;
 horizondepression.caption:=rsDrawTheAppar;
@@ -695,12 +698,18 @@ horizonopaque.checked:=not csc.horizonopaque;
 horizonfile.text:=cmain.horizonfile;
 horizonfile.InitialDir:=slash(appdir)+'data'+pathdelim+'horizon';
 displayhorizon.Checked:=csc.ShowHorizon;
+fillhorizon.Checked:=csc.FillHorizon;
 horizondepression.Checked:=csc.ShowHorizonDepression;
 end;
 
 procedure Tf_config_observatory.displayhorizonClick(Sender: TObject);
 begin
 csc.ShowHorizon:=displayhorizon.Checked;
+end;
+
+procedure Tf_config_observatory.fillhorizonClick(Sender: TObject);
+begin
+csc.FillHorizon:=fillhorizon.Checked;
 end;
 
 procedure Tf_config_observatory.horizondepressionClick(Sender: TObject);
