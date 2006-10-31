@@ -6,7 +6,6 @@ object f_splash: Tf_splash
   HorzScrollBar.Page = 495
   VertScrollBar.Page = 262
   BorderStyle = bsNone
-  Caption = 'f_splash'
   ClientHeight = 263
   ClientWidth = 496
   Font.Color = clBlack
@@ -14,16 +13,19 @@ object f_splash: Tf_splash
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
+  OnMouseUp = FormMouseUp
   OnShow = FormShow
-  Position = poScreenCenter
+  Position = poDesktopCenter
   object Panel1: TPanel
     Height = 263
     Width = 496
     Align = alClient
     BevelOuter = bvNone
+    Caption = 'Cartes du Ciel'
     ClientHeight = 263
     ClientWidth = 496
     TabOrder = 0
+    OnDblClick = logoDblClick
     object Image1: TImage
       Height = 263
       Width = 496

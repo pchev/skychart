@@ -14,8 +14,7 @@ object f_about: Tf_about
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
-  PixelsPerInch = 90
-  Position = poScreenCenter
+  Position = poMainFormCenter
   object Panel2: TPanel
     Height = 263
     Width = 496
@@ -2381,7 +2380,7 @@ object f_about: Tf_about
         PageIndex = 0
         object Page1: TPage
           Caption = 'About'
-          ClientWidth = 412
+          ClientWidth = 406
           ClientHeight = 196
           object Label5: TLabel
             Left = 20
@@ -2450,7 +2449,7 @@ object f_about: Tf_about
         end
         object Page2: TPage
           Caption = 'Authors'
-          ClientWidth = 412
+          ClientWidth = 406
           ClientHeight = 196
           object Label3: TLabel
             Left = 11
@@ -2493,7 +2492,7 @@ object f_about: Tf_about
         end
         object Page3: TPage
           Caption = 'License Agreement'
-          ClientWidth = 412
+          ClientWidth = 406
           ClientHeight = 196
           object Memo2: TMemo
             Height = 196
