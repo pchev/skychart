@@ -718,7 +718,7 @@ resourcestring
   rsDisplayTheLo = 'Display the local horizon line';
   rsDepressionOf = 'Depression of the visible horizon';
   rsYouLiveOnABi = 'You live on a big mountain near the ocean shore and you '
-    +'like to observe the distorded image of the object below the horizon.';
+    +'like to observe the distorted image of the object below the horizon.';
   rsDrawTheAppar = 'Draw the apparent depressed horizon line';
   rsUpdateOrAddT = 'Update or add the current location to the database ?';
   rsUpdatedSucce = 'Updated successfully!';
@@ -1065,6 +1065,7 @@ resourcestring
   rsOnlyTheLast = 'Only the last';
   rsLabelText = 'Label Text';
   rsCurrentDate = 'Current Date';
+  rsFillWithHori = 'Fill with horizon color';
 
 implementation
 

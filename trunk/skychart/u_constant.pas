@@ -399,7 +399,7 @@ type
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
                 ShowPluto, ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
-                ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,ShowHorizonDepression : boolean;
+                ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,FillHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY: double;
                 //  compass rose
                 ShowCRose : Boolean;
