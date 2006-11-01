@@ -2512,7 +2512,7 @@ end;
 
 Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
 begin
-if traceon then writetrace(txt);
+if traceon and (txt>'') then writetrace(txt);
 LPanels1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
 if sendmsg then SendInfo(Sender,origin,txt);
 // refresh tracking object
