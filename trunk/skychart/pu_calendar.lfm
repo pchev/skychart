@@ -7,8 +7,6 @@ object f_calendar: Tf_calendar
   VertScrollBar.Page = 392
   ActiveControl = step
   Caption = 'f_calendar'
-  ClientHeight = 393
-  ClientWidth = 643
   Icon.Data = {
     36100000424D3610000000000000360000002800000020000000200000000100
     20000000000000000000C40E0000C40E00000000000000000000000000FF0000
@@ -149,8 +147,6 @@ object f_calendar: Tf_calendar
     Height = 70
     Width = 643
     Align = alTop
-    ClientHeight = 70
-    ClientWidth = 643
     FullRepaint = False
     TabOrder = 1
     object Label1: TLabel
@@ -210,8 +206,6 @@ object f_calendar: Tf_calendar
       Top = 32
       Width = 273
       Alignment = taLeftJustify
-      ClientHeight = 35
-      ClientWidth = 273
       FullRepaint = False
       TabOrder = 0
       Visible = False
@@ -237,8 +231,6 @@ object f_calendar: Tf_calendar
       Top = 34
       Width = 273
       Caption = 'Eclipse Predictions by Fred Espenak, NASA/GSFC'
-      ClientHeight = 38
-      ClientWidth = 273
       FullRepaint = False
       ParentShowHint = False
       ShowHint = True
@@ -419,8 +411,6 @@ object f_calendar: Tf_calendar
     OnPageChanged = PageControl1Change
     object twilight: TTabSheet
       Caption = 'Twilight'
-      ClientHeight = 288
-      ClientWidth = 633
       object TwilightGrid: TStringGrid
         Height = 288
         Width = 633
@@ -441,8 +431,6 @@ object f_calendar: Tf_calendar
     end
     object planets: TTabSheet
       Caption = 'Planets'
-      ClientHeight = 288
-      ClientWidth = 633
       ImageIndex = 1
       object Pagecontrol2: TPageControl
         Height = 288
@@ -453,8 +441,6 @@ object f_calendar: Tf_calendar
         TabOrder = 0
         object Psoleil: TTabSheet
           Caption = 'Sun'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 9
           object SoleilGrid: TStringGrid
             Height = 288
@@ -489,8 +475,6 @@ object f_calendar: Tf_calendar
         end
         object Mercure: TTabSheet
           Caption = 'Mercury'
-          ClientHeight = 288
-          ClientWidth = 633
           object MercureGrid: TStringGrid
             Height = 288
             Width = 633
@@ -524,8 +508,6 @@ object f_calendar: Tf_calendar
         end
         object Venus: TTabSheet
           Caption = 'Venus'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 1
           object VenusGrid: TStringGrid
             Height = 288
@@ -560,8 +542,6 @@ object f_calendar: Tf_calendar
         end
         object PLune: TTabSheet
           Caption = 'Moon'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 2
           object LuneGrid: TStringGrid
             Height = 288
@@ -596,8 +576,6 @@ object f_calendar: Tf_calendar
         end
         object Mars: TTabSheet
           Caption = 'Mars'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 3
           object MarsGrid: TStringGrid
             Height = 288
@@ -632,8 +610,6 @@ object f_calendar: Tf_calendar
         end
         object Jupiter: TTabSheet
           Caption = 'Jupiter'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 4
           object JupiterGrid: TStringGrid
             Height = 288
@@ -668,8 +644,6 @@ object f_calendar: Tf_calendar
         end
         object Saturne: TTabSheet
           Caption = 'Saturn'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 5
           object SaturneGrid: TStringGrid
             Height = 288
@@ -704,8 +678,6 @@ object f_calendar: Tf_calendar
         end
         object Uranus: TTabSheet
           Caption = 'Uranus'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 6
           object UranusGrid: TStringGrid
             Height = 288
@@ -740,8 +712,6 @@ object f_calendar: Tf_calendar
         end
         object Neptune: TTabSheet
           Caption = 'Neptun'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 7
           object NeptuneGrid: TStringGrid
             Height = 288
@@ -776,8 +746,6 @@ object f_calendar: Tf_calendar
         end
         object Pluton: TTabSheet
           Caption = 'Pluto'
-          ClientHeight = 288
-          ClientWidth = 633
           ImageIndex = 8
           object PlutonGrid: TStringGrid
             Height = 288
@@ -814,8 +782,6 @@ object f_calendar: Tf_calendar
     end
     object comet: TTabSheet
       Caption = 'Comets'
-      ClientHeight = 288
-      ClientWidth = 633
       ImageIndex = 2
       object CometGrid: TStringGrid
         Height = 245
@@ -855,8 +821,6 @@ object f_calendar: Tf_calendar
         Height = 43
         Width = 633
         Align = alTop
-        ClientHeight = 43
-        ClientWidth = 633
         TabOrder = 1
         object Button1: TButton
           Left = 136
@@ -890,8 +854,6 @@ object f_calendar: Tf_calendar
     end
     object Asteroids: TTabSheet
       Caption = 'Asteroids'
-      ClientHeight = 288
-      ClientWidth = 633
       ImageIndex = 6
       object AsteroidGrid: TStringGrid
         Height = 245
@@ -927,8 +889,6 @@ object f_calendar: Tf_calendar
         Height = 43
         Width = 633
         Align = alTop
-        ClientHeight = 43
-        ClientWidth = 633
         TabOrder = 1
         object ComboBox2: TComboBox
           Left = 216
@@ -962,8 +922,6 @@ object f_calendar: Tf_calendar
     end
     object Solar: TTabSheet
       Caption = 'Solar Eclipses'
-      ClientHeight = 288
-      ClientWidth = 633
       ImageIndex = 3
       object SolarGrid: TStringGrid
         Height = 288
@@ -999,8 +957,6 @@ object f_calendar: Tf_calendar
     end
     object Lunar: TTabSheet
       Caption = 'Lunar Eclipses'
-      ClientHeight = 288
-      ClientWidth = 633
       ImageIndex = 4
       object LunarGrid: TStringGrid
         Height = 288
@@ -1022,8 +978,6 @@ object f_calendar: Tf_calendar
     end
     object Satellites: TTabSheet
       Caption = 'Artificial Satellites'
-      ClientHeight = 314
-      ClientWidth = 635
       ImageIndex = 5
       TabVisible = False
       object SatGrid: TStringGrid
@@ -1060,8 +1014,6 @@ object f_calendar: Tf_calendar
         Height = 66
         Width = 635
         Align = alTop
-        ClientHeight = 66
-        ClientWidth = 635
         TabOrder = 1
         Visible = False
         object Label8: TLabel

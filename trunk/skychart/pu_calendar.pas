@@ -326,6 +326,7 @@ BtnReset.caption:=rsResetChart;
 twilight.caption:=rsTwilight;
 planets.caption:=rsPlanet;
 comet.caption:=rsComet;
+Asteroids.caption:=rsAsteroid;
 Button1.caption:=rsFilter;
 Button2.caption:=rsFilter;
 Solar.caption:=rsSolarEclipse;

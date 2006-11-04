@@ -298,7 +298,7 @@ var i,n: integer;
     dir,buf,buf1,buf2: string;
 begin
 LanguageList.clear;
-LanguageList.Items.Add(rsDefault+' ('+GetDefaultLanguage+')');
+LanguageList.Items.Add(blank+rsDefault+' ('+GetDefaultLanguage+')');
 LanguageList.itemindex:=0;
 n:=1;
 dir:=slash(appdir)+slash('data')+slash('language');
@@ -323,11 +323,14 @@ while i=0 do begin
   except
   end;
   LanguageList.items.Add(buf+blank+'-'+blank+buf2);
-  if cmain.language=buf then LanguageList.itemindex:=n;
   inc(n);
   i:=findnext(fs);
 end;
 findclose(fs);
+application.ProcessMessages;
+for i:=0 to LanguageList.Items.Count-1 do begin
+  if cmain.language=words(LanguageList.Items[i],'',1,1) then LanguageList.itemindex:=i;
+end;
 end;
 
 procedure Tf_config_system.ShowSYS;
@@ -598,7 +601,7 @@ end;
 procedure Tf_config_system.LanguageListSelect(Sender: TObject);
 begin
 if LockChange then exit;
-  if LanguageList.ItemIndex=0 then cmain.language:=''
+  if LeftStr(LanguageList.Text,1)=blank then cmain.language:=''
      else cmain.language:=words(LanguageList.Text,'',1,1);
 end;
 
