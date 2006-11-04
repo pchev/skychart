@@ -1066,6 +1066,8 @@ resourcestring
   rsLabelText = 'Label Text';
   rsCurrentDate = 'Current Date';
   rsFillWithHori = 'Fill with horizon color';
+  rsAD = 'AD';
+  rsBC = 'BC';
 
 implementation
 
