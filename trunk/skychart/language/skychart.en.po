@@ -131,6 +131,10 @@ msgstr ""
 msgid "<<   Prev"
 msgstr ""
 
+#: u_translation:rsad
+msgid "AD"
+msgstr ""
+
 #: u_translation:rsabbreviation
 msgid "Abbreviation"
 msgstr ""
@@ -329,6 +333,10 @@ msgstr ""
 
 #: u_translation:rsb
 msgid "B"
+msgstr ""
+
+#: u_translation:rsbc
+msgid "BC"
 msgstr ""
 
 #: u_translation:rsbii

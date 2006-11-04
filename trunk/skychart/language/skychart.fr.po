@@ -1,7 +1,7 @@
-# translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-10-31 20:01+0100\n"
+"PO-Revision-Date: 2006-11-04 23:09+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -130,6 +130,10 @@ msgstr "9537 (plus gros catalogues)"
 #: u_translation:rsprev
 msgid "<<   Prev"
 msgstr "Précédent"
+
+#: u_translation:rsad
+msgid "AD"
+msgstr "AD"
 
 #: u_translation:rsabbreviation
 msgid "Abbreviation"
@@ -330,6 +334,10 @@ msgstr "Coordonnée azimutale"
 #: u_translation:rsb
 msgid "B"
 msgstr "B"
+
+#: u_translation:rsbc
+msgid "BC"
+msgstr "BC"
 
 #: u_translation:rsbii
 msgid "BII"
