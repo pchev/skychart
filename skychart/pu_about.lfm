@@ -5,10 +5,9 @@ object f_about: Tf_about
   Width = 496
   HorzScrollBar.Page = 495
   VertScrollBar.Page = 262
+  ActiveControl = Button1
   BorderStyle = bsSizeToolWin
   Caption = 'About'
-  ClientHeight = 263
-  ClientWidth = 496
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -20,16 +19,12 @@ object f_about: Tf_about
     Width = 496
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 263
-    ClientWidth = 496
     TabOrder = 0
     object Panel0: TPanel
       Height = 263
       Width = 80
       Align = alLeft
       BevelOuter = bvNone
-      ClientHeight = 263
-      ClientWidth = 80
       TabOrder = 0
       object Image2: TImage
         Height = 263
@@ -2347,8 +2342,6 @@ object f_about: Tf_about
       Height = 263
       Width = 416
       Align = alClient
-      ClientHeight = 263
-      ClientWidth = 416
       TabOrder = 1
       object Panel3: TPanel
         Left = 1
@@ -2356,8 +2349,6 @@ object f_about: Tf_about
         Top = 223
         Width = 414
         Align = alBottom
-        ClientHeight = 39
-        ClientWidth = 414
         TabOrder = 0
         object Button1: TButton
           Left = 149
@@ -2380,8 +2371,6 @@ object f_about: Tf_about
         PageIndex = 0
         object Page1: TPage
           Caption = 'About'
-          ClientWidth = 406
-          ClientHeight = 196
           object Label5: TLabel
             Left = 20
             Height = 13
@@ -2440,8 +2429,6 @@ object f_about: Tf_about
             Alignment = taLeftJustify
             BevelOuter = bvNone
             Caption = 'Panel1'
-            ClientHeight = 20
-            ClientWidth = 328
             Font.Color = clBlue
             TabOrder = 0
             OnClick = Panell1Click
@@ -2449,8 +2436,6 @@ object f_about: Tf_about
         end
         object Page2: TPage
           Caption = 'Authors'
-          ClientWidth = 406
-          ClientHeight = 196
           object Label3: TLabel
             Left = 11
             Height = 13
@@ -2462,9 +2447,9 @@ object f_about: Tf_about
           end
           object Memo1: TMemo
             Left = 11
-            Height = 146
-            Top = 46
-            Width = 387
+            Height = 142
+            Top = 50
+            Width = 393
             Anchors = [akTop, akLeft, akRight, akBottom]
             Color = clBtnFace
             Lines.Strings = (
@@ -2477,14 +2462,12 @@ object f_about: Tf_about
           object Panel5: TPanel
             Cursor = crHandPoint
             Left = 13
-            Height = 20
+            Height = 15
             Top = 22
             Width = 338
             Alignment = taLeftJustify
             BevelOuter = bvNone
             Caption = 'Panel4'
-            ClientHeight = 20
-            ClientWidth = 338
             Font.Color = clBlue
             TabOrder = 1
             OnClick = Panel5Click
@@ -2492,8 +2475,6 @@ object f_about: Tf_about
         end
         object Page3: TPage
           Caption = 'License Agreement'
-          ClientWidth = 406
-          ClientHeight = 196
           object Memo2: TMemo
             Height = 196
             Width = 412

@@ -9,8 +9,6 @@ object f_config_time: Tf_config_time
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
   Caption = 'Date / Time'
-  ClientHeight = 527
-  ClientWidth = 474
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -19,8 +17,6 @@ object f_config_time: Tf_config_time
     Width = 474
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 477
-    ClientWidth = 474
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
@@ -28,12 +24,10 @@ object f_config_time: Tf_config_time
       Width = 474
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       object Page1: TPage
         Caption = 'Time'
-        ClientWidth = 472
-        ClientHeight = 475
         object Label142: TLabel
           Left = 286
           Height = 13
@@ -57,8 +51,6 @@ object f_config_time: Tf_config_time
           Height = 87
           Top = 231
           Width = 409
-          ClientHeight = 87
-          ClientWidth = 409
           TabOrder = 1
           object Label134: TLabel
             Left = 8
@@ -119,8 +111,6 @@ object f_config_time: Tf_config_time
           Height = 113
           Top = 334
           Width = 409
-          ClientHeight = 113
-          ClientWidth = 409
           TabOrder = 2
           object Label135: TLabel
             Left = 8
@@ -205,8 +195,6 @@ object f_config_time: Tf_config_time
           Height = 137
           Top = 87
           Width = 409
-          ClientHeight = 137
-          ClientWidth = 409
           TabOrder = 4
           object Label137: TLabel
             Left = 8
@@ -304,7 +292,7 @@ object f_config_time: Tf_config_time
             Left = 267
             Height = 39
             Top = 6
-            Width = 116
+            Width = 137
             AutoFill = True
             ChildSizing.LeftRightSpacing = 6
             ChildSizing.TopBottomSpacing = 6
@@ -420,8 +408,6 @@ object f_config_time: Tf_config_time
       end
       object Page2: TPage
         Caption = 'Simulation'
-        ClientWidth = 472
-        ClientHeight = 475
         object stepreset: TSpeedButton
           Left = 338
           Height = 25
@@ -631,8 +617,6 @@ object f_config_time: Tf_config_time
     Top = 477
     Width = 474
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 474
     TabOrder = 1
     object Button1: TButton
       Left = 176

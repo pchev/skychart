@@ -84,6 +84,7 @@ Label3.caption:=rsPleaseReport;
 page1.Caption:=rsAbout;
 page2.Caption:=rsAuthors;
 page3.Caption:=rsLicenseAgree;
+memo1.Text:=rsProgrammer+crlf+cdcauthors+crlf+crlf+rsTranslator+crlf+rsCDCTranslator+crlf+crlf;
 end;
 
 procedure Tf_about.FormCreate(Sender: TObject);
@@ -95,7 +96,6 @@ SetLang;
  panel1.caption:=URL_WebHome;
  panel5.caption:=URL_BugTracker;
  label2.caption:=cdcversion+blank+compile_time;
- memo1.Text:=rsProgrammer+crlf+cdcauthors+crlf+crlf+rsTranslator+crlf+rsCDCTranslator+crlf+crlf;
 end;
 
 procedure Tf_about.Panell1Click(Sender: TObject);
