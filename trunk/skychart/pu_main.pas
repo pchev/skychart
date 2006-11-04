@@ -1087,7 +1087,8 @@ end;
 
 procedure Tf_main.HelpAbout1Execute(Sender: TObject);
 begin
-  f_about.ShowModal;
+if f_about=nil then f_about:=Tf_about.Create(application);
+f_about.ShowModal;
 end;
 
 procedure Tf_main.HelpContents1Execute(Sender: TObject);

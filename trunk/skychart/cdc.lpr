@@ -61,7 +61,6 @@ begin
   Application.CreateForm(Tf_calendar, f_calendar);
   Application.CreateForm(Tf_printsetup, f_printsetup);
   Application.CreateForm(Tf_print, f_print);
-  Application.CreateForm(Tf_about, f_about);
   f_main.init;
   Application.Run;
 
