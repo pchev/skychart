@@ -132,6 +132,10 @@ msgstr "9537 (великий набір даних) "
 msgid "<<   Prev"
 msgstr "<<   Назад"
 
+#: u_translation:rsad
+msgid "AD"
+msgstr ""
+
 #: u_translation:rsabbreviation
 msgid "Abbreviation"
 msgstr "Абревіатура"
@@ -331,6 +335,10 @@ msgstr "Азимутальні координати"
 #: u_translation:rsb
 msgid "B"
 msgstr "B"
+
+#: u_translation:rsbc
+msgid "BC"
+msgstr ""
 
 #: u_translation:rsbii
 msgid "BII"

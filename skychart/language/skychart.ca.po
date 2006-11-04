@@ -132,6 +132,10 @@ msgstr "9537 (catàlegs més grans)"
 msgid "<<   Prev"
 msgstr "Precedent"
 
+#: u_translation:rsad
+msgid "AD"
+msgstr ""
+
 #: u_translation:rsabbreviation
 msgid "Abbreviation"
 msgstr "Abreviació"
@@ -331,6 +335,10 @@ msgstr "Coordenades azimutals"
 #: u_translation:rsb
 msgid "B"
 msgstr "B"
+
+#: u_translation:rsbc
+msgid "BC"
+msgstr ""
 
 #: u_translation:rsbii
 msgid "BII"
