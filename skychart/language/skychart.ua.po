@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-10-14 15:13+0200\n"
+"PO-Revision-Date: 2006-11-06 17:24+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ua\n"
 "POT-Creation-Date: \n"
@@ -134,7 +134,7 @@ msgstr "<<   Назад"
 
 #: u_translation:rsad
 msgid "AD"
-msgstr ""
+msgstr "н.е."
 
 #: u_translation:rsabbreviation
 msgid "Abbreviation"
@@ -322,7 +322,7 @@ msgstr "Допоміжні файли"
 
 #: u_translation:rsaz
 msgid "Az"
-msgstr "Азимут"
+msgstr "Az"
 
 #: u_translation:rsazimuth
 msgid "Azimuth"
@@ -338,7 +338,7 @@ msgstr "B"
 
 #: u_translation:rsbc
 msgid "BC"
-msgstr ""
+msgstr "до н.е."
 
 #: u_translation:rsbii
 msgid "BII"
@@ -442,7 +442,7 @@ msgstr "Установки CDC плагіну"
 
 #: u_translation:rscdctranslator
 msgid "CDCTranslator"
-msgstr "Олег Малий, gemini@ua.fm  ( Запорізький астрономічний Клуб \"Альтаїр\" http://astroclub.biz )"
+msgstr "Олег Малий, gemini@ua.fm  ( Запорізький Астрономічний Клуб \"Альтаїр\" http://astroclub.biz )"
 
 #: u_translation:rscalendar
 msgid "Calendar"
@@ -1478,7 +1478,7 @@ msgstr "Заповнити Чумацький Шлях"
 
 #: u_translation:rsfillwithhori
 msgid "Fill with horizon color"
-msgstr ""
+msgstr "Заповнити обрій кольором"
 
 #: u_translation:rsfill
 msgid "Fill?"
@@ -2934,11 +2934,11 @@ msgstr "R- величина"
 
 #: u_translation:rsredo
 msgid "Redo"
-msgstr "Відновити"
+msgstr "Поновити"
 
 #: u_translation:rsredolastchan
 msgid "Redo Last Change"
-msgstr "Відновити останню зміну"
+msgstr "Поновити останню зміну"
 
 #: u_translation:rsreference
 msgid "Reference"
@@ -3346,7 +3346,7 @@ msgstr "Показати цю картинку"
 
 #: u_translation:rsshowhidedssi
 msgid "Show/Hide DSS image"
-msgstr "Поазати/приховати DSS зображення"
+msgstr "Показати/приховати DSS зображення"
 
 #: u_translation:rssideraltime
 msgid "Sideral Time"
@@ -3378,7 +3378,7 @@ msgstr "Колір неба"
 
 #: u_translation:rsskycharthome
 msgid "Skychart Homepage"
-msgstr "Домашня сторінка Skychart"
+msgstr "Домашня сторінка \"Зоряні Мапи\""
 
 #: u_translation:rsslew
 msgid "Slew"
@@ -3766,11 +3766,11 @@ msgstr "Відмітити, щоб запобігти схожості із ма
 
 #: u_translation:rsundo
 msgid "Undo"
-msgstr "Вернути"
+msgstr "Анулювати"
 
 #: u_translation:rsundolastchan
 msgid "Undo Last Change"
-msgstr "Відмінити останню зміну"
+msgstr "Анулювати останню зміну"
 
 #: u_translation:rsuniversaltim
 msgid "Universal Time"
@@ -4018,7 +4018,7 @@ msgstr "dpi для паперу форматом 8x11\""
 
 #: u_translation:rsdocumentatio
 msgid "en/documentation/start.html"
-msgstr ""
+msgstr "uk/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "
