@@ -1,8 +1,8 @@
 # translation of skychart.it.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-11-04 15:16+0100\n"
-"Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
+"PO-Revision-Date: 2006-11-05 10:55+0100\n"
+"Last-Translator: Mattia Verga <mverga@freemail.it>\n"
 "Project-Id-Version: skychart.it\n"
 "POT-Creation-Date: \n"
 "Language-Team:  <translation@ap-i.net>\n"
@@ -133,7 +133,7 @@ msgstr "<< Prec"
 
 #: u_translation:rsad
 msgid "AD"
-msgstr ""
+msgstr "d.C."
 
 #: u_translation:rsabbreviation
 msgid "Abbreviation"
@@ -337,7 +337,7 @@ msgstr "B"
 
 #: u_translation:rsbc
 msgid "BC"
-msgstr ""
+msgstr "a.C."
 
 #: u_translation:rsbii
 msgid "BII"
@@ -1477,7 +1477,7 @@ msgstr "Riempi la Via Lattea"
 
 #: u_translation:rsfillwithhori
 msgid "Fill with horizon color"
-msgstr ""
+msgstr "Riempi col colore dell'orizzonte"
 
 #: u_translation:rsfill
 msgid "Fill?"
@@ -1501,7 +1501,7 @@ msgstr "Trova"
 
 #: u_translation:rsfindercircle
 msgid "Finder circle (Eyepiece)"
-msgstr "Cerchi guida (Oculari)"
+msgstr "Campi circolari (Oculari)"
 
 #: u_translation:rsfindermark
 msgid "Finder mark"
@@ -1509,7 +1509,7 @@ msgstr "Segni guida"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "Rettangoli guida (CCD)"
+msgstr "Campi rettangolari (CCD)"
 
 #: u_translation:rsfirst5000
 msgid "First 5000"
@@ -2141,7 +2141,7 @@ msgstr "Mappa"
 
 #: u_translation:rsmarkthechart
 msgid "Mark the chart center "
-msgstr "Segna il centro della cartina"
+msgstr "Visualizza al centro della cartina"
 
 #: u_translation:rsmars
 msgid "Mars"
