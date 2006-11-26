@@ -45,7 +45,7 @@ type
     FCaption: string;
     startpoint: TPoint;
     moving, sizing, lockmove: boolean;
-    movedirection: integer;
+    movedirection, movecount: integer;
     FMaximized, FWireframeMoveResize: boolean;
     save_top,save_left,save_width,save_height,ini_width,ini_height: integer;
     borderw, titleheight: integer;
@@ -115,6 +115,14 @@ type
   end;
 
 implementation
+
+const
+{$ifdef lclgtk2}
+skipmouseeventcount=4; // duplicate mousemove events
+{$else}
+skipmouseeventcount=1;
+{$endif}
+
 
 {
      Class creator
@@ -274,6 +282,7 @@ TopLeftBar.BringToFront;
 TopRightBar.BringToFront;
 BotLeftBar.BringToFront;
 BotRightBar.BringToFront;
+movecount:=0;
 moving:=false;
 sizing:=false;
 lockmove:=false;
@@ -338,25 +347,46 @@ begin
 onEnter(self);
 startpoint:=clienttoscreen(point(X,titleheight div 2));
 moving:=true;
+movecount:=-1;
 if WireframeMoveResize then dockedpanel.Hide;
 MenuBarMouseMove(Sender,Shift,X, Y);
 end;
 
 procedure TChildDoc.MenuBarMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-MenuBarMouseLeave(Sender);
+moving:=false;
+if WireframeMoveResize then dockedpanel.Show;
 end;
 
 procedure TChildDoc.MenuBarMouseLeave(Sender: TObject);
+var P: Tpoint;
 begin
+{$ifdef lclgtk2}
+if moving and (not lockmove) then begin
+  lockmove:=true;
+  P:=mouse.CursorPos;
+  top:=top+P.Y-startpoint.Y;
+  left:=left+P.X-startpoint.X;
+  top:=max(top,0);
+  top:=min(top,parent.ClientHeight-MenuBar.Height-Topbar.Height);
+  left:=max(left,-width+2*MenuBar.Height);
+  left:=min(left,parent.ClientWidth-MenuBar.Height);
+  startpoint:=P;
+  application.ProcessMessages;
+  lockmove:=false;
+end;
+{$else}
 moving:=false;
 if WireframeMoveResize then dockedpanel.Show;
+{$endif}
 end;
 
 procedure TChildDoc.MenuBarMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 var P: Tpoint;
 begin
-if moving and (not lockmove) then begin
+inc(movecount);
+if movecount>=MaxInt then movecount:=0;
+if moving and (not lockmove) and ((movecount mod skipmouseeventcount) = 0) then begin
   lockmove:=true;
   P:=clienttoscreen(Point(X,Y));
   top:=top+P.Y-startpoint.Y;
