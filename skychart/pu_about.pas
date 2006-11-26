@@ -38,6 +38,7 @@ type
 
   Tf_about = class(TForm)
     Button1: TButton;
+    Button2: TButton;
     Image2: TImage;
     Label2: TLabel;
     Label3: TLabel;
@@ -56,10 +57,9 @@ type
     Panel3: TPanel;
     Panel0: TPanel;
     Panel4: TPanel;
-    Panel5: TPanel;
+    procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Panell1Click(Sender: TObject);
-    procedure Panel5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -94,18 +94,18 @@ SetLang;
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
  panel1.caption:=URL_WebHome;
- panel5.caption:=URL_BugTracker;
+ button2.caption:=URL_BugTracker;
  label2.caption:=cdcversion+blank+compile_time;
+end;
+
+procedure Tf_about.Button2Click(Sender: TObject);
+begin
+ ExecuteFile(URL_BugTracker);
 end;
 
 procedure Tf_about.Panell1Click(Sender: TObject);
 begin
   ExecuteFile(URL_WebHome);
-end;
-
-procedure Tf_about.Panel5Click(Sender: TObject);
-begin
-  ExecuteFile(URL_BugTracker);
 end;
 
 initialization

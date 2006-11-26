@@ -1980,7 +1980,6 @@ if ConfigTime=nil then begin
    ConfigTime.Notebook1.ShowTabs:=true;
    ConfigTime.Notebook1.PageIndex:=0;
    ConfigTime.onApplyConfig:=ApplyConfigTime;
-   ConfigTime.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigTime,nightvision);{$endif}
 ConfigTime.ccat^:=catalog.cfgcat;
@@ -2020,7 +2019,6 @@ if ConfigPictures=nil then begin
    ConfigPictures.Notebook1.ShowTabs:=true;
    ConfigPictures.Notebook1.PageIndex:=0;
    ConfigPictures.onApplyConfig:=ApplyConfigPictures;
-   ConfigPictures.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigPictures,nightvision);{$endif}
 ConfigPictures.cdb:=cdcdb;
@@ -2067,7 +2065,6 @@ if ConfigObservatory=nil then begin
    ConfigObservatory.Notebook1.ShowTabs:=true;
    ConfigObservatory.Notebook1.PageIndex:=0;
    ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
-   ConfigObservatory.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigObservatory,nightvision);{$endif}
 ConfigObservatory.cdb:=cdcdb;
@@ -2109,7 +2106,6 @@ if ConfigCatalog=nil then begin
    ConfigCatalog.Notebook1.ShowTabs:=true;
    ConfigCatalog.Notebook1.PageIndex:=0;
    ConfigCatalog.onApplyConfig:=ApplyConfigCatalog;
-   ConfigCatalog.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
 ConfigCatalog.ccat^:=catalog.cfgcat;
@@ -2176,7 +2172,6 @@ if ConfigDisplay=nil then begin
    ConfigDisplay.Notebook1.ShowTabs:=true;
    ConfigDisplay.Notebook1.PageIndex:=0;
    ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
-   ConfigDisplay.FormStyle:=fsStayOnTop;
 end;
 {$ifdef win32}SetFormNightVision(ConfigDisplay,nightvision);{$endif}
 ConfigDisplay.ccat^:=catalog.cfgcat;

@@ -11,7 +11,6 @@ object f_about: Tf_about
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
-  FormStyle = fsStayOnTop
   OnCreate = FormCreate
   Position = poMainFormCenter
   object Panel2: TPanel
@@ -2446,6 +2445,7 @@ object f_about: Tf_about
             ParentColor = False
           end
           object Memo1: TMemo
+            Cursor = crArrow
             Left = 11
             Height = 142
             Top = 50
@@ -2459,18 +2459,16 @@ object f_about: Tf_about
             ScrollBars = ssAutoBoth
             TabOrder = 0
           end
-          object Panel5: TPanel
-            Cursor = crHandPoint
-            Left = 13
-            Height = 15
-            Top = 22
-            Width = 338
-            Alignment = taLeftJustify
-            BevelOuter = bvNone
-            Caption = 'Panel4'
+          object Button2: TButton
+            Left = 11
+            Height = 20
+            Top = 24
+            Width = 231
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Button2'
             Font.Color = clBlue
+            OnClick = Button2Click
             TabOrder = 1
-            OnClick = Panel5Click
           end
         end
         object Page3: TPage
