@@ -5025,11 +5025,11 @@ end else begin
    SetButtonImage(cfgm.ButtonStandard);
    Color:=clBtnFace;
    Font.Color:=clWindowText;
-   quicksearch.Color:=clBtnFace;
+   quicksearch.Color:=clWindow;
    quicksearch.Font.Color:=clWindowText;
-   timeu.Color:=clBtnFace;
+   timeu.Color:=clWindow;
    timeu.Font.Color:=clWindowText;
-   timeval.Color:=clBtnFace;
+   timeval.Color:=clWindow;
    timeval.Font.Color:=clWindowText;
    Shape1.Pen.Color:=clBtnShadow;
    Shape1.Brush.Color:=clBtnShadow;
