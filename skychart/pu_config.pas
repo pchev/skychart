@@ -104,6 +104,7 @@ type
     procedure SysSaveAndRestart(Sender: TObject);
     function  SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
     procedure ShowPage(i,j:Integer);
+    procedure ActivateChanges;
   public
     { Déclarations publiques }
     procedure SetLang;
@@ -340,7 +341,7 @@ begin
    cmain.configpage_j:=j;
 end;
 
-procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+procedure Tf_config.ActivateChanges;
 var i:integer;
 begin
   i:=f_config.Treeview1.selected.absoluteindex;
@@ -351,10 +352,12 @@ begin
   if MultiDoc1.ActiveObject=f_config_system1 then begin
     if f_config_system1.Notebook1.ActivePage=f_config_system1.Notebook1.Page[0].Caption then f_config_system1.ActivateDBchange;
   end;
-  
-  // todo: remove after correction of Lazarus bug 905
-  //f_config_time1.SimObjClickCheck(nil);
+end;
 
+procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+var i:integer;
+begin
+  ActivateChanges;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);
@@ -525,6 +528,7 @@ end;
 
 procedure Tf_config.applyClick(Sender: TObject);
 begin
+ActivateChanges;
 if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 

@@ -7,19 +7,14 @@ object f_config_catalog: Tf_config_catalog
   VertScrollBar.Page = 538
   ActiveControl = addcat
   Caption = 'Catalog'
-  ClientHeight = 539
-  ClientWidth = 526
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 90
   object MainPanel: TPanel
     Left = 12
     Height = 480
     Top = 8
     Width = 500
-    ClientHeight = 480
-    ClientWidth = 500
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
@@ -28,17 +23,15 @@ object f_config_catalog: Tf_config_catalog
       Top = 1
       Width = 498
       Align = alClient
-      PageIndex = 2
+      PageIndex = 0
       ShowTabs = False
       object Page1: TPage
         Caption = 'Catalog'
-        ClientWidth = 496
-        ClientHeight = 422
         object Label37: TLabel
           Left = 4
           Height = 13
           Top = 23
-          Width = 240
+          Width = 246
           Caption = 'Stars and Nebulae catalogs prepared with '
           Color = clNone
           ParentColor = False
@@ -79,8 +72,6 @@ object f_config_catalog: Tf_config_catalog
           ScrollBars = ssAutoBoth
           TabOrder = 2
           TabStop = True
-          VisibleColCount = 5
-          VisibleRowCount = 1
           OnDrawCell = StringGrid3DrawCell
           OnMouseUp = StringGrid3MouseUp
           OnSelectCell = StringGrid3SelectCell
@@ -107,8 +98,6 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page2: TPage
         Caption = 'CdC Stars'
-        ClientWidth = 496
-        ClientHeight = 422
         object Label2: TLabel
           Height = 13
           Top = 7
@@ -233,7 +222,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 0
         end
         object Fbsc1: TLongEdit
-          Name = 'Fbsc1'
           Tag = 1
           Left = 266
           Height = 22
@@ -249,7 +237,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Fbsc2: TLongEdit
-          Name = 'Fbsc2'
           Tag = 1
           Left = 306
           Height = 22
@@ -279,7 +266,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 3
         end
         object Fsky1: TLongEdit
-          Name = 'Fsky1'
           Tag = 2
           Left = 266
           Height = 22
@@ -295,7 +281,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Fsky2: TLongEdit
-          Name = 'Fsky2'
           Tag = 2
           Left = 306
           Height = 22
@@ -325,7 +310,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 6
         end
         object Fty21: TLongEdit
-          Name = 'Fty21'
           Tag = 4
           Left = 266
           Height = 22
@@ -341,7 +325,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Fty22: TLongEdit
-          Name = 'Fty22'
           Tag = 4
           Left = 306
           Height = 22
@@ -451,7 +434,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 15
         end
         object fgscf1: TLongEdit
-          Name = 'fgscf1'
           Tag = 6
           Left = 266
           Height = 22
@@ -467,7 +449,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fgscc1: TLongEdit
-          Name = 'fgscc1'
           Tag = 7
           Left = 266
           Height = 22
@@ -483,7 +464,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fusn1: TLongEdit
-          Name = 'fusn1'
           Tag = 9
           Left = 266
           Height = 22
@@ -499,7 +479,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object dsbase1: TLongEdit
-          Name = 'dsbase1'
           Tag = 11
           Left = 267
           Height = 22
@@ -515,7 +494,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object dstyc1: TLongEdit
-          Name = 'dstyc1'
           Tag = 12
           Left = 267
           Height = 22
@@ -531,7 +509,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object dsgsc1: TLongEdit
-          Name = 'dsgsc1'
           Tag = 13
           Left = 266
           Height = 22
@@ -547,7 +524,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object dsgsc2: TLongEdit
-          Name = 'dsgsc2'
           Tag = 13
           Left = 306
           Height = 22
@@ -563,7 +539,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object dstyc2: TLongEdit
-          Name = 'dstyc2'
           Tag = 12
           Left = 306
           Height = 22
@@ -579,7 +554,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object dsbase2: TLongEdit
-          Name = 'dsbase2'
           Tag = 11
           Left = 306
           Height = 22
@@ -595,7 +569,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fusn2: TLongEdit
-          Name = 'fusn2'
           Tag = 9
           Left = 306
           Height = 22
@@ -611,7 +584,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fgscc2: TLongEdit
-          Name = 'fgscc2'
           Tag = 7
           Left = 306
           Height = 22
@@ -627,7 +599,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fgscf2: TLongEdit
-          Name = 'fgscf2'
           Tag = 6
           Left = 306
           Height = 22
@@ -643,7 +614,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Fgcv2: TLongEdit
-          Name = 'Fgcv2'
           Tag = 1
           Left = 306
           Height = 22
@@ -659,7 +629,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Fwds2: TLongEdit
-          Name = 'Fwds2'
           Tag = 1
           Left = 306
           Height = 22
@@ -675,7 +644,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Fwds1: TLongEdit
-          Name = 'Fwds1'
           Tag = 1
           Left = 266
           Height = 22
@@ -691,7 +659,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Fgcv1: TLongEdit
-          Name = 'Fgcv1'
           Tag = 1
           Left = 266
           Height = 22
@@ -750,11 +717,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 38
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 35
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 35
+          OnChange = CDCStarPathChange
         end
         object sky3: TDirectoryEdit
           Tag = 2
@@ -762,11 +729,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 67
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 36
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 36
+          OnChange = CDCStarPathChange
         end
         object ty23: TDirectoryEdit
           Tag = 4
@@ -774,11 +741,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 94
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 37
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 37
+          OnChange = CDCStarPathChange
         end
         object gscf3: TDirectoryEdit
           Tag = 6
@@ -786,11 +753,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 122
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 38
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 38
+          OnChange = CDCStarPathChange
         end
         object gscc3: TDirectoryEdit
           Tag = 7
@@ -798,11 +765,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 150
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 39
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 39
+          OnChange = CDCStarPathChange
         end
         object usn3: TDirectoryEdit
           Tag = 9
@@ -810,11 +777,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 179
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 40
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 40
+          OnChange = CDCStarPathChange
         end
         object dsbase3: TDirectoryEdit
           Tag = 11
@@ -822,11 +789,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 330
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 41
           ButtonWidth = 21
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 41
+          OnChange = CDCStarPathChange
         end
         object dstyc3: TDirectoryEdit
           Tag = 12
@@ -834,11 +801,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 359
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 42
           ButtonWidth = 21
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 42
+          OnChange = CDCStarPathChange
         end
         object dsgsc3: TDirectoryEdit
           Tag = 13
@@ -846,11 +813,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 386
           Width = 111
-          OnChange = CDCStarPathChange
-          TabOrder = 43
           ButtonWidth = 21
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 43
+          OnChange = CDCStarPathChange
         end
         object gcv3: TDirectoryEdit
           Tag = 1
@@ -858,11 +825,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 235
           Width = 111
-          OnChange = gcv3Change
-          TabOrder = 44
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 44
+          OnChange = gcv3Change
         end
         object wds3: TDirectoryEdit
           Tag = 1
@@ -870,19 +837,16 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 287
           Width = 111
-          OnChange = wds3Change
-          TabOrder = 45
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 45
+          OnChange = wds3Change
         end
       end
       object Page3: TPage
         Caption = 'CdC Nebulae'
-        ClientWidth = 496
-        ClientHeight = 422
         object Bevel5: TBevel
-          Name = 'Bevel5'
           Left = 1
           Height = 233
           Top = 136
@@ -891,7 +855,6 @@ object f_config_catalog: Tf_config_catalog
           Style = bsRaised
         end
         object Bevel3: TBevel
-          Name = 'Bevel3'
           Left = 2
           Height = 41
           Top = 40
@@ -900,7 +863,6 @@ object f_config_catalog: Tf_config_catalog
           Style = bsRaised
         end
         object Bevel4: TBevel
-          Name = 'Bevel4'
           Left = 1
           Height = 41
           Top = 88
@@ -1148,7 +1110,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 7
         end
         object fngc1: TLongEdit
-          Name = 'fngc1'
           Tag = 2
           Left = 279
           Height = 22
@@ -1164,7 +1125,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fngc2: TLongEdit
-          Name = 'fngc2'
           Tag = 2
           Left = 319
           Height = 22
@@ -1180,7 +1140,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fsac1: TLongEdit
-          Name = 'fsac1'
           Tag = 1
           Left = 279
           Height = 22
@@ -1196,7 +1155,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fsac2: TLongEdit
-          Name = 'fsac2'
           Tag = 1
           Left = 319
           Height = 22
@@ -1212,7 +1170,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object flbn1: TLongEdit
-          Name = 'flbn1'
           Tag = 3
           Left = 279
           Height = 22
@@ -1228,7 +1185,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object flbn2: TLongEdit
-          Name = 'flbn2'
           Tag = 3
           Left = 319
           Height = 22
@@ -1244,7 +1200,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object frc31: TLongEdit
-          Name = 'frc31'
           Tag = 4
           Left = 279
           Height = 22
@@ -1260,7 +1215,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object frc32: TLongEdit
-          Name = 'frc32'
           Tag = 4
           Left = 319
           Height = 22
@@ -1276,7 +1230,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fpgc1: TLongEdit
-          Name = 'fpgc1'
           Tag = 5
           Left = 279
           Height = 22
@@ -1292,7 +1245,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fpgc2: TLongEdit
-          Name = 'fpgc2'
           Tag = 5
           Left = 319
           Height = 22
@@ -1308,7 +1260,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object focl1: TLongEdit
-          Name = 'focl1'
           Tag = 6
           Left = 279
           Height = 22
@@ -1324,7 +1275,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object focl2: TLongEdit
-          Name = 'focl2'
           Tag = 6
           Left = 319
           Height = 22
@@ -1340,7 +1290,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fgcm1: TLongEdit
-          Name = 'fgcm1'
           Tag = 7
           Left = 279
           Height = 22
@@ -1356,7 +1305,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fgcm2: TLongEdit
-          Name = 'fgcm2'
           Tag = 7
           Left = 319
           Height = 22
@@ -1372,7 +1320,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fgpn1: TLongEdit
-          Name = 'fgpn1'
           Tag = 8
           Left = 279
           Height = 22
@@ -1388,7 +1335,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fgpn2: TLongEdit
-          Name = 'fgpn2'
           Tag = 8
           Left = 319
           Height = 22
@@ -1409,11 +1355,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 49
           Width = 104
-          OnChange = CDCNebPathChange
-          TabOrder = 24
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 24
+          OnChange = CDCNebPathChange
         end
         object ngc3: TDirectoryEdit
           Tag = 2
@@ -1421,11 +1367,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 19
           Top = 98
           Width = 104
-          OnChange = CDCNebPathChange
-          TabOrder = 25
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 25
+          OnChange = CDCNebPathChange
         end
         object lbn3: TDirectoryEdit
           Tag = 3
@@ -1433,11 +1379,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 19
           Top = 147
           Width = 104
-          OnChange = CDCNebPathChange
-          TabOrder = 26
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 26
+          OnChange = CDCNebPathChange
         end
         object rc33: TDirectoryEdit
           Tag = 4
@@ -1445,11 +1391,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 19
           Top = 187
           Width = 104
-          OnChange = CDCNebPathChange
-          TabOrder = 27
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 27
+          OnChange = CDCNebPathChange
         end
         object pgc3: TDirectoryEdit
           Tag = 5
@@ -1457,11 +1403,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 19
           Top = 212
           Width = 104
-          OnChange = CDCNebPathChange
-          TabOrder = 28
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 28
+          OnChange = CDCNebPathChange
         end
         object ocl3: TDirectoryEdit
           Tag = 6
@@ -1469,11 +1415,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 19
           Top = 252
           Width = 104
-          OnChange = CDCNebPathChange
-          TabOrder = 29
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 29
+          OnChange = CDCNebPathChange
         end
         object gcm3: TDirectoryEdit
           Tag = 7
@@ -1481,11 +1427,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 19
           Top = 292
           Width = 104
-          OnChange = CDCNebPathChange
-          TabOrder = 30
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 30
+          OnChange = CDCNebPathChange
         end
         object gpn3: TDirectoryEdit
           Tag = 8
@@ -1493,17 +1439,15 @@ object f_config_catalog: Tf_config_catalog
           Height = 19
           Top = 332
           Width = 104
-          OnChange = CDCNebPathChange
-          TabOrder = 31
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 31
+          OnChange = CDCNebPathChange
         end
       end
       object Page4: TPage
         Caption = 'Obsolete'
-        ClientWidth = 496
-        ClientHeight = 422
         object Label88: TLabel
           Height = 13
           Top = 7
@@ -1582,7 +1526,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 0
         end
         object Ftyc1: TLongEdit
-          Name = 'Ftyc1'
           Tag = 3
           Left = 235
           Height = 22
@@ -1598,7 +1541,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Ftyc2: TLongEdit
-          Name = 'Ftyc2'
           Tag = 3
           Left = 275
           Height = 22
@@ -1628,7 +1570,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 3
         end
         object Ftic1: TLongEdit
-          Name = 'Ftic1'
           Tag = 5
           Left = 235
           Height = 22
@@ -1644,7 +1585,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Ftic2: TLongEdit
-          Name = 'Ftic2'
           Tag = 5
           Left = 275
           Height = 22
@@ -1674,7 +1614,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 6
         end
         object fgsc1: TLongEdit
-          Name = 'fgsc1'
           Tag = 8
           Left = 235
           Height = 22
@@ -1690,7 +1629,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fgsc2: TLongEdit
-          Name = 'fgsc2'
           Tag = 8
           Left = 275
           Height = 22
@@ -1720,7 +1658,6 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 9
         end
         object fmct1: TLongEdit
-          Name = 'fmct1'
           Tag = 10
           Left = 235
           Height = 22
@@ -1736,7 +1673,6 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object fmct2: TLongEdit
-          Name = 'fmct2'
           Tag = 10
           Left = 275
           Height = 22
@@ -1757,11 +1693,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 45
           Width = 108
-          OnChange = CDCStarPathChange
-          TabOrder = 12
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 12
+          OnChange = CDCStarPathChange
         end
         object tic3: TDirectoryEdit
           Tag = 5
@@ -1769,11 +1705,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 106
           Width = 108
-          OnChange = CDCStarPathChange
-          TabOrder = 13
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 13
+          OnChange = CDCStarPathChange
         end
         object gsc3: TDirectoryEdit
           Tag = 8
@@ -1781,11 +1717,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 170
           Width = 108
-          OnChange = CDCStarPathChange
-          TabOrder = 14
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 14
+          OnChange = CDCStarPathChange
         end
         object mct3: TDirectoryEdit
           Tag = 10
@@ -1793,11 +1729,11 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 237
           Width = 108
-          OnChange = CDCStarPathChange
-          TabOrder = 15
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 15
+          OnChange = CDCStarPathChange
         end
       end
     end
@@ -1807,8 +1743,6 @@ object f_config_catalog: Tf_config_catalog
       Top = 425
       Width = 498
       Align = alBottom
-      ClientHeight = 54
-      ClientWidth = 498
       TabOrder = 1
       object fw0: TLabel
         Left = 91
@@ -1937,8 +1871,6 @@ object f_config_catalog: Tf_config_catalog
     Top = 489
     Width = 526
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 526
     TabOrder = 1
     object DirOpenImg: TImage
       Left = 8
