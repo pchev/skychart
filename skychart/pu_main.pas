@@ -548,7 +548,7 @@ type
     InitialChartNum: integer;
     AutoRefreshLock: Boolean;
   {$ifdef win32}
-    savwincol  : array[0..30] of Tcolor;
+    savwincol  : array[0..35] of Tcolor;
   {$endif}
     procedure SetButtonImage(button: Integer);
     function CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
@@ -647,6 +647,7 @@ implementation
    {$R cdc_icon.res}
 {$endif}
 
+
 //todo: lazarus cursor {$R cursbmp.res}
 
 uses
@@ -656,6 +657,8 @@ uses
      pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_manualtelescope, pu_print;
+
+const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
 
 
 function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
@@ -4964,24 +4967,22 @@ end;
 Procedure Tf_main.SaveWinColor;
 var n : integer;
 begin
-   for n:=0 to 30 do savwincol[n]:=getsyscolor(n);
+for n:=0 to 25 do savwincol[n]:=getsyscolor(win32_color_elem[n]);
 end;
 
 Procedure Tf_main.ResetWinColor;
-const elem31 : array[0..30] of integer=(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
 begin
-setsyscolors(31,elem31,savwincol);
+setsyscolors(sizeof(win32_color_elem),win32_color_elem,savwincol);
 end;
 
 procedure Tf_main.SetNightVision(night: boolean);
-const elem : array[0..30] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,30,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,25   ,26   ,27   ,28   ,29   );
-      rgb  : array[0..30] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_dark          ,nv_middle      ,nv_black    ,nv_black        ,nv_middle        ,nv_black        ,nv_black     ,nv_middle      ,nv_black      ,nv_dark,nv_dark,nv_dark,nv_dark,nv_dark,nv_dark);
+const rgb  : array[0..25] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_middle     ,nv_black       ,nv_black        ,nv_middle        ,nv_black        ,nv_black     ,nv_middle      ,nv_black    ,nv_dark       ,nv_black);
 begin
 if night then begin
  if (Color<>nv_dark) then begin
    SaveWinColor;
    SetButtonImage(cfgm.ButtonNight);
-   setsyscolors(sizeof(elem),elem,rgb);
+   setsyscolors(sizeof(win32_color_elem),win32_color_elem,rgb);
    Color:=nv_dark;
    Font.Color:=nv_middle;
    quicksearch.Color:=nv_dark;
