@@ -1714,9 +1714,7 @@ if result then begin
    rec.neb.dim2:=lin.s2;
    if lin.pa=255 then rec.neb.pa:=90
                  else rec.neb.pa:=lin.pa;
-   if (lin.sbr>70)or(rec.neb.nebtype=2)or(rec.neb.nebtype=6) then rec.neb.sbr:=99 // not reliable sbr for open cluster
-                else rec.neb.sbr:=lin.sbr;
-   if (rec.neb.mag<6)and((rec.neb.nebtype=2)or(rec.neb.nebtype=6)) then rec.neb.mag:=6;  // overestimate mag for open cluster
+   rec.neb.sbr:=lin.sbr;
    rec.neb.id:=lin.nom1;
    rec.neb.messierobject:=(copy(lin.nom1,1,2)='M ');
    rec.str[1]:=lin.nom2;
