@@ -212,7 +212,10 @@ object f_detail: Tf_detail
       Hint = 'Copy|Copies the selection and puts it on the Clipboard'
       ImageIndex = 1
       OnExecute = EditCopy1Execute
-      ShortCut = 16451
+      SecondaryShortCuts.Strings = (
+        'Ctrl+C'
+      )
+      ShortCut = 16429
     end
   end
   object PopupMenu1: TPopupMenu

@@ -103,6 +103,7 @@ end;
 
 procedure Tf_detail.EditCopy1Execute(Sender: TObject);
 begin
+  if not IpHtmlPanel1.HaveSelection then IpHtmlPanel1.SelectAll;
   IpHtmlPanel1.CopyToClipboard;
 end;
 

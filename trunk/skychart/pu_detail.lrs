@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_detail','FORMDATA',[
   'TPF0'#9'Tf_detail'#8'f_detail'#4'Left'#3#13#2#6'Height'#3#135#1#3'Top'#2'l'#5
   +'Width'#3#142#1#18'HorzScrollBar.Page'#3#141#1#18'VertScrollBar.Page'#3#134#1
@@ -186,8 +188,9 @@ LazarusResources.Add('Tf_detail','FORMDATA',[
   +'te'#8'ShortCut'#3'A@'#0#0#9'TEditCopy'#9'EditCopy1'#8'Category'#6#4'Edit'#7
   +'Caption'#6#5'&Copy'#18'DisableIfNoHandler'#9#4'Hint'#6'6Copy|Copies the sel'
   +'ection and puts it on the Clipboard'#10'ImageIndex'#2#1#9'OnExecute'#7#16'E'
-  +'ditCopy1Execute'#8'ShortCut'#3'C@'#0#0#0#10'TPopupMenu'#10'PopupMenu1'#4'le'
-  +'ft'#2'H'#3'top'#3#144#0#0#9'TMenuItem'#10'SelectAll1'#6'Action'#7#14'EditSe'
-  +'lectAll1'#7'OnClick'#7#21'EditSelectAll1Execute'#0#0#9'TMenuItem'#5'Copy1'#6
-  +'Action'#7#9'EditCopy1'#7'OnClick'#7#16'EditCopy1Execute'#0#0#0#0
+  +'ditCopy1Execute'#26'SecondaryShortCuts.Strings'#1#6#6'Ctrl+C'#0#8'ShortCut'
+  +#3'-@'#0#0#0#10'TPopupMenu'#10'PopupMenu1'#4'left'#2'H'#3'top'#3#144#0#0#9'T'
+  +'MenuItem'#10'SelectAll1'#6'Action'#7#14'EditSelectAll1'#7'OnClick'#7#21'Edi'
+  +'tSelectAll1Execute'#0#0#9'TMenuItem'#5'Copy1'#6'Action'#7#9'EditCopy1'#7'On'
+  +'Click'#7#16'EditCopy1Execute'#0#0#0#0
 ]);
