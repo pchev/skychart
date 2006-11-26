@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_calendar','FORMDATA',[
   'TPF0'#11'Tf_calendar'#10'f_calendar'#4'Left'#3'"'#1#6'Height'#3#137#1#3'Top'
   +#2'n'#5'Width'#3#131#2#18'HorzScrollBar.Page'#3#130#2#18'VertScrollBar.Page'
@@ -194,71 +196,71 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   ,'t'#8#8'ShowHint'#9#8'TabOrder'#2#1#5'Value'#2#1#8'MaxValue'#3#15''''#0#0#11
   +'TTimePicker'#4'Time'#4'Left'#2'H'#6'Height'#2#23#3'Top'#2'*'#5'Width'#2'K'#8
   +'EditMask'#6#13'!99:99:99;1; '#9'MaxLength'#2#8#11'ParentColor'#8#8'TabOrder'
-  +#2#2#4'Text'#6#8'19:57:01'#4'Time'#5#0'8'#211#17#251#142#205#212#254'?'#0#0
+  +#2#2#4'Text'#6#8'19:57:01'#4'Time'#5#0'@'#211#17#251#142#205#212#254'?'#0#0
   +#13'TJDDatePicker'#5'Date1'#4'Left'#2'H'#6'Height'#2#23#3'Top'#2#8#5'Width'#2
-  +'P'#5'Color'#7#9'clBtnFace'#8'OnChange'#7#11'Date1Change'#8'TabOrder'#2#4#11
-  +'ButtonWidth'#2#23#10'Glyph.Data'#10#154#2#0#0#150#2#0#0'/* XPM */'#10'stati'
-  +'c char *graphic[] = {'#10'"21 21 6 1",'#10'". c None",'#10'", c #000000",'
-  +#10'"- c #848484",'#10'"* c #848400",'#10'"a c #FFFFFF",'#10'"b c #FF0000",'
-  +#10'".....................",'#10'".....................",'#10'".............'
-  +'........",'#10'".,,,,,,,,,,,,,,,,,,,.",'#10'".-*****************,.",'#10'".'
-  +'-***aaaaaaaaaaa***,.",'#10'".-*****************,.",'#10'".-................'
-  +'.,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-....'
-  +'.............,.",'#10'".-aa.aa.aa.bb.aa.aa,.",'#10'".-aa.aa.aa.bb.aa.aa,.",'
-  +#10'".-.................,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-aa.aa.aa.aa'
-  +'.aa.aa,.",'#10'".-,,,,,,,,,,,,,,,,,,.",'#10'".....................",'#10'".'
-  +'....................",'#10'".....................",'#10'"..................'
-  +'..."}'#10#11'ParentColor'#8#7'Caption'#6#11'JD calendar'#2'JD'#5#0#0#0#0#0
+  +'P'#11'ButtonWidth'#2#23#5'Color'#7#9'clBtnFace'#10'Glyph.Data'#10#154#2#0#0
+  +#150#2#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"21 21 6 1",'#10'". '
+  +'c None",'#10'", c #000000",'#10'"- c #848484",'#10'"* c #848400",'#10'"a c '
+  +'#FFFFFF",'#10'"b c #FF0000",'#10'".....................",'#10'"............'
+  +'.........",'#10'".....................",'#10'".,,,,,,,,,,,,,,,,,,,.",'#10'"'
+  +'.-*****************,.",'#10'".-***aaaaaaaaaaa***,.",'#10'".-***************'
+  +'**,.",'#10'".-.................,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-aa.'
+  +'aa.aa.aa.aa.aa,.",'#10'".-.................,.",'#10'".-aa.aa.aa.bb.aa.aa,."'
+  +','#10'".-aa.aa.aa.bb.aa.aa,.",'#10'".-.................,.",'#10'".-aa.aa.aa'
+  +'.aa.aa.aa,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-,,,,,,,,,,,,,,,,,,.",'#10
+  +'".....................",'#10'".....................",'#10'"................'
+  +'.....",'#10'"....................."}'#10#8'OnChange'#7#11'Date1Change'#11'P'
+  +'arentColor'#8#8'TabOrder'#2#4#7'Caption'#6#11'JD calendar'#2'JD'#5#0#0#0#0#0
   +#30#196#149#20'@'#0#0#13'TJDDatePicker'#5'Date2'#4'Left'#3#205#0#6'Height'#2
-  +#23#3'Top'#2#8#5'Width'#2'P'#5'Color'#7#9'clBtnFace'#8'OnChange'#7#11'Date2C'
-  +'hange'#8'TabOrder'#2#3#11'ButtonWidth'#2#23#10'Glyph.Data'#10#154#2#0#0#150
-  +#2#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"21 21 6 1",'#10'". c No'
-  +'ne",'#10'", c #000000",'#10'"- c #848484",'#10'"* c #848400",'#10'"a c #FFF'
-  +'FFF",'#10'"b c #FF0000",'#10'".....................",'#10'"................'
-  +'.....",'#10'".....................",'#10'".,,,,,,,,,,,,,,,,,,,.",'#10'".-**'
-  +'***************,.",'#10'".-***aaaaaaaaaaa***,.",'#10'".-*****************,.'
-  +'",'#10'".-.................,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-aa.aa.a'
-  +'a.aa.aa.aa,.",'#10'".-.................,.",'#10'".-aa.aa.aa.bb.aa.aa,.",'#10
-  +'".-aa.aa.aa.bb.aa.aa,.",'#10'".-.................,.",'#10'".-aa.aa.aa.aa.aa'
-  +'.aa,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-,,,,,,,,,,,,,,,,,,.",'#10'"....'
-  +'.................",'#10'".....................",'#10'".....................'
-  +'",'#10'"....................."}'#10#11'ParentColor'#8#7'Caption'#6#11'JD ca'
-  +'lendar'#2'JD'#5#0#0#0#0#0#30#196#149#20'@'#0#0#7'TButton'#10'BtnRefresh'#4
-  +'Left'#3':'#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2'i'#25'BorderSpacing.Inner'
-  +'Border'#2#4#7'Caption'#6#7'Refresh'#7'OnClick'#7#15'BtnRefreshClick'#8'TabO'
-  +'rder'#2#6#0#0#7'TButton'#7'BtnHelp'#4'Left'#3#169#1#6'Height'#2#25#3'Top'#2
-  +#8#5'Width'#2'i'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#4'Help'#7'On'
-  +'Click'#7#12'BtnHelpClick'#8'TabOrder'#2#7#0#0#7'TButton'#8'BtnClose'#4'Left'
-  +#3#24#2#6'Height'#2#25#3'Top'#2#8#5'Width'#2'i'#25'BorderSpacing.InnerBorder'
-  +#2#4#7'Caption'#6#5'Close'#7'OnClick'#7#13'BtnCloseClick'#8'TabOrder'#2#8#0#0
-  +#7'TButton'#7'BtnSave'#4'Left'#3':'#1#6'Height'#2#25#3'Top'#2'('#5'Width'#2
-  +'i'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#12'Save to File'#7'OnClic'
-  +'k'#7#12'BtnSaveClick'#8'TabOrder'#2#9#0#0#7'TButton'#8'BtnPrint'#4'Left'#3
-  +#169#1#6'Height'#2#25#3'Top'#2'('#5'Width'#2'i'#25'BorderSpacing.InnerBorder'
-  +#2#4#7'Caption'#6#5'Print'#7'OnClick'#7#13'BtnPrintClick'#8'TabOrder'#2#10#0
-  +#0#7'TButton'#8'BtnReset'#4'Left'#3#24#2#6'Height'#2#25#3'Top'#2'('#5'Width'
-  +#2'i'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#11'Reset Chart'#7'OnCli'
-  +'ck'#7#13'BtnResetClick'#8'TabOrder'#2#11#7'Visible'#8#0#0#0#12'TPageControl'
-  +#12'PageControl1'#6'Height'#3':'#1#3'Top'#2'F'#5'Width'#3'{'#2#10'ActivePage'
-  +#7#8'twilight'#8'TabIndex'#2#0#8'TabOrder'#2#0#8'OnChange'#7#18'PageControl1'
-  +'Change'#13'OnPageChanged'#7#18'PageControl1Change'#0#9'TTabSheet'#8'twiligh'
-  +'t'#7'Caption'#6#8'Twilight'#0#11'TStringGrid'#12'TwilightGrid'#6'Height'#3
-  +' '#1#5'Width'#3'y'#2#5'Align'#7#8'alClient'#8'ColCount'#2#5#15'DefaultColWi'
-  +'dth'#2's'#10'FixedColor'#7#9'clBtnFace'#9'FixedRows'#2#2#13'GridLineWidth'#2
-  +#0#7'Options'#11#10'goVertLine'#10'goHorzLine'#13'goRangeSelect'#15'goThumbT'
-  +'racking'#0#8'RowCount'#2#3#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'#2#0#7
-  +'TabStop'#9#10'OnDblClick'#7#12'GridDblClick'#9'OnMouseUp'#7#11'GridMouseUp'
-  +#0#0#0#9'TTabSheet'#7'planets'#7'Caption'#6#7'Planets'#10'ImageIndex'#2#1#0
-  +#12'TPageControl'#12'Pagecontrol2'#6'Height'#3' '#1#5'Width'#3'y'#2#10'Activ'
-  +'ePage'#7#7'Psoleil'#5'Align'#7#8'alClient'#8'TabIndex'#2#0#8'TabOrder'#2#0#0
-  +#9'TTabSheet'#7'Psoleil'#7'Caption'#6#3'Sun'#10'ImageIndex'#2#9#0#11'TString'
-  +'Grid'#10'SoleilGrid'#6'Height'#3' '#1#5'Width'#3'y'#2#5'Align'#7#8'alClient'
-  +#8'ColCount'#2#11#15'DefaultColWidth'#2'K'#10'FixedColor'#7#9'clBtnFace'#9'F'
-  +'ixedRows'#2#2#13'GridLineWidth'#2#0#7'Options'#11#10'goVertLine'#10'goHorzL'
-  ,'ine'#13'goRangeSelect'#15'goThumbTracking'#0#8'RowCount'#2#15#10'ScrollBars'
-  +#7#10'ssAutoBoth'#8'TabOrder'#2#0#7'TabStop'#9#10'OnDblClick'#7#12'GridDblCl'
-  +'ick'#9'OnMouseUp'#7#11'GridMouseUp'#9'ColWidths'#1#2'K'#2'K'#2'K'#2'7'#2'4'
-  +#2'('#2'D'#2'G'#2'H'#2'K'#2'K'#0#0#0#0#9'TTabSheet'#7'Mercure'#7'Caption'#6#7
+  +#23#3'Top'#2#8#5'Width'#2'P'#11'ButtonWidth'#2#23#5'Color'#7#9'clBtnFace'#10
+  +'Glyph.Data'#10#154#2#0#0#150#2#0#0'/* XPM */'#10'static char *graphic[] = {'
+  +#10'"21 21 6 1",'#10'". c None",'#10'", c #000000",'#10'"- c #848484",'#10'"'
+  +'* c #848400",'#10'"a c #FFFFFF",'#10'"b c #FF0000",'#10'"..................'
+  +'...",'#10'".....................",'#10'".....................",'#10'".,,,,,'
+  +',,,,,,,,,,,,,,.",'#10'".-*****************,.",'#10'".-***aaaaaaaaaaa***,.",'
+  +#10'".-*****************,.",'#10'".-.................,.",'#10'".-aa.aa.aa.aa'
+  +'.aa.aa,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-.................,.",'#10'".'
+  +'-aa.aa.aa.bb.aa.aa,.",'#10'".-aa.aa.aa.bb.aa.aa,.",'#10'".-................'
+  +'.,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-aa.aa.aa.aa.aa.aa,.",'#10'".-,,,,'
+  +',,,,,,,,,,,,,,.",'#10'".....................",'#10'".....................",'
+  +#10'".....................",'#10'"....................."}'#10#8'OnChange'#7
+  +#11'Date2Change'#11'ParentColor'#8#8'TabOrder'#2#3#7'Caption'#6#11'JD calend'
+  +'ar'#2'JD'#5#0#0#0#0#0#30#196#149#20'@'#0#0#7'TButton'#10'BtnRefresh'#4'Left'
+  +#3':'#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2'i'#25'BorderSpacing.InnerBorder'
+  +#2#4#7'Caption'#6#7'Refresh'#7'OnClick'#7#15'BtnRefreshClick'#8'TabOrder'#2#6
+  +#0#0#7'TButton'#7'BtnHelp'#4'Left'#3#169#1#6'Height'#2#25#3'Top'#2#8#5'Width'
+  +#2'i'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#4'Help'#7'OnClick'#7#12
+  +'BtnHelpClick'#8'TabOrder'#2#7#0#0#7'TButton'#8'BtnClose'#4'Left'#3#24#2#6'H'
+  +'eight'#2#25#3'Top'#2#8#5'Width'#2'i'#25'BorderSpacing.InnerBorder'#2#4#7'Ca'
+  +'ption'#6#5'Close'#7'OnClick'#7#13'BtnCloseClick'#8'TabOrder'#2#8#0#0#7'TBut'
+  +'ton'#7'BtnSave'#4'Left'#3':'#1#6'Height'#2#25#3'Top'#2'('#5'Width'#2'i'#25
+  +'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#12'Save to File'#7'OnClick'#7#12
+  +'BtnSaveClick'#8'TabOrder'#2#9#0#0#7'TButton'#8'BtnPrint'#4'Left'#3#169#1#6
+  +'Height'#2#25#3'Top'#2'('#5'Width'#2'i'#25'BorderSpacing.InnerBorder'#2#4#7
+  +'Caption'#6#5'Print'#7'OnClick'#7#13'BtnPrintClick'#8'TabOrder'#2#10#0#0#7'T'
+  +'Button'#8'BtnReset'#4'Left'#3#24#2#6'Height'#2#25#3'Top'#2'('#5'Width'#2'i'
+  +#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#11'Reset Chart'#7'OnClick'#7
+  +#13'BtnResetClick'#8'TabOrder'#2#11#7'Visible'#8#0#0#0#12'TPageControl'#12'P'
+  +'ageControl1'#6'Height'#3':'#1#3'Top'#2'F'#5'Width'#3'{'#2#10'ActivePage'#7#8
+  +'twilight'#8'TabIndex'#2#0#8'TabOrder'#2#0#8'OnChange'#7#18'PageControl1Chan'
+  +'ge'#13'OnPageChanged'#7#18'PageControl1Change'#0#9'TTabSheet'#8'twilight'#7
+  +'Caption'#6#8'Twilight'#0#11'TStringGrid'#12'TwilightGrid'#6'Height'#3' '#1#5
+  +'Width'#3'y'#2#5'Align'#7#8'alClient'#8'ColCount'#2#5#15'DefaultColWidth'#2
+  +'s'#10'FixedColor'#7#9'clBtnFace'#9'FixedRows'#2#2#13'GridLineWidth'#2#0#7'O'
+  +'ptions'#11#10'goVertLine'#10'goHorzLine'#13'goRangeSelect'#15'goThumbTracki'
+  +'ng'#0#8'RowCount'#2#3#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'#2#0#7'Tab'
+  +'Stop'#9#10'OnDblClick'#7#12'GridDblClick'#9'OnMouseUp'#7#11'GridMouseUp'#0#0
+  +#0#9'TTabSheet'#7'planets'#7'Caption'#6#7'Planets'#10'ImageIndex'#2#1#0#12'T'
+  +'PageControl'#12'Pagecontrol2'#6'Height'#3' '#1#5'Width'#3'y'#2#10'ActivePag'
+  +'e'#7#7'Psoleil'#5'Align'#7#8'alClient'#8'TabIndex'#2#0#8'TabOrder'#2#0#0#9
+  +'TTabSheet'#7'Psoleil'#7'Caption'#6#3'Sun'#10'ImageIndex'#2#9#0#11'TStringGr'
+  +'id'#10'SoleilGrid'#6'Height'#3' '#1#5'Width'#3'y'#2#5'Align'#7#8'alClient'#8
+  +'ColCount'#2#11#15'DefaultColWidth'#2'K'#10'FixedColor'#7#9'clBtnFace'#9'Fix'
+  +'edRows'#2#2#13'GridLineWidth'#2#0#7'Options'#11#10'goVertLine'#10'goHorzLin'
+  ,'e'#13'goRangeSelect'#15'goThumbTracking'#0#8'RowCount'#2#15#10'ScrollBars'#7
+  +#10'ssAutoBoth'#8'TabOrder'#2#0#7'TabStop'#9#10'OnDblClick'#7#12'GridDblClic'
+  +'k'#9'OnMouseUp'#7#11'GridMouseUp'#9'ColWidths'#1#2'K'#2'K'#2'K'#2'7'#2'4'#2
+  +'('#2'D'#2'G'#2'H'#2'K'#2'K'#0#0#0#0#9'TTabSheet'#7'Mercure'#7'Caption'#6#7
   +'Mercury'#0#11'TStringGrid'#11'MercureGrid'#6'Height'#3' '#1#5'Width'#3'y'#2
   +#5'Align'#7#8'alClient'#8'ColCount'#2#11#15'DefaultColWidth'#2'K'#10'FixedCo'
   +'lor'#7#9'clBtnFace'#9'FixedRows'#2#2#13'GridLineWidth'#2#0#7'Options'#11#10
@@ -399,12 +401,13 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +'ked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#5#0#0#10'TFloatEdit'#8'magchar'
   +'t'#4'Left'#3#232#0#6'Height'#2#21#4'Hint'#6#5'0..99'#5'Width'#2'!'#11'Borde'
   +'rStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8
-  +'TabOrder'#2#4#5'Value'#5#0#0#0#0#0#0#0#208#1'@'#8'MaxValue'#2'c'#0#0#9'TChe'
-  +'ckBox'#11'SatChartBox'#4'Left'#3#208#1#6'Height'#2#13#5'Width'#2'q'#7'Capti'
-  +'on'#6#21'in current chart only'#8'TabOrder'#2#3#0#0#10'TFloatEdit'#8'maglim'
-  +'it'#4'Left'#3#144#0#6'Height'#2#21#4'Hint'#6#5'0..99'#5'Width'#2'!'#11'Bord'
-  +'erStyle'#7#8'bsSingle'#9'MaxLength'#2#4#11'ParentColor'#8#14'ParentShowHint'
-  +#8#8'ShowHint'#9#8'TabOrder'#2#1#5'Value'#2#4#8'MaxValue'#2'c'#0#0#0#0#0#11
-  +'TSaveDialog'#11'SaveDialog1'#5'Title'#6#12'Save file as'#11'FilterIndex'#2#0
-  +#4'left'#3'n'#1#3'top'#2#16#0#0#0
+  +'TabOrder'#2#4#5'Value'#5#0#0#0#0#0#0#0#208#1'@'#8'MaxValue'#5#0#0#0#0#0#0#0
+  +#198#5'@'#0#0#9'TCheckBox'#11'SatChartBox'#4'Left'#3#208#1#6'Height'#2#13#5
+  +'Width'#2'q'#7'Caption'#6#21'in current chart only'#8'TabOrder'#2#3#0#0#10'T'
+  +'FloatEdit'#8'maglimit'#4'Left'#3#144#0#6'Height'#2#21#4'Hint'#6#5'0..99'#5
+  +'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#4#11'ParentColor'#8
+  +#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#5'Value'#5#0#0#0#0#0#0#0
+  +#128#1'@'#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#0#0#0#11'TSaveDialog'#11
+  +'SaveDialog1'#5'Title'#6#12'Save file as'#11'FilterIndex'#2#0#4'left'#3'n'#1
+  +#3'top'#2#16#0#0#0
 ]);

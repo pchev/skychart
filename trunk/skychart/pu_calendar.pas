@@ -931,6 +931,7 @@ var ar,de,dist,illum,phase,diam,jda,magn,dkm,q,az,ha,dp : double;
     mr,mt,ms,azr,azs : string;
 
 procedure ComputeRow(gr:TstringGrid; ipla:integer);
+var PSat,aSat,bSat,beSat,sbSat: double;
 begin
 with gr do begin
   RowCount:=i+1;
@@ -940,6 +941,11 @@ with gr do begin
     precession(jd2000,c.jdchart,ar,de);
     if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
     if c.ApparentPos then apparent_equatorial(ar,de,c);
+    if ipla=6 then begin  // ring magn. correction
+       planet.SatRing(jda+jdt_ut,PSat,aSat,bSat,beSat);
+       sbSat:=sin(deg2rad*abs(beSat));
+       magn:=magn-2.6*sbSat+1.25*sbSat*sbSat;
+    end;
     end;
   10: begin
     Planet.Sun(jda+jdt_ut,ar,de,dist,diam);
