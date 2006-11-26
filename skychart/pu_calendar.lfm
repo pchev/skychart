@@ -272,7 +272,6 @@ object f_calendar: Tf_calendar
       Color = clBtnFace
       OnChange = Date1Change
       TabOrder = 4
-      Text = '2006.02.01'
       ButtonWidth = 23
       Glyph.Data = {
         960200002F2A2058504D202A2F0A7374617469632063686172202A6772617068
@@ -309,7 +308,6 @@ object f_calendar: Tf_calendar
       Color = clBtnFace
       OnChange = Date2Change
       TabOrder = 3
-      Text = '2006.02.01'
       ButtonWidth = 23
       Glyph.Data = {
         960200002F2A2058504D202A2F0A7374617469632063686172202A6772617068
