@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_main','FORMDATA',[
   'TPF0'#7'Tf_main'#6'f_main'#4'Left'#3#28#1#6'Height'#3'D'#2#3'Top'#2'i'#5'Wid'
   +'th'#3'\'#3#18'HorzScrollBar.Page'#3'['#3#18'VertScrollBar.Page'#3'/'#2#13'A'
@@ -1556,84 +1558,82 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'ck'#0#0#9'TMenuItem'#10'BugReport1'#7'Caption'#6#16'Report a problem'#7'OnC'
   +'lick'#7#15'BugReport1Click'#0#0#9'TMenuItem'#10'MenuItem11'#7'Caption'#6#1
   +'-'#0#0#9'TMenuItem'#13'HelpAboutItem'#6'Action'#7#10'HelpAbout1'#7'OnClick'
-  +#7#17'HelpAbout1Execute'#0#0#0#9'TMenuItem'#10'topmessage'#7'Caption'#6#141
-  +'                                                                           '
-  +'                                                                  '#0#0#0#11
-  +'TOpenDialog'#10'OpenDialog'#5'Title'#6#18'Open existing file'#11'FilterInde'
-  +'x'#2#0#7'Options'#11#14'ofEnableSizing'#0#4'left'#3#184#0#3'top'#3#160#0#0#0
-  +#11'TActionList'#11'ActionList1'#6'Images'#7#11'ImageNormal'#4'left'#3'P'#1#3
-  +'top'#3#160#0#0#7'TAction'#8'FileNew1'#8'Category'#6#4'File'#7'Caption'#6#9
-  +'New Chart'#18'DisableIfNoHandler'#9#4'Hint'#6#22'New|Create a new chart'#10
-  +'ImageIndex'#2#0#9'OnExecute'#7#15'FileNew1Execute'#0#0#7'TAction'#9'FileOpe'
-  +'n1'#8'Category'#6#4'File'#7'Caption'#6#5'Open '#18'DisableIfNoHandler'#9#4
-  +'Hint'#6#17'Open|Open a chart'#10'ImageIndex'#2#1#9'OnExecute'#7#16'FileOpen'
-  +'1Execute'#0#0#7'TAction'#11'FileSaveAs1'#8'Category'#6#4'File'#7'Caption'#6
-  +#10'Save As...'#18'DisableIfNoHandler'#9#4'Hint'#6#22'Save the current chart'
-  +#10'ImageIndex'#2#2#9'OnExecute'#7#18'FileSaveAs1Execute'#0#0#7'TAction'#9'F'
-  +'ileExit1'#8'Category'#6#4'File'#7'Caption'#6#4'Exit'#18'DisableIfNoHandler'
-  +#9#4'Hint'#6#21'Exit|Exit application'#10'ImageIndex'#2#11#9'OnExecute'#7#16
-  +'FileExit1Execute'#0#0#7'TAction'#6'Print1'#8'Category'#6#4'File'#7'Caption'
-  +#6#5'Print'#18'DisableIfNoHandler'#9#4'Hint'#6#15'Print the chart'#10'ImageI'
-  +'ndex'#2#3#9'OnExecute'#7#13'Print1Execute'#0#0#9'TEditCopy'#9'EditCopy1'#8
-  +'Category'#6#4'Edit'#7'Caption'#6#4'Copy'#18'DisableIfNoHandler'#9#4'Hint'#6
-  +'6Copy|Copies the selection and puts it on the Clipboard'#9'OnExecute'#7#16
-  +'EditCopy1Execute'#8'ShortCut'#3'C@'#0#0#7'TAction'#15'FilePrintSetup1'#8'Ca'
-  +'tegory'#6#4'File'#7'Caption'#6#11'Print Setup'#18'DisableIfNoHandler'#9#10
-  +'ImageIndex'#2'/'#9'OnExecute'#7#22'FilePrintSetup1Execute'#0#0#7'TAction'#10
-  +'HelpAbout1'#8'Category'#6#4'Help'#7'Caption'#6#8'About...'#18'DisableIfNoHa'
-  +'ndler'#9#4'Hint'#6'AAbout|Displays program information, version number, and'
-  +' copyright'#9'OnExecute'#7#17'HelpAbout1Execute'#0#0#7'TAction'#10'OpenConf'
-  +'ig'#8'Category'#6#5'Setup'#7'Caption'#6#13'Configuration'#18'DisableIfNoHan'
-  +'dler'#9#4'Hint'#6#21'Configure the program'#10'ImageIndex'#2#10#9'OnExecute'
-  +#7#17'OpenConfigExecute'#0#0#13'THelpContents'#13'HelpContents1'#8'Category'
-  +#6#4'Help'#7'Caption'#6#13'Help contents'#18'DisableIfNoHandler'#9#4'Hint'#6
-  +#13'Help contents'#10'ImageIndex'#2#12#9'OnExecute'#7#20'HelpContents1Execut'
-  +'e'#8'ShortCut'#2'p'#0#0#7'TAction'#7'Search1'#8'Category'#6#6'Search'#7'Cap'
-  +'tion'#6#6'Search'#18'DisableIfNoHandler'#9#4'Hint'#6#6'Search'#10'ImageInde'
-  +'x'#2'L'#9'OnExecute'#7#14'Search1Execute'#0#0#7'TAction'#7'ViewBar'#8'Categ'
-  +'ory'#6#4'View'#7'Caption'#6#14'View Tools Bar'#18'DisableIfNoHandler'#9#4'H'
-  +'int'#6#14'View Tools Bar'#9'OnExecute'#7#14'ViewBarExecute'#8'ShortCut'#3'B'
-  +'@'#0#0#7'TAction'#8'zoomplus'#8'Category'#6#5'chart'#7'Caption'#6#7'Zoom In'
-  +#18'DisableIfNoHandler'#9#4'Hint'#6#7'Zoom In'#10'ImageIndex'#2#6#9'OnExecut'
-  +'e'#7#15'zoomplusExecute'#0#0#7'TAction'#9'zoomminus'#8'Category'#6#5'chart'
-  +#7'Caption'#6#8'Zoom Out'#18'DisableIfNoHandler'#9#4'Hint'#6#8'Zoom Out'#10
-  +'ImageIndex'#2#7#9'OnExecute'#7#16'zoomminusExecute'#0#0#7'TAction'#7'ZoomBa'
-  +'r'#8'Category'#6#5'chart'#7'Caption'#6#7'ZoomBar'#18'DisableIfNoHandler'#9#4
-  ,'Hint'#6#7'Set FOV'#10'ImageIndex'#2#8#9'OnExecute'#7#14'ZoomBarExecute'#0#0
-  +#7'TAction'#5'FlipX'#8'Category'#6#5'chart'#7'Caption'#6#19'Mirror Horizonta'
-  +'lly'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Mirror Horizontally'#10'ImageInd'
-  +'ex'#2#15#9'OnExecute'#7#12'FlipXExecute'#0#0#7'TAction'#5'FlipY'#8'Category'
-  +#6#5'chart'#7'Caption'#6#17'Mirror Vertically'#18'DisableIfNoHandler'#9#4'Hi'
-  +'nt'#6#17'Mirror Vertically'#10'ImageIndex'#2#17#9'OnExecute'#7#12'FlipYExec'
-  +'ute'#0#0#7'TAction'#10'ViewStatus'#8'Category'#6#4'View'#7'Caption'#6#15'Vi'
-  +'ew Status Bar'#18'DisableIfNoHandler'#9#4'Hint'#6#19'View the status bar'#9
-  +'OnExecute'#7#17'ViewStatusExecute'#0#0#7'TAction'#17'SaveConfiguration'#8'C'
-  +'ategory'#6#5'Setup'#7'Caption'#6#22'Save Configuration Now'#18'DisableIfNoH'
-  +'andler'#9#4'Hint'#6#29'The the default configuration'#9'OnExecute'#7#24'Sav'
-  +'eConfigurationExecute'#0#0#7'TAction'#16'SaveConfigOnExit'#8'Category'#6#5
-  +'Setup'#7'Caption'#6#26'Save Configuration On Exit'#7'Checked'#9#18'DisableI'
-  +'fNoHandler'#9#4'Hint'#6'-Save the configuration when the program close'#9'O'
-  +'nExecute'#7#23'SaveConfigOnExitExecute'#0#0#7'TAction'#4'Undo'#8'Category'#6
-  +#4'Undo'#7'Caption'#6#4'Undo'#18'DisableIfNoHandler'#9#4'Hint'#6#16'Undo Las'
-  +'t Change'#10'ImageIndex'#2#19#9'OnExecute'#7#11'UndoExecute'#0#0#7'TAction'
-  +#4'Redo'#8'Category'#6#4'Undo'#7'Caption'#6#4'Redo'#18'DisableIfNoHandler'#9
-  +#4'Hint'#6#16'Redo Last Change'#10'ImageIndex'#2#20#9'OnExecute'#7#11'RedoEx'
-  +'ecute'#0#0#7'TAction'#8'rot_plus'#8'Category'#6#5'chart'#7'Caption'#6#12'Ro'
-  +'tate Right'#18'DisableIfNoHandler'#9#4'Hint'#6#12'Rotate Right'#10'ImageInd'
-  +'ex'#2#21#9'OnExecute'#7#15'rot_plusExecute'#0#0#7'TAction'#9'rot_minus'#8'C'
-  +'ategory'#6#5'chart'#7'Caption'#6#11'Rotate Left'#18'DisableIfNoHandler'#9#4
-  +'Hint'#6#11'Rotate Left'#10'ImageIndex'#2#22#9'OnExecute'#7#16'rot_minusExec'
-  +'ute'#0#0#7'TAction'#6'GridEQ'#8'Category'#6#5'chart'#7'Caption'#6#19'Add Eq'
-  +'uatorial Grid'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Add Equatorial Grid'#10
-  +'ImageIndex'#2#24#9'OnExecute'#7#13'GridEQExecute'#0#0#7'TAction'#4'Grid'#8
-  +'Category'#6#5'chart'#7'Caption'#6#20'Show Coordinate Grid'#18'DisableIfNoHa'
-  +'ndler'#9#4'Hint'#6#20'Show Coordinate Grid'#10'ImageIndex'#2#25#9'OnExecute'
-  +#7#11'GridExecute'#0#0#7'TAction'#11'switchstars'#8'Category'#6#5'chart'#7'C'
-  +'aption'#6#11'switchstars'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Change Draw'
-  +'ing Mode'#10'ImageIndex'#2'"'#9'OnExecute'#7#18'switchstarsExecute'#0#0#7'T'
-  +'Action'#16'switchbackground'#8'Category'#6#5'chart'#7'Caption'#6#16'switchb'
-  +'ackground'#18'DisableIfNoHandler'#9#4'Hint'#6#20'Sky Background Color'#10'I'
-  +'mageIndex'#2'#'#9'OnExecute'#7#23'switchbackgroundExecute'#0#0#7'TAction'#9
+  +#7#17'HelpAbout1Execute'#0#0#0#9'TMenuItem'#10'topmessage'#7'Caption'#6#1' '
+  +#0#0#0#11'TOpenDialog'#10'OpenDialog'#5'Title'#6#18'Open existing file'#11'F'
+  +'ilterIndex'#2#0#7'Options'#11#14'ofEnableSizing'#0#4'left'#3#184#0#3'top'#3
+  +#160#0#0#0#11'TActionList'#11'ActionList1'#6'Images'#7#11'ImageNormal'#4'lef'
+  +'t'#3'P'#1#3'top'#3#160#0#0#7'TAction'#8'FileNew1'#8'Category'#6#4'File'#7'C'
+  +'aption'#6#9'New Chart'#18'DisableIfNoHandler'#9#4'Hint'#6#22'New|Create a n'
+  +'ew chart'#10'ImageIndex'#2#0#9'OnExecute'#7#15'FileNew1Execute'#0#0#7'TActi'
+  +'on'#9'FileOpen1'#8'Category'#6#4'File'#7'Caption'#6#5'Open '#18'DisableIfNo'
+  +'Handler'#9#4'Hint'#6#17'Open|Open a chart'#10'ImageIndex'#2#1#9'OnExecute'#7
+  +#16'FileOpen1Execute'#0#0#7'TAction'#11'FileSaveAs1'#8'Category'#6#4'File'#7
+  +'Caption'#6#10'Save As...'#18'DisableIfNoHandler'#9#4'Hint'#6#22'Save the cu'
+  +'rrent chart'#10'ImageIndex'#2#2#9'OnExecute'#7#18'FileSaveAs1Execute'#0#0#7
+  +'TAction'#9'FileExit1'#8'Category'#6#4'File'#7'Caption'#6#4'Exit'#18'Disable'
+  +'IfNoHandler'#9#4'Hint'#6#21'Exit|Exit application'#10'ImageIndex'#2#11#9'On'
+  +'Execute'#7#16'FileExit1Execute'#0#0#7'TAction'#6'Print1'#8'Category'#6#4'Fi'
+  +'le'#7'Caption'#6#5'Print'#18'DisableIfNoHandler'#9#4'Hint'#6#15'Print the c'
+  +'hart'#10'ImageIndex'#2#3#9'OnExecute'#7#13'Print1Execute'#0#0#9'TEditCopy'#9
+  +'EditCopy1'#8'Category'#6#4'Edit'#7'Caption'#6#4'Copy'#18'DisableIfNoHandler'
+  +#9#4'Hint'#6'6Copy|Copies the selection and puts it on the Clipboard'#9'OnEx'
+  +'ecute'#7#16'EditCopy1Execute'#8'ShortCut'#3'C@'#0#0#7'TAction'#15'FilePrint'
+  +'Setup1'#8'Category'#6#4'File'#7'Caption'#6#11'Print Setup'#18'DisableIfNoHa'
+  +'ndler'#9#10'ImageIndex'#2'/'#9'OnExecute'#7#22'FilePrintSetup1Execute'#0#0#7
+  +'TAction'#10'HelpAbout1'#8'Category'#6#4'Help'#7'Caption'#6#8'About...'#18'D'
+  +'isableIfNoHandler'#9#4'Hint'#6'AAbout|Displays program information, version'
+  +' number, and copyright'#9'OnExecute'#7#17'HelpAbout1Execute'#0#0#7'TAction'
+  +#10'OpenConfig'#8'Category'#6#5'Setup'#7'Caption'#6#13'Configuration'#18'Dis'
+  +'ableIfNoHandler'#9#4'Hint'#6#21'Configure the program'#10'ImageIndex'#2#10#9
+  +'OnExecute'#7#17'OpenConfigExecute'#0#0#13'THelpContents'#13'HelpContents1'#8
+  +'Category'#6#4'Help'#7'Caption'#6#13'Help contents'#18'DisableIfNoHandler'#9
+  +#4'Hint'#6#13'Help contents'#10'ImageIndex'#2#12#9'OnExecute'#7#20'HelpConte'
+  +'nts1Execute'#8'ShortCut'#2'p'#0#0#7'TAction'#7'Search1'#8'Category'#6#6'Sea'
+  +'rch'#7'Caption'#6#6'Search'#18'DisableIfNoHandler'#9#4'Hint'#6#6'Search'#10
+  +'ImageIndex'#2'L'#9'OnExecute'#7#14'Search1Execute'#0#0#7'TAction'#7'ViewBar'
+  +#8'Category'#6#4'View'#7'Caption'#6#14'View Tools Bar'#18'DisableIfNoHandler'
+  +#9#4'Hint'#6#14'View Tools Bar'#9'OnExecute'#7#14'ViewBarExecute'#8'ShortCut'
+  +#3'B@'#0#0#7'TAction'#8'zoomplus'#8'Category'#6#5'chart'#7'Caption'#6#7'Zoom'
+  +' In'#18'DisableIfNoHandler'#9#4'Hint'#6#7'Zoom In'#10'ImageIndex'#2#6#9'OnE'
+  +'xecute'#7#15'zoomplusExecute'#0#0#7'TAction'#9'zoomminus'#8'Category'#6#5'c'
+  +'hart'#7'Caption'#6#8'Zoom Out'#18'DisableIfNoHandler'#9#4'Hint'#6#8'Zoom Ou'
+  +'t'#10'ImageIndex'#2#7#9'OnExecute'#7#16'zoomminusExecute'#0#0#7'TAction'#7
+  +'ZoomBar'#8'Category'#6#5'chart'#7'Caption'#6#7'ZoomBar'#18'DisableIfNoHandl'
+  +'er'#9#4'Hint'#6#7'Set FOV'#10'ImageIndex'#2#8#9'OnExecute'#7#14'ZoomBarExec'
+  +'ute'#0#0#7'TAction'#5'FlipX'#8'Category'#6#5'chart'#7'Caption'#6#19'Mirror '
+  ,'Horizontally'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Mirror Horizontally'#10
+  +'ImageIndex'#2#15#9'OnExecute'#7#12'FlipXExecute'#0#0#7'TAction'#5'FlipY'#8
+  +'Category'#6#5'chart'#7'Caption'#6#17'Mirror Vertically'#18'DisableIfNoHandl'
+  +'er'#9#4'Hint'#6#17'Mirror Vertically'#10'ImageIndex'#2#17#9'OnExecute'#7#12
+  +'FlipYExecute'#0#0#7'TAction'#10'ViewStatus'#8'Category'#6#4'View'#7'Caption'
+  +#6#15'View Status Bar'#18'DisableIfNoHandler'#9#4'Hint'#6#19'View the status'
+  +' bar'#9'OnExecute'#7#17'ViewStatusExecute'#0#0#7'TAction'#17'SaveConfigurat'
+  +'ion'#8'Category'#6#5'Setup'#7'Caption'#6#22'Save Configuration Now'#18'Disa'
+  +'bleIfNoHandler'#9#4'Hint'#6#29'The the default configuration'#9'OnExecute'#7
+  +#24'SaveConfigurationExecute'#0#0#7'TAction'#16'SaveConfigOnExit'#8'Category'
+  +#6#5'Setup'#7'Caption'#6#26'Save Configuration On Exit'#7'Checked'#9#18'Disa'
+  +'bleIfNoHandler'#9#4'Hint'#6'-Save the configuration when the program close'
+  +#9'OnExecute'#7#23'SaveConfigOnExitExecute'#0#0#7'TAction'#4'Undo'#8'Categor'
+  +'y'#6#4'Undo'#7'Caption'#6#4'Undo'#18'DisableIfNoHandler'#9#4'Hint'#6#16'Und'
+  +'o Last Change'#10'ImageIndex'#2#19#9'OnExecute'#7#11'UndoExecute'#0#0#7'TAc'
+  +'tion'#4'Redo'#8'Category'#6#4'Undo'#7'Caption'#6#4'Redo'#18'DisableIfNoHand'
+  +'ler'#9#4'Hint'#6#16'Redo Last Change'#10'ImageIndex'#2#20#9'OnExecute'#7#11
+  +'RedoExecute'#0#0#7'TAction'#8'rot_plus'#8'Category'#6#5'chart'#7'Caption'#6
+  +#12'Rotate Right'#18'DisableIfNoHandler'#9#4'Hint'#6#12'Rotate Right'#10'Ima'
+  +'geIndex'#2#21#9'OnExecute'#7#15'rot_plusExecute'#0#0#7'TAction'#9'rot_minus'
+  +#8'Category'#6#5'chart'#7'Caption'#6#11'Rotate Left'#18'DisableIfNoHandler'#9
+  +#4'Hint'#6#11'Rotate Left'#10'ImageIndex'#2#22#9'OnExecute'#7#16'rot_minusEx'
+  +'ecute'#0#0#7'TAction'#6'GridEQ'#8'Category'#6#5'chart'#7'Caption'#6#19'Add '
+  +'Equatorial Grid'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Add Equatorial Grid'
+  +#10'ImageIndex'#2#24#9'OnExecute'#7#13'GridEQExecute'#0#0#7'TAction'#4'Grid'
+  +#8'Category'#6#5'chart'#7'Caption'#6#20'Show Coordinate Grid'#18'DisableIfNo'
+  +'Handler'#9#4'Hint'#6#20'Show Coordinate Grid'#10'ImageIndex'#2#25#9'OnExecu'
+  +'te'#7#11'GridExecute'#0#0#7'TAction'#11'switchstars'#8'Category'#6#5'chart'
+  +#7'Caption'#6#11'switchstars'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Change D'
+  +'rawing Mode'#10'ImageIndex'#2'"'#9'OnExecute'#7#18'switchstarsExecute'#0#0#7
+  +'TAction'#16'switchbackground'#8'Category'#6#5'chart'#7'Caption'#6#16'switch'
+  +'background'#18'DisableIfNoHandler'#9#4'Hint'#6#20'Sky Background Color'#10
+  +'ImageIndex'#2'#'#9'OnExecute'#7#23'switchbackgroundExecute'#0#0#7'TAction'#9
   +'SaveImage'#8'Category'#6#4'File'#7'Caption'#6#13'Save Image...'#18'DisableI'
   +'fNoHandler'#9#10'ImageIndex'#2'$'#9'OnExecute'#7#16'SaveImageExecute'#0#0#7
   +'TAction'#8'ViewInfo'#8'Category'#6#4'View'#7'Caption'#6#16'View Information'
@@ -1663,9 +1663,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +' List'#10'ImageIndex'#2'.'#9'OnExecute'#7#14'listobjExecute'#0#0#7'TAction'
   +#16'TelescopeConnect'#8'Category'#6#9'Telescope'#7'Caption'#6#7'Connect'#18
   +'DisableIfNoHandler'#9#4'Hint'#6#17'Connect Telescope'#10'ImageIndex'#2'0'#9
-  ,'OnExecute'#7#23'TelescopeConnectExecute'#0#0#7'TAction'#13'TelescopeSlew'#8
+  +'OnExecute'#7#23'TelescopeConnectExecute'#0#0#7'TAction'#13'TelescopeSlew'#8
   +'Category'#6#9'Telescope'#7'Caption'#6#4'Slew'#18'DisableIfNoHandler'#9#4'Hi'
-  +'nt'#6#4'Slew'#10'ImageIndex'#2'2'#9'OnExecute'#7#20'TelescopeSlewExecute'#0
+  ,'nt'#6#4'Slew'#10'ImageIndex'#2'2'#9'OnExecute'#7#20'TelescopeSlewExecute'#0
   +#0#7'TAction'#13'TelescopeSync'#8'Category'#6#9'Telescope'#7'Caption'#6#4'Sy'
   +'nc'#18'DisableIfNoHandler'#9#4'Hint'#6#4'Sync'#10'ImageIndex'#2'3'#9'OnExec'
   +'ute'#7#20'TelescopeSyncExecute'#0#0#7'TAction'#8'MoreStar'#8'Category'#6#5
@@ -1727,9 +1727,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'EclipticProjection'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Ecliptic Coordina'
   +'te'#10'ImageIndex'#2'I'#9'OnExecute'#7#25'EclipticProjectionExecute'#0#0#7
   +'TAction'#18'GalacticProjection'#8'Category'#6#5'chart'#7'Caption'#6#18'Gala'
-  ,'cticProjection'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Galactic Coordinate'
+  +'cticProjection'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Galactic Coordinate'
   +#10'ImageIndex'#2'J'#9'OnExecute'#7#25'GalacticProjectionExecute'#0#0#7'TAct'
-  +'ion'#11'ViewMainBar'#8'Category'#6#4'View'#7'Caption'#6#8'Main Bar'#18'Disa'
+  ,'ion'#11'ViewMainBar'#8'Category'#6#4'View'#7'Caption'#6#8'Main Bar'#18'Disa'
   +'bleIfNoHandler'#9#9'OnExecute'#7#18'ViewMainBarExecute'#0#0#7'TAction'#13'V'
   +'iewObjectBar'#8'Category'#6#4'View'#7'Caption'#6#10'Object Bar'#18'DisableI'
   +'fNoHandler'#9#9'OnExecute'#7#20'ViewObjectBarExecute'#0#0#7'TAction'#11'Vie'
@@ -1791,9 +1791,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'xecute'#0#0#7'TAction'#13'SetupPictures'#8'Category'#6#5'Setup'#7'Caption'#6
   +#8'Pictures'#18'DisableIfNoHandler'#9#4'Hint'#6#23'Change pictures display'
   +#10'ImageIndex'#2'M'#9'OnExecute'#7#20'SetupPicturesExecute'#0#0#7'TAction'
-  ,#12'SetupCatalog'#8'Category'#6#5'Setup'#7'Caption'#6#7'Catalog'#18'DisableI'
+  +#12'SetupCatalog'#8'Category'#6#5'Setup'#7'Caption'#6#7'Catalog'#18'DisableI'
   +'fNoHandler'#9#9'OnExecute'#7#19'SetupCatalogExecute'#0#0#0#11'TSaveDialog'
-  +#10'SaveDialog'#5'Title'#6#12'Save file as'#11'FilterIndex'#2#0#4'left'#3#144
+  ,#10'SaveDialog'#5'Title'#6#12'Save file as'#11'FilterIndex'#2#0#4'left'#3#144
   +#0#3'top'#3#160#0#0#0#6'TTimer'#11'Autorefresh'#7'Enabled'#8#8'Interval'#4'`'
   +#234#0#0#7'OnTimer'#7#16'AutorefreshTimer'#4'left'#3#224#0#3'top'#3#160#0#0#0
   +#10'TImageList'#10'ImageList2'#4'left'#3#24#1#3'top'#3#208#0#0#0#10'TImageLi'
@@ -1855,9 +1855,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'bgwxyxygnozABC",'#10'".CDBDCDBDCDEFCFE",'#10'"BGHGHGIGJKLKMNBC",'#10'"DBDCD'
   +'BDCDEDCFEFM",'#10'"BGHGHGIGOOLKMNEN",'#10'"DHGHGIGPKJKLFCDM",'#10'"uAuAuAuA'
   +'MNMNMCM.",'#10'".BGHGIGPKJKMDM..",'#10'"..uAuAuAMNMNM..."}'#10#6#2#0#0'/* X'
-  ,'PM */'#10'static char *graphic[] = {'#10'"16 16 10 1",'#10'". c #B58CE7",'
+  +'PM */'#10'static char *graphic[] = {'#10'"16 16 10 1",'#10'". c #B58CE7",'
   +#10'", c #636394",'#10'"- c None",'#10'"* c #6363E7",'#10'"a c #DEEFFF",'#10
-  +'"b c #D6EFFF",'#10'"c c #CEE7FF",'#10'"d c #D6E7FF",'#10'"e c #C6E7FF",'#10
+  ,'"b c #D6EFFF",'#10'"c c #CEE7FF",'#10'"d c #D6E7FF",'#10'"e c #C6E7FF",'#10
   +'"f c #FFFFFF",'#10'".,.,.,.,.,.-----",'#10'",---------,-----",'#10'".------'
   +'---.-----",'#10'",---------,-----",'#10'".----,.,.,.,.,.,",'#10'",----*----'
   +'-----*",'#10'".----,---------,",'#10'",---a*---------*",'#10'".----,-------'
@@ -1919,9 +1919,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'BD8C29",'#10'"z c #7B4A00",'#10'"A c #8494FF",'#10'"B c #D6DEF7",'#10'"C c '
   +'#525A94",'#10'"D c #BD6331",'#10'"E c #FFDE00",'#10'"F c #FFD600",'#10'"G c'
   +' #844A00",'#10'"H c #636BA5",'#10'"I c #9C8CE7",'#10'"J c #5A639C",'#10'"K '
-  ,'c #FFE700",'#10'"L c #FFFF00",'#10'"...,-*ab........",'#10'"..,cdef.b......'
+  +'c #FFE700",'#10'"L c #FFFF00",'#10'"...,-*ab........",'#10'"..,cdef.b......'
   +'.",'#10'".,g..h..ij......",'#10'"klh.h.h.hmn.....",'#10'"op.......qr.....",'
-  +#10'"s.t...u.h.*.....",'#10'"v........ha.....",'#10'"s.......hwn.....",'#10
+  ,#10'"s.t...u.h.*.....",'#10'"v........ha.....",'#10'"s.......hwn.....",'#10
   +'".x......g,yz....",'#10'"..xAB.t.CDEFG...",'#10'"...HIsIJyKLKFz..",'#10'"..'
   +'......GFELEFG.",'#10'".........zFELEFz",'#10'"..........GFELEF",'#10'".....'
   +'......zFKLE",'#10'"............GFKL"}'#10#184#4#0#0'/* XPM */'#10'static ch'
@@ -1983,9 +1983,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'FFBDC6",'#10'".: c #FFADA5",'#10'".= c #FFCEB5",'#10'".+ c #FFAD94",'#10'".'
   +'% c #A51808",'#10'".$ c #FFF7EF",'#10'".( c #FF9CBD",'#10'".) c #D69C7B",'
   +#10'".[ c #E71808",'#10'".] c #CE8C5A",'#10'",. c #FFE7FF",'#10'",, c #D69C8'
-  ,'4",'#10'",- c #FFC6C6",'#10'",* c #FF8C6B",'#10'",a c #DEA584",'#10'",b c #'
+  +'4",'#10'",- c #FFC6C6",'#10'",* c #FF8C6B",'#10'",a c #DEA584",'#10'",b c #'
   +'FFCECE",'#10'",c c #A51800",'#10'",d c #A51000",'#10'",e c #FFCEBD",'#10'",'
-  +'f c #CE946B",'#10'",g c #DEAD8C",'#10'",h c #FFEFF7",'#10'",i c #AD2918",'
+  ,'f c #CE946B",'#10'",g c #DEAD8C",'#10'",h c #FFEFF7",'#10'",i c #AD2918",'
   +#10'",j c #FF946B",'#10'",k c #FF9C73",'#10'",l c #FFA57B",'#10'",m c #A5211'
   +'0",'#10'".....,.-.*.a.b.c.d.c.e.f.d.g....",'#10'"...b.h.i.j.k.l.m.n.m.n.o.p'
   +'.q.r..",'#10'".,.s.t.u.v.w.x.y.z.A.B.C.D.j.E.g",'#10'".a.k.F.G.H.I.J.J.J.J.'
@@ -2047,9 +2047,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#10'"C c #396BC6",'#10'"D c #4273CE",'#10'"E c #184AB5",'#10'"F c #1042B5",'
   +#10'"................",'#10'"................",'#10'".......,.-......",'#10
   +'"......*a.a*.....",'#10'".....bcd.ecf....",'#10'"....ghhe.ihhg...",'#10'"..'
-  ,'.jkche.dhckl..",'#10'"..mnoppe.eppoqm.",'#10'".rstokpu.vpootsw",'#10'"..mxt'
+  +'.jkche.dhckl..",'#10'"..mnoppe.eppoqm.",'#10'".rstokpu.vpootsw",'#10'"..mxt'
   +'ooy.yootxm.",'#10'"...zstoA.Botsm..",'#10'"....CqtB.BtqC...",'#10'".....DsE'
-  +'.Esm....",'#10'"......mF.Fm.....",'#10'".......r.w......",'#10'"...........'
+  ,'.Esm....",'#10'"......mF.Fm.....",'#10'".......r.w......",'#10'"...........'
   +'....."}'#10#200#3#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"16 16 4'
   +'0 1",'#10'". c None",'#10'", c #D61800",'#10'"- c #CE1800",'#10'"* c #DE735'
   +'A",'#10'"a c #DE2910",'#10'"b c #D6735A",'#10'"c c #FFF7F7",'#10'"d c #D639'
@@ -2111,9 +2111,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'c #108CF7",'#10'"G c #5A8CD6",'#10'"H c #6BA5E7",'#10'"I c #1073EF",'#10'"J'
   +' c #7394DE",'#10'"K c #089CFF",'#10'"L c #086BD6",'#10'"M c #1073E7",'#10'"'
   +'N c #5A7BD6",'#10'"O c #7BADEF",'#10'"P c #6B94D6",'#10'"Q c #088CFF",'#10
-  ,'"R c #088CF7",'#10'"S c #087BE7",'#10'"T c #3963BD",'#10'"U c #396BC6",'#10
+  +'"R c #088CF7",'#10'"S c #087BE7",'#10'"T c #3963BD",'#10'"U c #396BC6",'#10
   +'"V c #849CD6",'#10'"W c #087BEF",'#10'"X c #086BDE",'#10'"Y c #0873DE",'#10
-  +'"Z c #0863CE",'#10'"0 c #085ACE",'#10'"1 c #105ACE",'#10'"2 c #104ABD",'#10
+  ,'"Z c #0863CE",'#10'"0 c #085ACE",'#10'"1 c #105ACE",'#10'"2 c #104ABD",'#10
   +'"3 c #C6CEEF",'#10'"4 c #0852C6",'#10'"5 c #6384C6",'#10'"6 c #2173D6",'#10
   +'"7 c #2973D6",'#10'"8 c #297BD6",'#10'"9 c #3184D6",'#10'"@ c #085AC6",'#10
   +'"# c #3163C6",'#10'"; c #94A5DE",'#10'": c #3963C6",'#10'"= c #085AD6",'#10
@@ -2175,9 +2175,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'d*..",'#10'".e,.....fgg.hc-i",'#10'"..e,g..jff....kl",'#10'"...e,mfffff....'
   +'.",'#10'".....ff.ff......",'#10'"...,nf..f..f..op",'#10'"..,qrf.....f.psi",'
   +#10'".,tr.f.....fpqu.",'#10'".t...f..f..fk...",'#10'".......ff.ff....",'#10
-  ,'"..dv..fffff.wx..",'#10'".djqy..ffj..zAqB",'#10'".j.CD.pjf.....sq",'#10'"..'
+  +'"..dv..fffff.wx..",'#10'".djqy..ffj..zAqB",'#10'".j.CD.pjf.....sq",'#10'"..'
   +'..ExjF.......i",'#10'"....uGH........."}'#10#215#3#0#0'/* XPM */'#10'static'
-  +' char *graphic[] = {'#10'"16 16 41 1",'#10'". c None",'#10'", c #CECEDE",'
+  ,' char *graphic[] = {'#10'"16 16 41 1",'#10'". c None",'#10'", c #CECEDE",'
   +#10'"- c #7B7BA5",'#10'"* c #6B6B9C",'#10'"a c #B5B5CE",'#10'"b c #7B73A5",'
   +#10'"c c #6B639C",'#10'"d c #8484AD",'#10'"e c #7B7BAD",'#10'"f c #7373A5",'
   +#10'"g c #636394",'#10'"h c #9494BD",'#10'"i c #9C9CBD",'#10'"j c #000084",'
@@ -2239,9 +2239,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'3BD",'#10'"i c #D6DEF7",'#10'"j c #D6EFFF",'#10'"k c #DEE7FF",'#10'"l c #DE'
   +'EFFF",'#10'"m c #5A5AB5",'#10'"n c #5A63B5",'#10'"o c #D6E7FF",'#10'"p c #C'
   +'EE7FF",'#10'"q c #CEDEFF",'#10'".,,,,,,,,,,,,-*,",'#10'".,,,,,,--,,,,,,,",'
-  ,#10'".,,,,,--,,,,,,,,",'#10'".,,,,--,,,,-*,,a",'#10'".,,,--bbb*cbdaaa",'#10
+  +#10'".,,,,,--,,,,,,,,",'#10'".,,,,--,,,,-*,,a",'#10'".,,,--bbb*cbdaaa",'#10
   +'".,-*-,b,*abebaaa",'#10'".-*-,,bfg*hbdaaa",'#10'".*-,,,bibaaaaaaa",'#10'".-'
-  +',,,*aabaaaaaaj",'#10'".,***abkbaaaaajj",'#10'".*laaambnaaaajjo",'#10'".laaa'
+  ,',,,*aabaaaaaaj",'#10'".,***abkbaaaaajj",'#10'".*laaambnaaaajjo",'#10'".laaa'
   +'aaaaaajjjop",'#10'".alalalaaajjjopp",'#10'".alalalajjjjoppq",'#10'".kjjjjjj'
   +'jjjoppqq",'#10'".ljjjjjjjjqqqqqq"}'#10#186#2#0#0'/* XPM */'#10'static char '
   +'*graphic[] = {'#10'"16 16 22 1",'#10'". c None",'#10'", c #FFFFFF",'#10'"- '
@@ -2303,9 +2303,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#10'"x c #181894",'#10'"y c #6B6BBD",'#10'"z c #D6E7FF",'#10'"A c #CEE7FF",'
   +#10'"B c #CEDEFF",'#10'".,,,,,,,,,,,,-*,",'#10'".,,,,,,--,,,,,,,",'#10'".,,,'
   +',,--,,,,,,,,",'#10'".,,,,--,,,,-*,,a",'#10'".,b,-cde,*edfafd",'#10'".gd*-dh'
-  ,'i*ajkladm",'#10'".nd-,,hoa*dadafd",'#10'".*d,,,pqaadadaaa",'#10'".-d,,rsaaa'
+  +'i*ajkladm",'#10'".nd-,,hoa*dadafd",'#10'".*d,,,pqaadadaaa",'#10'".-d,,rsaaa'
   +'dadaat",'#10'".,d**uvaaalwlatt",'#10'".*daaxddaaydyttz",'#10'".qaaaaaaaaatt'
-  +'tzA",'#10'".aqaqaqaaatttzAA",'#10'".aqaqaqattttzAAB",'#10'".wtttttttttzAABB'
+  ,'tzA",'#10'".aqaqaqaaatttzAA",'#10'".aqaqaqattttzAAB",'#10'".wtttttttttzAABB'
   +'",'#10'".qttttttttBBBBBB"}'#10#246#1#0#0'/* XPM */'#10'static char *graphic'
   +'[] = {'#10'"16 16 9 1",'#10'". c None",'#10'", c #FF6331",'#10'"- c #848484'
   +'",'#10'"* c #9C5252",'#10'"a c #AD5A5A",'#10'"b c #B57373",'#10'"c c #DEB5B'
@@ -2367,9 +2367,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +',a.........",'#10'".....,c.........",'#10'".....,,,,,,d....",'#10'".....ccc'
   +'ccce....",'#10'"................",'#10'"................",'#10'"...........'
   +'.....",'#10'"................"}'#10#6#2#0#0'/* XPM */'#10'static char *grap'
-  ,'hic[] = {'#10'"16 16 10 1",'#10'". c None",'#10'", c #3942DE",'#10'"- c #52'
+  +'hic[] = {'#10'"16 16 10 1",'#10'". c None",'#10'", c #3942DE",'#10'"- c #52'
   +'5ADE",'#10'"* c #7B84E7",'#10'"a c #737BE7",'#10'"b c #9CA5EF",'#10'"c c #8'
-  +'C94EF",'#10'"d c #636BE7",'#10'"e c #848CEF",'#10'"f c #6B7BE7",'#10'".....'
+  ,'C94EF",'#10'"d c #636BE7",'#10'"e c #848CEF",'#10'"f c #6B7BE7",'#10'".....'
   +'...........",'#10'"................",'#10'"................",'#10'"........'
   +'........",'#10'".....,-...*,....",'#10'".....,,*..*,....",'#10'".....,,,..a'
   +',....",'#10'".....,*--.a,....",'#10'".....,*.,ba,....",'#10'".....,a.c,d,..'
@@ -2431,9 +2431,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'",'#10'"..........***..."}'#10#246#1#0#0'/* XPM */'#10'static char *graphic'
   +'[] = {'#10'"16 16 9 1",'#10'". c None",'#10'", c #0063CE",'#10'"- c #0052BD'
   +'",'#10'"* c #004AB5",'#10'"a c #0039A5",'#10'"b c #005AC6",'#10'"c c #004AB'
-  ,'D",'#10'"d c #0042AD",'#10'"e c #0039AD",'#10'"....,,..........",'#10'"....'
+  +'D",'#10'"d c #0042AD",'#10'"e c #0039AD",'#10'"....,,..........",'#10'"....'
   +',.-.........",'#10'"....,..*........",'#10'"....,...a.......",'#10'"....,..'
-  +'..a......",'#10'"....,.....a.....",'#10'"....,......a....",'#10'"....b.....'
+  ,'..a......",'#10'"....,.....a.....",'#10'"....,......a....",'#10'"....b.....'
   +'..a...",'#10'"....b.......a...",'#10'"....-......a....",'#10'"....c.....a..'
   +'...",'#10'"....*....a......",'#10'"....d...a.......",'#10'"....e..a........'
   +'",'#10'"....a.a.........",'#10'"....aa.........."}'#10'Q'#11#0#0'/* XPM */'
@@ -2495,9 +2495,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +' char *graphic[] = {'#10'"16 16 37 1",'#10'". c None",'#10'", c #D69C00",'
   +#10'"- c #FFC600",'#10'"* c #FF9C00",'#10'"a c #FFFFFF",'#10'"b c #00BD00",'
   +#10'"c c #FFFFEF",'#10'"d c #FFDEA5",'#10'"e c #CEFFCE",'#10'"f c #A56B00",'
-  ,#10'"g c #FFF7AD",'#10'"h c #FFCE63",'#10'"i c #E7FFAD",'#10'"j c #FFF763",'
+  +#10'"g c #FFF7AD",'#10'"h c #FFCE63",'#10'"i c #E7FFAD",'#10'"j c #FFF763",'
   +#10'"k c #63CE31",'#10'"l c #ADEF31",'#10'"m c #EF6B00",'#10'"n c #EF8C00",'
-  +#10'"o c #004AB5",'#10'"p c #E78C00",'#10'"q c #636394",'#10'"r c #6363DE",'
+  ,#10'"o c #004AB5",'#10'"p c #E78C00",'#10'"q c #636394",'#10'"r c #6363DE",'
   +#10'"s c #DEEFFF",'#10'"t c #CECEFF",'#10'"u c #004A63",'#10'"v c #A56300",'
   +#10'"w c #E76300",'#10'"x c #FFBD00",'#10'"y c #CE9C00",'#10'"z c #FFFFE7",'
   +#10'"A c #FFFFA5",'#10'"B c #FFF7A5",'#10'"C c #FFE79C",'#10'"D c #FFDE9C",'
@@ -2559,9 +2559,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'.g c #F7E7C7",'#10'".h c #AF8643",'#10'".i c #A76B1D",'#10'".j c #8F5B1D",'
   +#10'".k c #C7841D",'#10'".l c #7F4B1D",'#10'".m c #945F27",'#10'".n c #E7D6A'
   +'D",'#10'".o c #E7D6AF",'#10'".p c #BD7F1D",'#10'".q c #AD6F1D",'#10'".r c #'
-  ,'B77F1E",'#10'".s c #DE9F1F",'#10'".t c #DEAD25",'#10'".u c #97631F",'#10'".'
+  +'B77F1E",'#10'".s c #DE9F1F",'#10'".t c #DEAD25",'#10'".u c #97631F",'#10'".'
   +'v c #845621",'#10'".w c #D7B57B",'#10'".x c #BD8635",'#10'".y c #E7C784",'
-  +#10'".z c #D7BF94",'#10'".A c #C78C1E",'#10'".B c #B77F1F",'#10'".C c #97672'
+  ,#10'".z c #D7BF94",'#10'".A c #C78C1E",'#10'".B c #B77F1F",'#10'".C c #97672'
   +'1",'#10'".D c #C79421",'#10'".E c #E7CF2B",'#10'".F c #E7D72F",'#10'".G c #'
   +'9F7723",'#10'".H c #7B5321",'#10'".I c #A77725",'#10'".J c #975B1E",'#10'".'
   +'K c #D7AF63",'#10'".L c #CFB763",'#10'".M c #AF8627",'#10'".N c #967F27",'
@@ -2623,9 +2623,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'1",'#10'".( c #7F4A1D",'#10'".) c #73421D",'#10'".[ c #292723",'#10'".] c #'
   +'A5A59E",'#10'",. c #D7E7E7",'#10'",, c #191915",'#10'",- c #96968F",'#10'",'
   +'* c #CED76F",'#10'",a c #CFCE3B",'#10'",b c #B77F2B",'#10'",c c #B7731D",'
-  ,#10'",d c #5A8C1D",'#10'",e c #B7B721",'#10'",f c #E7DF33",'#10'",g c #D6A52'
+  +#10'",d c #5A8C1D",'#10'",e c #B7B721",'#10'",f c #E7DF33",'#10'",g c #D6A52'
   +'5",'#10'",h c #7F4E1D",'#10'",i c #BFBFBD",'#10'",j c #B7B5AF",'#10'",k c #'
-  +'C6C6C7",'#10'",l c #CFDFA7",'#10'",m c #CFD63F",'#10'",n c #BF8D2F",'#10'",'
+  ,'C6C6C7",'#10'",l c #CFDFA7",'#10'",m c #CFD63F",'#10'",n c #BF8D2F",'#10'",'
   +'o c #8E5E1D",'#10'",p c #737F1D",'#10'",q c #AD9C1E",'#10'",r c #E7CF2B",'
   +#10'",s c #D6941D",'#10'",t c #E7EFAD",'#10'",u c #C78623",'#10'",v c #C6462'
   +'F",'#10'",w c #875F1E",'#10'",x c #8F6F1D",'#10'",y c #AF6F1D",'#10'",z c #'
@@ -2687,9 +2687,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'1",'#10'". c None",'#10'", c #5767F7",'#10'"- c #293BF7",'#10'"* c #7F8CFF"'
   +','#10'"a c #424FF7",'#10'"b c #1427F7",'#10'"c c #6B77FF",'#10'"d c #9CA5FF'
   +'",'#10'"e c #737FFF",'#10'"f c #B7BDFF",'#10'"................",'#10'".....'
-  ,'...........",'#10'"................",'#10'"................",'#10'"........'
+  +'...........",'#10'"................",'#10'"................",'#10'"........'
   +'........",'#10'"................",'#10'"......,-*.......",'#10'"......abc..'
-  +'.....",'#10'"......def.......",'#10'"................",'#10'"..............'
+  ,'.....",'#10'"......def.......",'#10'"................",'#10'"..............'
   +'..",'#10'"................",'#10'"................",'#10'"................"'
   +','#10'"................",'#10'"................"}'#10'3'#2#0#0'/* XPM */'#10
   +'static char *graphic[] = {'#10'"16 16 13 1",'#10'". c None",'#10'", c #FF56'
@@ -2751,9 +2751,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#10'"y c #4E4E4E",'#10'"z c #272727",'#10'"A c #232323",'#10'"B c #2B2B2B",'
   +#10'"C c #7F7F7F",'#10'"D c #777777",'#10'"E c #3F3F3F",'#10'"F c #0D0D0D",'
   +#10'"G c #060606",'#10'"H c #3B3B3B",'#10'"I c #949494",'#10'"J c #636363",'
-  ,#10'"K c #3D3D3D",'#10'"L c #525252",'#10'"M c #575757",'#10'"N c #7B7B7B",'
+  +#10'"K c #3D3D3D",'#10'"L c #525252",'#10'"M c #575757",'#10'"N c #7B7B7B",'
   +#10'"O c #D7D7D7",'#10'"P c #9D9D9D",'#10'"Q c #8F8F8F",'#10'"R c #1D1D1D",'
-  +#10'"S c #393939",'#10'"T c #858585",'#10'"U c #474747",'#10'".....,-*aa....'
+  ,#10'"S c #393939",'#10'"T c #858585",'#10'"U c #474747",'#10'".....,-*aa....'
   +'..",'#10'".....-bcd,......",'#10'"....efghijg,....",'#10'"....klmnopqra..."'
   +','#10'"....sotuvngwe...",'#10'"....xuyzABCsb...",'#10'"....sDEFGHvxe...",'
   +#10'"....sIJHKLMw*...",'#10'".....oiiDHJq....",'#10'"......NhHJCc....",'#10
@@ -2815,9 +2815,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'..........2.3.4.X.5.6.7.8.9.@..",'#10'".............#.;.:.=.+...%.$.(..",'
   +#10'"...............).[.],.,,,-,*,a..",'#10'"..................,b,c,d.s,e,f.'
   +'.",'#10'"........................,g,h....",'#10'"..........................'
-  ,'......",'#10'"................................"}'#10#246#2#0#0'/* XPM */'#10
+  +'......",'#10'"................................"}'#10#246#2#0#0'/* XPM */'#10
   +'static char *graphic[] = {'#10'"16 16 26 1",'#10'". c #737373",'#10'", c #7'
-  +'F7F7F",'#10'"- c None",'#10'"* c #777777",'#10'"a c #DEDEDE",'#10'"b c #AFA'
+  ,'F7F7F",'#10'"- c None",'#10'"* c #777777",'#10'"a c #DEDEDE",'#10'"b c #AFA'
   +'FAF",'#10'"c c #A5A5A5",'#10'"d c #B5B5B5",'#10'"e c #DFDFDF",'#10'"f c #84'
   +'8484",'#10'"g c #868686",'#10'"h c #8E8E8E",'#10'"i c #D6D6D6",'#10'"j c #B'
   +'FBFBF",'#10'"k c #9D9D9D",'#10'"l c #E7E7E7",'#10'"m c #7B7B7B",'#10'"n c #'
@@ -2879,9 +2879,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +',....b******",'#10'"*g...,h..i******",'#10'"*j....,k..l*****",'#10'"**m...,'
   +'-..******",'#10'"**b...a,..mn****",'#10'"***o...p,...o***",'#10'"****b...,q'
   +'...q**",'#10'"*****r..s,qm..**",'#10'"******...,tfdj**",'#10'"******j...,io'
-  ,'***",'#10'"******j....,at**",'#10'"******o....,..hn"}'#10'A'#3#0#0'/* XPM *'
+  +'***",'#10'"******j....,at**",'#10'"******o....,..hn"}'#10'A'#3#0#0'/* XPM *'
   +'/'#10'static char *graphic[] = {'#10'"16 16 31 1",'#10'". c #E7E767",'#10'"'
-  +', c #F7F7BD",'#10'"- c None",'#10'"* c #E7E773",'#10'"a c #DFDF4A",'#10'"b '
+  ,', c #F7F7BD",'#10'"- c None",'#10'"* c #E7E773",'#10'"a c #DFDF4A",'#10'"b '
   +'c #FFFFE7",'#10'"c c #DFDF3F",'#10'"d c #E7EF85",'#10'"e c #010100",'#10'"f'
   +' c #F7F7BF",'#10'"g c #4B4A07",'#10'"h c #000000",'#10'"i c #848400",'#10'"'
   +'j c #EFEF9D",'#10'"k c #EFEFA5",'#10'"l c #DEDF35",'#10'"m c #E7E777",'#10
@@ -2943,9 +2943,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'3 1",'#10'". c None",'#10'", c #A7A5C7",'#10'"- c #9D9FBF",'#10'"* c #D6D7E'
   +'7",'#10'"a c #A7A7C7",'#10'"b c #D7DEEF",'#10'"c c #ADB5CE",'#10'"d c #8D8E'
   +'B7",'#10'"e c #969EBF",'#10'"f c #CECFDF",'#10'"g c #B5B5D6",'#10'"h c #BDB'
-  ,'FD7",'#10'"i c #9E9CBF",'#10'"j c #5E5B8F",'#10'"k c #B5B7D7",'#10'"l c #E7'
+  +'FD7",'#10'"i c #9E9CBF",'#10'"j c #5E5B8F",'#10'"k c #B5B7D7",'#10'"l c #E7'
   +'E7F7",'#10'"m c #A7AFCE",'#10'"n c #D7E7F7",'#10'"o c #A7ADD6",'#10'"p c #5'
-  +'E5F95",'#10'"q c #191AC6",'#10'"r c #0000C6",'#10'"s c #2527CE",'#10'"t c #'
+  ,'E5F95",'#10'"q c #191AC6",'#10'"r c #0000C6",'#10'"s c #2527CE",'#10'"t c #'
   +'A7AFEF",'#10'"u c #A5AFEF",'#10'"v c #A5A5C7",'#10'"w c #3335C6",'#10'"x c '
   +'#393BC7",'#10'"y c #4A4ED6",'#10'"z c #5B5EDE",'#10'"A c #6F6FAD",'#10'"B c'
   +' #191AC7",'#10'"C c #9EA7CE",'#10'"D c #191BC7",'#10'"E c #0404C7",'#10'"F '
@@ -3007,9 +3007,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#10'"...fapqrst..rr..",'#10'"....urrrrrv.rr..",'#10'"...wxry.zAB.rrCD",'#10
   +'"..wEFrG...m.rrHI",'#10'".wJKLrG.rrr.rrM.",'#10'".J..NrO.Prr.rrQ.",'#10'"..'
   +'..RrrrrrS.rrmQ",'#10'"..TU.VSrWX..rrYm",'#10'".TZ0.....m..123Y",'#10'".Z.45'
-  ,'.67......83",'#10'"....9@m#.......I",'#10'"....;:=........."}'#10#21#2#0#0
+  +'.67......83",'#10'"....9@m#.......I",'#10'"....;:=........."}'#10#21#2#0#0
   +'/* XPM */'#10'static char *graphic[] = {'#10'"16 16 11 1",'#10'". c None",'
-  +#10'", c #CFCFC7",'#10'"- c #070707",'#10'"* c #E7E7DF",'#10'"a c #CECFC7",'
+  ,#10'", c #CFCFC7",'#10'"- c #070707",'#10'"* c #E7E7DF",'#10'"a c #CECFC7",'
   +#10'"b c #CFCEC7",'#10'"c c #C6C7C7",'#10'"d c #060707",'#10'"e c #FF0707",'
   +#10'"f c #E70707",'#10'"g c #060607",'#10'"...,--....,--...",'#10'"...-*a-..'
   +'.-**-..",'#10'"...--aba,,,-,--.",'#10'"...-aba,,,,bc--.",'#10'"...------d-d'
@@ -3071,9 +3071,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'tic char *graphic[] = {'#10'"16 16 20 1",'#10'". c None",'#10'", c #0000FF"'
   +','#10'"- c #0C0CFF",'#10'"* c #C6C6FF",'#10'"a c #B5B5FF",'#10'"b c #2929FF'
   +'",'#10'"c c #1414FF",'#10'"d c #BDBDFF",'#10'"e c #E7E7FF",'#10'"f c #8C8CF'
-  ,'F",'#10'"g c #0404FF",'#10'"h c #ADADFF",'#10'"i c #3131FF",'#10'"j c #2121'
+  +'F",'#10'"g c #0404FF",'#10'"h c #ADADFF",'#10'"i c #3131FF",'#10'"j c #2121'
   +'FF",'#10'"k c #DEDEFF",'#10'"l c #5252FF",'#10'"m c #1818FF",'#10'"n c #080'
-  +'8FF",'#10'"o c #CECEFF",'#10'"p c #1C1CFF",'#10'"................",'#10'"..'
+  ,'8FF",'#10'"o c #CECEFF",'#10'"p c #1C1CFF",'#10'"................",'#10'"..'
   +'..............",'#10'"................",'#10'"................",'#10'".,,-*'
   +'..abcd.abcd",'#10'".,efgh.b*hi.b*hi",'#10'".,..hg.jf...jf..",'#10'".,...,.k'
   +'lm..klm.",'#10'".,..hg...*i...*i",'#10'".,.hnh.boab.boab",'#10'".,,gh..ajp*'
