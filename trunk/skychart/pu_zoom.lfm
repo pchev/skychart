@@ -8,8 +8,6 @@ object f_zoom: Tf_zoom
   ActiveControl = TrackBar1
   BorderStyle = bsSizeToolWin
   Caption = 'Set FOV'
-  ClientHeight = 142
-  ClientWidth = 308
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop

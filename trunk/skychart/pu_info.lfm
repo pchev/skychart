@@ -8,8 +8,6 @@ object f_info: Tf_info
   ActiveControl = StringGrid1
   BorderStyle = bsSizeToolWin
   Caption = 'Info'
-  ClientHeight = 397
-  ClientWidth = 639
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Icon.Data = {
@@ -157,8 +155,6 @@ object f_info: Tf_info
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TCP/IP Connection'
-      ClientHeight = 344
-      ClientWidth = 637
       object StringGrid1: TStringGrid
         Height = 316
         Width = 637
@@ -183,15 +179,13 @@ object f_info: Tf_info
         Top = 316
         Width = 637
         Align = alBottom
-        ClientHeight = 28
-        ClientWidth = 637
         FullRepaint = False
         TabOrder = 1
         object serverinfo: TLabel
-          Left = 553
-          Height = 22
+          Left = 547
+          Height = 29
           Top = 6
-          Width = 65
+          Width = 72
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Color = clNone
@@ -222,16 +216,12 @@ object f_info: Tf_info
     end
     object TabSheet2: TTabSheet
       Caption = 'Object List'
-      ClientHeight = 344
-      ClientWidth = 637
       ImageIndex = 1
       object Panel3: TPanel
         Height = 27
         Top = 317
         Width = 637
         Align = alBottom
-        ClientHeight = 27
-        ClientWidth = 637
         FullRepaint = False
         TabOrder = 0
         object Button3: TButton
@@ -299,7 +289,9 @@ object f_info: Tf_info
         TabOrder = 1
         OnDblClick = Memo1DblClick
         BookMarkOptions.Xoffset = -18
+        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
+        Gutter.OnChange = nil
         Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
@@ -628,13 +620,12 @@ object f_info: Tf_info
         Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
         ReadOnly = True
         RightEdge = 0
+        SelectedColor.OnChange = nil
         TabWidth = 10
       end
     end
     object ProgressMessages: TTabSheet
       Caption = 'Progress Messages'
-      ClientHeight = 344
-      ClientWidth = 637
       ImageIndex = 2
       object ProgressMemo: TMemo
         Height = 344
@@ -649,8 +640,6 @@ object f_info: Tf_info
     Top = 370
     Width = 639
     Align = alBottom
-    ClientHeight = 27
-    ClientWidth = 639
     FullRepaint = False
     TabOrder = 1
     object Button1: TButton
@@ -699,6 +688,7 @@ object f_info: Tf_info
     object EditSelectAll1: TEditSelectAll
       Category = 'Edition'
       Caption = '&Tout sélectionner'
+      DisableIfNoHandler = True
       Hint = 'Tout sélectionner|Sélectionner l''intégralité du document'
       OnExecute = EditSelectAll1Execute
       ShortCut = 16449
@@ -706,6 +696,7 @@ object f_info: Tf_info
     object EditCopy1: TEditCopy
       Category = 'Edition'
       Caption = '&Copier'
+      DisableIfNoHandler = True
       Hint = 'Copier|Copier la sélection et la mettre dans le Presse-papiers'
       ImageIndex = 1
       OnExecute = EditCopy1Execute

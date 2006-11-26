@@ -1,227 +1,210 @@
 object f_position: Tf_position
-  ActiveControl = Button1
-  BorderStyle = bsToolWindow
-  Caption = 'Position'
-  ClientHeight = 223
-  ClientWidth = 313
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
-  OnCreate = FormCreate
-  OnShow = FormShow
-  PixelsPerInch = 96
-  TextHeight = 13
-  HorzScrollBar.Page = 312
-  VertScrollBar.Page = 222
   Left = 266
   Height = 223
   Top = 281
   Width = 313
+  HorzScrollBar.Page = 312
+  VertScrollBar.Page = 222
+  ActiveControl = Button1
+  BorderStyle = bsToolWindow
+  Caption = 'Position'
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnShow = FormShow
   object Button1: TButton
-    BorderSpacing.InnerBorder = 4
-    Caption = 'OK'
-    ModalResult = 1
-    TabOrder = 0
     Left = 72
     Height = 25
     Top = 184
     Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 0
   end
   object Button2: TButton
+    Left = 160
+    Height = 25
+    Top = 184
+    Width = 75
     BorderSpacing.InnerBorder = 4
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 1
-    Left = 160
-    Height = 25
-    Top = 184
-    Width = 75
   end
   object Panel1: TPanel
-    ClientHeight = 57
-    ClientWidth = 296
-    FullRepaint = False
-    TabOrder = 2
     Left = 8
     Height = 57
     Top = 64
     Width = 296
+    FullRepaint = False
+    TabOrder = 2
     object coord1: TLabel
-      Caption = 'Az'
-      Color = clNone
-      ParentColor = False
       Left = 8
       Height = 13
       Top = 32
-      Width = 16
-    end
-    object coord2: TLabel
-      Caption = 'Alt'
+      Width = 13
+      Caption = 'Az'
       Color = clNone
       ParentColor = False
+    end
+    object coord2: TLabel
       Left = 152
       Height = 13
       Top = 32
-      Width = 16
-    end
-    object coord: TLabel
-      Caption = 'coord'
+      Width = 15
+      Caption = 'Alt'
       Color = clNone
       ParentColor = False
+    end
+    object coord: TLabel
       Left = 8
       Height = 13
       Top = 4
       Width = 33
+      Caption = 'coord'
+      Color = clNone
+      ParentColor = False
     end
     object long: TRaDec
-      kind = Az
+      Left = 56
+      Height = 21
+      Top = 28
+      Width = 73
       EditMask = '!999d99m99s;1; '
       MaxLength = 10
       ParentColor = False
       TabOrder = 0
       Text = '000d00m00s'
       OnChange = CoordChange
-      Left = 56
+      kind = Az
+    end
+    object lat: TRaDec
+      Left = 208
       Height = 21
       Top = 28
       Width = 73
-    end
-    object lat: TRaDec
-      kind = Alt
       EditMask = '!##9d99m99s;1; '
       MaxLength = 10
       ParentColor = False
       TabOrder = 1
       Text = '+00d00m00s'
       OnChange = CoordChange
-      Left = 208
-      Height = 21
-      Top = 28
-      Width = 73
+      kind = Alt
     end
   end
   object Panel2: TPanel
-    ClientHeight = 57
-    ClientWidth = 296
-    FullRepaint = False
-    TabOrder = 3
     Left = 8
     Height = 57
     Top = 3
     Width = 296
+    FullRepaint = False
+    TabOrder = 3
     object eq1: TLabel
+      Left = 8
+      Height = 13
+      Top = 32
+      Width = 15
       Caption = 'RA'
       Color = clNone
       ParentColor = False
-      Left = 8
-      Height = 13
-      Top = 32
-      Width = 18
     end
     object eq2: TLabel
-      Caption = 'DE'
-      Color = clNone
-      ParentColor = False
       Left = 152
       Height = 13
       Top = 32
-      Width = 18
-    end
-    object Equinox: TLabel
-      Caption = 'Equinox'
+      Width = 16
+      Caption = 'DE'
       Color = clNone
       ParentColor = False
+    end
+    object Equinox: TLabel
       Left = 8
       Height = 13
       Top = 8
-      Width = 46
+      Width = 45
+      Caption = 'Equinox'
+      Color = clNone
+      ParentColor = False
     end
     object Ra: TRaDec
+      Left = 56
+      Height = 21
+      Top = 28
+      Width = 73
       EditMask = '!99h99m99s;1; '
       MaxLength = 9
       ParentColor = False
       TabOrder = 0
       Text = '00h00m00s'
       OnChange = EqChange
-      Left = 56
-      Height = 21
-      Top = 28
-      Width = 73
     end
     object De: TRaDec
-      kind = DE
+      Left = 208
+      Height = 21
+      Top = 29
+      Width = 73
       EditMask = '!##9d99m99s;1; '
       MaxLength = 10
       ParentColor = False
       TabOrder = 1
       Text = '+00d00m00s'
       OnChange = EqChange
-      Left = 208
-      Height = 21
-      Top = 29
-      Width = 73
+      kind = DE
     end
   end
   object Panel3: TPanel
-    ClientHeight = 41
-    ClientWidth = 296
-    FullRepaint = False
-    TabOrder = 4
     Left = 8
     Height = 41
     Top = 126
     Width = 296
+    FullRepaint = False
+    TabOrder = 4
     object Label3: TLabel
-      Caption = 'FOV'
-      Color = clNone
-      ParentColor = False
       Left = 8
       Height = 13
       Top = 14
-      Width = 28
-    end
-    object Label4: TLabel
-      Caption = 'Rotation'
+      Width = 23
+      Caption = 'FOV'
       Color = clNone
       ParentColor = False
+    end
+    object Label4: TLabel
       Left = 152
       Height = 13
       Top = 14
-      Width = 46
+      Width = 47
+      Caption = 'Rotation'
+      Color = clNone
+      ParentColor = False
     end
     object Fov: TRaDec
-      kind = DE
+      Left = 56
+      Height = 21
+      Top = 10
+      Width = 73
       EditMask = '!##9d99m99s;1; '
       MaxLength = 10
       ParentColor = False
       TabOrder = 0
       Text = '+00d00m00s'
-      Left = 56
-      Height = 21
-      Top = 10
-      Width = 73
+      kind = DE
     end
     object rot: TFloatEdit
-      MinValue = -180
-      MaxValue = 180
-      Digits = 5
-      BorderStyle = bsSingle
+      Left = 208
       Height = 22
       Hint = '-180..180'
-      Left = 208
-      Name = 'rot'
+      Top = 10
+      Width = 73
+      BorderStyle = bsSingle
       ParentColor = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
-      Top = 10
-      Width = 73
-      OnExit = nil
-      Left = 208
-      Height = 22
-      Hint = '-180..180'
-      Top = 10
-      Width = 73
+      MinValue = -180
+      MaxValue = 180
+      Digits = 5
     end
   end
 end
