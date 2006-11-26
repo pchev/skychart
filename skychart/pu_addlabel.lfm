@@ -1,47 +1,49 @@
 object f_addlabel: Tf_addlabel
-  ActiveControl = Edit1
-  BorderIcons = [biSystemMenu]
-  BorderStyle = bsDialog
-  Caption = 'Add Label'
-  ClientHeight = 106
-  ClientWidth = 214
-  OnCreate = FormCreate
-  OnShow = FormShow
-  PixelsPerInch = 96
-  HorzScrollBar.Page = 213
-  VertScrollBar.Page = 105
   Left = 239
   Height = 106
   Top = 214
   Width = 214
+  HorzScrollBar.Page = 213
+  VertScrollBar.Page = 105
+  ActiveControl = Edit1
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Add Label'
+  OnCreate = FormCreate
+  OnShow = FormShow
   object Label1: TLabel
+    Left = 12
+    Height = 13
+    Top = 16
+    Width = 35
     Caption = 'Label:'
     Color = clNone
     ParentColor = False
-    Left = 12
-    Height = 17
-    Top = 16
-    Width = 36
   end
   object Label2: TLabel
+    Left = 12
+    Height = 13
+    Top = 45
+    Width = 32
     Caption = 'Type:'
     Color = clNone
     ParentColor = False
-    Left = 12
-    Height = 17
-    Top = 45
-    Width = 34
   end
   object Edit1: TEdit
-    OnChange = Edit1Change
-    TabOrder = 0
     Left = 56
     Height = 23
     Top = 8
     Width = 150
+    OnChange = Edit1Change
+    TabOrder = 0
   end
   object ComboBox1: TComboBox
+    Left = 56
+    Height = 21
+    Top = 40
+    Width = 150
     AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+    ItemIndex = 0
     Items.Strings = (
       'Star'
       'Variable Star'
@@ -56,29 +58,25 @@ object f_addlabel: Tf_addlabel
     OnSelect = ComboBox1Select
     TabOrder = 1
     Text = 'Star'
-    Left = 56
-    Height = 21
-    Top = 40
-    Width = 150
   end
   object Button1: TButton
+    Left = 56
+    Height = 25
+    Top = 72
+    Width = 65
     BorderSpacing.InnerBorder = 4
     Caption = 'Ok'
     ModalResult = 1
     TabOrder = 2
-    Left = 56
-    Height = 25
-    Top = 72
-    Width = 65
   end
   object Button2: TButton
-    BorderSpacing.InnerBorder = 4
-    Caption = 'Cancel'
-    ModalResult = 2
-    TabOrder = 3
     Left = 141
     Height = 25
     Top = 72
     Width = 65
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 3
   end
 end

@@ -632,7 +632,6 @@ object f_config_solsys: Tf_config_solsys
               Top = 83
               Width = 129
               TabOrder = 2
-              Text = 'COMET.DAT'
               FileName = 'COMET.DAT'
               Filter = 'Comet Files|COM*.DAT|All Files|*.*'
               ButtonWidth = 23
@@ -1221,7 +1220,6 @@ object f_config_solsys: Tf_config_solsys
               Top = 75
               Width = 138
               TabOrder = 3
-              Text = 'MPCORB.DAT'
               FileName = 'MPCORB.DAT'
               Filter = 'MPCORB Files|MPCORB*.DAT|All Files|*.*'
               ButtonWidth = 23
