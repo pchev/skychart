@@ -658,7 +658,9 @@ uses
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_manualtelescope, pu_print;
 
+{$ifdef win32}
 const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
+{$endif}
 
 
 function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
