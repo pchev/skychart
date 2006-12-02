@@ -305,6 +305,7 @@ type
     procedure EqGridStyleChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure GalEqStyleChange(Sender: TObject);
     procedure GridStyleChange(Sender: TObject);
@@ -406,16 +407,16 @@ type
     procedure UpdNebColor;
   public
     { Public declarations }
-    mycsc : conf_skychart;
-    myccat : conf_catalog;
-    mycshr : conf_shared;
-    mycplot : conf_plot;
-    mycmain : conf_main;
-    csc : Pconf_skychart;
-    ccat : Pconf_catalog;
-    cshr : Pconf_shared;
-    cplot : Pconf_plot;
-    cmain : Pconf_main;
+    mycsc : Tconf_skychart;
+    myccat : Tconf_catalog;
+    mycshr : Tconf_shared;
+    mycplot : Tconf_plot;
+    mycmain : Tconf_main;
+    csc : Tconf_skychart;
+    ccat : Tconf_catalog;
+    cshr : Tconf_shared;
+    cplot : Tconf_plot;
+    cmain : Tconf_main;
     constructor Create(AOwner:TComponent); override;
     procedure SetLang;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
@@ -623,11 +624,16 @@ end;
 
 constructor Tf_config_display.Create(AOwner:TComponent);
 begin
- csc:=@mycsc;
- ccat:=@myccat;
- cshr:=@mycshr;
- cplot:=@mycplot;
- cmain:=@mycmain;
+ mycsc:=Tconf_skychart.Create;
+ myccat:=Tconf_catalog.Create;
+ mycshr:=Tconf_shared.Create;
+ mycplot:=Tconf_plot.Create;
+ mycmain:=Tconf_main.Create;
+ csc:=mycsc;
+ ccat:=myccat;
+ cshr:=mycshr;
+ cplot:=mycplot;
+ cmain:=mycmain;
  inherited Create(AOwner);
 end;
 
@@ -724,6 +730,15 @@ begin
   SetLang;
 end;
 
+procedure Tf_config_display.FormDestroy(Sender: TObject);
+begin
+mycsc.Free;
+myccat.Free;
+mycshr.Free;
+mycplot.Free;
+mycmain.Free;
+end;
+
 procedure Tf_config_display.Button4Click(Sender: TObject);
 begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
@@ -737,7 +752,7 @@ end;
 
 procedure Tf_config_display.ShowDisplay;
 begin
- stardisplay.itemindex:=cplot^.starplot;
+ stardisplay.itemindex:=cplot.starplot;
  nebuladisplay.itemindex:=cplot.nebplot;
  StarSizeBar.position:=round(cplot.partsize*10);
  StarContrastBar.position:=cplot.contrast;

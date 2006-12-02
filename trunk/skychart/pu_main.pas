@@ -551,10 +551,9 @@ type
     savwincol  : array[0..35] of Tcolor;
   {$endif}
     procedure SetButtonImage(button: Integer);
-    function CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
+    function CreateChild(const CName: string; copyactive: boolean; var cfg1 : Tconf_skychart; var cfgp : Tconf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     Procedure SyncChild;
-    procedure CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
     procedure GetLanguage;
     Procedure GetAppDir;
     procedure ViewTopPanel;
@@ -577,9 +576,9 @@ type
   {$endif}
   public
     { Public declarations }
-    cfgm : conf_main;
-    def_cfgsc : conf_skychart;
-    def_cfgplot : conf_plot;
+    cfgm : Tconf_main;
+    def_cfgsc,cfgs : Tconf_skychart;
+    def_cfgplot,cfgp : Tconf_plot;
     catalog : Tcatalog;
     fits : TFits;
     planet  : Tplanet;
@@ -592,7 +591,7 @@ type
     DdeOpen : boolean;
     DdeEnqueue: boolean;
     Config_Version : string;
-    procedure ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:conf_plot ;var csc:conf_skychart);
+    procedure ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
     procedure UpdateConfig;
@@ -604,7 +603,7 @@ type
     procedure SetLang;
     procedure ChangeLanguage(lang:string);
     Procedure InitFonts;
-    Procedure activateconfig(cmain:Pconf_main; csc:Pconf_skychart; ccat:Pconf_catalog; cshr:Pconf_shared; cplot:Pconf_plot; cdss:Pconf_dss; applyall:boolean );
+    Procedure activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
     Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string);
@@ -628,8 +627,8 @@ type
     procedure GetTCPInfo(i:integer; var buf:string);
     procedure KillTCPClient(i:integer);
     procedure PrintSetup(Sender: TObject);
-    procedure GetChartConfig(var csc:conf_skychart);
-    procedure DrawChart(var csc:conf_skychart);
+    procedure GetChartConfig(var csc:Tconf_skychart);
+    procedure DrawChart(var csc:Tconf_skychart);
     procedure ConfigDBChange(Sender: TObject);
     procedure SaveAndRestart(Sender: TObject);
     procedure InitializeDB(Sender: TObject);
@@ -663,7 +662,7 @@ const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFA
 {$endif}
 
 
-function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : conf_skychart; var cfgp : conf_plot; locked:boolean=false):boolean;
+function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : Tconf_skychart; var cfgp : Tconf_plot; locked:boolean=false):boolean;
 var
   Child : Tf_chart;
   cp: TChildDoc;
@@ -678,8 +677,8 @@ begin
   end;
   // copy active child config
   if copyactive and (MultiDoc1.Activeobject is Tf_chart) then begin
-    cfg1:=(MultiDoc1.Activeobject as Tf_chart).sc.cfgsc^;
-    cfgp:=(MultiDoc1.Activeobject as Tf_chart).sc.plot.cfgplot^;
+    cfg1.Assign((MultiDoc1.Activeobject as Tf_chart).sc.cfgsc);
+    cfgp.Assign((MultiDoc1.Activeobject as Tf_chart).sc.plot.cfgplot);
     cfg1.scopemark:=false;
     maxi:=MultiDoc1.maximized;
     w:=MultiDoc1.ActiveChild.width;
@@ -712,11 +711,11 @@ begin
   {$ifdef win32}
   Child.telescopeplugin:=telescope;
   {$endif}
-  Child.sc.plot.cfgplot^:=cfgp;
+  Child.sc.plot.cfgplot.Assign(cfgp);
   Child.sc.plot.starshape:=starshape.Picture.Bitmap;
   Child.sc.plot.cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
   Child.sc.plot.cfgplot.starshapew:=Child.sc.plot.cfgplot.starshapesize div 2;
-  Child.sc.cfgsc^:=cfg1;
+  Child.sc.cfgsc.Assign(cfg1);
   Child.sc.cfgsc.chartname:=CName;
   Child.onImageSetFocus:=ImageSetFocus;
   Child.onSetFocus:=SetChildFocus;
@@ -743,119 +742,6 @@ begin
   caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption ;
 end;
 
-procedure Tf_main.CopySCconfig(c1:conf_skychart;var c2:conf_skychart);
-var i : integer;
-begin
-c2.CurYear:=c1.CurYear;
-c2.CurMonth := c1.CurMonth ;
-c2.CurDay := c1.CurDay ;
-c2.UseSystemTime := c1.UseSystemTime ;
-c2.autorefresh := c1.autorefresh ;
-c2.CurTime := c1.CurTime ;
-c2.DT_UT := c1.DT_UT ;
-c2.DT_UT_val := c1.DT_UT_val ;
-c2.Force_DT_UT := c1.Force_DT_UT ;
-c2.ObsLatitude := c1.ObsLatitude ;
-c2.ObsLongitude := c1.ObsLongitude ;
-c2.ObsAltitude := c1.ObsAltitude ;
-c2.ObsTZ := c1.ObsTZ ;
-c2.TimeZone := c1.TimeZone ;
-c2.DST := c1.DST ;
-c2.ObsTemperature := c1.ObsTemperature ;
-c2.ObsPressure := c1.ObsPressure ;
-c2.ObsName := c1.ObsName ;
-c2.ObsCountry := c1.ObsCountry ;
-c2.DrawPMyear := c1.DrawPMyear ;
-c2.PMon := c1.PMon ;
-c2.DrawPMon := c1.DrawPMon ;
-c2.ApparentPos := c1.ApparentPos;
-for i:=0 to 10 do c2.projname[i] := c1.projname[i];
-c2.Simnb := c1.Simnb ;
-c2.SimLabel := c1.SimLabel ;
-c2.SimDateLabel := c1.SimDateLabel ;
-c2.SimNameLabel := c1.SimNameLabel ;
-c2.SimMagLabel := c1.SimMagLabel ;
-c2.SimLine := c1.SimLine ;
-c2.SimD := c1.SimD ;
-c2.SimH := c1.SimH ;
-c2.SimM := c1.SimM ;
-c2.SimS := c1.SimS ;
-c2.SimObject := c1.SimObject ;
-c2.PlanetParalaxe := c1.PlanetParalaxe ;
-c2.ShowPlanet := c1.ShowPlanet ;
-c2.ShowAsteroid := c1.ShowAsteroid ;
-c2.ShowImages := c1.ShowImages ;
-c2.ShowBackgroundImage := c1.ShowBackgroundImage ;
-c2.BackgroundImage := c1.BackgroundImage ;
-c2.AstmagMax := c1.AstmagMax;
-c2.AstmagDiff := c1.AstmagDiff;
-c2.AstSymbol := c1.AstSymbol;
-c2.ShowComet := c1.ShowComet ;
-c2.CommagMax := c1.CommagMax;
-c2.CommagDiff := c1.CommagDiff;
-c2.ComSymbol := c1.ComSymbol;
-c2.MagLabel := c1.MagLabel;
-c2.NameLabel := c1.NameLabel;
-c2.ConstFullLabel := c1.ConstFullLabel;
-c2.GRSlongitude := c1.GRSlongitude ;
-c2.ShowEarthShadow := c1.ShowEarthShadow ;
-c2.ProjPole := c1.ProjPole ;
-c2.ShowEqGrid := c1.ShowEqGrid ;
-c2.ShowGrid := c1.ShowGrid ;
-c2.ShowGridNum := c1.ShowGridNum ;
-c2.ShowConstL := c1.ShowConstL ;
-c2.ShowConstB := c1.ShowConstB ;
-c2.ShowEcliptic := c1.ShowEcliptic ;
-c2.ShowGalactic := c1.ShowGalactic ;
-c2.ShowMilkyWay := c1.ShowMilkyWay ;
-c2.FillMilkyWay := c1.FillMilkyWay ;
-c2.HorizonOpaque := c1.HorizonOpaque ;
-c2.FillHorizon := c1.FillHorizon ;
-c2.ShowHorizon := c1.ShowHorizon ;
-c2.ShowHorizonDepression := c1.ShowHorizonDepression ;
-c2.HorizonMax := c1.HorizonMax ;
-c2.Horizonlist := c1.Horizonlist ;
-c2.ShowlabelAll := c1.ShowlabelAll ;
-c2.Editlabels := c1.Editlabels ;
-for i:=1 to numlabtype do begin
-   c2.ShowLabel[i]:=c1.ShowLabel[i];
-   c2.LabelMagDiff[i]:=c1.LabelMagDiff[i];
-end;
-for i:=1 to 10 do c2.circle[i,1]:=c1.circle[i,1];
-for i:=1 to 10 do c2.circle[i,2]:=c1.circle[i,2];
-for i:=1 to 10 do c2.circle[i,3]:=c1.circle[i,3];
-for i:=1 to 10 do c2.circleok[i]:=c1.circleok[i];
-for i:=1 to 10 do c2.circlelbl[i]:=c1.circlelbl[i];
-for i:=1 to 10 do c2.rectangle[i,1]:=c1.rectangle[i,1];
-for i:=1 to 10 do c2.rectangle[i,2]:=c1.rectangle[i,2];
-for i:=1 to 10 do c2.rectangle[i,3]:=c1.rectangle[i,3];
-for i:=1 to 10 do c2.rectangle[i,4]:=c1.rectangle[i,4];
-for i:=1 to 10 do c2.rectangleok[i]:=c1.rectangleok[i];
-for i:=1 to 10 do c2.rectanglelbl[i]:=c1.rectanglelbl[i];
-c2.ShowCircle:=c1.ShowCircle;
-c2.IndiServerHost:=c1.IndiServerHost;
-c2.IndiServerPort:=c1.IndiServerPort;
-c2.IndiServerCmd:=c1.IndiServerCmd;
-c2.IndiDriver:=c1.IndiDriver;
-c2.IndiPort:=c1.IndiPort;
-c2.IndiDevice:=c1.IndiDevice;
-c2.IndiTelescope:=c1.IndiTelescope;
-c2.PluginTelescope:=c1.PluginTelescope;
-c2.ManualTelescope:=c1.ManualTelescope;
-c2.ManualTelescopeType:=c1.ManualTelescopeType;
-c2.TelescopeTurnsX:=c1.TelescopeTurnsX;
-c2.TelescopeTurnsY:=c1.TelescopeTurnsY;
-c2.ScopePlugin:=c1.ScopePlugin;
-c2.StyleGrid:=c1.StyleGrid;
-c2.StyleEqGrid:=c1.StyleEqGrid;
-c2.StyleConstL:=c1.StyleConstL;
-c2.StyleConstB:=c1.StyleConstB;
-c2.StyleEcliptic:=c1.StyleEcliptic;
-c2.StyleGalEq:=c1.StyleGalEq;
-c2.ShowPluto := c1.ShowPluto ;
-//c2. := c1. ;
-end;
-
 procedure Tf_main.RefreshAllChild(applydef:boolean);
 var i: integer;
 begin
@@ -866,9 +752,9 @@ for i:=0 to MultiDoc1.ChildCount-1 do
       sc.planet:=planet;
       sc.cdb:=cdcdb;
       if applydef then begin
-        CopySCconfig(def_cfgsc,sc.cfgsc^);
+        sc.cfgsc.Assign(def_cfgsc);
         sc.cfgsc.FindOk:=false;
-        sc.plot.cfgplot^:=def_cfgplot;
+        sc.plot.cfgplot.Assign(def_cfgplot);
       end;
       AutoRefresh;
      end;
@@ -957,18 +843,26 @@ begin
    MultiDoc1.ActiveChild.close;
 end;
 
+procedure Tf_main.FileSaveAs1Execute(Sender: TObject);
+begin
+Savedialog.DefaultExt:='cdc3';
+if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
+savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
+savedialog.Title:=rsSaveTheCurre;
+if MultiDoc1.ActiveObject is Tf_chart then
+  if SaveDialog.Execute then SaveChartConfig(SaveDialog.Filename,MultiDoc1.ActiveChild);
+end;
+
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
-var cfgs :conf_skychart;
-    cfgp : conf_plot;
-    nam: string;
+var nam: string;
     p: integer;
 begin
-if Opendialog.InitialDir='' then Opendialog.InitialDir:=privatedir;
+if OpenDialog.InitialDir='' then OpenDialog.InitialDir:=privatedir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 OpenDialog.Title:=rsOpenAChart;
   if OpenDialog.Execute then begin
     cfgp:=def_cfgplot;
-    cfgs:=def_cfgsc;
+    cfgs.Assign(def_cfgsc);
     ReadChartConfig(OpenDialog.FileName,true,false,cfgp,cfgs);
     nam:=stringreplace(extractfilename(OpenDialog.FileName),blank,'_',[rfReplaceAll]);
     p:=pos('.',nam);
@@ -998,9 +892,7 @@ begin
 end;
 
 procedure Tf_main.Init;
-var cfgs :conf_skychart;
-    cfgp : conf_plot;
-    i: integer;
+var i: integer;
 begin
 try
  // some initialisation that need to be done after all the forms are created.
@@ -1031,7 +923,7 @@ try
  catalog.LoadHorizon(cfgm.horizonfile,@def_cfgsc);
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
  f_search.cfgshr:=catalog.cfgshr;
- f_search.cfgsc:=@def_cfgsc;
+ f_search.cfgsc.Assign(def_cfgsc);
  f_search.Init;
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
@@ -1049,7 +941,7 @@ try
  if InitialChartNum>1 then
     for i:=1 to InitialChartNum-1 do begin
       cfgp:=def_cfgplot;
-      cfgs:=def_cfgsc;
+      cfgs.Assign(def_cfgsc);
       ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
       CreateChild(GetUniqueName(rsChart_, true) , false, cfgs, cfgp);
     end;
@@ -1060,16 +952,6 @@ try
 except
  on E: Exception do SetLPanel1(E.Message);
 end;
-end;
-
-procedure Tf_main.FileSaveAs1Execute(Sender: TObject);
-begin
-Savedialog.DefaultExt:='cdc3';
-if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
-savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
-savedialog.Title:=rsSaveTheCurre;
-if MultiDoc1.ActiveObject is Tf_chart then
-  if SaveDialog.Execute then SaveChartConfig(SaveDialog.Filename,MultiDoc1.ActiveChild);
 end;
 
 procedure Tf_main.SaveImageExecute(Sender: TObject);
@@ -1193,6 +1075,11 @@ ImageListCount:=ImageNormal.Count;
 {$ifdef unix}
   configfile:=expandfilename(Defaultconfigfile);
 {$endif}
+def_cfgsc:=Tconf_skychart.Create;
+cfgs:=Tconf_skychart.Create;
+cfgm:=Tconf_main.Create;
+def_cfgplot:=Tconf_plot.Create;
+cfgp:=Tconf_plot.Create;
 GetAppDir;
 chdir(appdir);
 InitTrace;
@@ -1243,6 +1130,11 @@ planet.free;
 cdcdb.free;
 telescope.free;
 if NeedRestart then ExecNoWait(paramstr(0));
+def_cfgsc.Free;
+cfgs.Free;
+cfgm.Free;
+def_cfgplot.Free;
+cfgp.Free;
 except
 writetrace('error destroy '+name);
 end;
@@ -1280,16 +1172,16 @@ var savelabel:boolean;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with Tf_chart(MultiDoc1.ActiveObject) do begin
-    savelabel:= sc.cfgsc^.Editlabels;
+    savelabel:= sc.cfgsc.Editlabels;
     try
       if savelabel then begin
-         sc.cfgsc^.Editlabels:=false;
+         sc.cfgsc.Editlabels:=false;
          sc.Refresh;
       end;
       Clipboard.Assign(sc.plot.cbmp);
     finally
       if savelabel then begin
-         sc.cfgsc^.Editlabels:=true;
+         sc.cfgsc.Editlabels:=true;
          sc.Refresh;
       end;
     end;
@@ -1795,8 +1687,8 @@ end;
 procedure Tf_main.CalendarExecute(Sender: TObject);
 begin
   if not f_calendar.Visible then begin
-    if MultiDoc1.ActiveObject is Tf_chart then f_calendar.config^:= Tf_chart(MultiDoc1.ActiveObject).sc.cfgsc^
-       else f_calendar.config^:=def_cfgsc;
+    if MultiDoc1.ActiveObject is Tf_chart then f_calendar.config.Assign(Tf_chart(MultiDoc1.ActiveObject).sc.cfgsc)
+       else f_calendar.config.Assign(def_cfgsc);
   end;
   f_calendar.AzNorth:=catalog.cfgshr.AzNorth;
   formpos(f_calendar,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -1821,7 +1713,7 @@ end;
 procedure Tf_main.PositionExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   f_position.cfgsc:=sc.cfgsc;
+   f_position.cfgsc.Assign(sc.cfgsc);
    f_position.AzNorth:=sc.catalog.cfgshr.AzNorth;
    formpos(f_position,mouse.cursorpos.x,mouse.cursorpos.y);
    f_position.showmodal;
@@ -1859,7 +1751,7 @@ if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject
    end;
 if chart is Tf_chart then with chart as Tf_chart do begin
    formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
-   f_search.cfgsc:=sc.cfgsc;
+   f_search.cfgsc.Assign(sc.cfgsc);
    f_search.InitPlanet;
    repeat
    f_search.showmodal;
@@ -1909,20 +1801,20 @@ if chart is Tf_chart then with chart as Tf_chart do begin
 end;
 end;
 
-procedure Tf_main.GetChartConfig(var csc:conf_skychart);
+procedure Tf_main.GetChartConfig(var csc:Tconf_skychart);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do
-   csc:=sc.cfgsc^
+   csc.Assign(sc.cfgsc)
 else
-   csc:=def_cfgsc;
+   csc.Assign(def_cfgsc);
 end;
 
-procedure Tf_main.DrawChart(csc:conf_skychart);
+procedure Tf_main.DrawChart(csc:Tconf_skychart);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do begin
-   sc.cfgsc^:=csc;
+   sc.cfgsc.Assign(csc);
    Refresh;
 end;
 end;
@@ -1945,8 +1837,8 @@ try
  f_config.cplot:=def_cfgplot;
  f_config.csc:=def_cfgsc;
  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-     f_config.csc:=sc.cfgsc^;
-     f_config.cplot:=sc.plot.cfgplot^;
+     f_config.csc:=sc.cfgsc;
+     f_config.cplot:=sc.plot.cfgplot;
  end;
  cfgm.prgdir:=appdir;
  cfgm.persdir:=privatedir;
@@ -1959,7 +1851,7 @@ try
  f_config.next.enabled:=true;
  f_config.showmodal;
  if f_config.ModalResult=mrOK then begin
-   activateconfig(@f_config.cmain,@f_config.csc,@f_config.ccat,@f_config.cshr,@f_config.cplot,@f_config.cdss,f_config.Applyall.Checked);
+   activateconfig(f_config.cmain,f_config.csc,f_config.ccat,f_config.cshr,f_config.cplot,f_config.cdss,f_config.Applyall.Checked);
  end;
 
 finally
@@ -1969,7 +1861,7 @@ end;
 
 procedure Tf_main.ApplyConfig(Sender: TObject);
 begin
- activateconfig(@f_config.cmain,@f_config.csc,@f_config.ccat,@f_config.cshr,@f_config.cplot,@f_config.cdss,f_config.Applyall.Checked);
+ activateconfig(f_config.cmain,f_config.csc,f_config.ccat,f_config.cshr,f_config.cplot,f_config.cdss,f_config.Applyall.Checked);
 end;
 
 procedure Tf_main.SetupTimeExecute(Sender: TObject);
@@ -1987,17 +1879,17 @@ if ConfigTime=nil then begin
    ConfigTime.onApplyConfig:=ApplyConfigTime;
 end;
 {$ifdef win32}SetFormNightVision(ConfigTime,nightvision);{$endif}
-ConfigTime.ccat^:=catalog.cfgcat;
-ConfigTime.cshr^:=catalog.cfgshr;
-ConfigTime.cplot^:=def_cfgplot;
-ConfigTime.csc^:=def_cfgsc;
+ConfigTime.ccat.Assign(catalog.cfgcat);
+ConfigTime.cshr.Assign(catalog.cfgshr);
+ConfigTime.cplot.Assign(def_cfgplot);
+ConfigTime.csc.Assign(def_cfgsc);
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigTime.csc^:=sc.cfgsc^;
-   ConfigTime.cplot^:=sc.plot.cfgplot^;
+   ConfigTime.csc.Assign(sc.cfgsc);
+   ConfigTime.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigTime.cmain^:=cfgm;
+ConfigTime.cmain.Assign(cfgm);
 formpos(ConfigTime,mouse.cursorpos.x,mouse.cursorpos.y);
 ConfigTime.Notebook1.PageIndex:=page;
 ConfigTime.showmodal;
@@ -2027,19 +1919,19 @@ if ConfigPictures=nil then begin
 end;
 {$ifdef win32}SetFormNightVision(ConfigPictures,nightvision);{$endif}
 ConfigPictures.cdb:=cdcdb;
-ConfigPictures.cdss^:=f_getdss.cfgdss;
+ConfigPictures.cdss.Assign(f_getdss.cfgdss);
 ConfigPictures.Fits:=Fits;
-ConfigPictures.ccat^:=catalog.cfgcat;
-ConfigPictures.cshr^:=catalog.cfgshr;
-ConfigPictures.cplot^:=def_cfgplot;
-ConfigPictures.csc^:=def_cfgsc;
+ConfigPictures.ccat.Assign(catalog.cfgcat);
+ConfigPictures.cshr.Assign(catalog.cfgshr);
+ConfigPictures.cplot.Assign(def_cfgplot);
+ConfigPictures.csc.Assign(def_cfgsc);
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigPictures.csc^:=sc.cfgsc^;
-   ConfigPictures.cplot^:=sc.plot.cfgplot^;
+   ConfigPictures.csc.Assign(sc.cfgsc);
+   ConfigPictures.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigPictures.cmain^:=cfgm;
+ConfigPictures.cmain.Assign(cfgm);
 formpos(ConfigPictures,mouse.cursorpos.x,mouse.cursorpos.y);
 ConfigPictures.Notebook1.PageIndex:=page;
 ConfigPictures.show;
@@ -2073,17 +1965,17 @@ if ConfigObservatory=nil then begin
 end;
 {$ifdef win32}SetFormNightVision(ConfigObservatory,nightvision);{$endif}
 ConfigObservatory.cdb:=cdcdb;
-ConfigObservatory.ccat^:=catalog.cfgcat;
-ConfigObservatory.cshr^:=catalog.cfgshr;
-ConfigObservatory.cplot^:=def_cfgplot;
-ConfigObservatory.csc^:=def_cfgsc;
+ConfigObservatory.ccat.Assign(catalog.cfgcat);
+ConfigObservatory.cshr.Assign(catalog.cfgshr);
+ConfigObservatory.cplot.Assign(def_cfgplot);
+ConfigObservatory.csc.Assign(def_cfgsc);
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigObservatory.csc^:=sc.cfgsc^;
-   ConfigObservatory.cplot^:=sc.plot.cfgplot^;
+   ConfigObservatory.csc.Assign(sc.cfgsc);
+   ConfigObservatory.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigObservatory.cmain^:=cfgm;
+ConfigObservatory.cmain.Assign(cfgm);
 formpos(ConfigObservatory,mouse.cursorpos.x,mouse.cursorpos.y);
 ConfigObservatory.Notebook1.PageIndex:=page;
 ConfigObservatory.showmodal;
@@ -2113,17 +2005,17 @@ if ConfigCatalog=nil then begin
    ConfigCatalog.onApplyConfig:=ApplyConfigCatalog;
 end;
 {$ifdef win32}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
-ConfigCatalog.ccat^:=catalog.cfgcat;
-ConfigCatalog.cshr^:=catalog.cfgshr;
-ConfigCatalog.cplot^:=def_cfgplot;
-ConfigCatalog.csc^:=def_cfgsc;
+ConfigCatalog.ccat.Assign(catalog.cfgcat);
+ConfigCatalog.cshr.Assign(catalog.cfgshr);
+ConfigCatalog.cplot.Assign(def_cfgplot);
+ConfigCatalog.csc.Assign(def_cfgsc);
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigCatalog.csc^:=sc.cfgsc^;
-   ConfigCatalog.cplot^:=sc.plot.cfgplot^;
+   ConfigCatalog.csc.Assign(sc.cfgsc);
+   ConfigCatalog.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigCatalog.cmain^:=cfgm;
+ConfigCatalog.cmain.Assign(cfgm);
 formpos(ConfigCatalog,mouse.cursorpos.x,mouse.cursorpos.y);
 ConfigCatalog.Notebook1.PageIndex:=page;
 ConfigCatalog.showmodal;
@@ -2179,17 +2071,17 @@ if ConfigDisplay=nil then begin
    ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
 end;
 {$ifdef win32}SetFormNightVision(ConfigDisplay,nightvision);{$endif}
-ConfigDisplay.ccat^:=catalog.cfgcat;
-ConfigDisplay.cshr^:=catalog.cfgshr;
-ConfigDisplay.cplot^:=def_cfgplot;
-ConfigDisplay.csc^:=def_cfgsc;
+ConfigDisplay.ccat.Assign(catalog.cfgcat);
+ConfigDisplay.cshr.Assign(catalog.cfgshr);
+ConfigDisplay.cplot.Assign(def_cfgplot);
+ConfigDisplay.csc.Assign(def_cfgsc);
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigDisplay.csc^:=sc.cfgsc^;
-   ConfigDisplay.cplot^:=sc.plot.cfgplot^;
+   ConfigDisplay.csc.Assign(sc.cfgsc);
+   ConfigDisplay.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigDisplay.cmain^:=cfgm;
+ConfigDisplay.cmain.Assign(cfgm);
 formpos(ConfigDisplay,mouse.cursorpos.x,mouse.cursorpos.y);
 case pagegroup of
  0 : begin  //display mode
@@ -2270,17 +2162,17 @@ end;
 // Problem with initialization
 ConfigDisplay.show;
 ConfigDisplay.hide;
-ConfigDisplay.ccat^:=catalog.cfgcat;
-ConfigDisplay.cshr^:=catalog.cfgshr;
-ConfigDisplay.cplot^:=def_cfgplot;
-ConfigDisplay.csc^:=def_cfgsc;
+ConfigDisplay.ccat.Assign(catalog.cfgcat);
+ConfigDisplay.cshr.Assign(catalog.cfgshr);
+ConfigDisplay.cplot.Assign(def_cfgplot);
+ConfigDisplay.csc.Assign(def_cfgsc);
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigDisplay.csc^:=sc.cfgsc^;
-   ConfigDisplay.cplot^:=sc.plot.cfgplot^;
+   ConfigDisplay.csc.Assign(sc.cfgsc);
+   ConfigDisplay.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigDisplay.cmain^:=cfgm;
+ConfigDisplay.cmain.Assign(cfgm);
 ///////////////////////////////
 {$endif}
 
@@ -2314,63 +2206,63 @@ end;
 
 procedure Tf_main.SaveAndRestart(Sender: TObject);
 begin
-cfgm:=f_config.cmain;
+cfgm.Assign(f_config.cmain);
 if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
 if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
-def_cfgsc:=f_config.csc;
-catalog.cfgcat:=f_config.ccat;
-catalog.cfgshr:=f_config.cshr;
+def_cfgsc.Assign(f_config.csc);
+catalog.cfgcat.Assign(f_config.ccat);
+catalog.cfgshr.Assign(f_config.cshr);
 SavePrivateConfig(configfile);
 NeedRestart:=true;
 Close;
 end;
 
-procedure Tf_main.activateconfig(cmain:Pconf_main; csc:Pconf_skychart; ccat:Pconf_catalog; cshr:Pconf_shared; cplot:Pconf_plot; cdss:Pconf_dss; applyall:boolean );
+procedure Tf_main.activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
 var i:integer;
   themechange,langchange: Boolean;
 begin
     themechange:=false; langchange:=false;
     if cmain<>nil then begin
-      if (cfgm.language <> cmain^.language) then langchange:=true;
+      if (cfgm.language <> cmain.language) then langchange:=true;
     end;
-    if langchange then ChangeLanguage(cmain^.language);
+    if langchange then ChangeLanguage(cmain.language);
     if cmain<>nil then begin
-      if (cfgm.ButtonNight <> cmain^.ButtonNight) or
-         (cfgm.ButtonStandard <> cmain^.ButtonStandard) or
-         (cfgm.ThemeName <> cmain^.ThemeName)
+      if (cfgm.ButtonNight <> cmain.ButtonNight) or
+         (cfgm.ButtonStandard <> cmain.ButtonStandard) or
+         (cfgm.ThemeName <> cmain.ThemeName)
          then themechange:=true;
-      cfgm:=cmain^;
+      cfgm.Assign(cmain);
     end;
     if themechange then SetTheme;
     cfgm.updall:=applyall;
     if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
     if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
     if ccat<>nil then begin
-      for i:=0 to ccat^.GCatNum-1 do begin
-        if ccat^.GCatLst[i].Actif then begin
+      for i:=0 to ccat.GCatNum-1 do begin
+        if ccat.GCatLst[i].Actif then begin
           if not
-          catalog.GetInfo(ccat^.GCatLst[i].path,
-                          ccat^.GCatLst[i].shortname,
-                          ccat^.GCatLst[i].magmax,
-                          ccat^.GCatLst[i].cattype,
-                          ccat^.GCatLst[i].version,
-                          ccat^.GCatLst[i].name)
-          then ccat^.GCatLst[i].Actif:=false;
+          catalog.GetInfo(ccat.GCatLst[i].path,
+                          ccat.GCatLst[i].shortname,
+                          ccat.GCatLst[i].magmax,
+                          ccat.GCatLst[i].cattype,
+                          ccat.GCatLst[i].version,
+                          ccat.GCatLst[i].name)
+          then ccat.GCatLst[i].Actif:=false;
         end;
       end;
-      catalog.cfgcat:=ccat^;
+      catalog.cfgcat.Assign(ccat);
     end;
-    if cdss<>nil then f_getdss.cfgdss:=cdss^;
-    if cshr<>nil then catalog.cfgshr:=cshr^;
-    if csc<>nil  then def_cfgsc:=csc^;
-    if cplot<>nil then def_cfgplot:=cplot^;
+    if cdss<>nil then f_getdss.cfgdss.Assign(cdss);
+    if cshr<>nil then catalog.cfgshr.Assign(cshr);
+    if csc<>nil  then def_cfgsc.Assign(csc);
+    if cplot<>nil then def_cfgplot.Assign(cplot);
     def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
     InitFonts;
     catalog.LoadConstellation(cfgm.Constellationfile);
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
-    catalog.LoadHorizon(cfgm.horizonfile,@def_cfgsc);
+    catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
     ConnectDB;
     Fits.min_sigma:=cfgm.ImageLuminosity;
     Fits.max_sigma:=cfgm.ImageContrast;
@@ -2387,12 +2279,12 @@ begin
     telescope.plugin:=def_cfgsc.ScopePlugin;
     {$endif}
     if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-       CopySCconfig(def_cfgsc,sc.cfgsc^);
+       sc.cfgsc.Assign(def_cfgsc);
        sc.Fits:=Fits;
        sc.planet:=planet;
        sc.cdb:=cdcdb;
        sc.cfgsc.FindOk:=false;
-       sc.plot.cfgplot^:=def_cfgplot;
+       sc.plot.cfgplot.Assign(def_cfgplot);
        if cfgm.NewBackgroundImage then begin
           sc.Fits.Filename:=sc.cfgsc.BackgroundImage;
           if sc.Fits.Header.valid then begin
@@ -3016,7 +2908,7 @@ ReadChartConfig(configfile,true,true,def_cfgplot,def_cfgsc);
 //if config_version<cdcver then UpdateConfig;
 end;
 
-procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:conf_plot ;var csc:conf_skychart);
+procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
 var i:integer;
     inif: TMemIniFile;
     section,buf : string;
@@ -3448,16 +3340,18 @@ procedure Tf_main.SaveChartConfig(filename:string; child: TChildDoc);
 var i:integer;
     inif: TMemIniFile;
     section : string;
-    cplot:conf_plot ;
-    csc:conf_skychart;
+    cplot:Tconf_plot ;
+    csc:Tconf_skychart;
 begin
+cplot:=Tconf_plot.Create;
+csc:=Tconf_skychart.create;
 if (child<>nil) and (child.DockedObject is Tf_chart) then with child.DockedObject as Tf_chart do begin
-  cplot:=sc.plot.cfgplot^;
-  csc:=sc.cfgsc^;
+  cplot.Assign(sc.plot.cfgplot);
+  csc.Assign(sc.cfgsc);
 end
 else begin
-  cplot:=def_cfgplot;
-  csc:=def_cfgsc;
+  cplot.Assign(def_cfgplot);
+  csc.Assign(def_cfgsc);
 end;
 inif:=TMeminifile.create(filename);
 try
@@ -3688,6 +3582,8 @@ Updatefile;
 end;
 finally
  inif.Free;
+ csc.Free;
+ cplot.Free;
 end;
 end;
 
@@ -3909,7 +3805,11 @@ for i:=0 to MultiDoc1.ChildCount-1 do
      Tf_chart(MultiDoc1.Childs[i].DockedObject).SetLang;
 if f_about<>nil then f_about.SetLang;
 if f_config<>nil then f_config.SetLang;
-
+if ConfigTime<>nil then ConfigTime.SetLang;
+if ConfigObservatory<>nil then ConfigObservatory.SetLang;
+if ConfigDisplay<>nil then ConfigDisplay.SetLang;
+if ConfigPictures<>nil then ConfigPictures.SetLang;
+if ConfigCatalog<>nil then ConfigCatalog.SetLang;
 end;
 
 procedure Tf_main.SetLang;

@@ -11,6 +11,7 @@ object f_config_internet: Tf_config_internet
   Caption = 'Internet'
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   object MainPanel: TPanel
     Height = 480

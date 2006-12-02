@@ -54,6 +54,7 @@ type
     CancelBtn: TButton;
     HelpBtn: TButton;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -63,12 +64,12 @@ type
   private
     { Déclarations privées }
     locktree: boolean;
-    Fccat : conf_catalog;
-    Fcshr : conf_shared;
-    Fcsc  : conf_skychart;
-    Fcplot : conf_plot;
-    Fcmain : conf_main;
-    Fcdss : conf_dss;
+    Fccat : Tconf_catalog;
+    Fcshr : Tconf_shared;
+    Fcsc  : Tconf_skychart;
+    Fcplot : Tconf_plot;
+    Fcmain : Tconf_main;
+    Fcdss : Tconf_dss;
     Fnightvision: boolean;
     astpage,compage,dbpage: integer;
     FApplyConfig: TNotifyEvent;
@@ -90,12 +91,12 @@ type
     procedure SetCatalog(value: Tcatalog);
     function GetDB: Tcdcdb;
     procedure SetDB(value: Tcdcdb);
-    procedure SetCcat(value: conf_catalog);
-    procedure SetCshr(value: conf_shared);
-    procedure SetCsc(value: conf_skychart);
-    procedure SetCplot(value: conf_plot);
-    procedure SetCmain(value: conf_main);
-    procedure SetCdss(value: conf_dss);
+    procedure SetCcat(value: Tconf_catalog);
+    procedure SetCshr(value: Tconf_shared);
+    procedure SetCsc(value: Tconf_skychart);
+    procedure SetCplot(value: Tconf_plot);
+    procedure SetCmain(value: Tconf_main);
+    procedure SetCdss(value: Tconf_dss);
     procedure ShowDBSetting(Sender: TObject);
     procedure ShowCometSetting(Sender: TObject);
     procedure ShowAsteroidSetting(Sender: TObject);
@@ -108,12 +109,12 @@ type
   public
     { Déclarations publiques }
     procedure SetLang;
-    property ccat : conf_catalog read Fccat write SetCcat;
-    property cshr : conf_shared read Fcshr write SetCshr;
-    property csc  : conf_skychart read Fcsc write SetCsc;
-    property cplot : conf_plot read Fcplot write SetCplot;
-    property cmain : conf_main read Fcmain write SetCmain;
-    property cdss : conf_dss read Fcdss write SetCdss;
+    property ccat : Tconf_catalog read Fccat write SetCcat;
+    property cshr : Tconf_shared read Fcshr write SetCshr;
+    property csc  : Tconf_skychart read Fcsc write SetCsc;
+    property cplot : Tconf_plot read Fcplot write SetCplot;
+    property cmain : Tconf_main read Fcmain write SetCmain;
+    property cdss : Tconf_dss read Fcdss write SetCdss;
     property fits : TFits read GetFits write SetFits;
     property catalog : Tcatalog read GetCatalog write SetCatalog;
     property db : Tcdcdb read GetDB write SetDB;
@@ -196,6 +197,12 @@ end;
 procedure Tf_config.FormCreate(Sender: TObject);
 var Child: TChildDoc;
 begin
+Fcsc:=Tconf_skychart.Create;
+Fccat:=Tconf_catalog.Create;
+Fcshr:=Tconf_shared.Create;
+Fcplot:=Tconf_plot.Create;
+Fcmain:=Tconf_main.Create;
+Fcdss:=Tconf_dss.Create;
 SetLang;
 compage:=21;
 astpage:=22;
@@ -355,9 +362,18 @@ begin
 end;
 
 procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-var i:integer;
 begin
   ActivateChanges;
+end;
+
+procedure Tf_config.FormDestroy(Sender: TObject);
+begin
+  Fcsc.free;
+  Fccat.free;
+  Fcshr.free;
+  Fcplot.free;
+  Fcmain.free;
+  Fcdss.free;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);
@@ -453,77 +469,77 @@ f_config_pictures1.cdb:=value;
 f_config_observatory1.cdb:=value;
 end;
 
-procedure Tf_config.SetCcat(value: conf_catalog);
+procedure Tf_config.SetCcat(value: Tconf_catalog);
 begin
-Fccat:=value;
-f_config_time1.ccat:=@Fccat;
-f_config_observatory1.ccat:=@Fccat;
-f_config_chart1.ccat:=@Fccat;
-f_config_catalog1.ccat:=@Fccat;
-f_config_solsys1.ccat:=@Fccat;
-f_config_display1.ccat:=@Fccat;
-f_config_pictures1.ccat:=@Fccat;
-f_config_system1.ccat:=@Fccat;
+Fccat.Assign(value);
+f_config_time1.ccat:=Fccat;
+f_config_observatory1.ccat:=Fccat;
+f_config_chart1.ccat:=Fccat;
+f_config_catalog1.ccat:=Fccat;
+f_config_solsys1.ccat:=Fccat;
+f_config_display1.ccat:=Fccat;
+f_config_pictures1.ccat:=Fccat;
+f_config_system1.ccat:=Fccat;
 end;
 
-procedure Tf_config.SetCshr(value: conf_shared);
+procedure Tf_config.SetCshr(value: Tconf_shared);
 begin
-Fcshr:=value;
-f_config_time1.cshr:=@Fcshr;
-f_config_observatory1.cshr:=@Fcshr;
-f_config_chart1.cshr:=@Fcshr;
-f_config_catalog1.cshr:=@Fcshr;
-f_config_solsys1.cshr:=@Fcshr;
-f_config_display1.cshr:=@Fcshr;
-f_config_pictures1.cshr:=@Fcshr;
-f_config_system1.cshr:=@Fcshr;
+Fcshr.Assign(value);
+f_config_time1.cshr:=Fcshr;
+f_config_observatory1.cshr:=Fcshr;
+f_config_chart1.cshr:=Fcshr;
+f_config_catalog1.cshr:=Fcshr;
+f_config_solsys1.cshr:=Fcshr;
+f_config_display1.cshr:=Fcshr;
+f_config_pictures1.cshr:=Fcshr;
+f_config_system1.cshr:=Fcshr;
 end;
 
-procedure Tf_config.SetCsc(value: conf_skychart);
+procedure Tf_config.SetCsc(value: Tconf_skychart);
 begin
-Fcsc:=value;
-f_config_time1.csc:=@Fcsc;
-f_config_observatory1.csc:=@Fcsc;
-f_config_chart1.csc:=@Fcsc;
-f_config_catalog1.csc:=@Fcsc;
-f_config_solsys1.csc:=@Fcsc;
-f_config_display1.csc:=@Fcsc;
-f_config_pictures1.csc:=@Fcsc;
-f_config_system1.csc:=@Fcsc;
+Fcsc.Assign(value);
+f_config_time1.csc:=Fcsc;
+f_config_observatory1.csc:=Fcsc;
+f_config_chart1.csc:=Fcsc;
+f_config_catalog1.csc:=Fcsc;
+f_config_solsys1.csc:=Fcsc;
+f_config_display1.csc:=Fcsc;
+f_config_pictures1.csc:=Fcsc;
+f_config_system1.csc:=Fcsc;
 end;
 
-procedure Tf_config.SetCplot(value: conf_plot);
+procedure Tf_config.SetCplot(value: Tconf_plot);
 begin
-Fcplot:=value;
-f_config_time1.cplot:=@Fcplot;
-f_config_observatory1.cplot:=@Fcplot;
-f_config_chart1.cplot:=@Fcplot;
-f_config_catalog1.cplot:=@Fcplot;
-f_config_solsys1.cplot:=@Fcplot;
-f_config_display1.cplot:=@Fcplot;
-f_config_pictures1.cplot:=@Fcplot;
-f_config_system1.cplot:=@Fcplot;
+Fcplot.Assign(value);
+f_config_time1.cplot:=Fcplot;
+f_config_observatory1.cplot:=Fcplot;
+f_config_chart1.cplot:=Fcplot;
+f_config_catalog1.cplot:=Fcplot;
+f_config_solsys1.cplot:=Fcplot;
+f_config_display1.cplot:=Fcplot;
+f_config_pictures1.cplot:=Fcplot;
+f_config_system1.cplot:=Fcplot;
 end;
 
-procedure Tf_config.SetCmain(value: conf_main);
+procedure Tf_config.SetCmain(value: Tconf_main);
 begin
-Fcmain:=value;
-f_config_time1.cmain:=@Fcmain;
-f_config_observatory1.cmain:=@Fcmain;
-f_config_chart1.cmain:=@Fcmain;
-f_config_catalog1.cmain:=@Fcmain;
-f_config_solsys1.cmain:=@Fcmain;
-f_config_display1.cmain:=@Fcmain;
-f_config_pictures1.cmain:=@Fcmain;
-f_config_system1.cmain:=@Fcmain;
-f_config_internet1.cmain:=@Fcmain;
+Fcmain.Assign(value);
+f_config_time1.cmain:=Fcmain;
+f_config_observatory1.cmain:=Fcmain;
+f_config_chart1.cmain:=Fcmain;
+f_config_catalog1.cmain:=Fcmain;
+f_config_solsys1.cmain:=Fcmain;
+f_config_display1.cmain:=Fcmain;
+f_config_pictures1.cmain:=Fcmain;
+f_config_system1.cmain:=Fcmain;
+f_config_internet1.cmain:=Fcmain;
 end;
 
-procedure Tf_config.SetCdss(value: conf_dss);
+procedure Tf_config.SetCdss(value: Tconf_dss);
 begin
-Fcdss:=value;
-f_config_pictures1.cdss:=@Fcdss;
-f_config_internet1.cdss:=@Fcdss;
+Fcdss.Assign(value);
+f_config_pictures1.cdss:=Fcdss;
+f_config_internet1.cdss:=Fcdss;
 end;
 
 procedure Tf_config.applyClick(Sender: TObject);

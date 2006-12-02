@@ -91,6 +91,7 @@ type
     realskymb: TLongEdit;
     Notebook1: TNotebook;
     procedure Button2Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure ResetLumClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -127,18 +128,18 @@ type
   public
     { Public declarations }
     cdb: Tcdcdb;
-    mycsc : conf_skychart;
-    myccat : conf_catalog;
-    mycshr : conf_shared;
-    mycplot : conf_plot;
-    mycmain : conf_main;
-    mycdss : conf_dss;
-    csc : ^conf_skychart;
-    ccat : ^conf_catalog;
-    cshr : ^conf_shared;
-    cplot : ^conf_plot;
-    cmain : ^conf_main;
-    cdss : ^conf_dss;
+    mycsc : Tconf_skychart;
+    myccat : Tconf_catalog;
+    mycshr : Tconf_shared;
+    mycplot : Tconf_plot;
+    mycmain : Tconf_main;
+    mycdss : Tconf_dss;
+    csc : Tconf_skychart;
+    ccat : Tconf_catalog;
+    cshr : Tconf_shared;
+    cplot : Tconf_plot;
+    cmain : Tconf_main;
+    cdss : Tconf_dss;
     procedure SetLang;
     constructor Create(AOwner:TComponent); override;
     property Fits: TFits read FFits write FFits;
@@ -185,12 +186,18 @@ end;
 
 constructor Tf_config_pictures.Create(AOwner:TComponent);
 begin
- csc:=@mycsc;
- ccat:=@myccat;
- cshr:=@mycshr;
- cplot:=@mycplot;
- cmain:=@mycmain;
- cdss:=@mycdss;
+ mycsc:=Tconf_skychart.Create;
+ myccat:=Tconf_catalog.Create;
+ mycshr:=Tconf_shared.Create;
+ mycplot:=Tconf_plot.Create;
+ mycmain:=Tconf_main.Create;
+ mycdss:=Tconf_DSS.Create;
+ csc:=mycsc;
+ ccat:=myccat;
+ cshr:=mycshr;
+ cplot:=mycplot;
+ cmain:=mycmain;
+ cdss:=mycdss;
  inherited Create(AOwner);
 end;
 
@@ -249,6 +256,16 @@ end;
 procedure Tf_config_pictures.Button2Click(Sender: TObject);
 begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_pictures.FormDestroy(Sender: TObject);
+begin
+mycsc.Free;
+myccat.Free;
+mycshr.Free;
+mycplot.Free;
+mycmain.Free;
+mycdss.free;
 end;
 
 procedure Tf_config_pictures.ResetLumClick(Sender: TObject);

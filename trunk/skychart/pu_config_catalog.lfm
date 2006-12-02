@@ -9,6 +9,7 @@ object f_config_catalog: Tf_config_catalog
   Caption = 'Catalog'
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   object MainPanel: TPanel
     Left = 12

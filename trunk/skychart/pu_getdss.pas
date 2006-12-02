@@ -93,8 +93,8 @@ type
     procedure HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
   public
     { Public declarations }
-    cfgdss: conf_dss;
-    cmain: PConf_Main;
+    cfgdss: Tconf_dss;
+    cmain: TConf_Main;
     function GetDss(ra,de,fov,ratio:double; imgx:integer):boolean;
     procedure SetLang;
   end;
@@ -127,6 +127,7 @@ end;
 procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
 SetLang;
+cfgdss:=Tconf_dss.Create;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
@@ -150,6 +151,7 @@ ImageExtract:=nil;
 GetPlateList:=nil;
 ImageExtractFromPlate:=nil;
 if dsslib<>0 then Freelibrary(dsslib);
+cfgdss.Free;
 except
 writetrace('error destroy '+name);
 end;

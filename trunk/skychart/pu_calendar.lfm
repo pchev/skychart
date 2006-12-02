@@ -1,7 +1,7 @@
 object f_calendar: Tf_calendar
-  Left = 290
+  Left = 607
   Height = 393
-  Top = 110
+  Top = 105
   Width = 643
   HorzScrollBar.Page = 642
   VertScrollBar.Page = 392

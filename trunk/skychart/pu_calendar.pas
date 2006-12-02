@@ -32,7 +32,7 @@ uses u_translation, Math, cu_database, Printers,
   ActnList, StdActns, LResources;
 
 type
-    TScFunc = procedure(var csc:conf_skychart) of object;
+    TScFunc = procedure(var csc:Tconf_skychart) of object;
     TObjCoord = class(Tobject)
                 jd,ra,dec : double;
                 end;
@@ -148,7 +148,6 @@ type
     Fnightvision: boolean;
     FGetChartConfig: TScFunc;
     Fupdchart: TScFunc;
-    c: Pconf_skychart;
     Feclipsepath: string;
     deltajd: double;
     dat11,dat12,dat13,dat21,dat22,dat23,dat31,dat32,dat33 : double ;
@@ -181,9 +180,9 @@ type
     { Public declarations }
     cdb: Tcdcdb;
     AzNorth: boolean;
+    config: Tconf_skychart;
     procedure SetLang;
     property planet: Tplanet read Fplanet write Fplanet;
-    property config: Pconf_skychart read c write c;
     property EclipsePath: string read Feclipsepath write Feclipsepath;
     property OnGetChartConfig: TScFunc read FGetChartConfig write FGetChartConfig;
     property OnUpdateChart: TScFunc read Fupdchart write Fupdchart;
@@ -207,7 +206,7 @@ SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
-new(c);
+config:=Tconf_skychart.Create;
 Fnightvision:=false;
 AzNorth:=true;
 ShowImage:=Tf_image.Create(self);
@@ -232,7 +231,7 @@ procedure Tf_calendar.FormDestroy(Sender: TObject);
 begin
 try
 ShowImage.Free;
-dispose(c);
+config.Free;
 except
 writetrace('error destroy '+name);
 end;
@@ -248,11 +247,11 @@ if Fnightvision<>nightvision then begin
 end;
 {$endif}
 if initial then begin
-  date1.JD:=trunc(c.CurJD)+0.5;
+  date1.JD:=trunc(config.CurJD)+0.5;
   date2.JD:=date1.JD+5;
   deltajd:=date2.JD-date1.JD;
-  time.Time:=c.CurTime/24;
-  CometFilter.Text:='C/'+inttostr(c.CurYear);
+  time.Time:=config.CurTime/24;
+  CometFilter.Text:='C/'+inttostr(config.CurYear);
   RefreshAll;
   initial:=false;
 end;
@@ -300,7 +299,7 @@ Date2.labels.today:=rsToday;
 tz:=rsTimeZone;
 east:=rsEast;
 west:=rsWest;
-EcliPanel.Hint:='http://sunearth.gsfc.nasa.gov/eclipse/eclipse.html';
+EcliPanel.Hint:='http://sunearth.gsfconfig.nasa.gov/eclipse/eclipse.html';
 mercure.caption:=pla[1];
 venus.caption:=pla[2];
 mars.caption:=pla[4];
@@ -839,11 +838,11 @@ begin
   RefreshPlanet;
   RefreshSolarEclipse;
   RefreshLunarEclipse;
-  if c.timezone=0 then d:=''
+  if config.timezone=0 then d:=''
    else
-    if c.timezone<0 then d:=west
+    if config.timezone<0 then d:=west
       else d:=east;
-  caption:=title+blank+c.Obsname+blank+tz+'='+timtostr(abs(c.timezone))+blank+d;
+  caption:=title+blank+config.Obsname+blank+tz+'='+timtostr(abs(config.timezone))+blank+d;
 end;
 
 procedure Tf_calendar.RefreshTwilight;
@@ -861,7 +860,7 @@ dat13:=time.time;
 dat14:=step.text;
 s:=strtoint(step.text);
 djd(date1.JD,a,m,d,hh);
-h:=12-c.timezone;
+h:=12-config.timezone;
 jd1:=jd(a,m,d,h);
 djd(date2.JD,a,m,d,hh);
 jd2:=jd(a,m,d,h);
@@ -880,32 +879,32 @@ with TwilightGrid do begin
   if (ars<0) then ars:=ars+pi2;
   objects[0,i]:=SetObjCoord(jda,-999,-999);
   // crepuscule nautique
-  Time_Alt(jd0,ars,des,-12,hp1,hp2,c);
+  Time_Alt(jd0,ars,des,-12,hp1,hp2,config);
   if hp1>-99 then begin
-     cells[2,i]:=armtostr(rmod(hp1+c.timezone+24,24));
+     cells[2,i]:=armtostr(rmod(hp1+config.timezone+24,24));
      objects[2,i]:=SetObjCoord(jda+(hp1-h)/24,-999,-999);
   end else  begin
      cells[2,i]:='-';
      objects[2,i]:=nil;
   end;
   if hp1>-99 then begin
-     cells[3,i]:=armtostr(rmod(hp2+c.timezone+24,24));
+     cells[3,i]:=armtostr(rmod(hp2+config.timezone+24,24));
      objects[3,i]:=SetObjCoord(jda+(hp2-h)/24,-999,-999);
   end else  begin
      cells[3,i]:='-';
      objects[3,i]:=nil;
   end;
   // crepuscule astro
-  Time_Alt(jd0,ars,des,-18,hp1,hp2,c);
+  Time_Alt(jd0,ars,des,-18,hp1,hp2,config);
   if hp1>-99 then begin
-     cells[1,i]:=armtostr(rmod(hp1+c.timezone+24,24));
+     cells[1,i]:=armtostr(rmod(hp1+config.timezone+24,24));
      objects[1,i]:=SetObjCoord(jda+(hp1-h)/24,-999,-999);
   end else begin
      cells[1,i]:='-';
      objects[1,i]:=nil;
   end;
   if hp1>-99 then begin
-     cells[4,i]:=armtostr(rmod(hp2+c.timezone+24,24));
+     cells[4,i]:=armtostr(rmod(hp2+config.timezone+24,24));
      objects[4,i]:=SetObjCoord(jda+(hp2-h)/24,-999,-999);
   end else begin
      cells[4,i]:='-';
@@ -938,9 +937,9 @@ with gr do begin
   case ipla of
   1..9: begin
     planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-    precession(jd2000,c.jdchart,ar,de);
-    if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-    if c.ApparentPos then apparent_equatorial(ar,de,c);
+    precession(jd2000,config.jdchart,ar,de);
+    if config.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,config);
+    if config.ApparentPos then apparent_equatorial(ar,de,config);
     if ipla=6 then begin  // ring magn. correction
        planet.SatRing(jda+jdt_ut,PSat,aSat,bSat,beSat);
        sbSat:=sin(deg2rad*abs(beSat));
@@ -949,29 +948,29 @@ with gr do begin
     end;
   10: begin
     Planet.Sun(jda+jdt_ut,ar,de,dist,diam);
-    precession(jd2000,c.jdchart,ar,de);
-    if c.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,c);
-    if c.ApparentPos then apparent_equatorial(ar,de,c);
+    precession(jd2000,config.jdchart,ar,de);
+    if config.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,config);
+    if config.ApparentPos then apparent_equatorial(ar,de,config);
     illum:=1;
     magn:=-26.7;
     end;
   11: begin
     planet.Moon(jda+jdt_ut,ar,de,dist,dkm,diam,phase,illum);
-    precession(jd2000,c.jdchart,ar,de);
-    if c.PlanetParalaxe then begin
-       Paralaxe(st0,dist,ar,de,ar,de,q,c);
+    precession(jd2000,config.jdchart,ar,de);
+    if config.PlanetParalaxe then begin
+       Paralaxe(st0,dist,ar,de,ar,de,q,config);
        diam:=diam/q;
     end;
-    if c.ApparentPos then apparent_equatorial(ar,de,c);
+    if config.ApparentPos then apparent_equatorial(ar,de,config);
     magn:=planet.MoonMag(phase);
     end;
   end;
   ar:=rmod(ar+pi2,pi2);
   objects[0,i]:=SetObjCoord(jda,ar,de);
-  Eq2Hz((st0-ar),de,az,ha,c);
+  Eq2Hz((st0-ar),de,az,ha,config);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
-  cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
+  cells[1,0]:=trim(config.EquinoxName)+blank+appmsg[46];
   cells[0,1]:=trim(armtostr(h))+' UT';
   cells[0,i]:=isodate(a,m,d);
   cells[1,i]:=artostr(rad2deg*ar/15);
@@ -981,7 +980,7 @@ with gr do begin
   cells[5,i]:=floattostrf(illum,ffFixed,6,2);
   cells[9,i]:=demtostr(rad2deg*az);
   cells[10,i]:=demtostr(rad2deg*ha);
-  Planet.PlanetRiseSet(ipla,jd0,AzNorth,mr,mt,ms,azr,azs,jdr,jdt,jds,rar,der,rat,det,ras,des,irc,c);
+  Planet.PlanetRiseSet(ipla,jd0,AzNorth,mr,mt,ms,azr,azs,jdr,jdt,jds,rar,der,rat,det,ras,des,irc,config);
   case irc of
        0 : begin
            cells[6,i]:=mr; cells[7,i]:=mt; cells[8,i]:=ms;
@@ -1029,7 +1028,7 @@ dat23:=time.time;
 dat24:=step.text;
 s:=strtoint(step.text);
 djd(date1.JD,a,m,d,hh);
-h:=frac(Time.time)*24-c.TimeZone;
+h:=frac(Time.time)*24-config.TimeZone;
 jd1:=jd(a,m,d,h);
 djd(date2.JD,a,m,d,hh);
 jd2:=jd(a,m,d,h);
@@ -1061,8 +1060,8 @@ FreeCoord(PlutonGrid);
 repeat
 djd(jda,a,m,d,h);
 jd0:=jd(a,m,d,0);
-jdt_ut:=DTminusUT(a,c)/24;
-st0:=SidTim(jd0,h,c.ObsLongitude);
+jdt_ut:=DTminusUT(a,config)/24;
+st0:=SidTim(jd0,h,config.ObsLongitude);
 for ipla:=1 to 11 do begin
  if ipla=3 then continue;
 case ipla of
@@ -1100,11 +1099,11 @@ procedure Tf_calendar.BtnRefreshClick(Sender: TObject);
 var d: string;
 begin
 chdir(appdir);
-if c.timezone=0 then d:=''
+if config.timezone=0 then d:=''
   else
-   if c.timezone<0 then d:=west
+   if config.timezone<0 then d:=west
      else d:=east;
-caption:=title+blank+c.Obsname+blank+tz+'='+timtostr(abs(c.timezone))+blank+d;
+caption:=title+blank+config.Obsname+blank+tz+'='+timtostr(abs(config.timezone))+blank+d;
 case pagecontrol1.ActivePage.TabIndex of
      0 : RefreshTwilight;
      1 : RefreshPlanet;
@@ -1130,13 +1129,14 @@ procedure Tf_calendar.GridMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
   aColumn, aRow: Longint;
-  csc: conf_skychart;
+  csconfig: Tconf_skychart;
   p : TObjCoord;
   pathimage: string;
   a,d: double;
 begin
 if lockclick then exit;
 lockclick:=true;
+csconfig:=Tconf_skychart.Create;
 try
 with Tstringgrid(sender) do begin
 MouseToCell(X, Y, aColumn, aRow);
@@ -1144,18 +1144,18 @@ if (aRow>=0)and(aColumn>=0) then begin
   p:=TObjCoord(Objects[aColumn,aRow]);
   if p=nil then p:=TObjCoord(Objects[0,aRow]);
   if p<>nil then begin
-    if assigned(FGetChartConfig) then FGetChartConfig(csc)
-                                 else csc:=c^;
-    csc.UseSystemTime:=false;
-    csc.ObsTZ:=csc.Timezone;
-    if csc.DST then csc.ObsTZ:=csc.ObsTZ-1 ;
-    djd(p.jd+c.timezone/24,csc.CurYear,csc.CurMonth,csc.CurDay,csc.CurTime);
+    if assigned(FGetChartConfig) then FGetChartConfig(csconfig)
+                                 else csconfig.Assign(config);
+    csconfig.UseSystemTime:=false;
+    csconfig.ObsTZ:=csconfig.Timezone;
+    if csconfig.DST then csconfig.ObsTZ:=csconfig.ObsTZ-1 ;
+    djd(p.jd+config.timezone/24,csconfig.CurYear,csconfig.CurMonth,csconfig.CurDay,csconfig.CurTime);
     if Sender = solargrid then  begin      // Solar eclipse
        if (aColumn=1) then begin   // image map
          pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,aRow],blank,'',[rfReplaceAll])+copy(cells[3,aRow],1,1)+'.png';
          if fileexists(pathimage) then begin
             ShowImage.labeltext:=eclipanel.caption;
-            ShowImage.titre:=solar.Caption+blank+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
+            ShowImage.titre:=solar.Caption+blank+inttostr(csconfig.CurMonth)+'/'+inttostr(csconfig.CurYear);
             ShowImage.LoadImage(pathimage);
             ShowImage.ClientHeight:=min(screen.Height-80,ShowImage.imageheight+ShowImage.Panel1.Height+ShowImage.HScrollBar.Height);
             ShowImage.ClientWidth:=min(screen.Width-50,ShowImage.imagewidth+ShowImage.VScrollBar.Width);
@@ -1165,47 +1165,49 @@ if (aRow>=0)and(aColumn>=0) then begin
          end;
          exit;
        end;
-       csc.TrackOn:=true;     // set tracking to the Sun
-       csc.TrackType:=1;
-       csc.TrackObj:=10;
-       csc.PlanetParalaxe:=true;
-       csc.ShowPlanet:=true;
+       csconfig.TrackOn:=true;     // set tracking to the Sun
+       csconfig.TrackType:=1;
+       csconfig.TrackObj:=10;
+       csconfig.PlanetParalaxe:=true;
+       csconfig.ShowPlanet:=true;
        if (aColumn=7)or(aColumn=8) then begin         // change location to eclipse maxima
          d:=strtofloat(copy(cells[7,aRow],1,4));
          if copy(cells[7,aRow],5,1)='S' then d:=-d;
          a:=strtofloat(copy(cells[8,aRow],1,5));
          if copy(cells[8,aRow],6,1)='E' then a:=-a;
-         csc.ObsLatitude:=d;
-         csc.ObsLongitude:=a;
-         csc.ObsName:='Max. Solar Eclipse '+inttostr(csc.CurMonth)+'/'+inttostr(csc.CurYear);
+         csconfig.ObsLatitude:=d;
+         csconfig.ObsLongitude:=a;
+         csconfig.ObsName:='Max. Solar Eclipse '+inttostr(csconfig.CurMonth)+'/'+inttostr(csconfig.CurYear);
        end;
        BtnReset.visible:=true;
-       if assigned(Fupdchart) then Fupdchart(csc);
+       if assigned(Fupdchart) then Fupdchart(csconfig);
     end else if sender = lunargrid then begin
-       csc.TrackOn:=true;         // Lunar eclipse
-       csc.TrackType:=1;          // set tracking to the Moon
-       csc.TrackObj:=11;
-       csc.PlanetParalaxe:=true;
-       csc.ShowPlanet:=true;
-       csc.ShowEarthShadow:=true;
+       csconfig.TrackOn:=true;         // Lunar eclipse
+       csconfig.TrackType:=1;          // set tracking to the Moon
+       csconfig.TrackObj:=11;
+       csconfig.PlanetParalaxe:=true;
+       csconfig.ShowPlanet:=true;
+       csconfig.ShowEarthShadow:=true;
        BtnReset.visible:=true;
-       if assigned(Fupdchart) then Fupdchart(csc);
+       if assigned(Fupdchart) then Fupdchart(csconfig);
     end else if sender = Satgrid then begin    // Satellites
            // .....
     end else begin  // other grid
-       if p.ra>-900 then csc.racentre:=p.ra;
-       if p.dec>-900 then csc.decentre:=p.dec
+       if p.ra>-900 then csconfig.racentre:=p.ra;
+       if p.dec>-900 then csconfig.decentre:=p.dec
        else begin
-         csc.TrackOn:=true;
-         csc.TrackType:=4;
+         csconfig.TrackOn:=true;
+         csconfig.TrackType:=4;
        end;
        BtnReset.visible:=true;
-       if assigned(Fupdchart) then Fupdchart(csc);
+       if assigned(Fupdchart) then Fupdchart(csconfig);
     end;
   end; // p<>nil
 end; // row>=0..
 end; // with ..
+csconfig.free;
 except
+csconfig.free;
 end;
 end;
 
@@ -1280,12 +1282,12 @@ var buf,d : string;
     lst:TStringList;
 begin
 lst:=TStringList.Create;
-buf:='"'+c.ObsName+'";"';
-x:=abs(c.ObsLongitude);
-if c.ObsLongitude>0 then d:=west else d:=east;
-buf:=buf+appmsg[32]+'='+stringreplace(copy(detostr(x),2,99),'"','""',[rfReplaceAll])+d+'";"'+appmsg[31]+'='+stringreplace(detostr(c.ObsLatitude),'"','""',[rfReplaceAll])+'";"';
-x:=abs(c.TimeZone);
-if c.TimeZone<0 then d:=west else d:=east;
+buf:='"'+config.ObsName+'";"';
+x:=abs(config.ObsLongitude);
+if config.ObsLongitude>0 then d:=west else d:=east;
+buf:=buf+appmsg[32]+'='+stringreplace(copy(detostr(x),2,99),'"','""',[rfReplaceAll])+d+'";"'+appmsg[31]+'='+stringreplace(detostr(config.ObsLatitude),'"','""',[rfReplaceAll])+'";"';
+x:=abs(config.TimeZone);
+if config.TimeZone<0 then d:=west else d:=east;
 buf:=buf+tz+'='+timtostr(x)+d+'"';
 lst.Add(buf);
 for i:=0 to grid.RowCount-1 do begin
@@ -1336,12 +1338,12 @@ procedure Tf_calendar.Gridtoprinter(grid : tstringgrid);
 var buf,d : string;
     x : double;
 begin
-buf:=c.ObsName;
-x:=abs(c.ObsLongitude);
-if c.ObsLongitude>0 then d:=west else d:=east;
-buf:=buf+blank+appmsg[32]+'='+copy(detostr(x),2,99)+d+blank+appmsg[31]+'='+detostr(c.ObsLatitude);
-x:=abs(c.TimeZone);
-if c.TimeZone<0 then d:=west else d:=east;
+buf:=config.ObsName;
+x:=abs(config.ObsLongitude);
+if config.ObsLongitude>0 then d:=west else d:=east;
+buf:=buf+blank+appmsg[32]+'='+copy(detostr(x),2,99)+d+blank+appmsg[31]+'='+detostr(config.ObsLatitude);
+x:=abs(config.TimeZone);
+if config.TimeZone<0 then d:=west else d:=east;
 buf:=buf+blank+tz+'='+timtostr(x)+d;
 if grid=cometgrid then
   PrtGrid(Grid,'CdC',buf,'',poLandscape)
@@ -1381,7 +1383,7 @@ end;
 
 procedure Tf_calendar.BtnResetClick(Sender: TObject);
 begin
-if assigned(Fupdchart) then Fupdchart(c^);
+if assigned(Fupdchart) then Fupdchart(config);
 BtnReset.visible:=false;
 end;
 
@@ -1427,7 +1429,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    dat34:=step.text;
    s:=strtoint(step.text);
    djd(date1.JD,a,m,d,hhh);
-   h:=frac(Time.time)*24-c.TimeZone;
+   h:=frac(Time.time)*24-config.TimeZone;
    jd1:=jd(a,m,d,h);
    djd(date2.JD,a,m,d,hhh);
    jd2:=jd(a,m,d,h);
@@ -1437,16 +1439,16 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    jda:=jd1;
    i:=2;
    Cometgrid.cells[0,0]:=trim(nam);
-   Cometgrid.cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
+   Cometgrid.cells[1,0]:=trim(config.EquinoxName)+blank+appmsg[46];
    Cometgrid.cells[0,1]:=trim(armtostr(h))+' UT';
    repeat
       djd(jda,a,m,d,h);
       jd0:=jd(a,m,d,0);
-      st0:=SidTim(jd0,h,c.ObsLongitude);
+      st0:=SidTim(jd0,h,config.ObsLongitude);
       Fplanet.Comet(jda,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-      precession(jd2000,c.jdchart,ra,dec);
-      if c.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,c);
-      if c.ApparentPos then apparent_equatorial(ra,dec,c);
+      precession(jd2000,config.jdchart,ra,dec);
+      if config.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,config);
+      if config.ApparentPos then apparent_equatorial(ra,dec,config);
       ra:=rmod(ra+pi2,pi2);
       with Cometgrid do begin
          RowCount:=i+1;
@@ -1457,29 +1459,29 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          cells[4,i]:=demtostr(rad2deg*elong);
          cells[5,i]:=demtostr(rad2deg*phase);
          objects[0,i]:=SetObjCoord(jda,ra,dec);
-         RiseSet(1,jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,c);
-         Fplanet.Comet(jd0+rmod((hr1-c.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-         precession(jd2000,c.jdchart,ra1,dec1);
-         RiseSet(1,jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,c);
-         Fplanet.Comet(jd0+rmod((ht1-c.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-         precession(jd2000,c.jdchart,ra2,dec2);
-         RiseSet(1,jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,c);
-         Fplanet.Comet(jd0+rmod((hs1-c.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-         precession(jd2000,c.jdchart,ra3,dec3);
-         RiseSet(1,jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,c);
+         RiseSet(1,jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,config);
+         Fplanet.Comet(jd0+rmod((hr1-config.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+         precession(jd2000,config.jdchart,ra1,dec1);
+         RiseSet(1,jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,config);
+         Fplanet.Comet(jd0+rmod((ht1-config.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+         precession(jd2000,config.jdchart,ra2,dec2);
+         RiseSet(1,jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,config);
+         Fplanet.Comet(jd0+rmod((hs1-config.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+         precession(jd2000,config.jdchart,ra3,dec3);
+         RiseSet(1,jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,config);
          case irc of
           0 : begin
            cells[6,i]:=armtostr(hr);
            cells[7,i]:=armtostr(ht);
            cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.TimeZone-h)/24,ra1,dec1);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.TimeZone-h)/24,ra2,dec2);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.TimeZone-h)/24,ra3,dec3);
+           objects[6,i]:=SetObjCoord(jda+(hr-config.TimeZone-h)/24,ra1,dec1);
+           objects[7,i]:=SetObjCoord(jda+(ht-config.TimeZone-h)/24,ra2,dec2);
+           objects[8,i]:=SetObjCoord(jda+(hs-config.TimeZone-h)/24,ra3,dec3);
            end;
           1 : begin
            cells[6,i]:='-';
            cells[7,i]:=armtostr(ht);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.TimeZone-h)/24,ra2,dec2);
+           objects[7,i]:=SetObjCoord(jda+(ht-config.TimeZone-h)/24,ra2,dec2);
            cells[8,i]:='-';
            objects[6,i]:=nil;
            objects[8,i]:=nil;
@@ -1494,15 +1496,15 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
            end;
          end;
          Fplanet.Sun(jda,ars,des,ds,dds);
-         precession(jd2000,c.jdchart,ars,des);
+         precession(jd2000,config.jdchart,ars,des);
          // crepuscule nautique
-         Time_Alt(jd0,ars,des,-12,hp1,hp2,c);
+         Time_Alt(jd0,ars,des,-12,hp1,hp2,config);
          if hp1>-99 then begin
             jdt:=jd(a,m,d,hp1);
             Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-            precession(jd2000,c.jdchart,ra,dec);
-            st := Sidtim(jd0,hp1,c.ObsLongitude);
-            Eq2Hz((st-ra),dec,az,ha,c);
+            precession(jd2000,config.jdchart,ra,dec);
+            st := Sidtim(jd0,hp1,config.ObsLongitude);
+            Eq2Hz((st-ra),dec,az,ha,config);
             az:=rmod(az+pi,pi2);
             if ha>0 then cells[10,i]:=dedtostr(rad2deg*ha)+'  '+StringReplace(dedtostr(rad2deg*az),'+','Az',[])
                     else cells[10,i]:=dedtostr(rad2deg*ha);
@@ -1514,9 +1516,9 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          if hp2>-99 then begin
             jdt:=jd(a,m,d,hp2);
             Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-            precession(jd2000,c.jdchart,ra,dec);
-            st := Sidtim(jd0,hp2,c.ObsLongitude);
-            Eq2Hz((st-ra),dec,az,ha,c);
+            precession(jd2000,config.jdchart,ra,dec);
+            st := Sidtim(jd0,hp2,config.ObsLongitude);
+            Eq2Hz((st-ra),dec,az,ha,config);
             az:=rmod(az+pi,pi2);
             if ha>0 then cells[11,i]:=dedtostr(rad2deg*ha)+'  '+StringReplace(dedtostr(rad2deg*az),'+','Az',[])
                     else cells[11,i]:=dedtostr(rad2deg*ha);
@@ -1526,13 +1528,13 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
             objects[11,i]:=nil;
          end;
          // crepuscule astro
-         Time_Alt(jd0,ars,des,-18,hp1,hp2,c);
+         Time_Alt(jd0,ars,des,-18,hp1,hp2,config);
          if hp1>-99 then begin
             jdt:=jd(a,m,d,hp1);
             Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-            precession(jd2000,c.jdchart,ra,dec);
-            st := Sidtim(jd0,hp1,c.ObsLongitude);
-            Eq2Hz((st-ra),dec,az,ha,c);
+            precession(jd2000,config.jdchart,ra,dec);
+            st := Sidtim(jd0,hp1,config.ObsLongitude);
+            Eq2Hz((st-ra),dec,az,ha,config);
             az:=rmod(az+pi,pi2);
             if ha>0 then cells[9,i]:=dedtostr(rad2deg*ha)+'  '+StringReplace(dedtostr(rad2deg*az),'+','Az',[])
                     else cells[9,i]:=dedtostr(rad2deg*ha);
@@ -1544,9 +1546,9 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          if hp2>-99 then begin
             jdt:=jd(a,m,d,hp2);
             Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-            precession(jd2000,c.jdchart,ra,dec);
-            st := Sidtim(jd0,hp2,c.ObsLongitude);
-            Eq2Hz((st-ra),dec,az,ha,c);
+            precession(jd2000,config.jdchart,ra,dec);
+            st := Sidtim(jd0,hp2,config.ObsLongitude);
+            Eq2Hz((st-ra),dec,az,ha,config);
             az:=rmod(az+pi,pi2);
             if ha>0 then cells[12,i]:=dedtostr(rad2deg*ha)+'  '+StringReplace(dedtostr(rad2deg*az),'+','Az',[])
                     else cells[12,i]:=dedtostr(rad2deg*ha);
@@ -1608,7 +1610,7 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    dat74:=step.text;
    s:=strtoint(step.text);
    djd(date1.JD,a,m,d,hhh);
-   h:=frac(Time.time)*24-c.TimeZone;
+   h:=frac(Time.time)*24-config.TimeZone;
    jd1:=jd(a,m,d,h);
    djd(date2.JD,a,m,d,hhh);
    jd2:=jd(a,m,d,h);
@@ -1618,16 +1620,16 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    jda:=jd1;
    i:=2;
    Asteroidgrid.cells[0,0]:=trim(nam);
-   Asteroidgrid.cells[1,0]:=trim(c.EquinoxName)+blank+appmsg[46];
+   Asteroidgrid.cells[1,0]:=trim(config.EquinoxName)+blank+appmsg[46];
    Asteroidgrid.cells[0,1]:=trim(armtostr(h))+' UT';
    repeat
       djd(jda,a,m,d,h);
       jd0:=jd(a,m,d,0);
-      st0:=SidTim(jd0,h,c.ObsLongitude);
+      st0:=SidTim(jd0,h,config.ObsLongitude);
       Fplanet.Asteroid(jda,true,ra,dec,dist,r,elong,phase,magn);
-      precession(jd2000,c.jdchart,ra,dec);
-      if c.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,c);
-      if c.ApparentPos then apparent_equatorial(ra,dec,c);
+      precession(jd2000,config.jdchart,ra,dec);
+      if config.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,config);
+      if config.ApparentPos then apparent_equatorial(ra,dec,config);
       ra:=rmod(ra+pi2,pi2);
       with Asteroidgrid do begin
          RowCount:=i+1;
@@ -1638,29 +1640,29 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
          cells[4,i]:=demtostr(rad2deg*elong);
          cells[5,i]:=demtostr(rad2deg*phase);
          objects[0,i]:=SetObjCoord(jda,ra,dec);
-         RiseSet(1,jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,c);
-         Fplanet.Asteroid(jd0+rmod((hr1-c.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn);
-         precession(jd2000,c.jdchart,ra1,dec1);
-         RiseSet(1,jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,c);
-         Fplanet.Asteroid(jd0+rmod((ht1-c.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn);
-         precession(jd2000,c.jdchart,ra2,dec2);
-         RiseSet(1,jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,c);
-         Fplanet.Asteroid(jd0+rmod((hs1-c.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn);
-         precession(jd2000,c.jdchart,ra3,dec3);
-         RiseSet(1,jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,c);
+         RiseSet(1,jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,config);
+         Fplanet.Asteroid(jd0+rmod((hr1-config.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn);
+         precession(jd2000,config.jdchart,ra1,dec1);
+         RiseSet(1,jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,config);
+         Fplanet.Asteroid(jd0+rmod((ht1-config.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn);
+         precession(jd2000,config.jdchart,ra2,dec2);
+         RiseSet(1,jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,config);
+         Fplanet.Asteroid(jd0+rmod((hs1-config.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn);
+         precession(jd2000,config.jdchart,ra3,dec3);
+         RiseSet(1,jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,config);
          case irc of
           0 : begin
            cells[6,i]:=armtostr(hr);
            cells[7,i]:=armtostr(ht);
            cells[8,i]:=armtostr(hs);
-           objects[6,i]:=SetObjCoord(jda+(hr-c.TimeZone-h)/24,ra1,dec1);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.TimeZone-h)/24,ra2,dec2);
-           objects[8,i]:=SetObjCoord(jda+(hs-c.TimeZone-h)/24,ra3,dec3);
+           objects[6,i]:=SetObjCoord(jda+(hr-config.TimeZone-h)/24,ra1,dec1);
+           objects[7,i]:=SetObjCoord(jda+(ht-config.TimeZone-h)/24,ra2,dec2);
+           objects[8,i]:=SetObjCoord(jda+(hs-config.TimeZone-h)/24,ra3,dec3);
            end;
           1 : begin
            cells[6,i]:='-';
            cells[7,i]:=armtostr(ht);
-           objects[7,i]:=SetObjCoord(jda+(ht-c.TimeZone-h)/24,ra2,dec2);
+           objects[7,i]:=SetObjCoord(jda+(ht-config.TimeZone-h)/24,ra2,dec2);
            cells[8,i]:='-';
            objects[6,i]:=nil;
            objects[8,i]:=nil;

@@ -335,7 +335,11 @@ type
                     Actif,CatOn : boolean;
                     shortname, name, path, version : string;  //shortname, name, path, version : shortstring;
                  end;
-     conf_catalog = record
+     Tconf_catalog = class(TObject)    // catalog setting
+                public
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_catalog);
                 GCatLst : array of TGCatLst;
                 GCatNum  : Integer;
                 StarmagMax,NebMagMax,NebSizeMin : double;            // limit to extract from catalog
@@ -358,7 +362,11 @@ type
                 LinCatOn : array [1..MaxLinCatalog] of boolean;    // is the catalog used for current chart
                 UseUSNOBrightStars, UseGSVSIr : Boolean;  // filter specific catalog entry
                 end;
-     conf_shared = record
+     Tconf_shared = class(TObject)    // common setting
+                public
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_shared);
                 FieldNum : array [0..MaxField] of double;  // Field of vision limit
                 StarFilter,NebFilter : boolean;   // filter by magnitude
                 BigNebFilter : boolean;           // filter big nebulae
@@ -383,8 +391,11 @@ type
                 StarName: array of string;
                 StarNameHR: array of integer;
                 end;
-     conf_skychart = record
-                // chart setting
+     Tconf_skychart = class(TObject)    // chart setting
+                public
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_skychart);
                 racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP,moved,DST : Boolean;
                 projtype : char;
@@ -438,7 +449,11 @@ type
                 rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
                 CircleLst : array[0..MaxCircle,1..2] of double;
                 end;
-     conf_plot = record
+     Tconf_plot = class(TObject)    // plot setting
+                public
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_plot);
                 color : Starcolarray;
                 skycolor : TSkycolor;
                 backgroundcolor,bgcolor : Tcolor;
@@ -472,12 +487,20 @@ type
 //  End of deep-sky objects colour
 
                 end;
-     conf_chart = record
+     Tconf_chart = class(TObject)    // chart window setting
+                public
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_chart);
                 onprinter : boolean;
                 width,height,drawpen,drawsize,fontscale,hw,hh : integer;
                 min_ma, max_catalog_mag : double;
                 end;
-     conf_main = record
+     Tconf_main = class(TObject)    // main form setting
+                public
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_main);
                 prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
                 PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
@@ -492,7 +515,11 @@ type
                 FtpPassive, HttpProxy : Boolean;
                 CometUrlList, AsteroidUrlList : TStringList;
                 end;
-     conf_dss  = record
+     Tconf_dss  = class(TObject)    // DSS image setting
+                public
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_dss);
                 dssdir,dssdrive,dssfile : string;
                 dss102,dssnorth,dsssouth,dsssampling,dssplateprompt : boolean;
                 dssmaxsize : integer;
@@ -501,13 +528,6 @@ type
                 DSSurl: array[1..MaxDSSurl,0..1] of String;
                 end;
                 
-     Pconf_catalog = ^conf_catalog;
-     Pconf_shared = ^conf_shared;
-     Pconf_skychart = ^conf_skychart;
-     Pconf_plot = ^conf_plot;
-     Pconf_chart = ^conf_chart;
-     Pconf_main = ^conf_main;
-     Pconf_dss = ^conf_dss;
 
 type
   TPrepareAsteroid = function (jdt:double; msg:Tstrings):boolean of object;
@@ -878,6 +898,629 @@ sqlindex : array[mysql..sqlite,1..numsqlindex,1..2] of string =(
            ));
 
 implementation
+
+{ Tconf_catalog }
+
+constructor Tconf_catalog.Create;
+begin
+  Inherited Create;
+end;
+
+destructor Tconf_catalog.Destroy;
+begin
+  SetLength(GCatLst,0);
+  Inherited Destroy;
+end;
+
+procedure Tconf_catalog.Assign(Source: Tconf_catalog);
+var i,j : integer;
+begin
+GCatNum:=Source.GCatNum;
+SetLength(GCatLst,GCatNum);
+for i:=0 to GCatNum-1 do GCatLst[i]:=Source.GCatLst[i];
+StarmagMax:=Source.StarmagMax;
+NebMagMax:=Source.NebMagMax;
+NebSizeMin:=Source.NebSizeMin;
+for i:=1 to MaxStarCatalog do begin
+  StarCatPath[i]:=Source.StarCatPath[i];
+  StarCatDef[i]:=Source.StarCatDef[i];
+  StarCatOn[i]:=Source.StarCatOn[i];
+  for j:=1 to 2 do StarCatField[i,j]:=Source.StarCatField[i,j];
+end;
+for i:=1 to MaxVarStarCatalog do begin
+  VarStarCatPath[i]:=Source.VarStarCatPath[i];
+  VarStarCatDef[i]:=Source.VarStarCatDef[i];
+  VarStarCatOn[i]:=Source.VarStarCatOn[i];
+  for j:=1 to 2 do VarStarCatField[i,j]:=Source.VarStarCatField[i,j];
+end;
+for i:=1 to MaxDblStarCatalog do begin
+  DblStarCatPath[i]:=Source.DblStarCatPath[i];
+  DblStarCatDef[i]:=Source.DblStarCatDef[i];
+  DblStarCatOn[i]:=Source.DblStarCatOn[i];
+  for j:=1 to 2 do DblStarCatField[i,j]:=Source.DblStarCatField[i,j];
+end;
+for i:=1 to MaxNebCatalog do begin
+  NebCatPath[i]:=Source.NebCatPath[i];
+  NebCatDef[i]:=Source.NebCatDef[i];
+  NebCatOn[i]:=Source.NebCatOn[i];
+  for j:=1 to 2 do NebCatField[i,j]:=Source.NebCatField[i,j];
+end;
+for i:=1 to MaxLinCatalog do LinCatOn[i]:=Source.LinCatOn[i];
+UseUSNOBrightStars:=Source.UseUSNOBrightStars;
+UseGSVSIr:=Source.UseGSVSIr;
+end;
+
+{ Tconf_shared }
+
+constructor Tconf_shared.Create;
+begin
+  Inherited Create;
+end;
+
+destructor Tconf_shared.Destroy;
+begin
+  Setlength(ConstelName,0);
+  Setlength(ConstelPos,0);
+  Setlength(ConstB,0);
+  Setlength(ConstL,0);
+  Setlength(StarName,0);
+  Setlength(StarNameHR,0);
+  Inherited Destroy;
+end;
+
+procedure Tconf_shared.Assign(Source: Tconf_shared);
+var i,j : integer;
+begin
+for i:=0 to MaxField do FieldNum[i]:=Source.FieldNum[i];
+StarFilter:=Source.StarFilter;
+NebFilter:=Source.NebFilter;
+BigNebFilter:=Source.BigNebFilter;
+BigNebLimit:=Source.BigNebLimit;
+AutoStarFilter:=Source.AutoStarFilter;
+AutoStarFilterMag:=Source.AutoStarFilterMag;
+for i:=0 to MaxField do StarMagFilter[i]:=Source.StarMagFilter[i];
+for i:=0 to MaxField do NebMagFilter[i]:=Source.NebMagFilter[i];
+for i:=0 to MaxField do NebSizeFilter[i]:=Source.NebSizeFilter[i];
+for i:=0 to MaxField do HourGridSpacing[i]:=Source.HourGridSpacing[i];
+for i:=0 to MaxField do DegreeGridSpacing[i]:=Source.DegreeGridSpacing[i];
+EquinoxType:=Source.EquinoxType;
+DefaultJDchart:=Source.DefaultJDchart;
+EquinoxChart:=Source.EquinoxChart;
+AzNorth:=Source.AzNorth;
+ListNeb:=Source.ListNeb;
+ListStar:=Source.ListStar;
+ListVar:=Source.ListVar;
+ListDbl:=Source.ListDbl;
+ListPla:=Source.ListPla;
+ConstelNum:=Source.ConstelNum;
+Setlength(ConstelName,ConstelNum);
+Setlength(ConstelPos,ConstelNum);
+for i:=0 to ConstelNum-1 do begin
+  for j:=1 to 2 do ConstelName[i,j]:=Source.ConstelName[i,j];
+  ConstelPos[i].ra:=Source.ConstelPos[i].ra;
+  ConstelPos[i].de:=Source.ConstelPos[i].de;
+end;
+ConstBnum:=Source.ConstBnum;
+Setlength(ConstB,ConstBnum);
+for i:=0 to ConstBnum-1 do begin
+  ConstB[i].ra:=Source.ConstB[i].ra;
+  ConstB[i].de:=Source.ConstB[i].de;
+  ConstB[i].newconst:=Source.ConstB[i].newconst;
+end;
+ConstLnum:=Source.ConstLnum;
+Setlength(ConstL,ConstLnum);
+for i:=0 to ConstLnum-1 do begin
+  ConstL[i].ra1:=Source.ConstL[i].ra1;
+  ConstL[i].de1:=Source.ConstL[i].de1;
+  ConstL[i].ra2:=Source.ConstL[i].ra2;
+  ConstL[i].de2:=Source.ConstL[i].de2;
+end;
+StarNameNum:=Source.StarNameNum;
+Setlength(StarName,StarNameNum);
+Setlength(StarNameHR,StarNameNum);
+for i:=0 to StarNameNum-1 do begin
+  StarName[i]:=Source.StarName[i];
+  StarNameHR[i]:=Source.StarNameHR[i];
+end;
+for i:=0 to 360 do horizonlist[i]:=Source.horizonlist[i];
+end;
+
+{ Tconf_skychart }
+
+constructor Tconf_skychart.Create;
+begin
+  Inherited Create;
+end;
+
+destructor Tconf_skychart.Destroy;
+begin
+  SetLength(AsteroidLst,0);
+  SetLength(CometLst,0);
+  SetLength(AsteroidName,0);
+  SetLength(CometName,0);
+  Inherited Destroy;
+end;
+
+procedure Tconf_skychart.Assign(Source: Tconf_skychart);
+var i,j,k : integer;
+begin
+racentre:=Source.racentre ;
+decentre:=Source.decentre ;
+fov:=Source.fov ;
+theta:=Source.theta ;
+acentre:=Source.acentre ;
+hcentre:=Source.hcentre ;
+lcentre:=Source.lcentre ;
+bcentre:=Source.bcentre ;
+lecentre:=Source.lecentre ;
+becentre:=Source.becentre ;
+e:=Source.e ;
+nutl:=Source.nutl ;
+nuto:=Source.nuto ;
+sunl:=Source.sunl ;
+sunb:=Source.sunb ;
+abe:=Source.abe ;
+abp:=Source.abp ;
+raprev:=Source.raprev ;
+deprev:=Source.deprev ;
+Force_DT_UT:=Source.Force_DT_UT ;
+horizonopaque:=Source.horizonopaque ;
+autorefresh:=Source.autorefresh ;
+TrackOn:=Source.TrackOn ;
+Quick:=Source.Quick ;
+NP:=Source.NP ;
+SP:=Source.SP ;
+moved:=Source.moved ;
+DST:=Source.DST ;
+projtype:=Source.projtype ;
+FlipX:=Source.FlipX ;
+FlipY:=Source. FlipY;
+ProjPole:=Source.ProjPole ;
+TrackType:=Source.TrackType ;
+TrackObj:=Source.TrackObj ;
+AstSymbol:=Source.AstSymbol ;
+ComSymbol:=Source.ComSymbol ;
+SimNb:=Source.SimNb ;
+SimD:=Source.SimD ;
+SimH:=Source.SimH ;
+SimM:=Source.SimM ;
+SimS:=Source.SimS ;
+SimLabel:=Source.SimLabel ;
+SimLine:=Source.SimLine ;
+SimDateLabel:=Source.SimDateLabel ;
+SimNameLabel:=Source.SimNameLabel ;
+SimMagLabel:=Source.SimMagLabel ;
+ShowPlanet:=Source.ShowPlanet ;
+PlanetParalaxe:=Source.PlanetParalaxe ;
+ShowEarthShadow:=Source.ShowEarthShadow ;
+ShowAsteroid:=Source.ShowAsteroid ;
+ShowComet:=Source.ShowComet ;
+ObsLatitude:=Source.ObsLatitude;
+ObsLongitude:=Source.ObsLongitude ;
+ObsAltitude:=Source.ObsAltitude ;
+ObsTZ:=Source.ObsTZ ;
+ObsTemperature:=Source.ObsTemperature ;
+ObsPressure:=Source.ObsPressure ;
+ObsRefractionCor:=Source.ObsRefractionCor ;
+ObsHorizonDepression:=Source.ObsHorizonDepression ;
+ObsName:=Source.ObsName ;
+ObsCountry:=Source.ObsCountry ;
+chartname:=Source.chartname ;
+ast_day:=Source.ast_day ;
+ast_daypos:=Source.ast_daypos ;
+com_day:=Source.com_day ;
+com_daypos:=Source.com_daypos ;
+CurYear:=Source.CurYear ;
+CurMonth:=Source.CurMonth ;
+CurDay:=Source.CurDay ;
+DrawPMyear:=Source.DrawPMyear ;
+ShowPluto:=Source.ShowPluto ;
+ShowConstl:=Source.ShowConstl ;
+ShowConstB:=Source.ShowConstB ;
+ShowEqGrid:=Source.ShowEqGrid ;
+ShowGrid:=Source.ShowGrid ;
+ShowGridNum:=Source.ShowGridNum ;
+UseSystemTime:=Source.UseSystemTime ;
+StyleGrid:=Source.StyleGrid ;
+StyleEqGrid:=Source.StyleEqGrid ;
+StyleConstL:=Source.StyleConstL ;
+StyleConstB:=Source.StyleConstB ;
+StyleEcliptic:=Source.StyleEcliptic ;
+StyleGalEq:=Source.StyleGalEq ;
+ShowEcliptic:=Source.ShowEcliptic ;
+ShowGalactic:=Source.ShowGalactic ;
+ShowMilkyWay:=Source.ShowMilkyWay;
+FillMilkyWay:=Source.FillMilkyWay ;
+ShowHorizon:=Source.ShowHorizon ;
+FillHorizon:=Source.FillHorizon ;
+ShowHorizonDepression:=Source.ShowHorizonDepression ;
+CurTime:=Source.CurTime ;
+DT_UT_val:=Source.DT_UT_val ;
+GRSlongitude:=Source.GRSlongitude ;
+TelescopeTurnsX:=Source.TelescopeTurnsX ;
+TelescopeTurnsY:=Source.TelescopeTurnsY ;
+ShowCRose:=Source.ShowCRose ;
+CRoseType:=Source.CRoseType ;
+PMon:=Source.PMon ;
+DrawPMon:=Source.DrawPMon ;
+ApparentPos:=Source.ApparentPos ;
+LabelOrientation:=Source.LabelOrientation ;
+ManualTelescopeType:=Source.ManualTelescopeType ;
+IndiServerHost:=Source.IndiServerHost ;
+IndiServerPort:=Source.IndiServerPort ;
+IndiServerCmd:=Source.IndiServerCmd ;
+IndiDriver:=Source.IndiDriver ;
+IndiPort:=Source.IndiPort ;
+IndiDevice:=Source.IndiDevice ;
+ScopePlugin:=Source.ScopePlugin ;
+IndiAutostart:=Source.IndiAutostart ;
+ShowCircle:=Source.ShowCircle ;
+IndiTelescope:=Source.IndiTelescope ;
+PluginTelescope:=Source.PluginTelescope ;
+ManualTelescope:=Source.ManualTelescope ;
+ShowImages:=Source.ShowImages ;
+ShowBackgroundImage:=Source.ShowBackgroundImage ;
+showstars:=Source.showstars ;
+shownebulae:=Source.shownebulae ;
+showline:=Source.showline ;
+showlabelall:=Source.showlabelall ;
+Editlabels:=Source.Editlabels ;
+BackgroundImage:=Source.BackgroundImage ;
+HorizonMax:=Source.HorizonMax ;
+rap2000:=Source.rap2000 ;
+dep2000:=Source.dep2000 ;
+RefractionOffset:=Source.RefractionOffset ;
+WindowRatio:=Source.WindowRatio ;
+BxGlb:=Source.BxGlb ;
+ByGlb:=Source.ByGlb ;
+AxGlb:=Source.AxGlb ;
+AyGlb:=Source.AyGlb ;
+sintheta:=Source.sintheta ;
+costheta:=Source.costheta ;
+x2:=Source.x2 ;
+Xwrldmin:=Source.Xwrldmin ;
+Xwrldmax:=Source.Xwrldmax ;
+Ywrldmin:=Source.Ywrldmin ;
+Ywrldmax:=Source.Ywrldmax ;
+xmin:=Source.xmin ;
+xmax:=Source.xmax ;
+ymin:=Source.ymin ;
+ymax:=Source.ymax ;
+xshift:=Source.xshift ;
+yshift:=Source.yshift ;
+FieldNum:=Source.FieldNum ;
+winx:=Source.winx ;
+winy:=Source.winy ;
+wintop:=Source.wintop ;
+winleft:=Source.winleft ;
+LeftMargin:=Source.LeftMargin ;
+RightMargin:=Source.RightMargin ;
+TopMargin:=Source.TopMargin ;
+BottomMargin:=Source.BottomMargin ;
+Xcentre:=Source.Xcentre ;
+Ycentre:=Source.Ycentre ;
+ObsRoSinPhi:=Source.ObsRoSinPhi ;
+ObsRoCosPhi:=Source.ObsRoCosPhi ;
+StarmagMax:=Source.StarmagMax;
+NebMagMax:=Source.NebMagMax ;
+FindRA:=Source.FindRA ;
+FindDec:=Source.FindDec ;
+FindSize:=Source.FindSize ;
+AstmagMax:=Source.AstmagMax ;
+AstMagDiff:=Source.AstMagDiff ;
+CommagMax:=Source.CommagMax ;
+Commagdiff:=Source.Commagdiff ;
+TimeZone:=Source.TimeZone ;
+DT_UT:=Source.DT_UT ;
+CurST:=Source.CurST ;
+CurJD:=Source.CurJD ;
+LastJD:=Source.LastJD ;
+jd0:=Source.jd0 ;
+JDChart:=Source.JDChart ;
+LastJDChart:=Source.LastJDChart ;
+CurSunH:=Source.CurSunH ;
+CurMoonH:=Source.CurMoonH ;
+CurMoonIllum:=Source.CurMoonIllum ;
+ScopeRa:=Source.ScopeRa ;
+ScopeDec:=Source.ScopeDec ;
+TrackEpoch:=Source.TrackEpoch ;
+TrackRA:=Source.TrackRA ;
+TrackDec:=Source.TrackDec ;
+StarFilter:=Source.StarFilter ;
+NebFilter:=Source.NebFilter ;
+FindOK:=Source.FindOK ;
+WhiteBg:=Source.WhiteBg ;
+MagLabel:=Source.MagLabel ;
+NameLabel:=Source.NameLabel ;
+ConstFullLabel:=Source.ConstFullLabel ;
+ScopeMark:=Source.ScopeMark ;
+ScopeLock:=Source.ScopeLock ;
+EquinoxName:=Source.EquinoxName ;
+EquinoxDate:=Source.EquinoxDate ;
+TrackName:=Source.TrackName ;
+TrackId:=Source.TrackId ;
+FindName:=Source.FindName ;
+FindDesc:=Source.FindDesc ;
+FindNote:=Source.FindNote ;
+AsteroidNb:=Source.AsteroidNb ;
+CometNb:=Source.CometNb ;
+AsteroidLstSize:=Source.AsteroidLstSize ;
+CometLstSize:=Source.CometLstSize ;
+NumCircle:=Source.NumCircle ;
+nummodlabels:=Source.nummodlabels ;
+posmodlabels:=Source.posmodlabels ;
+numcustomlabels:=Source.numcustomlabels ;
+poscustomlabels:=Source.poscustomlabels ;
+horizonlist:=Source.horizonlist ;
+
+for i:=0 to 10 do projname[i] := Source.projname[i];
+for i:=1 to numlabtype do begin
+   ShowLabel[i]:=Source.ShowLabel[i];
+   LabelMagDiff[i]:=Source.LabelMagDiff[i];
+end;
+for i:=1 to 10 do circle[i,1]:=Source.circle[i,1];
+for i:=1 to 10 do circle[i,2]:=Source.circle[i,2];
+for i:=1 to 10 do circle[i,3]:=Source.circle[i,3];
+for i:=1 to 10 do circleok[i]:=Source.circleok[i];
+for i:=1 to 10 do circlelbl[i]:=Source.circlelbl[i];
+for i:=1 to 10 do rectangle[i,1]:=Source.rectangle[i,1];
+for i:=1 to 10 do rectangle[i,2]:=Source.rectangle[i,2];
+for i:=1 to 10 do rectangle[i,3]:=Source.rectangle[i,3];
+for i:=1 to 10 do rectangle[i,4]:=Source.rectangle[i,4];
+for i:=1 to 10 do rectangleok[i]:=Source.rectangleok[i];
+for i:=1 to 10 do rectanglelbl[i]:=Source.rectanglelbl[i];
+for i:=0 to Source.NumCircle-1 do
+  for j:=1 to 2 do
+    CircleLst[i,j]:=Source.CircleLst[i,j];
+for i:=1 to Source.nummodlabels do begin
+   modlabels[i].id:=Source.modlabels[i].id;
+   modlabels[i].dx:=Source.modlabels[i].dx;
+   modlabels[i].dy:=Source.modlabels[i].dy;
+   modlabels[i].labelnum:=Source.modlabels[i].labelnum;
+   modlabels[i].fontnum:=Source.modlabels[i].fontnum;
+   modlabels[i].txt:=Source.modlabels[i].txt;
+   modlabels[i].hiden:=Source.modlabels[i].hiden;
+end;
+for i:=1 to Source.numcustomlabels do begin
+   customlabels[i].ra:=Source.customlabels[i].ra;
+   customlabels[i].dec:=Source.customlabels[i].dec;
+   customlabels[i].labelnum:=Source.customlabels[i].labelnum;
+   customlabels[i].txt:=Source.customlabels[i].txt;
+end;
+for i:=1 to NumSimObject do SimObject[i]:=Source.SimObject[i];
+for i:=0 to Source.SimNb-1 do
+  for j:=1 to MaxPla do
+    for k:=1 to 7 do
+      PlanetLst[i,j,k]:=Source.PlanetLst[i,j,k];
+SetLength(AsteroidLst,Source.SimNb);
+for i:=0 to Source.SimNb-1 do
+  for j:=1 to Source.AsteroidNb do
+    for k:=1 to 5 do
+      AsteroidLst[i,j,k]:=Source.AsteroidLst[i,j,k];
+SetLength(CometLst,Source.SimNb);
+for i:=0 to Source.SimNb-1 do
+  for j:=1 to Source.CometNb do
+    for k:=1 to 8 do
+      CometLst[i,j,k]:=Source.CometLst[i,j,k];
+SetLength(AsteroidName,Source.SimNb);
+for i:=0 to Source.SimNb-1 do
+  for j:=1 to Source.AsteroidNb do
+    for k:=1 to 2 do
+      AsteroidName[i,j,k]:=Source.AsteroidName[i,j,k];
+SetLength(CometName,Source.SimNb);
+for i:=0 to Source.SimNb-1 do
+  for j:=1 to Source.CometNb do
+    for k:=1 to 2 do
+      CometName[i,j,k]:=Source.CometName[i,j,k];
+end;
+
+{ Tconf_plot }
+
+constructor Tconf_plot.Create;
+begin
+  Inherited Create;
+end;
+
+destructor Tconf_plot.Destroy;
+begin
+  Inherited Destroy;
+end;
+
+procedure Tconf_plot.Assign(Source: Tconf_plot);
+var i : integer;
+begin
+for i:=0 to Maxcolor do color[i]:=Source.color[i];
+for i:=1 to 7 do skycolor[i]:=Source.skycolor[i];
+backgroundcolor:=Source.backgroundcolor;
+bgcolor:=Source.bgcolor;
+stardyn:=Source.stardyn;
+starsize:=Source.starsize;
+prtres:=Source.prtres;
+starplot:=Source.starplot;
+nebplot:=Source.nebplot;
+plaplot:=Source.plaplot;
+Nebgray:=Source.Nebgray;
+NebBright:=Source.NebBright;
+starshapesize:=Source.starshapesize;
+starshapew:=Source.starshapew;
+Invisible:=Source.Invisible;
+AutoSkycolor:=Source.AutoSkycolor;
+TransparentPlanet:=Source.TransparentPlanet;
+for i:=1 to numfont do begin
+  FontName[i]:=Source.FontName[i];
+  FontSize[i]:=Source.FontSize[i];
+  FontBold[i]:=Source.FontBold[i];
+  FontItalic[i]:=Source.FontItalic[i];
+end;
+for i:=1 to numlabtype do begin
+  LabelColor[i]:=Source.LabelColor[i];
+  LabelSize[i]:=Source.LabelSize[i];
+end;
+
+outradius:=Source.outradius;
+contrast:=Source.contrast;
+saturation:=Source.saturation;
+xmin:=Source.xmin;
+xmax:=Source.xmax;
+ymin:=Source.ymin;
+ymax:=Source.ymax;
+partsize:=Source.partsize;
+magsize:=Source.magsize;
+DSOColorFillAst:=Source.DSOColorFillAst;
+DSOColorFillOCl:=Source.DSOColorFillOCl;
+DSOColorFillGCl:=Source.DSOColorFillGCl;
+DSOColorFillPNe:=Source.DSOColorFillPNe;
+DSOColorFillDN:=Source.DSOColorFillDN;
+DSOColorFillEN:=Source.DSOColorFillEN;
+DSOColorFillRN:=Source.DSOColorFillRN;
+DSOColorFillSN:=Source.DSOColorFillSN;
+DSOColorFillGxy:=Source.DSOColorFillGxy;
+DSOColorFillGxyCl:=Source.DSOColorFillGxyCl;
+DSOColorFillQ:=Source.DSOColorFillQ;
+DSOColorFillGL:=Source.DSOColorFillGL;
+DSOColorFillNE:=Source.DSOColorFillNE;
+end;
+
+{ Tconf_chart }
+
+constructor Tconf_chart.Create;
+begin
+  Inherited Create;
+end;
+
+destructor Tconf_chart.Destroy;
+begin
+  Inherited Destroy;
+end;
+
+procedure Tconf_chart.Assign(Source: Tconf_chart);
+begin
+onprinter:=Source.onprinter;
+width:=Source.width;
+height:=Source.height;
+drawpen:=Source.drawpen;
+drawsize:=Source.drawsize;
+fontscale:=Source.fontscale;
+hw:=Source.hw;
+hh:=Source.hh;
+min_ma:=Source.min_ma;
+max_catalog_mag:=Source.max_catalog_mag;
+end;
+
+{ Tconf_main }
+
+constructor Tconf_main.Create;
+begin
+  Inherited Create;
+end;
+
+destructor Tconf_main.Destroy;
+begin
+  if CometUrlList<>nil then CometUrlList.Free;
+  if AsteroidUrlList<>nil then AsteroidUrlList.Free;
+  Inherited Destroy;
+end;
+
+procedure Tconf_main.Assign(Source: Tconf_main);
+var
+  i: Integer;
+begin
+prtname:=Source.prtname;
+language:=Source.language;
+Constellationfile:=Source.Constellationfile;
+ConstLfile:=Source.ConstLfile;
+ConstBfile:=Source.ConstBfile;
+EarthMapFile:=Source.EarthMapFile;
+HorizonFile:=Source.HorizonFile;
+Planetdir:=Source.Planetdir;
+db:=Source.db;
+dbhost:=Source.dbhost;
+dbport:=Source.dbport;
+dbuser:=Source.dbuser;
+dbpass:=Source.dbpass;
+ImagePath:=Source.ImagePath;
+persdir:=Source.persdir;
+prgdir:=Source.prgdir;
+PrinterResolution:=Source.PrinterResolution;
+PrintMethod:=Source.PrintMethod;
+PrintColor:=Source.PrintColor;
+configpage:=Source.configpage;
+configpage_i:=Source.configpage_i;
+configpage_j:=Source.configpage_j;
+autorefreshdelay:=Source.autorefreshdelay;
+MaxChildID:=Source.MaxChildID;
+PrtLeftMargin:=Source.PrtLeftMargin;
+PrtRightMargin:=Source.PrtRightMargin;
+PrtTopMargin:=Source.PrtTopMargin;
+PrtBottomMargin:=Source.PrtBottomMargin;
+savetop:=Source.savetop;
+saveleft:=Source.saveleft;
+saveheight:=Source.saveheight;
+savewidth:=Source.savewidth;
+ButtonStandard:=Source.ButtonStandard;
+ButtonNight:=Source.ButtonNight;
+PrintLandscape:=Source.PrintLandscape;
+ShowChartInfo:=Source.ShowChartInfo;
+SyncChart:=Source.SyncChart;
+maximized:=Source.maximized;
+updall:=Source.updall;
+AutostartServer:=Source.AutostartServer;
+keepalive:=Source.keepalive;
+NewBackgroundImage:=Source.NewBackgroundImage;
+ServerIPaddr:=Source.ServerIPaddr;
+ServerIPport:=Source.ServerIPport;
+PrintCmd1:=Source.PrintCmd1;
+PrintCmd2:=Source.PrintCmd2;
+PrintTmpPath:=Source.PrintTmpPath;
+ThemeName:=Source.ThemeName;
+IndiPanelCmd:=Source.IndiPanelCmd;
+ImageLuminosity:=Source.ImageLuminosity;
+ImageContrast:=Source.ImageContrast;
+ProxyHost:=Source.ProxyHost;
+ProxyPort:=Source.ProxyPort;
+ProxyUser:=Source.ProxyUser;
+ProxyPass:=Source.ProxyPass;
+AnonPass:=Source.AnonPass;
+FtpPassive:=Source.FtpPassive;
+HttpProxy:=Source.HttpProxy;
+if CometUrlList=nil then CometUrlList:=TStringList.Create;
+CometUrlList.Clear;
+for i:=0 to Source.CometUrlList.Count-1 do CometUrlList.Add(Source.CometUrlList.Strings[i]);
+if AsteroidUrlList=nil then AsteroidUrlList:=TStringList.Create;
+AsteroidUrlList.Clear;
+for i:=0 to Source.AsteroidUrlList.Count-1 do AsteroidUrlList.Add(Source.AsteroidUrlList.Strings[i]);
+end;
+
+{ Tconf_dss }
+
+constructor Tconf_dss.Create;
+begin
+  Inherited Create;
+end;
+
+destructor Tconf_dss.Destroy;
+begin
+  Inherited Destroy;
+end;
+
+procedure Tconf_dss.Assign(Source: Tconf_dss);
+var i,j: integer;
+begin
+dssdir:=Source.dssdir;
+dssdrive:=Source.dssdrive;
+dssfile:=Source.dssfile;
+dss102:=Source.dss102;
+dssnorth:=Source.dssnorth;
+dsssouth:=Source.dsssouth;
+dsssampling:=Source.dsssampling;
+dssplateprompt:=Source.dssplateprompt;
+dssmaxsize:=Source.dssmaxsize;
+OnlineDSS:=Source.OnlineDSS;
+OnlineDSSid:=Source.OnlineDSSid;
+for i:=1 to MaxDSSurl do
+  for j:=0 to 1 do
+    DSSurl[i,j]:=Source.DSSurl[i,j];
+end;
 
 end.
 

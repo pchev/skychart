@@ -87,11 +87,11 @@ type
      function CloseLinCat:boolean;
   public
     { Public declarations }
-     cfgcat : conf_catalog;
-     cfgshr : conf_shared;
+     cfgcat : Tconf_catalog;
+     cfgshr : Tconf_shared;
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
-     function OpenCat(c: Pconf_skychart):boolean;
+     function OpenCat(c: Tconf_skychart):boolean;
      function CloseCat:boolean;
      function OpenStar:boolean;
      function CloseStar:boolean;
@@ -119,8 +119,8 @@ type
      function SearchVarStar(Num:string; var ar1,de1: double): boolean;
      function SearchLines(Num:string; var ar1,de1: double): boolean;
      function SearchConstellation(Num:string; var ar1,de1: double): boolean;
-     function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
-     function FindObj(x1,y1,x2,y2:double; nextobj,searchcenter : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
+     function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
+     function FindObj(x1,y1,x2,y2:double; nextobj,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
      procedure GetAltName(rec: GCatrec; var txt: string);
      function CheckPath(cat: integer; catpath:string):boolean;
      function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
@@ -128,7 +128,7 @@ type
      Procedure LoadConstellation(fname:string);
      Procedure LoadConstL(fname:string);
      Procedure LoadConstB(fname:string);
-     Procedure LoadHorizon(fname:string; cfgsc:Pconf_skychart);
+     Procedure LoadHorizon(fname:string; cfgsc:Tconf_skychart);
      Procedure LoadStarName(fname:string);
   published
     { Published declarations }
@@ -152,11 +152,15 @@ end;
 constructor Tcatalog.Create(AOwner:TComponent);
 begin
  inherited Create(AOwner);
+ cfgcat:=Tconf_catalog.Create;
+ cfgshr:=Tconf_shared.Create;
  lockcat:=false;
 end;
 
 destructor Tcatalog.Destroy;
 begin
+cfgcat.Free;
+cfgshr.Free;
 try
  inherited destroy;
 except
@@ -164,27 +168,27 @@ writetrace('error destroy '+name);
 end;
 end;
 
-Function Tcatalog.OpenCat(c: Pconf_skychart):boolean;
+Function Tcatalog.OpenCat(c: Tconf_skychart):boolean;
 var ac,dc: double;
 begin
 // get a lock before to do anything, libcatalog is NOT thread safe.
   while lockcat do application.ProcessMessages;
   lockcat:=true;
-  case c^.ProjPole of
+  case c.ProjPole of
   Gal   : begin
-          ac:=rad2deg*c^.lcentre;
-          dc:=rad2deg*c^.bcentre;
+          ac:=rad2deg*c.lcentre;
+          dc:=rad2deg*c.bcentre;
           end;
   Ecl   : begin
-          ac:=rad2deg*c^.lecentre;
-          dc:=rad2deg*c^.becentre;
+          ac:=rad2deg*c.lecentre;
+          dc:=rad2deg*c.becentre;
           end;
   else    begin
-          ac:=rad2deg*c^.acentre;
-          dc:=rad2deg*c^.hcentre;
+          ac:=rad2deg*c.acentre;
+          dc:=rad2deg*c.hcentre;
           end;
   end;
-  InitCatWin(c^.axglb,c^.ayglb,c^.bxglb/rad2deg,c^.byglb/rad2deg,c^.sintheta,c^.costheta,rad2deg*c^.racentre/15,rad2deg*c^.decentre,ac,dc,c^.CurJD,c^.JDChart,rad2deg*c^.CurST/15,c^.ObsLatitude,c^.ProjPole,c^.xshift,c^.yshift,c^.xmin,c^.xmax,c^.ymin,c^.ymax,c^.projtype,northpole2000inmap(c),southpole2000inmap(c));
+  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*c.racentre/15,rad2deg*c.decentre,ac,dc,c.CurJD,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
   result:=true;
 end;
 
@@ -2234,7 +2238,7 @@ begin
      end;
 end;
 
-function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
+function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
 var
    xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius : double;
    ok,found : boolean;
@@ -2245,7 +2249,7 @@ xx1:=rad2deg*x1/15;
 xx2:=rad2deg*x2/15;
 yy1:=rad2deg*y1;
 yy2:=rad2deg*y2;
-cyear:=cfgsc^.CurYear+cfgsc^.CurMonth/12;
+cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
 if not nextobj then begin
   InitRec(cat);
   case cat of
@@ -2370,14 +2374,14 @@ repeat
    else ok:=false;
   end;
   if not ok then break;
-  if cfgsc^.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
+  if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
     if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
                                else dyear:=cyear-rec.options.Epoch;
     rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*dyear;
     rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
   end;
-  precession(rec.options.EquinoxJD,cfgsc^.JDChart,rec.ra,rec.dec);
-  if cfgsc^.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
   found:=true;
   if truncate then begin
     if (rec.ra<x1) or (rec.ra>x2) then found:=false;
@@ -2392,12 +2396,12 @@ until false ;
 result:=ok;
 end;
 
-function Tcatalog.FindObj(x1,y1,x2,y2:double; nextobj,searchcenter : boolean;cfgsc:Pconf_skychart; var rec: Gcatrec):boolean;
+function Tcatalog.FindObj(x1,y1,x2,y2:double; nextobj,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
 var
    ok : boolean;
 begin
 ok:=false;
-if cfgsc^.shownebulae then begin
+if cfgsc.shownebulae then begin
   ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
@@ -2408,7 +2412,7 @@ if cfgsc^.shownebulae then begin
   if (not ok) and cfgcat.nebcaton[gcm-BaseNeb] then ok:=FindAtPos(gcm,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[gpn-BaseNeb] then ok:=FindAtPos(gpn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
 end;
-if cfgsc^.showstars then begin
+if cfgsc.showstars then begin
   if (not ok) then ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.varstarcaton[gcvs-BaseVar] then ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) then ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
@@ -2432,7 +2436,7 @@ end;
   if (not ok) and Catalog2Show then FindCatalogue2(ar,de,dx,dx,nextobj,ok,nom,ma,desc,notes);
   if (not ok) and ArtSatOn then FindSatellite(ar,de,dx,dx,nextobj,ok,nom,ma,desc);}
 result:=ok;
-cfgsc^.FindOK:=ok;
+cfgsc.FindOK:=ok;
 end;
 
 Procedure Tcatalog.GetAltName(rec: GCatrec; var txt: string);
@@ -2536,7 +2540,6 @@ Procedure Tcatalog.LoadConstL(fname:string);
 var f : textfile;
     i,n:integer;
     ra1,ra2,de1,de2:single;
-    dummytxt:string;
 begin
    if not FileExists(fname) then begin
       cfgshr.ConstLNum := 0;
@@ -2549,7 +2552,7 @@ begin
    n:=0;
    // first loop to get the size
    repeat
-     readln(f,dummytxt);
+     readln(f);
      inc(n);
    until eof(f);
    setlength(cfgshr.ConstL,n);
@@ -2606,13 +2609,13 @@ begin
    end;
 end;
 
-Procedure Tcatalog.LoadHorizon(fname:string; cfgsc:Pconf_skychart);
+Procedure Tcatalog.LoadHorizon(fname:string; cfgsc:Tconf_skychart);
 var de,d0,d1,d2 : single;
     i,i1,i2 : integer;
     f : textfile;
     buf : string;
 begin
-cfgsc^.HorizonMax:=musec;  // require in cfgsc for horizon clipping in u_projection
+cfgsc.HorizonMax:=musec;  // require in cfgsc for horizon clipping in u_projection
 for i:=1 to 360 do cfgshr.horizonlist[i]:=0;
 if fileexists(fname) then begin
 i1:=0;i2:=0;d1:=0;d0:=0;
@@ -2646,7 +2649,7 @@ while (not eof(f))and(i2<359) do begin
     for i := i1 to i2 do begin
         de:=deg2rad*(d1+(i-i1)*(d2-d1)/(i2-i1));
         cfgshr.horizonlist[i+1]:=de;
-        cfgsc^.HorizonMax:=max(cfgsc^.HorizonMax,de);
+        cfgsc.HorizonMax:=max(cfgsc.HorizonMax,de);
     end;
     i1:=i2;
     d1:=d2;
@@ -2658,12 +2661,12 @@ if i2<359 then begin
     for i:=i1 to 359 do begin
         de:=deg2rad*(d1+(i-i1)*(d0-d1)/(359-i1));
         cfgshr.horizonlist[i+1]:=de;
-        cfgsc^.HorizonMax:=max(cfgsc^.HorizonMax,de);
+        cfgsc.HorizonMax:=max(cfgsc.HorizonMax,de);
     end;
 end;
 end;
 end;
-cfgsc^.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
+cfgsc.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
 
 end;
 

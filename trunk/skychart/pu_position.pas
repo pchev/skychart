@@ -66,7 +66,7 @@ type
   public
     { Public declarations }
     AzNorth: boolean;
-    cfgsc: Pconf_skychart;
+    cfgsc: Tconf_skychart;
     procedure SetLang;
   end;
 

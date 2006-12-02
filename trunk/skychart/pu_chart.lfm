@@ -7,8 +7,6 @@ object f_chart: Tf_chart
   VertScrollBar.Page = 337
   ActiveControl = VertScrollBar
   Caption = 'Chart'
-  ClientHeight = 338
-  ClientWidth = 508
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
@@ -21,8 +19,6 @@ object f_chart: Tf_chart
     Height = 272
     Top = 8
     Width = 480
-    ClientHeight = 272
-    ClientWidth = 480
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
@@ -46,10 +42,10 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 466
-      Height = 257
+      Left = 461
+      Height = 252
       Top = 1
-      Width = 13
+      Width = 18
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -62,8 +58,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 1
-      Height = 13
-      Top = 258
+      Height = 18
+      Top = 253
       Width = 478
       Align = alBottom
       LargeChange = 10
@@ -87,124 +83,147 @@ object f_chart: Tf_chart
     object zoomplus: TAction
       Category = 'zoom'
       Caption = 'Zoom +'
+      DisableIfNoHandler = True
       ImageIndex = 6
       OnExecute = zoomplusExecute
     end
     object zoomminus: TAction
       Category = 'zoom'
       Caption = 'Zoom -'
+      DisableIfNoHandler = True
       ImageIndex = 7
       OnExecute = zoomminusExecute
     end
     object MoveWest: TAction
       Category = 'move'
       Caption = 'Move West'
+      DisableIfNoHandler = True
       OnExecute = MoveWestExecute
     end
     object MoveEast: TAction
       Category = 'move'
       Caption = 'Move East'
+      DisableIfNoHandler = True
       OnExecute = MoveEastExecute
     end
     object MoveNorth: TAction
       Category = 'move'
       Caption = 'Move North'
+      DisableIfNoHandler = True
       OnExecute = MoveNorthExecute
     end
     object MoveSouth: TAction
       Category = 'move'
       Caption = 'Move South'
+      DisableIfNoHandler = True
       OnExecute = MoveSouthExecute
     end
     object MoveNorthWest: TAction
       Category = 'move'
       Caption = 'Move North-West'
+      DisableIfNoHandler = True
       OnExecute = MoveNorthWestExecute
     end
     object MoveNorthEast: TAction
       Category = 'move'
       Caption = 'Move North-East'
+      DisableIfNoHandler = True
       OnExecute = MoveNorthEastExecute
     end
     object MoveSouthWest: TAction
       Category = 'move'
       Caption = 'Move South-West'
+      DisableIfNoHandler = True
       OnExecute = MoveSouthWestExecute
     end
     object MoveSouthEast: TAction
       Category = 'move'
       Caption = 'Move South-East'
+      DisableIfNoHandler = True
       OnExecute = MoveSouthEastExecute
     end
     object Centre: TAction
       Category = 'move'
       Caption = 'Centre'
+      DisableIfNoHandler = True
       OnExecute = CentreExecute
     end
     object zoomplusmove: TAction
       Category = 'zoom'
       Caption = 'Zoom + Centre'
+      DisableIfNoHandler = True
       ImageIndex = 6
       OnExecute = zoomplusmoveExecute
     end
     object zoomminusmove: TAction
       Category = 'zoom'
       Caption = 'Zoom - Centre'
+      DisableIfNoHandler = True
       ImageIndex = 7
       OnExecute = zoomminusmoveExecute
     end
     object FlipX: TAction
       Category = 'rotation'
       Caption = 'FlipX'
+      DisableIfNoHandler = True
       ImageIndex = 15
       OnExecute = FlipXExecute
     end
     object FlipY: TAction
       Category = 'rotation'
       Caption = 'FlipY'
+      DisableIfNoHandler = True
       ImageIndex = 17
       OnExecute = FlipYExecute
     end
     object Undo: TAction
       Category = 'Undo'
       Caption = 'Undo'
+      DisableIfNoHandler = True
       OnExecute = UndoExecute
     end
     object Redo: TAction
       Category = 'Undo'
       Caption = 'Redo'
+      DisableIfNoHandler = True
       OnExecute = RedoExecute
     end
     object rot_plus: TAction
       Category = 'rotation'
       Caption = 'rot_plus'
+      DisableIfNoHandler = True
       ImageIndex = 21
       OnExecute = rot_plusExecute
     end
     object rot_minus: TAction
       Category = 'rotation'
       Caption = 'rot_minus'
+      DisableIfNoHandler = True
       ImageIndex = 22
       OnExecute = rot_minusExecute
     end
     object GridEQ: TAction
       Category = 'Grid'
       Caption = 'GridEQ'
+      DisableIfNoHandler = True
       ImageIndex = 24
       OnExecute = GridEQExecute
     end
     object Grid: TAction
       Category = 'Grid'
       Caption = 'Grid'
+      DisableIfNoHandler = True
       ImageIndex = 25
       OnExecute = GridExecute
     end
     object switchbackground: TAction
       Caption = 'switchbackground'
+      DisableIfNoHandler = True
       OnExecute = switchbackgroundExecute
     end
     object switchstar: TAction
       Caption = 'switchstar'
+      DisableIfNoHandler = True
       OnExecute = switchstarExecute
     end
   end

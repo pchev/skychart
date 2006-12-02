@@ -66,7 +66,7 @@ type
     Procedure ShowPrtInfo;
   public
     { public declarations }
-    cm: conf_main;
+    cm: Tconf_main;
     procedure SetLang;
   end;
 

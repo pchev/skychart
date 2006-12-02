@@ -7,18 +7,14 @@ object f_config_pictures: Tf_config_pictures
   VertScrollBar.Page = 534
   ActiveControl = ScanImages
   Caption = 'Pictures'
-  ClientHeight = 535
-  ClientWidth = 513
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
-  PixelsPerInch = 96
   object MainPanel: TPanel
     Height = 485
     Width = 513
     Align = alClient
-    ClientHeight = 485
-    ClientWidth = 513
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
@@ -32,8 +28,6 @@ object f_config_pictures: Tf_config_pictures
       ShowTabs = False
       object Page1: TPage
         Caption = 'Objects'
-        ClientWidth = 503
-        ClientHeight = 475
         object Label50: TLabel
           Left = 2
           Height = 13
@@ -66,8 +60,6 @@ object f_config_pictures: Tf_config_pictures
           Height = 73
           Top = 70
           Width = 401
-          ClientHeight = 73
-          ClientWidth = 401
           TabOrder = 2
           Visible = False
           object ProgressCat: TLabel
@@ -103,8 +95,6 @@ object f_config_pictures: Tf_config_pictures
           Height = 183
           Top = 168
           Width = 401
-          ClientHeight = 183
-          ClientWidth = 401
           TabOrder = 1
           object Label266: TLabel
             Left = 32
@@ -175,17 +165,15 @@ object f_config_pictures: Tf_config_pictures
           Height = 23
           Top = 39
           Width = 264
-          OnChange = imgpathChange
-          TabOrder = 4
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 4
+          OnChange = imgpathChange
         end
       end
       object Page2: TPage
         Caption = 'Background'
-        ClientWidth = 503
-        ClientHeight = 475
         object Label270: TLabel
           Height = 14
           Width = 93
@@ -231,8 +219,6 @@ object f_config_pictures: Tf_config_pictures
           Height = 48
           Top = 67
           Width = 305
-          ClientHeight = 48
-          ClientWidth = 305
           TabOrder = 1
           object Label1: TLabel
             Left = 54
@@ -284,26 +270,22 @@ object f_config_pictures: Tf_config_pictures
           Height = 23
           Top = 15
           Width = 360
-          OnChange = backimgChange
-          TabOrder = 2
           Filter = 'FITS Files|*.fit'
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
+          TabOrder = 2
+          OnChange = backimgChange
         end
       end
       object Page3: TPage
         Caption = 'DSS - Realsky'
-        ClientWidth = 503
-        ClientHeight = 475
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355
           Top = 8
           Width = 481
           Caption = 'RealSky®'
-          ClientHeight = 355
-          ClientWidth = 481
           TabOrder = 0
           object Label72: TLabel
             Left = 8
@@ -427,7 +409,6 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 7
           end
           object realskymax: TLongEdit
-            Name = 'realskymax'
             Left = 336
             Height = 22
             Top = 268
@@ -438,7 +419,6 @@ object f_config_pictures: Tf_config_pictures
             OnChange = realskymaxChange
           end
           object realskymb: TLongEdit
-            Name = 'realskymb'
             Left = 336
             Height = 22
             Top = 304
@@ -456,8 +436,6 @@ object f_config_pictures: Tf_config_pictures
           Top = 374
           Width = 481
           Caption = 'Online DSS'
-          ClientHeight = 85
-          ClientWidth = 481
           TabOrder = 1
           object OnlineDSS: TCheckBox
             Left = 8
@@ -488,8 +466,6 @@ object f_config_pictures: Tf_config_pictures
     Top = 485
     Width = 513
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 513
     TabOrder = 1
     object Button1: TButton
       Left = 208

@@ -8,20 +8,17 @@ object f_search: Tf_search
   ActiveControl = Id
   BorderStyle = bsToolWindow
   Caption = 'Search'
-  ClientHeight = 326
-  ClientWidth = 433
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   object PlanetPanel: TPanel
     Left = 7
     Height = 41
     Top = 232
     Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
     FullRepaint = False
     TabOrder = 3
     Visible = False
@@ -51,8 +48,6 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
     TabOrder = 8
     object CometFilter: TEdit
       Left = 8
@@ -86,8 +81,6 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
     TabOrder = 9
     object AsteroidFilter: TEdit
       Left = 8
@@ -121,8 +114,6 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
     FullRepaint = False
     TabOrder = 4
     Visible = False
@@ -151,8 +142,6 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
     FullRepaint = False
     TabOrder = 5
     Visible = False
@@ -181,8 +170,6 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
     FullRepaint = False
     TabOrder = 7
     Visible = False
@@ -211,8 +198,6 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
     FullRepaint = False
     TabOrder = 0
     object Label1: TLabel
@@ -229,8 +214,6 @@ object f_search: Tf_search
       Height = 39
       Top = 1
       Width = 73
-      ClientHeight = 39
-      ClientWidth = 73
       FullRepaint = False
       TabOrder = 5
       Visible = False
@@ -259,8 +242,6 @@ object f_search: Tf_search
       Height = 39
       Top = 1
       Width = 73
-      ClientHeight = 39
-      ClientWidth = 73
       FullRepaint = False
       TabOrder = 4
       Visible = False
@@ -338,8 +319,6 @@ object f_search: Tf_search
       Height = 39
       Top = 1
       Width = 73
-      ClientHeight = 39
-      ClientWidth = 73
       FullRepaint = False
       TabOrder = 3
       Visible = False
@@ -396,8 +375,6 @@ object f_search: Tf_search
       Top = 1
       Width = 128
       BevelOuter = bvNone
-      ClientHeight = 39
-      ClientWidth = 128
       FullRepaint = False
       TabOrder = 1
       object SpeedButton1: TSpeedButton
@@ -534,8 +511,6 @@ object f_search: Tf_search
       Height = 39
       Top = 1
       Width = 73
-      ClientHeight = 39
-      ClientWidth = 73
       FullRepaint = False
       TabOrder = 2
       object SpeedButton14: TSpeedButton
