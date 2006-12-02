@@ -126,6 +126,7 @@ type
     Notebook1: TNotebook;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure LanguageListSelect(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
@@ -181,16 +182,16 @@ type
   public
     { Public declarations }
     cdb:Tcdcdb;
-    mycsc : conf_skychart;
-    myccat : conf_catalog;
-    mycshr : conf_shared;
-    mycplot : conf_plot;
-    mycmain : conf_main;
-    csc : ^conf_skychart;
-    ccat : ^conf_catalog;
-    cshr : ^conf_shared;
-    cplot : ^conf_plot;
-    cmain : ^conf_main;
+    mycsc : Tconf_skychart;
+    myccat : Tconf_catalog;
+    mycshr : Tconf_shared;
+    mycplot : Tconf_plot;
+    mycmain : Tconf_main;
+    csc : Tconf_skychart;
+    ccat : Tconf_catalog;
+    cshr : Tconf_shared;
+    cplot : Tconf_plot;
+    cmain : Tconf_main;
     constructor Create(AOwner:TComponent); override;
     procedure SetLang;
     property onShowAsteroid: TNotifyEvent read FShowAsteroid write FShowAsteroid;
@@ -264,11 +265,16 @@ end;
 
 constructor Tf_config_system.Create(AOwner:TComponent);
 begin
- csc:=@mycsc;
- ccat:=@myccat;
- cshr:=@mycshr;
- cplot:=@mycplot;
- cmain:=@mycmain;
+ mycsc:=Tconf_skychart.Create;
+ myccat:=Tconf_catalog.Create;
+ mycshr:=Tconf_shared.Create;
+ mycplot:=Tconf_plot.Create;
+ mycmain:=Tconf_main.Create;
+ csc:=mycsc;
+ ccat:=myccat;
+ cshr:=mycshr;
+ cplot:=mycplot;
+ cmain:=mycmain;
  inherited Create(AOwner);
 end;
 
@@ -503,7 +509,7 @@ end;
 procedure Tf_config_system.chkdbClick(Sender: TObject);
 var msg: string;
 begin
-msg:=cdb.checkdbconfig(cmain^);
+msg:=cdb.checkdbconfig(cmain);
 ShowMessage(msg);
 end;
 
@@ -511,7 +517,7 @@ procedure Tf_config_system.credbClick(Sender: TObject);
 var ok:boolean;
 begin
 screen.cursor:=crHourGlass;
-cdb.createdb(cmain^,ok);
+cdb.createdb(cmain,ok);
 if ok then begin
   // signal new database
   if Assigned(FDBChange) then FDBChange(self);
@@ -527,7 +533,7 @@ var msg:string;
 begin
 if messagedlg(Format(rsWarningYouAr, [crlf, cmain.db, crlf]),
               mtWarning, [mbYes,mbNo], 0)=mrYes then begin
-  msg:=cdb.dropdb(cmain^);
+  msg:=cdb.dropdb(cmain);
   if msg<>'' then showmessage(msg);
   // signal database no more exists
   if Assigned(FDBChange) then FDBChange(self);
@@ -596,6 +602,15 @@ procedure Tf_config_system.FormCreate(Sender: TObject);
 begin
 SetLang;
   LockChange:=true;
+end;
+
+procedure Tf_config_system.FormDestroy(Sender: TObject);
+begin
+mycsc.Free;
+myccat.Free;
+mycshr.Free;
+mycplot.Free;
+mycmain.Free;
 end;
 
 procedure Tf_config_system.LanguageListSelect(Sender: TObject);

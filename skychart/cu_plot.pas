@@ -87,8 +87,8 @@ type
     { Protected declarations }
   public
     { Public declarations }
-    cfgplot : Pconf_plot;
-    cfgchart: Pconf_chart;
+    cfgplot : Tconf_plot;
+    cfgchart: Tconf_chart;
     cbmp : Tbitmap;
     cnv, destcnv  : Tcanvas;
     Fstarshape,starbmp: Tbitmap;
@@ -168,8 +168,8 @@ begin
  starbmp:=Tbitmap.Create;
  cbmp:=Tbitmap.Create;
  cnv:=cbmp.canvas;
- new(cfgplot);
- new(cfgchart);
+ cfgplot:=Tconf_plot.Create;
+ cfgchart:=Tconf_chart.Create;
  // set safe value
  starbmpw:=1;
  editlabel:=-1;
@@ -259,8 +259,8 @@ try
  for i:=1 to maxlabels do labels[i].Free;
  starbmp.Free;
  cbmp.Free;
- dispose(cfgplot);
- dispose(cfgchart);
+ cfgplot.Free;
+ cfgchart.Free;
  if planetrender then begin
     ClosePlanetRender;
  end;
@@ -300,7 +300,7 @@ with cnv do begin
  Pen.Mode:=pmCopy;
  Pen.Style:=psSolid;
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
- Rgn:=CreateRectRgn(cfgplot^.xmin, cfgplot^.ymin, cfgplot^.xmax, cfgplot^.ymax);
+ Rgn:=CreateRectRgn(cfgplot.xmin, cfgplot.ymin, cfgplot.xmax, cfgplot.ymax);
  SelectClipRgn(cnv.Handle, Rgn);
 end;
 InitLabel;
@@ -322,8 +322,8 @@ begin
         Brush.Color := clWhite;
         Brush.Style := bsSolid;
         xmin:=0; ymin:=0;
-        xmax:=cfgchart^.width;
-        ymax:=cfgchart^.height;
+        xmax:=cfgchart.width;
+        ymax:=cfgchart.height;
         Rectangle(xmin,ymin,xmin+LeftMargin,ymax);
         Rectangle(xmax-RightMargin,ymin,xmax,ymax);
         Rectangle(xmin,ymin,xmax,ymin+TopMargin);
@@ -1838,10 +1838,10 @@ case Yalign of
  laCenter : yy:=yy-(ts.cy div 2);
 end;
 if clip then begin
-  if yy<cfgplot^.ymin then yy:=cfgplot^.ymin+marge;
-  if (yy+ts.cy+marge)>cfgplot^.ymax then yy:=cfgplot^.ymax-ts.cy-marge;
-  if xx<cfgplot^.xmin then xx:=cfgplot^.xmin+marge;
-  if (xx+ts.cx+marge)>cfgplot^.xmax then xx:=cfgplot^.xmax-ts.cx-marge;
+  if yy<cfgplot.ymin then yy:=cfgplot.ymin+marge;
+  if (yy+ts.cy+marge)>cfgplot.ymax then yy:=cfgplot.ymax-ts.cy-marge;
+  if xx<cfgplot.xmin then xx:=cfgplot.xmin+marge;
+  if (xx+ts.cx+marge)>cfgplot.xmax then xx:=cfgplot.xmax-ts.cx-marge;
 end;
 if cnv is TPostscriptCanvas then begin
   TextOut(xx,yy,txt);

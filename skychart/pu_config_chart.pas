@@ -253,6 +253,7 @@ type
     Notebook1: TNotebook;
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
     procedure Notebook1PageChanged(Sender: TObject);
     procedure equinoxtypeClick(Sender: TObject);
     procedure equinox1Change(Sender: TObject);
@@ -296,16 +297,16 @@ type
     procedure SetFieldHint(var lab:Tlabel; n:integer);
   public
     { Public declarations }
-    mycsc : conf_skychart;
-    myccat : conf_catalog;
-    mycshr : conf_shared;
-    mycplot : conf_plot;
-    mycmain : conf_main;
-    csc : ^conf_skychart;
-    ccat : ^conf_catalog;
-    cshr : ^conf_shared;
-    cplot : ^conf_plot;
-    cmain : ^conf_main;
+    mycsc : Tconf_skychart;
+    myccat : Tconf_catalog;
+    mycshr : Tconf_shared;
+    mycplot : Tconf_plot;
+    mycmain : Tconf_main;
+    csc : Tconf_skychart;
+    ccat : Tconf_catalog;
+    cshr : Tconf_shared;
+    cplot : Tconf_plot;
+    cmain : Tconf_main;
     procedure SetLang;
    constructor Create(AOwner:TComponent); override;
   end;
@@ -373,11 +374,16 @@ end;
 
 constructor Tf_config_chart.Create(AOwner:TComponent);
 begin
- csc:=@mycsc;
- ccat:=@myccat;
- cshr:=@mycshr;
- cplot:=@mycplot;
- cmain:=@mycmain;
+ mycsc:=Tconf_skychart.Create;
+ myccat:=Tconf_catalog.Create;
+ mycshr:=Tconf_shared.Create;
+ mycplot:=Tconf_plot.Create;
+ mycmain:=Tconf_main.Create;
+ csc:=mycsc;
+ ccat:=myccat;
+ cshr:=mycshr;
+ cplot:=mycplot;
+ cmain:=mycmain;
  inherited Create(AOwner);
 end;
 
@@ -602,6 +608,15 @@ procedure Tf_config_chart.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   LockChange:=true;
+end;
+
+procedure Tf_config_chart.FormDestroy(Sender: TObject);
+begin
+mycsc.Free;
+myccat.Free;
+mycshr.Free;
+mycplot.Free;
+mycmain.Free;
 end;
 
 procedure Tf_config_chart.Notebook1PageChanged(Sender: TObject);

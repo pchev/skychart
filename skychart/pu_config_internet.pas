@@ -70,6 +70,7 @@ type
     Page2: TPage;
     DSSpictures: TStringGrid;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormDestroy(Sender: TObject);
     procedure anonpassChange(Sender: TObject);
     procedure astcdcClick(Sender: TObject);
     procedure AsteroidUrlListExit(Sender: TObject);
@@ -98,10 +99,10 @@ type
     procedure ShowDSS;
   public
     { Public declarations }
-    mycmain : conf_main;
-    mycdss : conf_dss;
-    cmain : Pconf_main;
-    cdss : Pconf_dss;
+    mycmain : Tconf_main;
+    mycdss : Tconf_dss;
+    cmain : Tconf_main;
+    cdss : Tconf_dss;
     procedure SetLang;
     constructor Create(AOwner:TComponent); override;
   end;
@@ -138,8 +139,10 @@ end;
 
 constructor Tf_config_internet.Create(AOwner:TComponent);
 begin
- cmain:=@mycmain;
- cdss:=@mycdss;
+ mycmain:=Tconf_main.Create;
+ mycdss:=Tconf_dss.Create;
+ cmain:=mycmain;
+ cdss:=mycdss;
  inherited Create(AOwner);
 end;
 
@@ -230,6 +233,12 @@ procedure Tf_config_internet.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
 LockChange:=true;
+end;
+
+procedure Tf_config_internet.FormDestroy(Sender: TObject);
+begin
+  mycmain.Free;
+  mycdss.Free;
 end;
 
 procedure Tf_config_internet.astcdcClick(Sender: TObject);

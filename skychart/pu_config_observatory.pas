@@ -103,6 +103,7 @@ type
     horizondepression: TCheckBox;
     Label1: TLabel;
     procedure Button2Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure fillhorizonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure cityfilterKeyDown(Sender: TObject; var Key: Word;
@@ -155,16 +156,16 @@ type
   public
     { Public declarations }
     cdb: Tcdcdb;
-    mycsc : conf_skychart;
-    myccat : conf_catalog;
-    mycshr : conf_shared;
-    mycplot : conf_plot;
-    mycmain : conf_main;
-    csc : ^conf_skychart;
-    ccat : ^conf_catalog;
-    cshr : ^conf_shared;
-    cplot : ^conf_plot;
-    cmain : ^conf_main;
+    mycsc : Tconf_skychart;
+    myccat : Tconf_catalog;
+    mycshr : Tconf_shared;
+    mycplot : Tconf_plot;
+    mycmain : Tconf_main;
+    csc : Tconf_skychart;
+    ccat : Tconf_catalog;
+    cshr : Tconf_shared;
+    cplot : Tconf_plot;
+    cmain : Tconf_main;
     procedure SetLang;
     constructor Create(AOwner:TComponent); override;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
@@ -220,13 +221,24 @@ end;
 
 constructor Tf_config_observatory.Create(AOwner:TComponent);
 begin
- csc:=@mycsc;
- ccat:=@myccat;
- cshr:=@mycshr;
- cplot:=@mycplot;
- cmain:=@mycmain;
+ mycsc:=Tconf_skychart.Create;
+ myccat:=Tconf_catalog.Create;
+ mycshr:=Tconf_shared.Create;
+ mycplot:=Tconf_plot.Create;
+ mycmain:=Tconf_main.Create;
+ csc:=mycsc;
+ ccat:=myccat;
+ cshr:=mycshr;
+ cplot:=mycplot;
+ cmain:=mycmain;
  inherited Create(AOwner);
 end;
+
+procedure Tf_config_observatory.FormDestroy(Sender: TObject);
+begin
+mycsc.Free;
+end;
+
 
 procedure Tf_config_observatory.FormCreate(Sender: TObject);
 begin

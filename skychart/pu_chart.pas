@@ -192,12 +192,12 @@ type
     sc: Tskychart;
     indi1: TIndiClient;
     locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar :boolean;
-    undolist : array[1..maxundo] of conf_skychart;
+    undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
-    procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:conf_main);
+    procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
     function  IdentXY(X, Y: Integer;searchcenter: boolean= true):boolean;
@@ -305,10 +305,12 @@ begin
 end;
 
 procedure Tf_chart.FormCreate(Sender: TObject);
+var i: integer;
 begin
  locked:=true;
  lockkey:=false;
  SetLang;
+ for i:=1 to maxundo do undolist[i]:=Tconf_skychart.Create;
  Image1:= TChartDrawingControl.Create(Self);
  Image1.Parent := Panel1;
  IdentLabel.Parent:=Image1;
@@ -360,6 +362,7 @@ begin
 end;
 
 procedure Tf_chart.FormDestroy(Sender: TObject);
+var i: integer;
 begin
 try
  locked:=true;
@@ -371,6 +374,7 @@ try
    indi1.onMessage:=nil;
    indi1.terminate;
  end;
+ for i:=1 to maxundo do undolist[i].Free;
 except
 writetrace('error destroy '+name);
 end;
@@ -401,9 +405,13 @@ Refresh;
 end;
 
 procedure Tf_chart.Refresh;
+{$ifdef showtime}
 var starttime:TDateTime;
+{$endif}
 begin
+{$ifdef showtime}
 starttime:=now;
+{$endif}
 try
 if locked then exit;
 if lock_refresh then exit;
@@ -420,7 +428,7 @@ if lock_refresh then exit;
  if not lastquick then begin
     inc(lastundo); inc(validundo);
     if lastundo>maxundo then lastundo:=1;
-    undolist[lastundo]:=sc.cfgsc^;
+    undolist[lastundo].Assign(sc.cfgsc);
     curundo:=lastundo;
     Identlabel.color:=sc.plot.cfgplot.color[0];
     Identlabel.font.color:=sc.plot.cfgplot.color[11];
@@ -460,7 +468,7 @@ if i<1 then i:=maxundo;
 if j>maxundo then j:=1;
 if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
   curundo:=i;
-  sc.cfgsc^:=undolist[curundo];
+  sc.cfgsc.Assign(undolist[curundo]);
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
   Image1.Invalidate;
@@ -482,7 +490,7 @@ if i>maxundo then i:=1;
 if j>maxundo then j:=1;
 if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
   curundo:=i;
-  sc.cfgsc^:=undolist[curundo];
+  sc.cfgsc.Assign(undolist[curundo]);
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
   Image1.Invalidate;
@@ -515,23 +523,23 @@ begin
 lockscrollbar:=true;
 try
 with sc do begin
- if cfgsc^.Projpole=AltAz then begin
-    HorScrollBar.Position:=round(rmod(cfgsc^.acentre+pi2,pi2)*rad2deg*3600);
-    VertScrollBar.Position:=-round(cfgsc^.hcentre*rad2deg*3600);
+ if cfgsc.Projpole=AltAz then begin
+    HorScrollBar.Position:=round(rmod(cfgsc.acentre+pi2,pi2)*rad2deg*3600);
+    VertScrollBar.Position:=-round(cfgsc.hcentre*rad2deg*3600);
  end
- else if cfgsc^.Projpole=Gal then begin
-    HorScrollBar.Position:=round(rmod(pi2-cfgsc^.lcentre+pi2,pi2)*rad2deg*3600);
-    VertScrollBar.Position:=-round(cfgsc^.bcentre*rad2deg*3600);
+ else if cfgsc.Projpole=Gal then begin
+    HorScrollBar.Position:=round(rmod(pi2-cfgsc.lcentre+pi2,pi2)*rad2deg*3600);
+    VertScrollBar.Position:=-round(cfgsc.bcentre*rad2deg*3600);
  end
- else if cfgsc^.Projpole=Ecl then begin
-    HorScrollBar.Position:=round(rmod(pi2-cfgsc^.lecentre+pi2,pi2)*rad2deg*3600);
-    VertScrollBar.Position:=-round(cfgsc^.becentre*rad2deg*3600);
+ else if cfgsc.Projpole=Ecl then begin
+    HorScrollBar.Position:=round(rmod(pi2-cfgsc.lecentre+pi2,pi2)*rad2deg*3600);
+    VertScrollBar.Position:=-round(cfgsc.becentre*rad2deg*3600);
  end
  else begin // Equ
-    HorScrollBar.Position:=round(rmod(pi2-cfgsc^.racentre+pi2,pi2)*rad2deg*3600);
-    VertScrollBar.Position:=-round(cfgsc^.decentre*rad2deg*3600);
+    HorScrollBar.Position:=round(rmod(pi2-cfgsc.racentre+pi2,pi2)*rad2deg*3600);
+    VertScrollBar.Position:=-round(cfgsc.decentre*rad2deg*3600);
  end;
- i:=round(rad2deg*3600*cfgsc^.fov/90);
+ i:=round(rad2deg*3600*cfgsc.fov/90);
  if i<1 then i:=1;
  if i>3600 then i:=3600;
  VertScrollBar.SmallChange:=i;
@@ -554,23 +562,23 @@ if lockscrollbar then exit;
 lockscrollbar:=true;
 try
 with sc do begin
- cfgsc^.TrackOn:=false;
- cfgsc^.Quick:=true;
- if cfgsc^.Projpole=AltAz then begin
-    cfgsc^.acentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
-    Hz2Eq(cfgsc^.acentre,cfgsc^.hcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
-    cfgsc^.racentre:=cfgsc^.CurST-cfgsc^.racentre;
+ cfgsc.TrackOn:=false;
+ cfgsc.Quick:=true;
+ if cfgsc.Projpole=AltAz then begin
+    cfgsc.acentre:=rmod(deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
+    cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
  end
- else if cfgsc^.Projpole=Gal then begin
-    cfgsc^.lcentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
-    Gal2Eq(cfgsc^.lcentre,cfgsc^.bcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
+ else if cfgsc.Projpole=Gal then begin
+    cfgsc.lcentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    Gal2Eq(cfgsc.lcentre,cfgsc.bcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
  end
- else if cfgsc^.Projpole=Ecl then begin
-    cfgsc^.lecentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
-    Ecl2Eq(cfgsc^.lecentre,cfgsc^.becentre,cfgsc^.e,cfgsc^.racentre,cfgsc^.decentre);
+ else if cfgsc.Projpole=Ecl then begin
+    cfgsc.lecentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
  end
  else begin // Equ
-    cfgsc^.racentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
+    cfgsc.racentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
 end;
 end;
 Refresh;
@@ -588,27 +596,27 @@ if lockscrollbar then exit;
 lockscrollbar:=true;
 try
 with sc do begin
- cfgsc^.TrackOn:=false;
- cfgsc^.Quick:=true;
- if cfgsc^.Projpole=AltAz then begin
-    cfgsc^.hcentre:=-deg2rad*VertScrollBar.Position/3600;
-    if cfgsc^.hcentre>pid2 then cfgsc^.hcentre:=pi-cfgsc^.hcentre;
-    Hz2Eq(cfgsc^.acentre,cfgsc^.hcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
-    cfgsc^.racentre:=cfgsc^.CurST-cfgsc^.racentre;
+ cfgsc.TrackOn:=false;
+ cfgsc.Quick:=true;
+ if cfgsc.Projpole=AltAz then begin
+    cfgsc.hcentre:=-deg2rad*VertScrollBar.Position/3600;
+    if cfgsc.hcentre>pid2 then cfgsc.hcentre:=pi-cfgsc.hcentre;
+    Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
+    cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
  end
- else if cfgsc^.Projpole=Gal then begin
-    cfgsc^.bcentre:=-deg2rad*VertScrollBar.Position/3600;
-    if cfgsc^.bcentre>pid2 then cfgsc^.bcentre:=pi-cfgsc^.bcentre;
-    Gal2Eq(cfgsc^.lcentre,cfgsc^.bcentre,cfgsc^.racentre,cfgsc^.decentre,cfgsc);
+ else if cfgsc.Projpole=Gal then begin
+    cfgsc.bcentre:=-deg2rad*VertScrollBar.Position/3600;
+    if cfgsc.bcentre>pid2 then cfgsc.bcentre:=pi-cfgsc.bcentre;
+    Gal2Eq(cfgsc.lcentre,cfgsc.bcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
  end
- else if cfgsc^.Projpole=Ecl then begin
-    cfgsc^.becentre:=-deg2rad*VertScrollBar.Position/3600;
-    if cfgsc^.becentre>pid2 then cfgsc^.becentre:=pi-cfgsc^.becentre;
-    Ecl2Eq(cfgsc^.lecentre,cfgsc^.becentre,cfgsc^.e,cfgsc^.racentre,cfgsc^.decentre);
+ else if cfgsc.Projpole=Ecl then begin
+    cfgsc.becentre:=-deg2rad*VertScrollBar.Position/3600;
+    if cfgsc.becentre>pid2 then cfgsc.becentre:=pi-cfgsc.becentre;
+    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
  end
  else begin // Equ
-    cfgsc^.decentre:=-deg2rad*VertScrollBar.Position/3600;
-    if cfgsc^.decentre>pid2 then cfgsc^.decentre:=pi-cfgsc^.decentre;
+    cfgsc.decentre:=-deg2rad*VertScrollBar.Position/3600;
+    if cfgsc.decentre>pid2 then cfgsc.decentre:=pi-cfgsc.decentre;
 end;
 end;
 Refresh;
@@ -653,18 +661,18 @@ Refresh;
 end;
 
 procedure Tf_chart.RemoveLastLabel1Click(Sender: TObject);
-var i,j: integer;
+var j: integer;
 begin
 if sc.cfgsc.poscustomlabels>0 then begin
-  for j:=sc.cfgsc.poscustomlabels+1 to sc.cfgsc^.numcustomlabels do
-      sc.cfgsc^.customlabels[j-1]:=sc.cfgsc^.customlabels[j];
-  dec(sc.cfgsc^.numcustomlabels);
-  sc.cfgsc^.poscustomlabels:=sc.cfgsc^.numcustomlabels;
+  for j:=sc.cfgsc.poscustomlabels+1 to sc.cfgsc.numcustomlabels do
+      sc.cfgsc.customlabels[j-1]:=sc.cfgsc.customlabels[j];
+  dec(sc.cfgsc.numcustomlabels);
+  sc.cfgsc.poscustomlabels:=sc.cfgsc.numcustomlabels;
 end;
 Refresh;
 end;
 
-procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:conf_main);
+procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main);
 var savecolor: Starcolarray;
     savesplot,savenplot,savepplot,savebgcolor,resol: integer;
     saveskycolor: boolean;
@@ -672,7 +680,6 @@ var savecolor: Starcolarray;
     prtname:string;
     prtbmp:Tbitmap;
     fname:WideString;
-    cmd:string;
     i,w,h :integer;
     ps:TPostscriptCanvas;
  begin
@@ -718,12 +725,12 @@ try
     sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,resol div 100]);
     sc.plot.cfgchart.fontscale:=1;
-    sc.cfgsc^.LeftMargin:=mm2pi(cm.PrtLeftMargin,resol);
-    sc.cfgsc^.RightMargin:=mm2pi(cm.PrtRightMargin,resol);
-    sc.cfgsc^.TopMargin:=mm2pi(cm.PrtTopMargin,resol);
-    sc.cfgsc^.BottomMargin:=mm2pi(cm.PrtBottomMargin,resol);
-    sc.cfgsc^.xshift:=printer.PaperSize.PaperRect.WorkRect.Left+sc.cfgsc^.LeftMargin;
-    sc.cfgsc^.yshift:=printer.PaperSize.PaperRect.WorkRect.Top+sc.cfgsc^.TopMargin;
+    sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,resol);
+    sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,resol);
+    sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,resol);
+    sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,resol);
+    sc.cfgsc.xshift:=printer.PaperSize.PaperRect.WorkRect.Left+sc.cfgsc.LeftMargin;
+    sc.cfgsc.yshift:=printer.PaperSize.PaperRect.WorkRect.Top+sc.cfgsc.TopMargin;
     w:=Printer.PageWidth;
     h:=Printer.PageHeight;
     sc.plot.init(w,h);
@@ -747,12 +754,12 @@ try
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
     sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
-    sc.cfgsc^.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
-    sc.cfgsc^.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
-    sc.cfgsc^.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
-    sc.cfgsc^.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
-    sc.cfgsc^.xshift:=sc.cfgsc^.LeftMargin;
-    sc.cfgsc^.yshift:=sc.cfgsc^.TopMargin;
+    sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
+    sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
+    sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
+    sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+    sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
+    sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
     sc.plot.init(ps.pagewidth,ps.pageheight);
     sc.Refresh;
     ps.enddoc;
@@ -779,12 +786,12 @@ try
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
     sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
-    sc.cfgsc^.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
-    sc.cfgsc^.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
-    sc.cfgsc^.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
-    sc.cfgsc^.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
-    sc.cfgsc^.xshift:=sc.cfgsc^.LeftMargin;
-    sc.cfgsc^.yshift:=sc.cfgsc^.TopMargin;
+    sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
+    sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
+    sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
+    sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+    sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
+    sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
     sc.plot.init(prtbmp.width,prtbmp.height);
     sc.Refresh;
     // save the bitmap
@@ -808,12 +815,12 @@ finally
  sc.plot.cfgplot.autoskycolor:=saveskycolor;
  sc.plot.cfgplot.bgColor:=savebgcolor;
  for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=saveLabelColor[i];
- sc.cfgsc^.xshift:=0;
- sc.cfgsc^.yshift:=0;
- sc.cfgsc^.LeftMargin:=0;
- sc.cfgsc^.RightMargin:=0;
- sc.cfgsc^.TopMargin:=0;
- sc.cfgsc^.BottomMargin:=0;
+ sc.cfgsc.xshift:=0;
+ sc.cfgsc.yshift:=0;
+ sc.cfgsc.LeftMargin:=0;
+ sc.cfgsc.RightMargin:=0;
+ sc.cfgsc.TopMargin:=0;
+ sc.cfgsc.BottomMargin:=0;
  // redraw to screen
  sc.plot.destcnv:=Image1.canvas;
  sc.plot.cfgchart.onprinter:=false;
@@ -950,7 +957,6 @@ begin
 end;
 
 procedure Tf_chart.CKeyDown(var Key: Word; Shift: TShiftState);
-var ok:boolean;
 begin
 if LockKeyboard then exit;
 try
@@ -965,8 +971,6 @@ if Shift = [ssCtrl] then begin
    movefactor:=4;
    zoomfactor:=3;
 end;
-ok:=true;
-//sc.cfgsc.quick:=true;
 case key of
 key_upright   : MoveNorthWest.execute;
 key_downright : MoveSouthWest.execute;
@@ -978,16 +982,7 @@ key_right     : MoveWest.execute;
 key_down      : MoveSouth.execute;
 key_plus      : Zoomplus.execute;
 key_minus     : Zoomminus.execute;
-{else begin
-     ok:=false;
-     sc.cfgsc.quick:=false;
-     end;}
 end;
-{if ok then begin
-   key:=0;
-   RefreshTimer.enabled:=false;
-   RefreshTimer.enabled:=true;
-end;}
 movefactor:=4;
 zoomfactor:=2;
 application.processmessages;  // very important to empty the mouse event queue before to unlock
@@ -1219,8 +1214,7 @@ end;
 
 procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
-var ra,dec,a,h,l,b,le,be,c:double;
-    txt:string;
+var c:double;
 begin
 if locked then exit;
 if skipmove>0 then begin
@@ -1253,7 +1247,7 @@ end;
 end;
 
 Procedure Tf_chart.ShowCoord(x,y: Integer);
-var ra,dec,a,h,l,b,le,be,c:double;
+var ra,dec,a,h,l,b,le,be:double;
     txt:string;
 begin
    {show the coordinates}
@@ -2265,8 +2259,8 @@ begin
 if sc.catalog.cfgshr.AutoStarFilter then
    sc.catalog.cfgshr.AutoStarFilterMag:=min(16,sc.catalog.cfgshr.AutoStarFilterMag+0.5)
 else begin
-   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=min(sc.plot.cfgchart^.max_catalog_mag,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]+0.5);
-   if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>sc.plot.cfgchart^.max_catalog_mag then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=99;
+   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=min(sc.plot.cfgchart.max_catalog_mag,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]+0.5);
+   if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>sc.plot.cfgchart.max_catalog_mag then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=99;
 end;
 refresh;
 end;
@@ -2276,7 +2270,7 @@ begin
 if sc.catalog.cfgshr.AutoStarFilter then
    sc.catalog.cfgshr.AutoStarFilterMag:=max(1,sc.catalog.cfgshr.AutoStarFilterMag-0.5)
 else begin
-   if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>=99 then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=sc.plot.cfgchart^.min_ma
+   if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>=99 then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=sc.plot.cfgchart.min_ma
       else sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=max(1,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]-0.5);
 end;
 refresh;
@@ -2759,10 +2753,10 @@ var
    PNG : TPortableNetworkGraphic;
    savelabel:boolean;
 begin
-savelabel:= sc.cfgsc^.Editlabels;
+savelabel:= sc.cfgsc.Editlabels;
 try
 if savelabel then begin
-   sc.cfgsc^.Editlabels:=false;
+   sc.cfgsc.Editlabels:=false;
    sc.Refresh;
 end;
  if fn='' then fn:='cdc.bmp';
@@ -2802,7 +2796,7 @@ end;
  else result:=false;
 finally
 if savelabel then begin
-   sc.cfgsc^.Editlabels:=true;
+   sc.cfgsc.Editlabels:=true;
    sc.Refresh;
    SetScrollBar;
 end;

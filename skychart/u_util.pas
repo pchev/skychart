@@ -86,8 +86,8 @@ function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 Function GetTimeZone : double;
-function SetCurrentTime(cfgsc:Pconf_skychart):boolean;
-function DTminusUT(annee : integer; c:Pconf_skychart) : double;
+function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
+function DTminusUT(annee : integer; c:Tconf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
 Function ExecProcess(cmd: string; output: TStringList): integer;
 Function Exec(cmd: string; hide: boolean=true): integer;
@@ -895,22 +895,22 @@ begin
 {$endif}
 end;
 
-function SetCurrentTime(cfgsc:Pconf_skychart):boolean;
+function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
 var y,m,d:word;
 begin
 decodedate(now,y,m,d);
-cfgsc^.CurYear:=y;
-cfgsc^.CurMonth:=m;
-cfgsc^.CurDay:=d;
-cfgsc^.CurTime:=frac(now)*24;
-cfgsc^.TimeZone:=GetTimezone;
+cfgsc.CurYear:=y;
+cfgsc.CurMonth:=m;
+cfgsc.CurDay:=d;
+cfgsc.CurTime:=frac(now)*24;
+cfgsc.TimeZone:=GetTimezone;
 result:=true;
 end;
 
-function DTminusUT(annee : integer; c:Pconf_skychart) : double;
+function DTminusUT(annee : integer; c:Tconf_skychart) : double;
 var t : double;
 begin
-if c^.Force_DT_UT then result:=c^.DT_UT_val
+if c.Force_DT_UT then result:=c.DT_UT_val
 else begin
 case annee of
 { Atlas of Historical Eclipse Maps East Asia 1500 BC - AD 1900, Stephenson and Houlden (1986)
@@ -1093,7 +1093,6 @@ var
   P: TProcess;
   n: LongInt;
   BytesRead: LongInt;
-  TotalBytesAvailable: integer;
 begin
 M := TMemoryStream.Create;
 P := TProcess.Create(nil);

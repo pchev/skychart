@@ -72,7 +72,7 @@ type
     procedure updprtsetup;
   public
     { Public declarations }
-    cm: conf_main;
+    cm: Tconf_main;
     procedure SetLang;
   end;
 

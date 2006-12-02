@@ -12,6 +12,7 @@ object f_config_observatory: Tf_config_observatory
   ChildSizing.LeftRightSpacing = 525
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   object MainPanel: TPanel
     Height = 493
@@ -336,7 +337,8 @@ object f_config_observatory: Tf_config_observatory
           Height = 200
           Top = 251
           Width = 400
-          Canvas.Brush.Color = clBlack
+          Canvas.Brush.Color = clBtnFace
+          Canvas.Color = clBtnFace
           Zoom = 25
           ZoomMin = 25
           ZoomMax = 26
@@ -346,7 +348,7 @@ object f_config_observatory: Tf_config_observatory
         end
         object HScrollBar: TScrollBar
           Left = 47
-          Height = 13
+          Height = 18
           Top = 452
           Width = 400
           PageSize = 1
@@ -355,9 +357,9 @@ object f_config_observatory: Tf_config_observatory
         end
         object VScrollBar: TScrollBar
           Left = 448
-          Height = 13
+          Height = 18
           Top = 251
-          Width = 13
+          Width = 18
           Kind = sbVertical
           PageSize = 1
           TabOrder = 9
@@ -605,11 +607,11 @@ object f_config_observatory: Tf_config_observatory
             Height = 23
             Top = 56
             Width = 208
-            OnChange = horizonfileChange
-            TabOrder = 1
             ButtonWidth = 23
             NumGlyphs = 1
             ParentColor = False
+            TabOrder = 1
+            OnChange = horizonfileChange
           end
           object fillhorizon: TCheckBox
             Left = 221

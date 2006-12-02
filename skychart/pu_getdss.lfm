@@ -1,22 +1,22 @@
 object f_getdss: Tf_getdss
+  Left = 243
+  Height = 308
+  Top = 156
+  Width = 420
+  HorzScrollBar.Page = 419
+  VertScrollBar.Page = 307
   ActiveControl = ListBox1
   Caption = 'List of available plates'
-  ClientHeight = 308
-  ClientWidth = 420
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  PixelsPerInch = 96
-  TextHeight = 13
-  HorzScrollBar.Page = 419
-  VertScrollBar.Page = 307
-  Left = 243
-  Height = 308
-  Top = 156
-  Width = 420
   object Label1: TLabel
+    Left = 12
+    Height = 10
+    Top = 8
+    Width = 37
     Caption = 'Label1'
     Color = clNone
     Font.CharSet = ANSI_CHARSET
@@ -24,12 +24,12 @@ object f_getdss: Tf_getdss
     Font.Name = 'courier'
     Font.Pitch = fpFixed
     ParentColor = False
-    Left = 12
-    Height = 14
-    Top = 8
-    Width = 49
   end
   object IpHtmlPanel1: TIpHtmlPanel
+    Left = 9
+    Height = 248
+    Top = 24
+    Width = 403
     FixedTypeface = 'Courier New'
     DefaultTypeFace = 'default'
     PrintSettings.MarginLeft = 0.5
@@ -37,12 +37,12 @@ object f_getdss: Tf_getdss
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
     Visible = False
-    Left = 9
-    Height = 248
-    Top = 24
-    Width = 403
   end
   object ListBox1: TListBox
+    Left = 8
+    Height = 230
+    Top = 32
+    Width = 401
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11
     Font.Name = 'courier'
@@ -50,34 +50,31 @@ object f_getdss: Tf_getdss
     IntegralHeight = True
     ItemHeight = 18
     TabOrder = 0
-    Left = 8
-    Height = 230
-    Top = 32
-    Width = 401
+    TopIndex = -1
   end
   object BitBtn1: TBitBtn
+    Left = 96
+    Height = 25
+    Top = 272
+    Width = 75
     BorderSpacing.InnerBorder = 2
     Caption = 'OK'
     Default = True
     ModalResult = 1
     NumGlyphs = 0
     TabOrder = 1
-    Left = 96
+  end
+  object BitBtn2: TBitBtn
+    Left = 206
     Height = 25
     Top = 272
     Width = 75
-  end
-  object BitBtn2: TBitBtn
     BorderSpacing.InnerBorder = 2
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
     NumGlyphs = 0
     TabOrder = 2
-    Left = 206
-    Height = 25
-    Top = 272
-    Width = 75
   end
   object DownloadDialog1: TDownloadDialog
     FtpFwPassive = True

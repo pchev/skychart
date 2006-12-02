@@ -11,6 +11,7 @@ object f_config_time: Tf_config_time
   Caption = 'Date / Time'
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   object MainPanel: TPanel
     Height = 477

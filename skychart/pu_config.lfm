@@ -1,7 +1,7 @@
 object f_config: Tf_config
-  Left = 239
+  Left = 631
   Height = 521
-  Top = 119
+  Top = 105
   Width = 700
   HorzScrollBar.Page = 699
   VertScrollBar.Page = 520
@@ -144,6 +144,7 @@ object f_config: Tf_config
   }
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   object Panel1: TPanel
     Height = 480

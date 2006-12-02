@@ -9,6 +9,7 @@ object f_config_system: Tf_config_system
   Caption = 'System'
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   object MainPanel: TPanel
     Left = 8
@@ -192,22 +193,22 @@ object f_config_system: Tf_config_system
             Height = 23
             Top = 3
             Width = 250
-            OnChange = prgdirChange
-            TabOrder = 0
             ButtonWidth = 23
             NumGlyphs = 1
             ParentColor = False
+            TabOrder = 0
+            OnChange = prgdirChange
           end
           object persdir: TDirectoryEdit
             Left = 143
             Height = 23
             Top = 42
             Width = 250
-            OnChange = persdirChange
-            TabOrder = 1
             ButtonWidth = 23
             NumGlyphs = 1
             ParentColor = False
+            TabOrder = 1
+            OnChange = persdirChange
           end
         end
         object GroupBox1: TGroupBox

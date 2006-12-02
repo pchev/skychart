@@ -104,6 +104,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure NumButtonClick(Sender: TObject);
     procedure SpeedButton11Click(Sender: TObject);
     procedure SpeedButton13Click(Sender: TObject);
@@ -131,8 +132,8 @@ type
     Num : string;
     ra,de: double;
     SearchKind : integer;
-    cfgshr: conf_shared;
-    cfgsc:  Pconf_skychart;
+    cfgshr: Tconf_shared;
+    cfgsc:  Tconf_skychart;
     procedure SetLang;
     function SearchNebName(Num:string; var ar1,de1: double): boolean;
   end;
@@ -196,6 +197,7 @@ end;
 
 procedure Tf_search.FormCreate(Sender: TObject);
 begin
+cfgsc:=Tconf_skychart.create;
 SetLang;
   Fnightvision:=false;
 {$ifdef win32}
@@ -203,6 +205,11 @@ SetLang;
 {$endif}
 CometFilter.Text:='C/'+FormatDateTime('yyyy',now);
 RadioGroup1Click(Sender);
+end;
+
+procedure Tf_search.FormDestroy(Sender: TObject);
+begin
+  cfgsc.free;
 end;
 
 procedure Tf_search.Button3Click(Sender: TObject);
@@ -423,7 +430,7 @@ begin
 PlanetBox.Clear;
 for i:=1 to 11 do begin
   if i=3 then continue;
-  if (i=9) and (not cfgsc^.ShowPluto) then continue;
+  if (i=9) and (not cfgsc.ShowPluto) then continue;
   PlanetBox.Items.Add(pla[i]);
 end;
 PlanetBox.ItemIndex:=0;

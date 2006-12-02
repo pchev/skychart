@@ -70,10 +70,10 @@ type
      cdb: TCdcDb;
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
-     Procedure ComputePlanet(cfgsc: Pconf_skychart);
-     Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Pconf_skychart);
-     function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Pconf_skychart):boolean;
-     function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Pconf_skychart; var nom,ma,date,desc:string):boolean;
+     Procedure ComputePlanet(cfgsc: Tconf_skychart);
+     Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
+     function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
+     function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string):boolean;
      Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp : double; highprec:boolean=true);
      Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double; highprec:boolean=true);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double;  highprec:boolean=true);
@@ -88,26 +88,26 @@ type
      Function MoonMag(phase:double):double;
      Procedure PlanetOrientation(jde:double; ipla:integer; var P,De,Ds,w1,w2,w3 : double);
      Procedure MoonOrientation(jde,ra,dec,d:double; var P,llat,lats,llong : double);
-     Procedure ComputeAsteroid(cfgsc: Pconf_skychart);
-     Procedure ComputeComet(cfgsc: Pconf_skychart);
+     Procedure ComputeAsteroid(cfgsc: Tconf_skychart);
+     Procedure ComputeComet(cfgsc: Tconf_skychart);
      PROCEDURE OrbRect(jd :Double ; VAR xc,yc,zc,rs :Double );
      PROCEDURE InitComet(tp,q,ec,ap,an,ic,mh,mg,eq: double; nam:string);
      PROCEDURE Comet(jd :Double; lightcor:boolean; VAR ar,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc : Double);
      PROCEDURE InitAsteroid(epoch,mh,mg,ma,ap,an,ic,ec,sa,eq: double; nam:string);
      PROCEDURE Asteroid(jd :Double; highprec:boolean; VAR ar,de,dist,r,elong,phase,magn : Double);
      Function ConnectDB(host,db,user,pass:string; port:integer):boolean;
-     Function NewAstDay(newjd,limitmag:double; cfgsc: Pconf_skychart):boolean;
+     Function NewAstDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewAstDayCallback(Sender:TObject; Row:TResultRow);
-     function  FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Pconf_skychart; var nom,mag,date,desc:string):boolean;
-     function  FindAsteroidName(astname: String; var ra,de:double; cfgsc: Pconf_skychart):boolean;
+     function  FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string):boolean;
+     function  FindAsteroidName(astname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
      function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
      Procedure PrepareAsteroidCallback(Sender:TObject; Row:TResultRow);
-     Function NewComDay(newjd,limitmag:double; cfgsc: Pconf_skychart):boolean;
+     Function NewComDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewComDayCallback(Sender:TObject; Row:TResultRow);
-     function FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Pconf_skychart; var nom,mag,date,desc:string):boolean;
-     function FindCometName(comname: String; var ra,de:double; cfgsc: Pconf_skychart):boolean;
-     procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ; var i: integer; cfgsc: Pconf_skychart);
-     procedure PlanetAltitude(pla: integer; jd0,hh:double; cfgsc: Pconf_skychart; var har,sina: double);
+     function FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string):boolean;
+     function FindCometName(comname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
+     procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ; var i: integer; cfgsc: Tconf_skychart);
+     procedure PlanetAltitude(pla: integer; jd0,hh:double; cfgsc: Tconf_skychart; var har,sina: double);
   end;
 
 implementation
@@ -747,7 +747,7 @@ begin
 incl:=arctan2(cos(Sde)*sin(Sar-Lar),cos(Lde)*sin(Sde)-sin(Lde)*cos(Sde)*cos(Sar-Lar) );
 end;
 
-Procedure TPlanet.ComputePlanet(cfgsc: Pconf_skychart);
+Procedure TPlanet.ComputePlanet(cfgsc: Tconf_skychart);
 var ar,de,dist,illum,phase,diam,jdt,magn,jd0,st0,dkm,q,P,a,b,be,dp,sb,pha : double;
   ipla,j,i,ierr: integer;
   satx,saty : double8;
@@ -756,137 +756,137 @@ var ar,de,dist,illum,phase,diam,jdt,magn,jd0,st0,dkm,q,P,a,b,be,dp,sb,pha : doub
 begin
 try
 while lockpla do application.ProcessMessages; lockpla:=true;
-for j:=0 to cfgsc^.SimNb-1 do begin
- jd0:=jd(cfgsc^.CurYear,cfgsc^.CurMonth,cfgsc^.CurDay+j*cfgsc^.SimD,0.0);
- jdt:=jd(cfgsc^.CurYear,cfgsc^.CurMonth,cfgsc^.CurDay+j*cfgsc^.SimD,cfgsc^.CurTime-cfgsc^.TimeZone+cfgsc^.DT_UT+j*cfgsc^.SimH+j*cfgsc^.SimM/60+j*cfgsc^.SimS/3600);
- st0:=SidTim(jd0,cfgsc^.CurTime-cfgsc^.TimeZone+j*cfgsc^.SimH+j*cfgsc^.SimM/60+j*cfgsc^.SimS/3600,cfgsc^.ObsLongitude);
+for j:=0 to cfgsc.SimNb-1 do begin
+ jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,0.0);
+ jdt:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600);
+ st0:=SidTim(jd0,cfgsc.CurTime-cfgsc.TimeZone+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600,cfgsc.ObsLongitude);
  // Sun first
  ipla:=10;
  Sun(jdt,ar,de,dist,diam);
- precession(jd2000,cfgsc^.JDChart,ar,de);     // equinox require for the chart
- cfgsc^.PlanetLst[j,32,1]:=rmod(ar+pi,pi2);   // use geocentrique position for earth umbra
- cfgsc^.PlanetLst[j,32,2]:=-de;
- cfgsc^.PlanetLst[j,32,3]:=dist;
- if cfgsc^.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
- if cfgsc^.ApparentPos then apparent_equatorial(ar,de,cfgsc);
- cfgsc^.PlanetLst[j,ipla,1]:=ar;
- cfgsc^.PlanetLst[j,ipla,2]:=de;
- cfgsc^.PlanetLst[j,ipla,3]:=jdt;
- cfgsc^.PlanetLst[j,ipla,4]:=diam;
- cfgsc^.PlanetLst[j,ipla,5]:=-26;
- cfgsc^.PlanetLst[j,ipla,6]:=dist;
- cfgsc^.PlanetLst[j,ipla,7]:=0;        //phase
+ precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
+ cfgsc.PlanetLst[j,32,1]:=rmod(ar+pi,pi2);   // use geocentrique position for earth umbra
+ cfgsc.PlanetLst[j,32,2]:=-de;
+ cfgsc.PlanetLst[j,32,3]:=dist;
+ if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
+ if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+ cfgsc.PlanetLst[j,ipla,1]:=ar;
+ cfgsc.PlanetLst[j,ipla,2]:=de;
+ cfgsc.PlanetLst[j,ipla,3]:=jdt;
+ cfgsc.PlanetLst[j,ipla,4]:=diam;
+ cfgsc.PlanetLst[j,ipla,5]:=-26;
+ cfgsc.PlanetLst[j,ipla,6]:=dist;
+ cfgsc.PlanetLst[j,ipla,7]:=0;        //phase
  if j=0 then begin
-   Eq2HZ(cfgsc^.CurST-ar,de,a,cfgsc^.curSunH,cfgsc);
+   Eq2HZ(cfgsc.CurST-ar,de,a,cfgsc.curSunH,cfgsc);
  end;
  for ipla:=1 to 9 do begin
    if ipla=3 then continue;
    Planet(ipla,jdt,ar,de,dist,illum,phase,diam,magn,dp);
-   precession(jd2000,cfgsc^.JDChart,ar,de);     // equinox require for the chart
-   if cfgsc^.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
-   if cfgsc^.ApparentPos then apparent_equatorial(ar,de,cfgsc);
-   cfgsc^.PlanetLst[j,ipla,1]:=ar;
-   cfgsc^.PlanetLst[j,ipla,2]:=de;
-   cfgsc^.PlanetLst[j,ipla,3]:=jdt;
-   cfgsc^.PlanetLst[j,ipla,4]:=diam;
-   cfgsc^.PlanetLst[j,ipla,5]:=magn;
-   cfgsc^.PlanetLst[j,ipla,6]:=dist;
-   cfgsc^.PlanetLst[j,ipla,7]:=phase;
+   precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
+   if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
+   if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+   cfgsc.PlanetLst[j,ipla,1]:=ar;
+   cfgsc.PlanetLst[j,ipla,2]:=de;
+   cfgsc.PlanetLst[j,ipla,3]:=jdt;
+   cfgsc.PlanetLst[j,ipla,4]:=diam;
+   cfgsc.PlanetLst[j,ipla,5]:=magn;
+   cfgsc.PlanetLst[j,ipla,6]:=dist;
+   cfgsc.PlanetLst[j,ipla,7]:=phase;
    pha:=abs(phase);
     if ipla=4 then begin
        ierr:=Marsat(jdt,diam,satx,saty,supconj);
-       if ierr>0 then for i:=1 to 2 do cfgsc^.PlanetLst[j,i+28,6]:=99
+       if ierr>0 then for i:=1 to 2 do cfgsc.PlanetLst[j,i+28,6]:=99
        else for i:=1 to 2 do begin
            ars:=ar+secarc*satx[i]/cos(de);
            des:=de+secarc*saty[i];
-           cfgsc^.PlanetLst[j,i+28,1]:=ars;
-           cfgsc^.PlanetLst[j,i+28,2]:=des;
-           cfgsc^.PlanetLst[j,i+28,3]:=jdt;
-           cfgsc^.PlanetLst[j,i+28,4]:=rad2deg*(2*D0mar[i]/km_au/dist)*3600;
-           cfgsc^.PlanetLst[j,i+28,5]:=V0mar[i]+5*log10(dp*dist)+pha*(0.0380+pha*(-0.000273+pha*2e-6));
-           if supconj[i] then cfgsc^.PlanetLst[j,i+28,6]:=10
-                         else cfgsc^.PlanetLst[j,i+28,6]:=0;
+           cfgsc.PlanetLst[j,i+28,1]:=ars;
+           cfgsc.PlanetLst[j,i+28,2]:=des;
+           cfgsc.PlanetLst[j,i+28,3]:=jdt;
+           cfgsc.PlanetLst[j,i+28,4]:=rad2deg*(2*D0mar[i]/km_au/dist)*3600;
+           cfgsc.PlanetLst[j,i+28,5]:=V0mar[i]+5*log10(dp*dist)+pha*(0.0380+pha*(-0.000273+pha*2e-6));
+           if supconj[i] then cfgsc.PlanetLst[j,i+28,6]:=10
+                         else cfgsc.PlanetLst[j,i+28,6]:=0;
        end;
     end;
     if ipla=5 then begin
        ierr:=jupsat(jdt,diam,satx,saty,supconj);
-       if ierr>0 then for i:=1 to 4 do cfgsc^.PlanetLst[j,i+11,6]:=99
+       if ierr>0 then for i:=1 to 4 do cfgsc.PlanetLst[j,i+11,6]:=99
        else for i:=1 to 4 do begin
            ars:=ar+secarc*satx[i]/cos(de);
            des:=de+secarc*saty[i];
-           cfgsc^.PlanetLst[j,i+11,1]:=ars;
-           cfgsc^.PlanetLst[j,i+11,2]:=des;
-           cfgsc^.PlanetLst[j,i+11,3]:=jdt;
-           cfgsc^.PlanetLst[j,i+11,4]:=rad2deg*(2*D0jup[i]/km_au/dist)*3600;
-           cfgsc^.PlanetLst[j,i+11,5]:=V0jup[i]+5*log10(dp*dist)+0.005*pha;
-           if supconj[i] then cfgsc^.PlanetLst[j,i+11,6]:=10
-                         else cfgsc^.PlanetLst[j,i+11,6]:=0;
+           cfgsc.PlanetLst[j,i+11,1]:=ars;
+           cfgsc.PlanetLst[j,i+11,2]:=des;
+           cfgsc.PlanetLst[j,i+11,3]:=jdt;
+           cfgsc.PlanetLst[j,i+11,4]:=rad2deg*(2*D0jup[i]/km_au/dist)*3600;
+           cfgsc.PlanetLst[j,i+11,5]:=V0jup[i]+5*log10(dp*dist)+0.005*pha;
+           if supconj[i] then cfgsc.PlanetLst[j,i+11,6]:=10
+                         else cfgsc.PlanetLst[j,i+11,6]:=0;
        end;
     end;
     if ipla=6 then begin
        ierr:=Satsat(jdt,diam,satx,saty,supconj);
-       if ierr>0 then for i:=1 to 8 do cfgsc^.PlanetLst[j,i+15,6]:=99
+       if ierr>0 then for i:=1 to 8 do cfgsc.PlanetLst[j,i+15,6]:=99
        else for i:=1 to 8 do begin
            ars:=ar+secarc*satx[i]/cos(de);
            des:=de+secarc*saty[i];
-           cfgsc^.PlanetLst[j,i+15,1]:=ars;
-           cfgsc^.PlanetLst[j,i+15,2]:=des;
-           cfgsc^.PlanetLst[j,i+15,3]:=jdt;
-           cfgsc^.PlanetLst[j,i+15,4]:=rad2deg*(2*D0sat[i]/km_au/dist)*3600;
-           cfgsc^.PlanetLst[j,i+15,5]:=V0sat[i]+5*log10(dp*dist)+0.044*pha;
-           if supconj[i] then cfgsc^.PlanetLst[j,i+15,6]:=10
-                         else cfgsc^.PlanetLst[j,i+15,6]:=0;
+           cfgsc.PlanetLst[j,i+15,1]:=ars;
+           cfgsc.PlanetLst[j,i+15,2]:=des;
+           cfgsc.PlanetLst[j,i+15,3]:=jdt;
+           cfgsc.PlanetLst[j,i+15,4]:=rad2deg*(2*D0sat[i]/km_au/dist)*3600;
+           cfgsc.PlanetLst[j,i+15,5]:=V0sat[i]+5*log10(dp*dist)+0.044*pha;
+           if supconj[i] then cfgsc.PlanetLst[j,i+15,6]:=10
+                         else cfgsc.PlanetLst[j,i+15,6]:=0;
        end;
        SatRing(jdt,P,a,b,be);
-       cfgsc^.PlanetLst[j,31,1]:=P;
-       cfgsc^.PlanetLst[j,31,2]:=a;
-       cfgsc^.PlanetLst[j,31,3]:=b;
-       cfgsc^.PlanetLst[j,31,4]:=be;
+       cfgsc.PlanetLst[j,31,1]:=P;
+       cfgsc.PlanetLst[j,31,2]:=a;
+       cfgsc.PlanetLst[j,31,3]:=b;
+       cfgsc.PlanetLst[j,31,4]:=be;
        // ring magn. correction
        sb:=sin(deg2rad*abs(be));
-       cfgsc^.PlanetLst[j,ipla,5]:=cfgsc^.PlanetLst[j,ipla,5]-2.6*sb+1.25*sb*sb;
+       cfgsc.PlanetLst[j,ipla,5]:=cfgsc.PlanetLst[j,ipla,5]-2.6*sb+1.25*sb*sb;
     end;
     if ipla=7 then begin
        ierr:=Urasat(jdt,diam,satx,saty,supconj);
-       if ierr>0 then for i:=1 to 5 do cfgsc^.PlanetLst[j,i+23,6]:=99
+       if ierr>0 then for i:=1 to 5 do cfgsc.PlanetLst[j,i+23,6]:=99
        else for i:=1 to 5 do begin
            ars:=ar+secarc*satx[i]/cos(de);
            des:=de+secarc*saty[i];
-           cfgsc^.PlanetLst[j,i+23,1]:=ars;
-           cfgsc^.PlanetLst[j,i+23,2]:=des;
-           cfgsc^.PlanetLst[j,i+23,3]:=jdt;
-           cfgsc^.PlanetLst[j,i+23,4]:=rad2deg*(2*D0ura[i]/km_au/dist)*3600;
-           cfgsc^.PlanetLst[j,i+23,5]:=V0ura[i]+5*log10(dp*dist);
-           if supconj[i] then cfgsc^.PlanetLst[j,i+23,6]:=10
-                         else cfgsc^.PlanetLst[j,i+23,6]:=0;
+           cfgsc.PlanetLst[j,i+23,1]:=ars;
+           cfgsc.PlanetLst[j,i+23,2]:=des;
+           cfgsc.PlanetLst[j,i+23,3]:=jdt;
+           cfgsc.PlanetLst[j,i+23,4]:=rad2deg*(2*D0ura[i]/km_au/dist)*3600;
+           cfgsc.PlanetLst[j,i+23,5]:=V0ura[i]+5*log10(dp*dist);
+           if supconj[i] then cfgsc.PlanetLst[j,i+23,6]:=10
+                         else cfgsc.PlanetLst[j,i+23,6]:=0;
        end;
     end;
  end;
  ipla:=11;
  Moon(jdt,ar,de,dist,dkm,diam,phase,illum);
- precession(jd2000,cfgsc^.JDChart,ar,de);     // equinox require for the chart
- cfgsc^.PlanetLst[j,32,4]:=dist;
- cfgsc^.PlanetLst[j,32,5]:=dkm;
- if cfgsc^.PlanetParalaxe then begin
+ precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
+ cfgsc.PlanetLst[j,32,4]:=dist;
+ cfgsc.PlanetLst[j,32,5]:=dkm;
+ if cfgsc.PlanetParalaxe then begin
     Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
     diam:=diam/q;
     dist:=dist*q;
     dkm:=dkm*q;
-    cfgsc^.PlanetLst[j,32,5]:=dkm;
-    cfgsc^.PlanetLst[j,32,4]:=dist;
-    Paralaxe(st0,dist,cfgsc^.PlanetLst[j,32,1],cfgsc^.PlanetLst[j,32,2],cfgsc^.PlanetLst[j,32,1],cfgsc^.PlanetLst[j,32,2],q,cfgsc);
+    cfgsc.PlanetLst[j,32,5]:=dkm;
+    cfgsc.PlanetLst[j,32,4]:=dist;
+    Paralaxe(st0,dist,cfgsc.PlanetLst[j,32,1],cfgsc.PlanetLst[j,32,2],cfgsc.PlanetLst[j,32,1],cfgsc.PlanetLst[j,32,2],q,cfgsc);
  end;
- if cfgsc^.ApparentPos then apparent_equatorial(ar,de,cfgsc);
- cfgsc^.PlanetLst[j,ipla,1]:=ar;
- cfgsc^.PlanetLst[j,ipla,2]:=de;
- cfgsc^.PlanetLst[j,ipla,3]:=jdt;
- cfgsc^.PlanetLst[j,ipla,4]:=diam;
- cfgsc^.PlanetLst[j,ipla,5]:=illum;
- cfgsc^.PlanetLst[j,ipla,6]:=dist;
- cfgsc^.PlanetLst[j,ipla,7]:=phase;
+ if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+ cfgsc.PlanetLst[j,ipla,1]:=ar;
+ cfgsc.PlanetLst[j,ipla,2]:=de;
+ cfgsc.PlanetLst[j,ipla,3]:=jdt;
+ cfgsc.PlanetLst[j,ipla,4]:=diam;
+ cfgsc.PlanetLst[j,ipla,5]:=illum;
+ cfgsc.PlanetLst[j,ipla,6]:=dist;
+ cfgsc.PlanetLst[j,ipla,7]:=phase;
  if j=0 then begin
-   Eq2HZ(cfgsc^.CurST-ar,de,a,cfgsc^.curMoonH,cfgsc);
-   cfgsc^.curMoonIllum:=illum;
+   Eq2HZ(cfgsc.CurST-ar,de,a,cfgsc.curMoonH,cfgsc);
+   cfgsc.curMoonIllum:=illum;
  end;
 end;
 finally
@@ -894,23 +894,23 @@ finally
 end;
 end;
 
-Procedure TPlanet.FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Pconf_skychart);
+Procedure TPlanet.FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
 begin
 ok:=false;
 if (id<1) or (id>30) then exit;
 ok:=true;
-ar:=cfgsc^.Planetlst[0,id,1];
-de:=cfgsc^.Planetlst[0,id,2];
+ar:=cfgsc.Planetlst[0,id,1];
+de:=cfgsc.Planetlst[0,id,2];
 // back to j2000
-precession(cfgsc^.JDchart,jd2000,ar,de);
+precession(cfgsc.JDchart,jd2000,ar,de);
 end;
 
-function TPlanet.FindPlanetName(planetname: String; var ra,de:double; cfgsc: Pconf_skychart):boolean;
+function TPlanet.FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
 var i : integer;
 begin
 result:=false;
    for i:=1 to 30 do begin
-     if (i=9) and (not cfgsc^.ShowPluto) then continue;
+     if (i=9) and (not cfgsc.ShowPluto) then continue;
      if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) then begin
          FindNumPla(i,ra,de,result,cfgsc);
          break;
@@ -918,7 +918,7 @@ result:=false;
    end;
 end;
 
-function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Pconf_skychart; var nom,ma,date,desc:string):boolean;
+function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string):boolean;
 var
    yy,mm,dd,i : integer;
    tar,tde,ar,de : double;
@@ -940,14 +940,14 @@ directfind := false;
 desc:='';tar:=1;tde:=1;jdt:=0;
 repeat
   inc(CurrentPlanet);
-  if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc^.SimObject[CurrentPlanet]) then continue;
+  if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc.SimObject[CurrentPlanet]) then continue;
   if CurrentPlanet=3 then continue;    // skip Earth
-  if (CurrentPlanet=9) and (not cfgsc^.ShowPluto) then continue; // skip Pluto
+  if (CurrentPlanet=9) and (not cfgsc.ShowPluto) then continue; // skip Pluto
   if CurrentPlanet=31 then continue;   // skip Saturn ring
-  if (CurrentPlanet=32)and not cfgsc^.showearthshadow then continue;
+  if (CurrentPlanet=32)and not cfgsc.showearthshadow then continue;
   if CurrentPlanet>32 then begin
      inc(CurrentStep);
-     if nextobj or (CurrentStep>=cfgsc^.SimNb) then begin
+     if nextobj or (CurrentStep>=cfgsc.SimNb) then begin
         dec(CurrentStep);
         break;
      end else begin
@@ -956,20 +956,20 @@ repeat
      end;
   end;
   // not planetary satellites for large field of vision or if hiden by the planet
-  if (currentplanet>11) and (currentplanet<32) and((rad2deg*cfgsc^.fov>1.5) or (cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,6]>90)) then continue;
-  tar:=NormRa(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,1]);
-  tde:=cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,2];
+  if (currentplanet>11) and (currentplanet<32) and((rad2deg*cfgsc.fov>1.5) or (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]>90)) then continue;
+  tar:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
+  tde:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
   // search if this planet center is at the position
   if (tar<x1) or (tar>x2) or
      (tde<y1) or (tde>y2) or
-     ((CurrentPlanet>11)and (currentplanet<32)and(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,6]>90))or
-     ((CurrentPlanet>11)and (currentplanet<32)and cfgsc^.StarFilter and (cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc^.StarMagMax))
+     ((CurrentPlanet>11)and (currentplanet<32)and(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]>90))or
+     ((CurrentPlanet>11)and (currentplanet<32)and cfgsc.StarFilter and (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc.StarMagMax))
      then begin
         // no
         // but ok if the cursor is inside the planetary disk
         if (CurrentPlanet<32) then begin
            distancetocenter[CurrentPlanet]:=3600*rad2deg*angulardistance(ar,de,tar,tde);
-           if distancetocenter[CurrentPlanet]<=(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]/2)
+           if distancetocenter[CurrentPlanet]<=(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]/2)
               then result:=true
               else distancetocenter[CurrentPlanet]:=maxdouble;
         end;
@@ -980,7 +980,7 @@ repeat
      end;
 until directfind;
 st0:=0;
-cfgsc^.FindOK:=result;
+cfgsc.FindOK:=result;
 if result then begin
   if not directfind then begin // search the planet nearest to position
      distmin:=maxdouble;
@@ -991,33 +991,33 @@ if result then begin
        end;
      end;
   end;
-  cfgsc^.FindSize:=deg2rad*cfgsc^.Planetlst[CurrentStep,CurrentPlanet,4]/3600;
-  cfgsc^.FindRA:=NormRa(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,1]);
-  cfgsc^.FindDec:=cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,2];
-  sar := ARpToStr(rad2deg*cfgsc^.FindRA/15) ;
-  sde := DEpToStr(rad2deg*cfgsc^.FindDec) ;
-  jdt:=cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,3];
+  cfgsc.FindSize:=deg2rad*cfgsc.Planetlst[CurrentStep,CurrentPlanet,4]/3600;
+  cfgsc.FindRA:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
+  cfgsc.FindDec:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
+  sar := ARpToStr(rad2deg*cfgsc.FindRA/15) ;
+  sde := DEpToStr(rad2deg*cfgsc.FindDec) ;
+  jdt:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,3];
 //  str(jdt:12:4,sjd);
-  djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
+  djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
   date:=Date2Str(yy,mm,dd)+blank+shh;
   jd0:=jd(yy,mm,dd,0);
-  st0:=SidTim(jd0,hh-cfgsc^.TimeZone,cfgsc^.ObsLongitude);
+  st0:=SidTim(jd0,hh-cfgsc.TimeZone,cfgsc.ObsLongitude);
 end;
 //if result and (currentplanet<=11) then begin
 if result then begin
-  cfgsc^.TrackType:=1;
-  cfgsc^.TrackObj:=CurrentPlanet;
-  cfgsc^.TrackName:=trim(pla[CurrentPlanet]);
+  cfgsc.TrackType:=1;
+  cfgsc.TrackObj:=CurrentPlanet;
+  cfgsc.TrackName:=trim(pla[CurrentPlanet]);
 end;
 if result and (currentplanet<10) then begin
   Planet(CurrentPlanet,jdt,ar,de,dist,illum,phase,diam,magn,dp);
   str(dp:7:4,sdp);
   str(illum:5:3,sillum);
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,6]:7:4,sdist);
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,7]:4:0,sphase);
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]:5:1,sdiam);
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]:7:4,sdist);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,7]:4:0,sphase);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:1,sdiam);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   nom:=pla[CurrentPlanet];
   ma:=smagn;
   Desc := sar+tab+sde+tab
@@ -1037,9 +1037,9 @@ if result and (currentplanet<10) then begin
      Desc:=Desc+'CMI:'+formatfloat(d2,w1)+tab
           +'CMII:'+formatfloat(d2,w2)+tab
           +'CMIII:'+formatfloat(d2,w3)+tab;
-     jd0:=jd(yy,mm,dd,0-cfgsc^.TimeZone+cfgsc^.DT_UT);
+     jd0:=jd(yy,mm,dd,0-cfgsc.TimeZone+cfgsc.DT_UT);
      PlanetOrientation(jd0,CurrentPlanet,p,pde,pds,w1,w2,w3);
-     w1:=(cfgsc^.GRSlongitude-w2)*24/870.27003539;
+     w1:=(cfgsc.GRSlongitude-w2)*24/870.27003539;
      shh:='';
      if w1>0 then shh:=ARmtoStr(w1);
      repeat
@@ -1069,14 +1069,14 @@ if result and (currentplanet=10) then begin
 end;
 if result and (currentplanet=11) then begin
   Moon(jdt,ar,de,dist,dkm,diam,phase,illum);
-  precession(jd2000,cfgsc^.JDChart,ar,de);
-  if cfgsc^.PlanetParalaxe then begin   // correct distance for paralaxe
+  precession(jd2000,cfgsc.JDChart,ar,de);
+  if cfgsc.PlanetParalaxe then begin   // correct distance for paralaxe
     Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
     diam:=diam/q;
     dist:=dist*q;
     dkm:=dkm*q;
   end;
-  ar:=cfgsc^.FindRA ; de:=cfgsc^.FindDEC;    // reset original position value
+  ar:=cfgsc.FindRA ; de:=cfgsc.FindDEC;    // reset original position value
   str(dkm:8:1,sdist);
   str(diam/60:5:1,sdiam);
   str(illum:5:3,sillum);
@@ -1100,15 +1100,15 @@ if result and (currentplanet=11) then begin
           +'SunIncl:'+formatfloat(d2,pds)+tab;
 end;
 if result and (currentplanet=32) then begin   // Earth umbra
-  jdt:=cfgsc^.PlanetLst[CurrentStep,10,3];  // date from the Sun
+  jdt:=cfgsc.PlanetLst[CurrentStep,10,3];  // date from the Sun
 //  str(jdt:12:4,sjd);
-  djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
+  djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARmtoStr(rmod(hh,24));
   date:=Date2Str(yy,mm,dd)+blank+shh;
-  cfgsc^.TrackType:=1;
-  cfgsc^.TrackObj:=CurrentPlanet;
-  cfgsc^.TrackName:=rsEarthShadow;
-  nom:=cfgsc^.Trackname;
+  cfgsc.TrackType:=1;
+  cfgsc.TrackObj:=CurrentPlanet;
+  cfgsc.TrackName:=rsEarthShadow;
+  nom:=cfgsc.Trackname;
   ma:='';
   Desc := sar+tab+sde+tab
           +'  P'+tab+nom+tab
@@ -1116,8 +1116,8 @@ if result and (currentplanet=32) then begin   // Earth umbra
 end;
 if result and (currentplanet>11) and (currentplanet<=15) then begin
   nom:=pla[CurrentPlanet];
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
   ma:=smagn;
   Desc := sar+tab+sde+tab
           +' Ps'+tab+nom+tab
@@ -1127,8 +1127,8 @@ if result and (currentplanet>11) and (currentplanet<=15) then begin
 end;
 if result and (currentplanet>15) and (currentplanet<=23) then begin
   nom:=pla[CurrentPlanet];
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
   ma:=smagn;
   Desc := sar+tab+sde+tab
           +' Ps'+tab+nom+tab
@@ -1138,8 +1138,8 @@ if result and (currentplanet>15) and (currentplanet<=23) then begin
 end;
 if result and (currentplanet>23) and (currentplanet<=28) then begin
   nom:=pla[CurrentPlanet];
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
   ma:=smagn;
   Desc := sar+tab+sde+tab
           +' Ps'+tab+nom+tab
@@ -1149,8 +1149,8 @@ if result and (currentplanet>23) and (currentplanet<=28) then begin
 end;
 if result and (currentplanet>28) and (currentplanet<=30) then begin
   nom:=pla[CurrentPlanet];
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc^.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
   ma:=smagn;
   Desc := sar+tab+sde+tab
           +' Ps'+tab+nom+tab
@@ -1158,9 +1158,9 @@ if result and (currentplanet>28) and (currentplanet<=30) then begin
           +'diam:'+sdiam+blank+lsec+tab
           +'m:'+smagn+tab;
 end;
-cfgsc^.FindName:=nom;
-cfgsc^.FindDesc:=Desc;
-cfgsc^.FindNote:='';
+cfgsc.FindName:=nom;
+cfgsc.FindDesc:=Desc;
+cfgsc.FindNote:='';
 end;
 
 PROCEDURE Kepler(VAR E1:Double; e,m:Double; precision:double=1.0E-11);
@@ -1441,7 +1441,7 @@ except
 end;
 end;
 
-Function TPlanet.NewAstDay(newjd,limitmag:double; cfgsc: Pconf_skychart):boolean;
+Function TPlanet.NewAstDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
 var qry : string;
     currentjd,jd1,dt,t : double;
     currentmag,lmag:integer;
@@ -1449,7 +1449,7 @@ var qry : string;
 begin
 try
 lmag:=round(limitmag*10);
-qry:='SELECT jd,limit_mag from '+cfgsc^.ast_day;
+qry:='SELECT jd,limit_mag from '+cfgsc.ast_day;
 db1.Query(qry);
 if db1.Rowcount>0 then begin
    currentjd:=strtoint(db1.Results[0][0]);
@@ -1460,11 +1460,11 @@ end else begin
 end;
 if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
  else begin
-     if cfgsc^.ast_day<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc^.ast_day+'"') then
-        db1.Query('CREATE TABLE '+cfgsc^.ast_day+create_table_ast_day);
-     if cfgsc^.ast_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc^.ast_daypos+'"') then begin
-        db1.Query('CREATE TABLE '+cfgsc^.ast_daypos+create_table_ast_day_pos);
-        db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc^.ast_daypos+' ON '+cfgsc^.ast_daypos+' (id,epoch)');
+     if cfgsc.ast_day<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.ast_day+'"') then
+        db1.Query('CREATE TABLE '+cfgsc.ast_day+create_table_ast_day);
+     if cfgsc.ast_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.ast_daypos+'"') then begin
+        db1.Query('CREATE TABLE '+cfgsc.ast_daypos+create_table_ast_day_pos);
+        db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc.ast_daypos+' ON '+cfgsc.ast_daypos+' (id,epoch)');
      end;
      qry:='SELECT distinct(jd) from cdc_ast_mag where mag<110';
      db1.Query(qry);
@@ -1494,16 +1494,16 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
         db1.OnFetchRow:=@NewAstDayCallback;
         db2.UnLockTables;
         db2.StartTransaction;
-        db2.TruncateTable(cfgsc^.ast_day);
-        db2.TruncateTable(cfgsc^.ast_daypos);
-        db2.LockTables(cfgsc^.ast_day+' WRITE, '+cfgsc^.ast_daypos+' WRITE');
+        db2.TruncateTable(cfgsc.ast_day);
+        db2.TruncateTable(cfgsc.ast_daypos);
+        db2.LockTables(cfgsc.ast_day+' WRITE, '+cfgsc.ast_daypos+' WRITE');
         jdnew:=newjd;
-        jdchart:=cfgsc^.JDChart;
-        ast_daypos:=cfgsc^.ast_daypos;
+        jdchart:=cfgsc.JDChart;
+        ast_daypos:=cfgsc.ast_daypos;
         db1.Query(qry);
         db1.CallBackOnly:=false;
         db1.OnFetchRow:=nil;
-        qry:='INSERT INTO '+cfgsc^.ast_day+' (jd,limit_mag)'
+        qry:='INSERT INTO '+cfgsc.ast_day+' (jd,limit_mag)'
             +' VALUES ("'+inttostr(trunc(newjd))+'","'+inttostr(lmag)+'")';
         db2.Query(qry);
         db2.UnLockTables;
@@ -1556,14 +1556,14 @@ begin
              db2.Query(qry);
 end;
 
-Function TPlanet.NewComDay(newjd,limitmag:double; cfgsc: Pconf_skychart):boolean;
+Function TPlanet.NewComDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
 var qry : string;
     currentjd : double;
     currentmag,lmag:integer;
 begin
 try
 lmag:=round(limitmag*10);
-qry:='SELECT jd,limit_mag from '+cfgsc^.com_day;
+qry:='SELECT jd,limit_mag from '+cfgsc.com_day;
 db1.Query(qry);
 if db1.Rowcount>0 then begin
    currentjd:=strtoint(db1.Results[0][0]);
@@ -1574,23 +1574,23 @@ end else begin
 end;
 if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
  else begin
-     if cfgsc^.com_day<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc^.com_day+'"') then
-        db1.Query('CREATE TABLE '+cfgsc^.com_day+create_table_com_day);
-     if cfgsc^.com_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc^.com_daypos+'"') then begin
-        db1.Query('CREATE TABLE '+cfgsc^.com_daypos+create_table_com_day_pos);
-        db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc^.com_daypos+' ON '+cfgsc^.com_daypos+' (id,epoch)');
+     if cfgsc.com_day<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.com_day+'"') then
+        db1.Query('CREATE TABLE '+cfgsc.com_day+create_table_com_day);
+     if cfgsc.com_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.com_daypos+'"') then begin
+        db1.Query('CREATE TABLE '+cfgsc.com_daypos+create_table_com_day_pos);
+        db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc.com_daypos+' ON '+cfgsc.com_daypos+' (id,epoch)');
      end;
      db1.UnLockTables;
      db1.StartTransaction;
-     db1.TruncateTable(cfgsc^.com_day);
-     db1.TruncateTable(cfgsc^.com_daypos);
-     db1.LockTables(cfgsc^.com_day+' WRITE, '+cfgsc^.com_daypos+' WRITE, cdc_com_elem READ');
+     db1.TruncateTable(cfgsc.com_day);
+     db1.TruncateTable(cfgsc.com_daypos);
+     db1.LockTables(cfgsc.com_day+' WRITE, '+cfgsc.com_daypos+' WRITE, cdc_com_elem READ');
      qry:='SELECT distinct(id) from cdc_com_elem';
      db2.CallBackOnly:=true;
      db2.OnFetchRow:=@NewComDayCallback;
      jdnew:=newjd;
-     jdchart:=cfgsc^.JDChart;
-     com_daypos:=cfgsc^.com_daypos;
+     jdchart:=cfgsc.JDChart;
+     com_daypos:=cfgsc.com_daypos;
      com_limitmag:=limitmag;
      n_com:=0;
      db2.Query(qry);
@@ -1598,7 +1598,7 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
      db2.OnFetchRow:=nil;
      if n_com>0 then begin
        result:=true;
-       qry:='INSERT INTO '+cfgsc^.com_day+' (jd,limit_mag)'
+       qry:='INSERT INTO '+cfgsc.com_day+' (jd,limit_mag)'
            +' VALUES ("'+inttostr(trunc(newjd))+'","'+inttostr(lmag)+'")';
        db1.Query(qry);
        db1.UnLockTables;
@@ -1645,7 +1645,7 @@ begin
        end;
 end;
 
-Procedure TPlanet.ComputeAsteroid(cfgsc: Pconf_skychart);
+Procedure TPlanet.ComputeAsteroid(cfgsc: Tconf_skychart);
 var ra,dec,dist,r,elong,phase,magn,jdt,jd0,st0,q : double;
   epoch,h,g,ma,ap,an,ic,ec,sa,eq,d,da : double;
   qry,id,ref,nam,elem_id :string;
@@ -1653,74 +1653,74 @@ var ra,dec,dist,r,elong,phase,magn,jdt,jd0,st0,q : double;
 begin
 try
 while lockdb do application.ProcessMessages; lockdb:=true;
-cfgsc^.ast_day:='cdc_ast_day_'+cfgsc^.chartname;
-cfgsc^.ast_daypos:='cdc_ast_day_pos_'+cfgsc^.chartname;
-cfgsc^.AsteroidNb:=0;
-if not db1.Active then cfgsc^.ShowAsteroid:=false;
-if not cfgsc^.ShowAsteroid then exit;
-if not NewAstDay(cfgsc^.CurJD,cfgsc^.AstmagMax,cfgsc) then begin
-   cfgsc^.ShowAsteroid:=false;
+cfgsc.ast_day:='cdc_ast_day_'+cfgsc.chartname;
+cfgsc.ast_daypos:='cdc_ast_day_pos_'+cfgsc.chartname;
+cfgsc.AsteroidNb:=0;
+if not db1.Active then cfgsc.ShowAsteroid:=false;
+if not cfgsc.ShowAsteroid then exit;
+if not NewAstDay(cfgsc.CurJD,cfgsc.AstmagMax,cfgsc) then begin
+   cfgsc.ShowAsteroid:=false;
    exit;
 end;
-d:=maxvalue([0.6*cfgsc^.fov,0.02]);
-da:=d/cos(cfgsc^.decentre);
-qry:='SELECT id,epoch from '+cfgsc^.ast_daypos+' where';
-qry:=qry+' mag<='+inttostr(round((cfgsc^.StarMagMax+cfgsc^.AstMagDiff)*10))+' and';
-if cfgsc^.NP or cfgsc^.SP then
+d:=maxvalue([0.6*cfgsc.fov,0.02]);
+da:=d/cos(cfgsc.decentre);
+qry:='SELECT id,epoch from '+cfgsc.ast_daypos+' where';
+qry:=qry+' mag<='+inttostr(round((cfgsc.StarMagMax+cfgsc.AstMagDiff)*10))+' and';
+if cfgsc.NP or cfgsc.SP then
    qry:=qry+' (ra>0 and ra<'+inttostr(round(1000*(pi2)))+')'
-else if (cfgsc^.racentre+da)>pi2 then
-   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc^.racentre-da)))
-           +' or ra<'+inttostr(round(1000*(cfgsc^.racentre+da-pi2)))+')'
-else if (cfgsc^.racentre-da)<0 then
-   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc^.racentre-da+pi2)))
-           +' or ra<'+inttostr(round(1000*(cfgsc^.racentre+da)))+')'
+else if (cfgsc.racentre+da)>pi2 then
+   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc.racentre-da)))
+           +' or ra<'+inttostr(round(1000*(cfgsc.racentre+da-pi2)))+')'
+else if (cfgsc.racentre-da)<0 then
+   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc.racentre-da+pi2)))
+           +' or ra<'+inttostr(round(1000*(cfgsc.racentre+da)))+')'
 else
-   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc^.racentre-da)))
-           +' and ra<'+inttostr(round(1000*(cfgsc^.racentre+da)))+')';
+   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc.racentre-da)))
+           +' and ra<'+inttostr(round(1000*(cfgsc.racentre+da)))+')';
 
-qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc^.decentre-d)))
-    +' and de<'+inttostr(round(1000*(cfgsc^.decentre+d)))+')'
+qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
+    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+')'
     +' limit '+inttostr(MaxAsteroid) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
-  if cfgsc^.SimObject[12] then SimNb:=cfgsc^.SimNb
+  if cfgsc.SimObject[12] then SimNb:=cfgsc.SimNb
                          else SimNb:=1;
-  if SimNb>cfgsc^.AsteroidLstSize then begin
-     SetLength(cfgsc^.AsteroidLst,SimNb);
-     SetLength(cfgsc^.AsteroidName,SimNb);
-     cfgsc^.AsteroidLstSize:=SimNb;
+  if SimNb>cfgsc.AsteroidLstSize then begin
+     SetLength(cfgsc.AsteroidLst,SimNb);
+     SetLength(cfgsc.AsteroidName,SimNb);
+     cfgsc.AsteroidLstSize:=SimNb;
   end;
   for j:=0 to SimNb-1 do begin
-    jd0:=jd(cfgsc^.CurYear,cfgsc^.CurMonth,cfgsc^.CurDay+j*cfgsc^.SimD,0.0);
-    jdt:=jd(cfgsc^.CurYear,cfgsc^.CurMonth,cfgsc^.CurDay+j*cfgsc^.SimD,cfgsc^.CurTime-cfgsc^.TimeZone+cfgsc^.DT_UT+j*cfgsc^.SimH+j*cfgsc^.SimM/60+j*cfgsc^.SimS/3600);
-    st0:=SidTim(jd0,cfgsc^.CurTime-cfgsc^.TimeZone+j*cfgsc^.SimH+j*cfgsc^.SimM/60+j*cfgsc^.SimS/3600,cfgsc^.ObsLongitude);
+    jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,0.0);
+    jdt:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600);
+    st0:=SidTim(jd0,cfgsc.CurTime-cfgsc.TimeZone+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600,cfgsc.ObsLongitude);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
        epoch:=strtofloat(db2.Results[i][1]);
        if cdb.GetAstElem(id,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
           InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
           Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn);
-          precession(jd2000,cfgsc^.jdchart,ra,dec);
-          if cfgsc^.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,cfgsc);
-          if cfgsc^.ApparentPos then apparent_equatorial(ra,dec,cfgsc);
-          cfgsc^.AsteroidName[j,i+1,1]:=id;
-          cfgsc^.AsteroidName[j,i+1,2]:=nam;
-          cfgsc^.AsteroidLst[j,i+1,1]:=ra;
-          cfgsc^.AsteroidLst[j,i+1,2]:=dec;
-          cfgsc^.AsteroidLst[j,i+1,3]:=magn;
-          cfgsc^.AsteroidLst[j,i+1,4]:=jdt;
-          cfgsc^.AsteroidLst[j,i+1,5]:=epoch;
+          precession(jd2000,cfgsc.jdchart,ra,dec);
+          if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,cfgsc);
+          if cfgsc.ApparentPos then apparent_equatorial(ra,dec,cfgsc);
+          cfgsc.AsteroidName[j,i+1,1]:=id;
+          cfgsc.AsteroidName[j,i+1,2]:=nam;
+          cfgsc.AsteroidLst[j,i+1,1]:=ra;
+          cfgsc.AsteroidLst[j,i+1,2]:=dec;
+          cfgsc.AsteroidLst[j,i+1,3]:=magn;
+          cfgsc.AsteroidLst[j,i+1,4]:=jdt;
+          cfgsc.AsteroidLst[j,i+1,5]:=epoch;
        end;
     end;
   end;
 end;
-cfgsc^.AsteroidNb:=db2.Rowcount;
+cfgsc.AsteroidNb:=db2.Rowcount;
 finally
   lockdb:=false;
 end;
 end;
 
-Procedure TPlanet.ComputeComet(cfgsc: Pconf_skychart);
+Procedure TPlanet.ComputeComet(cfgsc: Tconf_skychart);
 var ra,dec,dist,r,elong,phase,magn,jdt,jd0,st0,q : double;
   epoch,h,g,ap,an,ic,ec,eq,d,da,tp,diam,lc,car,cde,rc : double;
   qry,id,nam,elem_id :string;
@@ -1728,84 +1728,84 @@ var ra,dec,dist,r,elong,phase,magn,jdt,jd0,st0,q : double;
 begin
 try
 while lockdb do application.ProcessMessages; lockdb:=true;
-cfgsc^.com_day:='cdc_com_day_'+cfgsc^.chartname;
-cfgsc^.com_daypos:='cdc_com_day_pos_'+cfgsc^.chartname;
-cfgsc^.CometNb:=0;
-if not db1.Active then cfgsc^.ShowComet:=false;
-if not cfgsc^.ShowComet then exit;
-if not NewComDay(cfgsc^.CurJD,cfgsc^.CommagMax,cfgsc) then begin
-   cfgsc^.ShowComet:=false;
+cfgsc.com_day:='cdc_com_day_'+cfgsc.chartname;
+cfgsc.com_daypos:='cdc_com_day_pos_'+cfgsc.chartname;
+cfgsc.CometNb:=0;
+if not db1.Active then cfgsc.ShowComet:=false;
+if not cfgsc.ShowComet then exit;
+if not NewComDay(cfgsc.CurJD,cfgsc.CommagMax,cfgsc) then begin
+   cfgsc.ShowComet:=false;
    exit;
 end;
-d:=maxvalue([0.6*cfgsc^.fov,0.02]);
-da:=d/cos(cfgsc^.decentre);
-qry:='SELECT id,epoch from '+cfgsc^.com_daypos+' where';
-if cfgsc^.StarFilter then qry:=qry+' mag<='+inttostr(round((cfgsc^.StarMagMax+cfgsc^.ComMagDiff)*10))+' and';
-if cfgsc^.NP or cfgsc^.SP then
+d:=maxvalue([0.6*cfgsc.fov,0.02]);
+da:=d/cos(cfgsc.decentre);
+qry:='SELECT id,epoch from '+cfgsc.com_daypos+' where';
+if cfgsc.StarFilter then qry:=qry+' mag<='+inttostr(round((cfgsc.StarMagMax+cfgsc.ComMagDiff)*10))+' and';
+if cfgsc.NP or cfgsc.SP then
    qry:=qry+' (ra>0 and ra<'+inttostr(round(1000*(pi2)))+')'
-else if (cfgsc^.racentre+da)>pi2 then
-   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc^.racentre-da)))
-           +' or ra<'+inttostr(round(1000*(cfgsc^.racentre+da-pi2)))+')'
-else if (cfgsc^.racentre-da)<0 then
-   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc^.racentre-da+pi2)))
-           +' or ra<'+inttostr(round(1000*(cfgsc^.racentre+da)))+')'
+else if (cfgsc.racentre+da)>pi2 then
+   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc.racentre-da)))
+           +' or ra<'+inttostr(round(1000*(cfgsc.racentre+da-pi2)))+')'
+else if (cfgsc.racentre-da)<0 then
+   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc.racentre-da+pi2)))
+           +' or ra<'+inttostr(round(1000*(cfgsc.racentre+da)))+')'
 else
-   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc^.racentre-da)))
-           +' and ra<'+inttostr(round(1000*(cfgsc^.racentre+da)))+')';
+   qry:=qry+' (ra>'+inttostr(round(1000*(cfgsc.racentre-da)))
+           +' and ra<'+inttostr(round(1000*(cfgsc.racentre+da)))+')';
 
-qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc^.decentre-d)))
-    +' and de<'+inttostr(round(1000*(cfgsc^.decentre+d)))+')'
+qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
+    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+')'
     +' limit '+inttostr(MaxComet) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
-  if cfgsc^.SimObject[13] then SimNb:=cfgsc^.SimNb
+  if cfgsc.SimObject[13] then SimNb:=cfgsc.SimNb
                          else SimNb:=1;
-  if SimNb>cfgsc^.CometLstSize then begin
-     SetLength(cfgsc^.CometLst,SimNb);
-     SetLength(cfgsc^.CometName,SimNb);
-     cfgsc^.CometLstSize:=SimNb;
+  if SimNb>cfgsc.CometLstSize then begin
+     SetLength(cfgsc.CometLst,SimNb);
+     SetLength(cfgsc.CometName,SimNb);
+     cfgsc.CometLstSize:=SimNb;
   end;
   for j:=0 to SimNb-1 do begin
-    jd0:=jd(cfgsc^.CurYear,cfgsc^.CurMonth,cfgsc^.CurDay+j*cfgsc^.SimD,0.0);
-    jdt:=jd(cfgsc^.CurYear,cfgsc^.CurMonth,cfgsc^.CurDay+j*cfgsc^.SimD,cfgsc^.CurTime-cfgsc^.TimeZone+cfgsc^.DT_UT+j*cfgsc^.SimH+j*cfgsc^.SimM/60+j*cfgsc^.SimS/3600);
-    st0:=SidTim(jd0,cfgsc^.CurTime-cfgsc^.TimeZone+j*cfgsc^.SimH+j*cfgsc^.SimM/60+j*cfgsc^.SimS/3600,cfgsc^.ObsLongitude);
+    jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,0.0);
+    jdt:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600);
+    st0:=SidTim(jd0,cfgsc.CurTime-cfgsc.TimeZone+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600,cfgsc.ObsLongitude);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
        epoch:=strtofloat(db2.Results[i][1]);
        if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
           InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
           Comet(jdt,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-          precession(jd2000,cfgsc^.jdchart,ra,dec);
-          precession(jd2000,cfgsc^.jdchart,car,cde);
-          if cfgsc^.PlanetParalaxe then begin
+          precession(jd2000,cfgsc.jdchart,ra,dec);
+          precession(jd2000,cfgsc.jdchart,car,cde);
+          if cfgsc.PlanetParalaxe then begin
              Paralaxe(st0,dist,ra,dec,ra,dec,q,cfgsc);
              Paralaxe(st0,rc,car,cde,car,cde,q,cfgsc);
           end;
-          if cfgsc^.ApparentPos then begin
+          if cfgsc.ApparentPos then begin
              apparent_equatorial(ra,dec,cfgsc);
              apparent_equatorial(car,cde,cfgsc);
           end;
-          cfgsc^.CometName[j,i+1,1]:=id;
-          cfgsc^.CometName[j,i+1,2]:=nam;
-          cfgsc^.CometLst[j,i+1,1]:=ra;
-          cfgsc^.CometLst[j,i+1,2]:=dec;
-          cfgsc^.CometLst[j,i+1,3]:=magn;
-          cfgsc^.CometLst[j,i+1,4]:=diam;
-          cfgsc^.CometLst[j,i+1,5]:=car;
-          cfgsc^.CometLst[j,i+1,6]:=cde;
-          cfgsc^.CometLst[j,i+1,7]:=jdt;
-          cfgsc^.CometLst[j,i+1,8]:=epoch;
+          cfgsc.CometName[j,i+1,1]:=id;
+          cfgsc.CometName[j,i+1,2]:=nam;
+          cfgsc.CometLst[j,i+1,1]:=ra;
+          cfgsc.CometLst[j,i+1,2]:=dec;
+          cfgsc.CometLst[j,i+1,3]:=magn;
+          cfgsc.CometLst[j,i+1,4]:=diam;
+          cfgsc.CometLst[j,i+1,5]:=car;
+          cfgsc.CometLst[j,i+1,6]:=cde;
+          cfgsc.CometLst[j,i+1,7]:=jdt;
+          cfgsc.CometLst[j,i+1,8]:=epoch;
        end;
     end;
   end;
 end;
-cfgsc^.CometNb:=db2.Rowcount;
+cfgsc.CometNb:=db2.Rowcount;
 finally
   lockdb:=false;
 end;
 end;
 
-function TPlanet.FindAsteroidName(astname: String; var ra,de:double; cfgsc: Pconf_skychart):boolean;
+function TPlanet.FindAsteroidName(astname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
 var dist,r,elong,phase,magn : double;
   epoch,h,g,ma,ap,an,ic,ec,sa,eq : double;
   qry,id,ref,nam,elem_id :string;
@@ -1818,14 +1818,14 @@ qry:='SELECT id FROM cdc_ast_name'
     +' limit 1';
 id:=db1.QueryOne(qry);
 if id='' then exit;
-if cdb.GetAstElemEpoch(id,cfgsc^.curjd,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+if cdb.GetAstElemEpoch(id,cfgsc.curjd,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
-   Asteroid(cfgsc^.curjd,true,ra,de,dist,r,elong,phase,magn);
-   precession(jd2000,cfgsc^.jdchart,ra,de);
+   Asteroid(cfgsc.curjd,true,ra,de,dist,r,elong,phase,magn);
+   precession(jd2000,cfgsc.jdchart,ra,de);
    ira:=round(ra*1000);
    idec:=round(de*1000);
    imag:=round(magn*10);
-   qry:='INSERT INTO '+cfgsc^.ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
+   qry:='INSERT INTO '+cfgsc.ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
         +'"'+id+'"'
         +',"'+formatfloat(f1,epoch)+'"'
         +',"'+inttostr(ira)+'"'
@@ -1833,13 +1833,13 @@ if cdb.GetAstElemEpoch(id,cfgsc^.curjd,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,el
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
    db1.flush('tables');
-   precession(cfgsc^.JDchart,jd2000,ra,de);
+   precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
  else result:=false;
 end;
 
-function TPlanet.FindCometName(comname: String; var ra,de:double; cfgsc: Pconf_skychart):boolean;
+function TPlanet.FindCometName(comname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
 var dist,r,elong,phase,magn : double;
   epoch,h,g,ap,an,ic,ec,eq,tp,q,diam,lc,car,cde,rc : double;
   qry,id,nam,elem_id :string;
@@ -1852,14 +1852,14 @@ qry:='SELECT id FROM cdc_com_name'
     +' limit 1';
 id:=db1.QueryOne(qry);
 if id='' then exit;
-if cdb.GetComElemEpoch(id,cfgsc^.curjd,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
+if cdb.GetComElemEpoch(id,cfgsc.curjd,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
    InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
-   Comet(cfgsc^.curjd,true,ra,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
-   precession(jd2000,cfgsc^.jdchart,ra,de);
+   Comet(cfgsc.curjd,true,ra,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+   precession(jd2000,cfgsc.jdchart,ra,de);
    ira:=round(ra*1000);
    idec:=round(de*1000);
    imag:=round(magn*10);
-   qry:='INSERT INTO '+cfgsc^.com_daypos+' (id,epoch,ra,de,mag) VALUES ('
+   qry:='INSERT INTO '+cfgsc.com_daypos+' (id,epoch,ra,de,mag) VALUES ('
         +'"'+id+'"'
         +',"'+formatfloat(f1,epoch)+'"'
         +',"'+inttostr(ira)+'"'
@@ -1867,13 +1867,13 @@ if cdb.GetComElemEpoch(id,cfgsc^.curjd,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
    db1.flush('tables');
-   precession(cfgsc^.JDchart,jd2000,ra,de);
+   precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
  else result:=false;
 end;
 
-function TPlanet.FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Pconf_skychart; var nom,mag,date,desc:string):boolean;
+function TPlanet.FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string):boolean;
 var
    yy,mm,dd : integer;
    tar,tde : double;
@@ -1886,16 +1886,16 @@ begin
 if not nextobj then begin CurrentAstStep:=0;CurrentAsteroid:=0; end;
 result := false;
 desc:='';tar:=1;tde:=1;
-if cfgsc^.AsteroidNb>0 then repeat
+if cfgsc.AsteroidNb>0 then repeat
   inc(CurrentAsteroid);
-  if CurrentAsteroid>cfgsc^.AsteroidNb then begin
+  if CurrentAsteroid>cfgsc.AsteroidNb then begin
      inc(CurrentAstStep);
-     if (not cfgsc^.SimObject[12]) or nextobj or (CurrentAstStep>=cfgsc^.SimNb) then
+     if (not cfgsc.SimObject[12]) or nextobj or (CurrentAstStep>=cfgsc.SimNb) then
         break
      else begin CurrentAsteroid:=0;continue;end;
   end;
-  tar:=NormRa(cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,1]);
-  tde:=cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,2];
+  tar:=NormRa(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,1]);
+  tde:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,2];
   // search if this asteroid is at the position
   if (tar<x1) or (tar>x2) or
      (tde<y1) or (tde>y2)
@@ -1905,23 +1905,23 @@ if cfgsc^.AsteroidNb>0 then repeat
      end
      else result := true;
 until result;
-cfgsc^.FindOK:=result;
+cfgsc.FindOK:=result;
 if result then begin
-  cfgsc^.FindSize:=0;
-  cfgsc^.FindRA:=tar;
-  cfgsc^.FindDec:=tde;
+  cfgsc.FindSize:=0;
+  cfgsc.FindRA:=tar;
+  cfgsc.FindDec:=tde;
   sar := ARpToStr(rad2deg*tar/15) ;
   sde := DEpToStr(rad2deg*tde) ;
-  jdt:=cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,4];
+  jdt:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,4];
 //  str(jdt:12:4,sjd);
-  djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
+  djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
   date:=Date2Str(yy,mm,dd)+blank+shh;
-  cdb.GetAstElem(cfgsc^.AsteroidName[CurrentAstStep,CurrentAsteroid,1],cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id);
-  InitAsteroid(cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,nam);
+  cdb.GetAstElem(cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1],cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id);
+  InitAsteroid(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,nam);
   Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn);
   nom:=nam;
-  str(cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,3]:5:1,mag);
+  str(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,3]:5:1,mag);
   str(r:7:4,sdp);
   str(dist:7:4,sdist);
   str((rad2deg*phase):4:0,sphase);
@@ -1933,19 +1933,19 @@ if result then begin
           +'dist:'+sdist+'au'+tab
           +'rsol:'+sdp+'au'+tab
           +'ref:'+ref;
-  djd(cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],yy,mm,dd,hh);
+  djd(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],yy,mm,dd,hh);
   Desc := Desc +'/'+Date2Str(yy,mm,dd)+tab; // ephemeris date
-  cfgsc^.TrackType:=3;
-  cfgsc^.TrackId:=cfgsc^.AsteroidName[CurrentAstStep,CurrentAsteroid,1];
-  cfgsc^.TrackEpoch:=cfgsc^.AsteroidLst[CurrentAstStep,CurrentAsteroid,5];
-  cfgsc^.TrackName:=nom;
+  cfgsc.TrackType:=3;
+  cfgsc.TrackId:=cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1];
+  cfgsc.TrackEpoch:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5];
+  cfgsc.TrackName:=nom;
 end;
-cfgsc^.FindName:=nom;
-cfgsc^.FindDesc:=Desc;
-cfgsc^.FindNote:='';
+cfgsc.FindName:=nom;
+cfgsc.FindDesc:=Desc;
+cfgsc.FindNote:='';
 end;
 
-function TPlanet.FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Pconf_skychart; var nom,mag,date,desc:string):boolean;
+function TPlanet.FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string):boolean;
 var
    yy,mm,dd : integer;
    tar,tde : double;
@@ -1958,16 +1958,16 @@ begin
 if not nextobj then begin CurrentComStep:=0;CurrentComet:=0; end;
 result := false;
 desc:='';tar:=1;tde:=1;
-if cfgsc^.CometNb>0 then repeat
+if cfgsc.CometNb>0 then repeat
   inc(CurrentComet);
-  if CurrentComet>cfgsc^.CometNb then begin
+  if CurrentComet>cfgsc.CometNb then begin
      inc(CurrentComStep);
-     if (not cfgsc^.SimObject[13]) or nextobj or (CurrentComStep>=cfgsc^.SimNb) then
+     if (not cfgsc.SimObject[13]) or nextobj or (CurrentComStep>=cfgsc.SimNb) then
         break
      else begin CurrentComet:=0;continue;end;
   end;
-  tar:=NormRa(cfgsc^.CometLst[CurrentComStep,CurrentComet,1]);
-  tde:=cfgsc^.CometLst[CurrentComStep,CurrentComet,2];
+  tar:=NormRa(cfgsc.CometLst[CurrentComStep,CurrentComet,1]);
+  tde:=cfgsc.CometLst[CurrentComStep,CurrentComet,2];
   // search if this comet is at the position
   if (tar<x1) or (tar>x2) or
      (tde<y1) or (tde>y2)
@@ -1977,22 +1977,22 @@ if cfgsc^.CometNb>0 then repeat
      end
      else result := true;
 until result;
-cfgsc^.FindOK:=result;
+cfgsc.FindOK:=result;
 if result then begin
-  cfgsc^.FindSize:=0;
-  cfgsc^.FindRA:=tar;
-  cfgsc^.FindDec:=tde;
+  cfgsc.FindSize:=0;
+  cfgsc.FindRA:=tar;
+  cfgsc.FindDec:=tde;
   sar := ARpToStr(rad2deg*tar/15) ;
   sde := DEpToStr(rad2deg*tde) ;
-  jdt:=cfgsc^.CometLst[CurrentComStep,CurrentComet,7];
-  djd(jdt+(cfgsc^.TimeZone-cfgsc^.DT_UT)/24,yy,mm,dd,hh);
+  jdt:=cfgsc.CometLst[CurrentComStep,CurrentComet,7];
+  djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
   date:=Date2Str(yy,mm,dd)+blank+shh;
-  cdb.GetComElem(cfgsc^.CometName[CurrentComStep,CurrentComet,1],cfgsc^.CometLst[CurrentComStep,CurrentComet,8],tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id);
+  cdb.GetComElem(cfgsc.CometName[CurrentComStep,CurrentComet,1],cfgsc.CometLst[CurrentComStep,CurrentComet,8],tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id);
   InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
   Comet(jdt,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
   nom:=nam;
-  str(cfgsc^.CometLst[CurrentComStep,CurrentComet,3]:5:1,mag);
+  str(cfgsc.CometLst[CurrentComStep,CurrentComet,3]:5:1,mag);
   str(r:7:4,sdp);
   str(dist:7:4,sdist);
   str((rad2deg*phase):4:0,sphase);
@@ -2005,16 +2005,16 @@ if result then begin
           +'rsol:'+sdp+'au'+tab
           +'tl:'+formatfloat(f2,lc)+'au'+tab
           +'ref:'+elem_id;
-  djd(cfgsc^.CometLst[CurrentComStep,CurrentComet,8],yy,mm,dd,hh);
+  djd(cfgsc.CometLst[CurrentComStep,CurrentComet,8],yy,mm,dd,hh);
   Desc := Desc +'/'+Date2Str(yy,mm,dd)+tab;
-  cfgsc^.TrackType:=2;
-  cfgsc^.TrackId:=cfgsc^.CometName[CurrentComStep,CurrentComet,1];
-  cfgsc^.TrackEpoch:=cfgsc^.CometLst[CurrentComStep,CurrentComet,8];
-  cfgsc^.TrackName:=nom;
+  cfgsc.TrackType:=2;
+  cfgsc.TrackId:=cfgsc.CometName[CurrentComStep,CurrentComet,1];
+  cfgsc.TrackEpoch:=cfgsc.CometLst[CurrentComStep,CurrentComet,8];
+  cfgsc.TrackName:=nom;
 end;
-cfgsc^.FindName:=nom;
-cfgsc^.FindDesc:=Desc;
-cfgsc^.FindNote:='';
+cfgsc.FindName:=nom;
+cfgsc.FindDesc:=Desc;
+cfgsc.FindNote:='';
 end;
 
 Function TPlanet.PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
@@ -2079,21 +2079,21 @@ begin
       n_ast)])); application.processmessages; end;
 end;
 
-Procedure TPlanet.PlanetAltitude(pla: integer; jd0,hh: double; cfgsc: Pconf_skychart; var har,sina: double);
+Procedure TPlanet.PlanetAltitude(pla: integer; jd0,hh: double; cfgsc: Tconf_skychart; var har,sina: double);
 var jdt,ra,de,dm4,dm5,dm6,dm7,dm8,dm9: double;
 begin
-jdt:=jd0+(hh-cfgsc^.TimeZone-cfgsc^.DT_UT)/24;
+jdt:=jd0+(hh-cfgsc.TimeZone-cfgsc.DT_UT)/24;
 case pla of
 1..9: Planet(pla,jdt,ra,de,dm4,dm5,dm6,dm7,dm8,dm9,false);
 10 :  Sun(jdt,ra,de,dm4,dm5,false);
 11 :  Moon(jdt,ra,de,dm4,dm5,dm6,dm7,dm8,false);
 end;
 precession(jd2000,jd0,ra,de);
-har:=rmod(sidtim(jd0, hh-cfgsc^.TimeZone, cfgsc^.Obslongitude) - ra + pi2, pi2);
-sina:=(sin(deg2rad*cfgsc^.Obslatitude) * sin(de) + cos(deg2rad*cfgsc^.Obslatitude) * cos(de) * cos(har));
+har:=rmod(sidtim(jd0, hh-cfgsc.TimeZone, cfgsc.Obslongitude) - ra + pi2, pi2);
+sina:=(sin(deg2rad*cfgsc.Obslatitude) * sin(de) + cos(deg2rad*cfgsc.Obslatitude) * cos(de) * cos(har));
 end;
 
-procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ;var i: integer; cfgsc: Pconf_skychart);
+procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ;var i: integer; cfgsc: Tconf_skychart);
 var hr,ht,hs,h1,h2,azr,azs,dist,q,diam : double;
     ho,sinho,dt,hh,y1,y2,y3,x1,x2,x3,xmax,ymax,xmax2,ymax2,ymax0,ra,de,dm5,dm6,dm7,dm8,dm9: double;
     frise,fset,ftransit: boolean;
@@ -2107,7 +2107,7 @@ case pla of
 10 : ho:=-0.8333;
 11: begin
     Moon(jd0,ra,de,dist,dm5,diam,dm7,dm8,false);
-    ho:=(8.794/dist/3600)-0.5748*cfgsc^.ObsRefractionCor-diam/2/3600-0.04;
+    ho:=(8.794/dist/3600)-0.5748*cfgsc.ObsRefractionCor-diam/2/3600-0.04;
     end;
 end;
 sinho:=sin(deg2rad*ho);
@@ -2165,20 +2165,20 @@ if (frise or fset) then begin    // rise (and/or) set and transit
    i:=0;
    if (frise) then begin       // rise
         thr:=armtostr(hr);
-        jdr:=jd0+(hr-cfgsc^.TimeZone)/24;
+        jdr:=jd0+(hr-cfgsc.TimeZone)/24;
         case pla of
         1..9: Planet(pla,jdr,ra,de,dist,dm5,dm6,dm7,dm8,dm9,false);
         10 :  Sun(jdr,ra,de,dist,dm5,false);
         11 :  Moon(jdr,ra,de,dist,dm5,dm6,dm7,dm8,false);
         end;
         precession(jd2000,jd0,ra,de);
-        if cfgsc^.PlanetParalaxe then begin
-           Paralaxe(SidTim(jd0,hr-cfgsc^.TimeZone,cfgsc^.ObsLongitude),dist,ra,de,rar,der,q,cfgsc);
+        if cfgsc.PlanetParalaxe then begin
+           Paralaxe(SidTim(jd0,hr-cfgsc.TimeZone,cfgsc.ObsLongitude),dist,ra,de,rar,der,q,cfgsc);
         end else begin
            rar:=ra;
            der:=de;
         end;
-        Eq2Hz(sidtim(jd0,hs-cfgsc^.TimeZone,cfgsc^.ObsLongitude)-ra,de,azr,dist,cfgsc);
+        Eq2Hz(sidtim(jd0,hs-cfgsc.TimeZone,cfgsc.ObsLongitude)-ra,de,azr,dist,cfgsc);
         if AzNorth then Azr:=rmod(Azr+pi,pi2);
         tazr:=demtostr(rad2deg*Azr);
       end
@@ -2188,20 +2188,20 @@ if (frise or fset) then begin    // rise (and/or) set and transit
       end;
    if (fset) then begin       // set
         ths:=armtostr(hs);
-        jds:=jd0+(hs-cfgsc^.TimeZone)/24;
+        jds:=jd0+(hs-cfgsc.TimeZone)/24;
         case pla of
         1..9: Planet(pla,jds,ra,de,dist,dm5,dm6,dm7,dm8,dm9,false);
         10 :  Sun(jds,ra,de,dist,dm5,false);
         11 :  Moon(jds,ra,de,dist,dm5,dm6,dm7,dm8,false);
         end;
         precession(jd2000,jd0,ra,de);
-        if cfgsc^.PlanetParalaxe then begin
-           Paralaxe(SidTim(jd0,hs-cfgsc^.TimeZone,cfgsc^.ObsLongitude),dist,ra,de,ras,des,q,cfgsc);
+        if cfgsc.PlanetParalaxe then begin
+           Paralaxe(SidTim(jd0,hs-cfgsc.TimeZone,cfgsc.ObsLongitude),dist,ra,de,ras,des,q,cfgsc);
         end else begin
            ras:=ra;
            des:=de;
         end;
-        Eq2Hz(sidtim(jd0,hs-cfgsc^.TimeZone,cfgsc^.ObsLongitude)-ra,de,azs,dist,cfgsc);
+        Eq2Hz(sidtim(jd0,hs-cfgsc.TimeZone,cfgsc.ObsLongitude)-ra,de,azs,dist,cfgsc);
         if AzNorth then Azs:=rmod(Azs+pi,pi2);
         tazs:=demtostr(rad2deg*Azs);
       end
@@ -2211,15 +2211,15 @@ if (frise or fset) then begin    // rise (and/or) set and transit
       end;
    if (ftransit) then begin      // transit
         tht:=armtostr(ht);
-        jdt:=jd0+(ht-cfgsc^.TimeZone)/24;
+        jdt:=jd0+(ht-cfgsc.TimeZone)/24;
         case pla of
         1..9: Planet(pla,jdt,ra,de,dist,dm5,dm6,dm7,dm8,dm9,false);
         10 :  Sun(jdt,ra,de,dist,dm5,false);
         11 :  Moon(jdt,ra,de,dist,dm5,dm6,dm7,dm8,false);
         end;
         precession(jd2000,jd0,ra,de);
-        if cfgsc^.PlanetParalaxe then begin
-           Paralaxe(SidTim(jd0,ht-cfgsc^.TimeZone,cfgsc^.ObsLongitude),dist,ra,de,rat,det,q,cfgsc);
+        if cfgsc.PlanetParalaxe then begin
+           Paralaxe(SidTim(jd0,ht-cfgsc.TimeZone,cfgsc.ObsLongitude),dist,ra,de,rat,det,q,cfgsc);
         end else begin
            rat:=ra;
            det:=de;
@@ -2236,15 +2236,15 @@ end else begin
         tazr:=na;
         tazs:=na;
         tht:=armtostr(ht);
-        jdt:=jd0+(ht-cfgsc^.TimeZone)/24;
+        jdt:=jd0+(ht-cfgsc.TimeZone)/24;
         case pla of
         1..9: Planet(pla,jdt,ra,de,dist,dm5,dm6,dm7,dm8,dm9,false);
         10 :  Sun(jdt,ra,de,dist,dm5,false);
         11 :  Moon(jdt,ra,de,dist,dm5,dm6,dm7,dm8,false);
         end;
         precession(jd2000,jd0,ra,de);
-        if cfgsc^.PlanetParalaxe then begin
-           Paralaxe(SidTim(jd0,ht-cfgsc^.TimeZone,cfgsc^.ObsLongitude),dist,ra,de,rat,det,q,cfgsc);
+        if cfgsc.PlanetParalaxe then begin
+           Paralaxe(SidTim(jd0,ht-cfgsc.TimeZone,cfgsc.ObsLongitude),dist,ra,de,rat,det,q,cfgsc);
         end else begin
            rat:=ra;
            det:=de;

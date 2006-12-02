@@ -41,9 +41,9 @@ type
     { Public declarations }
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
-     function createDB(cmain: conf_main; var ok:boolean): string;
-     function dropDB(cmain: conf_main): string;
-     function checkDBConfig(cmain: conf_main): string;
+     function createDB(cmain: Tconf_main; var ok:boolean): string;
+     function dropDB(cmain: Tconf_main): string;
+     function checkDBConfig(cmain: Tconf_main): string;
      Function ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
      function CheckDB:boolean;
      procedure LoadCountryList(locfile:string; memo:Tmemo);
@@ -56,8 +56,8 @@ type
      function  UpdateCity(locid:integer; country,location,loctype,lat,lon,elev,tz:string):string;
      function  DeleteCity(locid:integer):string;
      function  DeleteCountry(country:string; deleteall: boolean):string;
-     procedure GetCometFileList(cmain:conf_main; list:Tstrings);
-     procedure GetAsteroidFileList(cmain:conf_main; list:Tstrings);
+     procedure GetCometFileList(cmain:Tconf_main; list:Tstrings);
+     procedure GetAsteroidFileList(cmain:Tconf_main; list:Tstrings);
      procedure LoadCometFile(comfile:string; memocom:Tmemo);
      procedure DelComet(comelemlist: string; memocom:Tmemo);
      procedure DelCometAll(memocom:Tmemo);
@@ -160,7 +160,7 @@ end
 if creatednow and (Assigned(FInitializeDB)) then FInitializeDB(self);
 end;
 
-function TCDCdb.checkDBConfig(cmain: conf_main):string;
+function TCDCdb.checkDBConfig(cmain: Tconf_main):string;
 var msg,dbn: string;
     i:integer;
 label dmsg;
@@ -196,7 +196,7 @@ except
 end;
 end;
 
-function TCDCdb.createDB(cmain: conf_main; var ok:boolean): string;
+function TCDCdb.createDB(cmain: Tconf_main; var ok:boolean): string;
 var msg,dbn:string;
     i,j,k:integer;
     indexlist: TStringlist;
@@ -246,7 +246,7 @@ except
 end;
 end;
 
-function TCDCdb.dropDB(cmain: conf_main): string;
+function TCDCdb.dropDB(cmain: Tconf_main): string;
 var msg:string;
     i: integer;
 begin
@@ -279,7 +279,7 @@ else if DBtype=sqlite then begin
 end;
 end;
 
-procedure TCDCdb.GetCometFileList(cmain:conf_main; list:Tstrings);
+procedure TCDCdb.GetCometFileList(cmain:Tconf_main; list:Tstrings);
 var i:integer;
 begin
 list.clear;
@@ -296,7 +296,7 @@ except
 end;
 end;
 
-procedure TCDCdb.GetAsteroidFileList(cmain:conf_main; list:Tstrings);
+procedure TCDCdb.GetAsteroidFileList(cmain:Tconf_main; list:Tstrings);
 var i:integer;
 begin
 list.clear;

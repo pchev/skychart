@@ -102,6 +102,7 @@ type
     procedure DSTChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure JDEditChange(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
     procedure DateChange(Sender: TObject);
@@ -128,16 +129,16 @@ type
     procedure ShowTime;
   public
     { Public declarations }
-    mycsc : conf_skychart;
-    myccat : conf_catalog;
-    mycshr : conf_shared;
-    mycplot : conf_plot;
-    mycmain : conf_main;
-    csc : Pconf_skychart;
-    ccat : Pconf_catalog;
-    cshr : Pconf_shared;
-    cplot : Pconf_plot;
-    cmain : Pconf_main;
+    mycsc : Tconf_skychart;
+    myccat : Tconf_catalog;
+    mycshr : Tconf_shared;
+    mycplot : Tconf_plot;
+    mycmain : Tconf_main;
+    csc : Tconf_skychart;
+    ccat : Tconf_catalog;
+    cshr : Tconf_shared;
+    cplot : Tconf_plot;
+    cmain : Tconf_main;
     procedure SetLang;
     constructor Create(AOwner:TComponent); override;
     destructor Destroy; override;
@@ -227,11 +228,16 @@ end;
 
 constructor Tf_config_time.Create(AOwner:TComponent);
 begin
- csc:=@mycsc;
- ccat:=@myccat;
- cshr:=@mycshr;
- cplot:=@mycplot;
- cmain:=@mycmain;
+ mycsc:=Tconf_skychart.Create;
+ myccat:=Tconf_catalog.Create;
+ mycshr:=Tconf_shared.Create;
+ mycplot:=Tconf_plot.Create;
+ mycmain:=Tconf_main.Create;
+ csc:=mycsc;
+ ccat:=myccat;
+ cshr:=mycshr;
+ cplot:=mycplot;
+ cmain:=mycmain;
  inherited Create(AOwner);
 end;
 
@@ -396,6 +402,15 @@ LockChange:=true;
 JDCalendarDialog1:=TJDCalendarDialog.Create(nil);
 BitBtn1.Glyph.LoadFromLazarusResource('BtnDatePicker');
 SetLang;
+end;
+
+procedure Tf_config_time.FormDestroy(Sender: TObject);
+begin
+mycsc.Free;
+myccat.Free;
+mycshr.Free;
+mycplot.Free;
+mycmain.Free;
 end;
 
 procedure Tf_config_time.LongEdit2Change(Sender: TObject);
