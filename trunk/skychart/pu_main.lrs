@@ -2,7 +2,7 @@
 
 LazarusResources.Add('Tf_main','FORMDATA',[
   'TPF0'#7'Tf_main'#6'f_main'#4'Left'#3#175#1#6'Height'#3'D'#2#3'Top'#2'i'#5'Wi'
-  +'dth'#3'\'#3#18'HorzScrollBar.Page'#3'['#3#18'VertScrollBar.Page'#3'/'#2#13
+  +'dth'#3'\'#3#18'HorzScrollBar.Page'#3'['#3#18'VertScrollBar.Page'#3'-'#2#13
   +'ActiveControl'#7#11'quicksearch'#7'Caption'#6#14'Cartes du Ciel'#12'Font.Ch'
   +'arSet'#7#12'ANSI_CHARSET'#9'Icon.Data'#10':'#16#0#0'6'#16#0#0'BM6'#16#0#0#0
   +#0#0#0'6'#0#0#0'('#0#0#0' '#0#0#0' '#0#0#0#1#0' '#0#0#0#0#0#0#0#0#0#196#14#0
@@ -170,7 +170,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'OnCreate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#9'OnKeyDown'#7#11
   +'FormKeyDown'#10'OnKeyPress'#7#12'FormKeyPress'#8'OnResize'#7#10'FormResize'
   +#6'OnShow'#7#8'FormShow'#0#9'TMultiDoc'#9'MultiDoc1'#4'Left'#2#24#6'Height'#3
-  +#219#1#3'Top'#2'5'#5'Width'#3','#3#5'Align'#7#8'alClient'#10'BevelOuter'#7#6
+  +#217#1#3'Top'#2'5'#5'Width'#3','#3#5'Align'#7#8'alClient'#10'BevelOuter'#7#6
   +'bvNone'#11'BorderWidth'#2#2#7'Caption'#6#9'MultiDoc1'#5'Color'#7#7'clBlack'
   +#11'FullRepaint'#8#11'ParentColor'#8#8'TabOrder'#2#4#11'TitleHeight'#2#15#19
   +'WireframeMoveResize'#9#10'onMaximize'#7#17'MultiDoc1Maximize'#19'onActiveCh'
@@ -1132,9 +1132,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'...........................................................................'
   +'...........................................................................'
   +'.........................................................................."'
-  +'}'#10#7'Visible'#8#0#0#0#6'TPanel'#9'PanelLeft'#6'Height'#3#219#1#3'Top'#2
+  +'}'#10#7'Visible'#8#0#0#0#6'TPanel'#9'PanelLeft'#6'Height'#3#217#1#3'Top'#2
   +'5'#5'Width'#2#24#5'Align'#7#6'alLeft'#10'BevelOuter'#7#6'bvNone'#11'FullRep'
-  +'aint'#8#8'TabOrder'#2#0#0#8'TToolBar'#8'ToolBar2'#6'Height'#3#219#1#5'Width'
+  +'aint'#8#8'TabOrder'#2#0#0#8'TToolBar'#8'ToolBar2'#6'Height'#3#217#1#5'Width'
   +#2#24#5'Align'#7#8'alClient'#12'ButtonHeight'#2#23#7'Caption'#6#8'ToolBar2'
   +#11'EdgeBorders'#11#8'ebBottom'#0#4'Flat'#9#6'Images'#7#11'ImageNormal'#14'P'
   +'arentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'Wrapable'#8#0#11'TToolButt'
@@ -1159,9 +1159,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'ght'#3'Top'#3#207#0#6'Action'#7#8'rot_plus'#4'Wrap'#9#0#0#11'TToolButton'#14
   +'ToolButtonRotM'#4'Left'#2#1#4'Hint'#6#11'Rotate Left'#3'Top'#3#230#0#6'Acti'
   +'on'#7#9'rot_minus'#4'Wrap'#9#0#0#0#0#6'TPanel'#10'PanelRight'#4'Left'#3'D'#3
-  +#6'Height'#3#219#1#3'Top'#2'5'#5'Width'#2#24#5'Align'#7#7'alRight'#8'AutoSiz'
+  +#6'Height'#3#217#1#3'Top'#2'5'#5'Width'#2#24#5'Align'#7#7'alRight'#8'AutoSiz'
   +'e'#9#10'BevelOuter'#7#6'bvNone'#11'FullRepaint'#8#8'TabOrder'#2#1#0#8'TTool'
-  +'Bar'#8'ToolBar3'#6'Height'#3#225#0#3'Top'#3#250#0#5'Width'#2#24#5'Align'#7#8
+  +'Bar'#8'ToolBar3'#6'Height'#3#223#0#3'Top'#3#250#0#5'Width'#2#24#5'Align'#7#8
   +'alClient'#12'ButtonHeight'#2#23#7'Caption'#6#8'ToolBar3'#11'EdgeBorders'#11
   +#8'ebBottom'#0#4'Flat'#9#12'Font.CharSet'#7#12'ANSI_CHARSET'#10'Font.Color'#7
   +#7'clBlack'#11'Font.Height'#2#246#9'Font.Name'#6#7'Default'#10'Font.Pitch'#7
@@ -1214,7 +1214,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#2#23#4'Hint'#6#10'Set FOV to'#3'Top'#3#227#0#5'Width'#2#24#5'Color'#7#9'clB'
   +'tnFace'#4'Flat'#9#10'Font.Color'#7#6'clNavy'#10'Font.Style'#11#6'fsBold'#0#9
   +'NumGlyphs'#2#0#7'OnClick'#7#11'SetFOVClick'#8'ShowHint'#9#14'ParentShowHint'
-  +#8#0#0#0#0#6'TPanel'#11'PanelBottom'#6'Height'#2' '#3'Top'#3#16#2#5'Width'#3
+  +#8#0#0#0#0#6'TPanel'#11'PanelBottom'#6'Height'#2' '#3'Top'#3#14#2#5'Width'#3
   +'\'#3#5'Align'#7#8'alBottom'#10'BevelOuter'#7#6'bvNone'#11'FullRepaint'#8#10
   +'ParentFont'#9#8'TabOrder'#2#2#0#6'TShape'#6'Shape1'#4'Left'#3#150#0#6'Heigh'
   ,'t'#2' '#5'Width'#2#2#5'Align'#7#6'alLeft'#11'Brush.Color'#7#11'clBtnShadow'
@@ -1247,22 +1247,22 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'tton'#11'ToolButton3'#4'Left'#2't'#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#11
   +'ToolButton3'#10'ImageIndex'#2#2#5'Style'#7#10'tbsDivider'#0#0#11'TToolButto'
   +'n'#17'ToolButtonCascade'#4'Left'#2'|'#4'Hint'#6#7'Cascade'#3'Top'#2#2#7'Cap'
-  +'tion'#6#8'&Cascade'#10'ImageIndex'#2#4#7'OnClick'#7#21'WindowCascade1Execut'
-  +'e'#0#0#11'TToolButton'#14'ToolButtonTile'#4'Left'#3#147#0#4'Hint'#6#15'Tile'
-  +' Vertically'#3'Top'#2#2#7'Caption'#6#16'Tile &Vertically'#10'ImageIndex'#2
-  +#14#7'OnClick'#7#26'WindowTileVertical1Execute'#0#0#11'TToolButton'#11'ToolB'
-  +'utton5'#4'Left'#3#170#0#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#11'ToolButton5'
-  +#10'ImageIndex'#2#17#5'Style'#7#10'tbsDivider'#0#0#11'TToolButton'#14'ToolBu'
-  +'ttonUndo'#4'Left'#3#178#0#4'Hint'#6#16'Undo Last Change'#3'Top'#2#2#6'Actio'
-  +'n'#7#4'Undo'#0#0#11'TToolButton'#14'ToolButtonRedo'#4'Left'#3#201#0#4'Hint'
-  +#6#16'Redo Last Change'#3'Top'#2#2#6'Action'#7#4'Redo'#0#0#11'TToolButton'#14
-  +'ToolButtonZoom'#4'Left'#3#224#0#4'Hint'#6#7'Zoom In'#3'Top'#2#2#6'Action'#7
-  +#8'zoomplus'#0#0#11'TToolButton'#16'ToolButtonUnZoom'#4'Left'#3#247#0#4'Hint'
-  +#6#8'Zoom Out'#3'Top'#2#2#6'Action'#7#9'zoomminus'#0#0#11'TToolButton'#11'To'
-  +'olButton1'#4'Left'#3#14#1#4'Hint'#6#7'Set FOV'#3'Top'#2#2#6'Action'#7#7'Zoo'
-  +'mBar'#0#0#9'TComboBox'#11'quicksearch'#4'Left'#3'='#1#6'Height'#2#23#4'Hint'
-  +#6#6'Search'#3'Top'#2#2#5'Width'#2'P'#21'ArrowKeysTraverseList'#8#12'AutoCom'
-  +'plete'#9#16'AutoCompleteText'#11#12'cbactEnabled'#22'cbactEndOfLineComplete'
+  +'tion'#6#7'Cascade'#10'ImageIndex'#2#4#7'OnClick'#7#21'WindowCascade1Execute'
+  +#0#0#11'TToolButton'#14'ToolButtonTile'#4'Left'#3#147#0#4'Hint'#6#15'Tile Ve'
+  +'rtically'#3'Top'#2#2#7'Caption'#6#15'Tile Vertically'#10'ImageIndex'#2#14#7
+  +'OnClick'#7#26'WindowTileVertical1Execute'#0#0#11'TToolButton'#11'ToolButton'
+  +'5'#4'Left'#3#170#0#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#11'ToolButton5'#10
+  +'ImageIndex'#2#17#5'Style'#7#10'tbsDivider'#0#0#11'TToolButton'#14'ToolButto'
+  +'nUndo'#4'Left'#3#178#0#4'Hint'#6#16'Undo Last Change'#3'Top'#2#2#6'Action'#7
+  +#4'Undo'#0#0#11'TToolButton'#14'ToolButtonRedo'#4'Left'#3#201#0#4'Hint'#6#16
+  +'Redo Last Change'#3'Top'#2#2#6'Action'#7#4'Redo'#0#0#11'TToolButton'#14'Too'
+  +'lButtonZoom'#4'Left'#3#224#0#4'Hint'#6#7'Zoom In'#3'Top'#2#2#6'Action'#7#8
+  +'zoomplus'#0#0#11'TToolButton'#16'ToolButtonUnZoom'#4'Left'#3#247#0#4'Hint'#6
+  +#8'Zoom Out'#3'Top'#2#2#6'Action'#7#9'zoomminus'#0#0#11'TToolButton'#11'Tool'
+  +'Button1'#4'Left'#3#14#1#4'Hint'#6#7'Set FOV'#3'Top'#2#2#6'Action'#7#7'ZoomB'
+  +'ar'#0#0#9'TComboBox'#11'quicksearch'#4'Left'#3'='#1#6'Height'#2#23#4'Hint'#6
+  +#6'Search'#3'Top'#2#2#5'Width'#2'P'#21'ArrowKeysTraverseList'#8#12'AutoCompl'
+  +'ete'#9#16'AutoCompleteText'#11#12'cbactEnabled'#22'cbactEndOfLineComplete'
   +#20'cbactSearchAscending'#0#13'DropDownCount'#2#15#12'Font.CharSet'#7#12'ANS'
   +'I_CHARSET'#10'ItemHeight'#2#14#9'MaxLength'#2#0#9'OnCloseUp'#7#16'quicksear'
   +'chClick'#10'OnDblClick'#7#16'quicksearchClick'#9'OnKeyDown'#7#18'quicksearc'
@@ -1411,8 +1411,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'ton2'#5'Style'#7#10'tbsDivider'#0#0#11'TToolButton'#11'ToolButton4'#4'Left'
   ,#3#228#1#3'Top'#2#2#5'Width'#2#8#7'Caption'#6#11'ToolButton4'#5'Style'#7#10
   +'tbsDivider'#0#0#0#0#9'TMainMenu'#9'MainMenu1'#4'left'#2'`'#3'top'#3#160#0#0
-  +#9'TMenuItem'#5'File1'#7'Caption'#6#4'File'#4'Hint'#6#21'File related comman'
-  +'ds'#0#9'TMenuItem'#11'FileNewItem'#6'Action'#7#8'FileNew1'#7'OnClick'#7#15
+  +#9'TMenuItem'#5'File1'#7'Caption'#6#5'&File'#4'Hint'#6#21'File related comma'
+  +'nds'#0#9'TMenuItem'#11'FileNewItem'#6'Action'#7#8'FileNew1'#7'OnClick'#7#15
   +'FileNew1Execute'#0#0#9'TMenuItem'#12'FileOpenItem'#6'Action'#7#9'FileOpen1'
   +#7'OnClick'#7#16'FileOpen1Execute'#0#0#9'TMenuItem'#14'FileSaveAsItem'#6'Act'
   +'ion'#7#11'FileSaveAs1'#7'OnClick'#7#18'FileSaveAs1Execute'#0#0#9'TMenuItem'
@@ -1425,16 +1425,16 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'ction'#7#15'FilePrintSetup1'#7'OnClick'#7#22'FilePrintSetup1Execute'#0#0#9
   +'TMenuItem'#2'N1'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#12'FileExitItem'#6'Acti'
   +'on'#7#9'FileExit1'#7'OnClick'#7#16'FileExit1Execute'#0#0#0#9'TMenuItem'#5'E'
-  +'dit1'#7'Caption'#6#4'Edit'#10'GroupIndex'#2#2#4'Hint'#6#13'Edit commands'#0
+  +'dit1'#7'Caption'#6#5'&Edit'#10'GroupIndex'#2#2#4'Hint'#6#13'Edit commands'#0
   +#9'TMenuItem'#8'CopyItem'#6'Action'#7#9'EditCopy1'#7'OnClick'#7#16'EditCopy1'
   +'Execute'#0#0#9'TMenuItem'#5'Undo1'#6'Action'#7#4'Undo'#7'OnClick'#7#11'Undo'
   +'Execute'#0#0#9'TMenuItem'#5'Redo1'#6'Action'#7#4'Redo'#7'OnClick'#7#11'Redo'
-  +'Execute'#0#0#0#9'TMenuItem'#6'Setup1'#7'Caption'#6#5'Setup'#10'GroupIndex'#2
-  +#2#0#9'TMenuItem'#14'Configuration1'#6'Action'#7#10'OpenConfig'#10'GroupInde'
-  +'x'#2#2#7'OnClick'#7#17'OpenConfigExecute'#0#0#9'TMenuItem'#21'SaveConfigura'
-  +'tionNow1'#6'Action'#7#17'SaveConfiguration'#10'GroupIndex'#2#2#7'OnClick'#7
-  +#24'SaveConfigurationExecute'#0#0#9'TMenuItem'#2'N8'#7'Caption'#6#1'-'#10'Gr'
-  +'oupIndex'#2#2#0#0#9'TMenuItem'#24'SaveConfigurationOnExit1'#6'Action'#7#16
+  +'Execute'#0#0#0#9'TMenuItem'#6'Setup1'#7'Caption'#6#6'&Setup'#10'GroupIndex'
+  +#2#2#0#9'TMenuItem'#14'Configuration1'#6'Action'#7#10'OpenConfig'#10'GroupIn'
+  +'dex'#2#2#7'OnClick'#7#17'OpenConfigExecute'#0#0#9'TMenuItem'#21'SaveConfigu'
+  +'rationNow1'#6'Action'#7#17'SaveConfiguration'#10'GroupIndex'#2#2#7'OnClick'
+  +#7#24'SaveConfigurationExecute'#0#0#9'TMenuItem'#2'N8'#7'Caption'#6#1'-'#10
+  +'GroupIndex'#2#2#0#0#9'TMenuItem'#24'SaveConfigurationOnExit1'#6'Action'#7#16
   +'SaveConfigOnExit'#10'GroupIndex'#2#2#7'OnClick'#7#23'SaveConfigOnExitExecut'
   +'e'#0#0#9'TMenuItem'#3'N11'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#11'DateConfig'
   +'1'#6'Action'#7#9'SetupTime'#7'OnClick'#7#16'SetupTimeExecute'#0#0#9'TMenuIt'
@@ -1451,7 +1451,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'TMenuItem'#9'MenuItem7'#6'Action'#7#13'SetupPictures'#7'OnClick'#7#20'Setup'
   +'PicturesExecute'#0#0#9'TMenuItem'#9'MenuItem8'#6'Action'#7#19'ShowBackgroun'
   +'dImage'#7'OnClick'#7#26'ShowBackgroundImageExecute'#0#0#0#9'TMenuItem'#5'Vi'
-  +'ew1'#7'Caption'#6#4'View'#10'GroupIndex'#2#2#0#9'TMenuItem'#11'FullScreen1'
+  +'ew1'#7'Caption'#6#5'&View'#10'GroupIndex'#2#2#0#9'TMenuItem'#11'FullScreen1'
   +#6'Action'#7#14'ViewFullScreen'#10'GroupIndex'#2#2#7'OnClick'#7#21'ViewFullS'
   +'creenExecute'#0#0#9'TMenuItem'#12'NightVision1'#7'Caption'#6#12'Night Visio'
   +'n'#10'GroupIndex'#2#2#7'OnClick'#7#26'ToolButtonNightVisionClick'#0#0#9'TMe'
@@ -1475,7 +1475,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#6#1'-'#10'GroupIndex'#2#2#0#0#9'TMenuItem'#14'ileVertically1'#6'Action'#7#8
   ,'zoomplus'#10'GroupIndex'#2#2#7'OnClick'#7#15'zoomplusExecute'#0#0#9'TMenuIt'
   +'em'#10'zoomminus1'#6'Action'#7#9'zoomminus'#10'GroupIndex'#2#2#7'OnClick'#7
-  +#16'zoomminusExecute'#0#0#0#9'TMenuItem'#6'Chart1'#7'Caption'#6#5'Chart'#10
+  +#16'zoomminusExecute'#0#0#0#9'TMenuItem'#6'Chart1'#7'Caption'#6#6'&Chart'#10
   +'GroupIndex'#2#2#0#9'TMenuItem'#11'Projection1'#7'Caption'#6#10'Projection'#0
   +#9'TMenuItem'#21'EquatorialCoordinate1'#6'Action'#7#20'EquatorialProjection'
   +#7'OnClick'#7#27'EquatorialProjectionExecute'#0#0#9'TMenuItem'#16'AltAzProje'
@@ -1533,30 +1533,30 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'uItem'#11'ShowLabels1'#6'Action'#7#10'ShowLabels'#7'OnClick'#7#17'ShowLabel'
   +'sExecute'#0#0#9'TMenuItem'#26'ShowObjectbelowthehorizon1'#6'Action'#7#22'Sh'
   +'owObjectbelowHorizon'#7'Caption'#6#17'Below the horizon'#7'OnClick'#7#29'Sh'
-  +'owObjectbelowHorizonExecute'#0#0#0#9'TMenuItem'#9'elescope1'#7'Caption'#6#9
-  +'Telescope'#10'GroupIndex'#2#2#0#9'TMenuItem'#16'elescopeConnect1'#6'Action'
-  +#7#16'TelescopeConnect'#7'OnClick'#7#23'TelescopeConnectExecute'#0#0#9'TMenu'
-  +'Item'#13'ControlPanel1'#6'Action'#7#14'TelescopePanel'#7'OnClick'#7#21'Tele'
-  ,'scopePanelExecute'#0#0#9'TMenuItem'#13'elescopeSlew1'#6'Action'#7#13'Telesc'
-  +'opeSlew'#7'OnClick'#7#20'TelescopeSlewExecute'#0#0#9'TMenuItem'#13'elescope'
-  +'Sync1'#6'Action'#7#13'TelescopeSync'#7'OnClick'#7#20'TelescopeSyncExecute'#0
-  +#0#0#9'TMenuItem'#7'Window1'#7'Caption'#6#6'Window'#10'GroupIndex'#2#2#4'Hin'
-  +'t'#6#23'Window related commands'#0#9'TMenuItem'#17'WindowCascadeItem'#7'Cap'
-  +'tion'#6#8'&Cascade'#4'Hint'#6#7'Cascade'#10'ImageIndex'#2#4#7'OnClick'#7#21
-  +'WindowCascade1Execute'#0#0#9'TMenuItem'#14'WindowTileItem'#7'Caption'#6#18
-  +'Tile &Horizontally'#4'Hint'#6#17'Tile Horizontally'#10'ImageIndex'#2#5#7'On'
-  +'Click'#7#28'WindowTileHorizontal1Execute'#0#0#9'TMenuItem'#15'WindowTileIte'
-  +'m2'#7'Caption'#6#16'Tile &Vertically'#4'Hint'#6#15'Tile Vertically'#10'Imag'
-  +'eIndex'#2#14#7'OnClick'#7#26'WindowTileVertical1Execute'#0#0#9'TMenuItem'#9
-  +'Maximize1'#6'Action'#7#8'Maximize'#7'OnClick'#7#15'MaximizeExecute'#0#0#9'T'
-  +'MenuItem'#3'N10'#7'Caption'#6#1'-'#0#0#0#9'TMenuItem'#5'Help1'#7'Caption'#6
-  +#4'Help'#10'GroupIndex'#2#2#4'Hint'#6#11'Help topics'#0#9'TMenuItem'#8'Conte'
-  +'nt1'#6'Action'#7#13'HelpContents1'#7'OnClick'#7#20'HelpContents1Execute'#0#0
-  +#9'TMenuItem'#10'MenuItem10'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#9'HomePage1'
-  +#7'Caption'#6#17'Skychart Homepage'#7'OnClick'#7#14'HomePage1Click'#0#0#9'TM'
-  +'enuItem'#9'Maillist1'#7'Caption'#6#8'MailList'#7'OnClick'#7#14'Maillist1Cli'
-  +'ck'#0#0#9'TMenuItem'#10'BugReport1'#7'Caption'#6#16'Report a problem'#7'OnC'
-  +'lick'#7#15'BugReport1Click'#0#0#9'TMenuItem'#10'MenuItem11'#7'Caption'#6#1
+  +'owObjectbelowHorizonExecute'#0#0#0#9'TMenuItem'#10'telescope1'#7'Caption'#6
+  +#10'&Telescope'#10'GroupIndex'#2#2#0#9'TMenuItem'#17'telescopeConnect1'#6'Ac'
+  +'tion'#7#16'TelescopeConnect'#7'OnClick'#7#23'TelescopeConnectExecute'#0#0#9
+  +'TMenuItem'#13'ControlPanel1'#6'Action'#7#14'TelescopePanel'#7'OnClick'#7#21
+  ,'TelescopePanelExecute'#0#0#9'TMenuItem'#14'telescopeSlew1'#6'Action'#7#13'T'
+  +'elescopeSlew'#7'OnClick'#7#20'TelescopeSlewExecute'#0#0#9'TMenuItem'#14'tel'
+  +'escopeSync1'#6'Action'#7#13'TelescopeSync'#7'OnClick'#7#20'TelescopeSyncExe'
+  +'cute'#0#0#0#9'TMenuItem'#7'Window1'#7'Caption'#6#7'&Window'#10'GroupIndex'#2
+  +#2#4'Hint'#6#23'Window related commands'#0#9'TMenuItem'#17'WindowCascadeItem'
+  +#7'Caption'#6#8'&Cascade'#4'Hint'#6#7'Cascade'#10'ImageIndex'#2#4#7'OnClick'
+  +#7#21'WindowCascade1Execute'#0#0#9'TMenuItem'#14'WindowTileItem'#7'Caption'#6
+  +#18'Tile &Horizontally'#4'Hint'#6#17'Tile Horizontally'#10'ImageIndex'#2#5#7
+  +'OnClick'#7#28'WindowTileHorizontal1Execute'#0#0#9'TMenuItem'#15'WindowTileI'
+  +'tem2'#7'Caption'#6#16'Tile &Vertically'#4'Hint'#6#15'Tile Vertically'#10'Im'
+  +'ageIndex'#2#14#7'OnClick'#7#26'WindowTileVertical1Execute'#0#0#9'TMenuItem'
+  +#9'Maximize1'#6'Action'#7#8'Maximize'#7'OnClick'#7#15'MaximizeExecute'#0#0#9
+  +'TMenuItem'#3'N10'#7'Caption'#6#1'-'#0#0#0#9'TMenuItem'#5'Help1'#7'Caption'#6
+  +#5'&Help'#10'GroupIndex'#2#2#4'Hint'#6#11'Help topics'#0#9'TMenuItem'#8'Cont'
+  +'ent1'#6'Action'#7#13'HelpContents1'#7'OnClick'#7#20'HelpContents1Execute'#0
+  +#0#9'TMenuItem'#10'MenuItem10'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#9'HomePage'
+  +'1'#7'Caption'#6#17'Skychart Homepage'#7'OnClick'#7#14'HomePage1Click'#0#0#9
+  +'TMenuItem'#9'Maillist1'#7'Caption'#6#8'MailList'#7'OnClick'#7#14'Maillist1C'
+  +'lick'#0#0#9'TMenuItem'#10'BugReport1'#7'Caption'#6#16'Report a problem'#7'O'
+  +'nClick'#7#15'BugReport1Click'#0#0#9'TMenuItem'#10'MenuItem11'#7'Caption'#6#1
   +'-'#0#0#9'TMenuItem'#13'HelpAboutItem'#6'Action'#7#10'HelpAbout1'#7'OnClick'
   +#7#17'HelpAbout1Execute'#0#0#0#9'TMenuItem'#10'topmessage'#7'Caption'#6#1' '
   +#0#0#0#11'TOpenDialog'#10'OpenDialog'#5'Title'#6#18'Open existing file'#11'F'

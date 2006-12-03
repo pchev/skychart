@@ -4,7 +4,7 @@ object f_main: Tf_main
   Top = 105
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 559
+  VertScrollBar.Page = 557
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
   Font.CharSet = ANSI_CHARSET
@@ -152,7 +152,7 @@ object f_main: Tf_main
   OnShow = FormShow
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 475
+    Height = 473
     Top = 53
     Width = 812
     Align = alClient
@@ -2309,7 +2309,7 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 475
+    Height = 473
     Top = 53
     Width = 24
     Align = alLeft
@@ -2317,7 +2317,7 @@ object f_main: Tf_main
     FullRepaint = False
     TabOrder = 0
     object ToolBar2: TToolBar
-      Height = 475
+      Height = 473
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2413,7 +2413,7 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 836
-    Height = 475
+    Height = 473
     Top = 53
     Width = 24
     Align = alRight
@@ -2422,7 +2422,7 @@ object f_main: Tf_main
     FullRepaint = False
     TabOrder = 1
     object ToolBar3: TToolBar
-      Height = 225
+      Height = 223
       Top = 250
       Width = 24
       Align = alClient
@@ -2641,7 +2641,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 528
+    Top = 526
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -2767,7 +2767,7 @@ object f_main: Tf_main
         Left = 124
         Hint = 'Cascade'
         Top = 2
-        Caption = '&Cascade'
+        Caption = 'Cascade'
         ImageIndex = 4
         OnClick = WindowCascade1Execute
       end
@@ -2775,7 +2775,7 @@ object f_main: Tf_main
         Left = 147
         Hint = 'Tile Vertically'
         Top = 2
-        Caption = 'Tile &Vertically'
+        Caption = 'Tile Vertically'
         ImageIndex = 14
         OnClick = WindowTileVertical1Execute
       end
@@ -3305,7 +3305,7 @@ object f_main: Tf_main
     left = 96
     top = 160
     object File1: TMenuItem
-      Caption = 'File'
+      Caption = '&File'
       Hint = 'File related commands'
       object FileNewItem: TMenuItem
         Action = FileNew1
@@ -3354,7 +3354,7 @@ object f_main: Tf_main
       end
     end
     object Edit1: TMenuItem
-      Caption = 'Edit'
+      Caption = '&Edit'
       GroupIndex = 2
       Hint = 'Edit commands'
       object CopyItem: TMenuItem
@@ -3371,7 +3371,7 @@ object f_main: Tf_main
       end
     end
     object Setup1: TMenuItem
-      Caption = 'Setup'
+      Caption = '&Setup'
       GroupIndex = 2
       object Configuration1: TMenuItem
         Action = OpenConfig
@@ -3441,7 +3441,7 @@ object f_main: Tf_main
       end
     end
     object View1: TMenuItem
-      Caption = 'View'
+      Caption = '&View'
       GroupIndex = 2
       object FullScreen1: TMenuItem
         Action = ViewFullScreen
@@ -3529,7 +3529,7 @@ object f_main: Tf_main
       end
     end
     object Chart1: TMenuItem
-      Caption = 'Chart'
+      Caption = '&Chart'
       GroupIndex = 2
       object Projection1: TMenuItem
         Caption = 'Projection'
@@ -3722,10 +3722,10 @@ object f_main: Tf_main
         OnClick = ShowObjectbelowHorizonExecute
       end
     end
-    object elescope1: TMenuItem
-      Caption = 'Telescope'
+    object telescope1: TMenuItem
+      Caption = '&Telescope'
       GroupIndex = 2
-      object elescopeConnect1: TMenuItem
+      object telescopeConnect1: TMenuItem
         Action = TelescopeConnect
         OnClick = TelescopeConnectExecute
       end
@@ -3733,17 +3733,17 @@ object f_main: Tf_main
         Action = TelescopePanel
         OnClick = TelescopePanelExecute
       end
-      object elescopeSlew1: TMenuItem
+      object telescopeSlew1: TMenuItem
         Action = TelescopeSlew
         OnClick = TelescopeSlewExecute
       end
-      object elescopeSync1: TMenuItem
+      object telescopeSync1: TMenuItem
         Action = TelescopeSync
         OnClick = TelescopeSyncExecute
       end
     end
     object Window1: TMenuItem
-      Caption = 'Window'
+      Caption = '&Window'
       GroupIndex = 2
       Hint = 'Window related commands'
       object WindowCascadeItem: TMenuItem
@@ -3773,7 +3773,7 @@ object f_main: Tf_main
       end
     end
     object Help1: TMenuItem
-      Caption = 'Help'
+      Caption = '&Help'
       GroupIndex = 2
       Hint = 'Help topics'
       object Content1: TMenuItem
