@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-12-03 15:44+0100\n"
+"PO-Revision-Date: 2006-12-03 16:08+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -439,6 +439,10 @@ msgstr "Catalogue de nébuleuse CDC"
 #: u_translation:rscdcstarscata
 msgid "CDC Stars Catalog Setting"
 msgstr "Catalogue d'étoile CDC"
+
+#: u_translation:rscdcplugin
+msgid "CDC plugin"
+msgstr "Plugin pour CDC"
 
 #: u_translation:rscdcpluginset
 msgid "CDC plugin setting"
@@ -1755,6 +1759,10 @@ msgstr "Espacement en heures"
 #: u_translation:rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Heure, minute, seconde"
+
+#: u_translation:rsindidriver
+msgid "INDI Driver"
+msgstr "Pilote INDI"
 
 #: u_translation:rsindidriverse
 msgid "INDI Driver setting"
@@ -3167,6 +3175,10 @@ msgstr "Choisir les champs a utiliser et leur position dans le fichier"
 #: u_translation:rsselectthesys
 msgid "Select the system printer and options you want to use"
 msgstr "Choisir l'imprimante et les options d'impression"
+
+#: u_translation:rsselectthetel
+msgid "Select the telescope interface"
+msgstr "Choix de l'interface télescope"
 
 #: u_translation:rsselectthetyp
 msgid "Select the type of object in your catalog"

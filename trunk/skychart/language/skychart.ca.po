@@ -440,6 +440,10 @@ msgstr "Catàlegs de nebuloses CDC"
 msgid "CDC Stars Catalog Setting"
 msgstr "Catàlegs d'estels CDC"
 
+#: u_translation:rscdcplugin
+msgid "CDC plugin"
+msgstr ""
+
 #: u_translation:rscdcpluginset
 msgid "CDC plugin setting"
 msgstr "Paràmetre del connector CDC"
@@ -1755,6 +1759,10 @@ msgstr "Espaiat en hores"
 #: u_translation:rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Hores, minuts, segons"
+
+#: u_translation:rsindidriver
+msgid "INDI Driver"
+msgstr ""
 
 #: u_translation:rsindidriverse
 msgid "INDI Driver setting"
@@ -3167,6 +3175,10 @@ msgstr "Escolliu els camps a utilitzar i llur posició en l'arxiu"
 #: u_translation:rsselectthesys
 msgid "Select the system printer and options you want to use"
 msgstr "Escolliu la impressora i les opcions d'impressió"
+
+#: u_translation:rsselectthetel
+msgid "Select the telescope interface"
+msgstr ""
 
 #: u_translation:rsselectthetyp
 msgid "Select the type of object in your catalog"

@@ -1069,6 +1069,9 @@ resourcestring
   rsFillWithHori = 'Fill with horizon color';
   rsAD = 'AD';
   rsBC = 'BC';
+  rsSelectTheTel = 'Select the telescope interface';
+  rsINDIDriver = 'INDI Driver';
+  rsCDCPlugin = 'CDC plugin';
 
 implementation
 
