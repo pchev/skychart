@@ -923,7 +923,7 @@ try
  catalog.LoadHorizon(cfgm.horizonfile,@def_cfgsc);
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
  f_search.cfgshr:=catalog.cfgshr;
- f_search.cfgsc.Assign(def_cfgsc);
+ f_search.cfgsc:=def_cfgsc;
  f_search.Init;
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
@@ -1493,7 +1493,7 @@ procedure Tf_main.DSSImageExecute(Sender: TObject);
 begin
 if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
   then with MultiDoc1.ActiveObject as Tf_chart do begin
-   f_getdss.cmain:=@cfgm;
+   f_getdss.cmain:=cfgm;
    if f_getdss.GetDss(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
       sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
       if sc.Fits.Header.valid then begin
@@ -1713,7 +1713,7 @@ end;
 procedure Tf_main.PositionExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   f_position.cfgsc.Assign(sc.cfgsc);
+   f_position.cfgsc:=sc.cfgsc;
    f_position.AzNorth:=sc.catalog.cfgshr.AzNorth;
    formpos(f_position,mouse.cursorpos.x,mouse.cursorpos.y);
    f_position.showmodal;
@@ -1751,7 +1751,7 @@ if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject
    end;
 if chart is Tf_chart then with chart as Tf_chart do begin
    formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
-   f_search.cfgsc.Assign(sc.cfgsc);
+   f_search.cfgsc:=sc.cfgsc;
    f_search.InitPlanet;
    repeat
    f_search.showmodal;
