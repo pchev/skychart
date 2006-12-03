@@ -197,7 +197,6 @@ end;
 
 procedure Tf_search.FormCreate(Sender: TObject);
 begin
-cfgsc:=Tconf_skychart.create;
 SetLang;
   Fnightvision:=false;
 {$ifdef win32}
@@ -209,7 +208,6 @@ end;
 
 procedure Tf_search.FormDestroy(Sender: TObject);
 begin
-  cfgsc.free;
 end;
 
 procedure Tf_search.Button3Click(Sender: TObject);
