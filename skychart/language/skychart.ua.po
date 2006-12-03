@@ -408,6 +408,10 @@ msgstr "Межа"
 msgid "Bright + NEO + TNO"
 msgstr "Bright + NEO + TNO"
 
+#: u_translation:rsbrightnebula
+msgid "Bright Nebula"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Яскраві зорі"
@@ -429,7 +433,7 @@ msgid "Build Catalog"
 msgstr "Створити каталог"
 
 #: u_translation:rscdcnebulaeca
-msgid "CDC Nebulae Catalog Setting"
+msgid "CDC Deep Sky Catalog Setting"
 msgstr "Установки CDC каталогу туманностей"
 
 #: u_translation:rscdcstarscata
@@ -489,7 +493,7 @@ msgid "Catalog type"
 msgstr "Тип каталогу"
 
 #: u_translation:rscdcnebulae
-msgid "CdC Nebulae"
+msgid "CdC Deep Sky"
 msgstr "CdC туманності"
 
 #: u_translation:rscdcstars
@@ -959,6 +963,30 @@ msgstr "Схилення"
 #: u_translation:rsdecrementtim
 msgid "Decrement Time"
 msgstr "Спадання часу"
+
+#: u_translation:rsnebulacommon
+msgid "Deep Sky Common Name"
+msgstr "Прийнята назва туманності"
+
+#: u_translation:rsnebulaefilte
+msgid "Deep Sky Filter"
+msgstr "Фільтр туманностей"
+
+#: u_translation:rsnebula
+msgid "Deep Sky Object"
+msgstr "Туманність"
+
+#: u_translation:rsnebulae
+msgid "Deep Sky Objects"
+msgstr "Туманності"
+
+#: u_translation:rsnebuladispla
+msgid "Deep Sky Objects Display"
+msgstr "Відображення туманності"
+
+#: u_translation:rsnebulaeoroth
+msgid "Deep Sky or other objects"
+msgstr "Туманності або інші об'єкти"
 
 #: u_translation:rsdeepskyobjec
 msgid "Deep sky object colour"
@@ -1489,7 +1517,7 @@ msgid "Filter ->"
 msgstr "Фільтр ->"
 
 #: u_translation:rsfilternebula
-msgid "Filter nebulae"
+msgid "Filter Deep Sky Objects"
 msgstr "Фільтр туманностей"
 
 #: u_translation:rsfilterstars
@@ -1921,7 +1949,7 @@ msgid "Length"
 msgstr "Довжина"
 
 #: u_translation:rslessnebulae
-msgid "Less Nebulae"
+msgid "Less Deep Sky"
 msgstr "Менше туманностей"
 
 #: u_translation:rslessstars
@@ -2221,7 +2249,7 @@ msgid "Moon"
 msgstr "Місяць"
 
 #: u_translation:rsmorenebulae
-msgid "More Nebulae"
+msgid "More Deep Sky"
 msgstr "Більше туманностей"
 
 #: u_translation:rsmorestars
@@ -2275,30 +2303,6 @@ msgstr "Назва"
 #: u_translation:rsnautical
 msgid "Nautical"
 msgstr "Навігаційні"
-
-#: u_translation:rsnebula
-msgid "Nebula"
-msgstr "Туманність"
-
-#: u_translation:rsnebulacommon
-msgid "Nebula Common Name"
-msgstr "Прийнята назва туманності"
-
-#: u_translation:rsnebuladispla
-msgid "Nebula Display"
-msgstr "Відображення туманності"
-
-#: u_translation:rsnebulae
-msgid "Nebulae"
-msgstr "Туманності"
-
-#: u_translation:rsnebulaefilte
-msgid "Nebulae Filter"
-msgstr "Фільтр туманностей"
-
-#: u_translation:rsnebulaeoroth
-msgid "Nebulae or other objects"
-msgstr "Туманності або інші об'єкти"
 
 #: u_translation:rsnebulaeoutli
 msgid "Nebulae outlines"
@@ -3264,6 +3268,10 @@ msgstr "Показати контури сузір'їв"
 msgid "Show Coordinate Grid"
 msgstr "Показати координатну сітку"
 
+#: u_translation:rsshownebulae
+msgid "Show Deep Sky Objects"
+msgstr "Показати туманності"
+
 #: u_translation:rsshowearthsha
 msgid "Show Earth Shadow  (Lunar eclipses)"
 msgstr "Показати земну тінь (затьмарення Місяця)"
@@ -3299,10 +3307,6 @@ msgstr "Показати окуляр"
 #: u_translation:rsshowmilkyway
 msgid "Show Milky Way"
 msgstr "Показати Чумацький Шлях"
-
-#: u_translation:rsshownebulae
-msgid "Show Nebulae"
-msgstr "Показати туманності"
 
 #: u_translation:rsshowobjectbe
 msgid "Show Object below the horizon"
@@ -3489,7 +3493,7 @@ msgid "Stars Filter"
 msgstr "Фільтр зірок"
 
 #: u_translation:rsstarsandnebu
-msgid "Stars and Nebulae catalogs prepared with "
+msgid "Stars and Deep Sky catalogs prepared with "
 msgstr "Каталоги зірок та туманностей, приготовані "
 
 #: u_translation:rsstarsproperm
