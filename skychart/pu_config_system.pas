@@ -261,6 +261,10 @@ IndiAutostart.caption:=rsAutomaticall;
 Label14.caption:=rsLanguageSele;
 ManualMountType.Items[0]:=rsEquatorialMo;
 ManualMountType.Items[1]:=rsAltAzMount;
+TelescopeSelect.Caption:=rsSelectTheTel;
+TelescopeSelect.Items[0]:=rsINDIDriver;
+TelescopeSelect.Items[1]:=rsManualMount;
+TelescopeSelect.Items[2]:=rsCDCPlugin;
 end;
 
 constructor Tf_config_system.Create(AOwner:TComponent);
