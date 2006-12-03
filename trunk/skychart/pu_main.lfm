@@ -4542,6 +4542,7 @@ object f_main: Tf_main
   object SaveDialog: TSaveDialog
     Title = 'Save file as'
     FilterIndex = 0
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     left = 144
     top = 160
   end
