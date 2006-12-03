@@ -1,7 +1,8 @@
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# translation of skychart.fr.po
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-11-04 23:09+0100\n"
+"PO-Revision-Date: 2006-12-03 15:44+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -407,6 +408,10 @@ msgstr "Limite"
 msgid "Bright + NEO + TNO"
 msgstr "Brill. + NEO + TNO"
 
+#: u_translation:rsbrightnebula
+msgid "Bright Nebula"
+msgstr "Nébuleuse brillante"
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Etoiles brillantes"
@@ -428,7 +433,7 @@ msgid "Build Catalog"
 msgstr "Construire le catalogue"
 
 #: u_translation:rscdcnebulaeca
-msgid "CDC Nebulae Catalog Setting"
+msgid "CDC Deep Sky Catalog Setting"
 msgstr "Catalogue de nébuleuse CDC"
 
 #: u_translation:rscdcstarscata
@@ -488,7 +493,7 @@ msgid "Catalog type"
 msgstr "Type de catalogue"
 
 #: u_translation:rscdcnebulae
-msgid "CdC Nebulae"
+msgid "CdC Deep Sky"
 msgstr "CdC nébuleuses"
 
 #: u_translation:rscdcstars
@@ -958,6 +963,30 @@ msgstr "Déclinaison"
 #: u_translation:rsdecrementtim
 msgid "Decrement Time"
 msgstr "Décrémente le temps"
+
+#: u_translation:rsnebulacommon
+msgid "Deep Sky Common Name"
+msgstr "Nom commun de nébuleuse"
+
+#: u_translation:rsnebulaefilte
+msgid "Deep Sky Filter"
+msgstr "Filtre des nébuleuses"
+
+#: u_translation:rsnebula
+msgid "Deep Sky Object"
+msgstr "Nébuleuse"
+
+#: u_translation:rsnebulae
+msgid "Deep Sky Objects"
+msgstr "Nébuleuse"
+
+#: u_translation:rsnebuladispla
+msgid "Deep Sky Objects Display"
+msgstr "Affichage des nébuleuses"
+
+#: u_translation:rsnebulaeoroth
+msgid "Deep Sky or other objects"
+msgstr "Nébuleuse ou autre objet"
 
 #: u_translation:rsdeepskyobjec
 msgid "Deep sky object colour"
@@ -1488,7 +1517,7 @@ msgid "Filter ->"
 msgstr "Filtre ->"
 
 #: u_translation:rsfilternebula
-msgid "Filter nebulae"
+msgid "Filter Deep Sky Objects"
 msgstr "Filtrer les nébuleuses"
 
 #: u_translation:rsfilterstars
@@ -1920,7 +1949,7 @@ msgid "Length"
 msgstr "Longueur"
 
 #: u_translation:rslessnebulae
-msgid "Less Nebulae"
+msgid "Less Deep Sky"
 msgstr "Moins de nébuleuses"
 
 #: u_translation:rslessstars
@@ -2220,7 +2249,7 @@ msgid "Moon"
 msgstr "Lune"
 
 #: u_translation:rsmorenebulae
-msgid "More Nebulae"
+msgid "More Deep Sky"
 msgstr "Plus de nébuleuses"
 
 #: u_translation:rsmorestars
@@ -2274,30 +2303,6 @@ msgstr "Nom"
 #: u_translation:rsnautical
 msgid "Nautical"
 msgstr "Nautique"
-
-#: u_translation:rsnebula
-msgid "Nebula"
-msgstr "Nébuleuse"
-
-#: u_translation:rsnebulacommon
-msgid "Nebula Common Name"
-msgstr "Nom commun de nébuleuse"
-
-#: u_translation:rsnebuladispla
-msgid "Nebula Display"
-msgstr "Affichage des nébuleuses"
-
-#: u_translation:rsnebulae
-msgid "Nebulae"
-msgstr "Nébuleuse"
-
-#: u_translation:rsnebulaefilte
-msgid "Nebulae Filter"
-msgstr "Filtre des nébuleuses"
-
-#: u_translation:rsnebulaeoroth
-msgid "Nebulae or other objects"
-msgstr "Nébuleuse ou autre objet"
 
 #: u_translation:rsnebulaeoutli
 msgid "Nebulae outlines"
@@ -3263,6 +3268,10 @@ msgstr "Voir les figures des constellations"
 msgid "Show Coordinate Grid"
 msgstr "Voir les grilles de coordonnées"
 
+#: u_translation:rsshownebulae
+msgid "Show Deep Sky Objects"
+msgstr "Voir les nébuleuses"
+
 #: u_translation:rsshowearthsha
 msgid "Show Earth Shadow  (Lunar eclipses)"
 msgstr "Voir l'ombre de la Terre (eclipses lunaire)"
@@ -3298,10 +3307,6 @@ msgstr "Voir les marques"
 #: u_translation:rsshowmilkyway
 msgid "Show Milky Way"
 msgstr "Voir la voie lactée"
-
-#: u_translation:rsshownebulae
-msgid "Show Nebulae"
-msgstr "Voir les nébuleuses"
 
 #: u_translation:rsshowobjectbe
 msgid "Show Object below the horizon"
@@ -3488,7 +3493,7 @@ msgid "Stars Filter"
 msgstr "Filtre des étoiles"
 
 #: u_translation:rsstarsandnebu
-msgid "Stars and Nebulae catalogs prepared with "
+msgid "Stars and Deep Sky catalogs prepared with "
 msgstr "Catalogues préparés avec "
 
 #: u_translation:rsstarsproperm

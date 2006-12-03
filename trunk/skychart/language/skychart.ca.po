@@ -408,6 +408,10 @@ msgstr "Límit"
 msgid "Bright + NEO + TNO"
 msgstr "Brillant+NEO + TNO"
 
+#: u_translation:rsbrightnebula
+msgid "Bright Nebula"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Estels brillants"
@@ -429,7 +433,7 @@ msgid "Build Catalog"
 msgstr "Construir el catàleg"
 
 #: u_translation:rscdcnebulaeca
-msgid "CDC Nebulae Catalog Setting"
+msgid "CDC Deep Sky Catalog Setting"
 msgstr "Catàlegs de nebuloses CDC"
 
 #: u_translation:rscdcstarscata
@@ -489,7 +493,7 @@ msgid "Catalog type"
 msgstr "Tipus del catàleg"
 
 #: u_translation:rscdcnebulae
-msgid "CdC Nebulae"
+msgid "CdC Deep Sky"
 msgstr "CdC nebuloses"
 
 #: u_translation:rscdcstars
@@ -959,6 +963,30 @@ msgstr "Declinació"
 #: u_translation:rsdecrementtim
 msgid "Decrement Time"
 msgstr "Decrementa el temps"
+
+#: u_translation:rsnebulacommon
+msgid "Deep Sky Common Name"
+msgstr "Nom comú de la nebulosa"
+
+#: u_translation:rsnebulaefilte
+msgid "Deep Sky Filter"
+msgstr "Filtre de les nebuloses"
+
+#: u_translation:rsnebula
+msgid "Deep Sky Object"
+msgstr "Nebulosa"
+
+#: u_translation:rsnebulae
+msgid "Deep Sky Objects"
+msgstr "Nebuloses"
+
+#: u_translation:rsnebuladispla
+msgid "Deep Sky Objects Display"
+msgstr "Mostra les nebuloses"
+
+#: u_translation:rsnebulaeoroth
+msgid "Deep Sky or other objects"
+msgstr "Nebuloses o altres objectes"
 
 #: u_translation:rsdeepskyobjec
 msgid "Deep sky object colour"
@@ -1489,7 +1517,7 @@ msgid "Filter ->"
 msgstr "Filtre ->"
 
 #: u_translation:rsfilternebula
-msgid "Filter nebulae"
+msgid "Filter Deep Sky Objects"
 msgstr "Filtra les nebuloses"
 
 #: u_translation:rsfilterstars
@@ -1921,7 +1949,7 @@ msgid "Length"
 msgstr "Longitud"
 
 #: u_translation:rslessnebulae
-msgid "Less Nebulae"
+msgid "Less Deep Sky"
 msgstr "Menys  nebuloses"
 
 #: u_translation:rslessstars
@@ -2221,7 +2249,7 @@ msgid "Moon"
 msgstr "Lluna"
 
 #: u_translation:rsmorenebulae
-msgid "More Nebulae"
+msgid "More Deep Sky"
 msgstr "Més nebuloses"
 
 #: u_translation:rsmorestars
@@ -2275,30 +2303,6 @@ msgstr "Nom"
 #: u_translation:rsnautical
 msgid "Nautical"
 msgstr "Nàutic"
-
-#: u_translation:rsnebula
-msgid "Nebula"
-msgstr "Nebulosa"
-
-#: u_translation:rsnebulacommon
-msgid "Nebula Common Name"
-msgstr "Nom comú de la nebulosa"
-
-#: u_translation:rsnebuladispla
-msgid "Nebula Display"
-msgstr "Mostra les nebuloses"
-
-#: u_translation:rsnebulae
-msgid "Nebulae"
-msgstr "Nebuloses"
-
-#: u_translation:rsnebulaefilte
-msgid "Nebulae Filter"
-msgstr "Filtre de les nebuloses"
-
-#: u_translation:rsnebulaeoroth
-msgid "Nebulae or other objects"
-msgstr "Nebuloses o altres objectes"
 
 #: u_translation:rsnebulaeoutli
 msgid "Nebulae outlines"
@@ -3264,6 +3268,10 @@ msgstr "Mostra les figures de les constel·lacions"
 msgid "Show Coordinate Grid"
 msgstr "Mostra les graelles de coordenades"
 
+#: u_translation:rsshownebulae
+msgid "Show Deep Sky Objects"
+msgstr "Mostra les nebuloses"
+
 #: u_translation:rsshowearthsha
 msgid "Show Earth Shadow  (Lunar eclipses)"
 msgstr "Mostra l'ombra de la Terra (eclipsis lunars)"
@@ -3299,10 +3307,6 @@ msgstr "Mostra les marques"
 #: u_translation:rsshowmilkyway
 msgid "Show Milky Way"
 msgstr "Mostra la Via Làctia"
-
-#: u_translation:rsshownebulae
-msgid "Show Nebulae"
-msgstr "Mostra les nebuloses"
 
 #: u_translation:rsshowobjectbe
 msgid "Show Object below the horizon"
@@ -3489,7 +3493,7 @@ msgid "Stars Filter"
 msgstr "Filtre dels estels"
 
 #: u_translation:rsstarsandnebu
-msgid "Stars and Nebulae catalogs prepared with "
+msgid "Stars and Deep Sky catalogs prepared with "
 msgstr "Catàlegs preparats amb "
 
 #: u_translation:rsstarsproperm

@@ -66,7 +66,7 @@ resourcestring
   rsSlew = 'Slew';
   rsSync = 'Sync';
   rsShowStars = 'Show Stars';
-  rsShowNebulae = 'Show Nebulae';
+  rsShowNebulae = 'Show Deep Sky Objects';
   rsShowLines = 'Show Lines';
   rsShowPictures = 'Show Pictures';
   rsGetDSSImage = 'Get DSS Image';
@@ -194,7 +194,8 @@ resourcestring
   rsOpenCluster = 'Open Cluster';
   rsGlobularClus = 'Globular Cluster';
   rsGalaxy = 'Galaxy';
-  rsNebula = 'Nebula';
+  rsBrightNebula = 'Bright Nebula';
+  rsNebula = 'Deep Sky Object';
   rsPlanetaryNeb = 'Planetary Nebula';
   rsClusterAndNe = 'Cluster and Nebula';
   rsStar = 'Star';
@@ -531,7 +532,7 @@ resourcestring
   rsObjectFilter = 'Object Filter';
   rsGridSpacing = 'Grid Spacing';
   rsCdCStars = 'CdC Stars';
-  rsCdCNebulae = 'CdC Nebulae';
+  rsCdCNebulae = 'CdC Deep Sky';
   rsObsolete = 'Obsolete';
   rsDisplay = 'Display';
   rsDisplayColou = 'Display colour';
@@ -548,7 +549,7 @@ resourcestring
   rsOrbitalEleme = 'Orbital Elements';
   rsOnlineDSSPic = 'Online DSS pictures';
   rsApplyChangeT = 'Apply Change To All Chart';
-  rsStarsAndNebu = 'Stars and Nebulae catalogs prepared with ';
+  rsStarsAndNebu = 'Stars and Deep Sky catalogs prepared with ';
   rsAdd = 'Add';
   rsDelete = 'Delete';
   rsCDCStarsCata = 'CDC Stars Catalog Setting';
@@ -561,8 +562,8 @@ resourcestring
   rsDoubles = 'Doubles';
   rsBrightStars = 'Bright stars';
   rsShowIRVariab = 'Show IR variables';
-  rsCDCNebulaeCa = 'CDC Nebulae Catalog Setting';
-  rsNebulae = 'Nebulae';
+  rsCDCNebulaeCa = 'CDC Deep Sky Catalog Setting';
+  rsNebulae = 'Deep Sky Objects';
   rsGalaxies = 'Galaxies';
   rsPlanetaryNeb2 = 'Planetary nebulae';
   rsGeneral = 'General';
@@ -596,8 +597,8 @@ resourcestring
   rsLimitingMagn2 = 'Limiting magnitude :';
   rsNakedEyeRefe = 'Naked eye reference';
   rsAutomatic = 'Automatic';
-  rsNebulaeFilte = 'Nebulae Filter';
-  rsFilterNebula = 'Filter nebulae';
+  rsNebulaeFilte = 'Deep Sky Filter';
+  rsFilterNebula = 'Filter Deep Sky Objects';
   rsHideObjectWi = 'Hide object wider than';
   rsLimitingSize = 'Limiting Size (arcminutes) :';
   rsGridSetting = 'Grid Setting';
@@ -607,7 +608,7 @@ resourcestring
   rsTypeOfObject = 'Type of object to add to the list';
   rsSolarSystemO = 'Solar System object';
   rsStarDisplay = 'Star Display';
-  rsNebulaDispla = 'Nebula Display';
+  rsNebulaDispla = 'Deep Sky Objects Display';
   rsStarDisplayP = 'Star Display  Properties';
   rsFaintStarsSi = 'Faint Stars Size ';
   rsContrast = 'Contrast';
@@ -969,12 +970,12 @@ resourcestring
   rsLanguageSele = 'Language selection';
   rsMoreStars = 'More Stars';
   rsLessStars = 'Less Stars';
-  rsMoreNebulae = 'More Nebulae';
-  rsLessNebulae = 'Less Nebulae';
+  rsMoreNebulae = 'More Deep Sky';
+  rsLessNebulae = 'Less Deep Sky';
   rsTimeUnits = 'Time Units';
   rsSetFOVTo = 'Set FOV to';
   rsOtherLinesCa = 'Other Lines Catalogs';
-  rsNebulaCommon = 'Nebula Common Name';
+  rsNebulaCommon = 'Deep Sky Common Name';
   rsStarCommonNa = 'Star Common Name';
   rsCommonName = 'Common Name';
   rsPostscript = 'Postscript';
@@ -1015,7 +1016,7 @@ resourcestring
   rsProportional2 = 'Proportional to the magnitude';
   rsEquatorialMo = 'Equatorial Mount';
   rsAltAzMount = 'Alt/Az Mount';
-  rsNebulaeOrOth = 'Nebulae or other objects';
+  rsNebulaeOrOth = 'Deep Sky or other objects';
   rsNebulaeOutli = 'Nebulae outlines';
   rsBinaryIndexe = 'Binary indexed catalog';
   rsTextFileCata = 'Text file catalog';
