@@ -173,12 +173,20 @@ end;
 
 function TTelescope.ScopeConnect : boolean;
 begin
+try
 FScopeConnect(result);
+except
+ result:=false;
+end;
 end;
 
 function TTelescope.ScopeDisconnect : boolean;
 begin
+try
 FScopeDisconnect(result);
+except
+ result:=false;
+end;
 end;
 
 procedure TTelescope.ScopeAlign(source : string; ra,dec : double);
@@ -203,12 +211,20 @@ end;
 
 procedure TTelescope.ScopeGetRaDec(var ar,de : double; var ok : boolean);
 begin
+try
 FScopeGetRaDec(ar,de,ok);
+except
+ ok:=false;
+end;
 end;
 
 procedure TTelescope.ScopeGetAltAz(var alt,az : double; var ok : boolean);
 begin
+try
 FScopeGetAltAz(alt,az,ok);
+except
+ ok:=false;
+end;
 end;
 
 procedure TTelescope.ScopeGetName(var scopename : shortstring);

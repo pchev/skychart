@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  Windows,  Messages, SysUtils, Classes, Graphics, Controls, 
-  Forms, Dialogs, ShellAPI, 
+  Windows,  Messages, SysUtils, Classes, Graphics, Controls,
+  Forms, Dialogs, ShellAPI,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
 
 type
@@ -113,11 +113,7 @@ var
 
 implementation
 
-uses comobj
-{$IFDEF VER140}
-, variants
-{$ENDIF}
-;
+uses comobj, variants;
 
 {$R *.DFM}
 
@@ -253,6 +249,7 @@ pop_scope.pos_y.text:='';
 pop_scope.az_x.text:='';
 pop_scope.alt_y.text:='';
 if trim(pop_scope.edit1.text)='' then exit;
+try
 if not VarIsEmpty(T) then begin
   T.connected:=false;
   T:=Unassigned;
@@ -265,6 +262,9 @@ pop_scope.speedbutton7.enabled:=true;
 pop_scope.speedbutton8.enabled:=false;
 pop_scope.speedbutton9.enabled:=false;
 pop_scope.UpdTrackingButton;
+except
+ on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+end;
 end;
 
 Procedure ScopeConnect(var ok : boolean); stdcall;
@@ -276,6 +276,7 @@ pop_scope.timer1.enabled:=false;
 pop_scope.speedbutton3.enabled:=true;
 ok:=false;
 if trim(pop_scope.edit1.text)='' then exit;
+try
 T:=Unassigned;
 T := CreateOleObject(pop_scope.edit1.text);
 T.connected:=true;
@@ -292,6 +293,9 @@ if T.connected then begin
    pop_scope.speedbutton9.enabled:=true;
 end else scopedisconnect(dis_ok);
 pop_scope.UpdTrackingButton;
+except
+ on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+end;
 end;
 
 Procedure ScopeClose; stdcall;
@@ -304,7 +308,11 @@ begin
 result:=false;
 if not initialized then exit;
 if VarIsEmpty(T) then exit;
+try
 result:=T.connected;
+except
+ result:=false;
+end;
 end;
 
 Function  ScopeInitialized : boolean ; stdcall;
@@ -411,7 +419,7 @@ begin
    try
       if T.CanSlewAsync then T.SlewToCoordinatesAsync(ar,de)
       else T.SlewToCoordinates(ar,de);
-   except
+   except                                                                
       on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
    end;
 end;
@@ -436,9 +444,6 @@ begin
      long.text:=ini.readstring('observatory','longitude','0');
      ini.free;
      Timer1.Interval:=strtointdef(ReadIntBox.text,500);
-{     if trim(edit1.text)>'' then begin
-        T := CreateOleObject(edit1.text);
-     end;}
      UpdTrackingButton;
      initial:=false;
 end;
@@ -461,12 +466,17 @@ end;
 procedure Tpop_scope.Timer1Timer(Sender: TObject);
 begin
 if not ScopeConnected then exit;
+try
 if T.connected and (not CoordLock) then begin
    CoordLock := true;
    timer1.enabled:=false;
    ShowCoordinates;
    CoordLock := false;
    timer1.enabled:=true;
+end;
+except
+   timer1.enabled:=false;
+   Initialized := false;
 end;
 end;
 
@@ -548,6 +558,7 @@ end;
 
 procedure Tpop_scope.SpeedButton7Click(Sender: TObject);
 begin
+try
 if (edit1.text>'') and (not Scopeconnected) then begin
 if VarIsEmpty(T) then begin
    T := CreateOleObject(edit1.text);
@@ -558,6 +569,10 @@ end else begin
 end;
 UpdTrackingButton;
 end;
+except
+  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+end;
+
 end;
 
 procedure Tpop_scope.SpeedButton9Click(Sender: TObject);
@@ -597,6 +612,7 @@ end;
 
 procedure Tpop_scope.UpdTrackingButton;
 begin
+try
    if not ScopeConnected then exit;
    if (not T.CanSetTracking)or(not T.connected) then begin
       SpeedButton10.Font.Color:=clWindowText;
@@ -608,6 +624,9 @@ begin
       if T.Tracking then SpeedButton10.Font.Color:=clGreen
       else SpeedButton10.Font.Color:=clRed;
    end;
+except
+  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+end;
 end;
 
 
@@ -626,6 +645,7 @@ end;
 procedure Tpop_scope.SpeedButton11Click(Sender: TObject);
 var buf : string;
 begin
+try
    if (edit1.text>'') then begin
       try
          if VarIsEmpty(T) then begin
@@ -643,6 +663,9 @@ begin
       except
       end;
    end;
+except
+  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+end;
 end;
 
 initialization
