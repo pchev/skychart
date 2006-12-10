@@ -1840,9 +1840,9 @@ object f_config_chart: Tf_config_chart
       object Page5: TPage
         Caption = 'Page5'
         object Bevel9: TBevel
-          Left = 8
+          Left = 6
           Height = 353
-          Top = 24
+          Top = 22
           Width = 470
           Shape = bsFrame
         end
@@ -1983,7 +1983,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 53
-          Width = 69
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -1996,7 +1996,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 81
-          Width = 70
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2009,7 +2009,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 110
-          Width = 71
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2022,7 +2022,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 139
-          Width = 72
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2035,7 +2035,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 167
-          Width = 73
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2048,7 +2048,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 196
-          Width = 74
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2061,7 +2061,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 225
-          Width = 75
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2074,7 +2074,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 253
-          Width = 76
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2087,7 +2087,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 282
-          Width = 77
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2100,7 +2100,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 311
-          Width = 78
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2113,7 +2113,7 @@ object f_config_chart: Tf_config_chart
           Left = 139
           Height = 21
           Top = 340
-          Width = 79
+          Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2125,7 +2125,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 53
-          Width = 80
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2138,7 +2138,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 81
-          Width = 81
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2151,7 +2151,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 110
-          Width = 82
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2164,7 +2164,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 139
-          Width = 83
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2177,7 +2177,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 167
-          Width = 84
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2190,7 +2190,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 196
-          Width = 85
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2203,7 +2203,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 225
-          Width = 86
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2216,7 +2216,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 253
-          Width = 87
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2229,7 +2229,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 282
-          Width = 88
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
@@ -2242,7 +2242,7 @@ object f_config_chart: Tf_config_chart
           Left = 310
           Height = 21
           Top = 311
-          Width = 89
+          Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
           ParentColor = False
