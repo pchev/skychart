@@ -735,7 +735,7 @@ begin
      if t>=0 then cp.top:=t;
      if l>=0 then cp.left:=l;
   end;
-  cp.maximized:=maxi;
+  multidoc1.maximized:=maxi;
   result:=true;
   Child.locked:=false;
   Child.Refresh;
@@ -928,6 +928,7 @@ try
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
+ application.ProcessMessages; // apply any resizing
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
  AutoRefreshLock:=false;
