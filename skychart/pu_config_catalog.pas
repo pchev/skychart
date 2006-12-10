@@ -380,22 +380,23 @@ end;
 procedure Tf_config_catalog.ShowGCat;
 var i,j:integer;
 begin
-stringgrid3.RowCount:=2;
+stringgrid3.RowCount:=ccat.GCatnum+1;
 stringgrid3.cells[0,0]:='x';
 stringgrid3.cells[1, 0]:=rsCat;
 stringgrid3.cells[2, 0]:=rsMin3;
 stringgrid3.cells[3, 0]:=rsMax;
 stringgrid3.cells[4, 0]:=rsPath;
-stringgrid3.cells[0,1]:='';
-stringgrid3.cells[1,1]:='';
-stringgrid3.cells[2,1]:='';
-stringgrid3.cells[3,1]:='';
-stringgrid3.cells[4,1]:='';
+if ccat.GCatnum=0 then begin
+  stringgrid3.cells[0,1]:='';
+  stringgrid3.cells[1,1]:='';
+  stringgrid3.cells[2,1]:='';
+  stringgrid3.cells[3,1]:='';
+  stringgrid3.cells[4,1]:='';
+end;
 CatalogEmpty:=true;
 for j:=0 to ccat.GCatnum-1 do begin
-  if catalogempty then catalogempty:=false
-                  else stringgrid3.rowcount:=stringgrid3.rowcount+1;
-  i:=stringgrid3.rowcount-1;
+  if catalogempty then catalogempty:=false;
+  i:=j+1;
   stringgrid3.cells[1,i]:=ccat.GCatLst[j].shortname;
   stringgrid3.cells[2,i]:=floattostr(ccat.GCatLst[j].min);
   stringgrid3.cells[3,i]:=floattostr(ccat.GCatLst[j].max);
