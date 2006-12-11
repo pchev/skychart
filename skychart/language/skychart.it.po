@@ -1,7 +1,7 @@
 # translation of skychart.it.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-11-05 10:55+0100\n"
+"PO-Revision-Date: 2006-12-11 17:52+0100\n"
 "Last-Translator: Mattia Verga <mverga@freemail.it>\n"
 "Project-Id-Version: skychart.it\n"
 "POT-Creation-Date: \n"
@@ -409,7 +409,7 @@ msgstr "Principali + NEO + TNO"
 
 #: u_translation:rsbrightnebula
 msgid "Bright Nebula"
-msgstr ""
+msgstr "Nebulosa a Emissione"
 
 #: u_translation:rsbrightstars
 msgid "Bright stars"
@@ -441,7 +441,7 @@ msgstr "Impostazioni Catalogo CDC Stelle"
 
 #: u_translation:rscdcplugin
 msgid "CDC plugin"
-msgstr ""
+msgstr "Plugin CdC"
 
 #: u_translation:rscdcpluginset
 msgid "CDC plugin setting"
@@ -969,7 +969,7 @@ msgstr "Arretra Orologio"
 
 #: u_translation:rsnebulacommon
 msgid "Deep Sky Common Name"
-msgstr "Nome proprio della nebulosa"
+msgstr "Nome proprio dell'oggetto"
 
 #: u_translation:rsnebulaefilte
 msgid "Deep Sky Filter"
@@ -977,15 +977,15 @@ msgstr "Filtro profondo cielo"
 
 #: u_translation:rsnebula
 msgid "Deep Sky Object"
-msgstr "Nebulosa"
+msgstr "Oggetto di profondo cielo"
 
 #: u_translation:rsnebulae
 msgid "Deep Sky Objects"
-msgstr "Nebulosità"
+msgstr "Oggetti di profondo cielo"
 
 #: u_translation:rsnebuladispla
 msgid "Deep Sky Objects Display"
-msgstr "Rappresentazione Nebulosità"
+msgstr "Rappresentazione Profondo Cielo"
 
 #: u_translation:rsnebulaeoroth
 msgid "Deep Sky or other objects"
@@ -1761,7 +1761,7 @@ msgstr "Ore, minuti, secondi"
 
 #: u_translation:rsindidriver
 msgid "INDI Driver"
-msgstr ""
+msgstr "Driver INDI"
 
 #: u_translation:rsindidriverse
 msgid "INDI Driver setting"
@@ -1957,7 +1957,7 @@ msgstr "Lunghezza"
 
 #: u_translation:rslessnebulae
 msgid "Less Deep Sky"
-msgstr "Meno Nebulosità"
+msgstr "Meno Profondo cielo"
 
 #: u_translation:rslessstars
 msgid "Less Stars"
@@ -2257,7 +2257,7 @@ msgstr "Luna"
 
 #: u_translation:rsmorenebulae
 msgid "More Deep Sky"
-msgstr "Più Nebulosità"
+msgstr "Più Profondo cielo"
 
 #: u_translation:rsmorestars
 msgid "More Stars"
@@ -3177,7 +3177,7 @@ msgstr "Seleziona la stampante di sistema e le opzioni che vuoi utilizzare"
 
 #: u_translation:rsselectthetel
 msgid "Select the telescope interface"
-msgstr ""
+msgstr "Seleziona l'interfaccia"
 
 #: u_translation:rsselectthetyp
 msgid "Select the type of object in your catalog"
