@@ -890,6 +890,7 @@ begin
         RefreshTimer.Enabled:=false;
         RefreshTimer.Enabled:=true;
      end;
+ ImageSetFocus(Sender);
 end;
 
 procedure Tf_main.Init;
@@ -921,7 +922,7 @@ try
  catalog.LoadConstellation(cfgm.Constellationfile);
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
- catalog.LoadHorizon(cfgm.horizonfile,@def_cfgsc);
+ catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
  f_search.cfgshr:=catalog.cfgshr;
  f_search.cfgsc:=def_cfgsc;

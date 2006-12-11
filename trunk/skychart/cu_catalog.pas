@@ -2666,7 +2666,7 @@ if i2<359 then begin
 end;
 end;
 end;
-cfgsc.horizonlist:=@cfgshr.horizonlist;  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
+cfgsc.horizonlist:=@(cfgshr.horizonlist);  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
 
 end;
 
