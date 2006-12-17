@@ -1637,6 +1637,7 @@ else if txt='Gx' then txt:=rsGalaxy
 else if txt='Nb' then txt:=rsBrightNebula
 else if txt='Pl' then txt:=rsPlanetaryNeb
 else if txt='C+N' then txt:=rsClusterAndNe
+else if txt='N' then txt:=rsNebula
 else if txt='*' then txt:=rsStar
 else if txt='**' then txt:=rsDoubleStar
 else if txt='***' then txt:=rsTripleStar

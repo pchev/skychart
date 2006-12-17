@@ -2375,6 +2375,10 @@ msgstr "No."
 msgid "Non Existant"
 msgstr "No existente"
 
+#: u_translation:rsnonvisiblese
+msgid "Non visible search result, zoom for more details"
+msgstr ""
+
 #: u_translation:rsnonexistentu
 msgid "Non-existent/unknown"
 msgstr "No existente/desconocido"

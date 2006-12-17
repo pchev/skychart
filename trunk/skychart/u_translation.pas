@@ -1072,6 +1072,7 @@ resourcestring
   rsSelectTheTel = 'Select the telescope interface';
   rsINDIDriver = 'INDI Driver';
   rsCDCPlugin = 'CDC plugin';
+  rsNonVisibleSe = 'Non visible search result, zoom for more details';
 
 implementation
 

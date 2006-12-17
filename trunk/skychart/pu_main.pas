@@ -4058,11 +4058,13 @@ var ok : Boolean;
     ar1,de1 : Double;
     i : integer;
     chart:TForm;
+    stype: string;
 label findit;
 begin
 result:=false;
 if trim(num)='' then exit;
 chart:=nil;
+stype:='';
 if cname='' then begin
   if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject;
 end else begin
@@ -4071,22 +4073,31 @@ end else begin
       if MultiDoc1.Childs[i].caption=cname then chart:=MultiDoc1.Childs[i].DockedObject;
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
+   stype:='N';
    ok:=catalog.SearchNebulae(Num,ar1,de1) ;
    if ok then goto findit;
+   stype:='*';
    ok:=catalog.SearchStar(Num,ar1,de1) ;
    if ok then goto findit;
+   stype:='D*';
    ok:=catalog.SearchDblStar(Num,ar1,de1) ;
    if ok then goto findit;
+   stype:='V*';
    ok:=catalog.SearchVarStar(Num,ar1,de1) ;
    if ok then goto findit;
+   stype:='P';
    ok:=planet.FindPlanetName(trim(Num),ar1,de1,sc.cfgsc);
    if ok then goto findit;
+   stype:='As';
    ok:=planet.FindAsteroidName(trim(Num),ar1,de1,sc.cfgsc);
    if ok then goto findit;
+   stype:='Cm';
    ok:=planet.FindCometName(trim(Num),ar1,de1,sc.cfgsc);
    if ok then goto findit;
+   stype:='*';
    ok:=catalog.SearchStarName(Num,ar1,de1) ;
    if ok then goto findit;
+   stype:='N';
    ok:=f_search.SearchNebName(Num,ar1,de1) ;
    if ok then goto findit;
 
@@ -4099,8 +4110,16 @@ Findit:
       if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc);
       sc.movetoradec(ar1,de1);
       Refresh;
-      if sc.cfgsc.fov>0.17 then sc.FindatRaDec(ar1,de1,0.0005,true)
-                        else sc.FindatRaDec(ar1,de1,0.00005,true);
+      if sc.cfgsc.fov>0.17 then ok:=sc.FindatRaDec(ar1,de1,0.0005,true)
+                        else ok:=sc.FindatRaDec(ar1,de1,0.00005,true);
+      if not ok then begin  // object not visible with current chart setting
+        sc.cfgsc.FindName:=Num;
+        sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+''+rsNonVisibleSe+'';
+        sc.cfgsc.FindRA:=ar1;
+        sc.cfgsc.FindDec:=de1;
+        sc.cfgsc.FindSize:=0;
+        sc.cfgsc.FindOK:=true;
+      end;
       ShowIdentLabel;
       f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
    end;
