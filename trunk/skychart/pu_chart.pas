@@ -223,7 +223,7 @@ type
     function cmd_IdentCursor:string;
     function cmd_SaveImage(format,fn,quality:string):string;
     function ExecuteCmd(arg:Tstringlist):string;
-    function SaveChartImage(format,fn : string; quality: integer=75):boolean;
+    function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
     Procedure TrackCursor(X,Y : integer);
     Procedure ZoomCursor(yy : double);
@@ -2250,7 +2250,7 @@ end;
 function Tf_chart.cmd_SaveImage(format,fn,quality:string):string;
 var i : integer;
 begin
-i:=strtointdef(quality,75);
+i:=strtointdef(quality,95);
 if SaveChartImage(format,fn,i) then result:=msgOK
    else result:=msgFailed;
 end;
@@ -2748,17 +2748,24 @@ Refresh;
 end;
 
 
-function Tf_chart.SaveChartImage(format,fn : string; quality : integer=75):boolean;
+function Tf_chart.SaveChartImage(format,fn : string; quality : integer=95):boolean;
 var
    JPG : TJpegImage;
    PNG : TPortableNetworkGraphic;
-   savelabel:boolean;
+   savelabel,needrefresh:boolean;
 begin
+needrefresh:=false;
 savelabel:= sc.cfgsc.Editlabels;
 try
 if savelabel then begin
    sc.cfgsc.Editlabels:=false;
    sc.Refresh;
+   needrefresh:=true;
+end;
+if identlabel.Visible then begin
+  sc.plot.cnv:=sc.plot.cbmp.Canvas;
+  sc.plot.PlotText(identlabel.Left,identlabel.Top,2,identlabel.Font.Color,laLeft,laTop,identlabel.Caption);
+  needrefresh:=true;
 end;
  if fn='' then fn:='cdc.bmp';
  if format='' then format:='BMP';
@@ -2798,6 +2805,8 @@ end;
 finally
 if savelabel then begin
    sc.cfgsc.Editlabels:=true;
+end;
+if needrefresh then begin
    sc.Refresh;
    SetScrollBar;
 end;

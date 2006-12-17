@@ -962,14 +962,15 @@ var ext,format:string;
 begin
 Savedialog.DefaultExt:='bmp';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
-savedialog.Filter:='BMP|*.bmp|JPEG|*.jpg|PNG|*.png';
+//savedialog.Filter:='BMP|*.bmp|JPEG|*.jpg|PNG|*.png';
+savedialog.Filter:='BMP|*.bmp|JPEG|*.jpg';
 savedialog.Title:=rsSaveImage;
 if MultiDoc1.ActiveObject  is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do
   if SaveDialog.Execute then begin
      ext:=uppercase(extractfileext(SaveDialog.Filename));
-     if (ext='.PNG') then format:='PNG'
-     else if (ext='.JPG')or(ext='.JPEG') then format:='JPEG'
+     if (ext='.JPG')or(ext='.JPEG') then format:='JPEG'
+     // else if (ext='.PNG') then format:='PNG'
      else format:='BMP';
      SaveChartImage(format,SaveDialog.Filename,95);
   end;
