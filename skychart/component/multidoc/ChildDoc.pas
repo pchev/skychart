@@ -31,10 +31,26 @@ uses
    Use: See TMultiDoc
 }
 type
+TCdCSplitter = Class(TCustomSplitter)
+  public
+    procedure MouseDown(Button: TMouseButton; Shift:TShiftState; X,Y:Integer); override;
+    procedure MouseMove(Shift: TShiftState; X,Y: Integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift:TShiftState; X,Y:Integer); override;
+  end;
+  
+TCdCPanel = Class(TCustomPanel)
+  public
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnMouseLeave;
+    property OnDblClick;
+  end;
+  
   TChildDoc = class(TPanel)
-    TopLeftBar, TopRightBar, BotLeftBar, BotRightBar : TCustomSplitter;
-    TopBar, BotBar, LeftBar, RightBar : TCustomSplitter;
-    MenuBar: TPanel;
+    TopLeftBar, TopRightBar, BotLeftBar, BotRightBar : TCdCSplitter;
+    TopBar, BotBar, LeftBar, RightBar : TCdCSplitter;
+    MenuBar: TCDCPanel;
     Title: TLabel;
     ButtonClose: TSpeedButton;
     ButtonMaximize: TSpeedButton;
@@ -123,6 +139,22 @@ skipmouseeventcount=4; // duplicate mousemove events
 skipmouseeventcount=1;
 {$endif}
 
+{ TCdCSplitter }
+
+procedure TCdCSplitter.MouseDown(Button: TMouseButton; Shift:TShiftState; X,Y:Integer);
+begin
+ inherited  MouseDown(Button,Shift,X,Y);
+end;
+
+procedure TCdCSplitter.MouseMove(Shift: TShiftState; X,Y: Integer);
+begin
+ inherited  MouseMove(Shift,X,Y);
+end;
+
+procedure TCdCSplitter.MouseUp(Button: TMouseButton; Shift:TShiftState; X,Y:Integer);
+begin
+ inherited  MouseUp(Button,Shift,X,Y);
+end;
 
 {
      Class creator
@@ -137,7 +169,7 @@ FDockedObject:=nil;
 FDockedPanel:=nil;
 FCaption:='';
 BevelOuter:=bvNone;
-TopLeftBar:=TCustomSplitter.Create(self);
+TopLeftBar:=TCdCSplitter.Create(self);
 TopLeftBar.Parent:=self;
 TopLeftBar.Tag:=5;
 TopLeftBar.Align:=alNone;
@@ -151,7 +183,7 @@ TopLeftBar.Anchors:=[akLeft,akTop];
 TopLeftBar.OnMouseDown:=@SizeBarMouseDown;
 TopLeftBar.OnMouseUp:=@SizeBarMouseUp;
 TopLeftBar.OnMouseMove:=@SizeBarMouseMove;
-TopRightBar:=TCustomSplitter.Create(self);
+TopRightBar:=TCdCSplitter.Create(self);
 TopRightBar.Tag:=6;
 TopRightBar.Align:=alNone;
 TopRightBar.Parent:=self;
@@ -165,7 +197,7 @@ TopRightBar.Anchors:=[akRight,akTop];
 TopRightBar.OnMouseDown:=@SizeBarMouseDown;
 TopRightBar.OnMouseUp:=@SizeBarMouseUp;
 TopRightBar.OnMouseMove:=@SizeBarMouseMove;
-BotLeftBar:=TCustomSplitter.Create(self);
+BotLeftBar:=TCdCSplitter.Create(self);
 BotLeftBar.Tag:=7;
 BotLeftBar.Align:=alNone;
 BotLeftBar.Parent:=self;
@@ -179,7 +211,7 @@ BotLeftBar.Anchors:=[akLeft,akBottom];
 BotLeftBar.OnMouseDown:=@SizeBarMouseDown;
 BotLeftBar.OnMouseUp:=@SizeBarMouseUp;
 BotLeftBar.OnMouseMove:=@SizeBarMouseMove;
-BotRightBar:=TCustomSplitter.Create(self);
+BotRightBar:=TCdCSplitter.Create(self);
 BotRightBar.Parent:=self;
 BotRightBar.Tag:=8;
 BotRightBar.Align:=alNone;
@@ -193,7 +225,7 @@ BotRightBar.Anchors:=[akRight,akBottom];
 BotRightBar.OnMouseDown:=@SizeBarMouseDown;
 BotRightBar.OnMouseUp:=@SizeBarMouseUp;
 BotRightBar.OnMouseMove:=@SizeBarMouseMove;
-TopBar:=TCustomSplitter.Create(self);
+TopBar:=TCdCSplitter.Create(self);
 TopBar.Parent:=self;
 TopBar.Tag:=1;
 TopBar.Height:=borderw;
@@ -204,7 +236,7 @@ TopBar.Align:=alTop;
 TopBar.OnMouseDown:=@SizeBarMouseDown;
 TopBar.OnMouseUp:=@SizeBarMouseUp;
 TopBar.OnMouseMove:=@SizeBarMouseMove;
-BotBar:=TCustomSplitter.Create(self);
+BotBar:=TCdCSplitter.Create(self);
 BotBar.Tag:=2;
 BotBar.Parent:=self;
 BotBar.Height:=borderw;
@@ -214,7 +246,7 @@ BotBar.Align:=alBottom;
 BotBar.OnMouseDown:=@SizeBarMouseDown;
 BotBar.OnMouseUp:=@SizeBarMouseUp;
 BotBar.OnMouseMove:=@SizeBarMouseMove;
-LeftBar:=TCustomSplitter.Create(self);
+LeftBar:=TCdCSplitter.Create(self);
 LeftBar.Tag:=3;
 LeftBar.Parent:=self;
 LeftBar.Width:=borderw;
@@ -224,7 +256,7 @@ LeftBar.Align:=alLeft;
 LeftBar.OnMouseDown:=@SizeBarMouseDown;
 LeftBar.OnMouseUp:=@SizeBarMouseUp;
 LeftBar.OnMouseMove:=@SizeBarMouseMove;
-RightBar:=TCustomSplitter.Create(self);
+RightBar:=TCdCSplitter.Create(self);
 RightBar.Parent:=self;
 RightBar.Tag:=4;
 RightBar.Width:=borderw;
@@ -234,7 +266,7 @@ RightBar.Align:=alRight;
 RightBar.OnMouseDown:=@SizeBarMouseDown;
 RightBar.OnMouseUp:=@SizeBarMouseUp;
 RightBar.OnMouseMove:=@SizeBarMouseMove;
-MenuBar:=TPanel.Create(self);
+MenuBar:=TCDCPanel.Create(self);
 MenuBar.Parent:=self;
 MenuBar.Height:=TitleHeight;
 MenuBar.BevelOuter:=bvNone;
@@ -406,7 +438,7 @@ begin
 onEnter(self);
 GetCursorPos(startpoint);
 sizing:=true;
-movedirection:=(sender as TCustomSplitter).Tag;
+movedirection:=(sender as TCdCSplitter).Tag;
 if WireframeMoveResize then dockedpanel.Hide;
 application.processmessages;
 end;

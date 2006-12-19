@@ -210,7 +210,6 @@ Inherited onResize:=@SetResize;
 end;
 
 destructor  TMultiDoc.Destroy;
-var i: integer;
 begin
 try
 FActiveChild:=-1;
