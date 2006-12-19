@@ -42,10 +42,10 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 465
-      Height = 256
+      Left = 461
+      Height = 252
       Top = 1
-      Width = 14
+      Width = 18
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -58,8 +58,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 1
-      Height = 14
-      Top = 257
+      Height = 18
+      Top = 253
       Width = 478
       Align = alBottom
       LargeChange = 10

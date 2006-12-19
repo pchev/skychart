@@ -522,6 +522,7 @@ var i: integer;
 begin
 lockscrollbar:=true;
 try
+if VertScrollBar.Visible then
 with sc do begin
  if cfgsc.Projpole=AltAz then begin
     HorScrollBar.Position:=round(rmod(cfgsc.acentre+pi2,pi2)*rad2deg*3600);
