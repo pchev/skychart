@@ -45,14 +45,14 @@ object f_config_time: Tf_config_time
           Width = 131
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
-          TabOrder = 0
+          TabOrder = 1
         end
         object Panel7: TPanel
           Left = 32
           Height = 87
           Top = 231
           Width = 409
-          TabOrder = 1
+          TabOrder = 4
           object Label134: TLabel
             Left = 8
             Height = 13
@@ -112,7 +112,7 @@ object f_config_time: Tf_config_time
           Height = 113
           Top = 334
           Width = 409
-          TabOrder = 2
+          TabOrder = 5
           object Label135: TLabel
             Left = 8
             Height = 13
@@ -185,7 +185,7 @@ object f_config_time: Tf_config_time
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 3
+          TabOrder = 2
           OnChange = LongEdit2Change
           Value = 10
           MinValue = 10
@@ -196,7 +196,7 @@ object f_config_time: Tf_config_time
           Height = 137
           Top = 87
           Width = 409
-          TabOrder = 4
+          TabOrder = 3
           object Label137: TLabel
             Left = 8
             Height = 13
@@ -287,7 +287,7 @@ object f_config_time: Tf_config_time
             Caption = 'Actual system time'
             NumGlyphs = 0
             OnClick = BitBtn4Click
-            TabOrder = 0
+            TabOrder = 9
           end
           object ADBC: TRadioGroup
             Left = 267
@@ -309,7 +309,7 @@ object f_config_time: Tf_config_time
               'BC'
             )
             OnClick = DateChange
-            TabOrder = 1
+            TabOrder = 3
           end
           object d_year: TSpinEdit
             Left = 56
@@ -318,7 +318,7 @@ object f_config_time: Tf_config_time
             Width = 75
             MaxValue = 20000
             OnChange = DateChange
-            TabOrder = 2
+            TabOrder = 0
             Value = 2003
           end
           object d_month: TSpinEdit
@@ -329,7 +329,7 @@ object f_config_time: Tf_config_time
             MaxValue = 12
             MinValue = 1
             OnChange = DateChange
-            TabOrder = 3
+            TabOrder = 1
             Value = 1
           end
           object d_day: TSpinEdit
@@ -340,7 +340,7 @@ object f_config_time: Tf_config_time
             MaxValue = 31
             MinValue = 1
             OnChange = DateChange
-            TabOrder = 4
+            TabOrder = 2
             Value = 1
           end
           object t_hour: TSpinEdit
@@ -350,7 +350,7 @@ object f_config_time: Tf_config_time
             Width = 60
             MaxValue = 23
             OnChange = TimeChange
-            TabOrder = 5
+            TabOrder = 4
             Value = 1
           end
           object t_min: TSpinEdit
@@ -360,7 +360,7 @@ object f_config_time: Tf_config_time
             Width = 60
             MaxValue = 59
             OnChange = TimeChange
-            TabOrder = 6
+            TabOrder = 5
             Value = 1
           end
           object t_sec: TSpinEdit
@@ -370,7 +370,7 @@ object f_config_time: Tf_config_time
             Width = 60
             MaxValue = 59
             OnChange = TimeChange
-            TabOrder = 7
+            TabOrder = 6
             Value = 1
           end
           object JDEdit: TFloatEdit
@@ -380,7 +380,7 @@ object f_config_time: Tf_config_time
             Width = 131
             BorderStyle = bsSingle
             ParentColor = False
-            TabOrder = 8
+            TabOrder = 7
             OnChange = JDEditChange
             Decimals = 6
             Digits = 6
@@ -394,7 +394,7 @@ object f_config_time: Tf_config_time
             BorderSpacing.InnerBorder = 2
             NumGlyphs = 0
             OnClick = BitBtn1Click
-            TabOrder = 9
+            TabOrder = 8
           end
         end
         object CheckBox1: TCheckBox
@@ -404,7 +404,7 @@ object f_config_time: Tf_config_time
           Width = 118
           Caption = 'Use system time'
           OnClick = CheckBox1Click
-          TabOrder = 5
+          TabOrder = 0
         end
       end
       object Page2: TPage
@@ -478,7 +478,7 @@ object f_config_time: Tf_config_time
             'Seconds'
           )
           OnClick = stepunitClick
-          TabOrder = 0
+          TabOrder = 5
         end
         object stepline: TCheckBox
           Left = 6
@@ -487,7 +487,7 @@ object f_config_time: Tf_config_time
           Width = 251
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
-          TabOrder = 1
+          TabOrder = 6
         end
         object nbstep: TSpinEdit
           Left = 362
@@ -496,7 +496,7 @@ object f_config_time: Tf_config_time
           Width = 75
           MinValue = 1
           OnChange = nbstepChanged
-          TabOrder = 2
+          TabOrder = 3
           Value = 1
         end
         object stepsize: TSpinEdit
@@ -507,7 +507,7 @@ object f_config_time: Tf_config_time
           MaxValue = 999999
           MinValue = 1
           OnChange = stepsizeChanged
-          TabOrder = 3
+          TabOrder = 4
           Value = 1
         end
         object SimObj: TCheckListBox
@@ -531,7 +531,7 @@ object f_config_time: Tf_config_time
           )
           ItemHeight = 16
           OnItemClick = SimObjItemClick
-          TabOrder = 4
+          TabOrder = 0
           Data = {
             0C000000000000000000000000000000
           }
@@ -544,7 +544,7 @@ object f_config_time: Tf_config_time
           BorderSpacing.InnerBorder = 4
           Caption = 'All'
           OnClick = AllSimClick
-          TabOrder = 5
+          TabOrder = 1
         end
         object NoSim: TButton
           Left = 121
@@ -554,7 +554,7 @@ object f_config_time: Tf_config_time
           BorderSpacing.InnerBorder = 4
           Caption = 'None'
           OnClick = NoSimClick
-          TabOrder = 6
+          TabOrder = 2
         end
         object RadioGroup1: TRadioGroup
           Left = 8

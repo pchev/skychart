@@ -60,7 +60,7 @@ object f_config_pictures: Tf_config_pictures
           Height = 73
           Top = 70
           Width = 401
-          TabOrder = 2
+          TabOrder = 4
           Visible = False
           object ProgressCat: TLabel
             Left = 187
@@ -88,14 +88,14 @@ object f_config_pictures: Tf_config_pictures
           BorderSpacing.InnerBorder = 4
           Caption = 'Scan directory'
           OnClick = ScanImagesClick
-          TabOrder = 0
+          TabOrder = 1
         end
         object Panel11: TPanel
           Left = 16
           Height = 183
           Top = 168
           Width = 401
-          TabOrder = 1
+          TabOrder = 2
           object Label266: TLabel
             Left = 32
             Height = 13
@@ -168,33 +168,33 @@ object f_config_pictures: Tf_config_pictures
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 4
+          TabOrder = 0
           OnChange = imgpathChange
         end
       end
       object Page2: TPage
         Caption = 'Background'
         object Label270: TLabel
-          Height = 14
-          Width = 93
+          Height = 13
+          Width = 111
           Caption = 'Background Picture'
           Color = clNone
           ParentColor = False
         end
         object Label271: TLabel
           Left = 8
-          Height = 14
+          Height = 13
           Top = 22
-          Width = 42
+          Width = 48
           Caption = 'FITS File'
           Color = clNone
           ParentColor = False
         end
         object backimginfo: TLabel
           Left = 8
-          Height = 14
+          Height = 13
           Top = 47
-          Width = 7
+          Width = 9
           Caption = '  '
           Color = clNone
           ParentColor = False
@@ -207,33 +207,33 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowBackImg: TCheckBox
           Left = 8
-          Height = 13
+          Height = 19
           Top = 80
-          Width = 101
+          Width = 120
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
-          TabOrder = 0
+          TabOrder = 1
         end
         object Panel1: TPanel
           Left = 176
           Height = 48
           Top = 67
           Width = 305
-          TabOrder = 1
+          TabOrder = 2
           object Label1: TLabel
             Left = 54
-            Height = 14
+            Height = 13
             Top = 6
-            Width = 51
+            Width = 62
             Caption = 'Luminosity'
             Color = clNone
             ParentColor = False
           end
           object Label2: TLabel
             Left = 203
-            Height = 14
+            Height = 13
             Top = 6
-            Width = 43
+            Width = 50
             Caption = 'Contrast'
             Color = clNone
             ParentColor = False
@@ -274,7 +274,7 @@ object f_config_pictures: Tf_config_pictures
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 2
+          TabOrder = 0
           OnChange = backimgChange
         end
       end
@@ -338,7 +338,7 @@ object f_config_pictures: Tf_config_pictures
             Top = 92
             Width = 169
             OnChange = realskydirChange
-            TabOrder = 0
+            TabOrder = 3
             Text = 'cat\RealSky\'
           end
           object realskydrive: TEdit
@@ -347,7 +347,7 @@ object f_config_pictures: Tf_config_pictures
             Top = 144
             Width = 169
             OnChange = realskydriveChange
-            TabOrder = 1
+            TabOrder = 4
             Text = 'X:\'
           end
           object realskyfile: TEdit
@@ -356,7 +356,7 @@ object f_config_pictures: Tf_config_pictures
             Top = 188
             Width = 169
             OnChange = realskyfileChange
-            TabOrder = 2
+            TabOrder = 5
             Text = 'images\$TEMP.FIT'
           end
           object RealSkyNorth: TCheckBox
@@ -366,7 +366,7 @@ object f_config_pictures: Tf_config_pictures
             Width = 100
             Caption = 'RealSky North'
             OnClick = RealSkyNorthClick
-            TabOrder = 3
+            TabOrder = 0
           end
           object RealSkySouth: TCheckBox
             Left = 8
@@ -375,7 +375,7 @@ object f_config_pictures: Tf_config_pictures
             Width = 102
             Caption = 'RealSky South'
             OnClick = RealSkySouthClick
-            TabOrder = 4
+            TabOrder = 1
           end
           object DSS102CD: TCheckBox
             Left = 184
@@ -384,7 +384,7 @@ object f_config_pictures: Tf_config_pictures
             Width = 90
             Caption = '102 CD DSS'
             OnClick = DSS102CDClick
-            TabOrder = 5
+            TabOrder = 2
           end
           object usesubsample: TCheckBox
             Left = 8
@@ -395,7 +395,7 @@ object f_config_pictures: Tf_config_pictures
             Checked = True
             OnClick = usesubsampleClick
             State = cbChecked
-            TabOrder = 6
+            TabOrder = 7
           end
           object reallist: TCheckBox
             Left = 8
@@ -406,7 +406,7 @@ object f_config_pictures: Tf_config_pictures
             Checked = True
             OnClick = reallistClick
             State = cbChecked
-            TabOrder = 7
+            TabOrder = 6
           end
           object realskymax: TLongEdit
             Left = 336

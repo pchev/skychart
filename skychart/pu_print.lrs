@@ -15,7 +15,7 @@ LazarusResources.Add('Tf_print','FORMDATA',[
   +'Vertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightTh'
   +'enTopToBottom'#27'ChildSizing.ControlsPerLine'#2#1#9'ItemIndex'#2#0#13'Item'
   +'s.Strings'#1#6#16'Color, Line mode'#6#22'Black/White, Line mode'#6' As on s'
-  +'creen (black background!)'#0#7'OnClick'#7#13'prtcolorClick'#8'TabOrder'#2#0
+  +'creen (black background!)'#0#7'OnClick'#7#13'prtcolorClick'#8'TabOrder'#2#3
   +#0#0#11'TRadioGroup'#9'prtorient'#4'Left'#3#240#0#6'Height'#2'R'#3'Top'#2'0'
   +#5'Width'#3#149#0#8'AutoFill'#9#7'Caption'#6#11'Orientation'#28'ChildSizing.'
   +'LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.E'
@@ -24,14 +24,14 @@ LazarusResources.Add('Tf_print','FORMDATA',[
   +'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'Chil'
   +'dSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Controls'
   +'PerLine'#2#1#13'Items.Strings'#1#6#8'Portrait'#6#9'Landscape'#0#7'OnClick'#7
-  +#14'prtorientClick'#8'TabOrder'#2#1#0#0#7'TButton'#5'Print'#4'Left'#2'`'#6'H'
+  +#14'prtorientClick'#8'TabOrder'#2#4#0#0#7'TButton'#5'Print'#4'Left'#2'`'#6'H'
   +'eight'#2#25#3'Top'#3#248#0#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7
-  +'Caption'#6#5'Print'#7'Default'#9#11'ModalResult'#2#1#8'TabOrder'#2#2#0#0#7
+  +'Caption'#6#5'Print'#7'Default'#9#11'ModalResult'#2#1#8'TabOrder'#2#0#0#0#7
   +'TButton'#6'Cancel'#4'Left'#3#224#0#6'Height'#2#25#3'Top'#3#248#0#5'Width'#2
   +'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11
-  +'ModalResult'#2#2#8'TabOrder'#2#3#0#0#7'TButton'#5'Setup'#4'Left'#3'0'#1#6'H'
+  +'ModalResult'#2#2#8'TabOrder'#2#1#0#0#7'TButton'#5'Setup'#4'Left'#3'0'#1#6'H'
   +'eight'#2#25#3'Top'#2#8#5'Width'#2'U'#25'BorderSpacing.InnerBorder'#2#4#7'Ca'
-  +'ption'#6#5'Setup'#7'OnClick'#7#10'SetupClick'#8'TabOrder'#2#4#0#0#9'TGroupB'
+  +'ption'#6#5'Setup'#7'OnClick'#7#10'SetupClick'#8'TabOrder'#2#2#0#0#9'TGroupB'
   +'ox'#9'GroupBox1'#4'Left'#2#9#6'Height'#2'R'#3'Top'#3#144#0#5'Width'#3'|'#1#7
   +'Caption'#6#25'Page Margin in millimeter'#8'TabOrder'#2#5#0#6'TLabel'#6'Labe'
   +'l1'#4'Left'#2#23#6'Height'#2#13#3'Top'#2#14#5'Width'#2#22#7'Caption'#6#4'Le'

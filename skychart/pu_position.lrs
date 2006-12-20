@@ -1,20 +1,20 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_position','FORMDATA',[
-  'TPF0'#11'Tf_position'#10'f_position'#4'Left'#3#10#1#6'Height'#3#223#0#3'Top'
-  +#3#25#1#5'Width'#3'9'#1#18'HorzScrollBar.Page'#3'8'#1#18'VertScrollBar.Page'
-  +#3#222#0#13'ActiveControl'#7#7'Button1'#11'BorderStyle'#7#12'bsToolWindow'#7
-  +'Caption'#6#8'Position'#11'Font.Height'#2#245#9'Font.Name'#6#13'MS Sans Seri'
-  +'f'#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#0#7'TButton'#7'Butt'
-  +'on1'#4'Left'#2'H'#6'Height'#2#25#3'Top'#3#184#0#5'Width'#2'K'#25'BorderSpac'
-  +'ing.InnerBorder'#2#4#7'Caption'#6#2'OK'#11'ModalResult'#2#1#8'TabOrder'#2#0
-  +#0#0#7'TButton'#7'Button2'#4'Left'#3#160#0#6'Height'#2#25#3'Top'#3#184#0#5'W'
-  +'idth'#2'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Can'
-  +'cel'#11'ModalResult'#2#2#8'TabOrder'#2#1#0#0#6'TPanel'#6'Panel1'#4'Left'#2#8
-  +#6'Height'#2'9'#3'Top'#2'@'#5'Width'#3'('#1#11'FullRepaint'#8#8'TabOrder'#2#2
-  +#0#6'TLabel'#6'coord1'#4'Left'#2#8#6'Height'#2#13#3'Top'#2' '#5'Width'#2#13#7
-  +'Caption'#6#2'Az'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'coo'
-  +'rd2'#4'Left'#3#152#0#6'Height'#2#13#3'Top'#2' '#5'Width'#2#15#7'Caption'#6#3
+  'TPF0'#11'Tf_position'#10'f_position'#4'Left'#3#181#1#6'Height'#3#223#0#3'Top'
+  +#2'i'#5'Width'#3'9'#1#18'HorzScrollBar.Page'#3'8'#1#18'VertScrollBar.Page'#3
+  +#222#0#13'ActiveControl'#7#7'Button1'#11'BorderStyle'#7#12'bsToolWindow'#7'C'
+  +'aption'#6#8'Position'#11'Font.Height'#2#245#9'Font.Name'#6#13'MS Sans Serif'
+  +#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#0#7'TButton'#7'Button1'
+  +#4'Left'#2'H'#6'Height'#2#25#3'Top'#3#184#0#5'Width'#2'K'#25'BorderSpacing.I'
+  +'nnerBorder'#2#4#7'Caption'#6#2'OK'#11'ModalResult'#2#1#8'TabOrder'#2#3#0#0#7
+  +'TButton'#7'Button2'#4'Left'#3#160#0#6'Height'#2#25#3'Top'#3#184#0#5'Width'#2
+  +'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11
+  +'ModalResult'#2#2#8'TabOrder'#2#4#0#0#6'TPanel'#6'Panel1'#4'Left'#2#8#6'Heig'
+  +'ht'#2'9'#3'Top'#2'@'#5'Width'#3'('#1#11'FullRepaint'#8#8'TabOrder'#2#1#0#6
+  +'TLabel'#6'coord1'#4'Left'#2#8#6'Height'#2#13#3'Top'#2' '#5'Width'#2#13#7'Ca'
+  +'ption'#6#2'Az'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'coord'
+  +'2'#4'Left'#3#152#0#6'Height'#2#13#3'Top'#2' '#5'Width'#2#15#7'Caption'#6#3
   +'Alt'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#5'coord'#4'Left'#2
   +#8#6'Height'#2#13#3'Top'#2#4#5'Width'#2'!'#7'Caption'#6#5'coord'#5'Color'#7#6
   +'clNone'#11'ParentColor'#8#0#0#6'TRaDec'#4'long'#4'Left'#2'8'#6'Height'#2#21
@@ -25,7 +25,7 @@ LazarusResources.Add('Tf_position','FORMDATA',[
   +'ength'#2#10#11'ParentColor'#8#8'TabOrder'#2#1#4'Text'#6#10'+00d00m00s'#8'On'
   +'Change'#7#11'CoordChange'#4'kind'#7#3'Alt'#0#0#0#6'TPanel'#6'Panel2'#4'Left'
   +#2#8#6'Height'#2'9'#3'Top'#2#3#5'Width'#3'('#1#11'FullRepaint'#8#8'TabOrder'
-  +#2#3#0#6'TLabel'#3'eq1'#4'Left'#2#8#6'Height'#2#13#3'Top'#2' '#5'Width'#2#15
+  +#2#0#0#6'TLabel'#3'eq1'#4'Left'#2#8#6'Height'#2#13#3'Top'#2' '#5'Width'#2#15
   +#7'Caption'#6#2'RA'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#3'e'
   +'q2'#4'Left'#3#152#0#6'Height'#2#13#3'Top'#2' '#5'Width'#2#16#7'Caption'#6#2
   +'DE'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Equinox'#4'Left'
@@ -37,7 +37,7 @@ LazarusResources.Add('Tf_position','FORMDATA',[
   +'Width'#2'I'#8'EditMask'#6#15'!##9d99m99s;1; '#9'MaxLength'#2#10#11'ParentCo'
   +'lor'#8#8'TabOrder'#2#1#4'Text'#6#10'+00d00m00s'#8'OnChange'#7#8'EqChange'#4
   +'kind'#7#2'DE'#0#0#0#6'TPanel'#6'Panel3'#4'Left'#2#8#6'Height'#2')'#3'Top'#2
-  +'~'#5'Width'#3'('#1#11'FullRepaint'#8#8'TabOrder'#2#4#0#6'TLabel'#6'Label3'#4
+  +'~'#5'Width'#3'('#1#11'FullRepaint'#8#8'TabOrder'#2#2#0#6'TLabel'#6'Label3'#4
   +'Left'#2#8#6'Height'#2#13#3'Top'#2#14#5'Width'#2#23#7'Caption'#6#3'FOV'#5'Co'
   +'lor'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#3#152#0#6
   +'Height'#2#13#3'Top'#2#14#5'Width'#2'/'#7'Caption'#6#8'Rotation'#5'Color'#7#6

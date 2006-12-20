@@ -190,7 +190,7 @@ object f_config_internet: Tf_config_internet
           Width = 454
           Anchors = [akTop, akLeft, akRight]
           OnExit = AsteroidUrlListExit
-          TabOrder = 1
+          TabOrder = 4
         end
         object comdefault: TButton
           Left = 393
@@ -200,7 +200,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = comdefaultClick
-          TabOrder = 2
+          TabOrder = 3
         end
         object astdefault: TButton
           Left = 393
@@ -210,7 +210,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = astdefaultClick
-          TabOrder = 3
+          TabOrder = 8
         end
         object brightneo: TButton
           Left = 254
@@ -220,7 +220,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Bright + NEO + TNO'
           OnClick = brightneoClick
-          TabOrder = 4
+          TabOrder = 7
         end
         object mpcorb: TButton
           Left = 16
@@ -240,7 +240,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Http'
           OnClick = comhttpClick
-          TabOrder = 6
+          TabOrder = 2
         end
         object comftp: TButton
           Left = 200
@@ -250,7 +250,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Ftp'
           OnClick = comftpClick
-          TabOrder = 7
+          TabOrder = 1
         end
         object astcdc: TButton
           Left = 145
@@ -260,16 +260,16 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'First 5000'
           OnClick = astcdcClick
-          TabOrder = 8
+          TabOrder = 6
         end
       end
       object Page3: TPage
         Caption = 'Online DSS'
         object Label8: TLabel
           Left = 20
-          Height = 14
+          Height = 13
           Top = 19
-          Width = 111
+          Width = 135
           Caption = 'Online pictures servers'
           Color = clNone
           ParentColor = False

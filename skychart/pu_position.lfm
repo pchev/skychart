@@ -1,7 +1,7 @@
 object f_position: Tf_position
-  Left = 266
+  Left = 437
   Height = 223
-  Top = 281
+  Top = 105
   Width = 313
   HorzScrollBar.Page = 312
   VertScrollBar.Page = 222
@@ -20,7 +20,7 @@ object f_position: Tf_position
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
     ModalResult = 1
-    TabOrder = 0
+    TabOrder = 3
   end
   object Button2: TButton
     Left = 160
@@ -31,7 +31,7 @@ object f_position: Tf_position
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 1
+    TabOrder = 4
   end
   object Panel1: TPanel
     Left = 8
@@ -39,7 +39,7 @@ object f_position: Tf_position
     Top = 64
     Width = 296
     FullRepaint = False
-    TabOrder = 2
+    TabOrder = 1
     object coord1: TLabel
       Left = 8
       Height = 13
@@ -100,7 +100,7 @@ object f_position: Tf_position
     Top = 3
     Width = 296
     FullRepaint = False
-    TabOrder = 3
+    TabOrder = 0
     object eq1: TLabel
       Left = 8
       Height = 13
@@ -160,7 +160,7 @@ object f_position: Tf_position
     Top = 126
     Width = 296
     FullRepaint = False
-    TabOrder = 4
+    TabOrder = 2
     object Label3: TLabel
       Left = 8
       Height = 13

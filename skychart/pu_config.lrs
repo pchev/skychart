@@ -242,7 +242,7 @@ LazarusResources.Add('Tf_config','FORMDATA',[
   +'ght'#2#25#3'Top'#3#172#1#5'Width'#2#25#25'BorderSpacing.InnerBorder'#2#4#7
   +'Caption'#6#1'>'#7'OnClick'#7#9'nextClick'#8'TabOrder'#2#2#0#0#0#6'TPanel'#6
   +'Panel2'#6'Height'#2')'#3'Top'#3#224#1#5'Width'#3#188#2#5'Align'#7#8'alBotto'
-  +'m'#8'TabOrder'#2#1#0#9'TCheckBox'#8'Applyall'#4'Left'#2#16#6'Height'#2#19#3
+  +'m'#8'TabOrder'#2#2#0#9'TCheckBox'#8'Applyall'#4'Left'#2#16#6'Height'#2#19#3
   +'Top'#2#12#5'Width'#3#168#0#7'Caption'#6#25'Apply Change To All Chart'#7'Che'
   +'cked'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#0#0#0#7'TButton'#5'OKBtn'#4'L'
   +'eft'#3#14#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2'K'#25'BorderSpacing.InnerB'
@@ -256,6 +256,6 @@ LazarusResources.Add('Tf_config','FORMDATA',[
   +'cing.InnerBorder'#2#4#7'Caption'#6#5'&Help'#8'TabOrder'#2#4#0#0#0#9'TMultiD'
   +'oc'#9'MultiDoc1'#4'Left'#3#200#0#6'Height'#3#224#1#5'Width'#3#244#1#5'Align'
   +#7#8'alClient'#10'BevelOuter'#7#6'bvNone'#11'BorderWidth'#2#3#5'Color'#7#7'c'
-  +'lBlack'#11'ParentColor'#8#8'TabOrder'#2#2#9'Maximized'#9#11'TitleHeight'#2
+  +'lBlack'#11'ParentColor'#8#8'TabOrder'#2#1#9'Maximized'#9#11'TitleHeight'#2
   ,#12#0#0#0
 ]);

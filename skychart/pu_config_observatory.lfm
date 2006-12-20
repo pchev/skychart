@@ -27,7 +27,7 @@ object f_config_observatory: Tf_config_observatory
       Top = 1
       Width = 472
       Align = alClient
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       object Page1: TPage
         Caption = 'Observatory'
@@ -45,7 +45,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 111
           Width = 185
           Caption = 'Latitude'
-          TabOrder = 0
+          TabOrder = 1
           object Label58: TLabel
             Left = 4
             Height = 13
@@ -142,7 +142,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 111
           Width = 185
           Caption = 'Longitude'
-          TabOrder = 1
+          TabOrder = 2
           object Label61: TLabel
             Left = 4
             Height = 13
@@ -239,7 +239,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 111
           Width = 81
           Caption = 'Altitude'
-          TabOrder = 2
+          TabOrder = 3
           object Label70: TLabel
             Left = 8
             Height = 13
@@ -337,8 +337,7 @@ object f_config_observatory: Tf_config_observatory
           Height = 200
           Top = 251
           Width = 400
-          Canvas.Brush.Color = clBtnFace
-          Canvas.Color = clBtnFace
+          Canvas.Brush.Color = clBlack
           Zoom = 25
           ZoomMin = 25
           ZoomMax = 26
@@ -352,7 +351,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 452
           Width = 400
           PageSize = 1
-          TabOrder = 8
+          TabOrder = 9
           OnChange = HScrollBarChange
         end
         object VScrollBar: TScrollBar
@@ -362,7 +361,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 18
           Kind = sbVertical
           PageSize = 1
-          TabOrder = 9
+          TabOrder = 8
           OnChange = VScrollBarChange
         end
         object obsname: TGroupBox
@@ -371,7 +370,7 @@ object f_config_observatory: Tf_config_observatory
           Top = -1
           Width = 449
           Caption = 'Observatory Database'
-          TabOrder = 10
+          TabOrder = 0
           object Label2: TLabel
             Left = 314
             Height = 13
@@ -401,18 +400,19 @@ object f_config_observatory: Tf_config_observatory
             MaxLength = 0
             OnChange = citylistChange
             OnSelect = citylistChange
-            TabOrder = 0
+            TabOrder = 3
             Text = '...'
           end
           object citysearch: TButton
             Left = 365
             Height = 25
+            Top = 1
             Width = 76
             BorderSpacing.InnerBorder = 4
             Caption = 'Search'
             Default = True
             OnClick = citysearchClick
-            TabOrder = 1
+            TabOrder = 2
           end
           object countrylist: TComboBox
             Left = 8
@@ -425,7 +425,7 @@ object f_config_observatory: Tf_config_observatory
             MaxLength = 0
             OnSelect = countrylistChange
             Style = csDropDownList
-            TabOrder = 2
+            TabOrder = 0
           end
           object cityfilter: TEdit
             Left = 248
@@ -433,7 +433,7 @@ object f_config_observatory: Tf_config_observatory
             Top = 1
             Width = 104
             OnKeyDown = cityfilterKeyDown
-            TabOrder = 3
+            TabOrder = 1
           end
           object downloadcity: TButton
             Left = 249
@@ -443,7 +443,7 @@ object f_config_observatory: Tf_config_observatory
             BorderSpacing.InnerBorder = 4
             Caption = 'Download country details'
             OnClick = downloadcityClick
-            TabOrder = 4
+            TabOrder = 8
           end
           object updcity: TButton
             Left = 93
@@ -453,7 +453,7 @@ object f_config_observatory: Tf_config_observatory
             BorderSpacing.InnerBorder = 4
             Caption = 'Update'
             OnClick = updcityClick
-            TabOrder = 5
+            TabOrder = 6
           end
           object delcity: TButton
             Left = 169
@@ -463,7 +463,7 @@ object f_config_observatory: Tf_config_observatory
             BorderSpacing.InnerBorder = 4
             Caption = 'Delete'
             OnClick = delcityClick
-            TabOrder = 6
+            TabOrder = 7
           end
           object LocCode: TEdit
             Cursor = crHandPoint
@@ -477,7 +477,7 @@ object f_config_observatory: Tf_config_observatory
             ParentShowHint = False
             ReadOnly = True
             ShowHint = True
-            TabOrder = 7
+            TabOrder = 9
           end
           object vicinity: TButton
             Left = 248
@@ -487,7 +487,7 @@ object f_config_observatory: Tf_config_observatory
             BorderSpacing.InnerBorder = 4
             Caption = 'Vicinity'
             OnClick = vicinityClick
-            TabOrder = 8
+            TabOrder = 4
           end
           object vicinityrange: TSpinEdit
             Left = 341
@@ -495,7 +495,7 @@ object f_config_observatory: Tf_config_observatory
             Top = 31
             Width = 69
             MaxValue = 500
-            TabOrder = 9
+            TabOrder = 5
             Value = 10
           end
         end
@@ -505,7 +505,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 186
           Width = 273
           Caption = 'Atmospheric Refraction'
-          TabOrder = 3
+          TabOrder = 10
           object Label82: TLabel
             Left = 21
             Height = 13
@@ -566,7 +566,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 160
           Width = 457
           Caption = 'Want to track an object before it rise ?'
-          TabOrder = 0
+          TabOrder = 1
           object horizonopaque: TCheckBox
             Left = 13
             Height = 19
@@ -583,7 +583,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 32
           Width = 457
           Caption = 'Local Horizon'
-          TabOrder = 1
+          TabOrder = 0
           object hor_l1: TLabel
             Left = 13
             Height = 13
@@ -610,7 +610,7 @@ object f_config_observatory: Tf_config_observatory
             ButtonWidth = 23
             NumGlyphs = 1
             ParentColor = False
-            TabOrder = 1
+            TabOrder = 2
             OnChange = horizonfileChange
           end
           object fillhorizon: TCheckBox
@@ -620,7 +620,7 @@ object f_config_observatory: Tf_config_observatory
             Width = 140
             Caption = 'Fill with horizon color'
             OnClick = fillhorizonClick
-            TabOrder = 2
+            TabOrder = 1
           end
         end
         object GroupBox3: TGroupBox

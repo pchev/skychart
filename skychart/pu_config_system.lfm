@@ -1,7 +1,7 @@
 object f_config_system: Tf_config_system
-  Left = 273
+  Left = 419
   Height = 528
-  Top = 127
+  Top = 105
   Width = 541
   HorzScrollBar.Page = 540
   VertScrollBar.Page = 527
@@ -41,7 +41,7 @@ object f_config_system: Tf_config_system
           Top = 59
           Width = 441
           Caption = 'MySQL  Database'
-          TabOrder = 0
+          TabOrder = 5
           object Label77: TLabel
             Left = 16
             Height = 13
@@ -128,6 +128,7 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 48
             Width = 100
+            EchoMode = emPassword
             OnChange = dbpassChange
             PasswordChar = '*'
             TabOrder = 4
@@ -140,7 +141,7 @@ object f_config_system: Tf_config_system
           Top = 59
           Width = 441
           Caption = 'Sqlite Database'
-          TabOrder = 3
+          TabOrder = 1
           Visible = False
           object Label1: TLabel
             Left = 13
@@ -169,7 +170,7 @@ object f_config_system: Tf_config_system
           Top = 267
           Width = 441
           Caption = 'Directory'
-          TabOrder = 1
+          TabOrder = 3
           object Label156: TLabel
             Left = 13
             Height = 13
@@ -255,7 +256,7 @@ object f_config_system: Tf_config_system
             BorderSpacing.InnerBorder = 4
             Caption = 'Comet Setting'
             OnClick = CometDBClick
-            TabOrder = 3
+            TabOrder = 4
           end
           object AstDB: TButton
             Left = 16
@@ -265,7 +266,7 @@ object f_config_system: Tf_config_system
             BorderSpacing.InnerBorder = 4
             Caption = 'Asteroid Setting'
             OnClick = AstDBClick
-            TabOrder = 4
+            TabOrder = 3
           end
         end
         object DBtypeGroup: TRadioGroup
@@ -293,7 +294,7 @@ object f_config_system: Tf_config_system
           OnClick = DBtypeGroupClick
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 4
+          TabOrder = 0
         end
         object GroupBoxLinux: TGroupBox
           Left = 17
@@ -301,7 +302,7 @@ object f_config_system: Tf_config_system
           Top = 367
           Width = 440
           Caption = 'Desktop environment'
-          TabOrder = 5
+          TabOrder = 4
           object Label12: TLabel
             Left = 203
             Height = 13
@@ -381,7 +382,7 @@ object f_config_system: Tf_config_system
             Top = 120
             Width = 100
             OnChange = ipaddrChange
-            TabOrder = 1
+            TabOrder = 2
             Text = '127.0.0.1'
           end
           object ipport: TEdit
@@ -390,7 +391,7 @@ object f_config_system: Tf_config_system
             Top = 164
             Width = 100
             OnChange = ipportChange
-            TabOrder = 2
+            TabOrder = 3
             Text = '3292'
           end
           object keepalive: TCheckBox
@@ -400,7 +401,7 @@ object f_config_system: Tf_config_system
             Width = 182
             Caption = 'Client Connection Keep Alive'
             OnClick = keepaliveClick
-            TabOrder = 3
+            TabOrder = 1
           end
         end
       end
@@ -437,7 +438,7 @@ object f_config_system: Tf_config_system
             Height = 161
             Top = 112
             Width = 361
-            TabOrder = 0
+            TabOrder = 2
             object Label3: TLabel
               Left = 16
               Height = 13
@@ -535,14 +536,14 @@ object f_config_system: Tf_config_system
               'Alt / Az'
             )
             OnClick = ManualMountTypeClick
-            TabOrder = 1
+            TabOrder = 0
           end
           object AltAzMount: TPanel
             Left = 24
             Height = 161
             Top = 112
             Width = 361
-            TabOrder = 2
+            TabOrder = 1
             object Label8: TLabel
               Left = 16
               Height = 13
@@ -598,7 +599,7 @@ object f_config_system: Tf_config_system
               BorderStyle = bsSingle
               ParentColor = False
               ParentShowHint = False
-              TabOrder = 1
+              TabOrder = 2
               OnChange = TurnsAltChange
             end
             object RevertTurnsAz: TCheckBox
@@ -608,7 +609,7 @@ object f_config_system: Tf_config_system
               Width = 104
               Caption = 'Revert Az knob'
               OnClick = TurnsAzChange
-              TabOrder = 2
+              TabOrder = 1
             end
             object RevertTurnsAlt: TCheckBox
               Left = 128
@@ -657,7 +658,7 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 450
           Caption = 'INDI Driver setting'
-          TabOrder = 0
+          TabOrder = 1
           object Label75: TLabel
             Left = 8
             Height = 13
@@ -744,7 +745,7 @@ object f_config_system: Tf_config_system
             Width = 335
             Caption = 'Automatically start a local server if not already running'
             OnClick = IndiAutostartClick
-            TabOrder = 3
+            TabOrder = 2
           end
           object IndiServerCmd: TEdit
             Left = 120
@@ -752,7 +753,7 @@ object f_config_system: Tf_config_system
             Top = 100
             Width = 100
             OnChange = IndiServerCmdChange
-            TabOrder = 5
+            TabOrder = 3
           end
           object IndiDriver: TEdit
             Left = 336
@@ -761,7 +762,7 @@ object f_config_system: Tf_config_system
             Width = 100
             Enabled = False
             OnChange = IndiDriverChange
-            TabOrder = 2
+            TabOrder = 5
           end
           object IndiDev: TComboBox
             Left = 336
@@ -828,7 +829,7 @@ object f_config_system: Tf_config_system
             'CDC plugin'
           )
           OnClick = TelescopeSelectClick
-          TabOrder = 1
+          TabOrder = 0
         end
       end
       object Page4: TPage

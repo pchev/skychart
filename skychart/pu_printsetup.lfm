@@ -1,7 +1,7 @@
 object f_printsetup: Tf_printsetup
-  Left = 185
+  Left = 359
   Height = 258
-  Top = 123
+  Top = 105
   Width = 403
   HorzScrollBar.Page = 402
   VertScrollBar.Page = 257
@@ -18,7 +18,7 @@ object f_printsetup: Tf_printsetup
     Top = 83
     Width = 383
     FullRepaint = False
-    TabOrder = 0
+    TabOrder = 1
     object qtprintername: TLabel
       Left = 197
       Height = 13
@@ -128,7 +128,7 @@ object f_printsetup: Tf_printsetup
       ParentColor = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 1
       OnChange = prtresChange
       MaxValue = 600
     end
@@ -139,7 +139,7 @@ object f_printsetup: Tf_printsetup
       Width = 345
       Color = clBtnFace
       ReadOnly = True
-      TabOrder = 1
+      TabOrder = 3
     end
     object savepath: TDirectoryEdit
       Left = 6
@@ -149,7 +149,7 @@ object f_printsetup: Tf_printsetup
       ButtonWidth = 23
       NumGlyphs = 1
       ParentColor = False
-      TabOrder = 2
+      TabOrder = 0
       OnChange = savepathChange
     end
     object printcmd: TFileNameEdit
@@ -160,7 +160,7 @@ object f_printsetup: Tf_printsetup
       ButtonWidth = 23
       NumGlyphs = 1
       ParentColor = False
-      TabOrder = 3
+      TabOrder = 2
       OnChange = printcmdChange
     end
   end
@@ -186,7 +186,7 @@ object f_printsetup: Tf_printsetup
       'Bitmap File'
     )
     OnClick = printmodeClick
-    TabOrder = 1
+    TabOrder = 0
   end
   object Ok: TButton
     Left = 110

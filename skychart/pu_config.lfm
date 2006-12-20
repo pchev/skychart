@@ -269,7 +269,7 @@ object f_config: Tf_config
     Top = 480
     Width = 700
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
     object Applyall: TCheckBox
       Left = 16
       Height = 19
@@ -330,7 +330,7 @@ object f_config: Tf_config
     BorderWidth = 3
     Color = clBlack
     ParentColor = False
-    TabOrder = 2
+    TabOrder = 1
     Maximized = True
     TitleHeight = 12
   end

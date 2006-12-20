@@ -162,7 +162,8 @@ object f_main: Tf_main
     Color = clBlack
     FullRepaint = False
     ParentColor = False
-    TabOrder = 4
+    TabOrder = 0
+    TabStop = True
     TitleHeight = 15
     WireframeMoveResize = True
     onMaximize = MultiDoc1Maximize
@@ -2315,7 +2316,7 @@ object f_main: Tf_main
     Align = alLeft
     BevelOuter = bvNone
     FullRepaint = False
-    TabOrder = 0
+    TabOrder = 2
     object ToolBar2: TToolBar
       Height = 473
       Width = 24
@@ -2420,7 +2421,7 @@ object f_main: Tf_main
     AutoSize = True
     BevelOuter = bvNone
     FullRepaint = False
-    TabOrder = 1
+    TabOrder = 3
     object ToolBar3: TToolBar
       Height = 223
       Top = 250
@@ -2647,7 +2648,7 @@ object f_main: Tf_main
     BevelOuter = bvNone
     FullRepaint = False
     ParentFont = True
-    TabOrder = 2
+    TabOrder = 4
     object Shape1: TShape
       Left = 150
       Height = 32
@@ -2711,7 +2712,8 @@ object f_main: Tf_main
     AutoSize = True
     BevelOuter = bvNone
     FullRepaint = False
-    TabOrder = 3
+    TabOrder = 1
+    TabStop = True
     object ToolBar1: TToolBar
       Height = 25
       Width = 860
@@ -2722,6 +2724,7 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      TabStop = True
       Wrapable = False
       object ToolButtonNew: TToolButton
         Left = 1
@@ -2848,7 +2851,7 @@ object f_main: Tf_main
         Width = 24
         BevelOuter = bvNone
         FullRepaint = False
-        TabOrder = 3
+        TabOrder = 4
         object ButtonMoreStar: TImage
           Height = 11
           Hint = 'More Stars'
@@ -3017,7 +3020,7 @@ object f_main: Tf_main
         Width = 70
         MaxValue = 1000
         MinValue = 1
-        TabOrder = 4
+        TabOrder = 1
         Value = 1
       end
       object TimeU: TComboBox
@@ -3068,7 +3071,7 @@ object f_main: Tf_main
         Align = alRight
         AutoSize = True
         BevelOuter = bvNone
-        TabOrder = 1
+        TabOrder = 3
         object BtnRestoreChild: TSpeedButton
           Height = 15
           Width = 15
