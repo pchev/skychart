@@ -1,7 +1,7 @@
 object f_search: Tf_search
-  Left = 291
+  Left = 527
   Height = 326
-  Top = 114
+  Top = 105
   Width = 433
   HorzScrollBar.Page = 432
   VertScrollBar.Page = 325
@@ -15,12 +15,12 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   object PlanetPanel: TPanel
-    Left = 7
+    Left = 8
     Height = 41
     Top = 232
     Width = 416
     FullRepaint = False
-    TabOrder = 3
+    TabOrder = 7
     Visible = False
     object Label2: TLabel
       Left = 13
@@ -48,7 +48,7 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
-    TabOrder = 8
+    TabOrder = 6
     object CometFilter: TEdit
       Left = 8
       Height = 23
@@ -57,7 +57,7 @@ object f_search: Tf_search
       TabOrder = 0
     end
     object Button3: TButton
-      Left = 112
+      Left = 113
       Height = 25
       Top = 8
       Width = 75
@@ -81,7 +81,7 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
-    TabOrder = 9
+    TabOrder = 5
     object AsteroidFilter: TEdit
       Left = 8
       Height = 23
@@ -143,7 +143,7 @@ object f_search: Tf_search
     Top = 232
     Width = 416
     FullRepaint = False
-    TabOrder = 5
+    TabOrder = 3
     Visible = False
     object Label4: TLabel
       Left = 13
@@ -171,7 +171,7 @@ object f_search: Tf_search
     Top = 232
     Width = 416
     FullRepaint = False
-    TabOrder = 7
+    TabOrder = 2
     Visible = False
     object Label5: TLabel
       Left = 13
@@ -199,7 +199,7 @@ object f_search: Tf_search
     Top = 232
     Width = 416
     FullRepaint = False
-    TabOrder = 0
+    TabOrder = 1
     object Label1: TLabel
       Left = 6
       Height = 13
@@ -594,7 +594,7 @@ object f_search: Tf_search
       'Other Lines Catalogs'
     )
     OnClick = RadioGroup1Click
-    TabOrder = 6
+    TabOrder = 0
   end
   object Button1: TButton
     Left = 128
@@ -604,7 +604,7 @@ object f_search: Tf_search
     BorderSpacing.InnerBorder = 4
     Caption = 'Find'
     OnClick = Button1Click
-    TabOrder = 1
+    TabOrder = 8
   end
   object Button2: TButton
     Left = 232
@@ -615,6 +615,6 @@ object f_search: Tf_search
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 2
+    TabOrder = 9
   end
 end

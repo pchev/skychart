@@ -40,7 +40,7 @@ object f_print: Tf_print
       'As on screen (black background!)'
     )
     OnClick = prtcolorClick
-    TabOrder = 0
+    TabOrder = 3
   end
   object prtorient: TRadioGroup
     Left = 240
@@ -62,7 +62,7 @@ object f_print: Tf_print
       'Landscape'
     )
     OnClick = prtorientClick
-    TabOrder = 1
+    TabOrder = 4
   end
   object Print: TButton
     Left = 96
@@ -73,7 +73,7 @@ object f_print: Tf_print
     Caption = 'Print'
     Default = True
     ModalResult = 1
-    TabOrder = 2
+    TabOrder = 0
   end
   object Cancel: TButton
     Left = 224
@@ -84,7 +84,7 @@ object f_print: Tf_print
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 3
+    TabOrder = 1
   end
   object Setup: TButton
     Left = 304
@@ -94,7 +94,7 @@ object f_print: Tf_print
     BorderSpacing.InnerBorder = 4
     Caption = 'Setup'
     OnClick = SetupClick
-    TabOrder = 4
+    TabOrder = 2
   end
   object GroupBox1: TGroupBox
     Left = 9
