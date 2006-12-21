@@ -37,6 +37,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 105
           Width = 449
           TabOrder = 11
+          TabStop = False
           Visible = False
         end
         object Latitude: TGroupBox
@@ -274,7 +275,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 186
           Width = 177
           Caption = 'Time Zone'
-          TabOrder = 4
+          TabOrder = 5
           object Label81: TLabel
             Left = 4
             Height = 13
@@ -309,7 +310,7 @@ object f_config_observatory: Tf_config_observatory
           BorderSpacing.InnerBorder = 4
           Caption = '+'
           OnClick = ObszpClick
-          TabOrder = 5
+          TabOrder = 6
         end
         object Obszm: TButton
           Left = 3
@@ -319,7 +320,7 @@ object f_config_observatory: Tf_config_observatory
           BorderSpacing.InnerBorder = 4
           Caption = '-'
           OnClick = ObszmClick
-          TabOrder = 6
+          TabOrder = 7
         end
         object Obsmap: TButton
           Left = 3
@@ -329,7 +330,7 @@ object f_config_observatory: Tf_config_observatory
           BorderSpacing.InnerBorder = 4
           Caption = 'Load'
           OnClick = ObsmapClick
-          TabOrder = 7
+          TabOrder = 8
         end
         object ZoomImage1: TZoomImage
           Cursor = crCross
@@ -351,7 +352,8 @@ object f_config_observatory: Tf_config_observatory
           Top = 452
           Width = 400
           PageSize = 1
-          TabOrder = 9
+          TabOrder = 10
+          TabStop = False
           OnChange = HScrollBarChange
         end
         object VScrollBar: TScrollBar
@@ -361,7 +363,8 @@ object f_config_observatory: Tf_config_observatory
           Width = 18
           Kind = sbVertical
           PageSize = 1
-          TabOrder = 8
+          TabOrder = 9
+          TabStop = False
           OnChange = VScrollBarChange
         end
         object obsname: TGroupBox
@@ -505,7 +508,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 186
           Width = 273
           Caption = 'Atmospheric Refraction'
-          TabOrder = 10
+          TabOrder = 4
           object Label82: TLabel
             Left = 21
             Height = 13
@@ -534,7 +537,7 @@ object f_config_observatory: Tf_config_observatory
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 1
+            TabOrder = 0
             OnChange = pressureChange
             Decimals = 0
             MaxValue = 1500
@@ -550,7 +553,7 @@ object f_config_observatory: Tf_config_observatory
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 0
+            TabOrder = 1
             OnChange = temperatureChange
             MinValue = -100
             MaxValue = 100

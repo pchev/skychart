@@ -422,7 +422,7 @@ object f_config_catalog: Tf_config_catalog
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 45
+          TabOrder = 42
         end
         object USNBright: TCheckBox
           Tag = 9
@@ -520,7 +520,7 @@ object f_config_catalog: Tf_config_catalog
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 42
+          TabOrder = 43
           OnChange = CDCStarField1Change
           MaxValue = 10
         end
@@ -535,7 +535,7 @@ object f_config_catalog: Tf_config_catalog
           ParentColor = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 43
+          TabOrder = 44
           OnChange = CDCStarField2Change
           MaxValue = 10
         end
@@ -817,7 +817,7 @@ object f_config_catalog: Tf_config_catalog
           ButtonWidth = 21
           NumGlyphs = 1
           ParentColor = False
-          TabOrder = 44
+          TabOrder = 45
           OnChange = CDCStarPathChange
         end
         object gcv3: TDirectoryEdit
