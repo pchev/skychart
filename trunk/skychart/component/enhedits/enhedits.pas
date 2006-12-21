@@ -368,7 +368,7 @@ begin
   if (Text <> '') and not (Text = '-') then
     FValue := StrToInt(Text);
   if (FValue <= MaxWord) and (FValue >= MinWord) then
-     Result := FValue;
+     Result := word(FValue);
 end;
 
 { Method to Set Value as a word }
@@ -388,7 +388,7 @@ begin
   if (Text <> '') and not (Text = '-') then
     FValue := StrToInt(Text);
   if (FValue <= MaxByte) and (FValue >= MinByte) then
-     Result := FValue;
+     Result := byte(FValue);
 end;
 
 { Method to Set Value as a byte }
@@ -422,7 +422,7 @@ end;
 { Don't accept invalid characters }
 procedure TLongEdit.KeyPress(var Key: Char);
 begin
-  if Key in ['0'..'9', '-', #8] then
+  if Key in ['0'..'9', '-', #0 .. #20] then
     inherited KeyPress(Key)
   else begin
     Key := #0;
@@ -596,7 +596,7 @@ begin
   if (Text <> '') and not (Text = '-') then
     FValue := StrToFloat(Text);
   if (FValue <= MaxDouble) and (FValue >= MinDouble) then
-     Result := FValue;
+     Result := Double(FValue);
 end;
 
 { Method to Set Value as a double }
@@ -616,7 +616,7 @@ begin
   if (Text <> '') and not (Text = '-') then
     FValue := StrToFloat(Text);
   if (FValue <= MaxSingle) and (FValue >= MinSingle) then
-     Result := FValue;
+     Result := Single(FValue);
 end;
 
 { Method to Set Value as a single }
@@ -636,7 +636,7 @@ begin
   if (Text <> '') and not (Text = '-') then
     FValue := StrToFloat(Text);
   if (FValue <= MaxReal) and (FValue >= MinReal) then
-     Result := FValue;
+     Result := Real(FValue);
 end;
 
 { Method to Set Value as a real }
@@ -661,7 +661,7 @@ end;
 { Don't accept invalid characters }
 procedure TFloatEdit.KeyPress(var Key: Char);
 begin
-  if Key in ['0'..'9', '-', '+', 'e', 'E', DecimalSeparator, #8] then
+  if Key in ['0'..'9', '-', '+', 'e', 'E', DecimalSeparator, #0 .. #20] then
     inherited KeyPress(Key)
   else begin
     Key := #0;
