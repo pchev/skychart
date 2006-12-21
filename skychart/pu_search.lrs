@@ -1,5 +1,3 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('Tf_search','FORMDATA',[
   'TPF0'#9'Tf_search'#8'f_search'#4'Left'#3#15#2#6'Height'#3'F'#1#3'Top'#2'i'#5
   +'Width'#3#177#1#18'HorzScrollBar.Page'#3#176#1#18'VertScrollBar.Page'#3'E'#1
