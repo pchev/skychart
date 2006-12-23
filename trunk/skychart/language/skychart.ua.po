@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-11-06 17:24+0200\n"
+"PO-Revision-Date: 2006-12-21 22:38+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ua\n"
 "POT-Creation-Date: \n"
@@ -18,11 +18,11 @@ msgstr "%s  Не знайдено жодного встановленого ка
 
 #: u_translation:rsdifferenttha
 msgid "%s (different than configured port, maybe busy or other error.)"
-msgstr "%s (інший, ніж конфігурованийй порт, може бути зайнятим, або інша помилка._"
+msgstr "%s (інший, ніж конфігурований порт, може бути зайнятим, або інша помилка)"
 
 #: u_translation:rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or wrong path in catalog setting."
-msgstr "%s Не знайдено!%sМожливо каталог не встановлено, або невірний шлях до ньго в установках."
+msgstr "%s Не знайдено!%sМожливо каталог не встановлено, або невірний шлях до нього в установках."
 
 #: u_translation:rsconnectedfro
 msgid "%s connected from %s, using chart %s, connect time:%s"
@@ -90,7 +90,7 @@ msgstr "%sRA повороти:"
 
 #: u_translation:rstabledonotex
 msgid "%sTable %s do not exist! %sPlease correct the error and retry."
-msgstr "%sТаблиця %s не існує! %sБудь-ласка виправить помилку та повторіть."
+msgstr "%sТаблиця %s не існує! %sБудь-ласка виправіть помилку та повторіть."
 
 #: u_translation:rstableexist
 msgid "%sTable exist %s"
@@ -410,7 +410,7 @@ msgstr "Bright + NEO + TNO"
 
 #: u_translation:rsbrightnebula
 msgid "Bright Nebula"
-msgstr ""
+msgstr "Яскрава туманність"
 
 #: u_translation:rsbrightstars
 msgid "Bright stars"
@@ -442,7 +442,7 @@ msgstr "Установки CDC зоряного каталогу"
 
 #: u_translation:rscdcplugin
 msgid "CDC plugin"
-msgstr ""
+msgstr "CDC плагін"
 
 #: u_translation:rscdcpluginset
 msgid "CDC plugin setting"
@@ -450,7 +450,7 @@ msgstr "Установки CDC плагіну"
 
 #: u_translation:rscdctranslator
 msgid "CDCTranslator"
-msgstr "Олег Малий, gemini@ua.fm  ( Запорізький Астрономічний Клуб \"Альтаїр\" http://astroclub.biz )"
+msgstr "Олег Малий, gemini@ua.fm  ( МГО Запорізький Астрономічний Клуб \"Альтаїр\" http://astroclub.biz )"
 
 #: u_translation:rscalendar
 msgid "Calendar"
@@ -710,7 +710,7 @@ msgstr "З'єднання із %s, %s невдале! %sПеревірте, як
 
 #: u_translation:rsconnecttosuc
 msgid "Connect to %s, %s successful.%s"
-msgstr "Зєднання %s, %s вдале.%s"
+msgstr "З'єднання %s, %s вдале.%s"
 
 #: u_translation:rsconnectedtos
 msgid "Connected to SQL database %s"
@@ -718,7 +718,7 @@ msgstr "Під'єднано до SQL бази даних %s"
 
 #: u_translation:rsconnectionli
 msgid "Connection lines between each position"
-msgstr "Зєднати лініями  кожне положення"
+msgstr "З'єднати лініями  кожне положення"
 
 #: u_translation:rsconstellatio
 msgid "Constellation"
@@ -1150,7 +1150,7 @@ msgstr "Директорія не знайдена %s"
 
 #: u_translation:rsdisconnectte
 msgid "Disconnect Telescope"
-msgstr "Відключеннятелескопу"
+msgstr "Відключення телескопу"
 
 #: u_translation:rsdisplay
 msgid "Display"
@@ -1198,7 +1198,7 @@ msgstr "Не враховувати астероїд, зоряна величи�
 
 #: u_translation:rsdonottakeacc
 msgid "Do not take account of comet fainter than magnitude"
-msgstr "Не враховувати комету, слабішу ніж величина"
+msgstr "Не враховувати комету слабішу, ніж величина"
 
 #: u_translation:rsdoyouwanttos
 msgid "Do you want to save the program setting now?"
@@ -1398,7 +1398,7 @@ msgstr "Помилка! Будь-ласка перевірте параметр�
 
 #: u_translation:rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
-msgstr "Помилка! Будь-ласка перевірте параметри бази даних та завантажтепакет картинок."
+msgstr "Помилка! Будь-ласка перевірте параметри бази даних та завантажте пакет зображень."
 
 #: u_translation:rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -1626,7 +1626,7 @@ msgstr "Галактичне скупчення"
 
 #: u_translation:rsgamma
 msgid "Gamma"
-msgstr "Гамма"
+msgstr "Гама"
 
 #: u_translation:rsgeneral
 msgid "General"
@@ -1762,7 +1762,7 @@ msgstr "Години, хвилини, секунди"
 
 #: u_translation:rsindidriver
 msgid "INDI Driver"
-msgstr ""
+msgstr "INDI драйвер"
 
 #: u_translation:rsindidriverse
 msgid "INDI Driver setting"
@@ -1918,7 +1918,7 @@ msgstr "Текст мітки"
 
 #: u_translation:rslabel
 msgid "Label:"
-msgstr "Мітка;"
+msgstr "Мітка:"
 
 #: u_translation:rslabels
 msgid "Labels"
@@ -2054,7 +2054,7 @@ msgstr "Виклик проекту"
 
 #: u_translation:rslocalhorizon
 msgid "Local Horizon"
-msgstr "Місцевий горихонт"
+msgstr "Місцевий горизонт"
 
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
@@ -2266,7 +2266,7 @@ msgstr "Більше зірок"
 
 #: u_translation:rsmorethanobje
 msgid "More than %s objects, result truncated."
-msgstr "Більше, ніж %s обєктів..."
+msgstr "Більше, ніж %s об'єктів..."
 
 #: u_translation:rsmorethan1000
 msgid "More than 1000 errors! Process aborted."
@@ -2378,7 +2378,7 @@ msgstr "Неіснуючий"
 
 #: u_translation:rsnonvisiblese
 msgid "Non visible search result, zoom for more details"
-msgstr ""
+msgstr "Невидимий результат пошуку, збільшіть для детальності."
 
 #: u_translation:rsnonexistentu
 msgid "Non-existent/unknown"
@@ -3182,7 +3182,7 @@ msgstr "Виберіть системний принтер та його баж�
 
 #: u_translation:rsselectthetel
 msgid "Select the telescope interface"
-msgstr ""
+msgstr "Вибір інтерфейсу телескопу"
 
 #: u_translation:rsselectthetyp
 msgid "Select the type of object in your catalog"
@@ -3782,7 +3782,7 @@ msgstr "Повна тінь"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr "Відмітити, щоб запобігти схожості із малою планетою 134340"
+msgstr "Відмітити, щоб запобігти схожості із малою планетою 134340 (зараз цей номер присвоєно Плутону)."
 
 #: u_translation:rsundo
 msgid "Undo"
