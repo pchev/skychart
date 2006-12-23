@@ -919,7 +919,7 @@ try
    def_cfgsc.BackgroundImage:=slash(privatedir)+slash('pictures');
    if not DirectoryExists(def_cfgsc.BackgroundImage) then forcedirectories(def_cfgsc.BackgroundImage);
  end;
- catalog.LoadConstellation(cfgm.Constellationpath,cfgm.language);
+ catalog.LoadConstellation(cfgm.Constellationpath,Lang);
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
  catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
