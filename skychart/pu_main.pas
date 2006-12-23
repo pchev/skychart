@@ -2748,7 +2748,14 @@ catalog.cfgcat.NebmagMax:=12;
 catalog.cfgcat.NebSizeMin:=1;
 catalog.cfgcat.UseUSNOBrightStars:=false;
 catalog.cfgcat.UseGSVSIr:=false;
-catalog.cfgcat.GCatNum:=0;
+catalog.cfgcat.GCatNum:=1;
+SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
+catalog.cfgcat.GCatLst[0].shortname:='dsl';
+catalog.cfgcat.GCatLst[0].name:='Nebulae Outlines, spline curve';
+catalog.cfgcat.GCatLst[0].path:='cat/DSoutlines/';
+catalog.cfgcat.GCatLst[0].min:=0;
+catalog.cfgcat.GCatLst[0].max:=10;
+catalog.cfgcat.GCatLst[0].Actif:=true;
 for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatpath[i]:=slash(appdir)+'cat';
    catalog.cfgcat.starcatdef[i]:=false;
@@ -2957,15 +2964,15 @@ for i:=1 to maxfield do begin
 end;
 if usecatalog then begin
 section:='catalog';
-catalog.cfgcat.GCatNum:=Readinteger(section,'GCatNum',0);
+catalog.cfgcat.GCatNum:=Readinteger(section,'GCatNum',1);
 SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
 for i:=0 to catalog.cfgcat.GCatNum-1 do begin
-   catalog.cfgcat.GCatLst[i].shortname:=Readstring(section,'CatName'+inttostr(i),'');
-   catalog.cfgcat.GCatLst[i].name:=Readstring(section,'CatLongName'+inttostr(i),'');
-   catalog.cfgcat.GCatLst[i].path:=Readstring(section,'CatPath'+inttostr(i),'');
-   catalog.cfgcat.GCatLst[i].min:=ReadFloat(section,'CatMin'+inttostr(i),0);
-   catalog.cfgcat.GCatLst[i].max:=ReadFloat(section,'CatMax'+inttostr(i),0);
-   catalog.cfgcat.GCatLst[i].Actif:=ReadBool(section,'CatActif'+inttostr(i),false);
+   catalog.cfgcat.GCatLst[i].shortname:=Readstring(section,'CatName'+inttostr(i),catalog.cfgcat.GCatLst[i].shortname);
+   catalog.cfgcat.GCatLst[i].name:=Readstring(section,'CatLongName'+inttostr(i),catalog.cfgcat.GCatLst[i].name);
+   catalog.cfgcat.GCatLst[i].path:=Readstring(section,'CatPath'+inttostr(i),catalog.cfgcat.GCatLst[i].path);
+   catalog.cfgcat.GCatLst[i].min:=ReadFloat(section,'CatMin'+inttostr(i),catalog.cfgcat.GCatLst[i].min);
+   catalog.cfgcat.GCatLst[i].max:=ReadFloat(section,'CatMax'+inttostr(i),catalog.cfgcat.GCatLst[i].max);
+   catalog.cfgcat.GCatLst[i].Actif:=ReadBool(section,'CatActif'+inttostr(i),catalog.cfgcat.GCatLst[i].Actif);
    catalog.cfgcat.GCatLst[i].magmax:=0;
    catalog.cfgcat.GCatLst[i].cattype:=0;
    if catalog.cfgcat.GCatLst[i].Actif then begin
