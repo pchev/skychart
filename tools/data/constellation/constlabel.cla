@@ -1,6 +1,6 @@
 ; Name of the constellation for Cartes du Ciel
 ; Official Latin name
-; For a translation copy this file to constlabel_XX.dat where XX is the specific language code
+; For a translation copy this file to constlabel_xx.cla where xx is the specific language code
 ;
 00.567 ;  39.250 ; And ; Andromeda          
 10.117 ; -33.350 ; Ant ; Antlia             
