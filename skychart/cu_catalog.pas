@@ -125,7 +125,7 @@ type
      function CheckPath(cat: integer; catpath:string):boolean;
      function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
      function GetMaxField(path,cat: string):string;
-     Procedure LoadConstellation(fname:string);
+     Procedure LoadConstellation(fpath,lang:string);
      Procedure LoadConstL(fname:string);
      Procedure LoadConstB(fname:string);
      Procedure LoadHorizon(fname:string; cfgsc:Tconf_skychart);
@@ -2483,11 +2483,13 @@ begin
   end;
 end;
 
-Procedure Tcatalog.LoadConstellation(fname:string);
+Procedure Tcatalog.LoadConstellation(fpath,lang:string);
 var f : textfile;
     i,n,p:integer;
-    txt:string;
+    fname,txt:string;
 begin
+   fname:=slash(fpath)+'constlabel_'+lang+'.cla';
+   if not FileExists(fname) then fname:=slash(fpath)+'constlabel.cla';
    if not FileExists(fname) then begin
       cfgshr.ConstelNum := 0;
       setlength(cfgshr.ConstelName,0);

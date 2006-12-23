@@ -501,7 +501,7 @@ type
                 constructor Create;
                 destructor Destroy; override;
                 procedure Assign(Source: Tconf_main);
-                prtname,language,Constellationfile, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
+                prtname,language,Constellationpath, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
                 PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
                 PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin: integer;
@@ -1427,7 +1427,7 @@ var
 begin
 prtname:=Source.prtname;
 language:=Source.language;
-Constellationfile:=Source.Constellationfile;
+Constellationpath:=Source.Constellationpath;
 ConstLfile:=Source.ConstLfile;
 ConstBfile:=Source.ConstBfile;
 EarthMapFile:=Source.EarthMapFile;
