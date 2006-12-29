@@ -933,10 +933,10 @@ try
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp') then
-    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp');
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp') then
-    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm') then
+    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm') then
+    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm');
  application.ProcessMessages; // apply any resizing
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
@@ -4750,14 +4750,14 @@ begin
  else
     SetButtonImage(cfgm.ButtonStandard);
     
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp') then begin
-    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.xpm') then begin
+    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.xpm');
     for i:=0 to MultiDoc1.ChildCount-1 do
         if MultiDoc1.Childs[i].DockedObject is Tf_chart then
            Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassrose:=compass;
  end;
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp') then begin
-    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.xpm') then begin
+    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.xpm');
     for i:=0 to MultiDoc1.ChildCount-1 do
         if MultiDoc1.Childs[i].DockedObject is Tf_chart then
            Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassarrow:=arrow;
