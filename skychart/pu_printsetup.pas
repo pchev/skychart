@@ -111,6 +111,10 @@ var i:integer;
 begin
 try
 lockupd:=true;
+if (cm.PrintMethod=0)and(Printer.PrinterIndex<0) then begin
+  ShowMessage(rsNoPrinterFou);
+  cm.PrintMethod:=1;
+end;
 case cm.PrintMethod of
 0: begin
    printmode.ItemIndex:=0;

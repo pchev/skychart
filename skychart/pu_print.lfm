@@ -11,9 +11,9 @@ object f_print: Tf_print
   OnShow = FormShow
   object PrinterInfo: TLabel
     Left = 27
-    Height = 13
+    Height = 15
     Top = 14
-    Width = 60
+    Width = 67
     Caption = 'PrinterInfo'
     Color = clNone
     ParentColor = False
@@ -105,36 +105,36 @@ object f_print: Tf_print
     TabOrder = 5
     object Label1: TLabel
       Left = 23
-      Height = 13
+      Height = 15
       Top = 14
-      Width = 22
+      Width = 25
       Caption = 'Left'
       Color = clNone
       ParentColor = False
     end
     object Label2: TLabel
       Left = 89
-      Height = 13
+      Height = 15
       Top = 14
-      Width = 29
+      Width = 34
       Caption = 'Right'
       Color = clNone
       ParentColor = False
     end
     object Label3: TLabel
       Left = 153
-      Height = 13
+      Height = 15
       Top = 14
-      Width = 22
+      Width = 26
       Caption = 'Top'
       Color = clNone
       ParentColor = False
     end
     object Label4: TLabel
       Left = 216
-      Height = 13
+      Height = 15
       Top = 14
-      Width = 42
+      Width = 45
       Caption = 'Bottom'
       Color = clNone
       ParentColor = False

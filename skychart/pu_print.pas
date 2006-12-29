@@ -26,7 +26,7 @@ interface
 
 uses  u_translation, u_constant, u_util,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  Buttons, StdCtrls, enhedits;
+  Buttons, StdCtrls, enhedits, Printers;
 
 type
 
@@ -158,6 +158,9 @@ end;
 procedure Tf_print.ShowPrtInfo;
 var i: integer;
 begin
+if (cm.PrintMethod=0)and(Printer.PrinterIndex<0) then begin
+  cm.PrintMethod:=1;
+end;
 case cm.PrintMethod of
 0 : begin
     GetPrinterResolution(cm.prtname,i);
