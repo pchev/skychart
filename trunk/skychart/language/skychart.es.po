@@ -231,6 +231,10 @@ msgstr "Montura Alt-AZ"
 msgid "Altitude"
 msgstr "Altitud"
 
+#: u_translation:rsalwaysshowco
+msgid "Always show compass rose"
+msgstr ""
+
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
 msgstr "Movimiento Propio Anual"
@@ -666,6 +670,10 @@ msgstr "Comando a utilizar para procesar archivo."
 #: u_translation:rscommonname
 msgid "Common Name"
 msgstr "Nombre Común"
+
+#: u_translation:rscompassroses
+msgid "Compass rose size"
+msgstr ""
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -2359,6 +2367,10 @@ msgstr "No se encontró datos de Asteroides!%sPor favor, cargue un archivo MPC p
 msgid "No Margin"
 msgstr "Sin Margen"
 
+#: u_translation:rsnoprinterfou
+msgid "No Printer found!"
+msgstr ""
+
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "No hay objeto para fijar"
@@ -3298,6 +3310,10 @@ msgstr "Mostrar Eclíptica"
 #: u_translation:rsshowgalactic
 msgid "Show Galactic Equator"
 msgstr "Mostrar Ecuador Galáctico"
+
+#: u_translation:rsshowgrid
+msgid "Show Grid"
+msgstr ""
 
 #: u_translation:rsshowgridlabe
 msgid "Show Grid Label"
