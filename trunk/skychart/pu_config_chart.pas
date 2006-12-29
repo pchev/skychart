@@ -893,6 +893,7 @@ cshr.HourGridSpacing[7]:=1;
 cshr.HourGridSpacing[8]:=1;
 cshr.HourGridSpacing[9]:=2;
 cshr.HourGridSpacing[10]:=2;
+cshr.CRoseSz:=80;
 ShowGridSpacing;
 end;
 
