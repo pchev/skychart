@@ -231,6 +231,10 @@ msgstr ""
 msgid "Altitude"
 msgstr ""
 
+#: u_translation:rsalwaysshowco
+msgid "Always show compass rose"
+msgstr ""
+
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
 msgstr ""
@@ -665,6 +669,10 @@ msgstr ""
 
 #: u_translation:rscommonname
 msgid "Common Name"
+msgstr ""
+
+#: u_translation:rscompassroses
+msgid "Compass rose size"
 msgstr ""
 
 #: u_translation:rscomponent1ma
@@ -2359,6 +2367,10 @@ msgstr ""
 msgid "No Margin"
 msgstr ""
 
+#: u_translation:rsnoprinterfou
+msgid "No Printer found!"
+msgstr ""
+
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
 msgstr ""
@@ -3297,6 +3309,10 @@ msgstr ""
 
 #: u_translation:rsshowgalactic
 msgid "Show Galactic Equator"
+msgstr ""
+
+#: u_translation:rsshowgrid
+msgid "Show Grid"
 msgstr ""
 
 #: u_translation:rsshowgridlabe

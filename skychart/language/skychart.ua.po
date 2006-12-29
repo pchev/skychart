@@ -232,6 +232,10 @@ msgstr "Азимутальне монтування"
 msgid "Altitude"
 msgstr "Висота"
 
+#: u_translation:rsalwaysshowco
+msgid "Always show compass rose"
+msgstr ""
+
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
 msgstr "Річний власний рух"
@@ -667,6 +671,10 @@ msgstr "Команда використовується для обробітк�
 #: u_translation:rscommonname
 msgid "Common Name"
 msgstr "Прийнята назва"
+
+#: u_translation:rscompassroses
+msgid "Compass rose size"
+msgstr ""
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -2360,6 +2368,10 @@ msgstr "Не знайдено ніяких астероїдних даних!%s�
 msgid "No Margin"
 msgstr "Без поля"
 
+#: u_translation:rsnoprinterfou
+msgid "No Printer found!"
+msgstr ""
+
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "Нема об'єкту для опорного замикання"
@@ -3299,6 +3311,10 @@ msgstr "Показати екліптику"
 #: u_translation:rsshowgalactic
 msgid "Show Galactic Equator"
 msgstr "Показати галактичний екватор"
+
+#: u_translation:rsshowgrid
+msgid "Show Grid"
+msgstr ""
 
 #: u_translation:rsshowgridlabe
 msgid "Show Grid Label"
