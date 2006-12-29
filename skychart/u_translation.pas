@@ -1073,6 +1073,10 @@ resourcestring
   rsINDIDriver = 'INDI Driver';
   rsCDCPlugin = 'CDC plugin';
   rsNonVisibleSe = 'Non visible search result, zoom for more details';
+  rsNoPrinterFou = 'No Printer found!';
+  rsShowGrid = 'Show Grid';
+  rsCompassRoseS = 'Compass rose size';
+  rsAlwaysShowCo = 'Always show compass rose';
 
 implementation
 

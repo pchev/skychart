@@ -1717,6 +1717,7 @@ end;
 Procedure Tskychart.DrawGrid;
 begin
 if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
+    if Fcatalog.cfgshr.ShowCRose then DrawCRose;
     if cfgsc.ShowGrid then
        case cfgsc.ProjPole of
        Equat  :  DrawEqGrid;
@@ -1725,7 +1726,10 @@ if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then
        Ecl    :  begin DrawEclGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        end
     else if cfgsc.ShowEqGrid then DrawEqGrid;
-end else if cfgsc.ShowGrid then DrawScale;
+end else if cfgsc.ShowGrid then begin
+   if cfgsc.ShowEqGrid then DrawEqGrid;
+   DrawScale;
+end;
 end;
 
 Procedure Tskychart.DrawScale;
@@ -1734,8 +1738,10 @@ var fv,u:double;
     l1,l2:string;
 const sticksize=10;
 begin
+DrawCRose;
 fv:=rad2deg*cfgsc.fov/3;
-if trunc(fv)>5 then begin l1:='1'+ldeg; n:=trunc(fv); l2:=inttostr(n)+ldeg; s:=1; u:=deg2rad; end
+if trunc(fv)>20 then begin l1:='5'+ldeg; n:=trunc(fv/5); l2:=inttostr(n*5)+ldeg; s:=5; u:=deg2rad; end
+else if trunc(fv)>5 then begin l1:='1'+ldeg; n:=trunc(fv); l2:=inttostr(n)+ldeg; s:=1; u:=deg2rad; end
 else if trunc(fv)>0 then begin l1:='30'+lmin; n:=trunc(fv)*2; l2:=inttostr(n*30)+lmin; s:=30; u:=deg2rad/60; end
 else if trunc(6*fv/2)>0 then begin l1:='10'+lmin; n:=trunc(6*fv); l2:=inttostr(n*10)+lmin; s:=10; u:=deg2rad/60; end
 else if trunc(30*fv/2)>0 then begin l1:='2'+lmin; n:=trunc(30*fv); l2:=inttostr(n*2)+lmin; s:=2; u:=deg2rad/60; end
@@ -1744,7 +1750,7 @@ else if trunc(360*fv/2)>0 then begin l1:='10'+lsec; n:=trunc(360*fv); l2:=inttos
 else if trunc(1800*fv/2)>0 then begin l1:='2'+lsec; n:=trunc(1800*fv); l2:=inttostr(n*2)+lsec; s:=2; u:=deg2rad/3600; end
 else begin l1:='1'+lsec; n:=trunc(3600*fv); l2:=inttostr(n)+lsec; s:=1; u:=deg2rad/3600; end;
 if n<1 then n:=1;
-xp:=cfgsc.xmin+sticksize;
+xp:=cfgsc.xmin+10+Fcatalog.cfgshr.CRoseSz+sticksize;
 y:=cfgsc.ymax-sticksize;
 FPlot.PlotLine(xp,y,xp,y-sticksize,Fplot.cfgplot.Color[12],1);
 FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'0');
@@ -1847,6 +1853,7 @@ if (cfgsc.projpole=Equat)and(not cfgsc.ShowEqGrid) then col:=Fplot.cfgplot.Color
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.decentre));
 dra:=Fcatalog.cfgshr.HourGridSpacing[n];
 dde:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
+if dde>1000 then dde:=dde-1000;
 ra1:=deg2rad*trunc(rad2deg*cfgsc.racentre/15/dra)*dra*15;
 de1:=deg2rad*trunc(rad2deg*cfgsc.decentre/dde)*dde;
 dra:=deg2rad*dra*15;
@@ -2049,6 +2056,24 @@ if cfgsc.ProjPole=Altaz then begin
         Fplot.PlotOutline(xh,yh,1,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
      end else begin
         Fplot.Plotline(x,y,x0,y0,Fplot.cfgplot.Color[19],1);
+     end;
+     Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot.Color[12],2);
+  end
+  else begin
+     first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
+     for i:=1 to 360 do begin
+       az:=deg2rad*rmod(360+i-1-180,360);
+       proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+       WindowXY(x1,y1,xh,yh,cfgsc);
+       if first then begin
+          first:=false;
+          x0h:=xh;
+          y0h:=yh;
+       end else begin
+          Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot.Color[12],2);
+       end;
+       xph:=xh;
+       yph:=yh;
      end;
      Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot.Color[12],2);
   end;
@@ -2813,12 +2838,38 @@ end;
 
 //  compass rose
 Procedure Tskychart.DrawCRose;
+var rosex,rosey,roserd: integer;
+    ar,de,a,h,l,b,x1,y1,x2,y2,rot: double;
 begin
-//draw circle
-if cfgsc.ShowCRose then Fplot.PlotCircle(10,10,10,10,Fplot.cfgplot.Color[18],false);
-
+ roserd:=Fcatalog.cfgshr.CRoseSz div 2;
+ rosex:=cfgsc.xmin+10+roserd;
+ rosey:=cfgsc.ymax-10-roserd;
+ x1:=0; y1:=0;
+ projection(cfgsc.racentre,cfgsc.decentre+0.001,x2,y2,false,cfgsc);
+ rot:=-arctan2((x2-x1),(y2-y1));
+ Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,1);
+ if cfgsc.ProjPole=Altaz then begin
+   Eq2Hz(cfgsc.CurST-cfgsc.racentre,cfgsc.decentre,a,h,cfgsc) ;
+   Hz2Eq(a,h+0.001,ar,de,cfgsc);
+   projection(cfgsc.CurST-ar,de,x2,y2,false,cfgsc) ;
+   rot:=-arctan2((x2-x1),(y2-y1));
+   Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
+ end;
+ if cfgsc.ProjPole=Ecl then begin
+   Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.e,l,b);
+   Ecl2eq(l,b+0.001,cfgsc.e,ar,de);
+   projection(ar,de,x2,y2,false,cfgsc) ;
+   rot:=-arctan2((x2-x1),(y2-y1));
+   Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
+ end;
+ if cfgsc.ProjPole=Gal then begin
+   Eq2Gal(cfgsc.racentre,cfgsc.decentre,l,b,cfgsc);
+   gal2eq(l,b+0.001,ar,de,cfgsc);
+   projection(ar,de,x2,y2,false,cfgsc) ;
+   rot:=-arctan2((x2-x1),(y2-y1));
+   Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
+ end;
 end;
-//  end of compass rose
 
 function Tskychart.TelescopeMove(ra,dec:double):boolean;
 var dist:double;

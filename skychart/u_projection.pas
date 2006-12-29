@@ -124,13 +124,13 @@ end;
 
 Function RotationAngle(x1,y1,x2,y2: double; c: Tconf_skychart): double;
 begin
-x1:=c.AxGlb+c.BxGlb*x1+c.Xshift;
-y1:=c.AyGlb+c.ByGlb*y1+c.Yshift;
-x2:=c.AxGlb+c.BxGlb*x2+c.Xshift;
-y2:=c.AyGlb+c.ByGlb*y2+c.Yshift;
+x1:=c.BxGlb*x1;
+y1:=c.ByGlb*y1;
+x2:=c.BxGlb*x2;
+y2:=c.ByGlb*y2;
 result:=double(arctan2((x1-x2),(y1-y2)));
 if c.FlipY<0 then result:=result-pi;
-end;      
+end;
 
 Procedure WindowXY(x,y:Double; out WindowX,WindowY: single; c: Tconf_skychart);
 BEGIN

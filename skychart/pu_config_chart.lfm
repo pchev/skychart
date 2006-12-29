@@ -1,7 +1,7 @@
 object f_config_chart: Tf_config_chart
-  Left = 542
+  Left = 489
   Height = 511
-  Top = 210
+  Top = 184
   Width = 525
   HorzScrollBar.Page = 524
   VertScrollBar.Page = 510
@@ -29,8 +29,8 @@ object f_config_chart: Tf_config_chart
       object Page1: TPage
         Caption = 'Page1'
         object Label31: TLabel
-          Height = 13
-          Width = 76
+          Height = 15
+          Width = 84
           Caption = 'Chart Setting'
           Color = clNone
           ParentColor = False
@@ -45,36 +45,36 @@ object f_config_chart: Tf_config_chart
           TabOrder = 1
           object Label68: TLabel
             Left = 404
-            Height = 13
+            Height = 15
             Top = 72
-            Width = 33
+            Width = 36
             Caption = 'years'
             Color = clNone
             ParentColor = False
           end
           object Label113: TLabel
             Left = 8
-            Height = 13
+            Height = 15
             Top = 16
-            Width = 317
+            Width = 345
             Caption = 'Stars proper motion options (if available in the catalog)'
             Color = clNone
             ParentColor = False
           end
           object PMBox: TCheckBox
             Left = 8
-            Height = 19
+            Height = 22
             Top = 40
-            Width = 396
+            Width = 431
             Caption = 'Use the proper motion to correct the position for the current date'
             OnClick = PMBoxClick
             TabOrder = 0
           end
           object DrawPmBox: TCheckBox
             Left = 8
-            Height = 19
+            Height = 22
             Top = 72
-            Width = 348
+            Width = 380
             Caption = 'Draw a line that represent the proper motion for the next'
             OnClick = DrawPmBoxClick
             TabOrder = 1
@@ -103,18 +103,18 @@ object f_config_chart: Tf_config_chart
           TabOrder = 0
           object EquinoxLabel: TLabel
             Left = 259
-            Height = 13
+            Height = 15
             Top = 43
-            Width = 49
+            Width = 54
             Caption = 'Equinox:'
             Color = clNone
             ParentColor = False
           end
           object Label1: TLabel
             Left = 16
-            Height = 13
+            Height = 15
             Top = 8
-            Width = 286
+            Width = 318
             Caption = 'Equatorial and Ecliptic Chart  Coordinates Equinox'
             Color = clNone
             ParentColor = False
@@ -233,98 +233,98 @@ object f_config_chart: Tf_config_chart
       object Page2: TPage
         Caption = 'Page2'
         object Label30: TLabel
-          Height = 13
-          Width = 124
+          Height = 15
+          Width = 137
           Caption = 'Field of Vision Setting'
           Color = clNone
           ParentColor = False
         end
         object Label96: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 131
-          Width = 8
+          Width = 9
           Caption = '1'
           Color = clNone
           ParentColor = False
         end
         object Label97: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 159
-          Width = 8
+          Width = 9
           Caption = '2'
           Color = clNone
           ParentColor = False
         end
         object Label98: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 187
-          Width = 8
+          Width = 9
           Caption = '3'
           Color = clNone
           ParentColor = False
         end
         object Label99: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 215
-          Width = 8
+          Width = 9
           Caption = '4'
           Color = clNone
           ParentColor = False
         end
         object Label101: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 271
-          Width = 8
+          Width = 9
           Caption = '6'
           Color = clNone
           ParentColor = False
         end
         object Label102: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 299
-          Width = 8
+          Width = 9
           Caption = '7'
           Color = clNone
           ParentColor = False
         end
         object Label103: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 327
-          Width = 8
+          Width = 9
           Caption = '8'
           Color = clNone
           ParentColor = False
         end
         object Label104: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 355
-          Width = 8
+          Width = 9
           Caption = '9'
           Color = clNone
           ParentColor = False
         end
         object Label105: TLabel
           Left = 80
-          Height = 13
+          Height = 15
           Top = 383
-          Width = 15
+          Width = 17
           Caption = '10'
           Color = clNone
           ParentColor = False
         end
         object Label106: TLabel
           Left = 47
-          Height = 13
+          Height = 15
           Top = 64
-          Width = 76
+          Width = 83
           Alignment = taRightJustify
           Caption = 'Field Number'
           Color = clNone
@@ -332,27 +332,27 @@ object f_config_chart: Tf_config_chart
         end
         object Label107: TLabel
           Left = 207
-          Height = 13
+          Height = 15
           Top = 39
-          Width = 82
+          Width = 92
           Caption = 'Field Of Vision'
           Color = clNone
           ParentColor = False
         end
         object Label114: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 103
-          Width = 8
+          Width = 9
           Caption = '0'
           Color = clNone
           ParentColor = False
         end
         object Label57: TLabel
           Left = 183
-          Height = 13
+          Height = 15
           Top = 64
-          Width = 30
+          Width = 33
           Alignment = taRightJustify
           Caption = 'From'
           Color = clNone
@@ -360,18 +360,18 @@ object f_config_chart: Tf_config_chart
         end
         object Label74: TLabel
           Left = 87
-          Height = 13
+          Height = 15
           Top = 243
-          Width = 8
+          Width = 9
           Caption = '5'
           Color = clNone
           ParentColor = False
         end
         object Label5: TLabel
           Left = 287
-          Height = 13
+          Height = 15
           Top = 64
-          Width = 15
+          Width = 18
           Caption = 'To'
           Color = clNone
           ParentColor = False
@@ -694,53 +694,53 @@ object f_config_chart: Tf_config_chart
           Shape = bsFrame
         end
         object Label158: TLabel
-          Height = 13
-          Width = 101
+          Height = 15
+          Width = 112
           Caption = 'Projection Setting'
           Color = clNone
           ParentColor = False
         end
         object Labelp1: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 104
-          Width = 12
+          Width = 13
           Caption = '1 '
           Color = clNone
           ParentColor = False
         end
         object Labelp2: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 132
-          Width = 8
+          Width = 9
           Caption = '2'
           Color = clNone
           ParentColor = False
         end
         object Labelp3: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 160
-          Width = 8
+          Width = 9
           Caption = '3'
           Color = clNone
           ParentColor = False
         end
         object Labelp4: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 188
-          Width = 8
+          Width = 9
           Caption = '4'
           Color = clNone
           ParentColor = False
         end
         object Label165: TLabel
           Left = 27
-          Height = 13
+          Height = 15
           Top = 43
-          Width = 76
+          Width = 83
           Alignment = taRightJustify
           Caption = 'Field Number'
           Color = clNone
@@ -748,72 +748,72 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp0: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 76
-          Width = 8
+          Width = 9
           Caption = '0'
           Color = clNone
           ParentColor = False
         end
         object Labelp5: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 216
-          Width = 8
+          Width = 9
           Caption = '5'
           Color = clNone
           ParentColor = False
         end
         object Labelp6: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 244
-          Width = 8
+          Width = 9
           Caption = '6'
           Color = clNone
           ParentColor = False
         end
         object Labelp7: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 272
-          Width = 8
+          Width = 9
           Caption = '7'
           Color = clNone
           ParentColor = False
         end
         object Labelp8: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 300
-          Width = 8
+          Width = 9
           Caption = '8'
           Color = clNone
           ParentColor = False
         end
         object Labelp9: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 328
-          Width = 8
+          Width = 9
           Caption = '9'
           Color = clNone
           ParentColor = False
         end
         object Labelp10: TLabel
           Left = 62
-          Height = 13
+          Height = 15
           Top = 356
-          Width = 15
+          Width = 17
           Caption = '10'
           Color = clNone
           ParentColor = False
         end
         object Label172: TLabel
           Left = 195
-          Height = 13
+          Height = 15
           Top = 43
-          Width = 57
+          Width = 64
           Caption = 'Projection'
           Color = clNone
           ParentColor = False
@@ -1028,8 +1028,8 @@ object f_config_chart: Tf_config_chart
       object Page4: TPage
         Caption = 'Page4'
         object Label29: TLabel
-          Height = 13
-          Width = 113
+          Height = 15
+          Width = 124
           Caption = 'Object Filter Setting'
           Color = clNone
           ParentColor = False
@@ -1043,10 +1043,10 @@ object f_config_chart: Tf_config_chart
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
-            Height = 19
+            Height = 22
             Hint = 'Copy|Copies the selection and puts it on the Clipboard'
             Top = 22
-            Width = 87
+            Width = 94
             Caption = 'Filter stars '
             OnClick = StarBoxClick
             TabOrder = 0
@@ -1065,108 +1065,108 @@ object f_config_chart: Tf_config_chart
               TabOrder = 2
               object Label32: TLabel
                 Left = 25
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '1'
                 Color = clNone
                 ParentColor = False
               end
               object Label33: TLabel
                 Left = 66
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '2'
                 Color = clNone
                 ParentColor = False
               end
               object Label34: TLabel
                 Left = 107
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '3'
                 Color = clNone
                 ParentColor = False
               end
               object Label35: TLabel
                 Left = 148
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '4'
                 Color = clNone
                 ParentColor = False
               end
               object Label36: TLabel
                 Left = 189
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '5'
                 Color = clNone
                 ParentColor = False
               end
               object Label38: TLabel
                 Left = 230
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '6'
                 Color = clNone
                 ParentColor = False
               end
               object Label39: TLabel
                 Left = 271
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '7'
                 Color = clNone
                 ParentColor = False
               end
               object Label40: TLabel
                 Left = 312
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '8'
                 Color = clNone
                 ParentColor = False
               end
               object Label76: TLabel
                 Left = 353
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 9
                 Caption = '9'
                 Color = clNone
                 ParentColor = False
               end
               object Label78: TLabel
                 Left = 394
-                Height = 13
+                Height = 15
                 Top = 32
-                Width = 15
+                Width = 17
                 Caption = '10'
                 Color = clNone
                 ParentColor = False
               end
               object Label108: TLabel
                 Left = 8
-                Height = 13
+                Height = 15
                 Top = 8
-                Width = 135
+                Width = 144
                 Caption = 'Field of vision number :'
                 Color = clNone
                 ParentColor = False
               end
               object Label109: TLabel
                 Left = 8
-                Height = 13
+                Height = 15
                 Top = 48
-                Width = 117
+                Width = 125
                 Caption = 'Limiting magnitude :'
                 Color = clNone
                 ParentColor = False
@@ -1330,9 +1330,9 @@ object f_config_chart: Tf_config_chart
               TabOrder = 1
               object Label110: TLabel
                 Left = 8
-                Height = 13
+                Height = 15
                 Top = 12
-                Width = 119
+                Width = 134
                 Caption = 'Naked eye reference'
                 Color = clNone
                 ParentColor = False
@@ -1354,9 +1354,9 @@ object f_config_chart: Tf_config_chart
             end
             object StarAutoBox: TCheckBox
               Left = 4
-              Height = 19
+              Height = 22
               Top = 6
-              Width = 77
+              Width = 85
               Caption = 'Automatic'
               OnClick = StarAutoBoxClick
               TabOrder = 0
@@ -1372,27 +1372,27 @@ object f_config_chart: Tf_config_chart
           TabOrder = 1
           object BigNebUnit: TLabel
             Left = 389
-            Height = 13
+            Height = 15
             Top = 15
-            Width = 47
+            Width = 49
             Caption = 'minutes'
             Color = clNone
             ParentColor = False
           end
           object NebBox: TCheckBox
             Left = 9
-            Height = 19
+            Height = 22
             Top = 11
-            Width = 98
+            Width = 108
             Caption = 'Filter nebulae'
             OnClick = NebBoxClick
             TabOrder = 0
           end
           object BigNebBox: TCheckBox
             Left = 157
-            Height = 19
+            Height = 22
             Top = 11
-            Width = 148
+            Width = 164
             Caption = 'Hide object wider than'
             OnClick = BigNebBoxClick
             TabOrder = 1
@@ -1405,117 +1405,117 @@ object f_config_chart: Tf_config_chart
             TabOrder = 3
             object Label48: TLabel
               Left = 8
-              Height = 13
+              Height = 15
               Top = 48
-              Width = 115
+              Width = 126
               Caption = 'Limiting Magnitude :'
               Color = clNone
               ParentColor = False
             end
             object Label49: TLabel
               Left = 8
-              Height = 13
+              Height = 15
               Top = 101
-              Width = 156
+              Width = 169
               Caption = 'Limiting Size (arcminutes) :'
               Color = clNone
               ParentColor = False
             end
             object Label41: TLabel
               Left = 25
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '1'
               Color = clNone
               ParentColor = False
             end
             object Label42: TLabel
               Left = 66
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '2'
               Color = clNone
               ParentColor = False
             end
             object Label43: TLabel
               Left = 107
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '3'
               Color = clNone
               ParentColor = False
             end
             object Label44: TLabel
               Left = 148
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '4'
               Color = clNone
               ParentColor = False
             end
             object Label45: TLabel
               Left = 189
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '5'
               Color = clNone
               ParentColor = False
             end
             object Label46: TLabel
               Left = 230
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '6'
               Color = clNone
               ParentColor = False
             end
             object Label47: TLabel
               Left = 271
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '7'
               Color = clNone
               ParentColor = False
             end
             object Label79: TLabel
               Left = 312
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '8'
               Color = clNone
               ParentColor = False
             end
             object Label80: TLabel
               Left = 353
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 8
+              Width = 9
               Caption = '9'
               Color = clNone
               ParentColor = False
             end
             object Label111: TLabel
               Left = 394
-              Height = 13
+              Height = 15
               Top = 32
-              Width = 15
+              Width = 17
               Caption = '10'
               Color = clNone
               ParentColor = False
             end
             object Label112: TLabel
               Left = 8
-              Height = 13
+              Height = 15
               Top = 8
-              Width = 135
+              Width = 144
               Caption = 'Field of vision number :'
               Color = clNone
               ParentColor = False
@@ -1839,150 +1839,169 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TPage
         Caption = 'Page5'
-        object Bevel9: TBevel
-          Left = 6
-          Height = 353
-          Top = 22
-          Width = 470
-          Shape = bsFrame
-        end
         object Label159: TLabel
-          Height = 13
-          Width = 69
+          Height = 15
+          Width = 76
           Caption = 'Grid Setting'
           Color = clNone
           ParentColor = False
         end
         object Label160: TLabel
-          Left = 23
-          Height = 13
-          Top = 32
-          Width = 76
+          Left = 21
+          Height = 34
+          Top = 21
+          Width = 80
+          AutoSize = False
           Caption = 'Field Number'
           Color = clNone
           ParentColor = False
+          WordWrap = True
         end
         object Label176: TLabel
-          Left = 139
-          Height = 13
-          Top = 32
-          Width = 119
+          Left = 125
+          Height = 34
+          Top = 21
+          Width = 112
+          AutoSize = False
           Caption = 'Degree Grid Spacing'
           Color = clNone
           ParentColor = False
+          WordWrap = True
         end
         object Label175: TLabel
-          Left = 307
-          Height = 13
-          Top = 32
-          Width = 105
+          Left = 261
+          Height = 34
+          Top = 21
+          Width = 112
+          AutoSize = False
           Caption = 'Hour Grid Spacing'
           Color = clNone
           ParentColor = False
+          WordWrap = True
         end
         object Label161: TLabel
-          Left = 43
-          Height = 13
-          Top = 87
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 92
+          Width = 9
           Caption = '1'
           Color = clNone
           ParentColor = False
         end
         object Label162: TLabel
-          Left = 43
-          Height = 13
-          Top = 116
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 117
+          Width = 9
           Caption = '2'
           Color = clNone
           ParentColor = False
         end
         object Label163: TLabel
-          Left = 43
-          Height = 13
-          Top = 145
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 142
+          Width = 9
           Caption = '3'
           Color = clNone
           ParentColor = False
         end
         object Label164: TLabel
-          Left = 43
-          Height = 13
-          Top = 173
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 167
+          Width = 9
           Caption = '4'
           Color = clNone
           ParentColor = False
         end
         object Label166: TLabel
-          Left = 43
-          Height = 13
-          Top = 59
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 67
+          Width = 9
           Caption = '0'
           Color = clNone
           ParentColor = False
         end
         object Label167: TLabel
-          Left = 43
-          Height = 13
-          Top = 202
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 192
+          Width = 9
           Caption = '5'
           Color = clNone
           ParentColor = False
         end
         object Label168: TLabel
-          Left = 43
-          Height = 13
-          Top = 231
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 217
+          Width = 9
           Caption = '6'
           Color = clNone
           ParentColor = False
         end
         object Label169: TLabel
-          Left = 43
-          Height = 13
-          Top = 259
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 242
+          Width = 9
           Caption = '7'
           Color = clNone
           ParentColor = False
         end
         object Label170: TLabel
-          Left = 43
-          Height = 13
-          Top = 288
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 267
+          Width = 9
           Caption = '8'
           Color = clNone
           ParentColor = False
         end
         object Label174: TLabel
-          Left = 43
-          Height = 13
-          Top = 317
-          Width = 8
+          Left = 29
+          Height = 15
+          Top = 292
+          Width = 9
           Caption = '9'
           Color = clNone
           ParentColor = False
         end
         object Label177: TLabel
-          Left = 43
-          Height = 13
-          Top = 346
-          Width = 15
+          Left = 29
+          Height = 15
+          Top = 317
+          Width = 17
           Caption = '10'
           Color = clNone
           ParentColor = False
         end
+        object Label3: TLabel
+          Left = 389
+          Height = 32
+          Top = 23
+          Width = 67
+          AutoSize = False
+          Caption = 'Show Grid'
+          Color = clNone
+          ParentColor = False
+          WordWrap = True
+        end
+        object Label4: TLabel
+          Left = 61
+          Height = 15
+          Top = 357
+          Width = 121
+          Caption = 'Compass rose size'
+          Color = clNone
+          ParentColor = False
+        end
         object MaskEdit1: TMaskEdit
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 53
+          Top = 61
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -1993,9 +2012,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit2: TMaskEdit
           Tag = 1
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 81
+          Top = 86
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2006,9 +2025,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit3: TMaskEdit
           Tag = 2
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 110
+          Top = 111
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2019,9 +2038,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit4: TMaskEdit
           Tag = 3
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 139
+          Top = 136
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2032,9 +2051,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit5: TMaskEdit
           Tag = 4
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 167
+          Top = 161
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2045,9 +2064,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit6: TMaskEdit
           Tag = 5
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 196
+          Top = 186
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2058,9 +2077,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit7: TMaskEdit
           Tag = 6
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 225
+          Top = 211
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2071,9 +2090,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit8: TMaskEdit
           Tag = 7
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 253
+          Top = 236
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2084,9 +2103,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit9: TMaskEdit
           Tag = 8
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 282
+          Top = 261
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2097,9 +2116,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit10: TMaskEdit
           Tag = 9
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 311
+          Top = 286
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2110,9 +2129,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit11: TMaskEdit
           Tag = 10
-          Left = 139
+          Left = 125
           Height = 21
-          Top = 340
+          Top = 311
           Width = 90
           EditMask = '!99\d99\m99\s;1;_'
           MaxLength = 9
@@ -2122,9 +2141,9 @@ object f_config_chart: Tf_config_chart
           OnChange = DegSpacingChange
         end
         object MaskEdit12: TMaskEdit
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 53
+          Top = 61
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2135,9 +2154,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit13: TMaskEdit
           Tag = 1
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 81
+          Top = 86
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2148,9 +2167,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit14: TMaskEdit
           Tag = 2
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 110
+          Top = 111
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2161,9 +2180,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit15: TMaskEdit
           Tag = 3
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 139
+          Top = 136
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2174,9 +2193,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit16: TMaskEdit
           Tag = 4
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 167
+          Top = 161
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2187,9 +2206,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit17: TMaskEdit
           Tag = 5
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 196
+          Top = 186
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2200,9 +2219,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit18: TMaskEdit
           Tag = 6
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 225
+          Top = 211
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2213,9 +2232,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit19: TMaskEdit
           Tag = 7
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 253
+          Top = 236
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2226,9 +2245,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit20: TMaskEdit
           Tag = 8
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 282
+          Top = 261
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2239,9 +2258,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit21: TMaskEdit
           Tag = 9
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 311
+          Top = 286
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2252,9 +2271,9 @@ object f_config_chart: Tf_config_chart
         end
         object MaskEdit22: TMaskEdit
           Tag = 10
-          Left = 310
+          Left = 261
           Height = 21
-          Top = 340
+          Top = 311
           Width = 90
           EditMask = '!99\h99\m99\s;1;_'
           MaxLength = 9
@@ -2263,12 +2282,144 @@ object f_config_chart: Tf_config_chart
           Text = '  h  m  s'
           OnChange = HourSpacingChange
         end
+        object CheckBox1: TCheckBox
+          Left = 397
+          Height = 22
+          Top = 60
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 22
+        end
+        object CheckBox2: TCheckBox
+          Tag = 1
+          Left = 397
+          Height = 22
+          Top = 85
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 23
+        end
+        object CheckBox4: TCheckBox
+          Tag = 3
+          Left = 397
+          Height = 22
+          Top = 135
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 24
+        end
+        object CheckBox5: TCheckBox
+          Tag = 4
+          Left = 397
+          Height = 22
+          Top = 160
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 25
+        end
+        object CheckBox6: TCheckBox
+          Tag = 5
+          Left = 397
+          Height = 22
+          Top = 185
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 26
+        end
+        object CheckBox7: TCheckBox
+          Tag = 6
+          Left = 397
+          Height = 22
+          Top = 210
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 27
+        end
+        object CheckBox8: TCheckBox
+          Tag = 7
+          Left = 397
+          Height = 22
+          Top = 235
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 28
+        end
+        object CheckBox9: TCheckBox
+          Tag = 8
+          Left = 397
+          Height = 22
+          Top = 260
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 29
+        end
+        object CheckBox10: TCheckBox
+          Tag = 9
+          Left = 397
+          Height = 22
+          Top = 285
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 30
+        end
+        object CheckBox13: TCheckBox
+          Left = 261
+          Height = 22
+          Top = 350
+          Width = 197
+          Caption = 'Always show compass rose'
+          OnClick = CheckBox13Click
+          TabOrder = 31
+        end
+        object CheckBox3: TCheckBox
+          Tag = 2
+          Left = 397
+          Height = 22
+          Top = 110
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 32
+        end
+        object CheckBox11: TCheckBox
+          Tag = 10
+          Left = 397
+          Height = 22
+          Top = 310
+          Width = 24
+          OnClick = ShowGridBoxClick
+          TabOrder = 33
+        end
+        object Button2: TButton
+          Left = 365
+          Height = 25
+          Top = 381
+          Width = 75
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Default'
+          OnClick = Button2Click
+          TabOrder = 34
+        end
+        object TrackBar1: TTrackBar
+          Left = 21
+          Height = 31
+          Top = 373
+          Width = 220
+          Frequency = 5
+          LineSize = 5
+          Max = 130
+          Min = 30
+          OnChange = TrackBar1Change
+          PageSize = 10
+          Position = 80
+          TickStyle = tsNone
+          TabOrder = 35
+        end
       end
       object Page6: TPage
         Caption = 'Page6'
         object Label95: TLabel
-          Height = 13
-          Width = 105
+          Height = 15
+          Width = 115
           Caption = 'Object List Setting'
           Color = clNone
           ParentColor = False
@@ -2282,45 +2433,45 @@ object f_config_chart: Tf_config_chart
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32
-            Height = 19
+            Height = 22
             Top = 24
-            Width = 52
+            Width = 57
             Caption = 'Stars'
             OnClick = liststarClick
             TabOrder = 0
           end
           object listneb: TCheckBox
             Left = 32
-            Height = 19
+            Height = 22
             Top = 58
-            Width = 67
+            Width = 75
             Caption = 'Nebulae'
             OnClick = listnebClick
             TabOrder = 1
           end
           object listpla: TCheckBox
             Left = 32
-            Height = 19
+            Height = 22
             Top = 92
-            Width = 136
+            Width = 148
             Caption = 'Solar System object'
             OnClick = listplaClick
             TabOrder = 2
           end
           object listvar: TCheckBox
             Left = 32
-            Height = 19
+            Height = 22
             Top = 126
-            Width = 102
+            Width = 112
             Caption = 'Variable Stars'
             OnClick = listvarClick
             TabOrder = 3
           end
           object listdbl: TCheckBox
             Left = 32
-            Height = 19
+            Height = 22
             Top = 160
-            Width = 95
+            Width = 104
             Caption = 'Double Stars'
             OnClick = listdblClick
             TabOrder = 4

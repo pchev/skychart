@@ -547,6 +547,7 @@ type
     NeedRestart,NeedToInitializeDB : Boolean;
     InitialChartNum: integer;
     AutoRefreshLock: Boolean;
+    compass,arrow: TBitmap;
     procedure FormMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
   {$ifdef win32}
     savwincol  : array[0..35] of Tcolor;
@@ -716,6 +717,8 @@ begin
   Child.sc.plot.starshape:=starshape.Picture.Bitmap;
   Child.sc.plot.cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
   Child.sc.plot.cfgplot.starshapew:=Child.sc.plot.cfgplot.starshapesize div 2;
+  Child.sc.plot.compassrose:=compass;
+  Child.sc.plot.compassarrow:=arrow;
   Child.sc.cfgsc.Assign(cfg1);
   Child.sc.cfgsc.chartname:=CName;
   Child.onImageSetFocus:=ImageSetFocus;
@@ -930,6 +933,10 @@ try
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp') then
+    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp') then
+    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp');
  application.ProcessMessages; // apply any resizing
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
@@ -1123,6 +1130,8 @@ end else Plan404ok:=false;
    MultiDoc1.TitleColor:=clWhite;
    MultiDoc1.BorderColor:=$808080;
 {$endif}
+compass:=TBitmap.create;
+arrow:=TBitmap.create;
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -1140,6 +1149,8 @@ cfgs.Free;
 cfgm.Free;
 def_cfgplot.Free;
 cfgp.Free;
+compass.free;
+arrow.free;
 except
 writetrace('error destroy '+name);
 end;
@@ -2845,13 +2856,15 @@ catalog.cfgshr.FieldNum[7]:=90;
 catalog.cfgshr.FieldNum[8]:=180;
 catalog.cfgshr.FieldNum[9]:=310;
 catalog.cfgshr.FieldNum[10]:=360;
-catalog.cfgshr.DegreeGridSpacing[0]:=5/60;
-catalog.cfgshr.DegreeGridSpacing[1]:=10/60;
-catalog.cfgshr.DegreeGridSpacing[2]:=20/60;
-catalog.cfgshr.DegreeGridSpacing[3]:=30/60;
-catalog.cfgshr.DegreeGridSpacing[4]:=1;
-catalog.cfgshr.DegreeGridSpacing[5]:=2;
-catalog.cfgshr.DegreeGridSpacing[6]:=5;
+catalog.cfgshr.ShowCRose:=false;
+catalog.cfgshr.CRoseSz:=80;
+catalog.cfgshr.DegreeGridSpacing[0]:=1000+5/60;
+catalog.cfgshr.DegreeGridSpacing[1]:=1000+10/60;
+catalog.cfgshr.DegreeGridSpacing[2]:=1000+20/60;
+catalog.cfgshr.DegreeGridSpacing[3]:=1000+30/60;
+catalog.cfgshr.DegreeGridSpacing[4]:=1000+1;
+catalog.cfgshr.DegreeGridSpacing[5]:=1000+2;
+catalog.cfgshr.DegreeGridSpacing[6]:=1000+5;
 catalog.cfgshr.DegreeGridSpacing[7]:=10;
 catalog.cfgshr.DegreeGridSpacing[8]:=15;
 catalog.cfgshr.DegreeGridSpacing[9]:=20;
@@ -3032,6 +3045,8 @@ for i:=0 to maxcolor do cplot.color[i]:=ReadInteger(section,'color'+inttostr(i),
 for i:=1 to 7 do cplot.skycolor[i]:=ReadInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
 cplot.bgColor:=ReadInteger(section,'bgColor',cplot.bgColor);
 section:='grid';
+catalog.cfgshr.ShowCRose:=ReadBool(section,'ShowCRose',catalog.cfgshr.ShowCRose);
+catalog.cfgshr.CRoseSz:=ReadInteger(section,'CRoseSz',catalog.cfgshr.CRoseSz);
 for i:=0 to maxfield do catalog.cfgshr.HourGridSpacing[i]:=ReadFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=0 to maxfield do catalog.cfgshr.DegreeGridSpacing[i]:=ReadFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
 section:='Finder';
@@ -3452,6 +3467,8 @@ for i:=1 to numlabtype do begin
    WriteInteger(section,'LabelSize'+inttostr(i),cplot.LabelSize[i]);
 end;
 section:='grid';
+WriteBool(section,'ShowCRose',catalog.cfgshr.ShowCRose);
+WriteInteger(section,'CRoseSz',catalog.cfgshr.CRoseSz);
 for i:=0 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=0 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
 section:='Finder';
@@ -4726,11 +4743,25 @@ end;
 end;
 
 procedure Tf_main.SetTheme;
+var i : integer;
 begin
  if nightvision then
     SetNightVision(true)
  else
     SetButtonImage(cfgm.ButtonStandard);
+    
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp') then begin
+    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp');
+    for i:=0 to MultiDoc1.ChildCount-1 do
+        if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+           Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassrose:=compass;
+ end;
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp') then begin
+    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp');
+    for i:=0 to MultiDoc1.ChildCount-1 do
+        if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+           Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassarrow:=arrow;
+ end;
 end;
 
 procedure Tf_main.SetButtonImage(button: Integer);

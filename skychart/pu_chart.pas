@@ -1528,7 +1528,7 @@ repeat
   txt:=txt+html_br;
 until buf='';
 // coordinates
-txt:=txt+html_br+html_b+rsCoordinates+htms_b+html_br+html_ffx;
+txt:=txt+html_br+html_b+rsCoordinates+htms_b+html_br{+html_ffx};
 txt:=txt+html_b+sc.cfgsc.EquinoxName+blank+htms_b+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec)+html_br;
 if (sc.cfgsc.EquinoxName<>'J2000') then begin
    ra:=sc.cfgsc.FindRA;
@@ -1558,7 +1558,7 @@ dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,jd2000,ra,dec);
 Eq2Gal(ra,dec,a,h,sc.cfgsc) ;
 txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
-txt:=txt+htms_f+html_br;
+txt:=txt{+htms_f}+html_br;
 // local position
 txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
 txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( '+rsUT+' + '+ArmtoStr(sc.cfgsc.TimeZone)+' )'+html_br;

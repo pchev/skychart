@@ -119,7 +119,7 @@ implementation
 uses u_projection;
 
 var
-  dummy_double : double;
+  dummy_ext : extended;
   ftrace : textfile;
 
 Function mm2pi(l,PrinterResolution : single): integer;
@@ -170,10 +170,8 @@ if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
 end;
 
 function IsNumber(n : string) : boolean;
-var i : integer;
 begin
-val(n,Dummy_double,i);
-result:= (i=0) ;
+result:=TextToFloat(PChar(n),Dummy_ext);
 end;
 
 function roundF(x:double;n:integer):double;
@@ -1305,8 +1303,13 @@ end;
 
 Procedure GetPrinterResolution(var name : string; var resol : integer);
 begin
-name:=Printer.Printers[Printer.PrinterIndex];
-resol:=Printer.XDPI;
+if Printer.PrinterIndex >=0 then begin
+  name:=Printer.Printers[Printer.PrinterIndex];
+  resol:=Printer.XDPI;
+end else begin
+  name:='';
+  resol:=72;
+end;
 end;
 
 procedure PrintStrings(str: TStrings; PrtTitle, PrtText, PrtTextDate:string; orient:TPrinterOrientation);
