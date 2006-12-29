@@ -37,10 +37,22 @@ type
   Tf_config_chart = class(TForm)
     ApparentType: TRadioGroup;
     Bevel7: TBevel;
-    Bevel9: TBevel;
     BigNebBox: TCheckBox;
     BigNebUnit: TLabel;
     Button1: TButton;
+    Button2: TButton;
+    CheckBox1: TCheckBox;
+    CheckBox10: TCheckBox;
+    CheckBox13: TCheckBox;
+    CheckBox11: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
+    CheckBox7: TCheckBox;
+    CheckBox8: TCheckBox;
+    CheckBox9: TCheckBox;
     ComboBox1: TComboBox;
     ComboBox10: TComboBox;
     ComboBox11: TComboBox;
@@ -160,6 +172,7 @@ type
     Label177: TLabel;
     Label2: TLabel;
     Label29: TLabel;
+    Label3: TLabel;
     Label30: TLabel;
     Label31: TLabel;
     Label32: TLabel;
@@ -169,6 +182,7 @@ type
     Label36: TLabel;
     Label38: TLabel;
     Label39: TLabel;
+    Label4: TLabel;
     Label40: TLabel;
     Label41: TLabel;
     Label42: TLabel;
@@ -251,10 +265,15 @@ type
     StarAutoBox: TCheckBox;
     StarBox: TCheckBox;
     Notebook1: TNotebook;
+    TrackBar1: TTrackBar;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure CheckBox13Click(Sender: TObject);
+    procedure ShowGridBoxClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure Notebook1PageChanged(Sender: TObject);
+    procedure TrackBar1Change(Sender: TObject);
     procedure equinoxtypeClick(Sender: TObject);
     procedure equinox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -370,6 +389,10 @@ projectiontype.Items[0]:=rsEquatorialCo;
 projectiontype.Items[1]:=rsAzimuthalCoo;
 projectiontype.Items[2]:=rsGalacticCoor;
 projectiontype.Items[3]:=rsEclipticCoor;
+Button2.Caption:=rsDefault;
+Label3.caption:=rsShowGrid;
+Label4.caption:=rsCompassRoseS;
+CheckBox13.caption:=rsAlwaysShowCo;
 end;
 
 constructor Tf_config_chart.Create(AOwner:TComponent);
@@ -418,6 +441,8 @@ end;
 
 procedure Tf_config_chart.ShowGridSpacing;
 begin
+  CheckBox13.Checked:=cshr.ShowCRose;
+  TrackBar1.Position:=cshr.CRoseSz;
   MaskEdit1.text:=DEToStr3(cshr.DegreeGridSpacing[0]);
   MaskEdit2.text:=DEToStr3(cshr.DegreeGridSpacing[1]);
   MaskEdit3.text:=DEToStr3(cshr.DegreeGridSpacing[2]);
@@ -429,6 +454,28 @@ begin
   MaskEdit9.text:=DEToStr3(cshr.DegreeGridSpacing[8]);
   MaskEdit10.text:=DEToStr3(cshr.DegreeGridSpacing[9]);
   MaskEdit11.text:=DEToStr3(cshr.DegreeGridSpacing[10]);
+  MaskEdit1.Enabled:=cshr.DegreeGridSpacing[0]<1000;
+  MaskEdit2.Enabled:=cshr.DegreeGridSpacing[1]<1000;
+  MaskEdit3.Enabled:=cshr.DegreeGridSpacing[2]<1000;
+  MaskEdit4.Enabled:=cshr.DegreeGridSpacing[3]<1000;
+  MaskEdit5.Enabled:=cshr.DegreeGridSpacing[4]<1000;
+  MaskEdit6.Enabled:=cshr.DegreeGridSpacing[5]<1000;
+  MaskEdit7.Enabled:=cshr.DegreeGridSpacing[6]<1000;
+  MaskEdit8.Enabled:=cshr.DegreeGridSpacing[7]<1000;
+  MaskEdit9.Enabled:=cshr.DegreeGridSpacing[8]<1000;
+  MaskEdit10.Enabled:=cshr.DegreeGridSpacing[9]<1000;
+  MaskEdit11.Enabled:=cshr.DegreeGridSpacing[10]<1000;
+  CheckBox1.Checked:=MaskEdit1.Enabled;
+  CheckBox2.Checked:=MaskEdit2.Enabled;
+  CheckBox3.Checked:=MaskEdit3.Enabled;
+  CheckBox4.Checked:=MaskEdit4.Enabled;
+  CheckBox5.Checked:=MaskEdit5.Enabled;
+  CheckBox6.Checked:=MaskEdit6.Enabled;
+  CheckBox7.Checked:=MaskEdit7.Enabled;
+  CheckBox8.Checked:=MaskEdit8.Enabled;
+  CheckBox9.Checked:=MaskEdit9.Enabled;
+  CheckBox10.Checked:=MaskEdit10.Enabled;
+  CheckBox11.Checked:=MaskEdit11.Enabled;
   MaskEdit12.text:=ArToStr3(cshr.HourGridSpacing[0]);
   MaskEdit13.text:=ArToStr3(cshr.HourGridSpacing[1]);
   MaskEdit14.text:=ArToStr3(cshr.HourGridSpacing[2]);
@@ -440,6 +487,17 @@ begin
   MaskEdit20.text:=ArToStr3(cshr.HourGridSpacing[8]);
   MaskEdit21.text:=ArToStr3(cshr.HourGridSpacing[9]);
   MaskEdit22.text:=ArToStr3(cshr.HourGridSpacing[10]);
+  MaskEdit12.Enabled:=MaskEdit1.Enabled;
+  MaskEdit13.Enabled:=MaskEdit2.Enabled;
+  MaskEdit14.Enabled:=MaskEdit3.Enabled;
+  MaskEdit15.Enabled:=MaskEdit4.Enabled;
+  MaskEdit16.Enabled:=MaskEdit5.Enabled;
+  MaskEdit17.Enabled:=MaskEdit6.Enabled;
+  MaskEdit18.Enabled:=MaskEdit7.Enabled;
+  MaskEdit19.Enabled:=MaskEdit8.Enabled;
+  MaskEdit20.Enabled:=MaskEdit9.Enabled;
+  MaskEdit21.Enabled:=MaskEdit10.Enabled;
+  MaskEdit22.Enabled:=MaskEdit11.Enabled;
 end;
 
 procedure Tf_config_chart.ShowField;
@@ -631,6 +689,12 @@ else
 
 end;
 
+procedure Tf_config_chart.TrackBar1Change(Sender: TObject);
+begin
+if LockChange then exit;
+cshr.CRoseSz:=TrackBar1.Position;
+end;
+
 procedure Tf_config_chart.equinox1Change(Sender: TObject);
 begin
 if LockChange then exit;
@@ -803,6 +867,54 @@ if LockChange then exit;
 if sender is TFloatEdit then with sender as TFloatEdit do begin
   cshr.NebSizeFilter[tag]:=Value;
 end;
+end;
+
+procedure Tf_config_chart.Button2Click(Sender: TObject);
+begin
+cshr.DegreeGridSpacing[0]:=1000+5/60;
+cshr.DegreeGridSpacing[1]:=1000+10/60;
+cshr.DegreeGridSpacing[2]:=1000+20/60;
+cshr.DegreeGridSpacing[3]:=1000+30/60;
+cshr.DegreeGridSpacing[4]:=1000+1;
+cshr.DegreeGridSpacing[5]:=1000+2;
+cshr.DegreeGridSpacing[6]:=1000+5;
+cshr.DegreeGridSpacing[7]:=10;
+cshr.DegreeGridSpacing[8]:=15;
+cshr.DegreeGridSpacing[9]:=20;
+cshr.DegreeGridSpacing[10]:=20;
+cshr.HourGridSpacing[0]:=20/3600;
+cshr.HourGridSpacing[1]:=30/3600;
+cshr.HourGridSpacing[2]:=1/60;
+cshr.HourGridSpacing[3]:=2/60;
+cshr.HourGridSpacing[4]:=5/60;
+cshr.HourGridSpacing[5]:=15/60;
+cshr.HourGridSpacing[6]:=30/60;
+cshr.HourGridSpacing[7]:=1;
+cshr.HourGridSpacing[8]:=1;
+cshr.HourGridSpacing[9]:=2;
+cshr.HourGridSpacing[10]:=2;
+ShowGridSpacing;
+end;
+
+procedure Tf_config_chart.CheckBox13Click(Sender: TObject);
+begin
+if LockChange then exit;
+  cshr.ShowCRose:=CheckBox13.Checked;
+end;
+
+procedure Tf_config_chart.ShowGridBoxClick(Sender: TObject);
+begin
+if LockChange then exit;
+if sender is TCheckBox then with sender as TCheckBox do begin
+  if checked then begin
+     if cshr.DegreeGridSpacing[tag]>1000 then begin
+        cshr.DegreeGridSpacing[tag]:=cshr.DegreeGridSpacing[tag]-1000;
+     end
+  end else begin
+     cshr.DegreeGridSpacing[tag]:=cshr.DegreeGridSpacing[tag]+1000;
+  end;
+end;
+ShowGridSpacing;
 end;
 
 procedure Tf_config_chart.DegSpacingChange(Sender: TObject);

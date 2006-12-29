@@ -35,8 +35,8 @@ const MaxColor = 35;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[1..7]of Tcolor;
 
-const cdcversion = 'Version 3 beta 0.1.2 ';
-      cdcver     = '3.0.1.2';
+const cdcversion = 'Version 3 beta 0.1.3 svn ';
+      cdcver     = '3.0.1.3';
       cdccpy = 'Copyright (C) 2002-2006 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,' ;
@@ -378,6 +378,8 @@ type
                 NebSizeFilter : array [0..MaxField] of double;  // Limiting size for each field
                 HourGridSpacing : array [0..MaxField] of double;
                 DegreeGridSpacing : array [0..MaxField] of double;
+                ShowCRose : Boolean; //  compass rose
+                CRoseSz : Integer;
                 EquinoxType : integer;
                 DefaultJDchart : double;
                 EquinoxChart : string;
@@ -412,10 +414,6 @@ type
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,FillHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY: double;
-                //  compass rose
-                ShowCRose : Boolean;
-                CRoseType : Integer;
-                //  end of compass rose
                 PMon,DrawPMon,ApparentPos : boolean; // use proper motion
                 LabelOrientation, ManualTelescopeType : integer;
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
@@ -983,6 +981,8 @@ for i:=0 to MaxField do NebMagFilter[i]:=Source.NebMagFilter[i];
 for i:=0 to MaxField do NebSizeFilter[i]:=Source.NebSizeFilter[i];
 for i:=0 to MaxField do HourGridSpacing[i]:=Source.HourGridSpacing[i];
 for i:=0 to MaxField do DegreeGridSpacing[i]:=Source.DegreeGridSpacing[i];
+ShowCRose:=Source.ShowCRose ;
+CRoseSz:=Source.CRoseSz ;
 EquinoxType:=Source.EquinoxType;
 DefaultJDchart:=Source.DefaultJDchart;
 EquinoxChart:=Source.EquinoxChart;
@@ -1139,8 +1139,6 @@ DT_UT_val:=Source.DT_UT_val ;
 GRSlongitude:=Source.GRSlongitude ;
 TelescopeTurnsX:=Source.TelescopeTurnsX ;
 TelescopeTurnsY:=Source.TelescopeTurnsY ;
-ShowCRose:=Source.ShowCRose ;
-CRoseType:=Source.CRoseType ;
 PMon:=Source.PMon ;
 DrawPMon:=Source.DrawPMon ;
 ApparentPos:=Source.ApparentPos ;

@@ -91,7 +91,7 @@ type
     cfgchart: Tconf_chart;
     cbmp : Tbitmap;
     cnv, destcnv  : Tcanvas;
-    Fstarshape,starbmp: Tbitmap;
+    Fstarshape,starbmp,compassrose,compassarrow: Tbitmap;
     starbmpw:integer;
     IntfImg : TLazIntfImage;
     editlabelmenu: Tpopupmenu;
@@ -127,6 +127,7 @@ type
       Procedure PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
       Procedure PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
 //---------------------------------------------
+     Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
      Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap);
      procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean);
@@ -1741,7 +1742,7 @@ end;
 
 function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
 var ts:TSize;
-    arect: TRect;
+    //arect: TRect;
 begin
 // If drawing to the printer force to plot the text label to the canvas
 // even if label editing is selected
@@ -1771,8 +1772,9 @@ with cnv do begin
   if cnv is TPostscriptCanvas then begin
     TextOut(xx,yy,txt);
   end else begin
-    arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-    textRect(arect,xx,yy,txt);
+    TextOut(xx,yy,txt);
+    //arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
+    //textRect(arect,xx,yy,txt);
   end;
 end;
 // If drawing to the screen use movable label 
@@ -2053,6 +2055,57 @@ with cnv do begin
   end;
   Brush.Style:=bsClear;
   Ellipse(round(x1),round(y1),round(x2),round(y2));
+  Pen.Mode:=pmCopy;
+  brush.Style:=bsSolid;
+end;
+end;
+
+
+Procedure TSplot.PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
+var c,s: extended;
+    i: integer;
+begin
+if (cfgplot.nebplot>0)and(compassrose<>nil)and(compassrose.width>0)and(compassarrow<>nil)and(compassarrow.width>0)
+ then begin
+   case RoseType of
+    1: PlotImage(rosex,rosey,2*roserd,2*roserd,rot,flipx,flipy,WhiteBg,true,compassrose);
+    2: PlotImage(rosex,rosey,2*roserd,2*roserd,rot,flipx,flipy,WhiteBg,true,compassarrow);
+   end;
+end else
+with cnv do begin
+  if FlipY<0 then rot:=pi-rot;
+  if FlipX<0 then rot:=-rot;
+  Pen.Width:=cfgchart.drawpen;
+  Pen.Mode:=pmCopy;
+  Brush.Style:=bsClear;
+  case RoseType of
+  1: begin
+     Pen.Color:=cfgplot.Color[13];
+     Ellipse(round(rosex-roserd),round(rosey-roserd),round(rosex+roserd),round(rosey+roserd));
+     sincos(rot,c,s);
+     moveto(round(rosex+(roserd*s/8)),round(rosey-(roserd/8*c)));
+     lineto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     moveto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     lineto(round(rosex-(roserd*s/8)),round(rosey+(roserd/8*c)));
+     moveto(round(rosex-(roserd*s/8)),round(rosey+(roserd/8*c)));
+     lineto(round(rosex+(roserd*s/8)),round(rosey-(roserd/8*c)));
+     for i:=1 to 7 do begin
+         sincos(rot+i*pi/4,c,s);
+         moveto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+         lineto(round(rosex-(0.9*roserd*c)),round(rosey-(0.9*roserd*s)));
+     end;
+     end;
+  2: begin
+     Pen.Color:=cfgplot.Color[12];
+     sincos(rot,c,s);
+     moveto(round(rosex+(roserd*s/8)),round(rosey-(roserd/8*c)));
+     lineto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     moveto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     lineto(round(rosex-(roserd*s/8)),round(rosey+(roserd/8*c)));
+     moveto(round(rosex-(roserd*s/8)),round(rosey+(roserd/8*c)));
+     lineto(round(rosex+(roserd*s/8)),round(rosey-(roserd/8*c)));
+     end;
+  end;
   Pen.Mode:=pmCopy;
   brush.Style:=bsSolid;
 end;
