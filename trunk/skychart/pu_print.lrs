@@ -5,7 +5,7 @@ LazarusResources.Add('Tf_print','FORMDATA',[
   +'Width'#3#154#1#18'HorzScrollBar.Page'#3#153#1#18'VertScrollBar.Page'#3'+'#1
   +#13'ActiveControl'#7#21'prtcolor.RadioButton0'#7'Caption'#6#11'Print Chart'#8
   +'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#0#6'TLabel'#11'PrinterIn'
-  +'fo'#4'Left'#2#27#6'Height'#2#13#3'Top'#2#14#5'Width'#2'<'#7'Caption'#6#11'P'
+  +'fo'#4'Left'#2#27#6'Height'#2#15#3'Top'#2#14#5'Width'#2'C'#7'Caption'#6#11'P'
   +'rinterInfo'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#11'TRadioGroup'#8'pr'
   +'tcolor'#4'Left'#2#16#6'Height'#2'R'#3'Top'#2'0'#5'Width'#3#207#0#8'AutoFill'
   +#9#7'Caption'#6#5'Color'#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing'
@@ -34,13 +34,13 @@ LazarusResources.Add('Tf_print','FORMDATA',[
   +'ption'#6#5'Setup'#7'OnClick'#7#10'SetupClick'#8'TabOrder'#2#2#0#0#9'TGroupB'
   +'ox'#9'GroupBox1'#4'Left'#2#9#6'Height'#2'R'#3'Top'#3#144#0#5'Width'#3'|'#1#7
   +'Caption'#6#25'Page Margin in millimeter'#8'TabOrder'#2#5#0#6'TLabel'#6'Labe'
-  +'l1'#4'Left'#2#23#6'Height'#2#13#3'Top'#2#14#5'Width'#2#22#7'Caption'#6#4'Le'
+  +'l1'#4'Left'#2#23#6'Height'#2#15#3'Top'#2#14#5'Width'#2#25#7'Caption'#6#4'Le'
   +'ft'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2
-  +'Y'#6'Height'#2#13#3'Top'#2#14#5'Width'#2#29#7'Caption'#6#5'Right'#5'Color'#7
+  +'Y'#6'Height'#2#15#3'Top'#2#14#5'Width'#2'"'#7'Caption'#6#5'Right'#5'Color'#7
   +#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Left'#3#153#0#6'Heigh'
-  +'t'#2#13#3'Top'#2#14#5'Width'#2#22#7'Caption'#6#3'Top'#5'Color'#7#6'clNone'
-  +#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#3#216#0#6'Height'#2#13#3
-  +'Top'#2#14#5'Width'#2'*'#7'Caption'#6#6'Bottom'#5'Color'#7#6'clNone'#11'Pare'
+  +'t'#2#15#3'Top'#2#14#5'Width'#2#26#7'Caption'#6#3'Top'#5'Color'#7#6'clNone'
+  +#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#3#216#0#6'Height'#2#15#3
+  +'Top'#2#14#5'Width'#2'-'#7'Caption'#6#6'Bottom'#5'Color'#7#6'clNone'#11'Pare'
   +'ntColor'#8#0#0#9'TLongEdit'#9'LongEdit1'#4'Left'#2#21#6'Height'#2#23#4'Hint'
   +#6#6'0..100'#3'Top'#2'"'#5'Width'#2'('#11'BorderStyle'#7#8'bsSingle'#11'Pare'
   +'ntColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'OnChange'#7
