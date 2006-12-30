@@ -43,11 +43,10 @@ type
 
   Tf_config = class(TForm)
     MultiDoc1: TMultiDoc;
-    PairSplitter1: TPairSplitter;
-    PairSplitterSide1: TPairSplitterSide;
-    PairSplitterSide2: TPairSplitterSide;
     Panel1: TPanel;
     Panel3: TPanel;
+    Panel4: TPanel;
+    Splitter1: TSplitter;
     TreeView1: TTreeView;
     previous: TButton;
     next: TButton;
