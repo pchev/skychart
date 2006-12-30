@@ -35,7 +35,7 @@ uses u_translation, u_constant, u_util,
   pu_config_chart, pu_config_observatory, pu_config_time, pu_config_catalog,
   pu_config_system, pu_config_pictures, pu_config_display, pu_config_solsys,
   pu_config_internet,
-  LResources, MultiDoc, ChildDoc;
+  LResources, MultiDoc, ChildDoc, PairSplitter;
 
 type
 
@@ -43,7 +43,11 @@ type
 
   Tf_config = class(TForm)
     MultiDoc1: TMultiDoc;
+    PairSplitter1: TPairSplitter;
+    PairSplitterSide1: TPairSplitterSide;
+    PairSplitterSide2: TPairSplitterSide;
     Panel1: TPanel;
+    Panel3: TPanel;
     TreeView1: TTreeView;
     previous: TButton;
     next: TButton;
