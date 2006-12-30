@@ -1,9 +1,9 @@
 object f_config: Tf_config
-  Left = 631
+  Left = 527
   Height = 521
-  Top = 105
-  Width = 700
-  HorzScrollBar.Page = 699
+  Top = 97
+  Width = 717
+  HorzScrollBar.Page = 716
   VertScrollBar.Page = 520
   ActiveControl = TreeView1
   BorderStyle = bsSizeToolWin
@@ -148,18 +148,18 @@ object f_config: Tf_config
   OnShow = FormShow
   object Panel1: TPanel
     Height = 480
-    Width = 200
+    Width = 216
     Align = alLeft
     TabOrder = 0
     object TreeView1: TTreeView
-      Left = 4
+      Left = 2
       Height = 421
-      Top = 4
-      Width = 189
+      Width = 212
+      Anchors = [akTop, akLeft, akRight, akBottom]
       AutoExpand = True
       BackgroundColor = clBtnHighlight
       Color = clBtnHighlight
-      DefaultItemHeight = 14
+      DefaultItemHeight = 15
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True
@@ -167,7 +167,7 @@ object f_config: Tf_config
       ReadOnly = True
       RightClickSelect = True
       RowSelect = True
-      ScrollBars = ssAutoBoth
+      ScrollBars = ssNone
       SortType = stBoth
       TabOrder = 0
       OnChange = TreeView1Change
@@ -246,8 +246,9 @@ object f_config: Tf_config
     object previous: TButton
       Left = 56
       Height = 25
-      Top = 428
+      Top = 440
       Width = 25
+      Anchors = [akLeft, akBottom]
       BorderSpacing.InnerBorder = 4
       Caption = '<'
       OnClick = previousClick
@@ -256,8 +257,9 @@ object f_config: Tf_config
     object next: TButton
       Left = 104
       Height = 25
-      Top = 428
+      Top = 440
       Width = 25
+      Anchors = [akLeft, akBottom]
       BorderSpacing.InnerBorder = 4
       Caption = '>'
       OnClick = nextClick
@@ -267,14 +269,14 @@ object f_config: Tf_config
   object Panel2: TPanel
     Height = 41
     Top = 480
-    Width = 700
+    Width = 717
     Align = alBottom
     TabOrder = 2
     object Applyall: TCheckBox
       Left = 16
-      Height = 19
+      Height = 13
       Top = 12
-      Width = 168
+      Width = 144
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
@@ -322,9 +324,9 @@ object f_config: Tf_config
     end
   end
   object MultiDoc1: TMultiDoc
-    Left = 200
+    Left = 216
     Height = 480
-    Width = 500
+    Width = 501
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
