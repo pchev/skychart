@@ -133,7 +133,10 @@ TCdCPanel = Class(TCustomPanel)
 implementation
 
 const
-{$ifdef lclgtk2}
+{$if DEFINED(lclgtk2) OR DEFINED(win32) }
+  {$define childdoc_better_move}
+{$endif}
+{$ifdef childdoc_better_move}
 skipmouseeventcount=4; // duplicate mousemove events
 {$else}
 skipmouseeventcount=1;
@@ -379,11 +382,11 @@ if WireframeMoveResize then dockedpanel.Show;
 end;
 
 procedure TChildDoc.MenuBarMouseLeave(Sender: TObject);
-{$ifdef lclgtk2}
+{$ifdef childdoc_better_move}
 var P: Tpoint;
 {$endif}
 begin
-{$ifdef lclgtk2}
+{$ifdef childdoc_better_move}
 if moving and (not lockmove) then begin
   lockmove:=true;
   P:=mouse.CursorPos;
