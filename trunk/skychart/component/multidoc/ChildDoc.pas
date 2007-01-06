@@ -81,7 +81,7 @@ TCdCPanel = Class(TCustomPanel)
     procedure MenuBarMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure MenuBarMouseLeave(Sender: TObject);
     procedure SizeBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ButtonCloseClick(Sender: TObject);
+    procedure ButtonCloseMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ButtonMaximizeClick(Sender: TObject);
   protected
     { Protected declarations }
@@ -286,7 +286,7 @@ ButtonClose.Caption:='';
 ButtonClose.Glyph.LoadFromLazarusResource('CLOSE');
 ButtonClose.Parent:=MenuBar;
 ButtonClose.Align:=alRight;
-ButtonClose.OnClick:=@ButtonCloseClick;
+ButtonClose.OnMouseUp:=@ButtonCloseMouseUp;
 ButtonMaximize:=TSpeedButton.Create(self);
 ButtonMaximize.Width:=TitleHeight-2;
 ButtonMaximize.Height:=TitleHeight-2;
@@ -326,18 +326,6 @@ end;
 destructor TChildDoc.Destroy;
 begin
 try
-Title.Free;
-ButtonClose.Free;
-ButtonMaximize.Free;
-MenuBar.Free;
-RightBar.Free;
-LeftBar.Free;
-BotBar.Free;
-TopBar.Free;
-TopLeftBar.Free;
-TopRightBar.Free;
-BotLeftBar.Free;
-BotRightBar.Free;
 inherited destroy;
 except
 end;
@@ -391,7 +379,9 @@ if WireframeMoveResize then dockedpanel.Show;
 end;
 
 procedure TChildDoc.MenuBarMouseLeave(Sender: TObject);
+{$ifdef lclgtk2}
 var P: Tpoint;
+{$endif}
 begin
 {$ifdef lclgtk2}
 if moving and (not lockmove) then begin
@@ -511,12 +501,14 @@ begin
  if assigned(FonClose) then FonClose(self);
 end;
 
-procedure TChildDoc.ButtonCloseClick(Sender: TObject);
+procedure TChildDoc.ButtonCloseMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var canclose:boolean;
 begin
+if (Button=mbLeft) then begin
  canclose:=true;
  if assigned(FonCloseQuery) then FonCloseQuery(self,canclose);
  if canclose then Close;
+end;
 end;
 
 Procedure TChildDoc.Maximize;
