@@ -24,7 +24,7 @@ object f_config_chart: Tf_config_chart
       Width = 498
       Align = alClient
       OnPageChanged = Notebook1PageChanged
-      PageIndex = 4
+      PageIndex = 0
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
@@ -63,18 +63,18 @@ object f_config_chart: Tf_config_chart
           end
           object PMBox: TCheckBox
             Left = 8
-            Height = 19
+            Height = 20
             Top = 40
-            Width = 396
+            Width = 402
             Caption = 'Use the proper motion to correct the position for the current date'
             OnClick = PMBoxClick
             TabOrder = 0
           end
           object DrawPmBox: TCheckBox
             Left = 8
-            Height = 19
+            Height = 20
             Top = 72
-            Width = 348
+            Width = 354
             Caption = 'Draw a line that represent the proper motion for the next'
             OnClick = DrawPmBoxClick
             TabOrder = 1
@@ -694,53 +694,53 @@ object f_config_chart: Tf_config_chart
           Shape = bsFrame
         end
         object Label158: TLabel
-          Height = 15
-          Width = 112
+          Height = 13
+          Width = 101
           Caption = 'Projection Setting'
           Color = clNone
           ParentColor = False
         end
         object Labelp1: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 104
-          Width = 13
+          Width = 12
           Caption = '1 '
           Color = clNone
           ParentColor = False
         end
         object Labelp2: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 132
-          Width = 9
+          Width = 8
           Caption = '2'
           Color = clNone
           ParentColor = False
         end
         object Labelp3: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 160
-          Width = 9
+          Width = 8
           Caption = '3'
           Color = clNone
           ParentColor = False
         end
         object Labelp4: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 188
-          Width = 9
+          Width = 8
           Caption = '4'
           Color = clNone
           ParentColor = False
         end
         object Label165: TLabel
           Left = 27
-          Height = 15
+          Height = 13
           Top = 43
-          Width = 83
+          Width = 76
           Alignment = taRightJustify
           Caption = 'Field Number'
           Color = clNone
@@ -748,72 +748,72 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp0: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 76
-          Width = 9
+          Width = 8
           Caption = '0'
           Color = clNone
           ParentColor = False
         end
         object Labelp5: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 216
-          Width = 9
+          Width = 8
           Caption = '5'
           Color = clNone
           ParentColor = False
         end
         object Labelp6: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 244
-          Width = 9
+          Width = 8
           Caption = '6'
           Color = clNone
           ParentColor = False
         end
         object Labelp7: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 272
-          Width = 9
+          Width = 8
           Caption = '7'
           Color = clNone
           ParentColor = False
         end
         object Labelp8: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 300
-          Width = 9
+          Width = 8
           Caption = '8'
           Color = clNone
           ParentColor = False
         end
         object Labelp9: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 328
-          Width = 9
+          Width = 8
           Caption = '9'
           Color = clNone
           ParentColor = False
         end
         object Labelp10: TLabel
           Left = 62
-          Height = 15
+          Height = 13
           Top = 356
-          Width = 17
+          Width = 15
           Caption = '10'
           Color = clNone
           ParentColor = False
         end
         object Label172: TLabel
           Left = 195
-          Height = 15
+          Height = 13
           Top = 43
-          Width = 64
+          Width = 57
           Caption = 'Projection'
           Color = clNone
           ParentColor = False
@@ -2284,89 +2284,89 @@ object f_config_chart: Tf_config_chart
         end
         object CheckBox1: TCheckBox
           Left = 397
-          Height = 19
+          Height = 20
           Top = 60
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 22
         end
         object CheckBox2: TCheckBox
           Tag = 1
           Left = 397
-          Height = 19
+          Height = 20
           Top = 85
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 23
         end
         object CheckBox4: TCheckBox
           Tag = 3
           Left = 397
-          Height = 19
+          Height = 20
           Top = 135
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 24
         end
         object CheckBox5: TCheckBox
           Tag = 4
           Left = 397
-          Height = 19
+          Height = 20
           Top = 160
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 25
         end
         object CheckBox6: TCheckBox
           Tag = 5
           Left = 397
-          Height = 19
+          Height = 20
           Top = 185
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 26
         end
         object CheckBox7: TCheckBox
           Tag = 6
           Left = 397
-          Height = 19
+          Height = 20
           Top = 210
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 27
         end
         object CheckBox8: TCheckBox
           Tag = 7
           Left = 397
-          Height = 19
+          Height = 20
           Top = 235
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 28
         end
         object CheckBox9: TCheckBox
           Tag = 8
           Left = 397
-          Height = 19
+          Height = 20
           Top = 260
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 29
         end
         object CheckBox10: TCheckBox
           Tag = 9
           Left = 397
-          Height = 19
+          Height = 20
           Top = 285
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 30
         end
         object CheckBox13: TCheckBox
           Left = 261
-          Height = 19
+          Height = 20
           Top = 350
-          Width = 180
+          Width = 186
           Caption = 'Always show compass rose'
           OnClick = CheckBox13Click
           TabOrder = 31
@@ -2374,18 +2374,18 @@ object f_config_chart: Tf_config_chart
         object CheckBox3: TCheckBox
           Tag = 2
           Left = 397
-          Height = 19
+          Height = 20
           Top = 110
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 32
         end
         object CheckBox11: TCheckBox
           Tag = 10
           Left = 397
-          Height = 19
+          Height = 20
           Top = 310
-          Width = 21
+          Width = 27
           OnClick = ShowGridBoxClick
           TabOrder = 33
         end
