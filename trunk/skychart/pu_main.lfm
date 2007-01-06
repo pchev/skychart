@@ -4,7 +4,7 @@ object f_main: Tf_main
   Top = 105
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 557
+  VertScrollBar.Page = 553
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
   Font.CharSet = ANSI_CHARSET
@@ -152,7 +152,7 @@ object f_main: Tf_main
   OnShow = FormShow
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 473
+    Height = 469
     Top = 53
     Width = 812
     Align = alClient
@@ -2368,7 +2368,7 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 473
+    Height = 469
     Top = 53
     Width = 24
     Align = alLeft
@@ -2376,7 +2376,7 @@ object f_main: Tf_main
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 473
+      Height = 469
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2472,7 +2472,7 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 836
-    Height = 473
+    Height = 469
     Top = 53
     Width = 24
     Align = alRight
@@ -2481,7 +2481,7 @@ object f_main: Tf_main
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 223
+      Height = 219
       Top = 250
       Width = 24
       Align = alClient
@@ -2700,7 +2700,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 526
+    Top = 522
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
