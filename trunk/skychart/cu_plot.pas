@@ -303,6 +303,7 @@ with cnv do begin
  Rectangle(0,0,cfgchart.Width,cfgchart.Height);
  Rgn:=CreateRectRgn(cfgplot.xmin, cfgplot.ymin, cfgplot.xmax, cfgplot.ymax);
  SelectClipRgn(cnv.Handle, Rgn);
+ DeleteObject(Rgn);
 end;
 InitLabel;
 if (cfgplot.starplot>0)and(cfgchart.drawsize<>starbmpw)and(Fstarshape<>nil) then begin
