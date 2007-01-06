@@ -5,7 +5,7 @@ object f_config_display: Tf_config_display
   Width = 523
   HorzScrollBar.Page = 522
   VertScrollBar.Page = 531
-  ActiveControl = MagLabel.RadioButton0
+  ActiveControl = nebuladisplay.RadioButton0
   Caption = 'Display'
   OnClose = FormClose
   OnCreate = FormCreate
@@ -84,36 +84,36 @@ object f_config_display: Tf_config_display
           Visible = False
           object Label256: TLabel
             Left = 24
-            Height = 13
+            Height = 14
             Top = 38
-            Width = 94
+            Width = 78
             Caption = 'Faint Stars Size '
             Color = clNone
             ParentColor = False
           end
           object Label262: TLabel
             Left = 24
-            Height = 13
+            Height = 14
             Top = 112
-            Width = 50
+            Width = 43
             Caption = 'Contrast'
             Color = clNone
             ParentColor = False
           end
           object Label263: TLabel
             Left = 24
-            Height = 13
+            Height = 14
             Top = 150
-            Width = 93
+            Width = 78
             Caption = 'Color saturation'
             Color = clNone
             ParentColor = False
           end
           object Label257: TLabel
             Left = 24
-            Height = 13
+            Height = 14
             Top = 75
-            Width = 151
+            Width = 126
             Caption = 'Increment for Bright Stars'
             Color = clNone
             ParentColor = False
