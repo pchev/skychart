@@ -1113,6 +1113,10 @@ StarSizeBar.Position:=12;
 SizeContrastBar.Position:=40;
 StarContrastBar.Position:=400;
 SaturationBar.Position:=192;
+cplot.partsize:= StarSizeBar.position/10;
+cplot.magsize:= SizeContrastBar.position/10;
+cplot.contrast:= StarContrastBar.position;
+cplot.saturation:= SaturationBar.position;
 end;
 
 procedure Tf_config_display.StarButton2Click(Sender: TObject);
@@ -1121,6 +1125,10 @@ StarSizeBar.Position:=12;
 SizeContrastBar.Position:=10;
 StarContrastBar.Position:=400;
 SaturationBar.Position:=192;
+cplot.partsize:= StarSizeBar.position/10;
+cplot.magsize:= SizeContrastBar.position/10;
+cplot.contrast:= StarContrastBar.position;
+cplot.saturation:= SaturationBar.position;
 end;
 
 procedure Tf_config_display.StarButton3Click(Sender: TObject);
@@ -1129,6 +1137,10 @@ StarSizeBar.Position:=25;
 SizeContrastBar.Position:=40;
 StarContrastBar.Position:=300;
 SaturationBar.Position:=255;
+cplot.partsize:= StarSizeBar.position/10;
+cplot.magsize:= SizeContrastBar.position/10;
+cplot.contrast:= StarContrastBar.position;
+cplot.saturation:= SaturationBar.position;
 end;
 
 procedure Tf_config_display.StarButton4Click(Sender: TObject);
@@ -1137,6 +1149,10 @@ StarSizeBar.Position:=12;
 SizeContrastBar.Position:=40;
 StarContrastBar.Position:=500;
 SaturationBar.Position:=0;
+cplot.partsize:= StarSizeBar.position/10;
+cplot.magsize:= SizeContrastBar.position/10;
+cplot.contrast:= StarContrastBar.position;
+cplot.saturation:= SaturationBar.position;
 end;
 
 procedure Tf_config_display.SetFonts(ctrl:Tedit;num:integer);

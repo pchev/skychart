@@ -1,43 +1,45 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_config_display','FORMDATA',[
   'TPF0'#17'Tf_config_display'#16'f_config_display'#4'Left'#3'@'#2#6'Height'#3
   +#20#2#3'Top'#3#229#0#5'Width'#3#11#2#18'HorzScrollBar.Page'#3#10#2#18'VertSc'
-  +'rollBar.Page'#3#19#2#13'ActiveControl'#7#21'MagLabel.RadioButton0'#7'Captio'
-  +'n'#6#7'Display'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#9'On'
-  +'Destroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormShow'#0#6'TPanel'#9'MainPanel'
-  +#6'Height'#3#226#1#5'Width'#3#11#2#5'Align'#7#8'alClient'#11'ParentColor'#8#8
-  +'TabOrder'#2#0#0#9'TNotebook'#9'Notebook1'#4'Left'#2#1#6'Height'#3#224#1#3'T'
-  +'op'#2#1#5'Width'#3#9#2#5'Align'#7#8'alClient'#9'PageIndex'#2#0#8'ShowTabs'#8
-  +#0#5'TPage'#5'Page1'#7'Caption'#6#7'Display'#0#11'TRadioGroup'#11'stardispla'
-  +'y'#4'Left'#2#8#6'Height'#2'A'#3'Top'#2'x'#5'Width'#3#185#1#8'AutoFill'#9#7
-  +'Caption'#6#12'Star Display'#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSi'
-  +'zing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomoge'
-  +'nousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildRes'
-  +'ize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.S'
-  +'hrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRi'
-  +'ghtThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#3#7'Columns'#2#3#13'I'
-  +'tems.Strings'#1#6#9'Line mode'#6#12'Photographic'#6#10'Parametric'#0#7'OnCl'
-  +'ick'#7#16'stardisplayClick'#8'TabOrder'#2#1#0#0#11'TRadioGroup'#13'nebuladi'
-  +'splay'#4'Left'#2#8#6'Height'#2'A'#3'Top'#2' '#5'Width'#3#185#1#8'AutoFill'#9
-  +#7'Caption'#6#14'Nebula Display'#28'ChildSizing.LeftRightSpacing'#2#6#28'Chi'
-  +'ldSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHo'
-  +'mogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChil'
-  +'dResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizi'
-  +'ng.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeft'
-  +'ToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#2#7'Columns'#2#2
-  +#13'Items.Strings'#1#6#9'Line mode'#6#7'Graphic'#0#7'OnClick'#7#18'nebuladis'
-  +'playClick'#8'TabOrder'#2#0#0#0#9'TGroupBox'#10'starvisual'#4'Left'#2#8#6'He'
-  +'ight'#3#242#0#3'Top'#3#192#0#5'Width'#3#185#1#7'Caption'#6#24'Star Display '
-  +' Properties'#8'TabOrder'#2#2#7'Visible'#8#0#6'TLabel'#8'Label256'#4'Left'#2
-  +#24#6'Height'#2#13#3'Top'#2'&'#5'Width'#2'^'#7'Caption'#6#17'Faint Stars Siz'
-  +'e '#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label262'#4'Left'
-  +#2#24#6'Height'#2#13#3'Top'#2'p'#5'Width'#2'2'#7'Caption'#6#8'Contrast'#5'Co'
-  +'lor'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label263'#4'Left'#2#24#6
-  +'Height'#2#13#3'Top'#3#150#0#5'Width'#2']'#7'Caption'#6#16'Color saturation'
-  +#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label257'#4'Left'#2
-  +#24#6'Height'#2#13#3'Top'#2'K'#5'Width'#3#151#0#7'Caption'#6#26'Increment fo'
-  +'r Bright Stars'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TTrackBar'#11
-  +'StarSizeBar'#4'Left'#3#193#0#6'Height'#2#27#3'Top'#2#30#5'Width'#3#225#0#9
-  +'Frequency'#2#5#3'Max'#2'2'#3'Min'#2#1#8'OnChange'#7#17'StarSizeBarChange'#8
+  +'rollBar.Page'#3#19#2#13'ActiveControl'#7#26'nebuladisplay.RadioButton0'#7'C'
+  +'aption'#6#7'Display'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'
+  +#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormShow'#0#6'TPanel'#9'MainPa'
+  +'nel'#6'Height'#3#226#1#5'Width'#3#11#2#5'Align'#7#8'alClient'#11'ParentColo'
+  +'r'#8#8'TabOrder'#2#0#0#9'TNotebook'#9'Notebook1'#4'Left'#2#1#6'Height'#3#224
+  +#1#3'Top'#2#1#5'Width'#3#9#2#5'Align'#7#8'alClient'#9'PageIndex'#2#0#8'ShowT'
+  +'abs'#8#0#5'TPage'#5'Page1'#7'Caption'#6#7'Display'#0#11'TRadioGroup'#11'sta'
+  +'rdisplay'#4'Left'#2#8#6'Height'#2'A'#3'Top'#2'x'#5'Width'#3#185#1#8'AutoFil'
+  +'l'#9#7'Caption'#6#12'Star Display'#28'ChildSizing.LeftRightSpacing'#2#6#28
+  +'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'cr'
+  +'sHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousC'
+  +'hildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildS'
+  +'izing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclL'
+  +'eftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#3#7'Columns'#2
+  +#3#13'Items.Strings'#1#6#9'Line mode'#6#12'Photographic'#6#10'Parametric'#0#7
+  +'OnClick'#7#16'stardisplayClick'#8'TabOrder'#2#1#0#0#11'TRadioGroup'#13'nebu'
+  +'ladisplay'#4'Left'#2#8#6'Height'#2'A'#3'Top'#2' '#5'Width'#3#185#1#8'AutoFi'
+  +'ll'#9#7'Caption'#6#14'Nebula Display'#28'ChildSizing.LeftRightSpacing'#2#6
+  +#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24
+  +'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenou'
+  +'sChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'Chil'
+  +'dSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cc'
+  +'lLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#2#7'Columns'
+  +#2#2#13'Items.Strings'#1#6#9'Line mode'#6#7'Graphic'#0#7'OnClick'#7#18'nebul'
+  +'adisplayClick'#8'TabOrder'#2#0#0#0#9'TGroupBox'#10'starvisual'#4'Left'#2#8#6
+  +'Height'#3#242#0#3'Top'#3#192#0#5'Width'#3#185#1#7'Caption'#6#24'Star Displa'
+  +'y  Properties'#8'TabOrder'#2#2#7'Visible'#8#0#6'TLabel'#8'Label256'#4'Left'
+  +#2#24#6'Height'#2#14#3'Top'#2'&'#5'Width'#2'N'#7'Caption'#6#17'Faint Stars S'
+  +'ize '#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label262'#4'Le'
+  +'ft'#2#24#6'Height'#2#14#3'Top'#2'p'#5'Width'#2'+'#7'Caption'#6#8'Contrast'#5
+  +'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label263'#4'Left'#2#24
+  +#6'Height'#2#14#3'Top'#3#150#0#5'Width'#2'N'#7'Caption'#6#16'Color saturatio'
+  +'n'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#8'Label257'#4'Left'
+  +#2#24#6'Height'#2#14#3'Top'#2'K'#5'Width'#2'~'#7'Caption'#6#26'Increment for'
+  +' Bright Stars'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TTrackBar'#11'S'
+  +'tarSizeBar'#4'Left'#3#193#0#6'Height'#2#27#3'Top'#2#30#5'Width'#3#225#0#9'F'
+  +'requency'#2#5#3'Max'#2'2'#3'Min'#2#1#8'OnChange'#7#17'StarSizeBarChange'#8
   +'PageSize'#2#5#8'Position'#2#1#8'ScalePos'#7#5'trTop'#8'TabOrder'#2#0#0#0#9
   +'TTrackBar'#15'StarContrastBar'#4'Left'#3#193#0#6'Height'#2#27#3'Top'#2'h'#5
   +'Width'#3#225#0#9'Frequency'#2'd'#3'Max'#3#232#3#3'Min'#2'd'#8'OnChange'#7#21
