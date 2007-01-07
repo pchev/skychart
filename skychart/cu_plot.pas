@@ -1825,6 +1825,7 @@ TextStyle.Opaque:=opaque;
 Brush.Color:=cfgplot.backgroundcolor;
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
+Pen.Color:=cfgplot.backgroundcolor;
 Font.Name:=cfgplot.FontName[fontnum];
 Font.Color:=lcolor;
 if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
@@ -1846,7 +1847,9 @@ if clip then begin
   if xx<cfgplot.xmin then xx:=cfgplot.xmin+marge;
   if (xx+ts.cx+marge)>cfgplot.xmax then xx:=cfgplot.xmax-ts.cx-marge;
 end;
+arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
 if cnv is TPostscriptCanvas then begin
+  if opaque then Rectangle(arect);
   TextOut(xx,yy,txt);
 end else begin
   arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
@@ -1866,6 +1869,7 @@ TextStyle.Opaque:=opaque;
 Brush.Color:=cfgplot.backgroundcolor;
 Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
+Pen.Color:=cfgplot.backgroundcolor;
 Font.Name:=cfgplot.FontName[fontnum];
 Font.Color:=cfgplot.LabelColor[labelnum];
 if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
@@ -1886,10 +1890,11 @@ repeat
       delete(txt,1,p+1);
   end;
   ts:=TextExtent(buf);
+  arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
   if cnv is TPostscriptCanvas then begin
+     if opaque then Rectangle(arect);
      TextOut(xx,yy,buf);
   end else begin
-     arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
      textRect(arect,xx,yy,buf);
   end;
   yy:=yy+ls;
