@@ -1160,21 +1160,23 @@ if cfgsc.ShowAsteroid then begin
       magn:=cfgsc.AsteroidLst[j,i,3];
       projection(ra,dec,x1,y1,true,cfgsc);
       WindowXY(x1,y1,xx,yy,cfgsc);
-      Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,magn);
-      if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(magn<cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5]) then begin
-        lid:=GetId(cfgsc.AsteroidName[j,i,1]);
-        if cfgsc.SimNb=1 then ltxt:=cfgsc.AsteroidName[j,i,2]
-        else begin
-         if cfgsc.SimNameLabel then
-            ltxt:=cfgsc.AsteroidName[j,i,2]+blank
-           else
-            ltxt:='';
-         if cfgsc.SimDateLabel then
-            ltxt:=ltxt+jddatetime(cfgsc.AsteroidLst[j,i,4]+(cfgsc.TimeZone-cfgsc.DT_UT)/24)+blank;
-         if cfgsc.SimMagLabel then
-            ltxt:=ltxt+formatfloat(f1,magn);
+      if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+        Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,magn);
+        if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(magn<cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5]) then begin
+          lid:=GetId(cfgsc.AsteroidName[j,i,1]);
+          if cfgsc.SimNb=1 then ltxt:=cfgsc.AsteroidName[j,i,2]
+          else begin
+           if cfgsc.SimNameLabel then
+              ltxt:=cfgsc.AsteroidName[j,i,2]+blank
+             else
+              ltxt:='';
+           if cfgsc.SimDateLabel then
+              ltxt:=ltxt+jddatetime(cfgsc.AsteroidLst[j,i,4]+(cfgsc.TimeZone-cfgsc.DT_UT)/24)+blank;
+           if cfgsc.SimMagLabel then
+              ltxt:=ltxt+formatfloat(f1,magn);
+          end;
+          SetLabel(lid,xx,yy,0,2,5,ltxt);
         end;
-        SetLabel(lid,xx,yy,0,2,5,ltxt);
       end;
     end;
   end;
@@ -1199,26 +1201,28 @@ if cfgsc.ShowComet then begin
     for i:=1 to cfgsc.CometNb do begin
       projection(cfgsc.CometLst[j,i,1],cfgsc.CometLst[j,i,2],x1,y1,true,cfgsc);
       WindowXY(x1,y1,xx,yy,cfgsc);
-      if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5]) then begin
-        lid:=GetId(cfgsc.CometName[j,i,1]);
-        sz:=round(abs(cfgsc.BxGlb)*deg2rad/60*cfgsc.CometLst[j,i,4]/2);
-        if cfgsc.SimNb=1 then ltxt:=cfgsc.CometName[j,i,2]
-        else begin
-         if cfgsc.SimNameLabel then
-            ltxt:=cfgsc.CometName[j,i,2]+blank
-           else
-            ltxt:='';
-         if cfgsc.SimDateLabel then
-            ltxt:=ltxt+jddatetime(cfgsc.CometLst[j,i,7]+(cfgsc.TimeZone-cfgsc.DT_UT)/24)+blank;
-         if cfgsc.SimMagLabel then
-            ltxt:=ltxt+formatfloat(f1,cfgsc.CometLst[j,i,3]);
+      if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+        if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5]) then begin
+          lid:=GetId(cfgsc.CometName[j,i,1]);
+          sz:=round(abs(cfgsc.BxGlb)*deg2rad/60*cfgsc.CometLst[j,i,4]/2);
+          if cfgsc.SimNb=1 then ltxt:=cfgsc.CometName[j,i,2]
+          else begin
+           if cfgsc.SimNameLabel then
+              ltxt:=cfgsc.CometName[j,i,2]+blank
+             else
+              ltxt:='';
+           if cfgsc.SimDateLabel then
+              ltxt:=ltxt+jddatetime(cfgsc.CometLst[j,i,7]+(cfgsc.TimeZone-cfgsc.DT_UT)/24)+blank;
+           if cfgsc.SimMagLabel then
+              ltxt:=ltxt+formatfloat(f1,cfgsc.CometLst[j,i,3]);
+          end;
+          SetLabel(lid,xx,yy,sz,2,5,ltxt);
         end;
-        SetLabel(lid,xx,yy,sz,2,5,ltxt);
+        if projection(cfgsc.CometLst[j,i,5],cfgsc.CometLst[j,i,6],x1,y1,true,cfgsc) then
+           WindowXY(x1,y1,cxx,cyy,cfgsc)
+        else begin cxx:=xx; cyy:=yy; end;
+        Fplot.PlotComet(xx,yy,cxx,cyy,cfgsc.Comsymbol, cfgsc.CometLst[j,i,3],cfgsc.CometLst[j,i,4],abs(cfgsc.BxGlb)*deg2rad/60);
       end;
-      if projection(cfgsc.CometLst[j,i,5],cfgsc.CometLst[j,i,6],x1,y1,true,cfgsc) then
-         WindowXY(x1,y1,cxx,cyy,cfgsc)
-      else begin cxx:=xx; cyy:=yy; end;
-      Fplot.PlotComet(xx,yy,cxx,cyy,cfgsc.Comsymbol, cfgsc.CometLst[j,i,3],cfgsc.CometLst[j,i,4],abs(cfgsc.BxGlb)*deg2rad/60);
     end;
   end;
   result:=true;
