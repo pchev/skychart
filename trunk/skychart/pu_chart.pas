@@ -112,11 +112,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ChartResize(Sender: TObject);
+    procedure HorScrollBarChange(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
+    procedure VertScrollBarChange(Sender: TObject);
     procedure VertScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure zoomplusExecute(Sender: TObject);
@@ -350,6 +352,15 @@ begin
  Image1.Cursor := crCross;
  lock_refresh:=false;
  MovingCircle:=false;
+ // must use onScroll on Windows to solve bug 193
+ // but Gtk need onChange
+ {$ifdef win32}
+   HorScrollBar.onScroll:=HorScrollBarScroll;
+   VertScrollBar.onScroll:=VertScrollBarScroll;
+ {$else}
+   HorScrollBar.onChange:=HorScrollBarChange;
+   VertScrollBar.onChange:=VertScrollBarChange;
+ {$endif}
  VertScrollBar.Max:=90*3600;   // arcsecond position precision
  VertScrollBar.Min:=-90*3600;
  VertScrollBar.SmallChange:=3600;
@@ -559,6 +570,12 @@ lockscrollbar:=false;
 end;
 end;
 
+procedure Tf_chart.HorScrollBarChange(Sender: TObject);
+var i: integer;
+begin
+  HorScrollBarScroll(Sender,scTrack,i);
+end;
+
 procedure Tf_chart.HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
   var ScrollPos: Integer);
 begin
@@ -595,6 +612,12 @@ RefreshTimer.enabled:=true;
 finally
 lockscrollbar:=false;
 end;
+end;
+
+procedure Tf_chart.VertScrollBarChange(Sender: TObject);
+var i: integer;
+begin
+  VertScrollBarScroll(Sender,scTrack,i);
 end;
 
 procedure Tf_chart.VertScrollBarScroll(Sender: TObject;
