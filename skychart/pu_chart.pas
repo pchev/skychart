@@ -112,11 +112,13 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ChartResize(Sender: TObject);
-    procedure HorScrollBarChange(Sender: TObject);
+    procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
+      var ScrollPos: Integer);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
-    procedure VertScrollBarChange(Sender: TObject);
+    procedure VertScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
+      var ScrollPos: Integer);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure MoveWestExecute(Sender: TObject);
@@ -557,8 +559,12 @@ lockscrollbar:=false;
 end;
 end;
 
-procedure Tf_chart.HorScrollBarChange(Sender: TObject);
+procedure Tf_chart.HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
+  var ScrollPos: Integer);
 begin
+{$ifdef win32}
+if ScrollCode in [scPageUp,scPageDown] then exit; // do not refresh while scrolling scEndScroll do the final refresh
+{$endif}
 if lockscrollbar then exit;
 lockscrollbar:=true;
 try
@@ -591,8 +597,12 @@ lockscrollbar:=false;
 end;
 end;
 
-procedure Tf_chart.VertScrollBarChange(Sender: TObject);
+procedure Tf_chart.VertScrollBarScroll(Sender: TObject;
+  ScrollCode: TScrollCode; var ScrollPos: Integer);
 begin
+{$ifdef win32}
+if ScrollCode in [scPageUp,scPageDown] then exit; // do not refresh while scrolling scEndScroll do the final refresh
+{$endif}
 if lockscrollbar then exit;
 lockscrollbar:=true;
 try
