@@ -9,20 +9,19 @@ LazarusResources.Add('Tf_chart','FORMDATA',[
   +'s'#10'ParentFont'#9#0#6'TPanel'#6'Panel1'#4'Left'#2#8#6'Height'#3#16#1#3'To'
   +'p'#2#8#5'Width'#3#224#1#11'FullRepaint'#8#11'ParentColor'#8#8'TabOrder'#2#0
   +#8'OnResize'#7#11'ChartResize'#0#6'TLabel'#10'identlabel'#6'Cursor'#7#11'crH'
-  +'andPoint'#4'Left'#3#136#0#6'Height'#2#14#3'Top'#2'x'#5'Width'#2'1'#7'Captio'
+  +'andPoint'#4'Left'#3#136#0#6'Height'#2#13#3'Top'#2'x'#5'Width'#2';'#7'Captio'
   +'n'#6#11'identlabel '#5'Color'#7#7'clBlack'#10'Font.Color'#7#7'clWhite'#11'F'
   +'ont.Height'#2#244#9'Font.Name'#6#13'MS Sans Serif'#11'ParentColor'#8#13'Sho'
   +'wAccelChar'#8#11'Transparent'#8#7'Visible'#8#7'OnClick'#7#15'identlabelClic'
   +'k'#0#0#10'TScrollBar'#13'VertScrollBar'#6'Cursor'#7#7'crArrow'#4'Left'#3#208
   +#1#6'Height'#3#255#0#3'Top'#2#1#5'Width'#2#15#5'Align'#7#7'alRight'#4'Kind'#7
   +#10'sbVertical'#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8'PageSize'#2
-  +#10#8'TabOrder'#2#0#8'OnScroll'#7#19'VertScrollBarScroll'#0#0#10'TScrollBar'
-  +#12'HorScrollBar'#6'Cursor'#7#7'crArrow'#4'Left'#2#1#6'Height'#2#15#3'Top'#3
-  +#0#1#5'Width'#3#222#1#5'Align'#7#8'alBottom'#11'LargeChange'#2#10#3'Max'#2'2'
-  +#3'Min'#2#206#8'PageSize'#2#10#8'TabOrder'#2#1#8'OnScroll'#7#18'HorScrollBar'
-  +'Scroll'#0#0#0#6'TTimer'#12'RefreshTimer'#7'Enabled'#8#8'Interval'#3','#1#7
-  +'OnTimer'#7#17'RefreshTimerTimer'#4'left'#3'0'#1#3'top'#2#24#0#0#11'TActionL'
-  +'ist'#11'ActionList1'#4'left'#3'0'#1#3'top'#2'@'#0#7'TAction'#8'zoomplus'#8
+  +#10#8'TabOrder'#2#0#0#0#10'TScrollBar'#12'HorScrollBar'#6'Cursor'#7#7'crArro'
+  +'w'#4'Left'#2#1#6'Height'#2#15#3'Top'#3#0#1#5'Width'#3#222#1#5'Align'#7#8'al'
+  +'Bottom'#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8'PageSize'#2#10#8'Ta'
+  +'bOrder'#2#1#0#0#0#6'TTimer'#12'RefreshTimer'#7'Enabled'#8#8'Interval'#3','#1
+  +#7'OnTimer'#7#17'RefreshTimerTimer'#4'left'#3'0'#1#3'top'#2#24#0#0#11'TActio'
+  +'nList'#11'ActionList1'#4'left'#3'0'#1#3'top'#2'@'#0#7'TAction'#8'zoomplus'#8
   +'Category'#6#4'zoom'#7'Caption'#6#6'Zoom +'#18'DisableIfNoHandler'#9#10'Imag'
   +'eIndex'#2#6#9'OnExecute'#7#15'zoomplusExecute'#0#0#7'TAction'#9'zoomminus'#8
   +'Category'#6#4'zoom'#7'Caption'#6#6'Zoom -'#18'DisableIfNoHandler'#9#10'Imag'
@@ -65,8 +64,8 @@ LazarusResources.Add('Tf_chart','FORMDATA',[
   +#6#4'Grid'#7'Caption'#6#4'Grid'#18'DisableIfNoHandler'#9#10'ImageIndex'#2#25
   +#9'OnExecute'#7#11'GridExecute'#0#0#7'TAction'#16'switchbackground'#7'Captio'
   +'n'#6#16'switchbackground'#18'DisableIfNoHandler'#9#9'OnExecute'#7#23'switch'
-  ,'backgroundExecute'#0#0#7'TAction'#10'switchstar'#7'Caption'#6#10'switchstar'
-  +#18'DisableIfNoHandler'#9#9'OnExecute'#7#17'switchstarExecute'#0#0#0#10'TPop'
+  +'backgroundExecute'#0#0#7'TAction'#10'switchstar'#7'Caption'#6#10'switchstar'
+  ,#18'DisableIfNoHandler'#9#9'OnExecute'#7#17'switchstarExecute'#0#0#0#10'TPop'
   +'upMenu'#10'PopupMenu1'#7'OnPopup'#7#15'PopupMenu1Popup'#4'left'#3'0'#1#3'to'
   +'p'#2'h'#0#9'TMenuItem'#6'About1'#7'Caption'#6#5'About'#7'Visible'#8#7'OnCli'
   +'ck'#7#11'About1Click'#0#0#9'TMenuItem'#6'About2'#7'Caption'#6#1'-'#7'Visibl'
