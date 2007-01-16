@@ -1,7 +1,7 @@
 # translation of skychart.ca.po
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-10-14 14:05+0200\n"
+"PO-Revision-Date: 2007-01-2 23:09+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.ca\n"
 "POT-Creation-Date: \n"
@@ -134,7 +134,7 @@ msgstr "Precedent"
 
 #: u_translation:rsad
 msgid "AD"
-msgstr ""
+msgstr "AD"
 
 #: u_translation:rsabbreviation
 msgid "Abbreviation"
@@ -234,7 +234,7 @@ msgstr "Altura"
 
 #: u_translation:rsalwaysshowco
 msgid "Always show compass rose"
-msgstr ""
+msgstr "Rosa dels vents sempre visible"
 
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
@@ -342,7 +342,7 @@ msgstr "B"
 
 #: u_translation:rsbc
 msgid "BC"
-msgstr ""
+msgstr "BC"
 
 #: u_translation:rsbii
 msgid "BII"
@@ -414,7 +414,7 @@ msgstr "Brillant+NEO + TNO"
 
 #: u_translation:rsbrightnebula
 msgid "Bright Nebula"
-msgstr ""
+msgstr "Nebulosa brillant"
 
 #: u_translation:rsbrightstars
 msgid "Bright stars"
@@ -438,7 +438,7 @@ msgstr "Construir el catàleg"
 
 #: u_translation:rscdcnebulaeca
 msgid "CDC Deep Sky Catalog Setting"
-msgstr "Catàlegs de nebuloses CDC"
+msgstr "Catàlegs de cel profund CDC"
 
 #: u_translation:rscdcstarscata
 msgid "CDC Stars Catalog Setting"
@@ -446,11 +446,11 @@ msgstr "Catàlegs d'estels CDC"
 
 #: u_translation:rscdcplugin
 msgid "CDC plugin"
-msgstr ""
+msgstr "Connector CdC (plugin)"
 
 #: u_translation:rscdcpluginset
 msgid "CDC plugin setting"
-msgstr "Paràmetre del connector CDC"
+msgstr "Config. del connector CDC"
 
 #: u_translation:rscdctranslator
 msgid "CDCTranslator"
@@ -502,11 +502,11 @@ msgstr "Tipus del catàleg"
 
 #: u_translation:rscdcnebulae
 msgid "CdC Deep Sky"
-msgstr "CdC nebuloses"
+msgstr "Cel profund CdC"
 
 #: u_translation:rscdcstars
 msgid "CdC Stars"
-msgstr "CdC estels"
+msgstr "Estels CdC"
 
 #: u_translation:rscdcformatpre
 msgid "CdC format, prefere the compact version"
@@ -674,7 +674,7 @@ msgstr "Nom comú"
 
 #: u_translation:rscompassroses
 msgid "Compass rose size"
-msgstr ""
+msgstr "Mida de la rosa dels vents"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -978,31 +978,31 @@ msgstr "Decrementa el temps"
 
 #: u_translation:rsnebulacommon
 msgid "Deep Sky Common Name"
-msgstr "Nom comú de la nebulosa"
+msgstr "Nom comú de cel profund"
 
 #: u_translation:rsnebulaefilte
 msgid "Deep Sky Filter"
-msgstr "Filtre de les nebuloses"
+msgstr "Filtre de cel profund"
 
 #: u_translation:rsnebula
 msgid "Deep Sky Object"
-msgstr "Nebulosa"
+msgstr "Objecte de cel profund"
 
 #: u_translation:rsnebulae
 msgid "Deep Sky Objects"
-msgstr "Nebuloses"
+msgstr "Objectes de cel profund"
 
 #: u_translation:rsnebuladispla
 msgid "Deep Sky Objects Display"
-msgstr "Mostra les nebuloses"
+msgstr "Mostra els objectes de cel profund"
 
 #: u_translation:rsnebulaeoroth
 msgid "Deep Sky or other objects"
-msgstr "Nebuloses o altres objectes"
+msgstr "Cel profund o altres objectes"
 
 #: u_translation:rsdeepskyobjec
 msgid "Deep sky object colour"
-msgstr "Color de les nebuloses"
+msgstr "Color objectes  cel profund"
 
 #: u_translation:rsdeepskycolou
 msgid "Deep-sky colour"
@@ -1518,7 +1518,7 @@ msgstr "Reomple la via làctia"
 
 #: u_translation:rsfillwithhori
 msgid "Fill with horizon color"
-msgstr ""
+msgstr "Omple amb el color de l'horitzó"
 
 #: u_translation:rsfill
 msgid "Fill?"
@@ -1530,7 +1530,7 @@ msgstr "Filtre ->"
 
 #: u_translation:rsfilternebula
 msgid "Filter Deep Sky Objects"
-msgstr "Filtra les nebuloses"
+msgstr "Filtra  objectes  cel profund"
 
 #: u_translation:rsfilterstars
 msgid "Filter stars "
@@ -1770,7 +1770,7 @@ msgstr "Hores, minuts, segons"
 
 #: u_translation:rsindidriver
 msgid "INDI Driver"
-msgstr ""
+msgstr "Driver INDI"
 
 #: u_translation:rsindidriverse
 msgid "INDI Driver setting"
@@ -1898,7 +1898,7 @@ msgstr "Longitud de la gran taca roja"
 
 #: u_translation:rskm
 msgid "Km."
-msgstr "Km "
+msgstr "km "
 
 #: u_translation:rsknot
 msgid "Knot"
@@ -1966,7 +1966,7 @@ msgstr "Longitud"
 
 #: u_translation:rslessnebulae
 msgid "Less Deep Sky"
-msgstr "Menys  nebuloses"
+msgstr "Menys  cel profund"
 
 #: u_translation:rslessstars
 msgid "Less Stars"
@@ -2266,7 +2266,7 @@ msgstr "Lluna"
 
 #: u_translation:rsmorenebulae
 msgid "More Deep Sky"
-msgstr "Més nebuloses"
+msgstr "Més cel profund"
 
 #: u_translation:rsmorestars
 msgid "More Stars"
@@ -2370,7 +2370,7 @@ msgstr "Sense marge"
 
 #: u_translation:rsnoprinterfou
 msgid "No Printer found!"
-msgstr ""
+msgstr "No trobo la impressora!"
 
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
@@ -2390,7 +2390,7 @@ msgstr "No existeix"
 
 #: u_translation:rsnonvisiblese
 msgid "Non visible search result, zoom for more details"
-msgstr ""
+msgstr "Resultat de recerca no visible, feu zoom per més detalls"
 
 #: u_translation:rsnonexistentu
 msgid "Non-existent/unknown"
@@ -2510,11 +2510,11 @@ msgstr "Decalatge"
 
 #: u_translation:rsoneofthree
 msgid "One of three"
-msgstr "Un de tres"
+msgstr "Una de cada tres"
 
 #: u_translation:rsoneoftwo
 msgid "One of two"
-msgstr "Un de dos"
+msgstr "Una de cada dues"
 
 #: u_translation:rsonlinedss
 msgid "Online DSS"
@@ -2534,11 +2534,11 @@ msgstr "Solament els numerats"
 
 #: u_translation:rsonlythefirst
 msgid "Only the first"
-msgstr "Solament el primer"
+msgstr "Solament la primera"
 
 #: u_translation:rsonlythelast
 msgid "Only the last"
-msgstr "Solament el darrer"
+msgstr "Solament la darrera"
 
 #: u_translation:rsopen
 msgid "Open"
@@ -2798,7 +2798,7 @@ msgstr "Pressió (hPa)"
 
 #: u_translation:rsprint
 msgid "Print"
-msgstr "Impressió"
+msgstr "Imprimeix"
 
 #: u_translation:rsprintchart
 msgid "Print Chart"
@@ -2814,7 +2814,7 @@ msgstr "Imprimeix la carta"
 
 #: u_translation:rsprintersetup
 msgid "Printer Setup"
-msgstr "Opcions d'impressora"
+msgstr "Opcions impressió"
 
 #: u_translation:rsprinterlegen
 msgid "Printer legend"
@@ -3194,7 +3194,7 @@ msgstr "Escolliu la impressora i les opcions d'impressió"
 
 #: u_translation:rsselectthetel
 msgid "Select the telescope interface"
-msgstr ""
+msgstr "Seleccioneu la interfície del telescopi"
 
 #: u_translation:rsselectthetyp
 msgid "Select the type of object in your catalog"
@@ -3298,7 +3298,7 @@ msgstr "Mostra les graelles de coordenades"
 
 #: u_translation:rsshownebulae
 msgid "Show Deep Sky Objects"
-msgstr "Mostra les nebuloses"
+msgstr "Mostra els objectes de cel profund"
 
 #: u_translation:rsshowearthsha
 msgid "Show Earth Shadow  (Lunar eclipses)"
@@ -3314,7 +3314,7 @@ msgstr "Mostra l'equador galàctic"
 
 #: u_translation:rsshowgrid
 msgid "Show Grid"
-msgstr ""
+msgstr "Mostra la graella"
 
 #: u_translation:rsshowgridlabe
 msgid "Show Grid Label"
@@ -3618,7 +3618,7 @@ msgstr "Telescopi"
 
 #: u_translation:rstelescopeplu
 msgid "Telescope Plugin "
-msgstr "Connector (plugin) telescopi"
+msgstr "Connector (plugin) telesc."
 
 #: u_translation:rstelescopeset
 msgid "Telescope Setting"
@@ -3674,7 +3674,7 @@ msgstr "Dij."
 
 #: u_translation:rstilehorizont
 msgid "Tile Horizontally"
-msgstr "Divisió pantalla horitzontal"
+msgstr "Divisió de pantalla horitzontal"
 
 #: u_translation:rstilevertical
 msgid "Tile Vertically"
@@ -4062,7 +4062,7 @@ msgstr "cada"
 
 #: u_translation:rsfovnumber
 msgid "fov number:"
-msgstr "camp:"
+msgstr "Camp:"
 
 #: u_translation:rsindrive
 msgid "in drive"
