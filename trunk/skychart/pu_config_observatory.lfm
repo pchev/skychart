@@ -36,7 +36,7 @@ object f_config_observatory: Tf_config_observatory
           Height = 141
           Top = 105
           Width = 449
-          TabOrder = 11
+          TabOrder = 10
           TabStop = False
           Visible = False
         end
@@ -49,27 +49,27 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 1
           object Label58: TLabel
             Left = 4
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 42
+            Width = 48
             Caption = 'Degree'
             Color = clNone
             ParentColor = False
           end
           object Label59: TLabel
             Left = 48
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 24
+            Width = 27
             Caption = 'Min.'
             Color = clNone
             ParentColor = False
           end
           object Label60: TLabel
             Left = 80
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 26
+            Width = 28
             Caption = 'Sec.'
             Color = clNone
             ParentColor = False
@@ -146,27 +146,27 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 2
           object Label61: TLabel
             Left = 4
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 42
+            Width = 48
             Caption = 'Degree'
             Color = clNone
             ParentColor = False
           end
           object Label62: TLabel
             Left = 48
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 24
+            Width = 27
             Caption = 'Min.'
             Color = clNone
             ParentColor = False
           end
           object Label63: TLabel
             Left = 80
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 26
+            Width = 28
             Caption = 'Sec.'
             Color = clNone
             ParentColor = False
@@ -243,9 +243,9 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 3
           object Label70: TLabel
             Left = 8
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 40
+            Width = 45
             Caption = 'Meters'
             Color = clNone
             ParentColor = False
@@ -278,9 +278,9 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 5
           object Label81: TLabel
             Left = 4
-            Height = 13
+            Height = 15
             Top = 20
-            Width = 119
+            Width = 133
             Caption = 'Local Time =  UTC +'
             Color = clNone
             ParentColor = False
@@ -330,7 +330,7 @@ object f_config_observatory: Tf_config_observatory
           BorderSpacing.InnerBorder = 4
           Caption = 'Load'
           OnClick = ObsmapClick
-          TabOrder = 8
+          TabOrder = 11
         end
         object ZoomImage1: TZoomImage
           Cursor = crCross
@@ -348,19 +348,19 @@ object f_config_observatory: Tf_config_observatory
         end
         object HScrollBar: TScrollBar
           Left = 47
-          Height = 18
+          Height = 15
           Top = 452
           Width = 400
           PageSize = 1
-          TabOrder = 10
+          TabOrder = 8
           TabStop = False
           OnChange = HScrollBarChange
         end
         object VScrollBar: TScrollBar
           Left = 448
-          Height = 18
+          Height = 15
           Top = 251
-          Width = 18
+          Width = 15
           Kind = sbVertical
           PageSize = 1
           TabOrder = 9
@@ -376,7 +376,7 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 0
           object Label2: TLabel
             Left = 314
-            Height = 13
+            Height = 15
             Top = 35
             Width = 18
             Caption = '+/-'
@@ -385,9 +385,9 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label3: TLabel
             Left = 409
-            Height = 13
+            Height = 15
             Top = 35
-            Width = 23
+            Width = 24
             Caption = 'Km.'
             Color = clNone
             ParentColor = False
@@ -511,18 +511,18 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 4
           object Label82: TLabel
             Left = 21
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 107
+            Width = 114
             Caption = 'Pressure (millibar)'
             Color = clNone
             ParentColor = False
           end
           object Label83: TLabel
             Left = 141
-            Height = 13
+            Height = 15
             Top = 4
-            Width = 129
+            Width = 141
             Caption = 'Temperature (Celsius)'
             Color = clNone
             ParentColor = False

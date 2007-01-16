@@ -222,8 +222,8 @@ const cdcversion = 'Version 3 beta 0.1.3 svn ';
       CdcMinLocid='99999999';
       MaxCityList=100;
       // Location database source url
-      baseurl_us = 'http://geonames.usgs.gov/stategaz/';
-      baseurl_world = 'http://earth-info.nga.mil/gns/html/cntyfile/';
+      baseurl_us = 'http://www.ap-i.net/pub/skychart/gn/stategaz/';
+      baseurl_world = 'http://www.ap-i.net/pub/skychart/gn/cntyfile/';
       
       //Default URL
       URL_WebHome = 'http://www.ap-i.net/skychart';

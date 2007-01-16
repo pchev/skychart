@@ -473,7 +473,7 @@ citylistChange(self);
 end;
 
 procedure Tf_config_observatory.downloadcityClick(Sender: TObject);
-var country,fn,fnzip,buf:string;
+var country,state,fn,fnzip,buf:string;
 begin
 if countrylist.ItemIndex<0 then exit;
 if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
@@ -481,21 +481,27 @@ if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
   then begin
     country:=countrycode[countrylist.ItemIndex];
     if copy(country,1,3)='US-' then begin // US States
-       fn:=uppercase(copy(country,4,2))+'_DECI.TXT';
-       DownloadDialog1.URL:=baseurl_us+fn;
-       fn:=slash(TempDir)+fn;
-       DownloadDialog1.SaveToFile:=fn;
+       state:=uppercase(copy(country,4,2));
+       fnzip:=state+'_DECI.zip';
+       fn:=ChangeFileExt(fnzip,'.txt');
+       DownloadDialog1.URL:=baseurl_us+fnzip;
+       fnzip:=slash(TempDir)+fnzip;
+       DownloadDialog1.SaveToFile:=fnzip;
        if DownloadDialog1.Execute then begin
-          memo1.Visible:=true;
-          memo1.BringToFront;
-          application.ProcessMessages;
-          buf:=cdb.DeleteCountry(country,false);
-          memo1.Lines.Add(buf);
-          application.ProcessMessages;
-          cdb.LoadUSLocation(fn,false,memo1);
-          application.ProcessMessages;
-          sleep(2000);
-          memo1.Visible:=false;
+          if 1=FileUnzipEx(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
+            memo1.Visible:=true;
+            memo1.BringToFront;
+            application.ProcessMessages;
+            fn:=slash(TempDir)+fn;
+            buf:=cdb.DeleteCountry(country,false);
+            memo1.Lines.Add(buf);
+            application.ProcessMessages;
+            cdb.LoadUSLocation(fn,false,memo1,state);
+            application.ProcessMessages;
+            sleep(2000);
+            memo1.Visible:=false;
+          end
+          else Showmessage(Format(rsCancelWrongZ, [fnzip]));
        end else
           Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
     end else begin  // World
