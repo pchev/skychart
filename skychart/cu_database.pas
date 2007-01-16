@@ -48,7 +48,7 @@ type
      function CheckDB:boolean;
      procedure LoadCountryList(locfile:string; memo:Tmemo);
      procedure LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo);
-     procedure LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo);
+     procedure LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = '');
      procedure GetCountryList(codelist,countrylist:Tstrings);
      procedure GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
      procedure GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
@@ -1292,7 +1292,7 @@ except
 end;
 end;
 
-procedure TCDCdb.LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo);
+procedure TCDCdb.LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = '');
 var f: textfile;
     buf,sql: string;
     rec: TStringList;
@@ -1318,26 +1318,27 @@ if db.Active then begin
     if (nl mod 10000)=0 then begin Memo.lines.add(Format(rsProcessingLi, [
       inttostr(nl)])); application.processmessages; end;
     readln(f,buf);
-    SplitRec(buf,'|',rec);
+    SplitRec(buf,tab,rec);
      if ((not city_only)  // all names
-          or (rec[3]='ppl')  // populated place only
+          or (rec[2]='Populated Place')  // populated place only
         )
      then begin
+      if (state<>'')and(state<>rec[3]) then continue; // wrong state
       if not IsNumber(rec[9]) then continue;
       if not IsNumber(rec[10]) then continue;
-      elev:=strtointdef(rec[15],0)*footpermeter;
-      if rec[4]<>rec[2] then rec[2]:=rec[2]+', '+rec[4];
+      elev:=strtointdef(rec[15],0);
+      if rec[1]<>rec[5] then rec[1]:=rec[1]+', '+rec[5];
       sql:='insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
          'values ('+
          rec[0]+','+
-         '"US-'+rec[1]+'",'+
-         '"'+utf8encode(trim(rec[2]))+'",'+
-         '"'+rec[3]+'",'+
+         '"US-'+rec[3]+'",'+
+         '"'+utf8encode(trim(rec[1]))+'",'+
+         '"'+rec[2]+'",'+
          rec[9]+','+
          rec[10]+','+
          formatfloat('0.0',elev)+','+
          '0)';
-       if not db.Query(sql) then Memo.lines.add(db.ErrorMessage)
+       if not db.Query(sql) then Memo.lines.add(db.ErrorMessage+blank+rec[0])
           else inc(nl);
     end;
   until(eof(f));
