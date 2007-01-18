@@ -767,7 +767,7 @@ end;
 procedure Tf_main.SyncChild;
 var i,y,m,d: integer;
     ra,de,jda,t,tz: double;
-    st,dst: boolean;
+    st: boolean;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then begin
  ra:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.racentre;
@@ -777,8 +777,7 @@ if MultiDoc1.ActiveObject is Tf_chart then begin
  m:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curmonth;
  d:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curday;
  t:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curtime;
- tz:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.ObsTZ;
- dst:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.DST;
+ tz:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.Timezone;
  st:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.UseSystemTime;
  for i:=0 to MultiDoc1.ChildCount-1 do
   if (MultiDoc1.Childs[i].DockedObject is Tf_chart) and (MultiDoc1.Childs[i].DockedObject<>MultiDoc1.ActiveObject) then
@@ -789,8 +788,7 @@ if MultiDoc1.ActiveObject is Tf_chart then begin
       sc.cfgsc.curmonth:=m;
       sc.cfgsc.curday:=d;
       sc.cfgsc.curtime:=t;
-      sc.cfgsc.ObsTZ:=tz;
-      sc.cfgsc.DST:=dst;
+      sc.cfgsc.Timezone:=tz;
       sc.cfgsc.TrackOn:=false;
       sc.cfgsc.racentre:=ra;
       sc.cfgsc.decentre:=de;
@@ -937,6 +935,8 @@ try
     compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm');
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm') then
     arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm');
+ def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+ if def_cfgsc.tz.TimeZoneFile='' then SetupObservatory.Execute;
  application.ProcessMessages; // apply any resizing
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
@@ -1072,6 +1072,7 @@ if (not directoryexists(slash(appdir)+'data/constellation')) and
    appdir:=SharedDir;
 {$endif}
 SampleDir:=slash(appdir)+slash('data')+'sample';
+ZoneDir:=slash(appdir)+slash('data')+slash('zoneinfo');
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
@@ -1132,6 +1133,7 @@ end else Plan404ok:=false;
 {$endif}
 compass:=TBitmap.create;
 arrow:=TBitmap.create;
+def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -2612,8 +2614,7 @@ def_cfgsc.ymax:=100;
 def_cfgsc.ObsLatitude := 46.2 ;
 def_cfgsc.ObsLongitude := -6.1 ;
 def_cfgsc.ObsAltitude := 0 ;
-def_cfgsc.ObsTZ := GetTimezone ;
-def_cfgsc.DST := false;
+def_cfgsc.ObsTZ := 'Etc/GMT';
 def_cfgsc.ObsTemperature := 10 ;
 def_cfgsc.ObsPressure := 1010 ;
 def_cfgsc.ObsName := 'Genève' ;
@@ -3149,7 +3150,7 @@ csc.ObsTemperature := ReadFloat(section,'ObsTemperature',csc.ObsTemperature );
 csc.ObsPressure := ReadFloat(section,'ObsPressure',csc.ObsPressure );
 csc.ObsName := utf8decode(ReadString(section,'ObsName',csc.ObsName ));
 csc.ObsCountry := ReadString(section,'ObsCountry',csc.ObsCountry );
-csc.ObsTZ := ReadFloat(section,'ObsTZ',csc.ObsTZ );
+csc.ObsTZ := ReadString(section,'ObsTZ',csc.ObsTZ );
 section:='date';
 csc.UseSystemTime:=ReadBool(section,'UseSystemTime',csc.UseSystemTime);
 csc.CurYear:=ReadInteger(section,'CurYear',csc.CurYear);
@@ -3159,7 +3160,6 @@ csc.CurTime:=ReadFloat(section,'CurTime',csc.CurTime);
 csc.autorefresh:=ReadBool(section,'autorefresh',csc.autorefresh);
 csc.Force_DT_UT:=ReadBool(section,'Force_DT_UT',csc.Force_DT_UT);
 csc.DT_UT_val:=ReadFloat(section,'DT_UT_val',csc.DT_UT_val);
-csc.DST:=ReadBool(section,'DST',csc.DST);
 section:='projection';
 for i:=1 to maxfield do csc.projname[i]:=ReadString(section,'ProjName'+inttostr(i),csc.projname[i] );
 section:='labels';
@@ -3572,7 +3572,7 @@ WriteFloat(section,'ObsTemperature',csc.ObsTemperature );
 WriteFloat(section,'ObsPressure',csc.ObsPressure );
 WriteString(section,'ObsName',utf8encode(csc.ObsName) );
 WriteString(section,'ObsCountry',csc.ObsCountry );
-WriteFloat(section,'ObsTZ',csc.ObsTZ );
+WriteString(section,'ObsTZ',csc.ObsTZ );
 section:='date';
 WriteBool(section,'UseSystemTime',csc.UseSystemTime);
 WriteInteger(section,'CurYear',csc.CurYear);
@@ -3582,7 +3582,6 @@ WriteFloat(section,'CurTime',csc.CurTime);
 WriteBool(section,'autorefresh',csc.autorefresh);
 WriteBool(section,'Force_DT_UT',csc.Force_DT_UT);
 WriteFloat(section,'DT_UT_val',csc.DT_UT_val);
-WriteBool(section,'DST',csc.DST);
 section:='projection';
 for i:=1 to maxfield do WriteString(section,'ProjName'+inttostr(i),csc.projname[i] );
 section:='labels';
@@ -4592,6 +4591,7 @@ try
        ForceDirectories(Extractfilepath(cfgm.db));
     if (cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport)
        and cdcdb.CheckDB) then begin
+          cdcdb.CheckForUpgrade(f_info.ProgressMemo);
           planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           SetLpanel1(Format(rsConnectedToS, [cfgm.db]));

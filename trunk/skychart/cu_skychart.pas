@@ -410,13 +410,7 @@ function Tskychart.InitTime:boolean;
 var y,m,d:integer;
     t:double;
 begin
-if cfgsc.UseSystemTime then begin
-   SetCurrentTime(cfgsc);
-   cfgsc.TimeZone:=GetTimezone
-end else begin
-   cfgsc.TimeZone:=cfgsc.ObsTZ;
-   if cfgsc.DST then cfgsc.timezone:=cfgsc.timezone+1 ;
-end;
+if cfgsc.UseSystemTime then SetCurrentTime(cfgsc);
 cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc);
 cfgsc.CurJD:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);

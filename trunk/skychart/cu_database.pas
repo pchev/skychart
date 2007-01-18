@@ -45,11 +45,13 @@ type
      function dropDB(cmain: Tconf_main): string;
      function checkDBConfig(cmain: Tconf_main): string;
      Function ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
+     function CheckForUpgrade(memo:Tmemo):boolean;
      function CheckDB:boolean;
      procedure LoadCountryList(locfile:string; memo:Tmemo);
      procedure LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo);
      procedure LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = '');
      procedure GetCountryList(codelist,countrylist:Tstrings);
+     procedure GetCountryISOCode(countrycode:string; var isocode: string);
      procedure GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
      procedure GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
      function  GetCityLoc(locid:string; var loctype,latitude,longitude,elevation,timezone: string):boolean;
@@ -158,6 +160,23 @@ if db.Active then begin
 end
  else result:=false;
 if creatednow and (Assigned(FInitializeDB)) then FInitializeDB(self);
+end;
+
+function TCDCdb.CheckForUpgrade(memo:Tmemo):boolean;
+begin
+result:=false;
+if db.Active then begin
+  // add isocode column to country table
+  if (cdcver<='3.0.1.6')and(not db.Query('select isocode from cdc_country where country="AF"')) then begin
+     db.Query('drop table cdc_country');
+     writetrace('Drop table cdc_country ... '+db.ErrorMessage);
+     db.Commit;
+     db.Query('CREATE TABLE '+sqltable[dbtype,9,1]+sqltable[dbtype,9,2]);
+     writetrace('Create table '+sqltable[dbtype,9,1]+' ...  '+db.ErrorMessage);
+     LoadCountryList(slash(sampledir)+'country.dat',memo);
+     result:=true;
+  end;
+end;
 end;
 
 function TCDCdb.checkDBConfig(cmain: Tconf_main):string;
@@ -1213,10 +1232,11 @@ if db.Active then begin
   repeat
     readln(f,buf);
     SplitRec(buf,tab,rec);
-    sql:='insert into cdc_country (country,name)'+
+    sql:='insert into cdc_country (country,isocode,name)'+
        'values ('+
        '"'+rec[0]+'",'+
-       '"'+rec[1]+'")';
+       '"'+rec[1]+'",'+
+       '"'+rec[2]+'")';
     if not db.Query(sql) then Memo.lines.add(db.ErrorMessage);
   until(eof(f));
   db.Commit;
@@ -1368,6 +1388,11 @@ while i<db.RowCount do begin
   countrylist.add(utf8decode(buf));
   inc(i);
 end;
+end;
+
+procedure TCDCdb.GetCountryISOCode(countrycode:string; var isocode: string);
+begin
+isocode:=db.QueryOne('select isocode from cdc_country where country = "'+countrycode+'"');
 end;
 
 procedure TCDCdb.GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);

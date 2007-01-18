@@ -151,9 +151,9 @@ object f_calendar: Tf_calendar
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 13
+      Height = 15
       Top = 14
-      Width = 30
+      Width = 33
       Caption = 'From'
       Color = clNone
       Font.Style = [fsBold]
@@ -161,9 +161,9 @@ object f_calendar: Tf_calendar
     end
     object Label2: TLabel
       Left = 184
-      Height = 13
+      Height = 15
       Top = 14
-      Width = 12
+      Width = 13
       Caption = 'to'
       Color = clNone
       Font.Style = [fsBold]
@@ -171,9 +171,9 @@ object f_calendar: Tf_calendar
     end
     object Label5: TLabel
       Left = 52
-      Height = 13
+      Height = 15
       Top = 46
-      Width = 12
+      Width = 13
       Caption = 'at'
       Color = clNone
       Font.Style = [fsBold]
@@ -181,9 +181,9 @@ object f_calendar: Tf_calendar
     end
     object Label3: TLabel
       Left = 176
-      Height = 13
+      Height = 15
       Top = 46
-      Width = 22
+      Width = 24
       Caption = 'pas'
       Color = clNone
       Font.Style = [fsBold]
@@ -191,9 +191,9 @@ object f_calendar: Tf_calendar
     end
     object Label4: TLabel
       Left = 242
-      Height = 13
+      Height = 15
       Top = 46
-      Width = 30
+      Width = 31
       Caption = 'jours'
       Color = clNone
       Font.Style = [fsBold]
@@ -211,10 +211,10 @@ object f_calendar: Tf_calendar
       Visible = False
       object Label9: TLabel
         Left = 1
-        Height = 43
+        Height = 66
         Hint = 'http://users2.ev1.net/~mmccants/'
         Top = 4
-        Width = 215
+        Width = 214
         Caption = 'Satellites calculation use QuickSat by Mike McCants, Iridium flare prediction use Iridflar by Robert Matson'
         Color = clNone
         ParentColor = False
@@ -412,7 +412,7 @@ object f_calendar: Tf_calendar
     object twilight: TTabSheet
       Caption = 'Twilight'
       object TwilightGrid: TStringGrid
-        Height = 288
+        Height = 286
         Width = 633
         Align = alClient
         ColCount = 5
@@ -433,7 +433,7 @@ object f_calendar: Tf_calendar
       Caption = 'Planets'
       ImageIndex = 1
       object Pagecontrol2: TPageControl
-        Height = 288
+        Height = 286
         Width = 633
         ActivePage = Psoleil
         Align = alClient
@@ -443,7 +443,7 @@ object f_calendar: Tf_calendar
           Caption = 'Sun'
           ImageIndex = 9
           object SoleilGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -476,7 +476,7 @@ object f_calendar: Tf_calendar
         object Mercure: TTabSheet
           Caption = 'Mercury'
           object MercureGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -510,7 +510,7 @@ object f_calendar: Tf_calendar
           Caption = 'Venus'
           ImageIndex = 1
           object VenusGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -544,7 +544,7 @@ object f_calendar: Tf_calendar
           Caption = 'Moon'
           ImageIndex = 2
           object LuneGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -578,7 +578,7 @@ object f_calendar: Tf_calendar
           Caption = 'Mars'
           ImageIndex = 3
           object MarsGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -612,7 +612,7 @@ object f_calendar: Tf_calendar
           Caption = 'Jupiter'
           ImageIndex = 4
           object JupiterGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -646,7 +646,7 @@ object f_calendar: Tf_calendar
           Caption = 'Saturn'
           ImageIndex = 5
           object SaturneGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -680,7 +680,7 @@ object f_calendar: Tf_calendar
           Caption = 'Uranus'
           ImageIndex = 6
           object UranusGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -714,7 +714,7 @@ object f_calendar: Tf_calendar
           Caption = 'Neptun'
           ImageIndex = 7
           object NeptuneGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -748,7 +748,7 @@ object f_calendar: Tf_calendar
           Caption = 'Pluto'
           ImageIndex = 8
           object PlutonGrid: TStringGrid
-            Height = 288
+            Height = 286
             Width = 633
             Align = alClient
             ColCount = 11
@@ -784,7 +784,7 @@ object f_calendar: Tf_calendar
       Caption = 'Comets'
       ImageIndex = 2
       object CometGrid: TStringGrid
-        Height = 245
+        Height = 243
         Top = 43
         Width = 633
         Align = alClient
@@ -856,7 +856,7 @@ object f_calendar: Tf_calendar
       Caption = 'Asteroids'
       ImageIndex = 6
       object AsteroidGrid: TStringGrid
-        Height = 245
+        Height = 243
         Top = 43
         Width = 633
         Align = alClient
@@ -924,7 +924,7 @@ object f_calendar: Tf_calendar
       Caption = 'Solar Eclipses'
       ImageIndex = 3
       object SolarGrid: TStringGrid
-        Height = 288
+        Height = 286
         Width = 633
         Align = alClient
         ColCount = 12
@@ -959,7 +959,7 @@ object f_calendar: Tf_calendar
       Caption = 'Lunar Eclipses'
       ImageIndex = 4
       object LunarGrid: TStringGrid
-        Height = 288
+        Height = 286
         Width = 633
         Align = alClient
         ColCount = 9

@@ -895,13 +895,15 @@ end;
 
 function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
 var y,m,d:word;
+    n: TDateTime;
 begin
-decodedate(now,y,m,d);
+n:=cfgsc.tz.NowLocalTime;
+decodedate(n,y,m,d);
 cfgsc.CurYear:=y;
 cfgsc.CurMonth:=m;
 cfgsc.CurDay:=d;
-cfgsc.CurTime:=frac(now)*24;
-cfgsc.TimeZone:=GetTimezone;
+cfgsc.CurTime:=frac(n)*24;
+cfgsc.TimeZone:=cfgsc.tz.SecondsOffset/3600;
 result:=true;
 end;
 

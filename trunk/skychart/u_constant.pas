@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses gcatunit, {libcatalog,} // libcatalog statically linked
-     Classes,
-     FPCanvas, Graphics;
+     cu_tz,
+     Classes, FPCanvas, Graphics;
 
 const MaxColor = 35;
       crlf = chr(13)+chr(10);
@@ -59,6 +59,7 @@ const cdcversion = 'Version 3 beta 0.1.3 svn ';
       tlight = km_au/clight/3600/24;
       footpermeter = 0.3048;
       kmperdegree=111.1111;
+      secday=3600*24;
       eps2000 = 23.439291111;
       deg2rad = pi/180;
       rad2deg = 180/pi;
@@ -398,15 +399,16 @@ type
                 constructor Create;
                 destructor Destroy; override;
                 procedure Assign(Source: Tconf_skychart);
+                tz: TCdCTimeZone;
                 racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
-                Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP,moved,DST : Boolean;
+                Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP,moved : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
                 FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
                 SimNb,SimD,SimH,SimM,SimS,SimLabel : Integer;
                 SimObject: array[1..NumSimObject] of boolean;
                 SimLine,SimDateLabel,SimNameLabel,SimMagLabel,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet : Boolean;
-                ObsLatitude,ObsLongitude,ObsAltitude,ObsTZ : double;
+                ObsLatitude,ObsLongitude,ObsAltitude : double; ObsTZ: string;
                 ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
                 ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
@@ -587,7 +589,7 @@ var gzopen : Tgzopen;
 }
 
 // pseudo-constant only here
-Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir : string;
+Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, ZoneDir : string;
      Configfile, SysDecimalSeparator, Lang : string;
      compile_time:string;
      ldeg,lmin,lsec : string;
@@ -816,6 +818,7 @@ sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
                            'rotation  double NOT NULL default "0", '+
                            'PRIMARY KEY (ra,de))','2'),
            ('cdc_country','(country varchar(5) NOT NULL default "",'+
+                           'isocode varchar(5) NOT NULL default "",'+
                            'name varchar(50) NOT NULL default "",'+
                            'PRIMARY KEY (country))',''),
            ('cdc_location','(locid integer NOT NULL ,'+
@@ -869,6 +872,7 @@ sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
                            'rotation  NUMERIC NOT NULL default "0", '+
                            'PRIMARY KEY (ra,de))','2'),
            ('cdc_country','(country TEXT NOT NULL default "",'+
+                           'isocode TEXT NOT NULL default "",'+
                            'name TEXT NOT NULL default "",'+
                            'PRIMARY KEY (country))',''),
            ('cdc_location','(locid INTEGER NOT NULL ,'+
@@ -1030,6 +1034,7 @@ end;
 constructor Tconf_skychart.Create;
 begin
   Inherited Create;
+  tz:=TCdCTimeZone.Create;
 end;
 
 destructor Tconf_skychart.Destroy;
@@ -1038,12 +1043,14 @@ begin
   SetLength(CometLst,0);
   SetLength(AsteroidName,0);
   SetLength(CometName,0);
+  tz.Free;
   Inherited Destroy;
 end;
 
 procedure Tconf_skychart.Assign(Source: Tconf_skychart);
 var i,j,k : integer;
 begin
+tz.Assign(Source.tz);
 racentre:=Source.racentre ;
 decentre:=Source.decentre ;
 fov:=Source.fov ;
@@ -1071,7 +1078,6 @@ Quick:=Source.Quick ;
 NP:=Source.NP ;
 SP:=Source.SP ;
 moved:=Source.moved ;
-DST:=Source.DST ;
 projtype:=Source.projtype ;
 FlipX:=Source.FlipX ;
 FlipY:=Source. FlipY;

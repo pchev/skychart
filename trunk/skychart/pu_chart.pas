@@ -2232,7 +2232,7 @@ end;
 function Tf_chart.cmd_SetTZ(tz:string):string;
 begin
 try
-  sc.cfgsc.ObsTZ:=strtofloat(tz);
+  sc.cfgsc.ObsTZ:=tz;
   result:=msgOK;
 except
   result:=msgFailed;
@@ -2241,7 +2241,7 @@ end;
 
 function Tf_chart.cmd_GetTZ:string;
 begin
- result:=msgOK+blank+formatfloat(f1,sc.cfgsc.ObsTZ);
+ result:=msgOK+blank+sc.cfgsc.ObsTZ;
 end;
 
 function Tf_chart.cmd_IdentCursor:string;
@@ -2560,6 +2560,8 @@ procedure Tf_chart.SetJD(njd:double);
 var y,m,d : integer;
     h : double;
 begin
+sc.cfgsc.tz.JD:=njd;
+sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
 djd(njd,y,m,d,h);
 sc.cfgsc.UseSystemTime:=false;
 sc.cfgsc.CurYear:=y;
