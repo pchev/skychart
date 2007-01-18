@@ -1147,8 +1147,8 @@ if (aRow>=0)and(aColumn>=0) then begin
     if assigned(FGetChartConfig) then FGetChartConfig(csconfig)
                                  else csconfig.Assign(config);
     csconfig.UseSystemTime:=false;
-    csconfig.ObsTZ:=csconfig.Timezone;
-    if csconfig.DST then csconfig.ObsTZ:=csconfig.ObsTZ-1 ;
+//    csconfig.ObsTZ:=csconfig.Timezone;
+//    if csconfig.DST then csconfig.ObsTZ:=csconfig.ObsTZ-1 ;
     djd(p.jd+config.timezone/24,csconfig.CurYear,csconfig.CurMonth,csconfig.CurDay,csconfig.CurTime);
     if Sender = solargrid then  begin      // Solar eclipse
        if (aColumn=1) then begin   // image map

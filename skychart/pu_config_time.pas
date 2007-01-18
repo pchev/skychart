@@ -43,6 +43,7 @@ type
     DST: TCheckBox;
     JDEdit: TFloatEdit;
     Label1: TLabel;
+    tzLabel: TLabel;
     MainPanel: TPanel;
     Page1: TPage;
     Page2: TPage;
@@ -99,7 +100,6 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
-    procedure DSTChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -110,7 +110,6 @@ type
     procedure SimObjItemClick(Sender: TObject; Index: LongInt);
     procedure TimeChange(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
-    procedure tzChange(Sender: TObject);
     procedure CheckBox4Click(Sender: TObject);
     procedure dt_utChange(Sender: TObject);
     procedure nbstepChanged(Sender: TObject);
@@ -281,13 +280,9 @@ artostr2(csc.curtime,h,n,s);
 t_hour.value:=strtoint(h);
 t_min.value:=strtoint(n);
 t_sec.value:=strtoint(s);
-if csc.UseSystemTime then begin
-   tz.value:=GetTimezone;
-   DST.Checked:=false;
-end else begin
-   tz.value:=csc.ObsTZ;
-   DST.Checked:=csc.DST;
-end;
+tz.value:=csc.tz.SecondsOffset/3600;
+DST.Checked:=csc.tz.Daylight;
+tzlabel.caption:=csc.tz.ZoneName;
 Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
 if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
@@ -338,8 +333,6 @@ t_hour.enabled:=d_year.enabled;
 t_min.enabled:=d_year.enabled;
 t_sec.enabled:=d_year.enabled;
 bitbtn4.enabled:=d_year.enabled;
-tz.enabled:=d_year.enabled;
-DST.enabled:=d_year.enabled;
 JDedit.enabled:=d_year.enabled;
 BitBtn1.enabled:=d_year.enabled;
 ShowTime;
@@ -362,6 +355,9 @@ procedure Tf_config_time.JDEditChange(Sender: TObject);
 begin
 if LockChange or LockJD then exit;
 Djd(JDEdit.Value+csc.timezone/24,csc.curyear,csc.curmonth,csc.curday,csc.CurTime);
+csc.tz.Date:=EncodeDate(csc.curyear,csc.curmonth,csc.curday)+csc.curtime/secday;
+csc.TimeZone:=csc.tz.SecondsOffset/3600;
+tzlabel.caption:=csc.tz.ZoneName;
 LockChange:=true;
 LockJD:=true;
 ShowTime;
@@ -381,13 +377,6 @@ if (not CheckGroup1.Checked[0])and(not CheckGroup1.Checked[1])and(not CheckGroup
 csc.SimNameLabel:=CheckGroup1.Checked[0];
 csc.SimDateLabel:=CheckGroup1.Checked[1];
 csc.SimMagLabel:=CheckGroup1.Checked[2];
-end;
-
-procedure Tf_config_time.DSTChange(Sender: TObject);
-begin
-if LockChange then exit;
-csc.DST:=DST.Checked;
-tzChange(tz);
 end;
 
 procedure Tf_config_time.FormClose(Sender: TObject;
@@ -427,7 +416,11 @@ if adbc.itemindex=0 then
 else
   csc.curyear:=1-d_year.value;
 csc.curmonth:=d_month.value;
+d_day.maxvalue:=MonthDays[IsleapYear(csc.curyear),csc.curmonth];
 csc.curday:=d_day.value;
+csc.tz.Date:=EncodeDate(csc.curyear,csc.curmonth,csc.curday)+csc.curtime/secday;
+csc.TimeZone:=csc.tz.SecondsOffset/3600;
+tzlabel.caption:=csc.tz.ZoneName;
 csc.DT_UT:=DTminusUT(csc.curyear,csc);
 Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
@@ -446,6 +439,9 @@ procedure Tf_config_time.TimeChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.curtime:=t_hour.value+t_min.value/60+t_sec.value/3600;
+csc.tz.Date:=EncodeDate(csc.curyear,csc.curmonth,csc.curday)+csc.curtime/secday;
+csc.TimeZone:=csc.tz.SecondsOffset/3600;
+tzlabel.caption:=csc.tz.ZoneName;
 LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
@@ -455,34 +451,18 @@ procedure Tf_config_time.BitBtn4Click(Sender: TObject);
 var y,m,d,h,n,s,ms : word;
 begin
  ADBC.itemindex:=0;
- decodedate(now,y,m,d);
- decodeTime(now,h,n,s,ms);
+ decodedate(csc.tz.NowLocalTime,y,m,d);
+ decodeTime(csc.tz.NowLocalTime,h,n,s,ms);
  d_year.value:=y;
  d_month.value:=m;
  d_day.value:=d;
  t_hour.value:=h;
  t_min.value:=n;
  t_sec.value:=s;
- tz.value:=GetTimezone;
  DateChange(Sender);
  TimeChange(Sender);
 end;
 
-procedure Tf_config_time.tzChange(Sender: TObject);
-var tzone:double;
-begin
-if LockChange then exit;
-with sender as Tfloatedit do begin
-  tzone:=value;
-end;
-csc.timezone:=tzone;
-if csc.DST then csc.timezone:=csc.timezone+1 ;
-LockChange:=true;
-JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
-LockChange:=false;
-// same value in Time and Observatory panel
-if not csc.UseSystemTime then csc.obstz:=tzone;
-end;
 
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);
 begin

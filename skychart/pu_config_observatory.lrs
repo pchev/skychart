@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   'TPF0'#21'Tf_config_observatory'#20'f_config_observatory'#4'Left'#3'k'#1#6'He'
   +'ight'#3'!'#2#3'Top'#3#183#0#5'Width'#3#217#1#18'HorzScrollBar.Page'#3#216#1
@@ -11,167 +13,172 @@ LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   +#235#1#3'Top'#2#1#5'Width'#3#216#1#5'Align'#7#8'alClient'#9'PageIndex'#2#0#8
   +'ShowTabs'#8#0#5'TPage'#5'Page1'#7'Caption'#6#11'Observatory'#0#5'TMemo'#5'M'
   +'emo1'#4'Left'#2#8#6'Height'#3#141#0#3'Top'#2'i'#5'Width'#3#193#1#8'TabOrder'
-  +#2#10#7'TabStop'#8#7'Visible'#8#0#0#9'TGroupBox'#8'Latitude'#4'Left'#2#8#6'H'
-  +'eight'#2'D'#3'Top'#2'o'#5'Width'#3#185#0#7'Caption'#6#8'Latitude'#8'TabOrde'
-  +'r'#2#1#0#6'TLabel'#7'Label58'#4'Left'#2#4#6'Height'#2#15#3'Top'#2#4#5'Width'
-  +#2'0'#7'Caption'#6#6'Degree'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TL'
-  +'abel'#7'Label59'#4'Left'#2'0'#6'Height'#2#15#3'Top'#2#4#5'Width'#2#27#7'Cap'
-  +'tion'#6#4'Min.'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Labe'
-  +'l60'#4'Left'#2'P'#6'Height'#2#15#3'Top'#2#4#5'Width'#2#28#7'Caption'#6#4'Se'
-  +'c.'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TComboBox'#5'hemis'#4'Left'
-  +#2'p'#6'Height'#2#21#3'Top'#2#21#5'Width'#2'A'#16'AutoCompleteText'#11#20'cb'
-  +'actSearchAscending'#0#10'ItemHeight'#2#13#9'ItemIndex'#2#0#13'Items.Strings'
-  +#1#6#5'North'#6#5'South'#0#9'MaxLength'#2#0#8'OnChange'#7#12'latdegChange'#8
-  +'TabOrder'#2#3#4'Text'#6#5'North'#0#0#9'TLongEdit'#6'latdeg'#4'Left'#2#4#6'H'
-  +'eight'#2#22#4'Hint'#6#5'0..90'#3'Top'#2#20#5'Width'#2'!'#11'BorderStyle'#7#8
-  +'bsSingle'#9'MaxLength'#2#2#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHin'
-  +'t'#9#8'TabOrder'#2#0#6'OnExit'#7#12'latdegChange'#8'MaxValue'#2'Z'#0#0#9'TL'
-  +'ongEdit'#6'latmin'#4'Left'#2'0'#6'Height'#2#22#4'Hint'#6#5'0..59'#3'Top'#2
-  +#20#5'Width'#2#25#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#2#11'ParentCo'
-  +'lor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#6'OnExit'#7#12'la'
-  +'tdegChange'#8'MaxValue'#2';'#0#0#9'TLongEdit'#6'latsec'#4'Left'#2'P'#6'Heig'
-  +'ht'#2#22#4'Hint'#6#5'0..59'#3'Top'#2#20#5'Width'#2#25#11'BorderStyle'#7#8'b'
-  +'sSingle'#9'MaxLength'#2#2#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'
-  +#9#8'TabOrder'#2#2#6'OnExit'#7#12'latdegChange'#8'MaxValue'#2';'#0#0#0#9'TGr'
-  +'oupBox'#9'Longitude'#4'Left'#3#192#0#6'Height'#2'D'#3'Top'#2'o'#5'Width'#3
-  +#185#0#7'Caption'#6#9'Longitude'#8'TabOrder'#2#2#0#6'TLabel'#7'Label61'#4'Le'
-  +'ft'#2#4#6'Height'#2#15#3'Top'#2#4#5'Width'#2'0'#7'Caption'#6#6'Degree'#5'Co'
-  +'lor'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Label62'#4'Left'#2'0'#6
-  +'Height'#2#15#3'Top'#2#4#5'Width'#2#27#7'Caption'#6#4'Min.'#5'Color'#7#6'clN'
-  +'one'#11'ParentColor'#8#0#0#6'TLabel'#7'Label63'#4'Left'#2'P'#6'Height'#2#15
-  +#3'Top'#2#4#5'Width'#2#28#7'Caption'#6#4'Sec.'#5'Color'#7#6'clNone'#11'Paren'
-  +'tColor'#8#0#0#9'TComboBox'#4'long'#4'Left'#2'p'#6'Height'#2#21#3'Top'#2#21#5
-  +'Width'#2'A'#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#10'ItemHeigh'
-  +'t'#2#13#9'ItemIndex'#2#1#13'Items.Strings'#1#6#4'West'#6#4'East'#0#9'MaxLen'
-  +'gth'#2#0#8'OnChange'#7#13'longdegChange'#8'TabOrder'#2#3#4'Text'#6#4'East'#0
-  +#0#9'TLongEdit'#7'longdeg'#4'Left'#2#4#6'Height'#2#22#4'Hint'#6#6'0..180'#3
-  +'Top'#2#20#5'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#4#11'P'
-  +'arentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#6'OnExit'#7
-  +#13'longdegChange'#8'MaxValue'#3#180#0#0#0#9'TLongEdit'#7'longmin'#4'Left'#2
-  +'0'#6'Height'#2#22#4'Hint'#6#5'0..59'#3'Top'#2#21#5'Width'#2#25#11'BorderSty'
-  +'le'#7#8'bsSingle'#9'MaxLength'#2#2#11'ParentColor'#8#14'ParentShowHint'#8#8
-  +'ShowHint'#9#8'TabOrder'#2#1#6'OnExit'#7#13'longdegChange'#8'MaxValue'#2';'#0
-  +#0#9'TLongEdit'#7'longsec'#4'Left'#2'P'#6'Height'#2#22#4'Hint'#6#5'0..59'#3
-  +'Top'#2#20#5'Width'#2#25#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#2#11'P'
-  +'arentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#2#6'OnExit'#7
-  +#13'longdegChange'#8'MaxValue'#2';'#0#0#0#9'TGroupBox'#8'Altitude'#4'Left'#3
-  +'x'#1#6'Height'#2'D'#3'Top'#2'o'#5'Width'#2'Q'#7'Caption'#6#8'Altitude'#8'Ta'
-  +'bOrder'#2#3#0#6'TLabel'#7'Label70'#4'Left'#2#8#6'Height'#2#15#3'Top'#2#4#5
-  +'Width'#2'-'#7'Caption'#6#6'Meters'#5'Color'#7#6'clNone'#11'ParentColor'#8#0
-  +#0#10'TFloatEdit'#8'altmeter'#4'Left'#2#4#6'Height'#2#22#4'Hint'#6#10'-500..'
-  +'9000'#3'Top'#2#20#5'Width'#2'A'#11'BorderStyle'#7#8'bsSingle'#11'ParentColo'
-  +'r'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'OnChange'#7#14'al'
-  +'tmeterChange'#8'Decimals'#2#0#8'MinValue'#3#12#254#8'MaxValue'#3'(#'#6'Digi'
-  +'ts'#2#5#11'NumericType'#7#7'ntFixed'#0#0#0#9'TGroupBox'#8'timezone'#4'Left'
-  ,#3#24#1#6'Height'#2'<'#3'Top'#3#186#0#5'Width'#3#177#0#7'Caption'#6#9'Time Z'
-  +'one'#8'TabOrder'#2#5#0#6'TLabel'#7'Label81'#4'Left'#2#4#6'Height'#2#15#3'To'
-  +'p'#2#20#5'Width'#3#133#0#7'Caption'#6#19'Local Time =  UTC +'#5'Color'#7#6
-  +'clNone'#11'ParentColor'#8#0#0#10'TFloatEdit'#5'timez'#4'Left'#2'|'#6'Height'
-  +#2#22#4'Hint'#6#7'-12..12'#3'Top'#2#15#5'Width'#2'%'#11'BorderStyle'#7#8'bsS'
-  +'ingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0
-  +#8'OnChange'#7#11'timezChange'#8'MinValue'#2#244#8'MaxValue'#2#12#11'Numeric'
-  +'Type'#7#7'ntFixed'#0#0#0#7'TButton'#5'Obszp'#4'Left'#2#3#6'Height'#2#25#3'T'
-  +'op'#3#27#1#5'Width'#2')'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#1'+'
-  +#7'OnClick'#7#10'ObszpClick'#8'TabOrder'#2#6#0#0#7'TButton'#5'Obszm'#4'Left'
-  +#2#3#6'Height'#2#25#3'Top'#3'C'#1#5'Width'#2')'#25'BorderSpacing.InnerBorder'
-  +#2#4#7'Caption'#6#1'-'#7'OnClick'#7#10'ObszmClick'#8'TabOrder'#2#7#0#0#7'TBu'
-  +'tton'#6'Obsmap'#4'Left'#2#3#6'Height'#2#25#3'Top'#3'k'#1#5'Width'#2')'#25'B'
-  +'orderSpacing.InnerBorder'#2#4#7'Caption'#6#4'Load'#7'OnClick'#7#11'ObsmapCl'
-  +'ick'#8'TabOrder'#2#11#0#0#10'TZoomImage'#10'ZoomImage1'#6'Cursor'#7#7'crCro'
-  +'ss'#4'Left'#2'/'#6'Height'#3#200#0#3'Top'#3#251#0#5'Width'#3#144#1#18'Canva'
-  +'s.Brush.Color'#7#7'clBlack'#4'Zoom'#2#25#7'ZoomMin'#2#25#7'ZoomMax'#2#26#9
-  +'OnMouseUp'#7#17'ZoomImage1MouseUp'#7'OnPaint'#7#15'ZoomImage1Paint'#11'OnPo'
-  +'sChange'#7#19'ZoomImage1PosChange'#0#0#10'TScrollBar'#10'HScrollBar'#4'Left'
-  +#2'/'#6'Height'#2#15#3'Top'#3#196#1#5'Width'#3#144#1#8'PageSize'#2#1#8'TabOr'
-  +'der'#2#8#7'TabStop'#8#8'OnChange'#7#16'HScrollBarChange'#0#0#10'TScrollBar'
-  +#10'VScrollBar'#4'Left'#3#192#1#6'Height'#2#15#3'Top'#3#251#0#5'Width'#2#15#4
-  +'Kind'#7#10'sbVertical'#8'PageSize'#2#1#8'TabOrder'#2#9#7'TabStop'#8#8'OnCha'
-  +'nge'#7#16'VScrollBarChange'#0#0#9'TGroupBox'#7'obsname'#4'Left'#2#8#6'Heigh'
-  +'t'#2'i'#3'Top'#2#255#5'Width'#3#193#1#7'Caption'#6#20'Observatory Database'
-  +#8'TabOrder'#2#0#0#6'TLabel'#6'Label2'#4'Left'#3':'#1#6'Height'#2#15#3'Top'#2
-  +'#'#5'Width'#2#18#7'Caption'#6#3'+/-'#5'Color'#7#6'clNone'#11'ParentColor'#8
-  +#0#0#6'TLabel'#6'Label3'#4'Left'#3#153#1#6'Height'#2#15#3'Top'#2'#'#5'Width'
-  +#2#24#7'Caption'#6#3'Km.'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TComb'
-  +'oBox'#8'citylist'#4'Left'#2#8#6'Height'#2#21#3'Top'#2#31#5'Width'#3#233#0#12
-  +'AutoComplete'#9#16'AutoCompleteText'#11#12'cbactEnabled'#22'cbactEndOfLineC'
-  +'omplete'#20'cbactSearchAscending'#0#10'ItemHeight'#2#13#9'MaxLength'#2#0#8
-  +'OnChange'#7#14'citylistChange'#8'OnSelect'#7#14'citylistChange'#8'TabOrder'
-  +#2#3#4'Text'#6#3'...'#0#0#7'TButton'#10'citysearch'#4'Left'#3'm'#1#6'Height'
-  +#2#25#3'Top'#2#1#5'Width'#2'L'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6
-  +#6'Search'#7'Default'#9#7'OnClick'#7#15'citysearchClick'#8'TabOrder'#2#2#0#0
-  +#9'TComboBox'#11'countrylist'#4'Left'#2#8#6'Height'#2#21#3'Top'#2#1#5'Width'
-  +#3#234#0#16'AutoCompleteText'#11#22'cbactEndOfLineComplete'#20'cbactSearchAs'
-  +'cending'#0#13'DropDownCount'#2#10#10'ItemHeight'#2#13#9'MaxLength'#2#0#8'On'
-  +'Select'#7#17'countrylistChange'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2
-  +#0#0#0#5'TEdit'#10'cityfilter'#4'Left'#3#248#0#6'Height'#2#21#3'Top'#2#1#5'W'
-  +'idth'#2'h'#9'OnKeyDown'#7#17'cityfilterKeyDown'#8'TabOrder'#2#1#0#0#7'TButt'
-  +'on'#12'downloadcity'#4'Left'#3#249#0#6'Height'#2#25#3'Top'#2'<'#5'Width'#3
-  +#192#0#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#24'Download country de'
-  +'tails'#7'OnClick'#7#17'downloadcityClick'#8'TabOrder'#2#8#0#0#7'TButton'#7
-  +'updcity'#4'Left'#2']'#6'Height'#2#25#3'Top'#2'<'#5'Width'#2'H'#25'BorderSpa'
-  +'cing.InnerBorder'#2#4#7'Caption'#6#6'Update'#7'OnClick'#7#12'updcityClick'#8
-  +'TabOrder'#2#6#0#0#7'TButton'#7'delcity'#4'Left'#3#169#0#6'Height'#2#25#3'To'
-  +'p'#2'<'#5'Width'#2'H'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6'Dele'
-  +'te'#7'OnClick'#7#12'delcityClick'#8'TabOrder'#2#7#0#0#5'TEdit'#7'LocCode'#6
-  +'Cursor'#7#11'crHandPoint'#4'Left'#2#8#6'Height'#2#23#4'Hint'#6#16'Designati'
-  +'on Code'#3'Top'#2'<'#5'Width'#2'P'#5'Color'#7#9'clBtnFace'#7'OnClick'#7#12
-  +'LocCodeClick'#14'ParentShowHint'#8#8'ReadOnly'#9#8'ShowHint'#9#8'TabOrder'#2
-  +#9#0#0#7'TButton'#8'vicinity'#4'Left'#3#248#0#6'Height'#2#25#3'Top'#2#28#5'W'
-  +'idth'#2'<'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#8'Vicinity'#7'OnC'
-  +'lick'#7#13'vicinityClick'#8'TabOrder'#2#4#0#0#9'TSpinEdit'#13'vicinityrange'
-  +#4'Left'#3'U'#1#6'Height'#2#21#3'Top'#2#31#5'Width'#2'E'#8'MaxValue'#3#244#1
-  +#8'TabOrder'#2#5#5'Value'#2#10#0#0#0#9'TGroupBox'#10'refraction'#4'Left'#2#8
-  +#6'Height'#2'<'#3'Top'#3#186#0#5'Width'#3#17#1#7'Caption'#6#22'Atmospheric R'
-  +'efraction'#8'TabOrder'#2#4#0#6'TLabel'#7'Label82'#4'Left'#2#21#6'Height'#2
-  +#15#3'Top'#2#4#5'Width'#2'r'#7'Caption'#6#19'Pressure (millibar)'#5'Color'#7
-  +#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Label83'#4'Left'#3#141#0#6'Heig'
-  +'ht'#2#15#3'Top'#2#4#5'Width'#3#141#0#7'Caption'#6#21'Temperature (Celsius)'
-  +#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#10'TFloatEdit'#8'pressure'#4'Lef'
-  ,'t'#2#21#6'Height'#2#22#4'Hint'#6#7'0..1500'#3'Top'#2#18#5'Width'#2'A'#11'Bo'
-  +'rderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'
-  +#9#8'TabOrder'#2#0#8'OnChange'#7#14'pressureChange'#8'Decimals'#2#0#8'MaxVal'
-  +'ue'#3#220#5#11'NumericType'#7#7'ntFixed'#0#0#10'TFloatEdit'#11'temperature'
-  +#4'Left'#3#141#0#6'Height'#2#22#4'Hint'#6#9'-100..100'#3'Top'#2#18#5'Width'#2
-  +'A'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'S'
-  +'howHint'#9#8'TabOrder'#2#1#8'OnChange'#7#17'temperatureChange'#8'MinValue'#2
-  +#156#8'MaxValue'#2'd'#11'NumericType'#7#7'ntFixed'#0#0#0#0#5'TPage'#5'Page2'
-  +#7'Caption'#6#7'Horizon'#0#9'TGroupBox'#9'GroupBox2'#4'Left'#2#8#6'Height'#2
-  +'Y'#3'Top'#3#160#0#5'Width'#3#201#1#7'Caption'#6'(Want to track an object be'
-  +'fore it rise ?'#8'TabOrder'#2#1#0#9'TCheckBox'#13'horizonopaque'#4'Left'#2
-  +#13#6'Height'#2#19#3'Top'#2#24#5'Width'#3#196#0#7'Caption'#6#29'Show Object '
-  +'below the horizon'#7'OnClick'#7#18'horizonopaqueClick'#8'TabOrder'#2#0#0#0#0
-  +#9'TGroupBox'#9'GroupBox1'#4'Left'#2#8#6'Height'#2'y'#3'Top'#2' '#5'Width'#3
-  +#201#1#7'Caption'#6#13'Local Horizon'#8'TabOrder'#2#0#0#6'TLabel'#6'hor_l1'#4
-  +'Left'#2#13#6'Height'#2#13#3'Top'#2'@'#5'Width'#3#148#0#7'Caption'#6#26'Loca'
-  +'l Horizon File Name : '#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TCheck'
-  +'Box'#14'displayhorizon'#4'Left'#2#13#6'Height'#2#19#3'Top'#2#16#5'Width'#3
-  +#183#0#7'Caption'#6#30'Display the local horizon line'#7'OnClick'#7#19'displ'
-  +'ayhorizonClick'#8'TabOrder'#2#0#0#0#13'TFileNameEdit'#11'horizonfile'#4'Lef'
-  +'t'#3#197#0#6'Height'#2#23#3'Top'#2'8'#5'Width'#3#208#0#11'ButtonWidth'#2#23
-  +#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#2#8'OnChange'#7#17'horizon'
-  +'fileChange'#0#0#9'TCheckBox'#11'fillhorizon'#4'Left'#3#221#0#6'Height'#2#19
-  +#3'Top'#2#16#5'Width'#3#140#0#7'Caption'#6#23'Fill with horizon color'#7'OnC'
-  +'lick'#7#16'fillhorizonClick'#8'TabOrder'#2#1#0#0#0#9'TGroupBox'#9'GroupBox3'
-  +#4'Left'#2#8#6'Height'#2'y'#3'Top'#3#0#1#5'Width'#3#201#1#7'Caption'#6'!Depr'
-  +'ession of the visible horizon'#8'TabOrder'#2#2#0#6'TLabel'#6'Label1'#4'Left'
-  +#2#13#6'Height'#2'0'#3'Top'#2#16#5'Width'#3#159#1#8'AutoSize'#8#7'Caption'#6
-  +'|You live on a big mountain near the ocean shore and you like to observe th'
-  +'e distorded image of the object below the horizon.'#5'Color'#7#6'clNone'#11
-  +'ParentColor'#8#8'WordWrap'#9#0#0#9'TCheckBox'#17'horizondepression'#4'Left'
-  +#2#13#6'Height'#2#19#3'Top'#2'H'#5'Width'#3#5#1#7'Caption'#6'(Draw the appar'
-  +'ent depressed horizon line'#7'OnClick'#7#22'horizondepressionClick'#8'TabOr'
-  +'der'#2#0#0#0#0#0#0#0#6'TPanel'#6'Panel1'#6'Height'#2'2'#3'Top'#3#245#1#5'Wi'
-  +'dth'#3#217#1#7'Anchors'#11#6'akLeft'#7'akRight'#8'akBottom'#0#8'TabOrder'#2
-  +#1#0#7'TButton'#7'Button1'#4'Left'#3#161#0#6'Height'#2#25#3'Top'#2#10#5'Widt'
-  +'h'#2'S'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2
-  +#4#7'Caption'#6#2'OK'#11'ModalResult'#2#1#8'TabOrder'#2#0#0#0#7'TButton'#7'B'
-  +'utton2'#4'Left'#3#9#1#6'Height'#2#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11
-  +#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#5'Appl'
-  +'y'#7'OnClick'#7#12'Button2Click'#8'TabOrder'#2#1#0#0#7'TButton'#7'Button3'#4
-  +'Left'#3'q'#1#6'Height'#2#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTop'
-  +#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'C'
-  +'ancel'#11'ModalResult'#2#2#8'TabOrder'#2#2#0#0#0#15'TDownloadDialog'#15'Dow'
-  +'nloadDialog1'#12'FtpFwPassive'#9#15'ConfirmDownload'#9#4'left'#3#128#0#3'to'
-  +'p'#3'('#1#0#0#11'TOpenDialog'#11'OpenDialog1'#5'Title'#6#18'Open existing f'
-  +'ile'#11'FilterIndex'#2#0#4'left'#3#128#0#3'top'#3'h'#1#0#0#0
+  +#2#7#7'TabStop'#8#7'Visible'#8#0#0#7'TButton'#5'Obszp'#4'Left'#2#3#6'Height'
+  +#2#25#3'Top'#3#27#1#5'Width'#2')'#25'BorderSpacing.InnerBorder'#2#4#7'Captio'
+  +'n'#6#1'+'#7'OnClick'#7#10'ObszpClick'#8'TabOrder'#2#8#0#0#7'TButton'#5'Obsz'
+  +'m'#4'Left'#2#3#6'Height'#2#25#3'Top'#3'C'#1#5'Width'#2')'#25'BorderSpacing.'
+  +'InnerBorder'#2#4#7'Caption'#6#1'-'#7'OnClick'#7#10'ObszmClick'#8'TabOrder'#2
+  +#6#0#0#7'TButton'#6'Obsmap'#4'Left'#2#3#6'Height'#2#25#3'Top'#3'k'#1#5'Width'
+  +#2')'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#4'Load'#7'OnClick'#7#11
+  +'ObsmapClick'#8'TabOrder'#2#10#0#0#10'TZoomImage'#10'ZoomImage1'#6'Cursor'#7
+  +#7'crCross'#4'Left'#2'/'#6'Height'#3#200#0#3'Top'#3#251#0#5'Width'#3#144#1#18
+  +'Canvas.Brush.Color'#7#7'clBlack'#4'Zoom'#5#0#0#0#0#0#0#0#200#3'@'#7'ZoomMin'
+  +#5#0#0#0#0#0#0#0#200#3'@'#7'ZoomMax'#5#0#0#0#0#0#0#0#208#3'@'#9'OnMouseUp'#7
+  +#17'ZoomImage1MouseUp'#7'OnPaint'#7#15'ZoomImage1Paint'#11'OnPosChange'#7#19
+  +'ZoomImage1PosChange'#0#0#10'TScrollBar'#10'HScrollBar'#4'Left'#2'/'#6'Heigh'
+  +'t'#2#15#3'Top'#3#196#1#5'Width'#3#144#1#8'PageSize'#2#1#8'TabOrder'#2#9#7'T'
+  +'abStop'#8#8'OnChange'#7#16'HScrollBarChange'#0#0#10'TScrollBar'#10'VScrollB'
+  +'ar'#4'Left'#3#192#1#6'Height'#2#15#3'Top'#3#251#0#5'Width'#2#15#4'Kind'#7#10
+  +'sbVertical'#8'PageSize'#2#1#8'TabOrder'#2#5#7'TabStop'#8#8'OnChange'#7#16'V'
+  +'ScrollBarChange'#0#0#9'TGroupBox'#7'obsname'#4'Left'#2#8#6'Height'#2'i'#3'T'
+  +'op'#2#255#5'Width'#3#193#1#7'Caption'#6#20'Observatory Database'#8'TabOrder'
+  +#2#0#0#6'TLabel'#6'Label2'#4'Left'#3':'#1#6'Height'#2#15#3'Top'#2'#'#5'Width'
+  +#2#18#7'Caption'#6#3'+/-'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabe'
+  +'l'#6'Label3'#4'Left'#3#153#1#6'Height'#2#15#3'Top'#2'#'#5'Width'#2#24#7'Cap'
+  +'tion'#6#3'Km.'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TComboBox'#8'ci'
+  +'tylist'#4'Left'#2#8#6'Height'#2#21#3'Top'#2#31#5'Width'#3#233#0#12'AutoComp'
+  +'lete'#9#16'AutoCompleteText'#11#12'cbactEnabled'#22'cbactEndOfLineComplete'
+  +#20'cbactSearchAscending'#0#10'ItemHeight'#2#13#9'MaxLength'#2#0#8'OnChange'
+  +#7#14'citylistChange'#8'OnSelect'#7#14'citylistChange'#8'TabOrder'#2#3#4'Tex'
+  +'t'#6#3'...'#0#0#7'TButton'#10'citysearch'#4'Left'#3'm'#1#6'Height'#2#25#3'T'
+  +'op'#2#1#5'Width'#2'L'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6'Sear'
+  +'ch'#7'Default'#9#7'OnClick'#7#15'citysearchClick'#8'TabOrder'#2#2#0#0#9'TCo'
+  +'mboBox'#11'countrylist'#4'Left'#2#8#6'Height'#2#21#3'Top'#2#1#5'Width'#3#234
+  +#0#16'AutoCompleteText'#11#22'cbactEndOfLineComplete'#20'cbactSearchAscendin'
+  +'g'#0#13'DropDownCount'#2#10#10'ItemHeight'#2#13#9'MaxLength'#2#0#8'OnSelect'
+  +#7#17'countrylistChange'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#5
+  +'TEdit'#10'cityfilter'#4'Left'#3#248#0#6'Height'#2#21#3'Top'#2#1#5'Width'#2
+  +'h'#9'OnKeyDown'#7#17'cityfilterKeyDown'#8'TabOrder'#2#1#0#0#7'TButton'#12'd'
+  +'ownloadcity'#4'Left'#3#249#0#6'Height'#2#25#3'Top'#2'<'#5'Width'#3#192#0#25
+  +'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#24'Download country details'#7
+  +'OnClick'#7#17'downloadcityClick'#8'TabOrder'#2#8#0#0#7'TButton'#7'updcity'#4
+  +'Left'#2']'#6'Height'#2#25#3'Top'#2'<'#5'Width'#2'H'#25'BorderSpacing.InnerB'
+  +'order'#2#4#7'Caption'#6#6'Update'#7'OnClick'#7#12'updcityClick'#8'TabOrder'
+  +#2#6#0#0#7'TButton'#7'delcity'#4'Left'#3#169#0#6'Height'#2#25#3'Top'#2'<'#5
+  +'Width'#2'H'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6'Delete'#7'OnCl'
+  +'ick'#7#12'delcityClick'#8'TabOrder'#2#7#0#0#5'TEdit'#7'LocCode'#6'Cursor'#7
+  +#11'crHandPoint'#4'Left'#2#8#6'Height'#2#23#4'Hint'#6#16'Designation Code'#3
+  +'Top'#2'<'#5'Width'#2'P'#5'Color'#7#9'clBtnFace'#7'OnClick'#7#12'LocCodeClic'
+  +'k'#14'ParentShowHint'#8#8'ReadOnly'#9#8'ShowHint'#9#8'TabOrder'#2#9#0#0#7'T'
+  +'Button'#8'vicinity'#4'Left'#3#248#0#6'Height'#2#25#3'Top'#2#28#5'Width'#2'<'
+  +#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#8'Vicinity'#7'OnClick'#7#13
+  +'vicinityClick'#8'TabOrder'#2#4#0#0#9'TSpinEdit'#13'vicinityrange'#4'Left'#3
+  +'U'#1#6'Height'#2#21#3'Top'#2#31#5'Width'#2'E'#8'MaxValue'#3#244#1#8'TabOrde'
+  +'r'#2#5#5'Value'#2#10#0#0#0#9'TGroupBox'#8'Latitude'#4'Left'#2#8#6'Height'#2
+  ,'D'#3'Top'#2'o'#5'Width'#3#185#0#7'Caption'#6#8'Latitude'#8'TabOrder'#2#1#0#6
+  +'TLabel'#7'Label58'#4'Left'#2#4#6'Height'#2#15#3'Top'#2#4#5'Width'#2'0'#7'Ca'
+  +'ption'#6#6'Degree'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'L'
+  +'abel59'#4'Left'#2'0'#6'Height'#2#15#3'Top'#2#4#5'Width'#2#27#7'Caption'#6#4
+  +'Min.'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Label60'#4'Lef'
+  +'t'#2'P'#6'Height'#2#15#3'Top'#2#4#5'Width'#2#28#7'Caption'#6#4'Sec.'#5'Colo'
+  +'r'#7#6'clNone'#11'ParentColor'#8#0#0#9'TComboBox'#5'hemis'#4'Left'#2'p'#6'H'
+  +'eight'#2#21#3'Top'#2#21#5'Width'#2'A'#16'AutoCompleteText'#11#20'cbactSearc'
+  +'hAscending'#0#10'ItemHeight'#2#13#9'ItemIndex'#2#0#13'Items.Strings'#1#6#5
+  +'North'#6#5'South'#0#9'MaxLength'#2#0#8'OnChange'#7#12'latdegChange'#8'TabOr'
+  +'der'#2#3#4'Text'#6#5'North'#0#0#9'TLongEdit'#6'latdeg'#4'Left'#2#4#6'Height'
+  +#2#22#4'Hint'#6#5'0..90'#3'Top'#2#20#5'Width'#2'!'#11'BorderStyle'#7#8'bsSin'
+  +'gle'#9'MaxLength'#2#2#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8
+  +'TabOrder'#2#0#6'OnExit'#7#12'latdegChange'#8'MaxValue'#2'Z'#0#0#9'TLongEdit'
+  +#6'latmin'#4'Left'#2'0'#6'Height'#2#22#4'Hint'#6#5'0..59'#3'Top'#2#20#5'Widt'
+  +'h'#2#25#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#2#11'ParentColor'#8#14
+  +'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#6'OnExit'#7#12'latdegChange'
+  +#8'MaxValue'#2';'#0#0#9'TLongEdit'#6'latsec'#4'Left'#2'P'#6'Height'#2#22#4'H'
+  +'int'#6#5'0..59'#3'Top'#2#20#5'Width'#2#25#11'BorderStyle'#7#8'bsSingle'#9'M'
+  +'axLength'#2#2#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrd'
+  +'er'#2#2#6'OnExit'#7#12'latdegChange'#8'MaxValue'#2';'#0#0#0#9'TGroupBox'#9
+  +'Longitude'#4'Left'#3#192#0#6'Height'#2'D'#3'Top'#2'o'#5'Width'#3#185#0#7'Ca'
+  +'ption'#6#9'Longitude'#8'TabOrder'#2#2#0#6'TLabel'#7'Label61'#4'Left'#2#4#6
+  +'Height'#2#15#3'Top'#2#4#5'Width'#2'0'#7'Caption'#6#6'Degree'#5'Color'#7#6'c'
+  +'lNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Label62'#4'Left'#2'0'#6'Height'#2
+  +#15#3'Top'#2#4#5'Width'#2#27#7'Caption'#6#4'Min.'#5'Color'#7#6'clNone'#11'Pa'
+  +'rentColor'#8#0#0#6'TLabel'#7'Label63'#4'Left'#2'P'#6'Height'#2#15#3'Top'#2#4
+  +#5'Width'#2#28#7'Caption'#6#4'Sec.'#5'Color'#7#6'clNone'#11'ParentColor'#8#0
+  +#0#9'TComboBox'#4'long'#4'Left'#2'p'#6'Height'#2#21#3'Top'#2#21#5'Width'#2'A'
+  +#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#10'ItemHeight'#2#13#9'It'
+  +'emIndex'#2#1#13'Items.Strings'#1#6#4'West'#6#4'East'#0#9'MaxLength'#2#0#8'O'
+  +'nChange'#7#13'longdegChange'#8'TabOrder'#2#3#4'Text'#6#4'East'#0#0#9'TLongE'
+  +'dit'#7'longdeg'#4'Left'#2#4#6'Height'#2#22#4'Hint'#6#6'0..180'#3'Top'#2#20#5
+  +'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#4#11'ParentColor'#8
+  +#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#6'OnExit'#7#13'longdegCh'
+  +'ange'#8'MaxValue'#3#180#0#0#0#9'TLongEdit'#7'longmin'#4'Left'#2'0'#6'Height'
+  +#2#22#4'Hint'#6#5'0..59'#3'Top'#2#21#5'Width'#2#25#11'BorderStyle'#7#8'bsSin'
+  +'gle'#9'MaxLength'#2#2#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8
+  +'TabOrder'#2#1#6'OnExit'#7#13'longdegChange'#8'MaxValue'#2';'#0#0#9'TLongEdi'
+  +'t'#7'longsec'#4'Left'#2'P'#6'Height'#2#22#4'Hint'#6#5'0..59'#3'Top'#2#20#5
+  +'Width'#2#25#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#2#11'ParentColor'#8
+  +#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#2#6'OnExit'#7#13'longdegCh'
+  +'ange'#8'MaxValue'#2';'#0#0#0#9'TGroupBox'#8'Altitude'#4'Left'#3'x'#1#6'Heig'
+  +'ht'#2'D'#3'Top'#2'o'#5'Width'#2'Q'#7'Caption'#6#8'Altitude'#8'TabOrder'#2#3
+  +#0#6'TLabel'#7'Label70'#4'Left'#2#8#6'Height'#2#15#3'Top'#2#4#5'Width'#2'-'#7
+  +'Caption'#6#6'Meters'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#10'TFloatEd'
+  +'it'#8'altmeter'#4'Left'#2#4#6'Height'#2#22#4'Hint'#6#10'-500..9000'#3'Top'#2
+  +#20#5'Width'#2'A'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentS'
+  +'howHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'OnChange'#7#14'altmeterChange'#8
+  +'Decimals'#2#0#8'MinValue'#5#0#0#0#0#0#0#0#250#7#192#8'MaxValue'#5#0#0#0#0#0
+  +#0#160#140#12'@'#6'Digits'#2#5#11'NumericType'#7#7'ntFixed'#0#0#0#9'TGroupBo'
+  +'x'#8'timezone'#4'Left'#2#8#6'Height'#2'@'#3'Top'#3#182#0#5'Width'#3#193#1#7
+  +'Caption'#6#9'Time Zone'#8'TabOrder'#2#4#0#6'TLabel'#7'Label81'#4'Left'#2#8#6
+  +'Height'#2#15#3'Top'#2#31#5'Width'#3#133#0#7'Caption'#6#19'Local Time =  UTC'
+  +' +'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9'TComboBox'#10'TZComboBox'#4
+  +'Left'#3#181#0#6'Height'#2#25#3'Top'#2#10#5'Width'#3#4#1#16'AutoCompleteText'
+  +#11#22'cbactEndOfLineComplete'#20'cbactSearchAscending'#0#9'MaxLength'#2#0#8
+  +'OnChange'#7#16'TZComboBoxChange'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2
+  +#0#4'Text'#6#10'TZComboBox'#0#0#9'TCheckBox'#9'CountryTZ'#4'Left'#2#4#6'Heig'
+  +'ht'#2#21#3'Top'#2#7#5'Width'#3#160#0#7'Caption'#6#19'Use Country Timeone'#7
+  +'Checked'#9#8'OnChange'#7#15'CountryTZChange'#5'State'#7#9'cbChecked'#8'TabO'
+  +'rder'#2#1#0#0#0#0#5'TPage'#5'Page2'#7'Caption'#6#7'Horizon'#0#9'TGroupBox'#9
+  +'GroupBox2'#4'Left'#2#8#6'Height'#2'Y'#3'Top'#3#142#0#5'Width'#3#201#1#7'Cap'
+  +'tion'#6'(Want to track an object before it rise ?'#8'TabOrder'#2#1#0#9'TChe'
+  ,'ckBox'#13'horizonopaque'#4'Left'#2#13#6'Height'#2#21#3'Top'#2#24#5'Width'#3
+  +#217#0#7'Caption'#6#29'Show Object below the horizon'#7'OnClick'#7#18'horizo'
+  +'nopaqueClick'#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#9'GroupBox1'#4'Left'#2#8#6
+  +'Height'#2'y'#3'Top'#2#14#5'Width'#3#201#1#7'Caption'#6#13'Local Horizon'#8
+  +'TabOrder'#2#0#0#6'TLabel'#6'hor_l1'#4'Left'#2#13#6'Height'#2#15#3'Top'#2'@'
+  +#5'Width'#3#166#0#7'Caption'#6#26'Local Horizon File Name : '#5'Color'#7#6'c'
+  +'lNone'#11'ParentColor'#8#0#0#9'TCheckBox'#14'displayhorizon'#4'Left'#2#13#6
+  +'Height'#2#21#3'Top'#2#16#5'Width'#3#203#0#7'Caption'#6#30'Display the local'
+  +' horizon line'#7'OnClick'#7#19'displayhorizonClick'#8'TabOrder'#2#0#0#0#13
+  +'TFileNameEdit'#11'horizonfile'#4'Left'#3#197#0#6'Height'#2#23#3'Top'#2'8'#5
+  +'Width'#3#208#0#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'Ta'
+  +'bOrder'#2#2#8'OnChange'#7#17'horizonfileChange'#0#0#9'TCheckBox'#11'fillhor'
+  +'izon'#4'Left'#3#221#0#6'Height'#2#21#3'Top'#2#16#5'Width'#3#155#0#7'Caption'
+  +#6#23'Fill with horizon color'#7'OnClick'#7#16'fillhorizonClick'#8'TabOrder'
+  +#2#1#0#0#0#9'TGroupBox'#9'GroupBox3'#4'Left'#2#8#6'Height'#2'y'#3'Top'#3#238
+  +#0#5'Width'#3#201#1#7'Caption'#6'!Depression of the visible horizon'#8'TabOr'
+  +'der'#2#2#0#6'TLabel'#6'Label1'#4'Left'#2#13#6'Height'#2'0'#3'Top'#2#16#5'Wi'
+  +'dth'#3#159#1#8'AutoSize'#8#7'Caption'#6'|You live on a big mountain near th'
+  +'e ocean shore and you like to observe the distorded image of the object bel'
+  +'ow the horizon.'#5'Color'#7#6'clNone'#11'ParentColor'#8#8'WordWrap'#9#0#0#9
+  +'TCheckBox'#17'horizondepression'#4'Left'#2#13#6'Height'#2#21#3'Top'#2'H'#5
+  +'Width'#3'!'#1#7'Caption'#6'(Draw the apparent depressed horizon line'#7'OnC'
+  +'lick'#7#22'horizondepressionClick'#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#10're'
+  +'fraction'#4'Left'#2#8#6'Height'#2'P'#3'Top'#3'n'#1#5'Width'#3#201#1#7'Capti'
+  +'on'#6#22'Atmospheric Refraction'#8'TabOrder'#2#3#0#6'TLabel'#7'Label82'#4'L'
+  +'eft'#2'-'#6'Height'#2#15#3'Top'#2#7#5'Width'#2'r'#7'Caption'#6#19'Pressure '
+  +'(millibar)'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Label83'
+  +#4'Left'#3#245#0#6'Height'#2#15#3'Top'#2#7#5'Width'#3#141#0#7'Caption'#6#21
+  +'Temperature (Celsius)'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#10'TFloat'
+  +'Edit'#8'pressure'#4'Left'#2'-'#6'Height'#2#22#4'Hint'#6#7'0..1500'#3'Top'#2
+  +#21#5'Width'#2'A'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentS'
+  +'howHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'OnChange'#7#14'pressureChange'#8
+  +'Decimals'#2#0#8'MaxValue'#5#0#0#0#0#0#0#128#187#9'@'#11'NumericType'#7#7'nt'
+  +'Fixed'#0#0#10'TFloatEdit'#11'temperature'#4'Left'#3#245#0#6'Height'#2#22#4
+  +'Hint'#6#9'-100..100'#3'Top'#2#21#5'Width'#2'A'#11'BorderStyle'#7#8'bsSingle'
+  +#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#8'OnCh'
+  +'ange'#7#17'temperatureChange'#8'MinValue'#5#0#0#0#0#0#0#0#200#5#192#8'MaxVa'
+  +'lue'#5#0#0#0#0#0#0#0#200#5'@'#11'NumericType'#7#7'ntFixed'#0#0#0#0#0#0#6'TP'
+  +'anel'#6'Panel1'#6'Height'#2'2'#3'Top'#3#245#1#5'Width'#3#217#1#7'Anchors'#11
+  +#6'akLeft'#7'akRight'#8'akBottom'#0#8'TabOrder'#2#1#0#7'TButton'#7'Button1'#4
+  +'Left'#3#161#0#6'Height'#2#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTo'
+  +'p'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#11'Mod'
+  +'alResult'#2#1#8'TabOrder'#2#0#0#0#7'TButton'#7'Button2'#4'Left'#3#9#1#6'Hei'
+  +'ght'#2#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTop'#7'akRight'#0#25
+  +'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#5'Apply'#7'OnClick'#7#12'Button'
+  +'2Click'#8'TabOrder'#2#1#0#0#7'TButton'#7'Button3'#4'Left'#3'q'#1#6'Height'#2
+  +#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderS'
+  +'pacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11'ModalResult'#2
+  +#2#8'TabOrder'#2#2#0#0#0#15'TDownloadDialog'#15'DownloadDialog1'#12'FtpFwPas'
+  +'sive'#9#15'ConfirmDownload'#9#4'left'#3#128#0#3'top'#3'('#1#0#0#11'TOpenDia'
+  +'log'#11'OpenDialog1'#5'Title'#6#18'Open existing file'#11'FilterIndex'#2#0#4
+  +'left'#3#128#0#3'top'#3'h'#1#0#0#0
 ]);

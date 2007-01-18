@@ -38,12 +38,19 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    CountryTZ: TCheckBox;
+    TZComboBox: TComboBox;
     fillhorizon: TCheckBox;
     DownloadDialog1: TDownloadDialog;
     horizonfile: TFileNameEdit;
+    Label82: TLabel;
+    Label83: TLabel;
     Memo1: TMemo;
     OpenDialog1: TOpenDialog;
     Panel1: TPanel;
+    pressure: TFloatEdit;
+    refraction: TGroupBox;
+    temperature: TFloatEdit;
     vicinity: TButton;
     LocCode: TEdit;
     Label2: TLabel;
@@ -70,15 +77,9 @@ type
     Altitude: TGroupBox;
     Label70: TLabel;
     altmeter: TFloatEdit;
-    refraction: TGroupBox;
-    Label82: TLabel;
-    Label83: TLabel;
-    pressure: TFloatEdit;
     vicinityrange: TSpinEdit;
-    temperature: TFloatEdit;
     timezone: TGroupBox;
     Label81: TLabel;
-    timez: TFloatEdit;
     Obszp: TButton;
     Obszm: TButton;
     Obsmap: TButton;
@@ -104,6 +105,8 @@ type
     Label1: TLabel;
     procedure Button2Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure CountryTZChange(Sender: TObject);
+    procedure TZComboBoxChange(Sender: TObject);
     procedure fillhorizonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure cityfilterKeyDown(Sender: TObject; var Key: Word;
@@ -120,7 +123,6 @@ type
     procedure downloadcityClick(Sender: TObject);
     procedure pressureChange(Sender: TObject);
     procedure temperatureChange(Sender: TObject);
-    procedure timezChange(Sender: TObject);
     procedure ZoomImage1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ZoomImage1Paint(Sender: TObject);
@@ -153,6 +155,7 @@ type
     procedure CenterObs;
     procedure ShowHorizon;
     procedure ShowObservatory;
+    procedure UpdTZList(Sender: TObject);
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -239,7 +242,6 @@ begin
 mycsc.Free;
 end;
 
-
 procedure Tf_config_observatory.FormCreate(Sender: TObject);
 begin
 SetLang;
@@ -270,7 +272,6 @@ begin
 try
 obslock:=true;
 altmeter.value:=csc.obsaltitude;
-timez.value:=csc.obstz;
 ArToStr2(abs(csc.ObsLatitude),d,m,s);
 latdeg.Text:=d;
 latmin.Text:=m;
@@ -317,6 +318,7 @@ for i:=0 to countrylist.items.count-1 do
     countrylist.itemindex:=i;
     break;
   end;
+UpdTZList(self);
 citylist.text:=csc.obsname;
 Obsposx:=0;
 Obsposy:=0;
@@ -344,8 +346,52 @@ try
 csc.obscountry:=countrylist.text;
 cityfilter.Text:='';
 citysearchClick(Sender);
+UpdTZList(Sender);
 except
 end;
+end;
+
+procedure Tf_config_observatory.UpdTZList(Sender: TObject);
+var code, isocode,buf: string;
+    i,j: integer;
+begin
+if countrylist.ItemIndex<0 then exit;
+if CountryTZ.Checked then begin
+   code:=countrycode[countrylist.ItemIndex];
+   cdb.GetCountryISOCode(code,isocode);
+end else begin
+   isocode:='ZZ';
+end;
+TZComboBox.Clear;
+j:=0;
+for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
+  if csc.tz.ZoneTabCnty[i]=isocode then begin
+     buf:=csc.tz.ZoneTabZone[i];
+     if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
+     TZComboBox.Items.Add(buf);
+     if (j=0)or(csc.tz.ZoneTabZone[i]=csc.ObsTZ) then TZComboBox.ItemIndex:=j;
+     inc(j);
+  end;
+end;
+TZComboBoxChange(Sender);
+end;
+
+procedure Tf_config_observatory.TZComboBoxChange(Sender: TObject);
+var buf: string;
+    i: integer;
+begin
+  buf:=trim(TZComboBox.Text);
+  if buf='' then exit;
+  i:=pos(' ',buf);
+  if i>0 then Delete(buf,i,9999);
+  csc.ObsTZ:=buf;
+  csc.tz.TimeZoneFile:=ZoneDir+StringReplace(buf,'/',PathDelim,[rfReplaceAll]);
+  csc.timezone:=csc.tz.SecondsOffset/3600;
+end;
+
+procedure Tf_config_observatory.CountryTZChange(Sender: TObject);
+begin
+ UpdTZList(Sender);
 end;
 
 procedure Tf_config_observatory.cityfilterKeyDown(Sender: TObject;
@@ -400,7 +446,6 @@ if cdb.GetCityLoc(id,loctype,latitude,longitude,elevation,timezone) then begin
    csc.ObsLatitude:=strtofloat(latitude);
    csc.ObsLongitude:=-strtofloat(longitude);
    csc.ObsAltitude:=strtofloat(elevation);
-   csc.ObsTZ:=strtofloat(timezone);
    ShowObsCoord;
    SetObsPos;
    CenterObs;
@@ -409,7 +454,7 @@ else curobsid:=0;
 end;
 
 procedure Tf_config_observatory.updcityClick(Sender: TObject);
-var country,location,lat,lon,elev,tz,buf: string;
+var country,location,lat,lon,elev,ltz,buf: string;
     p: integer;
 begin
 if countrylist.ItemIndex<0 then exit;
@@ -418,12 +463,12 @@ if MessageDlg(rsUpdateOrAddT, mtWarning, [mbYes, mbNo], 0) = mrYes
     lat:=floattostr(csc.ObsLatitude);
     lon:=floattostr(-csc.ObsLongitude);
     elev:=floattostr(csc.ObsAltitude);
-    tz:=floattostr(csc.ObsTZ);
+    ltz:='0';
     country:=countrycode[countrylist.ItemIndex];
     location:=citylist.Text;
     p:=pos(' -- ',location);
     if p>0 then delete(location,p,99);
-    buf:=cdb.UpdateCity(curobsid,country,location,'user',lat,lon,elev,tz);
+    buf:=cdb.UpdateCity(curobsid,country,location,'user',lat,lon,elev,ltz);
     if buf='' then buf:=rsUpdatedSucce;
     vicinityClick(Sender);
     showmessage(buf);
@@ -584,17 +629,6 @@ procedure Tf_config_observatory.temperatureChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.obstemperature:=temperature.value;
-end;
-
-procedure Tf_config_observatory.timezChange(Sender: TObject);
-begin
-if LockChange then exit;
-with sender as Tfloatedit do begin
-  csc.obstz:=value;
-end;
-// same value in Time and Observatory panel
-csc.timezone:=csc.obstz;
-if csc.DST then csc.timezone:=csc.timezone+1 ;
 end;
 
 procedure Tf_config_observatory.ZoomImage1MouseUp(Sender: TObject;
