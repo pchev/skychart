@@ -96,10 +96,6 @@ msgstr "%sla taula %s no existeix! %sCorregiu l'error i torneu a provar."
 msgid "%sTable exist %s"
 msgstr "%sla taula %s existeix"
 
-#: u_translation:rsnegativewest
-msgid "(Negative West of GreenWich)"
-msgstr "(Negatiu a l'oest de Greenwich)"
-
 #: u_translation:rsrequirexplan
 msgid "(require Xplanet 1.2.0)"
 msgstr "(fa falta Xplanet 1.2.0)"
@@ -951,10 +947,6 @@ msgstr "Dia"
 #: u_translation:rsdaytime
 msgid "Day Time"
 msgstr "Temps de dia"
-
-#: u_translation:rsdaylightsavi
-msgid "Daylight Saving Time in effect "
-msgstr "Horari d'estiu aplicat"
 
 #: u_translation:rsdecimalsouth
 msgid "Decimal South Polar Distance"
@@ -2067,10 +2059,6 @@ msgstr "Horitzó local"
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
 msgstr "Nom de l'arxiu : "
-
-#: u_translation:rslocaltime
-msgid "Local Time = "
-msgstr "Hora local = "
 
 #: u_translation:rslockon
 msgid "Lock on %s"

@@ -79,7 +79,6 @@ type
     altmeter: TFloatEdit;
     vicinityrange: TSpinEdit;
     timezone: TGroupBox;
-    Label81: TLabel;
     Obszp: TButton;
     Obszm: TButton;
     Obsmap: TButton;
@@ -195,7 +194,6 @@ long.items[0]:=rsWest;
 long.items[1]:=rsEast;
 Label70.caption:=rsMeters;
 timezone.caption:=rsTimeZone;
-Label81.caption:=rsLocalTime+rsUT+' +';
 Obsmap.caption:=rsLoad;
 obsname.caption:=rsObservatoryD;
 Label3.caption:=rsKm;

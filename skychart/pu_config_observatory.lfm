@@ -476,19 +476,10 @@ object f_config_observatory: Tf_config_observatory
           Width = 449
           Caption = 'Time Zone'
           TabOrder = 4
-          object Label81: TLabel
-            Left = 8
-            Height = 15
-            Top = 31
-            Width = 133
-            Caption = 'Local Time =  UTC +'
-            Color = clNone
-            ParentColor = False
-          end
           object TZComboBox: TComboBox
             Left = 181
             Height = 25
-            Top = 10
+            Top = 8
             Width = 260
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
             MaxLength = 0
@@ -498,11 +489,11 @@ object f_config_observatory: Tf_config_observatory
             Text = 'TZComboBox'
           end
           object CountryTZ: TCheckBox
-            Left = 4
+            Left = 8
             Height = 21
-            Top = 7
-            Width = 160
-            Caption = 'Use Country Timeone'
+            Top = 10
+            Width = 131
+            Caption = 'Country Timeone'
             Checked = True
             OnChange = CountryTZChange
             State = cbChecked

@@ -748,7 +748,7 @@ incl:=arctan2(cos(Sde)*sin(Sar-Lar),cos(Lde)*sin(Sde)-sin(Lde)*cos(Sde)*cos(Sar-
 end;
 
 Procedure TPlanet.ComputePlanet(cfgsc: Tconf_skychart);
-var ar,de,dist,illum,phase,diam,jdt,magn,jd0,st0,dkm,q,P,a,b,be,dp,sb,pha : double;
+var ar,de,dist,illum,phase,diam,jdt,magn,st0,dkm,q,P,a,b,be,dp,sb,pha : double;
   ipla,j,i,ierr: integer;
   satx,saty : double8;
   supconj : array[1..8] of boolean;
@@ -757,9 +757,8 @@ begin
 try
 while lockpla do application.ProcessMessages; lockpla:=true;
 for j:=0 to cfgsc.SimNb-1 do begin
- jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,0.0);
- jdt:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600);
- st0:=SidTim(jd0,cfgsc.CurTime-cfgsc.TimeZone+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600,cfgsc.ObsLongitude);
+ jdt:=cfgsc.CurJD+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
+ st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
  // Sun first
  ipla:=10;
  Sun(jdt,ar,de,dist,diam);
@@ -1646,7 +1645,7 @@ begin
 end;
 
 Procedure TPlanet.ComputeAsteroid(cfgsc: Tconf_skychart);
-var ra,dec,dist,r,elong,phase,magn,jdt,jd0,st0,q : double;
+var ra,dec,dist,r,elong,phase,magn,jdt,st0,q : double;
   epoch,h,g,ma,ap,an,ic,ec,sa,eq,d,da : double;
   qry,id,ref,nam,elem_id :string;
   j,i,SimNb: integer;
@@ -1691,9 +1690,8 @@ if db2.Rowcount>0 then begin
      cfgsc.AsteroidLstSize:=SimNb;
   end;
   for j:=0 to SimNb-1 do begin
-    jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,0.0);
-    jdt:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600);
-    st0:=SidTim(jd0,cfgsc.CurTime-cfgsc.TimeZone+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600,cfgsc.ObsLongitude);
+    jdt:=cfgsc.CurJD+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
+    st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
        epoch:=strtofloat(db2.Results[i][1]);
@@ -1721,7 +1719,7 @@ end;
 end;
 
 Procedure TPlanet.ComputeComet(cfgsc: Tconf_skychart);
-var ra,dec,dist,r,elong,phase,magn,jdt,jd0,st0,q : double;
+var ra,dec,dist,r,elong,phase,magn,jdt,st0,q : double;
   epoch,h,g,ap,an,ic,ec,eq,d,da,tp,diam,lc,car,cde,rc : double;
   qry,id,nam,elem_id :string;
   j,i,SimNb: integer;
@@ -1766,9 +1764,8 @@ if db2.Rowcount>0 then begin
      cfgsc.CometLstSize:=SimNb;
   end;
   for j:=0 to SimNb-1 do begin
-    jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,0.0);
-    jdt:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay+j*cfgsc.SimD,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600);
-    st0:=SidTim(jd0,cfgsc.CurTime-cfgsc.TimeZone+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600,cfgsc.ObsLongitude);
+    jdt:=cfgsc.CurJD+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
+    st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
        epoch:=strtofloat(db2.Results[i][1]);

@@ -95,10 +95,6 @@ msgstr "%sTabla %s no existe! %sPor favor, corrija el error y reintente."
 msgid "%sTable exist %s"
 msgstr "%sTabla existe %s"
 
-#: u_translation:rsnegativewest
-msgid "(Negative West of GreenWich)"
-msgstr "(Oeste de GreenWich - Negativo)"
-
 #: u_translation:rsrequirexplan
 msgid "(require Xplanet 1.2.0)"
 msgstr "(requiere Xplanet 1.2.0)"
@@ -950,10 +946,6 @@ msgstr "Día"
 #: u_translation:rsdaytime
 msgid "Day Time"
 msgstr "De Día"
-
-#: u_translation:rsdaylightsavi
-msgid "Daylight Saving Time in effect "
-msgstr "Horario de aprovechamiento de Luz Solar"
 
 #: u_translation:rsdecimalsouth
 msgid "Decimal South Polar Distance"
@@ -2066,10 +2058,6 @@ msgstr "Horizonte Local"
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
 msgstr "Archivo de Horizonte Local : "
-
-#: u_translation:rslocaltime
-msgid "Local Time = "
-msgstr "Tiempo Local = "
 
 #: u_translation:rslockon
 msgid "Lock on %s"

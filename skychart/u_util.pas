@@ -85,7 +85,6 @@ function jddatetime(jd: double) : string;
 function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
-Function GetTimeZone : double;
 function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
 function DTminusUT(annee : integer; c:Tconf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
@@ -877,22 +876,6 @@ begin
     result := d+ldeg+m+lmin;
 end;
 
-Function GetTimeZone: double;
-{$ifdef win32}
-var
-  lt,st : TSystemTime;
-{$endif}
-begin
-// return time zone in hour
-{$ifdef win32}
- GetLocalTime(lt);GetSystemTime(st);
- result:=round(24000000*(SystemTimeToDateTime(lt)-SystemTimeToDateTime(st)))/1000000;
-{$endif}
-{$ifdef unix}
-  result:=TzSeconds / 3600;
-{$endif}
-end;
-
 function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
 var y,m,d:word;
     n: TDateTime;
@@ -973,10 +956,10 @@ case annee of
        1997 : result:=62/3600;
        1998 : result:=63/3600;
  1999..2005 : result:=64/3600;
-       2006 : result:=65/3600;
- 2007..2020 : begin
-              t:=(annee-2006)/100;
-              result:=(65+123.5*t+32.5*t*t)/3600;
+ 2006..2007 : result:=65/3600;
+ 2008..2020 : begin
+              t:=(annee-2007)/100;
+              result:=(65+50*t+32.5*t*t)/3600;
               end;
  2021..99999 : begin
               t:=(annee-1875.1)/100;
