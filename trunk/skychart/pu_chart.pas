@@ -234,7 +234,7 @@ type
     procedure SetField(field : double);
     procedure SetZenit(field : double; redraw:boolean=true);
     procedure SetAz(Az : double; redraw:boolean=true);
-    procedure SetDate(y,m,d,h,n,s:integer);
+    procedure SetDateUT(y,m,d,h,n,s:integer);
     procedure SetJD(njd:double);
     function cmd_GetProjection:string;
     function cmd_GetSkyMode:string;
@@ -1594,7 +1594,7 @@ txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+
 txt:=txt{+htms_f}+html_br;
 // local position
 txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
-txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( '+rsUT+' + '+ArmtoStr(sc.cfgsc.TimeZone)+' )'+html_br;
+txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( '+sc.cfgsc.tz.ZoneName+' )'+html_br;
 //txt:=txt+html_pre;
 djd(sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24,y,m,d,h);
 txt:=txt+html_b+copy(rsUniversalTim+blank15,1,17)+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h)+html_br;
@@ -2159,6 +2159,8 @@ sc.cfgsc.CurYear:=y;
 sc.cfgsc.CurMonth:=m;
 sc.cfgsc.CurDay:=d;
 sc.cfgsc.CurTime:=h+n/60+s/3600;
+sc.cfgsc.tz.JD:=jd(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay,sc.cfgsc.CurTime);
+sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
 result:=msgOK;
 except
 exit;
@@ -2537,23 +2539,13 @@ sc.cfgsc.TrackOn:=false;
 if redraw then Refresh;
 end;
 
-procedure Tf_chart.SetDate(y,m,d,h,n,s:integer);
+procedure Tf_chart.SetDateUT(y,m,d,h,n,s:integer);
 var jj,hh,sn: double;
 begin
 sn:=sign(h);
 hh:=h+sn*n/60+sn*s/3600;
 jj:=jd(y,m,d,hh);
-djd(jj,y,m,d,hh);
-sc.cfgsc.UseSystemTime:=false;
-sc.cfgsc.CurYear:=y;
-sc.cfgsc.CurMonth:=m;
-sc.cfgsc.CurDay:=d;
-sc.cfgsc.CurTime:=hh;
-if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
-  sc.cfgsc.TrackOn:=true;
-  sc.cfgsc.TrackType:=4;
-end;
-Refresh;
+SetJD(jj);
 end;
 
 procedure Tf_chart.SetJD(njd:double);
@@ -2562,12 +2554,12 @@ var y,m,d : integer;
 begin
 sc.cfgsc.tz.JD:=njd;
 sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
-djd(njd,y,m,d,h);
+djd(njd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
 sc.cfgsc.UseSystemTime:=false;
 sc.cfgsc.CurYear:=y;
 sc.cfgsc.CurMonth:=m;
 sc.cfgsc.CurDay:=d;
-sc.cfgsc.CurTime:=h-sc.cfgsc.DT_UT;
+sc.cfgsc.CurTime:=h;
 if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;

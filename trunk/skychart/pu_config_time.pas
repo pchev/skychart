@@ -39,8 +39,8 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
     CheckGroup1: TCheckGroup;
-    DST: TCheckBox;
     JDEdit: TFloatEdit;
     Label1: TLabel;
     tzLabel: TLabel;
@@ -51,12 +51,7 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     Panel1: TPanel;
-    Panel7: TPanel;
-    Label134: TLabel;
-    Label148: TLabel;
-    Label149: TLabel;
     RadioGroup1: TRadioGroup;
-    tz: TFloatEdit;
     Panel8: TPanel;
     Label135: TLabel;
     Tdt_Ut: TLabel;
@@ -97,6 +92,7 @@ type
     Notebook1: TNotebook;
     procedure BitBtn1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
@@ -152,10 +148,6 @@ Caption:=rsDateTime;
 Page1.caption:=rsTime;
 Label142.caption:=rsSeconds;
 CheckBox2.caption:=rsAutoRefreshE;
-Label134.caption:=rsLocalTime+rsUT+' +';
-Label148.caption:=rsTimeZone;
-Label149.caption:=rsNegativeWest;
-DST.caption:=rsDaylightSavi;
 Label135.caption:=rsDTUT;
 Label136.caption:=rsSeconds;
 Label150.caption:=rsDynamicTimeD;
@@ -280,8 +272,6 @@ artostr2(csc.curtime,h,n,s);
 t_hour.value:=strtoint(h);
 t_min.value:=strtoint(n);
 t_sec.value:=strtoint(s);
-tz.value:=csc.tz.SecondsOffset/3600;
-DST.Checked:=csc.tz.Daylight;
 tzlabel.caption:=csc.tz.ZoneName;
 Tdt_Ut.caption:=inttostr(round(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
@@ -325,6 +315,7 @@ procedure Tf_config_time.CheckBox1Click(Sender: TObject);
 begin
 csc.UseSystemTime:=checkbox1.checked;
 SetCurrentTime(csc);
+csc.DT_UT:=DTminusUT(csc.curyear,csc);
 d_year.enabled:=not csc.UseSystemTime;
 d_month.enabled:=d_year.enabled;
 d_day.enabled:=d_year.enabled;
@@ -343,6 +334,11 @@ begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
+procedure Tf_config_time.Button4Click(Sender: TObject);
+begin
+  panel8.Visible:= not panel8.Visible;
+end;
+
 procedure Tf_config_time.BitBtn1Click(Sender: TObject);
 begin
 JDCalendarDialog1.JD:=JDEdit.Value;
@@ -354,10 +350,10 @@ end;
 procedure Tf_config_time.JDEditChange(Sender: TObject);
 begin
 if LockChange or LockJD then exit;
-Djd(JDEdit.Value+csc.timezone/24,csc.curyear,csc.curmonth,csc.curday,csc.CurTime);
-csc.tz.Date:=EncodeDate(csc.curyear,csc.curmonth,csc.curday)+csc.curtime/secday;
+csc.tz.JD:=JDEdit.Value;
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
 tzlabel.caption:=csc.tz.ZoneName;
+Djd(JDEdit.Value+csc.timezone/24,csc.curyear,csc.curmonth,csc.curday,csc.CurTime);
 LockChange:=true;
 LockJD:=true;
 ShowTime;
@@ -418,7 +414,7 @@ else
 csc.curmonth:=d_month.value;
 d_day.maxvalue:=MonthDays[IsleapYear(csc.curyear),csc.curmonth];
 csc.curday:=d_day.value;
-csc.tz.Date:=EncodeDate(csc.curyear,csc.curmonth,csc.curday)+csc.curtime/secday;
+csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
 tzlabel.caption:=csc.tz.ZoneName;
 csc.DT_UT:=DTminusUT(csc.curyear,csc);

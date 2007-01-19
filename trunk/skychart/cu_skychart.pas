@@ -2902,10 +2902,7 @@ var cep,dat:string;
 begin
     cep:=trim(cfgsc.EquinoxName);
     dat:=Date2Str(cfgsc.CurYear,cfgsc.curmonth,cfgsc.curday)+sep+ArToStr3(cfgsc.Curtime);
-    if  cfgsc.TimeZone>=0 then
-       dat:=dat+' (+'+trim(ArmtoStr(cfgsc.TimeZone))+')'
-    else
-       dat:=dat+' ('+trim(ArmtoStr(cfgsc.TimeZone))+')';
+    dat:=dat+' ('+cfgsc.tz.ZoneName+')';
     case cfgsc.projpole of
     Equat : result:=rsEquatorialCo3+blank+cep+sep+dat;
     AltAz : result:=rsAltAZCoord2+sep+trim(cfgsc.ObsName)+sep+dat;

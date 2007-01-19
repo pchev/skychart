@@ -863,7 +863,7 @@ if OpenDialog.InitialDir='' then OpenDialog.InitialDir:=privatedir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 OpenDialog.Title:=rsOpenAChart;
   if OpenDialog.Execute then begin
-    cfgp:=def_cfgplot;
+    cfgp.Assign(def_cfgplot);
     cfgs.Assign(def_cfgsc);
     ReadChartConfig(OpenDialog.FileName,true,false,cfgp,cfgs);
     nam:=stringreplace(extractfilename(OpenDialog.FileName),blank,'_',[rfReplaceAll]);
@@ -950,7 +950,7 @@ try
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
  if InitialChartNum>1 then
     for i:=1 to InitialChartNum-1 do begin
-      cfgp:=def_cfgplot;
+      cfgp.Assign(def_cfgplot);
       cfgs.Assign(def_cfgsc);
       ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
       CreateChild(GetUniqueName(rsChart_, true) , false, cfgs, cfgp);
@@ -1421,33 +1421,33 @@ begin
 mult:=TAction(sender).tag*TimeVal.value;
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    djd(sc.cfgsc.CurJD,y,m,d,hh);
-   DtoS(hh+sc.cfgsc.TimeZone-sc.cfgsc.DT_UT,h,n,s);
+   DtoS(hh,h,n,s);
    case TimeU.itemindex of
    0 : begin
-       SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult/24);
+       SetJD(sc.cfgsc.CurJD+mult/24);
        end;
    1 : begin
-       SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult/1440);
+       SetJD(sc.cfgsc.CurJD+mult/1440);
        end;
    2 : begin
-       SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult/86400);
+       SetJD(sc.cfgsc.CurJD+mult/86400);
        end;
    3 : begin
-       SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult);
+       SetJD(sc.cfgsc.CurJD+mult);
        end;
    4 : begin
        inc(m,mult);
-       SetDate(y,m,d,h,n,s);
+       SetDateUT(y,m,d,h,n,s);
        end;
    5 : begin
        inc(y,mult);
-       SetDate(y,m,d,h,n,s);
+       SetDateUT(y,m,d,h,n,s);
        end;
-   6 : SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*365.25);      // julian year
-   7 : SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*365.2421988); // tropical year
-   8 : SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*0.99726956633); // sideral day
-   9 : SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*29.530589);   // synodic month
-   10: SetJD(sc.cfgsc.CurJD+(sc.cfgsc.TimeZone)/24+mult*6585.321);    // saros
+   6 : SetJD(sc.cfgsc.CurJD+mult*365.25);      // julian year
+   7 : SetJD(sc.cfgsc.CurJD+mult*365.2421988); // tropical year
+   8 : SetJD(sc.cfgsc.CurJD+mult*0.99726956633); // sideral day
+   9 : SetJD(sc.cfgsc.CurJD+mult*29.530589);   // synodic month
+   10: SetJD(sc.cfgsc.CurJD+mult*6585.321);    // saros
    end;
 end;
 end;
@@ -3184,6 +3184,9 @@ for i:=1 to csc.numcustomlabels do begin
    csc.customlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
 end;
 end;
+csc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+csc.tz.JD:=jd(csc.CurYear,csc.CurMonth,csc.CurDay,csc.CurTime);
+csc.TimeZone:=csc.tz.SecondsOffset/3600;
 finally
 inif.Free;
 end;

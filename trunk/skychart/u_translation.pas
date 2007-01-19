@@ -703,7 +703,6 @@ resourcestring
   rsURL = 'URL';
   rsSec2 = 'Sec.';
   rsMeters = 'Meters';
-  rsLocalTime = 'Local Time = ';
   rsLoad = 'Load';
   rsObservatoryD = 'Observatory Database';
   rsKm = 'Km.';
@@ -875,8 +874,6 @@ resourcestring
   rsTime = 'Time';
   rsSeconds = 'Seconds';
   rsAutoRefreshE = 'Auto-refresh every ';
-  rsNegativeWest = '(Negative West of GreenWich)';
-  rsDaylightSavi = 'Daylight Saving Time in effect ';
   rsDTUT = 'DT - UT  : ';
   rsDynamicTimeD = 'Dynamic Time difference with Universal Time';
   rsUseAnotherDT = 'Use another DT-UT value';

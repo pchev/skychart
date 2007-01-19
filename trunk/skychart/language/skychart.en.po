@@ -95,10 +95,6 @@ msgstr ""
 msgid "%sTable exist %s"
 msgstr ""
 
-#: u_translation:rsnegativewest
-msgid "(Negative West of GreenWich)"
-msgstr ""
-
 #: u_translation:rsrequirexplan
 msgid "(require Xplanet 1.2.0)"
 msgstr ""
@@ -949,10 +945,6 @@ msgstr ""
 
 #: u_translation:rsdaytime
 msgid "Day Time"
-msgstr ""
-
-#: u_translation:rsdaylightsavi
-msgid "Daylight Saving Time in effect "
 msgstr ""
 
 #: u_translation:rsdecimalsouth
@@ -2065,10 +2057,6 @@ msgstr ""
 
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
-msgstr ""
-
-#: u_translation:rslocaltime
-msgid "Local Time = "
 msgstr ""
 
 #: u_translation:rslockon

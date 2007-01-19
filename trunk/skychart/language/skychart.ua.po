@@ -96,10 +96,6 @@ msgstr "%sТаблиця %s не існує! %sБудь-ласка виправ�
 msgid "%sTable exist %s"
 msgstr "%sТаблиця існує %s"
 
-#: u_translation:rsnegativewest
-msgid "(Negative West of GreenWich)"
-msgstr "(Мінусовий західніше від Грінвічу)"
-
 #: u_translation:rsrequirexplan
 msgid "(require Xplanet 1.2.0)"
 msgstr "(потребувати Xplanet 1.2.0)"
@@ -951,10 +947,6 @@ msgstr "День"
 #: u_translation:rsdaytime
 msgid "Day Time"
 msgstr "День"
-
-#: u_translation:rsdaylightsavi
-msgid "Daylight Saving Time in effect "
-msgstr "Урахувати літній час"
 
 #: u_translation:rsdecimalsouth
 msgid "Decimal South Polar Distance"
@@ -2067,10 +2059,6 @@ msgstr "Місцевий горизонт"
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
 msgstr "Назва файлу місцевого обрію:"
-
-#: u_translation:rslocaltime
-msgid "Local Time = "
-msgstr "Місцевий час ="
 
 #: u_translation:rslockon
 msgid "Lock on %s"
