@@ -1596,7 +1596,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
          sc.cfgsc.ShowAsteroid:=true;
          Refresh;
       end;
-      f_info.close;
+      f_info.hide;
    end;
 end;
 end;
@@ -4643,7 +4643,7 @@ try
        cdcdb.LoadSampleData(f_info.ProgressMemo);
        Planet.PrepareAsteroid(DateTimetoJD(now), f_info.ProgressMemo.lines);
        def_cfgsc.ShowAsteroid:=true;
-       f_info.close;
+       f_info.hide;
     end;
 except
   SetLpanel1(rsSQLDatabaseN);
