@@ -803,6 +803,10 @@ msgstr "Radio de Núcleo"
 msgid "Correlated"
 msgstr "Correlacionado"
 
+#: u_translation:rscountrytimez
+msgid "Country Timezone"
+msgstr ""
+
 #: u_translation:rscreatedataba
 msgid "Create Database"
 msgstr "Crear Base de Datos"
@@ -2255,6 +2259,10 @@ msgstr "Luna"
 msgid "More Deep Sky"
 msgstr "Más Nebulosas"
 
+#: u_translation:rsmoreoptions
+msgid "More Options"
+msgstr ""
+
 #: u_translation:rsmorestars
 msgid "More Stars"
 msgstr "Más Estrellas"
@@ -2834,6 +2842,10 @@ msgstr "Procesando... %s"
 #: u_translation:rsprogramdata
 msgid "Program Data "
 msgstr "Datos de Programa "
+
+#: u_translation:rsprograminfor
+msgid "Program Information"
+msgstr ""
 
 #: u_translation:rsprogrammer
 msgid "Programmer:"
