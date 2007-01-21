@@ -152,7 +152,7 @@ type
     deltajd: double;
     dat11,dat12,dat13,dat21,dat22,dat23,dat31,dat32,dat33 : double ;
     dat41,dat51,{dat61,}dat71,dat72,dat73 : double ;
-    dat14,dat24,dat34,dat74,tz,west,east,title : string;
+    dat14,dat24,dat34,dat74,west,east,title : string;
     century_Solar, century_Lunar: string;
     appmsg: array[1..nummsg] of string;
     cometid, astid : array[0..maxcombo] of string;
@@ -296,7 +296,6 @@ Date2.labels.Sat:=rsSaturday;
 Date2.labels.Sun:=rsSunday;
 Date2.labels.jd:=rsJulianDay;
 Date2.labels.today:=rsToday;
-tz:=rsTimeZone;
 east:=rsEast;
 west:=rsWest;
 EcliPanel.Hint:='http://sunearth.gsfconfig.nasa.gov/eclipse/eclipse.html';
@@ -832,17 +831,18 @@ end;
 end;
 
 procedure Tf_calendar.RefreshAll;
-var d: string;
+var z1,z2: string;
 begin
   RefreshTwilight;
   RefreshPlanet;
   RefreshSolarEclipse;
   RefreshLunarEclipse;
-  if config.timezone=0 then d:=''
-   else
-    if config.timezone<0 then d:=west
-      else d:=east;
-  caption:=title+blank+config.Obsname+blank+tz+'='+timtostr(abs(config.timezone))+blank+d;
+  config.tz.JD:=date1.JD;
+  z1:=config.tz.ZoneName;
+  config.tz.JD:=date2.JD;
+  z2:=config.tz.ZoneName;
+  if z1<>z2 then z1:=z1+'/'+z2;
+  caption:=title+blank+config.Obsname+blank+rsTimeZone+'='+z1;
 end;
 
 procedure Tf_calendar.RefreshTwilight;
@@ -860,7 +860,9 @@ dat13:=time.time;
 dat14:=step.text;
 s:=strtoint(step.text);
 djd(date1.JD,a,m,d,hh);
-h:=12-config.timezone;
+config.tz.JD:=date1.JD;
+config.TimeZone:=config.tz.SecondsOffset/3600;;
+h:=12-config.TimeZone;
 jd1:=jd(a,m,d,h);
 djd(date2.JD,a,m,d,hh);
 jd2:=jd(a,m,d,h);
@@ -872,6 +874,8 @@ i:=2;
 repeat
 djd(jda,a,m,d,h);
 jd0:=jd(a,m,d,0);
+config.tz.JD:=jda;
+config.timezone:=config.tz.SecondsOffset/3600;
 with TwilightGrid do begin
   RowCount:=i+1;
   cells[0,i]:=isodate(a,m,d);
@@ -924,7 +928,7 @@ procedure Tf_calendar.RefreshPlanet;
 var ar,de,dist,illum,phase,diam,jda,magn,dkm,q,az,ha,dp : double;
     i,ipla,nj: integer;
     s,a,m,d,irc : integer;
-    jd1,jd2,jd0,h,jdr,jdt,jds,st0,hh : double;
+    jd1,jd2,jd0,h,jdr,jdt,jds,st0,hh: double;
     rar,der,rat,det,ras,des : double;
     jdt_ut : double;
     mr,mt,ms,azr,azs : string;
@@ -1028,7 +1032,8 @@ dat23:=time.time;
 dat24:=step.text;
 s:=strtoint(step.text);
 djd(date1.JD,a,m,d,hh);
-h:=frac(Time.time)*24-config.TimeZone;
+config.tz.JD:=date1.JD;
+h:=frac(Time.time)*24-config.tz.SecondsOffset/3600;
 jd1:=jd(a,m,d,h);
 djd(date2.JD,a,m,d,hh);
 jd2:=jd(a,m,d,h);
@@ -1062,6 +1067,8 @@ djd(jda,a,m,d,h);
 jd0:=jd(a,m,d,0);
 jdt_ut:=DTminusUT(a,config)/24;
 st0:=SidTim(jd0,h,config.ObsLongitude);
+config.tz.JD:=jda;
+config.TimeZone:=config.tz.SecondsOffset/3600;
 for ipla:=1 to 11 do begin
  if ipla=3 then continue;
 case ipla of
@@ -1096,14 +1103,9 @@ end;
 end;
 
 procedure Tf_calendar.BtnRefreshClick(Sender: TObject);
-var d: string;
+var z1,z2: string;
 begin
 chdir(appdir);
-if config.timezone=0 then d:=''
-  else
-   if config.timezone<0 then d:=west
-     else d:=east;
-caption:=title+blank+config.Obsname+blank+tz+'='+timtostr(abs(config.timezone))+blank+d;
 case pagecontrol1.ActivePage.TabIndex of
      0 : RefreshTwilight;
      1 : RefreshPlanet;
@@ -1113,6 +1115,12 @@ case pagecontrol1.ActivePage.TabIndex of
      5 : RefreshLunarEclipse;
 //     6 : RefreshSat;
 end;
+config.tz.JD:=date1.JD;
+z1:=config.tz.ZoneName;
+config.tz.JD:=date2.JD;
+z2:=config.tz.ZoneName;
+if z1<>z2 then z1:=z1+'/'+z2;
+caption:=title+blank+config.Obsname+blank+rsTimeZone+'='+z1;
 end;
 
 procedure Tf_calendar.BtnCloseClick(Sender: TObject);
@@ -1147,9 +1155,9 @@ if (aRow>=0)and(aColumn>=0) then begin
     if assigned(FGetChartConfig) then FGetChartConfig(csconfig)
                                  else csconfig.Assign(config);
     csconfig.UseSystemTime:=false;
-//    csconfig.ObsTZ:=csconfig.Timezone;
-//    if csconfig.DST then csconfig.ObsTZ:=csconfig.ObsTZ-1 ;
-    djd(p.jd+config.timezone/24,csconfig.CurYear,csconfig.CurMonth,csconfig.CurDay,csconfig.CurTime);
+    csconfig.tz.JD:=p.jd;
+    csconfig.TimeZone:=csconfig.tz.SecondsOffset/3600;
+    djd(p.jd+csconfig.timezone/24,csconfig.CurYear,csconfig.CurMonth,csconfig.CurDay,csconfig.CurTime);
     if Sender = solargrid then  begin      // Solar eclipse
        if (aColumn=1) then begin   // image map
          pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,aRow],blank,'',[rfReplaceAll])+copy(cells[3,aRow],1,1)+'.png';
@@ -1276,7 +1284,7 @@ end;
 end;
 
 Procedure Tf_calendar.SaveGrid(grid : tstringgrid);
-var buf,d : string;
+var buf,d,z1,z2 : string;
     i,j : integer;
     x : double;
     lst:TStringList;
@@ -1286,9 +1294,12 @@ buf:='"'+config.ObsName+'";"';
 x:=abs(config.ObsLongitude);
 if config.ObsLongitude>0 then d:=west else d:=east;
 buf:=buf+appmsg[32]+'='+stringreplace(copy(detostr(x),2,99),'"','""',[rfReplaceAll])+d+'";"'+appmsg[31]+'='+stringreplace(detostr(config.ObsLatitude),'"','""',[rfReplaceAll])+'";"';
-x:=abs(config.TimeZone);
-if config.TimeZone<0 then d:=west else d:=east;
-buf:=buf+tz+'='+timtostr(x)+d+'"';
+config.tz.JD:=date1.JD;
+z1:=config.tz.ZoneName;
+config.tz.JD:=date2.JD;
+z2:=config.tz.ZoneName;
+if z1<>z2 then z1:=z1+'/'+z2;
+buf:=buf+rsTimeZone+'='+z1+'"';
 lst.Add(buf);
 for i:=0 to grid.RowCount-1 do begin
   for j:=0 to grid.ColCount-1 do begin
@@ -1335,16 +1346,19 @@ case pagecontrol1.ActivePage.TabIndex of
 end;
 
 procedure Tf_calendar.Gridtoprinter(grid : tstringgrid);
-var buf,d : string;
+var buf,d,z1,z2 : string;
     x : double;
 begin
 buf:=config.ObsName;
 x:=abs(config.ObsLongitude);
 if config.ObsLongitude>0 then d:=west else d:=east;
 buf:=buf+blank+appmsg[32]+'='+copy(detostr(x),2,99)+d+blank+appmsg[31]+'='+detostr(config.ObsLatitude);
-x:=abs(config.TimeZone);
-if config.TimeZone<0 then d:=west else d:=east;
-buf:=buf+blank+tz+'='+timtostr(x)+d;
+config.tz.JD:=date1.JD;
+z1:=config.tz.ZoneName;
+config.tz.JD:=date2.JD;
+z2:=config.tz.ZoneName;
+if z1<>z2 then z1:=z1+'/'+z2;
+buf:=buf+blank+rsTimeZone+'='+z1;
 if grid=cometgrid then
   PrtGrid(Grid,'CdC',buf,'',poLandscape)
 else
@@ -1429,7 +1443,8 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    dat34:=step.text;
    s:=strtoint(step.text);
    djd(date1.JD,a,m,d,hhh);
-   h:=frac(Time.time)*24-config.TimeZone;
+   config.tz.JD:=date1.JD;
+   h:=frac(Time.time)*24-config.tz.SecondsOffset/3600;
    jd1:=jd(a,m,d,h);
    djd(date2.JD,a,m,d,hhh);
    jd2:=jd(a,m,d,h);
@@ -1445,6 +1460,8 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
       djd(jda,a,m,d,h);
       jd0:=jd(a,m,d,0);
       st0:=SidTim(jd0,h,config.ObsLongitude);
+      config.tz.JD:=jda;
+      config.TimeZone:=config.tz.SecondsOffset/3600;
       Fplanet.Comet(jda,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
       precession(jd2000,config.jdchart,ra,dec);
       if config.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,config);
@@ -1610,7 +1627,8 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    dat74:=step.text;
    s:=strtoint(step.text);
    djd(date1.JD,a,m,d,hhh);
-   h:=frac(Time.time)*24-config.TimeZone;
+   config.tz.JD:=date1.JD;
+   h:=frac(Time.time)*24-config.tz.SecondsOffset/3600;
    jd1:=jd(a,m,d,h);
    djd(date2.JD,a,m,d,hhh);
    jd2:=jd(a,m,d,h);
@@ -1626,6 +1644,8 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
       djd(jda,a,m,d,h);
       jd0:=jd(a,m,d,0);
       st0:=SidTim(jd0,h,config.ObsLongitude);
+      config.tz.JD:=jda;
+      config.TimeZone:=config.tz.SecondsOffset/3600;
       Fplanet.Asteroid(jda,true,ra,dec,dist,r,elong,phase,magn);
       precession(jd2000,config.jdchart,ra,dec);
       if config.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,config);
