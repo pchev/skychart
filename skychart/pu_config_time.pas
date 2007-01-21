@@ -215,6 +215,7 @@ CheckGroup1.Items[1]:=rsCurrentDate;
 CheckGroup1.Items[2]:=rsMagnitude;
 ADBC.Items[0]:=rsAD;
 ADBC.Items[1]:=rsBC;
+Button4.Caption:=rsMoreOptions;
 end;
 
 constructor Tf_config_time.Create(AOwner:TComponent);

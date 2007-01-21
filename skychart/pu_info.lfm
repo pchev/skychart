@@ -145,7 +145,7 @@ object f_info: Tf_info
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  Position = poDefaultPosOnly
+  Position = poScreenCenter
   object PageControl1: TPageControl
     Height = 370
     Width = 639
@@ -156,8 +156,8 @@ object f_info: Tf_info
     object TabSheet1: TTabSheet
       Caption = 'TCP/IP Connection'
       object StringGrid1: TStringGrid
-        Height = 316
-        Width = 637
+        Height = 310
+        Width = 635
         Align = alClient
         ColCount = 1
         DefaultColWidth = 800
@@ -176,16 +176,16 @@ object f_info: Tf_info
       end
       object Panel2: TPanel
         Height = 28
-        Top = 316
-        Width = 637
+        Top = 310
+        Width = 635
         Align = alBottom
         FullRepaint = False
         TabOrder = 1
         object serverinfo: TLabel
-          Left = 547
-          Height = 29
+          Left = 531
+          Height = 45
           Top = 6
-          Width = 72
+          Width = 88
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Color = clNone
@@ -205,7 +205,7 @@ object f_info: Tf_info
           Left = 104
           Height = 19
           Top = 2
-          Width = 90
+          Width = 98
           Caption = 'AutoRefresh'
           Checked = True
           OnClick = CheckBox1Click
@@ -219,13 +219,13 @@ object f_info: Tf_info
       ImageIndex = 1
       object Panel3: TPanel
         Height = 27
-        Top = 317
-        Width = 637
+        Top = 311
+        Width = 635
         Align = alBottom
         FullRepaint = False
         TabOrder = 0
         object Button3: TButton
-          Left = 299
+          Left = 297
           Height = 25
           Top = 1
           Width = 75
@@ -236,7 +236,7 @@ object f_info: Tf_info
           TabOrder = 0
         end
         object Edit1: TEdit
-          Left = 209
+          Left = 207
           Height = 21
           Top = 3
           Width = 85
@@ -245,7 +245,7 @@ object f_info: Tf_info
           TabOrder = 1
         end
         object Button5: TButton
-          Left = 385
+          Left = 383
           Height = 25
           Top = 1
           Width = 75
@@ -256,7 +256,7 @@ object f_info: Tf_info
           TabOrder = 2
         end
         object Button6: TButton
-          Left = 473
+          Left = 471
           Height = 25
           Top = 1
           Width = 75
@@ -267,7 +267,7 @@ object f_info: Tf_info
           TabOrder = 3
         end
         object Button7: TButton
-          Left = 561
+          Left = 559
           Height = 25
           Width = 75
           Anchors = [akTop, akRight]
@@ -278,8 +278,8 @@ object f_info: Tf_info
         end
       end
       object Memo1: TSynEdit
-        Height = 317
-        Width = 637
+        Height = 311
+        Width = 635
         Align = alClient
         Color = clBtnHighlight
         Font.Height = -13
@@ -289,9 +289,7 @@ object f_info: Tf_info
         TabOrder = 1
         OnDblClick = Memo1DblClick
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
-        Gutter.OnChange = nil
         Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
@@ -620,7 +618,6 @@ object f_info: Tf_info
         Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
         ReadOnly = True
         RightEdge = 0
-        SelectedColor.OnChange = nil
         TabWidth = 10
       end
     end
@@ -628,9 +625,22 @@ object f_info: Tf_info
       Caption = 'Progress Messages'
       ImageIndex = 2
       object ProgressMemo: TMemo
-        Height = 344
-        Width = 637
+        Height = 338
+        Width = 635
         Align = alClient
+        TabOrder = 0
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Program Information'
+      object InfoMemo: TMemo
+        Height = 338
+        Width = 635
+        Align = alClient
+        Lines.Strings = (
+          ''
+        )
+        ScrollBars = ssAutoVertical
         TabOrder = 0
       end
     end
@@ -643,10 +653,10 @@ object f_info: Tf_info
     FullRepaint = False
     TabOrder = 1
     object Button1: TButton
-      Left = 552
+      Left = 512
       Height = 25
       Top = 1
-      Width = 75
+      Width = 115
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
