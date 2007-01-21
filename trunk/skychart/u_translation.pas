@@ -1074,6 +1074,9 @@ resourcestring
   rsShowGrid = 'Show Grid';
   rsCompassRoseS = 'Compass rose size';
   rsAlwaysShowCo = 'Always show compass rose';
+  rsProgramInfor = 'Program Information';
+  rsCountryTimez = 'Country Timezone';
+  rsMoreOptions = 'More Options';
 
 implementation
 

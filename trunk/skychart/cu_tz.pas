@@ -390,7 +390,7 @@ var
   chars  : longint;
 begin
 if fn='' then fn:='localtime';
-if fileexists(fn) then begin
+if FileExists(fn) and ((FileGetAttr(fn) and faDirectory)=0) then begin
   system.assign(f,fn);
   reset(f,1);
   bufptr := @buf[bufsize-1]+1;
@@ -514,7 +514,7 @@ end;
 
 procedure TCdCTimeZone.SetTimeZoneFile(value: string);
 begin
-if (value<>fTimeZoneFile) and fileexists(value) then begin
+if (value<>fTimeZoneFile) and fileexists(value) and ((FileGetAttr(value) and faDirectory)=0) then begin
   fTimeZoneFile:=value;
   ReadTimezoneFile(fTimezoneFile);
   GetLocalTimezone(fTimer);

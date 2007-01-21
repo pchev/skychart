@@ -567,11 +567,12 @@ type
     procedure ApplyConfigCatalog(Sender: TObject);
     procedure SetChildFocus(Sender: TObject);
     procedure SetNightVision(night: boolean);
-    procedure SetupObservatoryPage(page:integer);
+    procedure SetupObservatoryPage(page:integer; posx:integer=0; posy:integer=0);
     procedure SetupTimePage(page:integer);
     procedure SetupDisplayPage(pagegroup:integer);
     procedure SetupPicturesPage(page:integer);
     procedure SetupCatalogPage(page:integer);
+    procedure FirstSetup;
   {$ifdef win32}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -657,7 +658,7 @@ uses
 {$endif}
      pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
-     pu_manualtelescope, pu_print;
+     pu_splash, pu_manualtelescope, pu_print;
 
 {$ifdef win32}
 const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
@@ -896,7 +897,9 @@ end;
 
 procedure Tf_main.Init;
 var i: integer;
+    firstuse: boolean;
 begin
+firstuse:=false;
 try
  // some initialisation that need to be done after all the forms are created.
  f_info.onGetTCPinfo:=GetTCPInfo;
@@ -936,7 +939,9 @@ try
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm') then
     arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm');
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
- if def_cfgsc.tz.TimeZoneFile='' then SetupObservatory.Execute;
+ if def_cfgsc.tz.TimeZoneFile='' then firstuse:=true;
+ if firstuse then
+    FirstSetup;
  application.ProcessMessages; // apply any resizing
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
@@ -962,6 +967,29 @@ try
 except
  on E: Exception do SetLPanel1(E.Message);
 end;
+end;
+
+procedure Tf_main.FirstSetup;
+var buf: string;
+begin
+ f_splash.Close;
+ application.ProcessMessages;
+ buf:=slash(HelpDir)+'releasenotes_'+lang+'.txt';
+ if not fileexists(buf) then
+    buf:=slash(HelpDir)+'releasenotes.txt';
+ if fileexists(buf) then begin
+    f_info.setpage(3);
+    f_info.InfoMemo.Lines.LoadFromFile(buf);
+    f_info.InfoMemo.Text:=UTF8Decode(f_info.InfoMemo.Text);
+    f_info.showmodal;
+ end;
+ SetupObservatoryPage(0,-1);
+ def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+ if def_cfgsc.tz.TimeZoneFile='' then begin
+    def_cfgsc.ObsTZ:='Etc/GMT';
+    def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+ end;
+ SaveDefault;
 end;
 
 procedure Tf_main.SaveImageExecute(Sender: TObject);
@@ -1972,7 +2000,7 @@ begin
 SetupObservatoryPage(0);
 end;
 
-procedure Tf_main.SetupObservatoryPage(page:integer);
+procedure Tf_main.SetupObservatoryPage(page:integer; posx:integer=0; posy:integer=0);
 begin
 if ConfigObservatory=nil then begin
    ConfigObservatory:=Tf_config_observatory.Create(self);
@@ -1994,7 +2022,11 @@ end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigObservatory.cmain.Assign(cfgm);
-formpos(ConfigObservatory,mouse.cursorpos.x,mouse.cursorpos.y);
+if (posx=0)and(posy=0) then
+   formpos(ConfigObservatory,mouse.cursorpos.x,mouse.cursorpos.y)
+else
+  if (posx>0)and(posy>0) then
+   formpos(ConfigObservatory,posx,posy);
 ConfigObservatory.Notebook1.PageIndex:=page;
 ConfigObservatory.showmodal;
 if ConfigObservatory.ModalResult=mrOK then begin
@@ -2614,10 +2646,10 @@ def_cfgsc.ymax:=100;
 def_cfgsc.ObsLatitude := 46.2 ;
 def_cfgsc.ObsLongitude := -6.1 ;
 def_cfgsc.ObsAltitude := 0 ;
-def_cfgsc.ObsTZ := 'Etc/GMT';
+def_cfgsc.ObsTZ := '';
 def_cfgsc.ObsTemperature := 10 ;
 def_cfgsc.ObsPressure := 1010 ;
-def_cfgsc.ObsName := 'Genève' ;
+def_cfgsc.ObsName := 'Geneva' ;
 def_cfgsc.ObsCountry := 'Switzerland' ;
 def_cfgsc.horizonopaque:=true;
 def_cfgsc.FillHorizon:=true;

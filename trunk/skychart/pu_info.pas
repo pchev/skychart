@@ -41,6 +41,7 @@ type
   { Tf_info }
 
   Tf_info = class(TForm)
+    InfoMemo: TMemo;
     serverinfo: TLabel;
     PageControl1: TPageControl;
     Panel1: TPanel;
@@ -53,6 +54,7 @@ type
     PopupMenu1: TPopupMenu;
     closeconnection: TMenuItem;
     CheckBox1: TCheckBox;
+    TabSheet3: TTabSheet;
     Timer1: TTimer;
     TabSheet2: TTabSheet;
     Panel3: TPanel;
@@ -120,6 +122,7 @@ TabSheet1.caption:=rsTCPIPConnect;
 Button2.caption:=rsRefresh;
 CheckBox1.caption:=rsAutoRefresh;
 TabSheet2.caption:=rsObjectList;
+TabSheet3.caption:=rsProgramInfor;
 Button3.caption:=rsSearch;
 Button5.caption:=rsSortByRA;
 Button6.caption:=rsPrint;
@@ -237,12 +240,17 @@ case Pagecontrol1.ActivepageIndex of
    panel1.visible:=false;
    f_info.ProgressMemo.clear;
    end;
+3: begin
+   panel1.visible:=true;
+   end;
 end;
 end;
 
 procedure Tf_info.setpage(n:integer);
 var i:integer;
 begin
+if n=3 then Button1.caption:=rsNext
+       else Button1.caption:=rsClose;
 Pagecontrol1.ActivepageIndex:=n;
 for i:=0 to Pagecontrol1.pagecount-1 do begin
   Pagecontrol1.pages[i].tabvisible:=(i=n);
