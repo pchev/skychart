@@ -803,6 +803,10 @@ msgstr "Kernradius"
 msgid "Correlated"
 msgstr "Korreliiert"
 
+#: u_translation:rscountrytimez
+msgid "Country Timezone"
+msgstr ""
+
 #: u_translation:rscreatedataba
 msgid "Create Database"
 msgstr "Datenbank erstellen"
@@ -2255,6 +2259,10 @@ msgstr "Mond"
 msgid "More Deep Sky"
 msgstr "Mehr Deep-Sky Objekte"
 
+#: u_translation:rsmoreoptions
+msgid "More Options"
+msgstr ""
+
 #: u_translation:rsmorestars
 msgid "More Stars"
 msgstr "Mehr Sterne"
@@ -2834,6 +2842,10 @@ msgstr "Berechne... %s"
 #: u_translation:rsprogramdata
 msgid "Program Data "
 msgstr "Programmdaten"
+
+#: u_translation:rsprograminfor
+msgid "Program Information"
+msgstr ""
 
 #: u_translation:rsprogrammer
 msgid "Programmer:"

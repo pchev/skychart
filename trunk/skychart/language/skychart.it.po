@@ -803,6 +803,10 @@ msgstr "Raggio del nucleo"
 msgid "Correlated"
 msgstr "Correlato"
 
+#: u_translation:rscountrytimez
+msgid "Country Timezone"
+msgstr ""
+
 #: u_translation:rscreatedataba
 msgid "Create Database"
 msgstr "Crea Database"
@@ -2255,6 +2259,10 @@ msgstr "Luna"
 msgid "More Deep Sky"
 msgstr "Più Profondo cielo"
 
+#: u_translation:rsmoreoptions
+msgid "More Options"
+msgstr ""
+
 #: u_translation:rsmorestars
 msgid "More Stars"
 msgstr "Più Stelle"
@@ -2834,6 +2842,10 @@ msgstr "In elaborazione... %s"
 #: u_translation:rsprogramdata
 msgid "Program Data "
 msgstr "Dati di programma"
+
+#: u_translation:rsprograminfor
+msgid "Program Information"
+msgstr ""
 
 #: u_translation:rsprogrammer
 msgid "Programmer:"

@@ -804,6 +804,10 @@ msgstr "Радіус ядра"
 msgid "Correlated"
 msgstr "Кореляція"
 
+#: u_translation:rscountrytimez
+msgid "Country Timezone"
+msgstr ""
+
 #: u_translation:rscreatedataba
 msgid "Create Database"
 msgstr "Створити БД"
@@ -2256,6 +2260,10 @@ msgstr "Місяць"
 msgid "More Deep Sky"
 msgstr "Більше туманностей"
 
+#: u_translation:rsmoreoptions
+msgid "More Options"
+msgstr ""
+
 #: u_translation:rsmorestars
 msgid "More Stars"
 msgstr "Більше зірок"
@@ -2835,6 +2843,10 @@ msgstr "Іде обробка... ... %s"
 #: u_translation:rsprogramdata
 msgid "Program Data "
 msgstr "Програмні дані"
+
+#: u_translation:rsprograminfor
+msgid "Program Information"
+msgstr ""
 
 #: u_translation:rsprogrammer
 msgid "Programmer:"
