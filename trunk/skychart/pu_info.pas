@@ -42,21 +42,22 @@ type
 
   Tf_info = class(TForm)
     InfoMemo: TMemo;
+    Page1: TPanel;
+    Page2: TPanel;
+    Page3: TPanel;
+    Page4: TPanel;
+    TitlePanel: TPanel;
     serverinfo: TLabel;
-    PageControl1: TPageControl;
     Panel1: TPanel;
     Button1: TButton;
     Memo1: TSynEdit;
-    TabSheet1: TTabSheet;
     StringGrid1: TStringGrid;
     Panel2: TPanel;
     Button2: TButton;
     PopupMenu1: TPopupMenu;
     closeconnection: TMenuItem;
     CheckBox1: TCheckBox;
-    TabSheet3: TTabSheet;
     Timer1: TTimer;
-    TabSheet2: TTabSheet;
     Panel3: TPanel;
     Button3: TButton;
     Edit1: TEdit;
@@ -70,7 +71,6 @@ type
     Button6: TButton;
     Button7: TButton;
     SaveDialog1: TSaveDialog;
-    ProgressMessages: TTabSheet;
     ProgressMemo: TMemo;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -99,6 +99,7 @@ type
     Fdetailinfo: Tdetinfo;
     RowClick,ColClick :integer;
     Fnightvision:boolean;
+    ActivePage:Integer;
   public
     { Public declarations }
     source_chart:string;
@@ -118,16 +119,12 @@ implementation
 procedure Tf_info.SetLang;
 begin
 Caption:=rsInfo;
-TabSheet1.caption:=rsTCPIPConnect;
 Button2.caption:=rsRefresh;
 CheckBox1.caption:=rsAutoRefresh;
-TabSheet2.caption:=rsObjectList;
-TabSheet3.caption:=rsProgramInfor;
 Button3.caption:=rsSearch;
 Button5.caption:=rsSortByRA;
 Button6.caption:=rsPrint;
 Button7.caption:=rsSave;
-ProgressMessages.caption:=rsProgressMess;
 Button1.caption:=rsClose;
 closeconnection.caption:=rsCloseConnect;
 outslectionner1.caption:=rsSelectAll;
@@ -184,6 +181,10 @@ end;
 
 procedure Tf_info.FormCreate(Sender: TObject);
 begin
+ page1.Align:=alClient;
+ page2.Align:=alClient;
+ page3.Align:=alClient;
+ page4.Align:=alClient;
  SetLang;
  Fnightvision:=false;
 {$ifdef win32}
@@ -223,7 +224,7 @@ if Fnightvision<>nightvision then begin
    Fnightvision:=nightvision;
 end;
 {$endif}
-case Pagecontrol1.ActivepageIndex of
+case Activepage of
 0: begin
    panel1.visible:=true;
    Button2Click(self);
@@ -251,10 +252,16 @@ var i:integer;
 begin
 if n=3 then Button1.caption:=rsNext
        else Button1.caption:=rsClose;
-Pagecontrol1.ActivepageIndex:=n;
-for i:=0 to Pagecontrol1.pagecount-1 do begin
-  Pagecontrol1.pages[i].tabvisible:=(i=n);
-  Pagecontrol1.pages[i].Visible:=(i=n);
+Activepage:=n;
+Page1.Visible:=(n=0);
+Page2.Visible:=(n=1);
+Page3.Visible:=(n=2);
+Page4.Visible:=(n=3);
+case ActivePage of
+ 0: TitlePanel.Caption:=rsTCPIPConnect;
+ 1: TitlePanel.Caption:=rsObjectList;
+ 2: TitlePanel.Caption:=rsProgressMess;
+ 3: TitlePanel.Caption:=rsProgramInfor;
 end;
 end;
 
