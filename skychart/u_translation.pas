@@ -717,8 +717,7 @@ resourcestring
   rsLocalHorizon2 = 'Local Horizon File Name : ';
   rsDisplayTheLo = 'Display the local horizon line';
   rsDepressionOf = 'Depression of the visible horizon';
-  rsYouLiveOnABi = 'You live on a big mountain near the ocean shore and you '
-    +'like to observe the distorted image of the object below the horizon.';
+  rsYouLiveOnABi = 'If you observe from a big mountain, the horizon line will be lower than would be at sea level.';
   rsDrawTheAppar = 'Draw the apparent depressed horizon line';
   rsUpdateOrAddT = 'Update or add the current location to the database ?';
   rsUpdatedSucce = 'Updated successfully!';

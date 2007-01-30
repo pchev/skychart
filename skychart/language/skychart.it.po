@@ -1779,6 +1779,10 @@ msgstr "Server Host INDI"
 msgid "INDI server Port"
 msgstr "Porta Server INDI"
 
+#: u_translation:rsyouliveonabi
+msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
+msgstr "Se osservi da una montagna elevata, la linea dell'orizzonte risulterà più bassa rispetto al livello del mare."
+
 #: u_translation:rsillum
 msgid "Illum."
 msgstr "Illum."
@@ -3982,10 +3986,6 @@ msgstr "Anno"
 #: u_translation:rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
 msgstr "Ora sei pronto per visualizzare gli asteroidi di questo periodo."
-
-#: u_translation:rsyouliveonabi
-msgid "You live on a big mountain near the ocean shore and you like to observe the distorted image of the object below the horizon."
-msgstr "Se osservi da una montagna elevata, la linea dell'orizzonte risulterà più bassa rispetto al livello del mare."
 
 #: u_translation:rszenith
 msgid "Zenith"
