@@ -17,12 +17,13 @@ $path = cwd;
   sendcmd("selectchart test");
 
   sendcmd("setproj equat");
+  sendcmd("redraw");
   sendcmd("search M37");
   sleep(2);
   sendcmd("setfov 3d0m0s");
   sendcmd("redraw");
 
-  sendcmd("saveimg PNG $path/test.png");
+#  sendcmd("saveimg PNG $path/test.png");
   sendcmd("saveimg JPEG $path/test.jpg 50");
 
   sleep(5);
@@ -39,7 +40,7 @@ sub sendcmd {
   if ($line =~ /$client/) {       # click form our client
      print STDOUT $line;
      }
-  while (($line =~/^\.\r\n$/) or ($line =~ /^> /)) # keepalive and click on the chart
+  while (($line =~/^\.\r\n$/) or ($line =~ /^>/)) # keepalive and click on the chart
     {
      $line = <$handle>;
      if ($line =~ /$client/) {       # click form our client
@@ -52,7 +53,7 @@ sub sendcmd {
      print STDOUT "Command success\n";
      }
   else {
-     print STDOUT "Command failed\n";
+     print STDOUT "Command failed: +$line+ \n";
 	 exit;
      }
 }
