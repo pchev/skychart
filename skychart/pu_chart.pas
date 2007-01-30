@@ -2142,6 +2142,7 @@ if p=0 then exit;
 m:=strtoint(trim(copy(dt,1,p-1)));
 dt:=copy(dt,p+1,999);
 p:=pos('T',dt);
+if p=0 then p:=pos(' ',dt);
 if p=0 then exit;
 d:=strtoint(trim(copy(dt,1,p-1)));
 dt:=copy(dt,p+1,999);
@@ -2161,6 +2162,10 @@ sc.cfgsc.CurDay:=d;
 sc.cfgsc.CurTime:=h+n/60+s/3600;
 sc.cfgsc.tz.JD:=jd(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay,sc.cfgsc.CurTime);
 sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 result:=msgOK;
 except
 exit;
@@ -2235,6 +2240,8 @@ function Tf_chart.cmd_SetTZ(tz:string):string;
 begin
 try
   sc.cfgsc.ObsTZ:=tz;
+  sc.cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(sc.cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+  sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
   result:=msgOK;
 except
   result:=msgFailed;
