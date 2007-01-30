@@ -86,7 +86,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 38
-            Width = 78
+            Width = 99
             Caption = 'Faint Stars Size '
             Color = clNone
             ParentColor = False
@@ -95,7 +95,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 112
-            Width = 43
+            Width = 50
             Caption = 'Contrast'
             Color = clNone
             ParentColor = False
@@ -104,7 +104,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 150
-            Width = 78
+            Width = 92
             Caption = 'Color saturation'
             Color = clNone
             ParentColor = False
@@ -113,14 +113,14 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 75
-            Width = 126
+            Width = 149
             Caption = 'Increment for Bright Stars'
             Color = clNone
             ParentColor = False
           end
           object StarSizeBar: TTrackBar
             Left = 193
-            Height = 27
+            Height = 31
             Top = 30
             Width = 225
             Frequency = 5
@@ -134,7 +134,7 @@ object f_config_display: Tf_config_display
           end
           object StarContrastBar: TTrackBar
             Left = 193
-            Height = 27
+            Height = 31
             Top = 104
             Width = 225
             Frequency = 100
@@ -148,7 +148,7 @@ object f_config_display: Tf_config_display
           end
           object SaturationBar: TTrackBar
             Left = 193
-            Height = 27
+            Height = 31
             Top = 142
             Width = 225
             Frequency = 28
@@ -160,7 +160,7 @@ object f_config_display: Tf_config_display
           end
           object SizeContrastBar: TTrackBar
             Left = 193
-            Height = 27
+            Height = 31
             Top = 67
             Width = 225
             Frequency = 10
@@ -1146,7 +1146,7 @@ object f_config_display: Tf_config_display
           end
           object NebBrightBar: TTrackBar
             Left = 232
-            Height = 27
+            Height = 31
             Top = 40
             Width = 217
             Frequency = 26
@@ -1158,7 +1158,7 @@ object f_config_display: Tf_config_display
           end
           object NebGrayBar: TTrackBar
             Left = 8
-            Height = 27
+            Height = 31
             Top = 40
             Width = 209
             Frequency = 26
@@ -2458,9 +2458,9 @@ object f_config_display: Tf_config_display
         Caption = 'Finder circle'
         object Label307: TLabel
           Left = 80
-          Height = 13
+          Height = 14
           Top = 8
-          Width = 172
+          Width = 177
           Caption = 'Finder circle (Eyepiece/Telrad)'
           Color = clNone
           ParentColor = False
@@ -2469,8 +2469,8 @@ object f_config_display: Tf_config_display
           Tag = 1
           Left = 24
           Height = 19
-          Top = 76
-          Width = 51
+          Top = 85
+          Width = 58
           Caption = 'No. 1'
           OnClick = cbClick
           TabOrder = 0
@@ -2479,8 +2479,8 @@ object f_config_display: Tf_config_display
           Tag = 2
           Left = 24
           Height = 19
-          Top = 106
-          Width = 51
+          Top = 115
+          Width = 58
           Caption = 'No. 2'
           OnClick = cbClick
           TabOrder = 1
@@ -2489,8 +2489,8 @@ object f_config_display: Tf_config_display
           Tag = 3
           Left = 24
           Height = 19
-          Top = 137
-          Width = 51
+          Top = 145
+          Width = 58
           Caption = 'No. 3'
           OnClick = cbClick
           TabOrder = 2
@@ -2499,8 +2499,8 @@ object f_config_display: Tf_config_display
           Tag = 4
           Left = 24
           Height = 19
-          Top = 168
-          Width = 51
+          Top = 175
+          Width = 58
           Caption = 'No. 4'
           OnClick = cbClick
           TabOrder = 3
@@ -2509,8 +2509,8 @@ object f_config_display: Tf_config_display
           Tag = 5
           Left = 24
           Height = 19
-          Top = 199
-          Width = 51
+          Top = 205
+          Width = 58
           Caption = 'No. 5'
           OnClick = cbClick
           TabOrder = 4
@@ -2519,8 +2519,8 @@ object f_config_display: Tf_config_display
           Tag = 6
           Left = 24
           Height = 19
-          Top = 230
-          Width = 51
+          Top = 235
+          Width = 58
           Caption = 'No. 6'
           OnClick = cbClick
           TabOrder = 5
@@ -2529,8 +2529,8 @@ object f_config_display: Tf_config_display
           Tag = 7
           Left = 24
           Height = 19
-          Top = 261
-          Width = 51
+          Top = 265
+          Width = 58
           Caption = 'No. 7'
           OnClick = cbClick
           TabOrder = 6
@@ -2539,8 +2539,8 @@ object f_config_display: Tf_config_display
           Tag = 8
           Left = 24
           Height = 19
-          Top = 292
-          Width = 51
+          Top = 295
+          Width = 58
           Caption = 'No. 8'
           OnClick = cbClick
           TabOrder = 7
@@ -2549,8 +2549,8 @@ object f_config_display: Tf_config_display
           Tag = 9
           Left = 24
           Height = 19
-          Top = 323
-          Width = 51
+          Top = 325
+          Width = 58
           Caption = 'No. 9'
           OnClick = cbClick
           TabOrder = 8
@@ -2559,8 +2559,8 @@ object f_config_display: Tf_config_display
           Tag = 10
           Left = 24
           Height = 19
-          Top = 354
-          Width = 58
+          Top = 355
+          Width = 65
           Caption = 'No. 10'
           OnClick = cbClick
           TabOrder = 9
@@ -2587,7 +2587,7 @@ object f_config_display: Tf_config_display
           Left = 23
           Height = 19
           Top = 402
-          Width = 147
+          Width = 155
           Caption = 'Mark the chart center '
           OnClick = CenterMark1Click
           TabOrder = 11
@@ -2597,9 +2597,9 @@ object f_config_display: Tf_config_display
         Caption = 'Finder rectangle'
         object Label308: TLabel
           Left = 80
-          Height = 13
+          Height = 14
           Top = 8
-          Width = 186
+          Width = 190
           Caption = 'Finder rectangle (CCD / Camera)'
           Color = clNone
           ParentColor = False
@@ -2608,8 +2608,8 @@ object f_config_display: Tf_config_display
           Tag = 1
           Left = 24
           Height = 19
-          Top = 74
-          Width = 51
+          Top = 85
+          Width = 58
           Caption = 'No. 1'
           OnClick = rbClick
           TabOrder = 0
@@ -2618,8 +2618,8 @@ object f_config_display: Tf_config_display
           Tag = 2
           Left = 24
           Height = 19
-          Top = 105
-          Width = 51
+          Top = 115
+          Width = 58
           Caption = 'No. 2'
           OnClick = rbClick
           TabOrder = 1
@@ -2628,8 +2628,8 @@ object f_config_display: Tf_config_display
           Tag = 3
           Left = 24
           Height = 19
-          Top = 136
-          Width = 51
+          Top = 145
+          Width = 58
           Caption = 'No. 3'
           OnClick = rbClick
           TabOrder = 2
@@ -2638,8 +2638,8 @@ object f_config_display: Tf_config_display
           Tag = 4
           Left = 24
           Height = 19
-          Top = 167
-          Width = 51
+          Top = 175
+          Width = 58
           Caption = 'No. 4'
           OnClick = rbClick
           TabOrder = 3
@@ -2648,8 +2648,8 @@ object f_config_display: Tf_config_display
           Tag = 5
           Left = 24
           Height = 19
-          Top = 198
-          Width = 51
+          Top = 205
+          Width = 58
           Caption = 'No. 5'
           OnClick = rbClick
           TabOrder = 4
@@ -2658,8 +2658,8 @@ object f_config_display: Tf_config_display
           Tag = 6
           Left = 24
           Height = 19
-          Top = 230
-          Width = 51
+          Top = 235
+          Width = 58
           Caption = 'No. 6'
           OnClick = rbClick
           TabOrder = 5
@@ -2668,8 +2668,8 @@ object f_config_display: Tf_config_display
           Tag = 7
           Left = 24
           Height = 19
-          Top = 261
-          Width = 51
+          Top = 265
+          Width = 58
           Caption = 'No. 7'
           OnClick = rbClick
           TabOrder = 6
@@ -2678,8 +2678,8 @@ object f_config_display: Tf_config_display
           Tag = 8
           Left = 24
           Height = 19
-          Top = 292
-          Width = 51
+          Top = 295
+          Width = 58
           Caption = 'No. 8'
           OnClick = rbClick
           TabOrder = 7
@@ -2688,8 +2688,8 @@ object f_config_display: Tf_config_display
           Tag = 9
           Left = 24
           Height = 19
-          Top = 323
-          Width = 51
+          Top = 325
+          Width = 58
           Caption = 'No. 9'
           OnClick = rbClick
           TabOrder = 8
@@ -2699,7 +2699,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 19
           Top = 355
-          Width = 50
+          Width = 57
           Caption = 'No10'
           OnClick = rbClick
           TabOrder = 9
@@ -2726,7 +2726,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 19
           Top = 402
-          Width = 147
+          Width = 155
           Caption = 'Mark the chart center '
           OnClick = CenterMark1Click
           TabOrder = 11
