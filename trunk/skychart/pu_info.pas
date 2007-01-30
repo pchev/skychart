@@ -248,7 +248,6 @@ end;
 end;
 
 procedure Tf_info.setpage(n:integer);
-var i:integer;
 begin
 if n=3 then Button1.caption:=rsNext
        else Button1.caption:=rsClose;

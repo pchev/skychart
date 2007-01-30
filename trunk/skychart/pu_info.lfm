@@ -202,10 +202,10 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 1
       object serverinfo: TLabel
-        Left = 147
-        Height = 347
+        Left = 146
+        Height = 348
         Top = 6
-        Width = 390
+        Width = 391
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         Color = clNone
@@ -316,7 +316,9 @@ object f_info: Tf_info
       TabOrder = 1
       OnDblClick = Memo1DblClick
       BookMarkOptions.Xoffset = -18
+      BookMarkOptions.OnChange = nil
       Gutter.Visible = False
+      Gutter.OnChange = nil
       Gutter.CodeFoldingWidth = 14
       Keystrokes = <      
         item
@@ -645,6 +647,7 @@ object f_info: Tf_info
       Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
       ReadOnly = True
       RightEdge = 0
+      SelectedColor.OnChange = nil
       TabWidth = 10
     end
   end
