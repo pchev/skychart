@@ -1,10 +1,10 @@
 object f_config_observatory: Tf_config_observatory
   Left = 363
-  Height = 558
+  Height = 567
   Top = 183
   Width = 481
   HorzScrollBar.Page = 480
-  VertScrollBar.Page = 557
+  VertScrollBar.Page = 566
   ActiveControl = latdeg
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
@@ -16,7 +16,7 @@ object f_config_observatory: Tf_config_observatory
   OnShow = FormShow
   Position = poScreenCenter
   object MainPanel: TPanel
-    Height = 506
+    Height = 515
     Top = 8
     Width = 482
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -24,7 +24,7 @@ object f_config_observatory: Tf_config_observatory
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
-      Height = 504
+      Height = 513
       Top = 1
       Width = 480
       Align = alClient
@@ -44,7 +44,7 @@ object f_config_observatory: Tf_config_observatory
         object Obszp: TButton
           Left = 3
           Height = 25
-          Top = 283
+          Top = 293
           Width = 41
           BorderSpacing.InnerBorder = 4
           Caption = '+'
@@ -54,7 +54,7 @@ object f_config_observatory: Tf_config_observatory
         object Obszm: TButton
           Left = 3
           Height = 25
-          Top = 323
+          Top = 333
           Width = 41
           BorderSpacing.InnerBorder = 4
           Caption = '-'
@@ -64,7 +64,7 @@ object f_config_observatory: Tf_config_observatory
         object Obsmap: TButton
           Left = 3
           Height = 25
-          Top = 363
+          Top = 373
           Width = 41
           BorderSpacing.InnerBorder = 4
           Caption = 'Load'
@@ -75,7 +75,7 @@ object f_config_observatory: Tf_config_observatory
           Cursor = crCross
           Left = 47
           Height = 200
-          Top = 251
+          Top = 261
           Width = 400
           Canvas.Brush.Color = clBlack
           Zoom = 25
@@ -88,7 +88,7 @@ object f_config_observatory: Tf_config_observatory
         object HScrollBar: TScrollBar
           Left = 47
           Height = 16
-          Top = 452
+          Top = 462
           Width = 400
           PageSize = 1
           TabOrder = 9
@@ -98,7 +98,7 @@ object f_config_observatory: Tf_config_observatory
         object VScrollBar: TScrollBar
           Left = 448
           Height = 16
-          Top = 251
+          Top = 261
           Width = 16
           Kind = sbVertical
           PageSize = 1
@@ -244,7 +244,7 @@ object f_config_observatory: Tf_config_observatory
         object Latitude: TGroupBox
           Left = 8
           Height = 68
-          Top = 111
+          Top = 109
           Width = 185
           Caption = 'Latitude'
           TabOrder = 1
@@ -341,7 +341,7 @@ object f_config_observatory: Tf_config_observatory
         object Longitude: TGroupBox
           Left = 192
           Height = 68
-          Top = 111
+          Top = 109
           Width = 185
           Caption = 'Longitude'
           TabOrder = 2
@@ -438,7 +438,7 @@ object f_config_observatory: Tf_config_observatory
         object Altitude: TGroupBox
           Left = 376
           Height = 68
-          Top = 111
+          Top = 109
           Width = 81
           Caption = 'Altitude'
           TabOrder = 3
@@ -472,16 +472,16 @@ object f_config_observatory: Tf_config_observatory
         end
         object timezone: TGroupBox
           Left = 8
-          Height = 64
-          Top = 182
+          Height = 73
+          Top = 181
           Width = 449
           Caption = 'Time Zone'
           TabOrder = 4
           object TZComboBox: TComboBox
-            Left = 181
+            Left = 8
             Height = 25
-            Top = 8
-            Width = 260
+            Top = 23
+            Width = 433
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
             MaxLength = 0
             OnChange = TZComboBoxChange
@@ -492,7 +492,7 @@ object f_config_observatory: Tf_config_observatory
           object CountryTZ: TCheckBox
             Left = 8
             Height = 19
-            Top = 10
+            Top = 1
             Width = 132
             Caption = 'Country Timezone'
             Checked = True
@@ -658,7 +658,7 @@ object f_config_observatory: Tf_config_observatory
   end
   object Panel1: TPanel
     Height = 50
-    Top = 514
+    Top = 523
     Width = 481
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 1

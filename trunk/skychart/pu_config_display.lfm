@@ -2469,7 +2469,7 @@ object f_config_display: Tf_config_display
           Tag = 1
           Left = 24
           Height = 19
-          Top = 85
+          Top = 87
           Width = 58
           Caption = 'No. 1'
           OnClick = cbClick
@@ -2479,7 +2479,7 @@ object f_config_display: Tf_config_display
           Tag = 2
           Left = 24
           Height = 19
-          Top = 115
+          Top = 117
           Width = 58
           Caption = 'No. 2'
           OnClick = cbClick
@@ -2489,7 +2489,7 @@ object f_config_display: Tf_config_display
           Tag = 3
           Left = 24
           Height = 19
-          Top = 145
+          Top = 147
           Width = 58
           Caption = 'No. 3'
           OnClick = cbClick
@@ -2499,7 +2499,7 @@ object f_config_display: Tf_config_display
           Tag = 4
           Left = 24
           Height = 19
-          Top = 175
+          Top = 177
           Width = 58
           Caption = 'No. 4'
           OnClick = cbClick
@@ -2509,7 +2509,7 @@ object f_config_display: Tf_config_display
           Tag = 5
           Left = 24
           Height = 19
-          Top = 205
+          Top = 207
           Width = 58
           Caption = 'No. 5'
           OnClick = cbClick
@@ -2519,7 +2519,7 @@ object f_config_display: Tf_config_display
           Tag = 6
           Left = 24
           Height = 19
-          Top = 235
+          Top = 237
           Width = 58
           Caption = 'No. 6'
           OnClick = cbClick
@@ -2529,7 +2529,7 @@ object f_config_display: Tf_config_display
           Tag = 7
           Left = 24
           Height = 19
-          Top = 265
+          Top = 267
           Width = 58
           Caption = 'No. 7'
           OnClick = cbClick
@@ -2539,7 +2539,7 @@ object f_config_display: Tf_config_display
           Tag = 8
           Left = 24
           Height = 19
-          Top = 295
+          Top = 297
           Width = 58
           Caption = 'No. 8'
           OnClick = cbClick
@@ -2549,7 +2549,7 @@ object f_config_display: Tf_config_display
           Tag = 9
           Left = 24
           Height = 19
-          Top = 325
+          Top = 327
           Width = 58
           Caption = 'No. 9'
           OnClick = cbClick
@@ -2559,7 +2559,7 @@ object f_config_display: Tf_config_display
           Tag = 10
           Left = 24
           Height = 19
-          Top = 355
+          Top = 357
           Width = 65
           Caption = 'No. 10'
           OnClick = cbClick
@@ -2608,7 +2608,7 @@ object f_config_display: Tf_config_display
           Tag = 1
           Left = 24
           Height = 19
-          Top = 85
+          Top = 87
           Width = 58
           Caption = 'No. 1'
           OnClick = rbClick
@@ -2618,7 +2618,7 @@ object f_config_display: Tf_config_display
           Tag = 2
           Left = 24
           Height = 19
-          Top = 115
+          Top = 117
           Width = 58
           Caption = 'No. 2'
           OnClick = rbClick
@@ -2628,7 +2628,7 @@ object f_config_display: Tf_config_display
           Tag = 3
           Left = 24
           Height = 19
-          Top = 145
+          Top = 147
           Width = 58
           Caption = 'No. 3'
           OnClick = rbClick
@@ -2638,7 +2638,7 @@ object f_config_display: Tf_config_display
           Tag = 4
           Left = 24
           Height = 19
-          Top = 175
+          Top = 177
           Width = 58
           Caption = 'No. 4'
           OnClick = rbClick
@@ -2648,7 +2648,7 @@ object f_config_display: Tf_config_display
           Tag = 5
           Left = 24
           Height = 19
-          Top = 205
+          Top = 207
           Width = 58
           Caption = 'No. 5'
           OnClick = rbClick
@@ -2658,7 +2658,7 @@ object f_config_display: Tf_config_display
           Tag = 6
           Left = 24
           Height = 19
-          Top = 235
+          Top = 237
           Width = 58
           Caption = 'No. 6'
           OnClick = rbClick
@@ -2668,7 +2668,7 @@ object f_config_display: Tf_config_display
           Tag = 7
           Left = 24
           Height = 19
-          Top = 265
+          Top = 267
           Width = 58
           Caption = 'No. 7'
           OnClick = rbClick
@@ -2678,7 +2678,7 @@ object f_config_display: Tf_config_display
           Tag = 8
           Left = 24
           Height = 19
-          Top = 295
+          Top = 297
           Width = 58
           Caption = 'No. 8'
           OnClick = rbClick
@@ -2688,7 +2688,7 @@ object f_config_display: Tf_config_display
           Tag = 9
           Left = 24
           Height = 19
-          Top = 325
+          Top = 327
           Width = 58
           Caption = 'No. 9'
           OnClick = rbClick
@@ -2698,7 +2698,7 @@ object f_config_display: Tf_config_display
           Tag = 10
           Left = 24
           Height = 19
-          Top = 355
+          Top = 357
           Width = 57
           Caption = 'No10'
           OnClick = rbClick
