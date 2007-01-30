@@ -1,5 +1,4 @@
-# translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2007-01-21 20:52+0100\n"
@@ -1779,6 +1778,10 @@ msgstr "Serveur INDI"
 #: u_translation:rsindiserverpo
 msgid "INDI server Port"
 msgstr "Port serveur"
+
+#: u_translation:rsyouliveonabi
+msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
+msgstr "Vous observez depuis une haute montagne près de l'océan et vous aimez observer l'image distordue des objets sous l'horizon."
 
 #: u_translation:rsillum
 msgid "Illum."
@@ -3983,10 +3986,6 @@ msgstr "Année"
 #: u_translation:rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
 msgstr "Vous êtes mantenant prêt à afficher les astéroïdes pour cette période."
-
-#: u_translation:rsyouliveonabi
-msgid "You live on a big mountain near the ocean shore and you like to observe the distorted image of the object below the horizon."
-msgstr "Vous vivez sur une haute montagne près de l'océan et vous aimez observer l'image distordue des objets sous l'horizon."
 
 #: u_translation:rszenith
 msgid "Zenith"
