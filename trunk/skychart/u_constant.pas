@@ -712,8 +712,8 @@ const
      ('GETDEC','49'),          // S/F
      ('GETDATE','50'),
      ('GETOBS','51'),
-     ('SETDATE','52'),         // yyyy-mm-ddThh:mm:ss
-     ('SETTZ','53'),           // 0.0
+     ('SETDATE','52'),         // yyyy-mm-ddThh:mm:ss or "yyyy-mm-dd hh:mm:ss"
+     ('SETTZ','53'),           // Etc/GTM
      ('GETTZ','54'),
      // V2.7 compatibility DDE command
      ('MOVE' ,'55'),           // obsolete, RA: 00h00m00.00s DEC:+0000'00.0" FOV:+0000'00"

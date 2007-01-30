@@ -4387,6 +4387,7 @@ end;
 procedure Tf_main.SendInfo(Sender: TObject; origin,str:string);
 var i : integer;
 begin
+if (origin='') and (str='') then exit;
 for i:=1 to Maxwindow do
  if (TCPDaemon<>nil)
     and(TCPDaemon.ThrdActive[i])
