@@ -391,6 +391,7 @@ var
 begin
 if fn='' then fn:='localtime';
 if FileExists(fn) and ((FileGetAttr(fn) and faDirectory)=0) then begin
+  Filemode:=0;
   system.assign(f,fn);
   reset(f,1);
   bufptr := @buf[bufsize-1]+1;
@@ -561,6 +562,7 @@ if fileexists(fn) then begin
   fZoneTabZone.Clear;
   fZoneTabComment.Clear;
   rec:=TStringList.Create;
+  Filemode:=0;
   system.assign(f,fn);
   reset(f);
   repeat
