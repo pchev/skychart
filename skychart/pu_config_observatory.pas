@@ -317,6 +317,7 @@ for i:=0 to countrylist.items.count-1 do
     countrylist.itemindex:=i;
     break;
   end;
+CountryTZ.checked:=csc.countrytz;
 UpdTZList(self);
 citylist.text:=csc.obsname;
 Obsposx:=0;
@@ -390,6 +391,8 @@ end;
 
 procedure Tf_config_observatory.CountryTZChange(Sender: TObject);
 begin
+ if LockChange then exit;
+ csc.countrytz:=CountryTZ.checked;
  UpdTZList(Sender);
 end;
 

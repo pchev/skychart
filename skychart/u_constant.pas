@@ -412,7 +412,7 @@ type
                 ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
                 ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;
                 CurYear,CurMonth,CurDay,DrawPMyear : integer;
-                ShowPluto, ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime : boolean;
+                ShowPluto, ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime,countrytz : boolean;
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,FillHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY: double;
@@ -1105,6 +1105,7 @@ ObsLatitude:=Source.ObsLatitude;
 ObsLongitude:=Source.ObsLongitude ;
 ObsAltitude:=Source.ObsAltitude ;
 ObsTZ:=Source.ObsTZ ;
+countrytz:=Source.countrytz;
 ObsTemperature:=Source.ObsTemperature ;
 ObsPressure:=Source.ObsPressure ;
 ObsRefractionCor:=Source.ObsRefractionCor ;
