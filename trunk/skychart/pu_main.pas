@@ -995,7 +995,7 @@ end;
 procedure Tf_main.SaveImageExecute(Sender: TObject);
 var ext,format:string;
 begin
-Savedialog.DefaultExt:='bmp';
+Savedialog.DefaultExt:='';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
 //savedialog.Filter:='BMP|*.bmp|JPEG|*.jpg|PNG|*.png';
 savedialog.Filter:='BMP|*.bmp|JPEG|*.jpg';
@@ -1004,6 +1004,12 @@ if MultiDoc1.ActiveObject  is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do
   if SaveDialog.Execute then begin
      ext:=uppercase(extractfileext(SaveDialog.Filename));
+     if ext='' then
+        case Savedialog.FilterIndex of
+        0,1 : ext:='.BMP';
+        2   : ext:='.JPG';
+        3   : ext:='.PNG';
+        end;
      if (ext='.JPG')or(ext='.JPEG') then format:='JPEG'
      // else if (ext='.PNG') then format:='PNG'
      else format:='BMP';
