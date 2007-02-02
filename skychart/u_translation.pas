@@ -1076,6 +1076,8 @@ resourcestring
   rsProgramInfor = 'Program Information';
   rsCountryTimez = 'Country Timezone';
   rsMoreOptions = 'More Options';
+  rsWarningYouAr2 = 'Warning! you are using multiple catalog for the same '
+    +'object. Be sure this what you want.';
 
 implementation
 

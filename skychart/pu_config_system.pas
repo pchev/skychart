@@ -303,7 +303,6 @@ end;
 
 procedure Tf_config_system.ShowLanguage;
 var i: integer;
-    fs : TSearchRec;
     f: textfile;
     dir,buf,buf1,buf2: string;
 begin
