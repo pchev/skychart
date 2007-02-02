@@ -302,7 +302,7 @@ GroupBoxLinux.Visible:=false;
 end;
 
 procedure Tf_config_system.ShowLanguage;
-var i,n: integer;
+var i: integer;
     fs : TSearchRec;
     f: textfile;
     dir,buf,buf1,buf2: string;
@@ -310,33 +310,21 @@ begin
 LanguageList.clear;
 LanguageList.Items.Add(blank+rsDefault+' ('+GetDefaultLanguage+')');
 LanguageList.itemindex:=0;
-n:=1;
 dir:=slash(appdir)+slash('data')+slash('language');
-i:=findfirst(dir+'skychart.*.po',0,fs);
-while i=0 do begin
-  buf:=fs.name;
-  buf:=extractfilename(buf);
-  buf:=StringReplace(buf,'skychart.','',[]);
-  buf:=trim(StringReplace(buf,'.po','',[]));
-  buf2:='';
-  try
-  AssignFile(f,dir+'skychart.lang');
-  Reset(f);
-  repeat
-    Readln(f,buf1);
-    if words(buf1,'',1,1)=buf then begin
-       buf2:=UTF8Decode(trim(StringReplace(words(buf1,'',2,1),'"','',[rfReplaceAll])));
-       break;
-    end;
-  until eof(f);
-  CloseFile(f);
-  except
+try
+AssignFile(f,dir+'skychart.lang');
+Reset(f);
+repeat
+  Readln(f,buf);
+  buf1:=words(buf,'',1,1);
+  buf2:=UTF8Decode(words(buf,'',2,1));
+  if fileexists(dir+'skychart.'+buf1+'.po') then begin
+     LanguageList.items.Add(buf1+blank+'-'+blank+buf2);
   end;
-  LanguageList.items.Add(buf+blank+'-'+blank+buf2);
-  inc(n);
-  i:=findnext(fs);
+until eof(f);
+CloseFile(f);
+except
 end;
-findclose(fs);
 application.ProcessMessages;
 for i:=0 to LanguageList.Items.Count-1 do begin
   if cmain.language=words(LanguageList.Items[i],'',1,1) then LanguageList.itemindex:=i;
