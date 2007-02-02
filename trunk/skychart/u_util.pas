@@ -81,7 +81,7 @@ Function Str3ToDE(dms : string) : double;
 Function DEToStr4(de: Double) : string;
 function isodate(a,m,d : integer) : string;
 function jddate(jd: double) : string;
-function jddatetime(jd: double) : string;
+function jddatetime(jd: double;fy,fm,fd,fh,fn,fs:boolean) : string;
 function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
@@ -808,12 +808,22 @@ begin
 result:=padzeros(inttostr(a),4)+'-'+padzeros(inttostr(m),2)+'-'+padzeros(inttostr(d),2);
 end;
 
-function jddatetime(jd: double) : string;
+function jddatetime(jd: double;fy,fm,fd,fh,fn,fs:boolean) : string;
 var a,m,d : integer;
     h:double;
+    var hd,hm,hs,sep : string;
 begin
 djd(jd,a,m,d,h);
-result:=isodate(a,m,d)+blank+ARtoStr3(rmod(h,24));
+ARToStr2(h,hd,hm,hs);
+result:='';
+sep:='';
+if fy then begin result:=result+padzeros(inttostr(a),4); sep:='-'; end;
+if fm then begin result:=result+sep+padzeros(inttostr(m),2); sep:='-'; end;
+if fd then result:=result+sep+padzeros(inttostr(d),2);
+if result>'' then sep:=blank;
+if fh then begin result:=result+sep+hd; sep:=':'; end;
+if fn then begin result:=result+sep+hm; sep:=':'; end;
+if fs then result:=result+sep+hs;
 end;
 
 function jddate(jd: double) : string;

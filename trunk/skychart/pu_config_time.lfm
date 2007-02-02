@@ -1,10 +1,10 @@
 object f_config_time: Tf_config_time
   Left = 629
-  Height = 527
+  Height = 564
   Top = 139
   Width = 474
   HorzScrollBar.Page = 473
-  VertScrollBar.Page = 526
+  VertScrollBar.Page = 563
   ActiveControl = CheckBox2
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
@@ -14,18 +14,18 @@ object f_config_time: Tf_config_time
   OnDestroy = FormDestroy
   OnShow = FormShow
   object MainPanel: TPanel
-    Height = 477
+    Height = 514
     Width = 474
     Align = alClient
     BevelOuter = bvNone
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
-      Height = 477
+      Height = 514
       Width = 474
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
-      PageIndex = 0
+      PageIndex = 1
       ShowTabs = False
       object Page1: TPage
         Caption = 'Time'
@@ -370,9 +370,9 @@ object f_config_time: Tf_config_time
       object Page2: TPage
         Caption = 'Simulation'
         object stepreset: TSpeedButton
-          Left = 338
+          Left = 220
           Height = 25
-          Top = 247
+          Top = 213
           Width = 81
           Caption = 'Reset '
           Color = clBtnFace
@@ -381,46 +381,46 @@ object f_config_time: Tf_config_time
           OnClick = stepresetClick
         end
         object Label178: TLabel
-          Left = 223
-          Height = 13
-          Top = 100
-          Width = 40
+          Left = 358
+          Height = 14
+          Top = 46
+          Width = 39
           Caption = 'every  '
           Color = clNone
           ParentColor = False
         end
         object Label179: TLabel
           Left = 220
-          Height = 13
-          Top = 60
-          Width = 97
+          Height = 14
+          Top = 46
+          Width = 96
           Caption = 'Number of steps'
           Color = clNone
           ParentColor = False
         end
         object Label180: TLabel
           Left = 8
-          Height = 13
+          Height = 14
           Top = 32
-          Width = 165
+          Width = 168
           Caption = 'Choose which objects to plot'
           Color = clNone
           ParentColor = False
         end
         object Label56: TLabel
-          Left = 220
-          Height = 13
-          Top = 23
-          Width = 195
+          Left = 8
+          Height = 14
+          Top = 6
+          Width = 196
           Caption = 'Plot the position of moving object.'
           Color = clNone
           ParentColor = False
         end
         object stepunit: TRadioGroup
-          Left = 284
-          Height = 112
-          Top = 127
-          Width = 153
+          Left = 318
+          Height = 136
+          Top = 102
+          Width = 137
           AutoFill = True
           Caption = 'Step unit'
           ChildSizing.LeftRightSpacing = 6
@@ -441,18 +441,18 @@ object f_config_time: Tf_config_time
           TabOrder = 5
         end
         object stepline: TCheckBox
-          Left = 6
+          Left = 8
           Height = 19
-          Top = 287
-          Width = 251
+          Top = 254
+          Width = 260
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           TabOrder = 6
         end
         object nbstep: TSpinEdit
-          Left = 362
+          Left = 220
           Height = 22
-          Top = 55
+          Top = 70
           Width = 75
           MinValue = 1
           OnChange = nbstepChanged
@@ -460,9 +460,9 @@ object f_config_time: Tf_config_time
           Value = 1
         end
         object stepsize: TSpinEdit
-          Left = 362
+          Left = 358
           Height = 22
-          Top = 95
+          Top = 70
           Width = 75
           MaxValue = 999999
           MinValue = 1
@@ -497,9 +497,9 @@ object f_config_time: Tf_config_time
           }
         end
         object AllSim: TButton
-          Left = 6
+          Left = 220
           Height = 25
-          Top = 247
+          Top = 118
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'All'
@@ -507,9 +507,9 @@ object f_config_time: Tf_config_time
           TabOrder = 1
         end
         object NoSim: TButton
-          Left = 121
+          Left = 220
           Height = 25
-          Top = 247
+          Top = 166
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'None'
@@ -519,8 +519,8 @@ object f_config_time: Tf_config_time
         object RadioGroup1: TRadioGroup
           Left = 8
           Height = 72
-          Top = 311
-          Width = 433
+          Top = 278
+          Width = 438
           AutoFill = True
           Caption = 'Show Labels'
           ChildSizing.LeftRightSpacing = 6
@@ -546,8 +546,8 @@ object f_config_time: Tf_config_time
         object CheckGroup1: TCheckGroup
           Left = 8
           Height = 48
-          Top = 391
-          Width = 433
+          Top = 358
+          Width = 438
           AutoFill = True
           Caption = 'Label Text'
           ChildSizing.LeftRightSpacing = 6
@@ -570,12 +570,42 @@ object f_config_time: Tf_config_time
             03000000020202
           }
         end
+        object CheckGroup2: TCheckGroup
+          Left = 6
+          Height = 48
+          Top = 414
+          Width = 438
+          AutoFill = True
+          Caption = 'Date Format'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 6
+          Columns = 6
+          Items.Strings = (
+            'Year'
+            'Month'
+            'Day'
+            'Hour'
+            'Minute'
+            'Second'
+          )
+          OnItemClick = CheckGroup2ItemClick
+          TabOrder = 9
+          Data = {
+            06000000020202020202
+          }
+        end
       end
     end
   end
   object Panel1: TPanel
     Height = 50
-    Top = 477
+    Top = 514
     Width = 474
     Align = alBottom
     TabOrder = 1
