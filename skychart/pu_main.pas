@@ -1908,6 +1908,8 @@ try
 
 finally
 screen.cursor:=crDefault;
+f_config.Free;
+f_config:=nil;
 end;
 end;
 
