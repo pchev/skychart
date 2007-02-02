@@ -41,6 +41,7 @@ type
     Button3: TButton;
     Button4: TButton;
     CheckGroup1: TCheckGroup;
+    CheckGroup2: TCheckGroup;
     JDEdit: TFloatEdit;
     Label1: TLabel;
     tzLabel: TLabel;
@@ -96,6 +97,7 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
+    procedure CheckGroup2ItemClick(Sender: TObject; Index: integer);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -213,6 +215,12 @@ CheckGroup1.Caption:=rsLabelText;
 CheckGroup1.Items[0]:=rsObjectName;
 CheckGroup1.Items[1]:=rsCurrentDate;
 CheckGroup1.Items[2]:=rsMagnitude;
+CheckGroup2.Items[0]:=rsYear;
+CheckGroup2.Items[1]:=rsMonth;
+CheckGroup2.Items[2]:=rsDay;
+CheckGroup2.Items[3]:=rsHour;
+CheckGroup2.Items[4]:=rsMinute;
+CheckGroup2.Items[5]:=rsSecond;
 ADBC.Items[0]:=rsAD;
 ADBC.Items[1]:=rsBC;
 Button4.Caption:=rsMoreOptions;
@@ -310,6 +318,12 @@ end;
 RadioGroup1.ItemIndex:=csc.SimLabel;
 CheckGroup1.Checked[0]:=csc.SimNameLabel;
 CheckGroup1.Checked[1]:=csc.SimDateLabel;
+CheckGroup2.Checked[0]:=csc.SimDateYear;
+CheckGroup2.Checked[1]:=csc.SimDateMonth;
+CheckGroup2.Checked[2]:=csc.SimDateDay;
+CheckGroup2.Checked[3]:=csc.SimDateHour;
+CheckGroup2.Checked[4]:=csc.SimDateMinute;
+CheckGroup2.Checked[5]:=csc.SimDateSecond;
 end;
 
 procedure Tf_config_time.CheckBox1Click(Sender: TObject);
@@ -374,6 +388,16 @@ if (not CheckGroup1.Checked[0])and(not CheckGroup1.Checked[1])and(not CheckGroup
 csc.SimNameLabel:=CheckGroup1.Checked[0];
 csc.SimDateLabel:=CheckGroup1.Checked[1];
 csc.SimMagLabel:=CheckGroup1.Checked[2];
+end;
+
+procedure Tf_config_time.CheckGroup2ItemClick(Sender: TObject; Index: integer);
+begin
+csc.SimDateYear:=CheckGroup2.Checked[0];
+csc.SimDateMonth:=CheckGroup2.Checked[1];
+csc.SimDateDay:=CheckGroup2.Checked[2];
+csc.SimDateHour:=CheckGroup2.Checked[3];
+csc.SimDateMinute:=CheckGroup2.Checked[4];
+csc.SimDateSecond:=CheckGroup2.Checked[5];
 end;
 
 procedure Tf_config_time.FormClose(Sender: TObject;

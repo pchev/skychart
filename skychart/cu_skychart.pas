@@ -1064,7 +1064,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
          else
           ltxt:='';
        if cfgsc.SimDateLabel then
-          ltxt:=ltxt+jddatetime(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24)+blank;
+          ltxt:=ltxt+jddatetime(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
        if cfgsc.SimMagLabel then
           if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
              else ltxt:=ltxt+formatfloat(f1,magn);
@@ -1165,7 +1165,7 @@ if cfgsc.ShowAsteroid then begin
              else
               ltxt:='';
            if cfgsc.SimDateLabel then
-              ltxt:=ltxt+jddatetime(cfgsc.AsteroidLst[j,i,4]+(cfgsc.TimeZone-cfgsc.DT_UT)/24)+blank;
+              ltxt:=ltxt+jddatetime(cfgsc.AsteroidLst[j,i,4]+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
            if cfgsc.SimMagLabel then
               ltxt:=ltxt+formatfloat(f1,magn);
           end;
@@ -1206,7 +1206,7 @@ if cfgsc.ShowComet then begin
              else
               ltxt:='';
            if cfgsc.SimDateLabel then
-              ltxt:=ltxt+jddatetime(cfgsc.CometLst[j,i,7]+(cfgsc.TimeZone-cfgsc.DT_UT)/24)+blank;
+              ltxt:=ltxt+jddatetime(cfgsc.CometLst[j,i,7]+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
            if cfgsc.SimMagLabel then
               ltxt:=ltxt+formatfloat(f1,cfgsc.CometLst[j,i,3]);
           end;
