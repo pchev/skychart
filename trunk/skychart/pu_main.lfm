@@ -158,7 +158,6 @@ object f_main: Tf_main
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
-    Caption = 'MultiDoc1'
     Color = clBlack
     FullRepaint = False
     ParentColor = False
