@@ -1203,8 +1203,10 @@ writetrace(rsExiting);
 Autorefresh.Enabled:=false;
 SaveQuickSearch(configfile);
 if SaveConfigOnExit.checked and
-   (MessageDlg(rsDoYouWantToS, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then
+   (MessageDlg(rsDoYouWantToS, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then begin
+      if (MultiDoc1.ActiveObject is Tf_chart) then (MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.SimNb:=1;
       SaveDefault;
+end;
 for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
       locked:=true;
@@ -3399,7 +3401,9 @@ procedure Tf_main.SaveDefault;
 var i,j: integer;
 begin
 SavePrivateConfig(configfile);
-SaveChartConfig(configfile,MultiDoc1.ActiveChild);
+if (MultiDoc1.ActiveObject is Tf_chart) then begin
+   SaveChartConfig(configfile,MultiDoc1.ActiveChild);
+end;
 j:=0;
 for i:=0 to MultiDoc1.ChildCount-1 do
   if (MultiDoc1.Childs[i].DockedObject is Tf_chart) and (MultiDoc1.Childs[i].DockedObject<>MultiDoc1.ActiveObject) then begin
