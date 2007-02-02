@@ -1952,6 +1952,8 @@ ConfigTime.showmodal;
 if ConfigTime.ModalResult=mrOK then begin
  activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
 end;
+ConfigTime.Free;
+ConfigTime:=nil;
 end;
 
 procedure Tf_main.ApplyConfigTime(Sender: TObject);
@@ -1997,6 +1999,8 @@ ConfigPictures.showmodal;
 if ConfigPictures.ModalResult=mrOK then begin
  activateconfig(ConfigPictures.cmain,ConfigPictures.csc,ConfigPictures.ccat,ConfigPictures.cshr,ConfigPictures.cplot,ConfigPictures.cdss,false);
 end;
+ConfigPictures.Free;
+ConfigPictures:=nil;
 end;
 
 procedure Tf_main.ApplyConfigPictures(Sender: TObject);
@@ -2042,6 +2046,8 @@ ConfigObservatory.showmodal;
 if ConfigObservatory.ModalResult=mrOK then begin
  activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
 end;
+ConfigObservatory.Free;
+ConfigObservatory:=nil;
 end;
 
 procedure Tf_main.ApplyConfigObservatory(Sender: TObject);
@@ -2083,6 +2089,8 @@ if ConfigCatalog.ModalResult=mrOK then begin
  ConfigCatalog.ActivateGCat;
  activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
 end;
+ConfigCatalog.Free;
+ConfigCatalog:=nil;
 end;
 
 procedure Tf_main.ApplyConfigCatalog(Sender: TObject);
