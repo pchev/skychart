@@ -3944,6 +3944,10 @@ msgstr "Atenció! El càlcul per"
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
 msgstr "Attention! La date et le lieu d'observation ont pu changer de leur valeur par défaut. Vous devez répondre Non et utiliser le bouton %s maintenant pour retrouver vos valeurs, autrement elles seront perdue. Voulez-vous continuer ?"
 
+#: u_translation:rswarningyouar2
+msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
+msgstr ""
+
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgstr "Atenció!%sEsteu a punt de destruir la base de dades %s i tot el seu contingut, fins i tot si el contingut no està relacionat amb aquest programa.%sEsteu segur que voleu continuar?"

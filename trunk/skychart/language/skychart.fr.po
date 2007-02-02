@@ -1,7 +1,8 @@
+# translation of skychart.fr.po
 # translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-01-21 20:52+0100\n"
+"PO-Revision-Date: 2007-02-02 19:37+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -3942,6 +3943,10 @@ msgstr "Attention! le calcul pour"
 #: u_translation:rswarningthecu
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
 msgstr "Attention! La date et le lieu d'observation ont pu changer de leur valeur par défaut. Vous devez répondre Non et utiliser le bouton %s maintenant pour retrouver vos valeurs, autrement elles seront perdue. Voulez-vous continuer ?"
+
+#: u_translation:rswarningyouar2
+msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
+msgstr "Attention! vous utilisez plusieurs catalogues pour le même type d'objet. Soyez sur que c'est ce que vous voulez."
 
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
