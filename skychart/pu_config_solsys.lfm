@@ -2,8 +2,8 @@ object f_config_solsys: Tf_config_solsys
   Left = 606
   Height = 524
   Top = 171
-  Width = 517
-  HorzScrollBar.Page = 516
+  Width = 529
+  HorzScrollBar.Page = 528
   VertScrollBar.Page = 523
   ActiveControl = PlaParalaxe.RadioButton0
   Caption = 'Solar System'
@@ -24,33 +24,33 @@ object f_config_solsys: Tf_config_solsys
       Top = 1
       Width = 498
       Align = alClient
-      PageIndex = 0
+      PageIndex = 3
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
         object Label12: TLabel
           Left = 7
-          Height = 13
+          Height = 14
           Top = 17
-          Width = 122
+          Width = 125
           Caption = 'Solar System Setting'
           Color = clNone
           ParentColor = False
         end
         object Label131: TLabel
           Left = 40
-          Height = 13
+          Height = 14
           Top = 64
-          Width = 65
+          Width = 68
           Caption = 'Data Files :'
           Color = clNone
           ParentColor = False
         end
         object Label3: TLabel
           Left = 62
-          Height = 13
+          Height = 14
           Top = 280
-          Width = 336
+          Width = 338
           Caption = 'Uncheck to avoid double labeling with minor planet 134340'
           Color = clNone
           ParentColor = False
@@ -93,7 +93,7 @@ object f_config_solsys: Tf_config_solsys
           Left = 40
           Height = 19
           Top = 248
-          Width = 117
+          Width = 125
           Caption = 'Pluto is a planet.'
           OnChange = CheckBoxPlutoChange
           TabOrder = 2
@@ -451,27 +451,27 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object Label154: TLabel
                 Left = 32
-                Height = 13
+                Height = 14
                 Top = 115
-                Width = 302
+                Width = 304
                 Caption = 'Do not take account of comet fainter than magnitude'
                 Color = clNone
                 ParentColor = False
               end
               object Label216: TLabel
                 Left = 32
-                Height = 13
+                Height = 14
                 Top = 155
-                Width = 71
+                Width = 73
                 Caption = 'Show comet'
                 Color = clNone
                 ParentColor = False
               end
               object Label231: TLabel
                 Left = 200
-                Height = 13
+                Height = 14
                 Top = 155
-                Width = 191
+                Width = 188
                 Caption = 'magnitude fainter than the stars.'
                 Color = clNone
                 ParentColor = False
@@ -494,7 +494,7 @@ object f_config_solsys: Tf_config_solsys
                 Left = 32
                 Height = 19
                 Top = 14
-                Width = 171
+                Width = 179
                 Caption = 'Show comets on the chart'
                 OnClick = showcomClick
                 TabOrder = 0
@@ -715,117 +715,117 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 4
             object Label241: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 8
-              Width = 356
+              Width = 358
               Caption = 'Add a single element to the database. All field are mandatory.'
               Color = clNone
               ParentColor = False
             end
             object Label242: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 40
-              Width = 68
+              Width = 69
               Caption = 'Designation'
               Color = clNone
               ParentColor = False
             end
             object Label243: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 232
-              Width = 126
+              Width = 127
               Caption = 'H absolute magnitude'
               Color = clNone
               ParentColor = False
             end
             object Label244: TLabel
               Left = 160
-              Height = 13
+              Height = 14
               Top = 232
-              Width = 109
+              Width = 108
               Caption = 'G slope parameter'
               Color = clNone
               ParentColor = False
             end
             object Label245: TLabel
               Left = 160
-              Height = 13
+              Height = 14
               Top = 168
-              Width = 58
+              Width = 65
               Caption = 'Epoch (JD)'
               Color = clNone
               ParentColor = False
             end
             object Label246: TLabel
               Left = 160
-              Height = 13
+              Height = 14
               Top = 40
-              Width = 86
+              Width = 87
               Caption = 'Perihelion date'
               Color = clNone
               ParentColor = False
             end
             object Label247: TLabel
               Left = 160
-              Height = 13
+              Height = 14
               Top = 104
-              Width = 131
+              Width = 130
               Caption = 'Argument of perihelion'
               Color = clNone
               ParentColor = False
             end
             object Label248: TLabel
               Left = 312
-              Height = 13
+              Height = 14
               Top = 104
-              Width = 151
+              Width = 154
               Caption = 'Longitude ascending Node'
               Color = clNone
               ParentColor = False
             end
             object Label249: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 168
-              Width = 58
+              Width = 59
               Caption = 'Inclination'
               Color = clNone
               ParentColor = False
             end
             object Label250: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 104
-              Width = 65
+              Width = 70
               Caption = 'Eccentricity'
               Color = clNone
               ParentColor = False
             end
             object Label251: TLabel
               Left = 312
-              Height = 13
+              Height = 14
               Top = 40
-              Width = 109
+              Width = 111
               Caption = 'Perihelion distance'
               Color = clNone
               ParentColor = False
             end
             object Label253: TLabel
               Left = 312
-              Height = 13
+              Height = 14
               Top = 168
-              Width = 45
+              Width = 48
               Caption = 'Equinox'
               Color = clNone
               ParentColor = False
             end
             object Label254: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 296
-              Width = 34
+              Width = 35
               Caption = 'Name'
               Color = clNone
               ParentColor = False
@@ -929,12 +929,12 @@ object f_config_solsys: Tf_config_solsys
               Left = 160
               Height = 21
               Top = 64
-              Width = 91
-              EditMask = '!9999.99.00.0000;1;_'
-              MaxLength = 15
+              Width = 115
+              EditMask = '!####.##.##.#####;1;_'
+              MaxLength = 16
               ParentColor = False
               TabOrder = 1
-              Text = '    .  .  .    '
+              Text = '    .  .  .     '
             end
           end
         end
@@ -960,7 +960,7 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object Label203: TLabel
                 Left = 29
-                Height = 13
+                Height = 14
                 Top = 123
                 Width = 314
                 Caption = 'Do not take account of asteroid fainter than magnitude'
@@ -969,7 +969,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object Label212: TLabel
                 Left = 32
-                Height = 13
+                Height = 14
                 Top = 171
                 Width = 83
                 Caption = 'Show asteroid'
@@ -978,9 +978,9 @@ object f_config_solsys: Tf_config_solsys
               end
               object Label213: TLabel
                 Left = 221
-                Height = 13
+                Height = 14
                 Top = 171
-                Width = 191
+                Width = 188
                 Caption = 'magnitude fainter than the stars.'
                 Color = clNone
                 ParentColor = False
@@ -1003,7 +1003,7 @@ object f_config_solsys: Tf_config_solsys
                 Left = 32
                 Height = 19
                 Top = 22
-                Width = 183
+                Width = 189
                 Caption = 'Show asteroids on the chart'
                 OnClick = showastClick
                 TabOrder = 0
@@ -1064,16 +1064,16 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 1
             object Label206: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 203
-              Width = 63
+              Width = 65
               Caption = 'Messages:'
               Color = clNone
               ParentColor = False
             end
             object Label204: TLabel
               Left = 15
-              Height = 13
+              Height = 14
               Top = 79
               Width = 110
               Caption = 'Or use a local file :'
@@ -1089,7 +1089,7 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object Label1: TLabel
                 Left = 8
-                Height = 13
+                Height = 14
                 Top = 6
                 Width = 189
                 Caption = 'Download latest orbital elements'
@@ -1126,9 +1126,9 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 3
               object Label215: TLabel
                 Left = 258
-                Height = 13
+                Height = 14
                 Top = 45
-                Width = 129
+                Width = 127
                 Caption = 'Asteroids from the file'
                 Color = clNone
                 ParentColor = False
@@ -1137,7 +1137,7 @@ object f_config_solsys: Tf_config_solsys
                 Left = 20
                 Height = 19
                 Top = 6
-                Width = 166
+                Width = 172
                 Caption = 'Only numbered asteroids'
                 Checked = True
                 State = cbChecked
@@ -1147,7 +1147,7 @@ object f_config_solsys: Tf_config_solsys
                 Left = 241
                 Height = 19
                 Top = 6
-                Width = 146
+                Width = 148
                 Caption = 'Halt after 1000 errors'
                 Checked = True
                 State = cbChecked
@@ -1157,7 +1157,7 @@ object f_config_solsys: Tf_config_solsys
                 Left = 20
                 Height = 19
                 Top = 39
-                Width = 128
+                Width = 134
                 Caption = 'Load only the first '
                 Checked = True
                 State = cbChecked
@@ -1286,9 +1286,9 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 3
             object Label211: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 184
-              Width = 63
+              Width = 65
               Caption = 'Messages:'
               Color = clNone
               ParentColor = False
@@ -1327,12 +1327,12 @@ object f_config_solsys: Tf_config_solsys
               Top = 128
               Width = 441
               Caption = 'Quick Delete'
-              TabOrder = 2
+              TabOrder = 3
               object Label209: TLabel
                 Left = 12
-                Height = 13
+                Height = 14
                 Top = 8
-                Width = 221
+                Width = 223
                 Caption = 'Quickly delete all asteroid related data'
                 Color = clNone
                 ParentColor = False
@@ -1354,7 +1354,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 441
               Color = clBtnFace
               ScrollBars = ssBoth
-              TabOrder = 3
+              TabOrder = 2
               TabStop = False
             end
             object GroupBox12: TGroupBox
@@ -1366,9 +1366,9 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 1
               object Label214: TLabel
                 Left = 12
-                Height = 13
+                Height = 14
                 Top = 16
-                Width = 179
+                Width = 182
                 Caption = 'Delete Monthly data older than '
                 Color = clNone
                 ParentColor = False
@@ -1401,126 +1401,126 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 4
             object Label217: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 8
-              Width = 356
+              Width = 358
               Caption = 'Add a single element to the database. All field are mandatory.'
               Color = clNone
               ParentColor = False
             end
             object Label218: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 40
-              Width = 68
+              Width = 69
               Caption = 'Designation'
               Color = clNone
               ParentColor = False
             end
             object Label219: TLabel
               Left = 160
-              Height = 13
+              Height = 14
               Top = 40
-              Width = 126
+              Width = 127
               Caption = 'H absolute magnitude'
               Color = clNone
               ParentColor = False
             end
             object Label220: TLabel
               Left = 312
-              Height = 13
+              Height = 14
               Top = 40
-              Width = 109
+              Width = 108
               Caption = 'G slope parameter'
               Color = clNone
               ParentColor = False
             end
             object Label221: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 104
-              Width = 58
+              Width = 65
               Caption = 'Epoch (JD)'
               Color = clNone
               ParentColor = False
             end
             object Label222: TLabel
               Left = 160
-              Height = 13
+              Height = 14
               Top = 104
-              Width = 83
+              Width = 86
               Caption = 'Mean anomaly'
               Color = clNone
               ParentColor = False
             end
             object Label223: TLabel
               Left = 312
-              Height = 13
+              Height = 14
               Top = 104
-              Width = 131
+              Width = 130
               Caption = 'Argument of perihelion'
               Color = clNone
               ParentColor = False
             end
             object Label224: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 168
-              Width = 151
+              Width = 154
               Caption = 'Longitude ascending Node'
               Color = clNone
               ParentColor = False
             end
             object Label225: TLabel
               Left = 160
-              Height = 13
+              Height = 14
               Top = 168
-              Width = 58
+              Width = 59
               Caption = 'Inclination'
               Color = clNone
               ParentColor = False
             end
             object Label226: TLabel
               Left = 312
-              Height = 13
+              Height = 14
               Top = 168
-              Width = 65
+              Width = 70
               Caption = 'Eccentricity'
               Color = clNone
               ParentColor = False
             end
             object Label227: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 232
-              Width = 90
+              Width = 93
               Caption = 'Semimajor Axis'
               Color = clNone
               ParentColor = False
             end
             object Label228: TLabel
               Left = 160
-              Height = 13
+              Height = 14
               Top = 232
-              Width = 58
+              Width = 59
               Caption = 'Reference'
               Color = clNone
               ParentColor = False
             end
             object Label229: TLabel
               Left = 312
-              Height = 13
+              Height = 14
               Top = 232
-              Width = 45
+              Width = 48
               Caption = 'Equinox'
               Color = clNone
               ParentColor = False
             end
             object Label230: TLabel
               Left = 8
-              Height = 13
+              Height = 14
               Top = 296
-              Width = 34
+              Width = 35
               Caption = 'Name'
               Color = clNone
               ParentColor = False
