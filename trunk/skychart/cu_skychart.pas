@@ -87,6 +87,7 @@ Tskychart = class (TComponent)
     function DrawComet :boolean;
     function DrawOrbitPath:boolean;
     Procedure DrawGrid;
+    Procedure DrawPole(pole: integer);
     procedure DrawEqGrid;
     procedure DrawAzGrid;
     procedure DrawGalGrid;
@@ -1723,10 +1724,44 @@ if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then
        Gal    :  begin DrawGalGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        Ecl    :  begin DrawEclGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        end
-    else if cfgsc.ShowEqGrid then DrawEqGrid;
+    else if cfgsc.ShowEqGrid then begin
+      DrawEqGrid;
+    end
 end else if cfgsc.ShowGrid then begin
    if cfgsc.ShowEqGrid then DrawEqGrid;
    DrawScale;
+end;
+end;
+
+Procedure Tskychart.DrawPole(pole: integer);
+var a,d,x1,y1: double;
+    xx,yy: single;
+begin
+{mark north pole}
+a:=0 ; d:=pid2;
+case pole of
+Equat: projection(a,d,x1,y1,cfgsc.horizonopaque,cfgsc);
+Altaz: proj2(a,d,cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc);
+Gal:   proj2(a,d,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc);
+Ecl:   proj2(a,d,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc);
+end;
+WindowXY(x1,y1,xx,yy,cfgsc);
+if (abs(xx)<10000)and(abs(yy)<10000) then begin
+   Fplot.Plotline(xx-5*Fplot.cfgchart.drawsize,yy,xx+5*Fplot.cfgchart.drawsize,yy,Fplot.cfgplot.Color[13],0,cfgsc.StyleGrid);
+   Fplot.Plotline(xx,yy-5*Fplot.cfgchart.drawsize,xx,yy+5*Fplot.cfgchart.drawsize,Fplot.cfgplot.Color[13],0,cfgsc.StyleGrid);
+end;
+{mark south pole}
+a:=0 ; d:=-pid2;
+case pole of
+Equat: projection(a,d,x1,y1,cfgsc.horizonopaque,cfgsc);
+Altaz: proj2(a,d,cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc);
+Gal:   proj2(a,d,cfgsc.lcentre,cfgsc.bcentre,x1,y1,cfgsc);
+Ecl:   proj2(a,d,cfgsc.lecentre,cfgsc.becentre,x1,y1,cfgsc);
+end;
+WindowXY(x1,y1,xx,yy,cfgsc);
+if (abs(xx)<10000)and(abs(yy)<10000) then begin
+   Fplot.Plotline(xx-5*Fplot.cfgchart.drawsize,yy,xx+5*Fplot.cfgchart.drawsize,yy,Fplot.cfgplot.Color[13],0,cfgsc.StyleGrid);
+   Fplot.Plotline(xx,yy-5*Fplot.cfgchart.drawsize,xx,yy+5*Fplot.cfgchart.drawsize,Fplot.cfgplot.Color[13],0,cfgsc.StyleGrid);
 end;
 end;
 
@@ -1737,6 +1772,7 @@ var fv,u:double;
 const sticksize=10;
 begin
 DrawCRose;
+DrawPole(cfgsc.ProjPole);
 fv:=rad2deg*cfgsc.fov/3;
 if trunc(fv)>20 then begin l1:='5'+ldeg; n:=trunc(fv/5); l2:=inttostr(n*5)+ldeg; s:=5; u:=deg2rad; end
 else if trunc(fv)>5 then begin l1:='1'+ldeg; n:=trunc(fv); l2:=inttostr(n)+ldeg; s:=1; u:=deg2rad; end
@@ -1778,12 +1814,12 @@ if (xx+w+marge)>cfgsc.xmax then x:=cfgsc.xmax-w-marge;
 end;}
 
 procedure Tskychart.DrawEqGrid;
-var ra1,de1,ac,dc,dra,dde:double;
+var ra1,de1,ac,dc,dra,dde,a,d:double;
     col,n:integer;
     ok,labelok:boolean;
 function DrawRAline(ra,de,dd:double):boolean;
-var x1,y1:double;
-    n: integer;
+var  n: integer;
+    x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
@@ -1814,8 +1850,8 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
 result:=(n>1);
 end;
 function DrawDEline(ra,de,da:double):boolean;
-var x1,y1:double;
-    n: integer;
+var  n: integer;
+    x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
@@ -1846,6 +1882,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
 result:=(n>1);
 end;
 begin
+DrawPole(Equat);
 if (cfgsc.projpole=Equat)and(not cfgsc.ShowEqGrid) then col:=Fplot.cfgplot.Color[12]
                   else col:=Fplot.cfgplot.Color[13];
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.decentre));
@@ -1969,6 +2006,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
 result:=(n>1);
 end;
 begin
+DrawPole(Altaz);
 col:=Fplot.cfgplot.Color[12];
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.hcentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
@@ -2184,6 +2222,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
 result:=(n>1);
 end;
 begin
+DrawPole(Gal);
 col:=Fplot.cfgplot.Color[12];
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.bcentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
@@ -2302,6 +2341,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
 result:=(n>1);
 end;
 begin
+DrawPole(Ecl);
 col:=Fplot.cfgplot.Color[12];
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.becentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
