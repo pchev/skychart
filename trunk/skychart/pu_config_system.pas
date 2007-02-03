@@ -394,6 +394,7 @@ TurnsAlt.value:=abs(csc.TelescopeTurnsY);
 RevertTurnsAz.checked:=csc.TelescopeTurnsX<0;
 RevertTurnsAlt.checked:=csc.TelescopeTurnsY<0;
 ManualMountType.itemindex:=csc.ManualTelescopeType;
+ManualMountTypeClick(nil);
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
    else if csc.PluginTelescope then Telescopeselect.itemindex:=2
    else Telescopeselect.itemindex:=1;

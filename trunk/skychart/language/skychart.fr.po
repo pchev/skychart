@@ -1,5 +1,4 @@
-# translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2007-02-02 19:37+0100\n"
@@ -3033,19 +3032,19 @@ msgid "Return"
 msgstr "Retour"
 
 #: u_translation:rsrevertaltkno
-msgid "Revert Alt knob"
+msgid "Reverse Alt knob"
 msgstr "Retourner la vis Alt"
 
 #: u_translation:rsrevertazknob
-msgid "Revert Az knob"
+msgid "Reverse Az knob"
 msgstr "Retourner la vis Az"
 
 #: u_translation:rsrevertdeckno
-msgid "Revert DEC knob"
+msgid "Reverse DEC knob"
 msgstr "Retourner la vis DEC"
 
 #: u_translation:rsrevertraknob
-msgid "Revert RA knob"
+msgid "Reverse RA knob"
 msgstr "Retourner la vis AR"
 
 #: u_translation:rsright
