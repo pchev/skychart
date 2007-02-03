@@ -97,6 +97,7 @@ type
     RC3box: TCheckBox;
     sac3: TDirectoryEdit;
     SACbox: TCheckBox;
+    StringGrid1: TStringGrid;
     tyc3: TDirectoryEdit;
     tic3: TDirectoryEdit;
     gsc3: TDirectoryEdit;
@@ -201,6 +202,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
     procedure StringGrid3DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure StringGrid3MouseUp(Sender: TObject; Button: TMouseButton;
@@ -236,6 +239,7 @@ type
     { Private declarations }
     catalogempty, LockChange,LockCatPath: boolean;
     FApplyConfig: TNotifyEvent;
+    textcolor: TColor; // clWindow replacement hack
     procedure ShowGCat;
     procedure ShowCDCStar;                                
     procedure ShowCDCNeb;
@@ -334,6 +338,7 @@ end;
 
 procedure Tf_config_catalog.FormShow(Sender: TObject);
 begin
+stringgrid1.visible:=true; stringgrid1.Paint; application.ProcessMessages; stringgrid1.visible:=false; // clWindow replacement hack
 LockCatPath:=false;
 LockChange:=true;
 ShowGCat;
@@ -343,8 +348,15 @@ ShowFov;
 LockChange:=false;
 end;
 
+procedure Tf_config_catalog.StringGrid1DrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
+begin
+  textcolor:=StringGrid1.Canvas.Pixels[aRect.Left+1,aRect.Top+1]; // clWindow replacement hack
+end;
+
 procedure Tf_config_catalog.FormCreate(Sender: TObject);
 begin
+  textcolor:=0;
   LockChange:=true;
   LockCatPath:=true;
   SetLang;
@@ -742,9 +754,9 @@ if sender is TDirectoryEdit then with sender as TDirectoryEdit do begin
   ccat.StarCatPath[tag]:=Text;
   if ccat.StarCatDef[tag] then
      if catalog.checkpath(tag+BaseStar,Text)
-        then color:=clWindow
+        then color:=textcolor
         else color:=clRed
-     else color:=clWindow;
+     else color:=textcolor;
 end;
 finally
 LockCatPath:=false;
@@ -783,9 +795,9 @@ LockCatPath:=true;
   ccat.VarStarCatPath[gcvs-BaseVar]:=gcv3.Text;
   if ccat.VarStarCatDef[gcvs-BaseVar] then
      if catalog.checkpath(gcvs,gcv3.text)
-        then gcv3.color:=clWindow
+        then gcv3.color:=textcolor
         else gcv3.color:=clRed
-     else gcv3.color:=clWindow;
+     else gcv3.color:=textcolor;
 finally
 LockCatPath:=false;
 end;
@@ -818,9 +830,9 @@ LockCatPath:=true;
   ccat.DblStarCatPath[wds-BaseDbl]:=wds3.Text;
   if ccat.DblStarCatDef[wds-BaseDbl] then
      if catalog.checkpath(wds,wds3.text)
-        then wds3.color:=clWindow
+        then wds3.color:=textcolor
         else wds3.color:=clRed
-     else wds3.color:=clWindow;
+     else wds3.color:=textcolor;
 finally
 LockCatPath:=false;
 end;
@@ -855,14 +867,14 @@ begin
 if LockCatPath then exit;
 try
 LockCatPath:=true;
-if sender is TEdit then with sender as TEdit do begin
+if sender is TDirectoryEdit then with sender as TDirectoryEdit do begin
   Text:=trim(Text);
   ccat.NebCatPath[tag]:=Text;
   if ccat.NebCatDef[tag] then
      if catalog.checkpath(tag+BaseNeb,text)
-        then color:=clWindow
+        then color:=textcolor
         else color:=clRed
-     else color:=clWindow;
+     else color:=textcolor;
 end;
 finally
 LockCatPath:=false;
