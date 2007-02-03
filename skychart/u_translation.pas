@@ -849,10 +849,10 @@ resourcestring
   rsDeclination = 'Declination';
   rsTurnsHour = 'turns / hour';
   rsTurnsDegree = 'turns / degree';
-  rsRevertRAKnob = 'Revert RA knob';
-  rsRevertDECKno = 'Revert DEC knob';
-  rsRevertAzKnob = 'Revert Az knob';
-  rsRevertAltKno = 'Revert Alt knob';
+  rsRevertRAKnob = 'Reverse RA knob';
+  rsRevertDECKno = 'Reverse DEC knob';
+  rsRevertAzKnob = 'Reverse Az knob';
+  rsRevertAltKno = 'Reverse Alt knob';
   rsCDCPluginSet = 'CDC plugin setting';
   rsTelescopePlu = 'Telescope Plugin ';
   rsINDIDriverSe = 'INDI Driver setting';

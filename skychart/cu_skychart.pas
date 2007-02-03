@@ -1814,7 +1814,7 @@ if (xx+w+marge)>cfgsc.xmax then x:=cfgsc.xmax-w-marge;
 end;}
 
 procedure Tskychart.DrawEqGrid;
-var ra1,de1,ac,dc,dra,dde,a,d:double;
+var ra1,de1,ac,dc,dra,dde:double;
     col,n:integer;
     ok,labelok:boolean;
 function DrawRAline(ra,de,dd:double):boolean;

@@ -3032,19 +3032,19 @@ msgid "Return"
 msgstr "Regresar"
 
 #: u_translation:rsrevertaltkno
-msgid "Revert Alt knob"
+msgid "Reverse Alt knob"
 msgstr "Revertir madno Alt"
 
 #: u_translation:rsrevertazknob
-msgid "Revert Az knob"
+msgid "Reverse Az knob"
 msgstr "Revertir mando Az"
 
 #: u_translation:rsrevertdeckno
-msgid "Revert DEC knob"
+msgid "Reverse DEC knob"
 msgstr "Revertir mando DEC"
 
 #: u_translation:rsrevertraknob
-msgid "Revert RA knob"
+msgid "Reverse RA knob"
 msgstr "Revertis mando RA"
 
 #: u_translation:rsright
