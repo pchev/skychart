@@ -3100,7 +3100,7 @@ cplot.partsize:=ReadFloat(section,'partsize',cplot.partsize);
 cplot.magsize:=ReadFloat(section,'magsize',cplot.magsize);
 cplot.AutoSkycolor:=ReadBool(section,'AutoSkycolor',cplot.AutoSkycolor);
 for i:=0 to maxcolor do cplot.color[i]:=ReadInteger(section,'color'+inttostr(i),cplot.color[i]);
-for i:=1 to 7 do cplot.skycolor[i]:=ReadInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
+for i:=0 to 7 do cplot.skycolor[i]:=ReadInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
 cplot.bgColor:=ReadInteger(section,'bgColor',cplot.bgColor);
 section:='grid';
 catalog.cfgshr.ShowCRose:=ReadBool(section,'ShowCRose',catalog.cfgshr.ShowCRose);
@@ -3522,7 +3522,7 @@ WriteFloat(section,'partsize',cplot.partsize);
 WriteFloat(section,'magsize',cplot.magsize);
 WriteBool(section,'AutoSkycolor',cplot.AutoSkycolor);
 for i:=0 to maxcolor do WriteInteger(section,'color'+inttostr(i),cplot.color[i]);
-for i:=1 to 7 do WriteInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
+for i:=0 to 7 do WriteInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
 WriteInteger(section,'bgColor',cplot.bgColor);
 section:='font';
 for i:=1 to numfont do begin

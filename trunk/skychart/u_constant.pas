@@ -33,7 +33,7 @@ const MaxColor = 35;
       crlf = chr(13)+chr(10);
 
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
-     TSkycolor = array[1..7]of Tcolor;
+     TSkycolor = array[0..7]of Tcolor;
 
 const cdcversion = 'Version 3 beta 0.1.3 svn ';
       cdcver     = '3.0.1.3';
@@ -81,7 +81,7 @@ const cdcversion = 'Version 3 beta 0.1.3 svn ';
       DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
       DfRedColor : Starcolarray =(clBlack,  $00ff00ff,$00a060ff,$008080ff,$0060a0ff,$004080ff,$006060ff,$000000ff,$000000ff,$00ff00ff,$008080ff,$000000ff,$00000040,$00000040,$00000080,$00000040,$00000040,$000000A0,$00000080,$00000040,clYellow, $000000A0,$00000020,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0,$000000A0);
       DfWBColor : Starcolarray = (clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clWhite,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack,  clBlack);
-      dfskycolor : Tskycolor =   ($00f03c3c,$00c83232,$00a02828,$00780000,$00640010,$003c0010,$00000000);
+      dfskycolor : Tskycolor =   ($00200000,  $00f03c3c,$00c83232,$00a02828,$00780000,$00640010,$003c0010,$00000000);
       nv_light  = $004040ff;
       nv_middle = $003030c0;
       nv_dim    = $00000060;
@@ -1342,7 +1342,7 @@ procedure Tconf_plot.Assign(Source: Tconf_plot);
 var i : integer;
 begin
 for i:=0 to Maxcolor do color[i]:=Source.color[i];
-for i:=1 to 7 do skycolor[i]:=Source.skycolor[i];
+for i:=0 to 7 do skycolor[i]:=Source.skycolor[i];
 backgroundcolor:=Source.backgroundcolor;
 bgcolor:=Source.bgcolor;
 stardyn:=Source.stardyn;

@@ -36,6 +36,7 @@ type
 
   Tf_config_display = class(TForm)
     Button2: TButton;
+    Button3: TButton;
     Button4: TButton;
     Button5: TButton;
     GridStyle: TComboBox;
@@ -49,6 +50,8 @@ type
     GroupBox6: TGroupBox;
     Panel1: TPanel;
     Panel2: TPanel;
+    Panel3: TPanel;
+    Shape8: TShape;
     ThemeList: TComboBox;
     MainPanel: TPanel;
     Page1: TPage;
@@ -152,7 +155,6 @@ type
     Shape22: TShape;
     Shape23: TShape;
     Shape24: TShape;
-    Button3: TButton;
     EqGrid: TCheckBox;
     CGrid: TCheckBox;
     ecliptic: TCheckBox;
@@ -828,6 +830,9 @@ begin
  if cplot.autoskycolor then skycolorbox.itemindex:=1
                        else skycolorbox.itemindex:=0;
  panel2.visible:=cplot.autoskycolor;
+ panel3.Visible:=not panel2.visible;
+ shape8.pen.color:=cplot.skycolor[0];
+ shape8.brush.color:=cplot.skycolor[0];
  shape18.pen.color:=cplot.skycolor[1];
  shape18.brush.color:=cplot.skycolor[1];
  shape19.pen.color:=cplot.skycolor[2];
@@ -1228,6 +1233,7 @@ procedure Tf_config_display.skycolorboxClick(Sender: TObject);
 begin
 cplot.autoskycolor:=(skycolorbox.itemindex=1);
 panel2.visible:=cplot.autoskycolor;
+panel3.visible:=not panel2.visible;
 end;
 
 procedure Tf_config_display.ShapeSkyMouseUp(Sender: TObject;
