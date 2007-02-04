@@ -1,7 +1,7 @@
 object f_config_time: Tf_config_time
-  Left = 629
+  Left = 566
   Height = 564
-  Top = 139
+  Top = 105
   Width = 474
   HorzScrollBar.Page = 473
   VertScrollBar.Page = 563
@@ -25,7 +25,7 @@ object f_config_time: Tf_config_time
       Width = 474
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       object Page1: TPage
         Caption = 'Time'
@@ -40,9 +40,9 @@ object f_config_time: Tf_config_time
         end
         object CheckBox2: TCheckBox
           Left = 40
-          Height = 19
+          Height = 21
           Top = 56
-          Width = 135
+          Width = 131
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
           TabOrder = 1
@@ -92,9 +92,9 @@ object f_config_time: Tf_config_time
           end
           object CheckBox4: TCheckBox
             Left = 8
-            Height = 19
+            Height = 21
             Top = 70
-            Width = 170
+            Width = 166
             Caption = 'Use another DT-UT value'
             OnClick = CheckBox4Click
             TabOrder = 0
@@ -134,7 +134,7 @@ object f_config_time: Tf_config_time
         end
         object Panel9: TPanel
           Left = 32
-          Height = 152
+          Height = 160
           Top = 87
           Width = 417
           TabOrder = 3
@@ -231,7 +231,7 @@ object f_config_time: Tf_config_time
           object BitBtn4: TBitBtn
             Left = 267
             Height = 25
-            Top = 104
+            Top = 96
             Width = 137
             BorderSpacing.InnerBorder = 2
             Caption = 'Actual system time'
@@ -346,12 +346,32 @@ object f_config_time: Tf_config_time
             OnClick = BitBtn1Click
             TabOrder = 8
           end
+          object Button5: TButton
+            Left = 267
+            Height = 25
+            Top = 124
+            Width = 45
+            BorderSpacing.InnerBorder = 4
+            Caption = '0h'
+            OnClick = Button5Click
+            TabOrder = 10
+          end
+          object Button6: TButton
+            Left = 343
+            Height = 25
+            Top = 124
+            Width = 61
+            BorderSpacing.InnerBorder = 4
+            Caption = '0h UT'
+            OnClick = Button6Click
+            TabOrder = 11
+          end
         end
         object CheckBox1: TCheckBox
           Left = 40
-          Height = 19
+          Height = 21
           Top = 24
-          Width = 126
+          Width = 122
           Caption = 'Use system time'
           OnClick = CheckBox1Click
           TabOrder = 0
@@ -442,9 +462,9 @@ object f_config_time: Tf_config_time
         end
         object stepline: TCheckBox
           Left = 8
-          Height = 19
+          Height = 21
           Top = 254
-          Width = 260
+          Width = 256
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           TabOrder = 6

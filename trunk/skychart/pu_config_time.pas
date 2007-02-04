@@ -40,6 +40,8 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
     JDEdit: TFloatEdit;
@@ -94,6 +96,8 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
@@ -164,6 +168,8 @@ Label145.caption:=rsSDay;
 Label140.caption:=rsDate;
 Label1.caption:=rsJD;
 BitBtn4.caption:=rsActualSystem;
+Button5.Caption:='0h';
+Button6.Caption:='0h '+rsUT;
 CheckBox1.caption:=rsUseSystemTim;
 Page2.caption:=rsSimulation;
 stepreset.caption:=rsReset;
@@ -341,6 +347,8 @@ t_sec.enabled:=d_year.enabled;
 bitbtn4.enabled:=d_year.enabled;
 JDedit.enabled:=d_year.enabled;
 BitBtn1.enabled:=d_year.enabled;
+Button5.enabled:=d_year.enabled;
+Button6.enabled:=d_year.enabled;
 ShowTime;
 end;
 
@@ -484,6 +492,37 @@ begin
  TimeChange(Sender);
 end;
 
+procedure Tf_config_time.Button5Click(Sender: TObject);
+var y,m,d,h,n,s,ms : word;
+begin
+ csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,0);
+ decodedate(csc.tz.Date,y,m,d);
+ decodeTime(csc.tz.Date,h,n,s,ms);
+ d_year.value:=y;
+ d_month.value:=m;
+ d_day.value:=d;
+ t_hour.value:=h;
+ t_min.value:=n;
+ t_sec.value:=s;
+ DateChange(Sender);
+ TimeChange(Sender);
+end;
+
+procedure Tf_config_time.Button6Click(Sender: TObject);
+var y,m,d,h,n,s,ms : word;
+begin
+ csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.timezone);
+ decodedate(csc.tz.Date,y,m,d);
+ decodeTime(csc.tz.Date,h,n,s,ms);
+ d_year.value:=y;
+ d_month.value:=m;
+ d_day.value:=d;
+ t_hour.value:=h;
+ t_min.value:=n;
+ t_sec.value:=s;
+ DateChange(Sender);
+ TimeChange(Sender);
+end;
 
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);
 begin
