@@ -418,8 +418,9 @@ Refresh;
 end;
 
 procedure Tf_chart.Refresh;
+var  savebg:Tcolor;
 {$ifdef showtime}
-var starttime:TDateTime;
+     starttime:TDateTime;
 {$endif}
 begin
 {$ifdef showtime}
@@ -436,7 +437,10 @@ if lock_refresh then exit;
  Image1.width:=clientwidth;
  Image1.height:=clientheight;
  sc.plot.init(Image1.width,Image1.height);
+ savebg:=sc.plot.cfgplot.color[0];
+ if sc.plot.cfgplot.color[0]=0 then sc.plot.cfgplot.bgcolor:=sc.plot.cfgplot.skycolor[0];
  sc.Refresh;
+ sc.plot.cfgplot.color[0]:=savebg;
  Image1.Invalidate;
  if not lastquick then begin
     inc(lastundo); inc(validundo);
