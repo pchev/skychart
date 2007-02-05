@@ -73,7 +73,7 @@ type
      procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
      procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double;WhiteBg:boolean);
      procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
-     procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
+     procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double; WhiteBg:boolean);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
      procedure labelMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -1235,7 +1235,7 @@ if not cfgplot.Invisible then begin
           end;
       1 : begin // diam
           PlotPlanet1(xx,yy,ipla,pixscale,diam);
-          if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,flipy*be );
+          if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,flipy*be,WhiteBg );
           end;
       2 : begin // image
           rot:=rot*FlipX*FlipY;
@@ -1262,23 +1262,24 @@ begin
 with cnv do begin
  ds:=round(max(diam*pixscale/2,2*cfgchart.drawpen));
  if cfgplot.Color[11]>cfgplot.BgColor then begin
- case Ipla of
-  1: begin ico := 4; end;
-  2: begin ico := 2; end;
-  3: begin ico := 2; end;
-  4: begin ico := 6; end;
-  5: begin ico := 4; end;
-  6: begin ico := 4; end;
-  7: begin ico := 1; end;
-  8: begin ico := 1; end;
-  9: begin ico := 2; end;
-  10:begin ico := 4; end;
-  11:begin ico := 2; end;
-  else begin ico:=2; end;
- end;
- Brush.Color := cfgplot.Color[ico+1] ;
+   case Ipla of
+    1: begin ico := 4; end;
+    2: begin ico := 2; end;
+    3: begin ico := 2; end;
+    4: begin ico := 6; end;
+    5: begin ico := 4; end;
+    6: begin ico := 4; end;
+    7: begin ico := 1; end;
+    8: begin ico := 1; end;
+    9: begin ico := 2; end;
+    10:begin ico := 4; end;
+    11:begin ico := 2; end;
+    else begin ico:=2; end;
+   end;
+   Brush.Color := cfgplot.Color[ico+1] ;
  end
- else Brush.Color := cfgplot.BgColor ;
+ else if cfgchart.onprinter then Brush.Color := cfgplot.BgColor
+                            else Brush.Color := cfgplot.Color[11];
  if cfgplot.TransparentPlanet then Brush.style:=bsclear
                               else Brush.style:=bssolid;
  Pen.Width := cfgchart.drawpen;
@@ -1534,7 +1535,7 @@ if not (hidesat xor showhide) then
    end;
 end;
 
-Procedure TSplot.PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double);
+Procedure TSplot.PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double; WhiteBg:boolean);
 var
   step: Double;
   ds1,ds2 : Integer;
@@ -1550,6 +1551,7 @@ with cnv do begin
   Pen.Width := cfgchart.drawpen;
   Brush.Color := cfgplot.Color[0];
   Pen.Color := cfgplot.Color[5];
+  if WhiteBg then Pen.Color:=clBlack;
   Pen.mode := pmCopy;
   step:=pi2/50;
   for ir:=1 to 5 do begin
@@ -1561,13 +1563,13 @@ with cnv do begin
        ey1:=round(ex*cos(pa) + ey*sin(pa)) + yy ;
        if n=0 then moveto(ex1,ey1)
        else begin
-         if cfgchart.onprinter then begin   // !! pmNot not supported by some printer
+         if cfgchart.onprinter and WhiteBg then begin   // !! pmNot not supported by some printer
            if sqrt(ex*ex+ey*ey)<1.1*R then
-              if be<0 then if n<=25 then Pen.Color:=cfgplot.Color[11]
-                                    else Pen.Color:=cfgplot.Color[5]
-                      else if n>25  then Pen.Color:=cfgplot.Color[11]
-                                    else Pen.Color:=cfgplot.Color[5]
-           else Pen.Color:=cfgplot.Color[11];
+              if be<0 then if n<=25 then Pen.Color:=clBlack
+                                    else Pen.Color:=clWhite
+                      else if n>25  then Pen.Color:=clBlack
+                                    else Pen.Color:=clWhite
+           else Pen.Color:=clBlack;
          end else
            if sqrt(ex*ex+ey*ey)<1.1*R then
               if be<0 then if n<=25 then Pen.mode := pmNot
