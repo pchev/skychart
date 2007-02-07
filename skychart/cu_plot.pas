@@ -1752,7 +1752,8 @@ begin
 if (cfgchart.onprinter or forcetextlabel) then begin
 with cnv do begin
   TextStyle.Opaque:=opaque;
-  Brush.Style:=bsSolid;
+  if opaque then Brush.Style:=bsSolid
+            else Brush.Style:=bsClear;
   Pen.Mode:=pmCopy;
   Font.CharSet:=DEFAULT_CHARSET;
   Font.Name:=cfgplot.FontName[fontnum];
@@ -1824,8 +1825,9 @@ var ts:TSize;
 begin
 with cnv do begin
 TextStyle.Opaque:=opaque;
+if opaque then Brush.Style:=bsSolid
+          else Brush.Style:=bsClear;
 Brush.Color:=cfgplot.backgroundcolor;
-Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Pen.Color:=cfgplot.backgroundcolor;
 Font.Name:=cfgplot.FontName[fontnum];
@@ -1868,8 +1870,9 @@ var ls,p:Integer;
 begin
 with cnv do begin
 TextStyle.Opaque:=opaque;
+if opaque then Brush.Style:=bsSolid
+          else Brush.Style:=bsClear;
 Brush.Color:=cfgplot.backgroundcolor;
-Brush.Style:=bsSolid;
 Pen.Mode:=pmCopy;
 Pen.Color:=cfgplot.backgroundcolor;
 Font.Name:=cfgplot.FontName[fontnum];
