@@ -170,6 +170,7 @@ type
     FListInfo: Tstr1func;
     FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
+    ChartCursor: TCursor;
     xcursor,ycursor,skipmove : integer;
     MovingCircle,FNightVision,StartCircle,lockkey: Boolean;
     SaveColor: Starcolarray;
@@ -348,8 +349,12 @@ begin
  validundo:=0;
  LockKeyboard:=false;
  LockTrackCursor:=false;
-//todo: Image1.Cursor := crRetic;
- Image1.Cursor := crCross;
+ {$ifdef win32}
+ ChartCursor := crRetic;
+ {$else}
+ ChartCursor:=crRetic;
+ {$endif}
+ Image1.Cursor := ChartCursor;
  lock_refresh:=false;
  MovingCircle:=false;
  // must use onScroll on Windows to solve bug 193
@@ -452,7 +457,7 @@ if lock_refresh then exit;
 //    Panel1.color:=sc.plot.cfgplot.color[0];
     if sc.cfgsc.FindOk then ShowIdentLabel;
     if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
-    Image1.Cursor:=crCross;
+    Image1.Cursor:=ChartCursor;
 end;
 finally
  lock_refresh:=false;
@@ -1229,7 +1234,7 @@ else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ListXY(x,y);
 end
 else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift)) then begin
-   Image1.Cursor:=crCross;
+   Image1.Cursor:=ChartCursor;
    Refresh;
 end;
 end;
