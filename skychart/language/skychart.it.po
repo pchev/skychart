@@ -2983,6 +2983,10 @@ msgstr "Nebulosa a riflessione"
 msgid "Refresh"
 msgstr "Aggiorna"
 
+#: u_translation:rsreleasenotes
+msgid "Release Notes"
+msgstr ""
+
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
 msgstr "Rimuovi tutti i campi"

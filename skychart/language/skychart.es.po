@@ -2983,6 +2983,10 @@ msgstr "Nebulosa de reflexión"
 msgid "Refresh"
 msgstr "Actualizar"
 
+#: u_translation:rsreleasenotes
+msgid "Release Notes"
+msgstr ""
+
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
 msgstr "Eliminar todos los Circulos"

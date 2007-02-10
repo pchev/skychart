@@ -202,10 +202,10 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 1
       object serverinfo: TLabel
-        Left = 146
-        Height = 348
+        Left = 144
+        Height = 350
         Top = 6
-        Width = 391
+        Width = 393
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         Color = clNone
@@ -223,9 +223,9 @@ object f_info: Tf_info
       end
       object CheckBox1: TCheckBox
         Left = 104
-        Height = 19
+        Height = 21
         Top = 2
-        Width = 98
+        Width = 94
         Caption = 'AutoRefresh'
         Checked = True
         OnClick = CheckBox1Click
@@ -241,67 +241,6 @@ object f_info: Tf_info
     Width = 554
     TabOrder = 2
     Visible = False
-    object Panel3: TPanel
-      Left = 1
-      Height = 27
-      Top = 315
-      Width = 552
-      Align = alBottom
-      FullRepaint = False
-      TabOrder = 0
-      object Button3: TButton
-        Left = 214
-        Height = 25
-        Top = 1
-        Width = 75
-        Anchors = [akTop, akRight]
-        BorderSpacing.InnerBorder = 4
-        Caption = 'Search'
-        OnClick = Button3Click
-        TabOrder = 0
-      end
-      object Edit1: TEdit
-        Left = 124
-        Height = 21
-        Top = 3
-        Width = 85
-        Anchors = [akTop, akRight]
-        OnKeyUp = Edit1KeyUp
-        TabOrder = 1
-      end
-      object Button5: TButton
-        Left = 300
-        Height = 25
-        Top = 1
-        Width = 75
-        Anchors = [akTop, akRight]
-        BorderSpacing.InnerBorder = 4
-        Caption = 'Sort by RA'
-        OnClick = Button5Click
-        TabOrder = 2
-      end
-      object Button6: TButton
-        Left = 388
-        Height = 25
-        Top = 1
-        Width = 75
-        Anchors = [akTop, akRight]
-        BorderSpacing.InnerBorder = 4
-        Caption = 'Print'
-        OnClick = Button6Click
-        TabOrder = 3
-      end
-      object Button7: TButton
-        Left = 476
-        Height = 25
-        Width = 75
-        Anchors = [akTop, akRight]
-        BorderSpacing.InnerBorder = 4
-        Caption = 'Save'
-        OnClick = Button7Click
-        TabOrder = 4
-      end
-    end
     object Memo1: TSynEdit
       Left = 1
       Height = 314
@@ -316,9 +255,7 @@ object f_info: Tf_info
       TabOrder = 1
       OnDblClick = Memo1DblClick
       BookMarkOptions.Xoffset = -18
-      BookMarkOptions.OnChange = nil
       Gutter.Visible = False
-      Gutter.OnChange = nil
       Gutter.CodeFoldingWidth = 14
       Keystrokes = <      
         item
@@ -647,9 +584,76 @@ object f_info: Tf_info
       Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
       ReadOnly = True
       RightEdge = 0
-      SelectedColor.OnChange = nil
       TabWidth = 10
     end
+    object Panel3: TPanel
+      Left = 1
+      Height = 27
+      Top = 315
+      Width = 552
+      Align = alBottom
+      FullRepaint = False
+      TabOrder = 0
+      object Button3: TButton
+        Left = 214
+        Height = 25
+        Top = 1
+        Width = 75
+        Anchors = [akTop, akRight]
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Search'
+        OnClick = Button3Click
+        TabOrder = 0
+      end
+      object Edit1: TEdit
+        Left = 124
+        Height = 21
+        Top = 3
+        Width = 85
+        Anchors = [akTop, akRight]
+        OnKeyUp = Edit1KeyUp
+        TabOrder = 1
+      end
+      object Button5: TButton
+        Left = 300
+        Height = 25
+        Top = 1
+        Width = 75
+        Anchors = [akTop, akRight]
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Sort by RA'
+        OnClick = Button5Click
+        TabOrder = 2
+      end
+      object Button6: TButton
+        Left = 388
+        Height = 25
+        Top = 1
+        Width = 75
+        Anchors = [akTop, akRight]
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Print'
+        OnClick = Button6Click
+        TabOrder = 3
+      end
+      object Button7: TButton
+        Left = 476
+        Height = 25
+        Width = 75
+        Anchors = [akTop, akRight]
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Save'
+        OnClick = Button7Click
+        TabOrder = 4
+      end
+    end
+  end
+  object TitlePanel: TPanel
+    Height = 26
+    Width = 719
+    Align = alTop
+    Alignment = taLeftJustify
+    TabOrder = 5
   end
   object Page3: TPanel
     Left = 110
@@ -686,13 +690,6 @@ object f_info: Tf_info
       ScrollBars = ssAutoVertical
       TabOrder = 0
     end
-  end
-  object TitlePanel: TPanel
-    Height = 26
-    Width = 719
-    Align = alTop
-    Alignment = taLeftJustify
-    TabOrder = 5
   end
   object PopupMenu1: TPopupMenu
     left = 112
