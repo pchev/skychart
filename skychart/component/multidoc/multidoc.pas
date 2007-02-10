@@ -450,6 +450,8 @@ var i: integer;
 begin
 if Maximized then
   for i:=0 to FChildIndex do begin
+    FChild[i].top:=0;
+    FChild[i].left:=0;
     FChild[i].Width:=clientwidth;
     FChild[i].Height:=clientheight;
   end;
