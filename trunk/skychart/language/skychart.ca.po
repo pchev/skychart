@@ -1,7 +1,7 @@
 # translation of skychart.ca.po
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-01-2 23:09+0100\n"
+"PO-Revision-Date: 2007-02-06 11:00+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.ca\n"
 "POT-Creation-Date: \n"
@@ -806,7 +806,7 @@ msgstr "Correlacionat"
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
-msgstr ""
+msgstr "Zona horària del país"
 
 #: u_translation:rscreatedataba
 msgid "Create Database"
@@ -1782,7 +1782,7 @@ msgstr "Port servidor INDI"
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
-msgstr "Viviu en una muntanya alta,prop del mar i voleu observar la imatge distorsionada dels objectes per sota de l'horitzó."
+msgstr "Si observeu des d'una muntanya alta, la línia de l'horitzó serà més baixa del que seria al nivell del mar."
 
 #: u_translation:rsillum
 msgid "Illum."
@@ -2266,7 +2266,7 @@ msgstr "Més cel profund"
 
 #: u_translation:rsmoreoptions
 msgid "More Options"
-msgstr ""
+msgstr "Més opcions"
 
 #: u_translation:rsmorestars
 msgid "More Stars"
@@ -2850,7 +2850,7 @@ msgstr "Dades del programa"
 
 #: u_translation:rsprograminfor
 msgid "Program Information"
-msgstr ""
+msgstr "Informació del programa"
 
 #: u_translation:rsprogrammer
 msgid "Programmer:"
@@ -4058,7 +4058,7 @@ msgstr "dpi,  paper 8x11"
 
 #: u_translation:rsdocumentatio
 msgid "en/documentation/start.html"
-msgstr "fr/documentation/start.html"
+msgstr "en/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "
