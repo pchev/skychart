@@ -548,6 +548,7 @@ type
     InitialChartNum: integer;
     AutoRefreshLock: Boolean;
     compass,arrow: TBitmap;
+    CursorImage1: TCursorImage;
     procedure FormMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
   {$ifdef win32}
     savwincol  : array[0..35] of Tcolor;
@@ -934,6 +935,8 @@ try
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
+ CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur');
+ Screen.Cursors[crRetic]:=CursorImage1.CursorHandle;
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm') then
     compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm');
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm') then
@@ -1127,6 +1130,7 @@ cfgs:=Tconf_skychart.Create;
 cfgm:=Tconf_main.Create;
 def_cfgplot:=Tconf_plot.Create;
 cfgp:=Tconf_plot.Create;
+CursorImage1:=TCursorImage.Create;
 GetAppDir;
 chdir(appdir);
 InitTrace;
@@ -1146,7 +1150,6 @@ starshape.Picture.Bitmap.Transparent:=false;
 TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 quicksearch.Width:=round( 75 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 TimeU.Width:=round( 95 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
-//todo: Screen.Cursors[crRetic] := LoadCursorFromFile('retic.cur');
 zlib:=LoadLibrary(libz);
 if zlib<>0 then begin
   gzopen:= Tgzopen(GetProcAddress(zlib,'gzopen'));
@@ -1187,6 +1190,7 @@ def_cfgplot.Free;
 cfgp.Free;
 compass.free;
 arrow.free;
+CursorImage1.FreeImage;
 except
 writetrace('error destroy '+name);
 end;
@@ -4826,7 +4830,12 @@ begin
     SetNightVision(true)
  else
     SetButtonImage(cfgm.ButtonStandard);
-    
+
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur') then begin
+   CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur');
+   Screen.Cursors[crRetic]:=CursorImage1.CursorHandle;
+ end;
+
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.xpm') then begin
     compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.xpm');
     for i:=0 to MultiDoc1.ChildCount-1 do
