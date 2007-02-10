@@ -1745,7 +1745,7 @@ end;
 
 function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
 var ts:TSize;
-    //arect: TRect;
+    arect: TRect;
 begin
 // If drawing to the printer force to plot the text label to the canvas
 // even if label editing is selected
@@ -1773,13 +1773,11 @@ with cnv do begin
    laCenter : yy:=yy-(ts.cy div 2);
   end;
   end;
-  if cnv is TPostscriptCanvas then begin
-    TextOut(xx,yy,txt);
-  end else begin
-    TextOut(xx,yy,txt);
-    //arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-    //textRect(arect,xx,yy,txt);
+  if opaque and (cnv is TPostscriptCanvas) then begin
+    arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
+    Rectangle(arect);
   end;
+  TextOut(xx,yy,txt);
 end;
 // If drawing to the screen use movable label 
 end else begin
@@ -1851,14 +1849,11 @@ if clip then begin
   if xx<cfgplot.xmin then xx:=cfgplot.xmin+marge;
   if (xx+ts.cx+marge)>cfgplot.xmax then xx:=cfgplot.xmax-ts.cx-marge;
 end;
-arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-if cnv is TPostscriptCanvas then begin
-  if opaque then Rectangle(arect);
-  TextOut(xx,yy,txt);
-end else begin
+if opaque and (cnv is TPostscriptCanvas) then begin
   arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-  textRect(arect,xx,yy,txt);
+  Rectangle(arect);
 end;
+TextOut(xx,yy,txt);
 end;
 end;
 
@@ -1895,13 +1890,11 @@ repeat
       delete(txt,1,p+1);
   end;
   ts:=TextExtent(buf);
-  arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-  if cnv is TPostscriptCanvas then begin
-     if opaque then Rectangle(arect);
-     TextOut(xx,yy,buf);
-  end else begin
-     textRect(arect,xx,yy,buf);
+  if opaque and (cnv is TPostscriptCanvas) then begin
+    arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
+    Rectangle(arect);
   end;
+  TextOut(xx,yy,txt);
   yy:=yy+ls;
 until p=0;
 end;
