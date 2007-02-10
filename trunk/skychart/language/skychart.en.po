@@ -2983,6 +2983,10 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
+#: u_translation:rsreleasenotes
+msgid "Release Notes"
+msgstr ""
+
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
 msgstr ""

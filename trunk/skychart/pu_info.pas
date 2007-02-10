@@ -249,8 +249,7 @@ end;
 
 procedure Tf_info.setpage(n:integer);
 begin
-if n=3 then Button1.caption:=rsNext
-       else Button1.caption:=rsClose;
+if n<>3 then Button1.caption:=rsClose;
 Activepage:=n;
 Page1.Visible:=(n=0);
 Page2.Visible:=(n=1);

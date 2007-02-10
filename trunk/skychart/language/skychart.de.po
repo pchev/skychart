@@ -2983,6 +2983,10 @@ msgstr "Reflektionsnebel"
 msgid "Refresh"
 msgstr "Aktualisiere"
 
+#: u_translation:rsreleasenotes
+msgid "Release Notes"
+msgstr ""
+
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
 msgstr "Lösche alle Aufsuchhilfen"

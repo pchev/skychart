@@ -1078,6 +1078,7 @@ resourcestring
   rsMoreOptions = 'More Options';
   rsWarningYouAr2 = 'Warning! you are using multiple catalog for the same '
     +'object. Be sure this what you want.';
+  rsReleaseNotes = 'Release Notes';
 
 implementation
 

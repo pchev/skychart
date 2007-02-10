@@ -3858,6 +3858,10 @@ object f_main: Tf_main
       object MenuItem11: TMenuItem
         Caption = '-'
       end
+      object ReleaseNotes1: TMenuItem
+        Caption = 'Release Notes'
+        OnClick = ReleaseNotes1Click
+      end
       object HelpAboutItem: TMenuItem
         Action = HelpAbout1
         OnClick = HelpAbout1Execute

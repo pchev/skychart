@@ -2984,6 +2984,10 @@ msgstr "Nebulosa de reflexió"
 msgid "Refresh"
 msgstr "Refresca"
 
+#: u_translation:rsreleasenotes
+msgid "Release Notes"
+msgstr ""
+
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
 msgstr "Suprimeix tots els cercles"

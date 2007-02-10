@@ -2984,6 +2984,10 @@ msgstr "Рефлексійна туманність"
 msgid "Refresh"
 msgstr "Обновити"
 
+#: u_translation:rsreleasenotes
+msgid "Release Notes"
+msgstr ""
+
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
 msgstr "Видалити всі кола"

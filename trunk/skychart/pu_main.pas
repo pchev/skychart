@@ -82,6 +82,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    ReleaseNotes1: TMenuItem;
     ViewScrollBar1: TMenuItem;
     ResetAllLabels1: TMenuItem;
     PopupMenu1: TPopupMenu;
@@ -428,6 +429,7 @@ type
     procedure Maillist1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure OpenConfigExecute(Sender: TObject);
+    procedure ReleaseNotes1Click(Sender: TObject);
     procedure ResetAllLabels1Click(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
     procedure SetupColourExecute(Sender: TObject);
@@ -574,6 +576,7 @@ type
     procedure SetupPicturesPage(page:integer);
     procedure SetupCatalogPage(page:integer);
     procedure FirstSetup;
+    procedure ShowReleaseNotes(shownext:boolean);
   {$ifdef win32}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -602,6 +605,7 @@ type
     procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
     procedure SaveChartConfig(filename:string; child: TChildDoc);
+    procedure SaveVersion;
     procedure SaveDefault;
     procedure SetDefault;
     procedure SetLang;
@@ -944,7 +948,9 @@ try
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  if def_cfgsc.tz.TimeZoneFile='' then firstuse:=true;
  if firstuse then
-    FirstSetup;
+    FirstSetup
+ else
+    if config_version<cdcver then ShowReleaseNotes(false);
  application.ProcessMessages; // apply any resizing
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
@@ -972,7 +978,7 @@ except
 end;
 end;
 
-procedure Tf_main.FirstSetup;
+procedure Tf_main.ShowReleaseNotes(shownext:boolean);
 var buf: string;
 begin
  f_splash.Close;
@@ -982,10 +988,18 @@ begin
     buf:=slash(HelpDir)+'releasenotes.txt';
  if fileexists(buf) then begin
     f_info.setpage(3);
+    if shownext then f_info.Button1.caption:=rsNext
+                else f_info.Button1.caption:=rsClose;
     f_info.InfoMemo.Lines.LoadFromFile(buf);
     f_info.InfoMemo.Text:=UTF8Decode(f_info.InfoMemo.Text);
     f_info.showmodal;
  end;
+ SaveVersion;
+end;
+
+procedure Tf_main.FirstSetup;
+begin
+ ShowReleaseNotes(true);
  SetupObservatoryPage(0,-1);
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  if def_cfgsc.tz.TimeZoneFile='' then begin
@@ -1917,6 +1931,11 @@ screen.cursor:=crDefault;
 f_config.Free;
 f_config:=nil;
 end;
+end;
+
+procedure Tf_main.ReleaseNotes1Click(Sender: TObject);
+begin
+  ShowReleaseNotes(false);
 end;
 
 procedure Tf_main.ApplyConfig(Sender: TObject);
@@ -2992,7 +3011,7 @@ procedure Tf_main.ReadDefault;
 begin
 ReadPrivateConfig(configfile);
 ReadChartConfig(configfile,true,true,def_cfgplot,def_cfgsc);
-//if config_version<cdcver then UpdateConfig;
+if config_version<cdcver then UpdateConfig;
 end;
 
 procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
@@ -3414,11 +3433,28 @@ if Config_Version < '3.0.0.7' then begin
    def_cfgplot.color[22]:=DFcolor[22];
    catalog.cfgshr.BigNebLimit:=211;
    catalog.cfgshr.NebMagFilter[4]:=99;
+   SaveDefault;
 end;
 if Config_Version < '3.0.0.8' then begin
    cfgm.dbpass:=cryptedpwd;
+   SaveDefault;
 end;
-SaveDefault;
+end;
+
+procedure Tf_main.SaveVersion;
+var inif: TMemIniFile;
+    section : string;
+begin
+inif:=TMeminifile.create(configfile);
+try
+with inif do begin
+section:='main';
+WriteString(section,'version',cdcver);
+Updatefile;
+end;
+finally
+ inif.Free;
+end;
 end;
 
 procedure Tf_main.SaveDefault;
@@ -4097,6 +4133,7 @@ HomePage1.caption:=rsSkychartHome;
 Maillist1.caption:=rsMailList;
 BugReport1.caption:=rsReportAProbl;
 HelpAboutItem.caption:=rsAbout;
+ReleaseNotes1.Caption:=rsReleaseNotes;
 ButtonMoreStar.Hint:=rsMoreStars;
 ButtonLessStar.Hint:=rsLessStars;
 ButtonMoreNeb.Hint:=rsMoreNebulae;
