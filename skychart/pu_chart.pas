@@ -1594,11 +1594,13 @@ ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 Eq2Ecl(ra,dec,sc.cfgsc.e,a,h) ;
+a:=rmod(a+pi2,pi2);
 txt:=txt+html_b+rsEcliptic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,jd2000,ra,dec);
 Eq2Gal(ra,dec,a,h,sc.cfgsc) ;
+a:=rmod(a+pi2,pi2);
 txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
 txt:=txt{+htms_f}+html_br;
 // local position
