@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2006-12-21 22:38+0200\n"
+"PO-Revision-Date: 2007-02-12 20:10+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ua\n"
 "POT-Creation-Date: \n"
@@ -230,7 +230,7 @@ msgstr "Висота"
 
 #: u_translation:rsalwaysshowco
 msgid "Always show compass rose"
-msgstr ""
+msgstr "Завжди показувати компас"
 
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
@@ -670,7 +670,7 @@ msgstr "Прийнята назва"
 
 #: u_translation:rscompassroses
 msgid "Compass rose size"
-msgstr ""
+msgstr "Розмір компасу"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -806,7 +806,7 @@ msgstr "Кореляція"
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
-msgstr ""
+msgstr "Часовий пояс  країни"
 
 #: u_translation:rscreatedataba
 msgid "Create Database"
@@ -1114,7 +1114,7 @@ msgstr "Позначення"
 
 #: u_translation:rsdesktopenvir
 msgid "Desktop environment"
-msgstr "Настольне середовище"
+msgstr "Настільне середовище"
 
 #: u_translation:rsdetails
 msgid "Details"
@@ -1826,7 +1826,7 @@ msgstr "Вкажіть, як визнавати величину розміру 
 
 #: u_translation:rsindicatethes3
 msgid "Indicate the string for each color"
-msgstr "вкажіть лінію для кожного кольору"
+msgstr "Вкажіть лінію для кожного кольору"
 
 #: u_translation:rsindicatethes2
 msgid "Indicate the string for each draw operation"
@@ -1834,7 +1834,7 @@ msgstr "Вказати лінію для кожної операції рису�
 
 #: u_translation:rsindicatethes
 msgid "Indicate the string identifier for each type of object :"
-msgstr "Вкажіть індентифкатор лінії для кожного типу об'єкту:"
+msgstr "Вкажіть індентифікатор лінії для кожного типу об'єкту:"
 
 #: u_translation:rsinfo
 msgid "Information"
@@ -2266,7 +2266,7 @@ msgstr "Більше туманностей"
 
 #: u_translation:rsmoreoptions
 msgid "More Options"
-msgstr ""
+msgstr "Більше опцій"
 
 #: u_translation:rsmorestars
 msgid "More Stars"
@@ -2370,7 +2370,7 @@ msgstr "Без поля"
 
 #: u_translation:rsnoprinterfou
 msgid "No Printer found!"
-msgstr ""
+msgstr "Принтер не знайдено!"
 
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
@@ -2562,7 +2562,7 @@ msgstr "Опції"
 
 #: u_translation:rsorusealocalf
 msgid "Or use a local file :"
-msgstr "Або використати місцевий час:"
+msgstr "Або використати місцевий :"
 
 #: u_translation:rsorbit
 msgid "Orbit"
@@ -2850,7 +2850,7 @@ msgstr "Програмні дані"
 
 #: u_translation:rsprograminfor
 msgid "Program Information"
-msgstr ""
+msgstr "Програмна інформація"
 
 #: u_translation:rsprogrammer
 msgid "Programmer:"
@@ -2986,7 +2986,7 @@ msgstr "Обновити"
 
 #: u_translation:rsreleasenotes
 msgid "Release Notes"
-msgstr ""
+msgstr "Коментарії"
 
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
@@ -3322,7 +3322,7 @@ msgstr "Показати галактичний екватор"
 
 #: u_translation:rsshowgrid
 msgid "Show Grid"
-msgstr ""
+msgstr "Показати сітку"
 
 #: u_translation:rsshowgridlabe
 msgid "Show Grid Label"
@@ -3794,7 +3794,7 @@ msgstr "URL"
 
 #: u_translation:rsurllaunchcom
 msgid "URL launch command"
-msgstr "Команда запусвку URL"
+msgstr "Команда запуску URL"
 
 #: u_translation:rsut
 msgid "UT"
@@ -3806,7 +3806,7 @@ msgstr "Повна тінь"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr "Відмітити, щоб запобігти схожості із малою планетою 134340 (зараз цей номер присвоєно Плутону)."
+msgstr "Відмітити, щоб запобігти схожості із малою планетою 134340."
 
 #: u_translation:rsundo
 msgid "Undo"
@@ -3950,7 +3950,7 @@ msgstr "Попередження! Поточна дата та місцезна�
 
 #: u_translation:rswarningyouar2
 msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
-msgstr ""
+msgstr "Увага! Ви використовуєте багато каталогів для одного об'єкту. Будьте впевнены, що ви цього хочете."
 
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
