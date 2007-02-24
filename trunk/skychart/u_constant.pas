@@ -27,7 +27,7 @@ interface
 
 uses gcatunit, {libcatalog,} // libcatalog statically linked
      cu_tz,
-     Classes, FPCanvas, Graphics;
+     Classes, Controls, FPCanvas, Graphics;
 
 const MaxColor = 35;
       crlf = chr(13)+chr(10);
@@ -50,7 +50,6 @@ const cdcversion = 'Version 3 beta 0.1.3 svn ';
       maxmodlabels = 1000; //maximum number of modified labels before older one are replaced
       MaxCircle = 100;
       MaxDSSurl = 20;
-      crRetic = 5;
       jd2000 =2451545.0 ;
       jd1950 =2433282.4235;
       jd1900 =2415020.3135;
@@ -598,6 +597,7 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, ZoneDir : string;
      nightvision : Boolean;
      ThemePath:string ='data/Themes';
      LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
+     crRetic: TCursor = 5;
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //
 {$else}
