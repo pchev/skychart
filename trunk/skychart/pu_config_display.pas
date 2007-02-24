@@ -39,6 +39,10 @@ type
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
+    BtnDefaultColor: TButton;
+    BtnRedColor: TButton;
+    BtnWBColor: TButton;
+    BtnBWColor: TButton;
     GridStyle: TComboBox;
     EclipticStyle: TComboBox;
     EqGridStyle: TComboBox;
@@ -48,6 +52,7 @@ type
     ConstlFile: TFileNameEdit;
     ConstbFile: TFileNameEdit;
     GroupBox6: TGroupBox;
+    GroupBox7: TGroupBox;
     Label5: TLabel;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -139,7 +144,6 @@ type
     Shape15: TShape;
     Shape16: TShape;
     Shape14: TShape;
-    DefColor: TRadioGroup;
     bg4: TPanel;
     Shape26: TShape;
     Shape27: TShape;
@@ -301,6 +305,10 @@ type
     Shape12: TShape;
     Shape11: TShape;
     Notebook1: TNotebook;
+    procedure BtnBWColorClick(Sender: TObject);
+    procedure BtnDefaultColorClick(Sender: TObject);
+    procedure BtnRedColorClick(Sender: TObject);
+    procedure BtnWBColorClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
@@ -331,7 +339,6 @@ type
     procedure DefaultFontClick(Sender: TObject);
     procedure ShapeMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure DefColorClick(Sender: TObject);
     procedure skycolorboxClick(Sender: TObject);
     procedure ShapeSkyMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -460,11 +467,11 @@ Label11.caption:=rsHorizon;
 Label6.caption:=rsAsteroid;
 Label234.caption:=rsComet;
 Label269.caption:=rsMilkyWay;
-DefColor.caption:=rsStandardColo;
-DefColor.Items[0]:=rsDefault;
-DefColor.Items[1]:=rsRed;
-DefColor.Items[2]:=rsWhiteOnBlack;
-DefColor.Items[3]:=rsBlackOnWhite;
+GroupBox7.caption:=rsStandardColo;
+BtnDefaultColor.caption:=rsDefault;
+BtnRedColor.caption:=rsRed;
+BtnWBColor.caption:=rsWhiteOnBlack;
+BtnBWColor.caption:=rsBlackOnWhite;
 GroupBox6.caption:=rsTheme;
 NightButton.caption:=rsNightVisionB;
 NightButton.Items[0]:=rsNormalColor;
@@ -745,6 +752,34 @@ end;
 procedure Tf_config_display.Button4Click(Sender: TObject);
 begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_display.BtnDefaultColorClick(Sender: TObject);
+begin
+ cplot.Color:=DfColor;
+ cplot.bgcolor:=cplot.color[0];
+ ShowColor;
+end;
+
+procedure Tf_config_display.BtnBWColorClick(Sender: TObject);
+begin
+ cplot.Color:=DfBWColor;
+ cplot.bgcolor:=cplot.color[0];
+ ShowColor;
+end;
+
+procedure Tf_config_display.BtnRedColorClick(Sender: TObject);
+begin
+ cplot.Color:=DfRedColor;
+ cplot.bgcolor:=cplot.color[0];
+ ShowColor;
+end;
+
+procedure Tf_config_display.BtnWBColorClick(Sender: TObject);
+begin
+ cplot.Color:=DfWBColor;
+ cplot.bgcolor:=cplot.color[0];
+ ShowColor;
 end;
 
 procedure Tf_config_display.FormClose(Sender: TObject;
@@ -1217,18 +1252,6 @@ if sender is TShape then with sender as TShape do begin
 end;
 end;
 
-procedure Tf_config_display.DefColorClick(Sender: TObject);
-begin
-case DefColor.ItemIndex of
-  0 : cplot.Color:=DfColor;
-  1 : cplot.Color:=DfRedColor;
-  2 : cplot.Color:=DfBWColor;
-  3 : cplot.Color:=DfWBColor;
-end;
-cplot.bgcolor:=cplot.color[0];
-ShowColor;
-end;
-
 procedure Tf_config_display.skycolorboxClick(Sender: TObject);
 begin
 cplot.autoskycolor:=(skycolorbox.itemindex=1);
@@ -1393,32 +1416,7 @@ procedure Tf_config_display.DefNebColorButtonClick(Sender: TObject);
 begin
 cplot.Nebgray:=55;
 cplot.NebBright:=180;
-
-case DefColor.ItemIndex of
-
-  0 : begin
-      cplot.Color[8]:=DfColor[8];
-      cplot.Color[9]:=DfColor[9];
-      cplot.Color[10]:=DfColor[10];
-      end;
-  1 : begin
-      cplot.Color[8]:=DfRedColor[8];
-      cplot.Color[9]:=DfRedColor[9];
-      cplot.Color[10]:=DfRedColor[10];
-      end;
-  2 : begin
-      cplot.Color[8]:=DfBWColor[8];
-      cplot.Color[9]:=DfBWColor[9];
-      cplot.Color[10]:=DfBWColor[10];
-      end;
-  3 : begin
-      cplot.Color[8]:=DfWBColor[8];
-      cplot.Color[9]:=DfWBColor[9];
-      cplot.Color[10]:=DfWBColor[10];
-      end;
-end;
 ShowNebColor;
-
 end;
 
 procedure Tf_config_display.CGridClick(Sender: TObject);
