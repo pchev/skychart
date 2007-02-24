@@ -556,7 +556,7 @@ type
     savwincol  : array[0..35] of Tcolor;
   {$endif}
     procedure SetButtonImage(button: Integer);
-    function CreateChild(const CName: string; copyactive: boolean; var cfg1 : Tconf_skychart; var cfgp : Tconf_plot; locked:boolean=false):boolean;
+    function CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
     Procedure SyncChild;
     procedure GetLanguage;
@@ -635,8 +635,8 @@ type
     procedure GetTCPInfo(i:integer; var buf:string);
     procedure KillTCPClient(i:integer);
     procedure PrintSetup(Sender: TObject);
-    procedure GetChartConfig(var csc:Tconf_skychart);
-    procedure DrawChart(var csc:Tconf_skychart);
+    procedure GetChartConfig(csc:Tconf_skychart);
+    procedure DrawChart(csc:Tconf_skychart);
     procedure ConfigDBChange(Sender: TObject);
     procedure SaveAndRestart(Sender: TObject);
     procedure InitializeDB(Sender: TObject);
@@ -670,7 +670,7 @@ const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFA
 {$endif}
 
 
-function Tf_main.CreateChild(const CName: string; copyactive: boolean; var cfg1 : Tconf_skychart; var cfgp : Tconf_plot; locked:boolean=false):boolean;
+function Tf_main.CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
 var
   Child : Tf_chart;
   cp: TChildDoc;
@@ -1873,7 +1873,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
 end;
 end;
 
-procedure Tf_main.GetChartConfig(var csc:Tconf_skychart);
+procedure Tf_main.GetChartConfig(csc:Tconf_skychart);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do
