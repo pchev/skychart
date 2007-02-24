@@ -32,7 +32,7 @@ uses u_translation, Math, cu_database, Printers,
   ActnList, StdActns, LResources;
 
 type
-    TScFunc = procedure(var csc:Tconf_skychart) of object;
+    TScFunc = procedure(csc:Tconf_skychart) of object;
     TObjCoord = class(Tobject)
                 jd,ra,dec : double;
                 end;
@@ -119,6 +119,7 @@ type
     Asteroids: TTabSheet;
     AsteroidGrid: TStringGrid;
     SaveDialog1: TSaveDialog;
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -227,6 +228,11 @@ if BtnReset.Visible then begin
 end;
 end;
 
+procedure Tf_calendar.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  initial:=true;
+end;
+
 procedure Tf_calendar.FormDestroy(Sender: TObject);
 begin
 try
@@ -247,7 +253,8 @@ if Fnightvision<>nightvision then begin
 end;
 {$endif}
 if initial then begin
-  date1.JD:=trunc(config.CurJD)+0.5;
+  date1.JD:=jd(config.CurYear,config.CurMonth,config.CurDay,0);
+//  date1.JD:=trunc(config.CurJD+(config.TimeZone-config.DT_UT)/24);
   date2.JD:=date1.JD+5;
   deltajd:=date2.JD-date1.JD;
   time.Time:=config.CurTime/24;
