@@ -939,8 +939,11 @@ try
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
- CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur');
- Screen.Cursors[crRetic]:=CursorImage1.CursorHandle;
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
+    CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur');
+    Screen.Cursors[crRetic]:=CursorImage1.CursorHandle;
+ end
+   else crRetic:=crCross;
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm') then
     compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm');
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm') then
@@ -974,7 +977,7 @@ try
     ToolButtonNightVisionClick(self);
  end;
 except
- on E: Exception do SetLPanel1(E.Message);
+ on E: Exception do SetLPanel1('Initialization error:'+E.Message);
 end;
 end;
 
