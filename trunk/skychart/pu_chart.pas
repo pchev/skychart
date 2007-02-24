@@ -443,7 +443,9 @@ if lock_refresh then exit;
  Image1.height:=clientheight;
  sc.plot.init(Image1.width,Image1.height);
  savebg:=sc.plot.cfgplot.color[0];
- if sc.plot.cfgplot.color[0]=0 then sc.plot.cfgplot.bgcolor:=sc.plot.cfgplot.skycolor[0];
+ if (sc.plot.cfgplot.color[0]<clWhite) and
+    not(sc.plot.cfgplot.AutoSkyColor and (sc.cfgsc.Projpole=AltAz)) then
+    sc.plot.cfgplot.bgcolor:=sc.plot.cfgplot.skycolor[0];
  sc.Refresh;
  sc.plot.cfgplot.color[0]:=savebg;
  Image1.Invalidate;
@@ -454,7 +456,6 @@ if lock_refresh then exit;
     curundo:=lastundo;
     Identlabel.color:=sc.plot.cfgplot.color[0];
     Identlabel.font.color:=sc.plot.cfgplot.color[11];
-//    Panel1.color:=sc.plot.cfgplot.color[0];
     if sc.cfgsc.FindOk then ShowIdentLabel;
     if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
     Image1.Cursor:=ChartCursor;
