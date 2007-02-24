@@ -48,6 +48,7 @@ type
     ConstlFile: TFileNameEdit;
     ConstbFile: TFileNameEdit;
     GroupBox6: TGroupBox;
+    Label5: TLabel;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -830,7 +831,6 @@ begin
  if cplot.autoskycolor then skycolorbox.itemindex:=1
                        else skycolorbox.itemindex:=0;
  panel2.visible:=cplot.autoskycolor;
- panel3.Visible:=not panel2.visible;
  shape8.pen.color:=cplot.skycolor[0];
  shape8.brush.color:=cplot.skycolor[0];
  shape18.pen.color:=cplot.skycolor[1];
@@ -1233,7 +1233,6 @@ procedure Tf_config_display.skycolorboxClick(Sender: TObject);
 begin
 cplot.autoskycolor:=(skycolorbox.itemindex=1);
 panel2.visible:=cplot.autoskycolor;
-panel3.visible:=not panel2.visible;
 end;
 
 procedure Tf_config_display.ShapeSkyMouseUp(Sender: TObject;
