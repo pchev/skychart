@@ -1,7 +1,7 @@
 object f_config_display: Tf_config_display
-  Left = 576
+  Left = 562
   Height = 532
-  Top = 229
+  Top = 105
   Width = 523
   HorzScrollBar.Page = 522
   VertScrollBar.Page = 531
@@ -23,7 +23,7 @@ object f_config_display: Tf_config_display
       Top = 1
       Width = 521
       Align = alClient
-      PageIndex = 3
+      PageIndex = 0
       ShowTabs = False
       object Page1: TPage
         Caption = 'Display'
@@ -543,31 +543,6 @@ object f_config_display: Tf_config_display
             Shape = stSquare
           end
         end
-        object DefColor: TRadioGroup
-          Left = 32
-          Height = 65
-          Top = 218
-          Width = 401
-          AutoFill = True
-          Caption = 'Standard  Color'
-          ChildSizing.LeftRightSpacing = 6
-          ChildSizing.TopBottomSpacing = 6
-          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-          ChildSizing.EnlargeVertical = crsHomogenousChildResize
-          ChildSizing.ShrinkHorizontal = crsScaleChilds
-          ChildSizing.ShrinkVertical = crsScaleChilds
-          ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ChildSizing.ControlsPerLine = 2
-          Columns = 2
-          Items.Strings = (
-            'Default'
-            'Red'
-            'White on Black'
-            'Black on White'
-          )
-          OnClick = DefColorClick
-          TabOrder = 3
-        end
         object bg4: TPanel
           Left = 32
           Height = 38
@@ -641,7 +616,7 @@ object f_config_display: Tf_config_display
           Top = 290
           Width = 401
           Caption = 'Theme'
-          TabOrder = 4
+          TabOrder = 3
           object ThemeList: TComboBox
             Left = 101
             Height = 21
@@ -701,14 +676,62 @@ object f_config_display: Tf_config_display
             TabOrder = 1
           end
         end
+        object GroupBox7: TGroupBox
+          Left = 32
+          Height = 56
+          Top = 222
+          Width = 402
+          Caption = 'Standard Color'
+          TabOrder = 4
+          object BtnDefaultColor: TButton
+            Left = 7
+            Height = 25
+            Top = 7
+            Width = 75
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Default'
+            OnClick = BtnDefaultColorClick
+            TabOrder = 0
+          end
+          object BtnRedColor: TButton
+            Left = 91
+            Height = 25
+            Top = 7
+            Width = 75
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Red'
+            OnClick = BtnRedColorClick
+            TabOrder = 1
+          end
+          object BtnWBColor: TButton
+            Left = 175
+            Height = 25
+            Top = 7
+            Width = 105
+            BorderSpacing.InnerBorder = 4
+            Caption = 'White on Black'
+            OnClick = BtnWBColorClick
+            TabOrder = 2
+          end
+          object BtnBWColor: TButton
+            Left = 289
+            Height = 25
+            Top = 7
+            Width = 105
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Black on White'
+            OnClick = BtnBWColorClick
+            TabOrder = 3
+          end
+        end
       end
       object Page3: TPage
         Caption = 'Deep-sky colour'
         object lblDSOCScheme: TLabel
           Left = 16
-          Height = 13
+          Height = 14
           Top = 24
-          Width = 171
+          Width = 172
           Caption = 'Use a preset colour scheme :'
           Color = clNone
           ParentColor = False
@@ -722,9 +745,9 @@ object f_config_display: Tf_config_display
           TabOrder = 1
           object lblAst: TLabel
             Left = 16
-            Height = 13
+            Height = 14
             Top = 44
-            Width = 52
+            Width = 53
             Caption = 'Asterism'
             Color = clNone
             ParentColor = False
@@ -739,9 +762,9 @@ object f_config_display: Tf_config_display
           end
           object lblSN: TLabel
             Left = 240
-            Height = 13
+            Height = 14
             Top = 44
-            Width = 114
+            Width = 112
             Caption = 'Supernova remnant'
             Color = clNone
             ParentColor = False
@@ -755,16 +778,16 @@ object f_config_display: Tf_config_display
           end
           object lblOCl: TLabel
             Left = 16
-            Height = 13
+            Height = 14
             Top = 64
-            Width = 74
+            Width = 75
             Caption = 'Open cluster'
             Color = clNone
             ParentColor = False
           end
           object lblGCl: TLabel
             Left = 16
-            Height = 13
+            Height = 14
             Top = 84
             Width = 92
             Caption = 'Globular cluster'
@@ -773,36 +796,36 @@ object f_config_display: Tf_config_display
           end
           object lblPNe: TLabel
             Left = 16
-            Height = 13
+            Height = 14
             Top = 104
-            Width = 96
+            Width = 98
             Caption = 'Planetary nebula'
             Color = clNone
             ParentColor = False
           end
           object lblDN: TLabel
             Left = 16
-            Height = 13
+            Height = 14
             Top = 124
-            Width = 69
+            Width = 70
             Caption = 'Dark nebula'
             Color = clNone
             ParentColor = False
           end
           object lblEN: TLabel
             Left = 16
-            Height = 13
+            Height = 14
             Top = 144
-            Width = 95
+            Width = 97
             Caption = 'Emission nebula'
             Color = clNone
             ParentColor = False
           end
           object lblRN: TLabel
             Left = 16
-            Height = 13
+            Height = 14
             Top = 164
-            Width = 98
+            Width = 100
             Caption = 'Reflection nebula'
             Color = clNone
             ParentColor = False
@@ -851,25 +874,25 @@ object f_config_display: Tf_config_display
           end
           object lblGxy: TLabel
             Left = 240
-            Height = 13
+            Height = 14
             Top = 64
-            Width = 39
+            Width = 42
             Caption = 'Galaxy'
             Color = clNone
             ParentColor = False
           end
           object lblGxyCl: TLabel
             Left = 240
-            Height = 13
+            Height = 14
             Top = 84
-            Width = 82
+            Width = 85
             Caption = 'Galaxy cluster'
             Color = clNone
             ParentColor = False
           end
           object lblQ: TLabel
             Left = 240
-            Height = 13
+            Height = 14
             Top = 104
             Width = 43
             Caption = 'Quasar'
@@ -878,18 +901,18 @@ object f_config_display: Tf_config_display
           end
           object lblGL: TLabel
             Left = 240
-            Height = 13
+            Height = 14
             Top = 124
-            Width = 101
+            Width = 100
             Caption = 'Gravitational lens'
             Color = clNone
             ParentColor = False
           end
           object lblNE: TLabel
             Left = 240
-            Height = 28
+            Height = 30
             Top = 144
-            Width = 110
+            Width = 106
             Caption = 'Non-existent/unknown'
             Color = clNone
             ParentColor = False
@@ -932,9 +955,9 @@ object f_config_display: Tf_config_display
           end
           object lblDSOType: TLabel
             Left = 240
-            Height = 13
+            Height = 14
             Top = 24
-            Width = 65
+            Width = 68
             Caption = 'Object type'
             Color = clNone
             Font.Style = [fsBold]
@@ -942,7 +965,7 @@ object f_config_display: Tf_config_display
           end
           object lblDSOColour: TLabel
             Left = 360
-            Height = 13
+            Height = 14
             Top = 24
             Width = 38
             Caption = 'Colour'
@@ -952,9 +975,9 @@ object f_config_display: Tf_config_display
           end
           object lblDSOColourFill: TLabel
             Left = 416
-            Height = 13
+            Height = 14
             Top = 24
-            Width = 22
+            Width = 25
             Caption = 'Fill?'
             Color = clNone
             Font.Style = [fsBold]
@@ -962,9 +985,9 @@ object f_config_display: Tf_config_display
           end
           object Label7: TLabel
             Left = 16
-            Height = 13
+            Height = 14
             Top = 24
-            Width = 65
+            Width = 68
             Caption = 'Object type'
             Color = clNone
             Font.Style = [fsBold]
@@ -972,7 +995,7 @@ object f_config_display: Tf_config_display
           end
           object Label12: TLabel
             Left = 120
-            Height = 13
+            Height = 14
             Top = 24
             Width = 38
             Caption = 'Colour'
@@ -982,9 +1005,9 @@ object f_config_display: Tf_config_display
           end
           object Label13: TLabel
             Left = 176
-            Height = 13
+            Height = 14
             Top = 24
-            Width = 22
+            Width = 25
             Caption = 'Fill?'
             Color = clNone
             Font.Style = [fsBold]
@@ -992,9 +1015,9 @@ object f_config_display: Tf_config_display
           end
           object chkFillAst: TCheckBox
             Left = 176
-            Height = 19
+            Height = 21
             Top = 44
-            Width = 21
+            Width = 23
             Enabled = False
             OnClick = chkFillAstClick
             TabOrder = 0
@@ -1002,89 +1025,89 @@ object f_config_display: Tf_config_display
           end
           object chkFillOCl: TCheckBox
             Left = 176
-            Height = 19
+            Height = 21
             Top = 64
-            Width = 21
+            Width = 23
             OnClick = chkFillOClClick
             TabOrder = 1
           end
           object chkFillGCl: TCheckBox
             Left = 176
-            Height = 19
+            Height = 21
             Top = 84
-            Width = 21
+            Width = 23
             OnClick = chkFillGClClick
             TabOrder = 2
           end
           object chkFillPNe: TCheckBox
             Left = 176
-            Height = 19
+            Height = 21
             Top = 104
-            Width = 21
+            Width = 23
             OnClick = chkFillPNeClick
             TabOrder = 3
           end
           object chkFillDN: TCheckBox
             Left = 176
-            Height = 19
+            Height = 21
             Top = 124
-            Width = 21
+            Width = 23
             OnClick = chkFillDNClick
             TabOrder = 4
           end
           object chkFillEN: TCheckBox
             Left = 176
-            Height = 19
+            Height = 21
             Top = 144
-            Width = 21
+            Width = 23
             OnClick = chkFillENClick
             TabOrder = 5
           end
           object chkFillRN: TCheckBox
             Left = 176
-            Height = 19
+            Height = 21
             Top = 164
-            Width = 21
+            Width = 23
             OnClick = chkFillRNClick
             TabOrder = 6
           end
           object chkFillSN: TCheckBox
             Left = 416
-            Height = 19
+            Height = 21
             Top = 44
-            Width = 21
+            Width = 23
             OnClick = chkFillSNClick
             TabOrder = 7
           end
           object chkFillGxy: TCheckBox
             Left = 416
-            Height = 19
+            Height = 21
             Top = 64
-            Width = 21
+            Width = 23
             OnClick = chkFillGxyClick
             TabOrder = 8
           end
           object chkFillGxyCl: TCheckBox
             Left = 416
-            Height = 19
+            Height = 21
             Top = 84
-            Width = 21
+            Width = 23
             OnClick = chkFillGxyClClick
             TabOrder = 9
           end
           object chkFillQ: TCheckBox
             Left = 416
-            Height = 19
+            Height = 21
             Top = 104
-            Width = 21
+            Width = 23
             OnClick = chkFillQClick
             TabOrder = 10
           end
           object chkFillGL: TCheckBox
             Left = 416
-            Height = 19
+            Height = 21
             Top = 124
-            Width = 21
+            Width = 23
             Enabled = False
             OnClick = chkFillGLClick
             TabOrder = 11
@@ -1092,9 +1115,9 @@ object f_config_display: Tf_config_display
           end
           object chkFillNE: TCheckBox
             Left = 416
-            Height = 19
+            Height = 21
             Top = 144
-            Width = 21
+            Width = 23
             Enabled = False
             OnClick = chkFillNEClick
             TabOrder = 12
@@ -1110,36 +1133,36 @@ object f_config_display: Tf_config_display
           TabOrder = 2
           object Label1: TLabel
             Left = 24
-            Height = 13
+            Height = 14
             Top = 20
-            Width = 135
+            Width = 134
             Caption = 'Low surface brightness'
             Color = clNone
             ParentColor = False
           end
           object Label2: TLabel
             Left = 248
-            Height = 13
+            Height = 14
             Top = 20
-            Width = 138
+            Width = 137
             Caption = 'High surface brightness'
             Color = clNone
             ParentColor = False
           end
           object Label3: TLabel
             Left = 8
-            Height = 13
+            Height = 14
             Top = 69
-            Width = 40
+            Width = 41
             Caption = 'Fainter'
             Color = clNone
             ParentColor = False
           end
           object Label4: TLabel
             Left = 405
-            Height = 13
+            Height = 14
             Top = 69
-            Width = 55
+            Width = 54
             Caption = 'Brighter  '
             Color = clNone
             ParentColor = False
@@ -1147,7 +1170,7 @@ object f_config_display: Tf_config_display
           object NebBrightBar: TTrackBar
             Left = 232
             Height = 31
-            Top = 40
+            Top = 35
             Width = 217
             Frequency = 26
             Max = 255
@@ -1159,7 +1182,7 @@ object f_config_display: Tf_config_display
           object NebGrayBar: TTrackBar
             Left = 8
             Height = 31
-            Top = 40
+            Top = 35
             Width = 209
             Frequency = 26
             Max = 255
