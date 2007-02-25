@@ -1,0 +1,320 @@
+object Form1: TForm1
+  Left = 359
+  Height = 488
+  Top = 105
+  Width = 714
+  HorzScrollBar.Page = 713
+  VertScrollBar.Page = 487
+  ActiveControl = RadioGroup1.RadioButton0
+  Caption = 'VO Demo'
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnShow = FormShow
+  object PageControl1: TPageControl
+    Height = 488
+    Width = 714
+    ActivePage = TabDetail
+    Align = alClient
+    TabIndex = 2
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Registry'
+      ImageIndex = 3
+      object RadioGroup1: TRadioGroup
+        Left = 24
+        Height = 145
+        Top = 40
+        Width = 433
+        AutoFill = True
+        Caption = 'Select Virtual Observatory Registry'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ItemIndex = 0
+        Items.Strings = (
+          'VizieR Catalogue Service'
+          'National Virtual Observatory  STScI VO Registry'
+        )
+        TabOrder = 0
+      end
+      object Button13: TButton
+        Left = 24
+        Height = 25
+        Top = 224
+        Width = 137
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Catalog List'
+        OnClick = Button13Click
+        TabOrder = 1
+      end
+    end
+    object TabCat: TTabSheet
+      Caption = 'Catalog List'
+      object Panel1: TPanel
+        Height = 66
+        Top = 394
+        Width = 712
+        Align = alBottom
+        TabOrder = 0
+        object msg: TLabel
+          Left = 352
+          Height = 13
+          Top = 36
+          Width = 337
+          AutoSize = False
+          Color = clInfoBk
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          ParentColor = False
+          Transparent = False
+        end
+        object Label1: TLabel
+          Left = 352
+          Height = 14
+          Top = 12
+          Width = 42
+          Caption = 'Search'
+          Color = clNone
+          ParentColor = False
+        end
+        object Button11: TButton
+          Left = 8
+          Height = 25
+          Top = 6
+          Width = 153
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Refresh from Server'
+          OnClick = Button11Click
+          TabOrder = 0
+        end
+        object Edit1: TEdit
+          Left = 392
+          Height = 21
+          Top = 8
+          Width = 161
+          TabOrder = 1
+        end
+        object ButtonFind: TButton
+          Left = 560
+          Height = 25
+          Top = 6
+          Width = 49
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Find'
+          OnClick = ButtonFindClick
+          TabOrder = 2
+        end
+        object ButtonNext: TButton
+          Left = 616
+          Height = 25
+          Top = 6
+          Width = 49
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Next'
+          OnClick = ButtonNextClick
+          TabOrder = 3
+        end
+        object Button12: TButton
+          Left = 184
+          Height = 25
+          Top = 6
+          Width = 153
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Select Catalog'
+          OnClick = Button12Click
+          TabOrder = 4
+        end
+        object OnlyCoord: TCheckBox
+          Left = 184
+          Height = 21
+          Top = 33
+          Width = 180
+          Caption = 'Only table with coordinates'
+          Checked = True
+          State = cbChecked
+          TabOrder = 5
+        end
+        object ServerList: TComboBox
+          Left = 8
+          Height = 21
+          Top = 32
+          Width = 153
+          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemHeight = 13
+          MaxLength = 0
+          Style = csDropDownList
+          TabOrder = 6
+        end
+      end
+      object CatList: TStringGrid
+        Height = 394
+        Width = 712
+        Align = alClient
+        ColCount = 4
+        FixedColor = clBtnFace
+        FixedCols = 0
+        GridLineWidth = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect]
+        RowCount = 2
+        ScrollBars = ssAutoBoth
+        TabOrder = 1
+        TabStop = True
+        RowHeights = (
+          24
+          24
+        )
+      end
+    end
+    object TabDetail: TTabSheet
+      Caption = 'Catalog Detail'
+      ImageIndex = 1
+      object PageControl2: TPageControl
+        Height = 460
+        Width = 712
+        Align = alClient
+        TabOrder = 0
+      end
+    end
+    object TabData: TTabSheet
+      Caption = 'Catalog Data'
+      ImageIndex = 2
+      object DataGrid: TStringGrid
+        Height = 419
+        Width = 712
+        Align = alClient
+        ColCount = 5
+        DefaultColWidth = 75
+        FixedColor = clBtnFace
+        GridLineWidth = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing]
+        RowCount = 5
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+        TabStop = True
+        RowHeights = (
+          24
+          24
+          24
+          24
+          24
+        )
+      end
+      object Panel2: TPanel
+        Height = 41
+        Top = 419
+        Width = 712
+        Align = alBottom
+        TabOrder = 1
+        object Label2: TLabel
+          Left = 128
+          Height = 14
+          Top = 12
+          Width = 38
+          Caption = 'Epoch'
+          Color = clNone
+          ParentColor = False
+        end
+        object Label3: TLabel
+          Left = 280
+          Height = 14
+          Top = 12
+          Width = 46
+          Caption = 'System'
+          Color = clNone
+          ParentColor = False
+        end
+        object Label4: TLabel
+          Left = 432
+          Height = 14
+          Top = 12
+          Width = 48
+          Caption = 'Equinox'
+          Color = clNone
+          ParentColor = False
+        end
+        object ep: TEdit
+          Left = 168
+          Height = 21
+          Top = 8
+          Width = 73
+          Color = clBtnFace
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object sys: TEdit
+          Left = 320
+          Height = 21
+          Top = 8
+          Width = 73
+          Color = clBtnFace
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object eq: TEdit
+          Left = 480
+          Height = 21
+          Top = 8
+          Width = 73
+          Color = clBtnFace
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object tn: TEdit
+          Left = 8
+          Height = 21
+          Top = 8
+          Width = 105
+          Color = clBtnFace
+          ReadOnly = True
+          TabOrder = 3
+        end
+        object Button1: TButton
+          Left = 584
+          Height = 25
+          Top = 6
+          Width = 81
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Save to file'
+          OnClick = Button1Click
+          TabOrder = 4
+        end
+      end
+    end
+  end
+  object VO_Catalogs1: TVO_Catalogs
+    ListUrl = 'http://vizier.u-strasbg.fr/cgi-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)'
+    CachePath = '.'
+    left = 672
+  end
+  object VO_Detail1: TVO_Detail
+    BaseUrl = 'http://vizier.u-strasbg.fr/cgi-bin/'
+    CachePath = '.'
+    left = 640
+  end
+  object VO_TableData1: TVO_TableData
+    BaseUrl = 'http://vizier.u-strasbg.fr/cgi-bin/'
+    CachePath = '.'
+    SelectCoord = True
+    FOV = 0.1
+    MaxData = 50
+    left = 608
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer1Timer
+    left = 576
+  end
+  object SaveDialog1: TSaveDialog
+    Title = 'Save file as'
+    FilterIndex = 0
+    left = 544
+  end
+end
