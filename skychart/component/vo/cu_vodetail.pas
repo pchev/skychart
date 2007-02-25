@@ -284,7 +284,7 @@ else if resource and(TagName='FIELD') then begin
    FRecDatatype[Nlist-1].Add(b3);
    FRecUnits[Nlist-1].Add(b4);
    FRecDescription[Nlist-1].Add('');
-   if pos('POS_EQ_RA',FRecUCD[Nlist-1][fieldnum])>0 then Coord:=true;
+   if pos('pos.eq.ra',FRecUCD[Nlist-1][fieldnum])>0 then Coord:=true;
 end;
 end;
 
