@@ -1,26 +1,27 @@
 object f_vodetail: Tf_vodetail
   Left = 836
-  Height = 270
+  Height = 427
   Top = 105
-  Width = 443
-  HorzScrollBar.Page = 442
-  VertScrollBar.Page = 269
+  Width = 759
+  HorzScrollBar.Page = 758
+  VertScrollBar.Page = 426
+  ActiveControl = tn
   Align = alClient
   Caption = 'f_vodetail'
   object MainPanel: TPanel
-    Height = 270
-    Width = 443
+    Height = 427
+    Width = 759
     Align = alClient
     TabOrder = 0
     object Panel1: TPanel
       Left = 1
       Height = 106
-      Top = 163
-      Width = 441
+      Top = 320
+      Width = 757
       Align = alBottom
       TabOrder = 0
       object Table: TLabel
-        Left = 168
+        Left = 151
         Height = 14
         Top = 12
         Width = 32
@@ -29,7 +30,7 @@ object f_vodetail: Tf_vodetail
         ParentColor = False
       end
       object Rows: TLabel
-        Left = 168
+        Left = 151
         Height = 14
         Top = 35
         Width = 33
@@ -65,7 +66,7 @@ object f_vodetail: Tf_vodetail
         ParentColor = False
       end
       object Label4: TLabel
-        Left = 24
+        Left = 7
         Height = 14
         Top = 12
         Width = 19
@@ -74,7 +75,7 @@ object f_vodetail: Tf_vodetail
         ParentColor = False
       end
       object Label5: TLabel
-        Left = 24
+        Left = 7
         Height = 14
         Top = 35
         Width = 28
@@ -83,16 +84,16 @@ object f_vodetail: Tf_vodetail
         ParentColor = False
       end
       object Label6: TLabel
-        Left = 24
+        Left = 7
         Height = 14
-        Top = 56
+        Top = 58
         Width = 28
         Caption = 'FOV'
         Color = clNone
         ParentColor = False
       end
       object Label7: TLabel
-        Left = 168
+        Left = 151
         Height = 14
         Top = 82
         Width = 83
@@ -101,7 +102,7 @@ object f_vodetail: Tf_vodetail
         ParentColor = False
       end
       object Label8: TLabel
-        Left = 168
+        Left = 151
         Height = 14
         Top = 58
         Width = 56
@@ -139,7 +140,7 @@ object f_vodetail: Tf_vodetail
         TabOrder = 2
       end
       object ep: TEdit
-        Left = 592
+        Left = 607
         Height = 21
         Top = 8
         Width = 73
@@ -148,7 +149,7 @@ object f_vodetail: Tf_vodetail
         TabOrder = 3
       end
       object sys: TEdit
-        Left = 592
+        Left = 607
         Height = 21
         Top = 31
         Width = 73
@@ -157,7 +158,7 @@ object f_vodetail: Tf_vodetail
         TabOrder = 4
       end
       object eq: TEdit
-        Left = 592
+        Left = 607
         Height = 21
         Top = 54
         Width = 73
@@ -175,7 +176,7 @@ object f_vodetail: Tf_vodetail
         TabOrder = 6
       end
       object Button1: TButton
-        Left = 24
+        Left = 7
         Height = 22
         Top = 77
         Width = 121
@@ -185,7 +186,7 @@ object f_vodetail: Tf_vodetail
         TabOrder = 7
       end
       object RaDec1: TRaDec
-        Left = 72
+        Left = 55
         Height = 21
         Top = 8
         Width = 74
@@ -198,7 +199,7 @@ object f_vodetail: Tf_vodetail
         value = 0.711666666666667
       end
       object RaDec2: TRaDec
-        Left = 72
+        Left = 55
         Height = 21
         Top = 31
         Width = 71
@@ -212,7 +213,7 @@ object f_vodetail: Tf_vodetail
         value = 41.264166666666668
       end
       object RaDec3: TRaDec
-        Left = 72
+        Left = 55
         Height = 21
         Top = 54
         Width = 71
@@ -244,9 +245,9 @@ object f_vodetail: Tf_vodetail
     end
     object Grid: TStringGrid
       Left = 1
-      Height = 162
+      Height = 319
       Top = 1
-      Width = 441
+      Width = 757
       Align = alClient
       BorderStyle = bsNone
       ColCount = 6
