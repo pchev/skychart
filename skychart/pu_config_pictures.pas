@@ -347,7 +347,7 @@ end;
 
 procedure Tf_config_pictures.backimgChange(Sender: TObject);
 begin
-if LockChange or (not ShowBackImg.Checked) then exit;
+if LockChange or (not Fileexists(backimg.text)) then exit;
 csc.BackgroundImage:=backimg.text;
 Ffits.filename:=csc.BackgroundImage;
 if Ffits.header.coordinate_valid then begin

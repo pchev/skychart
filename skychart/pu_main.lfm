@@ -3219,91 +3219,91 @@ object f_main: Tf_main
         Action = SetupPictures
       end
       object ToolButtonShowPlanets: TToolButton
-        Left = 139
+        Left = 162
         Hint = 'Show Planets'
         Top = 2
         Action = ShowPlanets
         Style = tbsCheck
       end
       object ToolButtonShowAsteroids: TToolButton
-        Left = 162
+        Left = 185
         Hint = 'Show Asteroids'
         Top = 2
         Action = ShowAsteroids
         Style = tbsCheck
       end
       object ToolButtonShowComets: TToolButton
-        Left = 185
+        Left = 208
         Hint = 'Show Comets'
         Top = 2
         Action = ShowComets
         Style = tbsCheck
       end
       object ToolButtonShowMilkyWay: TToolButton
-        Left = 208
+        Left = 231
         Hint = 'Show Milky Way'
         Top = 2
         Action = ShowMilkyWay
         Style = tbsCheck
       end
       object ToolButtonGrid: TToolButton
-        Left = 231
+        Left = 254
         Hint = 'Show Coordinate Grid'
         Top = 2
         Action = Grid
         Style = tbsCheck
       end
       object ToolButtonGridEq: TToolButton
-        Left = 254
+        Left = 277
         Hint = 'Add Equatorial Grid'
         Top = 2
         Action = GridEQ
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLine: TToolButton
-        Left = 277
+        Left = 300
         Hint = 'Show Constellation Line'
         Top = 2
         Action = ShowConstellationLine
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLimit: TToolButton
-        Left = 300
+        Left = 323
         Hint = 'Show Constellation Limit'
         Top = 2
         Action = ShowConstellationLimit
         Style = tbsCheck
       end
       object ToolButtonShowGalacticEquator: TToolButton
-        Left = 323
+        Left = 346
         Hint = 'Show Galactic Equator'
         Top = 2
         Action = ShowGalacticEquator
         Style = tbsCheck
       end
       object ToolButtonShowEcliptic: TToolButton
-        Left = 346
+        Left = 369
         Hint = 'Show Ecliptic'
         Top = 2
         Action = ShowEcliptic
         Style = tbsCheck
       end
       object ToolButtonShowMark: TToolButton
-        Left = 369
+        Left = 392
         Hint = 'Show Mark'
         Top = 2
         Action = ShowMark
         Style = tbsCheck
       end
       object ToolButtonShowLabels: TToolButton
-        Left = 392
+        Left = 415
         Hint = 'Show Labels'
         Top = 2
         Action = ShowLabels
         Style = tbsCheck
       end
       object ToolButtonEditlabels: TToolButton
-        Left = 415
+        Left = 438
         Hint = 'Edit Labels'
         Top = 2
         Action = EditLabels
@@ -3311,53 +3311,60 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
-        Left = 438
+        Left = 461
         Hint = 'Show Object below the horizon'
         Top = 2
         Action = ShowObjectbelowHorizon
         Style = tbsCheck
       end
       object ToolButtonswitchbackground: TToolButton
-        Left = 461
+        Left = 484
         Hint = 'Sky Background Color'
         Top = 2
         Action = switchbackground
         Style = tbsCheck
       end
       object ToolButtonSyncChart: TToolButton
-        Left = 492
+        Left = 515
         Hint = 'Link All Chart'
         Top = 2
         Action = SyncChart
         Style = tbsCheck
       end
       object ToolButtonTrack: TToolButton
-        Left = 515
+        Left = 538
         Hint = 'Track'
         Top = 2
         Action = Track
         Style = tbsCheck
       end
       object ToolButtonswitchstars: TToolButton
-        Left = 546
+        Left = 569
         Hint = 'Change Drawing Mode'
         Top = 2
         Action = switchstars
         Style = tbsCheck
       end
       object ToolButton2: TToolButton
-        Left = 538
+        Left = 561
         Top = 2
         Width = 8
         Caption = 'ToolButton2'
         Style = tbsDivider
       end
       object ToolButton4: TToolButton
-        Left = 484
+        Left = 507
         Top = 2
         Width = 8
         Caption = 'ToolButton4'
         Style = tbsDivider
+      end
+      object ToolButtonBlink: TToolButton
+        Left = 139
+        Hint = 'Blinking Picture'
+        Top = 2
+        Action = BlinkImage
+        Style = tbsCheck
       end
     end
   end
@@ -4602,6 +4609,14 @@ object f_main: Tf_main
       DisableIfNoHandler = True
       OnExecute = SetupCatalogExecute
     end
+    object BlinkImage: TAction
+      Category = 'chart'
+      Caption = 'BlinkImage'
+      DisableIfNoHandler = True
+      Hint = 'Blinking Picture'
+      ImageIndex = 86
+      OnExecute = BlinkImageExecute
+    end
   end
   object SaveDialog: TSaveDialog
     Title = 'Save file as'
@@ -4626,7 +4641,7 @@ object f_main: Tf_main
     left = 280
     top = 160
     Bitmap = {
-      6C69560000001000000010000000600200002F2A2058504D202A2F0A73746174
+      6C69570000001000000010000000600200002F2A2058504D202A2F0A73746174
       69632063686172202A677261706869635B5D203D207B0A223136203136203136
       2031222C0A222E2063204E6F6E65222C0A222C20632023423539344546222C0A
       222D20632023364236423943222C0A222A20632023423538434537222C0A2261
@@ -7133,7 +7148,20 @@ object f_main: Tf_main
       2020202C3B3B3B3B3B3B2740272C2020222C0A22202020273B3B3B3B3B274027
       40272020222C0A222020202C3B3B3B3B27402740272C2020222C0A2220202027
       2C272C272C272C272C272020222C0A2220202020202020202020202020202020
-      227D3B0A
+      227D3B0AAD0100002F2A2058504D202A2F0A7374617469632063686172202A20
+      6938365F78706D5B5D203D207B0A22313620313620342031222C0A2220096320
+      4E6F6E65222C0A222E09632023443045363031222C0A222B0963202330313031
+      3031222C0A224009632023464646463031222C0A22202020202020202E202020
+      2020202020222C0A22202020202020202E2020202020202020222C0A2220202E
+      20202E2E2E2E2E20202E202020222C0A222020202E2E2E2E2E2E2E2E2E202020
+      20222C0A222020202E2E2E2B2B2B2E2E2E20202020222C0A2220202E2E2E2B20
+      2E202B2E2E2E202020222C0A2220202E2E2B202E202E202B2E2E202020222C0A
+      222E2E2E2E2B2E2040202E2B2E2E2E2E20222C0A2220202E2E2B202E402E202B
+      2E2E202020222C0A2220202E2E2E2B2040202B2E2E2E202020222C0A22202020
+      2E2E2E2B202B2E2E2E20202020222C0A222020202E2E2E2B2E2B2E2E2E202020
+      20222C0A2220202E20202E2B2B2B2E20202E202020222C0A222020202020202B
+      202B20202020202020222C0A222020202020202B2B2B20202020202020222C0A
+      22202020202020202B2020202020202020227D3B0A
     }
   end
   object PopupMenu1: TPopupMenu

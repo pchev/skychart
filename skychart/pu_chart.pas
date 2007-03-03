@@ -62,6 +62,7 @@ type
     RemoveAllLabel1: TMenuItem;
     RefreshTimer: TTimer;
     ActionList1: TActionList;
+    BlinkTimer: TTimer;
     VertScrollBar: TScrollBar;
     HorScrollBar: TScrollBar;
     zoomplus: TAction;
@@ -108,6 +109,7 @@ type
     TrackOff1: TMenuItem;
     procedure About1Click(Sender: TObject);
     procedure AddLabel1Click(Sender: TObject);
+    procedure BlinkTimerTimer(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -170,7 +172,6 @@ type
     FListInfo: Tstr1func;
     FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
-    ChartCursor: TCursor;
     xcursor,ycursor,skipmove : integer;
     MovingCircle,FNightVision,StartCircle,lockkey: Boolean;
     SaveColor: Starcolarray;
@@ -194,6 +195,7 @@ type
   public
     { Public declarations }
     Image1 : TChartDrawingControl;
+    ChartCursor: TCursor;
     sc: Tskychart;
     indi1: TIndiClient;
     locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar :boolean;
@@ -349,11 +351,7 @@ begin
  validundo:=0;
  LockKeyboard:=false;
  LockTrackCursor:=false;
- {$ifdef win32}
- ChartCursor := crRetic;
- {$else}
  ChartCursor:=crRetic;
- {$endif}
  Image1.Cursor := ChartCursor;
  lock_refresh:=false;
  MovingCircle:=false;
@@ -1509,6 +1507,14 @@ var ra,dec: double;
 begin
 GetAdXy(Xcursor,Ycursor,ra,dec,sc.cfgsc);
 sc.AddNewLabel(ra,dec);
+end;
+
+procedure Tf_chart.BlinkTimerTimer(Sender: TObject);
+begin
+  BlinkTimer.Enabled:=false;
+  sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
+  Refresh;
+  BlinkTimer.Enabled:=true;
 end;
 
 procedure Tf_chart.identlabelClick(Sender: TObject);

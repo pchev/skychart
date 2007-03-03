@@ -387,6 +387,10 @@ msgstr "Negro/Blanco"
 msgid "Black/White, Line mode"
 msgstr "Negro/Blanco, Modo línea"
 
+#: u_translation:rsblinkingpict
+msgid "Blinking Picture"
+msgstr ""
+
 #: u_translation:rsblue
 msgid "Blue"
 msgstr "Azul"

@@ -82,7 +82,9 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    BlinkImage: TAction;
     ReleaseNotes1: TMenuItem;
+    ToolButtonBlink: TToolButton;
     ViewScrollBar1: TMenuItem;
     ResetAllLabels1: TMenuItem;
     PopupMenu1: TPopupMenu;
@@ -415,6 +417,7 @@ type
     TelescopePanel: TAction;
     ControlPanel1: TMenuItem;
     ViewFullScreen: TAction;
+    procedure BlinkImageExecute(Sender: TObject);
     procedure BugReport1Click(Sender: TObject);
     procedure FileClose1Execute(Sender: TObject);
     procedure FileNew1Execute(Sender: TObject);
@@ -1585,6 +1588,24 @@ if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
 end;
 end;
 
+procedure Tf_main.BlinkImageExecute(Sender: TObject);
+begin
+if (MultiDoc1.ActiveObject is Tf_chart)
+  then with MultiDoc1.ActiveObject as Tf_chart do begin
+     if BlinkTimer.enabled then begin
+        BlinkTimer.enabled:=false;
+        sc.cfgsc.ShowBackgroundImage:=true;
+        Refresh;
+     end else begin
+        if sc.cfgsc.ShowBackgroundImage then
+           BlinkTimer.enabled:=true
+        else begin
+           BlinkTimer.enabled:=false;
+           ToolButtonBlink.Down:=false;
+        end;
+     end;
+  end;
+end;
 
 procedure Tf_main.SyncChartExecute(Sender: TObject);
 begin
@@ -4020,6 +4041,7 @@ ToolButtonShowStars.hint:=rsShowStars;
 ToolButtonShowNebulae.hint:=rsShowNebulae;
 ToolButtonShowLines.hint:=rsShowLines;
 ToolButtonShowPictures.hint:=rsShowPictures;
+ToolButtonBlink.hint:=rsBlinkingPict;
 ToolButtonDSS.hint:=rsGetDSSImage;
 ToolButtonShowBackgroundImage.hint:=rsChangePictur;
 ToolButtonShowPlanets.hint:=rsShowPlanets;
@@ -4322,6 +4344,7 @@ if MultiDoc1.ActiveObject=sender then begin
     ShowObjectbelowthehorizon1.checked:=not sc.cfgsc.horizonopaque;
     ToolButtonswitchbackground.down:= sc.plot.cfgplot.autoskycolor;
     ToolButtonswitchbackground.Enabled:=(sc.cfgsc.Projpole=altaz);
+    ToolButtonBlink.Down:=BlinkTimer.enabled;
     ToolButtonSyncChart.down:=cfgm.SyncChart;
     ToolButtonTrack.down:=sc.cfgsc.TrackOn;
     if sc.cfgsc.TrackOn then
@@ -4872,8 +4895,14 @@ begin
     SetButtonImage(cfgm.ButtonStandard);
 
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur') then begin
+   CursorImage1.FreeImage;
+   CursorImage1:=TCursorImage.Create;
    CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur');
+   inc(crRetic);
    Screen.Cursors[crRetic]:=CursorImage1.CursorHandle;
+   for i:=0 to MultiDoc1.ChildCount-1 do
+        if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+           Tf_chart(MultiDoc1.Childs[i].DockedObject).ChartCursor:=crRetic;
  end;
 
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.xpm') then begin
