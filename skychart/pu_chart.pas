@@ -1524,7 +1524,7 @@ end;
 function Tf_chart.FormatDesc:string;
 var desc,buf,buf2,otype,oname,txt: string;
     thr,tht,ths,tazr,tazs: string;
-    i,p,l,y,m,d : integer;
+    i,p,l,y,m,d,precision : integer;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des :double;
 function Bold(s:string):string;
 var k:integer;
@@ -1546,6 +1546,12 @@ p:=pos(tab,desc);
 p:=pos2(tab,desc,p+1);
 l:=pos2(tab,desc,p+1);
 otype:=trim(copy(desc,p+1,l-p-1));
+if trim(otype)='*' then precision:=3
+else if trim(otype)='As' then precision:=3
+else if trim(otype)='Cm' then precision:=1
+else if trim(otype)='P' then precision:=1
+else if trim(otype)='Ps' then precision:=1
+else precision:=0;
 buf:=LongLabelObj(otype);
 txt:=txt+html_h2+buf+htms_h2;
 buf:=copy(desc,l+1,9999);
@@ -1572,24 +1578,24 @@ repeat
 until buf='';
 // coordinates
 txt:=txt+html_br+html_b+rsCoordinates+htms_b+html_br{+html_ffx};
-txt:=txt+html_b+sc.cfgsc.EquinoxName+blank+htms_b+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec)+html_br;
+txt:=txt+html_b+sc.cfgsc.EquinoxName+blank+htms_b+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec,precision)+html_br;
 if (sc.cfgsc.EquinoxName<>'J2000') then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-   txt:=txt+html_b+'J2000'+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra/15)+'   '+rsDE+':'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+'J2000'+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dec,precision)+html_br;
 end;
 if (sc.cfgsc.EquinoxName<>rsDate) then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
-   txt:=txt+html_b+rsDate+blank+htms_b+rsRA+': '+arptostr(rad2deg*ra/15)+'   '+rsDE+':'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+rsDate+blank+htms_b+rsRA+': '+arptostr(rad2deg*ra/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dec,precision)+html_br;
 end;
 if (sc.cfgsc.EquinoxName=rsDate)and(sc.catalog.cfgshr.EquinoxChart<>'J2000')and(sc.cfgsc.EquinoxName<>sc.catalog.cfgshr.EquinoxChart) then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDec;
    precession(sc.cfgsc.JDChart,sc.catalog.cfgshr.DefaultJDchart,ra,dec);
-   txt:=txt+html_b+sc.catalog.cfgshr.EquinoxChart+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra/15)+'   '+rsDE+':'+deptostr(rad2deg*dec)+html_br;
+   txt:=txt+html_b+sc.catalog.cfgshr.EquinoxChart+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dec,precision)+html_br;
 end;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;

@@ -67,8 +67,8 @@ Function DEmToStr(de: Double) : string;
 Function DEdToStr(de: Double) : string;
 Function DEToStrmin(de: Double) : string;
 Function ARmtoStr(ar: Double) : string;
-Function DEpToStr(de: Double) : string;
-Function ARptoStr(ar: Double) : string;
+Function DEpToStr(de: Double; precision:integer=1) : string;
+Function ARptoStr(ar: Double; precision:integer=1) : string;
 Function TimToStr(tim: Double) : string;
 Function YearADBC(year : integer) : string;
 Function Date2Str(y,m,d:integer):string;
@@ -572,7 +572,7 @@ begin
     result := d+'h'+m+'m'+s+'s';
 end;
 
-Function DEpToStr(de: Double) : string;
+Function DEpToStr(de: Double; precision:integer=1) : string;
 var dd,min1,min,sec: Double;
     d,m,s : string;
 begin
@@ -593,12 +593,12 @@ begin
     if de<0 then d:='-'+d else d:='+'+d;
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
-    str(sec:4:1,s);
+    str(sec:4:precision,s);
     if abs(sec)<9.95 then s:='0'+trim(s);
     result := d+ldeg+m+lmin+s+lsec;
 end;
 
-Function ARpToStr(ar: Double) : string;
+Function ARpToStr(ar: Double; precision:integer=1) : string;
 var dd,min1,min,sec: Double;
     d,m,s : string;
 begin
@@ -619,7 +619,7 @@ begin
     if dd<0 then d:='-'+d else d:=blank+d;
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
-    str(sec:5:2,s);
+    str(sec:5:precision+1,s);
     if abs(sec)<9.995 then s:='0'+trim(s);
    result := d+'h'+m+'m'+s+'s';
 end;
