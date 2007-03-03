@@ -797,17 +797,126 @@ result:=deg2rad*result;
 end;
 
 procedure nutation(j:double; var nutl,nuto:double);
-var t,ls,lm,om : double;
+var t,om,me,mas,mam,al : double;
 begin
 t:=(j-jd2000)/36525;
-// low precision.  todo: use table 21.A
-om:=deg2rad*(125.04452-1934.136261*t);
-ls:=deg2rad*(280.4665+36000.7698*t);
-lm:=deg2rad*(218.3165+481267.8813*t);
-nutl:=secarc*(-17.20*sin(om)-1.32*sin(2*ls)-0.23*sin(2*lm)+0.21*sin(2*om));
-nuto:=secarc*(9.20*cos(om)+0.57*cos(2*ls)+0.10*cos(2*lm)-0.09*cos(2*om));
+// high precision. using meeus91 table 21.A
+//longitude of the asc.node of the Moon's mean orbit on the ecliptic
+om:=deg2rad*(125.04452-1934.136261*t+0.0020708*t*t+t*t*t/4.5e+5);
+//mean elongation of the Moon from Sun
+me:=deg2rad*(297.85036+445267.11148*t-0.0019142*t*t+t*t*t/189474);
+//mean anomaly of the Sun (Earth)
+mas:=deg2rad*(357.52772+35999.05034*t-1.603e-4*t*t-t*t*t/3e+5);
+//mean anomaly of the Moon
+mam:=deg2rad*(134.96298+477198.867398*t+0.0086972*t*t+t*t*t/56250);
+//Moon's argument of latitude
+al:=deg2rad*(93.27191+483202.017538*t- 0.0036825*t*t+t*t*t/327270);
+//periodic terms for the nutation in longitude.The unit is 0".0001.
+nutl:=secarc*((-171996-174.2*t)*sin(1*om)
+                +(-13187-1.6*t)*sin(-2*me+2*al+2*om)
+                +(-2274-0.2*t)*sin(2*al+2*om)
+                +(2062+0.2*t)*sin(2*om)
+                +(1426-3.4*t)*sin(1*mas)
+                +(712+0.1*t)*sin(1*mam)
+                +(-517+1.2*t)*sin(-2*me+1*mas+2*al+2*om)
+                +(-386-0.4*t)*sin(2*al+1*om)
+                -301*sin(1*mam+2*al+2*om)
+                +(217-0.5*t)*sin(-2*me-1*mas+2*al+2*om)
+                -158*sin(-2*me+1*mam)
+                +(129+0.1*t)*sin(-2*me+2*al+1*om)
+                +123*sin(-1*mam+2*al+2*om)
+                +63*sin(2*me)
+                +(63+0.1*t)*sin(1*mam+1*om)
+                -59*sin(2*me-1*mam+2*al+2*om)
+                +(-58-0.1*t)*sin(-1*mam+1*om)
+                -51*sin(1*mam+2*al+1*om)
+                +48*sin(-2*me+2*mam)
+                +46*sin(-2*mam+2*al+1*om)
+                -38*sin(2*me+2*al+2*om)
+                -31*sin(2*mam+2*al+2*om)
+                +29*sin(2*mam)
+                +29*sin(-2*me+1*mam+2*al+2*om)
+                +26*sin(2*al)
+                -22*sin(-2*me+2*al)
+                +21*sin(-1*mam+2*al+1*om)
+                +(17-0.1*t)*sin(2*mas)
+                +16*sin(2*me-1*mam+1*om)
+                -16*sin(-2*me+2*mas+2*al+2*om)
+                -15*sin(1*mas+1*om)
+                -13*sin(-2*me+1*mam+1*om)
+                -12*sin(-1*mas+1*om)
+                +11*sin(2*mam-2*al)
+                -10*sin(2*me-1*mam+2*al+1*om)
+                -8*sin(2*me+1*mam+2*al+2*om)
+                +7*sin(1*mas+2*al+2*om)
+                -7*sin(-2*me+1*mas+1*mam)
+                -7*sin(-1*mas+2*al+2*om)
+                -7*sin(2*me+2*al+1*om)
+                +6*sin(2*me+1*mam)
+                +6*sin(-2*me+2*mam+2*al+2*om)
+                +6*sin(-2*me+1*mam+2*al+1*om)
+                -6*sin(2*me-2*mam+1*om)
+                -6*sin(2*me+1*om)
+                +5*sin(-1*mas+1*mam)
+                -5*sin(-2*me-1*mas+2*al+1*om)
+                -5*sin(-2*me+1*om)
+                -5*sin(2*mam+2*al+1*om)
+                +4*sin(-2*me+2*mam+1*om)
+                +4*sin(-2*me+1*mas+2*al+1*om)
+                +4*sin(1*mam-2*al)
+                -4*sin(-1*me+1*mam)
+                -4*sin(-2*me+1*mas)
+                -4*sin(1*me)
+                +3*sin(1*mam+2*al)
+                -3*sin(-2*mam+2*al+2*om)
+                -3*sin(-1*me-1*mas+1*mam)
+                -3*sin(1*mas+1*mam)
+                -3*sin(-1*mas+1*mam+2*al+2*om)
+                -3*sin(2*me-1*mas-1*mam+2*al+2*om)
+                -3*sin(3*mam+2*al+2*om)
+                -3*sin(2*me-1*mas+2*al+2*om));
+nutl:=nutl*0.0001;
+// periodic terms for the nutation in obliquity
+nuto:=secarc*((92025+8.9*t)*cos(1*om)
+                +(5736-3.1*t)*cos(-2*me+2*al+2*om)
+                +(977-0.5*t)*cos(2*al+2*om)
+                +(-895+0.5*t)*cos(2*om)
+                +(54-0.1*t)*cos(1*mas)
+                -7*cos(1*mam)
+                +(224-0.6*t)*cos(-2*me+1*mas+2*al+2*om)
+                +200*cos(2*al+1*om)
+                +(129-0.1*t)*cos(1*mam+2*al+2*om)
+                +(-95+0.3*t)*cos(-2*me+-1*mas+2*al+2*om)
+                -70*cos(-2*me+2*al+1*om)
+                -53*cos(-1*mam+2*al+2*om)
+                -33*cos(1*mam+1*om)
+                +26*cos(2*me+-1*mam+2*al+2*om)
+                +32*cos(-1*mam+1*om)
+                +27*cos(1*mam+2*al+1*om)
+                -24*cos(-2*mam+2*al+1*om)
+                +16*cos(2*me+2*al+2*om)
+                +13*cos(2*mam+2*al+2*om)
+                -12*cos(-2*me+1*mam+2*al+2*om)
+                -10*cos(-1*mam+2*al+1*om)
+                 -8*cos(2*me-1*mam+1*om)
+                 +7*cos(-2*me+2*mas+2*al+2*om)
+                 +9*cos(1*mas+1*om)
+                 +7*cos(-2*me+1*mam+1*om)
+                 +6*cos(-1*mas+1*om)
+                 +5*cos(2*me-1*mam+2*al+1*om)
+                 +3*cos(2*me+1*mam+2*al+2*om)
+                 -3*cos(1*mas+2*al+2*om)
+                 +3*cos(-1*mas+2*al+2*om)
+                 +3*cos(2*me+2*al+1*om)
+                 -3*cos(-2*me+2*mam+2*al+2*om)
+                 -3*cos(-2*me+1*mam+2*al+1*om)
+                 +3*cos(2*me-2*mam+1*om)
+                 +3*cos(2*me+1*om)
+                 +3*cos(-2*me-1*mas+2*al+1*om)
+                 +3*cos(-2*me+1*om)
+                 +3*cos(2*mam+2*al+1*om));
+nuto:=nuto*0.0001;
 end;
-
 
 procedure aberration(j:double; var abe,abp:double);
 var t : double;
