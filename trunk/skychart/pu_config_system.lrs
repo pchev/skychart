@@ -8,7 +8,7 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +'oy'#6'OnShow'#7#8'FormShow'#0#6'TPanel'#9'MainPanel'#4'Left'#2#8#6'Height'#3
   +#224#1#3'Top'#2#8#5'Width'#3#244#1#11'ParentColor'#8#8'TabOrder'#2#0#0#9'TNo'
   +'tebook'#9'Notebook1'#4'Left'#2#1#6'Height'#3#222#1#3'Top'#2#1#5'Width'#3#242
-  +#1#5'Align'#7#8'alClient'#9'PageIndex'#2#2#8'ShowTabs'#8#0#5'TPage'#5'Page1'
+  +#1#5'Align'#7#8'alClient'#9'PageIndex'#2#3#8'ShowTabs'#8#0#5'TPage'#5'Page1'
   +#7'Caption'#6#5'Page1'#0#6'TLabel'#8'Label153'#6'Height'#2#14#5'Width'#2'['#7
   +'Caption'#6#14'System Setting'#5'Color'#7#6'clNone'#11'ParentColor'#8#0#0#9
   +'TGroupBox'#8'MysqlBox'#4'Left'#2#17#6'Height'#2'a'#3'Top'#2';'#5'Width'#3

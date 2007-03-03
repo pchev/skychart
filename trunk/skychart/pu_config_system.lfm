@@ -24,7 +24,7 @@ object f_config_system: Tf_config_system
       Top = 1
       Width = 498
       Align = alClient
-      PageIndex = 2
+      PageIndex = 3
       ShowTabs = False
       object Page1: TPage
         Caption = 'Page1'
