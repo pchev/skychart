@@ -388,6 +388,10 @@ msgstr "Чёрно-белое"
 msgid "Black/White, Line mode"
 msgstr "Чёрно-белое, метод линий"
 
+#: u_translation:rsblinkingpict
+msgid "Blinking Picture"
+msgstr ""
+
 #: u_translation:rsblue
 msgid "Blue"
 msgstr "Голубой"

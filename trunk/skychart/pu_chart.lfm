@@ -321,4 +321,10 @@ object f_chart: Tf_chart
     left = 304
     top = 152
   end
+  object BlinkTimer: TTimer
+    Enabled = False
+    OnTimer = BlinkTimerTimer
+    left = 304
+    top = 202
+  end
 end
