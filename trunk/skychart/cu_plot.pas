@@ -1480,11 +1480,11 @@ with cnv do begin
       mask.Canvas.Pen.Color:=clBlack;
       mask.Canvas.Brush.Color:=clBlack;
       mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
-      mask.Canvas.Pen.Color:=$202000;
-      mask.Canvas.Brush.Color:=$202000;
+      mask.Canvas.Pen.Color:=$080800;
+      mask.Canvas.Brush.Color:=$080800;
       mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
-      mask.Canvas.Pen.Color:=$808000;
-      mask.Canvas.Brush.Color:=$808000;
+      mask.Canvas.Pen.Color:=$606000;
+      mask.Canvas.Brush.Color:=$606000;
       mask.Canvas.Ellipse(xm-ds1,ym-ds1,xm+ds1,ym+ds1);
       // substract the shadow
       BitmapSubstract(mbmp,mask);
