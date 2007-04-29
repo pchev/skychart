@@ -155,12 +155,20 @@ type
   
 { TTimePicker }
 type
-  TTimePicker = class(TMaskEdit)
+  TTimePicker = class(TCustomPanel)
   // minimal DateTimePicker
   private
     { Private declarations }
+    EditH, EditM, EditS : TEdit;
+    LabelH, LabelM : TLabel;
+    lockchange:boolean;
+    FOnChange: TNotifyEvent;
+    procedure Paint; override;
+    procedure EditChange(Sender: TObject);
     procedure SetTime(Value: TDateTime);
     function ReadTime: TDateTime;
+    procedure SetEnabled(value:boolean);
+    function GetEnabled: boolean;
   public
     { Public declarations }
      constructor Create(Aowner:Tcomponent); override;
@@ -168,6 +176,18 @@ type
   published
     { Published declarations }
      property Time : TDateTime read ReadTime write SetTime;
+     property OnChange: TNotifyEvent read FOnChange write FOnChange;
+     property Enabled: boolean Read GetEnabled Write SetEnabled;
+     property Font;
+     property Hint;
+     property ParentColor;
+     property ParentFont;
+     property ParentShowHint;
+     property PopupMenu;
+     property ShowHint;
+     property TabOrder;
+     property TabStop;
+     property Visible;
   end;
 
 
@@ -742,11 +762,53 @@ end;
 { TTimePicker }
 
 constructor TTimePicker.Create(Aowner:Tcomponent);
+var dsize,lsize: Integer;
 begin
 inherited create(Aowner);
-EditMask:='!99:99:99;1; ';
-Text:='';
-Width:=75;
+lockchange:=true;
+Caption:='';
+BevelOuter:=bvNone;
+dsize:=25;
+lsize:=10;
+EditH := TEdit.Create(self);
+EditM := TEdit.Create(self);
+EditS:= TEdit.Create(self);
+LabelH := TLabel.Create(self);
+LabelM := TLabel.Create(self);
+EditH.Parent:=self;
+EditM.Parent:=self;
+EditS.Parent:=self;
+LabelH.Parent:=self;
+LabelM.Parent:=self;
+EditH.ParentFont:=true;
+EditM.ParentFont:=true;
+EditS.ParentFont:=true;
+LabelH.ParentFont:=true;
+LabelM.ParentFont:=true;
+EditH.Text:='0';
+EditH.Top:=0;
+EditH.Left:=0;
+EditH.Width:=dsize;
+LabelH.Caption:=':';
+LabelH.Top:=(EditH.Height-LabelH.Height) div 2;
+LabelH.Left:=EditH.Left+EditH.Width+2;
+EditM.Text:='0';
+EditM.Top:=0;
+EditM.Left:=LabelH.Left+lsize;
+EditM.Width:=dsize;
+LabelM.Caption:=':';
+LabelM.Top:=LabelH.Top;
+LabelM.Left:=EditM.Left+EditM.Width+2;
+EditS.Text:='0';
+EditS.Top:=0;
+EditS.Left:=LabelM.Left+lsize;
+EditS.Width:=dsize;
+Height:=EditH.Height;
+Width:=EditS.Left+EditS.Width+2;
+EditH.OnChange:=@EditChange;
+EditM.OnChange:=@EditChange;
+EditS.OnChange:=@EditChange;
+lockchange:=false;
 settime(now);
 end;
 
@@ -755,14 +817,59 @@ begin
 inherited destroy;
 end;
 
+function FixNum(txt: string; maxl:integer): string;
+var i:integer;
+    c:string;
+begin
+result:='';
+for i:=1 to length(txt) do begin
+  c:=copy(txt,i,1);
+  if ((c>='0')and(c<='9'))
+     then result:=result+c;
+  if length(result)>=maxl then break;
+end;
+end;
+
 procedure TTimePicker.SetTime(Value: TDateTime);
 begin
-Text:=formatdatetime('hh:nn:ss',Value);
+EditH.Text:=formatdatetime('hh',Value);
+EditM.Text:=formatdatetime('mm',Value);
+EditS.Text:=formatdatetime('ss',Value);
 end;
 
 function TTimePicker.ReadTime: TDateTime;
+var val,h,m,s: string;
 begin
-result:=strtotime(Text);
+EditH.Text:=FixNum(EditH.Text,2);
+EditM.Text:=FixNum(EditM.Text,2);
+EditS.Text:=FixNum(EditS.Text,2);
+val:=trim(EditH.Text)+':'+trim(EditM.Text)+':'+trim(EditS.Text);
+result:=strtotime(val);
+end;
+
+procedure TTimePicker.Paint;
+begin
+caption:='';
+inherited Paint;
+end;
+
+procedure TTimePicker.EditChange(Sender: TObject);
+begin
+if (not lockchange) and assigned(FOnChange) then FOnChange(self);
+end;
+
+procedure TTimePicker.SetEnabled(value:boolean);
+begin
+EditH.Enabled:=value;
+EditM.Enabled:=value;
+EditS.Enabled:=value;
+LabelH.Enabled:=value;
+LabelM.Enabled:=value;
+end;
+
+function TTimePicker.GetEnabled: boolean;
+begin
+result:=EditH.Enabled;
 end;
 
 initialization
