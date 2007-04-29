@@ -27,7 +27,7 @@ interface
 
 uses u_translation, u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, unzip,
-  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, MaskEdit,
+  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
   downloaddialog, EditBtn, Process;
 
 type
@@ -36,6 +36,13 @@ type
 
   Tf_config_solsys = class(TForm)
     CheckBoxPluto: TCheckBox;
+    comt_y: TEdit;
+    comt_m: TEdit;
+    comt_d: TEdit;
+    astdeldate_y: TEdit;
+    astdeldate_m: TEdit;
+    aststrtdate_y: TEdit;
+    aststrtdate_m: TEdit;
     Label3: TLabel;
     XplanetMsg: TLabel;
     TransparentPlanet: TCheckBox;
@@ -117,7 +124,6 @@ type
     comnam: TEdit;
     comeq: TEdit;
     AddCom: TButton;
-    comt: TMaskEdit;
     AstPageControl: TPageControl;
     astsetting: TTabSheet;
     GroupBox9: TGroupBox;
@@ -145,7 +151,6 @@ type
     GroupBox8: TGroupBox;
     Label7: TLabel;
     Label207: TLabel;
-    aststrtdate: TMaskEdit;
     AstCompute: TButton;
     astnummonth: TSpinEdit;
     prepastmemo: TMemo;
@@ -160,7 +165,6 @@ type
     delastMemo: TMemo;
     GroupBox12: TGroupBox;
     Label214: TLabel;
-    astdeldate: TMaskEdit;
     deldateast: TButton;
     AddsingleAst: TTabSheet;
     Label217: TLabel;
@@ -452,8 +456,10 @@ showast.checked:=csc.ShowAsteroid;
 astsymbol.itemindex:=csc.AstSymbol;
 astlimitmag.value:=csc.AstmagMax;
 astmagdiff.value:=csc.AstmagDiff;
-aststrtdate.text:=inttostr(csc.curyear)+'.'+inttostr(csc.curmonth);
-astdeldate.text:=inttostr(csc.curyear-1)+'.'+inttostr(csc.curmonth);
+aststrtdate_y.text:=inttostr(csc.curyear);
+aststrtdate_m.text:=inttostr(csc.curmonth);
+astdeldate_y.text:=inttostr(csc.curyear-1);
+astdeldate_m.text:=inttostr(csc.curmonth);
 if csc.ShowAsteroid then UpdAstList;
 mpcfile.InitialDir:=slash(privatedir)+slash('MPC');
 end;
@@ -740,7 +746,7 @@ procedure Tf_config_solsys.AddComClick(Sender: TObject);
 var
   msg :string;
 begin
-msg:=cdb.AddCom(comid.text,comt.text,comep.text,comq.text,comec.text,comperi.text,comnode.text,comi.text,comh.text,comg.text,comnam.text,comeq.text);
+msg:=cdb.AddCom(comid.text,trim(comt_y.text)+'.'+trim(comt_m.text)+'.'+trim(comt_d.text),comep.text,comq.text,comec.text,comperi.text,comnode.text,comi.text,comh.text,comg.text,comnam.text,comeq.text);
 UpdComList;
 if msg<>'' then Showmessage(msg);
 end;
@@ -810,9 +816,8 @@ try
 screen.cursor:=crHourGlass;
 prepastmemo.clear;
 if assigned(FPrepareAsteroid) then begin
-i:=pos('.',aststrtdate.text);
-y:=strtoint(trim(copy(aststrtdate.text,1,i-1)));
-m:=strtoint(trim(copy(aststrtdate.text,i+1,99)));
+y:=strtoint(trim(aststrtdate_y.text));
+m:=strtoint(trim(aststrtdate_m.text));
 for i:=1 to astnummonth.value do begin
   jdt:=jd(y,m,1,0);
   if not FPrepareAsteroid(jdt,prepastmemo.lines) then begin
@@ -848,7 +853,7 @@ end;
 procedure Tf_config_solsys.deldateastClick(Sender: TObject);
 begin
 screen.cursor:=crHourGlass;
-cdb.DelAstDate(astdeldate.text, delastMemo);
+cdb.DelAstDate(trim(astdeldate_y.text)+'.'+trim(astdeldate_m.text), delastMemo);
 screen.cursor:=crDefault;
 end;
 
