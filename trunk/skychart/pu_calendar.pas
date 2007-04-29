@@ -54,6 +54,7 @@ type
     SatChartBox:TCheckBox;
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
+    Time: TTimePicker;
     TLEListBox:TFileListBox;
     maglimit:TFloatEdit;
     magchart:TFloatEdit;
@@ -81,7 +82,6 @@ type
     SatPanel: TPanel;
     Label9: TLabel;
     PageControl1: TPageControl;
-    Time: TTimePicker;
     tle1: TEdit;
     twilight: TTabSheet;
     TwilightGrid: TStringGrid;

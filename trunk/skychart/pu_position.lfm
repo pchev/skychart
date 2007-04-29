@@ -1,10 +1,10 @@
 object f_position: Tf_position
   Left = 437
-  Height = 223
+  Height = 282
   Top = 105
-  Width = 313
-  HorzScrollBar.Page = 312
-  VertScrollBar.Page = 222
+  Width = 477
+  HorzScrollBar.Page = 476
+  VertScrollBar.Page = 281
   ActiveControl = Button1
   BorderStyle = bsToolWindow
   Caption = 'Position'
@@ -13,9 +13,9 @@ object f_position: Tf_position
   OnCreate = FormCreate
   OnShow = FormShow
   object Button1: TButton
-    Left = 72
+    Left = 144
     Height = 25
-    Top = 184
+    Top = 240
     Width = 75
     BorderSpacing.InnerBorder = 4
     Caption = 'OK'
@@ -23,9 +23,9 @@ object f_position: Tf_position
     TabOrder = 3
   end
   object Button2: TButton
-    Left = 160
+    Left = 248
     Height = 25
-    Top = 184
+    Top = 240
     Width = 75
     BorderSpacing.InnerBorder = 4
     Cancel = True
@@ -35,167 +35,152 @@ object f_position: Tf_position
   end
   object Panel1: TPanel
     Left = 8
-    Height = 57
-    Top = 64
-    Width = 296
+    Height = 77
+    Top = 88
+    Width = 464
     FullRepaint = False
     TabOrder = 1
     object coord1: TLabel
       Left = 8
-      Height = 13
-      Top = 32
-      Width = 13
+      Height = 15
+      Top = 36
+      Width = 17
       Caption = 'Az'
       Color = clNone
       ParentColor = False
     end
     object coord2: TLabel
-      Left = 152
-      Height = 13
-      Top = 32
-      Width = 15
+      Left = 248
+      Height = 15
+      Top = 36
+      Width = 17
       Caption = 'Alt'
       Color = clNone
       ParentColor = False
     end
     object coord: TLabel
       Left = 8
-      Height = 13
-      Top = 4
-      Width = 33
+      Height = 15
+      Top = 8
+      Width = 37
       Caption = 'coord'
       Color = clNone
       ParentColor = False
     end
     object long: TRaDec
-      Left = 56
-      Height = 21
-      Top = 28
-      Width = 73
-      EditMask = '!999d99m99s;1; '
-      MaxLength = 10
-      ParentColor = False
-      TabOrder = 0
-      Text = '000d00m00s'
-      OnChange = CoordChange
+      Left = 64
+      Height = 23
+      Top = 32
+      Width = 176
       kind = Az
+      Enabled = True
+      OnChange = CoordChange
+      TabOrder = 0
     end
     object lat: TRaDec
-      Left = 208
-      Height = 21
-      Top = 28
-      Width = 73
-      EditMask = '!##9d99m99s;1; '
-      MaxLength = 10
-      ParentColor = False
-      TabOrder = 1
-      Text = '+00d00m00s'
-      OnChange = CoordChange
+      Left = 280
+      Height = 23
+      Top = 32
+      Width = 176
       kind = Alt
+      Enabled = True
+      OnChange = CoordChange
+      TabOrder = 1
     end
   end
   object Panel2: TPanel
     Left = 8
-    Height = 57
+    Height = 77
     Top = 3
-    Width = 296
+    Width = 464
     FullRepaint = False
     TabOrder = 0
     object eq1: TLabel
       Left = 8
-      Height = 13
-      Top = 32
-      Width = 15
+      Height = 15
+      Top = 36
+      Width = 20
       Caption = 'RA'
       Color = clNone
       ParentColor = False
     end
     object eq2: TLabel
-      Left = 152
-      Height = 13
-      Top = 32
-      Width = 16
+      Left = 248
+      Height = 15
+      Top = 36
+      Width = 20
       Caption = 'DE'
       Color = clNone
       ParentColor = False
     end
     object Equinox: TLabel
       Left = 8
-      Height = 13
+      Height = 15
       Top = 8
-      Width = 45
+      Width = 51
       Caption = 'Equinox'
       Color = clNone
       ParentColor = False
     end
-    object Ra: TRaDec
-      Left = 56
-      Height = 21
-      Top = 28
-      Width = 73
-      EditMask = '!99h99m99s;1; '
-      MaxLength = 9
-      ParentColor = False
+    object ra: TRaDec
+      Left = 64
+      Height = 23
+      Top = 32
+      Width = 176
+      Enabled = True
+      OnChange = EqChange
       TabOrder = 0
-      Text = '00h00m00s'
-      OnChange = EqChange
     end
-    object De: TRaDec
-      Left = 208
-      Height = 21
-      Top = 29
-      Width = 73
-      EditMask = '!##9d99m99s;1; '
-      MaxLength = 10
-      ParentColor = False
-      TabOrder = 1
-      Text = '+00d00m00s'
-      OnChange = EqChange
+    object de: TRaDec
+      Left = 280
+      Height = 23
+      Top = 32
+      Width = 176
       kind = DE
+      Enabled = True
+      OnChange = EqChange
+      TabOrder = 1
     end
   end
   object Panel3: TPanel
     Left = 8
-    Height = 41
-    Top = 126
-    Width = 296
+    Height = 49
+    Top = 176
+    Width = 464
     FullRepaint = False
     TabOrder = 2
     object Label3: TLabel
       Left = 8
-      Height = 13
+      Height = 15
       Top = 14
-      Width = 23
+      Width = 29
       Caption = 'FOV'
       Color = clNone
       ParentColor = False
     end
     object Label4: TLabel
-      Left = 152
-      Height = 13
+      Left = 248
+      Height = 15
       Top = 14
-      Width = 47
+      Width = 54
       Caption = 'Rotation'
       Color = clNone
       ParentColor = False
     end
     object Fov: TRaDec
-      Left = 56
-      Height = 21
-      Top = 10
-      Width = 73
-      EditMask = '!##9d99m99s;1; '
-      MaxLength = 10
-      ParentColor = False
+      Left = 64
+      Height = 23
+      Top = 9
+      Width = 176
+      kind = Az
+      Enabled = True
       TabOrder = 0
-      Text = '+00d00m00s'
-      kind = DE
     end
     object rot: TFloatEdit
-      Left = 208
-      Height = 22
+      Left = 336
+      Height = 23
       Hint = '-180..180'
-      Top = 10
+      Top = 9
       Width = 73
       BorderStyle = bsSingle
       ParentColor = False

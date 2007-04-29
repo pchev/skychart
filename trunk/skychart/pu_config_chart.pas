@@ -27,8 +27,8 @@ interface
 
 uses u_translation, u_constant, u_projection, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources, MaskEdit,
-  Buttons;
+  StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources,
+  Buttons, cu_radec, cu_zoomimage;
 
 type
 
@@ -224,28 +224,6 @@ type
     liststar: TCheckBox;
     listvar: TCheckBox;
     MainPanel: TPanel;
-    MaskEdit1: TMaskEdit;
-    MaskEdit10: TMaskEdit;
-    MaskEdit11: TMaskEdit;
-    MaskEdit12: TMaskEdit;
-    MaskEdit13: TMaskEdit;
-    MaskEdit14: TMaskEdit;
-    MaskEdit15: TMaskEdit;
-    MaskEdit16: TMaskEdit;
-    MaskEdit17: TMaskEdit;
-    MaskEdit18: TMaskEdit;
-    MaskEdit19: TMaskEdit;
-    MaskEdit2: TMaskEdit;
-    MaskEdit20: TMaskEdit;
-    MaskEdit21: TMaskEdit;
-    MaskEdit22: TMaskEdit;
-    MaskEdit3: TMaskEdit;
-    MaskEdit4: TMaskEdit;
-    MaskEdit5: TMaskEdit;
-    MaskEdit6: TMaskEdit;
-    MaskEdit7: TMaskEdit;
-    MaskEdit8: TMaskEdit;
-    MaskEdit9: TMaskEdit;
     NebBox: TCheckBox;
     Page1: TPage;
     Page2: TPage;
@@ -262,6 +240,28 @@ type
     FOVPanel: TPanel;
     PMBox: TCheckBox;
     projectiontype: TRadioGroup;
+    RaDec1: TRaDec;
+    RaDec10: TRaDec;
+    RaDec11: TRaDec;
+    RaDec12: TRaDec;
+    RaDec13: TRaDec;
+    RaDec14: TRaDec;
+    RaDec15: TRaDec;
+    RaDec16: TRaDec;
+    RaDec17: TRaDec;
+    RaDec18: TRaDec;
+    RaDec19: TRaDec;
+    RaDec2: TRaDec;
+    RaDec20: TRaDec;
+    RaDec21: TRaDec;
+    RaDec22: TRaDec;
+    RaDec3: TRaDec;
+    RaDec4: TRaDec;
+    RaDec5: TRaDec;
+    RaDec6: TRaDec;
+    RaDec7: TRaDec;
+    RaDec8: TRaDec;
+    RaDec9: TRaDec;
     StarAutoBox: TCheckBox;
     StarBox: TCheckBox;
     Notebook1: TNotebook;
@@ -443,61 +443,61 @@ procedure Tf_config_chart.ShowGridSpacing;
 begin
   CheckBox13.Checked:=cshr.ShowCRose;
   TrackBar1.Position:=cshr.CRoseSz;
-  MaskEdit1.text:=DEToStr3(cshr.DegreeGridSpacing[0]);
-  MaskEdit2.text:=DEToStr3(cshr.DegreeGridSpacing[1]);
-  MaskEdit3.text:=DEToStr3(cshr.DegreeGridSpacing[2]);
-  MaskEdit4.text:=DEToStr3(cshr.DegreeGridSpacing[3]);
-  MaskEdit5.text:=DEToStr3(cshr.DegreeGridSpacing[4]);
-  MaskEdit6.text:=DEToStr3(cshr.DegreeGridSpacing[5]);
-  MaskEdit7.text:=DEToStr3(cshr.DegreeGridSpacing[6]);
-  MaskEdit8.text:=DEToStr3(cshr.DegreeGridSpacing[7]);
-  MaskEdit9.text:=DEToStr3(cshr.DegreeGridSpacing[8]);
-  MaskEdit10.text:=DEToStr3(cshr.DegreeGridSpacing[9]);
-  MaskEdit11.text:=DEToStr3(cshr.DegreeGridSpacing[10]);
-  MaskEdit1.Enabled:=cshr.DegreeGridSpacing[0]<1000;
-  MaskEdit2.Enabled:=cshr.DegreeGridSpacing[1]<1000;
-  MaskEdit3.Enabled:=cshr.DegreeGridSpacing[2]<1000;
-  MaskEdit4.Enabled:=cshr.DegreeGridSpacing[3]<1000;
-  MaskEdit5.Enabled:=cshr.DegreeGridSpacing[4]<1000;
-  MaskEdit6.Enabled:=cshr.DegreeGridSpacing[5]<1000;
-  MaskEdit7.Enabled:=cshr.DegreeGridSpacing[6]<1000;
-  MaskEdit8.Enabled:=cshr.DegreeGridSpacing[7]<1000;
-  MaskEdit9.Enabled:=cshr.DegreeGridSpacing[8]<1000;
-  MaskEdit10.Enabled:=cshr.DegreeGridSpacing[9]<1000;
-  MaskEdit11.Enabled:=cshr.DegreeGridSpacing[10]<1000;
-  CheckBox1.Checked:=MaskEdit1.Enabled;
-  CheckBox2.Checked:=MaskEdit2.Enabled;
-  CheckBox3.Checked:=MaskEdit3.Enabled;
-  CheckBox4.Checked:=MaskEdit4.Enabled;
-  CheckBox5.Checked:=MaskEdit5.Enabled;
-  CheckBox6.Checked:=MaskEdit6.Enabled;
-  CheckBox7.Checked:=MaskEdit7.Enabled;
-  CheckBox8.Checked:=MaskEdit8.Enabled;
-  CheckBox9.Checked:=MaskEdit9.Enabled;
-  CheckBox10.Checked:=MaskEdit10.Enabled;
-  CheckBox11.Checked:=MaskEdit11.Enabled;
-  MaskEdit12.text:=ArToStr3(cshr.HourGridSpacing[0]);
-  MaskEdit13.text:=ArToStr3(cshr.HourGridSpacing[1]);
-  MaskEdit14.text:=ArToStr3(cshr.HourGridSpacing[2]);
-  MaskEdit15.text:=ArToStr3(cshr.HourGridSpacing[3]);
-  MaskEdit16.text:=ArToStr3(cshr.HourGridSpacing[4]);
-  MaskEdit17.text:=ArToStr3(cshr.HourGridSpacing[5]);
-  MaskEdit18.text:=ArToStr3(cshr.HourGridSpacing[6]);
-  MaskEdit19.text:=ArToStr3(cshr.HourGridSpacing[7]);
-  MaskEdit20.text:=ArToStr3(cshr.HourGridSpacing[8]);
-  MaskEdit21.text:=ArToStr3(cshr.HourGridSpacing[9]);
-  MaskEdit22.text:=ArToStr3(cshr.HourGridSpacing[10]);
-  MaskEdit12.Enabled:=MaskEdit1.Enabled;
-  MaskEdit13.Enabled:=MaskEdit2.Enabled;
-  MaskEdit14.Enabled:=MaskEdit3.Enabled;
-  MaskEdit15.Enabled:=MaskEdit4.Enabled;
-  MaskEdit16.Enabled:=MaskEdit5.Enabled;
-  MaskEdit17.Enabled:=MaskEdit6.Enabled;
-  MaskEdit18.Enabled:=MaskEdit7.Enabled;
-  MaskEdit19.Enabled:=MaskEdit8.Enabled;
-  MaskEdit20.Enabled:=MaskEdit9.Enabled;
-  MaskEdit21.Enabled:=MaskEdit10.Enabled;
-  MaskEdit22.Enabled:=MaskEdit11.Enabled;
+  RaDec1.value:=cshr.DegreeGridSpacing[0];
+  RaDec2.value:=cshr.DegreeGridSpacing[1];
+  RaDec3.value:=cshr.DegreeGridSpacing[2];
+  RaDec4.value:=cshr.DegreeGridSpacing[3];
+  RaDec5.value:=cshr.DegreeGridSpacing[4];
+  RaDec6.value:=cshr.DegreeGridSpacing[5];
+  RaDec7.value:=cshr.DegreeGridSpacing[6];
+  RaDec8.value:=cshr.DegreeGridSpacing[7];
+  RaDec9.value:=cshr.DegreeGridSpacing[8];
+  RaDec10.value:=cshr.DegreeGridSpacing[9];
+  RaDec11.value:=cshr.DegreeGridSpacing[10];
+  RaDec1.Enabled:=cshr.DegreeGridSpacing[0]<1000;
+  RaDec2.Enabled:=cshr.DegreeGridSpacing[1]<1000;
+  RaDec3.Enabled:=cshr.DegreeGridSpacing[2]<1000;
+  RaDec4.Enabled:=cshr.DegreeGridSpacing[3]<1000;
+  RaDec5.Enabled:=cshr.DegreeGridSpacing[4]<1000;
+  RaDec6.Enabled:=cshr.DegreeGridSpacing[5]<1000;
+  RaDec7.Enabled:=cshr.DegreeGridSpacing[6]<1000;
+  RaDec8.Enabled:=cshr.DegreeGridSpacing[7]<1000;
+  RaDec9.Enabled:=cshr.DegreeGridSpacing[8]<1000;
+  RaDec10.Enabled:=cshr.DegreeGridSpacing[9]<1000;
+  RaDec11.Enabled:=cshr.DegreeGridSpacing[10]<1000;
+  CheckBox1.Checked:=RaDec1.Enabled;
+  CheckBox2.Checked:=RaDec2.Enabled;
+  CheckBox3.Checked:=RaDec3.Enabled;
+  CheckBox4.Checked:=RaDec4.Enabled;
+  CheckBox5.Checked:=RaDec5.Enabled;
+  CheckBox6.Checked:=RaDec6.Enabled;
+  CheckBox7.Checked:=RaDec7.Enabled;
+  CheckBox8.Checked:=RaDec8.Enabled;
+  CheckBox9.Checked:=RaDec9.Enabled;
+  CheckBox10.Checked:=RaDec10.Enabled;
+  CheckBox11.Checked:=RaDec11.Enabled;
+  RaDec12.value:=cshr.HourGridSpacing[0];
+  RaDec13.value:=cshr.HourGridSpacing[1];
+  RaDec14.value:=cshr.HourGridSpacing[2];
+  RaDec15.value:=cshr.HourGridSpacing[3];
+  RaDec16.value:=cshr.HourGridSpacing[4];
+  RaDec17.value:=cshr.HourGridSpacing[5];
+  RaDec18.value:=cshr.HourGridSpacing[6];
+  RaDec19.value:=cshr.HourGridSpacing[7];
+  RaDec20.value:=cshr.HourGridSpacing[8];
+  RaDec21.value:=cshr.HourGridSpacing[9];
+  RaDec22.value:=cshr.HourGridSpacing[10];
+  RaDec12.Enabled:=RaDec1.Enabled;
+  RaDec13.Enabled:=RaDec2.Enabled;
+  RaDec14.Enabled:=RaDec3.Enabled;
+  RaDec15.Enabled:=RaDec4.Enabled;
+  RaDec16.Enabled:=RaDec5.Enabled;
+  RaDec17.Enabled:=RaDec6.Enabled;
+  RaDec18.Enabled:=RaDec7.Enabled;
+  RaDec19.Enabled:=RaDec8.Enabled;
+  RaDec20.Enabled:=RaDec9.Enabled;
+  RaDec21.Enabled:=RaDec10.Enabled;
+  RaDec22.Enabled:=RaDec11.Enabled;
 end;
 
 procedure Tf_config_chart.ShowField;
@@ -894,7 +894,9 @@ cshr.HourGridSpacing[8]:=1;
 cshr.HourGridSpacing[9]:=2;
 cshr.HourGridSpacing[10]:=2;
 cshr.CRoseSz:=80;
+LockChange:=true;
 ShowGridSpacing;
+LockChange:=false;
 end;
 
 procedure Tf_config_chart.CheckBox13Click(Sender: TObject);
@@ -906,6 +908,7 @@ end;
 procedure Tf_config_chart.ShowGridBoxClick(Sender: TObject);
 begin
 if LockChange then exit;
+LockChange:=true;
 if sender is TCheckBox then with sender as TCheckBox do begin
   if checked then begin
      if cshr.DegreeGridSpacing[tag]>1000 then begin
@@ -916,32 +919,26 @@ if sender is TCheckBox then with sender as TCheckBox do begin
   end;
 end;
 ShowGridSpacing;
+LockChange:=false;
 end;
 
 procedure Tf_config_chart.DegSpacingChange(Sender: TObject);
-var str: string;
-    val:double;
+var x: double;
 begin
 if LockChange then exit;
-if sender is TMaskEdit then with sender as TMaskEdit do begin
-   str:=stringreplace(text,'dd','d',[]); // kylix bug ?
-   str:=stringreplace(str,'mm','m',[]);
-   val:=Str3ToDE(str);
-   if val>0 then cshr.DegreeGridSpacing[tag]:=val;
-
+if sender is TRaDec then begin
+   x:=TRaDec(sender).value;
+   if x>0 then cshr.DegreeGridSpacing[TRaDec(sender).tag]:=x;
 end;
 end;
 
 procedure Tf_config_chart.HourSpacingChange(Sender: TObject);
-var str: string;
-    val:double;
+var x: double;
 begin
 if LockChange then exit;
-if sender is TMaskEdit then with sender as TMaskEdit do begin
-   str:=stringreplace(text,'hh','h',[]); // kylix bug ?
-   str:=stringreplace(str,'mm','m',[]);
-   val:=Str3ToAR(str);
-   if val>0 then cshr.HourGridSpacing[tag]:=val;
+if sender is TRaDec then  begin
+   x:=TRaDec(sender).value;
+   if x>0 then cshr.HourGridSpacing[TRaDec(sender).tag]:=x;
 end;   
 end;
 

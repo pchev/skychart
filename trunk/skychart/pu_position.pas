@@ -48,13 +48,13 @@ type
     Panel2: TPanel;
     eq1: TLabel;
     eq2: TLabel;
-    Ra: TRaDec;
-    De: TRaDec;
     Equinox: TLabel;
     Panel3: TPanel;
     Label3: TLabel;
     Label4: TLabel;
     Fov: TRaDec;
+    ra: TRaDec;
+    de: TRaDec;
     rot: TFloatEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
