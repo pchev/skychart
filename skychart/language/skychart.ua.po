@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-02-12 20:10+0200\n"
+"PO-Revision-Date: 2007-03-26 19:28+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ua\n"
 "POT-Creation-Date: \n"
@@ -18,7 +18,7 @@ msgstr "%s  Не знайдено жодного встановленого ка
 
 #: u_translation:rsdifferenttha
 msgid "%s (different than configured port, maybe busy or other error.)"
-msgstr "%s (інший, ніж конфігурований порт, може бути зайнятим, або інша помилка)"
+msgstr "%s (інший, ніж конфігурований порт; може бути зайнятим, або інша помилка)"
 
 #: u_translation:rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or wrong path in catalog setting."
@@ -390,7 +390,7 @@ msgstr "Чорно-біле, метод ліній"
 
 #: u_translation:rsblinkingpict
 msgid "Blinking Picture"
-msgstr ""
+msgstr "Миготливе зображення"
 
 #: u_translation:rsblue
 msgid "Blue"
@@ -658,7 +658,7 @@ msgstr "Елементи комет в МРС форматі (один URL в л
 
 #: u_translation:rscommandfound
 msgid "Command found OK."
-msgstr "Команда знайшлася успішно"
+msgstr "Команда знайшлася успішно."
 
 #: u_translation:rscommandnotfo
 msgid "Command not found!"
@@ -714,7 +714,7 @@ msgstr "Підключити телескоп"
 
 #: u_translation:rsconnecttofai
 msgid "Connect to %s, %s failed! %sVerify if the MySQL Server is running and control the Userid/Password"
-msgstr "З'єднання із %s, %s невдале! %sПеревірте, якщо MySQL сервер функціонує, Ідент.Користувача/Пароль"
+msgstr "З'єднання із %s, %s невдале! %sПеревірте, якщо MySQL сервер функціонує, Ідент.Користувача/Пароль."
 
 #: u_translation:rsconnecttosuc
 msgid "Connect to %s, %s successful.%s"
@@ -734,7 +734,7 @@ msgstr "Сузір'я"
 
 #: u_translation:rsconstellatio4
 msgid "Constellation Boundaries"
-msgstr "Границі сузір'я"
+msgstr "Межі сузір'їв"
 
 #: u_translation:rsconstellatio5
 msgid "Constellation Boundary File Name : "
@@ -746,7 +746,7 @@ msgstr "Назва файлу контурів сузір'їв :"
 
 #: u_translation:rsconstellatio2
 msgid "Constellation Figures"
-msgstr "Контури сузір'я"
+msgstr "Контури сузір'їв"
 
 #: u_translation:rsconstellatio6
 msgid "Constellation Label"
@@ -1510,7 +1510,7 @@ msgstr "Файл не знайдено!"
 
 #: u_translation:rsfilespath
 msgid "Files Path"
-msgstr "Шлях файлів"
+msgstr "Шлях до файлів"
 
 #: u_translation:rsfillmilkyway
 msgid "Fill Milky Way"
@@ -2066,7 +2066,7 @@ msgstr "Виклик проекту"
 
 #: u_translation:rslocalhorizon
 msgid "Local Horizon"
-msgstr "Місцевий горизонт"
+msgstr "Місцевий обрій"
 
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
@@ -2302,7 +2302,7 @@ msgstr "Ознака кратності"
 
 #: u_translation:rsmultiplestar
 msgid "Multiple Star"
-msgstr "Кратна зірка"
+msgstr "Кратні зорі"
 
 #: u_translation:rsmysqldatabas
 msgid "MySQL Database"
@@ -3294,7 +3294,7 @@ msgstr "Показати межі сузір'їв"
 
 #: u_translation:rsshowconstell3
 msgid "Show Constellation Figure"
-msgstr "Показати контури сузір'я"
+msgstr "Показати контури сузір'їв"
 
 #: u_translation:rsshowconstell2
 msgid "Show Constellation Limit"
@@ -3390,7 +3390,7 @@ msgstr "Показати зображення об'єктів на мапі"
 
 #: u_translation:rsshowthispict
 msgid "Show this picture"
-msgstr "Показати цю картинку"
+msgstr "Показати це зображення"
 
 #: u_translation:rsshowhidedssi
 msgid "Show/Hide DSS image"
@@ -3458,7 +3458,7 @@ msgstr "Установки для Сонячної системи"
 
 #: u_translation:rssolarsystemo
 msgid "Solar System object"
-msgstr "Об'єкт Сонячної системи"
+msgstr "Об'єкти Сонячної системи"
 
 #: u_translation:rssomerecordsw
 msgid "Some records where rejected, see file %sreject.txt for details"
@@ -3538,7 +3538,7 @@ msgstr "Фільтр зірок"
 
 #: u_translation:rsstarsandnebu
 msgid "Stars and Deep Sky catalogs prepared with "
-msgstr "Каталоги зірок та туманностей, приготовані "
+msgstr "Каталоги зірок та туманностей, приготовані із"
 
 #: u_translation:rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
@@ -4126,7 +4126,7 @@ msgstr "\""
 
 #: u_translation:rstemporaryfil
 msgid "temporary file"
-msgstr "тимчасовий файл"
+msgstr "Тимчасовий файл"
 
 #: u_translation:rsto
 msgid "to"
