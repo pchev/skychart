@@ -712,7 +712,7 @@ if Fcatalog.OpenStar then
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
     if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
        if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv))
-       else if ((cfgsc.NameLabel) and rec.vstr[3] and (rec.options.flabel[18]=rsCommonName)) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3])
+       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3])
        else if rec.star.valid[vsGreekSymbol] then SetLabel(lid,xx,yy,0,7,1,rec.star.greeksymbol)
           else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
     end;
