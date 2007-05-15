@@ -117,6 +117,7 @@ type
     Flabels: TDatesLabelsArray;
     Fcaption:string;
     AnchorComponent: TControl;
+    FFont: TFont;
     FBorderStyle: TFormBorderStyle;
     JDCalendar:TJDMonthlyCalendar;
     procedure CalendarDblClick(Sender: TObject);
@@ -130,6 +131,7 @@ type
     property JD : double read savejd write savejd;
     property BorderStyle: TFormBorderStyle read FBorderStyle write FBorderStyle;
     property Caption: string read Fcaption write Fcaption;
+    property font : TFont read FFont write FFont;
   end;
 
 { TJDDatePicker }
@@ -167,8 +169,8 @@ type
     procedure EditChange(Sender: TObject);
     procedure SetTime(Value: TDateTime);
     function ReadTime: TDateTime;
-    procedure SetEnabled(value:boolean);
-    function GetEnabled: boolean;
+    procedure SetEnable(value:boolean);
+    function GetEnable: boolean;
   public
     { Public declarations }
      constructor Create(Aowner:Tcomponent); override;
@@ -177,7 +179,7 @@ type
     { Published declarations }
      property Time : TDateTime read ReadTime write SetTime;
      property OnChange: TNotifyEvent read FOnChange write FOnChange;
-     property Enabled: boolean Read GetEnabled Write SetEnabled;
+     property Enabled: boolean Read GetEnable Write SetEnable;
      property Font;
      property Hint;
      property ParentColor;
@@ -199,7 +201,7 @@ implementation
 
 procedure Register;
 begin
-  RegisterComponents('CDC',[TJDCalendarDialog,TJDDatePicker,TTimePicker]);
+  RegisterComponents('CDC',[TJDCalendarDialog,TJDDatePicker,TTimePicker,TJDMonthlyCalendar]);
 end;
 
 { TJDMonthlyCalendar }
@@ -207,34 +209,44 @@ end;
 constructor TJDMonthlyCalendar.Create(Aowner:Tcomponent);
 begin
 inherited create(Aowner);
+{$ifdef lclwince}
+Width:=screen.Width;
+Height:=screen.Height;
+{$endif}
 Caption:='';
 //BevelOuter:=bvNone;
 BevelOuter:=bvLowered;
 BevelInner:=bvRaised;
 TopPanel:=Tpanel.Create(self);
 TopPanel.Parent:=self;
+TopPanel.ParentFont:=true;
 TopPanel.Top:=0;
 TopPanel.Left:=0;
 TopPanel.Height:=25;
+TopPanel.Width:=Width;
 TopPanel.Align:=alTop;
 TopPanel.BevelOuter:=bvNone;
-BottomPanel:=Tpanel.Create(self);
-BottomPanel.Parent:=self;
-BottomPanel.Top:=0;
-BottomPanel.Left:=0;
-BottomPanel.Height:=25;
-BottomPanel.Align:=alBottom;
-BottomPanel.BevelOuter:=bvNone;
 CalendarGrid:=TJDMonthlyCalendarGrid.Create(Self);
 CalendarGrid.Parent:=self;
+CalendarGrid.ParentFont:=true;
 CalendarGrid.BorderStyle:=bsNone;
 CalendarGrid.Top:=TopPanel.Height;
 CalendarGrid.Left:=0;
+BottomPanel:=Tpanel.Create(self);
+BottomPanel.Parent:=self;
+BottomPanel.ParentFont:=true;
+BottomPanel.Top:=CalendarGrid.Top+CalendarGrid.Height;
+BottomPanel.Left:=0;
+BottomPanel.Height:=25;
+BottomPanel.Width:=Width;
+BottomPanel.Align:=alBottom;
+BottomPanel.BevelOuter:=bvNone;
 Width:=CalendarGrid.Width;
 Height:=TopPanel.Height+CalendarGrid.Height+BottomPanel.Height;
 
 FYear:= TLongEdit.Create(self);
 FYear.Parent:=TopPanel;
+FYear.ParentFont:=true;
 FYear.MaxValue:=20000;
 FYear.MinValue:=-20000;
 FYear.Top:=2;
@@ -259,6 +271,7 @@ UpYear.Left:=FYear.Left+FYear.Width+2;
 UpYear.Top:=DownYear.Top;
 FMonth:= TLongEdit.Create(self);
 FMonth.Parent:=TopPanel;
+FMonth.ParentFont:=true;
 FMonth.MaxValue:=12;
 FMonth.MinValue:=1;
 FMonth.Top:=FYear.Top;
@@ -283,6 +296,7 @@ DownMonth.Top:=DownYear.Top;
 
 Today:=TButton.Create(self);
 Today.Parent:=TopPanel;
+Today.ParentFont:=true;
 Today.Height:=DownYear.Height;
 Today.Width:=DownMonth.Left-UpYear.Left-UpYear.Width-8;
 Today.Left:=UpYear.Left+UpYear.Width+4;
@@ -291,12 +305,14 @@ Today.Caption:='Today';
 
 JDLabel:=TLabel.Create(self);
 JDLabel.Parent:=BottomPanel;
+JDLabel.ParentFont:=true;
 JDLabel.Caption:='Julian Day =';
 JDLabel.Left:=0;
 JDLabel.Top:=6;
 
 Julian:= TFloatEdit.Create(self);
 Julian.Parent:=BottomPanel;
+Julian.ParentFont:=true;
 Julian.Decimals:=1;
 Julian.Digits:=5;
 Julian.NumericType:=ntFixed;
@@ -475,8 +491,10 @@ constructor TJDMonthlyCalendarGrid.Create(Aowner:Tcomponent);
 var yy,mm,dd:word;
 begin
 inherited create(Aowner);
-Width:=230;
-Height:=130;
+if csDesigning in ComponentState then begin
+  Width:=230;
+  Height:=130;
+end;
 ColCount:=7;
 RowCount:=7;
 //Ctl3D:=false;
@@ -613,6 +631,7 @@ constructor TJDCalendarDialog.Create(AOwner: TComponent);
 var y,m,d: word;
 begin
   inherited Create(AOwner);
+  FFont:=TFont.Create;
   DecodeDate(now,y,m,d);
   savejd:=Jdd(y,m,d,0);
   FBorderStyle:=bsDialog;
@@ -622,6 +641,7 @@ end;
 
 destructor TJDCalendarDialog.Destroy;
 begin
+  FFont.Free;
   inherited Destroy;
 end;
 
@@ -631,19 +651,35 @@ begin
 end;
 
 function TJDCalendarDialog.Execute:boolean;
-var okButton:TBitBtn;
+var
+{$ifdef lclwince}
+    okButton:TButton;
+    cancelButton:TButton;
+{$else}
+    okButton:TBitBtn;
     cancelButton:TBitBtn;
+{$endif}
     pos:TPoint;
 begin
   DF:=TForm.Create(Self);
   DF.Caption:=Fcaption;
   DF.BorderStyle:=FBorderStyle;
   DF.FormStyle:=fsStayOnTop;
+  DF.Font:=FFont;
+  {$ifdef lclwince}
+  DF.Width:=screen.Width;
+  DF.Height:=screen.Height;
+  {$endif}
 
   JDCalendar:=TJDMonthlyCalendar.Create(Self);
   with JDCalendar do begin
+    Font:=FFont;
     Parent:=DF;
     Align:=alTop;
+    {$ifdef lclwince}
+    width:=DF.Width;
+    height:=DF.Height;
+    {$endif}
     onDblClick:=@CalendarDblClick;
   end;
   JDCalendar.JD:=savejd;
@@ -661,12 +697,18 @@ begin
   DF.Left:=pos.x;
   DF.Top:=pos.y;
 
+{$ifdef lclwince}
+  okButton:=TButton.Create(Self);
+  okButton.Caption:='ok';
+{$else}
   okButton:=TBitBtn.Create(Self);
+    okButton.Kind:=bkOK;
+    okButton.Caption:='';
+    okButton.layout:=blGlyphTop;
+{$endif}
   with okButton do begin
     Parent:=JDCalendar.BottomPanel;
-    Kind:=bkOK;
-    Caption:='';
-    layout:=blGlyphTop;
+    Font:=FFont;
     Width:=30;
     Height:=25;
     ModalResult:=mrOK;
@@ -674,12 +716,18 @@ begin
     top:=2;
     left:=JDCalendar.width-width-2;
   end;
+{$ifdef lclwince}
+  cancelButton:=TButton.Create(Self);
+  cancelButton.Caption:='X';
+{$else}
   cancelButton:=TBitBtn.Create(Self);
+  cancelButton.Kind:=bkCancel;
+  cancelButton.Caption:='';
+  cancelButton.layout:=blGlyphTop;
+{$endif}
   with cancelButton do begin
     Parent:=JDCalendar.BottomPanel;
-    Kind:=bkCancel;
-    Caption:='';
-    layout:=blGlyphTop;
+    Font:=FFont;
     ModalResult:=mrCancel;
     Width:=30;
     Height:=25;
@@ -838,7 +886,7 @@ EditS.Text:=formatdatetime('ss',Value);
 end;
 
 function TTimePicker.ReadTime: TDateTime;
-var val,h,m,s: string;
+var val: string;
 begin
 EditH.Text:=FixNum(EditH.Text,2);
 EditM.Text:=FixNum(EditM.Text,2);
@@ -858,7 +906,7 @@ begin
 if (not lockchange) and assigned(FOnChange) then FOnChange(self);
 end;
 
-procedure TTimePicker.SetEnabled(value:boolean);
+procedure TTimePicker.SetEnable(value:boolean);
 begin
 EditH.Enabled:=value;
 EditM.Enabled:=value;
@@ -867,7 +915,7 @@ LabelH.Enabled:=value;
 LabelM.Enabled:=value;
 end;
 
-function TTimePicker.GetEnabled: boolean;
+function TTimePicker.GetEnable: boolean;
 begin
 result:=EditH.Enabled;
 end;
