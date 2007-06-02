@@ -4,9 +4,11 @@ object f_main: Tf_main
   Top = 105
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 555
+  VertScrollBar.Page = 551
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
+  ClientHeight = 552
+  ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
     36100000424D3610000000000000360000002800000020000000200000000100
@@ -152,12 +154,14 @@ object f_main: Tf_main
   OnShow = FormShow
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 471
+    Height = 467
     Top = 53
     Width = 812
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
+    ClientHeight = 467
+    ClientWidth = 812
     Color = clBlack
     FullRepaint = False
     ParentColor = False
@@ -2367,15 +2371,17 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 471
+    Height = 467
     Top = 53
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
+    ClientHeight = 467
+    ClientWidth = 24
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 471
+      Height = 467
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2471,16 +2477,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 836
-    Height = 471
+    Height = 467
     Top = 53
     Width = 24
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
+    ClientHeight = 467
+    ClientWidth = 24
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 221
+      Height = 217
       Top = 250
       Width = 24
       Align = alClient
@@ -2544,6 +2552,8 @@ object f_main: Tf_main
       Width = 24
       Align = alTop
       BevelOuter = bvNone
+      ClientHeight = 250
+      ClientWidth = 24
       TabOrder = 1
       object Field1: TSpeedButton
         Height = 24
@@ -2699,10 +2709,12 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 524
+    Top = 520
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
+    ClientHeight = 32
+    ClientWidth = 860
     FullRepaint = False
     ParentFont = True
     TabOrder = 4
@@ -2720,12 +2732,14 @@ object f_main: Tf_main
       Align = alLeft
       Alignment = taLeftJustify
       BevelOuter = bvNone
+      ClientHeight = 32
+      ClientWidth = 150
       FullRepaint = False
       ParentFont = True
       TabOrder = 0
       object LPanels01: TLabel
-        Height = 14
-        Width = 62
+        Height = 15
+        Width = 68
         Caption = 'LPanels01'
         Color = clNone
         ParentColor = False
@@ -2748,6 +2762,8 @@ object f_main: Tf_main
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
+      ClientHeight = 32
+      ClientWidth = 708
       FullRepaint = False
       ParentFont = True
       TabOrder = 1
@@ -2768,6 +2784,8 @@ object f_main: Tf_main
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
+    ClientHeight = 53
+    ClientWidth = 860
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -2907,6 +2925,8 @@ object f_main: Tf_main
         Top = 2
         Width = 24
         BevelOuter = bvNone
+        ClientHeight = 23
+        ClientWidth = 24
         FullRepaint = False
         TabOrder = 4
         object ButtonMoreStar: TImage
@@ -3128,6 +3148,8 @@ object f_main: Tf_main
         Align = alRight
         AutoSize = True
         BevelOuter = bvNone
+        ClientHeight = 23
+        ClientWidth = 30
         TabOrder = 3
         object BtnRestoreChild: TSpeedButton
           Height = 15
