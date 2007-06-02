@@ -624,7 +624,7 @@ end;
 procedure Tf_config_observatory.pressureChange(Sender: TObject);
 begin
 if LockChange then exit;
-csc.obsaltitude:=altmeter.value;
+csc.ObsPressure:=pressure.value;
 end;
 
 procedure Tf_config_observatory.temperatureChange(Sender: TObject);
