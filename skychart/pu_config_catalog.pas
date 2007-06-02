@@ -97,7 +97,6 @@ type
     RC3box: TCheckBox;
     sac3: TDirectoryEdit;
     SACbox: TCheckBox;
-    StringGrid1: TStringGrid;
     tyc3: TDirectoryEdit;
     tic3: TDirectoryEdit;
     gsc3: TDirectoryEdit;
@@ -202,8 +201,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure StringGrid1DrawCell(Sender: TObject; aCol, aRow: Integer;
-      aRect: TRect; aState: TGridDrawState);
     procedure StringGrid3DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure StringGrid3MouseUp(Sender: TObject; Button: TMouseButton;
@@ -338,7 +335,8 @@ end;
 
 procedure Tf_config_catalog.FormShow(Sender: TObject);
 begin
-stringgrid1.visible:=true; stringgrid1.Paint; application.ProcessMessages; stringgrid1.visible:=false; // clWindow replacement hack
+//textcolor:=clWindow;
+textcolor:=clWhite;
 LockCatPath:=false;
 LockChange:=true;
 ShowGCat;
@@ -346,12 +344,6 @@ ShowCDCStar;
 ShowCDCNeb;
 ShowFov;
 LockChange:=false;
-end;
-
-procedure Tf_config_catalog.StringGrid1DrawCell(Sender: TObject; aCol,
-  aRow: Integer; aRect: TRect; aState: TGridDrawState);
-begin
-  textcolor:=StringGrid1.Canvas.Pixels[aRect.Left+1,aRect.Top+1]; // clWindow replacement hack
 end;
 
 procedure Tf_config_catalog.FormCreate(Sender: TObject);
