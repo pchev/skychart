@@ -215,6 +215,7 @@ type
     function  LongLabelGreek(txt : string) : string;
     Function  LongLabelConst(txt : string) : string;
     procedure CKeyDown(var Key: Word; Shift: TShiftState);
+    procedure rotation(rot:double);
     function cmd_SetCursorPosition(x,y:integer):string;
     function cmd_SetGridEQ(onoff:string):string;
     function cmd_SetGrid(onoff:string):string;
@@ -898,16 +899,20 @@ begin
  Refresh;
 end;
 
+procedure Tf_chart.rotation(rot:double);
+begin
+ sc.cfgsc.theta:=sc.cfgsc.theta+deg2rad*rot;
+ Refresh;
+end;
+
 procedure Tf_chart.rot_plusExecute(Sender: TObject);
 begin
- sc.cfgsc.theta:=sc.cfgsc.theta+deg2rad*15;
- Refresh;
+ rotation(15);
 end;
 
 procedure Tf_chart.rot_minusExecute(Sender: TObject);
 begin
- sc.cfgsc.theta:=sc.cfgsc.theta-deg2rad*15;
- Refresh;
+ rotation(-15);
 end;
 
 procedure Tf_chart.GridEQExecute(Sender: TObject);

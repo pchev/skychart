@@ -2463,15 +2463,19 @@ object f_main: Tf_main
         Left = 1
         Hint = 'Rotate Right'
         Top = 207
-        Action = rot_plus
+        Caption = 'Rotate Right'
+        ImageIndex = 21
         Wrap = True
+        OnMouseUp = ToolButtonRotPMouseUp
       end
       object ToolButtonRotM: TToolButton
         Left = 1
         Hint = 'Rotate Left'
         Top = 230
-        Action = rot_minus
+        Caption = 'Rotate Left'
+        ImageIndex = 22
         Wrap = True
+        OnMouseUp = ToolButtonRotMMouseUp
       end
     end
   end
