@@ -56,9 +56,6 @@ type
     procedure SetLang;
   end;
 
-var
-  f_catgenadv: Tf_catgenadv;
-
 implementation
 
 const fformat = '0.###############';
@@ -77,7 +74,7 @@ begin
 R:=A*X+B;
 //str(R:16:10,buf);
 buf:=formatfloat(fformat,R);
-f_catgenadv.edit4.text:=buf;
+edit4.text:=buf;
 end;
 
 procedure Tf_catgenadv.FormShow(Sender: TObject);

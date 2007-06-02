@@ -49,9 +49,6 @@ type
     property onAbortClick: TNotifyEvent read Fabort write Fabort;
   end;
 
-var
-  f_progress: Tf_progress;
-
 implementation
 
 procedure Tf_progress.SetLang;

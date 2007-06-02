@@ -1,4 +1,10 @@
 object f_progress: Tf_progress
+  Left = 249
+  Height = 162
+  Top = 317
+  Width = 422
+  HorzScrollBar.Page = 421
+  VertScrollBar.Page = 161
   Caption = 'Progress'
   ClientHeight = 162
   ClientWidth = 422
@@ -6,59 +12,51 @@ object f_progress: Tf_progress
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
-  PixelsPerInch = 96
   Position = poDefaultPosOnly
-  TextHeight = 13
-  HorzScrollBar.Page = 421
-  VertScrollBar.Page = 161
-  Left = 249
-  Height = 162
-  Top = 317
-  Width = 422
   object Label1: TLabel
+    Left = 16
+    Height = 15
+    Top = 4
+    Width = 43
     Caption = 'Label1'
     Color = clNone
     ParentColor = False
-    Left = 16
-    Height = 17
-    Top = 4
-    Width = 38
   end
   object Label2: TLabel
+    Left = 16
+    Height = 15
+    Top = 56
+    Width = 43
     Caption = 'Label2'
     Color = clNone
     ParentColor = False
-    Left = 16
-    Height = 17
-    Top = 56
-    Width = 38
   end
   object SpeedButton2: TSpeedButton
-    Caption = 'Abort'
-    Color = clBtnFace
-    NumGlyphs = 0
-    OnClick = SpeedButton2Click
     Left = 159
     Height = 25
     Top = 112
     Width = 75
+    Caption = 'Abort'
+    Color = clBtnFace
+    NumGlyphs = 0
+    OnClick = SpeedButton2Click
   end
   object ProgressBar1: TProgressBar
-    Max = 1
-    Step = 1
-    TabOrder = 0
     Left = 16
     Height = 25
     Top = 24
     Width = 361
-  end
-  object ProgressBar2: TProgressBar
     Max = 1
     Step = 1
-    TabOrder = 1
+    TabOrder = 0
+  end
+  object ProgressBar2: TProgressBar
     Left = 16
     Height = 25
     Top = 72
     Width = 361
+    Max = 1
+    Step = 1
+    TabOrder = 1
   end
 end

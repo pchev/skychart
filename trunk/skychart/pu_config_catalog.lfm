@@ -106,8 +106,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page2: TPage
         Caption = 'CdC Stars'
-        ClientWidth = 494
-        ClientHeight = 460
+        ClientWidth = 498
+        ClientHeight = 464
         object Label2: TLabel
           Height = 15
           Top = 7
@@ -856,8 +856,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TPage
         Caption = 'CdC Nebulae'
-        ClientWidth = 494
-        ClientHeight = 460
+        ClientWidth = 498
+        ClientHeight = 464
         object Label3: TLabel
           Left = 1
           Height = 15
@@ -1475,8 +1475,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TPage
         Caption = 'Obsolete'
-        ClientWidth = 494
-        ClientHeight = 460
+        ClientWidth = 498
+        ClientHeight = 464
         object Label88: TLabel
           Height = 15
           Top = 7

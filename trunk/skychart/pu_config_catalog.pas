@@ -25,7 +25,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, cu_catalog,
+uses u_translation, u_constant, u_util, cu_catalog, pu_catgen,
+  pu_catgenadv, pu_progressbar,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
   EditBtn;
@@ -236,6 +237,7 @@ type
     { Private declarations }
     catalogempty, LockChange,LockCatPath: boolean;
     FApplyConfig: TNotifyEvent;
+    FCatGen: Tf_catgen;
     textcolor: TColor; // clWindow replacement hack
     procedure ShowGCat;
     procedure ShowCDCStar;                                
@@ -261,8 +263,6 @@ type
   end;
 
 implementation
-
-Uses pu_catgen, pu_catgenadv, pu_progressbar;
 
 procedure Tf_config_catalog.SetLang;
 begin
@@ -312,9 +312,7 @@ Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
 LabelWarning.Caption:=rsWarningYouAr2;
-if f_progress<>nil then f_progress.SetLang;
-if f_catgen<>nil then f_catgen.SetLang;
-if f_catgenadv<>nil then f_catgenadv.SetLang;
+if Fcatgen<>nil then Fcatgen.SetLang;
 end;
 
 constructor Tf_config_catalog.Create(AOwner:TComponent);
@@ -361,6 +359,7 @@ myccat.Free;
 mycshr.Free;
 mycplot.Free;
 mycmain.Free;
+if Fcatgen<>nil then Fcatgen.Free;
 end;
 
 procedure Tf_config_catalog.FormClose(Sender: TObject;
@@ -371,11 +370,9 @@ end;
 
 procedure Tf_config_catalog.CatgenClick(Sender: TObject);
 begin
-if f_catgen=nil then f_catgen:=Tf_catgen.create(self);
-if f_catgenadv=nil then f_catgenadv:=Tf_catgenadv.Create(self);
-if f_progress=nil then f_progress:=Tf_progress.Create(self);
-FormPos(f_catgen,mouse.CursorPos.x,mouse.CursorPos.y);
-f_catgen.ShowModal;
+if Fcatgen=nil then Fcatgen:=Tf_catgen.create(self);
+FormPos(Fcatgen,mouse.CursorPos.x,mouse.CursorPos.y);
+Fcatgen.ShowModal;
 end;
 
 procedure Tf_config_catalog.Button2Click(Sender: TObject);
