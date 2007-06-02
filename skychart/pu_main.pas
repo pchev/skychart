@@ -51,7 +51,7 @@ type
     FConnectTime : double;
   public
     id : integer;
-    keepalive,abort : boolean;
+    keepalive,abort,lockexecutecmd : boolean;
     active_chart,remoteip,remoteport : string;
     Constructor Create (hsock:tSocket);
     procedure Execute; override;
@@ -4630,6 +4630,7 @@ begin
   cmd:=TStringlist.create;
   keepalive:=false;
   abort:=false;
+  lockexecutecmd:=false;
   inherited create(false);
 end;
 
@@ -4694,7 +4695,13 @@ end;
 
 procedure TTCPThrd.ExecuteCmd;
 begin
-cmdresult:=f_main.ExecuteCmd(active_chart,cmd);
+if lockexecutecmd then exit;
+lockexecutecmd:=true;
+try
+  cmdresult:=f_main.ExecuteCmd(active_chart,cmd);
+finally
+  lockexecutecmd:=false;
+end;
 end;
 
 procedure Tf_main.StartServer;
