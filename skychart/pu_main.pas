@@ -444,6 +444,10 @@ type
     procedure SetupObservatoryExecute(Sender: TObject);
     procedure SetupPicturesExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
+    procedure ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ViewBarExecute(Sender: TObject);
     procedure ViewScrollBar1Click(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
@@ -1328,9 +1332,31 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rot_plusExecute(Sender);
 end;
 
+
+procedure Tf_main.ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var rot:double;
+begin
+if ssCtrl in Shift then rot:=45
+else if ssShift in Shift then rot:=1
+else rot:=15;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
+end;
+
 procedure Tf_main.rot_minusExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rot_minusExecute(Sender);
+end;
+
+
+procedure Tf_main.ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var rot:double;
+begin
+if ssCtrl in Shift then rot:=-45
+else if ssShift in Shift then rot:=-1
+else rot:=-15;
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do  rotation(rot);
 end;
 
 procedure Tf_main.TelescopeConnectExecute(Sender: TObject);

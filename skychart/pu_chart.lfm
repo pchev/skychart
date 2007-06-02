@@ -7,6 +7,8 @@ object f_chart: Tf_chart
   VertScrollBar.Page = 337
   ActiveControl = VertScrollBar
   Caption = 'Chart'
+  ClientHeight = 338
+  ClientWidth = 508
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
@@ -19,6 +21,8 @@ object f_chart: Tf_chart
     Height = 272
     Top = 8
     Width = 480
+    ClientHeight = 272
+    ClientWidth = 480
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
@@ -26,9 +30,9 @@ object f_chart: Tf_chart
     object identlabel: TLabel
       Cursor = crHandPoint
       Left = 136
-      Height = 12
+      Height = 15
       Top = 120
-      Width = 58
+      Width = 65
       Caption = 'identlabel '
       Color = clBlack
       Font.Color = clWhite
@@ -42,10 +46,10 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 466
-      Height = 257
+      Left = 464
+      Height = 255
       Top = 1
-      Width = 13
+      Width = 15
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -57,8 +61,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 1
-      Height = 13
-      Top = 258
+      Height = 15
+      Top = 256
       Width = 478
       Align = alBottom
       LargeChange = 10
