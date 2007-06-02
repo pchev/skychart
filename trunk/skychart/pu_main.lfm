@@ -4,10 +4,10 @@ object f_main: Tf_main
   Top = 105
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 559
+  VertScrollBar.Page = 551
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 560
+  ClientHeight = 552
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
@@ -154,13 +154,13 @@ object f_main: Tf_main
   OnShow = FormShow
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 475
+    Height = 467
     Top = 53
     Width = 812
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
-    ClientHeight = 475
+    ClientHeight = 467
     ClientWidth = 812
     Color = clBlack
     FullRepaint = False
@@ -2371,17 +2371,17 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 475
+    Height = 467
     Top = 53
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 475
+    ClientHeight = 467
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 475
+      Height = 467
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2477,18 +2477,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 836
-    Height = 475
+    Height = 467
     Top = 53
     Width = 24
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 475
+    ClientHeight = 467
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 225
+      Height = 217
       Top = 250
       Width = 24
       Align = alClient
@@ -2709,7 +2709,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 528
+    Top = 520
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -2738,8 +2738,8 @@ object f_main: Tf_main
       ParentFont = True
       TabOrder = 0
       object LPanels01: TLabel
-        Height = 14
-        Width = 49
+        Height = 15
+        Width = 68
         Caption = 'LPanels01'
         Color = clNone
         ParentColor = False
@@ -2906,7 +2906,6 @@ object f_main: Tf_main
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 13
         MaxLength = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
@@ -3109,7 +3108,6 @@ object f_main: Tf_main
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 13
         MaxLength = 0
         Style = csDropDownList
         TabOrder = 2
@@ -4663,7 +4661,7 @@ object f_main: Tf_main
     left = 280
     top = 160
     Bitmap = {
-      6C69570000001000000010000000600200002F2A2058504D202A2F0A73746174
+      6C69580000001000000010000000600200002F2A2058504D202A2F0A73746174
       69632063686172202A677261706869635B5D203D207B0A223136203136203136
       2031222C0A222E2063204E6F6E65222C0A222C20632023423539344546222C0A
       222D20632023364236423943222C0A222A20632023423538434537222C0A2261
@@ -7183,7 +7181,19 @@ object f_main: Tf_main
       2E2E2E2B202B2E2E2E20202020222C0A222020202E2E2E2B2E2B2E2E2E202020
       20222C0A2220202E20202E2B2B2B2E20202E202020222C0A222020202020202B
       202B20202020202020222C0A222020202020202B2B2B20202020202020222C0A
-      22202020202020202B2020202020202020227D3B0A
+      22202020202020202B2020202020202020227D3B0A800100002F2A2058504D20
+      2A2F0A7374617469632063686172202A206938375F78706D5B5D203D207B0A22
+      313620313620312031222C0A22200963204E6F6E65222C0A2220202020202020
+      202020202020202020222C0A2220202020202020202020202020202020222C0A
+      2220202020202020202020202020202020222C0A222020202020202020202020
+      2020202020222C0A2220202020202020202020202020202020222C0A22202020
+      20202020202020202020202020222C0A22202020202020202020202020202020
+      20222C0A2220202020202020202020202020202020222C0A2220202020202020
+      202020202020202020222C0A2220202020202020202020202020202020222C0A
+      2220202020202020202020202020202020222C0A222020202020202020202020
+      2020202020222C0A2220202020202020202020202020202020222C0A22202020
+      20202020202020202020202020222C0A22202020202020202020202020202020
+      20222C0A2220202020202020202020202020202020227D3B0A
     }
   end
   object PopupMenu1: TPopupMenu
