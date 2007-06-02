@@ -142,6 +142,7 @@ type
     RadioGroup6: TRadioGroup;
     CheckBox7: TCheckBox;
     Button12: TButton;
+    procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PageControl1PageChanged(Sender: TObject);
     procedure binarycatChange(Sender: TObject);
@@ -176,6 +177,8 @@ type
     procedure Button11Click(Sender: TObject);
     procedure Button12Click(Sender: TObject);
   private
+    Fcatgenadv: Tf_catgenadv;
+    Fprogress: Tf_progress;
     textpos : array [0..40] of array[1..2] of integer;
     calc : array[0..40,1..2] of double;
     Lra,Lde,ListIndex,nebulaesizescale,l_fixe,nbalt : integer;
@@ -241,7 +244,7 @@ type
     Procedure WriteIx;
     Procedure RejectRec(lin : string);
     Procedure BuildFiles;
-    function filegetsize(fn:string):integer;
+    function  filegetsize(fn:string):integer;
     Procedure Sortfiles;
     Procedure SortIXfile;
     Procedure BuildBinCat;
@@ -254,8 +257,7 @@ type
 
 Var
   f_catgen: Tf_catgen;
-  keypos,ixlen : integer;
-  
+  keypos,ixlen : integer; // not thread safe but cannot define the sort exit otherwise
 
 implementation
 
@@ -504,6 +506,8 @@ end;
 procedure Tf_catgen.FormCreate(Sender: TObject);
 var i : integer;
 begin
+Fcatgenadv:=Tf_catgenadv.Create(self);
+Fprogress:=Tf_progress.Create(self);
 rejectopen := false;
 for i:=1 to l_sup do altname[i]:=0;
 pagecontrol1.PageIndex:=pageFiles;
@@ -1464,9 +1468,9 @@ if createindex then begin
 end;
 for i:=1 to catheader.FileNum do begin
   if abort then raise exception.create(rsAbortedByUse);
-  f_progress.ProgressBar2.Position:=i;
-  f_progress.label2.caption:=inttostr(i);
-  f_progress.invalidate;
+  Fprogress.ProgressBar2.Position:=i;
+  Fprogress.label2.caption:=inttostr(i);
+  Fprogress.invalidate;
   m:=0;
   case catheader.FileNum of
     1      : ffn[i]:=lowercase(trim(catheader.ShortName))+'.dat';
@@ -1532,9 +1536,9 @@ Procedure Tf_catgen.Closefiles;
 var i : integer;
 begin
 for i:=1 to catheader.FileNum do begin
-  f_progress.ProgressBar2.Position:=i;
-  f_progress.label2.caption:=inttostr(i);
-  f_progress.invalidate;
+  Fprogress.ProgressBar2.Position:=i;
+  Fprogress.label2.caption:=inttostr(i);
+  Fprogress.invalidate;
   Closefile(ff[i]);
 end;
 if createindex then closefile(ixf);
@@ -1570,22 +1574,22 @@ var
     hemis : char;
     buf: string;
 begin
-f_progress.progressbar1.max:=ListBox1.Items.count;
+Fprogress.progressbar1.max:=ListBox1.Items.count;
 fillstring:=StringOfChar(' ',255);
 for n:=0 to ListBox1.Items.count-1 do begin
-f_progress.label1.caption:=Format(rsConvertCatal, [ListBox1.Items[n]]);
-f_progress.progressbar1.position:=n+1;
-f_progress.invalidate;
+Fprogress.label1.caption:=Format(rsConvertCatal, [ListBox1.Items[n]]);
+Fprogress.progressbar1.position:=n+1;
+Fprogress.invalidate;
 OpenCatalog(ListBox1.Items[n]);
-f_progress.progressbar2.max:=GetCatalogSize;
+Fprogress.progressbar2.max:=GetCatalogSize;
 ra:=0; de:=0;
 i:=0;
 repeat
   inc(i);
   if (i mod 1000)=0 then begin
      if abort then raise exception.create(rsAbortedByUse);
-     f_progress.progressbar2.position:=GetCatalogPos;
-     f_progress.progressbar2.invalidate;
+     Fprogress.progressbar2.position:=GetCatalogPos;
+     Fprogress.progressbar2.invalidate;
      application.processmessages;
   end;
   ReadCatalog(inl);
@@ -1785,16 +1789,6 @@ CloseCatalog;
 end;
 end;
 
-function CompareMag(Item1, Item2: Pointer): Integer;
-begin
-  Result:=CompSmallAt(Item1, Item2, keypos-1);
-end;
-
-function CompareIX(Item1, Item2: Pointer): Integer;
-begin
-  Result:=CompareTextFrom(Item1, Item2, 9, ixlen);
-end;
-
 function Tf_catgen.filegetsize(fn:string):integer;
 var f : file;
 begin
@@ -1805,15 +1799,25 @@ result:=filesize(f);
 closefile(f);
 end;
 
+function CompareMag(Item1, Item2: Pointer): Integer;
+begin
+  Result:=CompSmallAt(Item1, Item2, keypos-1);
+end;
+
+function CompareIX(Item1, Item2: Pointer): Integer;
+begin
+  Result:=CompareTextFrom(Item1, Item2, 9, ixlen);
+end;
+
 Procedure Tf_catgen.Sortfiles;
 var i : integer;
     Sorter: TFixRecSort;
 begin
 for i:=1 to catheader.FileNum do begin
   if abort then raise exception.create(rsAbortedByUse);
-  f_progress.ProgressBar2.Position:=i;
-  f_progress.label2.caption:=inttostr(i);
-  f_progress.invalidate;
+  Fprogress.ProgressBar2.Position:=i;
+  Fprogress.label2.caption:=inttostr(i);
+  Fprogress.invalidate;
   if filegetsize(destdir+ffn[i])<=catheader.reclen then continue;
   Sorter:=TFixRecSort.Create(catheader.reclen);
   Sorter.Stable:=True;
@@ -1828,15 +1832,15 @@ Procedure Tf_catgen.SortIXfile;
 var
   Sorter: TFixRecSort;
 begin
-f_progress.progressbar2.max:=2;
-f_progress.progressbar2.position:=1;
-f_progress.label1.caption:=rsSortingTheIn;
-f_progress.label2.caption:='';
+Fprogress.progressbar2.max:=2;
+Fprogress.progressbar2.position:=1;
+Fprogress.label1.caption:=rsSortingTheIn;
+Fprogress.label2.caption:='';
 application.processmessages;
 Sorter:=TFixRecSort.Create(ixlen+8);
 Sorter.Stable:=True;
 Sorter.Start(destdir+ixfn,destdir+'sort.out', @CompareIX);
-f_progress.progressbar2.position:=2;
+Fprogress.progressbar2.position:=2;
 application.processmessages;
 Sorter.Free;
 DeleteFile(destdir+ixfn);
@@ -1845,50 +1849,50 @@ end;
 
 Procedure Tf_catgen.BuildBinCat;
 begin
-f_progress.onAbortClick:=@ProgressAbort;
-f_progress.progressbar1.max:=4;
-f_progress.progressbar1.position:=0;
-f_progress.progressbar2.max:=1;
-f_progress.progressbar2.position:=0;
-f_progress.label1.caption:=rsCreateHeader;
-f_progress.label2.caption:='';
-f_progress.show;
+Fprogress.onAbortClick:=@ProgressAbort;
+Fprogress.progressbar1.max:=4;
+Fprogress.progressbar1.position:=0;
+Fprogress.progressbar2.max:=1;
+Fprogress.progressbar2.position:=0;
+Fprogress.label1.caption:=rsCreateHeader;
+Fprogress.label2.caption:='';
+Fprogress.show;
 application.processmessages;
 BuildHeader;
-f_progress.progressbar2.position:=1;
-f_progress.invalidate;
-f_progress.label1.caption:=rsCreateFiles;
-f_progress.progressbar1.position:=1;
-f_progress.progressbar2.max:=catheader.filenum;
-f_progress.progressbar2.position:=0;
-f_progress.label2.caption:='';
-f_progress.invalidate;
+Fprogress.progressbar2.position:=1;
+Fprogress.invalidate;
+Fprogress.label1.caption:=rsCreateFiles;
+Fprogress.progressbar1.position:=1;
+Fprogress.progressbar2.max:=catheader.filenum;
+Fprogress.progressbar2.position:=0;
+Fprogress.label2.caption:='';
+Fprogress.invalidate;
 application.processmessages;
 CreateFiles;
-f_progress.label1.caption:=rsConvertCatal2;
-f_progress.progressbar1.position:=2;
-f_progress.progressbar2.max:=1;
-f_progress.progressbar2.position:=0;
-f_progress.label2.caption:='';
-f_progress.invalidate;
+Fprogress.label1.caption:=rsConvertCatal2;
+Fprogress.progressbar1.position:=2;
+Fprogress.progressbar2.max:=1;
+Fprogress.progressbar2.position:=0;
+Fprogress.label2.caption:='';
+Fprogress.invalidate;
 application.processmessages;
 BuildFiles;
-f_progress.label1.caption:=rsCloseFiles;
-f_progress.progressbar1.max:=4;
-f_progress.progressbar1.position:=3;
-f_progress.progressbar2.max:=catheader.filenum;
-f_progress.progressbar2.position:=0;
-f_progress.label2.caption:='';
-f_progress.invalidate;
+Fprogress.label1.caption:=rsCloseFiles;
+Fprogress.progressbar1.max:=4;
+Fprogress.progressbar1.position:=3;
+Fprogress.progressbar2.max:=catheader.filenum;
+Fprogress.progressbar2.position:=0;
+Fprogress.label2.caption:='';
+Fprogress.invalidate;
 application.processmessages;
 CloseFiles;
 if radiogroup1.ItemIndex<4 then begin
- f_progress.label1.caption:=rsSortingFiles;
- f_progress.progressbar1.position:=4;
- f_progress.progressbar2.max:=catheader.filenum;
- f_progress.progressbar2.position:=0;
- f_progress.label2.caption:='';
- f_progress.invalidate;
+ Fprogress.label1.caption:=rsSortingFiles;
+ Fprogress.progressbar1.position:=4;
+ Fprogress.progressbar2.max:=catheader.filenum;
+ Fprogress.progressbar2.position:=0;
+ Fprogress.label2.caption:='';
+ Fprogress.invalidate;
  application.processmessages;
  SortFiles;
 end;
@@ -1933,7 +1937,7 @@ try
   Endbt.visible:=false;
   Exitbt.visible:=true;
 finally
-  f_progress.hide;
+  Fprogress.hide;
   panel1.enabled:=true;
 end;
 end;
@@ -2166,6 +2170,12 @@ endbt.Visible:=false;
 endbt.enabled:=false;
 end;
 
+procedure Tf_catgen.FormDestroy(Sender: TObject);
+begin
+  Fcatgenadv.Free;
+  Fprogress.Free;
+end;
+
 procedure Tf_catgen.Button3Click(Sender: TObject);
 begin
 panel1.enabled:=false;
@@ -2198,13 +2208,13 @@ if (pos('(',CheckListBox1.items[listindex])=0)and
    (pos('Numeric',CheckListBox1.items[listindex])=0) then exit;
 val(memo1.SelText,x,i);
 if i<>0 then exit;
-f_catgenadv.A:=calc[listindex,1];
-f_catgenadv.B:=calc[listindex,2];
-f_catgenadv.X:=x;
-f_catgenadv.ShowModal;
-if f_catgenadv.ModalResult=mrOK then begin
-  calc[listindex,1]:=f_catgenadv.A;
-  calc[listindex,2]:=f_catgenadv.B;
+Fcatgenadv.A:=calc[listindex,1];
+Fcatgenadv.B:=calc[listindex,2];
+Fcatgenadv.X:=x;
+Fcatgenadv.ShowModal;
+if Fcatgenadv.ModalResult=mrOK then begin
+  calc[listindex,1]:=Fcatgenadv.A;
+  calc[listindex,2]:=Fcatgenadv.B;
 end;
 end;
 

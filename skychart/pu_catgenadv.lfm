@@ -8,6 +8,8 @@ object f_catgenadv: Tf_catgenadv
   ActiveControl = Button1
   BorderStyle = bsDialog
   Caption = 'Compute Field'
+  ClientHeight = 263
+  ClientWidth = 224
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
@@ -15,7 +17,7 @@ object f_catgenadv: Tf_catgenadv
   Position = poMainFormCenter
   object Label1: TLabel
     Left = 72
-    Height = 12
+    Height = 15
     Top = 90
     Width = 8
     Caption = 'x'
@@ -27,9 +29,9 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label2: TLabel
     Left = 72
-    Height = 12
+    Height = 15
     Top = 126
-    Width = 8
+    Width = 10
     Caption = '+'
     Color = clNone
     Font.Height = -13
@@ -41,7 +43,7 @@ object f_catgenadv: Tf_catgenadv
     Left = 72
     Height = 15
     Top = 160
-    Width = 9
+    Width = 10
     Caption = '='
     Color = clNone
     Font.Height = -16
@@ -51,9 +53,9 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label4: TLabel
     Left = 8
-    Height = 43
+    Height = 66
     Top = 8
-    Width = 180
+    Width = 168
     Caption = 'Indicate here how to compute the require value from the data stored in the catalog text file.'
     Color = clNone
     ParentColor = False

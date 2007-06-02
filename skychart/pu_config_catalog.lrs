@@ -31,7 +31,7 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'n'#4'Left'#3#255#0#6'Height'#2#25#3'Top'#2#16#5'Width'#2'`'#25'BorderSpacin'
   +'g.InnerBorder'#2#4#7'Caption'#6#6'CatGen'#7'OnClick'#7#11'CatgenClick'#8'Ta'
   +'bOrder'#2#0#0#0#0#5'TPage'#5'Page2'#7'Caption'#6#9'CdC Stars'#11'ClientWidt'
-  +'h'#3#238#1#12'ClientHeight'#3#204#1#0#6'TLabel'#6'Label2'#6'Height'#2#15#3
+  +'h'#3#242#1#12'ClientHeight'#3#208#1#0#6'TLabel'#6'Label2'#6'Height'#2#15#3
   +'Top'#2#7#5'Width'#3#169#0#7'Caption'#6#25'CDC Stars Catalog Setting'#5'Colo'
   +'r'#7#6'clNone'#11'ParentColor'#8#0#0#6'TLabel'#7'Label65'#4'Left'#2'D'#6'He'
   +'ight'#2#15#3'Top'#2'&'#5'Width'#2#20#7'Caption'#6#2'pm'#5'Color'#7#6'clNone'
@@ -213,8 +213,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'3Change'#0#0#14'TDirectoryEdit'#4'wds3'#3'Tag'#2#1#4'Left'#3'W'#1#6'Height'
   +#2#21#3'Top'#3#31#1#5'Width'#2'o'#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'P'
   +'arentColor'#8#8'TabOrder'#2'!'#8'OnChange'#7#10'wds3Change'#0#0#0#5'TPage'#5
-  +'Page3'#7'Caption'#6#11'CdC Nebulae'#11'ClientWidth'#3#238#1#12'ClientHeight'
-  +#3#204#1#0#6'TLabel'#6'Label3'#4'Left'#2#1#6'Height'#2#15#3'Top'#2#7#5'Width'
+  +'Page3'#7'Caption'#6#11'CdC Nebulae'#11'ClientWidth'#3#242#1#12'ClientHeight'
+  +#3#208#1#0#6'TLabel'#6'Label3'#4'Left'#2#1#6'Height'#2#15#3'Top'#2#7#5'Width'
   +#3#187#0#7'Caption'#6#27'CDC Nebulae Catalog Setting'#5'Color'#7#6'clNone'#11
   +'ParentColor'#8#0#0#6'TLabel'#7'Label15'#4'Left'#3#23#1#6'Height'#2#15#5'Wid'
   +'th'#2'Q'#9'Alignment'#7#14'taRightJustify'#7'Caption'#6#12'Field number'#5
@@ -362,7 +362,7 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'DirectoryEdit'#4'gpn3'#3'Tag'#2#8#4'Left'#3'b'#1#6'Height'#2#19#3'Top'#3#195
   +#0#5'Width'#2'h'#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'T'
   +'abOrder'#2#23#8'OnChange'#7#16'CDCNebPathChange'#0#0#0#0#5'TPage'#5'Page4'#7
-  +'Caption'#6#8'Obsolete'#11'ClientWidth'#3#238#1#12'ClientHeight'#3#204#1#0#6
+  +'Caption'#6#8'Obsolete'#11'ClientWidth'#3#242#1#12'ClientHeight'#3#208#1#0#6
   +'TLabel'#7'Label88'#6'Height'#2#15#3'Top'#2#7#5'Width'#3':'#1#7'Caption'#6'1'
   +'CDC Obsolete Catalog (but you can still use them)'#5'Color'#7#6'clNone'#11
   +'ParentColor'#8#0#0#6'TLabel'#7'Label67'#4'Left'#2'?'#6'Height'#2#15#3'Top'#2
