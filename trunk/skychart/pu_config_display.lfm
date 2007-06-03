@@ -7,6 +7,8 @@ object f_config_display: Tf_config_display
   VertScrollBar.Page = 531
   ActiveControl = nebuladisplay.RadioButton0
   Caption = 'Display'
+  ClientHeight = 532
+  ClientWidth = 523
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -15,6 +17,8 @@ object f_config_display: Tf_config_display
     Height = 482
     Width = 523
     Align = alClient
+    ClientHeight = 482
+    ClientWidth = 523
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
@@ -25,8 +29,11 @@ object f_config_display: Tf_config_display
       Align = alClient
       PageIndex = 0
       ShowTabs = False
+      TabOrder = 0
       object Page1: TPage
         Caption = 'Display'
+        ClientWidth = 513
+        ClientHeight = 472
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -42,6 +49,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
+          ClientHeight = 47
+          ClientWidth = 437
           Columns = 3
           Items.Strings = (
             'Line mode'
@@ -66,6 +75,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
+          ClientHeight = 47
+          ClientWidth = 437
           Columns = 2
           Items.Strings = (
             'Line mode'
@@ -80,13 +91,15 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 441
           Caption = 'Star Display  Properties'
+          ClientHeight = 224
+          ClientWidth = 437
           TabOrder = 2
           Visible = False
           object Label256: TLabel
             Left = 24
             Height = 14
             Top = 38
-            Width = 99
+            Width = 78
             Caption = 'Faint Stars Size '
             Color = clNone
             ParentColor = False
@@ -95,7 +108,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 112
-            Width = 50
+            Width = 43
             Caption = 'Contrast'
             Color = clNone
             ParentColor = False
@@ -104,7 +117,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 150
-            Width = 92
+            Width = 78
             Caption = 'Color saturation'
             Color = clNone
             ParentColor = False
@@ -113,7 +126,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 75
-            Width = 149
+            Width = 126
             Caption = 'Increment for Bright Stars'
             Color = clNone
             ParentColor = False
@@ -216,6 +229,8 @@ object f_config_display: Tf_config_display
       end
       object Page2: TPage
         Caption = 'Colour'
+        ClientWidth = 513
+        ClientHeight = 454
         object Label181: TLabel
           Left = 86
           Height = 14
@@ -411,6 +426,8 @@ object f_config_display: Tf_config_display
           Height = 38
           Top = 48
           Width = 401
+          ClientHeight = 38
+          ClientWidth = 401
           TabOrder = 0
           object Shape1: TShape
             Tag = 1
@@ -481,6 +498,8 @@ object f_config_display: Tf_config_display
           Height = 38
           Top = 176
           Width = 401
+          ClientHeight = 38
+          ClientWidth = 401
           TabOrder = 2
           object Shape15: TShape
             Tag = 16
@@ -548,6 +567,8 @@ object f_config_display: Tf_config_display
           Height = 38
           Top = 112
           Width = 401
+          ClientHeight = 38
+          ClientWidth = 401
           TabOrder = 1
           object Shape26: TShape
             Tag = 20
@@ -616,6 +637,8 @@ object f_config_display: Tf_config_display
           Top = 290
           Width = 401
           Caption = 'Theme'
+          ClientHeight = 168
+          ClientWidth = 401
           TabOrder = 3
           object ThemeList: TComboBox
             Left = 101
@@ -623,6 +646,7 @@ object f_config_display: Tf_config_display
             Top = 1
             Width = 164
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+            ItemHeight = 13
             MaxLength = 0
             OnSelect = ThemeListChange
             TabOrder = 0
@@ -642,6 +666,8 @@ object f_config_display: Tf_config_display
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
+            ClientHeight = 82
+            ClientWidth = 176
             Items.Strings = (
               'Normal (color)'
               'Red'
@@ -666,6 +692,8 @@ object f_config_display: Tf_config_display
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
+            ClientHeight = 82
+            ClientWidth = 176
             Items.Strings = (
               'Normal (color)'
               'Red'
@@ -682,6 +710,8 @@ object f_config_display: Tf_config_display
           Top = 222
           Width = 402
           Caption = 'Standard Color'
+          ClientHeight = 38
+          ClientWidth = 398
           TabOrder = 4
           object BtnDefaultColor: TButton
             Left = 7
@@ -727,11 +757,13 @@ object f_config_display: Tf_config_display
       end
       object Page3: TPage
         Caption = 'Deep-sky colour'
+        ClientWidth = 513
+        ClientHeight = 454
         object lblDSOCScheme: TLabel
           Left = 16
           Height = 14
           Top = 24
-          Width = 172
+          Width = 140
           Caption = 'Use a preset colour scheme :'
           Color = clNone
           ParentColor = False
@@ -739,15 +771,18 @@ object f_config_display: Tf_config_display
         object gbDSOCOverrides: TGroupBox
           Left = 16
           Height = 209
-          Top = 80
+          Top = 75
           Width = 478
           Caption = ' Choose colours for object type  '
+          ClientHeight = 191
+          ClientWidth = 474
           TabOrder = 1
           object lblAst: TLabel
             Left = 16
             Height = 14
             Top = 44
-            Width = 53
+            Width = 105
+            AutoSize = False
             Caption = 'Asterism'
             Color = clNone
             ParentColor = False
@@ -764,7 +799,8 @@ object f_config_display: Tf_config_display
             Left = 240
             Height = 14
             Top = 44
-            Width = 112
+            Width = 120
+            AutoSize = False
             Caption = 'Supernova remnant'
             Color = clNone
             ParentColor = False
@@ -780,7 +816,8 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 14
             Top = 64
-            Width = 75
+            Width = 105
+            AutoSize = False
             Caption = 'Open cluster'
             Color = clNone
             ParentColor = False
@@ -789,7 +826,8 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 14
             Top = 84
-            Width = 92
+            Width = 105
+            AutoSize = False
             Caption = 'Globular cluster'
             Color = clNone
             ParentColor = False
@@ -798,7 +836,8 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 14
             Top = 104
-            Width = 98
+            Width = 105
+            AutoSize = False
             Caption = 'Planetary nebula'
             Color = clNone
             ParentColor = False
@@ -807,7 +846,8 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 14
             Top = 124
-            Width = 70
+            Width = 105
+            AutoSize = False
             Caption = 'Dark nebula'
             Color = clNone
             ParentColor = False
@@ -816,7 +856,8 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 14
             Top = 144
-            Width = 97
+            Width = 105
+            AutoSize = False
             Caption = 'Emission nebula'
             Color = clNone
             ParentColor = False
@@ -825,7 +866,8 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 14
             Top = 164
-            Width = 100
+            Width = 105
+            AutoSize = False
             Caption = 'Reflection nebula'
             Color = clNone
             ParentColor = False
@@ -876,7 +918,8 @@ object f_config_display: Tf_config_display
             Left = 240
             Height = 14
             Top = 64
-            Width = 42
+            Width = 120
+            AutoSize = False
             Caption = 'Galaxy'
             Color = clNone
             ParentColor = False
@@ -885,7 +928,8 @@ object f_config_display: Tf_config_display
             Left = 240
             Height = 14
             Top = 84
-            Width = 85
+            Width = 120
+            AutoSize = False
             Caption = 'Galaxy cluster'
             Color = clNone
             ParentColor = False
@@ -894,7 +938,8 @@ object f_config_display: Tf_config_display
             Left = 240
             Height = 14
             Top = 104
-            Width = 43
+            Width = 120
+            AutoSize = False
             Caption = 'Quasar'
             Color = clNone
             ParentColor = False
@@ -903,16 +948,18 @@ object f_config_display: Tf_config_display
             Left = 240
             Height = 14
             Top = 124
-            Width = 100
+            Width = 120
+            AutoSize = False
             Caption = 'Gravitational lens'
             Color = clNone
             ParentColor = False
           end
           object lblNE: TLabel
             Left = 240
-            Height = 30
+            Height = 14
             Top = 144
-            Width = 106
+            Width = 120
+            AutoSize = False
             Caption = 'Non-existent/unknown'
             Color = clNone
             ParentColor = False
@@ -957,7 +1004,8 @@ object f_config_display: Tf_config_display
             Left = 240
             Height = 14
             Top = 24
-            Width = 68
+            Width = 120
+            AutoSize = False
             Caption = 'Object type'
             Color = clNone
             Font.Style = [fsBold]
@@ -967,7 +1015,8 @@ object f_config_display: Tf_config_display
             Left = 360
             Height = 14
             Top = 24
-            Width = 38
+            Width = 55
+            AutoSize = False
             Caption = 'Colour'
             Color = clNone
             Font.Style = [fsBold]
@@ -977,7 +1026,8 @@ object f_config_display: Tf_config_display
             Left = 416
             Height = 14
             Top = 24
-            Width = 25
+            Width = 65
+            AutoSize = False
             Caption = 'Fill?'
             Color = clNone
             Font.Style = [fsBold]
@@ -987,7 +1037,8 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 14
             Top = 24
-            Width = 68
+            Width = 105
+            AutoSize = False
             Caption = 'Object type'
             Color = clNone
             Font.Style = [fsBold]
@@ -997,7 +1048,8 @@ object f_config_display: Tf_config_display
             Left = 120
             Height = 14
             Top = 24
-            Width = 38
+            Width = 55
+            AutoSize = False
             Caption = 'Colour'
             Color = clNone
             Font.Style = [fsBold]
@@ -1007,7 +1059,8 @@ object f_config_display: Tf_config_display
             Left = 176
             Height = 14
             Top = 24
-            Width = 25
+            Width = 120
+            AutoSize = False
             Caption = 'Fill?'
             Color = clNone
             Font.Style = [fsBold]
@@ -1015,9 +1068,9 @@ object f_config_display: Tf_config_display
           end
           object chkFillAst: TCheckBox
             Left = 176
-            Height = 21
+            Height = 13
             Top = 44
-            Width = 23
+            Width = 20
             Enabled = False
             OnClick = chkFillAstClick
             TabOrder = 0
@@ -1025,89 +1078,89 @@ object f_config_display: Tf_config_display
           end
           object chkFillOCl: TCheckBox
             Left = 176
-            Height = 21
+            Height = 13
             Top = 64
-            Width = 23
+            Width = 20
             OnClick = chkFillOClClick
             TabOrder = 1
           end
           object chkFillGCl: TCheckBox
             Left = 176
-            Height = 21
+            Height = 13
             Top = 84
-            Width = 23
+            Width = 20
             OnClick = chkFillGClClick
             TabOrder = 2
           end
           object chkFillPNe: TCheckBox
             Left = 176
-            Height = 21
+            Height = 13
             Top = 104
-            Width = 23
+            Width = 20
             OnClick = chkFillPNeClick
             TabOrder = 3
           end
           object chkFillDN: TCheckBox
             Left = 176
-            Height = 21
+            Height = 13
             Top = 124
-            Width = 23
+            Width = 20
             OnClick = chkFillDNClick
             TabOrder = 4
           end
           object chkFillEN: TCheckBox
             Left = 176
-            Height = 21
+            Height = 13
             Top = 144
-            Width = 23
+            Width = 20
             OnClick = chkFillENClick
             TabOrder = 5
           end
           object chkFillRN: TCheckBox
             Left = 176
-            Height = 21
+            Height = 13
             Top = 164
-            Width = 23
+            Width = 20
             OnClick = chkFillRNClick
             TabOrder = 6
           end
           object chkFillSN: TCheckBox
             Left = 416
-            Height = 21
+            Height = 13
             Top = 44
-            Width = 23
+            Width = 20
             OnClick = chkFillSNClick
             TabOrder = 7
           end
           object chkFillGxy: TCheckBox
             Left = 416
-            Height = 21
+            Height = 13
             Top = 64
-            Width = 23
+            Width = 20
             OnClick = chkFillGxyClick
             TabOrder = 8
           end
           object chkFillGxyCl: TCheckBox
             Left = 416
-            Height = 21
+            Height = 13
             Top = 84
-            Width = 23
+            Width = 20
             OnClick = chkFillGxyClClick
             TabOrder = 9
           end
           object chkFillQ: TCheckBox
             Left = 416
-            Height = 21
+            Height = 13
             Top = 104
-            Width = 23
+            Width = 20
             OnClick = chkFillQClick
             TabOrder = 10
           end
           object chkFillGL: TCheckBox
             Left = 416
-            Height = 21
+            Height = 13
             Top = 124
-            Width = 23
+            Width = 20
             Enabled = False
             OnClick = chkFillGLClick
             TabOrder = 11
@@ -1115,9 +1168,9 @@ object f_config_display: Tf_config_display
           end
           object chkFillNE: TCheckBox
             Left = 416
-            Height = 21
+            Height = 13
             Top = 144
-            Width = 23
+            Width = 20
             Enabled = False
             OnClick = chkFillNEClick
             TabOrder = 12
@@ -1130,12 +1183,14 @@ object f_config_display: Tf_config_display
           Top = 298
           Width = 478
           Caption = ' Adjust colour brightness '
+          ClientHeight = 143
+          ClientWidth = 474
           TabOrder = 2
           object Label1: TLabel
             Left = 24
             Height = 14
             Top = 20
-            Width = 134
+            Width = 112
             Caption = 'Low surface brightness'
             Color = clNone
             ParentColor = False
@@ -1144,7 +1199,7 @@ object f_config_display: Tf_config_display
             Left = 248
             Height = 14
             Top = 20
-            Width = 137
+            Width = 114
             Caption = 'High surface brightness'
             Color = clNone
             ParentColor = False
@@ -1153,7 +1208,7 @@ object f_config_display: Tf_config_display
             Left = 8
             Height = 14
             Top = 69
-            Width = 41
+            Width = 35
             Caption = 'Fainter'
             Color = clNone
             ParentColor = False
@@ -1162,7 +1217,7 @@ object f_config_display: Tf_config_display
             Left = 405
             Height = 14
             Top = 69
-            Width = 54
+            Width = 45
             Caption = 'Brighter  '
             Color = clNone
             ParentColor = False
@@ -1206,6 +1261,8 @@ object f_config_display: Tf_config_display
             Height = 41
             Top = 88
             Width = 233
+            ClientHeight = 41
+            ClientWidth = 233
             TabOrder = 2
             object Shape29: TShape
               Left = 32
@@ -1239,12 +1296,16 @@ object f_config_display: Tf_config_display
       end
       object Page4: TPage
         Caption = 'Sky colour'
+        ClientWidth = 513
+        ClientHeight = 454
         object Panel2: TPanel
           Left = 24
           Height = 147
           Top = 142
           Width = 416
           BevelOuter = bvNone
+          ClientHeight = 147
+          ClientWidth = 416
           TabOrder = 1
           object Label205: TLabel
             Left = 118
@@ -1287,6 +1348,8 @@ object f_config_display: Tf_config_display
             Height = 97
             Top = 8
             Width = 364
+            ClientHeight = 97
+            ClientWidth = 364
             TabOrder = 0
             object Shape18: TShape
               Tag = 1
@@ -1351,6 +1414,8 @@ object f_config_display: Tf_config_display
           Top = 294
           Width = 176
           BevelOuter = bvNone
+          ClientHeight = 120
+          ClientWidth = 176
           TabOrder = 2
           object Shape8: TShape
             Left = 5
@@ -1384,6 +1449,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
+          ClientHeight = 89
+          ClientWidth = 364
           Columns = 2
           Items.Strings = (
             'Fixed Black'
@@ -1405,6 +1472,8 @@ object f_config_display: Tf_config_display
       end
       object Page5: TPage
         Caption = 'Lines'
+        ClientWidth = 513
+        ClientHeight = 454
         object EqGrid: TCheckBox
           Left = 16
           Height = 19
@@ -1456,6 +1525,8 @@ object f_config_display: Tf_config_display
           Top = 173
           Width = 273
           Caption = 'Constellation Figures'
+          ClientHeight = 140
+          ClientWidth = 273
           TabOrder = 9
           object Label132: TLabel
             Left = 29
@@ -1493,6 +1564,7 @@ object f_config_display: Tf_config_display
             Top = 32
             Width = 100
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+            ItemHeight = 16
             ItemIndex = 0
             Items.Strings = (
               'Line'
@@ -1515,6 +1587,8 @@ object f_config_display: Tf_config_display
           Top = 325
           Width = 273
           Caption = 'Constellation Boundaries'
+          ClientHeight = 122
+          ClientWidth = 269
           TabOrder = 11
           object Label72: TLabel
             Left = 29
@@ -1548,10 +1622,11 @@ object f_config_display: Tf_config_display
           end
           object CBStyle: TComboBox
             Left = 29
-            Height = 21
+            Height = 24
             Top = 32
             Width = 100
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+            ItemHeight = 16
             ItemIndex = 0
             Items.Strings = (
               'Line'
@@ -1574,6 +1649,8 @@ object f_config_display: Tf_config_display
           Top = 173
           Width = 185
           Caption = 'Milky Way'
+          ClientHeight = 122
+          ClientWidth = 181
           TabOrder = 10
           object milkyway: TCheckBox
             Left = 8
@@ -1596,10 +1673,11 @@ object f_config_display: Tf_config_display
         end
         object GridStyle: TComboBox
           Left = 39
-          Height = 21
+          Height = 24
           Top = 53
           Width = 100
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemHeight = 16
           ItemIndex = 0
           Items.Strings = (
             'Line'
@@ -1617,10 +1695,11 @@ object f_config_display: Tf_config_display
         end
         object EclipticStyle: TComboBox
           Left = 230
-          Height = 21
+          Height = 24
           Top = 53
           Width = 100
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemHeight = 16
           ItemIndex = 0
           Items.Strings = (
             'Line'
@@ -1638,10 +1717,11 @@ object f_config_display: Tf_config_display
         end
         object EqGridStyle: TComboBox
           Left = 39
-          Height = 21
+          Height = 24
           Top = 125
           Width = 100
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemHeight = 16
           ItemIndex = 0
           Items.Strings = (
             'Line'
@@ -1659,10 +1739,11 @@ object f_config_display: Tf_config_display
         end
         object GalEqStyle: TComboBox
           Left = 230
-          Height = 21
+          Height = 24
           Top = 125
           Width = 100
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemHeight = 16
           ItemIndex = 0
           Items.Strings = (
             'Line'
@@ -1681,6 +1762,8 @@ object f_config_display: Tf_config_display
       end
       object Page6: TPage
         Caption = 'Labels'
+        ClientWidth = 513
+        ClientHeight = 454
         object MagLabel: TRadioGroup
           Left = 16
           Height = 73
@@ -1696,6 +1779,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
+          ClientHeight = 73
+          ClientWidth = 225
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -1721,6 +1806,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
+          ClientHeight = 73
+          ClientWidth = 201
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -1754,6 +1841,8 @@ object f_config_display: Tf_config_display
           Top = 64
           Width = 449
           Caption = 'Label Object'
+          ClientHeight = 273
+          ClientWidth = 449
           TabOrder = 2
           object Label237: TLabel
             Left = 245
@@ -2092,6 +2181,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TPage
         Caption = 'Fonts'
+        ClientWidth = 513
+        ClientHeight = 454
         object Bevel10: TBevel
           Left = 8
           Height = 329
@@ -2503,6 +2594,8 @@ object f_config_display: Tf_config_display
       end
       object Page8: TPage
         Caption = 'Finder circle'
+        ClientWidth = 513
+        ClientHeight = 454
         object Label307: TLabel
           Left = 80
           Height = 14
@@ -2642,6 +2735,8 @@ object f_config_display: Tf_config_display
       end
       object Page9: TPage
         Caption = 'Finder rectangle'
+        ClientWidth = 513
+        ClientHeight = 454
         object Label308: TLabel
           Left = 80
           Height = 14
@@ -2786,6 +2881,8 @@ object f_config_display: Tf_config_display
     Top = 482
     Width = 523
     Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 523
     TabOrder = 1
     object Button2: TButton
       Left = 203
