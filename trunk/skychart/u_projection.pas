@@ -757,7 +757,7 @@ A:=Rmod(A+pi2,pi2);
 { refraction meeus91 15.4 }
 h1:=rad2deg*h;
 if h1>-1 then h:=double(minvalue([pid2,h+deg2rad*c.ObsRefractionCor*(1.02/tan(deg2rad*(h1+10.3/(h1+5.11))))/60]))
-         else h:=h+deg2rad*0.64658062088;
+         else h:=h+deg2rad*c.ObsRefractionCor*0.64658062088*(h1+90)/89;
 END ;
 
 Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart);
@@ -769,7 +769,7 @@ h:=h-c.RefractionOffset; // correction for the refraction equation reversibility
 { refraction meeus91 15.3 }
 h1:=rad2deg*h;
 if h1>-0.3534193791 then h:=double(minvalue([pid2,h-deg2rad*c.ObsRefractionCor*(1/tan(deg2rad*(h1+(7.31/(h1+4.4)))))/60]))
-                    else h:=h-deg2rad*0.64658062088;
+                    else h:=h-deg2rad*c.ObsRefractionCor*0.65705159*(h1+90)/89.64658;
 h1:=h;
 de:= double(arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) ));
 hh:= double(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
