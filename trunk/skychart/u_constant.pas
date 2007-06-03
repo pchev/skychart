@@ -94,7 +94,7 @@ const cdcversion = 'Version 3 beta 0.1.3 svn ';
               ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
       greeksymbol : array[1..2,1..24]of string=(('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'),
                   ('a','b','g','d','e','z','h','q','i','k','l','m','n','x','o','p','r','s','t','u','f','c','y','w'));
-      pla : array[1..32] of string[8] = ('Mercury ','Venus   ','*       ','Mars    ','Jupiter ',
+      pla : array[1..32] of string[10] = ('Mercury ','Venus   ','*       ','Mars    ','Jupiter ',
       'Saturn  ','Uranus  ','Neptune ','Pluto   ','Sun     ','Moon    ',
       'Io      ','Europa  ','Ganymede','Callisto','Mimas   ','Encelade','Tethys  ','Dione   ',
       'Rhea    ','Titan   ','Hyperion','Iapetus ','Miranda ','Ariel   ','Umbriel ','Titania ',
