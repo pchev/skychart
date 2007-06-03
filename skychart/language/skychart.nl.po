@@ -1,15 +1,15 @@
-# translation of skychart.nl.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
+# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-05-13 18:19+0200\n"
-"Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
-"Project-Id-Version: skychart.nl\n"
+"PO-Revision-Date: 2007-05-16 18:43+0100\n"
+"Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
+"Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
 "Language-Team:  <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any installed catalog index."
@@ -37,7 +37,7 @@ msgstr "%s niet gevonden"
 
 #: u_translation:rsxplanetretur
 msgid "%s, xplanet return %s"
-msgstr ""
+msgstr "%s, xplanet return %s"
 
 #: u_translation:rsalltablesstr
 msgid "%sAll tables structure exists."
@@ -45,23 +45,23 @@ msgstr "%sAlle tabel-structuren bestaan. "
 
 #: u_translation:rsalsobesureth
 msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sVergewis u ervan dat de benodigde database software geïnstalleerd is. %sRaadpleeg de documantatie als u niet zeker bent. %sWilt u verder gaan?"
+msgstr "%sVergewis u ervan dat de benodigde database software geïnstalleerd is. %sRaadpleeg de documentatie als u niet zeker bent. %sWilt u verder gaan?"
 
 #: u_translation:rsaltturns
 msgid "%sAlt turns:"
-msgstr "%sAlt omwentellingen:"
+msgstr "%sAlt as-omw.:"
 
 #: u_translation:rsazturns
 msgid "%sAz turns:"
-msgstr "%sAz omwentellingen:"
+msgstr "%sAz as-omw.:"
 
 #: u_translation:rsccw
 msgid "%sCCW"
-msgstr ""
+msgstr "%stegen de klok in"
 
 #: u_translation:rscw
 msgid "%sCW"
-msgstr ""
+msgstr "%smet de klok mee"
 
 #: u_translation:rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -69,11 +69,11 @@ msgstr "%sKan de database niet %s openen! %s"
 
 #: u_translation:rsdecturns2
 msgid "%sDEC turns:"
-msgstr "%sDEC omwentellingen:"
+msgstr "%sDEC as-omw.:"
 
 #: u_translation:rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
-msgstr "%sdatabase %s geopend.%s"
+msgstr "%sDatabase %s geopend.%s"
 
 #: u_translation:rserrorcreatin
 msgid "%sError creating table %s"
@@ -85,7 +85,7 @@ msgstr "%sContoleer alstublieft uw Internet verbinding en de URL definitie%s"
 
 #: u_translation:rsraturns2
 msgid "%sRA turns:"
-msgstr "%sRA omwentellingen:"
+msgstr "%sRA as-omw.:"
 
 #: u_translation:rstabledonotex
 msgid "%sTable %s do not exist! %sPlease correct the error and retry."
@@ -105,7 +105,7 @@ msgstr "(nuttig om een flux weer te geven)"
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
-msgstr ""
+msgstr "102 CD DSS"
 
 #: u_translation:rs184recommend
 msgid "184 (recommended up to 1'000'000 objects)"
@@ -129,7 +129,7 @@ msgstr "<< Vorig"
 
 #: u_translation:rsad
 msgid "AD"
-msgstr ""
+msgstr "AD"
 
 #: u_translation:rsabbreviation
 msgid "Abbreviation"
@@ -137,11 +137,11 @@ msgstr "Afkorting"
 
 #: u_translation:rsabort
 msgid "Abort"
-msgstr "Breek af"
+msgstr "Afbreken"
 
 #: u_translation:rsabortslew
 msgid "Abort Slew"
-msgstr "Stop zwenken"
+msgstr "Stop bewegen naar object"
 
 #: u_translation:rsabortedbyuse
 msgid "Aborted by user"
@@ -157,11 +157,11 @@ msgstr "Over %s"
 
 #: u_translation:rsactualsystem
 msgid "Actual system time"
-msgstr "Werkelijke systeem tijd"
+msgstr "Huidige systeemtijd"
 
 #: u_translation:rsadd
 msgid "Add"
-msgstr "Voeg toe"
+msgstr "Toevoegen"
 
 #: u_translation:rsaddequatoria
 msgid "Add Equatorial Grid"
@@ -181,7 +181,7 @@ msgstr "Voeg de gewijzigde namen toe aan de index"
 
 #: u_translation:rsadjustcolour
 msgid "Adjust colour brightness"
-msgstr "Pas kleur helderheid aan"
+msgstr "Pas kleurhelderheid aan"
 
 #: u_translation:rsadvanced
 msgid "Advanced"
@@ -197,7 +197,7 @@ msgstr "Leeftijd"
 
 #: u_translation:rsall
 msgid "All"
-msgstr "Alles"
+msgstr "Alle"
 
 #: u_translation:rsalltoolsbar
 msgid "All Tools Bar"
@@ -205,7 +205,7 @@ msgstr "Alle gereedschapsbalken"
 
 #: u_translation:rsalt
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: u_translation:rsaltazcoordin
 msgid "Alt-Az Coordinate"
@@ -229,7 +229,7 @@ msgstr "Hoogte"
 
 #: u_translation:rsalwaysshowco
 msgid "Always show compass rose"
-msgstr ""
+msgstr "Altijd kompasroos tonen"
 
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
@@ -249,11 +249,11 @@ msgstr "Toepassen"
 
 #: u_translation:rsapplychanget
 msgid "Apply Change To All Chart"
-msgstr "Pas toe op alle kaarten"
+msgstr "Pas wijziging toe op alle kaarten"
 
 #: u_translation:rsargumentofpe
 msgid "Argument of perihelion"
-msgstr ""
+msgstr "Argument van het perihelium"
 
 #: u_translation:rsartificialsa
 msgid "Artificial Satellites"
@@ -321,27 +321,27 @@ msgstr "Extern toegevoegde bestanden"
 
 #: u_translation:rsaz
 msgid "Az"
-msgstr ""
+msgstr "Az"
 
 #: u_translation:rsazimuth
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: u_translation:rsazimuthalcoo
 msgid "Azimuthal Coordinate"
-msgstr "Azimuthale coördinaten"
+msgstr "Azimutale coördinaten"
 
 #: u_translation:rsb
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: u_translation:rsbc
 msgid "BC"
-msgstr ""
+msgstr "BC"
 
 #: u_translation:rsbii
 msgid "BII"
-msgstr ""
+msgstr "BII"
 
 #: u_translation:rsbackground
 msgid "Background"
@@ -349,11 +349,11 @@ msgstr "Achtergrond"
 
 #: u_translation:rsbackgroundpi
 msgid "Background Picture"
-msgstr "Achtergrond Afbeelding"
+msgstr "Achtergrond afbeelding"
 
 #: u_translation:rsbayerletter
 msgid "Bayer Letter"
-msgstr ""
+msgstr "Bayer letter"
 
 #: u_translation:rsbeginprocess
 msgid "Begin processing for jd=%s / %s"
@@ -369,11 +369,11 @@ msgstr "Binair geïndiceerde catalogus"
 
 #: u_translation:rsbitmap
 msgid "Bitmap"
-msgstr ""
+msgstr "Bitmap"
 
 #: u_translation:rsbitmapfile
 msgid "Bitmap File"
-msgstr "Bitmap bestand"
+msgstr "Bitmap-bestand"
 
 #: u_translation:rsblackonwhite
 msgid "Black on White"
@@ -389,7 +389,7 @@ msgstr "Zwart/wit, lijnmodus"
 
 #: u_translation:rsblinkingpict
 msgid "Blinking Picture"
-msgstr ""
+msgstr "Knipperende afbeelding"
 
 #: u_translation:rsblue
 msgid "Blue"
@@ -465,7 +465,7 @@ msgstr "Annuleren"
 
 #: u_translation:rscancel2
 msgid "Cancel %s"
-msgstr "Annuleren %s"
+msgstr "Annuleer %s"
 
 #: u_translation:rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
@@ -473,11 +473,11 @@ msgstr "Annuleren, verkeerde zip bestand?? %s"
 
 #: u_translation:rscascade
 msgid "Cascade"
-msgstr ""
+msgstr "Cascade"
 
 #: u_translation:rscat
 msgid "Cat."
-msgstr ""
+msgstr "Cat."
 
 #: u_translation:rscatalog
 msgid "Catalog"
@@ -521,7 +521,7 @@ msgstr "Centrale ster B magnitude"
 
 #: u_translation:rscentralstarv
 msgid "Central Star V Magnitude"
-msgstr "Centrale ster V magnitude"
+msgstr "Centrale ster B magnitude"
 
 #: u_translation:rscentralmerid
 msgid "Central meridian"
@@ -529,15 +529,15 @@ msgstr "Centrale meridiaan"
 
 #: u_translation:rscentre
 msgid "Centre"
-msgstr "Centrum"
+msgstr "Centreer"
 
 #: u_translation:rschangedrawin
 msgid "Change Drawing Mode"
-msgstr "Verander afbeeldingsmodus"
+msgstr "Verander weergavemodus"
 
 #: u_translation:rschangepictur
 msgid "Change pictures display"
-msgstr "Verander afbeeldingen weergave"
+msgstr "Verander weergavemodus"
 
 #: u_translation:rschart
 msgid "Chart"
@@ -621,7 +621,7 @@ msgstr "Gesloten contour"
 
 #: u_translation:rsclosingconne
 msgid "Closing connection"
-msgstr "Verbinding sluiten"
+msgstr "Bezig verbinding te sluiten"
 
 #: u_translation:rsclusterandne
 msgid "Cluster and Nebula"
@@ -637,11 +637,11 @@ msgstr "Kleur index"
 
 #: u_translation:rscolorsaturat
 msgid "Color saturation"
-msgstr "Kleur verzadiging"
+msgstr "Kleurverzadiging"
 
 #: u_translation:rscolorlinemod
 msgid "Color, Line mode"
-msgstr "Kleur, regel modus"
+msgstr "Kleur, lijnmodus"
 
 #: u_translation:rscomet
 msgid "Comet"
@@ -665,7 +665,7 @@ msgstr "Commando niet gevonden!"
 
 #: u_translation:rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Commando om te gebuiken om bestand te bewerken"
+msgstr "Commando om bestand te creëeren"
 
 #: u_translation:rscommonname
 msgid "Common Name"
@@ -673,15 +673,15 @@ msgstr "Triviale naam"
 
 #: u_translation:rscompassroses
 msgid "Compass rose size"
-msgstr ""
+msgstr "Kompas-roos grootte"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
-msgstr ""
+msgstr "Component 1 magnitude"
 
 #: u_translation:rscomponent2ma
 msgid "Component 2 Magnitude"
-msgstr ""
+msgstr "Component 2 magnitude"
 
 #: u_translation:rscompute
 msgid "Compute"
@@ -737,7 +737,7 @@ msgstr "Sterrenbeeld grenzen"
 
 #: u_translation:rsconstellatio5
 msgid "Constellation Boundary File Name : "
-msgstr "Sterrenbeeld grenzen bestandsnaam :"
+msgstr "Sterrenbeeld grenzen bestandsnaam:"
 
 #: u_translation:rsconstellatio3
 msgid "Constellation Figure File Name : "
@@ -757,7 +757,7 @@ msgstr "Sterrenbeeld naam"
 
 #: u_translation:rscontrast
 msgid "Contrast"
-msgstr ""
+msgstr "Contrast"
 
 #: u_translation:rscontrolpanel
 msgid "Control Panel"
@@ -797,7 +797,7 @@ msgstr "Coördinaten:"
 
 #: u_translation:rscopy
 msgid "Copy"
-msgstr "Kopieër"
+msgstr "Kopiëer"
 
 #: u_translation:rscoreradius
 msgid "Core Radius"
@@ -805,11 +805,11 @@ msgstr "Kernstraal"
 
 #: u_translation:rscorrelated
 msgid "Correlated"
-msgstr "Gecorelateerd"
+msgstr "Gecorreleerd"
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
-msgstr ""
+msgstr "Land tijdzone"
 
 #: u_translation:rscreatedataba
 msgid "Create Database"
@@ -821,7 +821,7 @@ msgstr "Creëer een nieuwe kaart"
 
 #: u_translation:rscreateasearc
 msgid "Create a search index file"
-msgstr "Creëer een zoek index bestand"
+msgstr "Creëer een zoek-index bestand"
 
 #: u_translation:rscreatefiles
 msgid "Create files"
@@ -833,7 +833,7 @@ msgstr "Creëer 'header'"
 
 #: u_translation:rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Creëert postscript kaart. Alstublieft geduld..."
+msgstr "Creëert Postscript kaart. Alstublieft geduld..."
 
 #: u_translation:rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
@@ -849,7 +849,7 @@ msgstr "Huidige datum"
 
 #: u_translation:rssday
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: u_translation:rsdbname
 msgid "DB Name:"
@@ -861,11 +861,11 @@ msgstr "DB invoegen mislukt van %s :%s"
 
 #: u_translation:rsde
 msgid "DE"
-msgstr ""
+msgstr "DE"
 
 #: u_translation:rsdec
 msgid "DEC"
-msgstr ""
+msgstr "DEC"
 
 #: u_translation:rsdecoptions
 msgid "DEC options"
@@ -873,15 +873,15 @@ msgstr "DEC opties"
 
 #: u_translation:rsdecturns
 msgid "DEC turns: "
-msgstr "DEC omwentelingen: "
+msgstr "DEC keer:"
 
 #: u_translation:rsdssrealsky
 msgid "DSS RealSky"
-msgstr ""
+msgstr "DSS RealSky"
 
 #: u_translation:rsdtut
 msgid "DT - UT  : "
-msgstr ""
+msgstr "DT - UT  : "
 
 #: u_translation:rsdarknebula
 msgid "Dark Nebula"
@@ -889,7 +889,7 @@ msgstr "Donkere nevel"
 
 #: u_translation:rsdarknebula2
 msgid "Dark nebula"
-msgstr "Donkere Nevel"
+msgstr "Donkere nevel"
 
 #: u_translation:rsdash1
 msgid "Dash"
@@ -897,15 +897,15 @@ msgstr "Streep"
 
 #: u_translation:rsdashdot1
 msgid "Dash Dot"
-msgstr "Streep Punt"
+msgstr "Streep punt"
 
 #: u_translation:rsdashdotdot1
 msgid "Dash Dot Dot"
-msgstr "Streep Punt Punt"
+msgstr "Streep punt punt"
 
 #: u_translation:rsdatafiles
 msgid "Data Files :"
-msgstr "Data bestanden :"
+msgstr "Data bestanden:"
 
 #: u_translation:rsdatafilescdr
 msgid "Data Files, CDrom"
@@ -921,7 +921,7 @@ msgstr "Gegevens beginnen op regel %s"
 
 #: u_translation:rsdatabasetype
 msgid "Database Type"
-msgstr ""
+msgstr "Database type"
 
 #: u_translation:rsdatabasefile
 msgid "Database file: "
@@ -957,7 +957,7 @@ msgstr "Dag tijd"
 
 #: u_translation:rsdecimalsouth
 msgid "Decimal South Polar Distance"
-msgstr "Decimaal zuidelijke pool afstand"
+msgstr "Decimaal zuidelijke poolafstand"
 
 #: u_translation:rsdecimaldegre
 msgid "Decimal degrees"
@@ -965,7 +965,7 @@ msgstr "Decimaal graden"
 
 #: u_translation:rsdecimalhours
 msgid "Decimal hours"
-msgstr "Decimaal uren"
+msgstr "Decimale uren"
 
 #: u_translation:rsdeclination
 msgid "Declination"
@@ -973,11 +973,11 @@ msgstr "Declinatie"
 
 #: u_translation:rsdecrementtim
 msgid "Decrement Time"
-msgstr ""
+msgstr "verlaag tijd"
 
 #: u_translation:rsnebulacommon
 msgid "Deep Sky Common Name"
-msgstr "Deep sky gewone naam"
+msgstr "Deep sky triviale naam"
 
 #: u_translation:rsnebulaefilte
 msgid "Deep Sky Filter"
@@ -1001,7 +1001,7 @@ msgstr "Deep sky of andere objecten"
 
 #: u_translation:rsdeepskyobjec
 msgid "Deep sky object colour"
-msgstr "Deep sky object kleur"
+msgstr "Deep sky objectkleur"
 
 #: u_translation:rsdeepskycolou
 msgid "Deep-sky colour"
@@ -1025,7 +1025,7 @@ msgstr "Standaard nevel parameters"
 
 #: u_translation:rsdefaultoutli
 msgid "Default Outline parameters"
-msgstr "Standaard outline parameters"
+msgstr "Standaard omlijningsparameters"
 
 #: u_translation:rsdefaultcolor
 msgid "Default color"
@@ -1065,7 +1065,7 @@ msgstr "Verwijder maandelijkse data ouder dan"
 
 #: u_translation:rsdeletecomple
 msgid "Delete completed"
-msgstr "Verwijderen gereed"
+msgstr "Delete completed"
 
 #: u_translation:rsdeletedailyd
 msgid "Delete daily data"
@@ -1089,7 +1089,7 @@ msgstr "Verwijder van de maand tabel..."
 
 #: u_translation:rsdeletefromna
 msgid "Delete from name list..."
-msgstr "verwijder uit namen lijst..."
+msgstr "verwijder uit namenlijst..."
 
 #: u_translation:rsdeleteprevio
 msgid "Delete previous data for this date."
@@ -1121,23 +1121,23 @@ msgstr "Bureaublad omgeving"
 
 #: u_translation:rsdetails
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: u_translation:rsdeviceport
 msgid "Device Port "
-msgstr "Apparaat port"
+msgstr "Apparaat-poort"
 
 #: u_translation:rsdiam
 msgid "Diam."
-msgstr ""
+msgstr "Diam."
 
 #: u_translation:rsdiameter
 msgid "Diameter"
-msgstr ""
+msgstr "Diameter"
 
 #: u_translation:rsdimension
 msgid "Dimension"
-msgstr "Dimesie"
+msgstr "Dimensie"
 
 #: u_translation:rsdimensionand
 msgid "Dimension and Units"
@@ -1145,7 +1145,7 @@ msgstr "Dimensie en eenheden"
 
 #: u_translation:rsdir
 msgid "Dir"
-msgstr ""
+msgstr "Dir"
 
 #: u_translation:rsdirectory
 msgid "Directory"
@@ -1169,7 +1169,7 @@ msgstr "Geef weer als symbool"
 
 #: u_translation:rsdisplaycolou
 msgid "Display colour"
-msgstr "Toon kleur"
+msgstr "Kleurweergave"
 
 #: u_translation:rsdisplayimage
 msgid "Display image of cataloged objects"
@@ -1209,7 +1209,7 @@ msgstr "Negeer kometen zwakker dan magnitude"
 
 #: u_translation:rsdoyouwanttos
 msgid "Do you want to save the program setting now?"
-msgstr "Wilt u de programma instellingen nu opslaan?"
+msgstr "Wilt u de programma-instellingen nu opslaan?"
 
 #: u_translation:rsdot1
 msgid "Dot"
@@ -1225,15 +1225,15 @@ msgstr "Dubbelsterren"
 
 #: u_translation:rsdownload
 msgid "Download"
-msgstr ""
+msgstr "Download"
 
 #: u_translation:rsdownload2
 msgid "Download %s"
-msgstr ""
+msgstr "Download %s"
 
 #: u_translation:rsdownloadcoun
 msgid "Download country details"
-msgstr "Download land details"
+msgstr "Download land-details"
 
 #: u_translation:rsdownloadlate
 msgid "Download latest orbital elements"
@@ -1253,7 +1253,7 @@ msgstr "Beeld lijn af"
 
 #: u_translation:rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "Beeld de aldus verlaagde horizon af"
+msgstr "Beeld de verlaagde horizon af"
 
 #: u_translation:rsdrawingtype
 msgid "Drawing Type"
@@ -1309,7 +1309,7 @@ msgstr "Bewerken"
 
 #: u_translation:rseditcolor
 msgid "Edit Color"
-msgstr "Bewerk Kleur"
+msgstr "Bewerk kleur"
 
 #: u_translation:rseditlabel
 msgid "Edit Label"
@@ -1317,7 +1317,7 @@ msgstr "Bewerk label"
 
 #: u_translation:rseditlineoper
 msgid "Edit Line operation"
-msgstr "Bewerk Lijn operation"
+msgstr "Bewerk lijn operation"
 
 #: u_translation:rseditobjectty
 msgid "Edit Object Types"
@@ -1329,15 +1329,15 @@ msgstr "Bewerk eenheden"
 
 #: u_translation:rselong
 msgid "Elong."
-msgstr ""
+msgstr "Elong."
 
 #: u_translation:rsemissionnebu
 msgid "Emission nebula"
-msgstr "Emissie nevel"
+msgstr "Emissienevel"
 
 #: u_translation:rsendofobject
 msgid "End of object"
-msgstr "Eind van object"
+msgstr "Einde van object"
 
 #: u_translation:rsendprocessin
 msgid "End processing: %s asteroids"
@@ -1349,11 +1349,11 @@ msgstr "Ephemeriden kalender"
 
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
-msgstr ""
+msgstr "Epoche (JD)"
 
 #: u_translation:rsepochofmaxim
 msgid "Epoch of maxima"
-msgstr "Epoch van maxima"
+msgstr "Epoche van maxima"
 
 #: u_translation:rseqgrid
 msgid "Eq. Grid"
@@ -1381,7 +1381,7 @@ msgstr "Equatoriale coördinaten, equinox: %s"
 
 #: u_translation:rsequinox2
 msgid "Equinox"
-msgstr ""
+msgstr "Equinox"
 
 #: u_translation:rsequinoxofthe
 msgid "Equinox of the date"
@@ -1389,7 +1389,7 @@ msgstr "Equinox van de datum"
 
 #: u_translation:rsequinox
 msgid "Equinox:"
-msgstr ""
+msgstr "Equinox:"
 
 #: u_translation:rserror
 msgid "Error"
@@ -1453,15 +1453,15 @@ msgstr "FITS bestand"
 
 #: u_translation:rsfov
 msgid "FOV"
-msgstr ""
+msgstr "Beeldveld"
 
 #: u_translation:rsfov2
 msgid "FOV:"
-msgstr ""
+msgstr "Beeldveld:"
 
 #: u_translation:rsftp
 msgid "FTP "
-msgstr ""
+msgstr "FTP "
 
 #: u_translation:rsftppassivemo
 msgid "FTP Passive Mode"
@@ -1473,7 +1473,7 @@ msgstr "Mislukt : %s"
 
 #: u_translation:rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Zwakke sterren grootte"
+msgstr "Zwakke sterren-grootte"
 
 #: u_translation:rsfainter
 msgid "Fainter"
@@ -1485,7 +1485,7 @@ msgstr "Veldnummer"
 
 #: u_translation:rsfieldofvisio
 msgid "Field of Vision"
-msgstr "Beeldveld (FOV)"
+msgstr "Beeldveld"
 
 #: u_translation:rsfieldofvisio3
 msgid "Field of Vision Setting"
@@ -1493,11 +1493,11 @@ msgstr "Beeldveld instelling"
 
 #: u_translation:rsfieldofvisio5
 msgid "Field of vision number :"
-msgstr "Beeldveld nummer :"
+msgstr "Beeldveld nummer:"
 
 #: u_translation:rsfieldtoowidt
 msgid "Field too width! Maximum is %s"
-msgstr "Veld te breed! Maximum is %s"
+msgstr "Beeldveld te breed! Maximum is %s"
 
 #: u_translation:rsfile
 msgid "File"
@@ -1509,7 +1509,7 @@ msgstr "Bestand niet gevonden!"
 
 #: u_translation:rsfilespath
 msgid "Files Path"
-msgstr "Bestanden Pad"
+msgstr "Bestanden-pad"
 
 #: u_translation:rsfillmilkyway
 msgid "Fill Milky Way"
@@ -1517,7 +1517,7 @@ msgstr "Vul melkweg"
 
 #: u_translation:rsfillwithhori
 msgid "Fill with horizon color"
-msgstr "Vul met horizon kleur"
+msgstr "Vul met horizon-kleur"
 
 #: u_translation:rsfill
 msgid "Fill?"
@@ -1525,7 +1525,7 @@ msgstr "Vullen?"
 
 #: u_translation:rsfilter
 msgid "Filter ->"
-msgstr ""
+msgstr "Filter ->"
 
 #: u_translation:rsfilternebula
 msgid "Filter Deep Sky Objects"
@@ -1541,15 +1541,15 @@ msgstr "Zoek"
 
 #: u_translation:rsfindercircle
 msgid "Finder circle (Eyepiece)"
-msgstr "Zoeker cirkel (Oculair)"
+msgstr "Beeldveld  zoeker/oculair"
 
 #: u_translation:rsfindermark
 msgid "Finder mark"
-msgstr "Zoeker markering"
+msgstr "Veldmarkering oculair/camera"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "Zoeker rechthoek (CCD)"
+msgstr "Beeldveld camera"
 
 #: u_translation:rsfirst5000
 msgid "First 5000"
@@ -1557,7 +1557,7 @@ msgstr "Eerste 5000"
 
 #: u_translation:rsfirstchar
 msgid "First Char"
-msgstr ""
+msgstr "Eerste char"
 
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
@@ -1573,7 +1573,7 @@ msgstr "Flamsteed nummer"
 
 #: u_translation:rsfonts
 msgid "Fonts"
-msgstr ""
+msgstr "Fonts"
 
 #: u_translation:rsforalargecat
 msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
@@ -1601,7 +1601,7 @@ msgstr "G helling parameter"
 
 #: u_translation:rsgrstransit
 msgid "GRS transit"
-msgstr ""
+msgstr "GRV overgang"
 
 #: u_translation:rsgalactic
 msgid "Galactic"
@@ -1625,15 +1625,15 @@ msgstr "Melkwegstelsel"
 
 #: u_translation:rsgalaxycluste
 msgid "Galaxy Cluster"
-msgstr "Melkwegstelsel cluster"
+msgstr "Melkwegstelselcluster"
 
 #: u_translation:rsgalaxycluste2
 msgid "Galaxy cluster"
-msgstr "Melkwegstelsel cluster"
+msgstr "Melkwegstelselscluster"
 
 #: u_translation:rsgamma
 msgid "Gamma"
-msgstr ""
+msgstr "Gamma"
 
 #: u_translation:rsgeneral
 msgid "General"
@@ -1653,11 +1653,11 @@ msgstr "Geocentrisch"
 
 #: u_translation:rsgetasteroidl
 msgid "Get Asteroid list."
-msgstr "Haal Planetoïden lijst."
+msgstr "Haal planetoïden lijst."
 
 #: u_translation:rsgetdssimage
 msgid "Get DSS Image"
-msgstr "Haal DSS afbeeldingen"
+msgstr "Haal DSS afbeelding"
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -1693,11 +1693,11 @@ msgstr "roosterverdeling"
 
 #: u_translation:rsshour
 msgid "H"
-msgstr ""
+msgstr "H"
 
 #: u_translation:rshabsolutemag
 msgid "H absolute magnitude"
-msgstr ""
+msgstr "H absolute Magnitude"
 
 #: u_translation:rshttpproxy
 msgid "HTTP Proxy"
@@ -1713,7 +1713,7 @@ msgstr "Stop na 1000 fouten"
 
 #: u_translation:rshbetamagnitu
 msgid "Hbeta Magnitude"
-msgstr ""
+msgstr "Hbeta magnitude"
 
 #: u_translation:rsheight
 msgid "Height"
@@ -1721,7 +1721,7 @@ msgstr "Hoogte"
 
 #: u_translation:rshelp
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: u_translation:rshelpcontents
 msgid "Help contents"
@@ -1741,11 +1741,11 @@ msgstr "Veel kleur"
 
 #: u_translation:rshighsurfaceb
 msgid "High surface brightness"
-msgstr "Hoge oppervlakte helderheid"
+msgstr "Hoge oppervlaktehelderheid"
 
 #: u_translation:rshorizon
 msgid "Horizon"
-msgstr ""
+msgstr "Horizon"
 
 #: u_translation:rshostname
 msgid "Host Name:"
@@ -1785,7 +1785,7 @@ msgstr "INDI server port"
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
-msgstr "Je leeft hoog op een berg aan de oceaankust en je vindt het leuk om het vervormde beeld van een object bestuderen dat op zeeniveau zich nog achter onder de horizon bevindt."
+msgstr "Wanneer u vanaf een berg observeert, zal de horizon lager zijn dan wanneer u op zeeniveau zou zijn."
 
 #: u_translation:rsillum
 msgid "Illum."
@@ -1797,7 +1797,7 @@ msgstr "Verlichte deel schijf"
 
 #: u_translation:rsimagedirecto
 msgid "Image Directory"
-msgstr "Afbeeldingen map"
+msgstr "Afbeeldingenmap"
 
 #: u_translation:rsimageoptions
 msgid "Image Options"
@@ -1813,7 +1813,7 @@ msgstr "Inclinatie="
 
 #: u_translation:rsincrementtim
 msgid "Increment Time"
-msgstr "Toename Tijd"
+msgstr "verhoog tijd"
 
 #: u_translation:rsincrementfor
 msgid "Increment for Bright Stars"
@@ -1833,7 +1833,7 @@ msgstr "Geef de string voor iedere kleur:"
 
 #: u_translation:rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr "Geef de string voor iedere afbeeld opdracht:"
+msgstr "Geef de string voor iedere afbeeldopdracht:"
 
 #: u_translation:rsindicatethes
 msgid "Indicate the string identifier for each type of object :"
@@ -1849,7 +1849,7 @@ msgstr "Initialiseer database"
 
 #: u_translation:rsinputcatalog
 msgid "Input Catalog files"
-msgstr "Input catalogus bestanden"
+msgstr "Input catalogus-bestanden"
 
 #: u_translation:rsinsertfailed2
 msgid "Insert failed! %s"
@@ -1861,7 +1861,7 @@ msgstr "Nederlands"
 
 #: u_translation:rsinternet
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: u_translation:rsinvalidfitsf
 msgid "Invalid FITS file: %s"
@@ -1873,7 +1873,7 @@ msgstr "Onzichtbaar op deze geografische breedte"
 
 #: u_translation:rsiscoordinate
 msgid "Is coordinates epoch really %s ?"
-msgstr "Is de coördinaten-epoch werkelijk %s ?"
+msgstr "Is de coördinaten-epoche werkelijk %s?"
 
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
@@ -1881,27 +1881,27 @@ msgstr "JD Kalender"
 
 #: u_translation:rsjd
 msgid "JD:"
-msgstr ""
+msgstr "JD:"
 
 #: u_translation:rsjulianday
 msgid "Julian Day ="
-msgstr "Juliaanse Dag ="
+msgstr "Juliaanse dag ="
 
 #: u_translation:rsjulianyear
 msgid "Julian Year"
-msgstr "Juliaans Jaar"
+msgstr "Juliaans jaar"
 
 #: u_translation:rsjupiter
 msgid "Jupiter"
-msgstr ""
+msgstr "Jupiter"
 
 #: u_translation:rsjupitergrslo
 msgid "Jupiter GRS longitude :"
-msgstr "Jupiter GRV lengtegraad :"
+msgstr "Jupiter GRV lengtegraad:"
 
 #: u_translation:rskm
 msgid "Km."
-msgstr ""
+msgstr "Km."
 
 #: u_translation:rsknot
 msgid "Knot"
@@ -1909,15 +1909,15 @@ msgstr "Knoop"
 
 #: u_translation:rsl
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: u_translation:rslii
 msgid "LII"
-msgstr ""
+msgstr "LII"
 
 #: u_translation:rslabel2
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 #: u_translation:rslabelobject
 msgid "Label Object"
@@ -1929,11 +1929,11 @@ msgstr "Label tekst"
 
 #: u_translation:rslabel
 msgid "Label:"
-msgstr ""
+msgstr "Label:"
 
 #: u_translation:rslabels
 msgid "Labels"
-msgstr ""
+msgstr "Labels"
 
 #: u_translation:rslandscape
 msgid "Landscape"
@@ -1989,15 +1989,15 @@ msgstr "Gebruiksovereenkomst"
 
 #: u_translation:rslimitingsize
 msgid "Limiting Size (arcminutes) :"
-msgstr "Grens afmetingen (boogminuten) :"
+msgstr "Grens afmetingen (boogminuten):"
 
 #: u_translation:rslimitingmagn2
 msgid "Limiting magnitude :"
-msgstr "Grensmagnitude :"
+msgstr "Grensmagnitude:"
 
 #: u_translation:rslimitingmagn
 msgid "Limiting magnitude, list :"
-msgstr "Grensmagnitude, lijst :"
+msgstr "Grensmagnitude, lijst:"
 
 #: u_translation:rsline1
 msgid "Line"
@@ -2025,11 +2025,11 @@ msgstr "Lijnen"
 
 #: u_translation:rslinesgrid
 msgid "Lines / Grid"
-msgstr "Lijnen / rooster"
+msgstr "Lijnen/rooster"
 
 #: u_translation:rslinkallchart
 msgid "Link All Chart"
-msgstr "Koppel alle kaarten"
+msgstr "Koppel/ontkoppel alle kaarten"
 
 #: u_translation:rslistofavaila
 msgid "List of available plates"
@@ -2069,11 +2069,11 @@ msgstr "Lokale horizon"
 
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
-msgstr "Lokale horizon bestandsnaam :"
+msgstr "Lokale horizon-bestandsnaam:"
 
 #: u_translation:rslockon
 msgid "Lock on %s"
-msgstr "Zet vast op %s"
+msgstr "Centreer en houd %s vast"
 
 #: u_translation:rslogarithmics
 msgid "Logarithmic scale"
@@ -2085,15 +2085,15 @@ msgstr "Geografische lengte"
 
 #: u_translation:rslongitudeasc
 msgid "Longitude ascending Node"
-msgstr ""
+msgstr "Lengte van klimmende knoop"
 
 #: u_translation:rslosange
 msgid "Losange"
-msgstr ""
+msgstr "Losange"
 
 #: u_translation:rslowsurfacebr
 msgid "Low surface brightness"
-msgstr "Lage oppervlakte helderheid"
+msgstr "Lage oppervlaktehelderheid"
 
 #: u_translation:rsluminosity
 msgid "Luminosity"
@@ -2105,51 +2105,51 @@ msgstr "Maansverduisteringen"
 
 #: u_translation:rssminute
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #: u_translation:rsmbytes
 msgid "MBytes"
-msgstr ""
+msgstr "MBytes"
 
 #: u_translation:rsmpcftp
 msgid "MPC Ftp"
-msgstr ""
+msgstr "MPC via FTP"
 
 #: u_translation:rsmpchttp
 msgid "MPC Http"
-msgstr ""
+msgstr "MPC via HTTP"
 
 #: u_translation:rsmpcorb50mb
 msgid "MPCORB > 50Mb!"
-msgstr ""
+msgstr "MPCORB > 50Mb!"
 
 #: u_translation:rsmag
 msgid "Mag:"
-msgstr ""
+msgstr "Mag:"
 
 #: u_translation:rsmagn
 msgid "Magn."
-msgstr ""
+msgstr "Magn."
 
 #: u_translation:rsmagnitude
 msgid "Magnitude"
-msgstr ""
+msgstr "Magnitude"
 
 #: u_translation:rsmagnitudeban
 msgid "Magnitude Band"
-msgstr ""
+msgstr "Magnitude band"
 
 #: u_translation:rsmagnitudeerr
 msgid "Magnitude Error"
-msgstr "Magnitude Fout"
+msgstr "Magnitude fout"
 
 #: u_translation:rsmagnitudetyc
 msgid "Magnitude Tycho BT"
-msgstr ""
+msgstr "Magnitude Tycho BT"
 
 #: u_translation:rsmagnitudetyc2
 msgid "Magnitude Tycho VT"
-msgstr ""
+msgstr "Magnitude Tycho VT"
 
 #: u_translation:rsmagnitudeatm
 msgid "Magnitude at maxima"
@@ -2165,7 +2165,7 @@ msgstr "Magnitude verschil"
 
 #: u_translation:rsmaillist
 msgid "MailList"
-msgstr ""
+msgstr "E-mail lijst"
 
 #: u_translation:rsmainbar
 msgid "Main Bar"
@@ -2181,7 +2181,7 @@ msgstr "Handmatige Telescoop"
 
 #: u_translation:rsmap
 msgid "Map"
-msgstr ""
+msgstr "Kaart"
 
 #: u_translation:rsmarkthechart
 msgid "Mark the chart center "
@@ -2189,11 +2189,11 @@ msgstr "Markeer het kaartcentrum"
 
 #: u_translation:rsmars
 msgid "Mars"
-msgstr ""
+msgstr "Mars"
 
 #: u_translation:rsmax
 msgid "Max."
-msgstr ""
+msgstr "Max."
 
 #: u_translation:rsmaximize
 msgid "Maximize"
@@ -2201,7 +2201,7 @@ msgstr "Maximaliseer"
 
 #: u_translation:rsmaximummagni
 msgid "Maximum magnitude"
-msgstr ""
+msgstr "Maximum magnitude"
 
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
@@ -2217,11 +2217,11 @@ msgstr "Mercurius"
 
 #: u_translation:rsmessages
 msgid "Messages:"
-msgstr "Berichten"
+msgstr "Berichten:"
 
 #: u_translation:rsmeters
 msgid "Meters"
-msgstr ""
+msgstr "Meters"
 
 #: u_translation:rsmilkyway
 msgid "Milky Way"
@@ -2229,7 +2229,7 @@ msgstr "Melkweg"
 
 #: u_translation:rsmin3
 msgid "Min."
-msgstr ""
+msgstr "Min."
 
 #: u_translation:rsminute
 msgid "Minute"
@@ -2269,7 +2269,7 @@ msgstr "Meer deep sky"
 
 #: u_translation:rsmoreoptions
 msgid "More Options"
-msgstr ""
+msgstr "Meer opties"
 
 #: u_translation:rsmorestars
 msgid "More Stars"
@@ -2277,7 +2277,7 @@ msgstr "Meer sterren"
 
 #: u_translation:rsmorethanobje
 msgid "More than %s objects, result truncated."
-msgstr "Meer dan %s objecten, resultaat beperkt. "
+msgstr "Meer dan %s objecten, resultaat afgekort. "
 
 #: u_translation:rsmorethan1000
 msgid "More than 1000 errors! Process aborted."
@@ -2297,7 +2297,7 @@ msgstr "Verplaats label"
 
 #: u_translation:rsmultipleflag
 msgid "Multiple Flag"
-msgstr "Meervoudigheids vlag"
+msgstr "Meervoudigheidsvlag"
 
 #: u_translation:rsmultiplestar
 msgid "Multiple Star"
@@ -2333,7 +2333,7 @@ msgstr "In directe nabijheid"
 
 #: u_translation:rsneptune
 msgid "Neptune"
-msgstr "Neptunes"
+msgstr "Neptunus"
 
 #: u_translation:rsnewchart
 msgid "New Chart"
@@ -2365,7 +2365,7 @@ msgstr "Nachtzicht kleur"
 
 #: u_translation:rsnoasteroidda
 msgid "No Asteroid data found!%sPlease load a MPC file first."
-msgstr "Geen planetoïde gegevens gevonden!%sLaad alstublieft eerst een MPC bestand. "
+msgstr "Geen planetoïde gegevens gevonden!%sLaad alstublieft eerst een MPC bestand."
 
 #: u_translation:rsnomargin
 msgid "No Margin"
@@ -2373,7 +2373,7 @@ msgstr "Geen marge"
 
 #: u_translation:rsnoprinterfou
 msgid "No Printer found!"
-msgstr ""
+msgstr "Geen printer gevonden!"
 
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
@@ -2389,7 +2389,7 @@ msgstr "Nr."
 
 #: u_translation:rsnonexistant
 msgid "Non Existant"
-msgstr "Bestaat Niet"
+msgstr "Bestaat niet"
 
 #: u_translation:rsnonvisiblese
 msgid "Non visible search result, zoom for more details"
@@ -2437,7 +2437,7 @@ msgstr "Aantal sterren"
 
 #: u_translation:rsnumberoffile
 msgid "Number of files"
-msgstr "Aantal Bestanden"
+msgstr "Aantal bestanden"
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"
@@ -2449,11 +2449,11 @@ msgstr "Nutatie, aberratie "
 
 #: u_translation:rsok
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: u_translation:rsobject
 msgid "Object"
-msgstr ""
+msgstr "Object"
 
 #: u_translation:rsobjectbar
 msgid "Object Bar"
@@ -2461,31 +2461,31 @@ msgstr "Objectenbalk"
 
 #: u_translation:rsobjectfilter
 msgid "Object Filter"
-msgstr "Object filter"
+msgstr "Objectfilter"
 
 #: u_translation:rsobjectfilter2
 msgid "Object Filter Setting"
-msgstr "Objecten filter instelling"
+msgstr "Objectfilter instelling"
 
 #: u_translation:rsobjectlist
 msgid "Object List"
-msgstr "Objecten lijst"
+msgstr "Objectenlijst"
 
 #: u_translation:rsobjectlistse
 msgid "Object List Setting"
-msgstr "Objecten lijst instelling"
+msgstr "Objectenijst instelling"
 
 #: u_translation:rsobjectname
 msgid "Object Name"
-msgstr "Object naam"
+msgstr "Objectnaam"
 
 #: u_translation:rsobjectsizeun
 msgid "Object size unit"
-msgstr "Object grootte eenheid"
+msgstr "Objectafmetingen eenheid"
 
 #: u_translation:rsobjecttype
 msgid "Object type"
-msgstr "Object type"
+msgstr "Objecttype"
 
 #: u_translation:rsobjects
 msgid "Objects"
@@ -2509,7 +2509,7 @@ msgstr "Verouderde CdC catalogi (maar u kunt deze nog wel gebruiken)"
 
 #: u_translation:rsoffset
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 #: u_translation:rsoneofthree
 msgid "One of three"
@@ -2521,7 +2521,7 @@ msgstr "Eén van twee"
 
 #: u_translation:rsonlinedss
 msgid "Online DSS"
-msgstr ""
+msgstr "Online DSS"
 
 #: u_translation:rsonlinedsspic
 msgid "Online DSS pictures"
@@ -2529,7 +2529,7 @@ msgstr "Online DSS afbeeldingen"
 
 #: u_translation:rsonlinepictur
 msgid "Online pictures servers"
-msgstr "Online DSS afbeeldingservers"
+msgstr "Online DSS afbeeldingenservers"
 
 #: u_translation:rsonlynumbered
 msgid "Only numbered asteroids"
@@ -2545,7 +2545,7 @@ msgstr "Alleen de laatste"
 
 #: u_translation:rsopen
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 #: u_translation:rsopencluster
 msgid "Open Cluster"
@@ -2565,7 +2565,7 @@ msgstr "Opties"
 
 #: u_translation:rsorusealocalf
 msgid "Or use a local file :"
-msgstr "Of gebruik een lokaal bestand :"
+msgstr "Of gebruik een lokaal bestand:"
 
 #: u_translation:rsorbit
 msgid "Orbit"
@@ -2573,7 +2573,7 @@ msgstr "Baan"
 
 #: u_translation:rsorbitaleleme
 msgid "Orbital Elements"
-msgstr "Baan Elementen"
+msgstr "Baan elementen"
 
 #: u_translation:rsorientation
 msgid "Orientation"
@@ -2585,7 +2585,7 @@ msgstr "Anders"
 
 #: u_translation:rsotherlinesca
 msgid "Other Lines Catalogs"
-msgstr "Andere Lijnen-Catalogi"
+msgstr "Andere lijnen-catalogi"
 
 #: u_translation:rsotherlabel
 msgid "Other label"
@@ -2597,7 +2597,7 @@ msgstr "Output catalogus type"
 
 #: u_translation:rsoutputdirect
 msgid "Output Directory"
-msgstr ""
+msgstr "Output map"
 
 #: u_translation:rsoutputcatalo2
 msgid "Output catalog options"
@@ -2609,7 +2609,7 @@ msgstr "Pagina marge in millimeter"
 
 #: u_translation:rsparallax
 msgid "Parallax"
-msgstr ""
+msgstr "Parallax"
 
 #: u_translation:rsparametric
 msgid "Parametric"
@@ -2621,7 +2621,7 @@ msgstr "Gedeeltelijk"
 
 #: u_translation:rspassword
 msgid "Password"
-msgstr ""
+msgstr "Paswoord"
 
 #: u_translation:rspath
 msgid "Path"
@@ -2633,11 +2633,11 @@ msgstr "Padbreedte"
 
 #: u_translation:rspathtosaveth
 msgid "Path to save the file :"
-msgstr "Pad om bestand op te slaan :"
+msgstr "Pad om bestand op te slaan:"
 
 #: u_translation:rspenumbra
 msgid "Penumbra"
-msgstr ""
+msgstr "Penumbra"
 
 #: u_translation:rsperihelionda
 msgid "Perihelion date"
@@ -2677,7 +2677,7 @@ msgstr "Planeet"
 
 #: u_translation:rsplanetaryneb
 msgid "Planetary Nebula"
-msgstr "Planetaire Nevel"
+msgstr "Planetaire nevel"
 
 #: u_translation:rsplanetaryneb3
 msgid "Planetary nebula"
@@ -2693,11 +2693,11 @@ msgstr "Planetaire satelliet"
 
 #: u_translation:rsplanetssetti
 msgid "Planets Setting"
-msgstr "Planeten instellingen"
+msgstr "Planeet-instellingen"
 
 #: u_translation:rsplatedefect
 msgid "Plate Defect"
-msgstr "Plaat Defect"
+msgstr "Plaat defect"
 
 #: u_translation:rsplateiddatee
 msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
@@ -2705,7 +2705,7 @@ msgstr "Plaat Id.    Datum   Exp.  Marge  CD  Observatorium"
 
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
-msgstr "Configureer alstublieft de baanelementen URL!"
+msgstr "Configureer alstublieft de baanelementen-URL!"
 
 #: u_translation:rspleaseconfig
 msgid "Please configure your DSS file path first."
@@ -2745,7 +2745,7 @@ msgstr "Beeld de positie af van een bewegend object."
 
 #: u_translation:rspluto
 msgid "Pluto"
-msgstr ""
+msgstr "Pluto"
 
 #: u_translation:rsplutoisaplan
 msgid "Pluto is a planet."
@@ -2757,7 +2757,7 @@ msgstr "Pool inclinatie"
 
 #: u_translation:rsport
 msgid "Port:"
-msgstr ""
+msgstr "Poort:"
 
 #: u_translation:rsportrait
 msgid "Portrait"
@@ -2773,11 +2773,11 @@ msgstr "Positiehoek"
 
 #: u_translation:rspositionepoc
 msgid "Position Epoch"
-msgstr "Positie Epoch"
+msgstr "Positie Epoche"
 
 #: u_translation:rspostscript
 msgid "Postscript"
-msgstr ""
+msgstr "Postscript"
 
 #: u_translation:rsprefixthealt
 msgid "Prefix the alternate names with their label"
@@ -2805,7 +2805,7 @@ msgstr "Afdrukken"
 
 #: u_translation:rsprintchart
 msgid "Print Chart"
-msgstr "Afdrukken Kaart"
+msgstr "Afdrukken kaart"
 
 #: u_translation:rsprintmethod
 msgid "Print method"
@@ -2817,27 +2817,27 @@ msgstr "Druk kaart af"
 
 #: u_translation:rsprintersetup
 msgid "Printer Setup"
-msgstr "Printer instellingen"
+msgstr "Printerinstellingen"
 
 #: u_translation:rsprinterlegen
 msgid "Printer legend"
-msgstr ""
+msgstr "Printer legenda"
 
 #: u_translation:rsprinter
 msgid "Printer:"
-msgstr ""
+msgstr "Printer:"
 
 #: u_translation:rsprocessingen2
 msgid "Processing ended. Total number of asteroid :%s"
-msgstr "Verwerken gereed. Total aantal van planetoïden : %s"
+msgstr "Verwerken gereed. Total aantal van planetoïden: %s"
 
 #: u_translation:rsprocessingen
 msgid "Processing ended. Total number of comet :%s"
-msgstr "Verwerken gereed. Total aantal van kometen : %s"
+msgstr "Verwerken gereed. Total aantal van kometen: %s"
 
 #: u_translation:rsprocessingen3
 msgid "Processing ended. Total number of location :%s"
-msgstr "Verwerken gereed. Total aantal van lokaties : %s"
+msgstr "Verwerken gereed. Total aantal van lokaties: %s"
 
 #: u_translation:rsprocessingli
 msgid "Processing line %s"
@@ -2849,15 +2849,15 @@ msgstr "Verwerken...%s"
 
 #: u_translation:rsprogramdata
 msgid "Program Data "
-msgstr "Programma gegevens"
+msgstr "Programmagegevens"
 
 #: u_translation:rsprograminfor
 msgid "Program Information"
-msgstr ""
+msgstr "Programma-informatie"
 
 #: u_translation:rsprogrammer
 msgid "Programmer:"
-msgstr ""
+msgstr "Programmeur:"
 
 #: u_translation:rsprogress
 msgid "Progress"
@@ -2873,19 +2873,19 @@ msgstr "Projectie"
 
 #: u_translation:rsprojectionse
 msgid "Projection Setting"
-msgstr "Projectie instelling"
+msgstr "Projectie-instelling"
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"
-msgstr "Eigenbeweging in Declinatie"
+msgstr "Eigenbeweging in declinatie (DEC)"
 
 #: u_translation:rspropermotion
 msgid "Proper Motion in Right ascension"
-msgstr "Eigenbeweging in Rechte Klimming"
+msgstr "Eigenbeweging in rechte klimming (RA)"
 
 #: u_translation:rsproportional2
 msgid "Proportional to the magnitude"
-msgstr "In verhouding tot Magnitude"
+msgstr "In verhouding tot magnitude"
 
 #: u_translation:rsproportional
 msgid "Proportional to the tail length"
@@ -2893,19 +2893,19 @@ msgstr "In verhouding tot staartlengte"
 
 #: u_translation:rsproxy
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: u_translation:rsproxyhost
 msgid "Proxy host"
-msgstr ""
+msgstr "Proxy host"
 
 #: u_translation:rsproxyport
 msgid "Proxy port"
-msgstr ""
+msgstr "Proxy port"
 
 #: u_translation:rsquasar
 msgid "Quasar"
-msgstr ""
+msgstr "Quasar"
 
 #: u_translation:rsquickdelete
 msgid "Quick Delete"
@@ -2921,7 +2921,7 @@ msgstr "Snel verwijderen van alle kometen gerelateerde gegevens"
 
 #: u_translation:rsra
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
 #: u_translation:rsraoptions
 msgid "RA options"
@@ -2929,7 +2929,7 @@ msgstr "RA opties"
 
 #: u_translation:rsraturns
 msgid "RA turns: "
-msgstr ""
+msgstr "RA keer:"
 
 #: u_translation:rsradialveloci
 msgid "Radial Velocity"
@@ -2941,7 +2941,7 @@ msgstr "Bereik"
 
 #: u_translation:rsrasterresolu
 msgid "Raster Resolution"
-msgstr "Rooster resolutie"
+msgstr "Raster resolutie"
 
 #: u_translation:rsrealskynorth
 msgid "RealSky North"
@@ -2957,7 +2957,7 @@ msgstr "als realistische afbeelding"
 
 #: u_translation:rsrecognizeuni
 msgid "Recognize Units or Object type from the file:"
-msgstr "Herken eenheden of objecttype van het bestand:"
+msgstr "Herken eenheden of objecttype van het bestand"
 
 #: u_translation:rsred
 msgid "Red"
@@ -2981,7 +2981,7 @@ msgstr "Verwijzing"
 
 #: u_translation:rsreflectionne
 msgid "Reflection nebula"
-msgstr "Reflectie nevel"
+msgstr "Reflectienevel"
 
 #: u_translation:rsrefresh
 msgid "Refresh"
@@ -2989,7 +2989,7 @@ msgstr "Vernieuw"
 
 #: u_translation:rsreleasenotes
 msgid "Release Notes"
-msgstr ""
+msgstr "Versie opmerkingen"
 
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
@@ -3021,7 +3021,7 @@ msgstr "Vereist veld ontbreekt!"
 
 #: u_translation:rsreset
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 #: u_translation:rsresetalllabe
 msgid "Reset All Labels"
@@ -3029,7 +3029,7 @@ msgstr "Reset alle labels"
 
 #: u_translation:rsresetchart
 msgid "Reset Chart"
-msgstr ""
+msgstr "Reset kaart"
 
 #: u_translation:rsresolution
 msgid "Resolution:"
@@ -3037,23 +3037,23 @@ msgstr "Resolutie:"
 
 #: u_translation:rsreturn
 msgid "Return"
-msgstr ""
+msgstr "Return"
 
 #: u_translation:rsrevertaltkno
 msgid "Reverse Alt knob"
-msgstr ""
+msgstr "Keer Az knop bewegingsrichting om"
 
 #: u_translation:rsrevertazknob
 msgid "Reverse Az knob"
-msgstr ""
+msgstr "Keer Az knop bewegingsrichting om"
 
 #: u_translation:rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr ""
+msgstr "Keer DEC knop bewegingsrichting om"
 
 #: u_translation:rsrevertraknob
 msgid "Reverse RA knob"
-msgstr ""
+msgstr "Keer RA knop bewegingsrichting om"
 
 #: u_translation:rsright
 msgid "Right"
@@ -3089,7 +3089,7 @@ msgstr "Rotatie"
 
 #: u_translation:rsssecond
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: u_translation:rssqldatabasen
 msgid "SQL database not available."
@@ -3101,7 +3101,7 @@ msgstr "SQL database software is waarschijnlijk niet geïnstalleerd!"
 
 #: u_translation:rssaros
 msgid "Saros"
-msgstr ""
+msgstr "Saros"
 
 #: u_translation:rssaturday
 msgid "Sat."
@@ -3109,7 +3109,7 @@ msgstr "Za."
 
 #: u_translation:rssatring
 msgid "Sat.Ring"
-msgstr ""
+msgstr "Sat.ring"
 
 #: u_translation:rssatellite
 msgid "Satellite"
@@ -3177,7 +3177,7 @@ msgstr "Zoek naar"
 
 #: u_translation:rssec2
 msgid "Sec."
-msgstr ""
+msgstr "Sec."
 
 #: u_translation:rssecond
 msgid "Second"
@@ -3213,11 +3213,11 @@ msgstr "Selecteer het objecttype in uw catalogus"
 
 #: u_translation:rssemi
 msgid "Semi"
-msgstr ""
+msgstr "Semi"
 
 #: u_translation:rssemimajoraxi
 msgid "Semimajor Axis"
-msgstr ""
+msgstr "Lange as"
 
 #: u_translation:rssendcharttop
 msgid "Send chart to printer."
@@ -3229,7 +3229,7 @@ msgstr "Scheiding"
 
 #: u_translation:rsserver
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: u_translation:rsserveripinte
 msgid "Server IP Interface :"
@@ -3253,11 +3253,11 @@ msgstr "Ondergang"
 
 #: u_translation:rssetfov
 msgid "Set FOV"
-msgstr "Stel 'FOV' in"
+msgstr "Stel beeldveld in"
 
 #: u_translation:rssetfovto
 msgid "Set FOV to"
-msgstr "Stel 'FOV' in op"
+msgstr "Stel beeldveld in op"
 
 #: u_translation:rssetdateandti
 msgid "Set date and time"
@@ -3265,7 +3265,7 @@ msgstr "Stel datum en tijd in"
 
 #: u_translation:rssethowthemou
 msgid "Set how the mount move on each axis when you turn the driving knob. Then the Telescope button show you the turns you must do to go from one object to another."
-msgstr ""
+msgstr "Stel per as in hoeveel uw telescoop beweegt wanneer u de betreffende aandrijfknop op uw montering éénmaal omdraait. In het vervolg kunt u de telescoopknop klikken om zien hoeveel keren u de aandrijfknop moet omdraaien om van het huidige naar het volgende object te gaan.  "
 
 #: u_translation:rssetobservato
 msgid "Set observatory location"
@@ -3325,7 +3325,7 @@ msgstr "Toon galactische equator"
 
 #: u_translation:rsshowgrid
 msgid "Show Grid"
-msgstr ""
+msgstr "Toon rooster"
 
 #: u_translation:rsshowgridlabe
 msgid "Show Grid Label"
@@ -3345,7 +3345,7 @@ msgstr "Toon lijnen"
 
 #: u_translation:rsshowmark
 msgid "Show Mark"
-msgstr "Toon markering"
+msgstr "Toon veldmarkering zoeker/oculair/camera"
 
 #: u_translation:rsshowmilkyway
 msgid "Show Milky Way"
@@ -3385,7 +3385,7 @@ msgstr "Toon kometen op de kaart"
 
 #: u_translation:rsshowobjectpi
 msgid "Show object pictures on the chart"
-msgstr "Toon object afbeeldingen op de kaart"
+msgstr "Toon object-afbeeldingen op de kaart"
 
 #: u_translation:rsshowthispict
 msgid "Show this picture"
@@ -3413,7 +3413,7 @@ msgstr "Afmeting"
 
 #: u_translation:rsskybackgroun
 msgid "Sky Background Color"
-msgstr "Hemel achtergrond kleur"
+msgstr "Hemel achtergrondkleur"
 
 #: u_translation:rsskycharts
 msgid "Sky Charts"
@@ -3421,7 +3421,7 @@ msgstr "Sterrenkaarten"
 
 #: u_translation:rsskycolour
 msgid "Sky Colour"
-msgstr "Hemel kleur"
+msgstr "Hemelkleur"
 
 #: u_translation:rsskycharthome
 msgid "Skychart Homepage"
@@ -3429,7 +3429,7 @@ msgstr "Cartes du Ciel - Sterrenkaarten Webpagina"
 
 #: u_translation:rsslew
 msgid "Slew"
-msgstr "Zwenk"
+msgstr "Beweeg telescoop naar object"
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"
@@ -3445,7 +3445,7 @@ msgstr "Zonsverduisteringen"
 
 #: u_translation:rssolarelongat
 msgid "Solar Elongation"
-msgstr "Solaire elongatie"
+msgstr "Elongatie"
 
 #: u_translation:rssolarsystem
 msgid "Solar System"
@@ -3481,11 +3481,11 @@ msgstr "Zuid"
 
 #: u_translation:rsspectralclas
 msgid "Spectral Class"
-msgstr "Spectrale Klasse"
+msgstr "Spectrale klasse"
 
 #: u_translation:rsspline
 msgid "Spline"
-msgstr ""
+msgstr "Spline"
 
 #: u_translation:rssqlitedataba
 msgid "Sqlite Database"
@@ -3525,7 +3525,7 @@ msgstr "Ster label"
 
 #: u_translation:rsstarcolourbv
 msgid "Star colour (B-V) :"
-msgstr "Sterkleur (B-V) :"
+msgstr "Sterkleur (B-V):"
 
 #: u_translation:rsstars
 msgid "Stars"
@@ -3573,7 +3573,7 @@ msgstr "Zon inclinatie"
 
 #: u_translation:rssunday
 msgid "Sun."
-msgstr "Zon."
+msgstr "Zo."
 
 #: u_translation:rssupernovarem
 msgid "Supernova remnant"
@@ -3585,7 +3585,7 @@ msgstr "Oppervlak"
 
 #: u_translation:rssurfacebrigh
 msgid "Surface Brightness"
-msgstr "Oppervlakte helderheid"
+msgstr "Oppervlaktehelderheid"
 
 #: u_translation:rssymbol
 msgid "Symbol"
@@ -3605,7 +3605,7 @@ msgstr "Systeem"
 
 #: u_translation:rssystemprinte
 msgid "System Printer"
-msgstr "Systeem printer"
+msgstr "Systeemprinter"
 
 #: u_translation:rssystemsettin
 msgid "System Setting"
@@ -3681,7 +3681,7 @@ msgstr "Dit programma is gratis software, u kunt het herdistribueren en/of wijzi
 
 #: u_translation:rsthursday
 msgid "Thu."
-msgstr "Do. "
+msgstr "Do."
 
 #: u_translation:rstilehorizont
 msgid "Tile Horizontally"
@@ -3701,7 +3701,7 @@ msgstr "Tijd simulatie"
 
 #: u_translation:rstimeunits
 msgid "Time Units"
-msgstr "Tijd Eenheden"
+msgstr "Tijdseenheden"
 
 #: u_translation:rstimezone
 msgid "Time Zone"
@@ -3769,7 +3769,7 @@ msgstr "Trumpler klasse"
 
 #: u_translation:rstuesday
 msgid "Tue."
-msgstr "Di. "
+msgstr "Di."
 
 #: u_translation:rstwilight
 msgid "Twilight"
@@ -3777,7 +3777,7 @@ msgstr "Schemer"
 
 #: u_translation:rstype
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: u_translation:rstypeofvariab
 msgid "Type of Variability"
@@ -3789,11 +3789,11 @@ msgstr "Objecttype om aan de lijst toe te voegen"
 
 #: u_translation:rstype2
 msgid "Type:"
-msgstr ""
+msgstr "Type:"
 
 #: u_translation:rsurl
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: u_translation:rsurllaunchcom
 msgid "URL launch command"
@@ -3801,11 +3801,11 @@ msgstr "URL voer commando uit"
 
 #: u_translation:rsut
 msgid "UT"
-msgstr ""
+msgstr "UT"
 
 #: u_translation:rsumbra
 msgid "Umbra"
-msgstr ""
+msgstr "Umbra"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
@@ -3821,7 +3821,7 @@ msgstr "Ongedaan maken laatste wijziging"
 
 #: u_translation:rsuniversaltim
 msgid "Universal Time"
-msgstr ""
+msgstr "Universal Time"
 
 #: u_translation:rsunknow
 msgid "Unknow"
@@ -3849,7 +3849,7 @@ msgstr "Bijwerken succesvol afgerond!"
 
 #: u_translation:rsuranus
 msgid "Uranus"
-msgstr ""
+msgstr "Uranus"
 
 #: u_translation:rsusehttpproxy
 msgid "Use HTTP Proxy"
@@ -3865,7 +3865,7 @@ msgstr "Gebruik Xplanet"
 
 #: u_translation:rsuseapresetco
 msgid "Use a preset colour scheme :"
-msgstr "Gebruik te voren ingestelde kleuren:"
+msgstr "Kies vooraf ingestelde kleuren:"
 
 #: u_translation:rsuseanotherdt
 msgid "Use another DT-UT value"
@@ -3877,7 +3877,7 @@ msgstr "Gebruik online DSS in plaats van RealSky"
 
 #: u_translation:rsuseonlycatal
 msgid "Use only the catalog from the same group"
-msgstr "Gebruik alleen de catalogus van dezelfde groep"
+msgstr "Gebruik alleen catalogi binnen dezelfde groep"
 
 #: u_translation:rsusesubsampli
 msgid "Use subsampling to limit image size to"
@@ -3885,7 +3885,7 @@ msgstr "Gebruik subsampling om de beeldafmetingen te beperken tot"
 
 #: u_translation:rsusesystemtim
 msgid "Use system time"
-msgstr "Gebruik systeem tijd"
+msgstr "Gebruik systeemtijd"
 
 #: u_translation:rsusetheproper
 msgid "Use the proper motion to correct the position for the current date"
@@ -3893,7 +3893,7 @@ msgstr "Gebruik de eigenbeweging om de positie voor de huidige datum te corriger
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"
-msgstr "Gebruik dit veld voor een extra naam (?moeilijk te vertalen!?)"
+msgstr "Gebruik dit veld voor een extra naam"
 
 #: u_translation:rsusername
 msgid "User Name"
@@ -3901,7 +3901,7 @@ msgstr "Gebruikersnaam"
 
 #: u_translation:rsuserid
 msgid "Userid:"
-msgstr "Gebruiker ID"
+msgstr "Gebruiker-ID:"
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"
@@ -3913,7 +3913,7 @@ msgstr "Variabelen"
 
 #: u_translation:rsvenus
 msgid "Venus"
-msgstr ""
+msgstr "Venus"
 
 #: u_translation:rsvicinity
 msgid "Vicinity"
@@ -3925,7 +3925,7 @@ msgstr "Weergave"
 
 #: u_translation:rsviewhorizon
 msgid "View Horizon"
-msgstr "Horizon zicht"
+msgstr "Horizonzicht"
 
 #: u_translation:rsvisibilityfo
 msgid "Visibility for observatory"
@@ -3933,7 +3933,7 @@ msgstr "Zichtbaarheid voor observatiepositie"
 
 #: u_translation:rsvisualmagnit
 msgid "Visual Magnitude"
-msgstr "Visuele Magnitude"
+msgstr "Visuele magnitude"
 
 #: u_translation:rswarningyouha
 msgid "WARNING !%sYou have choose to append the data to an existing catalog.%sThe existing catalog and index must be exactly of the same format, otherwise it will be corrupted.%sIt is a good idea to backup the actual files before this operation.%sDo you want to continue ?"
@@ -3945,15 +3945,15 @@ msgstr "Wilt u een object volgen voor het boven de horizon komt?"
 
 #: u_translation:rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr "Waarschuwing! Berekening van "
+msgstr "Waarschuwing! Berekening van"
 
 #: u_translation:rswarningthecu
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
-msgstr "Waarschuwing! De huidige datum en observatie locatie is mogelijk veranderd  van de standaard waarde. U moet nu Nee antwoorden en de %s knop gerbuiken om terug te keren naar uw standaard waarden, anders gaan ze verloren. Wilt u verder gaan?"
+msgstr "Waarschuwing! De huidige datum en observatielocatie zijn mogelijk veranderd van de standaard waarde. U moet nu Nee antwoorden en de %s knop gerbuiken om terug te keren naar uw standaardwaarden, anders gaan ze verloren. Wilt u verder gaan?"
 
 #: u_translation:rswarningyouar2
 msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
-msgstr ""
+msgstr "Waarschuwing! U gebruikt verschillende catalogi voor dezelfde objecten. Vergewis u ervan dat u dat wilt."
 
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
@@ -3961,7 +3961,7 @@ msgstr "Waarschuwing!%sU staat op het punt om de database %s te vernietigen en a
 
 #: u_translation:rswednesday
 msgid "Wed."
-msgstr "Wo. "
+msgstr "Wo."
 
 #: u_translation:rswest
 msgid "West"
@@ -4001,11 +4001,11 @@ msgstr "U bent nu gereed om planetoïden voor deze tijdsperioden weer te geven. 
 
 #: u_translation:rszenith
 msgid "Zenith"
-msgstr ""
+msgstr "Zenith"
 
 #: u_translation:rszoom
 msgid "Zoom +"
-msgstr ""
+msgstr "Zoom +"
 
 #: u_translation:rszoomcentre
 msgid "Zoom + Centre"
@@ -4013,7 +4013,7 @@ msgstr "Zoom + centreer"
 
 #: u_translation:rszoom2
 msgid "Zoom -"
-msgstr ""
+msgstr "Zoom -"
 
 #: u_translation:rszoomcentre2
 msgid "Zoom - Centre"
@@ -4045,7 +4045,7 @@ msgstr "°"
 
 #: u_translation:rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue ?"
-msgstr "data kunnen lange tijd nodig hebben. Wilt u doorgaan?"
+msgstr "Data kunnen lange tijd nodig hebben. Wilt u doorgaan?"
 
 #: u_translation:rsdays
 msgid "days"
@@ -4057,7 +4057,7 @@ msgstr "graden"
 
 #: u_translation:rsdesc
 msgid "desc:"
-msgstr ""
+msgstr "desc:"
 
 #: u_translation:rsdpifor8x11pa
 msgid "dpi for 8x11 paper"
@@ -4065,7 +4065,7 @@ msgstr "dpi voor 8x11 papier"
 
 #: u_translation:rsdocumentatio
 msgid "en/documentation/start.html"
-msgstr ""
+msgstr "en/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "
@@ -4077,15 +4077,15 @@ msgstr "beeldveld nr:"
 
 #: u_translation:rsindrive
 msgid "in drive"
-msgstr ""
+msgstr "in drive"
 
 #: u_translation:rsinsertfailed
 msgid "insert failed line %s : %s"
-msgstr "invoegen gefaald op regel %s : %s"
+msgstr "invoegen mislukt op regel %s: %s"
 
 #: u_translation:rsinvalidepoch
 msgid "invalid epoch on line%s : %s"
-msgstr "ongeldige epoch op regel%s : %s"
+msgstr "Ongeldige epoche op regel%s: %s"
 
 #: u_translation:rslightyears
 msgid "light years"
@@ -4101,11 +4101,11 @@ msgstr "magnituden zwakker dan de sterren."
 
 #: u_translation:rsmax2
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #: u_translation:rsmin2
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: u_translation:rsminutes
 msgid "minutes"
@@ -4113,11 +4113,11 @@ msgstr "minuten"
 
 #: u_translation:rspixels
 msgid "pixels"
-msgstr ""
+msgstr "pixels"
 
 #: u_translation:rspm
 msgid "pm"
-msgstr ""
+msgstr "pm"
 
 #: u_translation:rssec
 msgid "s"
@@ -4133,11 +4133,11 @@ msgstr "tot"
 
 #: u_translation:rsturnsdegree
 msgid "turns / degree"
-msgstr "omwentelingen / graad"
+msgstr "keer/graad"
 
 #: u_translation:rsturnshour
 msgid "turns / hour"
-msgstr "omwentelingen / uur"
+msgstr "keer/uur"
 
 #: u_translation:rsyears
 msgid "years"
