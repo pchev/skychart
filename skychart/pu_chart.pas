@@ -1534,9 +1534,9 @@ end;
 
 function Tf_chart.FormatDesc:string;
 var desc,buf,buf2,otype,oname,txt: string;
-    thr,tht,ths,tazr,tazs: string;
+    thr,tht,ths,tazr,tazs,tculmalt: string;
     i,p,l,y,m,d,precision : integer;
-    ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des :double;
+    ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
 function Bold(s:string):string;
 var k:integer;
 begin
@@ -1653,19 +1653,24 @@ else begin // fixed object
      tazr:=demtostr(rad2deg*Azr);
      tazs:=demtostr(rad2deg*Azs);
 end;
+culmalt:= 90 - sc.cfgsc.ObsLatitude + rad2deg*sc.cfgsc.FindDec;
+if culmalt>90 then culmalt:=180-culmalt;
+if culmalt>-1 then culmalt:=min(90,culmalt+sc.cfgsc.ObsRefractionCor*(1.02/tan(deg2rad*(culmalt+10.3/(culmalt+5.11))))/60)
+              else culmalt:=culmalt+0.64658062088;
+tculmalt:=demtostr(culmalt);
 case i of
 0 : begin
     txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;
     if trim(tazr)>'' then txt:=txt+rsAzimuth+tAzr+html_br
                      else txt:=txt+html_br;
-    txt:=txt+html_b+rsCulmination+':'+htms_b+tht+html_br;
+    txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
     txt:=txt+html_b+rsSet+':'+htms_b+ths+blank;
     if trim(tazs)>'' then txt:=txt+rsAzimuth+tAzs+html_br
                      else txt:=txt+html_br;
     end;
 1 : begin
     txt:=txt+rsCircumpolar+html_br;
-    txt:=txt+html_b+copy(rsCulmination+blank15,1,17)+':'+htms_b+tht+html_br;
+    txt:=txt+html_b+copy(rsCulmination+blank15,1,17)+':'+htms_b+tht+blank+tculmalt+html_br;
     end;
 else begin
     txt:=txt+rsInvisibleAtT+html_br;
