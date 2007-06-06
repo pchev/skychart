@@ -571,7 +571,7 @@ with sc do begin
  HorScrollBar.SmallChange:=i;
  HorScrollBar.LargeChange:=10*HorScrollBar.SmallChange;
  HorScrollBar.PageSize:=HorScrollBar.LargeChange;
- application.ProcessMessages;
+// application.ProcessMessages;
  ShowCoord(Image1.Width div 2, Image1.Height div 2);
 end;
 finally
@@ -615,7 +615,7 @@ with sc do begin
 end;
 end;
 Refresh;
-application.processmessages;
+//application.processmessages;
 RefreshTimer.enabled:=false;
 RefreshTimer.enabled:=true;
 finally
@@ -663,7 +663,7 @@ with sc do begin
 end;
 end;
 Refresh;
-application.processmessages;
+//application.processmessages;
 RefreshTimer.enabled:=false;
 RefreshTimer.enabled:=true;
 finally
