@@ -644,105 +644,106 @@ const msgTimeout='Timeout!';
 const
      MaxCmdArg = 10;
 // Main Commands, excuted form main form
-     numcmdmain = 11;
-     maincmdlist: array[1..numcmdmain,1..2] of string=(
-     ('NEWCHART','1'),
-     ('CLOSECHART','2'),
-     ('SELECTCHART','3'),
-     ('LISTCHART','4'),
-     ('SEARCH','5'),
-     ('GETMSGBOX','6'),
-     ('GETCOORBOX','7'),
-     ('GETINFOBOX','8'),
-     ('FIND' ,'9'),
-     ('SAVE' ,'10'),
-     ('LOAD' ,'11')
+     numcmdmain = 12;
+     maincmdlist: array[1..numcmdmain,1..3] of string=(
+     ('NEWCHART','1','chart_name'),
+     ('CLOSECHART','2','chart_name'),
+     ('SELECTCHART','3','chart_name'),
+     ('LISTCHART','4',''),
+     ('SEARCH','5','object_name'),
+     ('GETMSGBOX','6',''),
+     ('GETCOORBOX','7',''),
+     ('GETINFOBOX','8',''),
+     ('FIND' ,'9','! not implemented'),
+     ('SAVE' ,'10','! not implemented'),
+     ('LOAD' ,'11','! not implemented'),
+     ('?' ,'12','')
      );
 
 // Chart Commands
      numcmd = 79;
-     cmdlist: array[1..numcmd,1..2] of string=(
-     ('ZOOM+','1'),
-     ('ZOOM-','2'),
-     ('MOVEEAST','3'),
-     ('MOVEWEST','4'),
-     ('MOVENORTH','5'),
-     ('MOVESOUTH','6'),
-     ('MOVENORTHEAST','7'),
-     ('MOVENORTHWEST','8'),
-     ('MOVESOUTHEAST','9'),
-     ('MOVESOUTHWEST','10'),
-     ('FLIPX','11'),
-     ('FLIPY','12'),
-     ('SETCURSOR','13'),     // pixX pixY
-     ('CENTRECURSOR','14'),
-     ('ZOOM+MOVE','15'),
-     ('ZOOM-MOVE','16'),
-     ('ROT+','17'),
-     ('ROT-','18'),
-     ('SETEQGRID','19'),       // ON/OFF
-     ('SETGRID','20'),         // ON/OFF
-     ('SETSTARMODE','21'),     // 0/1
-     ('SETNEBMODE','22'),      // 0/1
-     ('SETAUTOSKY','23'),      // ON/OFF
-     ('UNDO','24'),
-     ('REDO','25'),
-     ('SETPROJ','26'),         // ALTAZ/EQUAT/GALACTIC/ECLIPTIC
-     ('SETFOV','27'),          // 00d00m00s/00.00
-     ('SETRA','28'),           // RA:00h00m00s/00.00
-     ('SETDEC','29'),          // DEC:+00d00m00s/00.00
-     ('SETOBS','30'),          // LAT:+00d00m00sLON:+000d00m00sALT:000mOBS:name
-     ('IDCURSOR','31'),
-     ('SAVEIMG','32'),         // PNG/JPEG/BMP filename quality
-     ('SETNORTH','33'),
-     ('SETSOUTH','34'),
-     ('SETEAST','35'),
-     ('SETWEST','36'),
-     ('SETZENITH','37'),
-     ('ALLSKY','38'),
-     ('REDRAW','39'),
-     ('GETCURSOR','40'),
-     ('GETEQGRID','41'),
-     ('GETGRID','42'),
-     ('GETSTARMODE','43'),
-     ('GETNEBMODE','44'),
-     ('GETAUTOSKY','45'),
-     ('GETPROJ','46'),
-     ('GETFOV','47'),          // S/F
-     ('GETRA','48'),           // S/F
-     ('GETDEC','49'),          // S/F
-     ('GETDATE','50'),
-     ('GETOBS','51'),
-     ('SETDATE','52'),         // yyyy-mm-ddThh:mm:ss or "yyyy-mm-dd hh:mm:ss"
-     ('SETTZ','53'),           // Etc/GTM
-     ('GETTZ','54'),
+     cmdlist: array[1..numcmd,1..3] of string=(
+     ('ZOOM+','1',''),
+     ('ZOOM-','2',''),
+     ('MOVEEAST','3',''),
+     ('MOVEWEST','4',''),
+     ('MOVENORTH','5',''),
+     ('MOVESOUTH','6',''),
+     ('MOVENORTHEAST','7',''),
+     ('MOVENORTHWEST','8',''),
+     ('MOVESOUTHEAST','9',''),
+     ('MOVESOUTHWEST','10',''),
+     ('FLIPX','11',''),
+     ('FLIPY','12',''),
+     ('SETCURSOR','13','pixX pixY'),
+     ('CENTRECURSOR','14',''),
+     ('ZOOM+MOVE','15',''),
+     ('ZOOM-MOVE','16',''),
+     ('ROT+','17',''),
+     ('ROT-','18',''),
+     ('SETEQGRID','19','ON/OFF'),
+     ('SETGRID','20','ON/OFF'),
+     ('SETSTARMODE','21','0/1/2'),
+     ('SETNEBMODE','22','0/1'),
+     ('SETAUTOSKY','23','ON/OFF'),
+     ('UNDO','24',''),
+     ('REDO','25',''),
+     ('SETPROJ','26','ALTAZ/EQUAT/GALACTIC/ECLIPTIC'),
+     ('SETFOV','27','00d00m00s or 00.00'),
+     ('SETRA','28','RA:00h00m00s or RA:00.00'),
+     ('SETDEC','29','DEC:+00d00m00s or DEC:00.00'),
+     ('SETOBS','30','LAT:+00d00m00sLON:+000d00m00sALT:000mOBS:name'),
+     ('IDCURSOR','31',''),
+     ('SAVEIMG','32','PNG/JPEG/BMP filename quality'),
+     ('SETNORTH','33',''),
+     ('SETSOUTH','34',''),
+     ('SETEAST','35',''),
+     ('SETWEST','36',''),
+     ('SETZENITH','37',''),
+     ('ALLSKY','38',''),
+     ('REDRAW','39',''),
+     ('GETCURSOR','40',''),
+     ('GETEQGRID','41',''),
+     ('GETGRID','42',''),
+     ('GETSTARMODE','43',''),
+     ('GETNEBMODE','44',''),
+     ('GETAUTOSKY','45',''),
+     ('GETPROJ','46',''),
+     ('GETFOV','47','S/F'),
+     ('GETRA','48','S/F'),
+     ('GETDEC','49','S/F'),
+     ('GETDATE','50',''),
+     ('GETOBS','51',''),
+     ('SETDATE','52','yyyy-mm-ddThh:mm:ss or "yyyy-mm-dd hh:mm:ss"'),
+     ('SETTZ','53','Etc/GTM'),
+     ('GETTZ','54',''),
      // V2.7 compatibility DDE command
-     ('MOVE' ,'55'),           // obsolete, RA: 00h00m00.00s DEC:+0000'00.0" FOV:+0000'00"
-     ('DATE' ,'52'),           // obsolete, same as SETDATE
-     ('OBSL' ,'30'),           // obsolete, same as SETOBS
-     ('RFSH' ,'39'),           // obsolete, same as REDRAW
-     ('PDSS' ,'56'),
-     ('SBMP' ,'57'),           // obsolete, use SAVEIMG
-     ('SGIF' ,'58'),           // obsolete, use SAVEIMG
-     ('SJPG' ,'59'),           // obsolete, use SAVEIMG
-     ('IDXY' ,'60'),           // X:pixelx Y:pixely
-     ('GOXY' ,'61'),           // X:pixelx Y:pixely
-     ('ZOM+' ,'1'),            // obsolete, same as ZOOM+
-     ('ZOM-' ,'2'),            // obsolete, same as ZOOM-
-     ('STA+' ,'62'),
-     ('STA-' ,'63'),
-     ('NEB+' ,'64'),
-     ('NEB-' ,'65'),
-     ('GREQ' ,'66'),           // obsolete, use SETEQGRID
-     ('GRAZ' ,'67'),           // obsolete, use SETGRID
-     ('GRNM' ,'68'),           // obsolete, use SETGRIDNUM
-     ('CONL' ,'69'),           // obsolete, use SETCONSTLINE
-     ('CONB' ,'70'),           // obsolete, use SETCONSTBOUNDARY
-     ('EQAZ' ,'71'),            // obsolete, use SETPROJ
+     ('MOVE' ,'55','obsolete, RA: 00h00m00.00s DEC:+00d00m00.0s FOV:+00d00m00s'),
+     ('DATE' ,'52','obsolete, same as SETDATE'),
+     ('OBSL' ,'30','obsolete, same as SETOBS'),
+     ('RFSH' ,'39','obsolete, same as REDRAW'),
+     ('PDSS' ,'56',''),
+     ('SBMP' ,'57','obsolete, use SAVEIMG'),
+     ('SGIF' ,'58','obsolete, use SAVEIMG'),
+     ('SJPG' ,'59','obsolete, use SAVEIMG'),
+     ('IDXY' ,'60','X:pixelx Y:pixely'),
+     ('GOXY' ,'61','X:pixelx Y:pixely'),
+     ('ZOM+' ,'1','obsolete, same as ZOOM+'),
+     ('ZOM-' ,'2','obsolete, same as ZOOM-'),
+     ('STA+' ,'62',''),
+     ('STA-' ,'63',''),
+     ('NEB+' ,'64',''),
+     ('NEB-' ,'65',''),
+     ('GREQ' ,'66','obsolete, use SETEQGRID'),
+     ('GRAZ' ,'67','obsolete, use SETGRID'),
+     ('GRNM' ,'68','obsolete, use SETGRIDNUM'),
+     ('CONL' ,'69','obsolete, use SETCONSTLINE'),
+     ('CONB' ,'70','obsolete, use SETCONSTBOUNDARY'),
+     ('EQAZ' ,'71','obsolete, use SETPROJ'),
      // end V2.7 compatibility DDE command
-     ('SETGRIDNUM','77'),      // ON/OFF
-     ('SETCONSTLINE','78'),    // ON/OFF
-     ('SETCONSTBOUNDARY','79') // ON/OFF
+     ('SETGRIDNUM','77','ON/OFF'),
+     ('SETCONSTLINE','78','ON/OFF'),
+     ('SETCONSTBOUNDARY','79','ON/OFF')
      );
 
 // INDI Telescope driver

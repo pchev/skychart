@@ -627,6 +627,7 @@ type
     Function CloseChart(cname:string):string;
     Function ListChart:string;
     Function SelectChart(cname:string):string;
+    Function HelpCmd(cname:string):string;
     function ExecuteCmd(cname:string; arg:Tstringlist):string;
     procedure SendInfo(Sender: TObject; origin,str:string);
     function GenericSearch(cname,Num:string):boolean;
@@ -4508,6 +4509,26 @@ for i:=0 to MultiDoc1.ChildCount-1 do
         end;
 end;
 
+Function Tf_main.HelpCmd(cname:string):string;
+var i: integer;
+begin
+result:='';
+if cname='' then begin
+   for i:=1 to numcmdmain do
+      result:=result+maincmdlist[i,1]+blank+maincmdlist[i,3]+crlf;
+   for i:=1 to numcmd do
+      result:=result+cmdlist[i,1]+blank+cmdlist[i,3]+crlf;
+   result:=result+crlf+msgOK;
+end else begin
+   for i:=1 to numcmdmain do
+      if maincmdlist[i,1]=cname then result:=result+maincmdlist[i,1]+blank+maincmdlist[i,3]+crlf;
+   for i:=1 to numcmd do
+      if cmdlist[i,1]=cname then result:=result+cmdlist[i,1]+blank+cmdlist[i,3]+crlf;
+   if result>'' then result:=result+crlf+msgOK
+                else result:=msgNotFound;
+end;
+end;
+
 function Tf_main.ExecuteCmd(cname:string; arg:Tstringlist):string;
 var i,n : integer;
     var cmd:string;
@@ -4531,6 +4552,7 @@ case n of
  9 :  ;// find
  10 : ;// save
  11 : ;// load
+ 12 : result:=HelpCmd(trim(uppercase(arg[1])));
 else begin
  result:='Bad chart name '+cname;
  for i:=0 to MultiDoc1.ChildCount-1 do
