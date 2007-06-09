@@ -23,8 +23,8 @@ $path = cwd;
   sendcmd("setfov 3d0m0s");
   sendcmd("redraw");
 
-#  sendcmd("saveimg PNG $path/test.png");
-  sendcmd("saveimg JPEG $path/test.jpg 50");
+#  sendcmd("saveimg PNG \"$path/test.png\" ");
+  sendcmd("saveimg JPEG \"$path/test.jpg\" 50");
 
   sleep(5);
   sendcmd("closechart test");
