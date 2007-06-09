@@ -2825,6 +2825,7 @@ var
 begin
 needrefresh:=false;
 savelabel:= sc.cfgsc.Editlabels;
+format:=uppercase(format);
 try
 if savelabel then begin
    sc.cfgsc.Editlabels:=false;
