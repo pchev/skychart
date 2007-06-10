@@ -616,7 +616,7 @@ type
     procedure SaveDefault;
     procedure SetDefault;
     procedure SetLang;
-    procedure ChangeLanguage(lang:string);
+    procedure ChangeLanguage(newlang:string);
     Procedure InitFonts;
     Procedure activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
     Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
@@ -2368,7 +2368,7 @@ var i:integer;
 begin
     themechange:=false; langchange:=false;
     if cmain<>nil then begin
-      if (cfgm.language <> cmain.language) then langchange:=true;
+      if (cfgm.language<>cmain.language) then langchange:=true;
     end;
     if langchange then ChangeLanguage(cmain.language);
     if cmain<>nil then begin
@@ -2407,7 +2407,7 @@ begin
     if def_cfgsc.ConstLatinLabel then
          catalog.LoadConstellation(cfgm.Constellationpath,'Latin')
       else
-         catalog.LoadConstellation(cfgm.Constellationpath,cfgm.language);
+         catalog.LoadConstellation(cfgm.Constellationpath,lang);
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
@@ -3975,11 +3975,11 @@ finally
 end;
 end;
 
-procedure Tf_main.ChangeLanguage(lang:string);
+procedure Tf_main.ChangeLanguage(newlang:string);
 var inif: TMemIniFile;
     i: integer;
 begin
-cfgm.language:=lang;
+cfgm.language:=newlang;
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
