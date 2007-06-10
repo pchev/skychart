@@ -574,6 +574,7 @@ MagLabel.Items[2]:=rsMagnitude;
 constlabel.caption:=rsConstellatio6;
 constlabel.Items[0]:=rsFullName;
 constlabel.Items[1]:=rsAbbreviation;
+constlabel.Items[2]:=rsLatinName;
 Showlabelall.caption:=rsDisplayTheLa;
 ShowChartInfo.caption:=rsDisplayTheCh;
 GroupBox5.caption:=rsLabelObject;
@@ -1040,7 +1041,10 @@ begin
  if csc.NameLabel then MagLabel.ItemIndex:=1
  else if csc.MagLabel then MagLabel.ItemIndex:=2
                       else MagLabel.itemindex:=0;
- if csc.ConstFullLabel then constlabel.ItemIndex:=0
+ if csc.ConstFullLabel then begin
+    if csc.ConstLatinLabel then constlabel.ItemIndex:=2
+                           else constlabel.ItemIndex:=0;
+                       end
                        else constlabel.ItemIndex:=1;
  Showlabelall.checked:=csc.Showlabelall;
  ShowChartInfo.checked:=cmain.ShowChartInfo;
@@ -1208,7 +1212,8 @@ begin
 end;
 
 procedure Tf_config_display.SelectFontClick(Sender: TObject);
-var i : integer;
+var i,p : integer;
+    fontn: string;
 begin
 if sender is Tspeedbutton then with sender as Tspeedbutton do i:=tag
    else exit;
@@ -1218,10 +1223,24 @@ if cplot.FontBold[i] then Fontdialog1.Font.Style:=[fsBold]
                      else Fontdialog1.Font.Style:=[];
 if cplot.FontItalic[i] then Fontdialog1.Font.Style:=Fontdialog1.Font.Style+[fsItalic];
 if Fontdialog1.Execute then begin
-   cplot.FontName[i]:=Fontdialog1.Font.Name;
-   cplot.FontSize[i]:=Fontdialog1.Font.Size;
-   cplot.FontBold[i]:=fsBold in Fontdialog1.Font.Style;
-   cplot.FontItalic[i]:=fsItalic in Fontdialog1.Font.Style;
+   fontn:=Fontdialog1.Font.Name;
+   // keep only the name from the selected font
+   //  '-bitstream-bitstream vera sans-medium-r-normal-*-*-140-*-*-p-*-iso8859-1'
+   p:=pos('-',fontn);
+   if p>0 then begin
+     Delete(fontn,1,p);
+     p:=pos('-',fontn);
+     if p>0 then Delete(fontn,1,p);
+     p:=pos('-',fontn);
+     if p>0 then fontn:=Copy(fontn,1,p-1);
+   end;
+   if fontn<>'' then begin
+     cplot.FontName[i]:=fontn;
+     // assign other font properties
+     cplot.FontSize[i]:=Fontdialog1.Font.Size;
+     cplot.FontBold[i]:=fsBold in Fontdialog1.Font.Style;
+     cplot.FontItalic[i]:=fsItalic in Fontdialog1.Font.Style;
+   end;
 end;
 ShowFonts;
 end;
@@ -1523,7 +1542,8 @@ end;
 
 procedure Tf_config_display.constlabelClick(Sender: TObject);
 begin
-csc.ConstFullLabel:=(constlabel.ItemIndex=0);
+csc.ConstFullLabel:=(constlabel.ItemIndex<>1);
+csc.ConstLatinLabel:=(constlabel.ItemIndex=2);
 end;
 
 

@@ -936,7 +936,10 @@ try
    def_cfgsc.BackgroundImage:=slash(privatedir)+slash('pictures');
    if not DirectoryExists(def_cfgsc.BackgroundImage) then forcedirectories(def_cfgsc.BackgroundImage);
  end;
- catalog.LoadConstellation(cfgm.Constellationpath,Lang);
+ if def_cfgsc.ConstLatinLabel then
+    catalog.LoadConstellation(cfgm.Constellationpath,'Latin')
+  else
+    catalog.LoadConstellation(cfgm.Constellationpath,Lang);
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
  catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
@@ -2401,7 +2404,10 @@ begin
     def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
     InitFonts;
-    catalog.LoadConstellation(cfgm.Constellationpath,cfgm.language);
+    if def_cfgsc.ConstLatinLabel then
+         catalog.LoadConstellation(cfgm.Constellationpath,'Latin')
+      else
+         catalog.LoadConstellation(cfgm.Constellationpath,cfgm.language);
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
@@ -2806,6 +2812,7 @@ def_cfgsc.CommagDiff:=4;
 def_cfgsc.MagLabel:=false;
 def_cfgsc.NameLabel:=false;
 def_cfgsc.ConstFullLabel:=true;
+def_cfgsc.ConstLatinLabel:=false;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
 def_cfgsc.GRSlongitude:=92;
@@ -3249,6 +3256,7 @@ csc.CommagDiff:=ReadFloat(section,'CommagDiff',csc.CommagDiff);
 csc.MagLabel:=ReadBool(section,'MagLabel',csc.MagLabel);
 csc.NameLabel:=ReadBool(section,'NameLabel',csc.NameLabel);
 csc.ConstFullLabel:=ReadBool(section,'ConstFullLabel',csc.ConstFullLabel);
+csc.ConstLatinLabel:=ReadBool(section,'ConstLatinLabel',csc.ConstLatinLabel);
 csc.PlanetParalaxe:=ReadBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
 csc.ShowEarthShadow:=ReadBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
 csc.GRSlongitude:=ReadFloat(section,'GRSlongitude',csc.GRSlongitude);
@@ -3700,6 +3708,7 @@ WriteFloat(section,'CommagDiff',csc.CommagDiff);
 WriteBool(section,'MagLabel',csc.MagLabel);
 WriteBool(section,'NameLabel',csc.NameLabel);
 WriteBool(section,'ConstFullLabel',csc.ConstFullLabel);
+WriteBool(section,'ConstLatinLabel',csc.ConstLatinLabel);
 WriteBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
 WriteBool(section,'ShowEarthShadow',csc.ShowEarthShadow);
 WriteFloat(section,'GRSlongitude',csc.GRSlongitude);

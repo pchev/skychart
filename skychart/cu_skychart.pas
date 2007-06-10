@@ -42,7 +42,7 @@ Tskychart = class (TComponent)
     FShowDetailXY: Tint2func;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
-    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string);
+    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
     procedure EditLabelPos(lnum,x,y: integer);
     procedure EditLabelTxt(lnum,x,y: integer);
     procedure DefaultLabel(lnum: integer);
@@ -2547,12 +2547,12 @@ begin
       projection(ra,de,x1,y1,true,cfgsc) ;
       WindowXY(x1,y1,xx,yy,cfgsc);
       lid:=GetId(Fcatalog.cfgshr.ConstelName[i,2]);
-      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2])
-                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1]);
+      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter)
+                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter);
   end;
 end;
 
-procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string);
+procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
 begin
 if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=cfgsc.xmin)and(xx<=cfgsc.xmax)and(yy>=cfgsc.ymin)and(yy<=cfgsc.ymax) then begin
   inc(numlabels);
@@ -2561,6 +2561,7 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
   labels[numlabels].x:=round(xx);
   labels[numlabels].y:=round(yy);
   labels[numlabels].r:=radius;
+  labels[numlabels].align:=align;
   labels[numlabels].labelnum:=labelnum;
   labels[numlabels].fontnum:=fontnum;
   labels[numlabels].txt:=wordspace(txt);
@@ -2787,6 +2788,7 @@ var i,j,x,y,r: integer;
     labelnum,fontnum:byte;
     txt:string;
     skiplabel:boolean;
+    al: TLabelAlign;
 begin
 Fplot.InitLabel;
 DrawCustomlabel;
@@ -2795,6 +2797,8 @@ for i:=1 to numlabels do begin
   x:=labels[i].x;
   y:=labels[i].y;
   r:=labels[i].r;
+  al:=labels[i].align;
+  if al=laNone then al:=laLeft;
   txt:=labels[i].txt;
   labelnum:=labels[i].labelnum;
   fontnum:=labels[i].fontnum;
@@ -2809,7 +2813,7 @@ for i:=1 to numlabels do begin
         if (cfgsc.modlabels[j].dx<>0)or(cfgsc.modlabels[j].dy<>0) then r:=-1;
         break;
      end;
-  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,laLeft,laCenter,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
+  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,al,laCenter,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
 end;
 if cfgsc.showlabel[8] then plot.PlotTextCR(cfgsc.xshift+5,cfgsc.yshift+5,2,8,GetChartInfo(crlf),cfgsc.WhiteBg);
 result:=true;

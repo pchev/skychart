@@ -1755,11 +1755,11 @@ with cnv do begin
             else Brush.Style:=bsClear;
   Pen.Mode:=pmCopy;
   Font.CharSet:=DEFAULT_CHARSET;
-  Font.Name:=cfgplot.FontName[fontnum];
+  Font.Name:=cfgplot.FontName[fontnum];;
   Font.Color:=cfgplot.LabelColor[labelnum];
-  Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
+  Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
   ts:=TextExtent(txt);
   if r>=0 then begin
   case Xalign of
