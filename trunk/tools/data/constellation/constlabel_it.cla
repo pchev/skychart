@@ -1,0 +1,93 @@
+; Name of the constellation for Cartes du Ciel
+; Official Latin name
+; For a translation copy this file to constlabel_xx.cla where xx is the specific language code
+;
+00.567 ;  39.250 ; And ; Andromeda          
+10.117 ; -33.350 ; Ant ; Pompa pneumatica   
+16.133 ; -76.583 ; Aps ; Uccello del Paradiso
+22.700 ; -10.467 ; Aqr ; Acquario           
+19.683 ;  03.367 ; Aql ; Aquila             
+17.233 ; -51.117 ; Ara ; Altare             
+02.683 ;  22.567 ; Ari ; Ariete             
+05.950 ;  42.817 ; Aur ; Auriga             
+14.683 ;  32.333 ; Boo ; Boote              
+04.717 ; -38.167 ; Cae ; Bulino             
+06.150 ;  71.967 ; Cam ; Giraffa            
+08.667 ;  22.000 ; Cnc ; Cancro             
+13.017 ;  42.350 ; CVn ; Cani da caccia     
+06.833 ; -22.317 ; CMa ; Cane Maggiore      
+07.617 ;  06.767 ; CMi ; Cane Minore        
+21.050 ; -19.350 ; Cap ; Capricorno         
+08.833 ; -60.500 ; Car ; Carena             
+00.867 ;  60.300 ; Cas ; Cassiopea          
+12.950 ; -44.000 ; Cen ; Centauro           
+22.417 ;  72.567 ; Cep ; Cefeo              
+01.717 ; -06.367 ; Cet ; Balena             
+12.000 ; -81.017 ; Cha ; Camaleonte         
+14.533 ; -67.300 ; Cir ; Compasso           
+05.700 ; -37.917 ; Col ; Colomba            
+12.750 ;  22.650 ; Com ; Chioma di Berenice 
+18.650 ; -41.750 ; CrA ; Corona Australe    
+15.883 ;  32.633 ; CrB ; Corona Boreale     
+12.383 ; -18.633 ; Crv ; Corvo              
+11.350 ; -13.750 ; Crt ; Coppa              
+12.483 ; -60.300 ; Cru ; Croce del Sud      
+20.583 ;  44.000 ; Cyg ; Cigno              
+20.667 ;  12.100 ; Del ; Delfino            
+05.333 ; -63.017 ; Dor ; Pesce dorato       
+17.950 ;  66.067 ; Dra ; Drago              
+21.250 ;  07.933 ; Equ ; Cavalluccio        
+03.883 ; -17.983 ; Eri ; Eridano            
+02.767 ; -31.000 ; For ; Fornace            
+06.850 ;  24.817 ; Gem ; Gemelli            
+22.450 ; -45.133 ; Gru ; Gru                
+17.433 ;  31.233 ; Her ; Ercole             
+03.217 ; -52.000 ; Hor ; Orologio           
+09.133 ; -11.683 ; Hya ; Idra femmina       
+02.583 ; -72.917 ; Hyi ; Idra maschio       
+21.133 ; -52.317 ; Ind ; Indiano            
+22.517 ;  46.667 ; Lac ; Lucertola          
+10.667 ;  17.000 ; Leo ; Leone              
+10.317 ;  33.233 ; LMi ; Leone Minore       
+05.433 ; -19.650 ; Lep ; Lepre              
+15.183 ; -15.550 ; Lib ; Bilancia           
+15.383 ; -42.717 ; Lup ; Lupo               
+07.733 ;  47.833 ; Lyn ; Lince              
+18.900 ;  40.650 ; Lyr ; Lira               
+05.500 ; -79.017 ; Men ; Altare             
+20.950 ; -36.800 ; Mic ; Microscopio        
+06.967 ; -03.267 ; Mon ; Unicorno           
+12.467 ; -69.133 ; Mus ; Mosca              
+16.050 ; -52.717 ; Nor ; Squadra            
+22.167 ; -84.267 ; Oct ; Ottante            
+17.033 ; -02.350 ; Oph ; Ofiuco             
+05.567 ;  03.583 ; Ori ; Orione             
+19.167 ; -65.867 ; Pav ; Pavone             
+22.617 ;  19.650 ; Peg ; Pegaso             
+03.517 ;  44.883 ; Per ; Perseo             
+00.733 ; -48.767 ; Phe ; Fenice            
+05.383 ; -51.367 ; Pic ; Cavalletto del pittore
+00.883 ;  15.483 ; Psc ; Pesci              
+22.417 ; -31.567 ; PsA ; Pisce Australe     
+07.867 ; -32.617 ; Pup ; Poppa              
+08.883 ; -29.783 ; Pyx ; Bussola            
+03.900 ; -60.517 ; Ret ; Reticolo           
+19.667 ;  17.000 ; Sge ; Freccia            
+19.383 ; -29.883 ; Sgr ; Sagittario         
+16.867 ; -35.333 ; Sco ; Scorpione          
+00.500 ; -31.000 ; Scl ; Scultore           
+18.650 ; -10.883 ; Sct ; Scudo              
+15.733 ;  10.850 ; Ser ; Testa del Serpente 
+17.800 ; -13.483 ; Ser ; Coda del Serpente  
+10.100 ; -01.133 ; Sex ; Sestante           
+04.100 ;  17.333 ; Tau ; Toro               
+19.250 ; -51.467 ; Tel ; Telescopio         
+02.050 ;  32.333 ; Tri ; Triangolo          
+16.117 ; -65.100 ; TrA ; Triangolo Australe 
+23.833 ; -64.933 ; Tuc ; Tucano             
+11.333 ;  57.500 ; UMa ; Orsa Maggiore      
+14.967 ;  75.033 ; UMi ; Orsa Minore        
+09.333 ; -48.483 ; Vel ; Vela               
+13.350 ; -03.517 ; Vir ; Vergine            
+07.667 ; -69.617 ; Vol ; Pesce volante      
+20.367 ;  25.033 ; Vul ; Volpetta           
