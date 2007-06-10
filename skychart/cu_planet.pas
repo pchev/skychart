@@ -2175,7 +2175,7 @@ if (frise or fset) then begin    // rise (and/or) set and transit
            rar:=ra;
            der:=de;
         end;
-        Eq2Hz(sidtim(jd0,hs-cfgsc.TimeZone,cfgsc.ObsLongitude)-ra,de,azr,dist,cfgsc);
+        Eq2Hz(sidtim(jd0,hr-cfgsc.TimeZone,cfgsc.ObsLongitude)-ra,de,azr,dist,cfgsc);
         if AzNorth then Azr:=rmod(Azr+pi,pi2);
         tazr:=demtostr(rad2deg*Azr);
       end
