@@ -1080,6 +1080,7 @@ resourcestring
     +'object. Be sure this what you want.';
   rsReleaseNotes = 'Release Notes';
   rsBlinkingPict = 'Blinking Picture';
+  rsLatinName = 'Latin Name';
 
 implementation
 
