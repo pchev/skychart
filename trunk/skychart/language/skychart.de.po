@@ -1947,6 +1947,10 @@ msgstr "Sprache"
 msgid "Language selection"
 msgstr "Sprachauswahl"
 
+#: u_translation:rslatinname
+msgid "Latin Name"
+msgstr ""
+
 #: u_translation:rslatitude
 msgid "Latitude"
 msgstr "Breitengrad"

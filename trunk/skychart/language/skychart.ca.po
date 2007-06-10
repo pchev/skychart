@@ -1948,6 +1948,10 @@ msgstr "Idiomes"
 msgid "Language selection"
 msgstr "Tria de la llengua"
 
+#: u_translation:rslatinname
+msgid "Latin Name"
+msgstr ""
+
 #: u_translation:rslatitude
 msgid "Latitude"
 msgstr "Latitud"
