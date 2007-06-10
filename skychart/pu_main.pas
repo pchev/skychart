@@ -2592,9 +2592,6 @@ var i:integer;
     buf:string;
 begin
 nightvision:=false;
-ldeg:='°';
-lmin:='''';
-lsec:='"';
 helpdir:=slash(appdir)+slash('doc');
 cfgm.MaxChildID:=0;
 cfgm.prtname:='';
