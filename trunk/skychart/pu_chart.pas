@@ -368,13 +368,13 @@ begin
  VertScrollBar.Max:=90*3600;   // arcsecond position precision
  VertScrollBar.Min:=-90*3600;
  VertScrollBar.SmallChange:=3600;
- VertScrollBar.LargeChange:=10*VertScrollBar.SmallChange;
+ VertScrollBar.LargeChange:=8*VertScrollBar.SmallChange;
  VertScrollBar.PageSize:=VertScrollBar.LargeChange;
  VertScrollBar.Width:=HorScrollBar.Height;
  HorScrollBar.Max:=360*3600;
  HorScrollBar.Min:=0;
  HorScrollBar.SmallChange:=3600;
- HorScrollBar.LargeChange:=10*HorScrollBar.SmallChange;
+ HorScrollBar.LargeChange:=8*HorScrollBar.SmallChange;
  HorScrollBar.PageSize:=HorScrollBar.LargeChange;
 end;
 
@@ -566,10 +566,10 @@ with sc do begin
  if i<1 then i:=1;
  if i>3600 then i:=3600;
  VertScrollBar.SmallChange:=i;
- VertScrollBar.LargeChange:=10*VertScrollBar.SmallChange;
+ VertScrollBar.LargeChange:=8*VertScrollBar.SmallChange;
  VertScrollBar.PageSize:=VertScrollBar.LargeChange;
  HorScrollBar.SmallChange:=i;
- HorScrollBar.LargeChange:=10*HorScrollBar.SmallChange;
+ HorScrollBar.LargeChange:=8*HorScrollBar.SmallChange;
  HorScrollBar.PageSize:=HorScrollBar.LargeChange;
 // application.ProcessMessages;
  ShowCoord(Image1.Width div 2, Image1.Height div 2);
