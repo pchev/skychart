@@ -1,7 +1,7 @@
 # translation of skychart.ca.po
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-02-06 11:00+0100\n"
+"PO-Revision-Date: 2007-06-05 11:00+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.ca\n"
 "POT-Creation-Date: \n"
@@ -390,7 +390,7 @@ msgstr "Blanc/negre, mode línia"
 
 #: u_translation:rsblinkingpict
 msgid "Blinking Picture"
-msgstr ""
+msgstr "Imatge parpellejant"
 
 #: u_translation:rsblue
 msgid "Blue"
@@ -2990,7 +2990,7 @@ msgstr "Refresca"
 
 #: u_translation:rsreleasenotes
 msgid "Release Notes"
-msgstr ""
+msgstr "Notes de l'edició"
 
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
@@ -3042,19 +3042,19 @@ msgstr "Retorn"
 
 #: u_translation:rsrevertaltkno
 msgid "Reverse Alt knob"
-msgstr "Retorneu el cargol Alt"
+msgstr "Invesió del cargol Alt"
 
 #: u_translation:rsrevertazknob
 msgid "Reverse Az knob"
-msgstr "Retorneu el cargol Az"
+msgstr "Inversió del cargol Az"
 
 #: u_translation:rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr "Retorneu el cargol DEC"
+msgstr "Inversió del cargol DEC"
 
 #: u_translation:rsrevertraknob
 msgid "Reverse RA knob"
-msgstr "Retorneu el cargol AR"
+msgstr "Inversió del cargol AR"
 
 #: u_translation:rsright
 msgid "Right"
@@ -3694,7 +3694,7 @@ msgstr "Divisió de pantalla vertical"
 
 #: u_translation:rstime
 msgid "Time"
-msgstr "Temps"
+msgstr "Hora"
 
 #: u_translation:rstimesimulati
 msgid "Time Simulation"
@@ -3954,7 +3954,7 @@ msgstr "Attention! La date et le lieu d'observation ont pu changer de leur valeu
 
 #: u_translation:rswarningyouar2
 msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
-msgstr ""
+msgstr "Atenció! Esteu usant més d'un catàleg per al mateix objecte. Segur que és això el que voleu?"
 
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
