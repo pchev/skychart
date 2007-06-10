@@ -1,15 +1,17 @@
+# translation of skychart.po to
 # translation of skychart.it.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# Mattia Verga <mverga@freemail.it>, 2007.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-01-22 18:27+0100\n"
+"PO-Revision-Date: 2007-06-09 18:26+0200\n"
 "Last-Translator: Mattia Verga <mverga@freemail.it>\n"
-"Project-Id-Version: skychart.it\n"
+"Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
-"Language-Team:  <translation@ap-i.net>\n"
+"Language-Team:  <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any installed catalog index."
@@ -389,7 +391,7 @@ msgstr "Bianco/Nero, modo linea"
 
 #: u_translation:rsblinkingpict
 msgid "Blinking Picture"
-msgstr ""
+msgstr "Immagine lampeggiante"
 
 #: u_translation:rsblue
 msgid "Blue"
@@ -437,11 +439,11 @@ msgstr "Costruisci Catalogo"
 
 #: u_translation:rscdcnebulaeca
 msgid "CDC Deep Sky Catalog Setting"
-msgstr "Impostazioni Catalogo CDC Profondo Cielo"
+msgstr "Impostazioni Cataloghi Profondo Cielo"
 
 #: u_translation:rscdcstarscata
 msgid "CDC Stars Catalog Setting"
-msgstr "Impostazioni Catalogo CDC Stelle"
+msgstr "Impostazioni Cataloghi Stelle"
 
 #: u_translation:rscdcplugin
 msgid "CDC plugin"
@@ -2989,7 +2991,7 @@ msgstr "Aggiorna"
 
 #: u_translation:rsreleasenotes
 msgid "Release Notes"
-msgstr ""
+msgstr "Note di versione"
 
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
@@ -3537,7 +3539,7 @@ msgstr "Filtro delle stelle"
 
 #: u_translation:rsstarsandnebu
 msgid "Stars and Deep Sky catalogs prepared with "
-msgstr "Cataloghi di stelle e profondo cielo preparati con "
+msgstr "Cataloghi preparati con"
 
 #: u_translation:rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
@@ -3877,7 +3879,7 @@ msgstr "Usa DSS online invece di RealSky"
 
 #: u_translation:rsuseonlycatal
 msgid "Use only the catalog from the same group"
-msgstr "Usa solo cataloghi dallo stesso gruppo"
+msgstr "Usa un solo catalogo per oggetti dello stesso gruppo"
 
 #: u_translation:rsusesubsampli
 msgid "Use subsampling to limit image size to"
@@ -3953,7 +3955,7 @@ msgstr "Attenzione! La data corrente e la località dell'osservatore potrebbero 
 
 #: u_translation:rswarningyouar2
 msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
-msgstr ""
+msgstr "Attenzione! Stai usando cataloghi multipli per indicare lo stesso oggetto. Sei sicuro che sia ciò che vuoi?"
 
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
