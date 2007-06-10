@@ -2742,8 +2742,8 @@ object f_main: Tf_main
       ParentFont = True
       TabOrder = 0
       object LPanels01: TLabel
-        Height = 15
-        Width = 68
+        Height = 14
+        Width = 60
         Caption = 'LPanels01'
         Color = clNone
         ParentColor = False
