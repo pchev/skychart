@@ -1,6 +1,4 @@
-# translation of skychart.po to
-# translation of skychart.it.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
-# Mattia Verga <mverga@freemail.it>, 2007.
+# translation of skychart.po to translation of skychart.it.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006. Mattia Verga <mverga@freemail.it>, 2007.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2007-06-09 18:26+0200\n"
@@ -1948,6 +1946,10 @@ msgstr "Lingua"
 #: u_translation:rslanguagesele
 msgid "Language selection"
 msgstr "Seleziona lingua"
+
+#: u_translation:rslatinname
+msgid "Latin Name"
+msgstr ""
 
 #: u_translation:rslatitude
 msgid "Latitude"

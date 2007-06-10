@@ -1947,6 +1947,10 @@ msgstr "Taal"
 msgid "Language selection"
 msgstr "Taalselectie"
 
+#: u_translation:rslatinname
+msgid "Latin Name"
+msgstr ""
+
 #: u_translation:rslatitude
 msgid "Latitude"
 msgstr "Geografische breedte"

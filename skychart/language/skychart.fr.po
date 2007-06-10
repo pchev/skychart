@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
+# translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-03-03 17:02+0100\n"
+"PO-Revision-Date: 2007-06-10 18:56+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any installed catalog index."
@@ -1947,6 +1947,10 @@ msgstr "Langues"
 #: u_translation:rslanguagesele
 msgid "Language selection"
 msgstr "Choix de la langue"
+
+#: u_translation:rslatinname
+msgid "Latin Name"
+msgstr "Nom latin"
 
 #: u_translation:rslatitude
 msgid "Latitude"
