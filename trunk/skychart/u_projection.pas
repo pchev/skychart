@@ -951,7 +951,7 @@ end;
 //aberration
 //meeus91 22.3
 da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
-dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*cde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*cde*sp);
+dd:=-abek*(cls*ce*((se/ce)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*((se/ce)*cde-sra*sde)+cra*sde*sp);
 ra:=ra+da;
 de:=de+dd;
 end;
@@ -970,18 +970,18 @@ sincos(c.abp,sp,cp);
 if abs(de)<(89*deg2rad) then begin    // meeus91 22.1
    da:=c.nutl*(ce+se*sra*tan(de))-c.nuto*(cra*tan(de));
    dd:=c.nutl*se*cra+c.nuto*sra;
-   ra:=ra+da;
-   de:=de+dd;
+   ra:=ra-da;
+   de:=de-dd;
 end else begin
    Eq2Ecl(ra,de,c.e,l,b);
-   l:=l+c.nutl;
-   b:=b+c.nuto;
+   l:=l-c.nutl;
+   b:=b-c.nuto;
    Ecl2Eq(l,b,c.e,ra,de);
 end;
 //aberration
 //meeus91 22.3
 da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
-dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*cde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*cde*sp);
+dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sp);
 ra:=ra-da;
 de:=de-dd;
 end;

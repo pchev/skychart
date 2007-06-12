@@ -533,9 +533,9 @@ Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
 // nutation constant
 cfgsc.e:=ecliptic(cfgsc.JDChart);
 nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
-// Sun geometric longitude
+// Sun geometric longitude eq. of date for aberration
 fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
-PrecessionEcl(jd2000,cfgsc.JdChart,cfgsc.sunl,cfgsc.sunb);
+PrecessionEcl(jd2000,cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
 // aberration constant
 aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
 // Planet position
