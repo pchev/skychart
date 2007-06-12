@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-03-26 19:28+0200\n"
+"PO-Revision-Date: 2007-06-11 19:28+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ua\n"
 "POT-Creation-Date: \n"
@@ -470,7 +470,7 @@ msgstr "Скасувати %s"
 
 #: u_translation:rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
-msgstr "Скасувати, неправильний zip файл ?? %s"
+msgstr "Скасувати, бо неправильний zip файл ?? %s"
 
 #: u_translation:rscascade
 msgid "Cascade"
@@ -810,7 +810,7 @@ msgstr "Кореляція"
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
-msgstr "Часовий пояс  країни"
+msgstr "Часовий пояс країни"
 
 #: u_translation:rscreatedataba
 msgid "Create Database"
@@ -1010,7 +1010,7 @@ msgstr "Deep-sky колір"
 
 #: u_translation:rsdefault
 msgid "Default"
-msgstr "Умовчаний"
+msgstr "Висхідні"
 
 #: u_translation:rsdefaultbutto
 msgid "Default Button"
@@ -1022,11 +1022,11 @@ msgstr "Устан. поля"
 
 #: u_translation:rsdefaultnebul
 msgid "Default Nebulae parameters"
-msgstr "Вбудовані параметри туманностей"
+msgstr "Висхідні параметри туманностей"
 
 #: u_translation:rsdefaultoutli
 msgid "Default Outline parameters"
-msgstr "Встроєні параметри схеми"
+msgstr "Висхідні параметри схеми"
 
 #: u_translation:rsdefaultcolor
 msgid "Default color"
@@ -1074,7 +1074,7 @@ msgstr "Видалити щоденні дані"
 
 #: u_translation:rsdeletefromel2
 msgid "Delete from element list..."
-msgstr "Видалити зі списку елементів..."
+msgstr "Видалити із переліку елементів..."
 
 #: u_translation:rsdeletefromel
 msgid "Delete from element table..."
@@ -1090,7 +1090,7 @@ msgstr "Видалити зі щомісячної таблиці..."
 
 #: u_translation:rsdeletefromna
 msgid "Delete from name list..."
-msgstr "Видалити зі списку назв..."
+msgstr "Видалити із переліку назв..."
 
 #: u_translation:rsdeleteprevio
 msgid "Delete previous data for this date."
@@ -1950,7 +1950,7 @@ msgstr "Вибір мови"
 
 #: u_translation:rslatinname
 msgid "Latin Name"
-msgstr ""
+msgstr "Латинська назва"
 
 #: u_translation:rslatitude
 msgid "Latitude"
@@ -2046,7 +2046,7 @@ msgstr "Прослуховування порту: %s"
 
 #: u_translation:rsload
 msgid "Load"
-msgstr "Карта"
+msgstr "Карта (???)"
 
 #: u_translation:rsloadmpcfile
 msgid "Load MPC File"
@@ -2158,11 +2158,11 @@ msgstr "Величина Tycho VT"
 
 #: u_translation:rsmagnitudeatm
 msgid "Magnitude at maxima"
-msgstr "Блиск в максимумі"
+msgstr "Блиск у максимумі"
 
 #: u_translation:rsmagnitudeatm2
 msgid "Magnitude at minima"
-msgstr "Блиск в мінімумі"
+msgstr "Блиск у мінімумі"
 
 #: u_translation:rsmagnitudedif
 msgid "Magnitude difference"
@@ -2386,7 +2386,7 @@ msgstr "Нема об'єкту для опорного замикання"
 
 #: u_translation:rsnopicture
 msgid "No picture"
-msgstr "Нема картинки"
+msgstr "Нема зображення"
 
 #: u_translation:rsno
 msgid "No."
@@ -2398,7 +2398,7 @@ msgstr "Неіснуючий"
 
 #: u_translation:rsnonvisiblese
 msgid "Non visible search result, zoom for more details"
-msgstr "Невидимий результат пошуку, збільшіть для детальності."
+msgstr "Невидимий результат пошуку, збільшіть для подробиць."
 
 #: u_translation:rsnonexistentu
 msgid "Non-existent/unknown"
@@ -2474,11 +2474,11 @@ msgstr "Установки фільтру об'єктів"
 
 #: u_translation:rsobjectlist
 msgid "Object List"
-msgstr "Список об'єктів"
+msgstr "Перелік об'єктів"
 
 #: u_translation:rsobjectlistse
 msgid "Object List Setting"
-msgstr "Установки списку об'єктів"
+msgstr "Установки переліку об'єктів"
 
 #: u_translation:rsobjectname
 msgid "Object Name"
@@ -2674,7 +2674,7 @@ msgstr "Фотографічна пластинка"
 
 #: u_translation:rspictures
 msgid "Pictures"
-msgstr "Рисунки"
+msgstr "Зображення"
 
 #: u_translation:rsplanet
 msgid "Planet"
@@ -2710,11 +2710,11 @@ msgstr "Ідент. пластинки   Дата   Експ.  Поле   CD   �
 
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
-msgstr "Будь-ласка сконфігуруйте  URL орбітального елементу!"
+msgstr "Будь-ласка завдайтейте  URL орбітального елементу!"
 
 #: u_translation:rspleaseconfig
 msgid "Please configure your DSS file path first."
-msgstr "Будь-ласка спершу конфігуруйте шлях до вашого DSS файлу."
+msgstr "Будь-ласка спершу завдайте шлях до вашого DSS файлу."
 
 #: u_translation:rspleaseconfir
 msgid "Please confirm that the telescope is centered to %s"
@@ -2754,7 +2754,7 @@ msgstr "Плутон"
 
 #: u_translation:rsplutoisaplan
 msgid "Pluto is a planet."
-msgstr "Плутон є планета."
+msgstr "Плутон, як планета."
 
 #: u_translation:rspoleinclinat
 msgid "Pole inclination"
@@ -2766,7 +2766,7 @@ msgstr "Порт:"
 
 #: u_translation:rsportrait
 msgid "Portrait"
-msgstr "Портретна"
+msgstr "Книжкова"
 
 #: u_translation:rsposition
 msgid "Position"
@@ -2994,7 +2994,7 @@ msgstr "Обновити"
 
 #: u_translation:rsreleasenotes
 msgid "Release Notes"
-msgstr "Коментарії"
+msgstr "Коментарі"
 
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
@@ -3366,7 +3366,7 @@ msgstr "Показати об'єкти"
 
 #: u_translation:rsshowpictures
 msgid "Show Pictures"
-msgstr "Показати картинки"
+msgstr "Показати зображення"
 
 #: u_translation:rsshowplaneton
 msgid "Show Planet on the Chart"
@@ -3790,7 +3790,7 @@ msgstr "Тип змінності"
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
-msgstr "Тип об'єкту для добавки в лист списку"
+msgstr "Тип об'єкту для добавки в лист переліку"
 
 #: u_translation:rstype2
 msgid "Type:"
@@ -3846,7 +3846,7 @@ msgstr "Обновити"
 
 #: u_translation:rsupdateoraddt
 msgid "Update or add the current location to the database ?"
-msgstr "Скоригувати або додати даний пункт в базу даних?"
+msgstr "Скоригувати, або додати даний пункт в базу даних?"
 
 #: u_translation:rsupdatedsucce
 msgid "Updated successfully!"
@@ -3870,7 +3870,7 @@ msgstr "Використати Xplanet"
 
 #: u_translation:rsuseapresetco
 msgid "Use a preset colour scheme :"
-msgstr "Застосувати предустановлену схему кольору:"
+msgstr "Застосувати висхідну схему кольору:"
 
 #: u_translation:rsuseanotherdt
 msgid "Use another DT-UT value"
