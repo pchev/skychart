@@ -558,7 +558,6 @@ type
     AutoRefreshLock: Boolean;
     compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
-    procedure FormMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
   {$ifdef win32}
     savwincol  : array[0..35] of Tcolor;
   {$endif}
@@ -1142,7 +1141,6 @@ end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
-OnMouseWheel:=FormMouseWheel;
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
@@ -5156,12 +5154,6 @@ end;
 procedure Tf_main.MaximizeExecute(Sender: TObject);
 begin
 MultiDoc1.Maximized:=true;
-end;
-
-procedure Tf_main.FormMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-begin
-if (MultiDoc1.ActiveObject is Tf_chart)and (Activecontrol=nil) then
-   (MultiDoc1.ActiveObject as Tf_chart).Image1.OnMouseWheel(Sender, Shift, WheelDelta, MousePos, Handled);
 end;
 
 procedure Tf_main.ToolButtonNightVisionClick(Sender: TObject);
