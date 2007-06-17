@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-06-10 18:56+0200\n"
+"PO-Revision-Date: 2007-06-17 17:03+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -239,6 +239,10 @@ msgstr "Mouvement propre annuel"
 #: u_translation:rsanonymouspas
 msgid "Anonymous password"
 msgstr "Mot de passe anonyme"
+
+#: u_translation:rsapparent
+msgid "Apparent"
+msgstr "Apparente"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -1372,10 +1376,6 @@ msgstr "Coordonnée Equatoriale"
 msgid "Equatorial Mount"
 msgstr "Monture equatoriale"
 
-#: u_translation:rsequatorialan
-msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
-msgstr "Equinoxe pour les coordonnées équatoriales et écliptiques"
-
 #: u_translation:rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Coordonnées équatoriale, équinoxe: %s"
@@ -1383,10 +1383,6 @@ msgstr "Coordonnées équatoriale, équinoxe: %s"
 #: u_translation:rsequinox2
 msgid "Equinox"
 msgstr "Equinoxe"
-
-#: u_translation:rsequinoxofthe
-msgid "Equinox of the date"
-msgstr "Equinoxe de la date"
 
 #: u_translation:rsequinox
 msgid "Equinox:"
@@ -1439,6 +1435,10 @@ msgstr "Sortie"
 #: u_translation:rsexiting
 msgid "Exiting ..."
 msgstr "Sortie ..."
+
+#: u_translation:rsexpertmode
+msgid "Expert mode"
+msgstr "Mode expert"
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1563,10 +1563,6 @@ msgstr "Premier caractère"
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
 msgstr "Fixe noir"
-
-#: u_translation:rsfixedequinox
-msgid "Fixed Equinox"
-msgstr "Equinoxe donnée"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -2208,9 +2204,21 @@ msgstr "Agrandir"
 msgid "Maximum magnitude"
 msgstr "Magnitude maximum"
 
+#: u_translation:rsmean
+msgid "Mean"
+msgstr "Moyenne"
+
+#: u_translation:rsmeanj2000
+msgid "Mean J2000"
+msgstr "Moyenne J2000"
+
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Anomalie moyenne"
+
+#: u_translation:rsmeanofthedat
+msgid "Mean of the date"
+msgstr "Moyenne de la date"
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -3504,10 +3512,6 @@ msgstr "Carré"
 msgid "Standard  Color"
 msgstr "Couleur standard"
 
-#: u_translation:rsstandardequi
-msgid "Standard Equinox"
-msgstr "Equinoxe standard"
-
 #: u_translation:rsstar
 msgid "Star"
 msgstr "Etoile"
@@ -3787,6 +3791,10 @@ msgstr "Type"
 #: u_translation:rstypeofvariab
 msgid "Type of Variability"
 msgstr "Type de variabilité"
+
+#: u_translation:rstypeofcoordi
+msgid "Type of coordinates"
+msgstr "Type de coordonnées"
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -4143,6 +4151,10 @@ msgstr "tour / degré"
 #: u_translation:rsturnshour
 msgid "turns / hour"
 msgstr "tour / heure"
+
+#: u_translation:rswithpropermo
+msgid "with proper motion"
+msgstr "avec le mouvement propre"
 
 #: u_translation:rsyears
 msgid "years"
