@@ -28,7 +28,7 @@ interface
 uses u_translation, u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
-  EditBtn, LCLType;
+  EditBtn, LCLType, enhedits;
 
 type
 
@@ -43,6 +43,8 @@ type
     BtnRedColor: TButton;
     BtnWBColor: TButton;
     BtnBWColor: TButton;
+    DrawPmBox: TCheckBox;
+    DrawPMy: TLongEdit;
     GridStyle: TComboBox;
     EclipticStyle: TComboBox;
     EqGridStyle: TComboBox;
@@ -53,7 +55,10 @@ type
     ConstbFile: TFileNameEdit;
     GroupBox6: TGroupBox;
     GroupBox7: TGroupBox;
+    GroupBox8: TGroupBox;
     Label5: TLabel;
+    Label68: TLabel;
+    Label8: TLabel;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -312,6 +317,8 @@ type
     procedure Button4Click(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
+    procedure DrawPMyChange(Sender: TObject);
+    procedure DrawPmBoxClick(Sender: TObject);
     procedure EclipticStyleChange(Sender: TObject);
     procedure EqGridStyleChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -325,6 +332,7 @@ type
     procedure NightButtonClick(Sender: TObject);
     procedure StandardButtonClick(Sender: TObject);
     procedure ThemeListChange(Sender: TObject);
+    procedure lDrawPMyChange(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
     procedure StarSizeBarChange(Sender: TObject);
@@ -631,6 +639,8 @@ CenterMark2.caption:=rsMarkTheChart;
 Button2.caption:=rsOK;
 Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
+label8.caption:=rsDrawALineTha;
+Label68.caption:=rsYears;
 end;
 
 constructor Tf_config_display.Create(AOwner:TComponent);
@@ -719,6 +729,18 @@ with  TComboBox(Control).Canvas do begin
 end;
 end;
 
+procedure Tf_config_display.DrawPmBoxClick(Sender: TObject);
+begin
+csc.DrawPMon:=DrawPMBox.checked;
+end;
+
+procedure Tf_config_display.DrawPMyChange(Sender: TObject);
+begin
+if LockChange then exit;
+csc.DrawPMyear:=DrawPMy.value;
+end;
+
+
 procedure Tf_config_display.NightButtonClick(Sender: TObject);
 begin
   cmain.ButtonNight:=NightButton.ItemIndex+1;
@@ -734,6 +756,10 @@ begin
 if LockChange then exit;
   cmain.ThemeName:=ThemeList.Text;
 end;
+
+procedure Tf_config_display.lDrawPMyChange(Sender: TObject);
+begin
+  end;
 
 procedure Tf_config_display.FormCreate(Sender: TObject);
 begin
@@ -999,6 +1025,8 @@ EclipticStyle.ItemIndex:=ord(csc.StyleEcliptic);
 GalEqStyle.ItemIndex:=ord(csc.StyleGalEq);
 CBStyle.ItemIndex:=ord(csc.StyleConstB);
 CFStyle.ItemIndex:=ord(csc.StyleConstL);
+DrawPMBox.checked:=csc.DrawPMon;
+DrawPMy.value:=csc.DrawPMyear;
 end;
 
 procedure Tf_config_display.showlabelcolor;

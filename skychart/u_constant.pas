@@ -36,7 +36,7 @@ type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:no
      TSkycolor = array[0..7]of Tcolor;
 
 const cdcversion = 'Version 3 beta 0.1.3 svn ';
-      cdcver     = '3.0.1.3b';
+      cdcver     = '3.0.1.3c';
       cdccpy = 'Copyright (C) 2002-2006 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,' ;
@@ -417,8 +417,8 @@ type
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,FillHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY: double;
-                PMon,DrawPMon,ApparentPos : boolean; // use proper motion
-                LabelOrientation, ManualTelescopeType : integer;
+                PMon,DrawPMon,ApparentPos,CoordExpertMode : boolean;
+                LabelOrientation, ManualTelescopeType, CoordType : integer;
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
                 IndiAutostart,ShowCircle,IndiTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
                 BackgroundImage: string;
@@ -431,7 +431,7 @@ type
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,LastJDChart,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
                 StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock : boolean;
-                EquinoxName,EquinoxDate,TrackName,TrackId,FindName,FindDesc,FindNote : string;
+                EquinoxName,TrackName,TrackId,FindName,FindDesc,FindNote : string;
                 PlanetLst : Tplanetlst;
                 AsteroidNb,CometNb,AsteroidLstSize,CometLstSize,NumCircle: integer;
                 AsteroidLst: Tasteroidlst;
@@ -1158,6 +1158,8 @@ TelescopeTurnsY:=Source.TelescopeTurnsY ;
 PMon:=Source.PMon ;
 DrawPMon:=Source.DrawPMon ;
 ApparentPos:=Source.ApparentPos ;
+CoordExpertMode:=Source.CoordExpertMode;
+CoordType:=Source.CoordType;
 LabelOrientation:=Source.LabelOrientation ;
 ManualTelescopeType:=Source.ManualTelescopeType ;
 IndiServerHost:=Source.IndiServerHost ;
@@ -1251,7 +1253,6 @@ ConstLatinLabel:=Source.ConstLatinLabel;
 ScopeMark:=Source.ScopeMark ;
 ScopeLock:=Source.ScopeLock ;
 EquinoxName:=Source.EquinoxName ;
-EquinoxDate:=Source.EquinoxDate ;
 TrackName:=Source.TrackName ;
 TrackId:=Source.TrackId ;
 FindName:=Source.FindName ;
