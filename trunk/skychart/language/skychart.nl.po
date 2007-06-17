@@ -239,6 +239,10 @@ msgstr "Jaarlijkse eigenbeweging"
 msgid "Anonymous password"
 msgstr "Anoniem password"
 
+#: u_translation:rsapparent
+msgid "Apparent"
+msgstr ""
+
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "Voeg toe aan bestaande catalogus"
@@ -1371,10 +1375,6 @@ msgstr "Equatoriale coördinaten"
 msgid "Equatorial Mount"
 msgstr "Equatoriale montering"
 
-#: u_translation:rsequatorialan
-msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
-msgstr "Equatoriale en ecliptische kaart coördinaten equinox"
-
 #: u_translation:rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Equatoriale coördinaten, equinox: %s"
@@ -1382,10 +1382,6 @@ msgstr "Equatoriale coördinaten, equinox: %s"
 #: u_translation:rsequinox2
 msgid "Equinox"
 msgstr "Equinox"
-
-#: u_translation:rsequinoxofthe
-msgid "Equinox of the date"
-msgstr "Equinox van de datum"
 
 #: u_translation:rsequinox
 msgid "Equinox:"
@@ -1438,6 +1434,10 @@ msgstr "Afsluiten"
 #: u_translation:rsexiting
 msgid "Exiting ..."
 msgstr "Bezig met afsluiten ..."
+
+#: u_translation:rsexpertmode
+msgid "Expert mode"
+msgstr ""
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1562,10 +1562,6 @@ msgstr "Eerste char"
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
 msgstr "Vast zwart"
-
-#: u_translation:rsfixedequinox
-msgid "Fixed Equinox"
-msgstr "Vaste equinox"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -2207,9 +2203,21 @@ msgstr "Maximaliseer"
 msgid "Maximum magnitude"
 msgstr "Maximum magnitude"
 
+#: u_translation:rsmean
+msgid "Mean"
+msgstr ""
+
+#: u_translation:rsmeanj2000
+msgid "Mean J2000"
+msgstr ""
+
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Gemiddelde afwijking"
+
+#: u_translation:rsmeanofthedat
+msgid "Mean of the date"
+msgstr ""
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -3503,10 +3511,6 @@ msgstr "Vierkant"
 msgid "Standard  Color"
 msgstr "Standaard  kleur"
 
-#: u_translation:rsstandardequi
-msgid "Standard Equinox"
-msgstr "Standaard equinox"
-
 #: u_translation:rsstar
 msgid "Star"
 msgstr "Ster"
@@ -3786,6 +3790,10 @@ msgstr "Type"
 #: u_translation:rstypeofvariab
 msgid "Type of Variability"
 msgstr "Type van variabele"
+
+#: u_translation:rstypeofcoordi
+msgid "Type of coordinates"
+msgstr ""
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -4142,6 +4150,10 @@ msgstr "keer/graad"
 #: u_translation:rsturnshour
 msgid "turns / hour"
 msgstr "keer/uur"
+
+#: u_translation:rswithpropermo
+msgid "with proper motion"
+msgstr ""
 
 #: u_translation:rsyears
 msgid "years"

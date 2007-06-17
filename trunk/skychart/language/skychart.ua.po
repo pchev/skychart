@@ -240,6 +240,10 @@ msgstr "Річний власний рух"
 msgid "Anonymous password"
 msgstr "Анонімний пароль"
 
+#: u_translation:rsapparent
+msgid "Apparent"
+msgstr ""
+
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "Додати існуючий каталог"
@@ -1372,10 +1376,6 @@ msgstr "Екваторіальні координати"
 msgid "Equatorial Mount"
 msgstr "Екваторіальне монтування"
 
-#: u_translation:rsequatorialan
-msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
-msgstr "Екваторіальне та екліптичне координатні рівнодення мапи"
-
 #: u_translation:rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Екваторіальні координати, рівнодення: %s"
@@ -1383,10 +1383,6 @@ msgstr "Екваторіальні координати, рівнодення: %
 #: u_translation:rsequinox2
 msgid "Equinox"
 msgstr "Рівнодення"
-
-#: u_translation:rsequinoxofthe
-msgid "Equinox of the date"
-msgstr "Рівнодення на дату"
 
 #: u_translation:rsequinox
 msgid "Equinox:"
@@ -1439,6 +1435,10 @@ msgstr "Вихід"
 #: u_translation:rsexiting
 msgid "Exiting ..."
 msgstr "Вихід ..."
+
+#: u_translation:rsexpertmode
+msgid "Expert mode"
+msgstr ""
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1563,10 +1563,6 @@ msgstr "Перша цифра"
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
 msgstr "Завжди чорний"
-
-#: u_translation:rsfixedequinox
-msgid "Fixed Equinox"
-msgstr "Фіксоване рівнодення"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -2208,9 +2204,21 @@ msgstr "Максималізація"
 msgid "Maximum magnitude"
 msgstr "Максим. величина"
 
+#: u_translation:rsmean
+msgid "Mean"
+msgstr ""
+
+#: u_translation:rsmeanj2000
+msgid "Mean J2000"
+msgstr ""
+
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Середня аномалія"
+
+#: u_translation:rsmeanofthedat
+msgid "Mean of the date"
+msgstr ""
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -3504,10 +3512,6 @@ msgstr "Площа"
 msgid "Standard  Color"
 msgstr "Стандартний колір"
 
-#: u_translation:rsstandardequi
-msgid "Standard Equinox"
-msgstr "Стандартне рівнодення"
-
 #: u_translation:rsstar
 msgid "Star"
 msgstr "Зоря"
@@ -3787,6 +3791,10 @@ msgstr "Тип"
 #: u_translation:rstypeofvariab
 msgid "Type of Variability"
 msgstr "Тип змінності"
+
+#: u_translation:rstypeofcoordi
+msgid "Type of coordinates"
+msgstr ""
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -4143,6 +4151,10 @@ msgstr "повороти / градус"
 #: u_translation:rsturnshour
 msgid "turns / hour"
 msgstr "повороти / година"
+
+#: u_translation:rswithpropermo
+msgid "with proper motion"
+msgstr ""
 
 #: u_translation:rsyears
 msgid "years"

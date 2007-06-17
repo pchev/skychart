@@ -240,6 +240,10 @@ msgstr "Годичное собственное движение"
 msgid "Anonymous password"
 msgstr "Анонимный пароль"
 
+#: u_translation:rsapparent
+msgid "Apparent"
+msgstr ""
+
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "Добавить существующий каталог"
@@ -1372,10 +1376,6 @@ msgstr "Экваториальные координаты"
 msgid "Equatorial Mount"
 msgstr "Экваториальная монтировка"
 
-#: u_translation:rsequatorialan
-msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
-msgstr "Экваториальное и эклиптическое координатные равноденствия карты"
-
 #: u_translation:rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Экваториальные координаты, равноденствие: %s"
@@ -1383,10 +1383,6 @@ msgstr "Экваториальные координаты, равноденст�
 #: u_translation:rsequinox2
 msgid "Equinox"
 msgstr "Равноденствие"
-
-#: u_translation:rsequinoxofthe
-msgid "Equinox of the date"
-msgstr "Равноденствие на дату"
 
 #: u_translation:rsequinox
 msgid "Equinox:"
@@ -1439,6 +1435,10 @@ msgstr "Выход"
 #: u_translation:rsexiting
 msgid "Exiting ..."
 msgstr "Выход…"
+
+#: u_translation:rsexpertmode
+msgid "Expert mode"
+msgstr ""
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1563,10 +1563,6 @@ msgstr "Первая цифра"
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
 msgstr "Всегда чёрный"
-
-#: u_translation:rsfixedequinox
-msgid "Fixed Equinox"
-msgstr "Фиксированное равноденствие"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -2208,9 +2204,21 @@ msgstr "Максимализация"
 msgid "Maximum magnitude"
 msgstr "Максим. величина"
 
+#: u_translation:rsmean
+msgid "Mean"
+msgstr ""
+
+#: u_translation:rsmeanj2000
+msgid "Mean J2000"
+msgstr ""
+
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Средняя аномалия"
+
+#: u_translation:rsmeanofthedat
+msgid "Mean of the date"
+msgstr ""
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -3504,10 +3512,6 @@ msgstr "Площадь"
 msgid "Standard  Color"
 msgstr "Стандартный цвет"
 
-#: u_translation:rsstandardequi
-msgid "Standard Equinox"
-msgstr "Стандартное равноденствие"
-
 #: u_translation:rsstar
 msgid "Star"
 msgstr "Звезда"
@@ -3787,6 +3791,10 @@ msgstr "Тип"
 #: u_translation:rstypeofvariab
 msgid "Type of Variability"
 msgstr "Тип переменности"
+
+#: u_translation:rstypeofcoordi
+msgid "Type of coordinates"
+msgstr ""
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -4143,6 +4151,10 @@ msgstr "повороты / градус"
 #: u_translation:rsturnshour
 msgid "turns / hour"
 msgstr "повороти / час"
+
+#: u_translation:rswithpropermo
+msgid "with proper motion"
+msgstr ""
 
 #: u_translation:rsyears
 msgid "years"

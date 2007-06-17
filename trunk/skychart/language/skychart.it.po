@@ -239,6 +239,10 @@ msgstr "Moto proprio annuale"
 msgid "Anonymous password"
 msgstr "Password utente anonimo"
 
+#: u_translation:rsapparent
+msgid "Apparent"
+msgstr ""
+
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "Aggiungi a un catalogo esistente"
@@ -1371,10 +1375,6 @@ msgstr "Coordinate Equatoriali"
 msgid "Equatorial Mount"
 msgstr "Montatura Equatoriale"
 
-#: u_translation:rsequatorialan
-msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
-msgstr "Equinozio delle coordinate per cartine equatoriali ed eclittiche"
-
 #: u_translation:rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Coordinate equatoriali, equinozio: %s"
@@ -1382,10 +1382,6 @@ msgstr "Coordinate equatoriali, equinozio: %s"
 #: u_translation:rsequinox2
 msgid "Equinox"
 msgstr "Equinozio"
-
-#: u_translation:rsequinoxofthe
-msgid "Equinox of the date"
-msgstr "Equinozio della data corrente"
 
 #: u_translation:rsequinox
 msgid "Equinox:"
@@ -1438,6 +1434,10 @@ msgstr "Esci"
 #: u_translation:rsexiting
 msgid "Exiting ..."
 msgstr "Uscendo..."
+
+#: u_translation:rsexpertmode
+msgid "Expert mode"
+msgstr ""
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1562,10 +1562,6 @@ msgstr "Primo car."
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
 msgstr "Fisso nero"
-
-#: u_translation:rsfixedequinox
-msgid "Fixed Equinox"
-msgstr "Equinozio Fisso"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -2207,9 +2203,21 @@ msgstr "Massimizza"
 msgid "Maximum magnitude"
 msgstr "Magnitudine massima"
 
+#: u_translation:rsmean
+msgid "Mean"
+msgstr ""
+
+#: u_translation:rsmeanj2000
+msgid "Mean J2000"
+msgstr ""
+
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Anomalia dell'orbita"
+
+#: u_translation:rsmeanofthedat
+msgid "Mean of the date"
+msgstr ""
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -3503,10 +3511,6 @@ msgstr "Quadrato"
 msgid "Standard  Color"
 msgstr "Colorazioni Standard"
 
-#: u_translation:rsstandardequi
-msgid "Standard Equinox"
-msgstr "Equinozio Standard"
-
 #: u_translation:rsstar
 msgid "Star"
 msgstr "Stella"
@@ -3786,6 +3790,10 @@ msgstr "Tipo"
 #: u_translation:rstypeofvariab
 msgid "Type of Variability"
 msgstr "Tipo di variabilità"
+
+#: u_translation:rstypeofcoordi
+msgid "Type of coordinates"
+msgstr ""
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -4142,6 +4150,10 @@ msgstr "pressioni / grado"
 #: u_translation:rsturnshour
 msgid "turns / hour"
 msgstr "pressioni / ora"
+
+#: u_translation:rswithpropermo
+msgid "with proper motion"
+msgstr ""
 
 #: u_translation:rsyears
 msgid "years"

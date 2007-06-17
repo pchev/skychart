@@ -239,6 +239,10 @@ msgstr ""
 msgid "Anonymous password"
 msgstr ""
 
+#: u_translation:rsapparent
+msgid "Apparent"
+msgstr ""
+
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr ""
@@ -1371,20 +1375,12 @@ msgstr ""
 msgid "Equatorial Mount"
 msgstr ""
 
-#: u_translation:rsequatorialan
-msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
-msgstr ""
-
 #: u_translation:rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
 msgstr ""
 
 #: u_translation:rsequinox2
 msgid "Equinox"
-msgstr ""
-
-#: u_translation:rsequinoxofthe
-msgid "Equinox of the date"
 msgstr ""
 
 #: u_translation:rsequinox
@@ -1437,6 +1433,10 @@ msgstr ""
 
 #: u_translation:rsexiting
 msgid "Exiting ..."
+msgstr ""
+
+#: u_translation:rsexpertmode
+msgid "Expert mode"
 msgstr ""
 
 #: u_translation:rsexternalcata
@@ -1561,10 +1561,6 @@ msgstr ""
 
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
-msgstr ""
-
-#: u_translation:rsfixedequinox
-msgid "Fixed Equinox"
 msgstr ""
 
 #: u_translation:rsflamsteednum
@@ -2207,8 +2203,20 @@ msgstr ""
 msgid "Maximum magnitude"
 msgstr ""
 
+#: u_translation:rsmean
+msgid "Mean"
+msgstr ""
+
+#: u_translation:rsmeanj2000
+msgid "Mean J2000"
+msgstr ""
+
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
+msgstr ""
+
+#: u_translation:rsmeanofthedat
+msgid "Mean of the date"
 msgstr ""
 
 #: u_translation:rsmeanposition
@@ -3503,10 +3511,6 @@ msgstr ""
 msgid "Standard  Color"
 msgstr ""
 
-#: u_translation:rsstandardequi
-msgid "Standard Equinox"
-msgstr ""
-
 #: u_translation:rsstar
 msgid "Star"
 msgstr ""
@@ -3785,6 +3789,10 @@ msgstr ""
 
 #: u_translation:rstypeofvariab
 msgid "Type of Variability"
+msgstr ""
+
+#: u_translation:rstypeofcoordi
+msgid "Type of coordinates"
 msgstr ""
 
 #: u_translation:rstypeofobject
@@ -4141,6 +4149,10 @@ msgstr ""
 
 #: u_translation:rsturnshour
 msgid "turns / hour"
+msgstr ""
+
+#: u_translation:rswithpropermo
+msgid "with proper motion"
 msgstr ""
 
 #: u_translation:rsyears
