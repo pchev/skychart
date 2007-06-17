@@ -1,0 +1,19 @@
+Version 3.0.1.3 svn  Notes de la version
+
+17 juin 2007 Changement du réglage des coordonnées:
+Un nouvel écran simplifié permet de choisir le type de coordonnée voulu.
+La valeur par défaut est maintenant les coordonnées apparentes de la date.
+Vous pouvez le changer par le menu Configuration/Carte,Coordonnées
+
+21 janvier 2007  Changement des zones horaires:
+Depuis cette version les informations de zone horaire ne sont plus prise de l'ordinateur mais de la définition de l'observatoire.
+Les principaux avantages sont de facilement gérer l'heure si vous faite des calculs pour différents emplacement ainsi que tenir compte de l'heure d'été pour n'importe quelle date dans le passé ou le futur.
+A cause de se changement il est nécessaire d'indiquer la bonne zone horaire dans la configuration de l'observatoire.
+Soyez sur de choisir la bonne, principalement si votre pays utilise plusieurs zone horaires et dans tous les cas sortez avec le bouton OK pour enregistrer la configuration.
+
+Autres changements:
+- Ajout du format de la date pour les labels de simulation
+- Marque le pole
+- Couleur du ciel pour tout les systèmes de coordonnées
+- Bouton pour mettre l'heure à 0h
+- Curseur de la carte comme en version 2

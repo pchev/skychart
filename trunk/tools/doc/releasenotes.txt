@@ -1,0 +1,19 @@
+Version 3.0.1.3 svn Release Notes
+
+June 17 2007 Coordinates setting change
+New simplified form to select the kind of coordinates you want.
+The default is now apparent coordinates of the date.
+You can change to mean coordinates using Configuration/Chart,Coordinates.
+
+January 21 2007  Time zone change:
+Starting with this version the timezone information is no longer taken from the computer setting but from the observatory definition.
+The main advantage is to easily manage the correct time if you do calculation for different location and to use the correct DST setting for any date in the past or in the future.
+Because of this change you need to set the right timezone in the Observatory Setting. 
+Be sure you select the right one if your country use more than one timezone and in any case click the OK button to save the setting.
+
+Other changes:
+- Add date format setting for simulation labels
+- Mark the pole.
+- Adjust sky color for all coordinate system.
+- Button to set time to 0h
+- Chart cursor like in version 2
