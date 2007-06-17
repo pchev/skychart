@@ -585,7 +585,6 @@ resourcestring
     +'current date';
   rsDrawALineTha = 'Draw a line that represent the proper motion for the next ';
   rsEquinox = 'Equinox:';
-  rsEquatorialAn = 'Equatorial and Ecliptic Chart  Coordinates Equinox';
   rsChartCoordin2 = 'Chart Coordinate System';
   rsNutationAber = 'Nutation ,  Aberration';
   rsFieldOfVisio3 = 'Field of Vision Setting';
@@ -983,9 +982,6 @@ resourcestring
   rsLandscape = 'Landscape';
   rsSystemPrinte = 'System Printer';
   rsBitmapFile = 'Bitmap File';
-  rsStandardEqui = 'Standard Equinox';
-  rsFixedEquinox = 'Fixed Equinox';
-  rsEquinoxOfThe = 'Equinox of the date';
   rsMeanPosition = 'Mean position';
   rsTruePosition = 'True position';
   rsAzimuthalCoo = 'Azimuthal Coordinate';
@@ -1081,6 +1077,13 @@ resourcestring
   rsReleaseNotes = 'Release Notes';
   rsBlinkingPict = 'Blinking Picture';
   rsLatinName = 'Latin Name';
+  rsExpertMode = 'Expert mode';
+  rsTypeOfCoordi = 'Type of coordinates';
+  rsApparent = 'Apparent';
+  rsMeanOfTheDat = 'Mean of the date';
+  rsMeanJ2000 = 'Mean J2000';
+  rsMean = 'Mean';
+  rsWithProperMo = 'with proper motion';
 
 implementation
 

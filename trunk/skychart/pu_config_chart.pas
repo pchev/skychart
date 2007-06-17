@@ -43,6 +43,7 @@ type
     Button2: TButton;
     CheckBox1: TCheckBox;
     CheckBox10: TCheckBox;
+    ExpertMode: TCheckBox;
     CheckBox13: TCheckBox;
     CheckBox11: TCheckBox;
     CheckBox2: TCheckBox;
@@ -64,11 +65,8 @@ type
     ComboBox7: TComboBox;
     ComboBox8: TComboBox;
     ComboBox9: TComboBox;
-    DrawPmBox: TCheckBox;
-    equinox1: TComboBox;
     equinox2: TFloatEdit;
     EquinoxLabel: TLabel;
-    equinoxtype: TRadioGroup;
     fBigNebLimit: TLongEdit;
     fdim0: TFloatEdit;
     fdim1: TFloatEdit;
@@ -136,8 +134,8 @@ type
     fv0: TLabel;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
+    GroupBox3: TGroupBox;
     GroupBox5: TGroupBox;
-    Label1: TLabel;
     Label101: TLabel;
     Label102: TLabel;
     Label103: TLabel;
@@ -150,7 +148,6 @@ type
     Label110: TLabel;
     Label111: TLabel;
     Label112: TLabel;
-    Label113: TLabel;
     Label114: TLabel;
     Label158: TLabel;
     Label159: TLabel;
@@ -195,7 +192,6 @@ type
     Label49: TLabel;
     Label5: TLabel;
     Label57: TLabel;
-    Label68: TLabel;
     Label74: TLabel;
     Label76: TLabel;
     Label78: TLabel;
@@ -217,7 +213,6 @@ type
     Labelp7: TLabel;
     Labelp8: TLabel;
     Labelp9: TLabel;
-    lDrawPMy: TLongEdit;
     listdbl: TCheckBox;
     listneb: TCheckBox;
     listpla: TCheckBox;
@@ -231,8 +226,8 @@ type
     Page4: TPage;
     Page5: TPage;
     Page6: TPage;
-    Panel1: TPanel;
-    Panel10: TPanel;
+    PanelExpert: TPanel;
+    PanelCoord: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
@@ -262,24 +257,23 @@ type
     RaDec7: TRaDec;
     RaDec8: TRaDec;
     RaDec9: TRaDec;
+    CoordType: TRadioGroup;
     StarAutoBox: TCheckBox;
     StarBox: TCheckBox;
     Notebook1: TNotebook;
     TrackBar1: TTrackBar;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure ExpertModeClick(Sender: TObject);
     procedure CheckBox13Click(Sender: TObject);
+    procedure CoordTypeClick(Sender: TObject);
     procedure ShowGridBoxClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure Notebook1PageChanged(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
-    procedure equinoxtypeClick(Sender: TObject);
-    procedure equinox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PMBoxClick(Sender: TObject);
-    procedure DrawPmBoxClick(Sender: TObject);
-    procedure lDrawPMyChange(Sender: TObject);
     procedure ApparentTypeClick(Sender: TObject);
     procedure projectiontypeClick(Sender: TObject);
     procedure FWExit(Sender: TObject);
@@ -312,7 +306,7 @@ type
     procedure ShowFilter;
     procedure ShowGridSpacing;
     procedure ShowObjList;
-    procedure SetEquinox;
+    procedure SetExpertEquinox;
     procedure SetFieldHint(var lab:Tlabel; n:integer);
   public
     { Public declarations }
@@ -337,12 +331,10 @@ procedure Tf_config_chart.SetLang;
 begin
 Caption:=rsCharts;
 Label31.caption:=rsChartSetting;
-Label68.caption:=rsYears;
-Label113.caption:=rsStarsProperM;
+GroupBox3.caption:=rsStarsProperM;
+ExpertMode.Caption:=rsExpertMode;
 PMBox.caption:=rsUseTheProper;
-DrawPmBox.caption:=rsDrawALineTha;
 EquinoxLabel.caption:=rsEquinox;
-Label1.caption:=rsEquatorialAn;
 projectiontype.caption:=rsChartCoordin2;
 ApparentType.caption:=rsNutationAber;
 Label30.caption:=rsFieldOfVisio3;
@@ -380,15 +372,16 @@ listpla.caption:=rsSolarSystemO;
 listvar.caption:=rsVariableStar;
 listdbl.caption:=rsDoubleStar;
 Label2.caption:=rsFovNumber;
-equinoxtype.items[0]:=rsStandardEqui;
-equinoxtype.items[1]:=rsFixedEquinox;
-equinoxtype.items[2]:=rsEquinoxOfThe;
 ApparentType.Items[0]:=rsMeanPosition;
 ApparentType.Items[1]:=rsTruePosition;
 projectiontype.Items[0]:=rsEquatorialCo;
 projectiontype.Items[1]:=rsAzimuthalCoo;
 projectiontype.Items[2]:=rsGalacticCoor;
 projectiontype.Items[3]:=rsEclipticCoor;
+CoordType.Caption:=rsTypeOfCoordi;
+CoordType.Items[0]:=rsApparent;
+CoordType.Items[1]:=rsMeanOfTheDat;
+CoordType.Items[2]:=rsMeanJ2000;
 Button2.Caption:=rsDefault;
 Label3.caption:=rsShowGrid;
 Label4.caption:=rsCompassRoseS;
@@ -423,20 +416,14 @@ LockChange:=false;
 end;
 
 procedure Tf_config_chart.ShowChart;
-var i : integer;
 begin
 equinox2.text:=stringreplace(stringreplace(stringreplace(cshr.EquinoxChart,'J','',[]),'B','',[]),rsDate,'2000.0',[]);
-equinox1.itemindex:=0;
-for i:=0 to equinox1.items.count-1 do
-  if equinox1.items[i]=cshr.EquinoxChart then
-      equinox1.itemindex:=i;
-equinoxtype.itemindex:=cshr.EquinoxType;
 PMBox.checked:=csc.PMon;
-DrawPMBox.checked:=csc.DrawPMon;
-lDrawPMy.value:=csc.DrawPMyear;
 if csc.ApparentPos then ApparentType.ItemIndex:=1
                    else Apparenttype.itemindex:=0;
 projectiontype.itemindex:=csc.ProjPole;
+coordtype.ItemIndex:=csc.CoordType;
+ExpertMode.Checked:=csc.CoordExpertMode;
 end;
 
 procedure Tf_config_chart.ShowGridSpacing;
@@ -640,12 +627,6 @@ end;
 lab.showhint:=true;
 end;
 
-procedure Tf_config_chart.equinoxtypeClick(Sender: TObject);
-begin
-cshr.EquinoxType:=equinoxtype.itemindex;
-SetEquinox;
-end;
-
 procedure Tf_config_chart.Button1Click(Sender: TObject);
 begin
 cshr.FieldNum[0]:=0.5;
@@ -695,12 +676,6 @@ if LockChange then exit;
 cshr.CRoseSz:=TrackBar1.Position;
 end;
 
-procedure Tf_config_chart.equinox1Change(Sender: TObject);
-begin
-if LockChange then exit;
-if (cshr.EquinoxType=0) then SetEquinox;
-end;
-
 procedure Tf_config_chart.FormCreate(Sender: TObject);
 begin
   SetLang;
@@ -717,26 +692,35 @@ begin
   fw9.OnExit:=FWExit;
 end;
 
+procedure Tf_config_chart.ExpertModeClick(Sender: TObject);
+begin
+  csc.CoordExpertMode:=ExpertMode.Checked;
+  PanelExpert.Visible:=ExpertMode.Checked;
+  PanelCoord.Visible:=not PanelExpert.Visible;
+  if ExpertMode.Checked then SetExpertEquinox
+                        else CoordTypeClick(Sender);
+end;
+
+procedure Tf_config_chart.SetExpertEquinox;
+begin
+cshr.EquinoxType:=1;
+csc.PMon:=PMBox.checked;
+csc.ApparentPos:=(ApparentType.ItemIndex=1);
+equinox2Change(nil);
+end;
+
 procedure Tf_config_chart.equinox2Change(Sender: TObject);
 begin
 if LockChange then exit;
-if (cshr.EquinoxType=1)and(trim(equinox2.text)>'') then SetEquinox;
+if (cshr.EquinoxType=1)and(trim(equinox2.text)>'') then begin
+     cshr.EquinoxChart:=equinox2.text;
+     cshr.DefaultJDChart:=jd(trunc(equinox2.Value),trunc(frac(equinox2.Value)*12)+1,0,0);
+end;
 end;
 
 procedure Tf_config_chart.PMBoxClick(Sender: TObject);
 begin
 csc.PMon:=PMBox.checked;
-end;
-
-procedure Tf_config_chart.DrawPmBoxClick(Sender: TObject);
-begin
-csc.DrawPMon:=DrawPMBox.checked;
-end;
-
-procedure Tf_config_chart.lDrawPMyChange(Sender: TObject);
-begin
-if LockChange then exit;
-csc.DrawPMyear:=lDrawPMy.value;
 end;
 
 procedure Tf_config_chart.ApparentTypeClick(Sender: TObject);
@@ -749,42 +733,32 @@ begin
 csc.ProjPole:=projectiontype.itemindex;
 end;
 
-procedure Tf_config_chart.SetEquinox;
+
+procedure Tf_config_chart.CoordTypeClick(Sender: TObject);
 begin
-case cshr.EquinoxType of
-0 : begin
-     case equinox1.itemindex of
-     0 : begin
-           cshr.EquinoxChart:='J2000';
-           cshr.DefaultJDChart:=jd2000;
-         end;
-     1 : begin
-           cshr.EquinoxChart:='B1950';
-           cshr.DefaultJDChart:=jd1950;
-         end;
-     2 : begin
-           cshr.EquinoxChart:='B1900';
-           cshr.DefaultJDChart:=jd1900;
-         end;
+csc.CoordType:=CoordType.ItemIndex;
+case CoordType.ItemIndex of
+ 0 : begin
+       cshr.EquinoxType:=2;
+       csc.ApparentPos:=true;
+       csc.PMon:=true;
+       cshr.EquinoxChart:=rsDate;
+       cshr.DefaultJDChart:=jd2000;
      end;
-     equinox1.Visible:=true;
-     equinox2.Visible:=false;
-     EquinoxLabel.Visible:=true;
-    end;
-1 : begin
-     cshr.EquinoxChart:=equinox2.text;
-     cshr.DefaultJDChart:=jd(trunc(equinox2.Value),trunc(frac(equinox2.Value)*12)+1,0,0);
-     equinox1.Visible:=false;
-     equinox2.Visible:=true;
-     EquinoxLabel.Visible:=true;
-    end;
-2 : begin
-     cshr.EquinoxChart:=rsDate;
-     cshr.DefaultJDChart:=jd2000;
-     equinox1.Visible:=false;
-     equinox2.Visible:=false;
-     EquinoxLabel.Visible:=false;
-    end;
+ 1 : begin
+       cshr.EquinoxType:=2;
+       csc.ApparentPos:=false;
+       csc.PMon:=true;
+       cshr.EquinoxChart:=rsDate;
+       cshr.DefaultJDChart:=jd2000;
+     end;
+ 2 : begin
+       cshr.EquinoxType:=0;
+       csc.ApparentPos:=false;
+       csc.PMon:=true;
+       cshr.EquinoxChart:='J2000';
+       cshr.DefaultJDChart:=jd2000;
+     end;
 end;
 end;
 

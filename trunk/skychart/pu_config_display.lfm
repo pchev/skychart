@@ -27,13 +27,13 @@ object f_config_display: Tf_config_display
       Top = 1
       Width = 521
       Align = alClient
-      PageIndex = 0
+      PageIndex = 4
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Display'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 521
+        ClientHeight = 480
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -49,8 +49,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 46
-          ClientWidth = 437
+          ClientHeight = 65
+          ClientWidth = 441
           Columns = 3
           Items.Strings = (
             'Line mode'
@@ -75,8 +75,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 46
-          ClientWidth = 437
+          ClientHeight = 65
+          ClientWidth = 441
           Columns = 2
           Items.Strings = (
             'Line mode'
@@ -91,42 +91,42 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 441
           Caption = 'Star Display  Properties'
-          ClientHeight = 223
-          ClientWidth = 437
+          ClientHeight = 242
+          ClientWidth = 441
           TabOrder = 2
           Visible = False
           object Label256: TLabel
             Left = 24
-            Height = 15
+            Height = 14
             Top = 38
-            Width = 104
+            Width = 90
             Caption = 'Faint Stars Size '
             Color = clNone
             ParentColor = False
           end
           object Label262: TLabel
             Left = 24
-            Height = 15
+            Height = 14
             Top = 112
-            Width = 55
+            Width = 47
             Caption = 'Contrast'
             Color = clNone
             ParentColor = False
           end
           object Label263: TLabel
             Left = 24
-            Height = 15
+            Height = 14
             Top = 150
-            Width = 101
+            Width = 88
             Caption = 'Color saturation'
             Color = clNone
             ParentColor = False
           end
           object Label257: TLabel
             Left = 24
-            Height = 15
+            Height = 14
             Top = 75
-            Width = 163
+            Width = 138
             Caption = 'Increment for Bright Stars'
             Color = clNone
             ParentColor = False
@@ -1471,20 +1471,20 @@ object f_config_display: Tf_config_display
       end
       object Page5: TPage
         Caption = 'Lines'
-        ClientWidth = 521
-        ClientHeight = 480
+        ClientWidth = 517
+        ClientHeight = 476
         object EqGrid: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 101
-          Width = 131
+          Width = 132
           Caption = 'Add Equatorial Grid'
           OnClick = EqGridClick
           TabOrder = 5
         end
         object CGrid: TCheckBox
           Left = 16
-          Height = 19
+          Height = 22
           Top = 32
           Width = 146
           Caption = 'Show Coordinate Grid'
@@ -1493,16 +1493,16 @@ object f_config_display: Tf_config_display
         end
         object ecliptic: TCheckBox
           Left = 210
-          Height = 19
+          Height = 22
           Top = 32
-          Width = 95
+          Width = 97
           Caption = 'Show Ecliptic'
           OnClick = eclipticClick
           TabOrder = 2
         end
         object galactic: TCheckBox
           Left = 210
-          Height = 19
+          Height = 22
           Top = 101
           Width = 149
           Caption = 'Show Galactic Equator'
@@ -1511,9 +1511,9 @@ object f_config_display: Tf_config_display
         end
         object GridNum: TCheckBox
           Left = 352
-          Height = 19
+          Height = 22
           Top = 32
-          Width = 114
+          Width = 116
           Caption = 'Show Grid Label'
           OnClick = GridNumClick
           TabOrder = 4
@@ -1521,24 +1521,24 @@ object f_config_display: Tf_config_display
         object GroupBox1: TGroupBox
           Left = 8
           Height = 140
-          Top = 173
+          Top = 157
           Width = 273
           Caption = 'Constellation Figures'
-          ClientHeight = 140
-          ClientWidth = 273
+          ClientHeight = 121
+          ClientWidth = 269
           TabOrder = 9
           object Label132: TLabel
             Left = 29
-            Height = 13
+            Height = 14
             Top = 75
-            Width = 186
+            Width = 181
             Caption = 'Constellation Figure File Name : '
             Color = clNone
             ParentColor = False
           end
           object Constl: TCheckBox
             Left = 8
-            Height = 19
+            Height = 22
             Top = 11
             Width = 169
             Caption = 'Show Constellation Figure'
@@ -1583,26 +1583,26 @@ object f_config_display: Tf_config_display
         object GroupBox3: TGroupBox
           Left = 8
           Height = 140
-          Top = 325
+          Top = 301
           Width = 273
           Caption = 'Constellation Boundaries'
-          ClientHeight = 140
-          ClientWidth = 273
+          ClientHeight = 121
+          ClientWidth = 269
           TabOrder = 11
           object Label72: TLabel
             Left = 29
-            Height = 13
+            Height = 14
             Top = 75
-            Width = 205
+            Width = 198
             Caption = 'Constellation Boundary File Name : '
             Color = clNone
             ParentColor = False
           end
           object Constb: TCheckBox
             Left = 8
-            Height = 19
+            Height = 22
             Top = 11
-            Width = 188
+            Width = 186
             Caption = 'Show Constellation Boundary'
             OnClick = ConstbClick
             TabOrder = 0
@@ -1643,28 +1643,28 @@ object f_config_display: Tf_config_display
           end
         end
         object GroupBox4: TGroupBox
-          Left = 301
+          Left = 293
           Height = 140
-          Top = 173
+          Top = 157
           Width = 185
           Caption = 'Milky Way'
-          ClientHeight = 140
-          ClientWidth = 185
+          ClientHeight = 121
+          ClientWidth = 181
           TabOrder = 10
           object milkyway: TCheckBox
             Left = 8
-            Height = 19
+            Height = 22
             Top = 24
-            Width = 109
+            Width = 114
             Caption = 'Show Milky Way'
             OnClick = milkywayClick
             TabOrder = 0
           end
           object fillmilkyway: TCheckBox
             Left = 8
-            Height = 19
+            Height = 22
             Top = 56
-            Width = 93
+            Width = 100
             Caption = 'Fill Milky Way'
             OnClick = fillmilkywayClick
             TabOrder = 1
@@ -1757,6 +1757,59 @@ object f_config_display: Tf_config_display
           Style = csOwnerDrawFixed
           TabOrder = 8
           Text = 'Line'
+        end
+        object GroupBox8: TGroupBox
+          Left = 293
+          Height = 140
+          Top = 301
+          Width = 185
+          Caption = 'Proper Motion'
+          ClientHeight = 121
+          ClientWidth = 181
+          TabOrder = 12
+          object Label68: TLabel
+            Left = 91
+            Height = 14
+            Top = 95
+            Width = 31
+            Caption = 'years'
+            Color = clNone
+            ParentColor = False
+          end
+          object Label8: TLabel
+            Left = 30
+            Height = 63
+            Top = 18
+            Width = 150
+            AutoSize = False
+            Caption = 'Draw a line that represent the proper motion for the next '
+            Color = clNone
+            ParentColor = False
+            WordWrap = True
+          end
+          object DrawPmBox: TCheckBox
+            Left = 8
+            Height = 22
+            Top = 11
+            Width = 24
+            OnClick = DrawPmBoxClick
+            TabOrder = 0
+          end
+          object DrawPMy: TLongEdit
+            Left = 22
+            Height = 22
+            Hint = '-99999..99999'
+            Top = 90
+            Width = 56
+            BorderStyle = bsSingle
+            ParentColor = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            OnChange = DrawPMyChange
+            MinValue = -99999
+            MaxValue = 99999
+          end
         end
       end
       object Page6: TPage
@@ -2181,8 +2234,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TPage
         Caption = 'Fonts'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 521
+        ClientHeight = 480
         object Bevel10: TBevel
           Left = 8
           Height = 329

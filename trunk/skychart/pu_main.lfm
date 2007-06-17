@@ -2745,7 +2745,6 @@ object f_main: Tf_main
         Height = 14
         Width = 60
         Caption = 'LPanels01'
-        Color = clNone
         ParentColor = False
         ParentFont = True
       end

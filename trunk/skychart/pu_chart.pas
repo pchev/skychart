@@ -1536,7 +1536,9 @@ function Tf_chart.FormatDesc:string;
 var desc,buf,buf2,otype,oname,txt: string;
     thr,tht,ths,tazr,tazs,tculmalt: string;
     i,p,l,y,m,d,precision : integer;
+    isStar, isSolarSystem: boolean;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
+    ra2000,de2000,radate,dedate,raapp,deapp: double;
 function Bold(s:string):string;
 var k:integer;
 begin
@@ -1557,12 +1559,14 @@ p:=pos(tab,desc);
 p:=pos2(tab,desc,p+1);
 l:=pos2(tab,desc,p+1);
 otype:=trim(copy(desc,p+1,l-p-1));
-if trim(otype)='*' then precision:=3
-else if trim(otype)='As' then precision:=3
-else if trim(otype)='Cm' then precision:=1
-else if trim(otype)='P' then precision:=1
-else if trim(otype)='Ps' then precision:=1
+if otype='*' then precision:=2
+else if otype='As' then precision:=2
+else if otype='Cm' then precision:=1
+else if otype='P' then precision:=1
+else if otype='Ps' then precision:=1
 else precision:=0;
+isStar:=(otype='*');
+isSolarSystem:=((otype='P')or(otype='Ps')or(otype='As')or(otype='Cm'));
 buf:=LongLabelObj(otype);
 txt:=txt+html_h2+buf+htms_h2;
 buf:=copy(desc,l+1,9999);
@@ -1587,40 +1591,53 @@ repeat
      txt:=txt+buf2;
   txt:=txt+html_br;
 until buf='';
+
 // coordinates
-txt:=txt+html_br+html_b+rsCoordinates+htms_b+html_br{+html_ffx};
-txt:=txt+html_b+sc.cfgsc.EquinoxName+blank+htms_b+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec,precision)+html_br;
-if (sc.cfgsc.EquinoxName<>'J2000') then begin
-   ra:=sc.cfgsc.FindRA;
-   dec:=sc.cfgsc.FindDec;
-   precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-   txt:=txt+html_b+'J2000'+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dec,precision)+html_br;
-end;
-if (sc.cfgsc.EquinoxName<>rsDate) then begin
-   ra:=sc.cfgsc.FindRA;
-   dec:=sc.cfgsc.FindDec;
-   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
-   txt:=txt+html_b+rsDate+blank+htms_b+rsRA+': '+arptostr(rad2deg*ra/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dec,precision)+html_br;
-end;
-if (sc.cfgsc.EquinoxName=rsDate)and(sc.catalog.cfgshr.EquinoxChart<>'J2000')and(sc.cfgsc.EquinoxName<>sc.catalog.cfgshr.EquinoxChart) then begin
-   ra:=sc.cfgsc.FindRA;
-   dec:=sc.cfgsc.FindDec;
-   precession(sc.cfgsc.JDChart,sc.catalog.cfgshr.DefaultJDchart,ra,dec);
-   txt:=txt+html_b+sc.catalog.cfgshr.EquinoxChart+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dec,precision)+html_br;
-end;
+txt:=txt+html_br+html_b+rsCoordinates+blank;
+if sc.cfgsc.CoordExpertMode then begin;
+  if sc.cfgsc.ApparentPos then txt:=txt+blank+rsApparent
+                          else txt:=txt+blank+rsMean;
+  txt:=txt+blank+sc.cfgsc.EquinoxName;
+end else
+  case sc.cfgsc.CoordType of
+  0: txt:=txt+blank+rsApparent;
+  1: txt:=txt+blank+rsMeanOfTheDat;
+  2: txt:=txt+blank+rsMeanJ2000;
+  end;
+if isStar and sc.cfgsc.PMon then txt:=txt+blank+rsWithProperMo;
+if isSolarSystem then
+   if sc.cfgsc.PlanetParalaxe then txt:=txt+blank+rsTopoCentric
+                              else txt:=txt+blank+rsGeocentric;
+txt:=txt+htms_b+html_br;
+ra2000:=sc.cfgsc.FindRA;
+de2000:=sc.cfgsc.FindDec;
+if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
+precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
+radate:=sc.cfgsc.FindRA;
+dedate:=sc.cfgsc.FindDec;
+precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,radate,dedate);
+if sc.cfgsc.ApparentPos then mean_equatorial(radate,dedate,sc.cfgsc);
+raapp:=sc.cfgsc.FindRA;
+deapp:=sc.cfgsc.FindDec;
+precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,raapp,deapp);
+if not sc.cfgsc.ApparentPos then apparent_equatorial(raapp,deapp,sc.cfgsc);
+if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
+txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
+txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
+txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 Eq2Ecl(ra,dec,sc.cfgsc.e,a,h) ;
 a:=rmod(a+pi2,pi2);
 txt:=txt+html_b+rsEcliptic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
 Eq2Gal(ra,dec,a,h,sc.cfgsc) ;
 a:=rmod(a+pi2,pi2);
 txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
-txt:=txt{+htms_f}+html_br;
+txt:=txt+html_br;
+
 // local position
 txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
 txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( '+sc.cfgsc.tz.ZoneName+' )'+html_br;

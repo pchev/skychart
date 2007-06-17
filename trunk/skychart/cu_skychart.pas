@@ -408,8 +408,6 @@ result:=true;
 end;
 
 function Tskychart.InitTime:boolean;
-var y,m,d:integer;
-    t:double;
 begin
 if cfgsc.UseSystemTime then SetCurrentTime(cfgsc);
 cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc);
@@ -420,17 +418,16 @@ if cfgsc.CurJD<>cfgsc.LastJD then begin // thing to do when the date change
    cfgsc.FindOk:=false;    // last search no longuer valid
 end;
 cfgsc.LastJD:=cfgsc.CurJD;
-if (Fcatalog.cfgshr.Equinoxtype=2)or(cfgsc.projpole=altaz) then begin  // use equinox of the date
+if (Fcatalog.cfgshr.Equinoxtype=2) then begin  // use equinox of the date
    cfgsc.JDChart:=cfgsc.CurJD;
    cfgsc.EquinoxName:=rsDate;
 end else begin
    cfgsc.JDChart:=Fcatalog.cfgshr.DefaultJDChart;
    cfgsc.EquinoxName:=fcatalog.cfgshr.EquinoxChart;
 end;
-djd(cfgsc.JDChart,y,m,d,t);
-cfgsc.EquinoxDate:=Date2Str(y,m,d);
 if (cfgsc.lastJDchart<-1E20) then cfgsc.lastJDchart:=cfgsc.JDchart; // initial value
-cfgsc.rap2000:=0;       // position of J2000 pole in current coordinates
+// position of J2000 pole in current coordinates
+cfgsc.rap2000:=0;
 cfgsc.dep2000:=pid2;
 precession(jd2000,cfgsc.JDChart,cfgsc.rap2000,cfgsc.dep2000);
 result:=true;
@@ -531,7 +528,7 @@ Fplot.cfgplot.outradius:=abs(round(min(50*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
 // nutation constant
-cfgsc.e:=ecliptic(cfgsc.JDChart);
+cfgsc.e:=ecliptic(cfgsc.CurJd);
 nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
 // Sun geometric longitude eq. of date for aberration
 fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
@@ -2944,14 +2941,23 @@ end;
 function Tskychart.GetChartInfo(sep:string=blank):string;
 var cep,dat:string;
 begin
-    cep:=trim(cfgsc.EquinoxName);
+    if cfgsc.CoordExpertMode then begin;
+      if cfgsc.ApparentPos then cep:=rsApparent
+                              else cep:=rsMean;
+      cep:=cep+blank+trim(cfgsc.EquinoxName);
+    end else
+      case cfgsc.CoordType of
+      0: cep:=rsApparent;
+      1: cep:=rsMeanOfTheDat;
+      2: cep:=rsMeanJ2000;
+      end;
     dat:=Date2Str(cfgsc.CurYear,cfgsc.curmonth,cfgsc.curday)+sep+ArToStr3(cfgsc.Curtime);
     dat:=dat+' ('+cfgsc.tz.ZoneName+')';
     case cfgsc.projpole of
-    Equat : result:=rsEquatorialCo3+blank+cep+sep+dat;
-    AltAz : result:=rsAltAZCoord2+sep+trim(cfgsc.ObsName)+sep+dat;
+    Equat : result:=rsEquatorialCo3+sep+cep+sep+dat;
+    AltAz : result:=rsAltAZCoord2+sep+cep+sep+trim(cfgsc.ObsName)+sep+dat;
     Gal :    result:=rsGalacticCoor2+sep+dat;
-    Ecl :     result:=rsEclipticCoor3+blank+cep+sep+dat+sep+rsInclination2+
+    Ecl :     result:=rsEclipticCoor3+sep+cep+sep+dat+sep+rsInclination2+
       detostr(cfgsc.e*rad2deg);
     else result:='';
     end;

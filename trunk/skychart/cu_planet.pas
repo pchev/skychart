@@ -300,7 +300,7 @@ end;
 Procedure TPlanet.Sun(t0 : double; var alpha,delta,dist,diam : double; highprec:boolean=true);
 var x,y,z : double;
 begin
-  SunRect(t0,true,x,y,z,highprec);
+  SunRect(t0,false,x,y,z,highprec);
   dist:=sqrt(x*x+y*y+z*z);
   alpha:=arctan2(y,x);
   if (alpha<0) then alpha:=alpha+pi2;
