@@ -866,6 +866,8 @@ for j:=0 to cfgsc.SimNb-1 do begin
  precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
  cfgsc.PlanetLst[j,32,4]:=dist;
  cfgsc.PlanetLst[j,32,5]:=dkm;
+ // for the Moon always apply nutation but not aberration
+ apparent_equatorial(ar,de,cfgsc,false);
  if cfgsc.PlanetParalaxe then begin
     Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
     diam:=diam/q;
@@ -875,7 +877,6 @@ for j:=0 to cfgsc.SimNb-1 do begin
     cfgsc.PlanetLst[j,32,4]:=dist;
     Paralaxe(st0,dist,cfgsc.PlanetLst[j,32,1],cfgsc.PlanetLst[j,32,2],cfgsc.PlanetLst[j,32,1],cfgsc.PlanetLst[j,32,2],q,cfgsc);
  end;
- if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
  cfgsc.PlanetLst[j,ipla,1]:=ar;
  cfgsc.PlanetLst[j,ipla,2]:=de;
  cfgsc.PlanetLst[j,ipla,3]:=jdt;

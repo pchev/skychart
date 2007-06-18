@@ -62,7 +62,7 @@ Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart);
 function ecliptic(j:double):double;
 procedure nutation(j:double; var nutl,nuto:double);
 procedure aberration(j:double; var abe,abp:double);
-procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart);
+procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
@@ -926,7 +926,7 @@ abe:=0.016708617-4.2037e-5*t-1.236e-7*t*t;
 abp:=deg2rad*(102.93735+1.71953*t+4.6e-4*t*t);
 end;
 
-procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart);
+procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
 var da,dd,l,b: double;
     cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
 begin
@@ -948,12 +948,14 @@ end else begin
    b:=b+c.nuto;
    Ecl2Eq(l,b,c.e,ra,de);
 end;
+if aberration then begin
 //aberration
 //meeus91 22.3
 da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
 dd:=-abek*(cls*ce*((se/ce)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*((se/ce)*cde-sra*sde)+cra*sde*sp);
 ra:=ra+da;
 de:=de+dd;
+end;
 end;
 
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart);
