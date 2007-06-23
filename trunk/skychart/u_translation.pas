@@ -1084,6 +1084,11 @@ resourcestring
   rsMeanJ2000 = 'Mean J2000';
   rsMean = 'Mean';
   rsWithProperMo = 'with proper motion';
+  rsAstrometricJ = 'Astrometric J2000';
+  rsTrueEquatorE = 'true equator, equinox and epoch of the date';
+  rsMeanEquatorE = 'mean equator, equinox and epoch of the date';
+  rsMeanEquinoxA = 'mean equinox and epoch J2000';
+  rsMeanEquinoxJ = 'mean equinox J2000, epoch of the date';
 
 implementation
 

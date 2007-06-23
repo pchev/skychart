@@ -379,9 +379,10 @@ projectiontype.Items[1]:=rsAzimuthalCoo;
 projectiontype.Items[2]:=rsGalacticCoor;
 projectiontype.Items[3]:=rsEclipticCoor;
 CoordType.Caption:=rsTypeOfCoordi;
-CoordType.Items[0]:=rsApparent;
-CoordType.Items[1]:=rsMeanOfTheDat;
-CoordType.Items[2]:=rsMeanJ2000;
+CoordType.Items[0]:=rsApparent+blank+'('+rsTrueEquatorE+')';
+CoordType.Items[1]:=rsMeanOfTheDat+blank+'('+rsMeanEquatorE+')';
+CoordType.Items[2]:=rsMeanJ2000+blank+'('+rsMeanEquinoxA+')';
+CoordType.Items[3]:=rsAstrometricJ+blank+'('+rsMeanEquinoxJ+')';
 Button2.Caption:=rsDefault;
 Label3.caption:=rsShowGrid;
 Label4.caption:=rsCompassRoseS;
@@ -753,6 +754,13 @@ case CoordType.ItemIndex of
        cshr.DefaultJDChart:=jd2000;
      end;
  2 : begin
+       cshr.EquinoxType:=0;
+       csc.ApparentPos:=false;
+       csc.PMon:=false;
+       cshr.EquinoxChart:='J2000';
+       cshr.DefaultJDChart:=jd2000;
+     end;
+ 3 : begin
        cshr.EquinoxType:=0;
        csc.ApparentPos:=false;
        csc.PMon:=true;

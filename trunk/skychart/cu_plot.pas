@@ -217,7 +217,7 @@ begin
     labels[i].tag:=i;
     labels[i].color:=clNone;
     labels[i].ShowAccelChar:=false;
-    labels[i].Font.CharSet:=DEFAULT_CHARSET;
+    labels[i].Font.CharSet:=FCS_ISO_10646_1;
     labels[i].OnMouseDown:=labelmousedown;
     labels[i].OnMouseUp:=labelmouseup;
     labels[i].OnMouseMove:=labelmousemove;

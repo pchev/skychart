@@ -1341,6 +1341,7 @@ const b=' ';
 begin
  cfgsc.FindRA:=rec.ra;
  cfgsc.FindDec:=rec.dec;
+ cfgsc.FindPM:=cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec];
  cfgsc.FindSize:=0;
  desc:= ARpToStr(rmod(rad2deg*rec.ra/15+24,24))+tab+DEpToStr(rad2deg*rec.dec)+tab;
  case rec.options.rectype of
@@ -2950,6 +2951,7 @@ begin
       0: cep:=rsApparent;
       1: cep:=rsMeanOfTheDat;
       2: cep:=rsMeanJ2000;
+      3: cep:=rsAstrometricJ;
       end;
     dat:=Date2Str(cfgsc.CurYear,cfgsc.curmonth,cfgsc.curday)+sep+ArToStr3(cfgsc.Curtime);
     dat:=dat+' ('+cfgsc.tz.ZoneName+')';

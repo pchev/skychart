@@ -1603,8 +1603,9 @@ end else
   0: txt:=txt+blank+rsApparent;
   1: txt:=txt+blank+rsMeanOfTheDat;
   2: txt:=txt+blank+rsMeanJ2000;
+  3: txt:=txt+blank+rsAstrometricJ;
   end;
-if isStar and sc.cfgsc.PMon then txt:=txt+blank+rsWithProperMo;
+if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM then txt:=txt+blank+rsWithProperMo;
 if isSolarSystem then
    if sc.cfgsc.PlanetParalaxe then txt:=txt+blank+rsTopoCentric
                               else txt:=txt+blank+rsGeocentric;
@@ -1624,7 +1625,10 @@ if not sc.cfgsc.ApparentPos then apparent_equatorial(raapp,deapp,sc.cfgsc);
 if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
 txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
 txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
-txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
+if isStar and sc.cfgsc.PMon then
+   txt:=txt+html_b+rsAstrometricJ+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br
+else
+   txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 Eq2Ecl(ra,dec,sc.cfgsc.e,a,h) ;

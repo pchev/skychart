@@ -942,7 +942,7 @@ try
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
  catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
- catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names')+'StarsNames.txt');
+ catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names'),Lang);
  f_search.cfgshr:=catalog.cfgshr;
  f_search.cfgsc:=def_cfgsc;
  f_search.Init;
@@ -1595,12 +1595,16 @@ end;
 
 
 procedure Tf_main.DSSImageExecute(Sender: TObject);
-
+var ra2000,de2000: double;
 begin
 if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
   then with MultiDoc1.ActiveObject as Tf_chart do begin
    f_getdss.cmain:=cfgm;
-   if f_getdss.GetDss(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
+   ra2000:=sc.cfgsc.racentre;
+   de2000:=sc.cfgsc.decentre;
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
+   precession(sc.cfgsc.JDchart,jd2000,ra2000,de2000);
+   if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
       sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
       if sc.Fits.Header.valid then begin
          sc.Fits.DeleteDB('OTHER','BKG');
@@ -2406,6 +2410,7 @@ begin
          catalog.LoadConstellation(cfgm.Constellationpath,'Latin')
       else
          catalog.LoadConstellation(cfgm.Constellationpath,lang);
+    catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names'),Lang);
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
@@ -3348,6 +3353,13 @@ case csc.CoordType of
        catalog.cfgshr.DefaultJDChart:=jd2000;
      end;
  2 : begin
+       catalog.cfgshr.EquinoxType:=0;
+       csc.ApparentPos:=false;
+       csc.PMon:=false;
+       catalog.cfgshr.EquinoxChart:='J2000';
+       catalog.cfgshr.DefaultJDChart:=jd2000;
+     end;
+ 3 : begin
        catalog.cfgshr.EquinoxType:=0;
        csc.ApparentPos:=false;
        csc.PMon:=true;
@@ -4344,6 +4356,7 @@ Findit:
         sc.cfgsc.FindRA:=ar1;
         sc.cfgsc.FindDec:=de1;
         sc.cfgsc.FindSize:=0;
+        sc.cfgsc.FindPM:=false;
         sc.cfgsc.FindOK:=true;
       end;
       ShowIdentLabel;
@@ -4898,6 +4911,7 @@ for i:=0 to MultiDoc1.ChildCount-1 do
       sc.cfgsc.FindDesc:=desc;
       sc.cfgsc.FindName:=nm;
       sc.cfgsc.FindNote:='';
+      sc.cfgsc.FindPM:=false;
       sc.cfgsc.FindOK:=true;
       sc.cfgsc.FindSize:=0;
       ShowIdentLabel;
