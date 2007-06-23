@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-06-21 18:04+0200\n"
+"PO-Revision-Date: 2007-06-23 17:16+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -103,6 +103,10 @@ msgstr "(nécessite Xplanet 1.2.0)"
 #: u_translation:rsusefultorepr
 msgid "(useful to represent a flux)"
 msgstr "(utile pour représenter un flux)"
+
+#: u_translation:rsnopropermo
+msgid ", no proper motion"
+msgstr ", sans mouvement propre"
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -4171,10 +4175,6 @@ msgstr "tour / degré"
 #: u_translation:rsturnshour
 msgid "turns / hour"
 msgstr "tour / heure"
-
-#: u_translation:rswithpropermo
-msgid "with proper motion"
-msgstr "avec le mouvement propre"
 
 #: u_translation:rsyears
 msgid "years"

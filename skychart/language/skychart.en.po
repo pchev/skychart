@@ -103,6 +103,10 @@ msgstr ""
 msgid "(useful to represent a flux)"
 msgstr ""
 
+#: u_translation:rsnopropermo
+msgid ", no proper motion"
+msgstr ""
+
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
 msgstr ""
@@ -4169,10 +4173,6 @@ msgstr ""
 
 #: u_translation:rsturnshour
 msgid "turns / hour"
-msgstr ""
-
-#: u_translation:rswithpropermo
-msgid "with proper motion"
 msgstr ""
 
 #: u_translation:rsyears
