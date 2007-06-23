@@ -129,7 +129,7 @@ type
      Procedure LoadConstL(fname:string);
      Procedure LoadConstB(fname:string);
      Procedure LoadHorizon(fname:string; cfgsc:Tconf_skychart);
-     Procedure LoadStarName(fname:string);
+     Procedure LoadStarName(fpath,lang:string);
   published
     { Published declarations }
   end;
@@ -2673,14 +2673,16 @@ cfgsc.horizonlist:=@(cfgshr.horizonlist);  // require in cfgsc for horizon clipp
 end;
 
 
-Procedure Tcatalog.LoadStarName(fname:string);
+Procedure Tcatalog.LoadStarName(fpath,lang:string);
 
 var
 
-    buf,hr : string;
+    buf,fname,hr : string;
     f : TextFile;
     n,i : integer;
 begin
+ fname:=slash(fpath)+'StarsNames_'+lang+'.txt';
+ if not fileexists(fname) then fname:=slash(fpath)+'StarsNames.txt';
   cfgshr.StarNameNum := 0;
   if not FileExists(fname) then begin
      setlength(cfgshr.StarName,0);

@@ -768,6 +768,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
  cfgsc.PlanetLst[j,32,3]:=dist;
  if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
  if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+ ar:=rmod(ar,pi2);
  cfgsc.PlanetLst[j,ipla,1]:=ar;
  cfgsc.PlanetLst[j,ipla,2]:=de;
  cfgsc.PlanetLst[j,ipla,3]:=jdt;
@@ -784,6 +785,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
    precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
    if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
    if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+   ar:=rmod(ar,pi2);
    cfgsc.PlanetLst[j,ipla,1]:=ar;
    cfgsc.PlanetLst[j,ipla,2]:=de;
    cfgsc.PlanetLst[j,ipla,3]:=jdt;
@@ -877,6 +879,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
     cfgsc.PlanetLst[j,32,4]:=dist;
     Paralaxe(st0,dist,cfgsc.PlanetLst[j,32,1],cfgsc.PlanetLst[j,32,2],cfgsc.PlanetLst[j,32,1],cfgsc.PlanetLst[j,32,2],q,cfgsc);
  end;
+ ar:=rmod(ar,pi2);
  cfgsc.PlanetLst[j,ipla,1]:=ar;
  cfgsc.PlanetLst[j,ipla,2]:=de;
  cfgsc.PlanetLst[j,ipla,3]:=jdt;
@@ -994,6 +997,7 @@ if result then begin
   cfgsc.FindSize:=deg2rad*cfgsc.Planetlst[CurrentStep,CurrentPlanet,4]/3600;
   cfgsc.FindRA:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
   cfgsc.FindDec:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
+  cfgsc.FindPM:=false;
   sar := ARpToStr(rad2deg*cfgsc.FindRA/15) ;
   sde := DEpToStr(rad2deg*cfgsc.FindDec) ;
   jdt:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,3];
@@ -1908,6 +1912,7 @@ if result then begin
   cfgsc.FindSize:=0;
   cfgsc.FindRA:=tar;
   cfgsc.FindDec:=tde;
+  cfgsc.FindPM:=false;
   sar := ARpToStr(rad2deg*tar/15) ;
   sde := DEpToStr(rad2deg*tde) ;
   jdt:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,4];
@@ -1980,6 +1985,7 @@ if result then begin
   cfgsc.FindSize:=0;
   cfgsc.FindRA:=tar;
   cfgsc.FindDec:=tde;
+  cfgsc.FindPM:=false;
   sar := ARpToStr(rad2deg*tar/15) ;
   sde := DEpToStr(rad2deg*tde) ;
   jdt:=cfgsc.CometLst[CurrentComStep,CurrentComet,7];

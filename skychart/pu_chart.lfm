@@ -35,9 +35,10 @@ object f_chart: Tf_chart
       Width = 58
       Caption = 'identlabel '
       Color = clBlack
+      Font.CharSet = 4
       Font.Color = clWhite
       Font.Height = -12
-      Font.Name = 'MS Sans Serif'
+      Font.Name = 'Sans'
       ParentColor = False
       ShowAccelChar = False
       Transparent = False
