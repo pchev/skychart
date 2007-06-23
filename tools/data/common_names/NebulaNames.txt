@@ -1,5 +1,5 @@
 ; Object Name for Cartes du Ciel
-; For a translation copy this file to ObjectNameList_XX.dat where XX is the specific language code
+; For a translation copy this file to NebulaNames_XX.txt where XX is the specific language code
 ;
 11.28283333 ;  -7.13333333 ; Abt's Star
  0.71166670 ; +41.26666670 ; Andromeda Galaxy

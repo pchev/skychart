@@ -1,5 +1,5 @@
 ; Stars Name for Cartes du Ciel
-; For a translation copy this file to starsname_XX.dat where XX is the specific language code
+; For a translation copy this file to StarsNames_XX.txt where XX is the specific language code
 ; the first column is the HR number
 ;
   897    Acamar
