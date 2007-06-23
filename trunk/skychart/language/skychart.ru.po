@@ -288,6 +288,10 @@ msgstr "Элементы астероидов у МРС формате (один
 msgid "Asteroids from the file"
 msgstr "Астероиды из файла"
 
+#: u_translation:rsastrometricj
+msgid "Astrometric J2000"
+msgstr ""
+
 #: u_translation:rsastronomical
 msgid "Astronomical"
 msgstr "Астрономические"
@@ -4116,6 +4120,18 @@ msgstr "величины слабее, чем звёзды."
 msgid "max"
 msgstr "макс."
 
+#: u_translation:rsmeanequatore
+msgid "mean equator, equinox and epoch of the date"
+msgstr ""
+
+#: u_translation:rsmeanequinoxj
+msgid "mean equinox J2000, epoch of the date"
+msgstr ""
+
+#: u_translation:rsmeanequinoxa
+msgid "mean equinox and epoch J2000"
+msgstr ""
+
 #: u_translation:rsmin2
 msgid "min"
 msgstr "мин."
@@ -4143,6 +4159,10 @@ msgstr "Временный файл"
 #: u_translation:rsto
 msgid "to"
 msgstr "до"
+
+#: u_translation:rstrueequatore
+msgid "true equator, equinox and epoch of the date"
+msgstr ""
 
 #: u_translation:rsturnsdegree
 msgid "turns / degree"
