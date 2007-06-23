@@ -103,6 +103,10 @@ msgstr "(vereist Xplanet 1.2.0)"
 msgid "(useful to represent a flux)"
 msgstr "(nuttig om een flux weer te geven)"
 
+#: u_translation:rsnopropermo
+msgid ", no proper motion"
+msgstr ""
+
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
 msgstr "102 CD DSS"
@@ -4170,10 +4174,6 @@ msgstr "keer/graad"
 #: u_translation:rsturnshour
 msgid "turns / hour"
 msgstr "keer/uur"
-
-#: u_translation:rswithpropermo
-msgid "with proper motion"
-msgstr ""
 
 #: u_translation:rsyears
 msgid "years"

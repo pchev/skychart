@@ -1605,7 +1605,7 @@ end else
   2: txt:=txt+blank+rsMeanJ2000;
   3: txt:=txt+blank+rsAstrometricJ;
   end;
-if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM then txt:=txt+blank+rsWithProperMo;
+if isStar and ((not sc.cfgsc.PMon)or(not sc.cfgsc.FindPM)) then txt:=txt+blank+rsNoProperMo;
 if isSolarSystem then
    if sc.cfgsc.PlanetParalaxe then txt:=txt+blank+rsTopoCentric
                               else txt:=txt+blank+rsGeocentric;

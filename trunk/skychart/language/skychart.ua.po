@@ -104,6 +104,10 @@ msgstr "(потребувати Xplanet 1.2.0)"
 msgid "(useful to represent a flux)"
 msgstr "(придатно зображувати потоки) "
 
+#: u_translation:rsnopropermo
+msgid ", no proper motion"
+msgstr ""
+
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
 msgstr "102 CD DSS"
@@ -4171,10 +4175,6 @@ msgstr "повороти / градус"
 #: u_translation:rsturnshour
 msgid "turns / hour"
 msgstr "повороти / година"
-
-#: u_translation:rswithpropermo
-msgid "with proper motion"
-msgstr ""
 
 #: u_translation:rsyears
 msgid "years"
