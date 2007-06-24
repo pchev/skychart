@@ -2680,7 +2680,7 @@ if f1.ShowModal=mrOK then begin
    cfgsc.modlabels[i].fontnum:=fontnum;
    cfgsc.modlabels[i].id:=id;
    cfgsc.modlabels[i].hiden:=false;
-   DrawLabels;
+   Refresh;
 end;
 finally
 e1.Free;
