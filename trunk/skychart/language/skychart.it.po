@@ -1359,6 +1359,10 @@ msgstr "Fine calcolo: %s asteroidi"
 msgid "Ephemeris Calendar"
 msgstr "Calendario Effemeridi"
 
+#: u_translation:rsepoch
+msgid "Epoch"
+msgstr ""
+
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
 msgstr "Epoca (JD)"
@@ -2078,6 +2082,10 @@ msgstr "Carica orizzonte"
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
 msgstr "Nome File dell'Orizzonte"
+
+#: u_translation:rslocalsideral
+msgid "Local Sideral Time"
+msgstr ""
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -3415,10 +3423,6 @@ msgstr "Mostra questa immagine"
 msgid "Show/Hide DSS image"
 msgstr "Mostra/Nascondi immagini DSS"
 
-#: u_translation:rssideraltime
-msgid "Sideral Time"
-msgstr "Tempo Siderale"
-
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Giorno Siderale"
@@ -3908,8 +3912,8 @@ msgid "Use system time"
 msgstr "Usa tempo di sistema"
 
 #: u_translation:rsusetheproper
-msgid "Use the proper motion to correct the position for the current date"
-msgstr "Usa il moto proprio per correggere la posizione per la data corrente"
+msgid "Use the proper motion to correct the position for the given epoch"
+msgstr ""
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"

@@ -2249,7 +2249,8 @@ xx1:=rad2deg*x1/15;
 xx2:=rad2deg*x2/15;
 yy1:=rad2deg*y1;
 yy2:=rad2deg*y2;
-cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
+if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
+                 else cyear:=cfgsc.YPmon;
 if not nextobj then begin
   InitRec(cat);
   case cat of

@@ -41,29 +41,72 @@ object f_config_chart: Tf_config_chart
           Caption = 'Chart Setting'
           ParentColor = False
         end
+        object PanelCoord: TPanel
+          Left = 10
+          Height = 176
+          Top = 149
+          Width = 453
+          ClientHeight = 176
+          ClientWidth = 453
+          TabOrder = 0
+          object CoordType: TRadioGroup
+            Left = 3
+            Height = 139
+            Top = 16
+            Width = 440
+            AutoFill = True
+            Caption = 'Type of coordinates'
+            ChildSizing.LeftRightSpacing = 6
+            ChildSizing.TopBottomSpacing = 6
+            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+            ChildSizing.EnlargeVertical = crsHomogenousChildResize
+            ChildSizing.ShrinkHorizontal = crsScaleChilds
+            ChildSizing.ShrinkVertical = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 1
+            ClientHeight = 120
+            ClientWidth = 436
+            Items.Strings = (
+              'Apparent'
+              'Mean of the date'
+              'Mean J2000'
+              'Astrometric J2000'
+            )
+            OnClick = CoordTypeClick
+            TabOrder = 0
+          end
+        end
         object PanelExpert: TPanel
           Left = 13
-          Height = 176
+          Height = 192
           Top = 149
           Width = 450
           BevelInner = bvRaised
           BevelOuter = bvNone
-          ClientHeight = 176
+          ClientHeight = 192
           ClientWidth = 450
           TabOrder = 1
           Visible = False
           object EquinoxLabel: TLabel
             Left = 16
             Height = 14
-            Top = 19
+            Top = 20
             Width = 49
             Caption = 'Equinox:'
+            ParentColor = False
+          end
+          object Label1: TLabel
+            Left = 248
+            Height = 14
+            Top = 20
+            Width = 39
+            Caption = 'Epoch:'
             ParentColor = False
           end
           object ApparentType: TRadioGroup
             Left = 8
             Height = 57
-            Top = 112
+            Top = 120
             Width = 417
             AutoFill = True
             Caption = 'Nutation ,  Aberration'
@@ -106,7 +149,7 @@ object f_config_chart: Tf_config_chart
           object GroupBox3: TGroupBox
             Left = 8
             Height = 57
-            Top = 48
+            Top = 56
             Width = 417
             Caption = 'Stars proper motion options (if available in the catalog)'
             ClientHeight = 38
@@ -116,46 +159,28 @@ object f_config_chart: Tf_config_chart
               Left = 6
               Height = 22
               Top = 7
-              Width = 369
-              Caption = 'Use the proper motion to correct the position for the current date'
+              Width = 371
+              Caption = 'Use the proper motion to correct the position for the given epoch'
               OnClick = PMBoxClick
               TabOrder = 0
             end
           end
-        end
-        object PanelCoord: TPanel
-          Left = 10
-          Height = 176
-          Top = 149
-          Width = 453
-          ClientHeight = 176
-          ClientWidth = 453
-          TabOrder = 0
-          object CoordType: TRadioGroup
-            Left = 3
-            Height = 139
-            Top = 16
-            Width = 440
-            AutoFill = True
-            Caption = 'Type of coordinates'
-            ChildSizing.LeftRightSpacing = 6
-            ChildSizing.TopBottomSpacing = 6
-            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-            ChildSizing.EnlargeVertical = crsHomogenousChildResize
-            ChildSizing.ShrinkHorizontal = crsScaleChilds
-            ChildSizing.ShrinkVertical = crsScaleChilds
-            ChildSizing.Layout = cclLeftToRightThenTopToBottom
-            ChildSizing.ControlsPerLine = 1
-            ClientHeight = 120
-            ClientWidth = 436
-            Items.Strings = (
-              'Apparent'
-              'Mean of the date'
-              'Mean J2000'
-              'Astrometric J2000'
-            )
-            OnClick = CoordTypeClick
-            TabOrder = 0
+          object epoch2: TFloatEdit
+            Left = 336
+            Height = 21
+            Hint = '-20000..20000'
+            Top = 12
+            Width = 89
+            BorderStyle = bsSingle
+            ParentColor = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 3
+            OnChange = epoch2Change
+            MinValue = -20000
+            MaxValue = 20000
+            Digits = 8
+            NumericType = ntFixed
           end
         end
         object projectiontype: TRadioGroup
@@ -189,7 +214,7 @@ object f_config_chart: Tf_config_chart
         object ExpertMode: TCheckBox
           Left = 21
           Height = 22
-          Top = 341
+          Top = 357
           Width = 93
           Caption = 'Expert mode'
           OnClick = ExpertModeClick

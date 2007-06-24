@@ -1359,6 +1359,10 @@ msgstr "Einde bewerken: %s planetoïden"
 msgid "Ephemeris Calendar"
 msgstr "Ephemeriden kalender"
 
+#: u_translation:rsepoch
+msgid "Epoch"
+msgstr ""
+
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
 msgstr "Epoche (JD)"
@@ -2078,6 +2082,10 @@ msgstr "Lokale horizon"
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
 msgstr "Lokale horizon-bestandsnaam:"
+
+#: u_translation:rslocalsideral
+msgid "Local Sideral Time"
+msgstr ""
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -3415,10 +3423,6 @@ msgstr "Toon deze afbeelding"
 msgid "Show/Hide DSS image"
 msgstr "Toon/verberg DSS beeld"
 
-#: u_translation:rssideraltime
-msgid "Sideral Time"
-msgstr "Sterrentijd"
-
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Siderische dag"
@@ -3908,8 +3912,8 @@ msgid "Use system time"
 msgstr "Gebruik systeemtijd"
 
 #: u_translation:rsusetheproper
-msgid "Use the proper motion to correct the position for the current date"
-msgstr "Gebruik de eigenbeweging om de positie voor de huidige datum te corrigeren. "
+msgid "Use the proper motion to correct the position for the given epoch"
+msgstr ""
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"

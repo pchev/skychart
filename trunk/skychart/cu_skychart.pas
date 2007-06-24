@@ -672,7 +672,8 @@ var rec:GcatRec;
   firstcat:TSname;
 begin
 fillchar(rec,sizeof(rec),0);
-cyear:=cfgsc.CurYear+cfgsc.CurMonth/12;
+if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
+                 else cyear:=cfgsc.YPmon;
 dyear:=0;
 first:=true;
 saveplot:=Fplot.cfgplot.starplot;

@@ -1360,6 +1360,10 @@ msgstr "Fi del processat: %s asteroides"
 msgid "Ephemeris Calendar"
 msgstr "Calendari de les efemèrides"
 
+#: u_translation:rsepoch
+msgid "Epoch"
+msgstr ""
+
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
 msgstr "Època (JD)"
@@ -2079,6 +2083,10 @@ msgstr "Horitzó local"
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
 msgstr "Nom de l'arxiu : "
+
+#: u_translation:rslocalsideral
+msgid "Local Sideral Time"
+msgstr ""
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -3416,10 +3424,6 @@ msgstr "Mostra aquesta imatge"
 msgid "Show/Hide DSS image"
 msgstr "Mostra/Amaga les imatges DSS"
 
-#: u_translation:rssideraltime
-msgid "Sideral Time"
-msgstr "Hora sideral"
-
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Dia sideral"
@@ -3909,8 +3913,8 @@ msgid "Use system time"
 msgstr "Usa l'hora del sistema"
 
 #: u_translation:rsusetheproper
-msgid "Use the proper motion to correct the position for the current date"
-msgstr "Usa el moviment propi per corregir la posició per a la data actual"
+msgid "Use the proper motion to correct the position for the given epoch"
+msgstr ""
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"

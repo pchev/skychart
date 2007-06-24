@@ -43,6 +43,7 @@ type
     Button2: TButton;
     CheckBox1: TCheckBox;
     CheckBox10: TCheckBox;
+    epoch2: TFloatEdit;
     ExpertMode: TCheckBox;
     CheckBox13: TCheckBox;
     CheckBox11: TCheckBox;
@@ -136,6 +137,7 @@ type
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
     GroupBox5: TGroupBox;
+    Label1: TLabel;
     Label101: TLabel;
     Label102: TLabel;
     Label103: TLabel;
@@ -275,6 +277,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure PMBoxClick(Sender: TObject);
     procedure ApparentTypeClick(Sender: TObject);
+    procedure epoch2Change(Sender: TObject);
     procedure projectiontypeClick(Sender: TObject);
     procedure FWExit(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -332,6 +335,7 @@ begin
 Caption:=rsCharts;
 Label31.caption:=rsChartSetting;
 GroupBox3.caption:=rsStarsProperM;
+label1.Caption:=rsEpoch;
 ExpertMode.Caption:=rsExpertMode;
 PMBox.caption:=rsUseTheProper;
 EquinoxLabel.caption:=rsEquinox;
@@ -419,6 +423,7 @@ end;
 procedure Tf_config_chart.ShowChart;
 begin
 equinox2.text:=stringreplace(stringreplace(stringreplace(cshr.EquinoxChart,'J','',[]),'B','',[]),rsDate,'2000.0',[]);
+epoch2.Value:=csc.YPmon;
 PMBox.checked:=csc.PMon;
 if csc.ApparentPos then ApparentType.ItemIndex:=1
                    else Apparenttype.itemindex:=0;
@@ -699,7 +704,10 @@ begin
   PanelExpert.Visible:=ExpertMode.Checked;
   PanelCoord.Visible:=not PanelExpert.Visible;
   if ExpertMode.Checked then SetExpertEquinox
-                        else CoordTypeClick(Sender);
+                        else begin
+                             cshr.EquinoxType:=0;
+                             CoordTypeClick(Sender);
+                             end;
 end;
 
 procedure Tf_config_chart.SetExpertEquinox;
@@ -729,6 +737,14 @@ begin
 csc.ApparentPos:=(ApparentType.ItemIndex=1);
 end;
 
+procedure Tf_config_chart.epoch2Change(Sender: TObject);
+begin
+if LockChange then exit;
+if (cshr.EquinoxType=1)and(trim(epoch2.text)>'') then begin
+     csc.YPmon:=epoch2.Value;
+end;
+end;
+
 procedure Tf_config_chart.projectiontypeClick(Sender: TObject);
 begin
 csc.ProjPole:=projectiontype.itemindex;
@@ -737,12 +753,14 @@ end;
 
 procedure Tf_config_chart.CoordTypeClick(Sender: TObject);
 begin
+if cshr.EquinoxType=1 then exit;
 csc.CoordType:=CoordType.ItemIndex;
 case CoordType.ItemIndex of
  0 : begin
        cshr.EquinoxType:=2;
        csc.ApparentPos:=true;
        csc.PMon:=true;
+       csc.YPmon:=0;
        cshr.EquinoxChart:=rsDate;
        cshr.DefaultJDChart:=jd2000;
      end;
@@ -750,13 +768,15 @@ case CoordType.ItemIndex of
        cshr.EquinoxType:=2;
        csc.ApparentPos:=false;
        csc.PMon:=true;
+       csc.YPmon:=0;
        cshr.EquinoxChart:=rsDate;
        cshr.DefaultJDChart:=jd2000;
      end;
  2 : begin
        cshr.EquinoxType:=0;
        csc.ApparentPos:=false;
-       csc.PMon:=false;
+       csc.PMon:=true;
+       csc.YPmon:=2000;
        cshr.EquinoxChart:='J2000';
        cshr.DefaultJDChart:=jd2000;
      end;
@@ -764,6 +784,7 @@ case CoordType.ItemIndex of
        cshr.EquinoxType:=0;
        csc.ApparentPos:=false;
        csc.PMon:=true;
+       csc.YPmon:=0;
        cshr.EquinoxChart:='J2000';
        cshr.DefaultJDChart:=jd2000;
      end;
