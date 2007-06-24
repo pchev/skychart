@@ -327,6 +327,7 @@ type
      Tcustomlabel = record
             ra,dec: double;
             labelnum: byte;
+            align: TLabelAlign;
             txt: string;
             end;
 
@@ -1304,6 +1305,7 @@ for i:=1 to Source.numcustomlabels do begin
    customlabels[i].dec:=Source.customlabels[i].dec;
    customlabels[i].labelnum:=Source.customlabels[i].labelnum;
    customlabels[i].txt:=Source.customlabels[i].txt;
+   customlabels[i].align:=Source.customlabels[i].align;
 end;
 for i:=1 to NumSimObject do SimObject[i]:=Source.SimObject[i];
 for i:=0 to Source.SimNb-1 do

@@ -3331,6 +3331,7 @@ for i:=1 to csc.numcustomlabels do begin
    csc.customlabels[i].dec:=ReadFloat(section,'labeldec'+inttostr(i),0);
    csc.customlabels[i].labelnum:=ReadInteger(section,'labelnum'+inttostr(i),7);
    csc.customlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
+   csc.customlabels[i].align:=TLabelAlign(ReadInteger(section,'labelalign'+inttostr(i),ord(laLeft)));
 end;
 end;
 csc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
@@ -3817,6 +3818,7 @@ for i:=1 to csc.numcustomlabels do begin
    WriteFloat(section,'labeldec'+inttostr(i),csc.customlabels[i].dec);
    WriteInteger(section,'labelnum'+inttostr(i),csc.customlabels[i].labelnum);
    WriteString(section,'labeltxt'+inttostr(i),csc.customlabels[i].txt);
+   WriteInteger(section,'labelalign'+inttostr(i),ord(csc.customlabels[i].align));
 end;
 Updatefile;
 end;

@@ -1090,6 +1090,8 @@ resourcestring
   rsMeanEquinoxA = 'mean equinox and epoch J2000';
   rsMeanEquinoxJ = 'mean equinox J2000, epoch of the date';
   rsEpoch = 'Epoch';
+  rsAlignment = 'Alignment';
+  rsCenter = 'Center';
 
 implementation
 
