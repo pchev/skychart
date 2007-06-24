@@ -3321,6 +3321,7 @@ for i:=1 to csc.nummodlabels do begin
    csc.modlabels[i].labelnum:=ReadInteger(section,'labelnum'+inttostr(i),1);
    csc.modlabels[i].fontnum:=ReadInteger(section,'labelfont'+inttostr(i),2);
    csc.modlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
+   csc.modlabels[i].align:=TLabelAlign(ReadInteger(section,'labelalign'+inttostr(i),ord(laLeft)));
    csc.modlabels[i].hiden:=ReadBool(section,'labelhiden'+inttostr(i),false);
 end;
 section:='custom_labels';
@@ -3808,6 +3809,7 @@ for i:=1 to csc.nummodlabels do begin
    WriteInteger(section,'labelnum'+inttostr(i),csc.modlabels[i].labelnum);
    WriteInteger(section,'labelfont'+inttostr(i),csc.modlabels[i].fontnum);
    WriteString(section,'labeltxt'+inttostr(i),csc.modlabels[i].txt);
+   WriteInteger(section,'labelalign'+inttostr(i),ord(csc.modlabels[i].align));
    WriteBool(section,'labelhiden'+inttostr(i),csc.modlabels[i].hiden);
 end;
 section:='custom_labels';
