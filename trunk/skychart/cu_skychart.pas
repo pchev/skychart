@@ -657,7 +657,7 @@ for i:=1 to cfgsc.numcustomlabels do begin
  projection(ra,dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    SetLabel(lid,xx,yy,0,2,cfgsc.customlabels[i].labelnum,cfgsc.customlabels[i].txt);
+    SetLabel(lid,xx,yy,0,2,cfgsc.customlabels[i].labelnum,cfgsc.customlabels[i].txt,cfgsc.customlabels[i].align);
     result:=true;
  end;
 end;
@@ -2708,7 +2708,8 @@ if f_addlabel.ShowModal=mrOK then begin
    cfgsc.customlabels[i].dec:=dec;
    cfgsc.customlabels[i].labelnum:=f_addlabel.labelnum;
    cfgsc.customlabels[i].txt:=txt;
-   SetLabel(lid,x,y,0,fontnum,cfgsc.customlabels[i].labelnum,txt);
+   cfgsc.customlabels[i].align:=f_addlabel.Lalign;
+   SetLabel(lid,x,y,0,fontnum,cfgsc.customlabels[i].labelnum,txt,cfgsc.customlabels[i].align);
    DrawLabels;
    Refresh;
 end;
