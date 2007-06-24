@@ -321,6 +321,7 @@ type
      Tmodlabel = record
             id,dx,dy:integer;
             labelnum,fontnum:byte;
+            align: TLabelAlign;
             txt: string;
             hiden: boolean;
             end;

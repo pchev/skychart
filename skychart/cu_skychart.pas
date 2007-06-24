@@ -2574,12 +2574,14 @@ procedure Tskychart.EditLabelPos(lnum,x,y: integer);
 var
     i,j,id: integer;
     labelnum,fontnum:byte;
+    Lalign: TLabelAlign;
     txt: string;
 begin
 i:=-1;
 txt:=labels[lnum].txt;
 labelnum:=labels[lnum].labelnum;
 fontnum:=labels[lnum].fontnum;
+Lalign:=labels[lnum].align;
 id:=labels[lnum].id;
 for j:=1 to cfgsc.nummodlabels do
     if id=cfgsc.modlabels[j].id then begin
@@ -2587,6 +2589,7 @@ for j:=1 to cfgsc.nummodlabels do
        txt:=cfgsc.modlabels[j].txt;
        labelnum:=cfgsc.modlabels[j].labelnum;
        fontnum:=cfgsc.modlabels[j].fontnum;
+       Lalign:=cfgsc.modlabels[j].align;
        break;
      end;
 if i<0 then begin
@@ -2600,6 +2603,7 @@ end;
 cfgsc.modlabels[i].dx:=x-labels[lnum].x;
 cfgsc.modlabels[i].dy:=y-labels[lnum].y;
 cfgsc.modlabels[i].txt:=txt;
+cfgsc.modlabels[i].align:=Lalign;
 cfgsc.modlabels[i].labelnum:=labelnum;
 cfgsc.modlabels[i].fontnum:=fontnum;
 cfgsc.modlabels[i].id:=id;
@@ -2609,6 +2613,7 @@ end;
 procedure Tskychart.EditLabelTxt(lnum,x,y: integer);
 var i,j,id: integer;
     labelnum,fontnum:byte;
+    Lalign: TLabelAlign;
     txt: string;
     f1:Tform;
     e1:Tedit;
@@ -2618,6 +2623,7 @@ i:=-1;
 txt:=labels[lnum].txt;
 labelnum:=labels[lnum].labelnum;
 fontnum:=labels[lnum].fontnum;
+Lalign:=labels[lnum].align;
 id:=labels[lnum].id;
 for j:=1 to cfgsc.nummodlabels do
     if id=cfgsc.modlabels[j].id then begin
@@ -2625,6 +2631,7 @@ for j:=1 to cfgsc.nummodlabels do
        txt:=cfgsc.modlabels[j].txt;
        labelnum:=cfgsc.modlabels[j].labelnum;
        fontnum:=cfgsc.modlabels[j].fontnum;
+       Lalign:=cfgsc.modlabels[j].align;
        break;
      end;
 f1:=Tform.Create(self);
@@ -2668,6 +2675,7 @@ if f1.ShowModal=mrOK then begin
      cfgsc.modlabels[i].dy:=0;
    end;
    cfgsc.modlabels[i].txt:=txt;
+   cfgsc.modlabels[i].align:=Lalign;
    cfgsc.modlabels[i].labelnum:=labelnum;
    cfgsc.modlabels[i].fontnum:=fontnum;
    cfgsc.modlabels[i].id:=id;
@@ -2718,12 +2726,14 @@ end;
 procedure Tskychart.DeleteLabel(lnum: integer);
 var i,j,id: integer;
     labelnum,fontnum:byte;
+    Lalign:TLabelAlign;
     txt: string;
 begin
 i:=-1;
 txt:=labels[lnum].txt;
 labelnum:=labels[lnum].labelnum;
 fontnum:=labels[lnum].fontnum;
+Lalign:=labels[lnum].align;
 id:=labels[lnum].id;
 for j:=1 to cfgsc.nummodlabels do
     if id=cfgsc.modlabels[j].id then begin
@@ -2731,6 +2741,7 @@ for j:=1 to cfgsc.nummodlabels do
        txt:=cfgsc.modlabels[j].txt;
        labelnum:=cfgsc.modlabels[j].labelnum;
        fontnum:=cfgsc.modlabels[j].fontnum;
+       Lalign:=cfgsc.modlabels[j].align;
        break;
      end;
 if i<0 then begin
@@ -2744,6 +2755,7 @@ end;
 cfgsc.modlabels[i].dx:=0;
 cfgsc.modlabels[i].dy:=0;
 cfgsc.modlabels[i].txt:=txt;
+cfgsc.modlabels[i].align:=Lalign;
 cfgsc.modlabels[i].labelnum:=labelnum;
 cfgsc.modlabels[i].fontnum:=fontnum;
 cfgsc.modlabels[i].id:=id;
