@@ -241,7 +241,7 @@ resourcestring
   rsCircumpolar = 'Circumpolar';
   rsInvisibleAtT = 'Invisible at this latitude';
   rsDistanceToTh = 'Distance to the last object';
-  rsSideralTime = 'Sideral Time';
+  rsLocalSideral = 'Local Sideral Time';
   rsHourAngle = 'Hour Angle';
   rsPlanetarySat = 'Planetary satellite';
   rsUniversalTim = 'Universal Time';
@@ -582,7 +582,7 @@ resourcestring
   rsYears = 'years';
   rsStarsProperM = 'Stars proper motion options (if available in the catalog)';
   rsUseTheProper = 'Use the proper motion to correct the position for the '
-    +'current date';
+    +'given epoch';
   rsDrawALineTha = 'Draw a line that represent the proper motion for the next ';
   rsEquinox = 'Equinox:';
   rsChartCoordin2 = 'Chart Coordinate System';
@@ -1089,6 +1089,7 @@ resourcestring
   rsMeanEquatorE = 'mean equator, equinox and epoch of the date';
   rsMeanEquinoxA = 'mean equinox and epoch J2000';
   rsMeanEquinoxJ = 'mean equinox J2000, epoch of the date';
+  rsEpoch = 'Epoch';
 
 implementation
 

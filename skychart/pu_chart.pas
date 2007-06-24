@@ -1605,7 +1605,10 @@ end else
   2: txt:=txt+blank+rsMeanJ2000;
   3: txt:=txt+blank+rsAstrometricJ;
   end;
-if isStar and ((not sc.cfgsc.PMon)or(not sc.cfgsc.FindPM)) then txt:=txt+blank+rsNoProperMo;
+if isStar then begin
+   if sc.cfgsc.PMon and (not sc.cfgsc.FindPM) then txt:=txt+blank+rsNoProperMo
+   else if sc.cfgsc.PMon and (sc.cfgsc.YPmon<>0) then txt:=txt+blank+rsEpoch+': '+formatfloat(f1, sc.cfgsc.YPmon);
+end;
 if isSolarSystem then
    if sc.cfgsc.PlanetParalaxe then txt:=txt+blank+rsTopoCentric
                               else txt:=txt+blank+rsGeocentric;
@@ -1623,9 +1626,9 @@ deapp:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,raapp,deapp);
 if not sc.cfgsc.ApparentPos then apparent_equatorial(raapp,deapp,sc.cfgsc);
 if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
-txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
-txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
-if isStar and sc.cfgsc.PMon then
+if (not isstar) or sc.cfgsc.PMon then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
+if (not isstar) or sc.cfgsc.PMon then txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
+if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM and (sc.cfgsc.YPmon=0) then
    txt:=txt+html_b+rsAstrometricJ+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br
 else
    txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
@@ -1647,16 +1650,17 @@ txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
 txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( '+sc.cfgsc.tz.ZoneName+' )'+html_br;
 //txt:=txt+html_pre;
 djd(sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24,y,m,d,h);
-txt:=txt+html_b+copy(rsUniversalTim+blank15,1,17)+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h)+html_br;
+txt:=txt+html_b+rsUniversalTim+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h);
+txt:=txt+blank+'JD='+formatfloat(f5,sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
 if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
-txt:=txt+html_b+copy(rsSideralTime+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*sc.cfgsc.CurSt/15+24,24))+html_br;
-txt:=txt+html_b+copy(rsHourAngle+blank15,1,17)+':'+htms_b+armtostr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24))+html_br;
-txt:=txt+html_b+copy(rsAzimuth+blank15,1,17)+':'+htms_b+demtostr(rad2deg*a)+html_br;
-txt:=txt+html_b+copy(rsAltitude+blank15,1,17)+':'+htms_b+demtostr(rad2deg*h)+html_br;
+txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*sc.cfgsc.CurSt/15+24,24))+html_br;
+txt:=txt+html_b+rsHourAngle+':'+htms_b+armtostr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24))+html_br;
+txt:=txt+html_b+rsAzimuth+':'+htms_b+demtostr(rad2deg*a)+html_br;
+txt:=txt+html_b+rsAltitude+':'+htms_b+demtostr(rad2deg*h)+html_br;
 // rise/set time
 if (otype='P') then begin // planet
    sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,sc.cfgsc.jd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
@@ -1691,7 +1695,7 @@ case i of
     end;
 1 : begin
     txt:=txt+rsCircumpolar+html_br;
-    txt:=txt+html_b+copy(rsCulmination+blank15,1,17)+':'+htms_b+tht+blank+tculmalt+html_br;
+    txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
     end;
 else begin
     txt:=txt+rsInvisibleAtT+html_br;
