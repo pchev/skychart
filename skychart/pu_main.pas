@@ -559,7 +559,7 @@ type
     compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
   {$ifdef win32}
-    savwincol  : array[0..35] of Tcolor;
+    savwincol  : array[0..25] of Tcolor;
   {$endif}
     procedure SetButtonImage(button: Integer);
     function CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
@@ -5218,16 +5218,20 @@ end;
 Procedure Tf_main.SaveWinColor;
 var n : integer;
 begin
-for n:=0 to 25 do savwincol[n]:=getsyscolor(win32_color_elem[n]);
+for n:=0 to 25 do
+   savwincol[n]:=getsyscolor(win32_color_elem[n]);
 end;
 
 Procedure Tf_main.ResetWinColor;
+var n : integer;
 begin
-setsyscolors(sizeof(win32_color_elem),win32_color_elem,savwincol);
+//setsyscolors(sizeof(win32_color_elem),win32_color_elem,savwincol); // strange this not reset all the colors
+for n:=0 to 25 do
+   setsyscolors(1,win32_color_elem[n],savwincol[n]);
 end;
 
 procedure Tf_main.SetNightVision(night: boolean);
-const rgb  : array[0..25] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_middle     ,nv_black       ,nv_black        ,nv_middle        ,nv_black        ,nv_black     ,nv_middle      ,nv_black    ,nv_dark       ,nv_black);
+const rgb  : array[0..25] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_middle     ,nv_black       ,nv_black    ,nv_middle       ,nv_black         ,nv_black     ,nv_middle      ,nv_black        ,nv_dark       ,nv_black);
 begin
 if night then begin
  if (Color<>nv_dark) then begin
