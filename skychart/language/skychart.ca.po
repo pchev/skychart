@@ -200,6 +200,10 @@ msgstr "Recerca avançada"
 msgid "Age"
 msgstr "Edat"
 
+#: u_translation:rsalignment
+msgid "Alignment"
+msgstr ""
+
 #: u_translation:rsall
 msgid "All"
 msgstr "Tot"
@@ -523,6 +527,10 @@ msgstr "Estels CdC"
 #: u_translation:rscdcformatpre
 msgid "CdC format, prefere the compact version"
 msgstr "Format CdC, utilitzeu millor el compacte"
+
+#: u_translation:rscenter
+msgid "Center"
+msgstr ""
 
 #: u_translation:rscenterobject
 msgid "Center Object"

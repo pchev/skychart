@@ -200,6 +200,10 @@ msgstr "Быстрый поиск"
 msgid "Age"
 msgstr "Возраст"
 
+#: u_translation:rsalignment
+msgid "Alignment"
+msgstr ""
+
 #: u_translation:rsall
 msgid "All"
 msgstr "Всё"
@@ -523,6 +527,10 @@ msgstr "CdC звёзды"
 #: u_translation:rscdcformatpre
 msgid "CdC format, prefere the compact version"
 msgstr "CdC формат, преимущество компактной версии"
+
+#: u_translation:rscenter
+msgid "Center"
+msgstr ""
 
 #: u_translation:rscenterobject
 msgid "Center Object"
