@@ -402,6 +402,12 @@ for j:=0 to ccat.GCatnum-1 do begin
 end;
 end;
 
+function changetext(newtext,oldtext: string):string;
+begin
+  if newtext=oldtext then result:=newtext+blank
+     else result:=newtext;
+end;
+
 procedure Tf_config_catalog.ShowCDCNeb;
 var spec,def,gen: boolean;
 begin
@@ -429,14 +435,14 @@ fpgc2.Value:=ccat.NebCatField[pgc-BaseNeb,2];
 focl2.Value:=ccat.NebCatField[ocl-BaseNeb,2];
 fgcm2.Value:=ccat.NebCatField[gcm-BaseNeb,2];
 fgpn2.Value:=ccat.NebCatField[gpn-BaseNeb,2];
-sac3.Text:=ccat.NebCatPath[sac-BaseNeb]+blank;
-ngc3.Text:=ccat.NebCatPath[ngc-BaseNeb]+blank;
-lbn3.Text:=ccat.NebCatPath[lbn-BaseNeb]+blank;
-rc33.Text:=ccat.NebCatPath[rc3-BaseNeb]+blank;
-pgc3.Text:=ccat.NebCatPath[pgc-BaseNeb]+blank;
-ocl3.Text:=ccat.NebCatPath[ocl-BaseNeb]+blank;
-gcm3.Text:=ccat.NebCatPath[gcm-BaseNeb]+blank;
-gpn3.Text:=ccat.NebCatPath[gpn-BaseNeb]+blank;
+sac3.Text:=changetext(ccat.NebCatPath[sac-BaseNeb],sac3.Text);
+ngc3.Text:=changetext(ccat.NebCatPath[ngc-BaseNeb],ngc3.Text);
+lbn3.Text:=changetext(ccat.NebCatPath[lbn-BaseNeb],lbn3.Text);
+rc33.Text:=changetext(ccat.NebCatPath[rc3-BaseNeb],rc33.Text);
+pgc3.Text:=changetext(ccat.NebCatPath[pgc-BaseNeb],pgc3.Text);
+ocl3.Text:=changetext(ccat.NebCatPath[ocl-BaseNeb],ocl3.Text);
+gcm3.Text:=changetext(ccat.NebCatPath[gcm-BaseNeb],gcm3.Text);
+gpn3.Text:=changetext(ccat.NebCatPath[gpn-BaseNeb],gpn3.Text);
 def:= sacbox.Checked;
 gen:=ngcbox.Checked;
 spec:=lbnbox.Checked or rc3box.Checked or pgcbox.Checked or oclbox.Checked or gcmbox.Checked or gpnbox.Checked;
@@ -492,21 +498,21 @@ dstyc1.Value:=ccat.StarCatField[dstyc-BaseStar,1];
 dstyc2.Value:=ccat.StarCatField[dstyc-BaseStar,2];
 dsgsc1.Value:=ccat.StarCatField[dsgsc-BaseStar,1];
 dsgsc2.Value:=ccat.StarCatField[dsgsc-BaseStar,2];
-bsc3.Text:=ccat.StarCatPath[bsc-BaseStar]+blank;
-sky3.Text:=ccat.StarCatPath[sky2000-BaseStar]+blank;
-tyc3.Text:=ccat.StarCatPath[tyc-BaseStar]+blank;
-ty23.Text:=ccat.StarCatPath[tyc2-BaseStar]+blank;
-tic3.Text:=ccat.StarCatPath[tic-BaseStar]+blank;
-gscf3.Text:=ccat.StarCatPath[gscf-BaseStar]+blank;
-gscc3.Text:=ccat.StarCatPath[gscc-BaseStar]+blank;
-gsc3.Text:=ccat.StarCatPath[gsc-BaseStar]+blank;
-usn3.Text:=ccat.StarCatPath[usnoa-BaseStar]+blank;
-mct3.Text:=ccat.StarCatPath[microcat-BaseStar]+blank;
-gcv3.Text:=ccat.VarStarCatPath[gcvs-BaseVar]+blank;
-wds3.Text:=ccat.DblStarCatPath[wds-BaseDbl]+blank;
-dsbase3.Text:=ccat.StarCatPath[dsbase-BaseStar]+blank;
-dstyc3.Text:=ccat.StarCatPath[dstyc-BaseStar]+blank;
-dsgsc3.Text:=ccat.StarCatPath[dsgsc-BaseStar]+blank;
+bsc3.Text:=changetext(ccat.StarCatPath[bsc-BaseStar],bsc3.Text);
+sky3.Text:=changetext(ccat.StarCatPath[sky2000-BaseStar],sky3.Text);
+tyc3.Text:=changetext(ccat.StarCatPath[tyc-BaseStar],tyc3.Text);
+ty23.Text:=changetext(ccat.StarCatPath[tyc2-BaseStar],ty23.Text);
+tic3.Text:=changetext(ccat.StarCatPath[tic-BaseStar],tic3.Text);
+gscf3.Text:=changetext(ccat.StarCatPath[gscf-BaseStar],gscf3.Text);
+gscc3.Text:=changetext(ccat.StarCatPath[gscc-BaseStar],gscc3.Text);
+gsc3.Text:=changetext(ccat.StarCatPath[gsc-BaseStar],gsc3.Text);
+usn3.Text:=changetext(ccat.StarCatPath[usnoa-BaseStar],usn3.Text);
+mct3.Text:=changetext(ccat.StarCatPath[microcat-BaseStar],mct3.Text);
+gcv3.Text:=changetext(ccat.VarStarCatPath[gcvs-BaseVar],gcv3.Text);
+wds3.Text:=changetext(ccat.DblStarCatPath[wds-BaseDbl],wds3.Text);
+dsbase3.Text:=changetext(ccat.StarCatPath[dsbase-BaseStar],dsbase3.Text);
+dstyc3.Text:=changetext(ccat.StarCatPath[dstyc-BaseStar],dstyc3.Text);
+dsgsc3.Text:=changetext(ccat.StarCatPath[dsgsc-BaseStar],dsgsc3.Text);
 end;
 
 procedure Tf_config_catalog.ShowFov;
