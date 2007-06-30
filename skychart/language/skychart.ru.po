@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-06-11 15:24+0200\n"
+"PO-Revision-Date: 2007-06-28 12:54+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ru\n"
 "POT-Creation-Date: \n"
@@ -106,7 +106,7 @@ msgstr "(пригодно изображать потоки) "
 
 #: u_translation:rsnopropermo
 msgid ", no proper motion"
-msgstr ""
+msgstr "(без собственного движения)"
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -202,7 +202,7 @@ msgstr "Возраст"
 
 #: u_translation:rsalignment
 msgid "Alignment"
-msgstr ""
+msgstr "Выравнивание"
 
 #: u_translation:rsall
 msgid "All"
@@ -250,7 +250,7 @@ msgstr "Анонимный пароль"
 
 #: u_translation:rsapparent
 msgid "Apparent"
-msgstr ""
+msgstr "Видимые"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -298,7 +298,7 @@ msgstr "Астероиды из файла"
 
 #: u_translation:rsastrometricj
 msgid "Astrometric J2000"
-msgstr ""
+msgstr "Астрометрические J2000.0"
 
 #: u_translation:rsastronomical
 msgid "Astronomical"
@@ -530,7 +530,7 @@ msgstr "CdC формат, преимущество компактной верс
 
 #: u_translation:rscenter
 msgid "Center"
-msgstr ""
+msgstr "Центр"
 
 #: u_translation:rscenterobject
 msgid "Center Object"
@@ -1370,7 +1370,7 @@ msgstr "Календар эфемерид"
 
 #: u_translation:rsepoch
 msgid "Epoch"
-msgstr ""
+msgstr "Эпоха"
 
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
@@ -1458,7 +1458,7 @@ msgstr "Выход…"
 
 #: u_translation:rsexpertmode
 msgid "Expert mode"
-msgstr ""
+msgstr "Для знатоков"
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -2094,7 +2094,7 @@ msgstr "Название файла местного горизонта:"
 
 #: u_translation:rslocalsideral
 msgid "Local Sideral Time"
-msgstr ""
+msgstr "Местное звёздное время"
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -2230,11 +2230,11 @@ msgstr "Максим. величина"
 
 #: u_translation:rsmean
 msgid "Mean"
-msgstr ""
+msgstr "Средние"
 
 #: u_translation:rsmeanj2000
 msgid "Mean J2000"
-msgstr ""
+msgstr "Стандартные J2000.0"
 
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
@@ -2242,7 +2242,7 @@ msgstr "Средняя аномалия"
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
-msgstr ""
+msgstr "Средние на дату"
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -3814,7 +3814,7 @@ msgstr "Тип переменности"
 
 #: u_translation:rstypeofcoordi
 msgid "Type of coordinates"
-msgstr ""
+msgstr "Тип координат"
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -3922,7 +3922,7 @@ msgstr "Использовать системное время"
 
 #: u_translation:rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr ""
+msgstr "Использовать собственное движение для исправления позиции на данную эпоху"
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"
@@ -4138,15 +4138,15 @@ msgstr "макс."
 
 #: u_translation:rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr ""
+msgstr "средний экватор, равноденствие и эпоха на дату"
 
 #: u_translation:rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr ""
+msgstr "среднее раноденствие J2000.0, эпоха на дату"
 
 #: u_translation:rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr ""
+msgstr "среднее равноденствие и эпоха J2000.0"
 
 #: u_translation:rsmin2
 msgid "min"
@@ -4178,7 +4178,7 @@ msgstr "до"
 
 #: u_translation:rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr ""
+msgstr "истинный экватор, равноденствие и эпоха на дату"
 
 #: u_translation:rsturnsdegree
 msgid "turns / degree"
