@@ -63,7 +63,7 @@ const
 
 
 
-  SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite.so'{$ENDIF}{$IFDEF WIN32}'sqlite.dll'{$ENDIF}{$IFDEF darwin}'libsqlite.dylib'{$ENDIF};
+  SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite.so'{$ENDIF}{$IFDEF WIN32}'sqlite.dll'{$ENDIF}{$IFDEF WINCE}'sqlite.dll'{$ENDIF}{$IFDEF darwin}'libsqlite.dylib'{$ENDIF};
 
 function LoadLibSqlite2 (var LibraryPath: String): Boolean;
 
