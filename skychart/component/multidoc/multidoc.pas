@@ -123,6 +123,18 @@ type
     }
     procedure SetActiveChild(n:integer);
     {
+     The number of child actually defined
+    }
+    property ChildCount: integer read GetChildCount;
+    {
+     The child that as focus
+    }
+    property ActiveChild: TChildDoc read GetActiveChild;
+    {
+     The form contained in ActiveChild, a shortcut for ActiveChild.DockedObject
+    }
+    property ActiveObject: TForm read GetActiveObject;
+    {
      The border and title color.
      Default value are from the current theme.
     }
@@ -135,18 +147,6 @@ type
      The menu that receive the list of child windows
     }
     property WindowList: TmenuItem read FWindowList write SetWindowList;
-    {
-     The number of child actually defined
-    }
-    property ChildCount: integer read GetChildCount;
-    {
-     The child that as focus
-    }
-    property ActiveChild: TChildDoc read GetActiveChild;
-    {
-     The form contained in ActiveChild, a shortcut for ActiveChild.DockedObject
-    }
-    property ActiveObject: TForm read GetActiveObject;
     {
      Maximise the child windows
     }
