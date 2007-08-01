@@ -68,6 +68,7 @@ type
      property Yc : integer read FYc;
      property SizeX : integer read FSizeX;
      property SizeY : integer read FSizeY;
+     property Align;
      property OnClick;
      property OnDblClick;
      property OnMouseDown;
@@ -75,6 +76,7 @@ type
      property OnMouseUp;
      property OnPaint: TNotifyEvent read FOnPaint write FOnPaint;
      property OnPosChange: TNotifyEvent read FOnPosChange write FOnPosChange;
+     property OnResize;
   end;
 
 procedure Register;
@@ -130,7 +132,7 @@ FSizeX:=FPicture.Width;
 FSizeY:=FPicture.Height;
 FZoomMin:=Width / FSizeX;
 if FZoomMax<=FZoomMin then FZoomMax:=FZoomMin+1;
-FZoom:=ZoomMin;
+//FZoom:=ZoomMin;
 Draw;
 end;
 
