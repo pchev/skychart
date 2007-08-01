@@ -29,14 +29,16 @@ uses
   Math, SysUtils, Graphics, Classes, FPImage, LCLType, IntfGraphics;
 
 Procedure BitmapRotation(var bmp,rbmp: TBitmap; Rotation:double; WhiteBg:boolean);
-Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
+Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double; pixelized: boolean=false);
 Procedure BitmapFlip(img:Tbitmap; flipx,flipy: boolean);
 Procedure BitmapSubstract(var img1:Tbitmap; img2:Tbitmap);
+Procedure BitmapLumCon(var img: TBitmap; Luminosity, Contrast: integer);
 
 Procedure RotateImage(OriginalIntfImg, RotatedIntfImg:TLazIntfImage; theta:Double; oldAxis:TPOINT;var   newAxis:TPOINT;TransparentColor: TFPColor;RevertImage : Boolean);
-Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double);
+Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double; pixelized: boolean=false);
 Procedure FlipImage(OriginalIntfImg,FlipIntfImg:TLazIntfImage; flipx,flipy: boolean);
 Procedure SubstractImage(IntfImg1, IntfImg2:TLazIntfImage);
+Procedure LumConImage(OriginalIntfImg,IntfImg:TLazIntfImage; Luminosity, Contrast: integer);
 
 implementation
 
@@ -220,16 +222,15 @@ OriginalIntfImg.Free;
 
 end;
 
-Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double);
+Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double; pixelized: boolean=false);
 var i,j,k,k2,l,nw,nh:integer;
     x,y,a,b:double;
-    pixelized: boolean;
     color,color1,color2,color3,color4: TFPColor;
 begin
    nh:=round(OriginalIntfImg.Height*zoom);
    nw:=round(OriginalIntfImg.Width*zoom);
    ResizedIntfImg.SetSize(nw,nh);
-   pixelized:=zoom<=1;
+   if zoom<=1 then pixelized:=true;
    for i:=0 to nh-1 do begin
       y:=i/zoom;
       k:=trunc(y);
@@ -261,7 +262,7 @@ begin
    end;
 end;
 
-Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
+Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double; pixelized: boolean=false);
 var
     OriginalIntfImg, ResizedIntfImg : TLazIntfImage;
     ImgHandle,ImgMaskHandle: HBitmap;
@@ -273,7 +274,7 @@ else begin
   OriginalIntfImg:=img1.CreateIntfImage;
   ResizedIntfImg:=img1.CreateIntfImage;
 
-  ResizeImage(OriginalIntfImg,ResizedIntfImg,zoom);
+  ResizeImage(OriginalIntfImg,ResizedIntfImg,zoom,pixelized);
 
   // create bitmap from rotated raw image
   img2.FreeImage;
@@ -364,6 +365,47 @@ begin
   // free the raw images
   IntfImg1.Free;
   IntfImg2.Free;
+end;
+
+Procedure LumConImage(OriginalIntfImg,IntfImg:TLazIntfImage; Luminosity, Contrast: integer);
+var i,j,dmin,dmax:integer;
+    c : double;
+    col: TFPColor;
+begin
+if (Luminosity=0) and (Contrast=0) then exit;
+dmin:=0+255*Contrast;
+dmax:=65535-255*Luminosity;
+if dmin>=dmax then dmax:=dmin+1;
+c:=65535/(dmax-dmin);
+IntfImg.SetSize(OriginalIntfImg.Width,OriginalIntfImg.Height);
+  for i:=0 to OriginalIntfImg.Height-1 do begin
+    for j:=0 to OriginalIntfImg.Width-1 do begin
+       col:=OriginalIntfImg.Colors[j,i];
+       col.red:=trunc(max(0,min(65535,(col.red-dmin) * c )) );
+       col.green:=trunc(max(0,min(65535,(col.green-dmin) * c )) );
+       col.blue:=trunc(max(0,min(65535,(col.blue-dmin) * c )) );
+       IntfImg.Colors[j,i]:=col;
+    end;
+  end;
+end;
+
+Procedure BitmapLumCon(var img: TBitmap; Luminosity, Contrast: integer);
+var ImgHandle,ImgMaskHandle: HBitmap;
+    OriginalIntfImg, IntfImg : TLazIntfImage;
+begin
+if (Luminosity=0) and (Contrast=0) then exit;
+OriginalIntfImg:=img.CreateIntfImage;
+IntfImg:=img.CreateIntfImage;
+
+LumConImage(OriginalIntfImg,IntfImg, Luminosity, Contrast);
+
+img.FreeImage;
+IntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+img.Handle:=ImgMaskHandle;
+img.FreeImage;
+img.Handle:=ImgHandle;
+OriginalIntfImg.Free;
+IntfImg.Free;
 end;
 
 end.
