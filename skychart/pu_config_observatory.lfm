@@ -32,7 +32,7 @@ object f_config_observatory: Tf_config_observatory
       Top = 1
       Width = 480
       Align = alClient
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -124,20 +124,18 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 0
           object Label2: TLabel
             Left = 314
-            Height = 15
+            Height = 14
             Top = 35
-            Width = 18
+            Width = 15
             Caption = '+/-'
-            Color = clNone
             ParentColor = False
           end
           object Label3: TLabel
             Left = 409
-            Height = 15
+            Height = 14
             Top = 35
-            Width = 24
+            Width = 22
             Caption = 'Km.'
-            Color = clNone
             ParentColor = False
           end
           object citylist: TComboBox
@@ -259,29 +257,26 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 1
           object Label58: TLabel
             Left = 4
-            Height = 15
+            Height = 14
             Top = 4
-            Width = 48
+            Width = 42
             Caption = 'Degree'
-            Color = clNone
             ParentColor = False
           end
           object Label59: TLabel
             Left = 48
-            Height = 15
+            Height = 14
             Top = 4
-            Width = 27
+            Width = 24
             Caption = 'Min.'
-            Color = clNone
             ParentColor = False
           end
           object Label60: TLabel
             Left = 80
-            Height = 15
+            Height = 14
             Top = 4
-            Width = 28
+            Width = 25
             Caption = 'Sec.'
-            Color = clNone
             ParentColor = False
           end
           object hemis: TComboBox
@@ -357,29 +352,26 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 2
           object Label61: TLabel
             Left = 4
-            Height = 15
+            Height = 14
             Top = 4
-            Width = 48
+            Width = 42
             Caption = 'Degree'
-            Color = clNone
             ParentColor = False
           end
           object Label62: TLabel
             Left = 48
-            Height = 15
+            Height = 14
             Top = 4
-            Width = 27
+            Width = 24
             Caption = 'Min.'
-            Color = clNone
             ParentColor = False
           end
           object Label63: TLabel
             Left = 80
-            Height = 15
+            Height = 14
             Top = 4
-            Width = 28
+            Width = 25
             Caption = 'Sec.'
-            Color = clNone
             ParentColor = False
           end
           object long: TComboBox
@@ -455,11 +447,10 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 3
           object Label70: TLabel
             Left = 8
-            Height = 15
+            Height = 14
             Top = 4
-            Width = 45
+            Width = 38
             Caption = 'Meters'
-            Color = clNone
             ParentColor = False
           end
           object altmeter: TFloatEdit
@@ -506,7 +497,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 8
             Height = 22
             Top = 1
-            Width = 139
+            Width = 125
             Caption = 'Country Timezone'
             Checked = True
             OnChange = CountryTZChange
@@ -532,7 +523,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 13
             Height = 22
             Top = 24
-            Width = 218
+            Width = 194
             Caption = 'Show Object below the horizon'
             OnClick = horizonopaqueClick
             TabOrder = 0
@@ -549,18 +540,17 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 0
           object hor_l1: TLabel
             Left = 13
-            Height = 15
+            Height = 14
             Top = 64
-            Width = 166
+            Width = 146
             Caption = 'Local Horizon File Name : '
-            Color = clNone
             ParentColor = False
           end
           object displayhorizon: TCheckBox
             Left = 13
             Height = 22
             Top = 16
-            Width = 204
+            Width = 181
             Caption = 'Display the local horizon line'
             OnClick = displayhorizonClick
             TabOrder = 0
@@ -580,7 +570,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 221
             Height = 22
             Top = 16
-            Width = 156
+            Width = 140
             Caption = 'Fill with horizon color'
             OnClick = fillhorizonClick
             TabOrder = 1
@@ -602,7 +592,6 @@ object f_config_observatory: Tf_config_observatory
             Width = 415
             AutoSize = False
             Caption = 'You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon.'
-            Color = clNone
             ParentColor = False
             WordWrap = True
           end
@@ -610,7 +599,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 13
             Height = 22
             Top = 72
-            Width = 290
+            Width = 253
             Caption = 'Draw the apparent depressed horizon line'
             OnClick = horizondepressionClick
             TabOrder = 0
@@ -627,20 +616,18 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 3
           object Label82: TLabel
             Left = 45
-            Height = 15
+            Height = 14
             Top = 7
-            Width = 114
+            Width = 101
             Caption = 'Pressure (millibar)'
-            Color = clNone
             ParentColor = False
           end
           object Label83: TLabel
             Left = 245
-            Height = 15
+            Height = 14
             Top = 7
-            Width = 141
+            Width = 124
             Caption = 'Temperature (Celsius)'
-            Color = clNone
             ParentColor = False
           end
           object pressure: TFloatEdit
