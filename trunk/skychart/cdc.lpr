@@ -49,9 +49,7 @@ begin
 
   Application.CreateForm(Tf_main, f_main);
   Application.CreateForm(Tf_splash, f_splash);
-{$ifndef lclgtk2}
   f_splash.Show; f_splash.Invalidate;
-{$endif}
   Application.ProcessMessages;
   Application.CreateForm(Tf_position, f_position);
   Application.CreateForm(Tf_search, f_search);
