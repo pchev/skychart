@@ -1878,11 +1878,10 @@ if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
 Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
 if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
 if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
-{$ifdef unix}
+{$ifdef lclgtk}
 ls:=round(1.5*cnv.TextHeight('1'));
-{$endif}
-{$ifdef win32}
-ls:=round(1.1*cnv.TextHeight('1'));
+{$else}
+ls:=round(cnv.TextHeight('1'));
 {$endif}
 repeat
   p:=pos(crlf,txt);

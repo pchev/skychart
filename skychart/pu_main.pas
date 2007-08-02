@@ -1004,7 +1004,7 @@ begin
     if shownext then f_info.Button1.caption:=rsNext
                 else f_info.Button1.caption:=rsClose;
     f_info.InfoMemo.Lines.LoadFromFile(buf);
-    f_info.InfoMemo.Text:=UTF8Decode(f_info.InfoMemo.Text);
+    f_info.InfoMemo.Text:=CondUTF8Decode(f_info.InfoMemo.Text);
     f_info.showmodal;
  end;
  SaveVersion;
@@ -3296,7 +3296,7 @@ csc.ObsLongitude := ReadFloat(section,'ObsLongitude',csc.ObsLongitude );
 csc.ObsAltitude := ReadFloat(section,'ObsAltitude',csc.ObsAltitude );
 csc.ObsTemperature := ReadFloat(section,'ObsTemperature',csc.ObsTemperature );
 csc.ObsPressure := ReadFloat(section,'ObsPressure',csc.ObsPressure );
-csc.ObsName := utf8decode(ReadString(section,'ObsName',csc.ObsName ));
+csc.ObsName := Condutf8decode(ReadString(section,'ObsName',csc.ObsName ));
 csc.ObsCountry := ReadString(section,'ObsCountry',csc.ObsCountry );
 csc.ObsTZ := ReadString(section,'ObsTZ',csc.ObsTZ );
 csc.countrytz := ReadBool(section,'countrytz',csc.countrytz );
@@ -3783,7 +3783,7 @@ WriteFloat(section,'ObsLongitude',csc.ObsLongitude );
 WriteFloat(section,'ObsAltitude',csc.ObsAltitude );
 WriteFloat(section,'ObsTemperature',csc.ObsTemperature );
 WriteFloat(section,'ObsPressure',csc.ObsPressure );
-WriteString(section,'ObsName',utf8encode(csc.ObsName) );
+WriteString(section,'ObsName',Condutf8encode(csc.ObsName) );
 WriteString(section,'ObsCountry',csc.ObsCountry );
 WriteString(section,'ObsTZ',csc.ObsTZ );
 WriteBool(section,'countrytz',csc.countrytz );

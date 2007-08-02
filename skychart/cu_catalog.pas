@@ -2515,7 +2515,7 @@ begin
    i:=0;
    repeat
      readln(f,txt);
-     txt:=trim(txt);
+     txt:=Condutf8decode(trim(txt));
      if (txt='')or(copy(txt,1,1)=';') then continue;
      p:=pos(';',txt);
      if p=0 then begin showmessage(txt); continue; end;
@@ -2708,6 +2708,7 @@ begin
   i:=0;
   repeat
     Readln(f,buf);
+    buf:=CondUTF8Decode(buf);
     if copy(buf,1,1)=';' then continue;
     hr:=trim(copy(buf,1,6));
     buf:=trim(copy(buf,10,999));

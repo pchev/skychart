@@ -2815,6 +2815,7 @@ object f_main: Tf_main
         Hint = 'Open|Open a chart'
         Top = 2
         Action = FileOpen1
+        Caption = ' '
       end
       object ToolButtonSave: TToolButton
         Left = 47
@@ -2832,7 +2833,6 @@ object f_main: Tf_main
         Left = 93
         Hint = 'Night vision color'
         Top = 2
-        Caption = 'ToolButtonNightVision'
         ImageIndex = 82
         OnClick = ToolButtonNightVisionClick
       end
@@ -2840,7 +2840,6 @@ object f_main: Tf_main
         Left = 116
         Top = 2
         Width = 8
-        Caption = 'ToolButton3'
         ImageIndex = 2
         Style = tbsDivider
       end
@@ -2848,7 +2847,6 @@ object f_main: Tf_main
         Left = 124
         Hint = 'Cascade'
         Top = 2
-        Caption = 'Cascade'
         ImageIndex = 4
         OnClick = WindowCascade1Execute
       end
@@ -2856,7 +2854,6 @@ object f_main: Tf_main
         Left = 147
         Hint = 'Tile Vertically'
         Top = 2
-        Caption = 'Tile Vertically'
         ImageIndex = 14
         OnClick = WindowTileVertical1Execute
       end
@@ -2864,7 +2861,6 @@ object f_main: Tf_main
         Left = 170
         Top = 2
         Width = 8
-        Caption = 'ToolButton5'
         ImageIndex = 17
         Style = tbsDivider
       end
@@ -2903,12 +2899,11 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Search'
         Top = 2
-        Width = 80
+        Width = 90
         ArrowKeysTraverseList = False
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
-        Font.CharSet = ANSI_CHARSET
         MaxLength = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
@@ -2916,7 +2911,7 @@ object f_main: Tf_main
         TabOrder = 0
       end
       object ToolButtonSearch: TToolButton
-        Left = 397
+        Left = 407
         Hint = 'Advanced Search'
         Top = 2
         Action = Search1
@@ -3048,51 +3043,50 @@ object f_main: Tf_main
         end
       end
       object ToolButtonPosition: TToolButton
-        Left = 420
+        Left = 430
         Hint = 'Position'
         Top = 2
         Action = Position
       end
       object ToolButtonListObj: TToolButton
-        Left = 443
+        Left = 453
         Hint = 'Object List'
         Top = 2
         Action = listobj
       end
       object ToolButtonCal: TToolButton
-        Left = 466
+        Left = 476
         Hint = 'Ephemeris Calendar'
         Top = 2
         Action = Calendar
       end
       object ToolButton35: TToolButton
-        Left = 489
+        Left = 499
         Top = 2
         Width = 8
-        Caption = 'ToolButton35'
         ImageIndex = 8
         Style = tbsDivider
       end
       object ToolButtonTdec: TToolButton
-        Left = 497
+        Left = 507
         Hint = 'Decrement Time'
         Top = 2
         Action = TimeDec
       end
       object ToolButtonTnow: TToolButton
-        Left = 520
+        Left = 530
         Hint = 'Now'
         Top = 2
         Action = TimeReset
       end
       object ToolButtonTinc: TToolButton
-        Left = 543
+        Left = 553
         Hint = 'Increment Time'
         Top = 2
         Action = TimeInc
       end
       object TimeVal: TSpinEdit
-        Left = 566
+        Left = 576
         Height = 23
         Hint = 'Time'
         Top = 2
@@ -3103,7 +3097,7 @@ object f_main: Tf_main
         Value = 1
       end
       object TimeU: TComboBox
-        Left = 636
+        Left = 646
         Height = 23
         Hint = 'Time Units'
         Top = 2
@@ -3116,27 +3110,26 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ToolButton39: TToolButton
-        Left = 716
+        Left = 726
         Top = 2
         Width = 8
-        Caption = 'ToolButton39'
         ImageIndex = 45
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 724
+        Left = 734
         Hint = 'Connect Telescope'
         Top = 2
         Action = TelescopeConnect
       end
       object TSlew: TToolButton
-        Left = 770
+        Left = 780
         Hint = 'Slew'
         Top = 2
         Action = TelescopeSlew
       end
       object TSync: TToolButton
-        Left = 747
+        Left = 757
         Hint = 'Sync'
         Top = 2
         Action = TelescopeSync
@@ -3171,18 +3164,16 @@ object f_main: Tf_main
         end
       end
       object ToolButton6: TToolButton
-        Left = 793
+        Left = 803
         Top = 2
         Width = 8
-        Caption = 'ToolButton6'
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 801
+        Left = 860
         Top = 2
         Width = 23
         AutoSize = True
-        Caption = 'ToolButton7'
         Style = tbsSeparator
       end
     end
@@ -3372,14 +3363,12 @@ object f_main: Tf_main
         Left = 561
         Top = 2
         Width = 8
-        Caption = 'ToolButton2'
         Style = tbsDivider
       end
       object ToolButton4: TToolButton
         Left = 507
         Top = 2
         Width = 8
-        Caption = 'ToolButton4'
         Style = tbsDivider
       end
       object ToolButtonBlink: TToolButton

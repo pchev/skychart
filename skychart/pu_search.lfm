@@ -8,6 +8,8 @@ object f_search: Tf_search
   ActiveControl = Id
   BorderStyle = bsToolWindow
   Caption = 'Search'
+  ClientHeight = 326
+  ClientWidth = 433
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
@@ -19,16 +21,17 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
     FullRepaint = False
     TabOrder = 7
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 13
+      Height = 14
       Top = 14
-      Width = 40
+      Width = 39
       Caption = 'Planet '
-      Color = clNone
       ParentColor = False
     end
     object PlanetBox: TComboBox
@@ -38,7 +41,6 @@ object f_search: Tf_search
       Width = 146
       AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
       DropDownCount = 10
-      ItemHeight = 13
       MaxLength = 0
       TabOrder = 0
     end
@@ -48,6 +50,8 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
     TabOrder = 6
     object CometFilter: TEdit
       Left = 8
@@ -81,6 +85,8 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
     TabOrder = 5
     object AsteroidFilter: TEdit
       Left = 8
@@ -114,16 +120,17 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
     FullRepaint = False
     TabOrder = 4
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 13
+      Height = 14
       Top = 14
-      Width = 40
+      Width = 41
       Caption = 'Nebula'
-      Color = clNone
       ParentColor = False
     end
     object NebNameBox: TComboBox
@@ -132,7 +139,6 @@ object f_search: Tf_search
       Top = 11
       Width = 280
       AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
       MaxLength = 0
       TabOrder = 0
     end
@@ -142,16 +148,17 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
     FullRepaint = False
     TabOrder = 3
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 13
+      Height = 14
       Top = 14
-      Width = 25
+      Width = 23
       Caption = 'Star'
-      Color = clNone
       ParentColor = False
     end
     object StarNameBox: TComboBox
@@ -160,7 +167,6 @@ object f_search: Tf_search
       Top = 11
       Width = 281
       AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
       MaxLength = 0
       TabOrder = 0
     end
@@ -170,16 +176,17 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
     FullRepaint = False
     TabOrder = 2
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 13
+      Height = 14
       Top = 14
-      Width = 75
+      Width = 73
       Caption = 'Constellation'
-      Color = clNone
       ParentColor = False
     end
     object ConstBox: TComboBox
@@ -188,7 +195,6 @@ object f_search: Tf_search
       Top = 11
       Width = 265
       AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
       MaxLength = 0
       TabOrder = 0
     end
@@ -198,15 +204,16 @@ object f_search: Tf_search
     Height = 41
     Top = 232
     Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
     FullRepaint = False
     TabOrder = 1
     object Label1: TLabel
       Left = 6
-      Height = 13
+      Height = 14
       Top = 14
-      Width = 74
+      Width = 73
       Caption = 'Object Name'
-      Color = clNone
       ParentColor = False
     end
     object DblPanel: TPanel
@@ -214,6 +221,8 @@ object f_search: Tf_search
       Height = 39
       Top = 1
       Width = 73
+      ClientHeight = 39
+      ClientWidth = 73
       FullRepaint = False
       TabOrder = 5
       Visible = False
@@ -242,6 +251,8 @@ object f_search: Tf_search
       Height = 39
       Top = 1
       Width = 73
+      ClientHeight = 39
+      ClientWidth = 73
       FullRepaint = False
       TabOrder = 4
       Visible = False
@@ -319,6 +330,8 @@ object f_search: Tf_search
       Height = 39
       Top = 1
       Width = 73
+      ClientHeight = 39
+      ClientWidth = 73
       FullRepaint = False
       TabOrder = 3
       Visible = False
@@ -375,6 +388,8 @@ object f_search: Tf_search
       Top = 1
       Width = 128
       BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 128
       FullRepaint = False
       TabOrder = 1
       object SpeedButton1: TSpeedButton
@@ -511,6 +526,8 @@ object f_search: Tf_search
       Height = 39
       Top = 1
       Width = 73
+      ClientHeight = 39
+      ClientWidth = 73
       FullRepaint = False
       TabOrder = 2
       object SpeedButton14: TSpeedButton
@@ -578,6 +595,8 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
+    ClientHeight = 198
+    ClientWidth = 412
     Columns = 2
     ItemIndex = 0
     Items.Strings = (

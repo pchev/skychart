@@ -103,6 +103,8 @@ Function DecryptStr(Str,Pwd: String): String;
 function strtohex(str:string):string;
 function hextostr(str:string):string;
 procedure GetTranslationString(form: TForm; var f: textfile);
+function CondUTF8Decode(v:string):string;
+function CondUTF8Encode(v:string):string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 {$endif}
@@ -120,6 +122,28 @@ uses u_projection;
 var
   dummy_ext : extended;
   ftrace : textfile;
+  
+{$ifdef lclgtk2} {$define cdcutf8} {$endif}
+{$ifdef lclqt} {$define cdcutf8} {$endif}
+{$ifdef lclcarbon} {$define cdcutf8} {$endif}
+
+function CondUTF8Decode(v:string):string;
+begin
+{$ifdef cdcutf8}
+result:=v;
+{$else}
+result:=UTF8Decode(v);
+{$endif}
+end;
+
+function CondUTF8Encode(v:string):string;
+begin
+{$ifdef cdcutf8}
+result:=v;
+{$else}
+result:=UTF8Encode(v);
+{$endif}
+end;
 
 Function mm2pi(l,PrinterResolution : single): integer;
 begin
