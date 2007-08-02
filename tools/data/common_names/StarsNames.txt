@@ -1,6 +1,7 @@
 ; Stars Name for Cartes du Ciel
 ; For a translation copy this file to StarsNames_XX.txt where XX is the specific language code
 ; the first column is the HR number
+; Use UTF-8 for character encoding
 ;
   897    Acamar
   472    Achernar

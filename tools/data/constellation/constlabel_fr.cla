@@ -1,12 +1,13 @@
-; Nom  des constellations en Français pour Cartes du Ciel
+; Nom  des constellations en FranÃ§ais pour Cartes du Ciel
+; Use UTF-8 for character encoding
 ;
-00.567 ;  39.250 ; And ; Andromède          
+00.567 ;  39.250 ; And ; AndromÃ¨de          
 10.117 ; -33.350 ; Ant ; Machine Pneumatique             
 16.133 ; -76.583 ; Aps ; Oiseau de Paradis               
 22.700 ; -10.467 ; Aqr ; Verseau       
 19.683 ;  03.367 ; Aql ; Aigle            
 17.233 ; -51.117 ; Ara ; Autel                
-02.683 ;  22.567 ; Ari ; Bélier              
+02.683 ;  22.567 ; Ari ; BÃ©lier              
 05.950 ;  42.817 ; Aur ; Cocher             
 14.683 ;  32.333 ; Boo ; Bouvier             
 04.717 ; -38.167 ; Cae ; Burin             
@@ -16,17 +17,17 @@
 06.833 ; -22.317 ; CMa ; Grand Chien        
 07.617 ;  06.767 ; CMi ; Petit Chien        
 21.050 ; -19.350 ; Cap ; Capricorne        
-08.833 ; -60.500 ; Car ; Carène             
-00.867 ;  60.300 ; Cas ; Cassiopée         
+08.833 ; -60.500 ; Car ; CarÃ¨ne             
+00.867 ;  60.300 ; Cas ; CassiopÃ©e         
 12.950 ; -44.000 ; Cen ; Centaure          
-22.417 ;  72.567 ; Cep ; Cephée           
+22.417 ;  72.567 ; Cep ; CephÃ©e           
 01.717 ; -06.367 ; Cet ; Baleine             
-12.000 ; -81.017 ; Cha ; Caméléon         
+12.000 ; -81.017 ; Cha ; CamÃ©lÃ©on         
 14.533 ; -67.300 ; Cir ; Compas           
 05.700 ; -37.917 ; Col ; Colombe            
 12.750 ;  22.650 ; Com ; Chevelure de Berenices     
 18.650 ; -41.750 ; CrA ; Couronne Australe   
-15.883 ;  32.633 ; CrB ; Couronne Boréale    
+15.883 ;  32.633 ; CrB ; Couronne BorÃ©ale    
 12.383 ; -18.633 ; Crv ; Corbeau   
 11.350 ; -13.750 ; Crt ; Coupe             
 12.483 ; -60.300 ; Cru ; Croix               
@@ -37,17 +38,17 @@
 21.250 ;  07.933 ; Equ ; Petit Cheval           
 03.883 ; -17.983 ; Eri ; Eridan           
 02.767 ; -31.000 ; For ; Fourneau             
-06.850 ;  24.817 ; Gem ; Gémeaux           
+06.850 ;  24.817 ; Gem ; GÃ©meaux           
 22.450 ; -45.133 ; Gru ; Grue             
 17.433 ;  31.233 ; Her ; Hercule           
 03.217 ; -52.000 ; Hor ; Horologe
 09.133 ; -11.683 ; Hya ; Hydre femelle              
-02.583 ; -72.917 ; Hyi ; Hydre mâle             
+02.583 ; -72.917 ; Hyi ; Hydre mÃ¢le             
 21.133 ; -52.317 ; Ind ; Oiseau Indien              
-22.517 ;  46.667 ; Lac ; Lézard            
+22.517 ;  46.667 ; Lac ; LÃ©zard            
 10.667 ;  17.000 ; Leo ; Lion                
 10.317 ;  33.233 ; LMi ; Petit Lion          
-05.433 ; -19.650 ; Lep ; Lièvre              
+05.433 ; -19.650 ; Lep ; LiÃ¨vre              
 15.183 ; -15.550 ; Lib ; Balance              
 15.383 ; -42.717 ; Lup ; Loup              
 07.733 ;  47.833 ; Lyn ; Lynx               
@@ -56,30 +57,30 @@
 20.950 ; -36.800 ; Mic ; Microscope       
 06.967 ; -03.267 ; Mon ; Licorne         
 12.467 ; -69.133 ; Mus ; Mouche              
-16.050 ; -52.717 ; Nor ; Règle              
+16.050 ; -52.717 ; Nor ; RÃ¨gle              
 22.167 ; -84.267 ; Oct ; Octant             
 17.033 ; -02.350 ; Oph ; Ophiuchus          
 05.567 ;  03.583 ; Ori ; Orion              
 19.167 ; -65.867 ; Pav ; Paon               
-22.617 ;  19.650 ; Peg ; Pégase            
-03.517 ;  44.883 ; Per ; Persée            
+22.617 ;  19.650 ; Peg ; PÃ©gase            
+03.517 ;  44.883 ; Per ; PersÃ©e            
 00.733 ; -48.767 ; Phe ; Phenix            
 05.383 ; -51.367 ; Pic ; Peintre             
 00.883 ;  15.483 ; Psc ; Pisces             
 22.417 ; -31.567 ; PsA ; Poisson Austral   
 07.867 ; -32.617 ; Pup ; Poupe             
 08.883 ; -29.783 ; Pyx ; Boussole              
-03.900 ; -60.517 ; Ret ; Réticule          
-19.667 ;  17.000 ; Sge ; Flèche            
+03.900 ; -60.517 ; Ret ; RÃ©ticule          
+19.667 ;  17.000 ; Sge ; FlÃ¨che            
 19.383 ; -29.883 ; Sgr ; Sagittaire        
 16.867 ; -35.333 ; Sco ; Scorpion           
 00.500 ; -31.000 ; Scl ; Sculpteur           
 18.650 ; -10.883 ; Sct ; Ecu             
-15.733 ;  10.850 ; Ser ; Tête du Serpent      
+15.733 ;  10.850 ; Ser ; TÃªte du Serpent      
 17.800 ; -13.483 ; Ser ; Queue du Serpent     
 10.100 ; -01.133 ; Sex ; Sextant            
 04.100 ;  17.333 ; Tau ; Taureau            
-19.250 ; -51.467 ; Tel ; Télescope        
+19.250 ; -51.467 ; Tel ; TÃ©lescope        
 02.050 ;  32.333 ; Tri ; Triangle         
 16.117 ; -65.100 ; TrA ; Triangle Austral
 23.833 ; -64.933 ; Tuc ; Toucan             
