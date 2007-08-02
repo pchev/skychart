@@ -482,6 +482,7 @@ if FileExists(fn) then begin
        setlength(NebNameDE,numNebName);
     end;
     Readln(f,buf);
+    buf:=CondUTF8Decode(buf);
     p:=pos(';',buf);
     if p=0 then continue;
     if not isnumber(trim(copy(buf,1,p-1))) then continue;

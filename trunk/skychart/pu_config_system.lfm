@@ -7,6 +7,8 @@ object f_config_system: Tf_config_system
   VertScrollBar.Page = 527
   ActiveControl = dbname
   Caption = 'System'
+  ClientHeight = 528
+  ClientWidth = 541
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -16,6 +18,8 @@ object f_config_system: Tf_config_system
     Height = 480
     Top = 8
     Width = 500
+    ClientHeight = 480
+    ClientWidth = 500
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
@@ -26,13 +30,15 @@ object f_config_system: Tf_config_system
       Align = alClient
       PageIndex = 3
       ShowTabs = False
+      TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
+        ClientWidth = 498
+        ClientHeight = 478
         object Label153: TLabel
           Height = 14
           Width = 91
           Caption = 'System Setting'
-          Color = clNone
           ParentColor = False
         end
         object MysqlBox: TGroupBox
@@ -41,6 +47,8 @@ object f_config_system: Tf_config_system
           Top = 59
           Width = 441
           Caption = 'MySQL  Database'
+          ClientHeight = 97
+          ClientWidth = 441
           TabOrder = 5
           object Label77: TLabel
             Left = 16
@@ -48,7 +56,6 @@ object f_config_system: Tf_config_system
             Top = 12
             Width = 61
             Caption = 'DB Name:'
-            Color = clNone
             ParentColor = False
           end
           object Label84: TLabel
@@ -57,7 +64,6 @@ object f_config_system: Tf_config_system
             Top = 12
             Width = 70
             Caption = 'Host Name:'
-            Color = clNone
             ParentColor = False
           end
           object Label85: TLabel
@@ -66,7 +72,6 @@ object f_config_system: Tf_config_system
             Top = 12
             Width = 29
             Caption = 'Port:'
-            Color = clNone
             ParentColor = False
           end
           object Label86: TLabel
@@ -75,7 +80,6 @@ object f_config_system: Tf_config_system
             Top = 52
             Width = 42
             Caption = 'Userid:'
-            Color = clNone
             ParentColor = False
           end
           object Label133: TLabel
@@ -84,7 +88,6 @@ object f_config_system: Tf_config_system
             Top = 52
             Width = 58
             Caption = 'Password'
-            Color = clNone
             ParentColor = False
           end
           object dbname: TEdit
@@ -141,6 +144,8 @@ object f_config_system: Tf_config_system
           Top = 59
           Width = 441
           Caption = 'Sqlite Database'
+          ClientHeight = 97
+          ClientWidth = 441
           TabOrder = 1
           Visible = False
           object Label1: TLabel
@@ -149,7 +154,6 @@ object f_config_system: Tf_config_system
             Top = 36
             Width = 84
             Caption = 'Database file: '
-            Color = clNone
             ParentColor = False
           end
           object dbnamesqlite: TEdit
@@ -170,6 +174,8 @@ object f_config_system: Tf_config_system
           Top = 267
           Width = 441
           Caption = 'Directory'
+          ClientHeight = 91
+          ClientWidth = 441
           TabOrder = 3
           object Label156: TLabel
             Left = 13
@@ -177,7 +183,6 @@ object f_config_system: Tf_config_system
             Top = 10
             Width = 85
             Caption = 'Program Data '
-            Color = clNone
             ParentColor = False
           end
           object Label157: TLabel
@@ -186,7 +191,6 @@ object f_config_system: Tf_config_system
             Top = 50
             Width = 81
             Caption = 'Personal data'
-            Color = clNone
             ParentColor = False
           end
           object prgdir: TDirectoryEdit
@@ -217,6 +221,8 @@ object f_config_system: Tf_config_system
           Height = 98
           Top = 155
           Width = 441
+          ClientHeight = 98
+          ClientWidth = 441
           TabOrder = 2
           object chkdb: TButton
             Left = 16
@@ -285,6 +291,8 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
+          ClientHeight = 48
+          ClientWidth = 283
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -302,6 +310,8 @@ object f_config_system: Tf_config_system
           Top = 367
           Width = 440
           Caption = 'Desktop environment'
+          ClientHeight = 92
+          ClientWidth = 440
           TabOrder = 4
           object Label12: TLabel
             Left = 203
@@ -309,7 +319,6 @@ object f_config_system: Tf_config_system
             Top = 8
             Width = 129
             Caption = 'URL launch command'
-            Color = clNone
             ParentColor = False
           end
           object LinuxDesktopBox: TComboBox
@@ -342,12 +351,16 @@ object f_config_system: Tf_config_system
       end
       object Page2: TPage
         Caption = 'Page2'
+        ClientWidth = 498
+        ClientHeight = 478
         object GroupBox3: TGroupBox
           Left = 16
           Height = 247
           Top = 8
           Width = 393
           Caption = 'TCP/IP Server'
+          ClientHeight = 247
+          ClientWidth = 393
           TabOrder = 0
           object Label54: TLabel
             Left = 16
@@ -355,7 +368,6 @@ object f_config_system: Tf_config_system
             Top = 124
             Width = 115
             Caption = 'Server IP Interface :'
-            Color = clNone
             ParentColor = False
           end
           object Label55: TLabel
@@ -364,7 +376,6 @@ object f_config_system: Tf_config_system
             Top = 168
             Width = 88
             Caption = 'Server IP Port :'
-            Color = clNone
             ParentColor = False
           end
           object UseIPserver: TCheckBox
@@ -407,11 +418,12 @@ object f_config_system: Tf_config_system
       end
       object Page3: TPage
         Caption = 'Page3'
+        ClientWidth = 498
+        ClientHeight = 478
         object Label13: TLabel
           Height = 14
           Width = 105
           Caption = 'Telescope Setting'
-          Color = clNone
           ParentColor = False
         end
         object INDI: TGroupBox
@@ -420,6 +432,8 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 450
           Caption = 'INDI Driver setting'
+          ClientHeight = 297
+          ClientWidth = 450
           TabOrder = 1
           object Label75: TLabel
             Left = 8
@@ -427,7 +441,6 @@ object f_config_system: Tf_config_system
             Top = 28
             Width = 100
             Caption = 'INDI Server Host '
-            Color = clNone
             ParentColor = False
           end
           object Label130: TLabel
@@ -436,7 +449,6 @@ object f_config_system: Tf_config_system
             Top = 28
             Width = 91
             Caption = 'INDI server Port'
-            Color = clNone
             ParentColor = False
           end
           object Label258: TLabel
@@ -445,7 +457,6 @@ object f_config_system: Tf_config_system
             Top = 104
             Width = 102
             Caption = 'Server command '
-            Color = clNone
             ParentColor = False
           end
           object Label259: TLabel
@@ -454,7 +465,6 @@ object f_config_system: Tf_config_system
             Top = 136
             Width = 69
             Caption = 'Driver name'
-            Color = clNone
             ParentColor = False
           end
           object Label260: TLabel
@@ -463,7 +473,6 @@ object f_config_system: Tf_config_system
             Top = 104
             Width = 89
             Caption = 'Telescope type'
-            Color = clNone
             ParentColor = False
           end
           object Label261: TLabel
@@ -472,7 +481,6 @@ object f_config_system: Tf_config_system
             Top = 180
             Width = 71
             Caption = 'Device Port '
-            Color = clNone
             ParentColor = False
           end
           object Label2: TLabel
@@ -481,7 +489,6 @@ object f_config_system: Tf_config_system
             Top = 224
             Width = 144
             Caption = 'Control Panel command '
-            Color = clNone
             ParentColor = False
           end
           object IndiServerHost: TEdit
@@ -532,7 +539,6 @@ object f_config_system: Tf_config_system
             Top = 100
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
             MaxLength = 0
             OnSelect = IndiDevChange
             Style = csDropDownList
@@ -544,7 +550,6 @@ object f_config_system: Tf_config_system
             Top = 176
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
             Items.Strings = (
               'COM1'
               'COM2'
@@ -575,6 +580,8 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 449
           Caption = 'Manual Mount'
+          ClientHeight = 297
+          ClientWidth = 449
           TabOrder = 3
           Visible = False
           object Label7: TLabel
@@ -584,7 +591,6 @@ object f_config_system: Tf_config_system
             Width = 361
             AutoSize = False
             Caption = 'Set how the mount move on each axis when you turn the driving knob.'#13#10'Then the Telescope button show you the turns you must do to go from one object to another.'
-            Color = clNone
             ParentColor = False
             WordWrap = True
           end
@@ -593,6 +599,8 @@ object f_config_system: Tf_config_system
             Height = 161
             Top = 112
             Width = 361
+            ClientHeight = 161
+            ClientWidth = 361
             TabOrder = 2
             object Label3: TLabel
               Left = 16
@@ -600,7 +608,6 @@ object f_config_system: Tf_config_system
               Top = 16
               Width = 96
               Caption = 'Right Ascension'
-              Color = clNone
               ParentColor = False
             end
             object Label4: TLabel
@@ -609,7 +616,6 @@ object f_config_system: Tf_config_system
               Top = 93
               Width = 65
               Caption = 'Declination'
-              Color = clNone
               ParentColor = False
             end
             object Label5: TLabel
@@ -618,7 +624,6 @@ object f_config_system: Tf_config_system
               Top = 16
               Width = 67
               Caption = 'turns / hour'
-              Color = clNone
               ParentColor = False
             end
             object Label6: TLabel
@@ -627,7 +632,6 @@ object f_config_system: Tf_config_system
               Top = 93
               Width = 81
               Caption = 'turns / degree'
-              Color = clNone
               ParentColor = False
             end
             object TurnsRa: TFloatEdit
@@ -685,6 +689,8 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
+            ClientHeight = 41
+            ClientWidth = 361
             Columns = 2
             Items.Strings = (
               'Equatorial'
@@ -698,6 +704,8 @@ object f_config_system: Tf_config_system
             Height = 161
             Top = 112
             Width = 361
+            ClientHeight = 161
+            ClientWidth = 361
             TabOrder = 1
             object Label8: TLabel
               Left = 16
@@ -705,7 +713,6 @@ object f_config_system: Tf_config_system
               Top = 16
               Width = 49
               Caption = 'Azimuth'
-              Color = clNone
               ParentColor = False
             end
             object Label9: TLabel
@@ -714,7 +721,6 @@ object f_config_system: Tf_config_system
               Top = 93
               Width = 45
               Caption = 'Altitude'
-              Color = clNone
               ParentColor = False
             end
             object Label10: TLabel
@@ -723,7 +729,6 @@ object f_config_system: Tf_config_system
               Top = 16
               Width = 81
               Caption = 'turns / degree'
-              Color = clNone
               ParentColor = False
             end
             object Label11: TLabel
@@ -732,7 +737,6 @@ object f_config_system: Tf_config_system
               Top = 93
               Width = 81
               Caption = 'turns / degree'
-              Color = clNone
               ParentColor = False
             end
             object TurnsAz: TFloatEdit
@@ -783,6 +787,8 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 450
           Caption = 'CDC plugin setting'
+          ClientHeight = 105
+          ClientWidth = 450
           TabOrder = 2
           Visible = False
           object Label155: TLabel
@@ -791,7 +797,6 @@ object f_config_system: Tf_config_system
             Top = 46
             Width = 104
             Caption = 'Telescope Plugin '
-            Color = clNone
             ParentColor = False
           end
           object telescopepluginlist: TComboBox
@@ -800,7 +805,6 @@ object f_config_system: Tf_config_system
             Top = 42
             Width = 145
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
             MaxLength = 0
             OnChange = telescopepluginlistChange
             Style = csDropDownList
@@ -822,6 +826,8 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
+          ClientHeight = 65
+          ClientWidth = 450
           Columns = 3
           Items.Strings = (
             'INDI'
@@ -834,13 +840,14 @@ object f_config_system: Tf_config_system
       end
       object Page4: TPage
         Caption = 'Page4'
+        ClientWidth = 494
+        ClientHeight = 474
         object Label14: TLabel
           Left = 19
           Height = 14
           Top = 24
-          Width = 113
+          Width = 109
           Caption = 'Language selection'
-          Color = clNone
           ParentColor = False
         end
         object LanguageList: TComboBox
@@ -849,7 +856,6 @@ object f_config_system: Tf_config_system
           Top = 82
           Width = 260
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-          ItemHeight = 13
           MaxLength = 0
           OnSelect = LanguageListSelect
           Style = csDropDownList

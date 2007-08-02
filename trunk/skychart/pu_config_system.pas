@@ -322,7 +322,7 @@ repeat
   Readln(f,buf);
   writetrace('  process: '+buf);
   buf1:=words(buf,'',1,1);
-  buf2:=UTF8Decode(words(buf,'',2,1));
+  buf2:=CondUTF8Decode(words(buf,'',2,1));
   if fileexists(dir+'skychart.'+buf1+'.po') then begin
      writetrace('  add: '+buf1+blank+'-'+blank+buf2);
      LanguageList.items.Add(buf1+blank+'-'+blank+buf2);

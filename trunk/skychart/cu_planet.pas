@@ -1435,7 +1435,7 @@ try
    db2.SetPort(port);
    db2.Connect(host,user,pass,db);
   end else if DBtype=sqlite then begin
-   db:=UTF8Encode(db);
+   db:=CondUTF8Encode(db);
   end;
  if db1.database<>db then db1.Use(db);
  if db2.database<>db then db2.Use(db);

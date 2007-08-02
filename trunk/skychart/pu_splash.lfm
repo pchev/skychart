@@ -1,5 +1,5 @@
 object f_splash: Tf_splash
-  Left = 328
+  Left = 421
   Height = 263
   Top = 156
   Width = 496
@@ -7,6 +7,8 @@ object f_splash: Tf_splash
   VertScrollBar.Page = 262
   BorderStyle = bsNone
   Caption = 'f_splash'
+  ClientHeight = 263
+  ClientWidth = 496
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -21,6 +23,8 @@ object f_splash: Tf_splash
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Cartes du Ciel'
+    ClientHeight = 263
+    ClientWidth = 496
     TabOrder = 0
     OnDblClick = logoDblClick
     object Image1: TImage
@@ -8399,14 +8403,13 @@ object f_splash: Tf_splash
       Stretch = True
     end
     object Label1: TLabel
-      Left = 282
-      Height = 27
+      Left = 381
+      Height = 14
       Top = 108
-      Width = 159
+      Width = 60
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = 'Sky Charts'
-      Color = clNone
       Font.Color = clWhite
       Font.Height = -26
       Font.Style = [fsBold]
@@ -8414,11 +8417,10 @@ object f_splash: Tf_splash
     end
     object Label2: TLabel
       Left = 16
-      Height = 21
-      Top = 168
-      Width = 115
+      Height = 14
+      Top = 155
+      Width = 56
       Caption = 'Version 3 '
-      Color = clNone
       Font.Color = clWhite
       Font.Height = -20
       Font.Style = [fsBold]
@@ -8432,30 +8434,27 @@ object f_splash: Tf_splash
       Anchors = [akLeft, akRight, akBottom]
       AutoSize = False
       Caption = 'Copyright (C) '
-      Color = clNone
       Font.Color = clWhite
       ParentColor = False
     end
     object Label4: TLabel
       Left = 16
-      Height = 30
-      Top = 202
-      Width = 464
+      Height = 42
+      Top = 190
+      Width = 460
       Anchors = [akLeft, akRight, akBottom]
       AutoSize = False
       Caption = 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License'
-      Color = clNone
       Font.Color = clWhite
       ParentColor = False
       WordWrap = True
     end
     object LabelDate: TLabel
       Left = 128
-      Height = 16
-      Top = 170
-      Width = 36
+      Height = 14
+      Top = 157
+      Width = 27
       Caption = 'Date'
-      Color = clNone
       Font.Color = clWhite
       Font.Height = -15
       ParentColor = False

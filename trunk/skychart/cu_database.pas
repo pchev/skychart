@@ -116,7 +116,7 @@ try
    db.Connect(host,user,pass,dbn);
  end
  else if DBtype=sqlite then begin
-   dbn:=UTF8Encode(dbn);
+   dbn:=CondUTF8Encode(dbn);
  end;
  if db.database<>dbn then db.Use(dbn);
  result:=db.Active;
@@ -194,7 +194,7 @@ try
        else begin msg:=Format(rsConnectToFai, [cmain.dbhost, inttostr(
          cmain.dbport), trim(db.ErrorMessage)+crlf]); goto dmsg; end;
   end else if DBtype=sqlite then begin
-    dbn:=UTF8Encode(cmain.db);
+    dbn:=CondUTF8Encode(cmain.db);
   end;
   if ((db.database=dbn)or db.use(dbn)) then msg:=Format(rsDatabaseOpen, [msg,
     cmain.db, crlf])
@@ -232,7 +232,7 @@ try
      result:=trim(db.ErrorMessage);
      db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
   end else if DBtype=sqlite then begin
-    dbn:=UTF8Encode(cmain.db);
+    dbn:=CondUTF8Encode(cmain.db);
   end;
   if db.database<>dbn then db.Use(dbn);
   if db.database=dbn then begin
@@ -1352,7 +1352,7 @@ if db.Active then begin
          'values ('+
          rec[0]+','+
          '"US-'+rec[3]+'",'+
-         '"'+utf8encode(trim(rec[1]))+'",'+
+         '"'+Condutf8encode(trim(rec[1]))+'",'+
          '"'+rec[2]+'",'+
          rec[9]+','+
          rec[10]+','+
@@ -1385,7 +1385,7 @@ i:=0;
 while i<db.RowCount do begin
   codelist.add(db.results[i][0]);
   buf:=db.results[i][1];
-  countrylist.add(utf8decode(buf));
+  countrylist.add(Condutf8decode(buf));
   inc(i);
 end;
 end;
@@ -1401,7 +1401,7 @@ var i,k:integer;
 begin
 citylist.Clear;
 codelist.Clear;
-filter:=utf8encode(filter);
+filter:=Condutf8encode(filter);
 buf:='select locid,location,type from cdc_location where country = "'+countrycode+'" ';
 if filter<>'' then buf:=buf+' and location like "'+filter+'" ';
 buf:=buf+' order by location limit '+inttostr(limit);
@@ -1421,7 +1421,7 @@ while i<db.RowCount do begin
     prev:=buf;
     k:=0;
   end;
-  bufutf8:=utf8decode(buf);
+  bufutf8:=Condutf8decode(buf);
   citylist.add(bufutf8);
   inc(i);
 end;
@@ -1454,7 +1454,7 @@ while i<db.RowCount do begin
     prev:=buf;
     k:=0;
   end;
-  citylist.add(utf8decode(buf));
+  citylist.add(Condutf8decode(buf));
   inc(i);
 end;
 end;
@@ -1487,7 +1487,7 @@ if locid=0 then begin // Add new location
        'values ('+
        id+','+
        '"'+country+'",'+
-       '"'+utf8encode(location)+'",'+
+       '"'+Condutf8encode(location)+'",'+
        '"'+loctype+'",'+
        lat+','+
        lon+','+
