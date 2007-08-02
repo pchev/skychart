@@ -329,6 +329,7 @@ if fileexists(cmain.EarthMapFile)and(cmain.EarthMapFile<>ObsMapfile) then begin
    ObsMapfile:=cmain.EarthMapFile;
    ZoomImage1.Picture.LoadFromFile(ObsMapfile);
 end else ZoomImage1.PictureChange(self);
+ZoomImage1.Zoom:=ZoomImage1.ZoomMin;
 SetScrollBar;
 Hscrollbar.Position:=ZoomImage1.SizeX div 2;
 Vscrollbar.Position:=ZoomImage1.SizeY div 2;
