@@ -212,7 +212,7 @@ RotateImage(OriginalIntfImg,RotatedIntfImg,Rotation,point(bmp.Width div 2, bmp.H
 
 // create bitmap from rotated raw image
 rbmp.FreeImage;
-RotatedIntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+RotatedIntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
 rbmp.Handle:=ImgMaskHandle;
 rbmp.FreeImage;
 rbmp.Handle:=ImgHandle;
@@ -278,7 +278,7 @@ else begin
 
   // create bitmap from rotated raw image
   img2.FreeImage;
-  ResizedIntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+  ResizedIntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
   img2.Handle:=ImgMaskHandle;
   img2.FreeImage;
   img2.Handle:=ImgHandle;
@@ -317,7 +317,7 @@ FlipIntfImg:=img.CreateIntfImage;
 FlipImage(OriginalIntfImg,FlipIntfImg,flipx,flipy);
 
 img.FreeImage;
-FlipIntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+FlipIntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
 img.Handle:=ImgMaskHandle;
 img.FreeImage;
 img.Handle:=ImgHandle;
@@ -358,7 +358,7 @@ begin
 
   // create bitmap from rotated raw image
   img1.FreeImage;
-  IntfImg1.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+  IntfImg1.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
   img1.Handle:=ImgMaskHandle;
   img1.FreeImage;
   img1.Handle:=ImgHandle;
@@ -400,7 +400,7 @@ IntfImg:=img.CreateIntfImage;
 LumConImage(OriginalIntfImg,IntfImg, Luminosity, Contrast);
 
 img.FreeImage;
-IntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
 img.Handle:=ImgMaskHandle;
 img.FreeImage;
 img.Handle:=ImgHandle;
