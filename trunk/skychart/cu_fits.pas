@@ -765,7 +765,7 @@ imabmp.width:=1;
 IntfImg:=TLazIntfImage.Create(0,0);
 IntfImg.LoadFromBitmap(imabmp.Handle,0);
 GetIntfImg(IntfImg);
-IntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
 imabmp.freeimage;
 imabmp.Handle:=ImgHandle;
 //imabmp.MaskHandle:=ImgMaskHandle;
