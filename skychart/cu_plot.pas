@@ -366,7 +366,7 @@ begin
 if IntfImgReady then begin
   IntfImgReady:=false;
   cbmp.FreeImage;
-  IntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
+  IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
   cbmp.Handle:=ImgMaskHandle;
   cbmp.FreeImage;
   cbmp.Handle:=ImgHandle;
