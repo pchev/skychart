@@ -3610,23 +3610,23 @@ LazarusResources.Add('Tf_splash','FORMDATA',[
   +'oXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXo'
   +'XoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoX'
   +'oXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoXoX,.~ u 2'
-  +' "'#10'};'#10#7'Stretch'#9#0#0#6'TLabel'#6'Label1'#4'Left'#3'}'#1#6'Height'
-  +#2#14#3'Top'#2'l'#5'Width'#2'<'#9'Alignment'#7#14'taRightJustify'#7'Anchors'
-  +#11#5'akTop'#7'akRight'#0#7'Caption'#6#10'Sky Charts'#10'Font.Color'#7#7'clW'
-  +'hite'#11'Font.Height'#2#230#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8
-  +#0#0#6'TLabel'#6'Label2'#4'Left'#2#16#6'Height'#2#14#3'Top'#3#155#0#5'Width'
-  +#2'8'#7'Caption'#6#10'Version 3 '#10'Font.Color'#7#7'clWhite'#11'Font.Height'
-  +#2#236#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8#0#0#6'TLabel'#6'Label'
-  +'3'#4'Left'#2#16#6'Height'#2#14#3'Top'#3#240#0#5'Width'#3#208#1#7'Anchors'#11
-  +#6'akLeft'#7'akRight'#8'akBottom'#0#8'AutoSize'#8#7'Caption'#6#14'Copyright '
-  +'(C) '#10'Font.Color'#7#7'clWhite'#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'
-  +#4'Left'#2#16#6'Height'#2'*'#3'Top'#3#190#0#5'Width'#3#204#1#7'Anchors'#11#6
-  +'akLeft'#7'akRight'#8'akBottom'#0#8'AutoSize'#8#7'Caption'#6'yThis program i'
-  +'s free software; you can redistribute it and/or modify it under the terms o'
-  +'f the GNU General Public License'#10'Font.Color'#7#7'clWhite'#11'ParentColo'
-  +'r'#8#8'WordWrap'#9#0#0#6'TLabel'#9'LabelDate'#4'Left'#3#128#0#6'Height'#2#14
-  +#3'Top'#3#157#0#5'Width'#2#27#7'Caption'#6#4'Date'#10'Font.Color'#7#7'clWhit'
-  +'e'#11'Font.Height'#2#241#11'ParentColor'#8#7'Visible'#8#0#0#0#6'TTimer'#6'T'
-  +'imer1'#7'Enabled'#8#8'Interval'#3#184#11#7'OnTimer'#7#11'Timer1Timer'#4'lef'
-  +'t'#2#8#3'top'#2#16#0#0#0
+  +' "'#10'};'#10#7'Stretch'#9#0#0#6'TLabel'#6'Label1'#4'Left'#3#17#1#6'Height'
+  +#2'"'#3'Top'#2'l'#5'Width'#3#168#0#9'Alignment'#7#14'taRightJustify'#7'Ancho'
+  +'rs'#11#5'akTop'#7'akRight'#0#7'Caption'#6#10'Sky Charts'#10'Font.Color'#7#7
+  +'clWhite'#11'Font.Height'#2#230#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'
+  +#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#16#6'Height'#2#27#3'Top'#3#155#0#5'Widt'
+  +'h'#2'|'#7'Caption'#6#10'Version 3 '#10'Font.Color'#7#7'clWhite'#11'Font.Hei'
+  +'ght'#2#236#10'Font.Style'#11#6'fsBold'#0#11'ParentColor'#8#0#0#6'TLabel'#6
+  +'Label3'#4'Left'#2#16#6'Height'#2#14#3'Top'#3#240#0#5'Width'#3#208#1#7'Ancho'
+  +'rs'#11#6'akLeft'#7'akRight'#8'akBottom'#0#8'AutoSize'#8#7'Caption'#6#14'Cop'
+  +'yright (C) '#10'Font.Color'#7#7'clWhite'#11'ParentColor'#8#0#0#6'TLabel'#6
+  +'Label4'#4'Left'#2#16#6'Height'#2'*'#3'Top'#3#190#0#5'Width'#3#204#1#7'Ancho'
+  +'rs'#11#6'akLeft'#7'akRight'#8'akBottom'#0#8'AutoSize'#8#7'Caption'#6'yThis '
+  +'program is free software; you can redistribute it and/or modify it under th'
+  +'e terms of the GNU General Public License'#10'Font.Color'#7#7'clWhite'#11'P'
+  +'arentColor'#8#8'WordWrap'#9#0#0#6'TLabel'#9'LabelDate'#4'Left'#3#128#0#6'He'
+  +'ight'#2#20#3'Top'#3#157#0#5'Width'#2'&'#7'Caption'#6#4'Date'#10'Font.Color'
+  +#7#7'clWhite'#11'Font.Height'#2#241#11'ParentColor'#8#7'Visible'#8#0#0#0#6'T'
+  +'Timer'#6'Timer1'#7'Enabled'#8#8'Interval'#3#184#11#7'OnTimer'#7#11'Timer1Ti'
+  +'mer'#4'left'#2#8#3'top'#2#16#0#0#0
 ]);
