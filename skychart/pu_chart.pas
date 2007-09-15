@@ -1524,10 +1524,10 @@ end;
 
 procedure Tf_chart.identlabelClick(Sender: TObject);
 begin
-f_detail.text:=FormatDesc;
 if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
 f_detail.show;
+f_detail.text:=FormatDesc;
 f_detail.setfocus;
 f_detail.BringToFront;
 end;
