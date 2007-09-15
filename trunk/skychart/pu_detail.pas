@@ -31,7 +31,7 @@ interface
 uses u_translation, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
-  Buttons, SynEdit, IpHtml;
+  Buttons, IpHtml;
 
 type
   Tstr1func = procedure(txt:string) of object;
