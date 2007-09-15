@@ -30,7 +30,7 @@ interface
 
 uses u_translation, u_constant, u_util,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources, Buttons, SynEdit;
+  ExtCtrls, LResources, Buttons;
 
 type
 
