@@ -1087,11 +1087,37 @@ end;
 end;
 
 procedure TSplot.PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
-{ tie this routine into plotting outline colours depending on object type.
- ie, different colours if we are plotting milky way, refelction or emmission nebula outlines
- ----> no, this must be done at the generation of the catalog by catgen.
-}
 var xx,yy:integer;
+function SingularPolygon: boolean;
+var i,j,k: integer;
+    newpoint: boolean;
+    x: array[1..3] of double;
+    y: array[1..3] of double;
+begin
+result:=true;
+k:=1;
+for j:=1 to 3 do begin
+  x[j]:=maxdouble;
+  y[j]:=maxdouble;
+end;
+for i:=0 to  outlinenum -1 do begin
+  newpoint:=false;
+  for j:=1 to 3 do begin
+    if outlinepts[i].x<>x[j] then newpoint:=true;
+    if outlinepts[i].y<>y[j] then newpoint:=true;
+    if newpoint then break;
+  end;
+  if newpoint then begin
+     x[k]:=outlinepts[i].x;
+     y[k]:=outlinepts[i].y;
+     inc(k);
+  end;
+  if k>3 then begin
+    result:=false;
+    break;
+  end;
+end;
+end;
 procedure addpoint(x,y:integer);
 begin
 // add a point to the line
@@ -1160,19 +1186,12 @@ if not cfgplot.Invisible then begin
        end else begin
           if processpoint(xx,yy) then addpoint(outx1,outy1);
        end;
-       if outlineinscreen and(outlinenum>=2) then begin
+       if outlineinscreen and(outlinenum>=2)and(not SingularPolygon) then begin
          // object is to be draw
          dec(outlinenum);
          if outlinecol=cfgplot.bgColor then outlinecol:=outlinecol xor clWhite;
          cnv.Pen.Mode:=pmCopy;
          cnv.Pen.Width:=outlinelw*cfgchart.drawpen;
-
-{ This needs careful thought. Ideally, the outline line colour needs to be the
-  same as the object type, eg SNRs, Barnards, and bright nebs.
-  Sort out what type of object is being plotted as MilkyWay will also be
-  displayed in this colour
-  ????
-}
          cnv.Pen.Color:=outlinecol;
          cnv.Brush.Style:=bsSolid;
          cnv.Brush.Color:=outlinecol;
