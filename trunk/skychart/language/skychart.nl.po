@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-05-16 18:43+0100\n"
+"PO-Revision-Date: 2007-07-07 10:46+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -105,7 +105,7 @@ msgstr "(nuttig om een flux weer te geven)"
 
 #: u_translation:rsnopropermo
 msgid ", no proper motion"
-msgstr ""
+msgstr ", geen eigenbeweging"
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -201,7 +201,7 @@ msgstr "Leeftijd"
 
 #: u_translation:rsalignment
 msgid "Alignment"
-msgstr ""
+msgstr "Uitlijning"
 
 #: u_translation:rsall
 msgid "All"
@@ -249,7 +249,7 @@ msgstr "Anoniem password"
 
 #: u_translation:rsapparent
 msgid "Apparent"
-msgstr ""
+msgstr "Schijnbare"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -297,7 +297,7 @@ msgstr "Planetoïden van het bestand"
 
 #: u_translation:rsastrometricj
 msgid "Astrometric J2000"
-msgstr ""
+msgstr "Astrometrisch J2000"
 
 #: u_translation:rsastronomical
 msgid "Astronomical"
@@ -449,7 +449,7 @@ msgstr "Helderheid"
 
 #: u_translation:rsbuildcatalog
 msgid "Build Catalog"
-msgstr "Samengestelde catalogus"
+msgstr "creëer catalogus"
 
 #: u_translation:rscdcnebulaeca
 msgid "CDC Deep Sky Catalog Setting"
@@ -529,7 +529,7 @@ msgstr "CdC format, verkies de compacte versie"
 
 #: u_translation:rscenter
 msgid "Center"
-msgstr ""
+msgstr "Centreer"
 
 #: u_translation:rscenterobject
 msgid "Center Object"
@@ -689,7 +689,7 @@ msgstr "Commando om bestand te creëeren"
 
 #: u_translation:rscommonname
 msgid "Common Name"
-msgstr "Triviale naam"
+msgstr "Naam"
 
 #: u_translation:rscompassroses
 msgid "Compass rose size"
@@ -1369,7 +1369,7 @@ msgstr "Ephemeriden kalender"
 
 #: u_translation:rsepoch
 msgid "Epoch"
-msgstr ""
+msgstr "Epoche"
 
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
@@ -1457,7 +1457,7 @@ msgstr "Bezig met afsluiten ..."
 
 #: u_translation:rsexpertmode
 msgid "Expert mode"
-msgstr ""
+msgstr "Expert modus"
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1593,7 +1593,7 @@ msgstr "Fonts"
 
 #: u_translation:rsforalargecat
 msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
-msgstr "Voor een grote catalogus altijd 'Binary' seleceteren. Voor een kleine dataset die frequent verandert, selecteer 'Text'. Dit maakt het mogelijk het bestand te bewerken en het resultaat onmiddelijk op de kaart toonbaar te maken zonder de noodzaak deze utility nog eens te draaien."
+msgstr "Voor een grote catalogus altijd 'binair geïndiceerde catalogus' seleceteren. Voor een kleine dataset die frequent verandert, selecteer ''Tekstbestand catalogus'. Dit maakt het mogelijk het bestand te bewerken en het resultaat onmiddelijk op de kaart toonbaar te maken zonder de noodzaak deze utility nog eens te draaien."
 
 #: u_translation:rsfriday
 msgid "Fri."
@@ -1965,11 +1965,11 @@ msgstr "Taalselectie"
 
 #: u_translation:rslatinname
 msgid "Latin Name"
-msgstr ""
+msgstr "Latijnse naam"
 
 #: u_translation:rslatitude
 msgid "Latitude"
-msgstr "Geografische breedte"
+msgstr "breedtegraad"
 
 #: u_translation:rsleft
 msgid "Left"
@@ -2093,7 +2093,7 @@ msgstr "Lokale horizon-bestandsnaam:"
 
 #: u_translation:rslocalsideral
 msgid "Local Sideral Time"
-msgstr ""
+msgstr "Locale Sterrentijd"
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -2105,7 +2105,7 @@ msgstr "Logaritmische schaal"
 
 #: u_translation:rslongitude
 msgid "Longitude"
-msgstr "Geografische lengte"
+msgstr "lengtegraad"
 
 #: u_translation:rslongitudeasc
 msgid "Longitude ascending Node"
@@ -2113,7 +2113,7 @@ msgstr "Lengte van klimmende knoop"
 
 #: u_translation:rslosange
 msgid "Losange"
-msgstr "Losange"
+msgstr "ruit"
 
 #: u_translation:rslowsurfacebr
 msgid "Low surface brightness"
@@ -2189,7 +2189,7 @@ msgstr "Magnitude verschil"
 
 #: u_translation:rsmaillist
 msgid "MailList"
-msgstr "E-mail lijst"
+msgstr "Discussiegroep (Yahoo)"
 
 #: u_translation:rsmainbar
 msgid "Main Bar"
@@ -2229,11 +2229,11 @@ msgstr "Maximum magnitude"
 
 #: u_translation:rsmean
 msgid "Mean"
-msgstr ""
+msgstr "Gemiddeld"
 
 #: u_translation:rsmeanj2000
 msgid "Mean J2000"
-msgstr ""
+msgstr "Gemiddeld J2000"
 
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
@@ -2241,7 +2241,7 @@ msgstr "Gemiddelde afwijking"
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
-msgstr ""
+msgstr "Gemiddeld voor de datum"
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -2641,7 +2641,7 @@ msgstr "Output catalogus opties"
 
 #: u_translation:rspagemarginin
 msgid "Page Margin in millimeter"
-msgstr "Pagina marge in millimeter"
+msgstr "Paginamarge in millimeter"
 
 #: u_translation:rsparallax
 msgid "Parallax"
@@ -3073,7 +3073,7 @@ msgstr "Resolutie:"
 
 #: u_translation:rsreturn
 msgid "Return"
-msgstr "Return"
+msgstr "terug"
 
 #: u_translation:rsrevertaltkno
 msgid "Reverse Alt knob"
@@ -3516,6 +3516,7 @@ msgid "Spectral Class"
 msgstr "Spectrale klasse"
 
 #: u_translation:rsspline
+#, fuzzy
 msgid "Spline"
 msgstr "Spline"
 
@@ -3813,7 +3814,7 @@ msgstr "Type van variabele"
 
 #: u_translation:rstypeofcoordi
 msgid "Type of coordinates"
-msgstr ""
+msgstr "Coördinaattypen"
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -3921,9 +3922,10 @@ msgstr "Gebruik systeemtijd"
 
 #: u_translation:rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr ""
+msgstr "Gebruik de eigenbeweging om de positie te corrigeren voor de gegeven epoche"
 
 #: u_translation:rsusethisfield
+#, fuzzy
 msgid "Use this field as an Alternate Name"
 msgstr "Gebruik dit veld voor een extra naam"
 
@@ -3981,7 +3983,7 @@ msgstr "Waarschuwing! Berekening van"
 
 #: u_translation:rswarningthecu
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
-msgstr "Waarschuwing! De huidige datum en observatielocatie zijn mogelijk veranderd van de standaard waarde. U moet nu Nee antwoorden en de %s knop gerbuiken om terug te keren naar uw standaardwaarden, anders gaan ze verloren. Wilt u verder gaan?"
+msgstr "Waarschuwing! De standaard waarde voor huidige datum en/of observatielocatie zijn mogelijk gewijzigd. U kunt nu Nee antwoorden en de %s knop gebruiken om terug te keren naar uw vorige standaardwaarden, anders gaan ze verloren. Wilt u verder gaan?"
 
 #: u_translation:rswarningyouar2
 msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
@@ -4088,6 +4090,7 @@ msgid "degrees"
 msgstr "graden"
 
 #: u_translation:rsdesc
+#, fuzzy
 msgid "desc:"
 msgstr "desc:"
 
@@ -4137,15 +4140,15 @@ msgstr "max"
 
 #: u_translation:rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr ""
+msgstr "gemiddelde equator, equinox, en epoche voor de datum"
 
 #: u_translation:rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr ""
+msgstr "gemiddelde equinox J2000, epoche van de datum"
 
 #: u_translation:rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr ""
+msgstr "gemiddelde equinox en epoche J2000"
 
 #: u_translation:rsmin2
 msgid "min"
@@ -4177,7 +4180,7 @@ msgstr "tot"
 
 #: u_translation:rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr ""
+msgstr "werkelijke equator, equinox, en epoche van de datum"
 
 #: u_translation:rsturnsdegree
 msgid "turns / degree"
