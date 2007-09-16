@@ -97,10 +97,6 @@ msgstr "%sTabela %s não existe! %sPor favor corrija o erro e refaça."
 msgid "%sTable exist %s"
 msgstr "%sTabela existe %s"
 
-#: u_translation:rsnegativewest
-msgid "(Negative West of GreenWich)"
-msgstr "(Oeste Negativo de GreenWich)"
-
 #: u_translation:rsrequirexplan
 msgid "(require Xplanet 1.2.0)"
 msgstr "(requer Xplanet 1.2.0)"
@@ -108,6 +104,10 @@ msgstr "(requer Xplanet 1.2.0)"
 #: u_translation:rsusefultorepr
 msgid "(useful to represent a flux)"
 msgstr "(útil para representar um fluxo)"
+
+#: u_translation:rsnopropermo
+msgid ", no proper motion"
+msgstr ""
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -201,6 +201,10 @@ msgstr "Pesquisa Avançada"
 msgid "Age"
 msgstr "Idade"
 
+#: u_translation:rsalignment
+msgid "Alignment"
+msgstr ""
+
 #: u_translation:rsall
 msgid "All"
 msgstr "Tudo"
@@ -233,6 +237,10 @@ msgstr "Alt/Az Mountagem"
 msgid "Altitude"
 msgstr "Altitude"
 
+#: u_translation:rsalwaysshowco
+msgid "Always show compass rose"
+msgstr ""
+
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
 msgstr "Movimento Próprio Anual "
@@ -240,6 +248,10 @@ msgstr "Movimento Próprio Anual "
 #: u_translation:rsanonymouspas
 msgid "Anonymous password"
 msgstr "Senha anônima"
+
+#: u_translation:rsapparent
+msgid "Apparent"
+msgstr ""
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -284,6 +296,10 @@ msgstr "Elementos de Asteróides em formato MPC (uma URL por linha)"
 #: u_translation:rsasteroidsfro
 msgid "Asteroids from the file"
 msgstr "Asteróides do arquivo"
+
+#: u_translation:rsastrometricj
+msgid "Astrometric J2000"
+msgstr ""
 
 #: u_translation:rsastronomical
 msgid "Astronomical"
@@ -388,6 +404,10 @@ msgstr "Preto/Branco"
 #: u_translation:rsblackwhiteli
 msgid "Black/White, Line mode"
 msgstr "Preto/Branco, modo linha"
+
+#: u_translation:rsblinkingpict
+msgid "Blinking Picture"
+msgstr ""
 
 #: u_translation:rsblue
 msgid "Blue"
@@ -508,6 +528,10 @@ msgstr "Estrelas CdC"
 #: u_translation:rscdcformatpre
 msgid "CdC format, prefere the compact version"
 msgstr "Formato CdC, preferir a versão compacta"
+
+#: u_translation:rscenter
+msgid "Center"
+msgstr ""
 
 #: u_translation:rscenterobject
 msgid "Center Object"
@@ -669,6 +693,10 @@ msgstr "Comando para usar no processo do arquivo."
 msgid "Common Name"
 msgstr "Nome comum"
 
+#: u_translation:rscompassroses
+msgid "Compass rose size"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "Componente 1 Magnitude"
@@ -800,6 +828,10 @@ msgstr "Raio do Núcleo"
 #: u_translation:rscorrelated
 msgid "Correlated"
 msgstr "Correlacionado"
+
+#: u_translation:rscountrytimez
+msgid "Country Timezone"
+msgstr ""
 
 #: u_translation:rscreatedataba
 msgid "Create Database"
@@ -944,10 +976,6 @@ msgstr "Dia"
 #: u_translation:rsdaytime
 msgid "Day Time"
 msgstr "Dia Hora"
-
-#: u_translation:rsdaylightsavi
-msgid "Daylight Saving Time in effect "
-msgstr "Salvando hora em efeito da luz diurna"
 
 #: u_translation:rsdecimalsouth
 msgid "Decimal South Polar Distance"
@@ -1341,6 +1369,10 @@ msgstr "Fim do processamento: %s asteróides"
 msgid "Ephemeris Calendar"
 msgstr "Calendário de Efemérides"
 
+#: u_translation:rsepoch
+msgid "Epoch"
+msgstr ""
+
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
 msgstr "Época (JD)"
@@ -1365,10 +1397,6 @@ msgstr "Coordenada Equatorial"
 msgid "Equatorial Mount"
 msgstr "Montagem Equatorial"
 
-#: u_translation:rsequatorialan
-msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
-msgstr "Coordenadas do Equinócio Equatorial e  Eclíptica da Carta"
-
 #: u_translation:rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Coordenadas Equatorial, equinócio: %s"
@@ -1376,10 +1404,6 @@ msgstr "Coordenadas Equatorial, equinócio: %s"
 #: u_translation:rsequinox2
 msgid "Equinox"
 msgstr "Equinócio"
-
-#: u_translation:rsequinoxofthe
-msgid "Equinox of the date"
-msgstr "Equinócio da data"
 
 #: u_translation:rsequinox
 msgid "Equinox:"
@@ -1432,6 +1456,10 @@ msgstr "Saída"
 #: u_translation:rsexiting
 msgid "Exiting ..."
 msgstr "Saindo ..."
+
+#: u_translation:rsexpertmode
+msgid "Expert mode"
+msgstr ""
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1556,10 +1584,6 @@ msgstr "Primeiro Char"
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
 msgstr "Preto fixo"
-
-#: u_translation:rsfixedequinox
-msgid "Fixed Equinox"
-msgstr "Equinócio fixo"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -1777,6 +1801,10 @@ msgstr "Servidor Host INDI"
 msgid "INDI server Port"
 msgstr "Porta do servidor INDI"
 
+#: u_translation:rsyouliveonabi
+msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
+msgstr ""
+
 #: u_translation:rsillum
 msgid "Illum."
 msgstr "Illum."
@@ -1937,6 +1965,10 @@ msgstr "Linguagem"
 msgid "Language selection"
 msgstr "Seleção da linguagem"
 
+#: u_translation:rslatinname
+msgid "Latin Name"
+msgstr ""
+
 #: u_translation:rslatitude
 msgid "Latitude"
 msgstr "Latitude"
@@ -2061,9 +2093,9 @@ msgstr "Horizonte Local"
 msgid "Local Horizon File Name : "
 msgstr "Arquivo do Horizonte Local : "
 
-#: u_translation:rslocaltime
-msgid "Local Time = "
-msgstr "Hora Local = "
+#: u_translation:rslocalsideral
+msgid "Local Sideral Time"
+msgstr ""
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -2197,9 +2229,21 @@ msgstr "Maximizar"
 msgid "Maximum magnitude"
 msgstr "Magnitude máxima"
 
+#: u_translation:rsmean
+msgid "Mean"
+msgstr ""
+
+#: u_translation:rsmeanj2000
+msgid "Mean J2000"
+msgstr ""
+
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Anomalia baixa"
+
+#: u_translation:rsmeanofthedat
+msgid "Mean of the date"
+msgstr ""
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -2260,6 +2304,10 @@ msgstr "Lua"
 #: u_translation:rsmorenebulae
 msgid "More Deep Sky"
 msgstr "Céu mais profundo"
+
+#: u_translation:rsmoreoptions
+msgid "More Options"
+msgstr ""
 
 #: u_translation:rsmorestars
 msgid "More Stars"
@@ -2360,6 +2408,10 @@ msgstr "Nenhum dado encontrado de Asteróide!%sPor favor carregue o primeiro arq
 #: u_translation:rsnomargin
 msgid "No Margin"
 msgstr "Nenhuma Margem"
+
+#: u_translation:rsnoprinterfou
+msgid "No Printer found!"
+msgstr ""
 
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
@@ -2837,6 +2889,10 @@ msgstr "Processando... %s"
 msgid "Program Data "
 msgstr "Dados do Programa "
 
+#: u_translation:rsprograminfor
+msgid "Program Information"
+msgstr ""
+
 #: u_translation:rsprogrammer
 msgid "Programmer:"
 msgstr "Programador:"
@@ -2969,6 +3025,10 @@ msgstr "Nebulosa reflexão"
 msgid "Refresh"
 msgstr "Repetir"
 
+#: u_translation:rsreleasenotes
+msgid "Release Notes"
+msgstr ""
+
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
 msgstr "Remover Todos os Círculos"
@@ -3018,20 +3078,20 @@ msgid "Return"
 msgstr "Retornar"
 
 #: u_translation:rsrevertaltkno
-msgid "Revert Alt knob"
-msgstr "Reverter Alt botão"
+msgid "Reverse Alt knob"
+msgstr ""
 
 #: u_translation:rsrevertazknob
-msgid "Revert Az knob"
-msgstr "Reverter Az botão"
+msgid "Reverse Az knob"
+msgstr ""
 
 #: u_translation:rsrevertdeckno
-msgid "Revert DEC knob"
-msgstr "Reverter DEC botão"
+msgid "Reverse DEC knob"
+msgstr ""
 
 #: u_translation:rsrevertraknob
-msgid "Revert RA knob"
-msgstr "Reverter RA botão"
+msgid "Reverse RA knob"
+msgstr ""
 
 #: u_translation:rsright
 msgid "Right"
@@ -3301,6 +3361,10 @@ msgstr "Mostrar Eclíptica"
 msgid "Show Galactic Equator"
 msgstr "Mostrar Equador Galáctico"
 
+#: u_translation:rsshowgrid
+msgid "Show Grid"
+msgstr ""
+
 #: u_translation:rsshowgridlabe
 msgid "Show Grid Label"
 msgstr "Mostrar Rótulo da Grade"
@@ -3368,10 +3432,6 @@ msgstr "Mostrar esta figura"
 #: u_translation:rsshowhidedssi
 msgid "Show/Hide DSS image"
 msgstr "Exibir/Ocultar Imagem DSS"
-
-#: u_translation:rssideraltime
-msgid "Sideral Time"
-msgstr "Hora Sideral"
 
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
@@ -3472,10 +3532,6 @@ msgstr "Quadrado"
 #: u_translation:rsstandardcolo
 msgid "Standard  Color"
 msgstr "Cor Padrão"
-
-#: u_translation:rsstandardequi
-msgid "Standard Equinox"
-msgstr "Equinócio padrão"
 
 #: u_translation:rsstar
 msgid "Star"
@@ -3757,6 +3813,10 @@ msgstr "Tipo"
 msgid "Type of Variability"
 msgstr "Variabildade de Tipo"
 
+#: u_translation:rstypeofcoordi
+msgid "Type of coordinates"
+msgstr ""
+
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
 msgstr "Tipo de objeto para adicionar na lista"
@@ -3862,8 +3922,8 @@ msgid "Use system time"
 msgstr "Usar hora do sistema"
 
 #: u_translation:rsusetheproper
-msgid "Use the proper motion to correct the position for the current date"
-msgstr "Usar o próprio movimento para corrigir a posiçao para a data atual"
+msgid "Use the proper motion to correct the position for the given epoch"
+msgstr ""
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"
@@ -3925,6 +3985,10 @@ msgstr "Cuidado! Cálculo de"
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
 msgstr "Cuidado! A data atual e o local do observatório podem ter mudado do valor padrão. Você tem que responder Nenhum e tem que usar o %s botão agora para retornar seus valores normais, caso contrário eles podem ser perdidos. Você quer continuar ? "
 
+#: u_translation:rswarningyouar2
+msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
+msgstr ""
+
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgstr "Cuidado!%sVocê está a ponto de destruir o banco de dados %s e todo o seu conteúdo, inclusive o conteúdo que não é relacionado a este programa.%sVocê está seguro e quer continuar?"
@@ -3968,10 +4032,6 @@ msgstr "Ano"
 #: u_translation:rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
 msgstr "Você está pronto agora para mostrar o asteróide para este período de tempo."
-
-#: u_translation:rsyouliveonabi
-msgid "You live on a big mountain near the ocean shore and you like to observe the distorted image of the object below the horizon."
-msgstr "Você vive numa grande montanha perto da costa do oceano e gosta de observar a imagem distorcida do objeto debaixo do horizonte."
 
 #: u_translation:rszenith
 msgid "Zenith"
@@ -4077,6 +4137,18 @@ msgstr "magnitude mais débil que as estrelas."
 msgid "max"
 msgstr "max"
 
+#: u_translation:rsmeanequatore
+msgid "mean equator, equinox and epoch of the date"
+msgstr ""
+
+#: u_translation:rsmeanequinoxj
+msgid "mean equinox J2000, epoch of the date"
+msgstr ""
+
+#: u_translation:rsmeanequinoxa
+msgid "mean equinox and epoch J2000"
+msgstr ""
+
 #: u_translation:rsmin2
 msgid "min"
 msgstr "min"
@@ -4104,6 +4176,10 @@ msgstr "arquivo temporário"
 #: u_translation:rsto
 msgid "to"
 msgstr "a"
+
+#: u_translation:rstrueequatore
+msgid "true equator, equinox and epoch of the date"
+msgstr ""
 
 #: u_translation:rsturnsdegree
 msgid "turns / degree"

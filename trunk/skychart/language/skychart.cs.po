@@ -96,10 +96,6 @@ msgstr "%sTabulka %s neexistuje! %sOpravte prosím chybu a opakujte akci znovu."
 msgid "%sTable exist %s"
 msgstr "%sTabulka existuje %s"
 
-#: u_translation:rsnegativewest
-msgid "(Negative West of GreenWich)"
-msgstr "(záporné na západ od GreenWich)"
-
 #: u_translation:rsrequirexplan
 msgid "(require Xplanet 1.2.0)"
 msgstr "(vyžaduje Xplanet 1.2.0)"
@@ -107,6 +103,10 @@ msgstr "(vyžaduje Xplanet 1.2.0)"
 #: u_translation:rsusefultorepr
 msgid "(useful to represent a flux)"
 msgstr "(vhodný pro vytváření proudů)"
+
+#: u_translation:rsnopropermo
+msgid ", no proper motion"
+msgstr ""
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -200,6 +200,10 @@ msgstr "Pokročilé hledání"
 msgid "Age"
 msgstr "Stáří"
 
+#: u_translation:rsalignment
+msgid "Alignment"
+msgstr ""
+
 #: u_translation:rsall
 msgid "All"
 msgstr "Vše"
@@ -232,6 +236,10 @@ msgstr "Azimutální montáž"
 msgid "Altitude"
 msgstr "Výška"
 
+#: u_translation:rsalwaysshowco
+msgid "Always show compass rose"
+msgstr ""
+
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
 msgstr "Roční pohyb"
@@ -239,6 +247,10 @@ msgstr "Roční pohyb"
 #: u_translation:rsanonymouspas
 msgid "Anonymous password"
 msgstr "Anonymní heslo"
+
+#: u_translation:rsapparent
+msgid "Apparent"
+msgstr ""
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -283,6 +295,10 @@ msgstr "Elementy asteroidů ve formátu MPC (jedno URL na řádek)"
 #: u_translation:rsasteroidsfro
 msgid "Asteroids from the file"
 msgstr "Asteroidy ze souboru"
+
+#: u_translation:rsastrometricj
+msgid "Astrometric J2000"
+msgstr ""
 
 #: u_translation:rsastronomical
 msgid "Astronomical"
@@ -387,6 +403,10 @@ msgstr "Černá/bílá"
 #: u_translation:rsblackwhiteli
 msgid "Black/White, Line mode"
 msgstr "Černá/bílá, linie"
+
+#: u_translation:rsblinkingpict
+msgid "Blinking Picture"
+msgstr ""
 
 #: u_translation:rsblue
 msgid "Blue"
@@ -507,6 +527,10 @@ msgstr "Hvězda"
 #: u_translation:rscdcformatpre
 msgid "CdC format, prefere the compact version"
 msgstr "Formát, preferovaná je kompaktní verze"
+
+#: u_translation:rscenter
+msgid "Center"
+msgstr ""
 
 #: u_translation:rscenterobject
 msgid "Center Object"
@@ -668,6 +692,10 @@ msgstr "Program na zpracování:"
 msgid "Common Name"
 msgstr "Běžné jméno"
 
+#: u_translation:rscompassroses
+msgid "Compass rose size"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "Magnituda 1. složky"
@@ -799,6 +827,10 @@ msgstr "Poloměr jádra"
 #: u_translation:rscorrelated
 msgid "Correlated"
 msgstr "Korelované"
+
+#: u_translation:rscountrytimez
+msgid "Country Timezone"
+msgstr ""
 
 #: u_translation:rscreatedataba
 msgid "Create Database"
@@ -943,10 +975,6 @@ msgstr "Den"
 #: u_translation:rsdaytime
 msgid "Day Time"
 msgstr "Čas"
-
-#: u_translation:rsdaylightsavi
-msgid "Daylight Saving Time in effect "
-msgstr "Letní čas"
 
 #: u_translation:rsdecimalsouth
 msgid "Decimal South Polar Distance"
@@ -1340,6 +1368,10 @@ msgstr "Zpracování dokončeno: % asteroidů"
 msgid "Ephemeris Calendar"
 msgstr "Efemeridy"
 
+#: u_translation:rsepoch
+msgid "Epoch"
+msgstr ""
+
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
 msgstr "Epocha (JD)"
@@ -1364,10 +1396,6 @@ msgstr "Ekvatoriální souřadnice"
 msgid "Equatorial Mount"
 msgstr "Ekvatoriální montáž"
 
-#: u_translation:rsequatorialan
-msgid "Equatorial and Ecliptic Chart  Coordinates Equinox"
-msgstr "Ekvatoriální a ekliptické souřadnice - rovnodennost"
-
 #: u_translation:rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Ekvatoriální souřadnice, rovnodenost: %s"
@@ -1375,10 +1403,6 @@ msgstr "Ekvatoriální souřadnice, rovnodenost: %s"
 #: u_translation:rsequinox2
 msgid "Equinox"
 msgstr "Rovnodennost"
-
-#: u_translation:rsequinoxofthe
-msgid "Equinox of the date"
-msgstr "Rovnodenost podle data"
 
 #: u_translation:rsequinox
 msgid "Equinox:"
@@ -1431,6 +1455,10 @@ msgstr "Konec"
 #: u_translation:rsexiting
 msgid "Exiting ..."
 msgstr "Ukončuji..."
+
+#: u_translation:rsexpertmode
+msgid "Expert mode"
+msgstr ""
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1555,10 +1583,6 @@ msgstr "První znak"
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
 msgstr "Černá (neměnná)"
-
-#: u_translation:rsfixedequinox
-msgid "Fixed Equinox"
-msgstr "Rovnodennost (neměnná)"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -1776,6 +1800,10 @@ msgstr "Server INDI"
 msgid "INDI server Port"
 msgstr "Port serveru INDI"
 
+#: u_translation:rsyouliveonabi
+msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
+msgstr ""
+
 #: u_translation:rsillum
 msgid "Illum."
 msgstr "Osvětl."
@@ -1936,6 +1964,10 @@ msgstr "Jazyk"
 msgid "Language selection"
 msgstr "Výběr jazyka"
 
+#: u_translation:rslatinname
+msgid "Latin Name"
+msgstr ""
+
 #: u_translation:rslatitude
 msgid "Latitude"
 msgstr "Zeměpisná šířka"
@@ -2060,9 +2092,9 @@ msgstr "Místní horizont"
 msgid "Local Horizon File Name : "
 msgstr "Soubor místního horizontu:"
 
-#: u_translation:rslocaltime
-msgid "Local Time = "
-msgstr "Místní čas = "
+#: u_translation:rslocalsideral
+msgid "Local Sideral Time"
+msgstr ""
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -2196,9 +2228,21 @@ msgstr "Maximalizovat"
 msgid "Maximum magnitude"
 msgstr "Maximální magnituda:"
 
+#: u_translation:rsmean
+msgid "Mean"
+msgstr ""
+
+#: u_translation:rsmeanj2000
+msgid "Mean J2000"
+msgstr ""
+
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Střední odchylka"
+
+#: u_translation:rsmeanofthedat
+msgid "Mean of the date"
+msgstr ""
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -2259,6 +2303,10 @@ msgstr "Měsíc"
 #: u_translation:rsmorenebulae
 msgid "More Deep Sky"
 msgstr "Více deep sky"
+
+#: u_translation:rsmoreoptions
+msgid "More Options"
+msgstr ""
 
 #: u_translation:rsmorestars
 msgid "More Stars"
@@ -2359,6 +2407,10 @@ msgstr "Nebyla nalezena žádná data asteroidů!%sNejprve nahrajte soubor MPC."
 #: u_translation:rsnomargin
 msgid "No Margin"
 msgstr "Bez okrajů"
+
+#: u_translation:rsnoprinterfou
+msgid "No Printer found!"
+msgstr ""
 
 #: u_translation:rsnoobjecttolo
 msgid "No object to lock on"
@@ -2836,6 +2888,10 @@ msgstr "Zpracování... %s"
 msgid "Program Data "
 msgstr "Data programu"
 
+#: u_translation:rsprograminfor
+msgid "Program Information"
+msgstr ""
+
 #: u_translation:rsprogrammer
 msgid "Programmer:"
 msgstr "Autor:"
@@ -2968,6 +3024,10 @@ msgstr "Reflexní mlhovina"
 msgid "Refresh"
 msgstr "Obnovit"
 
+#: u_translation:rsreleasenotes
+msgid "Release Notes"
+msgstr ""
+
 #: u_translation:rsremoveallcir
 msgid "Remove All Circles"
 msgstr "Odstranit všechny kružnice"
@@ -3017,20 +3077,20 @@ msgid "Return"
 msgstr "Zpět"
 
 #: u_translation:rsrevertaltkno
-msgid "Revert Alt knob"
-msgstr "Obnovit uzly Alt"
+msgid "Reverse Alt knob"
+msgstr ""
 
 #: u_translation:rsrevertazknob
-msgid "Revert Az knob"
-msgstr "Obnovit uzly Az"
+msgid "Reverse Az knob"
+msgstr ""
 
 #: u_translation:rsrevertdeckno
-msgid "Revert DEC knob"
-msgstr "Obnovit uzly Dec"
+msgid "Reverse DEC knob"
+msgstr ""
 
 #: u_translation:rsrevertraknob
-msgid "Revert RA knob"
-msgstr "Obnovit uzly RA"
+msgid "Reverse RA knob"
+msgstr ""
 
 #: u_translation:rsright
 msgid "Right"
@@ -3300,6 +3360,10 @@ msgstr "Zobrazit ekliptiku"
 msgid "Show Galactic Equator"
 msgstr "Zobrazit galaktický rovník"
 
+#: u_translation:rsshowgrid
+msgid "Show Grid"
+msgstr ""
+
 #: u_translation:rsshowgridlabe
 msgid "Show Grid Label"
 msgstr "Zobrazit popisky sítě"
@@ -3367,10 +3431,6 @@ msgstr "Zobrazit obrázek"
 #: u_translation:rsshowhidedssi
 msgid "Show/Hide DSS image"
 msgstr "Zobrazit/skrýt obrázek DSS"
-
-#: u_translation:rssideraltime
-msgid "Sideral Time"
-msgstr "Hvězdný čas"
 
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
@@ -3471,10 +3531,6 @@ msgstr "Čtverec"
 #: u_translation:rsstandardcolo
 msgid "Standard  Color"
 msgstr "Standardní barvy"
-
-#: u_translation:rsstandardequi
-msgid "Standard Equinox"
-msgstr "Standardní rovnodennost"
 
 #: u_translation:rsstar
 msgid "Star"
@@ -3756,6 +3812,10 @@ msgstr "Typ"
 msgid "Type of Variability"
 msgstr "Typ proměnlivosti"
 
+#: u_translation:rstypeofcoordi
+msgid "Type of coordinates"
+msgstr ""
+
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
 msgstr "Zahrnout do seznamu"
@@ -3861,8 +3921,8 @@ msgid "Use system time"
 msgstr "Použít systémový čas"
 
 #: u_translation:rsusetheproper
-msgid "Use the proper motion to correct the position for the current date"
-msgstr "Použít vlastní pohyb pro opravu pozice pro aktuální datum"
+msgid "Use the proper motion to correct the position for the given epoch"
+msgstr ""
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"
@@ -3924,6 +3984,10 @@ msgstr "Varování! Výpočet pro"
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
 msgstr "Varování! Aktuální datum a pozice pozorovatele se mohou změnit. Musíte odpovědět ne a použít tlačítko %s  pro obnovení původních hodnot, jinak bude nastavení ztraceno. Přejete si pokračovat?"
 
+#: u_translation:rswarningyouar2
+msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
+msgstr ""
+
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgstr "Varování!%sPřejete si smazat celou databázi %s včetně obsahu. Databáze může obsahovat i data jiných aplikací.%sPřejete si opravdu pokračovat?"
@@ -3967,10 +4031,6 @@ msgstr "Rok"
 #: u_translation:rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
 msgstr "Nyní je možné zobrazit asteroidy pro toto časové období."
-
-#: u_translation:rsyouliveonabi
-msgid "You live on a big mountain near the ocean shore and you like to observe the distorted image of the object below the horizon."
-msgstr "Jste na vysokém kopci nedaleko pobřeží a přejete si pozorovat oblohu pod horizontem (deformovanou atmosférou)."
 
 #: u_translation:rszenith
 msgid "Zenith"
@@ -4076,6 +4136,18 @@ msgstr "magnitudy slabší než hvězdy"
 msgid "max"
 msgstr "max"
 
+#: u_translation:rsmeanequatore
+msgid "mean equator, equinox and epoch of the date"
+msgstr ""
+
+#: u_translation:rsmeanequinoxj
+msgid "mean equinox J2000, epoch of the date"
+msgstr ""
+
+#: u_translation:rsmeanequinoxa
+msgid "mean equinox and epoch J2000"
+msgstr ""
+
 #: u_translation:rsmin2
 msgid "min"
 msgstr "min"
@@ -4103,6 +4175,10 @@ msgstr "Dočasný soubor"
 #: u_translation:rsto
 msgid "to"
 msgstr "do"
+
+#: u_translation:rstrueequatore
+msgid "true equator, equinox and epoch of the date"
+msgstr ""
 
 #: u_translation:rsturnsdegree
 msgid "turns / degree"
