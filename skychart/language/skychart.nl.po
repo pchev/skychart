@@ -3516,7 +3516,6 @@ msgid "Spectral Class"
 msgstr "Spectrale klasse"
 
 #: u_translation:rsspline
-#, fuzzy
 msgid "Spline"
 msgstr "Spline"
 
@@ -3925,7 +3924,6 @@ msgid "Use the proper motion to correct the position for the given epoch"
 msgstr "Gebruik de eigenbeweging om de positie te corrigeren voor de gegeven epoche"
 
 #: u_translation:rsusethisfield
-#, fuzzy
 msgid "Use this field as an Alternate Name"
 msgstr "Gebruik dit veld voor een extra naam"
 
@@ -4090,7 +4088,6 @@ msgid "degrees"
 msgstr "graden"
 
 #: u_translation:rsdesc
-#, fuzzy
 msgid "desc:"
 msgstr "desc:"
 
