@@ -79,10 +79,6 @@ msgstr "%sBase de datos %s abierta.%s"
 msgid "%sError creating table %s"
 msgstr "%sError creando tabla %s"
 
-#: u_translation:rspleasechecky
-msgid "%sPlease check your Internet connection and the URL definition%s"
-msgstr "%sPor favor, revise su conexión de Internet y la URL definida%s"
-
 #: u_translation:rsraturns2
 msgid "%sRA turns:"
 msgstr "%sVueltas RA:"
@@ -2739,6 +2735,10 @@ msgstr "Defecto de Placa"
 msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
 msgstr "Id. Placa    Fecha  Exp.  Margein  CD  Observatorio"
 
+#: u_translation:rspleasechecky
+msgid "Please check your Internet connection and the URL definition"
+msgstr "Por favor, revise su conexión de Internet y la URL definida"
+
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
 msgstr "Por favor configure la URL de elementos orbitales!"
@@ -3050,6 +3050,10 @@ msgstr "Reemplazado por"
 #: u_translation:rsreportaprobl
 msgid "Report a problem"
 msgstr "Reporte un problema"
+
+#: u_translation:rsrequesttimeo
+msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
+msgstr ""
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"

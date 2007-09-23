@@ -79,10 +79,6 @@ msgstr ""
 msgid "%sError creating table %s"
 msgstr ""
 
-#: u_translation:rspleasechecky
-msgid "%sPlease check your Internet connection and the URL definition%s"
-msgstr ""
-
 #: u_translation:rsraturns2
 msgid "%sRA turns:"
 msgstr ""
@@ -2739,6 +2735,10 @@ msgstr ""
 msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
 msgstr ""
 
+#: u_translation:rspleasechecky
+msgid "Please check your Internet connection and the URL definition"
+msgstr ""
+
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
 msgstr ""
@@ -3049,6 +3049,10 @@ msgstr ""
 
 #: u_translation:rsreportaprobl
 msgid "Report a problem"
+msgstr ""
+
+#: u_translation:rsrequesttimeo
+msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
 msgstr ""
 
 #: u_translation:rsrequiredfiel

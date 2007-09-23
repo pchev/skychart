@@ -80,10 +80,6 @@ msgstr "%sDatabáze %s otevřena.%s"
 msgid "%sError creating table %s"
 msgstr "%Chyba při vytváření tabulky %s"
 
-#: u_translation:rspleasechecky
-msgid "%sPlease check your Internet connection and the URL definition%s"
-msgstr "%sZkontrolujte prosím internetové připojení a adresu URL%s"
-
 #: u_translation:rsraturns2
 msgid "%sRA turns:"
 msgstr "%sRA posun:"
@@ -2740,6 +2736,10 @@ msgstr "Vada desky"
 msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
 msgstr "ID desky    Dat.   Exp.  Okraje   CD  Observatoř"
 
+#: u_translation:rspleasechecky
+msgid "Please check your Internet connection and the URL definition"
+msgstr "Zkontrolujte prosím internetové připojení a adresu URL"
+
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
 msgstr "Nastavte prosím URL elementů oběžných drah!"
@@ -3051,6 +3051,10 @@ msgstr "Nahrazený"
 #: u_translation:rsreportaprobl
 msgid "Report a problem"
 msgstr "Ohlásit problém"
+
+#: u_translation:rsrequesttimeo
+msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
+msgstr ""
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"
