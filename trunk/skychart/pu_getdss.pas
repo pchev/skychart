@@ -161,7 +161,7 @@ function Tf_getdss.GetDss(ra,de,fov,ratio:double; imgx:integer):boolean;
 var i : SImageConfig;
     pl: Plate_data;
     rc,datasource,subsample,n,l,imgy : integer;
-    width,height,npix,imgsize : double;
+    width,height,npix,imgsize,fovx,fovy : double;
     ima,app,platename,buf,dd,mm,ss : string;
     firstrec: boolean;
     gzf:pointer;
@@ -190,6 +190,8 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   buf:=cfgdss.DSSurl[cfgdss.OnlineDSSid,1];
   width:=fov*rad2deg*60;
   height:=width/ratio;
+  fovx:=rad2deg*fov;
+  fovy:=fovx/ratio;
   imgy:=round(imgx/ratio);
   buf:=StringReplace(buf,'$XSZ',formatfloat(f1s,width),[rfReplaceAll]);
   buf:=StringReplace(buf,'$YSZ',formatfloat(f1s,height),[rfReplaceAll]);
@@ -202,6 +204,8 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   buf:=StringReplace(buf,'$DEM',mm,[rfReplaceAll]);
   buf:=StringReplace(buf,'$DES',ss,[rfReplaceAll]);
   buf:=StringReplace(buf,'$FOVF',formatfloat(f5,rad2deg*fov),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$FOVX',formatfloat(f5,fovx),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$FOVY',formatfloat(f5,fovy),[rfReplaceAll]);
   buf:=StringReplace(buf,'$RAF',formatfloat(f5,rad2deg*ra),[rfReplaceAll]);
   buf:=StringReplace(buf,'$DEF',formatfloat(f5,rad2deg*de),[rfReplaceAll]);
   buf:=StringReplace(buf,'$PIXX',inttostr(imgx),[rfReplaceAll]);
@@ -228,7 +232,10 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
      assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
      rewrite(fitsfile,1);
      buf:=html_h+DownloadDialog1.ResponseText;
-     buf:=Format(rsPleaseCheckY, [buf+html_p, htms_p]);
+     if pos('Timeout',DownloadDialog1.ResponseText)>0 then
+        buf:=buf+html_p+rsRequestTimeo+htms_p
+     else
+        buf:=buf+html_p+rsPleaseCheckY+htms_p;
      buf:=buf+htms_h;
      gzbuf:=buf;
      blockwrite(fitsfile,gzbuf,length(buf),n);

@@ -303,8 +303,8 @@ resourcestring
   rsFind = 'Find';
   rsPleaseEnterA = 'Please enter an object identifier.';
   rsNotFound = '%s not found';
-  rsPleaseCheckY = '%sPlease check your Internet connection and the URL '
-    +'definition%s';
+  rsPleaseCheckY = 'Please check your Internet connection and the URL '
+    +'definition';
   rsError = 'Error';
   rsPleaseConfig = 'Please configure your DSS file path first.';
   rsFieldTooWidt = 'Field too width! Maximum is %s';
@@ -1092,6 +1092,8 @@ resourcestring
   rsEpoch = 'Epoch';
   rsAlignment = 'Alignment';
   rsCenter = 'Center';
+  rsRequestTimeo = 'Request timeout. You probably asked a too width area that '
+    +'request too much processing time on the remote server.';
 
 implementation
 
@@ -1107,6 +1109,9 @@ function Translate(lang : string = ''; lang2 : string = ''):string;
 var pofile: string;
 begin
  if lang='' then lang:=GetDefaultLanguage;
+ {$ifdef unix}
+ Exec('locale');
+ {$endif}
  writetrace('Try language: '+lang+', '+lang2);
  // translate LCL messages
  TranslateUnitResourceStrings('LCLStrConsts',slash(appdir)+slash('data')+slash('language')+'lcl.%s.po',lang,lang2);
