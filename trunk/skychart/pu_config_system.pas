@@ -307,7 +307,8 @@ var i: integer;
     dir,buf,buf1,buf2: string;
 begin
 LanguageList.clear;
-LanguageList.Items.Add(blank+rsDefault+' ('+GetDefaultLanguage+')');
+GetDefaultLanguage(buf1,buf2);
+LanguageList.Items.Add(blank+rsDefault+' ('+buf1+')');
 LanguageList.itemindex:=0;
 dir:=slash(appdir)+slash('data')+slash('language');
 writetrace('Language directory: '+dir);
