@@ -79,10 +79,6 @@ msgstr "%sDatabase %s geopend.%s"
 msgid "%sError creating table %s"
 msgstr "%sFout bij creëren van tabel %s"
 
-#: u_translation:rspleasechecky
-msgid "%sPlease check your Internet connection and the URL definition%s"
-msgstr "%sContoleer alstublieft uw Internet verbinding en de URL definitie%s"
-
 #: u_translation:rsraturns2
 msgid "%sRA turns:"
 msgstr "%sRA as-omw.:"
@@ -2739,6 +2735,10 @@ msgstr "Plaat defect"
 msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
 msgstr "Plaat Id.    Datum   Exp.  Marge  CD  Observatorium"
 
+#: u_translation:rspleasechecky
+msgid "Please check your Internet connection and the URL definition"
+msgstr "Contoleer alstublieft uw Internet verbinding en de URL definitie"
+
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
 msgstr "Configureer alstublieft de baanelementen-URL!"
@@ -3050,6 +3050,10 @@ msgstr "Vervangen door"
 #: u_translation:rsreportaprobl
 msgid "Report a problem"
 msgstr "Raporteer een probleem"
+
+#: u_translation:rsrequesttimeo
+msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
+msgstr ""
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"

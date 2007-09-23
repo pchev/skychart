@@ -80,10 +80,6 @@ msgstr "%sBase de dades %s oberta.%s"
 msgid "%sError creating table %s"
 msgstr "%sError en crear la taula %s"
 
-#: u_translation:rspleasechecky
-msgid "%sPlease check your Internet connection and the URL definition%s"
-msgstr "%sSi us plau, comproveu la vostra connexió a Internet i la definició de les URL%s"
-
 #: u_translation:rsraturns2
 msgid "%sRA turns:"
 msgstr "%svoltes AR:"
@@ -2740,6 +2736,10 @@ msgstr "Defecte fotogràfic"
 msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
 msgstr "Placa       Data   Exp.  Marge   CD  Observatori"
 
+#: u_translation:rspleasechecky
+msgid "Please check your Internet connection and the URL definition"
+msgstr "Si us plau, comproveu la vostra connexió a Internet i la definició de les URL"
+
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
 msgstr "Si us plau, configureu la URL per als elements orbitals!"
@@ -3051,6 +3051,10 @@ msgstr "Reemplaçat per"
 #: u_translation:rsreportaprobl
 msgid "Report a problem"
 msgstr "Indiqueu un problema"
+
+#: u_translation:rsrequesttimeo
+msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
+msgstr ""
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"

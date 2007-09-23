@@ -80,10 +80,6 @@ msgstr "%sБаза даних %s відкрита.%s"
 msgid "%sError creating table %s"
 msgstr "%sПомилка створення таблиці %s"
 
-#: u_translation:rspleasechecky
-msgid "%sPlease check your Internet connection and the URL definition%s"
-msgstr "%sБудь-ласка перевірте зв'язок із Інтернетом та визначення URL%s"
-
 #: u_translation:rsraturns2
 msgid "%sRA turns:"
 msgstr "%sRA повороти:"
@@ -2740,6 +2736,10 @@ msgstr "Дефект пластинки"
 msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
 msgstr "Ідент. пластинки   Дата   Експ.  Поле   CD   Обсерваторія"
 
+#: u_translation:rspleasechecky
+msgid "Please check your Internet connection and the URL definition"
+msgstr "Будь-ласка перевірте зв'язок із Інтернетом та визначення URL"
+
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
 msgstr "Будь-ласка завдайтейте  URL орбітального елементу!"
@@ -3051,6 +3051,10 @@ msgstr "Замінено"
 #: u_translation:rsreportaprobl
 msgid "Report a problem"
 msgstr "Повідомити проблему"
+
+#: u_translation:rsrequesttimeo
+msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
+msgstr ""
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"

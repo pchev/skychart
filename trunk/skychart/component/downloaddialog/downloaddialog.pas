@@ -340,7 +340,10 @@ begin
     end else
     begin // error
       ok:=false;
-      FResponse:='Finished: '+progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
+      if  http.ResultCode=0 then
+          FResponse:='Finished: '+progress.text+' / Error: Timeout '+http.ResultString
+      else
+          FResponse:='Finished: '+progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
       progress.Text:=FResponse;
  end;
  if assigned(FDownloadFeedback) then FDownloadFeedback(FResponse);
