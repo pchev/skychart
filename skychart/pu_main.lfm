@@ -4,10 +4,10 @@ object f_main: Tf_main
   Top = 105
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 558
+  VertScrollBar.Page = 551
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 559
+  ClientHeight = 552
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
@@ -154,13 +154,13 @@ object f_main: Tf_main
   OnShow = FormShow
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 474
+    Height = 467
     Top = 53
     Width = 812
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
-    ClientHeight = 474
+    ClientHeight = 467
     ClientWidth = 812
     Color = clBlack
     FullRepaint = False
@@ -2371,17 +2371,17 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 474
+    Height = 467
     Top = 53
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 474
+    ClientHeight = 467
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 474
+      Height = 467
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2479,18 +2479,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 836
-    Height = 474
+    Height = 467
     Top = 53
     Width = 24
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 474
+    ClientHeight = 467
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 224
+      Height = 217
       Top = 250
       Width = 24
       Align = alClient
@@ -2711,7 +2711,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 527
+    Top = 520
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -2740,8 +2740,8 @@ object f_main: Tf_main
       ParentFont = True
       TabOrder = 0
       object LPanels01: TLabel
-        Height = 20
-        Width = 59
+        Height = 14
+        Width = 60
         Caption = 'LPanels01'
         ParentColor = False
         ParentFont = True

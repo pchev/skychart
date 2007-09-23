@@ -1162,7 +1162,7 @@ chdir(appdir);
 InitTrace;
 traceon:=true;
 GetLanguage;
-lang:=u_translation.translate(cfgm.language,'en');
+lang:=u_translation.translate(cfgm.language);
 catalog:=Tcatalog.Create(self);
 SetLang;
 telescope:=Ttelescope.Create(self);
@@ -4032,7 +4032,7 @@ end;
 finally
  inif.Free;
 end;
-lang:=u_translation.translate(cfgm.language,'en');
+lang:=u_translation.translate(cfgm.language);
 SetLang;
 f_position.SetLang;
 f_search.SetLang;

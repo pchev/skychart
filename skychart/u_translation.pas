@@ -7,8 +7,8 @@ interface
 uses gettext, translations, u_constant, u_util,
   Classes, SysUtils;
 
-function GetDefaultLanguage:string;
-function Translate(lang : string = ''; lang2 : string = ''):string;
+procedure GetDefaultLanguage(var buf1,buf2: string);
+function Translate(lang : string = ''):string;
 
 resourcestring
   rsLanguage = 'Internal language';
@@ -1097,30 +1097,35 @@ resourcestring
 
 implementation
 
-function GetDefaultLanguage:string;
-var buf1,buf2: string;
+procedure GetDefaultLanguage(var buf1,buf2: string);
+var i : integer;
 begin
  GetLanguageIDs(buf1,buf2);
- if buf2<>'' then result:=buf2
-    else result:=buf1;
+ i:=pos('.',buf1);
+ if i>0 then buf1:=copy(buf1,1,i-1);
 end;
 
-function Translate(lang : string = ''; lang2 : string = ''):string;
-var pofile: string;
+function Translate(lang : string = ''):string;
+var lang2,pofile: string;
 begin
- if lang='' then lang:=GetDefaultLanguage;
- {$ifdef unix}
- Exec('locale');
- {$endif}
+ lang2:='';
+ if lang='' then GetDefaultLanguage(lang,lang2);
  writetrace('Try language: '+lang+', '+lang2);
- // translate LCL messages
- TranslateUnitResourceStrings('LCLStrConsts',slash(appdir)+slash('data')+slash('language')+'lcl.%s.po',lang,lang2);
- // translate CDC messages
  pofile:=format(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',[lang]);
  if FileExists(pofile) then result:=lang
-                       else result:=lang2;
- TranslateUnitResourceStrings('u_translation',slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',lang,lang2);
- writetrace('Language: '+rsLanguage);
+ else begin
+    pofile:=format(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',[lang2]);
+    if FileExists(pofile) then result:=lang2
+    else begin
+        pofile:=format(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',['en']);
+        result:='en';
+    end;
+ end;
+ // translate CDC messages
+ TranslateUnitResourceStrings('u_translation',slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',result,'');
+ // translate LCL messages
+ TranslateUnitResourceStrings('LCLStrConsts',slash(appdir)+slash('data')+slash('language')+'lclstrconsts.%s.po',result,'');
+ writetrace('Language: '+result+' '+rsLanguage);
 end;
 
 end.
