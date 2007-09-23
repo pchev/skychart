@@ -247,15 +247,15 @@ const cdcversion = 'Version 3 beta 0.1.3 svn ';
       URL_DSS_NAME4 = 'DSS 2 Infrared';
       URL_DSS4 = 'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS2-infrared&mime-type=display/gz-fits';
       URL_DSS_NAME5 = 'SkyView DSS';
-      URL_DSS5 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=Digitized%20Sky%20Survey&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS5 = 'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=DSS&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
       URL_DSS_NAME6 = 'H-alpha Full Sky Map';
-      URL_DSS6 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=H-ALPHA%20COMP&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS6 = 'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=H-alpha&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
       URL_DSS_NAME7 = '2MASS J';
-      URL_DSS7 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=2MASS-J&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS7 = 'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=2MASS-J&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
       URL_DSS_NAME8 = '2MASS H';
-      URL_DSS8 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=2MASS-H&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS8 = 'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=2MASS-H&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
       URL_DSS_NAME9 = 'IRAS 12 micron';
-      URL_DSS9 = 'http://skys.gsfc.nasa.gov/cgi-bin/pskcall?VCOORD=$RAF%20,%20$DEF&SURVEY=IRAS%2012%20micron&SCOORD=Equatorial&MAPROJ=Gnonomic&SFACTR=$FOVF&ISCALN=Log(10)&EQUINX=2000&PIXELX=$PIXX&PIXELY=$PIXY&SMOOTH=1&NAMRES=SIMBAD/NED&PXLCNT=YES';
+      URL_DSS9 = 'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=IRAS12&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
 
 {$ifdef linux}
       DefaultFontName='Helvetica';

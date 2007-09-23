@@ -7,6 +7,8 @@ object f_getdss: Tf_getdss
   VertScrollBar.Page = 307
   ActiveControl = ListBox1
   Caption = 'List of available plates'
+  ClientHeight = 308
+  ClientWidth = 420
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
@@ -18,7 +20,6 @@ object f_getdss: Tf_getdss
     Top = 8
     Width = 37
     Caption = 'Label1'
-    Color = clNone
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11
     Font.Name = 'courier'
