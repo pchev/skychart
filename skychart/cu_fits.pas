@@ -579,8 +579,8 @@ closefile(f);
 Fmean:=sum/ni;
 Fsigma:=sqrt( (sum2/ni)-(Fmean*Fmean) );
 if (Fheader.dmin=0)and(Fheader.dmax=0) then begin
-  Fheader.dmin:=dmin;
-  Fheader.dmax:=dmax;
+  Fheader.dmin:=max(dmin,Fmean-5*Fsigma);
+  Fheader.dmax:=min(dmax,Fmean+5*Fsigma);
 end;
 end;
 
