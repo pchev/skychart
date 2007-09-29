@@ -167,6 +167,8 @@ begin
     left:=8;
     readonly:=true;
     color:=clBtnFace;
+    selstart:=1;
+    sellength:=0;
   end;
 
   filetxt:=TLabeledEdit.Create(self);
