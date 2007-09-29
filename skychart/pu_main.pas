@@ -3535,6 +3535,27 @@ if Config_Version < '3.0.0.8' then begin
    cfgm.dbpass:=cryptedpwd;
    SaveDefault;
 end;
+if Config_Version < '3.0.1.3d' then begin
+  f_getdss.cfgdss.DSSurl[1,0]:=URL_DSS_NAME1;
+  f_getdss.cfgdss.DSSurl[1,1]:=URL_DSS1;
+  f_getdss.cfgdss.DSSurl[2,0]:=URL_DSS_NAME2;
+  f_getdss.cfgdss.DSSurl[2,1]:=URL_DSS2;
+  f_getdss.cfgdss.DSSurl[3,0]:=URL_DSS_NAME3;
+  f_getdss.cfgdss.DSSurl[3,1]:=URL_DSS3;
+  f_getdss.cfgdss.DSSurl[4,0]:=URL_DSS_NAME4;
+  f_getdss.cfgdss.DSSurl[4,1]:=URL_DSS4;
+  f_getdss.cfgdss.DSSurl[5,0]:=URL_DSS_NAME5;
+  f_getdss.cfgdss.DSSurl[5,1]:=URL_DSS5;
+  f_getdss.cfgdss.DSSurl[6,0]:=URL_DSS_NAME6;
+  f_getdss.cfgdss.DSSurl[6,1]:=URL_DSS6;
+  f_getdss.cfgdss.DSSurl[7,0]:=URL_DSS_NAME7;
+  f_getdss.cfgdss.DSSurl[7,1]:=URL_DSS7;
+  f_getdss.cfgdss.DSSurl[8,0]:=URL_DSS_NAME8;
+  f_getdss.cfgdss.DSSurl[8,1]:=URL_DSS8;
+  f_getdss.cfgdss.DSSurl[9,0]:=URL_DSS_NAME9;
+  f_getdss.cfgdss.DSSurl[9,1]:=URL_DSS9;
+  SaveDefault;
+end;
 end;
 
 procedure Tf_main.SaveVersion;
