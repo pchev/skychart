@@ -2,304 +2,304 @@
 ; Ukrainian name
 ; Translator: Oleg Maliy, gemini@ua.fm
 ; 
- 3307    Авіор: Avior
- 5267    Агена: Agena; Hadar
- 2618    Адара: Adara; Adhara
-  390    Адгіл: Adhil
- 4031    Адгафера: Adhafera; Aldhafara; Aldhafera
-  874    Ажа: Azha
- 8301    Азельфафадж: Azelfafage
- 3045    Азмідіске: Azmidiske; Asmidiske
- 7116    Айн-аль-Рамі: Ain Al Rami
- 1409    Айн: Ain; Oculus Boreus
-  897    Акамар: Acamar
- 5984    Акраб: Acrab; Graffias; Grafias; Grassias; Akrab; Elacrab
- 4730    Акрукс: Acrux
- 3572    Акубенс: Acubens; Sertan; Sartan
- 4905    Аліот: Alioth; Aliath
- 7141    Алія: Alya; Alga
- 7298    Аладфар: Aladfar
- 6903    Алатфар: Alathfar; Al Athfar
-  936    Алголь: Algol; Gorgona; Gorgonea Prima; Demon Star; El Ghoul
- 1605    Аль-Анз: Al Anz; Almaaz
- 8591    Аль-Кальб-аль-Рай: Al Kalb Al Rai
- 3731    Аль-Мінляр-аль-Асад: Al Minliar Al Asad
- 7417    Альбірео: Albireo
- 7950    Альбалі: Albali; Al Bali
- 7264    Альбалдаг: Albaldah; Al Baldah
- 4057    Альгієба: Algieba; Algeiba; Al Gieba
-   39    Альгеніб: Algenib
- 2421    Альгена: Alhena
- 4757    Альгораб: Algorab; Algores; Algoral; Algorel
- 6396    Альдгібах: Aldhibah; Eldsib
- 1457    Альдебаран: Aldebaran; Cor Tauri; Parilicium.
- 8162    Альдерамин: Alderamin; Alderaimin.
- 2484    Альзірр: Alzirr
- 5191    Алькайд: Alkaid; Benetnash; Benetnasch; Elkeid
- 5733    Алькалуропс: Alkalurops; Inkalunis; Icalurus; Clava; Venabulum
- 4287    Алькес: Alkes
- 5062    Алькор: Alcor; Saidak
- 8417    Алькургаг: Alkurhah; Al Kirdah; Kurhah
-  603    Альмаак: Almaak; Almach; Alamak; Almak; Almaach
- 1903    Альнілам: Alnilam; Alnihan; Alnitam
- 1948    Альнітак: Alnitak; Alnitah
- 6084    Альніят: Alniyat; Al Niyat
- 8425    Альнайр: Alnair; Al Nair
- 1791    Альнатх: Alnath; El Nath; Nath
-  596    Альріша: Alrisha; Alrischa; Alrescha; El Rischa; Al Richa; Rescha; Okda; Kaitain
- 8974    Альрай: Alrai; Arrai; Errai; Er Rai
- 7462    Альсафі: Alsafi; Athafi
- 3634    Альсухайль: Alsuhail; Al Suhail Al Wazn; Suhail
- 7557    Альтаір: Altair; Atair
- 3249    Альтарф: Altarf; Al Tarf
- 3773    Альтерф: Alterf
- 8238    Альфірк: Alfirk; Alphirk
- 3748    Альфард: Alphard; Alfard; Alphart; Kalbelaphard; Cor Hydrae
- 7254    Альфекка Мерідіана: Alfecca Meridiana
- 5793    Альфекка: Alphekka; Alphecca; Alphacca; Gemma; Gnosia; The Jewel; Gnosia Stella Coronae; Ashtaroth
-   15    Альферац: Alpheratz; Alpherat; Sirrah; Sirah
- 1165    Альціоне: Alcyone
- 4623    Альчіба: Alchiba; Alchita; Al Minliar Al Ghurab; Al Chiba
- 3275    Альчяукат: Alsciaukat; Mabsuthat
- 7602    Альшайн: Alshain; Alschairn
- 7773    Альшат: Alshat
- 2827    Алюдра: Aludra
- 4375    Алюля Аустраліс: Alula Australis
- 4377    Алюля Бореаліс: Alula Borealis
-  850    Ангетенар: Angetenar; Al Anchat Al Nahr; Anchat
-   99    Анкаа: Ankaa; Nair Al Zaurak; Cymbae; Lucida Cymbae; Head Of Phoenix
- 7405    Ансер: Anser
- 6134    Антарес: Antares; Cor Scorpii; Kalb Al Akrab; Vespertilio
- 8499    Анча: Ancha
- 7343    Аркаб Постеріор: Arkab Posterior; Arkab Or Urkab
- 7337    Аркаб Пріор: Arkab Prior; Arkab Or Urkab
- 5340    Арктур: Arcturus; Haris-El-Sema
- 1865    Арнеб: Arneb
- 6370    Арракіс: Arrakis; Errakis; Al Rakis; El Rakis
- 3461    Аселлюс Аустраліс: Asellus Australis
- 3449    Аселлюс Бореаліс: Asellus Borealis
- 5404    Аселлюс Прімус: Asellus Primus
- 5350    Аселлюс Секондус: Asellus Secondus
- 5329    Аселлюс Тертіус: Asellus Tertius
- 7194    Аскелла: Ascella
- 1151    Астеропе: Asterope. Sterope I
- 1131    Атік: Atik; Ati; Al Atik
- 1178    Атлас: Atlas
- 4910    Аува: Auva; Minelauva
-  472    Ахернар: Achernar
-  219    Ачірд: Achird
- 8450    Багам: Baham; Biham
-  539    Батен Кайтос: Baten Kaitos
- 1298    Бейд: Beid
- 4853    Бекрукс: Becrux; Mimosa
- 1790    Беллятрікс: Bellatrix; The Amazon Star
- 2061    Бетельгейзе: Betelgeuse; Betelguex; Betelgeuze; Beteiguex; Al Mankib
- 5958    Блейза зоря: Blaze Star
-  951    Ботейн: Botein
- 5603    Брахіум: Brachium; Cornu; Zuben El Genubi; Zuban Al Akrab; Zuben Hakrabi
- 4932    Віндеміатрікс: Vindemiatrix; Vindemiator; Vendemiatrix; Almuredin; Provindemiator; Protrigetrix; Protrygetor; Alaraph
- 2777    Васат: Wasat; Wesat
- 7001    Вега: Vega; Wega; Fidis; Harp Star
- 2693    Везен: Wezen; Alwazn; Wesen; Al Wazor
- 2040    Везн: Wezn; Wazn
- 1346    Гіадум І: Hyadum I
- 1373    Гіадум Іі: Hyadum Ii
- 4434    Гіанфар: Gianfar; Giansar; Gaiusar; Giauzar; Juza
- 4662    Гєнах Гхураб: Gienah Ghurab; Gienah
- 7949    Гєнах Цигні: Gienah Cygni; Gienah
- 1612    Гаеді: Haedi; Haedus; Hoedus I; The Kids; Sadatoni; Saclateni
- 4763    Гакрукс: Gacrux
-  617    Гамаль: Hamal; Hemal; Hamul; Ras Hammel; El Nath
- 8316    Гарнета зоря: Garnet Star
- 1577    Гасселех: Hassaleh
- 5107    Гезе: Heze
- 1641    Гоедус Іі: Hoedus Ii; The Kids
-  591    Голова Гідри: Head Of Hydrus
- 8634    Гомам: Homam; Homan; Humam; Al Hammam
- 2845    Гомеіза: Gomeisa; Algomeyla; Gomelza
-  947    Горгоне Кварта: Gorgonea Quarta
-  879    Горгоне Секунда: Gorgonea Secunda
-  921    Горгоне Тертіа: Gorgonea Tertia
- 5978    Графіас: Grafias
- 6688    Груміум: Grumium; Genam; Nodus I
- 4550    Грумбрідж 1830: Groombridge 1830
- 4968    Діадема: Diadem
-  188    Діфда: Diphda; Deneb Kaitos; Difda; Difda Al Thani; Rana Secunda, The Second Frog
- 7776    Дабіг. Бета 1: Dabih. Beta1 = Dabih Major; Beta2 = Dabih Minor
- 8322    Денеб Альгеді: Deneb Algedi; Deneb Algiedi; Scheddi; Sheddi
-  334    Денеб Альгенубі: Deneb Algenubi; Dheneb; Deneb
- 7852    Денеб Дульфім: Deneb Dulfim; Deneb El Delphinus
-   74    Денеб Кайтос Шемалі: Deneb Kaitos Shemali; Deneb Kaitos Al Shamaliyy
- 7176    Денеб-аль-Окаб: Deneb El Okab; Deneb
- 7235    Денеб-аль-Окаб: Deneb El Okab; Deneb
- 7924    Денеб: Deneb; Deneb Cygni; Deneb El Adige; Arided; Aridif; Gallina; Arrioph
- 4534    Денебола: Denebola; Deneb Aleet
- 6027    Джаббаг: Jabbah
- 6636    Дзібан: Dsiban; Dziban
- 4301    Дубге: Dubhe; Dubb; Ak
- 5953    Дчубба: Dschubba; Iclarkrau
- 5744    Ед Асіх: Ed Asich; Eldsich; Al Dhiba; Al Dhihi
- 1142    Електра: Electra
- 8308    Еніф: Enif; Enf; Enir; Al Anf; Os Pegasi; Fom
- 6705    Етамін: Etamin; Etanin; Ettanin; Rastaban; Rasaben; Zenith Star
- 6075    Єд Постеріор: Yed Posterior
- 6056    Єд Пріор: Yed Prior; Yad; Yed; Jed
-  984    Зібаль: Zibal 
- 4540    Завіджаг: Zavijah; Zavijava; Zavyava; Zawijah; Zarijan; Minelauva; Alaraph
- 4689    Заніах: Zaniah
- 1231    Заурак: Zaurak; Zaurac; Zaurack
- 4357    Зосма: Zosma; Zozma; Zosca; Zozca; Duhr; Dhur; Zubra
- 5586    Зубен Елакрібі: Zuben Elakribi
- 5787    Зубен Ельакраб: Zuben Elakrab; Zuben Hakraki; Zuben El Hakrabi
- 5531    Зубен Ельгенубі: Zuben Elgenubi; Zubenelgenubi; Kiffa Australis; Elkhiffa Australis
- 5685    Зубен Ельшемалі: Zuben Elschemali; Zuben Eschamali; Zuben El Chamali; Zubenesch; Zubenelg; Kiffa Borealis
- 5506    Ізар: Izar; Mirac; Mirak; Mirach; Mizar; Pulcherrima
- 6789    Їльдун: Yildun; Vildiur; Gildun
- 8131    Кітальфа: Kitalpha; Kitel Phard; Kitalphar
- 6117    Каджам: Kajam; Cujam; Cajam; Caiam
- 2326    Канопус: Canopus; Suhel; Suhail
- 1708    Капелла: Capella; Alhajoth
- 2891    Кастор: Castor; Apollo
- 6879    Каус Аустраліс: Kaus Australis
- 6913    Каус Бореаліс: Kaus Borealis
- 6859    Каус Мерідіоналіс: Kaus Meridionalis; Kaus Media; Media
-   21    Каф: Caph; Chaph; Kaff; Al Sanam Al Nakah
-  804    Каффальджідгма: Kaffaljidhma; Al Kaff Al Jidhmah
- 6603    Кебальрай: Cebalrai; Kelb Alrai; Kabalrai; Cheleb; Celb-Al-Rai
- 1325    Кейд: Keid; Kied
- 1140    Келено: Celaeno; Celieno; Celeno; Lost Pleiad
- 4915    Кор Каролі: Cor Caroli
- 6148    Корнефорос: Kornephoros; Korneforos; Rutilicus
- 5563    Кохаб: Kocab; Kochab; Kochah; Guards Of The Pole
- 4786    Краз у Бечваржа: Kraz In Becvar
- 6555    Кума: Kuma
- 1666    Курса: Cursa; Dhalim; Kursa
- 6508    Лезатх: Lesath; Lesuth
- 3685    Міаплацідус: Miaplacidus
- 4630    Мінкар: Minkar
- 1852    Мінтака: Mintaka; Mintika
- 3418    Мінчір: Minchir; Al Minliar Al Shuja
-  681    Міра: Mira
-  337    Мірак: Mirach; Merach; Mirac; Mirak; Al Mizar
-  834    Мірам: Miram
- 1017    Мірфак: Mirphak; Mirfak; Marfak; Algenib
- 6526    Місам: Misam; Maasym; Masym
- 5054    Міцар: Mizar; Mizat; Mirza
- 1149    Майя: Maia
- 8781    Маркаб: Markab; Marchab
- 2948    Маркаб: Markab; Markeb
- 6149    Марфік: Marfic; Marfik; Marsic
- 6008    Марфік: Marfik; Marsik; Mirfak; Marfak
-  343    Марфак: Marfak
-  321    Марфак: Marfak
- 8650    Матар: Matar
- 2473    Мебсута: Mebsuta; Melucta; Meboula
- 4660    Мегрез: Megrez; Kaffa
-  546    Мезартхім: Mesarthim; Mesartim; First Star In Aries
- 1879    Мейсса; Meissa; Heka
- 2650    Мекбуда: Mekbuda
- 1228    Менкіб: Menkib; Menkhib; Menchib
- 2088    Менкалінан: Menkalinan; Menkalina
-  896    Менкар: Menkar
-  911    Менкар: Menkar; Mekab; Menkab; Monkar
- 5288    Менкент: Menkent
- 4295    Мерак: Merak; Mirak
- 5533    Мерга: Merga; Marrha; El Mara El Musalsela; Falx Italica
- 1156    Меропе: Merope
-  544    Металлах: Metallah; Mothallah; Atria; Caput Trianguli; Ras Al Muthallah; Elmuthalleth
- 2657    Муліфен: Muliphen; Muliphein; Isis; Mirza
- 2294    Мурзім: Murzim; Mirzam; Mirza
- 3323    Мускіда: Muscida
- 3391    Мускіда: Muscida
- 3403    Мускіда: Muscida
- 5235    Муфрід: Mufrid; Muphrid; Mufride; Muphride
- 1829    Ніхаль: Nihal; Nibal
- 1899    Найр-аль-Саіф: Nair Al Saif; Hatysa
- 3165    Наос: Naos; Suhail Hadar
- 6746    Наш: Nash; Alnasl; Alwazl; Zujj Al Nushshabah; Nushaba
- 8278    Нашіра: Nashira
- 5602    Неккар: Nekkar; Merez; Meres
- 7310    Нодус Секундус: Nodus Secundus; Altais; Aldib
- 7121    Нункі: Nunki; Sadira
- 5747    Нусакан: Nusakan
- 7790    Павич: Peacock
- 2422    Пласкетта зоря: Plaskett'S Star
- 1180    Плейоне: Pleione
- 2990    Поллукс: Pollux; Hercules
- 7228    Полярна Південна: Polaris Australis
-  424    Полярна: Polaris; Alruccabah; Cynosura; Phoenice; Lodestar; Pole Star; Tramontana; Angel Stern; Navigatoria; Star Of Arcady;Yilduz; Mismar
- 4825    Порріма: Porrima; Arich
- 7747    Пріма Гіеді: Prima Giedi; Algiedi Prima; Algedi
- 4247    Преціпуа: Praecipua
- 2134    Пропус: Propus
- 2821    Пропус: Propus
- 2216    Пропус: Propus; Praepes; Tejat Prior
- 2943    Проціон: Procyon; Elgomaisa; Algomeysa; Antecanis
- 1713    Рігель: Rigel; Algebar; Elgebar
- 5487    Ріджль-аль-Авва: Rijl Al Awwa
- 1136    Рана: Rana 
- 3873    Рас Еласед Аустраліс: Ras Elased Australis; Al Ras Al Asad Al Janubiyyah; Algenubi; Al Ashfar
- 3905    Рас Еласед Бореаліс: Ras Elased Borealis; Rasalas; Ras Al Asad Al Shamaliyy; Alshemali; Al Ashfar
- 6406    Расальгеті: Rasalgethi; Ras Algethi; Rasalegti
- 6556    Расальхаге: Rasalhague; Ras Alhague
- 6536    Растабан: Rastaban; Alwaid; Asuia; Rastaben
- 3982    Регул: Regulus; Cor Leonis; Rex; Al Kalb Al Asad; Kabeleced
- 7882    Ротанев: Rotanev; Rotanen; Venator
- 7851    Рукба: Ruchba; Rukbat Al-Dajajah; Al Rukbah Al Dajajah
- 7348    Рукбат: Rukbat; Rucba; Rukbat Al Rami; Alrami
-  403    Рукбах: Ruchbah; Rucba; Rucha; Ksora
- 2491    Сіріус: Sirius; Canicula; Dog Star; Aschere
- 5338    Сірма: Syrma
- 8610    Сітула: Situla
- 6378    Сабік: Sabik
- 8414    Садальмелік: Sadalmelik; Sadalmelek; Sadlamulk; El Melik; Saad El Melik
- 8232    Садальсууд: Sadalsuud; Sadalsud; Sad Es Saud; Sadalsund; Saad El Sund
- 8518    Садальчбія: Sadalachbia; Sadachbia
- 7796    Садр: Sadr; Sador; Sadir
- 2004    Сайф: Saiph
- 8880    Сальм: Salm; Kerb; Markab; El Khereb
- 6410    Сарін: Sarin
- 6553    Саргас: Sargas
- 5435    Сегінус: Seginus; Ceginus; Haris
- 7754    Секунда Гіеді: Secunda Giedi; Algiedi Secunda; Gredi; Algedi
- 8709    Скат: Skat; Scheat; Sheat
- 1481    Скептрум: Sceptrum
- 5056    Спіка: Spica; Azimech; Spica Virginis; Alaraph
- 1152    Стеропе Іі: Sterope Ii
- 7906    Суалокін: Sualocin; Scalovin; Svalocin; Nicolaus
- 3852    Субра: Subra
- 7178    Суляфат: Sulafat; Sulaphat
- 7582    Тіл: Tyl
- 1543    Табіт: Tabit
- 1855    Табіт: Thabit; Tabit
- 1145    Тайгета: Taygeta; Taygete
- 3569    Таліта: Talitha; Talita
- 4069    Танія Аустраліс: Tania Australis
- 4033    Танія Бореаліс: Tania Borealis; Al Kafzah Al Thaniyah.
- 7525    Таразед: Tarazed; Reda
- 1464    Тгімін: Theemim; Beemin
- 5291    Тгубан: Thuban; Adib; Dragon'S Tail
- 3208    Тегмен: Tegmen; Tegmine
- 2286    Теджат Постеріор: Tejat Posterior; Calx; Pish Pai
- 7604    Теребеллум: Terebellum
- 7597    Теребеллум: Terebellum
- 5459    Толіман: Toliman; Rigel Kentaurus; Rigil Kent
-  510    Торкуларіс СЕптентріоналіс: Torcularis Septentrionalis
- 3699    Тураіс: Turais; Tureis; Scutulum; Aspidiske
- 5854    Унукальгай: Unukalhai; Unuk Al Hay; Unuk Elhaia; Unuk; Unukalhay; Cor Serpentis
- 1956    Фает: Phaet; Phakt; Phact; Phad
- 4554    Фекда: Phekda; Phad; Phecda; Phegda; Phekha; Phacd
- 5714    Феркад Мінор: Pherkad Minor
- 5735    Феркад: Pherkad; Pherkad Major
- 8728    Фомальгаут: Fomalhaut; Os Piscis Meridiani; Os Piscis Notii; Difda Al Auwel; The First Frog
- 8773    Фум-аль-Самаках: Fum Al Samakah
- 2282    Фуруд: Furud; Phurud
- 4785    Хара: Chara 
- 4359    Хорт: Chort; Coxa; Chertan
- 7479    Шам: Sham; Alsahm
-  553    Шаратан: Sharatan; Sheratan; Al Sharatain
- 6527    Шаула: Shaula
- 8775    Шеат: Scheat; Sheat; Seat Alpheras; Menkib
-  168    Шедар: Schedar; Shedir; Schedir
- 7106    Шеліак: Sheliak; Shelyak; Shiliak
- 3207    Шуаль-аль-Мугліф: Suhail Al Muhlif; Al Suhail Al Muhlif
+ 3307    Р С‚Р“СЋв„–: Avior
+ 5267    Р СѓС…СЌСЂ: Agena; Hadar
+ 2618    Р С„СЂв„–СЂ: Adara; Adhara
+  390    Р С„СѓР“С‹: Adhil
+ 4031    Р С„СѓСЂС”С…в„–СЂ: Adhafera; Aldhafara; Aldhafera
+  874    Р С†СЂ: Azha
+ 8301    Р С‡С…С‹СњС”СЂС”СЂС„С†: Azelfafage
+ 3045    Р С‡СЊР“С„Р“С‘СЉС…: Azmidiske; Asmidiske
+ 7116    Р С‰СЌ-СЂС‹Сњ-Р°СЂСЊР“: Ain Al Rami
+ 1409    Р С‰СЌ: Ain; Oculus Boreus
+  897    Р СЉСЂСЊСЂв„–: Acamar
+ 5984    Р СЉв„–СЂСЃ: Acrab; Graffias; Grafias; Grassias; Akrab; Elacrab
+ 4730    Р СЉв„–С“СЉС‘: Acrux
+ 3572    Р СЉС“СЃС…СЌС‘: Acubens; Sertan; Sartan
+ 4905    Р С‹Р“СЋС’: Alioth; Aliath
+ 7141    Р С‹Р“Сџ: Alya; Alga
+ 7298    Р С‹СЂС„С”СЂв„–: Aladfar
+ 6903    Р С‹СЂС’С”СЂв„–: Alathfar; Al Athfar
+  936    Р С‹СѓСЋС‹Сњ: Algol; Gorgona; Gorgonea Prima; Demon Star; El Ghoul
+ 1605    Р С‹Сњ-Р СЌС‡: Al Anz; Almaaz
+ 8591    Р С‹Сњ-РЄСЂС‹СњСЃ-СЂС‹Сњ-Р°СЂС‰: Al Kalb Al Rai
+ 3731    Р С‹Сњ-Р¬Р“СЌС‹Сџв„–-СЂС‹Сњ-Р С‘СЂС„: Al Minliar Al Asad
+ 7417    Р С‹СњСЃР“в„–С…СЋ: Albireo
+ 7950    Р С‹СњСЃСЂС‹Р“: Albali; Al Bali
+ 7264    Р С‹СњСЃСЂС‹С„СЂСѓ: Albaldah; Al Baldah
+ 4057    Р С‹СњСѓР“РљСЃСЂ: Algieba; Algeiba; Al Gieba
+   39    Р С‹СњСѓС…СЌР“СЃ: Algenib
+ 2421    Р С‹СњСѓС…СЌСЂ: Alhena
+ 4757    Р С‹СњСѓСЋв„–СЂСЃ: Algorab; Algores; Algoral; Algorel
+ 6396    Р С‹СњС„СѓР“СЃСЂС•: Aldhibah; Eldsib
+ 1457    Р С‹СњС„С…СЃСЂв„–СЂСЌ: Aldebaran; Cor Tauri; Parilicium.
+ 8162    Р С‹СњС„С…в„–СЂСЊС€СЌ: Alderamin; Alderaimin.
+ 2484    Р С‹СњС‡Р“в„–в„–: Alzirr
+ 5191    Р С‹СњСЉСЂС‰С„: Alkaid; Benetnash; Benetnasch; Elkeid
+ 5733    Р С‹СњСЉСЂС‹С“в„–СЋСЏС‘: Alkalurops; Inkalunis; Icalurus; Clava; Venabulum
+ 4287    Р С‹СњСЉС…С‘: Alkes
+ 5062    Р С‹СњСЉСЋв„–: Alcor; Saidak
+ 8417    Р С‹СњСЉС“в„–СѓСЂСѓ: Alkurhah; Al Kirdah; Kurhah
+  603    Р С‹СњСЊСЂСЂСЉ: Almaak; Almach; Alamak; Almak; Almaach
+ 1903    Р С‹СњСЌР“С‹СЂСЊ: Alnilam; Alnihan; Alnitam
+ 1948    Р С‹СњСЌР“С’СЂСЉ: Alnitak; Alnitah
+ 6084    Р С‹СњСЌР“СџС’: Alniyat; Al Niyat
+ 8425    Р С‹СњСЌСЂС‰в„–: Alnair; Al Nair
+ 1791    Р С‹СњСЌСЂС’С•: Alnath; El Nath; Nath
+  596    Р С‹Сњв„–Р“ССЂ: Alrisha; Alrischa; Alrescha; El Rischa; Al Richa; Rescha; Okda; Kaitain
+ 8974    Р С‹Сњв„–СЂС‰: Alrai; Arrai; Errai; Er Rai
+ 7462    Р С‹СњС‘СЂС”Р“: Alsafi; Athafi
+ 3634    Р С‹СњС‘С“С•СЂС‰С‹Сњ: Alsuhail; Al Suhail Al Wazn; Suhail
+ 7557    Р С‹СњС’СЂР“в„–: Altair; Atair
+ 3249    Р С‹СњС’СЂв„–С”: Altarf; Al Tarf
+ 3773    Р С‹СњС’С…в„–С”: Alterf
+ 8238    Р С‹СњС”Р“в„–СЉ: Alfirk; Alphirk
+ 3748    Р С‹СњС”СЂв„–С„: Alphard; Alfard; Alphart; Kalbelaphard; Cor Hydrae
+ 7254    Р С‹СњС”С…СЉСЉСЂ Р¬С…в„–Р“С„Р“СЂСЌСЂ: Alfecca Meridiana
+ 5793    Р С‹СњС”С…СЉСЉСЂ: Alphekka; Alphecca; Alphacca; Gemma; Gnosia; The Jewel; Gnosia Stella Coronae; Ashtaroth
+   15    Р С‹СњС”С…в„–СЂС–: Alpheratz; Alpherat; Sirrah; Sirah
+ 1165    Р С‹СњС–Р“СЋСЌС…: Alcyone
+ 4623    Р С‹СњС—Р“СЃСЂ: Alchiba; Alchita; Al Minliar Al Ghurab; Al Chiba
+ 3275    Р С‹СњС—СџС“СЉСЂС’: Alsciaukat; Mabsuthat
+ 7602    Р С‹СњССЂС‰СЌ: Alshain; Alschairn
+ 7773    Р С‹СњССЂС’: Alshat
+ 2827    Р С‹СћС„в„–СЂ: Aludra
+ 4375    Р С‹СћС‹Сџ Р С“С‘С’в„–СЂС‹Р“С‘: Alula Australis
+ 4377    Р С‹СћС‹Сџ РЎСЋв„–С…СЂС‹Р“С‘: Alula Borealis
+  850    Р СЌСѓС…С’С…СЌСЂв„–: Angetenar; Al Anchat Al Nahr; Anchat
+   99    Р СЌСЉСЂСЂ: Ankaa; Nair Al Zaurak; Cymbae; Lucida Cymbae; Head Of Phoenix
+ 7405    Р СЌС‘С…в„–: Anser
+ 6134    Р СЌС’СЂв„–С…С‘: Antares; Cor Scorpii; Kalb Al Akrab; Vespertilio
+ 8499    Р СЌС—СЂ: Ancha
+ 7343    Р в„–СЉСЂСЃ РЇСЋС‘С’С…в„–Р“СЋв„–: Arkab Posterior; Arkab Or Urkab
+ 7337    Р в„–СЉСЂСЃ РЇв„–Р“СЋв„–: Arkab Prior; Arkab Or Urkab
+ 5340    Р в„–СЉС’С“в„–: Arcturus; Haris-El-Sema
+ 1865    Р в„–СЌС…СЃ: Arneb
+ 6370    Р в„–в„–СЂСЉР“С‘: Arrakis; Errakis; Al Rakis; El Rakis
+ 3461    Р С‘С…С‹С‹СћС‘ Р С“С‘С’в„–СЂС‹Р“С‘: Asellus Australis
+ 3449    Р С‘С…С‹С‹СћС‘ РЎСЋв„–С…СЂС‹Р“С‘: Asellus Borealis
+ 5404    Р С‘С…С‹С‹СћС‘ РЇв„–Р“СЊС“С‘: Asellus Primus
+ 5350    Р С‘С…С‹С‹СћС‘ Р±С…СЉСЋСЌС„С“С‘: Asellus Secondus
+ 5329    Р С‘С…С‹С‹СћС‘ РІС…в„–С’Р“С“С‘: Asellus Tertius
+ 7194    Р С‘СЉС…С‹С‹СЂ: Ascella
+ 1151    Р С‘С’С…в„–СЋСЏС…: Asterope. Sterope I
+ 1131    Р С’Р“СЉ: Atik; Ati; Al Atik
+ 1178    Р С’С‹СЂС‘: Atlas
+ 4910    Р С“С‚СЂ: Auva; Minelauva
+  472    Р С•С…в„–СЌСЂв„–: Achernar
+  219    Р С—Р“в„–С„: Achird
+ 8450    РЎСЂСѓСЂСЊ: Baham; Biham
+  539    РЎСЂС’С…СЌ РЄСЂС‰С’СЋС‘: Baten Kaitos
+ 1298    РЎС…С‰С„: Beid
+ 4853    РЎС…СЉв„–С“СЉС‘: Becrux; Mimosa
+ 1790    РЎС…С‹С‹СџС’в„–Р“СЉС‘: Bellatrix; The Amazon Star
+ 2061    РЎС…С’С…С‹СњСѓС…С‰С‡С…: Betelgeuse; Betelguex; Betelgeuze; Beteiguex; Al Mankib
+ 5958    РЎС‹С…С‰С‡СЂ С‡СЋв„–Сџ: Blaze Star
+  951    РЎСЋС’С…С‰СЌ: Botein
+ 5603    РЎв„–СЂС•Р“С“СЊ: Brachium; Cornu; Zuben El Genubi; Zuban Al Akrab; Zuben Hakrabi
+ 4932    РўР“СЌС„С…СЊР“СЂС’в„–Р“СЉС‘: Vindemiatrix; Vindemiator; Vendemiatrix; Almuredin; Provindemiator; Protrigetrix; Protrygetor; Alaraph
+ 2777    РўСЂС‘СЂС’: Wasat; Wesat
+ 7001    РўС…СѓСЂ: Vega; Wega; Fidis; Harp Star
+ 2693    РўС…С‡С…СЌ: Wezen; Alwazn; Wesen; Al Wazor
+ 2040    РўС…С‡СЌ: Wezn; Wazn
+ 1346    РЈР“СЂС„С“СЊ Р’: Hyadum I
+ 1373    РЈР“СЂС„С“СЊ Р’Р“: Hyadum Ii
+ 4434    РЈР“СЂСЌС”СЂв„–: Gianfar; Giansar; Gaiusar; Giauzar; Juza
+ 4662    РЈРљСЌСЂС• РЈС•С“в„–СЂСЃ: Gienah Ghurab; Gienah
+ 7949    РЈРљСЌСЂС• Р¶С€СѓСЌР“: Gienah Cygni; Gienah
+ 1612    РЈСЂС…С„Р“: Haedi; Haedus; Hoedus I; The Kids; Sadatoni; Saclateni
+ 4763    РЈСЂСЉв„–С“СЉС‘: Gacrux
+  617    РЈСЂСЊСЂС‹Сњ: Hamal; Hemal; Hamul; Ras Hammel; El Nath
+ 8316    РЈСЂв„–СЌС…С’СЂ С‡СЋв„–Сџ: Garnet Star
+ 1577    РЈСЂС‘С‘С…С‹С…С•: Hassaleh
+ 5107    РЈС…С‡С…: Heze
+ 1641    РЈСЋС…С„С“С‘ Р’Р“: Hoedus Ii; The Kids
+  591    РЈСЋС‹СЋС‚СЂ РЈР“С„в„–С€: Head Of Hydrus
+ 8634    РЈСЋСЊСЂСЊ: Homam; Homan; Humam; Al Hammam
+ 2845    РЈСЋСЊС…Р“С‡СЂ: Gomeisa; Algomeyla; Gomelza
+  947    РЈСЋв„–СѓСЋСЌС… РЄС‚СЂв„–С’СЂ: Gorgonea Quarta
+  879    РЈСЋв„–СѓСЋСЌС… Р±С…СЉС“СЌС„СЂ: Gorgonea Secunda
+  921    РЈСЋв„–СѓСЋСЌС… РІС…в„–С’Р“СЂ: Gorgonea Tertia
+ 5978    РЈв„–СЂС”Р“СЂС‘: Grafias
+ 6688    РЈв„–С“СЊР“С“СЊ: Grumium; Genam; Nodus I
+ 4550    РЈв„–С“СЊСЃв„–Р“С„С† 1830: Groombridge 1830
+ 4968    Р¤Р“СЂС„С…СЊСЂ: Diadem
+  188    Р¤Р“С”С„СЂ: Diphda; Deneb Kaitos; Difda; Difda Al Thani; Rana Secunda, The Second Frog
+ 7776    Р¤СЂСЃР“Сѓ. РЎС…С’СЂ 1: Dabih. Beta1 = Dabih Major; Beta2 = Dabih Minor
+ 8322    Р¤С…СЌС…СЃ Р С‹СњСѓС…С„Р“: Deneb Algedi; Deneb Algiedi; Scheddi; Sheddi
+  334    Р¤С…СЌС…СЃ Р С‹СњСѓС…СЌС“СЃР“: Deneb Algenubi; Dheneb; Deneb
+ 7852    Р¤С…СЌС…СЃ Р¤С“С‹СњС”Р“СЊ: Deneb Dulfim; Deneb El Delphinus
+   74    Р¤С…СЌС…СЃ РЄСЂС‰С’СЋС‘ РёС…СЊСЂС‹Р“: Deneb Kaitos Shemali; Deneb Kaitos Al Shamaliyy
+ 7176    Р¤С…СЌС…СЃ-СЂС‹Сњ-Р®СЉСЂСЃ: Deneb El Okab; Deneb
+ 7235    Р¤С…СЌС…СЃ-СЂС‹Сњ-Р®СЉСЂСЃ: Deneb El Okab; Deneb
+ 7924    Р¤С…СЌС…СЃ: Deneb; Deneb Cygni; Deneb El Adige; Arided; Aridif; Gallina; Arrioph
+ 4534    Р¤С…СЌС…СЃСЋС‹СЂ: Denebola; Deneb Aleet
+ 6027    Р¤С†СЂСЃСЃСЂСѓ: Jabbah
+ 6636    Р¤С‡Р“СЃСЂСЌ: Dsiban; Dziban
+ 4301    Р¤С“СЃСѓС…: Dubhe; Dubb; Ak
+ 5953    Р¤С—С“СЃСЃСЂ: Dschubba; Iclarkrau
+ 5744    РҐС„ Р С‘Р“С•: Ed Asich; Eldsich; Al Dhiba; Al Dhihi
+ 1142    РҐС‹С…СЉС’в„–СЂ: Electra
+ 8308    РҐСЌР“С”: Enif; Enf; Enir; Al Anf; Os Pegasi; Fom
+ 6705    РҐС’СЂСЊР“СЌ: Etamin; Etanin; Ettanin; Rastaban; Rasaben; Zenith Star
+ 6075    РЉС„ РЇСЋС‘С’С…в„–Р“СЋв„–: Yed Posterior
+ 6056    РЉС„ РЇв„–Р“СЋв„–: Yed Prior; Yad; Yed; Jed
+  984    Р§Р“СЃСЂС‹Сњ: Zibal 
+ 4540    Р§СЂС‚Р“С„С†СЂСѓ: Zavijah; Zavijava; Zavyava; Zawijah; Zarijan; Minelauva; Alaraph
+ 4689    Р§СЂСЌР“СЂС•: Zaniah
+ 1231    Р§СЂС“в„–СЂСЉ: Zaurak; Zaurac; Zaurack
+ 4357    Р§СЋС‘СЊСЂ: Zosma; Zozma; Zosca; Zozca; Duhr; Dhur; Zubra
+ 5586    Р§С“СЃС…СЌ РҐС‹СЂСЉв„–Р“СЃР“: Zuben Elakribi
+ 5787    Р§С“СЃС…СЌ РҐС‹СњСЂСЉв„–СЂСЃ: Zuben Elakrab; Zuben Hakraki; Zuben El Hakrabi
+ 5531    Р§С“СЃС…СЌ РҐС‹СњСѓС…СЌС“СЃР“: Zuben Elgenubi; Zubenelgenubi; Kiffa Australis; Elkhiffa Australis
+ 5685    Р§С“СЃС…СЌ РҐС‹СњСС…СЊСЂС‹Р“: Zuben Elschemali; Zuben Eschamali; Zuben El Chamali; Zubenesch; Zubenelg; Kiffa Borealis
+ 5506    Р’С‡СЂв„–: Izar; Mirac; Mirak; Mirach; Mizar; Pulcherrima
+ 6789    РЏС‹СњС„С“СЌ: Yildun; Vildiur; Gildun
+ 8131    РЄР“С’СЂС‹СњС”СЂ: Kitalpha; Kitel Phard; Kitalphar
+ 6117    РЄСЂС„С†СЂСЊ: Kajam; Cujam; Cajam; Caiam
+ 2326    РЄСЂСЌСЋСЏС“С‘: Canopus; Suhel; Suhail
+ 1708    РЄСЂСЏС…С‹С‹СЂ: Capella; Alhajoth
+ 2891    РЄСЂС‘С’СЋв„–: Castor; Apollo
+ 6879    РЄСЂС“С‘ Р С“С‘С’в„–СЂС‹Р“С‘: Kaus Australis
+ 6913    РЄСЂС“С‘ РЎСЋв„–С…СЂС‹Р“С‘: Kaus Borealis
+ 6859    РЄСЂС“С‘ Р¬С…в„–Р“С„Р“СЋСЌСЂС‹Р“С‘: Kaus Meridionalis; Kaus Media; Media
+   21    РЄСЂС”: Caph; Chaph; Kaff; Al Sanam Al Nakah
+  804    РЄСЂС”С”СЂС‹СњС„С†Р“С„СѓСЊСЂ: Kaffaljidhma; Al Kaff Al Jidhmah
+ 6603    РЄС…СЃСЂС‹Сњв„–СЂС‰: Cebalrai; Kelb Alrai; Kabalrai; Cheleb; Celb-Al-Rai
+ 1325    РЄС…С‰С„: Keid; Kied
+ 1140    РЄС…С‹С…СЌСЋ: Celaeno; Celieno; Celeno; Lost Pleiad
+ 4915    РЄСЋв„– РЄСЂв„–СЋС‹Р“: Cor Caroli
+ 6148    РЄСЋв„–СЌС…С”СЋв„–СЋС‘: Kornephoros; Korneforos; Rutilicus
+ 5563    РЄСЋС•СЂСЃ: Kocab; Kochab; Kochah; Guards Of The Pole
+ 4786    РЄв„–СЂС‡ С“ РЎС…С—С‚СЂв„–С†СЂ: Kraz In Becvar
+ 6555    РЄС“СЊСЂ: Kuma
+ 1666    РЄС“в„–С‘СЂ: Cursa; Dhalim; Kursa
+ 6508    Р«С…С‡СЂС’С•: Lesath; Lesuth
+ 3685    Р¬Р“СЂСЏС‹СЂС–Р“С„С“С‘: Miaplacidus
+ 4630    Р¬Р“СЌСЉСЂв„–: Minkar
+ 1852    Р¬Р“СЌС’СЂСЉСЂ: Mintaka; Mintika
+ 3418    Р¬Р“СЌС—Р“в„–: Minchir; Al Minliar Al Shuja
+  681    Р¬Р“в„–СЂ: Mira
+  337    Р¬Р“в„–СЂСЉ: Mirach; Merach; Mirac; Mirak; Al Mizar
+  834    Р¬Р“в„–СЂСЊ: Miram
+ 1017    Р¬Р“в„–С”СЂСЉ: Mirphak; Mirfak; Marfak; Algenib
+ 6526    Р¬Р“С‘СЂСЊ: Misam; Maasym; Masym
+ 5054    Р¬Р“С–СЂв„–: Mizar; Mizat; Mirza
+ 1149    Р¬СЂС‰Сџ: Maia
+ 8781    Р¬СЂв„–СЉСЂСЃ: Markab; Marchab
+ 2948    Р¬СЂв„–СЉСЂСЃ: Markab; Markeb
+ 6149    Р¬СЂв„–С”Р“СЉ: Marfic; Marfik; Marsic
+ 6008    Р¬СЂв„–С”Р“СЉ: Marfik; Marsik; Mirfak; Marfak
+  343    Р¬СЂв„–С”СЂСЉ: Marfak
+  321    Р¬СЂв„–С”СЂСЉ: Marfak
+ 8650    Р¬СЂС’СЂв„–: Matar
+ 2473    Р¬С…СЃС‘С“С’СЂ: Mebsuta; Melucta; Meboula
+ 4660    Р¬С…Сѓв„–С…С‡: Megrez; Kaffa
+  546    Р¬С…С‡СЂв„–С’С•Р“СЊ: Mesarthim; Mesartim; First Star In Aries
+ 1879    Р¬С…С‰С‘С‘СЂ; Meissa; Heka
+ 2650    Р¬С…СЉСЃС“С„СЂ: Mekbuda
+ 1228    Р¬С…СЌСЉР“СЃ: Menkib; Menkhib; Menchib
+ 2088    Р¬С…СЌСЉСЂС‹Р“СЌСЂСЌ: Menkalinan; Menkalina
+  896    Р¬С…СЌСЉСЂв„–: Menkar
+  911    Р¬С…СЌСЉСЂв„–: Menkar; Mekab; Menkab; Monkar
+ 5288    Р¬С…СЌСЉС…СЌС’: Menkent
+ 4295    Р¬С…в„–СЂСЉ: Merak; Mirak
+ 5533    Р¬С…в„–СѓСЂ: Merga; Marrha; El Mara El Musalsela; Falx Italica
+ 1156    Р¬С…в„–СЋСЏС…: Merope
+  544    Р¬С…С’СЂС‹С‹СЂС•: Metallah; Mothallah; Atria; Caput Trianguli; Ras Al Muthallah; Elmuthalleth
+ 2657    Р¬С“С‹Р“С”С…СЌ: Muliphen; Muliphein; Isis; Mirza
+ 2294    Р¬С“в„–С‡Р“СЊ: Murzim; Mirzam; Mirza
+ 3323    Р¬С“С‘СЉР“С„СЂ: Muscida
+ 3391    Р¬С“С‘СЉР“С„СЂ: Muscida
+ 3403    Р¬С“С‘СЉР“С„СЂ: Muscida
+ 5235    Р¬С“С”в„–Р“С„: Mufrid; Muphrid; Mufride; Muphride
+ 1829    Р­Р“С•СЂС‹Сњ: Nihal; Nibal
+ 1899    Р­СЂС‰в„–-СЂС‹Сњ-Р±СЂР“С”: Nair Al Saif; Hatysa
+ 3165    Р­СЂСЋС‘: Naos; Suhail Hadar
+ 6746    Р­СЂС: Nash; Alnasl; Alwazl; Zujj Al Nushshabah; Nushaba
+ 8278    Р­СЂСР“в„–СЂ: Nashira
+ 5602    Р­С…СЉСЉСЂв„–: Nekkar; Merez; Meres
+ 7310    Р­СЋС„С“С‘ Р±С…СЉС“СЌС„С“С‘: Nodus Secundus; Altais; Aldib
+ 7121    Р­С“СЌСЉР“: Nunki; Sadira
+ 5747    Р­С“С‘СЂСЉСЂСЌ: Nusakan
+ 7790    РЇСЂС‚С€С—: Peacock
+ 2422    РЇС‹СЂС‘СЉС…С’С’СЂ С‡СЋв„–Сџ: Plaskett'S Star
+ 1180    РЇС‹С…С‰СЋСЌС…: Pleione
+ 2990    РЇСЋС‹С‹С“СЉС‘: Pollux; Hercules
+ 7228    РЇСЋС‹Сџв„–СЌСЂ РЇР“С‚С„С…СЌСЌСЂ: Polaris Australis
+  424    РЇСЋС‹Сџв„–СЌСЂ: Polaris; Alruccabah; Cynosura; Phoenice; Lodestar; Pole Star; Tramontana; Angel Stern; Navigatoria; Star Of Arcady;Yilduz; Mismar
+ 4825    РЇСЋв„–в„–Р“СЊСЂ: Porrima; Arich
+ 7747    РЇв„–Р“СЊСЂ РЈР“С…С„Р“: Prima Giedi; Algiedi Prima; Algedi
+ 4247    РЇв„–С…С–Р“СЏС“СЂ: Praecipua
+ 2134    РЇв„–СЋСЏС“С‘: Propus
+ 2821    РЇв„–СЋСЏС“С‘: Propus
+ 2216    РЇв„–СЋСЏС“С‘: Propus; Praepes; Tejat Prior
+ 2943    РЇв„–СЋС–Р“СЋСЌ: Procyon; Elgomaisa; Algomeysa; Antecanis
+ 1713    Р°Р“СѓС…С‹Сњ: Rigel; Algebar; Elgebar
+ 5487    Р°Р“С„С†С‹Сњ-СЂС‹Сњ-Р С‚С‚СЂ: Rijl Al Awwa
+ 1136    Р°СЂСЌСЂ: Rana 
+ 3873    Р°СЂС‘ РҐС‹СЂС‘С…С„ Р С“С‘С’в„–СЂС‹Р“С‘: Ras Elased Australis; Al Ras Al Asad Al Janubiyyah; Algenubi; Al Ashfar
+ 3905    Р°СЂС‘ РҐС‹СЂС‘С…С„ РЎСЋв„–С…СЂС‹Р“С‘: Ras Elased Borealis; Rasalas; Ras Al Asad Al Shamaliyy; Alshemali; Al Ashfar
+ 6406    Р°СЂС‘СЂС‹СњСѓС…С’Р“: Rasalgethi; Ras Algethi; Rasalegti
+ 6556    Р°СЂС‘СЂС‹СњС•СЂСѓС…: Rasalhague; Ras Alhague
+ 6536    Р°СЂС‘С’СЂСЃСЂСЌ: Rastaban; Alwaid; Asuia; Rastaben
+ 3982    Р°С…СѓС“С‹: Regulus; Cor Leonis; Rex; Al Kalb Al Asad; Kabeleced
+ 7882    Р°СЋС’СЂСЌС…С‚: Rotanev; Rotanen; Venator
+ 7851    Р°С“СЉСЃСЂ: Ruchba; Rukbat Al-Dajajah; Al Rukbah Al Dajajah
+ 7348    Р°С“СЉСЃСЂС’: Rukbat; Rucba; Rukbat Al Rami; Alrami
+  403    Р°С“СЉСЃСЂС•: Ruchbah; Rucba; Rucha; Ksora
+ 2491    Р±Р“в„–Р“С“С‘: Sirius; Canicula; Dog Star; Aschere
+ 5338    Р±Р“в„–СЊСЂ: Syrma
+ 8610    Р±Р“С’С“С‹СЂ: Situla
+ 6378    Р±СЂСЃР“СЉ: Sabik
+ 8414    Р±СЂС„СЂС‹СњСЊС…С‹Р“СЉ: Sadalmelik; Sadalmelek; Sadlamulk; El Melik; Saad El Melik
+ 8232    Р±СЂС„СЂС‹СњС‘С“С“С„: Sadalsuud; Sadalsud; Sad Es Saud; Sadalsund; Saad El Sund
+ 8518    Р±СЂС„СЂС‹СњС—СЃР“Сџ: Sadalachbia; Sadachbia
+ 7796    Р±СЂС„в„–: Sadr; Sador; Sadir
+ 2004    Р±СЂС‰С”: Saiph
+ 8880    Р±СЂС‹СњСЊ: Salm; Kerb; Markab; El Khereb
+ 6410    Р±СЂв„–Р“СЌ: Sarin
+ 6553    Р±СЂв„–СѓСЂС‘: Sargas
+ 5435    Р±С…СѓР“СЌС“С‘: Seginus; Ceginus; Haris
+ 7754    Р±С…СЉС“СЌС„СЂ РЈР“С…С„Р“: Secunda Giedi; Algiedi Secunda; Gredi; Algedi
+ 8709    Р±СЉСЂС’: Skat; Scheat; Sheat
+ 1481    Р±СЉС…СЏС’в„–С“СЊ: Sceptrum
+ 5056    Р±СЏР“СЉСЂ: Spica; Azimech; Spica Virginis; Alaraph
+ 1152    Р±С’С…в„–СЋСЏС… Р’Р“: Sterope Ii
+ 7906    Р±С“СЂС‹СЋСЉР“СЌ: Sualocin; Scalovin; Svalocin; Nicolaus
+ 3852    Р±С“СЃв„–СЂ: Subra
+ 7178    Р±С“С‹СџС”СЂС’: Sulafat; Sulaphat
+ 7582    РІР“С‹: Tyl
+ 1543    РІСЂСЃР“С’: Tabit
+ 1855    РІСЂСЃР“С’: Thabit; Tabit
+ 1145    РІСЂС‰СѓС…С’СЂ: Taygeta; Taygete
+ 3569    РІСЂС‹Р“С’СЂ: Talitha; Talita
+ 4069    РІСЂСЌР“Сџ Р С“С‘С’в„–СЂС‹Р“С‘: Tania Australis
+ 4033    РІСЂСЌР“Сџ РЎСЋв„–С…СЂС‹Р“С‘: Tania Borealis; Al Kafzah Al Thaniyah.
+ 7525    РІСЂв„–СЂС‡С…С„: Tarazed; Reda
+ 1464    РІСѓР“СЊР“СЌ: Theemim; Beemin
+ 5291    РІСѓС“СЃСЂСЌ: Thuban; Adib; Dragon'S Tail
+ 3208    РІС…СѓСЊС…СЌ: Tegmen; Tegmine
+ 2286    РІС…С„С†СЂС’ РЇСЋС‘С’С…в„–Р“СЋв„–: Tejat Posterior; Calx; Pish Pai
+ 7604    РІС…в„–С…СЃС…С‹С‹С“СЊ: Terebellum
+ 7597    РІС…в„–С…СЃС…С‹С‹С“СЊ: Terebellum
+ 5459    РІСЋС‹Р“СЊСЂСЌ: Toliman; Rigel Kentaurus; Rigil Kent
+  510    РІСЋв„–СЉС“С‹СЂв„–Р“С‘ Р±РҐСЏС’С…СЌС’в„–Р“СЋСЌСЂС‹Р“С‘: Torcularis Septentrionalis
+ 3699    РІС“в„–СЂР“С‘: Turais; Tureis; Scutulum; Aspidiske
+ 5854    РіСЌС“СЉСЂС‹СњСѓСЂС‰: Unukalhai; Unuk Al Hay; Unuk Elhaia; Unuk; Unukalhay; Cor Serpentis
+ 1956    РґСЂС…С’: Phaet; Phakt; Phact; Phad
+ 4554    РґС…СЉС„СЂ: Phekda; Phad; Phecda; Phegda; Phekha; Phacd
+ 5714    РґС…в„–СЉСЂС„ Р¬Р“СЌСЋв„–: Pherkad Minor
+ 5735    РґС…в„–СЉСЂС„: Pherkad; Pherkad Major
+ 8728    РґСЋСЊСЂС‹СњСѓСЂС“С’: Fomalhaut; Os Piscis Meridiani; Os Piscis Notii; Difda Al Auwel; The First Frog
+ 8773    РґС“СЊ-СЂС‹Сњ-Р±СЂСЊСЂСЉСЂС•: Fum Al Samakah
+ 2282    РґС“в„–С“С„: Furud; Phurud
+ 4785    РµСЂв„–СЂ: Chara 
+ 4359    РµСЋв„–С’: Chort; Coxa; Chertan
+ 7479    РёСЂСЊ: Sham; Alsahm
+  553    РёСЂв„–СЂС’СЂСЌ: Sharatan; Sheratan; Al Sharatain
+ 6527    РёСЂС“С‹СЂ: Shaula
+ 8775    РёС…СЂС’: Scheat; Sheat; Seat Alpheras; Menkib
+  168    РёС…С„СЂв„–: Schedar; Shedir; Schedir
+ 7106    РёС…С‹Р“СЂСЉ: Sheliak; Shelyak; Shiliak
+ 3207    РёС“СЂС‹Сњ-СЂС‹Сњ-Р¬С“СѓС‹Р“С”: Suhail Al Muhlif; Al Suhail Al Muhlif
