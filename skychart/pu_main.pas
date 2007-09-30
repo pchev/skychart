@@ -83,6 +83,9 @@ type
 
   Tf_main = class(TForm)
     BlinkImage: TAction;
+    P1L1: TLabel;
+    P0L1: TLabel;
+    P0L2: TLabel;
     ReleaseNotes1: TMenuItem;
     ToolButtonBlink: TToolButton;
     ViewScrollBar1: TMenuItem;
@@ -2547,8 +2550,9 @@ begin
    if def_cfgplot.FontBold[4] then font.style:=[fsBold] else font.style:=[];
    if def_cfgplot.FontItalic[4] then font.style:=font.style+[fsItalic];
 {$endif}
-   LPanels01.Caption:='Ra:22h22m22.22s +22°22''22"22';
+   LPanels01.Caption:='Ra:222h22m22.22s +22°22''22"22';
    PanelBottom.height:=2*LPanels01.Height+8;
+   P0L2.Top:=LPanels01.Height+4;
    PPanels0.Width:=LPanels01.width+8;
    Lpanels01.Caption:='';
    Lpanels0.Caption:='';
@@ -2557,7 +2561,7 @@ end;
 Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
 begin
 if traceon and (txt>'') then writetrace(txt);
-LPanels1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
+P1L1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
 if sendmsg then SendInfo(Sender,origin,txt);
 // refresh tracking object
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
@@ -2573,8 +2577,16 @@ end;
 end;
 
 Procedure Tf_main.SetLPanel0(txt:string);
+var i: integer;
 begin
-LPanels0.Caption:=txt;
+i:=pos(crlf,txt);
+if i=0 then begin
+  P0L1.Caption:=txt;
+  P0L2.Caption:='';
+end else begin
+  P0L1.Caption:=copy(txt,1,i-1);
+  P0L2.Caption:=copy(txt,i+2,999);
+end;
 end;
 
 Procedure Tf_main.SetTopMessage(txt:string);
