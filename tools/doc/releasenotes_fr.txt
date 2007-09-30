@@ -1,5 +1,11 @@
 Version 3.0.1.3 svn  Notes de la version
 
+30 septembre 2007
+Améliore la précision des coordonnées moyennes J2000.
+L'affichage des images de Skyview marche à nouveau avec les nouvelles URL.
+Amélioration de l'affichage des images FITS 32 bits.
+Montrer en rouge les erreurs dans le chemin des catalogues.
+
 17 juin 2007 Changement du réglage des coordonnées:
 Un nouvel écran simplifié permet de choisir le type de coordonnée voulu.
 La valeur par défaut est maintenant les coordonnées apparentes de la date.
