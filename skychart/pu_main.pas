@@ -85,7 +85,6 @@ type
     BlinkImage: TAction;
     P1L1: TLabel;
     P0L1: TLabel;
-    P0L2: TLabel;
     ReleaseNotes1: TMenuItem;
     ToolButtonBlink: TToolButton;
     ViewScrollBar1: TMenuItem;
@@ -2552,7 +2551,6 @@ begin
 {$endif}
    LPanels01.Caption:='Ra:222h22m22.22s +22°22''22"22';
    PanelBottom.height:=2*LPanels01.Height+8;
-   P0L2.Top:=LPanels01.Height+4;
    PPanels0.Width:=LPanels01.width+8;
    Lpanels01.Caption:='';
    Lpanels0.Caption:='';
@@ -2577,16 +2575,8 @@ end;
 end;
 
 Procedure Tf_main.SetLPanel0(txt:string);
-var i: integer;
 begin
-i:=pos(crlf,txt);
-if i=0 then begin
-  P0L1.Caption:=txt;
-  P0L2.Caption:='';
-end else begin
-  P0L1.Caption:=copy(txt,1,i-1);
-  P0L2.Caption:=copy(txt,i+2,999);
-end;
+P0L1.Caption:=txt;
 end;
 
 Procedure Tf_main.SetTopMessage(txt:string);

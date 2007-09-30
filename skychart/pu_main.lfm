@@ -3182,17 +3182,11 @@ object f_main: Tf_main
         ParentFont = True
         TabOrder = 0
         object P0L1: TLabel
-          Height = 15
-          Width = 31
+          Height = 32
+          Width = 180
+          Align = alClient
+          ParentColor = False
           ParentFont = True
-          Transparent = False
-        end
-        object P0L2: TLabel
-          Height = 15
-          Top = 16
-          Width = 31
-          ParentFont = True
-          Transparent = False
         end
       end
     end
@@ -3224,6 +3218,7 @@ object f_main: Tf_main
           Align = alClient
           AutoSize = False
           ParentColor = False
+          ParentFont = True
           WordWrap = True
         end
       end
