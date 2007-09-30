@@ -1,7 +1,7 @@
-# translation of skychart.po to translation of skychart.it.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006. Mattia Verga <mverga@freemail.it>, 2007.
+# translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-06-09 18:26+0200\n"
+"PO-Revision-Date: 2007-09-16 18:10+0200\n"
 "Last-Translator: Mattia Verga <mverga@freemail.it>\n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
@@ -101,7 +101,7 @@ msgstr "(utile per rappresentare un flusso)"
 
 #: u_translation:rsnopropermo
 msgid ", no proper motion"
-msgstr ""
+msgstr ", nessun moto proprio"
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -197,7 +197,7 @@ msgstr "Età"
 
 #: u_translation:rsalignment
 msgid "Alignment"
-msgstr ""
+msgstr "Allineamento"
 
 #: u_translation:rsall
 msgid "All"
@@ -245,7 +245,7 @@ msgstr "Password utente anonimo"
 
 #: u_translation:rsapparent
 msgid "Apparent"
-msgstr ""
+msgstr "Apparenti"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -293,7 +293,7 @@ msgstr "Asteroidi da file"
 
 #: u_translation:rsastrometricj
 msgid "Astrometric J2000"
-msgstr ""
+msgstr "Astrometriche J2000"
 
 #: u_translation:rsastronomical
 msgid "Astronomical"
@@ -525,7 +525,7 @@ msgstr "Formato CdC, preferibilmente la versione compatta"
 
 #: u_translation:rscenter
 msgid "Center"
-msgstr ""
+msgstr "Centra"
 
 #: u_translation:rscenterobject
 msgid "Center Object"
@@ -1365,7 +1365,7 @@ msgstr "Calendario Effemeridi"
 
 #: u_translation:rsepoch
 msgid "Epoch"
-msgstr ""
+msgstr "Epoca"
 
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
@@ -1453,7 +1453,7 @@ msgstr "Uscendo..."
 
 #: u_translation:rsexpertmode
 msgid "Expert mode"
-msgstr ""
+msgstr "Modalità esperta"
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1661,7 +1661,7 @@ msgstr "Opzioni generali dei cataloghi"
 
 #: u_translation:rsgeocentric
 msgid "Geocentric"
-msgstr "Geocentrica"
+msgstr "geocentriche"
 
 #: u_translation:rsgetasteroidl
 msgid "Get Asteroid list."
@@ -1961,7 +1961,7 @@ msgstr "Seleziona lingua"
 
 #: u_translation:rslatinname
 msgid "Latin Name"
-msgstr ""
+msgstr "Nome Latino"
 
 #: u_translation:rslatitude
 msgid "Latitude"
@@ -2089,7 +2089,7 @@ msgstr "Nome File dell'Orizzonte"
 
 #: u_translation:rslocalsideral
 msgid "Local Sideral Time"
-msgstr ""
+msgstr "Tempo Locale Siderale"
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -2225,23 +2225,23 @@ msgstr "Magnitudine massima"
 
 #: u_translation:rsmean
 msgid "Mean"
-msgstr ""
+msgstr "Medie"
 
 #: u_translation:rsmeanj2000
 msgid "Mean J2000"
-msgstr ""
+msgstr "Medie J2000"
 
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
-msgstr "Anomalia dell'orbita"
+msgstr "Anomalia media"
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
-msgstr ""
+msgstr "Medie per la data"
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
-msgstr "Posizione reale"
+msgstr "Posizione media"
 
 #: u_translation:rsmercury
 msgid "Mercury"
@@ -3761,7 +3761,7 @@ msgstr "Sopra"
 
 #: u_translation:rstopocentric
 msgid "TopoCentric"
-msgstr "Topocentrica"
+msgstr "topocentriche"
 
 #: u_translation:rstotalradius
 msgid "Total Radius"
@@ -3817,7 +3817,7 @@ msgstr "Tipo di variabilità"
 
 #: u_translation:rstypeofcoordi
 msgid "Type of coordinates"
-msgstr ""
+msgstr "Tipo di coordinate"
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -3925,7 +3925,7 @@ msgstr "Usa tempo di sistema"
 
 #: u_translation:rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr ""
+msgstr "Usa il moto proprio per correggere la posizione per l'epoca data"
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"
@@ -4141,15 +4141,15 @@ msgstr "max"
 
 #: u_translation:rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr ""
+msgstr "equatore, equinozio e epoca della data medi"
 
 #: u_translation:rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr ""
+msgstr "equinozio J2000 e epoca della data medi"
 
 #: u_translation:rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr ""
+msgstr "equinozio e epoca J2000 medi"
 
 #: u_translation:rsmin2
 msgid "min"
@@ -4181,7 +4181,7 @@ msgstr "a"
 
 #: u_translation:rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr ""
+msgstr "equatore, equinozio e epoca della data reali"
 
 #: u_translation:rsturnsdegree
 msgid "turns / degree"
