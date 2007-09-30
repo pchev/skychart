@@ -727,9 +727,9 @@ begin
   Child.telescopeplugin:=telescope;
   {$endif}
   Child.sc.plot.cfgplot.Assign(cfgp);
-  Child.sc.plot.starshape:=starshape.Picture.Bitmap;
   Child.sc.plot.cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
   Child.sc.plot.cfgplot.starshapew:=Child.sc.plot.cfgplot.starshapesize div 2;
+  Child.sc.plot.starshape:=starshape.Picture.Bitmap;
   Child.sc.plot.compassrose:=compass;
   Child.sc.plot.compassarrow:=arrow;
   Child.sc.cfgsc.Assign(cfg1);

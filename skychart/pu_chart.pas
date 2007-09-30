@@ -1863,8 +1863,6 @@ end;
 
 procedure Tf_chart.switchstarExecute(Sender: TObject);
 begin
-//sc.plot.cfgplot.starplot:=abs(sc.plot.cfgplot.starplot-1);
-//sc.plot.cfgplot.nebplot:=sc.plot.cfgplot.starplot;
 dec(sc.plot.cfgplot.starplot);
 if sc.plot.cfgplot.starplot<0 then sc.plot.cfgplot.starplot:=2;
 if sc.plot.cfgplot.starplot=0 then sc.plot.cfgplot.nebplot:=0

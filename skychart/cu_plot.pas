@@ -83,6 +83,7 @@ type
      procedure Setstarshape(value:Tbitmap);
      procedure InitXPlanetRender;
      procedure SetImage(value:TCanvas);
+     procedure InitStarBmp;
   protected
     { Protected declarations }
   public
@@ -92,6 +93,7 @@ type
     cbmp : Tbitmap;
     cnv, destcnv  : Tcanvas;
     Fstarshape,starbmp,compassrose,compassarrow: Tbitmap;
+    Astarbmp: array [0..6,0..10] of Tbitmap;
     starbmpw:integer;
     IntfImg : TLazIntfImage;
     editlabelmenu: Tpopupmenu;
@@ -162,10 +164,13 @@ type
 Implementation
 
 constructor TSplot.Create(AOwner:TComponent);
-var i : integer;
+var i,j : integer;
     MenuItem: TMenuItem;
 begin
  inherited Create(AOwner);
+for i:=0 to 6 do
+  for j:=0 to 10 do
+     Astarbmp[i,j]:=Tbitmap.create;
  starbmp:=Tbitmap.Create;
  cbmp:=Tbitmap.Create;
  cnv:=cbmp.canvas;
@@ -254,10 +259,13 @@ begin
 end;
 
 destructor TSplot.Destroy;
-var i:integer;
+var i,j:integer;
 begin
 try
  for i:=1 to maxlabels do labels[i].Free;
+for i:=0 to 6 do
+  for j:=0 to 10 do
+     Astarbmp[i,j].free;
  starbmp.Free;
  cbmp.Free;
  cfgplot.Free;
@@ -310,6 +318,7 @@ InitLabel;
 if (cfgplot.starplot>0)and(cfgchart.drawsize<>starbmpw)and(Fstarshape<>nil) then begin
    starbmpw:=cfgchart.drawsize;
    BitmapResize(Fstarshape,starbmp,starbmpw);
+   InitStarBmp;
 end;
 result:=true;
 end;
@@ -386,6 +395,60 @@ begin
 Fstarshape:=value;
 starbmpw:=1;
 starbmp.Assign(Fstarshape);
+InitStarBmp;
+end;
+
+procedure SetTransparencyFromLuminance(bmp:Tbitmap);
+var
+  IntfImage: TLazIntfImage;
+  y: Integer;
+  x: Integer;
+  CurColor: TFPColor;
+  ImgHandle, ImgMaskHandle: HBitmap;
+begin
+    IntfImage:=nil;
+    try
+      bmp.CreateIntfImage(IntfImage);
+      for y:=0 to IntfImage.Height-1 do begin
+        for x:=0 to IntfImage.Width-1 do begin
+          CurColor:=IntfImage.Colors[x,y];
+ //         CurColor.alpha:=(CurColor.red+CurColor.green+CurColor.blue) div 3;
+          if ((CurColor.red+CurColor.green+CurColor.blue) div 3)<(40*255) then
+            CurColor:=colTransparent
+          else
+            CurColor.alpha:=alphaOpaque;
+          IntfImage.Colors[x,y]:=CurColor;
+        end;
+      end;
+      IntfImage.CreateBitmaps(ImgHandle, ImgMaskHandle);
+      bmp.SetHandles(ImgHandle, ImgMaskHandle);
+    finally
+      IntfImage.Free;
+    end;
+end;
+
+procedure TSplot.InitStarBmp;
+var memstream:Tmemorystream;
+    i,j,bw: integer;
+    SrcR,DestR: Trect;
+begin
+bw:=2*cfgplot.starshapew*starbmpw;
+for i:=0 to 6 do
+  for j:=0 to 10 do begin
+   SrcR:=Rect(j*cfgplot.starshapesize*starbmpw,i*cfgplot.starshapesize*starbmpw,(j+1)*cfgplot.starshapesize*starbmpw,(i+1)*cfgplot.starshapesize*starbmpw);
+   DestR:=Rect(0,0,bw,bw);
+   Astarbmp[i,j].Width:=bw;
+   Astarbmp[i,j].Height:=bw;
+   Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
+   Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
+   SetTransparencyFromLuminance(Astarbmp[i,j]);
+   Astarbmp[i,j].Transparent:=true;
+   memstream:=Tmemorystream.create;
+   Astarbmp[i,j].SaveToStream(memstream);
+   memstream.position := 0;
+   Astarbmp[i,j].LoadFromStream(memstream);
+   memstream.free;
+  end;
 end;
 
 function TSplot.InitLabel : boolean;
@@ -401,7 +464,10 @@ var
   ds,Icol : Integer;
   ico,isz,xx,yy : integer;
   DestR,SrcR :Trect;
+  bmp:Tbitmap;
+  memstream:Tmemorystream;
 begin
+bmp:=Tbitmap.create;
 xx:=round(x);
 yy:=round(y);
 with cnv do begin
@@ -431,11 +497,27 @@ with cnv do begin
       11: isz:=1;
      else isz:=0;
    end;
-   SrcR:=Rect(isz*cfgplot.starshapesize*starbmpw,ico*cfgplot.starshapesize*starbmpw,(isz+1)*cfgplot.starshapesize*starbmpw,(ico+1)*cfgplot.starshapesize*starbmpw);
+{   SrcR:=Rect(isz*cfgplot.starshapesize*starbmpw,ico*cfgplot.starshapesize*starbmpw,(isz+1)*cfgplot.starshapesize*starbmpw,(ico+1)*cfgplot.starshapesize*starbmpw);
    DestR:=Rect(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,xx+(cfgplot.starshapew+1)*starbmpw,yy+(cfgplot.starshapew+1)*starbmpw);
-   copymode:=cmSrcPaint;
-   CopyRect(DestR,starbmp.canvas,SrcR);
+   bmp.Width:=2*cfgplot.starshapew*starbmpw;
+   bmp.Height:=bmp.Width;
+   bmp.canvas.CopyMode:=cmSrcCopy;
+   bmp.canvas.CopyRect(Rect(0,0,bmp.Width,bmp.Height),starbmp.canvas,SrcR);
+   bmp.TransparentColor:=clBlack;
+   bmp.Transparent:=true;
+   memstream:=Tmemorystream.create;
+   bmp.SaveToStream(memstream);
+   memstream.position := 0;
+   bmp.LoadFromStream(memstream);
+   memstream.free;}
+   CopyMode:=cmSrcCopy;
+   Draw(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Astarbmp[ico,isz]);
+
+//   CopyMode:=cmSrcPaint;
+//   CopyRect(DestR,starbmp.canvas,SrcR);
+
 end;
+bmp.free;
 end;
 
 Procedure TSplot.PlotStar0(x,y: single; ma,b_v : Double);
