@@ -412,8 +412,7 @@ begin
       for y:=0 to IntfImage.Height-1 do begin
         for x:=0 to IntfImage.Width-1 do begin
           CurColor:=IntfImage.Colors[x,y];
- //         CurColor.alpha:=(CurColor.red+CurColor.green+CurColor.blue) div 3;
-          if ((CurColor.red+CurColor.green+CurColor.blue) div 3)<(40*255) then
+          if MaxIntValue([CurColor.red,CurColor.green,CurColor.blue])<(20*255) then
             CurColor:=colTransparent
           else
             CurColor.alpha:=alphaOpaque;
@@ -441,13 +440,21 @@ for i:=0 to 6 do
    Astarbmp[i,j].Height:=bw;
    Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
+//todo: all is not too nice here! must be revisited.
+   {$ifndef mswindows}
    SetTransparencyFromLuminance(Astarbmp[i,j]);
    Astarbmp[i,j].Transparent:=true;
+   {$endif}
    memstream:=Tmemorystream.create;
    Astarbmp[i,j].SaveToStream(memstream);
    memstream.position := 0;
    Astarbmp[i,j].LoadFromStream(memstream);
    memstream.free;
+   {$ifdef mswindows}
+   //SetTransparencyFromLuminance(Astarbmp[i,j]);
+   Astarbmp[i,j].TransparentColor:=clBlack;
+   Astarbmp[i,j].Transparent:=true;
+   {$endif}
   end;
 end;
 
@@ -1427,10 +1434,8 @@ if (iWidth<=cfgchart.Width)and(iHeight<=cfgchart.Height) then begin
    imabmp.SaveToStream(memstream);
    memstream.position := 0;
    imabmp.LoadFromStream(memstream);
-   {$ifndef mswindows}       // transparent produce weird output on Windows
-      imabmp.Transparent:=iTransparent;
-      imabmp.TransparentColor:=clBlack;
-   {$endif}
+   imabmp.Transparent:=iTransparent;
+   imabmp.TransparentColor:=clBlack;
    cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(DestX,DestY,imabmp);
 end else begin
