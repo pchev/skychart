@@ -527,8 +527,10 @@ cfgsc.RefractionOffset:=0;
 Fplot.cfgplot.outradius:=abs(round(min(50*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
+// ecliptic
+//cfgsc.e:=ecliptic(cfgsc.CurJd);
+cfgsc.e:=ecliptic(cfgsc.JdChart);
 // nutation constant
-cfgsc.e:=ecliptic(cfgsc.CurJd);
 nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
 // Sun geometric longitude eq. of date for aberration
 fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);

@@ -30,9 +30,9 @@ object f_chart: Tf_chart
     object identlabel: TLabel
       Cursor = crHandPoint
       Left = 136
-      Height = 17
+      Height = 14
       Top = 120
-      Width = 66
+      Width = 58
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4
@@ -47,10 +47,10 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 463
-      Height = 254
+      Left = 464
+      Height = 255
       Top = 1
-      Width = 16
+      Width = 15
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -62,8 +62,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 1
-      Height = 16
-      Top = 255
+      Height = 15
+      Top = 256
       Width = 478
       Align = alBottom
       LargeChange = 10
