@@ -403,6 +403,7 @@ var
   IntfImage: TLazIntfImage;
   y: Integer;
   x: Integer;
+  alpha : word;
   CurColor: TFPColor;
   ImgHandle, ImgMaskHandle: HBitmap;
 begin
@@ -412,10 +413,10 @@ begin
       for y:=0 to IntfImage.Height-1 do begin
         for x:=0 to IntfImage.Width-1 do begin
           CurColor:=IntfImage.Colors[x,y];
-          if MaxIntValue([CurColor.red,CurColor.green,CurColor.blue])<(20*255) then
-            CurColor:=colTransparent
-          else
-            CurColor.alpha:=alphaOpaque;
+          alpha:=MaxIntValue([CurColor.red,CurColor.green,CurColor.blue]);
+          if (alpha>200*255) then alpha:=65535;
+          if (alpha<100*255) then alpha:=alpha div 2;
+          CurColor.alpha:=alpha;
           IntfImage.Colors[x,y]:=CurColor;
         end;
       end;
@@ -432,29 +433,22 @@ var memstream:Tmemorystream;
     SrcR,DestR: Trect;
 begin
 bw:=2*cfgplot.starshapew*starbmpw;
+memstream:=Tmemorystream.create;
+starbmp.SaveToStream(memstream);
+memstream.position := 0;
+starbmp.LoadFromStream(memstream);
+memstream.free;
+SetTransparencyFromLuminance(starbmp);
 for i:=0 to 6 do
   for j:=0 to 10 do begin
    SrcR:=Rect(j*cfgplot.starshapesize*starbmpw,i*cfgplot.starshapesize*starbmpw,(j+1)*cfgplot.starshapesize*starbmpw,(i+1)*cfgplot.starshapesize*starbmpw);
    DestR:=Rect(0,0,bw,bw);
    Astarbmp[i,j].Width:=bw;
    Astarbmp[i,j].Height:=bw;
+   Astarbmp[i,j].PixelFormat:=pf32bit;
    Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
-//todo: all is not too nice here! must be revisited.
-   {$ifndef mswindows}
-   SetTransparencyFromLuminance(Astarbmp[i,j]);
    Astarbmp[i,j].Transparent:=true;
-   {$endif}
-   memstream:=Tmemorystream.create;
-   Astarbmp[i,j].SaveToStream(memstream);
-   memstream.position := 0;
-   Astarbmp[i,j].LoadFromStream(memstream);
-   memstream.free;
-   {$ifdef mswindows}
-   //SetTransparencyFromLuminance(Astarbmp[i,j]);
-   Astarbmp[i,j].TransparentColor:=clBlack;
-   Astarbmp[i,j].Transparent:=true;
-   {$endif}
   end;
 end;
 
