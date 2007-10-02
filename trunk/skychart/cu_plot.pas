@@ -398,6 +398,9 @@ starbmp.Assign(Fstarshape);
 InitStarBmp;
 end;
 
+//todo: check if gtk alpha transparency work
+{$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
+{$IFDEF LCLGTK2} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 procedure SetTransparencyFromLuminance(bmp:Tbitmap);
 var
   IntfImage: TLazIntfImage;
@@ -414,9 +417,16 @@ begin
         for x:=0 to IntfImage.Width-1 do begin
           CurColor:=IntfImage.Colors[x,y];
           alpha:=MaxIntValue([CurColor.red,CurColor.green,CurColor.blue]);
+{$IFDEF OLD_MASK_TRANSPARENCY}
+          if alpha<(80*255) then
+              CurColor:=colTransparent
+          else
+              CurColor.alpha:=alphaOpaque;
+{$ELSE}
           if (alpha>200*255) then alpha:=65535;
           if (alpha<100*255) then alpha:=alpha div 2;
           CurColor.alpha:=alpha;
+{$ENDIF}
           IntfImage.Colors[x,y]:=CurColor;
         end;
       end;
@@ -433,21 +443,33 @@ var memstream:Tmemorystream;
     SrcR,DestR: Trect;
 begin
 bw:=2*cfgplot.starshapew*starbmpw;
+{$IFNDEF OLD_MASK_TRANSPARENCY}
 memstream:=Tmemorystream.create;
 starbmp.SaveToStream(memstream);
 memstream.position := 0;
 starbmp.LoadFromStream(memstream);
 memstream.free;
 SetTransparencyFromLuminance(starbmp);
+{$ENDIF}
 for i:=0 to 6 do
   for j:=0 to 10 do begin
    SrcR:=Rect(j*cfgplot.starshapesize*starbmpw,i*cfgplot.starshapesize*starbmpw,(j+1)*cfgplot.starshapesize*starbmpw,(i+1)*cfgplot.starshapesize*starbmpw);
    DestR:=Rect(0,0,bw,bw);
    Astarbmp[i,j].Width:=bw;
    Astarbmp[i,j].Height:=bw;
+{$IFNDEF OLD_MASK_TRANSPARENCY}
    Astarbmp[i,j].PixelFormat:=pf32bit;
+{$ENDIF}
    Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
+{$IFDEF OLD_MASK_TRANSPARENCY}
+   SetTransparencyFromLuminance(Astarbmp[i,j]);
+   memstream:=Tmemorystream.create;
+   Astarbmp[i,j].SaveToStream(memstream);
+   memstream.position := 0;
+   Astarbmp[i,j].LoadFromStream(memstream);
+   memstream.free;
+{$ENDIF}
    Astarbmp[i,j].Transparent:=true;
   end;
 end;
