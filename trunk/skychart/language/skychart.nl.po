@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-07-07 10:46+0100\n"
+"PO-Revision-Date: 2007-10-03 21:02+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -245,7 +245,7 @@ msgstr "Anoniem password"
 
 #: u_translation:rsapparent
 msgid "Apparent"
-msgstr "Schijnbare"
+msgstr "Schijnbaar"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -2321,7 +2321,7 @@ msgstr "Ochtend"
 
 #: u_translation:rsmorningtwili
 msgid "Morning twilight"
-msgstr "Ochtend schemer"
+msgstr "Ochtendschemer"
 
 #: u_translation:rsmovelabel
 msgid "Move label"
@@ -3053,7 +3053,7 @@ msgstr "Raporteer een probleem"
 
 #: u_translation:rsrequesttimeo
 msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
-msgstr ""
+msgstr "Te veel tijd verstreken. Mogelijk heeft u een te groot gebied ingesteld dat te veel rekentijd kost op de server. "
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"
