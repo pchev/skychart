@@ -102,7 +102,7 @@ msgstr "(útil per representar un flux)"
 
 #: u_translation:rsnopropermo
 msgid ", no proper motion"
-msgstr ""
+msgstr ", sense moviment propi"
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -198,7 +198,7 @@ msgstr "Edat"
 
 #: u_translation:rsalignment
 msgid "Alignment"
-msgstr ""
+msgstr "Alineació"
 
 #: u_translation:rsall
 msgid "All"
@@ -246,7 +246,7 @@ msgstr "Contrasenya anònima"
 
 #: u_translation:rsapparent
 msgid "Apparent"
-msgstr ""
+msgstr "Aparent"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -294,7 +294,7 @@ msgstr "Asteroides de l'arxiu"
 
 #: u_translation:rsastrometricj
 msgid "Astrometric J2000"
-msgstr ""
+msgstr "Astromètric J2000"
 
 #: u_translation:rsastronomical
 msgid "Astronomical"
@@ -526,7 +526,7 @@ msgstr "Format CdC, utilitzeu millor el compacte"
 
 #: u_translation:rscenter
 msgid "Center"
-msgstr ""
+msgstr "Centre"
 
 #: u_translation:rscenterobject
 msgid "Center Object"
@@ -1366,7 +1366,7 @@ msgstr "Calendari de les efemèrides"
 
 #: u_translation:rsepoch
 msgid "Epoch"
-msgstr ""
+msgstr "Època"
 
 #: u_translation:rsepochjd
 msgid "Epoch (JD)"
@@ -1454,7 +1454,7 @@ msgstr "Sortida ..."
 
 #: u_translation:rsexpertmode
 msgid "Expert mode"
-msgstr ""
+msgstr "Mode expert"
 
 #: u_translation:rsexternalcata
 msgid "External catalog object"
@@ -1962,7 +1962,7 @@ msgstr "Tria de la llengua"
 
 #: u_translation:rslatinname
 msgid "Latin Name"
-msgstr ""
+msgstr "Nom llatí"
 
 #: u_translation:rslatitude
 msgid "Latitude"
@@ -2090,7 +2090,7 @@ msgstr "Nom de l'arxiu : "
 
 #: u_translation:rslocalsideral
 msgid "Local Sideral Time"
-msgstr ""
+msgstr "Hora sideral local"
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -2226,11 +2226,11 @@ msgstr "Magnitud màxima"
 
 #: u_translation:rsmean
 msgid "Mean"
-msgstr ""
+msgstr "Mitjana"
 
 #: u_translation:rsmeanj2000
 msgid "Mean J2000"
-msgstr ""
+msgstr "Mitjana J2000"
 
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
@@ -2238,7 +2238,7 @@ msgstr "Anomalia mitjana"
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
-msgstr ""
+msgstr "Mitjana de la data"
 
 #: u_translation:rsmeanposition
 msgid "Mean position"
@@ -3054,7 +3054,7 @@ msgstr "Indiqueu un problema"
 
 #: u_translation:rsrequesttimeo
 msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
-msgstr ""
+msgstr "Petició fora de temps. Probablement heu demanat una àrea que demana massa temps de procés en el servidor remot"
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"
@@ -3818,7 +3818,7 @@ msgstr "Tipus de variabilitat"
 
 #: u_translation:rstypeofcoordi
 msgid "Type of coordinates"
-msgstr ""
+msgstr "Tipus de coordenades"
 
 #: u_translation:rstypeofobject
 msgid "Type of object to add to the list"
@@ -3926,7 +3926,7 @@ msgstr "Usa l'hora del sistema"
 
 #: u_translation:rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr ""
+msgstr "Usa el moviment propi per corregir la posició per a l'època donada"
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"
@@ -4142,15 +4142,15 @@ msgstr "màx"
 
 #: u_translation:rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr ""
+msgstr "equador mitjà, equinocci i època de la data"
 
 #: u_translation:rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr ""
+msgstr "equinocci mitjà J2000, època de la data"
 
 #: u_translation:rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr ""
+msgstr "equinocci i època J2000 mitjans"
 
 #: u_translation:rsmin2
 msgid "min"
@@ -4182,7 +4182,7 @@ msgstr "a"
 
 #: u_translation:rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr ""
+msgstr "equador vertader, equinocci i època de la data"
 
 #: u_translation:rsturnsdegree
 msgid "turns / degree"
