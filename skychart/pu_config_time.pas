@@ -618,6 +618,10 @@ procedure Tf_config_time.nbstepChanged(Sender: TObject);
 begin
 if LockChange then exit;
 csc.Simnb:=nbstep.value;
+Setlength(csc.AsteroidLst,csc.Simnb);
+SetLength(csc.CometLst,csc.SimNb);
+SetLength(csc.AsteroidName,csc.SimNb);
+SetLength(csc.CometName,csc.SimNb);
 end;
 
 procedure Tf_config_time.stepsizeChanged(Sender: TObject);
