@@ -1,13 +1,13 @@
 object f_main: Tf_main
-  Left = 387
+  Left = 380
   Height = 580
-  Top = 105
+  Top = 113
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 551
+  VertScrollBar.Page = 553
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 552
+  ClientHeight = 554
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
@@ -154,13 +154,13 @@ object f_main: Tf_main
   OnShow = FormShow
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 467
+    Height = 469
     Top = 53
     Width = 812
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
-    ClientHeight = 467
+    ClientHeight = 469
     ClientWidth = 812
     Color = clBlack
     FullRepaint = False
@@ -2796,17 +2796,17 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 467
+    Height = 469
     Top = 53
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 467
+    ClientHeight = 469
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 467
+      Height = 469
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2904,18 +2904,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 836
-    Height = 467
+    Height = 469
     Top = 53
     Width = 24
     Align = alRight
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 467
+    ClientHeight = 469
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 217
+      Height = 219
       Top = 250
       Width = 24
       Align = alClient
@@ -3136,7 +3136,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 520
+    Top = 522
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -3165,7 +3165,7 @@ object f_main: Tf_main
       ParentFont = True
       TabOrder = 0
       object LPanels01: TLabel
-        Height = 14
+        Height = 13
         Width = 60
         Caption = 'LPanels01'
         ParentColor = False
@@ -3351,7 +3351,6 @@ object f_main: Tf_main
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
         TabOrder = 0
-        Text = '165'
       end
       object ToolButtonSearch: TToolButton
         Left = 407
