@@ -351,7 +351,7 @@ var
   ARect: TRect;
 begin
   ARect := GetClientRect;
-  Canvas.Brush.Color:=clBtnFace;
+  Canvas.Brush.Color:=color;
   Canvas.Brush.Style:=bsSolid;
   Canvas.Rectangle(ARect);
   Inherited Paint;
