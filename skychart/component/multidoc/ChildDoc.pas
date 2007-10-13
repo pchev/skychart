@@ -144,7 +144,7 @@ TCdCPanel = Class(TCustomPanel)
 implementation
 
 const
-{$if DEFINED(lclgtk2) OR DEFINED(win32) }
+{$if DEFINED(lclgtk2) OR DEFINED(lclqt) OR DEFINED(lclcarbon) OR DEFINED(win32) }
   {$define childdoc_better_move}
 {$endif}
 {$ifdef childdoc_better_move}
