@@ -3238,7 +3238,6 @@ object f_main: Tf_main
     object ToolBar1: TToolBar
       Height = 25
       Width = 860
-      AutoSize = True
       ButtonHeight = 23
       Flat = True
       Images = ImageNormal
@@ -3626,7 +3625,6 @@ object f_main: Tf_main
       Top = 25
       Width = 860
       Align = alBottom
-      AutoSize = True
       ButtonHeight = 24
       Caption = 'ToolBar4'
       EdgeBorders = [ebTop, ebBottom]
