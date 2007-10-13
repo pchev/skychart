@@ -1097,13 +1097,25 @@ end;
 Procedure Tf_main.GetAppDir;
 var inif: TMemIniFile;
     buf: string;
+    i: integer;
 {$ifdef win32}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
 const CSIDL_PERSONAL = $0005;
 {$endif}
 begin
+{$ifdef darwin}
 appdir:=getcurrentdir;
+if not DirectoryExists(slash(appdir)+slash('data')+slash('planet')) then begin
+   appdir:=ExtractFilePath(ParamStr(0));
+   i:=pos('.app/',appdir);
+   if i>0 then begin
+     appdir:=ExtractFilePath(copy(appdir,1,i));
+   end;
+end;
+{$else}
+appdir:=getcurrentdir;
+{$endif}
 privatedir:=DefaultPrivateDir;
 Tempdir:=DefaultTmpDir;
 {$ifdef unix}
