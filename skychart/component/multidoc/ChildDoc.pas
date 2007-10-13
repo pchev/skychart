@@ -49,7 +49,7 @@ TCdCSplitter = Class(TCustomSplitter)
     procedure MouseUp(Button: TMouseButton; Shift:TShiftState; X,Y:Integer); override;
   end;
   
-TCdCPanel = Class(TCustomPanel)
+TCdCPanel = Class(TPanel)
   public
     property OnMouseDown;
     property OnMouseMove;
@@ -96,6 +96,7 @@ TCdCPanel = Class(TCustomPanel)
     procedure ButtonMaximizeClick(Sender: TObject);
   protected
     { Protected declarations }
+    procedure Paint; override;
   public
     { Public declarations }
     procedure SizeBarMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
@@ -343,6 +344,17 @@ try
 inherited destroy;
 except
 end;
+end;
+
+procedure TChildDoc.Paint;
+var
+  ARect: TRect;
+begin
+  ARect := GetClientRect;
+  Canvas.Brush.Color:=clBtnFace;
+  Canvas.Brush.Style:=bsSolid;
+  Canvas.Rectangle(ARect);
+  Inherited Paint;
 end;
 
 procedure TChildDoc.SetDockedPanel(value: TPanel);

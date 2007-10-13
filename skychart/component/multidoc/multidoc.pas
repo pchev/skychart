@@ -32,7 +32,8 @@ unit MultiDoc;
 
 interface
 
-uses ChildDoc,
+uses
+  LCLIntf,LCLType,ChildDoc,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls, Menus, GraphType;
 
 type
@@ -70,6 +71,10 @@ type
     FOnResize : TNotifyEvent;
     FonActiveChildChange : TNotifyEvent;
     FChild: ChildArray;
+    DestroyTimer:TTimer;
+    DestroyPending: array of TChildDoc;
+    DestroyPendingCount: integer;
+    DestroyCriticalSection: TCriticalSection;
     FWindowList: TmenuItem;
     FWindowListOffset:integer;
     DefaultPos:TPoint;
@@ -92,6 +97,7 @@ type
     procedure SetWindowList(value:TmenuItem);
     procedure SetWireframeMoveResize(value:boolean);
     procedure SetResize(Sender: TObject);
+    procedure DestroyChildTimer(Sender: TObject);
   protected
     { Protected declarations }
   public
@@ -210,7 +216,7 @@ FBorderWidth:=3;  FTitleHeight:=12;
 FBorderColor:=clActiveCaption;
 FInactiveColor:=clInactiveCaption;
 FTitleColor:=clCaptionText;
-{$ifdef linux}
+{$ifdef lclgtk}
 FBorderColor:=$C00000;
 FInactiveColor:=clGray;
 FTitleColor:=clWhite;
@@ -218,11 +224,19 @@ FTitleColor:=clWhite;
 DefaultPos:=Point(0,0);
 FOnResize:=nil;
 Inherited onResize:=@SetResize;
+InitializeCriticalSection(DestroyCriticalSection);
+DestroyPendingCount:=0;
+SetLength(DestroyPending,DestroyPendingCount);
+DestroyTimer:=TTimer.Create(self);
+DestroyTimer.Enabled:=false;
+DestroyTimer.Interval:=100;
+DestroyTimer.OnTimer:=@DestroyChildTimer;
 end;
 
 destructor  TMultiDoc.Destroy;
 begin
 try
+DeleteCriticalSection(DestroyCriticalSection);
 FActiveChild:=-1;
 inherited destroy;
 except
@@ -295,7 +309,12 @@ end;
 dec(FChildIndex);
 setlength(FChild,FChildIndex+1);
 SetActiveChild(FChildIndex);
-TChildDoc(Sender).Free;
+EnterCriticalSection(DestroyCriticalSection);
+inc(DestroyPendingCount);
+SetLength(DestroyPending,DestroyPendingCount);
+DestroyPending[DestroyPendingCount-1]:=TChildDoc(Sender);
+DestroyTimer.Enabled:=true;
+LeaveCriticalSection(DestroyCriticalSection);
 end;
 
 procedure TMultiDoc.ChildMaximize(Sender: TObject);
@@ -548,6 +567,23 @@ if ChildCount>0 then begin
    end;
   end;
 end;
+end;
+
+procedure TMultiDoc.DestroyChildTimer(Sender: TObject);
+var i,n: integer;
+begin
+DestroyTimer.Enabled:=false;
+EnterCriticalSection(DestroyCriticalSection);
+n:=DestroyPendingCount-1;
+if n>=0 then begin
+  for i:=0 to n do begin
+     if DestroyPending[i]<>nil then
+        DestroyPending[i].Free;
+  end;
+end;
+DestroyPendingCount:=0;
+SetLength(DestroyPending,DestroyPendingCount);
+LeaveCriticalSection(DestroyCriticalSection);
 end;
 
 end.
