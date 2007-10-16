@@ -75,6 +75,7 @@ type
     Fcdss : Tconf_dss;
     Fnightvision: boolean;
     astpage,compage,dbpage: integer;
+    lastSelectedNode: TTreeNode;
     FApplyConfig: TNotifyEvent;
     FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
@@ -302,12 +303,17 @@ f_config_internet1.FormShow(Sender);
 TreeView1.FullCollapse;
 Treeview1.selected:=Treeview1.items[0];
 Treeview1.selected:=Treeview1.items[cmain.configpage];
+lastSelectedNode:=Treeview1.selected;
 end;
 
 procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var i,j: integer;
 begin
 if locktree then exit;
+if node=nil then begin
+   Treeview1.selected:=lastSelectedNode;
+   exit;
+end;
 try
 if node.level=0 then begin
    Treeview1.selected:=Treeview1.items[(Treeview1.selected.absoluteindex+1)];
@@ -319,6 +325,7 @@ end else begin
    TreeView1.FullCollapse;
    node.Parent.Expand(true);
 end;
+lastSelectedNode:=Treeview1.selected;
 application.processmessages;
 finally
 locktree:=false;
@@ -354,8 +361,8 @@ end;
 procedure Tf_config.ActivateChanges;
 var i:integer;
 begin
-  i:=f_config.Treeview1.selected.absoluteindex;
-  cmain.configpage:=i;
+  if Treeview1.selected<>nil then
+     cmain.configpage:=Treeview1.selected.absoluteindex;
   if MultiDoc1.ActiveObject=f_config_catalog1 then begin
     if f_config_catalog1.Notebook1.ActivePageComponent=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
   end;
@@ -381,7 +388,7 @@ end;
 
 procedure Tf_config.nextClick(Sender: TObject);
 begin
-if Treeview1.selected.absoluteindex< Treeview1.items.count-1 then begin
+if (Treeview1.selected<>nil)and(Treeview1.selected.absoluteindex< Treeview1.items.count-1) then begin
  Treeview1.selected:=Treeview1.selected.GetNext;
  treeview1.topitem:=Treeview1.selected;
  TreeView1Change(Sender,Treeview1.selected);
@@ -391,7 +398,7 @@ end;
 procedure Tf_config.previousClick(Sender: TObject);
 var i : integer;
 begin
-if Treeview1.selected.absoluteindex>1 then begin
+if (Treeview1.selected<>nil)and(Treeview1.selected.absoluteindex>1) then begin
  locktree:=true;
  Treeview1.selected:=Treeview1.selected.GetPrev;
  if Treeview1.selected.level=0 then Treeview1.selected:=Treeview1.selected.GetPrev;
