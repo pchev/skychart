@@ -11,7 +11,7 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +'TabOrder'#2#0#0#9'TNotebook'#9'Notebook1'#4'Left'#2#1#6'Height'#3#222#1#3'T'
   +'op'#2#1#5'Width'#3#242#1#5'Align'#7#8'alClient'#9'PageIndex'#2#3#8'ShowTabs'
   +#8#8'TabOrder'#2#0#0#5'TPage'#5'Page1'#7'Caption'#6#5'Page1'#11'ClientWidth'
-  +#3#242#1#12'ClientHeight'#3#222#1#0#6'TLabel'#8'Label153'#6'Height'#2#14#5'W'
+  +#3#234#1#12'ClientHeight'#3#196#1#0#6'TLabel'#8'Label153'#6'Height'#2#14#5'W'
   +'idth'#2'['#7'Caption'#6#14'System Setting'#11'ParentColor'#8#0#0#9'TGroupBo'
   +'x'#8'MysqlBox'#4'Left'#2#17#6'Height'#2'a'#3'Top'#2';'#5'Width'#3#185#1#7'C'
   +'aption'#6#15'MySQL  Database'#12'ClientHeight'#2'a'#11'ClientWidth'#3#185#1
@@ -83,140 +83,141 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +#4'Left'#3#203#0#6'Height'#2#14#3'Top'#2#8#5'Width'#3#129#0#7'Caption'#6#18
   +'URL launch command'#11'ParentColor'#8#0#0#9'TComboBox'#15'LinuxDesktopBox'#4
   +'Left'#2#20#6'Height'#2#21#3'Top'#2'!'#5'Width'#2'f'#16'AutoCompleteText'#11
-  +#20'cbactSearchAscending'#0#9'ItemIndex'#2#0#13'Items.Strings'#1#6#3'KDE'#6#5
-  +'GNOME'#6#5'Other'#0#9'MaxLength'#2#0#8'OnSelect'#7#21'LinuxDesktopBoxChange'
-  +#8'TabOrder'#2#0#4'Text'#6#3'KDE'#0#0#5'TEdit'#8'LinuxCmd'#4'Left'#3#204#0#6
-  +'Height'#2#23#3'Top'#2'!'#5'Width'#3#194#0#8'OnChange'#7#14'LinuxCmdChange'#8
-  +'TabOrder'#2#1#4'Text'#6#8'LinuxCmd'#0#0#0#0#5'TPage'#5'Page2'#7'Caption'#6#5
-  +'Page2'#11'ClientWidth'#3#242#1#12'ClientHeight'#3#222#1#0#9'TGroupBox'#9'Gr'
-  +'oupBox3'#4'Left'#2#16#6'Height'#3#247#0#3'Top'#2#8#5'Width'#3#137#1#7'Capti'
-  +'on'#6#13'TCP/IP Server'#12'ClientHeight'#3#247#0#11'ClientWidth'#3#137#1#8
-  +'TabOrder'#2#0#0#6'TLabel'#7'Label54'#4'Left'#2#16#6'Height'#2#13#3'Top'#2'|'
-  +#5'Width'#2's'#7'Caption'#6#21'Server IP Interface :'#11'ParentColor'#8#0#0#6
-  +'TLabel'#7'Label55'#4'Left'#2#16#6'Height'#2#13#3'Top'#3#168#0#5'Width'#2'X'
-  +#7'Caption'#6#16'Server IP Port :'#11'ParentColor'#8#0#0#9'TCheckBox'#11'Use'
-  +'IPserver'#4'Left'#2#16#6'Height'#2#19#3'Top'#2' '#5'Width'#2'}'#7'Caption'#6
-  +#17'Use TCP/IP Server'#7'OnClick'#7#16'UseIPserverClick'#8'TabOrder'#2#0#0#0
-  +#5'TEdit'#6'ipaddr'#4'Left'#3#144#0#6'Height'#2#21#3'Top'#2'x'#5'Width'#2'd'
-  +#8'OnChange'#7#12'ipaddrChange'#8'TabOrder'#2#2#4'Text'#6#9'127.0.0.1'#0#0#5
-  +'TEdit'#6'ipport'#4'Left'#3#144#0#6'Height'#2#21#3'Top'#3#164#0#5'Width'#2'd'
-  +#8'OnChange'#7#12'ipportChange'#8'TabOrder'#2#3#4'Text'#6#4'3292'#0#0#9'TChe'
-  +'ckBox'#9'keepalive'#4'Left'#2#16#6'Height'#2#19#3'Top'#2'H'#5'Width'#3#182#0
-  +#7'Caption'#6#28'Client Connection Keep Alive'#7'OnClick'#7#14'keepaliveClic'
-  +'k'#8'TabOrder'#2#1#0#0#0#0#5'TPage'#5'Page3'#7'Caption'#6#5'Page3'#11'Clien'
-  +'tWidth'#3#242#1#12'ClientHeight'#3#222#1#0#6'TLabel'#7'Label13'#6'Height'#2
-  +#14#5'Width'#2'i'#7'Caption'#6#17'Telescope Setting'#11'ParentColor'#8#0#0#9
-  +'TGroupBox'#4'INDI'#4'Left'#2#8#6'Height'#3')'#1#3'Top'#2'p'#5'Width'#3#194#1
-  +#7'Caption'#6#19'INDI Driver setting'#12'ClientHeight'#3')'#1#11'ClientWidth'
-  +#3#194#1#8'TabOrder'#2#1#0#6'TLabel'#7'Label75'#4'Left'#2#8#6'Height'#2#14#3
-  +'Top'#2#28#5'Width'#2'd'#7'Caption'#6#17'INDI Server Host '#11'ParentColor'#8
-  +#0#0#6'TLabel'#8'Label130'#4'Left'#3#231#0#6'Height'#2#14#3'Top'#2#28#5'Widt'
-  +'h'#2'['#7'Caption'#6#16'INDI server Port'#11'ParentColor'#8#0#0#6'TLabel'#8
-  +'Label258'#4'Left'#2#8#6'Height'#2#14#3'Top'#2'h'#5'Width'#2'f'#7'Caption'#6
-  +#15'Server command '#11'ParentColor'#8#0#0#6'TLabel'#8'Label259'#4'Left'#3
-  +#231#0#6'Height'#2#14#3'Top'#3#136#0#5'Width'#2'E'#7'Caption'#6#11'Driver na'
-  +'me'#11'ParentColor'#8#0#0#6'TLabel'#8'Label260'#4'Left'#3#231#0#6'Height'#2
-  +#14#3'Top'#2'h'#5'Width'#2'Y'#7'Caption'#6#14'Telescope type'#11'ParentColor'
-  +#8#0#0#6'TLabel'#8'Label261'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#180#0#5'Wid'
-  +'th'#2'G'#7'Caption'#6#12'Device Port '#11'ParentColor'#8#0#0#6'TLabel'#6'La'
-  +'bel2'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#224#0#5'Width'#3#144#0#7'Caption'
-  +#6#22'Control Panel command '#11'ParentColor'#8#0#0#5'TEdit'#14'IndiServerHo'
-  +'st'#4'Left'#2'x'#6'Height'#2#21#3'Top'#2#24#5'Width'#2'd'#8'OnChange'#7#20
-  +'IndiServerHostChange'#8'TabOrder'#2#0#0#0#5'TEdit'#14'IndiServerPort'#4'Lef'
-  +'t'#3'P'#1#6'Height'#2#21#3'Top'#2#24#5'Width'#2'a'#8'OnChange'#7#20'IndiSer'
-  +'verPortChange'#8'TabOrder'#2#1#0#0#9'TCheckBox'#13'IndiAutostart'#4'Left'#2
-  +#8#6'Height'#2#21#3'Top'#2'@'#5'Width'#3'P'#1#7'Caption'#6'9Automatically st'
-  +'art a local server if not already running'#7'OnClick'#7#18'IndiAutostartCli'
-  +'ck'#8'TabOrder'#2#2#0#0#5'TEdit'#13'IndiServerCmd'#4'Left'#2'x'#6'Height'#2
-  +#21#3'Top'#2'd'#5'Width'#2'd'#8'OnChange'#7#19'IndiServerCmdChange'#8'TabOrd'
-  ,'er'#2#3#0#0#5'TEdit'#10'IndiDriver'#4'Left'#3'P'#1#6'Height'#2#21#3'Top'#3
-  +#132#0#5'Width'#2'd'#7'Enabled'#8#8'OnChange'#7#16'IndiDriverChange'#8'TabOr'
-  +'der'#2#5#0#0#9'TComboBox'#7'IndiDev'#4'Left'#3'P'#1#6'Height'#2#21#3'Top'#2
-  +'d'#5'Width'#2'd'#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#9'MaxLe'
-  +'ngth'#2#0#8'OnSelect'#7#13'IndiDevChange'#5'Style'#7#14'csDropDownList'#8'T'
-  +'abOrder'#2#4#0#0#9'TComboBox'#8'IndiPort'#4'Left'#2'x'#6'Height'#2#21#3'Top'
-  +#3#176#0#5'Width'#2'd'#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#13
-  +'Items.Strings'#1#6#4'COM1'#6#4'COM2'#6#4'COM3'#6#4'COM4'#6#4'COM5'#6#4'COM6'
-  +#6#4'COM7'#6#4'COM8'#0#9'MaxLength'#2#0#8'OnSelect'#7#14'IndiPortChange'#5'S'
-  +'tyle'#7#14'csDropDownList'#8'TabOrder'#2#6#0#0#5'TEdit'#8'PanelCmd'#4'Left'
-  +#3#176#0#6'Height'#2#21#3'Top'#3#220#0#5'Width'#3#1#1#8'OnChange'#7#14'Panel'
-  +'CmdChange'#8'TabOrder'#2#7#0#0#0#9'TGroupBox'#15'TelescopeManual'#4'Left'#2
-  +#8#6'Height'#3')'#1#3'Top'#2'p'#5'Width'#3#193#1#7'Caption'#6#12'Manual Moun'
-  +'t'#12'ClientHeight'#3')'#1#11'ClientWidth'#3#193#1#8'TabOrder'#2#3#7'Visibl'
-  +'e'#8#0#6'TLabel'#6'Label7'#4'Left'#2#24#6'Height'#2'>'#3'Top'#2#3#5'Width'#3
-  +'i'#1#8'AutoSize'#8#7'Caption'#6#159'Set how the mount move on each axis whe'
-  +'n you turn the driving knob.'#13#10'Then the Telescope button show you the '
-  +'turns you must do to go from one object to another.'#11'ParentColor'#8#8'Wo'
-  +'rdWrap'#9#0#0#6'TPanel'#15'EquatorialMount'#4'Left'#2#24#6'Height'#3#161#0#3
-  +'Top'#2'p'#5'Width'#3'i'#1#12'ClientHeight'#3#161#0#11'ClientWidth'#3'i'#1#8
-  +'TabOrder'#2#2#0#6'TLabel'#6'Label3'#4'Left'#2#16#6'Height'#2#14#3'Top'#2#16
-  +#5'Width'#2'`'#7'Caption'#6#15'Right Ascension'#11'ParentColor'#8#0#0#6'TLab'
-  +'el'#6'Label4'#4'Left'#2#16#6'Height'#2#14#3'Top'#2']'#5'Width'#2'A'#7'Capti'
-  +'on'#6#11'Declination'#11'ParentColor'#8#0#0#6'TLabel'#6'Label5'#4'Left'#3
-  +#240#0#6'Height'#2#14#3'Top'#2#16#5'Width'#2'C'#7'Caption'#6#12'turns / hour'
-  +#11'ParentColor'#8#0#0#6'TLabel'#6'Label6'#4'Left'#3#240#0#6'Height'#2#14#3
-  +'Top'#2']'#5'Width'#2'Q'#7'Caption'#6#14'turns / degree'#11'ParentColor'#8#0
-  +#0#10'TFloatEdit'#7'TurnsRa'#4'Left'#3#128#0#6'Height'#2#22#3'Top'#2#11#5'Wi'
-  +'dth'#2'Q'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'
-  +#8#8'TabOrder'#2#0#8'OnChange'#7#13'TurnsRaChange'#0#0#10'TFloatEdit'#8'Turn'
-  +'sDec'#4'Left'#3#128#0#6'Height'#2#22#3'Top'#2'X'#5'Width'#2'Q'#11'BorderSty'
-  +'le'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'TabOrder'#2#1#8
-  +'OnChange'#7#14'TurnsDecChange'#0#0#9'TCheckBox'#13'RevertTurnsRa'#4'Left'#3
-  +#128#0#6'Height'#2#21#3'Top'#2'('#5'Width'#2'q'#7'Caption'#6#14'Revert RA kn'
-  +'ob'#7'OnClick'#7#13'TurnsRaChange'#8'TabOrder'#2#2#0#0#9'TCheckBox'#13'Reve'
-  +'rtTurnDec'#4'Left'#3#128#0#6'Height'#2#21#3'Top'#2'x'#5'Width'#2'z'#7'Capti'
-  +'on'#6#15'Revert DEC knob'#7'OnClick'#7#14'TurnsDecChange'#8'TabOrder'#2#3#0
-  +#0#0#11'TRadioGroup'#15'ManualMountType'#4'Left'#2#24#6'Height'#2')'#3'Top'#2
-  +'@'#5'Width'#3'i'#1#8'AutoFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'Ch'
-  +'ildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsH'
-  +'omogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChi'
-  +'ldResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSiz'
-  +'ing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLef'
-  +'tToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#2#12'ClientHeigh'
-  +'t'#2')'#11'ClientWidth'#3'i'#1#7'Columns'#2#2#13'Items.Strings'#1#6#10'Equa'
-  +'torial'#6#8'Alt / Az'#0#7'OnClick'#7#20'ManualMountTypeClick'#8'TabOrder'#2
-  +#0#0#0#6'TPanel'#10'AltAzMount'#4'Left'#2#24#6'Height'#3#161#0#3'Top'#2'p'#5
-  +'Width'#3'i'#1#12'ClientHeight'#3#161#0#11'ClientWidth'#3'i'#1#8'TabOrder'#2
-  +#1#0#6'TLabel'#6'Label8'#4'Left'#2#16#6'Height'#2#14#3'Top'#2#16#5'Width'#2
-  +'1'#7'Caption'#6#7'Azimuth'#11'ParentColor'#8#0#0#6'TLabel'#6'Label9'#4'Left'
-  +#2#16#6'Height'#2#14#3'Top'#2']'#5'Width'#2'-'#7'Caption'#6#8'Altitude'#11'P'
-  +'arentColor'#8#0#0#6'TLabel'#7'Label10'#4'Left'#3#240#0#6'Height'#2#14#3'Top'
-  +#2#16#5'Width'#2'Q'#7'Caption'#6#14'turns / degree'#11'ParentColor'#8#0#0#6
-  +'TLabel'#7'Label11'#4'Left'#3#240#0#6'Height'#2#14#3'Top'#2']'#5'Width'#2'Q'
-  +#7'Caption'#6#14'turns / degree'#11'ParentColor'#8#0#0#10'TFloatEdit'#7'Turn'
-  +'sAz'#4'Left'#3#128#0#6'Height'#2#22#3'Top'#2#11#5'Width'#2'Q'#11'BorderStyl'
-  +'e'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'TabOrder'#2#0#8'O'
-  +'nChange'#7#13'TurnsAzChange'#0#0#10'TFloatEdit'#8'TurnsAlt'#4'Left'#3#128#0
-  +#6'Height'#2#22#3'Top'#2'X'#5'Width'#2'Q'#11'BorderStyle'#7#8'bsSingle'#11'P'
-  +'arentColor'#8#14'ParentShowHint'#8#8'TabOrder'#2#2#8'OnChange'#7#14'TurnsAl'
-  +'tChange'#0#0#9'TCheckBox'#13'RevertTurnsAz'#4'Left'#3#128#0#6'Height'#2#21#3
-  +'Top'#2'('#5'Width'#2'o'#7'Caption'#6#14'Revert Az knob'#7'OnClick'#7#13'Tur'
-  +'nsAzChange'#8'TabOrder'#2#1#0#0#9'TCheckBox'#14'RevertTurnsAlt'#4'Left'#3
-  +#128#0#6'Height'#2#21#3'Top'#2'x'#5'Width'#2'o'#7'Caption'#6#15'Revert Alt k'
-  ,'nob'#7'OnClick'#7#14'TurnsAltChange'#8'TabOrder'#2#3#0#0#0#0#9'TGroupBox'#15
-  +'TelescopePlugin'#4'Left'#2#8#6'Height'#2'i'#3'Top'#2'p'#5'Width'#3#194#1#7
-  +'Caption'#6#18'CDC plugin setting'#12'ClientHeight'#2'i'#11'ClientWidth'#3
-  +#194#1#8'TabOrder'#2#2#7'Visible'#8#0#6'TLabel'#8'Label155'#4'Left'#2#24#6'H'
-  +'eight'#2#14#3'Top'#2'.'#5'Width'#2'h'#7'Caption'#6#17'Telescope Plugin '#11
-  +'ParentColor'#8#0#0#9'TComboBox'#19'telescopepluginlist'#4'Left'#3#144#0#6'H'
-  +'eight'#2#21#3'Top'#2'*'#5'Width'#3#145#0#16'AutoCompleteText'#11#20'cbactSe'
-  +'archAscending'#0#9'MaxLength'#2#0#8'OnChange'#7#25'telescopepluginlistChang'
-  +'e'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#0#11'TRadioGroup'#15'T'
-  +'elescopeSelect'#4'Left'#2#8#6'Height'#2'A'#3'Top'#2' '#5'Width'#3#194#1#8'A'
-  +'utoFill'#9#7'Caption'#6#15'TelescopeSelect'#28'ChildSizing.LeftRightSpacing'
-  +#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7
+  +#20'cbactSearchAscending'#0#10'ItemHeight'#2#13#9'ItemIndex'#2#0#13'Items.St'
+  +'rings'#1#6#3'KDE'#6#5'GNOME'#6#5'Other'#0#9'MaxLength'#2#0#8'OnSelect'#7#21
+  +'LinuxDesktopBoxChange'#8'TabOrder'#2#0#4'Text'#6#3'KDE'#0#0#5'TEdit'#8'Linu'
+  +'xCmd'#4'Left'#3#204#0#6'Height'#2#23#3'Top'#2'!'#5'Width'#3#194#0#8'OnChang'
+  +'e'#7#14'LinuxCmdChange'#8'TabOrder'#2#1#4'Text'#6#8'LinuxCmd'#0#0#0#0#5'TPa'
+  +'ge'#5'Page2'#7'Caption'#6#5'Page2'#11'ClientWidth'#3#234#1#12'ClientHeight'
+  +#3#196#1#0#9'TGroupBox'#9'GroupBox3'#4'Left'#2#16#6'Height'#3#247#0#3'Top'#2
+  +#8#5'Width'#3#137#1#7'Caption'#6#13'TCP/IP Server'#12'ClientHeight'#3#247#0
+  +#11'ClientWidth'#3#137#1#8'TabOrder'#2#0#0#6'TLabel'#7'Label54'#4'Left'#2#16
+  +#6'Height'#2#13#3'Top'#2'|'#5'Width'#2's'#7'Caption'#6#21'Server IP Interfac'
+  +'e :'#11'ParentColor'#8#0#0#6'TLabel'#7'Label55'#4'Left'#2#16#6'Height'#2#13
+  +#3'Top'#3#168#0#5'Width'#2'X'#7'Caption'#6#16'Server IP Port :'#11'ParentCol'
+  +'or'#8#0#0#9'TCheckBox'#11'UseIPserver'#4'Left'#2#16#6'Height'#2#19#3'Top'#2
+  +' '#5'Width'#2'}'#7'Caption'#6#17'Use TCP/IP Server'#7'OnClick'#7#16'UseIPse'
+  +'rverClick'#8'TabOrder'#2#0#0#0#5'TEdit'#6'ipaddr'#4'Left'#3#144#0#6'Height'
+  +#2#21#3'Top'#2'x'#5'Width'#2'd'#8'OnChange'#7#12'ipaddrChange'#8'TabOrder'#2
+  +#2#4'Text'#6#9'127.0.0.1'#0#0#5'TEdit'#6'ipport'#4'Left'#3#144#0#6'Height'#2
+  +#21#3'Top'#3#164#0#5'Width'#2'd'#8'OnChange'#7#12'ipportChange'#8'TabOrder'#2
+  +#3#4'Text'#6#4'3292'#0#0#9'TCheckBox'#9'keepalive'#4'Left'#2#16#6'Height'#2
+  +#19#3'Top'#2'H'#5'Width'#3#182#0#7'Caption'#6#28'Client Connection Keep Aliv'
+  +'e'#7'OnClick'#7#14'keepaliveClick'#8'TabOrder'#2#1#0#0#0#0#5'TPage'#5'Page3'
+  +#7'Caption'#6#5'Page3'#11'ClientWidth'#3#234#1#12'ClientHeight'#3#196#1#0#6
+  +'TLabel'#7'Label13'#6'Height'#2#14#5'Width'#2'i'#7'Caption'#6#17'Telescope S'
+  +'etting'#11'ParentColor'#8#0#0#9'TGroupBox'#4'INDI'#4'Left'#2#8#6'Height'#3
+  +')'#1#3'Top'#2'p'#5'Width'#3#194#1#7'Caption'#6#19'INDI Driver setting'#12'C'
+  +'lientHeight'#3')'#1#11'ClientWidth'#3#194#1#8'TabOrder'#2#1#0#6'TLabel'#7'L'
+  +'abel75'#4'Left'#2#8#6'Height'#2#14#3'Top'#2#28#5'Width'#2'd'#7'Caption'#6#17
+  +'INDI Server Host '#11'ParentColor'#8#0#0#6'TLabel'#8'Label130'#4'Left'#3#231
+  +#0#6'Height'#2#14#3'Top'#2#28#5'Width'#2'['#7'Caption'#6#16'INDI server Port'
+  +#11'ParentColor'#8#0#0#6'TLabel'#8'Label258'#4'Left'#2#8#6'Height'#2#14#3'To'
+  +'p'#2'h'#5'Width'#2'f'#7'Caption'#6#15'Server command '#11'ParentColor'#8#0#0
+  +#6'TLabel'#8'Label259'#4'Left'#3#231#0#6'Height'#2#14#3'Top'#3#136#0#5'Width'
+  +#2'E'#7'Caption'#6#11'Driver name'#11'ParentColor'#8#0#0#6'TLabel'#8'Label26'
+  +'0'#4'Left'#3#231#0#6'Height'#2#14#3'Top'#2'h'#5'Width'#2'Y'#7'Caption'#6#14
+  +'Telescope type'#11'ParentColor'#8#0#0#6'TLabel'#8'Label261'#4'Left'#2#8#6'H'
+  +'eight'#2#14#3'Top'#3#180#0#5'Width'#2'G'#7'Caption'#6#12'Device Port '#11'P'
+  +'arentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#8#6'Height'#2#14#3'Top'#3
+  +#224#0#5'Width'#3#144#0#7'Caption'#6#22'Control Panel command '#11'ParentCol'
+  +'or'#8#0#0#5'TEdit'#14'IndiServerHost'#4'Left'#2'x'#6'Height'#2#21#3'Top'#2
+  +#24#5'Width'#2'd'#8'OnChange'#7#20'IndiServerHostChange'#8'TabOrder'#2#0#0#0
+  +#5'TEdit'#14'IndiServerPort'#4'Left'#3'P'#1#6'Height'#2#21#3'Top'#2#24#5'Wid'
+  +'th'#2'a'#8'OnChange'#7#20'IndiServerPortChange'#8'TabOrder'#2#1#0#0#9'TChec'
+  +'kBox'#13'IndiAutostart'#4'Left'#2#8#6'Height'#2#21#3'Top'#2'@'#5'Width'#3'P'
+  +#1#7'Caption'#6'9Automatically start a local server if not already running'#7
+  +'OnClick'#7#18'IndiAutostartClick'#8'TabOrder'#2#2#0#0#5'TEdit'#13'IndiServe'
+  +'rCmd'#4'Left'#2'x'#6'Height'#2#21#3'Top'#2'd'#5'Width'#2'd'#8'OnChange'#7#19
+  ,'IndiServerCmdChange'#8'TabOrder'#2#3#0#0#5'TEdit'#10'IndiDriver'#4'Left'#3
+  +'P'#1#6'Height'#2#21#3'Top'#3#132#0#5'Width'#2'd'#7'Enabled'#8#8'OnChange'#7
+  +#16'IndiDriverChange'#8'TabOrder'#2#5#0#0#9'TComboBox'#7'IndiDev'#4'Left'#3
+  +'P'#1#6'Height'#2#21#3'Top'#2'd'#5'Width'#2'd'#16'AutoCompleteText'#11#20'cb'
+  +'actSearchAscending'#0#10'ItemHeight'#2#13#9'MaxLength'#2#0#8'OnSelect'#7#13
+  +'IndiDevChange'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#4#0#0#9'TComboBo'
+  +'x'#8'IndiPort'#4'Left'#2'x'#6'Height'#2#21#3'Top'#3#176#0#5'Width'#2'd'#16
+  +'AutoCompleteText'#11#20'cbactSearchAscending'#0#10'ItemHeight'#2#13#13'Item'
+  +'s.Strings'#1#6#4'COM1'#6#4'COM2'#6#4'COM3'#6#4'COM4'#6#4'COM5'#6#4'COM6'#6#4
+  +'COM7'#6#4'COM8'#0#9'MaxLength'#2#0#8'OnSelect'#7#14'IndiPortChange'#5'Style'
+  +#7#14'csDropDownList'#8'TabOrder'#2#6#0#0#5'TEdit'#8'PanelCmd'#4'Left'#3#176
+  +#0#6'Height'#2#21#3'Top'#3#220#0#5'Width'#3#1#1#8'OnChange'#7#14'PanelCmdCha'
+  +'nge'#8'TabOrder'#2#7#0#0#0#9'TGroupBox'#15'TelescopeManual'#4'Left'#2#8#6'H'
+  +'eight'#3')'#1#3'Top'#2'p'#5'Width'#3#193#1#7'Caption'#6#12'Manual Mount'#12
+  +'ClientHeight'#3#23#1#11'ClientWidth'#3#189#1#8'TabOrder'#2#3#7'Visible'#8#0
+  +#6'TLabel'#6'Label7'#4'Left'#2#24#6'Height'#2'>'#3'Top'#2#3#5'Width'#3'i'#1#8
+  +'AutoSize'#8#7'Caption'#6#159'Set how the mount move on each axis when you t'
+  +'urn the driving knob.'#13#10'Then the Telescope button show you the turns y'
+  +'ou must do to go from one object to another.'#11'ParentColor'#8#8'WordWrap'
+  +#9#0#0#6'TPanel'#15'EquatorialMount'#4'Left'#2#24#6'Height'#3#161#0#3'Top'#2
+  +'p'#5'Width'#3'i'#1#12'ClientHeight'#3#161#0#11'ClientWidth'#3'i'#1#8'TabOrd'
+  +'er'#2#2#0#6'TLabel'#6'Label3'#4'Left'#2#16#6'Height'#2#14#3'Top'#2#16#5'Wid'
+  +'th'#2'`'#7'Caption'#6#15'Right Ascension'#11'ParentColor'#8#0#0#6'TLabel'#6
+  +'Label4'#4'Left'#2#16#6'Height'#2#14#3'Top'#2']'#5'Width'#2'A'#7'Caption'#6
+  +#11'Declination'#11'ParentColor'#8#0#0#6'TLabel'#6'Label5'#4'Left'#3#240#0#6
+  +'Height'#2#14#3'Top'#2#16#5'Width'#2'C'#7'Caption'#6#12'turns / hour'#11'Par'
+  +'entColor'#8#0#0#6'TLabel'#6'Label6'#4'Left'#3#240#0#6'Height'#2#14#3'Top'#2
+  +']'#5'Width'#2'Q'#7'Caption'#6#14'turns / degree'#11'ParentColor'#8#0#0#10'T'
+  +'FloatEdit'#7'TurnsRa'#4'Left'#3#128#0#6'Height'#2#22#3'Top'#2#11#5'Width'#2
+  +'Q'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'T'
+  +'abOrder'#2#0#8'OnChange'#7#13'TurnsRaChange'#0#0#10'TFloatEdit'#8'TurnsDec'
+  +#4'Left'#3#128#0#6'Height'#2#22#3'Top'#2'X'#5'Width'#2'Q'#11'BorderStyle'#7#8
+  +'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'TabOrder'#2#1#8'OnChange'
+  +#7#14'TurnsDecChange'#0#0#9'TCheckBox'#13'RevertTurnsRa'#4'Left'#3#128#0#6'H'
+  +'eight'#2#21#3'Top'#2'('#5'Width'#2'q'#7'Caption'#6#14'Revert RA knob'#7'OnC'
+  +'lick'#7#13'TurnsRaChange'#8'TabOrder'#2#2#0#0#9'TCheckBox'#13'RevertTurnDec'
+  +#4'Left'#3#128#0#6'Height'#2#21#3'Top'#2'x'#5'Width'#2'z'#7'Caption'#6#15'Re'
+  +'vert DEC knob'#7'OnClick'#7#14'TurnsDecChange'#8'TabOrder'#2#3#0#0#0#11'TRa'
+  +'dioGroup'#15'ManualMountType'#4'Left'#2#24#6'Height'#2')'#3'Top'#2'@'#5'Wid'
+  +'th'#3'i'#1#8'AutoFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizin'
+  +'g.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenou'
+  +'sChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'
+  +#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.Shrink'
+  +'Vertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightTh'
+  +'enTopToBottom'#27'ChildSizing.ControlsPerLine'#2#2#12'ClientHeight'#2#23#11
+  +'ClientWidth'#3'e'#1#7'Columns'#2#2#13'Items.Strings'#1#6#10'Equatorial'#6#8
+  +'Alt / Az'#0#7'OnClick'#7#20'ManualMountTypeClick'#8'TabOrder'#2#0#0#0#6'TPa'
+  +'nel'#10'AltAzMount'#4'Left'#2#24#6'Height'#3#161#0#3'Top'#2'p'#5'Width'#3'i'
+  +#1#12'ClientHeight'#3#161#0#11'ClientWidth'#3'i'#1#8'TabOrder'#2#1#0#6'TLabe'
+  +'l'#6'Label8'#4'Left'#2#16#6'Height'#2#14#3'Top'#2#16#5'Width'#2'1'#7'Captio'
+  +'n'#6#7'Azimuth'#11'ParentColor'#8#0#0#6'TLabel'#6'Label9'#4'Left'#2#16#6'He'
+  +'ight'#2#14#3'Top'#2']'#5'Width'#2'-'#7'Caption'#6#8'Altitude'#11'ParentColo'
+  +'r'#8#0#0#6'TLabel'#7'Label10'#4'Left'#3#240#0#6'Height'#2#14#3'Top'#2#16#5
+  +'Width'#2'Q'#7'Caption'#6#14'turns / degree'#11'ParentColor'#8#0#0#6'TLabel'
+  +#7'Label11'#4'Left'#3#240#0#6'Height'#2#14#3'Top'#2']'#5'Width'#2'Q'#7'Capti'
+  +'on'#6#14'turns / degree'#11'ParentColor'#8#0#0#10'TFloatEdit'#7'TurnsAz'#4
+  +'Left'#3#128#0#6'Height'#2#22#3'Top'#2#11#5'Width'#2'Q'#11'BorderStyle'#7#8
+  +'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'TabOrder'#2#0#8'OnChange'
+  +#7#13'TurnsAzChange'#0#0#10'TFloatEdit'#8'TurnsAlt'#4'Left'#3#128#0#6'Height'
+  +#2#22#3'Top'#2'X'#5'Width'#2'Q'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'
+  +#8#14'ParentShowHint'#8#8'TabOrder'#2#2#8'OnChange'#7#14'TurnsAltChange'#0#0
+  +#9'TCheckBox'#13'RevertTurnsAz'#4'Left'#3#128#0#6'Height'#2#21#3'Top'#2'('#5
+  +'Width'#2'o'#7'Caption'#6#14'Revert Az knob'#7'OnClick'#7#13'TurnsAzChange'#8
+  +'TabOrder'#2#1#0#0#9'TCheckBox'#14'RevertTurnsAlt'#4'Left'#3#128#0#6'Height'
+  ,#2#21#3'Top'#2'x'#5'Width'#2'o'#7'Caption'#6#15'Revert Alt knob'#7'OnClick'#7
+  +#14'TurnsAltChange'#8'TabOrder'#2#3#0#0#0#0#9'TGroupBox'#15'TelescopePlugin'
+  +#4'Left'#2#8#6'Height'#2'i'#3'Top'#2'p'#5'Width'#3#194#1#7'Caption'#6#18'CDC'
+  +' plugin setting'#12'ClientHeight'#2'W'#11'ClientWidth'#3#190#1#8'TabOrder'#2
+  +#2#7'Visible'#8#0#6'TLabel'#8'Label155'#4'Left'#2#24#6'Height'#2#14#3'Top'#2
+  +'.'#5'Width'#2'h'#7'Caption'#6#17'Telescope Plugin '#11'ParentColor'#8#0#0#9
+  +'TComboBox'#19'telescopepluginlist'#4'Left'#3#144#0#6'Height'#2#21#3'Top'#2
+  +'*'#5'Width'#3#145#0#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#10'I'
+  +'temHeight'#2#13#9'MaxLength'#2#0#8'OnChange'#7#25'telescopepluginlistChange'
+  +#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#0#11'TRadioGroup'#15'Tele'
+  +'scopeSelect'#4'Left'#2#8#6'Height'#2'A'#3'Top'#2' '#5'Width'#3#194#1#8'Auto'
+  +'Fill'#9#7'Caption'#6#15'TelescopeSelect'#28'ChildSizing.LeftRightSpacing'#2
+  +#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7
   +#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomoge'
   +'nousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'C'
   +'hildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29
   +'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#3#12'Clien'
-  +'tHeight'#2'A'#11'ClientWidth'#3#194#1#7'Columns'#2#3#13'Items.Strings'#1#6#4
+  +'tHeight'#2'/'#11'ClientWidth'#3#190#1#7'Columns'#2#3#13'Items.Strings'#1#6#4
   +'INDI'#6#6'Manual'#6#10'CDC plugin'#0#7'OnClick'#7#20'TelescopeSelectClick'#8
   +'TabOrder'#2#0#0#0#0#5'TPage'#5'Page4'#7'Caption'#6#5'Page4'#11'ClientWidth'
-  +#3#238#1#12'ClientHeight'#3#218#1#0#6'TLabel'#7'Label14'#4'Left'#2#19#6'Heig'
-  +'ht'#2#14#3'Top'#2#24#5'Width'#2'm'#7'Caption'#6#18'Language selection'#11'P'
+  +#3#234#1#12'ClientHeight'#3#214#1#0#6'TLabel'#7'Label14'#4'Left'#2#19#6'Heig'
+  +'ht'#2#14#3'Top'#2#24#5'Width'#2']'#7'Caption'#6#18'Language selection'#11'P'
   +'arentColor'#8#0#0#9'TComboBox'#12'LanguageList'#4'Left'#2#17#6'Height'#2#21
   +#3'Top'#2'R'#5'Width'#3#4#1#16'AutoCompleteText'#11#22'cbactEndOfLineComplet'
-  +'e'#20'cbactSearchAscending'#0#9'MaxLength'#2#0#8'OnSelect'#7#18'LanguageLis'
-  +'tSelect'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#4'Text'#6#12'Languag'
-  +'eList'#0#0#0#0#0#0
+  +'e'#20'cbactSearchAscending'#0#10'ItemHeight'#2#13#9'MaxLength'#2#0#8'OnSele'
+  +'ct'#7#18'LanguageListSelect'#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0
+  +#0#0#0#0#0
 ]);

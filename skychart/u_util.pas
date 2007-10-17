@@ -207,6 +207,7 @@ end;
 Procedure InitTrace;
 begin
 try
+ traceon:=true;
  if tracefile<>'' then tracefile:=expandfilename(tracefile); 
  assignfile(ftrace,tracefile);
  rewrite(ftrace);
@@ -223,12 +224,14 @@ end;end;
 Procedure WriteTrace( buf : string);
 begin
 try
+if traceon then begin
  if tracefile<>'' then begin
     assignfile(ftrace,tracefile);
     append(ftrace);
  end;   
  writeln(ftrace,FormatDateTime(dateiso,Now)+'  '+buf);
  if tracefile<>'' then closefile(ftrace);
+end;
 except
 {$I-}
  traceon:=false;

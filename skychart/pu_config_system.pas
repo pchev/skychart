@@ -434,6 +434,7 @@ for i:=0 to NumIndiDriver do if IndiDriverLst[i,1]=csc.IndiDevice then IndiDev.i
 end;
 
 procedure Tf_config_system.DBtypeGroupClick(Sender: TObject);
+var dbpath:string;
 begin
 if skipDBtypeGroupClick then begin
    skipDBtypeGroupClick:=false;
@@ -447,7 +448,9 @@ if messageDlg(Format(rsAlsoBeSureTh, [DBtypeGroup.hint+crlf+crlf, crlf, crlf]),
         MysqlBox.visible:=false;
         SqliteBox.visible:=true;
         dbnamesqlite.text:=slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]);
-        forcedirectories(extractfilepath(dbnamesqlite.text));
+        dbpath:=extractfilepath(dbnamesqlite.text);
+        if not directoryexists(dbpath) then CreateDir(dbpath);
+        if not directoryexists(dbpath) then forcedirectories(dbpath);
       end;
   1 : begin
         DBtype:=mysql;

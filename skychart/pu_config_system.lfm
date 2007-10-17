@@ -33,8 +33,8 @@ object f_config_system: Tf_config_system
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 452
         object Label153: TLabel
           Height = 14
           Width = 91
@@ -327,6 +327,7 @@ object f_config_system: Tf_config_system
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
+            ItemHeight = 13
             ItemIndex = 0
             Items.Strings = (
               'KDE'
@@ -351,8 +352,8 @@ object f_config_system: Tf_config_system
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 452
         object GroupBox3: TGroupBox
           Left = 16
           Height = 247
@@ -418,8 +419,8 @@ object f_config_system: Tf_config_system
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 498
-        ClientHeight = 478
+        ClientWidth = 490
+        ClientHeight = 452
         object Label13: TLabel
           Height = 14
           Width = 105
@@ -539,6 +540,7 @@ object f_config_system: Tf_config_system
             Top = 100
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
+            ItemHeight = 13
             MaxLength = 0
             OnSelect = IndiDevChange
             Style = csDropDownList
@@ -550,6 +552,7 @@ object f_config_system: Tf_config_system
             Top = 176
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
+            ItemHeight = 13
             Items.Strings = (
               'COM1'
               'COM2'
@@ -580,8 +583,8 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 449
           Caption = 'Manual Mount'
-          ClientHeight = 297
-          ClientWidth = 449
+          ClientHeight = 279
+          ClientWidth = 445
           TabOrder = 3
           Visible = False
           object Label7: TLabel
@@ -689,8 +692,8 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 41
-            ClientWidth = 361
+            ClientHeight = 23
+            ClientWidth = 357
             Columns = 2
             Items.Strings = (
               'Equatorial'
@@ -787,8 +790,8 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 450
           Caption = 'CDC plugin setting'
-          ClientHeight = 105
-          ClientWidth = 450
+          ClientHeight = 87
+          ClientWidth = 446
           TabOrder = 2
           Visible = False
           object Label155: TLabel
@@ -805,6 +808,7 @@ object f_config_system: Tf_config_system
             Top = 42
             Width = 145
             AutoCompleteText = [cbactSearchAscending]
+            ItemHeight = 13
             MaxLength = 0
             OnChange = telescopepluginlistChange
             Style = csDropDownList
@@ -826,8 +830,8 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 65
-          ClientWidth = 450
+          ClientHeight = 47
+          ClientWidth = 446
           Columns = 3
           Items.Strings = (
             'INDI'
@@ -840,13 +844,13 @@ object f_config_system: Tf_config_system
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 494
-        ClientHeight = 474
+        ClientWidth = 490
+        ClientHeight = 470
         object Label14: TLabel
           Left = 19
           Height = 14
           Top = 24
-          Width = 109
+          Width = 93
           Caption = 'Language selection'
           ParentColor = False
         end
@@ -856,11 +860,11 @@ object f_config_system: Tf_config_system
           Top = 82
           Width = 260
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+          ItemHeight = 13
           MaxLength = 0
           OnSelect = LanguageListSelect
           Style = csDropDownList
           TabOrder = 0
-          Text = 'LanguageList'
         end
       end
     end
