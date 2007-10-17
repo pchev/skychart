@@ -824,6 +824,10 @@ msgstr "Radi del nucli"
 msgid "Correlated"
 msgstr "Correlacionat"
 
+#: u_translation:rscouldnotload
+msgid "Could not load library "
+msgstr ""
+
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
 msgstr "Zona horària del país"
@@ -2776,6 +2780,14 @@ msgstr "Si us palu, entreu el CD-ROM Realsky\256 número"
 msgid "Please report any problem to:"
 msgstr "Indiqueu qualsevol problema a:"
 
+#: u_translation:rspleasetrytoc
+msgid "Please try to create this directory yourself and restart the program."
+msgstr ""
+
+#: u_translation:rspleasetrytor
+msgid "Please try to reinstall the program."
+msgstr ""
+
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
 msgstr "Dibuixa la posició dels objectes en moviment."
@@ -3843,6 +3855,10 @@ msgstr "TU"
 #: u_translation:rsumbra
 msgid "Umbra"
 msgstr "Ombra"
+
+#: u_translation:rsunabletocrea
+msgid "Unable to create directory "
+msgstr ""
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"

@@ -1094,6 +1094,11 @@ resourcestring
   rsCenter = 'Center';
   rsRequestTimeo = 'Request timeout. You probably asked a too width area that '
     +'request too much processing time on the remote server.';
+  rsUnableToCrea = 'Unable to create directory ';
+  rsPleaseTryToC = 'Please try to create this directory yourself and restart '
+    +'the program.';
+  rsCouldNotLoad = 'Could not load library ';
+  rsPleaseTryToR = 'Please try to reinstall the program.';
 
 implementation
 

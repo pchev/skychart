@@ -824,6 +824,10 @@ msgstr "Радіус ядра"
 msgid "Correlated"
 msgstr "Кореляція"
 
+#: u_translation:rscouldnotload
+msgid "Could not load library "
+msgstr ""
+
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
 msgstr "Часовий пояс країни"
@@ -2776,6 +2780,14 @@ msgstr "Будь-ласка встановіть число RealSky\256 CD "
 msgid "Please report any problem to:"
 msgstr "Будь-ласка повідомте про труднощі їм:"
 
+#: u_translation:rspleasetrytoc
+msgid "Please try to create this directory yourself and restart the program."
+msgstr ""
+
+#: u_translation:rspleasetrytor
+msgid "Please try to reinstall the program."
+msgstr ""
+
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
 msgstr "Накреслити положення рухаючугося об'єкту."
@@ -3843,6 +3855,10 @@ msgstr "UT"
 #: u_translation:rsumbra
 msgid "Umbra"
 msgstr "Повна тінь"
+
+#: u_translation:rsunabletocrea
+msgid "Unable to create directory "
+msgstr ""
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"

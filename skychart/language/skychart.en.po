@@ -823,6 +823,10 @@ msgstr ""
 msgid "Correlated"
 msgstr ""
 
+#: u_translation:rscouldnotload
+msgid "Could not load library "
+msgstr ""
+
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
 msgstr ""
@@ -2775,6 +2779,14 @@ msgstr ""
 msgid "Please report any problem to:"
 msgstr ""
 
+#: u_translation:rspleasetrytoc
+msgid "Please try to create this directory yourself and restart the program."
+msgstr ""
+
+#: u_translation:rspleasetrytor
+msgid "Please try to reinstall the program."
+msgstr ""
+
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
 msgstr ""
@@ -3841,6 +3853,10 @@ msgstr ""
 
 #: u_translation:rsumbra
 msgid "Umbra"
+msgstr ""
+
+#: u_translation:rsunabletocrea
+msgid "Unable to create directory "
 msgstr ""
 
 #: u_translation:rsunchecktoavo
