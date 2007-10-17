@@ -1143,8 +1143,8 @@ end;
 if not directoryexists(privatedir) then CreateDir(privatedir);
 if not directoryexists(privatedir) then forcedirectories(privatedir);
 if not directoryexists(privatedir) then begin
-   MessageDlg('Unable to create directory '+privatedir+crlf
-             +'Please try to create this directory yourself and restart the program.',
+   MessageDlg(rsUnableToCrea+privatedir+crlf
+             +rsPleaseTryToC,
              mtError, [mbAbort], 0);
    Halt;
 end;
@@ -1216,8 +1216,8 @@ if Plan404lib<>0 then begin
   Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
 end;
 if @Plan404=nil then begin
-   MessageDlg('Could not load library '+lib404+crlf
-             +'Please try to reinstall the program.',
+   MessageDlg(rsCouldNotLoad+lib404+crlf
+             +rsPleaseTryToR,
              mtError, [mbAbort], 0);
    Halt;
 end;

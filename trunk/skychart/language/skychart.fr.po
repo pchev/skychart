@@ -1,7 +1,8 @@
+# translation of skychart.fr.po
 # translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-09-23 14:22+0200\n"
+"PO-Revision-Date: 2007-10-17 12:58+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -822,6 +823,10 @@ msgstr "Rayon du noyau"
 #: u_translation:rscorrelated
 msgid "Correlated"
 msgstr "Corréler"
+
+#: u_translation:rscouldnotload
+msgid "Could not load library "
+msgstr "Ne peut pas charger la librairie "
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
@@ -2775,6 +2780,14 @@ msgstr "Veuillez monter le CDrom Realsky\256 numéro"
 msgid "Please report any problem to:"
 msgstr "Veuillez signaler les problèmes à:"
 
+#: u_translation:rspleasetrytoc
+msgid "Please try to create this directory yourself and restart the program."
+msgstr "Essayez de créer ce répertoire vous même et relancez le programme."
+
+#: u_translation:rspleasetrytor
+msgid "Please try to reinstall the program."
+msgstr "Essayez de réinstaller le programme."
+
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
 msgstr "Dessine la position des objets en mouvement."
@@ -3842,6 +3855,10 @@ msgstr "TU"
 #: u_translation:rsumbra
 msgid "Umbra"
 msgstr "Ombre"
+
+#: u_translation:rsunabletocrea
+msgid "Unable to create directory "
+msgstr "Ne peut pas créer le répertoire "
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"

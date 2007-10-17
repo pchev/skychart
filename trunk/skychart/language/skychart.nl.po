@@ -823,6 +823,10 @@ msgstr "Kernstraal"
 msgid "Correlated"
 msgstr "Gecorreleerd"
 
+#: u_translation:rscouldnotload
+msgid "Could not load library "
+msgstr ""
+
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
 msgstr "Land tijdzone"
@@ -2775,6 +2779,14 @@ msgstr "Voer alstublieft RealSky\256 CD in"
 msgid "Please report any problem to:"
 msgstr "Raporteer alstublieft ieder probleem aan:"
 
+#: u_translation:rspleasetrytoc
+msgid "Please try to create this directory yourself and restart the program."
+msgstr ""
+
+#: u_translation:rspleasetrytor
+msgid "Please try to reinstall the program."
+msgstr ""
+
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
 msgstr "Beeld de positie af van een bewegend object."
@@ -3842,6 +3854,10 @@ msgstr "UT"
 #: u_translation:rsumbra
 msgid "Umbra"
 msgstr "Umbra"
+
+#: u_translation:rsunabletocrea
+msgid "Unable to create directory "
+msgstr ""
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"

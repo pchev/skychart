@@ -823,6 +823,10 @@ msgstr "Raggio del nucleo"
 msgid "Correlated"
 msgstr "Correlato"
 
+#: u_translation:rscouldnotload
+msgid "Could not load library "
+msgstr ""
+
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
 msgstr "Fuso orario locale"
@@ -2775,6 +2779,14 @@ msgstr "Per favore, inserisci il CD RealSky\256 numero"
 msgid "Please report any problem to:"
 msgstr "Per favore, indica i problemi a:"
 
+#: u_translation:rspleasetrytoc
+msgid "Please try to create this directory yourself and restart the program."
+msgstr ""
+
+#: u_translation:rspleasetrytor
+msgid "Please try to reinstall the program."
+msgstr ""
+
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
 msgstr "Disegna il movimento degli oggetti."
@@ -3842,6 +3854,10 @@ msgstr "T.U."
 #: u_translation:rsumbra
 msgid "Umbra"
 msgstr "Ombra"
+
+#: u_translation:rsunabletocrea
+msgid "Unable to create directory "
+msgstr ""
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
