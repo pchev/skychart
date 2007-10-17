@@ -1129,7 +1129,6 @@ SHGetPathFromIDList(PIDL, Folder);
 privatedir:=slash(Folder)+privatedir;
 configfile:=slash(privatedir)+configfile;
 tracefile:=slash(privatedir)+tracefile;
-Tempdir:=slash(privatedir)+DefaultTmpDir;
 {$endif}
 if fileexists(configfile) then begin
   inif:=TMeminifile.create(configfile);
@@ -1141,8 +1140,22 @@ if fileexists(configfile) then begin
    inif.Free;
   end;
 end;
+if not directoryexists(privatedir) then CreateDir(privatedir);
 if not directoryexists(privatedir) then forcedirectories(privatedir);
+if not directoryexists(privatedir) then begin
+   MessageDlg('Unable to create directory '+privatedir+crlf
+             +'Please try to create this directory yourself and restart the program.',
+             mtError, [mbAbort], 0);
+   Halt;
+end;
+if not directoryexists(slash(privatedir)+'MPC') then CreateDir(slash(privatedir)+'MPC');
 if not directoryexists(slash(privatedir)+'MPC') then forcedirectories(slash(privatedir)+'MPC');
+if not directoryexists(slash(privatedir)+'database') then CreateDir(slash(privatedir)+'database');
+if not directoryexists(slash(privatedir)+'database') then forcedirectories(slash(privatedir)+'database');
+if not directoryexists(slash(privatedir)+'pictures') then CreateDir(slash(privatedir)+'pictures');
+if not directoryexists(slash(privatedir)+'pictures') then forcedirectories(slash(privatedir)+'pictures');
+Tempdir:=slash(privatedir)+DefaultTmpDir;
+if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
 {$ifdef unix}  // allow a shared install
 if (not directoryexists(slash(appdir)+'data/constellation')) and
@@ -1174,7 +1187,6 @@ CursorImage1:=TCursorImage.Create;
 GetAppDir;
 chdir(appdir);
 InitTrace;
-traceon:=true;
 GetLanguage;
 lang:=u_translation.translate(cfgm.language);
 catalog:=Tcatalog.Create(self);
@@ -1198,11 +1210,17 @@ if zlib<>0 then begin
   gzeof:= Tgzeof(GetProcAddress(zlib,'gzeof'));
   zlibok:=true;
 end else zlibok:=false;
+Plan404:=nil;
 Plan404lib:=LoadLibrary(lib404);
 if Plan404lib<>0 then begin
   Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
-  Plan404ok:=true;
-end else Plan404ok:=false;
+end;
+if @Plan404=nil then begin
+   MessageDlg('Could not load library '+lib404+crlf
+             +'Please try to reinstall the program.',
+             mtError, [mbAbort], 0);
+   Halt;
+end;
 {$ifdef unix}
    MultiDoc1.InactiveBorderColor:=$404040;
    MultiDoc1.TitleColor:=clWhite;
@@ -2570,7 +2588,7 @@ end;
 
 Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
 begin
-if traceon and (txt>'') then writetrace(txt);
+if (txt>'') then writetrace(txt);
 P1L1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
 if sendmsg then SendInfo(Sender,origin,txt);
 // refresh tracking object
@@ -3582,6 +3600,7 @@ procedure Tf_main.SaveVersion;
 var inif: TMemIniFile;
     section : string;
 begin
+try
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
@@ -3592,11 +3611,14 @@ end;
 finally
  inif.Free;
 end;
+except
+end;
 end;
 
 procedure Tf_main.SaveDefault;
 var i,j: integer;
 begin
+try
 SavePrivateConfig(configfile);
 if (MultiDoc1.ActiveObject is Tf_chart) then begin
    SaveChartConfig(configfile,MultiDoc1.ActiveChild);
@@ -3607,6 +3629,8 @@ for i:=0 to MultiDoc1.ChildCount-1 do
      inc(j);
      SaveChartConfig(configfile+inttostr(j),MultiDoc1.Childs[i]);
   end;
+except
+end;
 end;
 
 procedure Tf_main.SaveChartConfig(filename:string; child: TChildDoc);
@@ -3616,6 +3640,7 @@ var i:integer;
     cplot:Tconf_plot ;
     csc:Tconf_skychart;
 begin
+try
 cplot:=Tconf_plot.Create;
 csc:=Tconf_skychart.create;
 if (child<>nil) and (child.DockedObject is Tf_chart) then with child.DockedObject as Tf_chart do begin
@@ -3872,6 +3897,8 @@ finally
  csc.Free;
  cplot.Free;
 end;
+except
+end;
 end;
 
 procedure Tf_main.SavePrivateConfig(filename:string);
@@ -3879,6 +3906,7 @@ var i,j:integer;
     inif: TMemIniFile;
     section : string;
 begin
+try
 inif:=TMeminifile.create(filename);
 try
 with inif do begin
@@ -4012,6 +4040,8 @@ end;
 finally
  inif.Free;
 end;
+except
+end;
 end;
 
 procedure Tf_main.SaveQuickSearch(filename:string);
@@ -4022,6 +4052,7 @@ var i,j:integer;
     instini: TIniFile;
     {$endif}
 begin
+try
 inif:=TMeminifile.create(filename);
 try
 with inif do begin
@@ -4034,20 +4065,15 @@ end;
 finally
  inif.Free;
 end;
-{$ifdef win32}
- // hard to locate the main .ini file, the location depend on the Windows version
- // put this one in the system default location (C:\windows) to locate the install path
- // To be read by external software only
- instini:=TIniFile.Create('cdc_install.ini');
- instini.WriteString('Default','Install_Dir',appdir);
- instini.free;
-{$endif}
+except
+end;
 end;
 
 procedure Tf_main.SaveConfigOnExitExecute(Sender: TObject);
 var inif: TMemIniFile;
     section : string;
 begin
+try
 SaveConfigOnExit.Checked:=not SaveConfigOnExit.Checked;
 inif:=TMeminifile.create(configfile);
 try
@@ -4059,12 +4085,15 @@ end;
 finally
  inif.Free;
 end;
+except
+end;
 end;
 
 procedure Tf_main.ChangeLanguage(newlang:string);
 var inif: TMemIniFile;
     i: integer;
 begin
+try
 cfgm.language:=newlang;
 inif:=TMeminifile.create(configfile);
 try
@@ -4097,6 +4126,8 @@ if ConfigObservatory<>nil then ConfigObservatory.SetLang;
 if ConfigDisplay<>nil then ConfigDisplay.SetLang;
 if ConfigPictures<>nil then ConfigPictures.SetLang;
 if ConfigCatalog<>nil then ConfigCatalog.SetLang;
+except
+end;
 end;
 
 procedure Tf_main.SetLang;
@@ -4903,11 +4934,15 @@ end;
 end;
 
 procedure Tf_main.ConnectDB;
+var dbpath:string;
 begin
 try
     NeedToInitializeDB:=false;
-    if ((DBtype=sqlite) and not Fileexists(cfgm.db)) then
-       ForceDirectories(Extractfilepath(cfgm.db));
+    if ((DBtype=sqlite) and not Fileexists(cfgm.db)) then begin
+        dbpath:=extractfilepath(cfgm.db);
+        if not directoryexists(dbpath) then CreateDir(dbpath);
+        if not directoryexists(dbpath) then forcedirectories(dbpath);
+    end;
     if (cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport)
        and cdcdb.CheckDB) then begin
           cdcdb.CheckForUpgrade(f_info.ProgressMemo);

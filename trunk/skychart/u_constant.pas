@@ -569,7 +569,6 @@ type
      PPlanetData = ^TPlanetData;
      TPlan404=Function( pla : PPlanetData):integer; cdecl;
 var Plan404 : TPlan404;
-    Plan404ok: boolean;
     Plan404lib: longword;
 
 //  zlib
