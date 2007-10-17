@@ -761,14 +761,11 @@ begin
 imabmp.freeimage;
 imabmp.height:=1;
 imabmp.width:=1;
-//imabmp.pixelformat:=pf32bit;
 IntfImg:=TLazIntfImage.Create(0,0);
 IntfImg.LoadFromBitmap(imabmp.Handle,0);
 GetIntfImg(IntfImg);
 IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
-imabmp.freeimage;
-imabmp.Handle:=ImgHandle;
-//imabmp.MaskHandle:=ImgMaskHandle;
+imabmp.SetHandles(ImgHandle, ImgMaskHandle);
 IntfImg.Free;
 end;
 
