@@ -374,8 +374,11 @@ var  ImgHandle,ImgMaskHandle: HBitmap;
 begin
 if IntfImgReady then begin
   IntfImgReady:=false;
+  cbmp.FreeImage;
   IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
-  cbmp.SetHandles(ImgHandle, ImgMaskHandle);
+  cbmp.Handle:=ImgMaskHandle;
+  cbmp.FreeImage;
+  cbmp.Handle:=ImgHandle;
   IntfImg.free;
 end;
 end;
