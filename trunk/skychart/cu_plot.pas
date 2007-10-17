@@ -443,14 +443,6 @@ var memstream:Tmemorystream;
     SrcR,DestR: Trect;
 begin
 bw:=2*cfgplot.starshapew*starbmpw;
-{$IFNDEF OLD_MASK_TRANSPARENCY}
-memstream:=Tmemorystream.create;
-starbmp.SaveToStream(memstream);
-memstream.position := 0;
-starbmp.LoadFromStream(memstream);
-memstream.free;
-SetTransparencyFromLuminance(starbmp);
-{$ENDIF}
 for i:=0 to 6 do
   for j:=0 to 10 do begin
    SrcR:=Rect(j*cfgplot.starshapesize*starbmpw,i*cfgplot.starshapesize*starbmpw,(j+1)*cfgplot.starshapesize*starbmpw,(i+1)*cfgplot.starshapesize*starbmpw);
@@ -469,6 +461,8 @@ for i:=0 to 6 do
    memstream.position := 0;
    Astarbmp[i,j].LoadFromStream(memstream);
    memstream.free;
+{$ELSE}
+   SetTransparencyFromLuminance(Astarbmp[i,j]);
 {$ENDIF}
    Astarbmp[i,j].Transparent:=true;
   end;
