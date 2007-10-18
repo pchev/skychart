@@ -4952,7 +4952,7 @@ try
           Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           SetLpanel1(Format(rsConnectedToS, [cfgm.db]));
     end else begin
-          SetLpanel1(rsSQLDatabaseN);
+          Showmessage(rsSQLDatabaseN+crlf+rsSQLDatabaseS);
           def_cfgsc.ShowAsteroid:=false;
           def_cfgsc.ShowComet:=false;
           def_cfgsc.ShowImages:=false;
