@@ -597,6 +597,7 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, ZoneDir : string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
      nightvision : Boolean;
+     isWin98: Boolean;
      ThemePath:string ='data/Themes';
      LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
      crRetic: TCursor = 5;
