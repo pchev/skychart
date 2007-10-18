@@ -111,6 +111,7 @@ function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string=''
 {$ifdef win32}
 procedure ScaleForm(form: TForm; scale: single);
 procedure SetFormNightVision(form: TForm; onoff:boolean);
+function FindWin98: boolean;
 {$endif}
 
 var traceon : boolean;
@@ -1508,6 +1509,17 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
  end;
 
 {$ifdef win32}
+function FindWin98: boolean;
+var lpversioninfo: TOSVERSIONINFO;
+begin
+lpversioninfo.dwOSVersionInfoSize:=sizeof(TOSVERSIONINFO);
+if GetVersionEx(lpversioninfo) then begin
+   result:=lpversioninfo.dwMajorVersion<=4;
+end
+else
+ result:=false;
+end;
+
 procedure ScaleForm(form: TForm; scale: single);
 var i: integer;
 begin

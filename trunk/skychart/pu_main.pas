@@ -951,11 +951,11 @@ try
  ConnectDB;
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
+ if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
     CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur');
     Screen.Cursors[crRetic]:=CursorImage1.CursorHandle;
  end
-   else crRetic:=crCross;
+ else crRetic:=crCross;
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm') then
     compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm');
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm') then
@@ -1172,7 +1172,9 @@ SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
 ImageListCount:=ImageNormal.Count;
+isWin98:=false;
 {$ifdef win32}
+  isWin98:=FindWin98;
   configfile:=Defaultconfigfile;
 {$endif}
 {$ifdef unix}
