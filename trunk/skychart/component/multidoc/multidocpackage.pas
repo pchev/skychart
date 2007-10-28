@@ -7,7 +7,7 @@ unit MultiDocPackage;
 interface
 
 uses
-  MultiDoc, LazarusPackageIntf; 
+  MultiDoc, ChildDoc, LazarusPackageIntf; 
 
 implementation
 

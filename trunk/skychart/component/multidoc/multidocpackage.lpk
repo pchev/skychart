@@ -18,9 +18,9 @@
       </Other>
     </CompilerOptions>
     <Version Minor="3"/>
-    <Files Count="2">
+    <Files Count="3">
       <Item1>
-        <Filename Value="multidoc.pas"/>
+        <Filename Value="MultiDoc.pas"/>
         <HasRegisterProc Value="True"/>
         <UnitName Value="MultiDoc"/>
       </Item1>
@@ -28,15 +28,18 @@
         <Filename Value="multidoc.lrs"/>
         <Type Value="LRS"/>
       </Item2>
+      <Item3>
+        <Filename Value="ChildDoc.pas"/>
+      </Item3>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="2">
       <Item1>
-        <PackageName Value="FCL"/>
+        <PackageName Value="LCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item1>
       <Item2>
-        <PackageName Value="LCL"/>
+        <PackageName Value="FCL"/>
         <MinVersion Major="1" Valid="True"/>
       </Item2>
     </RequiredPkgs>
