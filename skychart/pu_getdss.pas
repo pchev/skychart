@@ -214,6 +214,7 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   DownloadDialog1.SaveToFile:=ExpandFileName(cfgdss.dssfile+'.gz');
   if DownloadDialog1.Execute then begin
      gzf:=gzopen(pchar(DownloadDialog1.SaveToFile),pchar('rb'));
+     Filemode:=2;
      assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
      rewrite(fitsfile,1);
      firstrec:=true;
@@ -229,6 +230,7 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
      CloseFile(fitsfile);
   end
   else begin
+     Filemode:=2;
      assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
      rewrite(fitsfile,1);
      buf:=html_h+DownloadDialog1.ResponseText;

@@ -211,6 +211,7 @@ begin
 try
  traceon:=true;
  if tracefile<>'' then tracefile:=expandfilename(tracefile); 
+ Filemode:=2;
  assignfile(ftrace,tracefile);
  rewrite(ftrace);
  writeln(ftrace,FormatDateTime(dateiso,Now)+'  Start trace');
@@ -228,6 +229,7 @@ begin
 try
 if traceon then begin
  if tracefile<>'' then begin
+    Filemode:=2;
     assignfile(ftrace,tracefile);
     append(ftrace);
  end;   

@@ -2497,6 +2497,7 @@ begin
       setlength(cfgshr.ConstelPos,0);
       exit;
    end;
+   Filemode:=0;
    assignfile(f,fname);
    try
    reset(f);
@@ -2549,6 +2550,7 @@ begin
       setlength(cfgshr.ConstL,0);
       exit;
    end;
+   Filemode:=0;
    assignfile(f,fname);
    try
    reset(f);
@@ -2586,6 +2588,7 @@ begin
       setlength(cfgshr.ConstB,0);
       exit;
    end;
+   Filemode:=0;
    assignfile(f,fname);
    try
    reset(f);
@@ -2623,6 +2626,7 @@ for i:=1 to 360 do cfgshr.horizonlist[i]:=0;
 if fileexists(fname) then begin
 i1:=0;i2:=0;d1:=0;d0:=0;
 try
+Filemode:=0;
 assignfile(f,fname);
 reset(f);
 // get first point
