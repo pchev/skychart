@@ -1,14 +1,14 @@
 object f_calendar: Tf_calendar
   Left = 607
-  Height = 393
+  Height = 388
   Top = 105
-  Width = 643
-  HorzScrollBar.Page = 642
-  VertScrollBar.Page = 392
+  Width = 670
+  HorzScrollBar.Page = 669
+  VertScrollBar.Page = 387
   ActiveControl = step
   Caption = 'f_calendar'
-  ClientHeight = 393
-  ClientWidth = 643
+  ClientHeight = 388
+  ClientWidth = 670
   Icon.Data = {
     36100000424D3610000000000000360000002800000020000000200000000100
     20000000000000000000C40E0000C40E00000000000000000000000000FF0000
@@ -148,59 +148,54 @@ object f_calendar: Tf_calendar
   OnShow = FormShow
   object Panel1: TPanel
     Height = 70
-    Width = 643
+    Width = 670
     Align = alTop
     ClientHeight = 70
-    ClientWidth = 643
+    ClientWidth = 670
     FullRepaint = False
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 15
+      Height = 14
       Top = 14
-      Width = 33
+      Width = 30
       Caption = 'From'
-      Color = clNone
       Font.Style = [fsBold]
       ParentColor = False
     end
     object Label2: TLabel
       Left = 184
-      Height = 15
+      Height = 14
       Top = 14
-      Width = 13
+      Width = 11
       Caption = 'to'
-      Color = clNone
       Font.Style = [fsBold]
       ParentColor = False
     end
     object Label5: TLabel
       Left = 48
-      Height = 15
+      Height = 14
       Top = 46
-      Width = 13
+      Width = 11
       Caption = 'at'
-      Color = clNone
       Font.Style = [fsBold]
       ParentColor = False
     end
     object Label3: TLabel
       Left = 184
-      Height = 15
+      Height = 14
       Top = 46
-      Width = 24
+      Width = 21
       Caption = 'pas'
-      Color = clNone
       Font.Style = [fsBold]
       ParentColor = False
     end
     object Label4: TLabel
       Left = 260
-      Height = 15
+      Height = 14
       Top = 46
-      Width = 31
+      Width = 28
       Caption = 'jours'
-      Color = clNone
       Font.Style = [fsBold]
       ParentColor = False
     end
@@ -218,12 +213,11 @@ object f_calendar: Tf_calendar
       Visible = False
       object Label9: TLabel
         Left = 1
-        Height = 66
+        Height = 62
         Hint = 'http://users2.ev1.net/~mmccants/'
         Top = 4
-        Width = 172
+        Width = 150
         Caption = 'Satellites calculation use QuickSat by Mike McCants, Iridium flare prediction use Iridflar by Robert Matson'
-        Color = clNone
         ParentColor = False
         ParentShowHint = False
         ShowHint = True
@@ -399,35 +393,36 @@ object f_calendar: Tf_calendar
       Height = 23
       Top = 41
       Width = 101
-      Time = 0.878032407407407
+      Time = 0.88358796296296
       Enabled = True
       TabOrder = 2
       TabStop = True
     end
   end
   object PageControl1: TPageControl
-    Height = 314
+    Height = 318
     Top = 70
-    Width = 635
+    Width = 670
     ActivePage = twilight
+    Align = alClient
     TabIndex = 0
     TabOrder = 1
     OnChange = PageControl1Change
     OnPageChanged = PageControl1Change
     object twilight: TTabSheet
       Caption = 'Twilight'
-      ClientHeight = 282
-      ClientWidth = 631
+      ClientHeight = 286
+      ClientWidth = 666
       object TwilightGrid: TStringGrid
-        Height = 282
-        Width = 631
+        Height = 286
+        Width = 666
         Align = alClient
         ColCount = 5
         DefaultColWidth = 115
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
-        Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+        Options = [goVertLine, goHorzLine, goRangeSelect]
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
@@ -438,31 +433,31 @@ object f_calendar: Tf_calendar
     end
     object planets: TTabSheet
       Caption = 'Planets'
-      ClientHeight = 282
-      ClientWidth = 631
+      ClientHeight = 286
+      ClientWidth = 666
       ImageIndex = 1
       object Pagecontrol2: TPageControl
-        Height = 282
-        Width = 631
-        ActivePage = Psoleil
+        Height = 286
+        Width = 666
+        ActivePage = Pluton
         Align = alClient
-        TabIndex = 0
+        TabIndex = 9
         TabOrder = 0
         object Psoleil: TTabSheet
           Caption = 'Sun'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 9
           object SoleilGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -486,18 +481,18 @@ object f_calendar: Tf_calendar
         end
         object Mercure: TTabSheet
           Caption = 'Mercury'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           object MercureGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -521,19 +516,19 @@ object f_calendar: Tf_calendar
         end
         object Venus: TTabSheet
           Caption = 'Venus'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 1
           object VenusGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -557,19 +552,19 @@ object f_calendar: Tf_calendar
         end
         object PLune: TTabSheet
           Caption = 'Moon'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 2
           object LuneGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -593,19 +588,19 @@ object f_calendar: Tf_calendar
         end
         object Mars: TTabSheet
           Caption = 'Mars'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 3
           object MarsGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -629,19 +624,19 @@ object f_calendar: Tf_calendar
         end
         object Jupiter: TTabSheet
           Caption = 'Jupiter'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 4
           object JupiterGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -665,19 +660,19 @@ object f_calendar: Tf_calendar
         end
         object Saturne: TTabSheet
           Caption = 'Saturn'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 5
           object SaturneGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -701,19 +696,19 @@ object f_calendar: Tf_calendar
         end
         object Uranus: TTabSheet
           Caption = 'Uranus'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 6
           object UranusGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -737,19 +732,19 @@ object f_calendar: Tf_calendar
         end
         object Neptune: TTabSheet
           Caption = 'Neptun'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 7
           object NeptuneGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -773,19 +768,19 @@ object f_calendar: Tf_calendar
         end
         object Pluton: TTabSheet
           Caption = 'Pluto'
-          ClientHeight = 282
-          ClientWidth = 631
+          ClientHeight = 254
+          ClientWidth = 662
           ImageIndex = 8
           object PlutonGrid: TStringGrid
-            Height = 282
-            Width = 631
+            Height = 254
+            Width = 662
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
-            Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+            Options = [goVertLine, goHorzLine, goRangeSelect]
             RowCount = 15
             ScrollBars = ssAutoBoth
             TabOrder = 0
@@ -811,13 +806,13 @@ object f_calendar: Tf_calendar
     end
     object comet: TTabSheet
       Caption = 'Comets'
-      ClientHeight = 282
-      ClientWidth = 631
+      ClientHeight = 286
+      ClientWidth = 666
       ImageIndex = 2
       object CometGrid: TStringGrid
-        Height = 239
+        Height = 243
         Top = 43
-        Width = 631
+        Width = 666
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 13
@@ -825,7 +820,7 @@ object f_calendar: Tf_calendar
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
-        Options = [goVertLine, goHorzLine, goThumbTracking]
+        Options = [goVertLine, goHorzLine]
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
@@ -850,10 +845,10 @@ object f_calendar: Tf_calendar
       end
       object Panel2: TPanel
         Height = 43
-        Width = 631
+        Width = 666
         Align = alTop
         ClientHeight = 43
-        ClientWidth = 631
+        ClientWidth = 666
         TabOrder = 1
         object Button1: TButton
           Left = 136
@@ -887,13 +882,13 @@ object f_calendar: Tf_calendar
     end
     object Asteroids: TTabSheet
       Caption = 'Asteroids'
-      ClientHeight = 282
-      ClientWidth = 631
+      ClientHeight = 286
+      ClientWidth = 666
       ImageIndex = 6
       object AsteroidGrid: TStringGrid
-        Height = 239
+        Height = 243
         Top = 43
-        Width = 631
+        Width = 666
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 9
@@ -901,7 +896,7 @@ object f_calendar: Tf_calendar
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
-        Options = [goVertLine, goHorzLine, goThumbTracking]
+        Options = [goVertLine, goHorzLine]
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
@@ -922,10 +917,10 @@ object f_calendar: Tf_calendar
       end
       object Panel3: TPanel
         Height = 43
-        Width = 631
+        Width = 666
         Align = alTop
         ClientHeight = 43
-        ClientWidth = 631
+        ClientWidth = 666
         TabOrder = 1
         object ComboBox2: TComboBox
           Left = 216
@@ -959,19 +954,19 @@ object f_calendar: Tf_calendar
     end
     object Solar: TTabSheet
       Caption = 'Solar Eclipses'
-      ClientHeight = 282
-      ClientWidth = 631
+      ClientHeight = 286
+      ClientWidth = 666
       ImageIndex = 3
       object SolarGrid: TStringGrid
-        Height = 282
-        Width = 631
+        Height = 286
+        Width = 666
         Align = alClient
         ColCount = 12
         DefaultColWidth = 75
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
-        Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+        Options = [goVertLine, goHorzLine, goRangeSelect]
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
@@ -996,19 +991,19 @@ object f_calendar: Tf_calendar
     end
     object Lunar: TTabSheet
       Caption = 'Lunar Eclipses'
-      ClientHeight = 282
-      ClientWidth = 631
+      ClientHeight = 286
+      ClientWidth = 666
       ImageIndex = 4
       object LunarGrid: TStringGrid
-        Height = 282
-        Width = 631
+        Height = 286
+        Width = 666
         Align = alClient
         ColCount = 9
         DefaultColWidth = 75
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
-        Options = [goVertLine, goHorzLine, goRangeSelect, goThumbTracking]
+        Options = [goVertLine, goHorzLine, goRangeSelect]
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
@@ -1019,14 +1014,14 @@ object f_calendar: Tf_calendar
     end
     object Satellites: TTabSheet
       Caption = 'Artificial Satellites'
-      ClientHeight = 314
-      ClientWidth = 635
+      ClientHeight = 286
+      ClientWidth = 666
       ImageIndex = 5
       TabVisible = False
       object SatGrid: TStringGrid
-        Height = 248
+        Height = 220
         Top = 66
-        Width = 635
+        Width = 666
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 10
@@ -1034,7 +1029,7 @@ object f_calendar: Tf_calendar
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
-        Options = [goVertLine, goHorzLine, goThumbTracking]
+        Options = [goVertLine, goHorzLine]
         RowCount = 3
         ScrollBars = ssAutoBoth
         TabOrder = 0
@@ -1055,36 +1050,33 @@ object f_calendar: Tf_calendar
       end
       object Panel4: TPanel
         Height = 66
-        Width = 635
+        Width = 666
         Align = alTop
         ClientHeight = 66
-        ClientWidth = 635
+        ClientWidth = 666
         TabOrder = 1
         Visible = False
         object Label8: TLabel
           Left = 192
           Height = 14
           Top = 4
-          Width = 28
+          Width = 31
           Caption = 'map :'
-          Color = clNone
           ParentColor = False
         end
         object Label7: TLabel
           Height = 14
           Top = 4
-          Width = 111
+          Width = 125
           Caption = 'Magnitude limite, liste :'
-          Color = clNone
           ParentColor = False
         end
         object Label6: TLabel
           Left = 288
           Height = 14
           Top = 6
-          Width = 25
+          Width = 30
           Caption = 'TLE :'
-          Color = clNone
           ParentColor = False
         end
         object tle1: TEdit
@@ -1097,9 +1089,9 @@ object f_calendar: Tf_calendar
         end
         object fullday: TCheckBox
           Left = 8
-          Height = 13
+          Height = 22
           Top = 24
-          Width = 122
+          Width = 145
           Caption = 'Include day time pass'
           TabOrder = 2
         end
@@ -1108,6 +1100,7 @@ object f_calendar: Tf_calendar
           Height = 43
           Top = 6
           Width = 110
+          Directory = '/home/pch'
           IntegralHeight = True
           ItemHeight = 13
           Mask = '*.tle'
@@ -1117,9 +1110,9 @@ object f_calendar: Tf_calendar
         end
         object IridiumBox: TCheckBox
           Left = 464
-          Height = 13
+          Height = 22
           Top = 24
-          Width = 116
+          Width = 140
           Caption = 'Include Iridium flares'
           Checked = True
           State = cbChecked
@@ -1140,8 +1133,8 @@ object f_calendar: Tf_calendar
         end
         object SatChartBox: TCheckBox
           Left = 464
-          Height = 13
-          Width = 113
+          Height = 22
+          Width = 134
           Caption = 'in current chart only'
           TabOrder = 3
         end
