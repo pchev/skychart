@@ -216,7 +216,6 @@ date1.JD:=jdd(yy,mm,dd,0);
 date2.JD:=date1.JD+5;
 time.Time:=now;
 initial:=true;
-PageControl1.Align:=alClient;
 end;
 
 procedure Tf_calendar.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -700,7 +699,7 @@ Filemode:=0;
 Assignfile(f,slash(Feclipsepath)+'solar'+century+'.txt');
 reset(f);
 i:=2;
-solargrid.visible:=false;
+//solargrid.visible:=false;
 repeat
 Readln(f,buf);
 with solargrid do begin
@@ -738,7 +737,7 @@ i:=i+1;
 until eof(f);
 century_Solar:=century;
 finally
-solargrid.visible:=true;
+//solargrid.visible:=true;
 Closefile(f);
 screen.cursor:=crDefault;
 end;
@@ -784,7 +783,7 @@ Filemode:=0;
 Assignfile(f,slash(Feclipsepath)+'lunar'+century+'.txt');
 reset(f);
 i:=2;
-lunargrid.visible:=false;
+//lunargrid.visible:=false;
 repeat
 Readln(f,buf);
 with lunargrid do begin
@@ -817,7 +816,7 @@ i:=i+1;
 until eof(f);
 century_Lunar:=century;
 finally
-lunargrid.visible:=true;
+//lunargrid.visible:=true;
 Closefile(f);
 screen.cursor:=crDefault;
 end;
@@ -859,7 +858,7 @@ var jda,jd0,jd1,jd2,h,hh : double;
 begin
 screen.cursor:=crHourglass;
 try
-TwilightGrid.Visible:=false;
+//TwilightGrid.Visible:=false;
 FreeCoord(TwilightGrid);
 dat11:=date1.JD;
 dat12:=date2.JD;
@@ -926,7 +925,7 @@ jda:=jda+s;
 i:=i+1;
 until jda>jd2;
 finally
-TwilightGrid.Visible:=true;
+//TwilightGrid.Visible:=true;
 screen.cursor:=crDefault;
 end;
 end;
@@ -1023,7 +1022,7 @@ end;
 begin
 screen.cursor:=crHourGlass;
 try
-SoleilGrid.Visible:=false;
+{SoleilGrid.Visible:=false;
 MercureGrid.Visible:=false;
 VenusGrid.Visible:=false;
 LuneGrid.Visible:=false;
@@ -1032,7 +1031,7 @@ JupiterGrid.Visible:=false;
 SaturneGrid.Visible:=false;
 UranusGrid.Visible:=false;
 NeptuneGrid.Visible:=false;
-PlutonGrid.Visible:=false;
+PlutonGrid.Visible:=false;}
 dat21:=date1.JD;
 dat22:=date2.JD;
 dat23:=time.time;
@@ -1096,7 +1095,7 @@ i:=i+1;
 until jda>jd2;
 finally
 screen.cursor:=crDefault;
-SoleilGrid.Visible:=true;
+{SoleilGrid.Visible:=true;
 MercureGrid.Visible:=true;
 VenusGrid.Visible:=true;
 LuneGrid.Visible:=true;
@@ -1105,7 +1104,7 @@ JupiterGrid.Visible:=true;
 SaturneGrid.Visible:=true;
 UranusGrid.Visible:=true;
 NeptuneGrid.Visible:=true;
-PlutonGrid.Visible:=true;
+PlutonGrid.Visible:=true;}
 end;
 end;
 
@@ -1442,7 +1441,7 @@ id:=cometid[ComboBox1.itemindex];
 epoch:=cdb.GetCometEpoch(id,cjd);
 if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    Fplanet.InitComet(tp,q,ec,ap,an,ic,hh,g,eq,nam);
-   Cometgrid.Visible:=false;
+//   Cometgrid.Visible:=false;
    FreeCoord(Cometgrid);
    dat31:=date1.jd;
    dat32:=date2.jd;
@@ -1587,7 +1586,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    until jda>jd2;
 end;
 finally
-Cometgrid.Visible:=true;
+//Cometgrid.Visible:=true;
 screen.cursor:=crDefault;
 end;
 end;
@@ -1626,7 +1625,7 @@ id:=astid[ComboBox2.itemindex];
 epoch:=cdb.GetAsteroidEpoch(id,cjd);
 if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    Fplanet.InitAsteroid(epoch,hh,g,ma,ap,an,ic,ec,sa,eq,nam);
-   Asteroidgrid.Visible:=false;
+//   Asteroidgrid.Visible:=false;
    FreeCoord(Asteroidgrid);
    dat71:=date1.jd;
    dat72:=date2.jd;
@@ -1709,7 +1708,7 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    until jda>jd2;
 end;
 finally
-Asteroidgrid.Visible:=true;
+//Asteroidgrid.Visible:=true;
 screen.cursor:=crDefault;
 end;
 end;
