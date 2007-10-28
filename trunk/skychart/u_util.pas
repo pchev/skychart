@@ -112,6 +112,7 @@ function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string=''
 procedure ScaleForm(form: TForm; scale: single);
 procedure SetFormNightVision(form: TForm; onoff:boolean);
 function FindWin98: boolean;
+function ScreenBPP: integer;
 {$endif}
 
 var traceon : boolean;
@@ -1518,6 +1519,14 @@ if GetVersionEx(lpversioninfo) then begin
 end
 else
  result:=false;
+end;
+
+function ScreenBPP: integer;
+var screendc: HDC;
+begin
+screendc:=GetDC(0);
+result:=GetDeviceCaps(screendc,BITSPIXEL);
+ReleaseDC(0,screendc);
 end;
 
 procedure ScaleForm(form: TForm; scale: single);
