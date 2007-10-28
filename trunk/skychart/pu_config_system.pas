@@ -317,6 +317,7 @@ if fileexists(dir+'skychart.lang') then
 else
    writetrace('File '+dir+'skychart.lang'+' not found!');
 try
+Filemode:=0;
 AssignFile(f,dir+'skychart.lang');
 Reset(f);
 repeat

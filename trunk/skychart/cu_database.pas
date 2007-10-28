@@ -347,6 +347,7 @@ end;
 try
 if db.Active then begin
   filedesc:=extractfilename(comfile)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(comfile)));
+  Filemode:=0;
   assignfile(f,comfile);
   reset(f);
   db.starttransaction;
@@ -570,6 +571,7 @@ end;
 try
 if db.Active then begin
   filedesc:=extractfilename(astfile)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(astfile)));
+  Filemode:=0;
   assignfile(f,astfile);
   reset(f);
   // minimal file checking to distinguish full mpcorb from daily update
@@ -1226,6 +1228,7 @@ end;
 try
 if db.Active then begin
   rec:= TStringList.Create;
+  Filemode:=0;
   assignfile(f,locfile);
   reset(f);
   db.StartTransaction;
@@ -1266,6 +1269,7 @@ if db.Active then begin
   rec:= TStringList.Create;
   nl:=0;
   force_country:=(country<>'');
+  Filemode:=0;
   assignfile(f,locfile);
   reset(f);
   readln(f,buf); // heading
@@ -1328,6 +1332,7 @@ try
 if db.Active then begin
   rec:= TStringList.Create;
   nl:=0;
+  Filemode:=0;
   assignfile(f,locfile);
   reset(f);
   readln(f,buf); // heading

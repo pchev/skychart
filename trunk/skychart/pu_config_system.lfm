@@ -33,8 +33,6 @@ object f_config_system: Tf_config_system
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 490
-        ClientHeight = 452
         object Label153: TLabel
           Height = 14
           Width = 91
@@ -352,8 +350,6 @@ object f_config_system: Tf_config_system
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 490
-        ClientHeight = 452
         object GroupBox3: TGroupBox
           Left = 16
           Height = 247
@@ -419,8 +415,6 @@ object f_config_system: Tf_config_system
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 490
-        ClientHeight = 452
         object Label13: TLabel
           Height = 14
           Width = 105

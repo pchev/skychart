@@ -521,6 +521,7 @@ begin
     if DownloadDialog1.Execute then begin
        ok:=true;
        if i>1 then begin
+          Filemode:=2;
           assignfile(fi,tmpfn);
           assignfile(fo,fn);
           reset(fi);
@@ -605,6 +606,7 @@ begin
     if DownloadDialog1.Execute then begin
        ok:=true;
        if i>1 then begin
+          Filemode:=2;
           assignfile(fi,tmpfn);
           assignfile(fo,fn);
           reset(fi);
