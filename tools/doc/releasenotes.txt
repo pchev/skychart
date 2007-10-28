@@ -1,5 +1,8 @@
 Version 3.0.1.3 svn Release Notes
 
+October 28 2007:
+Improved picture display on Windows. To beneficiate of this improvement you need to set your graphic card to 32 bits color.
+
 September 30 2007:
 Improve precision for Mean J2000 coordinates.
 Skyview online picture is now working with the new URL.

@@ -1,5 +1,8 @@
 Version 3.0.1.3 svn  Notes de la version
 
+28 octobre 2007:
+Amélioration de l'affichage des images avec Windows. Pour bénéficier de cette amélioration vous devez régler votre carte graphique en couleur 32 bits.
+
 30 septembre 2007
 Améliore la précision des coordonnées moyennes J2000.
 L'affichage des images de Skyview marche à nouveau avec les nouvelles URL.
