@@ -376,6 +376,7 @@ if IntfImgReady then begin
   IntfImgReady:=false;
   cbmp.FreeImage;
   IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+//  cbmp.SetHandles(ImgHandle,ImgMaskHandle);
   cbmp.Handle:=ImgMaskHandle;
   cbmp.FreeImage;
   cbmp.Handle:=ImgHandle;
@@ -401,12 +402,12 @@ end;
 //todo: check if gtk alpha transparency work
 {$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 {$IFDEF LCLGTK2} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
-procedure SetTransparencyFromLuminance(bmp:Tbitmap);
+procedure SetTransparencyFromLuminance(bmp:Tbitmap; method: integer);
 var
+  memstream:Tmemorystream;
   IntfImage: TLazIntfImage;
-  y: Integer;
-  x: Integer;
-  alpha : word;
+  x,y: Integer;
+  newalpha : word;
   CurColor: TFPColor;
   ImgHandle, ImgMaskHandle: HBitmap;
 begin
@@ -416,29 +417,57 @@ begin
       for y:=0 to IntfImage.Height-1 do begin
         for x:=0 to IntfImage.Width-1 do begin
           CurColor:=IntfImage.Colors[x,y];
-          alpha:=MaxIntValue([CurColor.red,CurColor.green,CurColor.blue]);
-{$IFDEF OLD_MASK_TRANSPARENCY}
-          if alpha<(80*255) then
-              CurColor:=colTransparent
-          else
-              CurColor.alpha:=alphaOpaque;
-{$ELSE}
-          if (alpha>200*255) then alpha:=65535;
-          if (alpha<100*255) then alpha:=alpha div 2;
-          CurColor.alpha:=alpha;
-{$ENDIF}
+          newalpha:=MaxIntValue([CurColor.red,CurColor.green,CurColor.blue]);
+          case method of
+          0: begin  // linear for nebulae
+             {$IFDEF OLD_MASK_TRANSPARENCY}
+                if newalpha<=(0) then
+                    CurColor:=colTransparent
+                else
+                    CurColor.alpha:=alphaOpaque;
+             {$ELSE}
+                CurColor.alpha:=newalpha;
+             {$ENDIF}
+             end;
+          1: begin  // hard contrast for bitmap stars
+             {$IFDEF OLD_MASK_TRANSPARENCY}
+                if newalpha<(80*255) then
+                    CurColor:=colTransparent
+                else
+                    CurColor.alpha:=alphaOpaque;
+             {$ELSE}
+                if (newalpha>200*255) then newalpha:=65535;
+                if (newalpha<100*255) then newalpha:=newalpha div 2;
+                CurColor.alpha:=newalpha;
+             {$ENDIF}
+             end;
+          2: begin  // black transparent
+                if newalpha<=(0) then
+                    CurColor:=colTransparent
+                else
+                    CurColor.alpha:=alphaOpaque;
+             end;
+           end;
           IntfImage.Colors[x,y]:=CurColor;
         end;
       end;
       IntfImage.CreateBitmaps(ImgHandle, ImgMaskHandle);
       bmp.SetHandles(ImgHandle, ImgMaskHandle);
+      {$IFDEF OLD_MASK_TRANSPARENCY}
+       memstream:=Tmemorystream.create;
+       bmp.SaveToStream(memstream);
+       memstream.position := 0;
+       bmp.LoadFromStream(memstream);
+       memstream.free;
+       bmp.Transparent:=true;
+      {$ENDIF}
     finally
       IntfImage.Free;
     end;
 end;
 
 procedure TSplot.InitStarBmp;
-var memstream:Tmemorystream;
+var
     i,j,bw: integer;
     SrcR,DestR: Trect;
 begin
@@ -454,17 +483,7 @@ for i:=0 to 6 do
 {$ENDIF}
    Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
-{$IFDEF OLD_MASK_TRANSPARENCY}
-   SetTransparencyFromLuminance(Astarbmp[i,j]);
-   memstream:=Tmemorystream.create;
-   Astarbmp[i,j].SaveToStream(memstream);
-   memstream.position := 0;
-   Astarbmp[i,j].LoadFromStream(memstream);
-   memstream.free;
-{$ELSE}
-   SetTransparencyFromLuminance(Astarbmp[i,j]);
-{$ENDIF}
-   Astarbmp[i,j].Transparent:=true;
+   SetTransparencyFromLuminance(Astarbmp[i,j],1);
   end;
 end;
 
@@ -480,11 +499,7 @@ Procedure TSplot.PlotStar1(x,y: single; ma,b_v : Double);
 var
   ds,Icol : Integer;
   ico,isz,xx,yy : integer;
-  DestR,SrcR :Trect;
-  bmp:Tbitmap;
-  memstream:Tmemorystream;
 begin
-bmp:=Tbitmap.create;
 xx:=round(x);
 yy:=round(y);
 with cnv do begin
@@ -514,27 +529,9 @@ with cnv do begin
       11: isz:=1;
      else isz:=0;
    end;
-{   SrcR:=Rect(isz*cfgplot.starshapesize*starbmpw,ico*cfgplot.starshapesize*starbmpw,(isz+1)*cfgplot.starshapesize*starbmpw,(ico+1)*cfgplot.starshapesize*starbmpw);
-   DestR:=Rect(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,xx+(cfgplot.starshapew+1)*starbmpw,yy+(cfgplot.starshapew+1)*starbmpw);
-   bmp.Width:=2*cfgplot.starshapew*starbmpw;
-   bmp.Height:=bmp.Width;
-   bmp.canvas.CopyMode:=cmSrcCopy;
-   bmp.canvas.CopyRect(Rect(0,0,bmp.Width,bmp.Height),starbmp.canvas,SrcR);
-   bmp.TransparentColor:=clBlack;
-   bmp.Transparent:=true;
-   memstream:=Tmemorystream.create;
-   bmp.SaveToStream(memstream);
-   memstream.position := 0;
-   bmp.LoadFromStream(memstream);
-   memstream.free;}
    CopyMode:=cmSrcCopy;
    Draw(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Astarbmp[ico,isz]);
-
-//   CopyMode:=cmSrcPaint;
-//   CopyRect(DestR,starbmp.canvas,SrcR);
-
 end;
-bmp.free;
 end;
 
 Procedure TSplot.PlotStar0(x,y: single; ma,b_v : Double);
@@ -1423,6 +1420,10 @@ begin
 zoom:=iWidth/ibmp.Width;
 imabmp:=Tbitmap.Create;
 rbmp:=Tbitmap.Create;
+if not DisplayIs32bpp then begin
+  imabmp.PixelFormat:=pf32bit;
+  rbmp.PixelFormat:=pf32bit;
+end;
 memstream := TMemoryStream.create;
 try
 if (iWidth<=cfgchart.Width)and(iHeight<=cfgchart.Height) then begin
@@ -1441,11 +1442,14 @@ if (iWidth<=cfgchart.Width)and(iHeight<=cfgchart.Height) then begin
    DestX:=round(xx-dsx);
    DestY:=round(yy-dsy);
    BitmapFlip(imabmp,(flipx<0),(flipy<0));
+   {$IFNDEF OLD_MASK_TRANSPARENCY}
    imabmp.SaveToStream(memstream);
    memstream.position := 0;
    imabmp.LoadFromStream(memstream);
-   imabmp.Transparent:=iTransparent;
-   imabmp.TransparentColor:=clBlack;
+   {$ENDIF}
+   if iTransparent then
+      if DisplayIs32bpp then SetTransparencyFromLuminance(imabmp,0)
+                        else imabmp.TransparentColor:=clBlack;
    cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(DestX,DestY,imabmp);
 end else begin
@@ -1469,13 +1473,14 @@ end else begin
    imabmp.Canvas.Rectangle(0,0,imabmp.Width,imabmp.Height);
    imabmp.canvas.CopyRect(Rect(0,0,imabmp.Width,imabmp.Height),rbmp.Canvas,SrcR);
    BitmapResize(imabmp,rbmp,zoom);
+   {$IFNDEF OLD_MASK_TRANSPARENCY}
    rbmp.SaveToStream(memstream);
    memstream.position := 0;
    rbmp.LoadFromStream(memstream);
-   {$ifndef mswindows}       // transparent produce weird output on Windows
-      rbmp.Transparent:=iTransparent;
-      rbmp.TransparentColor:=clBlack;
-   {$endif}
+   {$ENDIF}
+   if iTransparent then
+      if DisplayIs32bpp then SetTransparencyFromLuminance(rbmp,0)
+                        else rbmp.TransparentColor:=clBlack;
    cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(0,0,rbmp);
 end;
