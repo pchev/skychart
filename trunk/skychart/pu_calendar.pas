@@ -841,8 +841,8 @@ var z1,z2: string;
 begin
   RefreshTwilight;
   RefreshPlanet;
-  RefreshSolarEclipse;
-  RefreshLunarEclipse;
+//  RefreshSolarEclipse;
+//  RefreshLunarEclipse;
   config.tz.JD:=date1.JD;
   z1:=config.tz.ZoneName;
   config.tz.JD:=date2.JD;
