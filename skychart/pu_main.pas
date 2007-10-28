@@ -1172,9 +1172,11 @@ SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
 ImageListCount:=ImageNormal.Count;
+DisplayIs32bpp:=true;
 isWin98:=false;
 {$ifdef win32}
   isWin98:=FindWin98;
+  DisplayIs32bpp:=(ScreenBPP=32);
   configfile:=Defaultconfigfile;
 {$endif}
 {$ifdef unix}
