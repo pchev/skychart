@@ -937,8 +937,8 @@ sincos(c.e,se,ce);
 sincos(c.sunl,sls,cls);
 sincos(c.abp,sp,cp);
 // nutation
-if abs(de)<(89*deg2rad) then begin    // meeus91 22.1
-   da:=c.nutl*(ce+se*sra*tan(de))-c.nuto*(cra*tan(de));
+if abs(de)<(89.99*deg2rad) then begin    // meeus91 22.1
+   da:=c.nutl*(ce+se*sra*(sde/cde))-c.nuto*(cra*(sde/cde));
    dd:=c.nutl*se*cra+c.nuto*sra;
    ra:=ra+da;
    de:=de+dd;
@@ -969,8 +969,8 @@ sincos(c.e,se,ce);
 sincos(c.sunl,sls,cls);
 sincos(c.abp,sp,cp);
 // nutation
-if abs(de)<(89*deg2rad) then begin    // meeus91 22.1
-   da:=c.nutl*(ce+se*sra*tan(de))-c.nuto*(cra*tan(de));
+if abs(de)<(89.99*deg2rad) then begin    // meeus91 22.1
+   da:=c.nutl*(ce+se*sra*(sde/cde))-c.nuto*(cra*(sde/cde));
    dd:=c.nutl*se*cra+c.nuto*sra;
    ra:=ra-da;
    de:=de-dd;
