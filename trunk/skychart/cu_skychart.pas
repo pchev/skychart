@@ -27,7 +27,7 @@ interface
 
 uses u_translation, gcatunit, {libcatalog,} // libcatalog statically linked
      cu_plot, cu_catalog, cu_fits, u_constant, cu_planet, cu_database, u_projection, u_util,
-     pu_addlabel, SysUtils, Classes, Math, Types, Buttons,
+     pu_addlabel, SysUtils, Classes, Math, Types, Buttons, dialogs,
      Forms, StdCtrls, Controls, ExtCtrls, Graphics, FPImage, LCLType, IntfGraphics;
 type
   Tint2func = procedure(i,j: integer) of object;
@@ -860,6 +860,7 @@ var rec:GcatRec;
               if cfgsc.ShowImages and
                  FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then
                 begin
+                 if (ExtractFileExt(imgfile)<>'.nil') then begin
                   if (sz>6) then
                     begin
                       FFits.FileName:=imgfile;
@@ -882,6 +883,7 @@ var rec:GcatRec;
                       else Drawing_Gray;
                     end
                   else Drawing_Gray;
+                 end;
                 end
               else
                 if cfgsc.shownebulae then
