@@ -105,6 +105,7 @@ function hextostr(str:string):string;
 procedure GetTranslationString(form: TForm; var f: textfile);
 function CondUTF8Decode(v:string):string;
 function CondUTF8Encode(v:string):string;
+function GreekSymbolUtf8(v:string):string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 {$endif}
@@ -144,6 +145,25 @@ begin
 result:=v;
 {$else}
 result:=UTF8Encode(v);
+{$endif}
+end;
+
+function GreekSymbolUtf8(v:string):string;
+var c,n : string;
+    i: integer;
+begin
+{$ifdef cdcutf8}
+result:='';
+c:=lowercase(trim(copy(v,1,1)));
+n:=trim(copy(v,2,1));
+for i:=1 to 24 do begin
+  if c=greeksymbol[2,i] then begin
+     result:=chr(hi(greekUTF8[i]))+chr(lo(greekUTF8[i]))+n;
+     break;
+   end;
+end;
+{$else}
+result:=v;
 {$endif}
 end;
 
