@@ -94,6 +94,7 @@ const cdcversion = 'Version 3 beta 0.1.3 svn ';
               ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
       greeksymbol : array[1..2,1..24]of string=(('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'),
                   ('a','b','g','d','e','z','h','q','i','k','l','m','n','x','o','p','r','s','t','u','f','c','y','w'));
+      greekUTF8 : array[1..24] of word =($CEB1,$CEB2,$CEB3,$CEB4,$CEB5,$CEB6,$CEB7,$CEB8,$CEB9,$CEBA,$CEBB,$CEBC,$CEBD,$CEBE,$CEBF,$CF80,$CF81,$CF83,$CF84,$CF85,$CF86,$CF87,$CF88,$CF89);
       pla : array[1..32] of string[10] = ('Mercury ','Venus   ','*       ','Mars    ','Jupiter ',
       'Saturn  ','Uranus  ','Neptune ','Pluto   ','Sun     ','Moon    ',
       'Io      ','Europa  ','Ganymede','Callisto','Mimas   ','Encelade','Tethys  ','Dione   ',

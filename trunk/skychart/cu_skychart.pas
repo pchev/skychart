@@ -672,6 +672,7 @@ var rec:GcatRec;
   lid,saveplot : integer;
   first:boolean;
   firstcat:TSname;
+  gk: string;
 begin
 fillchar(rec,sizeof(rec),0);
 if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
@@ -713,8 +714,10 @@ if Fcatalog.OpenStar then
     if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
        if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv))
        else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3])
-       else if rec.star.valid[vsGreekSymbol] then SetLabel(lid,xx,yy,0,7,1,rec.star.greeksymbol)
-          else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
+       else if rec.star.valid[vsGreekSymbol] then begin
+          gk:=GreekSymbolUtf8(rec.star.greeksymbol);
+          SetLabel(lid,xx,yy,0,7,1,gk);
+        end else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
     end;
  end;
 end;
