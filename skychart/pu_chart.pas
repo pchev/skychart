@@ -528,15 +528,10 @@ begin
 if locked or (fsCreating in FormState) then exit;
 RefreshTimer.Enabled:=false;
 RefreshTimer.Enabled:=true;
-with Image1.Canvas do begin
- Brush.Color:=sc.plot.cfgplot.Color[0];
- Pen.Color:=sc.plot.cfgplot.Color[0];
- Brush.style:=bsSolid;
- Pen.Mode:=pmCopy;
- Pen.Style:=psSolid;
- Rectangle(0,0,Image1.Width,Image1.Height);
+if sc<>nil then begin
+  sc.plot.cfgplot.Color[0]:=clBlack;
+  sc.plot.init(Image1.width,Image1.height);
 end;
-if sc<>nil then sc.plot.init(Image1.width,Image1.height);
 end;
 
 procedure Tf_chart.SetScrollBar;
@@ -692,7 +687,7 @@ procedure Tf_chart.RefreshTimerTimer(Sender: TObject);
 begin
 RefreshTimer.Enabled:=false;
 if locked then exit;
-if sc<>nil then sc.plot.init(Image1.width,Image1.height);
+//if sc<>nil then sc.plot.init(Image1.width,Image1.height);
 Refresh;
 end;
 

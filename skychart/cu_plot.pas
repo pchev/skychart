@@ -103,6 +103,7 @@ type
     { Published declarations }
      function Init(w,h : integer) : boolean;
      function InitLabel : boolean;
+     procedure ClearImage;
      Procedure FlushCnv;
      Procedure InitPixelImg;
      Procedure ClosePixelImg;
@@ -289,6 +290,18 @@ begin
  destcnv:=value;
 end;
 
+procedure TSplot.ClearImage;
+begin
+with cnv do begin
+ Brush.Color:=cfgplot.Color[0];
+ Pen.Color:=cfgplot.Color[0];
+ Brush.style:=bsSolid;
+ Pen.Mode:=pmCopy;
+ Pen.Style:=psSolid;
+ Rectangle(0,0,cfgchart.Width,cfgchart.Height);
+end;
+end;
+
 function TSplot.Init(w,h : integer) : boolean;
 var Rgn : HRGN;
 begin
@@ -302,14 +315,9 @@ if cfgchart.onprinter then cnv:=destcnv
         cbmp.Height:=h;
         cnv:=cbmp.Canvas; // defered plot to bitmap
       end;  
+ClearImage;
 with cnv do begin
  Font.CharSet:=FCS_ISO_10646_1;
- Brush.Color:=cfgplot.Color[0];
- Pen.Color:=cfgplot.Color[0];
- Brush.style:=bsSolid;
- Pen.Mode:=pmCopy;
- Pen.Style:=psSolid;
- Rectangle(0,0,cfgchart.Width,cfgchart.Height);
  Rgn:=CreateRectRgn(cfgplot.xmin, cfgplot.ymin, cfgplot.xmax, cfgplot.ymax);
  SelectClipRgn(cnv.Handle, Rgn);
  DeleteObject(Rgn);
