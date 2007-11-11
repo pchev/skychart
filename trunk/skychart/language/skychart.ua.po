@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-06-28 12:49+0200\n"
+"PO-Revision-Date: 2007-11-02 20:03+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ua\n"
 "POT-Creation-Date: \n"
@@ -22,7 +22,7 @@ msgstr "%s (інший, ніж конфігурований порт; може �
 
 #: u_translation:rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or wrong path in catalog setting."
-msgstr "%s Не знайдено!%sМожливо каталог не встановлено, або невірний шлях до нього в установках."
+msgstr "%s Не знайдено!%sМожливо каталог не встановлено, або невірний шлях до нього в настановах."
 
 #: u_translation:rsconnectedfro
 msgid "%s connected from %s, using chart %s, connect time:%s"
@@ -46,7 +46,7 @@ msgstr "%sСтруктура всіх таблиць існує."
 
 #: u_translation:rsalsobesureth
 msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sТакож пересвідчитися, що необхідне програмне забезпечення бази данних установлено. % s Будь-ласка зверніться до документації, якщо ви не впевнені. % s Ви хочете продовжити? "
+msgstr "%sТакож пересвідчитися, що необхідне програмне забезпечення бази данних установлено. % s Будь-ласка зверніться до документації, якщо ви не впевнені. % s Бажаєте продовжити? "
 
 #: u_translation:rsaltturns
 msgid "%sAlt turns:"
@@ -182,7 +182,7 @@ msgstr "Додати альтернативну назву в індекс"
 
 #: u_translation:rsadjustcolour
 msgid "Adjust colour brightness"
-msgstr "Установка яскравості кольору"
+msgstr "Настанова яскравості кольору"
 
 #: u_translation:rsadvanced
 msgid "Advanced"
@@ -450,11 +450,11 @@ msgstr "Створити каталог"
 
 #: u_translation:rscdcnebulaeca
 msgid "CDC Deep Sky Catalog Setting"
-msgstr "Установки CDC каталогу туманностей"
+msgstr "Настанови CDC каталогу туманностей"
 
 #: u_translation:rscdcstarscata
 msgid "CDC Stars Catalog Setting"
-msgstr "Установки CDC зоряного каталогу"
+msgstr "Настанови CDC зоряного каталогу"
 
 #: u_translation:rscdcplugin
 msgid "CDC plugin"
@@ -462,7 +462,7 @@ msgstr "CDC плагін"
 
 #: u_translation:rscdcpluginset
 msgid "CDC plugin setting"
-msgstr "Установки CDC плагіну"
+msgstr "Настанови CDC плагіну"
 
 #: u_translation:rscdctranslator
 msgid "CDCTranslator"
@@ -570,7 +570,7 @@ msgstr "Інформація мапи"
 
 #: u_translation:rschartsetting
 msgid "Chart Setting"
-msgstr "Установка мапи"
+msgstr "Настанова мапи"
 
 #: u_translation:rschartcoordin
 msgid "Chart, Coordinates"
@@ -686,7 +686,7 @@ msgstr "Команда використовується для обробітк�
 
 #: u_translation:rscommonname
 msgid "Common Name"
-msgstr "Прийнята назва"
+msgstr "Назва"
 
 #: u_translation:rscompassroses
 msgid "Compass rose size"
@@ -824,10 +824,6 @@ msgstr "Радіус ядра"
 msgid "Correlated"
 msgstr "Кореляція"
 
-#: u_translation:rscouldnotload
-msgid "Could not load library "
-msgstr ""
-
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
 msgstr "Часовий пояс країни"
@@ -950,7 +946,7 @@ msgstr "Файл бази даних:"
 
 #: u_translation:rsdatabasesett
 msgid "Database setting..."
-msgstr "Установки БД..."
+msgstr "Настанови БД..."
 
 #: u_translation:rsdate
 msgid "Date"
@@ -1022,11 +1018,11 @@ msgstr "Туманності або інші об'єкти"
 
 #: u_translation:rsdeepskyobjec
 msgid "Deep sky object colour"
-msgstr "Колір об'єктів Deep sky"
+msgstr "Колір об'єктів Deep Sky"
 
 #: u_translation:rsdeepskycolou
 msgid "Deep-sky colour"
-msgstr "Deep-sky колір"
+msgstr "Deep Sky колір"
 
 #: u_translation:rsdefault
 msgid "Default"
@@ -1230,7 +1226,7 @@ msgstr "Не враховувати комету слабішу, ніж вели
 
 #: u_translation:rsdoyouwanttos
 msgid "Do you want to save the program setting now?"
-msgstr "Ви хочете зберегти настройки програми негайно?"
+msgstr "Ви хочете зберегти настанови програми негайно?"
 
 #: u_translation:rsdot1
 msgid "Dot"
@@ -1510,7 +1506,7 @@ msgstr "Поле зору"
 
 #: u_translation:rsfieldofvisio3
 msgid "Field of Vision Setting"
-msgstr "Установки поля зору"
+msgstr "Настанови поля зору"
 
 #: u_translation:rsfieldofvisio5
 msgid "Field of vision number :"
@@ -1658,11 +1654,11 @@ msgstr "Загальний"
 
 #: u_translation:rsgeneralsetti
 msgid "General Setting"
-msgstr "Головні установки"
+msgstr "Головні настанови"
 
 #: u_translation:rsgeneralcatal
 msgid "General catalog options"
-msgstr "Основні установки каталогу"
+msgstr "Головні настанови каталогу"
 
 #: u_translation:rsgeocentric
 msgid "Geocentric"
@@ -1702,7 +1698,7 @@ msgstr "Зелений"
 
 #: u_translation:rsgridsetting
 msgid "Grid Setting"
-msgstr "Установки сітки"
+msgstr "Настанови сітки"
 
 #: u_translation:rsgridspacing
 msgid "Grid Spacing"
@@ -1790,7 +1786,7 @@ msgstr "INDI драйвер"
 
 #: u_translation:rsindidriverse
 msgid "INDI Driver setting"
-msgstr "Установки INDI драйверу"
+msgstr "Настанови INDI драйверу"
 
 #: u_translation:rsindiserverho
 msgid "INDI Server Host "
@@ -1954,7 +1950,7 @@ msgstr "Мітки"
 
 #: u_translation:rslandscape
 msgid "Landscape"
-msgstr "Ландшафт"
+msgstr "Альбомна"
 
 #: u_translation:rslanguage2
 msgid "Language"
@@ -2062,7 +2058,7 @@ msgstr "Прослуховування порту: %s"
 
 #: u_translation:rsload
 msgid "Load"
-msgstr "Карта (???)"
+msgstr "Мапа"
 
 #: u_translation:rsloadmpcfile
 msgid "Load MPC File"
@@ -2454,7 +2450,7 @@ msgstr "Нема FITS файлу, SIMPLE = T втрата ключового с�
 
 #: u_translation:rsnotavailable
 msgid "Not available"
-msgstr "Не доступний"
+msgstr "Не досяжний"
 
 #: u_translation:rsnote
 msgid "Note"
@@ -2486,7 +2482,7 @@ msgstr "Нутація, аберація"
 
 #: u_translation:rsok
 msgid "OK"
-msgstr "OK"
+msgstr "Гаразд"
 
 #: u_translation:rsobject
 msgid "Object"
@@ -2502,7 +2498,7 @@ msgstr "Фільтр об'єктів"
 
 #: u_translation:rsobjectfilter2
 msgid "Object Filter Setting"
-msgstr "Установки фільтру об'єктів"
+msgstr "Настанови фільтру об'єктів"
 
 #: u_translation:rsobjectlist
 msgid "Object List"
@@ -2510,7 +2506,7 @@ msgstr "Перелік об'єктів"
 
 #: u_translation:rsobjectlistse
 msgid "Object List Setting"
-msgstr "Установки переліку об'єктів"
+msgstr "Настанови переліку об'єктів"
 
 #: u_translation:rsobjectname
 msgid "Object Name"
@@ -2562,11 +2558,11 @@ msgstr "Online DSS"
 
 #: u_translation:rsonlinedsspic
 msgid "Online DSS pictures"
-msgstr "Online DSS картинки"
+msgstr "Online DSS зображення"
 
 #: u_translation:rsonlinepictur
 msgid "Online pictures servers"
-msgstr "Online сервери картинок"
+msgstr "Online сервери зображень"
 
 #: u_translation:rsonlynumbered
 msgid "Only numbered asteroids"
@@ -2730,7 +2726,7 @@ msgstr "Супутник планети"
 
 #: u_translation:rsplanetssetti
 msgid "Planets Setting"
-msgstr "Установки відображення планет"
+msgstr "Настанови відображення планет"
 
 #: u_translation:rsplatedefect
 msgid "Plate Defect"
@@ -2779,14 +2775,6 @@ msgstr "Будь-ласка встановіть число RealSky\256 CD "
 #: u_translation:rspleasereport
 msgid "Please report any problem to:"
 msgstr "Будь-ласка повідомте про труднощі їм:"
-
-#: u_translation:rspleasetrytoc
-msgid "Please try to create this directory yourself and restart the program."
-msgstr ""
-
-#: u_translation:rspleasetrytor
-msgid "Please try to reinstall the program."
-msgstr ""
 
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
@@ -2922,7 +2910,7 @@ msgstr "Проекція"
 
 #: u_translation:rsprojectionse
 msgid "Projection Setting"
-msgstr "Установки проекції"
+msgstr "Настанови проекції"
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"
@@ -3066,7 +3054,7 @@ msgstr "Повідомити проблему"
 
 #: u_translation:rsrequesttimeo
 msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
-msgstr ""
+msgstr "Очікування. Ймомірно, ви зробили запит досить широкої області, що потребує більше серверного часу."
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"
@@ -3254,7 +3242,7 @@ msgstr "Виберіть поля для  використання та їх п�
 
 #: u_translation:rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr "Виберіть системний принтер та його бажані установки"
+msgstr "Виберіть системний принтер та його бажані настанови"
 
 #: u_translation:rsselectthetel
 msgid "Select the telescope interface"
@@ -3306,7 +3294,7 @@ msgstr "Захід"
 
 #: u_translation:rssetfov
 msgid "Set FOV"
-msgstr "Установки ПЗ"
+msgstr "Настанови ПЗ"
 
 #: u_translation:rssetfovto
 msgid "Set FOV to"
@@ -3314,19 +3302,19 @@ msgstr "Встановити ПЗ"
 
 #: u_translation:rssetdateandti
 msgid "Set date and time"
-msgstr "Установка дати та часу"
+msgstr "Настанова дати та часу"
 
 #: u_translation:rssethowthemou
 msgid "Set how the mount move on each axis when you turn the driving knob. Then the Telescope button show you the turns you must do to go from one object to another."
-msgstr "Установіть, як коректно ходять осі монтування , коли ви натискаєте на кнопку запуску. Потім натискаючи кнопку показу об'єктів, повинен бути перебіг із об'єкту на об'єкт."
+msgstr "Перевірте, як коректно ходять осі монтування , коли ви натискаєте на кнопку запуску. Потім натискаючи кнопку показу об'єктів, повинен бути перебіг із об'єкту на об'єкт."
 
 #: u_translation:rssetobservato
 msgid "Set observatory location"
-msgstr "Установка місцезнаходження обсерваторії"
+msgstr "Настанова розташування обсерваторії"
 
 #: u_translation:rssetup
 msgid "Setup"
-msgstr "Настройка"
+msgstr "Налаштування"
 
 #: u_translation:rsshowallsky
 msgid "Show All Sky"
@@ -3502,7 +3490,7 @@ msgstr "Сонячна система"
 
 #: u_translation:rssolarsystems
 msgid "Solar System Setting"
-msgstr "Установки для Сонячної системи"
+msgstr "Настанови для Сонячної системи"
 
 #: u_translation:rssolarsystemo
 msgid "Solar System object"
@@ -3562,7 +3550,7 @@ msgstr "Відображення зірки"
 
 #: u_translation:rsstardisplayp
 msgid "Star Display  Properties"
-msgstr "Установки відображення зірки"
+msgstr "Настанови відображення зірки"
 
 #: u_translation:rsstarlabel
 msgid "Star Label"
@@ -3586,7 +3574,7 @@ msgstr "Каталоги зірок та туманностей, пригото�
 
 #: u_translation:rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "Установки власного руху зірок (при наявності в каталозі)"
+msgstr "Настанови власного руху зірок (при наявності в каталозі)"
 
 #: u_translation:rsstartmonth
 msgid "Start Month"
@@ -3654,7 +3642,7 @@ msgstr "Системний принтер"
 
 #: u_translation:rssystemsettin
 msgid "System Setting"
-msgstr "Установка системи"
+msgstr "Настанови системи"
 
 #: u_translation:rstcpipconnect
 msgid "TCP/IP Connection"
@@ -3678,7 +3666,7 @@ msgstr "Плагін телескопу"
 
 #: u_translation:rstelescopeset
 msgid "Telescope Setting"
-msgstr "Установки телескопу"
+msgstr "Настанови телескопу"
 
 #: u_translation:rstelescopenot
 msgid "Telescope not connected"
@@ -3714,7 +3702,7 @@ msgstr "Присутні %s об'єктів на даному полі."
 
 #: u_translation:rsthisactionre
 msgid "This action replace all the database content for the country %s using fresh data from NGA and GNIS.%sAll your editing for this country will be lost except the location you added with a new name that will be kept.%sDo you want to continue ?"
-msgstr "Ця дія замінює весь вміст бази даних для країни %s, використовуючи свіжі дані від NGA та GNIS.%Всі ваші редагування інформації про цю країну будуть втрачені, за виключенням того пункту, який ви додали із новою назвою, що буде збережено.%Хочете продовжувати?"
+msgstr "Ця дія замінює весь вміст бази даних для країни %s, використовуючи свіжі дані від NGA та GNIS.%Всі ваші редагування інформації про цю країну будуть втрачені, за виключенням того пункту, який ви додали із новою назвою, що буде збережено.%Бажаєте продовжувати?"
 
 #: u_translation:rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -3856,21 +3844,17 @@ msgstr "UT"
 msgid "Umbra"
 msgstr "Повна тінь"
 
-#: u_translation:rsunabletocrea
-msgid "Unable to create directory "
-msgstr ""
-
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
 msgstr "Відмітити, щоб запобігти схожості із малою планетою 134340."
 
 #: u_translation:rsundo
 msgid "Undo"
-msgstr "Анулювати"
+msgstr "Скасувати"
 
 #: u_translation:rsundolastchan
 msgid "Undo Last Change"
-msgstr "Анулювати останню зміну"
+msgstr "Скасувати останню зміну"
 
 #: u_translation:rsuniversaltim
 msgid "Universal Time"
@@ -3990,11 +3974,11 @@ msgstr "Візуальна величина"
 
 #: u_translation:rswarningyouha
 msgid "WARNING !%sYou have choose to append the data to an existing catalog.%sThe existing catalog and index must be exactly of the same format, otherwise it will be corrupted.%sIt is a good idea to backup the actual files before this operation.%sDo you want to continue ?"
-msgstr "ПОПЕРЕДЖЕННЯ! %sУ вас є вибір добавити дані в існуючий каталог.% Існуючий каталог та індекси повинні бути в одному форматі, бо інакше будуть перекручування.% Дуже добра ідея зробити копії актуальних файлів перед цією операцією.% sВи хочете продовжити? "
+msgstr "ПОПЕРЕДЖЕННЯ! %sУ вас є вибір добавити дані в існуючий каталог.% Існуючий каталог та індекси повинні бути в одному форматі, бо інакше будуть перекручування.% Дуже добра ідея зробити копії актуальних файлів перед цією операцією.% sБажаєте продовжити? "
 
 #: u_translation:rswanttotracka
 msgid "Want to track an object before it rise ?"
-msgstr "Хочете прослідкувати об'єкт до його сходу?"
+msgstr "Бажаєте прослідкувати об'єкт до його сходу?"
 
 #: u_translation:rswarningcalcu
 msgid "Warning! Calculation of"
@@ -4002,11 +3986,11 @@ msgstr "Увага! Обчислення"
 
 #: u_translation:rswarningthecu
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
-msgstr "Попередження! Поточна дата та місцезнаходження обсерваторії, можливо змінилися від значень по умовчанню. Ви повинні відповісти \"Ні\" та використати %s кнопку, щоб повернутися до ваших значень по умовчанню, а інакше вони можуть втратитись. Ви хочете продовжити? "
+msgstr "Попередження! Поточна дата та місцезнаходження обсерваторії, можливо змінилися від значень по умовчанню. Ви повинні відповісти \"Ні\" та використати %s кнопку, щоб повернутися до ваших значень по умовчанню, а інакше вони можуть втратитись. Бажаєте продовжити? "
 
 #: u_translation:rswarningyouar2
 msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
-msgstr "Увага! Ви використовуєте багато каталогів для одного об'єкту. Будьте впевнены, що ви цього хочете."
+msgstr "Увага! Ви використовуєте багато каталогів для одного об'єкту. Будьте впевнені, що ви цього хочете."
 
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
