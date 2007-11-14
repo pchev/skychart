@@ -27,6 +27,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 //{$define showtime}
 
+{$ifdef lclqt} {$define ImageBuffered} {$endif}
+{$ifdef lclcarbon} {$define ImageBuffered} {$endif}
+
 interface
 
 uses u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
@@ -323,7 +326,7 @@ begin
  Image1.Parent := Panel1;
  IdentLabel.Parent:=Image1;
  Image1.Align:=alClient;
- Image1.DoubleBuffered := True;
+ Image1.DoubleBuffered := false;
  Image1.PopupMenu:=popupmenu1;
  Image1.OnClick:=Image1Click;
  Image1.OnMouseDown:=Image1MouseDown;
@@ -668,14 +671,35 @@ end;
 
 procedure Tf_chart.Image1Paint(Sender: TObject);
 begin
-ZoomStep:=0;
 sc.plot.FlushCnv;
+{$ifndef ImageBuffered}
+ZoomStep:=0;
 if StartCircle then begin
   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
   StartCircle:=false;
   end
   else MovingCircle := false;
+{$endif}
 inherited Paint;
+{$ifdef ImageBuffered}
+if  MovingCircle then begin
+  sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+end;
+if Zoomstep>1 then begin
+     with Image1.Canvas do begin
+      Pen.Width := 1;
+      pen.Color:=sc.plot.cfgplot.color[11];
+      Pen.Mode:=pmXor;
+      brush.Style:=bsclear;
+      rectangle(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
+      Pen.Mode:=pmCopy;
+      brush.Style:=bsSolid;
+     end;
+end;
+if sc.cfgsc.scopemark then begin
+   sc.DrawFinderMark(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,true);
+end;
+{$endif}
 end;
 
 procedure TChartDrawingControl.Paint;
@@ -1220,8 +1244,9 @@ if MovingCircle then begin
 end
 else
 if (button=mbLeft)and((shift=[])or(shift=[ssLeft])) then begin
-   if zoomstep>0 then
-     ZoomBox(3,X,Y)
+   if zoomstep>0 then begin
+     ZoomBox(3,X,Y);
+   end
    else
      IdentXY(x,y);
 end
@@ -1269,6 +1294,9 @@ if MovingCircle then begin
    sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
    GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],sc.cfgsc);
    sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+   {$ifdef ImageBuffered}
+   Image1.Invalidate;
+   {$endif}
 end else
 if shift = [ssLeft] then begin
    ZoomBox(2,X,Y);
@@ -1455,6 +1483,9 @@ case action of
         Zoomstep:=0;
    end;
 end;
+{$ifdef ImageBuffered}
+ Image1.Invalidate;
+{$endif}
 end;
 
 Procedure Tf_chart.TrackCursor(X,Y : integer);

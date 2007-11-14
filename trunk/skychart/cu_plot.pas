@@ -318,9 +318,11 @@ if cfgchart.onprinter then cnv:=destcnv
 ClearImage;
 with cnv do begin
  Font.CharSet:=FCS_ISO_10646_1;
+{$ifndef lclqt}      // problem with QT clipping
  Rgn:=CreateRectRgn(cfgplot.xmin, cfgplot.ymin, cfgplot.xmax, cfgplot.ymax);
  SelectClipRgn(cnv.Handle, Rgn);
  DeleteObject(Rgn);
+{$endif}
 end;
 InitLabel;
 if (cfgplot.starplot>0)and(cfgchart.drawsize<>starbmpw)and(Fstarshape<>nil) then begin
@@ -2191,7 +2193,7 @@ begin
 with cnv do begin
   Pen.Width:=cfgchart.drawpen;
   if moving then begin
-     Pen.Color:=clWhite;
+     Pen.Color:=cfgplot.color[11];
      Pen.Mode:=pmXor;
   end else begin
      Pen.Color:=lcolor;
