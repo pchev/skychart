@@ -33,6 +33,8 @@ object f_config_system: Tf_config_system
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
+        ClientWidth = 492
+        ClientHeight = 447
         object Label153: TLabel
           Height = 14
           Width = 91
@@ -45,8 +47,8 @@ object f_config_system: Tf_config_system
           Top = 59
           Width = 441
           Caption = 'MySQL  Database'
-          ClientHeight = 97
-          ClientWidth = 441
+          ClientHeight = 81
+          ClientWidth = 435
           TabOrder = 5
           object Label77: TLabel
             Left = 16
@@ -142,8 +144,8 @@ object f_config_system: Tf_config_system
           Top = 59
           Width = 441
           Caption = 'Sqlite Database'
-          ClientHeight = 97
-          ClientWidth = 441
+          ClientHeight = 81
+          ClientWidth = 435
           TabOrder = 1
           Visible = False
           object Label1: TLabel
@@ -172,8 +174,8 @@ object f_config_system: Tf_config_system
           Top = 267
           Width = 441
           Caption = 'Directory'
-          ClientHeight = 91
-          ClientWidth = 441
+          ClientHeight = 75
+          ClientWidth = 435
           TabOrder = 3
           object Label156: TLabel
             Left = 13
@@ -219,8 +221,8 @@ object f_config_system: Tf_config_system
           Height = 98
           Top = 155
           Width = 441
-          ClientHeight = 98
-          ClientWidth = 441
+          ClientHeight = 82
+          ClientWidth = 435
           TabOrder = 2
           object chkdb: TButton
             Left = 16
@@ -289,8 +291,8 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 48
-          ClientWidth = 283
+          ClientHeight = 32
+          ClientWidth = 277
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -308,8 +310,8 @@ object f_config_system: Tf_config_system
           Top = 367
           Width = 440
           Caption = 'Desktop environment'
-          ClientHeight = 92
-          ClientWidth = 440
+          ClientHeight = 76
+          ClientWidth = 434
           TabOrder = 4
           object Label12: TLabel
             Left = 203
@@ -325,7 +327,6 @@ object f_config_system: Tf_config_system
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
             ItemIndex = 0
             Items.Strings = (
               'KDE'
@@ -350,14 +351,16 @@ object f_config_system: Tf_config_system
       end
       object Page2: TPage
         Caption = 'Page2'
+        ClientWidth = 492
+        ClientHeight = 447
         object GroupBox3: TGroupBox
           Left = 16
           Height = 247
           Top = 8
           Width = 393
           Caption = 'TCP/IP Server'
-          ClientHeight = 247
-          ClientWidth = 393
+          ClientHeight = 231
+          ClientWidth = 387
           TabOrder = 0
           object Label54: TLabel
             Left = 16
@@ -415,6 +418,8 @@ object f_config_system: Tf_config_system
       end
       object Page3: TPage
         Caption = 'Page3'
+        ClientWidth = 492
+        ClientHeight = 447
         object Label13: TLabel
           Height = 14
           Width = 105
@@ -427,8 +432,8 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 450
           Caption = 'INDI Driver setting'
-          ClientHeight = 297
-          ClientWidth = 450
+          ClientHeight = 281
+          ClientWidth = 444
           TabOrder = 1
           object Label75: TLabel
             Left = 8
@@ -534,7 +539,6 @@ object f_config_system: Tf_config_system
             Top = 100
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
             MaxLength = 0
             OnSelect = IndiDevChange
             Style = csDropDownList
@@ -546,7 +550,6 @@ object f_config_system: Tf_config_system
             Top = 176
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
             Items.Strings = (
               'COM1'
               'COM2'
@@ -577,8 +580,8 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 449
           Caption = 'Manual Mount'
-          ClientHeight = 279
-          ClientWidth = 445
+          ClientHeight = 281
+          ClientWidth = 443
           TabOrder = 3
           Visible = False
           object Label7: TLabel
@@ -686,8 +689,8 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 23
-            ClientWidth = 357
+            ClientHeight = 25
+            ClientWidth = 355
             Columns = 2
             Items.Strings = (
               'Equatorial'
@@ -784,8 +787,8 @@ object f_config_system: Tf_config_system
           Top = 112
           Width = 450
           Caption = 'CDC plugin setting'
-          ClientHeight = 87
-          ClientWidth = 446
+          ClientHeight = 89
+          ClientWidth = 444
           TabOrder = 2
           Visible = False
           object Label155: TLabel
@@ -802,7 +805,6 @@ object f_config_system: Tf_config_system
             Top = 42
             Width = 145
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
             MaxLength = 0
             OnChange = telescopepluginlistChange
             Style = csDropDownList
@@ -824,8 +826,8 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 47
-          ClientWidth = 446
+          ClientHeight = 49
+          ClientWidth = 444
           Columns = 3
           Items.Strings = (
             'INDI'
@@ -838,13 +840,13 @@ object f_config_system: Tf_config_system
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 490
-        ClientHeight = 470
+        ClientWidth = 492
+        ClientHeight = 472
         object Label14: TLabel
           Left = 19
-          Height = 14
+          Height = 20
           Top = 24
-          Width = 93
+          Width = 111
           Caption = 'Language selection'
           ParentColor = False
         end
@@ -854,7 +856,6 @@ object f_config_system: Tf_config_system
           Top = 82
           Width = 260
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-          ItemHeight = 13
           MaxLength = 0
           OnSelect = LanguageListSelect
           Style = csDropDownList
