@@ -311,10 +311,7 @@ GetDefaultLanguage(buf1,buf2);
 LanguageList.Items.Add(blank+rsDefault+' ('+buf1+')');
 LanguageList.itemindex:=0;
 dir:=slash(appdir)+slash('data')+slash('language');
-writetrace('Language directory: '+dir);
-if fileexists(dir+'skychart.lang') then
-   writetrace('File '+dir+'skychart.lang'+' found')
-else
+if not fileexists(dir+'skychart.lang') then
    writetrace('File '+dir+'skychart.lang'+' not found!');
 try
 Filemode:=0;
@@ -322,11 +319,9 @@ AssignFile(f,dir+'skychart.lang');
 Reset(f);
 repeat
   Readln(f,buf);
-  writetrace('  process: '+buf);
   buf1:=words(buf,'',1,1);
   buf2:=CondUTF8Decode(words(buf,'',2,1));
   if fileexists(dir+'skychart.'+buf1+'.po') then begin
-     writetrace('  add: '+buf1+blank+'-'+blank+buf2);
      LanguageList.items.Add(buf1+blank+'-'+blank+buf2);
   end
   else
