@@ -319,9 +319,11 @@ ClearImage;
 with cnv do begin
  Font.CharSet:=FCS_ISO_10646_1;
 {$ifndef lclqt}      // problem with QT clipping
- Rgn:=CreateRectRgn(cfgplot.xmin, cfgplot.ymin, cfgplot.xmax, cfgplot.ymax);
- SelectClipRgn(cnv.Handle, Rgn);
- DeleteObject(Rgn);
+ if cfgchart.onprinter then begin
+     Rgn:=CreateRectRgn(cfgplot.xmin, cfgplot.ymin, cfgplot.xmax, cfgplot.ymax);
+     SelectClipRgn(cnv.Handle, Rgn);
+     DeleteObject(Rgn);
+ end;
 {$endif}
 end;
 InitLabel;
