@@ -252,6 +252,7 @@ if Fnightvision<>nightvision then begin
 end;
 {$endif}
 if initial then begin
+  Satellites.TabVisible:=false;
   date1.JD:=jd(config.CurYear,config.CurMonth,config.CurDay,0);
 //  date1.JD:=trunc(config.CurJD+(config.TimeZone-config.DT_UT)/24);
   date2.JD:=date1.JD+5;

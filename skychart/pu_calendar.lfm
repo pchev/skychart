@@ -411,11 +411,11 @@ object f_calendar: Tf_calendar
     OnPageChanged = PageControl1Change
     object twilight: TTabSheet
       Caption = 'Twilight'
-      ClientHeight = 292
-      ClientWidth = 662
+      ClientHeight = 287
+      ClientWidth = 664
       object TwilightGrid: TStringGrid
-        Height = 292
-        Width = 662
+        Height = 287
+        Width = 664
         Align = alClient
         ColCount = 5
         DefaultColWidth = 115
@@ -433,16 +433,24 @@ object f_calendar: Tf_calendar
     end
     object planets: TTabSheet
       Caption = 'Planets'
+      ClientHeight = 287
+      ClientWidth = 664
       ImageIndex = 1
       object Pagecontrol2: TPageControl
-        ActivePage = Pluton
+        Height = 287
+        Width = 664
+        ActivePage = Psoleil
         Align = alClient
-        TabIndex = 9
+        TabIndex = 0
         TabOrder = 0
         object Psoleil: TTabSheet
           Caption = 'Sun'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 9
           object SoleilGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -473,7 +481,11 @@ object f_calendar: Tf_calendar
         end
         object Mercure: TTabSheet
           Caption = 'Mercury'
+          ClientHeight = 256
+          ClientWidth = 658
           object MercureGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -504,8 +516,12 @@ object f_calendar: Tf_calendar
         end
         object Venus: TTabSheet
           Caption = 'Venus'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 1
           object VenusGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -536,8 +552,12 @@ object f_calendar: Tf_calendar
         end
         object PLune: TTabSheet
           Caption = 'Moon'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 2
           object LuneGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -568,8 +588,12 @@ object f_calendar: Tf_calendar
         end
         object Mars: TTabSheet
           Caption = 'Mars'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 3
           object MarsGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -600,8 +624,12 @@ object f_calendar: Tf_calendar
         end
         object Jupiter: TTabSheet
           Caption = 'Jupiter'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 4
           object JupiterGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -632,8 +660,12 @@ object f_calendar: Tf_calendar
         end
         object Saturne: TTabSheet
           Caption = 'Saturn'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 5
           object SaturneGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -664,8 +696,12 @@ object f_calendar: Tf_calendar
         end
         object Uranus: TTabSheet
           Caption = 'Uranus'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 6
           object UranusGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -696,8 +732,12 @@ object f_calendar: Tf_calendar
         end
         object Neptune: TTabSheet
           Caption = 'Neptun'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 7
           object NeptuneGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -728,8 +768,12 @@ object f_calendar: Tf_calendar
         end
         object Pluton: TTabSheet
           Caption = 'Pluto'
+          ClientHeight = 256
+          ClientWidth = 658
           ImageIndex = 8
           object PlutonGrid: TStringGrid
+            Height = 256
+            Width = 658
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
@@ -762,9 +806,13 @@ object f_calendar: Tf_calendar
     end
     object comet: TTabSheet
       Caption = 'Comets'
+      ClientHeight = 287
+      ClientWidth = 664
       ImageIndex = 2
       object CometGrid: TStringGrid
-        Top = 21
+        Height = 244
+        Top = 43
+        Width = 664
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 13
@@ -797,8 +845,10 @@ object f_calendar: Tf_calendar
       end
       object Panel2: TPanel
         Height = 43
+        Width = 664
         Align = alTop
         ClientHeight = 43
+        ClientWidth = 664
         TabOrder = 1
         object Button1: TButton
           Left = 136
@@ -823,7 +873,6 @@ object f_calendar: Tf_calendar
           Top = 9
           Width = 169
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-          ItemHeight = 13
           MaxLength = 0
           OnSelect = ComboBox1Change
           Style = csDropDownList
@@ -833,9 +882,13 @@ object f_calendar: Tf_calendar
     end
     object Asteroids: TTabSheet
       Caption = 'Asteroids'
+      ClientHeight = 287
+      ClientWidth = 664
       ImageIndex = 6
       object AsteroidGrid: TStringGrid
-        Top = 21
+        Height = 244
+        Top = 43
+        Width = 664
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 9
@@ -864,8 +917,10 @@ object f_calendar: Tf_calendar
       end
       object Panel3: TPanel
         Height = 43
+        Width = 664
         Align = alTop
         ClientHeight = 43
+        ClientWidth = 664
         TabOrder = 1
         object ComboBox2: TComboBox
           Left = 216
@@ -873,7 +928,6 @@ object f_calendar: Tf_calendar
           Top = 13
           Width = 169
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-          ItemHeight = 13
           MaxLength = 0
           OnSelect = ComboBox2Change
           Style = csDropDownList
@@ -900,8 +954,12 @@ object f_calendar: Tf_calendar
     end
     object Solar: TTabSheet
       Caption = 'Solar Eclipses'
+      ClientHeight = 287
+      ClientWidth = 664
       ImageIndex = 3
       object SolarGrid: TStringGrid
+        Height = 287
+        Width = 664
         Align = alClient
         ColCount = 12
         DefaultColWidth = 75
@@ -933,8 +991,12 @@ object f_calendar: Tf_calendar
     end
     object Lunar: TTabSheet
       Caption = 'Lunar Eclipses'
+      ClientHeight = 287
+      ClientWidth = 664
       ImageIndex = 4
       object LunarGrid: TStringGrid
+        Height = 287
+        Width = 664
         Align = alClient
         ColCount = 9
         DefaultColWidth = 75
@@ -952,10 +1014,13 @@ object f_calendar: Tf_calendar
     end
     object Satellites: TTabSheet
       Caption = 'Artificial Satellites'
+      ClientHeight = 287
+      ClientWidth = 664
       ImageIndex = 5
-      TabVisible = False
       object SatGrid: TStringGrid
-        Top = 33
+        Height = 221
+        Top = 66
+        Width = 664
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 10
@@ -984,30 +1049,32 @@ object f_calendar: Tf_calendar
       end
       object Panel4: TPanel
         Height = 66
+        Width = 664
         Align = alTop
         ClientHeight = 66
+        ClientWidth = 664
         TabOrder = 1
         Visible = False
         object Label8: TLabel
           Left = 192
-          Height = 14
+          Height = 20
           Top = 4
-          Width = 31
+          Width = 34
           Caption = 'map :'
           ParentColor = False
         end
         object Label7: TLabel
-          Height = 14
+          Height = 20
           Top = 4
-          Width = 125
+          Width = 134
           Caption = 'Magnitude limite, liste :'
           ParentColor = False
         end
         object Label6: TLabel
           Left = 288
-          Height = 14
+          Height = 20
           Top = 6
-          Width = 30
+          Width = 29
           Caption = 'TLE :'
           ParentColor = False
         end
@@ -1021,9 +1088,9 @@ object f_calendar: Tf_calendar
         end
         object fullday: TCheckBox
           Left = 8
-          Height = 22
+          Height = 21
           Top = 24
-          Width = 145
+          Width = 148
           Caption = 'Include day time pass'
           TabOrder = 2
         end
@@ -1038,12 +1105,13 @@ object f_calendar: Tf_calendar
           Mask = '*.tle'
           MultiSelect = True
           TabOrder = 6
+          TopIndex = -1
         end
         object IridiumBox: TCheckBox
           Left = 464
-          Height = 22
+          Height = 21
           Top = 24
-          Width = 140
+          Width = 143
           Caption = 'Include Iridium flares'
           Checked = True
           State = cbChecked
@@ -1064,8 +1132,8 @@ object f_calendar: Tf_calendar
         end
         object SatChartBox: TCheckBox
           Left = 464
-          Height = 22
-          Width = 134
+          Height = 21
+          Width = 138
           Caption = 'in current chart only'
           TabOrder = 3
         end
