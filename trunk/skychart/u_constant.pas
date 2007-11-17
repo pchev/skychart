@@ -753,14 +753,18 @@ const
 
 // INDI Telescope driver
 const
-      NumIndiDriver=6;
+      NumIndiDriver=10;
       IndiDriverLst: array[0..NumIndiDriver,1..2] of string =(('Other',''),
+                  ('AstroPhysic','apmount'),
+                  ('Celestron GPS','celestrongps'),
+                  ('LX200 Basic','lx200basic'),
                   ('LX200 Generic','lx200generic'),
                   ('LX200 Classic','lx200classic'),
                   ('LX200 GPS','lx200gps'),
                   ('LX200 Autostar','lx200autostar'),
                   ('LX200 16','lx200_16'),
-                  ('Celestron GPS','celestrongps'));
+                  ('SkyCommander','skycommander'),
+                  ('Takahashi Temma','temma'));
 
 // Database
 type TDBtype = (mysql,sqlite);
