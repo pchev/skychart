@@ -50,7 +50,7 @@ type
     FConnectTime : double;
   public
     id : integer;
-    keepalive,abort,lockexecutecmd : boolean;
+    keepalive,abort,lockexecutecmd,stoping : boolean;
     active_chart,remoteip,remoteport : string;
     Constructor Create (hsock:tSocket);
     procedure Execute; override;
@@ -67,7 +67,7 @@ type
     active_chart : string;
     procedure ShowError;
   public
-    keepalive : boolean;
+    keepalive, stoping : boolean;
     TCPThrd: array [1..Maxwindow] of TTCPThrd ;
     ThrdActive: array [1..Maxwindow] of boolean ;
     Constructor Create;
@@ -1099,7 +1099,9 @@ end;
 Procedure Tf_main.GetAppDir;
 var inif: TMemIniFile;
     buf: string;
+{$ifdef darwin}
     i: integer;
+{$endif}
 {$ifdef win32}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
@@ -1247,7 +1249,6 @@ end;
 procedure Tf_main.FormDestroy(Sender: TObject);
 begin
 try
-StopServer;
 catalog.free;
 Fits.Free;
 planet.free;
@@ -1274,6 +1275,7 @@ try
 {$ifdef win32}
 if nightvision then ResetWinColor;
 {$endif}
+StopServer;
 writetrace(rsExiting);
 Autorefresh.Enabled:=false;
 SaveQuickSearch(configfile);
@@ -4846,6 +4848,7 @@ var
   ClientSock:TSocket;
   i,n : integer;
 begin
+stoping:=false;
 for i:=1 to MaxWindow do ThrdActive[i]:=false;
 sock:=TTCPBlockSocket.create;
 try
@@ -4862,8 +4865,8 @@ try
       if lasterror<>0 then Synchronize(ShowError);
       Synchronize(ShowSocket);
       repeat
-        if terminated then break;
-        if canread(1000) and (not terminated) then
+        if stoping or terminated then break;
+        if canread(500) and (not terminated) then
           begin
             ClientSock:=accept;
             if lastError=0 then begin
@@ -4906,9 +4909,10 @@ try
       until false;
     end;
 finally
-  terminate;
+  suspend;
   Sock.CloseSocket;
   Sock.free;
+  terminate;
 end;
 end;
 
@@ -4930,6 +4934,7 @@ var
 begin
   Fsock:=TTCPBlockSocket.create;
   FConnectTime:=now;
+  stoping:=false;
   try
     Fsock.socket:=CSock;
     Fsock.GetSins;
@@ -4939,8 +4944,8 @@ begin
     with Fsock do
       begin
         repeat
-          if terminated then break;
-          s := RecvString(1000);
+          if stoping or terminated then break;
+          s := RecvString(500);
           //if s<>'' then writetrace(s);   // for debuging only, not thread safe!
           if lastError=0 then begin
              if (uppercase(s)='QUIT')or(uppercase(s)='EXIT') then break;
@@ -4958,12 +4963,13 @@ begin
         until false;
       end;
   finally
-    terminate;
+    suspend;
     f_main.TCPDaemon.ThrdActive[id]:=false;
     Fsock.SendString(msgBye+crlf);
     Fsock.CloseSocket;
     Fsock.Free;
     cmd.free;
+    terminate;
   end;
 end;
 
@@ -5008,14 +5014,15 @@ var i :integer;
 //    d :double;
 begin
 if TCPDaemon=nil then exit;
+SetLpanel1(rsStopTCPIPSer);
 try
 screen.cursor:=crHourglass;
 for i:=1 to Maxwindow do
- if (TCPDaemon.TCPThrd[i]<>nil) then
-    TCPDaemon.TCPThrd[i].terminate;
-application.processmessages;
-TCPDaemon.terminate;
-//d:=now+1.7E-5;  // 1.5 seconde delay to close the thread
+ if (TCPDaemon.TCPThrd[i]<>nil) then begin
+    TCPDaemon.TCPThrd[i].stoping:=true;
+ end;
+TCPDaemon.stoping:=true;
+//d:=now+8E-6;  // 0.7 seconde delay to close the thread
 //while now<d do application.processmessages;
 screen.cursor:=crDefault;
 except

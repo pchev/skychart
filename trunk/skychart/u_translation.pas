@@ -1101,6 +1101,7 @@ resourcestring
   rsPleaseTryToR = 'Please try to reinstall the program.';
   rsSomethingGoW = 'Something go wrong during program initialization. We must '
     +'now close';
+  rsStopTCPIPSer = 'Stop TCP/IP server';
 
 implementation
 
