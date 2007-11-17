@@ -1099,6 +1099,8 @@ resourcestring
     +'the program.';
   rsCouldNotLoad = 'Could not load library ';
   rsPleaseTryToR = 'Please try to reinstall the program.';
+  rsSomethingGoW = 'Something go wrong during program initialization. We must '
+    +'now close';
 
 implementation
 

@@ -31,7 +31,6 @@ interface
 uses
   {$ifdef win32}
     Windows,
-    //WinXP, // XP theme still not working with night vision
   {$endif}
   u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
@@ -563,6 +562,7 @@ type
   {$ifdef win32}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
+    procedure ShowError(msg: string);
     procedure SetButtonImage(button: Integer);
     function CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
     Procedure RefreshAllChild(applydef:boolean);
@@ -663,9 +663,6 @@ implementation
    {$R cdc_icon.res}
 {$endif}
 
-
-//todo: lazarus cursor {$R cursbmp.res}
-
 uses
 {$ifdef LCLgtk}
      gtkproc,
@@ -678,6 +675,11 @@ uses
 const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
 {$endif}
 
+procedure Tf_main.ShowError(msg: string);
+begin
+WriteTrace(msg);
+ShowMessage(msg);
+end;
 
 function Tf_main.CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
 var
@@ -1168,6 +1170,7 @@ end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 begin
+try
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 NeedRestart:=false;
@@ -1233,6 +1236,12 @@ end;
 compass:=TBitmap.create;
 arrow:=TBitmap.create;
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
+except
+   MessageDlg(rsSomethingGoW+crlf
+             +rsPleaseTryToR,
+             mtError, [mbAbort], 0);
+   Halt;
+end;
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -1435,6 +1444,7 @@ procedure Tf_main.ListObjExecute(Sender: TObject);
 var buf:widestring;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+  if sc.cfgsc.windowratio=0 then sc.cfgsc.windowratio:=1;
   sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,false,false,false);
   f_info.Memo1.Font.Name:=def_cfgplot.FontName[5];
   f_info.Memo1.Font.Size:=def_cfgplot.FontSize[5];
@@ -1611,7 +1621,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.ShowImages:=not sc.cfgsc.ShowImages;
    if sc.cfgsc.ShowImages and (not Fits.dbconnected) then begin
       sc.cfgsc.ShowImages:=false;
-      showmessage(rsErrorPleaseC3);
+      ShowError(rsErrorPleaseC3);
    end;
    Refresh;
 end;
@@ -1623,7 +1633,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
    if sc.cfgsc.ShowBackgroundImage and (not Fits.dbconnected) then begin
       sc.cfgsc.ShowBackgroundImage:=false;
-      showmessage(rsErrorPleaseC);
+      ShowError(rsErrorPleaseC);
    end;
    Refresh;
 end;
@@ -1726,7 +1736,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
    showcom:=sc.cfgsc.ShowComet;
    Refresh;
-   if showcom<>sc.cfgsc.ShowComet then showmessage(rsErrorPleaseC2);
+   if showcom<>sc.cfgsc.ShowComet then ShowError(rsErrorPleaseC2);
 end;
 end;
 
@@ -1958,7 +1968,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
         end;
       end
       else begin
-        ShowMessage(Format(rsNotFoundMayb, [f_search.Num, crlf]) );
+        ShowError(Format(rsNotFoundMayb, [f_search.Num, crlf]) );
       end;
    end;
    until ok or (f_search.ModalResult<>mrOk);
@@ -2900,9 +2910,9 @@ def_cfgsc.IndiAutostart:=true;
 def_cfgsc.IndiServerHost:='localhost';
 def_cfgsc.IndiServerPort:='7624';
 def_cfgsc.IndiServerCmd:='indiserver';
-def_cfgsc.IndiDriver:='lx200generic';
+def_cfgsc.IndiDriver:='lx200basic';
 def_cfgsc.IndiPort:='/dev/ttyS0';
-def_cfgsc.IndiDevice:='LX200 Generic';
+def_cfgsc.IndiDevice:='LX200 Basic';
 def_cfgsc.IndiTelescope:=false;
 def_cfgsc.PluginTelescope:=false;
 def_cfgsc.ManualTelescope:=false;
@@ -3119,6 +3129,7 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
+try
 if resizemain then begin
   f_main.Top := ReadInteger(section,'WinTop',f_main.Top);
   f_main.Left := ReadInteger(section,'WinLeft',f_main.Left);
@@ -3129,6 +3140,10 @@ if resizemain then begin
   formpos(f_main,f_main.Left,f_main.Top);
 end;
 for i:=0 to MaxField do catalog.cfgshr.FieldNum[i]:=ReadFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
+except
+  ShowError('Error reading '+filename+' chart main');
+end;
+try
 section:='font';
 for i:=1 to numfont do begin
    cplot.FontName[i]:=ReadString(section,'FontName'+inttostr(i),cplot.FontName[i]);
@@ -3140,6 +3155,10 @@ for i:=1 to numlabtype do begin
    cplot.LabelColor[i]:=ReadInteger(section,'LabelColor'+inttostr(i),cplot.LabelColor[i]);
    cplot.LabelSize[i]:=ReadInteger(section,'LabelSize'+inttostr(i),cplot.LabelSize[i]);
 end;
+except
+  ShowError('Error reading '+filename+' font');
+end;
+try
 section:='filter';
 catalog.cfgshr.StarFilter:=ReadBool(section,'StarFilter',catalog.cfgshr.StarFilter);
 catalog.cfgshr.AutoStarFilter:=ReadBool(section,'AutoStarFilter',catalog.cfgshr.AutoStarFilter);
@@ -3152,7 +3171,11 @@ for i:=1 to maxfield do begin
    catalog.cfgshr.NebMagFilter[i]:=ReadFloat(section,'NebMagFilter'+inttostr(i),catalog.cfgshr.NebMagFilter[i]);
    catalog.cfgshr.NebSizeFilter[i]:=ReadFloat(section,'NebSizeFilter'+inttostr(i),catalog.cfgshr.NebSizeFilter[i]);
 end;
+except
+  ShowError('Error reading '+filename+' filter');
+end;
 if usecatalog then begin
+try
 section:='catalog';
 catalog.cfgcat.GCatNum:=Readinteger(section,'GCatNum',1);
 SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
@@ -3205,7 +3228,11 @@ for i:=1 to maxnebcatalog do begin
    catalog.cfgcat.nebcatfield[i,1]:=ReadInteger(section,'nebcatfield1'+inttostr(i),catalog.cfgcat.nebcatfield[i,1]);
    catalog.cfgcat.nebcatfield[i,2]:=ReadInteger(section,'nebcatfield2'+inttostr(i),catalog.cfgcat.nebcatfield[i,2]);
 end;
+except
+  ShowError('Error reading '+filename+' chart catalog');
 end;
+end;
+try
 section:='display';
 cplot.starplot:=ReadInteger(section,'starplot',cplot.starplot);
 cplot.nebplot:=ReadInteger(section,'nebplot',cplot.nebplot);
@@ -3221,11 +3248,19 @@ cplot.AutoSkycolor:=ReadBool(section,'AutoSkycolor',cplot.AutoSkycolor);
 for i:=0 to maxcolor do cplot.color[i]:=ReadInteger(section,'color'+inttostr(i),cplot.color[i]);
 for i:=0 to 7 do cplot.skycolor[i]:=ReadInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
 cplot.bgColor:=ReadInteger(section,'bgColor',cplot.bgColor);
+except
+  ShowError('Error reading '+filename+' display');
+end;
+try
 section:='grid';
 catalog.cfgshr.ShowCRose:=ReadBool(section,'ShowCRose',catalog.cfgshr.ShowCRose);
 catalog.cfgshr.CRoseSz:=ReadInteger(section,'CRoseSz',catalog.cfgshr.CRoseSz);
 for i:=0 to maxfield do catalog.cfgshr.HourGridSpacing[i]:=ReadFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=0 to maxfield do catalog.cfgshr.DegreeGridSpacing[i]:=ReadFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
+except
+  ShowError('Error reading '+filename+' grid');
+end;
+try
 section:='Finder';
 csc.ShowCircle:=ReadBool(section,'ShowCircle',csc.ShowCircle);
 for i:=1 to 10 do csc.circle[i,1]:=ReadFloat(section,'Circle'+inttostr(i),csc.circle[i,1]);
@@ -3239,10 +3274,18 @@ for i:=1 to 10 do csc.rectangle[i,3]:=ReadFloat(section,'RectangleR'+inttostr(i)
 for i:=1 to 10 do csc.rectangle[i,4]:=ReadFloat(section,'RectangleOffset'+inttostr(i),csc.rectangle[i,4]);
 for i:=1 to 10 do csc.rectangleok[i]:=ReadBool(section,'ShowRectangle'+inttostr(i),csc.rectangleok[i]);
 for i:=1 to 10 do csc.rectanglelbl[i]:=ReadString(section,'RectangleLbl'+inttostr(i),csc.rectanglelbl[i]);
+except
+  ShowError('Error reading '+filename+' Finder');
+end;
+try
 section:='chart';
 catalog.cfgshr.EquinoxType:=ReadInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
 catalog.cfgshr.EquinoxChart:=ReadString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
 catalog.cfgshr.DefaultJDchart:=ReadFloat(section,'DefaultJDchart',catalog.cfgshr.DefaultJDchart);
+except
+  ShowError('Error reading '+filename+' chart');
+end;
+try
 section:='default_chart';
 csc.winx:=ReadInteger(section,'ChartWidth',csc.xmax);
 csc.winy:=ReadInteger(section,'ChartHeight',csc.ymax);
@@ -3328,6 +3371,10 @@ for i:=1 to numlabtype do begin
    csc.ShowLabel[i]:=readBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
    csc.LabelMagDiff[i]:=readFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
 end;
+except
+  ShowError('Error reading '+filename+' default chart');
+end;
+try
 section:='observatory';
 csc.ObsLatitude := ReadFloat(section,'ObsLatitude',csc.ObsLatitude );
 csc.ObsLongitude := ReadFloat(section,'ObsLongitude',csc.ObsLongitude );
@@ -3338,6 +3385,10 @@ csc.ObsName := Condutf8decode(ReadString(section,'ObsName',csc.ObsName ));
 csc.ObsCountry := ReadString(section,'ObsCountry',csc.ObsCountry );
 csc.ObsTZ := ReadString(section,'ObsTZ',csc.ObsTZ );
 csc.countrytz := ReadBool(section,'countrytz',csc.countrytz );
+except
+  ShowError('Error reading '+filename+' observatory');
+end;
+try
 section:='date';
 csc.UseSystemTime:=ReadBool(section,'UseSystemTime',csc.UseSystemTime);
 csc.CurYear:=ReadInteger(section,'CurYear',csc.CurYear);
@@ -3347,8 +3398,16 @@ csc.CurTime:=ReadFloat(section,'CurTime',csc.CurTime);
 csc.autorefresh:=ReadBool(section,'autorefresh',csc.autorefresh);
 csc.Force_DT_UT:=ReadBool(section,'Force_DT_UT',csc.Force_DT_UT);
 csc.DT_UT_val:=ReadFloat(section,'DT_UT_val',csc.DT_UT_val);
+except
+  ShowError('Error reading '+filename+' date');
+end;
+try
 section:='projection';
 for i:=1 to maxfield do csc.projname[i]:=ReadString(section,'ProjName'+inttostr(i),csc.projname[i] );
+except
+  ShowError('Error reading '+filename+' projection');
+end;
+try
 section:='labels';
 csc.posmodlabels:=ReadInteger(section,'poslabels',0);
 csc.nummodlabels:=ReadInteger(section,'numlabels',0);
@@ -3362,6 +3421,10 @@ for i:=1 to csc.nummodlabels do begin
    csc.modlabels[i].align:=TLabelAlign(ReadInteger(section,'labelalign'+inttostr(i),ord(laLeft)));
    csc.modlabels[i].hiden:=ReadBool(section,'labelhiden'+inttostr(i),false);
 end;
+except
+  ShowError('Error reading '+filename+' labels');
+end;
+try
 section:='custom_labels';
 csc.poscustomlabels:=ReadInteger(section,'poslabels',0);
 csc.numcustomlabels:=ReadInteger(section,'numlabels',0);
@@ -3372,7 +3435,11 @@ for i:=1 to csc.numcustomlabels do begin
    csc.customlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
    csc.customlabels[i].align:=TLabelAlign(ReadInteger(section,'labelalign'+inttostr(i),ord(laLeft)));
 end;
+except
+  ShowError('Error reading '+filename+' custom_labels');
 end;
+end;
+try
 csc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
 csc.tz.JD:=jd(csc.CurYear,csc.CurMonth,csc.CurDay,csc.CurTime);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
@@ -3412,6 +3479,9 @@ case csc.CoordType of
      end;
 end;
 end;
+except
+  ShowError('Error reading '+filename+' coordinates initialization');
+end;
 finally
 inif.Free;
 end;
@@ -3426,6 +3496,7 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
+try
 Config_Version:=ReadString(section,'version','0');
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 {$ifdef linux}
@@ -3527,6 +3598,10 @@ RightBar1.checked:=PanelRight.visible;
 ViewToolsBar1.checked:=(MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked);
 ViewTopPanel;
 InitialChartNum:=ReadInteger(section,'NumChart',0);
+except
+  ShowError('Error reading '+filename+' main');
+end;
+try
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatpath[i]:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -3540,6 +3615,10 @@ end;
 for i:=1 to maxnebcatalog do begin
    catalog.cfgcat.nebcatpath[i]:=ReadString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
 end;
+except
+  ShowError('Error reading '+filename+' catalog');
+end;
+try
 section:='dss';
 f_getdss.cfgdss.dssnorth:=ReadBool(section,'dssnorth',false);
 f_getdss.cfgdss.dsssouth:=ReadBool(section,'dsssouth',false);
@@ -3556,9 +3635,16 @@ for i:=1 to MaxDSSurl do begin
 end;
 f_getdss.cfgdss.OnlineDSS:=ReadBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
 f_getdss.cfgdss.OnlineDSSid:=ReadInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
+except
+  ShowError('Error reading '+filename+' dss');
+end;
+try
 section:='quicksearch';
 j:=min(MaxQuickSearch,ReadInteger(section,'count',0));
 for i:=1 to j do quicksearch.Items.Add(ReadString(section,'item'+inttostr(i),''));
+except
+  ShowError('Error reading '+filename+' quicksearch');
+end;
 end;
 finally
 inif.Free;
@@ -4954,7 +5040,7 @@ try
           Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           SetLpanel1(Format(rsConnectedToS, [cfgm.db]));
     end else begin
-          Showmessage(rsSQLDatabaseN+crlf+rsSQLDatabaseS);
+          ShowError(rsSQLDatabaseN+crlf+rsSQLDatabaseS);
           def_cfgsc.ShowAsteroid:=false;
           def_cfgsc.ShowComet:=false;
           def_cfgsc.ShowImages:=false;

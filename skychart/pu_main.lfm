@@ -4,10 +4,10 @@ object f_main: Tf_main
   Top = 126
   Width = 860
   HorzScrollBar.Page = 859
-  VertScrollBar.Page = 559
+  VertScrollBar.Page = 560
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 560
+  ClientHeight = 561
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   Icon.Data = {
@@ -154,13 +154,13 @@ object f_main: Tf_main
   OnShow = FormShow
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 474
+    Height = 475
     Top = 54
     Width = 811
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
-    ClientHeight = 474
+    ClientHeight = 475
     ClientWidth = 811
     Color = clBlack
     FullRepaint = False
@@ -2792,21 +2792,22 @@ object f_main: Tf_main
         0000000000000000000000000000000000000000000000000000000000000000
         000000000000
       }
+      Transparent = False
       Visible = False
     end
   end
   object PanelLeft: TPanel
-    Height = 474
+    Height = 475
     Top = 54
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 474
+    ClientHeight = 475
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 474
+      Height = 475
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2904,17 +2905,17 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 835
-    Height = 474
+    Height = 475
     Top = 54
     Width = 25
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 474
+    ClientHeight = 475
     ClientWidth = 25
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 224
+      Height = 225
       Top = 250
       Width = 25
       Align = alClient
@@ -3135,7 +3136,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 528
+    Top = 529
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -3344,7 +3345,6 @@ object f_main: Tf_main
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
-        ItemHeight = 13
         MaxLength = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
@@ -3404,6 +3404,7 @@ object f_main: Tf_main
             4B4C4D4E4F50515261222C0A222E6F514A4453546F2E61222C0A222E2E6F682C
             6F522E2E61222C0A2261616161616161616161227D0A
           }
+          Transparent = False
         end
         object ButtonLessStar: TImage
           Left = 12
@@ -3429,6 +3430,7 @@ object f_main: Tf_main
             2A702D2E2E2E2C222C0A222E2E2E2E2E2E2E2E2E2C222C0A222E2E2E2E2E2E2E
             2E2E2C222C0A222C2C2C2C2C2C2C2C2C2C227D0A
           }
+          Transparent = False
         end
         object ButtonMoreNeb: TImage
           Height = 11
@@ -3457,6 +3459,7 @@ object f_main: Tf_main
             2C222C0A222E2E2E2E2E2E2E2E2E2C222C0A222E2E2E2E2E2E2E2E2E2C222C0A
             222C2C2C2C2C2C2C2C2C2C227D0A
           }
+          Transparent = False
         end
         object ButtonLessNeb: TImage
           Left = 12
@@ -3481,6 +3484,7 @@ object f_main: Tf_main
             2E2E2E2E2E2E2E2E2E2C222C0A222E2E2E2E2E2E2E2E2E2C222C0A222C2C2C2C
             2C2C2C2C2C2C227D0A
           }
+          Transparent = False
         end
       end
       object ToolButtonPosition: TToolButton
@@ -3546,7 +3550,6 @@ object f_main: Tf_main
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 16
         MaxLength = 0
         Style = csDropDownList
         TabOrder = 2
