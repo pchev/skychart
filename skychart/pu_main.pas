@@ -4963,12 +4963,12 @@ begin
         until false;
       end;
   finally
-    suspend;
     f_main.TCPDaemon.ThrdActive[id]:=false;
     Fsock.SendString(msgBye+crlf);
     Fsock.CloseSocket;
     Fsock.Free;
     cmd.free;
+    suspend;
     terminate;
   end;
 end;
@@ -5011,7 +5011,7 @@ end;
 
 procedure Tf_main.StopServer;
 var i :integer;
-//    d :double;
+    d :double;
 begin
 if TCPDaemon=nil then exit;
 SetLpanel1(rsStopTCPIPSer);
@@ -5021,9 +5021,9 @@ for i:=1 to Maxwindow do
  if (TCPDaemon.TCPThrd[i]<>nil) then begin
     TCPDaemon.TCPThrd[i].stoping:=true;
  end;
+d:=now+8E-6;  // 0.7 seconde delay to close the thread
+while now<d do application.processmessages;
 TCPDaemon.stoping:=true;
-//d:=now+8E-6;  // 0.7 seconde delay to close the thread
-//while now<d do application.processmessages;
 screen.cursor:=crDefault;
 except
  screen.cursor:=crDefault;
