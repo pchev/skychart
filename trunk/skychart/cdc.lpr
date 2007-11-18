@@ -23,9 +23,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 
 uses
-  {$ifdef unix}
-  cthreads,  // Unix thread support, must be first!
-  {$endif}
+  {$IFDEF UNIX}{$IFDEF UseCThreads}
+  cthreads,
+  {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, cu_catalog, cu_skychart, cu_plot, cu_planet,
   cu_indiclient, cu_fits, cu_database, cu_telescope, pu_info, pu_image,
