@@ -326,7 +326,7 @@ begin
  Image1.Parent := Panel1;
  IdentLabel.Parent:=Image1;
  Image1.Align:=alClient;
- Image1.DoubleBuffered := false;
+ Image1.DoubleBuffered := true;
  Image1.PopupMenu:=popupmenu1;
  Image1.OnClick:=Image1Click;
  Image1.OnMouseDown:=Image1MouseDown;
