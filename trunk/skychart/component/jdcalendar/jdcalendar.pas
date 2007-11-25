@@ -881,7 +881,7 @@ end;
 procedure TTimePicker.SetTime(Value: TDateTime);
 begin
 EditH.Text:=formatdatetime('hh',Value);
-EditM.Text:=formatdatetime('mm',Value);
+EditM.Text:=formatdatetime('nn',Value);
 EditS.Text:=formatdatetime('ss',Value);
 end;
 
