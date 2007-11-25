@@ -8,6 +8,8 @@ object f_config: Tf_config
   ActiveControl = Applyall
   BorderStyle = bsSizeToolWin
   Caption = 'Configuration'
+  ClientHeight = 540
+  ClientWidth = 730
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Icon.Data = {
@@ -151,12 +153,14 @@ object f_config: Tf_config
     Top = 499
     Width = 730
     Align = alBottom
+    ClientHeight = 41
+    ClientWidth = 730
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16
-      Height = 19
+      Height = 21
       Top = 12
-      Width = 180
+      Width = 168
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
@@ -207,6 +211,8 @@ object f_config: Tf_config
     Height = 499
     Width = 232
     Align = alLeft
+    ClientHeight = 499
+    ClientWidth = 232
     TabOrder = 1
     object TreeView1: TTreeView
       Left = 1
@@ -215,8 +221,7 @@ object f_config: Tf_config
       Width = 230
       Align = alClient
       AutoExpand = True
-      BackgroundColor = clBtnHighlight
-      Color = clBtnHighlight
+      BackgroundColor = clWindow
       DefaultItemHeight = 15
       ExpandSignType = tvestArrow
       HideSelection = False
@@ -307,6 +312,8 @@ object f_config: Tf_config
       Top = 458
       Width = 230
       Align = alBottom
+      ClientHeight = 40
+      ClientWidth = 230
       TabOrder = 1
       object previous: TButton
         Left = 63
@@ -337,6 +344,8 @@ object f_config: Tf_config
     Height = 499
     Width = 493
     Align = alClient
+    ClientHeight = 499
+    ClientWidth = 493
     TabOrder = 2
     object MultiDoc1: TMultiDoc
       Left = 1
