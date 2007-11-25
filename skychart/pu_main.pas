@@ -1175,6 +1175,8 @@ begin
 try
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
+DateSeparator:='/';
+TimeSeparator:=':';
 NeedRestart:=false;
 ImageListCount:=ImageNormal.Count;
 DisplayIs32bpp:=true;
