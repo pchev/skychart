@@ -27,7 +27,7 @@
         <WorkingDirectory Value="/home/cdc"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="20">
+    <RequiredPackages Count="19">
       <Item1>
         <PackageName Value="cdccatalog"/>
         <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
@@ -102,9 +102,6 @@
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item19>
-      <Item20>
-        <PackageName Value="ImagesForLazarus"/>
-      </Item20>
     </RequiredPackages>
     <Units Count="44">
       <Unit0>
