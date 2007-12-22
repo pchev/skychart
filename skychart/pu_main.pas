@@ -34,7 +34,7 @@ uses
   {$endif}
   u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
-  pu_config_catalog, u_constant, u_util, blcksock, synsock, lazjpeg, dynlibs,
+  pu_config_catalog, u_constant, u_util, blcksock, synsock, lazjpg, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,

@@ -29,81 +29,81 @@
     </RunParams>
     <RequiredPackages Count="20">
       <Item1>
-        <PackageName Value="zoomimage"/>
-        <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
+        <PackageName Value="cdccatalog"/>
+        <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
       </Item1>
       <Item2>
-        <PackageName Value="XmlParser"/>
-        <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
+        <PackageName Value="CDCjdcalendar"/>
+        <DefaultFilename Value="component/jdcalendar/cdcjdcalendar.lpk"/>
       </Item2>
       <Item3>
-        <PackageName Value="TurboPowerIPro"/>
-        <MinVersion Major="1" Valid="True"/>
+        <PackageName Value="downldialog"/>
+        <DefaultFilename Value="component/downloaddialog/downldialog.lpk"/>
       </Item3>
       <Item4>
-        <PackageName Value="SynEdit"/>
-        <MinVersion Major="1" Valid="True"/>
+        <PackageName Value="elp82"/>
+        <DefaultFilename Value="library/elp82/elp82.lpk"/>
       </Item4>
       <Item5>
-        <PackageName Value="synapse"/>
-        <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
+        <PackageName Value="enhedit"/>
+        <DefaultFilename Value="component/enhedits/enhedit.lpk"/>
       </Item5>
       <Item6>
-        <PackageName Value="series96"/>
-        <DefaultFilename Value="library/series96/series96.lpk"/>
+        <PackageName Value="FCL"/>
       </Item6>
       <Item7>
-        <PackageName Value="satxy"/>
-        <DefaultFilename Value="library/satxy/satxy.lpk"/>
+        <PackageName Value="LCL"/>
       </Item7>
       <Item8>
-        <PackageName Value="radec"/>
-        <DefaultFilename Value="component/radec/radec.lpk"/>
+        <PackageName Value="libsql"/>
+        <DefaultFilename Value="component/libsql/libsql.lpk"/>
       </Item8>
       <Item9>
-        <PackageName Value="Printer4Lazarus"/>
-        <MinVersion Build="1" Valid="True"/>
+        <PackageName Value="mrecsort"/>
+        <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
       </Item9>
       <Item10>
         <PackageName Value="MultiDocPackage"/>
         <MinVersion Valid="True"/>
       </Item10>
       <Item11>
-        <PackageName Value="mrecsort"/>
-        <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
+        <PackageName Value="Printer4Lazarus"/>
+        <MinVersion Build="1" Valid="True"/>
       </Item11>
       <Item12>
-        <PackageName Value="libsql"/>
-        <DefaultFilename Value="component/libsql/libsql.lpk"/>
+        <PackageName Value="radec"/>
+        <DefaultFilename Value="component/radec/radec.lpk"/>
       </Item12>
       <Item13>
-        <PackageName Value="LCL"/>
+        <PackageName Value="satxy"/>
+        <DefaultFilename Value="library/satxy/satxy.lpk"/>
       </Item13>
       <Item14>
-        <PackageName Value="JPEGForLazarus"/>
+        <PackageName Value="series96"/>
+        <DefaultFilename Value="library/series96/series96.lpk"/>
       </Item14>
       <Item15>
-        <PackageName Value="FCL"/>
+        <PackageName Value="synapse"/>
+        <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
       </Item15>
       <Item16>
-        <PackageName Value="enhedit"/>
-        <DefaultFilename Value="component/enhedits/enhedit.lpk"/>
+        <PackageName Value="SynEdit"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item16>
       <Item17>
-        <PackageName Value="elp82"/>
-        <DefaultFilename Value="library/elp82/elp82.lpk"/>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item17>
       <Item18>
-        <PackageName Value="downldialog"/>
-        <DefaultFilename Value="component/downloaddialog/downldialog.lpk"/>
+        <PackageName Value="XmlParser"/>
+        <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
       </Item18>
       <Item19>
-        <PackageName Value="CDCjdcalendar"/>
-        <DefaultFilename Value="component/jdcalendar/cdcjdcalendar.lpk"/>
+        <PackageName Value="zoomimage"/>
+        <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item19>
       <Item20>
-        <PackageName Value="cdccatalog"/>
-        <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
+        <PackageName Value="ImagesForLazarus"/>
       </Item20>
     </RequiredPackages>
     <Units Count="44">
