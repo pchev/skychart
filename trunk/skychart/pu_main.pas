@@ -34,7 +34,7 @@ uses
   {$endif}
   u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
-  pu_config_catalog, u_constant, u_util, blcksock, synsock, lazjpg, dynlibs,
+  pu_config_catalog, u_constant, u_util, blcksock, synsock, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
@@ -1031,8 +1031,7 @@ var ext,format:string;
 begin
 Savedialog.DefaultExt:='';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
-//savedialog.Filter:='BMP|*.bmp|JPEG|*.jpg|PNG|*.png';
-savedialog.Filter:='BMP|*.bmp|JPEG|*.jpg';
+savedialog.Filter:='PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
 savedialog.Title:=rsSaveImage;
 if MultiDoc1.ActiveObject  is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do
@@ -1040,13 +1039,13 @@ if MultiDoc1.ActiveObject  is Tf_chart then
      ext:=uppercase(extractfileext(SaveDialog.Filename));
      if ext='' then
         case Savedialog.FilterIndex of
-        0,1 : ext:='.BMP';
+        0,1 : ext:='.PNG';
         2   : ext:='.JPG';
-        3   : ext:='.PNG';
+        3   : ext:='.BMP';
         end;
      if (ext='.JPG')or(ext='.JPEG') then format:='JPEG'
-     // else if (ext='.PNG') then format:='PNG'
-     else format:='BMP';
+     else if (ext='.BMP') then format:='BMP'
+     else format:='PNG';
      SaveChartImage(format,SaveDialog.Filename,95);
   end;
 end;

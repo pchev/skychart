@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
-     Printers, Math, cu_telescope, lazjpg, IntfGraphics, PostscriptCanvas,
+     Printers, Math, cu_telescope, IntfGraphics, PostscriptCanvas,
      LCLIntf, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList, SysUtils, LResources;
      

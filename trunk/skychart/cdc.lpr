@@ -38,7 +38,7 @@ uses
   radec, XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
-  pu_splash, pu_about, cu_tz, ImagesForLazarus;
+  pu_splash, pu_about, cu_tz;
   
 const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
 
