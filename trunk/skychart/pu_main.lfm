@@ -4337,7 +4337,6 @@ object f_main: Tf_main
     end
   end
   object OpenDialog: TOpenDialog
-    Title = 'Open existing file'
     FilterIndex = 0
     Options = [ofEnableSizing]
     left = 184
@@ -4986,7 +4985,6 @@ object f_main: Tf_main
     end
   end
   object SaveDialog: TSaveDialog
-    Title = 'Save file as'
     FilterIndex = 0
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     left = 144

@@ -35,10 +35,10 @@ uses
   TurboPowerIPro, pu_config, enhedit, pu_config_catalog,
   pu_config_system, pu_config_solsys, pu_config_pictures, pu_config_observatory,
   pu_config_display, pu_config_chart, pu_config_internet, libsql,
-  radec, XmlParser, zoomimage, JPEGForLazarus, CDCjdcalendar, cdccatalog, satxy,
+  radec, XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
-  pu_splash, pu_about, cu_tz;
+  pu_splash, pu_about, cu_tz, ImagesForLazarus;
   
 const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
 
