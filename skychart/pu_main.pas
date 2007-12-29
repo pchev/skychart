@@ -991,7 +991,7 @@ try
     ToolButtonNightVisionClick(self);
  end;
 except
- on E: Exception do SetLPanel1('Initialization error:'+E.Message);
+on E: Exception do SetLPanel1('Initialization error:'+E.Message);
 end;
 end;
 
@@ -1170,8 +1170,10 @@ ZoneDir:=slash(appdir)+slash('data')+slash('zoneinfo');
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
+var step:string;
 begin
 try
+step:='Init';
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 DateSeparator:='/';
@@ -1181,37 +1183,48 @@ ImageListCount:=ImageNormal.Count;
 DisplayIs32bpp:=true;
 isWin98:=false;
 {$ifdef win32}
+  step:='Windows spefic';
   isWin98:=FindWin98;
   DisplayIs32bpp:=(ScreenBPP=32);
   configfile:=Defaultconfigfile;
 {$endif}
 {$ifdef unix}
+  step:='Unix specific';
   configfile:=expandfilename(Defaultconfigfile);
 {$endif}
+step:='Create config';
 def_cfgsc:=Tconf_skychart.Create;
 cfgs:=Tconf_skychart.Create;
 cfgm:=Tconf_main.Create;
 def_cfgplot:=Tconf_plot.Create;
 cfgp:=Tconf_plot.Create;
+step:='Create cursoe';
 CursorImage1:=TCursorImage.Create;
+step:='Application directory';
 GetAppDir;
 chdir(appdir);
+step:='Trace';
 InitTrace;
+step:='Language';
 GetLanguage;
 lang:=u_translation.translate(cfgm.language);
 catalog:=Tcatalog.Create(self);
 SetLang;
+step:='Telescope';
 telescope:=Ttelescope.Create(self);
+step:='Multidoc';
 basecaption:=caption;
 MultiDoc1.WindowList:=Window1;
 MultiDoc1.KeepLastChild:=true;
 ChildControl.visible:=false;
 BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
+step:='Size control';
 starshape.Picture.Bitmap.Transparent:=false;
 TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 quicksearch.Width:=round( 75 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 TimeU.Width:=round( 95 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
+step:='Load zlib';
 zlib:=LoadLibrary(libz);
 if zlib<>0 then begin
   gzopen:= Tgzopen(GetProcAddress(zlib,'gzopen'));
@@ -1220,6 +1233,7 @@ if zlib<>0 then begin
   gzeof:= Tgzeof(GetProcAddress(zlib,'gzeof'));
   zlibok:=true;
 end else zlibok:=false;
+step:='Load plan404';
 Plan404:=nil;
 Plan404lib:=LoadLibrary(lib404);
 if Plan404lib<>0 then begin
@@ -1232,18 +1246,23 @@ if @Plan404=nil then begin
    Halt;
 end;
 {$ifdef unix}
+   step:='Multidoc unix';
    MultiDoc1.InactiveBorderColor:=$404040;
    MultiDoc1.TitleColor:=clWhite;
    MultiDoc1.BorderColor:=$808080;
 {$endif}
+step:='Bitmap';
 compass:=TBitmap.create;
 arrow:=TBitmap.create;
+step:='Load timezone';
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 except
-   MessageDlg(rsSomethingGoW+crlf
+  on E: Exception do begin
+   MessageDlg(step+': '+E.Message+crlf+rsSomethingGoW+crlf
              +rsPleaseTryToR,
              mtError, [mbAbort], 0);
    Halt;
+   end;
 end;
 end;
 
