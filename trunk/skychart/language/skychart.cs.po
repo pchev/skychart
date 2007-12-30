@@ -592,10 +592,6 @@ msgstr "Zkontrolovat"
 msgid "Choose colours for object type"
 msgstr "Barvy objektů"
 
-#: u_translation:rschoosewhicho
-msgid "Choose which objects to plot"
-msgstr "Zobrazit objekty"
-
 #: u_translation:rscircle
 msgid "Circle"
 msgstr "Kružnice"
@@ -3512,6 +3508,10 @@ msgstr "Objekty sluneční soustavy"
 msgid "Some records where rejected, see file %sreject.txt for details"
 msgstr "Některé záznamy byly zamítnuty, detaily naleznete v souboru %sreject.txt"
 
+#: u_translation:rssomethinggow
+msgid "Something go wrong during program initialization. We must now close"
+msgstr ""
+
 #: u_translation:rssortbyra
 msgid "Sort by RA"
 msgstr "Řadit podle RA"
@@ -3603,6 +3603,10 @@ msgstr "Stavový řádek"
 #: u_translation:rsstepunit
 msgid "Step unit"
 msgstr "Jednotka krokování"
+
+#: u_translation:rsstoptcpipser
+msgid "Stop TCP/IP server"
+msgstr ""
 
 #: u_translation:rssun
 msgid "Sun"

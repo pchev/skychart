@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-10-03 21:02+0100\n"
+"PO-Revision-Date: 2007-11-20 14:22+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -591,10 +591,6 @@ msgstr "Controleer"
 msgid "Choose colours for object type"
 msgstr "Kies kleuren voor object type"
 
-#: u_translation:rschoosewhicho
-msgid "Choose which objects to plot"
-msgstr "Kies welke afbeeldingen af te drukken"
-
 #: u_translation:rscircle
 msgid "Circle"
 msgstr "Cirkel"
@@ -681,7 +677,7 @@ msgstr "Commando niet gevonden!"
 
 #: u_translation:rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Commando om bestand te creëeren"
+msgstr "Commando om bestand te creëren"
 
 #: u_translation:rscommonname
 msgid "Common Name"
@@ -825,7 +821,7 @@ msgstr "Gecorreleerd"
 
 #: u_translation:rscouldnotload
 msgid "Could not load library "
-msgstr ""
+msgstr "Kan de bibliotheek niet laden"
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
@@ -2781,11 +2777,11 @@ msgstr "Raporteer alstublieft ieder probleem aan:"
 
 #: u_translation:rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr ""
+msgstr "Probeer alstublieft deze map zelf te creëren en herstart het programma."
 
 #: u_translation:rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr ""
+msgstr "Probeer alstublieft het programma opnieuw te installeren."
 
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
@@ -3511,6 +3507,10 @@ msgstr "Zonnestelsel objecten"
 msgid "Some records where rejected, see file %sreject.txt for details"
 msgstr "Sommige records zijn geweigerd, zie bestand %sreject.txt voor details."
 
+#: u_translation:rssomethinggow
+msgid "Something go wrong during program initialization. We must now close"
+msgstr "Iets is fout gegaan tijdens de programma-initialisatie. We moeten nu sluiten."
+
 #: u_translation:rssortbyra
 msgid "Sort by RA"
 msgstr "Sorteer op RA"
@@ -3602,6 +3602,10 @@ msgstr "Statusbalk"
 #: u_translation:rsstepunit
 msgid "Step unit"
 msgstr "Stap eenheid"
+
+#: u_translation:rsstoptcpipser
+msgid "Stop TCP/IP server"
+msgstr "Stop TCP/IP server"
 
 #: u_translation:rssun
 msgid "Sun"
@@ -3857,7 +3861,7 @@ msgstr "Umbra"
 
 #: u_translation:rsunabletocrea
 msgid "Unable to create directory "
-msgstr ""
+msgstr "Kan de map niet aanmaken"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
