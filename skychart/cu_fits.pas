@@ -761,14 +761,16 @@ begin
 imabmp.freeimage;
 imabmp.height:=1;
 imabmp.width:=1;
-IntfImg:=TLazIntfImage.Create(0,0);
-IntfImg.LoadFromBitmap(imabmp.Handle,0);
-GetIntfImg(IntfImg);
-IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
-imabmp.freeimage;
-imabmp.Handle:=ImgHandle;
-//imabmp.MaskHandle:=ImgMaskHandle;
-IntfImg.Free;
+if Fheader.naxis1>0 then begin
+  IntfImg:=TLazIntfImage.Create(0,0);
+  IntfImg.LoadFromBitmap(imabmp.Handle,0);
+  GetIntfImg(IntfImg);
+  IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+  imabmp.freeimage;
+  imabmp.Handle:=ImgHandle;
+  //imabmp.MaskHandle:=ImgMaskHandle;
+  IntfImg.Free;
+end;
 end;
 
 Function TFits.ConnectDB(host,db,user,pass:string; port:integer):boolean;
