@@ -83,7 +83,6 @@ type
     stepreset: TSpeedButton;
     Label178: TLabel;
     Label179: TLabel;
-    Label180: TLabel;
     Label56: TLabel;
     stepunit: TRadioGroup;
     stepline: TCheckBox;
@@ -175,7 +174,6 @@ Page2.caption:=rsSimulation;
 stepreset.caption:=rsReset;
 Label178.caption:=rsEvery;
 Label179.caption:=rsNumberOfStep;
-Label180.caption:=rsChooseWhichO;
 Label56.caption:=rsPlotThePosit;
 stepunit.caption:=rsStepUnit;
 stepunit.items[0]:=rsDay;

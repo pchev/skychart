@@ -140,7 +140,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object citylist: TComboBox
             Left = 8
-            Height = 21
+            Height = 24
             Top = 31
             Width = 233
             AutoComplete = True
@@ -164,7 +164,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object countrylist: TComboBox
             Left = 8
-            Height = 21
+            Height = 24
             Top = 1
             Width = 234
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
@@ -176,7 +176,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object cityfilter: TEdit
             Left = 248
-            Height = 21
+            Height = 24
             Top = 1
             Width = 104
             OnKeyDown = cityfilterKeyDown
@@ -215,7 +215,7 @@ object f_config_observatory: Tf_config_observatory
           object LocCode: TEdit
             Cursor = crHandPoint
             Left = 8
-            Height = 23
+            Height = 24
             Hint = 'Designation Code'
             Top = 60
             Width = 80
@@ -716,6 +716,7 @@ object f_config_observatory: Tf_config_observatory
     top = 296
   end
   object OpenDialog1: TOpenDialog
+    Title = 'Open existing file'
     FilterIndex = 0
     left = 128
     top = 360

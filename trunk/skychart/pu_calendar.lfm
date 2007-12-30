@@ -5,7 +5,7 @@ object f_calendar: Tf_calendar
   Width = 670
   HorzScrollBar.Page = 669
   VertScrollBar.Page = 387
-  ActiveControl = step
+  ActiveControl = Date1
   Caption = 'f_calendar'
   ClientHeight = 388
   ClientWidth = 670
@@ -852,7 +852,7 @@ object f_calendar: Tf_calendar
         TabOrder = 1
         object Button1: TButton
           Left = 136
-          Height = 22
+          Height = 24
           Top = 8
           Width = 75
           BorderSpacing.InnerBorder = 4
@@ -862,14 +862,14 @@ object f_calendar: Tf_calendar
         end
         object CometFilter: TEdit
           Left = 8
-          Height = 21
+          Height = 24
           Top = 9
           Width = 121
           TabOrder = 1
         end
         object ComboBox1: TComboBox
           Left = 216
-          Height = 21
+          Height = 24
           Top = 9
           Width = 169
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
@@ -924,7 +924,7 @@ object f_calendar: Tf_calendar
         TabOrder = 1
         object ComboBox2: TComboBox
           Left = 216
-          Height = 21
+          Height = 24
           Top = 13
           Width = 169
           AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
@@ -935,7 +935,7 @@ object f_calendar: Tf_calendar
         end
         object Button2: TButton
           Left = 136
-          Height = 22
+          Height = 24
           Top = 12
           Width = 75
           BorderSpacing.InnerBorder = 4
@@ -945,8 +945,8 @@ object f_calendar: Tf_calendar
         end
         object AstFilter: TEdit
           Left = 8
-          Height = 21
-          Top = 15
+          Height = 24
+          Top = 12
           Width = 121
           TabOrder = 2
         end
