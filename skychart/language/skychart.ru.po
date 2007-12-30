@@ -592,10 +592,6 @@ msgstr "Проверка"
 msgid "Choose colours for object type"
 msgstr "Выбрать цвета для типа объектов."
 
-#: u_translation:rschoosewhicho
-msgid "Choose which objects to plot"
-msgstr "Быбрать объекты для рисования"
-
 #: u_translation:rscircle
 msgid "Circle"
 msgstr "Круг"
@@ -3512,6 +3508,10 @@ msgstr "Объекты Солнечной системы"
 msgid "Some records where rejected, see file %sreject.txt for details"
 msgstr "Некоторые записи отклонены, детали смотрите в файле %sreject.txt"
 
+#: u_translation:rssomethinggow
+msgid "Something go wrong during program initialization. We must now close"
+msgstr ""
+
 #: u_translation:rssortbyra
 msgid "Sort by RA"
 msgstr "Сорт. по RA"
@@ -3603,6 +3603,10 @@ msgstr "Панель состояния"
 #: u_translation:rsstepunit
 msgid "Step unit"
 msgstr "Единица шага"
+
+#: u_translation:rsstoptcpipser
+msgid "Stop TCP/IP server"
+msgstr ""
 
 #: u_translation:rssun
 msgid "Sun"

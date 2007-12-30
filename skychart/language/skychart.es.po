@@ -591,10 +591,6 @@ msgstr "Marcar"
 msgid "Choose colours for object type"
 msgstr "Elija colores para tipo de objeto"
 
-#: u_translation:rschoosewhicho
-msgid "Choose which objects to plot"
-msgstr "Elija objetos a dibujar"
-
 #: u_translation:rscircle
 msgid "Circle"
 msgstr "Circulo"
@@ -3511,6 +3507,10 @@ msgstr "Objeto de Sistema Solar"
 msgid "Some records where rejected, see file %sreject.txt for details"
 msgstr "Algunos registros fueron rechazados, ver archivo %sreject.txt para detalles"
 
+#: u_translation:rssomethinggow
+msgid "Something go wrong during program initialization. We must now close"
+msgstr ""
+
 #: u_translation:rssortbyra
 msgid "Sort by RA"
 msgstr "Orden por RA"
@@ -3602,6 +3602,10 @@ msgstr "Barra de Estado"
 #: u_translation:rsstepunit
 msgid "Step unit"
 msgstr "Unidad de paso"
+
+#: u_translation:rsstoptcpipser
+msgid "Stop TCP/IP server"
+msgstr ""
 
 #: u_translation:rssun
 msgid "Sun"

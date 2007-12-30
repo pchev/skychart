@@ -592,10 +592,6 @@ msgstr "Control"
 msgid "Choose colours for object type"
 msgstr "Tria de colors per tipus d'objecte"
 
-#: u_translation:rschoosewhicho
-msgid "Choose which objects to plot"
-msgstr "Objecte a simular"
-
 #: u_translation:rscircle
 msgid "Circle"
 msgstr "Cercle"
@@ -3512,6 +3508,10 @@ msgstr "Objecte del sistema solar"
 msgid "Some records where rejected, see file %sreject.txt for details"
 msgstr "Alguns registres de gravació han estat rebutjats, vegeu l'arxiu %sreject.txt per més detalls"
 
+#: u_translation:rssomethinggow
+msgid "Something go wrong during program initialization. We must now close"
+msgstr ""
+
 #: u_translation:rssortbyra
 msgid "Sort by RA"
 msgstr "Ordena per AR"
@@ -3603,6 +3603,10 @@ msgstr "Barra d'estat"
 #: u_translation:rsstepunit
 msgid "Step unit"
 msgstr "Unitats"
+
+#: u_translation:rsstoptcpipser
+msgid "Stop TCP/IP server"
+msgstr ""
 
 #: u_translation:rssun
 msgid "Sun"

@@ -1,7 +1,7 @@
 # translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-09-16 18:10+0200\n"
+"PO-Revision-Date: 2007-12-11 18:03+0100\n"
 "Last-Translator: Mattia Verga <mverga@freemail.it>\n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
@@ -591,10 +591,6 @@ msgstr "Verifica"
 msgid "Choose colours for object type"
 msgstr "Scegli il colore per tipo di oggetto"
 
-#: u_translation:rschoosewhicho
-msgid "Choose which objects to plot"
-msgstr "Scegli quali oggetti mostrare"
-
 #: u_translation:rscircle
 msgid "Circle"
 msgstr "Cerchio"
@@ -825,7 +821,7 @@ msgstr "Correlato"
 
 #: u_translation:rscouldnotload
 msgid "Could not load library "
-msgstr ""
+msgstr "Impossibile caricare la libreria"
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
@@ -2781,11 +2777,11 @@ msgstr "Per favore, indica i problemi a:"
 
 #: u_translation:rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr ""
+msgstr "Per favore, crea questa directory manualmente e riavvia il programma."
 
 #: u_translation:rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr ""
+msgstr "Per favore, prova a reinstallare il programma."
 
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
@@ -3065,7 +3061,7 @@ msgstr "Segnala un problema"
 
 #: u_translation:rsrequesttimeo
 msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
-msgstr ""
+msgstr "Risposta non ottenuta in tempo utile. Probabilmente hai richiesto un campo troppo largo che ha causato un tempo di elaborazione troppo lungo sul server remoto."
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"
@@ -3511,6 +3507,10 @@ msgstr "Oggetti del Sistema Solare"
 msgid "Some records where rejected, see file %sreject.txt for details"
 msgstr "Alcuni dati sono stati rifiutati, vedi il file %sreject.txt per i dettagli"
 
+#: u_translation:rssomethinggow
+msgid "Something go wrong during program initialization. We must now close"
+msgstr "Qualcosa di sbagliato è successo durante l'avvio. Il programma ora si chiuderà."
+
 #: u_translation:rssortbyra
 msgid "Sort by RA"
 msgstr "Elenca per A.R."
@@ -3602,6 +3602,10 @@ msgstr "Barra di stato"
 #: u_translation:rsstepunit
 msgid "Step unit"
 msgstr "Unità di passo"
+
+#: u_translation:rsstoptcpipser
+msgid "Stop TCP/IP server"
+msgstr "Ferma server TCP/IP"
 
 #: u_translation:rssun
 msgid "Sun"
@@ -3857,7 +3861,7 @@ msgstr "Ombra"
 
 #: u_translation:rsunabletocrea
 msgid "Unable to create directory "
-msgstr ""
+msgstr "Impossibile creare la cartella"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"

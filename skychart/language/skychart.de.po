@@ -591,10 +591,6 @@ msgstr "Überprüfen"
 msgid "Choose colours for object type"
 msgstr "Farbe für Objektklassen wählen"
 
-#: u_translation:rschoosewhicho
-msgid "Choose which objects to plot"
-msgstr "Wähle zu plottende Objekte"
-
 #: u_translation:rscircle
 msgid "Circle"
 msgstr "Aufsuchhilfen rund (Okular)"
@@ -3511,6 +3507,10 @@ msgstr "Objekt des Sonnensystem"
 msgid "Some records where rejected, see file %sreject.txt for details"
 msgstr ""
 
+#: u_translation:rssomethinggow
+msgid "Something go wrong during program initialization. We must now close"
+msgstr ""
+
 #: u_translation:rssortbyra
 msgid "Sort by RA"
 msgstr "RA-sortiert"
@@ -3602,6 +3602,10 @@ msgstr "Statusleiste"
 #: u_translation:rsstepunit
 msgid "Step unit"
 msgstr "Schritteinheit"
+
+#: u_translation:rsstoptcpipser
+msgid "Stop TCP/IP server"
+msgstr ""
 
 #: u_translation:rssun
 msgid "Sun"

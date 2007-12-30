@@ -591,10 +591,6 @@ msgstr ""
 msgid "Choose colours for object type"
 msgstr ""
 
-#: u_translation:rschoosewhicho
-msgid "Choose which objects to plot"
-msgstr ""
-
 #: u_translation:rscircle
 msgid "Circle"
 msgstr ""
@@ -3511,6 +3507,10 @@ msgstr ""
 msgid "Some records where rejected, see file %sreject.txt for details"
 msgstr ""
 
+#: u_translation:rssomethinggow
+msgid "Something go wrong during program initialization. We must now close"
+msgstr ""
+
 #: u_translation:rssortbyra
 msgid "Sort by RA"
 msgstr ""
@@ -3601,6 +3601,10 @@ msgstr ""
 
 #: u_translation:rsstepunit
 msgid "Step unit"
+msgstr ""
+
+#: u_translation:rsstoptcpipser
+msgid "Stop TCP/IP server"
 msgstr ""
 
 #: u_translation:rssun
