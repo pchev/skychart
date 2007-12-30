@@ -1,0 +1,89 @@
+object f_manualtelescope: Tf_manualtelescope
+  Left = 222
+  Height = 107
+  Top = 198
+  Width = 390
+  HorzScrollBar.Page = 389
+  VertScrollBar.Page = 106
+  BorderIcons = []
+  BorderStyle = bsNone
+  Caption = 'Manual Telescope'
+  Color = clBlack
+  FormStyle = fsStayOnTop
+  OnCreate = FormCreate
+  OnMouseDown = FormMouseDown
+  OnMouseMove = FormMouseMove
+  OnMouseUp = FormMouseUp
+  object Panel1: TPanel
+    Height = 107
+    Width = 390
+    Align = alClient
+    Color = clBlack
+    ParentColor = False
+    TabOrder = 0
+    OnDblClick = Panel1DblClick
+    OnMouseDown = FormMouseDown
+    OnMouseMove = FormMouseMove
+    OnMouseUp = FormMouseUp
+    object Label1: TLabel
+      Left = 16
+      Height = 13
+      Top = 8
+      Width = 98
+      Caption = 'Manual Telescope'
+      Color = clNone
+      Font.Color = clRed
+      Font.Height = -12
+      ParentColor = False
+      OnDblClick = Panel1DblClick
+      OnMouseDown = FormMouseDown
+      OnMouseMove = FormMouseMove
+      OnMouseUp = FormMouseUp
+    end
+    object Label2: TLabel
+      Left = 16
+      Height = 13
+      Top = 24
+      Width = 76
+      Caption = 'sep                   '
+      Color = clNone
+      Font.Color = clRed
+      Font.Height = -12
+      ParentColor = False
+      OnDblClick = Panel1DblClick
+      OnMouseDown = FormMouseDown
+      OnMouseMove = FormMouseMove
+      OnMouseUp = FormMouseUp
+    end
+    object Label4: TLabel
+      Left = 16
+      Height = 20
+      Top = 44
+      Width = 86
+      Caption = 'RA turns: '
+      Color = clNone
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      OnDblClick = Panel1DblClick
+      OnMouseDown = FormMouseDown
+      OnMouseMove = FormMouseMove
+      OnMouseUp = FormMouseUp
+    end
+    object Label5: TLabel
+      Left = 16
+      Height = 20
+      Top = 72
+      Width = 96
+      Caption = 'DEC turns: '
+      Color = clNone
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      OnDblClick = Panel1DblClick
+      OnMouseDown = FormMouseDown
+      OnMouseMove = FormMouseMove
+      OnMouseUp = FormMouseUp
+    end
+  end
+end

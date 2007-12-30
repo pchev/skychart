@@ -1,0 +1,195 @@
+object f_position: Tf_position
+  Left = 437
+  Height = 282
+  Top = 105
+  Width = 477
+  HorzScrollBar.Page = 476
+  VertScrollBar.Page = 281
+  ActiveControl = Button1
+  BorderStyle = bsToolWindow
+  Caption = 'Position'
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnShow = FormShow
+  object Button1: TButton
+    Left = 144
+    Height = 25
+    Top = 240
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 3
+  end
+  object Button2: TButton
+    Left = 248
+    Height = 25
+    Top = 240
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 4
+  end
+  object Panel1: TPanel
+    Left = 8
+    Height = 77
+    Top = 88
+    Width = 464
+    FullRepaint = False
+    TabOrder = 1
+    object coord1: TLabel
+      Left = 8
+      Height = 15
+      Top = 36
+      Width = 17
+      Caption = 'Az'
+      Color = clNone
+      ParentColor = False
+    end
+    object coord2: TLabel
+      Left = 248
+      Height = 15
+      Top = 36
+      Width = 17
+      Caption = 'Alt'
+      Color = clNone
+      ParentColor = False
+    end
+    object coord: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 37
+      Caption = 'coord'
+      Color = clNone
+      ParentColor = False
+    end
+    object long: TRaDec
+      Left = 64
+      Height = 23
+      Top = 32
+      Width = 176
+      kind = Az
+      Enabled = True
+      OnChange = CoordChange
+      TabOrder = 0
+    end
+    object lat: TRaDec
+      Left = 280
+      Height = 23
+      Top = 32
+      Width = 176
+      kind = Alt
+      Enabled = True
+      OnChange = CoordChange
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 77
+    Top = 3
+    Width = 464
+    FullRepaint = False
+    TabOrder = 0
+    object eq1: TLabel
+      Left = 8
+      Height = 15
+      Top = 36
+      Width = 20
+      Caption = 'RA'
+      Color = clNone
+      ParentColor = False
+    end
+    object eq2: TLabel
+      Left = 248
+      Height = 15
+      Top = 36
+      Width = 20
+      Caption = 'DE'
+      Color = clNone
+      ParentColor = False
+    end
+    object Equinox: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 51
+      Caption = 'Equinox'
+      Color = clNone
+      ParentColor = False
+    end
+    object ra: TRaDec
+      Left = 64
+      Height = 23
+      Top = 32
+      Width = 176
+      Enabled = True
+      OnChange = EqChange
+      TabOrder = 0
+    end
+    object de: TRaDec
+      Left = 280
+      Height = 23
+      Top = 32
+      Width = 176
+      kind = DE
+      Enabled = True
+      OnChange = EqChange
+      TabOrder = 1
+    end
+  end
+  object Panel3: TPanel
+    Left = 8
+    Height = 49
+    Top = 176
+    Width = 464
+    FullRepaint = False
+    TabOrder = 2
+    object Label3: TLabel
+      Left = 8
+      Height = 15
+      Top = 14
+      Width = 29
+      Caption = 'FOV'
+      Color = clNone
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 248
+      Height = 15
+      Top = 14
+      Width = 54
+      Caption = 'Rotation'
+      Color = clNone
+      ParentColor = False
+    end
+    object Fov: TRaDec
+      Left = 64
+      Height = 23
+      Top = 9
+      Width = 176
+      kind = Az
+      Enabled = True
+      TabOrder = 0
+    end
+    object rot: TFloatEdit
+      Left = 336
+      Height = 23
+      Hint = '-180..180'
+      Top = 9
+      Width = 73
+      BorderStyle = bsSingle
+      ParentColor = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      MinValue = -180
+      MaxValue = 180
+      Digits = 5
+    end
+  end
+end

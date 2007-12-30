@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="2">
+    <Name Value="lazvo"/>
+    <CompilerOptions>
+      <Version Value="5"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+      </SearchPaths>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Files Count="6">
+      <Item1>
+        <Filename Value="cu_vocatalog.pas"/>
+        <UnitName Value="cu_vocatalog"/>
+      </Item1>
+      <Item2>
+        <Filename Value="cu_vodata.pas"/>
+        <UnitName Value="cu_vodata"/>
+      </Item2>
+      <Item3>
+        <Filename Value="cu_vodetail.pas"/>
+        <UnitName Value="cu_vodetail"/>
+      </Item3>
+      <Item4>
+        <Filename Value="u_voconstant.pas"/>
+        <UnitName Value="u_voconstant"/>
+      </Item4>
+      <Item5>
+        <Filename Value="cu_vo.lrs"/>
+        <Type Value="LRS"/>
+      </Item5>
+      <Item6>
+        <Filename Value="cu_vo.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="cu_vo"/>
+      </Item6>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="4">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="XmlParser"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="synapse"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item4>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
