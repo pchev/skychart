@@ -8,6 +8,8 @@ object f_about: Tf_about
   ActiveControl = Button1
   BorderStyle = bsSizeToolWin
   Caption = 'About'
+  ClientHeight = 263
+  ClientWidth = 496
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -18,12 +20,16 @@ object f_about: Tf_about
     Width = 496
     Align = alClient
     BevelOuter = bvNone
+    ClientHeight = 263
+    ClientWidth = 496
     TabOrder = 0
     object Panel0: TPanel
       Height = 263
       Width = 80
       Align = alLeft
       BevelOuter = bvNone
+      ClientHeight = 263
+      ClientWidth = 80
       TabOrder = 0
       object Image2: TImage
         Height = 263
@@ -2342,6 +2348,8 @@ object f_about: Tf_about
       Height = 263
       Width = 416
       Align = alClient
+      ClientHeight = 263
+      ClientWidth = 416
       TabOrder = 1
       object Panel3: TPanel
         Left = 1
@@ -2349,9 +2357,11 @@ object f_about: Tf_about
         Top = 223
         Width = 414
         Align = alBottom
+        ClientHeight = 39
+        ClientWidth = 414
         TabOrder = 0
         object Button1: TButton
-          Left = 149
+          Left = 151
           Height = 25
           Top = 8
           Width = 75
@@ -2369,55 +2379,53 @@ object f_about: Tf_about
         Width = 414
         Align = alClient
         PageIndex = 0
+        TabOrder = 1
         object Page1: TPage
           Caption = 'About'
+          ClientWidth = 408
+          ClientHeight = 191
           object Label5: TLabel
             Left = 20
-            Height = 13
+            Height = 20
             Top = 30
             Width = 63
             Caption = 'Sky Charts'
-            Color = clNone
             Font.Style = [fsBold]
             ParentColor = False
           end
           object Label6: TLabel
             Left = 20
-            Height = 13
+            Height = 20
             Top = 6
             Width = 82
             Caption = 'Cartes du Ciel'
-            Color = clNone
             Font.Style = [fsBold]
             ParentColor = False
           end
           object Label7: TLabel
             Left = 20
-            Height = 56
-            Top = 110
-            Width = 328
+            Height = 68
+            Top = 99
+            Width = 380
             AutoSize = False
             Caption = 'Label7'
-            Color = clNone
             ParentColor = False
             WordWrap = True
           end
           object Label8: TLabel
             Left = 20
-            Height = 13
+            Height = 20
             Top = 78
             Width = 55
             Caption = 'Copyright'
-            Color = clNone
             ParentColor = False
           end
           object Label2: TLabel
             Left = 20
-            Height = 13
+            Height = 20
             Top = 54
-            Width = 44
+            Width = 43
             Caption = 'Version'
-            Color = clNone
             ParentColor = False
           end
           object Panel1: TPanel
@@ -2436,13 +2444,14 @@ object f_about: Tf_about
         end
         object Page2: TPage
           Caption = 'Authors'
+          ClientWidth = 408
+          ClientHeight = 191
           object Label3: TLabel
             Left = 11
-            Height = 13
+            Height = 20
             Top = 6
             Width = 172
             Caption = 'Please report any problem to:'
-            Color = clNone
             ParentColor = False
           end
           object Memo1: TMemo
@@ -2461,22 +2470,22 @@ object f_about: Tf_about
             TabOrder = 0
           end
           object Button2: TButton
-            Left = 11
-            Height = 20
-            Top = 24
-            Width = 231
-            BorderSpacing.InnerBorder = 4
+            Left = 12
+            Height = 25
+            Top = 21
+            Width = 250
             Caption = 'Button2'
-            Font.Color = clBlue
             OnClick = Button2Click
             TabOrder = 1
           end
         end
         object Page3: TPage
           Caption = 'License Agreement'
+          ClientWidth = 408
+          ClientHeight = 191
           object Memo2: TMemo
-            Height = 196
-            Width = 412
+            Height = 191
+            Width = 408
             Align = alClient
             Color = clBtnFace
             Lines.Strings = (

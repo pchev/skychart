@@ -887,7 +887,6 @@ resourcestring
   rsSimulation = 'Simulation';
   rsEvery = 'every ';
   rsNumberOfStep = 'Number of steps';
-  rsChooseWhichO = 'Choose which objects to plot';
   rsPlotThePosit = 'Plot the position of moving object.';
   rsStepUnit = 'Step unit';
   rsConnectionLi = 'Connection lines between each position';
