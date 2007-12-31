@@ -29,7 +29,7 @@ object f_config_time: Tf_config_time
       Width = 474
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -146,7 +146,7 @@ object f_config_time: Tf_config_time
           TabOrder = 3
           object Label137: TLabel
             Left = 8
-            Height = 14
+            Height = 20
             Top = 70
             Width = 29
             Caption = 'Time'
@@ -154,86 +154,75 @@ object f_config_time: Tf_config_time
           end
           object Label139: TLabel
             Left = 127
-            Height = 14
+            Height = 20
             Top = 52
-            Width = 12
+            Width = 10
             Caption = 'M'
             ParentColor = False
           end
           object Label141: TLabel
             Left = 195
-            Height = 14
+            Height = 20
             Top = 52
-            Width = 10
+            Width = 9
             Caption = 'S'
             ParentColor = False
           end
           object Label138: TLabel
             Left = 56
-            Height = 14
+            Height = 20
             Top = 52
-            Width = 10
+            Width = 9
             Caption = 'H'
             ParentColor = False
           end
           object Label143: TLabel
             Left = 56
-            Height = 14
+            Height = 20
             Top = 6
-            Width = 10
+            Width = 8
             Caption = 'Y'
             ParentColor = False
           end
           object Label144: TLabel
             Left = 127
-            Height = 14
+            Height = 20
             Top = 6
-            Width = 12
+            Width = 10
             Caption = 'M'
             ParentColor = False
           end
           object Label145: TLabel
             Left = 196
-            Height = 14
+            Height = 20
             Top = 6
-            Width = 10
+            Width = 9
             Caption = 'D'
             ParentColor = False
           end
           object Label140: TLabel
             Left = 8
-            Height = 14
+            Height = 20
             Top = 22
-            Width = 28
+            Width = 27
             Caption = 'Date'
             ParentColor = False
           end
           object Label1: TLabel
             Left = 8
-            Height = 14
+            Height = 20
             Top = 109
-            Width = 20
+            Width = 16
             Caption = 'JD:'
             ParentColor = False
           end
           object tzLabel: TLabel
             Left = 267
-            Height = 14
+            Height = 20
             Top = 70
-            Width = 43
+            Width = 40
             Caption = 'tzLabel'
             ParentColor = False
-          end
-          object BitBtn4: TBitBtn
-            Left = 267
-            Height = 25
-            Top = 96
-            Width = 137
-            BorderSpacing.InnerBorder = 2
-            Caption = 'Actual system time'
-            NumGlyphs = 0
-            OnClick = BitBtn4Click
-            TabOrder = 9
           end
           object ADBC: TRadioGroup
             Left = 267
@@ -324,7 +313,7 @@ object f_config_time: Tf_config_time
           object JDEdit: TFloatEdit
             Left = 56
             Height = 23
-            Top = 104
+            Top = 106
             Width = 131
             BorderStyle = bsSingle
             ParentColor = False
@@ -334,16 +323,6 @@ object f_config_time: Tf_config_time
             Digits = 6
             NumericType = ntFixed
           end
-          object BitBtn1: TBitBtn
-            Left = 196
-            Height = 25
-            Top = 104
-            Width = 32
-            BorderSpacing.InnerBorder = 2
-            NumGlyphs = 0
-            OnClick = BitBtn1Click
-            TabOrder = 8
-          end
           object Button5: TButton
             Left = 267
             Height = 25
@@ -352,7 +331,7 @@ object f_config_time: Tf_config_time
             BorderSpacing.InnerBorder = 4
             Caption = '0h'
             OnClick = Button5Click
-            TabOrder = 10
+            TabOrder = 8
           end
           object Button6: TButton
             Left = 343
@@ -362,6 +341,70 @@ object f_config_time: Tf_config_time
             BorderSpacing.InnerBorder = 4
             Caption = '0h UT'
             OnClick = Button6Click
+            TabOrder = 9
+          end
+          object BitBtn4: TButton
+            Left = 267
+            Height = 25
+            Top = 94
+            Width = 137
+            Caption = 'Actual system time'
+            OnClick = BitBtn4Click
+            TabOrder = 10
+          end
+          object BitBtn1: TBitBtn
+            Left = 197
+            Height = 30
+            Top = 102
+            Width = 32
+            Glyph.Data = {
+              76050000424D7605000000000000360000002800000015000000150000000100
+              18000000000040050000C21E0000C21E00000000000000000000C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000C0C0C0808080
+              0000000000000000000000000000000000000000000000000000000000000000
+              00000000000000000000000000000000000000000000C0C0C000C0C0C0808080
+              FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFF
+              FFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFF000000C0C0C000C0C0C0808080
+              FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFF
+              FFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFF000000C0C0C000C0C0C0808080
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C000C0C0C0808080
+              FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C00000FF0000
+              FFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFF000000C0C0C000C0C0C0808080
+              FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C00000FF0000
+              FFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFF000000C0C0C000C0C0C0808080
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C000C0C0C0808080
+              FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFF
+              FFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFF000000C0C0C000C0C0C0808080
+              FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFF
+              FFC0C0C0FFFFFFFFFFFFC0C0C0FFFFFFFFFFFF000000C0C0C000C0C0C0808080
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C000C0C0C0808080
+              0080800080800080800080800080800080800080800080800080800080800080
+              80008080008080008080008080008080008080000000C0C0C000C0C0C0808080
+              008080008080008080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFF008080008080008080000000C0C0C000C0C0C0808080
+              0080800080800080800080800080800080800080800080800080800080800080
+              80008080008080008080008080008080008080000000C0C0C000C0C0C0000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              00000000000000000000000000000000000000000000C0C0C000C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+              C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000
+            }
+            NumGlyphs = 0
+            OnClick = BitBtn1Click
             TabOrder = 11
           end
         end
@@ -388,7 +431,7 @@ object f_config_time: Tf_config_time
       object Page2: TPage
         Caption = 'Simulation'
         ClientWidth = 468
-        ClientHeight = 508
+        ClientHeight = 483
         object stepreset: TSpeedButton
           Left = 220
           Height = 25
@@ -502,6 +545,7 @@ object f_config_time: Tf_config_time
           ItemHeight = 16
           OnItemClick = SimObjItemClick
           TabOrder = 0
+          TopIndex = -1
           Data = {
             0C000000000000000000000000000000
           }

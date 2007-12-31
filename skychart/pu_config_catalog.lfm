@@ -1,11 +1,11 @@
 object f_config_catalog: Tf_config_catalog
-  Left = 1007
+  Left = 379
   Height = 577
-  Top = 229
+  Top = 242
   Width = 522
   HorzScrollBar.Page = 521
   VertScrollBar.Page = 576
-  ActiveControl = BSCbox
+  ActiveControl = SACbox
   Caption = 'Catalog'
   ClientHeight = 577
   ClientWidth = 522
@@ -28,7 +28,7 @@ object f_config_catalog: Tf_config_catalog
       Top = 1
       Width = 498
       Align = alClient
-      PageIndex = 2
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 1
       object Page1: TPage
@@ -44,28 +44,6 @@ object f_config_catalog: Tf_config_catalog
           Anchors = [akTop, akRight]
           Caption = 'Stars and Nebulae catalogs prepared with '
           ParentColor = False
-        end
-        object addcat: TBitBtn
-          Left = 144
-          Height = 25
-          Top = 376
-          Width = 75
-          BorderSpacing.InnerBorder = 2
-          Caption = 'Add'
-          NumGlyphs = 0
-          OnClick = AddCatClick
-          TabOrder = 2
-        end
-        object delcat: TBitBtn
-          Left = 248
-          Height = 25
-          Top = 376
-          Width = 75
-          BorderSpacing.InnerBorder = 2
-          Caption = 'Delete'
-          NumGlyphs = 0
-          OnClick = DelCatClick
-          TabOrder = 3
         end
         object StringGrid3: TStringGrid
           Height = 321
@@ -104,11 +82,29 @@ object f_config_catalog: Tf_config_catalog
           OnClick = CatgenClick
           TabOrder = 0
         end
+        object addcat: TButton
+          Left = 144
+          Height = 25
+          Top = 376
+          Width = 75
+          Caption = 'Add'
+          OnClick = AddCatClick
+          TabOrder = 2
+        end
+        object delcat: TButton
+          Left = 248
+          Height = 25
+          Top = 376
+          Width = 75
+          Caption = 'Delete'
+          OnClick = DelCatClick
+          TabOrder = 3
+        end
       end
       object Page2: TPage
         Caption = 'CdC Stars'
         ClientWidth = 492
-        ClientHeight = 458
+        ClientHeight = 433
         object Label2: TLabel
           Height = 20
           Top = 7

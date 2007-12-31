@@ -37,6 +37,8 @@ type
 
   Tf_config_catalog = class(TForm)
     bsc3: TDirectoryEdit;
+    addcat: TButton;
+    delcat: TButton;
     CatgenButton: TButton;
     Button1: TButton;
     Button2: TButton;
@@ -119,8 +121,6 @@ type
     Page3: TPage;
     Page4: TPage;
     Label37: TLabel;
-    addcat: TBitBtn;
-    delcat: TBitBtn;
     StringGrid3: TStringGrid;
     Label2: TLabel;
     Label65: TLabel;

@@ -42,6 +42,7 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
+    BitBtn4: TButton;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
     JDEdit: TFloatEdit;
@@ -72,7 +73,6 @@ type
     Label144: TLabel;
     Label145: TLabel;
     Label140: TLabel;
-    BitBtn4: TBitBtn;
     ADBC: TRadioGroup;
     d_year: TSpinEdit;
     d_month: TSpinEdit;
@@ -416,7 +416,7 @@ procedure Tf_config_time.FormCreate(Sender: TObject);
 begin
 LockChange:=true;
 JDCalendarDialog1:=TJDCalendarDialog.Create(nil);
-BitBtn1.Glyph.LoadFromLazarusResource('BtnDatePicker');
+//BitBtn1.Glyph.LoadFromLazarusResource('BtnDatePicker');
 SetLang;
 end;
 
