@@ -822,7 +822,7 @@ msgstr "Correlacionat"
 
 #: u_translation:rscouldnotload
 msgid "Could not load library "
-msgstr ""
+msgstr "No es pot carregar la llibreria"
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
@@ -1562,7 +1562,7 @@ msgstr "Cercle del buscador (ocular)"
 
 #: u_translation:rsfindermark
 msgid "Finder mark"
-msgstr "Marques"
+msgstr "Marques del buscador"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"
@@ -2778,11 +2778,11 @@ msgstr "Indiqueu qualsevol problema a:"
 
 #: u_translation:rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr ""
+msgstr "Si us plau, proveu de carregar aquest directori personalment i torneu a engegar el programa"
 
 #: u_translation:rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr ""
+msgstr "Si us plau, proveu de reinstal·lar el programa"
 
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
@@ -3394,7 +3394,7 @@ msgstr "Mostra les línies"
 
 #: u_translation:rsshowmark
 msgid "Show Mark"
-msgstr "Mostra les marques"
+msgstr "Mostra les marques del buscador"
 
 #: u_translation:rsshowmilkyway
 msgid "Show Milky Way"
@@ -3510,7 +3510,7 @@ msgstr "Alguns registres de gravació han estat rebutjats, vegeu l'arxiu %srejec
 
 #: u_translation:rssomethinggow
 msgid "Something go wrong during program initialization. We must now close"
-msgstr ""
+msgstr "Alguna cosa ha anat malament en iniciar el programa. Cal tancar-lo ara"
 
 #: u_translation:rssortbyra
 msgid "Sort by RA"
@@ -3606,7 +3606,7 @@ msgstr "Unitats"
 
 #: u_translation:rsstoptcpipser
 msgid "Stop TCP/IP server"
-msgstr ""
+msgstr "Atura el servidor TCP/IP"
 
 #: u_translation:rssun
 msgid "Sun"
@@ -3862,7 +3862,7 @@ msgstr "Ombra"
 
 #: u_translation:rsunabletocrea
 msgid "Unable to create directory "
-msgstr ""
+msgstr "No puc crear el directori"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
