@@ -1196,10 +1196,6 @@ msgstr "Barvy"
 msgid "Display image of cataloged objects"
 msgstr "Zobrazit obrázky objektů z katalogu"
 
-#: u_translation:rsdisplaymode
-msgid "Display mode"
-msgstr "Zobrazení"
-
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Zobrazit informace o mapě v menu"
@@ -1563,10 +1559,6 @@ msgstr "Hledat"
 #: u_translation:rsfindercircle
 msgid "Finder circle (Eyepiece)"
 msgstr "Zorná pole okulárů"
-
-#: u_translation:rsfindermark
-msgid "Finder mark"
-msgstr "Zorná pole okulárů/CCD"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"

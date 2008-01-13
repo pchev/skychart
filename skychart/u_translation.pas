@@ -107,11 +107,9 @@ resourcestring
   rsSaveConfigur2 = 'Save Configuration On Exit';
   rsDateTime = 'Date / Time';
   rsObservatory = 'Observatory';
-  rsDisplayMode = 'Display mode';
   rsLines = 'Lines';
   rsLabels = 'Labels';
   rsFonts = 'Fonts';
-  rsFinderMark = 'Finder mark';
   rsPictures = 'Pictures';
   rsShowHideDSSI = 'Show/Hide DSS image';
   rsCatalog = 'Catalog';

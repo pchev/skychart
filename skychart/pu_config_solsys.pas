@@ -35,6 +35,9 @@ type
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     CheckBoxPluto: TCheckBox;
     comt_y: TEdit;
     comt_m: TEdit;
@@ -44,6 +47,7 @@ type
     aststrtdate_y: TEdit;
     aststrtdate_m: TEdit;
     Label3: TLabel;
+    Panel1: TPanel;
     XplanetMsg: TLabel;
     TransparentPlanet: TCheckBox;
     comfile: TFileNameEdit;
@@ -201,6 +205,7 @@ type
     UseXplanet: TCheckBox;
     XplanetDir: TEdit;
     XplanetBtn: TBitBtn;
+    procedure Button2Click(Sender: TObject);
     procedure CheckBoxPlutoChange(Sender: TObject);
     procedure DownloadAsteroidClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -244,6 +249,7 @@ type
     { Private declarations }
     FShowDB: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
+    FApplyConfig: TNotifyEvent;
     LockChange: boolean;
     procedure ShowPlanet;
     procedure ShowComet;
@@ -272,6 +278,7 @@ type
     procedure LoadSampleData;
     property onShowDB: TNotifyEvent read FShowDB write FShowDB;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
@@ -279,6 +286,10 @@ implementation
 procedure Tf_config_solsys.SetLang;
 begin
 Caption:=rsSolarSystem;
+page1.Caption:=rsSolarSystem;
+page2.Caption:=rsPlanet;
+page3.Caption:=rsComet;
+page4.Caption:=rsAsteroid;
 Label12.caption:=rsSolarSystemS;
 Label131.caption:=rsDataFiles;
 PlaParalaxe.caption:=rsPosition;
@@ -393,6 +404,9 @@ comsymbol.Items[0]:=rsDisplayAsASy;
 comsymbol.Items[1]:=rsProportional;
 astsymbol.Items[0]:=rsDisplayAsASy;
 astsymbol.Items[1]:=rsProportional2;
+Button1.caption:=rsOK;
+Button2.caption:=rsApply;
+Button3.caption:=rsCancel;
 end;
 
 constructor Tf_config_solsys.Create(AOwner:TComponent);
@@ -552,6 +566,11 @@ procedure Tf_config_solsys.CheckBoxPlutoChange(Sender: TObject);
 begin
 if LockChange then exit;
   csc.ShowPluto:=CheckBoxPluto.checked;
+end;
+
+procedure Tf_config_solsys.Button2Click(Sender: TObject);
+begin
+   if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
 procedure Tf_config_solsys.FormClose(Sender: TObject;

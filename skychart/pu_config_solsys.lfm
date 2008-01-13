@@ -1,40 +1,39 @@
 object f_config_solsys: Tf_config_solsys
   Left = 606
-  Height = 524
+  Height = 536
   Top = 171
-  Width = 529
-  HorzScrollBar.Page = 528
-  VertScrollBar.Page = 523
+  Width = 515
+  HorzScrollBar.Page = 514
+  VertScrollBar.Page = 535
   ActiveControl = PlaParalaxe.RadioButton0
   Caption = 'Solar System'
-  ClientHeight = 524
-  ClientWidth = 529
+  ClientHeight = 536
+  ClientWidth = 515
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   object MainPanel: TPanel
-    Left = 8
-    Height = 480
-    Top = 6
-    Width = 500
-    ClientHeight = 480
-    ClientWidth = 500
+    Height = 486
+    Width = 515
+    Align = alClient
+    ClientHeight = 486
+    ClientWidth = 515
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
-      Height = 478
+      Height = 484
       Top = 1
-      Width = 498
+      Width = 513
       Align = alClient
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 492
-        ClientHeight = 472
+        ClientWidth = 507
+        ClientHeight = 478
         object Label12: TLabel
           Left = 7
           Height = 20
@@ -74,7 +73,7 @@ object f_config_solsys: Tf_config_solsys
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 67
+          ClientHeight = 65
           ClientWidth = 384
           Columns = 2
           ItemIndex = 0
@@ -108,8 +107,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 492
-        ClientHeight = 472
+        ClientWidth = 507
+        ClientHeight = 478
         object Label5: TLabel
           Height = 20
           Top = 17
@@ -136,9 +135,9 @@ object f_config_solsys: Tf_config_solsys
         end
         object XplanetMsg: TLabel
           Left = 46
-          Height = 24
+          Height = 27
           Top = 236
-          Width = 49
+          Width = 52
           ParentColor = False
         end
         object PlanetBox: TCheckBox
@@ -171,7 +170,7 @@ object f_config_solsys: Tf_config_solsys
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 129
+          ClientHeight = 131
           ClientWidth = 323
           Items.Strings = (
             'Star'
@@ -441,8 +440,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 492
-        ClientHeight = 447
+        ClientWidth = 507
+        ClientHeight = 478
         object ComPageControl: TPageControl
           Height = 429
           Top = 4
@@ -461,30 +460,30 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Chart Setting'
-              ClientHeight = 191
+              ClientHeight = 193
               ClientWidth = 435
               TabOrder = 0
               object Label154: TLabel
                 Left = 32
-                Height = 15
+                Height = 20
                 Top = 115
-                Width = 330
+                Width = 302
                 Caption = 'Do not take account of comet fainter than magnitude'
                 ParentColor = False
               end
               object Label216: TLabel
                 Left = 32
-                Height = 15
+                Height = 20
                 Top = 155
-                Width = 78
+                Width = 71
                 Caption = 'Show comet'
                 ParentColor = False
               end
               object Label231: TLabel
                 Left = 200
-                Height = 15
+                Height = 20
                 Top = 155
-                Width = 204
+                Width = 191
                 Caption = 'magnitude fainter than the stars.'
                 ParentColor = False
               end
@@ -504,9 +503,9 @@ object f_config_solsys: Tf_config_solsys
               end
               object showcom: TCheckBox
                 Left = 32
-                Height = 22
+                Height = 21
                 Top = 14
-                Width = 188
+                Width = 173
                 Caption = 'Show comets on the chart'
                 OnClick = showcomClick
                 TabOrder = 0
@@ -562,6 +561,7 @@ object f_config_solsys: Tf_config_solsys
               Caption = 'Database setting...'
               OnClick = comdbsetClick
               TabOrder = 1
+              Visible = False
             end
           end
           object comload: TTabSheet
@@ -571,17 +571,17 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 1
             object Label232: TLabel
               Left = 15
-              Height = 15
+              Height = 20
               Top = 123
-              Width = 69
+              Width = 63
               Caption = 'Messages:'
               ParentColor = False
             end
             object Label233: TLabel
               Left = 15
-              Height = 15
+              Height = 20
               Top = 87
-              Width = 117
+              Width = 110
               Caption = 'Or use a local file :'
               ParentColor = False
             end
@@ -596,9 +596,9 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object Label2: TLabel
                 Left = 5
-                Height = 15
+                Height = 20
                 Top = 14
-                Width = 205
+                Width = 189
                 Caption = 'Download latest orbital elements'
                 ParentColor = False
               end
@@ -958,8 +958,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 492
-        ClientHeight = 447
+        ClientWidth = 507
+        ClientHeight = 478
         object AstPageControl: TPageControl
           Height = 429
           Top = 4
@@ -978,30 +978,30 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Chart Setting'
-              ClientHeight = 213
+              ClientHeight = 215
               ClientWidth = 435
               TabOrder = 0
               object Label203: TLabel
                 Left = 29
-                Height = 15
+                Height = 20
                 Top = 123
-                Width = 343
+                Width = 314
                 Caption = 'Do not take account of asteroid fainter than magnitude'
                 ParentColor = False
               end
               object Label212: TLabel
                 Left = 32
-                Height = 15
+                Height = 20
                 Top = 171
-                Width = 91
+                Width = 83
                 Caption = 'Show asteroid'
                 ParentColor = False
               end
               object Label213: TLabel
                 Left = 221
-                Height = 15
+                Height = 20
                 Top = 171
-                Width = 204
+                Width = 191
                 Caption = 'magnitude fainter than the stars.'
                 ParentColor = False
               end
@@ -1021,9 +1021,9 @@ object f_config_solsys: Tf_config_solsys
               end
               object showast: TCheckBox
                 Left = 32
-                Height = 22
+                Height = 21
                 Top = 22
-                Width = 201
+                Width = 185
                 Caption = 'Show asteroids on the chart'
                 OnClick = showastClick
                 TabOrder = 0
@@ -1079,6 +1079,7 @@ object f_config_solsys: Tf_config_solsys
               Caption = 'Database setting...'
               OnClick = astdbsetClick
               TabOrder = 1
+              Visible = False
             end
           end
           object astload: TTabSheet
@@ -1232,9 +1233,9 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 2
             object Label210: TLabel
               Left = 8
-              Height = 15
+              Height = 20
               Top = 109
-              Width = 69
+              Width = 63
               Caption = 'Messages:'
               ParentColor = False
             end
@@ -1244,22 +1245,22 @@ object f_config_solsys: Tf_config_solsys
               Top = 7
               Width = 441
               Caption = 'Prepare data '
-              ClientHeight = 78
+              ClientHeight = 80
               ClientWidth = 435
               TabOrder = 0
               object Label7: TLabel
                 Left = 9
-                Height = 15
+                Height = 20
                 Top = 13
-                Width = 75
+                Width = 67
                 Caption = 'Start Month'
                 ParentColor = False
               end
               object Label207: TLabel
                 Left = 9
-                Height = 15
+                Height = 20
                 Top = 50
-                Width = 109
+                Width = 99
                 Caption = 'Number of Month'
                 ParentColor = False
               end
@@ -1664,6 +1665,50 @@ object f_config_solsys: Tf_config_solsys
           end
         end
       end
+    end
+  end
+  object Panel1: TPanel
+    Height = 50
+    Top = 486
+    Width = 515
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 515
+    TabOrder = 1
+    object Button1: TButton
+      Left = 217
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 313
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Apply'
+      OnClick = Button2Click
+      TabOrder = 1
+    end
+    object Button3: TButton
+      Left = 417
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
     end
   end
   object OpenDialog1: TOpenDialog

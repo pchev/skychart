@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 467
+  Left = 706
   Height = 580
-  Top = 120
+  Top = 109
   Width = 860
   HorzScrollBar.Page = 859
   VertScrollBar.Page = 560
@@ -2836,8 +2836,10 @@ object f_main: Tf_main
         Left = 1
         Hint = 'Configure the program'
         Top = 46
-        Action = OpenConfig
+        ImageIndex = 10
+        PopupMenu = PopupConfig
         Wrap = True
+        OnClick = ToolButtonConfigClick
       end
       object ToolButtonEQ: TToolButton
         Left = 1
@@ -3896,28 +3898,6 @@ object f_main: Tf_main
     object Setup1: TMenuItem
       Caption = '&Setup'
       GroupIndex = 2
-      object Configuration1: TMenuItem
-        Action = OpenConfig
-        GroupIndex = 2
-        OnClick = OpenConfigExecute
-      end
-      object SaveConfigurationNow1: TMenuItem
-        Action = SaveConfiguration
-        GroupIndex = 2
-        OnClick = SaveConfigurationExecute
-      end
-      object N8: TMenuItem
-        Caption = '-'
-        GroupIndex = 2
-      end
-      object SaveConfigurationOnExit1: TMenuItem
-        Action = SaveConfigOnExit
-        GroupIndex = 2
-        OnClick = SaveConfigOnExitExecute
-      end
-      object N11: TMenuItem
-        Caption = '-'
-      end
       object DateConfig1: TMenuItem
         Action = SetupTime
         OnClick = SetupTimeExecute
@@ -3926,37 +3906,47 @@ object f_main: Tf_main
         Action = SetupObservatory
         OnClick = SetupObservatoryExecute
       end
+      object MenuItem2: TMenuItem
+        Action = SetupChart
+        OnClick = SetupChartExecute
+      end
       object MenuItem9: TMenuItem
         Action = SetupCatalog
         OnClick = SetupCatalogExecute
+      end
+      object MenuItem3: TMenuItem
+        Action = SetupSolSys
+        OnClick = SetupSolSysExecute
       end
       object MenuItem1: TMenuItem
         Action = SetupDisplay
         OnClick = SetupDisplayExecute
       end
-      object MenuItem2: TMenuItem
-        Action = SetupColour
-        OnClick = SetupColourExecute
-      end
-      object MenuItem3: TMenuItem
-        Action = SetupLines
-        OnClick = SetupLinesExecute
-      end
-      object MenuItem4: TMenuItem
-        Action = SetupLabels
-        OnClick = SetupLabelsExecute
-      end
-      object MenuItem5: TMenuItem
-        Action = SetupFonts
-        OnClick = SetupFontsExecute
-      end
-      object MenuItem6: TMenuItem
-        Action = SetupFinder
-        OnClick = SetupFinderExecute
-      end
       object MenuItem7: TMenuItem
         Action = SetupPictures
         OnClick = SetupPicturesExecute
+      end
+      object MenuItem4: TMenuItem
+        Action = SetupSystem
+        OnClick = SetupSystemExecute
+      end
+      object MenuItem5: TMenuItem
+        Action = SetupInternet
+        OnClick = SetupInternetExecute
+      end
+      object N8: TMenuItem
+        Caption = '-'
+        GroupIndex = 2
+      end
+      object SaveConfigurationNow1: TMenuItem
+        Action = SaveConfiguration
+        GroupIndex = 2
+        OnClick = SaveConfigurationExecute
+      end
+      object SaveConfigurationOnExit1: TMenuItem
+        Action = SaveConfigOnExit
+        GroupIndex = 2
+        OnClick = SaveConfigOnExitExecute
       end
     end
     object View1: TMenuItem
@@ -4335,6 +4325,7 @@ object f_main: Tf_main
     end
   end
   object OpenDialog: TOpenDialog
+    Title = 'Open existing file'
     FilterIndex = 0
     Options = [ofEnableSizing]
     left = 184
@@ -4397,13 +4388,6 @@ object f_main: Tf_main
       DisableIfNoHandler = True
       Hint = 'About|Displays program information, version number, and copyright'
       OnExecute = HelpAbout1Execute
-    end
-    object OpenConfig: TAction
-      Category = 'Setup'
-      DisableIfNoHandler = True
-      Hint = 'Configure the program'
-      ImageIndex = 10
-      OnExecute = OpenConfigExecute
     end
     object HelpContents1: THelpContents
       Category = 'Help'
@@ -4470,12 +4454,14 @@ object f_main: Tf_main
     end
     object SaveConfiguration: TAction
       Category = 'Setup'
+      Caption = 'Save Configuration'
       DisableIfNoHandler = True
       Hint = 'The the default configuration'
       OnExecute = SaveConfigurationExecute
     end
     object SaveConfigOnExit: TAction
       Category = 'Setup'
+      Caption = 'Save Config On Exit'
       Checked = True
       DisableIfNoHandler = True
       Hint = 'Save the configuration when the program close'
@@ -4919,6 +4905,7 @@ object f_main: Tf_main
     end
     object SetupTime: TAction
       Category = 'Setup'
+      Caption = 'Set date and time'
       DisableIfNoHandler = True
       Hint = 'Set date and time'
       ImageIndex = 45
@@ -4926,6 +4913,7 @@ object f_main: Tf_main
     end
     object SetupObservatory: TAction
       Category = 'Setup'
+      Caption = 'Set observatory location'
       DisableIfNoHandler = True
       Hint = 'Set observatory location'
       ImageIndex = 85
@@ -4933,37 +4921,14 @@ object f_main: Tf_main
     end
     object SetupDisplay: TAction
       Category = 'Setup'
+      Caption = 'Setup Display'
       DisableIfNoHandler = True
+      Hint = 'Setup Display'
       OnExecute = SetupDisplayExecute
-    end
-    object SetupColour: TAction
-      Category = 'Setup'
-      DisableIfNoHandler = True
-      OnExecute = SetupColourExecute
-    end
-    object SetupLines: TAction
-      Category = 'Setup'
-      DisableIfNoHandler = True
-      OnExecute = SetupLinesExecute
-    end
-    object SetupLabels: TAction
-      Category = 'Setup'
-      DisableIfNoHandler = True
-      OnExecute = SetupLabelsExecute
-    end
-    object SetupFonts: TAction
-      Category = 'Setup'
-      DisableIfNoHandler = True
-      OnExecute = SetupFontsExecute
-    end
-    object SetupFinder: TAction
-      Category = 'Setup'
-      DisableIfNoHandler = True
-      ImageIndex = 77
-      OnExecute = SetupFinderExecute
     end
     object SetupPictures: TAction
       Category = 'Setup'
+      Caption = 'Setup Pictures'
       DisableIfNoHandler = True
       Hint = 'Change pictures display'
       ImageIndex = 77
@@ -4971,7 +4936,9 @@ object f_main: Tf_main
     end
     object SetupCatalog: TAction
       Category = 'Setup'
+      Caption = 'Setup Catalog'
       DisableIfNoHandler = True
+      Hint = 'Setup Catalog'
       OnExecute = SetupCatalogExecute
     end
     object BlinkImage: TAction
@@ -4981,8 +4948,33 @@ object f_main: Tf_main
       ImageIndex = 86
       OnExecute = BlinkImageExecute
     end
+    object SetupChart: TAction
+      Category = 'Setup'
+      Caption = 'SetupChart'
+      DisableIfNoHandler = True
+      OnExecute = SetupChartExecute
+    end
+    object SetupSolSys: TAction
+      Category = 'Setup'
+      Caption = 'SetupSolSys'
+      DisableIfNoHandler = True
+      OnExecute = SetupSolSysExecute
+    end
+    object SetupSystem: TAction
+      Category = 'Setup'
+      Caption = 'SetupSystem'
+      DisableIfNoHandler = True
+      OnExecute = SetupSystemExecute
+    end
+    object SetupInternet: TAction
+      Category = 'Setup'
+      Caption = 'SetupInternet'
+      DisableIfNoHandler = True
+      OnExecute = SetupInternetExecute
+    end
   end
   object SaveDialog: TSaveDialog
+    Title = 'Save file as'
     FilterIndex = 0
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     left = 144
@@ -7829,6 +7821,57 @@ object f_main: Tf_main
     object ResetAllLabels1: TMenuItem
       Caption = 'Reset All Labels'
       OnClick = ResetAllLabels1Click
+    end
+  end
+  object PopupConfig: TPopupMenu
+    left = 96
+    top = 200
+    object MenuItem12: TMenuItem
+      Action = SetupTime
+      OnClick = SetupTimeExecute
+    end
+    object MenuItem13: TMenuItem
+      Action = SetupObservatory
+      OnClick = SetupObservatoryExecute
+    end
+    object MenuItem14: TMenuItem
+      Action = SetupChart
+      OnClick = SetupChartExecute
+    end
+    object MenuItem15: TMenuItem
+      Action = SetupCatalog
+      OnClick = SetupCatalogExecute
+    end
+    object MenuItem16: TMenuItem
+      Action = SetupSolSys
+      OnClick = SetupSolSysExecute
+    end
+    object MenuItem17: TMenuItem
+      Action = SetupDisplay
+      OnClick = SetupDisplayExecute
+    end
+    object MenuItem18: TMenuItem
+      Action = SetupPictures
+      OnClick = SetupPicturesExecute
+    end
+    object MenuItem19: TMenuItem
+      Action = SetupSystem
+      OnClick = SetupSystemExecute
+    end
+    object MenuItem20: TMenuItem
+      Action = SetupInternet
+      OnClick = SetupInternetExecute
+    end
+    object MenuItem21: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem22: TMenuItem
+      Action = SaveConfiguration
+      OnClick = SaveConfigurationExecute
+    end
+    object MenuItem23: TMenuItem
+      Action = SaveConfigOnExit
+      OnClick = SaveConfigOnExitExecute
     end
   end
 end

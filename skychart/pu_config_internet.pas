@@ -36,6 +36,9 @@ type
 
   Tf_config_internet = class(TForm)
     astcdc: TButton;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     DefaultDSS: TButton;
     comhttp: TButton;
     comftp: TButton;
@@ -52,6 +55,7 @@ type
     CometUrlList: TMemo;
     AsteroidUrlList: TMemo;
     Page3: TPage;
+    Panel1: TPanel;
     proxyhost: TEdit;
     proxyport: TEdit;
     proxyuser: TEdit;
@@ -69,6 +73,7 @@ type
     Notebook1: TNotebook;
     Page2: TPage;
     DSSpictures: TStringGrid;
+    procedure Button2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure anonpassChange(Sender: TObject);
@@ -93,6 +98,7 @@ type
     procedure proxyuserChange(Sender: TObject);
   private
     { Private declarations }
+    FApplyConfig: TNotifyEvent;
     LockChange: boolean;
     procedure ShowProxy;
     procedure ShowOrbitalElements;
@@ -105,6 +111,7 @@ type
     cdss : Tconf_dss;
     procedure SetLang;
     constructor Create(AOwner:TComponent); override;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
@@ -135,6 +142,9 @@ astcdc.caption:=rsFirst5000;
 Page3.caption:=rsOnlineDSS;
 Label8.caption:=rsOnlinePictur;
 DefaultDSS.caption:=rsDefault;
+Button1.caption:=rsOK;
+Button2.caption:=rsApply;
+Button3.caption:=rsCancel;
 end;
 
 constructor Tf_config_internet.Create(AOwner:TComponent);
@@ -233,6 +243,11 @@ procedure Tf_config_internet.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
 LockChange:=true;
+end;
+
+procedure Tf_config_internet.Button2Click(Sender: TObject);
+begin
+   if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
 procedure Tf_config_internet.FormDestroy(Sender: TObject);

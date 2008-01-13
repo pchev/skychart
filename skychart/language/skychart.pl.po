@@ -1199,10 +1199,6 @@ msgstr "Wyświetlony kolor"
 msgid "Display image of cataloged objects"
 msgstr "Katalog obrazów obiektów"
 
-#: u_translation:rsdisplaymode
-msgid "Display mode"
-msgstr "Tryb wyświetlania"
-
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Wyświetlanie informacji o mapie w pasku menu."
@@ -1566,10 +1562,6 @@ msgstr "Znajdź"
 #: u_translation:rsfindercircle
 msgid "Finder circle (Eyepiece)"
 msgstr "Koło szukacza (okular)"
-
-#: u_translation:rsfindermark
-msgid "Finder mark"
-msgstr "Marker szukacza"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"

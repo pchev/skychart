@@ -34,7 +34,8 @@ uses
   {$endif}
   u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
-  pu_config_catalog, u_constant, u_util, blcksock, synsock, dynlibs,
+  pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
+  u_constant, u_util, blcksock, synsock, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
@@ -81,6 +82,28 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
+    MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
+    MenuItem16: TMenuItem;
+    MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
+    MenuItem19: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem20: TMenuItem;
+    MenuItem21: TMenuItem;
+    MenuItem22: TMenuItem;
+    MenuItem23: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    PopupConfig: TPopupMenu;
+    SetupInternet: TAction;
+    SetupSystem: TAction;
+    SetupSolSys: TAction;
+    SetupChart: TAction;
     BlinkImage: TAction;
     P1L1: TLabel;
     P0L1: TLabel;
@@ -102,19 +125,8 @@ type
     MenuItem9: TMenuItem;
     SetupPictures: TAction;
     MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
-    MenuItem6: TMenuItem;
     SetupDisplay: TAction;
-    SetupColour: TAction;
-    SetupLines: TAction;
-    SetupLabels: TAction;
-    SetupFonts: TAction;
-    SetupFinder: TAction;
     ObsConfig1: TMenuItem;
-    N11: TMenuItem;
     SetupObservatory: TAction;
     DateConfig1: TMenuItem;
     SetupTime: TAction;
@@ -161,8 +173,6 @@ type
     Print1: TAction;
     Print2: TMenuItem;
     starshape: TImage;
-    OpenConfig: TAction;
-    Configuration1: TMenuItem;
     PrintSetup2: TMenuItem;
     N2: TMenuItem;
     Setup1: TMenuItem;
@@ -432,19 +442,18 @@ type
     procedure HomePage1Click(Sender: TObject);
     procedure Maillist1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
-    procedure OpenConfigExecute(Sender: TObject);
     procedure ReleaseNotes1Click(Sender: TObject);
     procedure ResetAllLabels1Click(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
-    procedure SetupColourExecute(Sender: TObject);
+    procedure SetupChartExecute(Sender: TObject);
     procedure SetupDisplayExecute(Sender: TObject);
-    procedure SetupFinderExecute(Sender: TObject);
-    procedure SetupFontsExecute(Sender: TObject);
-    procedure SetupLabelsExecute(Sender: TObject);
-    procedure SetupLinesExecute(Sender: TObject);
+    procedure SetupInternetExecute(Sender: TObject);
     procedure SetupObservatoryExecute(Sender: TObject);
     procedure SetupPicturesExecute(Sender: TObject);
+    procedure SetupSolSysExecute(Sender: TObject);
+    procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
+    procedure ToolButtonConfigClick(Sender: TObject);
     procedure ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
@@ -550,6 +559,10 @@ type
     { Private declarations }
     ConfigTime: Tf_config_time;
     ConfigObservatory: Tf_config_observatory;
+    ConfigChart: Tf_config_chart;
+    ConfigSolsys: Tf_config_solsys;
+    ConfigSystem: Tf_config_system;
+    ConfigInternet: Tf_config_internet;
     ConfigDisplay: Tf_config_display;
     ConfigPictures: Tf_config_pictures;
     ConfigCatalog: Tf_config_catalog;
@@ -570,7 +583,6 @@ type
     procedure GetLanguage;
     Procedure GetAppDir;
     procedure ViewTopPanel;
-    procedure ApplyConfig(Sender: TObject);
     procedure ApplyConfigTime(Sender: TObject);
     procedure ApplyConfigObservatory(Sender: TObject);
     procedure ApplyConfigDisplay(Sender: TObject);
@@ -583,6 +595,14 @@ type
     procedure SetupDisplayPage(pagegroup:integer);
     procedure SetupPicturesPage(page:integer);
     procedure SetupCatalogPage(page:integer);
+    procedure SetupChartPage(page:integer);
+    procedure ApplyConfigChart(Sender: TObject);
+    procedure SetupSolsysPage(page:integer);
+    procedure ApplyConfigSolsys(Sender: TObject);
+    procedure SetupSystemPage(page:integer);
+    procedure ApplyConfigSystem(Sender: TObject);
+    procedure SetupInternetPage(page:integer);
+    procedure ApplyConfigInternet(Sender: TObject);
     procedure FirstSetup;
     procedure ShowReleaseNotes(shownext:boolean);
   {$ifdef win32}
@@ -667,7 +687,7 @@ uses
 {$ifdef LCLgtk}
      gtkproc,
 {$endif}
-     pu_detail, pu_about, pu_config, pu_info, pu_getdss, u_projection,
+     pu_detail, pu_about, pu_info, pu_getdss, u_projection,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_splash, pu_manualtelescope, pu_print;
 
@@ -2015,61 +2035,19 @@ if MultiDoc1.ActiveObject is Tf_chart then
 end;
 end;
 
-procedure Tf_main.OpenConfigExecute(Sender: TObject);
-begin
-if f_config=nil then begin
-   f_config:=Tf_config.Create(application);
-   f_config.onApplyConfig:=ApplyConfig;
-   f_config.onDBChange:=ConfigDBChange;
-   f_config.onSaveAndRestart:=SaveAndRestart;
-   f_config.onPrepareAsteroid:=PrepareAsteroid;
-   f_config.Fits:=fits;
-   f_config.catalog:=catalog;
-   f_config.db:=cdcdb;
-end;
-try
- f_config.ccat:=catalog.cfgcat;
- f_config.cshr:=catalog.cfgshr;
- f_config.cplot:=def_cfgplot;
- f_config.csc:=def_cfgsc;
- if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-     f_config.csc:=sc.cfgsc;
-     f_config.cplot:=sc.plot.cfgplot;
- end;
- cfgm.prgdir:=appdir;
- cfgm.persdir:=privatedir;
- f_config.cmain:=cfgm;
- f_config.cdss:=f_getdss.cfgdss;
- f_config.applyall.checked:=cfgm.updall;
- formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
- f_config.TreeView1.enabled:=true;
- f_config.previous.enabled:=true;
- f_config.next.enabled:=true;
- f_config.showmodal;
- if f_config.ModalResult=mrOK then begin
-   activateconfig(f_config.cmain,f_config.csc,f_config.ccat,f_config.cshr,f_config.cplot,f_config.cdss,f_config.Applyall.Checked);
- end;
-
-finally
-screen.cursor:=crDefault;
-f_config.Free;
-f_config:=nil;
-end;
-end;
-
 procedure Tf_main.ReleaseNotes1Click(Sender: TObject);
 begin
   ShowReleaseNotes(false);
 end;
 
-procedure Tf_main.ApplyConfig(Sender: TObject);
-begin
- activateconfig(f_config.cmain,f_config.csc,f_config.ccat,f_config.cshr,f_config.cplot,f_config.cdss,f_config.Applyall.Checked);
-end;
-
 procedure Tf_main.SetupTimeExecute(Sender: TObject);
 begin
 SetupTimePage(0);
+end;
+
+procedure Tf_main.ToolButtonConfigClick(Sender: TObject);
+begin
+  ToolButtonConfig.PopupMenu.PopUp(mouse.cursorpos.x,mouse.cursorpos.y);
 end;
 
 procedure Tf_main.SetupTimePage(page:integer);
@@ -2111,6 +2089,168 @@ end;
 procedure Tf_main.SetupPicturesExecute(Sender: TObject);
 begin
 SetupPicturesPage(1);
+end;
+
+procedure Tf_main.SetupChartExecute(Sender: TObject);
+begin
+ SetupChartPage(0);
+end;
+
+procedure Tf_main.SetupChartPage(page:integer);
+begin
+if ConfigChart=nil then begin
+   ConfigChart:=Tf_config_chart.Create(self);
+   {$ifdef win32}ScaleForm(ConfigChart,Screen.PixelsPerInch/96);{$endif}
+   ConfigChart.Notebook1.ShowTabs:=true;
+   ConfigChart.Notebook1.PageIndex:=0;
+   ConfigChart.onApplyConfig:=ApplyConfigChart;
+end;
+{$ifdef win32}SetFormNightVision(ConfigChart,nightvision);{$endif}
+ConfigChart.ccat.Assign(catalog.cfgcat);
+ConfigChart.cshr.Assign(catalog.cfgshr);
+ConfigChart.cplot.Assign(def_cfgplot);
+ConfigChart.csc.Assign(def_cfgsc);
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigChart.csc.Assign(sc.cfgsc);
+   ConfigChart.cplot.Assign(sc.plot.cfgplot);
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigChart.cmain.Assign(cfgm);
+formpos(ConfigChart,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigChart.Notebook1.PageIndex:=page;
+ConfigChart.showmodal;
+if ConfigChart.ModalResult=mrOK then begin
+ activateconfig(ConfigChart.cmain,ConfigChart.csc,ConfigChart.ccat,ConfigChart.cshr,ConfigChart.cplot,nil,false);
+end;
+ConfigChart.Free;
+ConfigChart:=nil;
+end;
+
+procedure Tf_main.ApplyConfigChart(Sender: TObject);
+begin
+ activateconfig(ConfigChart.cmain,ConfigChart.csc,ConfigChart.ccat,ConfigChart.cshr,ConfigChart.cplot,nil,false);
+end;
+
+procedure Tf_main.SetupSolSysExecute(Sender: TObject);
+begin
+ SetupSolsysPage(0);
+end;
+
+procedure Tf_main.SetupSolsysPage(page:integer);
+begin
+if ConfigSolsys=nil then begin
+   ConfigSolsys:=Tf_config_solsys.Create(self);
+   {$ifdef win32}ScaleForm(ConfigSolsys,Screen.PixelsPerInch/96);{$endif}
+   ConfigSolsys.Notebook1.ShowTabs:=true;
+   ConfigSolsys.Notebook1.PageIndex:=0;
+   ConfigSolsys.onApplyConfig:=ApplyConfigSolsys;
+   ConfigSolsys.onPrepareAsteroid:=PrepareAsteroid;
+end;
+{$ifdef win32}SetFormNightVision(ConfigSolsys,nightvision);{$endif}
+ConfigSolsys.cdb:=cdcdb;
+ConfigSolsys.ccat.Assign(catalog.cfgcat);
+ConfigSolsys.cshr.Assign(catalog.cfgshr);
+ConfigSolsys.cplot.Assign(def_cfgplot);
+ConfigSolsys.csc.Assign(def_cfgsc);
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigSolsys.csc.Assign(sc.cfgsc);
+   ConfigSolsys.cplot.Assign(sc.plot.cfgplot);
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigSolsys.cmain.Assign(cfgm);
+formpos(ConfigSolsys,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigSolsys.Notebook1.PageIndex:=page;
+ConfigSolsys.showmodal;
+if ConfigSolsys.ModalResult=mrOK then begin
+ activateconfig(ConfigSolsys.cmain,ConfigSolsys.csc,ConfigSolsys.ccat,ConfigSolsys.cshr,ConfigSolsys.cplot,nil,false);
+end;
+ConfigSolsys.Free;
+ConfigSolsys:=nil;
+end;
+
+procedure Tf_main.ApplyConfigSolsys(Sender: TObject);
+begin
+ activateconfig(ConfigSolsys.cmain,ConfigSolsys.csc,ConfigSolsys.ccat,ConfigSolsys.cshr,ConfigSolsys.cplot,nil,false);
+end;
+
+procedure Tf_main.SetupSystemExecute(Sender: TObject);
+begin
+ SetupSystemPage(0);
+end;
+
+procedure Tf_main.SetupSystemPage(page:integer);
+begin
+if ConfigSystem=nil then begin
+   ConfigSystem:=Tf_config_system.Create(self);
+   {$ifdef win32}ScaleForm(ConfigSystem,Screen.PixelsPerInch/96);{$endif}
+   ConfigSystem.Notebook1.ShowTabs:=true;
+   ConfigSystem.Notebook1.PageIndex:=0;
+   ConfigSystem.onApplyConfig:=ApplyConfigSystem;
+   ConfigSystem.onDBChange:=ConfigDBChange;
+   ConfigSystem.onSaveAndRestart:=SaveAndRestart;
+end;
+{$ifdef win32}SetFormNightVision(ConfigSystem,nightvision);{$endif}
+ConfigSystem.cdb:=cdcdb;
+ConfigSystem.ccat.Assign(catalog.cfgcat);
+ConfigSystem.cshr.Assign(catalog.cfgshr);
+ConfigSystem.cplot.Assign(def_cfgplot);
+ConfigSystem.csc.Assign(def_cfgsc);
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigSystem.csc.Assign(sc.cfgsc);
+   ConfigSystem.cplot.Assign(sc.plot.cfgplot);
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigSystem.cmain.Assign(cfgm);
+formpos(ConfigSystem,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigSystem.Notebook1.PageIndex:=page;
+ConfigSystem.showmodal;
+if ConfigSystem.ModalResult=mrOK then begin
+ ConfigSystem.ActivateDBchange;
+ activateconfig(ConfigSystem.cmain,ConfigSystem.csc,ConfigSystem.ccat,ConfigSystem.cshr,ConfigSystem.cplot,nil,false);
+end;
+ConfigSystem.Free;
+ConfigSystem:=nil;
+end;
+
+procedure Tf_main.ApplyConfigSystem(Sender: TObject);
+begin
+ activateconfig(ConfigSystem.cmain,ConfigSystem.csc,ConfigSystem.ccat,ConfigSystem.cshr,ConfigSystem.cplot,nil,false);
+end;
+
+procedure Tf_main.SetupInternetExecute(Sender: TObject);
+begin
+ SetupInternetPage(0);
+end;
+
+procedure Tf_main.SetupInternetPage(page:integer);
+begin
+if ConfigInternet=nil then begin
+   ConfigInternet:=Tf_config_internet.Create(self);
+   {$ifdef win32}ScaleForm(ConfigInternet,Screen.PixelsPerInch/96);{$endif}
+   ConfigInternet.Notebook1.ShowTabs:=true;
+   ConfigInternet.Notebook1.PageIndex:=0;
+   ConfigInternet.onApplyConfig:=ApplyConfigInternet;
+end;
+{$ifdef win32}SetFormNightVision(ConfigInternet,nightvision);{$endif}
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigInternet.cmain.Assign(cfgm);
+formpos(ConfigInternet,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigInternet.Notebook1.PageIndex:=page;
+ConfigInternet.showmodal;
+if ConfigInternet.ModalResult=mrOK then begin
+ activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,nil,false);
+end;
+ConfigInternet.Free;
+ConfigInternet:=nil;
+end;
+
+procedure Tf_main.ApplyConfigInternet(Sender: TObject);
+begin
+ activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,nil,false);
 end;
 
 procedure Tf_main.SetupPicturesPage(page:integer);
@@ -2246,34 +2386,9 @@ begin
  activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
 end;
 
-procedure Tf_main.SetupColourExecute(Sender: TObject);
-begin
-SetupDisplayPage(1);
-end;
-
 procedure Tf_main.SetupDisplayExecute(Sender: TObject);
 begin
 SetupDisplayPage(0);
-end;
-
-procedure Tf_main.SetupFinderExecute(Sender: TObject);
-begin
-SetupDisplayPage(5);
-end;
-
-procedure Tf_main.SetupFontsExecute(Sender: TObject);
-begin
-SetupDisplayPage(4);
-end;
-
-procedure Tf_main.SetupLabelsExecute(Sender: TObject);
-begin
-SetupDisplayPage(3);
-end;
-
-procedure Tf_main.SetupLinesExecute(Sender: TObject);
-begin
-SetupDisplayPage(2);
 end;
 
 procedure Tf_main.SetupDisplayPage(pagegroup:integer);
@@ -2298,81 +2413,6 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigDisplay.cmain.Assign(cfgm);
 formpos(ConfigDisplay,mouse.cursorpos.x,mouse.cursorpos.y);
-case pagegroup of
- 0 : begin  //display mode
-     ConfigDisplay.Notebook1.Page[0].Visible:=true;
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.PageIndex:=0;
-     end;
- 1 : begin  //colours
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Page[0].Visible:=true;
-     ConfigDisplay.Notebook1.Page[1].Visible:=true;
-     ConfigDisplay.Notebook1.Page[2].Visible:=true;
-     ConfigDisplay.Notebook1.Pages.Delete(3);
-     ConfigDisplay.Notebook1.Pages.Delete(3);
-     ConfigDisplay.Notebook1.Pages.Delete(3);
-     ConfigDisplay.Notebook1.Pages.Delete(3);
-     ConfigDisplay.Notebook1.Pages.Delete(3);
-     ConfigDisplay.Notebook1.PageIndex:=0;
-     end;
- 2 : begin  //lines
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Page[0].Visible:=true;
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.PageIndex:=0;
-     end;
- 3 : begin  //labels
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Page[0].Visible:=true;
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.PageIndex:=0;
-     end;
- 4 : begin  //fonts
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Page[0].Visible:=true;
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.Pages.Delete(1);
-     ConfigDisplay.Notebook1.PageIndex:=0;
-     end;
- 5 : begin  //finder
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Pages.Delete(0);
-     ConfigDisplay.Notebook1.Page[0].Visible:=true;
-     ConfigDisplay.Notebook1.Page[1].Visible:=true;
-     ConfigDisplay.Notebook1.PageIndex:=0;
-     end;
-end;
-
 {$ifdef win32}
 // Problem with initialization
 ConfigDisplay.show;
@@ -2390,7 +2430,6 @@ cfgm.persdir:=privatedir;
 ConfigDisplay.cmain.Assign(cfgm);
 ///////////////////////////////
 {$endif}
-
 ConfigDisplay.showmodal;
 if ConfigDisplay.ModalResult=mrOK then begin
  activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
@@ -2411,25 +2450,29 @@ end;
 
 procedure Tf_main.ConfigDBChange(Sender: TObject);
 begin
-cfgm.dbhost:=f_config.cmain.dbhost;
-cfgm.db:=f_config.cmain.db;
-cfgm.dbuser:=f_config.cmain.dbuser;
-cfgm.dbpass:=f_config.cmain.dbpass;
-cfgm.dbport:=f_config.cmain.dbport;
-ConnectDB;
+if ConfigSystem<>nil then begin
+  cfgm.dbhost:=ConfigSystem.cmain.dbhost;
+  cfgm.db:=ConfigSystem.cmain.db;
+  cfgm.dbuser:=ConfigSystem.cmain.dbuser;
+  cfgm.dbpass:=ConfigSystem.cmain.dbpass;
+  cfgm.dbport:=ConfigSystem.cmain.dbport;
+  ConnectDB;
+end;
 end;
 
 procedure Tf_main.SaveAndRestart(Sender: TObject);
 begin
-cfgm.Assign(f_config.cmain);
-if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
-if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
-def_cfgsc.Assign(f_config.csc);
-catalog.cfgcat.Assign(f_config.ccat);
-catalog.cfgshr.Assign(f_config.cshr);
-SavePrivateConfig(configfile);
-NeedRestart:=true;
-Close;
+if ConfigSystem<>nil then begin
+  cfgm.Assign(ConfigSystem.cmain);
+  if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
+  if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
+  def_cfgsc.Assign(ConfigSystem.csc);
+  catalog.cfgcat.Assign(ConfigSystem.ccat);
+  catalog.cfgshr.Assign(ConfigSystem.cshr);
+  SavePrivateConfig(configfile);
+  NeedRestart:=true;
+  Close;
+end;
 end;
 
 procedure Tf_main.activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
@@ -4232,7 +4275,10 @@ for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      Tf_chart(MultiDoc1.Childs[i].DockedObject).SetLang;
 if f_about<>nil then f_about.SetLang;
-if f_config<>nil then f_config.SetLang;
+if ConfigSystem<>nil then ConfigSystem.SetLang;
+if ConfigInternet<>nil then ConfigInternet.SetLang;
+if ConfigSolsys<>nil then ConfigSolsys.SetLang;
+if ConfigChart<>nil then ConfigChart.SetLang;
 if ConfigTime<>nil then ConfigTime.SetLang;
 if ConfigObservatory<>nil then ConfigObservatory.SetLang;
 if ConfigDisplay<>nil then ConfigDisplay.SetLang;
@@ -4339,20 +4385,18 @@ CopyItem.caption:=rsCopy;
 Undo1.caption:=rsUndo;
 Redo1.caption:=rsRedo;
 Setup1.caption:=rsSetup;
-Configuration1.caption:=rsconfigurethe;
-SaveConfigurationNow1.caption:=rsSaveConfigur;
-SaveConfigurationOnExit1.caption:=rsSaveConfigur2;
-DateConfig1.caption:=rsDateTime;
-ObsConfig1.caption:=rsObservatory;
-MenuItem1.caption:=rsDisplayMode;
-MenuItem2.caption:=rsColor;
-MenuItem3.caption:=rsLines;
-MenuItem4.caption:=rsLabels;
-MenuItem5.caption:=rsFonts;
-MenuItem6.caption:=rsFinderMark;
-MenuItem7.caption:=rsPictures;
+SaveConfiguration.caption:=rsSaveConfigur;
+SaveConfigOnExit.caption:=rsSaveConfigur2;
+SetupTime.caption:=rsDateTime;
+SetupObservatory.caption:=rsObservatory;
+SetupDisplay.caption:=rsDisplay;
+SetupChart.caption:=rsChartCoordin;
+SetupSolSys.caption:=rsSolarSystem;
+SetupSystem.caption:=rsSystem;
+SetupInternet.caption:=rsInternet;
+SetupPictures.caption:=rsPictures;
+SetupCatalog.caption:=rsCatalog;
 MenuItem8.caption:=rsShowHideDSSI;
-MenuItem9.caption:=rsCatalog;
 View1.caption:=rsView;
 FullScreen1.caption:=rsFullScreen;
 NightVision1.caption:=rsNightVision;
