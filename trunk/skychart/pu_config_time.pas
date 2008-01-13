@@ -219,6 +219,7 @@ CheckGroup1.Caption:=rsLabelText;
 CheckGroup1.Items[0]:=rsObjectName;
 CheckGroup1.Items[1]:=rsCurrentDate;
 CheckGroup1.Items[2]:=rsMagnitude;
+CheckGroup2.Caption:=rsDateFormat;
 CheckGroup2.Items[0]:=rsYear;
 CheckGroup2.Items[1]:=rsMonth;
 CheckGroup2.Items[2]:=rsDay;

@@ -955,6 +955,10 @@ msgstr "Datum"
 msgid "Date / Time"
 msgstr "Datum / tijd"
 
+#: u_translation:rsdateformat
+msgid "Date Format"
+msgstr ""
+
 #: u_translation:rsdatefrom
 msgid "Date from"
 msgstr "Datum van"
@@ -1579,6 +1583,10 @@ msgstr "Eerste char"
 msgid "Fixed Black"
 msgstr "Vast zwart"
 
+#: u_translation:rsfixedskycolo
+msgid "Fixed sky color"
+msgstr ""
+
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
 msgstr "Flamsteed nummer"
@@ -1670,6 +1678,10 @@ msgstr "Haal planetoïden lijst."
 #: u_translation:rsgetdssimage
 msgid "Get DSS Image"
 msgstr "Haal DSS afbeelding"
+
+#: u_translation:rsgetrecentmea
+msgid "Get recent measurement from JUPOS project"
+msgstr ""
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2918,6 +2930,10 @@ msgstr "Projectie"
 #: u_translation:rsprojectionse
 msgid "Projection Setting"
 msgstr "Projectie-instelling"
+
+#: u_translation:rspropermotion3
+msgid "Proper Motion"
+msgstr ""
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"

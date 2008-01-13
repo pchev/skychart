@@ -29,7 +29,7 @@ object f_config_time: Tf_config_time
       Width = 474
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
-      PageIndex = 0
+      PageIndex = 1
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -431,7 +431,7 @@ object f_config_time: Tf_config_time
       object Page2: TPage
         Caption = 'Simulation'
         ClientWidth = 468
-        ClientHeight = 483
+        ClientHeight = 508
         object stepreset: TSpeedButton
           Left = 220
           Height = 25
@@ -545,7 +545,6 @@ object f_config_time: Tf_config_time
           ItemHeight = 16
           OnItemClick = SimObjItemClick
           TabOrder = 0
-          TopIndex = -1
           Data = {
             0C000000000000000000000000000000
           }

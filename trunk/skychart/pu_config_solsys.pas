@@ -288,6 +288,7 @@ CheckBoxPluto.Caption:=rsPlutoIsAPlan;
 Label3.caption:=rsUncheckToAvo;
 Label5.caption:=rsPlanetsSetti;
 Label89.caption:=rsJupiterGRSLo;
+BitBtn37.Hint:=rsGetRecentMea;
 PlanetBox.caption:=rsShowPlanetOn;
 PlanetMode.caption:=rsDrawPlanetAs;
 PlanetMode.Items[0]:=rsStar;

@@ -955,6 +955,10 @@ msgstr "Fecha"
 msgid "Date / Time"
 msgstr "Fecha / Hora"
 
+#: u_translation:rsdateformat
+msgid "Date Format"
+msgstr ""
+
 #: u_translation:rsdatefrom
 msgid "Date from"
 msgstr "Fecha de"
@@ -1579,6 +1583,10 @@ msgstr "Primer Caracter"
 msgid "Fixed Black"
 msgstr "Negro Fijo"
 
+#: u_translation:rsfixedskycolo
+msgid "Fixed sky color"
+msgstr ""
+
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
 msgstr "Número Flamsteed"
@@ -1670,6 +1678,10 @@ msgstr "Obtener listado de Asteroides"
 #: u_translation:rsgetdssimage
 msgid "Get DSS Image"
 msgstr "Obtener Imagen DSS"
+
+#: u_translation:rsgetrecentmea
+msgid "Get recent measurement from JUPOS project"
+msgstr ""
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2918,6 +2930,10 @@ msgstr "Proyección"
 #: u_translation:rsprojectionse
 msgid "Projection Setting"
 msgstr "Seteo de proyección"
+
+#: u_translation:rspropermotion3
+msgid "Proper Motion"
+msgstr ""
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"
