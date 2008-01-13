@@ -1196,10 +1196,6 @@ msgstr "Цвета отображения"
 msgid "Display image of cataloged objects"
 msgstr "Показ изображения из каталога объектов"
 
-#: u_translation:rsdisplaymode
-msgid "Display mode"
-msgstr "Тип отображения"
-
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Отображать информацию карты в панеле меню."
@@ -1563,10 +1559,6 @@ msgstr "Найти"
 #: u_translation:rsfindercircle
 msgid "Finder circle (Eyepiece)"
 msgstr "Поисковый круг (окуляр)"
-
-#: u_translation:rsfindermark
-msgid "Finder mark"
-msgstr "Поисковая метка"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"

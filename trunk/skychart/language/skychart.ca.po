@@ -1196,10 +1196,6 @@ msgstr "Color de presentació"
 msgid "Display image of cataloged objects"
 msgstr "Mostra una imatge dels objectes del catàleg"
 
-#: u_translation:rsdisplaymode
-msgid "Display mode"
-msgstr "Mode de presentació"
-
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Mostra les informacions de la carta en la barra de menú."
@@ -1563,10 +1559,6 @@ msgstr "Busca"
 #: u_translation:rsfindercircle
 msgid "Finder circle (Eyepiece)"
 msgstr "Cercle del buscador (ocular)"
-
-#: u_translation:rsfindermark
-msgid "Finder mark"
-msgstr "Marques del buscador"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"

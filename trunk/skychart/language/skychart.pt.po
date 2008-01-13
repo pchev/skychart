@@ -1197,10 +1197,6 @@ msgstr "Exibir cor"
 msgid "Display image of cataloged objects"
 msgstr "Exibir imagem dos objetos catalogados"
 
-#: u_translation:rsdisplaymode
-msgid "Display mode"
-msgstr "Modalidade de Exibição"
-
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Exibir informação da carta na barra menu."
@@ -1564,10 +1560,6 @@ msgstr "Procurar"
 #: u_translation:rsfindercircle
 msgid "Finder circle (Eyepiece)"
 msgstr "Procurar círculo (ocular)"
-
-#: u_translation:rsfindermark
-msgid "Finder mark"
-msgstr "Procurar alvo"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"

@@ -41,6 +41,9 @@ type
     BigNebUnit: TLabel;
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
     CheckBox1: TCheckBox;
     CheckBox10: TCheckBox;
     epoch2: TFloatEdit;
@@ -228,6 +231,7 @@ type
     Page4: TPage;
     Page5: TPage;
     Page6: TPage;
+    Panel1: TPanel;
     PanelExpert: TPanel;
     PanelCoord: TPanel;
     Panel2: TPanel;
@@ -266,6 +270,7 @@ type
     TrackBar1: TTrackBar;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure ExpertModeClick(Sender: TObject);
     procedure CheckBox13Click(Sender: TObject);
     procedure CoordTypeClick(Sender: TObject);
@@ -302,6 +307,7 @@ type
   private
     { Private declarations }
     LockChange: boolean;
+    FApplyConfig: TNotifyEvent;
     procedure ShowChart;
     procedure ShowField;
     procedure ShowFOV;
@@ -324,7 +330,8 @@ type
     cplot : Tconf_plot;
     cmain : Tconf_main;
     procedure SetLang;
-   constructor Create(AOwner:TComponent); override;
+    constructor Create(AOwner:TComponent); override;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
   
 implementation
@@ -332,7 +339,13 @@ implementation
 
 procedure Tf_config_chart.SetLang;
 begin
-Caption:=rsCharts;
+Caption:=rsChartCoordin;
+page1.Caption:=rsChartCoordin;
+page2.Caption:=rsFieldOfVisio;
+page3.Caption:=rsProjection;
+page4.Caption:=rsObjectFilter;
+page5.Caption:=rsGridSpacing;
+page6.Caption:=rsObjectList;
 Label31.caption:=rsChartSetting;
 GroupBox3.caption:=rsStarsProperM;
 label1.Caption:=rsEpoch;
@@ -391,6 +404,9 @@ Button2.Caption:=rsDefault;
 Label3.caption:=rsShowGrid;
 Label4.caption:=rsCompassRoseS;
 CheckBox13.caption:=rsAlwaysShowCo;
+Button3.caption:=rsOK;
+Button4.caption:=rsApply;
+Button5.caption:=rsCancel;
 end;
 
 constructor Tf_config_chart.Create(AOwner:TComponent);
@@ -900,6 +916,11 @@ cshr.CRoseSz:=80;
 LockChange:=true;
 ShowGridSpacing;
 LockChange:=false;
+end;
+
+procedure Tf_config_chart.Button4Click(Sender: TObject);
+begin
+   if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
 procedure Tf_config_chart.CheckBox13Click(Sender: TObject);

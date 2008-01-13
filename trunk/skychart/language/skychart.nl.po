@@ -1195,10 +1195,6 @@ msgstr "Kleurweergave"
 msgid "Display image of cataloged objects"
 msgstr "Toon afbeelding van gecatologiseerde objecten"
 
-#: u_translation:rsdisplaymode
-msgid "Display mode"
-msgstr "Weergavemodus"
-
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Toon de kaart-informatie in de menubalk."
@@ -1562,10 +1558,6 @@ msgstr "Zoek"
 #: u_translation:rsfindercircle
 msgid "Finder circle (Eyepiece)"
 msgstr "Beeldveld  zoeker/oculair"
-
-#: u_translation:rsfindermark
-msgid "Finder mark"
-msgstr "Veldmarkering oculair/camera"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"

@@ -1,40 +1,39 @@
 object f_config_system: Tf_config_system
   Left = 1086
-  Height = 528
+  Height = 532
   Top = 132
-  Width = 541
-  HorzScrollBar.Page = 540
-  VertScrollBar.Page = 527
+  Width = 484
+  HorzScrollBar.Page = 483
+  VertScrollBar.Page = 531
   ActiveControl = dbname
   Caption = 'System'
-  ClientHeight = 528
-  ClientWidth = 541
+  ClientHeight = 532
+  ClientWidth = 484
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   object MainPanel: TPanel
-    Left = 8
-    Height = 480
-    Top = 8
-    Width = 500
-    ClientHeight = 480
-    ClientWidth = 500
+    Height = 482
+    Width = 484
+    Align = alClient
+    ClientHeight = 482
+    ClientWidth = 484
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
-      Height = 478
+      Height = 480
       Top = 1
-      Width = 498
+      Width = 482
       Align = alClient
-      PageIndex = 0
+      PageIndex = 2
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 492
-        ClientHeight = 472
+        ClientWidth = 476
+        ClientHeight = 474
         object Label153: TLabel
           Height = 20
           Width = 88
@@ -263,6 +262,7 @@ object f_config_system: Tf_config_system
             Caption = 'Comet Setting'
             OnClick = CometDBClick
             TabOrder = 4
+            Visible = False
           end
           object AstDB: TButton
             Left = 16
@@ -273,6 +273,7 @@ object f_config_system: Tf_config_system
             Caption = 'Asteroid Setting'
             OnClick = AstDBClick
             TabOrder = 3
+            Visible = False
           end
         end
         object DBtypeGroup: TRadioGroup
@@ -291,7 +292,7 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 32
+          ClientHeight = 34
           ClientWidth = 277
           Columns = 2
           ItemIndex = 0
@@ -310,7 +311,7 @@ object f_config_system: Tf_config_system
           Top = 367
           Width = 440
           Caption = 'Desktop environment'
-          ClientHeight = 78
+          ClientHeight = 76
           ClientWidth = 434
           TabOrder = 4
           object Label12: TLabel
@@ -351,8 +352,8 @@ object f_config_system: Tf_config_system
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 492
-        ClientHeight = 447
+        ClientWidth = 476
+        ClientHeight = 449
         object GroupBox3: TGroupBox
           Left = 16
           Height = 247
@@ -364,7 +365,7 @@ object f_config_system: Tf_config_system
           TabOrder = 0
           object Label54: TLabel
             Left = 16
-            Height = 13
+            Height = 20
             Top = 124
             Width = 115
             Caption = 'Server IP Interface :'
@@ -372,7 +373,7 @@ object f_config_system: Tf_config_system
           end
           object Label55: TLabel
             Left = 16
-            Height = 13
+            Height = 20
             Top = 168
             Width = 88
             Caption = 'Server IP Port :'
@@ -380,9 +381,9 @@ object f_config_system: Tf_config_system
           end
           object UseIPserver: TCheckBox
             Left = 16
-            Height = 19
+            Height = 21
             Top = 32
-            Width = 125
+            Width = 126
             Caption = 'Use TCP/IP Server'
             OnClick = UseIPserverClick
             TabOrder = 0
@@ -407,9 +408,9 @@ object f_config_system: Tf_config_system
           end
           object keepalive: TCheckBox
             Left = 16
-            Height = 19
+            Height = 21
             Top = 72
-            Width = 182
+            Width = 183
             Caption = 'Client Connection Keep Alive'
             OnClick = keepaliveClick
             TabOrder = 1
@@ -418,8 +419,8 @@ object f_config_system: Tf_config_system
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 492
-        ClientHeight = 472
+        ClientWidth = 476
+        ClientHeight = 474
         object Label13: TLabel
           Height = 20
           Width = 101
@@ -840,8 +841,8 @@ object f_config_system: Tf_config_system
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 492
-        ClientHeight = 472
+        ClientWidth = 476
+        ClientHeight = 449
         object Label14: TLabel
           Left = 19
           Height = 20
@@ -862,6 +863,50 @@ object f_config_system: Tf_config_system
           TabOrder = 0
         end
       end
+    end
+  end
+  object Panel1: TPanel
+    Height = 50
+    Top = 482
+    Width = 484
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 484
+    TabOrder = 1
+    object Button1: TButton
+      Left = 186
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 282
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Apply'
+      OnClick = Button2Click
+      TabOrder = 1
+    end
+    object Button3: TButton
+      Left = 386
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
     end
   end
 end

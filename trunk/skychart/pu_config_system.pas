@@ -35,10 +35,14 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
     LanguageList: TComboBox;
     Label14: TLabel;
     Language: TPage;
     Page4: TPage;
+    Panel1: TPanel;
     prgdir: TDirectoryEdit;
     persdir: TDirectoryEdit;
     Label12: TLabel;
@@ -124,6 +128,7 @@ type
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
     Notebook1: TNotebook;
+    procedure Button2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -174,6 +179,7 @@ type
     FLoadMPCSample: TNotifyEvent;
     FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
+    FApplyConfig: TNotifyEvent;
     dbchanged,skipDBtypeGroupClick,LockChange: boolean;
     procedure ShowSYS;
     procedure ShowServer;
@@ -199,6 +205,7 @@ type
     property onLoadMPCSample: TNotifyEvent read FLoadMPCSample write FLoadMPCSample;
     property onDBChange: TNotifyEvent read FDBChange write FDBChange;
     property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
+    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
@@ -206,6 +213,10 @@ implementation
 procedure Tf_config_system.SetLang;
 begin
 Caption:=rsSystem;
+Page1.caption:=rsSystem;
+Page2.caption:=rsServer;
+Page3.caption:=rsTelescope;
+Page4.caption:=rsLanguage2;
 Label153.caption:=rsSystemSettin;
 MysqlBox.caption:=rsMySQLDatabas;
 Label77.caption:=rsDBName;
@@ -264,7 +275,12 @@ ManualMountType.Items[1]:=rsAltAzMount;
 TelescopeSelect.Caption:=rsSelectTheTel;
 TelescopeSelect.Items[0]:=rsINDIDriver;
 TelescopeSelect.Items[1]:=rsManualMount;
+{$ifdef mswindows}
 TelescopeSelect.Items[2]:=rsCDCPlugin;
+{$endif}
+Button1.caption:=rsOK;
+Button2.caption:=rsApply;
+Button3.caption:=rsCancel;
 end;
 
 constructor Tf_config_system.Create(AOwner:TComponent);
@@ -297,7 +313,9 @@ ShowServer;
 ShowTelescope;
 LockChange:=false;
 {$ifdef win32}
-GroupBoxLinux.Visible:=false;
+  GroupBoxLinux.Visible:=false;
+{$else}
+  TelescopeSelect.Items.Delete(2);
 {$endif}
 end;
 
@@ -402,7 +420,9 @@ RevertTurnsAlt.checked:=csc.TelescopeTurnsY<0;
 ManualMountType.itemindex:=csc.ManualTelescopeType;
 ManualMountTypeClick(nil);
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
+   {$ifdef mswindows}
    else if csc.PluginTelescope then Telescopeselect.itemindex:=2
+   {$endif}
    else Telescopeselect.itemindex:=1;
 TelescopeselectClick(self);
 {$ifdef unix}
@@ -625,6 +645,11 @@ procedure Tf_config_system.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   LockChange:=true;
+end;
+
+procedure Tf_config_system.Button2Click(Sender: TObject);
+begin
+  if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
 procedure Tf_config_system.UseIPserverClick(Sender: TObject);
