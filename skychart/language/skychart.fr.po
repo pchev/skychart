@@ -1,7 +1,8 @@
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007.
+# translation of skychart.fr.po
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-11-17 15:20+0100\n"
+"PO-Revision-Date: 2008-01-13 11:03+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -955,6 +956,10 @@ msgstr "Date"
 msgid "Date / Time"
 msgstr "Date / Heure"
 
+#: u_translation:rsdateformat
+msgid "Date Format"
+msgstr "Format de la date"
+
 #: u_translation:rsdatefrom
 msgid "Date from"
 msgstr "Depuis"
@@ -1579,6 +1584,10 @@ msgstr "Premier caractère"
 msgid "Fixed Black"
 msgstr "Fixe noir"
 
+#: u_translation:rsfixedskycolo
+msgid "Fixed sky color"
+msgstr "Couleur du ciel"
+
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
 msgstr "Numéro de Flamsteed"
@@ -1670,6 +1679,10 @@ msgstr "Liste des astéroïdes."
 #: u_translation:rsgetdssimage
 msgid "Get DSS Image"
 msgstr "Affiche une image DSS"
+
+#: u_translation:rsgetrecentmea
+msgid "Get recent measurement from JUPOS project"
+msgstr "Obtenir des mesures récentes du projet JUPOS"
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2918,6 +2931,10 @@ msgstr "Projection"
 #: u_translation:rsprojectionse
 msgid "Projection Setting"
 msgstr "Paramètres de projection"
+
+#: u_translation:rspropermotion3
+msgid "Proper Motion"
+msgstr "Mouvement propre"
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"

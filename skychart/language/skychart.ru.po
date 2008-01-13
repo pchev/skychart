@@ -956,6 +956,10 @@ msgstr "Дата"
 msgid "Date / Time"
 msgstr "Дата/Время"
 
+#: u_translation:rsdateformat
+msgid "Date Format"
+msgstr ""
+
 #: u_translation:rsdatefrom
 msgid "Date from"
 msgstr "Дата от"
@@ -1580,6 +1584,10 @@ msgstr "Первая цифра"
 msgid "Fixed Black"
 msgstr "Всегда чёрный"
 
+#: u_translation:rsfixedskycolo
+msgid "Fixed sky color"
+msgstr ""
+
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
 msgstr "Обозначение Флемстида"
@@ -1671,6 +1679,10 @@ msgstr "Получить список астероидов"
 #: u_translation:rsgetdssimage
 msgid "Get DSS Image"
 msgstr "Получить DSS изображение"
+
+#: u_translation:rsgetrecentmea
+msgid "Get recent measurement from JUPOS project"
+msgstr ""
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2919,6 +2931,10 @@ msgstr "Проекция"
 #: u_translation:rsprojectionse
 msgid "Projection Setting"
 msgstr "Установки проекции"
+
+#: u_translation:rspropermotion3
+msgid "Proper Motion"
+msgstr ""
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"

@@ -959,6 +959,10 @@ msgstr "Data"
 msgid "Date / Time"
 msgstr "Data / Czas"
 
+#: u_translation:rsdateformat
+msgid "Date Format"
+msgstr ""
+
 #: u_translation:rsdatefrom
 msgid "Date from"
 msgstr "Data od"
@@ -1583,6 +1587,10 @@ msgstr "Pierwsza litera"
 msgid "Fixed Black"
 msgstr "Sztywny blok"
 
+#: u_translation:rsfixedskycolo
+msgid "Fixed sky color"
+msgstr ""
+
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
 msgstr "Numer Flamsteed"
@@ -1674,6 +1682,10 @@ msgstr "Pobierz liste planetoid"
 #: u_translation:rsgetdssimage
 msgid "Get DSS Image"
 msgstr "Pobierz obraz DSS"
+
+#: u_translation:rsgetrecentmea
+msgid "Get recent measurement from JUPOS project"
+msgstr ""
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2922,6 +2934,10 @@ msgstr "Projekcja"
 #: u_translation:rsprojectionse
 msgid "Projection Setting"
 msgstr "Ustawienia projekcji"
+
+#: u_translation:rspropermotion3
+msgid "Proper Motion"
+msgstr ""
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"

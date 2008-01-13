@@ -1101,6 +1101,10 @@ resourcestring
   rsSomethingGoW = 'Something go wrong during program initialization. We must '
     +'now close';
   rsStopTCPIPSer = 'Stop TCP/IP server';
+  rsDateFormat = 'Date Format';
+  rsFixedSkyColo = 'Fixed sky color';
+  rsProperMotion3 = 'Proper Motion';
+  rsGetRecentMea = 'Get recent measurement from JUPOS project';
 
 implementation
 
