@@ -1,0 +1,287 @@
+object ObsForm: TObsForm
+  Left = 266
+  Height = 462
+  Top = 120
+  Width = 687
+  HorzScrollBar.Page = 686
+  VertScrollBar.Page = 461
+  ActiveControl = Edit3
+  Caption = 'New observation'
+  ClientHeight = 462
+  ClientWidth = 687
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
+  object Label1: TLabel
+    Left = 2
+    Height = 14
+    Top = 32
+    Width = 54
+    Caption = 'Star Name '
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 432
+    Height = 14
+    Top = 32
+    Width = 52
+    Caption = 'UT decimal'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 2
+    Height = 14
+    Top = 70
+    Width = 31
+    Caption = 'Magn.'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 520
+    Height = 14
+    Top = 70
+    Width = 46
+    Caption = 'Observer'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 168
+    Height = 14
+    Top = 70
+    Width = 46
+    Caption = 'Comment'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    Left = 296
+    Height = 14
+    Top = 70
+    Width = 51
+    Caption = 'Comp Star'
+    ParentColor = False
+  end
+  object Label7: TLabel
+    Left = 178
+    Height = 17
+    Top = 30
+    Width = 30
+    Caption = 'Date'
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    ParentColor = False
+  end
+  object Label8: TLabel
+    Left = 312
+    Height = 17
+    Top = 30
+    Width = 20
+    Caption = 'UT'
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    ParentColor = False
+  end
+  object Label9: TLabel
+    Left = 432
+    Height = 14
+    Top = 70
+    Width = 28
+    Caption = 'Chart'
+    ParentColor = False
+  end
+  object Label10: TLabel
+    Left = 2
+    Height = 14
+    Top = 108
+    Width = 42
+    Caption = 'Remarks'
+    ParentColor = False
+  end
+  object Edit1: TEdit
+    Left = 56
+    Height = 21
+    Top = 28
+    Width = 113
+    CharCase = ecUppercase
+    TabOrder = 11
+  end
+  object Edit2: TEdit
+    Left = 496
+    Height = 21
+    Top = 28
+    Width = 121
+    CharCase = ecUppercase
+    OnChange = Edit2Change
+    TabOrder = 13
+  end
+  object Edit3: TEdit
+    Left = 32
+    Height = 21
+    Top = 66
+    Width = 41
+    CharCase = ecUppercase
+    TabOrder = 0
+  end
+  object Edit4: TEdit
+    Left = 568
+    Height = 21
+    Top = 66
+    Width = 47
+    CharCase = ecUppercase
+    TabOrder = 4
+  end
+  object Edit5: TEdit
+    Left = 216
+    Height = 21
+    Top = 66
+    Width = 73
+    CharCase = ecUppercase
+    TabOrder = 1
+  end
+  object Edit6: TEdit
+    Left = 352
+    Height = 21
+    Top = 66
+    Width = 73
+    CharCase = ecUppercase
+    TabOrder = 2
+  end
+  object Memo1: TMemo
+    Left = 8
+    Height = 153
+    Top = 136
+    Width = 609
+    Font.Height = -11
+    Font.Name = 'Courier New'
+    Font.Pitch = fpFixed
+    ScrollBars = ssBoth
+    TabOrder = 15
+  end
+  object BitBtn1: TBitBtn
+    Left = 472
+    Height = 25
+    Top = 104
+    Width = 142
+    Caption = 'Add'
+    NumGlyphs = 0
+    OnClick = Button1Click
+    TabOrder = 6
+  end
+  object BitBtn2: TBitBtn
+    Left = 7
+    Height = 25
+    Top = 304
+    Width = 75
+    Caption = 'Save to File'
+    NumGlyphs = 0
+    OnClick = Button2Click
+    TabOrder = 7
+  end
+  object BitBtn3: TBitBtn
+    Left = 111
+    Height = 25
+    Top = 304
+    Width = 75
+    Caption = 'Delete All'
+    NumGlyphs = 0
+    OnClick = Button3Click
+    TabOrder = 8
+  end
+  object BitBtn5: TBitBtn
+    Left = 208
+    Height = 25
+    Top = 304
+    Width = 75
+    Caption = 'Edit File'
+    NumGlyphs = 0
+    OnClick = BitBtn5Click
+    TabOrder = 9
+  end
+  object BitBtn6: TBitBtn
+    Left = 544
+    Height = 25
+    Top = 304
+    Width = 75
+    Caption = 'Close'
+    ModalResult = 1
+    NumGlyphs = 2
+    TabOrder = 10
+  end
+  object Edit7: TEdit
+    Left = 464
+    Height = 21
+    Top = 66
+    Width = 49
+    CharCase = ecUppercase
+    TabOrder = 3
+  end
+  object Edit8: TEdit
+    Left = 48
+    Height = 21
+    Top = 104
+    Width = 407
+    CharCase = ecUppercase
+    TabOrder = 5
+  end
+  object CheckBox1: TCheckBox
+    Left = 80
+    Height = 19
+    Top = 60
+    Width = 72
+    Caption = 'Uncertain'
+    TabOrder = 12
+    TabStop = False
+  end
+  object CheckBox2: TCheckBox
+    Left = 80
+    Height = 19
+    Top = 78
+    Width = 82
+    Caption = 'Fainter than'
+    TabOrder = 14
+    TabStop = False
+  end
+  object TimePicker1: TTimePicker
+    Left = 341
+    Height = 23
+    Top = 28
+    Width = 101
+    Time = 0.39739583333333
+    Enabled = True
+    TabOrder = 16
+  end
+  object DateEdit1: TDateEdit
+    Left = 209
+    Height = 23
+    Top = 28
+    Width = 80
+    CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
+    OKCaption = 'OK'
+    CancelCaption = 'Cancel'
+    ReadOnly = False
+    ButtonWidth = 23
+    Glyph.Data = {
+      2F0200002F2A2058504D202A2F0A7374617469632063686172202A63616C656E
+      6461725B5D203D207B0A2F2A20636F6C756D6E7320726F777320636F6C6F7273
+      2063686172732D7065722D706978656C202A2F0A223134203132203137203122
+      2C0A2220206320626C61636B222C0A222E20632023383030303030222C0A2258
+      20632023303038303030222C0A226F20632023383038303030222C0A224F2063
+      206E617679222C0A222B20632023383030303830222C0A224020632023303038
+      303830222C0A222320632023383038303830222C0A2224206320234330433043
+      30222C0A2225206320726564222C0A2226206320677265656E222C0A222A2063
+      2079656C6C6F77222C0A223D206320626C7565222C0A222D2063206D6167656E
+      7461222C0A223B2063206379616E222C0A223A20632067726179313030222C0A
+      223E2063204E6F6E65222C0A2F2A20706978656C73202A2F0A223E3E20202020
+      2020202020203E3E222C0A223E3E3A24242424242424243A4F23222C0A223E3E
+      3A3A3A3A3A3A3A3A3A3A4F23222C0A223E3E3A3A203A3A202020203A4F23222C
+      0A223E3E3A20203A3A203A3A3A3A4F23222C0A223E3E3A3A203A3A202020243A
+      4F23222C0A223E3E3A3A203A3A3A3A3A203A4F23222C0A223E3E3A3A203A3A24
+      3A24203A4F23222C0A223E3E3A2020203A202020243A4F23222C0A223E3E3A3A
+      3A3A3A3A3A3A3A3A4F23222C0A223E3E20204F204F4F204F20204F23222C0A22
+      3E3E3E2323232323232323232323220A7D3B0A
+    }
+    NumGlyphs = 1
+    OnChange = DateEdit1Change
+    TabOrder = 17
+  end
+end

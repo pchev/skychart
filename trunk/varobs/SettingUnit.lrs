@@ -1,0 +1,187 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TOptForm','FORMDATA',[
+  'TPF0'#8'TOptForm'#7'OptForm'#4'Left'#3#7#3#6'Height'#3'`'#2#3'Top'#2'6'#5'Wi'
+  +'dth'#3#160#1#18'HorzScrollBar.Page'#3#159#1#18'VertScrollBar.Page'#3'_'#2#13
+  +'ActiveControl'#7#11'RadioGroup1'#7'Caption'#6#7'Options'#12'ClientHeight'#3
+  +'`'#2#11'ClientWidth'#3#160#1#11'Font.Height'#2#245#9'Font.Name'#6#13'MS San'
+  +'s Serif'#6'OnShow'#7#8'FormShow'#0#9'TGroupBox'#9'GroupBox8'#4'Left'#3#152#0
+  +#6'Height'#3#208#0#3'Top'#2#8#5'Width'#3#249#0#7'Caption'#6#22'AAVSO QuickLo'
+  +'ok format'#12'ClientHeight'#3#190#0#11'ClientWidth'#3#245#0#8'TabOrder'#2#9
+  +#7'Visible'#8#0#6'TLabel'#7'Label20'#4'Left'#2#8#6'Height'#2'q'#3'Top'#2#24#5
+  +'Width'#3#225#0#8'AutoSize'#8#7'Caption'#12#21#1#0#0'Col  1-8     Designatio'
+  +'n from Validation File'#13#10'Col 10-19  Star name'#13#10'Col 34-45  Julian'
+  +' Date and GMAT time'#13#10'Col 48-53  Magnitude'#13#10'                < in'
+  +' column 48 for fainter-than'#13#10'                 : in column 53 for unce'
+  +'rtain'#13#10'Col 60-66 Comment Codes'#13#10'Col 56-58 Observer Initials'#11
+  +'ParentColor'#8#8'WordWrap'#9#0#0#6'TLabel'#7'Label21'#4'Left'#2#8#6'Height'
+  +#2#14#3'Top'#3#144#0#5'Width'#2'.'#7'Caption'#6#9'File name'#11'ParentColor'
+  +#8#0#0#5'TEdit'#13'FilenameEdit7'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#160#0#5
+  +'Width'#2'y'#8'TabOrder'#2#0#4'Text'#6#13'FilenameEdit7'#0#0#0#9'TGroupBox'#9
+  +'GroupBox2'#4'Left'#3#152#0#6'Height'#3#208#0#3'Top'#2#8#5'Width'#3#249#0#7
+  +'Caption'#6#12'VSNET format'#12'ClientHeight'#3#190#0#11'ClientWidth'#3#245#0
+  +#8'TabOrder'#2#4#0#6'TLabel'#6'Label9'#4'Left'#2#8#6'Height'#2'u'#3'Top'#2#20
+  +#5'Width'#3#225#0#8'AutoSize'#8#7'Caption'#6#213'Free format. Fields are sep'
+  +'arated by at least one blank space and appear in this order'#13#10' '#13#10
+  +'Star name '#13#10'Universal Time in decimal format: yymmdd.tttt'#13#10'Magn'
+  +'itude,  < for fainter-than,  : uncertain'#13#10'Observer'#13#10'Comment'#11
+  +'ParentColor'#8#8'WordWrap'#9#0#0#6'TLabel'#7'Label10'#4'Left'#2#8#6'Height'
+  +#2#14#3'Top'#3#144#0#5'Width'#2'.'#7'Caption'#6#9'File name'#11'ParentColor'
+  +#8#0#0#5'TEdit'#13'FilenameEdit2'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#160#0#5
+  +'Width'#2'y'#8'TabOrder'#2#0#4'Text'#6#13'FilenameEdit2'#0#0#0#9'TGroupBox'#9
+  +'GroupBox3'#4'Left'#3#152#0#6'Height'#3#209#0#3'Top'#2#8#5'Width'#3#249#0#7
+  +'Caption'#6#17'AFOEV base folder'#12'ClientHeight'#3#191#0#11'ClientWidth'#3
+  +#245#0#8'TabOrder'#2#1#7'Visible'#8#0#6'TLabel'#6'Label4'#4'Left'#2#8#6'Heig'
+  +'ht'#2'e'#3'Top'#2#28#5'Width'#3#225#0#8'AutoSize'#8#7'Caption'#6#143'Indica'
+  +'te the path to the constellation folder.'#13#10' '#13#10'c:\afoev\    '#13
+  +#10'                and\ '#13#10'                         r'#13#10'         '
+  +'                s'#11'ParentColor'#8#8'WordWrap'#9#0#0#5'TEdit'#14'Director'
+  +'yedit1'#4'Left'#2#6#6'Height'#2#21#3'Top'#3#149#0#5'Width'#2'y'#8'TabOrder'
+  +#2#0#4'Text'#6#14'Directoryedit1'#0#0#0#9'TGroupBox'#9'GroupBox0'#4'Left'#3
+  +#152#0#6'Height'#3#209#0#3'Top'#2#8#5'Width'#3#249#0#7'Caption'#6#15'AAVSO J'
+  +'D format'#12'ClientHeight'#3#191#0#11'ClientWidth'#3#245#0#8'TabOrder'#2#2#7
+  +'Visible'#8#0#6'TLabel'#6'Label5'#4'Left'#2#8#6'Height'#2'm'#3'Top'#2#20#5'W'
+  +'idth'#3#225#0#8'AutoSize'#8#7'Caption'#6#217'Col 14-23  Star name'#13#10' '
+  +#13#10'Col 31-42  Julian date '#13#10'                 with decimal point at'
+  +' col. 38'#13#10' '#13#10'Col 46-51 Magnitude '#13#10'                < in c'
+  +'olumn 46 for fainter-than'#13#10'                 : in column 51 for uncert'
+  +'ain'#11'ParentColor'#8#8'WordWrap'#9#0#0#6'TLabel'#6'Label6'#4'Left'#2#8#6
+  +'Height'#2#14#3'Top'#3#144#0#5'Width'#2'.'#7'Caption'#6#9'File name'#11'Pare'
+  +'ntColor'#8#0#0#5'TEdit'#13'FilenameEdit0'#4'Left'#2#8#6'Height'#2#21#3'Top'
+  +#3#160#0#5'Width'#2'y'#8'TabOrder'#2#0#4'Text'#6#13'FilenameEdit0'#0#0#0#9'T'
+  +'GroupBox'#9'GroupBox1'#4'Left'#3#152#0#6'Height'#3#209#0#3'Top'#2#8#5'Width'
+  +#3#249#0#7'Caption'#6#15'AAVSO UT format'#12'ClientHeight'#3#191#0#11'Client'
+  +'Width'#3#245#0#8'TabOrder'#2#3#7'Visible'#8#0#6'TLabel'#6'Label7'#4'Left'#2
+  +#8#6'Height'#2'm'#3'Top'#2#20#5'Width'#3#225#0#8'AutoSize'#8#7'Caption'#6#222
+  +'Col  9-18  Star name'#13#10' '#13#10'Col 20-30  Universal Time in decimal f'
+  +'ormat: '#13#10'                 yymmdd.tttt'#13#10' '#13#10'Col 31-36  Magn'
+  +'itude '#13#10'                < in column 31 for fainter-than'#13#10'      '
+  +'           : in column 36 for uncertain'#11'ParentColor'#8#8'WordWrap'#9#0#0
+  +#6'TLabel'#6'Label8'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#144#0#5'Width'#2'.'
+  +#7'Caption'#6#9'File name'#11'ParentColor'#8#0#0#5'TEdit'#13'FilenameEdit1'#4
+  +'Left'#2#6#6'Height'#2#21#3'Top'#3#168#0#5'Width'#2'y'#8'TabOrder'#2#0#4'Tex'
+  +'t'#6#13'FilenameEdit1'#0#0#0#9'TGroupBox'#9'GroupBox4'#4'Left'#3#152#0#6'He'
+  +'ight'#3#207#0#3'Top'#2#9#5'Width'#3#249#0#7'Caption'#6#31'Other format fiel'
+  +'ds description'#12'ClientHeight'#3#189#0#11'ClientWidth'#3#245#0#8'TabOrder'
+  +#2#12#7'Visible'#8#0#6'TLabel'#6'Label1'#4'Left'#2#8#6'Height'#2#14#3'Top'#2
+  +'4'#5'Width'#2'2'#7'Caption'#6#9'Star name'#11'ParentColor'#8#0#0#6'TLabel'#6
+  ,'Label2'#4'Left'#2#8#6'Height'#2#14#3'Top'#2'J'#5'Width'#2#23#7'Caption'#6#4
+  +'Time'#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Left'#2#8#6'Height'#2#14#3
+  +'Top'#2'`'#5'Width'#2'3'#7'Caption'#6#9'Magnitude'#11'ParentColor'#8#0#0#6'T'
+  +'Label'#7'Label11'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#148#0#5'Width'#2'.'#7
+  +'Caption'#6#9'File name'#11'ParentColor'#8#0#0#6'TLabel'#7'Label12'#4'Left'#3
+  +#144#0#6'Height'#2#14#3'Top'#2'4'#5'Width'#2''''#7'Caption'#6#8'Field No'#11
+  +'ParentColor'#8#0#0#6'TLabel'#7'Label13'#4'Left'#3#144#0#6'Height'#2#14#3'To'
+  +'p'#2'J'#5'Width'#2''''#7'Caption'#6#8'Field No'#11'ParentColor'#8#0#0#6'TLa'
+  +'bel'#7'Label14'#4'Left'#3#144#0#6'Height'#2#14#3'Top'#2'`'#5'Width'#2''''#7
+  +'Caption'#6#8'Field No'#11'ParentColor'#8#0#0#11'TRadioGroup'#11'RadioGroup2'
+  +#4'Left'#2#8#6'Height'#2#30#3'Top'#2'p'#5'Width'#3#225#0#8'AutoFill'#9#28'Ch'
+  +'ildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'Chi'
+  +'ldSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.E'
+  +'nlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizon'
+  +'tal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChild'
+  +'s'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizin'
+  +'g.ControlsPerLine'#2#2#12'ClientHeight'#2#12#11'ClientWidth'#3#221#0#7'Colu'
+  +'mns'#2#2#9'ItemIndex'#2#1#13'Items.Strings'#1#6#11'Julian date'#6#10'Decima'
+  +'l UT'#0#8'TabOrder'#2#0#0#0#5'TEdit'#5'Edit1'#4'Left'#2'H'#6'Height'#2#21#3
+  +'Top'#2'0'#5'Width'#2'A'#8'TabOrder'#2#1#4'Text'#6#1'1'#0#0#5'TEdit'#5'Edit2'
+  +#4'Left'#2'H'#6'Height'#2#21#3'Top'#2'F'#5'Width'#2'A'#8'TabOrder'#2#2#4'Tex'
+  +'t'#6#1'2'#0#0#5'TEdit'#5'Edit3'#4'Left'#2'H'#6'Height'#2#21#3'Top'#2'\'#5'W'
+  +'idth'#2'A'#8'TabOrder'#2#3#4'Text'#6#1'3'#0#0#11'TRadioGroup'#11'RadioGroup'
+  +'3'#4'Left'#2#8#6'Height'#2#30#3'Top'#2#14#5'Width'#3#225#0#8'AutoFill'#9#28
+  +'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'C'
+  +'hildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing'
+  +'.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHoriz'
+  +'ontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChi'
+  +'lds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSiz'
+  +'ing.ControlsPerLine'#2#2#12'ClientHeight'#2#12#11'ClientWidth'#3#221#0#7'Co'
+  +'lumns'#2#2#9'ItemIndex'#2#0#13'Items.Strings'#1#6#15'Variable format'#6#12
+  +'Fixed format'#0#7'OnClick'#7#16'RadioGroup3Click'#8'TabOrder'#2#4#0#0#5'TEd'
+  +'it'#13'FilenameEdit4'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#167#0#5'Width'#3
+  +#208#0#8'TabOrder'#2#5#4'Text'#6#13'FilenameEdit4'#0#0#0#9'TGroupBox'#9'Grou'
+  +'pBox7'#4'Left'#3#152#0#6'Height'#3#209#0#3'Top'#2#8#5'Width'#3#249#0#7'Capt'
+  +'ion'#6#16'AAVSO SUM format'#12'ClientHeight'#3#191#0#11'ClientWidth'#3#245#0
+  +#8'TabOrder'#2#8#7'Visible'#8#0#6'TLabel'#7'Label19'#4'Left'#2#8#6'Height'#2
+  +#14#3'Top'#3#144#0#5'Width'#2'.'#7'Caption'#6#9'File name'#11'ParentColor'#8
+  +#0#0#6'TLabel'#7'Label18'#4'Left'#2#8#6'Height'#2'u'#3'Top'#2#20#5'Width'#3
+  +#225#0#8'AutoSize'#8#7'Caption'#12#22#1#0#0'Col  1-8     Designation from Va'
+  +'lidation File'#13#10'Col  9-18   Star name'#13#10'Col 19-30  Julian Date an'
+  +'d GMAT time'#13#10'Col 31-36  Magnitude'#13#10'                < in column '
+  +'31 for fainter-than'#13#10'                 : in column 36 for uncertain'#13
+  +#10'Col 37-43 Comment Codes'#13#10'Col 63-67 Observer Initials'#11'ParentCol'
+  +'or'#8#0#0#5'TEdit'#13'FilenameEdit6'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#160
+  +#0#5'Width'#3#225#0#8'TabOrder'#2#0#4'Text'#6#13'FilenameEdit6'#0#0#0#11'TRa'
+  +'dioGroup'#11'RadioGroup1'#4'Left'#2#16#6'Height'#3#209#0#3'Top'#2#8#5'Width'
+  +#3#137#0#8'AutoFill'#9#7'Caption'#6#16'Light curve data'#28'ChildSizing.Left'
+  +'RightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.Enlar'
+  +'geHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'
+  +#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsSca'
+  +'leChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizin'
+  +'g.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLin'
+  +'e'#2#1#12'ClientHeight'#3#191#0#11'ClientWidth'#3#133#0#9'ItemIndex'#2#0#13
+  +'Items.Strings'#1#6#9'AAVSO SUM'#6#19'Old AAVSO Quicklook'#6#12'Old AAVSO JD'
+  +#6#12'Old AAVSO UT'#6#5'VSNET'#6#5'AFOEV'#6#5'Other'#0#7'OnClick'#7#16'Radio'
+  +'Group1Click'#8'TabOrder'#2#0#0#0#7'TBitBtn'#7'BitBtn1'#4'Left'#3#160#0#6'He'
+  +'ight'#2#25#3'Top'#3'8'#2#5'Width'#2'K'#7'Caption'#6#2'OK'#7'Default'#9#11'M'
+  +'odalResult'#2#1#9'NumGlyphs'#2#2#8'TabOrder'#2#5#0#0#9'TGroupBox'#9'GroupBo'
+  +'x5'#4'Left'#2#16#6'Height'#3#144#0#3'Top'#3#224#0#5'Width'#3#129#1#7'Captio'
+  +'n'#6#17'Observation Entry'#12'ClientHeight'#2'~'#11'ClientWidth'#3'}'#1#8'T'
+  +'abOrder'#2#6#0#6'TLabel'#7'Label16'#4'Left'#2#6#6'Height'#2#27#3'Top'#2'P'#5
+  +'Width'#2'.'#7'Caption'#6#20'Observer'#13#10'Initials :'#11'ParentColor'#8#0
+  +#0#6'TPanel'#6'Panel2'#4'Left'#3#136#0#6'Height'#2'h'#3'Top'#2#6#5'Width'#3
+  ,#241#0#12'ClientHeight'#2'h'#11'ClientWidth'#3#241#0#8'TabOrder'#2#2#0#6'TLa'
+  +'bel'#7'Label22'#4'Left'#2'<'#6'Height'#2#14#3'Top'#2'8'#5'Width'#2'{'#7'Cap'
+  +'tion'#6#24'PCObs program location :'#11'ParentColor'#8#0#0#6'TLabel'#7'Labe'
+  +'l23'#4'Left'#2#24#6'Height'#2'('#3'Top'#2#8#5'Width'#3#193#0#7'Caption'#6'l'
+  +'Launch AAVSO PCObs for data entry'#13#10'This option is recommended if you '
+  +'want '#13#10'to submit your data to the AAVSO'#11'ParentColor'#8#0#0#5'TEdi'
+  +'t'#13'FilenameEdit8'#4'Left'#2#16#6'Height'#2#21#3'Top'#2'K'#5'Width'#3#198
+  +#0#8'TabOrder'#2#0#4'Text'#6#13'FilenameEdit8'#0#0#0#6'TPanel'#6'Panel1'#4'L'
+  +'eft'#3#136#0#6'Height'#2'h'#3'Top'#2#8#5'Width'#3#241#0#12'ClientHeight'#2
+  +'h'#11'ClientWidth'#3#241#0#8'TabOrder'#2#1#0#6'TLabel'#7'Label15'#4'Left'#2
+  +#6#6'Height'#2#14#3'Top'#2'P'#5'Width'#2'T'#7'Caption'#6#18'Observation file'
+  +' :'#11'ParentColor'#8#0#0#11'TRadioGroup'#11'RadioGroup4'#4'Left'#2#6#6'Hei'
+  +'ght'#2'<'#5'Width'#3#221#0#8'AutoFill'#9#7'Caption'#6#6'Format'#28'ChildSiz'
+  +'ing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizi'
+  +'ng.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.Enlarge'
+  +'Vertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7
+  +#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'C'
+  +'hildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Contr'
+  +'olsPerLine'#2#2#12'ClientHeight'#2'*'#11'ClientWidth'#3#217#0#7'Columns'#2#2
+  +#9'ItemIndex'#2#0#13'Items.Strings'#1#6#9'AAVSO SUM'#6#5'VSNET'#0#8'TabOrder'
+  +#2#0#0#0#5'TEdit'#13'FilenameEdit3'#4'Left'#2'f'#6'Height'#2#21#3'Top'#2'H'#5
+  +'Width'#2'y'#8'TabOrder'#2#1#4'Text'#6#13'FilenameEdit3'#0#0#0#11'TRadioGrou'
+  +'p'#11'RadioGroup5'#4'Left'#2#8#6'Height'#2'C'#3'Top'#2#6#5'Width'#2'q'#8'Au'
+  +'toFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpac'
+  +'ing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27
+  +'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.'
+  +'ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14
+  +'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'
+  +#27'ChildSizing.ControlsPerLine'#2#1#12'ClientHeight'#2'1'#11'ClientWidth'#2
+  +'m'#9'ItemIndex'#2#0#13'Items.Strings'#1#6#17'Internal facility'#6#11'AAVSO '
+  +'PCObs'#0#7'OnClick'#7#16'RadioGroup5Click'#8'TabOrder'#2#0#0#0#5'TEdit'#5'E'
+  +'dit4'#4'Left'#2'D'#6'Height'#2#21#3'Top'#2'T'#5'Width'#2'5'#8'TabOrder'#2#3
+  +#0#0#0#9'TGroupBox'#9'GroupBox6'#4'Left'#2#16#6'Height'#2'a'#3'Top'#3'p'#1#5
+  +'Width'#3#185#0#7'Caption'#6'%Cartes du Ciel / Sky Charts interface'#12'Clie'
+  +'ntHeight'#2'O'#11'ClientWidth'#3#181#0#8'TabOrder'#2#7#0#6'TLabel'#7'Label1'
+  +'7'#4'Left'#2#8#6'Height'#2#14#3'Top'#2#18#5'Width'#3#158#0#7'Caption'#6' De'
+  +'fault profile saved chart name'#11'ParentColor'#8#0#0#5'TEdit'#13'FilenameE'
+  +'dit5'#4'Left'#2#8#6'Height'#2#21#3'Top'#2'+'#5'Width'#3#161#0#8'TabOrder'#2
+  +#0#4'Text'#6#13'FilenameEdit5'#0#0#0#11'TRadioGroup'#11'RadioGroup6'#4'Left'
+  +#3#208#0#6'Height'#2'`'#3'Top'#3'p'#1#5'Width'#3#193#0#8'AutoFill'#9#7'Capti'
+  +'on'#6#26'Plot aditional data from :'#28'ChildSizing.LeftRightSpacing'#2#6#28
+  +'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'cr'
+  +'sHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousC'
+  +'hildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildS'
+  +'izing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclL'
+  +'eftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#1#12'ClientHei'
+  +'ght'#2'N'#11'ClientWidth'#3#189#0#9'ItemIndex'#2#0#13'Items.Strings'#1#6#16
+  +'AAVSO Quick Look'#6#18'VSNET data browser'#6#17'AFOEV FTP Archive'#0#8'TabO'
+  +'rder'#2#10#0#0#9'TGroupBox'#9'GroupBox9'#4'Left'#2#16#6'Height'#2'J'#3'Top'
+  +#3#216#1#5'Width'#3#129#1#7'Caption'#6#21'AAVSO Chart Directory'#12'ClientHe'
+  +'ight'#2'8'#11'ClientWidth'#3'}'#1#8'TabOrder'#2#11#0#7'TButton'#7'Button1'#4
+  +'Left'#3#200#0#6'Height'#2#25#3'Top'#2#18#5'Width'#3#137#0#7'Caption'#6#22'I'
+  +'nternet Online Access'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#0#0#0#5
+  +'TEdit'#14'Directoryedit2'#4'Left'#2#17#6'Height'#2#21#3'Top'#2#18#5'Width'#3
+  +#157#0#8'TabOrder'#2#1#4'Text'#6#14'Directoryedit2'#0#0#0#0
+]);

@@ -1,0 +1,45 @@
+object chartform: Tchartform
+  Left = 154
+  Height = 395
+  Top = 203
+  Width = 254
+  HorzScrollBar.Page = 253
+  VertScrollBar.Page = 394
+  ActiveControl = Button1
+  Caption = 'AAVSO Chart List'
+  ClientHeight = 395
+  ClientWidth = 254
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnShow = FormShow
+  Position = poDefaultPosOnly
+  object Label1: TLabel
+    Left = 8
+    Height = 25
+    Top = 6
+    Width = 225
+    AutoSize = False
+    Caption = 'Label1'
+    ParentColor = False
+    WordWrap = True
+  end
+  object Button1: TButton
+    Left = 85
+    Height = 25
+    Top = 328
+    Width = 75
+    Cancel = True
+    Caption = 'Close'
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object ListBox1: TListBox
+    Left = 8
+    Height = 289
+    Top = 32
+    Width = 225
+    ItemHeight = 13
+    OnClick = ListBox1Click
+    TabOrder = 1
+  end
+end
