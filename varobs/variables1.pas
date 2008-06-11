@@ -1184,10 +1184,12 @@ if i<=32 then showmessage('Error '+inttostr(i)+'. Please verify that file "'+Opt
 end;
 
 procedure RunPCObs;
+{$ifdef win32}
 var nom,id : string ;
     pcobshnd : Thandle;
     ok : boolean;
     i : integer;
+{$endif}
 begin
 {$ifdef win32}
 nom:=trim(varform.Grid1.Cells[0,currentrow]);
