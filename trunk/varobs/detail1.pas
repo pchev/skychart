@@ -28,7 +28,7 @@ interface
 uses Clipbrd, Printers, FileCtrl,  
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, ExtCtrls, StdCtrls, Buttons, Menus, ExtDlgs, LResources, u_param,
-  downloaddialog;
+  downloaddialog, cu_voreader;
 
 type
 
@@ -138,7 +138,7 @@ type
     { Public declarations }
   end;
 
-Type Tfileformat = (fixed,token);
+Type Tfileformat = (fixed,token,voxml);
 
 var
   DetailForm: TDetailForm;
@@ -151,6 +151,8 @@ var
   dateformat : integer;
   fileformat : Tfileformat;
   initialized : boolean =false;
+  voreader:TVO_Reader;
+  vorow: TStringList;
 
 implementation
 
@@ -497,7 +499,7 @@ if fileexists(fn) then begin
 end;
 end;
 
-Procedure OpenQuickLook(var f:textfile;var sname : string; var ok : boolean);
+{Procedure OpenQuickLook(var f:textfile;var sname : string; var ok : boolean);
 var fn : string;
 begin
 ok:=false;
@@ -521,6 +523,27 @@ if fileexists(fn) then begin
    Fileformat:=fixed;
    visualcomment:=' '+AllChar;
    ok:=true;
+end;
+end; }
+Procedure OpenQuickLook(var f:textfile;var sname : string; var ok : boolean);
+var fn : string;
+    i:integer;
+const
+    colfilter=' name jd magnitude observer band ';
+begin
+ok:=false;
+sname:='*';
+fn:=qlfn;
+if fileexists(fn) then begin
+  voreader:=TVO_Reader.Create(nil);
+  vorow:=TStringList.Create;
+  ok:=voreader.OpenVO(fn);
+  for i:=0 to voreader.fieldname.Count-1 do begin
+   if pos(' '+voreader.fieldname[i]+' ',colfilter)=0 then voreader.UseField[i]:=false;
+  end;
+  dateformat:=1;
+  Fileformat:=voxml;
+  visualcomment:=' Vis.';
 end;
 end;
 
@@ -706,7 +729,20 @@ if fileexists(fn) then begin
 end;
 end;
 
-Procedure ReadObs(var f : textfile; sname : string; var jdt,ma : double; var um : char;var sm,obsname : string; var ok : boolean);
+Procedure CloseObs(var f : textfile);
+begin
+case fileformat of
+  fixed : closefile(f);
+  token : closefile(f);
+  voxml : begin
+          voreader.CloseVO;
+          voreader.Free;
+          vorow.Free;
+          end;
+end;
+end;
+
+Procedure ReadObs(var f : textfile; sname : string; var jdt,ma : double; var um : char;var sm,obsname : string; var feof,ok : boolean);
 var buf,lin,tmpbuf : string;
     p,n : integer;
     c : char;
@@ -714,9 +750,40 @@ const magnum='01234567989.:<?';
 begin
 ok:=false;
 try
-readln(f,lin);
 case fileformat of
+voxml : begin
+      if voreader.ReadVORow(vorow) then begin
+        buf:=trim(vorow[1]);
+        case dateformat of
+        1 : begin                                    // JD
+            p:=pos('.',buf)-1;
+            if p=-1 then p:=length(buf);
+            if p=5 then buf:='24'+buf;
+            jdt:=strtofloat(buf);
+            end;
+        end;
+        buf:=trim(vorow[2]);    // mag.
+        buf:=stringreplace(buf,'&lt;','<',[]);
+        if buf='' then exit;
+        um:=' ';
+        p:=pos('<',buf);                             // fainter-than
+        if p>0 then begin
+           um:='<';
+           buf:=copy(buf,1,p-1)+copy(buf,p+1,99);
+        end;
+        val(buf,ma,n);
+        if n<>0 then ma:=0;
+
+        obsname:=vorow[3]; // observer
+
+        sm:=vorow[4];  // band
+        if sm='' then sm:=' ';
+        ok:=true;
+      end;
+      feof:=voreader.EOF;
+      end;
 fixed : begin
+      readln(f,lin);
       buf:=uppercase(trim(copy(lin,nampos[1],nampos[2])));    // name
       if (sname<>'*') and (buf<>sname) then exit;
       buf:=trim(copy(lin,jdpos[1],jdpos[2]));      // date
@@ -764,8 +831,10 @@ fixed : begin
       if sm='' then sm:=' ';
       obsname:=trim(copy(lin,obspos[1],obspos[2]));
       ok:=true;
+      feof:=eof(f);
       end;
 token : begin
+      readln(f,lin);
       buf:=uppercase(trim(words(lin,'',nampos[1],1)));        // name
       if (sname<>'*') and (buf<>sname) then exit;
       buf:=trim(words(lin,'',jdpos[1],1));         // date
@@ -816,6 +885,7 @@ token : begin
       end else sm:=' ';
       obsname:=trim(words(lin,'',obspos[1],1));
       ok:=true;
+      feof:=eof(f);
       end;
 end;
 except
@@ -830,7 +900,7 @@ var f : textfile;
     x,y,i : integer;
     jdt,ma,jd0 : double;
     um : char;
-    ok,visualobs : boolean;
+    ok,feof,visualobs : boolean;
 begin
 case typeobs of
 0 : OpenAAVSOSUM(f,sname,ok);
@@ -851,7 +921,7 @@ with DetailForm.Image1.Canvas do begin
    try
    jd0:=rmod(t1,per);
    repeat
-      readobs(f,sname,jdt,ma,um,sm,obsname,ok);
+      readobs(f,sname,jdt,ma,um,sm,obsname,feof,ok);
       if not ok then continue;
       if detailform.checkbox5.checked then jdt:=rmod(jdt-jd0,per)+t1;
       if (jdt>t1)and(jdt<t5) then begin
@@ -894,9 +964,9 @@ with DetailForm.Image1.Canvas do begin
          end;
          rectangle(x-2,y-2,x+2,y+2);
       end;
-   until eof(f);
+   until feof;
    finally
-   closefile(f);
+   CloseObs(f);
    end;
 end;
 end;
@@ -1288,6 +1358,23 @@ result:=stringreplace(nom,'+','%2B',[rfReplaceAll]);
 result:=stringreplace(result,' ','%20',[rfReplaceAll]);
 end;
 
+procedure CleanXML(nom : string);
+var f: textfile;
+    buf:Tstringlist;
+    i:integer;
+begin
+buf:=Tstringlist.Create;
+buf.LoadFromFile(nom);
+assignfile(f,nom);
+rewrite(f);
+for i:=0 to buf.Count-1 do begin
+   if (trim(buf[i])<>'')and(copy(buf[i],1,19)<>'Astro::VO::VOTable:') then
+      writeln(f,buf[i]);
+end;
+closefile(f);
+buf.free;
+end;
+
 procedure TDetailForm.GetQuickLookClick(Sender: TObject);
 begin
 case OptForm.radiogroup6.itemindex of
@@ -1296,12 +1383,8 @@ case OptForm.radiogroup6.itemindex of
     DownloadDialog1.URL:=StringReplace(qlurl,'$$$$',CleanName(starname),[]) ;
     DownloadDialog1.SaveToFile:=qlfn;
     DownloadDialog1.Title:='AAVSO QuickLook';
-//    GetExt('AAVSO QuickLook',qlurl,qlmethode,qlinfo,qlfn);
-//    if stardesign='' then ModUrl('$$$$',CleanName(starname))
-//                     else ModUrl('$$$$',CleanName(stardesign));
-//    if extform.showmodal=mrOK then begin
     if DownloadDialog1.Execute then begin;
-
+       CleanXML(qlfn);
        CheckBox4.checked:=true;
        if started then DrawGraph(current);
     end;
@@ -1313,8 +1396,6 @@ case OptForm.radiogroup6.itemindex of
     DownloadDialog1.Title:='AFOEV data archive';
     DownloadDialog1.FtpUserName:='anonymous';
     DownloadDialog1.FtpPassword:='varobs@';
-//    GetExt('AFOEV data archive',afoevurl+afoevdir+'/'+afoevname,afoevmethode,afoevinfo,afoevfn);
-//    if extform.showmodal=mrOK then begin
     if DownloadDialog1.Execute then begin;
        CheckBox4.checked:=true;
        if started then DrawGraph(current);
