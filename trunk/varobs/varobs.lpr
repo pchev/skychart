@@ -12,10 +12,6 @@ uses
   ObsUnit, SettingUnit, splashunit, Printer4Lazarus, CDCjdcalendar, u_param,
   downldialog;
 
-
-
-{$R manifest.res}
-
 begin
   Application.Initialize;
   Application.CreateForm(TVarForm, VarForm);

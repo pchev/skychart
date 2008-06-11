@@ -721,6 +721,7 @@ fixed : begin
       if (sname<>'*') and (buf<>sname) then exit;
       buf:=trim(copy(lin,jdpos[1],jdpos[2]));      // date
       if buf='' then exit;
+      buf:=RemoveLastDot(buf);
       case dateformat of
       1 : begin                                    // JD
           p:=pos('.',buf)-1;
