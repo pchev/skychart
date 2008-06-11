@@ -112,6 +112,7 @@ type
     procedure AAVSOwebpage1Click(Sender: TObject);
     procedure AAVSOChart1Click(Sender: TObject);
   private
+    Procedure GetAppDir;
     { Private declarations }
   public
     { Public declarations }
@@ -123,10 +124,10 @@ PROCEDURE Djd(jd:Double;VAR annee,mois,jour:integer; VAR Heure:double);
 function words(str,sep : string; p,n : integer) : string;
 function IsNumber(n : string) : boolean;
 Function Slash(nom : string) : string;
-Function SlashX(nom : string) : string;
 Function SetDate(year,month,day : word) : Tdatetime;
 Procedure GetDate(d : TDatetime; var year,month,day : word);
 Function ExecuteFile(const FileName: string): integer;
+Procedure FormPos(form : Tform; x,y : integer);
 
 Type
     TVarinfo = class(Tobject)
@@ -173,6 +174,19 @@ for i:=1 to n do begin
  if j=0 then j:=length(str)+1;
  result:=result+trim(copy(str,1,j))+sep;
  str:=trim(copy(str,j,length(str)));
+end;
+end;
+
+Procedure FormPos(form : Tform; x,y : integer);
+const bot=40; //minimal distance from screen bottom
+begin
+with Form do begin
+  left:=x;
+  if left+width>Screen.Width then left:=Screen.Width-width;
+  if left<0 then left:=0;
+  top:=y;
+  if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
+  if top<0 then top:=0;
 end;
 end;
 
@@ -237,12 +251,6 @@ Function Slash(nom : string) : string;
 begin
 result:=trim(nom);
 if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
-end;
-
-Function SlashX(nom : string) : string;
-begin
-if copy(nom,length(nom),1)<>'/' then result:=nom+'/'
-                              else result:=nom;
 end;
 
 function Jd(annee,mois,jour :integer; Heure:double):double;
@@ -624,6 +632,60 @@ inc(i);
 end;
 end;
 
+Procedure TVarForm.GetAppDir;
+var inif: TMemIniFile;
+    buf: string;
+{$ifdef darwin}
+    i: integer;
+{$endif}
+{$ifdef win32}
+    PIDL : PItemIDList;
+    Folder : array[0..MAX_PATH] of Char;
+const CSIDL_PERSONAL = $0005;
+{$endif}
+begin
+{$ifdef darwin}
+appdir:=getcurrentdir;
+if not DirectoryExists(slash(appdir)+slash('const')) then begin
+   appdir:=ExtractFilePath(ParamStr(0));
+   i:=pos('.app/',appdir);
+   if i>0 then begin
+     appdir:=ExtractFilePath(copy(appdir,1,i));
+   end;
+end;
+{$else}
+appdir:=getcurrentdir;
+GetDir(0,appdir);
+{$endif}
+privatedir:=DefaultPrivateDir;
+configfile:=Defaultconfigfile;
+{$ifdef unix}
+appdir:=expandfilename(appdir);
+privatedir:=expandfilename(PrivateDir);
+configfile:=expandfilename(configfile);
+{$endif}
+{$ifdef win32}
+SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
+SHGetPathFromIDList(PIDL, Folder);
+privatedir:=slash(Folder)+privatedir;
+configfile:=slash(privatedir)+configfile;
+{$endif}
+if not directoryexists(privatedir) then CreateDir(privatedir);
+if not directoryexists(privatedir) then forcedirectories(privatedir);
+if not directoryexists(privatedir) then begin
+   MessageDlg('Unable to create '+privatedir,
+             mtError, [mbAbort], 0);
+   Halt;
+end;
+if not directoryexists(slash(privatedir)+'quicklook') then CreateDir(slash(privatedir)+'quicklook');
+if not directoryexists(slash(privatedir)+'afoevdata') then CreateDir(slash(privatedir)+'afoevdata');
+{$ifdef unix}  // allow a shared install
+if (not directoryexists(slash(appdir)+'const')) and
+   (directoryexists(SharedDir)) then
+   appdir:=SharedDir;
+{$endif}
+end;
+
 procedure TVarForm.FormCreate(Sender: TObject);
 begin
 lockdate := false;
@@ -632,7 +694,7 @@ started := false;
 StartedByVarobs := false;
 NoChart := false;
 param:=Tstringlist.Create;
-AppDir:=slash(trim(extractfilepath(paramstr(0))));
+GetAppDir;
 decimalseparator:='.';
 DateSeparator:='-';
 ShortdateFormat:='yyyy-mm-dd';
@@ -717,7 +779,7 @@ end;
 procedure TVarForm.Open1Click(Sender: TObject);
 begin
 try
-opendialog1.FilterIndex:=3;
+opendialog1.FilterIndex:=2;
 if opendialog1.execute then begin
    planname:=opendialog1.FileName;
    varform.caption:='Variables Star Observer, current file : '+planname;
@@ -738,25 +800,19 @@ begin
 timepicker1.time:=now;
 decodedate(now,year,month,day);
 DateEdit1.date:=now;
-//Grid1.SetSelectRow(0,true);
-planname:=appdir+'aavsoeasy.txt';
-qlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$$$$&mycode=&startdate=&output=votable&jd=';
-//qlurl:='http://www.aavso.org/cgi-bin/quickquick.pl?star=$$$$';
-qlmethode:='GET';
-qlinfo:='http://www.aavso.org/ql';
-vsurl:='http://www.kusastro.kyoto-u.ac.jp/vsnet/etc/searchobs.cgi?text=$$$$';
-vsmethode:='GET';
-vsinfo:='http://www.kusastro.kyoto-u.ac.jp/vsnet/etc/searchobs.html';
+planname:=slash(privatedir)+'aavsoeasy.dat';
+if not fileexists(planname) then CopyFile(pchar(slash(appdir)+'aavsoeasy.dat'),pchar(planname),true);
+qlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$$$$&output=votable';
+qlinfo:='http://www.aavso.org/data/ql/';
 afoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
-afoevmethode:='GET';
 afoevinfo:='http://cdsweb.u-strasbg.fr/afoev/english.htx';
 pcobscaption:='PCObs Data Entry';
 Optform.DirectoryEdit2.Text:=aavsocharturl;
-inifile:=Tinifile.create(appdir+'puls.ini');
+inifile:=Tinifile.create(configfile);
 section:='Default';
 if Inifile.SectionExists(section) then begin
 with inifile do begin
-    planname:=ReadString(section,'fname',planname);
+    planname:=ReadString(section,'planname',planname);
     Radiogroup1.itemindex:=ReadInteger(section,'dateformat',0);
     OptForm.Radiogroup1.itemindex:=ReadInteger(section,'obstype',0);
     OptForm.Radiogroup4.itemindex:=ReadInteger(section,'obsformat',0);
@@ -799,15 +855,8 @@ with inifile do begin
     Varform.left:=ReadInteger(section,'formleft',Varform.left);
     Varform.width:=ReadInteger(section,'formwidth',Varform.width);
     Varform.height:=ReadInteger(section,'formheight',Varform.height);
-    qlurl:=ReadString(section,'qlurl',qlurl);
-    qlmethode:=ReadString(section,'qlmeth',qlmethode);
-    qlinfo:=ReadString(section,'qlinfo',qlinfo);
-    vsurl:=ReadString(section,'vsurl',vsurl);
-    vsmethode:=ReadString(section,'vsmeth',vsmethode);
-    vsinfo:=ReadString(section,'vsinfo',vsinfo);
 end;
 end;
-appdir:=slash(extractfilepath(planname));
 inifile.free;
 detail1.savecheckbox1:=Detailform.checkbox1.checked;
 param.clear;
@@ -837,6 +886,7 @@ case button of
 mbLeft  : begin
           CurrentRow:=Arow;
           Detail1.current:=ARow;
+          FormPos(DetailForm,mouse.cursorpos.x,mouse.cursorpos.y);
           DetailForm.ShowModal;
           end;
 mbRight : begin
@@ -848,6 +898,7 @@ end;
 
 procedure TVarForm.Setting1Click(Sender: TObject);
 begin
+FormPos(OptForm,mouse.cursorpos.x,mouse.cursorpos.y);
 OptForm.showmodal;
 chdir(appdir);
 end;
@@ -856,10 +907,10 @@ procedure TVarForm.FormClose(Sender: TObject; var Action: TCloseAction);
 var  inifile : Tinifile;
      section : string;
 begin
-inifile:=Tinifile.create(appdir+'puls.ini');
+inifile:=Tinifile.create(configfile);
 section:='Default';
 with inifile do begin
-    WriteString(section,'fname',planname);
+    WriteString(section,'planname',planname);
     WriteInteger(section,'dateformat',Radiogroup1.itemindex);
     WriteInteger(section,'obstype',OptForm.Radiogroup1.itemindex);
     WriteInteger(section,'obsformat',OptForm.Radiogroup4.itemindex);
@@ -902,12 +953,6 @@ with inifile do begin
     WriteInteger(section,'formleft',Varform.left);
     WriteInteger(section,'formwidth',Varform.width);
     WriteInteger(section,'formheight',Varform.Height);
-    WriteString(section,'qlurl',qlurl);
-    WriteString(section,'qlmeth',qlmethode);
-    WriteString(section,'qlinfo',qlinfo);
-    WriteString(section,'vsurl',vsurl);
-    WriteString(section,'vsmeth',vsmethode);
-    WriteString(section,'vsinfo',vsinfo);
 end;
 inifile.free;
 {if StartedByVarobs then PostMessage(findwindow(nil,Pchar(skychartcaption)),WM_QUIT,0,0)   // close skychart (use WM_CLOSE for close prompt)
@@ -1052,6 +1097,7 @@ end;
 procedure TVarForm.Lightcurve1Click(Sender: TObject);
 begin
 Detail1.current:=CurrentRow;
+FormPos(DetailForm,mouse.cursorpos.x,mouse.cursorpos.y);
 DetailForm.ShowModal;
 end;
 
@@ -1159,18 +1205,22 @@ begin
 case Optform.radiogroup5.itemindex of
 0 : begin
     ObsUnit.current:=CurrentRow;
+    FormPos(ObsForm,mouse.cursorpos.x,mouse.cursorpos.y);
     ObsForm.Showmodal;
     chdir(appdir);
     end;
 1 : begin
     RunPCObs;
     end;
+2: begin
+    executefile('http://www.aavso.org/observing/submit/webobs.shtml');
+    end;
 end;
 end;
 
 procedure TVarForm.Content1Click(Sender: TObject);
 begin
-executefile('varobs.html');
+executefile(slash(appdir)+slash('doc')+'varobs.html');
 end;
 
 procedure TVarForm.BitBtn3Click(Sender: TObject);
@@ -1190,12 +1240,12 @@ end;
 
 procedure TVarForm.PrepareLPVBulletin1Click(Sender: TObject);
 begin
-executefile('bulletin.exe');
+executefile(slash(appdir)+'bulletin.exe');
 end;
 
 procedure TVarForm.Createobservingplan1Click(Sender: TObject);
 begin
-executefile('copyplan.exe');
+executefile(slash(appdir)+'copyplan.exe');
 end;
 
 procedure TVarForm.AAVSOwebpage1Click(Sender: TObject);
@@ -1208,26 +1258,30 @@ var i : integer;
     buf,id, chartlist: string;
     f: textfile;
 begin
-chartlist:='';
-chdir(appdir);
-assignfile(f,'united.txt');
-reset(f);
-try
-repeat
-  readln(f,buf);
-  i:=pos('#',buf);
-  id:=trim(copy(buf,1,i-1));
-  if id=VarForm.Grid1.Cells[1,currentrow] then begin
-     i:=lastdelimiter('#',buf);
-     chartlist:=trim(copy(buf,i+1,9999));
-     break;
+if (pos('://',Optform.DirectoryEdit2.Text)=0) then begin
+  chartlist:='';
+  chdir(appdir);
+  assignfile(f,slash(appdir)+'united.txt');
+  reset(f);
+  try
+  repeat
+    readln(f,buf);
+    i:=pos('#',buf);
+    id:=trim(copy(buf,1,i-1));
+    if id=VarForm.Grid1.Cells[1,currentrow] then begin
+       i:=lastdelimiter('#',buf);
+       chartlist:=trim(copy(buf,i+1,9999));
+       break;
+    end;
+  until eof(f);
+  finally
+  closefile(f);
   end;
-until eof(f);
-finally
-closefile(f);
+  chartform.chartlist:=chartlist;
 end;
-chartform.chartlist:=chartlist;
+chartform.starname:=VarForm.Grid1.Cells[0,currentrow];
 chartform.chartdir:=Optform.DirectoryEdit2.Text;
+FormPos(chartform,mouse.cursorpos.x,mouse.cursorpos.y);
 chartform.ShowModal;
 end;
 

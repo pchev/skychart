@@ -27,15 +27,21 @@ interface
 
 uses
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Buttons, LResources, u_param;
+  StdCtrls, ExtCtrls, Buttons, LResources, u_param, ComCtrls;
 
 type
 
   { TOptForm }
 
   TOptForm = class(TForm)
+    BitBtn2: TBitBtn;
+    Button1: TButton;
     Directoryedit1: TEdit;
     Directoryedit2: TEdit;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
     FilenameEdit0: TEdit;
     FilenameEdit1: TEdit;
     FilenameEdit2: TEdit;
@@ -45,53 +51,53 @@ type
     FilenameEdit6: TEdit;
     FilenameEdit7: TEdit;
     FilenameEdit8: TEdit;
-    RadioGroup1: TRadioGroup;
-    GroupBox4: TGroupBox;
-    RadioGroup2: TRadioGroup;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    GroupBox3: TGroupBox;
-    Label4: TLabel;
     GroupBox0: TGroupBox;
-    Label5: TLabel;
-    Label6: TLabel;
     GroupBox1: TGroupBox;
-    Label7: TLabel;
-    Label8: TLabel;
     GroupBox2: TGroupBox;
-    Label9: TLabel;
+    GroupBox3: TGroupBox;
+    GroupBox4: TGroupBox;
+    GroupBox5: TGroupBox;
+    GroupBox6: TGroupBox;
+    GroupBox7: TGroupBox;
+    GroupBox8: TGroupBox;
+    GroupBox9: TGroupBox;
+    Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
-    BitBtn1: TBitBtn;
-    RadioGroup3: TRadioGroup;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
-    GroupBox5: TGroupBox;
-    GroupBox6: TGroupBox;
+    Label15: TLabel;
+    Label16: TLabel;
     Label17: TLabel;
-    GroupBox7: TGroupBox;
     Label18: TLabel;
     Label19: TLabel;
-    GroupBox8: TGroupBox;
+    Label2: TLabel;
     Label20: TLabel;
     Label21: TLabel;
-    RadioGroup5: TRadioGroup;
-    Panel1: TPanel;
-    RadioGroup4: TRadioGroup;
-    Label15: TLabel;
-    Panel2: TPanel;
     Label22: TLabel;
     Label23: TLabel;
-    Edit4: TEdit;
-    Label16: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    PageControl1: TPageControl;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    BitBtn1: TBitBtn;
+    RadioGroup1: TRadioGroup;
+    RadioGroup2: TRadioGroup;
+    RadioGroup3: TRadioGroup;
+    RadioGroup4: TRadioGroup;
+    RadioGroup5: TRadioGroup;
     RadioGroup6: TRadioGroup;
-    GroupBox9: TGroupBox;
-    Button1: TButton;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
     procedure RadioGroup1Click(Sender: TObject);
     procedure RadioGroup3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -212,6 +218,10 @@ case radiogroup5.itemindex of
 1 : begin
     Panel1.visible:=False;
     Panel2.visible:=true;
+    end;
+2 : begin
+    Panel1.visible:=False;
+    Panel2.visible:=False;
     end;
 end;
 end;

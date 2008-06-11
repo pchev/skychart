@@ -270,15 +270,6 @@ with detailform do begin
     Detailform.checkbox1.enabled:=true;
  end;
  skipsavebox1:=false;
-{ if stardesign<>'' then begin
-    GetQuickLook.visible:=true;
-    checkbox4.visible:=true;
-    BitBtn5.visible:=true;
- end else begin
-    GetQuickLook.visible:=false;
-    checkbox4.visible:=false;
-    BitBtn5.visible:=false;
- end;}
 end;
 end;
 
@@ -914,24 +905,15 @@ begin
 // quicklook
 case OptForm.radiogroup6.ItemIndex of
 0 : begin
-  qldir:=slash(appdir)+slash('quicklook');
-  if stardesign='' then qlfn:=qldir+uppercase(trim(starname))+'.txt'
-                   else qlfn:=qldir+trim(stardesign)+'.txt';
+  qldir:=slash(privatedir)+slash('quicklook');
+  qlfn:=qldir+uppercase(trim(starname))+'.xml';
   if detailform.checkbox4.checked and fileexists(qlfn) then begin
      DrawObservation(98);
   end;
   end;
 1 : begin
-  vsname:=uppercase(trim(VSNETname(starname)));
-  vsdir:=slash(appdir)+slash('vsnetdata');
-  vsfn:=vsdir+vsname+'.txt';
-  if detailform.checkbox4.checked and fileexists(vsfn) then begin
-     DrawObservation(99);
-  end;
-  end;
-2 : begin
   AFOEVnam(starname,afoevdir,afoevname);
-  afoevfn:=slash(appdir)+slash('afoevdata')+slash(afoevdir)+afoevname;
+  afoevfn:=slash(privatedir)+slash('afoevdata')+slash(afoevdir)+afoevname;
   if detailform.checkbox4.checked and fileexists(afoevfn) then begin
      DrawObservation(97);
   end;
@@ -978,11 +960,6 @@ case Optform.RadioGroup6.ItemIndex of
     CheckBox4.Caption:='Plot QuickLook';
     end;
 1 : begin
-    GetQuickLook.caption:='Get online VSNET data browser';
-    Bitbtn5.caption:='VSNET Browser';
-    CheckBox4.Caption:='Plot VSNET data';
-    end;
-2 : begin
     GetQuickLook.caption:='Get online AFOEV data';
     Bitbtn5.caption:='Get AFOEV data';
     CheckBox4.Caption:='Plot AFOEV data';
@@ -1287,15 +1264,15 @@ end;
 
 
 procedure TDetailForm.SaveasBMP1Click(Sender: TObject);
-var currentdir : string;
+var curdir : string;
 begin
-  GetDir(0,currentdir);
+  GetDir(0,curdir);
   Savedialog1.filename:=starname+'.bmp';
   try
   if SaveDialog1.Execute then
      Image1.Picture.Bitmap.SaveTofile(savedialog1.Filename);
   finally
-    ChDir(currentdir);
+    ChDir(curdir);
   end;
 end;
 
@@ -1314,7 +1291,7 @@ procedure TDetailForm.GetQuickLookClick(Sender: TObject);
 begin
 case OptForm.radiogroup6.itemindex of
 0 : begin
-    forcedirectories(qldir);
+    CreateDir(qldir);
     DownloadDialog1.URL:=StringReplace(qlurl,'$$$$',CleanName(starname),[]) ;
     DownloadDialog1.SaveToFile:=qlfn;
     DownloadDialog1.Title:='AAVSO QuickLook';
@@ -1329,16 +1306,7 @@ case OptForm.radiogroup6.itemindex of
     end;
     end;
 1 : begin
-{    forcedirectories(vsdir);
-    GetExt('VSNET data browser',vsurl,vsmethode,vsinfo,vsfn);
-    ModUrl('$$$$',CleanName(vsname));
-    if extform.showmodal=mrOK then begin
-       CheckBox4.checked:=true;
-       if started then DrawGraph(current);
-    end;}
-    end;
-2 : begin   
-    forcedirectories(slash(appdir)+slash('afoevdata')+afoevdir);
+    CreateDir(ExtractFilePath(afoevfn));
     DownloadDialog1.URL:=afoevurl+afoevdir+'/'+afoevname;
     DownloadDialog1.SaveToFile:=afoevfn;
     DownloadDialog1.Title:='AFOEV data archive';

@@ -1,14 +1,14 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TObsForm','FORMDATA',[
-  'TPF0'#8'TObsForm'#7'ObsForm'#4'Left'#3#10#1#6'Height'#3#206#1#3'Top'#2'x'#5
-  +'Width'#3#175#2#18'HorzScrollBar.Page'#3#174#2#18'VertScrollBar.Page'#3#205#1
-  +#13'ActiveControl'#7#5'Edit3'#7'Caption'#6#15'New observation'#12'ClientHeig'
-  +'ht'#3#206#1#11'ClientWidth'#3#175#2#11'Font.Height'#2#245#9'Font.Name'#6#13
-  +'MS Sans Serif'#12'OnCloseQuery'#7#14'FormCloseQuery'#6'OnShow'#7#8'FormShow'
-  +#0#6'TLabel'#6'Label1'#4'Left'#2#2#6'Height'#2#14#3'Top'#2' '#5'Width'#2'6'#7
-  +'Caption'#6#10'Star Name '#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'
-  +#3#176#1#6'Height'#2#14#3'Top'#2' '#5'Width'#2'4'#7'Caption'#6#10'UT decimal'
+  'TPF0'#8'TObsForm'#7'ObsForm'#4'Left'#3#10#1#6'Height'#3'`'#1#3'Top'#2'x'#5'W'
+  +'idth'#3'~'#2#18'HorzScrollBar.Page'#3'}'#2#18'VertScrollBar.Page'#3'_'#1#13
+  +'ActiveControl'#7#5'Edit3'#7'Caption'#6#15'New observation'#12'ClientHeight'
+  +#3'`'#1#11'ClientWidth'#3'~'#2#11'Font.Height'#2#245#9'Font.Name'#6#13'MS Sa'
+  +'ns Serif'#12'OnCloseQuery'#7#14'FormCloseQuery'#6'OnShow'#7#8'FormShow'#0#6
+  +'TLabel'#6'Label1'#4'Left'#2#2#6'Height'#2#14#3'Top'#2' '#5'Width'#2'6'#7'Ca'
+  +'ption'#6#10'Star Name '#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#3
+  +#176#1#6'Height'#2#14#3'Top'#2' '#5'Width'#2'4'#7'Caption'#6#10'UT decimal'
   +#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Left'#2#2#6'Height'#2#14#3'Top'
   +#2'F'#5'Width'#2#31#7'Caption'#6#5'Magn.'#11'ParentColor'#8#0#0#6'TLabel'#6
   +'Label4'#4'Left'#3#8#2#6'Height'#2#14#3'Top'#2'F'#5'Width'#2'.'#7'Caption'#6

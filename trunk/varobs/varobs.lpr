@@ -14,6 +14,8 @@ uses
 
 
 
+{$R manifest.res}
+
 begin
   Application.Initialize;
   Application.CreateForm(TVarForm, VarForm);
