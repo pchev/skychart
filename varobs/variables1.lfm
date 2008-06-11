@@ -1,14 +1,14 @@
 object VarForm: TVarForm
-  Left = 258
-  Height = 526
-  Top = 151
-  Width = 875
-  HorzScrollBar.Page = 874
-  VertScrollBar.Page = 505
+  Left = 291
+  Height = 530
+  Top = 105
+  Width = 891
+  HorzScrollBar.Page = 890
+  VertScrollBar.Page = 509
   ActiveControl = Grid1
   Caption = 'Variable stars observer'
-  ClientHeight = 506
-  ClientWidth = 875
+  ClientHeight = 510
+  ClientWidth = 891
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Icon.Data = {
@@ -117,10 +117,10 @@ object VarForm: TVarForm
   OnShow = FormShow
   ShowHint = True
   object Grid1: TStringGrid
-    Height = 434
+    Height = 438
     Hint = 'Right click on a line to show menu'
     Top = 72
-    Width = 875
+    Width = 891
     Align = alBottom
     Anchors = [akTop, akLeft, akRight, akBottom]
     ColCount = 11
@@ -136,10 +136,10 @@ object VarForm: TVarForm
   end
   object Panel1: TPanel
     Height = 70
-    Width = 875
+    Width = 891
     Align = alTop
     ClientHeight = 70
-    ClientWidth = 875
+    ClientWidth = 891
     TabOrder = 1
     object Label1: TLabel
       Left = 152

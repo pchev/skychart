@@ -1,14 +1,14 @@
 object ObsForm: TObsForm
   Left = 266
-  Height = 462
+  Height = 352
   Top = 120
-  Width = 687
-  HorzScrollBar.Page = 686
-  VertScrollBar.Page = 461
+  Width = 638
+  HorzScrollBar.Page = 637
+  VertScrollBar.Page = 351
   ActiveControl = Edit3
   Caption = 'New observation'
-  ClientHeight = 462
-  ClientWidth = 687
+  ClientHeight = 352
+  ClientWidth = 638
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCloseQuery = FormCloseQuery

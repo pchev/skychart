@@ -27,13 +27,33 @@ interface
 
 uses
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, LResources, u_param;
+  Dialogs, StdCtrls, LResources, u_param, ExtCtrls;
 
 type
+
+  { Tchartform }
+
   Tchartform = class(TForm)
     Button1: TButton;
-    ListBox1: TListBox;
+    Button2: TButton;
+    CdromPanel: TPanel;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
     Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    LabelNorth: TLabel;
+    LabelMag: TLabel;
+    Labelfov: TLabel;
+    StarLabel: TLabel;
+    ListBox1: TListBox;
+    OnlinePanel: TPanel;
+    procedure Button2Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
   private
@@ -41,6 +61,7 @@ type
   public
     chartlist:string;
     chartdir:string;
+    starname:string;
     { Public declarations }
   end;
 
@@ -57,19 +78,47 @@ var i: integer;
     byinternet:boolean;
 begin
 byinternet:=(pos('://',chartdir)>0);
-if byinternet then chartdir:=slashX(chartdir)
-              else chartdir:=slash(chartdir);
-label1.Caption:=chartdir;
-Listbox1.clear;
-buf1:=chartlist;
-i:=pos(',',buf1);
-while i>0 do begin
-  buf2:=trim(copy(buf1,1,i-1));
-  if not byinternet then buf2:=stringreplace(buf2,'/','\',[rfReplaceAll]);
-  delete(buf1,1,i);
-  Listbox1.items.add(buf2);
+if byinternet then begin
+  CdromPanel.Visible:=false;
+  OnlinePanel.Visible:=true;
+  StarLabel.Caption:=starname;
+  ComboBox1Change(Sender);
+end else begin
+  OnlinePanel.Visible:=false;
+  CdromPanel.Visible:=true;
+  chartdir:=slash(chartdir);
+  label1.Caption:=chartdir;
+  Listbox1.clear;
+  buf1:=chartlist;
   i:=pos(',',buf1);
+  while i>0 do begin
+    buf2:=trim(copy(buf1,1,i-1));
+    buf2:=stringreplace(buf2,'/',PathDelim,[rfReplaceAll]);
+    delete(buf1,1,i);
+    if (copy(buf2,length(buf2)-3,length(buf2))<>'.ZIP') then Listbox1.items.add(buf2);
+    i:=pos(',',buf1);
+  end;
 end;
+end;
+
+procedure Tchartform.ComboBox1Change(Sender: TObject);
+begin
+  labelfov.Caption:=aavsochartfov[ComboBox1.ItemIndex];
+  labelmag.Caption:=aavsochartmag[ComboBox1.ItemIndex];
+  labelnorth.Caption:=aavsochartnorth[ComboBox1.ItemIndex];
+end;
+
+procedure Tchartform.Button2Click(Sender: TObject);
+var buf:string;
+begin
+  buf:=chartdir;
+  buf:=StringReplace(buf,'$star',starname,[]);
+  buf:=StringReplace(buf,'$scale',aavsochartscale[ComboBox1.ItemIndex],[]);
+  buf:=StringReplace(buf,'$fov',aavsochartfov[ComboBox1.ItemIndex],[]);
+  buf:=StringReplace(buf,'$mag',aavsochartmag[ComboBox1.ItemIndex],[]);
+  buf:=StringReplace(buf,'$north',aavsochartnorth[ComboBox1.ItemIndex],[]);
+  buf:=StringReplace(buf,'$east',aavsocharteast[ComboBox2.ItemIndex],[]);
+  ExecuteFile(buf);
 end;
 
 procedure Tchartform.ListBox1Click(Sender: TObject);

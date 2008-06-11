@@ -1,45 +1,197 @@
 object chartform: Tchartform
-  Left = 154
-  Height = 395
-  Top = 203
-  Width = 254
-  HorzScrollBar.Page = 253
-  VertScrollBar.Page = 394
-  ActiveControl = Button1
+  Left = 250
+  Height = 295
+  Top = 164
+  Width = 247
+  HorzScrollBar.Page = 246
+  VertScrollBar.Page = 294
+  ActiveControl = ListBox1
   Caption = 'AAVSO Chart List'
-  ClientHeight = 395
-  ClientWidth = 254
+  ClientHeight = 295
+  ClientWidth = 247
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnShow = FormShow
-  Position = poDefaultPosOnly
-  object Label1: TLabel
-    Left = 8
-    Height = 25
-    Top = 6
-    Width = 225
-    AutoSize = False
-    Caption = 'Label1'
-    ParentColor = False
-    WordWrap = True
+  object CdromPanel: TPanel
+    Height = 256
+    Width = 242
+    ClientHeight = 256
+    ClientWidth = 242
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Height = 25
+      Top = 6
+      Width = 225
+      AutoSize = False
+      Caption = 'Label1'
+      ParentColor = False
+      WordWrap = True
+    end
+    object ListBox1: TListBox
+      Left = 8
+      Height = 209
+      Top = 32
+      Width = 225
+      ItemHeight = 13
+      OnClick = ListBox1Click
+      TabOrder = 0
+    end
   end
   object Button1: TButton
-    Left = 85
+    Left = 80
     Height = 25
-    Top = 328
+    Top = 264
     Width = 75
     Cancel = True
     Caption = 'Close'
     ModalResult = 1
-    TabOrder = 0
-  end
-  object ListBox1: TListBox
-    Left = 8
-    Height = 289
-    Top = 32
-    Width = 225
-    ItemHeight = 13
-    OnClick = ListBox1Click
     TabOrder = 1
+  end
+  object OnlinePanel: TPanel
+    Height = 272
+    Top = -16
+    Width = 242
+    ClientHeight = 272
+    ClientWidth = 242
+    TabOrder = 2
+    object Label2: TLabel
+      Left = 8
+      Height = 14
+      Top = 24
+      Width = 116
+      Caption = 'Online AAVSO chart for '
+      ParentColor = False
+    end
+    object StarLabel: TLabel
+      Left = 136
+      Height = 14
+      Top = 24
+      Width = 55
+      Caption = 'StarLabel'
+      Font.Style = [fsBold]
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 88
+      Height = 14
+      Top = 59
+      Width = 33
+      Caption = 'Scale :'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 96
+      Height = 14
+      Top = 92
+      Width = 25
+      Caption = 'FOV:'
+      ParentColor = False
+    end
+    object Labelfov: TLabel
+      Left = 136
+      Height = 14
+      Top = 92
+      Width = 49
+      Caption = 'Labelfov'
+      Font.Style = [fsBold]
+      ParentColor = False
+    end
+    object Label5: TLabel
+      Left = 66
+      Height = 14
+      Top = 118
+      Width = 55
+      Caption = 'Magnitude:'
+      ParentColor = False
+    end
+    object LabelMag: TLabel
+      Left = 136
+      Height = 14
+      Top = 118
+      Width = 55
+      Caption = 'LabelMag'
+      Font.Style = [fsBold]
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 89
+      Height = 14
+      Top = 144
+      Width = 32
+      Caption = 'North:'
+      ParentColor = False
+    end
+    object LabelNorth: TLabel
+      Left = 136
+      Height = 14
+      Top = 144
+      Width = 62
+      Caption = 'LabelNorth'
+      Font.Style = [fsBold]
+      ParentColor = False
+    end
+    object Label7: TLabel
+      Left = 95
+      Height = 14
+      Top = 168
+      Width = 26
+      Caption = 'East:'
+      ParentColor = False
+    end
+    object ComboBox1: TComboBox
+      Left = 136
+      Height = 21
+      Top = 56
+      Width = 60
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      ItemHeight = 13
+      ItemIndex = 0
+      Items.Strings = (
+        'A'
+        'AR'
+        'B'
+        'BR'
+        'C'
+        'CR'
+        'D'
+        'DR'
+        'E'
+        'ER'
+        'F'
+        'FR'
+        'G'
+        'GR'
+      )
+      OnChange = ComboBox1Change
+      Style = csDropDownList
+      TabOrder = 0
+      Text = 'A'
+    end
+    object ComboBox2: TComboBox
+      Left = 136
+      Height = 21
+      Top = 166
+      Width = 75
+      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
+      ItemHeight = 13
+      ItemIndex = 0
+      Items.Strings = (
+        'Right'
+        'Left'
+      )
+      Style = csDropDownList
+      TabOrder = 1
+      Text = 'Right'
+    end
+    object Button2: TButton
+      Left = 136
+      Height = 25
+      Top = 208
+      Width = 75
+      Caption = 'Get Chart'
+      OnClick = Button2Click
+      TabOrder = 2
+    end
   end
 end
