@@ -128,6 +128,7 @@ Function SetDate(year,month,day : word) : Tdatetime;
 Procedure GetDate(d : TDatetime; var year,month,day : word);
 Function ExecuteFile(const FileName: string): integer;
 Procedure FormPos(form : Tform; x,y : integer);
+Function RemoveLastDot(value : string) : string;
 
 Type
     TVarinfo = class(Tobject)
@@ -245,6 +246,12 @@ Function NoSlash(nom : string) : string;
 begin
 result:=trim(nom);
 if copy(result,length(nom),1)=PathDelim then result:=copy(result,1,length(nom)-1);
+end;
+
+Function RemoveLastDot(value : string) : string;
+begin
+result:=trim(value);
+if copy(result,length(result),1)='.' then result:=copy(result,1,length(result)-1);
 end;
 
 Function Slash(nom : string) : string;
@@ -801,7 +808,7 @@ timepicker1.time:=now;
 decodedate(now,year,month,day);
 DateEdit1.date:=now;
 planname:=slash(privatedir)+'aavsoeasy.dat';
-if not fileexists(planname) then CopyFile(pchar(slash(appdir)+'aavsoeasy.dat'),pchar(planname),true);
+//if not fileexists(planname) then CopyFile(pchar(slash(appdir)+'aavsoeasy.dat'),pchar(planname),true);
 qlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$$$$&output=votable';
 qlinfo:='http://www.aavso.org/data/ql/';
 afoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
