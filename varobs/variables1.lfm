@@ -4,10 +4,10 @@ object VarForm: TVarForm
   Top = 105
   Width = 891
   HorzScrollBar.Page = 890
-  VertScrollBar.Page = 510
+  VertScrollBar.Page = 509
   ActiveControl = Grid1
   Caption = 'Variable stars observer'
-  ClientHeight = 511
+  ClientHeight = 510
   ClientWidth = 891
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -117,7 +117,7 @@ object VarForm: TVarForm
   OnShow = FormShow
   ShowHint = True
   object Grid1: TStringGrid
-    Height = 439
+    Height = 438
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 891
@@ -225,8 +225,8 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 24
-      ClientWidth = 323
+      ClientHeight = 20
+      ClientWidth = 325
       Columns = 3
       ItemIndex = 0
       Items.Strings = (

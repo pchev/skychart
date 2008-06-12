@@ -817,7 +817,6 @@ pcobscaption:='PCObs Data Entry';
 Optform.DirectoryEdit2.Text:=aavsocharturl;
 inifile:=Tinifile.create(configfile);
 section:='Default';
-if Inifile.SectionExists(section) then begin
 with inifile do begin
     planname:=ReadString(section,'planname',planname);
     Radiogroup1.itemindex:=ReadInteger(section,'dateformat',0);
@@ -825,17 +824,17 @@ with inifile do begin
     OptForm.Radiogroup4.itemindex:=ReadInteger(section,'obsformat',0);
     OptForm.Radiogroup5.itemindex:=ReadInteger(section,'obspgm',0);
     OptForm.Radiogroup6.itemindex:=ReadInteger(section,'onlinedata',0);
-    OptForm.FilenameEdit8.text:=ReadString(section,'pcobs','pcobs.exe');
+    OptForm.FilenameEdit8.text:=ReadString(section,'pcobs','C:\pcobs\pcobs.exe');
     pcobscaption:=ReadString(section,'pcobscaption',pcobscaption);
-    OptForm.FilenameEdit6.text:=ReadString(section,'faavsosum','aavsosum.txt');
-    OptForm.FilenameEdit7.text:=ReadString(section,'faavsoql','aavsoql.txt');
-    OptForm.FilenameEdit0.text:=ReadString(section,'faavsojd','aavsojd.txt');
-    OptForm.FilenameEdit1.text:=ReadString(section,'faavsout','aavsout.txt');
-    OptForm.FilenameEdit2.text:=ReadString(section,'fvsnet','observation.txt');
-    OptForm.DirectoryEdit1.text:=ReadString(section,'dafoev','c:\afoev');
-    OptForm.FilenameEdit4.text:=ReadString(section,'freeformat','vsnet.txt');
-    OptForm.FilenameEdit5.text:=ReadString(section,'skychartprof','');
-    OptForm.FilenameEdit3.text:=ReadString(section,'fobs','aavsosum.txt');
+    OptForm.FilenameEdit6.text:=ReadString(section,'faavsosum',slash(privatedir)+'aavsosum.txt');
+    OptForm.FilenameEdit7.text:=ReadString(section,'faavsoql',slash(privatedir)+'aavsoql.txt');
+    OptForm.FilenameEdit0.text:=ReadString(section,'faavsojd',slash(privatedir)+'aavsojd.txt');
+    OptForm.FilenameEdit1.text:=ReadString(section,'faavsout',slash(privatedir)+'aavsout.txt');
+    OptForm.FilenameEdit2.text:=ReadString(section,'fvsnet',slash(privatedir)+'observation.txt');
+    OptForm.DirectoryEdit1.text:=ReadString(section,'dafoev',privatedir);
+    OptForm.FilenameEdit4.text:=ReadString(section,'freeformat',slash(privatedir)+'vsnet.txt');
+    OptForm.FilenameEdit5.text:=ReadString(section,'skychartprof',slash(privatedir)+'varobs.cdc3');
+    OptForm.FilenameEdit3.text:=ReadString(section,'fobs',slash(privatedir)+'aavsosum.txt');
     OptForm.Edit1.text:=ReadString(section,'namepos','1');
     OptForm.Edit2.text:=ReadString(section,'datepos','2');
     OptForm.Edit3.text:=ReadString(section,'magpos','3');
@@ -862,7 +861,6 @@ with inifile do begin
     Varform.left:=ReadInteger(section,'formleft',Varform.left);
     Varform.width:=ReadInteger(section,'formwidth',Varform.width);
     Varform.height:=ReadInteger(section,'formheight',Varform.height);
-end;
 end;
 inifile.free;
 detail1.savecheckbox1:=Detailform.checkbox1.checked;

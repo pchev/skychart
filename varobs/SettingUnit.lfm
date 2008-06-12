@@ -11,6 +11,7 @@ object OptForm: TOptForm
   ClientWidth = 431
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
   OnShow = FormShow
   object BitBtn1: TBitBtn
     Left = 224
@@ -36,8 +37,8 @@ object OptForm: TOptForm
   object PageControl1: TPageControl
     Height = 272
     Width = 432
-    ActivePage = TabSheet4
-    TabIndex = 3
+    ActivePage = TabSheet1
+    TabIndex = 0
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Observation entry'
@@ -45,11 +46,11 @@ object OptForm: TOptForm
       ClientWidth = 424
       object GroupBox5: TGroupBox
         Left = 20
-        Height = 168
+        Height = 184
         Top = 18
         Width = 385
         Caption = 'Observation Entry'
-        ClientHeight = 150
+        ClientHeight = 166
         ClientWidth = 381
         TabOrder = 0
         object Label16: TLabel
@@ -62,10 +63,10 @@ object OptForm: TOptForm
         end
         object Panel2: TPanel
           Left = 158
-          Height = 133
+          Height = 140
           Top = 6
           Width = 219
-          ClientHeight = 133
+          ClientHeight = 140
           ClientWidth = 219
           TabOrder = 2
           object Label22: TLabel
@@ -84,21 +85,23 @@ object OptForm: TOptForm
             Caption = 'Launch AAVSO PCObs for data entry'#13#10'This option is recommended if you want '#13#10'to submit your data to the AAVSO'
             ParentColor = False
           end
-          object FilenameEdit8: TEdit
+          object FileNameEdit8: TFileNameEdit
             Left = 16
-            Height = 21
-            Top = 106
-            Width = 198
+            Height = 23
+            Top = 109
+            Width = 169
+            ButtonWidth = 23
+            NumGlyphs = 1
+            ParentColor = False
             TabOrder = 0
-            Text = 'FilenameEdit8'
           end
         end
         object Panel1: TPanel
           Left = 158
-          Height = 131
+          Height = 138
           Top = 8
           Width = 219
-          ClientHeight = 131
+          ClientHeight = 138
           ClientWidth = 219
           TabOrder = 1
           object Label15: TLabel
@@ -133,13 +136,15 @@ object OptForm: TOptForm
             )
             TabOrder = 0
           end
-          object FilenameEdit3: TEdit
-            Left = 18
-            Height = 21
-            Top = 104
-            Width = 182
+          object FileNameEdit3: TFileNameEdit
+            Left = 14
+            Height = 23
+            Top = 105
+            Width = 176
+            ButtonWidth = 23
+            NumGlyphs = 1
+            ParentColor = False
             TabOrder = 1
-            Text = 'FilenameEdit3'
           end
         end
         object RadioGroup5: TRadioGroup
@@ -162,7 +167,7 @@ object OptForm: TOptForm
           Items.Strings = (
             'Internal facility'
             'AAVSO PCObs'
-            'AAVSO WevObs'
+            'AAVSO WebObs'
           )
           OnClick = RadioGroup5Click
           TabOrder = 0
@@ -208,13 +213,15 @@ object OptForm: TOptForm
           Caption = 'File name'
           ParentColor = False
         end
-        object FilenameEdit7: TEdit
+        object FileNameEdit7: TFileNameEdit
           Left = 8
-          Height = 21
-          Top = 160
-          Width = 121
+          Height = 23
+          Top = 162
+          Width = 200
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 0
-          Text = 'FilenameEdit7'
         end
       end
       object GroupBox2: TGroupBox
@@ -244,13 +251,15 @@ object OptForm: TOptForm
           Caption = 'File name'
           ParentColor = False
         end
-        object FilenameEdit2: TEdit
+        object FileNameEdit2: TFileNameEdit
           Left = 8
-          Height = 21
-          Top = 160
-          Width = 121
+          Height = 23
+          Top = 161
+          Width = 208
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 0
-          Text = 'FilenameEdit2'
         end
       end
       object GroupBox3: TGroupBox
@@ -273,13 +282,15 @@ object OptForm: TOptForm
           ParentColor = False
           WordWrap = True
         end
-        object Directoryedit1: TEdit
-          Left = 6
-          Height = 21
-          Top = 149
-          Width = 121
+        object DirectoryEdit1: TDirectoryEdit
+          Left = 8
+          Height = 23
+          Top = 159
+          Width = 204
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 0
-          Text = 'Directoryedit1'
         end
       end
       object GroupBox0: TGroupBox
@@ -310,13 +321,15 @@ object OptForm: TOptForm
           Caption = 'File name'
           ParentColor = False
         end
-        object FilenameEdit0: TEdit
+        object FileNameEdit0: TFileNameEdit
           Left = 8
-          Height = 21
-          Top = 160
-          Width = 121
+          Height = 23
+          Top = 162
+          Width = 200
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 0
-          Text = 'FilenameEdit0'
         end
       end
       object GroupBox1: TGroupBox
@@ -347,13 +360,15 @@ object OptForm: TOptForm
           Caption = 'File name'
           ParentColor = False
         end
-        object FilenameEdit1: TEdit
-          Left = 6
-          Height = 21
-          Top = 168
-          Width = 121
+        object FileNameEdit1: TFileNameEdit
+          Left = 8
+          Height = 23
+          Top = 161
+          Width = 200
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 0
-          Text = 'FilenameEdit1'
         end
       end
       object GroupBox4: TGroupBox
@@ -369,7 +384,7 @@ object OptForm: TOptForm
         object Label1: TLabel
           Left = 8
           Height = 14
-          Top = 52
+          Top = 46
           Width = 50
           Caption = 'Star name'
           ParentColor = False
@@ -377,7 +392,7 @@ object OptForm: TOptForm
         object Label2: TLabel
           Left = 8
           Height = 14
-          Top = 74
+          Top = 68
           Width = 23
           Caption = 'Time'
           ParentColor = False
@@ -385,7 +400,7 @@ object OptForm: TOptForm
         object Label3: TLabel
           Left = 8
           Height = 14
-          Top = 96
+          Top = 90
           Width = 51
           Caption = 'Magnitude'
           ParentColor = False
@@ -393,7 +408,7 @@ object OptForm: TOptForm
         object Label11: TLabel
           Left = 8
           Height = 14
-          Top = 148
+          Top = 143
           Width = 46
           Caption = 'File name'
           ParentColor = False
@@ -401,7 +416,7 @@ object OptForm: TOptForm
         object Label12: TLabel
           Left = 144
           Height = 14
-          Top = 52
+          Top = 46
           Width = 39
           Caption = 'Field No'
           ParentColor = False
@@ -409,7 +424,7 @@ object OptForm: TOptForm
         object Label13: TLabel
           Left = 144
           Height = 14
-          Top = 74
+          Top = 68
           Width = 39
           Caption = 'Field No'
           ParentColor = False
@@ -417,7 +432,7 @@ object OptForm: TOptForm
         object Label14: TLabel
           Left = 144
           Height = 14
-          Top = 96
+          Top = 90
           Width = 39
           Caption = 'Field No'
           ParentColor = False
@@ -425,7 +440,7 @@ object OptForm: TOptForm
         object RadioGroup2: TRadioGroup
           Left = 8
           Height = 30
-          Top = 112
+          Top = 106
           Width = 225
           AutoFill = True
           ChildSizing.LeftRightSpacing = 6
@@ -449,7 +464,7 @@ object OptForm: TOptForm
         object Edit1: TEdit
           Left = 72
           Height = 21
-          Top = 48
+          Top = 42
           Width = 65
           TabOrder = 1
           Text = '1'
@@ -457,7 +472,7 @@ object OptForm: TOptForm
         object Edit2: TEdit
           Left = 72
           Height = 21
-          Top = 70
+          Top = 64
           Width = 65
           TabOrder = 2
           Text = '2'
@@ -465,15 +480,15 @@ object OptForm: TOptForm
         object Edit3: TEdit
           Left = 72
           Height = 21
-          Top = 92
+          Top = 86
           Width = 65
           TabOrder = 3
           Text = '3'
         end
         object RadioGroup3: TRadioGroup
-          Left = 8
-          Height = 30
-          Top = 14
+          Left = 12
+          Height = 37
+          Top = -1
           Width = 225
           AutoFill = True
           ChildSizing.LeftRightSpacing = 6
@@ -484,7 +499,7 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 12
+          ClientHeight = 19
           ClientWidth = 221
           Columns = 2
           ItemIndex = 0
@@ -495,13 +510,15 @@ object OptForm: TOptForm
           OnClick = RadioGroup3Click
           TabOrder = 4
         end
-        object FilenameEdit4: TEdit
+        object FileNameEdit4: TFileNameEdit
           Left = 8
-          Height = 21
-          Top = 167
-          Width = 208
+          Height = 23
+          Top = 161
+          Width = 204
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 5
-          Text = 'FilenameEdit4'
         end
       end
       object GroupBox7: TGroupBox
@@ -531,13 +548,15 @@ object OptForm: TOptForm
           Caption = 'Col  1-8     Designation from Validation File'#13#10'Col  9-18   Star name'#13#10'Col 19-30  Julian Date and GMAT time'#13#10'Col 31-36  Magnitude'#13#10'                < in column 31 for fainter-than'#13#10'                 : in column 36 for uncertain'#13#10'Col 37-43 Comment Codes'#13#10'Col 63-67 Observer Initials'
           ParentColor = False
         end
-        object FilenameEdit6: TEdit
+        object FileNameEdit6: TFileNameEdit
           Left = 8
-          Height = 21
-          Top = 160
-          Width = 225
+          Height = 23
+          Top = 161
+          Width = 204
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 0
-          Text = 'FilenameEdit6'
         end
       end
       object RadioGroup1: TRadioGroup
@@ -616,18 +635,20 @@ object OptForm: TOptForm
         object Label17: TLabel
           Left = 8
           Height = 14
-          Top = 18
+          Top = 13
           Width = 158
           Caption = 'Default profile saved chart name'
           ParentColor = False
         end
-        object FilenameEdit5: TEdit
-          Left = 206
-          Height = 21
-          Top = 16
-          Width = 161
+        object FileNameEdit5: TFileNameEdit
+          Left = 180
+          Height = 23
+          Top = 9
+          Width = 168
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 0
-          Text = 'FilenameEdit5'
         end
       end
       object GroupBox9: TGroupBox
@@ -648,13 +669,15 @@ object OptForm: TOptForm
           OnClick = Button1Click
           TabOrder = 0
         end
-        object Directoryedit2: TEdit
-          Left = 17
-          Height = 21
+        object DirectoryEdit2: TDirectoryEdit
+          Left = 10
+          Height = 23
           Top = 18
-          Width = 157
+          Width = 162
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
           TabOrder = 1
-          Text = 'Directoryedit2'
         end
       end
     end
