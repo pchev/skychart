@@ -36,7 +36,9 @@ type
   TObsForm = class(TForm)
     DateEdit1: TDateEdit;
     Edit1: TEdit;
+    Edit9: TEdit;
     Label1: TLabel;
+    Label11: TLabel;
     Label2: TLabel;
     Edit2: TEdit;
     Label3: TLabel;
@@ -59,7 +61,6 @@ type
     Edit7: TEdit;
     Edit8: TEdit;
     Label10: TLabel;
-    CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     TimePicker1: TTimePicker;
     procedure FormShow(Sender: TObject);
@@ -85,6 +86,8 @@ implementation
 
 uses variables1,SettingUnit;
 
+const
+   coma=',';
 var sname : string;
     lockdate : boolean;
 
@@ -98,7 +101,6 @@ procedure TObsForm.FormShow(Sender: TObject);
 var p,i : integer;
     buf,nam,con : string;
 begin
-checkbox1.checked:=false;
 checkbox2.checked:=false;
 edit3.text:='';
 edit4.text:='';
@@ -107,35 +109,36 @@ edit6.text:='';
 edit7.text:='';
 edit8.text:='';
 if current>0 then begin
-case optform.radiogroup4.itemindex of
-0 : begin
-    Edit1.text:=fixlen(varform.Grid1.Cells[1,current],8)+fixlen(varform.Grid1.Cells[0,current],10);
-    Edit1.Readonly:=true;
-    label2.caption:='JD + GMAT ';
-    if Edit2.text='' then Edit2.text:= trim(varform.Edit1.text);      // Date
-    if Edit4.text='' then Edit4.text:= optform.Edit4.text;            // Observer
+  case optform.radiogroup4.itemindex of
+    0 : begin   //AAVSO
+        Edit1.text:=varform.Grid1.Cells[0,current];
+        Edit1.Readonly:=false;
+        label2.caption:='JD + GMAT ';
+        if Edit2.text='' then Edit2.text:= trim(varform.Edit1.text);      // Date
+        if Edit4.text='' then Edit4.text:= optform.Edit4.text;            // Observer
+        end;
+    1 : begin //VSNET
+        buf := trim(varform.Grid1.Cells[0,current]);      // star name
+        p:=pos(' ',buf);
+        if p>0 then begin
+           nam:=trim(copy(buf,1,p));
+           if (uppercase(copy(nam,1,1))='V')and IsNumber(copy(nam,2,99)) then begin
+              nam:='V'+inttostr(strtoint(copy(nam,2,99)));
+           end;
+           for i:=1 to 24 do if nam=greek[2,i] then nam:=greek[1,i];
+           con:=uppercase(trim(copy(buf,p+1,99)));
+           if pos(con,uppercase(abrcons))>0 then sname:=con+nam
+                                            else sname:=nam+con;
+           end
+        else
+           sname:=uppercase(buf);
+        Edit1.text:=sname;
+        Edit1.Readonly:=false;
+        label2.caption:='UT decimal';
+        if Edit2.text='' then Edit2.text:= trim(varform.Edit2.text);      // Date
+        if Edit4.text='' then Edit4.text:= optform.Edit4.text;            // Observer
     end;
-1 : begin
-buf := trim(varform.Grid1.Cells[0,current]);      // star name
-p:=pos(' ',buf);
-if p>0 then begin
-   nam:=trim(copy(buf,1,p));
-   if (uppercase(copy(nam,1,1))='V')and IsNumber(copy(nam,2,99)) then begin
-      nam:='V'+inttostr(strtoint(copy(nam,2,99)));
-   end;
-   for i:=1 to 24 do if nam=greek[2,i] then nam:=greek[1,i];
-   con:=uppercase(trim(copy(buf,p+1,99)));
-   if pos(con,uppercase(abrcons))>0 then sname:=con+nam
-                                    else sname:=nam+con;
-   end
-else sname:=uppercase(buf);
-Edit1.text:=sname;
-Edit1.Readonly:=false;
-label2.caption:='UT decimal';
-if Edit2.text='' then Edit2.text:= trim(varform.Edit2.text);      // Date
-if Edit4.text='' then Edit4.text:= optform.Edit4.text;            // Observer
-end;
-end;
+  end;
 end;
 DateEdit1Change(sender);
 end;
@@ -145,25 +148,28 @@ var buf,s : string;
     p : integer;
 begin
 case OptForm.RadioGroup4.ItemIndex of
-0 : begin  // aavso sum
+0 : begin  // aavso vis
     if edit1.text='' then begin Showmessage('Enter a star name !'); exit; end;
     if edit2.text='' then begin Showmessage('Enter a date !'); exit; end;
     if edit3.text='' then begin Showmessage('Enter a magnitude !'); exit; end;
     if edit4.text='' then begin Showmessage('Enter an observer !'); exit; end;
     if edit6.text='' then begin Showmessage('Enter comparison stars !'); exit; end;
     if edit7.text='' then begin Showmessage('Enter chart name !'); exit; end;
-    buf:=fixlen(edit1.text,18)+fixlen(edit2.text,12);
-    if checkbox2.checked then buf:=buf+'<' else buf:=buf+' ';
+    buf:=trim(edit1.text)+coma+trim(edit2.text)+coma;
+    if checkbox2.checked then buf:=buf+'<';
     s:=trim(edit3.text);
     p:=pos('.',s);
     if p=0 then begin Showmessage('Magnitude must include decimal point !'); exit; end;
-    if p=1 then s:=' 0'+s;
-    if p=2 then s:=' '+s;
-    if checkbox1.checked then buf:=buf+fixlen(s,4)+':'
-                         else buf:=buf+fixlen(s,5);
-    buf:=buf+fixlen(edit5.text,7)+fixlen(edit6.text,11);
-    buf:=buf+fixlen(edit7.text,8)+fixlen(edit4.text,5);
-    buf:=buf+trim(copy(edit8.text,1,82));
+    if p=1 then s:='0'+s;
+    buf:=buf+trim(s)+coma;
+    if trim(edit5.text)='' then buf:=buf+'na'+coma
+                           else buf:=buf+trim(edit5.text)+coma;
+    buf:=buf+trim(edit6.text)+coma;
+    if trim(edit9.text)='' then buf:=buf+'na'+coma
+                           else buf:=buf+trim(edit9.text)+coma;
+    buf:=buf+trim(edit7.text)+coma;
+    if trim(edit8.text)='' then buf:=buf+'na'
+                           else buf:=buf+trim(edit8.text);
     end;
 1 : begin  // vsnet
     if edit1.text='' then begin Showmessage('Enter a star name !'); exit; end;
@@ -172,7 +178,6 @@ case OptForm.RadioGroup4.ItemIndex of
     if edit4.text='' then begin Showmessage('Enter an observer !'); exit; end;
     s:=trim(edit3.text);
     if checkbox2.checked then s:='<'+s;
-    if checkbox1.checked then s:=s+':';
     buf:=edit1.text+' '+edit2.text+' '+s+' '+edit4.text+' '+edit5.text+' '+edit6.text+' '+edit7.text+' '+edit8.text;
     end;
 end;
@@ -273,7 +278,7 @@ end;
 procedure TObsForm.BitBtn5Click(Sender: TObject);
 var i : integer;
 begin
-//i:=ExecuteFile(OptForm.FilenameEdit3.text, '', '', SW_SHOWNOACTIVATE);
+i:=ExecuteFile(OptForm.FilenameEdit3.text);
 if i<=32 then showmessage('Error '+inttostr(i)+'. Please verify that file "'+OptForm.FilenameEdit3.text+'" exist and associate it with your favorite text editor.');
 end;
 

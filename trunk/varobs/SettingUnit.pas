@@ -36,30 +36,26 @@ type
   TOptForm = class(TForm)
     BitBtn2: TBitBtn;
     Button1: TButton;
-    DirectoryEdit1: TDirectoryEdit;
+    DirectoryEdit3: TDirectoryEdit;
     DirectoryEdit2: TDirectoryEdit;
     Edit1: TEdit;
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
-    FileNameEdit3: TFileNameEdit;
-    FileNameEdit8: TFileNameEdit;
-    FileNameEdit6: TFileNameEdit;
-    FileNameEdit4: TFileNameEdit;
-    FileNameEdit1: TFileNameEdit;
     FileNameEdit0: TFileNameEdit;
+    FileNameEdit1: TFileNameEdit;
     FileNameEdit2: TFileNameEdit;
-    FileNameEdit7: TFileNameEdit;
+    FileNameEdit3: TFileNameEdit;
+    FileNameEdit4: TFileNameEdit;
     FileNameEdit5: TFileNameEdit;
+    FileNameEdit8: TFileNameEdit;
     GroupBox0: TGroupBox;
-    GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
     GroupBox6: TGroupBox;
-    GroupBox7: TGroupBox;
-    GroupBox8: TGroupBox;
+    GroupBox1: TGroupBox;
     GroupBox9: TGroupBox;
     Label1: TLabel;
     Label10: TLabel;
@@ -79,10 +75,6 @@ type
     Label23: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
     Label9: TLabel;
     PageControl1: TPageControl;
     Panel1: TPanel;
@@ -122,67 +114,39 @@ procedure TOptForm.RadioGroup1Click(Sender: TObject);
 begin
 case radiogroup1.itemindex of
 0 : begin
-    GroupBox0.visible:=False;
-    GroupBox1.visible:=false;
-    GroupBox2.visible:=false;
-    GroupBox3.visible:=false;
-    GroupBox4.visible:=false;
-    GroupBox7.visible:=true;
-    GroupBox8.visible:=false;
-    end;
-1 : begin
-    GroupBox0.visible:=false;
-    GroupBox1.visible:=false;
-    GroupBox2.visible:=false;
-    GroupBox3.visible:=false;
-    GroupBox4.visible:=false;
-    GroupBox7.visible:=false;
-    GroupBox8.visible:=true;
-    end;
-2 : begin
     GroupBox0.visible:=true;
     GroupBox1.visible:=false;
     GroupBox2.visible:=false;
     GroupBox3.visible:=false;
     GroupBox4.visible:=false;
-    GroupBox7.visible:=false;
-    GroupBox8.visible:=false;
     end;
-3 : begin
+1 : begin
     GroupBox0.visible:=false;
     GroupBox1.visible:=true;
     GroupBox2.visible:=false;
     GroupBox3.visible:=false;
     GroupBox4.visible:=false;
-    GroupBox7.visible:=false;
-    GroupBox8.visible:=false;
     end;
-4 : begin
+2 : begin
     GroupBox0.visible:=false;
     GroupBox1.visible:=false;
     GroupBox2.visible:=true;
     GroupBox3.visible:=false;
     GroupBox4.visible:=false;
-    GroupBox7.visible:=false;
-    GroupBox8.visible:=false;
     end;
-5 : begin
+3 : begin
     GroupBox0.visible:=false;
     GroupBox1.visible:=false;
     GroupBox2.visible:=false;
     GroupBox3.visible:=true;
     GroupBox4.visible:=false;
-    GroupBox7.visible:=false;
-    GroupBox8.visible:=false;
     end;
-6 : begin
+4 : begin
     GroupBox0.visible:=false;
     GroupBox1.visible:=false;
     GroupBox2.visible:=false;
     GroupBox3.visible:=false;
     GroupBox4.visible:=true;
-    GroupBox7.visible:=false;
-    GroupBox8.visible:=false;
     end;
 end;
 end;
@@ -195,8 +159,6 @@ FileNameEdit2.InitialDir:=privatedir;
 FileNameEdit3.InitialDir:=privatedir;
 FileNameEdit4.InitialDir:=privatedir;
 FileNameEdit5.InitialDir:=privatedir;
-FileNameEdit6.InitialDir:=privatedir;
-FileNameEdit7.InitialDir:=privatedir;
 FileNameEdit8.InitialDir:=privatedir;
 end;
 
