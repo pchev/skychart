@@ -3,7 +3,7 @@ unit SettingUnit;
 {$MODE Delphi}
 
 {
-Copyright (C) 2005 Patrick Chevalley
+Copyright (C) 2008 Patrick Chevalley
 
 http://www.astrosurf.com/astropc
 pch@freesurf.ch
@@ -86,6 +86,7 @@ type
     RadioGroup4: TRadioGroup;
     RadioGroup5: TRadioGroup;
     RadioGroup6: TRadioGroup;
+    RadioGroup7: TRadioGroup;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;

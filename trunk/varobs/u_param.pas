@@ -1,4 +1,24 @@
 unit u_param;
+{
+Copyright (C) 2008 Patrick Chevalley
+
+http://www.astrosurf.com/astropc
+pch@freesurf.ch
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+}
 
 {$mode objfpc}{$H+}
 
@@ -8,6 +28,7 @@ uses
   Classes, SysUtils; 
 
 const
+software_version='Skychart VarObs module 3.0 beta http://ap-i.net/skychart';
 bl='                                         ';
 blank=' ';
 abrcons=' And Ant Aps Aqr Aql Ara Ari Aur Boo Cae Cam Cnc CVn CMa CMi Cap Car Cas Cen Cep Cet Cha Cir Col Com CrA CrB Crv Crt Cru'
@@ -21,7 +42,6 @@ pulslist=' ACYG BCEP BCEPS BLBOO CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC L L
 rotlist=' ACV ACVO BY ELL FKCOM PSR SXARI ';
 ecllist=' E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD ';
 
-//aavsocharturl='http://www.aavso.org/cgi-bin/shrinkwrap.pl?path=/';
 aavsocharturl='http://mira.aavso.org/cgi-bin/vsp.pl?action=render&name=$star&ra=&dec=&charttitle=&chartcomment=&aavsoscale=$scale&fov=$fov&resolution=150&maglimit=$mag&north=$north&east=$east&othervars=gcvs&Submit=Plot+Chart';
 aavsochartscale: array[0..13] of string=('A','AR','B','BR','C','CR','D','DR','E','ER','F','FR','G','GR');
 aavsochartfov: array[0..13] of string=('900','900','180','180','120','120','60','60','30','30','15','15','7.5','7.5');

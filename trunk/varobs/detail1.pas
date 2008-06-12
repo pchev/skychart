@@ -3,7 +3,7 @@ unit detail1;
 {$MODE Delphi}
 
 {
-Copyright (C) 2005 Patrick Chevalley
+Copyright (C) 2008 Patrick Chevalley
 
 http://www.astrosurf.com/astropc
 pch@freesurf.ch
@@ -154,6 +154,7 @@ var
   m1,m2,m3,t1,t2,t3,t4,t5,t10,t11,Ax,Ay,per,ris : double;
   Bx,By,Xp,Yp : integer;
   magact,visualcomment,starname,stardesign,qlfn,qldir,vsfn,vsdir,vsname,afoevdir,afoevname,afoevfn : string;
+  tokensep, saveobs:string;
   savecheckbox1,skipsavebox1,movecursor : boolean;
   jdpos,magpos,nampos,obspos,codpos : array[1..2] of integer;
   dateformat : integer;
@@ -396,8 +397,43 @@ end;
 end;
 
 Procedure OpenAAVSOVIS(var f:textfile;var sname : string; var ok : boolean);
+var nam,con,fn,buf : string;
+    p : integer;
 begin
 ok:=false;
+buf := trim(starname);      // star name
+p:=pos(' ',buf);
+ if p>0 then begin                        // remove extra space in name
+   nam:=uppercase(trim(copy(buf,1,p)));
+   if (copy(nam,1,1)='V')and IsNumber(copy(nam,2,99)) then begin
+      nam:='V'+inttostr(strtoint(copy(nam,2,99)));
+   end;
+   con:=uppercase(trim(copy(buf,p+1,99)));
+   sname:=nam+' '+con;
+   end
+   else sname:=uppercase(buf);
+fn:=OptForm.FilenameEdit0.Text;
+if fileexists(fn) then begin
+   filemode:=0;
+   assignfile(f,fn);
+   reset(f);
+   nampos[1]:=1;
+   nampos[2]:=0;
+   jdpos[1]:=2;
+   jdpos[2]:=0;
+   magpos[1]:=3;
+   magpos[2]:=0;
+   obspos[1]:=0;
+   obspos[2]:=0;
+   codpos[1]:=4;
+   codpos[2]:=0;
+   dateformat:=1;
+   Fileformat:=token;
+   tokensep:=',';
+   visualcomment:=' Vis';
+   saveobs:='';
+   ok:=true;
+end;
 end;
 
 Procedure OpenAAVSOSUM(var f:textfile;var sname : string; var ok : boolean);
@@ -483,6 +519,7 @@ if fileexists(fn) then begin
    codpos[2]:=0;
    dateformat:=2;
    Fileformat:=token;
+   tokensep:=' ';
    visualcomment:=' Vv';
    ok:=true;
 end;
@@ -551,6 +588,7 @@ if fileexists(fn) then begin
        codpos[2]:=0;
        dateformat:=OptForm.RadioGroup2.ItemIndex+1;
        Fileformat:=token;
+       tokensep:=' ';
        end;
    1 : begin                              // fixed format
        buf:=Optform.edit1.text;
@@ -602,6 +640,7 @@ try
 case fileformat of
 voxml : begin
       if voreader.ReadVORow(vorow) then begin
+        feof:=voreader.EOF;
         buf:=stringreplace(trim(vorow[1]),',','.',[]);
         case dateformat of
         1 : begin                                    // JD
@@ -633,6 +672,7 @@ voxml : begin
       end;
 fixed : begin
       readln(f,lin);
+      feof:=eof(f);
       buf:=uppercase(trim(copy(lin,nampos[1],nampos[2])));    // name
       if (sname<>'*') and (buf<>sname) then exit;
       buf:=trim(copy(lin,jdpos[1],jdpos[2]));      // date
@@ -680,13 +720,15 @@ fixed : begin
       if sm='' then sm:=' ';
       obsname:=trim(copy(lin,obspos[1],obspos[2]));
       ok:=true;
-      feof:=eof(f);
       end;
 token : begin
       readln(f,lin);
-      buf:=uppercase(trim(words(lin,'',nampos[1],1)));        // name
+      feof:=eof(f);
+      if (tokensep=',')and(copy(lin,1,9)='#OBSCODE=') then saveobs:=trim(copy(lin,10,99));
+      if copy(lin,1,1)='#' then exit; //comments
+      buf:=uppercase(trim(words(lin,tokensep,'',nampos[1],1)));        // name
       if (sname<>'*') and (buf<>sname) then exit;
-      buf:=trim(words(lin,'',jdpos[1],1));         // date
+      buf:=trim(words(lin,tokensep,'',jdpos[1],1));         // date
       if buf='' then exit;
       case dateformat of
       1 : begin                                    // JD
@@ -702,7 +744,7 @@ token : begin
           jdt:=jd(strtoint(copy(buf,1,4)),strtoint(copy(buf,5,2)),strtoint(copy(buf,7,2)),strtofloat(copy(buf,9,99))*24);
           end;
       end;
-      tmpbuf:=trim(words(lin,'',magpos[1],1));        // mag.
+      tmpbuf:=trim(words(lin,tokensep,'',magpos[1],1));        // mag.
       if tmpbuf='' then exit;
       sm:=' '; buf:='';
       for p:=1 to length(tmpbuf) do begin
@@ -730,11 +772,11 @@ token : begin
       p:=pos('.',buf);
       if p=0 then ma:=ma/10;                       // max in tenth
       if codpos[1]>0 then begin                       // comment
-          sm:=trim(words(lin,'',codpos[1],1))+' ';
+          sm:=trim(words(lin,tokensep,'',codpos[1],1))+' ';
       end else sm:=' ';
-      obsname:=trim(words(lin,'',obspos[1],1));
+      if (tokensep=',') then obsname:=saveobs
+          else obsname:=trim(words(lin,tokensep,'',obspos[1],1));
       ok:=true;
-      feof:=eof(f);
       end;
 end;
 except
@@ -784,7 +826,7 @@ with DetailForm.Image1.Picture.Bitmap.Canvas do begin
             i:=1;
             visualobs:=true;
             repeat
-              buf:=' '+trim(words(sm,'',i,1))+' ';
+              buf:=' '+trim(words(sm,' ','',i,1))+' ';
               visualobs := visualobs and (pos(buf,nonvisual)=0);
               inc(i);
             until buf='  ';

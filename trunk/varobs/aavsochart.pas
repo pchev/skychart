@@ -3,7 +3,7 @@ unit aavsochart;
 {$MODE Delphi}
 
 {
-Copyright (C) 2005 Patrick Chevalley
+Copyright (C) 2008 Patrick Chevalley
 
 http://www.astrosurf.com/astropc
 pch@freesurf.ch

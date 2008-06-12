@@ -3,7 +3,7 @@ unit ObsUnit;
 {$MODE Delphi}
 
 {
-Copyright (C) 2005 Patrick Chevalley
+Copyright (C) 2008 Patrick Chevalley
 
 http://www.astrosurf.com/astropc
 pch@freesurf.ch
@@ -37,6 +37,7 @@ type
     DateEdit1: TDateEdit;
     Edit1: TEdit;
     Edit9: TEdit;
+    FileNameEdit1: TFileNameEdit;
     Label1: TLabel;
     Label11: TLabel;
     Label2: TLabel;
@@ -55,8 +56,6 @@ type
     BitBtn3: TBitBtn;
     Label7: TLabel;
     Label8: TLabel;
-    BitBtn5: TBitBtn;
-    BitBtn6: TBitBtn;
     Label9: TLabel;
     Edit7: TEdit;
     Edit8: TEdit;
@@ -68,11 +67,11 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
-    procedure BitBtn5Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DateEdit1Change(Sender: TObject);
   private
     { Private declarations }
+    procedure WriteAAVSOheader(var f: textfile);
   public
     { Public declarations }
   end;
@@ -147,6 +146,10 @@ if current>0 then begin
   end;
 end;
 DateEdit1Change(sender);
+case OptForm.RadioGroup7.ItemIndex of
+  0 : FileNameEdit1.Text:=OptForm.FileNameEdit3.Text;
+  1 : FileNameEdit1.Text:=changefileext(OptForm.FileNameEdit3.Text,'')+'-'+trim(edit2.text)+extractfileext(OptForm.FileNameEdit3.Text);
+end;
 end;
 
 procedure TObsForm.Button1Click(Sender: TObject);
@@ -190,21 +193,59 @@ end;
 memo1.Lines.Add(buf);
 end;
 
+procedure TObsForm.WriteAAVSOheader(var f: textfile);
+begin
+writeln(f,'#TYPE=VISUAL');
+writeln(f,'#OBSCODE='+trim(edit4.text));
+writeln(f,'#SOFTWARE='+software_version);
+writeln(f,'#DELIM=,');
+writeln(f,'#DATE=JD');
+writeln(f,'#OBSTYPE=Visual');
+end;
+
 procedure TObsForm.Button2Click(Sender: TObject);
 var f : textfile;
     i : integer;
     fn,buf : string;
 begin
-fn:=OptForm.FilenameEdit3.text;
-assignfile(f,fn);
-if fileexists(fn) then append(f)
-                  else rewrite(f);
-for i:=0 to memo1.Lines.Count-1 do begin
- buf:=memo1.lines[i];
- writeln(f,buf);
+fn:=FilenameEdit1.text;
+if optform.RadioGroup7.ItemIndex=0 then begin
+  try
+  assignfile(f,fn);
+  if fileexists(fn) then
+     append(f)
+  else begin
+     rewrite(f);
+     if OptForm.RadioGroup4.ItemIndex=0 then WriteAAVSOheader(f);
+  end;
+  for i:=0 to memo1.Lines.Count-1 do begin
+   buf:=memo1.lines[i];
+   writeln(f,buf);
+  end;
+  closefile(f);
+  finally
+  memo1.clear;
+  end;
+end else begin
+  if (not fileexists(fn))or
+     (mrYes=MessageDlg('File already exists. Overwrite ?',mtConfirmation,mbYesNo,0)) then begin
+      try
+      assignfile(f,fn);
+      rewrite(f);
+      if OptForm.RadioGroup4.ItemIndex=0 then WriteAAVSOheader(f);
+      for i:=0 to memo1.Lines.Count-1 do begin
+       buf:=memo1.lines[i];
+       writeln(f,buf);
+      end;
+      closefile(f);
+      finally
+      memo1.clear;
+      TimePicker1.Time:=now;
+      DateEdit1Change(sender);
+      FileNameEdit1.Text:=changefileext(OptForm.FileNameEdit3.Text,'')+'-'+trim(edit2.text)+extractfileext(OptForm.FileNameEdit3.Text);
+      end;
+  end;
 end;
-closefile(f);
-memo1.clear;
 end;
 
 procedure TObsForm.Button3Click(Sender: TObject);
@@ -279,13 +320,6 @@ except
 end;
 Application.processmessages;
 lockdate:=false;
-end;
-
-procedure TObsForm.BitBtn5Click(Sender: TObject);
-var i : integer;
-begin
-i:=ExecuteFile(OptForm.FilenameEdit3.text);
-if i<=32 then showmessage('Error '+inttostr(i)+'. Please verify that file "'+OptForm.FilenameEdit3.text+'" exist and associate it with your favorite text editor.');
 end;
 
 procedure TObsForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
