@@ -33,7 +33,7 @@ uses
     unix,baseunix,unixutil,
   {$endif}
   Clipbrd, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Buttons,IniFiles, Printers,
+  StdCtrls, ComCtrls, Buttons,IniFiles, Printers, fileutil,
   Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param;
 
 type
@@ -676,7 +676,7 @@ privatedir:=slash(Folder)+privatedir;
 configfile:=slash(privatedir)+configfile;
 {$endif}
 if not directoryexists(privatedir) then CreateDir(privatedir);
-if not directoryexists(privatedir) then forcedirectories(privatedir);
+if not directoryexists(privatedir) then forcedirectory(privatedir);
 if not directoryexists(privatedir) then begin
    MessageDlg('Unable to create '+privatedir,
              mtError, [mbAbort], 0);
@@ -806,7 +806,7 @@ timepicker1.time:=now;
 decodedate(now,year,month,day);
 DateEdit1.date:=now;
 planname:=slash(privatedir)+'aavsoeasy.dat';
-//if not fileexists(planname) then CopyFile(pchar(slash(appdir)+'aavsoeasy.dat'),pchar(planname),true);
+if not fileexists(planname) then CopyFile(slash(appdir)+'aavsoeasy.dat',planname,true);
 qlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$$$$&output=votable';
 qlinfo:='http://www.aavso.org/data/ql/';
 afoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
