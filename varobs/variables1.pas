@@ -3,7 +3,7 @@ unit variables1;
 {$MODE Delphi}
 
 {
-Copyright (C) 2005 Patrick Chevalley
+Copyright (C) 2008 Patrick Chevalley
 
 http://www.astrosurf.com/astropc
 pch@freesurf.ch
@@ -121,7 +121,7 @@ type
 function datef(jdt:double): string;
 function Jd(annee,mois,jour :integer; Heure:double):double;
 PROCEDURE Djd(jd:Double;VAR annee,mois,jour:integer; VAR Heure:double);
-function words(str,sep : string; p,n : integer) : string;
+function words(str,isep,osep : string; p,n : integer) : string;
 function IsNumber(n : string) : boolean;
 Function Slash(nom : string) : string;
 Function SetDate(year,month,day : word) : Tdatetime;
@@ -160,20 +160,20 @@ result:=copy(buf,1,p-1);
 buf:=copy(buf,p+1,999);
 end;
 
-function words(str,sep : string; p,n : integer) : string;
+function words(str,isep,osep : string; p,n : integer) : string;
 var     i,j : Integer;
 begin
 result:='';
 str:=trim(str);
 for i:=1 to p-1 do begin
- j:=pos(' ',str);
+ j:=pos(isep,str);
  if j=0 then j:=length(str)+1;
- str:=trim(copy(str,j,length(str)));
+ str:=trim(copy(str,j+1,length(str)));
 end;
 for i:=1 to n do begin
- j:=pos(' ',str);
+ j:=pos(isep,str);
  if j=0 then j:=length(str)+1;
- result:=result+trim(copy(str,1,j))+sep;
+ result:=result+trim(copy(str,1,j-1))+osep;
  str:=trim(copy(str,j,length(str)));
 end;
 end;
@@ -468,7 +468,7 @@ if trim(buf)='' then continue;
 if buf[1]=';' then continue;
 name:=nextword(buf);
 if name='ENDOFLIST' then continue;
-name:=trim(words(name,'',1,1)+' '+words(name,'',2,1)+' '+words(name,'',3,1)+' '+words(name,'',4,99));
+name:=trim(words(name,' ','',1,1)+' '+words(name,' ','',2,1)+' '+words(name,' ','',3,1)+' '+words(name,' ','',4,99));
 vtype:=trim(nextword(buf));
 curvtype:=0;
 ww:=vtype;
@@ -825,6 +825,7 @@ with inifile do begin
     OptForm.FilenameEdit8.text:=ReadString(section,'pcobs','C:\pcobs\pcobs.exe');
     pcobscaption:=ReadString(section,'pcobscaption',pcobscaption);
     OptForm.FilenameEdit0.text:=ReadString(section,'faavsovis',slash(privatedir)+'aavsovis.txt');
+    optform.RadioGroup7.ItemIndex:=ReadInteger(section,'fautoincrement',1);
     OptForm.FilenameEdit1.text:=ReadString(section,'faavsosum',slash(privatedir)+'aavsosum.txt');
     OptForm.FilenameEdit2.text:=ReadString(section,'fvsnet',slash(privatedir)+'vsnet.txt');
     OptForm.DirectoryEdit3.text:=ReadString(section,'dafoev',privatedir);
@@ -920,6 +921,7 @@ with inifile do begin
     WriteString(section,'pcobs',OptForm.FilenameEdit8.text);
     WriteString(section,'pcobscaption',pcobscaption);
     WriteString(section,'faavsovis',OptForm.FilenameEdit0.text);
+    WriteInteger(section,'fautoincrement',optform.RadioGroup7.ItemIndex);
     WriteString(section,'faavsosum',OptForm.FilenameEdit1.text);
     WriteString(section,'fvsnet',OptForm.FilenameEdit2.text);
     WriteString(section,'dafoev',OptForm.DirectoryEdit3.text);
@@ -1206,9 +1208,17 @@ begin
 case Optform.radiogroup5.itemindex of
 0 : begin
     ObsUnit.current:=CurrentRow;
-    FormPos(ObsForm,mouse.cursorpos.x,mouse.cursorpos.y);
-    ObsForm.Showmodal;
-    chdir(appdir);
+    if Obsform.Visible then begin
+      ObsForm.Edit1.text:=varform.Grid1.Cells[0,CurrentRow];
+      ObsForm.Edit3.text:='';
+      ObsForm.Edit6.text:='';
+      ObsForm.Edit9.text:='';
+      ObsForm.CheckBox2.Checked:=false;
+      ObsForm.BringToFront;
+    end else begin
+      FormPos(ObsForm,mouse.cursorpos.x,mouse.cursorpos.y);
+      ObsForm.Show;
+    end;
     end;
 1 : begin
     RunPCObs;

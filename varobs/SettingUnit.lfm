@@ -37,51 +37,49 @@ object OptForm: TOptForm
   object PageControl1: TPageControl
     Height = 272
     Width = 432
-    ActivePage = TabSheet1
-    TabIndex = 0
+    ActivePage = TabSheet2
+    TabIndex = 1
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Observation entry'
-      ClientHeight = 241
-      ClientWidth = 426
       object GroupBox5: TGroupBox
         Left = 20
-        Height = 184
+        Height = 216
         Top = 18
         Width = 385
         Caption = 'Observation Entry'
-        ClientHeight = 170
-        ClientWidth = 379
+        ClientHeight = 216
+        ClientWidth = 385
         TabOrder = 0
         object Label16: TLabel
           Left = 6
-          Height = 43
+          Height = 27
           Top = 112
-          Width = 54
+          Width = 46
           Caption = 'Observer'#13#10'Initials :'
           ParentColor = False
         end
         object Panel2: TPanel
           Left = 158
-          Height = 140
+          Height = 180
           Top = 6
           Width = 219
-          ClientHeight = 140
+          ClientHeight = 180
           ClientWidth = 219
           TabOrder = 2
           object Label22: TLabel
             Left = 16
-            Height = 20
+            Height = 14
             Top = 82
-            Width = 148
+            Width = 123
             Caption = 'PCObs program location :'
             ParentColor = False
           end
           object Label23: TLabel
             Left = 8
-            Height = 66
+            Height = 40
             Top = 18
-            Width = 234
+            Width = 193
             Caption = 'Launch AAVSO PCObs for data entry'#13#10'This option is recommended if you want '#13#10'to submit your data to the AAVSO'
             ParentColor = False
           end
@@ -98,23 +96,46 @@ object OptForm: TOptForm
         end
         object Panel1: TPanel
           Left = 158
-          Height = 138
+          Height = 178
           Top = 8
           Width = 219
-          ClientHeight = 138
+          ClientHeight = 178
           ClientWidth = 219
           TabOrder = 1
           object Label15: TLabel
-            Left = 16
-            Height = 20
-            Top = 88
-            Width = 99
+            Left = 14
+            Height = 14
+            Top = 56
+            Width = 84
             Caption = 'Observation file :'
             ParentColor = False
           end
+          object RadioGroup7: TRadioGroup
+            Left = 14
+            Height = 76
+            Top = 96
+            Width = 185
+            AutoFill = True
+            ChildSizing.LeftRightSpacing = 6
+            ChildSizing.TopBottomSpacing = 6
+            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+            ChildSizing.EnlargeVertical = crsHomogenousChildResize
+            ChildSizing.ShrinkHorizontal = crsScaleChilds
+            ChildSizing.ShrinkVertical = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 1
+            ClientHeight = 76
+            ClientWidth = 185
+            ItemIndex = 1
+            Items.Strings = (
+              'Append data to same file'
+              'Add date time suffix to file'
+            )
+            TabOrder = 2
+          end
           object RadioGroup4: TRadioGroup
-            Left = 12
-            Height = 80
+            Left = 14
+            Height = 56
             Width = 189
             AutoFill = True
             Caption = 'Format'
@@ -126,8 +147,8 @@ object OptForm: TOptForm
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 66
-            ClientWidth = 183
+            ClientHeight = 56
+            ClientWidth = 189
             Columns = 2
             ItemIndex = 0
             Items.Strings = (
@@ -139,7 +160,7 @@ object OptForm: TOptForm
           object FileNameEdit3: TFileNameEdit
             Left = 14
             Height = 23
-            Top = 105
+            Top = 72
             Width = 176
             ButtonWidth = 23
             NumGlyphs = 1
@@ -161,8 +182,8 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 85
-          ClientWidth = 128
+          ClientHeight = 99
+          ClientWidth = 134
           ItemIndex = 0
           Items.Strings = (
             'Internal facility'
@@ -183,16 +204,16 @@ object OptForm: TOptForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Plot observation'
-      ClientHeight = 241
-      ClientWidth = 426
+      ClientHeight = 246
+      ClientWidth = 424
       object GroupBox2: TGroupBox
         Left = 150
         Height = 208
         Top = 10
         Width = 249
         Caption = 'VSNET format'
-        ClientHeight = 192
-        ClientWidth = 243
+        ClientHeight = 190
+        ClientWidth = 245
         TabOrder = 0
         object Label9: TLabel
           Left = 8
@@ -206,9 +227,9 @@ object OptForm: TOptForm
         end
         object Label10: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 144
-          Width = 55
+          Width = 46
           Caption = 'File name'
           ParentColor = False
         end
@@ -229,8 +250,8 @@ object OptForm: TOptForm
         Top = 11
         Width = 249
         Caption = 'AFOEV base folder'
-        ClientHeight = 193
-        ClientWidth = 243
+        ClientHeight = 191
+        ClientWidth = 245
         TabOrder = 1
         Visible = False
         object Label4: TLabel
@@ -260,63 +281,63 @@ object OptForm: TOptForm
         Top = 11
         Width = 249
         Caption = 'Other format fields description'
-        ClientHeight = 191
-        ClientWidth = 243
+        ClientHeight = 189
+        ClientWidth = 245
         TabOrder = 2
         Visible = False
         object Label1: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 46
-          Width = 61
+          Width = 50
           Caption = 'Star name'
           ParentColor = False
         end
         object Label2: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 68
-          Width = 29
+          Width = 23
           Caption = 'Time'
           ParentColor = False
         end
         object Label3: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 90
-          Width = 59
+          Width = 51
           Caption = 'Magnitude'
           ParentColor = False
         end
         object Label11: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 143
-          Width = 55
+          Width = 46
           Caption = 'File name'
           ParentColor = False
         end
         object Label12: TLabel
           Left = 144
-          Height = 20
+          Height = 14
           Top = 46
-          Width = 45
+          Width = 39
           Caption = 'Field No'
           ParentColor = False
         end
         object Label13: TLabel
           Left = 144
-          Height = 20
+          Height = 14
           Top = 68
-          Width = 45
+          Width = 39
           Caption = 'Field No'
           ParentColor = False
         end
         object Label14: TLabel
           Left = 144
-          Height = 20
+          Height = 14
           Top = 90
-          Width = 45
+          Width = 39
           Caption = 'Field No'
           ParentColor = False
         end
@@ -334,8 +355,8 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 14
-          ClientWidth = 219
+          ClientHeight = 12
+          ClientWidth = 221
           Columns = 2
           ItemIndex = 1
           Items.Strings = (
@@ -382,8 +403,8 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 21
-          ClientWidth = 219
+          ClientHeight = 19
+          ClientWidth = 221
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -410,15 +431,15 @@ object OptForm: TOptForm
         Top = 10
         Width = 249
         Caption = 'AAVSO SUM format'
-        ClientHeight = 193
-        ClientWidth = 243
+        ClientHeight = 191
+        ClientWidth = 245
         TabOrder = 3
         Visible = False
         object Label19: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 144
-          Width = 55
+          Width = 46
           Caption = 'File name'
           ParentColor = False
         end
@@ -448,8 +469,8 @@ object OptForm: TOptForm
         Top = 11
         Width = 249
         Caption = 'AAVSO Visual'
-        ClientHeight = 193
-        ClientWidth = 243
+        ClientHeight = 191
+        ClientWidth = 245
         TabOrder = 5
         object Label20: TLabel
           Left = 8
@@ -462,9 +483,9 @@ object OptForm: TOptForm
         end
         object Label21: TLabel
           Left = 8
-          Height = 20
+          Height = 14
           Top = 144
-          Width = 55
+          Width = 46
           Caption = 'File name'
           ParentColor = False
         end
@@ -494,8 +515,8 @@ object OptForm: TOptForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 193
-        ClientWidth = 131
+        ClientHeight = 191
+        ClientWidth = 133
         ItemIndex = 0
         Items.Strings = (
           'AAVSO Visual'
@@ -510,8 +531,6 @@ object OptForm: TOptForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Plot Online Data'
-      ClientHeight = 241
-      ClientWidth = 426
       object RadioGroup6: TRadioGroup
         Left = 20
         Height = 128
@@ -527,8 +546,8 @@ object OptForm: TOptForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 112
-        ClientWidth = 283
+        ClientHeight = 128
+        ClientWidth = 289
         ItemIndex = 0
         Items.Strings = (
           'AAVSO Quick Look'
@@ -539,16 +558,14 @@ object OptForm: TOptForm
     end
     object TabSheet4: TTabSheet
       Caption = 'Charts'
-      ClientHeight = 241
-      ClientWidth = 426
       object GroupBox6: TGroupBox
         Left = 14
         Height = 98
         Top = 114
         Width = 385
         Caption = 'Cartes du Ciel / Sky Charts interface'
-        ClientHeight = 84
-        ClientWidth = 379
+        ClientHeight = 98
+        ClientWidth = 385
         TabOrder = 0
         object Label17: TLabel
           Left = 10
@@ -575,8 +592,8 @@ object OptForm: TOptForm
         Top = 18
         Width = 385
         Caption = 'AAVSO Chart CDrom'
-        ClientHeight = 60
-        ClientWidth = 379
+        ClientHeight = 74
+        ClientWidth = 385
         TabOrder = 1
         object Button1: TButton
           Left = 200
