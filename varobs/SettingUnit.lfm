@@ -1,7 +1,7 @@
 object OptForm: TOptForm
-  Left = 461
+  Left = 808
   Height = 314
-  Top = 98
+  Top = 65
   Width = 431
   HorzScrollBar.Page = 430
   VertScrollBar.Page = 313
@@ -185,45 +185,6 @@ object OptForm: TOptForm
       Caption = 'Plot observation'
       ClientHeight = 246
       ClientWidth = 424
-      object GroupBox8: TGroupBox
-        Left = 150
-        Height = 208
-        Top = 10
-        Width = 249
-        Caption = 'AAVSO QuickLook format'
-        ClientHeight = 190
-        ClientWidth = 245
-        TabOrder = 0
-        Visible = False
-        object Label20: TLabel
-          Left = 8
-          Height = 113
-          Top = 24
-          Width = 225
-          AutoSize = False
-          Caption = 'Col  1-8     Designation from Validation File'#13#10'Col 10-19  Star name'#13#10'Col 34-45  Julian Date and GMAT time'#13#10'Col 48-53  Magnitude'#13#10'                < in column 48 for fainter-than'#13#10'                 : in column 53 for uncertain'#13#10'Col 60-66 Comment Codes'#13#10'Col 56-58 Observer Initials'
-          ParentColor = False
-          WordWrap = True
-        end
-        object Label21: TLabel
-          Left = 8
-          Height = 14
-          Top = 144
-          Width = 46
-          Caption = 'File name'
-          ParentColor = False
-        end
-        object FileNameEdit7: TFileNameEdit
-          Left = 8
-          Height = 23
-          Top = 162
-          Width = 200
-          ButtonWidth = 23
-          NumGlyphs = 1
-          ParentColor = False
-          TabOrder = 0
-        end
-      end
       object GroupBox2: TGroupBox
         Left = 150
         Height = 208
@@ -232,7 +193,7 @@ object OptForm: TOptForm
         Caption = 'VSNET format'
         ClientHeight = 190
         ClientWidth = 245
-        TabOrder = 1
+        TabOrder = 0
         object Label9: TLabel
           Left = 8
           Height = 117
@@ -270,7 +231,7 @@ object OptForm: TOptForm
         Caption = 'AFOEV base folder'
         ClientHeight = 191
         ClientWidth = 245
-        TabOrder = 2
+        TabOrder = 1
         Visible = False
         object Label4: TLabel
           Left = 8
@@ -282,89 +243,11 @@ object OptForm: TOptForm
           ParentColor = False
           WordWrap = True
         end
-        object DirectoryEdit1: TDirectoryEdit
+        object DirectoryEdit3: TDirectoryEdit
           Left = 8
           Height = 23
           Top = 159
           Width = 204
-          ButtonWidth = 23
-          NumGlyphs = 1
-          ParentColor = False
-          TabOrder = 0
-        end
-      end
-      object GroupBox0: TGroupBox
-        Left = 150
-        Height = 209
-        Top = 10
-        Width = 249
-        Caption = 'AAVSO JD format'
-        ClientHeight = 191
-        ClientWidth = 245
-        TabOrder = 3
-        Visible = False
-        object Label5: TLabel
-          Left = 8
-          Height = 109
-          Top = 20
-          Width = 225
-          AutoSize = False
-          Caption = 'Col 14-23  Star name'#13#10' '#13#10'Col 31-42  Julian date '#13#10'                 with decimal point at col. 38'#13#10' '#13#10'Col 46-51 Magnitude '#13#10'                < in column 46 for fainter-than'#13#10'                 : in column 51 for uncertain'
-          ParentColor = False
-          WordWrap = True
-        end
-        object Label6: TLabel
-          Left = 8
-          Height = 14
-          Top = 144
-          Width = 46
-          Caption = 'File name'
-          ParentColor = False
-        end
-        object FileNameEdit0: TFileNameEdit
-          Left = 8
-          Height = 23
-          Top = 162
-          Width = 200
-          ButtonWidth = 23
-          NumGlyphs = 1
-          ParentColor = False
-          TabOrder = 0
-        end
-      end
-      object GroupBox1: TGroupBox
-        Left = 150
-        Height = 209
-        Top = 11
-        Width = 249
-        Caption = 'AAVSO UT format'
-        ClientHeight = 191
-        ClientWidth = 245
-        TabOrder = 4
-        Visible = False
-        object Label7: TLabel
-          Left = 8
-          Height = 109
-          Top = 20
-          Width = 225
-          AutoSize = False
-          Caption = 'Col  9-18  Star name'#13#10' '#13#10'Col 20-30  Universal Time in decimal format: '#13#10'                 yymmdd.tttt'#13#10' '#13#10'Col 31-36  Magnitude '#13#10'                < in column 31 for fainter-than'#13#10'                 : in column 36 for uncertain'
-          ParentColor = False
-          WordWrap = True
-        end
-        object Label8: TLabel
-          Left = 8
-          Height = 14
-          Top = 144
-          Width = 46
-          Caption = 'File name'
-          ParentColor = False
-        end
-        object FileNameEdit1: TFileNameEdit
-          Left = 8
-          Height = 23
-          Top = 161
-          Width = 200
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
@@ -379,7 +262,7 @@ object OptForm: TOptForm
         Caption = 'Other format fields description'
         ClientHeight = 189
         ClientWidth = 245
-        TabOrder = 5
+        TabOrder = 2
         Visible = False
         object Label1: TLabel
           Left = 8
@@ -521,7 +404,7 @@ object OptForm: TOptForm
           TabOrder = 5
         end
       end
-      object GroupBox7: TGroupBox
+      object GroupBox1: TGroupBox
         Left = 150
         Height = 209
         Top = 10
@@ -529,7 +412,7 @@ object OptForm: TOptForm
         Caption = 'AAVSO SUM format'
         ClientHeight = 191
         ClientWidth = 245
-        TabOrder = 6
+        TabOrder = 3
         Visible = False
         object Label19: TLabel
           Left = 8
@@ -548,11 +431,48 @@ object OptForm: TOptForm
           Caption = 'Col  1-8     Designation from Validation File'#13#10'Col  9-18   Star name'#13#10'Col 19-30  Julian Date and GMAT time'#13#10'Col 31-36  Magnitude'#13#10'                < in column 31 for fainter-than'#13#10'                 : in column 36 for uncertain'#13#10'Col 37-43 Comment Codes'#13#10'Col 63-67 Observer Initials'
           ParentColor = False
         end
-        object FileNameEdit6: TFileNameEdit
+        object FileNameEdit1: TFileNameEdit
           Left = 8
           Height = 23
           Top = 161
           Width = 204
+          ButtonWidth = 23
+          NumGlyphs = 1
+          ParentColor = False
+          TabOrder = 0
+        end
+      end
+      object GroupBox0: TGroupBox
+        Left = 150
+        Height = 209
+        Top = 11
+        Width = 249
+        Caption = 'AAVSO Visual'
+        ClientHeight = 191
+        ClientWidth = 245
+        TabOrder = 5
+        object Label20: TLabel
+          Left = 8
+          Height = 117
+          Top = 12
+          Width = 225
+          AutoSize = False
+          Caption = 'AAVSO Visual format'#13#10'Version: 1.0'#13#10#13#10'Using Julian Date and coma delimiter.'
+          ParentColor = False
+        end
+        object Label21: TLabel
+          Left = 8
+          Height = 14
+          Top = 144
+          Width = 46
+          Caption = 'File name'
+          ParentColor = False
+        end
+        object FileNameEdit0: TFileNameEdit
+          Left = 20
+          Height = 23
+          Top = 160
+          Width = 184
           ButtonWidth = 23
           NumGlyphs = 1
           ParentColor = False
@@ -578,29 +498,27 @@ object OptForm: TOptForm
         ClientWidth = 133
         ItemIndex = 0
         Items.Strings = (
-          'AAVSO SUM'
-          'Old AAVSO Quicklook'
-          'Old AAVSO JD'
-          'Old AAVSO UT'
+          'AAVSO Visual'
+          'Old AAVSO SUM'
           'VSNET'
           'AFOEV'
-          'Other'
+          'Other format'
         )
         OnClick = RadioGroup1Click
-        TabOrder = 7
+        TabOrder = 4
       end
     end
     object TabSheet3: TTabSheet
-      Caption = 'Plot Data'
+      Caption = 'Plot Online Data'
       ClientHeight = 246
       ClientWidth = 424
       object RadioGroup6: TRadioGroup
         Left = 20
-        Height = 96
+        Height = 128
         Top = 18
         Width = 289
         AutoFill = True
-        Caption = 'Plot aditional data from :'
+        Caption = 'Plot additional data from :'
         ChildSizing.LeftRightSpacing = 6
         ChildSizing.TopBottomSpacing = 6
         ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
@@ -609,7 +527,7 @@ object OptForm: TOptForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 78
+        ClientHeight = 110
         ClientWidth = 285
         ItemIndex = 0
         Items.Strings = (

@@ -448,7 +448,6 @@ VarForm.Grid1.Cells[7,0]:='Maxima';
 VarForm.Grid1.Cells[8,0]:='Minima';
 VarForm.Grid1.Cells[9,0]:='Maxima';
 VarForm.Grid1.Cells[10,0]:='Minima';
-screen.cursor:=crhourglass;
 aavsodesign:=false;
 try
 r:=1;
@@ -607,7 +606,6 @@ if aavsodesign then varform.Grid1.ColWidths[1]:=60
                else varform.Grid1.ColWidths[1]:=0;
 finally
 closefile(f);
-screen.cursor:=crdefault;
 end;
 end;
 
@@ -826,15 +824,13 @@ with inifile do begin
     OptForm.Radiogroup6.itemindex:=ReadInteger(section,'onlinedata',0);
     OptForm.FilenameEdit8.text:=ReadString(section,'pcobs','C:\pcobs\pcobs.exe');
     pcobscaption:=ReadString(section,'pcobscaption',pcobscaption);
-    OptForm.FilenameEdit6.text:=ReadString(section,'faavsosum',slash(privatedir)+'aavsosum.txt');
-    OptForm.FilenameEdit7.text:=ReadString(section,'faavsoql',slash(privatedir)+'aavsoql.txt');
-    OptForm.FilenameEdit0.text:=ReadString(section,'faavsojd',slash(privatedir)+'aavsojd.txt');
-    OptForm.FilenameEdit1.text:=ReadString(section,'faavsout',slash(privatedir)+'aavsout.txt');
-    OptForm.FilenameEdit2.text:=ReadString(section,'fvsnet',slash(privatedir)+'observation.txt');
-    OptForm.DirectoryEdit1.text:=ReadString(section,'dafoev',privatedir);
-    OptForm.FilenameEdit4.text:=ReadString(section,'freeformat',slash(privatedir)+'vsnet.txt');
+    OptForm.FilenameEdit0.text:=ReadString(section,'faavsovis',slash(privatedir)+'aavsovis.txt');
+    OptForm.FilenameEdit1.text:=ReadString(section,'faavsosum',slash(privatedir)+'aavsosum.txt');
+    OptForm.FilenameEdit2.text:=ReadString(section,'fvsnet',slash(privatedir)+'vsnet.txt');
+    OptForm.DirectoryEdit3.text:=ReadString(section,'dafoev',privatedir);
+    OptForm.FilenameEdit4.text:=ReadString(section,'freeformat',slash(privatedir)+'freeformat.txt');
     OptForm.FilenameEdit5.text:=ReadString(section,'skychartprof',slash(privatedir)+'varobs.cdc3');
-    OptForm.FilenameEdit3.text:=ReadString(section,'fobs',slash(privatedir)+'aavsosum.txt');
+    OptForm.FilenameEdit3.text:=ReadString(section,'fobs',slash(privatedir)+'aavsovis.txt');
     OptForm.Edit1.text:=ReadString(section,'namepos','1');
     OptForm.Edit2.text:=ReadString(section,'datepos','2');
     OptForm.Edit3.text:=ReadString(section,'magpos','3');
@@ -923,12 +919,10 @@ with inifile do begin
     WriteInteger(section,'onlinedata',OptForm.Radiogroup6.itemindex);
     WriteString(section,'pcobs',OptForm.FilenameEdit8.text);
     WriteString(section,'pcobscaption',pcobscaption);
-    WriteString(section,'faavsosum',OptForm.FilenameEdit6.text);
-    WriteString(section,'faavsoql',OptForm.FilenameEdit7.text);
-    WriteString(section,'faavsojd',OptForm.FilenameEdit0.text);
-    WriteString(section,'faavsout',OptForm.FilenameEdit1.text);
+    WriteString(section,'faavsovis',OptForm.FilenameEdit0.text);
+    WriteString(section,'faavsosum',OptForm.FilenameEdit1.text);
     WriteString(section,'fvsnet',OptForm.FilenameEdit2.text);
-    WriteString(section,'dafoev',OptForm.DirectoryEdit1.text);
+    WriteString(section,'dafoev',OptForm.DirectoryEdit3.text);
     WriteString(section,'freeformat',OptForm.FilenameEdit4.text);
     WriteString(section,'fobs',OptForm.FilenameEdit3.text);
     WriteString(section,'skychartprof',OptForm.FilenameEdit5.text);

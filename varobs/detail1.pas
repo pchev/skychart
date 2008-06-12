@@ -35,64 +35,69 @@ type
   { TDetailForm }
 
   TDetailForm = class(TForm)
-    DownloadDialog1: TDownloadDialog;
-    Image1: TImage;
-    Panel2: TPanel;
-    Label7: TLabel;
-    Label8: TLabel;
     BitBtn1: TBitBtn;
-    Edit12: TEdit;
-    Edit13: TEdit;
-    CheckBox1: TCheckBox;
-    CheckBox2: TCheckBox;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
     BitBtn4: TBitBtn;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
+    BitBtn5: TBitBtn;
+    BitBtn6: TBitBtn;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
+    DownloadDialog1: TDownloadDialog;
     Edit1: TEdit;
+    Edit12: TEdit;
+    Edit13: TEdit;
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
     Edit5: TEdit;
     Edit6: TEdit;
-    Panel3: TPanel;
-    Shape1: TShape;
-    Label9: TLabel;
-    Shape2: TShape;
+    Image1: TImage;
+    Label1: TLabel;
     Label10: TLabel;
-    Shape5: TShape;
-    Label13: TLabel;
-    Shape3: TShape;
     Label11: TLabel;
-    Shape4: TShape;
     Label12: TLabel;
-    Shape6: TShape;
+    Label13: TLabel;
     Label14: TLabel;
-    Shape7: TShape;
-    Shape8: TShape;
     Label16: TLabel;
-    Shape9: TShape;
     Label17: TLabel;
-    Shape10: TShape;
     Label18: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    Panel1: TPanel;
+    Panel2: TPanel;
     ColorDialog1: TColorDialog;
-    CheckBox3: TCheckBox;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
     Close1: TMenuItem;
+    Panel3: TPanel;
     SaveasBMP1: TMenuItem;
     SaveDialog1: TSaveDialog;
-    SavePictureDialog1: TSavePictureDialog;
     GetQuickLook: TMenuItem;
-    CheckBox4: TCheckBox;
-    BitBtn5: TBitBtn;
-    BitBtn6: TBitBtn;
-    CheckBox5: TCheckBox;
+    Shape1: TShape;
+    Shape10: TShape;
+    Shape2: TShape;
+    Shape3: TShape;
+    Shape4: TShape;
+    Shape5: TShape;
+    Shape6: TShape;
+    Shape7: TShape;
+    Shape8: TShape;
+    Shape9: TShape;
+    RefreshTimer: TTimer;
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
@@ -105,6 +110,9 @@ type
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
+    procedure MenuItem3Click(Sender: TObject);
+    procedure RefreshTimerTimer(Sender: TObject);
     procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Shape2MouseUp(Sender: TObject; Button: TMouseButton;
@@ -134,6 +142,7 @@ type
     procedure CheckBox5Click(Sender: TObject);
   private
     { Private declarations }
+    procedure SetOnlineButtons;
   public
     { Public declarations }
   end;
@@ -213,11 +222,13 @@ with DetailForm.Image1.ClientRect do begin
   xmin := left; xmax := right;
   ymin := top; ymax := bottom;
 end;
+DetailForm.Image1.Picture.Bitmap.Width:=DetailForm.Image1.Width;
+DetailForm.Image1.Picture.Bitmap.Height:=DetailForm.Image1.Height;
 Ax:=(xmax-xmin-2*mx)/(t5-t1);
 Bx:=xmin+mx;
 Ay:=(ymax-ymin-2*my)/(m2-m1);
 By:=ymin+my;
-with DetailForm.Image1.Canvas do begin
+with DetailForm.Image1.Picture.Bitmap.Canvas do begin
   Brush.style:=bsSolid;
   Pen.mode := pmCopy;
   Pen.Width := 3;
@@ -277,7 +288,7 @@ end;
 
 Procedure DrawAxis(varstar:integer);
 begin
-with DetailForm.Image1.Canvas do begin
+with DetailForm.Image1.Picture.Bitmap.Canvas do begin
   Pen.mode := pmCopy;
   Pen.Width:=1;
   Pen.Color:=DetailForm.Shape2.brush.color;     // Axis
@@ -303,7 +314,7 @@ end;
 
 Procedure DrawPulsCurve(varstar:integer);
 begin
-with DetailForm.Image1.Canvas do begin
+with DetailForm.Image1.Picture.Bitmap.Canvas do begin
   Pen.Color:=DetailForm.Shape4.brush.color;      // Light Curve
   moveto(xmin+mx,ymax-my);
   lineto(round(Ax*(t2-t1)+Bx),round(Ay*(m1-m1)+By));
@@ -322,7 +333,7 @@ end;
 
 Procedure DrawEcliCurve(varstar:integer);
 begin
-with DetailForm.Image1.Canvas do begin
+with DetailForm.Image1.Picture.Bitmap.Canvas do begin
   Pen.Color:=DetailForm.Shape4.brush.color;    // Light Curve
   moveto(xmin+mx,ymax-my);
   lineto(round(Ax*(t10-t1)+Bx),round(Ay*(m1-m1)+By));
@@ -362,7 +373,7 @@ if p>0 then begin
    dir:=con;
    end
    else exit;
-fn:=slash(OptForm.DirectoryEdit1.Text)+slash(dir)+fn;
+fn:=slash(OptForm.DirectoryEdit3.Text)+slash(dir)+fn;
 if fileexists(fn) then begin
    filemode:=0;
    assignfile(f,fn);
@@ -385,169 +396,11 @@ if fileexists(fn) then begin
 end;
 end;
 
-Procedure OpenAAVSOJD(var f:textfile;var sname : string; var ok : boolean);
-var nam,con,fn,buf : string;
-    p : integer;
+Procedure OpenAAVSOVIS(var f:textfile;var sname : string; var ok : boolean);
 begin
-ok:=false;
-buf := trim(starname);      // star name
-p:=pos(' ',buf);
-if p>0 then begin                        // remove extra space in name
-   nam:=uppercase(trim(copy(buf,1,p)));
-   if (copy(nam,1,1)='V')and IsNumber(copy(nam,2,99)) then begin
-      nam:='V'+inttostr(strtoint(copy(nam,2,99)));
-   end;
-   con:=uppercase(trim(copy(buf,p+1,99)));
-   sname:=nam+' '+con;
-   end
-   else sname:=uppercase(buf);
-fn:=OptForm.FilenameEdit0.Text;
-if fileexists(fn) then begin
-   filemode:=0;
-   assignfile(f,fn);
-   reset(f);
-   nampos[1]:=14;
-   nampos[2]:=10;
-   jdpos[1]:=31;
-   jdpos[2]:=12;
-   magpos[1]:=46;
-   magpos[2]:=6;
-   codpos[1]:=52;
-   codpos[2]:=1;
-   obspos[1]:=61;
-   obspos[2]:=3;
-   dateformat:=1;
-   Fileformat:=fixed;
-   visualcomment:=' '+AllChar;
-   ok:=true;
-end;
 end;
 
 Procedure OpenAAVSOSUM(var f:textfile;var sname : string; var ok : boolean);
-var nam,con,fn,buf : string;
-    p : integer;
-begin
-ok:=false;
-buf := trim(starname);      // star name
-p:=pos(' ',buf);
-if p>0 then begin                        // remove extra space in name
-   nam:=uppercase(trim(copy(buf,1,p)));
-   if (copy(nam,1,1)='V')and IsNumber(copy(nam,2,99)) then begin
-      nam:='V'+inttostr(strtoint(copy(nam,2,99)));
-   end;
-   con:=uppercase(trim(copy(buf,p+1,99)));
-   sname:=nam+' '+con;
-   end
-   else sname:=uppercase(buf);
-fn:=OptForm.FilenameEdit6.Text;
-if fileexists(fn) then begin
-   filemode:=0;
-   assignfile(f,fn);
-   reset(f);
-   nampos[1]:=9;
-   nampos[2]:=10;
-   jdpos[1]:=19;
-   jdpos[2]:=12;
-   magpos[1]:=31;
-   magpos[2]:=6;
-   codpos[1]:=37;
-   codpos[2]:=7;
-   obspos[1]:=63;
-   obspos[2]:=5;
-   dateformat:=1;
-   Fileformat:=fixed;
-   visualcomment:=' '+AllChar;
-   ok:=true;
-end;
-end;
-
-Procedure OpenAAVSOQL(var f:textfile;var sname : string; var ok : boolean);
-var nam,con,fn,buf : string;
-    p : integer;
-begin
-ok:=false;
-buf := trim(starname);      // star name
-p:=pos(' ',buf);
-if p>0 then begin                        // remove extra space in name
-   nam:=uppercase(trim(copy(buf,1,p)));
-   if (copy(nam,1,1)='V')and IsNumber(copy(nam,2,99)) then begin
-      nam:='V'+inttostr(strtoint(copy(nam,2,99)));
-   end;
-   con:=uppercase(trim(copy(buf,p+1,99)));
-   sname:=nam+' '+con;
-   end
-   else sname:=uppercase(buf);
-fn:=OptForm.FilenameEdit7.Text;
-if fileexists(fn) then begin
-   filemode:=0;
-   assignfile(f,fn);
-   reset(f);
-   nampos[1]:=10;
-   nampos[2]:=10;
-   jdpos[1]:=34;
-   jdpos[2]:=12;
-   magpos[1]:=48;
-   magpos[2]:=6;
-   codpos[1]:=60;
-   codpos[2]:=7;
-   obspos[1]:=56;
-   obspos[2]:=3;
-   dateformat:=1;
-   Fileformat:=fixed;
-   visualcomment:=' '+AllChar;
-   ok:=true;
-end;
-end;
-
-{Procedure OpenQuickLook(var f:textfile;var sname : string; var ok : boolean);
-var fn : string;
-begin
-ok:=false;
-sname:='*';
-fn:=qlfn;
-if fileexists(fn) then begin
-   filemode:=0;
-   assignfile(f,fn);
-   reset(f);
-   nampos[1]:=1;
-   nampos[2]:=10;
-   jdpos[1]:=24;
-   jdpos[2]:=12;
-   magpos[1]:=39;
-   magpos[2]:=6;
-   codpos[1]:=52;
-   codpos[2]:=7;
-   obspos[1]:=47;
-   obspos[2]:=4;
-   dateformat:=1;
-   Fileformat:=fixed;
-   visualcomment:=' '+AllChar;
-   ok:=true;
-end;
-end; }
-Procedure OpenQuickLook(var f:textfile;var sname : string; var ok : boolean);
-var fn : string;
-    i:integer;
-const
-    colfilter=' name jd magnitude observer band ';
-begin
-ok:=false;
-sname:='*';
-fn:=qlfn;
-if fileexists(fn) then begin
-  voreader:=TVO_Reader.Create(nil);
-  vorow:=TStringList.Create;
-  ok:=voreader.OpenVO(fn);
-  for i:=0 to voreader.fieldname.Count-1 do begin
-   if pos(' '+voreader.fieldname[i]+' ',colfilter)=0 then voreader.UseField[i]:=false;
-  end;
-  dateformat:=1;
-  Fileformat:=voxml;
-  visualcomment:=' Vis.';
-end;
-end;
-
-Procedure OpenAAVSOUT(var f:textfile; var sname : string; var ok : boolean);
 var nam,con,fn,buf : string;
     p : integer;
 begin
@@ -570,20 +423,43 @@ if fileexists(fn) then begin
    reset(f);
    nampos[1]:=9;
    nampos[2]:=10;
-   jdpos[1]:=20;
-   jdpos[2]:=11;
+   jdpos[1]:=19;
+   jdpos[2]:=12;
    magpos[1]:=31;
    magpos[2]:=6;
-   codpos[1]:=38;
-   codpos[2]:=1;
+   codpos[1]:=37;
+   codpos[2]:=7;
    obspos[1]:=63;
-   obspos[2]:=3;
-   dateformat:=2;
+   obspos[2]:=5;
+   dateformat:=1;
    Fileformat:=fixed;
    visualcomment:=' '+AllChar;
    ok:=true;
 end;
 end;
+
+Procedure OpenQuickLook(var f:textfile;var sname : string; var ok : boolean);
+var fn : string;
+    i:integer;
+const
+    colfilter=' name jd magnitude observer band ';
+begin
+ok:=false;
+sname:='*';
+fn:=qlfn;
+if fileexists(fn) then begin
+  voreader:=TVO_Reader.Create(nil);
+  vorow:=TStringList.Create;
+  ok:=voreader.OpenVO(fn);
+  for i:=0 to voreader.fieldname.Count-1 do begin
+   if pos(' '+voreader.fieldname[i]+' ',colfilter)=0 then voreader.UseField[i]:=false;
+  end;
+  dateformat:=1;
+  Fileformat:=voxml;
+  visualcomment:=' Vis.';
+end;
+end;
+
 
 Procedure OpenVSNET(var f:textfile; var sname : string; var ok : boolean);
 var fn : string;
@@ -591,33 +467,6 @@ begin
 ok:=false;
 sname:=vsnetname(starname);
 fn:=OptForm.FilenameEdit2.Text;
-if fileexists(fn) then begin
-   filemode:=0;
-   assignfile(f,fn);
-   reset(f);
-   nampos[1]:=1;
-   nampos[2]:=0;
-   jdpos[1]:=2;
-   jdpos[2]:=0;
-   magpos[1]:=3;
-   magpos[2]:=0;
-   obspos[1]:=4;
-   obspos[2]:=0;
-   codpos[1]:=5;
-   codpos[2]:=0;
-   dateformat:=2;
-   Fileformat:=token;
-   visualcomment:=' Vv';
-   ok:=true;
-end;
-end;
-
-Procedure OpenVSNETSearch(var f:textfile; var sname : string; var ok : boolean);
-var fn : string;
-begin
-ok:=false;
-sname:=vsnetname(starname);
-fn:=vsfn;
 if fileexists(fn) then begin
    filemode:=0;
    assignfile(f,fn);
@@ -903,19 +752,16 @@ var f : textfile;
     ok,feof,visualobs : boolean;
 begin
 case typeobs of
-0 : OpenAAVSOSUM(f,sname,ok);
-1 : OpenAAVSOQL(f,sname,ok);
-2 : OpenAAVSOJD(f,sname,ok);
-3 : OpenAAVSOUT(f,sname,ok);
-4 : OpenVSNET(f,sname,ok);
-5 : OpenAFOEV(f,sname,ok);
-6 : OpenFreeFile(f,sname,ok);
+0 : OpenAAVSOVIS(f,sname,ok);
+1 : OpenAAVSOSUM(f,sname,ok);
+2 : OpenVSNET(f,sname,ok);
+3 : OpenAFOEV(f,sname,ok);
+4 : OpenFreeFile(f,sname,ok);
 97: OpenAFOEVftp(f,sname,ok);
 98: OpenQuickLook(f,sname,ok);
-99: OpenVSNETSearch(f,sname,ok);
 end;
 if not ok then exit;
-with DetailForm.Image1.Canvas do begin
+with DetailForm.Image1.Picture.Bitmap.Canvas do begin
    Pen.mode := pmCopy;
    Pen.Width:=1;
    try
@@ -997,7 +843,6 @@ end;
 Procedure DrawGraph(varstar : integer);
 begin
 try
-screen.cursor:=crHourGlass;
 FillBox(varstar);
 InitGraph;
 DrawAxis(varstar);
@@ -1007,7 +852,6 @@ case vartyp of
 end;
 if DetailForm.checkbox2.checked or DetailForm.checkbox4.checked then PlotObservation;
 finally
-screen.cursor:=crDefault;
 end;
 end;
 
@@ -1024,20 +868,55 @@ t4:=varinfo.i[7];
 t5:=varinfo.i[8];
 t10:=varinfo.i[12];
 t11:=varinfo.i[13];
+SetOnlineButtons;
+DrawGraph(current);
+end;
+
+procedure TDetailForm.FormResize(Sender: TObject);
+begin
+  RefreshTimer.Enabled:=true;
+end;
+
+procedure TDetailForm.SetOnlineButtons;
+begin
 case Optform.RadioGroup6.ItemIndex of
 0 : begin
     GetQuickLook.caption:='Get online AAVSO QuickLook data';
     Bitbtn5.caption:='Get QuickLook';
     CheckBox4.Caption:='Plot QuickLook';
+    MenuItem2.Checked:=true;
+    MenuItem3.Checked:=false;
     end;
 1 : begin
     GetQuickLook.caption:='Get online AFOEV data';
     Bitbtn5.caption:='Get AFOEV data';
     CheckBox4.Caption:='Plot AFOEV data';
+    MenuItem2.Checked:=false;
+    MenuItem3.Checked:=true;
     end;
 end;
-DrawGraph(current);
 end;
+
+procedure TDetailForm.MenuItem2Click(Sender: TObject);
+begin
+Optform.RadioGroup6.ItemIndex:=0;
+SetOnlineButtons;
+if started then DrawGraph(current);
+end;
+
+procedure TDetailForm.MenuItem3Click(Sender: TObject);
+begin
+Optform.RadioGroup6.ItemIndex:=1;
+SetOnlineButtons;
+if started then DrawGraph(current);
+end;
+
+procedure TDetailForm.RefreshTimerTimer(Sender: TObject);
+begin
+RefreshTimer.Enabled:=false;
+if started then DrawGraph(current);
+end;
+
 
 Procedure InitCursor(X,Y :integer);
 var jdt,ma : double;
