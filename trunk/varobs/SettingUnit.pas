@@ -27,7 +27,7 @@ interface
 
 uses
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Buttons, LResources, u_param, ComCtrls;
+  StdCtrls, ExtCtrls, Buttons, LResources, u_param, ComCtrls, EditBtn;
 
 type
 
@@ -36,21 +36,21 @@ type
   TOptForm = class(TForm)
     BitBtn2: TBitBtn;
     Button1: TButton;
-    Directoryedit1: TEdit;
-    Directoryedit2: TEdit;
+    DirectoryEdit1: TDirectoryEdit;
+    DirectoryEdit2: TDirectoryEdit;
     Edit1: TEdit;
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
-    FilenameEdit0: TEdit;
-    FilenameEdit1: TEdit;
-    FilenameEdit2: TEdit;
-    FilenameEdit3: TEdit;
-    FilenameEdit4: TEdit;
-    FilenameEdit5: TEdit;
-    FilenameEdit6: TEdit;
-    FilenameEdit7: TEdit;
-    FilenameEdit8: TEdit;
+    FileNameEdit3: TFileNameEdit;
+    FileNameEdit8: TFileNameEdit;
+    FileNameEdit6: TFileNameEdit;
+    FileNameEdit4: TFileNameEdit;
+    FileNameEdit1: TFileNameEdit;
+    FileNameEdit0: TFileNameEdit;
+    FileNameEdit2: TFileNameEdit;
+    FileNameEdit7: TFileNameEdit;
+    FileNameEdit5: TFileNameEdit;
     GroupBox0: TGroupBox;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
@@ -98,6 +98,7 @@ type
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
+    procedure FormCreate(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
     procedure RadioGroup3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -184,6 +185,19 @@ case radiogroup1.itemindex of
     GroupBox8.visible:=false;
     end;
 end;
+end;
+
+procedure TOptForm.FormCreate(Sender: TObject);
+begin
+FileNameEdit0.InitialDir:=privatedir;
+FileNameEdit1.InitialDir:=privatedir;
+FileNameEdit2.InitialDir:=privatedir;
+FileNameEdit3.InitialDir:=privatedir;
+FileNameEdit4.InitialDir:=privatedir;
+FileNameEdit5.InitialDir:=privatedir;
+FileNameEdit6.InitialDir:=privatedir;
+FileNameEdit7.InitialDir:=privatedir;
+FileNameEdit8.InitialDir:=privatedir;
 end;
 
 procedure TOptForm.RadioGroup3Click(Sender: TObject);
