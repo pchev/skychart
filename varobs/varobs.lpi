@@ -28,19 +28,19 @@
     </RunParams>
     <RequiredPackages Count="4">
       <Item1>
-        <PackageName Value="downldialog"/>
-        <MinVersion Valid="True"/>
+        <PackageName Value="LCL"/>
       </Item1>
       <Item2>
-        <PackageName Value="CDCjdcalendar"/>
-        <MinVersion Valid="True"/>
-      </Item2>
-      <Item3>
         <PackageName Value="Printer4Lazarus"/>
         <MinVersion Minor="5" Valid="True"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="CDCjdcalendar"/>
+        <MinVersion Valid="True"/>
       </Item3>
       <Item4>
-        <PackageName Value="LCL"/>
+        <PackageName Value="downldialog"/>
+        <MinVersion Valid="True"/>
       </Item4>
     </RequiredPackages>
     <Units Count="8">
@@ -108,6 +108,7 @@
     <Version Value="5"/>
     <SearchPaths>
       <UnitOutputDirectory Value="units"/>
+      <LCLWidgetType Value="gtk2"/>
     </SearchPaths>
     <CodeGeneration>
       <Generate Value="Faster"/>
@@ -123,7 +124,8 @@
       </Options>
     </Linking>
     <Other>
-      <CustomOptions Value="-dUseCThreads"/>
+      <CustomOptions Value="-dUseCThreads
+"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
