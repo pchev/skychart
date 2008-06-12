@@ -2,9 +2,9 @@
 
 LazarusResources.Add('TVarForm','FORMDATA',[
   'TPF0'#8'TVarForm'#7'VarForm'#4'Left'#3'#'#1#6'Height'#3#18#2#3'Top'#2'i'#5'W'
-  +'idth'#3'{'#3#18'HorzScrollBar.Page'#3'z'#3#18'VertScrollBar.Page'#3#253#1#13
+  +'idth'#3'{'#3#18'HorzScrollBar.Page'#3'z'#3#18'VertScrollBar.Page'#3#254#1#13
   +'ActiveControl'#7#5'Grid1'#7'Caption'#6#23'Variable stars observer'#12'Clien'
-  +'tHeight'#3#254#1#11'ClientWidth'#3'{'#3#11'Font.Height'#2#245#9'Font.Name'#6
+  +'tHeight'#3#255#1#11'ClientWidth'#3'{'#3#11'Font.Height'#2#245#9'Font.Name'#6
   +#13'MS Sans Serif'#9'Icon.Data'#10':'#12#0#0'6'#12#0#0'BM6'#12#0#0#0#0#0#0'6'
   +#0#0#0'('#0#0#0' '#0#0#0' '#0#0#0#1#0#24#0#0#0#0#0#0#12#0#0'd'#0#0#0'd'#0#0#0
   +#0#0#0#0#0#0#0#0#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
@@ -111,7 +111,7 @@ LazarusResources.Add('TVarForm','FORMDATA',[
   +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
   +#255#255#255#255#255#255#255#255#4'Menu'#7#9'MainMenu1'#7'OnClose'#7#9'FormC'
   +'lose'#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#8'ShowHint'#9#0
-  +#11'TStringGrid'#5'Grid1'#6'Height'#3#182#1#4'Hint'#6'"Right click on a line'
+  +#11'TStringGrid'#5'Grid1'#6'Height'#3#183#1#4'Hint'#6'"Right click on a line'
   +' to show menu'#3'Top'#2'H'#5'Width'#3'{'#3#5'Align'#7#8'alBottom'#7'Anchors'
   +#11#5'akTop'#6'akLeft'#7'akRight'#8'akBottom'#0#8'ColCount'#2#11#15'DefaultC'
   +'olWidth'#2'x'#10'FixedColor'#7#9'clBtnFace'#9'FixedCols'#2#0#7'Options'#11
@@ -142,8 +142,8 @@ LazarusResources.Add('TVarForm','FORMDATA',[
   +'ize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'Chil'
   +'dSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertica'
   +'l'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopTo'
-  +'Bottom'#27'ChildSizing.ControlsPerLine'#2#3#12'ClientHeight'#2#20#11'Client'
-  +'Width'#3'E'#1#7'Columns'#2#3#9'ItemIndex'#2#0#13'Items.Strings'#1#6#11'Date'
+  +'Bottom'#27'ChildSizing.ControlsPerLine'#2#3#12'ClientHeight'#2#24#11'Client'
+  +'Width'#3'C'#1#7'Columns'#2#3#9'ItemIndex'#2#0#13'Items.Strings'#1#6#11'Date'
   +' / hour'#6#10'Julian day'#6#12'Decimal date'#0#8'TabOrder'#2#3#0#0#5'TEdit'
   +#5'Edit4'#4'Left'#3'x'#1#6'Height'#2#21#3'Top'#2#4#5'Width'#2'y'#8'TabOrder'
   +#2#5#0#0#7'TBitBtn'#7'BitBtn3'#4'Left'#3#248#1#6'Height'#2#25#3'Top'#2#2#5'W'

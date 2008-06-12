@@ -222,11 +222,11 @@ begin
 {$ifdef unix}
 var cmd,p1,p2,p3,p4: string;
 begin
-  cmd:=trim(words(OpenFileCMD,blank,1,1));
-  p1:=trim(words(OpenFileCMD,blank,2,1));
-  p2:=trim(words(OpenFileCMD,blank,3,1));
-  p3:=trim(words(OpenFileCMD,blank,4,1));
-  p4:=trim(words(OpenFileCMD,blank,5,1));
+  cmd:=trim(words(OpenFileCMD,blank,blank,1,1));
+  p1:=trim(words(OpenFileCMD,blank,blank,2,1));
+  p2:=trim(words(OpenFileCMD,blank,blank,3,1));
+  p3:=trim(words(OpenFileCMD,blank,blank,4,1));
+  p4:=trim(words(OpenFileCMD,blank,blank,5,1));
   if p1='' then result:=ExecFork(cmd,FileName)
   else if p2='' then result:=ExecFork(cmd,p1,FileName)
   else if p3='' then result:=ExecFork(cmd,p1,p2,FileName)

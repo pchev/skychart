@@ -781,7 +781,7 @@ token : begin
 end;
 except
 ok:=false;
-raise exception.Create('Invalid data : '+lin);
+//showmessage('Invalid data : '+lin);
 end;
 end;
 
