@@ -113,6 +113,9 @@ if current>0 then begin
     0 : begin   //AAVSO
         Edit1.text:=varform.Grid1.Cells[0,current];
         Edit1.Readonly:=false;
+        Label6.Caption:='Comp Star 1';
+        Label11.visible:=true;
+        edit9.visible:=true;
         label2.caption:='JD + GMAT ';
         if Edit2.text='' then Edit2.text:= trim(varform.Edit1.text);      // Date
         if Edit4.text='' then Edit4.text:= optform.Edit4.text;            // Observer
@@ -134,6 +137,9 @@ if current>0 then begin
            sname:=uppercase(buf);
         Edit1.text:=sname;
         Edit1.Readonly:=false;
+        Label6.Caption:='Comp Stars';
+        Label11.visible:=false;
+        edit9.visible:=false;
         label2.caption:='UT decimal';
         if Edit2.text='' then Edit2.text:= trim(varform.Edit2.text);      // Date
         if Edit4.text='' then Edit4.text:= optform.Edit4.text;            // Observer

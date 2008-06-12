@@ -4,10 +4,9 @@ object DetailForm: TDetailForm
   Top = 120
   Width = 728
   HorzScrollBar.Page = 727
-  VertScrollBar.Page = 462
-  ActiveControl = BitBtn1
+  VertScrollBar.Page = 463
   Caption = 'DetailForm'
-  ClientHeight = 463
+  ClientHeight = 464
   ClientWidth = 728
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -16,7 +15,7 @@ object DetailForm: TDetailForm
   OnShow = FormShow
   ShowHint = True
   object Image1: TImage
-    Height = 340
+    Height = 336
     Width = 728
     Align = alClient
     OnMouseDown = Image1MouseDown
@@ -24,470 +23,464 @@ object DetailForm: TDetailForm
     OnMouseUp = Image1MouseUp
     Transparent = False
   end
-  object Panel1: TPanel
-    Height = 123
-    Top = 340
+  object Panel2: TPanel
+    Height = 90
+    Top = 374
     Width = 728
     Align = alBottom
-    ClientHeight = 123
+    ClientHeight = 90
     ClientWidth = 728
     TabOrder = 0
-    object Panel2: TPanel
-      Height = 83
-      Top = 40
-      Width = 725
-      ClientHeight = 83
-      ClientWidth = 725
-      TabOrder = 0
-      object Label7: TLabel
-        Left = 8
-        Height = 14
-        Top = 36
-        Width = 28
-        Caption = 'Date:'
-        ParentColor = False
-      end
-      object Label8: TLabel
-        Left = 136
-        Height = 14
-        Top = 36
-        Width = 25
-        Caption = 'Mag:'
-        ParentColor = False
-      end
-      object Label1: TLabel
-        Left = 228
-        Height = 14
-        Top = 10
-        Width = 52
-        Caption = 'Mag. max:'
-        ParentColor = False
-      end
-      object Label2: TLabel
-        Left = 333
-        Height = 14
-        Top = 10
-        Width = 44
-        Caption = 'Mag min:'
-        ParentColor = False
-      end
-      object Label3: TLabel
-        Left = 429
-        Height = 14
-        Top = 10
-        Width = 35
-        Caption = 'Period:'
-        ParentColor = False
-      end
-      object Label4: TLabel
-        Left = 541
-        Height = 14
-        Top = 10
-        Width = 48
-        Caption = 'Rise time:'
-        ParentColor = False
-      end
-      object Label5: TLabel
-        Left = 136
-        Height = 14
-        Top = 10
-        Width = 29
-        Caption = 'Type:'
-        ParentColor = False
-      end
-      object Label6: TLabel
-        Left = 8
-        Height = 14
-        Top = 10
-        Width = 25
-        Caption = 'Star:'
-        ParentColor = False
-      end
-      object BitBtn1: TBitBtn
-        Left = 651
-        Height = 25
-        Top = 5
-        Width = 67
-        Cancel = True
-        Caption = 'Close'
-        ModalResult = 2
-        NumGlyphs = 2
-        TabOrder = 0
-      end
-      object Edit12: TEdit
-        Left = 36
-        Height = 21
-        Top = 32
-        Width = 97
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 1
-        Text = 'Edit12'
-      end
-      object Edit13: TEdit
-        Left = 166
-        Height = 21
-        Top = 32
-        Width = 41
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 2
-        Text = 'Edit13'
-      end
-      object CheckBox1: TCheckBox
-        Left = 256
-        Height = 19
-        Hint = 'Cursor follow light curve on graph'
-        Top = 56
-        Width = 108
-        Caption = 'Follow light curve'
-        Checked = True
-        OnClick = CheckBox1Click
-        State = cbChecked
-        TabOrder = 3
-      end
-      object CheckBox2: TCheckBox
-        Left = 399
-        Height = 19
-        Hint = 'Plot observation data from file defined on setting'
-        Top = 56
-        Width = 129
-        Caption = 'Plot observation data '
-        Checked = True
-        OnClick = CheckBox2Click
-        State = cbChecked
-        TabOrder = 4
-      end
-      object BitBtn2: TBitBtn
-        Left = 224
-        Height = 25
-        Hint = 'Backward one period'
-        Top = 30
-        Width = 25
-        Glyph.Data = {
-          F6000000424DF600000000000000760000002800000010000000100000000100
-          04000000000080000000120B0000120B00001000000010000000000000000000
-          8000008000000080800080000000800080008080000080808000C0C0C0000000
-          FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADAD0DADA
-          DADAADADAD00ADADADADDADAD0D0DADADADAADAD0DA0ADADADADDAD0DAD00000
-          000AAD0DADADADADAD0DD0DADADADADADA0A0DADADADADADAD0DD0DADADADADA
-          DA0AAD0DADADADADAD0DDAD0DAD00000000AADAD0DA0ADADADADDADAD0D0DADA
-          DADAADADAD00ADADADADDADADAD0DADADADAADADADADADADADAD
-        }
-        NumGlyphs = 0
-        OnClick = BitBtn2Click
-        TabOrder = 5
-      end
-      object BitBtn3: TBitBtn
-        Left = 288
-        Height = 25
-        Hint = 'Forward one period'
-        Top = 30
-        Width = 25
-        Glyph.Data = {
-          F6000000424DF600000000000000760000002800000010000000100000000100
-          04000000000080000000130B0000130B00001000000000000000000000000000
-          8000008000000080800080000000800080008080000080808000C0C0C0000000
-          FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
-          DADAADADADAD0DADADADDADADADA00DADADAADADADAD0D0DADADDADADADA0AD0
-          DADAA00000000DAD0DADD0DADADADADAD0DAA0ADADADADADAD0DD0DADADADADA
-          DAD0A0ADADADADADAD0DD0DADADADADAD0DAA00000000DAD0DADDADADADA0AD0
-          DADAADADADAD0D0DADADDADADADA00DADADAADADADAD0DADADAD
-        }
-        NumGlyphs = 0
-        OnClick = BitBtn3Click
-        TabOrder = 6
-      end
-      object BitBtn4: TBitBtn
-        Left = 256
-        Height = 25
-        Hint = 'Current period'
-        Top = 30
-        Width = 25
-        Glyph.Data = {
-          F6000000424DF600000000000000760000002800000010000000100000000100
-          04000000000080000000120B0000120B00001000000010000000000000000000
-          8000008000000080800080000000800080008080000080808000C0C0C0000000
-          FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
-          DADAADADADA0ADADADADDADADA0A0ADADADAADADA0ADA0ADADADDADA0ADADA0A
-          DADAADA0ADADADA0ADADDA0ADADADADA0ADAA0ADADADADADA0AD0ADADADADADA
-          DA0AA0ADADADADADA0ADDA0ADADADADA0ADAADA0ADADADA0ADADDADA0ADADA0A
-          DADAADADA0ADA0ADADADDADADA0A0ADADADAADADADA0ADADADAD
-        }
-        NumGlyphs = 0
-        OnClick = BitBtn4Click
-        TabOrder = 7
-      end
-      object Edit1: TEdit
-        Left = 36
-        Height = 21
-        Top = 6
-        Width = 97
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 8
-        Text = 'Edit1'
-      end
-      object Edit2: TEdit
-        Left = 166
-        Height = 21
-        Top = 6
-        Width = 57
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 9
-        Text = 'Edit2'
-      end
-      object Edit3: TEdit
-        Left = 288
-        Height = 21
-        Top = 6
-        Width = 41
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 10
-        Text = 'Edit3'
-      end
-      object Edit4: TEdit
-        Left = 383
-        Height = 21
-        Top = 6
-        Width = 41
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 11
-        Text = 'Edit4'
-      end
-      object Edit5: TEdit
-        Left = 469
-        Height = 21
-        Top = 6
-        Width = 65
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 12
-        Text = 'Edit5'
-      end
-      object Edit6: TEdit
-        Left = 597
-        Height = 21
-        Top = 6
-        Width = 41
-        Color = clBtnFace
-        ReadOnly = True
-        TabOrder = 13
-        Text = 'Edit6'
-      end
-      object CheckBox4: TCheckBox
-        Left = 399
-        Height = 19
-        Top = 34
-        Width = 99
-        Caption = 'Plot QuickLook'
-        OnClick = CheckBox4Click
-        TabOrder = 14
-      end
-      object BitBtn5: TBitBtn
-        Left = 615
-        Height = 25
-        Top = 48
-        Width = 97
-        Caption = 'Get QuickLook'
-        NumGlyphs = 0
-        OnClick = GetQuickLookClick
-        TabOrder = 15
-      end
-      object CheckBox5: TCheckBox
-        Left = 8
-        Height = 19
-        Top = 56
-        Width = 193
-        Caption = 'Group observation to current phase'
-        OnClick = CheckBox5Click
-        TabOrder = 16
-      end
+    object Label7: TLabel
+      Left = 8
+      Height = 20
+      Top = 36
+      Width = 31
+      Caption = 'Date:'
+      ParentColor = False
     end
-    object Panel3: TPanel
-      Height = 44
-      Hint = 'Click on the box to change color'
-      Width = 725
-      ClientHeight = 44
-      ClientWidth = 725
+    object Label8: TLabel
+      Left = 136
+      Height = 20
+      Top = 36
+      Width = 28
+      Caption = 'Mag:'
+      ParentColor = False
+    end
+    object Label1: TLabel
+      Left = 228
+      Height = 20
+      Top = 10
+      Width = 60
+      Caption = 'Mag. max:'
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 333
+      Height = 20
+      Top = 10
+      Width = 53
+      Caption = 'Mag min:'
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 429
+      Height = 20
+      Top = 10
+      Width = 41
+      Caption = 'Period:'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 541
+      Height = 20
+      Top = 10
+      Width = 58
+      Caption = 'Rise time:'
+      ParentColor = False
+    end
+    object Label5: TLabel
+      Left = 136
+      Height = 20
+      Top = 10
+      Width = 30
+      Caption = 'Type:'
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 8
+      Height = 20
+      Top = 10
+      Width = 29
+      Caption = 'Star:'
+      ParentColor = False
+    end
+    object BitBtn1: TBitBtn
+      Left = 651
+      Height = 25
+      Top = 5
+      Width = 67
+      Cancel = True
+      Caption = 'Close'
+      ModalResult = 2
+      NumGlyphs = 2
+      TabOrder = 0
+    end
+    object Edit12: TEdit
+      Left = 36
+      Height = 21
+      Top = 32
+      Width = 97
+      Color = clBtnFace
+      ReadOnly = True
       TabOrder = 1
-      object Shape1: TShape
-        Left = 8
-        Height = 14
-        Top = 2
-        Width = 14
-        OnMouseUp = Shape1MouseUp
-      end
-      object Label9: TLabel
-        Left = 25
-        Height = 14
-        Top = 5
-        Width = 57
-        Caption = 'Background'
-        ParentColor = False
-      end
-      object Shape2: TShape
-        Left = 136
-        Height = 14
-        Top = 2
-        Width = 14
-        Brush.Color = clBlack
-        OnMouseUp = Shape2MouseUp
-      end
-      object Label10: TLabel
-        Left = 158
-        Height = 14
-        Top = 5
-        Width = 21
-        Caption = 'Axis'
-        ParentColor = False
-      end
-      object Shape5: TShape
-        Left = 533
-        Height = 14
-        Top = 2
-        Width = 14
-        Brush.Color = clRed
-        OnMouseUp = Shape5MouseUp
-      end
-      object Label13: TLabel
-        Left = 558
-        Height = 14
-        Top = 5
-        Width = 63
-        Caption = 'Out of range'
-        ParentColor = False
-      end
-      object Shape3: TShape
-        Left = 288
-        Height = 14
-        Top = 2
-        Width = 14
-        Brush.Color = clRed
-        OnMouseUp = Shape3MouseUp
-      end
-      object Label11: TLabel
-        Left = 304
-        Height = 14
-        Top = 5
-        Width = 63
-        Caption = 'Current date'
-        ParentColor = False
-      end
-      object Shape4: TShape
-        Left = 383
-        Height = 14
-        Top = 2
-        Width = 14
-        Brush.Color = clBlue
-        OnMouseUp = Shape4MouseUp
-      end
-      object Label12: TLabel
-        Left = 408
-        Height = 14
-        Top = 5
-        Width = 101
-        Caption = 'Estimated light curve'
-        ParentColor = False
-      end
-      object Shape6: TShape
-        Left = 8
-        Height = 14
-        Top = 18
-        Width = 14
-        Brush.Color = clLime
-        OnMouseUp = Shape6MouseUp
-      end
-      object Label14: TLabel
-        Left = 25
-        Height = 14
-        Top = 21
-        Width = 87
-        Caption = 'Observation point'
-        ParentColor = False
-      end
-      object Shape7: TShape
-        Left = 136
-        Height = 14
-        Top = 18
-        Width = 14
-        Brush.Color = clFuchsia
-        OnMouseUp = Shape7MouseUp
-      end
-      object Shape8: TShape
-        Left = 288
-        Height = 14
-        Top = 18
-        Width = 14
-        Brush.Color = clBlue
-        OnMouseUp = Shape8MouseUp
-      end
-      object Label16: TLabel
-        Left = 304
-        Height = 14
-        Top = 21
-        Width = 60
-        Caption = 'Fainter than'
-        ParentColor = False
-      end
-      object Shape9: TShape
-        Left = 383
-        Height = 14
-        Top = 18
-        Width = 14
-        Brush.Color = clGreen
-        OnMouseUp = Shape9MouseUp
-      end
-      object Label17: TLabel
-        Left = 408
-        Height = 14
-        Top = 21
-        Width = 47
-        Caption = 'Uncertain'
-        ParentColor = False
-      end
-      object Shape10: TShape
-        Left = 533
-        Height = 14
-        Top = 18
-        Width = 14
-        Brush.Color = clTeal
-        OnMouseUp = Shape10MouseUp
-      end
-      object Label18: TLabel
-        Left = 558
-        Height = 14
-        Top = 21
-        Width = 110
-        Caption = 'Non visual observation'
-        ParentColor = False
-      end
-      object CheckBox3: TCheckBox
-        Left = 158
-        Height = 19
-        Hint = 'Show your own observation on another color'
-        Top = 16
-        Width = 106
-        Caption = 'Own observation'
-        Checked = True
-        OnClick = CheckBox3Click
-        State = cbChecked
-        TabOrder = 0
-      end
-      object BitBtn6: TBitBtn
-        Left = 693
-        Height = 25
-        Hint = 'Zoom'
-        Top = 5
-        Width = 25
-        Caption = '+/-'
-        NumGlyphs = 0
-        OnClick = BitBtn6Click
-        TabOrder = 1
-      end
+      Text = 'Edit12'
+    end
+    object Edit13: TEdit
+      Left = 166
+      Height = 21
+      Top = 32
+      Width = 41
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 2
+      Text = 'Edit13'
+    end
+    object CheckBox1: TCheckBox
+      Left = 256
+      Height = 21
+      Hint = 'Cursor follow light curve on graph'
+      Top = 56
+      Width = 121
+      Caption = 'Follow light curve'
+      Checked = True
+      OnClick = CheckBox1Click
+      State = cbChecked
+      TabOrder = 3
+    end
+    object CheckBox2: TCheckBox
+      Left = 399
+      Height = 21
+      Hint = 'Plot observation data from file defined on setting'
+      Top = 56
+      Width = 148
+      Caption = 'Plot observation data '
+      Checked = True
+      OnClick = CheckBox2Click
+      State = cbChecked
+      TabOrder = 4
+    end
+    object BitBtn2: TBitBtn
+      Left = 224
+      Height = 25
+      Hint = 'Backward one period'
+      Top = 30
+      Width = 25
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        04000000000080000000120B0000120B00001000000010000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADAD0DADA
+        DADAADADAD00ADADADADDADAD0D0DADADADAADAD0DA0ADADADADDAD0DAD00000
+        000AAD0DADADADADAD0DD0DADADADADADA0A0DADADADADADAD0DD0DADADADADA
+        DA0AAD0DADADADADAD0DDAD0DAD00000000AADAD0DA0ADADADADDADAD0D0DADA
+        DADAADADAD00ADADADADDADADAD0DADADADAADADADADADADADAD
+      }
+      NumGlyphs = 0
+      OnClick = BitBtn2Click
+      TabOrder = 5
+    end
+    object BitBtn3: TBitBtn
+      Left = 288
+      Height = 25
+      Hint = 'Forward one period'
+      Top = 30
+      Width = 25
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        04000000000080000000130B0000130B00001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+        DADAADADADAD0DADADADDADADADA00DADADAADADADAD0D0DADADDADADADA0AD0
+        DADAA00000000DAD0DADD0DADADADADAD0DAA0ADADADADADAD0DD0DADADADADA
+        DAD0A0ADADADADADAD0DD0DADADADADAD0DAA00000000DAD0DADDADADADA0AD0
+        DADAADADADAD0D0DADADDADADADA00DADADAADADADAD0DADADAD
+      }
+      NumGlyphs = 0
+      OnClick = BitBtn3Click
+      TabOrder = 6
+    end
+    object BitBtn4: TBitBtn
+      Left = 256
+      Height = 25
+      Hint = 'Current period'
+      Top = 30
+      Width = 25
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        04000000000080000000120B0000120B00001000000010000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+        DADAADADADA0ADADADADDADADA0A0ADADADAADADA0ADA0ADADADDADA0ADADA0A
+        DADAADA0ADADADA0ADADDA0ADADADADA0ADAA0ADADADADADA0AD0ADADADADADA
+        DA0AA0ADADADADADA0ADDA0ADADADADA0ADAADA0ADADADA0ADADDADA0ADADA0A
+        DADAADADA0ADA0ADADADDADADA0A0ADADADAADADADA0ADADADAD
+      }
+      NumGlyphs = 0
+      OnClick = BitBtn4Click
+      TabOrder = 7
+    end
+    object Edit1: TEdit
+      Left = 36
+      Height = 21
+      Top = 6
+      Width = 97
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 8
+      Text = 'Edit1'
+    end
+    object Edit2: TEdit
+      Left = 166
+      Height = 21
+      Top = 6
+      Width = 57
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 9
+      Text = 'Edit2'
+    end
+    object Edit3: TEdit
+      Left = 288
+      Height = 21
+      Top = 6
+      Width = 41
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 10
+      Text = 'Edit3'
+    end
+    object Edit4: TEdit
+      Left = 383
+      Height = 21
+      Top = 6
+      Width = 41
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 11
+      Text = 'Edit4'
+    end
+    object Edit5: TEdit
+      Left = 469
+      Height = 21
+      Top = 6
+      Width = 65
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 12
+      Text = 'Edit5'
+    end
+    object Edit6: TEdit
+      Left = 597
+      Height = 21
+      Top = 6
+      Width = 41
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 13
+      Text = 'Edit6'
+    end
+    object CheckBox4: TCheckBox
+      Left = 399
+      Height = 21
+      Top = 34
+      Width = 105
+      Caption = 'Plot QuickLook'
+      OnClick = CheckBox4Click
+      TabOrder = 14
+    end
+    object BitBtn5: TBitBtn
+      Left = 615
+      Height = 25
+      Top = 48
+      Width = 97
+      Caption = 'Get QuickLook'
+      NumGlyphs = 0
+      OnClick = GetQuickLookClick
+      TabOrder = 15
+    end
+    object CheckBox5: TCheckBox
+      Left = 8
+      Height = 21
+      Top = 56
+      Width = 228
+      Caption = 'Group observation to current phase'
+      OnClick = CheckBox5Click
+      TabOrder = 16
+    end
+  end
+  object Panel3: TPanel
+    Height = 38
+    Hint = 'Click on the box to change color'
+    Top = 336
+    Width = 728
+    Align = alBottom
+    ClientHeight = 38
+    ClientWidth = 728
+    TabOrder = 1
+    object Shape1: TShape
+      Left = 8
+      Height = 14
+      Top = 2
+      Width = 14
+      OnMouseUp = Shape1MouseUp
+    end
+    object Label9: TLabel
+      Left = 25
+      Height = 20
+      Top = 5
+      Width = 68
+      Caption = 'Background'
+      ParentColor = False
+    end
+    object Shape2: TShape
+      Left = 136
+      Height = 14
+      Top = 2
+      Width = 14
+      Brush.Color = clBlack
+      OnMouseUp = Shape2MouseUp
+    end
+    object Label10: TLabel
+      Left = 158
+      Height = 20
+      Top = 5
+      Width = 24
+      Caption = 'Axis'
+      ParentColor = False
+    end
+    object Shape5: TShape
+      Left = 533
+      Height = 14
+      Top = 2
+      Width = 14
+      Brush.Color = clRed
+      OnMouseUp = Shape5MouseUp
+    end
+    object Label13: TLabel
+      Left = 558
+      Height = 20
+      Top = 5
+      Width = 73
+      Caption = 'Out of range'
+      ParentColor = False
+    end
+    object Shape3: TShape
+      Left = 288
+      Height = 14
+      Top = 2
+      Width = 14
+      Brush.Color = clRed
+      OnMouseUp = Shape3MouseUp
+    end
+    object Label11: TLabel
+      Left = 304
+      Height = 20
+      Top = 5
+      Width = 73
+      Caption = 'Current date'
+      ParentColor = False
+    end
+    object Shape4: TShape
+      Left = 383
+      Height = 14
+      Top = 2
+      Width = 14
+      Brush.Color = clBlue
+      OnMouseUp = Shape4MouseUp
+    end
+    object Label12: TLabel
+      Left = 408
+      Height = 20
+      Top = 5
+      Width = 121
+      Caption = 'Estimated light curve'
+      ParentColor = False
+    end
+    object Shape6: TShape
+      Left = 8
+      Height = 14
+      Top = 18
+      Width = 14
+      Brush.Color = clLime
+      OnMouseUp = Shape6MouseUp
+    end
+    object Label14: TLabel
+      Left = 25
+      Height = 20
+      Top = 21
+      Width = 102
+      Caption = 'Observation point'
+      ParentColor = False
+    end
+    object Shape7: TShape
+      Left = 136
+      Height = 14
+      Top = 18
+      Width = 14
+      Brush.Color = clFuchsia
+      OnMouseUp = Shape7MouseUp
+    end
+    object Shape8: TShape
+      Left = 288
+      Height = 14
+      Top = 18
+      Width = 14
+      Brush.Color = clBlue
+      OnMouseUp = Shape8MouseUp
+    end
+    object Label16: TLabel
+      Left = 304
+      Height = 20
+      Top = 21
+      Width = 68
+      Caption = 'Fainter than'
+      ParentColor = False
+    end
+    object Shape9: TShape
+      Left = 383
+      Height = 14
+      Top = 18
+      Width = 14
+      Brush.Color = clGreen
+      OnMouseUp = Shape9MouseUp
+    end
+    object Label17: TLabel
+      Left = 408
+      Height = 20
+      Top = 21
+      Width = 55
+      Caption = 'Uncertain'
+      ParentColor = False
+    end
+    object Shape10: TShape
+      Left = 533
+      Height = 14
+      Top = 18
+      Width = 14
+      Brush.Color = clTeal
+      OnMouseUp = Shape10MouseUp
+    end
+    object Label18: TLabel
+      Left = 558
+      Height = 20
+      Top = 21
+      Width = 131
+      Caption = 'Non visual observation'
+      ParentColor = False
+    end
+    object CheckBox3: TCheckBox
+      Left = 158
+      Height = 21
+      Hint = 'Show your own observation on another color'
+      Top = 16
+      Width = 119
+      Caption = 'Own observation'
+      Checked = True
+      OnClick = CheckBox3Click
+      State = cbChecked
+      TabOrder = 0
+    end
+    object BitBtn6: TBitBtn
+      Left = 693
+      Height = 25
+      Hint = 'Zoom'
+      Top = 5
+      Width = 25
+      Caption = '+/-'
+      NumGlyphs = 0
+      OnClick = BitBtn6Click
+      TabOrder = 1
     end
   end
   object ColorDialog1: TColorDialog
