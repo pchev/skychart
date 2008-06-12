@@ -30,11 +30,15 @@ uses
   StdCtrls, ExtCtrls, Buttons, LResources, u_param;
 
 type
+
+  { Tsplash }
+
   Tsplash = class(TForm)
     Image1: TImage;
-    Timer1: TTimer;
     Label2: TLabel;
     Label3: TLabel;
+    Panel1: TPanel;
+    Timer1: TTimer;
     BitBtn1: TBitBtn;
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);

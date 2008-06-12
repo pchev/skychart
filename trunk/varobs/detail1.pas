@@ -76,7 +76,6 @@ type
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
-    Panel1: TPanel;
     Panel2: TPanel;
     ColorDialog1: TColorDialog;
     MainMenu1: TMainMenu;
@@ -398,6 +397,7 @@ end;
 
 Procedure OpenAAVSOVIS(var f:textfile;var sname : string; var ok : boolean);
 begin
+ok:=false;
 end;
 
 Procedure OpenAAVSOSUM(var f:textfile;var sname : string; var ok : boolean);
@@ -602,7 +602,7 @@ try
 case fileformat of
 voxml : begin
       if voreader.ReadVORow(vorow) then begin
-        buf:=trim(vorow[1]);
+        buf:=stringreplace(trim(vorow[1]),',','.',[]);
         case dateformat of
         1 : begin                                    // JD
             p:=pos('.',buf)-1;
@@ -611,7 +611,7 @@ voxml : begin
             jdt:=strtofloat(buf);
             end;
         end;
-        buf:=trim(vorow[2]);    // mag.
+        buf:=stringreplace(trim(vorow[2]),',','.',[]);    // mag.
         buf:=stringreplace(buf,'&lt;','<',[]);
         if buf='' then exit;
         um:=' ';
@@ -868,13 +868,14 @@ t4:=varinfo.i[7];
 t5:=varinfo.i[8];
 t10:=varinfo.i[12];
 t11:=varinfo.i[13];
-SetOnlineButtons;
-DrawGraph(current);
+//force a resize event
+width:=width+1;
+width:=width-1;
 end;
 
 procedure TDetailForm.FormResize(Sender: TObject);
 begin
-  RefreshTimer.Enabled:=true;
+ if started then RefreshTimer.Enabled:=true;
 end;
 
 procedure TDetailForm.SetOnlineButtons;

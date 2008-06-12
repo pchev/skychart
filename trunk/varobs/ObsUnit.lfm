@@ -15,65 +15,65 @@ object ObsForm: TObsForm
   OnShow = FormShow
   object Label1: TLabel
     Left = 8
-    Height = 14
+    Height = 20
     Top = 67
-    Width = 54
+    Width = 66
     Caption = 'Star Name '
     ParentColor = False
   end
   object Label2: TLabel
     Left = 422
-    Height = 14
-    Top = 18
-    Width = 52
+    Height = 20
+    Top = 20
+    Width = 64
     Caption = 'UT decimal'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 200
-    Height = 14
+    Height = 20
     Top = 67
-    Width = 31
+    Width = 35
     Caption = 'Magn.'
     ParentColor = False
   end
   object Label4: TLabel
     Left = 13
-    Height = 14
+    Height = 20
     Top = 20
-    Width = 46
+    Width = 54
     Caption = 'Observer'
     ParentColor = False
   end
   object Label5: TLabel
     Left = 398
-    Height = 14
+    Height = 20
     Top = 67
-    Width = 46
+    Width = 56
     Caption = 'Comment'
     ParentColor = False
   end
   object Label6: TLabel
-    Left = 171
-    Height = 14
+    Left = 162
+    Height = 20
     Top = 103
-    Width = 60
+    Width = 73
     Caption = 'Comp Star 1'
     ParentColor = False
   end
   object Label7: TLabel
-    Left = 152
-    Height = 17
+    Left = 144
+    Height = 18
     Top = 16
-    Width = 30
+    Width = 34
     Caption = 'Date'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     ParentColor = False
   end
   object Label8: TLabel
-    Left = 286
-    Height = 17
+    Left = 288
+    Height = 18
     Top = 16
     Width = 20
     Caption = 'UT'
@@ -83,43 +83,44 @@ object ObsForm: TObsForm
   end
   object Label9: TLabel
     Left = 416
-    Height = 14
+    Height = 20
     Top = 103
-    Width = 28
+    Width = 32
     Caption = 'Chart'
     ParentColor = False
   end
   object Label10: TLabel
     Left = 8
-    Height = 14
+    Height = 20
     Top = 140
-    Width = 42
+    Width = 51
     Caption = 'Remarks'
     ParentColor = False
   end
   object Label11: TLabel
-    Left = 296
-    Height = 14
+    Left = 288
+    Height = 20
     Top = 103
-    Width = 60
+    Width = 73
     Caption = 'Comp Star 2'
     ParentColor = False
   end
   object Edit1: TEdit
-    Left = 62
+    Left = 72
     Height = 21
     Top = 63
     Width = 113
     CharCase = ecUppercase
-    TabOrder = 11
+    TabOrder = 13
   end
   object Edit2: TEdit
-    Left = 478
+    Left = 488
     Height = 21
     Top = 14
     Width = 121
     CharCase = ecUppercase
     OnChange = Edit2Change
+    TabStop = False
     TabOrder = 12
   end
   object Edit3: TEdit
@@ -131,12 +132,13 @@ object ObsForm: TObsForm
     TabOrder = 0
   end
   object Edit4: TEdit
-    Left = 61
+    Left = 72
     Height = 21
-    Top = 16
+    Top = 14
     Width = 47
     CharCase = ecUppercase
     ReadOnly = True
+    TabStop = False
     TabOrder = 4
   end
   object Edit5: TEdit
@@ -165,6 +167,7 @@ object ObsForm: TObsForm
     Font.Pitch = fpFixed
     ScrollBars = ssBoth
     TabOrder = 14
+    TabStop = False
   end
   object BitBtn1: TBitBtn
     Left = 478
@@ -174,7 +177,7 @@ object ObsForm: TObsForm
     Caption = 'Add'
     NumGlyphs = 0
     OnClick = Button1Click
-    TabOrder = 6
+    TabOrder = 11
   end
   object BitBtn2: TBitBtn
     Left = 13
@@ -185,6 +188,7 @@ object ObsForm: TObsForm
     NumGlyphs = 0
     OnClick = Button2Click
     TabOrder = 7
+    TabStop = False
   end
   object BitBtn3: TBitBtn
     Left = 117
@@ -195,6 +199,7 @@ object ObsForm: TObsForm
     NumGlyphs = 0
     OnClick = Button3Click
     TabOrder = 8
+    TabStop = False
   end
   object BitBtn5: TBitBtn
     Left = 214
@@ -205,6 +210,7 @@ object ObsForm: TObsForm
     NumGlyphs = 0
     OnClick = BitBtn5Click
     TabOrder = 9
+    TabStop = False
   end
   object BitBtn6: TBitBtn
     Left = 550
@@ -215,6 +221,7 @@ object ObsForm: TObsForm
     ModalResult = 1
     NumGlyphs = 2
     TabOrder = 10
+    TabStop = False
   end
   object Edit7: TEdit
     Left = 456
@@ -222,23 +229,23 @@ object ObsForm: TObsForm
     Top = 100
     Width = 88
     CharCase = ecUppercase
-    TabOrder = 3
+    TabOrder = 5
   end
   object Edit8: TEdit
-    Left = 54
+    Left = 64
     Height = 21
     Top = 136
-    Width = 407
+    Width = 397
     CharCase = ecUppercase
-    TabOrder = 5
+    TabOrder = 6
   end
   object CheckBox2: TCheckBox
     Left = 296
-    Height = 19
+    Height = 21
     Top = 65
-    Width = 82
+    Width = 90
     Caption = 'Fainter than'
-    TabOrder = 13
+    TabOrder = 15
     TabStop = False
   end
   object TimePicker1: TTimePicker
@@ -249,7 +256,7 @@ object ObsForm: TObsForm
     Time = 0.39739583333333
     OnChange = DateEdit1Change
     Enabled = True
-    TabOrder = 15
+    TabOrder = 17
   end
   object DateEdit1: TDateEdit
     Left = 183
@@ -283,6 +290,7 @@ object ObsForm: TObsForm
     }
     NumGlyphs = 1
     OnChange = DateEdit1Change
+    TabStop = False
     TabOrder = 16
   end
   object Edit9: TEdit
@@ -291,6 +299,6 @@ object ObsForm: TObsForm
     Top = 100
     Width = 41
     CharCase = ecUppercase
-    TabOrder = 17
+    TabOrder = 3
   end
 end
