@@ -28,7 +28,8 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms
-  { you can add units after this }, variables1, aavsochart, detail1,
+  { you can add units after this },
+  variables1, aavsochart, detail1, uniqueinstance_package,
   ObsUnit, SettingUnit, splashunit, Printer4Lazarus, CDCjdcalendar, u_param,
   downldialog;
 

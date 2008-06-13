@@ -55,20 +55,25 @@ OpenFileCMD='kfmclient exec';
       DefaultPrivateDir='~/cartes_du_ciel/varobs';
       Defaultconfigfile='~/.varobs.ini';
       SharedDir='/usr/share/apps/skychart';
+      DefaultSkychart='skychart';
 {$endif}
 {$ifdef darwin}
       DefaultPrivateDir='~/cartes_du_ciel/varobs';
       Defaultconfigfile='~/.varobs.ini';
       SharedDir='/usr/share/skychart';
+      DefaultSkychart='skychart';
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
       DefaultPrivateDir='Cartes du Ciel\VarObs';
       Defaultconfigfile='varobs.ini';
+      DefaultSkychart='skychart.exe';
 {$endif}
 
   CR = #$0d;
   LF = #$0a;
   CRLF = CR + LF;
+  connectdelay=15E-5; // 13 sec. delay
+  cmddelay=5E-5; // 4 sec. delay
 
 
 var
@@ -76,7 +81,7 @@ var
   lockdate : boolean;
   lockselect : boolean;
   started : boolean;
-  AppDir,PrivateDir,ConstDir,ConfigFile,planname : string;
+  AppDir,PrivateDir,ConstDir,ConfigFile,planname,skychart : string;
   jdact : double;
   CurrentRow: integer;
   param : Tstringlist;

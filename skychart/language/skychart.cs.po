@@ -3976,6 +3976,10 @@ msgstr "ID uživatele:"
 msgid "Variable Star"
 msgstr "Proměnná hvězda"
 
+#: u_translation:rsvariablestar2
+msgid "Variable Stars"
+msgstr ""
+
 #: u_translation:rsvariables
 msgid "Variables"
 msgstr "Proměnná"

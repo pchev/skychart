@@ -270,6 +270,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultPrintCmd2='gimp';
       DefaultTmpDir=DefaultPrivateDir+'/tmp';
       Default_dssdrive='/mnt/cdrom';
+      DefaultVarObs='varobs';
 {$endif}
 {$ifdef darwin}
       DefaultFontName='Helvetica';
@@ -283,6 +284,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultPrintCmd2='gimp';
       DefaultTmpDir=DefaultPrivateDir+'/tmp';
       Default_dssdrive='/Volumes';
+      DefaultVarObs='varobs';
 {$endif}
 {$ifdef win32}
       DefaultFontName='Arial';
@@ -295,6 +297,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultPrintCmd2='mspaint.exe';
       DefaultTmpDir='tmp';
       Default_dssdrive='D:\';
+      DefaultVarObs='varobs.exe';
 {$endif}
 
 type
@@ -594,6 +597,7 @@ var gzopen : Tgzopen;
 
 // pseudo-constant only here
 Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, ZoneDir : string;
+     VarObs : String;
      Configfile, SysDecimalSeparator, Lang : string;
      compile_time:string;
      ldeg,lmin,lsec : string;

@@ -3975,6 +3975,10 @@ msgstr "Gebruiker-ID:"
 msgid "Variable Star"
 msgstr "Variabele ster"
 
+#: u_translation:rsvariablestar2
+msgid "Variable Stars"
+msgstr ""
+
 #: u_translation:rsvariables
 msgid "Variables"
 msgstr "Variabelen"

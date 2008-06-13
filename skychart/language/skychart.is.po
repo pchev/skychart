@@ -3975,6 +3975,10 @@ msgstr "Notandi.:"
 msgid "Variable Star"
 msgstr "Sveiflustjarna"
 
+#: u_translation:rsvariablestar2
+msgid "Variable Stars"
+msgstr ""
+
 #: u_translation:rsvariables
 msgid "Variables"
 msgstr "Breytur"
