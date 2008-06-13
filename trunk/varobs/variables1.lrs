@@ -1,10 +1,10 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TVarForm','FORMDATA',[
-  'TPF0'#8'TVarForm'#7'VarForm'#4'Left'#3'#'#1#6'Height'#3#18#2#3'Top'#2'i'#5'W'
-  +'idth'#3'{'#3#18'HorzScrollBar.Page'#3'z'#3#18'VertScrollBar.Page'#3#253#1#13
+  'TPF0'#8'TVarForm'#7'VarForm'#4'Left'#3'{'#1#6'Height'#3#18#2#3'Top'#2'x'#5'W'
+  +'idth'#3'{'#3#18'HorzScrollBar.Page'#3'z'#3#18'VertScrollBar.Page'#3#254#1#13
   +'ActiveControl'#7#5'Grid1'#7'Caption'#6#23'Variable stars observer'#12'Clien'
-  +'tHeight'#3#254#1#11'ClientWidth'#3'{'#3#11'Font.Height'#2#245#9'Font.Name'#6
+  +'tHeight'#3#255#1#11'ClientWidth'#3'{'#3#11'Font.Height'#2#245#9'Font.Name'#6
   +#13'MS Sans Serif'#9'Icon.Data'#10':'#12#0#0'6'#12#0#0'BM6'#12#0#0#0#0#0#0'6'
   +#0#0#0'('#0#0#0' '#0#0#0' '#0#0#0#1#0#24#0#0#0#0#0#0#12#0#0'd'#0#0#0'd'#0#0#0
   +#0#0#0#0#0#0#0#0#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
@@ -110,92 +110,92 @@ LazarusResources.Add('TVarForm','FORMDATA',[
   +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
   +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
   +#255#255#255#255#255#255#255#255#4'Menu'#7#9'MainMenu1'#7'OnClose'#7#9'FormC'
-  +'lose'#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#8'ShowHint'#9#0
-  +#11'TStringGrid'#5'Grid1'#6'Height'#3#182#1#4'Hint'#6'"Right click on a line'
-  +' to show menu'#3'Top'#2'H'#5'Width'#3'{'#3#5'Align'#7#8'alBottom'#7'Anchors'
-  +#11#5'akTop'#6'akLeft'#7'akRight'#8'akBottom'#0#8'ColCount'#2#11#15'DefaultC'
-  +'olWidth'#2'x'#10'FixedColor'#7#9'clBtnFace'#9'FixedCols'#2#0#7'Options'#11
-  +#15'goFixedVertLine'#15'goFixedHorzLine'#10'goVertLine'#10'goHorzLine'#19'go'
-  +'DrawFocusSelected'#11'goColSizing'#11'goRowSelect'#15'goThumbTracking'#14'g'
-  +'oSmoothScroll'#0#8'RowCount'#2#2#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'
-  +#2#0#7'TabStop'#9#9'OnMouseUp'#7#12'Grid1MouseUp'#12'OnSelectCell'#7#15'Grid'
-  +'1SelectCell'#0#0#6'TPanel'#6'Panel1'#6'Height'#2'F'#5'Width'#3'{'#3#5'Align'
-  +#7#5'alTop'#12'ClientHeight'#2'F'#11'ClientWidth'#3'{'#3#8'TabOrder'#2#1#0#6
-  +'TLabel'#6'Label1'#4'Left'#3#156#0#6'Height'#2#14#3'Top'#2#10#5'Width'#2#14#7
-  +'Caption'#6#2'UT'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#11#6'H'
-  +'eight'#2#14#3'Top'#2#10#5'Width'#2#24#7'Caption'#6#4'Date'#11'ParentColor'#8
-  +#0#0#6'TLabel'#6'Label3'#4'Left'#2#22#6'Height'#2#14#3'Top'#2','#5'Width'#2
-  +#13#7'Caption'#6#2'JD'#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#3
-  +#147#0#6'Height'#2#14#3'Top'#2','#5'Width'#2#23#7'Caption'#6#4'Dec.'#11'Pare'
-  +'ntColor'#8#0#0#7'TBitBtn'#7'BitBtn1'#4'Left'#3' '#1#6'Height'#2#22#3'Top'#2
-  +#2#5'Width'#2'K'#7'Caption'#6#7'Compute'#11'ModalResult'#2#4#9'NumGlyphs'#2#2
-  ,#7'OnClick'#7#12'BitBtn1Click'#8'TabOrder'#2#0#0#0#5'TEdit'#5'Edit1'#4'Left'
-  +#2'0'#6'Height'#2#21#3'Top'#2'*'#5'Width'#2'Y'#8'OnChange'#7#11'Edit1Change'
-  +#8'TabOrder'#2#1#4'Text'#6#11'2451179.123'#0#0#5'TEdit'#5'Edit2'#4'Left'#3
-  +#176#0#6'Height'#2#21#3'Top'#2'*'#5'Width'#2'a'#8'OnChange'#7#11'Edit2Change'
-  +#8'TabOrder'#2#2#4'Text'#6#12'19990928.123'#0#0#11'TRadioGroup'#11'RadioGrou'
-  +'p1'#4'Left'#3' '#1#6'Height'#2'&'#3'Top'#2#28#5'Width'#3'I'#1#8'AutoFill'#9
-  +#7'Caption'#6#18'Output date format'#28'ChildSizing.LeftRightSpacing'#2#6#28
-  +'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'cr'
-  +'sHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousC'
-  +'hildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildS'
-  +'izing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclL'
-  +'eftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#3#12'ClientHei'
-  +'ght'#2#20#11'ClientWidth'#3'E'#1#7'Columns'#2#3#9'ItemIndex'#2#0#13'Items.S'
-  +'trings'#1#6#11'Date / hour'#6#10'Julian day'#6#12'Decimal date'#0#8'TabOrde'
-  +'r'#2#3#0#0#5'TEdit'#5'Edit4'#4'Left'#3'x'#1#6'Height'#2#21#3'Top'#2#3#5'Wid'
-  +'th'#2'y'#8'TabOrder'#2#5#0#0#7'TBitBtn'#7'BitBtn3'#4'Left'#3#248#1#6'Height'
-  +#2#22#3'Top'#2#2#5'Width'#2'K'#7'Caption'#6#6'Search'#9'NumGlyphs'#2#0#7'OnC'
-  +'lick'#7#12'BitBtn3Click'#8'TabOrder'#2#4#0#0#9'TDateEdit'#9'DateEdit1'#4'Le'
-  +'ft'#2'0'#6'Height'#2#23#3'Top'#2#6#5'Width'#2'P'#23'CalendarDisplaySettings'
-  +#11#14'dsShowHeadings'#14'dsShowDayNames'#0#9'OKCaption'#6#2'OK'#13'CancelCa'
-  +'ption'#6#6'Cancel'#8'ReadOnly'#8#11'ButtonWidth'#2#23#10'Glyph.Data'#10'3'#2
-  +#0#0'/'#2#0#0'/* XPM */'#10'static char *calendar[] = {'#10'/* columns rows '
-  +'colors chars-per-pixel */'#10'"14 12 17 1",'#10'"  c black",'#10'". c #8000'
-  +'00",'#10'"X c #008000",'#10'"o c #808000",'#10'"O c navy",'#10'"+ c #800080'
-  +'",'#10'"@ c #008080",'#10'"# c #808080",'#10'"$ c #C0C0C0",'#10'"% c red",'
-  +#10'"& c green",'#10'"* c yellow",'#10'"= c blue",'#10'"- c magenta",'#10'";'
-  +' c cyan",'#10'": c gray100",'#10'"> c None",'#10'/* pixels */'#10'">>      '
-  +'    >>",'#10'">>:$$$$$$$$:O#",'#10'">>::::::::::O#",'#10'">>:: ::    :O#",'
-  +#10'">>:  :: ::::O#",'#10'">>:: ::   $:O#",'#10'">>:: ::::: :O#",'#10'">>:: '
-  +'::$:$ :O#",'#10'">>:   :   $:O#",'#10'">>::::::::::O#",'#10'">>  O OO O  O#'
-  +'",'#10'">>>###########"'#10'};'#10#9'NumGlyphs'#2#1#8'OnChange'#7#15'DateEd'
-  +'it1Change'#8'TabOrder'#2#6#0#0#11'TTimePicker'#11'TimePicker1'#4'Left'#3#176
-  +#0#6'Height'#2#23#3'Top'#2#6#5'Width'#2'e'#4'Time'#5#0'0Tv'#152#186#220#202
-  +#253'?'#8'OnChange'#7#15'DateEdit1Change'#7'Enabled'#9#8'TabOrder'#2#7#0#0#0
-  +#19'TPrinterSetupDialog'#19'PrinterSetupDialog1'#4'left'#3#232#1#3'top'#3#200
-  +#0#0#0#9'TMainMenu'#9'MainMenu1'#4'left'#3'('#1#3'top'#3#168#0#0#9'TMenuItem'
-  +#5'File1'#7'Caption'#6#5'&File'#0#9'TMenuItem'#5'Open1'#7'Caption'#6#20'&Ope'
-  +'n Observing Plan'#7'OnClick'#7#10'Open1Click'#0#0#9'TMenuItem'#16'Editcurre'
-  +'ntfile1'#7'Caption'#6#20'&Edit Observing Plan'#7'OnClick'#7#21'Editcurrentf'
-  +'ile1Click'#0#0#9'TMenuItem'#6'Print1'#7'Caption'#6#6'&Print'#7'OnClick'#7#11
-  +'Print1Click'#0#0#9'TMenuItem'#13'Printersetup1'#7'Caption'#6#14'Printer &se'
-  +'tup'#7'OnClick'#7#18'Printersetup1Click'#0#0#9'TMenuItem'#8'Setting1'#7'Cap'
-  +'tion'#6#8'&Options'#7'OnClick'#7#13'Setting1Click'#0#0#9'TMenuItem'#2'N6'#7
-  +'Caption'#6#1'-'#0#0#9'TMenuItem'#5'Exit1'#7'Caption'#6#5'E&xit'#7'OnClick'#7
-  +#10'Exit1Click'#0#0#0#9'TMenuItem'#9'MenuItem1'#7'Caption'#6#7'&Action'#0#9
-  +'TMenuItem'#9'MenuItem2'#7'Caption'#6#17'Show &Light curve'#7'OnClick'#7#16
-  +'Lightcurve1Click'#0#0#9'TMenuItem'#9'MenuItem3'#7'Caption'#6#18'Enter &obse'
-  +'rvation'#7'OnClick'#7#20'Newobservation1Click'#0#0#9'TMenuItem'#9'MenuItem4'
-  +#7'Caption'#6#12'&AAVSO Chart'#7'OnClick'#7#16'AAVSOChart1Click'#0#0#9'TMenu'
-  +'Item'#9'MenuItem5'#7'Caption'#6#21'&Cartes du Ciel Chart'#7'OnClick'#7#15'S'
-  +'howChart1Click'#0#0#0#9'TMenuItem'#11'AAVSOTools1'#7'Caption'#6#6'&Tools'#0
-  +#9'TMenuItem'#19'PrepareLPVBulletin1'#7'Caption'#6#27'&Prepare AAVSO LPV Bul'
-  +'letin'#7'OnClick'#7#24'PrepareLPVBulletin1Click'#0#0#9'TMenuItem'#20'Create'
-  +'observingplan1'#7'Caption'#6'*&Create observing plan from AAVSO Bulletin'#7
-  +'OnClick'#7#25'Createobservingplan1Click'#0#0#9'TMenuItem'#13'AAVSOwebpage1'
-  +#7'Caption'#6#15'&AAVSO web page'#7'OnClick'#7#18'AAVSOwebpage1Click'#0#0#0#9
-  +'TMenuItem'#5'Help1'#7'Caption'#6#5'&Help'#0#9'TMenuItem'#8'Content1'#7'Capt'
-  +'ion'#6#8'&Content'#7'OnClick'#7#13'Content1Click'#0#0#9'TMenuItem'#6'About1'
-  +#7'Caption'#6#6'&About'#7'OnClick'#7#11'About1Click'#0#0#0#0#11'TOpenDialog'
-  +#11'OpenDialog1'#5'Title'#6'#Open variables stars parameter file'#6'Filter'#6
-  +'/All files|*.*|.dat files|*.dat|.txt files|*.txt'#4'left'#3#232#1#3'top'#3
-  +#168#0#0#0#10'TPopupMenu'#10'PopupMenu1'#4'left'#3'X'#1#3'top'#3#216#0#0#9'T'
-  +'MenuItem'#11'Lightcurve1'#7'Caption'#6#16'Show Light curve'#7'OnClick'#7#16
-  +'Lightcurve1Click'#0#0#9'TMenuItem'#17'Enterobservation1'#7'Caption'#6#17'En'
-  ,'ter observation'#7'OnClick'#7#20'Newobservation1Click'#0#0#9'TMenuItem'#11
-  +'AAVSOChart1'#7'Caption'#6#11'AAVSO Chart'#7'OnClick'#7#16'AAVSOChart1Click'
-  +#0#0#9'TMenuItem'#10'ShowChart1'#7'Caption'#6#20'Cartes du Ciel Chart'#7'OnC'
-  +'lick'#7#15'ShowChart1Click'#0#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#7'OnTime'
-  +'r'#7#11'Timer1Timer'#4'left'#3'0'#1#3'top'#3#16#1#0#0#0
+  +'lose'#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#8'Position'#7#9
+  +'poDefault'#8'ShowHint'#9#0#11'TStringGrid'#5'Grid1'#6'Height'#3#183#1#4'Hin'
+  +'t'#6'"Right click on a line to show menu'#3'Top'#2'H'#5'Width'#3'{'#3#5'Ali'
+  +'gn'#7#8'alBottom'#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#8'akBottom'#0
+  +#8'ColCount'#2#11#15'DefaultColWidth'#2'x'#10'FixedColor'#7#9'clBtnFace'#9'F'
+  +'ixedCols'#2#0#7'Options'#11#15'goFixedVertLine'#15'goFixedHorzLine'#10'goVe'
+  +'rtLine'#10'goHorzLine'#19'goDrawFocusSelected'#11'goColSizing'#11'goRowSele'
+  +'ct'#15'goThumbTracking'#14'goSmoothScroll'#0#8'RowCount'#2#2#10'ScrollBars'
+  +#7#10'ssAutoBoth'#8'TabOrder'#2#0#7'TabStop'#9#9'OnMouseUp'#7#12'Grid1MouseU'
+  +'p'#12'OnSelectCell'#7#15'Grid1SelectCell'#0#0#6'TPanel'#6'Panel1'#6'Height'
+  +#2'F'#5'Width'#3'{'#3#5'Align'#7#5'alTop'#12'ClientHeight'#2'F'#11'ClientWid'
+  +'th'#3'{'#3#8'TabOrder'#2#1#0#6'TLabel'#6'Label1'#4'Left'#3#156#0#6'Height'#2
+  +#14#3'Top'#2#10#5'Width'#2#14#7'Caption'#6#2'UT'#11'ParentColor'#8#0#0#6'TLa'
+  +'bel'#6'Label2'#4'Left'#2#11#6'Height'#2#14#3'Top'#2#10#5'Width'#2#24#7'Capt'
+  +'ion'#6#4'Date'#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Left'#2#22#6'Hei'
+  +'ght'#2#14#3'Top'#2','#5'Width'#2#13#7'Caption'#6#2'JD'#11'ParentColor'#8#0#0
+  +#6'TLabel'#6'Label4'#4'Left'#3#147#0#6'Height'#2#14#3'Top'#2','#5'Width'#2#23
+  +#7'Caption'#6#4'Dec.'#11'ParentColor'#8#0#0#7'TBitBtn'#7'BitBtn1'#4'Left'#3
+  +' '#1#6'Height'#2#22#3'Top'#2#2#5'Width'#2'K'#7'Caption'#6#7'Compute'#11'Mod'
+  ,'alResult'#2#4#9'NumGlyphs'#2#2#7'OnClick'#7#12'BitBtn1Click'#8'TabOrder'#2#0
+  +#0#0#5'TEdit'#5'Edit1'#4'Left'#2'0'#6'Height'#2#21#3'Top'#2'*'#5'Width'#2'Y'
+  +#8'OnChange'#7#11'Edit1Change'#8'TabOrder'#2#1#4'Text'#6#11'2451179.123'#0#0
+  +#5'TEdit'#5'Edit2'#4'Left'#3#176#0#6'Height'#2#21#3'Top'#2'*'#5'Width'#2'a'#8
+  +'OnChange'#7#11'Edit2Change'#8'TabOrder'#2#2#4'Text'#6#12'19990928.123'#0#0
+  +#11'TRadioGroup'#11'RadioGroup1'#4'Left'#3' '#1#6'Height'#2'&'#3'Top'#2#28#5
+  +'Width'#3'I'#1#8'AutoFill'#9#7'Caption'#6#18'Output date format'#28'ChildSiz'
+  +'ing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizi'
+  +'ng.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.Enlarge'
+  +'Vertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7
+  +#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'C'
+  +'hildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Contr'
+  +'olsPerLine'#2#3#12'ClientHeight'#2#24#11'ClientWidth'#3'C'#1#7'Columns'#2#3
+  +#9'ItemIndex'#2#0#13'Items.Strings'#1#6#9'Date/Time'#6#10'Julian day'#6#12'D'
+  +'ecimal date'#0#8'TabOrder'#2#3#0#0#5'TEdit'#5'Edit4'#4'Left'#3'x'#1#6'Heigh'
+  +'t'#2#21#3'Top'#2#3#5'Width'#2'y'#8'TabOrder'#2#5#0#0#7'TBitBtn'#7'BitBtn3'#4
+  +'Left'#3#248#1#6'Height'#2#22#3'Top'#2#2#5'Width'#2'K'#7'Caption'#6#6'Search'
+  +#9'NumGlyphs'#2#0#7'OnClick'#7#12'BitBtn3Click'#8'TabOrder'#2#4#0#0#9'TDateE'
+  +'dit'#9'DateEdit1'#4'Left'#2'0'#6'Height'#2#23#3'Top'#2#6#5'Width'#2'P'#23'C'
+  +'alendarDisplaySettings'#11#14'dsShowHeadings'#14'dsShowDayNames'#0#9'OKCapt'
+  +'ion'#6#2'OK'#13'CancelCaption'#6#6'Cancel'#8'ReadOnly'#8#11'ButtonWidth'#2
+  +#23#10'Glyph.Data'#10'3'#2#0#0'/'#2#0#0'/* XPM */'#10'static char *calendar['
+  +'] = {'#10'/* columns rows colors chars-per-pixel */'#10'"14 12 17 1",'#10'"'
+  +'  c black",'#10'". c #800000",'#10'"X c #008000",'#10'"o c #808000",'#10'"O'
+  +' c navy",'#10'"+ c #800080",'#10'"@ c #008080",'#10'"# c #808080",'#10'"$ c'
+  +' #C0C0C0",'#10'"% c red",'#10'"& c green",'#10'"* c yellow",'#10'"= c blue"'
+  +','#10'"- c magenta",'#10'"; c cyan",'#10'": c gray100",'#10'"> c None",'#10
+  +'/* pixels */'#10'">>          >>",'#10'">>:$$$$$$$$:O#",'#10'">>::::::::::O'
+  +'#",'#10'">>:: ::    :O#",'#10'">>:  :: ::::O#",'#10'">>:: ::   $:O#",'#10'"'
+  +'>>:: ::::: :O#",'#10'">>:: ::$:$ :O#",'#10'">>:   :   $:O#",'#10'">>:::::::'
+  +':::O#",'#10'">>  O OO O  O#",'#10'">>>###########"'#10'};'#10#9'NumGlyphs'#2
+  +#1#8'OnChange'#7#15'DateEdit1Change'#8'TabOrder'#2#6#0#0#11'TTimePicker'#11
+  +'TimePicker1'#4'Left'#3#176#0#6'Height'#2#23#3'Top'#2#6#5'Width'#2'e'#4'Time'
+  +#5#0'0Tv'#152#186#220#202#253'?'#8'OnChange'#7#15'DateEdit1Change'#7'Enabled'
+  +#9#8'TabOrder'#2#7#0#0#0#19'TPrinterSetupDialog'#19'PrinterSetupDialog1'#4'l'
+  +'eft'#3#232#1#3'top'#3#200#0#0#0#9'TMainMenu'#9'MainMenu1'#4'left'#3'('#1#3
+  +'top'#3#168#0#0#9'TMenuItem'#5'File1'#7'Caption'#6#5'&File'#0#9'TMenuItem'#5
+  +'Open1'#7'Caption'#6#20'&Open Observing Plan'#7'OnClick'#7#10'Open1Click'#0#0
+  +#9'TMenuItem'#9'MenuItem6'#7'Caption'#6#18'Open Constellation'#7'OnClick'#7
+  +#14'MenuItem6Click'#0#0#9'TMenuItem'#6'Print1'#7'Caption'#6#6'&Print'#7'OnCl'
+  +'ick'#7#11'Print1Click'#0#0#9'TMenuItem'#13'Printersetup1'#7'Caption'#6#14'P'
+  +'rinter &setup'#7'OnClick'#7#18'Printersetup1Click'#0#0#9'TMenuItem'#8'Setti'
+  +'ng1'#7'Caption'#6#8'&Options'#7'OnClick'#7#13'Setting1Click'#0#0#9'TMenuIte'
+  +'m'#2'N6'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#5'Exit1'#7'Caption'#6#5'E&xit'#7
+  +'OnClick'#7#10'Exit1Click'#0#0#0#9'TMenuItem'#9'MenuItem1'#7'Caption'#6#7'&A'
+  +'ction'#0#9'TMenuItem'#9'MenuItem2'#7'Caption'#6#17'Show &Light curve'#7'OnC'
+  +'lick'#7#16'Lightcurve1Click'#0#0#9'TMenuItem'#9'MenuItem3'#7'Caption'#6#18
+  +'Enter &observation'#7'OnClick'#7#20'Newobservation1Click'#0#0#9'TMenuItem'#9
+  +'MenuItem4'#7'Caption'#6#12'&AAVSO Chart'#7'OnClick'#7#16'AAVSOChart1Click'#0
+  +#0#9'TMenuItem'#9'MenuItem5'#7'Caption'#6#21'&Cartes du Ciel Chart'#7'OnClic'
+  +'k'#7#15'ShowChart1Click'#0#0#0#9'TMenuItem'#11'AAVSOTools1'#7'Caption'#6#6
+  +'&Tools'#0#9'TMenuItem'#19'PrepareLPVBulletin1'#7'Caption'#6#27'&Prepare AAV'
+  +'SO LPV Bulletin'#7'OnClick'#7#24'PrepareLPVBulletin1Click'#0#0#9'TMenuItem'
+  +#20'Createobservingplan1'#7'Caption'#6'*&Create observing plan from AAVSO Bu'
+  +'lletin'#7'OnClick'#7#25'Createobservingplan1Click'#0#0#9'TMenuItem'#13'AAVS'
+  +'Owebpage1'#7'Caption'#6#15'&AAVSO web page'#7'OnClick'#7#18'AAVSOwebpage1Cl'
+  +'ick'#0#0#0#9'TMenuItem'#5'Help1'#7'Caption'#6#5'&Help'#0#9'TMenuItem'#8'Con'
+  +'tent1'#7'Caption'#6#8'&Content'#7'OnClick'#7#13'Content1Click'#0#0#9'TMenuI'
+  +'tem'#6'About1'#7'Caption'#6#6'&About'#7'OnClick'#7#11'About1Click'#0#0#0#0
+  +#11'TOpenDialog'#11'OpenDialog1'#5'Title'#6'#Open variables stars parameter '
+  +'file'#6'Filter'#6'/All files|*.*|.dat files|*.dat|.txt files|*.txt'#4'left'
+  +#3#232#1#3'top'#3#168#0#0#0#10'TPopupMenu'#10'PopupMenu1'#4'left'#3'X'#1#3't'
+  +'op'#3#216#0#0#9'TMenuItem'#11'Lightcurve1'#7'Caption'#6#16'Show Light curve'
+  +#7'OnClick'#7#16'Lightcurve1Click'#0#0#9'TMenuItem'#17'Enterobservation1'#7
+  ,'Caption'#6#17'Enter observation'#7'OnClick'#7#20'Newobservation1Click'#0#0#9
+  +'TMenuItem'#11'AAVSOChart1'#7'Caption'#6#11'AAVSO Chart'#7'OnClick'#7#16'AAV'
+  +'SOChart1Click'#0#0#9'TMenuItem'#10'ShowChart1'#7'Caption'#6#20'Cartes du Ci'
+  +'el Chart'#7'OnClick'#7#15'ShowChart1Click'#0#0#0#6'TTimer'#6'Timer1'#7'Enab'
+  +'led'#8#7'OnTimer'#7#11'Timer1Timer'#4'left'#3'0'#1#3'top'#3#16#1#0#0#0
 ]);

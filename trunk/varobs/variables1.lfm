@@ -1,13 +1,13 @@
 object VarForm: TVarForm
-  Left = 291
+  Left = 379
   Height = 530
-  Top = 105
+  Top = 120
   Width = 891
   HorzScrollBar.Page = 890
-  VertScrollBar.Page = 509
+  VertScrollBar.Page = 510
   ActiveControl = Grid1
   Caption = 'Variable stars observer'
-  ClientHeight = 510
+  ClientHeight = 511
   ClientWidth = 891
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -115,9 +115,10 @@ object VarForm: TVarForm
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
+  Position = poDefault
   ShowHint = True
   object Grid1: TStringGrid
-    Height = 438
+    Height = 439
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 891
@@ -218,12 +219,12 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 20
-      ClientWidth = 325
+      ClientHeight = 24
+      ClientWidth = 323
       Columns = 3
       ItemIndex = 0
       Items.Strings = (
-        'Date / hour'
+        'Date/Time'
         'Julian day'
         'Decimal date'
       )
@@ -304,9 +305,9 @@ object VarForm: TVarForm
         Caption = '&Open Observing Plan'
         OnClick = Open1Click
       end
-      object Editcurrentfile1: TMenuItem
-        Caption = '&Edit Observing Plan'
-        OnClick = Editcurrentfile1Click
+      object MenuItem6: TMenuItem
+        Caption = 'Open Constellation'
+        OnClick = MenuItem6Click
       end
       object Print1: TMenuItem
         Caption = '&Print'

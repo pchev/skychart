@@ -47,6 +47,7 @@ type
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
     PrinterSetupDialog1: TPrinterSetupDialog;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
@@ -64,7 +65,6 @@ type
     Enterobservation1: TMenuItem;
     ShowChart1: TMenuItem;
     Edit3: TMenuItem;
-    Editcurrentfile1: TMenuItem;
     Content1: TMenuItem;
     TimePicker1: TTimePicker;
     Timer1: TTimer;
@@ -93,6 +93,7 @@ type
     procedure Edit2Change(Sender: TObject);
     procedure Grid1SelectCell(Sender: TObject; aCol, aRow: Integer;
       var CanSelect: Boolean);
+    procedure MenuItem6Click(Sender: TObject);
     procedure Open1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Grid1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -103,7 +104,6 @@ type
     procedure Printersetup1Click(Sender: TObject);
     procedure Lightcurve1Click(Sender: TObject);
     procedure ShowChart1Click(Sender: TObject);
-    procedure Editcurrentfile1Click(Sender: TObject);
     procedure Newobservation1Click(Sender: TObject);
     procedure Content1Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
@@ -657,7 +657,7 @@ const CSIDL_PERSONAL = $0005;
 begin
 {$ifdef darwin}
 appdir:=getcurrentdir;
-if not DirectoryExists(slash(appdir)+slash('const')) then begin
+if not DirectoryExists(slash(appdir)+slash('data')+slash('varobs')) then begin
    appdir:=ExtractFilePath(ParamStr(0));
    i:=pos('.app/',appdir);
    if i>0 then begin
@@ -691,10 +691,11 @@ end;
 if not directoryexists(slash(privatedir)+'quicklook') then CreateDir(slash(privatedir)+'quicklook');
 if not directoryexists(slash(privatedir)+'afoevdata') then CreateDir(slash(privatedir)+'afoevdata');
 {$ifdef unix}  // allow a shared install
-if (not directoryexists(slash(appdir)+'const')) and
+if (not directoryexists(slash(appdir)+slash('data')+slash('varobs'))) and
    (directoryexists(SharedDir)) then
    appdir:=SharedDir;
 {$endif}
+ConstDir:=slash(appdir)+slash('data')+slash('varobs');
 end;
 
 procedure TVarForm.FormCreate(Sender: TObject);
@@ -712,8 +713,8 @@ ShortdateFormat:='yyyy-mm-dd';
 Grid1.ColWidths[0]:=60;
 Grid1.ColWidths[1]:=60;
 Grid1.ColWidths[2]:=45;
-Grid1.ColWidths[3]:=35;
-Grid1.ColWidths[4]:=35;
+Grid1.ColWidths[3]:=40;
+Grid1.ColWidths[4]:=40;
 Grid1.ColWidths[5]:=30;
 end;
 
@@ -790,7 +791,27 @@ end;
 procedure TVarForm.Open1Click(Sender: TObject);
 begin
 try
-opendialog1.FilterIndex:=2;
+opendialog1.FilterIndex:=1;
+opendialog1.InitialDir:=privatedir;
+opendialog1.Filename:=slash(privatedir)+'obs.dat';
+if opendialog1.execute then begin
+   planname:=opendialog1.FileName;
+   varform.caption:='Variables Star Observer, current file : '+planname;
+   chdir(appdir);
+   CalculVar;
+end;
+finally
+chdir(appdir);
+end;
+end;
+
+procedure TVarForm.MenuItem6Click(Sender: TObject);
+begin
+try
+opendialog1.FilterIndex:=1;
+opendialog1.InitialDir:=ConstDir;
+opendialog1.Filename:=slash(ConstDir)+'And.dat';
+opendialog1.DoFolderChange;
 if opendialog1.execute then begin
    planname:=opendialog1.FileName;
    varform.caption:='Variables Star Observer, current file : '+planname;
@@ -812,7 +833,7 @@ timepicker1.time:=now;
 decodedate(now,year,month,day);
 DateEdit1.date:=now;
 planname:=slash(privatedir)+'aavsoeasy.dat';
-if not fileexists(planname) then CopyFile(slash(appdir)+'aavsoeasy.dat',planname,true);
+if not fileexists(planname) then CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.dat',planname,true);
 qlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$$$$&output=votable';
 qlinfo:='http://www.aavso.org/data/ql/';
 afoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
@@ -909,7 +930,6 @@ procedure TVarForm.Grid1SelectCell(Sender: TObject; aCol, aRow: Integer;
 begin
   CurrentRow:=Arow;
 end;
-
 
 procedure TVarForm.Setting1Click(Sender: TObject);
 begin
@@ -1203,13 +1223,6 @@ if (cdc=nil)or(cdc.Terminated) then InitSkyChart;
 DrawSkyChart;
 end;
 
-procedure TVarForm.Editcurrentfile1Click(Sender: TObject);
-var i : integer;
-begin
-i:=ExecuteFile(planname);
-chdir(appdir);
-if i<=32 then showmessage('Error '+inttostr(i)+'. Please verify that file "'+planname+'" exist and associate it with your favorite text editor.');
-end;
 
 procedure RunPCObs;
 {$ifdef win32}
@@ -1265,7 +1278,7 @@ end;
 
 procedure TVarForm.Content1Click(Sender: TObject);
 begin
-executefile(slash(appdir)+slash('doc')+'varobs.html');
+executefile(slash(appdir)+slash('doc')+slash('varobs')+'varobs.html');
 end;
 
 procedure TVarForm.BitBtn3Click(Sender: TObject);
@@ -1306,7 +1319,7 @@ begin
 if (OptForm.Radiogroup8.itemindex=1) then begin // cdrom
   chartlist:='';
   chdir(appdir);
-  assignfile(f,slash(appdir)+'united.txt');
+  assignfile(f,slash(appdir)+slash('data')+slash('varobs')+'united.txt');
   reset(f);
   try
   repeat
