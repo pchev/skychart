@@ -66,6 +66,10 @@ OpenFileCMD='kfmclient exec';
       Defaultconfigfile='varobs.ini';
 {$endif}
 
+  CR = #$0d;
+  LF = #$0a;
+  CRLF = CR + LF;
+
 
 var
   datim,datact,qlurl,qlinfo,afoevurl,afoevinfo,pcobscaption : string;

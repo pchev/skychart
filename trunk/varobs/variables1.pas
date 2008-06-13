@@ -33,7 +33,7 @@ uses
     unix,baseunix,unixutil,
   {$endif}
   Clipbrd, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Buttons,IniFiles, Printers, fileutil,
+  StdCtrls, ComCtrls, Buttons,IniFiles, Printers, fileutil, cu_cdcclient,
   Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param;
 
 type
@@ -114,8 +114,12 @@ type
     procedure AAVSOwebpage1Click(Sender: TObject);
     procedure AAVSOChart1Click(Sender: TObject);
   private
-    Procedure GetAppDir;
     { Private declarations }
+    cdc : TCDCclientThrd;
+    tcpclient: TCDCclient;
+    Procedure GetAppDir;
+    Procedure DrawSkyChart;
+    Procedure InitSkyChart;
   public
     { Public declarations }
   end;
@@ -1133,9 +1137,33 @@ end
 else Timer1.Enabled:=true;}
 end;
 
-Procedure InitSkyChart;
-var param : string;
+Procedure TVarForm.InitSkyChart;
+var resp : string;
 begin
+if tcpclient=nil then begin
+ tcpclient:=TCDCclient.Create;
+ tcpclient.TargetHost:='127.0.0.1';
+ tcpclient.TargetPort:='3292';
+ tcpclient.Timeout := 500;
+ tcpclient.Connect;
+ resp:=tcpclient.recvstring;
+ tcpclient.Sock.SendString('NEWCHART VarObs'+crlf);
+ resp:=tcpclient.recvstring;
+ tcpclient.Sock.SendString('SELECTCHART VarObs'+crlf);
+ resp:=tcpclient.recvstring;
+end;
+{if (cdc=nil)or(cdc.Terminated) then
+   cdc:=TCDCclientThrd.Create
+   else exit;
+cdc.TargetHost:='127.0.0.1';
+cdc.TargetPort:='3292';
+cdc.Timeout := 500;
+cdc.CmdTimeout := 10;
+cdc.Resume;
+if (cdc=nil)or(cdc.Terminated) then exit;
+resp:=cdc.Send('NEWCHART '+'VarObs');
+resp:=cdc.Send('SELECTCHART '+'VarObs');
+}
 {skychartok := SkyChartRunning;     // is app already running
 if not SkyChartok then begin
        if trim(optform.FilenameEdit5.text)='' then param:=''
@@ -1152,9 +1180,13 @@ end;
 }
 end;
 
-Procedure DrawSkyChart;
+Procedure TVarForm.DrawSkyChart;
 var buf : string;
 begin
+ tcpclient.Sock.SendString('SELECTCHART VarObs'+crlf);
+ buf:=tcpclient.recvstring;
+ tcpclient.Sock.SendString('SEARCH "'+trim(Grid1.Cells[0,currentrow])+'"'+crlf);
+ buf:=tcpclient.recvstring;
 {InitConv;
 buf := 'FIND CAT: 4 ID:'+trim(VarForm.Grid1.Cells[0,currentrow]);
 CielHnd:=findwindow(nil,Pchar(skychartcaption));
@@ -1166,9 +1198,9 @@ end;
 
 procedure TVarForm.ShowChart1Click(Sender: TObject);
 begin
-{skychartok := SkyChartRunning;     // is app already running
-if not skychartok then InitSkyChart;
-DrawSkyChart;}
+{skychartok := SkyChartRunning;     // is app already running}
+if (cdc=nil)or(cdc.Terminated) then InitSkyChart;
+DrawSkyChart;
 end;
 
 procedure TVarForm.Editcurrentfile1Click(Sender: TObject);
