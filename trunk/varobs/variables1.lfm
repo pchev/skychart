@@ -1,5 +1,5 @@
 object VarForm: TVarForm
-  Left = 379
+  Left = 393
   Height = 530
   Top = 120
   Width = 891
@@ -293,12 +293,12 @@ object VarForm: TVarForm
     end
   end
   object PrinterSetupDialog1: TPrinterSetupDialog
-    left = 488
-    top = 200
+    left = 192
+    top = 184
   end
   object MainMenu1: TMainMenu
-    left = 296
-    top = 168
+    left = 112
+    top = 147
     object File1: TMenuItem
       Caption = '&File'
       object Open1: TMenuItem
@@ -378,12 +378,12 @@ object VarForm: TVarForm
   object OpenDialog1: TOpenDialog
     Title = 'Open variables stars parameter file'
     Filter = 'All files|*.*|.dat files|*.dat|.txt files|*.txt'
-    left = 488
-    top = 168
+    left = 192
+    top = 147
   end
   object PopupMenu1: TPopupMenu
-    left = 344
-    top = 216
+    left = 112
+    top = 184
     object Lightcurve1: TMenuItem
       Caption = 'Show Light curve'
       OnClick = Lightcurve1Click
@@ -401,10 +401,12 @@ object VarForm: TVarForm
       OnClick = ShowChart1Click
     end
   end
-  object Timer1: TTimer
-    Enabled = False
-    OnTimer = Timer1Timer
-    left = 304
-    top = 272
+  object UniqueInstance1: TUniqueInstance
+    Enabled = True
+    Identifier = 'VarObs'
+    UpdateInterval = 1000
+    OnOtherInstance = UniqueInstance1OtherInstance
+    left = 38
+    top = 147
   end
 end

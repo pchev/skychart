@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  {$ifdef win32}
+  {$ifdef mswindows}
     Windows, ShellAPI,
   {$endif}
   {$ifdef unix}
@@ -34,7 +34,8 @@ uses
   {$endif}
   Clipbrd, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, Buttons,IniFiles, Printers, fileutil, cu_cdcclient,
-  Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param;
+  Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param,
+  UniqueInstance;
 
 type
 
@@ -67,7 +68,6 @@ type
     Edit3: TMenuItem;
     Content1: TMenuItem;
     TimePicker1: TTimePicker;
-    Timer1: TTimer;
     Panel1: TPanel;
     Label1: TLabel;
     Label2: TLabel;
@@ -85,6 +85,7 @@ type
     Createobservingplan1: TMenuItem;
     AAVSOwebpage1: TMenuItem;
     AAVSOChart1: TMenuItem;
+    UniqueInstance1: TUniqueInstance;
     procedure BitBtn1Click(Sender: TObject);
     procedure DateEdit1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -107,19 +108,22 @@ type
     procedure Newobservation1Click(Sender: TObject);
     procedure Content1Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
     procedure About1Click(Sender: TObject);
     procedure PrepareLPVBulletin1Click(Sender: TObject);
     procedure Createobservingplan1Click(Sender: TObject);
     procedure AAVSOwebpage1Click(Sender: TObject);
     procedure AAVSOChart1Click(Sender: TObject);
+    procedure UniqueInstance1OtherInstance(Sender: TObject;
+      ParamCount: Integer; Parameters: array of String);
   private
     { Private declarations }
     cdc : TCDCclientThrd;
     tcpclient: TCDCclient;
     Procedure GetAppDir;
     Procedure DrawSkyChart;
+    procedure SkychartPurge;
     Procedure InitSkyChart;
+    function SkychartCmd(cmd:string):boolean;
   public
     { Public declarations }
   end;
@@ -218,7 +222,7 @@ end;
 {$endif}
 
 Function ExecuteFile(const FileName: string): integer;
-{$ifdef win32}
+{$ifdef mswindows}
 var
   zFileName, zParams, zDir: array[0..255] of Char;
 begin
@@ -240,6 +244,38 @@ begin
   else result:=ExecFork(cmd,p1,p2,p3,p4,FileName);
 {$endif}
 end;
+
+procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
+{$ifdef unix}
+begin
+ fpSystem(cmd+' &');
+end;
+{$endif}
+{$ifdef mswindows}
+var
+   bchExec: array[0..1024] of char;
+   pchEXEC: Pchar;
+   si: TStartupInfo;
+   pi: TProcessInformation;
+begin
+   pchExec := @bchExec;
+   StrPCopy(pchExec,cmd);
+   FillChar(si,sizeof(si),0);
+   FillChar(pi,sizeof(pi),0);
+   si.dwFlags:=STARTF_USESHOWWINDOW;
+   if title<>'' then si.lpTitle:=Pchar(title);
+   if hide then si.wShowWindow:=SW_SHOWMINIMIZED
+           else si.wShowWindow:=SW_SHOWNORMAL;
+   si.cb := sizeof(si);
+   writetrace('Try to launch '+cmd);
+   try
+     CreateProcess(Nil,pchExec,Nil,Nil,false,CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, Nil,Nil,si,pi);
+    except;
+      writetrace('Could not launch '+cmd);
+    end;
+end;
+{$endif}
+
 
 function IsNumber(n : string) : boolean;
 var i,dummy : integer;
@@ -649,7 +685,7 @@ var inif: TMemIniFile;
 {$ifdef darwin}
     i: integer;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
 const CSIDL_PERSONAL = $0005;
@@ -675,12 +711,14 @@ appdir:=expandfilename(appdir);
 privatedir:=expandfilename(PrivateDir);
 configfile:=expandfilename(configfile);
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
 privatedir:=slash(Folder)+privatedir;
 configfile:=slash(privatedir)+configfile;
 {$endif}
+skychart:=slash(appdir)+DefaultSkychart;
+if not FileExists(skychart) then skychart:=DefaultSkychart;
 if not directoryexists(privatedir) then CreateDir(privatedir);
 if not directoryexists(privatedir) then forcedirectory(privatedir);
 if not directoryexists(privatedir) then begin
@@ -893,7 +931,6 @@ if paramcount>0 then begin
      for i:=1 to paramcount do param.Add(paramstr(i));
      ReadParam;
 end;
-//ShowChart1.Enabled:=(not NoChart)and GetSkyChartInfo;  // initialize skychart value
 started:=true;
 DateEdit1change(sender);
 CalculVar;
@@ -990,6 +1027,9 @@ with inifile do begin
     WriteInteger(section,'formheight',Varform.Height);
 end;
 inifile.free;
+if tcpclient<>nil then begin
+  tcpclient.Disconnect;
+end;
 {if StartedByVarobs then PostMessage(findwindow(nil,Pchar(skychartcaption)),WM_QUIT,0,0)   // close skychart (use WM_CLOSE for close prompt)
 else begin
   CielHnd:=findwindow(nil,Pchar(skychartcaption));
@@ -1136,103 +1176,75 @@ FormPos(DetailForm,mouse.cursorpos.x,mouse.cursorpos.y);
 DetailForm.ShowModal;
 end;
 
-Function InitConv : boolean;
+procedure TVarForm.SkychartPurge;
+var resp : string;
+    timeo:TDateTime;
 begin
-result:=false;
-{varform.ddeclientconv1.CloseLink;
-with VarForm do if ddeclientconv1.SetLink('ciel','DdeSkyChart') then begin   // initialize conversation
- ddeclientitem1.DdeItem:='DdeData';
- result:=true;
-end;}
+ timeo:=now+cmddelay;
+ repeat
+    resp:=tcpclient.Sock.RecvBufferStr(1024,0);
+ until (resp='')or(now>timeo);;
 end;
 
-procedure TVarForm.Timer1Timer(Sender: TObject);
+function TVarForm.SkychartCmd(cmd:string):boolean;
+var resp : string;
+    timeo:TDateTime;
 begin
-Timer1.Enabled:=false;                            // stop timer to avoid multiple call
-{if SkyChartRunning then begin                     // is app running
-   sleep(2000);                                   // a litle more time to initialize
-   skychartok:=Initconv;                          // start communication
-   if not skychartok then Timer1.Enabled:=true;   // if not ok restart timer
-end
-else Timer1.Enabled:=true;}
+ SkychartPurge;
+ timeo:=now+cmddelay;
+ repeat
+    tcpclient.Sock.SendString(cmd+crlf);
+    Application.ProcessMessages;
+    resp:=tcpclient.recvstring;
+ until ((resp<>'')and(resp<>'.'))or(now>timeo);
+ if pos('OK',resp)>0 then result:=true
+                     else result:=false;
 end;
 
 Procedure TVarForm.InitSkyChart;
 var resp : string;
+    timeo:TDateTime;
 begin
+ExecNoWait(skychart);
 if tcpclient=nil then begin
- tcpclient:=TCDCclient.Create;
- tcpclient.TargetHost:='127.0.0.1';
- tcpclient.TargetPort:='3292';
- tcpclient.Timeout := 500;
- tcpclient.Connect;
- resp:=tcpclient.recvstring;
- tcpclient.Sock.SendString('NEWCHART VarObs'+crlf);
- resp:=tcpclient.recvstring;
- tcpclient.Sock.SendString('SELECTCHART VarObs'+crlf);
- resp:=tcpclient.recvstring;
+  tcpclient:=TCDCclient.Create;
 end;
-{if (cdc=nil)or(cdc.Terminated) then
-   cdc:=TCDCclientThrd.Create
-   else exit;
-cdc.TargetHost:='127.0.0.1';
-cdc.TargetPort:='3292';
-cdc.Timeout := 500;
-cdc.CmdTimeout := 10;
-cdc.Resume;
-if (cdc=nil)or(cdc.Terminated) then exit;
-resp:=cdc.Send('NEWCHART '+'VarObs');
-resp:=cdc.Send('SELECTCHART '+'VarObs');
-}
-{skychartok := SkyChartRunning;     // is app already running
-if not SkyChartok then begin
-       if trim(optform.FilenameEdit5.text)='' then param:=''
-       else param:='-c '+optform.FilenameEdit5.text;
-       param:=param+' -f "CAT: 4 ID:'+trim(VarForm.Grid1.Cells[0,currentrow])+'"';
-       StartSkyChart(param);
-       VarForm.Timer1.Enabled:=true; // wait app start
-       StartedByVarobs:=true;
-       end
-else begin
-   skychartok:=Initconv;         // otherwise start communication directely
-   if not skychartok then VarForm.Timer1.Enabled:=true;  // if not ok restart timer
-end;
-}
+tcpclient.Disconnect;
+tcpclient.TargetHost:='127.0.0.1';
+tcpclient.TargetPort:='3292';
+tcpclient.Timeout := 500;
+timeo:=now+connectdelay;
+repeat
+  tcpclient.Connect;
+  Application.ProcessMessages;
+  resp:=tcpclient.recvstring;
+until  ((resp<>'')and(resp<>'.'))or(now>timeo);
+SkychartCmd('SETPROJ EQUAT');
+SkychartCmd('SETFOV 15');
 end;
 
 Procedure TVarForm.DrawSkyChart;
 var buf : string;
 begin
- tcpclient.Sock.SendString('SELECTCHART VarObs'+crlf);
- buf:=tcpclient.recvstring;
- tcpclient.Sock.SendString('SEARCH "'+trim(Grid1.Cells[0,currentrow])+'"'+crlf);
- buf:=tcpclient.recvstring;
-{InitConv;
-buf := 'FIND CAT: 4 ID:'+trim(VarForm.Grid1.Cells[0,currentrow]);
-CielHnd:=findwindow(nil,Pchar(skychartcaption));
-SendMessage(CielHnd, WM_SYSCOMMAND, SC_RESTORE, 0);
-SetForegroundWindow(CielHnd);
-VarForm.ddeClientConv1.PokeData('DdeData',Pchar(buf));   // locate an object
-sleep(1000);}
+if (tcpclient=nil)or(not SkychartCmd('LISTCHART')) then InitSkyChart;
+SkychartCmd('SEARCH "'+trim(Grid1.Cells[0,currentrow])+'"');
 end;
 
 procedure TVarForm.ShowChart1Click(Sender: TObject);
 begin
-{skychartok := SkyChartRunning;     // is app already running}
-if (cdc=nil)or(cdc.Terminated) then InitSkyChart;
 DrawSkyChart;
 end;
 
 
 procedure RunPCObs;
-{$ifdef win32}
+{$ifdef mswindows}
 var nom,id : string ;
     pcobshnd : Thandle;
     ok : boolean;
     i : integer;
 {$endif}
 begin
-{$ifdef win32}
+{$ifdef mswindows}
 nom:=trim(varform.Grid1.Cells[0,currentrow]);
 id:=trim(varform.Grid1.Cells[1,currentrow]);
 if id='' then clipboard.settextbuf(pchar(nom))
@@ -1247,6 +1259,8 @@ end else begin
    chdir(appdir);
    if i<=32 then showmessage('Error '+inttostr(i)+'. Please verify that PCObs program is installed at location : '+OptForm.FilenameEdit8.text);
 end;
+{$else}
+ExecNoWait(OptForm.FilenameEdit8.text);
 {$endif}
 end;
 
@@ -1342,6 +1356,23 @@ chartform.starname:=VarForm.Grid1.Cells[0,currentrow];
 chartform.chartsource:=OptForm.Radiogroup8.itemindex;
 FormPos(chartform,mouse.cursorpos.x,mouse.cursorpos.y);
 chartform.ShowModal;
+end;
+
+procedure TVarForm.UniqueInstance1OtherInstance(Sender: TObject;
+  ParamCount: Integer; Parameters: array of String);
+var
+  i: integer;
+begin
+  application.Restore;
+  application.BringToFront;
+  if ParamCount > 0 then begin
+     param.Clear;
+     for i:=0 to ParamCount-1 do begin
+        param.add(Parameters[i]);
+     end;
+     ReadParam;
+     CalculVar;
+  end;
 end;
 
 initialization

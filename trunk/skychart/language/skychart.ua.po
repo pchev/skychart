@@ -3976,6 +3976,10 @@ msgstr "Ідент.Користувача:"
 msgid "Variable Star"
 msgstr "Змінні зорі"
 
+#: u_translation:rsvariablestar2
+msgid "Variable Stars"
+msgstr ""
+
 #: u_translation:rsvariables
 msgid "Variables"
 msgstr "Змінні"

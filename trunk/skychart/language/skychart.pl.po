@@ -3979,6 +3979,10 @@ msgstr "IDużytkownika:"
 msgid "Variable Star"
 msgstr "Gwiazda zmienna"
 
+#: u_translation:rsvariablestar2
+msgid "Variable Stars"
+msgstr ""
+
 #: u_translation:rsvariables
 msgid "Variables"
 msgstr "Zmienne"

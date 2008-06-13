@@ -910,6 +910,7 @@ t4:=varinfo.i[7];
 t5:=varinfo.i[8];
 t10:=varinfo.i[12];
 t11:=varinfo.i[13];
+SetOnlineButtons;
 //force a resize event
 width:=width+1;
 width:=width-1;

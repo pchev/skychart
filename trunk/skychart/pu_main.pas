@@ -39,7 +39,7 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources;
+  LResources, UniqueInstance;
 
 type
   TTCPThrd = class(TThread)
@@ -98,7 +98,8 @@ type
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
-    MenuItem6: TMenuItem;
+    UniqueInstance1: TUniqueInstance;
+    VariableStar1: TMenuItem;
     PopupConfig: TPopupMenu;
     SetupInternet: TAction;
     SetupSystem: TAction;
@@ -458,6 +459,9 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure UniqueInstance1OtherInstance(Sender: TObject;
+      ParamCount: Integer; Parameters: array of String);
+    procedure VariableStar1Click(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
     procedure ViewScrollBar1Click(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
@@ -1153,6 +1157,9 @@ privatedir:=slash(Folder)+privatedir;
 configfile:=slash(privatedir)+configfile;
 tracefile:=slash(privatedir)+tracefile;
 {$endif}
+VarObs:=slash(appdir)+DefaultVarObs;     // varobs normally at same location as skychart
+if not FileExists(VarObs) then VarObs:=DefaultVarObs; // if not try in $PATH
+
 if fileexists(configfile) then begin
   inif:=TMeminifile.create(configfile);
   try
@@ -1180,6 +1187,7 @@ if not directoryexists(slash(privatedir)+'pictures') then forcedirectories(slash
 Tempdir:=slash(privatedir)+DefaultTmpDir;
 if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
+
 {$ifdef unix}  // allow a shared install
 if (not directoryexists(slash(appdir)+'data/constellation')) and
    (directoryexists(SharedDir)) then
@@ -1430,6 +1438,29 @@ if ssCtrl in Shift then rot:=45
 else if ssShift in Shift then rot:=1
 else rot:=15;
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
+end;
+
+procedure Tf_main.UniqueInstance1OtherInstance(Sender: TObject;
+  ParamCount: Integer; Parameters: array of String);
+var
+  i: integer;
+begin
+  application.Restore;
+  application.BringToFront;
+  BringToFront;
+{  if ParamCount > 0 then begin
+     param.Clear;
+     for i:=0 to ParamCount-1 do begin
+        param.add(Parameters[i]);
+     end;
+     ReadParam;
+  end;
+}
+end;
+
+procedure Tf_main.VariableStar1Click(Sender: TObject);
+begin
+  ExecNoWait(varobs);
 end;
 
 procedure Tf_main.rot_minusExecute(Sender: TObject);
@@ -2729,7 +2760,7 @@ cfgm.AutoRefreshDelay:=60;
 cfgm.ServerIPaddr:='127.0.0.1';
 cfgm.ServerIPport:='3292'; // x'CDC' :o)
 cfgm.IndiPanelCmd:=dcd_cmd;
-cfgm.keepalive:=false;
+cfgm.keepalive:=true;
 cfgm.AutostartServer:=true;
 cfgm.dbhost:='localhost';
 cfgm.dbport:=3306;
@@ -4380,6 +4411,7 @@ FileSaveAsItem.caption:=rsSaveAs;
 SaveImage1.caption:=rsSaveImage;
 FileCloseItem.caption:=rsCloseChart;
 Calendar1.caption:=rsCalendar;
+VariableStar1.Caption:=rsVariableStar2;
 Print2.caption:=rsPrint;
 PrintSetup2.caption:=rsPrinterSetup;
 FileExitItem.caption:=rsExit;

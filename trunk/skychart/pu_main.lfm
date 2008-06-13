@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 706
+  Left = 379
   Height = 580
-  Top = 109
+  Top = 120
   Width = 860
   HorzScrollBar.Page = 859
   VertScrollBar.Page = 560
@@ -3858,6 +3858,9 @@ object f_main: Tf_main
       object Calendar1: TMenuItem
         Action = Calendar
         OnClick = CalendarExecute
+      end
+      object VariableStar1: TMenuItem
+        OnClick = VariableStar1Click
       end
       object N2: TMenuItem
         Caption = '-'
@@ -7873,5 +7876,13 @@ object f_main: Tf_main
       Action = SaveConfigOnExit
       OnClick = SaveConfigOnExitExecute
     end
+  end
+  object UniqueInstance1: TUniqueInstance
+    Enabled = True
+    Identifier = 'skychart'
+    UpdateInterval = 1000
+    OnOtherInstance = UniqueInstance1OtherInstance
+    left = 144
+    top = 199
   end
 end

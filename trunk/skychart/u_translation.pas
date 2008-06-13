@@ -1104,6 +1104,7 @@ resourcestring
   rsProperMotion3 = 'Proper Motion';
   rsGetRecentMea = 'Get recent measurement from JUPOS project';
   rsReduceDetail = 'Reduce detail when moving the chart';
+  rsVariableStar2 = 'Variable Stars';
 
 implementation
 

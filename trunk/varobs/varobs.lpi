@@ -26,22 +26,25 @@
         <WorkingDirectory Value="/home/cdc"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="4">
+    <RequiredPackages Count="5">
       <Item1>
-        <PackageName Value="LCL"/>
+        <PackageName Value="uniqueinstance_package"/>
       </Item1>
       <Item2>
-        <PackageName Value="Printer4Lazarus"/>
-        <MinVersion Minor="5" Valid="True"/>
+        <PackageName Value="LCL"/>
       </Item2>
       <Item3>
-        <PackageName Value="CDCjdcalendar"/>
-        <MinVersion Valid="True"/>
+        <PackageName Value="Printer4Lazarus"/>
+        <MinVersion Minor="5" Valid="True"/>
       </Item3>
       <Item4>
-        <PackageName Value="downldialog"/>
+        <PackageName Value="CDCjdcalendar"/>
         <MinVersion Valid="True"/>
       </Item4>
+      <Item5>
+        <PackageName Value="downldialog"/>
+        <MinVersion Valid="True"/>
+      </Item5>
     </RequiredPackages>
     <Units Count="8">
       <Unit0>
