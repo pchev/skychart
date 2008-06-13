@@ -54,12 +54,12 @@ OpenFileCMD='kfmclient exec';
 {$ifdef linux}
       DefaultPrivateDir='~/cartes_du_ciel/varobs';
       Defaultconfigfile='~/.varobs.ini';
-      SharedDir='/usr/share/apps/skychart/varobs';
+      SharedDir='/usr/share/apps/skychart';
 {$endif}
 {$ifdef darwin}
       DefaultPrivateDir='~/cartes_du_ciel/varobs';
       Defaultconfigfile='~/.varobs.ini';
-      SharedDir='/usr/share/skychart/varobs';
+      SharedDir='/usr/share/skychart';
 {$endif}
 {$ifdef win32}
       DefaultPrivateDir='Cartes du Ciel\VarObs';
