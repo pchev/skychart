@@ -1,7 +1,8 @@
+# translation of skychart.fr.po
 # translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-01-13 11:03+0100\n"
+"PO-Revision-Date: 2008-06-13 13:16+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -3026,6 +3027,10 @@ msgstr "Refaire"
 #: u_translation:rsredolastchan
 msgid "Redo Last Change"
 msgstr "Refaire"
+
+#: u_translation:rsreducedetail
+msgid "Reduce detail when moving the chart"
+msgstr "Réduire les détails lors du déplacement de la carte"
 
 #: u_translation:rsreference
 msgid "Reference"

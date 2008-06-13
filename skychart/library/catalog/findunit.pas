@@ -269,7 +269,8 @@ ok := false;
 repeat
   ReadBSC(lin,BSCrok);
   if not BSCrok then break;
-  if (lowercase(trim(lin.cons))=cons)and(lowercase(trim(copy(lin.bayer,1,length(bayer))))=bayer) then ok:=true;
+//  if (lowercase(trim(lin.cons))=cons)and(lowercase(trim(copy(lin.bayer,1,length(bayer))))=bayer) then ok:=true;
+  if (lowercase(trim(lin.cons))=cons)and(lowercase(trim(lin.bayer))=bayer) then ok:=true;
 until ok ;
 CloseBSC;
 ar:=lin.ar/100000/15;

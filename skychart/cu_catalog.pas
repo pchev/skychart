@@ -22,7 +22,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  Catalog interface component. Also contain shared resources.
 }
+
 {$mode delphi}{$H+}
+
 interface
 
 uses  { libcatalog,}  // libcatalog statically linked

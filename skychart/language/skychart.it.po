@@ -3027,6 +3027,10 @@ msgstr "Ripristina"
 msgid "Redo Last Change"
 msgstr "Ripristina ultima modifica"
 
+#: u_translation:rsreducedetail
+msgid "Reduce detail when moving the chart"
+msgstr ""
+
 #: u_translation:rsreference
 msgid "Reference"
 msgstr "Riferimento"

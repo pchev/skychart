@@ -473,6 +473,7 @@ type
                 outradius,contrast,saturation:integer;
                 xmin,xmax,ymin,ymax: integer;
                 partsize,magsize:single;
+                red_move:boolean;
 
 //  deep-sky objects colour defaults filss are decalers as boolean - either fill or not
                 DSOColorFillAst: boolean;
@@ -1391,6 +1392,7 @@ xmin:=Source.xmin;
 xmax:=Source.xmax;
 ymin:=Source.ymin;
 ymax:=Source.ymax;
+red_move:=Source.red_move;
 partsize:=Source.partsize;
 magsize:=Source.magsize;
 DSOColorFillAst:=Source.DSOColorFillAst;

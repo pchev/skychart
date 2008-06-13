@@ -3027,6 +3027,10 @@ msgstr "&Wiederholen"
 msgid "Redo Last Change"
 msgstr "Letzte Änderung wiederherstellen"
 
+#: u_translation:rsreducedetail
+msgid "Reduce detail when moving the chart"
+msgstr ""
+
 #: u_translation:rsreference
 msgid "Reference"
 msgstr "Referenz"
