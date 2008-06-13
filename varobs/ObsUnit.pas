@@ -27,7 +27,7 @@ interface
 
 uses
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ComCtrls, LResources, jdcalendar, EditBtn, u_param;
+  StdCtrls, Buttons, ComCtrls, LResources, jdcalendar, EditBtn, u_param, Menus;
 
 type
 
@@ -50,10 +50,10 @@ type
     Edit5: TEdit;
     Label6: TLabel;
     Edit6: TEdit;
+    MainMenu1: TMainMenu;
     Memo1: TMemo;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
@@ -61,14 +61,19 @@ type
     Edit8: TEdit;
     Label10: TLabel;
     CheckBox2: TCheckBox;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
     TimePicker1: TTimePicker;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DateEdit1Change(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
+    procedure MenuItem3Click(Sender: TObject);
   private
     { Private declarations }
     procedure WriteAAVSOheader(var f: textfile);
@@ -96,6 +101,23 @@ result:=copy(buf,1,len);
 while length(result)<len do result:=result+' ';
 end;
 
+procedure TObsForm.MenuItem2Click(Sender: TObject);
+begin
+checkbox2.checked:=false;
+edit3.text:='';
+edit4.text:='';
+edit5.text:='';
+edit6.text:='';
+edit7.text:='';
+edit8.text:='';
+edit9.text:='';
+end;
+
+procedure TObsForm.MenuItem3Click(Sender: TObject);
+begin
+  Close;
+end;
+
 procedure TObsForm.FormShow(Sender: TObject);
 var p,i : integer;
     buf,nam,con : string;
@@ -107,6 +129,7 @@ edit5.text:='';
 edit6.text:='';
 edit7.text:='';
 edit8.text:='';
+edit9.text:='';
 if current>0 then begin
   case optform.radiogroup4.itemindex of
     0 : begin   //AAVSO
@@ -246,12 +269,6 @@ end else begin
       end;
   end;
 end;
-end;
-
-procedure TObsForm.Button3Click(Sender: TObject);
-begin
-if mrOK=MessageDlg('Delete all abow data ?',mtConfirmation,mbOkCancel,0) then
-   memo1.clear;
 end;
 
 procedure TObsForm.DateEdit1Change(Sender: TObject);

@@ -62,6 +62,7 @@ type
     chartlist:string;
     chartdir:string;
     starname:string;
+    chartsource: integer;
     { Public declarations }
   end;
 
@@ -75,15 +76,13 @@ Uses Variables1;
 procedure Tchartform.FormShow(Sender: TObject);
 var i: integer;
     buf1,buf2:string;
-    byinternet:boolean;
 begin
-byinternet:=(pos('://',chartdir)>0);
-if byinternet then begin
+if chartsource=0 then begin // online
   CdromPanel.Visible:=false;
   OnlinePanel.Visible:=true;
   StarLabel.Caption:=starname;
   ComboBox1Change(Sender);
-end else begin
+end else begin     //cdrom
   OnlinePanel.Visible:=false;
   CdromPanel.Visible:=true;
   chartdir:=slash(chartdir);
@@ -111,7 +110,7 @@ end;
 procedure Tchartform.Button2Click(Sender: TObject);
 var buf:string;
 begin
-  buf:=chartdir;
+  buf:=aavsocharturl;
   buf:=StringReplace(buf,'$star',starname,[]);
   buf:=StringReplace(buf,'$scale',aavsochartscale[ComboBox1.ItemIndex],[]);
   buf:=StringReplace(buf,'$fov',aavsochartfov[ComboBox1.ItemIndex],[]);

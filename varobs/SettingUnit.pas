@@ -35,7 +35,6 @@ type
 
   TOptForm = class(TForm)
     BitBtn2: TBitBtn;
-    Button1: TButton;
     DirectoryEdit3: TDirectoryEdit;
     DirectoryEdit2: TDirectoryEdit;
     Edit1: TEdit;
@@ -87,6 +86,7 @@ type
     RadioGroup5: TRadioGroup;
     RadioGroup6: TRadioGroup;
     RadioGroup7: TRadioGroup;
+    RadioGroup8: TRadioGroup;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
@@ -96,7 +96,7 @@ type
     procedure RadioGroup3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure RadioGroup5Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure RadioGroup8Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -183,6 +183,7 @@ procedure TOptForm.FormShow(Sender: TObject);
 begin
 radiogroup1click(sender);
 RadioGroup5Click(Sender);
+RadioGroup8Click(Sender);
 end;
 
 procedure TOptForm.RadioGroup5Click(Sender: TObject);
@@ -203,9 +204,17 @@ case radiogroup5.itemindex of
 end;
 end;
 
-procedure TOptForm.Button1Click(Sender: TObject);
+
+procedure TOptForm.RadioGroup8Click(Sender: TObject);
 begin
-DirectoryEdit2.Text:=aavsocharturl;
+case radiogroup8.ItemIndex of
+  0 : begin // online
+        DirectoryEdit2.visible:=false;
+      end;
+  1 : begin  // cdrom
+        DirectoryEdit2.visible:=true;
+      end;
+end;
 end;
 
 initialization
