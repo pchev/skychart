@@ -4,10 +4,10 @@ object VarForm: TVarForm
   Top = 105
   Width = 891
   HorzScrollBar.Page = 890
-  VertScrollBar.Page = 510
+  VertScrollBar.Page = 509
   ActiveControl = Grid1
   Caption = 'Variable stars observer'
-  ClientHeight = 511
+  ClientHeight = 510
   ClientWidth = 891
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -117,7 +117,7 @@ object VarForm: TVarForm
   OnShow = FormShow
   ShowHint = True
   object Grid1: TStringGrid
-    Height = 439
+    Height = 438
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 891
@@ -127,12 +127,13 @@ object VarForm: TVarForm
     DefaultColWidth = 120
     FixedColor = clBtnFace
     FixedCols = 0
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goThumbTracking, goSmoothScroll]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goRowSelect, goThumbTracking, goSmoothScroll]
     RowCount = 2
     ScrollBars = ssAutoBoth
     TabOrder = 0
     TabStop = True
     OnMouseUp = Grid1MouseUp
+    OnSelectCell = Grid1SelectCell
   end
   object Panel1: TPanel
     Height = 70
@@ -142,48 +143,40 @@ object VarForm: TVarForm
     ClientWidth = 891
     TabOrder = 1
     object Label1: TLabel
-      Left = 152
-      Height = 17
-      Top = 6
-      Width = 20
+      Left = 156
+      Height = 14
+      Top = 10
+      Width = 14
       Caption = 'UT'
-      Font.Height = -13
-      Font.Name = 'MS Sans Serif'
       ParentColor = False
     end
     object Label2: TLabel
-      Left = 10
-      Height = 17
-      Top = 6
-      Width = 30
+      Left = 11
+      Height = 14
+      Top = 10
+      Width = 24
       Caption = 'Date'
-      Font.Height = -13
-      Font.Name = 'MS Sans Serif'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 22
-      Height = 17
+      Height = 14
       Top = 44
-      Width = 18
+      Width = 13
       Caption = 'JD'
-      Font.Height = -13
-      Font.Name = 'MS Sans Serif'
       ParentColor = False
     end
     object Label4: TLabel
-      Left = 144
-      Height = 17
+      Left = 147
+      Height = 14
       Top = 44
-      Width = 29
+      Width = 23
       Caption = 'Dec.'
-      Font.Height = -13
-      Font.Name = 'MS Sans Serif'
       ParentColor = False
     end
     object BitBtn1: TBitBtn
       Left = 288
-      Height = 25
+      Height = 22
       Top = 2
       Width = 75
       Caption = 'Compute'
@@ -202,10 +195,10 @@ object VarForm: TVarForm
       Text = '2451179.123'
     end
     object Edit2: TEdit
-      Left = 184
+      Left = 176
       Height = 21
       Top = 42
-      Width = 89
+      Width = 97
       OnChange = Edit2Change
       TabOrder = 2
       Text = '19990928.123'
@@ -213,7 +206,7 @@ object VarForm: TVarForm
     object RadioGroup1: TRadioGroup
       Left = 288
       Height = 38
-      Top = 30
+      Top = 28
       Width = 329
       AutoFill = True
       Caption = 'Output date format'
@@ -225,8 +218,8 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 24
-      ClientWidth = 323
+      ClientHeight = 20
+      ClientWidth = 325
       Columns = 3
       ItemIndex = 0
       Items.Strings = (
@@ -239,13 +232,13 @@ object VarForm: TVarForm
     object Edit4: TEdit
       Left = 376
       Height = 21
-      Top = 4
+      Top = 3
       Width = 121
       TabOrder = 5
     end
     object BitBtn3: TBitBtn
       Left = 504
-      Height = 25
+      Height = 22
       Top = 2
       Width = 75
       Caption = 'Search'
@@ -306,75 +299,77 @@ object VarForm: TVarForm
     left = 296
     top = 168
     object File1: TMenuItem
-      Caption = 'File'
+      Caption = '&File'
       object Open1: TMenuItem
-        Caption = 'Open Observing Plan'
+        Caption = '&Open Observing Plan'
         OnClick = Open1Click
       end
-      object N1: TMenuItem
-        Caption = '-'
-      end
-      object Setting1: TMenuItem
-        Caption = 'Options'
-        OnClick = Setting1Click
-      end
-      object N5: TMenuItem
-        Caption = '-'
+      object Editcurrentfile1: TMenuItem
+        Caption = '&Edit Observing Plan'
+        OnClick = Editcurrentfile1Click
       end
       object Print1: TMenuItem
-        Caption = 'Print'
+        Caption = '&Print'
         OnClick = Print1Click
       end
       object Printersetup1: TMenuItem
-        Caption = 'Printer setup'
+        Caption = 'Printer &setup'
         OnClick = Printersetup1Click
+      end
+      object Setting1: TMenuItem
+        Caption = '&Options'
+        OnClick = Setting1Click
       end
       object N6: TMenuItem
         Caption = '-'
       end
       object Exit1: TMenuItem
-        Caption = 'Exit'
+        Caption = 'E&xit'
         OnClick = Exit1Click
       end
     end
-    object Edit3: TMenuItem
-      Caption = 'Edit'
-      object Editcurrentfile1: TMenuItem
-        Caption = 'Edit current ephemeris'
-        OnClick = Editcurrentfile1Click
+    object MenuItem1: TMenuItem
+      Caption = '&Action'
+      object MenuItem2: TMenuItem
+        Caption = 'Show &Light curve'
+        OnClick = Lightcurve1Click
       end
-      object Newobservation1: TMenuItem
-        Caption = 'New observation'
+      object MenuItem3: TMenuItem
+        Caption = 'Enter &observation'
         OnClick = Newobservation1Click
       end
-      object Editobservationfile1: TMenuItem
-        Caption = 'Edit observation file'
-        OnClick = Editobservationfile1Click
+      object MenuItem4: TMenuItem
+        Caption = '&AAVSO Chart'
+        OnClick = AAVSOChart1Click
+      end
+      object MenuItem5: TMenuItem
+        Caption = '&Cartes du Ciel Chart'
+        OnClick = ShowChart1Click
       end
     end
     object AAVSOTools1: TMenuItem
-      Caption = 'Tools'
+      Caption = '&Tools'
       object PrepareLPVBulletin1: TMenuItem
-        Caption = 'Prepare AAVSO LPV Bulletin'
+        Caption = '&Prepare AAVSO LPV Bulletin'
         OnClick = PrepareLPVBulletin1Click
       end
       object Createobservingplan1: TMenuItem
-        Caption = 'Create observing plan from AAVSO Bulletin'
+        Caption = '&Create observing plan from AAVSO Bulletin'
         OnClick = Createobservingplan1Click
       end
       object AAVSOwebpage1: TMenuItem
-        Caption = 'AAVSO web page'
+        Caption = '&AAVSO web page'
         OnClick = AAVSOwebpage1Click
       end
     end
     object Help1: TMenuItem
-      Caption = 'Help'
+      Caption = '&Help'
       object Content1: TMenuItem
-        Caption = 'Content'
+        Caption = '&Content'
         OnClick = Content1Click
       end
       object About1: TMenuItem
-        Caption = 'About'
+        Caption = '&About'
         OnClick = About1Click
       end
     end

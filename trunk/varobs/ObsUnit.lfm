@@ -1,16 +1,17 @@
 object ObsForm: TObsForm
   Left = 680
-  Height = 373
+  Height = 391
   Top = 90
   Width = 638
   HorzScrollBar.Page = 637
-  VertScrollBar.Page = 372
+  VertScrollBar.Page = 370
   ActiveControl = Edit3
   Caption = 'New visual observation'
-  ClientHeight = 373
+  ClientHeight = 371
   ClientWidth = 638
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
+  Menu = MainMenu1
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   object Label1: TLabel
@@ -111,7 +112,7 @@ object ObsForm: TObsForm
     Top = 63
     Width = 113
     CharCase = ecUppercase
-    TabOrder = 11
+    TabOrder = 10
   end
   object Edit2: TEdit
     Left = 488
@@ -121,7 +122,7 @@ object ObsForm: TObsForm
     CharCase = ecUppercase
     OnChange = Edit2Change
     TabStop = False
-    TabOrder = 10
+    TabOrder = 9
   end
   object Edit3: TEdit
     Left = 240
@@ -166,7 +167,7 @@ object ObsForm: TObsForm
     Font.Name = 'Courier New'
     Font.Pitch = fpFixed
     ScrollBars = ssBoth
-    TabOrder = 13
+    TabOrder = 12
     TabStop = False
   end
   object BitBtn1: TBitBtn
@@ -177,28 +178,17 @@ object ObsForm: TObsForm
     Caption = 'Add'
     NumGlyphs = 0
     OnClick = Button1Click
-    TabOrder = 9
+    TabOrder = 8
   end
   object BitBtn2: TBitBtn
-    Left = 10
+    Left = 548
     Height = 25
-    Top = 336
+    Top = 334
     Width = 75
     Caption = 'Save to File'
     NumGlyphs = 0
     OnClick = Button2Click
     TabOrder = 7
-    TabStop = False
-  end
-  object BitBtn3: TBitBtn
-    Left = 548
-    Height = 25
-    Top = 334
-    Width = 75
-    Caption = 'Clear All'
-    NumGlyphs = 0
-    OnClick = Button3Click
-    TabOrder = 8
     TabStop = False
   end
   object Edit7: TEdit
@@ -223,7 +213,7 @@ object ObsForm: TObsForm
     Top = 65
     Width = 82
     Caption = 'Fainter than'
-    TabOrder = 12
+    TabOrder = 11
     TabStop = False
   end
   object TimePicker1: TTimePicker
@@ -234,7 +224,7 @@ object ObsForm: TObsForm
     Time = 0.39739583333333
     OnChange = DateEdit1Change
     Enabled = True
-    TabOrder = 15
+    TabOrder = 14
   end
   object DateEdit1: TDateEdit
     Left = 183
@@ -269,7 +259,7 @@ object ObsForm: TObsForm
     NumGlyphs = 1
     OnChange = DateEdit1Change
     TabStop = False
-    TabOrder = 14
+    TabOrder = 13
   end
   object Edit9: TEdit
     Left = 368
@@ -280,13 +270,32 @@ object ObsForm: TObsForm
     TabOrder = 3
   end
   object FileNameEdit1: TFileNameEdit
-    Left = 100
+    Left = 14
     Height = 23
     Top = 336
-    Width = 356
+    Width = 486
     ButtonWidth = 23
     NumGlyphs = 1
     ParentColor = False
-    TabOrder = 16
+    TabOrder = 15
+  end
+  object MainMenu1: TMainMenu
+    left = 584
+    top = 48
+    object MenuItem1: TMenuItem
+      Caption = '&File'
+      object MenuItem4: TMenuItem
+        Caption = '&Save'
+        OnClick = Button2Click
+      end
+      object MenuItem2: TMenuItem
+        Caption = '&Reset input fields'
+        OnClick = MenuItem2Click
+      end
+      object MenuItem3: TMenuItem
+        Caption = '&Quit'
+        OnClick = MenuItem3Click
+      end
+    end
   end
 end

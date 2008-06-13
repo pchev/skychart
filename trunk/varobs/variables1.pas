@@ -42,6 +42,11 @@ type
 
   TVarForm = class(TForm)
     DateEdit1: TDateEdit;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
     PrinterSetupDialog1: TPrinterSetupDialog;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
@@ -53,7 +58,6 @@ type
     Help1: TMenuItem;
     Print1: TMenuItem;
     Printersetup1: TMenuItem;
-    N5: TMenuItem;
     N6: TMenuItem;
     PopupMenu1: TPopupMenu;
     Lightcurve1: TMenuItem;
@@ -61,8 +65,6 @@ type
     ShowChart1: TMenuItem;
     Edit3: TMenuItem;
     Editcurrentfile1: TMenuItem;
-    Editobservationfile1: TMenuItem;
-    Newobservation1: TMenuItem;
     Content1: TMenuItem;
     TimePicker1: TTimePicker;
     Timer1: TTimer;
@@ -82,7 +84,6 @@ type
     PrepareLPVBulletin1: TMenuItem;
     Createobservingplan1: TMenuItem;
     AAVSOwebpage1: TMenuItem;
-    N1: TMenuItem;
     AAVSOChart1: TMenuItem;
     procedure BitBtn1Click(Sender: TObject);
     procedure DateEdit1Change(Sender: TObject);
@@ -90,6 +91,8 @@ type
     procedure Exit1Click(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
+    procedure Grid1SelectCell(Sender: TObject; aCol, aRow: Integer;
+      var CanSelect: Boolean);
     procedure Open1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Grid1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -101,7 +104,6 @@ type
     procedure Lightcurve1Click(Sender: TObject);
     procedure ShowChart1Click(Sender: TObject);
     procedure Editcurrentfile1Click(Sender: TObject);
-    procedure Editobservationfile1Click(Sender: TObject);
     procedure Newobservation1Click(Sender: TObject);
     procedure Content1Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
@@ -812,7 +814,6 @@ qlinfo:='http://www.aavso.org/data/ql/';
 afoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
 afoevinfo:='http://cdsweb.u-strasbg.fr/afoev/english.htx';
 pcobscaption:='PCObs Data Entry';
-Optform.DirectoryEdit2.Text:=aavsocharturl;
 inifile:=Tinifile.create(configfile);
 section:='Default';
 with inifile do begin
@@ -837,7 +838,8 @@ with inifile do begin
     OptForm.Edit3.text:=ReadString(section,'magpos','3');
     OptForm.Radiogroup2.itemindex:=ReadInteger(section,'datetype',1);
     OptForm.Radiogroup3.itemindex:=ReadInteger(section,'formattype',0);
-    Optform.DirectoryEdit2.Text:=ReadString(section,'aavsochartdir',aavsocharturl);
+    OptForm.Radiogroup8.itemindex:=ReadInteger(section,'aavsochart',0);
+    Optform.DirectoryEdit2.Text:=ReadString(section,'aavsochartdir',privatedir);
     DetailForm.Checkbox1.Checked:=ReadBool(section,'followcurve',true);
     DetailForm.Checkbox2.Checked:=ReadBool(section,'plotobs',true);
     DetailForm.Checkbox3.Checked:=ReadBool(section,'owncolor',true);
@@ -898,6 +900,13 @@ mbRight : begin
 end;
 end;
 
+procedure TVarForm.Grid1SelectCell(Sender: TObject; aCol, aRow: Integer;
+  var CanSelect: Boolean);
+begin
+  CurrentRow:=Arow;
+end;
+
+
 procedure TVarForm.Setting1Click(Sender: TObject);
 begin
 FormPos(OptForm,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -933,6 +942,7 @@ with inifile do begin
     WriteString(section,'magpos',OptForm.Edit3.text);
     WriteInteger(section,'datetype',OptForm.Radiogroup2.itemindex);
     WriteInteger(section,'formattype',OptForm.Radiogroup3.itemindex);
+    WriteInteger(section,'aavsochart',OptForm.Radiogroup8.itemindex);
     WriteString(section,'aavsochartdir',Optform.DirectoryEdit2.Text);
     WriteBool(section,'followcurve',Detail1.SaveCheckbox1);
     WriteBool(section,'plotobs',DetailForm.Checkbox2.Checked);
@@ -1169,14 +1179,6 @@ chdir(appdir);
 if i<=32 then showmessage('Error '+inttostr(i)+'. Please verify that file "'+planname+'" exist and associate it with your favorite text editor.');
 end;
 
-procedure TVarForm.Editobservationfile1Click(Sender: TObject);
-var i : integer;
-begin
-i:=ExecuteFile(OptForm.FilenameEdit3.text);
-chdir(appdir);
-if i<=32 then showmessage('Error '+inttostr(i)+'. Please verify that file "'+OptForm.FilenameEdit3.text+'" exist and associate it with your favorite text editor.');
-end;
-
 procedure RunPCObs;
 {$ifdef win32}
 var nom,id : string ;
@@ -1269,7 +1271,7 @@ var i : integer;
     buf,id, chartlist: string;
     f: textfile;
 begin
-if (pos('://',Optform.DirectoryEdit2.Text)=0) then begin
+if (OptForm.Radiogroup8.itemindex=1) then begin // cdrom
   chartlist:='';
   chdir(appdir);
   assignfile(f,slash(appdir)+'united.txt');
@@ -1289,9 +1291,10 @@ if (pos('://',Optform.DirectoryEdit2.Text)=0) then begin
   closefile(f);
   end;
   chartform.chartlist:=chartlist;
+  chartform.chartdir:=Optform.DirectoryEdit2.Text;
 end;
 chartform.starname:=VarForm.Grid1.Cells[0,currentrow];
-chartform.chartdir:=Optform.DirectoryEdit2.Text;
+chartform.chartsource:=OptForm.Radiogroup8.itemindex;
 FormPos(chartform,mouse.cursorpos.x,mouse.cursorpos.y);
 chartform.ShowModal;
 end;
