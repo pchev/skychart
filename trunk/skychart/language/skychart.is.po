@@ -955,6 +955,10 @@ msgstr "Dags."
 msgid "Date / Time"
 msgstr "Dags./tími"
 
+#: u_translation:rsdateformat
+msgid "Date Format"
+msgstr ""
+
 #: u_translation:rsdatefrom
 msgid "Date from"
 msgstr "Dags. frá"
@@ -1190,10 +1194,6 @@ msgstr "Litur skjás"
 #: u_translation:rsdisplayimage
 msgid "Display image of cataloged objects"
 msgstr "Sýna mynd af skráðum fyrirbærum"
-
-#: u_translation:rsdisplaymode
-msgid "Display mode"
-msgstr "Skjáhamur"
 
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1559,10 +1559,6 @@ msgstr "Finna"
 msgid "Finder circle (Eyepiece)"
 msgstr "Hringur leitarsjón./augngl."
 
-#: u_translation:rsfindermark
-msgid "Finder mark"
-msgstr "Leitarsjónauki"
-
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Ferningur CCD vélar"
@@ -1578,6 +1574,10 @@ msgstr "Fyrsti bókst."
 #: u_translation:rsfixedblack
 msgid "Fixed Black"
 msgstr "Fastur svartur"
+
+#: u_translation:rsfixedskycolo
+msgid "Fixed sky color"
+msgstr ""
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -1670,6 +1670,10 @@ msgstr "Ná í lista yfir smástirni."
 #: u_translation:rsgetdssimage
 msgid "Get DSS Image"
 msgstr "Ná í DSS mynd"
+
+#: u_translation:rsgetrecentmea
+msgid "Get recent measurement from JUPOS project"
+msgstr ""
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2919,6 +2923,10 @@ msgstr "Vörpun"
 msgid "Projection Setting"
 msgstr "Stilling vörpunar"
 
+#: u_translation:rspropermotion3
+msgid "Proper Motion"
+msgstr ""
+
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"
 msgstr "Eiginhreyfing í stjörnubreidd"
@@ -3018,6 +3026,10 @@ msgstr "Endurtaka"
 #: u_translation:rsredolastchan
 msgid "Redo Last Change"
 msgstr "Endurtaka síðustu breytingu"
+
+#: u_translation:rsreducedetail
+msgid "Reduce detail when moving the chart"
+msgstr ""
 
 #: u_translation:rsreference
 msgid "Reference"

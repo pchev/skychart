@@ -3028,6 +3028,10 @@ msgstr "Refés"
 msgid "Redo Last Change"
 msgstr "Refés l'últim canvi"
 
+#: u_translation:rsreducedetail
+msgid "Reduce detail when moving the chart"
+msgstr ""
+
 #: u_translation:rsreference
 msgid "Reference"
 msgstr "Referència"

@@ -62,6 +62,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    red_moveBox: TCheckBox;
     Shape8: TShape;
     ThemeList: TComboBox;
     MainPanel: TPanel;
@@ -334,6 +335,7 @@ type
     procedure ThemeListChange(Sender: TObject);
     procedure lDrawPMyChange(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
+    procedure red_moveBoxClick(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
     procedure StarSizeBarChange(Sender: TObject);
     procedure SizeContrastBarChange(Sender: TObject);
@@ -643,6 +645,7 @@ Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
 label8.caption:=rsDrawALineTha;
 Label68.caption:=rsYears;
+red_moveBox.Caption:=rsReduceDetail;
 end;
 
 constructor Tf_config_display.Create(AOwner:TComponent);
@@ -826,6 +829,7 @@ begin
  SaturationBar.position:=cplot.saturation;
  starvisual.visible:= (cplot.starplot=2);
  SizeContrastBar.position:=round(cplot.magsize*10);
+ red_moveBox.Checked:=cplot.red_move;
  Application.ProcessMessages;
 end;
 
@@ -1148,6 +1152,11 @@ procedure Tf_config_display.nebuladisplayClick(Sender: TObject);
 begin
 if LockChange then exit;
  cplot.nebplot:=nebuladisplay.itemindex;
+end;
+
+procedure Tf_config_display.red_moveBoxClick(Sender: TObject);
+begin
+  cplot.red_move:=red_moveBox.Checked;
 end;
 
 procedure Tf_config_display.stardisplayClick(Sender: TObject);

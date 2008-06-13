@@ -224,7 +224,7 @@ try
   InitTime;
   InitChart;
   InitCoordinates; // now include ComputePlanet
-  if cfgsc.quick then begin
+  if cfgsc.quick and FPlot.cfgplot.red_move then begin
      Fcatalog.cfgshr.StarFilter:=true;
   end else begin
      InitLabels;
@@ -235,7 +235,7 @@ try
   InitCatalog;
   //writetrace('Draw');
   // first the extended object
-  if not cfgsc.quick then begin
+  if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawMilkyWay; // most extended first
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque) then DrawHorizon;
@@ -247,7 +247,7 @@ try
   // then the lines
   //writetrace('Draw grid');
   DrawGrid;
-  if not cfgsc.quick then begin
+  if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawConstL;
     DrawConstB;
     DrawEcliptic;
@@ -258,23 +258,23 @@ try
   // the stars
   //writetrace('Draw star');
   if cfgsc.showstars then DrawStars;
-  if not cfgsc.quick then begin
+  if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawDblStars;
     DrawVarStars;
   end;
   // finally the planets
   //writetrace('Draw planet');
-  if not cfgsc.quick then begin
+  if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawAsteroid;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanet then DrawPlanet;
   // and the horizon line if not transparent
   //writetrace('Draw horizon');
-  if (not cfgsc.quick)and cfgsc.horizonopaque then DrawHorizon;
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque then DrawHorizon;
   // the labels
   //writetrace('Draw label');
-  if (not cfgsc.quick) and cfgsc.showlabelall then DrawLabels;
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
   // refresh telescope mark
   if scopemark then begin
      //writetrace('Draw mark');
@@ -286,7 +286,7 @@ try
   result:=true;
   //writetrace('Draw end');
 finally
-  if cfgsc.quick then begin
+  if cfgsc.quick and FPlot.cfgplot.red_move then begin
      Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=savmag;
      Fcatalog.cfgshr.StarFilter:=savfilter;
      Fcatalog.cfgshr.AutoStarFilter:=saveautofilter;
@@ -344,7 +344,7 @@ var i:integer;
 begin
 if Fcatalog.cfgshr.AutoStarFilter then Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
    else Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
-if cfgsc.quick then Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgcat.StarMagMax-2;
+if cfgsc.quick and FPlot.cfgplot.red_move then Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgcat.StarMagMax-2;
 Fcatalog.cfgcat.NebMagMax:=Fcatalog.cfgshr.NebMagFilter[cfgsc.FieldNum];
 Fcatalog.cfgcat.NebSizeMin:=Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
 Fplot.cfgchart.min_ma:=1;

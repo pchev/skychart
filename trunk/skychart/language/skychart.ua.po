@@ -3028,6 +3028,10 @@ msgstr "Поновити"
 msgid "Redo Last Change"
 msgstr "Поновити останню зміну"
 
+#: u_translation:rsreducedetail
+msgid "Reduce detail when moving the chart"
+msgstr ""
+
 #: u_translation:rsreference
 msgid "Reference"
 msgstr "Співвідношення"

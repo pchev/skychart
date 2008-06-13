@@ -3031,6 +3031,10 @@ msgstr "Ponów"
 msgid "Redo Last Change"
 msgstr "Ponów ostatnią zmianę"
 
+#: u_translation:rsreducedetail
+msgid "Reduce detail when moving the chart"
+msgstr ""
+
 #: u_translation:rsreference
 msgid "Reference"
 msgstr "Odniesienie"

@@ -3027,6 +3027,10 @@ msgstr "Opnieuw"
 msgid "Redo Last Change"
 msgstr "Doe laatste verandering opnieuw"
 
+#: u_translation:rsreducedetail
+msgid "Reduce detail when moving the chart"
+msgstr ""
+
 #: u_translation:rsreference
 msgid "Reference"
 msgstr "Verwijzing"
