@@ -142,14 +142,6 @@ object VarForm: TVarForm
     ClientHeight = 70
     ClientWidth = 800
     TabOrder = 1
-    object Label1: TLabel
-      Left = 156
-      Height = 16
-      Top = 10
-      Width = 16
-      Caption = 'UT'
-      ParentColor = False
-    end
     object Label2: TLabel
       Left = 11
       Height = 16
@@ -190,7 +182,7 @@ object VarForm: TVarForm
       Height = 21
       Top = 42
       Width = 89
-      OnChange = Edit1Change
+      OnExit = Edit1Change
       TabOrder = 1
       Text = '2451179.123'
     end
@@ -199,7 +191,7 @@ object VarForm: TVarForm
       Height = 21
       Top = 42
       Width = 97
-      OnChange = Edit2Change
+      OnExit = Edit2Change
       TabOrder = 2
       Text = '19990928.123'
     end
@@ -278,6 +270,7 @@ object VarForm: TVarForm
       }
       NumGlyphs = 1
       OnChange = DateEdit1Change
+      OnExit = DateEdit1Change
       TabOrder = 6
     end
     object TimePicker1: TTimePicker
@@ -367,6 +360,10 @@ object VarForm: TVarForm
       object Content1: TMenuItem
         Caption = '&Content'
         OnClick = Content1Click
+      end
+      object MenuItem7: TMenuItem
+        Caption = 'VarObs Web site'
+        OnClick = MenuItem7Click
       end
       object About1: TMenuItem
         Caption = '&About'

@@ -49,6 +49,7 @@ type
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
     PrinterSetupDialog1: TPrinterSetupDialog;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
@@ -69,7 +70,6 @@ type
     Content1: TMenuItem;
     TimePicker1: TTimePicker;
     Panel1: TPanel;
-    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -95,6 +95,7 @@ type
     procedure Grid1SelectCell(Sender: TObject; aCol, aRow: Integer;
       var CanSelect: Boolean);
     procedure MenuItem6Click(Sender: TObject);
+    procedure MenuItem7Click(Sender: TObject);
     procedure Open1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Grid1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -439,7 +440,7 @@ var yy,mm,dd : integer;
 begin
 case varform.RadioGroup1.ItemIndex of
 0 : begin
-    djd(jdt,yy,mm,dd,hm);
+    djd(jdt+TZ/24,yy,mm,dd,hm);
     result:=formatdatetime('yyyy-mm-dd hh:mm:ss',encodedate(yy,mm,dd)+hm/24);
     end;
 1 : begin
@@ -462,7 +463,7 @@ Procedure CalculVar;
 var f : textfile;
   ww,buf,name,vtype,design : string;
   yy,mm,dd,r,curvtype,p : integer;
-  hh,mi,ss,mss,y1,m1,d1 : word;
+  y1,m1,d1 : word;
   magmax,magmin,jdini,period,rise,actmag,next2mini,nextmini,nextmaxi,next2maxi,prevmini,prevmaxi,prev2maxi,hm : double;
   aavsodesign,uncertain : boolean;
   varinfo : Tvarinfo;
@@ -490,13 +491,18 @@ try
 r:=1;
 assignfile(f,planname);
 reset(f);
+//decodetime(varform.timepicker1.time,hh,mi,ss,mss);
 getdate(varform.DateEdit1.date,y1,m1,d1);
-decodetime(varform.timepicker1.time,hh,mi,ss,mss);
-datim:=formatdatetime('yyyy-mm-dd',varform.DateEdit1.date);
-datim:=datim+'  '+formatdatetime('hh:mm',varform.timepicker1.time)+' UT';
 yy:=y1 ; mm:=m1 ; dd:=d1;
-hm:=hh+mi/60+ss/3600;
-jdact:=jd(yy,mm,dd,hm);
+hm:=varform.timepicker1.time;
+jdact:=jd(yy,mm,dd,hm)+(TZ/24);
+djd(jdact,yy,mm,dd,hm);
+datim:=inttostr(yy)+'-'+inttostr(mm)+'-'+inttostr(dd)+' '+formatdatetime('hh:mm',hm/24)+' UT';
+//datim:=formatdatetime('yyyy-mm-dd',varform.DateEdit1.date);
+//datim:=datim+'  '+formatdatetime('hh:mm',varform.timepicker1.time)+' UT';
+//yy:=y1 ; mm:=m1 ; dd:=d1;
+//hm:=hh+mi/60+ss/3600;
+//jdact:=jd(yy,mm,dd,hm);
 datact:=datef(jdact);
 repeat
 uncertain:=false;
@@ -663,9 +669,6 @@ if param[i]='-c' then begin
      buf:=param[i];
      if fileexists(buf) then planname:=buf;
 end
-else if param[i]='-n' then begin
-     NoChart:=true;
-end
 else if pos('.var',param[i])>0 then begin
      buf:=param[i];
      if fileexists(buf) then planname:=buf;
@@ -736,8 +739,6 @@ begin
 lockdate := false;
 lockselect := false;
 started := false;
-StartedByVarobs := false;
-NoChart := false;
 param:=Tstringlist.Create;
 GetAppDir;
 decimalseparator:='.';
@@ -759,23 +760,27 @@ end;
 procedure TVarForm.Edit1Change(Sender: TObject);
 var
     yy,mm,dd :integer;
-    hm : double;
+    hm,jdt : double;
     buf1,buf : string;
 begin
-if lockdate then begin lockdate:=false; exit; end;
+//if lockdate then begin lockdate:=false; exit; end;
+//if locktime then begin locktime:=false; exit; end;
 try
-djd(strtofloat(edit1.text),yy,mm,dd,hm);
-if (yy>1) and (yy<9999) then begin
-edit1.color:=clWindow;
-lockdate:=true;
-DateEdit1.date:=setdate(yy,mm,dd);
-lockdate:=true;
-varform.timepicker1.time:=hm/24;
-buf1:=format('%.4d%.2d%.2d',[yy,mm,dd]);
-str(frac(varform.timepicker1.time):1:4,buf);
-lockdate:=true;
-edit2.text:=buf1+copy(buf,2,9);
-edit2.color:=clWindow;
+jdt:=strtofloat(edit1.text);
+djd(jdt+(TZ/24),yy,mm,dd,hm);
+if (yy>1800) and (yy<3000) then begin
+  edit1.color:=clWindow;
+  lockdate:=true; locktime:=true;
+  DateEdit1.date:=setdate(yy,mm,dd);
+  lockdate:=true; locktime:=true;
+  varform.timepicker1.time:=hm/24;
+  djd(jdt,yy,mm,dd,hm);
+  buf1:=format('%.4d%.2d%.2d',[yy,mm,dd]);
+//  str(frac(varform.timepicker1.time):1:4,buf);
+  str((hm/24):1:4,buf);
+  lockdate:=true; locktime:=true;
+  edit2.text:=buf1+copy(buf,2,9);
+  edit2.color:=clWindow;
 end else begin
   edit1.color:=clRed;
 end;
@@ -783,16 +788,17 @@ except
   edit1.color:=clRed;
 end;
 Application.processmessages;
-lockdate:=false;
+lockdate:=false; locktime:=false;
 end;
 
 procedure TVarForm.Edit2Change(Sender: TObject);
 var
     yy,mm,dd,p :integer;
-    hm : double;
+    hm,jdt : double;
     buf : string;
 begin
-if lockdate then begin lockdate:=false; exit; end;
+//if lockdate then begin lockdate:=false; exit; end;
+//if locktime then begin locktime:=false; exit; end;
 try
 buf:=trim(edit2.text);
 p:=pos('.',buf);
@@ -802,15 +808,17 @@ yy:=strtoint(copy(buf,1,p-5));
 mm:=strtoint(copy(buf,p-4,2));
 dd:=strtoint(copy(buf,p-2,2));
 hm:=strtofloat(copy(buf,p,9))*24;
-if (yy>1) and (yy<9999) then begin
-edit2.color:=clWindow;
-lockdate:=true;
-DateEdit1.date:=setdate(yy,mm,dd);
-lockdate:=true;
-varform.timepicker1.time:=hm/24;
-str(jd(yy,mm,dd,hm):9:4,buf);
-lockdate:=true;
-edit1.text:=buf;
+if (yy>1800) and (yy<3000) then begin
+  edit2.color:=clWindow;
+  str(jd(yy,mm,dd,hm):9:4,buf);
+  lockdate:=true; locktime:=true;
+  edit1.text:=buf;
+  jdt:=jd(yy,mm,dd,hm)+(TZ/24);
+  Djd(jdt,yy,mm,dd,hm);
+  lockdate:=true; locktime:=true;
+  DateEdit1.date:=setdate(yy,mm,dd);
+  lockdate:=true;  locktime:=true;
+  varform.timepicker1.time:=hm/24;
 end else begin
   edit2.color:=clRed;
 end;
@@ -818,7 +826,7 @@ except
   edit2.color:=clRed;
 end;
 Application.processmessages;
-lockdate:=false;
+lockdate:=false; locktime:=false;
 end;
 
 procedure TVarForm.Open1Click(Sender: TObject);
@@ -859,12 +867,8 @@ end;
 procedure TVarForm.FormShow(Sender: TObject);
 var  inifile : Tinifile;
      section : string;
-     year,month,day : word;
      i : integer;
 begin
-timepicker1.time:=now;
-decodedate(now,year,month,day);
-DateEdit1.date:=now;
 planname:=slash(privatedir)+'aavsoeasy.dat';
 if not fileexists(planname) then begin
   CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.dat',planname,true);
@@ -882,6 +886,7 @@ section:='Default';
 with inifile do begin
     planname:=ReadString(section,'planname',planname);
     Radiogroup1.itemindex:=ReadInteger(section,'dateformat',0);
+    OptForm.tz.Value:=ReadInteger(section,'tz',0);
     OptForm.Radiogroup1.itemindex:=ReadInteger(section,'obstype',0);
     OptForm.Radiogroup4.itemindex:=ReadInteger(section,'obsformat',0);
     OptForm.Radiogroup5.itemindex:=ReadInteger(section,'obspgm',0);
@@ -937,6 +942,9 @@ if paramcount>0 then begin
      for i:=1 to paramcount do param.Add(paramstr(i));
      ReadParam;
 end;
+TZ:=OptForm.tz.Value;
+timepicker1.time:=now;
+DateEdit1.date:=now;
 started:=true;
 DateEdit1change(sender);
 CalculVar;
@@ -978,6 +986,7 @@ procedure TVarForm.Setting1Click(Sender: TObject);
 begin
 FormPos(OptForm,mouse.cursorpos.x,mouse.cursorpos.y);
 OptForm.showmodal;
+TZ:=OptForm.tz.Value;
 chdir(appdir);
 end;
 
@@ -990,6 +999,7 @@ section:='Default';
 with inifile do begin
     WriteString(section,'planname',planname);
     WriteInteger(section,'dateformat',Radiogroup1.itemindex);
+    WriteInteger(section,'tz',OptForm.tz.Value);
     WriteInteger(section,'obstype',OptForm.Radiogroup1.itemindex);
     WriteInteger(section,'obsformat',OptForm.Radiogroup4.itemindex);
     WriteInteger(section,'obspgm',OptForm.Radiogroup5.itemindex);
@@ -1161,20 +1171,28 @@ var y1,m1,d1 : word;
     hm : double;
     buf,buf1 : string;
 begin
-if lockdate then begin lockdate:=false; exit; end;
-getdate(DateEdit1.date,y1,m1,d1);
-hm:=frac(timepicker1.time);
+//if lockdate then begin lockdate:=false; exit; end;
+//if locktime then begin locktime:=false; exit; end;
+//getdate(DateEdit1.date,y1,m1,d1);
+//hm:=frac(timepicker1.time);
+//buf1:=format('%.4d%.2d%.2d',[y1,m1,d1]);
+//str(hm:1:4,buf);
+hm:=frac(timepicker1.time)-TZ/24;
+hm:=hm+trunc(DateEdit1.date);
+getdate(trunc(hm),y1,m1,d1);
 buf1:=format('%.4d%.2d%.2d',[y1,m1,d1]);
+hm:=frac(hm);
 str(hm:1:4,buf);
-lockdate:=true;
+lockdate:=true; locktime:=true;
 edit2.text:=buf1+copy(buf,2,9);
+Application.processmessages;
 str(jd(y1,m1,d1,hm*24):9:4,buf);
-lockdate:=true;
+lockdate:=true; locktime:=true;
 edit1.text:=buf;
 edit1.color:=clWindow;
 edit2.color:=clWindow;
 Application.processmessages;
-lockdate:=false;
+lockdate:=false; locktime:=false;
 end;
 
 procedure TVarForm.Lightcurve1Click(Sender: TObject);
@@ -1335,6 +1353,11 @@ end;
 procedure TVarForm.AAVSOwebpage1Click(Sender: TObject);
 begin
 executefile(aavsourl);
+end;
+
+procedure TVarForm.MenuItem7Click(Sender: TObject);
+begin
+executefile(varobsurl);
 end;
 
 procedure TVarForm.AAVSOChart1Click(Sender: TObject);

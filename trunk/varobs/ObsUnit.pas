@@ -34,6 +34,7 @@ type
   { TObsForm }
 
   TObsForm = class(TForm)
+    Button1: TButton;
     DateEdit1: TDateEdit;
     Edit1: TEdit;
     Edit9: TEdit;
@@ -55,25 +56,38 @@ type
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     Label7: TLabel;
-    Label8: TLabel;
     Label9: TLabel;
     Edit7: TEdit;
     Edit8: TEdit;
     Label10: TLabel;
     CheckBox2: TCheckBox;
     MenuItem1: TMenuItem;
+    MenuItem10: TMenuItem;
+    MenuItem11: TMenuItem;
+    MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
+    MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
+    PopupMenu1: TPopupMenu;
     TimePicker1: TTimePicker;
-    procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure AddClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DateEdit1Change(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure MenuItem3Click(Sender: TObject);
+    procedure CodeClick(Sender: TObject);
   private
     { Private declarations }
     procedure WriteAAVSOheader(var f: textfile);
@@ -118,6 +132,11 @@ begin
   Close;
 end;
 
+procedure TObsForm.CodeClick(Sender: TObject);
+begin
+  edit5.Text:=trim(edit5.Text)+trim(copy(Tmenuitem(sender).Caption,1,1));
+end;
+
 procedure TObsForm.FormShow(Sender: TObject);
 var p,i : integer;
     buf,nam,con : string;
@@ -133,6 +152,7 @@ edit9.text:='';
 if current>0 then begin
   case optform.radiogroup4.itemindex of
     0 : begin   //AAVSO
+        Button1.Visible:=true;
         Edit1.text:=varform.Grid1.Cells[0,current];
         Edit1.Readonly:=false;
         Label6.Caption:='Comp Star 1';
@@ -143,6 +163,7 @@ if current>0 then begin
         Edit4.text:= optform.Edit4.text;            // Observer
         end;
     1 : begin //VSNET
+        Button1.Visible:=false;
         buf := trim(varform.Grid1.Cells[0,current]);      // star name
         p:=pos(' ',buf);
         if p>0 then begin
@@ -168,7 +189,7 @@ if current>0 then begin
     end;
   end;
 end;
-DateEdit1Change(sender);
+Edit2Change(sender);
 case OptForm.RadioGroup7.ItemIndex of
   0 : FileNameEdit1.Text:=OptForm.FileNameEdit3.Text;
   1 : FileNameEdit1.Text:=changefileext(OptForm.FileNameEdit3.Text,'')+'-'+trim(edit2.text)+extractfileext(OptForm.FileNameEdit3.Text);
@@ -176,6 +197,11 @@ end;
 end;
 
 procedure TObsForm.Button1Click(Sender: TObject);
+begin
+  PopupMenu1.PopUp(mouse.cursorpos.x,mouse.cursorpos.y);
+end;
+
+procedure TObsForm.AddClick(Sender: TObject);
 var buf,s : string;
     p : integer;
 begin
@@ -277,11 +303,16 @@ var y1,m1,d1 : word;
     hm : double;
     buf,buf1 : string;
 begin
-if lockdate then begin lockdate:=false; exit; end;
-getdate(DateEdit1.date,y1,m1,d1);
-hm:=frac(timepicker1.time);
+//if lockdate then begin lockdate:=false; exit; end;
+//if locktime then begin locktime:=false; exit; end;
+//getdate(DateEdit1.date,y1,m1,d1);
+//hm:=frac(timepicker1.time);
+hm:=frac(timepicker1.time)-TZ/24;
+hm:=hm+trunc(DateEdit1.date);
+getdate(trunc(hm),y1,m1,d1);
+hm:=frac(hm);
 try
-lockdate:=true;
+lockdate:=true; locktime:=true;
 case optform.radiogroup4.itemindex of
 0 : begin
     str(jd(y1,m1,d1,hm*24):9:4,buf);
@@ -297,21 +328,24 @@ case optform.radiogroup4.itemindex of
 end;
 Application.processmessages;
 finally
-lockdate:=false;
+lockdate:=false; locktime:=false;
 end;
 end;
 
 procedure TObsForm.Edit2Change(Sender: TObject);
 var
     yy,mm,dd,p :integer;
-    hm : double;
+    hm,jdt : double;
     buf : string;
 begin
 if lockdate then begin lockdate:=false; exit; end;
+if locktime then begin locktime:=false; exit; end;
 try
 case optform.radiogroup4.itemindex of
 0 : begin
-    djd(strtofloat(edit2.text),yy,mm,dd,hm);
+    jdt:=strtofloat(edit2.text);
+    djd(jdt+(TZ/24),yy,mm,dd,hm);
+    //djd(strtofloat(edit2.text),yy,mm,dd,hm);
     end;
 1 : begin
     buf:=trim(edit2.text);
@@ -322,14 +356,16 @@ case optform.radiogroup4.itemindex of
     mm:=strtoint(copy(buf,p-4,2));
     dd:=strtoint(copy(buf,p-2,2));
     hm:=strtofloat(copy(buf,p,9))*24;
+    jdt:=jd(yy,mm,dd,hm)+(TZ/24);
+    Djd(jdt,yy,mm,dd,hm);
     end;
 end;
-if (yy>1) and (yy<9999) then begin
-edit2.color:=clWindow;
-lockdate:=true;
-DateEdit1.date:=setdate(yy,mm,dd);
-lockdate:=true;
-timepicker1.time:=hm/24;
+if (yy>1800) and (yy<3000) then begin
+  edit2.color:=clWindow;
+  lockdate:=true; locktime:=true;
+  DateEdit1.date:=setdate(yy,mm,dd);
+  lockdate:=true; locktime:=true;
+  timepicker1.time:=hm/24;
 end else begin
   edit2.color:=clRed;
 end;
@@ -337,13 +373,13 @@ except
   edit2.color:=clRed;
 end;
 Application.processmessages;
-lockdate:=false;
+lockdate:=false; locktime:=false;
 end;
 
 procedure TObsForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
 if memo1.Lines.Count>0 then begin
-   if mrOK=MessageDlg('Some data are not saved to file. Do you really whant to quit ?',mtConfirmation,mbOkCancel,0) then begin
+   if mrYes=MessageDlg('You can keep this form open and return later to add a new observation.'+crlf+'Some data are not saved to file and will be lost. Do you really whant to quit ?' ,mtWarning,mbYesNo,0) then begin
       memo1.clear;
       canclose:=true;
    end

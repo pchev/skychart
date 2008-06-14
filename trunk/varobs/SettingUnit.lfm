@@ -14,7 +14,7 @@ object OptForm: TOptForm
   OnCreate = FormCreate
   OnShow = FormShow
   object BitBtn1: TBitBtn
-    Left = 224
+    Left = 176
     Height = 25
     Top = 280
     Width = 75
@@ -24,34 +24,23 @@ object OptForm: TOptForm
     NumGlyphs = 2
     TabOrder = 0
   end
-  object BitBtn2: TBitBtn
-    Left = 128
-    Height = 25
-    Top = 280
-    Width = 75
-    Cancel = True
-    Caption = 'Cancel'
-    ModalResult = 2
-    NumGlyphs = 2
-    TabOrder = 1
-  end
   object PageControl1: TPageControl
     Height = 272
     Width = 432
     ActivePage = TabSheet1
     TabIndex = 0
-    TabOrder = 2
+    TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Observation entry'
       ClientHeight = 246
       ClientWidth = 424
       object GroupBox5: TGroupBox
         Left = 20
-        Height = 216
-        Top = 18
+        Height = 232
+        Top = 10
         Width = 385
         Caption = 'Observation Entry'
-        ClientHeight = 198
+        ClientHeight = 214
         ClientWidth = 381
         TabOrder = 0
         object Label16: TLabel
@@ -60,6 +49,22 @@ object OptForm: TOptForm
           Top = 112
           Width = 48
           Caption = 'Observer'#13#10'Initials :'
+          ParentColor = False
+        end
+        object Label8: TLabel
+          Left = 6
+          Height = 16
+          Top = 152
+          Width = 58
+          Caption = 'Time Zone'
+          ParentColor = False
+        end
+        object Label17: TLabel
+          Left = 6
+          Height = 31
+          Top = 168
+          Width = 78
+          Caption = 'negative West '#13#10'of Greenwich'
           ParentColor = False
         end
         object Panel2: TPanel
@@ -197,11 +202,20 @@ object OptForm: TOptForm
           TabOrder = 0
         end
         object Edit4: TEdit
-          Left = 68
+          Left = 89
           Height = 21
-          Top = 116
+          Top = 112
           Width = 53
           TabOrder = 3
+        end
+        object tz: TSpinEdit
+          Left = 90
+          Height = 23
+          Top = 152
+          Width = 52
+          MaxValue = 12
+          MinValue = -12
+          TabOrder = 4
         end
       end
     end
@@ -657,8 +671,6 @@ object OptForm: TOptForm
     end
     object TabSheet5: TTabSheet
       Caption = 'URL'
-      ClientHeight = 246
-      ClientWidth = 424
       object Label7: TLabel
         Left = 12
         Height = 16

@@ -77,16 +77,13 @@ OpenFileCMD='kfmclient exec';
 
 var
   datim,datact,defaavsocharturl,defqlurl,defafoevurl,defwebobsurl,aavsourl,varobsurl,pcobscaption : string;
-  lockdate : boolean;
+  lockdate,locktime : boolean;
   lockselect : boolean;
   started : boolean;
   AppDir,PrivateDir,ConstDir,ConfigFile,planname,skychart : string;
-  jdact : double;
+  jdact,TZ : double;
   CurrentRow: integer;
   param : Tstringlist;
-  StartedByVarobs : boolean;
-  NoChart : boolean;
-  CielHnd : Thandle;
 
 implementation
 
