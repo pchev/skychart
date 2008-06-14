@@ -56,9 +56,9 @@ object OptForm: TOptForm
         TabOrder = 0
         object Label16: TLabel
           Left = 6
-          Height = 27
+          Height = 31
           Top = 112
-          Width = 46
+          Width = 48
           Caption = 'Observer'#13#10'Initials :'
           ParentColor = False
         end
@@ -72,17 +72,17 @@ object OptForm: TOptForm
           TabOrder = 2
           object Label22: TLabel
             Left = 16
-            Height = 14
+            Height = 16
             Top = 82
-            Width = 123
+            Width = 138
             Caption = 'PCObs program location :'
             ParentColor = False
           end
           object Label23: TLabel
             Left = 8
-            Height = 40
+            Height = 46
             Top = 18
-            Width = 193
+            Width = 218
             Caption = 'Launch AAVSO PCObs for data entry'#13#10'This option is recommended if you want '#13#10'to submit your data to the AAVSO'
             ParentColor = False
           end
@@ -107,9 +107,9 @@ object OptForm: TOptForm
           TabOrder = 1
           object Label15: TLabel
             Left = 6
-            Height = 14
+            Height = 16
             Top = 58
-            Width = 84
+            Width = 90
             Caption = 'Observation file :'
             ParentColor = False
           end
@@ -563,36 +563,60 @@ object OptForm: TOptForm
       ClientWidth = 424
       object GroupBox6: TGroupBox
         Left = 12
-        Height = 98
-        Top = 138
+        Height = 112
+        Top = 122
         Width = 385
         Caption = 'Cartes du Ciel / Sky Charts interface'
-        ClientHeight = 80
+        ClientHeight = 94
         ClientWidth = 381
         TabOrder = 0
-        object Label17: TLabel
-          Left = 10
-          Height = 14
-          Top = 13
-          Width = 158
-          Caption = 'Default profile saved chart name'
+        object Label5: TLabel
+          Left = 14
+          Height = 16
+          Top = 72
+          Width = 352
+          Caption = 'Be sure the GCVS catalog is installed and activated whitin Skychart!'
           ParentColor = False
         end
-        object FileNameEdit5: TFileNameEdit
-          Left = 10
-          Height = 23
+        object Label6: TLabel
+          Left = 174
+          Height = 16
           Top = 37
-          Width = 332
-          ButtonWidth = 23
-          NumGlyphs = 1
+          Width = 42
+          Caption = 'degrees'
           ParentColor = False
+        end
+        object CheckBox1: TCheckBox
+          Left = 14
+          Height = 21
+          Top = 8
+          Width = 206
+          Caption = 'Switch chart to equatorial coordinates'
           TabOrder = 0
+        end
+        object CheckBox2: TCheckBox
+          Left = 14
+          Height = 21
+          Top = 35
+          Width = 84
+          Caption = 'Set zoom to'
+          TabOrder = 1
+        end
+        object SpinEdit1: TSpinEdit
+          Left = 110
+          Height = 23
+          Top = 34
+          Width = 50
+          MaxValue = 180
+          MinValue = 1
+          TabOrder = 2
+          Value = 15
         end
       end
       object GroupBox9: TGroupBox
-        Left = 14
+        Left = 12
         Height = 106
-        Top = 18
+        Top = 10
         Width = 385
         Caption = 'AAVSO Chart'
         ClientHeight = 88

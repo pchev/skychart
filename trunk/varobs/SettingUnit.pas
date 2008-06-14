@@ -27,7 +27,7 @@ interface
 
 uses
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Buttons, LResources, u_param, ComCtrls, EditBtn;
+  StdCtrls, ExtCtrls, Buttons, LResources, u_param, ComCtrls, EditBtn, Spin;
 
 type
 
@@ -35,6 +35,8 @@ type
 
   TOptForm = class(TForm)
     BitBtn2: TBitBtn;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     DirectoryEdit3: TDirectoryEdit;
     DirectoryEdit2: TDirectoryEdit;
     Edit1: TEdit;
@@ -46,7 +48,6 @@ type
     FileNameEdit2: TFileNameEdit;
     FileNameEdit3: TFileNameEdit;
     FileNameEdit4: TFileNameEdit;
-    FileNameEdit5: TFileNameEdit;
     FileNameEdit8: TFileNameEdit;
     GroupBox0: TGroupBox;
     GroupBox2: TGroupBox;
@@ -64,7 +65,6 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
-    Label17: TLabel;
     Label18: TLabel;
     Label19: TLabel;
     Label2: TLabel;
@@ -74,6 +74,8 @@ type
     Label23: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
     Label9: TLabel;
     PageControl1: TPageControl;
     Panel1: TPanel;
@@ -87,6 +89,7 @@ type
     RadioGroup6: TRadioGroup;
     RadioGroup7: TRadioGroup;
     RadioGroup8: TRadioGroup;
+    SpinEdit1: TSpinEdit;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
@@ -159,7 +162,6 @@ FileNameEdit1.InitialDir:=privatedir;
 FileNameEdit2.InitialDir:=privatedir;
 FileNameEdit3.InitialDir:=privatedir;
 FileNameEdit4.InitialDir:=privatedir;
-FileNameEdit5.InitialDir:=privatedir;
 FileNameEdit8.InitialDir:=privatedir;
 end;
 

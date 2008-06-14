@@ -4956,7 +4956,7 @@ try
       CreateSocket;
       if lasterror<>0 then Synchronize(ShowError);
       MaxLineLength:=1024;
-      setLinger(true,10);
+      setLinger(true,1000);
       if lasterror<>0 then Synchronize(ShowError);
       bind(f_main.cfgm.ServerIPaddr,f_main.cfgm.ServerIPport);
       if lasterror<>0 then Synchronize(ShowError);
@@ -5056,7 +5056,7 @@ begin
              if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then active_chart:=cmd[1];
           end else
              if keepalive then begin
-                SendString('.'+crlf);        // keepalive check
+                SendString('.'+crlf);      // keepalive check
                 if lastError<>0 then break;  // if send failed we close the connection
           end;
         until false;
@@ -5542,10 +5542,6 @@ if night then begin
    f_printsetup.Font.Color:=nv_middle;
    f_print.Color:=nv_dark;
    f_print.Font.Color:=nv_middle;
-   if f_config<>nil then begin
-      f_config.Color:=nv_dark;
-      f_config.Font.Color:=nv_middle;
-   end;
  end;
 end else begin
    ResetWinColor;
@@ -5578,10 +5574,6 @@ end else begin
    f_printsetup.Font.Color:=clWindowText;
    f_print.Color:=clBtnFace;
    f_print.Font.Color:=clWindowText;
-   if f_config<>nil then begin
-      f_config.Color:=clBtnFace;
-      f_config.Font.Color:=clWindowText;
-   end;
 end;
 end;
 
