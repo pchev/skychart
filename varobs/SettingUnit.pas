@@ -34,7 +34,6 @@ type
   { TOptForm }
 
   TOptForm = class(TForm)
-    BitBtn2: TBitBtn;
     Button1: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
@@ -66,6 +65,7 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
+    Label17: TLabel;
     Label18: TLabel;
     Label19: TLabel;
     Label2: TLabel;
@@ -78,10 +78,12 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    Label8: TLabel;
     Label9: TLabel;
     qlurl: TLabeledEdit;
     afoevurl: TLabeledEdit;
     charturl: TLabeledEdit;
+    tz: TSpinEdit;
     webobsurl: TLabeledEdit;
     PageControl1: TPageControl;
     Panel1: TPanel;

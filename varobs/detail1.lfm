@@ -1,7 +1,7 @@
 object DetailForm: TDetailForm
-  Left = 402
+  Left = 457
   Height = 483
-  Top = 120
+  Top = 149
   Width = 728
   HorzScrollBar.Page = 727
   VertScrollBar.Page = 462

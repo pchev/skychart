@@ -40,7 +40,7 @@ begin
   Application.CreateForm(TVarForm, VarForm);
   Application.CreateForm(Tsplash, splash);
   splash.SplashTimer:=true;
-  splash.Show;
+//  splash.Show;
   Application.CreateForm(Tchartform, chartform);
   Application.CreateForm(TDetailForm, DetailForm);
   Application.CreateForm(TObsForm, ObsForm);

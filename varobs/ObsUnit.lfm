@@ -17,7 +17,7 @@ object ObsForm: TObsForm
   object Label1: TLabel
     Left = 8
     Height = 16
-    Top = 67
+    Top = 66
     Width = 59
     Caption = 'Star Name '
     ParentColor = False
@@ -25,7 +25,7 @@ object ObsForm: TObsForm
   object Label2: TLabel
     Left = 422
     Height = 16
-    Top = 20
+    Top = 17
     Width = 61
     Caption = 'UT decimal'
     ParentColor = False
@@ -33,7 +33,7 @@ object ObsForm: TObsForm
   object Label3: TLabel
     Left = 200
     Height = 16
-    Top = 67
+    Top = 66
     Width = 35
     Caption = 'Magn.'
     ParentColor = False
@@ -41,15 +41,15 @@ object ObsForm: TObsForm
   object Label4: TLabel
     Left = 13
     Height = 16
-    Top = 20
+    Top = 17
     Width = 48
     Caption = 'Observer'
     ParentColor = False
   end
   object Label5: TLabel
-    Left = 398
+    Left = 392
     Height = 16
-    Top = 67
+    Top = 66
     Width = 55
     Caption = 'Comment'
     ParentColor = False
@@ -57,13 +57,13 @@ object ObsForm: TObsForm
   object Label6: TLabel
     Left = 162
     Height = 16
-    Top = 103
+    Top = 102
     Width = 66
     Caption = 'Comp Star 1'
     ParentColor = False
   end
   object Label7: TLabel
-    Left = 144
+    Left = 136
     Height = 17
     Top = 16
     Width = 30
@@ -72,20 +72,10 @@ object ObsForm: TObsForm
     Font.Name = 'MS Sans Serif'
     ParentColor = False
   end
-  object Label8: TLabel
-    Left = 288
-    Height = 17
-    Top = 16
-    Width = 20
-    Caption = 'UT'
-    Font.Height = -13
-    Font.Name = 'MS Sans Serif'
-    ParentColor = False
-  end
   object Label9: TLabel
     Left = 416
     Height = 16
-    Top = 103
+    Top = 102
     Width = 30
     Caption = 'Chart'
     ParentColor = False
@@ -101,7 +91,7 @@ object ObsForm: TObsForm
   object Label11: TLabel
     Left = 288
     Height = 16
-    Top = 103
+    Top = 102
     Width = 66
     Caption = 'Comp Star 2'
     ParentColor = False
@@ -109,7 +99,7 @@ object ObsForm: TObsForm
   object Edit1: TEdit
     Left = 72
     Height = 21
-    Top = 63
+    Top = 64
     Width = 113
     CharCase = ecUppercase
     TabOrder = 10
@@ -117,17 +107,17 @@ object ObsForm: TObsForm
   object Edit2: TEdit
     Left = 488
     Height = 21
-    Top = 14
+    Top = 15
     Width = 121
     CharCase = ecUppercase
-    OnChange = Edit2Change
+    OnExit = Edit2Change
     TabStop = False
     TabOrder = 9
   end
   object Edit3: TEdit
     Left = 240
     Height = 21
-    Top = 63
+    Top = 64
     Width = 41
     CharCase = ecUppercase
     TabOrder = 0
@@ -135,7 +125,7 @@ object ObsForm: TObsForm
   object Edit4: TEdit
     Left = 72
     Height = 21
-    Top = 14
+    Top = 15
     Width = 47
     CharCase = ecUppercase
     ReadOnly = True
@@ -145,7 +135,7 @@ object ObsForm: TObsForm
   object Edit5: TEdit
     Left = 456
     Height = 21
-    Top = 63
+    Top = 64
     Width = 88
     CharCase = ecUppercase
     TabOrder = 1
@@ -177,7 +167,7 @@ object ObsForm: TObsForm
     Width = 142
     Caption = 'Add'
     NumGlyphs = 0
-    OnClick = Button1Click
+    OnClick = AddClick
     TabOrder = 8
   end
   object BitBtn2: TBitBtn
@@ -202,7 +192,7 @@ object ObsForm: TObsForm
   object Edit8: TEdit
     Left = 64
     Height = 21
-    Top = 136
+    Top = 138
     Width = 397
     MaxLength = 100
     TabOrder = 6
@@ -210,14 +200,14 @@ object ObsForm: TObsForm
   object CheckBox2: TCheckBox
     Left = 296
     Height = 21
-    Top = 65
+    Top = 64
     Width = 84
     Caption = 'Fainter than'
     TabOrder = 11
     TabStop = False
   end
   object TimePicker1: TTimePicker
-    Left = 315
+    Left = 288
     Height = 23
     Top = 14
     Width = 101
@@ -227,7 +217,7 @@ object ObsForm: TObsForm
     TabOrder = 14
   end
   object DateEdit1: TDateEdit
-    Left = 183
+    Left = 176
     Height = 23
     Top = 14
     Width = 80
@@ -257,7 +247,7 @@ object ObsForm: TObsForm
       3E3E3E2323232323232323232323220A7D3B0A
     }
     NumGlyphs = 1
-    OnChange = DateEdit1Change
+    OnExit = DateEdit1Change
     TabStop = False
     TabOrder = 13
   end
@@ -272,16 +262,26 @@ object ObsForm: TObsForm
   object FileNameEdit1: TFileNameEdit
     Left = 14
     Height = 23
-    Top = 336
+    Top = 335
     Width = 486
     ButtonWidth = 23
     NumGlyphs = 1
     ParentColor = False
     TabOrder = 15
+    TabStop = False
+  end
+  object Button1: TButton
+    Left = 548
+    Height = 21
+    Top = 64
+    Width = 21
+    Caption = '...'
+    OnClick = Button1Click
+    TabOrder = 16
   end
   object MainMenu1: TMainMenu
-    left = 584
-    top = 48
+    left = 16
+    top = 40
     object MenuItem1: TMenuItem
       Caption = '&File'
       object MenuItem4: TMenuItem
@@ -296,6 +296,54 @@ object ObsForm: TObsForm
         Caption = '&Quit'
         OnClick = MenuItem3Click
       end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 572
+    top = 95
+    object MenuItem5: TMenuItem
+      Caption = 'B: Sky is bright, moon, twilight, light pollution, aurorae.'
+      OnClick = CodeClick
+    end
+    object MenuItem6: TMenuItem
+      Caption = 'U: Clouds, dust, smoke, haze, etc. '
+      OnClick = CodeClick
+    end
+    object MenuItem7: TMenuItem
+      Caption = 'W: Poor seeing. '
+      OnClick = CodeClick
+    end
+    object MenuItem8: TMenuItem
+      Caption = 'L: Low in the sky, near horizon, in trees, obstructed view.'
+      OnClick = CodeClick
+    end
+    object MenuItem9: TMenuItem
+      Caption = 'D: Unusual Activity (fading, flare, bizarre behavior, etc.) '
+      OnClick = CodeClick
+    end
+    object MenuItem10: TMenuItem
+      Caption = 'Y: Outburst.'
+      OnClick = CodeClick
+    end
+    object MenuItem11: TMenuItem
+      Caption = 'K: Non-AAVSO chart. '
+      OnClick = CodeClick
+    end
+    object MenuItem12: TMenuItem
+      Caption = 'S: Comparison sequence problem. '
+      OnClick = CodeClick
+    end
+    object MenuItem13: TMenuItem
+      Caption = 'Z: Magnitude of star uncertain.'
+      OnClick = CodeClick
+    end
+    object MenuItem14: TMenuItem
+      Caption = 'I: Identification of star uncertain. '
+      OnClick = CodeClick
+    end
+    object MenuItem15: TMenuItem
+      Caption = 'V: Faint star, near observing limit, only glimpsed. '
+      OnClick = CodeClick
     end
   end
 end
