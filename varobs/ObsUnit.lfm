@@ -16,49 +16,49 @@ object ObsForm: TObsForm
   OnShow = FormShow
   object Label1: TLabel
     Left = 8
-    Height = 14
+    Height = 16
     Top = 67
-    Width = 54
+    Width = 59
     Caption = 'Star Name '
     ParentColor = False
   end
   object Label2: TLabel
     Left = 422
-    Height = 14
+    Height = 16
     Top = 20
-    Width = 52
+    Width = 61
     Caption = 'UT decimal'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 200
-    Height = 14
+    Height = 16
     Top = 67
-    Width = 31
+    Width = 35
     Caption = 'Magn.'
     ParentColor = False
   end
   object Label4: TLabel
     Left = 13
-    Height = 14
+    Height = 16
     Top = 20
-    Width = 46
+    Width = 48
     Caption = 'Observer'
     ParentColor = False
   end
   object Label5: TLabel
     Left = 398
-    Height = 14
+    Height = 16
     Top = 67
-    Width = 46
+    Width = 55
     Caption = 'Comment'
     ParentColor = False
   end
   object Label6: TLabel
     Left = 162
-    Height = 14
+    Height = 16
     Top = 103
-    Width = 60
+    Width = 66
     Caption = 'Comp Star 1'
     ParentColor = False
   end
@@ -84,25 +84,25 @@ object ObsForm: TObsForm
   end
   object Label9: TLabel
     Left = 416
-    Height = 14
+    Height = 16
     Top = 103
-    Width = 28
+    Width = 30
     Caption = 'Chart'
     ParentColor = False
   end
   object Label10: TLabel
     Left = 8
-    Height = 14
+    Height = 16
     Top = 140
-    Width = 42
+    Width = 46
     Caption = 'Remarks'
     ParentColor = False
   end
   object Label11: TLabel
     Left = 288
-    Height = 14
+    Height = 16
     Top = 103
-    Width = 60
+    Width = 66
     Caption = 'Comp Star 2'
     ParentColor = False
   end
@@ -209,9 +209,9 @@ object ObsForm: TObsForm
   end
   object CheckBox2: TCheckBox
     Left = 296
-    Height = 19
+    Height = 21
     Top = 65
-    Width = 82
+    Width = 84
     Caption = 'Fainter than'
     TabOrder = 11
     TabStop = False

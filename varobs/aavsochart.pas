@@ -71,7 +71,7 @@ var
 
 implementation
 
-Uses Variables1;
+Uses Variables1, settingUnit;
 
 procedure Tchartform.FormShow(Sender: TObject);
 var i: integer;
@@ -110,7 +110,7 @@ end;
 procedure Tchartform.Button2Click(Sender: TObject);
 var buf:string;
 begin
-  buf:=aavsocharturl;
+  buf:=OptForm.charturl.Text;
   buf:=StringReplace(buf,'$star',starname,[]);
   buf:=StringReplace(buf,'$scale',aavsochartscale[ComboBox1.ItemIndex],[]);
   buf:=StringReplace(buf,'$fov',aavsochartfov[ComboBox1.ItemIndex],[]);

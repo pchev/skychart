@@ -140,7 +140,7 @@ if current>0 then begin
         edit9.visible:=true;
         label2.caption:='JD + GMAT ';
         if Edit2.text='' then Edit2.text:= trim(varform.Edit1.text);      // Date
-        if Edit4.text='' then Edit4.text:= optform.Edit4.text;            // Observer
+        Edit4.text:= optform.Edit4.text;            // Observer
         end;
     1 : begin //VSNET
         buf := trim(varform.Grid1.Cells[0,current]);      // star name
@@ -164,7 +164,7 @@ if current>0 then begin
         edit9.visible:=false;
         label2.caption:='UT decimal';
         if Edit2.text='' then Edit2.text:= trim(varform.Edit2.text);      // Date
-        if Edit4.text='' then Edit4.text:= optform.Edit4.text;            // Observer
+        Edit4.text:= optform.Edit4.text;            // Observer
     end;
   end;
 end;
@@ -223,7 +223,8 @@ writeln(f,'#OBSCODE='+trim(edit4.text));
 writeln(f,'#SOFTWARE='+software_version);
 writeln(f,'#DELIM=,');
 writeln(f,'#DATE=JD');
-writeln(f,'#OBSTYPE=Visual');
+writeln(f,'#REPORT-DATE='+DateTimeToStr(now));
+writeln(f,'#NAME,DATE,MAG,COMMENTCODE,COMP1,COMP2,CHART,NOTES');
 end;
 
 procedure TObsForm.Button2Click(Sender: TObject);

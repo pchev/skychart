@@ -35,6 +35,7 @@ type
 
   TOptForm = class(TForm)
     BitBtn2: TBitBtn;
+    Button1: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     DirectoryEdit3: TDirectoryEdit;
@@ -76,7 +77,12 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    Label7: TLabel;
     Label9: TLabel;
+    qlurl: TLabeledEdit;
+    afoevurl: TLabeledEdit;
+    charturl: TLabeledEdit;
+    webobsurl: TLabeledEdit;
     PageControl1: TPageControl;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -94,6 +100,8 @@ type
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
     procedure RadioGroup3Click(Sender: TObject);
@@ -163,6 +171,14 @@ FileNameEdit2.InitialDir:=privatedir;
 FileNameEdit3.InitialDir:=privatedir;
 FileNameEdit4.InitialDir:=privatedir;
 FileNameEdit8.InitialDir:=privatedir;
+end;
+
+procedure TOptForm.Button1Click(Sender: TObject);
+begin
+qlurl.Text:=defqlurl;
+afoevurl.Text:=defafoevurl;
+charturl.Text:=defaavsocharturl;
+webobsurl.Text:=defwebobsurl;
 end;
 
 procedure TOptForm.RadioGroup3Click(Sender: TObject);

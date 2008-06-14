@@ -1295,7 +1295,7 @@ begin
 case OptForm.radiogroup6.itemindex of
 0 : begin
     CreateDir(qldir);
-    DownloadDialog1.URL:=StringReplace(qlurl,'$$$$',CleanName(starname),[]) ;
+    DownloadDialog1.URL:=StringReplace(OptForm.qlurl.Text,'$star',CleanName(starname),[]) ;
     DownloadDialog1.SaveToFile:=qlfn;
     DownloadDialog1.Title:='AAVSO QuickLook';
     if DownloadDialog1.Execute then begin;
@@ -1306,7 +1306,7 @@ case OptForm.radiogroup6.itemindex of
     end;
 1 : begin
     CreateDir(ExtractFilePath(afoevfn));
-    DownloadDialog1.URL:=afoevurl+afoevdir+'/'+afoevname;
+    DownloadDialog1.URL:=OptForm.afoevurl.Text+afoevdir+'/'+afoevname;
     DownloadDialog1.SaveToFile:=afoevfn;
     DownloadDialog1.Title:='AFOEV data archive';
     DownloadDialog1.FtpUserName:='anonymous';

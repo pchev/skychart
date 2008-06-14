@@ -559,16 +559,14 @@ object OptForm: TOptForm
     end
     object TabSheet4: TTabSheet
       Caption = 'Charts'
-      ClientHeight = 246
-      ClientWidth = 424
       object GroupBox6: TGroupBox
         Left = 12
         Height = 112
         Top = 122
         Width = 385
         Caption = 'Cartes du Ciel / Sky Charts interface'
-        ClientHeight = 94
-        ClientWidth = 381
+        ClientHeight = 112
+        ClientWidth = 385
         TabOrder = 0
         object Label5: TLabel
           Left = 14
@@ -619,8 +617,8 @@ object OptForm: TOptForm
         Top = 10
         Width = 385
         Caption = 'AAVSO Chart'
-        ClientHeight = 88
-        ClientWidth = 381
+        ClientHeight = 106
+        ClientWidth = 385
         TabOrder = 1
         object DirectoryEdit2: TDirectoryEdit
           Left = 12
@@ -645,8 +643,8 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 30
-          ClientWidth = 344
+          ClientHeight = 48
+          ClientWidth = 348
           Columns = 2
           Items.Strings = (
             'Online charts'
@@ -655,6 +653,84 @@ object OptForm: TOptForm
           OnClick = RadioGroup8Click
           TabOrder = 1
         end
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'URL'
+      ClientHeight = 246
+      ClientWidth = 424
+      object Label7: TLabel
+        Left = 12
+        Height = 16
+        Top = 214
+        Width = 269
+        Caption = 'Do NOT change any of this without a good reason!'
+        ParentColor = False
+      end
+      object qlurl: TLabeledEdit
+        Left = 12
+        Height = 21
+        Top = 26
+        Width = 392
+        EditLabel.Left = 12
+        EditLabel.Height = 16
+        EditLabel.Top = 7
+        EditLabel.Width = 102
+        EditLabel.Caption = 'AAVSO Quick Look'
+        EditLabel.ParentColor = False
+        ParentColor = False
+        TabOrder = 0
+      end
+      object afoevurl: TLabeledEdit
+        Left = 12
+        Height = 21
+        Top = 74
+        Width = 392
+        EditLabel.Left = 12
+        EditLabel.Height = 16
+        EditLabel.Top = 55
+        EditLabel.Width = 93
+        EditLabel.Caption = 'AFOEF FTP server'
+        EditLabel.ParentColor = False
+        ParentColor = False
+        TabOrder = 1
+      end
+      object charturl: TLabeledEdit
+        Left = 12
+        Height = 21
+        Top = 126
+        Width = 392
+        EditLabel.Left = 12
+        EditLabel.Height = 16
+        EditLabel.Top = 107
+        EditLabel.Width = 76
+        EditLabel.Caption = 'AAVSO Charts'
+        EditLabel.ParentColor = False
+        ParentColor = False
+        TabOrder = 2
+      end
+      object webobsurl: TLabeledEdit
+        Left = 12
+        Height = 21
+        Top = 176
+        Width = 392
+        EditLabel.Left = 12
+        EditLabel.Height = 16
+        EditLabel.Top = 157
+        EditLabel.Width = 87
+        EditLabel.Caption = 'AAVSO WebObs'
+        EditLabel.ParentColor = False
+        ParentColor = False
+        TabOrder = 3
+      end
+      object Button1: TButton
+        Left = 300
+        Height = 25
+        Top = 210
+        Width = 107
+        Caption = 'Reset to default'
+        OnClick = Button1Click
+        TabOrder = 4
       end
     end
   end
