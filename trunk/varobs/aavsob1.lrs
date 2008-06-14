@@ -1,0 +1,46 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TForm1','FORMDATA',[
+  'TPF0'#6'TForm1'#5'Form1'#4'Left'#3#140#1#6'Height'#3#150#1#3'Top'#2'k'#5'Wid'
+  +'th'#3#185#1#18'HorzScrollBar.Page'#3#184#1#18'VertScrollBar.Page'#3#149#1#13
+  +'ActiveControl'#7#7'Button1'#7'Caption'#6#14'AAVSO Bulletin'#12'ClientHeight'
+  +#3#150#1#11'ClientWidth'#3#185#1#11'Font.Height'#2#245#9'Font.Name'#6#13'MS '
+  +'Sans Serif'#8'OnCreate'#7#10'FormCreate'#6'OnShow'#7#8'FormShow'#8'Position'
+  +#7#16'poDefaultPosOnly'#0#6'TLabel'#6'Label1'#4'Left'#2'('#6'Height'#2#16#3
+  +'Top'#3#196#0#5'Width'#3#147#0#7'Caption'#6#29'Current Year of the bulletin:'
+  +#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2'('#6'Height'#2#31#3'Top'
+  +#3#238#0#5'Width'#3#159#0#7'Caption'#6';AAVSO LPV Bulletin Single file'#13#10
+  +'Plain Text - By designation'#11'ParentColor'#8#0#0#6'TLabel'#6'Label3'#4'Le'
+  +'ft'#3'0'#1#6'Height'#2#16#3'Top'#3'F'#1#5'Width'#2#6#11'ParentColor'#8#0#0#6
+  +'TLabel'#6'Label4'#4'Left'#2'('#6'Height'#2#31#3'Top'#3#26#1#5'Width'#2'w'#7
+  +'Caption'#6'''Varobs GCVS by'#13#10'constellation directory'#11'ParentColor'
+  +#8#0#0#6'TLabel'#6'Label5'#4'Left'#2'('#6'Height'#2#31#3'Top'#3#152#0#5'Widt'
+  +'h'#3#141#0#7'Caption'#6'2AAVSO Validation file. '#13#10'Long form: By desig'
+  +'nation'#11'ParentColor'#8#0#0#6'TLabel'#6'Label6'#4'Left'#2'('#6'Height'#2
+  +'['#3'Top'#2#8#5'Width'#3#136#1#7'Caption'#12'G'#1#0#0'Use this form to refr'
+  +'esh the Long Period Variables maxima epoch'#13#10'using the AAVSO Bulletin '
+  +'for the current year.'#13#10'This produce two files aavsoval.txt and aavsoY'
+  +'YYY.txt that can be use'#13#10'in input to VarObs.'#13#10'All data are take'
+  +' in priority from the Bulletin or the Validation File, missing '#13#10'valu'
+  +'es are then completed from the GCVS.'#11'ParentColor'#8#0#0#6'TLabel'#6'Lab'
+  +'el7'#6'Cursor'#7#11'crHandPoint'#4'Left'#2'('#6'Height'#2#14#3'Top'#2'p'#5
+  +'Width'#3#186#0#7'Caption'#6'$http://www.aavso.org/observing/aids/'#5'Color'
+  +#7#9'clBtnFace'#10'Font.Color'#7#6'clBlue'#11'Font.Height'#2#245#9'Font.Name'
+  +#6#13'MS Sans Serif'#11'ParentColor'#8#11'Transparent'#8#7'OnClick'#7#11'Lab'
+  +'el7Click'#0#0#6'TLabel'#6'Label8'#4'Left'#2'('#6'Height'#2#16#3'Top'#2'`'#5
+  +'Width'#3#20#1#7'Caption'#6'4Get the AAVSO Validation file and LPV Bulletin '
+  +'from:'#11'ParentColor'#8#0#0#7'TButton'#7'Button1'#4'Left'#3#208#0#6'Height'
+  +#2#25#3'Top'#3'@'#1#5'Width'#2'K'#7'Caption'#6#3'GO!'#7'OnClick'#7#12'Button'
+  +'1Click'#8'TabOrder'#2#0#0#0#5'TEdit'#5'Edit1'#4'Left'#3#208#0#6'Height'#2#21
+  +#3'Top'#3#192#0#5'Width'#2')'#8'OnChange'#7#11'Edit1Change'#9'OnKeyDown'#13#8
+  +'TabOrder'#2#1#4'Text'#6#4'1900'#0#0#5'TEdit'#5'Edit2'#4'Left'#3#208#0#6'Hei'
+  +'ght'#2#21#3'Top'#3#234#0#5'Width'#2'y'#8'TabOrder'#2#2#4'Text'#6#12'bullet0'
+  +'1.txt'#0#0#5'TEdit'#5'Edit3'#4'Left'#3#208#0#6'Height'#2#21#3'Top'#3#22#1#5
+  +'Width'#2'y'#8'TabOrder'#2#3#4'Text'#6#20'E:\var\varobs\const\'#0#0#5'TEdit'
+  +#5'Edit4'#4'Left'#3#208#0#6'Height'#2#21#3'Top'#3#148#0#5'Width'#2'y'#8'TabO'
+  +'rder'#2#4#4'Text'#6#11'vallong.txt'#0#0#7'TButton'#7'Button2'#4'Left'#3'`'#1
+  +#6'Height'#2#25#3'Top'#3'@'#1#5'Width'#2'K'#7'Caption'#6#5'Close'#7'OnClick'
+  +#7#12'Button2Click'#8'TabOrder'#2#5#0#0#7'TUpDown'#7'UpDown1'#4'Left'#3#249#0
+  +#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2#16#9'Associate'#7#5'Edit1'#3'Min'#3
+  +'l'#7#3'Max'#3#15''''#8'Position'#3'l'#7#8'TabOrder'#2#6#9'Thousands'#8#0#0#0
+]);
