@@ -42,7 +42,6 @@ pulslist=' ACYG BCEP BCEPS BLBOO CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC L L
 rotlist=' ACV ACVO BY ELL FKCOM PSR SXARI ';
 ecllist=' E EA EB EW GS PN RS WD WR AR D DM DS DW K KE KW SD ';
 
-aavsocharturl='http://mira.aavso.org/cgi-bin/vsp.pl?action=render&name=$star&ra=&dec=&charttitle=&chartcomment=&aavsoscale=$scale&fov=$fov&resolution=150&maglimit=$mag&north=$north&east=$east&othervars=gcvs&Submit=Plot+Chart';
 aavsochartscale: array[0..13] of string=('A','AR','B','BR','C','CR','D','DR','E','ER','F','FR','G','GR');
 aavsochartfov: array[0..13] of string=('900','900','180','180','120','120','60','60','30','30','15','15','7.5','7.5');
 aavsochartmag: array[0..13] of string=('9','9','11','11','12','12','14.5','14.5','16.5','16.5','18.5','18.5','20.5','20.5');
@@ -77,7 +76,7 @@ OpenFileCMD='kfmclient exec';
 
 
 var
-  datim,datact,qlurl,qlinfo,afoevurl,afoevinfo,pcobscaption : string;
+  datim,datact,defaavsocharturl,defqlurl,defafoevurl,defwebobsurl,aavsourl,varobsurl,pcobscaption : string;
   lockdate : boolean;
   lockselect : boolean;
   started : boolean;

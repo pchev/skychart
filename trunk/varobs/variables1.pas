@@ -824,7 +824,7 @@ end;
 procedure TVarForm.Open1Click(Sender: TObject);
 begin
 try
-opendialog1.FilterIndex:=1;
+opendialog1.FilterIndex:=2;
 opendialog1.InitialDir:=privatedir;
 opendialog1.Filename:=slash(privatedir)+'obs.dat';
 if opendialog1.execute then begin
@@ -841,7 +841,7 @@ end;
 procedure TVarForm.MenuItem6Click(Sender: TObject);
 begin
 try
-opendialog1.FilterIndex:=1;
+opendialog1.FilterIndex:=2;
 opendialog1.InitialDir:=ConstDir;
 opendialog1.Filename:=slash(ConstDir)+'And.dat';
 opendialog1.DoFolderChange;
@@ -866,11 +866,16 @@ timepicker1.time:=now;
 decodedate(now,year,month,day);
 DateEdit1.date:=now;
 planname:=slash(privatedir)+'aavsoeasy.dat';
-if not fileexists(planname) then CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.dat',planname,true);
-qlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$$$$&output=votable';
-qlinfo:='http://www.aavso.org/data/ql/';
-afoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
-afoevinfo:='http://cdsweb.u-strasbg.fr/afoev/english.htx';
+if not fileexists(planname) then begin
+  CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.dat',planname,true);
+  CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.plan',slash(privatedir)+'aavsoeasy.plan',true);
+end;
+defqlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$star&output=votable';
+defafoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
+defaavsocharturl:='http://mira.aavso.org/cgi-bin/vsp.pl?action=render&name=$star&ra=&dec=&charttitle=&chartcomment=&aavsoscale=$scale&fov=$fov&resolution=150&maglimit=$mag&north=$north&east=$east&othervars=gcvs&Submit=Plot+Chart';
+defwebobsurl:='http://www.aavso.org/observing/submit/webobs.shtml';
+aavsourl:='http://www.aavso.org';
+varobsurl:='http://www.ap-i.net/skychart';
 pcobscaption:='PCObs Data Entry';
 inifile:=Tinifile.create(configfile);
 section:='Default';
@@ -892,6 +897,10 @@ with inifile do begin
     OptForm.CheckBox1.checked:=ReadBool(section,'skycharteq',true);
     OptForm.CheckBox2.checked:=ReadBool(section,'skychartzoom',true);
     OptForm.SpinEdit1.value:=ReadInteger(section,'skychartzoomto',15);
+    OptForm.qlurl.text:=ReadString(section,'quicklookurl',defqlurl);
+    OptForm.afoevurl.text:=ReadString(section,'afoevurl',defafoevurl);
+    OptForm.charturl.text:=ReadString(section,'charturl',defaavsocharturl);
+    OptForm.webobsurl.text:=ReadString(section,'webobsurl',defwebobsurl);
     OptForm.FilenameEdit3.text:=ReadString(section,'fobs',slash(privatedir)+'aavsovis.txt');
     OptForm.Edit1.text:=ReadString(section,'namepos','1');
     OptForm.Edit2.text:=ReadString(section,'datepos','2');
@@ -997,6 +1006,10 @@ with inifile do begin
     WriteBool(section,'skycharteq',OptForm.CheckBox1.checked);
     WriteBool(section,'skychartzoom',OptForm.CheckBox2.checked);
     WriteInteger(section,'skychartzoomto',OptForm.SpinEdit1.value);
+    WriteString(section,'quicklookurl',OptForm.qlurl.text);
+    WriteString(section,'afoevurl',OptForm.afoevurl.text);
+    WriteString(section,'charturl',OptForm.charturl.text);
+    WriteString(section,'webobsurl',OptForm.webobsurl.text);
     WriteString(section,'namepos',OptForm.Edit1.text);
     WriteString(section,'datepos',OptForm.Edit2.text);
     WriteString(section,'magpos',OptForm.Edit3.text);
@@ -1263,6 +1276,10 @@ procedure TVarForm.Newobservation1Click(Sender: TObject);
 begin
 case Optform.radiogroup5.itemindex of
 0 : begin
+    if trim(optform.Edit4.text)='' then begin
+       ShowMessage('Set your observer initial using the Option menu first!');
+       exit;
+    end;
     ObsUnit.current:=CurrentRow;
     if Obsform.Visible then begin
       ObsForm.Edit1.text:=varform.Grid1.Cells[0,CurrentRow];
@@ -1280,7 +1297,7 @@ case Optform.radiogroup5.itemindex of
     RunPCObs;
     end;
 2: begin
-    executefile('http://www.aavso.org/observing/submit/webobs.shtml');
+    executefile(OptForm.webobsurl.Text);
     end;
 end;
 end;
@@ -1317,7 +1334,7 @@ end;
 
 procedure TVarForm.AAVSOwebpage1Click(Sender: TObject);
 begin
-executefile('http://www.aavso.org');
+executefile(aavsourl);
 end;
 
 procedure TVarForm.AAVSOChart1Click(Sender: TObject);

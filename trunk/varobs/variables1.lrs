@@ -1,5 +1,3 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('TVarForm','FORMDATA',[
   'TPF0'#8'TVarForm'#7'VarForm'#4'Left'#3#23#1#6'Height'#3'X'#2#3'Top'#2'b'#5'W'
   +'idth'#3' '#3#18'HorzScrollBar.Page'#3#31#3#18'VertScrollBar.Page'#3'C'#2#13
@@ -161,26 +159,26 @@ LazarusResources.Add('TVarForm','FORMDATA',[
   +'",'#10'">>:   :   $:O#",'#10'">>::::::::::O#",'#10'">>  O OO O  O#",'#10'">'
   +'>>###########"'#10'};'#10#9'NumGlyphs'#2#1#8'OnChange'#7#15'DateEdit1Change'
   +#8'TabOrder'#2#6#0#0#11'TTimePicker'#11'TimePicker1'#4'Left'#3#176#0#6'Heigh'
-  +'t'#2#23#3'Top'#2#6#5'Width'#2'e'#4'Time'#5#0'0Tv'#152#186#220#202#253'?'#8
-  +'OnChange'#7#15'DateEdit1Change'#7'Enabled'#9#8'TabOrder'#2#7#0#0#0#19'TPrin'
-  +'terSetupDialog'#19'PrinterSetupDialog1'#4'left'#3#192#0#3'top'#3#184#0#0#0#9
-  +'TMainMenu'#9'MainMenu1'#4'left'#2'p'#3'top'#3#147#0#0#9'TMenuItem'#5'File1'
-  +#7'Caption'#6#5'&File'#0#9'TMenuItem'#5'Open1'#7'Caption'#6#20'&Open Observi'
-  +'ng Plan'#7'OnClick'#7#10'Open1Click'#0#0#9'TMenuItem'#9'MenuItem6'#7'Captio'
-  +'n'#6#18'Open Constellation'#7'OnClick'#7#14'MenuItem6Click'#0#0#9'TMenuItem'
-  +#6'Print1'#7'Caption'#6#6'&Print'#7'OnClick'#7#11'Print1Click'#0#0#9'TMenuIt'
-  +'em'#13'Printersetup1'#7'Caption'#6#14'Printer &setup'#7'OnClick'#7#18'Print'
-  +'ersetup1Click'#0#0#9'TMenuItem'#8'Setting1'#7'Caption'#6#8'&Options'#7'OnCl'
-  +'ick'#7#13'Setting1Click'#0#0#9'TMenuItem'#2'N6'#7'Caption'#6#1'-'#0#0#9'TMe'
-  +'nuItem'#5'Exit1'#7'Caption'#6#5'E&xit'#7'OnClick'#7#10'Exit1Click'#0#0#0#9
-  +'TMenuItem'#9'MenuItem1'#7'Caption'#6#7'&Action'#0#9'TMenuItem'#9'MenuItem2'
-  +#7'Caption'#6#17'Show &Light curve'#7'OnClick'#7#16'Lightcurve1Click'#0#0#9
-  +'TMenuItem'#9'MenuItem3'#7'Caption'#6#18'Enter &observation'#7'OnClick'#7#20
-  +'Newobservation1Click'#0#0#9'TMenuItem'#9'MenuItem4'#7'Caption'#6#12'&AAVSO '
-  +'Chart'#7'OnClick'#7#16'AAVSOChart1Click'#0#0#9'TMenuItem'#9'MenuItem5'#7'Ca'
-  +'ption'#6#21'&Cartes du Ciel Chart'#7'OnClick'#7#15'ShowChart1Click'#0#0#0#9
-  +'TMenuItem'#11'AAVSOTools1'#7'Caption'#6#6'&Tools'#0#9'TMenuItem'#19'Prepare'
-  +'LPVBulletin1'#7'Caption'#6#27'&Prepare AAVSO LPV Bulletin'#7'OnClick'#7#24
+  +'t'#2#23#3'Top'#2#6#5'Width'#2'e'#4'Time'#5#0#208'Ov'#152#186#220#202#253'?'
+  +#8'OnChange'#7#15'DateEdit1Change'#7'Enabled'#9#8'TabOrder'#2#7#0#0#0#19'TPr'
+  +'interSetupDialog'#19'PrinterSetupDialog1'#4'left'#3#192#0#3'top'#3#184#0#0#0
+  +#9'TMainMenu'#9'MainMenu1'#4'left'#2'p'#3'top'#3#147#0#0#9'TMenuItem'#5'File'
+  +'1'#7'Caption'#6#5'&File'#0#9'TMenuItem'#5'Open1'#7'Caption'#6#20'&Open Obse'
+  +'rving Plan'#7'OnClick'#7#10'Open1Click'#0#0#9'TMenuItem'#9'MenuItem6'#7'Cap'
+  +'tion'#6#18'Open Constellation'#7'OnClick'#7#14'MenuItem6Click'#0#0#9'TMenuI'
+  +'tem'#6'Print1'#7'Caption'#6#6'&Print'#7'OnClick'#7#11'Print1Click'#0#0#9'TM'
+  +'enuItem'#13'Printersetup1'#7'Caption'#6#14'Printer &setup'#7'OnClick'#7#18
+  +'Printersetup1Click'#0#0#9'TMenuItem'#8'Setting1'#7'Caption'#6#8'&Options'#7
+  +'OnClick'#7#13'Setting1Click'#0#0#9'TMenuItem'#2'N6'#7'Caption'#6#1'-'#0#0#9
+  +'TMenuItem'#5'Exit1'#7'Caption'#6#5'E&xit'#7'OnClick'#7#10'Exit1Click'#0#0#0
+  +#9'TMenuItem'#9'MenuItem1'#7'Caption'#6#7'&Action'#0#9'TMenuItem'#9'MenuItem'
+  +'2'#7'Caption'#6#17'Show &Light curve'#7'OnClick'#7#16'Lightcurve1Click'#0#0
+  +#9'TMenuItem'#9'MenuItem3'#7'Caption'#6#18'Enter &observation'#7'OnClick'#7
+  +#20'Newobservation1Click'#0#0#9'TMenuItem'#9'MenuItem4'#7'Caption'#6#12'&AAV'
+  +'SO Chart'#7'OnClick'#7#16'AAVSOChart1Click'#0#0#9'TMenuItem'#9'MenuItem5'#7
+  +'Caption'#6#21'&Cartes du Ciel Chart'#7'OnClick'#7#15'ShowChart1Click'#0#0#0
+  +#9'TMenuItem'#11'AAVSOTools1'#7'Caption'#6#6'&Tools'#0#9'TMenuItem'#19'Prepa'
+  +'reLPVBulletin1'#7'Caption'#6#27'&Prepare AAVSO LPV Bulletin'#7'OnClick'#7#24
   +'PrepareLPVBulletin1Click'#0#0#9'TMenuItem'#20'Createobservingplan1'#7'Capti'
   +'on'#6'*&Create observing plan from AAVSO Bulletin'#7'OnClick'#7#25'Createob'
   +'servingplan1Click'#0#0#9'TMenuItem'#13'AAVSOwebpage1'#7'Caption'#6#15'&AAVS'
