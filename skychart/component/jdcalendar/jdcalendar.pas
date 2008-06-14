@@ -886,13 +886,11 @@ EditS.Text:=formatdatetime('ss',Value);
 end;
 
 function TTimePicker.ReadTime: TDateTime;
-var val: string;
 begin
 EditH.Text:=FixNum(EditH.Text,2);
 EditM.Text:=FixNum(EditM.Text,2);
 EditS.Text:=FixNum(EditS.Text,2);
-val:=trim(EditH.Text)+':'+trim(EditM.Text)+':'+trim(EditS.Text);
-result:=strtotime(val);
+result:=(strtointdef(EditH.Text,0)+(strtointdef(EditM.Text,0)/60)+(strtointdef(EditM.Text,0)/3600))/24;
 end;
 
 procedure TTimePicker.Paint;
