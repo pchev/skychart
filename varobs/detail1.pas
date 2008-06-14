@@ -996,8 +996,6 @@ with DetailForm.Image1.Canvas do begin
      ma:=(Yp-By)/Ay + m1;
   end;
   movecursor:=true;
-//  moveto(Xp,ymax-By);
-//  lineto(Xp,By);
   moveto(Xp,ymax);
   lineto(Xp,0);
   moveto(Xp-5,Yp);
@@ -1015,8 +1013,6 @@ with DetailForm.Image1.Canvas do begin
   screen.cursor:=crDefault;
   Pen.color:=clWhite;
   Pen.mode:=pmXor;
-//  moveto(Xp,ymax-By);
-//  lineto(Xp,By);
   moveto(Xp,ymax);
   lineto(Xp,0);
   moveto(Xp-5,Yp);
@@ -1035,9 +1031,7 @@ begin
 if movecursor and (shift=[ssLeft])and(X>Bx)and(X<(xmax-mx)) then with DetailForm.Image1.Canvas do begin
   Pen.color:=clWhite;
   Pen.mode:=pmXor;
-//  moveto(Xp,ymax-By);
   moveto(Xp,ymax);
-//  lineto(Xp,By);
   lineto(Xp,0);
   moveto(Xp-5,Yp);
   lineto(Xp+5,Yp);
@@ -1067,9 +1061,7 @@ if movecursor and (shift=[ssLeft])and(X>Bx)and(X<(xmax-mx)) then with DetailForm
      Yp:=Y;
      ma:=(Yp-By)/Ay + m1;
   end;
-//  moveto(Xp,ymax-By);
   moveto(Xp,ymax);
-//  lineto(Xp,By);
   lineto(Xp,0);
   moveto(Xp-5,Yp);
   lineto(Xp+5,Yp);

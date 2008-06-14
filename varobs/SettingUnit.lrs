@@ -16,174 +16,180 @@ LazarusResources.Add('TOptForm','FORMDATA',[
   +'tHeight'#3#246#0#11'ClientWidth'#3#168#1#0#9'TGroupBox'#9'GroupBox5'#4'Left'
   +#2#20#6'Height'#3#216#0#3'Top'#2#18#5'Width'#3#129#1#7'Caption'#6#17'Observa'
   +'tion Entry'#12'ClientHeight'#3#198#0#11'ClientWidth'#3'}'#1#8'TabOrder'#2#0
-  +#0#6'TLabel'#7'Label16'#4'Left'#2#6#6'Height'#2#27#3'Top'#2'p'#5'Width'#2'.'
+  +#0#6'TLabel'#7'Label16'#4'Left'#2#6#6'Height'#2#31#3'Top'#2'p'#5'Width'#2'0'
   +#7'Caption'#6#20'Observer'#13#10'Initials :'#11'ParentColor'#8#0#0#6'TPanel'
   +#6'Panel2'#4'Left'#3#150#0#6'Height'#3#180#0#3'Top'#2#6#5'Width'#3#227#0#12
   +'ClientHeight'#3#180#0#11'ClientWidth'#3#227#0#8'TabOrder'#2#2#0#6'TLabel'#7
-  +'Label22'#4'Left'#2#16#6'Height'#2#14#3'Top'#2'R'#5'Width'#2'{'#7'Caption'#6
-  +#24'PCObs program location :'#11'ParentColor'#8#0#0#6'TLabel'#7'Label23'#4'L'
-  +'eft'#2#8#6'Height'#2'('#3'Top'#2#18#5'Width'#3#193#0#7'Caption'#6'lLaunch A'
-  +'AVSO PCObs for data entry'#13#10'This option is recommended if you want '#13
-  +#10'to submit your data to the AAVSO'#11'ParentColor'#8#0#0#13'TFileNameEdit'
-  +#13'FileNameEdit8'#4'Left'#2#16#6'Height'#2#23#3'Top'#2'm'#5'Width'#3#169#0
+  +'Label22'#4'Left'#2#16#6'Height'#2#16#3'Top'#2'R'#5'Width'#3#138#0#7'Caption'
+  +#6#24'PCObs program location :'#11'ParentColor'#8#0#0#6'TLabel'#7'Label23'#4
+  +'Left'#2#8#6'Height'#2'.'#3'Top'#2#18#5'Width'#3#218#0#7'Caption'#6'lLaunch '
+  +'AAVSO PCObs for data entry'#13#10'This option is recommended if you want '
+  +#13#10'to submit your data to the AAVSO'#11'ParentColor'#8#0#0#13'TFileNameE'
+  +'dit'#13'FileNameEdit8'#4'Left'#2#16#6'Height'#2#23#3'Top'#2'm'#5'Width'#3
+  +#169#0#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2
+  +#0#0#0#0#6'TPanel'#6'Panel1'#4'Left'#3#150#0#6'Height'#3#178#0#3'Top'#2#8#5
+  +'Width'#3#227#0#12'ClientHeight'#3#178#0#11'ClientWidth'#3#227#0#8'TabOrder'
+  +#2#1#0#6'TLabel'#7'Label15'#4'Left'#2#6#6'Height'#2#16#3'Top'#2':'#5'Width'#2
+  +'Z'#7'Caption'#6#18'Observation file :'#11'ParentColor'#8#0#0#11'TRadioGroup'
+  +#11'RadioGroup7'#4'Left'#2#6#6'Height'#2'L'#3'Top'#2'`'#5'Width'#3#204#0#8'A'
+  +'utoFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpa'
+  +'cing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'
+  +#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizi'
+  +'ng.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7
+  +#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBotto'
+  +'m'#27'ChildSizing.ControlsPerLine'#2#1#12'ClientHeight'#2':'#11'ClientWidth'
+  +#3#200#0#9'ItemIndex'#2#1#13'Items.Strings'#1#6#26'Append data to unique fil'
+  +'e'#6#28'Add date/time suffix to file'#0#8'TabOrder'#2#2#0#0#11'TRadioGroup'
+  +#11'RadioGroup4'#4'Left'#2#6#6'Height'#2'8'#5'Width'#3#204#0#8'AutoFill'#9#7
+  +'Caption'#6#6'Format'#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.To'
+  +'pBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChi'
+  +'ldResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28
+  +'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVer'
+  +'tical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenT'
+  +'opToBottom'#27'ChildSizing.ControlsPerLine'#2#2#12'ClientHeight'#2'&'#11'Cl'
+  +'ientWidth'#3#200#0#7'Columns'#2#2#9'ItemIndex'#2#0#13'Items.Strings'#1#6#12
+  +'AAVSO Visual'#6#5'VSNET'#0#8'TabOrder'#2#0#0#0#13'TFileNameEdit'#13'FileNam'
+  +'eEdit3'#4'Left'#2#6#6'Height'#2#23#3'Top'#2'I'#5'Width'#3#176#0#11'ButtonWi'
+  +'dth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#1#0#0#0#11'TRadi'
+  +'oGroup'#11'RadioGroup5'#4'Left'#2#8#6'Height'#2'c'#3'Top'#2#6#5'Width'#3#134
+  +#0#8'AutoFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBott'
+  +'omSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildRes'
+  +'ize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'Chil'
+  +'dSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertica'
+  +'l'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopTo'
+  +'Bottom'#27'ChildSizing.ControlsPerLine'#2#1#12'ClientHeight'#2'Q'#11'Client'
+  +'Width'#3#130#0#9'ItemIndex'#2#0#13'Items.Strings'#1#6#17'Internal facility'
+  +#6#11'AAVSO PCObs'#6#12'AAVSO WebObs'#0#7'OnClick'#7#16'RadioGroup5Click'#8
+  +'TabOrder'#2#0#0#0#5'TEdit'#5'Edit4'#4'Left'#2'D'#6'Height'#2#21#3'Top'#2't'
+  +#5'Width'#2'5'#8'TabOrder'#2#3#0#0#0#0#9'TTabSheet'#9'TabSheet2'#7'Caption'#6
+  +#16'Plot observation'#0#9'TGroupBox'#9'GroupBox2'#4'Left'#3#150#0#6'Height'#3
+  +#208#0#3'Top'#2#10#5'Width'#3#249#0#7'Caption'#6#12'VSNET format'#12'ClientH'
+  +'eight'#3#208#0#11'ClientWidth'#3#249#0#8'TabOrder'#2#0#0#6'TLabel'#6'Label9'
+  ,#4'Left'#2#8#6'Height'#2'u'#3'Top'#2#20#5'Width'#3#225#0#8'AutoSize'#8#7'Cap'
+  +'tion'#6#213'Free format. Fields are separated by at least one blank space a'
+  +'nd appear in this order'#13#10' '#13#10'Star name '#13#10'Universal Time in'
+  +' decimal format: yymmdd.tttt'#13#10'Magnitude,  < for fainter-than,  : unce'
+  +'rtain'#13#10'Observer'#13#10'Comment'#11'ParentColor'#8#8'WordWrap'#9#0#0#6
+  +'TLabel'#7'Label10'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#144#0#5'Width'#2'.'#7
+  +'Caption'#6#9'File name'#11'ParentColor'#8#0#0#13'TFileNameEdit'#13'FileName'
+  +'Edit2'#4'Left'#2#8#6'Height'#2#23#3'Top'#3#161#0#5'Width'#3#208#0#11'Button'
+  +'Width'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#0#0#0#0#9'TGro'
+  +'upBox'#9'GroupBox3'#4'Left'#3#150#0#6'Height'#3#209#0#3'Top'#2#11#5'Width'#3
+  +#249#0#7'Caption'#6#17'AFOEV base folder'#12'ClientHeight'#3#209#0#11'Client'
+  +'Width'#3#249#0#8'TabOrder'#2#1#7'Visible'#8#0#6'TLabel'#6'Label4'#4'Left'#2
+  +#8#6'Height'#2'e'#3'Top'#2#28#5'Width'#3#225#0#8'AutoSize'#8#7'Caption'#6#143
+  +'Indicate the path to the constellation folder.'#13#10' '#13#10'c:\afoev\   '
+  +' '#13#10'                and\ '#13#10'                         r'#13#10'   '
+  +'                      s'#11'ParentColor'#8#8'WordWrap'#9#0#0#14'TDirectoryE'
+  +'dit'#14'DirectoryEdit3'#4'Left'#2#8#6'Height'#2#23#3'Top'#3#159#0#5'Width'#3
+  +#204#0#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2
+  +#0#0#0#0#9'TGroupBox'#9'GroupBox4'#4'Left'#3#150#0#6'Height'#3#207#0#3'Top'#2
+  +#11#5'Width'#3#249#0#7'Caption'#6#31'Other format fields description'#12'Cli'
+  +'entHeight'#3#207#0#11'ClientWidth'#3#249#0#8'TabOrder'#2#2#7'Visible'#8#0#6
+  +'TLabel'#6'Label1'#4'Left'#2#8#6'Height'#2#14#3'Top'#2'.'#5'Width'#2'2'#7'Ca'
+  +'ption'#6#9'Star name'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#8
+  +#6'Height'#2#14#3'Top'#2'D'#5'Width'#2#23#7'Caption'#6#4'Time'#11'ParentColo'
+  +'r'#8#0#0#6'TLabel'#6'Label3'#4'Left'#2#8#6'Height'#2#14#3'Top'#2'Z'#5'Width'
+  +#2'3'#7'Caption'#6#9'Magnitude'#11'ParentColor'#8#0#0#6'TLabel'#7'Label11'#4
+  +'Left'#2#8#6'Height'#2#14#3'Top'#3#143#0#5'Width'#2'.'#7'Caption'#6#9'File n'
+  +'ame'#11'ParentColor'#8#0#0#6'TLabel'#7'Label12'#4'Left'#3#144#0#6'Height'#2
+  +#14#3'Top'#2'.'#5'Width'#2''''#7'Caption'#6#8'Field No'#11'ParentColor'#8#0#0
+  +#6'TLabel'#7'Label13'#4'Left'#3#144#0#6'Height'#2#14#3'Top'#2'D'#5'Width'#2
+  +''''#7'Caption'#6#8'Field No'#11'ParentColor'#8#0#0#6'TLabel'#7'Label14'#4'L'
+  +'eft'#3#144#0#6'Height'#2#14#3'Top'#2'Z'#5'Width'#2''''#7'Caption'#6#8'Field'
+  +' No'#11'ParentColor'#8#0#0#11'TRadioGroup'#11'RadioGroup2'#4'Left'#2#8#6'He'
+  +'ight'#2#30#3'Top'#2'j'#5'Width'#3#225#0#8'AutoFill'#9#28'ChildSizing.LeftRi'
+  +'ghtSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.Enlarge'
+  +'Horizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7
+  +#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScale'
+  +'Childs'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.'
+  +'Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'
+  +#2#2#12'ClientHeight'#2#30#11'ClientWidth'#3#225#0#7'Columns'#2#2#9'ItemInde'
+  +'x'#2#1#13'Items.Strings'#1#6#11'Julian date'#6#10'Decimal UT'#0#8'TabOrder'
+  +#2#0#0#0#5'TEdit'#5'Edit1'#4'Left'#2'H'#6'Height'#2#21#3'Top'#2'*'#5'Width'#2
+  +'A'#8'TabOrder'#2#1#4'Text'#6#1'1'#0#0#5'TEdit'#5'Edit2'#4'Left'#2'H'#6'Heig'
+  +'ht'#2#21#3'Top'#2'@'#5'Width'#2'A'#8'TabOrder'#2#2#4'Text'#6#1'2'#0#0#5'TEd'
+  +'it'#5'Edit3'#4'Left'#2'H'#6'Height'#2#21#3'Top'#2'V'#5'Width'#2'A'#8'TabOrd'
+  +'er'#2#3#4'Text'#6#1'3'#0#0#11'TRadioGroup'#11'RadioGroup3'#4'Left'#2#12#6'H'
+  +'eight'#2'%'#3'Top'#2#255#5'Width'#3#225#0#8'AutoFill'#9#28'ChildSizing.Left'
+  +'RightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.Enlar'
+  +'geHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'
+  +#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsSca'
+  +'leChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizin'
+  +'g.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLin'
+  +'e'#2#2#12'ClientHeight'#2'%'#11'ClientWidth'#3#225#0#7'Columns'#2#2#9'ItemI'
+  +'ndex'#2#0#13'Items.Strings'#1#6#15'Variable format'#6#12'Fixed format'#0#7
+  +'OnClick'#7#16'RadioGroup3Click'#8'TabOrder'#2#4#0#0#13'TFileNameEdit'#13'Fi'
+  +'leNameEdit4'#4'Left'#2#8#6'Height'#2#23#3'Top'#3#161#0#5'Width'#3#204#0#11
+  +'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#5#0#0#0#9
+  +'TGroupBox'#9'GroupBox1'#4'Left'#3#150#0#6'Height'#3#209#0#3'Top'#2#10#5'Wid'
+  +'th'#3#249#0#7'Caption'#6#16'AAVSO SUM format'#12'ClientHeight'#3#209#0#11'C'
+  +'lientWidth'#3#249#0#8'TabOrder'#2#3#7'Visible'#8#0#6'TLabel'#7'Label19'#4'L'
+  +'eft'#2#8#6'Height'#2#14#3'Top'#3#144#0#5'Width'#2'.'#7'Caption'#6#9'File na'
+  +'me'#11'ParentColor'#8#0#0#6'TLabel'#7'Label18'#4'Left'#2#8#6'Height'#2'u'#3
+  +'Top'#2#20#5'Width'#3#225#0#8'AutoSize'#8#7'Caption'#12#22#1#0#0'Col  1-8   '
+  +'  Designation from Validation File'#13#10'Col  9-18   Star name'#13#10'Col '
+  ,'19-30  Julian Date and GMAT time'#13#10'Col 31-36  Magnitude'#13#10'       '
+  +'         < in column 31 for fainter-than'#13#10'                 : in colum'
+  +'n 36 for uncertain'#13#10'Col 37-43 Comment Codes'#13#10'Col 63-67 Observer'
+  +' Initials'#11'ParentColor'#8#0#0#13'TFileNameEdit'#13'FileNameEdit1'#4'Left'
+  +#2#8#6'Height'#2#23#3'Top'#3#161#0#5'Width'#3#204#0#11'ButtonWidth'#2#23#9'N'
+  +'umGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#9'GroupB'
+  +'ox0'#4'Left'#3#150#0#6'Height'#3#209#0#3'Top'#2#11#5'Width'#3#249#0#7'Capti'
+  +'on'#6#12'AAVSO Visual'#12'ClientHeight'#3#209#0#11'ClientWidth'#3#249#0#8'T'
+  +'abOrder'#2#5#0#6'TLabel'#7'Label20'#4'Left'#2#8#6'Height'#2'u'#3'Top'#2#12#5
+  +'Width'#3#225#0#8'AutoSize'#8#7'Caption'#6'JAAVSO Visual format'#13#10'Versi'
+  +'on: 1.0'#13#10#13#10'Using Julian Date and coma delimiter.'#11'ParentColor'
+  +#8#0#0#6'TLabel'#7'Label21'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#144#0#5'Widt'
+  +'h'#2'.'#7'Caption'#6#9'File name'#11'ParentColor'#8#0#0#13'TFileNameEdit'#13
+  +'FileNameEdit0'#4'Left'#2#20#6'Height'#2#23#3'Top'#3#160#0#5'Width'#3#184#0
   +#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#0#0#0
-  +#0#6'TPanel'#6'Panel1'#4'Left'#3#150#0#6'Height'#3#178#0#3'Top'#2#8#5'Width'
-  +#3#227#0#12'ClientHeight'#3#178#0#11'ClientWidth'#3#227#0#8'TabOrder'#2#1#0#6
-  +'TLabel'#7'Label15'#4'Left'#2#6#6'Height'#2#14#3'Top'#2':'#5'Width'#2'T'#7'C'
-  +'aption'#6#18'Observation file :'#11'ParentColor'#8#0#0#11'TRadioGroup'#11'R'
-  +'adioGroup7'#4'Left'#2#6#6'Height'#2'L'#3'Top'#2'`'#5'Width'#3#204#0#8'AutoF'
-  +'ill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'
-  +#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'Chi'
-  +'ldSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.Shr'
-  +'inkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crs'
-  +'ScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27
-  +'ChildSizing.ControlsPerLine'#2#1#12'ClientHeight'#2':'#11'ClientWidth'#3#200
-  +#0#9'ItemIndex'#2#1#13'Items.Strings'#1#6#26'Append data to unique file'#6#28
-  +'Add date/time suffix to file'#0#8'TabOrder'#2#2#0#0#11'TRadioGroup'#11'Radi'
-  +'oGroup4'#4'Left'#2#6#6'Height'#2'8'#5'Width'#3#204#0#8'AutoFill'#9#7'Captio'
-  +'n'#6#6'Format'#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBotto'
-  +'mSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResi'
-  +'ze'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'Child'
-  +'Sizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'
-  +#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBot'
-  +'tom'#27'ChildSizing.ControlsPerLine'#2#2#12'ClientHeight'#2'&'#11'ClientWid'
-  +'th'#3#200#0#7'Columns'#2#2#9'ItemIndex'#2#0#13'Items.Strings'#1#6#12'AAVSO '
-  +'Visual'#6#5'VSNET'#0#8'TabOrder'#2#0#0#0#13'TFileNameEdit'#13'FileNameEdit3'
-  +#4'Left'#2#6#6'Height'#2#23#3'Top'#2'I'#5'Width'#3#176#0#11'ButtonWidth'#2#23
-  +#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#1#0#0#0#11'TRadioGroup'#11
-  +'RadioGroup5'#4'Left'#2#8#6'Height'#2'c'#3'Top'#2#6#5'Width'#3#134#0#8'AutoF'
-  +'ill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'
-  +#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'Chi'
-  +'ldSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.Shr'
-  +'inkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crs'
-  +'ScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27
-  +'ChildSizing.ControlsPerLine'#2#1#12'ClientHeight'#2'Q'#11'ClientWidth'#3#130
-  +#0#9'ItemIndex'#2#0#13'Items.Strings'#1#6#17'Internal facility'#6#11'AAVSO P'
-  +'CObs'#6#12'AAVSO WebObs'#0#7'OnClick'#7#16'RadioGroup5Click'#8'TabOrder'#2#0
-  +#0#0#5'TEdit'#5'Edit4'#4'Left'#2'D'#6'Height'#2#21#3'Top'#2't'#5'Width'#2'5'
-  +#8'TabOrder'#2#3#0#0#0#0#9'TTabSheet'#9'TabSheet2'#7'Caption'#6#16'Plot obse'
-  +'rvation'#0#9'TGroupBox'#9'GroupBox2'#4'Left'#3#150#0#6'Height'#3#208#0#3'To'
-  +'p'#2#10#5'Width'#3#249#0#7'Caption'#6#12'VSNET format'#12'ClientHeight'#3
-  +#208#0#11'ClientWidth'#3#249#0#8'TabOrder'#2#0#0#6'TLabel'#6'Label9'#4'Left'
-  ,#2#8#6'Height'#2'u'#3'Top'#2#20#5'Width'#3#225#0#8'AutoSize'#8#7'Caption'#6
-  +#213'Free format. Fields are separated by at least one blank space and appea'
-  +'r in this order'#13#10' '#13#10'Star name '#13#10'Universal Time in decimal'
-  +' format: yymmdd.tttt'#13#10'Magnitude,  < for fainter-than,  : uncertain'#13
-  +#10'Observer'#13#10'Comment'#11'ParentColor'#8#8'WordWrap'#9#0#0#6'TLabel'#7
-  +'Label10'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#144#0#5'Width'#2'.'#7'Caption'
-  +#6#9'File name'#11'ParentColor'#8#0#0#13'TFileNameEdit'#13'FileNameEdit2'#4
-  +'Left'#2#8#6'Height'#2#23#3'Top'#3#161#0#5'Width'#3#208#0#11'ButtonWidth'#2
-  +#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#9
-  +'GroupBox3'#4'Left'#3#150#0#6'Height'#3#209#0#3'Top'#2#11#5'Width'#3#249#0#7
-  +'Caption'#6#17'AFOEV base folder'#12'ClientHeight'#3#209#0#11'ClientWidth'#3
-  +#249#0#8'TabOrder'#2#1#7'Visible'#8#0#6'TLabel'#6'Label4'#4'Left'#2#8#6'Heig'
-  +'ht'#2'e'#3'Top'#2#28#5'Width'#3#225#0#8'AutoSize'#8#7'Caption'#6#143'Indica'
-  +'te the path to the constellation folder.'#13#10' '#13#10'c:\afoev\    '#13
-  +#10'                and\ '#13#10'                         r'#13#10'         '
-  +'                s'#11'ParentColor'#8#8'WordWrap'#9#0#0#14'TDirectoryEdit'#14
-  +'DirectoryEdit3'#4'Left'#2#8#6'Height'#2#23#3'Top'#3#159#0#5'Width'#3#204#0
-  +#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#0#0#0
-  +#0#9'TGroupBox'#9'GroupBox4'#4'Left'#3#150#0#6'Height'#3#207#0#3'Top'#2#11#5
-  +'Width'#3#249#0#7'Caption'#6#31'Other format fields description'#12'ClientHe'
-  +'ight'#3#207#0#11'ClientWidth'#3#249#0#8'TabOrder'#2#2#7'Visible'#8#0#6'TLab'
-  +'el'#6'Label1'#4'Left'#2#8#6'Height'#2#14#3'Top'#2'.'#5'Width'#2'2'#7'Captio'
-  +'n'#6#9'Star name'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#8#6'H'
-  +'eight'#2#14#3'Top'#2'D'#5'Width'#2#23#7'Caption'#6#4'Time'#11'ParentColor'#8
-  +#0#0#6'TLabel'#6'Label3'#4'Left'#2#8#6'Height'#2#14#3'Top'#2'Z'#5'Width'#2'3'
-  +#7'Caption'#6#9'Magnitude'#11'ParentColor'#8#0#0#6'TLabel'#7'Label11'#4'Left'
-  +#2#8#6'Height'#2#14#3'Top'#3#143#0#5'Width'#2'.'#7'Caption'#6#9'File name'#11
-  +'ParentColor'#8#0#0#6'TLabel'#7'Label12'#4'Left'#3#144#0#6'Height'#2#14#3'To'
-  +'p'#2'.'#5'Width'#2''''#7'Caption'#6#8'Field No'#11'ParentColor'#8#0#0#6'TLa'
-  +'bel'#7'Label13'#4'Left'#3#144#0#6'Height'#2#14#3'Top'#2'D'#5'Width'#2''''#7
-  +'Caption'#6#8'Field No'#11'ParentColor'#8#0#0#6'TLabel'#7'Label14'#4'Left'#3
-  +#144#0#6'Height'#2#14#3'Top'#2'Z'#5'Width'#2''''#7'Caption'#6#8'Field No'#11
-  +'ParentColor'#8#0#0#11'TRadioGroup'#11'RadioGroup2'#4'Left'#2#8#6'Height'#2
-  +#30#3'Top'#2'j'#5'Width'#3#225#0#8'AutoFill'#9#28'ChildSizing.LeftRightSpaci'
-  +'ng'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizont'
-  +'al'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crs'
-  +'HomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'
-  +#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7
-  +#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#2#12'Cl'
-  +'ientHeight'#2#30#11'ClientWidth'#3#225#0#7'Columns'#2#2#9'ItemIndex'#2#1#13
-  +'Items.Strings'#1#6#11'Julian date'#6#10'Decimal UT'#0#8'TabOrder'#2#0#0#0#5
-  +'TEdit'#5'Edit1'#4'Left'#2'H'#6'Height'#2#21#3'Top'#2'*'#5'Width'#2'A'#8'Tab'
-  +'Order'#2#1#4'Text'#6#1'1'#0#0#5'TEdit'#5'Edit2'#4'Left'#2'H'#6'Height'#2#21
-  +#3'Top'#2'@'#5'Width'#2'A'#8'TabOrder'#2#2#4'Text'#6#1'2'#0#0#5'TEdit'#5'Edi'
-  +'t3'#4'Left'#2'H'#6'Height'#2#21#3'Top'#2'V'#5'Width'#2'A'#8'TabOrder'#2#3#4
-  +'Text'#6#1'3'#0#0#11'TRadioGroup'#11'RadioGroup3'#4'Left'#2#12#6'Height'#2'%'
-  +#3'Top'#2#255#5'Width'#3#225#0#8'AutoFill'#9#28'ChildSizing.LeftRightSpacing'
-  +#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7
-  +#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomoge'
-  +'nousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'C'
-  +'hildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29
-  +'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#2#12'Clien'
-  +'tHeight'#2'%'#11'ClientWidth'#3#225#0#7'Columns'#2#2#9'ItemIndex'#2#0#13'It'
-  +'ems.Strings'#1#6#15'Variable format'#6#12'Fixed format'#0#7'OnClick'#7#16'R'
-  +'adioGroup3Click'#8'TabOrder'#2#4#0#0#13'TFileNameEdit'#13'FileNameEdit4'#4
-  +'Left'#2#8#6'Height'#2#23#3'Top'#3#161#0#5'Width'#3#204#0#11'ButtonWidth'#2
-  +#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#5#0#0#0#9'TGroupBox'#9
-  +'GroupBox1'#4'Left'#3#150#0#6'Height'#3#209#0#3'Top'#2#10#5'Width'#3#249#0#7
-  +'Caption'#6#16'AAVSO SUM format'#12'ClientHeight'#3#209#0#11'ClientWidth'#3
-  +#249#0#8'TabOrder'#2#3#7'Visible'#8#0#6'TLabel'#7'Label19'#4'Left'#2#8#6'Hei'
-  +'ght'#2#14#3'Top'#3#144#0#5'Width'#2'.'#7'Caption'#6#9'File name'#11'ParentC'
-  +'olor'#8#0#0#6'TLabel'#7'Label18'#4'Left'#2#8#6'Height'#2'u'#3'Top'#2#20#5'W'
-  +'idth'#3#225#0#8'AutoSize'#8#7'Caption'#12#22#1#0#0'Col  1-8     Designation'
-  +' from Validation File'#13#10'Col  9-18   Star name'#13#10'Col 19-30  Julian'
-  ,' Date and GMAT time'#13#10'Col 31-36  Magnitude'#13#10'                < in'
-  +' column 31 for fainter-than'#13#10'                 : in column 36 for unce'
-  +'rtain'#13#10'Col 37-43 Comment Codes'#13#10'Col 63-67 Observer Initials'#11
-  +'ParentColor'#8#0#0#13'TFileNameEdit'#13'FileNameEdit1'#4'Left'#2#8#6'Height'
-  +#2#23#3'Top'#3#161#0#5'Width'#3#204#0#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1
-  +#11'ParentColor'#8#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#9'GroupBox0'#4'Left'#3
-  +#150#0#6'Height'#3#209#0#3'Top'#2#11#5'Width'#3#249#0#7'Caption'#6#12'AAVSO '
-  +'Visual'#12'ClientHeight'#3#209#0#11'ClientWidth'#3#249#0#8'TabOrder'#2#5#0#6
-  +'TLabel'#7'Label20'#4'Left'#2#8#6'Height'#2'u'#3'Top'#2#12#5'Width'#3#225#0#8
-  +'AutoSize'#8#7'Caption'#6'JAAVSO Visual format'#13#10'Version: 1.0'#13#10#13
-  +#10'Using Julian Date and coma delimiter.'#11'ParentColor'#8#0#0#6'TLabel'#7
-  +'Label21'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#144#0#5'Width'#2'.'#7'Caption'
-  +#6#9'File name'#11'ParentColor'#8#0#0#13'TFileNameEdit'#13'FileNameEdit0'#4
-  +'Left'#2#20#6'Height'#2#23#3'Top'#3#160#0#5'Width'#3#184#0#11'ButtonWidth'#2
-  +#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#0#0#0#0#11'TRadioGroup'
-  +#11'RadioGroup1'#4'Left'#2#14#6'Height'#3#209#0#3'Top'#2#10#5'Width'#3#137#0
-  +#8'AutoFill'#9#7'Caption'#6#16'Light curve data'#28'ChildSizing.LeftRightSpa'
-  +'cing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizo'
-  +'ntal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertical'#7#24'c'
-  +'rsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChil'
-  +'ds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSizing.Layo'
-  +'ut'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#1
-  +#12'ClientHeight'#3#209#0#11'ClientWidth'#3#137#0#9'ItemIndex'#2#0#13'Items.'
-  +'Strings'#1#6#12'AAVSO Visual'#6#13'Old AAVSO SUM'#6#5'VSNET'#6#5'AFOEV'#6#12
-  +'Other format'#0#7'OnClick'#7#16'RadioGroup1Click'#8'TabOrder'#2#4#0#0#0#9'T'
-  +'TabSheet'#9'TabSheet3'#7'Caption'#6#16'Plot Online Data'#0#11'TRadioGroup'
-  +#11'RadioGroup6'#4'Left'#2#20#6'Height'#3#128#0#3'Top'#2#18#5'Width'#3'!'#1#8
-  +'AutoFill'#9#7'Caption'#6#27'Plot additional data from :'#28'ChildSizing.Lef'
-  +'tRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.Enla'
-  +'rgeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVertica'
-  +'l'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14'crs'
-  +'ScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'ChildSi'
-  +'zing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.ControlsPer'
-  +'Line'#2#1#12'ClientHeight'#3#128#0#11'ClientWidth'#3'!'#1#9'ItemIndex'#2#0
-  +#13'Items.Strings'#1#6#16'AAVSO Quick Look'#6#17'AFOEV FTP Archive'#0#8'TabO'
-  +'rder'#2#0#0#0#0#9'TTabSheet'#9'TabSheet4'#7'Caption'#6#6'Charts'#12'ClientH'
-  +'eight'#3#246#0#11'ClientWidth'#3#168#1#0#9'TGroupBox'#9'GroupBox6'#4'Left'#2
-  +#12#6'Height'#2'b'#3'Top'#3#138#0#5'Width'#3#129#1#7'Caption'#6'%Cartes du C'
-  +'iel / Sky Charts interface'#12'ClientHeight'#2'P'#11'ClientWidth'#3'}'#1#8
-  +'TabOrder'#2#0#0#6'TLabel'#7'Label17'#4'Left'#2#10#6'Height'#2#14#3'Top'#2#13
-  +#5'Width'#3#158#0#7'Caption'#6' Default profile saved chart name'#11'ParentC'
-  +'olor'#8#0#0#13'TFileNameEdit'#13'FileNameEdit5'#4'Left'#2#10#6'Height'#2#23
-  +#3'Top'#2'%'#5'Width'#3'L'#1#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'Parent'
-  +'Color'#8#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#9'GroupBox9'#4'Left'#2#14#6'Hei'
-  +'ght'#2'j'#3'Top'#2#18#5'Width'#3#129#1#7'Caption'#6#11'AAVSO Chart'#12'Clie'
-  +'ntHeight'#2'X'#11'ClientWidth'#3'}'#1#8'TabOrder'#2#1#0#14'TDirectoryEdit'
-  +#14'DirectoryEdit2'#4'Left'#2#12#6'Height'#2#23#3'Top'#2'8'#5'Width'#3'H'#1
-  +#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#0#0#0
-  +#11'TRadioGroup'#11'RadioGroup8'#4'Left'#2#12#6'Height'#2'0'#5'Width'#3'\'#1
-  +#8'AutoFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottom'
-  +'Spacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResiz'
-  +'e'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildS'
-  +'izing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'
-  +#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBot'
-  +'tom'#27'ChildSizing.ControlsPerLine'#2#2#12'ClientHeight'#2#30#11'ClientWid'
-  +'th'#3'X'#1#7'Columns'#2#2#13'Items.Strings'#1#6#13'Online charts'#6#11'Char'
-  +'t CDrom'#0#7'OnClick'#7#16'RadioGroup8Click'#8'TabOrder'#2#1#0#0#0#0#0#0
+  +#0#11'TRadioGroup'#11'RadioGroup1'#4'Left'#2#14#6'Height'#3#209#0#3'Top'#2#10
+  +#5'Width'#3#137#0#8'AutoFill'#9#7'Caption'#6#16'Light curve data'#28'ChildSi'
+  +'zing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSiz'
+  +'ing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.Enlarg'
+  +'eVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7
+  +#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'C'
+  +'hildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Contr'
+  +'olsPerLine'#2#1#12'ClientHeight'#3#209#0#11'ClientWidth'#3#137#0#9'ItemInde'
+  +'x'#2#0#13'Items.Strings'#1#6#12'AAVSO Visual'#6#13'Old AAVSO SUM'#6#5'VSNET'
+  +#6#5'AFOEV'#6#12'Other format'#0#7'OnClick'#7#16'RadioGroup1Click'#8'TabOrde'
+  +'r'#2#4#0#0#0#9'TTabSheet'#9'TabSheet3'#7'Caption'#6#16'Plot Online Data'#0
+  +#11'TRadioGroup'#11'RadioGroup6'#4'Left'#2#20#6'Height'#3#128#0#3'Top'#2#18#5
+  +'Width'#3'!'#1#8'AutoFill'#9#7'Caption'#6#27'Plot additional data from :'#28
+  +'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'C'
+  +'hildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing'
+  +'.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHoriz'
+  +'ontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChi'
+  +'lds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSiz'
+  +'ing.ControlsPerLine'#2#1#12'ClientHeight'#3#128#0#11'ClientWidth'#3'!'#1#9
+  +'ItemIndex'#2#0#13'Items.Strings'#1#6#16'AAVSO Quick Look'#6#17'AFOEV FTP Ar'
+  +'chive'#0#8'TabOrder'#2#0#0#0#0#9'TTabSheet'#9'TabSheet4'#7'Caption'#6#6'Cha'
+  +'rts'#12'ClientHeight'#3#246#0#11'ClientWidth'#3#168#1#0#9'TGroupBox'#9'Grou'
+  +'pBox6'#4'Left'#2#12#6'Height'#2'p'#3'Top'#2'z'#5'Width'#3#129#1#7'Caption'#6
+  +'%Cartes du Ciel / Sky Charts interface'#12'ClientHeight'#2'^'#11'ClientWidt'
+  +'h'#3'}'#1#8'TabOrder'#2#0#0#6'TLabel'#6'Label5'#4'Left'#2#14#6'Height'#2#16
+  +#3'Top'#2'H'#5'Width'#3'`'#1#7'Caption'#6'DBe sure the GCVS catalog is insta'
+  +'lled and activated whitin Skychart!'#11'ParentColor'#8#0#0#6'TLabel'#6'Labe'
+  +'l6'#4'Left'#3#174#0#6'Height'#2#16#3'Top'#2'%'#5'Width'#2'*'#7'Caption'#6#7
+  +'degrees'#11'ParentColor'#8#0#0#9'TCheckBox'#9'CheckBox1'#4'Left'#2#14#6'Hei'
+  +'ght'#2#21#3'Top'#2#8#5'Width'#3#206#0#7'Caption'#6'&Switch chart to equator'
+  +'ial coordinates'#8'TabOrder'#2#0#0#0#9'TCheckBox'#9'CheckBox2'#4'Left'#2#14
+  +#6'Height'#2#21#3'Top'#2'#'#5'Width'#2'T'#7'Caption'#6#11'Set zoom to'#8'Tab'
+  +'Order'#2#1#0#0#9'TSpinEdit'#9'SpinEdit1'#4'Left'#2'n'#6'Height'#2#23#3'Top'
+  +#2'"'#5'Width'#2'2'#8'MaxValue'#3#180#0#8'MinValue'#2#1#8'TabOrder'#2#2#5'Va'
+  +'lue'#2#15#0#0#0#9'TGroupBox'#9'GroupBox9'#4'Left'#2#12#6'Height'#2'j'#3'Top'
+  +#2#10#5'Width'#3#129#1#7'Caption'#6#11'AAVSO Chart'#12'ClientHeight'#2'X'#11
+  +'ClientWidth'#3'}'#1#8'TabOrder'#2#1#0#14'TDirectoryEdit'#14'DirectoryEdit2'
+  +#4'Left'#2#12#6'Height'#2#23#3'Top'#2'8'#5'Width'#3'H'#1#11'ButtonWidth'#2#23
+  +#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2#0#0#0#11'TRadioGroup'#11'R'
+  +'adioGroup8'#4'Left'#2#12#6'Height'#2'0'#5'Width'#3'\'#1#8'AutoFill'#9#28'Ch'
+  +'ildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'Chi'
+  +'ldSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.E'
+  +'nlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizon'
+  +'tal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChild'
+  +'s'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizin'
+  +'g.ControlsPerLine'#2#2#12'ClientHeight'#2#30#11'ClientWidth'#3'X'#1#7'Colum'
+  +'ns'#2#2#13'Items.Strings'#1#6#13'Online charts'#6#11'Chart CDrom'#0#7'OnCli'
+  +'ck'#7#16'RadioGroup8Click'#8'TabOrder'#2#1#0#0#0#0#0#0
 ]);

@@ -267,11 +267,9 @@ begin
    if hide then si.wShowWindow:=SW_SHOWMINIMIZED
            else si.wShowWindow:=SW_SHOWNORMAL;
    si.cb := sizeof(si);
-   writetrace('Try to launch '+cmd);
    try
      CreateProcess(Nil,pchExec,Nil,Nil,false,CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, Nil,Nil,si,pi);
     except;
-      writetrace('Could not launch '+cmd);
     end;
 end;
 {$endif}
@@ -378,9 +376,6 @@ s.Day:=day ;
 s.Hour:=0 ;
 s.Minute:=0 ;
 s.Second:=0 ;
-// windows
-//s.DayOfWeek:=0 ;
-//s.Milliseconds:=0 ;
 result:=SystemTimeToDateTime(s);
 end;
 
@@ -894,7 +889,9 @@ with inifile do begin
     OptForm.FilenameEdit2.text:=ReadString(section,'fvsnet',slash(privatedir)+'vsnet.txt');
     OptForm.DirectoryEdit3.text:=ReadString(section,'dafoev',privatedir);
     OptForm.FilenameEdit4.text:=ReadString(section,'freeformat',slash(privatedir)+'freeformat.txt');
-    OptForm.FilenameEdit5.text:=ReadString(section,'skychartprof',slash(privatedir)+'varobs.cdc3');
+    OptForm.CheckBox1.checked:=ReadBool(section,'skycharteq',true);
+    OptForm.CheckBox2.checked:=ReadBool(section,'skychartzoom',true);
+    OptForm.SpinEdit1.value:=ReadInteger(section,'skychartzoomto',15);
     OptForm.FilenameEdit3.text:=ReadString(section,'fobs',slash(privatedir)+'aavsovis.txt');
     OptForm.Edit1.text:=ReadString(section,'namepos','1');
     OptForm.Edit2.text:=ReadString(section,'datepos','2');
@@ -997,7 +994,9 @@ with inifile do begin
     WriteString(section,'dafoev',OptForm.DirectoryEdit3.text);
     WriteString(section,'freeformat',OptForm.FilenameEdit4.text);
     WriteString(section,'fobs',OptForm.FilenameEdit3.text);
-    WriteString(section,'skychartprof',OptForm.FilenameEdit5.text);
+    WriteBool(section,'skycharteq',OptForm.CheckBox1.checked);
+    WriteBool(section,'skychartzoom',OptForm.CheckBox2.checked);
+    WriteInteger(section,'skychartzoomto',OptForm.SpinEdit1.value);
     WriteString(section,'namepos',OptForm.Edit1.text);
     WriteString(section,'datepos',OptForm.Edit2.text);
     WriteString(section,'magpos',OptForm.Edit3.text);
@@ -1028,13 +1027,9 @@ with inifile do begin
 end;
 inifile.free;
 if tcpclient<>nil then begin
+  SkychartCmd('QUIT');
   tcpclient.Disconnect;
 end;
-{if StartedByVarobs then PostMessage(findwindow(nil,Pchar(skychartcaption)),WM_QUIT,0,0)   // close skychart (use WM_CLOSE for close prompt)
-else begin
-  CielHnd:=findwindow(nil,Pchar(skychartcaption));
-  SendMessage(CielHnd, WM_SYSCOMMAND, SC_MINIMIZE, 0);
-end;}
 end;
 
 Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string);
@@ -1219,8 +1214,8 @@ repeat
   Application.ProcessMessages;
   resp:=tcpclient.recvstring;
 until  ((resp<>'')and(resp<>'.'))or(now>timeo);
-SkychartCmd('SETPROJ EQUAT');
-SkychartCmd('SETFOV 15');
+if OptForm.CheckBox1.Checked then SkychartCmd('SETPROJ EQUAT');
+if OptForm.CheckBox2.Checked then SkychartCmd('SETFOV '+trim(OptForm.SpinEdit1.Text));
 end;
 
 Procedure TVarForm.DrawSkyChart;
