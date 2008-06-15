@@ -28,22 +28,22 @@
     </RunParams>
     <RequiredPackages Count="5">
       <Item1>
-        <PackageName Value="uniqueinstance_package"/>
+        <PackageName Value="downldialog"/>
+        <MinVersion Valid="True"/>
       </Item1>
       <Item2>
-        <PackageName Value="LCL"/>
+        <PackageName Value="CDCjdcalendar"/>
+        <MinVersion Valid="True"/>
       </Item2>
       <Item3>
         <PackageName Value="Printer4Lazarus"/>
         <MinVersion Minor="5" Valid="True"/>
       </Item3>
       <Item4>
-        <PackageName Value="CDCjdcalendar"/>
-        <MinVersion Valid="True"/>
+        <PackageName Value="LCL"/>
       </Item4>
       <Item5>
-        <PackageName Value="downldialog"/>
-        <MinVersion Valid="True"/>
+        <PackageName Value="uniqueinstance_package"/>
       </Item5>
     </RequiredPackages>
     <Units Count="9">

@@ -346,10 +346,6 @@ object VarForm: TVarForm
         Caption = '&Prepare AAVSO LPV Bulletin'
         OnClick = PrepareLPVBulletin1Click
       end
-      object Createobservingplan1: TMenuItem
-        Caption = '&Create observing plan from AAVSO Bulletin'
-        OnClick = Createobservingplan1Click
-      end
       object AAVSOwebpage1: TMenuItem
         Caption = '&AAVSO web page'
         OnClick = AAVSOwebpage1Click

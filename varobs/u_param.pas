@@ -54,6 +54,7 @@ aavsocharteast: array[0..1] of string=('right','left');
       Defaultconfigfile='~/.varobs.ini';
       SharedDir='/usr/share/apps/skychart';
       DefaultSkychart='skychart';
+      DefaultLpvb='varobs_lpv_bulletin';
       DefaultOpenFileCMD='kfmclient exec';
 {$endif}
 {$ifdef darwin}
@@ -61,12 +62,14 @@ aavsocharteast: array[0..1] of string=('right','left');
       Defaultconfigfile='~/.varobs.ini';
       SharedDir='/usr/share/skychart';
       DefaultSkychart='skychart';
+      DefaultLpvb='varobs_lpv_bulletin';
       DefaultOpenFileCMD='open';
 {$endif}
 {$ifdef mswindows}
       DefaultPrivateDir='Cartes du Ciel\VarObs';
       Defaultconfigfile='varobs.ini';
       DefaultSkychart='skychart.exe';
+      DefaultLpvb='varobs_lpv_bulletin.exe';
       DefaultOpenFileCMD='';
 {$endif}
 
@@ -82,7 +85,7 @@ var
   lockdate,locktime : boolean;
   lockselect : boolean;
   started : boolean;
-  AppDir,PrivateDir,ConstDir,ConfigFile,planname,skychart : string;
+  AppDir,PrivateDir,ConstDir,ConfigFile,planname,skychart,lpvb : string;
   jdact,TZ : double;
   CurrentRow: integer;
   param : Tstringlist;
