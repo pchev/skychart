@@ -180,23 +180,22 @@ LazarusResources.Add('TVarForm','FORMDATA',[
   +#21'&Cartes du Ciel Chart'#7'OnClick'#7#15'ShowChart1Click'#0#0#0#9'TMenuIte'
   +'m'#11'AAVSOTools1'#7'Caption'#6#6'&Tools'#0#9'TMenuItem'#19'PrepareLPVBulle'
   +'tin1'#7'Caption'#6#27'&Prepare AAVSO LPV Bulletin'#7'OnClick'#7#24'PrepareL'
-  +'PVBulletin1Click'#0#0#9'TMenuItem'#20'Createobservingplan1'#7'Caption'#6'*&'
-  +'Create observing plan from AAVSO Bulletin'#7'OnClick'#7#25'Createobservingp'
-  +'lan1Click'#0#0#9'TMenuItem'#13'AAVSOwebpage1'#7'Caption'#6#15'&AAVSO web pa'
-  +'ge'#7'OnClick'#7#18'AAVSOwebpage1Click'#0#0#0#9'TMenuItem'#5'Help1'#7'Capti'
-  +'on'#6#5'&Help'#0#9'TMenuItem'#8'Content1'#7'Caption'#6#8'&Content'#7'OnClic'
-  +'k'#7#13'Content1Click'#0#0#9'TMenuItem'#9'MenuItem7'#7'Caption'#6#15'VarObs'
-  +' Web site'#7'OnClick'#7#14'MenuItem7Click'#0#0#9'TMenuItem'#6'About1'#7'Cap'
-  +'tion'#6#6'&About'#7'OnClick'#7#11'About1Click'#0#0#0#0#11'TOpenDialog'#11'O'
-  +'penDialog1'#5'Title'#6'#Open variables stars parameter file'#6'Filter'#6'/A'
-  +'ll files|*.*|.dat files|*.dat|.txt files|*.txt'#4'left'#3#192#0#3'top'#3#147
-  +#0#0#0#10'TPopupMenu'#10'PopupMenu1'#4'left'#2'p'#3'top'#3#184#0#0#9'TMenuIt'
-  +'em'#11'Lightcurve1'#7'Caption'#6#16'Show Light curve'#7'OnClick'#7#16'Light'
-  +'curve1Click'#0#0#9'TMenuItem'#17'Enterobservation1'#7'Caption'#6#17'Enter o'
-  ,'bservation'#7'OnClick'#7#20'Newobservation1Click'#0#0#9'TMenuItem'#11'AAVSO'
-  +'Chart1'#7'Caption'#6#11'AAVSO Chart'#7'OnClick'#7#16'AAVSOChart1Click'#0#0#9
-  +'TMenuItem'#10'ShowChart1'#7'Caption'#6#20'Cartes du Ciel Chart'#7'OnClick'#7
-  +#15'ShowChart1Click'#0#0#0#15'TUniqueInstance'#15'UniqueInstance1'#7'Enabled'
-  +#9#10'Identifier'#6#6'VarObs'#14'UpdateInterval'#3#232#3#15'OnOtherInstance'
-  +#7#28'UniqueInstance1OtherInstance'#4'left'#2'&'#3'top'#3#147#0#0#0#0
+  +'PVBulletin1Click'#0#0#9'TMenuItem'#13'AAVSOwebpage1'#7'Caption'#6#15'&AAVSO'
+  +' web page'#7'OnClick'#7#18'AAVSOwebpage1Click'#0#0#0#9'TMenuItem'#5'Help1'#7
+  +'Caption'#6#5'&Help'#0#9'TMenuItem'#8'Content1'#7'Caption'#6#8'&Content'#7'O'
+  +'nClick'#7#13'Content1Click'#0#0#9'TMenuItem'#9'MenuItem7'#7'Caption'#6#15'V'
+  +'arObs Web site'#7'OnClick'#7#14'MenuItem7Click'#0#0#9'TMenuItem'#6'About1'#7
+  +'Caption'#6#6'&About'#7'OnClick'#7#11'About1Click'#0#0#0#0#11'TOpenDialog'#11
+  +'OpenDialog1'#5'Title'#6'#Open variables stars parameter file'#6'Filter'#6'/'
+  +'All files|*.*|.dat files|*.dat|.txt files|*.txt'#4'left'#3#192#0#3'top'#3
+  +#147#0#0#0#10'TPopupMenu'#10'PopupMenu1'#4'left'#2'p'#3'top'#3#184#0#0#9'TMe'
+  +'nuItem'#11'Lightcurve1'#7'Caption'#6#16'Show Light curve'#7'OnClick'#7#16'L'
+  +'ightcurve1Click'#0#0#9'TMenuItem'#17'Enterobservation1'#7'Caption'#6#17'Ent'
+  +'er observation'#7'OnClick'#7#20'Newobservation1Click'#0#0#9'TMenuItem'#11'A'
+  +'AVSOChart1'#7'Caption'#6#11'AAVSO Chart'#7'OnClick'#7#16'AAVSOChart1Click'#0
+  ,#0#9'TMenuItem'#10'ShowChart1'#7'Caption'#6#20'Cartes du Ciel Chart'#7'OnCli'
+  +'ck'#7#15'ShowChart1Click'#0#0#0#15'TUniqueInstance'#15'UniqueInstance1'#7'E'
+  +'nabled'#9#10'Identifier'#6#6'VarObs'#14'UpdateInterval'#3#232#3#15'OnOtherI'
+  +'nstance'#7#28'UniqueInstance1OtherInstance'#4'left'#2'&'#3'top'#3#147#0#0#0
+  +#0
 ]);

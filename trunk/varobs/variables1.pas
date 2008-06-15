@@ -82,7 +82,6 @@ type
     About1: TMenuItem;
     AAVSOTools1: TMenuItem;
     PrepareLPVBulletin1: TMenuItem;
-    Createobservingplan1: TMenuItem;
     AAVSOwebpage1: TMenuItem;
     AAVSOChart1: TMenuItem;
     UniqueInstance1: TUniqueInstance;
@@ -111,7 +110,6 @@ type
     procedure BitBtn3Click(Sender: TObject);
     procedure About1Click(Sender: TObject);
     procedure PrepareLPVBulletin1Click(Sender: TObject);
-    procedure Createobservingplan1Click(Sender: TObject);
     procedure AAVSOwebpage1Click(Sender: TObject);
     procedure AAVSOChart1Click(Sender: TObject);
     procedure UniqueInstance1OtherInstance(Sender: TObject;
@@ -498,6 +496,8 @@ configfile:=slash(privatedir)+configfile;
 {$endif}
 skychart:=slash(appdir)+DefaultSkychart;
 if not FileExists(skychart) then skychart:=DefaultSkychart;
+lpvb:=slash(appdir)+Defaultlpvb;
+if not FileExists(lpvb) then skychart:=Defaultlpvb;
 if not directoryexists(privatedir) then CreateDir(privatedir);
 if not directoryexists(privatedir) then forcedirectory(privatedir);
 if not directoryexists(privatedir) then begin
@@ -653,7 +653,6 @@ begin
 planname:=slash(privatedir)+'aavsoeasy.dat';
 if not fileexists(planname) then begin
   CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.dat',planname,true);
-  CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.plan',slash(privatedir)+'aavsoeasy.plan',true);
 end;
 defqlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$star&output=votable';
 defafoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
@@ -1123,12 +1122,7 @@ end;
 
 procedure TVarForm.PrepareLPVBulletin1Click(Sender: TObject);
 begin
-executefile(slash(appdir)+'bulletin.exe');
-end;
-
-procedure TVarForm.Createobservingplan1Click(Sender: TObject);
-begin
-executefile(slash(appdir)+'copyplan.exe');
+ExecNoWait(lpvb);
 end;
 
 procedure TVarForm.AAVSOwebpage1Click(Sender: TObject);
