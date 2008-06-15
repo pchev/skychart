@@ -27,7 +27,7 @@ interface
 
 uses
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, LResources, u_param, ExtCtrls;
+  Dialogs, StdCtrls, LResources, u_param, ExtCtrls, u_util2;
 
 type
 

@@ -36,6 +36,7 @@ object chartform: Tchartform
       ItemHeight = 13
       OnClick = ListBox1Click
       TabOrder = 0
+      TopIndex = -1
     end
   end
   object Button1: TButton
@@ -145,7 +146,6 @@ object chartform: Tchartform
       Top = 56
       Width = 60
       AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
       ItemIndex = 0
       Items.Strings = (
         'A'
@@ -174,7 +174,6 @@ object chartform: Tchartform
       Top = 166
       Width = 75
       AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      ItemHeight = 13
       ItemIndex = 0
       Items.Strings = (
         'Right'

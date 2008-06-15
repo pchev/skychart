@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
-    <PathDelim Value="\"/>
+    <PathDelim Value="/"/>
     <Version Value="6"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <IconPath Value=".\"/>
+      <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <Title Value="varobs"/>
       <UseXPManifest Value="True"/>
@@ -22,8 +22,8 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="D:\ciel"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+        <WorkingDirectory Value="/home/cdc"/>
       </local>
     </RunParams>
     <RequiredPackages Count="5">
@@ -46,7 +46,7 @@
         <MinVersion Valid="True"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="9">
       <Unit0>
         <Filename Value="varobs.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -105,11 +105,15 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="u_param"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="u_util2.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="u_util2"/>
+      </Unit8>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>
-    <PathDelim Value="\"/>
     <SearchPaths>
       <UnitOutputDirectory Value="units"/>
     </SearchPaths>
@@ -127,7 +131,8 @@
       </Options>
     </Linking>
     <Other>
-      <CustomOptions Value="-dUseCThreads"/>
+      <CustomOptions Value="-dUseCThreads
+"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>

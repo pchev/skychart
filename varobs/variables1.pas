@@ -33,7 +33,7 @@ uses
     unix,baseunix,unixutil,
   {$endif}
   Clipbrd, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Buttons,IniFiles, Printers, fileutil, cu_cdcclient,
+  StdCtrls, ComCtrls, Buttons,IniFiles, Printers, fileutil, cu_cdcclient, u_util2,
   Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param,
   UniqueInstance;
 
@@ -130,16 +130,6 @@ type
   end;
 
 function datef(jdt:double): string;
-function Jd(annee,mois,jour :integer; Heure:double):double;
-PROCEDURE Djd(jd:Double;VAR annee,mois,jour:integer; VAR Heure:double);
-function words(str,isep,osep : string; p,n : integer) : string;
-function IsNumber(n : string) : boolean;
-Function Slash(nom : string) : string;
-Function SetDate(year,month,day : word) : Tdatetime;
-Procedure GetDate(d : TDatetime; var year,month,day : word);
-Function ExecuteFile(const FileName: string): integer;
-Procedure FormPos(form : Tform; x,y : integer);
-Function RemoveLastDot(value : string) : string;
 
 Type
     TVarinfo = class(Tobject)
@@ -169,215 +159,6 @@ p:=pos(',',buf);
 if p=0 then p:=length(buf)+1;
 result:=copy(buf,1,p-1);
 buf:=copy(buf,p+1,999);
-end;
-
-function words(str,isep,osep : string; p,n : integer) : string;
-var     i,j : Integer;
-begin
-result:='';
-str:=trim(str);
-for i:=1 to p-1 do begin
- j:=pos(isep,str);
- if j=0 then j:=length(str)+1;
- str:=trim(copy(str,j+1,length(str)));
-end;
-for i:=1 to n do begin
- j:=pos(isep,str);
- if j=0 then j:=length(str)+1;
- result:=result+trim(copy(str,1,j-1))+osep;
- str:=trim(copy(str,j,length(str)));
-end;
-end;
-
-Procedure FormPos(form : Tform; x,y : integer);
-const bot=40; //minimal distance from screen bottom
-begin
-with Form do begin
-  left:=x;
-  if left+width>Screen.Width then left:=Screen.Width-width;
-  if left<0 then left:=0;
-  top:=y;
-  if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
-  if top<0 then top:=0;
-end;
-end;
-
-{$ifdef unix}
-function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
-var
-  parg: array[1..7] of PChar;
-begin
-  result := fpFork;
-  if result = 0 then
-  begin
-    parg[1] := Pchar(cmd);
-    if p1='' then parg[2]:=nil else parg[2] := PChar(p1);
-    if p2='' then parg[3]:=nil else parg[3] := PChar(p2);
-    if p3='' then parg[4]:=nil else parg[4] := PChar(p3);
-    if p4='' then parg[5]:=nil else parg[5] := PChar(p4);
-    if p5='' then parg[6]:=nil else parg[6] := PChar(p5);
-    parg[7] := nil;
-    if fpExecVP(cmd,PPChar(@parg[1])) = -1 then result:=99;
-  end;
-end;
-{$endif}
-
-Function ExecuteFile(const FileName: string): integer;
-{$ifdef mswindows}
-var
-  zFileName, zParams, zDir: array[0..255] of Char;
-begin
-  Result := ShellExecute(Application.MainForm.Handle, nil, StrPCopy(zFileName, FileName),
-                         StrPCopy(zParams, ''), StrPCopy(zDir, ''), SW_SHOWNOACTIVATE);
-{$endif}
-{$ifdef unix}
-var cmd,p1,p2,p3,p4: string;
-begin
-  cmd:=trim(words(OpenFileCMD,blank,blank,1,1));
-  p1:=trim(words(OpenFileCMD,blank,blank,2,1));
-  p2:=trim(words(OpenFileCMD,blank,blank,3,1));
-  p3:=trim(words(OpenFileCMD,blank,blank,4,1));
-  p4:=trim(words(OpenFileCMD,blank,blank,5,1));
-  if p1='' then result:=ExecFork(cmd,FileName)
-  else if p2='' then result:=ExecFork(cmd,p1,FileName)
-  else if p3='' then result:=ExecFork(cmd,p1,p2,FileName)
-  else if p4='' then result:=ExecFork(cmd,p1,p2,p3,FileName)
-  else result:=ExecFork(cmd,p1,p2,p3,p4,FileName);
-{$endif}
-end;
-
-procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
-{$ifdef unix}
-begin
- fpSystem(cmd+' &');
-end;
-{$endif}
-{$ifdef mswindows}
-var
-   bchExec: array[0..1024] of char;
-   pchEXEC: Pchar;
-   si: TStartupInfo;
-   pi: TProcessInformation;
-begin
-   pchExec := @bchExec;
-   StrPCopy(pchExec,cmd);
-   FillChar(si,sizeof(si),0);
-   FillChar(pi,sizeof(pi),0);
-   si.dwFlags:=STARTF_USESHOWWINDOW;
-   if title<>'' then si.lpTitle:=Pchar(title);
-   if hide then si.wShowWindow:=SW_SHOWMINIMIZED
-           else si.wShowWindow:=SW_SHOWNORMAL;
-   si.cb := sizeof(si);
-   try
-     CreateProcess(Nil,pchExec,Nil,Nil,false,CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, Nil,Nil,si,pi);
-    except;
-    end;
-end;
-{$endif}
-
-
-function IsNumber(n : string) : boolean;
-var i,dummy : integer;
-begin
-val(n,dummy,i);
-result:= (i=0) ;
-end;
-
-Function NoSlash(nom : string) : string;
-begin
-result:=trim(nom);
-if copy(result,length(nom),1)=PathDelim then result:=copy(result,1,length(nom)-1);
-end;
-
-Function RemoveLastDot(value : string) : string;
-begin
-result:=trim(value);
-if copy(result,length(result),1)='.' then result:=copy(result,1,length(result)-1);
-end;
-
-Function Slash(nom : string) : string;
-begin
-result:=trim(nom);
-if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
-end;
-
-function Jd(annee,mois,jour :integer; Heure:double):double;
- VAR siecle,cor:INTEGER ;
-     jd1:double;
- BEGIN
-    IF mois<=2 THEN
-    begin
-      annee:=annee-1;
-      mois:=mois+12;
-    end ;
-    (* IF (annee>1582) OR ((annee=1582) AND ((mois*100+jour)>=1015)) THEN *)
-    IF annee > 1582 THEN
-    begin
-       siecle:=annee DIV 100;
-       cor:=2 - siecle + siecle DIV 4;
-       end
-        ELSE
-        cor:=0;
-    IF annee<0 THEN
-       jd1:=Int(365.25*annee-0.75)
-     ELSE
-       jd1:=Int(365.25*annee);
-    jd := jd1 + Int(30.6001*(mois+1)) + jour
-               + 1720994.5 + cor + Heure/24.0;
- END ;
-
-PROCEDURE Djd(jd:Double;VAR annee,mois,jour:integer; VAR Heure:double);
- VAR z,f,a,al,b,c,d,e:double;
- BEGIN
-    z := Int(jd+0.5);
-    f := jd + 0.5 - z ;
-    IF z<2299161.0 THEN
-       a := z
-      ELSE
-      begin
-       al:= Int((z-1867216.25)/36524.25);
-        a := z + 1.0 + al - Int(al/4.0);
-    END;
-    b := a + 1524.0;
-    c := Int((b-122.1)/365.25);
-    d := Int(365.25*c);
-    e := Int((b-d)/30.6001);
-    jour := Trunc(b-d-Int(30.6001*e)+f);
-    IF e<13.5 THEN
-        mois:=Trunc(e)-1
-      ELSE
-        mois:=Trunc(e)-13;
-    IF mois>2 THEN
-        annee:=Trunc(c)-4716
-      ELSE
-        annee:=Trunc(c)-4715;
-    IF (annee MOD 4 <> 0) AND (mois=2) AND (jour=29) THEN
-    begin
-            mois:=3;
-            jour:=1;
-    END;
-    Heure:=24.0*f ;
- END ;
-
-Procedure GetDate(d : Tdatetime; var year,month,day : word);
-var s : TSystemTime;
-begin
-   DateTimeToSystemTime(d,s);
-   year:=word(s.Year);
-   month:=word(s.Month);
-   day:=word(s.Day);
-end;
-
-Function SetDate(year,month,day : word) : Tdatetime;
-var s : TsystemTime;
-begin
-s.Year:=year ;
-s.Month:=month ;
-s.Day:=day ;
-s.Hour:=0 ;
-s.Minute:=0 ;
-s.Second:=0 ;
-result:=SystemTimeToDateTime(s);
 end;
 
 Procedure PulsVar(jdobs,magmax,magmin,jdini,period,rise : double; var actmag,prevmini,prevmaxi,nextmini,nextmaxi,next2mini: double);
@@ -511,7 +292,7 @@ if trim(buf)='' then continue;
 if buf[1]=';' then continue;
 name:=nextword(buf);
 if name='ENDOFLIST' then continue;
-name:=trim(words(name,' ','',1,1)+' '+words(name,' ','',2,1)+' '+words(name,' ','',3,1)+' '+words(name,' ','',4,99));
+name:=trim(words(name,'',1,1)+' '+words(name,'',2,1)+' '+words(name,'',3,1)+' '+words(name,'',4,99));
 vtype:=trim(nextword(buf));
 curvtype:=0;
 ww:=vtype;

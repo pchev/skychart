@@ -26,36 +26,35 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  LCLIntf, Shellapi, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, LResources;
+//Shellapi,
+  LCLIntf,  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ComCtrls, LResources, EditBtn, Fileutil, u_param, u_util2, Spin;
 
 type
+
+  { TForm1 }
+
   TForm1 = class(TForm)
     Button1: TButton;
-    Edit1: TEdit;
+    DirectoryEdit1: TDirectoryEdit;
+    FileNameEdit1: TFileNameEdit;
     Label1: TLabel;
     Label2: TLabel;
-    Edit2: TEdit;
     Label3: TLabel;
-    Edit3: TEdit;
     Label4: TLabel;
-    Label5: TLabel;
-    Edit4: TEdit;
     Label6: TLabel;
-    Button2: TButton;
-    UpDown1: TUpDown;
     Label7: TLabel;
     Label8: TLabel;
+    SpinEdit1: TSpinEdit;
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure Edit1Change(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Label7Click(Sender: TObject);
+    procedure SpinEdit1Change(Sender: TObject);
   private
-    { Déclarations privées }
+    Procedure ConvAAVSOb;
+    Procedure GetAppDir;
   public
-    { Déclarations publiques }
   end;
 
 var
@@ -64,6 +63,62 @@ var
   nLPV,curvar : integer;
 
 implementation
+
+Procedure TForm1.GetAppDir;
+var buf: string;
+{$ifdef darwin}
+    i: integer;
+{$endif}
+{$ifdef mswindows}
+    PIDL : PItemIDList;
+    Folder : array[0..MAX_PATH] of Char;
+const CSIDL_PERSONAL = $0005;
+{$endif}
+begin
+{$ifdef darwin}
+appdir:=getcurrentdir;
+if not DirectoryExists(slash(appdir)+slash('data')+slash('varobs')) then begin
+   appdir:=ExtractFilePath(ParamStr(0));
+   i:=pos('.app/',appdir);
+   if i>0 then begin
+     appdir:=ExtractFilePath(copy(appdir,1,i));
+   end;
+end;
+{$else}
+appdir:=getcurrentdir;
+GetDir(0,appdir);
+{$endif}
+privatedir:=DefaultPrivateDir;
+configfile:=Defaultconfigfile;
+{$ifdef unix}
+appdir:=expandfilename(appdir);
+privatedir:=expandfilename(PrivateDir);
+configfile:=expandfilename(configfile);
+{$endif}
+{$ifdef mswindows}
+SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
+SHGetPathFromIDList(PIDL, Folder);
+privatedir:=slash(Folder)+privatedir;
+configfile:=slash(privatedir)+configfile;
+{$endif}
+skychart:=slash(appdir)+DefaultSkychart;
+if not FileExists(skychart) then skychart:=DefaultSkychart;
+if not directoryexists(privatedir) then CreateDir(privatedir);
+if not directoryexists(privatedir) then forcedirectory(privatedir);
+if not directoryexists(privatedir) then begin
+   MessageDlg('Unable to create '+privatedir,
+             mtError, [mbAbort], 0);
+   Halt;
+end;
+if not directoryexists(slash(privatedir)+'quicklook') then CreateDir(slash(privatedir)+'quicklook');
+if not directoryexists(slash(privatedir)+'afoevdata') then CreateDir(slash(privatedir)+'afoevdata');
+{$ifdef unix}  // allow a shared install
+if (not directoryexists(slash(appdir)+slash('data')+slash('varobs'))) and
+   (directoryexists(SharedDir)) then
+   appdir:=SharedDir;
+{$endif}
+ConstDir:=slash(appdir)+slash('data')+slash('varobs');
+end;
 
 
 Function CleanMag(mag:string):string;
@@ -87,61 +142,6 @@ result:=stringreplace(result,'-','',[rfReplaceAll]);
 result:=stringreplace(result,' ','',[rfReplaceAll]);
 end;
 
-Function CleanPer(dat:string):string;
-var n : integer;
-    x : single;
-begin
-result:=stringreplace(dat,':',' ',[rfReplaceAll]);
-result:=stringreplace(result,'/N',' ',[rfReplaceAll]);
-result:=stringreplace(result,'(',' ',[rfReplaceAll]);
-result:=stringreplace(result,')',' ',[rfReplaceAll]);
-result:=stringreplace(result,'+',' ',[rfReplaceAll]);
-result:=stringreplace(result,'*',' ',[rfReplaceAll]);
-result:=stringreplace(result,'?',' ',[rfReplaceAll]);
-result:=stringreplace(result,'<',' ',[rfReplaceAll]);
-val(result,x,n);
-if n<>0 then result:=' ';
-end;
-
-function Jd(annee,mois,jour :INTEGER; Heure:double):double;
- VAR siecle,cor:INTEGER ;
- begin
-    if mois<=2 then begin
-      annee:=annee-1;
-      mois:=mois+12;
-    end ;
-    if annee*10000+mois*100+jour >= 15821015 then begin
-       siecle:=annee div 100;
-       cor:=2 - siecle + siecle div 4;
-    end else cor:=0;
-    jd:=int(365.25*(annee+4716))+int(30.6001*(mois+1))+jour+cor-1524.5 +heure/24;
-END ;
-
-Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Integer): THandle;
-var
-  zFileName, zParams, zDir: array[0..79] of Char;
-begin
-  Result := ShellExecute(Application.MainForm.Handle, nil, StrPCopy(zFileName, FileName),
-                         StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
-end;
-
-Procedure GetValInfo(var f : textfile; design : string; var nom,vartype,per : string);
-var buf : string;
-begin
-vartype:=' ';
-per:=' ';
-reset(f);
-repeat
-  readln(f,buf);
-  if copy(buf,1,8)=design then begin
-    nom:=copy(buf,11,10);
-    vartype:=copy(buf,23,10);
-    per:=copy(buf,48,8);
-    break;
-  end;
-until eof(f);
-end;
-
 Procedure GetGCVSInfo(nom : string; var vartype,per,slope,jdt : string);
 var f : textfile;
     buf,id1,id2,constel : string;
@@ -157,7 +157,7 @@ id1:=uppercase(copy(buf,1,p-1));
 constel:=copy(buf,p+1,99);
 if constel='*' then exit;
 constel:=stringreplace(constel,'?','',[]);
-buf:=form1.edit3.text+constel+'.dat';
+buf:=slash(form1.DirectoryEdit1.Directory)+constel+'.dat';
 if not fileexists(buf) then exit;
 assignfile(f,buf);
 reset(f);
@@ -178,28 +178,25 @@ until eof(f);
 closefile(f);
 end;
 
-Procedure ConvAAVSOb;
-var fb,fv,f : textfile;
+Procedure Tform1.ConvAAVSOb;
+var fb,f : textfile;
     buf,design,nom,mag,dat,mag1,mag2,datm,vartype,jdt,per,slope,puls,v1,p1,j1 : string;
     i,n,p,year1,year,mois,jour : integer;
     jdm : double;
 begin
 i:=0;
 n:=1;
-year1:=strtoint(form1.edit1.text);
-buf:=form1.edit2.text;
+year1:=SpinEdit1.Value;
+buf:=FileNameEdit1.FileName;
 assignfile(fb,buf);
 reset(fb);
-buf:=form1.edit4.text;
-assignfile(fv,buf);
-reset(fv);
-buf:='aavso'+inttostr(year1)+'.txt';
+buf:=slash(privatedir)+'aavso'+inttostr(year1)+'.dat';
 assignfile(f,buf);
 rewrite(f);
 try
 repeat
  inc(i);
- form1.label3.caption:=inttostr(i);
+ label3.caption:='Progress: '+inttostr(i);
  application.processmessages;
  readln(fb,buf);
  design:=copy(buf,7,8);
@@ -224,10 +221,7 @@ repeat
  end;
  jdm:=jd(year,mois,jour,12);
  str(jdm:10:1,jdt);
- GetValInfo(fv,design,nom,vartype,per);
- GetGCVSinfo(nom,v1,p1,slope,j1);
- if trim(vartype)='' then vartype:=v1;
- if trim(per)='' then per:=p1;
+ GetGCVSinfo(nom,vartype,per,slope,j1);
  puls:=nom+', '+vartype+', '+mag1+', '+mag2+', '+jdt+', '+per+', '+slope+', '+design;
  writeln(f,puls);
  lpvlst[n]:=trim(design);
@@ -236,9 +230,8 @@ repeat
 until eof(fb);
 nLPV:=n-1;
 closefile(f);
-closefile(fv);
 closefile(fb);
-form1.label3.caption:='Finished';
+label3.caption:='Finished';
 except
 showmessage('Error for line :'+buf);
 raise;
@@ -259,71 +252,11 @@ for i:=1 to nLPV do begin
 end;
 end;
 
-procedure ConvAAVSOval;
-var fv,f : textfile;
-    buf,design,nom,mag,mag1,mag2,vartype,jdt,per,slope,puls,v1,p1 : string;
-    i,p : integer;
-begin
-i:=0;
-buf:=form1.edit4.text;
-assignfile(fv,buf);
-reset(fv);
-readln(fv,buf);
-buf:='aavsoval.txt';
-assignfile(f,buf);
-rewrite(f);
-try
-repeat
- inc(i);
- form1.label3.caption:=inttostr(i);
- application.processmessages;
- readln(fv,buf);
- design:=copy(buf,1,8);
- if (trim(design)='')or(design[1]='*') then break;
- if IsLPV(design) then puls:=pulslst[curvar]
- else begin
- vartype:=copy(buf,22,8);
- per:=cleanper(copy(buf,48,8));
- nom:=copy(buf,11,10);
- mag:=trim(copy(buf,30,17));
- p:=pos('-',copy(mag,2,99));
- if p>0 then begin
-    p:=p+1;
-    mag1:=cleanmag(copy(mag,1,p-1));
-    mag2:=cleanmag(copy(mag,p+1,99))
- end else begin
-    mag:=trim(mag);
-    p:=pos(' ',mag);
-    if p>0 then begin
-       mag1:=cleanmag(copy(mag,1,p-1));
-       mag2:=cleanmag(copy(mag,p+1,99))
-    end else begin
-       mag1:=cleanmag(mag);
-       mag2:='';
-    end;
- end;
- GetGCVSinfo(nom,v1,p1,slope,jdt);
- if trim(vartype)='' then vartype:=v1;
- if trim(per)='' then per:=p1;
- puls:=nom+', '+vartype+', '+mag1+', '+mag2+', '+jdt+', '+per+', '+slope+', '+design;
- end;
- writeln(f,puls);
-until eof(fv);
-closefile(f);
-closefile(fv);
-form1.label3.caption:='Finished';
-except
-showmessage('Error for line :'+buf);
-raise;
-end;
-end;
-
 procedure TForm1.Button1Click(Sender: TObject);
 begin
 screen.cursor:=crhourglass;
 try
 convaavsob;
-convaavsoval;
 finally
 screen.cursor:=crdefault;
 end;
@@ -331,19 +264,10 @@ end;
 
 procedure TForm1.FormShow(Sender: TObject);
 begin
-edit3.text:=getcurrentdir+'\const\';
-edit1.text:=formatdatetime('yyyy',now);
-edit2.text:='bulletin'+formatdatetime('yy',now)+'.txt';
-end;
-
-procedure TForm1.Edit1Change(Sender: TObject);
-begin
-if length(edit1.text)=4 then edit2.text:='bulletin'+copy(edit1.text,3,2)+'.txt';
-end;
-
-procedure TForm1.Button2Click(Sender: TObject);
-begin
-close;
+GetAppDir;
+DirectoryEdit1.Directory:=slash(appdir)+slash('data')+slash('varobs');
+SpinEdit1.Text:=formatdatetime('yyyy',now);
+FileNameEdit1.FileName:=slash(privatedir)+'BULLET'+formatdatetime('yy',now)+'.TXT';
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -353,7 +277,12 @@ end;
 
 procedure TForm1.Label7Click(Sender: TObject);
 begin
-Executefile('http://www.aavso.org/observing/aids/','','',SW_SHOWNOACTIVATE);
+Executefile(label7.Caption);
+end;
+
+procedure TForm1.SpinEdit1Change(Sender: TObject);
+begin
+FileNameEdit1.FileName:=slash(privatedir)+'BULLET'+copy(SpinEdit1.text,3,2)+'.TXT';
 end;
 
 initialization
