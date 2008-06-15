@@ -1,4 +1,4 @@
-program lpv_bulletin;
+program varobs_lpv_bulletin;
 
 {$mode objfpc}{$H+}
 
@@ -10,8 +10,12 @@ uses
   Forms
   { you can add units after this }, aavsob1;
 
+{$R manifest.res}
+
 begin
+  Application.Title:='lpv_bulletin';
   Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.
 

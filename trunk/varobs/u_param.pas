@@ -48,24 +48,26 @@ aavsochartmag: array[0..13] of string=('9','9','11','11','12','12','14.5','14.5'
 aavsochartnorth: array[0..13] of string=('down','up','down','up','down','up','down','up','down','up','down','up','down','up');
 aavsocharteast: array[0..1] of string=('right','left');
 
-OpenFileCMD='kfmclient exec';
 
 {$ifdef linux}
       DefaultPrivateDir='~/cartes_du_ciel/varobs';
       Defaultconfigfile='~/.varobs.ini';
       SharedDir='/usr/share/apps/skychart';
       DefaultSkychart='skychart';
+      DefaultOpenFileCMD='kfmclient exec';
 {$endif}
 {$ifdef darwin}
       DefaultPrivateDir='~/cartes_du_ciel/varobs';
       Defaultconfigfile='~/.varobs.ini';
       SharedDir='/usr/share/skychart';
       DefaultSkychart='skychart';
+      DefaultOpenFileCMD='open';
 {$endif}
 {$ifdef mswindows}
       DefaultPrivateDir='Cartes du Ciel\VarObs';
       Defaultconfigfile='varobs.ini';
       DefaultSkychart='skychart.exe';
+      DefaultOpenFileCMD='';
 {$endif}
 
   CR = #$0d;

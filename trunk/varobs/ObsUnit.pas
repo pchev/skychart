@@ -27,7 +27,7 @@ interface
 
 uses
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ComCtrls, LResources, jdcalendar, EditBtn, u_param, Menus;
+  StdCtrls, Buttons, ComCtrls, LResources, jdcalendar, EditBtn, u_param, Menus, u_util2;
 
 type
 

@@ -28,7 +28,7 @@ interface
 uses Clipbrd, Printers, FileCtrl,  
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, ExtCtrls, StdCtrls, Buttons, Menus, ExtDlgs, LResources, u_param,
-  downloaddialog, cu_voreader;
+  downloaddialog, cu_voreader, u_util2;
 
 type
 
@@ -726,9 +726,9 @@ token : begin
       feof:=eof(f);
       if (tokensep=',')and(copy(lin,1,9)='#OBSCODE=') then saveobs:=trim(copy(lin,10,99));
       if copy(lin,1,1)='#' then exit; //comments
-      buf:=uppercase(trim(words(lin,tokensep,'',nampos[1],1)));        // name
+      buf:=uppercase(trim(words(lin,'',nampos[1],1,tokensep)));        // name
       if (sname<>'*') and (buf<>sname) then exit;
-      buf:=trim(words(lin,tokensep,'',jdpos[1],1));         // date
+      buf:=trim(words(lin,'',jdpos[1],1,tokensep));         // date
       if buf='' then exit;
       case dateformat of
       1 : begin                                    // JD
@@ -744,7 +744,7 @@ token : begin
           jdt:=jd(strtoint(copy(buf,1,4)),strtoint(copy(buf,5,2)),strtoint(copy(buf,7,2)),strtofloat(copy(buf,9,99))*24);
           end;
       end;
-      tmpbuf:=trim(words(lin,tokensep,'',magpos[1],1));        // mag.
+      tmpbuf:=trim(words(lin,'',magpos[1],1,tokensep));        // mag.
       if tmpbuf='' then exit;
       sm:=' '; buf:='';
       for p:=1 to length(tmpbuf) do begin
@@ -772,10 +772,10 @@ token : begin
       p:=pos('.',buf);
       if p=0 then ma:=ma/10;                       // max in tenth
       if codpos[1]>0 then begin                       // comment
-          sm:=trim(words(lin,tokensep,'',codpos[1],1))+' ';
+          sm:=trim(words(lin,'',codpos[1],1,tokensep))+' ';
       end else sm:=' ';
       if (tokensep=',') then obsname:=saveobs
-          else obsname:=trim(words(lin,tokensep,'',obspos[1],1));
+          else obsname:=trim(words(lin,'',obspos[1],1,tokensep));
       ok:=true;
       end;
 end;
@@ -826,7 +826,7 @@ with DetailForm.Image1.Picture.Bitmap.Canvas do begin
             i:=1;
             visualobs:=true;
             repeat
-              buf:=' '+trim(words(sm,' ','',i,1))+' ';
+              buf:=' '+trim(words(sm,'',i,1))+' ';
               visualobs := visualobs and (pos(buf,nonvisual)=0);
               inc(i);
             until buf='  ';

@@ -2,72 +2,59 @@ object Form1: TForm1
   Left = 396
   Height = 406
   Top = 107
-  Width = 441
-  HorzScrollBar.Page = 440
+  Width = 420
+  HorzScrollBar.Page = 419
   VertScrollBar.Page = 405
   ActiveControl = Button1
   Caption = 'AAVSO Bulletin'
   ClientHeight = 406
-  ClientWidth = 441
+  ClientWidth = 420
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefaultPosOnly
-  object Label1: TLabel
-    Left = 40
-    Height = 16
-    Top = 196
-    Width = 147
-    Caption = 'Current Year of the bulletin:'
-    ParentColor = False
-  end
   object Label2: TLabel
-    Left = 40
-    Height = 31
-    Top = 238
-    Width = 159
-    Caption = 'AAVSO LPV Bulletin Single file'#13#10'Plain Text - By designation'
+    Left = 32
+    Height = 20
+    Top = 224
+    Width = 325
+    Caption = 'AAVSO LPV Bulletin Single file, Plain Text - By designation'
     ParentColor = False
   end
   object Label3: TLabel
-    Left = 304
-    Height = 16
-    Top = 326
-    Width = 6
+    Left = 144
+    Height = 19
+    Top = 376
+    Width = 9
+    Alignment = taCenter
     ParentColor = False
   end
   object Label4: TLabel
-    Left = 40
-    Height = 31
-    Top = 282
-    Width = 119
-    Caption = 'Varobs GCVS by'#13#10'constellation directory'
-    ParentColor = False
-  end
-  object Label5: TLabel
-    Left = 40
-    Height = 31
-    Top = 152
-    Width = 141
-    Caption = 'AAVSO Validation file. '#13#10'Long form: By designation'
+    Left = 32
+    Height = 20
+    Top = 288
+    Width = 223
+    Caption = 'Varobs GCVS by constellation directory'
     ParentColor = False
   end
   object Label6: TLabel
-    Left = 40
-    Height = 91
-    Top = 8
-    Width = 392
-    Caption = 'Use this form to refresh the Long Period Variables maxima epoch'#13#10'using the AAVSO Bulletin for the current year.'#13#10'This produce two files aavsoval.txt and aavsoYYYY.txt that can be use'#13#10'in input to VarObs.'#13#10'All data are take in priority from the Bulletin or the Validation File, missing '#13#10'values are then completed from the GCVS.'
+    Left = 32
+    Height = 89
+    Top = 16
+    Width = 344
+    AutoSize = False
+    Caption = 'Use this form to refresh the Long Period Variables maxima epoch using the AAVSO Bulletin for the current year.'#10'This produce the file aavsoYYYY.dat that can be use in input to VarObs.'
     ParentColor = False
+    WordWrap = True
   end
   object Label7: TLabel
     Cursor = crHandPoint
-    Left = 40
-    Height = 14
-    Top = 112
-    Width = 186
-    Caption = 'http://www.aavso.org/observing/aids/'
+    Left = 32
+    Height = 15
+    Top = 144
+    Width = 265
+    Caption = 'http://www.aavso.org/publications/bulletin/'
     Color = clBtnFace
     Font.Color = clBlue
     Font.Height = -11
@@ -77,75 +64,59 @@ object Form1: TForm1
     OnClick = Label7Click
   end
   object Label8: TLabel
-    Left = 40
-    Height = 16
-    Top = 96
-    Width = 276
+    Left = 32
+    Height = 20
+    Top = 120
+    Width = 293
     Caption = 'Get the AAVSO Validation file and LPV Bulletin from:'
     ParentColor = False
   end
+  object Label1: TLabel
+    Left = 32
+    Height = 20
+    Top = 184
+    Width = 26
+    Caption = 'Year'
+    ParentColor = False
+  end
   object Button1: TButton
-    Left = 208
+    Left = 144
     Height = 25
-    Top = 320
+    Top = 344
     Width = 75
     Caption = 'GO!'
     OnClick = Button1Click
     TabOrder = 0
   end
-  object Edit1: TEdit
-    Left = 208
-    Height = 21
-    Top = 192
-    Width = 41
-    OnChange = Edit1Change
-    OnKeyDown = nil
+  object FileNameEdit1: TFileNameEdit
+    Left = 32
+    Height = 23
+    Top = 248
+    Width = 304
+    ButtonWidth = 23
+    NumGlyphs = 1
+    ParentColor = False
     TabOrder = 1
-    Text = '1900'
   end
-  object Edit2: TEdit
-    Left = 208
-    Height = 21
-    Top = 234
-    Width = 121
+  object SpinEdit1: TSpinEdit
+    Left = 88
+    Height = 23
+    Top = 181
+    Width = 80
+    MaxValue = 3000
+    MinValue = 2000
+    OnChange = SpinEdit1Change
     TabOrder = 2
-    Text = 'bullet01.txt'
+    Value = 2008
   end
-  object Edit3: TEdit
-    Left = 208
-    Height = 21
-    Top = 278
-    Width = 121
+  object DirectoryEdit1: TDirectoryEdit
+    Left = 32
+    Height = 23
+    Top = 312
+    Width = 304
+    ButtonWidth = 23
+    NumGlyphs = 1
+    ParentColor = False
     TabOrder = 3
-    Text = 'E:\var\varobs\const\'
-  end
-  object Edit4: TEdit
-    Left = 208
-    Height = 21
-    Top = 148
-    Width = 121
-    TabOrder = 4
-    Text = 'vallong.txt'
-  end
-  object Button2: TButton
-    Left = 352
-    Height = 25
-    Top = 320
-    Width = 75
-    Caption = 'Close'
-    OnClick = Button2Click
-    TabOrder = 5
-  end
-  object UpDown1: TUpDown
-    Left = 249
-    Height = 21
-    Top = 192
-    Width = 16
-    Associate = Edit1
-    Min = 1900
-    Max = 9999
-    Position = 1900
-    TabOrder = 6
-    Thousands = False
   end
 end
