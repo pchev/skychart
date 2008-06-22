@@ -27,6 +27,9 @@ interface
 
 uses
 //Shellapi,
+{$ifdef mswindows}
+  Windows,
+{$endif}
   LCLIntf,  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, LResources, EditBtn, Fileutil, u_param, u_util2, Spin;
 
