@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 396
+  Left = 273
   Height = 406
-  Top = 107
+  Top = 96
   Width = 420
   HorzScrollBar.Page = 419
   VertScrollBar.Page = 405
@@ -16,25 +16,25 @@ object Form1: TForm1
   Position = poDefaultPosOnly
   object Label2: TLabel
     Left = 32
-    Height = 20
+    Height = 16
     Top = 224
-    Width = 325
+    Width = 305
     Caption = 'AAVSO LPV Bulletin Single file, Plain Text - By designation'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 144
-    Height = 19
+    Height = 20
     Top = 376
-    Width = 9
+    Width = 10
     Alignment = taCenter
     ParentColor = False
   end
   object Label4: TLabel
     Left = 32
-    Height = 20
+    Height = 16
     Top = 288
-    Width = 223
+    Width = 206
     Caption = 'Varobs GCVS by constellation directory'
     ParentColor = False
   end
@@ -51,9 +51,9 @@ object Form1: TForm1
   object Label7: TLabel
     Cursor = crHandPoint
     Left = 32
-    Height = 15
+    Height = 14
     Top = 144
-    Width = 265
+    Width = 210
     Caption = 'http://www.aavso.org/publications/bulletin/'
     Color = clBtnFace
     Font.Color = clBlue
@@ -65,17 +65,17 @@ object Form1: TForm1
   end
   object Label8: TLabel
     Left = 32
-    Height = 20
+    Height = 16
     Top = 120
-    Width = 293
+    Width = 276
     Caption = 'Get the AAVSO Validation file and LPV Bulletin from:'
     ParentColor = False
   end
   object Label1: TLabel
     Left = 32
-    Height = 20
+    Height = 16
     Top = 184
-    Width = 26
+    Width = 24
     Caption = 'Year'
     ParentColor = False
   end
