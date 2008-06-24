@@ -979,7 +979,7 @@ try
  Fits.max_sigma:=cfgm.ImageContrast;
  if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
     CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur');
-    Screen.Cursors[crRetic]:=CursorImage1.CursorHandle;
+    Screen.Cursors[crRetic]:=CursorImage1.Handle;
  end
  else crRetic:=crCross;
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm') then
@@ -5306,7 +5306,7 @@ begin
    CursorImage1:=TCursorImage.Create;
    CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur');
    inc(crRetic);
-   Screen.Cursors[crRetic]:=CursorImage1.CursorHandle;
+   Screen.Cursors[crRetic]:=CursorImage1.Handle;
    for i:=0 to MultiDoc1.ChildCount-1 do
         if MultiDoc1.Childs[i].DockedObject is Tf_chart then
            Tf_chart(MultiDoc1.Childs[i].DockedObject).ChartCursor:=crRetic;

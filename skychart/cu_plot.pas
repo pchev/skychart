@@ -425,7 +425,7 @@ var
 begin
     IntfImage:=nil;
     try
-      bmp.CreateIntfImage(IntfImage);
+      IntfImage:=bmp.CreateIntfImage;
       for y:=0 to IntfImage.Height-1 do begin
         for x:=0 to IntfImage.Width-1 do begin
           CurColor:=IntfImage.Colors[x,y];
