@@ -982,10 +982,10 @@ try
     Screen.Cursors[crRetic]:=CursorImage1.Handle;
  end
  else crRetic:=crCross;
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm') then
-    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.xpm');
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm') then
-    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.xpm');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp') then
+    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp') then
+    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp');
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  if def_cfgsc.tz.TimeZoneFile='' then firstuse:=true;
  if firstuse then
@@ -5312,14 +5312,14 @@ begin
            Tf_chart(MultiDoc1.Childs[i].DockedObject).ChartCursor:=crRetic;
  end;
 
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.xpm') then begin
-    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.xpm');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp') then begin
+    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp');
     for i:=0 to MultiDoc1.ChildCount-1 do
         if MultiDoc1.Childs[i].DockedObject is Tf_chart then
            Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassrose:=compass;
  end;
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.xpm') then begin
-    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.xpm');
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp') then begin
+    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp');
     for i:=0 to MultiDoc1.ChildCount-1 do
         if MultiDoc1.Childs[i].DockedObject is Tf_chart then
            Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassarrow:=arrow;
@@ -5337,7 +5337,7 @@ begin
      for i:=0 to ImageListCount-1 do begin
        try
          btn:=TBitmap.Create;
-         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.xpm');
+         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.bmp');
          imagelist.Add(btn,nil);
          btn.Free;
        except
@@ -5348,8 +5348,8 @@ begin
    Toolbar2.Images:=imagelist;
    Toolbar3.Images:=imagelist;
    Toolbar4.Images:=imagelist;
-   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.xpm');
-   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.xpm');
+   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.bmp');
+   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.bmp');
    btn:=TBitmap.Create;
    btn.canvas.pen.color:=clBlack;
    btn.canvas.brush.color:=clBlack;
@@ -5404,7 +5404,7 @@ end;
 { code to save the image list to individual files
    for i:=0 to ImageNormal.Count-1 do begin
      ImageNormal.GetBitmap(i,btn);
-     btn.SavetoFile('/home/cdc/src/skychart/bitmaps/icon_color/i'+inttostr(i)+'.xpm');
+     btn.SavetoFile('/home/cdc/src/skychart/bitmaps/icon_color/i'+inttostr(i)+'.bmp');
    end;
 }
 
