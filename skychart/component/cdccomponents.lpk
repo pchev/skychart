@@ -16,7 +16,7 @@
     </CompilerOptions>
     <Description Value="Requires packages for Cartes du Ciel"/>
     <Type Value="RunAndDesignTime"/>
-    <RequiredPkgs Count="12">
+    <RequiredPkgs Count="13">
       <Item1>
         <PackageName Value="lazvo"/>
         <DefaultFilename Value="vo/lazvo.lpk"/>
@@ -65,6 +65,10 @@
         <PackageName Value="CDCjdcalendar"/>
         <DefaultFilename Value="jdcalendar/cdcjdcalendar.lpk"/>
       </Item12>
+      <Item13>
+        <PackageName Value="uniqueinstance_package"/>
+        <DefaultFilename Value="uniqueinstance/uniqueinstance_package.lpk"/>
+      </Item13>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)/"/>
