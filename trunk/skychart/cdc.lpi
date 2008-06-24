@@ -27,87 +27,84 @@
         <WorkingDirectory Value="D:\ciel"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="21">
+    <RequiredPackages Count="20">
       <Item1>
         <PackageName Value="uniqueinstance_package"/>
       </Item1>
       <Item2>
-        <PackageName Value="JPEGForLazarus"/>
-      </Item2>
-      <Item3>
         <PackageName Value="cdccatalog"/>
         <DefaultFilename Value="library\catalog\cdccatalog.lpk"/>
-      </Item3>
-      <Item4>
+      </Item2>
+      <Item3>
         <PackageName Value="CDCjdcalendar"/>
         <DefaultFilename Value="component\jdcalendar\cdcjdcalendar.lpk"/>
-      </Item4>
-      <Item5>
+      </Item3>
+      <Item4>
         <PackageName Value="downldialog"/>
         <DefaultFilename Value="component\downloaddialog\downldialog.lpk"/>
-      </Item5>
-      <Item6>
+      </Item4>
+      <Item5>
         <PackageName Value="elp82"/>
         <DefaultFilename Value="library\elp82\elp82.lpk"/>
-      </Item6>
-      <Item7>
+      </Item5>
+      <Item6>
         <PackageName Value="enhedit"/>
         <DefaultFilename Value="component\enhedits\enhedit.lpk"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="FCL"/>
       </Item7>
       <Item8>
-        <PackageName Value="FCL"/>
+        <PackageName Value="LCL"/>
       </Item8>
       <Item9>
-        <PackageName Value="LCL"/>
-      </Item9>
-      <Item10>
         <PackageName Value="libsql"/>
         <DefaultFilename Value="component\libsql\libsql.lpk"/>
-      </Item10>
-      <Item11>
+      </Item9>
+      <Item10>
         <PackageName Value="mrecsort"/>
         <DefaultFilename Value="component\mrecsort\mrecsort.lpk"/>
-      </Item11>
-      <Item12>
+      </Item10>
+      <Item11>
         <PackageName Value="MultiDocPackage"/>
         <MinVersion Valid="True"/>
-      </Item12>
-      <Item13>
+      </Item11>
+      <Item12>
         <PackageName Value="Printer4Lazarus"/>
         <MinVersion Build="1" Valid="True"/>
-      </Item13>
-      <Item14>
+      </Item12>
+      <Item13>
         <PackageName Value="radec"/>
         <DefaultFilename Value="component\radec\radec.lpk"/>
-      </Item14>
-      <Item15>
+      </Item13>
+      <Item14>
         <PackageName Value="satxy"/>
         <DefaultFilename Value="library\satxy\satxy.lpk"/>
-      </Item15>
-      <Item16>
+      </Item14>
+      <Item15>
         <PackageName Value="series96"/>
         <DefaultFilename Value="library\series96\series96.lpk"/>
-      </Item16>
-      <Item17>
+      </Item15>
+      <Item16>
         <PackageName Value="synapse"/>
         <DefaultFilename Value="component\synapse\source\lib\synapse.lpk"/>
+      </Item16>
+      <Item17>
+        <PackageName Value="SynEdit"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item17>
       <Item18>
-        <PackageName Value="SynEdit"/>
+        <PackageName Value="TurboPowerIPro"/>
         <MinVersion Major="1" Valid="True"/>
       </Item18>
       <Item19>
-        <PackageName Value="TurboPowerIPro"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item19>
-      <Item20>
         <PackageName Value="XmlParser"/>
         <DefaultFilename Value="component\xmlparser\xmlparser.lpk"/>
-      </Item20>
-      <Item21>
+      </Item19>
+      <Item20>
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="component\zoomimage\zoomimage.lpk"/>
-      </Item21>
+      </Item20>
     </RequiredPackages>
     <Units Count="44">
       <Unit0>
@@ -120,6 +117,7 @@
         <ComponentName Value="f_main"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_main.lrs"/>
         <UnitName Value="pu_main"/>
       </Unit1>
@@ -184,6 +182,7 @@
         <ComponentName Value="f_chart"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_chart.lrs"/>
         <UnitName Value="pu_chart"/>
       </Unit12>
@@ -324,6 +323,7 @@
         <ComponentName Value="f_config_chart"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config_chart.lrs"/>
         <UnitName Value="pu_config_chart"/>
       </Unit31>
