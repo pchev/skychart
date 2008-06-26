@@ -306,6 +306,8 @@ end;
 
 procedure Tf_config_observatory.ShowObservatory;
 var i:integer;
+    img:TJPEGImage;
+    pict:TPicture;
 begin
 try
 pressure.value:=csc.obspressure;
@@ -327,7 +329,14 @@ ZoomImage1.Ycentre:=Obsposy;
 ZoomImage1.ZoomMax:=3;
 if fileexists(cmain.EarthMapFile)and(cmain.EarthMapFile<>ObsMapfile) then begin
    ObsMapfile:=cmain.EarthMapFile;
-   ZoomImage1.Picture.LoadFromFile(ObsMapfile);
+   img:=TJPEGImage.Create;
+   pict:=TPicture.Create;
+   img.LoadFromFile(ObsMapfile);
+//   ZoomImage1.Picture.LoadFromFile(ObsMapfile);
+   pict.Assign(img);
+   ZoomImage1.Picture:=pict;
+   img.Free;
+   pict.free;
 end else ZoomImage1.PictureChange(self);
 ZoomImage1.Zoom:=ZoomImage1.ZoomMin;
 SetScrollBar;

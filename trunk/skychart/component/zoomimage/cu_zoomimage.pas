@@ -117,6 +117,7 @@ if Value.Width=0 then raise exception.create('Invalid image!');
 FSizeX:=Value.Width;
 FSizeY:=Value.Height;
 FPicture.Assign(Value);
+//FPicture.SaveToFile('tt.jpg');
 FZoomMin:=Width / FSizeX;
 if FZoomMax<=FZoomMin then FZoomMax:=FZoomMin+1;
 end;

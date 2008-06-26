@@ -1,7 +1,7 @@
 object f_calendar: Tf_calendar
-  Left = 607
+  Left = 625
   Height = 388
-  Top = 105
+  Top = 102
   Width = 670
   ActiveControl = Date1
   Caption = 'f_calendar'
@@ -326,15 +326,14 @@ object f_calendar: Tf_calendar
     OnPageChanged = PageControl1Change
     object twilight: TTabSheet
       Caption = 'Twilight'
-      ClientHeight = 292
-      ClientWidth = 662
+      ClientHeight = 287
+      ClientWidth = 664
       object TwilightGrid: TStringGrid
-        Height = 292
-        Width = 662
+        Height = 287
+        Width = 664
         Align = alClient
         ColCount = 5
         DefaultColWidth = 115
-        ExtendedSelect = True
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
@@ -368,7 +367,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -402,7 +400,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -437,7 +434,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -472,7 +468,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -507,7 +502,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -542,7 +536,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -577,7 +570,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -612,7 +604,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -647,7 +638,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -682,7 +672,6 @@ object f_calendar: Tf_calendar
             Align = alClient
             ColCount = 11
             DefaultColWidth = 75
-            ExtendedSelect = True
             FixedColor = clBtnFace
             FixedRows = 2
             GridLineWidth = 0
@@ -721,7 +710,6 @@ object f_calendar: Tf_calendar
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 13
         DefaultColWidth = 70
-        ExtendedSelect = True
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
@@ -796,7 +784,6 @@ object f_calendar: Tf_calendar
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 9
         DefaultColWidth = 70
-        ExtendedSelect = True
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
@@ -865,7 +852,6 @@ object f_calendar: Tf_calendar
         Align = alClient
         ColCount = 12
         DefaultColWidth = 75
-        ExtendedSelect = True
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
@@ -901,7 +887,6 @@ object f_calendar: Tf_calendar
         Align = alClient
         ColCount = 9
         DefaultColWidth = 75
-        ExtendedSelect = True
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0
@@ -925,7 +910,6 @@ object f_calendar: Tf_calendar
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 10
         DefaultColWidth = 70
-        ExtendedSelect = True
         FixedColor = clBtnFace
         FixedRows = 2
         GridLineWidth = 0

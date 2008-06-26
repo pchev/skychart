@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
-    <PathDelim Value="\"/>
+    <PathDelim Value="/"/>
     <Version Value="6"/>
     <General>
       <Flags>
@@ -11,7 +11,7 @@
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <IconPath Value=".\"/>
+      <IconPath Value="./"/>
       <TargetFileExt Value=".exe"/>
       <Title Value="Cartes du Ciel"/>
     </General>
@@ -23,8 +23,8 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="C:\appli\as\ciel"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+        <WorkingDirectory Value="/home/cdc"/>
       </local>
     </RunParams>
     <RequiredPackages Count="20">
@@ -33,23 +33,23 @@
       </Item1>
       <Item2>
         <PackageName Value="cdccatalog"/>
-        <DefaultFilename Value="library\catalog\cdccatalog.lpk"/>
+        <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
       </Item2>
       <Item3>
         <PackageName Value="CDCjdcalendar"/>
-        <DefaultFilename Value="component\jdcalendar\cdcjdcalendar.lpk"/>
+        <DefaultFilename Value="component/jdcalendar/cdcjdcalendar.lpk"/>
       </Item3>
       <Item4>
         <PackageName Value="downldialog"/>
-        <DefaultFilename Value="component\downloaddialog\downldialog.lpk"/>
+        <DefaultFilename Value="component/downloaddialog/downldialog.lpk"/>
       </Item4>
       <Item5>
         <PackageName Value="elp82"/>
-        <DefaultFilename Value="library\elp82\elp82.lpk"/>
+        <DefaultFilename Value="library/elp82/elp82.lpk"/>
       </Item5>
       <Item6>
         <PackageName Value="enhedit"/>
-        <DefaultFilename Value="component\enhedits\enhedit.lpk"/>
+        <DefaultFilename Value="component/enhedits/enhedit.lpk"/>
       </Item6>
       <Item7>
         <PackageName Value="FCL"/>
@@ -59,11 +59,11 @@
       </Item8>
       <Item9>
         <PackageName Value="libsql"/>
-        <DefaultFilename Value="component\libsql\libsql.lpk"/>
+        <DefaultFilename Value="component/libsql/libsql.lpk"/>
       </Item9>
       <Item10>
         <PackageName Value="mrecsort"/>
-        <DefaultFilename Value="component\mrecsort\mrecsort.lpk"/>
+        <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
       </Item10>
       <Item11>
         <PackageName Value="MultiDocPackage"/>
@@ -75,19 +75,19 @@
       </Item12>
       <Item13>
         <PackageName Value="radec"/>
-        <DefaultFilename Value="component\radec\radec.lpk"/>
+        <DefaultFilename Value="component/radec/radec.lpk"/>
       </Item13>
       <Item14>
         <PackageName Value="satxy"/>
-        <DefaultFilename Value="library\satxy\satxy.lpk"/>
+        <DefaultFilename Value="library/satxy/satxy.lpk"/>
       </Item14>
       <Item15>
         <PackageName Value="series96"/>
-        <DefaultFilename Value="library\series96\series96.lpk"/>
+        <DefaultFilename Value="library/series96/series96.lpk"/>
       </Item15>
       <Item16>
         <PackageName Value="synapse"/>
-        <DefaultFilename Value="component\synapse\source\lib\synapse.lpk"/>
+        <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
       </Item16>
       <Item17>
         <PackageName Value="SynEdit"/>
@@ -99,11 +99,11 @@
       </Item18>
       <Item19>
         <PackageName Value="XmlParser"/>
-        <DefaultFilename Value="component\xmlparser\xmlparser.lpk"/>
+        <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
       </Item19>
       <Item20>
         <PackageName Value="zoomimage"/>
-        <DefaultFilename Value="component\zoomimage\zoomimage.lpk"/>
+        <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item20>
     </RequiredPackages>
     <Units Count="44">
@@ -242,6 +242,7 @@
         <ComponentName Value="f_printsetup"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_printsetup.lrs"/>
         <UnitName Value="pu_printsetup"/>
       </Unit19>
@@ -335,6 +336,7 @@
         <ComponentName Value="f_config_observatory"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config_observatory.lrs"/>
         <UnitName Value="pu_config_observatory"/>
       </Unit32>
@@ -382,6 +384,7 @@
         <Filename Value="pu_print.pas"/>
         <ComponentName Value="f_print"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_print.lrs"/>
         <UnitName Value="pu_print"/>
       </Unit38>
@@ -423,13 +426,12 @@
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="5"/>
-    <PathDelim Value="\"/>
     <Target>
-      <Filename Value="units\$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)\skychart"/>
+      <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
     </Target>
     <SearchPaths>
-      <UnitOutputDirectory Value="units\$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
-      <SrcPath Value="$(LazarusDir)\lcl\;$(LazarusDir)\lcl\interfaces\$(LCLWidgetType)\"/>
+      <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+      <SrcPath Value="$(LazarusDir)/lcl/;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)/"/>
     </SearchPaths>
     <CodeGeneration>
       <HeapSize Value="100000"/>

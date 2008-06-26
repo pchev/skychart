@@ -3,8 +3,6 @@ object f_config_observatory: Tf_config_observatory
   Height = 567
   Top = 183
   Width = 481
-  HorzScrollBar.Page = 480
-  VertScrollBar.Page = 566
   ActiveControl = latdeg
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
@@ -17,6 +15,7 @@ object f_config_observatory: Tf_config_observatory
   OnDestroy = FormDestroy
   OnShow = FormShow
   Position = poScreenCenter
+  LCLVersion = '0.9.25'
   object MainPanel: TPanel
     Height = 515
     Top = 8
@@ -98,7 +97,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 462
           Width = 400
           PageSize = 1
-          TabOrder = 9
+          TabOrder = 11
           TabStop = False
           OnChange = HScrollBarChange
         end
@@ -140,7 +139,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object citylist: TComboBox
             Left = 8
-            Height = 24
+            Height = 23
             Top = 31
             Width = 233
             AutoComplete = True
@@ -164,7 +163,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object countrylist: TComboBox
             Left = 8
-            Height = 24
+            Height = 23
             Top = 1
             Width = 234
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
@@ -252,12 +251,12 @@ object f_config_observatory: Tf_config_observatory
           Top = 109
           Width = 185
           Caption = 'Latitude'
-          ClientHeight = 52
+          ClientHeight = 54
           ClientWidth = 179
           TabOrder = 1
           object Label58: TLabel
             Left = 4
-            Height = 14
+            Height = 20
             Top = 4
             Width = 42
             Caption = 'Degree'
@@ -265,7 +264,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label59: TLabel
             Left = 48
-            Height = 14
+            Height = 20
             Top = 4
             Width = 24
             Caption = 'Min.'
@@ -273,15 +272,15 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label60: TLabel
             Left = 80
-            Height = 14
+            Height = 20
             Top = 4
-            Width = 25
+            Width = 26
             Caption = 'Sec.'
             ParentColor = False
           end
           object hemis: TComboBox
             Left = 112
-            Height = 21
+            Height = 23
             Top = 21
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
@@ -347,12 +346,12 @@ object f_config_observatory: Tf_config_observatory
           Top = 109
           Width = 185
           Caption = 'Longitude'
-          ClientHeight = 52
+          ClientHeight = 54
           ClientWidth = 179
           TabOrder = 2
           object Label61: TLabel
             Left = 4
-            Height = 14
+            Height = 20
             Top = 4
             Width = 42
             Caption = 'Degree'
@@ -360,7 +359,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label62: TLabel
             Left = 48
-            Height = 14
+            Height = 20
             Top = 4
             Width = 24
             Caption = 'Min.'
@@ -368,15 +367,15 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label63: TLabel
             Left = 80
-            Height = 14
+            Height = 20
             Top = 4
-            Width = 25
+            Width = 26
             Caption = 'Sec.'
             ParentColor = False
           end
           object long: TComboBox
             Left = 112
-            Height = 21
+            Height = 23
             Top = 21
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
@@ -483,7 +482,7 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 4
           object TZComboBox: TComboBox
             Left = 8
-            Height = 25
+            Height = 23
             Top = 23
             Width = 433
             AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
@@ -716,7 +715,6 @@ object f_config_observatory: Tf_config_observatory
     top = 296
   end
   object OpenDialog1: TOpenDialog
-    Title = 'Open existing file'
     FilterIndex = 0
     left = 128
     top = 360

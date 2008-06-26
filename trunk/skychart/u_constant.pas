@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses gcatunit, {libcatalog,} // libcatalog statically linked
-     cu_tz,
+     cu_tz, dynlibs,
      Classes, Controls, FPCanvas, Graphics;
 
 const MaxColor = 35;
@@ -574,7 +574,7 @@ type
      PPlanetData = ^TPlanetData;
      TPlan404=Function( pla : PPlanetData):integer; cdecl;
 var Plan404 : TPlan404;
-    Plan404lib: longword;
+    Plan404lib: TLibHandle;
 
 //  zlib
 type
