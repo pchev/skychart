@@ -1,7 +1,7 @@
 object f_info: Tf_info
-  Left = 358
+  Left = 379
   Height = 464
-  Top = 135
+  Top = 120
   Width = 719
   ActiveControl = StringGrid1
   BorderStyle = bsSizeToolWin
@@ -54,7 +54,6 @@ object f_info: Tf_info
       ColCount = 1
       DefaultColWidth = 800
       DefaultRowHeight = 22
-      ExtendedSelect = True
       FixedColor = clBtnFace
       FixedCols = 0
       FixedRows = 0
@@ -77,10 +76,10 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 1
       object serverinfo: TLabel
-        Left = 536
-        Height = 14
+        Left = 535
+        Height = 15
         Top = 6
-        Width = 1
+        Width = 2
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         ParentColor = False
@@ -97,9 +96,9 @@ object f_info: Tf_info
       end
       object CheckBox1: TCheckBox
         Left = 104
-        Height = 19
+        Height = 21
         Top = 2
-        Width = 85
+        Width = 92
         Caption = 'AutoRefresh'
         Checked = True
         OnClick = CheckBox1Click
@@ -131,7 +130,6 @@ object f_info: Tf_info
       TabOrder = 1
       OnDblClick = Memo1DblClick
       BookMarkOptions.Xoffset = -18
-      BookMarkOptions.OnChange = nil
       Gutter.Visible = False
       Gutter.CodeFoldingWidth = 14
       Keystrokes = <      
@@ -461,7 +459,6 @@ object f_info: Tf_info
       Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
       ReadOnly = True
       RightEdge = 0
-      SelectedColor.OnChange = nil
       TabWidth = 10
     end
     object Panel3: TPanel
