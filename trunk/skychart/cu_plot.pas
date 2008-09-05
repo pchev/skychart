@@ -423,6 +423,7 @@ var
   CurColor: TFPColor;
   ImgHandle, ImgMaskHandle: HBitmap;
 begin
+if (bmp.Width<2)or(bmp.Height<2) then exit;
     IntfImage:=nil;
     try
       IntfImage:=bmp.CreateIntfImage;
@@ -1437,6 +1438,7 @@ var dsx,dsy,zoom : single;
     imabmp:Tbitmap;
     rbmp: Tbitmap;
 begin
+if (iWidth<2)or(iHeight<2) then exit;
 zoom:=iWidth/ibmp.Width;
 imabmp:=Tbitmap.Create;
 rbmp:=Tbitmap.Create;
