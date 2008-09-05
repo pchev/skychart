@@ -1573,7 +1573,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
  if i=0 then begin
    xplanetimg.LoadFromFile(slash(Tempdir)+'planet.png');
    chdir(appdir);
-   planetbmp.Assign(xplanetimg);
+   planetbmp.Assign(xplanetimg.Bitmap);
    planetbmppla:=ipla;
    planetbmpjd:=jdt;
    planetbmprot:=pa;
