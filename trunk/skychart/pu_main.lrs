@@ -1,14 +1,14 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_main','FORMDATA',[
-  'TPF0'#7'Tf_main'#6'f_main'#4'Left'#3'{'#1#6'Height'#3'D'#2#3'Top'#2'x'#5'Wid'
-  +'th'#3'\'#3#13'ActiveControl'#7#11'quicksearch'#7'Caption'#6#14'Cartes du Ci'
-  +'el'#12'ClientHeight'#3'1'#2#11'ClientWidth'#3'\'#3#12'Font.CharSet'#7#12'AN'
-  +'SI_CHARSET'#10'KeyPreview'#9#4'Menu'#7#9'MainMenu1'#10'OnActivate'#7#12'For'
-  +'mActivate'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#9'OnDestr'
-  +'oy'#7#11'FormDestroy'#9'OnKeyDown'#7#11'FormKeyDown'#10'OnKeyPress'#7#12'Fo'
-  +'rmKeyPress'#8'OnResize'#7#10'FormResize'#6'OnShow'#7#8'FormShow'#10'LCLVers'
-  +'ion'#6#6'0.9.25'#0#9'TMultiDoc'#9'MultiDoc1'#4'Left'#2#24#6'Height'#3#219#1
+  'TPF0'#7'Tf_main'#6'f_main'#4'Left'#3#208#1#6'Height'#3'D'#2#3'Top'#2'x'#5'Wi'
+  +'dth'#3'\'#3#13'ActiveControl'#7#11'quicksearch'#7'Caption'#6#14'Cartes du C'
+  +'iel'#12'ClientHeight'#3'1'#2#11'ClientWidth'#3'\'#3#12'Font.CharSet'#7#12'A'
+  +'NSI_CHARSET'#10'KeyPreview'#9#4'Menu'#7#9'MainMenu1'#10'OnActivate'#7#12'Fo'
+  +'rmActivate'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#9'OnDest'
+  +'roy'#7#11'FormDestroy'#9'OnKeyDown'#7#11'FormKeyDown'#10'OnKeyPress'#7#12'F'
+  +'ormKeyPress'#8'OnResize'#7#10'FormResize'#6'OnShow'#7#8'FormShow'#10'LCLVer'
+  +'sion'#6#6'0.9.25'#0#9'TMultiDoc'#9'MultiDoc1'#4'Left'#2#24#6'Height'#3#219#1
   +#3'Top'#2'6'#5'Width'#3'+'#3#5'Align'#7#8'alClient'#10'BevelOuter'#7#6'bvNon'
   +'e'#11'BorderWidth'#2#2#12'ClientHeight'#3#219#1#11'ClientWidth'#3'+'#3#5'Co'
   +'lor'#7#7'clBlack'#11'FullRepaint'#8#11'ParentColor'#8#8'TabOrder'#2#0#7'Tab'
@@ -2638,122 +2638,123 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#2#2#5'Width'#2'8'#8'MaxValue'#3#232#3#8'MinValue'#2#1#8'TabOrder'#2#1#5'Val'
   +'ue'#2#1#0#0#9'TComboBox'#5'TimeU'#4'Left'#3'x'#2#6'Height'#2#23#4'Hint'#6#10
   +'Time Units'#3'Top'#2#2#5'Width'#2'P'#16'AutoCompleteText'#11#20'cbactSearch'
-  +'Ascending'#0#13'DropDownCount'#2#11#12'Font.CharSet'#7#12'ANSI_CHARSET'#5'S'
-  +'tyle'#7#14'csDropDownList'#8'TabOrder'#2#2#0#0#6'TPanel'#12'ChildControl'#4
-  +'Left'#3'>'#3#6'Height'#2#23#3'Top'#2#2#5'Width'#2#30#5'Align'#7#7'alRight'#8
-  +'AutoSize'#9#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#2#23#11'ClientWidth'
-  +#2#30#8'TabOrder'#2#3#0#12'TSpeedButton'#15'BtnRestoreChild'#6'Height'#2#15#5
-  +'Width'#2#15#5'Color'#7#9'clBtnFace'#4'Flat'#9#9'NumGlyphs'#2#0#7'OnClick'#7
-  +#20'BtnRestoreChildClick'#0#0#12'TSpeedButton'#13'BtnCloseChild'#4'Left'#2#15
-  +#6'Height'#2#15#5'Width'#2#15#5'Color'#7#9'clBtnFace'#4'Flat'#9#9'NumGlyphs'
-  +#2#0#7'OnClick'#7#18'BtnCloseChildClick'#0#0#0#0#8'TToolBar'#8'ToolBar4'#6'H'
-  +'eight'#2#28#3'Top'#2#26#5'Width'#3'\'#3#5'Align'#7#8'alBottom'#12'ButtonHei'
-  +'ght'#2#24#7'Caption'#6#8'ToolBar4'#11'EdgeBorders'#11#5'ebTop'#8'ebBottom'#0
-  +#4'Flat'#9#6'Images'#7#11'ImageNormal'#14'ParentShowHint'#8#8'ShowHint'#9#8
-  +'TabOrder'#2#1#8'Wrapable'#8#0#11'TToolButton'#19'ToolButtonShowStars'#4'Lef'
-  +'t'#2#1#4'Hint'#6#10'Show Stars'#3'Top'#2#2#6'Action'#7#9'ShowStars'#5'Style'
-  +#7#8'tbsCheck'#0#0#11'TToolButton'#21'ToolButtonShowNebulae'#4'Left'#2#24#4
-  +'Hint'#6#12'Show Nebulae'#3'Top'#2#2#6'Action'#7#11'ShowNebulae'#5'Style'#7#8
-  +'tbsCheck'#0#0#11'TToolButton'#19'ToolButtonShowLines'#4'Left'#2'/'#4'Hint'#6
-  +#10'Show Lines'#3'Top'#2#2#6'Action'#7#9'ShowLines'#5'Style'#7#8'tbsCheck'#0
-  +#0#11'TToolButton'#22'ToolButtonShowPictures'#4'Left'#2'F'#4'Hint'#6#13'Show'
-  +' Pictures'#3'Top'#2#2#6'Action'#7#12'ShowPictures'#5'Style'#7#8'tbsCheck'#0
-  +#0#11'TToolButton'#13'ToolButtonDSS'#4'Left'#2']'#4'Hint'#6#13'Get DSS Image'
-  +#3'Top'#2#2#6'Action'#7#8'DSSImage'#0#0#11'TToolButton'#29'ToolButtonShowBac'
-  +'kgroundImage'#4'Left'#2't'#4'Hint'#6#23'Change pictures display'#3'Top'#2#2
-  +#6'Action'#7#13'SetupPictures'#0#0#11'TToolButton'#21'ToolButtonShowPlanets'
-  +#4'Left'#3#162#0#4'Hint'#6#12'Show Planets'#3'Top'#2#2#6'Action'#7#11'ShowPl'
-  +'anets'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#23'ToolButtonShowAsteroid'
-  +'s'#4'Left'#3#185#0#4'Hint'#6#14'Show Asteroids'#3'Top'#2#2#6'Action'#7#13'S'
-  +'howAsteroids'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#20'ToolButtonShowC'
-  +'omets'#4'Left'#3#208#0#4'Hint'#6#11'Show Comets'#3'Top'#2#2#6'Action'#7#10
-  +'ShowComets'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#22'ToolButtonShowMil'
-  +'kyWay'#4'Left'#3#231#0#4'Hint'#6#14'Show Milky Way'#3'Top'#2#2#6'Action'#7
-  +#12'ShowMilkyWay'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#14'ToolButtonGr'
-  +'id'#4'Left'#3#254#0#4'Hint'#6#20'Show Coordinate Grid'#3'Top'#2#2#6'Action'
-  +#7#4'Grid'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#16'ToolButtonGridEq'#4
-  +'Left'#3#21#1#4'Hint'#6#19'Add Equatorial Grid'#3'Top'#2#2#6'Action'#7#6'Gri'
-  +'dEQ'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#31'ToolButtonShowConstellat'
-  +'ionLine'#4'Left'#3','#1#4'Hint'#6#23'Show Constellation Line'#3'Top'#2#2#6
-  +'Action'#7#21'ShowConstellationLine'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButt'
-  +'on ToolButtonShowConstellationLimit'#4'Left'#3'C'#1#4'Hint'#6#24'Show Const'
-  +'ellation Limit'#3'Top'#2#2#6'Action'#7#22'ShowConstellationLimit'#5'Style'#7
-  +#8'tbsCheck'#0#0#11'TToolButton'#29'ToolButtonShowGalacticEquator'#4'Left'#3
-  +'Z'#1#4'Hint'#6#21'Show Galactic Equator'#3'Top'#2#2#6'Action'#7#19'ShowGala'
-  +'cticEquator'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#22'ToolButtonShowEc'
-  +'liptic'#4'Left'#3'q'#1#4'Hint'#6#13'Show Ecliptic'#3'Top'#2#2#6'Action'#7#12
-  +'ShowEcliptic'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#18'ToolButtonShowM'
-  +'ark'#4'Left'#3#136#1#4'Hint'#6#9'Show Mark'#3'Top'#2#2#6'Action'#7#8'ShowMa'
-  +'rk'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#20'ToolButtonShowLabels'#4'L'
-  +'eft'#3#159#1#4'Hint'#6#11'Show Labels'#3'Top'#2#2#6'Action'#7#10'ShowLabels'
-  +#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#20'ToolButtonEditlabels'#4'Left'
-  +#3#182#1#4'Hint'#6#11'Edit Labels'#3'Top'#2#2#6'Action'#7#10'EditLabels'#9'P'
-  +'opupMenu'#7#10'PopupMenu1'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton ToolBu'
-  ,'ttonShowObjectbelowHorizon'#4'Left'#3#205#1#4'Hint'#6#29'Show Object below '
-  +'the horizon'#3'Top'#2#2#6'Action'#7#22'ShowObjectbelowHorizon'#5'Style'#7#8
-  +'tbsCheck'#0#0#11'TToolButton'#26'ToolButtonswitchbackground'#4'Left'#3#228#1
-  +#4'Hint'#6#20'Sky Background Color'#3'Top'#2#2#6'Action'#7#16'switchbackgrou'
-  +'nd'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#19'ToolButtonSyncChart'#4'Le'
-  +'ft'#3#3#2#4'Hint'#6#14'Link All Chart'#3'Top'#2#2#6'Action'#7#9'SyncChart'#5
-  +'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#15'ToolButtonTrack'#4'Left'#3#26#2
-  +#4'Hint'#6#5'Track'#3'Top'#2#2#6'Action'#7#5'Track'#5'Style'#7#8'tbsCheck'#0
-  +#0#11'TToolButton'#21'ToolButtonswitchstars'#4'Left'#3'9'#2#4'Hint'#6#19'Cha'
-  +'nge Drawing Mode'#3'Top'#2#2#6'Action'#7#11'switchstars'#5'Style'#7#8'tbsCh'
-  +'eck'#0#0#11'TToolButton'#11'ToolButton2'#4'Left'#3'1'#2#3'Top'#2#2#5'Width'
-  +#2#8#5'Style'#7#10'tbsDivider'#0#0#11'TToolButton'#11'ToolButton4'#4'Left'#3
-  +#251#1#3'Top'#2#2#5'Width'#2#8#5'Style'#7#10'tbsDivider'#0#0#11'TToolButton'
-  +#15'ToolButtonBlink'#4'Left'#3#139#0#4'Hint'#6#16'Blinking Picture'#3'Top'#2
-  +#2#6'Action'#7#10'BlinkImage'#5'Style'#7#8'tbsCheck'#0#0#0#0#9'TMainMenu'#9
-  +'MainMenu1'#4'left'#2'`'#3'top'#3#160#0#0#9'TMenuItem'#5'File1'#7'Caption'#6
-  +#5'&File'#4'Hint'#6#21'File related commands'#0#9'TMenuItem'#11'FileNewItem'
-  +#6'Action'#7#8'FileNew1'#7'OnClick'#7#15'FileNew1Execute'#0#0#9'TMenuItem'#12
-  +'FileOpenItem'#6'Action'#7#9'FileOpen1'#7'OnClick'#7#16'FileOpen1Execute'#0#0
-  +#9'TMenuItem'#14'FileSaveAsItem'#6'Action'#7#11'FileSaveAs1'#7'OnClick'#7#18
-  +'FileSaveAs1Execute'#0#0#9'TMenuItem'#10'SaveImage1'#6'Action'#7#9'SaveImage'
-  +#7'OnClick'#7#16'SaveImageExecute'#0#0#9'TMenuItem'#13'FileCloseItem'#6'Acti'
-  +'on'#7#10'FileClose1'#7'OnClick'#7#17'FileClose1Execute'#0#0#9'TMenuItem'#2
-  +'N6'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#9'Calendar1'#6'Action'#7#8'Calendar'
-  +#7'OnClick'#7#15'CalendarExecute'#0#0#9'TMenuItem'#13'VariableStar1'#7'OnCli'
-  +'ck'#7#18'VariableStar1Click'#0#0#9'TMenuItem'#2'N2'#7'Caption'#6#1'-'#0#0#9
-  +'TMenuItem'#6'Print2'#6'Action'#7#6'Print1'#7'OnClick'#7#13'Print1Execute'#0
-  +#0#9'TMenuItem'#11'PrintSetup2'#6'Action'#7#15'FilePrintSetup1'#7'OnClick'#7
-  +#22'FilePrintSetup1Execute'#0#0#9'TMenuItem'#2'N1'#7'Caption'#6#1'-'#0#0#9'T'
-  +'MenuItem'#12'FileExitItem'#6'Action'#7#9'FileExit1'#7'OnClick'#7#16'FileExi'
-  +'t1Execute'#0#0#0#9'TMenuItem'#5'Edit1'#7'Caption'#6#5'&Edit'#10'GroupIndex'
-  +#2#2#4'Hint'#6#13'Edit commands'#0#9'TMenuItem'#8'CopyItem'#6'Action'#7#9'Ed'
-  +'itCopy1'#7'OnClick'#7#16'EditCopy1Execute'#0#0#9'TMenuItem'#5'Undo1'#6'Acti'
-  +'on'#7#4'Undo'#7'OnClick'#7#11'UndoExecute'#0#0#9'TMenuItem'#5'Redo1'#6'Acti'
-  +'on'#7#4'Redo'#7'OnClick'#7#11'RedoExecute'#0#0#0#9'TMenuItem'#6'Setup1'#7'C'
-  +'aption'#6#6'&Setup'#10'GroupIndex'#2#2#0#9'TMenuItem'#11'DateConfig1'#6'Act'
-  +'ion'#7#9'SetupTime'#7'OnClick'#7#16'SetupTimeExecute'#0#0#9'TMenuItem'#10'O'
-  +'bsConfig1'#6'Action'#7#16'SetupObservatory'#7'OnClick'#7#23'SetupObservator'
-  +'yExecute'#0#0#9'TMenuItem'#9'MenuItem2'#6'Action'#7#10'SetupChart'#7'OnClic'
-  +'k'#7#17'SetupChartExecute'#0#0#9'TMenuItem'#9'MenuItem9'#6'Action'#7#12'Set'
-  +'upCatalog'#7'OnClick'#7#19'SetupCatalogExecute'#0#0#9'TMenuItem'#9'MenuItem'
-  +'3'#6'Action'#7#11'SetupSolSys'#7'OnClick'#7#18'SetupSolSysExecute'#0#0#9'TM'
-  +'enuItem'#9'MenuItem1'#6'Action'#7#12'SetupDisplay'#7'OnClick'#7#19'SetupDis'
-  +'playExecute'#0#0#9'TMenuItem'#9'MenuItem7'#6'Action'#7#13'SetupPictures'#7
-  +'OnClick'#7#20'SetupPicturesExecute'#0#0#9'TMenuItem'#9'MenuItem4'#6'Action'
-  +#7#11'SetupSystem'#7'OnClick'#7#18'SetupSystemExecute'#0#0#9'TMenuItem'#9'Me'
-  +'nuItem5'#6'Action'#7#13'SetupInternet'#7'OnClick'#7#20'SetupInternetExecute'
-  +#0#0#9'TMenuItem'#10'MenuItem26'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#9'MenuIt'
-  +'em6'#6'Action'#7#11'SetupConfig'#0#0#9'TMenuItem'#2'N8'#7'Caption'#6#1'-'#10
-  +'GroupIndex'#2#2#0#0#9'TMenuItem'#21'SaveConfigurationNow1'#6'Action'#7#17'S'
-  +'aveConfiguration'#10'GroupIndex'#2#2#7'OnClick'#7#24'SaveConfigurationExecu'
-  +'te'#0#0#9'TMenuItem'#24'SaveConfigurationOnExit1'#6'Action'#7#16'SaveConfig'
-  +'OnExit'#10'GroupIndex'#2#2#7'OnClick'#7#23'SaveConfigOnExitExecute'#0#0#0#9
-  +'TMenuItem'#5'View1'#7'Caption'#6#5'&View'#10'GroupIndex'#2#2#0#9'TMenuItem'
-  +#11'FullScreen1'#6'Action'#7#14'ViewFullScreen'#10'GroupIndex'#2#2#7'OnClick'
-  +#7#21'ViewFullScreenExecute'#0#0#9'TMenuItem'#12'NightVision1'#7'Caption'#6
-  +#12'Night Vision'#10'GroupIndex'#2#2#7'OnClick'#7#26'ToolButtonNightVisionCl'
-  +'ick'#0#0#9'TMenuItem'#7'oolBar1'#7'Caption'#6#8'Tool Bar'#10'GroupIndex'#2#2
-  +#0#9'TMenuItem'#13'ViewToolsBar1'#6'Action'#7#7'ViewBar'#7'Caption'#6#13'All'
-  +' Tools Bar'#7'Checked'#9#10'GroupIndex'#2#2#7'OnClick'#7#14'ViewBarExecute'
-  +#0#0#9'TMenuItem'#2'N5'#7'Caption'#6#1'-'#10'GroupIndex'#2#2#0#0#9'TMenuItem'
-  +#8'MainBar1'#6'Action'#7#11'ViewMainBar'#7'Checked'#9#10'GroupIndex'#2#2#7'O'
-  +'nClick'#7#18'ViewMainBarExecute'#0#0#9'TMenuItem'#10'ObjectBar1'#6'Action'#7
-  +#13'ViewObjectBar'#7'Checked'#9#10'GroupIndex'#2#2#7'OnClick'#7#20'ViewObjec'
-  ,'tBarExecute'#0#0#9'TMenuItem'#8'LeftBar1'#6'Action'#7#11'ViewLeftBar'#7'Che'
+  +'Ascending'#0#13'DropDownCount'#2#11#12'Font.CharSet'#7#12'ANSI_CHARSET'#9'M'
+  +'axLength'#2#255#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#2#0#0#6'TPanel'
+  +#12'ChildControl'#4'Left'#3'>'#3#6'Height'#2#23#3'Top'#2#2#5'Width'#2#30#5'A'
+  +'lign'#7#7'alRight'#8'AutoSize'#9#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'
+  +#2#23#11'ClientWidth'#2#30#8'TabOrder'#2#3#0#12'TSpeedButton'#15'BtnRestoreC'
+  +'hild'#6'Height'#2#15#5'Width'#2#15#5'Color'#7#9'clBtnFace'#4'Flat'#9#9'NumG'
+  +'lyphs'#2#0#7'OnClick'#7#20'BtnRestoreChildClick'#0#0#12'TSpeedButton'#13'Bt'
+  +'nCloseChild'#4'Left'#2#15#6'Height'#2#15#5'Width'#2#15#5'Color'#7#9'clBtnFa'
+  +'ce'#4'Flat'#9#9'NumGlyphs'#2#0#7'OnClick'#7#18'BtnCloseChildClick'#0#0#0#0#8
+  +'TToolBar'#8'ToolBar4'#6'Height'#2#28#3'Top'#2#26#5'Width'#3'\'#3#5'Align'#7
+  +#8'alBottom'#12'ButtonHeight'#2#24#7'Caption'#6#8'ToolBar4'#11'EdgeBorders'
+  +#11#5'ebTop'#8'ebBottom'#0#4'Flat'#9#6'Images'#7#11'ImageNormal'#14'ParentSh'
+  +'owHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#8'Wrapable'#8#0#11'TToolButton'#19
+  +'ToolButtonShowStars'#4'Left'#2#1#4'Hint'#6#10'Show Stars'#3'Top'#2#2#6'Acti'
+  +'on'#7#9'ShowStars'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#21'ToolButton'
+  +'ShowNebulae'#4'Left'#2#24#4'Hint'#6#12'Show Nebulae'#3'Top'#2#2#6'Action'#7
+  +#11'ShowNebulae'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#19'ToolButtonSho'
+  +'wLines'#4'Left'#2'/'#4'Hint'#6#10'Show Lines'#3'Top'#2#2#6'Action'#7#9'Show'
+  +'Lines'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#22'ToolButtonShowPictures'
+  +#4'Left'#2'F'#4'Hint'#6#13'Show Pictures'#3'Top'#2#2#6'Action'#7#12'ShowPict'
+  +'ures'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#13'ToolButtonDSS'#4'Left'#2
+  +']'#4'Hint'#6#13'Get DSS Image'#3'Top'#2#2#6'Action'#7#8'DSSImage'#0#0#11'TT'
+  +'oolButton'#29'ToolButtonShowBackgroundImage'#4'Left'#2't'#4'Hint'#6#23'Chan'
+  +'ge pictures display'#3'Top'#2#2#6'Action'#7#13'SetupPictures'#0#0#11'TToolB'
+  +'utton'#21'ToolButtonShowPlanets'#4'Left'#3#162#0#4'Hint'#6#12'Show Planets'
+  +#3'Top'#2#2#6'Action'#7#11'ShowPlanets'#5'Style'#7#8'tbsCheck'#0#0#11'TToolB'
+  +'utton'#23'ToolButtonShowAsteroids'#4'Left'#3#185#0#4'Hint'#6#14'Show Astero'
+  +'ids'#3'Top'#2#2#6'Action'#7#13'ShowAsteroids'#5'Style'#7#8'tbsCheck'#0#0#11
+  +'TToolButton'#20'ToolButtonShowComets'#4'Left'#3#208#0#4'Hint'#6#11'Show Com'
+  +'ets'#3'Top'#2#2#6'Action'#7#10'ShowComets'#5'Style'#7#8'tbsCheck'#0#0#11'TT'
+  +'oolButton'#22'ToolButtonShowMilkyWay'#4'Left'#3#231#0#4'Hint'#6#14'Show Mil'
+  +'ky Way'#3'Top'#2#2#6'Action'#7#12'ShowMilkyWay'#5'Style'#7#8'tbsCheck'#0#0
+  +#11'TToolButton'#14'ToolButtonGrid'#4'Left'#3#254#0#4'Hint'#6#20'Show Coordi'
+  +'nate Grid'#3'Top'#2#2#6'Action'#7#4'Grid'#5'Style'#7#8'tbsCheck'#0#0#11'TTo'
+  +'olButton'#16'ToolButtonGridEq'#4'Left'#3#21#1#4'Hint'#6#19'Add Equatorial G'
+  +'rid'#3'Top'#2#2#6'Action'#7#6'GridEQ'#5'Style'#7#8'tbsCheck'#0#0#11'TToolBu'
+  +'tton'#31'ToolButtonShowConstellationLine'#4'Left'#3','#1#4'Hint'#6#23'Show '
+  +'Constellation Line'#3'Top'#2#2#6'Action'#7#21'ShowConstellationLine'#5'Styl'
+  +'e'#7#8'tbsCheck'#0#0#11'TToolButton ToolButtonShowConstellationLimit'#4'Lef'
+  +'t'#3'C'#1#4'Hint'#6#24'Show Constellation Limit'#3'Top'#2#2#6'Action'#7#22
+  +'ShowConstellationLimit'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#29'ToolB'
+  +'uttonShowGalacticEquator'#4'Left'#3'Z'#1#4'Hint'#6#21'Show Galactic Equator'
+  +#3'Top'#2#2#6'Action'#7#19'ShowGalacticEquator'#5'Style'#7#8'tbsCheck'#0#0#11
+  +'TToolButton'#22'ToolButtonShowEcliptic'#4'Left'#3'q'#1#4'Hint'#6#13'Show Ec'
+  +'liptic'#3'Top'#2#2#6'Action'#7#12'ShowEcliptic'#5'Style'#7#8'tbsCheck'#0#0
+  +#11'TToolButton'#18'ToolButtonShowMark'#4'Left'#3#136#1#4'Hint'#6#9'Show Mar'
+  +'k'#3'Top'#2#2#6'Action'#7#8'ShowMark'#5'Style'#7#8'tbsCheck'#0#0#11'TToolBu'
+  +'tton'#20'ToolButtonShowLabels'#4'Left'#3#159#1#4'Hint'#6#11'Show Labels'#3
+  +'Top'#2#2#6'Action'#7#10'ShowLabels'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButt'
+  +'on'#20'ToolButtonEditlabels'#4'Left'#3#182#1#4'Hint'#6#11'Edit Labels'#3'To'
+  +'p'#2#2#6'Action'#7#10'EditLabels'#9'PopupMenu'#7#10'PopupMenu1'#5'Style'#7#8
+  ,'tbsCheck'#0#0#11'TToolButton ToolButtonShowObjectbelowHorizon'#4'Left'#3#205
+  +#1#4'Hint'#6#29'Show Object below the horizon'#3'Top'#2#2#6'Action'#7#22'Sho'
+  +'wObjectbelowHorizon'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#26'ToolButt'
+  +'onswitchbackground'#4'Left'#3#228#1#4'Hint'#6#20'Sky Background Color'#3'To'
+  +'p'#2#2#6'Action'#7#16'switchbackground'#5'Style'#7#8'tbsCheck'#0#0#11'TTool'
+  +'Button'#19'ToolButtonSyncChart'#4'Left'#3#3#2#4'Hint'#6#14'Link All Chart'#3
+  +'Top'#2#2#6'Action'#7#9'SyncChart'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'
+  +#15'ToolButtonTrack'#4'Left'#3#26#2#4'Hint'#6#5'Track'#3'Top'#2#2#6'Action'#7
+  +#5'Track'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#21'ToolButtonswitchstar'
+  +'s'#4'Left'#3'9'#2#4'Hint'#6#19'Change Drawing Mode'#3'Top'#2#2#6'Action'#7
+  +#11'switchstars'#5'Style'#7#8'tbsCheck'#0#0#11'TToolButton'#11'ToolButton2'#4
+  +'Left'#3'1'#2#3'Top'#2#2#5'Width'#2#8#5'Style'#7#10'tbsDivider'#0#0#11'TTool'
+  +'Button'#11'ToolButton4'#4'Left'#3#251#1#3'Top'#2#2#5'Width'#2#8#5'Style'#7
+  +#10'tbsDivider'#0#0#11'TToolButton'#15'ToolButtonBlink'#4'Left'#3#139#0#4'Hi'
+  +'nt'#6#16'Blinking Picture'#3'Top'#2#2#6'Action'#7#10'BlinkImage'#5'Style'#7
+  +#8'tbsCheck'#0#0#0#0#9'TMainMenu'#9'MainMenu1'#4'left'#2'`'#3'top'#3#160#0#0
+  +#9'TMenuItem'#5'File1'#7'Caption'#6#5'&File'#4'Hint'#6#21'File related comma'
+  +'nds'#0#9'TMenuItem'#11'FileNewItem'#6'Action'#7#8'FileNew1'#7'OnClick'#7#15
+  +'FileNew1Execute'#0#0#9'TMenuItem'#12'FileOpenItem'#6'Action'#7#9'FileOpen1'
+  +#7'OnClick'#7#16'FileOpen1Execute'#0#0#9'TMenuItem'#14'FileSaveAsItem'#6'Act'
+  +'ion'#7#11'FileSaveAs1'#7'OnClick'#7#18'FileSaveAs1Execute'#0#0#9'TMenuItem'
+  +#10'SaveImage1'#6'Action'#7#9'SaveImage'#7'OnClick'#7#16'SaveImageExecute'#0
+  +#0#9'TMenuItem'#13'FileCloseItem'#6'Action'#7#10'FileClose1'#7'OnClick'#7#17
+  +'FileClose1Execute'#0#0#9'TMenuItem'#2'N6'#7'Caption'#6#1'-'#0#0#9'TMenuItem'
+  +#9'Calendar1'#6'Action'#7#8'Calendar'#7'OnClick'#7#15'CalendarExecute'#0#0#9
+  +'TMenuItem'#13'VariableStar1'#7'OnClick'#7#18'VariableStar1Click'#0#0#9'TMen'
+  +'uItem'#2'N2'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#6'Print2'#6'Action'#7#6'Pri'
+  +'nt1'#7'OnClick'#7#13'Print1Execute'#0#0#9'TMenuItem'#11'PrintSetup2'#6'Acti'
+  +'on'#7#15'FilePrintSetup1'#7'OnClick'#7#22'FilePrintSetup1Execute'#0#0#9'TMe'
+  +'nuItem'#2'N1'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#12'FileExitItem'#6'Action'
+  +#7#9'FileExit1'#7'OnClick'#7#16'FileExit1Execute'#0#0#0#9'TMenuItem'#5'Edit1'
+  +#7'Caption'#6#5'&Edit'#10'GroupIndex'#2#2#4'Hint'#6#13'Edit commands'#0#9'TM'
+  +'enuItem'#8'CopyItem'#6'Action'#7#9'EditCopy1'#7'OnClick'#7#16'EditCopy1Exec'
+  +'ute'#0#0#9'TMenuItem'#5'Undo1'#6'Action'#7#4'Undo'#7'OnClick'#7#11'UndoExec'
+  +'ute'#0#0#9'TMenuItem'#5'Redo1'#6'Action'#7#4'Redo'#7'OnClick'#7#11'RedoExec'
+  +'ute'#0#0#0#9'TMenuItem'#6'Setup1'#7'Caption'#6#6'&Setup'#10'GroupIndex'#2#2
+  +#0#9'TMenuItem'#11'DateConfig1'#6'Action'#7#9'SetupTime'#7'OnClick'#7#16'Set'
+  +'upTimeExecute'#0#0#9'TMenuItem'#10'ObsConfig1'#6'Action'#7#16'SetupObservat'
+  +'ory'#7'OnClick'#7#23'SetupObservatoryExecute'#0#0#9'TMenuItem'#9'MenuItem2'
+  +#6'Action'#7#10'SetupChart'#7'OnClick'#7#17'SetupChartExecute'#0#0#9'TMenuIt'
+  +'em'#9'MenuItem9'#6'Action'#7#12'SetupCatalog'#7'OnClick'#7#19'SetupCatalogE'
+  +'xecute'#0#0#9'TMenuItem'#9'MenuItem3'#6'Action'#7#11'SetupSolSys'#7'OnClick'
+  +#7#18'SetupSolSysExecute'#0#0#9'TMenuItem'#9'MenuItem1'#6'Action'#7#12'Setup'
+  +'Display'#7'OnClick'#7#19'SetupDisplayExecute'#0#0#9'TMenuItem'#9'MenuItem7'
+  +#6'Action'#7#13'SetupPictures'#7'OnClick'#7#20'SetupPicturesExecute'#0#0#9'T'
+  +'MenuItem'#9'MenuItem4'#6'Action'#7#11'SetupSystem'#7'OnClick'#7#18'SetupSys'
+  +'temExecute'#0#0#9'TMenuItem'#9'MenuItem5'#6'Action'#7#13'SetupInternet'#7'O'
+  +'nClick'#7#20'SetupInternetExecute'#0#0#9'TMenuItem'#10'MenuItem26'#7'Captio'
+  +'n'#6#1'-'#0#0#9'TMenuItem'#9'MenuItem6'#6'Action'#7#11'SetupConfig'#7'OnCli'
+  +'ck'#7#18'SetupConfigExecute'#0#0#9'TMenuItem'#2'N8'#7'Caption'#6#1'-'#10'Gr'
+  +'oupIndex'#2#2#0#0#9'TMenuItem'#21'SaveConfigurationNow1'#6'Action'#7#17'Sav'
+  +'eConfiguration'#10'GroupIndex'#2#2#7'OnClick'#7#24'SaveConfigurationExecute'
+  +#0#0#9'TMenuItem'#24'SaveConfigurationOnExit1'#6'Action'#7#16'SaveConfigOnEx'
+  +'it'#10'GroupIndex'#2#2#7'OnClick'#7#23'SaveConfigOnExitExecute'#0#0#0#9'TMe'
+  +'nuItem'#5'View1'#7'Caption'#6#5'&View'#10'GroupIndex'#2#2#0#9'TMenuItem'#11
+  +'FullScreen1'#6'Action'#7#14'ViewFullScreen'#10'GroupIndex'#2#2#7'OnClick'#7
+  +#21'ViewFullScreenExecute'#0#0#9'TMenuItem'#12'NightVision1'#7'Caption'#6#12
+  +'Night Vision'#10'GroupIndex'#2#2#7'OnClick'#7#26'ToolButtonNightVisionClick'
+  +#0#0#9'TMenuItem'#7'oolBar1'#7'Caption'#6#8'Tool Bar'#10'GroupIndex'#2#2#0#9
+  +'TMenuItem'#13'ViewToolsBar1'#6'Action'#7#7'ViewBar'#7'Caption'#6#13'All Too'
+  +'ls Bar'#7'Checked'#9#10'GroupIndex'#2#2#7'OnClick'#7#14'ViewBarExecute'#0#0
+  +#9'TMenuItem'#2'N5'#7'Caption'#6#1'-'#10'GroupIndex'#2#2#0#0#9'TMenuItem'#8
+  +'MainBar1'#6'Action'#7#11'ViewMainBar'#7'Checked'#9#10'GroupIndex'#2#2#7'OnC'
+  +'lick'#7#18'ViewMainBarExecute'#0#0#9'TMenuItem'#10'ObjectBar1'#6'Action'#7
+  ,#13'ViewObjectBar'#7'Checked'#9#10'GroupIndex'#2#2#7'OnClick'#7#20'ViewObjec'
+  +'tBarExecute'#0#0#9'TMenuItem'#8'LeftBar1'#6'Action'#7#11'ViewLeftBar'#7'Che'
   +'cked'#9#10'GroupIndex'#2#2#7'OnClick'#7#18'ViewLeftBarExecute'#0#0#9'TMenuI'
   +'tem'#9'RightBar1'#6'Action'#7#12'ViewRightBar'#7'Checked'#9#10'GroupIndex'#2
   +#2#7'OnClick'#7#19'ViewRightBarExecute'#0#0#9'TMenuItem'#14'ViewStatusBar1'#6
@@ -2816,8 +2817,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'GridEQ'#7'OnClick'#7#13'GridEQExecute'#0#0#9'TMenuItem'#22'ShowConstellatio'
   +'nLine1'#6'Action'#7#21'ShowConstellationLine'#7'OnClick'#7#28'ShowConstella'
   +'tionLineExecute'#0#0#9'TMenuItem'#23'ShowConstellationLimit1'#6'Action'#7#22
-  +'ShowConstellationLimit'#7'OnClick'#7#29'ShowConstellationLimitExecute'#0#0#9
-  ,'TMenuItem'#20'ShowGalacticEquator1'#6'Action'#7#19'ShowGalacticEquator'#7'O'
+  ,'ShowConstellationLimit'#7'OnClick'#7#29'ShowConstellationLimitExecute'#0#0#9
+  +'TMenuItem'#20'ShowGalacticEquator1'#6'Action'#7#19'ShowGalacticEquator'#7'O'
   +'nClick'#7#26'ShowGalacticEquatorExecute'#0#0#9'TMenuItem'#13'ShowEcliptic1'
   +#6'Action'#7#12'ShowEcliptic'#7'OnClick'#7#19'ShowEclipticExecute'#0#0#9'TMe'
   +'nuItem'#9'ShowMark1'#6'Action'#7#8'ShowMark'#7'OnClick'#7#15'ShowMarkExecut'
@@ -2880,8 +2881,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'Search'#18'DisableIfNoHandler'#9#4'Hint'#6#6'Search'#10'ImageIndex'#2'L'#9
   +'OnExecute'#7#14'Search1Execute'#0#0#7'TAction'#7'ViewBar'#8'Category'#6#4'V'
   +'iew'#18'DisableIfNoHandler'#9#4'Hint'#6#14'View Tools Bar'#9'OnExecute'#7#14
-  +'ViewBarExecute'#8'ShortCut'#3'B@'#0#0#7'TAction'#8'zoomplus'#8'Category'#6#5
-  ,'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#7'Zoom In'#10'ImageIndex'#2#6#9'O'
+  ,'ViewBarExecute'#8'ShortCut'#3'B@'#0#0#7'TAction'#8'zoomplus'#8'Category'#6#5
+  +'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#7'Zoom In'#10'ImageIndex'#2#6#9'O'
   +'nExecute'#7#15'zoomplusExecute'#0#0#7'TAction'#9'zoomminus'#8'Category'#6#5
   +'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#8'Zoom Out'#10'ImageIndex'#2#7#9
   +'OnExecute'#7#16'zoomminusExecute'#0#0#7'TAction'#7'ZoomBar'#8'Category'#6#5
@@ -2944,8 +2945,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'n'#13'TelescopeSlew'#8'Category'#6#9'Telescope'#18'DisableIfNoHandler'#9#4
   +'Hint'#6#4'Slew'#10'ImageIndex'#2'2'#9'OnExecute'#7#20'TelescopeSlewExecute'
   +#0#0#7'TAction'#13'TelescopeSync'#8'Category'#6#9'Telescope'#18'DisableIfNoH'
-  +'andler'#9#4'Hint'#6#4'Sync'#10'ImageIndex'#2'3'#9'OnExecute'#7#20'Telescope'
-  ,'SyncExecute'#0#0#7'TAction'#8'MoreStar'#8'Category'#6#5'chart'#18'DisableIf'
+  ,'andler'#9#4'Hint'#6#4'Sync'#10'ImageIndex'#2'3'#9'OnExecute'#7#20'Telescope'
+  +'SyncExecute'#0#0#7'TAction'#8'MoreStar'#8'Category'#6#5'chart'#18'DisableIf'
   +'NoHandler'#9#4'Hint'#6#9'More Star'#10'ImageIndex'#2'4'#9'OnExecute'#7#15'M'
   +'oreStarExecute'#0#0#7'TAction'#8'LessStar'#8'Category'#6#5'chart'#18'Disabl'
   +'eIfNoHandler'#9#4'Hint'#6#9'Less Star'#10'ImageIndex'#2'5'#9'OnExecute'#7#15
@@ -3008,8 +3009,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'K'#9'OnExecute'#7#15'CalendarExecute'#0#0#7'TAction'#19'ShowBackgroundImage'
   +#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#21'Show Backgroun'
   +'d Image'#10'ImageIndex'#2'M'#9'OnExecute'#7#26'ShowBackgroundImageExecute'#8
-  +'ShortCut'#3'I@'#0#0#7'TAction'#8'Position'#8'Category'#6#6'Search'#18'Disab'
-  ,'leIfNoHandler'#9#4'Hint'#6#8'Position'#10'ImageIndex'#2'N'#9'OnExecute'#7#15
+  ,'ShortCut'#3'I@'#0#0#7'TAction'#8'Position'#8'Category'#6#6'Search'#18'Disab'
+  +'leIfNoHandler'#9#4'Hint'#6#8'Position'#10'ImageIndex'#2'N'#9'OnExecute'#7#15
   +'PositionExecute'#0#0#7'TAction'#9'SyncChart'#8'Category'#6#5'chart'#18'Disa'
   +'bleIfNoHandler'#9#4'Hint'#6#14'Link All Chart'#10'ImageIndex'#2'O'#9'OnExec'
   +'ute'#7#16'SyncChartExecute'#0#0#7'TAction'#5'Track'#8'Category'#6#5'chart'
@@ -3072,8 +3073,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#181#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#231#140#181
   +#255#0#0#0#0#0#0#0#0#148'Zc'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#156'kk'#255
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#165'kk'#255#0#0#0#0
-  +#0#0#0#0#0#0#0#0#148'ZZ'#255#0#0#0#0#0#0#0#0#0#0#0#0#239#148#181#255#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#214'{'#165#255#148'Zc'#255
+  ,#0#0#0#0#0#0#0#0#148'ZZ'#255#0#0#0#0#0#0#0#0#0#0#0#0#239#148#181#255#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#214'{'#165#255#148'Zc'#255
   +#214'{'#165#255#148'ZZ'#255#214'{'#165#255#0#0#0#0#0#0#0#0#0#0#0#0#156'kk'
   +#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#148'ZZ'#255#0#0#0#0#0#0#0#0#0#0#0#0#239#148#181#255#0#0#0#0
@@ -3136,8 +3137,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#239#255#255#255#156#239#255#255#239#255#255#255#156#239#255#255#0'k'#239#255
   +#0#0#0#0#0#0#0#0#0#0#0#0'{'#247#255#255#189#255#255#255'{'#247#255#255#189
   +#255#255#255'{'#247#255#255#189#255#255#255'{'#239#255#255#198#255#255#255's'
-  +#239#255#255#198#255#255#255's'#231#255#255#255#255#255#255#0'c'#156#255#0#0
-  ,#0#0#0#0#0#0#0#0#0#0#0'c'#231#255#0'c'#156#255#0'c'#231#255#0'c'#156#255#0'c'
+  ,#239#255#255#198#255#255#255's'#231#255#255#255#255#255#255#0'c'#156#255#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0'c'#231#255#0'c'#156#255#0'c'#231#255#0'c'#156#255#0'c'
   +#231#255#0'c'#156#255#0'c'#231#255#0'c'#156#255#0'k'#239#255#0'c'#156#255#0
   +'k'#239#255#0'c'#156#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -3200,8 +3201,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'1'#0#255#214'1'#0#255#255#255#255#255#255#231#206#255'cJ'#0#255#0'c'#165#255
   +#0'c'#231#255#0#156#214#255#0#156#255#255#0#0#0#0#0#156#255#255#0#189#255#255
   +#0#156#214#255#0#189#255#255#0#156#255#255#0#189#255#255#0#156#214#255#0#189
-  +#255#255#0#156#255#255#0#189#255#255#0#156#206#255#0#140#239#255#0#156#255
-  ,#255#0#140#239#255#0#156#206#255#0#156#214#255#231#255#255#255#165#255#255
+  ,#255#255#0#156#255#255#0#189#255#255#0#156#206#255#0#140#239#255#0#156#255
+  +#255#0#140#239#255#0#156#206#255#0#156#214#255#231#255#255#255#165#255#255
   +#255#231#255#255#255#165#255#255#255#231#255#255#255#165#247#255#255#231#255
   +#255#255#156#231#255#255#239#255#255#255#156#222#255#255#239#255#255#255#0'c'
   +#156#255#0'k'#239#255#0#156#214#255#0#156#255#255#0#189#255#255#0#156#214#255
@@ -3264,8 +3265,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#140'RZ'#255#0#0#0#0
   +#132'RR'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#222#222#255#206'RR'#255#0#0#0#0#132'RR'
-  +#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#140'RZ'#255#0#0#0#0#214'RR'#255#0#0#0#0#0#0
+  ,#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#140'RZ'#255#0#0#0#0#214'RR'#255#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#255#222#222#255#132'RR'#255#0#0#0#0#132'RR'#255#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -3328,8 +3329,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#140'ZR'#255#247#132's'#255#231#198#173#255#255#255#255#255#255#222
   +#198#255#0#0#0#0'{JJ'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#140'ZR'#255#255#206#231#255#0#0#0#0#0#0#0#0#255#231#206#255#0#0
-  ,#0#0#0#0#0#0#255#198#222#255'{JR'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#0#0#140'ZR'#255#255#206#231#255#0#0#0#0#0#0#0#0#255#231#206#255#0#0
+  +#0#0#0#0#0#0#255#198#222#255'{JR'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#148'cZ'#255#255#140'{'#255#255#231#206#255#0#0#0#0#255#231#206#255#0
   +#0#0#0#255#231#206#255#0#0#0#0#255#231#206#255#239'{s'#255#132'RR'#255#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#231#140#165#255#255#206#255#255#0#0#0#0#0
@@ -3392,8 +3393,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'J{'#255#0#214#255#255
   +#0#231#255#255#0#255#255#255#0#222#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'J'#132#255#0
-  +#214#255#255#0#231#255#255#0#255#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#0#0'JJJ'#255#140'B'#140#255#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0
+  ,#214#255#255#0#231#255#255#0#255#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0'JJJ'#255#140'B'#140#255#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'B'
   +'BB'#255#255#255#255#255#206#206#206#255#255#222#255#255#0#0#0#255#0'c'#0#255
   +#0'c'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#156'J'
@@ -3456,8 +3457,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#255#255#255#255#255#222#255#255#255#239#255#255#132'RR'#255#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#148'cc'#255#255#255#255#255#148'cc'#255#222'cc'#255#255
   +#231#214#255#222'cc'#255#148'cc'#255#222'cc'#255#148'cc'#255#255#247#255#255
-  +#255#206#206#255#132'RR'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#222#140#173#255
-  ,#255#239#255#255#255#255#255#255#255#231#255#255#255#255#255#255#255#255#255
+  ,#255#206#206#255#132'RR'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#222#140#173#255
+  +#255#239#255#255#255#255#255#255#255#231#255#255#255#255#255#255#255#255#255
   +#255#255#255#255#255#255#222#255#255#255#255#255#255#255#214#181#255#255#239
   +#255#255#132'RR'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#148'cc'#255#255#255#255
   +#255#148'cc'#255#222'cc'#255#255#222#206#255#222'cc'#255#148'cc'#255#222'cc'
@@ -3520,8 +3521,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#132#165#255#255#222#214#255#255'R{'#206#255#8#16#231#255#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#16#165#255#24')'#239#255#16'!'#165#255#16'!'#239#255#16'!'#165#255#16
   +'!'#239#255#8#24#165#255#8#24#231#255#8#24#165#255#8#24#231#255#0#16#165#255
-  +#8#16#231#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#165'9'#0#255'Z'
-  ,'9'#0#255#165'9'#0#255'Z9'#0#255#165'9'#0#255'Z9'#0#255#0#0#0#255#0#0#0#0#0#0
+  ,#8#16#231#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#165'9'#0#255'Z'
+  +'9'#0#255#165'9'#0#255'Z9'#0#255#165'9'#0#255'Z9'#0#255#0#0#0#255#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'Z9'#0#255#198#132')'#255
   +#214'R'#0#255#0#0#0#255#0#0#0#255#0#0#0#255#214'R'#0#255#140'R'#0#255#0#0#0
   +#255#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#173'B'#0#255#255#173
@@ -3584,8 +3585,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#255#239#222#255#0#0#0#0#255#239#222#255#0#0#0#0#255#239#214
   +#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#198'{'#148#255#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#231#214
-  +#255#0#0#0#0#255#222#247#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#165'kk'#255#156
-  ,'kk'#255#206#132#148#255#156'kk'#255#198'{'#148#255#165'kk'#255#198'{'#148
+  ,#255#0#0#0#0#255#222#247#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#165'kk'#255#156
+  +'kk'#255#206#132#148#255#156'kk'#255#198'{'#148#255#165'kk'#255#198'{'#148
   +#255#165'kk'#255#198'{'#148#255#198'{'#148#255#165'kk'#255#198'{'#148#255#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#181'RR'#255#132'RR'
@@ -3648,8 +3649,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#198'k9'#255#255#222#189#255
   +#255#222#181#255#198'Z'#24#255#0#0#0#0#198'Z'#24#255#255#222#181#255#255#222
   +#189#255#198'k9'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#206'sB'#255#255#206#173#255#181'J'#24#255#0#0#0#0#181'J'#24#255#255
-  ,#206#173#255#198'sB'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#206'sB'#255#255#206#173#255#181'J'#24#255#0#0#0#0#181'J'#24#255#255
+  +#206#173#255#198'sB'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#198'sB'#255#181'B'#16#255#0#0#0#0#181'B'#16#255
   +#198'sB'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#165'9'#8#255#0#0#0#0#165'9'#0#255#0#0#0#0#0
@@ -3712,8 +3713,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#165'9'#0#255#181'B'#16#255#181'J'#24#255#198'Z'#24#255
   +#189'Z'#16#255#214'c'#24#255#206'k'#24#255#222's'#24#255#214's'#24#255#222's'
-  +#24#255#214's'#24#255#222'k'#16#255#206'c'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#214'sB'#255#255#206#173#255#255#222#181#255#255#231#206#255#255#231#214
+  ,#24#255#214's'#24#255#222'k'#16#255#206'c'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#214'sB'#255#255#206#173#255#255#222#181#255#255#231#206#255#255#231#214
   +#255#255#247#231#255#255#247#247#255#255#255#255#255#255#255#255#255#255#247
   +#247#255#231#156'Z'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#198
   +'k9'#255#255#222#189#255#255#222#181#255#255#231#206#255#255#231#206#255#255
@@ -3776,8 +3777,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#198'sR'#255#255#189#8#255#189'c)'#255#206#132'c'#255#255#140#16#255#247#140
   +#16#255#214#140'Z'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#231#165'k'#255#239's'
   +#16#255#222#148's'#255#0#0#0#0#0#0#0#0#198'kJ'#255#255#156#8#255#214'k'#8#255
-  +#255#140#16#255#231's'#16#255#214'{Z'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#239#173'{'#255#231's'#16#255#214#148'k'#255#0#0#0#0#0#0#0#0#198'kJ'#255
+  ,#255#140#16#255#231's'#16#255#214'{Z'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#239#173'{'#255#231's'#16#255#214#148'k'#255#0#0#0#0#0#0#0#0#198'kJ'#255
   +#255#140#8#255#247#140#8#255#231'{'#8#255#189'c9'#255#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#198'k9'#255#231'{'#16#255#214#156#132#255#0#0#0#0#0
   +#0#0#0#198'kJ'#255#239'{'#8#255#222'k'#8#255#222's'#8#255#206'c'#8#255#206'Z'
@@ -3840,8 +3841,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#214#181#255#255#214#181#255#222#156'Z'#255#222#156'Z'#255#132#0#0#255#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#222#156'Z'#255#255'BB'#255#222#156'Z'
   +#255#255#214#181#255#255#231#214#255#255#231#214#255#255#214#181#255#255#214
-  +#181#255#255#214#181#255#222#156'Z'#255#198#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#255'BB'#255#222#156'Z'#255#255#231#214#255#255#231#214#255#255
+  ,#181#255#255#214#181#255#222#156'Z'#255#198#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#255'BB'#255#222#156'Z'#255#255#231#214#255#255#231#214#255#255
   +'BB'#255#255'BB'#255#255'BB'#255#222#156'Z'#255#222#156'Z'#255#198#0#0#255#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255'BB'#255#222#156'Z'#255#255#231#214
   +#255#255#231#214#255#255'BB'#255#0#0#0#0#0#0#0#0#0#0#0#0#255'BB'#255#198#0#0
@@ -3904,8 +3905,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#198#165#165#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#239#222#214#255#206#181#173#255#181#140#140#255
   +#189#156#148#255#231#214#214#255#0#0#0#0#0#0#0#0#0#0#0#0#222#206#206#255#198
-  +#165#165#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'{))'#255#214#181#181#255
-  ,#214#181#181#255#0#0#0#0#214#189#189#255#181#140#140#255#189#156#156#255#140
+  ,#165#165#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'{))'#255#214#181#181#255
+  +#214#181#181#255#0#0#0#0#214#189#189#255#181#140#140#255#189#156#156#255#140
   +'ZZ'#255#0#0#0#0#0#0#0#0#222#206#206#255#198#165#165#255#214#181#181#255#0#0
   +#0#0#0#0#0#0#206#173#165#255'{))'#255'{))'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#214#173#165#255#148'ZZ'#255#0#0#0#0#0#0#0#0#0#0#0#0#222#206#206#255#198
@@ -3968,8 +3969,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#165'{s'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#231#206#189#255#156'kk'#255#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#222#181#173#255#173'{{'#255#0#0#0#0#0#0#0#0#239
   +#206#189#255#173'{{'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#239#206#189#255#156
-  +'kk'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#173'{{'#255#0#0#0#0#0#0#0#0
-  ,#214#189#189#255#148'cc'#255#222#198#198#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  ,'kk'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#173'{{'#255#0#0#0#0#0#0#0#0
+  +#214#189#189#255#148'cc'#255#222#198#198#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#156'kk'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#222#198#189#255#165'{{'#255#0#0
   +#0#0#206#181#181#255#165'{{'#255#148'cc'#255#165'{{'#255#173#140#140#255#173
   +#132'{'#255#173#132#132#255#173'{{'#255#165'ss'#255#173#132#132#255#173#132
@@ -4032,8 +4033,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#255#255#255#255#255#255#255#132#0#0#255#255#247#231#255#255#247#231#255
   +#132#0#0#255#255#247#231#255#132#0#0#255#255#247#231#255#255#247#231#255#255
   +#247#231#255#255#247#231#255#0#0#0#0#255#255#247#255#255#255#255#255#255#255
-  +#255#255#255#255#255#255#255#247#239#255#132#0#0#255#255#247#231#255#255#247
-  ,#231#255#132#0#0#255#255#247#231#255#132#0#0#255#255#247#231#255#255#247#231
+  ,#255#255#255#255#255#255#255#247#239#255#132#0#0#255#255#247#231#255#255#247
+  +#231#255#132#0#0#255#255#247#231#255#132#0#0#255#255#247#231#255#255#247#231
   +#255#255#247#231#255#255#239#214#255#0#0#0#0#255#255#255#255#255#247#239#255
   +#255#247#239#255#255#247#239#255#255#247#231#255#132#0#0#255#255#247#231#255
   +#255#247#231#255#132#8#0#255#255#231#222#255#132#8#0#255#255#247#231#255#255
@@ -4096,8 +4097,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#255#247#231#255#255#247#231#255#255#247#231#255#255#247#231#255#255#247
   +#231#255#255#247#231#255#255#239#214#255#255#239#214#255#255#239#214#255#255
   +#231#214#255#255#231#206#255#0#0#0#0#255#247#231#255#255#239#222#255#255#247
-  +#231#255#255#239#222#255#255#247#231#255#255#239#222#255#255#247#231#255#255
-  ,#247#231#255#255#247#231#255#255#239#214#255#255#239#214#255#255#239#214#255
+  ,#231#255#255#239#222#255#255#247#231#255#255#239#222#255#255#247#231#255#255
+  +#247#231#255#255#247#231#255#255#239#214#255#255#239#214#255#255#239#214#255
   +#255#231#214#255#255#231#206#255#255#231#206#255#0#0#0#0#255#247#231#255#255
   +#239#222#255#255#247#231#255#255#239#222#255#255#247#231#255#255#239#222#255
   +#255#247#231#255#255#239#214#255#255#239#214#255#255#239#214#255#255#239#214
@@ -4160,8 +4161,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#239#214#255#255#239#214#255#255#239#214#255#255#239#214#255#255#239#214#255
   +#255#239#214#255#255#222#206#255#255#222#206#255#255#222#206#255#255#222#206
   +#255#255#222#206#255#255#222#206#255#0#0#0#0#255#255#255#255#255#255#255#255
-  +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
   ,#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
+  +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
   +#255#255#255#255#247#255#255#247#239#255#255#255#255#255#0#0#0#0#255#255#255
   +#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255#255
   +#255#255#255#255#247#255#255#255#247#255#255#255#255#255#255#255#255#255#255
@@ -4224,8 +4225,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#247#255#255#255#247#255#255#255#255#255#255#255#255#255#255#255#255#255
   +#255#255#255#255#255#255#247#255#255#247#239#255#255#255#255#255#255#255#255
   +#255#255#247#231#255#0#0#0#0#255#255#255#255#255#255#255#255#181'cc'#255#132
-  +#0#0#255#189'ss'#255#255#255#255#255#255#255#255#255#189'{{'#255#132#0#0#255
-  ,#189'{{'#255#255#247#231#255#189'sk'#255#132#0#0#255#189'kk'#255#255#247#231
+  ,#0#0#255#189'ss'#255#255#255#255#255#255#255#255#255#189'{{'#255#132#0#0#255
+  +#189'{{'#255#255#247#231#255#189'sk'#255#132#0#0#255#189'kk'#255#255#247#231
   +#255#0#0#0#0#255#255#255#255#255#255#247#255#132#8#0#255#247#231#222#255#132
   +#8#8#255#255#255#255#255#255#255#255#255#132#8#8#255#247#231#214#255#132#8#0
   +#255#255#247#231#255#132#0#0#255#239#198#189#255#132#0#0#255#255#247#231#255
@@ -4288,8 +4289,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#247#231#255#0#0#0#0#255#255#247#255#255#255#255#255#255#255#255#255#255
   +#255#255#255#132#0#0#255#255#247#231#255#255#247#231#255#132#0#0#255#255#247
   +#231#255#132#0#0#255#255#247#231#255#255#247#231#255#255#247#231#255#255#247
-  +#231#255#255#239#214#255#0#0#0#0#255#255#255#255#255#247#239#255#132#0#0#255
-  ,#247#239#231#255#132#0#0#255#255#247#231#255#255#247#231#255#132#8#0#255#255
+  ,#231#255#255#239#214#255#0#0#0#0#255#255#255#255#255#247#239#255#132#0#0#255
+  +#247#239#231#255#132#0#0#255#255#247#231#255#255#247#231#255#132#8#0#255#255
   +#231#222#255#132#8#0#255#255#247#231#255#255#247#231#255#255#247#231#255#255
   +#239#214#255#255#239#214#255#0#0#0#0#255#247#239#255#255#239#222#255#181'ZZ'
   +#255#132#0#0#255#181'cZ'#255#255#247#231#255#255#247#231#255#189'kk'#255#132
@@ -4352,8 +4353,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#255#247#231#255#255#247#231#255#255#247#231#255#255#239#214#255#255#239
   +#214#255#255#239#214#255#255#231#214#255#255#231#206#255#255#231#206#255#0#0
   +#0#0#255#247#231#255#255#239#222#255#255#247#231#255#255#239#222#255#255#247
-  +#231#255#255#239#222#255#255#247#231#255#255#239#214#255#255#239#214#255#255
-  ,#239#214#255#255#239#214#255#255#231#214#255#255#231#206#255#255#231#206#255
+  ,#231#255#255#239#222#255#255#247#231#255#255#239#214#255#255#239#214#255#255
+  +#239#214#255#255#239#214#255#255#231#214#255#255#231#206#255#255#231#206#255
   +#255#222#206#255#0#0#0#0#255#231#222#255#255#239#214#255#255#239#214#255#255
   +#239#214#255#255#239#214#255#255#239#214#255#255#239#214#255#255#239#214#255
   +#255#239#214#255#255#239#214#255#255#231#214#255#255#231#206#255#255#231#206
@@ -4416,8 +4417,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255'1c'#255#255'1c'#255#255'1c'#255#255'1c'#255#255#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'1c'#255#255
   +'1c'#255#255'1c'#255#255'1c'#255#255'1c'#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'1c'#255#255'1c'
-  ,#255#255'1c'#255#255'1c'#255#255'1c'#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'1c'#255#255'1c'
+  +#255#255'1c'#255#255'1c'#255#255'1c'#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#132#132#132#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'1c'
   +#255#255'1c'#255#255'1c'#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#132#132#132
   +#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -4480,8 +4481,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#132'RR'#255#132'RR'#255#132'RR'#255#132'RR'#255#132'RR'#255#132'RR'#255#132
   +'RR'#255#132'RR'#255#132'RR'#255#132'RR'#255#132'RR'#255#132'RR'#255#132'RR'
   +#255#132'RR'#255'sk'#206#255'99'#189#255'J1'#148#255#189#148'c'#255#214#165
-  +'B'#255#198#148'R'#255#214#214#198#255#156#198#165#255#132#156'{'#255#222#214
-  ,#206#255#247#239#231#255#0#0#0#0#0#0#0#0#132'RR'#255#0#0#0#0#132'RR'#255#173
+  ,'B'#255#198#148'R'#255#214#214#198#255#156#198#165#255#132#156'{'#255#222#214
+  +#206#255#247#239#231#255#0#0#0#0#0#0#0#0#132'RR'#255#0#0#0#0#132'RR'#255#173
   +#181#247#255'Zc'#239#255')'#24#173#255#231#198#132#255#222#173'Z'#255#165'k1'
   +#255#140#132'c'#255#189#222#198#255'R'#140'R'#255'BB)'#255'RBB'#255#0#0#0#0#0
   +#0#0#0#132'RR'#255#132'RR'#255#132'RR'#255'Zk'#239#255')1'#214#255')'#24#156
@@ -4544,8 +4545,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -4608,8 +4609,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -4672,8 +4673,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0'kcc'#255'RRR'#255'RB1'#255'RB1'#255'RB1'#255'RB1'#255'RB1'#255'RRR'
   +#255'kcc'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'sss'#255'kkk'#255#132
   +'sk'#255#148#132's'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#148#132'k'
-  +#255#132'sk'#255'kkk'#255'ssk'#255#0#0#0#0#0#0#0#0#0#0#0#0'kkk'#255'{kc'#255
-  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'{kZ'
+  ,#255#132'sk'#255'kkk'#255'ssk'#255#0#0#0#0#0#0#0#0#0#0#0#0'kkk'#255'{kc'#255
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'{kZ'
   +#255'kcc'#255#0#0#0#0#0#0#0#0'kcc'#255#132'{s'#255#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#16#247#247#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#132'sc'
   +#255'kcZ'#255#0#0#0#0'RRR'#255#148#140'{'#255#0#0#0#0#0#0#0#0#0#0#0#0#239'R'
@@ -4736,8 +4737,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206'c'#0#255#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#165'9'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206'c'#0#255#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#165'9'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206'c'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#0#0#0#0#0#0#0#165'9'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206'c'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#165'9'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#198'Z'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#165'9'#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -4800,8 +4801,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#181#173#140#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#198
   +#189#156#255#173#148'c'#255#148's1'#255#140'k!'#255#148's1'#255#165#140'Z'
   +#255#181#165#140#255#214#206#189#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -4864,8 +4865,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#165#255#255#255#231#255#255#255#165#255#255#255#231#255#255#255#165#247
   +#255#255#231#255#255#255#165#239#255#255#239#255#255#255#156#231#255#255#239
   +#255#255#255#156#222#255#255#0#140#239#255#0#156#255#255#0#189#255#255#0'c'
-  +#156#255#0'k'#165#255#0'c'#231#255#0'k'#165#255#0'c'#231#255#0'k'#165#255#0
-  ,'c'#231#255#0'k'#165#255#0'c'#231#255#0'c'#156#255#0'k'#239#255#0'c'#156#255
+  ,#156#255#0'k'#165#255#0'c'#231#255#0'k'#165#255#0'c'#231#255#0'k'#165#255#0
+  +'c'#231#255#0'k'#165#255#0'c'#231#255#0'c'#156#255#0'k'#239#255#0'c'#156#255
   +#0'k'#239#255#0'c'#156#255#0#156#255#255#0'c'#156#255#0#0#0#0#0#0#0#0#0#156
   +#214#255#231#255#255#255#165#255#255#255#231#255#255#255#165#247#255#255#231
   +#255#255#255#165#239#255#255#239#255#255#255#156#231#255#255#239#255#255#255
@@ -4928,8 +4929,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255')'#143#173#255'#Ww'#255'!Gs'#255'5{'#173#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0'g'#223#207#255'?'#207#183#255'5'#158#132#255'1'#156''
   +#255'1'#167#142#255'1'#191#175#255'9'#215#207#255'/'#165#183#255'#Z{'#255'7o'
-  +#149#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'o'#223#150
-  ,#255'B'#214'w'#255'='#191'^'#255'9'#175'W'#255'7'#173's'#255'5'#173#149#255
+  ,#149#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'o'#223#150
+  +#255'B'#214'w'#255'='#191'^'#255'9'#175'W'#255'7'#173's'#255'5'#173#149#255
   +'7'#206#198#255''''#159#189#255'-s'#157#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#151#231#141#255'o'#222'g'#255'G'#222'F'#255'5'#215'7'#255'9'
   +#215'?'#255'='#189'J'#255';'#167'g'#255'5'#149''#255'-'#158#175#255'5'#148
@@ -4992,8 +4993,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'#%'#255#207#206#206#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'?CF'
   +#255#206#206#206#255#0#0#0#0#0#0#0#0#0#0#0#0'!'''''#255#0#0#0#0#0#0#0#0#0#0#0
   +#0#181#181#181#255'^cc'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0';??'#255#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#25#30#30#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#215#222#222#255'gkk'#255#0#0#0#0#0#0#0#0#173#173#173#255#214#214#214#255#0#0
+  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#25#30#30#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#215#222#222#255'gkk'#255#0#0#0#0#0#0#0#0#173#173#173#255#214#214#214#255#0#0
   +#0#0#0#0#0#0#0#0#0#0'''+-'#255'koo'#255#0#0#0#255'Z__'#255'399'#255#0#0#0#0#0
   +#0#0#0#0#0#0#0#165#167#167#255#215#222#222#255#0#0#0#0'''--'#255#0#0#0#0#0#0
   +#0#0#0#0#0#0'ORR'#255#0#0#0#0#0#0#0#0'-33'#255#0#0#0#0#0#0#0#0'-33'#255#0#0#0
@@ -5056,8 +5057,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -5120,8 +5121,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#140'w'#255#255#132'k'#255#255#133'k'#255#255#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#167#150#255#255'+'#2#255#255'+'#2#255#255'+'#2#255#255#142'{'#255#255#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#157#141#255#255#143'{'#255#255#132'o'#255#255#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#157#141#255#255#143'{'#255#255#132'o'#255#255#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -5184,8 +5185,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#133#133#133#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#135#135#135#255#133#133#133#255#133#133#133#255#133#133
   +#133#255#133#133#133#255#133#133#133#255#214#214#214#255#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#191#191#191#255#133#133
-  ,#133#255#133#133#133#255#133#133#133#255#133#133#133#255#133#133#133#255#181
+  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#191#191#191#255#133#133
+  +#133#255#133#133#133#255#133#133#133#255#133#133#133#255#133#133#133#255#181
   +#181#181#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#142#142#142#255#133#133#133#255#133#133#133#255#133#133#133
   +#255#133#133#133#255#165#165#165#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -5248,8 +5249,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255
-  ,#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255
+  +#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#255#0#0#0#255#0#0#0#255#0#0#0
   +#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -5312,8 +5313,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#214#214#214#255'---'#255'111'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -5376,8 +5377,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#173#173#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#191#191
   +#191#255'sss'#255'sss'#255#148#148#148#255#199#199#199#255#173#173#173#255'{'
   +'{{'#255'sss'#255'sss'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0'sss'#255'sss'#255'sss'#255'sss'#255#189#189#189#255#223#223
-  ,#223#255#165#165#165#255#214#214#214#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#0#0#0'sss'#255'sss'#255'sss'#255'sss'#255#189#189#189#255#223#223
+  +#223#255#165#165#165#255#214#214#214#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#214#214#214#255'sss'#255'sss'#255'sss'#255'sss'
   +#255#142#142#142#255#206#206#206#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#214#214#214#255'sss'#255'sss'#255'sss'#255
@@ -5440,8 +5441,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#206#206#255#255'{{'#255#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#23#14#14#255#175#132#132#255#255
   +#214#214#255#255#214#214#255#255#214#214#255#255#214#214#255#231#214#214#255
-  +'K99'#255#231#231#231#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0'sss'#255#206'ss'#255#255'ss'#255#255'ss'#255#255'ss'#255#255'ss'#255#183
+  ,'K99'#255#231#231#231#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0'sss'#255#206'ss'#255#255'ss'#255#255'ss'#255#255'ss'#255#255'ss'#255#183
   +'ss'#255#31#31#31#255#167#167#167#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206
   +#206#206#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206#206
@@ -5504,8 +5505,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'sss'#255#148#148#148#255#255#255#255#255#173#173#173#255'{{{'#255'sss'#255
   +'sss'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'ss'
   +'s'#255'sss'#255'sss'#255#255#255#255#255#189#189#189#255#223#223#223#255#165
-  +#165#165#255#214#214#214#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#214#214#214#255'sss'#255'sss'#255'sss'#255#255#255#255#255
+  ,#165#165#255#214#214#214#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#214#214#214#255'sss'#255'sss'#255'sss'#255#255#255#255#255
   +#142#142#142#255#206#206#206#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#214#214#214#255'sss'#255'sss'#255'sss'#255'sss'
   +#255#255#255#255#255'www'#255#189#189#189#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -5568,8 +5569,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'))'#255#255#183#183#255#255#0#0#0#0#0#0#0#0#0#0#0#0#134#134#255#255#165#165
   +#255#255#0#0#0#0#0#0#0#0#191#191#255#255'{{'#255#255#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'{{'#255#255#191#191
-  +#255#255#0#0#0#0#0#0#0#0#0#0#0#0#183#183#255#255#140#140#255#255#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#140#140#255#255#183#183
+  ,#255#255#0#0#0#0#0#0#0#0#0#0#0#0#183#183#255#255#140#140#255#255#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#140#140#255#255#183#183
   +#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#183#183#255#255'{{'#255#255
   +#134#134#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#134#134#255#255'{{'#255#255
   +#183#183#255#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#191
@@ -5632,8 +5633,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#239#222#215#255#206#181#173#255#183#142#141#255#191
   +#158#150#255#231#215#214#255#0#0#0#0#0#0#0#0#0#0#0#0#223#207#206#255#199#167
   +#167#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#214#181#181#255#214
-  +#181#181#255#0#0#0#0#215#191#189#255#183#142#141#255#191#156#158#255#143'[^'
-  ,#255#0#0#0#0#0#0#0#0#223#207#206#255#199#167#167#255#215#183#181#255#0#0#0#0
+  ,#181#181#255#0#0#0#0#215#191#189#255#183#142#141#255#191#156#158#255#143'[^'
+  +#255#0#0#0#0#0#0#0#0#223#207#206#255#199#167#167#255#215#183#181#255#0#0#0#0
   +#0#0#0#0#206#175#167#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#247#231#215
   +#255#214#173#167#255#149'_^'#255#0#0#0#0#0#0#0#0#198#0#0#255#198#0#0#255#198
   +#0#0#255#198#0#0#255#198#0#0#255#198#0#0#255#0#0#0#0#0#0#0#0#231#132''#255
@@ -5696,8 +5697,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'{'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206#175#167#255#0#0#0#0#0#0#0
   +#0#231#199#181#255#181#133''#255#173'{'#255#247#206#199#255#0#0#0#0#206#173
   +#165#255#0#0#0#0#189#150#148#255#181#142#133#255#0#0#0#0#198#165#157#255#207
-  +#175#165#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206#167#157#255
-  ,#173'{'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#181#133#133#255#198#157#150#255
+  ,#175#165#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#206#167#157#255
+  +#173'{'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#181#133#133#255#198#157#150#255
   +#206#175#167#255#231#207#191#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#140'Z['#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#231#189#183#255#173
   +'{w'#255#214#167#165#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
@@ -5760,8 +5761,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#199#4#4#255#198#0#0#255#206#167#158#255#0#0#0#0#198#0#0#255#198#0#0#255
   +#198#0#0#255#0#0#0#0#198#0#0#255#198#0#0#255#231#189#181#255#0#0#0#0#0#0#0#0
   +#215#181#175#255#0#0#0#0#0#0#0#0#207'1/'#255#198#0#0#255#231'w'#255#0#0#0#0
-  +#247#199#183#255#198#0#0#255#198#0#0#255#0#0#0#0#198#0#0#255#198#0#0#255#255
-  ,#223#207#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#239#159#151#255#198#0#0
+  ,#247#199#183#255#198#0#0#255#198#0#0#255#0#0#0#0#198#0#0#255#198#0#0#255#255
+  +#223#207#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#239#159#151#255#198#0#0
   +#255#198#0#0#255#198#0#0#255#198#0#0#255#198#0#0#255#206#30#29#255#0#0#0#0
   +#198#0#0#255#198#0#0#255#206#175#167#255#255#223#207#255#0#0#0#0#0#0#0#0#191
   +#156#150#255#223#198#191#255#0#0#0#0#231#132''#255#206#30#29#255#198#0#0#255
@@ -5824,8 +5825,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0'B'#0#0#255'B'#0#0#255#255#255#255#255'B'#0#0#255'B'#0#0#255'B'#0#0#255
   +'B'#0#0#255'B'#0#0#255#255#247#231#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0
   +#0#255'B'#0#0#255#0#0#0#0#0#0#0#0'B'#0#0#255'B'#0#0#255#255#255#255#255'B'#0
-  +#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255#0#247#231#255'B'#0#0#255
-  ,'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255#0#0#0#0#0#0#0#0'B'#0#0#255'B'#0
+  ,#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255#0#247#231#255'B'#0#0#255
+  +'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255#0#0#0#0#0#0#0#0'B'#0#0#255'B'#0
   +#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0
   +#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'B'#0#0#255#0#0#0#0#0#0#0#0
   +'B'#0#0#255#255#247#231#255'B'#0#0#255'B'#0#0#255'B'#0#0#255'{s'#255'{s'
@@ -5888,8 +5889,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#255#0#0#255#0#0#0#0#0#0#0#0#255#239#231#255#0#0#0#0#255#0#0#255#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#0#0#255#0#0
-  +#0#0#0#0#0#0#255#0#0#255#255#0#0#255#255#0#0#255#255#0#0#255#0#0#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#0#0#0#0#255#231#207#255#0#0#0#0#0#0#0#0#255#0#0#255#255#0#0
+  ,#0#0#0#0#0#0#255#0#0#255#255#0#0#255#255#0#0#255#255#0#0#255#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#255#231#207#255#0#0#0#0#0#0#0#0#255#0#0#255#255#0#0
   +#255#255#0#0#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#255#231#207#255#255#231#199#255#0#0#0#0#255#0#0#255#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#231#207#255#255#0#0#255#0#0#0#0#255
@@ -5952,8 +5953,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#141#255#133#133#133#255#132#132#132#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255'sss'#255#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255'sss'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'VVV'#255#0#0#0#0#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255'sss'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0'VVV'#255#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#255'sss'#255#0#0#0#0#0#0#0#0#0#0#0#0'kVW'#255#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#141#141#141#255'^79'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#255'sss'#255#0#0#0#0#0#0#0#0#183'ww'#255'O?B'#255#0#0#0#0#0#0#0#0#0#0#0#0
@@ -6016,8 +6017,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#255#0#0#255#255#0#0#0#255#0#0#255#255#0#0#0#0#132#132#132#255#0#0#0#0#0
   +#0#255#255#0#0#0#255#0#0#255#255#0#0#255#255#0#0#255#255#0#0#255#255#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#255#255#0#0#255#255#0#0#0#255#0#0#0#0#0#0#255#255#132
-  +#132#132#255#0#0#255#255#0#0#0#0#0#0#0#255#0#0#255#255#0#0#255#255#0#0#0#0#0
-  ,#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#255#0#0#255#255#0#0#255#255#0#0#0#255
+  ,#132#132#255#0#0#255#255#0#0#0#0#0#0#0#255#0#0#255#255#0#0#255#255#0#0#0#0#0
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#255#0#0#255#255#0#0#255#255#0#0#0#255
   +#0#0#0#0#132#132#132#255#0#0#0#0#0#0#0#255#0#0#255#255#0#0#255#255#0#0#255
   +#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#255#255#0#0#255#255
   +#0#0#255#255#0#0#0#255#0#0#0#0#0#0#0#255#0#0#255#255#0#0#255#255#0#0#255#255
@@ -6080,8 +6081,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#255#231'cc'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#148'cc'#255#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#148'cc'#255
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#231'cc'#255#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#255#239#222#255#0#0#0#0#255#239#214#255#0#0#0#0#255#231#214#255#231
-  ,'cc'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#148'cc'#255#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#255#239#222#255#0#0#0#0#255#239#214#255#0#0#0#0#255#231#214#255#231
+  +'cc'#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#148'cc'#255#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#255#239#214#255#0#0#0#0#0#0#0#0#0#0#0#0#148'cc'#255
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#231'cc'#255#0#0#0#0#0#0#0#0#255#239
   +#222#255#0#0#0#0#255#239#214#255#0#0#0#0#255#231#206#255#0#0#0#0#255#231#198
@@ -6144,8 +6145,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#208#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#1#230#208#255#1#230
   +#208#255#1#230#208#255#1#230#208#255#1#230#208#255#1#230#208#255#1#230#208
   +#255#1#230#208#255#1#230#208#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
-  +#0#0#0#0#0#0#1#230#208#255#1#230#208#255#1#230#208#255#1#1#1#255#1#1#1#255#1
-  ,#1#1#255#1#230#208#255#1#230#208#255#1#230#208#255#0#0#0#0#0#0#0#0#0#0#0#0#0
+  ,#0#0#0#0#0#0#1#230#208#255#1#230#208#255#1#230#208#255#1#1#1#255#1#1#1#255#1
+  +#1#1#255#1#230#208#255#1#230#208#255#1#230#208#255#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#1#230#208#255#1#230#208#255#1#230#208#255#1#1#1#255#0
   +#0#0#0#1#230#208#255#0#0#0#0#1#1#1#255#1#230#208#255#1#230#208#255#1#230#208
   +#255#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#1#230#208#255#1#230#208#255#1#1
@@ -6208,16 +6209,13 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'nuItem'#10'MenuItem16'#6'Action'#7#11'SetupSolSys'#7'OnClick'#7#18'SetupSol'
   +'SysExecute'#0#0#9'TMenuItem'#10'MenuItem17'#6'Action'#7#12'SetupDisplay'#7
   +'OnClick'#7#19'SetupDisplayExecute'#0#0#9'TMenuItem'#10'MenuItem18'#6'Action'
-  +#7#13'SetupPictures'#7'OnClick'#7#20'SetupPicturesExecute'#0#0#9'TMenuItem'
-  ,#10'MenuItem19'#6'Action'#7#11'SetupSystem'#7'OnClick'#7#18'SetupSystemExecu'
+  ,#7#13'SetupPictures'#7'OnClick'#7#20'SetupPicturesExecute'#0#0#9'TMenuItem'
+  +#10'MenuItem19'#6'Action'#7#11'SetupSystem'#7'OnClick'#7#18'SetupSystemExecu'
   +'te'#0#0#9'TMenuItem'#10'MenuItem20'#6'Action'#7#13'SetupInternet'#7'OnClick'
   +#7#20'SetupInternetExecute'#0#0#9'TMenuItem'#10'MenuItem25'#7'Caption'#6#1'-'
   +#0#0#9'TMenuItem'#10'MenuItem24'#6'Action'#7#11'SetupConfig'#7'OnClick'#7#18
   +'SetupConfigExecute'#0#0#9'TMenuItem'#10'MenuItem21'#7'Caption'#6#1'-'#0#0#9
   +'TMenuItem'#10'MenuItem22'#6'Action'#7#17'SaveConfiguration'#7'OnClick'#7#24
   +'SaveConfigurationExecute'#0#0#9'TMenuItem'#10'MenuItem23'#6'Action'#7#16'Sa'
-  +'veConfigOnExit'#7'OnClick'#7#23'SaveConfigOnExitExecute'#0#0#0#15'TUniqueIn'
-  +'stance'#15'UniqueInstance1'#7'Enabled'#9#10'Identifier'#6#8'skychart'#14'Up'
-  +'dateInterval'#3#232#3#15'OnOtherInstance'#7#28'UniqueInstance1OtherInstance'
-  +#4'left'#3#144#0#3'top'#3#199#0#0#0#0
+  +'veConfigOnExit'#7'OnClick'#7#23'SaveConfigOnExitExecute'#0#0#0#0
 ]);

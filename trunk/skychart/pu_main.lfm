@@ -1,5 +1,5 @@
 object f_main: Tf_main
-  Left = 379
+  Left = 464
   Height = 580
   Top = 120
   Width = 860
@@ -3364,6 +3364,7 @@ object f_main: Tf_main
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
+        MaxLength = -1
         Style = csDropDownList
         TabOrder = 2
       end
@@ -3715,6 +3716,7 @@ object f_main: Tf_main
       end
       object MenuItem6: TMenuItem
         Action = SetupConfig
+        OnClick = SetupConfigExecute
       end
       object N8: TMenuItem
         Caption = '-'
@@ -7666,13 +7668,5 @@ object f_main: Tf_main
       Action = SaveConfigOnExit
       OnClick = SaveConfigOnExitExecute
     end
-  end
-  object UniqueInstance1: TUniqueInstance
-    Enabled = True
-    Identifier = 'skychart'
-    UpdateInterval = 1000
-    OnOtherInstance = UniqueInstance1OtherInstance
-    left = 144
-    top = 199
   end
 end

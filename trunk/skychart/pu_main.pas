@@ -39,7 +39,7 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, UniqueInstance;
+  LResources;
 
 type
   TTCPThrd = class(TThread)
@@ -103,7 +103,6 @@ type
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
-    UniqueInstance1: TUniqueInstance;
     VariableStar1: TMenuItem;
     PopupConfig: TPopupMenu;
     SetupInternet: TAction;
@@ -465,8 +464,6 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure UniqueInstance1OtherInstance(Sender: TObject;
-      ParamCount: Integer; Parameters: array of String);
     procedure VariableStar1Click(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
     procedure ViewScrollBar1Click(Sender: TObject);
@@ -1227,6 +1224,13 @@ isWin98:=false;
   step:='Unix specific';
   configfile:=expandfilename(Defaultconfigfile);
 {$endif}
+{$ifdef darwin}
+  step:='Darwin specific';
+  MenuItem24.Visible:=false;  // config all not working
+  MenuItem25.Visible:=false;
+  MenuItem26.Visible:=false;
+  MenuItem6.Visible:=false;
+{$endif}
 step:='Create config';
 def_cfgsc:=Tconf_skychart.Create;
 cfgs:=Tconf_skychart.Create;
@@ -1445,24 +1449,6 @@ if ssCtrl in Shift then rot:=45
 else if ssShift in Shift then rot:=1
 else rot:=15;
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
-end;
-
-procedure Tf_main.UniqueInstance1OtherInstance(Sender: TObject;
-  ParamCount: Integer; Parameters: array of String);
-var
-  i: integer;
-begin
-  application.Restore;
-  application.BringToFront;
-  BringToFront;
-{  if ParamCount > 0 then begin
-     param.Clear;
-     for i:=0 to ParamCount-1 do begin
-        param.add(Parameters[i]);
-     end;
-     ReadParam;
-  end;
-}
 end;
 
 procedure Tf_main.VariableStar1Click(Sender: TObject);
