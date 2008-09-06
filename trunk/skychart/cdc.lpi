@@ -279,6 +279,7 @@
         <ComponentName Value="f_config_catalog"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config_catalog.lrs"/>
         <UnitName Value="pu_config_catalog"/>
       </Unit25>
@@ -419,13 +420,14 @@
         <ComponentName Value="f_config"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config.lrs"/>
         <UnitName Value="pu_config"/>
       </Unit43>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="5"/>
+    <Version Value="8"/>
     <Target>
       <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
     </Target>
@@ -435,7 +437,6 @@
     </SearchPaths>
     <CodeGeneration>
       <HeapSize Value="100000"/>
-      <Generate Value="Faster"/>
       <Optimizations>
         <OptimizationLevel Value="2"/>
       </Optimizations>

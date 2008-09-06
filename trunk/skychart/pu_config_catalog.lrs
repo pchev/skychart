@@ -1,117 +1,118 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   'TPF0'#17'Tf_config_catalog'#16'f_config_catalog'#4'Left'#3'{'#1#6'Height'#3
-  +'A'#2#3'Top'#3#242#0#5'Width'#3#10#2#18'HorzScrollBar.Page'#3#9#2#18'VertScr'
-  +'ollBar.Page'#3'@'#2#13'ActiveControl'#7#6'SACbox'#7'Caption'#6#7'Catalog'#12
-  +'ClientHeight'#3'A'#2#11'ClientWidth'#3#10#2#7'OnClose'#7#9'FormClose'#8'OnC'
-  +'reate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormSh'
-  +'ow'#0#6'TPanel'#9'MainPanel'#4'Left'#2#12#6'Height'#3#8#2#3'Top'#2#8#5'Widt'
-  +'h'#3#244#1#12'ClientHeight'#3#8#2#11'ClientWidth'#3#244#1#11'ParentColor'#8
-  +#8'TabOrder'#2#0#0#9'TNotebook'#9'Notebook1'#4'Left'#2#1#6'Height'#3#208#1#3
-  +'Top'#2#1#5'Width'#3#242#1#5'Align'#7#8'alClient'#9'PageIndex'#2#0#8'ShowTab'
-  +'s'#8#8'TabOrder'#2#1#0#5'TPage'#5'Page1'#7'Caption'#6#7'Catalog'#11'ClientW'
-  +'idth'#3#236#1#12'ClientHeight'#3#202#1#0#6'TLabel'#7'Label37'#4'Left'#2'`'#6
-  +'Height'#2#20#3'Top'#2#17#5'Width'#3#246#0#9'Alignment'#7#14'taRightJustify'
-  +#7'Anchors'#11#5'akTop'#7'akRight'#0#7'Caption'#6')Stars and Nebulae catalog'
-  +'s prepared with '#11'ParentColor'#8#0#0#11'TStringGrid'#11'StringGrid3'#6'H'
-  +'eight'#3'A'#1#3'Top'#2'0'#5'Width'#3#226#1#8'ColCount'#2#6#15'DefaultColWid'
-  +'th'#2#18#16'DefaultRowHeight'#2#18#10'FixedColor'#7#9'clBtnFace'#13'GridLin'
-  +'eWidth'#2#0#7'Options'#11#15'goFixedVertLine'#15'goFixedHorzLine'#10'goVert'
-  +'Line'#10'goHorzLine'#11'goRowMoving'#9'goEditing'#18'goAlwaysShowEditor'#0#8
-  +'RowCount'#2#2#10'ScrollBars'#7#10'ssAutoBoth'#8'TabOrder'#2#1#7'TabStop'#9
-  +#10'OnDrawCell'#7#19'StringGrid3DrawCell'#9'OnMouseUp'#7#18'StringGrid3Mouse'
-  +'Up'#12'OnSelectCell'#7#21'StringGrid3SelectCell'#13'OnSetEditText'#7#22'Str'
-  +'ingGrid3SetEditText'#9'ColWidths'#1#2#18#2'6'#2'6'#2'6'#3#4#1#2#18#0#0#0#7
-  +'TButton'#12'CatgenButton'#4'Left'#3'p'#1#6'Height'#2#25#3'Top'#2#12#5'Width'
-  +#2'`'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6'CatGen'#7'OnClick'#7
-  +#11'CatgenClick'#8'TabOrder'#2#0#0#0#7'TButton'#6'addcat'#4'Left'#3#144#0#6
-  +'Height'#2#25#3'Top'#3'x'#1#5'Width'#2'K'#7'Caption'#6#3'Add'#7'OnClick'#7#11
-  +'AddCatClick'#8'TabOrder'#2#2#0#0#7'TButton'#6'delcat'#4'Left'#3#248#0#6'Hei'
-  +'ght'#2#25#3'Top'#3'x'#1#5'Width'#2'K'#7'Caption'#6#6'Delete'#7'OnClick'#7#11
-  +'DelCatClick'#8'TabOrder'#2#3#0#0#0#5'TPage'#5'Page2'#7'Caption'#6#9'CdC Sta'
-  +'rs'#11'ClientWidth'#3#236#1#12'ClientHeight'#3#177#1#0#6'TLabel'#6'Label2'#6
-  +'Height'#2#20#3'Top'#2#7#5'Width'#3#151#0#7'Caption'#6#25'CDC Stars Catalog '
-  +'Setting'#11'ParentColor'#8#0#0#6'TLabel'#7'Label65'#4'Left'#2'D'#6'Height'#2
-  +#20#3'Top'#2'&'#5'Width'#2#19#7'Caption'#6#2'pm'#11'ParentColor'#8#0#0#6'TLa'
-  +'bel'#7'Label66'#4'Left'#2'D'#6'Height'#2#20#3'Top'#2'D'#5'Width'#2#19#7'Cap'
-  +'tion'#6#2'pm'#11'ParentColor'#8#0#0#6'TLabel'#7'Label87'#4'Left'#2'D'#6'Hei'
-  +'ght'#2#20#3'Top'#2'^'#5'Width'#2#19#7'Caption'#6#2'pm'#11'ParentColor'#8#0#0
-  +#6'TLabel'#7'Label16'#4'Left'#3#10#1#6'Height'#2#20#3'Top'#2#23#5'Width'#2#26
-  +#7'Caption'#6#4' min'#11'ParentColor'#8#0#0#6'TLabel'#7'Label28'#4'Left'#3#11
-  +#1#6'Height'#2#20#3'Top'#2#7#5'Width'#2'J'#9'Alignment'#7#14'taRightJustify'
-  +#7'Caption'#6#12'Field number'#11'ParentColor'#8#0#0#6'TLabel'#7'Label17'#4
-  +'Left'#3'/'#1#6'Height'#2#20#3'Top'#2#23#5'Width'#2#29#7'Caption'#6#4' max'
-  +#11'ParentColor'#8#0#0#6'TLabel'#7'Label27'#4'Left'#3'T'#1#6'Height'#2#20#3
-  +'Top'#2#23#5'Width'#2'7'#7'Caption'#6#10'Files Path'#11'ParentColor'#8#0#0#6
-  +'TLabel'#7'Label18'#4'Left'#2#8#6'Height'#2#20#3'Top'#2'&'#5'Width'#2' '#7'C'
-  +'aption'#6#5'Stars'#11'ParentColor'#8#0#0#6'TLabel'#7'Label21'#4'Left'#2#8#6
-  +'Height'#2'+'#3'Top'#3'J'#1#5'Width'#2'+'#7'Caption'#6#12'Deepsky 2000'#11'P'
-  +'arentColor'#8#8'WordWrap'#9#0#0#6'TLabel'#7'Label19'#4'Left'#2#8#6'Height'#2
-  +#20#3'Top'#3#235#0#5'Width'#2'5'#7'Caption'#6#9'Variables'#11'ParentColor'#8
-  +#0#0#6'TLabel'#7'Label20'#4'Left'#2#8#6'Height'#2#20#3'Top'#3#31#1#5'Width'#2
-  +'/'#7'Caption'#6#7'Doubles'#11'ParentColor'#8#0#0#9'TCheckBox'#6'BSCbox'#3'T'
-  +'ag'#2#1#4'Left'#2'\'#6'Height'#2#21#4'Hint'#6'1Bright Stars Catalog 5th Edi'
-  +'tion  (Hoffleit 1991)'#3'Top'#2'&'#5'Width'#3#132#0#11'HelpContext'#2'd'#7
-  +'Caption'#6#19'Bright Star Catalog'#7'OnClick'#7#15'CDCStarSelClick'#14'Pare'
-  +'ntShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#0#0#9'TLongEdit'#5'Fbsc1'#3'Tag'
-  +#2#1#4'Left'#3#10#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#2'&'#5'Width'#2
-  +#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'S'
-  +'howHint'#9#8'TabOrder'#2#1#8'OnChange'#7#19'CDCStarField1Change'#8'MaxValue'
-  +#2#10#0#0#9'TLongEdit'#5'Fbsc2'#3'Tag'#2#1#4'Left'#3'2'#1#6'Height'#2#22#4'H'
-  +'int'#6#5'0..10'#3'Top'#2'&'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11
-  +'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#2#8'OnChang'
-  +'e'#7#19'CDCStarField2Change'#8'MaxValue'#2#10#0#0#9'TCheckBox'#6'SKYbox'#3
-  +'Tag'#2#2#4'Left'#2'\'#6'Height'#2#21#4'Hint'#6',SKY2000 - Master Star Catal'
-  +'og  (Sande+ 1998)'#3'Top'#2'D'#5'Width'#2'I'#11'HelpContext'#2'e'#7'Caption'
-  +#6#7'SKY2000'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHi'
-  ,'nt'#9#8'TabOrder'#2#4#0#0#9'TLongEdit'#5'Fsky1'#3'Tag'#2#2#4'Left'#3#10#1#6
-  +'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#2'B'#5'Width'#2#30#11'BorderStyle'#7
-  +#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'
-  +#2#5#8'OnChange'#7#19'CDCStarField1Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'
-  +#5'Fsky2'#3'Tag'#2#2#4'Left'#3'2'#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'
-  +#2'B'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'Paren'
-  +'tShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#6#8'OnChange'#7#19'CDCStarField2Ch'
-  +'ange'#8'MaxValue'#2#10#0#0#9'TCheckBox'#6'TY2Box'#3'Tag'#2#4#4'Left'#2'\'#6
-  +'Height'#2#21#4'Hint'#6'!The Tycho-2 Catalogue (Hog+ 2000)'#3'Top'#2'^'#5'Wi'
-  +'dth'#2'p'#11'HelpContext'#2'f'#7'Caption'#6#15'Tycho 2 Catalog'#7'OnClick'#7
-  +#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#8#0#0#9
-  +'TLongEdit'#5'Fty21'#3'Tag'#2#4#4'Left'#3#10#1#6'Height'#2#22#4'Hint'#6#5'0.'
-  +'.10'#3'Top'#2'^'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'
-  +#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#9#8'OnChange'#7#19'CDCSt'
-  +'arField1Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'Fty22'#3'Tag'#2#4#4'Lef'
-  +'t'#3'2'#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#2'^'#5'Width'#2#30#11'Bo'
-  +'rderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'
-  +#9#8'TabOrder'#2#10#8'OnChange'#7#19'CDCStarField2Change'#8'MaxValue'#2#10#0
-  +#0#9'TCheckBox'#7'GSCFBox'#3'Tag'#2#6#4'Left'#2'\'#6'Height'#2#21#4'Hint'#6
-  +'RThe Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  original FI'
-  +'TS CDROM'#3'Top'#2'z'#5'Width'#3#149#0#11'HelpContext'#2'h'#7'Caption'#6#21
-  +'HST GSC original FITS'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8
-  +#8'ShowHint'#9#8'TabOrder'#2#12#0#0#9'TCheckBox'#7'GSCCbox'#3'Tag'#2#7#4'Lef'
-  +'t'#2'\'#6'Height'#2#21#4'Hint'#6'SThe Hubble Space Telescope Guide Star Cat'
-  +'alog  ( Lasker 1990)  Compact CDS version '#3'Top'#3#152#0#5'Width'#2''#11
-  +'HelpContext'#2'h'#7'Caption'#6#15'HST GSC compact'#7'OnClick'#7#15'CDCStarS'
-  +'elClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#16#0#0#9'TCheckBo'
-  +'x'#6'USNbox'#3'Tag'#2#9#4'Left'#2'\'#6'Height'#2#21#4'Hint'#6'J- USNO-SA1.0'
-  +' '#13#10'- USNO-A1.0 '#13#10'- USNO-A2.0'#13#10'  U.S. Naval Observatory CD'
-  +'ROM''s'#3'Top'#3#181#0#5'Width'#2'C'#11'HelpContext'#2'q'#7'Caption'#6#6'US'
-  +'NO-A'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8
-  +'TabOrder'#2#20#0#0#9'TCheckBox'#9'dsbasebox'#3'Tag'#2#11#4'Left'#2'\'#6'Hei'
-  +'ght'#2#21#4'Hint'#6'7Deepsky 2000 base directory with stars to magnitude 5.'
-  +'5'#3'Top'#3'J'#1#5'Width'#3#135#0#11'HelpContext'#2'h'#7'Caption'#6#17'Deep'
-  +'sky 2000 base'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8'Show'
-  +'Hint'#9#8'TabOrder'#2'"'#0#0#9'TCheckBox'#8'dstycBox'#3'Tag'#2#12#4'Left'#2
-  +'['#6'Height'#2#21#4'Hint'#6'%Tycho Catalog from Deepsky 2000 CDROM'#3'Top'#3
-  +'f'#1#5'Width'#3#176#0#11'HelpContext'#2'h'#7'Caption'#6#24'Deepsky 2000 Sup'
-  +'er Tycho'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHint'
-  +#9#8'TabOrder'#2'&'#0#0#9'TCheckBox'#8'dsgscBox'#3'Tag'#2#13#4'Left'#2'['#6
-  +'Height'#2#21#4'Hint'#6'EThe Hubble Space Telescope Guide Star Catalog from '
-  +'Deepsky 2000 CDROM'#3'Top'#3#130#1#5'Width'#3#159#0#11'HelpContext'#2'h'#7
-  +'Caption'#6#20'Deepsky 2000 HST GSC'#7'OnClick'#7#15'CDCStarSelClick'#14'Par'
-  +'entShowHint'#8#8'ShowHint'#9#8'TabOrder'#2'*'#0#0#9'TCheckBox'#9'USNBright'
-  +#3'Tag'#2#9#4'Left'#3#164#0#6'Height'#2#21#3'Top'#3#181#0#5'Width'#2'['#7'Ca'
-  +'ption'#6#12'Bright stars'#7'OnClick'#7#14'USNBrightClick'#8'TabOrder'#2#21#0
-  +#0#9'TLongEdit'#6'fgscf1'#3'Tag'#2#6#4'Left'#3#10#1#6'Height'#2#22#4'Hint'#6
-  +#5'0..10'#3'Top'#2'z'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentC'
-  +'olor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#13#8'OnChange'#7#19
+  +'A'#2#3'Top'#3#242#0#5'Width'#3#10#2#7'Caption'#6#7'Catalog'#12'ClientHeight'
+  +#3'A'#2#11'ClientWidth'#3#10#2#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'Fo'
+  +'rmCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormShow'#10'LCLVers'
+  +'ion'#6#6'0.9.25'#0#6'TPanel'#9'MainPanel'#4'Left'#2#12#6'Height'#3#8#2#3'To'
+  +'p'#2#8#5'Width'#3#244#1#12'ClientHeight'#3#8#2#11'ClientWidth'#3#244#1#11'P'
+  +'arentColor'#8#8'TabOrder'#2#0#0#9'TNotebook'#9'Notebook1'#4'Left'#2#1#6'Hei'
+  +'ght'#3#208#1#3'Top'#2#1#5'Width'#3#242#1#5'Align'#7#8'alClient'#9'PageIndex'
+  +#2#0#8'ShowTabs'#8#8'TabOrder'#2#1#0#5'TPage'#5'Page1'#7'Caption'#6#7'Catalo'
+  +'g'#11'ClientWidth'#3#236#1#12'ClientHeight'#3#202#1#0#6'TLabel'#7'Label37'#4
+  +'Left'#2'`'#6'Height'#2#14#3'Top'#2#17#5'Width'#3#246#0#9'Alignment'#7#14'ta'
+  +'RightJustify'#7'Anchors'#11#5'akTop'#7'akRight'#0#7'Caption'#6')Stars and N'
+  +'ebulae catalogs prepared with '#11'ParentColor'#8#0#0#11'TStringGrid'#11'St'
+  +'ringGrid3'#6'Height'#3'A'#1#3'Top'#2'0'#5'Width'#3#226#1#8'ColCount'#2#6#15
+  +'DefaultColWidth'#2#18#16'DefaultRowHeight'#2#18#14'ExtendedSelect'#9#10'Fix'
+  +'edColor'#7#9'clBtnFace'#13'GridLineWidth'#2#0#7'Options'#11#15'goFixedVertL'
+  +'ine'#15'goFixedHorzLine'#10'goVertLine'#10'goHorzLine'#11'goRowMoving'#9'go'
+  +'Editing'#18'goAlwaysShowEditor'#0#8'RowCount'#2#2#8'TabOrder'#2#1#10'OnDraw'
+  +'Cell'#7#19'StringGrid3DrawCell'#9'OnMouseUp'#7#18'StringGrid3MouseUp'#12'On'
+  +'SelectCell'#7#21'StringGrid3SelectCell'#13'OnSetEditText'#7#22'StringGrid3S'
+  +'etEditText'#9'ColWidths'#1#2#18#2'6'#2'6'#2'6'#3#4#1#2#18#0#0#0#7'TButton'
+  +#12'CatgenButton'#4'Left'#3'p'#1#6'Height'#2#25#3'Top'#2#12#5'Width'#2'`'#25
+  +'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6'CatGen'#7'OnClick'#7#11'Catge'
+  +'nClick'#8'TabOrder'#2#0#0#0#7'TButton'#6'addcat'#4'Left'#3#144#0#6'Height'#2
+  +#25#3'Top'#3'x'#1#5'Width'#2'K'#7'Caption'#6#3'Add'#7'OnClick'#7#11'AddCatCl'
+  +'ick'#8'TabOrder'#2#2#0#0#7'TButton'#6'delcat'#4'Left'#3#248#0#6'Height'#2#25
+  +#3'Top'#3'x'#1#5'Width'#2'K'#7'Caption'#6#6'Delete'#7'OnClick'#7#11'DelCatCl'
+  +'ick'#8'TabOrder'#2#3#0#0#0#5'TPage'#5'Page2'#7'Caption'#6#9'CdC Stars'#11'C'
+  +'lientWidth'#3#236#1#12'ClientHeight'#3#177#1#0#6'TLabel'#6'Label2'#6'Height'
+  +#2#20#3'Top'#2#7#5'Width'#3#151#0#7'Caption'#6#25'CDC Stars Catalog Setting'
+  +#11'ParentColor'#8#0#0#6'TLabel'#7'Label65'#4'Left'#2'D'#6'Height'#2#20#3'To'
+  +'p'#2'&'#5'Width'#2#19#7'Caption'#6#2'pm'#11'ParentColor'#8#0#0#6'TLabel'#7
+  +'Label66'#4'Left'#2'D'#6'Height'#2#20#3'Top'#2'D'#5'Width'#2#19#7'Caption'#6
+  +#2'pm'#11'ParentColor'#8#0#0#6'TLabel'#7'Label87'#4'Left'#2'D'#6'Height'#2#20
+  +#3'Top'#2'^'#5'Width'#2#19#7'Caption'#6#2'pm'#11'ParentColor'#8#0#0#6'TLabel'
+  +#7'Label16'#4'Left'#3#10#1#6'Height'#2#20#3'Top'#2#23#5'Width'#2#26#7'Captio'
+  +'n'#6#4' min'#11'ParentColor'#8#0#0#6'TLabel'#7'Label28'#4'Left'#3#11#1#6'He'
+  +'ight'#2#20#3'Top'#2#7#5'Width'#2'J'#9'Alignment'#7#14'taRightJustify'#7'Cap'
+  +'tion'#6#12'Field number'#11'ParentColor'#8#0#0#6'TLabel'#7'Label17'#4'Left'
+  +#3'/'#1#6'Height'#2#20#3'Top'#2#23#5'Width'#2#29#7'Caption'#6#4' max'#11'Par'
+  +'entColor'#8#0#0#6'TLabel'#7'Label27'#4'Left'#3'T'#1#6'Height'#2#20#3'Top'#2
+  +#23#5'Width'#2'7'#7'Caption'#6#10'Files Path'#11'ParentColor'#8#0#0#6'TLabel'
+  +#7'Label18'#4'Left'#2#8#6'Height'#2#20#3'Top'#2'&'#5'Width'#2' '#7'Caption'#6
+  +#5'Stars'#11'ParentColor'#8#0#0#6'TLabel'#7'Label21'#4'Left'#2#8#6'Height'#2
+  +'+'#3'Top'#3'J'#1#5'Width'#2'+'#7'Caption'#6#12'Deepsky 2000'#11'ParentColor'
+  +#8#8'WordWrap'#9#0#0#6'TLabel'#7'Label19'#4'Left'#2#8#6'Height'#2#20#3'Top'#3
+  +#235#0#5'Width'#2'5'#7'Caption'#6#9'Variables'#11'ParentColor'#8#0#0#6'TLabe'
+  +'l'#7'Label20'#4'Left'#2#8#6'Height'#2#20#3'Top'#3#31#1#5'Width'#2'/'#7'Capt'
+  +'ion'#6#7'Doubles'#11'ParentColor'#8#0#0#9'TCheckBox'#6'BSCbox'#3'Tag'#2#1#4
+  +'Left'#2'\'#6'Height'#2#21#4'Hint'#6'1Bright Stars Catalog 5th Edition  (Hof'
+  +'fleit 1991)'#3'Top'#2'&'#5'Width'#3#132#0#11'HelpContext'#2'd'#7'Caption'#6
+  +#19'Bright Star Catalog'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'
+  +#8#8'ShowHint'#9#8'TabOrder'#2#0#0#0#9'TLongEdit'#5'Fbsc1'#3'Tag'#2#1#4'Left'
+  +#3#10#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#2'&'#5'Width'#2#30#11'Borde'
+  +'rStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8
+  +'TabOrder'#2#1#8'OnChange'#7#19'CDCStarField1Change'#8'MaxValue'#2#10#0#0#9
+  +'TLongEdit'#5'Fbsc2'#3'Tag'#2#1#4'Left'#3'2'#1#6'Height'#2#22#4'Hint'#6#5'0.'
+  +'.10'#3'Top'#2'&'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'
+  +#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#2#8'OnChange'#7#19'CDCSt'
+  +'arField2Change'#8'MaxValue'#2#10#0#0#9'TCheckBox'#6'SKYbox'#3'Tag'#2#2#4'Le'
+  +'ft'#2'\'#6'Height'#2#21#4'Hint'#6',SKY2000 - Master Star Catalog  (Sande+ 1'
+  +'998)'#3'Top'#2'D'#5'Width'#2'I'#11'HelpContext'#2'e'#7'Caption'#6#7'SKY2000'
+  +#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOr'
+  +'der'#2#4#0#0#9'TLongEdit'#5'Fsky1'#3'Tag'#2#2#4'Left'#3#10#1#6'Height'#2#22
+  ,#4'Hint'#6#5'0..10'#3'Top'#2'B'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'
+  +#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#5#8'OnCh'
+  +'ange'#7#19'CDCStarField1Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'Fsky2'#3
+  +'Tag'#2#2#4'Left'#3'2'#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#2'B'#5'Wid'
+  +'th'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'
+  +#8#8'ShowHint'#9#8'TabOrder'#2#6#8'OnChange'#7#19'CDCStarField2Change'#8'Max'
+  +'Value'#2#10#0#0#9'TCheckBox'#6'TY2Box'#3'Tag'#2#4#4'Left'#2'\'#6'Height'#2
+  +#21#4'Hint'#6'!The Tycho-2 Catalogue (Hog+ 2000)'#3'Top'#2'^'#5'Width'#2'p'
+  +#11'HelpContext'#2'f'#7'Caption'#6#15'Tycho 2 Catalog'#7'OnClick'#7#15'CDCSt'
+  +'arSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#8#0#0#9'TLongE'
+  +'dit'#5'Fty21'#3'Tag'#2#4#4'Left'#3#10#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3
+  +'Top'#2'^'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14
+  +'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#9#8'OnChange'#7#19'CDCStarFie'
+  +'ld1Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'Fty22'#3'Tag'#2#4#4'Left'#3
+  +'2'#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#2'^'#5'Width'#2#30#11'BorderS'
+  +'tyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8
+  +'TabOrder'#2#10#8'OnChange'#7#19'CDCStarField2Change'#8'MaxValue'#2#10#0#0#9
+  +'TCheckBox'#7'GSCFBox'#3'Tag'#2#6#4'Left'#2'\'#6'Height'#2#21#4'Hint'#6'RThe'
+  +' Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  original FITS C'
+  +'DROM'#3'Top'#2'z'#5'Width'#3#149#0#11'HelpContext'#2'h'#7'Caption'#6#21'HST'
+  +' GSC original FITS'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8
+  +'ShowHint'#9#8'TabOrder'#2#12#0#0#9'TCheckBox'#7'GSCCbox'#3'Tag'#2#7#4'Left'
+  +#2'\'#6'Height'#2#21#4'Hint'#6'SThe Hubble Space Telescope Guide Star Catalo'
+  +'g  ( Lasker 1990)  Compact CDS version '#3'Top'#3#152#0#5'Width'#2''#11'He'
+  +'lpContext'#2'h'#7'Caption'#6#15'HST GSC compact'#7'OnClick'#7#15'CDCStarSel'
+  +'Click'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#16#0#0#9'TCheckBox'
+  +#6'USNbox'#3'Tag'#2#9#4'Left'#2'\'#6'Height'#2#21#4'Hint'#6'J- USNO-SA1.0 '
+  +#13#10'- USNO-A1.0 '#13#10'- USNO-A2.0'#13#10'  U.S. Naval Observatory CDROM'
+  +'''s'#3'Top'#3#181#0#5'Width'#2'C'#11'HelpContext'#2'q'#7'Caption'#6#6'USNO-'
+  +'A'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'Ta'
+  +'bOrder'#2#20#0#0#9'TCheckBox'#9'dsbasebox'#3'Tag'#2#11#4'Left'#2'\'#6'Heigh'
+  +'t'#2#21#4'Hint'#6'7Deepsky 2000 base directory with stars to magnitude 5.5'
+  +#3'Top'#3'J'#1#5'Width'#3#135#0#11'HelpContext'#2'h'#7'Caption'#6#17'Deepsky'
+  +' 2000 base'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHin'
+  +'t'#9#8'TabOrder'#2'"'#0#0#9'TCheckBox'#8'dstycBox'#3'Tag'#2#12#4'Left'#2'['
+  +#6'Height'#2#21#4'Hint'#6'%Tycho Catalog from Deepsky 2000 CDROM'#3'Top'#3'f'
+  +#1#5'Width'#3#176#0#11'HelpContext'#2'h'#7'Caption'#6#24'Deepsky 2000 Super '
+  +'Tycho'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8
+  +'TabOrder'#2'&'#0#0#9'TCheckBox'#8'dsgscBox'#3'Tag'#2#13#4'Left'#2'['#6'Heig'
+  +'ht'#2#21#4'Hint'#6'EThe Hubble Space Telescope Guide Star Catalog from Deep'
+  +'sky 2000 CDROM'#3'Top'#3#130#1#5'Width'#3#159#0#11'HelpContext'#2'h'#7'Capt'
+  +'ion'#6#20'Deepsky 2000 HST GSC'#7'OnClick'#7#15'CDCStarSelClick'#14'ParentS'
+  +'howHint'#8#8'ShowHint'#9#8'TabOrder'#2'*'#0#0#9'TCheckBox'#9'USNBright'#3'T'
+  +'ag'#2#9#4'Left'#3#164#0#6'Height'#2#21#3'Top'#3#181#0#5'Width'#2'['#7'Capti'
+  +'on'#6#12'Bright stars'#7'OnClick'#7#14'USNBrightClick'#8'TabOrder'#2#21#0#0
+  +#9'TLongEdit'#6'fgscf1'#3'Tag'#2#6#4'Left'#3#10#1#6'Height'#2#22#4'Hint'#6#5
+  +'0..10'#3'Top'#2'z'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentCol'
+  +'or'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#13#8'OnChange'#7#19
   +'CDCStarField1Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#6'fgscc1'#3'Tag'#2#7
   +#4'Left'#3#10#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#3#150#0#5'Width'#2
   +#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'S'
@@ -127,8 +128,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#3'f'#1#5'Width'#2#30#11'BorderStyle'
   +#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrd'
   +'er'#2''''#8'OnChange'#7#19'CDCStarField1Change'#8'MaxValue'#2#10#0#0#9'TLon'
-  ,'gEdit'#6'dsgsc1'#3'Tag'#2#13#4'Left'#3#10#1#6'Height'#2#22#4'Hint'#6#5'0..1'
-  +'0'#3'Top'#3#130#1#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColo'
+  +'gEdit'#6'dsgsc1'#3'Tag'#2#13#4'Left'#3#10#1#6'Height'#2#22#4'Hint'#6#5'0..1'
+  ,'0'#3'Top'#3#130#1#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColo'
   +'r'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2'+'#8'OnChange'#7#19'C'
   +'DCStarField1Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#6'dsgsc2'#3'Tag'#2#13
   +#4'Left'#3'2'#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#3#130#1#5'Width'#2
@@ -191,8 +192,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'ht'#2#21#3'Top'#3#150#0#5'Width'#2'o'#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1
   +#11'ParentColor'#8#8'TabOrder'#2#19#8'OnChange'#7#17'CDCStarPathChange'#0#0
   +#14'TDirectoryEdit'#4'usn3'#3'Tag'#2#9#4'Left'#3'W'#1#6'Height'#2#21#3'Top'#3
-  ,#179#0#5'Width'#2'o'#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8
-  +#8'TabOrder'#2#24#8'OnChange'#7#17'CDCStarPathChange'#0#0#14'TDirectoryEdit'
+  +#179#0#5'Width'#2'o'#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8
+  ,#8'TabOrder'#2#24#8'OnChange'#7#17'CDCStarPathChange'#0#0#14'TDirectoryEdit'
   +#7'dsbase3'#3'Tag'#2#11#4'Left'#3'W'#1#6'Height'#2#21#3'Top'#3'J'#1#5'Width'
   +#2'o'#11'ButtonWidth'#2#21#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrder'#2
   +'%'#8'OnChange'#7#17'CDCStarPathChange'#0#0#14'TDirectoryEdit'#6'dstyc3'#3'T'
@@ -207,7 +208,7 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'oryEdit'#4'wds3'#3'Tag'#2#1#4'Left'#3'W'#1#6'Height'#2#21#3'Top'#3#31#1#5'W'
   +'idth'#2'o'#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'TabOrd'
   +'er'#2'!'#8'OnChange'#7#10'wds3Change'#0#0#0#5'TPage'#5'Page3'#7'Caption'#6
-  +#11'CdC Nebulae'#11'ClientWidth'#3#236#1#12'ClientHeight'#3#202#1#0#6'TLabel'
+  +#11'CdC Nebulae'#11'ClientWidth'#3#236#1#12'ClientHeight'#3#177#1#0#6'TLabel'
   +#6'Label3'#4'Left'#2#1#6'Height'#2#20#3'Top'#2#7#5'Width'#3#166#0#7'Caption'
   +#6#27'CDC Nebulae Catalog Setting'#11'ParentColor'#8#0#0#6'TLabel'#7'Label15'
   +#4'Left'#3#23#1#6'Height'#2#20#5'Width'#2'J'#9'Alignment'#7#14'taRightJustif'
@@ -255,8 +256,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'TabOrder'#2#2#8'OnChange'#7#18'CDCNebField2Change'#8'MaxValue'#2#10#0#0#14
   +'TDirectoryEdit'#4'ngc3'#3'Tag'#2#2#4'Left'#3'a'#1#6'Height'#2#19#3'Top'#2#11
   +#5'Width'#2'h'#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#11'ParentColor'#8#8'Tab'
-  ,'Order'#2#3#8'OnChange'#7#16'CDCNebPathChange'#0#0#0#6'TPanel'#9'PanelSpec'#6
-  +'Height'#3#250#0#3'Top'#3#132#0#5'Width'#3#232#1#12'ClientHeight'#3#250#0#11
+  +'Order'#2#3#8'OnChange'#7#16'CDCNebPathChange'#0#0#0#6'TPanel'#9'PanelSpec'#6
+  ,'Height'#3#250#0#3'Top'#3#132#0#5'Width'#3#232#1#12'ClientHeight'#3#250#0#11
   +'ClientWidth'#3#232#1#8'TabOrder'#2#2#0#6'TLabel'#7'Label22'#4'Left'#2#7#6'H'
   +'eight'#2'('#3'Top'#2#10#5'Width'#2'Q'#8'AutoSize'#8#7'Caption'#6#7'Nebulae'
   +#11'ParentColor'#8#8'WordWrap'#9#0#0#6'TLabel'#7'Label23'#4'Left'#2#6#6'Heig'
@@ -319,8 +320,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'t'#9#8'TabOrder'#2#12#8'OnChange'#7#18'CDCNebField1Change'#8'MaxValue'#2#10
   +#0#0#9'TLongEdit'#5'focl2'#3'Tag'#2#6#4'Left'#3'>'#1#6'Height'#2#22#4'Hint'#6
   +#5'0..10'#3'Top'#2'q'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentC'
-  ,'olor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#13#8'OnChange'#7#18
-  +'CDCNebField2Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'fgcm1'#3'Tag'#2#7#4
+  +'olor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#13#8'OnChange'#7#18
+  ,'CDCNebField2Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'fgcm1'#3'Tag'#2#7#4
   +'Left'#3#22#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#3#153#0#5'Width'#2#30
   +#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'Show'
   +'Hint'#9#8'TabOrder'#2#14#8'OnChange'#7#18'CDCNebField1Change'#8'MaxValue'#2
@@ -383,8 +384,8 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'LongEdit'#5'Ftic1'#3'Tag'#2#5#4'Left'#3#235#0#6'Height'#2#22#4'Hint'#6#5'0.'
   +'.10'#3'Top'#2'h'#5'Width'#2#30#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'
   +#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#5#8'OnChange'#7#19'CDCSt'
-  ,'arField1Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'Ftic2'#3'Tag'#2#5#4'Lef'
-  +'t'#3#19#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#2'h'#5'Width'#2#30#11'Bo'
+  +'arField1Change'#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'Ftic2'#3'Tag'#2#5#4'Lef'
+  ,'t'#3#19#1#6'Height'#2#22#4'Hint'#6#5'0..10'#3'Top'#2'h'#5'Width'#2#30#11'Bo'
   +'rderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'
   +#9#8'TabOrder'#2#6#8'OnChange'#7#19'CDCStarField2Change'#8'MaxValue'#2#10#0#0
   +#9'TCheckBox'#6'GSCbox'#3'Tag'#2#8#4'Left'#2'W'#6'Height'#2#22#4'Hint'#6'=Th'
@@ -447,20 +448,20 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'ClientHeight'#2'2'#11'ClientWidth'#3#10#2#8'TabOrder'#2#1#0#6'TImage'#10'Di'
   +'rOpenImg'#4'Left'#2#8#6'Height'#2#16#3'Top'#2#15#5'Width'#2#16#8'AutoSize'#9
   +#12'Picture.Data'#10#198#1#0#0#7'TPixmap'#186#1#0#0'/* XPM */'#10'static cha'
-  ,'r *graphic[] = {'#10'"16 16 5 1",'#10'". c None",'#10'", c #7F7F7F",'#10'"-'
-  +' c #FFFF00",'#10'"* c #FFFFFF",'#10'"a c #000000",'#10'"................",'
+  +'r *graphic[] = {'#10'"16 16 5 1",'#10'". c None",'#10'", c #7F7F7F",'#10'"-'
+  ,' c #FFFF00",'#10'"* c #FFFFFF",'#10'"a c #000000",'#10'"................",'
   +#10'"................",'#10'"................",'#10'"................",'#10
   +'"...,,,,.........",'#10'"..,-*-*,........",'#10'"..,,,,,,,,,,a...",'#10'"..'
   +',*********,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,*-'
   +'.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaa'
-  +'aaaaa...",'#10'"................",'#10'"................"}'#10#11'Transpare'
-  +'nt'#8#7'Visible'#8#0#0#7'TButton'#7'Button1'#4'Left'#3#240#0#6'Height'#2#25
-  +#3'Top'#2#15#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2
-  +'OK'#11'ModalResult'#2#1#8'TabOrder'#2#0#0#0#7'TButton'#7'Button2'#4'Left'#3
-  +'P'#1#6'Height'#2#25#3'Top'#2#15#5'Width'#2'K'#25'BorderSpacing.InnerBorder'
-  +#2#4#7'Caption'#6#5'Apply'#7'OnClick'#7#12'Button2Click'#8'TabOrder'#2#1#0#0
-  +#7'TButton'#7'Button3'#4'Left'#3#176#1#6'Height'#2#25#3'Top'#2#15#5'Width'#2
-  +'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6'Cancel'#11'ModalResult'
-  +#2#2#8'TabOrder'#2#2#0#0#0#11'TOpenDialog'#11'OpenDialog1'#5'Title'#6#18'Ope'
-  +'n existing file'#11'FilterIndex'#2#0#4'left'#3#240#1#3'top'#2#24#0#0#0
+  +'aaaaa...",'#10'"................",'#10'"................"}'#10#7'Visible'#8
+  +#0#0#7'TButton'#7'Button1'#4'Left'#3#240#0#6'Height'#2#25#3'Top'#2#15#5'Widt'
+  +'h'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#11'ModalResult'
+  +#2#1#8'TabOrder'#2#0#0#0#7'TButton'#7'Button2'#4'Left'#3'P'#1#6'Height'#2#25
+  +#3'Top'#2#15#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#5
+  +'Apply'#7'OnClick'#7#12'Button2Click'#8'TabOrder'#2#1#0#0#7'TButton'#7'Butto'
+  +'n3'#4'Left'#3#176#1#6'Height'#2#25#3'Top'#2#15#5'Width'#2'K'#25'BorderSpaci'
+  +'ng.InnerBorder'#2#4#7'Caption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2
+  +#2#0#0#0#11'TOpenDialog'#11'OpenDialog1'#11'FilterIndex'#2#0#4'left'#3#240#1
+  +#3'top'#2#24#0#0#0
 ]);

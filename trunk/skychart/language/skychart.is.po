@@ -207,6 +207,10 @@ msgstr "Allt"
 msgid "All Tools Bar"
 msgstr "Allt stikan"
 
+#: u_translation:rsallconfigura
+msgid "All configuration options"
+msgstr ""
+
 #: u_translation:rsalt
 msgid "Alt"
 msgstr "Stj.h."
