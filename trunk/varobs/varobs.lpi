@@ -23,7 +23,7 @@
       <local>
         <FormatVersion Value="1"/>
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="/home/cdc"/>
+        <WorkingDirectory Value="/Users/pch/cdc/"/>
       </local>
     </RunParams>
     <RequiredPackages Count="5">
@@ -73,6 +73,7 @@
         <ComponentName Value="VarForm"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="variables1.lrs"/>
         <UnitName Value="variables1"/>
       </Unit3>
@@ -113,13 +114,10 @@
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="5"/>
+    <Version Value="8"/>
     <SearchPaths>
       <UnitOutputDirectory Value="units"/>
     </SearchPaths>
-    <CodeGeneration>
-      <Generate Value="Faster"/>
-    </CodeGeneration>
     <Linking>
       <Debugging>
         <GenerateDebugInfo Value="True"/>

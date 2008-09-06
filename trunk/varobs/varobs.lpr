@@ -33,7 +33,9 @@ uses
   ObsUnit, SettingUnit, splashunit, Printer4Lazarus, CDCjdcalendar, u_param,
   downldialog, u_util2;
 
+{$ifndef darwin}
 {$R manifest.res}
+{$endif}
 
 begin
   Application.Initialize;
