@@ -198,6 +198,7 @@ begin
   FUpdateInterval := 1000;
   {$ifdef unix}
   FTimer := TTimer.Create(Self);
+  FTimer.Enabled := false;
   FTimer.OnTimer := @CheckMessage;
   {$endif}
 end;
