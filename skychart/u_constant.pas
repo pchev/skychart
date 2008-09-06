@@ -275,7 +275,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
 {$ifdef darwin}
       DefaultFontName='Helvetica';
       DefaultFontFixed='Courier';
-      DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
+      DefaultFontSymbol='symbol';
       DefaultFontSize=10;
       DefaultPrivateDir='~/cartes_du_ciel';
       Defaultconfigfile='~/.cartesduciel.ini';
