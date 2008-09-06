@@ -208,6 +208,10 @@ msgstr "Всё"
 msgid "All Tools Bar"
 msgstr "Все панели инструментов"
 
+#: u_translation:rsallconfigura
+msgid "All configuration options"
+msgstr ""
+
 #: u_translation:rsalt
 msgid "Alt"
 msgstr "Высота"

@@ -3,9 +3,6 @@ object f_config_catalog: Tf_config_catalog
   Height = 577
   Top = 242
   Width = 522
-  HorzScrollBar.Page = 521
-  VertScrollBar.Page = 576
-  ActiveControl = SACbox
   Caption = 'Catalog'
   ClientHeight = 577
   ClientWidth = 522
@@ -13,6 +10,7 @@ object f_config_catalog: Tf_config_catalog
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  LCLVersion = '0.9.25'
   object MainPanel: TPanel
     Left = 12
     Height = 520
@@ -37,7 +35,7 @@ object f_config_catalog: Tf_config_catalog
         ClientHeight = 458
         object Label37: TLabel
           Left = 96
-          Height = 20
+          Height = 14
           Top = 17
           Width = 246
           Alignment = taRightJustify
@@ -52,13 +50,12 @@ object f_config_catalog: Tf_config_catalog
           ColCount = 6
           DefaultColWidth = 18
           DefaultRowHeight = 18
+          ExtendedSelect = True
           FixedColor = clBtnFace
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
           RowCount = 2
-          ScrollBars = ssAutoBoth
           TabOrder = 1
-          TabStop = True
           OnDrawCell = StringGrid3DrawCell
           OnMouseUp = StringGrid3MouseUp
           OnSelectCell = StringGrid3SelectCell
@@ -842,7 +839,7 @@ object f_config_catalog: Tf_config_catalog
       object Page3: TPage
         Caption = 'CdC Nebulae'
         ClientWidth = 492
-        ClientHeight = 458
+        ClientHeight = 433
         object Label3: TLabel
           Left = 1
           Height = 20
@@ -1878,7 +1875,6 @@ object f_config_catalog: Tf_config_catalog
         2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
         2E2E2E227D0A
       }
-      Transparent = False
       Visible = False
     end
     object Button1: TButton
@@ -1913,7 +1909,6 @@ object f_config_catalog: Tf_config_catalog
     end
   end
   object OpenDialog1: TOpenDialog
-    Title = 'Open existing file'
     FilterIndex = 0
     left = 496
     top = 24

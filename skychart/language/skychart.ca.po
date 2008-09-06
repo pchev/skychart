@@ -208,6 +208,10 @@ msgstr "Tot"
 msgid "All Tools Bar"
 msgstr "Totes les barres d'útils"
 
+#: u_translation:rsallconfigura
+msgid "All configuration options"
+msgstr ""
+
 #: u_translation:rsalt
 msgid "Alt"
 msgstr "Alt"

@@ -82,6 +82,11 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuItem24: TMenuItem;
+    MenuItem25: TMenuItem;
+    MenuItem26: TMenuItem;
+    MenuItem6: TMenuItem;
+    SetupConfig: TAction;
     MenuItem12: TMenuItem;
     MenuItem13: TMenuItem;
     MenuItem14: TMenuItem;
@@ -447,6 +452,7 @@ type
     procedure ResetAllLabels1Click(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
     procedure SetupChartExecute(Sender: TObject);
+    procedure SetupConfigExecute(Sender: TObject);
     procedure SetupDisplayExecute(Sender: TObject);
     procedure SetupInternetExecute(Sender: TObject);
     procedure SetupObservatoryExecute(Sender: TObject);
@@ -587,6 +593,7 @@ type
     procedure GetLanguage;
     Procedure GetAppDir;
     procedure ViewTopPanel;
+    procedure ApplyConfig(Sender: TObject);
     procedure ApplyConfigTime(Sender: TObject);
     procedure ApplyConfigObservatory(Sender: TObject);
     procedure ApplyConfigDisplay(Sender: TObject);
@@ -691,7 +698,7 @@ uses
 {$ifdef LCLgtk}
      gtkproc,
 {$endif}
-     pu_detail, pu_about, pu_info, pu_getdss, u_projection,
+     pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_splash, pu_manualtelescope, pu_print;
 
@@ -2125,6 +2132,53 @@ end;
 procedure Tf_main.SetupChartExecute(Sender: TObject);
 begin
  SetupChartPage(0);
+end;
+
+procedure Tf_main.SetupConfigExecute(Sender: TObject);
+begin
+if f_config=nil then begin
+   f_config:=Tf_config.Create(application);
+   f_config.onApplyConfig:=ApplyConfig;
+   f_config.onDBChange:=ConfigDBChange;
+   f_config.onSaveAndRestart:=SaveAndRestart;
+   f_config.onPrepareAsteroid:=PrepareAsteroid;
+   f_config.Fits:=fits;
+   f_config.catalog:=catalog;
+   f_config.db:=cdcdb;
+end;
+try
+ f_config.ccat:=catalog.cfgcat;
+ f_config.cshr:=catalog.cfgshr;
+ f_config.cplot:=def_cfgplot;
+ f_config.csc:=def_cfgsc;
+ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+     f_config.csc:=sc.cfgsc;
+     f_config.cplot:=sc.plot.cfgplot;
+ end;
+ cfgm.prgdir:=appdir;
+ cfgm.persdir:=privatedir;
+ f_config.cmain:=cfgm;
+ f_config.cdss:=f_getdss.cfgdss;
+ f_config.applyall.checked:=cfgm.updall;
+ formpos(f_config,mouse.cursorpos.x,mouse.cursorpos.y);
+ f_config.TreeView1.enabled:=true;
+ f_config.previous.enabled:=true;
+ f_config.next.enabled:=true;
+ f_config.showmodal;
+ if f_config.ModalResult=mrOK then begin
+   activateconfig(f_config.cmain,f_config.csc,f_config.ccat,f_config.cshr,f_config.cplot,f_config.cdss,f_config.Applyall.Checked);
+ end;
+
+finally
+screen.cursor:=crDefault;
+f_config.Free;
+f_config:=nil;
+end;
+end;
+
+procedure Tf_main.ApplyConfig(Sender: TObject);
+begin
+ activateconfig(f_config.cmain,f_config.csc,f_config.ccat,f_config.cshr,f_config.cplot,f_config.cdss,f_config.Applyall.Checked);
 end;
 
 procedure Tf_main.SetupChartPage(page:integer);
@@ -4342,6 +4396,7 @@ TimeU.Items.Add(rsSaros);
 TimeU.ItemIndex:=0;
 ToolButton8.hint:=rsSetDateAndTi;
 ToolButton9.hint:=rsSetObservato;
+SetupConfig.Caption:=rsAllConfigura;
 ToolButtonConfig.hint:=rsConfigureThe;
 ToolButtonEQ.hint:=rsEquatorialCo;
 ToolButtonAZ.hint:=rsAltAzCoordin;

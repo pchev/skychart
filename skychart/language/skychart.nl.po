@@ -207,6 +207,10 @@ msgstr "Alle"
 msgid "All Tools Bar"
 msgstr "Alle gereedschapsbalken"
 
+#: u_translation:rsallconfigura
+msgid "All configuration options"
+msgstr ""
+
 #: u_translation:rsalt
 msgid "Alt"
 msgstr "Alt"
