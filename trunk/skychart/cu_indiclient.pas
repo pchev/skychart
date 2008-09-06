@@ -205,7 +205,7 @@ try
       FIndiServerPid:=ExecFork(FIndiServer,'-p',FTargetPort,'-r','0',FIndiDriver);
       {$endif}
       {$ifdef darwin}
-      // todo: darwin
+      FIndiServerPid:=ExecFork(FIndiServer,'-p',FTargetPort,'-r','0',FIndiDriver);
       {$endif}
       {$ifdef win32}
       if localplugin then chdir(plugin);
@@ -236,7 +236,11 @@ try
         if tcpclient.Sock.lastError<>0 then break;
      end;
      if FAutoconnect then begin
+        {$ifdef darwin}
+        Connect;
+        {$else}
         Synchronize(@Connect);
+        {$endif}
         FAutoconnect:=false;
      end;
    until false;
@@ -270,7 +274,11 @@ begin
 FErrorDesc:=msg;
 //if FErrorDesc='OK' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
 if FErrorDesc='' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
+{$ifdef darwin}
+DisplayMessageSyn;
+{$else}
 Synchronize(@DisplayMessageSyn);
+{$endif}
 end;
 
 procedure TIndiClient.DisplayMessageSyn;
@@ -307,7 +315,11 @@ end;
 procedure TIndiClient.ProcessData(line:string);
 begin
 FRecvData:=line;
+{$ifdef darwin}
+ProcessDataSyn;
+{$else}
 Synchronize(@ProcessDataSyn);
+{$endif}
 end;
 
 procedure TIndiClient.ProcessDataSyn;
