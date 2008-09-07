@@ -1,16 +1,17 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-06-28 12:54+0200\n"
+"PO-Revision-Date: 2008-09-05 11:48+0200\n"
 "Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
 "Project-Id-Version: skychart.ru\n"
 "POT-Creation-Date: \n"
-"Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.biz>\n"
+"Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 "X-Poedit-Country: UKRAINE\n"
+"X-Poedit-Language: Russian\n"
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any installed catalog index."
@@ -470,7 +471,7 @@ msgstr "Установки CDC плагина"
 
 #: u_translation:rscdctranslator
 msgid "CDCTranslator"
-msgstr "Олег Малый, gemini@ua.fm ( ГОО Запорожский Астрономический Клуб \"Альтаир\" http://astroclub.biz )"
+msgstr "Олег Малый, gemini@ua.fm ( ГОО Запорожский Астрономический Клуб \"Альтаир\" http://astroclub.zp.ua )"
 
 #: u_translation:rscalendar
 msgid "Calendar"
@@ -826,7 +827,7 @@ msgstr "Корреляция"
 
 #: u_translation:rscouldnotload
 msgid "Could not load library "
-msgstr ""
+msgstr "Невозможно загрузить библиотеку"
 
 #: u_translation:rscountrytimez
 msgid "Country Timezone"
@@ -962,7 +963,7 @@ msgstr "Дата/Время"
 
 #: u_translation:rsdateformat
 msgid "Date Format"
-msgstr ""
+msgstr "Формат Даты"
 
 #: u_translation:rsdatefrom
 msgid "Date from"
@@ -1582,7 +1583,7 @@ msgstr "Всегда чёрный"
 
 #: u_translation:rsfixedskycolo
 msgid "Fixed sky color"
-msgstr ""
+msgstr "Неизменный цвет неба"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -1678,7 +1679,7 @@ msgstr "Получить DSS изображение"
 
 #: u_translation:rsgetrecentmea
 msgid "Get recent measurement from JUPOS project"
-msgstr ""
+msgstr "Получить последний замер от проекта  JUPOS"
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2786,11 +2787,11 @@ msgstr "Пожалуйста, сообщите о проблемах им::"
 
 #: u_translation:rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr ""
+msgstr "Пожалуйста, попробуйте сами создать эту директорию и перезапустите программу."
 
 #: u_translation:rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr ""
+msgstr "Пожалуйста, переустановите программу."
 
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
@@ -2930,7 +2931,7 @@ msgstr "Установки проекции"
 
 #: u_translation:rspropermotion3
 msgid "Proper Motion"
-msgstr ""
+msgstr "Собственное движение"
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"
@@ -3034,7 +3035,7 @@ msgstr "Вернуть последнее изменекние"
 
 #: u_translation:rsreducedetail
 msgid "Reduce detail when moving the chart"
-msgstr ""
+msgstr "Понизить деталировку при перемещении карты"
 
 #: u_translation:rsreference
 msgid "Reference"
@@ -3078,7 +3079,7 @@ msgstr "Сообщить о проблеме"
 
 #: u_translation:rsrequesttimeo
 msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
-msgstr ""
+msgstr "Ожидание. Возможно вы сделали запрос весьма широкой области, что требует больше серверного времени."
 
 #: u_translation:rsrequiredfiel
 msgid "Required field missing !"
@@ -3526,7 +3527,7 @@ msgstr "Некоторые записи отклонены, детали смо�
 
 #: u_translation:rssomethinggow
 msgid "Something go wrong during program initialization. We must now close"
-msgstr ""
+msgstr "Что-то происходит неправильно при инициализации программы. Мы сейчас должны закрыть"
 
 #: u_translation:rssortbyra
 msgid "Sort by RA"
@@ -3622,7 +3623,7 @@ msgstr "Единица шага"
 
 #: u_translation:rsstoptcpipser
 msgid "Stop TCP/IP server"
-msgstr ""
+msgstr "Остановка TCP/IP сервера"
 
 #: u_translation:rssun
 msgid "Sun"
@@ -3878,7 +3879,7 @@ msgstr "Полная тень"
 
 #: u_translation:rsunabletocrea
 msgid "Unable to create directory "
-msgstr ""
+msgstr "Невозможно создать директорию"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
@@ -3982,7 +3983,7 @@ msgstr "Переменные звёзды"
 
 #: u_translation:rsvariablestar2
 msgid "Variable Stars"
-msgstr ""
+msgstr "Переменные Звёзды"
 
 #: u_translation:rsvariables
 msgid "Variables"

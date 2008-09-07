@@ -1,29 +1,16 @@
-Version 3.0.1.4  Notes de la version
+Version 3.0.1.5 SVN  Notes de la version
 
-Changements depuis la version 3.0.1.2:
+Changements depuis la version 3.0.1.4:
 
-Changement des zones horaires:
-Depuis cette version les informations de zone horaire ne sont plus prise de l'ordinateur mais de la définition de l'observatoire.
-Les principaux avantages sont de facilement gérer l'heure si vous faite des calculs pour différents emplacement ainsi que tenir compte de l'heure d'été pour n'importe quelle date dans le passé ou le futur.
-A cause de se changement il est nécessaire d'indiquer la bonne zone horaire dans la configuration de l'observatoire.
-Soyez sur de choisir la bonne, principalement si votre pays utilise plusieurs zone horaires et dans tous les cas sortez avec le bouton OK pour enregistrer la configuration.
+Module pour les étoiles variables VarObs:
+VarObs fait maintenant partie de Cartes du Ciel.
+Modifié pour les nouveaux format de fichiers de l'AAVSO.
+Les fichiers utilisateurs sont maintenant dans le même répertoire que Cartes du Ciel.
+Amélioration du dialogue de configuration.
+Possibilité d'utiliser l'heure locale pour les observations.
+Marche avec Cartes du Ciel version 3.0.
 
-Changement du réglage des coordonnées:
-Un nouvel écran simplifié permet de choisir le type de coordonnée voulu.
-La valeur par défaut est maintenant les coordonnées apparentes de la date.
-Vous pouvez le changer par le menu Configuration/Carte,Coordonnées
-
-Autres changements:
-Utilisation de Gtk2 par défaut sous Linux. 
-Amélioration de l'affichage des images avec Windows. Pour bénéficier de cette amélioration vous devez régler votre carte graphique en couleur 32 bits.
-Améliore la précision des coordonnées moyennes J2000.
-Possibilité d'affichage d'un compas et échelle à la place des grilles de coordonnées. 
-L'affichage des images de Skyview marche à nouveau avec les nouvelles URL.
-Amélioration de l'affichage des images FITS 32 bits.
-Montrer en rouge les erreurs dans le chemin des catalogues.
-Ajout du format de la date pour les labels de simulation
-Marque le pole
-Couleur du ciel pour tout les systèmes de coordonnées
-Bouton pour mettre l'heure à 0h
-Curseur de la carte comme en version 2
-
+Autres changement;
+Séparations des options de configuration dans le menu principal.
+Option pour ne pas simplifier la carte pendant le déplacement.
+Traduction en Islandais par Sverrir Gudmundsson.
