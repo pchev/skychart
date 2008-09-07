@@ -296,6 +296,7 @@
         <ComponentName Value="f_config_system"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config_system.lrs"/>
         <UnitName Value="pu_config_system"/>
       </Unit27>
@@ -435,6 +436,11 @@
       <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       <SrcPath Value="$(LazarusDir)/lcl/;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)/"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <CStyleOperator Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <CodeGeneration>
       <HeapSize Value="100000"/>
       <Optimizations>

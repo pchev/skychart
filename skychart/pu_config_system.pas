@@ -307,16 +307,18 @@ procedure Tf_config_system.FormShow(Sender: TObject);
 begin
 LockChange:=true;
 dbchanged:=false;
+{$ifdef win32}
+  GroupBoxLinux.Visible:=false;
+{$else}
+  if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
+  Indiport.Style:= csSimple;
+  IndiPort.Items.Clear;
+{$endif}
 ShowLanguage;
 ShowSYS;
 ShowServer;
 ShowTelescope;
 LockChange:=false;
-{$ifdef win32}
-  GroupBoxLinux.Visible:=false;
-{$else}
-  TelescopeSelect.Items.Delete(2);
-{$endif}
 end;
 
 procedure Tf_config_system.ShowLanguage;
