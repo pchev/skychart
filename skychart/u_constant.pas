@@ -268,7 +268,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       SharedDir='/usr/share/apps/skychart';
       DefaultPrintCmd1='kghostview';
       DefaultPrintCmd2='gimp';
-      DefaultTmpDir=DefaultPrivateDir+'/tmp';
+      DefaultTmpDir='tmp';
       Default_dssdrive='/mnt/cdrom';
       DefaultVarObs='varobs';
 {$endif}
@@ -282,7 +282,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       SharedDir='/usr/share/skychart';
       DefaultPrintCmd1='kghostview';
       DefaultPrintCmd2='gimp';
-      DefaultTmpDir=DefaultPrivateDir+'/tmp';
+      DefaultTmpDir='tmp';
       Default_dssdrive='/Volumes';
       DefaultVarObs='varobs';
 {$endif}
@@ -598,7 +598,7 @@ var gzopen : Tgzopen;
 // pseudo-constant only here
 Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, ZoneDir : string;
      VarObs : String;
-     Configfile, SysDecimalSeparator, Lang : string;
+     ForceConfig, Configfile, SysDecimalSeparator, Lang : string;
      compile_time:string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
@@ -608,6 +608,7 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, ZoneDir : string;
      ThemePath:string ='data/Themes';
      LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
      crRetic: TCursor = 5;
+     Params : TStringList;
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //
 {$else}

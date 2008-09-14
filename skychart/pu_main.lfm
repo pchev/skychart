@@ -18,6 +18,7 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
+  ParentFont = False
   LCLVersion = '0.9.25'
   object MultiDoc1: TMultiDoc
     Left = 24
@@ -2797,6 +2798,7 @@ object f_main: Tf_main
       Font.Name = 'Default'
       Font.Pitch = fpVariable
       Images = ImageNormal
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -2862,6 +2864,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field2: TSpeedButton
@@ -2878,6 +2881,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field3: TSpeedButton
@@ -2893,6 +2897,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field4: TSpeedButton
@@ -2908,6 +2913,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field5: TSpeedButton
@@ -2923,6 +2929,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field6: TSpeedButton
@@ -2938,6 +2945,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field7: TSpeedButton
@@ -2953,6 +2961,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field8: TSpeedButton
@@ -2968,6 +2977,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field9: TSpeedButton
@@ -2983,6 +2993,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
       object Field10: TSpeedButton
@@ -2998,6 +3009,7 @@ object f_main: Tf_main
         NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
+        ParentFont = False
         ParentShowHint = False
       end
     end
@@ -3011,7 +3023,6 @@ object f_main: Tf_main
     ClientHeight = 32
     ClientWidth = 860
     FullRepaint = False
-    ParentFont = True
     TabOrder = 4
     object Shape1: TShape
       Left = 180
@@ -3030,14 +3041,12 @@ object f_main: Tf_main
       ClientHeight = 32
       ClientWidth = 180
       FullRepaint = False
-      ParentFont = True
       TabOrder = 0
       object LPanels01: TLabel
         Height = 14
         Width = 60
         Caption = 'LPanels01'
         ParentColor = False
-        ParentFont = True
       end
       object LPanels0: TPanel
         Height = 32
@@ -3047,14 +3056,12 @@ object f_main: Tf_main
         BevelOuter = bvNone
         ClientHeight = 32
         ClientWidth = 180
-        ParentFont = True
         TabOrder = 0
         object P0L1: TLabel
           Height = 32
           Width = 180
           Align = alClient
           ParentColor = False
-          ParentFont = True
         end
       end
     end
@@ -3068,7 +3075,6 @@ object f_main: Tf_main
       ClientHeight = 32
       ClientWidth = 678
       FullRepaint = False
-      ParentFont = True
       TabOrder = 1
       object LPanels1: TPanel
         Height = 32
@@ -3078,7 +3084,6 @@ object f_main: Tf_main
         BevelOuter = bvNone
         ClientHeight = 32
         ClientWidth = 678
-        ParentFont = True
         TabOrder = 0
         object P1L1: TLabel
           Height = 32
@@ -3086,7 +3091,6 @@ object f_main: Tf_main
           Align = alClient
           AutoSize = False
           ParentColor = False
-          ParentFont = True
           WordWrap = True
         end
       end
@@ -3365,6 +3369,7 @@ object f_main: Tf_main
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
         MaxLength = -1
+        ParentFont = False
         Style = csDropDownList
         TabOrder = 2
       end
