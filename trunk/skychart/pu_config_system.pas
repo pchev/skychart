@@ -593,6 +593,8 @@ procedure Tf_config_system.persdirChange(Sender: TObject);
 begin
 if LockChange then exit;
 cmain.persdir:=persdir.text;
+dbnamesqlite.Text:=slash(cmain.persdir)+slash('database')+'cdc.db';
+dbchanged:=true;
 end;
 
 procedure Tf_config_system.LinuxDesktopBoxChange(Sender: TObject);

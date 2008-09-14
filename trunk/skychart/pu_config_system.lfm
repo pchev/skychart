@@ -3,7 +3,7 @@ object f_config_system: Tf_config_system
   Height = 532
   Top = 132
   Width = 484
-  ActiveControl = dbname
+  ActiveControl = DBtypeGroup.RadioButton0
   Caption = 'System'
   ClientHeight = 532
   ClientWidth = 484
@@ -11,6 +11,7 @@ object f_config_system: Tf_config_system
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = False
   LCLVersion = '0.9.25'
   object MainPanel: TPanel
     Height = 482
@@ -26,15 +27,15 @@ object f_config_system: Tf_config_system
       Top = 1
       Width = 482
       Align = alClient
-      PageIndex = 2
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
         ClientWidth = 476
-        ClientHeight = 449
+        ClientHeight = 474
         object Label153: TLabel
-          Height = 20
+          Height = 14
           Width = 88
           Caption = 'System Setting'
           ParentColor = False
@@ -50,7 +51,7 @@ object f_config_system: Tf_config_system
           TabOrder = 5
           object Label77: TLabel
             Left = 16
-            Height = 20
+            Height = 14
             Top = 12
             Width = 58
             Caption = 'DB Name:'
@@ -58,7 +59,7 @@ object f_config_system: Tf_config_system
           end
           object Label84: TLabel
             Left = 168
-            Height = 20
+            Height = 14
             Top = 12
             Width = 68
             Caption = 'Host Name:'
@@ -66,7 +67,7 @@ object f_config_system: Tf_config_system
           end
           object Label85: TLabel
             Left = 328
-            Height = 20
+            Height = 14
             Top = 12
             Width = 28
             Caption = 'Port:'
@@ -74,7 +75,7 @@ object f_config_system: Tf_config_system
           end
           object Label86: TLabel
             Left = 16
-            Height = 20
+            Height = 14
             Top = 52
             Width = 42
             Caption = 'Userid:'
@@ -82,7 +83,7 @@ object f_config_system: Tf_config_system
           end
           object Label133: TLabel
             Left = 208
-            Height = 20
+            Height = 14
             Top = 52
             Width = 57
             Caption = 'Password'
@@ -148,7 +149,7 @@ object f_config_system: Tf_config_system
           Visible = False
           object Label1: TLabel
             Left = 13
-            Height = 20
+            Height = 14
             Top = 36
             Width = 84
             Caption = 'Database file: '
@@ -177,7 +178,7 @@ object f_config_system: Tf_config_system
           TabOrder = 3
           object Label156: TLabel
             Left = 13
-            Height = 20
+            Height = 14
             Top = 10
             Width = 84
             Caption = 'Program Data '
@@ -185,7 +186,7 @@ object f_config_system: Tf_config_system
           end
           object Label157: TLabel
             Left = 13
-            Height = 20
+            Height = 14
             Top = 50
             Width = 80
             Caption = 'Personal data'
@@ -310,12 +311,12 @@ object f_config_system: Tf_config_system
           Top = 367
           Width = 440
           Caption = 'Desktop environment'
-          ClientHeight = 76
+          ClientHeight = 78
           ClientWidth = 434
           TabOrder = 4
           object Label12: TLabel
             Left = 203
-            Height = 20
+            Height = 14
             Top = 8
             Width = 123
             Caption = 'URL launch command'
@@ -323,7 +324,7 @@ object f_config_system: Tf_config_system
           end
           object LinuxDesktopBox: TComboBox
             Left = 20
-            Height = 24
+            Height = 23
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
@@ -745,6 +746,7 @@ object f_config_system: Tf_config_system
             Top = 100
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
+            MaxLength = -1
             OnSelect = IndiDevChange
             Style = csDropDownList
             TabOrder = 4
@@ -765,6 +767,7 @@ object f_config_system: Tf_config_system
               'COM7'
               'COM8'
             )
+            MaxLength = -1
             OnSelect = IndiPortChange
             Style = csDropDownList
             TabOrder = 6
@@ -828,6 +831,7 @@ object f_config_system: Tf_config_system
             Top = 42
             Width = 145
             AutoCompleteText = [cbactSearchAscending]
+            MaxLength = -1
             OnChange = telescopepluginlistChange
             Style = csDropDownList
             TabOrder = 0
@@ -851,6 +855,7 @@ object f_config_system: Tf_config_system
           Height = 24
           Top = 82
           Width = 260
+          MaxLength = -1
           OnSelect = LanguageListSelect
           Style = csDropDownList
           TabOrder = 0

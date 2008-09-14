@@ -39,7 +39,7 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources;
+  LResources, uniqueinstance;
 
 type
   TTCPThrd = class(TThread)
@@ -75,6 +75,11 @@ type
     procedure Execute; override;
     procedure ShowSocket;
     procedure GetACtiveChart;
+  end;
+
+  TCdCUniqueInstance = class(TUniqueInstance)
+  public
+    procedure Loaded; override;
   end;
 
 type
@@ -564,6 +569,7 @@ type
     procedure SetTheme;
   private
     { Private declarations }
+    UniqueInstance1: TCdCUniqueInstance;
     ConfigTime: Tf_config_time;
     ConfigObservatory: Tf_config_observatory;
     ConfigChart: Tf_config_chart;
@@ -582,6 +588,10 @@ type
   {$ifdef win32}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
+    procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
+    procedure InstanceRunning(Sender : TObject);
+    procedure ProcessParams1;
+    procedure ProcessParams2;
     procedure ShowError(msg: string);
     procedure SetButtonImage(button: Integer);
     function CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
@@ -638,7 +648,7 @@ type
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
     procedure UpdateConfig;
-    procedure SavePrivateConfig(filename:string);
+    procedure SavePrivateConfig(filename:string; purge: boolean=false);
     procedure SaveQuickSearch(filename:string);
     procedure SaveChartConfig(filename:string; child: TChildDoc);
     procedure SaveVersion;
@@ -1148,11 +1158,9 @@ end;
 appdir:=getcurrentdir;
 {$endif}
 privatedir:=DefaultPrivateDir;
-Tempdir:=DefaultTmpDir;
 {$ifdef unix}
 appdir:=expandfilename(appdir);
 privatedir:=expandfilename(PrivateDir);
-Tempdir:=expandfilename(Tempdir);
 {$endif}
 {$ifdef win32}
 SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
@@ -1163,6 +1171,8 @@ tracefile:=slash(privatedir)+tracefile;
 {$endif}
 VarObs:=slash(appdir)+DefaultVarObs;     // varobs normally at same location as skychart
 if not FileExists(VarObs) then VarObs:=DefaultVarObs; // if not try in $PATH
+
+if ForceConfig<>'' then Configfile:=ForceConfig;
 
 if fileexists(configfile) then begin
   inif:=TMeminifile.create(configfile);
@@ -1205,6 +1215,14 @@ procedure Tf_main.FormCreate(Sender: TObject);
 var step:string;
 begin
 try
+{$ifndef darwin}
+UniqueInstance1:=TCdCUniqueInstance.Create(self);
+UniqueInstance1.Identifier:='skychart';
+UniqueInstance1.OnOtherInstance:=OtherInstance;
+UniqueInstance1.OnInstanceRunning:=InstanceRunning;
+UniqueInstance1.Enabled:=true;
+UniqueInstance1.Loaded;
+{$endif}
 step:='Init';
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
@@ -1237,8 +1255,11 @@ cfgs:=Tconf_skychart.Create;
 cfgm:=Tconf_main.Create;
 def_cfgplot:=Tconf_plot.Create;
 cfgp:=Tconf_plot.Create;
-step:='Create cursoe';
+ForceConfig:='';
+step:='Create cursor';
 CursorImage1:=TCursorImage.Create;
+step:='Read initial parameters';
+ProcessParams1;
 step:='Application directory';
 GetAppDir;
 chdir(appdir);
@@ -1321,7 +1342,7 @@ def_cfgplot.Free;
 cfgp.Free;
 compass.free;
 arrow.free;
-CursorImage1.FreeImage;
+if CursorImage1<>nil then CursorImage1.FreeImage;
 except
 writetrace('error destroy '+name);
 end;
@@ -2536,7 +2557,7 @@ begin
 if ConfigSystem<>nil then begin
   cfgm.Assign(ConfigSystem.cmain);
   if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
-  if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
+  privatedir:=cfgm.persdir;
   def_cfgsc.Assign(ConfigSystem.csc);
   catalog.cfgcat.Assign(ConfigSystem.ccat);
   catalog.cfgshr.Assign(ConfigSystem.cshr);
@@ -2565,7 +2586,7 @@ begin
     if themechange then SetTheme;
     cfgm.updall:=applyall;
     if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
-    if directoryexists(cfgm.persdir) then privatedir:=cfgm.persdir;
+    privatedir:=cfgm.persdir;
     if ccat<>nil then begin
       for i:=0 to ccat.GCatNum-1 do begin
         if ccat.GCatLst[i].Actif then begin
@@ -3653,7 +3674,6 @@ cfgm.PrintLandscape:=ReadBool(section,'PrintLandscape',cfgm.PrintLandscape);
 cfgm.PrintMethod:=ReadInteger(section,'PrintMethod',cfgm.PrintMethod);
 cfgm.PrintCmd1:=ReadString(section,'PrintCmd1',cfgm.PrintCmd1);
 cfgm.PrintCmd2:=ReadString(section,'PrintCmd2',cfgm.PrintCmd2);
-cfgm.PrintTmpPath:=ReadString(section,'PrintTmpPath',cfgm.PrintTmpPath);
 cfgm.PrtLeftMargin:=ReadInteger(section,'PrtLeftMargin',cfgm.PrtLeftMargin);
 cfgm.PrtRightMargin:=ReadInteger(section,'PrtRightMargin',cfgm.PrtRightMargin);
 cfgm.PrtTopMargin:=ReadInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
@@ -3766,7 +3786,7 @@ f_getdss.cfgdss.dssplateprompt:=ReadBool(section,'dssplateprompt',true);
 f_getdss.cfgdss.dssmaxsize:=ReadInteger(section,'dssmaxsize',2048);
 f_getdss.cfgdss.dssdir:=ReadString(section,'dssdir',slash('cat')+'RealSky');
 f_getdss.cfgdss.dssdrive:=ReadString(section,'dssdrive',default_dssdrive);
-f_getdss.cfgdss.dssfile:=ReadString(section,'dssfile',slash(privatedir)+slash('pictures')+'$temp.fit');
+f_getdss.cfgdss.dssfile:=slash(privatedir)+slash('pictures')+'$temp.fit';
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:=ReadString(section,'DSSurlName'+inttostr(i),f_getdss.cfgdss.DSSurl[i,0]);
   f_getdss.cfgdss.DSSurl[i,1]:=ReadString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
@@ -3847,7 +3867,7 @@ procedure Tf_main.SaveDefault;
 var i,j: integer;
 begin
 try
-SavePrivateConfig(configfile);
+SavePrivateConfig(configfile,true);
 if (MultiDoc1.ActiveObject is Tf_chart) then begin
    SaveChartConfig(configfile,MultiDoc1.ActiveChild);
 end;
@@ -4130,7 +4150,7 @@ except
 end;
 end;
 
-procedure Tf_main.SavePrivateConfig(filename:string);
+procedure Tf_main.SavePrivateConfig(filename:string; purge: boolean=false);
 var i,j:integer;
     inif: TMemIniFile;
     section : string;
@@ -4139,6 +4159,7 @@ try
 inif:=TMeminifile.create(filename);
 try
 with inif do begin
+if purge then Clear;
 section:='main';
 WriteString(section,'version',cdcver);
 WriteString(section,'AppDir',appdir);
@@ -4160,7 +4181,6 @@ WriteBool(section,'PrintLandscape',cfgm.PrintLandscape);
 WriteInteger(section,'PrintMethod',cfgm.PrintMethod);
 WriteString(section,'PrintCmd1',cfgm.PrintCmd1);
 WriteString(section,'PrintCmd2',cfgm.PrintCmd2);
-WriteString(section,'PrintTmpPath',cfgm.PrintTmpPath);
 WriteInteger(section,'PrtLeftMargin',cfgm.PrtLeftMargin);
 WriteInteger(section,'PrtRightMargin',cfgm.PrtRightMargin);
 WriteInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
@@ -4257,7 +4277,6 @@ WriteBool(section,'dssplateprompt',f_getdss.cfgdss.dssplateprompt);
 WriteInteger(section,'dssmaxsize',f_getdss.cfgdss.dssmaxsize);
 WriteString(section,'dssdir',f_getdss.cfgdss.dssdir);
 WriteString(section,'dssdrive',f_getdss.cfgdss.dssdrive);
-WriteString(section,'dssfile',f_getdss.cfgdss.dssfile);
 for i:=1 to MaxDSSurl do begin
   WriteString(section,'DSSurlName'+inttostr(i),f_getdss.cfgdss.DSSurl[i,0]);
   WriteString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
@@ -5167,6 +5186,81 @@ TCPDaemon.stoping:=true;
 screen.cursor:=crDefault;
 except
  screen.cursor:=crDefault;
+end;
+end;
+
+procedure  TCdCUniqueInstance.Loaded;
+begin
+  inherited;
+end;
+
+procedure Tf_main.OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
+var i : integer;
+    buf,p: string;
+begin
+// process param from new instance
+  buf:='';
+  Params.Clear;
+  for i:=0 to Paramcount-1 do begin
+      p:=Parameters[i];
+      if copy(p,1,2)='--' then begin
+         if buf<>'' then Params.Add(buf);
+         buf:=p;
+      end
+      else
+         buf:=buf+blank+p;
+  end;
+  if buf<>'' then Params.Add(buf);
+  buf:='';
+  for i:=0 to Params.Count-1 do buf:=buf+blank+params[i];
+  WriteTrace('Receive from new instance: '+buf);
+  ProcessParams2;
+end;
+
+procedure Tf_main.InstanceRunning(Sender : TObject);
+var i : integer;
+begin
+if Params.Find('--unique',i) then
+   halt(1);
+end;
+
+// Parameters that need to be set before program initialisation
+procedure Tf_main.ProcessParams1;
+var i,p: integer;
+    cmd, parms, buf : string;
+    pp: TStringList;
+begin
+for i:=0 to Params.Count-1 do begin
+   parms:= Params[i];
+   cmd:=words(parms,'',1,1);
+   if cmd='--config' then begin  // specify .ini file
+      p:=pos(' ',parms);
+      if p>0 then begin
+         buf:=copy(parms,p+1,999);
+         ForceConfig:=trim(buf);
+      end;
+   end else if cmd='--test' then begin
+   end;
+end;
+end;
+
+// Parameters that need to be set after a chart is available
+procedure Tf_main.ProcessParams2;
+var i: integer;
+    cmd, parms, buf : string;
+    pp: TStringList;
+begin
+for i:=0 to Params.Count-1 do begin
+   parms:= Params[i];
+   cmd:=words(parms,'',1,1);
+   if cmd='--test1' then begin
+   end else if cmd='--test2' then begin
+       pp:=TStringList.Create;
+       pp.Add('NEWCHART');
+       pp.Add('test');
+       ExecuteCmd('test',pp);
+       pp.free;
+   end;
 end;
 end;
 

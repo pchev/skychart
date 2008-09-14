@@ -27,7 +27,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, cu_catalog, cu_skychart, cu_plot, cu_planet,
+  Forms, Classes, Sysutils, cu_catalog, cu_skychart, cu_plot, cu_planet,
   cu_indiclient, cu_fits, cu_database, cu_telescope, pu_info, pu_image,
   pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection,
@@ -38,14 +38,27 @@ uses
   radec, XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
-  pu_splash, pu_about, cu_tz, uniqueinstance_package, uniqueinstanceraw;
+  pu_splash, pu_about, cu_tz, uniqueinstance_package;
   
 const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
 
+var i : integer;
+    buf, p : string;
+
 begin
-{$ifndef darwin}
-  if InstanceRunning('skychart',true) then halt;
-{$endif}
+  Params:=TStringList.Create;
+  buf:='';
+  for i:=1 to Paramcount do begin
+      p:=ParamStr(i);
+      if copy(p,1,2)='--' then begin
+         if buf<>'' then Params.Add(buf);
+         buf:=p;
+      end
+      else
+         buf:=buf+blank+p;
+  end;
+  if buf<>'' then Params.Add(buf);
+
   compile_time:=compile_t;
   Application.Title:='Cartes du Ciel';
   Application.Initialize;
@@ -67,5 +80,6 @@ begin
   f_main.init;
   Application.Run;
 
+  Params.Free;
 end.
 
