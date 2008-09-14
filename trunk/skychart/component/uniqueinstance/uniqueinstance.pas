@@ -53,6 +53,7 @@ type
     FIPCServer: TSimpleIPCServer;
     FIPCClient: TSimpleIPCClient;
     FOnOtherInstance: TOnOtherInstance;
+    FOnInstanceRunning: TNotifyEvent;
     {$ifdef unix}
     FTimer: TTimer;
     {$endif}
@@ -72,6 +73,7 @@ type
     property Identifier: String read FIdentifier write FIdentifier;
     property UpdateInterval: Cardinal read FUpdateInterval write SetUpdateInterval;
     property OnOtherInstance: TOnOtherInstance read FOnOtherInstance write FOnOtherInstance;
+    property OnInstanceRunning: TNotifyEvent read FOnInstanceRunning write FOnInstanceRunning;
   end;
 
 implementation
@@ -165,8 +167,12 @@ begin
         FIPCClient.Active := True;
         FIPCClient.SendStringMessage(ParamCount, TempStr);
       end;
-      Application.ShowMainForm := False;
-      Application.Terminate;
+      if Assigned(FOnInstanceRunning) then
+        FOnInstanceRunning(self)
+      else begin
+        Application.ShowMainForm := False;
+        Application.Terminate;
+      end;
     end
     else
     begin
