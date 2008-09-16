@@ -10,6 +10,7 @@ object f_config_catalog: Tf_config_catalog
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = False
   LCLVersion = '0.9.25'
   object MainPanel: TPanel
     Left = 12
@@ -31,13 +32,13 @@ object f_config_catalog: Tf_config_catalog
       TabOrder = 1
       object Page1: TPage
         Caption = 'Catalog'
-        ClientWidth = 492
-        ClientHeight = 458
+        ClientWidth = 494
+        ClientHeight = 460
         object Label37: TLabel
-          Left = 96
-          Height = 14
+          Left = 73
+          Height = 16
           Top = 17
-          Width = 246
+          Width = 271
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Caption = 'Stars and Nebulae catalogs prepared with '
@@ -54,6 +55,7 @@ object f_config_catalog: Tf_config_catalog
           FixedColor = clBtnFace
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+          ParentColor = False
           RowCount = 2
           TabOrder = 1
           OnDrawCell = StringGrid3DrawCell
@@ -100,8 +102,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page2: TPage
         Caption = 'CdC Stars'
-        ClientWidth = 492
-        ClientHeight = 433
+        ClientWidth = 494
+        ClientHeight = 435
         object Label2: TLabel
           Height = 20
           Top = 7
@@ -838,8 +840,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TPage
         Caption = 'CdC Nebulae'
-        ClientWidth = 492
-        ClientHeight = 433
+        ClientWidth = 494
+        ClientHeight = 435
         object Label3: TLabel
           Left = 1
           Height = 20
@@ -1441,8 +1443,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TPage
         Caption = 'Obsolete'
-        ClientWidth = 492
-        ClientHeight = 433
+        ClientWidth = 494
+        ClientHeight = 435
         object Label88: TLabel
           Height = 15
           Top = 7
@@ -1910,7 +1912,7 @@ object f_config_catalog: Tf_config_catalog
   end
   object OpenDialog1: TOpenDialog
     FilterIndex = 0
-    left = 496
+    left = 494
     top = 24
   end
 end

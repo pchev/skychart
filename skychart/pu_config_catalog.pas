@@ -548,7 +548,6 @@ end else if (Acol=1)and(Arow>0) then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
     Canvas.rectangle(Rect);
-    cells[0,arow]:='0';
   end else begin
     Canvas.Pen.Color := clWindow;
     Canvas.Brush.style := bsSolid;
@@ -559,7 +558,6 @@ end else if (Acol=2)and(Arow>0) then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
     Canvas.rectangle(Rect);
-    cells[0,arow]:='0';
   end else begin
     Canvas.Pen.Color := clWindow;
     Canvas.Brush.style := bsSolid;
@@ -570,7 +568,6 @@ end else if (Acol=3)and(Arow>0) then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
     Canvas.rectangle(Rect);
-    cells[0,arow]:='0';
   end else begin
     Canvas.Pen.Color := clWindow;
     Canvas.Brush.style := bsSolid;
@@ -581,7 +578,6 @@ end else if (Acol=4)and(Arow>0) then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
     Canvas.rectangle(Rect);
-    cells[0,arow]:='0';
   end else begin
     Canvas.Pen.Color := clWindow;
     Canvas.Brush.style := bsSolid;
@@ -624,7 +620,8 @@ Procedure Tf_config_catalog.EditGCatPath(row : integer);
 var buf : string;
     p : integer;
 begin
-    if trim(stringgrid3.Cells[4,row])<>'' then opendialog1.InitialDir:=stringgrid3.Cells[4,row]
+    chdir(appdir);
+    if trim(stringgrid3.Cells[4,row])<>'' then opendialog1.InitialDir:=ExpandFileName(stringgrid3.Cells[4,row])
                                           else opendialog1.InitialDir:=slash(appdir)+'cat';
     if trim(stringgrid3.Cells[1,row])<>'' then opendialog1.filename:=trim(stringgrid3.Cells[1,row])+'.hdr';
     opendialog1.Filter:='Catalog header|*.hdr';
@@ -654,6 +651,12 @@ procedure Tf_config_catalog.StringGrid3SetEditText(Sender: TObject; ACol,
 begin
 if (Acol=4)and(Arow>0) then
   if not fileexists(slash(value)+StringGrid3.cells[1,arow]+'.hdr') then begin
+    StringGrid3.Canvas.Brush.Color := clRed;
+    StringGrid3.Canvas.FillRect(StringGrid3.CellRect(ACol, ARow));
+    StringGrid3.cells[0,arow]:='0';
+  end;
+if (Acol=1)and(Arow>0) then
+  if not fileexists(slash(StringGrid3.cells[4,arow])+value+'.hdr') then begin
     StringGrid3.Canvas.Brush.Color := clRed;
     StringGrid3.Canvas.FillRect(StringGrid3.CellRect(ACol, ARow));
     StringGrid3.cells[0,arow]:='0';
