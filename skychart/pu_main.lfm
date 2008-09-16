@@ -3106,6 +3106,8 @@ object f_main: Tf_main
     FullRepaint = False
     TabOrder = 1
     TabStop = True
+    OnEnter = ToolBar1Enter
+    OnMouseMove = Toolbar1MouseMove
     object ToolBar1: TToolBar
       Height = 25
       Width = 860
@@ -3117,6 +3119,9 @@ object f_main: Tf_main
       TabOrder = 0
       TabStop = True
       Wrapable = False
+      OnEnter = ToolBar1Enter
+      OnMouseMove = Toolbar1MouseMove
+      OnMouseEnter = ToolBar1Enter
       object ToolButtonNew: TToolButton
         Left = 1
         Hint = 'New|Create a new chart'
@@ -3208,91 +3213,109 @@ object f_main: Tf_main
         Action = ZoomBar
       end
       object ToolButtonSearch: TToolButton
-        Left = 407
+        Left = 415
         Hint = 'Advanced Search'
         Top = 2
         Action = Search1
       end
       object ToolButtonPosition: TToolButton
-        Left = 430
+        Left = 438
         Hint = 'Position'
         Top = 2
         Action = Position
       end
       object ToolButtonListObj: TToolButton
-        Left = 453
+        Left = 461
         Hint = 'Object List'
         Top = 2
         Action = listobj
       end
       object ToolButtonCal: TToolButton
-        Left = 476
+        Left = 484
         Hint = 'Ephemeris Calendar'
         Top = 2
         Action = Calendar
       end
       object ToolButton35: TToolButton
-        Left = 499
+        Left = 507
         Top = 2
         Width = 8
         ImageIndex = 8
         Style = tbsDivider
       end
       object ToolButtonTdec: TToolButton
-        Left = 507
+        Left = 515
         Hint = 'Decrement Time'
         Top = 2
         Action = TimeDec
       end
       object ToolButtonTnow: TToolButton
-        Left = 530
+        Left = 538
         Hint = 'Now'
         Top = 2
         Action = TimeReset
       end
       object ToolButtonTinc: TToolButton
-        Left = 553
+        Left = 561
         Hint = 'Increment Time'
         Top = 2
         Action = TimeInc
       end
       object ToolButton39: TToolButton
-        Left = 712
+        Left = 736
         Top = 2
         Width = 8
         ImageIndex = 45
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 720
+        Left = 744
         Hint = 'Connect Telescope'
         Top = 2
         Action = TelescopeConnect
       end
       object TSlew: TToolButton
-        Left = 766
+        Left = 790
         Hint = 'Slew'
         Top = 2
         Action = TelescopeSlew
       end
       object TSync: TToolButton
-        Left = 743
+        Left = 767
         Hint = 'Sync'
         Top = 2
         Action = TelescopeSync
       end
       object ToolButton6: TToolButton
-        Left = 789
+        Left = 813
         Top = 2
         Width = 8
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 797
+        Left = 860
         Top = 2
         Width = 23
         AutoSize = True
         Style = tbsSeparator
+      end
+      object ToolButton10: TToolButton
+        Left = 407
+        Top = 2
+        Width = 8
+        Style = tbsDivider
+      end
+      object ToolButton11: TToolButton
+        Left = 648
+        Top = 2
+        Width = 8
+        Style = tbsDivider
+      end
+      object ToolButton12: TToolButton
+        Left = 584
+        Top = 2
+        Width = 8
+        Style = tbsDivider
       end
       object quicksearch: TComboBox
         Left = 317
@@ -3306,7 +3329,9 @@ object f_main: Tf_main
         DropDownCount = 15
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
+        OnEnter = ToolBar1Enter
         OnKeyDown = quicksearchKeyDown
+        OnMouseMove = Toolbar1MouseMove
         TabOrder = 0
       end
       object MagPanel: TPanel
@@ -3349,26 +3374,29 @@ object f_main: Tf_main
         end
       end
       object TimeVal: TSpinEdit
-        Left = 576
+        Left = 592
         Height = 23
         Hint = 'Time'
         Top = 2
         Width = 56
         MaxValue = 1000
         MinValue = 1
+        OnEnter = ToolBar1Enter
+        OnMouseMove = Toolbar1MouseMove
         TabOrder = 1
         Value = 1
       end
       object TimeU: TComboBox
-        Left = 632
-        Height = 29
+        Left = 656
+        Height = 23
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        MaxLength = -1
+        OnEnter = ToolBar1Enter
+        OnMouseMove = Toolbar1MouseMove
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2

@@ -108,6 +108,9 @@ type
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
+    ToolButton10: TToolButton;
+    ToolButton11: TToolButton;
+    ToolButton12: TToolButton;
     VariableStar1: TMenuItem;
     PopupConfig: TPopupMenu;
     SetupInternet: TAction;
@@ -452,6 +455,8 @@ type
     procedure HomePage1Click(Sender: TObject);
     procedure Maillist1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
+    procedure Toolbar1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
     procedure ReleaseNotes1Click(Sender: TObject);
     procedure ResetAllLabels1Click(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
@@ -464,6 +469,7 @@ type
     procedure SetupSolSysExecute(Sender: TObject);
     procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
+    procedure ToolBar1Enter(Sender: TObject);
     procedure ToolButtonConfigClick(Sender: TObject);
     procedure ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -1412,6 +1418,7 @@ if f_print.showmodal=mrOK then begin
 end;
 end;
 
+
 procedure Tf_main.UndoExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do UndoExecute(Sender);
@@ -2089,6 +2096,21 @@ end;
 procedure Tf_main.SetupTimeExecute(Sender: TObject);
 begin
 SetupTimePage(0);
+end;
+
+procedure Tf_main.ToolBar1Enter(Sender: TObject);
+begin
+{$ifdef lclgtk2}
+  quicksearch.Enabled:=true;
+  TimeVal.Enabled:=true;
+  TimeU.Enabled:=true;
+{$endif}
+end;
+
+procedure Tf_main.Toolbar1MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+    ToolBar1Enter(sender);
 end;
 
 procedure Tf_main.ToolButtonConfigClick(Sender: TObject);
@@ -5381,9 +5403,11 @@ begin
   quicksearch.Enabled:=false;   // add all main form focusable control here
   TimeVal.Enabled:=false;
   TimeU.Enabled:=false;
+{$ifndef lclgtk2}
   quicksearch.Enabled:=true;
   TimeVal.Enabled:=true;
   TimeU.Enabled:=true;
+{$endif}
 end;
 
 procedure Tf_main.ListInfo(buf:string);
