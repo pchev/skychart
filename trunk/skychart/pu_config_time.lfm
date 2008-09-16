@@ -3,9 +3,7 @@ object f_config_time: Tf_config_time
   Height = 564
   Top = 105
   Width = 474
-  HorzScrollBar.Page = 473
-  VertScrollBar.Page = 563
-  ActiveControl = CheckBox2
+  ActiveControl = nbstep
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
   Caption = 'Date / Time'
@@ -15,6 +13,8 @@ object f_config_time: Tf_config_time
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object MainPanel: TPanel
     Height = 514
     Width = 474
@@ -34,8 +34,8 @@ object f_config_time: Tf_config_time
       TabOrder = 0
       object Page1: TPage
         Caption = 'Time'
-        ClientWidth = 468
-        ClientHeight = 508
+        ClientWidth = 470
+        ClientHeight = 485
         object Label142: TLabel
           Left = 286
           Height = 20
@@ -238,8 +238,8 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 25
-            ClientWidth = 131
+            ClientHeight = 22
+            ClientWidth = 133
             Columns = 2
             Items.Strings = (
               'AD'
@@ -430,8 +430,8 @@ object f_config_time: Tf_config_time
       end
       object Page2: TPage
         Caption = 'Simulation'
-        ClientWidth = 468
-        ClientHeight = 508
+        ClientWidth = 470
+        ClientHeight = 510
         object stepreset: TSpeedButton
           Left = 220
           Height = 25
@@ -445,25 +445,25 @@ object f_config_time: Tf_config_time
         end
         object Label178: TLabel
           Left = 358
-          Height = 20
+          Height = 16
           Top = 46
-          Width = 40
+          Width = 42
           Caption = 'every  '
           ParentColor = False
         end
         object Label179: TLabel
           Left = 220
-          Height = 20
+          Height = 16
           Top = 46
-          Width = 97
+          Width = 105
           Caption = 'Number of steps'
           ParentColor = False
         end
         object Label56: TLabel
           Left = 8
-          Height = 20
+          Height = 16
           Top = 6
-          Width = 195
+          Width = 215
           Caption = 'Plot the position of moving object.'
           ParentColor = False
         end
@@ -482,8 +482,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 120
-          ClientWidth = 131
+          ClientHeight = 119
+          ClientWidth = 133
           Items.Strings = (
             'Days'
             'Hours'
@@ -495,9 +495,9 @@ object f_config_time: Tf_config_time
         end
         object stepline: TCheckBox
           Left = 8
-          Height = 21
+          Height = 22
           Top = 254
-          Width = 253
+          Width = 279
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           TabOrder = 6
@@ -584,8 +584,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 56
-          ClientWidth = 432
+          ClientHeight = 55
+          ClientWidth = 434
           Columns = 3
           Items.Strings = (
             'Every position'

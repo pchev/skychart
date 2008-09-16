@@ -3388,13 +3388,14 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 23
+        Height = 29
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
+        MaxLength = -1
         OnEnter = ToolBar1Enter
         OnMouseMove = Toolbar1MouseMove
         ParentFont = False
