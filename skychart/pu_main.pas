@@ -2687,6 +2687,8 @@ LeftBar1.checked:=ToolBar1.visible;
 RightBar1.checked:=ToolBar1.visible;
 ViewStatusBar1.checked:=ToolBar1.visible;
 ViewTopPanel;
+if PanelBottom.visible then InitFonts;
+FormResize(sender);
 end;
 
 procedure Tf_main.ViewScrollBar1Click(Sender: TObject);
@@ -2708,6 +2710,7 @@ MainBar1.checked:=ToolBar1.visible;
 if not MainBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 ViewTopPanel;
+FormResize(sender);
 end;
 
 procedure Tf_main.ViewObjectBarExecute(Sender: TObject);
@@ -2717,6 +2720,7 @@ ObjectBar1.checked:=ToolBar4.visible;
 if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 ViewTopPanel;
+FormResize(sender);
 end;
 
 procedure Tf_main.ViewLeftBarExecute(Sender: TObject);
@@ -2725,6 +2729,7 @@ PanelLeft.visible:=not PanelLeft.visible;
 LeftBar1.checked:=PanelLeft.visible;
 if not LeftBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+FormResize(sender);
 end;
 
 procedure Tf_main.ViewRightBarExecute(Sender: TObject);
@@ -2733,6 +2738,7 @@ PanelRight.visible:=not PanelRight.visible;
 RightBar1.checked:=PanelRight.visible;
 if not RightBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+FormResize(sender);
 end;
 
 procedure Tf_main.ViewStatusExecute(Sender: TObject);
@@ -2741,6 +2747,8 @@ PanelBottom.visible:=not PanelBottom.visible;
 ViewStatusBar1.checked:=PanelBottom.visible;
 if not ViewStatusBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+if PanelBottom.visible then InitFonts;
+FormResize(sender);
 end;
 
 Procedure Tf_main.InitFonts;
@@ -2791,7 +2799,9 @@ end;
 
 procedure Tf_main.FormResize(Sender: TObject);
 begin
-
+  MultiDoc1.Align:=alNone;
+  MultiDoc1.Width:=MultiDoc1.Width-1;
+  MultiDoc1.Align:=alClient;
 end;
 
 procedure Tf_main.SetDefault;
@@ -3749,6 +3759,8 @@ PanelLeft.visible:=ReadBool(section,'ViewLeftBar',true);
 PanelRight.visible:=ReadBool(section,'ViewRightBar',true);
 toolbar4.visible:=ReadBool(section,'ViewObjectBar',true);
 ViewScrollBar1.Checked:=ReadBool(section,'ViewScrollBar',true);
+PanelBottom.visible:=ReadBool(section,'ViewStatusBar',true);
+ViewStatusBar1.checked:=PanelBottom.visible;
 MainBar1.checked:=ToolBar1.visible;
 ObjectBar1.checked:=ToolBar4.visible;
 LeftBar1.checked:=PanelLeft.visible;
@@ -4253,6 +4265,7 @@ WriteBool(section,'ViewLeftBar',PanelLeft.visible);
 WriteBool(section,'ViewRightBar',PanelRight.visible);
 WriteBool(section,'ViewObjectBar',toolbar4.visible);
 WriteBool(section,'ViewScrollBar',ViewScrollBar1.Checked);
+WriteBool(section,'ViewStatusBar',ViewStatusBar1.Checked);
 WriteInteger(section,'NumChart',MultiDoc1.ChildCount);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
