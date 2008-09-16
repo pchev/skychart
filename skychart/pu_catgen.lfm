@@ -1,10 +1,8 @@
 object f_catgen: Tf_catgen
-  Left = 605
+  Left = 566
   Height = 479
   Top = 105
   Width = 503
-  HorzScrollBar.Page = 502
-  VertScrollBar.Page = 478
   ActiveControl = RadioGroup1.RadioButton0
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
@@ -12,7 +10,9 @@ object f_catgen: Tf_catgen
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = False
   Position = poDefaultPosOnly
+  LCLVersion = '0.9.25'
   object Image1: TImage
     Height = 438
     Width = 114
@@ -2908,39 +2908,35 @@ object f_catgen: Tf_catgen
       ClientHeight = 434
       object Label6: TLabel
         Left = 14
-        Height = 66
+        Height = 70
         Top = 24
-        Width = 85
+        Width = 86
         Caption = 'Select the type of object in your catalog'
-        Color = clNone
         ParentColor = False
         WordWrap = True
       end
       object Label8: TLabel
         Left = 14
-        Height = 15
+        Height = 16
         Top = 224
         Width = 114
         Caption = 'Input Catalog files'
-        Color = clNone
         ParentColor = False
       end
       object Label10: TLabel
         Left = 14
-        Height = 15
+        Height = 16
         Top = 164
         Width = 125
         Caption = 'Catalog short name'
-        Color = clNone
         ParentColor = False
       end
       object Label13: TLabel
         Left = 14
-        Height = 15
+        Height = 16
         Top = 192
-        Width = 120
+        Width = 119
         Caption = 'Catalog long name'
-        Color = clNone
         ParentColor = False
       end
       object SpeedButton1: TSpeedButton
@@ -3010,7 +3006,6 @@ object f_catgen: Tf_catgen
         Width = 345
         AutoSize = False
         Caption = 'For a large catalog always select "Binary". For a small dataset that change frequently select "Text", this let you edit the file and see the result immediatly on the chart without the need to rerun this utility.'
-        Color = clNone
         ParentColor = False
         WordWrap = True
       end
@@ -3029,7 +3024,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 118
+        ClientHeight = 120
         ClientWidth = 223
         ItemIndex = 0
         Items.Strings = (
@@ -3082,7 +3077,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 37
+        ClientHeight = 39
         ClientWidth = 343
         Columns = 2
         ItemIndex = 0
@@ -3096,8 +3091,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet2: TPage
       Caption = '2'
-      ClientWidth = 389
-      ClientHeight = 438
+      ClientWidth = 385
+      ClientHeight = 409
       ImageIndex = 4
       object Label2: TLabel
         Left = 16
@@ -3105,7 +3100,6 @@ object f_catgen: Tf_catgen
         Top = 8
         Width = 135
         Caption = 'General catalog options'
-        Color = clNone
         ParentColor = False
       end
       object GroupBox5: TGroupBox
@@ -3114,8 +3108,8 @@ object f_catgen: Tf_catgen
         Top = 224
         Width = 345
         Caption = 'Default Nebulae parameters'
-        ClientHeight = 192
-        ClientWidth = 345
+        ClientHeight = 175
+        ClientWidth = 341
         TabOrder = 5
         object Label11: TLabel
           Left = 8
@@ -3123,7 +3117,6 @@ object f_catgen: Tf_catgen
           Top = 17
           Width = 117
           Caption = 'Dimension and Units'
-          Color = clNone
           ParentColor = False
         end
         object Label12: TLabel
@@ -3132,7 +3125,6 @@ object f_catgen: Tf_catgen
           Top = 88
           Width = 66
           Caption = 'Object type'
-          Color = clNone
           ParentColor = False
         end
         object Label15: TLabel
@@ -3141,7 +3133,6 @@ object f_catgen: Tf_catgen
           Top = 120
           Width = 246
           Caption = 'Recognize Units or Object type from the file:'
-          Color = clNone
           ParentColor = False
         end
         object Label16: TLabel
@@ -3150,7 +3141,6 @@ object f_catgen: Tf_catgen
           Top = 48
           Width = 146
           Caption = '(useful to represent a flux)'
-          Color = clNone
           ParentColor = False
           WordWrap = True
         end
@@ -3159,13 +3149,11 @@ object f_catgen: Tf_catgen
           Height = 21
           Top = 12
           Width = 89
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           Items.Strings = (
             'Degree'
             'Minute'
             'Second'
           )
-          MaxLength = 0
           OnChange = ComboBox1Change
           TabOrder = 1
         end
@@ -3195,7 +3183,6 @@ object f_catgen: Tf_catgen
           Height = 21
           Top = 80
           Width = 113
-          AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
           ItemIndex = 14
           Items.Strings = (
             'Galaxy'
@@ -3217,7 +3204,6 @@ object f_catgen: Tf_catgen
             'Square'
             'Losange'
           )
-          MaxLength = 0
           TabOrder = 3
           Text = 'Unknow'
         end
@@ -3248,8 +3234,8 @@ object f_catgen: Tf_catgen
         Top = 224
         Width = 345
         Caption = 'Default Outline parameters'
-        ClientHeight = 192
-        ClientWidth = 345
+        ClientHeight = 175
+        ClientWidth = 341
         TabOrder = 6
         object Label18: TLabel
           Left = 148
@@ -3257,7 +3243,6 @@ object f_catgen: Tf_catgen
           Top = 80
           Width = 63
           Caption = 'Line width '
-          Color = clNone
           ParentColor = False
         end
         object Label19: TLabel
@@ -3266,7 +3251,6 @@ object f_catgen: Tf_catgen
           Top = 152
           Width = 35
           Caption = 'Color '
-          Color = clNone
           ParentColor = False
         end
         object Shape1: TShape
@@ -3324,8 +3308,8 @@ object f_catgen: Tf_catgen
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 57
-          ClientWidth = 316
+          ClientHeight = 40
+          ClientWidth = 312
           Columns = 3
           ItemIndex = 0
           Items.Strings = (
@@ -3361,8 +3345,8 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 105
-        ClientWidth = 180
+        ClientHeight = 88
+        ClientWidth = 176
         ItemIndex = 0
         Items.Strings = (
           'Hours, minutes, secondes'
@@ -3388,8 +3372,8 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 105
-        ClientWidth = 192
+        ClientHeight = 88
+        ClientWidth = 188
         ItemIndex = 0
         Items.Strings = (
           'Degrees, minutes, secondes'
@@ -3405,8 +3389,8 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 130
         Caption = 'Coordinates Equinox'
-        ClientHeight = 57
-        ClientWidth = 130
+        ClientHeight = 40
+        ClientWidth = 126
         TabOrder = 2
         object FloatEdit1: TFloatEdit
           Left = 8
@@ -3424,8 +3408,8 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 128
         Caption = 'Maximum magnitude'
-        ClientHeight = 57
-        ClientWidth = 128
+        ClientHeight = 40
+        ClientWidth = 124
         TabOrder = 4
         object FloatEdit2: TFloatEdit
           Left = 12
@@ -3443,8 +3427,8 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 107
         Caption = 'Position Epoch'
-        ClientHeight = 57
-        ClientWidth = 107
+        ClientHeight = 40
+        ClientWidth = 103
         TabOrder = 3
         object FloatEdit3: TFloatEdit
           Left = 8
@@ -3459,8 +3443,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet3: TPage
       Caption = '3'
-      ClientWidth = 389
-      ClientHeight = 438
+      ClientWidth = 385
+      ClientHeight = 409
       ImageIndex = 1
       object Label4: TLabel
         Left = 134
@@ -3468,7 +3452,6 @@ object f_catgen: Tf_catgen
         Top = 252
         Width = 57
         Caption = 'First Char'
-        Color = clNone
         ParentColor = False
       end
       object Label5: TLabel
@@ -3477,7 +3460,6 @@ object f_catgen: Tf_catgen
         Top = 252
         Width = 39
         Caption = 'Length'
-        Color = clNone
         ParentColor = False
       end
       object Label7: TLabel
@@ -3486,7 +3468,6 @@ object f_catgen: Tf_catgen
         Top = 16
         Width = 316
         Caption = 'Select the fields to use and their position in the text file'
-        Color = clNone
         ParentColor = False
       end
       object Label3: TLabel
@@ -3495,7 +3476,6 @@ object f_catgen: Tf_catgen
         Top = 252
         Width = 31
         Caption = 'Label'
-        Color = clNone
         ParentColor = False
       end
       object CheckListBox1: TCheckListBox
@@ -3511,6 +3491,7 @@ object f_catgen: Tf_catgen
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
+        TopIndex = -1
         Data = {
           020000000000
         }
@@ -3569,13 +3550,11 @@ object f_catgen: Tf_catgen
         Font.Name = 'Courier'
         Font.Pitch = fpFixed
         ParentColor = False
+        ParentFont = False
         TabOrder = 6
         OnMouseUp = Memo1MouseUp
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
-        Gutter.OnChange = nil
-        Gutter.CodeFoldingWidth = 14
         Keystrokes = <        
           item
             Command = 3
@@ -3899,13 +3878,12 @@ object f_catgen: Tf_catgen
           end>
         ReadOnly = True
         ScrollBars = ssHorizontal
-        SelectedColor.OnChange = nil
       end
     end
     object TabSheet4: TPage
       Caption = '4'
-      ClientWidth = 389
-      ClientHeight = 438
+      ClientWidth = 385
+      ClientHeight = 409
       ImageIndex = 2
       object Label1: TLabel
         Left = 24
@@ -3913,7 +3891,6 @@ object f_catgen: Tf_catgen
         Top = 16
         Width = 129
         Caption = 'Output catalog options'
-        Color = clNone
         ParentColor = False
       end
       object RadioGroup4: TRadioGroup
@@ -3931,8 +3908,8 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 121
-        ClientWidth = 321
+        ClientHeight = 104
+        ClientWidth = 317
         ItemIndex = 0
         Items.Strings = (
           '50   (recommended up to 100''000 objects)'
@@ -3948,8 +3925,8 @@ object f_catgen: Tf_catgen
         Top = 296
         Width = 321
         Caption = 'Output Directory'
-        ClientHeight = 96
-        ClientWidth = 321
+        ClientHeight = 79
+        ClientWidth = 317
         TabOrder = 0
         object DirectoryEdit1: TDirectoryEdit
           Left = 16
@@ -3978,8 +3955,8 @@ object f_catgen: Tf_catgen
         Top = 176
         Width = 321
         Caption = 'Search Index'
-        ClientHeight = 100
-        ClientWidth = 321
+        ClientHeight = 83
+        ClientWidth = 317
         TabOrder = 1
         object CheckBox3: TCheckBox
           Left = 16
@@ -4013,8 +3990,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet5: TPage
       Caption = '5'
-      ClientWidth = 389
-      ClientHeight = 438
+      ClientWidth = 385
+      ClientHeight = 409
       ImageIndex = 4
       object Label9: TLabel
         Left = 24
@@ -4022,7 +3999,6 @@ object f_catgen: Tf_catgen
         Top = 24
         Width = 300
         Caption = 'Indicate the string identifier for each type of object :'
-        Color = clNone
         ParentColor = False
       end
       object StringGrid1: TStringGrid
@@ -4033,13 +4009,13 @@ object f_catgen: Tf_catgen
         ColCount = 2
         DefaultColWidth = 120
         DefaultRowHeight = 18
+        ExtendedSelect = True
         FixedColor = clBtnFace
         GridLineWidth = 0
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
+        ParentColor = False
         RowCount = 15
-        ScrollBars = ssAutoBoth
         TabOrder = 0
-        TabStop = True
         ColWidths = (
           120
           193
@@ -4058,8 +4034,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet6: TPage
       Caption = '6'
-      ClientWidth = 389
-      ClientHeight = 438
+      ClientWidth = 385
+      ClientHeight = 409
       ImageIndex = 5
       object Label14: TLabel
         Left = 22
@@ -4067,7 +4043,6 @@ object f_catgen: Tf_catgen
         Top = 40
         Width = 269
         Caption = 'Indicate how to recognize the object size unit :'
-        Color = clNone
         ParentColor = False
       end
       object StringGrid2: TStringGrid
@@ -4078,13 +4053,13 @@ object f_catgen: Tf_catgen
         ColCount = 2
         DefaultColWidth = 120
         DefaultRowHeight = 18
+        ExtendedSelect = True
         FixedColor = clBtnFace
         GridLineWidth = 0
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
+        ParentColor = False
         RowCount = 4
-        ScrollBars = ssAutoBoth
         TabOrder = 0
-        TabStop = True
         ColWidths = (
           120
           193
@@ -4103,8 +4078,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet7: TPage
       Caption = '7'
-      ClientWidth = 389
-      ClientHeight = 438
+      ClientWidth = 385
+      ClientHeight = 409
       ImageIndex = 6
       object Label17: TLabel
         Left = 30
@@ -4112,7 +4087,6 @@ object f_catgen: Tf_catgen
         Top = 40
         Width = 246
         Caption = 'Indicate the string for each draw operation'
-        Color = clNone
         ParentColor = False
       end
       object StringGrid3: TStringGrid
@@ -4123,13 +4097,13 @@ object f_catgen: Tf_catgen
         ColCount = 2
         DefaultColWidth = 120
         DefaultRowHeight = 18
+        ExtendedSelect = True
         FixedColor = clBtnFace
         GridLineWidth = 0
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
+        ParentColor = False
         RowCount = 5
-        ScrollBars = ssAutoBoth
         TabOrder = 0
-        TabStop = True
         ColWidths = (
           120
           193
@@ -4148,8 +4122,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet8: TPage
       Caption = '8'
-      ClientWidth = 389
-      ClientHeight = 438
+      ClientWidth = 385
+      ClientHeight = 409
       ImageIndex = 7
       object Label20: TLabel
         Left = 70
@@ -4157,7 +4131,6 @@ object f_catgen: Tf_catgen
         Top = 24
         Width = 187
         Caption = 'Indicate the string for each color'
-        Color = clNone
         ParentColor = False
       end
       object Shape2: TShape
@@ -4245,7 +4218,6 @@ object f_catgen: Tf_catgen
         Top = 64
         Width = 146
         Caption = 'Click to change the color '
-        Color = clNone
         ParentColor = False
       end
       object StringGrid4: TStringGrid
@@ -4256,14 +4228,14 @@ object f_catgen: Tf_catgen
         ColCount = 1
         DefaultColWidth = 200
         DefaultRowHeight = 26
+        ExtendedSelect = True
         FixedColor = clBtnFace
         FixedCols = 0
         GridLineWidth = 0
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
+        ParentColor = False
         RowCount = 11
-        ScrollBars = ssAutoBoth
         TabOrder = 0
-        TabStop = True
       end
       object Button10: TButton
         Left = 134
@@ -4286,7 +4258,6 @@ object f_catgen: Tf_catgen
     ClientHeight = 41
     ClientWidth = 503
     ParentColor = False
-    ParentFont = True
     TabOrder = 1
     object Exitbt: TButton
       Left = 406
@@ -4307,7 +4278,6 @@ object f_catgen: Tf_catgen
       BorderSpacing.InnerBorder = 4
       Caption = '<<   Prev'
       OnClick = prevbtClick
-      ParentFont = True
       TabOrder = 0
     end
     object nextbt: TButton
@@ -4318,7 +4288,6 @@ object f_catgen: Tf_catgen
       BorderSpacing.InnerBorder = 4
       Caption = 'Next   >>'
       OnClick = nextbtClick
-      ParentFont = True
       TabOrder = 1
     end
     object Endbt: TButton
@@ -4330,7 +4299,6 @@ object f_catgen: Tf_catgen
       Caption = 'Build Catalog'
       Enabled = False
       OnClick = EndbtClick
-      ParentFont = True
       TabOrder = 2
     end
     object Button2: TButton
@@ -4341,7 +4309,6 @@ object f_catgen: Tf_catgen
       BorderSpacing.InnerBorder = 4
       Caption = 'Load project'
       OnClick = Button2Click
-      ParentFont = True
       TabOrder = 4
     end
     object Button1: TButton
@@ -4352,7 +4319,6 @@ object f_catgen: Tf_catgen
       BorderSpacing.InnerBorder = 4
       Caption = 'Save Project'
       OnClick = Button1Click
-      ParentFont = True
       TabOrder = 5
     end
     object Button12: TButton
@@ -4363,12 +4329,10 @@ object f_catgen: Tf_catgen
       BorderSpacing.InnerBorder = 4
       Caption = 'Help'
       OnClick = Button12Click
-      ParentFont = True
       TabOrder = 6
     end
   end
   object OpenDialog1: TOpenDialog
-    Title = 'Open existing file'
     Filter = 'All files|*.*|Project files|*.prj'
     FilterIndex = 0
     Options = [ofHideReadOnly, ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing]
@@ -4376,14 +4340,12 @@ object f_catgen: Tf_catgen
     top = 8
   end
   object SaveDialog1: TSaveDialog
-    Title = 'Save file as'
     Filter = 'All files|*.*|Project files|*.prj'
     FilterIndex = 0
     left = 144
     top = 8
   end
   object ColorDialog1: TColorDialog
-    Title = 'Select color'
     left = 224
     top = 8
   end
