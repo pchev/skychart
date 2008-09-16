@@ -3682,7 +3682,6 @@ cfgm.PrtBottomMargin:=ReadInteger(section,'PrtBottomMargin',cfgm.PrtBottomMargin
 cfgm.ThemeName:=ReadString(section,'Theme',cfgm.ThemeName);
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
-cfgm.Constellationpath:=ReadString(section,'Constellationpath',cfgm.Constellationpath);
 cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
 cfgm.ConstBfile:=ReadString(section,'ConstBfile',cfgm.ConstBfile);
 cfgm.EarthMapFile:=ReadString(section,'EarthMapFile',cfgm.EarthMapFile);
@@ -4195,7 +4194,6 @@ WriteBool(section,'ListVar',catalog.cfgshr.ListVar);
 WriteBool(section,'ListDbl',catalog.cfgshr.ListDbl);
 WriteBool(section,'ListPla',catalog.cfgshr.ListPla);
 WriteInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
-WriteString(section,'Constellationpath',cfgm.Constellationpath);
 WriteString(section,'ConstLfile',cfgm.ConstLfile);
 WriteString(section,'ConstBfile',cfgm.ConstBfile);
 WriteString(section,'EarthMapFile',cfgm.EarthMapFile);
