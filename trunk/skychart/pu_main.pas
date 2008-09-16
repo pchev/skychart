@@ -702,7 +702,7 @@ implementation
 {$endif}
 
 uses
-{$ifdef LCLgtk}
+{$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
      gtkproc,
 {$endif}
      pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
@@ -1028,6 +1028,7 @@ try
     nightvision:=false;
     ToolButtonNightVisionClick(self);
  end;
+ ProcessParams2;
 except
 on E: Exception do SetLPanel1('Initialization error:'+E.Message);
 end;
@@ -5767,8 +5768,7 @@ end;
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 begin
 FullScreen1.Checked:=not FullScreen1.Checked;
-// Finally something that seem to work
-{$ifdef LCLgtk}
+{$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
   SetWindowFullScreen(f_main,FullScreen1.Checked);
 {$endif}
 end;
