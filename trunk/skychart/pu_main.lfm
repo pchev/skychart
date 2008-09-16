@@ -3368,6 +3368,7 @@ object f_main: Tf_main
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
+        MaxLength = -1
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2
