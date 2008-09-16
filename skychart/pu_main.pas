@@ -1365,7 +1365,6 @@ if nightvision then ResetWinColor;
 StopServer;
 writetrace(rsExiting);
 Autorefresh.Enabled:=false;
-SaveQuickSearch(configfile);
 if SaveConfigOnExit.checked and
    (MessageDlg(rsDoYouWantToS, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then begin
       if (MultiDoc1.ActiveObject is Tf_chart) then (MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.SimNb:=1;
@@ -3902,6 +3901,7 @@ var i,j: integer;
 begin
 try
 SavePrivateConfig(configfile,true);
+SaveQuickSearch(configfile);
 if (MultiDoc1.ActiveObject is Tf_chart) then begin
    SaveChartConfig(configfile,MultiDoc1.ActiveChild);
 end;
@@ -4206,6 +4206,7 @@ WriteString(section,'OpenFileCMD',OpenFileCMD);
 WriteBool(section,'use_xplanet',use_xplanet);
 WriteString(section,'xplanet_dir',xplanet_dir);
 {$endif}
+WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
 WriteString(section,'prtname',cfgm.prtname);

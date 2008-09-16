@@ -561,7 +561,7 @@ for i:=0 to SimObj.Items.Count-1 do begin
   if (i=9) and (not csc.ShowPluto) then SimObj.checked[i]:=false
     else SimObj.checked[i]:=true;
 end;
-{$ifdef win32}
+{$IF DEFINED(win32) or DEFINED(LCLgtk2)}
  for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);
 {$endif}
 end;
@@ -571,7 +571,7 @@ var i:integer;
 begin
 for i:=0 to SimObj.Items.Count-1 do
     SimObj.checked[i]:=false;
-{$ifdef win32}
+{$IF DEFINED(win32) or DEFINED(LCLgtk2)}
  for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);
 {$endif}
 end;
