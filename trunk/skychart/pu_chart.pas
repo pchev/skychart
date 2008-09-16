@@ -1046,8 +1046,6 @@ key_left      : MoveEast.execute;
 key_up        : MoveNorth.execute;
 key_right     : MoveWest.execute;
 key_down      : MoveSouth.execute;
-key_plus      : Zoomplus.execute;
-key_minus     : Zoomminus.execute;
 end;
 movefactor:=4;
 zoomfactor:=2;
@@ -2552,6 +2550,8 @@ case key of
        sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation-20;
        Refresh;
      end;
+'+' : Zoomplus.execute;
+'-' : Zoomminus.execute;
 '1' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[0]);
 '2' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[1]);
 '3' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[2]);
@@ -2578,8 +2578,6 @@ case key of
 'z' : SetZenit(0);
 //'P' : SetRecording;
 //'R' : SetRot(-15);
-//'+' : SpeedButton2Click(Sender);
-//'-' : SpeedButton3Click(Sender);
 //' ' : HideMenu(not menu_on);
 end;
 Application.ProcessMessages;
