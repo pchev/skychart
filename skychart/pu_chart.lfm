@@ -13,7 +13,6 @@ object f_chart: Tf_chart
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
-  ParentFont = True
   LCLVersion = '0.9.25'
   object Panel1: TPanel
     Left = 8
@@ -39,6 +38,7 @@ object f_chart: Tf_chart
       Font.Height = -12
       Font.Name = 'Sans'
       ParentColor = False
+      ParentFont = False
       ShowAccelChar = False
       Transparent = False
       Visible = False
@@ -46,10 +46,10 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 463
-      Height = 254
+      Left = 464
+      Height = 255
       Top = 1
-      Width = 16
+      Width = 15
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -61,8 +61,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 1
-      Height = 16
-      Top = 255
+      Height = 15
+      Top = 256
       Width = 478
       Align = alBottom
       LargeChange = 10
