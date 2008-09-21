@@ -12,6 +12,7 @@ function Translate(lang : string = ''):string;
 
 resourcestring
   rsLanguage = 'Internal language';
+  rsDocumentatio = 'en/documentation/start.html';
   rsdeg = 'd';
   rsmin = 'm';
   rssec = 's';
@@ -1047,7 +1048,6 @@ resourcestring
   rsXplanetIsNot = 'Xplanet is not compiled with JPEG support';
   rsRequireXplan = '(require Xplanet 1.2.0)';
   rsXplanetIsPro = 'Xplanet is probably not installed!';
-  rsDocumentatio = 'en/documentation/start.html';
   rsEveryPositio = 'Every position';
   rsOneOfTwo = 'One of two';
   rsOneOfThree = 'One of three';

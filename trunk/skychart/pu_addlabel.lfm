@@ -3,8 +3,6 @@ object f_addlabel: Tf_addlabel
   Height = 149
   Top = 208
   Width = 264
-  HorzScrollBar.Page = 263
-  VertScrollBar.Page = 148
   ActiveControl = Edit1
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
@@ -13,6 +11,8 @@ object f_addlabel: Tf_addlabel
   ClientWidth = 264
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object Label1: TLabel
     Left = 12
     Height = 14
@@ -25,7 +25,7 @@ object f_addlabel: Tf_addlabel
     Left = 12
     Height = 14
     Top = 45
-    Width = 32
+    Width = 30
     Caption = 'Type:'
     ParentColor = False
   end
@@ -39,10 +39,9 @@ object f_addlabel: Tf_addlabel
   end
   object ComboBox1: TComboBox
     Left = 56
-    Height = 21
+    Height = 25
     Top = 40
     Width = 192
-    AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
     ItemIndex = 0
     Items.Strings = (
       'Star'
@@ -54,7 +53,6 @@ object f_addlabel: Tf_addlabel
       'Other label'
       'Chart Information'
     )
-    MaxLength = 0
     OnSelect = ComboBox1Select
     TabOrder = 1
     Text = 'Star'
@@ -94,7 +92,7 @@ object f_addlabel: Tf_addlabel
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 25
+    ClientHeight = 29
     ClientWidth = 232
     Columns = 3
     ItemIndex = 0
@@ -105,5 +103,16 @@ object f_addlabel: Tf_addlabel
     )
     OnClick = RadioGroup1Click
     TabOrder = 4
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 8
+    top = 117
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 120
+    top = 120
   end
 end

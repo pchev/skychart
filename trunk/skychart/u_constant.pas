@@ -596,7 +596,7 @@ var gzopen : Tgzopen;
 }
 
 // pseudo-constant only here
-Var  Appdir, PrivateDir, SampleDir, TempDir, HelpDir, ZoneDir : string;
+Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
      VarObs : String;
      ForceConfig, Configfile, SysDecimalSeparator, Lang : string;
      compile_time:string;

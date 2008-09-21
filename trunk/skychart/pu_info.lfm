@@ -13,6 +13,7 @@ object f_info: Tf_info
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = False
   Position = poScreenCenter
   LCLVersion = '0.9.25'
   object Panel1: TPanel
@@ -53,16 +54,19 @@ object f_info: Tf_info
       Align = alClient
       ColCount = 1
       DefaultColWidth = 800
-      DefaultRowHeight = 22
+      ExtendedSelect = True
       FixedColor = clBtnFace
       FixedCols = 0
       FixedRows = 0
       GridLineWidth = 0
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goRowSelect]
+      ParentColor = False
       PopupMenu = PopupMenu1
       RowCount = 10
       ScrollBars = ssVertical
       TabOrder = 0
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
       OnMouseDown = StringGrid1MouseDown
     end
     object Panel2: TPanel
@@ -76,10 +80,10 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 1
       object serverinfo: TLabel
-        Left = 535
-        Height = 15
+        Left = 534
+        Height = 16
         Top = 6
-        Width = 2
+        Width = 3
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         ParentColor = False
@@ -98,7 +102,7 @@ object f_info: Tf_info
         Left = 104
         Height = 21
         Top = 2
-        Width = 92
+        Width = 99
         Caption = 'AutoRefresh'
         Checked = True
         OnClick = CheckBox1Click
@@ -125,13 +129,15 @@ object f_info: Tf_info
       Color = clBtnHighlight
       Font.Height = -13
       Font.Name = 'courier'
+      Font.Pitch = fpFixed
       ParentColor = False
+      ParentFont = False
       PopupMenu = PopupMenu2
       TabOrder = 1
       OnDblClick = Memo1DblClick
       BookMarkOptions.Xoffset = -18
+      BookMarkOptions.OnChange = nil
       Gutter.Visible = False
-      Gutter.CodeFoldingWidth = 14
       Keystrokes = <      
         item
           Command = 3
@@ -459,6 +465,7 @@ object f_info: Tf_info
       Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
       ReadOnly = True
       RightEdge = 0
+      SelectedColor.OnChange = nil
       TabWidth = 10
     end
     object Panel3: TPanel
@@ -624,5 +631,16 @@ object f_info: Tf_info
     FilterIndex = 0
     left = 72
     top = 136
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 29
+    top = 420
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 72
+    top = 420
   end
 end

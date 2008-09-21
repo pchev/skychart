@@ -28,9 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_translation, u_constant, u_projection, u_util,
+uses  u_help, u_translation, u_constant, u_projection, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons;
+  Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons,
+  LazHelpHTML;
 
 type
 
@@ -39,6 +40,8 @@ type
   Tf_position = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Panel1: TPanel;
     coord1: TLabel;
     coord2: TLabel;
@@ -86,6 +89,8 @@ eq1.caption:=rsRA;
 eq2.caption:=rsDE;
 Label3.caption:=rsFOV;
 Label4.caption:=rsRotation;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpPosition);
 end;
 
 procedure Tf_position.FormShow(Sender: TObject);

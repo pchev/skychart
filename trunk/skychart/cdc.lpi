@@ -106,7 +106,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item20>
     </RequiredPackages>
-    <Units Count="44">
+    <Units Count="45">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -166,6 +166,7 @@
         <ComponentName Value="f_zoom"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_zoom.lrs"/>
         <UnitName Value="pu_zoom"/>
       </Unit10>
@@ -201,6 +202,7 @@
         <ComponentName Value="f_getdss"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_getdss.lrs"/>
         <UnitName Value="pu_getdss"/>
       </Unit14>
@@ -209,6 +211,7 @@
         <ComponentName Value="f_image"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_image.lrs"/>
         <UnitName Value="pu_image"/>
       </Unit15>
@@ -226,6 +229,7 @@
         <ComponentName Value="f_manualtelescope"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_manualtelescope.lrs"/>
         <UnitName Value="pu_manualtelescope"/>
       </Unit17>
@@ -234,6 +238,7 @@
         <ComponentName Value="f_position"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_position.lrs"/>
         <UnitName Value="pu_position"/>
       </Unit18>
@@ -251,6 +256,7 @@
         <ComponentName Value="f_search"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_search.lrs"/>
         <UnitName Value="pu_search"/>
       </Unit20>
@@ -288,6 +294,7 @@
         <ComponentName Value="f_config_time"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config_time.lrs"/>
         <UnitName Value="pu_config_time"/>
       </Unit26>
@@ -305,6 +312,7 @@
         <ComponentName Value="f_config_pictures"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config_pictures.lrs"/>
         <UnitName Value="pu_config_pictures"/>
       </Unit28>
@@ -313,6 +321,7 @@
         <ComponentName Value="f_config_display"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config_display.lrs"/>
         <UnitName Value="pu_config_display"/>
       </Unit29>
@@ -348,6 +357,7 @@
         <ComponentName Value="f_config_internet"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_config_internet.lrs"/>
         <UnitName Value="pu_config_internet"/>
       </Unit33>
@@ -356,6 +366,7 @@
         <ComponentName Value="f_catgen"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_catgen.lrs"/>
         <UnitName Value="pu_catgen"/>
       </Unit34>
@@ -364,6 +375,7 @@
         <ComponentName Value="f_catgenadv"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_catgenadv.lrs"/>
         <UnitName Value="pu_catgenadv"/>
       </Unit35>
@@ -372,6 +384,7 @@
         <ComponentName Value="f_progress"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_progressbar.lrs"/>
         <UnitName Value="pu_progressbar"/>
       </Unit36>
@@ -380,6 +393,7 @@
         <ComponentName Value="f_addlabel"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_addlabel.lrs"/>
         <UnitName Value="pu_addlabel"/>
       </Unit37>
@@ -401,6 +415,7 @@
         <ComponentName Value="f_about"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_about.lrs"/>
         <UnitName Value="pu_about"/>
       </Unit40>
@@ -426,6 +441,11 @@
         <ResourceFilename Value="pu_config.lrs"/>
         <UnitName Value="pu_config"/>
       </Unit43>
+      <Unit44>
+        <Filename Value="u_help.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="u_help"/>
+      </Unit44>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

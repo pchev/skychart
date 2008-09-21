@@ -35,10 +35,10 @@ object f_config_catalog: Tf_config_catalog
         ClientWidth = 494
         ClientHeight = 460
         object Label37: TLabel
-          Left = 73
-          Height = 16
+          Left = 98
+          Height = 14
           Top = 17
-          Width = 271
+          Width = 246
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Caption = 'Stars and Nebulae catalogs prepared with '
@@ -103,7 +103,7 @@ object f_config_catalog: Tf_config_catalog
       object Page2: TPage
         Caption = 'CdC Stars'
         ClientWidth = 494
-        ClientHeight = 435
+        ClientHeight = 437
         object Label2: TLabel
           Height = 20
           Top = 7
@@ -841,7 +841,7 @@ object f_config_catalog: Tf_config_catalog
       object Page3: TPage
         Caption = 'CdC Nebulae'
         ClientWidth = 494
-        ClientHeight = 435
+        ClientHeight = 437
         object Label3: TLabel
           Left = 1
           Height = 20
@@ -1444,7 +1444,7 @@ object f_config_catalog: Tf_config_catalog
       object Page4: TPage
         Caption = 'Obsolete'
         ClientWidth = 494
-        ClientHeight = 435
+        ClientHeight = 437
         object Label88: TLabel
           Height = 15
           Top = 7
@@ -1850,6 +1850,8 @@ object f_config_catalog: Tf_config_catalog
     Height = 50
     Top = 527
     Width = 522
+    HelpType = htKeyword
+    HelpKeyword = 'help/catalog.html'
     Align = alBottom
     ClientHeight = 50
     ClientWidth = 522
@@ -1914,5 +1916,18 @@ object f_config_catalog: Tf_config_catalog
     FilterIndex = 0
     left = 494
     top = 24
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    BaseURL = 'file:///home/cdc/doc/wiki_doc/en/documentation'
+    AutoRegister = True
+    KeywordPrefix = 'help'
+    left = 48
+    top = 536
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 96
+    top = 536
   end
 end

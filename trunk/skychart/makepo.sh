@@ -7,3 +7,6 @@
 
 rstconv -i units/i386-linux-gtk2/u_translation.rst -o language/skychart.po
 ~/lazarus/tools/updatepofiles language/skychart.po
+
+rstconv -i units/i386-linux-gtk2/u_help.rst -o language/help.po
+~/lazarus/tools/updatepofiles language/help.po

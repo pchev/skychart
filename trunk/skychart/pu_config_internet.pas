@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel, Grids;
+  ButtonPanel, Grids, LazHelpHTML;
 
 type
 
@@ -45,6 +45,8 @@ type
     comdefault: TButton;
     astdefault: TButton;
     brightneo: TButton;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label8: TLabel;
     mpcorb: TButton;
     ftppassive: TCheckBox;
@@ -145,6 +147,8 @@ DefaultDSS.caption:=rsDefault;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgInt);
 end;
 
 constructor Tf_config_internet.Create(AOwner:TComponent);

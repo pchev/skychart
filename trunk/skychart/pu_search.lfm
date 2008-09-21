@@ -3,8 +3,6 @@ object f_search: Tf_search
   Height = 326
   Top = 105
   Width = 433
-  HorzScrollBar.Page = 432
-  VertScrollBar.Page = 325
   ActiveControl = Id
   BorderStyle = bsToolWindow
   Caption = 'Search'
@@ -16,6 +14,8 @@ object f_search: Tf_search
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object PlanetPanel: TPanel
     Left = 8
     Height = 41
@@ -28,20 +28,18 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 14
+      Height = 16
       Top = 14
-      Width = 39
+      Width = 45
       Caption = 'Planet '
       ParentColor = False
     end
     object PlanetBox: TComboBox
       Left = 97
-      Height = 21
+      Height = 25
       Top = 12
       Width = 146
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
       DropDownCount = 10
-      MaxLength = 0
       TabOrder = 0
     end
   end
@@ -72,11 +70,9 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 21
+      Height = 25
       Top = 10
       Width = 216
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      MaxLength = 0
       TabOrder = 2
     end
   end
@@ -107,11 +103,9 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 21
+      Height = 25
       Top = 10
       Width = 216
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      MaxLength = 0
       TabOrder = 2
     end
   end
@@ -127,19 +121,17 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 14
+      Height = 16
       Top = 14
-      Width = 41
+      Width = 45
       Caption = 'Nebula'
       ParentColor = False
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 21
+      Height = 25
       Top = 11
       Width = 280
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      MaxLength = 0
       TabOrder = 0
     end
   end
@@ -155,19 +147,17 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 14
+      Height = 16
       Top = 14
-      Width = 23
+      Width = 27
       Caption = 'Star'
       ParentColor = False
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 21
+      Height = 25
       Top = 11
       Width = 281
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      MaxLength = 0
       TabOrder = 0
     end
   end
@@ -183,19 +173,17 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 14
+      Height = 16
       Top = 14
-      Width = 73
+      Width = 83
       Caption = 'Constellation'
       ParentColor = False
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 21
+      Height = 25
       Top = 11
       Width = 265
-      AutoCompleteText = [cbactEndOfLineComplete, cbactSearchAscending]
-      MaxLength = 0
       TabOrder = 0
     end
   end
@@ -595,7 +583,7 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 198
+    ClientHeight = 200
     ClientWidth = 412
     Columns = 2
     ItemIndex = 0
@@ -635,5 +623,16 @@ object f_search: Tf_search
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 9
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 16
+    top = 288
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 64
+    top = 288
   end
 end

@@ -4,9 +4,9 @@ unit pu_addlabel;
 
 interface
 
-uses u_translation, u_constant,
+uses u_help, u_translation, u_constant,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Buttons, ExtCtrls;
+  Buttons, ExtCtrls, LazHelpHTML;
 
 type
 
@@ -17,6 +17,8 @@ type
     Button2: TButton;
     ComboBox1: TComboBox;
     Edit1: TEdit;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label2: TLabel;
     RadioGroup1: TRadioGroup;
@@ -62,6 +64,8 @@ RadioGroup1.items[1]:=rsCenter;
 RadioGroup1.items[2]:=rsRight;
 Button1.caption:=rsOk;
 Button2.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpIndex);
 end;
 
 procedure Tf_addlabel.Edit1Change(Sender: TObject);

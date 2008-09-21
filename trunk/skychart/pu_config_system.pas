@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, cu_database,
+uses u_help, u_translation, u_constant, u_util, cu_database,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms,
-  ExtCtrls, StdCtrls, LResources, EditBtn;
+  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
 
 type
 
@@ -38,6 +38,8 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     LanguageList: TComboBox;
     Label14: TLabel;
     Language: TPage;
@@ -281,6 +283,8 @@ TelescopeSelect.Items[2]:=rsCDCPlugin;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgSys);
 end;
 
 constructor Tf_config_system.Create(AOwner:TComponent);

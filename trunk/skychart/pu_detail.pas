@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_util,
+uses u_help, u_translation, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
-  Buttons, IpHtml;
+  Buttons, IpHtml, LazHelpHTML;
 
 type
   Tstr1func = procedure(txt:string) of object;
@@ -39,6 +39,8 @@ type
   { Tf_detail }
 
   Tf_detail = class(TForm)
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     IpHtmlPanel1: TIpHtmlPanel;
     Panel1: TPanel;
     Button1: TButton;
@@ -84,6 +86,8 @@ Button2.caption:=rsCenterObject;
 Button3.caption:=rsNeighbor;
 SelectAll1.caption:=rsSelectAll;
 Copy1.caption:=rsCopy;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpInfo);
 end;
 
 procedure Tf_detail.Button1Click(Sender: TObject);

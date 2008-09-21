@@ -32,14 +32,14 @@ uses
   {$ifdef win32}
     Windows,
   {$endif}  dl,
-  u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
+  u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   u_constant, u_util, blcksock, synsock, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, uniqueinstance;
+  LResources, uniqueinstance, LazHelpHTML;
 
 type
   TTCPThrd = class(TThread)
@@ -87,6 +87,8 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     MenuItem24: TMenuItem;
     MenuItem25: TMenuItem;
     MenuItem26: TMenuItem;
@@ -1103,7 +1105,7 @@ end;
 
 procedure Tf_main.HelpContents1Execute(Sender: TObject);
 begin
-   ExecuteFile(slash(helpdir)+slash('wiki_doc')+stringreplace(rsDocumentatio,'/',PathDelim,[rfReplaceAll]));
+ShowHelp;
 end;
 
 procedure Tf_main.HomePage1Click(Sender: TObject);
@@ -1214,6 +1216,7 @@ if (not directoryexists(slash(appdir)+'data/constellation')) and
    (directoryexists(SharedDir)) then
    appdir:=SharedDir;
 {$endif}
+helpdir:=slash(appdir)+slash('doc');
 SampleDir:=slash(appdir)+slash('data')+'sample';
 ZoneDir:=slash(appdir)+slash('data')+slash('zoneinfo');
 end;
@@ -1275,6 +1278,7 @@ InitTrace;
 step:='Language';
 GetLanguage;
 lang:=u_translation.translate(cfgm.language);
+u_help.Translate(lang);
 catalog:=Tcatalog.Create(self);
 SetLang;
 step:='Telescope';
@@ -2830,7 +2834,6 @@ var i:integer;
     buf:string;
 begin
 nightvision:=false;
-helpdir:=slash(appdir)+slash('doc');
 cfgm.MaxChildID:=0;
 cfgm.prtname:='';
 cfgm.configpage:=0;
@@ -4388,6 +4391,7 @@ finally
  inif.Free;
 end;
 lang:=u_translation.translate(cfgm.language);
+u_help.Translate(lang);
 SetLang;
 f_position.SetLang;
 f_search.SetLang;
@@ -4625,6 +4629,8 @@ pla[10]:=rsSun;
 pla[11]:=rsMoon;
 pla[31]:=rsSatRing;
 pla[32]:=rsEarthShadow;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpIndex);
 end;
 
 procedure Tf_main.quicksearchClick(Sender: TObject);

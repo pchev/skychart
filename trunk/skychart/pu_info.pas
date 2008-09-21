@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util,
   SysUtils, Types, Classes, Controls, Forms, Printers, Graphics,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList,
-  LResources, Buttons, SynEdit;
+  LResources, Buttons, SynEdit, LazHelpHTML;
 
 type
   Tistrfunc = procedure(i:integer; var txt:string) of object;
@@ -41,6 +41,8 @@ type
   { Tf_info }
 
   Tf_info = class(TForm)
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     InfoMemo: TMemo;
     Page1: TPanel;
     Page2: TPanel;
@@ -129,6 +131,7 @@ Button1.caption:=rsClose;
 closeconnection.caption:=rsCloseConnect;
 outslectionner1.caption:=rsSelectAll;
 Copier1.caption:=rsCopy;
+SetHelpDB(HTMLHelpDatabase1);
 end;
 
 procedure Tf_info.Button1Click(Sender: TObject);
@@ -229,6 +232,7 @@ case Activepage of
    panel1.visible:=true;
    Button2Click(self);
    Timer1.enabled:=CheckBox1.Checked;
+   SetHelp(self,hlpSrvInfo);
    end;
 1: begin
    panel1.visible:=true;
@@ -236,13 +240,16 @@ case Activepage of
    memo1.setfocus;
    memo1.SelStart:=0;
    memo1.SelEnd:=0;
+   SetHelp(self,hlpObjList);
    end;
 2: begin
    panel1.visible:=false;
    f_info.ProgressMemo.clear;
+   SetHelp(self,hlpIndex);
    end;
 3: begin
    panel1.visible:=true;
+   SetHelp(self,hlpIndex);
    end;
 end;
 end;

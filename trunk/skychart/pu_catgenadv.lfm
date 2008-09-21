@@ -3,9 +3,7 @@ object f_catgenadv: Tf_catgenadv
   Height = 263
   Top = 176
   Width = 224
-  HorzScrollBar.Page = 223
-  VertScrollBar.Page = 262
-  ActiveControl = Button1
+  ActiveControl = Edit1
   BorderStyle = bsDialog
   Caption = 'Compute Field'
   ClientHeight = 263
@@ -14,50 +12,51 @@ object f_catgenadv: Tf_catgenadv
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = False
   Position = poMainFormCenter
+  LCLVersion = '0.9.25'
   object Label1: TLabel
     Left = 72
-    Height = 15
+    Height = 18
     Top = 90
-    Width = 8
+    Width = 9
     Caption = 'x'
-    Color = clNone
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
   object Label2: TLabel
     Left = 72
-    Height = 15
+    Height = 18
     Top = 126
-    Width = 10
+    Width = 12
     Caption = '+'
-    Color = clNone
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
   object Label3: TLabel
     Left = 72
-    Height = 15
+    Height = 23
     Top = 160
-    Width = 10
+    Width = 15
     Caption = '='
-    Color = clNone
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
   object Label4: TLabel
     Left = 8
-    Height = 66
+    Height = 70
     Top = 8
-    Width = 168
+    Width = 167
     Caption = 'Indicate here how to compute the require value from the data stored in the catalog text file.'
-    Color = clNone
     ParentColor = False
     WordWrap = True
   end
@@ -116,5 +115,16 @@ object f_catgenadv: Tf_catgenadv
     Color = clBtnFace
     ReadOnly = True
     TabOrder = 5
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 184
+    top = 88
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 186
+    top = 129
   end
 end

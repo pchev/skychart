@@ -3,8 +3,6 @@ object f_config_internet: Tf_config_internet
   Height = 484
   Top = 91
   Width = 489
-  HorzScrollBar.Page = 488
-  VertScrollBar.Page = 483
   ActiveControl = httpproxy
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
@@ -15,6 +13,8 @@ object f_config_internet: Tf_config_internet
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object MainPanel: TPanel
     Height = 434
     Width = 489
@@ -34,16 +34,16 @@ object f_config_internet: Tf_config_internet
       TabOrder = 0
       object Page1: TPage
         Caption = 'Proxy'
-        ClientWidth = 483
-        ClientHeight = 428
+        ClientWidth = 485
+        ClientHeight = 430
         object GroupBox1: TGroupBox
           Left = 20
           Height = 201
           Top = 12
           Width = 401
           Caption = 'HTTP Proxy'
-          ClientHeight = 187
-          ClientWidth = 395
+          ClientHeight = 186
+          ClientWidth = 397
           TabOrder = 0
           object httpproxy: TCheckBox
             Left = 30
@@ -59,8 +59,8 @@ object f_config_internet: Tf_config_internet
             Height = 137
             Top = 40
             Width = 369
-            ClientHeight = 121
-            ClientWidth = 363
+            ClientHeight = 122
+            ClientWidth = 365
             TabOrder = 1
             object Label2: TLabel
               Left = 22
@@ -132,8 +132,8 @@ object f_config_internet: Tf_config_internet
           Top = 228
           Width = 401
           Caption = 'FTP '
-          ClientHeight = 130
-          ClientWidth = 395
+          ClientHeight = 129
+          ClientWidth = 397
           TabOrder = 1
           object Label1: TLabel
             Left = 39
@@ -164,8 +164,8 @@ object f_config_internet: Tf_config_internet
       end
       object Page2: TPage
         Caption = 'Orbital Elements'
-        ClientWidth = 483
-        ClientHeight = 428
+        ClientWidth = 485
+        ClientHeight = 407
         object Label6: TLabel
           Left = 28
           Height = 20
@@ -186,7 +186,7 @@ object f_config_internet: Tf_config_internet
           Left = 16
           Height = 90
           Top = 48
-          Width = 443
+          Width = 445
           Anchors = [akTop, akLeft, akRight]
           OnExit = CometUrlListExit
           TabOrder = 0
@@ -195,7 +195,7 @@ object f_config_internet: Tf_config_internet
           Left = 16
           Height = 90
           Top = 228
-          Width = 443
+          Width = 445
           Anchors = [akTop, akLeft, akRight]
           OnExit = AsteroidUrlListExit
           TabOrder = 4
@@ -273,8 +273,8 @@ object f_config_internet: Tf_config_internet
       end
       object Page3: TPage
         Caption = 'Online DSS'
-        ClientWidth = 483
-        ClientHeight = 428
+        ClientWidth = 485
+        ClientHeight = 407
         object Label8: TLabel
           Left = 20
           Height = 20
@@ -290,14 +290,14 @@ object f_config_internet: Tf_config_internet
           Width = 453
           ColCount = 2
           DefaultColWidth = 120
+          ExtendedSelect = True
           FixedColor = clBtnFace
           FixedCols = 0
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor, goSmoothScroll]
+          ParentColor = False
           RowCount = 11
-          ScrollBars = ssAutoBoth
           TabOrder = 0
-          TabStop = True
           OnEditingDone = DSSpicturesEditingDone
         end
         object DefaultDSS: TButton
@@ -356,5 +356,16 @@ object f_config_internet: Tf_config_internet
       ModalResult = 2
       TabOrder = 2
     end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 33
+    top = 446
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 80
+    top = 446
   end
 end

@@ -28,20 +28,22 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
   cu_fits, cu_catalog, cu_database,
   pu_config_chart, pu_config_observatory, pu_config_time, pu_config_catalog,
   pu_config_system, pu_config_pictures, pu_config_display, pu_config_solsys,
   pu_config_internet,
-  LResources, MultiDoc, ChildDoc, PairSplitter;
+  LResources, MultiDoc, ChildDoc, PairSplitter, LazHelpHTML;
 
 type
 
   { Tf_config }
 
   Tf_config = class(TForm)
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     MultiDoc1: TMultiDoc;
     Panel1: TPanel;
     Panel3: TPanel;
@@ -58,6 +60,7 @@ type
     HelpBtn: TButton;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
+    procedure HelpBtnClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -196,6 +199,8 @@ if f_config_pictures1<>nil then f_config_pictures1.SetLang;
 if f_config_solsys1<>nil then f_config_solsys1.SetLang;
 if f_config_system1<>nil then f_config_system1.SetLang;
 if f_config_time1<>nil then f_config_time1.SetLang;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(HelpBtn,hlpMenuSetup);
 end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
@@ -344,15 +349,15 @@ begin
    // page change
    MultiDoc1.SetActiveChild(i);
    case i of
-     0 : begin f_config_time1.Notebook1.PageIndex:=j;        f_config_time1.FormShow(self); end;
-     1 : begin f_config_observatory1.Notebook1.PageIndex:=j; f_config_observatory1.FormShow(self); end;
-     2 : begin f_config_chart1.Notebook1.PageIndex:=j;       f_config_chart1.FormShow(self); end;
-     3 : begin f_config_catalog1.Notebook1.PageIndex:=j;     f_config_catalog1.FormShow(self); end;
-     4 : begin f_config_solsys1.Notebook1.PageIndex:=j;      f_config_solsys1.FormShow(self); end;
-     5 : begin f_config_display1.Notebook1.PageIndex:=j;     f_config_display1.FormShow(self); end;
-     6 : begin f_config_pictures1.Notebook1.PageIndex:=j;    f_config_pictures1.FormShow(self); end;
-     7 : begin f_config_system1.Notebook1.PageIndex:=j;      f_config_system1.FormShow(self); end;
-     8 : begin f_config_internet1.Notebook1.PageIndex:=j;    f_config_internet1.FormShow(self); end;
+     0 : begin f_config_time1.Notebook1.PageIndex:=j;        f_config_time1.FormShow(self); SetHelp(self,hlpCfgDate); end;
+     1 : begin f_config_observatory1.Notebook1.PageIndex:=j; f_config_observatory1.FormShow(self); SetHelp(self,hlpCfgObs); end;
+     2 : begin f_config_chart1.Notebook1.PageIndex:=j;       f_config_chart1.FormShow(self); SetHelp(self,hlpCfgChart); end;
+     3 : begin f_config_catalog1.Notebook1.PageIndex:=j;     f_config_catalog1.FormShow(self); SetHelp(self,hlpCatalog); end;
+     4 : begin f_config_solsys1.Notebook1.PageIndex:=j;      f_config_solsys1.FormShow(self); SetHelp(self,hlpCfgSol); end;
+     5 : begin f_config_display1.Notebook1.PageIndex:=j;     f_config_display1.FormShow(self); SetHelp(self,hlpCfgDispl); end;
+     6 : begin f_config_pictures1.Notebook1.PageIndex:=j;    f_config_pictures1.FormShow(self); SetHelp(self,hlpCfgPict); end;
+     7 : begin f_config_system1.Notebook1.PageIndex:=j;      f_config_system1.FormShow(self); SetHelp(self,hlpCfgSys); end;
+     8 : begin f_config_internet1.Notebook1.PageIndex:=j;    f_config_internet1.FormShow(self); SetHelp(self,hlpCfgInt); end;
    end;
    cmain.configpage_i:=i;
    cmain.configpage_j:=j;
@@ -384,6 +389,11 @@ begin
   Fcplot.free;
   Fcmain.free;
   Fcdss.free;
+end;
+
+procedure Tf_config.HelpBtnClick(Sender: TObject);
+begin
+  HelpBtn.ShowHelp;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);

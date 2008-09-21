@@ -3,19 +3,20 @@ object f_print: Tf_print
   Height = 300
   Top = 305
   Width = 410
-  HorzScrollBar.Page = 409
-  VertScrollBar.Page = 299
   ActiveControl = prtcolor.RadioButton0
   Caption = 'Print Chart'
+  ClientHeight = 300
+  ClientWidth = 410
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object PrinterInfo: TLabel
     Left = 27
-    Height = 15
+    Height = 14
     Top = 14
-    Width = 67
+    Width = 60
     Caption = 'PrinterInfo'
-    Color = clNone
     ParentColor = False
   end
   object prtcolor: TRadioGroup
@@ -33,6 +34,8 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
+    ClientHeight = 67
+    ClientWidth = 203
     ItemIndex = 0
     Items.Strings = (
       'Color, Line mode'
@@ -57,6 +60,8 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
+    ClientHeight = 67
+    ClientWidth = 145
     Items.Strings = (
       'Portrait'
       'Landscape'
@@ -102,6 +107,8 @@ object f_print: Tf_print
     Top = 144
     Width = 380
     Caption = 'Page Margin in millimeter'
+    ClientHeight = 67
+    ClientWidth = 376
     TabOrder = 5
     object Label1: TLabel
       Left = 23
@@ -109,7 +116,6 @@ object f_print: Tf_print
       Top = 14
       Width = 25
       Caption = 'Left'
-      Color = clNone
       ParentColor = False
     end
     object Label2: TLabel
@@ -118,7 +124,6 @@ object f_print: Tf_print
       Top = 14
       Width = 34
       Caption = 'Right'
-      Color = clNone
       ParentColor = False
     end
     object Label3: TLabel
@@ -127,7 +132,6 @@ object f_print: Tf_print
       Top = 14
       Width = 26
       Caption = 'Top'
-      Color = clNone
       ParentColor = False
     end
     object Label4: TLabel
@@ -136,7 +140,6 @@ object f_print: Tf_print
       Top = 14
       Width = 45
       Caption = 'Bottom'
-      Color = clNone
       ParentColor = False
     end
     object LongEdit1: TLongEdit
@@ -215,5 +218,16 @@ object f_print: Tf_print
       OnClick = Button2Click
       TabOrder = 5
     end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 19
+    top = 252
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 56
+    top = 252
   end
 end

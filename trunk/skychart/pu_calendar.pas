@@ -25,11 +25,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, Math, cu_database, Printers,
+uses u_help, u_translation, Math, cu_database, Printers,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, IniFiles,
   jdcalendar, cu_planet, u_constant, pu_image, Buttons, ExtCtrls,
-  ActnList, StdActns, LResources;
+  ActnList, StdActns, LResources, LazHelpHTML;
 
 type
     TScFunc = procedure(csc:Tconf_skychart) of object;
@@ -51,6 +51,8 @@ type
     BtnSave: TButton;
     BtnPrint: TButton;
     BtnReset: TButton;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     SatChartBox:TCheckBox;
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
@@ -400,6 +402,13 @@ Solartitle;
 LunarTitle;
 SatTitle; 
 if ShowImage<>nil then ShowImage.SetLang;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCalInput);
+SetHelp(twilight,hlpCalTw);
+SetHelp(planets,hlpCalPla);
+SetHelp(comet,hlpCalCom);
+SetHelp(Solar,hlpCalSol);
+SetHelp(Lunar,hlpCalLuna);
 end;
 
 Procedure Tf_calendar.cometetitle;

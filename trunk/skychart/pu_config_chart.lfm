@@ -3,8 +3,6 @@ object f_config_chart: Tf_config_chart
   Height = 567
   Top = 120
   Width = 510
-  HorzScrollBar.Page = 509
-  VertScrollBar.Page = 566
   ActiveControl = CoordType.RadioButton0
   Caption = 'Charts'
   ClientHeight = 567
@@ -13,6 +11,8 @@ object f_config_chart: Tf_config_chart
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object MainPanel: TPanel
     Height = 517
     Width = 510
@@ -33,10 +33,10 @@ object f_config_chart: Tf_config_chart
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 502
-        ClientHeight = 455
+        ClientWidth = 504
+        ClientHeight = 457
         object Label31: TLabel
-          Height = 20
+          Height = 14
           Width = 76
           Caption = 'Chart Setting'
           ParentColor = False
@@ -83,8 +83,8 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 43
-            ClientWidth = 411
+            ClientHeight = 42
+            ClientWidth = 413
             Columns = 2
             ItemIndex = 0
             Items.Strings = (
@@ -117,8 +117,8 @@ object f_config_chart: Tf_config_chart
             Top = 56
             Width = 417
             Caption = 'Stars proper motion options (if available in the catalog)'
-            ClientHeight = 43
-            ClientWidth = 411
+            ClientHeight = 42
+            ClientWidth = 413
             TabOrder = 2
             object PMBox: TCheckBox
               Left = 6
@@ -171,8 +171,8 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 125
-            ClientWidth = 434
+            ClientHeight = 124
+            ClientWidth = 436
             Items.Strings = (
               'Apparent'
               'Mean of the date'
@@ -198,8 +198,8 @@ object f_config_chart: Tf_config_chart
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 82
-          ClientWidth = 444
+          ClientHeight = 81
+          ClientWidth = 446
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -223,8 +223,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 502
-        ClientHeight = 455
+        ClientWidth = 504
+        ClientHeight = 434
         object Label30: TLabel
           Height = 20
           Width = 123
@@ -663,8 +663,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 502
-        ClientHeight = 455
+        ClientWidth = 504
+        ClientHeight = 434
         object Bevel7: TBevel
           Left = 15
           Height = 375
@@ -796,7 +796,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 1
           Text = 'ARC'
@@ -813,7 +812,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 0
           Text = 'ARC'
@@ -831,7 +829,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 2
           Text = 'ARC'
@@ -848,7 +845,6 @@ object f_config_chart: Tf_config_chart
             'ARC'
             'CAR'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 3
           Text = 'ARC'
@@ -865,7 +861,6 @@ object f_config_chart: Tf_config_chart
             'ARC'
             'CAR'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 4
           Text = 'ARC'
@@ -883,7 +878,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 5
           Text = 'ARC'
@@ -901,7 +895,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 6
           Text = 'ARC'
@@ -919,7 +912,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 7
           Text = 'ARC'
@@ -937,7 +929,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 8
           Text = 'ARC'
@@ -955,7 +946,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 9
           Text = 'ARC'
@@ -973,7 +963,6 @@ object f_config_chart: Tf_config_chart
             'TAN'
             'SIN'
           )
-          MaxLength = 0
           OnSelect = ProjectionChange
           TabOrder = 10
           Text = 'ARC'
@@ -981,8 +970,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 502
-        ClientHeight = 455
+        ClientWidth = 504
+        ClientHeight = 434
         object Label29: TLabel
           Height = 20
           Width = 112
@@ -995,8 +984,8 @@ object f_config_chart: Tf_config_chart
           Top = 16
           Width = 449
           Caption = 'Stars Filter'
-          ClientHeight = 170
-          ClientWidth = 443
+          ClientHeight = 169
+          ClientWidth = 445
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
@@ -1319,8 +1308,8 @@ object f_config_chart: Tf_config_chart
           Top = 208
           Width = 449
           Caption = 'Nebulae Filter'
-          ClientHeight = 186
-          ClientWidth = 443
+          ClientHeight = 185
+          ClientWidth = 445
           TabOrder = 1
           object BigNebUnit: TLabel
             Left = 389
@@ -1779,8 +1768,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TPage
         Caption = 'Page5'
-        ClientWidth = 502
-        ClientHeight = 455
+        ClientWidth = 504
+        ClientHeight = 434
         object Label159: TLabel
           Height = 20
           Width = 69
@@ -2287,8 +2276,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page6: TPage
         Caption = 'Page6'
-        ClientWidth = 502
-        ClientHeight = 455
+        ClientWidth = 504
+        ClientHeight = 434
         object Label95: TLabel
           Height = 20
           Width = 105
@@ -2301,8 +2290,8 @@ object f_config_chart: Tf_config_chart
           Top = 40
           Width = 369
           Caption = 'Type of object to add to the list'
-          ClientHeight = 209
-          ClientWidth = 363
+          ClientHeight = 208
+          ClientWidth = 365
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32
@@ -2515,5 +2504,16 @@ object f_config_chart: Tf_config_chart
       ModalResult = 2
       TabOrder = 2
     end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 35
+    top = 531
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 88
+    top = 531
   end
 end

@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, cu_fits, cu_database,
+uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
-  EditBtn;
+  EditBtn, LazHelpHTML;
 
 type
 
@@ -39,6 +39,8 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     ResetLum: TButton;
     OnlineDSS: TCheckBox;
     OnlineDSSList: TComboBox;
@@ -182,6 +184,8 @@ OnlineDSS.caption:=rsUseOnlineDSS;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgPict);
 end;
 
 constructor Tf_config_pictures.Create(AOwner:TComponent);
