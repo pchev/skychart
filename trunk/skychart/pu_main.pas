@@ -5410,6 +5410,7 @@ begin
   quicksearch.Enabled:=false;   // add all main form focusable control here
   TimeVal.Enabled:=false;
   TimeU.Enabled:=false;
+  Activecontrol:=Multidoc1;
 {$ifndef lclgtk2}
   quicksearch.Enabled:=true;
   TimeVal.Enabled:=true;
@@ -5630,13 +5631,13 @@ end;
 
 procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart)and (Activecontrol=nil) then
+if (MultiDoc1.ActiveObject is Tf_chart) and ((Activecontrol=nil)or(Activecontrol=Multidoc1)) then
    (MultiDoc1.ActiveObject as Tf_chart).FormKeyDown(Sender,Key,Shift);
 end;
 
 procedure Tf_main.FormKeyPress(Sender: TObject; var Key: Char);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart)and (Activecontrol=nil) then
+if (MultiDoc1.ActiveObject is Tf_chart)and ((Activecontrol=nil)or(Activecontrol=Multidoc1)) then
    (MultiDoc1.ActiveObject as Tf_chart).FormKeyPress(Sender,Key);
 end;
 
