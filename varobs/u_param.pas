@@ -48,7 +48,7 @@ aavsochartmag: array[0..13] of string=('9','9','11','11','12','12','14.5','14.5'
 aavsochartnorth: array[0..13] of string=('down','up','down','up','down','up','down','up','down','up','down','up','down','up');
 aavsocharteast: array[0..1] of string=('right','left');
 
-skychartopt = '-unique -server 3292';
+skychartopt = '--unique';
 
 {$ifdef linux}
       DefaultPrivateDir='~/cartes_du_ciel/varobs';
