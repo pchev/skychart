@@ -2,10 +2,11 @@
 
 Septenber 21 changes:
 
-Add contextual help.
+Add contextual help, press F1 key.
 Add main configuration window again.
 Fix telescope port selection on Linux.
 Add command line parameter --config to specify a configuration .ini file.
+Add command line parameter --unique to allow only one instance to run 
 
 Зміни після версії 3.0.1.4 :
 
