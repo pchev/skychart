@@ -126,9 +126,10 @@ var
   dummy_ext : extended;
   ftrace : textfile;
   
-{$ifdef lclgtk2} {$define cdcutf8} {$endif}
-{$ifdef lclqt} {$define cdcutf8} {$endif}
-{$ifdef lclcarbon} {$define cdcutf8} {$endif}
+{$ifdef lclgtk2} {$define cdcutf8} {$define greekutf8} {$endif}
+{$ifdef lclqt} {$define cdcutf8} {$define greekutf8} {$endif}
+{$ifdef lclcarbon} {$define cdcutf8} {$define greekutf8} {$endif}
+{$ifdef lclwin32} {$define cdcutf8} {$endif}
 
 function CondUTF8Decode(v:string):string;
 begin
@@ -152,7 +153,7 @@ function GreekSymbolUtf8(v:string):string;
 var c,n : string;
     i: integer;
 begin
-{$ifdef cdcutf8}
+{$ifdef greekutf8}
 result:='';
 c:=lowercase(trim(copy(v,1,1)));
 n:=trim(copy(v,2,1));
