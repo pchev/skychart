@@ -1,5 +1,12 @@
 Комментарии к версии 3.0.1.5 SVN
 
+Septenber 21 changes:
+
+Add contextual help.
+Add main configuration window again.
+Fix telescope port selection on Linux.
+Add command line parameter --config to specify a configuration .ini file.
+
 Изменения после версии 3.0.1.4 :
 
 Модуль VarObs теперь часть Skychart.

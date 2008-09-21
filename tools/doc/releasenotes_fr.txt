@@ -1,5 +1,12 @@
 Version 3.0.1.5 SVN  Notes de la version
 
+Changement du 21 septembre:
+
+Ajout de l'aide contextuelle.
+Ajoute a nouveau la fenêtre principale de configuration.
+Corrige le choix du port du télescope sous Linux.
+Ajout de l'option de ligne de commande --config pour indiquer le fichier .ini à utiliser.
+
 Changements depuis la version 3.0.1.4:
 
 Module pour les étoiles variables VarObs:
