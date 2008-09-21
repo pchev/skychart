@@ -1011,7 +1011,7 @@ Procedure TVarForm.InitSkyChart;
 var resp : string;
     timeo:TDateTime;
 begin
-ExecNoWait(skychart);
+ExecNoWait(skychart+blank+skychartopt);
 if tcpclient=nil then begin
   tcpclient:=TCDCclient.Create;
 end;

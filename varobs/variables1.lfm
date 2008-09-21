@@ -5,7 +5,7 @@ object VarForm: TVarForm
   Width = 800
   ActiveControl = Grid1
   Caption = 'Variable stars observer'
-  ClientHeight = 600
+  ClientHeight = 581
   ClientWidth = 800
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -118,10 +118,11 @@ object VarForm: TVarForm
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = False
   ShowHint = True
   LCLVersion = '0.9.25'
   object Grid1: TStringGrid
-    Height = 528
+    Height = 509
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 800
@@ -133,8 +134,11 @@ object VarForm: TVarForm
     FixedColor = clBtnFace
     FixedCols = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goRowSelect, goThumbTracking, goSmoothScroll]
+    ParentColor = False
     RowCount = 2
     TabOrder = 0
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
     OnMouseUp = Grid1MouseUp
     OnSelectCell = Grid1SelectCell
   end
@@ -213,8 +217,8 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 16
-      ClientWidth = 321
+      ClientHeight = 22
+      ClientWidth = 323
       Columns = 3
       ItemIndex = 0
       Items.Strings = (
