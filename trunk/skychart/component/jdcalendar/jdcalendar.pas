@@ -758,6 +758,7 @@ begin
   ReadOnly:=true;
   Button.Glyph.LoadFromLazarusResource('BtnDatePicker');
   Button.OnClick:= @DoButtonClick;
+  Button.Enabled:=true;
   UpdDate;
 end;
 
