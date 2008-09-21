@@ -1,0 +1,162 @@
+# translation of help.fr.po
+# Patrick Chevalley <pch@freesurf.ch>, 2008.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2008-09-21 15:23+0200\n"
+"Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
+"Project-Id-Version: help.fr\n"
+"POT-Creation-Date: \n"
+"Language-Team:  <translation@ap-i.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: u_help:hlpsearch
+msgid "advanced_search.html"
+msgstr "recherche_avancee.html"
+
+#: u_help:hlpcalast
+msgid "calendar_asteroid.html"
+msgstr "calendrier_asteroide.html"
+
+#: u_help:hlpcalcom
+msgid "calendar_comet.html"
+msgstr "calendrier_comete.html"
+
+#: u_help:hlpcalinput
+msgid "calendar_input_area.html"
+msgstr "calendrier_zone_de_saisie.html"
+
+#: u_help:hlpcalluna
+msgid "calendar_lunar_eclipses.html"
+msgstr "calendrier_eclipses_lunaires.html"
+
+#: u_help:hlpcalpla
+msgid "calendar_planet.html"
+msgstr "calendrier_planete.html"
+
+#: u_help:hlpcalsol
+msgid "calendar_solar_eclipses.html"
+msgstr "calendrier_eclipses_solaires.html"
+
+#: u_help:hlpcaltw
+msgid "calendar_twilight.html"
+msgstr "calendrier_crepuscule.html"
+
+#: u_help:hlpcatalog
+msgid "catalog.html"
+msgstr "catalogues.html"
+
+#: u_help:hlpcfgchart
+msgid "chart_coordinates.html"
+msgstr "carte_coordonnees.html"
+
+#: u_help:hlpcfgdate
+msgid "date_time.html"
+msgstr "date_heure.html"
+
+#: u_help:hlpinfo
+msgid "detailed_information.html"
+msgstr "information_detaillee.html"
+
+#: u_help:hlpcfgdispl
+msgid "display.html"
+msgstr "affichage.html"
+
+#: u_help:hlpbasedir
+msgid "en/documentation/"
+msgstr "fr/documentation/"
+
+#: u_help:hlpcfgint
+msgid "internet.html"
+msgstr "internet.html"
+
+#: u_help:hlpbarleft
+msgid "left_bar.html"
+msgstr "barre_de_gauche.html"
+
+#: u_help:hlpbarmain
+msgid "main_bar.html"
+msgstr "barre_principale.html"
+
+#: u_help:hlpmenuchart
+msgid "menuchart.html"
+msgstr "menucarte.html"
+
+#: u_help:hlpmenuedit
+msgid "menuedit.html"
+msgstr "menuedition.html"
+
+#: u_help:hlpmenufile
+msgid "menufile.html"
+msgstr "menufichier.html"
+
+#: u_help:hlpmenuhelp
+msgid "menuhelp.html"
+msgstr "menuaide.html"
+
+#: u_help:hlpmenusetup
+msgid "menusetup.html"
+msgstr "menuconfiguration.html"
+
+#: u_help:hlpmenutel
+msgid "menutelescope.html"
+msgstr "menutelescope.html"
+
+#: u_help:hlpmenuview
+msgid "menuview.html"
+msgstr "menuvoir.html"
+
+#: u_help:hlpmenuwin
+msgid "menuwindow.html"
+msgstr "menufenetre.html"
+
+#: u_help:hlpbarobj
+msgid "object_bar.html"
+msgstr "barre_d_objet.html"
+
+#: u_help:hlpobjlist
+msgid "object_list.html"
+msgstr "list_des_objets.html"
+
+#: u_help:hlpcfgobs
+msgid "observatory.html"
+msgstr "observatoire.html"
+
+#: u_help:hlpcfgpict
+msgid "pictures.html"
+msgstr "images.html"
+
+#: u_help:hlpposition
+msgid "position.html"
+msgstr "position.html"
+
+#: u_help:hlpbarright
+msgid "right_bar.html"
+msgstr "barre_de_droite.html"
+
+#: u_help:hlpsrvinfo
+msgid "server_information.html"
+msgstr "information_sur_le_serveur.html"
+
+#: u_help:hlpsetfov
+msgid "set_fov.html"
+msgstr "regle_le_champ.html"
+
+#: u_help:hlpcfgsol
+msgid "solar_system.html"
+msgstr "systeme_solaire.html"
+
+#: u_help:hlpindex
+msgid "start.html"
+msgstr "start.html"
+
+#: u_help:hlpbarstatus
+msgid "status_bar.html"
+msgstr "barre_d_etat.html"
+
+#: u_help:hlpcfgsys
+msgid "system.html"
+msgstr "systeme.html"
+
