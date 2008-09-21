@@ -666,6 +666,7 @@ begin
   DF.BorderStyle:=FBorderStyle;
   DF.FormStyle:=fsStayOnTop;
   DF.Font:=FFont;
+  DF.AutoScroll:=false;
   {$ifdef lclwince}
   DF.Width:=screen.Width;
   DF.Height:=screen.Height;
