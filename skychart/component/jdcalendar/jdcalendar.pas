@@ -657,7 +657,6 @@ var
     cancelButton:TButton;
 {$else}
     okButton:TBitBtn;
-    cancelButton:TBitBtn;
 {$endif}
     pos:TPoint;
 begin
@@ -720,29 +719,16 @@ begin
 {$ifdef lclwince}
   cancelButton:=TButton.Create(Self);
   cancelButton.Caption:='X';
-{$else}
-  cancelButton:=TBitBtn.Create(Self);
-  cancelButton.Kind:=bkCancel;
-  cancelButton.Caption:='';
-  cancelButton.layout:=blGlyphTop;
 {$endif}
-  with cancelButton do begin
-    Parent:=JDCalendar.BottomPanel;
-    Font:=FFont;
-    ModalResult:=mrCancel;
-    Width:=30;
-    Height:=25;
-    Cancel:=True;
-    top:=2;
-    left:=okButton.left-width-5;
-  end;
 
   Result:=DF.ShowModal=mrOK;
   if Result then savejd:=JDCalendar.JD;
   
   FreeAndNil(JDCalendar);
   FreeAndNil(okButton);
+{$ifdef lclwince}
   FreeAndNil(cancelButton);
+{$endif}
   FreeAndNil(DF);
 end;
 
