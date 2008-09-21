@@ -31,7 +31,7 @@ interface
 uses
   {$ifdef win32}
     Windows,
-  {$endif}  dl,
+  {$endif}
   u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
