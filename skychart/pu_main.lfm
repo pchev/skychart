@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 860
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 557
+  ClientHeight = 561
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -22,13 +22,13 @@ object f_main: Tf_main
   LCLVersion = '0.9.25'
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 471
+    Height = 475
     Top = 54
     Width = 811
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
-    ClientHeight = 471
+    ClientHeight = 475
     ClientWidth = 811
     Color = clBlack
     FullRepaint = False
@@ -2664,17 +2664,17 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 471
+    Height = 475
     Top = 54
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 471
+    ClientHeight = 475
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 471
+      Height = 475
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2774,17 +2774,17 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 835
-    Height = 471
+    Height = 475
     Top = 54
     Width = 25
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 471
+    ClientHeight = 475
     ClientWidth = 25
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 221
+      Height = 225
       Top = 250
       Width = 25
       Align = alClient
@@ -3016,7 +3016,7 @@ object f_main: Tf_main
   end
   object PanelBottom: TPanel
     Height = 32
-    Top = 525
+    Top = 529
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -3319,7 +3319,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 317
-        Height = 23
+        Height = 21
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3327,6 +3327,8 @@ object f_main: Tf_main
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
+        ItemHeight = 13
+        MaxLength = -1
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnEnter = ToolBar1Enter
@@ -3388,13 +3390,15 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 25
+        Height = 21
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
+        ItemHeight = 13
+        MaxLength = -1
         OnEnter = ToolBar1Enter
         OnMouseMove = Toolbar1MouseMove
         ParentFont = False
