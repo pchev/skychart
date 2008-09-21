@@ -1,5 +1,3 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('Tf_printsetup','FORMDATA',[
   'TPF0'#13'Tf_printsetup'#12'f_printsetup'#4'Left'#3'g'#1#6'Height'#3#2#1#3'To'
   +'p'#2'i'#5'Width'#3#147#1#13'ActiveControl'#7#7'qtsetup'#11'BorderStyle'#7#13
