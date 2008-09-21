@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, u_projection, cu_database,
+uses u_help, u_translation, u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, unzip,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
-  downloaddialog, EditBtn, Process;
+  downloaddialog, EditBtn, Process, LazHelpHTML;
 
 type
 
@@ -46,6 +46,8 @@ type
     astdeldate_m: TEdit;
     aststrtdate_y: TEdit;
     aststrtdate_m: TEdit;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label3: TLabel;
     Panel1: TPanel;
     XplanetMsg: TLabel;
@@ -407,6 +409,8 @@ astsymbol.Items[1]:=rsProportional2;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgSol);
 end;
 
 constructor Tf_config_solsys.Create(AOwner:TComponent);

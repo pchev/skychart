@@ -3,20 +3,24 @@ object f_printsetup: Tf_printsetup
   Height = 258
   Top = 105
   Width = 403
-  HorzScrollBar.Page = 402
-  VertScrollBar.Page = 257
   ActiveControl = qtsetup
   BorderStyle = bsSizeToolWin
   Caption = 'Printer Setup'
+  ClientHeight = 258
+  ClientWidth = 403
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object qtoption: TPanel
     Left = 10
     Height = 110
     Top = 83
     Width = 383
+    ClientHeight = 110
+    ClientWidth = 383
     FullRepaint = False
     TabOrder = 1
     object qtprintername: TLabel
@@ -25,7 +29,6 @@ object f_printsetup: Tf_printsetup
       Top = 49
       Width = 65
       Caption = '                '
-      Color = clNone
       ParentColor = False
     end
     object qtprintresol: TLabel
@@ -34,7 +37,6 @@ object f_printsetup: Tf_printsetup
       Top = 71
       Width = 77
       Caption = '                   '
-      Color = clNone
       ParentColor = False
     end
     object Label2: TLabel
@@ -43,7 +45,6 @@ object f_printsetup: Tf_printsetup
       Top = 49
       Width = 46
       Caption = 'Printer:'
-      Color = clNone
       ParentColor = False
     end
     object Label3: TLabel
@@ -52,7 +53,6 @@ object f_printsetup: Tf_printsetup
       Top = 71
       Width = 70
       Caption = 'Resolution:'
-      Color = clNone
       ParentColor = False
     end
     object Label7: TLabel
@@ -61,7 +61,6 @@ object f_printsetup: Tf_printsetup
       Top = 16
       Width = 337
       Caption = 'Select the system printer and options you want to use'
-      Color = clNone
       ParentColor = False
     end
     object qtsetup: TButton
@@ -80,6 +79,8 @@ object f_printsetup: Tf_printsetup
     Height = 110
     Top = 83
     Width = 383
+    ClientHeight = 110
+    ClientWidth = 383
     FullRepaint = False
     TabOrder = 2
     object Label1: TLabel
@@ -88,7 +89,6 @@ object f_printsetup: Tf_printsetup
       Top = 8
       Width = 113
       Caption = 'Raster Resolution'
-      Color = clNone
       ParentColor = False
     end
     object Label4: TLabel
@@ -97,7 +97,6 @@ object f_printsetup: Tf_printsetup
       Top = 58
       Width = 226
       Caption = 'Command to use to process the file.'
-      Color = clNone
       ParentColor = False
     end
     object Label5: TLabel
@@ -106,7 +105,6 @@ object f_printsetup: Tf_printsetup
       Top = 28
       Width = 127
       Caption = 'dpi for 8"x11" paper'
-      Color = clNone
       ParentColor = False
     end
     object Label6: TLabel
@@ -115,7 +113,6 @@ object f_printsetup: Tf_printsetup
       Top = 8
       Width = 133
       Caption = 'Path to save the file :'
-      Color = clNone
       ParentColor = False
     end
     object prtres: TLongEdit
@@ -179,6 +176,8 @@ object f_printsetup: Tf_printsetup
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
+    ClientHeight = 44
+    ClientWidth = 379
     Columns = 3
     Items.Strings = (
       'System Printer'
@@ -215,5 +214,16 @@ object f_printsetup: Tf_printsetup
   object PrintDialog1: TPrintDialog
     left = 216
     top = 64
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 10
+    top = 219
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 55
+    top = 219
   end
 end

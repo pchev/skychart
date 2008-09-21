@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
-  EditBtn, LCLType, enhedits;
+  EditBtn, LCLType, enhedits, LazHelpHTML;
 
 type
 
@@ -56,6 +56,8 @@ type
     GroupBox6: TGroupBox;
     GroupBox7: TGroupBox;
     GroupBox8: TGroupBox;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label5: TLabel;
     Label68: TLabel;
     Label8: TLabel;
@@ -646,6 +648,8 @@ Button5.caption:=rsCancel;
 label8.caption:=rsDrawALineTha;
 Label68.caption:=rsYears;
 red_moveBox.Caption:=rsReduceDetail;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgDispl);
 end;
 
 constructor Tf_config_display.Create(AOwner:TComponent);

@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, u_projection,
+uses u_help, u_translation, u_constant, u_util, u_projection,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel, jdcalendar;
+  ButtonPanel, jdcalendar, LazHelpHTML;
 
 type
 
@@ -45,6 +45,8 @@ type
     BitBtn4: TButton;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     JDEdit: TFloatEdit;
     Label1: TLabel;
     tzLabel: TLabel;
@@ -229,6 +231,8 @@ CheckGroup2.Items[5]:=rsSecond;
 ADBC.Items[0]:=rsAD;
 ADBC.Items[1]:=rsBC;
 Button4.Caption:=rsMoreOptions;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgDate);
 end;
 
 constructor Tf_config_time.Create(AOwner:TComponent);

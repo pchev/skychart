@@ -35,7 +35,7 @@ object f_config_time: Tf_config_time
       object Page1: TPage
         Caption = 'Time'
         ClientWidth = 470
-        ClientHeight = 485
+        ClientHeight = 487
         object Label142: TLabel
           Left = 286
           Height = 20
@@ -238,7 +238,7 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 22
+            ClientHeight = 24
             ClientWidth = 133
             Columns = 2
             Items.Strings = (
@@ -445,25 +445,25 @@ object f_config_time: Tf_config_time
         end
         object Label178: TLabel
           Left = 358
-          Height = 16
+          Height = 14
           Top = 46
-          Width = 42
+          Width = 40
           Caption = 'every  '
           ParentColor = False
         end
         object Label179: TLabel
           Left = 220
-          Height = 16
+          Height = 14
           Top = 46
-          Width = 105
+          Width = 97
           Caption = 'Number of steps'
           ParentColor = False
         end
         object Label56: TLabel
           Left = 8
-          Height = 16
+          Height = 14
           Top = 6
-          Width = 215
+          Width = 195
           Caption = 'Plot the position of moving object.'
           ParentColor = False
         end
@@ -482,7 +482,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 119
+          ClientHeight = 121
           ClientWidth = 133
           Items.Strings = (
             'Days'
@@ -495,9 +495,9 @@ object f_config_time: Tf_config_time
         end
         object stepline: TCheckBox
           Left = 8
-          Height = 22
+          Height = 21
           Top = 254
-          Width = 279
+          Width = 253
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           TabOrder = 6
@@ -584,7 +584,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 55
+          ClientHeight = 57
           ClientWidth = 434
           Columns = 3
           Items.Strings = (
@@ -700,5 +700,16 @@ object f_config_time: Tf_config_time
       ModalResult = 2
       TabOrder = 2
     end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 15
+    top = 526
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 64
+    top = 526
   end
 end

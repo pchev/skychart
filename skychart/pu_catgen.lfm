@@ -2908,7 +2908,7 @@ object f_catgen: Tf_catgen
       ClientHeight = 434
       object Label6: TLabel
         Left = 14
-        Height = 70
+        Height = 46
         Top = 24
         Width = 86
         Caption = 'Select the type of object in your catalog'
@@ -2917,25 +2917,25 @@ object f_catgen: Tf_catgen
       end
       object Label8: TLabel
         Left = 14
-        Height = 16
+        Height = 14
         Top = 224
-        Width = 114
+        Width = 104
         Caption = 'Input Catalog files'
         ParentColor = False
       end
       object Label10: TLabel
         Left = 14
-        Height = 16
+        Height = 14
         Top = 164
-        Width = 125
+        Width = 114
         Caption = 'Catalog short name'
         ParentColor = False
       end
       object Label13: TLabel
         Left = 14
-        Height = 16
+        Height = 14
         Top = 192
-        Width = 119
+        Width = 108
         Caption = 'Catalog long name'
         ParentColor = False
       end
@@ -3024,7 +3024,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 120
+        ClientHeight = 122
         ClientWidth = 223
         ItemIndex = 0
         Items.Strings = (
@@ -3077,7 +3077,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 39
+        ClientHeight = 41
         ClientWidth = 343
         Columns = 2
         ItemIndex = 0
@@ -3092,7 +3092,7 @@ object f_catgen: Tf_catgen
     object TabSheet2: TPage
       Caption = '2'
       ClientWidth = 385
-      ClientHeight = 409
+      ClientHeight = 411
       ImageIndex = 4
       object Label2: TLabel
         Left = 16
@@ -3108,7 +3108,7 @@ object f_catgen: Tf_catgen
         Top = 224
         Width = 345
         Caption = 'Default Nebulae parameters'
-        ClientHeight = 175
+        ClientHeight = 177
         ClientWidth = 341
         TabOrder = 5
         object Label11: TLabel
@@ -3234,7 +3234,7 @@ object f_catgen: Tf_catgen
         Top = 224
         Width = 345
         Caption = 'Default Outline parameters'
-        ClientHeight = 175
+        ClientHeight = 177
         ClientWidth = 341
         TabOrder = 6
         object Label18: TLabel
@@ -3308,7 +3308,7 @@ object f_catgen: Tf_catgen
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 40
+          ClientHeight = 42
           ClientWidth = 312
           Columns = 3
           ItemIndex = 0
@@ -3345,7 +3345,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 88
+        ClientHeight = 90
         ClientWidth = 176
         ItemIndex = 0
         Items.Strings = (
@@ -3372,7 +3372,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 88
+        ClientHeight = 90
         ClientWidth = 188
         ItemIndex = 0
         Items.Strings = (
@@ -3389,7 +3389,7 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 130
         Caption = 'Coordinates Equinox'
-        ClientHeight = 40
+        ClientHeight = 42
         ClientWidth = 126
         TabOrder = 2
         object FloatEdit1: TFloatEdit
@@ -3408,7 +3408,7 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 128
         Caption = 'Maximum magnitude'
-        ClientHeight = 40
+        ClientHeight = 42
         ClientWidth = 124
         TabOrder = 4
         object FloatEdit2: TFloatEdit
@@ -3427,7 +3427,7 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 107
         Caption = 'Position Epoch'
-        ClientHeight = 40
+        ClientHeight = 42
         ClientWidth = 103
         TabOrder = 3
         object FloatEdit3: TFloatEdit
@@ -3444,7 +3444,7 @@ object f_catgen: Tf_catgen
     object TabSheet3: TPage
       Caption = '3'
       ClientWidth = 385
-      ClientHeight = 409
+      ClientHeight = 411
       ImageIndex = 1
       object Label4: TLabel
         Left = 134
@@ -3554,6 +3554,7 @@ object f_catgen: Tf_catgen
         TabOrder = 6
         OnMouseUp = Memo1MouseUp
         BookMarkOptions.Xoffset = -18
+        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
         Keystrokes = <        
           item
@@ -3878,12 +3879,13 @@ object f_catgen: Tf_catgen
           end>
         ReadOnly = True
         ScrollBars = ssHorizontal
+        SelectedColor.OnChange = nil
       end
     end
     object TabSheet4: TPage
       Caption = '4'
       ClientWidth = 385
-      ClientHeight = 409
+      ClientHeight = 411
       ImageIndex = 2
       object Label1: TLabel
         Left = 24
@@ -3908,7 +3910,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 104
+        ClientHeight = 106
         ClientWidth = 317
         ItemIndex = 0
         Items.Strings = (
@@ -3925,7 +3927,7 @@ object f_catgen: Tf_catgen
         Top = 296
         Width = 321
         Caption = 'Output Directory'
-        ClientHeight = 79
+        ClientHeight = 81
         ClientWidth = 317
         TabOrder = 0
         object DirectoryEdit1: TDirectoryEdit
@@ -3955,7 +3957,7 @@ object f_catgen: Tf_catgen
         Top = 176
         Width = 321
         Caption = 'Search Index'
-        ClientHeight = 83
+        ClientHeight = 85
         ClientWidth = 317
         TabOrder = 1
         object CheckBox3: TCheckBox
@@ -3991,7 +3993,7 @@ object f_catgen: Tf_catgen
     object TabSheet5: TPage
       Caption = '5'
       ClientWidth = 385
-      ClientHeight = 409
+      ClientHeight = 411
       ImageIndex = 4
       object Label9: TLabel
         Left = 24
@@ -4035,7 +4037,7 @@ object f_catgen: Tf_catgen
     object TabSheet6: TPage
       Caption = '6'
       ClientWidth = 385
-      ClientHeight = 409
+      ClientHeight = 411
       ImageIndex = 5
       object Label14: TLabel
         Left = 22
@@ -4079,7 +4081,7 @@ object f_catgen: Tf_catgen
     object TabSheet7: TPage
       Caption = '7'
       ClientWidth = 385
-      ClientHeight = 409
+      ClientHeight = 411
       ImageIndex = 6
       object Label17: TLabel
         Left = 30
@@ -4123,7 +4125,7 @@ object f_catgen: Tf_catgen
     object TabSheet8: TPage
       Caption = '8'
       ClientWidth = 385
-      ClientHeight = 409
+      ClientHeight = 411
       ImageIndex = 7
       object Label20: TLabel
         Left = 70
@@ -4348,5 +4350,16 @@ object f_catgen: Tf_catgen
   object ColorDialog1: TColorDialog
     left = 224
     top = 8
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 138
+    top = 103
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 183
+    top = 103
   end
 end

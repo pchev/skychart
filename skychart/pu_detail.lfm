@@ -11,6 +11,7 @@ object f_detail: Tf_detail
   Font.Height = -14
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
+  ParentFont = False
   LCLVersion = '0.9.25'
   object Panel1: TPanel
     Height = 50
@@ -101,5 +102,16 @@ object f_detail: Tf_detail
       Action = EditCopy1
       OnClick = EditCopy1Execute
     end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 185
+    top = 144
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 248
+    top = 144
   end
 end

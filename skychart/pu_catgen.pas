@@ -24,11 +24,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, pu_progressbar, pu_catgenadv, GSCconst, skylibcat, gcatunit,
+uses u_help, u_translation, u_constant, u_util, pu_progressbar, pu_catgenadv, GSCconst, skylibcat, gcatunit,
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
   Buttons, Math, Inifiles, Grids, mwFixedRecSort, mwCompFrom,
-  LResources, EditBtn, SynEdit;
+  LResources, EditBtn, SynEdit, LazHelpHTML;
 
 const
 l_sup =10;
@@ -38,6 +38,8 @@ type
   { Tf_catgen }
 
   Tf_catgen = class(TForm)
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label22: TLabel;
     ListBox1: TListBox;
     PageControl1: TNoteBook;
@@ -501,6 +503,8 @@ end;
 with stringgrid4 do begin
 cells[0, 0]:=rsCatalogStrin;
 end;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCatalog);
 end;
 
 procedure Tf_catgen.FormCreate(Sender: TObject);

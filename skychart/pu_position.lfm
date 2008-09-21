@@ -3,15 +3,16 @@ object f_position: Tf_position
   Height = 282
   Top = 105
   Width = 477
-  HorzScrollBar.Page = 476
-  VertScrollBar.Page = 281
-  ActiveControl = Button1
   BorderStyle = bsToolWindow
   Caption = 'Position'
+  ClientHeight = 282
+  ClientWidth = 477
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object Button1: TButton
     Left = 144
     Height = 25
@@ -38,6 +39,8 @@ object f_position: Tf_position
     Height = 77
     Top = 88
     Width = 464
+    ClientHeight = 77
+    ClientWidth = 464
     FullRepaint = False
     TabOrder = 1
     object coord1: TLabel
@@ -46,7 +49,6 @@ object f_position: Tf_position
       Top = 36
       Width = 17
       Caption = 'Az'
-      Color = clNone
       ParentColor = False
     end
     object coord2: TLabel
@@ -55,7 +57,6 @@ object f_position: Tf_position
       Top = 36
       Width = 17
       Caption = 'Alt'
-      Color = clNone
       ParentColor = False
     end
     object coord: TLabel
@@ -64,7 +65,6 @@ object f_position: Tf_position
       Top = 8
       Width = 37
       Caption = 'coord'
-      Color = clNone
       ParentColor = False
     end
     object long: TRaDec
@@ -93,6 +93,8 @@ object f_position: Tf_position
     Height = 77
     Top = 3
     Width = 464
+    ClientHeight = 77
+    ClientWidth = 464
     FullRepaint = False
     TabOrder = 0
     object eq1: TLabel
@@ -101,7 +103,6 @@ object f_position: Tf_position
       Top = 36
       Width = 20
       Caption = 'RA'
-      Color = clNone
       ParentColor = False
     end
     object eq2: TLabel
@@ -110,7 +111,6 @@ object f_position: Tf_position
       Top = 36
       Width = 20
       Caption = 'DE'
-      Color = clNone
       ParentColor = False
     end
     object Equinox: TLabel
@@ -119,7 +119,6 @@ object f_position: Tf_position
       Top = 8
       Width = 51
       Caption = 'Equinox'
-      Color = clNone
       ParentColor = False
     end
     object ra: TRaDec
@@ -147,6 +146,8 @@ object f_position: Tf_position
     Height = 49
     Top = 176
     Width = 464
+    ClientHeight = 49
+    ClientWidth = 464
     FullRepaint = False
     TabOrder = 2
     object Label3: TLabel
@@ -155,7 +156,6 @@ object f_position: Tf_position
       Top = 14
       Width = 29
       Caption = 'FOV'
-      Color = clNone
       ParentColor = False
     end
     object Label4: TLabel
@@ -164,7 +164,6 @@ object f_position: Tf_position
       Top = 14
       Width = 54
       Caption = 'Rotation'
-      Color = clNone
       ParentColor = False
     end
     object Fov: TRaDec
@@ -191,5 +190,16 @@ object f_position: Tf_position
       MaxValue = 180
       Digits = 5
     end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 31
+    top = 241
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 80
+    top = 241
   end
 end

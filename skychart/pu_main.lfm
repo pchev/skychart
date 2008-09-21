@@ -3388,7 +3388,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 29
+        Height = 25
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -4212,7 +4212,6 @@ object f_main: Tf_main
       Hint = 'Help contents'
       ImageIndex = 12
       OnExecute = HelpContents1Execute
-      ShortCut = 112
     end
     object Search1: TAction
       Category = 'Search'
@@ -7702,5 +7701,16 @@ object f_main: Tf_main
       Action = SaveConfigOnExit
       OnClick = SaveConfigOnExitExecute
     end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 104
+    top = 267
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 146
+    top = 267
   end
 end

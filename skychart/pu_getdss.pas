@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation,
+uses u_help, u_translation,
   dynlibs, u_constant, u_util, Math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, LResources, downloaddialog, IpHtml;
+  StdCtrls, Buttons, LResources, downloaddialog, IpHtml, LazHelpHTML;
 
 // GetDss.dll interface
   type
@@ -76,6 +76,8 @@ type
 
   Tf_getdss = class(TForm)
     DownloadDialog1: TDownloadDialog;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     IpHtmlPanel1: TIpHtmlPanel;
     ListBox1: TListBox;
     Label1: TLabel;
@@ -122,6 +124,8 @@ begin
 Caption:=rsListOfAvaila;
 BitBtn1.caption:=rsOK;
 BitBtn2.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgPict);
 end;
 
 procedure Tf_getdss.FormCreate(Sender: TObject);

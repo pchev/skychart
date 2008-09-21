@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, cu_database,
+uses u_help, u_translation, u_constant, u_util, cu_database,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Buttons, LResources;
+  Dialogs, StdCtrls, ExtCtrls, Buttons, LResources, LazHelpHTML;
 
 const maxcombo = 50;
 
@@ -47,6 +47,8 @@ type
     CometFilter: TEdit;
     AsteroidPanel: TPanel;
     AsteroidFilter: TEdit;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     RadioGroup1: TRadioGroup;
     IDPanel: TPanel;
     Button1: TButton;
@@ -167,6 +169,8 @@ RadioGroup1.Items[9]:=rsConstellatio;
 RadioGroup1.Items[10]:=rsOtherLinesCa;
 Button1.caption:=rsFind;
 Button2.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpSearch);
 end;
 
 procedure Tf_search.FormShow(Sender: TObject);

@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_config_time','FORMDATA',[
   'TPF0'#14'Tf_config_time'#13'f_config_time'#4'Left'#3'6'#2#6'Height'#3'4'#2#3
   +'Top'#2'i'#5'Width'#3#218#1#13'ActiveControl'#7#6'nbstep'#11'BorderIcons'#11
@@ -10,7 +12,7 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'or'#8#8'TabOrder'#2#0#0#9'TNotebook'#9'Notebook1'#6'Height'#3#2#2#5'Width'#3
   +#218#1#5'Align'#7#8'alClient'#7'Anchors'#11#6'akLeft'#7'akRight'#8'akBottom'
   +#0#9'PageIndex'#2#1#8'ShowTabs'#8#8'TabOrder'#2#0#0#5'TPage'#5'Page1'#7'Capt'
-  +'ion'#6#4'Time'#11'ClientWidth'#3#214#1#12'ClientHeight'#3#229#1#0#6'TLabel'
+  +'ion'#6#4'Time'#11'ClientWidth'#3#214#1#12'ClientHeight'#3#231#1#0#6'TLabel'
   +#8'Label142'#4'Left'#3#30#1#6'Height'#2#20#3'Top'#2'>'#5'Width'#2'2'#7'Capti'
   +'on'#6#7'Seconds'#11'ParentColor'#8#0#0#9'TCheckBox'#9'CheckBox2'#4'Left'#2
   +'('#6'Height'#2#21#3'Top'#2'8'#5'Width'#3#133#0#7'Caption'#6#19'Auto-refresh'
@@ -58,7 +60,7 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizo'
   +'ntal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChil'
   +'ds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizi'
-  +'ng.ControlsPerLine'#2#2#12'ClientHeight'#2#22#11'ClientWidth'#3#133#0#7'Col'
+  +'ng.ControlsPerLine'#2#2#12'ClientHeight'#2#24#11'ClientWidth'#3#133#0#7'Col'
   +'umns'#2#2#13'Items.Strings'#1#6#2'AD'#6#2'BC'#0#7'OnClick'#7#10'DateChange'
   +#8'TabOrder'#2#3#0#0#9'TSpinEdit'#6'd_year'#4'Left'#2'8'#6'Height'#2#22#3'To'
   +'p'#2#19#5'Width'#2'K'#8'MaxValue'#3' N'#8'OnChange'#7#10'DateChange'#8'TabO'
@@ -162,11 +164,11 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'SpeedButton'#9'stepreset'#4'Left'#3#220#0#6'Height'#2#25#3'Top'#3#213#0#5'W'
   +'idth'#2'Q'#7'Caption'#6#6'Reset '#5'Color'#7#9'clBtnFace'#6'Layout'#7#10'bl'
   +'GlyphTop'#9'NumGlyphs'#2#2#7'OnClick'#7#14'stepresetClick'#0#0#6'TLabel'#8
-  +'Label178'#4'Left'#3'f'#1#6'Height'#2#16#3'Top'#2'.'#5'Width'#2'*'#7'Caption'
+  +'Label178'#4'Left'#3'f'#1#6'Height'#2#14#3'Top'#2'.'#5'Width'#2'('#7'Caption'
   +#6#7'every  '#11'ParentColor'#8#0#0#6'TLabel'#8'Label179'#4'Left'#3#220#0#6
-  +'Height'#2#16#3'Top'#2'.'#5'Width'#2'i'#7'Caption'#6#15'Number of steps'#11
-  +'ParentColor'#8#0#0#6'TLabel'#7'Label56'#4'Left'#2#8#6'Height'#2#16#3'Top'#2
-  +#6#5'Width'#3#215#0#7'Caption'#6'#Plot the position of moving object.'#11'Pa'
+  +'Height'#2#14#3'Top'#2'.'#5'Width'#2'a'#7'Caption'#6#15'Number of steps'#11
+  +'ParentColor'#8#0#0#6'TLabel'#7'Label56'#4'Left'#2#8#6'Height'#2#14#3'Top'#2
+  +#6#5'Width'#3#195#0#7'Caption'#6'#Plot the position of moving object.'#11'Pa'
   +'rentColor'#8#0#0#11'TRadioGroup'#8'stepunit'#4'Left'#3'>'#1#6'Height'#3#136
   +#0#3'Top'#2'f'#5'Width'#3#137#0#8'AutoFill'#9#7'Caption'#6#9'Step unit'#28'C'
   +'hildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'Ch'
@@ -174,11 +176,11 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizo'
   +'ntal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChil'
   +'ds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizi'
-  +'ng.ControlsPerLine'#2#1#12'ClientHeight'#2'w'#11'ClientWidth'#3#133#0#13'It'
+  +'ng.ControlsPerLine'#2#1#12'ClientHeight'#2'y'#11'ClientWidth'#3#133#0#13'It'
   +'ems.Strings'#1#6#4'Days'#6#5'Hours'#6#7'Minutes'#6#7'Seconds'#0#7'OnClick'#7
   +#13'stepunitClick'#8'TabOrder'#2#5#0#0#9'TCheckBox'#8'stepline'#4'Left'#2#8#6
-  +'Height'#2#22#3'Top'#3#254#0#5'Width'#3#23#1#7'Caption'#6'''Connection lines'
-  +' between each position '#7'OnClick'#7#13'steplineClick'#8'TabOrder'#2#6#0#0
+  +'Height'#2#21#3'Top'#3#254#0#5'Width'#3#253#0#7'Caption'#6'''Connection line'
+  +'s between each position '#7'OnClick'#7#13'steplineClick'#8'TabOrder'#2#6#0#0
   +#9'TSpinEdit'#6'nbstep'#4'Left'#3#220#0#6'Height'#2#22#3'Top'#2'F'#5'Width'#2
   +'K'#8'MinValue'#2#1#8'OnChange'#7#13'nbstepChanged'#8'TabOrder'#2#3#5'Value'
   +#2#1#0#0#9'TSpinEdit'#8'stepsize'#4'Left'#3'f'#1#6'Height'#2#22#3'Top'#2'F'#5
@@ -200,7 +202,7 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizi'
   +'ng.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7
   +#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBotto'
-  +'m'#27'ChildSizing.ControlsPerLine'#2#3#12'ClientHeight'#2'7'#11'ClientWidth'
+  +'m'#27'ChildSizing.ControlsPerLine'#2#3#12'ClientHeight'#2'9'#11'ClientWidth'
   +#3#178#1#7'Columns'#2#3#13'Items.Strings'#1#6#14'Every position'#6#10'One of'
   +' two'#6#12'One of three'#6#14'Only the first'#6#13'Only the last'#6#4'None'
   +#0#7'OnClick'#7#16'RadioGroup1Click'#8'TabOrder'#2#7#0#0#11'TCheckGroup'#11
@@ -233,5 +235,8 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +#6#5'Apply'#7'OnClick'#7#12'Button2Click'#8'TabOrder'#2#1#0#0#7'TButton'#7'B'
   +'utton3'#4'Left'#3'x'#1#6'Height'#2#25#3'Top'#2#12#5'Width'#2'K'#7'Anchors'
   +#11#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Ca'
-  +'ption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#2#0#0#0#0
+  +'ption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#2#0#0#0#17'THTMLHelpDa'
+  +'tabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#2#15#3'top'#3#14#2
+  +#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'
+  +#6#2'%s'#12'AutoRegister'#9#4'left'#2'@'#3'top'#3#14#2#0#0#0
 ]);

@@ -3,8 +3,6 @@ object f_getdss: Tf_getdss
   Height = 308
   Top = 156
   Width = 420
-  HorzScrollBar.Page = 419
-  VertScrollBar.Page = 307
   ActiveControl = ListBox1
   Caption = 'List of available plates'
   ClientHeight = 308
@@ -14,17 +12,20 @@ object f_getdss: Tf_getdss
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  ParentFont = False
+  LCLVersion = '0.9.25'
   object Label1: TLabel
     Left = 12
-    Height = 14
+    Height = 15
     Top = 8
-    Width = 49
+    Width = 43
     Caption = 'Label1'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11
     Font.Name = 'courier'
     Font.Pitch = fpFixed
     ParentColor = False
+    ParentFont = False
   end
   object IpHtmlPanel1: TIpHtmlPanel
     Left = 9
@@ -33,6 +34,7 @@ object f_getdss: Tf_getdss
     Width = 403
     FixedTypeface = 'Courier New'
     DefaultTypeFace = 'default'
+    DefaultFontSize = 12
     PrintSettings.MarginLeft = 0.5
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
@@ -50,7 +52,9 @@ object f_getdss: Tf_getdss
     Font.Pitch = fpFixed
     IntegralHeight = True
     ItemHeight = 18
+    ParentFont = False
     TabOrder = 0
+    TopIndex = -1
   end
   object BitBtn1: TBitBtn
     Left = 96
@@ -81,5 +85,16 @@ object f_getdss: Tf_getdss
     ConfirmDownload = True
     left = 264
     top = 16
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 303
+    top = 275
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 352
+    top = 275
   end
 end

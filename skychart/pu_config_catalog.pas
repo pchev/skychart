@@ -25,11 +25,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, cu_catalog, pu_catgen,
+uses u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
   pu_catgenadv, pu_progressbar,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
-  EditBtn;
+  EditBtn, LazHelpHTML;
 
 type
 
@@ -73,6 +73,8 @@ type
     GCMbox: TCheckBox;
     gpn3: TDirectoryEdit;
     GPNbox: TCheckBox;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     LabelWarning: TLabel;
     Label119: TLabel;
     Label22: TLabel;
@@ -313,6 +315,8 @@ Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
 LabelWarning.Caption:=rsWarningYouAr2;
 if Fcatgen<>nil then Fcatgen.SetLang;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCatalog);
 end;
 
 constructor Tf_config_catalog.Create(AOwner:TComponent);

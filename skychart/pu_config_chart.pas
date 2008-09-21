@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                             
 interface
 
-uses u_translation, u_constant, u_projection, u_util,
+uses u_help, u_translation, u_constant, u_projection, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources,
-  Buttons, cu_radec, cu_zoomimage;
+  Buttons, cu_radec, cu_zoomimage, LazHelpHTML;
 
 type
 
@@ -140,6 +140,8 @@ type
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
     GroupBox5: TGroupBox;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label101: TLabel;
     Label102: TLabel;
@@ -407,6 +409,8 @@ CheckBox13.caption:=rsAlwaysShowCo;
 Button3.caption:=rsOK;
 Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgChart);
 end;
 
 constructor Tf_config_chart.Create(AOwner:TComponent);

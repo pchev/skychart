@@ -25,10 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util, cu_database, Math, dynlibs, unzip,
+uses u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs, unzip,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
-  Spin, downloaddialog, EditBtn;
+  Spin, downloaddialog, EditBtn, LazHelpHTML;
 
 type
 
@@ -39,6 +39,8 @@ type
     Button2: TButton;
     Button3: TButton;
     CountryTZ: TCheckBox;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     TZComboBox: TComboBox;
     fillhorizon: TCheckBox;
     DownloadDialog1: TDownloadDialog;
@@ -219,6 +221,8 @@ horizondepression.caption:=rsDrawTheAppar;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCfgObs);
 end;
 
 constructor Tf_config_observatory.Create(AOwner:TComponent);

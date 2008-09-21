@@ -24,9 +24,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_translation,
+uses  u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, LResources;
+  StdCtrls, Buttons, LResources, LazHelpHTML;
 
 type
 
@@ -39,6 +39,8 @@ type
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -66,6 +68,8 @@ Caption:=rsComputeField;
 Label4.caption:=rsIndicateHere;
 Button1.caption:=rsOK;
 Button2.caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpCatalog);
 end;
 
 Procedure Tf_catgenadv.RefreshCalc;

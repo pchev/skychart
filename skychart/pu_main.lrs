@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_main','FORMDATA',[
   'TPF0'#7'Tf_main'#6'f_main'#4'Left'#3#208#1#6'Height'#3'D'#2#3'Top'#2'x'#5'Wi'
   +'dth'#3'\'#3#13'ActiveControl'#7#11'quicksearch'#7'Caption'#6#14'Cartes du C'
@@ -2644,7 +2646,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'ght'#2#23#4'Hint'#6#4'Time'#3'Top'#2#2#5'Width'#2'8'#8'MaxValue'#3#232#3#8
   +'MinValue'#2#1#7'OnEnter'#7#13'ToolBar1Enter'#11'OnMouseMove'#7#17'Toolbar1M'
   +'ouseMove'#8'TabOrder'#2#1#5'Value'#2#1#0#0#9'TComboBox'#5'TimeU'#4'Left'#3
-  +#144#2#6'Height'#2#29#4'Hint'#6#10'Time Units'#3'Top'#2#2#5'Width'#2'P'#16'A'
+  +#144#2#6'Height'#2#25#4'Hint'#6#10'Time Units'#3'Top'#2#2#5'Width'#2'P'#16'A'
   +'utoCompleteText'#11#20'cbactSearchAscending'#0#13'DropDownCount'#2#11#12'Fo'
   +'nt.CharSet'#7#12'ANSI_CHARSET'#9'MaxLength'#2#255#7'OnEnter'#7#13'ToolBar1E'
   +'nter'#11'OnMouseMove'#7#17'Toolbar1MouseMove'#10'ParentFont'#8#5'Style'#7#14
@@ -2885,71 +2887,71 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'nt'#6'AAbout|Displays program information, version number, and copyright'#9
   +'OnExecute'#7#17'HelpAbout1Execute'#0#0#13'THelpContents'#13'HelpContents1'#8
   +'Category'#6#4'Help'#18'DisableIfNoHandler'#9#4'Hint'#6#13'Help contents'#10
-  +'ImageIndex'#2#12#9'OnExecute'#7#20'HelpContents1Execute'#8'ShortCut'#2'p'#0
-  +#0#7'TAction'#7'Search1'#8'Category'#6#6'Search'#18'DisableIfNoHandler'#9#4
-  +'Hint'#6#6'Search'#10'ImageIndex'#2'L'#9'OnExecute'#7#14'Search1Execute'#0#0
-  +#7'TAction'#7'ViewBar'#8'Category'#6#4'View'#18'DisableIfNoHandler'#9#4'Hint'
-  +#6#14'View Tools Bar'#9'OnExecute'#7#14'ViewBarExecute'#8'ShortCut'#3'B@'#0#0
-  +#7'TAction'#8'zoomplus'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hi'
-  +'nt'#6#7'Zoom In'#10'ImageIndex'#2#6#9'OnExecute'#7#15'zoomplusExecute'#0#0#7
-  +'TAction'#9'zoomminus'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hin'
-  +'t'#6#8'Zoom Out'#10'ImageIndex'#2#7#9'OnExecute'#7#16'zoomminusExecute'#0#0
-  +#7'TAction'#7'ZoomBar'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hin'
-  +'t'#6#7'Set FOV'#10'ImageIndex'#2#8#9'OnExecute'#7#14'ZoomBarExecute'#0#0#7
-  +'TAction'#5'FlipX'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6
-  +#19'Mirror Horizontally'#10'ImageIndex'#2#15#9'OnExecute'#7#12'FlipXExecute'
-  +#0#0#7'TAction'#5'FlipY'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'H'
-  +'int'#6#17'Mirror Vertically'#10'ImageIndex'#2#17#9'OnExecute'#7#12'FlipYExe'
-  +'cute'#0#0#7'TAction'#10'ViewStatus'#8'Category'#6#4'View'#18'DisableIfNoHan'
-  +'dler'#9#4'Hint'#6#19'View the status bar'#9'OnExecute'#7#17'ViewStatusExecu'
-  +'te'#0#0#7'TAction'#17'SaveConfiguration'#8'Category'#6#5'Setup'#7'Caption'#6
-  +#18'Save Configuration'#18'DisableIfNoHandler'#9#4'Hint'#6#29'The the defaul'
-  +'t configuration'#9'OnExecute'#7#24'SaveConfigurationExecute'#0#0#7'TAction'
-  +#16'SaveConfigOnExit'#8'Category'#6#5'Setup'#7'Caption'#6#19'Save Config On '
-  +'Exit'#7'Checked'#9#18'DisableIfNoHandler'#9#4'Hint'#6'-Save the configurati'
-  +'on when the program close'#9'OnExecute'#7#23'SaveConfigOnExitExecute'#0#0#7
-  +'TAction'#4'Undo'#8'Category'#6#4'Undo'#18'DisableIfNoHandler'#9#4'Hint'#6#16
-  +'Undo Last Change'#10'ImageIndex'#2#19#9'OnExecute'#7#11'UndoExecute'#0#0#7
-  +'TAction'#4'Redo'#8'Category'#6#4'Undo'#18'DisableIfNoHandler'#9#4'Hint'#6#16
-  +'Redo Last Change'#10'ImageIndex'#2#20#9'OnExecute'#7#11'RedoExecute'#0#0#7
-  +'TAction'#8'rot_plus'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'
-  +#6#12'Rotate Right'#10'ImageIndex'#2#21#9'OnExecute'#7#15'rot_plusExecute'#0
-  +#0#7'TAction'#9'rot_minus'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4
-  +'Hint'#6#11'Rotate Left'#10'ImageIndex'#2#22#9'OnExecute'#7#16'rot_minusExec'
-  +'ute'#0#0#7'TAction'#6'GridEQ'#8'Category'#6#5'chart'#18'DisableIfNoHandler'
-  +#9#4'Hint'#6#19'Add Equatorial Grid'#10'ImageIndex'#2#24#9'OnExecute'#7#13'G'
-  +'ridEQExecute'#0#0#7'TAction'#4'Grid'#8'Category'#6#5'chart'#18'DisableIfNoH'
-  +'andler'#9#4'Hint'#6#20'Show Coordinate Grid'#10'ImageIndex'#2#25#9'OnExecut'
-  +'e'#7#11'GridExecute'#0#0#7'TAction'#11'switchstars'#8'Category'#6#5'chart'
-  +#18'DisableIfNoHandler'#9#4'Hint'#6#19'Change Drawing Mode'#10'ImageIndex'#2
-  +'"'#9'OnExecute'#7#18'switchstarsExecute'#0#0#7'TAction'#16'switchbackground'
-  +#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#20'Sky Background'
-  +' Color'#10'ImageIndex'#2'#'#9'OnExecute'#7#23'switchbackgroundExecute'#0#0#7
-  +'TAction'#9'SaveImage'#8'Category'#6#4'File'#18'DisableIfNoHandler'#9#10'Ima'
-  +'geIndex'#2'$'#9'OnExecute'#7#16'SaveImageExecute'#0#0#7'TAction'#8'ViewInfo'
-  +#8'Category'#6#4'View'#18'DisableIfNoHandler'#9#9'OnExecute'#7#15'ViewInfoEx'
-  +'ecute'#0#0#7'TAction'#3'toN'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9
-  +#4'Hint'#6#5'North'#10'ImageIndex'#2'&'#9'OnExecute'#7#10'toNExecute'#0#0#7
-  +'TAction'#3'toE'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#4
-  +'East'#10'ImageIndex'#2'%'#9'OnExecute'#7#10'toEExecute'#0#0#7'TAction'#3'to'
-  +'S'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#5'South'#10'Im'
-  +'ageIndex'#2''''#9'OnExecute'#7#10'toSExecute'#0#0#7'TAction'#3'toW'#8'Categ'
-  +'ory'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#4'West'#10'ImageIndex'#2
-  +'('#9'OnExecute'#7#10'toWExecute'#0#0#7'TAction'#8'toZenith'#8'Category'#6#5
-  +'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#6'Zenith'#10'ImageIndex'#2')'#9'O'
-  +'nExecute'#7#15'toZenithExecute'#0#0#7'TAction'#6'allSky'#8'Category'#6#5'ch'
-  +'art'#18'DisableIfNoHandler'#9#4'Hint'#6#12'Show All Sky'#10'ImageIndex'#2'*'
-  +#9'OnExecute'#7#13'allSkyExecute'#0#0#7'TAction'#7'TimeInc'#3'Tag'#2#1#8'Cat'
-  +'egory'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#14'Increment Time'#10
-  +'ImageIndex'#2','#9'OnExecute'#7#14'TimeIncExecute'#0#0#7'TAction'#7'TimeDec'
-  +#3'Tag'#2#255#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#14'D'
-  ,'ecrement Time'#10'ImageIndex'#2'+'#9'OnExecute'#7#14'TimeIncExecute'#0#0#7
-  +'TAction'#9'TimeReset'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hin'
-  +'t'#6#3'Now'#10'ImageIndex'#2'T'#9'OnExecute'#7#16'TimeResetExecute'#0#0#7'T'
-  +'Action'#7'listobj'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6
-  +#11'Object List'#10'ImageIndex'#2'.'#9'OnExecute'#7#14'listobjExecute'#0#0#7
-  +'TAction'#16'TelescopeConnect'#8'Category'#6#9'Telescope'#18'DisableIfNoHand'
-  +'ler'#9#4'Hint'#6#17'Connect Telescope'#10'ImageIndex'#2'0'#9'OnExecute'#7#23
+  +'ImageIndex'#2#12#9'OnExecute'#7#20'HelpContents1Execute'#0#0#7'TAction'#7'S'
+  +'earch1'#8'Category'#6#6'Search'#18'DisableIfNoHandler'#9#4'Hint'#6#6'Search'
+  +#10'ImageIndex'#2'L'#9'OnExecute'#7#14'Search1Execute'#0#0#7'TAction'#7'View'
+  +'Bar'#8'Category'#6#4'View'#18'DisableIfNoHandler'#9#4'Hint'#6#14'View Tools'
+  +' Bar'#9'OnExecute'#7#14'ViewBarExecute'#8'ShortCut'#3'B@'#0#0#7'TAction'#8
+  +'zoomplus'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#7'Zoom '
+  +'In'#10'ImageIndex'#2#6#9'OnExecute'#7#15'zoomplusExecute'#0#0#7'TAction'#9
+  +'zoomminus'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#8'Zoom'
+  +' Out'#10'ImageIndex'#2#7#9'OnExecute'#7#16'zoomminusExecute'#0#0#7'TAction'
+  +#7'ZoomBar'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#7'Set '
+  +'FOV'#10'ImageIndex'#2#8#9'OnExecute'#7#14'ZoomBarExecute'#0#0#7'TAction'#5
+  +'FlipX'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#19'Mirror '
+  +'Horizontally'#10'ImageIndex'#2#15#9'OnExecute'#7#12'FlipXExecute'#0#0#7'TAc'
+  +'tion'#5'FlipY'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#17
+  +'Mirror Vertically'#10'ImageIndex'#2#17#9'OnExecute'#7#12'FlipYExecute'#0#0#7
+  +'TAction'#10'ViewStatus'#8'Category'#6#4'View'#18'DisableIfNoHandler'#9#4'Hi'
+  +'nt'#6#19'View the status bar'#9'OnExecute'#7#17'ViewStatusExecute'#0#0#7'TA'
+  +'ction'#17'SaveConfiguration'#8'Category'#6#5'Setup'#7'Caption'#6#18'Save Co'
+  +'nfiguration'#18'DisableIfNoHandler'#9#4'Hint'#6#29'The the default configur'
+  +'ation'#9'OnExecute'#7#24'SaveConfigurationExecute'#0#0#7'TAction'#16'SaveCo'
+  +'nfigOnExit'#8'Category'#6#5'Setup'#7'Caption'#6#19'Save Config On Exit'#7'C'
+  +'hecked'#9#18'DisableIfNoHandler'#9#4'Hint'#6'-Save the configuration when t'
+  +'he program close'#9'OnExecute'#7#23'SaveConfigOnExitExecute'#0#0#7'TAction'
+  +#4'Undo'#8'Category'#6#4'Undo'#18'DisableIfNoHandler'#9#4'Hint'#6#16'Undo La'
+  +'st Change'#10'ImageIndex'#2#19#9'OnExecute'#7#11'UndoExecute'#0#0#7'TAction'
+  +#4'Redo'#8'Category'#6#4'Undo'#18'DisableIfNoHandler'#9#4'Hint'#6#16'Redo La'
+  +'st Change'#10'ImageIndex'#2#20#9'OnExecute'#7#11'RedoExecute'#0#0#7'TAction'
+  +#8'rot_plus'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#12'Ro'
+  +'tate Right'#10'ImageIndex'#2#21#9'OnExecute'#7#15'rot_plusExecute'#0#0#7'TA'
+  +'ction'#9'rot_minus'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'
+  +#6#11'Rotate Left'#10'ImageIndex'#2#22#9'OnExecute'#7#16'rot_minusExecute'#0
+  +#0#7'TAction'#6'GridEQ'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hi'
+  +'nt'#6#19'Add Equatorial Grid'#10'ImageIndex'#2#24#9'OnExecute'#7#13'GridEQE'
+  +'xecute'#0#0#7'TAction'#4'Grid'#8'Category'#6#5'chart'#18'DisableIfNoHandler'
+  +#9#4'Hint'#6#20'Show Coordinate Grid'#10'ImageIndex'#2#25#9'OnExecute'#7#11
+  +'GridExecute'#0#0#7'TAction'#11'switchstars'#8'Category'#6#5'chart'#18'Disab'
+  +'leIfNoHandler'#9#4'Hint'#6#19'Change Drawing Mode'#10'ImageIndex'#2'"'#9'On'
+  +'Execute'#7#18'switchstarsExecute'#0#0#7'TAction'#16'switchbackground'#8'Cat'
+  +'egory'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#20'Sky Background Colo'
+  +'r'#10'ImageIndex'#2'#'#9'OnExecute'#7#23'switchbackgroundExecute'#0#0#7'TAc'
+  +'tion'#9'SaveImage'#8'Category'#6#4'File'#18'DisableIfNoHandler'#9#10'ImageI'
+  +'ndex'#2'$'#9'OnExecute'#7#16'SaveImageExecute'#0#0#7'TAction'#8'ViewInfo'#8
+  +'Category'#6#4'View'#18'DisableIfNoHandler'#9#9'OnExecute'#7#15'ViewInfoExec'
+  +'ute'#0#0#7'TAction'#3'toN'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4
+  +'Hint'#6#5'North'#10'ImageIndex'#2'&'#9'OnExecute'#7#10'toNExecute'#0#0#7'TA'
+  +'ction'#3'toE'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#4'E'
+  +'ast'#10'ImageIndex'#2'%'#9'OnExecute'#7#10'toEExecute'#0#0#7'TAction'#3'toS'
+  +#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#5'South'#10'Image'
+  +'Index'#2''''#9'OnExecute'#7#10'toSExecute'#0#0#7'TAction'#3'toW'#8'Category'
+  +#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#4'West'#10'ImageIndex'#2'('#9
+  +'OnExecute'#7#10'toWExecute'#0#0#7'TAction'#8'toZenith'#8'Category'#6#5'char'
+  +'t'#18'DisableIfNoHandler'#9#4'Hint'#6#6'Zenith'#10'ImageIndex'#2')'#9'OnExe'
+  +'cute'#7#15'toZenithExecute'#0#0#7'TAction'#6'allSky'#8'Category'#6#5'chart'
+  +#18'DisableIfNoHandler'#9#4'Hint'#6#12'Show All Sky'#10'ImageIndex'#2'*'#9'O'
+  +'nExecute'#7#13'allSkyExecute'#0#0#7'TAction'#7'TimeInc'#3'Tag'#2#1#8'Catego'
+  +'ry'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#14'Increment Time'#10'Ima'
+  +'geIndex'#2','#9'OnExecute'#7#14'TimeIncExecute'#0#0#7'TAction'#7'TimeDec'#3
+  +'Tag'#2#255#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#14'Dec'
+  ,'rement Time'#10'ImageIndex'#2'+'#9'OnExecute'#7#14'TimeIncExecute'#0#0#7'TA'
+  +'ction'#9'TimeReset'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'
+  +#6#3'Now'#10'ImageIndex'#2'T'#9'OnExecute'#7#16'TimeResetExecute'#0#0#7'TAct'
+  +'ion'#7'listobj'#8'Category'#6#5'chart'#18'DisableIfNoHandler'#9#4'Hint'#6#11
+  +'Object List'#10'ImageIndex'#2'.'#9'OnExecute'#7#14'listobjExecute'#0#0#7'TA'
+  +'ction'#16'TelescopeConnect'#8'Category'#6#9'Telescope'#18'DisableIfNoHandle'
+  +'r'#9#4'Hint'#6#17'Connect Telescope'#10'ImageIndex'#2'0'#9'OnExecute'#7#23
   +'TelescopeConnectExecute'#0#0#7'TAction'#13'TelescopeSlew'#8'Category'#6#9'T'
   +'elescope'#18'DisableIfNoHandler'#9#4'Hint'#6#4'Slew'#10'ImageIndex'#2'2'#9
   +'OnExecute'#7#20'TelescopeSlewExecute'#0#0#7'TAction'#13'TelescopeSync'#8'Ca'
@@ -6226,5 +6228,8 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'SetupConfigExecute'#0#0#9'TMenuItem'#10'MenuItem21'#7'Caption'#6#1'-'#0#0#9
   +'TMenuItem'#10'MenuItem22'#6'Action'#7#17'SaveConfiguration'#7'OnClick'#7#24
   +'SaveConfigurationExecute'#0#0#9'TMenuItem'#10'MenuItem23'#6'Action'#7#16'Sa'
-  +'veConfigOnExit'#7'OnClick'#7#23'SaveConfigOnExitExecute'#0#0#0#0
+  +'veConfigOnExit'#7'OnClick'#7#23'SaveConfigOnExitExecute'#0#0#0#17'THTMLHelp'
+  +'Database'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#2'h'#3'top'#3#11
+  +#1#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParam'
+  +'s'#6#2'%s'#12'AutoRegister'#9#4'left'#3#146#0#3'top'#3#11#1#0#0#0
 ]);

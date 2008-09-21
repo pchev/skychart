@@ -7,4 +7,7 @@ REM Update first the path to your Lazarus installation and run "make" in lazarus
 D:\appli\lazarus\pp\bin\i386-win32\rstconv -i units\win32\u_translation.rst -o language\skychart.po
 D:\appli\lazarus\tools\updatepofiles language\skychart.po
 
+D:\appli\lazarus\pp\bin\i386-win32\rstconv -i units\win32\u_help.rst -o language\help.po
+D:\appli\lazarus\tools\updatepofiles language\help.po
+
 pause

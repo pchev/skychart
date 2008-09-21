@@ -28,16 +28,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util,
   SysUtils, Types, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
-  LResources, PrintersDlgs, EditBtn;
+  LResources, PrintersDlgs, EditBtn, LazHelpHTML;
 
 type
 
   { Tf_printsetup }
 
   Tf_printsetup = class(TForm)
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     printcmd: TFileNameEdit;
     PrintDialog1: TPrintDialog;
     PrinterSetupDialog1: TPrinterSetupDialog;
@@ -98,6 +100,8 @@ printmode.Items[1]:=rsPostscript;
 printmode.Items[2]:=rsBitmapFile;
 Ok.Caption:=rsOK;
 Cancel.Caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpIndex);
 end;
 
 procedure Tf_printsetup.FormShow(Sender: TObject);

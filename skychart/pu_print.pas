@@ -24,9 +24,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_translation, u_constant, u_util,
+uses  u_help, u_translation, u_constant, u_util,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  Buttons, StdCtrls, enhedits, Printers;
+  Buttons, StdCtrls, enhedits, Printers, LazHelpHTML;
 
 type
 
@@ -36,6 +36,8 @@ type
     Button1: TButton;
     Button2: TButton;
     GroupBox1: TGroupBox;
+    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
+    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -97,6 +99,8 @@ Button2.caption:=rsDefaultMargi;
 Setup.caption:=rsSetup;
 Print.caption:=rsPrint;
 Cancel.Caption:=rsCancel;
+SetHelpDB(HTMLHelpDatabase1);
+SetHelp(self,hlpIndex);
 end;
 
 procedure Tf_print.FormShow(Sender: TObject);
