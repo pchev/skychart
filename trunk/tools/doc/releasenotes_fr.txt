@@ -2,10 +2,17 @@ Version 3.0.1.5 SVN  Notes de la version
 
 Changement du 21 septembre:
 
-Ajout de l'aide contextuelle.
+Add contextual help, press F1 key.
+Add main configuration window again.
+Fix telescope port selection on Linux.
+Add command line parameter --config to specify a configuration .ini file.
+Add command line parameter --unique to allow only one instance to run 
+
+Ajout de l'aide contextuelle, appuyez sur F1.
 Ajoute a nouveau la fenêtre principale de configuration.
 Corrige le choix du port du télescope sous Linux.
 Ajout de l'option de ligne de commande --config pour indiquer le fichier .ini à utiliser.
+Ajout de l'option de ligne de commande --unique pour n'avoir qu'une seule instance du programme.
 
 Changements depuis la version 3.0.1.4:
 
