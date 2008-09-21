@@ -1,5 +1,12 @@
 Version 3.0.1.5 SVN  Release Notes
 
+Septenber 21 changes:
+
+Add contextual help.
+Add main configuration window again.
+Fix telescope port selection on Linux.
+Add command line parameter --config to specify a configuration .ini file.
+
 Change since version 3.0.1.4 :
 
 Variable stars module VarObs:
