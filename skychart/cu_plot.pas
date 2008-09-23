@@ -1465,15 +1465,16 @@ if (iWidth<=cfgchart.Width)and(iHeight<=cfgchart.Height) then begin
    DestY:=round(yy-dsy);
    BitmapFlip(imabmp,(flipx<0),(flipy<0));
    {$IFNDEF OLD_MASK_TRANSPARENCY}
-   imabmp.SaveToStream(memstream);
-   memstream.position := 0;
-   imabmp.LoadFromStream(memstream);
-   {$ENDIF}
+   rbmp.PixelFormat:=pf32bit;
+   {$endif}
+   rbmp.Width:=imabmp.Width;
+   rbmp.Height:=imabmp.Height;
+   rbmp.Canvas.Draw(0,0,imabmp);
    if iTransparent then
-      if DisplayIs32bpp then SetTransparencyFromLuminance(imabmp,0)
-                        else imabmp.TransparentColor:=clBlack;
+      if DisplayIs32bpp then SetTransparencyFromLuminance(rbmp,0)
+                        else rbmp.TransparentColor:=clBlack;
    cnv.CopyMode:=cmSrcCopy;
-   cnv.Draw(DestX,DestY,imabmp);
+   cnv.Draw(DestX,DestY,rbmp);
 end else begin
    // only a part of the image is displayed
    BitmapRotation(ibmp,rbmp,Rotation,WhiteBg);
@@ -1496,15 +1497,16 @@ end else begin
    imabmp.canvas.CopyRect(Rect(0,0,imabmp.Width,imabmp.Height),rbmp.Canvas,SrcR);
    BitmapResize(imabmp,rbmp,zoom);
    {$IFNDEF OLD_MASK_TRANSPARENCY}
-   rbmp.SaveToStream(memstream);
-   memstream.position := 0;
-   rbmp.LoadFromStream(memstream);
-   {$ENDIF}
+   imabmp.PixelFormat:=pf32bit;
+   {$endif}
+   imabmp.Width:=rbmp.Width;
+   imabmp.Height:=rbmp.Height;
+   imabmp.Canvas.Draw(0,0,rbmp);
    if iTransparent then
-      if DisplayIs32bpp then SetTransparencyFromLuminance(rbmp,0)
-                        else rbmp.TransparentColor:=clBlack;
+      if DisplayIs32bpp then SetTransparencyFromLuminance(imabmp,0)
+                        else imabmp.TransparentColor:=clBlack;
    cnv.CopyMode:=cmSrcCopy;
-   cnv.Draw(0,0,rbmp);
+   cnv.Draw(0,0,imabmp);
 end;
 finally
   memstream.Free;
