@@ -1176,10 +1176,7 @@ SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
 privatedir:=slash(Folder)+privatedir;
 configfile:=slash(privatedir)+configfile;
-tracefile:=slash(privatedir)+tracefile;
 {$endif}
-VarObs:=slash(appdir)+DefaultVarObs;     // varobs normally at same location as skychart
-if not FileExists(VarObs) then VarObs:=DefaultVarObs; // if not try in $PATH
 
 if ForceConfig<>'' then Configfile:=ForceConfig;
 
@@ -1216,6 +1213,11 @@ if (not directoryexists(slash(appdir)+'data/constellation')) and
    (directoryexists(SharedDir)) then
    appdir:=SharedDir;
 {$endif}
+{$ifdef win32}
+tracefile:=slash(privatedir)+tracefile;
+{$endif}
+VarObs:=slash(appdir)+DefaultVarObs;     // varobs normally at same location as skychart
+if not FileExists(VarObs) then VarObs:=DefaultVarObs; // if not try in $PATH
 helpdir:=slash(appdir)+slash('doc');
 SampleDir:=slash(appdir)+slash('data')+'sample';
 ZoneDir:=slash(appdir)+slash('data')+slash('zoneinfo');
