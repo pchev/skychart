@@ -152,7 +152,7 @@ begin
   DF.Caption:='Download File';
   DF.FormStyle:=fsStayOnTop;
   DF.BorderStyle:=bsDialog;
-  DF.AutoSize:=true;
+  DF.AutoSize:=false;
   pos:=mouse.CursorPos;
   FormPos(DF,pos.x,pos.y);
   DF.OnClose:=@FormClose;
@@ -213,6 +213,9 @@ begin
     left:=progress.Width-cancelButton.Width-8;
     Cancel:=True;
   end;
+
+  DF.Width:=urltxt.Width+16;
+  DF.Height:=okButton.Top+okButton.Height+8;
 
   if not FConfirmDownload then DF.OnShow:=@BtnDownload;
   
