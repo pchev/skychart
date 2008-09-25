@@ -1,0 +1,98 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('Tf_chart','FORMDATA',[
+  'TPF0'#8'Tf_chart'#7'f_chart'#4'Left'#3#241#1#6'Height'#3'R'#1#3'Top'#3#135#0
+  +#5'Width'#3#252#1#13'ActiveControl'#7#13'VertScrollBar'#7'Caption'#6#5'Chart'
+  +#12'ClientHeight'#3'R'#1#11'ClientWidth'#3#252#1#10'KeyPreview'#9#7'OnClose'
+  +#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#9
+  +'OnKeyDown'#7#11'FormKeyDown'#10'OnKeyPress'#7#12'FormKeyPress'#10'ParentFon'
+  +'t'#9#10'LCLVersion'#6#6'0.9.25'#0#6'TPanel'#6'Panel1'#4'Left'#2#8#6'Height'
+  +#3#16#1#3'Top'#2#8#5'Width'#3#224#1#12'ClientHeight'#3#16#1#11'ClientWidth'#3
+  +#224#1#11'FullRepaint'#8#11'ParentColor'#8#8'TabOrder'#2#0#8'OnResize'#7#11
+  +'ChartResize'#0#6'TLabel'#10'identlabel'#6'Cursor'#7#11'crHandPoint'#4'Left'
+  +#3#136#0#6'Height'#2#14#3'Top'#2'x'#5'Width'#2':'#7'Caption'#6#11'identlabel'
+  +' '#5'Color'#7#7'clBlack'#12'Font.CharSet'#2#4#10'Font.Color'#7#7'clWhite'#11
+  +'Font.Height'#2#244#9'Font.Name'#6#4'Sans'#11'ParentColor'#8#13'ShowAccelCha'
+  +'r'#8#11'Transparent'#8#7'Visible'#8#7'OnClick'#7#15'identlabelClick'#0#0#10
+  +'TScrollBar'#13'VertScrollBar'#6'Cursor'#7#7'crArrow'#4'Left'#3#208#1#6'Heig'
+  +'ht'#3#255#0#3'Top'#2#1#5'Width'#2#15#5'Align'#7#7'alRight'#4'Kind'#7#10'sbV'
+  +'ertical'#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8'PageSize'#2#10#8'T'
+  +'abOrder'#2#0#0#0#10'TScrollBar'#12'HorScrollBar'#6'Cursor'#7#7'crArrow'#4'L'
+  +'eft'#2#1#6'Height'#2#15#3'Top'#3#0#1#5'Width'#3#222#1#5'Align'#7#8'alBottom'
+  +#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8'PageSize'#2#10#8'TabOrder'#2
+  +#1#0#0#0#6'TTimer'#12'RefreshTimer'#7'Enabled'#8#8'Interval'#3','#1#7'OnTime'
+  +'r'#7#17'RefreshTimerTimer'#4'left'#3'0'#1#3'top'#2#24#0#0#11'TActionList'#11
+  +'ActionList1'#4'left'#3'0'#1#3'top'#2'@'#0#7'TAction'#8'zoomplus'#8'Category'
+  +#6#4'zoom'#7'Caption'#6#6'Zoom +'#18'DisableIfNoHandler'#9#10'ImageIndex'#2#6
+  +#9'OnExecute'#7#15'zoomplusExecute'#0#0#7'TAction'#9'zoomminus'#8'Category'#6
+  +#4'zoom'#7'Caption'#6#6'Zoom -'#18'DisableIfNoHandler'#9#10'ImageIndex'#2#7#9
+  +'OnExecute'#7#16'zoomminusExecute'#0#0#7'TAction'#8'MoveWest'#8'Category'#6#4
+  +'move'#7'Caption'#6#9'Move West'#18'DisableIfNoHandler'#9#9'OnExecute'#7#15
+  +'MoveWestExecute'#0#0#7'TAction'#8'MoveEast'#8'Category'#6#4'move'#7'Caption'
+  +#6#9'Move East'#18'DisableIfNoHandler'#9#9'OnExecute'#7#15'MoveEastExecute'#0
+  +#0#7'TAction'#9'MoveNorth'#8'Category'#6#4'move'#7'Caption'#6#10'Move North'
+  +#18'DisableIfNoHandler'#9#9'OnExecute'#7#16'MoveNorthExecute'#0#0#7'TAction'
+  +#9'MoveSouth'#8'Category'#6#4'move'#7'Caption'#6#10'Move South'#18'DisableIf'
+  +'NoHandler'#9#9'OnExecute'#7#16'MoveSouthExecute'#0#0#7'TAction'#13'MoveNort'
+  +'hWest'#8'Category'#6#4'move'#7'Caption'#6#15'Move North-West'#18'DisableIfN'
+  +'oHandler'#9#9'OnExecute'#7#20'MoveNorthWestExecute'#0#0#7'TAction'#13'MoveN'
+  +'orthEast'#8'Category'#6#4'move'#7'Caption'#6#15'Move North-East'#18'Disable'
+  +'IfNoHandler'#9#9'OnExecute'#7#20'MoveNorthEastExecute'#0#0#7'TAction'#13'Mo'
+  +'veSouthWest'#8'Category'#6#4'move'#7'Caption'#6#15'Move South-West'#18'Disa'
+  +'bleIfNoHandler'#9#9'OnExecute'#7#20'MoveSouthWestExecute'#0#0#7'TAction'#13
+  +'MoveSouthEast'#8'Category'#6#4'move'#7'Caption'#6#15'Move South-East'#18'Di'
+  +'sableIfNoHandler'#9#9'OnExecute'#7#20'MoveSouthEastExecute'#0#0#7'TAction'#6
+  +'Centre'#8'Category'#6#4'move'#7'Caption'#6#6'Centre'#18'DisableIfNoHandler'
+  +#9#9'OnExecute'#7#13'CentreExecute'#0#0#7'TAction'#12'zoomplusmove'#8'Catego'
+  +'ry'#6#4'zoom'#7'Caption'#6#13'Zoom + Centre'#18'DisableIfNoHandler'#9#10'Im'
+  +'ageIndex'#2#6#9'OnExecute'#7#19'zoomplusmoveExecute'#0#0#7'TAction'#13'zoom'
+  +'minusmove'#8'Category'#6#4'zoom'#7'Caption'#6#13'Zoom - Centre'#18'DisableI'
+  +'fNoHandler'#9#10'ImageIndex'#2#7#9'OnExecute'#7#20'zoomminusmoveExecute'#0#0
+  +#7'TAction'#5'FlipX'#8'Category'#6#8'rotation'#7'Caption'#6#5'FlipX'#18'Disa'
+  +'bleIfNoHandler'#9#10'ImageIndex'#2#15#9'OnExecute'#7#12'FlipXExecute'#0#0#7
+  +'TAction'#5'FlipY'#8'Category'#6#8'rotation'#7'Caption'#6#5'FlipY'#18'Disabl'
+  +'eIfNoHandler'#9#10'ImageIndex'#2#17#9'OnExecute'#7#12'FlipYExecute'#0#0#7'T'
+  +'Action'#4'Undo'#8'Category'#6#4'Undo'#7'Caption'#6#4'Undo'#18'DisableIfNoHa'
+  +'ndler'#9#9'OnExecute'#7#11'UndoExecute'#0#0#7'TAction'#4'Redo'#8'Category'#6
+  +#4'Undo'#7'Caption'#6#4'Redo'#18'DisableIfNoHandler'#9#9'OnExecute'#7#11'Red'
+  +'oExecute'#0#0#7'TAction'#8'rot_plus'#8'Category'#6#8'rotation'#7'Caption'#6
+  +#8'rot_plus'#18'DisableIfNoHandler'#9#10'ImageIndex'#2#21#9'OnExecute'#7#15
+  +'rot_plusExecute'#0#0#7'TAction'#9'rot_minus'#8'Category'#6#8'rotation'#7'Ca'
+  +'ption'#6#9'rot_minus'#18'DisableIfNoHandler'#9#10'ImageIndex'#2#22#9'OnExec'
+  +'ute'#7#16'rot_minusExecute'#0#0#7'TAction'#6'GridEQ'#8'Category'#6#4'Grid'#7
+  +'Caption'#6#6'GridEQ'#18'DisableIfNoHandler'#9#10'ImageIndex'#2#24#9'OnExecu'
+  +'te'#7#13'GridEQExecute'#0#0#7'TAction'#4'Grid'#8'Category'#6#4'Grid'#7'Capt'
+  +'ion'#6#4'Grid'#18'DisableIfNoHandler'#9#10'ImageIndex'#2#25#9'OnExecute'#7
+  +#11'GridExecute'#0#0#7'TAction'#16'switchbackground'#7'Caption'#6#16'switchb'
+  +'ackground'#18'DisableIfNoHandler'#9#9'OnExecute'#7#23'switchbackgroundExecu'
+  ,'te'#0#0#7'TAction'#10'switchstar'#7'Caption'#6#10'switchstar'#18'DisableIfN'
+  +'oHandler'#9#9'OnExecute'#7#17'switchstarExecute'#0#0#0#10'TPopupMenu'#10'Po'
+  +'pupMenu1'#7'OnPopup'#7#15'PopupMenu1Popup'#4'left'#3'0'#1#3'top'#2'h'#0#9'T'
+  +'MenuItem'#6'About1'#7'Caption'#6#5'About'#7'Visible'#8#7'OnClick'#7#11'Abou'
+  +'t1Click'#0#0#9'TMenuItem'#6'About2'#7'Caption'#6#1'-'#7'Visible'#8#0#0#9'TM'
+  +'enuItem'#7'Centre1'#6'Action'#7#6'Centre'#7'OnClick'#7#13'CentreExecute'#0#0
+  +#9'TMenuItem'#5'Zoom1'#6'Action'#7#12'zoomplusmove'#7'OnClick'#7#19'zoomplus'
+  +'moveExecute'#0#0#9'TMenuItem'#5'Zoom2'#6'Action'#7#13'zoomminusmove'#7'OnCl'
+  +'ick'#7#20'zoomminusmoveExecute'#0#0#9'TMenuItem'#2'N1'#7'Caption'#6#1'-'#0#0
+  +#9'TMenuItem'#16'NewFinderCircle1'#7'Caption'#6#17'New Finder Circle'#7'OnCl'
+  +'ick'#7#21'NewFinderCircle1Click'#0#0#9'TMenuItem'#17'RemoveLastCircle1'#7'C'
+  +'aption'#6#18'Remove Last Circle'#7'OnClick'#7#22'RemoveLastCircle1Click'#0#0
+  +#9'TMenuItem'#17'RemoveAllCircles1'#7'Caption'#6#18'Remove All Circles'#7'On'
+  +'Click'#7#22'RemoveAllCircles1Click'#0#0#9'TMenuItem'#9'MenuItem1'#7'Caption'
+  +#6#1'-'#0#0#9'TMenuItem'#9'AddLabel1'#7'Caption'#6#9'New Label'#7'OnClick'#7
+  +#14'AddLabel1Click'#0#0#9'TMenuItem'#16'RemoveLastLabel1'#7'Caption'#6#17'Re'
+  +'move Last Label'#7'OnClick'#7#21'RemoveLastLabel1Click'#0#0#9'TMenuItem'#15
+  +'RemoveAllLabel1'#7'Caption'#6#17'Remove All Labels'#7'OnClick'#7#20'RemoveA'
+  +'llLabel1Click'#0#0#9'TMenuItem'#2'N2'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#9
+  +'elescope1'#7'Caption'#6#9'Telescope'#0#9'TMenuItem'#5'Slew1'#7'Caption'#6#4
+  +'Slew'#7'OnClick'#7#10'Slew1Click'#0#0#9'TMenuItem'#5'Sync1'#7'Caption'#6#4
+  +'Sync'#7'OnClick'#7#10'Sync1Click'#0#0#9'TMenuItem'#8'Connect1'#7'Caption'#6
+  +#7'Connect'#7'OnClick'#7#13'Connect1Click'#0#0#9'TMenuItem'#10'AbortSlew1'#7
+  +'Caption'#6#10'Abort Slew'#7'OnClick'#7#15'AbortSlew1Click'#0#0#0#9'TMenuIte'
+  +'m'#2'N3'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#8'TrackOn1'#7'Caption'#6#7'Lock'
+  +' on'#7'OnClick'#7#13'TrackOn1Click'#0#0#9'TMenuItem'#9'TrackOff1'#7'Caption'
+  +#6#12'Unlock Chart'#7'OnClick'#7#14'TrackOff1Click'#0#0#0#6'TTimer'#14'Teles'
+  +'copeTimer'#7'Enabled'#8#8'Interval'#3#244#1#7'OnTimer'#7#19'TelescopeTimerT'
+  +'imer'#4'left'#3'0'#1#3'top'#3#152#0#0#0#6'TTimer'#10'BlinkTimer'#7'Enabled'
+  +#8#7'OnTimer'#7#15'BlinkTimerTimer'#4'left'#3'0'#1#3'top'#3#202#0#0#0#0
+]);

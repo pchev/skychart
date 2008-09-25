@@ -16,9 +16,9 @@ object f_getdss: Tf_getdss
   LCLVersion = '0.9.25'
   object Label1: TLabel
     Left = 12
-    Height = 15
+    Height = 12
     Top = 8
-    Width = 43
+    Width = 37
     Caption = 'Label1'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11

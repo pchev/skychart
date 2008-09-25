@@ -587,11 +587,13 @@ if not cfgsc.quick then Fplanet.ComputePlanet(cfgsc);
          // fits image
          cfgsc.TrackOn:=false;
          if FFits.Header.valid then begin
-            cfgsc.Projpole:=Equat;
-            cfgsc.JDChart:=jd2000; //FFits.Header.equinox;
             cfgsc.lastJDchart:=cfgsc.JDChart;
-            cfgsc.racentre:=FFits.Center_RA;
-            cfgsc.decentre:=FFits.Center_DE;
+            v1:=FFits.Center_RA;
+            v2:=FFits.Center_DE;
+            precession(jd2000,cfgsc.JDChart,v1,v2);
+            if cfgsc.ApparentPos then apparent_equatorial(v1,v2,cfgsc);;
+            cfgsc.racentre:=v1;
+            cfgsc.decentre:=v2;
             cfgsc.fov:=FFits.Img_Width;
             cfgsc.theta:=FFits.Rotation;
             ScaleWindow(cfgsc);

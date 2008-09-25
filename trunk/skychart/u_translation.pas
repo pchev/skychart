@@ -1106,6 +1106,7 @@ resourcestring
   rsReduceDetail = 'Reduce detail when moving the chart';
   rsVariableStar2 = 'Variable Stars';
   rsAllConfigura = 'All configuration options';
+  rsAskConfirmat = 'Ask confirmation before any Internet connection';
 
 implementation
 

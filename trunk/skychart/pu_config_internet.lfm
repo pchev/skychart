@@ -42,14 +42,14 @@ object f_config_internet: Tf_config_internet
           Top = 12
           Width = 401
           Caption = 'HTTP Proxy'
-          ClientHeight = 186
+          ClientHeight = 184
           ClientWidth = 397
           TabOrder = 0
           object httpproxy: TCheckBox
             Left = 30
-            Height = 21
+            Height = 22
             Top = 11
-            Width = 113
+            Width = 120
             Caption = 'Use HTTP Proxy'
             OnClick = httpproxyClick
             TabOrder = 0
@@ -59,7 +59,7 @@ object f_config_internet: Tf_config_internet
             Height = 137
             Top = 40
             Width = 369
-            ClientHeight = 122
+            ClientHeight = 120
             ClientWidth = 365
             TabOrder = 1
             object Label2: TLabel
@@ -128,26 +128,26 @@ object f_config_internet: Tf_config_internet
         end
         object GroupBox2: TGroupBox
           Left = 20
-          Height = 144
-          Top = 228
+          Height = 120
+          Top = 222
           Width = 401
           Caption = 'FTP '
-          ClientHeight = 129
+          ClientHeight = 103
           ClientWidth = 397
           TabOrder = 1
           object Label1: TLabel
             Left = 39
-            Height = 20
+            Height = 16
             Top = 60
-            Width = 127
+            Width = 137
             Caption = 'Anonymous password'
             ParentColor = False
           end
           object ftppassive: TCheckBox
             Left = 39
-            Height = 21
+            Height = 22
             Top = 18
-            Width = 125
+            Width = 134
             Caption = 'FTP Passive Mode'
             OnClick = ftppassiveClick
             TabOrder = 0
@@ -161,11 +161,20 @@ object f_config_internet: Tf_config_internet
             TabOrder = 1
           end
         end
+        object CheckBox1: TCheckBox
+          Left = 20
+          Height = 22
+          Top = 350
+          Width = 327
+          Caption = 'Ask confirmation before any Internet connection'
+          OnClick = CheckBox1Click
+          TabOrder = 2
+        end
       end
       object Page2: TPage
         Caption = 'Orbital Elements'
         ClientWidth = 485
-        ClientHeight = 407
+        ClientHeight = 405
         object Label6: TLabel
           Left = 28
           Height = 20
@@ -274,7 +283,7 @@ object f_config_internet: Tf_config_internet
       object Page3: TPage
         Caption = 'Online DSS'
         ClientWidth = 485
-        ClientHeight = 407
+        ClientHeight = 405
         object Label8: TLabel
           Left = 20
           Height = 20

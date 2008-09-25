@@ -520,7 +520,7 @@ type
                 ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd : string;
                 ImageLuminosity, ImageContrast : double;
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass: string;
-                FtpPassive, HttpProxy : Boolean;
+                FtpPassive, HttpProxy, ConfirmDownload : Boolean;
                 CometUrlList, AsteroidUrlList : TStringList;
                 end;
      Tconf_dss  = class(TObject)    // DSS image setting
@@ -1517,6 +1517,7 @@ ProxyPass:=Source.ProxyPass;
 AnonPass:=Source.AnonPass;
 FtpPassive:=Source.FtpPassive;
 HttpProxy:=Source.HttpProxy;
+ConfirmDownload:=Source.ConfirmDownload;
 if CometUrlList=nil then CometUrlList:=TStringList.Create;
 CometUrlList.Clear;
 for i:=0 to Source.CometUrlList.Count-1 do CometUrlList.Add(Source.CometUrlList.Strings[i]);

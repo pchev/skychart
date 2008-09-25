@@ -39,6 +39,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    CheckBox1: TCheckBox;
     DefaultDSS: TButton;
     comhttp: TButton;
     comftp: TButton;
@@ -76,6 +77,7 @@ type
     Page2: TPage;
     DSSpictures: TStringGrid;
     procedure Button2Click(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure anonpassChange(Sender: TObject);
@@ -131,6 +133,7 @@ Label5.caption:=rsPassword;
 GroupBox2.caption:=rsFTP;
 Label1.caption:=rsAnonymousPas;
 ftppassive.caption:=rsFTPPassiveMo;
+CheckBox1.Caption:=rsAskConfirmat;
 Page2.caption:=rsOrbitalEleme;
 Label6.caption:=rsCometElement;
 Label7.caption:=rsAsteroidElem;
@@ -177,6 +180,7 @@ proxyport.Text:=cmain.ProxyPort;
 proxyuser.Text:=cmain.ProxyUser;
 proxypass.Text:=cmain.ProxyPass;
 ftppassive.Checked:=cmain.FtpPassive;
+CheckBox1.Checked:=cmain.ConfirmDownload;
 anonpass.Text:=cmain.AnonPass;
 GroupBox3.Visible:=cmain.HttpProxy;
 end;
@@ -242,6 +246,13 @@ begin
 if lockchange then exit;
 cmain.AnonPass:=anonpass.text;
 end;
+
+procedure Tf_config_internet.CheckBox1Click(Sender: TObject);
+begin
+if lockchange then exit;
+cmain.ConfirmDownload:=CheckBox1.Checked;
+end;
+
 
 procedure Tf_config_internet.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);

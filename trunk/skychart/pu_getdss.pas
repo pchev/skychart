@@ -175,6 +175,8 @@ var i : SImageConfig;
     s: TMemoryStream;
 begin
 try
+hide;
+application.ProcessMessages;
 result:=false;
 if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   if cmain.HttpProxy then begin
@@ -191,6 +193,7 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   DownloadDialog1.FtpUserName:='anonymous';
   DownloadDialog1.FtpPassword:=cmain.AnonPass;
   DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
+  DownloadDialog1.ConfirmDownload:=cmain.ConfirmDownload;
   buf:=cfgdss.DSSurl[cfgdss.OnlineDSSid,1];
   width:=fov*rad2deg*60;
   height:=width/ratio;
