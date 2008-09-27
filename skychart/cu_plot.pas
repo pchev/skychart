@@ -414,6 +414,7 @@ end;
 //todo: check if gtk alpha transparency work
 {$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 {$IFDEF LCLGTK2} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
+{$IFDEF LCLQT} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 procedure SetTransparencyFromLuminance(bmp:Tbitmap; method: integer);
 var
   memstream:Tmemorystream;
@@ -444,12 +445,12 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
              end;
           1: begin  // hard contrast for bitmap stars
              {$IFDEF OLD_MASK_TRANSPARENCY}
-                if newalpha<(80*255) then
+                if newalpha<(50*255) then
                     CurColor:=colTransparent
                 else
                     CurColor.alpha:=alphaOpaque;
              {$ELSE}
-                if (newalpha>200*255) then newalpha:=65535;
+                if (newalpha>200*255) then newalpha:=alphaOpaque;
                 if (newalpha<100*255) then newalpha:=newalpha div 2;
                 CurColor.alpha:=newalpha;
              {$ENDIF}
