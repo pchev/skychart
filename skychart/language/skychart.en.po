@@ -275,6 +275,10 @@ msgstr ""
 msgid "As on screen (black background!)"
 msgstr ""
 
+#: u_translation:rsaskconfirmat
+msgid "Ask confirmation before any Internet connection"
+msgstr ""
+
 #: u_translation:rsasterism
 msgid "Asterism"
 msgstr ""
@@ -2477,6 +2481,10 @@ msgstr ""
 
 #: u_translation:rsnumberoffile
 msgid "Number of files"
+msgstr ""
+
+#: u_translation:rsnumberofnebu
+msgid "Number of nebulae"
 msgstr ""
 
 #: u_translation:rsnumberofstep

@@ -275,6 +275,10 @@ msgstr "Gervitungl"
 msgid "As on screen (black background!)"
 msgstr "Skjálitur (sva. bakgr!)"
 
+#: u_translation:rsaskconfirmat
+msgid "Ask confirmation before any Internet connection"
+msgstr ""
+
 #: u_translation:rsasterism
 msgid "Asterism"
 msgstr "Samstirni"
@@ -2478,6 +2482,10 @@ msgstr "Fjöldi stjarna"
 #: u_translation:rsnumberoffile
 msgid "Number of files"
 msgstr "Fjöldi skráa"
+
+#: u_translation:rsnumberofnebu
+msgid "Number of nebulae"
+msgstr ""
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"

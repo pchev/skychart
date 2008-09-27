@@ -275,6 +275,10 @@ msgstr "Künstliche Satelliten"
 msgid "As on screen (black background!)"
 msgstr "Wie am Bildschirm (Hintergrund Schwarz!)"
 
+#: u_translation:rsaskconfirmat
+msgid "Ask confirmation before any Internet connection"
+msgstr ""
+
 #: u_translation:rsasterism
 msgid "Asterism"
 msgstr "Stern"
@@ -2478,6 +2482,10 @@ msgstr "Anzahl der Sterne"
 #: u_translation:rsnumberoffile
 msgid "Number of files"
 msgstr "Anzahl der Dateien"
+
+#: u_translation:rsnumberofnebu
+msgid "Number of nebulae"
+msgstr ""
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"

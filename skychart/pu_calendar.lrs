@@ -1,10 +1,12 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_calendar','FORMDATA',[
   'TPF0'#11'Tf_calendar'#10'f_calendar'#4'Left'#3'q'#2#6'Height'#3#132#1#3'Top'
   +#2'f'#5'Width'#3#158#2#13'ActiveControl'#7#12'TwilightGrid'#7'Caption'#6#10
   +'f_calendar'#12'ClientHeight'#3#132#1#11'ClientWidth'#3#158#2#7'OnClose'#7#9
   +'FormClose'#12'OnCloseQuery'#7#14'FormCloseQuery'#8'OnCreate'#7#10'FormCreat'
   +'e'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormShow'#10'ParentFont'#8
-  +#10'LCLVersion'#6#6'0.9.25'#0#6'TPanel'#6'Panel1'#6'Height'#2'F'#5'Width'#3
+  +#10'LCLVersion'#6#6'0.9.26'#0#6'TPanel'#6'Panel1'#6'Height'#2'F'#5'Width'#3
   +#158#2#5'Align'#7#5'alTop'#12'ClientHeight'#2'F'#11'ClientWidth'#3#158#2#11
   +'FullRepaint'#8#8'TabOrder'#2#0#0#6'TLabel'#6'Label1'#4'Left'#2#8#6'Height'#2
   +#14#3'Top'#2#14#5'Width'#2#30#7'Caption'#6#4'From'#10'Font.Style'#11#6'fsBol'
@@ -191,7 +193,7 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +'Height'#2#25#3'Top'#2'('#5'Width'#2'i'#25'BorderSpacing.InnerBorder'#2#4#7
   +'Caption'#6#11'Reset Chart'#7'OnClick'#7#13'BtnResetClick'#8'TabOrder'#2#9#7
   +'Visible'#8#0#0#11'TTimePicker'#4'Time'#4'Left'#2'H'#6'Height'#2#23#3'Top'#2
-  ,')'#5'Width'#2'e'#4'Time'#5'q'#224'n^M<+'#226#254'?'#7'Enabled'#9#8'TabOrder'
+  ,')'#5'Width'#2'e'#4'Time'#5#0#128'o^M<+'#226#254'?'#7'Enabled'#9#8'TabOrder'
   +#2#2#7'TabStop'#9#0#0#0#12'TPageControl'#12'PageControl1'#6'Height'#3'>'#1#3
   +'Top'#2'F'#5'Width'#3#158#2#10'ActivePage'#7#8'twilight'#5'Align'#7#8'alClie'
   +'nt'#8'TabIndex'#2#0#8'TabOrder'#2#1#8'OnChange'#7#18'PageControl1Change'#13
@@ -358,14 +360,15 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#0#0#10'TFloatEdit'#8'magchart'#4'Left'#3#232#0#6'Height'#2#21#4'Hint'#6#5'0'
   +'..99'#5'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'#11'ParentColor'#8#14'Pare'
   +'ntShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#4#5'Value'#5#0#0#0#0#0#0#0#208#1
-  +'@'#8'MaxValue'#2'c'#0#0#9'TCheckBox'#11'SatChartBox'#4'Left'#3#208#1#6'Heig'
-  +'ht'#2#21#5'Width'#3#138#0#7'Caption'#6#21'in current chart only'#8'TabOrder'
-  +#2#3#0#0#10'TFloatEdit'#8'maglimit'#4'Left'#3#144#0#6'Height'#2#21#4'Hint'#6
-  +#5'0..99'#5'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'#9'MaxLength'#2#4#11'Pa'
-  +'rentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#5'Value'#2#4
-  +#8'MaxValue'#2'c'#0#0#0#0#0#11'TSaveDialog'#11'SaveDialog1'#11'FilterIndex'#2
-  +#0#4'left'#3'n'#1#3'top'#2#16#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'
-  +#12'AutoRegister'#9#4'left'#3#157#1#3'top'#2#21#0#0#22'THTMLBrowserHelpViewe'
-  +'r'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4
-  +'left'#3#205#1#3'top'#2#21#0#0#0
+  +'@'#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#9'TCheckBox'#11'SatChartBox'#4
+  +'Left'#3#208#1#6'Height'#2#21#5'Width'#3#138#0#7'Caption'#6#21'in current ch'
+  +'art only'#8'TabOrder'#2#3#0#0#10'TFloatEdit'#8'maglimit'#4'Left'#3#144#0#6
+  +'Height'#2#21#4'Hint'#6#5'0..99'#5'Width'#2'!'#11'BorderStyle'#7#8'bsSingle'
+  +#9'MaxLength'#2#4#11'ParentColor'#8#14'ParentShowHint'#8#8'ShowHint'#9#8'Tab'
+  +'Order'#2#1#5'Value'#5#0#0#0#0#0#0#0#128#1'@'#8'MaxValue'#5#0#0#0#0#0#0#0#198
+  +#5'@'#0#0#0#0#0#11'TSaveDialog'#11'SaveDialog1'#11'FilterIndex'#2#0#4'left'#3
+  +'n'#1#3'top'#2#16#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoReg'
+  +'ister'#9#4'left'#3#157#1#3'top'#2#21#0#0#22'THTMLBrowserHelpViewer'#22'HTML'
+  +'BrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#3
+  +#205#1#3'top'#2#21#0#0#0
 ]);

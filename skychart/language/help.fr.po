@@ -1,5 +1,4 @@
-# translation of help.fr.po
-# Patrick Chevalley <pch@freesurf.ch>, 2008.
+# translation of help.fr.po Patrick Chevalley <pch@freesurf.ch>, 2008.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2008-09-21 15:23+0200\n"

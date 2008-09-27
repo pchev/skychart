@@ -92,6 +92,23 @@ type
     MenuItem24: TMenuItem;
     MenuItem25: TMenuItem;
     MenuItem26: TMenuItem;
+    MenuEditLabels: TMenuItem;
+    MenuDSS: TMenuItem;
+    MenuBlinkImage: TMenuItem;
+    MenuTrack: TMenuItem;
+    MenuSyncChart: TMenuItem;
+    MenuItem28: TMenuItem;
+    Menuswitchbackground: TMenuItem;
+    MenuPosition: TMenuItem;
+    MenuListObj: TMenuItem;
+    MenuSearch: TMenuItem;
+    zoommenu: TMenuItem;
+    MenuStarNum: TMenuItem;
+    MenuNebNum: TMenuItem;
+    MenuMoreStar: TMenuItem;
+    MenuLessStar: TMenuItem;
+    MenuMoreNeb: TMenuItem;
+    MenuLessNeb: TMenuItem;
     MenuItem6: TMenuItem;
     SetupConfig: TAction;
     MenuItem12: TMenuItem;
@@ -355,7 +372,7 @@ type
     Field10: TSpeedButton;
     Undo1: TMenuItem;
     Redo1: TMenuItem;
-    ileVertically1: TMenuItem;
+    zoomplus1: TMenuItem;
     zoomminus1: TMenuItem;
     telescope1: TMenuItem;
     telescopeConnect1: TMenuItem;
@@ -2800,13 +2817,17 @@ P1L1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
 if sendmsg then SendInfo(Sender,origin,txt);
 // refresh tracking object
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
-    if sc.cfgsc.TrackOn then
-       ToolButtonTrack.Hint:=rsUnlockChart
-     else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
-     then
-       ToolButtonTrack.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname])
-     else
+    if sc.cfgsc.TrackOn then begin
+       ToolButtonTrack.Hint:=rsUnlockChart;
+       MenuTrack.Caption:=rsUnlockChart;
+     end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
+     then begin
+       ToolButtonTrack.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname]);
+       MenuTrack.Caption:=Format(rsLockOn, [sc.cfgsc.Trackname]);
+     end else begin
        ToolButtonTrack.Hint:=rsNoObjectToLo;
+       MenuTrack.Caption:=rsNoObjectToLo;
+     end;
      if f_manualtelescope.visible then  f_manualtelescope.SetTurn(sc.cfgsc.FindNote);
 end;
 end;
@@ -4474,8 +4495,11 @@ ToolButtonZoom.hint:=rsZoomIn;
 ToolButtonUnZoom.hint:=rsZoomOut;
 ToolButton1.hint:=rsSetFOV;
 ToolButtonSearch.hint:=rsAdvancedSear;
+MenuSearch.Caption:=rsAdvancedSear;
 ToolButtonPosition.hint:=rsPosition;
+MenuPosition.Caption:=rsPosition;
 ToolButtonListObj.hint:=rsObjectList;
+MenuListObj.Caption:=rsObjectList;
 ToolButtonCal.hint:=rsEphemerisCal;
 ToolButtonTdec.hint:=rsDecrementTim;
 ToolButtonTnow.hint:=rsNow;
@@ -4488,7 +4512,9 @@ ToolButtonShowNebulae.hint:=rsShowNebulae;
 ToolButtonShowLines.hint:=rsShowLines;
 ToolButtonShowPictures.hint:=rsShowPictures;
 ToolButtonBlink.hint:=rsBlinkingPict;
+menublinkimage.Caption:=rsBlinkingPict;
 ToolButtonDSS.hint:=rsGetDSSImage;
+MenuDSS.Caption:=rsGetDSSImage;
 ToolButtonShowBackgroundImage.hint:=rsChangePictur;
 ToolButtonShowPlanets.hint:=rsShowPlanets;
 ToolButtonShowAsteroids.hint:=rsShowAsteroid;
@@ -4503,10 +4529,15 @@ ToolButtonShowEcliptic.hint:=rsShowEcliptic;
 ToolButtonShowMark.hint:=rsShowMark;
 ToolButtonShowLabels.hint:=rsShowLabels;
 ToolButtonEditlabels.hint:=rsEditLabel;
+MenuEditlabels.Caption:=rsEditLabel;
 ToolButtonShowObjectbelowHorizon.hint:=rsShowObjectBe;
 ToolButtonswitchbackground.hint:=rsSkyBackgroun;
+Menuswitchbackground.caption:=rsSkyBackgroun;
 ToolButtonSyncChart.hint:=rsLinkAllChart;
+MenuSyncChart.Caption:=rsLinkAllChart;
+MenuSyncChart.hint:=rsLinkAllChart;
 ToolButtonTrack.hint:=rsNoObjectToLo;
+MenuTrack.Caption:=rsNoObjectToLo;
 ToolButtonswitchstars.hint:=rsChangeDrawin;
 File1.caption:=rsFile;
 FileNewItem.caption:=rsNewChart;
@@ -4548,8 +4579,9 @@ RightBar1.caption:=rsRightBar;
 ViewStatusBar1.caption:=rsStatusBar;
 ViewScrollBar1.caption:=rsScrollBar;
 ViewInformation1.caption:=rsServerInform;
-ileVertically1.caption:=rsZoomIn;
+zoomplus1.caption:=rsZoomIn;
 zoomminus1.caption:=rsZoomOut;
+zoommenu.Caption:=rsSetFOV;
 Chart1.caption:=rsChart;
 Projection1.caption:=rsChartCoordin2;
 EquatorialCoordinate1.caption:=rsEquatorialCo;
@@ -4608,6 +4640,12 @@ ButtonMoreStar.Hint:=rsMoreStars;
 ButtonLessStar.Hint:=rsLessStars;
 ButtonMoreNeb.Hint:=rsMoreNebulae;
 ButtonLessNeb.Hint:=rsLessNebulae;
+MenuMoreStar.Caption:=rsMoreStars;
+MenuLessStar.Caption:=rsLessStars;
+MenuMoreNeb.Caption:=rsMoreNebulae;
+MenuLessNeb.Caption:=rsLessNebulae;
+MenuStarNum.Caption:=rsNumberOfStar;
+MenuNebNum.Caption:=rsNumberOfNebu;
 ResetAllLabels1.caption:=rsResetAllLabe;
 quicksearch.Hint:=rsSearch;
 TimeVal.Hint:=rsTime;
@@ -4822,13 +4860,17 @@ if MultiDoc1.ActiveObject=sender then begin
     ToolButtonBlink.Down:=BlinkTimer.enabled;
     ToolButtonSyncChart.down:=cfgm.SyncChart;
     ToolButtonTrack.down:=sc.cfgsc.TrackOn;
-    if sc.cfgsc.TrackOn then
-       ToolButtonTrack.Hint:=rsUnlockChart
-     else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
-     then
-       ToolButtonTrack.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname])
-     else
+    if sc.cfgsc.TrackOn then begin
+       ToolButtonTrack.Hint:=rsUnlockChart;
+       MenuTrack.Caption:=rsUnlockChart;
+     end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
+     then begin
+       ToolButtonTrack.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname]);
+       MenuTrack.Caption:=Format(rsLockOn, [sc.cfgsc.Trackname]);
+     end else begin
        ToolButtonTrack.Hint:=rsNoObjectToLo;
+       MenuTrack.Caption:=rsNoObjectToLo;
+     end;
     case sc.plot.cfgplot.starplot of
     0: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=true; end;
     1: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=false; end;
