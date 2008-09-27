@@ -12,7 +12,7 @@ object f_addlabel: Tf_addlabel
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.26'
   object Label1: TLabel
     Left = 12
     Height = 14

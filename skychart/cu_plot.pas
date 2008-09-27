@@ -224,6 +224,7 @@ for i:=0 to 6 do
     labels[i].color:=clNone;
     labels[i].ShowAccelChar:=false;
     labels[i].Font.CharSet:=FCS_ISO_10646_1;
+    labels[i].PopupMenu:=editlabelmenu;
     labels[i].OnMouseDown:=labelmousedown;
     labels[i].OnMouseUp:=labelmouseup;
     labels[i].OnMouseMove:=labelmousemove;

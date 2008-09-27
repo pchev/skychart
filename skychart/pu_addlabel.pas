@@ -82,16 +82,17 @@ procedure Tf_addlabel.FormShow(Sender: TObject);
 begin
   txt:=edit1.Text;
   labelnum:=ComboBox1.ItemIndex+1;
-  RadioGroup1.ItemIndex:=0;
+  RadioGroup1.ItemIndex:=2;
   Lalign:=laLeft;
 end;
 
 procedure Tf_addlabel.RadioGroup1Click(Sender: TObject);
 begin
+// text alignment to left put text on right of object!
   case RadioGroup1.ItemIndex of
-   0 : Lalign:=laLeft;
+   0 : Lalign:=laRight;
    1 : Lalign:=laCenter;
-   2 : Lalign:=laRight;
+   2 : Lalign:=laLeft;
   end;
 end;
 

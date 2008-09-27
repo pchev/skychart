@@ -2713,6 +2713,7 @@ WindowXY(x1,y1,x,y,cfgsc);
 fontnum:=2;
 if f_addlabel=nil then f_addlabel:=Tf_addlabel.Create(application);
 formpos(f_addlabel,trunc(x),trunc(y));
+f_addlabel.ActiveControl:=f_addlabel.Edit1;
 if f_addlabel.ShowModal=mrOK then begin
    txt:=f_addlabel.txt;
    if cfgsc.numcustomlabels<maxmodlabels then inc(cfgsc.numcustomlabels);
