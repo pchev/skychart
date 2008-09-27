@@ -5,7 +5,7 @@ LazarusResources.Add('Tf_addlabel','FORMDATA',[
   +#3#208#0#5'Width'#3#8#1#13'ActiveControl'#7#5'Edit1'#11'BorderIcons'#11#12'b'
   +'iSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#9'Add Label'#12'C'
   +'lientHeight'#3#149#0#11'ClientWidth'#3#8#1#8'OnCreate'#7#10'FormCreate'#6'O'
-  +'nShow'#7#8'FormShow'#10'ParentFont'#8#10'LCLVersion'#6#6'0.9.25'#0#6'TLabel'
+  +'nShow'#7#8'FormShow'#10'ParentFont'#8#10'LCLVersion'#6#6'0.9.26'#0#6'TLabel'
   +#6'Label1'#4'Left'#2#12#6'Height'#2#14#3'Top'#2#16#5'Width'#2'#'#7'Caption'#6
   +#6'Label:'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#12#6'Height'#2
   +#14#3'Top'#2'-'#5'Width'#2#30#7'Caption'#6#5'Type:'#11'ParentColor'#8#0#0#5
