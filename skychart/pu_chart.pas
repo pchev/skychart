@@ -41,6 +41,7 @@ const maxundo=10;
 
 type
   Tstr1func = procedure(txt:string) of object;
+  Tstr2func = procedure(txt:string;sender:TObject) of object;
   Tint2func = procedure(i1,i2:integer) of object;
   Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
   Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil) of object;
@@ -168,7 +169,7 @@ type
     Ftelescope: Ttelescope;
     FImageSetFocus: TnotifyEvent;
     FSetFocus: TnotifyEvent;
-    FShowTopMessage: Tstr1func;
+    FShowTopMessage: Tstr2func;
     FUpdateBtn: Tbtnfunc;
     FShowInfo : Tshowinfo;
     FShowCoord: Tstr1func;
@@ -274,7 +275,7 @@ type
     property telescopeplugin: Ttelescope read Ftelescope write Ftelescope;
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
-    property OnShowTopMessage: Tstr1func read FShowTopMessage write FShowTopMessage;
+    property OnShowTopMessage: Tstr2func read FShowTopMessage write FShowTopMessage;
     property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
@@ -459,7 +460,7 @@ if lock_refresh then exit;
     Identlabel.color:=sc.plot.cfgplot.color[0];
     Identlabel.font.color:=sc.plot.cfgplot.color[11];
     if sc.cfgsc.FindOk then ShowIdentLabel;
-    if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
+    if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo,self);
     Image1.Cursor:=ChartCursor;
 end;
 finally
@@ -498,7 +499,7 @@ if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
   sc.Refresh;
   Image1.Invalidate;
   if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
-  if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
+  if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo,self);
   if assigned(FChartMove) then FChartMove(self);
   SetScrollBar;
 end;
@@ -520,7 +521,7 @@ if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
   sc.Refresh;
   Image1.Invalidate;
   if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
-  if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
+  if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo,self);
   if assigned(FChartMove) then FChartMove(self);
   SetScrollBar;
 end;
@@ -900,7 +901,7 @@ procedure Tf_chart.ChartActivate;
 begin
 // code to execute when the chart get focus.
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
-if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo);
+if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo,self);
 if sc.cfgsc.FindOk and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,false);
 end;
 

@@ -685,7 +685,7 @@ type
     Procedure activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
     Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
     Procedure SetLPanel0(txt:string);
-    Procedure SetTopMessage(txt:string);
+    Procedure SetTopMessage(txt:string;sender:TObject);
     procedure updatebtn(fx,fy:integer;tc:boolean;sender:TObject);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
@@ -2837,12 +2837,14 @@ begin
 P0L1.Caption:=txt;
 end;
 
-Procedure Tf_main.SetTopMessage(txt:string);
+Procedure Tf_main.SetTopMessage(txt:string;sender:TObject);
 begin
 // set the message that appear in the menu bar
-topmsg:=txt;
-if cfgm.ShowChartInfo then topmessage.caption:=topmsg
-   else topmessage.caption:=' ';
+if MultiDoc1.ActiveObject=sender then begin
+  topmsg:=txt;
+  if cfgm.ShowChartInfo then topmessage.caption:=topmsg
+     else topmessage.caption:=' ';
+end;
 end;
 
 procedure Tf_main.FormResize(Sender: TObject);
