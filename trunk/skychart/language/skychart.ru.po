@@ -277,6 +277,10 @@ msgstr "ИСЗ"
 msgid "As on screen (black background!)"
 msgstr "Как на экране (чёрной фон!!!)"
 
+#: u_translation:rsaskconfirmat
+msgid "Ask confirmation before any Internet connection"
+msgstr ""
+
 #: u_translation:rsasterism
 msgid "Asterism"
 msgstr "Астеризм"
@@ -2480,6 +2484,10 @@ msgstr "Количество звёзд"
 #: u_translation:rsnumberoffile
 msgid "Number of files"
 msgstr "Количество файлов"
+
+#: u_translation:rsnumberofnebu
+msgid "Number of nebulae"
+msgstr ""
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"

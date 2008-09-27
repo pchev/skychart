@@ -276,6 +276,10 @@ msgstr "Satelity"
 msgid "As on screen (black background!)"
 msgstr "Jako na obrazovce (černé pozadí!)"
 
+#: u_translation:rsaskconfirmat
+msgid "Ask confirmation before any Internet connection"
+msgstr ""
+
 #: u_translation:rsasterism
 msgid "Asterism"
 msgstr "Skupina hvězd"
@@ -2479,6 +2483,10 @@ msgstr "Počet hvězd"
 #: u_translation:rsnumberoffile
 msgid "Number of files"
 msgstr "Počet souborů"
+
+#: u_translation:rsnumberofnebu
+msgid "Number of nebulae"
+msgstr ""
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"
