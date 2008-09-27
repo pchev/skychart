@@ -1,15 +1,16 @@
-# translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007.
+# translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-12-11 18:03+0100\n"
-"Last-Translator: Mattia Verga <mverga@freemail.it>\n"
+"PO-Revision-Date: 2008-09-20 14:33+0200\n"
+"Last-Translator: Mattia\n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
-"Language-Team:  <it@li.org>\n"
+"Language-Team: Italian <kde-i18n-it@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any installed catalog index."
@@ -209,7 +210,7 @@ msgstr "Tutti i pannelli"
 
 #: u_translation:rsallconfigura
 msgid "All configuration options"
-msgstr ""
+msgstr "Tutte le opzioni di configurazione"
 
 #: u_translation:rsalt
 msgid "Alt"
@@ -961,7 +962,7 @@ msgstr "Data / Ora"
 
 #: u_translation:rsdateformat
 msgid "Date Format"
-msgstr ""
+msgstr "Formato Data"
 
 #: u_translation:rsdatefrom
 msgid "Date from"
@@ -1581,7 +1582,7 @@ msgstr "Fisso nero"
 
 #: u_translation:rsfixedskycolo
 msgid "Fixed sky color"
-msgstr ""
+msgstr "Colore del cielo fisso"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -1677,7 +1678,7 @@ msgstr "Recupera immagini DSS"
 
 #: u_translation:rsgetrecentmea
 msgid "Get recent measurement from JUPOS project"
-msgstr ""
+msgstr "Recupera misure recenti dal progetto JUPOS"
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2929,7 +2930,7 @@ msgstr "Impostazioni Proiezione"
 
 #: u_translation:rspropermotion3
 msgid "Proper Motion"
-msgstr ""
+msgstr "Moto Proprio"
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"
@@ -3033,7 +3034,7 @@ msgstr "Ripristina ultima modifica"
 
 #: u_translation:rsreducedetail
 msgid "Reduce detail when moving the chart"
-msgstr ""
+msgstr "Riduci i dettagli durante spostamenti"
 
 #: u_translation:rsreference
 msgid "Reference"
@@ -3977,11 +3978,11 @@ msgstr "Userid:"
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"
-msgstr "Stelle Variabili"
+msgstr "Stella Variabile"
 
 #: u_translation:rsvariablestar2
 msgid "Variable Stars"
-msgstr ""
+msgstr "Stelle Variabili"
 
 #: u_translation:rsvariables
 msgid "Variables"
