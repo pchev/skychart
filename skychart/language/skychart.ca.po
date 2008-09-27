@@ -1,7 +1,7 @@
 # translation of skychart.ca.po
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-06-05 11:00+0100\n"
+"PO-Revision-Date: 2008-09-23 19:10+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.ca\n"
 "POT-Creation-Date: \n"
@@ -210,7 +210,7 @@ msgstr "Totes les barres d'útils"
 
 #: u_translation:rsallconfigura
 msgid "All configuration options"
-msgstr ""
+msgstr "Totes les opcions de configuració"
 
 #: u_translation:rsalt
 msgid "Alt"
@@ -322,7 +322,7 @@ msgstr "Refresca cada"
 
 #: u_translation:rsautorefresh
 msgid "AutoRefresh"
-msgstr "Rafresca automàticament"
+msgstr "Refresca automàticament"
 
 #: u_translation:rsautomatic
 msgid "Automatic"
@@ -962,7 +962,7 @@ msgstr "Data / Hora"
 
 #: u_translation:rsdateformat
 msgid "Date Format"
-msgstr ""
+msgstr "Format de la data"
 
 #: u_translation:rsdatefrom
 msgid "Date from"
@@ -1582,7 +1582,7 @@ msgstr "Fixat negre"
 
 #: u_translation:rsfixedskycolo
 msgid "Fixed sky color"
-msgstr ""
+msgstr "Color del cel fix"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -1678,7 +1678,7 @@ msgstr "Mostra una imatge DSS"
 
 #: u_translation:rsgetrecentmea
 msgid "Get recent measurement from JUPOS project"
-msgstr ""
+msgstr "Obté mesures recents del projecte JUPOS"
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -2930,7 +2930,7 @@ msgstr "Paràmetres de projecció"
 
 #: u_translation:rspropermotion3
 msgid "Proper Motion"
-msgstr ""
+msgstr "Moviment propi"
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"
@@ -3034,7 +3034,7 @@ msgstr "Refés l'últim canvi"
 
 #: u_translation:rsreducedetail
 msgid "Reduce detail when moving the chart"
-msgstr ""
+msgstr "Reduix detalls quan moguis la carta"
 
 #: u_translation:rsreference
 msgid "Reference"
@@ -3982,7 +3982,7 @@ msgstr "Estel variable"
 
 #: u_translation:rsvariablestar2
 msgid "Variable Stars"
-msgstr ""
+msgstr "Estels variables"
 
 #: u_translation:rsvariables
 msgid "Variables"
