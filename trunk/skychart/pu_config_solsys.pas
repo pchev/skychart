@@ -457,6 +457,7 @@ TransparentPlanet.Checked:=cplot.TransparentPlanet;
  XplanetBox.Visible:=false;
  use_xplanet:=true;
 {$endif}
+ActiveControl:=PlanetDir;
 end;
 
 procedure Tf_config_solsys.ShowComet;

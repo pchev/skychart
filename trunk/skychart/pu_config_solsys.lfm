@@ -12,7 +12,7 @@ object f_config_solsys: Tf_config_solsys
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.26'
   object MainPanel: TPanel
     Height = 486
     Width = 515
@@ -622,7 +622,6 @@ object f_config_solsys: Tf_config_solsys
                 Top = 6
                 Width = 281
                 AutoCompleteText = [cbactSearchAscending]
-                MaxLength = -1
                 Style = csDropDownList
                 TabOrder = 0
               end
@@ -1286,7 +1285,6 @@ object f_config_solsys: Tf_config_solsys
                 Top = 14
                 Width = 281
                 AutoCompleteText = [cbactSearchAscending]
-                MaxLength = -1
                 Style = csDropDownList
                 TabOrder = 0
               end
