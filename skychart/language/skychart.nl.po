@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-11-20 14:22+0100\n"
+"PO-Revision-Date: 2008-09-28 23:42+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -13,7 +13,7 @@ msgstr ""
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any installed catalog index."
-msgstr "%s Niet gevonden binnen geen van de geïnstalleerde catalgus indices."
+msgstr "%s Niet gevonden binnen geen van de geïnstalleerde catalogi indices."
 
 #: u_translation:rsdifferenttha
 msgid "%s (different than configured port, maybe busy or other error.)"
@@ -65,7 +65,7 @@ msgstr "%smet de klok mee"
 
 #: u_translation:rscannotopenda
 msgid "%sCannot open database %s! %s"
-msgstr "%sKan de database niet %s openen! %s"
+msgstr "%sKan niet de database %s openen! %s"
 
 #: u_translation:rsdecturns2
 msgid "%sDEC turns:"
@@ -101,7 +101,7 @@ msgstr "(nuttig om een flux weer te geven)"
 
 #: u_translation:rsnopropermo
 msgid ", no proper motion"
-msgstr ", geen eigenbeweging"
+msgstr ", geen eigen beweging"
 
 #: u_translation:rs102cddss
 msgid "102 CD DSS"
@@ -209,7 +209,7 @@ msgstr "Alle gereedschapsbalken"
 
 #: u_translation:rsallconfigura
 msgid "All configuration options"
-msgstr ""
+msgstr "Alle configuratie instellingen"
 
 #: u_translation:rsalt
 msgid "Alt"
@@ -241,7 +241,7 @@ msgstr "Altijd kompasroos tonen"
 
 #: u_translation:rsannualproper
 msgid "Annual Proper Motion"
-msgstr "Jaarlijkse eigenbeweging"
+msgstr "Jaarlijkse eigen beweging"
 
 #: u_translation:rsanonymouspas
 msgid "Anonymous password"
@@ -274,10 +274,6 @@ msgstr "Kunstmatige satellieten"
 #: u_translation:rsasonscreenbl
 msgid "As on screen (black background!)"
 msgstr "Als op het scherm (zwarte achtergrond!)"
-
-#: u_translation:rsaskconfirmat
-msgid "Ask confirmation before any Internet connection"
-msgstr ""
 
 #: u_translation:rsasterism
 msgid "Asterism"
@@ -545,7 +541,7 @@ msgstr "Centrale ster B magnitude"
 
 #: u_translation:rscentralstarv
 msgid "Central Star V Magnitude"
-msgstr "Centrale ster B magnitude"
+msgstr "Centrale ster V magnitude"
 
 #: u_translation:rscentralmerid
 msgid "Central meridian"
@@ -693,7 +689,7 @@ msgstr "Naam"
 
 #: u_translation:rscompassroses
 msgid "Compass rose size"
-msgstr "Kompas-roos grootte"
+msgstr "Kompasroos grootte"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -965,7 +961,7 @@ msgstr "Datum / tijd"
 
 #: u_translation:rsdateformat
 msgid "Date Format"
-msgstr ""
+msgstr "Datum formaat"
 
 #: u_translation:rsdatefrom
 msgid "Date from"
@@ -981,7 +977,7 @@ msgstr "Dag"
 
 #: u_translation:rsdaytime
 msgid "Day Time"
-msgstr "Dag tijd"
+msgstr "Overdag"
 
 #: u_translation:rsdecimalsouth
 msgid "Decimal South Polar Distance"
@@ -989,7 +985,7 @@ msgstr "Decimaal zuidelijke poolafstand"
 
 #: u_translation:rsdecimaldegre
 msgid "Decimal degrees"
-msgstr "Decimaal graden"
+msgstr "Decimale graden"
 
 #: u_translation:rsdecimalhours
 msgid "Decimal hours"
@@ -1093,7 +1089,7 @@ msgstr "Verwijder maandelijkse data ouder dan"
 
 #: u_translation:rsdeletecomple
 msgid "Delete completed"
-msgstr "Delete completed"
+msgstr "Klaar met verwijderen"
 
 #: u_translation:rsdeletedailyd
 msgid "Delete daily data"
@@ -1269,7 +1265,7 @@ msgstr "Toon planeet als"
 
 #: u_translation:rsdrawalinetha
 msgid "Draw a line that represent the proper motion for the next "
-msgstr "Beeld een lijn af die de eigenbeweging weergeeft voor de volgende"
+msgstr "Beeld een lijn af die de eigen beweging weergeeft voor de volgende"
 
 #: u_translation:rsdrawline
 msgid "Draw line"
@@ -1493,11 +1489,11 @@ msgstr "FTP passieve modus"
 
 #: u_translation:rsfailed
 msgid "Failed : %s"
-msgstr "Mislukt : %s"
+msgstr "Mislukt: %s"
 
 #: u_translation:rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Zwakke sterren-grootte"
+msgstr "Zwakke sterren grootte"
 
 #: u_translation:rsfainter
 msgid "Fainter"
@@ -1521,7 +1517,7 @@ msgstr "Beeldveld nummer:"
 
 #: u_translation:rsfieldtoowidt
 msgid "Field too width! Maximum is %s"
-msgstr "Beeldveld te breed! Maximum is %s"
+msgstr "Beeldveld te groot! Maximum is %s"
 
 #: u_translation:rsfile
 msgid "File"
@@ -1537,7 +1533,7 @@ msgstr "Bestanden-pad"
 
 #: u_translation:rsfillmilkyway
 msgid "Fill Milky Way"
-msgstr "Vul melkweg"
+msgstr "Vul Melkweg"
 
 #: u_translation:rsfillwithhori
 msgid "Fill with horizon color"
@@ -1585,7 +1581,7 @@ msgstr "Vast zwart"
 
 #: u_translation:rsfixedskycolo
 msgid "Fixed sky color"
-msgstr ""
+msgstr "Vaste hemelkleur"
 
 #: u_translation:rsflamsteednum
 msgid "Flamsteed Number"
@@ -1597,7 +1593,7 @@ msgstr "Fonts"
 
 #: u_translation:rsforalargecat
 msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
-msgstr "Voor een grote catalogus altijd 'binair geïndiceerde catalogus' seleceteren. Voor een kleine dataset die frequent verandert, selecteer ''Tekstbestand catalogus'. Dit maakt het mogelijk het bestand te bewerken en het resultaat onmiddelijk op de kaart toonbaar te maken zonder de noodzaak deze utility nog eens te draaien."
+msgstr "Selecteer voor een grote catalogus altijd 'binair geïndiceerde catalogus'. Voor een kleine dataset die frequent verandert, selecteer ''Tekstbestand catalogus'. Dit maakt het mogelijk het bestand te bewerken en het resultaat onmiddelijk op de kaart toonbaar te maken zonder de noodzaak deze utility nog eens te draaien."
 
 #: u_translation:rsfriday
 msgid "Fri."
@@ -1621,7 +1617,7 @@ msgstr "G helling parameter"
 
 #: u_translation:rsgrstransit
 msgid "GRS transit"
-msgstr "GRV overgang"
+msgstr "Grote Rode Vlek overgang"
 
 #: u_translation:rsgalactic
 msgid "Galactic"
@@ -1681,7 +1677,7 @@ msgstr "Haal DSS afbeelding"
 
 #: u_translation:rsgetrecentmea
 msgid "Get recent measurement from JUPOS project"
-msgstr ""
+msgstr "Haal recente meetgegevens van JUPOS project"
 
 #: u_translation:rsglobularclus
 msgid "Globular Cluster"
@@ -1757,7 +1753,7 @@ msgstr "Verberg label"
 
 #: u_translation:rshideobjectwi
 msgid "Hide object wider than"
-msgstr "Verberg object breder dan"
+msgstr "Verberg object groter dan"
 
 #: u_translation:rshighcolor
 msgid "High Color"
@@ -1977,7 +1973,7 @@ msgstr "Latijnse naam"
 
 #: u_translation:rslatitude
 msgid "Latitude"
-msgstr "breedtegraad"
+msgstr "Breedtegraad"
 
 #: u_translation:rsleft
 msgid "Left"
@@ -2045,7 +2041,7 @@ msgstr "Lijn bewerking"
 
 #: u_translation:rslinewidth
 msgid "Line width "
-msgstr "Lijnbreedte"
+msgstr "Lijndikte"
 
 #: u_translation:rslines
 msgid "Lines"
@@ -2209,7 +2205,7 @@ msgstr "Handmatige montering"
 
 #: u_translation:rsmanualtelesc
 msgid "Manual Telescope"
-msgstr "Handmatige Telescoop"
+msgstr "Handmatige telescoop"
 
 #: u_translation:rsmap
 msgid "Map"
@@ -2482,10 +2478,6 @@ msgstr "Aantal sterren"
 #: u_translation:rsnumberoffile
 msgid "Number of files"
 msgstr "Aantal bestanden"
-
-#: u_translation:rsnumberofnebu
-msgid "Number of nebulae"
-msgstr ""
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"
@@ -2937,15 +2929,15 @@ msgstr "Projectie-instelling"
 
 #: u_translation:rspropermotion3
 msgid "Proper Motion"
-msgstr ""
+msgstr "Eigen beweging"
 
 #: u_translation:rspropermotion2
 msgid "Proper Motion in Declination"
-msgstr "Eigenbeweging in declinatie (DEC)"
+msgstr "Eigen beweging in declinatie (DEC)"
 
 #: u_translation:rspropermotion
 msgid "Proper Motion in Right ascension"
-msgstr "Eigenbeweging in rechte klimming (RA)"
+msgstr "Eigen beweging in rechte klimming (RA)"
 
 #: u_translation:rsproportional2
 msgid "Proportional to the magnitude"
@@ -3041,7 +3033,7 @@ msgstr "Doe laatste verandering opnieuw"
 
 #: u_translation:rsreducedetail
 msgid "Reduce detail when moving the chart"
-msgstr ""
+msgstr "Verminder detail bij verschuiven van de kaart"
 
 #: u_translation:rsreference
 msgid "Reference"
@@ -3289,7 +3281,7 @@ msgstr "Semi"
 
 #: u_translation:rssemimajoraxi
 msgid "Semimajor Axis"
-msgstr "Lange as"
+msgstr "Halve lange as"
 
 #: u_translation:rssendcharttop
 msgid "Send chart to printer."
@@ -3609,7 +3601,7 @@ msgstr "Sterren - en deep sky catalogi gecreëerd met"
 
 #: u_translation:rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "Sterren eigenbeweging opties (indien beschikbaar in catalogus)"
+msgstr "Sterren eigen beweging opties (indien beschikbaar in catalogus)"
 
 #: u_translation:rsstartmonth
 msgid "Start Month"
@@ -3649,7 +3641,7 @@ msgstr "Zo."
 
 #: u_translation:rssupernovarem
 msgid "Supernova remnant"
-msgstr "Supernova overblijfsel"
+msgstr "Supernova restant"
 
 #: u_translation:rssurface
 msgid "Surface"
@@ -3969,7 +3961,7 @@ msgstr "Gebruik systeemtijd"
 
 #: u_translation:rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr "Gebruik de eigenbeweging om de positie te corrigeren voor de gegeven epoche"
+msgstr "Gebruik de eigen beweging om de positie te corrigeren voor de gegeven epoche"
 
 #: u_translation:rsusethisfield
 msgid "Use this field as an Alternate Name"
@@ -3989,7 +3981,7 @@ msgstr "Variabele ster"
 
 #: u_translation:rsvariablestar2
 msgid "Variable Stars"
-msgstr ""
+msgstr "Variabele sterren"
 
 #: u_translation:rsvariables
 msgid "Variables"
@@ -4033,11 +4025,11 @@ msgstr "Waarschuwing! Berekening van"
 
 #: u_translation:rswarningthecu
 msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
-msgstr "Waarschuwing! De standaard waarde voor huidige datum en/of observatielocatie zijn mogelijk gewijzigd. U kunt nu Nee antwoorden en de %s knop gebruiken om terug te keren naar uw vorige standaardwaarden, anders gaan ze verloren. Wilt u verder gaan?"
+msgstr "Waarschuwing! De oorspronkelijke waarde van datum en/of observatielocatie zijn gewijzigd. U kunt nu 'Nee' klikken en de %s knop gebruiken om de oorspronkelijke datum/observatielocatie terug te zetten, anders gaan ze verloren. Wilt u verder gaan?"
 
 #: u_translation:rswarningyouar2
 msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
-msgstr "Waarschuwing! U gebruikt verschillende catalogi voor dezelfde objecten. Vergewis u ervan dat u dat wilt."
+msgstr "Waarschuwing! U gebruikt verschillende catalogi voor dezelfde objecten. Vergewis u ervan dat u dit wilt."
 
 #: u_translation:rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
@@ -4149,7 +4141,7 @@ msgstr "dpi voor 8x11 papier"
 
 #: u_translation:rsdocumentatio
 msgid "en/documentation/start.html"
-msgstr "en/documentation/start.html"
+msgstr "nl/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

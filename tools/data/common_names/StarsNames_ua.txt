@@ -1,9 +1,4 @@
-﻿; Stars Names for Cartes du Ciel
-; the first column is the HR number 
-; Ukrainian name_ UA
-; Translator: Oleg Maliy, gemini@ua.fm
-; 
- 3307    Авіор: Avior
+﻿ 3307    Авіор: Avior
  5267    Агена: Agena; Hadar
  2618    Адара: Adara; Adhara
   390    Адгіл: Adhil
