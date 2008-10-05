@@ -1,160 +1,163 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-06 10:44+0200\n"
-"Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
-"Project-Id-Version: skychart.fr\n"
+"PO-Revision-Date: 2008-09-29 21:48+0200\n"
+"Last-Translator: Oleg Maliy <astroclubzp@gmail.com>\n"
+"Project-Id-Version: Cartes du Ciel v.3\n"
 "POT-Creation-Date: \n"
-"Language-Team:  <translation@ap-i.net>\n"
+"Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: u_help:hlpsearch
 msgid "advanced_search.html"
-msgstr ""
+msgstr "поліпшений_пошук.html"
 
 #: u_help:hlpcalast
 msgid "calendar_asteroid.html"
-msgstr ""
+msgstr "календар_астероїд.html"
 
 #: u_help:hlpcalcom
 msgid "calendar_comet.html"
-msgstr ""
+msgstr "календар_комета.html"
 
 #: u_help:hlpcalinput
 msgid "calendar_input_area.html"
-msgstr ""
+msgstr "календар_вхідна_область.html"
 
 #: u_help:hlpcalluna
 msgid "calendar_lunar_eclipses.html"
-msgstr ""
+msgstr "календар_місячні_затьмарення.html"
 
 #: u_help:hlpcalpla
 msgid "calendar_planet.html"
-msgstr ""
+msgstr "календар_планета.html"
 
 #: u_help:hlpcalsol
 msgid "calendar_solar_eclipses.html"
-msgstr ""
+msgstr "календар_сонячні_затьмарення.html"
 
 #: u_help:hlpcaltw
 msgid "calendar_twilight.html"
-msgstr ""
+msgstr "календар_присмерки.html"
 
 #: u_help:hlpcatalog
 msgid "catalog.html"
-msgstr ""
+msgstr "каталог.html"
 
 #: u_help:hlpcfgchart
 msgid "chart_coordinates.html"
-msgstr ""
+msgstr "мапа_координати.html"
 
 #: u_help:hlpcfgdate
 msgid "date_time.html"
-msgstr ""
+msgstr "дата_час.html"
 
 #: u_help:hlpinfo
 msgid "detailed_information.html"
-msgstr ""
+msgstr "детальна_інформація.html"
 
 #: u_help:hlpcfgdispl
 msgid "display.html"
-msgstr ""
+msgstr "спосіб_показувати.html"
 
 #: u_help:hlpbasedir
 msgid "en/documentation/"
-msgstr ""
+msgstr "uk/documentation/"
 
 #: u_help:hlpcfgint
 msgid "internet.html"
-msgstr ""
+msgstr "інтернет.html"
 
 #: u_help:hlpbarleft
 msgid "left_bar.html"
-msgstr ""
+msgstr "ліва_панель.html"
 
 #: u_help:hlpbarmain
 msgid "main_bar.html"
-msgstr ""
+msgstr "головна_панель.html"
 
 #: u_help:hlpmenuchart
 msgid "menuchart.html"
-msgstr ""
+msgstr "меню_мапа.html"
 
 #: u_help:hlpmenuedit
 msgid "menuedit.html"
-msgstr ""
+msgstr "меню_редагування.html"
 
 #: u_help:hlpmenufile
 msgid "menufile.html"
-msgstr ""
+msgstr "меню_файл.html"
 
 #: u_help:hlpmenuhelp
 msgid "menuhelp.html"
-msgstr ""
+msgstr "меню_допомога.html"
 
 #: u_help:hlpmenusetup
 msgid "menusetup.html"
-msgstr ""
+msgstr "меню_налаштування.html"
 
 #: u_help:hlpmenutel
 msgid "menutelescope.html"
-msgstr ""
+msgstr "меню_телескоп.html"
 
 #: u_help:hlpmenuview
 msgid "menuview.html"
-msgstr ""
+msgstr "меню_вид.html"
 
 #: u_help:hlpmenuwin
 msgid "menuwindow.html"
-msgstr ""
+msgstr "меню_вікно.html"
 
 #: u_help:hlpbarobj
 msgid "object_bar.html"
-msgstr ""
+msgstr "панель_об'єктів.html"
 
 #: u_help:hlpobjlist
 msgid "object_list.html"
-msgstr ""
+msgstr "перелік_об'єктів.html"
 
 #: u_help:hlpcfgobs
 msgid "observatory.html"
-msgstr ""
+msgstr "обсерваторія.html"
 
 #: u_help:hlpcfgpict
 msgid "pictures.html"
-msgstr ""
+msgstr "зображення.html"
 
 #: u_help:hlpposition
 msgid "position.html"
-msgstr ""
+msgstr "позиція.html"
 
 #: u_help:hlpbarright
 msgid "right_bar.html"
-msgstr ""
+msgstr "права_панель.html"
 
 #: u_help:hlpsrvinfo
 msgid "server_information.html"
-msgstr ""
+msgstr "серверна_інформація.html"
 
 #: u_help:hlpsetfov
 msgid "set_fov.html"
-msgstr ""
+msgstr "настанови_поля_зору.html"
 
 #: u_help:hlpcfgsol
 msgid "solar_system.html"
-msgstr ""
+msgstr "сонячна_система.html"
 
 #: u_help:hlpindex
 msgid "start.html"
-msgstr ""
+msgstr "старт.html"
 
 #: u_help:hlpbarstatus
 msgid "status_bar.html"
-msgstr ""
+msgstr "панель_стану.html"
 
 #: u_help:hlpcfgsys
 msgid "system.html"
-msgstr ""
+msgstr "система.html"
 

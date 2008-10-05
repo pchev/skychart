@@ -1,12 +1,12 @@
 Коментарі до версії 3.0.1.5 SVN
 
-Septenber 21 changes:
+Зміни 21 вересня:
 
-Add contextual help, press F1 key.
-Add main configuration window again.
-Fix telescope port selection on Linux.
-Add command line parameter --config to specify a configuration .ini file.
-Add command line parameter --unique to allow only one instance to run 
+Додано ситуаційну допомогу (виклик натисканням F1).
+Знову додано головне конфігураційне вікно.
+Дороблений вибір порту телескопа в Linux.
+Додано параметр командного рядка --config щоб конкретизувати конфігурацію .ini файлу.
+Додано параметр командного рядка --unique щоб дозволити тільки один зразок для запуску. 
 
 Зміни після версії 3.0.1.4 :
 
@@ -14,7 +14,7 @@ Add command line parameter --unique to allow only one instance to run
 Виправлений для нового формату файлів AAVSO.
 Файли користувача тепер в тій же директорії, що і Skychart.
 Покращений діалог конфігурації.
-Можна використовувати иісцевий час для спостережень.
+Можна використовувати місцевий час для спостережень.
 Робота із версією Skychart 3.0.
 
 Інші зміни:

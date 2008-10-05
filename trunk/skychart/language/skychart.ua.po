@@ -1,17 +1,18 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-05 11:47+0200\n"
-"Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
-"Project-Id-Version: skychart.ua\n"
+"PO-Revision-Date: 2008-09-29 21:49+0200\n"
+"Last-Translator: Oleg Maliy <astroclubzp@gmail.com>\n"
+"Project-Id-Version: Cartes du Ciel v.3\n"
 "POT-Creation-Date: \n"
-"Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
+"Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any installed catalog index."
@@ -47,7 +48,7 @@ msgstr "%sСтруктура всіх таблиць існує."
 
 #: u_translation:rsalsobesureth
 msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sТакож пересвідчитися, що необхідне програмне забезпечення бази данних установлено. % s Будь-ласка зверніться до документації, якщо ви не впевнені. % s Бажаєте продовжити? "
+msgstr "%sТакож пересвідчитися, що необхідне програмне забезпечення бази данних установлено. % s Будь ласка зверніться до документації, якщо ви не впевнені. % s Бажаєте продовжити? "
 
 #: u_translation:rsaltturns
 msgid "%sAlt turns:"
@@ -87,7 +88,7 @@ msgstr "%sRA повороти:"
 
 #: u_translation:rstabledonotex
 msgid "%sTable %s do not exist! %sPlease correct the error and retry."
-msgstr "%sТаблиця %s не існує! %sБудь-ласка виправіть помилку та повторіть."
+msgstr "%sТаблиця %s не існує! %sБудь ласка виправіть помилку та повторіть."
 
 #: u_translation:rstableexist
 msgid "%sTable exist %s"
@@ -151,7 +152,7 @@ msgstr "Видалено користувачем"
 
 #: u_translation:rsabout
 msgid "About"
-msgstr "Анонс"
+msgstr "Оповістка"
 
 #: u_translation:rsabout2
 msgid "About %s"
@@ -211,7 +212,7 @@ msgstr "Всі панелі інструментів"
 
 #: u_translation:rsallconfigura
 msgid "All configuration options"
-msgstr ""
+msgstr "Всі конфігураційні опції"
 
 #: u_translation:rsalt
 msgid "Alt"
@@ -276,10 +277,6 @@ msgstr "Штучні супутники"
 #: u_translation:rsasonscreenbl
 msgid "As on screen (black background!)"
 msgstr "Як на екрані (чорне тло!)"
-
-#: u_translation:rsaskconfirmat
-msgid "Ask confirmation before any Internet connection"
-msgstr ""
 
 #: u_translation:rsasterism
 msgid "Asterism"
@@ -859,11 +856,11 @@ msgstr "Створити заголовок"
 
 #: u_translation:rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Створення postscript діаграми. Будь-ласка почекайте..."
+msgstr "Створення postscript діаграми. Будь ласка почекайте..."
 
 #: u_translation:rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "Створення растрової мапи %s dpi. Будь-ласка почекайте..."
+msgstr "Створення растрової мапи %s dpi. Будь ласка почекайте..."
 
 #: u_translation:rsculmination
 msgid "Culmination"
@@ -1227,7 +1224,7 @@ msgstr "Відстань до попереднього об'єкту"
 
 #: u_translation:rsdonottakeacc2
 msgid "Do not take account of asteroid fainter than magnitude"
-msgstr "Не враховувати астероїд, зоряна величина якого слабіша, ніж"
+msgstr "Не враховувати астероїд, зоряна величина якого слабша, ніж"
 
 #: u_translation:rsdonottakeacc
 msgid "Do not take account of comet fainter than magnitude"
@@ -1423,15 +1420,15 @@ msgstr "Помилка відкриття %s"
 
 #: u_translation:rserrorpleasec2
 msgid "Error! Please check the database parameters and load the comete data file."
-msgstr "Помилка! Будь-ласка перевірте параметри бази даних та завантажте кометний файл даних."
+msgstr "Помилка! Будь ласка перевірте параметри бази даних та завантажте кометний файл даних."
 
 #: u_translation:rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
-msgstr "Помилка! Будь-ласка перевірте параметри бази даних та завантажте пакет зображень."
+msgstr "Помилка! Будь ласка перевірте параметри бази даних та завантажте пакет зображень."
 
 #: u_translation:rserrorpleasec
 msgid "Error! Please check the database parameters."
-msgstr "Помилка! Будь-ласка перевірте параметри бази даних."
+msgstr "Помилка! Будь ласка перевірте параметри бази даних."
 
 #: u_translation:rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue ?"
@@ -1571,7 +1568,7 @@ msgstr "Пошукове коло (окуляр)"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "Прямокутне поле шукача (CCD)"
+msgstr "Прямокутне поле CCD"
 
 #: u_translation:rsfirst5000
 msgid "First 5000"
@@ -1811,7 +1808,7 @@ msgstr "Порт INDI серверу"
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
-msgstr "Ви живете на високій горі на океанському узбережжі і вам подобається спостерігати спотворений образ об'єкту нижче обрію."
+msgstr "Якщо ви спостерігаєте із високої гори, то лінія обрію буде нижче, ніж вона була б на рівні моря."
 
 #: u_translation:rsillum
 msgid "Illum."
@@ -2411,7 +2408,7 @@ msgstr "Колір нічного режиму"
 
 #: u_translation:rsnoasteroidda
 msgid "No Asteroid data found!%sPlease load a MPC file first."
-msgstr "Не знайдено ніяких астероїдних даних!%sБудь-ласка спочатку завантажте МРС файл."
+msgstr "Не знайдено ніяких астероїдних даних!%sБудь ласка спочатку завантажте МРС файл."
 
 #: u_translation:rsnomargin
 msgid "No Margin"
@@ -2484,10 +2481,6 @@ msgstr "Кількість зірок"
 #: u_translation:rsnumberoffile
 msgid "Number of files"
 msgstr "Кількість файлів"
-
-#: u_translation:rsnumberofnebu
-msgid "Number of nebulae"
-msgstr ""
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"
@@ -2755,51 +2748,51 @@ msgstr "Ідент. пластинки   Дата   Експ.  Поле   CD   �
 
 #: u_translation:rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
-msgstr "Будь-ласка перевірте зв'язок із Інтернетом та визначення URL"
+msgstr "Будь ласка перевірте зв'язок із Інтернетом та визначення URL"
 
 #: u_translation:rspleaseconfig2
 msgid "Please configure the orbital element URL!"
-msgstr "Будь-ласка завдайтейте  URL орбітального елементу!"
+msgstr "Будь ласка завдайтейте  URL орбітального елементу!"
 
 #: u_translation:rspleaseconfig
 msgid "Please configure your DSS file path first."
-msgstr "Будь-ласка спершу завдайте шлях до вашого DSS файлу."
+msgstr "Будь ласка спершу завдайте шлях до вашого DSS файлу."
 
 #: u_translation:rspleaseconfir
 msgid "Please confirm that the telescope is centered to %s"
-msgstr "Будь-ласка підтвердіть, що телескоп відцентровано по %s"
+msgstr "Будь ласка підтвердіть, що телескоп відцентровано по %s"
 
 #: u_translation:rspleaseentera
 msgid "Please enter an object identifier."
-msgstr "Будь-ласка введіть ідентифікатор об'єкту."
+msgstr "Будь ласка введіть ідентифікатор об'єкту."
 
 #: u_translation:rspleaseindica2
 msgid "Please indicate a catalog long name"
-msgstr "Будь-ласка вкажіть повну назву каталогу"
+msgstr "Будь ласка вкажіть повну назву каталогу"
 
 #: u_translation:rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr "Будь-ласка вкажіть коротку назву каталогу"
+msgstr "Будь ласка вкажіть коротку назву каталогу"
 
 #: u_translation:rspleaseindica3
 msgid "Please indicate the directory where the catalog must to be build"
-msgstr "Будь-ласка вкажіть директорію, в котрій каталог повинен створюватися"
+msgstr "Будь ласка вкажіть директорію, в котрій каталог повинен створюватися"
 
 #: u_translation:rspleasemountr
 msgid "Please mount RealSky\256 CD number"
-msgstr "Будь-ласка встановіть число RealSky\256 CD "
+msgstr "Будь ласка встановіть число RealSky\256 CD "
 
 #: u_translation:rspleasereport
 msgid "Please report any problem to:"
-msgstr "Будь-ласка повідомте про труднощі їм:"
+msgstr "Будь ласка повідомте про труднощі їм:"
 
 #: u_translation:rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr "Будь-ласка, спробуйте створити цю директорію самотужки та перезапустіть програму."
+msgstr "Будь ласка, спробуйте створити цю директорію самотужки та перезапустіть програму."
 
 #: u_translation:rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr "Будь-ласка, перевстановіть програму."
+msgstr "Будь ласка, перевстановіть програму."
 
 #: u_translation:rsplottheposit
 msgid "Plot the position of moving object."
@@ -3791,7 +3784,7 @@ msgstr "Сьогодні"
 
 #: u_translation:rstoomanyopenw
 msgid "Too many open window, please close some chart."
-msgstr "Забагато відкритих вікон: будь-ласка закрийте деякі мапи."
+msgstr "Забагато відкритих вікон: будь ласка закрийте деякі мапи."
 
 #: u_translation:rstoolbar
 msgid "Tool Bar"
@@ -3891,7 +3884,7 @@ msgstr "Неможливо створити директорію"
 
 #: u_translation:rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr "Відмітити, щоб запобігти схожості із малою планетою 134340."
+msgstr "Відмітити, щоб запобігти повторенню із малою планетою 134340."
 
 #: u_translation:rsundo
 msgid "Undo"
@@ -4183,7 +4176,7 @@ msgstr "'"
 
 #: u_translation:rsmagnitudefai
 msgid "magnitude fainter than the stars."
-msgstr "величини слабіше, ніж зірки."
+msgstr "величини слабші, ніж зірки."
 
 #: u_translation:rsmax2
 msgid "max"
