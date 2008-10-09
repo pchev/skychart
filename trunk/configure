@@ -1,0 +1,85 @@
+#!/bin/bash
+#
+# create freepascal Makefile to build skychart
+#
+# syntaxe :
+#            ./configure [fpc=path_to_fpc] [lazarus=path_to_lazarus]
+#
+
+# set parameters
+if [ ! -z $@ ]; then
+   export "$@"
+fi
+
+dirs="skychart/component/synapse/source/lib \
+     skychart/component/libsql \
+     skychart/component/mrecsort \
+     skychart/component/uniqueinstance \
+     skychart/component/xmlparser \
+     skychart/component/enhedits \
+     skychart/component/radec \
+     skychart/component/zoomimage \
+     skychart/component/downloaddialog \
+     skychart/component/jdcalendar \
+     skychart/component/multidoc \
+     skychart/component/vo \
+     skychart/component \
+     skychart/library/catalog \
+     skychart/library/elp82 \
+     skychart/library/satxy \
+     skychart/library/series96 \
+     skychart/library \
+     skychart \
+     . "
+
+#  Try to locate fpc in PATH
+if [ -z "$fpc" ]; then
+   export fpc=$(which fpcmake | sed 's#/fpcmake##')
+fi
+#  Try fpc in standard location
+if [ -z "$fpc" ]; then
+  if [ -x /usr/bin/fpcmake ]; then 
+   export  fpc=/usr/bin
+  fi
+fi
+#  Try to locate fpc
+if [ -z "$fpc" ]; then
+   export fpc=$(locate -b '\fpcmake'  | sed 's#/fpcmake##')
+fi
+# fpc not found
+if [ -z "$fpc" ]; then
+   echo fpc compiler not found! 
+   echo Please specify the location of the fpc compiler with :
+   echo ./configure fpc=path_to_fpc
+   exit 1
+fi
+echo using fpc in $fpc
+
+#  Try Lazarus in standard location
+if [ -z "$lazarus" ]; then
+  if [ -d /usr/share/lazarus ]; then 
+   export  lazarus=/usr/share/lazarus
+  fi
+fi
+#  Try to locate Lazarus lcl
+if [ -z "$lazarus" ]; then
+   export lazarus=$(locate -n 1 lcl/lclclasses.pp | sed 's#/lcl/lclclasses.pp##')
+fi
+# Lazarus not found
+if [ -z "$lazarus" ]; then
+   echo Lazarus library not found! 
+   echo Please specify the location of Lazarus installation with :
+   echo ./configure lazarus=path_to_lazarus
+   exit 1
+fi
+echo using Lazarus in $lazarus
+
+basedir=$(pwd)
+for dir in $dirs 
+do
+   echo create $dir/Makefile 
+   cd $dir
+   sed "s#%LAZDIR%#$lazarus#" Makefile.in > Makefile.fpc
+   $fpc/fpcmake -q Makefile.fpc
+   cd $basedir
+done
