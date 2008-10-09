@@ -1,0 +1,63 @@
+#   File generated automatically by Lazarus Package Manager
+#
+#   Makefile.fpc for CDCcomponents 0.0
+#
+#   This file was generated on 8-10-08
+
+[package]
+name=cdccomponents
+version=0.0
+
+[target]
+dirs=synapse/source/lib \
+     libsql \
+     mrecsort \
+     uniqueinstance \
+     xmlparser \
+     enhedits \
+     radec \
+     zoomimage \
+     downloaddialog \
+     jdcalendar \
+     multidoc \
+     vo 
+units=cdccomponents.pas
+
+[compiler]
+unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
+unitdir=uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ libsql/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ mrecsort/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ multidoc/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ radec/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ zoomimage/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ vo/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
+includedir=./
+options=-dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi
+
+[clean]
+files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(PPUEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(RSTEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*.compiled) \
+      $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT))
+
+[prerules]
+LAZDIR=%LAZDIR%
+# LCL Platform
+ifndef LCL_PLATFORM
+ifeq ($(OS_TARGET),win32)
+LCL_PLATFORM=win32
+else
+ifeq ($(OS_TARGET),win64)
+LCL_PLATFORM=win32
+else
+ifeq ($(OS_TARGET),darwin)
+LCL_PLATFORM=carbon
+else
+LCL_PLATFORM=gtk2
+endif
+endif
+endif
+endif
+export LCL_PLATFORM
+
+[rules]
+.PHONY: all
+
+all: synapse/source/lib_all libsql_all mrecsort_all uniqueinstance_all xmlparser_all enhedits_all radec_all zoomimage_all downloaddialog_all jdcalendar_all multidoc_all vo_all cdccomponents$(PPUEXT)
+

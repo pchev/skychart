@@ -1,0 +1,19 @@
+#
+#   Makefile.fpc for CDClibrary 0.0
+#
+
+[package]
+name=cdclibrary
+version=0.0
+
+[target]
+dirs= catalog \
+     elp82 \
+     satxy \
+     series96 
+
+[rules]
+.PHONY: all
+
+all: catalog_all elp82_all satxy_all series96_all
+

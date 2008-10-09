@@ -1,0 +1,55 @@
+#
+#   Makefile.fpc for Skychart
+#
+
+[package]
+name=skychart
+version=3.0.1.5
+
+[target]
+dirs=component library
+programs=cdc
+
+[require]
+libc=y
+packages=rtl
+
+[compiler]
+unittargetdir=units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
+includedir=./
+options=-dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi -Ch100000 -O2 -g -gl -WG -vewni -l 
+unitdir=library/catalog/lib/$(CPU_TARGET)-$(OS_TARGET)/ library/series96/lib/$(CPU_TARGET)-$(OS_TARGET)/ library/elp82/lib/$(CPU_TARGET)-$(OS_TARGET)/ library/satxy/lib/$(CPU_TARGET)-$(OS_TARGET)/ component/uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ component/jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/libsql/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/mrecsort/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/multidoc/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/radec/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/zoomimage/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/vo/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/components/turbopower_ipro/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/synedit/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/printers/lib/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
+
+[clean]
+files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(PPUEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(RSTEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*.compiled) \
+      $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT))
+
+[prerules]
+LAZDIR=%LAZDIR%
+# LCL Platform
+ifndef LCL_PLATFORM
+ifeq ($(OS_TARGET),win32)
+LCL_PLATFORM=win32
+else
+ifeq ($(OS_TARGET),win64)
+LCL_PLATFORM=win32
+else
+ifeq ($(OS_TARGET),darwin)
+LCL_PLATFORM=carbon
+else
+LCL_PLATFORM=gtk2
+endif
+endif
+endif
+endif
+export LCL_PLATFORM
+
+[rules]
+.PHONY: all
+
+all: component_all library_all cdc 
+
+
