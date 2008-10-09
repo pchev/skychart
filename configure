@@ -3,7 +3,7 @@
 # create freepascal Makefile to build skychart
 #
 # syntaxe :
-#            ./configure [fpc=path_to_fpc] [lazarus=path_to_lazarus]
+#            ./configure [fpc=path_to_fpc] [lazarus=path_to_lazarus] [prefix=install_path]
 #
 
 # set parameters
@@ -74,12 +74,22 @@ if [ -z "$lazarus" ]; then
 fi
 echo using Lazarus in $lazarus
 
+#  Install directory
+if [ -z "$prefix" ]; then
+   export prefix=/tmp/skychart
+fi
+
 basedir=$(pwd)
 for dir in $dirs 
 do
    echo create $dir/Makefile 
    cd $dir
    sed "s#%LAZDIR%#$lazarus#" Makefile.in > Makefile.fpc
+   sed -i "s#%PREFIX%#$prefix#" Makefile.fpc
    $fpc/fpcmake -q Makefile.fpc
    cd $basedir
 done
+
+# replace fpc install by own script and add uninstall script
+sed  -i 's/^install:\(.*\)$/install: \n\t.\/install.sh \nuninstall: \n\t.\/uninstall.sh/g' Makefile
+
