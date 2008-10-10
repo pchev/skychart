@@ -64,7 +64,7 @@ if [ -z "$lazarus" ]; then
 fi
 #  Try to locate Lazarus lcl
 if [ -z "$lazarus" ]; then
-   export lazarus=$(locate -n 1 lcl/lclclasses.pp | sed 's#/lcl/lclclasses.pp##')
+   export lazarus=$(locate -l 1 lcl/lclclasses.pp | sed 's#/lcl/lclclasses.pp##')
 fi
 # Lazarus not found
 if [ -z "$lazarus" ]; then
