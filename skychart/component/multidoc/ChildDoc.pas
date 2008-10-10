@@ -82,11 +82,11 @@ TCdCPanel = Class(TPanel)
     FonRestore : TNotifyEvent;
     FonCaptionChange: TNotifyEvent;
     FOnCloseQuery: TCloseQueryEvent;
+    procedure Maximize;
+    procedure Restore;
     procedure SetDockedPanel(value: TPanel);
     procedure SetCaption(value: string);
     procedure SetMaximized(value: boolean);
-    procedure Maximize;
-    procedure Restore;
     procedure MenuBarMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure MenuBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure MenuBarMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -184,6 +184,7 @@ FDockedObject:=nil;
 FDockedPanel:=nil;
 FCaption:='';
 BevelOuter:=bvNone;
+BevelWidth:=1;
 TopLeftBar:=TCdCSplitter.Create(self);
 TopLeftBar.Parent:=self;
 TopLeftBar.Tag:=5;
@@ -544,10 +545,18 @@ begin
  save_left:=left;
  save_width:=width;
  save_height:=height;
+{$ifdef lclgtk2}
+// bug with black margin around chart
+ top:=-4;
+ left:=-4;
+ width:=parent.Width+4;
+ height:=parent.Height+4;
+{$else}
  top:=0;
  left:=0;
  width:=parent.Width;
  height:=parent.Height;
+{$endif}
  MenuBar.Visible:=false;
  TopLeftBar.Visible:=false;
  TopRightBar.Visible:=false;
