@@ -79,6 +79,7 @@ echo using Lazarus in $lazarus
 if [ -z "$prefix" ]; then
    export prefix=/tmp/skychart
 fi
+echo installing in $prefix
 
 basedir=$(pwd)
 for dir in $dirs 
