@@ -7,7 +7,7 @@
 #
 
 # set parameters
-if [ ! -z $@ ]; then
+if [ $# -gt 0 ]; then
    export "$@"
 fi
 
@@ -92,5 +92,18 @@ do
 done
 
 # replace fpc install by own script and add uninstall script
-sed  -i 's/^install:\(.*\)$/install: \n\t.\/install.sh \nuninstall: \n\t.\/uninstall.sh/g' Makefile
+sed  -i 's/^install:\(.*\)$/install: \n\t.\/install.sh \$(PREFIX)\nuninstall: \n\t.\/uninstall.sh \$(PREFIX)/g' Makefile
+
+# add data install
+cat >> Makefile <<EOF 
+data:
+	\$(MAKE) -C tools all
+data_install:
+	\$(MAKE) -C tools install 
+data_uninstall:
+	\$(MAKE) -C tools uninstall
+EOF
+cd tools
+sed "s#%PREFIX%#$prefix#" Makefile.in > Makefile
+cd $basedir
 
