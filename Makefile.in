@@ -7,7 +7,7 @@ name=skychart
 version=3.0.1.5
 
 [target]
-dirs=skychart
+dirs=skychart varobs
 
 [require]
 libc=y
@@ -16,5 +16,5 @@ packages=rtl
 [rules]
 .PHONY: all
 
-all: skychart_all
+all: skychart_all varobs_all
 
