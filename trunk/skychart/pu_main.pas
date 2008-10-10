@@ -1225,12 +1225,38 @@ Tempdir:=slash(privatedir)+DefaultTmpDir;
 if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
 
-{$ifdef unix}  // allow a shared install
-buf:=ExpandFileName(slash(appdir)+SharedDir);
-if (not directoryexists(slash(appdir)+'data/constellation')) and
-   (directoryexists(buf)) then
-   appdir:=buf;
-{$endif}
+// Be sur the data directory exists
+if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
+  // try under the current directory
+  buf:=slash(GetCurrentDir)+'data/constellation';
+  if (directoryexists(buf)) then
+     appdir:=buf
+  else begin
+     // try under the program directory
+     buf:=slash(ExtractFilePath(ParamStr(0)))+slash('data')+'constellation';
+     if (directoryexists(buf)) then
+        appdir:=buf
+     else begin
+         // try share directory under current location
+         buf:=ExpandFileName(slash(GetCurrentDir)+SharedDir);
+         if (directoryexists(buf)) then
+            appdir:=buf
+         else begin
+            // try share directory at the same location as the program
+            buf:=ExpandFileName(slash(ExtractFilePath(ParamStr(0)))+SharedDir);
+            if (directoryexists(buf)) then
+               appdir:=buf
+            else begin
+               MessageDlg('Could not found the application data directory '+crlf+rsSomethingGoW+crlf
+                   +rsPleaseTryToR,
+                   mtError, [mbAbort], 0);
+               Halt;
+            end;
+         end;
+     end;
+  end;
+end;
+
 {$ifdef win32}
 tracefile:=slash(privatedir)+tracefile;
 {$endif}
