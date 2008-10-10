@@ -14,14 +14,15 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object Panel1: TPanel
     Left = 8
     Height = 272
     Top = 8
     Width = 480
-    ClientHeight = 272
-    ClientWidth = 480
+    BevelOuter = bvNone
+    ClientHeight = 268
+    ClientWidth = 476
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
@@ -29,9 +30,9 @@ object f_chart: Tf_chart
     object identlabel: TLabel
       Cursor = crHandPoint
       Left = 136
-      Height = 14
+      Height = 18
       Top = 120
-      Width = 58
+      Width = 67
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4
@@ -47,9 +48,8 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 463
-      Height = 254
-      Top = 1
+      Left = 460
+      Height = 252
       Width = 16
       Align = alRight
       Kind = sbVertical
@@ -61,10 +61,9 @@ object f_chart: Tf_chart
     end
     object HorScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 1
       Height = 16
-      Top = 255
-      Width = 478
+      Top = 252
+      Width = 476
       Align = alBottom
       LargeChange = 10
       Max = 50

@@ -1226,9 +1226,10 @@ if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
 
 {$ifdef unix}  // allow a shared install
+buf:=ExpandFileName(slash(appdir)+SharedDir);
 if (not directoryexists(slash(appdir)+'data/constellation')) and
-   (directoryexists(SharedDir)) then
-   appdir:=SharedDir;
+   (directoryexists(buf)) then
+   appdir:=buf;
 {$endif}
 {$ifdef win32}
 tracefile:=slash(privatedir)+tracefile;
