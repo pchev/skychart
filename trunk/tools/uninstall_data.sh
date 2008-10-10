@@ -17,6 +17,7 @@ for f in $(cat doc.lst)
 do
   rm -v $destdir/share/apps/skychart/$f
 done
+rm -rf $destdir/share/apps/skychart/wiki_doc
 
 for f in $(cat cat.lst)
 do
