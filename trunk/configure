@@ -30,6 +30,7 @@ dirs="skychart/component/synapse/source/lib \
      skychart/library/series96 \
      skychart/library \
      skychart \
+     varobs \
      . "
 
 #  Try to locate fpc in PATH

@@ -9,6 +9,8 @@ fi
 echo Uninstall skychart from $destdir
 
 rm -v $destdir/bin/skychart
+rm -v $destdir/bin/varobs
+rm -v $destdir/bin/varobs_lpv_bulletin
 rm -v $destdir/lib/libgetdss.so
 rm -v $destdir/lib/libplan404.so
 rm -v $destdir/share/applications/skychart.desktop
