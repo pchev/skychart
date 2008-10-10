@@ -13,6 +13,9 @@ dirs=skychart varobs
 libc=y
 packages=rtl
 
+[prerules]
+PREFIX=%PREFIX%
+
 [rules]
 .PHONY: all
 

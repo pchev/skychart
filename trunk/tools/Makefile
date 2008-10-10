@@ -1,5 +1,6 @@
-
 default: all
+
+PREFIX=/usr/local
 
 .PHONY: all
 all: 
@@ -7,8 +8,8 @@ all:
 
 
 install: 
-	./install_data.sh 
+	./install_data.sh $(PREFIX) 
 
 uninstall: 
-	./uninstall_data.sh
+	./uninstall_data.sh $(PREFIX)
 
