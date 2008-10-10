@@ -108,3 +108,9 @@ cd tools
 sed "s#%PREFIX%#$prefix#" Makefile.in > Makefile
 cd $basedir
 
+echo
+echo You can now run make 
+echo then make install 
+echo and make data_install
+echo
+
