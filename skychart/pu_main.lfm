@@ -19,7 +19,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object MultiDoc1: TMultiDoc
     Left = 24
     Height = 471
@@ -27,9 +27,8 @@ object f_main: Tf_main
     Width = 811
     Align = alClient
     BevelOuter = bvNone
-    BorderWidth = 2
-    ClientHeight = 471
-    ClientWidth = 811
+    ClientHeight = 467
+    ClientWidth = 807
     Color = clBlack
     FullRepaint = False
     ParentColor = False
@@ -2669,13 +2668,13 @@ object f_main: Tf_main
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 471
-    ClientWidth = 24
+    ClientHeight = 467
+    ClientWidth = 20
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 471
-      Width = 24
+      Height = 467
+      Width = 20
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar2'
@@ -2779,14 +2778,14 @@ object f_main: Tf_main
     Width = 25
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 471
-    ClientWidth = 25
+    ClientHeight = 467
+    ClientWidth = 21
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 221
+      Height = 217
       Top = 250
-      Width = 25
+      Width = 21
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar3'
@@ -2846,11 +2845,11 @@ object f_main: Tf_main
     end
     object PanelFieldSize: TPanel
       Height = 250
-      Width = 25
+      Width = 21
       Align = alTop
       BevelOuter = bvNone
-      ClientHeight = 250
-      ClientWidth = 25
+      ClientHeight = 246
+      ClientWidth = 17
       TabOrder = 1
       object Field1: TSpeedButton
         Height = 24
@@ -3020,8 +3019,8 @@ object f_main: Tf_main
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
-    ClientHeight = 32
-    ClientWidth = 860
+    ClientHeight = 28
+    ClientWidth = 856
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -3101,8 +3100,8 @@ object f_main: Tf_main
     Width = 860
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 54
-    ClientWidth = 860
+    ClientHeight = 50
+    ClientWidth = 856
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -3110,7 +3109,7 @@ object f_main: Tf_main
     OnMouseMove = Toolbar1MouseMove
     object ToolBar1: TToolBar
       Height = 25
-      Width = 860
+      Width = 856
       ButtonHeight = 23
       Flat = True
       Images = ImageNormal
@@ -3293,7 +3292,7 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 860
+        Left = 856
         Top = 2
         Width = 23
         AutoSize = True
@@ -3477,6 +3476,7 @@ object f_main: Tf_main
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
+        MaxLength = -1
         OnEnter = ToolBar1Enter
         OnMouseMove = Toolbar1MouseMove
         ParentFont = False
@@ -3484,14 +3484,14 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ChildControl: TPanel
-        Left = 830
+        Left = 822
         Height = 23
         Top = 2
-        Width = 30
+        Width = 34
         Align = alRight
         AutoSize = True
         BevelOuter = bvNone
-        ClientHeight = 23
+        ClientHeight = 19
         ClientWidth = 30
         TabOrder = 3
         object BtnRestoreChild: TSpeedButton
@@ -3515,8 +3515,8 @@ object f_main: Tf_main
     end
     object ToolBar4: TToolBar
       Height = 28
-      Top = 26
-      Width = 860
+      Top = 22
+      Width = 856
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'

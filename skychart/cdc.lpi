@@ -23,7 +23,7 @@
       <local>
         <FormatVersion Value="1"/>
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="/home/pch/appli/cdc"/>
+        <WorkingDirectory Value="/home/cdc"/>
       </local>
     </RunParams>
     <RequiredPackages Count="20">
