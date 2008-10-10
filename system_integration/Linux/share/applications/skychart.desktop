@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Skychart
+Comment=Skychart / Cartes du Ciel
+Exec=skychart
+Icon=skychart.xpm
+Terminal=false
+Type=Application
+Categories=Education;Science;Astronomy
+GenericName[fr_CH]=
