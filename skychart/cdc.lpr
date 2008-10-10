@@ -38,14 +38,17 @@ uses
   radec, XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
-  pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help;
+  pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LResources;
   
 const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
 
 var i : integer;
     buf, p : string;
 
+{$IFDEF WINDOWS}{$R cdc.rc}{$ENDIF}
+
 begin
+  {$I cdc.lrs}
   Params:=TStringList.Create;
   buf:='';
   for i:=1 to Paramcount do begin
