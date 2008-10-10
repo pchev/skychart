@@ -1,8 +1,15 @@
 # Common flags
 CC            = gcc
-SO_Name       = libplan404.so
 CFLAGS        = -O3 -ffast-math
+OSTYPE = $(shell uname)
+ifneq ($(findstring darwin,$(OSTYPE)),)
+SO_Name       = libplan404.dylib
+LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm
+else
+SO_Name       = libplan404.so
 LIBFLAGS      = -shared -WL,-soname,$(SO_Name) -lc -lm
+endif
+
 .PHONY: clean
 
 # Source files

@@ -1,6 +1,6 @@
 default: all
 
-PREFIX=/usr/local
+PREFIX=/tmp/skychart
 
 .PHONY: all
 all: 
