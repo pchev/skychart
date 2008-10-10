@@ -1,6 +1,6 @@
 default: all
 
-PREFIX=/tmp/skychart
+PREFIX=%PREFIX%
 
 .PHONY: all
 all: 
