@@ -1450,7 +1450,7 @@ if not DisplayIs32bpp then begin
 end;
 memstream := TMemoryStream.create;
 try
-if (iWidth<=cfgchart.Width)and(iHeight<=cfgchart.Height) then begin
+if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    // image smaller than chart, write in full
    if zoom>1 then begin
       BitmapRotation(ibmp,rbmp,Rotation,WhiteBg);
