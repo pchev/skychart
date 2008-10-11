@@ -99,9 +99,9 @@ sed  -i 's/^install:\(.*\)$/install: \n\t.\/install.sh \$(PREFIX)\nuninstall: \n
 cat >> Makefile <<EOF 
 data:
 	\$(MAKE) -C tools all
-data_install:
+install_data:
 	\$(MAKE) -C tools install 
-data_uninstall:
+uninstall_data:
 	\$(MAKE) -C tools uninstall
 EOF
 cd tools
@@ -111,6 +111,6 @@ cd $basedir
 echo
 echo You can now run make 
 echo then make install 
-echo and make data_install
+echo and make install_data
 echo
 
