@@ -1228,27 +1228,28 @@ if not directoryexists(TempDir) then forcedirectories(TempDir);
 // Be sur the data directory exists
 if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
   // try under the current directory
-  buf:=slash(GetCurrentDir)+'data/constellation';
-  if (directoryexists(buf)) then
+  buf:=GetCurrentDir;
+  if (directoryexists(slash(buf)+slash('data')+'constellation')) then
      appdir:=buf
   else begin
      // try under the program directory
-     buf:=slash(ExtractFilePath(ParamStr(0)))+slash('data')+'constellation';
-     if (directoryexists(buf)) then
+     buf:=ExtractFilePath(ParamStr(0));
+     if (directoryexists(slash(buf)+slash('data')+'constellation')) then
         appdir:=buf
      else begin
          // try share directory under current location
          buf:=ExpandFileName(slash(GetCurrentDir)+SharedDir);
-         if (directoryexists(buf)) then
+         if (directoryexists(slash(buf)+slash('data')+'constellation')) then
             appdir:=buf
          else begin
             // try share directory at the same location as the program
             buf:=ExpandFileName(slash(ExtractFilePath(ParamStr(0)))+SharedDir);
-            if (directoryexists(buf)) then
+            if (directoryexists(slash(buf)+slash('data')+'constellation')) then
                appdir:=buf
             else begin
-               MessageDlg('Could not found the application data directory '+crlf+rsSomethingGoW+crlf
-                   +rsPleaseTryToR,
+               MessageDlg('Could not found the application data directory.'+crlf
+                   +'Please edit the file .cartesduciel.ini'+crlf
+                   +'and indicate at the line Appdir= where you install the data.',
                    mtError, [mbAbort], 0);
                Halt;
             end;
