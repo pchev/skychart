@@ -1,3 +1,4 @@
+# script used on my web server to build the daily first 5000 asteroids ephemeris
 date
 wget  -O- ftp://anonymous:pch%40freesurf.ch@cfa-ftp.harvard.edu/pub/MPCORB/MPCORB.DAT | head -5039 - > mpc5000.dat
 dos2unix -u mpc5000.dat
