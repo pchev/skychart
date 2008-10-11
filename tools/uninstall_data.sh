@@ -10,18 +10,18 @@ echo Uninstall skychart from $destdir
 
 for f in $(cat data.lst)
 do
-  rm -v $destdir/share/apps/skychart/$f
+  rm -fv $destdir/share/apps/skychart/$f
 done
 
 for f in $(cat doc.lst)
 do
-  rm -v $destdir/share/apps/skychart/$f
+  rm -fv $destdir/share/apps/skychart/$f
 done
 rm -rf $destdir/share/apps/skychart/doc/wiki_doc
 
 for f in $(cat cat.lst)
 do
-  rm -v $destdir/share/apps/skychart/$f
+  rm -fv $destdir/share/apps/skychart/$f
 done
 
 for f in $(sort -r dir.lst)

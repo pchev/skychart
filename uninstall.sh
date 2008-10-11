@@ -8,15 +8,15 @@ fi
 
 echo Uninstall skychart from $destdir
 
-rm -v $destdir/bin/skychart
-rm -v $destdir/bin/varobs
-rm -v $destdir/bin/varobs_lpv_bulletin
-rm -v $destdir/lib/libgetdss.so
-rm -v $destdir/lib/libplan404.so
-rm -v $destdir/share/applications/skychart.desktop
-rm -v $destdir/share/doc/skychart/changelog
-rm -v $destdir/share/doc/skychart/copyright
-rm -v $destdir/share/pixmaps/skychart.xpm
+rm -fv $destdir/bin/skychart
+rm -fv $destdir/bin/varobs
+rm -fv $destdir/bin/varobs_lpv_bulletin
+rm -fv $destdir/lib/libgetdss.so
+rm -fv $destdir/lib/libplan404.so
+rm -fv $destdir/share/applications/skychart.desktop
+rm -fv $destdir/share/doc/skychart/changelog
+rm -fv $destdir/share/doc/skychart/copyright
+rm -fv $destdir/share/pixmaps/skychart.xpm
 
 rmdir -v $destdir/share/doc/skychart
 rmdir -v $destdir/share/doc
