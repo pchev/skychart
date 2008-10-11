@@ -555,6 +555,8 @@ function TCdCTimeZone.LoadZoneTab(fn: string):boolean;
 var f: textfile;
     buf: string;
     rec: TStringList;
+    i: integer;
+const tzgmt: array[1..25] of string=('Etc/GMT-12','Etc/GMT-11','Etc/GMT-10','Etc/GMT-9','Etc/GMT-8','Etc/GMT-7','Etc/GMT-6','Etc/GMT-5','Etc/GMT-4','Etc/GMT-3','Etc/GMT-2','Etc/GMT-1','Etc/GMT','Etc/GMT+1','Etc/GMT+2','Etc/GMT+3','Etc/GMT+4','Etc/GMT+5','Etc/GMT+6','Etc/GMT+7','Etc/GMT+8','Etc/GMT+9','Etc/GMT+10','Etc/GMT+11','Etc/GMT+12');
 begin
 if fileexists(fn) then begin
   fZoneTabCnty.Clear;
@@ -579,6 +581,12 @@ if fileexists(fn) then begin
                    else fZoneTabComment.Add('');
   until eof(f);
   closefile(f);
+  for i:=1 to 25 do begin
+    fZoneTabCnty.Add('ZZ');
+    fZoneTabCoord.Add('');
+    fZoneTabZone.Add(tzgmt[i]);
+    fZoneTabComment.Add('');
+  end;
   result:=fZoneTabCnty.Count>0;
   rec.Free;
 end
