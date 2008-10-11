@@ -1265,7 +1265,24 @@ VarObs:=slash(appdir)+DefaultVarObs;     // varobs normally at same location as 
 if not FileExists(VarObs) then VarObs:=DefaultVarObs; // if not try in $PATH
 helpdir:=slash(appdir)+slash('doc');
 SampleDir:=slash(appdir)+slash('data')+'sample';
+// Be sure zoneinfo exists in standard location or in skychart directory
 ZoneDir:=slash(appdir)+slash('data')+slash('zoneinfo');
+buf:=slash('')+slash('usr')+slash('share')+slash('zoneinfo');
+if (FileExists(slash(buf)+'zone.tab')) then
+     ZoneDir:=slash(buf)
+else begin
+  buf:=slash('')+slash('usr')+slash('lib')+slash('zoneinfo');
+  if (FileExists(slash(buf)+'zone.tab')) then
+      ZoneDir:=slash(buf)
+  else begin
+     if (not FileExists(slash(ZoneDir)+'zone.tab')) then
+       MessageDlg('zoneinfo directory not found!'+crlf
+         +'Please install the tzdata package.'+crlf
+         +'If it is not installed at a standard location create a logical link zoneinfo in skychart data directory.',
+         mtError, [mbAbort], 0);
+       Halt;
+  end;
+end;
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
