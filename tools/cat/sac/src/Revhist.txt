@@ -1,0 +1,87 @@
+               REVISION HISTORY for SAC DATABASE
+
+The goal of the people working on the Saguaro Astronomy Club database has
+been to provide a listing which could yield an observing list for use at
+the telescope.  The early versions covered plenty of objects for users of
+scopes up to 8" in size.  As we added more objects and data, the list
+became more massive and we believe that it now covers a large portion of
+what could be seen in a telescope in the 10" to 14" range.  Addition of
+many more objects will add many small and faint galaxies, seeing as that
+is about all that remains below 14 magnitude.  We do not relish this task
+and probably will not undertake such a large work.
+
+Version 1.0 consisted of 1100 objects down to a magnitude limit of about
+11.5.  It was also the beginning of the navstar and multistr files.
+
+Version 2.0 started to add a variety of objects from the RNGC.  We soon
+discovered an excellent list of corrections from Brian Skiff and Dr.
+Harold Corwin.
+
+Version 3.0 should not be used.  It is easy to spot the erroneous
+data.  Look at M31, the Andromeda Galaxy, if its' declination is -31,
+that is the bad version!!  We certainly learned a lot about
+maintaining back ups to data.
+
+Version 4.0 combined data from version 2.0 with the data input by Jeff
+Weintraub from Sky Catalog 2000.  This version contains much good info
+and started to show us how massive a fairly complete deep sky database
+was going to get.  This was the first version to contain Dan Ward's
+Report Generator.  This version was compressed with PKPAK 3.61.
+
+After the release of version 4.0 many SAC members joined together in a
+combined effort to try and find as much info as we could on objects each
+person was assigned.  The listing of who-did-what is in SACDOC.TXT.
+Several intermediate versions were compiled within the club, and then:
+
+Version 5.0 fixed some problems with the DESCR field and included all the
+NOTES which members had found.  With the inclusion of multistr, navstar,
+potporri and Jim Lucyk's photondx files, this was the best version to date.
+A medium to large telescope owner with good skies can keep busy with
+version 5 for many observing sessions.  A.J. Crayon's install program will
+put this version onto hard disk.  The files are no larger than 360K each,
+to accommodate BBS operators.  SAC Report Generator has been rewritten to
+include several more features.  This version was compressed with the
+old compression algorithm so that we would only have to include ARCE on
+disk to un-arc the files.
+
+Version 5.1 fixed a small problem with the Report Generator.  It can now
+search for objects with lower case characters in the name, such as
+Cr or Tr.  If you are using your own database manager or if you do not
+use SACREP to search for individual objects, the update is unnecessary.
+
+Version 5.2 added several corrections, given in the file "errata50.txt".
+Dan Ward updated the Report Generator.
+
+Several internal versions existed within the SAC as we updated the
+information and Dan Ward set up Report Generator to accomodate the
+changes.  We dropped the SOURCE field, finding that we where doing a
+poor job of keeping track of where each objects info source.  We
+added the SUBR field with info from RC3 on surface brightness.
+Sizes of several fields changed as the NOTES and NGC DESCR fields
+got larger.  U2 and TIR fields got smaller because we found that
+we did not need to provide multiple chart numbers for each object.
+
+Version 6.0 contains all the changes mentioned above and accompanying
+changes made to Report Generator.
+
+Version 6.1 incorporates several changes which I believe are well
+worth doing.  First, the database is in one large file and not
+small pieces, RA hour size.  Second, nothing is compressed by the
+pkzip program, it all fits on one 1.44 Meg floppy.  Third, the
+errors given below have been fixed in the data, I will maintain a
+complete errata list if you wish to add to it, please contact me.
+
+Version 6.2 takes care of a few errors, and make the data more
+consistent, such as finding a magnitude that was given as 08 and
+changing that to 08.0, so that all the data appears the same to
+the computer.
+
+Several SAC members have been working with the NGC project to 
+update the NGC and make certain that all the objects are identified
+with the correct object in the sky.  The fruit of this undertaking
+is in Version 7.0.  Dr. Harold Corwin and Wolfgang Steinike have
+provided info on many NGC objects and have solved many puzzles 
+concerning the NGC.  The number of truly unknown or unverified
+objects has shrunk to a fraction of where we began and this 
+version of the SAC database reflects that work.
+

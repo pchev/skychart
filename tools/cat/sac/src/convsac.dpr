@@ -1,8 +1,8 @@
-program convwds;
+program convsac;
 
 uses
   Forms,
-  convwds1 in 'convwds1.pas' {Form1};
+  convsac1 in 'convsac1.pas' {Form1};
 
 {$R *.RES}
 
