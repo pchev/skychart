@@ -1,25 +1,24 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="2">
+  <Package Version="3">
     <PathDelim Value="\"/>
     <Name Value="uniqueinstance_package"/>
     <Author Value="Luiz Américo Pereira Câmara"/>
     <CompilerOptions>
-      <Version Value="5"/>
+      <Version Value="8"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
-      <CodeGeneration>
-        <Generate Value="Faster"/>
-      </CodeGeneration>
       <Other>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Description Value="UniqueInstance provides a component to limits one instance per application"/>
-    <License Value="Modified LGPL"/>
-    <Version Minor="2"/>
+    <Description Value="UniqueInstance provides a component to limits one instance per application
+"/>
+    <License Value="Modified LGPL
+"/>
+    <Version Minor="2" Release="1"/>
     <Files Count="3">
       <Item1>
         <Filename Value="uniqueinstance.pas"/>
