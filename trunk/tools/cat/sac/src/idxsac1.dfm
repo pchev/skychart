@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 214
-  Top = 88
+  Left = 263
+  Top = 101
   Caption = 'Form1'
   ClientHeight = 185
   ClientWidth = 370
@@ -28,7 +28,7 @@ object Form1: TForm1
     Width = 217
     Height = 21
     TabOrder = 1
-    Text = 'd:\appli\astro\index\index.txt'
+    Text = 'sac72.txt'
   end
   object Edit2: TEdit
     Left = 24
@@ -36,7 +36,7 @@ object Form1: TForm1
     Width = 217
     Height = 21
     TabOrder = 2
-    Text = 'd:\appli\astro\index\sao.idx'
+    Text = 'sac.idx'
   end
   object Edit3: TEdit
     Left = 24
