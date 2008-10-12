@@ -38,6 +38,7 @@ type
   private
     FonDownloadComplete: TDownloadProc;
     FonProgress: TDownloadProc;
+    LastRead, LastWrite: integer;
     procedure SockStatus(Sender: TObject; Reason: THookSocketReason; Const Value: string) ;  public
     procedure FTPStatus(Sender: TObject; Response: Boolean; Const Value: string);
   public
@@ -395,6 +396,8 @@ procedure TDownloadDaemon.Execute;
 begin
 Fsockreadcount:=0;
 Fsockwritecount:=0;
+LastRead:=0;
+LastWrite:=0;
 if protocol=prHttp then begin
   phttp^.Sock.OnStatus:=@SockStatus;
   ok:=phttp^.HTTPMethod('GET', Durl)
@@ -412,13 +415,17 @@ end;
 procedure TDownloadDaemon.SockStatus(Sender: TObject; Reason: THookSocketReason; Const Value: string) ;
 var reasontxt:string;
 begin
+reasontxt:='';
 case reason of
 HR_ResolvingBegin : reasontxt:='Resolving '+value;
 HR_Connect        : reasontxt:='Connect '+value;
 HR_Accept         : reasontxt:='Accept '+value;
 HR_ReadCount      : begin
                     FSockreadcount:=FSockreadcount+strtoint(value);
-                    reasontxt:='Read Bytes: '+inttostr(FSockreadcount);
+                    if (FSockreadcount-LastRead)>100000 then begin
+                      reasontxt:='Read Bytes: '+inttostr(FSockreadcount);
+                      LastRead:=FSockreadcount;
+                    end;
                     end;
 HR_WriteCount     : begin
                     FSockwritecount:=FSockwritecount+strtoint(value);
