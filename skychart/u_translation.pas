@@ -691,7 +691,6 @@ resourcestring
   rsCometElement = 'Comet elements in MPC format (one URL by line) ';
   rsAsteroidElem = 'Asteroid elements in MPC format (one URL by line)';
   rsBrightNEO = 'Bright + NEO + TNO';
-  rsMPCORB50Mb = 'MPCORB > 50Mb!';
   rsMPCHttp = 'MPC Http';
   rsMPCFtp = 'MPC Ftp';
   rsFirst5000 = 'First 5000';

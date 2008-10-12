@@ -3,7 +3,7 @@ object f_config_solsys: Tf_config_solsys
   Height = 536
   Top = 171
   Width = 515
-  ActiveControl = PlaParalaxe.RadioButton0
+  ActiveControl = ComPageControl
   Caption = 'Solar System'
   ClientHeight = 536
   ClientWidth = 515
@@ -12,28 +12,28 @@ object f_config_solsys: Tf_config_solsys
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Height = 486
     Width = 515
     Align = alClient
-    ClientHeight = 486
-    ClientWidth = 515
+    ClientHeight = 482
+    ClientWidth = 511
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
-      Height = 484
+      Height = 480
       Top = 1
-      Width = 513
+      Width = 509
       Align = alClient
-      PageIndex = 0
+      PageIndex = 2
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 509
-        ClientHeight = 480
+        ClientWidth = 505
+        ClientHeight = 476
         object Label12: TLabel
           Left = 7
           Height = 14
@@ -388,14 +388,14 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 509
-        ClientHeight = 457
+        ClientWidth = 505
+        ClientHeight = 476
         object ComPageControl: TPageControl
           Height = 429
           Top = 4
           Width = 481
-          ActivePage = comsetting
-          TabIndex = 0
+          ActivePage = comload
+          TabIndex = 1
           TabOrder = 0
           object comsetting: TTabSheet
             Caption = 'General Setting'
@@ -413,7 +413,7 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object Label154: TLabel
                 Left = 32
-                Height = 20
+                Height = 14
                 Top = 115
                 Width = 302
                 Caption = 'Do not take account of comet fainter than magnitude'
@@ -421,7 +421,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object Label216: TLabel
                 Left = 32
-                Height = 20
+                Height = 14
                 Top = 155
                 Width = 71
                 Caption = 'Show comet'
@@ -429,7 +429,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object Label231: TLabel
                 Left = 200
-                Height = 20
+                Height = 14
                 Top = 155
                 Width = 191
                 Caption = 'magnitude fainter than the stars.'
@@ -519,7 +519,7 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 1
             object Label232: TLabel
               Left = 15
-              Height = 20
+              Height = 14
               Top = 123
               Width = 63
               Caption = 'Messages:'
@@ -527,7 +527,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object Label233: TLabel
               Left = 15
-              Height = 20
+              Height = 14
               Top = 87
               Width = 110
               Caption = 'Or use a local file :'
@@ -544,7 +544,7 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object Label2: TLabel
                 Left = 5
-                Height = 20
+                Height = 14
                 Top = 14
                 Width = 189
                 Caption = 'Download latest orbital elements'
@@ -601,9 +601,9 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 3
             object Label238: TLabel
               Left = 8
-              Height = 15
+              Height = 14
               Top = 151
-              Width = 69
+              Width = 63
               Caption = 'Messages:'
               ParentColor = False
             end
@@ -618,10 +618,11 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object comelemlist: TComboBox
                 Left = 16
-                Height = 21
+                Height = 25
                 Top = 6
                 Width = 281
                 AutoCompleteText = [cbactSearchAscending]
+                MaxLength = -1
                 Style = csDropDownList
                 TabOrder = 0
               end
@@ -647,9 +648,9 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 1
               object Label239: TLabel
                 Left = 12
-                Height = 15
+                Height = 14
                 Top = 16
-                Width = 229
+                Width = 209
                 Caption = 'Quickly delete all comet related data'
                 ParentColor = False
               end
@@ -1285,6 +1286,7 @@ object f_config_solsys: Tf_config_solsys
                 Top = 14
                 Width = 281
                 AutoCompleteText = [cbactSearchAscending]
+                MaxLength = -1
                 Style = csDropDownList
                 TabOrder = 0
               end
