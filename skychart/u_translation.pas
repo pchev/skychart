@@ -1107,6 +1107,7 @@ resourcestring
   rsAllConfigura = 'All configuration options';
   rsAskConfirmat = 'Ask confirmation before any Internet connection';
   rsNumberOfNebu = 'Number of nebulae';
+  rsInformationD = 'Information detail';
 
 implementation
 

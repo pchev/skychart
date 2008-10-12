@@ -1867,6 +1867,10 @@ msgstr "Geef de string aanduiding aan voor ieder type van object:"
 msgid "Information"
 msgstr "Informatie"
 
+#: u_translation:rsinformationd
+msgid "Information detail"
+msgstr ""
+
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
 msgstr "Initialiseer database"
@@ -2150,10 +2154,6 @@ msgstr "MPC via FTP"
 #: u_translation:rsmpchttp
 msgid "MPC Http"
 msgstr "MPC via HTTP"
-
-#: u_translation:rsmpcorb50mb
-msgid "MPCORB > 50Mb!"
-msgstr "MPCORB > 50Mb!"
 
 #: u_translation:rsmag
 msgid "Mag:"

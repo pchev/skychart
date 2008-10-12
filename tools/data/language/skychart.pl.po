@@ -1871,6 +1871,10 @@ msgstr "Wskaż tekstowy identyfikator dla każdego typu obiektu :"
 msgid "Information"
 msgstr "Informacja"
 
+#: u_translation:rsinformationd
+msgid "Information detail"
+msgstr ""
+
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
 msgstr "Inicjalizacja bazy danych"
@@ -2154,10 +2158,6 @@ msgstr "MPC Ftp"
 #: u_translation:rsmpchttp
 msgid "MPC Http"
 msgstr "MPC Http"
-
-#: u_translation:rsmpcorb50mb
-msgid "MPCORB > 50Mb!"
-msgstr "MPCORB > 50Mb!"
 
 #: u_translation:rsmag
 msgid "Mag:"

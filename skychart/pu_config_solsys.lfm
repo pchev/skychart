@@ -33,7 +33,7 @@ object f_config_solsys: Tf_config_solsys
       object Page1: TPage
         Caption = 'Page1'
         ClientWidth = 505
-        ClientHeight = 476
+        ClientHeight = 453
         object Label12: TLabel
           Left = 7
           Height = 14
@@ -106,8 +106,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 509
-        ClientHeight = 457
+        ClientWidth = 505
+        ClientHeight = 453
         object Label5: TLabel
           Height = 20
           Top = 17
@@ -622,7 +622,6 @@ object f_config_solsys: Tf_config_solsys
                 Top = 6
                 Width = 281
                 AutoCompleteText = [cbactSearchAscending]
-                MaxLength = -1
                 Style = csDropDownList
                 TabOrder = 0
               end
@@ -906,8 +905,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 509
-        ClientHeight = 457
+        ClientWidth = 505
+        ClientHeight = 453
         object AstPageControl: TPageControl
           Height = 429
           Top = 4
@@ -1286,7 +1285,6 @@ object f_config_solsys: Tf_config_solsys
                 Top = 14
                 Width = 281
                 AutoCompleteText = [cbactSearchAscending]
-                MaxLength = -1
                 Style = csDropDownList
                 TabOrder = 0
               end
