@@ -1,7 +1,7 @@
 object f_config_display: Tf_config_display
-  Left = 562
+  Left = 1098
   Height = 532
-  Top = 105
+  Top = 102
   Width = 523
   ActiveControl = nebuladisplay.RadioButton0
   Caption = 'Display'
@@ -12,28 +12,28 @@ object f_config_display: Tf_config_display
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Height = 482
     Width = 523
     Align = alClient
-    ClientHeight = 482
-    ClientWidth = 523
+    ClientHeight = 478
+    ClientWidth = 519
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
-      Height = 480
+      Height = 476
       Top = 1
-      Width = 521
+      Width = 517
       Align = alClient
       PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Display'
-        ClientWidth = 517
-        ClientHeight = 476
+        ClientWidth = 513
+        ClientHeight = 472
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -1532,6 +1532,7 @@ object f_config_display: Tf_config_display
               'Dash Dot'
               'Dash Dot Dot'
             )
+            MaxLength = -1
             OnChange = CFStyleChange
             OnDrawItem = StyleDrawItem
             Style = csOwnerDrawFixed
@@ -1591,6 +1592,7 @@ object f_config_display: Tf_config_display
               'Dash Dot'
               'Dash Dot Dot'
             )
+            MaxLength = -1
             OnChange = CBStyleChange
             OnDrawItem = StyleDrawItem
             Style = csOwnerDrawFixed
@@ -1640,6 +1642,7 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
+          MaxLength = -1
           OnChange = GridStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1660,6 +1663,7 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
+          MaxLength = -1
           OnChange = EclipticStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1680,6 +1684,7 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
+          MaxLength = -1
           OnChange = EqGridStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1700,6 +1705,7 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
+          MaxLength = -1
           OnChange = GalEqStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -2176,8 +2182,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TPage
         Caption = 'Fonts'
-        ClientWidth = 517
-        ClientHeight = 453
+        ClientWidth = 513
+        ClientHeight = 472
         object Bevel10: TBevel
           Left = 8
           Height = 329
@@ -2187,73 +2193,73 @@ object f_config_display: Tf_config_display
         end
         object Label121: TLabel
           Left = 16
-          Height = 15
+          Height = 14
           Top = 74
-          Width = 109
+          Width = 98
           Caption = 'Coordinates Grid'
           ParentColor = False
         end
         object Label122: TLabel
           Left = 16
-          Height = 15
+          Height = 14
           Top = 40
-          Width = 41
+          Width = 37
           Caption = 'Object'
           ParentColor = False
         end
         object Label123: TLabel
           Left = 16
-          Height = 15
+          Height = 14
           Top = 115
-          Width = 42
+          Width = 38
           Caption = 'Labels'
           ParentColor = False
         end
         object Label124: TLabel
           Left = 16
-          Height = 15
+          Height = 14
           Top = 157
-          Width = 49
+          Width = 42
           Caption = 'Legend'
           ParentColor = False
         end
         object Label125: TLabel
           Left = 16
-          Height = 15
+          Height = 14
           Top = 198
-          Width = 143
+          Width = 131
           Caption = 'Screen and Status Bar'
           ParentColor = False
         end
         object Label126: TLabel
           Left = 16
-          Height = 15
+          Height = 14
           Top = 240
-          Width = 62
+          Width = 58
           Caption = 'Object list'
           ParentColor = False
         end
         object Label127: TLabel
           Left = 16
-          Height = 15
+          Height = 14
           Top = 282
-          Width = 90
+          Width = 81
           Caption = 'Printer legend'
           ParentColor = False
         end
         object Label128: TLabel
           Left = 192
-          Height = 15
+          Height = 14
           Top = 40
-          Width = 29
+          Width = 25
           Caption = 'Font'
           ParentColor = False
         end
         object Label129: TLabel
           Left = 344
-          Height = 15
+          Height = 14
           Top = 40
-          Width = 43
+          Width = 37
           Caption = 'Modify'
           ParentColor = False
         end
@@ -2623,9 +2629,9 @@ object f_config_display: Tf_config_display
         end
         object Label235: TLabel
           Left = 16
-          Height = 15
+          Height = 14
           Top = 328
-          Width = 87
+          Width = 80
           Caption = 'Greek symbol'
           ParentColor = False
         end
@@ -3039,12 +3045,12 @@ object f_config_display: Tf_config_display
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Options = [fdTrueTypeOnly, fdEffects, fdForceFontExist, fdScalableOnly]
-    left = 496
-    top = 32
+    left = 472
+    top = 40
   end
   object ColorDialog1: TColorDialog
-    left = 496
-    top = 96
+    left = 472
+    top = 104
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True

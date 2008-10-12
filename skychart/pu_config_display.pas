@@ -774,6 +774,17 @@ procedure Tf_config_display.FormCreate(Sender: TObject);
 begin
   LockChange:=true;
   SetLang;
+  label124.Visible:=false;   // legend font
+  legendfont.Visible:=false;
+  speedbutton3.Visible:=false;
+{$ifndef mswindows}
+  label125.Visible:=false;      // screen status
+  statusfont.Visible:=false;
+  speedbutton4.Visible:=false;
+  label235.Visible:=false;      // symbol same as label with utf-8
+  symbfont.Visible:=false;
+  speedbutton7.Visible:=false;
+{$endif}
 end;
 
 procedure Tf_config_display.FormDestroy(Sender: TObject);
