@@ -4484,6 +4484,7 @@ f_print.SetLang;
 for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      Tf_chart(MultiDoc1.Childs[i].DockedObject).SetLang;
+if f_config<>nil then f_config.SetLang;
 if f_about<>nil then f_about.SetLang;
 if ConfigSystem<>nil then ConfigSystem.SetLang;
 if ConfigInternet<>nil then ConfigInternet.SetLang;
