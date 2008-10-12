@@ -295,6 +295,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultFontSize=8;
       DefaultPrivateDir='Cartes du Ciel';
       Defaultconfigfile='cartesduciel.ini';
+      SharedDir='.\';
       DefaultPrintCmd1='gsview32.exe';
       DefaultPrintCmd2='mspaint.exe';
       DefaultTmpDir='tmp';
