@@ -1275,12 +1275,13 @@ else begin
   if (FileExists(slash(buf)+'zone.tab')) then
       ZoneDir:=slash(buf)
   else begin
-     if (not FileExists(slash(ZoneDir)+'zone.tab')) then
+     if (not FileExists(slash(ZoneDir)+'zone.tab')) then begin
        MessageDlg('zoneinfo directory not found!'+crlf
          +'Please install the tzdata package.'+crlf
          +'If it is not installed at a standard location create a logical link zoneinfo in skychart data directory.',
          mtError, [mbAbort], 0);
        Halt;
+     end;
   end;
 end;
 end;
