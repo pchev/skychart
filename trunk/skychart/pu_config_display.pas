@@ -609,7 +609,7 @@ Label121.caption:=rsCoordinatesG;
 Label122.caption:=rsObject;
 Label123.caption:=rsLabels;
 Label124.caption:=rsLegend;
-Label125.caption:=rsScreenAndSta;
+Label125.caption:=rsInformationD;
 Label126.caption:=rsObjectList;
 Label127.caption:=rsPrinterLegen;
 Label128.caption:=rsFonts;
@@ -778,9 +778,6 @@ begin
   legendfont.Visible:=false;
   speedbutton3.Visible:=false;
 {$ifndef mswindows}
-  label125.Visible:=false;      // screen status
-  statusfont.Visible:=false;
-  speedbutton4.Visible:=false;
   label235.Visible:=false;      // symbol same as label with utf-8
   symbfont.Visible:=false;
   speedbutton7.Visible:=false;
@@ -1308,6 +1305,7 @@ for i:=1 to numfont do begin
     cplot.FontBold[i]:=false;
     cplot.FontItalic[i]:=false;
 end;
+cplot.FontSize[4]:=8;
 cplot.FontName[5]:=DefaultFontFixed;
 cplot.FontName[7]:='Symbol';
 ShowFonts;

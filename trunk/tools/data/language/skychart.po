@@ -2650,10 +2650,6 @@ msgstr ""
 msgid "Bright + NEO + TNO"
 msgstr ""
 
-#: u_translation:rsmpcorb50mb
-msgid "MPCORB > 50Mb!"
-msgstr ""
-
 #: u_translation:rsmpchttp
 msgid "MPC Http"
 msgstr ""
@@ -4232,5 +4228,9 @@ msgstr ""
 
 #: u_translation:rsnumberofnebu
 msgid "Number of nebulae"
+msgstr ""
+
+#: u_translation:rsinformationd
+msgid "Information detail"
 msgstr ""
 

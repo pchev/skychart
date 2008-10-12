@@ -1868,6 +1868,10 @@ msgstr "Indica la stringa identificativa per ciascun tipo di oggetto:"
 msgid "Information"
 msgstr "Informazioni"
 
+#: u_translation:rsinformationd
+msgid "Information detail"
+msgstr ""
+
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
 msgstr "Inizializza Database"
@@ -2151,10 +2155,6 @@ msgstr "MPC Ftp"
 #: u_translation:rsmpchttp
 msgid "MPC Http"
 msgstr "MPC Http"
-
-#: u_translation:rsmpcorb50mb
-msgid "MPCORB > 50Mb!"
-msgstr "MPCORB > 50Mb!"
 
 #: u_translation:rsmag
 msgid "Mag:"

@@ -1868,6 +1868,10 @@ msgstr "Nastavte identifikátor pro každý typ objektu:"
 msgid "Information"
 msgstr "Informace"
 
+#: u_translation:rsinformationd
+msgid "Information detail"
+msgstr ""
+
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
 msgstr "Inicializovat databázi"
@@ -2151,10 +2155,6 @@ msgstr "MPC FTP"
 #: u_translation:rsmpchttp
 msgid "MPC Http"
 msgstr "MPC HTTP"
-
-#: u_translation:rsmpcorb50mb
-msgid "MPCORB > 50Mb!"
-msgstr "MPCORB >50MB!"
 
 #: u_translation:rsmag
 msgid "Mag:"

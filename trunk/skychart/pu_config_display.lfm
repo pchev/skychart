@@ -3,7 +3,7 @@ object f_config_display: Tf_config_display
   Height = 532
   Top = 102
   Width = 523
-  ActiveControl = nebuladisplay.RadioButton0
+  ActiveControl = gridfont
   Caption = 'Display'
   ClientHeight = 532
   ClientWidth = 523
@@ -27,7 +27,7 @@ object f_config_display: Tf_config_display
       Top = 1
       Width = 517
       Align = alClient
-      PageIndex = 0
+      PageIndex = 6
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -234,8 +234,8 @@ object f_config_display: Tf_config_display
       end
       object Page2: TPage
         Caption = 'Colour'
-        ClientWidth = 517
-        ClientHeight = 453
+        ClientWidth = 513
+        ClientHeight = 449
         object Label181: TLabel
           Left = 86
           Height = 20
@@ -739,8 +739,8 @@ object f_config_display: Tf_config_display
       end
       object Page3: TPage
         Caption = 'Deep-sky colour'
-        ClientWidth = 517
-        ClientHeight = 453
+        ClientWidth = 513
+        ClientHeight = 449
         object lblDSOCScheme: TLabel
           Left = 16
           Height = 14
@@ -1261,8 +1261,8 @@ object f_config_display: Tf_config_display
       end
       object Page4: TPage
         Caption = 'Sky colour'
-        ClientWidth = 517
-        ClientHeight = 453
+        ClientWidth = 513
+        ClientHeight = 449
         object Panel2: TPanel
           Left = 24
           Height = 147
@@ -1433,8 +1433,8 @@ object f_config_display: Tf_config_display
       end
       object Page5: TPage
         Caption = 'Lines'
-        ClientWidth = 517
-        ClientHeight = 453
+        ClientWidth = 513
+        ClientHeight = 449
         object EqGrid: TCheckBox
           Left = 16
           Height = 21
@@ -1532,7 +1532,6 @@ object f_config_display: Tf_config_display
               'Dash Dot'
               'Dash Dot Dot'
             )
-            MaxLength = -1
             OnChange = CFStyleChange
             OnDrawItem = StyleDrawItem
             Style = csOwnerDrawFixed
@@ -1592,7 +1591,6 @@ object f_config_display: Tf_config_display
               'Dash Dot'
               'Dash Dot Dot'
             )
-            MaxLength = -1
             OnChange = CBStyleChange
             OnDrawItem = StyleDrawItem
             Style = csOwnerDrawFixed
@@ -1642,7 +1640,6 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
-          MaxLength = -1
           OnChange = GridStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1663,7 +1660,6 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
-          MaxLength = -1
           OnChange = EclipticStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1684,7 +1680,6 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
-          MaxLength = -1
           OnChange = EqGridStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1705,7 +1700,6 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
-          MaxLength = -1
           OnChange = GalEqStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1766,8 +1760,8 @@ object f_config_display: Tf_config_display
       end
       object Page6: TPage
         Caption = 'Labels'
-        ClientWidth = 517
-        ClientHeight = 453
+        ClientWidth = 513
+        ClientHeight = 449
         object MagLabel: TRadioGroup
           Left = 16
           Height = 73
@@ -2227,8 +2221,8 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 14
           Top = 198
-          Width = 131
-          Caption = 'Screen and Status Bar'
+          Width = 101
+          Caption = 'Information detail'
           ParentColor = False
         end
         object Label126: TLabel
@@ -2718,8 +2712,8 @@ object f_config_display: Tf_config_display
       end
       object Page8: TPage
         Caption = 'Finder circle'
-        ClientWidth = 517
-        ClientHeight = 453
+        ClientWidth = 513
+        ClientHeight = 449
         object Label307: TLabel
           Left = 80
           Height = 14
@@ -2858,8 +2852,8 @@ object f_config_display: Tf_config_display
       end
       object Page9: TPage
         Caption = 'Finder rectangle'
-        ClientWidth = 517
-        ClientHeight = 453
+        ClientWidth = 513
+        ClientHeight = 449
         object Label308: TLabel
           Left = 80
           Height = 14
