@@ -3,7 +3,7 @@ object f_config_display: Tf_config_display
   Height = 532
   Top = 102
   Width = 523
-  ActiveControl = gridfont
+  ActiveControl = CGrid
   Caption = 'Display'
   ClientHeight = 532
   ClientWidth = 523
@@ -27,13 +27,13 @@ object f_config_display: Tf_config_display
       Top = 1
       Width = 517
       Align = alClient
-      PageIndex = 6
+      PageIndex = 4
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Display'
         ClientWidth = 513
-        ClientHeight = 472
+        ClientHeight = 449
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -1434,7 +1434,7 @@ object f_config_display: Tf_config_display
       object Page5: TPage
         Caption = 'Lines'
         ClientWidth = 513
-        ClientHeight = 449
+        ClientHeight = 472
         object EqGrid: TCheckBox
           Left = 16
           Height = 21
@@ -1491,7 +1491,7 @@ object f_config_display: Tf_config_display
           TabOrder = 9
           object Label132: TLabel
             Left = 29
-            Height = 20
+            Height = 14
             Top = 75
             Width = 184
             Caption = 'Constellation Figure File Name : '
@@ -1520,7 +1520,7 @@ object f_config_display: Tf_config_display
           end
           object CFStyle: TComboBox
             Left = 29
-            Height = 22
+            Height = 25
             Top = 32
             Width = 100
             ItemHeight = 16
@@ -1532,6 +1532,7 @@ object f_config_display: Tf_config_display
               'Dash Dot'
               'Dash Dot Dot'
             )
+            MaxLength = -1
             OnChange = CFStyleChange
             OnDrawItem = StyleDrawItem
             Style = csOwnerDrawFixed
@@ -1550,7 +1551,7 @@ object f_config_display: Tf_config_display
           TabOrder = 11
           object Label72: TLabel
             Left = 29
-            Height = 20
+            Height = 14
             Top = 75
             Width = 204
             Caption = 'Constellation Boundary File Name : '
@@ -1579,7 +1580,7 @@ object f_config_display: Tf_config_display
           end
           object CBStyle: TComboBox
             Left = 29
-            Height = 22
+            Height = 25
             Top = 32
             Width = 100
             ItemHeight = 16
@@ -1591,6 +1592,7 @@ object f_config_display: Tf_config_display
               'Dash Dot'
               'Dash Dot Dot'
             )
+            MaxLength = -1
             OnChange = CBStyleChange
             OnDrawItem = StyleDrawItem
             Style = csOwnerDrawFixed
@@ -1628,7 +1630,7 @@ object f_config_display: Tf_config_display
         end
         object GridStyle: TComboBox
           Left = 39
-          Height = 22
+          Height = 25
           Top = 53
           Width = 100
           ItemHeight = 16
@@ -1640,6 +1642,7 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
+          MaxLength = -1
           OnChange = GridStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1648,7 +1651,7 @@ object f_config_display: Tf_config_display
         end
         object EclipticStyle: TComboBox
           Left = 230
-          Height = 22
+          Height = 25
           Top = 53
           Width = 100
           ItemHeight = 16
@@ -1660,6 +1663,7 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
+          MaxLength = -1
           OnChange = EclipticStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1668,7 +1672,7 @@ object f_config_display: Tf_config_display
         end
         object EqGridStyle: TComboBox
           Left = 39
-          Height = 22
+          Height = 25
           Top = 125
           Width = 100
           ItemHeight = 16
@@ -1680,6 +1684,7 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
+          MaxLength = -1
           OnChange = EqGridStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1688,7 +1693,7 @@ object f_config_display: Tf_config_display
         end
         object GalEqStyle: TComboBox
           Left = 230
-          Height = 22
+          Height = 25
           Top = 125
           Width = 100
           ItemHeight = 16
@@ -1700,6 +1705,7 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
+          MaxLength = -1
           OnChange = GalEqStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1717,16 +1723,16 @@ object f_config_display: Tf_config_display
           TabOrder = 12
           object Label68: TLabel
             Left = 91
-            Height = 20
+            Height = 14
             Top = 95
             Width = 33
             Caption = 'years'
             ParentColor = False
           end
           object Label8: TLabel
-            Left = 30
+            Left = 28
             Height = 63
-            Top = 18
+            Top = 15
             Width = 150
             AutoSize = False
             Caption = 'Draw a line that represent the proper motion for the next '
