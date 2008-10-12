@@ -1435,7 +1435,6 @@ writetrace(rsExiting);
 Autorefresh.Enabled:=false;
 if SaveConfigOnExit.checked and
    (MessageDlg(rsDoYouWantToS, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then begin
-      if (MultiDoc1.ActiveObject is Tf_chart) then (MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.SimNb:=1;
       SaveDefault;
 end;
 for i:=0 to MultiDoc1.ChildCount-1 do
