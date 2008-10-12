@@ -132,7 +132,7 @@ type
 //---------------------------------------------
      Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
-     Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap);
+     Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap; TransparentMode:integer=0);
      procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean);
      procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
@@ -1432,7 +1432,7 @@ with cnv do begin
 end;
 end;
 
-Procedure TSplot.PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean; var ibmp:TBitmap);
+Procedure TSplot.PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean; var ibmp:TBitmap; TransparentMode:integer=0);
 var dsx,dsy,zoom : single;
     DestX,DestY :integer;
     SrcR: TRect;
@@ -1473,7 +1473,7 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    rbmp.Height:=imabmp.Height;
    rbmp.Canvas.Draw(0,0,imabmp);
    if iTransparent then
-      if DisplayIs32bpp then SetTransparencyFromLuminance(rbmp,0)
+      if DisplayIs32bpp then SetTransparencyFromLuminance(rbmp,TransparentMode)
                         else rbmp.TransparentColor:=clBlack;
    cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(DestX,DestY,rbmp);
@@ -1505,7 +1505,7 @@ end else begin
    imabmp.Height:=rbmp.Height;
    imabmp.Canvas.Draw(0,0,rbmp);
    if iTransparent then
-      if DisplayIs32bpp then SetTransparencyFromLuminance(imabmp,0)
+      if DisplayIs32bpp then SetTransparencyFromLuminance(imabmp,TransparentMode)
                         else imabmp.TransparentColor:=clBlack;
    cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(0,0,imabmp);
@@ -1544,7 +1544,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
  planetbmpjd:=jdt;
  planetbmprot:=pa;
 end;
-PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp);
+PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,2);
 end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
