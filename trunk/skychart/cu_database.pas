@@ -379,7 +379,9 @@ if db.Active then begin
     node:=copy(buf,61,9);
     i:=copy(buf,71,9);
     h:=copy(buf,92,4);
+    if trim(h)='' then h:='20';
     g:=copy(buf,97,4);
+    if trim(g)='' then g:='0.15';
     nam:=stringreplace(trim(copy(buf,103,27)),'"','\"',[rfreplaceall]);
     eq:='2000';
     if nl=1 then begin
@@ -1042,8 +1044,8 @@ if db.Rowcount>0 then begin
     inc(i);
   end;
   if dt<1000 then begin
-     h:=strtofloat(db.Results[j][1]);
-     g:=strtofloat(db.Results[j][2]);
+     h:=StrToFloatDef(db.Results[j][1],20);  // H and G not present in file for some poorly observed asteroids
+     g:=StrToFloatDef(db.Results[j][2],0.15);
      ma:=strtofloat(db.Results[j][4]);
      ap:=strtofloat(db.Results[j][5]);
      an:=strtofloat(db.Results[j][6]);

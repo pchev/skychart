@@ -1533,8 +1533,8 @@ var qry,id : string;
     nam:string;
 begin
              id:=row[0];
-             h:=strtofloat(row[1]);
-             g:=strtofloat(row[2]);
+             h:=StrToFloatDef(row[1],20);
+             g:=StrToFloatDef(row[2],0.15);
              epoch:=strtofloat(row[3]);
              ma:=strtofloat(row[4]);
              ap:=strtofloat(row[5]);

@@ -39,6 +39,9 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    astcdcneo: TButton;
     CheckBox1: TCheckBox;
     DefaultDSS: TButton;
     comhttp: TButton;
@@ -77,6 +80,9 @@ type
     Page2: TPage;
     DSSpictures: TStringGrid;
     procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure astcdcneoClick(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
@@ -140,10 +146,10 @@ Label7.caption:=rsAsteroidElem;
 comdefault.caption:=rsDefault;
 astdefault.caption:=rsDefault;
 brightneo.caption:=rsBrightNEO;
-mpcorb.caption:=rsMPCORB50Mb;
 comhttp.caption:=rsMPCHttp;
 comftp.caption:=rsMPCFtp;
 astcdc.caption:=rsFirst5000;
+astcdcneo.Caption:=rsFirst5000+' NEO + TNO';
 Page3.caption:=rsOnlineDSS;
 Label8.caption:=rsOnlinePictur;
 DefaultDSS.caption:=rsDefault;
@@ -265,6 +271,29 @@ begin
    if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
 
+procedure Tf_config_internet.Button4Click(Sender: TObject);
+begin
+CometUrlList.Clear;
+CometUrlList.Lines.Add(URL_HTTPCometElements2);
+CometUrlListExit(Sender);
+end;
+
+procedure Tf_config_internet.Button5Click(Sender: TObject);
+begin
+AsteroidUrlList.Clear;
+AsteroidUrlList.Lines.Add(URL_MPCORBAsteroidElements2);
+AsteroidUrlListExit(Sender);
+end;
+
+procedure Tf_config_internet.astcdcneoClick(Sender: TObject);
+begin
+AsteroidUrlList.Clear;
+AsteroidUrlList.Lines.Add(URL_CDCAsteroidElements);
+AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements2);
+AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements3);
+AsteroidUrlListExit(Sender);
+end;
+
 procedure Tf_config_internet.FormDestroy(Sender: TObject);
 begin
   mycmain.Free;
@@ -291,7 +320,7 @@ end;
 
 procedure Tf_config_internet.astdefaultClick(Sender: TObject);
 begin
-brightneoClick(Sender);
+astcdcneoClick(Sender);
 end;
 
 procedure Tf_config_internet.brightneoClick(Sender: TObject);
@@ -300,10 +329,8 @@ begin
 AsteroidUrlList.Clear;
 buf:=stringreplace(URL_HTTPAsteroidElements1,'$YYYY',FormatDateTime('yyyy',now),[]);
 AsteroidUrlList.Lines.Add(buf);
-buf:=stringreplace(URL_HTTPAsteroidElements2,'$YYYY',FormatDateTime('yyyy',now),[]);
-AsteroidUrlList.Lines.Add(buf);
-buf:=stringreplace(URL_HTTPAsteroidElements3,'$YYYY',FormatDateTime('yyyy',now),[]);
-AsteroidUrlList.Lines.Add(buf);
+AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements2);
+AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements3);
 AsteroidUrlListExit(Sender);
 end;
 
