@@ -545,18 +545,10 @@ begin
  save_left:=left;
  save_width:=width;
  save_height:=height;
-{$ifdef lclgtk2}
-// bug with black margin around chart
- top:=-4;
- left:=-4;
- width:=parent.Width+4;
- height:=parent.Height+4;
-{$else}
  top:=0;
  left:=0;
- width:=parent.Width;
- height:=parent.Height;
-{$endif}
+ width:=parent.ClientWidth;
+ height:=parent.ClientHeight;
  MenuBar.Visible:=false;
  TopLeftBar.Visible:=false;
  TopRightBar.Visible:=false;
