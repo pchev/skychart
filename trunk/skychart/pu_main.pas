@@ -5322,8 +5322,8 @@ for i:=1 to Maxwindow do
  if (TCPDaemon.TCPThrd[i]<>nil) then begin
     TCPDaemon.TCPThrd[i].stoping:=true;
  end;
-d:=now+8E-6;  // 0.7 seconde delay to close the thread
-while now<d do application.processmessages;
+d:=now+1.16E-5;  // 1 seconde delay to close the thread, sleep to interrupt the thread
+while now<d do begin; application.processmessages; sleep(50); end;
 TCPDaemon.stoping:=true;
 screen.cursor:=crDefault;
 except

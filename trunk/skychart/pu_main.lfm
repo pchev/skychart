@@ -3328,7 +3328,6 @@ object f_main: Tf_main
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
         ItemHeight = 15
-        MaxLength = -1
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnEnter = ToolBar1Enter
@@ -3480,7 +3479,6 @@ object f_main: Tf_main
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
         ItemHeight = 15
-        MaxLength = -1
         OnEnter = ToolBar1Enter
         OnMouseMove = Toolbar1MouseMove
         ParentFont = False
