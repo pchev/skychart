@@ -21,8 +21,8 @@ object f_chart: Tf_chart
     Top = 8
     Width = 480
     BevelOuter = bvNone
-    ClientHeight = 268
-    ClientWidth = 476
+    ClientHeight = 272
+    ClientWidth = 480
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
@@ -48,8 +48,8 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 460
-      Height = 252
+      Left = 464
+      Height = 256
       Width = 16
       Align = alRight
       Kind = sbVertical
@@ -62,8 +62,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Height = 16
-      Top = 252
-      Width = 476
+      Top = 256
+      Width = 480
       Align = alBottom
       LargeChange = 10
       Max = 50

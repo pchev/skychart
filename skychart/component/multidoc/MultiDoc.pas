@@ -470,18 +470,10 @@ var i: integer;
 begin
 if Maximized then
   for i:=0 to FChildIndex do begin
-    {$ifdef lclgtk2}
-    // bug with black margin around chart
-    FChild[i].top:=-4;
-    FChild[i].left:=-4;
-    FChild[i].Width:=width+4;
-    FChild[i].Height:=height+4;
-    {$else}
     FChild[i].top:=0;
     FChild[i].left:=0;
-    FChild[i].Width:=clientwidth;
-    FChild[i].Height:=clientheight;
-    {$endif}
+    FChild[i].Width:=ClientWidth;
+    FChild[i].Height:=ClientHeight;
   end;
 if Assigned(FOnResize) then  FOnResize(Sender);
 end;

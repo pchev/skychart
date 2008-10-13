@@ -360,15 +360,8 @@ begin
  Image1.Cursor := ChartCursor;
  lock_refresh:=false;
  MovingCircle:=false;
- // must use onScroll on Windows to solve bug 193
- // but Gtk need onChange
- {$ifdef win32}
-   HorScrollBar.onScroll:=HorScrollBarScroll;
-   VertScrollBar.onScroll:=VertScrollBarScroll;
- {$else}
-   HorScrollBar.onChange:=HorScrollBarChange;
-   VertScrollBar.onChange:=VertScrollBarChange;
- {$endif}
+ HorScrollBar.onScroll:=HorScrollBarScroll;
+ VertScrollBar.onScroll:=VertScrollBarScroll;
  VertScrollBar.Max:=90*3600;   // arcsecond position precision
  VertScrollBar.Min:=-90*3600;
  VertScrollBar.SmallChange:=3600;
