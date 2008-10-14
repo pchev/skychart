@@ -2842,11 +2842,11 @@ end;
 
 Procedure Tf_main.InitFonts;
 begin
-   LPanels01.Caption:='Ra:222h22m22.22s +22°22''22"22';
+{   LPanels01.Caption:='Ra:222h22m22.22s +22°22''22"22';
    PanelBottom.height:=2*LPanels01.Height+8;
    PPanels0.Width:=LPanels01.width+8;
    Lpanels01.Caption:='';
-   Lpanels0.Caption:='';
+   Lpanels0.Caption:='';}
 end;
 
 Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
