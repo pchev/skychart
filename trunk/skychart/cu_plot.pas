@@ -1518,7 +1518,7 @@ end;
 end;
 
 procedure TSplot.PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double;WhiteBg:boolean);
-var ds : integer;
+var ds,mode : integer;
     fn: shortstring;
 const planetsize=450;
       moonsize=1000;
@@ -1544,11 +1544,13 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
  planetbmpjd:=jdt;
  planetbmprot:=pa;
 end;
-PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,2);
+if cfgplot.TransparentPlanet then mode:=0
+   else mode:=2;
+PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
 end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
-var ds,i : integer;
+var ds,i,mode : integer;
     cmd, searchdir: string;
     ok: boolean;
 begin
@@ -1589,7 +1591,9 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
     planetbmpjd:=0;
  end;
 end;
-if ok then PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp);
+if cfgplot.TransparentPlanet then mode:=0
+   else mode:=2;
+if ok then PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
 end;
 
 procedure TSplot.PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
