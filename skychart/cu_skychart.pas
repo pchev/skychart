@@ -245,8 +245,7 @@ try
     if cfgsc.showline then DrawOutline;
   end;
   // then the lines
-  //writetrace('Draw grid');
-  DrawGrid;
+  //writetrace('Draw lines');
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawConstL;
     DrawConstB;
@@ -272,6 +271,9 @@ try
   // and the horizon line if not transparent
   //writetrace('Draw horizon');
   if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque then DrawHorizon;
+
+  //writetrace('Draw grid');
+  DrawGrid;
   // the labels
   //writetrace('Draw label');
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
