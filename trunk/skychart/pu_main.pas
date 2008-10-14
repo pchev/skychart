@@ -2842,12 +2842,6 @@ end;
 
 Procedure Tf_main.InitFonts;
 begin
-{$ifdef win32}
-   font.name:=def_cfgplot.fontname[4];
-   font.size:=def_cfgplot.fontsize[4];
-   if def_cfgplot.FontBold[4] then font.style:=[fsBold] else font.style:=[];
-   if def_cfgplot.FontItalic[4] then font.style:=font.style+[fsItalic];
-{$endif}
    LPanels01.Caption:='Ra:222h22m22.22s +22°22''22"22';
    PanelBottom.height:=2*LPanels01.Height+8;
    PPanels0.Width:=LPanels01.width+8;
@@ -2880,6 +2874,7 @@ end;
 Procedure Tf_main.SetLPanel0(txt:string);
 begin
 P0L1.Caption:=txt;
+if PPanels0.Width<P0L1.width then PPanels0.Width:=P0L1.width+8;
 end;
 
 Procedure Tf_main.SetTopMessage(txt:string;sender:TObject);
