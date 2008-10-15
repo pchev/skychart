@@ -722,10 +722,6 @@ var
 
 implementation
 
-{$ifdef win32}
-   {$R cdc_icon.res}
-{$endif}
-
 uses
 {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
      gtkproc,
