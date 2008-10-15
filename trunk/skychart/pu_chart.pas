@@ -728,6 +728,18 @@ end;
 Refresh;
 end;
 
+Procedure FixPostscript(fn: string; pw,ph:integer);
+var buf:TStringList;
+    i:integer;
+begin
+// Add Pagesize to the Postscript file to avoid bad clipping
+buf:=TStringList.Create;
+buf.LoadFromFile(fn);
+i:=buf.IndexOf('%%Page: 1 1')+1;
+buf.Insert(i,'<< /PageSize ['+inttostr(pw)+' '+inttostr(ph)+'] >> setpagedevice');
+buf.SaveToFile(fn);
+end;
+
 procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main);
 var savecolor: Starcolarray;
     savesplot,savenplot,savepplot,savebgcolor,resol: integer;
@@ -821,6 +833,7 @@ try
     ps.enddoc;
     fname:=slash(printpath)+'cdcprint.ps';
     ps.savetofile(fname);
+    FixPostscript(fname,ps.pagewidth,ps.pageheight);
     chdir(appdir);
     if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
     execnowait(printcmd1+' "'+fname+'"');
