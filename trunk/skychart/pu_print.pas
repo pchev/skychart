@@ -105,7 +105,6 @@ end;
 
 procedure Tf_print.FormShow(Sender: TObject);
 begin
-prtcolor.ItemIndex:=cm.PrintColor;
 if cm.PrintLandscape then prtorient.ItemIndex:=1
                      else prtorient.ItemIndex:=0;
 LongEdit1.Value:=cm.PrtLeftMargin;
@@ -165,6 +164,9 @@ begin
 if (cm.PrintMethod=0)and(Printer.PrinterIndex<0) then begin
   cm.PrintMethod:=1;
 end;
+prtcolor.ItemIndex:=cm.PrintColor;
+if ((cm.PrintMethod=0)or(cm.PrintMethod=1))and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
+cm.PrintColor:=prtcolor.ItemIndex;
 case cm.PrintMethod of
 0 : begin
     GetPrinterResolution(cm.prtname,i);
@@ -181,7 +183,7 @@ end;
 
 procedure Tf_print.prtcolorClick(Sender: TObject);
 begin
-if (cm.PrintMethod=0)and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
+if ((cm.PrintMethod=0)or(cm.PrintMethod=1))and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
 cm.PrintColor:=prtcolor.ItemIndex;
 end;
 
