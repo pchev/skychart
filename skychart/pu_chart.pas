@@ -840,11 +840,11 @@ try
     if assigned(Fshowinfo) then Fshowinfo(rsCreatePostsc , caption);
     ps:=TPostscriptCanvas.Create;
     if PrintLandscape then begin
-       ps.pagewidth:=round(11.7*printresol);  // A4 11.7 8.27
-       ps.pageheight:=round(8.27*printresol);
+       ps.pagewidth:=round(PaperHeight[cm.Paper]*printresol);
+       ps.pageheight:=round(PaperWidth[cm.Paper]*printresol);
     end else begin
-       ps.pagewidth:=round(8.27*printresol);
-       ps.pageheight:=round(11.7*printresol);
+       ps.pagewidth:=round(PaperWidth[cm.Paper]*printresol);
+       ps.pageheight:=round(PaperHeight[cm.Paper]*printresol);
     end;
    // draw the chart
     ps.begindoc;

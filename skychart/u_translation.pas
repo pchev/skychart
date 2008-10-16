@@ -379,7 +379,6 @@ resourcestring
   rsPrinterSetup = 'Printer Setup';
   rsRasterResolu = 'Raster Resolution';
   rsCommandToUse = 'Command to use to process the file.';
-  rsDpiFor8X11Pa = 'dpi for 8x11 paper';
   rsPathToSaveTh = 'Path to save the file :';
   rsPrintMethod = 'Print method';
   rsCommandFound = 'Command found OK.';
