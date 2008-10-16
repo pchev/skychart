@@ -6,7 +6,7 @@ LazarusResources.Add('Tf_chart','FORMDATA',[
   +#12'ClientHeight'#3'R'#1#11'ClientWidth'#3#252#1#10'KeyPreview'#9#7'OnClose'
   +#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#9
   +'OnKeyDown'#7#11'FormKeyDown'#10'OnKeyPress'#7#12'FormKeyPress'#10'ParentFon'
-  +'t'#8#10'LCLVersion'#6#6'0.9.27'#0#6'TPanel'#6'Panel1'#4'Left'#2#8#6'Height'
+  +'t'#8#10'LCLVersion'#6#6'0.9.26'#0#6'TPanel'#6'Panel1'#4'Left'#2#8#6'Height'
   +#3#16#1#3'Top'#2#8#5'Width'#3#224#1#10'BevelOuter'#7#6'bvNone'#12'ClientHeig'
   +'ht'#3#16#1#11'ClientWidth'#3#224#1#11'FullRepaint'#8#11'ParentColor'#8#8'Ta'
   +'bOrder'#2#0#8'OnResize'#7#11'ChartResize'#0#6'TLabel'#10'identlabel'#6'Curs'
@@ -15,10 +15,10 @@ LazarusResources.Add('Tf_chart','FORMDATA',[
   +#10'Font.Color'#7#7'clWhite'#11'Font.Height'#2#244#9'Font.Name'#6#4'Sans'#11
   +'ParentColor'#8#10'ParentFont'#8#13'ShowAccelChar'#8#11'Transparent'#8#7'Vis'
   +'ible'#8#7'OnClick'#7#15'identlabelClick'#0#0#10'TScrollBar'#13'VertScrollBa'
-  +'r'#6'Cursor'#7#7'crArrow'#4'Left'#3#208#1#6'Height'#3#0#1#5'Width'#2#16#5'A'
+  +'r'#6'Cursor'#7#7'crArrow'#4'Left'#3#209#1#6'Height'#3#1#1#5'Width'#2#15#5'A'
   +'lign'#7#7'alRight'#4'Kind'#7#10'sbVertical'#11'LargeChange'#2#10#3'Max'#2'2'
   +#3'Min'#2#206#8'PageSize'#2#10#8'TabOrder'#2#0#0#0#10'TScrollBar'#12'HorScro'
-  +'llBar'#6'Cursor'#7#7'crArrow'#6'Height'#2#16#3'Top'#3#0#1#5'Width'#3#224#1#5
+  +'llBar'#6'Cursor'#7#7'crArrow'#6'Height'#2#15#3'Top'#3#1#1#5'Width'#3#224#1#5
   +'Align'#7#8'alBottom'#11'LargeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8'PageSi'
   +'ze'#2#10#8'TabOrder'#2#1#0#0#0#6'TTimer'#12'RefreshTimer'#7'Enabled'#8#8'In'
   +'terval'#3','#1#7'OnTimer'#7#17'RefreshTimerTimer'#4'left'#3'0'#1#3'top'#2#24

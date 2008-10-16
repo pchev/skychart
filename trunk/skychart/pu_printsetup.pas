@@ -38,6 +38,8 @@ type
   { Tf_printsetup }
 
   Tf_printsetup = class(TForm)
+    Label5: TLabel;
+    PaperSize: TComboBox;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     printcmd: TFileNameEdit;
@@ -58,10 +60,10 @@ type
     prtres: TLongEdit;
     cmdreport: TEdit;
     Label4: TLabel;
-    Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure PaperSizeChange(Sender: TObject);
     procedure qtsetupClick(Sender: TObject);
     procedure printmodeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -92,7 +94,7 @@ Label7.caption:=rsSelectTheSys;
 qtsetup.caption:=rsPrinterSetup;
 Label1.caption:=rsRasterResolu;
 Label4.caption:=rsCommandToUse;
-Label5.caption:=rsDpiFor8X11Pa;
+Label5.caption:=rsSize;
 Label6.caption:=rsPathToSaveTh;
 printmode.caption:=rsPrintMethod;
 printmode.Items[0]:=rsSystemPrinte;
@@ -106,6 +108,7 @@ end;
 
 procedure Tf_printsetup.FormShow(Sender: TObject);
 begin
+PaperSize.ItemIndex:=cm.Paper-1;
 updprtsetup;
 end;
 
@@ -190,11 +193,21 @@ begin
 end;
 
 procedure Tf_printsetup.FormCreate(Sender: TObject);
+var i: integer;
 begin
 SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
+PaperSize.Clear;
+for i:=1 to PaperNumber do begin
+   PaperSize.Items.Add(Papername[i]);
+end;
+end;
+
+procedure Tf_printsetup.PaperSizeChange(Sender: TObject);
+begin
+  cm.Paper:=PaperSize.ItemIndex+1;
 end;
 
 procedure Tf_printsetup.printmodeClick(Sender: TObject);

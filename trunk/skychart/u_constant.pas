@@ -87,8 +87,13 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       nv_dark   = $00000040;
       nv_black  = $00000000;
 
-
 //  End of deep-sky objects colour
+
+      // Paper size
+      PaperNumber=9;
+      PaperName : array[1..PaperNumber] of string=('A5','A4','A3', 'A2', 'A1', 'A0',  'Letter','Legal','Tabloid');
+      PaperWidth: array[1..PaperNumber] of single=(5.83,8.27,11.69, 16.54,23.39,33.11, 8.5,     8.5,    11.0);
+      PaperHeight:array[1..PaperNumber] of single=(8.27,11.69,16.54,23.39,33.11,46.81, 11.0,    14.0,   17.0);
 
       greek : array[1..2,1..24]of string=(('Alpha','Beta','Gamma','Delta','Epsilon','Zeta','Eta','Theta','Iota','Kappa','Lambda','Mu','Nu','Xi','Omicron','Pi','Rho','Sigma','Tau','Upsilon','Phi','Chi','Psi','Omega'),
               ('alp','bet','gam','del','eps','zet','eta','the','iot','kap','lam','mu','nu','xi','omi','pi','rho','sig','tau','ups','phi','chi','psi','ome'));
@@ -225,7 +230,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       // Location database source url
       baseurl_us = 'http://www.ap-i.net/pub/skychart/gn/stategaz/';
       baseurl_world = 'http://www.ap-i.net/pub/skychart/gn/cntyfile/';
-      
+
       //Default URL
       URL_WebHome = 'http://www.ap-i.net/skychart';
       URL_Maillist = 'http://groups.yahoo.com/group/skychart-discussion/';
@@ -514,7 +519,7 @@ type
                 procedure Assign(Source: Tconf_main);
                 prtname,language,Constellationpath, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
-                PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
+                Paper,PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
                 PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin: integer;
                 savetop,saveleft,saveheight,savewidth: integer;
                 ButtonStandard,ButtonNight: integer;
@@ -1478,6 +1483,7 @@ dbpass:=Source.dbpass;
 ImagePath:=Source.ImagePath;
 persdir:=Source.persdir;
 prgdir:=Source.prgdir;
+Paper:=Source.Paper;
 PrinterResolution:=Source.PrinterResolution;
 PrintMethod:=Source.PrintMethod;
 PrintColor:=Source.PrintColor;

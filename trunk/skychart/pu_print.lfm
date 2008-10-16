@@ -1,21 +1,21 @@
 object f_print: Tf_print
-  Left = 947
-  Height = 300
-  Top = 305
-  Width = 410
+  Left = 1013
+  Height = 293
+  Top = 417
+  Width = 403
   ActiveControl = prtcolor.RadioButton0
   Caption = 'Print Chart'
-  ClientHeight = 300
-  ClientWidth = 410
+  ClientHeight = 293
+  ClientWidth = 403
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.26'
   object PrinterInfo: TLabel
     Left = 27
-    Height = 14
+    Height = 16
     Top = 14
-    Width = 60
+    Width = 66
     Caption = 'PrinterInfo'
     ParentColor = False
   end
@@ -34,7 +34,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 67
+    ClientHeight = 65
     ClientWidth = 203
     ItemIndex = 0
     Items.Strings = (
@@ -60,7 +60,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 67
+    ClientHeight = 65
     ClientWidth = 145
     Items.Strings = (
       'Portrait'
@@ -70,9 +70,9 @@ object f_print: Tf_print
     TabOrder = 4
   end
   object Print: TButton
-    Left = 96
+    Left = 192
     Height = 25
-    Top = 248
+    Top = 256
     Width = 75
     BorderSpacing.InnerBorder = 4
     Caption = 'Print'
@@ -81,9 +81,9 @@ object f_print: Tf_print
     TabOrder = 0
   end
   object Cancel: TButton
-    Left = 224
+    Left = 314
     Height = 25
-    Top = 248
+    Top = 256
     Width = 75
     BorderSpacing.InnerBorder = 4
     Cancel = True
@@ -107,7 +107,7 @@ object f_print: Tf_print
     Top = 144
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 67
+    ClientHeight = 65
     ClientWidth = 376
     TabOrder = 5
     object Label1: TLabel
