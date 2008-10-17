@@ -1107,6 +1107,7 @@ resourcestring
   rsAskConfirmat = 'Ask confirmation before any Internet connection';
   rsNumberOfNebu = 'Number of nebulae';
   rsInformationD = 'Information detail';
+  rsDisplayLabel = 'Display labels for all star catalog';
 
 implementation
 

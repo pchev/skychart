@@ -444,7 +444,7 @@ type
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
-                StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
+                DrawAllStarLabel,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
                 EquinoxName,TrackName,TrackId,FindName,FindDesc,FindNote : string;
                 PlanetLst : Tplanetlst;
                 AsteroidNb,CometNb,AsteroidLstSize,CometLstSize,NumCircle: integer;
@@ -1273,6 +1273,7 @@ WhiteBg:=Source.WhiteBg ;
 MagLabel:=Source.MagLabel ;
 NameLabel:=Source.NameLabel ;
 ConstFullLabel:=Source.ConstFullLabel ;
+DrawAllStarLabel:=Source.DrawAllStarLabel;
 ConstLatinLabel:=Source.ConstLatinLabel;
 ScopeMark:=Source.ScopeMark ;
 ScopeLock:=Source.ScopeLock ;
