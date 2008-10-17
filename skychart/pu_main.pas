@@ -1433,7 +1433,8 @@ Autorefresh.Enabled:=false;
 if SaveConfigOnExit.checked and
    (MessageDlg(rsDoYouWantToS, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then begin
       SaveDefault;
-end;
+end else
+   SaveQuickSearch(configfile);
 for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
       locked:=true;
