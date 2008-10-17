@@ -43,6 +43,7 @@ type
     BtnRedColor: TButton;
     BtnWBColor: TButton;
     BtnBWColor: TButton;
+    DrawAllStarLabel: TCheckBox;
     DrawPmBox: TCheckBox;
     DrawPMy: TLongEdit;
     GridStyle: TComboBox;
@@ -320,6 +321,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
+    procedure DrawAllStarLabelClick(Sender: TObject);
     procedure DrawPMyChange(Sender: TObject);
     procedure DrawPmBoxClick(Sender: TObject);
     procedure EclipticStyleChange(Sender: TObject);
@@ -581,6 +583,7 @@ GalEqStyle.items[2]:=rsDot1;
 GalEqStyle.items[3]:=rsDashDot1;
 GalEqStyle.items[4]:=rsDashDotDot1;
 Page6.caption:=rsLabels;
+DrawAllStarLabel.Caption:=rsDisplayLabel;
 MagLabel.caption:=rsStarLabel;
 MagLabel.Items[0]:=rsName;
 MagLabel.Items[1]:=rsCommonName;
@@ -698,6 +701,11 @@ end;
 procedure Tf_config_display.CFStyleChange(Sender: TObject);
 begin
 csc.StyleConstL:=TPenStyle(CFStyle.itemindex);
+end;
+
+procedure Tf_config_display.DrawAllStarLabelClick(Sender: TObject);
+begin
+csc.DrawAllStarLabel:=DrawAllStarLabel.Checked;
 end;
 
 procedure Tf_config_display.GalEqStyleChange(Sender: TObject);
@@ -1094,6 +1102,7 @@ begin
                        else constlabel.ItemIndex:=1;
  Showlabelall.checked:=csc.Showlabelall;
  ShowChartInfo.checked:=cmain.ShowChartInfo;
+ DrawAllStarLabel.Checked:=csc.DrawAllStarLabel;
 end;
 
 procedure Tf_config_display.ShowCircle;

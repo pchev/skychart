@@ -718,9 +718,9 @@ if Fcatalog.OpenStar then
        Fplot.PlotLine(xx,yy,xxp,yyp,Fplot.cfgplot.Color[15],1);
     end;
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
-    if (rec.options.ShortName=firstcat) then al:=laBottomLeft
-                                        else al:=laBottomRight;
-    if (rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
+    if (cfgsc.DrawAllStarLabel or(rec.options.ShortName=firstcat)) and (rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
+       if (rec.options.ShortName=firstcat) then al:=laBottomLeft
+                                           else al:=laBottomRight;
        if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv),al)
        else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3],al)
        else if rec.star.valid[vsGreekSymbol] then begin
