@@ -19,7 +19,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object MultiDoc1: TMultiDoc
     Left = 24
     Height = 469
@@ -2669,12 +2669,12 @@ object f_main: Tf_main
     Width = 24
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 469
+    ClientHeight = 492
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 469
+      Height = 492
       Width = 24
       Align = alClient
       ButtonHeight = 23
@@ -2779,12 +2779,12 @@ object f_main: Tf_main
     Width = 25
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 469
+    ClientHeight = 492
     ClientWidth = 25
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 219
+      Height = 242
       Top = 250
       Width = 25
       Align = alClient
@@ -3470,14 +3470,13 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 29
+        Height = 25
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        MaxLength = -1
         OnEnter = ToolBar1Enter
         OnMouseMove = Toolbar1MouseMove
         ParentFont = False

@@ -27,7 +27,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, Classes, Sysutils, cu_catalog, cu_skychart, cu_plot, cu_planet,
+  Forms, Classes, Sysutils, Dialogs, cu_catalog, cu_skychart, cu_plot, cu_planet,
   cu_indiclient, cu_fits, cu_database, cu_telescope, pu_info, pu_image,
   pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection,
@@ -43,7 +43,7 @@ uses
 const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
 
 var i : integer;
-    buf, p : string;
+    buf, p, step : string;
 
 {$IFDEF WINDOWS}{$R cdc.rc}{$ENDIF}
 
@@ -65,22 +65,48 @@ begin
   compile_time:=compile_t;
   Application.Title:='Cartes du Ciel';
   Application.Initialize;
-
+  try
+  step:='Create main form';
   Application.CreateForm(Tf_main, f_main);
+  step:='Create splash';
   Application.CreateForm(Tf_splash, f_splash);
+  step:='Show splash';
   f_splash.Show; f_splash.Invalidate;
   Application.ProcessMessages;
+  step:='Create f_position';
   Application.CreateForm(Tf_position, f_position);
+  step:='Create f_search';
   Application.CreateForm(Tf_search, f_search);
+  step:='Create f_zoom';
   Application.CreateForm(Tf_zoom, f_zoom);
+  step:='Create f_getdss';
   Application.CreateForm(Tf_getdss, f_getdss);
+  step:='Create f_manualtelescope';
   Application.CreateForm(Tf_manualtelescope, f_manualtelescope);
+  step:='Create f_detail';
   Application.CreateForm(Tf_detail, f_detail);
+  step:='Create f_info';
   Application.CreateForm(Tf_info, f_info);
+  step:='Create f_calendar';
   Application.CreateForm(Tf_calendar, f_calendar);
+  step:='Create f_printsetup';
   Application.CreateForm(Tf_printsetup, f_printsetup);
+  step:='Create f_print';
   Application.CreateForm(Tf_print, f_print);
+  step:='Main Init';
   f_main.init;
+  step:='';
+  except
+  on E: Exception do begin
+   WriteTrace(step+': '+E.Message);
+   f_splash.Close;
+   MessageDlg(step+': '+E.Message+crlf+rsSomethingGoW+crlf
+             +rsPleaseTryToR,
+             mtError, [mbAbort], 0);
+   Halt;
+   end;
+  end;
+
   Application.Run;
 
   Params.Free;

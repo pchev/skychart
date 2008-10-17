@@ -15,7 +15,7 @@ object f_info: Tf_info
   OnShow = FormShow
   ParentFont = False
   Position = poScreenCenter
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object Panel1: TPanel
     Height = 27
     Top = 437
@@ -130,13 +130,13 @@ object f_info: Tf_info
       Font.Height = -13
       Font.Name = 'courier'
       Font.Pitch = fpFixed
+      Font.Quality = fqNonAntialiased
       ParentColor = False
       ParentFont = False
       PopupMenu = PopupMenu2
       TabOrder = 1
       OnDblClick = Memo1DblClick
       BookMarkOptions.Xoffset = -18
-      BookMarkOptions.OnChange = nil
       Gutter.Visible = False
       Keystrokes = <      
         item
@@ -465,7 +465,6 @@ object f_info: Tf_info
       Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
       ReadOnly = True
       RightEdge = 0
-      SelectedColor.OnChange = nil
       TabWidth = 10
     end
     object Panel3: TPanel
