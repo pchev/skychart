@@ -319,7 +319,7 @@ type
      Tconstpos  = record ra,de : single; end;
      Tconstb = record ra,de : single; newconst:boolean; end;
      Tconstl = record ra1,de1,ra2,de2 : single; end;
-     TLabelAlign = (laNone,laTop,laBottom,laLeft,laRight,laCenter);
+     TLabelAlign = (laNone,laTop,laBottom,laLeft,laRight,laCenter,laTopLeft,laBottomLeft,laTopRight,laBottomRight);
      Thorizonlist = array [0..360] of single;
      Phorizonlist = ^Thorizonlist;
 
