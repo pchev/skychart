@@ -957,6 +957,7 @@ end;
 procedure Tf_main.FormShow(Sender: TObject);
 var i:integer;
 begin
+try
  if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
  InitFonts;
  SetLpanel1('');
@@ -968,6 +969,12 @@ begin
         RefreshTimer.Enabled:=true;
      end;
  ImageSetFocus(Sender);
+except
+  on E: Exception do begin
+   WriteTrace('FormShow error: '+E.Message);
+   MessageDlg('FormShow error: '+E.Message, mtError, [mbClose], 0);
+  end;
+end;
 end;
 
 procedure Tf_main.Init;
@@ -1051,7 +1058,10 @@ try
  end;
  ProcessParams2;
 except
-on E: Exception do SetLPanel1('Initialization error:'+E.Message);
+  on E: Exception do begin
+   WriteTrace('Initialization error: '+E.Message);
+   MessageDlg('Initialization error: '+E.Message, mtError, [mbClose], 0);
+  end;
 end;
 end;
 
@@ -1390,6 +1400,7 @@ step:='Load timezone';
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 except
   on E: Exception do begin
+   WriteTrace(step+': '+E.Message);
    MessageDlg(step+': '+E.Message+crlf+rsSomethingGoW+crlf
              +rsPleaseTryToR,
              mtError, [mbAbort], 0);
