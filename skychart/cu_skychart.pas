@@ -679,6 +679,7 @@ var rec:GcatRec;
   first:boolean;
   firstcat:TSname;
   gk: string;
+  al: TLabelAlign;
 begin
 fillchar(rec,sizeof(rec),0);
 if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
@@ -717,13 +718,15 @@ if Fcatalog.OpenStar then
        Fplot.PlotLine(xx,yy,xxp,yyp,Fplot.cfgplot.Color[15],1);
     end;
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
-    if (rec.options.ShortName=firstcat)and(rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
-       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv))
-       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3])
+    if (rec.options.ShortName=firstcat) then al:=laBottomLeft
+                                        else al:=laBottomRight;
+    if (rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
+       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv),al)
+       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3],al)
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
-          SetLabel(lid,xx,yy,0,7,1,gk);
-        end else SetLabel(lid,xx,yy,0,2,1,rec.star.id);
+          SetLabel(lid,xx,yy,0,7,1,gk,al);
+        end else SetLabel(lid,xx,yy,0,2,1,rec.star.id,al);
     end;
  end;
 end;
@@ -753,8 +756,8 @@ if Fcatalog.OpenVarStar then
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
     if rec.variable.magmax<cfgsc.StarmagMax-cfgsc.LabelMagDiff[2] then
-    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,2,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin))
-       else SetLabel(lid,xx,yy,0,2,2,rec.variable.id);
+    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,2,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft)
+       else SetLabel(lid,xx,yy,0,2,2,rec.variable.id,laTopLeft);
  end;
 end;
 result:=true;
@@ -788,8 +791,8 @@ if Fcatalog.OpenDblStar then
     rec.double.pa:=Deg2Rad*rec.double.pa+rot;
     Fplot.PlotDblStar(xx,yy,abs(rec.double.sep*secarc*cfgsc.BxGlb),rec.double.mag1,rec.double.sep,rec.double.pa,0);
     if rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3] then
-    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1))
-       else SetLabel(lid,xx,yy,0,2,3,rec.double.id);
+    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1),laTopRight)
+       else SetLabel(lid,xx,yy,0,2,3,rec.double.id,laTopRight);
  end;
 end;
 result:=true;
@@ -816,6 +819,7 @@ var rec:GcatRec;
   imgfile: string;
   bmp:Tbitmap;
   save_col: Starcolarray;
+  al: TLabelAlign;
 
   Procedure Drawing;
     begin
@@ -899,8 +903,11 @@ var rec:GcatRec;
                   begin
                     Drawing;
                   end;
-              if rec.neb.messierobject or (rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then
-              SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id);
+              if rec.neb.messierobject or (rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then begin
+                 if rec.options.ShortName='SAC' then al:=laLeft
+                                                else al:=laRight;
+                 SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al);
+              end;
             end;
         end;
       result:=true;
@@ -1081,7 +1088,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
           if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
              else ltxt:=ltxt+formatfloat(f1,magn);
       end;
-      SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,ltxt);
+      SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,ltxt,laLeft);
     end;
     case ipla of
       4 :  begin
@@ -1146,7 +1153,7 @@ begin
 projection(ra,dec,x1,y1,true,cfgsc) ;
 WindowXY(x1,y1,xx,yy,cfgsc);
 Fplot.PlotSatel(xx,yy,ipla,pixscale,ma,diam,hidesat,showhide);
-if not(hidesat xor showhide)and(j=0) then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla]);
+if not(hidesat xor showhide)and(j=0) then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla],laLeft);
 end;
 
 function Tskychart.DrawAsteroid :boolean;
@@ -1181,7 +1188,7 @@ if cfgsc.ShowAsteroid then begin
            if cfgsc.SimMagLabel then
               ltxt:=ltxt+formatfloat(f1,magn);
           end;
-          SetLabel(lid,xx,yy,0,2,5,ltxt);
+          SetLabel(lid,xx,yy,0,2,5,ltxt,laLeft);
         end;
       end;
     end;
@@ -1222,7 +1229,7 @@ if cfgsc.ShowComet then begin
            if cfgsc.SimMagLabel then
               ltxt:=ltxt+formatfloat(f1,cfgsc.CometLst[j,i,3]);
           end;
-          SetLabel(lid,xx,yy,sz,2,5,ltxt);
+          SetLabel(lid,xx,yy,sz,2,5,ltxt,laLeft);
         end;
         if projection(cfgsc.CometLst[j,i,5],cfgsc.CometLst[j,i,6],x1,y1,true,cfgsc) then
            WindowXY(x1,y1,cxx,cyy,cfgsc)
@@ -2814,7 +2821,7 @@ var i,j,x,y,r: integer;
     labelnum,fontnum:byte;
     txt:string;
     skiplabel:boolean;
-    al: TLabelAlign;
+    al,av: TLabelAlign;
 begin
 Fplot.InitLabel;
 DrawCustomlabel;
@@ -2824,7 +2831,24 @@ for i:=1 to numlabels do begin
   y:=labels[i].y;
   r:=labels[i].r;
   al:=labels[i].align;
+  av:=laCenter;
   if al=laNone then al:=laLeft;
+  if al=laTopLeft then begin
+     al:=laLeft;
+     av:=laTop;
+  end;
+  if al=laBottomLeft then begin
+     al:=laLeft;
+     av:=laBottom;
+  end;
+  if al=laTopRight then begin
+     al:=laRight;
+     av:=laTop;
+  end;
+  if al=laBottomRight then begin
+     al:=laRight;
+     av:=laBottom;
+  end;
   txt:=labels[i].txt;
   labelnum:=labels[i].labelnum;
   fontnum:=labels[i].fontnum;
@@ -2839,7 +2863,7 @@ for i:=1 to numlabels do begin
         if (cfgsc.modlabels[j].dx<>0)or(cfgsc.modlabels[j].dy<>0) then r:=-1;
         break;
      end;
-  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,al,laCenter,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
+  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
 end;
 if cfgsc.showlabel[8] then plot.PlotTextCR(cfgsc.xshift+5,cfgsc.yshift+5,2,8,GetChartInfo(crlf),cfgsc.WhiteBg);
 result:=true;
