@@ -102,9 +102,8 @@ Tskychart = class (TComponent)
     function DrawLabels:boolean;
     procedure DrawFinderMark(ra,de :double; moving:boolean) ;
     procedure DrawCircle;
-//  compass rose
+    Procedure DrawCompass;
     procedure DrawCRose;
-//  end of compass rose
     function TelescopeMove(ra,dec:double):boolean;
     procedure GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
@@ -246,6 +245,7 @@ try
   end;
   // then the lines
   //writetrace('Draw lines');
+  DrawGrid;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawConstL;
     DrawConstB;
@@ -272,8 +272,10 @@ try
   //writetrace('Draw horizon');
   if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque then DrawHorizon;
 
-  //writetrace('Draw grid');
-  DrawGrid;
+  // the compass and scale
+  //writetrace('Draw compass');
+  DrawCompass;
+
   // the labels
   //writetrace('Draw label');
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
@@ -1726,7 +1728,7 @@ end;
 Procedure Tskychart.DrawGrid;
 begin
 if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
-    if Fcatalog.cfgshr.ShowCRose then DrawCRose;
+//    if Fcatalog.cfgshr.ShowCRose then DrawCRose;
     if cfgsc.ShowGrid then
        case cfgsc.ProjPole of
        Equat  :  DrawEqGrid;
@@ -1738,8 +1740,8 @@ if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then
       DrawEqGrid;
     end
 end else if cfgsc.ShowGrid then begin
-   if cfgsc.ShowEqGrid then DrawEqGrid;
-   DrawScale;
+    if cfgsc.ShowEqGrid then DrawEqGrid;
+//   DrawScale;
 end;
 end;
 
@@ -2903,6 +2905,15 @@ for i:=1 to cfgsc.NumCircle do DrawFinderMark(cfgsc.CircleLst[i,1],cfgsc.CircleL
 end;
 
 //  compass rose
+Procedure Tskychart.DrawCompass;
+begin
+  if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
+      if Fcatalog.cfgshr.ShowCRose then DrawCRose;
+  end else if cfgsc.ShowGrid then begin
+      DrawScale;
+  end;
+end;
+
 Procedure Tskychart.DrawCRose;
 var rosex,rosey,roserd: integer;
     ar,de,a,h,l,b,x1,y1,x2,y2,rot: double;
