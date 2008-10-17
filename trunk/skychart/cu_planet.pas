@@ -905,6 +905,7 @@ ok:=true;
 ar:=cfgsc.Planetlst[0,id,1];
 de:=cfgsc.Planetlst[0,id,2];
 // back to j2000
+if cfgsc.ApparentPos then mean_equatorial(ar,de,cfgsc);
 precession(cfgsc.JDchart,jd2000,ar,de);
 end;
 
