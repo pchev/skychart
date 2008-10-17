@@ -199,6 +199,11 @@ end;
 procedure Tskychart.SetLang;
 begin
 if f_addlabel<>nil then f_addlabel.SetLang;
+Fplot.editlabelmenu.Items[2].Caption := rsMoveLabel;
+Fplot.editlabelmenu.Items[3].Caption := rsEditLabel;
+Fplot.editlabelmenu.Items[4].Caption := rsDefaultLabel;
+Fplot.editlabelmenu.Items[5].Caption := rsHideLabel;
+Fplot.editlabelmenu.Items[6].Caption := rsResetAllLabe;
 end;
 
 procedure Tskychart.SetImage(value:TCanvas);
