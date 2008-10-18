@@ -38,7 +38,7 @@ uses
   radec, XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
-  pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LResources;
+  pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LResources, LCLProc;
   
 const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
 
@@ -49,6 +49,11 @@ var i : integer;
 
 begin
   {$I cdc.lrs}
+
+  {$ifdef trace_debug}
+  debugln('Read parameters');
+  {$endif}
+
   Params:=TStringList.Create;
   buf:='';
   for i:=1 to Paramcount do begin
@@ -63,10 +68,20 @@ begin
   if buf<>'' then Params.Add(buf);
 
   compile_time:=compile_t;
+  {$ifdef trace_debug}
+  debugln('Program version : '+cdcversion);
+  debugln('Program compiled: '+compile_time);
+  {$endif}
   Application.Title:='Cartes du Ciel';
+  {$ifdef trace_debug}
+  debugln('Initialize');
+  {$endif}
   Application.Initialize;
   try
   step:='Create main form';
+  {$ifdef trace_debug}
+  debugln(step);
+  {$endif}
   Application.CreateForm(Tf_main, f_main);
   step:='Create splash';
   {$ifdef trace_debug}
