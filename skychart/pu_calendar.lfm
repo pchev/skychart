@@ -13,7 +13,7 @@ object f_calendar: Tf_calendar
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object Panel1: TPanel
     Height = 70
     Width = 670
@@ -792,7 +792,6 @@ object f_calendar: Tf_calendar
           Height = 25
           Top = 9
           Width = 169
-          MaxLength = -1
           OnSelect = ComboBox1Change
           Style = csDropDownList
           TabOrder = 2
@@ -846,7 +845,6 @@ object f_calendar: Tf_calendar
           Height = 25
           Top = 13
           Width = 169
-          MaxLength = -1
           OnSelect = ComboBox2Change
           Style = csDropDownList
           TabOrder = 0
@@ -1019,7 +1017,6 @@ object f_calendar: Tf_calendar
           Width = 110
           Directory = '/home/pch'
           IntegralHeight = True
-          ItemHeight = 13
           Mask = '*.tle'
           MultiSelect = True
           TabOrder = 6

@@ -13,12 +13,12 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object Label1: TLabel
     Left = 12
-    Height = 12
+    Height = 15
     Top = 8
-    Width = 37
+    Width = 43
     Caption = 'Label1'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11
@@ -51,7 +51,6 @@ object f_getdss: Tf_getdss
     Font.Name = 'courier'
     Font.Pitch = fpFixed
     IntegralHeight = True
-    ItemHeight = 18
     ParentFont = False
     TabOrder = 0
     TopIndex = -1

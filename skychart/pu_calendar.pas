@@ -212,6 +212,9 @@ SetLang;
 config:=Tconf_skychart.Create;
 Fnightvision:=false;
 AzNorth:=true;
+{$ifdef trace_debug}
+WriteTrace('Create Tf_image');
+{$endif}
 ShowImage:=Tf_image.Create(self);
 decodedate(now,yy,mm,dd);
 date1.JD:=jdd(yy,mm,dd,0);

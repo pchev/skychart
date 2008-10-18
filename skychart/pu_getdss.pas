@@ -135,12 +135,18 @@ cfgdss:=Tconf_dss.Create;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
+  {$ifdef trace_debug}
+   WriteTrace('Loadlibrary '+dsslibname);
+  {$endif}
   dsslib := LoadLibrary(dsslibname);
   if dsslib<>0 then begin
     ImageExtract:= TImageExtract(GetProcAddress(dsslib, 'ImageExtract'));
     GetPlateList:= TGetPlateList(GetProcAddress(dsslib, 'GetPlateList'));
     ImageExtractFromPlate:= TImageExtractFromPlate(GetProcAddress(dsslib, 'ImageExtractFromPlate'));
     Fenabled:=true;
+    {$ifdef trace_debug}
+     WriteTrace('Library ok');
+    {$endif}
   end else begin
     Fenabled:=false;
     writetrace(Format(rsNotFound, [dsslibname]));
