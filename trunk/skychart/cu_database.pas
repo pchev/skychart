@@ -167,7 +167,9 @@ begin
 result:=false;
 if db.Active then begin
   // add isocode column to country table
-  if (cdcver<='3.0.1.6')and(not db.Query('select isocode from cdc_country where country="AF"')) then begin
+  if ((not db.Query('select isocode from cdc_country where country="AF"'))
+      or (db.RowCount<1) )
+   then begin
      {$ifdef trace_debug}
      WriteTrace('Upgrade DB to 3.0.1.6 ');
      {$endif}
@@ -1228,6 +1230,7 @@ begin
 Memo.clear;
 if not fileexists(locfile) then begin
   Memo.lines.add(rsFileNotFound);
+  ShowMessage(rsFileNotFound+crlf+locfile);
   exit;
 end;
 try
