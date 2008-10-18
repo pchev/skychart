@@ -958,6 +958,9 @@ procedure Tf_main.FormShow(Sender: TObject);
 var i:integer;
 begin
 try
+{$ifdef trace_debug}
+ WriteTrace('Enter Tf_main.FormShow');
+{$endif}
  if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
  InitFonts;
  SetLpanel1('');
@@ -975,6 +978,9 @@ except
    MessageDlg('FormShow error: '+E.Message, mtError, [mbClose], 0);
   end;
 end;
+{$ifdef trace_debug}
+ WriteTrace('Exit Tf_main.FormShow');
+{$endif}
 end;
 
 procedure Tf_main.Init;
@@ -983,6 +989,9 @@ var i: integer;
 begin
 firstuse:=false;
 try
+{$ifdef trace_debug}
+ WriteTrace('Enter Tf_main.Init');
+{$endif}
  // some initialisation that need to be done after all the forms are created.
  f_info.onGetTCPinfo:=GetTCPInfo;
  f_info.onKillTCP:=KillTCPClient;
@@ -990,21 +999,39 @@ try
  f_info.OnShowDetail:=showdetailinfo;
  f_detail.OnCenterObj:=CenterFindObj;
  f_detail.OnNeighborObj:=NeighborObj;
+{$ifdef trace_debug}
+ WriteTrace('SetDefault');
+{$endif}
  SetDefault;
+{$ifdef trace_debug}
+ WriteTrace('ReadDefault');
+{$endif}
  ReadDefault;
  // must read db configuration before to create this one!
+{$ifdef trace_debug}
+ WriteTrace('Create DB');
+{$endif}
  cdcdb:=TCDCdb.Create(self);
  planet:=Tplanet.Create(self);
  Fits:=TFits.Create(self);
  cdcdb.onInitializeDB:=InitializeDB;
  planet.cdb:=cdcdb;
  f_search.cdb:=cdcdb;
+{$ifdef trace_debug}
+ WriteTrace('Telescope plugin');
+{$endif}
  telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
  telescope.plugin:=def_cfgsc.ScopePlugin;
+{$ifdef trace_debug}
+ WriteTrace('Background Image');
+{$endif}
  if def_cfgsc.BackgroundImage='' then begin
    def_cfgsc.BackgroundImage:=slash(privatedir)+slash('pictures');
    if not DirectoryExists(def_cfgsc.BackgroundImage) then forcedirectories(def_cfgsc.BackgroundImage);
  end;
+{$ifdef trace_debug}
+ WriteTrace('Constellation');
+{$endif}
  if def_cfgsc.ConstLatinLabel then
     catalog.LoadConstellation(cfgm.Constellationpath,'Latin')
   else
@@ -1016,36 +1043,66 @@ try
  f_search.cfgshr:=catalog.cfgshr;
  f_search.cfgsc:=def_cfgsc;
  f_search.Init;
+{$ifdef trace_debug}
+ WriteTrace('Connect DB');
+{$endif}
  ConnectDB;
+{$ifdef trace_debug}
+ WriteTrace('FITS');
+{$endif}
  Fits.min_sigma:=cfgm.ImageLuminosity;
  Fits.max_sigma:=cfgm.ImageContrast;
+{$ifdef trace_debug}
+ WriteTrace('Cursor');
+{$endif}
  if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
     CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur');
     Screen.Cursors[crRetic]:=CursorImage1.Handle;
  end
  else crRetic:=crCross;
+{$ifdef trace_debug}
+ WriteTrace('Compass');
+{$endif}
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp') then
     compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp');
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp') then
     arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp');
+{$ifdef trace_debug}
+ WriteTrace('Timezone');
+{$endif}
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  if def_cfgsc.tz.TimeZoneFile='' then firstuse:=true;
- if firstuse then
+ if firstuse then begin
+{$ifdef trace_debug}
+ WriteTrace('First setup');
+{$endif}
     FirstSetup
- else
+ end else
     if config_version<cdcver then ShowReleaseNotes(false);
  application.ProcessMessages; // apply any resizing
+{$ifdef trace_debug}
+ WriteTrace('Create default chart');
+{$endif}
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
  AutoRefreshLock:=false;
  Autorefresh.enabled:=true;
+{$ifdef trace_debug}
+ WriteTrace('Start server');
+{$endif}
  if cfgm.AutostartServer then StartServer;
+{$ifdef trace_debug}
+ WriteTrace('Init calendar');
+{$endif}
  f_calendar.planet:=planet;
  f_calendar.cdb:=cdcdb;
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
  if InitialChartNum>1 then
+{$ifdef trace_debug}
+ WriteTrace('Load supplementary charts');
+{$endif}
     for i:=1 to InitialChartNum-1 do begin
       cfgp.Assign(def_cfgplot);
       cfgs.Assign(def_cfgsc);
@@ -1053,9 +1110,15 @@ try
       CreateChild(GetUniqueName(rsChart_, true) , false, cfgs, cfgp);
     end;
  if nightvision then begin
+{$ifdef trace_debug}
+ WriteTrace('Night vision');
+{$endif}
     nightvision:=false;
     ToolButtonNightVisionClick(self);
  end;
+{$ifdef trace_debug}
+ WriteTrace('Read params');
+{$endif}
  ProcessParams2;
 except
   on E: Exception do begin
@@ -1063,6 +1126,9 @@ except
    MessageDlg('Initialization error: '+E.Message, mtError, [mbClose], 0);
   end;
 end;
+{$ifdef trace_debug}
+ WriteTrace('Exit Tf_main.Init');
+{$endif}
 end;
 
 procedure Tf_main.ShowReleaseNotes(shownext:boolean);
@@ -1347,14 +1413,23 @@ chdir(appdir);
 step:='Trace';
 InitTrace;
 step:='Language';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
 GetLanguage;
 lang:=u_translation.translate(cfgm.language);
 u_help.Translate(lang);
 catalog:=Tcatalog.Create(self);
 SetLang;
 step:='Telescope';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
 telescope:=Ttelescope.Create(self);
 step:='Multidoc';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
 basecaption:=caption;
 MultiDoc1.WindowList:=Window1;
 MultiDoc1.KeepLastChild:=true;
@@ -1362,11 +1437,17 @@ ChildControl.visible:=false;
 BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
 step:='Size control';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
 starshape.Picture.Bitmap.Transparent:=false;
 TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 quicksearch.Width:=round( 75 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 TimeU.Width:=round( 95 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 step:='Load zlib';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
 zlib:=LoadLibrary(libz);
 if zlib<>0 then begin
   gzopen:= Tgzopen(GetProcAddress(zlib,'gzopen'));
@@ -1376,6 +1457,9 @@ if zlib<>0 then begin
   zlibok:=true;
 end else zlibok:=false;
 step:='Load plan404';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
 Plan404:=nil;
 Plan404lib:=LoadLibrary(lib404);
 if Plan404lib<>0 then begin
@@ -1389,14 +1473,23 @@ if @Plan404=nil then begin
 end;
 {$ifdef unix}
    step:='Multidoc unix';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
    MultiDoc1.InactiveBorderColor:=$404040;
    MultiDoc1.TitleColor:=clWhite;
    MultiDoc1.BorderColor:=$808080;
 {$endif}
 step:='Bitmap';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
 compass:=TBitmap.create;
 arrow:=TBitmap.create;
 step:='Load timezone';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 except
   on E: Exception do begin
@@ -1407,6 +1500,9 @@ except
    Halt;
    end;
 end;
+{$ifdef trace_debug}
+ WriteTrace('Exit Tf_main.FormCreate');
+{$endif}
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
@@ -5421,12 +5517,18 @@ begin
 try
     NeedToInitializeDB:=false;
     if ((DBtype=sqlite) and not Fileexists(cfgm.db)) then begin
+        {$ifdef trace_debug}
+         WriteTrace('Create sqlite '+dbpath);
+        {$endif}
         dbpath:=extractfilepath(cfgm.db);
         if not directoryexists(dbpath) then CreateDir(dbpath);
         if not directoryexists(dbpath) then forcedirectories(dbpath);
     end;
     if (cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport)
        and cdcdb.CheckDB) then begin
+         {$ifdef trace_debug}
+          WriteTrace('DB connected');
+         {$endif}
           cdcdb.CheckForUpgrade(f_info.ProgressMemo);
           planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
@@ -5438,6 +5540,9 @@ try
           def_cfgsc.ShowImages:=false;
     end;
     if NeedToInitializeDB then begin
+       {$ifdef trace_debug}
+       WriteTrace('Initialize DB');
+       {$endif}
        f_info.setpage(2);
        f_info.show;
        f_info.ProgressMemo.lines.add(rsInitializeDa);

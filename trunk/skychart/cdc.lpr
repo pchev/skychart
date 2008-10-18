@@ -69,31 +69,70 @@ begin
   step:='Create main form';
   Application.CreateForm(Tf_main, f_main);
   step:='Create splash';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_splash, f_splash);
   step:='Show splash';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   f_splash.Show; f_splash.Invalidate;
   Application.ProcessMessages;
   step:='Create f_position';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_position, f_position);
   step:='Create f_search';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_search, f_search);
   step:='Create f_zoom';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_zoom, f_zoom);
   step:='Create f_getdss';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_getdss, f_getdss);
   step:='Create f_manualtelescope';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_manualtelescope, f_manualtelescope);
   step:='Create f_detail';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_detail, f_detail);
   step:='Create f_info';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_info, f_info);
   step:='Create f_calendar';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_calendar, f_calendar);
   step:='Create f_printsetup';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_printsetup, f_printsetup);
   step:='Create f_print';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   Application.CreateForm(Tf_print, f_print);
   step:='Main Init';
+  {$ifdef trace_debug}
+   WriteTrace(step);
+  {$endif}
   f_main.init;
   step:='';
   except
@@ -106,7 +145,9 @@ begin
    Halt;
    end;
   end;
-
+  {$ifdef trace_debug}
+   WriteTrace('Application Run');
+  {$endif}
   Application.Run;
 
   Params.Free;

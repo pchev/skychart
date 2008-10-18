@@ -168,6 +168,9 @@ result:=false;
 if db.Active then begin
   // add isocode column to country table
   if (cdcver<='3.0.1.6')and(not db.Query('select isocode from cdc_country where country="AF"')) then begin
+     {$ifdef trace_debug}
+     WriteTrace('Upgrade DB to 3.0.1.6 ');
+     {$endif}
      db.Query('drop table cdc_country');
      writetrace('Drop table cdc_country ... '+db.ErrorMessage);
      db.Commit;
