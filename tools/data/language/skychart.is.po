@@ -1203,6 +1203,10 @@ msgstr "Litur skjás"
 msgid "Display image of cataloged objects"
 msgstr "Sýna mynd af skráðum fyrirbærum"
 
+#: u_translation:rsdisplaylabel
+msgid "Display labels for all star catalog"
+msgstr ""
+
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Birta upplýsingar korts í valblaðsstiku"
@@ -4142,10 +4146,6 @@ msgstr "gráður"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "desc:"
-
-#: u_translation:rsdpifor8x11pa
-msgid "dpi for 8x11 paper"
-msgstr "uppl 8x11 blaðast."
 
 #: u_translation:rsdocumentatio
 msgid "en/documentation/start.html"

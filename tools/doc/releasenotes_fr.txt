@@ -1,5 +1,13 @@
 Version 3.0.1.5 SVN  Notes de la version
 
+Changement du 18 octobre:
+
+Pour réduire le chevauchement des labels provenant de différentes sources sont écrit a différentes position autour de l'objet.
+Il est maintenant possible d'activer les labels pour les étoiles, les variables et les doubles sans chevauchement.
+Pour les nébuleuses le label SAC est écrit à droite et le label des autres catalogue à gauche.
+Il y a une option dans Configuration/Affichage/Label pour afficher les labels de tous les catalogues d'étoiles.
++ correction de bug selon la roadmap: http://www.ap-i.net/mantis/roadmap_page.php
+
 Changement du 21 septembre:
 
 Ajout de l'aide contextuelle, appuyez sur F1.

@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-10-12 14:18+0200\n"
+"PO-Revision-Date: 2008-10-18 14:22+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -1203,6 +1203,10 @@ msgstr "Couleur d'affichage"
 #: u_translation:rsdisplayimage
 msgid "Display image of cataloged objects"
 msgstr "Afficher une image des objets du catalogue"
+
+#: u_translation:rsdisplaylabel
+msgid "Display labels for all star catalog"
+msgstr "Voir les labels de tout les catalogues d'étoiles"
 
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -4143,10 +4147,6 @@ msgstr "degrés"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "desc:"
-
-#: u_translation:rsdpifor8x11pa
-msgid "dpi for 8x11 paper"
-msgstr "dpi,  papier 8x11"
 
 #: u_translation:rsdocumentatio
 msgid "en/documentation/start.html"

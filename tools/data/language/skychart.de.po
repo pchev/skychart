@@ -1203,6 +1203,10 @@ msgstr "Farbe anzeigen"
 msgid "Display image of cataloged objects"
 msgstr "Bildanzeige katalogisierter Objekte"
 
+#: u_translation:rsdisplaylabel
+msgid "Display labels for all star catalog"
+msgstr ""
+
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Karteninformationen in der Menüleiste anzeigen."
@@ -4142,10 +4146,6 @@ msgstr "Grad"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr ""
-
-#: u_translation:rsdpifor8x11pa
-msgid "dpi for 8x11 paper"
-msgstr "DPI für 8x11 Papier"
 
 #: u_translation:rsdocumentatio
 msgid "en/documentation/start.html"
