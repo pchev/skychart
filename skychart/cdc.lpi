@@ -483,7 +483,8 @@
       <Verbosity>
         <ShowHints Value="False"/>
       </Verbosity>
-      <CustomOptions Value="-dtrace_debug"/>
+      <CustomOptions Value="-dtrace_debug
+"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>

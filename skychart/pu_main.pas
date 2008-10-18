@@ -1521,7 +1521,10 @@ def_cfgplot.Free;
 cfgp.Free;
 compass.free;
 arrow.free;
-if CursorImage1<>nil then CursorImage1.FreeImage;
+if CursorImage1<>nil then begin
+  CursorImage1.FreeImage;
+  CursorImage1.Free;
+end;
 except
 writetrace('error destroy '+name);
 end;
