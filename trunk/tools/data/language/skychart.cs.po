@@ -1204,6 +1204,10 @@ msgstr "Barvy"
 msgid "Display image of cataloged objects"
 msgstr "Zobrazit obrázky objektů z katalogu"
 
+#: u_translation:rsdisplaylabel
+msgid "Display labels for all star catalog"
+msgstr ""
+
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr "Zobrazit informace o mapě v menu"
@@ -4143,10 +4147,6 @@ msgstr "stupňů"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "popis:"
-
-#: u_translation:rsdpifor8x11pa
-msgid "dpi for 8x11 paper"
-msgstr "dpi, formát A4 (8\"x11\")"
 
 #: u_translation:rsdocumentatio
 msgid "en/documentation/start.html"

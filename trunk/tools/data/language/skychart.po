@@ -1454,10 +1454,6 @@ msgstr ""
 msgid "Command to use to process the file."
 msgstr ""
 
-#: u_translation:rsdpifor8x11pa
-msgid "dpi for 8x11 paper"
-msgstr ""
-
 #: u_translation:rspathtosaveth
 msgid "Path to save the file :"
 msgstr ""
@@ -4232,5 +4228,9 @@ msgstr ""
 
 #: u_translation:rsinformationd
 msgid "Information detail"
+msgstr ""
+
+#: u_translation:rsdisplaylabel
+msgid "Display labels for all star catalog"
 msgstr ""
 

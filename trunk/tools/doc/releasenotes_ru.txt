@@ -1,5 +1,13 @@
 Комментарии к версии 3.0.1.5 SVN
 
+October 18 changes:
+
+To reduce label overlap the label from diferent source are now draw at different position around an object. 
+It is now possible to activate the labels for stars, variables, and double without overlap.
+For the nebulae the SAC label is show on the right, label from other catalog is show on the left.
+There is a new option in Setup/Display/Labels to show the labels from all stars catalog.
++ bug correction as show in roadmap: http://www.ap-i.net/mantis/roadmap_page.php
+
 Septenber 21 changes:
 
 Add contextual help, press F1 key.

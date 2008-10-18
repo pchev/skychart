@@ -1203,6 +1203,10 @@ msgstr ""
 msgid "Display image of cataloged objects"
 msgstr ""
 
+#: u_translation:rsdisplaylabel
+msgid "Display labels for all star catalog"
+msgstr ""
+
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
 msgstr ""
@@ -4141,10 +4145,6 @@ msgstr ""
 
 #: u_translation:rsdesc
 msgid "desc:"
-msgstr ""
-
-#: u_translation:rsdpifor8x11pa
-msgid "dpi for 8x11 paper"
 msgstr ""
 
 #: u_translation:rsdocumentatio
