@@ -1159,7 +1159,8 @@ begin
     def_cfgsc.ObsTZ:='Etc/GMT';
     def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  end;
- SaveDefault;
+ SavePrivateConfig(configfile,true);
+ SaveChartConfig(configfile,nil);
 end;
 
 procedure Tf_main.SaveImageExecute(Sender: TObject);
@@ -5532,7 +5533,7 @@ try
          {$ifdef trace_debug}
           WriteTrace('DB connected');
          {$endif}
-          cdcdb.CheckForUpgrade(f_info.ProgressMemo);
+          if not NeedToInitializeDB then cdcdb.CheckForUpgrade(f_info.ProgressMemo);
           planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           SetLpanel1(Format(rsConnectedToS, [cfgm.db]));
@@ -5549,7 +5550,7 @@ try
        f_info.setpage(2);
        f_info.show;
        f_info.ProgressMemo.lines.add(rsInitializeDa);
-       cdcdb.LoadSampleData(f_info.ProgressMemo);
+       cdcdb.LoadSampleData(f_info.ProgressMemo,cfgm);
        Planet.PrepareAsteroid(DateTimetoJD(now), f_info.ProgressMemo.lines);
        def_cfgsc.ShowAsteroid:=true;
        f_info.hide;

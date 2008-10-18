@@ -47,9 +47,9 @@ type
      Function ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
      function CheckForUpgrade(memo:Tmemo):boolean;
      function CheckDB:boolean;
-     procedure LoadCountryList(locfile:string; memo:Tmemo);
-     procedure LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo);
-     procedure LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = '');
+     function LoadCountryList(locfile:string; memo:Tmemo):boolean;
+     function LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo):boolean;
+     function LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = ''):boolean;
      procedure GetCountryList(codelist,countrylist:Tstrings);
      procedure GetCountryISOCode(countrycode:string; var isocode: string);
      procedure GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
@@ -60,7 +60,7 @@ type
      function  DeleteCountry(country:string; deleteall: boolean):string;
      procedure GetCometFileList(cmain:Tconf_main; list:Tstrings);
      procedure GetAsteroidFileList(cmain:Tconf_main; list:Tstrings);
-     procedure LoadCometFile(comfile:string; memocom:Tmemo);
+     function LoadCometFile(comfile:string; memocom:Tmemo):boolean;
      procedure DelComet(comelemlist: string; memocom:Tmemo);
      procedure DelCometAll(memocom:Tmemo);
      function AddCom(comid,comt,comep,comq,comec,comperi,comnode,comi,comh,comg,comnam,comeq:string ):string;
@@ -79,7 +79,7 @@ type
      Function GetAstElemEpoch(id:string; jd:double; var epoch,h,g,ma,ap,an,ic,ec,sa,eq: double; var ref,nam,elem_id:string):boolean;
      Function GetComElem(id: string; epoch:double; var tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
      Function GetComElemEpoch(id:string; jd:double; var epoch,tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
-     procedure LoadSampleData(memo:Tmemo);
+     procedure LoadSampleData(memo:Tmemo; cmain: Tconf_main);
      function CountImages:integer;
      procedure ScanImagesDirectory(ImagePath:string; ProgressCat:Tlabel; ProgressBar:TProgressBar );
      property onInitializeDB: TNotifyEvent read FInitializeDB write FInitializeDB;
@@ -289,7 +289,7 @@ if DBtype=mysql then begin
 end
 else if DBtype=sqlite then begin
   // do not work
-  result:='';
+{  result:='';
   db.StartTransaction;
   for i:=0 to db.Tables.Count-1 do begin
     db.Query('DROP TABLE '+db.Tables[i]);
@@ -299,7 +299,9 @@ else if DBtype=sqlite then begin
   db.Commit;
   db.Vacuum;
   msg:=trim(db.ErrorMessage);
-  if msg<>'0' then result:=result+msg;
+  if msg<>'0' then result:=result+msg;}
+  db.Close;
+  DeleteFile(cmain.db);
 end;
 end;
 
@@ -337,7 +339,7 @@ except
 end;
 end;
 
-procedure TCDCdb.LoadCometFile(comfile:string; memocom:Tmemo);
+function TCDCdb.LoadCometFile(comfile:string; memocom:Tmemo):boolean;
 var
   buf,cmd,filedesc,filenum :string;
   t,ep,id,nam,ec,q,i,node,peri,eq,h,g  : string;
@@ -345,6 +347,7 @@ var
   hh:double;
   f : textfile;
 begin
+result:=false;
 if not fileexists(comfile) then begin
   MemoCom.lines.add(rsFileNotFound);
   exit;
@@ -414,7 +417,8 @@ if db.Active then begin
     if (not db.query(cmd))and(db.LastError<>19) then begin
        MemoCom.lines.add(Format(rsInsertFailed, [inttostr(nl), trim(
          db.ErrorMessage)]));
-    end;
+    end
+      else result:=true; // at least one insert
     cmd:='REPLACE INTO cdc_com_name (name, id) VALUES ('
         +'"'+nam+'"'
         +',"'+id+'"'+')';
@@ -886,16 +890,41 @@ finally
 end;
 end;
 
-procedure TCDCdb.LoadSampleData(memo:Tmemo);
+procedure TCDCdb.LoadSampleData(memo:Tmemo; cmain: Tconf_main);
 begin
+try
   // load sample asteroid data
-  LoadAsteroidFile(slash(sampledir)+'MPCsample.dat',true,false,false,1000,memo);
+  if not LoadAsteroidFile(slash(sampledir)+'MPCsample.dat',true,false,false,1000,memo) then begin
+     dropdb(cmain);
+     raise exception.create('Error loading '+slash(sampledir)+'MPCsample.dat');
+  end;
   // load sample comet data
-  LoadCometFile(slash(sampledir)+'Cometsample.dat',memo);
+  if not LoadCometFile(slash(sampledir)+'Cometsample.dat',memo) then begin
+     dropdb(cmain);
+     raise exception.create('Error loading '+slash(sampledir)+'Cometsample.dat');
+  end;
   // load location
-  LoadCountryList(slash(sampledir)+'country.dat',memo);
-  LoadWorldLocation(slash(sampledir)+'world.dat','',false,memo);
-  LoadUSLocation(slash(sampledir)+'us.dat',false,memo);
+  if not LoadCountryList(slash(sampledir)+'country.dat',memo) then begin
+     dropdb(cmain);
+     raise exception.create('Error loading '+slash(sampledir)+'country.dat');
+  end;
+  if not LoadWorldLocation(slash(sampledir)+'world.dat','',false,memo) then begin
+     dropdb(cmain);
+     raise exception.create('Error loading '+slash(sampledir)+'world.dat');
+  end;
+  if not LoadUSLocation(slash(sampledir)+'us.dat',false,memo) then begin
+     dropdb(cmain);
+     raise exception.create('Error loading '+slash(sampledir)+'us.dat');
+  end;
+except
+  on E: Exception do begin
+   WriteTrace('LoadSampleData: '+E.Message);
+   MessageDlg('LoadSampleData: '+E.Message+crlf+rsSomethingGoW+crlf
+             +rsPleaseTryToR,
+             mtError, [mbAbort], 0);
+   Halt;
+   end;
+end;
 end;
 
 procedure TCDCdb.GetCometList(filter:string; maxnumber:integer; list:TstringList; var cometid: array of string);
@@ -1222,11 +1251,12 @@ finally
 end;
 end;
 
-procedure TCDCdb.LoadCountryList(locfile:string; memo:Tmemo);
+function TCDCdb.LoadCountryList(locfile:string; memo:Tmemo):boolean;
 var f: textfile;
     buf,sql: string;
     rec: TStringList;
 begin
+result:=false;
 Memo.clear;
 if not fileexists(locfile) then begin
   Memo.lines.add(rsFileNotFound);
@@ -1248,7 +1278,8 @@ if db.Active then begin
        '"'+rec[0]+'",'+
        '"'+rec[1]+'",'+
        '"'+rec[2]+'")';
-    if not db.Query(sql) then Memo.lines.add(db.ErrorMessage);
+    if not db.Query(sql) then Memo.lines.add(db.ErrorMessage)
+       else result:=true;
   until(eof(f));
   db.Commit;
   db.flush('tables');
@@ -1260,13 +1291,14 @@ except
 end;
 end;
 
-procedure TCDCdb.LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo);
+function TCDCdb.LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo):boolean;
 var f: textfile;
     buf,sql,cc: string;
     rec: TStringList;
     nl: integer;
     force_country: boolean;
 begin
+result:=false;
 Memo.clear;
 if not fileexists(locfile) then begin
   Memo.lines.add(rsFileNotFound);
@@ -1319,18 +1351,20 @@ if db.Active then begin
   db.flush('tables');
   Memo.lines.add(Format(rsProcessingEn3, [inttostr(nl)]));
   application.ProcessMessages;
+  result:=(nl>0);
 end;
 except
 end;
 end;
 
-procedure TCDCdb.LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = '');
+function TCDCdb.LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = ''):boolean;
 var f: textfile;
     buf,sql: string;
     rec: TStringList;
     nl: integer;
     elev:double;
 begin
+result:=false;
 Memo.clear;
 if not fileexists(locfile) then begin
   Memo.lines.add(rsFileNotFound);
@@ -1382,6 +1416,7 @@ if db.Active then begin
   db.flush('tables');
   Memo.lines.add(Format(rsProcessingEn3, [inttostr(nl)]));
   Application.ProcessMessages;
+  result:=(nl>0);
 end;
 except
 end;
