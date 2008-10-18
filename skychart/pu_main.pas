@@ -726,7 +726,7 @@ uses
 {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
      gtkproc,
 {$endif}
-     pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
+     LCLProc,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_splash, pu_manualtelescope, pu_print;
 
@@ -1255,6 +1255,9 @@ if not DirectoryExists(slash(appdir)+slash('data')+slash('planet')) then begin
 end;
 {$else}
 appdir:=getcurrentdir;
+{$ifdef trace_debug}
+ debugln('appdir='+appdir);
+{$endif}
 {$endif}
 privatedir:=DefaultPrivateDir;
 {$ifdef unix}
@@ -1297,26 +1300,40 @@ if not directoryexists(slash(privatedir)+'pictures') then forcedirectories(slash
 Tempdir:=slash(privatedir)+DefaultTmpDir;
 if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
-
+{$ifdef trace_debug}
+ debugln('appdir='+appdir);
+{$endif}
 // Be sur the data directory exists
 if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
   // try under the current directory
   buf:=GetCurrentDir;
+  {$ifdef trace_debug}
+   debugln('Try '+buf);
+  {$endif}
   if (directoryexists(slash(buf)+slash('data')+'constellation')) then
      appdir:=buf
   else begin
      // try under the program directory
      buf:=ExtractFilePath(ParamStr(0));
+    {$ifdef trace_debug}
+     debugln('Try '+buf);
+    {$endif}
      if (directoryexists(slash(buf)+slash('data')+'constellation')) then
         appdir:=buf
      else begin
          // try share directory under current location
          buf:=ExpandFileName(slash(GetCurrentDir)+SharedDir);
+          {$ifdef trace_debug}
+           debugln('Try '+buf);
+          {$endif}
          if (directoryexists(slash(buf)+slash('data')+'constellation')) then
             appdir:=buf
          else begin
             // try share directory at the same location as the program
             buf:=ExpandFileName(slash(ExtractFilePath(ParamStr(0)))+SharedDir);
+            {$ifdef trace_debug}
+             debugln('Try '+buf);
+            {$endif}
             if (directoryexists(slash(buf)+slash('data')+'constellation')) then
                appdir:=buf
             else begin
@@ -1330,7 +1347,10 @@ if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
      end;
   end;
 end;
-
+{$ifdef trace_debug}
+ debugln('appdir='+appdir);
+ debugln('privatedir='+privatedir);
+{$endif}
 {$ifdef win32}
 tracefile:=slash(privatedir)+tracefile;
 {$endif}
@@ -1340,11 +1360,20 @@ helpdir:=slash(appdir)+slash('doc');
 SampleDir:=slash(appdir)+slash('data')+'sample';
 // Be sure zoneinfo exists in standard location or in skychart directory
 ZoneDir:=slash(appdir)+slash('data')+slash('zoneinfo');
+{$ifdef trace_debug}
+ debugln('ZoneDir='+ZoneDir);
+{$endif}
 buf:=slash('')+slash('usr')+slash('share')+slash('zoneinfo');
+{$ifdef trace_debug}
+ debugln('Try '+buf);
+{$endif}
 if (FileExists(slash(buf)+'zone.tab')) then
      ZoneDir:=slash(buf)
 else begin
   buf:=slash('')+slash('usr')+slash('lib')+slash('zoneinfo');
+  {$ifdef trace_debug}
+   debugln('Try '+buf);
+  {$endif}
   if (FileExists(slash(buf)+'zone.tab')) then
       ZoneDir:=slash(buf)
   else begin
@@ -1357,12 +1386,18 @@ else begin
      end;
   end;
 end;
+{$ifdef trace_debug}
+ debugln('ZoneDir='+ZoneDir);
+{$endif}
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 var step:string;
 begin
 try
+{$ifdef trace_debug}
+ debugln('Enter f_main.formcreate');
+{$endif}
 {$ifndef darwin}
 UniqueInstance1:=TCdCUniqueInstance.Create(self);
 UniqueInstance1.Identifier:='skychart';
@@ -1372,6 +1407,9 @@ UniqueInstance1.Enabled:=true;
 UniqueInstance1.Loaded;
 {$endif}
 step:='Init';
+{$ifdef trace_debug}
+ debugln(step);
+{$endif}
 SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
 DateSeparator:='/';
@@ -1398,6 +1436,9 @@ isWin98:=false;
   MenuItem6.Visible:=false;
 {$endif}
 step:='Create config';
+{$ifdef trace_debug}
+ debugln(step);
+{$endif}
 def_cfgsc:=Tconf_skychart.Create;
 cfgs:=Tconf_skychart.Create;
 cfgm:=Tconf_main.Create;
@@ -1405,13 +1446,25 @@ def_cfgplot:=Tconf_plot.Create;
 cfgp:=Tconf_plot.Create;
 ForceConfig:='';
 step:='Create cursor';
+{$ifdef trace_debug}
+ debugln(step);
+{$endif}
 CursorImage1:=TCursorImage.Create;
 step:='Read initial parameters';
+{$ifdef trace_debug}
+ debugln(step);
+{$endif}
 ProcessParams1;
 step:='Application directory';
+{$ifdef trace_debug}
+ debugln(step);
+{$endif}
 GetAppDir;
 chdir(appdir);
 step:='Trace';
+{$ifdef trace_debug}
+ debugln(step);
+{$endif}
 InitTrace;
 step:='Language';
 {$ifdef trace_debug}
