@@ -1,0 +1,167 @@
+object f_clock: Tf_clock
+  Left = 271
+  Height = 178
+  Top = 224
+  Width = 340
+  BorderIcons = []
+  BorderStyle = bsNone
+  Caption = 'Clock'
+  ClientHeight = 178
+  ClientWidth = 340
+  FormStyle = fsStayOnTop
+  OnCreate = FormCreate
+  OnHide = FormHide
+  OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.26'
+  object Panel1: TPanel
+    Height = 178
+    Width = 340
+    Align = alClient
+    ClientHeight = 178
+    ClientWidth = 340
+    Color = clBlack
+    ParentColor = False
+    TabOrder = 0
+    OnDblClick = Panel1DblClick
+    OnMouseDown = FormMouseDown
+    OnMouseMove = FormMouseMove
+    OnMouseUp = FormMouseUp
+    object Label1: TLabel
+      Left = 16
+      Height = 25
+      Top = 16
+      Width = 68
+      Caption = 'Legal :'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object Label2: TLabel
+      Left = 16
+      Height = 25
+      Top = 46
+      Width = 41
+      Caption = 'UT :'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object Label3: TLabel
+      Left = 16
+      Height = 25
+      Top = 76
+      Width = 121
+      Caption = 'Mean local :'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object Label4: TLabel
+      Left = 16
+      Height = 25
+      Top = 106
+      Width = 84
+      Caption = 'Sideral :'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object clock1: TLabel
+      Left = 144
+      Height = 25
+      Top = 16
+      Width = 93
+      Caption = '00:00:00'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object clock2: TLabel
+      Left = 144
+      Height = 25
+      Top = 46
+      Width = 93
+      Caption = '00:00:00'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object clock3: TLabel
+      Left = 144
+      Height = 25
+      Top = 76
+      Width = 93
+      Caption = '00:00:00'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object clock4: TLabel
+      Left = 144
+      Height = 25
+      Top = 106
+      Width = 93
+      Caption = '00:00:00'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object Label5: TLabel
+      Left = 16
+      Height = 25
+      Top = 136
+      Width = 29
+      Caption = 'JD:'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+    object clock5: TLabel
+      Left = 144
+      Height = 25
+      Top = 136
+      Width = 93
+      Caption = '00:00:00'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+      OnMouseDown = FormMouseDown
+      OnMouseUp = FormMouseUp
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    OnTimer = Timer1Timer
+    left = 280
+    top = 16
+  end
+end

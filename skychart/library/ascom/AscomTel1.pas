@@ -324,7 +324,11 @@ Procedure ScopeAlign(source : string; ra,dec : double); stdcall;
 begin
    if not ScopeConnected then exit;
    if T.CanSync then begin
-      try
+      try                 
+         if not T.tracking then begin
+            T.tracking:=true;
+            pop_scope.UpdTrackingButton;
+         end;
          T.SyncToCoordinates(Ra,Dec);
       except
          on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
@@ -417,6 +421,10 @@ Procedure ScopeGoto(ar,de : double; var ok : boolean); stdcall;
 begin
    if not ScopeConnected then exit;
    try
+      if not T.tracking then begin
+         T.tracking:=true;
+         pop_scope.UpdTrackingButton;
+      end;
       if T.CanSlewAsync then T.SlewToCoordinatesAsync(ar,de)
       else T.SlewToCoordinates(ar,de);
    except                                                                

@@ -938,9 +938,6 @@ try
  {$endif}
  cmd:=cmd+' --version';
 
- i:=exec(cmd);  // first test if the command run, otherwise this may crash the application
- if i=0 then begin
- 
  i:=execprocess(cmd,r);
  if (i=0)and(r.Count>0) then begin
    for j:=0 to r.Count-1 do begin
@@ -957,11 +954,8 @@ try
      buf:='';
      for j:=0 to r.Count-1 do  buf:=buf+r[j];
    end else buf:='';
-   XplanetMsg.Caption:=Format(rsXplanetRetur, [buf, inttostr(i)]);
+   XplanetMsg.Caption:=Format(rsXplanetIsPro+blank+rsXplanetRetur, [buf, inttostr(i)]);
  end;
- 
- end
- else XplanetMsg.Caption:=rsXplanetIsPro;
  
 finally
  chdir(appdir);

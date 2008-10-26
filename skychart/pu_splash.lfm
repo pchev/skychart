@@ -3,8 +3,6 @@ object f_splash: Tf_splash
   Height = 263
   Top = 156
   Width = 496
-  HorzScrollBar.Page = 495
-  VertScrollBar.Page = 262
   BorderStyle = bsNone
   Caption = 'f_splash'
   ClientHeight = 263
@@ -16,7 +14,9 @@ object f_splash: Tf_splash
   OnCreate = FormCreate
   OnMouseUp = FormMouseUp
   OnShow = FormShow
-  Position = poDesktopCenter
+  ParentFont = False
+  Position = poScreenCenter
+  LCLVersion = '0.9.26'
   object Panel1: TPanel
     Height = 263
     Width = 496
@@ -8414,6 +8414,7 @@ object f_splash: Tf_splash
       Font.Height = -26
       Font.Style = [fsBold]
       ParentColor = False
+      ParentFont = False
     end
     object Label2: TLabel
       Left = 16
@@ -8425,6 +8426,7 @@ object f_splash: Tf_splash
       Font.Height = -20
       Font.Style = [fsBold]
       ParentColor = False
+      ParentFont = False
     end
     object Label3: TLabel
       Left = 16
@@ -8436,6 +8438,7 @@ object f_splash: Tf_splash
       Caption = 'Copyright (C) '
       Font.Color = clWhite
       ParentColor = False
+      ParentFont = False
     end
     object Label4: TLabel
       Left = 16
@@ -8447,6 +8450,7 @@ object f_splash: Tf_splash
       Caption = 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License'
       Font.Color = clWhite
       ParentColor = False
+      ParentFont = False
       WordWrap = True
     end
     object LabelDate: TLabel
@@ -8458,6 +8462,7 @@ object f_splash: Tf_splash
       Font.Color = clWhite
       Font.Height = -15
       ParentColor = False
+      ParentFont = False
       Visible = False
     end
   end

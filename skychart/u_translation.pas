@@ -135,7 +135,7 @@ resourcestring
   rsLinesGrid = 'Lines / Grid';
   rsBelowTheHori = 'Below the horizon';
   rsTelescope = 'Telescope';
-  rsConnect = 'Connect';
+  //rsConnect = 'Connect';
   rsControlPanel = 'Control Panel';
   rsWindow = 'Window';
   rsTileHorizont = 'Tile Horizontally';
@@ -1108,6 +1108,13 @@ resourcestring
   rsNumberOfNebu = 'Number of nebulae';
   rsInformationD = 'Information detail';
   rsDisplayLabel = 'Display labels for all star catalog';
+  rsUsingExistin = 'Using existing file %s';
+  rsSideral = 'Sideral';
+  rsBrightStarsS = 'Bright Stars Size';
+  rsLegal = 'Legal';
+  rsMeanLocal = 'Mean local';
+  rsJD2 = 'JD';
+  rsClock = 'Clock';
 
 implementation
 

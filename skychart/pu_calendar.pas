@@ -899,6 +899,7 @@ with TwilightGrid do begin
   RowCount:=i+1;
   cells[0,i]:=isodate(a,m,d);
   Fplanet.Sun(jd0+0.5,ars,des,dist,diam);
+  precession(jd2000,config.JDChart,ars,des);
   if (ars<0) then ars:=ars+pi2;
   objects[0,i]:=SetObjCoord(jda,-999,-999);
   // crepuscule nautique

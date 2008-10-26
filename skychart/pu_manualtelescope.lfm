@@ -3,21 +3,22 @@ object f_manualtelescope: Tf_manualtelescope
   Height = 107
   Top = 198
   Width = 390
-  HorzScrollBar.Page = 389
-  VertScrollBar.Page = 106
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Manual Telescope'
+  ClientHeight = 107
+  ClientWidth = 390
   Color = clBlack
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
-  OnMouseDown = FormMouseDown
-  OnMouseMove = FormMouseMove
-  OnMouseUp = FormMouseUp
+  ParentFont = False
+  LCLVersion = '0.9.26'
   object Panel1: TPanel
     Height = 107
     Width = 390
     Align = alClient
+    ClientHeight = 107
+    ClientWidth = 390
     Color = clBlack
     ParentColor = False
     TabOrder = 0
@@ -31,13 +32,12 @@ object f_manualtelescope: Tf_manualtelescope
       Top = 8
       Width = 98
       Caption = 'Manual Telescope'
-      Color = clNone
       Font.Color = clRed
       Font.Height = -12
       ParentColor = False
+      ParentFont = False
       OnDblClick = Panel1DblClick
       OnMouseDown = FormMouseDown
-      OnMouseMove = FormMouseMove
       OnMouseUp = FormMouseUp
     end
     object Label2: TLabel
@@ -46,13 +46,12 @@ object f_manualtelescope: Tf_manualtelescope
       Top = 24
       Width = 76
       Caption = 'sep                   '
-      Color = clNone
       Font.Color = clRed
       Font.Height = -12
       ParentColor = False
+      ParentFont = False
       OnDblClick = Panel1DblClick
       OnMouseDown = FormMouseDown
-      OnMouseMove = FormMouseMove
       OnMouseUp = FormMouseUp
     end
     object Label4: TLabel
@@ -61,13 +60,12 @@ object f_manualtelescope: Tf_manualtelescope
       Top = 44
       Width = 86
       Caption = 'RA turns: '
-      Color = clNone
       Font.Color = clRed
       Font.Height = -20
       ParentColor = False
+      ParentFont = False
       OnDblClick = Panel1DblClick
       OnMouseDown = FormMouseDown
-      OnMouseMove = FormMouseMove
       OnMouseUp = FormMouseUp
     end
     object Label5: TLabel
@@ -76,13 +74,12 @@ object f_manualtelescope: Tf_manualtelescope
       Top = 72
       Width = 96
       Caption = 'DEC turns: '
-      Color = clNone
       Font.Color = clRed
       Font.Height = -20
       ParentColor = False
+      ParentFont = False
       OnDblClick = Panel1DblClick
       OnMouseDown = FormMouseDown
-      OnMouseMove = FormMouseMove
       OnMouseUp = FormMouseUp
     end
   end

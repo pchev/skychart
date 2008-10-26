@@ -171,7 +171,7 @@ end;
 end;
 
 Function Tcatalog.OpenCat(c: Tconf_skychart):boolean;
-var ac,dc: double;
+var ac,dc,rac,ddc: double;
 begin
 // get a lock before to do anything, libcatalog is NOT thread safe.
   while lockcat do application.ProcessMessages;
@@ -190,7 +190,9 @@ begin
           dc:=rad2deg*c.hcentre;
           end;
   end;
-  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*c.racentre/15,rad2deg*c.decentre,ac,dc,c.CurJD,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
+  rac:=c.racentre; ddc:=c.decentre;
+  if c.ApparentPos then mean_equatorial(rac,ddc,c);
+  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*rac/15,rad2deg*ddc,ac,dc,c.CurJD,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
   result:=true;
 end;
 
@@ -2247,10 +2249,13 @@ var
 begin
 xxc:=(x1+x2)/2;
 yyc:=(y1+y2)/2;
-xx1:=rad2deg*x1/15;
-xx2:=rad2deg*x2/15;
-yy1:=rad2deg*y1;
-yy2:=rad2deg*y2;
+xx1:=x1; xx2:=x2; yy1:=y1; yy2:=y2;
+if cfgsc.ApparentPos then mean_equatorial(xx1,yy1,cfgsc);
+if cfgsc.ApparentPos then mean_equatorial(xx2,yy2,cfgsc);
+xx1:=rad2deg*xx1/15;
+xx2:=rad2deg*xx2/15;
+yy1:=rad2deg*yy1;
+yy2:=rad2deg*yy2;
 if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
                  else cyear:=cfgsc.YPmon;
 if not nextobj then begin

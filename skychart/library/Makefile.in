@@ -16,10 +16,15 @@ dirs= catalog \
 .PHONY: all
 
 all: catalog_all elp82_all satxy_all series96_all
+ifeq ($(OS_TARGET),win32)
+else
 	$(MAKE) -C getdss all
 	$(MAKE) -C plan404 all
+endif
 
 clean: catalog_clean elp82_clean satxy_clean series96_clean
+ifeq ($(OS_TARGET),win32)
+else
 	$(MAKE) -C getdss clean
 	$(MAKE) -C plan404 clean
-
+endif
