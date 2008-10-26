@@ -548,7 +548,11 @@ if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
        DownloadDialog1.URL:=baseurl_us+fnzip;
        fnzip:=slash(TempDir)+fnzip;
        DownloadDialog1.SaveToFile:=fnzip;
-       if DownloadDialog1.Execute then begin
+       if not FileExists(fnzip) then begin
+          if not DownloadDialog1.Execute then Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+       end else
+          ShowMessage(Format(rsUsingExistin, [fnzip]));
+       if FileExists(fnzip) then begin
           if 1=FileUnzipEx(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
             memo1.Visible:=true;
             memo1.BringToFront;
@@ -564,14 +568,18 @@ if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
           end
           else Showmessage(Format(rsCancelWrongZ, [fnzip]));
        end else
-          Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+         ShowMessage(Format(rsNotFound, [fnzip]));
     end else begin  // World
        fnzip:=lowercase(country)+'.zip';
        fn:=ChangeFileExt(fnzip,'.txt');
        DownloadDialog1.URL:=baseurl_world+fnzip;
        fnzip:=slash(TempDir)+fnzip;
        DownloadDialog1.SaveToFile:=fnzip;
-       if DownloadDialog1.Execute then begin
+       if not FileExists(fnzip) then begin
+          if not DownloadDialog1.Execute then Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+       end else
+          ShowMessage(Format(rsUsingExistin, [fnzip]));
+       if FileExists(fnzip) then begin
           if 1=FileUnzipEx(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
              memo1.Visible:=true;
              memo1.BringToFront;
@@ -587,7 +595,7 @@ if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
           end
           else Showmessage(Format(rsCancelWrongZ, [fnzip]));
        end else
-          Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+         ShowMessage(Format(rsNotFound, [fnzip]));
     end;
 end;
 end;

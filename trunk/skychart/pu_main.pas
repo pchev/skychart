@@ -87,6 +87,8 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuItem27: TMenuItem;
+    ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     MenuItem24: TMenuItem;
@@ -496,6 +498,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure VariableStar1Click(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
+    procedure ViewClockExecute(Sender: TObject);
     procedure ViewScrollBar1Click(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
@@ -728,7 +731,7 @@ uses
 {$endif}
      LCLProc,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
-     pu_splash, pu_manualtelescope, pu_print;
+     pu_splash, pu_manualtelescope, pu_print, pu_clock;
 
 {$ifdef win32}
 const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
@@ -2941,6 +2944,23 @@ if PanelBottom.visible then InitFonts;
 FormResize(sender);
 end;
 
+procedure Tf_main.ViewClockExecute(Sender: TObject);
+var P : Tpoint;
+begin
+P:=point(0,110);
+  if f_clock=nil then begin
+     f_clock:=Tf_clock.Create(application);
+     f_clock.cfgsc:=def_cfgsc;
+  end;
+  if f_clock.visible then
+     f_clock.hide
+  else begin
+     formpos(f_clock,P.x,P.y);
+     f_clock.Show;
+     f_main.Setfocus;
+  end;
+end;
+
 procedure Tf_main.ViewScrollBar1Click(Sender: TObject);
 var i: Integer;
 begin
@@ -3660,6 +3680,8 @@ cplot.TransparentPlanet:=ReadBool(section,'TransparentPlanet',cplot.TransparentP
 cplot.plaplot:=ReadInteger(section,'plaplot',cplot.plaplot);
 cplot.Nebgray:=ReadInteger(section,'Nebgray',cplot.Nebgray);
 cplot.NebBright:=ReadInteger(section,'NebBright',cplot.NebBright);
+cplot.stardyn:=ReadInteger(section,'StarDyn',cplot.stardyn);
+cplot.starsize:=ReadInteger(section,'StarSize',cplot.starsize);
 cplot.contrast:=ReadInteger(section,'contrast',cplot.contrast);
 cplot.saturation:=ReadInteger(section,'saturation',cplot.saturation);
 cplot.red_move:=ReadBool(section,'redmove',cplot.red_move);
@@ -4237,6 +4259,8 @@ WriteInteger(section,'plaplot',cplot.plaplot);
 WriteBool(section,'TransparentPlanet',cplot.TransparentPlanet);
 WriteInteger(section,'Nebgray',cplot.Nebgray);
 WriteInteger(section,'NebBright',cplot.NebBright);
+WriteInteger(section,'StarDyn',cplot.stardyn);
+WriteInteger(section,'StarSize',cplot.starsize);
 WriteInteger(section,'contrast',cplot.contrast);
 WriteInteger(section,'saturation',cplot.saturation);
 WriteBool(section,'redmove',cplot.red_move);
@@ -4720,7 +4744,12 @@ ToolButtonCal.hint:=rsEphemerisCal;
 ToolButtonTdec.hint:=rsDecrementTim;
 ToolButtonTnow.hint:=rsNow;
 ToolButtonTinc.hint:=rsIncrementTim;
-TConnect.hint:=rsConnectTeles;
+if def_cfgsc.PluginTelescope then begin
+   TConnect.hint:=rsControlPanel;
+end else begin
+   TConnect.hint:=rsConnectTeles
+end;
+telescopeConnect1.caption:=TConnect.hint;
 TSlew.hint:=rsSlew;
 TSync.hint:=rsSync;
 ToolButtonShowStars.hint:=rsShowStars;
@@ -4795,6 +4824,7 @@ RightBar1.caption:=rsRightBar;
 ViewStatusBar1.caption:=rsStatusBar;
 ViewScrollBar1.caption:=rsScrollBar;
 ViewInformation1.caption:=rsServerInform;
+ViewClock.Caption:=rsClock;
 zoomplus1.caption:=rsZoomIn;
 zoomminus1.caption:=rsZoomOut;
 zoommenu.Caption:=rsSetFOV;
@@ -4836,7 +4866,6 @@ ShowMark1.caption:=rsShowMark;
 ShowLabels1.caption:=rsShowLabels;
 ShowObjectbelowthehorizon1.caption:=rsBelowTheHori;
 telescope1.caption:=rsTelescope;
-telescopeConnect1.caption:=rsConnect;
 ControlPanel1.caption:=rsControlPanel;
 telescopeSlew1.caption:=rsSlew;
 telescopeSync1.caption:=rsSync;
@@ -4996,17 +5025,27 @@ end;
 
 procedure Tf_main.UpdateBtn(fx,fy:integer;tc:boolean;sender:TObject);
 begin
-if MultiDoc1.ActiveObject=sender then begin
+if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
   if fx>0 then begin FlipButtonX.ImageIndex:=15 ; Flipx1.checked:=false; end
           else begin FlipButtonX.ImageIndex:=16 ; Flipx1.checked:=true;  end;
   if fy>0 then begin FlipButtonY.ImageIndex:=17 ; Flipy1.checked:=false; end
           else begin FlipButtonY.ImageIndex:=18 ; Flipy1.checked:=true; end;
   if tc   then begin
                TConnect.ImageIndex:=49;
-               TelescopeConnect.Hint:=rsDisconnectTe;
+               if Tf_chart(sender).sc.cfgsc.PluginTelescope then
+                  TConnect.Hint:=rsControlPanel
+               else
+                  TConnect.Hint:=rsDisconnectTe;
+               telescopeConnect1.caption:=TConnect.hint;
+               Tf_chart(sender).Connect1.caption :=TConnect.hint;
           end else begin
                TConnect.ImageIndex:=48;
-               TelescopeConnect.Hint:=rsConnectTeles;
+               if Tf_chart(sender).sc.cfgsc.PluginTelescope then
+                  TConnect.Hint:=rsControlPanel
+               else
+                  TConnect.Hint:=rsConnectTeles;
+               telescopeConnect1.caption:=TConnect.hint;
+               Tf_chart(sender).Connect1.caption :=TConnect.hint;
           end;
   with MultiDoc1.ActiveObject as Tf_chart do begin
     toolbuttonshowStars.down:=sc.cfgsc.showstars;
@@ -5754,6 +5793,7 @@ begin
 
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur') then begin
    CursorImage1.FreeImage;
+   CursorImage1.Free;
    CursorImage1:=TCursorImage.Create;
    CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur');
    inc(crRetic);
@@ -5778,7 +5818,7 @@ begin
 end;
 
 procedure Tf_main.SetButtonImage(button: Integer);
-var btn : TBitmap;
+var btn : TPortableNetworkGraphic; //TBitmap;
     col: Tcolor;
     iconpath: String;
 procedure SetButtonImage1(imagelist:Timagelist);
@@ -5787,8 +5827,10 @@ begin
    imagelist.Clear;
      for i:=0 to ImageListCount-1 do begin
        try
-         btn:=TBitmap.Create;
-         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.bmp');
+         btn:=TPortableNetworkGraphic.Create;
+         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
+//         btn.Transparent:=true;
+//         btn.TransparentColor:=clBlack;
          imagelist.Add(btn,nil);
          btn.Free;
        except
@@ -5799,9 +5841,11 @@ begin
    Toolbar2.Images:=imagelist;
    Toolbar3.Images:=imagelist;
    Toolbar4.Images:=imagelist;
-   BtnCloseChild.Glyph.LoadFromFile(iconpath+'b1.bmp');
-   BtnRestoreChild.Glyph.LoadFromFile(iconpath+'b2.bmp');
-   btn:=TBitmap.Create;
+   btn:=TPortableNetworkGraphic.Create;
+   btn.LoadFromFile(iconpath+'b1.png');
+   BtnCloseChild.Glyph.Assign(btn);
+   btn.LoadFromFile(iconpath+'b2.png');
+   BtnRestoreChild.Glyph.Assign(btn);
    btn.canvas.pen.color:=clBlack;
    btn.canvas.brush.color:=clBlack;
    btn.canvas.brush.style:=bsSolid;

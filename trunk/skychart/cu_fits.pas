@@ -767,8 +767,7 @@ if Fheader.naxis1>0 then begin
   GetIntfImg(IntfImg);
   IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
   imabmp.freeimage;
-  imabmp.Handle:=ImgHandle;
-  //imabmp.MaskHandle:=ImgMaskHandle;
+  imabmp.SetHandles(ImgHandle,ImgMaskHandle);
   IntfImg.Free;
 end;
 end;

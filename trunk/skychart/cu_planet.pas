@@ -163,7 +163,7 @@ var  v1,v2: double6;
      tjd,t : double;
      i,ierr : integer;
      p :TPlanetData;
-     lt,bt,rt,dt,lp,bp,rp,l,b,x,y,z,ce,se,lsol,pha : double;
+     lt,bt,rt,dt,lp,bp,rp,l,b,x,y,z,ce,se,lsol,pha,qr : double;
 begin
 if (ipla<1) or (ipla=3) or (ipla>9) then exit;
 if highprec and (t0>series96t1) and (t0<series96t2) then begin   // use SERIES96
@@ -185,7 +185,8 @@ if highprec and (t0>series96t1) and (t0<series96t2) then begin   // use SERIES96
          end;
          alpha:=arctan2(w[2],w[1]);
          if (alpha<0) then alpha:=alpha+2*pi;
-         delta:=arctan(w[3]/sqrt(w[1]*w[1]+w[2]*w[2]));
+         qr:=sqrt(w[1]*w[1]+w[2]*w[2]);
+         if qr<>0 then delta:=arctan(w[3]/qr);
 end else begin               // use Plan404
      // Earth position
      p.ipla:=3;
@@ -214,7 +215,8 @@ end else begin               // use Plan404
      z:=rp*sin(bp) - rt*sin(bt);
      // J2000 geocentric coordinates
      l:=arctan2(y,x);
-     b:=arctan(z/sqrt(x*x+y*y));
+     qr:=sqrt(x*x+y*y);
+     if qr<>0 then b:=arctan(z/qr);
      ce:=cos(degtorad(eps2000));
      se:=sin(degtorad(eps2000));
      alpha:=arctan2(sin(l)*ce-tan(b)*se , cos(l) );
@@ -224,7 +226,8 @@ end;
   illuminated fraction
   correct the phase sign with the difference of longitude with the sun.
 }
-     phase:=(dp*dp+distance*distance-dt*dt)/(2*dp*distance); //=cos(phase)
+     qr:=(2*dp*distance);
+     if qr<>0 then phase:=(dp*dp+distance*distance-dt*dt)/qr; //=cos(phase)
      illum:=(1+phase)/2;
      phase:=radtodeg(arccos(phase));
      lsol:=rmod(pi4+pi+lt,pi2); // be sure to obtain a positive value
@@ -234,7 +237,7 @@ end;
 {
   apparent diameter
 }
-         diameter:=2*s0[ipla]/distance;
+         if distance<>0 then diameter:=2*s0[ipla]/distance;
 {
   magnitude
 }
@@ -298,14 +301,15 @@ end;
 end;
 
 Procedure TPlanet.Sun(t0 : double; var alpha,delta,dist,diam : double; highprec:boolean=true);
-var x,y,z : double;
+var x,y,z,qr : double;
 begin
   SunRect(t0,false,x,y,z,highprec);
   dist:=sqrt(x*x+y*y+z*z);
   alpha:=arctan2(y,x);
   if (alpha<0) then alpha:=alpha+pi2;
-  delta:=arctan(z/sqrt(x*x+y*y));
-  diam:=2*959.63/dist;
+  qr:=sqrt(x*x+y*y);
+  if qr<>0 then delta:=arctan(z/qr);
+  if dist<>0 then diam:=2*959.63/dist;
 end;
 
 Procedure TPlanet.SunEcl(t0 : double ; var l,b : double);

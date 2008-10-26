@@ -1141,7 +1141,7 @@ var
 begin
 M := TMemoryStream.Create;
 P := TProcess.Create(nil);
-result:=999;
+result:=1;
 try
   BytesRead := 0;
   P.CommandLine := cmd;

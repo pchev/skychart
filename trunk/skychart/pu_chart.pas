@@ -301,7 +301,11 @@ RemoveAllLabel1.caption:=rsRemoveAllLab;
 elescope1.caption:=rsTelescope;
 Slew1.caption:=rsSlew;
 Sync1.caption:=rsSync;
-Connect1.caption:=rsConnect;
+if (sc<>nil)and sc.cfgsc.PluginTelescope then begin
+   Connect1.caption:=rsConnectTeles
+end else begin
+   Connect1.caption:=rsControlPanel;
+end;
 AbortSlew1.caption:=rsAbortSlew;
 TrackOff1.caption:=rsUnlockChart;
 if sc<>nil then sc.SetLang;
@@ -360,8 +364,13 @@ begin
  Image1.Cursor := ChartCursor;
  lock_refresh:=false;
  MovingCircle:=false;
+{$ifdef lclgtk2}  // clic on bar or arrow not working
+ HorScrollBar.onChange:=HorScrollBarChange;
+ VertScrollBar.onChange:=VertScrollBarChange;
+{$else}
  HorScrollBar.onScroll:=HorScrollBarScroll;
  VertScrollBar.onScroll:=VertScrollBarScroll;
+{$endif}
  VertScrollBar.Max:=90*3600;   // arcsecond position precision
  VertScrollBar.Min:=-90*3600;
  VertScrollBar.SmallChange:=3600;
@@ -1365,7 +1374,8 @@ begin
           end;
    Equat: begin
           ra:=rmod(ra+pi2,pi2);
-          txt:=rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
+          txt:=rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec)+crlf
+               +rsAz+':'+deptostr(rad2deg*a)+blank+deptostr(rad2deg*h);
           end;
    Gal:   begin
           l:=rmod(l+pi2,pi2);
@@ -2982,8 +2992,8 @@ end else begin
    if Ftelescope.scopelibok then begin
      Ftelescope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      Ftelescope.ScopeShow;
-     ok:=Ftelescope.ScopeConnect;
-     Connect1.Checked:=ok;
+//     ok:=Ftelescope.ScopeConnect;
+//     Connect1.Checked:=ok;
      TelescopeTimer.Enabled:=ok;
      sc.cfgsc.TrackOn:=true;
    end;

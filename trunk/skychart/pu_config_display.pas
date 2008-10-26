@@ -57,16 +57,25 @@ type
     GroupBox6: TGroupBox;
     GroupBox7: TGroupBox;
     GroupBox8: TGroupBox;
+    GroupBox9: TGroupBox;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
+    Label258: TLabel;
+    Label259: TLabel;
     Label5: TLabel;
     Label68: TLabel;
     Label8: TLabel;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    Panel4: TPanel;
     red_moveBox: TCheckBox;
     Shape8: TShape;
+    StarButton5: TButton;
+    StarButton6: TButton;
+    StarButton7: TButton;
+    StarDynBar1: TTrackBar;
+    StarSizeBar1: TTrackBar;
     ThemeList: TComboBox;
     MainPanel: TPanel;
     Page1: TPage;
@@ -332,6 +341,11 @@ type
     procedure FormShow(Sender: TObject);
     procedure GalEqStyleChange(Sender: TObject);
     procedure GridStyleChange(Sender: TObject);
+    procedure StarButton5Click(Sender: TObject);
+    procedure StarButton6Click(Sender: TObject);
+    procedure StarButton7Click(Sender: TObject);
+    procedure StarDynBar1Change(Sender: TObject);
+    procedure StarSizeBar1Change(Sender: TObject);
     procedure StyleDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure NightButtonClick(Sender: TObject);
@@ -460,6 +474,7 @@ nebuladisplay.caption:=rsNebulaDispla;
 nebuladisplay.Items[0]:=rsLineMode;
 nebuladisplay.Items[1]:=rsGraphic;
 starvisual.caption:=rsStarDisplayP;
+groupbox9.Caption:=rsStarDisplayP;
 Label256.caption:=rsFaintStarsSi;
 Label262.caption:=rsContrast;
 Label263.caption:=rsColorSaturat;
@@ -468,6 +483,10 @@ StarButton1.caption:=rsDefault;
 StarButton2.caption:=rsNakedEye;
 StarButton3.caption:=rsHighColor;
 StarButton4.caption:=rsBlackWhite;
+groupbox9.Caption:=rsStarDisplayP;
+Label258.caption:=rsBrightStarsS;
+Label259.caption:=rsContrast;
+
 Page2.caption:=rsColor;
 Label189.caption:=rsStarColourBV;
 Label193.caption:=rsCoordGrid;
@@ -693,6 +712,30 @@ begin
 csc.StyleGrid:=TPenStyle(GridStyle.itemindex);
 end;
 
+procedure Tf_config_display.StarButton5Click(Sender: TObject);
+begin
+StarSizeBar1.Position:=13;
+StarDynBar1.Position:=65;
+cplot.stardyn:=StarDynBar1.Position;
+cplot.starsize:=StarSizeBar1.Position;
+end;
+
+procedure Tf_config_display.StarButton6Click(Sender: TObject);
+begin
+StarSizeBar1.Position:=5;
+StarDynBar1.Position:=50;
+cplot.stardyn:=StarDynBar1.Position;
+cplot.starsize:=StarSizeBar1.Position;
+end;
+
+procedure Tf_config_display.StarButton7Click(Sender: TObject);
+begin
+StarSizeBar1.Position:=40;
+StarDynBar1.Position:=78;
+cplot.stardyn:=StarDynBar1.Position;
+cplot.starsize:=StarSizeBar1.Position;
+end;
+
 procedure Tf_config_display.EqGridStyleChange(Sender: TObject);
 begin
 csc.StyleEqGrid:=TPenStyle(EqGridStyle.itemindex);
@@ -848,8 +891,11 @@ begin
  StarContrastBar.position:=cplot.contrast;
  SaturationBar.position:=cplot.saturation;
  starvisual.visible:= (cplot.starplot=2);
+ panel4.visible:= (cplot.starplot=0);
  SizeContrastBar.position:=round(cplot.magsize*10);
  red_moveBox.Checked:=cplot.red_move;
+ StarSizeBar1.position:=cplot.starsize;
+ StarDynBar1.position:=cplot.stardyn;
  Application.ProcessMessages;
 end;
 
@@ -1185,6 +1231,19 @@ begin
 if LockChange then exit;
 cplot.starplot:=stardisplay.itemindex;
 starvisual.visible:= (cplot.starplot=2);
+panel4.visible:= (cplot.starplot=0);
+end;
+
+procedure Tf_config_display.StarSizeBar1Change(Sender: TObject);
+begin
+if LockChange then exit;
+cplot.starsize:= StarSizeBar1.position;
+end;
+
+procedure Tf_config_display.StarDynBar1Change(Sender: TObject);
+begin
+if LockChange then exit;
+cplot.stardyn:= StarDynBar1.position;
 end;
 
 procedure Tf_config_display.StarSizeBarChange(Sender: TObject);

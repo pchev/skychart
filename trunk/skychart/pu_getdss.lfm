@@ -13,10 +13,10 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = False
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.26'
   object Label1: TLabel
     Left = 12
-    Height = 15
+    Height = 14
     Top = 8
     Width = 43
     Caption = 'Label1'
