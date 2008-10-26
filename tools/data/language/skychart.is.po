@@ -435,6 +435,10 @@ msgstr "Björt + NEO + TNO"
 msgid "Bright Nebula"
 msgstr "Björt þoka"
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Bjartar stjörnur"
@@ -619,6 +623,10 @@ msgstr "Smelltu til að breyta lit"
 msgid "Client Connection Keep Alive"
 msgstr "Halda tengingu opinni"
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr ""
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr "Loka"
@@ -722,10 +730,6 @@ msgstr "Stillingar"
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
 msgstr "Stilla forritið"
-
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr "Tengja"
 
 #: u_translation:rsconnectteles
 msgid "Connect Telescope"
@@ -1907,6 +1911,10 @@ msgstr "Sést ekki frá þessari breiddargráðu"
 msgid "Is coordinates epoch really %s ?"
 msgstr "Er tímabil hnitakerfi %s í alvöru ?"
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr "Júlíanska dagatalið"
@@ -1994,6 +2002,10 @@ msgstr "Vinstri"
 #: u_translation:rsleftbar
 msgid "Left Bar"
 msgstr "Vinstri stika"
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr ""
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2250,6 +2262,10 @@ msgstr "Meðal J2000"
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Meðalbrautarhorn"
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr ""
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3471,6 +3487,10 @@ msgstr "Birta þessa mynd"
 msgid "Show/Hide DSS image"
 msgstr "Sýna/fela DSS mynd"
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Stjörnudagur"
@@ -3986,6 +4006,10 @@ msgstr "Notendanafn"
 #: u_translation:rsuserid
 msgid "Userid:"
 msgstr "Notandi.:"
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr ""
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

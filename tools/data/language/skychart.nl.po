@@ -435,6 +435,10 @@ msgstr "Helder + NEO + TNO"
 msgid "Bright Nebula"
 msgstr "Heldere nevel"
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Heldere sterren"
@@ -619,6 +623,10 @@ msgstr "Klik om de kleur te veranderen"
 msgid "Client Connection Keep Alive"
 msgstr "Client verbinding 'Keep Allive'"
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr ""
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr "Sluiten"
@@ -722,10 +730,6 @@ msgstr "Configuratie"
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
 msgstr "Configureer het programma"
-
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr "Verbind"
 
 #: u_translation:rsconnectteles
 msgid "Connect Telescope"
@@ -1907,6 +1911,10 @@ msgstr "Onzichtbaar op deze geografische breedte"
 msgid "Is coordinates epoch really %s ?"
 msgstr "Is de coördinaten-epoche werkelijk %s?"
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr "JD Kalender"
@@ -1994,6 +2002,10 @@ msgstr "Links"
 #: u_translation:rsleftbar
 msgid "Left Bar"
 msgstr "Linker balk"
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr ""
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2250,6 +2262,10 @@ msgstr "Gemiddeld J2000"
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Gemiddelde afwijking"
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr ""
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3471,6 +3487,10 @@ msgstr "Toon deze afbeelding"
 msgid "Show/Hide DSS image"
 msgstr "Toon/verberg DSS beeld"
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Siderische dag"
@@ -3986,6 +4006,10 @@ msgstr "Gebruikersnaam"
 #: u_translation:rsuserid
 msgid "Userid:"
 msgstr "Gebruiker-ID:"
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr ""
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

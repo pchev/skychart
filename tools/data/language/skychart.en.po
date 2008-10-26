@@ -435,6 +435,10 @@ msgstr ""
 msgid "Bright Nebula"
 msgstr ""
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr ""
@@ -619,6 +623,10 @@ msgstr ""
 msgid "Client Connection Keep Alive"
 msgstr ""
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr ""
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr ""
@@ -721,10 +729,6 @@ msgstr ""
 
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
-msgstr ""
-
-#: u_translation:rsconnect
-msgid "Connect"
 msgstr ""
 
 #: u_translation:rsconnectteles
@@ -1907,6 +1911,10 @@ msgstr ""
 msgid "Is coordinates epoch really %s ?"
 msgstr ""
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr ""
@@ -1993,6 +2001,10 @@ msgstr ""
 
 #: u_translation:rsleftbar
 msgid "Left Bar"
+msgstr ""
+
+#: u_translation:rslegal
+msgid "Legal"
 msgstr ""
 
 #: u_translation:rslegend
@@ -2249,6 +2261,10 @@ msgstr ""
 
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
+msgstr ""
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
 msgstr ""
 
 #: u_translation:rsmeanofthedat
@@ -3471,6 +3487,10 @@ msgstr ""
 msgid "Show/Hide DSS image"
 msgstr ""
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr ""
@@ -3985,6 +4005,10 @@ msgstr ""
 
 #: u_translation:rsuserid
 msgid "Userid:"
+msgstr ""
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
 msgstr ""
 
 #: u_translation:rsvariablestar

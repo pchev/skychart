@@ -437,6 +437,10 @@ msgstr "Bright + NEO + TNO"
 msgid "Bright Nebula"
 msgstr "Яркая туманность"
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Яркие звёзды"
@@ -621,6 +625,10 @@ msgstr "Нажмите для замены цвета"
 msgid "Client Connection Keep Alive"
 msgstr "Клиент находится на связи"
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr ""
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr "Закрыть"
@@ -724,10 +732,6 @@ msgstr "Конфигурация"
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
 msgstr "Конфигурация программы"
-
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr "Подключиться"
 
 #: u_translation:rsconnectteles
 msgid "Connect Telescope"
@@ -1909,6 +1913,10 @@ msgstr "Невидимо на этой широте"
 msgid "Is coordinates epoch really %s ?"
 msgstr "Это действительно такая эпоха координат %s ?"
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr "JD календар"
@@ -1996,6 +2004,10 @@ msgstr "Левый"
 #: u_translation:rsleftbar
 msgid "Left Bar"
 msgstr "Левая панель"
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr ""
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2252,6 +2264,10 @@ msgstr "Стандартные J2000.0"
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Средняя аномалия"
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr ""
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3473,6 +3489,10 @@ msgstr "Показать это изображение"
 msgid "Show/Hide DSS image"
 msgstr "Показать/убрать DSS изображения"
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Сидерический день"
@@ -3988,6 +4008,10 @@ msgstr "Имя пользователя"
 #: u_translation:rsuserid
 msgid "Userid:"
 msgstr "Идент.Пользователя:"
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr ""
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"
