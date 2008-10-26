@@ -48,6 +48,6 @@ export LCL_PLATFORM
 [rules]
 .PHONY: all
 
-all: varobs varobs_lpv_bulletin
+all: varobs$(EXEEXT) varobs_lpv_bulletin$(EXEEXT)
 
 

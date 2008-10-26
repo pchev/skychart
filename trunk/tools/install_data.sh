@@ -27,13 +27,10 @@ for f in $(cat doc.lst)
 do
   install -v -m 644  $f $destdir/share/apps/skychart/$f
 done
-install -v -m 644  doc/wiki_doc.tar.gz $destdir/share/apps/skychart/doc/wiki_doc.tar.gz
-cd $destdir/share/apps/skychart/doc/
-tar xzf wiki_doc.tar.gz
-rm wiki_doc.tar.gz
-cd -
 
 for f in $(cat cat.lst)
 do
   install -v -m 644  $f $destdir/share/apps/skychart/$f
 done
+
+unzip -d $destdir/share/apps/skychart/doc/ doc/wiki_doc.zip

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 #
 # create freepascal Makefile to build skychart
 #
@@ -45,7 +45,10 @@ if [ -z "$fpc" ]; then
 fi
 #  Try to locate fpc
 if [ -z "$fpc" ]; then
-   export fpc=$(locate -b '\fpcmake'  | sed 's#/fpcmake##')
+   echo Warning! try to use locate to find FPC path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify fpc= on the command line.
+   export fpc=$(locate -n1 '\fpcmake'  | sed 's#/fpcmake##')
+   echo fpc=$fpc
+   read -p "[Press Enter to continue]"
 fi
 # fpc not found
 if [ -z "$fpc" ]; then
@@ -64,7 +67,10 @@ if [ -z "$lazarus" ]; then
 fi
 #  Try to locate Lazarus lcl
 if [ -z "$lazarus" ]; then
-   export lazarus=$(locate -l 1 lcl/lclclasses.pp | sed 's#/lcl/lclclasses.pp##')
+   echo Warning! try to use locate to find LAZARUS path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify lazarus= on the command line.
+   export lazarus=$(locate -n1 lcl/lclclasses.pp | sed 's#/lcl/lclclasses.pp##')
+   echo lazarus=$lazarus
+   read -p "[Press Enter to continue]"
 fi
 # Lazarus not found
 if [ -z "$lazarus" ]; then
