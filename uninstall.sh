@@ -19,10 +19,3 @@ rm -fv $destdir/share/doc/skychart/copyright
 rm -fv $destdir/share/pixmaps/skychart.xpm
 
 rmdir -v $destdir/share/doc/skychart
-rmdir -v $destdir/share/doc
-rmdir -v $destdir/share/applications
-rmdir -v $destdir/share/pixmaps
-rmdir -v $destdir/share
-rmdir -v $destdir/bin
-rmdir -v $destdir/lib
-rmdir -v $destdir
