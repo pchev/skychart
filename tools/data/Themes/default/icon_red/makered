@@ -1,15 +1,15 @@
 # use imagemagick to convert the color icon to red
 
-cp -f ../icon_color/*.bmp .
+cp -f ../icon_color/*.png .
 
 # image list
-convert -size 10x100  gradient:\#C03030-\#400000 color.png
-ls i*.bmp | xargs -i+ -n1 convert + -fx intensity +
-ls i*.bmp | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' +
+convert -size 10x100  gradient:\#C03030-\#400000 -depth 8 color.png
+ls i*.png | xargs -i+ -n1 convert + -fx intensity -depth 8 +
+ls i*.png | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' -depth 8 +
 
 # special open/close button
-convert -size 10x100  gradient:\#FF3030-\#000000 color.png
-ls b*.bmp | xargs -i+ -n1 convert + -fx intensity +
-ls b*.bmp | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' +
+convert -size 10x100  gradient:\#FF3030-\#000000 -depth 8 color.png
+ls b*.png | xargs -i+ -n1 convert + -fx intensity -depth 8 +
+ls b*.png | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' -depth 8 +
 
 rm color.png
