@@ -439,6 +439,10 @@ msgstr "Jasność + NEO + TNO"
 msgid "Bright Nebula"
 msgstr "mgławica jasna"
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Jasne gwiazdy"
@@ -623,6 +627,10 @@ msgstr "Kliknij żeby zmienić kolor"
 msgid "Client Connection Keep Alive"
 msgstr "Utrzymaj aktywne połączenie klienta"
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr ""
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr "Zamknij"
@@ -726,10 +734,6 @@ msgstr "Konfiguracja"
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
 msgstr "Konfiguruj program"
-
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr "Podłącz"
 
 #: u_translation:rsconnectteles
 msgid "Connect Telescope"
@@ -1911,6 +1915,10 @@ msgstr "Niewidoczny dla tej szerokości"
 msgid "Is coordinates epoch really %s ?"
 msgstr "Czy współrzędne epoki to naprawdę %s ?"
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr "Kalendarz JD"
@@ -1998,6 +2006,10 @@ msgstr "Lewo"
 #: u_translation:rsleftbar
 msgid "Left Bar"
 msgstr "Lewy pasek"
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr ""
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2254,6 +2266,10 @@ msgstr "Średnia J2000"
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Średnia niepewność"
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr ""
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3475,6 +3491,10 @@ msgstr "Pokaż ten obrazek"
 msgid "Show/Hide DSS image"
 msgstr "Pokaż/Ukryj obraz DSS"
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Doba gwiazdowa"
@@ -3990,6 +4010,10 @@ msgstr "Nazwa użytkownika"
 #: u_translation:rsuserid
 msgid "Userid:"
 msgstr "IDużytkownika:"
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr ""
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

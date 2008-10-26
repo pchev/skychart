@@ -494,10 +494,6 @@ msgstr ""
 msgid "Telescope"
 msgstr ""
 
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr ""
-
 #: u_translation:rscontrolpanel
 msgid "Control Panel"
 msgstr ""
@@ -4232,5 +4228,33 @@ msgstr ""
 
 #: u_translation:rsdisplaylabel
 msgid "Display labels for all star catalog"
+msgstr ""
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr ""
+
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr ""
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr ""
+
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
+#: u_translation:rsclock
+msgid "Clock"
 msgstr ""
 

@@ -438,6 +438,10 @@ msgstr "Bright + NEO + TNO"
 msgid "Bright Nebula"
 msgstr "Яскрава туманність"
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Яскраві зорі"
@@ -622,6 +626,10 @@ msgstr "Натисніть для зміни кольору"
 msgid "Client Connection Keep Alive"
 msgstr "Клієнт перебуває на зв'язку"
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr ""
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr "Закрити"
@@ -725,10 +733,6 @@ msgstr "Конфігурація"
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
 msgstr "Конфігурація програми"
-
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr "З'єднати"
 
 #: u_translation:rsconnectteles
 msgid "Connect Telescope"
@@ -1910,6 +1914,10 @@ msgstr "Невидимо на цій широті"
 msgid "Is coordinates epoch really %s ?"
 msgstr "Це дійсно така епоха координат %s ?"
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr "JD календар"
@@ -1997,6 +2005,10 @@ msgstr "Лівий"
 #: u_translation:rsleftbar
 msgid "Left Bar"
 msgstr "Ліва панель"
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr ""
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2253,6 +2265,10 @@ msgstr "Стандартні J2000.0"
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Середня аномалія"
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr ""
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3474,6 +3490,10 @@ msgstr "Показати це зображення"
 msgid "Show/Hide DSS image"
 msgstr "Показати/приховати DSS зображення"
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Сидеричний день"
@@ -3989,6 +4009,10 @@ msgstr "І'мя користувача"
 #: u_translation:rsuserid
 msgid "Userid:"
 msgstr "Ідент.Користувача:"
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr ""
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

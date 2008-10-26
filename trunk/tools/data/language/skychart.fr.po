@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-10-18 14:22+0200\n"
+"PO-Revision-Date: 2008-10-24 17:00+0200\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -436,6 +436,10 @@ msgstr "Brill. + NEO + TNO"
 msgid "Bright Nebula"
 msgstr "Nébuleuse brillante"
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr "Taille des étoiles brillantes"
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Etoiles brillantes"
@@ -620,6 +624,10 @@ msgstr "Clic pour modifier la couleur"
 msgid "Client Connection Keep Alive"
 msgstr "Garde la connexion client"
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr "Horloge"
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr "Fermer"
@@ -723,10 +731,6 @@ msgstr "Configuration"
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
 msgstr "Configuration du programme"
-
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr "Connecter"
 
 #: u_translation:rsconnectteles
 msgid "Connect Telescope"
@@ -1908,6 +1912,10 @@ msgstr "Invisible à cette latitude"
 msgid "Is coordinates epoch really %s ?"
 msgstr "Est-ce que l'époque des coordonnées est vraiment %s ?"
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr "JD"
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr "Calendrier JD"
@@ -1995,6 +2003,10 @@ msgstr "Gauche"
 #: u_translation:rsleftbar
 msgid "Left Bar"
 msgstr "Barre de gauche"
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr "Légal"
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2251,6 +2263,10 @@ msgstr "Moyenne J2000"
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Anomalie moyenne"
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr "Moyen local"
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3472,6 +3488,10 @@ msgstr "Voir l'image"
 msgid "Show/Hide DSS image"
 msgstr "Voir/Cacher les images DSS"
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr "Sidéral"
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Jour Sidéral"
@@ -3987,6 +4007,10 @@ msgstr "Utilisateur"
 #: u_translation:rsuserid
 msgid "Userid:"
 msgstr "Utilisateur"
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr "Utilise le fichier existant %s"
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

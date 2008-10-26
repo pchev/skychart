@@ -435,6 +435,10 @@ msgstr "helle KP + NEO + TNO"
 msgid "Bright Nebula"
 msgstr "Helle Nebel"
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Helle Sterne"
@@ -619,6 +623,10 @@ msgstr "Klick zur Änderung der Farbe"
 msgid "Client Connection Keep Alive"
 msgstr "Keep Alive für Clientapplikation"
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr ""
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr "Schließen"
@@ -722,10 +730,6 @@ msgstr "Konfiguration"
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
 msgstr "Programm konfigurieren."
-
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr "Verbinde"
 
 #: u_translation:rsconnectteles
 msgid "Connect Telescope"
@@ -1907,6 +1911,10 @@ msgstr "Unsichtbar auf diesem Breitengrad"
 msgid "Is coordinates epoch really %s ?"
 msgstr "Ist die Epche der Koordinaten wirklich %s?"
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr "JD Kalender"
@@ -1994,6 +2002,10 @@ msgstr "Links"
 #: u_translation:rsleftbar
 msgid "Left Bar"
 msgstr "Linke Menüleiste"
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr ""
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2250,6 +2262,10 @@ msgstr ""
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Mittlere Anomalie"
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr ""
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3471,6 +3487,10 @@ msgstr "Zeige dieses Bild"
 msgid "Show/Hide DSS image"
 msgstr "DSS-Bild anzeigen"
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Sideirscher Tag"
@@ -3986,6 +4006,10 @@ msgstr "Anwendername:"
 #: u_translation:rsuserid
 msgid "Userid:"
 msgstr "User-ID:"
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr ""
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

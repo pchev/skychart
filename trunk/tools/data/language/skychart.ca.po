@@ -436,6 +436,10 @@ msgstr "Brillant+NEO + TNO"
 msgid "Bright Nebula"
 msgstr "Nebulosa brillant"
 
+#: u_translation:rsbrightstarss
+msgid "Bright Stars Size"
+msgstr ""
+
 #: u_translation:rsbrightstars
 msgid "Bright stars"
 msgstr "Estels brillants"
@@ -620,6 +624,10 @@ msgstr "Feu clic per modificar el color"
 msgid "Client Connection Keep Alive"
 msgstr "Manté la connexió client"
 
+#: u_translation:rsclock
+msgid "Clock"
+msgstr ""
+
 #: u_translation:rsclose
 msgid "Close"
 msgstr "Tanca"
@@ -723,10 +731,6 @@ msgstr "Configuració"
 #: u_translation:rsconfigurethe
 msgid "Configure the program"
 msgstr "Configuració del programa"
-
-#: u_translation:rsconnect
-msgid "Connect"
-msgstr "Connecta"
 
 #: u_translation:rsconnectteles
 msgid "Connect Telescope"
@@ -1908,6 +1912,10 @@ msgstr "Invisible des d'aquesta latitud"
 msgid "Is coordinates epoch really %s ?"
 msgstr "L'Època de les coordenades és segur que és %s ?"
 
+#: u_translation:rsjd2
+msgid "JD"
+msgstr ""
+
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
 msgstr "Calendari JD"
@@ -1995,6 +2003,10 @@ msgstr "Esquerra"
 #: u_translation:rsleftbar
 msgid "Left Bar"
 msgstr "Barra de l'esquerra"
+
+#: u_translation:rslegal
+msgid "Legal"
+msgstr ""
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2251,6 +2263,10 @@ msgstr "Mitjana J2000"
 #: u_translation:rsmeananomaly
 msgid "Mean anomaly"
 msgstr "Anomalia mitjana"
+
+#: u_translation:rsmeanlocal
+msgid "Mean local"
+msgstr ""
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3472,6 +3488,10 @@ msgstr "Mostra aquesta imatge"
 msgid "Show/Hide DSS image"
 msgstr "Mostra/Amaga les imatges DSS"
 
+#: u_translation:rssideral
+msgid "Sideral"
+msgstr ""
+
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
 msgstr "Dia sideral"
@@ -3987,6 +4007,10 @@ msgstr "Usuari"
 #: u_translation:rsuserid
 msgid "Userid:"
 msgstr "Usuari"
+
+#: u_translation:rsusingexistin
+msgid "Using existing file %s"
+msgstr ""
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"
