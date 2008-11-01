@@ -3,7 +3,7 @@ object f_chart: Tf_chart
   Height = 338
   Top = 135
   Width = 508
-  ActiveControl = VertScrollBar
+  ActiveControl = Panel1
   Caption = 'Chart'
   ClientHeight = 338
   ClientWidth = 508
@@ -14,7 +14,7 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object Panel1: TPanel
     Left = 8
     Height = 272

@@ -1,16 +1,16 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_main','FORMDATA',[
-  'TPF0'#7'Tf_main'#6'f_main'#4'Left'#3'Y'#1#6'Height'#3'D'#2#3'Top'#2'_'#5'Wid'
+  'TPF0'#7'Tf_main'#6'f_main'#4'Left'#3'{'#1#6'Height'#3'D'#2#3'Top'#2'm'#5'Wid'
   +'th'#3'\'#3#13'ActiveControl'#7#11'quicksearch'#7'Caption'#6#14'Cartes du Ci'
-  +'el'#12'ClientHeight'#3'1'#2#11'ClientWidth'#3'\'#3#12'Font.CharSet'#7#12'AN'
+  +'el'#12'ClientHeight'#3'-'#2#11'ClientWidth'#3'\'#3#12'Font.CharSet'#7#12'AN'
   +'SI_CHARSET'#10'KeyPreview'#9#4'Menu'#7#9'MainMenu1'#10'OnActivate'#7#12'For'
   +'mActivate'#7'OnClose'#7#9'FormClose'#8'OnCreate'#7#10'FormCreate'#9'OnDestr'
   +'oy'#7#11'FormDestroy'#9'OnKeyDown'#7#11'FormKeyDown'#10'OnKeyPress'#7#12'Fo'
   +'rmKeyPress'#8'OnResize'#7#10'FormResize'#6'OnShow'#7#8'FormShow'#10'ParentF'
-  +'ont'#8#10'LCLVersion'#6#6'0.9.26'#0#9'TMultiDoc'#9'MultiDoc1'#4'Left'#2#24#6
-  +'Height'#3#217#1#3'Top'#2'6'#5'Width'#3'+'#3#5'Align'#7#8'alClient'#10'Bevel'
-  +'Outer'#7#6'bvNone'#11'BorderWidth'#2#3#12'ClientHeight'#3#217#1#11'ClientWi'
+  +'ont'#8#10'LCLVersion'#6#6'0.9.27'#0#9'TMultiDoc'#9'MultiDoc1'#4'Left'#2#24#6
+  +'Height'#3#213#1#3'Top'#2'6'#5'Width'#3'+'#3#5'Align'#7#8'alClient'#10'Bevel'
+  +'Outer'#7#6'bvNone'#11'BorderWidth'#2#3#12'ClientHeight'#3#213#1#11'ClientWi'
   +'dth'#3'+'#3#5'Color'#7#7'clBlack'#11'FullRepaint'#8#11'ParentColor'#8#8'Tab'
   +'Order'#2#0#7'TabStop'#9#11'TitleHeight'#2#15#19'WireframeMoveResize'#9#10'o'
   +'nMaximize'#7#17'MultiDoc1Maximize'#19'onActiveChildChange'#7#26'MultiDoc1Ac'
@@ -2462,9 +2462,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0
   +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#7'Visible'#8#0#0#0#6'TPanel'#9
-  +'PanelLeft'#6'Height'#3#217#1#3'Top'#2'6'#5'Width'#2#24#5'Align'#7#6'alLeft'
-  +#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#3#217#1#11'ClientWidth'#2#24#11
-  +'FullRepaint'#8#8'TabOrder'#2#2#0#8'TToolBar'#8'ToolBar2'#6'Height'#3#217#1#5
+  +'PanelLeft'#6'Height'#3#213#1#3'Top'#2'6'#5'Width'#2#24#5'Align'#7#6'alLeft'
+  +#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#3#213#1#11'ClientWidth'#2#24#11
+  +'FullRepaint'#8#8'TabOrder'#2#2#0#8'TToolBar'#8'ToolBar2'#6'Height'#3#213#1#5
   +'Width'#2#24#5'Align'#7#8'alClient'#12'ButtonHeight'#2#23#7'Caption'#6#8'Too'
   +'lBar2'#11'EdgeBorders'#11#8'ebBottom'#0#4'Flat'#9#6'Images'#7#11'ImageNorma'
   +'l'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'Wrapable'#8#0#11'TT'
@@ -2491,9 +2491,9 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'tPMouseUp'#0#0#11'TToolButton'#14'ToolButtonRotM'#4'Left'#2#1#4'Hint'#6#11
   +'Rotate Left'#3'Top'#3#230#0#10'ImageIndex'#2#22#4'Wrap'#9#9'OnMouseUp'#7#21
   +'ToolButtonRotMMouseUp'#0#0#0#0#6'TPanel'#10'PanelRight'#4'Left'#3'C'#3#6'He'
-  +'ight'#3#217#1#3'Top'#2'6'#5'Width'#2#25#5'Align'#7#7'alRight'#10'BevelOuter'
-  +#7#6'bvNone'#12'ClientHeight'#3#217#1#11'ClientWidth'#2#25#11'FullRepaint'#8
-  +#8'TabOrder'#2#3#0#8'TToolBar'#8'ToolBar3'#6'Height'#3#223#0#3'Top'#3#250#0#5
+  +'ight'#3#213#1#3'Top'#2'6'#5'Width'#2#25#5'Align'#7#7'alRight'#10'BevelOuter'
+  +#7#6'bvNone'#12'ClientHeight'#3#213#1#11'ClientWidth'#2#25#11'FullRepaint'#8
+  +#8'TabOrder'#2#3#0#8'TToolBar'#8'ToolBar3'#6'Height'#3#219#0#3'Top'#3#250#0#5
   +'Width'#2#25#5'Align'#7#8'alClient'#12'ButtonHeight'#2#23#7'Caption'#6#8'Too'
   +'lBar3'#11'EdgeBorders'#11#8'ebBottom'#0#4'Flat'#9#12'Font.CharSet'#7#12'ANS'
   +'I_CHARSET'#10'Font.Color'#7#7'clBlack'#11'Font.Height'#2#246#9'Font.Name'#6
@@ -2550,7 +2550,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'th'#2#24#5'Color'#7#9'clBtnFace'#4'Flat'#9#10'Font.Color'#7#6'clNavy'#10'Fo'
   +'nt.Style'#11#6'fsBold'#0#9'NumGlyphs'#2#0#7'OnClick'#7#11'SetFOVClick'#8'Sh'
   +'owHint'#9#10'ParentFont'#8#14'ParentShowHint'#8#0#0#0#0#6'TPanel'#11'PanelB'
-  +'ottom'#6'Height'#2'"'#3'Top'#3#15#2#5'Width'#3'\'#3#5'Align'#7#8'alBottom'
+  +'ottom'#6'Height'#2'"'#3'Top'#3#11#2#5'Width'#3'\'#3#5'Align'#7#8'alBottom'
   +#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#2'"'#11'ClientWidth'#3'\'#3#11
   +'FullRepaint'#8#8'TabOrder'#2#4#0#6'TShape'#6'Shape1'#4'Left'#3#190#0#6'Heig'
   +'ht'#2'"'#5'Width'#2#2#5'Align'#7#6'alLeft'#11'Brush.Color'#7#11'clBtnShadow'
@@ -2709,7 +2709,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'Height'#2#23#4'Hint'#6#4'Time'#3'Top'#2#2#5'Width'#2'8'#8'MaxValue'#3#232#3
   +#8'MinValue'#2#1#7'OnEnter'#7#13'ToolBar1Enter'#11'OnMouseMove'#7#17'Toolbar'
   +'1MouseMove'#8'TabOrder'#2#1#5'Value'#2#1#0#0#9'TComboBox'#5'TimeU'#4'Left'#3
-  +#144#2#6'Height'#2#23#4'Hint'#6#10'Time Units'#3'Top'#2#2#5'Width'#2'P'#16'A'
+  +#144#2#6'Height'#2#25#4'Hint'#6#10'Time Units'#3'Top'#2#2#5'Width'#2'P'#16'A'
   +'utoCompleteText'#11#20'cbactSearchAscending'#0#13'DropDownCount'#2#11#12'Fo'
   +'nt.CharSet'#7#12'ANSI_CHARSET'#9'MaxLength'#2#255#7'OnEnter'#7#13'ToolBar1E'
   +'nter'#11'OnMouseMove'#7#17'Toolbar1MouseMove'#10'ParentFont'#8#5'Style'#7#14

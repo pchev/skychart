@@ -390,8 +390,8 @@ begin
 stringgrid3.RowCount:=ccat.GCatnum+1;
 stringgrid3.cells[0,0]:='x';
 stringgrid3.cells[1, 0]:=rsCat;
-stringgrid3.cells[2, 0]:=rsMin3;
-stringgrid3.cells[3, 0]:=rsMax;
+stringgrid3.cells[2, 0]:=rsMin2;
+stringgrid3.cells[3, 0]:=rsMax2;
 stringgrid3.cells[4, 0]:=rsPath;
 CatalogEmpty:=true;
 for j:=0 to ccat.GCatnum-1 do begin
