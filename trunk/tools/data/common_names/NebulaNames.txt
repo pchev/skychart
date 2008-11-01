@@ -2,194 +2,444 @@
 ; For a translation copy this file to NebulaNames_XX.txt where XX is the specific language code
 ; Use UTF-8 for character encoding
 ;
-11.28283333 ;  -7.13333333 ; Abt's Star
+20.19833333 ; +26.48333333 ; 20 Vulpeculae Cluster
+5.643333333 ; -69.1        ; 30 Doradus
+6.14        ; +13.96666667 ; 37 Cluster
+19.42333333 ; +20.18333333 ; 4-5 Vulpeculae Cluster
+0.401666667 ; -72.08333333 ; 47 Tucanae
+ 6.30000000 ; +23.63333333 ; 9-12 Geminorum Cluster
+11.28283333 ; -7.133333333 ; Abt's Star
+19.42333333 ; +20.18333333 ; Al Sufi's Cluster
+ 3.36666667 ; +49.00000000 ; Alpha Persei Cluster
+11.18666667 ; +28.70000000 ; Ambartsumian's Knot
+ 0.71166670 ; +41.26666670 ; Andromeda A
  0.71166670 ; +41.26666670 ; Andromeda Galaxy
-10.94750000 ;  +6.90333333 ; Ant Galaxy
+ 0.76166667 ; +38.00000000 ; Andromeda I
+ 1.27166667 ; +33.45000000 ; Andromeda II
+ 0.58833333 ; +36.51666667 ; Andromeda III
+ 0.70833333 ; +40.56666667 ; Andromeda IV
+ 0.88166667 ; +43.20000000 ; Andromeda IX
+ 1.17166667 ; +47.63333333 ; Andromeda V
+23.86166667 ; +24.60000000 ; Andromeda VI
+ 3.46333333 ; +50.58333333 ; Andromeda VII
+ 0.70500000 ; +40.61666667 ; Andromeda VIII
+ 1.11000000 ; +44.80000000 ; Andromeda X
+21.50000000 ; +48.98333333 ; Anon Platais
+ 6.61833333 ; +3.06666667  ; Anonymous vdB cluster
+10.94750000 ; +6.90333333  ; Ant Galaxy
 16.28716666 ; -51.98833333 ; Ant Nebula
 16.48999999 ; -26.43166666 ; Antares Nebula
-12.03166670 ; -18.86666670 ; Antennae
+12.03166670 ; -18.86666670 ; Antennae Galaxies
+10.06833333 ; -27.33333333 ; Antlia Dwarf
+ 1.70500000 ; +51.58333333 ; Apple Core Nebula
+19.99333330 ; +22.71666670 ; Apple Core Nebula
 20.78266666 ; -12.83000000 ; Aquarius Dwarf
+7.075000000 ; -58.45000000 ; Argo Dwarf
 11.32666666 ; +51.50000000 ; Arp's Galaxy
+22.34500000 ; -24.68333333 ; Atom For Peace Galaxy
+ 5.87166667 ; +32.55000000 ; Auriga Salt-and-Pepper
+ 0.83166667 ; +42.58333333 ; Baade's Galaxies A & B
 17.98999999 ; -29.05000000 ; Baade's Window
- 1.70500000 ; +51.56666670 ; Barbell Nebula
-23.62833333 ; +30.13333333 ; Barbon's Galaxy
-19.74833330 ; -14.80000000 ; Barnard's Galaxy
- 5.90000000 ;  -1.20000000 ; Barnard's Loop
-21.55666670 ;  -0.38333330 ; Baxendell's Neb
- 8.22000000 ; +46.00000000 ; Bear Claw Galaxy
- 8.22000000 ; +46.00000000 ; Bear Paw Galaxy
- 8.66833330 ; +19.98333330 ; Beehive Cluster
-18.25833333 ; -18.18333333 ; Black Hole in Sagittarius
-12.94500000 ; +21.68333330 ; Blackeye Galaxy
-15.99166666 ; +25.91666666 ; Blaze Star
-19.74666670 ; +50.51666670 ; Blinking Planetary
-20.37333330 ; +20.11666670 ; Blue Flash
-11.83833330 ; -57.18333330 ; Blue Planetary
-23.43166670 ; +42.55000000 ; Blue Snowball
- 9.92666670 ; +69.06666670 ; Bode's Nebula
-17.23500000 ; -12.91666670 ; Box Nebula
-19.42333333 ; +20.18333333 ; Brocchi's Cluster
-23.34500000 ; +61.20000000 ; Bubble Nebula
-17.22833330 ; -37.10000000 ; Bug Nebula
-17.66833330 ; -32.21666670 ; Butterfly Cluster
- 7.94666670 ; -59.11666670 ; Butterfly Nebula
- 4.01166670 ; +36.61666670 ; California Nebula
-19.57999999 ; +30.51666666 ; Campbell's Star
- 6.69333333 ; -50.96666666 ; Carina Dwarf
- 0.62783333 ; -33.71500000 ; Cartwheel Galaxy
-17.97666670 ; +66.63333330 ; Cat's Eye Nebula
-22.94666666 ; +62.61666666 ; Cave Nebula
-13.42500000 ; -43.01666670 ; Centaurus A Galaxy
-12.73883333 ; -40.73166666 ; Centaurus Chain
-18.34666670 ; -16.18333330 ; Checkmark Nebula
- 6.68500000 ;  +9.88333330 ; Christmas Tree Cluster
-14.22000000 ; -65.33333333 ; Circinus Galaxy
-20.76166670 ; +30.71666670 ; Cirrus Nebula
-16.48666666 ; -26.44999999 ; Cloud Nebula
- 7.48666670 ; +20.91666670 ; Clown Face Nebula
-12.85000000 ; -63.00000000 ; Coal Sack
-19.42333333 ; +20.18333333 ; Coat Hanger
-12.50833330 ; +41.70000000 ; Cocoon Galaxy
-21.89000000 ; +47.26666670 ; Cocoon Nebula
-10.47333330 ; +68.41666670 ; Coddington's Galaxy
-12.99666666 ; +27.96666666 ; Coma Cluster
-12.43333333 ; +26.00000000 ; Coma Star Cluster
- 6.68500000 ;  +9.88333330 ; Cone Nebula
-11.62833330 ; +22.01666670 ; Copeland's Septet
- 1.70500000 ; +51.56666670 ; Cork Nebula
-15.37833333 ; +27.71666666 ; Corona Cluster
- 5.57500000 ; +22.01666670 ; Crab Nebula
-20.20000000 ; +38.35000000 ; Crescent Nebula
- 3.13666666 ; +40.95000000 ; Demon Star
- 6.75166666 ; -16.71666666 ; Dog Star
- 2.31666670 ; +57.15000000 ; Double Cluster
-17.33666666 ; +57.91499999 ; Draco Dwarf
-19.99333330 ; +22.71666670 ; Dumbbell Nebula
-18.31333330 ; -13.78333330 ; Eagle Nebula
-21.03849999 ; +36.69333333 ; Egg Nebula
-10.11666670 ; -40.43333330 ; Eight-burst Planetary
-22.67500000 ;  +3.35833333 ; Einstein's Cross
- 3.78333000 ; +24.11667000 ; Electra Nebula
- 7.48666670 ; +20.91666670 ; Eskimo nebula
-10.73000000 ; -59.86666670 ; Eta Carinae Neb
- 0.65166666 ; -43.08333333 ; Exclamation Mark
-12.46166670 ; +13.08333330 ; Eyes
-20.76166670 ; +30.71666670 ; Filamentary Nebula
- 5.59000000 ;  -5.45000000 ; Fish's Mouth
- 4.00166670 ; -53.36666670 ; Flame
- 5.27000000 ; +34.26666670 ; Flaming Star Neb
- 5.27000000 ; +34.26666670 ; Flaming Star Nebula
-11.33766666 ;  +2.52499999 ; Flying Bird Galaxy
-13.46500000 ; -29.61666670 ; Flywing Galaxy
-19.60500000 ; -29.55000000 ; Footprint Nebula
-10.41333330 ; -18.63333330 ; Ghost of Jupiter
- 6.71833333 ; -74.23666666 ; Graham's Object
-16.69500000 ; +36.46666670 ; Great Hercules Cluster
-23.27000000 ; -42.58333330 ; Grus Quartet
- 8.50000000 ; -45.00000000 ; Gum Nebula
-13.21500000 ; -32.68833333 ; Hardcastle Neb
- 8.92666670 ; +58.73333330 ; Helix Galaxy
-22.49333330 ; -20.80000000 ; Helix Nebula
-16.69500000 ; +36.46666670 ; Hercules Cluster
- 4.38166670 ; +19.53333330 ; Hind's Variable Nebula
-15.28750000 ; +21.58666666 ; Hoag's Object
-10.73000000 ; -59.86666666 ; Homunculus Neb
- 5.68166666 ;  -2.46666666 ; Horsehead Nebula
-18.34666670 ; -16.18333330 ; Horseshoe Nebula
-18.06333330 ; -24.38333330 ; Hourglass Nebula
- 6.65333330 ;  +8.73333330 ; Hubble's Variable Nebula
- 7.19000000 ; +71.83333333 ; Integral Sign
- 7.63499999 ; +38.88333333 ; Intergalactic Wanderer
-12.89333330 ; -60.33333330 ; Jewel Box
-13.53666666 ; +62.73333333 ; Keenan's System
-10.73000000 ; -59.86666670 ; Keyhole Nebula
-19.49966666 ; -17.67833333 ; Kowel's Object
- 4.54999999 ; +24.60000000 ; Kutner's Cloud
-18.06333330 ; -24.38333330 ; Lagoon Nebula
-11.61000000 ; -63.03333330 ; Lambda Centauri Neb
- 5.58333333 ; +10.00000000 ; Lambda Orionis Neb
- 5.39333333 ; -69.75000000 ; Large Magellanic Cloud
-11.31500000 ; +13.08333330 ; Leo Triplet
- 6.71833333 ; -74.23666666 ; Lindsay-Shapley Ring
- 1.70500000 ; +51.56666670 ; Little Dumbbell Nebula
-17.48833330 ; -23.76666670 ; Little Ghost
-13.46500000 ; -41.13666666 ; Longmore's Group
- 6.14833333 ; +15.81666666 ; Lower's Nebula
- 3.76333330 ; +24.36666670 ; Maia Nebula
-12.50000000 ; +13.50000000 ; Markarian's Chain
-11.06500000 ; +40.85000000 ; Mayall's Object
-20.15833333 ; -66.21500000 ; McLeish's Object
- 7.48333333 ; +13.25000000 ; Medusa Nebula
- 3.76833330 ; +23.78333330 ; Merope Nebula
-12.76833330 ; +30.73333330 ; Mice
-11.86333330 ; +48.68333330 ; Miniature Spiral
- 1.42983333 ;  -1.37166666 ; Minkowski's Object
-20.98000000 ; +44.33333330 ; North American Nebula
-13.44666670 ; -47.48333330 ; Omega Centauri
-18.34666670 ; -16.18333330 ; Omega Nebula
- 5.59000000 ;  -5.45000000 ; Orion Nebula
-11.24666670 ; +55.01666670 ; Owl Nebula
- 8.92666670 ; +58.73333330 ; Pancake Galaxy
-11.56500000 ; +49.05000000 ; Papillon
-18.07166666 ; -32.50000000 ; Parrot's Head
- 3.27166666 ; +60.03333333 ; Pazmino's Cluster
-20.79666670 ; +44.36666670 ; Pelican Nebula
- 3.31000000 ; +41.53333333 ; Perseus Cluster
-19.04333330 ;  -0.45000000 ; Phantom Streak
-20.80833333 ; +31.64999999 ; Pickering's Triangular wisp
- 1.56500000 ; +30.65000000 ; Pinwheel Galaxy
-12.31333330 ; +14.41666670 ; Pinwheel Nebula
- 3.31166670 ; +41.46666670 ; Pipe Nebula
- 1.12250000 ; +32.40833333 ; Pisces Cloud
- 1.06333333 ; +21.88333333 ; Pisces Dwarf
- 3.78333000 ; +24.11667000 ; Pleiades
- 8.66833330 ; +19.98333330 ; Praesepe
- 4.60333333 ; -58.86166666 ; Reticulum Dwarf
-16.42666670 ; -23.43333330 ; Rho Ophiuchi Neb
-18.89333330 ; +33.03333330 ; Ring Nebula
-12.03166670 ; -18.86666670 ; Ringtail Galaxy
- 6.54000000 ;  +4.86666670 ; Rosette Nebula
-11.61000000 ; -63.03333330 ; Running Chicken Nebula
-17.39166666 ; -23.63333333 ; S Nebula
-19.49966666 ; -17.67833333 ; Sagittarius Dwarf
-21.07000000 ; -11.36666670 ; Saturn Nebula
- 1.00266666 ; -33.71000000 ; Sculptor Dwarf
- 0.79333330 ; -25.28333330 ; Sculptor Galaxy
- 5.58833330 ; -67.56666670 ; Seagull Nebula
-13.79000000 ; -30.41666670 ; Seashell Galaxy
-15.26833333 ;  +0.13333333 ; Serpens Dwarf
-15.98666670 ; +20.75000000 ; Seyfert's Sextet
-12.60833330 ; +11.25000000 ; Siamese Twins
- 0.79333330 ; -25.28333330 ; Silver Coin Galaxy
- 0.88000000 ; -72.83333330 ; Small Magellanic Cloud
-17.39166666 ; -23.63333333 ; Snake Nebula
-12.66666670 ; -11.61666670 ; Sombrero Galaxy
-10.71233333 ; +34.45833333 ; Spider
-10.08666670 ;  -7.71666670 ; Spindle Galaxy
-18.31333330 ; -13.78333330 ; Star-Queen Nebula
-22.60000000 ; +33.96666670 ; Stephan's Quintet
- 4.36333330 ; +19.53333330 ; Struve's Lost Nebula
-13.26333330 ; +42.03333330 ; Sunflower Galaxy
-18.34666670 ; -16.18333330 ; Swan Nebula
-16.90000000 ; -41.80000000 ; Table of Scorpius
- 5.69833330 ;  -1.85000000 ; Tank Track Nebula
- 5.64333330 ; -69.08333330 ; Tarantula Nebula
- 3.76833330 ; +23.78333330 ; Tempel's Nebula
- 7.94666670 ; -59.11666670 ; Toby Jug Nebula
-17.84500000 ; -30.21666670 ; Tom Thumb Cluster
- 5.59000000 ;  -5.45000000 ; Trapezium
- 1.56500000 ; +30.65000000 ; Triangulum Galaxy
-18.03833330 ; -23.03333330 ; Trifid Nebula
-11.31500000 ; +13.08333330 ; Trio in Leo
-11.78333333 ; +55.73333333 ; Ursa Major I
-10.96666666 ; +56.76666666 ; Ursa Major II
-15.14666666 ; +67.20000000 ; Ursa Minor Dwarf
-20.76166670 ; +30.71666670 ; Veil Nebula
- 8.56666666 ; -44.00000000 ; Vela SNR
-13.49833330 ; +47.20000000 ; Whirlpool Galaxy
-16.19500000 ; +12.06666670 ; White Eyed Pea
-18.85166670 ;  -6.26666670 ; Wild Duck Cluster
-11.77999999 ;  -3.83333333 ; Wild's Triplet
-12.37333000 ; +58.08333000 ; Winnecke 4
- 5.11500000 ;  -7.21666670 ; Witch Head Neb
-16.82499999 ; +45.50000000 ; Zwicky's Triplet
+ 1.70500000 ;	+51.56666670 ; Barbell Nebula
+23.62833333 ;	+30.13333333 ; Barbon's Galaxy
+19.74833330 ;	-14.80000000 ; Barnard's Galaxy
+ 5.90000000 ;	-1.20000000  ; Barnard's Loop
+21.55666670 ;	-0.38333330  ; Baxendell's Neb
+ 8.22000000 ;	+46.00000000 ; Bear Claw Galaxy
+ 8.22000000 ;	+46.00000000 ; Bear Paw Galaxy
+ 8.66833330 ;	+19.98333330 ; Beehive Cluster
+22.04500000 ;	+42.02833333 ; BL Lacertae
+18.25833333 ;	-18.18333333 ; Black Hole in Sagittarius
+12.94500000 ;	+21.68333330 ; Blackeye Galaxy
+15.99166666 ;	+25.91666666 ; Blaze Star
+19.74666670 ;	+50.51666670 ; Blinking Planetary
+20.37333330 ;	+20.11666670 ; Blue Flash
+11.83833330 ;	-57.18333330 ; Blue Planetary
+23.43166670 ;	+42.55000000 ; Blue Snowball
+ 9.92666670 ;	+69.06666670 ; Bode's Nebula
+12.74666667 ;	-54.51666667 ; Boomerang Nebula
+12.20500000 ;	+29.18333333 ; Box
+17.23500000 ;	-12.91666670 ; Box Nebula
+19.42333333 ;	+20.18333333 ; Brocchi's Cluster
+23.34500000 ;	+61.20000000 ; Bubble Nebula
+17.22833330 ;	-37.10000000 ; Bug Nebula
+ 0.79166667 ;	-20.43333333 ; Burbidge Chain
+ 4.36666667 ;	+19.53333333 ; Burnham's Nebula
+17.66833330 ;	-32.21666670 ; Butterfly Cluster
+ 7.94666670 ;	-59.11666670 ; Butterfly Nebula
+ 1.70500000 ;	+51.58333333 ; Butterfly Nebula
+17.09333333 ;	-10.13333333 ; Butterfly Nebula
+ 4.55333333 ;	+5.35000000  ; BW Tauri
+ 7.70500000 ;	-14.70000000 ; Calabash Nebula
+ 4.01166670 ;	+36.61666670 ; California Nebula
+ 4.62000000 ;	+71.51666667 ; Camelopardalis A
+19.57999999 ;	+30.51666666 ; Campbell's Star
+12.59500000 ;	-12.03333333 ; Canali
+ 7.33333333 ;	-30.00000000 ; Canis Major Dwarf
+21.77500000 ;	-21.23333333 ; Capricorn Dwarf
+ 4.46666667 ;	-47.90000000 ; Carafe Galaxy, Cannon's
+ 4.47333333 ;	-47.81666667 ; Carafe Group
+ 6.69333333 ;	-50.96666666 ; Carina Dwarf
+ 7.07500000 ;	-58.45000000 ; Carina II Dwarf
+ 0.62783333 ;	-33.71500000 ; Cartwheel Galaxy
+23.39000000 ;	+58.83333333 ; Cassiopeia A
+ 3.46333333 ;	+50.58333333 ; Cassiopeia dSph
+23.40333333 ;	+61.58333333 ; Cassiopeia Salt-and-Pepper
+17.97666670 ;	+66.63333330 ; Cat's Eye Nebula
+22.94666666 ;	+62.61666666 ; Cave Nebula
+10.41333333 ;	-18.65000000 ; CBS Eye
+13.42500000 ;	-43.01666670 ; Centaurus A Galaxy
+12.73883333 ;	-40.73166666 ; Centaurus Chain
+ 2.71166667 ;	-0.01666667  ; Cetus A
+ 0.43500000 ;	-11.03333333 ; Cetus Dwarf
+18.34666670 ;	-16.18333330 ; Checkmark Nebula
+ 2.37500000 ;	+57.15000000 ; Chi Persei
+ 6.68500000 ;	+9.88333330  ; Christmas Tree Cluster
+ 9.93166667 ;	+69.68333333 ; Cigar Galaxy
+14.22000000 ;	-65.33333333 ; Circinus Galaxy
+20.76166670 ;	+30.71666670 ; Cirrus Nebula
+ 4.23833333 ;	-12.73333333 ; Cleopatra's Eye
+16.48666666 ;	-26.44999999 ; Cloud Nebula
+ 7.48666670 ;	+20.91666670 ; Clown Face Nebula
+ 5.57500000 ;	+22.01666667 ; CM Tauri
+12.85000000 ;	-63.00000000 ; Coal Sack
+19.42333333 ;	+20.18333333 ; Coathanger Cluster
+12.50833330 ;	+41.70000000 ; Cocoon Galaxy
+21.89000000 ;	+47.26666670 ; Cocoon Nebula
+10.47333330 ;	+68.41666670 ; Coddington's Galaxy
+12.90333333 ;	+27.63333333 ; Coma A
+12.99666666 ;	+27.96666666 ; Coma Cluster
+12.31333333 ;	+14.41666667 ; Coma Pinwheel Galaxy
+12.43333333 ;	+26.00000000 ; Coma Star Cluster
+ 6.68500000 ;	+9.88333330  ; Cone Nebula
+20.39833333 ;	+38.53333333 ; Cooling Tower
+11.62833330 ;	+22.01666670 ; Copeland's Septet
+ 1.70500000 ;	+51.56666670 ; Cork Nebula
+15.37833333 ;	+27.71666666 ; Corona Cluster
+ 5.57500000 ;	+22.01666670 ; Crab Nebula
+ 5.57500000 ;	+22.01666670 ; Crab Pulsar
+20.21333333 ;	+38.31666667 ; Crescent Nebula
+12.73333333 ;	+32.16666667 ; Crowbar Galaxy
+ 6.61833333 ;	+3.06666667  ; CV Mon cluster
+19.99000000 ;	+40.71666667 ; Cygnus A
+21.03833333 ;	+36.70000000 ; Cygnus Egg
+20.76102777 ;	+30.71972222 ; Cygnus Loop
+12.41666667 ;	-71.50000000 ; Dark Doodad
+ 5.59166667 ;	-5.26666667  ; De Mairan's Nebula
+18.44333333 ;	-18.38333333 ; Delle Caustiche
+18.90833333 ;	+36.90000000 ; Delta Lyrae Cluster
+ 3.13666666 ;	+40.95000000 ; Demon Star
+19.99333330 ;	+22.71666670 ; Diablo Nebula
+ 6.75166666 ;	-16.71666666 ; Dog Star
+ 2.31666670 ;	+57.15000000 ; Double Cluster
+19.99333330 ;	+22.71666670 ; Double-Headed Shot
+17.33666666 ;	+57.91499999 ; Draco Dwarf
+18.06166667 ;	-24.38333333 ; Dragon Nebula
+ 1.32500000 ;	+58.28333333 ; Dragonfly Cluster
+ 7.30833333 ;	-13.23333333 ; Duck Nebula
+19.99333330 ;	+22.71666670 ; Dumbbell Nebula
+ 1.70500000 ;	+51.58333333 ; Dumbbell Nebula, Little
+18.31333330 ;	-13.78333330 ; Eagle Nebula
+21.03849999 ;	+36.69333333 ; Egg Nebula
+10.11666670 ;	-40.43333330 ; Eight-burst Planetary
+22.67500000 ;	+3.35833333  ; Einstein's Cross
+ 3.78333000 ;	+24.11667000 ; Electra Nebula
+21.61833333 ;	+57.48333333 ; Elephant Trunk
+ 5.60333333 ;	-1.20000000  ; Epsilon Orionis Nebula
+ 4.41333333 ;	-21.18333333 ; Eridanus Globular Cluster
+ 7.48666670 ;	+20.91666670 ; Eskimo nebula
+ 1.32500000 ;	+58.28333333 ; ET Cluster
+10.73000000 ;	-59.86666670 ; Eta Carinae Neb
+ 0.65166666 ;	-43.08333333 ; Exclamation Mark Galaxy
+10.41333333 ;	-18.65000000 ; Eye Nebula
+12.46166670 ;	+13.08333330 ; Eyes
+15.23000000 ;	-15.46666667 ; Fath 703
+20.76166670 ;	+30.71666670 ; Filamentary Nebula
+11.08666667 ;	-58.73333333 ; Firefly Party Cluster
+19.98333333 ;	+35.00000000 ; Fish on the platter nebula
+ 5.59000000 ;	-5.45000000  ; Fish's Mouth
+ 4.00166670 ;	-53.36666670 ; Flame
+ 5.69500000 ;	-1.85000000  ; Flame Nebula
+ 5.27000000 ;	+34.26666670 ; Flaming Star Nebula
+11.33766666 ;	+2.52499999  ; Flying Bird Galaxy
+13.46500000 ;	-29.61666670 ; Flywing Galaxy
+12.97833333 ;	+14.21666667 ; Footprint Galaxy
+19.60500000 ;	-29.55000000 ; Footprint Nebula
+ 3.37833333 ;	-37.21666667 ; Fornax A
+ 2.66500000 ;	-34.53333333 ; Fornax Dwarf
+13.58000000 ;	-45.55000000 ; Fourcade-Figuero
+ 9.66500000 ;	+11.98333333 ; Frosty Leo
+10.30166667 ;	+21.83333333 ; Gamma Leonis Group
+10.07000000 ;	+68.66666667 ; Garland
+10.59666667 ;	-58.21666667 ; Gem Cluster
+ 5.66166667 ;	-69.65000000 ; Ghost Head Nebula
+10.41333330 ;	-18.63333330 ; Ghost of Jupiter
+21.03000000 ;	+44.20000000 ; Golf of Mexico
+18.15372222 ;	-32.18027778 ; Gomez's Hamburger
+12.97833333 ;	+14.21666667 ; GR 8 (Gibson Reaves)
+ 6.71833333 ;	-74.23666666 ; Graham's Object
+16.69500000 ;	+36.46666670 ; Great Hercules Cluster
+23.27000000 ;	-42.58333330 ; Grus Quartet
+ 8.50000000 ;	-45.00000000 ; Gum Nebula
+ 2.31833333 ;	+57.13333333 ; h Persei
+13.42500000 ;	-43.01666667 ; Hamburger Galaxy
+13.21666667 ;	-32.68333333 ; Hardcastle's Galaxy
+ 7.04166667 ;	-8.38333333  ; Heart-Shaped Cluster
+ 8.92666670 ;	+58.73333330 ; Helix Galaxy
+22.49333330 ;	-20.80000000 ; Helix Nebula
+16.85333333 ;	+4.98333333  ; Hercules A
+16.69500000 ;	+36.46666670 ; Hercules Globular Cluster
+12.70166667 ;	+32.53333333 ; Herring Galaxy (Nebula)
+ 9.00666667 ;	-45.90000000 ; Herschel's Ray
+ 4.38166670 ;	+19.53333330 ; Hind's Variable Nebula
+15.28750000 ;	+21.58666666 ; Hoag's Object
+19.63666667 ;	+46.56666667 ; Hole in a Cluster
+ 9.67500000 ;	+71.18333333 ; Holmberg I
+ 8.32166667 ;	+70.71666667 ; Holmberg II
+ 9.24333333 ;	+74.23333333 ; Holmberg III
+13.91166667 ;	+53.90000000 ; Holmberg IV
+ 9.96000000 ;	+69.05000000 ; Holmberg IX
+13.67666667 ;	+54.33333333 ; Holmberg V
+ 3.41500000 ;	-21.33333333 ; Holmberg VI
+12.57833333 ;	+6.28333333  ; Holmberg VII
+13.22166667 ;	+36.20000000 ; Holmberg VIII
+10.73000000 ;	-59.86666666 ; Homunculus Neb
+15.35916667 ;	-7.45000000  ; Hooked Galaxy
+ 3.98666667 ;	-21.33333333 ; Horologium Dwarf
+ 5.68166666 ;	-2.46666666  ; Horsehead Nebula
+ 5.68166667 ;	-2.46666667  ; Horsehead Nebula
+18.34666670 ;	-16.18333330 ; Horseshoe Nebula
+18.06333330 ;	-24.38333330 ; Hourglass Nebula
+ 6.65333330 ;	+8.73333330  ; Hubble's Variable Nebula
+ 4.45000000 ;	+16.00000000 ; Hyades
+ 9.30166667 ;	-12.10000000 ; Hydra A
+12.97833333 ;	+14.21666667 ; Imprint of Foot Galaxy
+18.04500000 ;	-27.83333333 ; Ink Spot
+ 7.19000000 ;	+71.83333333 ; Integral Sign Galaxy
+ 7.63499999 ;	+38.88333333 ; Intergalactic Wanderer
+ 5.87166667 ;	+32.55000000 ; January Salt-and-Pepper
+12.89333330 ;	-60.33333330 ; Jewel Box
+18.85166667 ;	-6.26666667  ; July Salt-and-Pepper
+10.41333333 ;	-18.65000000 ; Jupiter's Ghost
+12.89333333 ;	-60.35000000 ; Kappa Crucis Cluster
+13.53666666 ;	+62.73333333 ; Keenan's System
+ 3.95666667 ;	+63.06666667 ; Kemble's Cascade
+17.51000000 ;	-21.48333333 ; Kepler's Star/Supernova/SNR
+10.73000000 ;	-59.86666670 ; Keyhole Nebula
+12.88500000 ;	+36.81666667 ; Kidney Bean Galaxy
+19.49966666 ;	-17.67833333 ; Kowel's Object
+ 4.54999999 ;	+24.60000000 ; Kutner's Cloud
+20.76166667 ;	+30.71666667 ; Lace-work Nebula
+18.06333330 ;	-24.38333330 ; Lagoon Nebula
+11.61000000 ;	-63.03333330 ; Lambda Centauri Nebula
+ 5.58500000 ;	+9.93333333  ; Lambda Orionis Cluster
+ 5.58333333 ;	+10.00000000 ; Lambda Orionis Neb
+ 5.39333333 ;	-69.75000000 ; Large Magellanic Cloud
+ 6.14000000 ;	+13.96666667 ; LE Cluster
+10.14166667 ;	+12.30000000 ; Leo I
+11.22333333 ;	+22.16666667 ; Leo II, Leo B
+ 9.98833333 ;	+30.75000000 ; Leo III, Leo A
+11.31500000 ;	+13.08333330 ; Leo Triplet
+ 1.06333333 ;	+21.88333333 ; LGS 3
+ 6.71833333 ;	-74.23666666 ; Lindsay-Shapley Ring
+ 1.70500000 ;	+51.56666670 ; Little Dumbbell Nebula
+17.82166667 ;	-20.01666667 ; Little Gem
+17.82166667 ;	-20.01666667 ; Little Gem
+19.73333333 ;	-14.15000000 ; Little Gem
+17.48833330 ;	-23.76666670 ; Little Ghost Nebula
+17.41166667 ;	-34.20000000 ; Lobster Nebula
+18.34666667 ;	-16.18333333 ; Lobster Nebula
+13.46500000 ;	-41.13666666 ; Longmore's Group
+5.643333333 ;	-69.1        ; Looped Nebula
+13.49833333 ;	+47.20000000 ; Lord Rosse's Nebula (Galaxy)
+12.57166667 ;	+8.20000000  ; Lost Galaxy
+12.56666667 ;	+7.70000000  ; Lost Galaxy
+ 6.14833333 ;	+15.81666666 ; Lower's Nebula
+ 2.60666667 ;	+59.65000000 ; Maffei I
+ 2.70000000 ;	+59.61666667 ; Maffei II
+ 3.76333330 ;	+24.36666670 ; Maia Nebula
+12.61666667 ;	+14.33333333 ; Malin 1
+ 8.66666667 ;	+19.66666667 ; Manger (Praesepe)
+12.50000000 ;	+13.50000000 ; Markarian's Chain
+11.06500000 ;	+40.85000000 ; Mayall's Object
+20.15833333 ;	-66.21500000 ; McLeish's Object
+ 5.77000000 ;	-0.10000000  ; McNeil's Nebula
+ 7.48333333 ;	+13.25000000 ; Medusa Nebula
+ 3.76833330 ;	+23.78333330 ; Merope Nebula
+ 3.76833330 ;	+23.78333330 ; Merope Nebula Part
+ 7.31166667 ;	-24.95000000 ; Mexican Jumping Star
+12.76833330 ;	+30.73333330 ; Mice
+18.30666667 ;	-18.40000000 ; Milky Way Patch
+18.58333333 ;	+72.38333333 ; Mini Cassiopeia
+11.86333330 ;	+48.68333330 ; Miniature Spiral
+ 1.42983333 ;	-1.37166666  ; Minkowski's Object
+ 1.15666667 ;	+35.71666667 ; Mirach's Ghost
+16.56833333 ;	-44.05000000 ; Mu Normae Cluster
+ 2.25000000 ;	+59.26666667 ; Muscle Man Cluster
+20.94000000 ;	+31.71666667 ; Network Nebula
+20.98000000 ;	+44.33333330 ; North American Nebula
+ 5.58333333 ;	+10.00000000 ; North Orion Bubble
+20.66666667 ;	+42.00000000 ; Northern Coalsack
+ 5.39333333 ;	-69.75000000 ; Nubecula Major
+ 0.87833333 ;	-72.83333333 ; Nubecula Minor
+13.44666670 ;	-47.48333330 ; Omega Centauri
+18.34666670 ;	-16.18333330 ; Omega Nebula
+ 6.93833333 ;	-24.73333333 ; Omicron Canis Minorum Cl.
+ 5.58833333 ;	-5.38333333  ; Orion A
+ 5.69500000 ;	-1.85000000  ; Orion B
+ 5.59000000 ;	-5.45000000  ; Orion Nebula
+ 5.59333333 ;	-1.08333333  ; Orion's Belt
+ 1.32500000 ;	+58.28333333 ; Owl Cluster
+11.24666670 ;	+55.01666670 ; Owl Nebula
+ 0.88333333 ;	+56.61666667 ; PacMan Nebula
+ 8.92666670 ;	+58.73333330 ; Pancake Galaxy
+11.56500000 ;	+49.05000000 ; Papillon
+18.07166666 ;	-32.50000000 ; Parrot's Head Nebula
+19.18166667 ;	-59.98333333 ; Pavo Globular
+ 3.27166666 ;	+60.03333333 ; Pazmino's Cluster
+23.86166667 ;	+24.60000000 ; Pegasus dSph
+23.47500000 ;	+14.73333333 ; Pegasus Dwarf
+20.79666670 ;	+44.36666670 ; Pelican Nebula
+ 9.00666667 ;	-45.90000000 ; Pencil
+ 3.33000000 ;	+41.51666667 ; Perseus A
+ 3.31000000 ;	+41.53333333 ; Perseus Cluster
+ 2.31833333 ;	+57.13333333 ; Perseus Double Cluster
+19.04333330 ;	-0.45000000  ; Phantom Streak
+ 1.32500000 ;	+58.28333333 ; Phi Cassiopeiae Cluster
+ 1.85166667 ;	-44.43333333 ; Phoenix Dwarf Irregular G.
+20.80833333 ;	+31.64999999 ; Pickering's Triangular N.
+ 5.33166667 ;	-45.78333333 ; Pictor A
+ 5.60500000 ;	+34.13333333 ; Pinwheel Cluster
+ 1.56500000 ;	+30.65000000 ; Pinwheel Galaxy
+ 1.56500000 ;	+30.65000000 ; Pinwheel Galaxy
+14.05333333 ;	+54.35000000 ; Pinwheel Galaxy
+12.31333333 ;	+14.41666667 ; Pinwheel Galaxy
+12.31333330 ;	+14.41666670 ; Pinwheel Nebula
+ 3.31166670 ;	+41.46666670 ; Pipe Nebula
+17.35166667 ;	-26.78333333 ; Pipe Nebula
+17.55000000 ;	-26.00000000 ; Pipe Nebula
+ 1.12250000 ;	+32.40833333 ; Pisces Cloud
+ 1.06333333 ;	+21.88333333 ; Pisces Dwarf
+ 3.78333000 ;	+24.11667000 ; Pleiades
+ 1.69844444 ;	-89.33333333 ; Polarissima Australis
+11.78658333 ;	+89.10000000 ; Polarissima Borealis
+ 8.66833330 ;	+19.98333330 ; Praesepe (Manger)
+17.89833333 ;	-34.80000000 ; Ptolemy's Cluster
+ 8.40166667 ;	-43.00000000 ; Puppis A
+13.49833333 ;	+47.20000000 ; Question Mark
+ 6.33333333 ;	-10.63333333 ; Red Rectangle
+18.08666667 ;	-19.85000000 ; Red Spider Nebula
+12.54166667 ;	+0.38333333  ; Reinmuth 80
+ 4.60333333 ;	-58.86666667 ; Reticulum Cluster
+ 4.60333333 ;	-58.86166666 ; Reticulum Dwarf
+16.02638889 ;	-24.10000000 ; Rho Ophiuchi Dark Cloud
+16.42666670 ;	-23.43333330 ; Rho Ophiuchi Nebula
+18.89333330 ;	+33.03333330 ; Ring Nebula
+12.03166670 ;	-18.86666670 ; Ring Tail Galaxies
+ 6.54000000 ;	+4.86666670  ; Rosette Nebula
+13.49833333 ;	+47.20000000 ; Rosse's Galaxy
+ 7.70500000 ;	-14.70000000 ; Rotten Egg Nebula
+11.61000000 ;	-63.03333330 ; Running Chicken Nebula
+17.39166666 ;	-23.63333333 ; S Nebula
+18.91666667 ;	-30.51666667 ; SagDEG
+19.50000000 ;	-17.68333333 ; SagDIG
+17.76166667 ;	-29.00000000 ; Sagittarius A
+19.49966666 ;	-17.67833333 ; Sagittarius Dwarf
+18.30666667 ;	-18.40000000 ; Sagittarius Star Cloud
+ 0.72666667 ;	+61.76666667 ; Sailboat Cluster
+21.07000000 ;	-11.36666670 ; Saturn Nebula
+ 3.98666667 ;	-21.33333333 ; Schuster's Spiral
+ 1.00266666 ;	-33.71000000 ; Sculptor Dwarf
+ 0.13500000 ;	-34.56666667 ; Sculptor Dwarf Irregular
+ 0.79333330 ;	-25.28333330 ; Sculptor Galaxy
+18.85166667 ;	-6.26666667  ; Scutum Salt-and-Pepper
+ 0.13500000 ;	-34.56666667 ; SDIG
+ 5.58833330 ;	-67.56666670 ; Seagull Nebula
+13.79000000 ;	-30.41666670 ; Seashell Galaxy
+15.26833333 ;	+0.13333333  ; Serpens Dwarf
+ 3.76833330 ;	+23.78333330 ; Seven Sisters
+10.18333333 ;	-4.68333333  ; Sextans A
+10.00000000 ;	+5.31666667  ; Sextans B
+10.09333333 ;	+0.06666667  ; Sextans C
+10.22000000 ;	-1.61666667  ; Sextans Dwarf
+15.98666670 ;	+20.75000000 ; Seyfert's Sextet
+ 1.08500000 ;	-6.21666667  ; Shapley-Ames 1
+12.59333333 ;	-39.91666667 ; Shapley-Ames 2
+12.82333333 ;	-10.11666667 ; Shapley-Ames 3
+12.92000000 ;	+0.11666667  ; Shapley-Ames 4
+20.40000000 ;	-44.00000000 ; Shapley-Ames 5
+21.38666667 ;	+45.76666667 ; Shapley-Ames 6
+12.60833330 ;	+11.25000000 ; Siamese Twins
+ 0.79333330 ;	-25.28333330 ; Silver Coin Galaxy
+ 2.37666667 ;	+42.35000000 ; Silver Sliver Galaxy
+ 5.65166667 ;	+28.00000000 ; Simeis 147
+12.94500000 ;	+21.68333333 ; Sleeping Beauty Galaxy
+21.71666667 ;	+66.11666667 ; Small Cluster Nebula
+ 0.88000000 ;	-72.83333330 ; Small Magellanic Cloud
+12.51333333 ;	+12.38333333 ; Smoking Gun
+17.39166666 ;	-23.63333333 ; Snake Nebula
+ 6.46666667 ;	+15.00000000 ; Snickers
+12.66666670 ;	-11.61666670 ; Sombrero Galaxy
+14.19833333 ;	-51.43333333 ; Southern Crab Nebula
+13.61666667 ;	-29.86666667 ; Southern Pinwheel Galaxy
+6.74000000  ; -74.18333333 ; Southern Ring Galaxy
+10.11666667 ;	-40.43333333 ; Southern Ring Nebula
+10.71233333 ;	+34.45833333 ; Spider
+10.08666670 ;	-7.71666670  ; Spindle Galaxy
+ 2.70166667 ;	+42.78333333 ; Spiral Cluster
+15.26500000 ;	+56.33333333 ; Splinter Galaxy
+12.31333333 ;	+14.41666667 ; St. Katherine's Wheel
+18.31333330 ;	-13.78333330 ; Star Queen Nebula
+ 5.47833333 ;	+35.85000000 ; Starfish Cluster
+17.35166667 ;	-26.78333333 ; Stem of the Pipe Nebula
+22.60000000 ;	+33.96666670 ; Stephan's Quintet
+ 4.36333330 ;	+19.53333330 ; Struve's Lost Nebula
+ 3.76833330 ;	+23.78333330 ; Subaru
+13.26333330 ;	+42.03333330 ; Sunflower Galaxy
+12.75166667 ;	-0.46666667  ; Superwind-Galaxy
+18.34666670 ;	-16.18333330 ; Swan Nebula
+16.90000000 ;	-41.80000000 ; Table of Scorpius
+16.10166667 ;	+55.41666667 ; Tadpole Galaxy
+ 5.69833330 ;	-1.85000000  ; Tank Track Nebula
+ 5.64333330 ;	-69.08333330 ; Tarantula Nebula
+ 7.31166667 ;	-24.95000000 ; Tau CMa cluster
+ 5.57500000 ;	+22.01666667 ; Taurus A
+ 4.64500000 ;	+26.05000000 ; Taurus Dark Cloud
+ 3.76833330 ;	+23.78333330 ; Tempel's Nebula
+ 7.30833333 ;	-13.23333333 ; Thor's Helmet
+12.71500000 ;	-78.26666667 ; Thumbprint Nebula
+ 7.94666670 ;	-59.11666670 ; Toby Jug Nebula
+17.84500000 ;	-30.21666670 ; Tom Thumb Cluster
+ 5.59000000 ;	-5.45000000  ; Trapezium Cluster
+ 1.56500000 ;	+30.65000000 ; Triangulum Galaxy
+18.03833330 ;	-23.03333330 ; Trifid Nebula
+11.31500000 ;	+13.08333330 ; Trio in Leo
+ 5.64333333 ;	-69.10000000 ; True Lovers' Knot
+22.69500000 ;	-64.41666667 ; Tucana Dwarf
+ 7.39833333 ;	-32.20000000 ; Tuft in the Tail of the Dog
+16.74166667 ;	+23.80000000 ; Turtle Planetary Nebula
+ 0.42166667 ;	+64.13333333 ; Tycho's Star/Supernova/SNR
+ 9.93166667 ;	+69.68333333 ; Ursa Major A
+11.48833333 ;	+28.96666667 ; Ursa Major Dwarf
+11.78333333 ;	+55.73333333 ; Ursa Major I
+10.96666666 ;	+56.76666666 ; Ursa Major II
+15.14666666 ;	+67.20000000 ; Ursa Minor Dwarf
+ 2.25000000 ;	+59.26666667 ; V Man Cluster
+20.76166670 ;	+30.71666670 ; Veil Nebula
+ 8.56666666 ;	-44.00000000 ; Vela SNR
+12.51333333 ;	+12.38333333 ; Virgo A
+12.31333333 ;	+14.41666667 ; Virgo Cluster Pinwheel Gal.
+17.41166667 ;	-34.20000000 ; War and Peace Nebula
+12.70166667 ;	+32.53333333 ; Whale Galaxy
+13.49833330 ;	+47.20000000 ; Whirlpool Galaxy
+16.19500000 ;	+12.06666670 ; White Eyed Pea
+18.85166670 ;	-6.26666670  ; Wild Duck Cluster
+11.77999999 ;	-3.83333333  ; Wild's Triplet
+12.37333000 ;	+58.08333000 ; Winnecke 4
+ 5.11500000 ;	-7.21666670  ; Witch Head Nebula
+12.36500000 ;	+58.10000000 ; WNC 4 (Winnecke 4)
+ 0.03333333 ;	-15.46666667 ; Wolf-Lundmark-Melotte, WLM
+ 6.68333333 ;	+9.90000000  ; X-mas Tree Cluster
+ 0.07000000 ;	-29.93333333 ; Zeta Sculptoris Cl.
+11.97333333 ;	+38.05000000 ; Zwicky #2
+16.80000000 ;	+45.06666666 ; Zwicky's Triplet
