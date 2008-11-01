@@ -1469,6 +1469,9 @@ step:='Trace';
  debugln(step);
 {$endif}
 InitTrace;
+{$ifdef trace_debug}
+ WriteTrace('Privatedir: '+PrivateDir);
+{$endif}
 step:='Language';
 {$ifdef trace_debug}
  WriteTrace(step);
@@ -5613,10 +5616,10 @@ begin
 try
     NeedToInitializeDB:=false;
     if ((DBtype=sqlite) and not Fileexists(cfgm.db)) then begin
+        dbpath:=extractfilepath(cfgm.db);
         {$ifdef trace_debug}
          WriteTrace('Create sqlite '+dbpath);
         {$endif}
-        dbpath:=extractfilepath(cfgm.db);
         if not directoryexists(dbpath) then CreateDir(dbpath);
         if not directoryexists(dbpath) then forcedirectories(dbpath);
     end;
