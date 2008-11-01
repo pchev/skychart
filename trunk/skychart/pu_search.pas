@@ -471,7 +471,8 @@ begin
 try
 NebNameBox.Clear;
 i:=0;
-fn:=slash(appdir)+slash('data')+slash('common_names')+'NebulaNames.txt';
+fn:=slash(appdir)+slash('data')+slash('common_names')+'NebulaNames_'+lang+'.txt';
+if not fileexists(fn) then fn:=slash(appdir)+slash('data')+slash('common_names')+'NebulaNames.txt';
 numNebName:=100;
 setlength(NebNameAR,numNebName);
 setlength(NebNameDE,numNebName);

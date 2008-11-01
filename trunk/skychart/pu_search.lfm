@@ -15,7 +15,7 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object PlanetPanel: TPanel
     Left = 8
     Height = 41
