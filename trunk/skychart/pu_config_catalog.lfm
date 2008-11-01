@@ -3,6 +3,7 @@ object f_config_catalog: Tf_config_catalog
   Height = 577
   Top = 242
   Width = 522
+  ActiveControl = MainPanel
   Caption = 'Catalog'
   ClientHeight = 577
   ClientWidth = 522
@@ -11,7 +12,7 @@ object f_config_catalog: Tf_config_catalog
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Left = 12
     Height = 520

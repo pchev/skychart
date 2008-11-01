@@ -16,7 +16,7 @@ object f_config_observatory: Tf_config_observatory
   OnShow = FormShow
   ParentFont = False
   Position = poScreenCenter
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Height = 515
     Top = 8
@@ -37,8 +37,8 @@ object f_config_observatory: Tf_config_observatory
       TabOrder = 0
       object Page1: TPage
         Caption = 'Observatory'
-        ClientWidth = 474
-        ClientHeight = 507
+        ClientWidth = 476
+        ClientHeight = 509
         object Memo1: TMemo
           Left = 8
           Height = 141
@@ -119,8 +119,8 @@ object f_config_observatory: Tf_config_observatory
           Top = -1
           Width = 449
           Caption = 'Observatory Database'
-          ClientHeight = 91
-          ClientWidth = 443
+          ClientHeight = 90
+          ClientWidth = 445
           TabOrder = 0
           object Label2: TLabel
             Left = 314
@@ -140,7 +140,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object citylist: TComboBox
             Left = 8
-            Height = 23
+            Height = 25
             Top = 31
             Width = 233
             AutoComplete = True
@@ -163,10 +163,11 @@ object f_config_observatory: Tf_config_observatory
           end
           object countrylist: TComboBox
             Left = 8
-            Height = 23
+            Height = 25
             Top = 1
             Width = 234
             DropDownCount = 10
+            MaxLength = -1
             OnSelect = countrylistChange
             Style = csDropDownList
             TabOrder = 0
@@ -249,8 +250,8 @@ object f_config_observatory: Tf_config_observatory
           Top = 109
           Width = 185
           Caption = 'Latitude'
-          ClientHeight = 54
-          ClientWidth = 179
+          ClientHeight = 53
+          ClientWidth = 181
           TabOrder = 1
           object Label58: TLabel
             Left = 4
@@ -278,7 +279,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object hemis: TComboBox
             Left = 112
-            Height = 23
+            Height = 25
             Top = 21
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
@@ -343,8 +344,8 @@ object f_config_observatory: Tf_config_observatory
           Top = 109
           Width = 185
           Caption = 'Longitude'
-          ClientHeight = 54
-          ClientWidth = 179
+          ClientHeight = 53
+          ClientWidth = 181
           TabOrder = 2
           object Label61: TLabel
             Left = 4
@@ -372,7 +373,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object long: TComboBox
             Left = 112
-            Height = 23
+            Height = 25
             Top = 21
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
@@ -437,8 +438,8 @@ object f_config_observatory: Tf_config_observatory
           Top = 109
           Width = 81
           Caption = 'Altitude'
-          ClientHeight = 52
-          ClientWidth = 75
+          ClientHeight = 53
+          ClientWidth = 77
           TabOrder = 3
           object Label70: TLabel
             Left = 8
@@ -473,14 +474,15 @@ object f_config_observatory: Tf_config_observatory
           Top = 181
           Width = 449
           Caption = 'Time Zone'
-          ClientHeight = 59
-          ClientWidth = 443
+          ClientHeight = 58
+          ClientWidth = 445
           TabOrder = 4
           object TZComboBox: TComboBox
             Left = 8
-            Height = 23
+            Height = 25
             Top = 23
             Width = 433
+            MaxLength = -1
             OnChange = TZComboBoxChange
             Style = csDropDownList
             TabOrder = 0
@@ -500,16 +502,16 @@ object f_config_observatory: Tf_config_observatory
       end
       object Page2: TPage
         Caption = 'Horizon'
-        ClientWidth = 474
-        ClientHeight = 482
+        ClientWidth = 476
+        ClientHeight = 486
         object GroupBox2: TGroupBox
           Left = 8
           Height = 89
           Top = 142
           Width = 457
           Caption = 'Want to track an object before it rise ?'
-          ClientHeight = 73
-          ClientWidth = 451
+          ClientHeight = 74
+          ClientWidth = 453
           TabOrder = 1
           object horizonopaque: TCheckBox
             Left = 13
@@ -527,8 +529,8 @@ object f_config_observatory: Tf_config_observatory
           Top = 14
           Width = 457
           Caption = 'Local Horizon'
-          ClientHeight = 105
-          ClientWidth = 451
+          ClientHeight = 106
+          ClientWidth = 453
           TabOrder = 0
           object hor_l1: TLabel
             Left = 13
@@ -574,8 +576,8 @@ object f_config_observatory: Tf_config_observatory
           Top = 238
           Width = 457
           Caption = 'Depression of the visible horizon'
-          ClientHeight = 105
-          ClientWidth = 451
+          ClientHeight = 106
+          ClientWidth = 453
           TabOrder = 2
           object Label1: TLabel
             Left = 13
@@ -603,8 +605,8 @@ object f_config_observatory: Tf_config_observatory
           Top = 366
           Width = 457
           Caption = 'Atmospheric Refraction'
-          ClientHeight = 64
-          ClientWidth = 451
+          ClientHeight = 65
+          ClientWidth = 453
           TabOrder = 3
           object Label82: TLabel
             Left = 45

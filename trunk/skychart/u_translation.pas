@@ -876,7 +876,7 @@ resourcestring
   rsSMinute = 'M';
   rsSSecond = 'S';
   rsSYear = 'Y';
-  rsSMonth = 'M';
+  rsSMonth = 'M.';
   rsSDay = 'D';
   rsJD = 'JD:';
   rsActualSystem = 'Actual system time';
