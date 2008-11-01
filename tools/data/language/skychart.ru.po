@@ -2161,6 +2161,10 @@ msgstr "Лунные затмения"
 msgid "M"
 msgstr "М"
 
+#: u_translation:rssmonth
+msgid "M."
+msgstr ""
+
 #: u_translation:rsmbytes
 msgid "MBytes"
 msgstr "Мегабайт"

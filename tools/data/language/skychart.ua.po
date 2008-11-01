@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-29 21:49+0200\n"
+"PO-Revision-Date: 2008-10-25 08:51+0200\n"
 "Last-Translator: Oleg Maliy <astroclubzp@gmail.com>\n"
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "POT-Creation-Date: \n"
@@ -280,7 +280,7 @@ msgstr "Як на екрані (чорне тло!)"
 
 #: u_translation:rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr ""
+msgstr "Запитати підтвердження перед будь-яким інтернет-з'єднанням"
 
 #: u_translation:rsasterism
 msgid "Asterism"
@@ -1212,7 +1212,7 @@ msgstr "Показ зображення із каталогу об'єктів"
 
 #: u_translation:rsdisplaylabel
 msgid "Display labels for all star catalog"
-msgstr ""
+msgstr "Показати позначки всіх зоряних каталогів"
 
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1880,7 +1880,7 @@ msgstr "Інформація"
 
 #: u_translation:rsinformationd
 msgid "Information detail"
-msgstr ""
+msgstr "Інформаційна деталь"
 
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
@@ -2161,6 +2161,10 @@ msgstr "Місячні затьмарення"
 #: u_translation:rssminute
 msgid "M"
 msgstr "М"
+
+#: u_translation:rssmonth
+msgid "M."
+msgstr ""
 
 #: u_translation:rsmbytes
 msgid "MBytes"
@@ -2508,7 +2512,7 @@ msgstr "Кількість файлів"
 
 #: u_translation:rsnumberofnebu
 msgid "Number of nebulae"
-msgstr ""
+msgstr "Кількість туманностей"
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"

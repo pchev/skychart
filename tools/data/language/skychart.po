@@ -3343,7 +3343,7 @@ msgid "Y"
 msgstr ""
 
 #: u_translation:rssmonth
-msgid "M"
+msgid "M."
 msgstr ""
 
 #: u_translation:rssday

@@ -1,7 +1,7 @@
 # translation of skychart.ca.po
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-23 19:10+0100\n"
+"PO-Revision-Date: 2008-10-21 14:08+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.ca\n"
 "POT-Creation-Date: \n"
@@ -42,7 +42,7 @@ msgstr "%s, xplanet retorna: %s"
 
 #: u_translation:rsalltablesstr
 msgid "%sAll tables structure exists."
-msgstr "%sTotes les estructures de taula existeixent."
+msgstr "%s: Totes les estructures de taula existeixen."
 
 #: u_translation:rsalsobesureth
 msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
@@ -74,7 +74,7 @@ msgstr "%svoltes DEC:"
 
 #: u_translation:rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
-msgstr "%sBase de dades %s oberta.%s"
+msgstr "%sBase de dades %s ja està oberta.%s"
 
 #: u_translation:rserrorcreatin
 msgid "%sError creating table %s"
@@ -86,11 +86,11 @@ msgstr "%svoltes AR:"
 
 #: u_translation:rstabledonotex
 msgid "%sTable %s do not exist! %sPlease correct the error and retry."
-msgstr "%sla taula %s no existeix! %sCorregiu l'error i torneu a provar."
+msgstr "%s la taula %s no existeix! %sCorregiu l'error i torneu a provar."
 
 #: u_translation:rstableexist
 msgid "%sTable exist %s"
-msgstr "%sla taula %s existeix"
+msgstr "%s la taula %s existeix"
 
 #: u_translation:rsrequirexplan
 msgid "(require Xplanet 1.2.0)"
@@ -206,7 +206,7 @@ msgstr "Tot"
 
 #: u_translation:rsalltoolsbar
 msgid "All Tools Bar"
-msgstr "Totes les barres d'útils"
+msgstr "Totes les barres d'eines"
 
 #: u_translation:rsallconfigura
 msgid "All configuration options"
@@ -278,7 +278,7 @@ msgstr "Com a la pantalla (fons negre!)"
 
 #: u_translation:rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr ""
+msgstr "Demana confirmació abans de connectar a Internet"
 
 #: u_translation:rsasterism
 msgid "Asterism"
@@ -398,7 +398,7 @@ msgstr "Arxiu bitmap"
 
 #: u_translation:rsblackonwhite
 msgid "Black on White"
-msgstr "Negre sobre blanc"
+msgstr "Blanc sobre negre"
 
 #: u_translation:rsblackwhite
 msgid "Black/White"
@@ -1210,7 +1210,7 @@ msgstr "Mostra una imatge dels objectes del catàleg"
 
 #: u_translation:rsdisplaylabel
 msgid "Display labels for all star catalog"
-msgstr ""
+msgstr "Mostra etiquetes per tots els catàlegs d'estels"
 
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1278,7 +1278,7 @@ msgstr "Mostra els planetes com"
 
 #: u_translation:rsdrawalinetha
 msgid "Draw a line that represent the proper motion for the next "
-msgstr "Dibuixa una línia mostrant el moviment propi per a "
+msgstr " Dibuixa una línia mostrant el moviment propi per a "
 
 #: u_translation:rsdrawline
 msgid "Draw line"
@@ -1546,7 +1546,7 @@ msgstr "Directori"
 
 #: u_translation:rsfillmilkyway
 msgid "Fill Milky Way"
-msgstr "Reomple la via làctia"
+msgstr "Reomple la Via Làctia"
 
 #: u_translation:rsfillwithhori
 msgid "Fill with horizon color"
@@ -1878,7 +1878,7 @@ msgstr "Informació"
 
 #: u_translation:rsinformationd
 msgid "Information detail"
-msgstr ""
+msgstr "Informació detallada"
 
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
@@ -1962,7 +1962,7 @@ msgstr "Etiqueta"
 
 #: u_translation:rslabelobject
 msgid "Label Object"
-msgstr "Etiqueta els objectes"
+msgstr "Etiqueta dels objectes"
 
 #: u_translation:rslabeltext
 msgid "Label Text"
@@ -2159,6 +2159,10 @@ msgstr "Eclipsis lunars"
 #: u_translation:rssminute
 msgid "M"
 msgstr "M"
+
+#: u_translation:rssmonth
+msgid "M."
+msgstr ""
 
 #: u_translation:rsmbytes
 msgid "MBytes"
@@ -2506,7 +2510,7 @@ msgstr "Nombre d'arxius"
 
 #: u_translation:rsnumberofnebu
 msgid "Number of nebulae"
-msgstr ""
+msgstr "Nombre objectes cel profund"
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"
@@ -2526,15 +2530,15 @@ msgstr "Objecte"
 
 #: u_translation:rsobjectbar
 msgid "Object Bar"
-msgstr "Barra d'objecte"
+msgstr "Barra d'objectes"
 
 #: u_translation:rsobjectfilter
 msgid "Object Filter"
-msgstr "Filtre d'objecte"
+msgstr "Filtre d'objectes"
 
 #: u_translation:rsobjectfilter2
 msgid "Object Filter Setting"
-msgstr "Paràmetres del filtre d'objecte"
+msgstr "Paràmetres del filtre d'objectes"
 
 #: u_translation:rsobjectlist
 msgid "Object List"
@@ -3398,7 +3402,7 @@ msgstr "Mostra les figures de les constel·lacions"
 
 #: u_translation:rsshowcoordina
 msgid "Show Coordinate Grid"
-msgstr "Mostra les graelles de coordenades"
+msgstr "Mostra la graella de coordenades"
 
 #: u_translation:rsshownebulae
 msgid "Show Deep Sky Objects"
@@ -3518,7 +3522,7 @@ msgstr "Color del cel"
 
 #: u_translation:rsskycharthome
 msgid "Skychart Homepage"
-msgstr "Pàgina web de Cartes del Ciel"
+msgstr "Pàgina web de Cartes del Cel"
 
 #: u_translation:rsslew
 msgid "Slew"
@@ -3818,7 +3822,7 @@ msgstr "Massa finestres obertes, tanqueu una carta, si us plau."
 
 #: u_translation:rstoolbar
 msgid "Tool Bar"
-msgstr "Barra d'útils"
+msgstr "Barres d'eines"
 
 #: u_translation:rstop
 msgid "Top"
@@ -4082,7 +4086,7 @@ msgstr "Oest"
 
 #: u_translation:rswhiteonblack
 msgid "White on Black"
-msgstr "Blanc sobre negre"
+msgstr "Negre sobre blanc"
 
 #: u_translation:rswidth
 msgid "Width"
