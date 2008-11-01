@@ -779,7 +779,7 @@ if DBtype=mysql then begin
   db1.SetPort(port);
   db1.Connect(host,user,pass,db);
 end else if DBtype=sqlite then begin
-  db:=CondUTF8Encode(db);
+  db:=UTF8Encode(db);
 end;
 if db1.database<>db then db1.Use(db);
 dbconnected:=db1.Active;

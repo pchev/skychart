@@ -116,7 +116,7 @@ try
    db.Connect(host,user,pass,dbn);
  end
  else if DBtype=sqlite then begin
-   dbn:=CondUTF8Encode(dbn);
+   dbn:=UTF8Encode(dbn);
  end;
  if db.database<>dbn then db.Use(dbn);
  result:=db.Active;
@@ -199,7 +199,7 @@ try
        else begin msg:=Format(rsConnectToFai, [cmain.dbhost, inttostr(
          cmain.dbport), trim(db.ErrorMessage)+crlf]); goto dmsg; end;
   end else if DBtype=sqlite then begin
-    dbn:=CondUTF8Encode(cmain.db);
+    dbn:=UTF8Encode(cmain.db);
   end;
   if ((db.database=dbn)or db.use(dbn)) then msg:=Format(rsDatabaseOpen, [msg,
     cmain.db, crlf])
@@ -237,7 +237,7 @@ try
      result:=trim(db.ErrorMessage);
      db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
   end else if DBtype=sqlite then begin
-    dbn:=CondUTF8Encode(cmain.db);
+    dbn:=UTF8Encode(cmain.db);
   end;
   if db.database<>dbn then db.Use(dbn);
   if db.database=dbn then begin
