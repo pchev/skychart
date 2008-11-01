@@ -2160,6 +2160,10 @@ msgstr "Zatmění měsíce"
 msgid "M"
 msgstr "M"
 
+#: u_translation:rssmonth
+msgid "M."
+msgstr ""
+
 #: u_translation:rsmbytes
 msgid "MBytes"
 msgstr "MB"

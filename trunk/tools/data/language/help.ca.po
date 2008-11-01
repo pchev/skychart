@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-06 10:44+0200\n"
-"Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
+"PO-Revision-Date: 2008-10-21 16:52+0100\n"
+"Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team:  <translation@ap-i.net>\n"
@@ -12,149 +12,149 @@ msgstr ""
 
 #: u_help:hlpsearch
 msgid "advanced_search.html"
-msgstr ""
+msgstr "recerca_avancada.html"
 
 #: u_help:hlpcalast
 msgid "calendar_asteroid.html"
-msgstr ""
+msgstr "calendari_asteroides.html"
 
 #: u_help:hlpcalcom
 msgid "calendar_comet.html"
-msgstr ""
+msgstr "calendari_cometes.html"
 
 #: u_help:hlpcalinput
 msgid "calendar_input_area.html"
-msgstr ""
+msgstr "calendari_area_entrada.html"
 
 #: u_help:hlpcalluna
 msgid "calendar_lunar_eclipses.html"
-msgstr ""
+msgstr "calendari_eclipsis_lunars.html"
 
 #: u_help:hlpcalpla
 msgid "calendar_planet.html"
-msgstr ""
+msgstr "calendari_planetes.html"
 
 #: u_help:hlpcalsol
 msgid "calendar_solar_eclipses.html"
-msgstr ""
+msgstr "calendari_eclipsis_solars.html"
 
 #: u_help:hlpcaltw
 msgid "calendar_twilight.html"
-msgstr ""
+msgstr "calendari_crepuscles.html"
 
 #: u_help:hlpcatalog
 msgid "catalog.html"
-msgstr ""
+msgstr "catalegs.html"
 
 #: u_help:hlpcfgchart
 msgid "chart_coordinates.html"
-msgstr ""
+msgstr "mapa_coordenades.html"
 
 #: u_help:hlpcfgdate
 msgid "date_time.html"
-msgstr ""
+msgstr "data_i_hora.html"
 
 #: u_help:hlpinfo
 msgid "detailed_information.html"
-msgstr ""
+msgstr "informacio_detallada.html"
 
 #: u_help:hlpcfgdispl
 msgid "display.html"
-msgstr ""
+msgstr "presentacio.html"
 
 #: u_help:hlpbasedir
 msgid "en/documentation/"
-msgstr ""
+msgstr "ca/documentation/"
 
 #: u_help:hlpcfgint
 msgid "internet.html"
-msgstr ""
+msgstr "internet.html"
 
 #: u_help:hlpbarleft
 msgid "left_bar.html"
-msgstr ""
+msgstr "barra_esquerra.html"
 
 #: u_help:hlpbarmain
 msgid "main_bar.html"
-msgstr ""
+msgstr "barra_principal.html"
 
 #: u_help:hlpmenuchart
 msgid "menuchart.html"
-msgstr ""
+msgstr "menumapa.html"
 
 #: u_help:hlpmenuedit
 msgid "menuedit.html"
-msgstr ""
+msgstr "menuedicio.html"
 
 #: u_help:hlpmenufile
 msgid "menufile.html"
-msgstr ""
+msgstr "menuarxiu.html"
 
 #: u_help:hlpmenuhelp
 msgid "menuhelp.html"
-msgstr ""
+msgstr "menuajuda.html"
 
 #: u_help:hlpmenusetup
 msgid "menusetup.html"
-msgstr ""
+msgstr "menuconfiguracio.html"
 
 #: u_help:hlpmenutel
 msgid "menutelescope.html"
-msgstr ""
+msgstr "menutelescopi.html"
 
 #: u_help:hlpmenuview
 msgid "menuview.html"
-msgstr ""
+msgstr "menuveure.html"
 
 #: u_help:hlpmenuwin
 msgid "menuwindow.html"
-msgstr ""
+msgstr "menufinestra.html"
 
 #: u_help:hlpbarobj
 msgid "object_bar.html"
-msgstr ""
+msgstr "barra_d_objectes.html"
 
 #: u_help:hlpobjlist
 msgid "object_list.html"
-msgstr ""
+msgstr "llista_d_objectes.html"
 
 #: u_help:hlpcfgobs
 msgid "observatory.html"
-msgstr ""
+msgstr "observatori.html"
 
 #: u_help:hlpcfgpict
 msgid "pictures.html"
-msgstr ""
+msgstr "imatges.html"
 
 #: u_help:hlpposition
 msgid "position.html"
-msgstr ""
+msgstr "posicio.html"
 
 #: u_help:hlpbarright
 msgid "right_bar.html"
-msgstr ""
+msgstr "barra_dreta.html"
 
 #: u_help:hlpsrvinfo
 msgid "server_information.html"
-msgstr ""
+msgstr "informacio_del_servidor.html"
 
 #: u_help:hlpsetfov
 msgid "set_fov.html"
-msgstr ""
+msgstr "camp_de_visio.html"
 
 #: u_help:hlpcfgsol
 msgid "solar_system.html"
-msgstr ""
+msgstr "sistema_solar.html"
 
 #: u_help:hlpindex
 msgid "start.html"
-msgstr ""
+msgstr "start.html"
 
 #: u_help:hlpbarstatus
 msgid "status_bar.html"
-msgstr ""
+msgstr "barra_d_estat.html"
 
 #: u_help:hlpcfgsys
 msgid "system.html"
-msgstr ""
+msgstr "sistema.html"
 
