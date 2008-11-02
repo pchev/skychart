@@ -1,5 +1,13 @@
 Version 3.0.1.5 SVN  Release Notes
 
+November 2 changes:
+
+New Clock display from View/Clock menu.
+It is now possible to change the star size in line mode for display or printing from configuration/display.
+USNO-A display and search problem is fixed.
+New ASCOM driver.
+Solve for a few crash situation and other bug.
+
 October 18 changes:
 
 To reduce label overlap the label from diferent source are now draw at different position around an object. 
