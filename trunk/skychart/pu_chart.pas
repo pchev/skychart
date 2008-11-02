@@ -323,6 +323,9 @@ end;
 procedure Tf_chart.FormCreate(Sender: TObject);
 var i: integer;
 begin
+{$ifdef trace_debug}
+ WriteTrace('Create new chart');
+{$endif}
  locked:=true;
  lockkey:=false;
  SetLang;
@@ -387,6 +390,9 @@ end;
 procedure Tf_chart.FormDestroy(Sender: TObject);
 var i: integer;
 begin
+{$ifdef trace_debug}
+ WriteTrace('Destroy chart '+sc.cfgsc.chartname);
+{$endif}
 try
  locked:=true;
  if sc<>nil then sc.free;
@@ -433,12 +439,18 @@ var  savebg:Tcolor;
      starttime:TDateTime;
 {$endif}
 begin
+{$ifdef trace_debug}
+ WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh');
+{$endif}
 {$ifdef showtime}
 starttime:=now;
 {$endif}
-try
 if locked then exit;
 if lock_refresh then exit;
+try
+{$ifdef trace_debug}
+ WriteTrace('Chart '+sc.cfgsc.chartname+': Get refresh lock');
+{$endif}
  lock_refresh:=true;
  lastquick:=sc.cfgsc.quick;
  if not lastquick then screen.cursor:=crHourGlass;
@@ -446,12 +458,21 @@ if lock_refresh then exit;
  identlabel.visible:=false;
  Image1.width:=clientwidth;
  Image1.height:=clientheight;
+{$ifdef trace_debug}
+ WriteTrace('Chart '+sc.cfgsc.chartname+': Init '+inttostr(Image1.width)+'x'+inttostr(Image1.height));
+{$endif}
  sc.plot.init(Image1.width,Image1.height);
  savebg:=sc.plot.cfgplot.color[0];
  if (sc.plot.cfgplot.color[0]<clWhite) and
     not(sc.plot.cfgplot.AutoSkyColor and (sc.cfgsc.Projpole=AltAz)) then
     sc.plot.cfgplot.bgcolor:=sc.plot.cfgplot.skycolor[0];
+{$ifdef trace_debug}
+ WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map');
+{$endif}
  sc.Refresh;
+{$ifdef trace_debug}
+ WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
+{$endif}
  sc.plot.cfgplot.color[0]:=savebg;
  Image1.Invalidate;
  if not lastquick then begin
@@ -466,6 +487,9 @@ if lock_refresh then exit;
     Image1.Cursor:=ChartCursor;
 end;
 finally
+{$ifdef trace_debug}
+ WriteTrace('Chart '+sc.cfgsc.chartname+': Release refresh lock');
+{$endif}
  lock_refresh:=false;
  screen.cursor:=crDefault;
  if (not lastquick) and assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -483,6 +507,9 @@ if assigned(Fshowinfo) then begin
   {$endif}
 end;
 SetScrollBar;
+{$ifdef trace_debug}
+ WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh end');
+{$endif}
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
@@ -715,6 +742,9 @@ begin
 RefreshTimer.Enabled:=false;
 if locked then exit;
 //if sc<>nil then sc.plot.init(Image1.width,Image1.height);
+{$ifdef trace_debug}
+ WriteTrace('Chart '+sc.cfgsc.chartname+': RefreshTimer');
+{$endif}
 Refresh;
 end;
 
