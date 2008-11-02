@@ -821,6 +821,7 @@ begin
   multidoc1.maximized:=maxi;
   result:=true;
   Child.locked:=false;
+  Child.lock_refresh:=false;
   Child.Refresh;
   caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption ;
 end;
@@ -968,6 +969,7 @@ try
  InitFonts;
  SetLpanel1('');
  TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
+ // ensure a first chart is draw, even if it usually result in a double refresh on launch
  for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
@@ -1076,24 +1078,13 @@ try
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  if def_cfgsc.tz.TimeZoneFile='' then firstuse:=true;
  if firstuse then begin
-{$ifdef trace_debug}
- WriteTrace('First setup');
-{$endif}
+    {$ifdef trace_debug}
+     WriteTrace('First setup');
+    {$endif}
     FirstSetup
  end else
     if config_version<cdcver then ShowReleaseNotes(false);
  application.ProcessMessages; // apply any resizing
-{$ifdef trace_debug}
- WriteTrace('Create default chart');
-{$endif}
- CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
- Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
- AutoRefreshLock:=false;
- Autorefresh.enabled:=true;
-{$ifdef trace_debug}
- WriteTrace('Start server');
-{$endif}
- if cfgm.AutostartServer then StartServer;
 {$ifdef trace_debug}
  WriteTrace('Init calendar');
 {$endif}
@@ -1102,20 +1093,28 @@ try
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
- if InitialChartNum>1 then
 {$ifdef trace_debug}
- WriteTrace('Load supplementary charts');
+ WriteTrace('Create default chart');
 {$endif}
+ CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
+ Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
+ AutoRefreshLock:=false;
+ Autorefresh.enabled:=true;
+ if InitialChartNum>1 then begin
+    {$ifdef trace_debug}
+     WriteTrace('Load '+inttostr(InitialChartNum-1)+' supplementary charts');
+    {$endif}
     for i:=1 to InitialChartNum-1 do begin
       cfgp.Assign(def_cfgplot);
       cfgs.Assign(def_cfgsc);
       ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
       CreateChild(GetUniqueName(rsChart_, true) , false, cfgs, cfgp);
     end;
+ end;
  if nightvision then begin
-{$ifdef trace_debug}
- WriteTrace('Night vision');
-{$endif}
+    {$ifdef trace_debug}
+     WriteTrace('Night vision');
+    {$endif}
     nightvision:=false;
     ToolButtonNightVisionClick(self);
  end;
@@ -1123,6 +1122,12 @@ try
  WriteTrace('Read params');
 {$endif}
  ProcessParams2;
+if cfgm.AutostartServer then begin
+    {$ifdef trace_debug}
+     WriteTrace('Start server');
+    {$endif}
+    StartServer;
+end;
 except
   on E: Exception do begin
    WriteTrace('Initialization error: '+E.Message);

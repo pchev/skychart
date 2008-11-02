@@ -215,7 +215,12 @@ function Tskychart.Refresh :boolean;
 var savmag: double;
     savfilter,saveautofilter,savfillmw,scopemark:boolean;
 begin
-//writetrace('Refresh');
+{$ifdef trace_debug}
+  if cfgsc.quick and FPlot.cfgplot.red_move then
+     WriteTrace('SkyChart '+cfgsc.chartname+': Simplified Refresh')
+  else
+     WriteTrace('SkyChart '+cfgsc.chartname+': Full Refresh');
+{$endif}
 savmag:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
 savfilter:=Fcatalog.cfgshr.StarFilter;
 saveautofilter:=Fcatalog.cfgshr.AutoStarFilter;
@@ -224,6 +229,9 @@ scopemark:=cfgsc.ScopeMark;
 try
   chdir(appdir);
   // initialize chart value
+  {$ifdef trace_debug}
+  WriteTrace('SkyChart '+cfgsc.chartname+': Init');
+  {$endif}
   InitObservatory;
   InitTime;
   InitChart;
@@ -235,9 +243,14 @@ try
   end;
   InitColor; // after ComputePlanet
   // draw objects
+  {$ifdef trace_debug}
+   WriteTrace('SkyChart '+cfgsc.chartname+': Open catalogs');
+  {$endif}
   Fcatalog.OpenCat(cfgsc);
   InitCatalog;
-  //writetrace('Draw');
+  {$ifdef trace_debug}
+   WriteTrace('SkyChart '+cfgsc.chartname+': begin drawing');
+  {$endif}
   // first the extended object
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawMilkyWay; // most extended first
@@ -249,7 +262,6 @@ try
     if cfgsc.showline then DrawOutline;
   end;
   // then the lines
-  //writetrace('Draw lines');
   DrawGrid;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawConstL;
@@ -257,43 +269,38 @@ try
     DrawEcliptic;
     DrawGalactic;
   end;
-  //writetrace('Draw circle');
   DrawCircle;
   // the stars
-  //writetrace('Draw star');
   if cfgsc.showstars then DrawStars;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawDblStars;
     DrawVarStars;
   end;
   // finally the planets
-  //writetrace('Draw planet');
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawAsteroid;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanet then DrawPlanet;
   // and the horizon line if not transparent
-  //writetrace('Draw horizon');
   if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque then DrawHorizon;
 
   // the compass and scale
-  //writetrace('Draw compass');
   DrawCompass;
 
   // the labels
-  //writetrace('Draw label');
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
   // refresh telescope mark
   if scopemark then begin
-     //writetrace('Draw mark');
      DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
      cfgsc.ScopeMark:=true;
   end;
   // Draw the chart border
   DrawBorder;
   result:=true;
-  //writetrace('Draw end');
+{$ifdef trace_debug}
+   WriteTrace('SkyChart '+cfgsc.chartname+': end drawing');
+{$endif}
 finally
   if cfgsc.quick and FPlot.cfgplot.red_move then begin
      Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=savmag;
@@ -304,6 +311,9 @@ finally
   cfgsc.quick:=false;
   Fcatalog.CloseCat;
 end;
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': end Refresh');
+{$endif}
 end;
 
 function Tskychart.InitCatalog:boolean;
@@ -351,6 +361,9 @@ var i:integer;
      else Fcatalog.cfgcat.nebcaton[cat-BaseNeb]:=false;
   end;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': Init catalogs');
+{$endif}
 if Fcatalog.cfgshr.AutoStarFilter then Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
    else Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
 if cfgsc.quick and FPlot.cfgplot.red_move then Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgcat.StarMagMax-2;
@@ -418,6 +431,9 @@ end;
 
 function Tskychart.InitTime:boolean;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': Init time');
+{$endif}
 if cfgsc.UseSystemTime then SetCurrentTime(cfgsc);
 cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc);
 cfgsc.CurJD:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);
@@ -447,6 +463,9 @@ var u,p : double;
 const ratio = 0.99664719;
       H0 = 6378140.0 ;
 begin
+  {$ifdef trace_debug}
+  WriteTrace('SkyChart '+cfgsc.chartname+': Init observatory');
+  {$endif}
    p:=deg2rad*cfgsc.ObsLatitude;
    u:=arctan(ratio*tan(p));
    cfgsc.ObsRoSinPhi:=ratio*sin(u)+(cfgsc.ObsAltitude/H0)*sin(p);
@@ -459,6 +478,9 @@ end;
 function Tskychart.InitChart:boolean;
 begin
 // do not add more function here as this is also called at the chart create
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': Init chart');
+{$endif}
 cfgsc.xmin:=cfgsc.LeftMargin;
 cfgsc.ymin:=cfgsc.TopMargin;
 cfgsc.xmax:=Fplot.cfgchart.width-cfgsc.RightMargin;
@@ -474,6 +496,9 @@ end;
 function Tskychart.InitColor:boolean;
 var i : integer;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': Init colors');
+{$endif}
 if Fplot.cfgplot.color[0]>Fplot.cfgplot.color[11] then begin // white background
    Fplot.cfgplot.AutoSkyColor:=false;
    Fplot.cfgplot.StarPlot:=0;
@@ -530,6 +555,9 @@ function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,saveaz : double;
     s1,s2,s3: string;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': Init coordinates');
+{$endif}
 cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
 // clipping limit
@@ -547,7 +575,15 @@ PrecessionEcl(jd2000,cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
 // aberration constant
 aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
 // Planet position
-if not cfgsc.quick then Fplanet.ComputePlanet(cfgsc);
+if not cfgsc.quick then begin
+  {$ifdef trace_debug}
+   WriteTrace('SkyChart '+cfgsc.chartname+': Compute planet position');
+  {$endif}
+  Fplanet.ComputePlanet(cfgsc);
+  {$ifdef trace_debug}
+   WriteTrace('SkyChart '+cfgsc.chartname+': end Compute planet position');
+  {$endif}
+end;
 // is the chart to be centered on an object ?
  if cfgsc.TrackOn then begin
   case cfgsc.TrackType of
@@ -686,6 +722,9 @@ var rec:GcatRec;
   gk: string;
   al: TLabelAlign;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw stars');
+{$endif}
 fillchar(rec,sizeof(rec),0);
 if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
                  else cyear:=cfgsc.YPmon;
@@ -749,6 +788,9 @@ var rec:GcatRec;
   xx,yy:single;
   lid: integer;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
+{$endif}
 fillchar(rec,sizeof(rec),0);
 try
 if Fcatalog.OpenVarStar then
@@ -777,6 +819,9 @@ var rec:GcatRec;
   xx,yy:single;
   lid: integer;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
+{$endif}
 fillchar(rec,sizeof(rec),0);
 try
 if Fcatalog.OpenDblStar then
@@ -856,6 +901,9 @@ var rec:GcatRec;
     end;
 
   begin
+    {$ifdef trace_debug}
+     WriteTrace('SkyChart '+cfgsc.chartname+': draw deepsky objects');
+    {$endif}
     fillchar(rec,sizeof(rec),0);
     bmp:=Tbitmap.Create;
     try
@@ -930,6 +978,9 @@ var bmp:Tbitmap;
   x1,y1,x2,y2,rot: Double;
   xx,yy:single;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw background image');
+{$endif}
 result:=false;
 bmp:=Tbitmap.Create;
 try
@@ -976,6 +1027,9 @@ var rec:GcatRec;
   xx,yy: single;
   op,lw,col,fs: integer;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw nebula outlines');
+{$endif}
 fillchar(rec,sizeof(rec),0);
 try
 if Fcatalog.OpenLin then
@@ -1009,6 +1063,9 @@ begin
 result:=false;
 if not cfgsc.ShowMilkyWay then exit;
 if cfgsc.fov<(deg2rad*2) then exit;
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw milky way');
+{$endif}
 fillchar(rec,sizeof(rec),0);
 first:=true;
 lw:=1;fs:=1;
@@ -1048,6 +1105,9 @@ var
   draworder : array[1..11] of integer;
   ltxt: string;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw planets');
+{$endif}
 fov:=rad2deg*cfgsc.fov;
 pixscale:=abs(cfgsc.BxGlb)*deg2rad/3600;
 for j:=0 to cfgsc.SimNb-1 do begin
@@ -1169,6 +1229,9 @@ var
   ltxt:string;
 begin
 if cfgsc.ShowAsteroid then begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
+{$endif}
   Fplanet.ComputeAsteroid(cfgsc);
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[12]) then break;
@@ -1213,6 +1276,9 @@ var
   ltxt:string;
 begin
 if cfgsc.ShowComet then begin
+  {$ifdef trace_debug}
+  WriteTrace('SkyChart '+cfgsc.chartname+': draw comets');
+  {$endif}
   Fplanet.ComputeComet(cfgsc);
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[13]) then break;
@@ -1255,6 +1321,9 @@ var i,j,color : integer;
     x1,y1 : double;
     xx,yy,xp,yp:single;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw orbit path');
+{$endif}
 Color:=Fplot.cfgplot.Color[14];
 xp:=0;yp:=0;
 if cfgsc.ShowPlanet then for i:=1 to 11 do
@@ -1740,20 +1809,21 @@ end;
 Procedure Tskychart.DrawGrid;
 begin
 if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
-//    if Fcatalog.cfgshr.ShowCRose then DrawCRose;
-    if cfgsc.ShowGrid then
+    {$ifdef trace_debug}
+     WriteTrace('SkyChart '+cfgsc.chartname+': draw grid');
+    {$endif}
+    if cfgsc.ShowGrid then begin
        case cfgsc.ProjPole of
        Equat  :  DrawEqGrid;
        AltAz  :  begin DrawAzGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        Gal    :  begin DrawGalGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        Ecl    :  begin DrawEclGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        end
-    else if cfgsc.ShowEqGrid then begin
+    end else if cfgsc.ShowEqGrid then begin
       DrawEqGrid;
     end
 end else if cfgsc.ShowGrid then begin
     if cfgsc.ShowEqGrid then DrawEqGrid;
-//   DrawScale;
 end;
 end;
 
@@ -1795,6 +1865,9 @@ var fv,u:double;
     l1,l2:string;
 const sticksize=10;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw scale line');
+{$endif}
 DrawCRose;
 DrawPole(cfgsc.ProjPole);
 fv:=rad2deg*cfgsc.fov/3;
@@ -1824,6 +1897,9 @@ end;
 
 Procedure Tskychart.DrawBorder;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw chart border');
+{$endif}
 Fplot.PlotBorder(cfgsc.LeftMargin,cfgsc.RightMargin,cfgsc.TopMargin,cfgsc.BottomMargin);
 end;
 
@@ -2077,6 +2153,9 @@ var az,h,x1,y1 : double;
     x,y,xh,yh,xp,yp,x0,y0,xph,yph,x0h,y0h :single;
     first:boolean;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw horizon');
+{$endif}
 if cfgsc.ProjPole=Altaz then begin
   if cfgsc.hcentre<-(cfgsc.fov/6) then
      Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2, (cfgsc.ymax-cfgsc.ymin)
@@ -2449,6 +2528,9 @@ var
 begin
 result:=false;
 if not cfgsc.ShowConstl then exit;
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw constellation figures');
+{$endif}
 color := Fplot.cfgplot.Color[16];
 for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
   ra1:=Fcatalog.cfgshr.ConstL[i].ra1;
@@ -2479,6 +2561,9 @@ var
 begin
 result:=false;
 if not cfgsc.ShowConstB then exit;
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw constellation boundaries');
+{$endif}
 dm:=max(cfgsc.fov,0.1);
 color := Fplot.cfgplot.Color[17];
 x1:=0; y1:=0;
@@ -2509,6 +2594,9 @@ var l,b,e,ar,de,xx,yy : double;
 begin
 result:=false;
 if not cfgsc.ShowEcliptic then exit;
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw ecliptic line');
+{$endif}
 e:=ecliptic(cfgsc.JDChart);
 b:=0;
 first:=true;
@@ -2538,6 +2626,9 @@ var l,b,ar,de,xx,yy : double;
 begin
 result:=false;
 if not cfgsc.ShowGalactic then exit;
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw galactic line');
+{$endif}
 b:=0;
 first:=true;
 color := Fplot.cfgplot.Color[15];
@@ -2563,6 +2654,9 @@ var i,lid : integer;
     xx,yy:single;
     ra,de,x1,y1:double;
 begin
+  {$ifdef trace_debug}
+   WriteTrace('SkyChart '+cfgsc.chartname+': Init labels');
+  {$endif}
   numlabels:=0;
   for i:=0 to Fcatalog.cfgshr.ConstelNum-1 do begin
       ra:=Fcatalog.cfgshr.ConstelPos[i].ra;
@@ -2828,6 +2922,9 @@ var i,j,x,y,r: integer;
     skiplabel:boolean;
     al,av: TLabelAlign;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw labels');
+{$endif}
 Fplot.InitLabel;
 DrawCustomlabel;
 for i:=1 to numlabels do begin
@@ -2927,6 +3024,9 @@ var i : integer;
 begin
 //center mark
 if cfgsc.ShowCircle then begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw circle');
+{$endif}
  DrawFinderMark(cfgsc.racentre,cfgsc.decentre,false);
 end;
 //listed mark
@@ -2947,6 +3047,9 @@ Procedure Tskychart.DrawCRose;
 var rosex,rosey,roserd: integer;
     ar,de,a,h,l,b,x1,y1,x2,y2,rot: double;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw compass');
+{$endif}
  roserd:=Fcatalog.cfgshr.CRoseSz div 2;
  rosex:=cfgsc.xmin+10+roserd;
  rosey:=cfgsc.ymax-10-roserd;
