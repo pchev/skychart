@@ -430,9 +430,10 @@ end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then MemoCom.lines.add(buf);
 end;
-  db.UnLockTables;
-  db.commit;
-  db.flush('tables');
+db.UnLockTables;
+db.commit;
+db.flush('tables');
+memocom.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadCometFile.log');
 except
 end;
 end;
@@ -681,10 +682,11 @@ end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then memoast.lines.add(buf);
 end;
-  db.UnLockTables;
-  db.commit;
-  db.flush('tables');
+db.UnLockTables;
+db.commit;
+db.flush('tables');
 result:=(nerr=0);
+memoast.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadAsteroidFile.log');
 except
 end;
 end;
@@ -925,6 +927,7 @@ except
    Halt;
    end;
 end;
+memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadSampleData.log');
 end;
 
 procedure TCDCdb.GetCometList(filter:string; maxnumber:integer; list:TstringList; var cometid: array of string);
@@ -1278,7 +1281,7 @@ if db.Active then begin
        '"'+rec[0]+'",'+
        '"'+rec[1]+'",'+
        '"'+rec[2]+'")';
-    if not db.Query(sql) then Memo.lines.add(db.ErrorMessage)
+    if not db.Query(sql) then Memo.lines.add(rec[0]+blank+db.ErrorMessage)
        else result:=true;
   until(eof(f));
   db.Commit;
@@ -1286,6 +1289,7 @@ if db.Active then begin
   closefile(f);
   rec.Free;
 end;
+memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadCountryList.log');
 application.ProcessMessages;
 except
 end;
@@ -1340,7 +1344,7 @@ if db.Active then begin
          rec[4]+','+
          '0,'+
          '0)';
-       if not db.Query(sql) then Memo.lines.add(db.ErrorMessage)
+       if not db.Query(sql) then Memo.lines.add(rec[2]+blank+cc+blank+db.ErrorMessage)
           else inc(nl);
     end;
   until(eof(f));
@@ -1353,6 +1357,7 @@ if db.Active then begin
   application.ProcessMessages;
   result:=(nl>0);
 end;
+memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadWorldLocation.log');
 except
 end;
 end;
@@ -1405,7 +1410,7 @@ if db.Active then begin
          rec[10]+','+
          formatfloat('0.0',elev)+','+
          '0)';
-       if not db.Query(sql) then Memo.lines.add(db.ErrorMessage+blank+rec[0])
+       if not db.Query(sql) then Memo.lines.add(rec[0]+blank+rec[3]+blank+db.ErrorMessage)
           else inc(nl);
     end;
   until(eof(f));
@@ -1418,6 +1423,7 @@ if db.Active then begin
   Application.ProcessMessages;
   result:=(nl>0);
 end;
+memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadUSLocation.log');
 except
 end;
 end;
