@@ -1,5 +1,13 @@
 Коментарі до версії 3.0.1.5 SVN
 
+November 2 changes:
+
+New Clock display from View/Clock menu.
+It is now possible to change the star size in line mode for display or printing from configuration/display.
+USNO-A display and search problem is fixed.
+New ASCOM driver.
+Solve for a few crash situation and other bug.
+
 Зміни 18 жовтня:
 
 Щоб зменшити перекриття позначки позначкою від іншого каталогу, тепер різні позначки об'єкту розміщуються навколо нього. 
