@@ -7,6 +7,8 @@ It is now possible to change the star size in line mode for display or printing 
 USNO-A display and search problem is fixed.
 New ASCOM driver.
 Solve for a few crash situation and other bug.
+Improved nebulae common name search by Oleg Maliy.
+Chinese translation by Lam Xiang.
 
 October 18 changes:
 

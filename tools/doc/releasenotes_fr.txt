@@ -3,10 +3,12 @@ Version 3.0.1.5 SVN  Notes de la version
 Changement du 2 novembre:
 
 Nouveau menu Voir/Horloge 
-Il est maintenant possible de chiosir la taille des étoiles en mode ligne pour l'affichage ou l'impression depuis le menu configuration/affichage.
+Il est maintenant possible de choisir la taille des étoiles en mode ligne pour l'affichage ou l'impression depuis le menu configuration/affichage.
 L'affichage et la recherche d'étoiles USNO-A est corrigée.
 Nouveau pilote ASCOM.
 Solution pour certain plantage du programme et correction d'autres bug.
+Amélioration de la recherche par nom commun de nébuleuse par Oleg Maliy.
+Traduction en chinois par Lam Xiang.
 
 Changement du 18 octobre:
 
