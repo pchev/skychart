@@ -606,7 +606,7 @@ var gzopen : Tgzopen;
 // pseudo-constant only here
 Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
      VarObs : String;
-     ForceConfig, Configfile, SysDecimalSeparator, Lang : string;
+     ForceConfig, Configfile, Lang : string;
      compile_time:string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
