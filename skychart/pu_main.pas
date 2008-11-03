@@ -1418,8 +1418,8 @@ step:='Init';
 {$ifdef trace_debug}
  debugln(step);
 {$endif}
-SysDecimalSeparator:=DecimalSeparator;
 DecimalSeparator:='.';
+ThousandSeparator:=',';
 DateSeparator:='/';
 TimeSeparator:=':';
 NeedRestart:=false;
@@ -3694,7 +3694,11 @@ cplot.contrast:=ReadInteger(section,'contrast',cplot.contrast);
 cplot.saturation:=ReadInteger(section,'saturation',cplot.saturation);
 cplot.red_move:=ReadBool(section,'redmove',cplot.red_move);
 cplot.partsize:=ReadFloat(section,'partsize',cplot.partsize);
+cplot.partsize:=max(cplot.partsize,0.1);
+cplot.partsize:=min(cplot.partsize,5.0);
 cplot.magsize:=ReadFloat(section,'magsize',cplot.magsize);
+cplot.magsize:=max(cplot.magsize,1.0);
+cplot.magsize:=min(cplot.magsize,10.0);
 cplot.AutoSkycolor:=ReadBool(section,'AutoSkycolor',cplot.AutoSkycolor);
 for i:=0 to maxcolor do cplot.color[i]:=ReadInteger(section,'color'+inttostr(i),cplot.color[i]);
 for i:=0 to 7 do cplot.skycolor[i]:=ReadInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
@@ -3748,6 +3752,8 @@ csc.decentre:=ReadFloat(section,'decentre',csc.decentre);
 csc.acentre:=ReadFloat(section,'acentre',csc.acentre);
 csc.hcentre:=ReadFloat(section,'hcentre',csc.hcentre);
 csc.fov:=round(ReadFloat(section,'fov',csc.fov)/secarc)*secarc; // round to 1 arcsec
+csc.fov:=max(csc.fov,secarc);
+csc.fov:=min(csc.fov,pi2);
 csc.theta:=ReadFloat(section,'theta',csc.theta);
 buf:=trim(ReadString(section,'projtype',csc.projtype))+'A';
 csc.projtype:=buf[1];
