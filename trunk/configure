@@ -3,7 +3,7 @@
 # create freepascal Makefile to build skychart
 #
 # syntaxe :
-#            ./configure [fpc=path_to_fpc] [lazarus=path_to_lazarus] [prefix=install_path]
+#    ./configure [fpcbin=path_to_fpc_binaries] [fpc=path_to_fpc_units]  [lazarus=path_to_lazarus] [prefix=install_path]
 #
 
 # set parameters
@@ -33,31 +33,58 @@ dirs="skychart/component/synapse/source/lib \
      varobs \
      . "
 
-#  Try to locate fpc in PATH
-if [ -z "$fpc" ]; then
-   export fpc=$(which fpcmake | sed 's#/fpcmake##')
+#  Try to locate fpcbin in PATH
+if [ -z "$fpcbin" ]; then
+   export fpcbin=$(which fpcmake | sed 's#/fpcmake##')
 fi
-#  Try fpc in standard location
-if [ -z "$fpc" ]; then
+#  Try fpcbin in standard location
+if [ -z "$fpcbin" ]; then
   if [ -x /usr/bin/fpcmake ]; then 
-   export  fpc=/usr/bin
+   export  fpcbin=/usr/bin
   fi
 fi
-#  Try to locate fpc
+if [ -z "$fpcbin" ]; then
+  if [ -x /usr/local/bin/fpcmake ]; then 
+   export  fpcbin=/usr/local/bin
+  fi
+fi
+#  Try to locate fpcbin
+if [ -z "$fpcbin" ]; then
+   echo Warning! try to use locate to find FPC path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify fpcbin= on the command line.
+   export fpcbin=$(locate -n1 '\fpcmake'  | sed 's#/fpcmake##')
+   echo fpcbin=$fpcbin
+   read -p "[Press Enter to continue]"
+fi
+# fpcbin not found
+if [ -z "$fpcbin" ]; then
+   echo fpc compiler not found! 
+   echo Please specify the location of the fpc compiler with :
+   echo ./configure fpcbin=path_to_fpc
+   exit 1
+fi
+echo using fpcbin in $fpcbin
+
+#  Try fpc unit in standard location
 if [ -z "$fpc" ]; then
-   echo Warning! try to use locate to find FPC path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify fpc= on the command line.
-   export fpc=$(locate -n1 '\fpcmake'  | sed 's#/fpcmake##')
+  if [ -d /usr/share/fpcsrc ]; then 
+   export  fpc=/usr/share/fpcsrc
+  fi
+fi
+#  Try to locate fpc unit 
+if [ -z "$fpc" ]; then
+   echo Warning! try to use locate to find fpc source/units path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify fpc= on the command line.
+   export fpc=$(locate -n1 rtl/Package.fpc | sed 's#/rtl/Package.fpc##')
    echo fpc=$fpc
    read -p "[Press Enter to continue]"
 fi
 # fpc not found
 if [ -z "$fpc" ]; then
-   echo fpc compiler not found! 
-   echo Please specify the location of the fpc compiler with :
-   echo ./configure fpc=path_to_fpc
+   echo fpc units not found! 
+   echo Please specify the location of fpc units installation with :
+   echo ./configure fpc=path_to_fpc_unit
    exit 1
 fi
-echo using fpc in $fpc
+echo using fpc units in $fpc
 
 #  Try Lazarus in standard location
 if [ -z "$lazarus" ]; then
@@ -87,6 +114,7 @@ if [ -z "$prefix" ]; then
 fi
 echo installing in $prefix
 
+export FPCDIR=$fpc
 basedir=$(pwd)
 for dir in $dirs 
 do
@@ -94,8 +122,12 @@ do
    cd $dir
    sed "s#%LAZDIR%#$lazarus#" Makefile.in > Makefile.fpc
    sed -i "s#%PREFIX%#$prefix#" Makefile.fpc
-   $fpc/fpcmake -q Makefile.fpc
+   $fpcbin/fpcmake -q Makefile.fpc
+   rc=$?
    cd $basedir
+   if [[ $rc -ne 0 ]]; then 
+      exit $rc
+   fi
 done
 
 # replace fpc install by own script and add uninstall script
