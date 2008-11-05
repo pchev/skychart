@@ -278,6 +278,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultTmpDir='tmp';
       Default_dssdrive='/mnt/cdrom';
       DefaultVarObs='varobs';
+      DefaultCdC='skychart';
 {$endif}
 {$ifdef darwin}
       DefaultFontName='Helvetica';
@@ -292,6 +293,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultTmpDir='tmp';
       Default_dssdrive='/Volumes';
       DefaultVarObs='varobs';
+      DefaultCdC='skychart';
 {$endif}
 {$ifdef win32}
       DefaultFontName='Arial';
@@ -306,6 +308,7 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultTmpDir='tmp';
       Default_dssdrive='D:\';
       DefaultVarObs='varobs.exe';
+      DefaultCdC='skychart.exe';
 {$endif}
 
 type
@@ -605,7 +608,7 @@ var gzopen : Tgzopen;
 
 // pseudo-constant only here
 Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
-     VarObs : String;
+     VarObs,CdC : String;
      ForceConfig, Configfile, Lang : string;
      compile_time:string;
      ldeg,lmin,lsec : string;
