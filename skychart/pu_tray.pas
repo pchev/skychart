@@ -87,8 +87,14 @@ begin
 bmp.Canvas.Brush.Color:=clBlack;
 bmp.Canvas.Rectangle(0,0,bmp.Width,bmp.Height);
 bmp.Canvas.Font.Color:=clYellow;
-bmp.Canvas.TextOut(8,2,txt1);
-bmp.Canvas.TextOut(8,14,txt2);
+if bmp.width>30 then begin
+  bmp.Canvas.TextOut(8,2,txt1);
+  bmp.Canvas.TextOut(8,14,txt2);
+end else begin
+  bmp.Canvas.Font.Size:=6;
+  bmp.Canvas.TextOut(3,-1,txt1);
+  bmp.Canvas.TextOut(3,7,txt2);
+end;
 Systray.Icon.FreeImage;
 SysTray.Icon.Canvas.Draw(0,0,bmp);
 Systray.Hint:=hint1;
@@ -101,6 +107,11 @@ end;
 
 procedure Tf_tray.FormCreate(Sender: TObject);
 begin
+{$ifdef win32}
+  SysTray.Icon.LoadFromLazarusResource('black16x16');
+{$else}
+  SysTray.Icon.LoadFromLazarusResource('black32x32');
+{$endif}
   bmp:=TBitmap.Create;
   bmp.Width:=SysTray.Icon.Width;
   bmp.Height:=SysTray.Icon.Height;
@@ -298,6 +309,6 @@ end;
 
 initialization
   {$I pu_tray.lrs}
-
+  {$I blankicon.lrs}
 end.
 
