@@ -4,7 +4,11 @@ unit pu_tray;
 
 interface
 
-uses  u_util, u_constant, Inifiles, u_help,
+uses
+{$ifdef win32}
+  windows,
+{$endif}
+  u_util, u_constant, Inifiles, u_help,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   Menus, ExtCtrls, StdCtrls;
 
