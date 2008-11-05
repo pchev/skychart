@@ -87,6 +87,9 @@ begin
 bmp.Canvas.Brush.Color:=clBlack;
 bmp.Canvas.Rectangle(0,0,bmp.Width,bmp.Height);
 bmp.Canvas.Font.Color:=clYellow;
+bmp.Canvas.TextStyle.Opaque:=false;
+bmp.Canvas.Brush.Style:=bsClear;
+bmp.Canvas.Pen.Mode:=pmCopy;
 if bmp.width>30 then begin
   bmp.Canvas.TextOut(8,2,txt1);
   bmp.Canvas.TextOut(8,14,txt2);
