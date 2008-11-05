@@ -1,7 +1,7 @@
 object f_tray: Tf_tray
   Left = 244
   Height = 300
-  Top = 142
+  Top = 84
   Width = 400
   Caption = 'f_tray'
   ClientHeight = 300
@@ -9,7 +9,7 @@ object f_tray: Tf_tray
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object Button1: TButton
     Left = 272
     Height = 25
