@@ -5,10 +5,10 @@
     <Version Value="6"/>
     <General>
       <MainUnit Value="0"/>
-      <IconPath Value="./"/>
       <TargetFileExt Value=""/>
       <Title Value="cdcicon"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <Icon Value="AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAGQAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGvZz/rZRj/5RzMf+MayH/lHMx/6WMWv+1pYz/1s69/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC1nGv/pXsh/72MIf+9jCH/vYwp/72UMf+9lDn/vZRC/62MUv+1rYz/AAAAAAAAAAAAAAAAAAAAAAAAAAC1lFL/vZQp/86cKf/GlCn/vYwh/72MIf+1hBj/tYQh/7WEIf+9lDH/tZRS/62chP8AAAAAAAAAAAAAAAC9pXP/xpQp/9alMf/OnDn/zq1r/+fWtf9jWkr/zsa1/97GlP+9lDn/rYQY/8aUOf+tjEr/vbWl/wAAAAAAAAAAtYwp/9atOf/OpUL/xq2E/+fn5///////Wlpa/9bW1v/39/f/3tbG/72cUv+lexj/xpxK/5yEUv8AAAAAAAAAANalQv/etUr/xqVj/8bGvf/39/f/5+fn/1paWv+1tbX/hISE/87Ozv/n1rX/vYwx/7WMMf+1lFL/lJyU/5y1vf/nvVr/3r1a/62ce//Ozs7/9/f3/+fn5/9aWlr/MTEx/4SEhP////////fn/86lSv+thCH/tZRC/2uEa/9KlJz/785z/+fGc/9KQin/nJyc//f39/+cnJz/EBAQ/wAAAAD39/f/3t7e/2NjY/+UcyH/tYQY/62EIf+llHv/rdbe/+/WhP/v1oz/pZx7/7W1rf/n5+f/9/f3/3t7e//e3t7/5+fn/+fn5//37+f/zqVS/72MIf+teyH/WnNa/0KMnP/nznv/996l/8a1hP+clJT/zs7O/+fn5//39/f////////////39/f/3ta1/86lQv/OlCH/rYQp/8a9rf8AAAAA1q1a//fntf/v3q3/raWE/5ycnP+9vb3/xsbG/97e3v/e3t7/zs69/86ta//OnDH/xpQh/6WEQv8AAAAAAAAAANa1e//v3pz///fn/+fWnP+1rYT/nJyM/1JSSv+MjIz/ta2U/8atY//OpTn/1qUx/7WEIf+9rZT/AAAAAAAAAAAAAAAA1rVz//fntf//99b/79aM/97Gc//OrVr/zq1S/9atSv/WrUL/1qU5/72MKf+tlGv/AAAAAAAAAAAAAAAAAAAAAAAAAADWtXP/586M//fnrf/357X/996U/+fGa//etUr/zqU5/72UOf+1pXP/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANa9lP/exoT/zrV7/8alWv/GnEr/xqVS/8atc//Oxq3/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/>
+      <ActiveEditorIndexAtStart Value="4"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -44,10 +44,10 @@
         <Filename Value="cdcicon.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cdcicon"/>
-        <CursorPos X="62" Y="22"/>
+        <CursorPos X="19" Y="17"/>
         <TopLine Value="1"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -57,10 +57,10 @@
         <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_tray.lrs"/>
         <UnitName Value="pu_tray"/>
-        <CursorPos X="67" Y="280"/>
-        <TopLine Value="271"/>
+        <CursorPos X="57" Y="296"/>
+        <TopLine Value="277"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -113,7 +113,7 @@
         <CursorPos X="54" Y="63"/>
         <TopLine Value="44"/>
         <EditorIndex Value="3"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -152,123 +152,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="52" Column="23" TopLine="31"/>
+        <Caret Line="220" Column="8" TopLine="198"/>
       </Position1>
       <Position2>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="115" Column="18" TopLine="109"/>
+        <Caret Line="7" Column="42" TopLine="1"/>
       </Position2>
       <Position3>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="106" Column="31" TopLine="93"/>
+        <Caret Line="57" Column="30" TopLine="37"/>
       </Position3>
       <Position4>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="7" Column="36" TopLine="1"/>
+        <Caret Line="59" Column="15" TopLine="37"/>
       </Position4>
       <Position5>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="43" Column="57" TopLine="32"/>
+        <Filename Value="pu_clock.pas"/>
+        <Caret Line="135" Column="27" TopLine="97"/>
       </Position5>
       <Position6>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="255" Column="40" TopLine="212"/>
+        <Caret Line="111" Column="42" TopLine="87"/>
       </Position6>
       <Position7>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="220" Column="8" TopLine="198"/>
+        <Caret Line="109" Column="29" TopLine="87"/>
       </Position7>
       <Position8>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="7" Column="42" TopLine="1"/>
+        <Caret Line="161" Column="27" TopLine="135"/>
       </Position8>
       <Position9>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="57" Column="30" TopLine="37"/>
+        <Caret Line="156" Column="1" TopLine="135"/>
       </Position9>
       <Position10>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="59" Column="15" TopLine="37"/>
+        <Caret Line="32" Column="47" TopLine="31"/>
       </Position10>
       <Position11>
-        <Filename Value="pu_clock.pas"/>
-        <Caret Line="135" Column="27" TopLine="97"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="137" Column="3" TopLine="135"/>
       </Position11>
       <Position12>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="111" Column="42" TopLine="87"/>
+        <Caret Line="113" Column="56" TopLine="1"/>
       </Position12>
       <Position13>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="109" Column="29" TopLine="87"/>
+        <Caret Line="33" Column="43" TopLine="32"/>
       </Position13>
       <Position14>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="161" Column="27" TopLine="135"/>
+        <Caret Line="138" Column="17" TopLine="109"/>
       </Position14>
       <Position15>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="156" Column="1" TopLine="135"/>
+        <Caret Line="30" Column="69" TopLine="16"/>
       </Position15>
       <Position16>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="32" Column="47" TopLine="31"/>
+        <Caret Line="76" Column="11" TopLine="55"/>
       </Position16>
       <Position17>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="137" Column="3" TopLine="135"/>
+        <Caret Line="27" Column="44" TopLine="6"/>
       </Position17>
       <Position18>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="113" Column="56" TopLine="1"/>
+        <Caret Line="248" Column="1" TopLine="226"/>
       </Position18>
       <Position19>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="33" Column="43" TopLine="32"/>
+        <Caret Line="249" Column="1" TopLine="227"/>
       </Position19>
       <Position20>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="138" Column="17" TopLine="109"/>
+        <Caret Line="250" Column="3" TopLine="217"/>
       </Position20>
       <Position21>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="30" Column="69" TopLine="16"/>
+        <Caret Line="29" Column="47" TopLine="28"/>
       </Position21>
       <Position22>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="76" Column="11" TopLine="55"/>
+        <Caret Line="127" Column="9" TopLine="101"/>
       </Position22>
       <Position23>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="27" Column="44" TopLine="6"/>
+        <Caret Line="90" Column="15" TopLine="65"/>
       </Position23>
       <Position24>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="248" Column="1" TopLine="226"/>
+        <Caret Line="102" Column="17" TopLine="68"/>
       </Position24>
       <Position25>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="249" Column="1" TopLine="227"/>
+        <Caret Line="94" Column="1" TopLine="79"/>
       </Position25>
       <Position26>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="250" Column="3" TopLine="217"/>
+        <Caret Line="93" Column="1" TopLine="73"/>
       </Position26>
       <Position27>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="29" Column="47" TopLine="28"/>
+        <Caret Line="94" Column="1" TopLine="74"/>
       </Position27>
       <Position28>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="127" Column="9" TopLine="101"/>
+        <Caret Line="95" Column="1" TopLine="75"/>
       </Position28>
       <Position29>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="90" Column="15" TopLine="65"/>
+        <Caret Line="101" Column="1" TopLine="81"/>
       </Position29>
       <Position30>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="102" Column="17" TopLine="68"/>
+        <Caret Line="140" Column="53" TopLine="120"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

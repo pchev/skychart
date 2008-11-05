@@ -85,13 +85,15 @@ end;
 procedure Tf_tray.TrayMsg(txt1,txt2,hint1:string);
 begin
 bmp.Canvas.Brush.Color:=clBlack;
+bmp.Canvas.Brush.Style:=bsSolid;
 bmp.Canvas.Rectangle(0,0,bmp.Width,bmp.Height);
 bmp.Canvas.Font.Color:=clYellow;
 bmp.Canvas.TextStyle.Opaque:=false;
 bmp.Canvas.Brush.Style:=bsClear;
 bmp.Canvas.Pen.Mode:=pmCopy;
 if bmp.width>30 then begin
-  bmp.Canvas.TextOut(8,2,txt1);
+  bmp.Canvas.Font.Size:=8;
+  bmp.Canvas.TextOut(8,3,txt1);
   bmp.Canvas.TextOut(8,14,txt2);
 end else begin
   bmp.Canvas.Font.Size:=6;
@@ -135,7 +137,7 @@ if f_clock.Visible then begin
   f_clock.Hide;
 end else begin
   UpdateIcon(nil);
-  FormPos(f_clock,SysTray.GetPosition.X,SysTray.GetPosition.Y);
+  FormPos(f_clock,SysTray.GetPosition.X+SysTray.Icon.Width,SysTray.GetPosition.Y);
   f_clock.Show;
 end;
 end;
