@@ -1,7 +1,7 @@
 object f_tray: Tf_tray
-  Left = 247
+  Left = 240
   Height = 300
-  Top = 139
+  Top = 152
   Width = 400
   ActiveControl = PageControl1
   Caption = 'Skychart Icon Setup'
@@ -67,6 +67,7 @@ object f_tray: Tf_tray
         Height = 29
         Top = 111
         Width = 150
+        ItemHeight = 16
         ItemIndex = 0
         Items.Strings = (
           'clBlack'
@@ -183,6 +184,7 @@ object f_tray: Tf_tray
           'clSkyBlue'
           'clMedGray'
         )
+        MaxLength = -1
         Palette = cpFull
         TabOrder = 0
         Text = 'clBlack'
@@ -193,6 +195,7 @@ object f_tray: Tf_tray
         Height = 29
         Top = 111
         Width = 150
+        ItemHeight = 16
         ItemIndex = 0
         Items.Strings = (
           'clBlack'
@@ -309,6 +312,7 @@ object f_tray: Tf_tray
           'clSkyBlue'
           'clMedGray'
         )
+        MaxLength = -1
         Palette = cpFull
         TabOrder = 1
         Text = 'clBlack'

@@ -1115,6 +1115,12 @@ resourcestring
   rsMeanLocal = 'Mean local';
   rsJD2 = 'JD';
   rsClock = 'Clock';
+  rsSkychartIcon = 'Skychart Icon Setup';
+  rsAppearance = 'Appearance';
+  rsIconSize = 'Icon Size';
+  rsText = 'Text';
+  rsTextSize = 'Text Size';
+  rsIconTime = 'Icon Time';
 
 implementation
 

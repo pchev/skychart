@@ -8,7 +8,7 @@ uses
 {$ifdef win32}
   windows,
 {$endif}
-  u_util, u_constant, Inifiles, u_help,
+  u_help, u_translation, u_util, u_constant, Inifiles,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   Menus, ExtCtrls, StdCtrls, ComCtrls, ColorBox, Spin;
 
@@ -56,10 +56,13 @@ type
     icontype, icontextsize, iconinfo : integer;
     iconbg, icontext: TColor;
     bmp:TBitmap;
+    language:string;
     procedure TrayMsg(txt1,txt2,hint1:string);
     procedure UpdBmp(txt1,txt2:string; itype,isize:integer; ibg,ifg:TColor; ubmp:TBitmap);
     procedure UpdBmpTest(txt1,txt2:string);
     procedure GetAppdir;
+    procedure GetLanguage;
+    procedure SetLang;
     procedure SaveConfig;
     procedure LoadIcon;
   public
@@ -76,22 +79,45 @@ uses pu_clock;
 
 { Tf_tray }
 
+procedure Tf_tray.SetLang;
+begin
+caption:=rsSkychartIcon;
+TabSheet1.Caption:=rsAppearance;
+RadioGroup2.Caption:=rsIconSize;
+Label1.Caption:=rsBackground;
+Label2.Caption:=rsText;
+Label3.Caption:=rsTextSize;
+TabSheet2.Caption:=rsClock;
+RadioGroup1.Caption:=rsIconTime;
+RadioGroup1.Items[0]:=rsLegal;
+RadioGroup1.Items[1]:=rsUT;
+RadioGroup1.Items[2]:=rsMeanLocal;
+RadioGroup1.Items[3]:=rsSideral;
+Button1.Caption:=rsOK;
+Button2.Caption:=rsCancel;
+MenuItem1.caption:=rsClock;
+MenuItem2.caption:=rsSkyCharts;
+MenuItem3.caption:=rsSetup;
+MenuItem4.caption:=rsCalendar;
+MenuItem5.caption:=rsClose;
+end;
+
 procedure Tf_tray.Init;
 var inif: TMemIniFile;
-    section,buf : string;
+    section : string;
 begin
 {$ifdef mswindows}
 icontype:=0;
-iconbg:=clBlack;
-icontext:=clYellow;
-icontextsize:=6;
+iconbg:=clBtnFace;
+icontext:=clBtnText;
+icontextsize:=7;
 iconinfo:=3;
 Radiogroup2.enabled:=false;
 {$else}
 icontype:=1;
 iconbg:=clBtnFace;
 icontext:=clBtnText;
-icontextsize:=8;
+icontextsize:=9;
 iconinfo:=3;
 {$endif}
 f_clock.cfgsc:=Tconf_skychart.Create;
@@ -151,6 +177,8 @@ var h,p1,p2 : integer;
 begin
 ubmp.Canvas.Brush.Color:=ibg;
 ubmp.Canvas.Brush.Style:=bsSolid;
+ubmp.Canvas.Pen.Color:=ibg;
+ubmp.Canvas.Pen.Mode:=pmCopy;
 ubmp.Canvas.Rectangle(0,0,ubmp.Width,ubmp.Height);
 ubmp.Canvas.Font.Color:=ifg;
 ubmp.Canvas.TextStyle.Opaque:=false;
@@ -161,7 +189,7 @@ h:=ubmp.Canvas.TextHeight('0');
 case itype of
 0 : begin
     p1:=(ubmp.Height-round(1.7*h)) div 2;
-    p2:=round(0.8*h)+p1;
+    p2:=round(0.8*h)+p1-1;
     ubmp.Canvas.TextOut(3,p1,txt1);
     ubmp.Canvas.TextOut(3,p2,txt2);
     end;
@@ -249,6 +277,10 @@ begin
   bmp:=TBitmap.Create;
   SysTray.PopUpMenu:=PopupMenu1;
   GetAppDir;
+  GetLanguage;
+  lang:=u_translation.translate(language);
+  u_help.Translate(lang);
+  SetLang;
 end;
 
 procedure Tf_tray.FormDestroy(Sender: TObject);
@@ -297,11 +329,28 @@ begin
 end;
 
 procedure Tf_tray.UpdateIcon(Sender: TObject);
-var buf: string;
+var buf1,buf2: string;
 begin
   if not f_clock.Timer1.Enabled then f_clock.UpdateClock;
-  buf:=f_clock.clock4.Caption;
-  TrayMsg(copy(buf,1,2),copy(buf,4,2),f_clock.label4.Caption+blank+f_clock.clock4.caption);
+  case iconinfo of
+  0 : begin
+        buf1:=f_clock.clock1.Caption;
+        buf2:=f_clock.label1.Caption;
+      end;
+  1 : begin
+        buf1:=f_clock.clock2.Caption;
+        buf2:=f_clock.label2.Caption;
+      end;
+  2 : begin
+        buf1:=f_clock.clock3.Caption;
+        buf2:=f_clock.label3.Caption;
+      end;
+  3 : begin
+        buf1:=f_clock.clock4.Caption;
+        buf2:=f_clock.label4.Caption;
+      end;
+  end;
+  TrayMsg(copy(buf1,1,2),copy(buf1,4,2),buf2+blank+buf1);
 end;
 
 Procedure Tf_tray.GetAppDir;
@@ -448,6 +497,20 @@ end;
 {$ifdef trace_debug}
  debugln('ZoneDir='+ZoneDir);
 {$endif}
+end;
+
+Procedure Tf_tray.GetLanguage;
+var inif: TMemIniFile;
+begin
+language:='';
+if fileexists(configfile) then begin
+  inif:=TMeminifile.create(configfile);
+  try
+  language:=inif.ReadString('main','language','');
+  finally
+   inif.Free;
+  end;
+end;
 end;
 
 initialization
