@@ -20,6 +20,7 @@ if not exist %destdir% (
 echo Install skychart to %destdir%
 
 strip -v -o %destdir%\skychart.exe skychart\cdc.exe 
+strip -v -o %destdir%\cdcicon.exe skychart\cdcicon.exe
 strip -v -o %destdir%\varobs.exe varobs\varobs.exe
 strip -v -o %destdir%\varobs_lpv_bulletin.exe varobs\varobs_lpv_bulletin.exe
 xcopy /Y /F skychart\library\getdss\libgetdss.dll  %destdir%\

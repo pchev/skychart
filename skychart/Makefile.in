@@ -8,7 +8,7 @@ version=3.0.1.5
 
 [target]
 dirs=component library
-programs=cdc
+programs=cdc cdcicon
 
 [require]
 libc=y
@@ -50,6 +50,6 @@ export LCL_PLATFORM
 [rules]
 .PHONY: all
 
-all: component_all library_all cdc$(EXEEXT)
+all: component_all library_all cdc$(EXEEXT) cdcicon$(EXEEXT)
 
 
