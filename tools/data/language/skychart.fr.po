@@ -1,8 +1,8 @@
 # translation of skychart.fr.po
-# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
+# translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-11-01 12:12+0100\n"
+"PO-Revision-Date: 2008-11-06 17:33+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -251,6 +251,10 @@ msgstr "Mot de passe anonyme"
 #: u_translation:rsapparent
 msgid "Apparent"
 msgstr "Apparente"
+
+#: u_translation:rsappearance
+msgid "Appearance"
+msgstr "Apparence"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -1815,6 +1819,14 @@ msgstr "Serveur INDI"
 #: u_translation:rsindiserverpo
 msgid "INDI server Port"
 msgstr "Port serveur"
+
+#: u_translation:rsiconsize
+msgid "Icon Size"
+msgstr "Taille de l'icône"
+
+#: u_translation:rsicontime
+msgid "Icon Time Display"
+msgstr "Affichage de l'heure dans l'icône"
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
@@ -3524,6 +3536,10 @@ msgstr "Couleur du ciel"
 msgid "Skychart Homepage"
 msgstr "Page web de Cartes du Ciel"
 
+#: u_translation:rsskycharticon
+msgid "Skychart Icon Setup"
+msgstr "Configuration de l'icône"
+
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Goto"
@@ -3751,6 +3767,14 @@ msgstr "Télescope: %s"
 #: u_translation:rstemperaturec
 msgid "Temperature (Celsius)"
 msgstr "Température (Celsius)"
+
+#: u_translation:rstext
+msgid "Text"
+msgstr "Texte"
+
+#: u_translation:rstextsize
+msgid "Text Size"
+msgstr "Taille du texte"
 
 #: u_translation:rstextfilecata
 msgid "Text file catalog"

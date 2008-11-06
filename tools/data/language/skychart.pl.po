@@ -255,6 +255,10 @@ msgstr "Hasło anonimowego użytkownika"
 msgid "Apparent"
 msgstr "Pozorny"
 
+#: u_translation:rsappearance
+msgid "Appearance"
+msgstr ""
+
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "Dodaj do istniejącego katalogu"
@@ -1818,6 +1822,14 @@ msgstr "Host serwera INDI"
 #: u_translation:rsindiserverpo
 msgid "INDI server Port"
 msgstr "Port serwera INDI"
+
+#: u_translation:rsiconsize
+msgid "Icon Size"
+msgstr ""
+
+#: u_translation:rsicontime
+msgid "Icon Time Display"
+msgstr ""
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
@@ -3527,6 +3539,10 @@ msgstr "Kolor nieba"
 msgid "Skychart Homepage"
 msgstr "Strona projektu Skychart"
 
+#: u_translation:rsskycharticon
+msgid "Skychart Icon Setup"
+msgstr ""
+
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Okręcać"
@@ -3754,6 +3770,14 @@ msgstr "Teleskop: %s"
 #: u_translation:rstemperaturec
 msgid "Temperature (Celsius)"
 msgstr "temperatura (Celsjusz)"
+
+#: u_translation:rstext
+msgid "Text"
+msgstr ""
+
+#: u_translation:rstextsize
+msgid "Text Size"
+msgstr ""
 
 #: u_translation:rstextfilecata
 msgid "Text file catalog"

@@ -252,6 +252,10 @@ msgstr "Contrasenya anònima"
 msgid "Apparent"
 msgstr "Aparent"
 
+#: u_translation:rsappearance
+msgid "Appearance"
+msgstr ""
+
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "Afegeix a un catàleg existent"
@@ -1815,6 +1819,14 @@ msgstr "Servidor INDI"
 #: u_translation:rsindiserverpo
 msgid "INDI server Port"
 msgstr "Port servidor INDI"
+
+#: u_translation:rsiconsize
+msgid "Icon Size"
+msgstr ""
+
+#: u_translation:rsicontime
+msgid "Icon Time Display"
+msgstr ""
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
@@ -3524,6 +3536,10 @@ msgstr "Color del cel"
 msgid "Skychart Homepage"
 msgstr "Pàgina web de Cartes del Cel"
 
+#: u_translation:rsskycharticon
+msgid "Skychart Icon Setup"
+msgstr ""
+
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Ves a (Goto)"
@@ -3751,6 +3767,14 @@ msgstr "Telescopi: %s"
 #: u_translation:rstemperaturec
 msgid "Temperature (Celsius)"
 msgstr "Temperatura (Celsius)"
+
+#: u_translation:rstext
+msgid "Text"
+msgstr ""
+
+#: u_translation:rstextsize
+msgid "Text Size"
+msgstr ""
 
 #: u_translation:rstextfilecata
 msgid "Text file catalog"
