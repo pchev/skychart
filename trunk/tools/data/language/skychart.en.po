@@ -1,5 +1,4 @@
-# translation of skychart.en.po
-# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2008.
+# translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2008.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2008-11-01 12:13+0100\n"
@@ -250,6 +249,10 @@ msgstr ""
 
 #: u_translation:rsapparent
 msgid "Apparent"
+msgstr ""
+
+#: u_translation:rsappearance
+msgid "Appearance"
 msgstr ""
 
 #: u_translation:rsappendtoanex
@@ -1814,6 +1817,14 @@ msgstr ""
 
 #: u_translation:rsindiserverpo
 msgid "INDI server Port"
+msgstr ""
+
+#: u_translation:rsiconsize
+msgid "Icon Size"
+msgstr ""
+
+#: u_translation:rsicontime
+msgid "Icon Time Display"
 msgstr ""
 
 #: u_translation:rsyouliveonabi
@@ -3524,6 +3535,10 @@ msgstr ""
 msgid "Skychart Homepage"
 msgstr ""
 
+#: u_translation:rsskycharticon
+msgid "Skychart Icon Setup"
+msgstr ""
+
 #: u_translation:rsslew
 msgid "Slew"
 msgstr ""
@@ -3750,6 +3765,14 @@ msgstr ""
 
 #: u_translation:rstemperaturec
 msgid "Temperature (Celsius)"
+msgstr ""
+
+#: u_translation:rstext
+msgid "Text"
+msgstr ""
+
+#: u_translation:rstextsize
+msgid "Text Size"
 msgstr ""
 
 #: u_translation:rstextfilecata

@@ -1120,7 +1120,7 @@ resourcestring
   rsIconSize = 'Icon Size';
   rsText = 'Text';
   rsTextSize = 'Text Size';
-  rsIconTime = 'Icon Time';
+  rsIconTime = 'Icon Time Display';
 
 implementation
 
