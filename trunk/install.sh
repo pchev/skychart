@@ -18,6 +18,7 @@ install -m 755 -d $destdir/share/doc/skychart
 install -m 755 -d $destdir/share/pixmaps
 
 install -v -m 755 -s skychart/cdc  $destdir/bin/skychart
+install -v -m 755 -s skychart/cdcicon  $destdir/bin/cdcicon
 install -v -m 755 -s varobs/varobs  $destdir/bin/varobs
 install -v -m 755 -s varobs/varobs_lpv_bulletin  $destdir/bin/varobs_lpv_bulletin
 install -v -m 644 -s skychart/library/getdss/libgetdss.so  $destdir/lib/libgetdss.so

@@ -15,6 +15,7 @@ if not exist %destdir% (
 echo uninstall skychart from %destdir%
 
 del /F %destdir%\skychart.exe 
+del /F %destdir%\cdcicon.exe 
 del /F %destdir%\varobs.exe
 del /F %destdir%\varobs_lpv_bulletin.exe
 del /F %destdir%\libgetdss.dll

@@ -20,6 +20,7 @@ data/Themes/default/icon_blue
 data/Themes/default/icon_color
 data/Themes/default/icon_green
 data/Themes/default/icon_red
+data/varobs
 doc
 doc/html_doc
 doc/html_doc/en

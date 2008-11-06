@@ -9,6 +9,7 @@ fi
 echo Uninstall skychart from $destdir
 
 rm -fv $destdir/bin/skychart
+rm -fv $destdir/bin/cdcicon
 rm -fv $destdir/bin/varobs
 rm -fv $destdir/bin/varobs_lpv_bulletin
 rm -fv $destdir/lib/libgetdss.so
