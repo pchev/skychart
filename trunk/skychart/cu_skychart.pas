@@ -2043,7 +2043,14 @@ var x1,y1,al:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
-if (abs(a)<musec)or(abs(a-pi2)<musec)or(abs(a-pi)<musec) then w:=2 else w:=0;
+if (abs(a)<musec)or(abs(a-pi2)<musec)or(abs(a-pi)<musec) then begin
+   w:=2;
+   col := Fplot.cfgplot.Color[15];
+end else begin
+   w:=0;
+   col := Fplot.cfgplot.Color[12];
+end;
+
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
