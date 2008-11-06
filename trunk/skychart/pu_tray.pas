@@ -10,7 +10,7 @@ uses
 {$endif}
   u_util, u_constant, Inifiles, u_help,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  Menus, ExtCtrls, StdCtrls;
+  Menus, ExtCtrls, StdCtrls, ComCtrls, ColorBox, Spin;
 
 type
 
@@ -18,27 +18,50 @@ type
 
   Tf_tray = class(TForm)
     Button1: TButton;
+    Button2: TButton;
+    ColorBox1: TColorBox;
+    ColorBox2: TColorBox;
+    Imagetest: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    PageControl1: TPageControl;
     PopupMenu1: TPopupMenu;
+    RadioGroup1: TRadioGroup;
+    RadioGroup2: TRadioGroup;
+    SpinEdit1: TSpinEdit;
     SysTray: TTrayIcon;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     Timer1: TTimer;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure IconSettingChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure MenuItem3Click(Sender: TObject);
+    procedure MenuItem4Click(Sender: TObject);
     procedure MenuItem5Click(Sender: TObject);
     procedure UpdateIcon(Sender: TObject);
   private
     { private declarations }
+    icontype, icontextsize, iconinfo : integer;
+    iconbg, icontext: TColor;
     bmp:TBitmap;
     procedure TrayMsg(txt1,txt2,hint1:string);
+    procedure UpdBmp(txt1,txt2:string; itype,isize:integer; ibg,ifg:TColor; ubmp:TBitmap);
+    procedure UpdBmpTest(txt1,txt2:string);
     procedure GetAppdir;
+    procedure SaveConfig;
+    procedure LoadIcon;
   public
     { public declarations }
     procedure Init;
@@ -57,10 +80,30 @@ procedure Tf_tray.Init;
 var inif: TMemIniFile;
     section,buf : string;
 begin
+{$ifdef mswindows}
+icontype:=0;
+iconbg:=clBlack;
+icontext:=clYellow;
+icontextsize:=6;
+iconinfo:=3;
+Radiogroup2.enabled:=false;
+{$else}
+icontype:=1;
+iconbg:=clBtnFace;
+icontext:=clBtnText;
+icontextsize:=8;
+iconinfo:=3;
+{$endif}
 f_clock.cfgsc:=Tconf_skychart.Create;
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
+section:='icon';
+icontype:=ReadInteger(section,'Icon_type',icontype);
+iconbg:=ReadInteger(section,'Icon_bg',iconbg);
+icontext:=ReadInteger(section,'Icon_text',icontext);
+icontextsize:=ReadInteger(section,'Icon_textsize',icontextsize);
+iconinfo:=ReadInteger(section,'Icon_info',iconinfo);
 section:='observatory';
 f_clock.cfgsc.ObsLatitude := ReadFloat(section,'ObsLatitude',f_clock.cfgsc.ObsLatitude );
 f_clock.cfgsc.ObsLongitude := ReadFloat(section,'ObsLongitude',f_clock.cfgsc.ObsLongitude );
@@ -77,49 +120,133 @@ inif.Free;
 end;
 f_clock.cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 f_clock.cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(f_clock.cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+LoadIcon;
 UpdateIcon(nil);
 Timer1.Enabled:=true;
 SysTray.Visible:=true;
 end;
 
+procedure Tf_tray.SaveConfig;
+var inif: TMemIniFile;
+    section : string;
+begin
+inif:=TMeminifile.create(configfile);
+try
+with inif do begin
+section:='icon';
+WriteInteger(section,'Icon_type',icontype);
+WriteInteger(section,'Icon_bg',iconbg);
+WriteInteger(section,'Icon_text',icontext);
+WriteInteger(section,'Icon_textsize',icontextsize);
+WriteInteger(section,'Icon_info',iconinfo);
+UpdateFile;
+end;
+finally
+inif.Free;
+end;
+end;
+
+procedure Tf_tray.UpdBmp(txt1,txt2:string; itype,isize:integer; ibg,ifg:TColor; ubmp:TBitmap);
+var h,p1,p2 : integer;
+begin
+ubmp.Canvas.Brush.Color:=ibg;
+ubmp.Canvas.Brush.Style:=bsSolid;
+ubmp.Canvas.Rectangle(0,0,ubmp.Width,ubmp.Height);
+ubmp.Canvas.Font.Color:=ifg;
+ubmp.Canvas.TextStyle.Opaque:=false;
+ubmp.Canvas.Brush.Style:=bsClear;
+ubmp.Canvas.Pen.Mode:=pmCopy;
+ubmp.Canvas.Font.Size:=isize;
+h:=ubmp.Canvas.TextHeight('0');
+case itype of
+0 : begin
+    p1:=(ubmp.Height-round(1.7*h)) div 2;
+    p2:=round(0.8*h)+p1;
+    ubmp.Canvas.TextOut(3,p1,txt1);
+    ubmp.Canvas.TextOut(3,p2,txt2);
+    end;
+1 : begin
+    p1:=(ubmp.Height-round(1.7*h)) div 2;
+    p2:=round(0.8*h)+p1;
+    ubmp.Canvas.TextOut(3,p1,txt1);
+    ubmp.Canvas.TextOut(3,p2,txt2);
+    end;
+2 : begin
+    p1:=(ubmp.Height-h) div 2;
+    ubmp.Canvas.TextOut(8,p1,txt1+':'+txt2);
+    end;
+end;
+end;
+
+procedure Tf_tray.UpdBmpTest(txt1,txt2:string);
+begin
+case RadioGroup2.ItemIndex of
+  0 : begin
+       imagetest.Width:=16;
+       Imagetest.Height:=16;
+      end;
+  1 : begin
+       imagetest.Width:=32;
+       Imagetest.Height:=32;
+      end;
+  2 : begin
+       imagetest.Width:=64;
+       Imagetest.Height:=32;
+      end;
+end;
+imagetest.Picture.Bitmap.Width:=imagetest.Width;
+Imagetest.Picture.Bitmap.Height:=Imagetest.Height;
+UpdBmp(txt1,txt2,RadioGroup2.ItemIndex,SpinEdit1.Value,ColorBox1.Selected,ColorBox2.Selected,Imagetest.Picture.Bitmap);
+end;
+
 procedure Tf_tray.TrayMsg(txt1,txt2,hint1:string);
 begin
-bmp.Canvas.Brush.Color:=clBlack;
-bmp.Canvas.Brush.Style:=bsSolid;
-bmp.Canvas.Rectangle(0,0,bmp.Width,bmp.Height);
-bmp.Canvas.Font.Color:=clYellow;
-bmp.Canvas.TextStyle.Opaque:=false;
-bmp.Canvas.Brush.Style:=bsClear;
-bmp.Canvas.Pen.Mode:=pmCopy;
-if bmp.width>30 then begin
-  bmp.Canvas.Font.Size:=8;
-  bmp.Canvas.TextOut(8,3,txt1);
-  bmp.Canvas.TextOut(8,14,txt2);
-end else begin
-  bmp.Canvas.Font.Size:=6;
-  bmp.Canvas.TextOut(3,-1,txt1);
-  bmp.Canvas.TextOut(3,7,txt2);
-end;
+UpdBmp(txt1,txt2,icontype,icontextsize,iconbg,icontext,bmp);
 Systray.Icon.FreeImage;
+SysTray.Icon.Canvas.Draw(0,0,bmp);
+Systray.Icon.FreeImage; // yep two time is better
 SysTray.Icon.Canvas.Draw(0,0,bmp);
 Systray.Hint:=hint1;
 end;
 
 procedure Tf_tray.Button1Click(Sender: TObject);
 begin
+  icontype:=RadioGroup2.ItemIndex;
+  iconbg:=ColorBox1.Selected;
+  icontext:=ColorBox2.Selected;
+  icontextsize:=SpinEdit1.Value;
+  iconinfo:=RadioGroup1.ItemIndex;
+  SaveConfig;
   Hide;
+  LoadIcon;
+  UpdateIcon(nil);
+end;
+
+procedure Tf_tray.Button2Click(Sender: TObject);
+begin
+  Hide
+end;
+
+procedure Tf_tray.IconSettingChange(Sender: TObject);
+begin
+  UpdBmpTest('22','22');
+end;
+
+procedure Tf_tray.LoadIcon;
+begin
+  SysTray.Icon.FreeImage;
+  case icontype of
+   0 : SysTray.Icon.LoadFromLazarusResource('black16x16');
+   1 : SysTray.Icon.LoadFromLazarusResource('black32x32');
+   2 : SysTray.Icon.LoadFromLazarusResource('black32x64');
+  end;
+  bmp.Width:=SysTray.Icon.Width;
+  bmp.Height:=SysTray.Icon.Height;
 end;
 
 procedure Tf_tray.FormCreate(Sender: TObject);
 begin
-{$ifdef win32}
-  SysTray.Icon.LoadFromLazarusResource('black16x16');
-{$else}
-  SysTray.Icon.LoadFromLazarusResource('black32x32');
-{$endif}
   bmp:=TBitmap.Create;
-  bmp.Width:=SysTray.Icon.Width;
-  bmp.Height:=SysTray.Icon.Height;
   SysTray.PopUpMenu:=PopupMenu1;
   GetAppDir;
 end;
@@ -149,8 +276,19 @@ end;
 
 procedure Tf_tray.MenuItem3Click(Sender: TObject);
 begin
+  RadioGroup2.ItemIndex:=icontype;
+  ColorBox1.Selected:=iconbg;
+  ColorBox2.Selected:=icontext;
+  SpinEdit1.Value:=icontextsize;
+  RadioGroup1.ItemIndex:=iconinfo;
+  UpdBmptest('22','22');
   FormPos(Self,SysTray.GetPosition.X,SysTray.GetPosition.Y);
   Show;
+end;
+
+procedure Tf_tray.MenuItem4Click(Sender: TObject);
+begin
+  ShowMessage('Calendar');
 end;
 
 procedure Tf_tray.MenuItem5Click(Sender: TObject);

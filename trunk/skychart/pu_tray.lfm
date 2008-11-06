@@ -1,33 +1,408 @@
 object f_tray: Tf_tray
-  Left = 244
+  Left = 247
   Height = 300
-  Top = 84
+  Top = 139
   Width = 400
-  Caption = 'f_tray'
+  ActiveControl = PageControl1
+  Caption = 'Skychart Icon Setup'
   ClientHeight = 300
   ClientWidth = 400
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = False
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.26'
   object Button1: TButton
-    Left = 272
+    Left = 208
     Height = 25
-    Top = 256
+    Top = 264
     Width = 75
     Caption = 'OK'
     OnClick = Button1Click
     TabOrder = 0
   end
+  object PageControl1: TPageControl
+    Left = 8
+    Height = 248
+    Top = 8
+    Width = 384
+    ActivePage = TabSheet1
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Appearance'
+      ClientHeight = 223
+      ClientWidth = 382
+      object Label1: TLabel
+        Left = 15
+        Height = 16
+        Top = 96
+        Width = 74
+        Caption = 'Background'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        Left = 220
+        Height = 16
+        Top = 96
+        Width = 25
+        Caption = 'Text'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        Left = 15
+        Height = 16
+        Top = 154
+        Width = 53
+        Caption = 'Text Size'
+        ParentColor = False
+      end
+      object Imagetest: TImage
+        Left = 220
+        Height = 32
+        Top = 169
+        Width = 64
+      end
+      object ColorBox1: TColorBox
+        Left = 15
+        Height = 29
+        Top = 111
+        Width = 150
+        ItemIndex = 0
+        Items.Strings = (
+          'clBlack'
+          'clMaroon'
+          'clGreen'
+          'clOlive'
+          'clNavy'
+          'clPurple'
+          'clTeal'
+          'clGray'
+          'clSilver'
+          'clRed'
+          'clLime'
+          'clYellow'
+          'clBlue'
+          'clFuchsia'
+          'clAqua'
+          'clLtGray'
+          'clDkGray'
+          'clWhite'
+          'clCream'
+          'clNone'
+          'clDefault'
+          'clScrollBar'
+          'clBackground'
+          'clActiveCaption'
+          'clInactiveCaption'
+          'clMenu'
+          'clWindow'
+          'clWindowFrame'
+          'clMenuText'
+          'clWindowText'
+          'clCaptionText'
+          'clActiveBorder'
+          'clInactiveBorder'
+          'clAppWorkspace'
+          'clHighlight'
+          'clHighlightText'
+          'clBtnFace'
+          'clBtnShadow'
+          'clGrayText'
+          'clBtnText'
+          'clInactiveCaptionText'
+          'clBtnHighlight'
+          'cl3DDkShadow'
+          'cl3DLight'
+          'clInfoText'
+          'clInfoBk'
+          'clHotLight'
+          'clGradientActiveCaption'
+          'clGradientInactiveCaption'
+          'clForm'
+          'clEndColors'
+          'clColorDesktop'
+          'cl3DFace'
+          'cl3DShadow'
+          'cl3DHiLight'
+          'clBtnHiLight'
+          'clForeground'
+          'clButton'
+          'clLight'
+          'clMidlight'
+          'clDark'
+          'clMid'
+          'clText'
+          'clBrightText'
+          'clButtonText'
+          'clBase'
+          'clShadow'
+          'clHighlightedText'
+          'clNormalForeground'
+          'clNormalButton'
+          'clNormalLight'
+          'clNormalMidlight'
+          'clNormalDark'
+          'clNormalMid'
+          'clNormalText'
+          'clNormalBrightText'
+          'clNormalButtonText'
+          'clNormalBase'
+          'clNormalBackground'
+          'clNormalShadow'
+          'clNormalHighlight'
+          'clNormalHighlightedText'
+          'clDisabledForeground'
+          'clDisabledButton'
+          'clDisabledLight'
+          'clDisabledMidlight'
+          'clDisabledDark'
+          'clDisabledMid'
+          'clDisabledText'
+          'clDisabledBrightText'
+          'clDisabledButtonText'
+          'clDisabledBase'
+          'clDisabledBackground'
+          'clDisabledShadow'
+          'clDisabledHighlight'
+          'clDisabledHighlightedText'
+          'clActiveForeground'
+          'clActiveButton'
+          'clActiveLight'
+          'clActiveMidlight'
+          'clActiveDark'
+          'clActiveMid'
+          'clActiveText'
+          'clActiveBrightText'
+          'clActiveButtonText'
+          'clActiveBase'
+          'clActiveBackground'
+          'clActiveShadow'
+          'clActiveHighlight'
+          'clActiveHighlightedText'
+          'clMoneyGreen'
+          'clSkyBlue'
+          'clMedGray'
+        )
+        Palette = cpFull
+        TabOrder = 0
+        Text = 'clBlack'
+        OnChange = IconSettingChange
+      end
+      object ColorBox2: TColorBox
+        Left = 220
+        Height = 29
+        Top = 111
+        Width = 150
+        ItemIndex = 0
+        Items.Strings = (
+          'clBlack'
+          'clMaroon'
+          'clGreen'
+          'clOlive'
+          'clNavy'
+          'clPurple'
+          'clTeal'
+          'clGray'
+          'clSilver'
+          'clRed'
+          'clLime'
+          'clYellow'
+          'clBlue'
+          'clFuchsia'
+          'clAqua'
+          'clLtGray'
+          'clDkGray'
+          'clWhite'
+          'clCream'
+          'clNone'
+          'clDefault'
+          'clScrollBar'
+          'clBackground'
+          'clActiveCaption'
+          'clInactiveCaption'
+          'clMenu'
+          'clWindow'
+          'clWindowFrame'
+          'clMenuText'
+          'clWindowText'
+          'clCaptionText'
+          'clActiveBorder'
+          'clInactiveBorder'
+          'clAppWorkspace'
+          'clHighlight'
+          'clHighlightText'
+          'clBtnFace'
+          'clBtnShadow'
+          'clGrayText'
+          'clBtnText'
+          'clInactiveCaptionText'
+          'clBtnHighlight'
+          'cl3DDkShadow'
+          'cl3DLight'
+          'clInfoText'
+          'clInfoBk'
+          'clHotLight'
+          'clGradientActiveCaption'
+          'clGradientInactiveCaption'
+          'clForm'
+          'clEndColors'
+          'clColorDesktop'
+          'cl3DFace'
+          'cl3DShadow'
+          'cl3DHiLight'
+          'clBtnHiLight'
+          'clForeground'
+          'clButton'
+          'clLight'
+          'clMidlight'
+          'clDark'
+          'clMid'
+          'clText'
+          'clBrightText'
+          'clButtonText'
+          'clBase'
+          'clShadow'
+          'clHighlightedText'
+          'clNormalForeground'
+          'clNormalButton'
+          'clNormalLight'
+          'clNormalMidlight'
+          'clNormalDark'
+          'clNormalMid'
+          'clNormalText'
+          'clNormalBrightText'
+          'clNormalButtonText'
+          'clNormalBase'
+          'clNormalBackground'
+          'clNormalShadow'
+          'clNormalHighlight'
+          'clNormalHighlightedText'
+          'clDisabledForeground'
+          'clDisabledButton'
+          'clDisabledLight'
+          'clDisabledMidlight'
+          'clDisabledDark'
+          'clDisabledMid'
+          'clDisabledText'
+          'clDisabledBrightText'
+          'clDisabledButtonText'
+          'clDisabledBase'
+          'clDisabledBackground'
+          'clDisabledShadow'
+          'clDisabledHighlight'
+          'clDisabledHighlightedText'
+          'clActiveForeground'
+          'clActiveButton'
+          'clActiveLight'
+          'clActiveMidlight'
+          'clActiveDark'
+          'clActiveMid'
+          'clActiveText'
+          'clActiveBrightText'
+          'clActiveButtonText'
+          'clActiveBase'
+          'clActiveBackground'
+          'clActiveShadow'
+          'clActiveHighlight'
+          'clActiveHighlightedText'
+          'clMoneyGreen'
+          'clSkyBlue'
+          'clMedGray'
+        )
+        Palette = cpFull
+        TabOrder = 1
+        Text = 'clBlack'
+        OnChange = IconSettingChange
+      end
+      object SpinEdit1: TSpinEdit
+        Left = 15
+        Height = 23
+        Top = 169
+        Width = 146
+        MaxValue = 20
+        MinValue = 4
+        OnChange = IconSettingChange
+        TabOrder = 2
+        Value = 4
+      end
+      object RadioGroup2: TRadioGroup
+        Left = 15
+        Height = 72
+        Top = 8
+        Width = 353
+        AutoFill = True
+        Caption = 'Icon Size'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 3
+        ClientHeight = 55
+        ClientWidth = 349
+        Columns = 3
+        Items.Strings = (
+          '16x16'
+          '32x32'
+          '32x64'
+        )
+        OnClick = IconSettingChange
+        TabOrder = 3
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Clock'
+      ClientHeight = 223
+      ClientWidth = 382
+      object RadioGroup1: TRadioGroup
+        Left = 47
+        Height = 160
+        Top = 24
+        Width = 272
+        AutoFill = True
+        Caption = 'Icon Time'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 143
+        ClientWidth = 268
+        Items.Strings = (
+          'Legal'
+          'UT'
+          'Mean local'
+          'Sideral'
+        )
+        TabOrder = 0
+      end
+    end
+  end
+  object Button2: TButton
+    Left = 317
+    Height = 25
+    Top = 264
+    Width = 75
+    Cancel = True
+    Caption = 'Cancel'
+    OnClick = Button2Click
+    TabOrder = 2
+  end
   object PopupMenu1: TPopupMenu
-    left = 21
-    top = 16
+    left = 8
+    top = 264
     object MenuItem1: TMenuItem
       Caption = 'Clock'
       OnClick = MenuItem1Click
     end
     object MenuItem4: TMenuItem
       Caption = 'Calendar'
+      OnClick = MenuItem4Click
     end
     object MenuItem2: TMenuItem
       Caption = 'Skychart'
@@ -37,6 +412,9 @@ object f_tray: Tf_tray
       Caption = 'Setup'
       OnClick = MenuItem3Click
     end
+    object MenuItem6: TMenuItem
+      Caption = '-'
+    end
     object MenuItem5: TMenuItem
       Caption = 'Quit'
       OnClick = MenuItem5Click
@@ -44,14 +422,14 @@ object f_tray: Tf_tray
   end
   object SysTray: TTrayIcon
     OnClick = MenuItem1Click
-    left = 80
-    top = 16
+    left = 48
+    top = 264
   end
   object Timer1: TTimer
     Enabled = False
     Interval = 5000
     OnTimer = UpdateIcon
-    left = 24
-    top = 66
+    left = 96
+    top = 264
   end
 end
