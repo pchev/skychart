@@ -117,7 +117,7 @@ Radiogroup2.enabled:=false;
 icontype:=1;
 iconbg:=clBtnFace;
 icontext:=clBtnText;
-icontextsize:=9;
+icontextsize:=8;
 iconinfo:=3;
 {$endif}
 f_clock.cfgsc:=Tconf_skychart.Create;
@@ -173,7 +173,7 @@ end;
 end;
 
 procedure Tf_tray.UpdBmp(txt1,txt2:string; itype,isize:integer; ibg,ifg:TColor; ubmp:TBitmap);
-var h,p1,p2 : integer;
+var h,w,p1,p2,p3 : integer;
 begin
 ubmp.Canvas.Brush.Color:=ibg;
 ubmp.Canvas.Brush.Style:=bsSolid;
@@ -186,22 +186,26 @@ ubmp.Canvas.Brush.Style:=bsClear;
 ubmp.Canvas.Pen.Mode:=pmCopy;
 ubmp.Canvas.Font.Size:=isize;
 h:=ubmp.Canvas.TextHeight('0');
+w:=ubmp.Canvas.TextWidth('00');
 case itype of
 0 : begin
     p1:=(ubmp.Height-round(1.7*h)) div 2;
     p2:=round(0.8*h)+p1-1;
-    ubmp.Canvas.TextOut(3,p1,txt1);
-    ubmp.Canvas.TextOut(3,p2,txt2);
+    p3:=(ubmp.Width-w) div 2;
+    ubmp.Canvas.TextOut(p3,p1,txt1);
+    ubmp.Canvas.TextOut(p3,p2,txt2);
     end;
 1 : begin
     p1:=(ubmp.Height-round(1.7*h)) div 2;
     p2:=round(0.8*h)+p1;
-    ubmp.Canvas.TextOut(3,p1,txt1);
-    ubmp.Canvas.TextOut(3,p2,txt2);
+    p3:=(ubmp.Width-w) div 2;
+    ubmp.Canvas.TextOut(p3,p1,txt1);
+    ubmp.Canvas.TextOut(p3,p2,txt2);
     end;
 2 : begin
     p1:=(ubmp.Height-h) div 2;
-    ubmp.Canvas.TextOut(8,p1,txt1+':'+txt2);
+    p3:=(ubmp.Width-round(2.5*w)) div 2;
+    ubmp.Canvas.TextOut(p3,p1,txt1+':'+txt2);
     end;
 end;
 end;
