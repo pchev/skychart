@@ -3887,6 +3887,10 @@ msgstr "Tropisches Jahr"
 msgid "True position"
 msgstr "Wahre Position"
 
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
+
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
 msgstr "Trumpler Klasse"

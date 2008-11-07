@@ -3891,6 +3891,10 @@ msgstr "Rok zwrotnikowy"
 msgid "True position"
 msgstr "Prawdziwa pozycja"
 
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
+
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
 msgstr "Klasa Trumplera"

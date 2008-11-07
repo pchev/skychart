@@ -3889,6 +3889,10 @@ msgstr "Тропический год"
 msgid "True position"
 msgstr "Истинное положение"
 
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
+
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
 msgstr "Класс Трамплера"

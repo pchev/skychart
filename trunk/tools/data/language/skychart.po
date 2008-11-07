@@ -4282,3 +4282,7 @@ msgstr ""
 msgid "Icon Time Display"
 msgstr ""
 
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
+
