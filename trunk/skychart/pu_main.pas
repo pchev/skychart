@@ -2959,6 +2959,7 @@ P:=point(0,110);
   if f_clock=nil then begin
      f_clock:=Tf_clock.Create(application);
      f_clock.cfgsc:=def_cfgsc;
+     f_clock.planet:=planet;
   end;
   if f_clock.visible then
      f_clock.hide

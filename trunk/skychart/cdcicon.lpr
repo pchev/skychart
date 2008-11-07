@@ -9,7 +9,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms
   { you can add units after this }, pu_tray, pu_clock, cdccatalog, enhedit,
-  Printer4Lazarus, LResources;
+  Printer4Lazarus, LResources, satxy, series96, elp82, libsql;
 
 {$IFDEF WINDOWS}{$R cdcicon.rc}{$ENDIF}
 

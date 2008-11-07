@@ -4,7 +4,7 @@ unit pu_clock;
 
 interface
 
-uses  u_constant, u_util, u_translation, u_projection,
+uses  u_constant, u_util, u_translation, u_projection, cu_planet,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   ExtCtrls, StdCtrls;
 
@@ -17,12 +17,14 @@ type
     clock3: TLabel;
     clock4: TLabel;
     clock5: TLabel;
+    clock6: TLabel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     clock1: TLabel;
     Label5: TLabel;
+    Label6: TLabel;
     Panel1: TPanel;
     Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
@@ -39,11 +41,13 @@ type
     { private declarations }
     startpoint: TPoint;
     moving, lockmove: boolean;
+    Fplanet: Tplanet;
   public
     { public declarations }
     cfgsc: Tconf_skychart;
     procedure SetLang;
     procedure UpdateClock;
+    property planet: Tplanet read Fplanet write Fplanet;
   end;
 
 var
@@ -56,7 +60,7 @@ implementation
 procedure Tf_clock.UpdateClock;
 var y,m,d:word;
     n: TDateTime;
-    t,tz,jd0,st: double;
+    t,tz,jd0,jdt,st,ra,dec,dist,diam: double;
 begin
 n:=cfgsc.tz.NowLocalTime;
 decodedate(n,y,m,d);
@@ -64,11 +68,16 @@ t:=frac(n)*24;
 tz:=cfgsc.tz.SecondsOffset/3600;
 jd0:=jd(y,m,d,0);
 st:=Sidtim(jd0,t-tz,cfgsc.ObsLongitude)*rad2deg/15;
+jdt:=jd(y,m,d,t-tz);
+Fplanet.sun(jdt,ra,dec,dist,diam,true);
+precession(jd2000,jdt,ra,dec);
+ra:=ra*rad2deg/15;
 clock1.Caption:=TimToStr(rmod(t+24,24))+blank+cfgsc.tz.ZoneName;
 clock2.Caption:=TimToStr(rmod(t-tz+24,24));
 clock3.Caption:=TimToStr(rmod(t-tz-(cfgsc.ObsLongitude/15)+24,24));
-clock4.Caption:=TimToStr(rmod(st+24,24));
-clock5.Caption:=formatfloat(f5,jd(y,m,d,t-tz));
+clock4.Caption:=TimToStr(rmod(st-ra+24+12,24));
+clock5.Caption:=TimToStr(rmod(st+24,24));
+clock6.Caption:=formatfloat(f5,jdt);
 end;
 
 procedure Tf_clock.SetLang;
@@ -76,8 +85,9 @@ begin
 Label1.caption:=rsLegal+':';
 Label2.caption:=rsUT+':';
 Label3.caption:=rsMeanLocal+':';
-Label4.Caption:=rsSideral+':';
-label5.Caption:=rsJD2+':';
+Label4.caption:=rsTrueSolar+':';
+Label5.Caption:=rsSideral+':';
+label6.Caption:=rsJD2+':';
 end;
 
 procedure Tf_clock.FormCreate(Sender: TObject);
