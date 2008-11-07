@@ -3888,6 +3888,10 @@ msgstr "Tropický rok"
 msgid "True position"
 msgstr "Pravá pozice"
 
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
+
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
 msgstr "Trumpler třída"

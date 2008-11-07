@@ -2,24 +2,25 @@ object f_clock: Tf_clock
   Left = 240
   Height = 198
   Top = 234
-  Width = 340
+  Width = 375
+  ActiveControl = Panel1
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Clock'
   ClientHeight = 198
-  ClientWidth = 340
+  ClientWidth = 375
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnHide = FormHide
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object Panel1: TPanel
     Height = 198
-    Width = 340
+    Width = 375
     Align = alClient
     ClientHeight = 198
-    ClientWidth = 340
+    ClientWidth = 375
     Color = clBlack
     ParentColor = False
     TabOrder = 0
@@ -29,9 +30,9 @@ object f_clock: Tf_clock
     OnMouseUp = FormMouseUp
     object Label1: TLabel
       Left = 16
-      Height = 23
+      Height = 27
       Top = 16
-      Width = 61
+      Width = 72
       Caption = 'Legal :'
       Font.Color = clRed
       Font.Height = -20
@@ -42,9 +43,9 @@ object f_clock: Tf_clock
     end
     object Label2: TLabel
       Left = 16
-      Height = 23
+      Height = 27
       Top = 44
-      Width = 37
+      Width = 43
       Caption = 'UT :'
       Font.Color = clRed
       Font.Height = -20
@@ -55,9 +56,9 @@ object f_clock: Tf_clock
     end
     object Label3: TLabel
       Left = 16
-      Height = 23
+      Height = 27
       Top = 72
-      Width = 109
+      Width = 130
       Caption = 'Mean local :'
       Font.Color = clRed
       Font.Height = -20
@@ -68,9 +69,9 @@ object f_clock: Tf_clock
     end
     object Label4: TLabel
       Left = 16
-      Height = 23
+      Height = 27
       Top = 100
-      Width = 87
+      Width = 106
       Caption = 'True solar'
       Font.Color = clRed
       Font.Height = -20
@@ -80,10 +81,10 @@ object f_clock: Tf_clock
       OnMouseUp = FormMouseUp
     end
     object clock1: TLabel
-      Left = 144
-      Height = 23
+      Left = 168
+      Height = 27
       Top = 16
-      Width = 79
+      Width = 93
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -93,10 +94,10 @@ object f_clock: Tf_clock
       OnMouseUp = FormMouseUp
     end
     object clock2: TLabel
-      Left = 144
-      Height = 23
+      Left = 168
+      Height = 27
       Top = 44
-      Width = 79
+      Width = 93
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -106,10 +107,10 @@ object f_clock: Tf_clock
       OnMouseUp = FormMouseUp
     end
     object clock3: TLabel
-      Left = 144
-      Height = 23
+      Left = 168
+      Height = 27
       Top = 72
-      Width = 79
+      Width = 93
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -119,10 +120,10 @@ object f_clock: Tf_clock
       OnMouseUp = FormMouseUp
     end
     object clock4: TLabel
-      Left = 144
-      Height = 23
+      Left = 168
+      Height = 27
       Top = 100
-      Width = 79
+      Width = 93
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -133,9 +134,9 @@ object f_clock: Tf_clock
     end
     object Label5: TLabel
       Left = 16
-      Height = 23
+      Height = 27
       Top = 128
-      Width = 62
+      Width = 74
       Caption = 'Sideral'
       Font.Color = clRed
       Font.Height = -20
@@ -145,10 +146,10 @@ object f_clock: Tf_clock
       OnMouseUp = FormMouseUp
     end
     object clock5: TLabel
-      Left = 144
-      Height = 23
+      Left = 168
+      Height = 27
       Top = 128
-      Width = 79
+      Width = 93
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -159,9 +160,9 @@ object f_clock: Tf_clock
     end
     object Label6: TLabel
       Left = 16
-      Height = 23
+      Height = 27
       Top = 156
-      Width = 25
+      Width = 30
       Caption = 'JD:'
       Font.Color = clRed
       Font.Height = -20
@@ -169,10 +170,10 @@ object f_clock: Tf_clock
       ParentFont = False
     end
     object clock6: TLabel
-      Left = 144
-      Height = 23
+      Left = 168
+      Height = 27
       Top = 156
-      Width = 79
+      Width = 93
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20

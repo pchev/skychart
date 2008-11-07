@@ -3887,6 +3887,10 @@ msgstr "Árstíðaár"
 msgid "True position"
 msgstr "Sönn staða (séð frá miðju sólar)"
 
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
+
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
 msgstr "Trumpler flokkur"

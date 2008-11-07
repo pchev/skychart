@@ -3888,6 +3888,10 @@ msgstr "Any tròpic"
 msgid "True position"
 msgstr "Posició veritable"
 
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
+
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
 msgstr "Classe de Trumpler"

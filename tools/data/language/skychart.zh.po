@@ -3889,6 +3889,10 @@ msgstr "回归年"
 msgid "True position"
 msgstr "真位置"
 
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
+
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
 msgstr "特朗普勒分类"
