@@ -9,6 +9,10 @@ else
 SO_Name       = libplan404.so
 LIBFLAGS      = -shared -WL,-soname,$(SO_Name) -lc -lm
 endif
+ifneq ($(findstring W32,$(OSTYPE)),)
+SO_Name       = libplan404.dll
+LIBFLAGS      = -shared -WL,-soname,$(SO_Name)  -lm
+endif
 
 .PHONY: clean
 

@@ -9,7 +9,10 @@ else
 SO_Name = libgetdss.so
 LDFLAGS= -shared -WL,-soname,$(SO_Name)
 endif
-
+ifneq ($(findstring W32,$(OSTYPE)),)
+SO_Name = libgetdss.dll
+LDFLAGS= -shared -WL,-soname,$(SO_Name)
+endif
 OBJS = getdss_lib.o dss.o extr_fit.o getpiece.o \
 	hdcmprss.o bitinput.o decode.o dodecode.o hinv.o \
 	platelst.o qtreedec.o
