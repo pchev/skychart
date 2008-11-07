@@ -42,6 +42,7 @@ type
     Timer1: TTimer;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure IconSettingChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -57,6 +58,7 @@ type
     iconbg, icontext: TColor;
     bmp:TBitmap;
     language:string;
+    WantClose: boolean;
     procedure TrayMsg(txt1,txt2,hint1:string);
     procedure UpdBmp(txt1,txt2:string; itype,isize:integer; ibg,ifg:TColor; ubmp:TBitmap);
     procedure UpdBmpTest(txt1,txt2:string);
@@ -261,6 +263,11 @@ begin
   Hide
 end;
 
+procedure Tf_tray.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  if not WantClose then CloseAction:=caHide;
+end;
+
 procedure Tf_tray.IconSettingChange(Sender: TObject);
 begin
   UpdBmpTest('22','22');
@@ -280,6 +287,7 @@ end;
 
 procedure Tf_tray.FormCreate(Sender: TObject);
 begin
+  WantClose:=false;
   bmp:=TBitmap.Create;
   SysTray.PopUpMenu:=PopupMenu1;
   GetAppDir;
@@ -334,6 +342,7 @@ end;
 
 procedure Tf_tray.MenuItem5Click(Sender: TObject);
 begin
+  WantClose:=true;
   Close;
 end;
 
