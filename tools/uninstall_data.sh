@@ -30,7 +30,4 @@ do
 done
 
 rmdir -v $destdir/share/apps/skychart
-rmdir -v $destdir/share/apps
-rmdir -v $destdir/share
-rmdir -v $destdir
 
