@@ -19,25 +19,25 @@ if not exist %destdir% (
 
 echo Install skychart data to %destdir%
 
-for /F "usebackq" %%d in (`sed "s#/#\\\#g" dir.lst`) do (
+for /F "usebackq" %%d in (`sed "s#/#\\#g" dir.lst`) do (
   echo mkdir %destdir%\%%d 
   mkdir %destdir%\%%d 
 )
 
-for /F "usebackq" %%d in (`sed "s#/#\\\#g" data.lst`) do (
+for /F "usebackq" %%d in (`sed "s#/#\\#g" data.lst`) do (
   echo %%d - %destdir%\%%d
   copy /Y %%d %destdir%\%%d 
 )
 unzip -d %destdir%\data ..\system_integration\Windows\data\zoneinfo.zip 
 
-for /F "usebackq" %%d in (`sed "s#/#\\\#g" doc.lst`) do (
+for /F "usebackq" %%d in (`sed "s#/#\\#g" doc.lst`) do (
   echo %%d - %destdir%\%%d
   copy /Y %%d %destdir%\%%d 
 )
 
 unzip -d %destdir%\doc doc\wiki_doc.zip 
 
-for /F "usebackq" %%d in (`sed "s#/#\\\#g" cat.lst`) do (
+for /F "usebackq" %%d in (`sed "s#/#\\#g" cat.lst`) do (
   echo %%d - %destdir%\%%d
   copy /Y %%d %destdir%\%%d 
 )

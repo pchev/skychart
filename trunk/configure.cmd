@@ -2,35 +2,58 @@
 rem
 rem create freepascal Makefile to build skychart
 rem
-rem syntaxe :
-rem            ./configure [fpc=path_to_fpc] [lazarus=path_to_lazarus] [prefix=install_path]
-rem
+rem set the variable below before to run
 
-set lazarus=D:\\\lazarus
-set fpc=D:\\\lazarus\\\fpc\\\2.2.2\\\bin\\\i386-win32
-set prefix=C:\\\temp
+rem where you install sed  ( http://gnuwin32.sourceforge.net/packages/sed.htm )
+set sed=C:\appli\sed
+
+rem where you install fpc 
+set fpc=C:\appli\lazarus\fpc\2.2.2\bin\i386-win32
+
+rem where you install lazarus (keep double \\ for path) 
+set lazarus=C:\\appli\\lazarus
+
+rem where you want to install CdC (keep double \\ for path)
+set prefix=C:\\appli\\cdc
+
+rem end of parameters
+
 set basedir=%CD%
+set PATH=%basedir%;%fpc%;%sed%;C:\WINDOWS\system32;C:\WINDOWS
 
-set PATH=%basedir%;%fpc%;C:\WINDOWS\system32;C:\WINDOWS
+rem test sed
+sed --version
+if %ERRORLEVEL% NEQ 0 (
+  echo .
+  echo Please edit configure.cmd to set the path to fpc, lazarus and sed
+  goto :EOF
+)
+rem test fpc
+fpc -iV
+if %ERRORLEVEL% NEQ 0 (
+  echo .
+  echo Please edit configure.cmd to set the path to fpc, lazarus and sed
+  goto :EOF
+)
 
-echo skychart\\\component\\\synapse\\\source\\\lib > dirs.lst
-echo skychart\\\component\\\libsql >> dirs.lst
-echo skychart\\\component\\\mrecsort >> dirs.lst
-echo skychart\\\component\\\uniqueinstance >> dirs.lst
-echo skychart\\\component\\\xmlparser >> dirs.lst
-echo skychart\\\component\\\enhedits >> dirs.lst
-echo skychart\\\component\\\radec >> dirs.lst
-echo skychart\\\component\\\zoomimage >> dirs.lst
-echo skychart\\\component\\\downloaddialog >> dirs.lst
-echo skychart\\\component\\\jdcalendar >> dirs.lst
-echo skychart\\\component\\\multidoc >> dirs.lst
-echo skychart\\\component\\\vo >> dirs.lst
-echo skychart\\\component >> dirs.lst
-echo skychart\\\library\\\catalog >> dirs.lst
-echo skychart\\\library\\\elp82 >> dirs.lst
-echo skychart\\\library\\\satxy >> dirs.lst
-echo skychart\\\library\\\series96 >> dirs.lst
-echo skychart\\\library >> dirs.lst
+echo skychart\component\synapse\source\lib > dirs.lst
+echo skychart\component\libsql >> dirs.lst
+echo skychart\component\mrecsort >> dirs.lst
+echo skychart\component\uniqueinstance >> dirs.lst
+echo skychart\component\xmlparser >> dirs.lst
+echo skychart\component\enhedits >> dirs.lst
+echo skychart\component\radec >> dirs.lst
+echo skychart\component\zoomimage >> dirs.lst
+echo skychart\component\downloaddialog >> dirs.lst
+echo skychart\component\jdcalendar >> dirs.lst
+echo skychart\component\multidoc >> dirs.lst
+echo skychart\component\vo >> dirs.lst
+echo skychart\component >> dirs.lst
+echo skychart\library\catalog >> dirs.lst
+echo skychart\library\elp82 >> dirs.lst
+echo skychart\library\satxy >> dirs.lst
+echo skychart\library\series96 >> dirs.lst
+echo skychart\library >> dirs.lst
 echo skychart >> dirs.lst
 echo varobs >> dirs.lst
 echo . >> dirs.lst
