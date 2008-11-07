@@ -1,12 +1,12 @@
 object f_clock: Tf_clock
-  Left = 271
-  Height = 178
-  Top = 224
+  Left = 240
+  Height = 198
+  Top = 234
   Width = 340
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Clock'
-  ClientHeight = 178
+  ClientHeight = 198
   ClientWidth = 340
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
@@ -15,10 +15,10 @@ object f_clock: Tf_clock
   ParentFont = False
   LCLVersion = '0.9.26'
   object Panel1: TPanel
-    Height = 178
+    Height = 198
     Width = 340
     Align = alClient
-    ClientHeight = 178
+    ClientHeight = 198
     ClientWidth = 340
     Color = clBlack
     ParentColor = False
@@ -29,9 +29,9 @@ object f_clock: Tf_clock
     OnMouseUp = FormMouseUp
     object Label1: TLabel
       Left = 16
-      Height = 25
+      Height = 23
       Top = 16
-      Width = 68
+      Width = 61
       Caption = 'Legal :'
       Font.Color = clRed
       Font.Height = -20
@@ -42,9 +42,9 @@ object f_clock: Tf_clock
     end
     object Label2: TLabel
       Left = 16
-      Height = 25
-      Top = 46
-      Width = 41
+      Height = 23
+      Top = 44
+      Width = 37
       Caption = 'UT :'
       Font.Color = clRed
       Font.Height = -20
@@ -55,9 +55,9 @@ object f_clock: Tf_clock
     end
     object Label3: TLabel
       Left = 16
-      Height = 25
-      Top = 76
-      Width = 121
+      Height = 23
+      Top = 72
+      Width = 109
       Caption = 'Mean local :'
       Font.Color = clRed
       Font.Height = -20
@@ -68,10 +68,10 @@ object f_clock: Tf_clock
     end
     object Label4: TLabel
       Left = 16
-      Height = 25
-      Top = 106
-      Width = 84
-      Caption = 'Sideral :'
+      Height = 23
+      Top = 100
+      Width = 87
+      Caption = 'True solar'
       Font.Color = clRed
       Font.Height = -20
       ParentColor = False
@@ -81,9 +81,9 @@ object f_clock: Tf_clock
     end
     object clock1: TLabel
       Left = 144
-      Height = 25
+      Height = 23
       Top = 16
-      Width = 93
+      Width = 79
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -94,9 +94,9 @@ object f_clock: Tf_clock
     end
     object clock2: TLabel
       Left = 144
-      Height = 25
-      Top = 46
-      Width = 93
+      Height = 23
+      Top = 44
+      Width = 79
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -107,9 +107,9 @@ object f_clock: Tf_clock
     end
     object clock3: TLabel
       Left = 144
-      Height = 25
-      Top = 76
-      Width = 93
+      Height = 23
+      Top = 72
+      Width = 79
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -120,9 +120,9 @@ object f_clock: Tf_clock
     end
     object clock4: TLabel
       Left = 144
-      Height = 25
-      Top = 106
-      Width = 93
+      Height = 23
+      Top = 100
+      Width = 79
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -133,10 +133,10 @@ object f_clock: Tf_clock
     end
     object Label5: TLabel
       Left = 16
-      Height = 25
-      Top = 136
-      Width = 29
-      Caption = 'JD:'
+      Height = 23
+      Top = 128
+      Width = 62
+      Caption = 'Sideral'
       Font.Color = clRed
       Font.Height = -20
       ParentColor = False
@@ -146,9 +146,9 @@ object f_clock: Tf_clock
     end
     object clock5: TLabel
       Left = 144
-      Height = 25
-      Top = 136
-      Width = 93
+      Height = 23
+      Top = 128
+      Width = 79
       Caption = '00:00:00'
       Font.Color = clRed
       Font.Height = -20
@@ -156,6 +156,28 @@ object f_clock: Tf_clock
       ParentFont = False
       OnMouseDown = FormMouseDown
       OnMouseUp = FormMouseUp
+    end
+    object Label6: TLabel
+      Left = 16
+      Height = 23
+      Top = 156
+      Width = 25
+      Caption = 'JD:'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
+    end
+    object clock6: TLabel
+      Left = 144
+      Height = 23
+      Top = 156
+      Width = 79
+      Caption = '00:00:00'
+      Font.Color = clRed
+      Font.Height = -20
+      ParentColor = False
+      ParentFont = False
     end
   end
   object Timer1: TTimer

@@ -8,7 +8,7 @@ uses
 {$ifdef win32}
   windows,
 {$endif}
-  u_help, u_translation, u_util, u_constant, Inifiles,
+  u_help, u_translation, u_util, u_constant, cu_planet, Inifiles,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   Menus, ExtCtrls, StdCtrls, ComCtrls, ColorBox, Spin;
 
@@ -92,7 +92,8 @@ RadioGroup1.Caption:=rsIconTime;
 RadioGroup1.Items[0]:=rsLegal;
 RadioGroup1.Items[1]:=rsUT;
 RadioGroup1.Items[2]:=rsMeanLocal;
-RadioGroup1.Items[3]:=rsSideral;
+RadioGroup1.Items[3]:=rsTrueSolar;
+RadioGroup1.Items[4]:=rsSideral;
 Button1.Caption:=rsOK;
 Button2.Caption:=rsCancel;
 MenuItem1.caption:=rsClock;
@@ -111,16 +112,17 @@ icontype:=0;
 iconbg:=clBtnFace;
 icontext:=clBtnText;
 icontextsize:=7;
-iconinfo:=3;
+iconinfo:=4;
 Radiogroup2.enabled:=false;
 {$else}
 icontype:=1;
 iconbg:=clBtnFace;
 icontext:=clBtnText;
 icontextsize:=8;
-iconinfo:=3;
+iconinfo:=4;
 {$endif}
 f_clock.cfgsc:=Tconf_skychart.Create;
+f_clock.planet:=TPlanet.Create(self);
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
@@ -291,7 +293,10 @@ procedure Tf_tray.FormDestroy(Sender: TObject);
 begin
   SysTray.Hide;
   bmp.free;
-  if (f_clock<>nil)and(f_clock.cfgsc<>nil) then f_clock.cfgsc.Free;
+  if (f_clock<>nil)then begin
+    if (f_clock.cfgsc<>nil) then f_clock.cfgsc.Free;
+    if (f_clock.planet<>nil) then f_clock.planet.Free;
+  end;
 end;
 
 procedure Tf_tray.MenuItem1Click(Sender: TObject);
@@ -352,6 +357,10 @@ begin
   3 : begin
         buf1:=f_clock.clock4.Caption;
         buf2:=f_clock.label4.Caption;
+      end;
+  4 : begin
+        buf1:=f_clock.clock5.Caption;
+        buf2:=f_clock.label5.Caption;
       end;
   end;
   TrayMsg(copy(buf1,1,2),copy(buf1,4,2),buf2+blank+buf1);

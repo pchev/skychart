@@ -1121,6 +1121,7 @@ resourcestring
   rsText = 'Text';
   rsTextSize = 'Text Size';
   rsIconTime = 'Icon Time Display';
+  rsTrueSolar = 'True solar';
 
 implementation
 
