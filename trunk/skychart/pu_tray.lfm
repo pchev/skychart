@@ -7,6 +7,7 @@ object f_tray: Tf_tray
   Caption = 'Skychart Icon Setup'
   ClientHeight = 300
   ClientWidth = 400
+  OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = False
@@ -184,7 +185,6 @@ object f_tray: Tf_tray
           'clSkyBlue'
           'clMedGray'
         )
-        MaxLength = -1
         Palette = cpFull
         TabOrder = 0
         Text = 'clBlack'
@@ -312,7 +312,6 @@ object f_tray: Tf_tray
           'clSkyBlue'
           'clMedGray'
         )
-        MaxLength = -1
         Palette = cpFull
         TabOrder = 1
         Text = 'clBlack'
