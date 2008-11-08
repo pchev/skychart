@@ -27,6 +27,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
+  InterfaceBase, LCLVersion, // version number
   Forms, Classes, Sysutils, Dialogs, cu_catalog, cu_skychart, cu_plot, cu_planet,
   cu_indiclient, cu_fits, cu_database, cu_telescope, pu_info, pu_image,
   pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
@@ -42,6 +43,7 @@ uses
   pu_clock;
   
 const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
+      compile_v='Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%};
 
 var i : integer;
     buf, p, step : string;
@@ -69,9 +71,11 @@ begin
   if buf<>'' then Params.Add(buf);
 
   compile_time:=compile_t;
+  compile_version:='Lazarus '+lcl_version+' '+compile_v+'-'+LCLPlatformDirNames[WidgetSet.LCLPlatform];
   {$ifdef trace_debug}
   debugln('Program version : '+cdcversion);
   debugln('Program compiled: '+compile_time);
+  debugln('Compiler version: '+compile_version);
   {$endif}
   Application.Title:='Cartes du Ciel';
   {$ifdef trace_debug}

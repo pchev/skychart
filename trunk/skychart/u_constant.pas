@@ -37,7 +37,7 @@ type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:no
 
 const cdcversion = 'Version 3 beta 0.1.5 svn';
       cdcver     = '3.0.1.5d';
-      cdccpy = 'Copyright (C) 2002-2006 Patrick Chevalley';
+      cdccpy = 'Copyright (C) 2002-2008 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,' ;
       MaxSim = 100 ;
@@ -610,7 +610,7 @@ var gzopen : Tgzopen;
 Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
      VarObs,CdC : String;
      ForceConfig, Configfile, Lang : string;
-     compile_time:string;
+     compile_time,compile_version:string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
      nightvision : Boolean;

@@ -14,7 +14,7 @@ object f_about: Tf_about
   OnCreate = FormCreate
   ParentFont = False
   Position = poMainFormCenter
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object Panel2: TPanel
     Height = 263
     Width = 496
@@ -2385,9 +2385,9 @@ object f_about: Tf_about
           ClientHeight = 195
           object Label5: TLabel
             Left = 20
-            Height = 20
+            Height = 18
             Top = 30
-            Width = 63
+            Width = 80
             Caption = 'Sky Charts'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2395,9 +2395,9 @@ object f_about: Tf_about
           end
           object Label6: TLabel
             Left = 20
-            Height = 20
+            Height = 18
             Top = 6
-            Width = 82
+            Width = 105
             Caption = 'Cartes du Ciel'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2405,8 +2405,8 @@ object f_about: Tf_about
           end
           object Label7: TLabel
             Left = 20
-            Height = 68
-            Top = 99
+            Height = 49
+            Top = 118
             Width = 380
             AutoSize = False
             Caption = 'Label7'
@@ -2415,18 +2415,26 @@ object f_about: Tf_about
           end
           object Label8: TLabel
             Left = 20
-            Height = 20
-            Top = 78
-            Width = 55
+            Height = 16
+            Top = 94
+            Width = 60
             Caption = 'Copyright'
             ParentColor = False
           end
           object Label2: TLabel
             Left = 20
-            Height = 20
+            Height = 16
             Top = 54
-            Width = 43
+            Width = 47
             Caption = 'Version'
+            ParentColor = False
+          end
+          object Label4: TLabel
+            Left = 20
+            Height = 16
+            Top = 74
+            Width = 55
+            Caption = 'Compiler'
             ParentColor = False
           end
           object Panel1: TPanel
