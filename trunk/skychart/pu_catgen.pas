@@ -184,7 +184,7 @@ type
     textpos : array [0..40] of array[1..2] of integer;
     calc : array[0..40,1..2] of double;
     Lra,Lde,ListIndex,nebulaesizescale,l_fixe,nbalt : integer;
-    catheader : Tcatheader;
+    catheader : TFileHeader;
     catinfo : TCatHdrInfo;
     datarec : array [0..4096] of byte;
     indexrec : array [0..1024] of byte;

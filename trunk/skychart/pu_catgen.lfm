@@ -12,7 +12,7 @@ object f_catgen: Tf_catgen
   OnShow = FormShow
   ParentFont = False
   Position = poDefaultPosOnly
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object Image1: TImage
     Height = 438
     Width = 114
@@ -3487,7 +3487,6 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 13
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
@@ -3549,12 +3548,12 @@ object f_catgen: Tf_catgen
         Font.Height = -11
         Font.Name = 'Courier'
         Font.Pitch = fpFixed
+        Font.Quality = fqNonAntialiased
         ParentColor = False
         ParentFont = False
         TabOrder = 6
         OnMouseUp = Memo1MouseUp
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
         Keystrokes = <        
           item
@@ -3879,7 +3878,6 @@ object f_catgen: Tf_catgen
           end>
         ReadOnly = True
         ScrollBars = ssHorizontal
-        SelectedColor.OnChange = nil
       end
     end
     object TabSheet4: TPage

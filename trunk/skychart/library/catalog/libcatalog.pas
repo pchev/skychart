@@ -683,7 +683,7 @@ TVdbl  = array[1..10] of boolean;
 TVneb  = array[1..11] of boolean;
 TVlin  = array[1..6] of boolean;
 TValid = array[1..10] of boolean;
-Tlabellst = array[1..35,0..10] of char;
+Tlabellst = array[1..35,0..15] of char;
 TSname = array[0..3] of char;
 Tstar =   packed record
           magv,b_v,magb,magr,pmra,pmdec,epoch,px : double;
