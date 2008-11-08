@@ -185,6 +185,7 @@ object f_tray: Tf_tray
           'clSkyBlue'
           'clMedGray'
         )
+        MaxLength = -1
         Palette = cpFull
         TabOrder = 0
         Text = 'clBlack'
@@ -312,6 +313,7 @@ object f_tray: Tf_tray
           'clSkyBlue'
           'clMedGray'
         )
+        MaxLength = -1
         Palette = cpFull
         TabOrder = 1
         Text = 'clBlack'

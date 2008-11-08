@@ -8,9 +8,9 @@ uses
 {$ifdef win32}
   windows,
 {$endif}
-  u_help, u_translation, u_util, u_constant, cu_planet, Inifiles,
+  u_help, u_translation, u_util, u_constant, u_projection, cu_planet, cu_database, Inifiles,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  Menus, ExtCtrls, StdCtrls, ComCtrls, ColorBox, Spin;
+  Menus, ExtCtrls, StdCtrls, ComCtrls, ColorBox, Spin, dynlibs, Math;
 
 type
 
@@ -59,6 +59,9 @@ type
     bmp:TBitmap;
     language:string;
     WantClose: boolean;
+    db,dbhost,dbuser,dbpass,cryptedpwd:string;
+    dbport: integer;
+    cdcdb:Tcdcdb;
     procedure TrayMsg(txt1,txt2,hint1:string);
     procedure UpdBmp(txt1,txt2:string; itype,isize:integer; ibg,ifg:TColor; ubmp:TBitmap);
     procedure UpdBmpTest(txt1,txt2:string);
@@ -67,6 +70,7 @@ type
     procedure SetLang;
     procedure SaveConfig;
     procedure LoadIcon;
+    procedure ConnectDB;
   public
     { public declarations }
     procedure Init;
@@ -77,12 +81,15 @@ var
 
 implementation
 
-uses pu_clock;
+uses pu_clock, pu_calendar;
 
 { Tf_tray }
 
 procedure Tf_tray.SetLang;
 begin
+ldeg:=rsdeg;
+lmin:=rsmin;
+lsec:=rssec;
 caption:=rsSkychartIcon;
 TabSheet1.Caption:=rsAppearance;
 RadioGroup2.Caption:=rsIconSize;
@@ -103,6 +110,18 @@ MenuItem2.caption:=rsSkyCharts;
 MenuItem3.caption:=rsSetup;
 MenuItem4.caption:=rsCalendar;
 MenuItem5.caption:=rsClose;
+pla[1]:=rsMercury;
+pla[2]:=rsVenus;
+pla[4]:=rsMars;
+pla[5]:=rsJupiter;
+pla[6]:=rsSaturn;
+pla[7]:=rsUranus;
+pla[8]:=rsNeptune;
+pla[9]:=rsPluto;
+pla[10]:=rsSun;
+pla[11]:=rsMoon;
+pla[31]:=rsSatRing;
+pla[32]:=rsEarthShadow;
 end;
 
 procedure Tf_tray.Init;
@@ -135,25 +154,41 @@ icontext:=ReadInteger(section,'Icon_text',icontext);
 icontextsize:=ReadInteger(section,'Icon_textsize',icontextsize);
 iconinfo:=ReadInteger(section,'Icon_info',iconinfo);
 section:='observatory';
-f_clock.cfgsc.ObsLatitude := ReadFloat(section,'ObsLatitude',f_clock.cfgsc.ObsLatitude );
-f_clock.cfgsc.ObsLongitude := ReadFloat(section,'ObsLongitude',f_clock.cfgsc.ObsLongitude );
-f_clock.cfgsc.ObsAltitude := ReadFloat(section,'ObsAltitude',f_clock.cfgsc.ObsAltitude );
-f_clock.cfgsc.ObsTemperature := ReadFloat(section,'ObsTemperature',f_clock.cfgsc.ObsTemperature );
-f_clock.cfgsc.ObsPressure := ReadFloat(section,'ObsPressure',f_clock.cfgsc.ObsPressure );
-f_clock.cfgsc.ObsName := Condutf8decode(ReadString(section,'ObsName',f_clock.cfgsc.ObsName ));
-f_clock.cfgsc.ObsCountry := ReadString(section,'ObsCountry',f_clock.cfgsc.ObsCountry );
-f_clock.cfgsc.ObsTZ := ReadString(section,'ObsTZ',f_clock.cfgsc.ObsTZ );
-f_clock.cfgsc.countrytz := ReadBool(section,'countrytz',f_clock.cfgsc.countrytz );
+f_clock.cfgsc.ObsLatitude := ReadFloat(section,'ObsLatitude',0 );
+f_clock.cfgsc.ObsLongitude := ReadFloat(section,'ObsLongitude',0 );
+f_clock.cfgsc.ObsAltitude := ReadFloat(section,'ObsAltitude',0 );
+f_clock.cfgsc.ObsTemperature := ReadFloat(section,'ObsTemperature',0);
+f_clock.cfgsc.ObsPressure := ReadFloat(section,'ObsPressure',0 );
+f_clock.cfgsc.ObsName := Condutf8decode(ReadString(section,'ObsName','' ));
+f_clock.cfgsc.ObsCountry := ReadString(section,'ObsCountry','' );
+f_clock.cfgsc.ObsTZ := ReadString(section,'ObsTZ','Etc/GMT' );
+f_clock.cfgsc.countrytz := ReadBool(section,'countrytz',false);
+section:='main';
+DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
+dbhost:=ReadString(section,'dbhost','localhost');
+dbport:=ReadInteger(section,'dbport',3306);
+db:=ReadString(section,'db',slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]));
+dbuser:=ReadString(section,'dbuser','root');
+cryptedpwd:=hextostr(ReadString(section,'dbpass',''));
+dbpass:=DecryptStr(cryptedpwd,encryptpwd);
 end;
 finally
 inif.Free;
 end;
 f_clock.cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 f_clock.cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(f_clock.cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+ConnectDB;
 LoadIcon;
 UpdateIcon(nil);
 Timer1.Enabled:=true;
 SysTray.Visible:=true;
+Plan404:=nil;
+Plan404lib:=LoadLibrary(lib404);
+if Plan404lib<>0 then begin
+  Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
+end;
+if @Plan404=nil then
+   MenuItem4.Enabled:=false; // no calendar
 end;
 
 procedure Tf_tray.SaveConfig;
@@ -305,6 +340,8 @@ begin
     if (f_clock.cfgsc<>nil) then f_clock.cfgsc.Free;
     if (f_clock.planet<>nil) then f_clock.planet.Free;
   end;
+  if f_calendar<>nil then f_calendar.Free;
+  if cdcdb<>nil then cdcdb.Free;
 end;
 
 procedure Tf_tray.MenuItem1Click(Sender: TObject);
@@ -336,8 +373,45 @@ begin
 end;
 
 procedure Tf_tray.MenuItem4Click(Sender: TObject);
+var y,m,d:word;
+    u,p : double;
+const ratio = 0.99664719;
+      H0 = 6378140.0 ;
 begin
-  ShowMessage('Calendar');
+  if f_calendar=nil then begin
+    f_calendar:=Tf_calendar.Create(self);
+    f_calendar.planet:=f_clock.planet;
+    f_calendar.cdb:=cdcdb;
+    f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
+    f_calendar.AzNorth:=true;
+  end;
+  f_calendar.config.Assign(f_clock.cfgsc);
+  DecodeDate(Now,y,m,d);
+  f_calendar.config.CurYear:=y;
+  f_calendar.config.CurMonth:=m;
+  f_calendar.config.CurDay:=d;
+  f_calendar.config.CurTime:=frac(now)*24;
+  f_calendar.config.JDChart:=jd(y,m,d,0);
+  f_calendar.config.CurJD:=f_calendar.config.JDChart;
+  f_calendar.config.PlanetParalaxe:=true;
+  f_calendar.config.ApparentPos:=true;
+  f_calendar.config.e:=ecliptic(f_calendar.config.JdChart);
+  nutation(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
+  f_calendar.planet.sunecl(f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
+  PrecessionEcl(jd2000,f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
+  aberration(f_calendar.config.CurJd,f_calendar.config.abe,f_calendar.config.abp);
+
+  p:=deg2rad*f_calendar.config.ObsLatitude;
+  u:=arctan(ratio*tan(p));
+  f_calendar.config.ObsRoSinPhi:=ratio*sin(u)+(f_calendar.config.ObsAltitude/H0)*sin(p);
+  f_calendar.config.ObsRoCosPhi:=cos(u)+(f_calendar.config.ObsAltitude/H0)*cos(p);
+  f_calendar.config.ObsRefractionCor:=1;
+  f_calendar.config.EquinoxName:=rsDate;
+  f_calendar.config.Force_DT_UT:=false;
+  f_calendar.config.DT_UT:=DTminusUT(y,f_calendar.config);
+  formpos(f_calendar,SysTray.GetPosition.X,SysTray.GetPosition.Y);
+  f_calendar.show;
+  f_calendar.bringtofront;
 end;
 
 procedure Tf_tray.MenuItem5Click(Sender: TObject);
@@ -532,6 +606,29 @@ if fileexists(configfile) then begin
   finally
    inif.Free;
   end;
+end;
+end;
+
+procedure Tf_tray.ConnectDB;
+var dbpath:string;
+begin
+try
+    if ((DBtype=sqlite) and not Fileexists(db)) then begin
+       cdcdb:=nil;
+       exit;
+    end;
+    cdcdb:=Tcdcdb.create(self);
+    if (cdcdb.ConnectDB(dbhost,db,dbuser,dbpass,dbport)
+       and cdcdb.CheckDB) then begin
+         {$ifdef trace_debug}
+          WriteTrace('DB connected');
+         {$endif}
+    end else begin
+       cdcdb.free;
+       cdcdb:=nil;
+    end;
+except
+cdcdb:=nil;
 end;
 end;
 

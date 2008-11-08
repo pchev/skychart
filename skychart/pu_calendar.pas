@@ -268,6 +268,10 @@ if initial then begin
   initial:=false;
 end;
 BtnReset.visible:=false;
+if cdb=nil then begin
+   comet.TabVisible:=false;
+   Asteroids.TabVisible:=false;
+end;
 lockclick:=true;
 end;
 
@@ -310,7 +314,7 @@ Date2.labels.jd:=rsJulianDay;
 Date2.labels.today:=rsToday;
 east:=rsEast;
 west:=rsWest;
-EcliPanel.Hint:='http://sunearth.gsfconfig.nasa.gov/eclipse/eclipse.html';
+EcliPanel.Hint:='http://eclipse.gsfc.nasa.gov';
 mercure.caption:=pla[1];
 venus.caption:=pla[2];
 mars.caption:=pla[4];
@@ -899,7 +903,8 @@ with TwilightGrid do begin
   RowCount:=i+1;
   cells[0,i]:=isodate(a,m,d);
   Fplanet.Sun(jd0+0.5,ars,des,dist,diam);
-  precession(jd2000,config.JDChart,ars,des);
+//  precession(jd2000,config.JDChart,ars,des);
+  precession(jd2000,jda,ars,des);
   if (ars<0) then ars:=ars+pi2;
   objects[0,i]:=SetObjCoord(jda,-999,-999);
   // crepuscule nautique
@@ -961,7 +966,7 @@ with gr do begin
   case ipla of
   1..9: begin
     planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
-    precession(jd2000,config.jdchart,ar,de);
+    precession(jd2000,config.JDChart,ar,de);
     if config.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,config);
     if config.ApparentPos then apparent_equatorial(ar,de,config);
     if ipla=6 then begin  // ring magn. correction
@@ -1207,8 +1212,10 @@ if (aRow>=0)and(aColumn>=0) then begin
          csconfig.ObsLongitude:=a;
          csconfig.ObsName:='Max. Solar Eclipse '+inttostr(csconfig.CurMonth)+'/'+inttostr(csconfig.CurYear);
        end;
-       BtnReset.visible:=true;
-       if assigned(Fupdchart) then Fupdchart(csconfig);
+       if assigned(Fupdchart) then begin
+          BtnReset.visible:=true;
+          Fupdchart(csconfig);
+       end;
     end else if sender = lunargrid then begin
        csconfig.TrackOn:=true;         // Lunar eclipse
        csconfig.TrackType:=1;          // set tracking to the Moon
@@ -1216,8 +1223,10 @@ if (aRow>=0)and(aColumn>=0) then begin
        csconfig.PlanetParalaxe:=true;
        csconfig.ShowPlanet:=true;
        csconfig.ShowEarthShadow:=true;
-       BtnReset.visible:=true;
-       if assigned(Fupdchart) then Fupdchart(csconfig);
+       if assigned(Fupdchart) then begin
+          BtnReset.visible:=true;
+          Fupdchart(csconfig);
+       end;
     end else if sender = Satgrid then begin    // Satellites
            // .....
     end else begin  // other grid
@@ -1227,8 +1236,10 @@ if (aRow>=0)and(aColumn>=0) then begin
          csconfig.TrackOn:=true;
          csconfig.TrackType:=4;
        end;
-       BtnReset.visible:=true;
-       if assigned(Fupdchart) then Fupdchart(csconfig);
+       if assigned(Fupdchart) then begin
+          BtnReset.visible:=true;
+          Fupdchart(csconfig);
+       end;
     end;
   end; // p<>nil
 end; // row>=0..
