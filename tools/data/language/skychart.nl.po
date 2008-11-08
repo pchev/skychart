@@ -251,6 +251,10 @@ msgstr "Anoniem password"
 msgid "Apparent"
 msgstr "Schijnbaar"
 
+#: u_translation:rsappearance
+msgid "Appearance"
+msgstr ""
+
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "Voeg toe aan bestaande catalogus"
@@ -1814,6 +1818,14 @@ msgstr "INDI server host "
 #: u_translation:rsindiserverpo
 msgid "INDI server Port"
 msgstr "INDI server port"
+
+#: u_translation:rsiconsize
+msgid "Icon Size"
+msgstr ""
+
+#: u_translation:rsicontime
+msgid "Icon Time Display"
+msgstr ""
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
@@ -3523,6 +3535,10 @@ msgstr "Hemelkleur"
 msgid "Skychart Homepage"
 msgstr "Cartes du Ciel - Sterrenkaarten Webpagina"
 
+#: u_translation:rsskycharticon
+msgid "Skychart Icon Setup"
+msgstr ""
+
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Beweeg telescoop naar object"
@@ -3751,6 +3767,14 @@ msgstr "Telescoop: %s"
 msgid "Temperature (Celsius)"
 msgstr "Temperatuur (Celsius)"
 
+#: u_translation:rstext
+msgid "Text"
+msgstr ""
+
+#: u_translation:rstextsize
+msgid "Text Size"
+msgstr ""
+
 #: u_translation:rstextfilecata
 msgid "Text file catalog"
 msgstr "Tekstbestand catalogus"
@@ -3862,6 +3886,10 @@ msgstr "Tropisch jaar"
 #: u_translation:rstrueposition
 msgid "True position"
 msgstr "Ware positie"
+
+#: u_translation:rstruesolar
+msgid "True solar"
+msgstr ""
 
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
