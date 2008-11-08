@@ -1481,9 +1481,9 @@ end else begin
    // only a part of the image is displayed
    BitmapRotation(ibmp,rbmp,Rotation,WhiteBg);
    BitmapFlip(rbmp,(flipx<0),(flipy<0));
-   xx:=(rbmp.Width/2)+((cfgchart.Width/2)-xx)*ibmp.Width/iWidth;
-   yy:=(rbmp.Height/2)+((cfgchart.Height/2)-yy)*ibmp.height/iHeight;
-   dsx:=(ibmp.Width*cfgchart.Width/iWidth)/2;
+   xx:=(rbmp.Width/2)+((cfgchart.Width/2)-xx)/zoom;
+   yy:=(rbmp.Height/2)+((cfgchart.Height/2)-yy)/zoom;
+   dsx:=cfgchart.Width/2/zoom;
    dsy:=dsx*cfgchart.height/cfgchart.width;
    SrcR:=Rect(round(xx-dsx),round(yy-dsy),round(xx+dsx),round(yy+dsy));
    imabmp.Width:=round(2*dsx);
