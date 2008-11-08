@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-28 23:42+0100\n"
+"PO-Revision-Date: 2008-11-05 01:10+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -251,10 +251,6 @@ msgstr "Anoniem password"
 msgid "Apparent"
 msgstr "Schijnbaar"
 
-#: u_translation:rsappearance
-msgid "Appearance"
-msgstr ""
-
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "Voeg toe aan bestaande catalogus"
@@ -281,7 +277,7 @@ msgstr "Als op het scherm (zwarte achtergrond!)"
 
 #: u_translation:rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr ""
+msgstr "Vraag bevestiging voor iedere Internet verbinding"
 
 #: u_translation:rsasterism
 msgid "Asterism"
@@ -441,7 +437,7 @@ msgstr "Heldere nevel"
 
 #: u_translation:rsbrightstarss
 msgid "Bright Stars Size"
-msgstr ""
+msgstr "Heldere sterren-grootte"
 
 #: u_translation:rsbrightstars
 msgid "Bright stars"
@@ -629,7 +625,7 @@ msgstr "Client verbinding 'Keep Allive'"
 
 #: u_translation:rsclock
 msgid "Clock"
-msgstr ""
+msgstr "Klok"
 
 #: u_translation:rsclose
 msgid "Close"
@@ -701,7 +697,7 @@ msgstr "Commando om bestand te creëren"
 
 #: u_translation:rscommonname
 msgid "Common Name"
-msgstr "Naam"
+msgstr "Triviale naam"
 
 #: u_translation:rscompassroses
 msgid "Compass rose size"
@@ -1213,7 +1209,7 @@ msgstr "Toon afbeelding van gecatologiseerde objecten"
 
 #: u_translation:rsdisplaylabel
 msgid "Display labels for all star catalog"
-msgstr ""
+msgstr "Toon labels voor alle sterren-catalogi"
 
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1819,14 +1815,6 @@ msgstr "INDI server host "
 msgid "INDI server Port"
 msgstr "INDI server port"
 
-#: u_translation:rsiconsize
-msgid "Icon Size"
-msgstr ""
-
-#: u_translation:rsicontime
-msgid "Icon Time Display"
-msgstr ""
-
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
 msgstr "Wanneer u vanaf een berg observeert, zal de horizon lager zijn dan wanneer u op zeeniveau zou zijn."
@@ -1889,7 +1877,7 @@ msgstr "Informatie"
 
 #: u_translation:rsinformationd
 msgid "Information detail"
-msgstr ""
+msgstr "Gedetaileerde informatie"
 
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
@@ -1925,7 +1913,7 @@ msgstr "Is de coördinaten-epoche werkelijk %s?"
 
 #: u_translation:rsjd2
 msgid "JD"
-msgstr ""
+msgstr "Juliaans"
 
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
@@ -2017,7 +2005,7 @@ msgstr "Linker balk"
 
 #: u_translation:rslegal
 msgid "Legal"
-msgstr ""
+msgstr "Wettelijk"
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2133,7 +2121,7 @@ msgstr "Lokale horizon-bestandsnaam:"
 
 #: u_translation:rslocalsideral
 msgid "Local Sideral Time"
-msgstr "Locale Sterrentijd"
+msgstr "Lokale Sterrentijd"
 
 #: u_translation:rslockon
 msgid "Lock on %s"
@@ -2173,7 +2161,7 @@ msgstr "M"
 
 #: u_translation:rssmonth
 msgid "M."
-msgstr ""
+msgstr "M."
 
 #: u_translation:rsmbytes
 msgid "MBytes"
@@ -2281,7 +2269,7 @@ msgstr "Gemiddelde afwijking"
 
 #: u_translation:rsmeanlocal
 msgid "Mean local"
-msgstr ""
+msgstr "Gem. lokaal"
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -2521,7 +2509,7 @@ msgstr "Aantal bestanden"
 
 #: u_translation:rsnumberofnebu
 msgid "Number of nebulae"
-msgstr ""
+msgstr "Aantal nevels"
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"
@@ -3505,7 +3493,7 @@ msgstr "Toon/verberg DSS beeld"
 
 #: u_translation:rssideral
 msgid "Sideral"
-msgstr ""
+msgstr "Siderisch"
 
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
@@ -3534,10 +3522,6 @@ msgstr "Hemelkleur"
 #: u_translation:rsskycharthome
 msgid "Skychart Homepage"
 msgstr "Cartes du Ciel - Sterrenkaarten Webpagina"
-
-#: u_translation:rsskycharticon
-msgid "Skychart Icon Setup"
-msgstr ""
 
 #: u_translation:rsslew
 msgid "Slew"
@@ -3767,14 +3751,6 @@ msgstr "Telescoop: %s"
 msgid "Temperature (Celsius)"
 msgstr "Temperatuur (Celsius)"
 
-#: u_translation:rstext
-msgid "Text"
-msgstr ""
-
-#: u_translation:rstextsize
-msgid "Text Size"
-msgstr ""
-
 #: u_translation:rstextfilecata
 msgid "Text file catalog"
 msgstr "Tekstbestand catalogus"
@@ -3886,10 +3862,6 @@ msgstr "Tropisch jaar"
 #: u_translation:rstrueposition
 msgid "True position"
 msgstr "Ware positie"
-
-#: u_translation:rstruesolar
-msgid "True solar"
-msgstr ""
 
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
@@ -4041,7 +4013,7 @@ msgstr "Gebruiker-ID:"
 
 #: u_translation:rsusingexistin
 msgid "Using existing file %s"
-msgstr ""
+msgstr "Gebruikt bestaand bestand %s"
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"
