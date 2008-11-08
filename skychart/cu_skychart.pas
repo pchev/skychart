@@ -561,7 +561,7 @@ begin
 cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
 // clipping limit
-Fplot.cfgplot.outradius:=abs(round(min(50*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
+Fplot.cfgplot.outradius:=abs(round(min(10*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
 // ecliptic
