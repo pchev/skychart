@@ -15,7 +15,7 @@ object f_info: Tf_info
   OnShow = FormShow
   ParentFont = False
   Position = poScreenCenter
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object Panel1: TPanel
     Height = 27
     Top = 437
@@ -26,16 +26,25 @@ object f_info: Tf_info
     FullRepaint = False
     TabOrder = 0
     object Button1: TButton
-      Left = 592
+      Left = 628
       Height = 25
       Top = 1
-      Width = 115
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Close'
       OnClick = Button1Click
       TabOrder = 0
+    end
+    object Button4: TButton
+      Left = 528
+      Height = 25
+      Top = 1
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button4Click
+      TabOrder = 1
     end
   end
   object Page1: TPanel
@@ -80,10 +89,10 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 1
       object serverinfo: TLabel
-        Left = 536
-        Height = 14
+        Left = 535
+        Height = 15
         Top = 6
-        Width = 1
+        Width = 2
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         ParentColor = False
@@ -102,7 +111,7 @@ object f_info: Tf_info
         Left = 104
         Height = 21
         Top = 2
-        Width = 87
+        Width = 99
         Caption = 'AutoRefresh'
         Checked = True
         OnClick = CheckBox1Click
@@ -130,13 +139,13 @@ object f_info: Tf_info
       Font.Height = -13
       Font.Name = 'courier'
       Font.Pitch = fpFixed
+      Font.Quality = fqNonAntialiased
       ParentColor = False
       ParentFont = False
       PopupMenu = PopupMenu2
       TabOrder = 1
       OnDblClick = Memo1DblClick
       BookMarkOptions.Xoffset = -18
-      BookMarkOptions.OnChange = nil
       Gutter.Visible = False
       Keystrokes = <      
         item
@@ -465,7 +474,6 @@ object f_info: Tf_info
       Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
       ReadOnly = True
       RightEdge = 0
-      SelectedColor.OnChange = nil
       TabWidth = 10
     end
     object Panel3: TPanel

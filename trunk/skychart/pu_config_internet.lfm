@@ -3,7 +3,7 @@ object f_config_internet: Tf_config_internet
   Height = 484
   Top = 91
   Width = 489
-  ActiveControl = CometUrlList
+  ActiveControl = MainPanel
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
   Caption = 'Internet'
@@ -20,13 +20,13 @@ object f_config_internet: Tf_config_internet
     Width = 489
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 430
-    ClientWidth = 485
+    ClientHeight = 434
+    ClientWidth = 489
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
-      Height = 430
-      Width = 485
+      Height = 434
+      Width = 489
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       PageIndex = 1
@@ -173,8 +173,8 @@ object f_config_internet: Tf_config_internet
       end
       object Page2: TPage
         Caption = 'Orbital Elements'
-        ClientWidth = 481
-        ClientHeight = 426
+        ClientWidth = 485
+        ClientHeight = 430
         object Label6: TLabel
           Left = 28
           Height = 14
@@ -195,7 +195,7 @@ object f_config_internet: Tf_config_internet
           Left = 16
           Height = 90
           Top = 48
-          Width = 441
+          Width = 445
           Anchors = [akTop, akLeft, akRight]
           OnExit = CometUrlListExit
           TabOrder = 0
@@ -204,7 +204,7 @@ object f_config_internet: Tf_config_internet
           Left = 16
           Height = 90
           Top = 228
-          Width = 441
+          Width = 445
           Anchors = [akTop, akLeft, akRight]
           OnExit = AsteroidUrlListExit
           TabOrder = 4
@@ -358,7 +358,7 @@ object f_config_internet: Tf_config_internet
     ClientWidth = 489
     TabOrder = 1
     object Button1: TButton
-      Left = 191
+      Left = 194
       Height = 25
       Top = 12
       Width = 75
@@ -370,7 +370,7 @@ object f_config_internet: Tf_config_internet
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 287
+      Left = 292
       Height = 25
       Top = 12
       Width = 75
@@ -381,7 +381,7 @@ object f_config_internet: Tf_config_internet
       TabOrder = 1
     end
     object Button3: TButton
-      Left = 391
+      Left = 390
       Height = 25
       Top = 12
       Width = 75
@@ -392,16 +392,25 @@ object f_config_internet: Tf_config_internet
       ModalResult = 2
       TabOrder = 2
     end
+    object Button6: TButton
+      Left = 96
+      Height = 25
+      Top = 12
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button6Click
+      TabOrder = 3
+    end
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True
-    left = 33
+    left = 16
     top = 446
   end
   object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
     BrowserParams = '%s'
     AutoRegister = True
-    left = 80
+    left = 56
     top = 446
   end
 end

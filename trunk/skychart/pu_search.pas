@@ -42,6 +42,7 @@ type
     Button3: TButton;
     Button4: TButton;
     AsteroidList: TComboBox;
+    Button5: TButton;
     CometList: TComboBox;
     CometPanel: TPanel;
     CometFilter: TEdit;
@@ -105,6 +106,7 @@ type
     ConstBox: TComboBox;
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure NumButtonClick(Sender: TObject);
@@ -169,6 +171,7 @@ RadioGroup1.Items[9]:=rsConstellatio;
 RadioGroup1.Items[10]:=rsOtherLinesCa;
 Button1.caption:=rsFind;
 Button2.caption:=rsCancel;
+Button5.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpSearch);
 end;
@@ -230,6 +233,11 @@ list:=TStringList.Create;
 Cdb.GetAsteroidList(AsteroidFilter.Text,maxcombo,list,Astid);
 AsteroidList.Items.Assign(list);
 AsteroidList.ItemIndex:=0;
+end;
+
+procedure Tf_search.Button5Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_search.SpeedButton11Click(Sender: TObject);

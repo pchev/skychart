@@ -44,6 +44,7 @@ type
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
+    Button6: TButton;
     CheckBox1: TCheckBox;
     CheckBox10: TCheckBox;
     epoch2: TFloatEdit;
@@ -273,6 +274,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure ExpertModeClick(Sender: TObject);
     procedure CheckBox13Click(Sender: TObject);
     procedure CoordTypeClick(Sender: TObject);
@@ -409,6 +411,7 @@ CheckBox13.caption:=rsAlwaysShowCo;
 Button3.caption:=rsOK;
 Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
+Button6.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgChart);
 end;
@@ -925,6 +928,11 @@ end;
 procedure Tf_config_chart.Button4Click(Sender: TObject);
 begin
    if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_chart.Button6Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_config_chart.CheckBox13Click(Sender: TObject);

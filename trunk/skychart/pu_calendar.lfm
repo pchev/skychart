@@ -792,7 +792,6 @@ object f_calendar: Tf_calendar
           Height = 25
           Top = 9
           Width = 169
-          MaxLength = -1
           OnSelect = ComboBox1Change
           Style = csDropDownList
           TabOrder = 2
@@ -846,7 +845,6 @@ object f_calendar: Tf_calendar
           Height = 25
           Top = 13
           Width = 169
-          MaxLength = -1
           OnSelect = ComboBox2Change
           Style = csDropDownList
           TabOrder = 0

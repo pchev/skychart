@@ -3,7 +3,7 @@ object f_config_display: Tf_config_display
   Height = 532
   Top = 102
   Width = 523
-  ActiveControl = bg1
+  ActiveControl = MainPanel
   Caption = 'Display'
   ClientHeight = 532
   ClientWidth = 523
@@ -33,7 +33,7 @@ object f_config_display: Tf_config_display
       object Page1: TPage
         Caption = 'Display'
         ClientWidth = 517
-        ClientHeight = 476
+        ClientHeight = 453
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -1626,7 +1626,6 @@ object f_config_display: Tf_config_display
               'Dash Dot'
               'Dash Dot Dot'
             )
-            MaxLength = -1
             OnChange = CFStyleChange
             OnDrawItem = StyleDrawItem
             Style = csOwnerDrawFixed
@@ -1686,7 +1685,6 @@ object f_config_display: Tf_config_display
               'Dash Dot'
               'Dash Dot Dot'
             )
-            MaxLength = -1
             OnChange = CBStyleChange
             OnDrawItem = StyleDrawItem
             Style = csOwnerDrawFixed
@@ -1736,7 +1734,6 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
-          MaxLength = -1
           OnChange = GridStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1757,7 +1754,6 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
-          MaxLength = -1
           OnChange = EclipticStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1778,7 +1774,6 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
-          MaxLength = -1
           OnChange = EqGridStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -1799,7 +1794,6 @@ object f_config_display: Tf_config_display
             'Dash Dot'
             'Dash Dot Dot'
           )
-          MaxLength = -1
           OnChange = GalEqStyleChange
           OnDrawItem = StyleDrawItem
           Style = csOwnerDrawFixed
@@ -3142,6 +3136,15 @@ object f_config_display: Tf_config_display
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2
+    end
+    object Button6: TButton
+      Left = 104
+      Height = 25
+      Top = 10
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button6Click
+      TabOrder = 3
     end
   end
   object FontDialog1: TFontDialog

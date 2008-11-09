@@ -43,6 +43,7 @@ type
     BtnRedColor: TButton;
     BtnWBColor: TButton;
     BtnBWColor: TButton;
+    Button6: TButton;
     DrawAllStarLabel: TCheckBox;
     DrawPmBox: TCheckBox;
     DrawPMy: TLongEdit;
@@ -328,6 +329,7 @@ type
     procedure BtnRedColorClick(Sender: TObject);
     procedure BtnWBColorClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
     procedure DrawAllStarLabelClick(Sender: TObject);
@@ -667,6 +669,7 @@ CenterMark2.caption:=rsMarkTheChart;
 Button2.caption:=rsOK;
 Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
+Button6.caption:=rsHelp;
 label8.caption:=rsDrawALineTha;
 Label68.caption:=rsYears;
 red_moveBox.Caption:=rsReduceDetail;
@@ -847,6 +850,11 @@ end;
 procedure Tf_config_display.Button4Click(Sender: TObject);
 begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_display.Button6Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_config_display.BtnDefaultColorClick(Sender: TObject);

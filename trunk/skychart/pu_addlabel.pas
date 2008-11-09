@@ -15,6 +15,7 @@ type
   Tf_addlabel = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
     ComboBox1: TComboBox;
     Edit1: TEdit;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
@@ -22,6 +23,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     RadioGroup1: TRadioGroup;
+    procedure Button3Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
@@ -64,8 +66,9 @@ RadioGroup1.items[1]:=rsCenter;
 RadioGroup1.items[2]:=rsRight;
 Button1.caption:=rsOk;
 Button2.caption:=rsCancel;
+Button3.Caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
-SetHelp(self,hlpIndex);
+SetHelp(self,hlpLabel);
 end;
 
 procedure Tf_addlabel.Edit1Change(Sender: TObject);
@@ -104,6 +107,11 @@ end;
 procedure Tf_addlabel.ComboBox1Change(Sender: TObject);
 begin
 
+end;
+
+procedure Tf_addlabel.Button3Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 initialization

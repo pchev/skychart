@@ -1,9 +1,9 @@
 object f_config_time: Tf_config_time
-  Left = 566
+  Left = 537
   Height = 564
-  Top = 105
+  Top = 120
   Width = 474
-  ActiveControl = nbstep
+  ActiveControl = MainPanel
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
   Caption = 'Date / Time'
@@ -14,7 +14,7 @@ object f_config_time: Tf_config_time
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Height = 514
     Width = 474
@@ -29,16 +29,16 @@ object f_config_time: Tf_config_time
       Width = 474
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Time'
         ClientWidth = 470
-        ClientHeight = 487
+        ClientHeight = 510
         object Label142: TLabel
           Left = 286
-          Height = 20
+          Height = 14
           Top = 62
           Width = 50
           Caption = 'Seconds'
@@ -64,7 +64,7 @@ object f_config_time: Tf_config_time
           Visible = False
           object Label135: TLabel
             Left = 8
-            Height = 20
+            Height = 14
             Top = 41
             Width = 59
             Caption = 'DT - UT  : '
@@ -72,7 +72,7 @@ object f_config_time: Tf_config_time
           end
           object Tdt_Ut: TLabel
             Left = 85
-            Height = 20
+            Height = 14
             Top = 41
             Width = 29
             Caption = '0000'
@@ -80,7 +80,7 @@ object f_config_time: Tf_config_time
           end
           object Label136: TLabel
             Left = 142
-            Height = 20
+            Height = 14
             Top = 41
             Width = 50
             Caption = 'Seconds'
@@ -88,7 +88,7 @@ object f_config_time: Tf_config_time
           end
           object Label150: TLabel
             Left = 8
-            Height = 20
+            Height = 14
             Top = 16
             Width = 258
             Caption = 'Dynamic Time difference with Universal Time'
@@ -146,7 +146,7 @@ object f_config_time: Tf_config_time
           TabOrder = 3
           object Label137: TLabel
             Left = 8
-            Height = 20
+            Height = 14
             Top = 70
             Width = 29
             Caption = 'Time'
@@ -154,7 +154,7 @@ object f_config_time: Tf_config_time
           end
           object Label139: TLabel
             Left = 127
-            Height = 20
+            Height = 14
             Top = 52
             Width = 10
             Caption = 'M'
@@ -162,7 +162,7 @@ object f_config_time: Tf_config_time
           end
           object Label141: TLabel
             Left = 195
-            Height = 20
+            Height = 14
             Top = 52
             Width = 9
             Caption = 'S'
@@ -170,7 +170,7 @@ object f_config_time: Tf_config_time
           end
           object Label138: TLabel
             Left = 56
-            Height = 20
+            Height = 14
             Top = 52
             Width = 9
             Caption = 'H'
@@ -178,7 +178,7 @@ object f_config_time: Tf_config_time
           end
           object Label143: TLabel
             Left = 56
-            Height = 20
+            Height = 14
             Top = 6
             Width = 8
             Caption = 'Y'
@@ -186,7 +186,7 @@ object f_config_time: Tf_config_time
           end
           object Label144: TLabel
             Left = 127
-            Height = 20
+            Height = 14
             Top = 6
             Width = 10
             Caption = 'M'
@@ -194,7 +194,7 @@ object f_config_time: Tf_config_time
           end
           object Label145: TLabel
             Left = 196
-            Height = 20
+            Height = 14
             Top = 6
             Width = 9
             Caption = 'D'
@@ -202,7 +202,7 @@ object f_config_time: Tf_config_time
           end
           object Label140: TLabel
             Left = 8
-            Height = 20
+            Height = 14
             Top = 22
             Width = 27
             Caption = 'Date'
@@ -210,7 +210,7 @@ object f_config_time: Tf_config_time
           end
           object Label1: TLabel
             Left = 8
-            Height = 20
+            Height = 14
             Top = 109
             Width = 16
             Caption = 'JD:'
@@ -218,7 +218,7 @@ object f_config_time: Tf_config_time
           end
           object tzLabel: TLabel
             Left = 267
-            Height = 20
+            Height = 14
             Top = 70
             Width = 40
             Caption = 'tzLabel'
@@ -542,7 +542,7 @@ object f_config_time: Tf_config_time
             'Asteroids'
             'Comets'
           )
-          ItemHeight = 16
+          ItemHeight = 19
           OnItemClick = SimObjItemClick
           TabOrder = 0
           Data = {
@@ -667,7 +667,7 @@ object f_config_time: Tf_config_time
     ClientWidth = 474
     TabOrder = 1
     object Button1: TButton
-      Left = 176
+      Left = 184
       Height = 25
       Top = 12
       Width = 75
@@ -678,7 +678,7 @@ object f_config_time: Tf_config_time
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 272
+      Left = 280
       Height = 25
       Top = 12
       Width = 75
@@ -699,6 +699,15 @@ object f_config_time: Tf_config_time
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2
+    end
+    object Button7: TButton
+      Left = 88
+      Height = 25
+      Top = 12
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button7Click
+      TabOrder = 3
     end
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase

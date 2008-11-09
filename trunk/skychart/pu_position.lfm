@@ -3,6 +3,7 @@ object f_position: Tf_position
   Height = 282
   Top = 105
   Width = 477
+  ActiveControl = Panel2
   BorderStyle = bsToolWindow
   Caption = 'Position'
   ClientHeight = 282
@@ -12,9 +13,9 @@ object f_position: Tf_position
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object Button1: TButton
-    Left = 144
+    Left = 304
     Height = 25
     Top = 240
     Width = 75
@@ -24,7 +25,7 @@ object f_position: Tf_position
     TabOrder = 3
   end
   object Button2: TButton
-    Left = 248
+    Left = 397
     Height = 25
     Top = 240
     Width = 75
@@ -190,6 +191,15 @@ object f_position: Tf_position
       MaxValue = 180
       Digits = 5
     end
+  end
+  object Button3: TButton
+    Left = 208
+    Height = 25
+    Top = 240
+    Width = 75
+    Caption = 'Help'
+    OnClick = Button3Click
+    TabOrder = 5
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True

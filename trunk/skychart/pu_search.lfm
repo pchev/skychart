@@ -604,7 +604,7 @@ object f_search: Tf_search
     TabOrder = 0
   end
   object Button1: TButton
-    Left = 128
+    Left = 248
     Height = 25
     Top = 288
     Width = 75
@@ -614,7 +614,7 @@ object f_search: Tf_search
     TabOrder = 8
   end
   object Button2: TButton
-    Left = 232
+    Left = 348
     Height = 25
     Top = 288
     Width = 75
@@ -623,6 +623,15 @@ object f_search: Tf_search
     Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 9
+  end
+  object Button5: TButton
+    Left = 152
+    Height = 25
+    Top = 288
+    Width = 75
+    Caption = 'Help'
+    OnClick = Button5Click
+    TabOrder = 10
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True

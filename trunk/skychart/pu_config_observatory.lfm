@@ -167,7 +167,6 @@ object f_config_observatory: Tf_config_observatory
             Top = 1
             Width = 234
             DropDownCount = 10
-            MaxLength = -1
             OnSelect = countrylistChange
             Style = csDropDownList
             TabOrder = 0
@@ -482,7 +481,6 @@ object f_config_observatory: Tf_config_observatory
             Height = 25
             Top = 23
             Width = 433
-            MaxLength = -1
             OnChange = TZComboBoxChange
             Style = csDropDownList
             TabOrder = 0
@@ -702,6 +700,15 @@ object f_config_observatory: Tf_config_observatory
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2
+    end
+    object Button4: TButton
+      Left = 71
+      Height = 25
+      Top = 10
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button4Click
+      TabOrder = 3
     end
   end
   object DownloadDialog1: TDownloadDialog

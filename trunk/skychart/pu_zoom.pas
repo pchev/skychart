@@ -37,6 +37,7 @@ type
   { Tf_zoom }
 
   Tf_zoom = class(TForm)
+    Button1: TButton;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     TrackBar1: TTrackBar;
@@ -49,6 +50,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -71,6 +73,7 @@ begin
 Caption:=rsSetFOV;
 BitBtn1.caption:=rsOK;
 BitBtn2.caption:=rsCancel;
+Button1.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpSetFov);
 end;
@@ -91,6 +94,11 @@ SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
+end;
+
+procedure Tf_zoom.Button1Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_zoom.FormShow(Sender: TObject);

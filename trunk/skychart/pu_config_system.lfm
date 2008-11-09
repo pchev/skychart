@@ -12,7 +12,7 @@ object f_config_system: Tf_config_system
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Height = 482
     Width = 484
@@ -746,6 +746,7 @@ object f_config_system: Tf_config_system
             Top = 100
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
+            MaxLength = -1
             OnSelect = IndiDevChange
             Style = csDropDownList
             TabOrder = 4
@@ -766,6 +767,7 @@ object f_config_system: Tf_config_system
               'COM7'
               'COM8'
             )
+            MaxLength = -1
             OnSelect = IndiPortChange
             Style = csDropDownList
             TabOrder = 6
@@ -829,6 +831,7 @@ object f_config_system: Tf_config_system
             Top = 42
             Width = 145
             AutoCompleteText = [cbactSearchAscending]
+            MaxLength = -1
             OnChange = telescopepluginlistChange
             Style = csDropDownList
             TabOrder = 0
@@ -852,6 +855,7 @@ object f_config_system: Tf_config_system
           Height = 24
           Top = 82
           Width = 260
+          MaxLength = -1
           OnSelect = LanguageListSelect
           Style = csDropDownList
           TabOrder = 0
@@ -868,7 +872,7 @@ object f_config_system: Tf_config_system
     ClientWidth = 484
     TabOrder = 1
     object Button1: TButton
-      Left = 186
+      Left = 200
       Height = 25
       Top = 12
       Width = 75
@@ -880,7 +884,7 @@ object f_config_system: Tf_config_system
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 282
+      Left = 296
       Height = 25
       Top = 12
       Width = 75
@@ -901,6 +905,15 @@ object f_config_system: Tf_config_system
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2
+    end
+    object Button4: TButton
+      Left = 104
+      Height = 25
+      Top = 12
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button4Click
+      TabOrder = 3
     end
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase

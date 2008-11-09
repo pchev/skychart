@@ -707,6 +707,10 @@ msgstr "Triviale naam"
 msgid "Compass rose size"
 msgstr "Kompasroos grootte"
 
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "Component 1 magnitude"
@@ -1482,6 +1486,10 @@ msgstr "Extern catalogus object"
 #: u_translation:rseyepiece
 msgid "Eyepiece"
 msgstr "Oculair"
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr ""
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -3011,6 +3019,10 @@ msgstr "Quasar"
 msgid "Quick Delete"
 msgstr "Snel verwijderen"
 
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
+msgstr ""
+
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
 msgstr "Snel verwijderen van alle planetoïden gerelateerde gegevens"
@@ -4202,10 +4214,6 @@ msgstr "graden"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "desc:"
-
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr "nl/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

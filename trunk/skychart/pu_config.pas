@@ -200,7 +200,7 @@ if f_config_solsys1<>nil then f_config_solsys1.SetLang;
 if f_config_system1<>nil then f_config_system1.SetLang;
 if f_config_time1<>nil then f_config_time1.SetLang;
 SetHelpDB(HTMLHelpDatabase1);
-SetHelp(HelpBtn,hlpMenuSetup);
+SetHelp(self,hlpMenuSetup);
 end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
@@ -349,15 +349,15 @@ begin
    // page change
    MultiDoc1.SetActiveChild(i);
    case i of
-     0 : begin f_config_time1.Notebook1.PageIndex:=j;        f_config_time1.FormShow(self); SetHelp(self,hlpCfgDate); end;
-     1 : begin f_config_observatory1.Notebook1.PageIndex:=j; f_config_observatory1.FormShow(self); SetHelp(self,hlpCfgObs); end;
-     2 : begin f_config_chart1.Notebook1.PageIndex:=j;       f_config_chart1.FormShow(self); SetHelp(self,hlpCfgChart); end;
-     3 : begin f_config_catalog1.Notebook1.PageIndex:=j;     f_config_catalog1.FormShow(self); SetHelp(self,hlpCatalog); end;
-     4 : begin f_config_solsys1.Notebook1.PageIndex:=j;      f_config_solsys1.FormShow(self); SetHelp(self,hlpCfgSol); end;
-     5 : begin f_config_display1.Notebook1.PageIndex:=j;     f_config_display1.FormShow(self); SetHelp(self,hlpCfgDispl); end;
-     6 : begin f_config_pictures1.Notebook1.PageIndex:=j;    f_config_pictures1.FormShow(self); SetHelp(self,hlpCfgPict); end;
-     7 : begin f_config_system1.Notebook1.PageIndex:=j;      f_config_system1.FormShow(self); SetHelp(self,hlpCfgSys); end;
-     8 : begin f_config_internet1.Notebook1.PageIndex:=j;    f_config_internet1.FormShow(self); SetHelp(self,hlpCfgInt); end;
+     0 : begin f_config_time1.Notebook1.PageIndex:=j;        f_config_time1.FormShow(self);  end;
+     1 : begin f_config_observatory1.Notebook1.PageIndex:=j; f_config_observatory1.FormShow(self);  end;
+     2 : begin f_config_chart1.Notebook1.PageIndex:=j;       f_config_chart1.FormShow(self);  end;
+     3 : begin f_config_catalog1.Notebook1.PageIndex:=j;     f_config_catalog1.FormShow(self);  end;
+     4 : begin f_config_solsys1.Notebook1.PageIndex:=j;      f_config_solsys1.FormShow(self);  end;
+     5 : begin f_config_display1.Notebook1.PageIndex:=j;     f_config_display1.FormShow(self); end;
+     6 : begin f_config_pictures1.Notebook1.PageIndex:=j;    f_config_pictures1.FormShow(self);  end;
+     7 : begin f_config_system1.Notebook1.PageIndex:=j;      f_config_system1.FormShow(self);  end;
+     8 : begin f_config_internet1.Notebook1.PageIndex:=j;    f_config_internet1.FormShow(self);  end;
    end;
    cmain.configpage_i:=i;
    cmain.configpage_j:=j;
@@ -393,7 +393,7 @@ end;
 
 procedure Tf_config.HelpBtnClick(Sender: TObject);
 begin
-  HelpBtn.ShowHelp;
+  MultiDoc1.ActiveObject.ShowHelp;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);

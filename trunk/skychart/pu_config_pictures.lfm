@@ -3,7 +3,7 @@ object f_config_pictures: Tf_config_pictures
   Height = 535
   Top = 154
   Width = 513
-  ActiveControl = backimg
+  ActiveControl = MainPanel
   Caption = 'Pictures'
   ClientHeight = 535
   ClientWidth = 513
@@ -12,7 +12,7 @@ object f_config_pictures: Tf_config_pictures
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Height = 485
     Width = 513
@@ -473,7 +473,7 @@ object f_config_pictures: Tf_config_pictures
     ClientWidth = 513
     TabOrder = 1
     object Button1: TButton
-      Left = 208
+      Left = 216
       Height = 25
       Top = 11
       Width = 75
@@ -506,6 +506,15 @@ object f_config_pictures: Tf_config_pictures
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2
+    end
+    object Button4: TButton
+      Left = 120
+      Height = 25
+      Top = 11
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button4Click
+      TabOrder = 3
     end
   end
   object ImageTimer1: TTimer
