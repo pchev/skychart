@@ -2,12 +2,12 @@ object f_about: Tf_about
   Left = 395
   Height = 263
   Top = 105
-  Width = 496
+  Width = 534
   ActiveControl = Notebook1
   BorderStyle = bsSizeToolWin
   Caption = 'About'
   ClientHeight = 263
-  ClientWidth = 496
+  ClientWidth = 534
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -17,11 +17,11 @@ object f_about: Tf_about
   LCLVersion = '0.9.27'
   object Panel2: TPanel
     Height = 263
-    Width = 496
+    Width = 534
     Align = alClient
     BevelOuter = bvNone
     ClientHeight = 263
-    ClientWidth = 496
+    ClientWidth = 534
     TabOrder = 0
     object Panel0: TPanel
       Height = 263
@@ -2345,19 +2345,19 @@ object f_about: Tf_about
     object Panel4: TPanel
       Left = 80
       Height = 263
-      Width = 416
+      Width = 454
       Align = alClient
       ClientHeight = 263
-      ClientWidth = 416
+      ClientWidth = 454
       TabOrder = 1
       object Panel3: TPanel
         Left = 1
         Height = 39
         Top = 223
-        Width = 414
+        Width = 452
         Align = alBottom
         ClientHeight = 39
-        ClientWidth = 414
+        ClientWidth = 452
         TabOrder = 0
         object Button1: TButton
           Left = 151
@@ -2375,13 +2375,13 @@ object f_about: Tf_about
         Left = 1
         Height = 222
         Top = 1
-        Width = 414
+        Width = 452
         Align = alClient
         PageIndex = 0
         TabOrder = 1
         object Page1: TPage
           Caption = 'About'
-          ClientWidth = 410
+          ClientWidth = 448
           ClientHeight = 195
           object Label5: TLabel
             Left = 20
@@ -2406,7 +2406,7 @@ object f_about: Tf_about
           object Label7: TLabel
             Left = 20
             Height = 49
-            Top = 118
+            Top = 102
             Width = 380
             AutoSize = False
             Caption = 'Label7'
@@ -2416,7 +2416,7 @@ object f_about: Tf_about
           object Label8: TLabel
             Left = 20
             Height = 16
-            Top = 94
+            Top = 78
             Width = 60
             Caption = 'Copyright'
             ParentColor = False
@@ -2432,7 +2432,7 @@ object f_about: Tf_about
           object Label4: TLabel
             Left = 20
             Height = 16
-            Top = 74
+            Top = 158
             Width = 55
             Caption = 'Compiler'
             ParentColor = False

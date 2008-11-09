@@ -42,9 +42,6 @@ uses
   pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LResources, LCLProc,
   pu_clock;
   
-const compile_t={$I %DATE%}+' '+{$I %TIME%} ;
-      compile_v='Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%};
-
 var i : integer;
     buf, p, step : string;
 
@@ -70,8 +67,8 @@ begin
   end;
   if buf<>'' then Params.Add(buf);
 
-  compile_time:=compile_t;
-  compile_version:='Lazarus '+lcl_version+' '+compile_v+'-'+LCLPlatformDirNames[WidgetSet.LCLPlatform];
+  compile_time:={$I %DATE%}+' '+{$I %TIME%};
+  compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+LCLPlatformDirNames[WidgetSet.LCLPlatform];
   {$ifdef trace_debug}
   debugln('Program version : '+cdcversion);
   debugln('Program compiled: '+compile_time);
