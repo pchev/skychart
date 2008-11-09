@@ -1122,6 +1122,7 @@ resourcestring
   rsTextSize = 'Text Size';
   rsIconTime = 'Icon Time Display';
   rsTrueSolar = 'True solar';
+  rsCompiledWith = 'Compiled with:';
 
 implementation
 
