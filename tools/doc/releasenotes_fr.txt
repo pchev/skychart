@@ -1,5 +1,14 @@
 Version 3.0.1.5 SVN  Notes de la version
 
+Changement du 9 novembre:
+
+Nouveau programme cdcicon qui affiche l'horloge dans la barre de tâche. Il permet aussi d'ouvrir directement le calendrier ou Cartes du Ciel. Faire un clic droit pour le menu.
+Ajout de l'heure solaire vraie à l'horloge.
+Mise à jour de la documentation a partir du wiki grâce au travail de Marceau GUIHARD et des traducteurs.
+Toutes les fenêtres ont maintenant un bouton d'aide.
+La ligne du méridien utilise la couleur "autres lignes" pour plus de visibilité.
+Affichage de la version du compilateur utilisé dans la fenêtre A Propos.
+
 Changement du 2 novembre:
 
 Nouveau menu Voir/Horloge 

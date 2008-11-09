@@ -1,5 +1,14 @@
 Коментарі до версії 3.0.1.5 SVN
 
+November 9 changes:
+
+New program cdcicon that show the clock on the task bar. It can also start directly the Calendar or Skychat, do a rigth click on the icon to show the menu.
+Add True Solar Time to the clock
+Update the documentation from the wiki thank's to the great work from Marceau GUIHARD and the translators.
+All the windows have now a Help button.
+The meridian line is show with the "other line" color for more visibility.
+Show the compiler version in the About box.
+
 November 2 changes:
 
 New Clock display from View/Clock menu.
