@@ -1,5 +1,5 @@
 object f_info: Tf_info
-  Left = 397
+  Left = 405
   Height = 464
   Top = 100
   Width = 719
@@ -15,7 +15,7 @@ object f_info: Tf_info
   OnShow = FormShow
   ParentFont = False
   Position = poScreenCenter
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.26'
   object Panel1: TPanel
     Height = 27
     Top = 437
@@ -89,10 +89,10 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 1
       object serverinfo: TLabel
-        Left = 535
-        Height = 15
+        Left = 536
+        Height = 14
         Top = 6
-        Width = 2
+        Width = 1
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         ParentColor = False
@@ -111,7 +111,7 @@ object f_info: Tf_info
         Left = 104
         Height = 21
         Top = 2
-        Width = 99
+        Width = 87
         Caption = 'AutoRefresh'
         Checked = True
         OnClick = CheckBox1Click
@@ -139,13 +139,13 @@ object f_info: Tf_info
       Font.Height = -13
       Font.Name = 'courier'
       Font.Pitch = fpFixed
-      Font.Quality = fqNonAntialiased
       ParentColor = False
       ParentFont = False
       PopupMenu = PopupMenu2
       TabOrder = 1
       OnDblClick = Memo1DblClick
       BookMarkOptions.Xoffset = -18
+      BookMarkOptions.OnChange = nil
       Gutter.Visible = False
       Keystrokes = <      
         item
@@ -474,6 +474,7 @@ object f_info: Tf_info
       Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoTrimTrailingSpaces]
       ReadOnly = True
       RightEdge = 0
+      SelectedColor.OnChange = nil
       TabWidth = 10
     end
     object Panel3: TPanel
