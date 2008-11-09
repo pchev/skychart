@@ -504,7 +504,7 @@ with stringgrid4 do begin
 cells[0, 0]:=rsCatalogStrin;
 end;
 SetHelpDB(HTMLHelpDatabase1);
-SetHelp(self,hlpCatalog);
+SetHelp(self,hlpCatgen);
 end;
 
 procedure Tf_catgen.FormCreate(Sender: TObject);
@@ -2245,9 +2245,7 @@ end;
 procedure Tf_catgen.Button12Click(Sender: TObject);
 var fn:string;
 begin
-chdir(appdir);
-fn:=appdir+'\doc\UK_catgen.html';
-ExecuteFile(fn);
+ShowHelp;
 end;
 
 procedure Tf_catgen.ProgressAbort(Sender: TObject);

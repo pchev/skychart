@@ -38,6 +38,7 @@ type
   Tf_config_catalog = class(TForm)
     bsc3: TDirectoryEdit;
     addcat: TButton;
+    Button4: TButton;
     delcat: TButton;
     CatgenButton: TButton;
     Button1: TButton;
@@ -199,6 +200,7 @@ type
     OpenDialog1: TOpenDialog;
     Notebook1: TNotebook;
     procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure CatgenClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -313,6 +315,7 @@ Label5.caption:=rsFovNumber;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+Button4.caption:=rsHelp;
 LabelWarning.Caption:=rsWarningYouAr2;
 if Fcatgen<>nil then Fcatgen.SetLang;
 SetHelpDB(HTMLHelpDatabase1);
@@ -382,6 +385,11 @@ end;
 procedure Tf_config_catalog.Button2Click(Sender: TObject);
 begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_catalog.Button4Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_config_catalog.ShowGCat;

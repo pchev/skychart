@@ -5,7 +5,7 @@ LazarusResources.Add('Tf_addlabel','FORMDATA',[
   +#3#208#0#5'Width'#3#8#1#13'ActiveControl'#7#5'Edit1'#11'BorderIcons'#11#12'b'
   +'iSystemMenu'#0#11'BorderStyle'#7#8'bsDialog'#7'Caption'#6#9'Add Label'#12'C'
   +'lientHeight'#3#149#0#11'ClientWidth'#3#8#1#8'OnCreate'#7#10'FormCreate'#6'O'
-  +'nShow'#7#8'FormShow'#10'ParentFont'#8#10'LCLVersion'#6#6'0.9.26'#0#6'TLabel'
+  +'nShow'#7#8'FormShow'#10'ParentFont'#8#10'LCLVersion'#6#6'0.9.27'#0#6'TLabel'
   +#6'Label1'#4'Left'#2#12#6'Height'#2#14#3'Top'#2#16#5'Width'#2'#'#7'Caption'#6
   +#6'Label:'#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2#12#6'Height'#2
   +#14#3'Top'#2'-'#5'Width'#2#30#7'Caption'#6#5'Type:'#11'ParentColor'#8#0#0#5
@@ -15,9 +15,9 @@ LazarusResources.Add('Tf_addlabel','FORMDATA',[
   +'Items.Strings'#1#6#4'Star'#6#13'Variable Star'#6#13'Multiple Star'#6#6'Nebu'
   +'la'#6#12'Solar System'#6#13'Constellation'#6#11'Other label'#6#17'Chart Inf'
   +'ormation'#0#8'OnSelect'#7#15'ComboBox1Select'#8'TabOrder'#2#1#4'Text'#6#4'S'
-  +'tar'#0#0#7'TButton'#7'Button1'#4'Left'#2'0'#6'Height'#2#25#3'Top'#2'p'#5'Wi'
+  +'tar'#0#0#7'TButton'#7'Button1'#4'Left'#2'c'#6'Height'#2#25#3'Top'#2'p'#5'Wi'
   +'dth'#2'A'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'Ok'#11'ModalResu'
-  +'lt'#2#1#8'TabOrder'#2#2#0#0#7'TButton'#7'Button2'#4'Left'#3#160#0#6'Height'
+  +'lt'#2#1#8'TabOrder'#2#2#0#0#7'TButton'#7'Button2'#4'Left'#3#182#0#6'Height'
   +#2#25#3'Top'#2'p'#5'Width'#2'A'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'
   +#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#3#0#0#11'TRadioGroup'#11'Radi'
   +'oGroup1'#4'Left'#2#12#6'Height'#2','#3'Top'#2'@'#5'Width'#3#236#0#8'AutoFil'
@@ -29,8 +29,10 @@ LazarusResources.Add('Tf_addlabel','FORMDATA',[
   +'oRightThenTopToBottom'#27'ChildSizing.ControlsPerLine'#2#3#12'ClientHeight'
   +#2#29#11'ClientWidth'#3#232#0#7'Columns'#2#3#9'ItemIndex'#2#0#13'Items.Strin'
   +'gs'#1#6#4'Left'#6#6'Center'#6#5'Right'#0#7'OnClick'#7#16'RadioGroup1Click'#8
-  +'TabOrder'#2#4#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegist'
-  +'er'#9#4'left'#2#8#3'top'#2'u'#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowser'
-  +'HelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#2'x'#3'to'
-  +'p'#2'x'#0#0#0
+  +'TabOrder'#2#4#0#0#7'TButton'#7'Button3'#4'Left'#2#16#6'Height'#2#25#3'Top'#2
+  +'p'#5'Width'#2'A'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#4'Help'#7'O'
+  +'nClick'#7#12'Button3Click'#8'TabOrder'#2#5#0#0#17'THTMLHelpDatabase'#17'HTM'
+  +'LHelpDatabase1'#12'AutoRegister'#9#4'left'#2#8#3'top'#2'u'#0#0#22'THTMLBrow'
+  +'serHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'Auto'
+  +'Register'#9#4'left'#2'x'#3'top'#2'x'#0#0#0
 ]);

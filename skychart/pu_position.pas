@@ -40,6 +40,7 @@ type
   Tf_position = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     Panel1: TPanel;
@@ -59,6 +60,7 @@ type
     ra: TRaDec;
     de: TRaDec;
     rot: TFloatEdit;
+    procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure EqChange(Sender: TObject);
@@ -83,6 +85,7 @@ begin
 Caption:=rsPosition;
 Button1.caption:=rsOK;
 Button2.caption:=rsCancel;
+Button3.caption:=rsHelp;
 coord1.caption:=rsAz;
 coord2.caption:=rsAlt;
 eq1.caption:=rsRA;
@@ -133,6 +136,11 @@ SetLang;
 {$ifdef win32}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
+end;
+
+procedure Tf_position.Button3Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_position.EqChange(Sender: TObject);

@@ -711,6 +711,10 @@ msgstr "N. zwyczajowa"
 msgid "Compass rose size"
 msgstr "Wielkość róży wiatrów"
 
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "Wielkość gwiazdowa  komponentu 1"
@@ -1486,6 +1490,10 @@ msgstr "Zewnętrzny katalog obiektów"
 #: u_translation:rseyepiece
 msgid "Eyepiece"
 msgstr "Okular"
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr ""
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -3015,6 +3023,10 @@ msgstr "Kwazar"
 msgid "Quick Delete"
 msgstr "Szybko usuń"
 
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
+msgstr ""
+
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
 msgstr "Szybko usuń wszystkie dane powiązane z planetoidami"
@@ -4206,10 +4218,6 @@ msgstr "stopni"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "stolik krzyżowy:"
-
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr "en/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

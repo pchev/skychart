@@ -42,6 +42,7 @@ type
     Button4: TButton;
     Button5: TButton;
     astcdcneo: TButton;
+    Button6: TButton;
     CheckBox1: TCheckBox;
     DefaultDSS: TButton;
     comhttp: TButton;
@@ -83,6 +84,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure astcdcneoClick(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
@@ -156,6 +158,7 @@ DefaultDSS.caption:=rsDefault;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+Button6.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgInt);
 end;
@@ -292,6 +295,11 @@ AsteroidUrlList.Lines.Add(URL_CDCAsteroidElements);
 AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements2);
 AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements3);
 AsteroidUrlListExit(Sender);
+end;
+
+procedure Tf_config_internet.Button6Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_config_internet.FormDestroy(Sender: TObject);

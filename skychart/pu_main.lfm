@@ -19,7 +19,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object MultiDoc1: TMultiDoc
     Left = 24
     Height = 469
@@ -3470,14 +3470,13 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 29
+        Height = 25
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        MaxLength = -1
         OnEnter = ToolBar1Enter
         OnMouseMove = Toolbar1MouseMove
         ParentFont = False
@@ -4262,6 +4261,14 @@ object f_main: Tf_main
         Action = HelpContents1
         OnClick = HelpContents1Execute
       end
+      object MenuItem29: TMenuItem
+        Action = HelpFaq1
+        OnClick = HelpFaq1Execute
+      end
+      object MenuItem30: TMenuItem
+        Action = HelpQS1
+        OnClick = HelpQS1Execute
+      end
       object MenuItem10: TMenuItem
         Caption = '-'
       end
@@ -4950,6 +4957,18 @@ object f_main: Tf_main
       Caption = 'ViewClock'
       DisableIfNoHandler = True
       OnExecute = ViewClockExecute
+    end
+    object HelpFaq1: TAction
+      Category = 'Help'
+      Caption = 'HelpFaq1'
+      DisableIfNoHandler = True
+      OnExecute = HelpFaq1Execute
+    end
+    object HelpQS1: TAction
+      Category = 'Help'
+      Caption = 'HelpQS1'
+      DisableIfNoHandler = True
+      OnExecute = HelpQS1Execute
     end
   end
   object SaveDialog: TSaveDialog

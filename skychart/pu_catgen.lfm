@@ -3554,6 +3554,7 @@ object f_catgen: Tf_catgen
         TabOrder = 6
         OnMouseUp = Memo1MouseUp
         BookMarkOptions.Xoffset = -18
+        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
         Keystrokes = <        
           item
@@ -3878,6 +3879,7 @@ object f_catgen: Tf_catgen
           end>
         ReadOnly = True
         ScrollBars = ssHorizontal
+        SelectedColor.OnChange = nil
       end
     end
     object TabSheet4: TPage

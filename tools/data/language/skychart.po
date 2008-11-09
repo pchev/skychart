@@ -2,10 +2,6 @@
 msgid "Internal language"
 msgstr ""
 
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr ""
-
 #: u_translation:rsdeg
 msgid "d"
 msgstr ""
@@ -4284,5 +4280,17 @@ msgstr ""
 
 #: u_translation:rstruesolar
 msgid "True solar"
+msgstr ""
+
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr ""
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr ""
+
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
 msgstr ""
 

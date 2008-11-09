@@ -707,6 +707,10 @@ msgstr "Alg. heiti"
 msgid "Compass rose size"
 msgstr "Stærð áttavita"
 
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "Birtustig þáttar 1"
@@ -1482,6 +1486,10 @@ msgstr "Fyrirbæri úr gagnagrunni utan tölvunnar"
 #: u_translation:rseyepiece
 msgid "Eyepiece"
 msgstr "Augngler"
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr ""
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -3011,6 +3019,10 @@ msgstr "Dulstirni"
 msgid "Quick Delete"
 msgstr "Eyða hratt"
 
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
+msgstr ""
+
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
 msgstr "Eyða á fljótvirkan hátt öllum upplýsingum sem tengjast smástirnum."
@@ -4202,10 +4214,6 @@ msgstr "gráður"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "desc:"
-
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr "en/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

@@ -38,6 +38,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
     CountryTZ: TCheckBox;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
@@ -105,6 +106,7 @@ type
     horizondepression: TCheckBox;
     Label1: TLabel;
     procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CountryTZChange(Sender: TObject);
     procedure TZComboBoxChange(Sender: TObject);
@@ -221,6 +223,7 @@ horizondepression.caption:=rsDrawTheAppar;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+Button4.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgObs);
 end;
@@ -419,6 +422,11 @@ end;
 procedure Tf_config_observatory.Button2Click(Sender: TObject);
 begin
  if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_observatory.Button4Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_config_observatory.FormClose(Sender: TObject;

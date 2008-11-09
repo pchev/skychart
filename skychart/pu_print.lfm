@@ -1,7 +1,7 @@
 object f_print: Tf_print
-  Left = 1013
+  Left = 992
   Height = 293
-  Top = 417
+  Top = 402
   Width = 403
   ActiveControl = prtcolor.RadioButton0
   Caption = 'Print Chart'
@@ -10,12 +10,12 @@ object f_print: Tf_print
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object PrinterInfo: TLabel
     Left = 27
-    Height = 16
+    Height = 14
     Top = 14
-    Width = 66
+    Width = 60
     Caption = 'PrinterInfo'
     ParentColor = False
   end
@@ -34,7 +34,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 65
+    ClientHeight = 67
     ClientWidth = 203
     ItemIndex = 0
     Items.Strings = (
@@ -60,7 +60,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 65
+    ClientHeight = 67
     ClientWidth = 145
     Items.Strings = (
       'Portrait'
@@ -70,7 +70,7 @@ object f_print: Tf_print
     TabOrder = 4
   end
   object Print: TButton
-    Left = 192
+    Left = 224
     Height = 25
     Top = 256
     Width = 75
@@ -107,7 +107,7 @@ object f_print: Tf_print
     Top = 144
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 65
+    ClientHeight = 67
     ClientWidth = 376
     TabOrder = 5
     object Label1: TLabel
@@ -218,6 +218,15 @@ object f_print: Tf_print
       OnClick = Button2Click
       TabOrder = 5
     end
+  end
+  object Button3: TButton
+    Left = 134
+    Height = 25
+    Top = 256
+    Width = 75
+    Caption = 'Help'
+    OnClick = Button3Click
+    TabOrder = 6
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True

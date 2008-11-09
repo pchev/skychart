@@ -35,6 +35,7 @@ type
   Tf_print = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
     GroupBox1: TGroupBox;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
@@ -54,6 +55,7 @@ type
     prtorient: TRadioGroup;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LongEdit1Change(Sender: TObject);
@@ -96,11 +98,12 @@ Label3.caption:=rsTop;
 Label4.caption:=rsBottom;
 Button1.caption:=rsNoMargin;
 Button2.caption:=rsDefaultMargi;
+Button3.caption:=rsHelp;
 Setup.caption:=rsSetup;
 Print.caption:=rsPrint;
 Cancel.Caption:=rsCancel;
 SetHelpDB(HTMLHelpDatabase1);
-SetHelp(self,hlpIndex);
+SetHelp(self,hlpMenuFile);
 end;
 
 procedure Tf_print.FormShow(Sender: TObject);
@@ -128,6 +131,11 @@ LongEdit1.Value:=15;
 LongEdit2.Value:=15;
 LongEdit3.Value:=10;
 LongEdit4.Value:=5;
+end;
+
+procedure Tf_print.Button3Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_print.FormCreate(Sender: TObject);

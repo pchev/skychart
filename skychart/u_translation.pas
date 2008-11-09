@@ -12,7 +12,6 @@ function Translate(lang : string = ''):string;
 
 resourcestring
   rsLanguage = 'Internal language';
-  rsDocumentatio = 'en/documentation/start.html';
   rsdeg = 'd';
   rsmin = 'm';
   rssec = 's';
@@ -1123,6 +1122,8 @@ resourcestring
   rsIconTime = 'Icon Time Display';
   rsTrueSolar = 'True solar';
   rsCompiledWith = 'Compiled with:';
+  rsFAQ = 'FAQ';
+  rsQuickStartGu = 'Quick start guide';
 
 implementation
 

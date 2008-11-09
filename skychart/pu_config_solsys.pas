@@ -38,6 +38,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
     CheckBoxPluto: TCheckBox;
     comt_y: TEdit;
     comt_m: TEdit;
@@ -208,6 +209,7 @@ type
     XplanetDir: TEdit;
     XplanetBtn: TBitBtn;
     procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure CheckBoxPlutoChange(Sender: TObject);
     procedure DownloadAsteroidClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -409,6 +411,7 @@ astsymbol.Items[1]:=rsProportional2;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+Button4.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgSol);
 end;
@@ -576,6 +579,11 @@ end;
 procedure Tf_config_solsys.Button2Click(Sender: TObject);
 begin
    if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_solsys.Button4Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_config_solsys.FormClose(Sender: TObject;

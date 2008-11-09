@@ -43,6 +43,7 @@ type
     Button5: TButton;
     Button6: TButton;
     BitBtn4: TButton;
+    Button7: TButton;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
@@ -99,6 +100,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
@@ -231,6 +233,7 @@ CheckGroup2.Items[5]:=rsSecond;
 ADBC.Items[0]:=rsAD;
 ADBC.Items[1]:=rsBC;
 Button4.Caption:=rsMoreOptions;
+Button7.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgDate);
 end;
@@ -525,6 +528,11 @@ begin
  t_sec.value:=s;
  DateChange(Sender);
  TimeChange(Sender);
+end;
+
+procedure Tf_config_time.Button7Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);

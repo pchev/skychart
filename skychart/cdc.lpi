@@ -425,6 +425,7 @@
         <ComponentName Value="f_splash"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_splash.lrs"/>
         <UnitName Value="pu_splash"/>
       </Unit41>

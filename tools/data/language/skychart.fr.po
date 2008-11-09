@@ -1,7 +1,8 @@
+# translation of skychart.fr.po
 # translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-11-07 12:53+0100\n"
+"PO-Revision-Date: 2008-11-09 14:21+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -706,6 +707,10 @@ msgstr "Nom commun"
 #: u_translation:rscompassroses
 msgid "Compass rose size"
 msgstr "Taille de la boussole"
+
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr "Compilé avec:"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -1482,6 +1487,10 @@ msgstr "Objet d'un catalogue externe"
 #: u_translation:rseyepiece
 msgid "Eyepiece"
 msgstr "Oculaire"
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr "F.A.Q."
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -3011,6 +3020,10 @@ msgstr "Quasar"
 msgid "Quick Delete"
 msgstr "Suppression rapide"
 
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
+msgstr "Guide d'utilisation rapide"
+
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
 msgstr "Suppression rapide de toutes les données des astéroïdes"
@@ -4202,10 +4215,6 @@ msgstr "degrés"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "desc:"
-
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr "fr/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

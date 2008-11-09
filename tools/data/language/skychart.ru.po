@@ -709,6 +709,10 @@ msgstr "Принятое название"
 msgid "Compass rose size"
 msgstr "Размер компаса"
 
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "Блеск 1-го компонента"
@@ -1484,6 +1488,10 @@ msgstr "Объект внешнего каталога"
 #: u_translation:rseyepiece
 msgid "Eyepiece"
 msgstr "Окуляр"
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr ""
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -3013,6 +3021,10 @@ msgstr "Квазар"
 msgid "Quick Delete"
 msgstr "Быстро удалить"
 
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
+msgstr ""
+
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
 msgstr "Быстро удалить все связанные с астероидами данные"
@@ -4204,10 +4216,6 @@ msgstr "градусов"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "опис:"
-
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr "ru/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

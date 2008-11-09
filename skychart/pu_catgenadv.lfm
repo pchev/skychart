@@ -14,7 +14,7 @@ object f_catgenadv: Tf_catgenadv
   OnShow = FormShow
   ParentFont = False
   Position = poMainFormCenter
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object Label1: TLabel
     Left = 72
     Height = 18

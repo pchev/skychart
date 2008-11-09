@@ -709,6 +709,10 @@ msgstr "普通名称"
 msgid "Compass rose size"
 msgstr "罗盘大小"
 
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "子源1星等"
@@ -1484,6 +1488,10 @@ msgstr "外部星表天体"
 #: u_translation:rseyepiece
 msgid "Eyepiece"
 msgstr "目镜"
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr ""
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -3013,6 +3021,10 @@ msgstr "类星体"
 msgid "Quick Delete"
 msgstr "快速删除"
 
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
+msgstr ""
+
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
 msgstr "快速删除所有小行星相关数据"
@@ -4204,10 +4216,6 @@ msgstr "度"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "描述："
-
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr "en/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

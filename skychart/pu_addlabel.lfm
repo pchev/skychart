@@ -12,7 +12,7 @@ object f_addlabel: Tf_addlabel
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object Label1: TLabel
     Left = 12
     Height = 14
@@ -58,7 +58,7 @@ object f_addlabel: Tf_addlabel
     Text = 'Star'
   end
   object Button1: TButton
-    Left = 48
+    Left = 99
     Height = 25
     Top = 112
     Width = 65
@@ -68,7 +68,7 @@ object f_addlabel: Tf_addlabel
     TabOrder = 2
   end
   object Button2: TButton
-    Left = 160
+    Left = 182
     Height = 25
     Top = 112
     Width = 65
@@ -103,6 +103,16 @@ object f_addlabel: Tf_addlabel
     )
     OnClick = RadioGroup1Click
     TabOrder = 4
+  end
+  object Button3: TButton
+    Left = 16
+    Height = 25
+    Top = 112
+    Width = 65
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Help'
+    OnClick = Button3Click
+    TabOrder = 5
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True

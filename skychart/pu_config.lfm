@@ -158,8 +158,8 @@ object f_config: Tf_config
     Top = 499
     Width = 730
     Align = alBottom
-    ClientHeight = 37
-    ClientWidth = 726
+    ClientHeight = 41
+    ClientWidth = 730
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16

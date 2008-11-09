@@ -38,6 +38,7 @@ type
   { Tf_printsetup }
 
   Tf_printsetup = class(TForm)
+    Button1: TButton;
     Label5: TLabel;
     PaperSize: TComboBox;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
@@ -62,6 +63,7 @@ type
     Label4: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PaperSizeChange(Sender: TObject);
     procedure qtsetupClick(Sender: TObject);
@@ -102,8 +104,9 @@ printmode.Items[1]:=rsPostscript;
 printmode.Items[2]:=rsBitmapFile;
 Ok.Caption:=rsOK;
 Cancel.Caption:=rsCancel;
+Button1.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
-SetHelp(self,hlpIndex);
+SetHelp(self,hlpMenuFile);
 end;
 
 procedure Tf_printsetup.FormShow(Sender: TObject);
@@ -203,6 +206,11 @@ PaperSize.Clear;
 for i:=1 to PaperNumber do begin
    PaperSize.Items.Add(Papername[i]);
 end;
+end;
+
+procedure Tf_printsetup.Button1Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_printsetup.PaperSizeChange(Sender: TObject);

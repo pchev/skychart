@@ -708,6 +708,10 @@ msgstr "Nom comú"
 msgid "Compass rose size"
 msgstr "Mida de la rosa dels vents"
 
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "Magnitud del primer component"
@@ -1483,6 +1487,10 @@ msgstr "Objecte d'un catàleg extern"
 #: u_translation:rseyepiece
 msgid "Eyepiece"
 msgstr "Ocular"
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr ""
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -3012,6 +3020,10 @@ msgstr "Quasar"
 msgid "Quick Delete"
 msgstr "Supressió ràpida"
 
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
+msgstr ""
+
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
 msgstr "Supressió ràpida de totes les dades dels asteroides"
@@ -4203,10 +4215,6 @@ msgstr "graus"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "desc:"
-
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr "en/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "

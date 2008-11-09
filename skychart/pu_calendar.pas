@@ -414,6 +414,7 @@ SetHelp(self,hlpCalInput);
 SetHelp(twilight,hlpCalTw);
 SetHelp(planets,hlpCalPla);
 SetHelp(comet,hlpCalCom);
+SetHelp(Asteroids,hlpCalAst);
 SetHelp(Solar,hlpCalSol);
 SetHelp(Lunar,hlpCalLuna);
 end;
@@ -1740,7 +1741,8 @@ end;
 
 procedure Tf_calendar.BtnHelpClick(Sender: TObject);
 begin
-ExecuteFile(slash(helpdir)+slash('wiki_doc')+stringreplace(rsDocumentatio,'/',PathDelim,[rfReplaceAll]));
+pagecontrol1.ActivePage.ShowHelp;
+//ExecuteFile(slash(helpdir)+slash('wiki_doc')+stringreplace(rsDocumentatio,'/',PathDelim,[rfReplaceAll]));
 end;
 
 initialization

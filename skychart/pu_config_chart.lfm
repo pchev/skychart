@@ -12,7 +12,7 @@ object f_config_chart: Tf_config_chart
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = False
-  LCLVersion = '0.9.25'
+  LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Height = 517
     Width = 510
@@ -2503,6 +2503,15 @@ object f_config_chart: Tf_config_chart
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2
+    end
+    object Button6: TButton
+      Left = 120
+      Height = 25
+      Top = 12
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button6Click
+      TabOrder = 3
     end
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase

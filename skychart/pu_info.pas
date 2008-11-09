@@ -41,6 +41,7 @@ type
   { Tf_info }
 
   Tf_info = class(TForm)
+    Button4: TButton;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     InfoMemo: TMemo;
@@ -76,6 +77,7 @@ type
     ProgressMemo: TMemo;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure closeconnectionClick(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
     procedure EditSelectAll1Execute(Sender: TObject);
@@ -124,6 +126,7 @@ Caption:=rsInfo;
 Button2.caption:=rsRefresh;
 CheckBox1.caption:=rsAutoRefresh;
 Button3.caption:=rsSearch;
+Button4.caption:=rsHelp;
 Button5.caption:=rsSortByRA;
 Button6.caption:=rsPrint;
 Button7.caption:=rsSave;
@@ -152,6 +155,11 @@ for i:=1 to Maxwindow do begin
 end;
 except
 end;
+end;
+
+procedure Tf_info.Button4Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_info.StringGrid1MouseDown(Sender: TObject;

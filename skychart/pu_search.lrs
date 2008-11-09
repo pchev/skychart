@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_search','FORMDATA',[
   'TPF0'#9'Tf_search'#8'f_search'#4'Left'#3#15#2#6'Height'#3'F'#1#3'Top'#2'i'#5
   +'Width'#3#177#1#13'ActiveControl'#7#2'Id'#11'BorderStyle'#7#12'bsToolWindow'
@@ -144,12 +146,14 @@ LazarusResources.Add('Tf_search','FORMDATA',[
   +'Common Name'#6#14'Variable Stars'#6#12'Double Stars'#6#6'Comets'#6#9'Astero'
   +'ids'#6#7'Planets'#6#13'Constellation'#6#20'Other Lines Catalogs'#0#7'OnClic'
   +'k'#7#16'RadioGroup1Click'#8'TabOrder'#2#0#0#0#7'TButton'#7'Button1'#4'Left'
-  +#3#128#0#6'Height'#2#25#3'Top'#3' '#1#5'Width'#2'K'#25'BorderSpacing.InnerBo'
+  +#3#248#0#6'Height'#2#25#3'Top'#3' '#1#5'Width'#2'K'#25'BorderSpacing.InnerBo'
   +'rder'#2#4#7'Caption'#6#4'Find'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#8
-  +#0#0#7'TButton'#7'Button2'#4'Left'#3#232#0#6'Height'#2#25#3'Top'#3' '#1#5'Wi'
-  +'dth'#2'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Canc'
-  +'el'#11'ModalResult'#2#2#8'TabOrder'#2#9#0#0#17'THTMLHelpDatabase'#17'HTMLHe'
-  +'lpDatabase1'#12'AutoRegister'#9#4'left'#2#16#3'top'#3' '#1#0#0#22'THTMLBrow'
-  +'serHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'Auto'
-  +'Register'#9#4'left'#2'@'#3'top'#3' '#1#0#0#0
+  +#0#0#7'TButton'#7'Button2'#4'Left'#3'\'#1#6'Height'#2#25#3'Top'#3' '#1#5'Wid'
+  +'th'#2'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cance'
+  +'l'#11'ModalResult'#2#2#8'TabOrder'#2#9#0#0#7'TButton'#7'Button5'#4'Left'#3
+  +#152#0#6'Height'#2#25#3'Top'#3' '#1#5'Width'#2'K'#7'Caption'#6#4'Help'#7'OnC'
+  +'lick'#7#12'Button5Click'#8'TabOrder'#2#10#0#0#17'THTMLHelpDatabase'#17'HTML'
+  +'HelpDatabase1'#12'AutoRegister'#9#4'left'#2#16#3'top'#3' '#1#0#0#22'THTMLBr'
+  +'owserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'Au'
+  +'toRegister'#9#4'left'#2'@'#3'top'#3' '#1#0#0#0
 ]);

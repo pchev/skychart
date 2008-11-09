@@ -69,7 +69,7 @@ Label4.caption:=rsIndicateHere;
 Button1.caption:=rsOK;
 Button2.caption:=rsCancel;
 SetHelpDB(HTMLHelpDatabase1);
-SetHelp(self,hlpCatalog);
+SetHelp(self,hlpCatgen);
 end;
 
 Procedure Tf_catgenadv.RefreshCalc;

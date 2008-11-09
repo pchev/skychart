@@ -39,6 +39,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     ResetLum: TButton;
@@ -93,6 +94,7 @@ type
     realskymb: TLongEdit;
     Notebook1: TNotebook;
     procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ResetLumClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -184,6 +186,7 @@ OnlineDSS.caption:=rsUseOnlineDSS;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
+Button4.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgPict);
 end;
@@ -260,6 +263,11 @@ end;
 procedure Tf_config_pictures.Button2Click(Sender: TObject);
 begin
   if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_pictures.Button4Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_config_pictures.FormDestroy(Sender: TObject);

@@ -1912,6 +1912,16 @@ object f_config_catalog: Tf_config_catalog
       ModalResult = 2
       TabOrder = 2
     end
+    object Button4: TButton
+      Left = 144
+      Height = 25
+      Top = 15
+      Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Help'
+      OnClick = Button4Click
+      TabOrder = 3
+    end
   end
   object OpenDialog1: TOpenDialog
     FilterIndex = 0

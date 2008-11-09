@@ -87,7 +87,11 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    HelpFaq1: TAction;
+    HelpQS1: TAction;
     MenuItem27: TMenuItem;
+    MenuItem29: TMenuItem;
+    MenuItem30: TMenuItem;
     ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
@@ -473,6 +477,8 @@ type
     procedure FileExit1Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure HelpFaq1Execute(Sender: TObject);
+    procedure HelpQS1Execute(Sender: TObject);
     procedure HomePage1Click(Sender: TObject);
     procedure Maillist1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
@@ -1203,7 +1209,22 @@ end;
 
 procedure Tf_main.HelpContents1Execute(Sender: TObject);
 begin
+sethelp(self,hlpIndex);
 ShowHelp;
+end;
+
+procedure Tf_main.HelpFaq1Execute(Sender: TObject);
+begin
+sethelp(self,hlpFaq);
+ShowHelp;
+sethelp(self,hlpIndex);
+end;
+
+procedure Tf_main.HelpQS1Execute(Sender: TObject);
+begin
+sethelp(self,hlpQSguide);
+ShowHelp;
+sethelp(self,hlpIndex);
 end;
 
 procedure Tf_main.HomePage1Click(Sender: TObject);
@@ -4890,7 +4911,9 @@ WindowTileItem.caption:=rsTileHorizont;
 WindowTileItem2.caption:=rsTileVertical;
 Maximize1.caption:=rsMaximize;
 Help1.caption:=rsHelp;
-Content1.caption:=rsHelpContents;
+HelpContents1.caption:=rsHelpContents;
+HelpFaq1.Caption:=rsFAQ;
+HelpQS1.Caption:=rsQuickStartGu;
 HomePage1.caption:=rsSkychartHome;
 Maillist1.caption:=rsMailList;
 BugReport1.caption:=rsReportAProbl;

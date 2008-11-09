@@ -708,6 +708,10 @@ msgstr "Běžné jméno"
 msgid "Compass rose size"
 msgstr ""
 
+#: u_translation:rscompiledwith
+msgid "Compiled with:"
+msgstr ""
+
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
 msgstr "Magnituda 1. složky"
@@ -1483,6 +1487,10 @@ msgstr "Objekt externího katalogu"
 #: u_translation:rseyepiece
 msgid "Eyepiece"
 msgstr "Okulár"
+
+#: u_translation:rsfaq
+msgid "FAQ"
+msgstr ""
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -3012,6 +3020,10 @@ msgstr "Kvasar"
 msgid "Quick Delete"
 msgstr "Smazat"
 
+#: u_translation:rsquickstartgu
+msgid "Quick start guide"
+msgstr ""
+
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
 msgstr "Smazat všechna data asteroidů"
@@ -4203,10 +4215,6 @@ msgstr "stupňů"
 #: u_translation:rsdesc
 msgid "desc:"
 msgstr "popis:"
-
-#: u_translation:rsdocumentatio
-msgid "en/documentation/start.html"
-msgstr "en/documentation/start.html"
 
 #: u_translation:rsevery
 msgid "every "
