@@ -103,6 +103,7 @@ RadioGroup1.Items[1]:=rsUT;
 RadioGroup1.Items[2]:=rsMeanLocal;
 RadioGroup1.Items[3]:=rsTrueSolar;
 RadioGroup1.Items[4]:=rsSideral;
+RadioGroup1.Items[5]:=rsNone1;
 Button1.Caption:=rsOK;
 Button2.Caption:=rsCancel;
 MenuItem1.caption:=rsClock;
@@ -271,11 +272,13 @@ end;
 
 procedure Tf_tray.TrayMsg(txt1,txt2,hint1:string);
 begin
-UpdBmp(txt1,txt2,icontype,icontextsize,iconbg,icontext,bmp);
-Systray.Icon.FreeImage;
-SysTray.Icon.Canvas.Draw(0,0,bmp);
-Systray.Icon.FreeImage; // yep two time is better
-SysTray.Icon.Canvas.Draw(0,0,bmp);
+if iconinfo<>5 then begin
+  UpdBmp(txt1,txt2,icontype,icontextsize,iconbg,icontext,bmp);
+  Systray.Icon.FreeImage;
+  SysTray.Icon.Canvas.Draw(0,0,bmp);
+  Systray.Icon.FreeImage; // yep two time is better
+  SysTray.Icon.Canvas.Draw(0,0,bmp);
+end;
 Systray.Hint:=hint1;
 end;
 
@@ -310,10 +313,14 @@ end;
 procedure Tf_tray.LoadIcon;
 begin
   SysTray.Icon.FreeImage;
-  case icontype of
-   0 : SysTray.Icon.LoadFromLazarusResource('black16x16');
-   1 : SysTray.Icon.LoadFromLazarusResource('black32x32');
-   2 : SysTray.Icon.LoadFromLazarusResource('black32x64');
+  if iconinfo=5 then begin
+     SysTray.Icon.LoadFromLazarusResource('cdcmain');
+  end else begin
+    case icontype of
+     0 : SysTray.Icon.LoadFromLazarusResource('black16x16');
+     1 : SysTray.Icon.LoadFromLazarusResource('black32x32');
+     2 : SysTray.Icon.LoadFromLazarusResource('black32x64');
+    end;
   end;
   bmp.Width:=SysTray.Icon.Width;
   bmp.Height:=SysTray.Icon.Height;
@@ -441,6 +448,10 @@ begin
         buf2:=f_clock.label4.Caption;
       end;
   4 : begin
+        buf1:=f_clock.clock5.Caption;
+        buf2:=f_clock.label5.Caption;
+      end;
+  5 : begin
         buf1:=f_clock.clock5.Caption;
         buf2:=f_clock.label5.Caption;
       end;
@@ -634,5 +645,6 @@ end;
 initialization
   {$I pu_tray.lrs}
   {$I blankicon.lrs}
+  {$I cdcmain.lrs}
 end.
 
