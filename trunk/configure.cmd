@@ -72,17 +72,6 @@ for /F  %%d in (dirs.lst) do  (
 )
 del dirs.lst
 
-rem  replace fpc install by own script and add uninstall script
-sed  -i "s/^install:\(.*\)$/install: \n\t.\\\install.cmd \$(PREFIX)\nuninstall: \n\t.\\\uninstall.cmd \$(PREFIX)/g" Makefile
-
-rem add data install
-echo data: >> Makefile
-echo 	$(MAKE) -C tools all >> Makefile
-echo install_data: >> Makefile
-echo 	$(MAKE) -C tools install >> Makefile 
-echo uninstall_data: >> Makefile
-echo 	$(MAKE) -C tools uninstall >> Makefile
-
 cd tools
 sed "s/\%%PREFIX\%%/%prefix%/" Makefile.in > Makefile
 cd %basedir%
