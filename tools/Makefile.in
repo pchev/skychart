@@ -6,22 +6,18 @@ PREFIX=%PREFIX%
 all: 
 	#build data tools
 
-
+ifeq ($(OS_TARGET),win32)
 install: 
-ifeq ($(OS_TARGET),win32)
 	.\install_data.cmd $(PREFIX) 
-else
-	./install_data.sh $(PREFIX) 
-endif
-
 uninstall: 
-ifeq ($(OS_TARGET),win32)
 	.\uninstall_data.cmd $(PREFIX) 
 else
+install: 
+	./install_data.sh $(PREFIX) 
+uninstall: 
 	./uninstall_data.sh $(PREFIX) 
-endif
-
 install_win: 
 	./install_win_data.sh $(PREFIX)
 uninstall_win: 
 	./uninstall_win_data.sh $(PREFIX)
+endif
