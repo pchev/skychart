@@ -10,7 +10,7 @@ uses
 {$endif}
   u_help, u_translation, u_util, u_constant, u_projection, cu_planet, cu_database, Inifiles,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  Menus, ExtCtrls, StdCtrls, ComCtrls, ColorBox, Spin, dynlibs, Math;
+  Menus, ExtCtrls, StdCtrls, ComCtrls, ColorBox, Spin, dynlibs, Math, LCLProc;
 
 type
 
