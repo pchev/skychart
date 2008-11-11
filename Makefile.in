@@ -21,3 +21,21 @@ PREFIX=%PREFIX%
 
 all: skychart_all varobs_all
 
+install: 
+	./install.sh $(PREFIX)
+uninstall: 
+	./uninstall.sh $(PREFIX)
+data:
+	\$(MAKE) -C tools all
+install_data:
+	\$(MAKE) -C tools install 
+uninstall_data:
+	\$(MAKE) -C tools uninstall
+install_win: 
+	./install_win.sh $(PREFIX)
+uninstall_win: 
+	./uninstall_win.sh $(PREFIX)
+install_win_data:
+	\$(MAKE) -C tools install_win 
+uninstall_win_data:
+	\$(MAKE) -C tools uninstall_win

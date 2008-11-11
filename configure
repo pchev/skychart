@@ -130,18 +130,6 @@ do
    fi
 done
 
-# replace fpc install by own script and add uninstall script
-sed  -i 's/^install:\(.*\)$/install: \n\t.\/install.sh \$(PREFIX)\nuninstall: \n\t.\/uninstall.sh \$(PREFIX)/g' Makefile
-
-# add data install
-cat >> Makefile <<EOF 
-data:
-	\$(MAKE) -C tools all
-install_data:
-	\$(MAKE) -C tools install 
-uninstall_data:
-	\$(MAKE) -C tools uninstall
-EOF
 cd tools
 sed "s#%PREFIX%#$prefix#" Makefile.in > Makefile
 cd $basedir

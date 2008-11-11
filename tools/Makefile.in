@@ -20,3 +20,8 @@ ifeq ($(OS_TARGET),win32)
 else
 	./uninstall_data.sh $(PREFIX) 
 endif
+
+install_win: 
+	./install_win_data.sh $(PREFIX)
+uninstall_win: 
+	./uninstall_win_data.sh $(PREFIX)
