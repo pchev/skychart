@@ -1,6 +1,7 @@
 # Common flags
 CC            = gcc
-CFLAGS        = -O3 -ffast-math
+#CFLAGS        = -O3 -ffast-math (fast-math removed for better compatibility )
+CFLAGS        = -O3
 OSTYPE = $(shell uname)
 ifneq ($(findstring darwin,$(OSTYPE)),)
 SO_Name       = libplan404.dylib
