@@ -15,4 +15,6 @@ rm -fv $destdir/varobs_lpv_bulletin.exe
 rm -fv $destdir/libgetdss.dll
 rm -fv $destdir/libplan404.dll
 rm -fv $destdir/sqlite3.dll
+rm -fv $destdir/libFPlanetRender.dll
+rm -fv $destdir/zlib1.dll
 rm -rfv $destdir/plugins

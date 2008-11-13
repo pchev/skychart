@@ -18,3 +18,5 @@ install -v -m 644 skychart/library/plan404/libplan404.dll  $destdir/
 
 unzip -d $destdir system_integration/Windows/data/sqlite3.zip
 unzip -d $destdir system_integration/Windows/data/plugins.zip
+unzip -d $destdir system_integration/Windows/data/planetrender.zip
+unzip -d $destdir system_integration/Windows/data/zlib.zip
