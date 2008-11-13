@@ -28,7 +28,7 @@ if [[ $lastrev -ne $currentrev ]]; then
 # delete old files
   rm skychart-linux.tar.bz2
   rm skychart-windows.zip
-  rm skychart*.exe
+  rm skychart-*.exe
   rm -rf $builddir
 
 # make Linux version
@@ -68,7 +68,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   wine "$innosetup" "$issscript"
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv $builddir/skychart*.exe $wd
+  mv $builddir/skychart-*.exe $wd
 
   cd $wd
   rm -rf $builddir
