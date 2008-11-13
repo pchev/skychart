@@ -32,8 +32,8 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm -rf $builddir
 
 # make Linux version
-  cp -a system_integration/Linux/debian $builddir
-  cp -a system_integration/Linux/rpm $builddir
+  rsync -a --exclude=.svn system_integration/Linux/debian $builddir
+  rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
   ./configure $configopt prefix=$builddir
   if [[ $? -ne 0 ]]; then exit 1;fi
   make clean
@@ -59,7 +59,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm -rf $builddir
 
 # make Windows version
-  cp -a system_integration/Windows/installer/skychart $builddir
+  rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
   ./configure $configopt prefix=$builddir/Data
   if [[ $? -ne 0 ]]; then exit 1;fi
   make OS_TARGET=win32 CPU_TARGET=i386 clean
