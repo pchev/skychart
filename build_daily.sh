@@ -32,6 +32,8 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm -rf $builddir
 
 # make Linux version
+  cp -a system_integration/Linux/debian $builddir
+  cp -a system_integration/Linux/rpm $builddir
   ./configure $configopt prefix=$builddir
   if [[ $? -ne 0 ]]; then exit 1;fi
   make clean
@@ -46,6 +48,12 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart-linux.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
+  mv bin debian/skychart/usr/
+  mv lib debian/skychart/usr/
+  mv share debian/skychart/usr/
+  cd debian
+  fakeroot dpkg-deb --build skychart .
+  mv skychart*.deb $wd
 
   cd $wd
   rm -rf $builddir
