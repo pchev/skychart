@@ -1,6 +1,6 @@
 Summary: Skychart / Cartes du Ciel planetarium software
 Name: skychart
-Version: 3.0.1.0
+Version: 3.0.1.4
 Release: 1
 Group: Sciences/Astronomy
 License: GPL
@@ -9,7 +9,7 @@ Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: i386
 Provides: skychart libplan404.so libgetdss.so
-Requires: gtk+ gdk-pixbuf libsqlite3.so.0
+Requires: gtk2 glib2 pango libjpeg libpng sqlite 
 AutoReqProv: no
 
 %description
@@ -22,5 +22,6 @@ Planetarium software for the advanced amateur astronomer.
 /usr/lib/libgetdss.so
 /usr/share/applications/skychart.desktop
 /usr/share/pixmaps/skychart.xpm
+/usr/share/doc/skychart
 /usr/share/apps/skychart
 
