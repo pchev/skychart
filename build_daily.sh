@@ -26,7 +26,7 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart-linux.tar.bz
+  rm skychart-linux.tar.bz2
   rm skychart-windows.zip
   rm skychart*.exe
   rm -rf $builddir
@@ -42,9 +42,9 @@ if [[ $lastrev -ne $currentrev ]]; then
   make install_data
   if [[ $? -ne 0 ]]; then exit 1;fi
   cd $builddir
-  tar cvjf skychart-linux.tar.bz *
+  tar cvjf skychart-linux.tar.bz2 *
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv skychart-linux.tar.bz $wd
+  mv skychart-linux.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
 
   cd $wd
