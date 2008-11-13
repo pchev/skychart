@@ -47,18 +47,22 @@ if [[ $lastrev -ne $currentrev ]]; then
   tar cvjf skychart-linux.tar.bz2 *
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart-linux.tar.bz2 $wd
-  if [[ $? -ne 0 ]]; then exit 1;fimv 
+  if [[ $? -ne 0 ]]; then exit 1;fi
   mv bin debian/skychart/usr/
   mv lib debian/skychart/usr/
   mv share debian/skychart/usr/
   cd debian
   fakeroot dpkg-deb --build skychart .
+  if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
+  if [[ $? -ne 0 ]]; then exit 1;fi
   cd $builddir
   mv debian/skychart/usr/* rpm/skychart/usr/
   cd rpm
   fakeroot rpmbuild  --define "_topdir $builddir/rpm/" -bb SPECS/skychart.spec
+  if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/i386/skychart*.rpm $wd
+  if [[ $? -ne 0 ]]; then exit 1;fi
 
   cd $wd
   rm -rf $builddir
