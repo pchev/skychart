@@ -1,0 +1,15 @@
+
+Copyright: GPL
+
+Information :
+Name        : skychart-pictures
+Version     : 1.0.0.1
+Release     : 1
+Group       : Sciences/Astronomy
+License     : GPL
+Packager    : Patrick Chevalley
+URL         : http://skychart.sourceforge.net
+Summary     : Skychart / Cartes du Ciel Pictures of Deepsky objects
+Description :
+Pictures of Deepsky objects to use with Skychart planetarium software.
+
