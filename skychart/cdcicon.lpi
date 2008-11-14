@@ -75,7 +75,7 @@
         <ResourceBaseClass Value="Form"/>
         <ResourceFilename Value="pu_tray.lrs"/>
         <UnitName Value="pu_tray"/>
-        <CursorPos X="78" Y="13"/>
+        <CursorPos X="41" Y="21"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="28"/>

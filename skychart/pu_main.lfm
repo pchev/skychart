@@ -3031,6 +3031,7 @@ object f_main: Tf_main
       Align = alLeft
       Brush.Color = clBtnShadow
       Pen.Color = clBtnShadow
+      Pen.Cosmetic = True
     end
     object PPanels0: TPanel
       Height = 34

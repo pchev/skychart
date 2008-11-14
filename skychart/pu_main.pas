@@ -5112,12 +5112,12 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     if sc.cfgsc.ProjPole=Equat then begin
        toolbuttonGridEq.Enabled:=false;
        toolbuttonGridEq.Indeterminate:=true;
-       toolbuttonGridEq.ImageIndex:=87;
+//       toolbuttonGridEq.ImageIndex:=87;
        GridEQ1.Enabled:=false;
     end else begin
        toolbuttonGridEq.Enabled:=true;
        toolbuttonGridEq.Indeterminate:=false;
-       toolbuttonGridEq.ImageIndex:=24;
+//       toolbuttonGridEq.ImageIndex:=24;
        GridEQ1.Enabled:=true;
     end;
     ToolButtonShowConstellationLine.down:=sc.cfgsc.ShowConstl;
@@ -5136,18 +5136,18 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     if sc.cfgsc.ProjPole=AltAz then begin
        ToolButtonShowObjectbelowHorizon.Enabled:=true;
        ToolButtonShowObjectbelowHorizon.Indeterminate:=false;
-       ToolButtonShowObjectbelowHorizon.ImageIndex:=70;
+//       ToolButtonShowObjectbelowHorizon.ImageIndex:=70;
        ToolButtonswitchbackground.Enabled:=true;
        ToolButtonswitchbackground.Indeterminate:=false;
-       ToolButtonswitchbackground.ImageIndex:=35;
+//       ToolButtonswitchbackground.ImageIndex:=35;
        ShowObjectbelowthehorizon1.Enabled:=true;
     end else begin
        ToolButtonShowObjectbelowHorizon.Enabled:=false;
        ToolButtonShowObjectbelowHorizon.Indeterminate:=true;
-       ToolButtonShowObjectbelowHorizon.ImageIndex:=87;
+//       ToolButtonShowObjectbelowHorizon.ImageIndex:=87;
        ToolButtonswitchbackground.Enabled:=false;
        ToolButtonswitchbackground.Indeterminate:=true;
-       ToolButtonswitchbackground.ImageIndex:=87;
+//       ToolButtonswitchbackground.ImageIndex:=87;
        ShowObjectbelowthehorizon1.Enabled:=false;
     end;
     ToolButtonBlink.Down:=BlinkTimer.enabled;
