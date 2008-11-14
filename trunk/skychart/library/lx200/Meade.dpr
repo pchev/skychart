@@ -33,7 +33,7 @@ will work with all systems using same protocol
 uses
   lx2001 in 'lx2001.pas' {pop_scope},
   lx200_lib in 'lx200_lib.pas',
-  EnhEdits in '..\enhedits\EnhEdits.pas';
+  EnhEdits in 'EnhEdits.pas';
 
 {$E .tid}
 
@@ -51,6 +51,7 @@ Exports
        ScopeGoto,
        ScopeInitialized,
        ScopeConnected,
+       ScopeGetEqSys,
        ScopeGetInfo;
 
 begin

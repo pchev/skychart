@@ -49,6 +49,7 @@ type
   TScopeInitialized = Function   : boolean; stdcall;
   TScopeSetObs     = Procedure (latitude,longitude : double); stdcall;
   TScopeGoto       = Procedure (ar,de : double; var ok : boolean); stdcall;
+  TScopeGetEqSys   = Procedure (var EqSys : double); stdcall;
 
   TTelescope = class(TComponent)
   private
@@ -72,6 +73,8 @@ type
     FScopeGetInfo : TScopeGetInfo;
     FScopeSetObs : TScopeSetObs;
     FScopeGoto : TScopeGoto;
+    FScopeGetEqSys : TScopeGetEqSys;
+
   protected
   public
      constructor Create(AOwner:TComponent); override;
@@ -85,6 +88,7 @@ type
      function  ScopeShowModal : boolean;
      procedure ScopeShow;
      procedure ScopeClose;
+     procedure ScopeGetEqSys(var EqSys : double);
      procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
      procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
      procedure ScopeGetName(var scopename : shortstring);
@@ -157,6 +161,7 @@ if Fscopelib<>0 then begin
     FScopeGetInfo := TScopeGetInfo(GetProcAddress(Fscopelib, 'ScopeGetInfo'));
     FScopeSetObs := TScopeSetObs(GetProcAddress(Fscopelib, 'ScopeSetObs'));
     FScopeGoto := TScopeGoto(GetProcAddress(Fscopelib, 'ScopeGoto'));
+    FScopeGetEqSys := TScopeGetEqSys(GetProcAddress(Fscopelib, 'ScopeGetEqSys'));
     Fscopelibok:=true;
    {$ifdef win32}
     CoInitialize(nil);
@@ -207,6 +212,16 @@ end;
 procedure TTelescope.ScopeClose;
 begin
 FScopeClose;
+end;
+
+procedure TTelescope.ScopeGetEqSys(var EqSys : double);
+begin
+try
+if FScopeGetEqSys<>nil then FScopeGetEqSys(EqSys)
+   else EqSys:=0;
+except
+  EqSys:=0;
+end;
 end;
 
 procedure TTelescope.ScopeGetRaDec(var ar,de : double; var ok : boolean);

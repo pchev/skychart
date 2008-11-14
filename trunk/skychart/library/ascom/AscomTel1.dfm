@@ -4,7 +4,7 @@ object pop_scope: Tpop_scope
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   BorderStyle = bsToolWindow
-  Caption = 'ASCOM Telescope Interface 1.4'
+  Caption = 'ASCOM Telescope Interface 1.5'
   ClientHeight = 317
   ClientWidth = 272
   Color = clBtnFace
