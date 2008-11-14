@@ -98,6 +98,7 @@ Procedure ScopeShowModal(var ok : boolean); stdcall;
 Procedure ScopeConnect(var ok : boolean); stdcall;
 Procedure ScopeDisconnect(var ok : boolean); stdcall;
 Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer); stdcall;
+Procedure ScopeGetEqSys(var EqSys : double); stdcall;
 Procedure ScopeSetObs(la,lo : double); stdcall;
 Procedure ScopeAlign(source : string; ra,dec : double); stdcall;
 Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean); stdcall;
@@ -403,6 +404,25 @@ begin
       GotoOK:=false;
    end;
    refreshrate:=pop_scope.timer1.interval;
+end;
+
+Procedure ScopeGetEqSys(var EqSys : double); stdcall;
+var i: integer;
+begin
+   if ScopeConnected then begin
+      try
+         i:=T.EquatorialSystem;
+      except
+         i:=0;
+      end;
+   end else i:=0;
+   case i of
+   0 : EqSys:=0;
+   1 : EqSys:=0;
+   2 : EqSys:=2000;
+   3 : EqSys:=2050;
+   4 : EqSys:=1950;
+   end;
 end;
 
 Procedure ScopeReset; stdcall;

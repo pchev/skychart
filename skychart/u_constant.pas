@@ -433,7 +433,7 @@ type
                 ShowPluto, ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime,countrytz : boolean;
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,FillHorizon,ShowHorizonDepression : boolean;
-                CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY: double;
+                CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY,TelescopeJD: double;
                 PMon,DrawPMon,ApparentPos,CoordExpertMode : boolean;
                 LabelOrientation, ManualTelescopeType, CoordType : integer;
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
@@ -1180,6 +1180,7 @@ DT_UT_val:=Source.DT_UT_val ;
 GRSlongitude:=Source.GRSlongitude ;
 TelescopeTurnsX:=Source.TelescopeTurnsX ;
 TelescopeTurnsY:=Source.TelescopeTurnsY ;
+TelescopeJD:=Source.TelescopeJD;
 PMon:=Source.PMon ;
 DrawPMon:=Source.DrawPMon ;
 ApparentPos:=Source.ApparentPos ;

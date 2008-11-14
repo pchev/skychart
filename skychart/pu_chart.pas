@@ -2759,7 +2759,7 @@ if sc.cfgsc.PluginTelescope then begin
 end;
 {$endif}
 if sc.cfgsc.ManualTelescope then begin
-
+   sc.cfgsc.TelescopeJD:=0;
 end;
 if sc.cfgsc.IndiTelescope then begin
 if Connect1.checked then begin
@@ -2769,6 +2769,7 @@ if Connect1.checked then begin
    Refresh;
 end else begin
 if (indi1=nil)or(indi1.Terminated) then begin
+   sc.cfgsc.TelescopeJD:=0;
    indi1:=TIndiClient.Create;
    indi1.TargetHost:=sc.cfgsc.IndiServerHost;
    indi1.TargetPort:=sc.cfgsc.IndiServerPort;
@@ -2786,6 +2787,7 @@ if (indi1=nil)or(indi1.Terminated) then begin
    indi1.Resume;
    sc.cfgsc.TrackOn:=true;
 end else begin
+   sc.cfgsc.TelescopeJD:=0;
    indi1.Connect;
    sc.cfgsc.TrackOn:=true;
 end;
@@ -3037,8 +3039,10 @@ var ra,dec:double;
 begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+if sc.cfgsc.TelescopeJD<>0 then begin
+  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+  precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+end;
 Ftelescope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
 end;
 
@@ -3052,8 +3056,10 @@ var ra,dec:double;
 begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+if sc.cfgsc.TelescopeJD<>0 then begin
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+end;
 Ftelescope.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 end;
 
@@ -3066,11 +3072,13 @@ TelescopeTimer.Enabled:=false;
 if Ftelescope.scopelibok then begin
  Connect1.checked:=Ftelescope.ScopeConnected;
  if Connect1.checked then begin
+   Ftelescope.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+   if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
    Ftelescope.ScopeGetRaDec(ra,dec,ok);
    if ok then begin
       ra:=ra*15*deg2rad;
       dec:=dec*deg2rad;
-      precession(jd2000,sc.cfgsc.JDChart,ra,dec);
+      if sc.cfgsc.TelescopeJD<>0 then precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
       if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
       if sc.cfgsc.moved then begin
          Image1.Invalidate;

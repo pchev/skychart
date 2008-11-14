@@ -6,8 +6,8 @@ object pop_scope: Tpop_scope
   AutoSize = True
   BorderStyle = bsToolWindow
   Caption = 'LX200'
-  ClientHeight = 377
-  ClientWidth = 281
+  ClientHeight = 407
+  ClientWidth = 313
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,34 +24,36 @@ object pop_scope: Tpop_scope
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 281
-    Height = 377
+    Width = 313
+    Height = 407
     ActivePage = TabSheet1
     MultiLine = True
-    TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
+      ExplicitTop = 42
+      ExplicitWidth = 273
+      ExplicitHeight = 331
       object SpeedButton8: TSpeedButton
-        Left = 152
-        Top = 242
+        Left = 176
+        Top = 255
         Width = 113
         Height = 22
         Caption = 'Set TelescopeTime'
         OnClick = SpeedButton8Click
       end
       object SpeedButton9: TSpeedButton
-        Left = 152
-        Top = 267
+        Left = 176
+        Top = 283
         Width = 113
         Height = 22
         Caption = 'Park Telescope'
         OnClick = SpeedButton9Click
       end
       object Panel1: TPanel
-        Left = 8
-        Top = 4
-        Width = 257
+        Left = 3
+        Top = 3
+        Width = 286
         Height = 61
         TabOrder = 0
         object LabelAlpha: TLabel
@@ -123,23 +125,23 @@ object pop_scope: Tpop_scope
         end
       end
       object GroupBox1: TGroupBox
-        Left = 8
-        Top = 72
-        Width = 257
+        Left = 3
+        Top = 73
+        Width = 286
         Height = 169
         Caption = 'Move '
         TabOrder = 1
         object Shape1: TShape
-          Left = 95
-          Top = 14
+          Left = 124
+          Top = 16
           Width = 150
           Height = 150
           Brush.Style = bsClear
           Shape = stCircle
         end
         object TopBtn: TSpeedButton
-          Left = 158
-          Top = 38
+          Left = 187
+          Top = 40
           Width = 25
           Height = 25
           Enabled = False
@@ -159,8 +161,8 @@ object pop_scope: Tpop_scope
           OnMouseUp = TopBtnMouseUp
         end
         object LeftBtn: TSpeedButton
-          Left = 120
-          Top = 77
+          Left = 149
+          Top = 79
           Width = 25
           Height = 25
           Enabled = False
@@ -180,8 +182,8 @@ object pop_scope: Tpop_scope
           OnMouseUp = LeftBtnMouseUp
         end
         object RightBtn: TSpeedButton
-          Left = 196
-          Top = 77
+          Left = 225
+          Top = 79
           Width = 25
           Height = 25
           Enabled = False
@@ -201,8 +203,8 @@ object pop_scope: Tpop_scope
           OnMouseUp = RightBtnMouseUp
         end
         object BotBtn: TSpeedButton
-          Left = 158
-          Top = 116
+          Left = 187
+          Top = 118
           Width = 25
           Height = 25
           Enabled = False
@@ -222,8 +224,8 @@ object pop_scope: Tpop_scope
           OnMouseUp = BotBtnMouseUp
         end
         object StopBtn: TSpeedButton
-          Left = 152
-          Top = 71
+          Left = 181
+          Top = 73
           Width = 37
           Height = 37
           Caption = 'STOP'
@@ -237,8 +239,8 @@ object pop_scope: Tpop_scope
           OnMouseDown = StopBtnMouseDown
         end
         object Label3: TLabel
-          Left = 164
-          Top = 18
+          Left = 193
+          Top = 20
           Width = 12
           Height = 16
           Caption = 'N'
@@ -250,8 +252,8 @@ object pop_scope: Tpop_scope
           ParentFont = False
         end
         object Label4: TLabel
-          Left = 224
-          Top = 81
+          Left = 253
+          Top = 83
           Width = 15
           Height = 16
           Caption = 'W'
@@ -263,8 +265,8 @@ object pop_scope: Tpop_scope
           ParentFont = False
         end
         object Label6: TLabel
-          Left = 165
-          Top = 142
+          Left = 194
+          Top = 144
           Width = 11
           Height = 16
           Caption = 'S'
@@ -276,8 +278,8 @@ object pop_scope: Tpop_scope
           ParentFont = False
         end
         object Label14: TLabel
-          Left = 102
-          Top = 81
+          Left = 131
+          Top = 83
           Width = 11
           Height = 16
           Caption = 'E'
@@ -291,7 +293,7 @@ object pop_scope: Tpop_scope
         object RadioGroup1: TRadioGroup
           Left = 8
           Top = 15
-          Width = 81
+          Width = 94
           Height = 90
           Caption = 'Speed'
           Enabled = False
@@ -305,8 +307,8 @@ object pop_scope: Tpop_scope
         end
         object GroupBox8: TGroupBox
           Left = 8
-          Top = 104
-          Width = 81
+          Top = 105
+          Width = 94
           Height = 57
           Caption = 'Swap button'
           TabOrder = 1
@@ -331,46 +333,46 @@ object pop_scope: Tpop_scope
         end
       end
       object GroupBox3: TGroupBox
-        Left = 8
-        Top = 288
-        Width = 257
-        Height = 41
+        Left = 3
+        Top = 319
+        Width = 286
+        Height = 49
         TabOrder = 2
         object SpeedButton1: TSpeedButton
-          Left = 2
-          Top = 11
+          Left = 8
+          Top = 12
           Width = 65
           Height = 22
           Caption = 'Connect'
           OnClick = setresClick
         end
         object SpeedButton2: TSpeedButton
-          Left = 158
-          Top = 11
+          Left = 182
+          Top = 12
           Width = 65
           Height = 22
           Caption = 'Hide'
           OnClick = SpeedButton2Click
         end
         object SpeedButton5: TSpeedButton
-          Left = 88
-          Top = 11
+          Left = 108
+          Top = 12
           Width = 65
           Height = 22
           Caption = 'Disconnect'
           OnClick = SpeedButton5Click
         end
         object SpeedButton4: TSpeedButton
-          Left = 228
-          Top = 11
+          Left = 253
+          Top = 12
           Width = 25
           Height = 22
           Caption = '?'
           OnClick = SpeedButton4Click
         end
         object led: TEdit
-          Left = 70
-          Top = 12
+          Left = 84
+          Top = 14
           Width = 15
           Height = 20
           AutoSize = False
@@ -380,16 +382,16 @@ object pop_scope: Tpop_scope
         end
       end
       object GroupBox6: TGroupBox
-        Left = 8
-        Top = 240
-        Width = 129
-        Height = 49
+        Left = 3
+        Top = 248
+        Width = 145
+        Height = 65
         Caption = 'High Precision Pointing'
         TabOrder = 3
         Visible = False
         object SpeedButton3: TSpeedButton
-          Left = 8
-          Top = 16
+          Left = 12
+          Top = 25
           Width = 89
           Height = 22
           Caption = 'Resume GoTo'
@@ -400,6 +402,9 @@ object pop_scope: Tpop_scope
     object MotorTab: TTabSheet
       Caption = 'Motor'
       ImageIndex = 6
+      ExplicitTop = 42
+      ExplicitWidth = 273
+      ExplicitHeight = 331
       object FanControl: TCheckBox
         Left = 32
         Top = 184
@@ -444,14 +449,8 @@ object pop_scope: Tpop_scope
           Enabled = False
           Max = 4
           Min = 2
-          Orientation = trHorizontal
-          Frequency = 1
           Position = 2
-          SelEnd = 0
-          SelStart = 0
           TabOrder = 0
-          TickMarks = tmBottomRight
-          TickStyle = tsAuto
           OnChange = SlewSpeedBarChange
         end
       end
@@ -535,9 +534,9 @@ object pop_scope: Tpop_scope
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
-          Value = 60
+          Value = 60.000000000000000000
           Decimals = 3
-          MaxValue = 999
+          MaxValue = 999.000000000000000000
           Digits = 7
           NumericType = ntFixed
         end
@@ -742,6 +741,9 @@ object pop_scope: Tpop_scope
     object Focus: TTabSheet
       Caption = 'Focus'
       ImageIndex = 3
+      ExplicitTop = 42
+      ExplicitWidth = 273
+      ExplicitHeight = 331
       object SpeedButton6: TSpeedButton
         Left = 168
         Top = 192
@@ -900,6 +902,9 @@ object pop_scope: Tpop_scope
       Caption = 'VirtHP'
       ImageIndex = 4
       TabVisible = False
+      ExplicitTop = 42
+      ExplicitWidth = 273
+      ExplicitHeight = 331
       object VHPTitleLabel: TLabel
         Left = 0
         Top = 16
@@ -995,6 +1000,9 @@ object pop_scope: Tpop_scope
       Caption = 'Scope Adv'
       ImageIndex = 5
       TabVisible = False
+      ExplicitTop = 42
+      ExplicitWidth = 273
+      ExplicitHeight = 331
       object ADVTitleLabel: TLabel
         Left = 0
         Top = 16
@@ -1149,6 +1157,9 @@ object pop_scope: Tpop_scope
       Caption = 'PEC'
       ImageIndex = 7
       TabVisible = False
+      ExplicitTop = 42
+      ExplicitWidth = 273
+      ExplicitHeight = 331
       object RAPEC: TGroupBox
         Left = 24
         Top = 56
@@ -1205,9 +1216,12 @@ object pop_scope: Tpop_scope
     object TabSheet2: TTabSheet
       Caption = 'Configuration'
       ImageIndex = 1
+      ExplicitTop = 42
+      ExplicitWidth = 273
+      ExplicitHeight = 331
       object SaveButton1: TButton
-        Left = 180
-        Top = 300
+        Left = 192
+        Top = 340
         Width = 89
         Height = 25
         Caption = 'Save Setting'
@@ -1216,8 +1230,8 @@ object pop_scope: Tpop_scope
       end
       object GroupBox5: TGroupBox
         Left = 8
-        Top = 192
-        Width = 257
+        Top = 231
+        Width = 281
         Height = 89
         Caption = 'Observatory '
         TabOrder = 1
@@ -1257,8 +1271,8 @@ object pop_scope: Tpop_scope
       object GroupBox2: TGroupBox
         Left = 8
         Top = 0
-        Width = 169
-        Height = 89
+        Width = 178
+        Height = 119
         Caption = 'LX200'
         TabOrder = 2
         object Label1: TLabel
@@ -1275,8 +1289,17 @@ object pop_scope: Tpop_scope
           Height = 13
           Caption = 'Refresh rate '
         end
+        object Label21: TLabel
+          Left = 8
+          Top = 84
+          Width = 75
+          Height = 25
+          AutoSize = False
+          Caption = 'Equatorial System'
+          WordWrap = True
+        end
         object cbo_type: TComboBox
-          Left = 80
+          Left = 87
           Top = 24
           Width = 81
           Height = 21
@@ -1292,7 +1315,7 @@ object pop_scope: Tpop_scope
             'Scope.exe')
         end
         object ReadIntBox: TComboBox
-          Left = 80
+          Left = 87
           Top = 56
           Width = 81
           Height = 21
@@ -1308,17 +1331,32 @@ object pop_scope: Tpop_scope
             '2000'
             '5000')
         end
+        object EqSys1: TComboBox
+          Left = 87
+          Top = 87
+          Width = 81
+          Height = 21
+          ItemHeight = 13
+          ItemIndex = 0
+          TabOrder = 2
+          Text = 'Local'
+          Items.Strings = (
+            'Local'
+            'B1950'
+            'J2000'
+            'J2050')
+        end
       end
       object ProductInfoBox: TGroupBox
-        Left = 184
-        Top = 0
-        Width = 81
+        Left = 192
+        Top = 1
+        Width = 97
         Height = 89
         Caption = 'Product Info'
         TabOrder = 7
         object QueryFirmwareButton: TButton
-          Left = 8
-          Top = 32
+          Left = 16
+          Top = 25
           Width = 65
           Height = 33
           Caption = 'Query'
@@ -1328,8 +1366,8 @@ object pop_scope: Tpop_scope
       end
       object RadioGroup2: TRadioGroup
         Left = 8
-        Top = 96
-        Width = 257
+        Top = 125
+        Width = 281
         Height = 45
         Caption = 'Display Precision'
         Columns = 2
@@ -1342,8 +1380,8 @@ object pop_scope: Tpop_scope
       end
       object GroupBox7: TGroupBox
         Left = 8
-        Top = 144
-        Width = 257
+        Top = 176
+        Width = 281
         Height = 49
         Caption = 'High Precision Pointing'
         TabOrder = 4
@@ -1377,8 +1415,8 @@ object pop_scope: Tpop_scope
         end
       end
       object CheckBox2: TCheckBox
-        Left = 12
-        Top = 308
+        Left = 24
+        Top = 348
         Width = 129
         Height = 17
         Caption = 'Form always visible'
@@ -1386,8 +1424,8 @@ object pop_scope: Tpop_scope
         OnClick = CheckBox2Click
       end
       object CheckBox5: TCheckBox
-        Left = 12
-        Top = 288
+        Left = 24
+        Top = 328
         Width = 165
         Height = 17
         Caption = 'Record protocol to a trace file'
@@ -1398,6 +1436,9 @@ object pop_scope: Tpop_scope
     object TabSheet3: TTabSheet
       Caption = 'Comm Settings'
       ImageIndex = 2
+      ExplicitTop = 42
+      ExplicitWidth = 273
+      ExplicitHeight = 331
       object GroupBox4: TGroupBox
         Left = 8
         Top = 4
@@ -1596,9 +1637,9 @@ object pop_scope: Tpop_scope
       end
     end
   end
-  object Timer1: THiResTimer
-    Interval = 500
+  object Timer1: TTimer
+    Enabled = False
     OnTimer = Timer1Timer
-    Left = 240
+    Top = 376
   end
 end

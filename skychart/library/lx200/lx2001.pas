@@ -38,7 +38,7 @@ uses
   Windows,  Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, ShellAPI,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls,
-  enhedits, HiResTim;
+  enhedits;
 
 type
   Tpop_scope = class(TForm)
@@ -126,7 +126,6 @@ type
     Label20: TLabel;
     Bevel1: TBevel;
     Button1: TButton;
-    Timer1: THiResTimer;
      SpeedButton4: TSpeedButton;
      SpeedButton8: TSpeedButton;
      SpeedButton9: TSpeedButton;
@@ -195,6 +194,9 @@ type
     SlewSpeedBar: TTrackBar;
     SlewSpeedGroup: TGroupBox;
     LabelSetSlewSpeed: TLabel;
+    Timer1: TTimer;
+    EqSys1: TComboBox;
+    Label21: TLabel;
      {Utility and form functions}
      procedure formcreate(Sender: TObject);
      procedure kill(Sender: TObject; var CanClose: Boolean);
@@ -300,6 +302,7 @@ Procedure ScopeReset; stdcall;
 Function  ScopeInitialized : boolean ; stdcall;
 Function  ScopeConnected : boolean ; stdcall;
 Procedure ScopeClose; stdcall;
+Procedure ScopeGetEqSys(var EqSys : double); stdcall;
 
 var
   pop_scope: Tpop_scope;
@@ -531,6 +534,16 @@ if ScopeConnected then begin
 end else ok:=false;
 end;
 
+Procedure ScopeGetEqSys(var EqSys : double); stdcall;
+begin
+case pop_scope.EqSys1.ItemIndex of
+  0: EqSys:=0;
+  1: EqSys:=1950;
+  2: EqSys:=2000;
+  3: EqSys:=2050;
+end;
+end;
+
 Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer); stdcall;
 begin
 if (pop_scope=nil)or(pop_scope.pos_x=nil) then begin
@@ -635,6 +648,7 @@ begin
      radiogroup4.ItemIndex:=ini.readinteger('lx200','focusspeed2',1);
      checkbox6.Checked:=ini.ReadBool('lx200','focuspulse',false);
      longedit1.Value:=ini.readinteger('lx200','focusduration',100);
+     eqsys1.ItemIndex:=ini.readinteger('lx200','eqsys',0);
      ini.free;
      Timer1.Interval:=strtointdef(ReadIntBox.text,500);
      // Renato Bonomini:
@@ -796,6 +810,7 @@ ini.writeinteger('lx200','focusspeed1',radiogroup3.ItemIndex);
 ini.writeinteger('lx200','focusspeed2',radiogroup4.ItemIndex);
 ini.writeBool('lx200','focuspulse',checkbox6.Checked);
 ini.writeinteger('lx200','focusduration',longedit1.Value);
+ini.writeinteger('lx200','eqsys',eqsys1.ItemIndex);
 ini.free;
 end;
 

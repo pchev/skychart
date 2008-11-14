@@ -3395,6 +3395,7 @@ def_cfgsc.ManualTelescope:=false;
 def_cfgsc.ManualTelescopeType:=0;
 def_cfgsc.TelescopeTurnsX:=6;    // Vixen GP
 def_cfgsc.TelescopeTurnsY:=0.4;
+def_cfgsc.TelescopeJD:=0;
 def_cfgsc.ScopePlugin:='Ascom.tid';
 catalog.cfgshr.ListStar:=false;
 catalog.cfgshr.ListNeb:=true;
@@ -5112,12 +5113,10 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     if sc.cfgsc.ProjPole=Equat then begin
        toolbuttonGridEq.Enabled:=false;
        toolbuttonGridEq.Indeterminate:=true;
-//       toolbuttonGridEq.ImageIndex:=87;
        GridEQ1.Enabled:=false;
     end else begin
        toolbuttonGridEq.Enabled:=true;
        toolbuttonGridEq.Indeterminate:=false;
-//       toolbuttonGridEq.ImageIndex:=24;
        GridEQ1.Enabled:=true;
     end;
     ToolButtonShowConstellationLine.down:=sc.cfgsc.ShowConstl;
@@ -5136,18 +5135,14 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     if sc.cfgsc.ProjPole=AltAz then begin
        ToolButtonShowObjectbelowHorizon.Enabled:=true;
        ToolButtonShowObjectbelowHorizon.Indeterminate:=false;
-//       ToolButtonShowObjectbelowHorizon.ImageIndex:=70;
        ToolButtonswitchbackground.Enabled:=true;
        ToolButtonswitchbackground.Indeterminate:=false;
-//       ToolButtonswitchbackground.ImageIndex:=35;
        ShowObjectbelowthehorizon1.Enabled:=true;
     end else begin
        ToolButtonShowObjectbelowHorizon.Enabled:=false;
        ToolButtonShowObjectbelowHorizon.Indeterminate:=true;
-//       ToolButtonShowObjectbelowHorizon.ImageIndex:=87;
        ToolButtonswitchbackground.Enabled:=false;
        ToolButtonswitchbackground.Indeterminate:=true;
-//       ToolButtonswitchbackground.ImageIndex:=87;
        ShowObjectbelowthehorizon1.Enabled:=false;
     end;
     ToolButtonBlink.Down:=BlinkTimer.enabled;
