@@ -3024,8 +3024,6 @@ end else begin
    if Ftelescope.scopelibok then begin
      Ftelescope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      Ftelescope.ScopeShow;
-//     ok:=Ftelescope.ScopeConnect;
-//     Connect1.Checked:=ok;
      TelescopeTimer.Enabled:=ok;
      sc.cfgsc.TrackOn:=true;
    end;
@@ -3039,7 +3037,9 @@ var ra,dec:double;
 begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.TelescopeJD<>0 then begin
+if sc.cfgsc.TelescopeJD=0 then begin
+  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+end else begin
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
@@ -3056,7 +3056,9 @@ var ra,dec:double;
 begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.TelescopeJD<>0 then begin
+if sc.cfgsc.TelescopeJD=0 then begin
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
@@ -3078,7 +3080,8 @@ if Ftelescope.scopelibok then begin
    if ok then begin
       ra:=ra*15*deg2rad;
       dec:=dec*deg2rad;
-      if sc.cfgsc.TelescopeJD<>0 then precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
+      if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJD,sc.cfgsc.JDChart,ra,dec)
+         else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
       if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
       if sc.cfgsc.moved then begin
          Image1.Invalidate;
