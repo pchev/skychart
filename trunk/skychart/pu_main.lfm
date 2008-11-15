@@ -4311,7 +4311,7 @@ object f_main: Tf_main
   end
   object ActionList1: TActionList
     Images = ImageNormal
-    left = 336
+    left = 328
     top = 160
     object FileNew1: TAction
       Category = 'File'
@@ -4347,13 +4347,6 @@ object f_main: Tf_main
       Hint = 'Print the chart'
       ImageIndex = 3
       OnExecute = Print1Execute
-    end
-    object EditCopy1: TEditCopy
-      Category = 'Edit'
-      DisableIfNoHandler = True
-      Hint = 'Copy|Copies the selection and puts it on the Clipboard'
-      OnExecute = EditCopy1Execute
-      ShortCut = 16451
     end
     object FilePrintSetup1: TAction
       Category = 'File'
@@ -4972,6 +4965,13 @@ object f_main: Tf_main
       Caption = 'HelpQS1'
       DisableIfNoHandler = True
       OnExecute = HelpQS1Execute
+    end
+    object EditCopy1: TAction
+      Category = 'Edit'
+      Caption = 'EditCopy1'
+      DisableIfNoHandler = True
+      OnExecute = EditCopy1Execute
+      ShortCut = 16451
     end
   end
   object SaveDialog: TSaveDialog
