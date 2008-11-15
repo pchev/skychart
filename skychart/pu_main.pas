@@ -87,6 +87,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    EditCopy1: TAction;
     HelpFaq1: TAction;
     HelpQS1: TAction;
     MenuItem27: TMenuItem;
@@ -201,7 +202,6 @@ type
     Edit1: TMenuItem;
     CopyItem: TMenuItem;
     ActionList1: TActionList;
-    EditCopy1: TEditCopy;
     FileNew1: TAction;
     FileExit1: TAction;
     FileOpen1: TAction;
