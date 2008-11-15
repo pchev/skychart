@@ -689,9 +689,9 @@ end;
 
 procedure Tf_config_chart.Notebook1PageChanged(Sender: TObject);
 begin
-if (Notebook1.ActivePage='Page3') or
-   (Notebook1.ActivePage='Page4') or
-   (Notebook1.ActivePage='Page5')
+if (Notebook1.ActivePage=rsProjection) or
+   (Notebook1.ActivePage=rsObjectFilter) or
+   (Notebook1.ActivePage=rsGridSpacing)
 then
    FOVPanel.Visible:=true
 else
@@ -770,12 +770,15 @@ end;
 
 procedure Tf_config_chart.projectiontypeClick(Sender: TObject);
 begin
+if LockChange then exit;
 csc.ProjPole:=projectiontype.itemindex;
 end;
 
 
 procedure Tf_config_chart.CoordTypeClick(Sender: TObject);
 begin
+if LockChange then exit;
+if Sender is TRadioGroup then begin
 if cshr.EquinoxType=1 then exit;
 csc.CoordType:=CoordType.ItemIndex;
 case CoordType.ItemIndex of
@@ -811,6 +814,7 @@ case CoordType.ItemIndex of
        cshr.EquinoxChart:='J2000';
        cshr.DefaultJDChart:=jd2000;
      end;
+end;
 end;
 end;
 
@@ -897,6 +901,7 @@ end;
 
 procedure Tf_config_chart.Button2Click(Sender: TObject);
 begin
+if LockChange then exit;
 cshr.DegreeGridSpacing[0]:=1000+5/60;
 cshr.DegreeGridSpacing[1]:=1000+10/60;
 cshr.DegreeGridSpacing[2]:=1000+20/60;
