@@ -223,7 +223,6 @@ type
     ToolBar3: TToolBar;
     PanelBottom: TPanel;
     PPanels0: TPanel;
-    LPanels01: TLabel;
     PPanels1: TPanel;
     PanelTop: TPanel;
     ToolBar1: TToolBar;
@@ -3134,7 +3133,11 @@ cfgm.ServerIPaddr:='127.0.0.1';
 cfgm.ServerIPport:='3292'; // x'CDC' :o)
 cfgm.IndiPanelCmd:=dcd_cmd;
 cfgm.keepalive:=true;
+{$ifdef darwin}
+cfgm.AutostartServer:=false;
+{$else}
 cfgm.AutostartServer:=true;
+{$endif}
 cfgm.dbhost:='localhost';
 cfgm.dbport:=3306;
 cfgm.db:=slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]);
