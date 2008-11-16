@@ -1,32 +1,31 @@
 Коментарі до версії 3.0.1.5 SVN
 
-November 9 changes:
+Зміни 9 листопада:
 
-New program cdcicon that show the clock on the task bar. It can also start directly the Calendar or Skychat, do a rigth click on the icon to show the menu.
-Add True Solar Time to the clock
-Update the documentation from the wiki thank's to the great work from Marceau GUIHARD and the translators.
-All the windows have now a Help button.
-The meridian line is show with the "other line" color for more visibility.
-Show the compiler version in the About box.
+Нова програма cdcicon, котра показує Годинник на панелі завдань. Із неї безпосередньо можна запустити Календар або Зоряні Мапи, клацнувши іконку правою клавішею мишки, щоб показати меню.
+В Годинник додано Істинний Сонячний Час.
+Оновлена документація на вікі, дякуючи Marceau GUIHARD та перекладачам.
+Всі вікна мають ситуаційну допомогу.
+Лінія небесного меридіана, для кращого бачення, відображається в кольорі меню "Спосіб показувати ->Колір "Різні лінії".
+Показ версії компілятора у меню "Допомога ->Оповістка".
 
-November 2 changes:
+Зміни 2 листопада:
 
-New Clock display from View/Clock menu.
-It is now possible to change the star size in line mode for display or printing from configuration/display.
-USNO-A display and search problem is fixed.
-New ASCOM driver.
-Solve for a few crash situation and other bug.
-Improved nebulae common name search by Oleg Maliy.
-Chinese translation by Lam Xiang.
+Додано показ годинника в меню "Вид ->Годинник".
+Тепер можливо змінювати розміри відображення та друку зірок в режимі "Вид лінії" в меню "Спосіб показувати".
+Вирішена проблема відображення та пошуку в USNO-A.
+Новий ASCOM драйвер.
+Вирішено деякі збої та нші дефекти.
+Удосконалений пошук прийнятої назви туманності від Олега Малого.
+Китайський переклад від Lam Xiang.
 
 Зміни 18 жовтня:
 
 Щоб зменшити перекриття позначки позначкою від іншого каталогу, тепер різні позначки об'єкту розміщуються навколо нього. 
-Тепер можливо активізувати позначки для зірок, змінних та подвійнихзірок без перекриття.
+Тепер можливо активізувати позначки для зірок, змінних та подвійних зірок без перекриття.
 Для туманностей позначки каталогу SAC розміщуються із правого боку, а позначки від іншого каталога показуються з лівого боку.
 Нова опція в Конфігурація/Спосіб показувати/Позначки, щоб показати позначки всіх зоряних каталогів.
 + виправлення дефекту подібно, як в мережевому графіку: http://www.ap-i.net/mantis/roadmap_page.php
-
 
 Зміни 21 вересня:
 
