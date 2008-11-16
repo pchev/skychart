@@ -27,11 +27,13 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart-linux.tar.bz2
+  rm skychart*.bz2
   rm skychart*.deb
   rm skychart*.rpm
-  rm skychart-windows.zip
+  rm skychart*.zip
   rm skychart*.exe
+  rm bin-*.zip
+  rm bin-*.bz2
   rm -rf $builddir
 
 # make Linux version
