@@ -27,13 +27,13 @@ object f_config_display: Tf_config_display
       Top = 1
       Width = 521
       Align = alClient
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Display'
         ClientWidth = 517
-        ClientHeight = 453
+        ClientHeight = 476
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -97,33 +97,33 @@ object f_config_display: Tf_config_display
           Visible = False
           object Label256: TLabel
             Left = 24
-            Height = 16
+            Height = 14
             Top = 38
-            Width = 100
+            Width = 93
             Caption = 'Faint Stars Size '
             ParentColor = False
           end
           object Label262: TLabel
             Left = 24
-            Height = 16
+            Height = 14
             Top = 112
-            Width = 55
+            Width = 50
             Caption = 'Contrast'
             ParentColor = False
           end
           object Label263: TLabel
             Left = 24
-            Height = 16
+            Height = 14
             Top = 150
-            Width = 102
+            Width = 93
             Caption = 'Color saturation'
             ParentColor = False
           end
           object Label257: TLabel
             Left = 24
-            Height = 16
+            Height = 14
             Top = 75
-            Width = 163
+            Width = 151
             Caption = 'Increment for Bright Stars'
             ParentColor = False
           end
@@ -329,7 +329,7 @@ object f_config_display: Tf_config_display
       object Page2: TPage
         Caption = 'Colour'
         ClientWidth = 517
-        ClientHeight = 476
+        ClientHeight = 453
         object Label181: TLabel
           Left = 86
           Height = 14
@@ -514,6 +514,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -523,6 +524,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -532,6 +534,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -541,6 +544,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -550,6 +554,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -559,6 +564,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -568,6 +574,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -589,6 +596,7 @@ object f_config_display: Tf_config_display
             Width = 33
             Brush.Style = bsClear
             Pen.Color = clWhite
+            Pen.Cosmetic = True
             Pen.Width = 3
             OnMouseUp = ShapeMouseUp
             Shape = stSquare
@@ -601,6 +609,7 @@ object f_config_display: Tf_config_display
             Width = 30
             Brush.Style = bsClear
             Pen.Color = clWhite
+            Pen.Cosmetic = True
             Pen.Width = 3
             OnMouseUp = ShapeMouseUp
             Shape = stSquare
@@ -613,6 +622,7 @@ object f_config_display: Tf_config_display
             Width = 30
             Brush.Style = bsClear
             Pen.Color = clWhite
+            Pen.Cosmetic = True
             Pen.Width = 3
             OnMouseUp = ShapeMouseUp
             Shape = stSquare
@@ -625,6 +635,7 @@ object f_config_display: Tf_config_display
             Width = 30
             Brush.Style = bsClear
             Pen.Color = clWhite
+            Pen.Cosmetic = True
             Pen.Width = 3
             OnMouseUp = ShapeMouseUp
             Shape = stSquare
@@ -637,6 +648,7 @@ object f_config_display: Tf_config_display
             Width = 30
             Brush.Style = bsClear
             Pen.Color = clWhite
+            Pen.Cosmetic = True
             Pen.Width = 3
             OnMouseUp = ShapeMouseUp
             Shape = stSquare
@@ -656,6 +668,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -665,6 +678,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
           end
@@ -674,6 +688,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stSquare
           end
@@ -683,6 +698,7 @@ object f_config_display: Tf_config_display
             Height = 30
             Top = 4
             Width = 30
+            Pen.Cosmetic = True
             OnMouseUp = ShapeMouseUp
             Shape = stSquare
           end
@@ -694,6 +710,7 @@ object f_config_display: Tf_config_display
             Width = 30
             Brush.Style = bsClear
             Pen.Color = clWhite
+            Pen.Cosmetic = True
             Pen.Width = 3
             OnMouseUp = ShapeMouseUp
             Shape = stSquare
@@ -706,6 +723,7 @@ object f_config_display: Tf_config_display
             Width = 30
             Brush.Style = bsClear
             Pen.Color = clWhite
+            Pen.Cosmetic = True
             Pen.Width = 3
             OnMouseUp = ShapeMouseUp
             Shape = stCircle
@@ -867,6 +885,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 44
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
             Shape = stRoundRect
           end
@@ -884,6 +903,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 44
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object lblOCl: TLabel
@@ -945,6 +965,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 164
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpEN: TShape
@@ -952,6 +973,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 144
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpDN: TShape
@@ -959,6 +981,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 124
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpPNe: TShape
@@ -966,6 +989,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 104
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpGCl: TShape
@@ -973,6 +997,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 84
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpOCl: TShape
@@ -980,6 +1005,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 64
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object lblGxy: TLabel
@@ -1033,6 +1059,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 144
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpGL: TShape
@@ -1040,6 +1067,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 124
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpQ: TShape
@@ -1047,6 +1075,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 104
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpGxyCl: TShape
@@ -1054,6 +1083,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 84
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpGxy: TShape
@@ -1061,6 +1091,7 @@ object f_config_display: Tf_config_display
             Height = 13
             Top = 64
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = ShapeDSOMouseUp
           end
           object lblDSOType: TLabel
@@ -1328,6 +1359,7 @@ object f_config_display: Tf_config_display
               Height = 33
               Top = 4
               Width = 65
+              Pen.Cosmetic = True
               Shape = stEllipse
             end
             object Shape30: TShape
@@ -1335,6 +1367,7 @@ object f_config_display: Tf_config_display
               Height = 33
               Top = 4
               Width = 65
+              Pen.Cosmetic = True
               Shape = stEllipse
             end
           end
@@ -1412,6 +1445,7 @@ object f_config_display: Tf_config_display
               Height = 97
               Width = 52
               Pen.Color = clSilver
+              Pen.Cosmetic = True
               OnMouseUp = ShapeSkyMouseUp
             end
             object Shape19: TShape
@@ -1420,6 +1454,7 @@ object f_config_display: Tf_config_display
               Height = 97
               Width = 52
               Pen.Color = clSilver
+              Pen.Cosmetic = True
               OnMouseUp = ShapeSkyMouseUp
             end
             object Shape20: TShape
@@ -1428,6 +1463,7 @@ object f_config_display: Tf_config_display
               Height = 97
               Width = 52
               Pen.Color = clSilver
+              Pen.Cosmetic = True
               OnMouseUp = ShapeSkyMouseUp
             end
             object Shape21: TShape
@@ -1436,6 +1472,7 @@ object f_config_display: Tf_config_display
               Height = 97
               Width = 52
               Pen.Color = clSilver
+              Pen.Cosmetic = True
               OnMouseUp = ShapeSkyMouseUp
             end
             object Shape22: TShape
@@ -1444,6 +1481,7 @@ object f_config_display: Tf_config_display
               Height = 97
               Width = 52
               Pen.Color = clSilver
+              Pen.Cosmetic = True
               OnMouseUp = ShapeSkyMouseUp
             end
             object Shape23: TShape
@@ -1452,6 +1490,7 @@ object f_config_display: Tf_config_display
               Height = 97
               Width = 52
               Pen.Color = clSilver
+              Pen.Cosmetic = True
               OnMouseUp = ShapeSkyMouseUp
             end
             object Shape24: TShape
@@ -1460,6 +1499,7 @@ object f_config_display: Tf_config_display
               Height = 97
               Width = 52
               Pen.Color = clSilver
+              Pen.Cosmetic = True
               OnMouseUp = ShapeSkyMouseUp
             end
           end
@@ -1478,6 +1518,7 @@ object f_config_display: Tf_config_display
             Height = 73
             Top = 8
             Width = 139
+            Pen.Cosmetic = True
             OnMouseUp = ShapeSkyMouseUp
           end
           object Label5: TLabel
@@ -1969,6 +2010,7 @@ object f_config_display: Tf_config_display
             Height = 17
             Top = 56
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = labelcolorMouseUp
           end
           object labelcolorVar: TShape
@@ -1977,6 +2019,7 @@ object f_config_display: Tf_config_display
             Height = 17
             Top = 80
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = labelcolorMouseUp
           end
           object labelcolorMult: TShape
@@ -1985,6 +2028,7 @@ object f_config_display: Tf_config_display
             Height = 17
             Top = 104
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = labelcolorMouseUp
           end
           object labelcolorNeb: TShape
@@ -1993,6 +2037,7 @@ object f_config_display: Tf_config_display
             Height = 17
             Top = 128
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = labelcolorMouseUp
           end
           object labelcolorSol: TShape
@@ -2001,6 +2046,7 @@ object f_config_display: Tf_config_display
             Height = 17
             Top = 152
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = labelcolorMouseUp
           end
           object labelcolorConst: TShape
@@ -2009,6 +2055,7 @@ object f_config_display: Tf_config_display
             Height = 17
             Top = 176
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = labelcolorMouseUp
           end
           object labelcolorMisc: TShape
@@ -2017,6 +2064,7 @@ object f_config_display: Tf_config_display
             Height = 17
             Top = 200
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = labelcolorMouseUp
           end
           object labelcolorchartinfo: TShape
@@ -2025,6 +2073,7 @@ object f_config_display: Tf_config_display
             Height = 17
             Top = 224
             Width = 33
+            Pen.Cosmetic = True
             OnMouseUp = labelcolorMouseUp
           end
           object Label255: TLabel
@@ -3155,6 +3204,28 @@ object f_config_display: Tf_config_display
     top = 40
   end
   object ColorDialog1: TColorDialog
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
     left = 472
     top = 104
   end

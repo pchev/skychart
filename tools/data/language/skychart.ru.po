@@ -1,8 +1,8 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-05 11:48+0200\n"
-"Last-Translator: Oleg Maliy <gemini@ua.fm>\n"
+"PO-Revision-Date: 2008-11-12 18:39+0200\n"
+"Last-Translator: Oleg Maliy <astroclubzp@gmail.com>\n"
 "Project-Id-Version: skychart.ru\n"
 "POT-Creation-Date: \n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
@@ -211,7 +211,7 @@ msgstr "Все панели инструментов"
 
 #: u_translation:rsallconfigura
 msgid "All configuration options"
-msgstr ""
+msgstr "Все конфигурационные опции"
 
 #: u_translation:rsalt
 msgid "Alt"
@@ -255,7 +255,7 @@ msgstr "Видимые"
 
 #: u_translation:rsappearance
 msgid "Appearance"
-msgstr ""
+msgstr "Внешний вид"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -283,7 +283,7 @@ msgstr "Как на экране (чёрной фон!!!)"
 
 #: u_translation:rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr ""
+msgstr "Спрашивать подтверждение перед любым интернет-соединением"
 
 #: u_translation:rsasterism
 msgid "Asterism"
@@ -389,6 +389,10 @@ msgstr "Начало обработки для jd=%s / %s"
 msgid "Below the horizon"
 msgstr "Ниже горизонта"
 
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
 msgstr "Бинарно индексированный каталог"
@@ -443,7 +447,7 @@ msgstr "Яркая туманность"
 
 #: u_translation:rsbrightstarss
 msgid "Bright Stars Size"
-msgstr ""
+msgstr "Размеры отображения звёзд"
 
 #: u_translation:rsbrightstars
 msgid "Bright stars"
@@ -631,7 +635,7 @@ msgstr "Клиент находится на связи"
 
 #: u_translation:rsclock
 msgid "Clock"
-msgstr ""
+msgstr "Часы"
 
 #: u_translation:rsclose
 msgid "Close"
@@ -711,7 +715,7 @@ msgstr "Размер компаса"
 
 #: u_translation:rscompiledwith
 msgid "Compiled with:"
-msgstr ""
+msgstr "Компиллировано:"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -1067,7 +1071,7 @@ msgstr "Встроенные параметры туманностей"
 
 #: u_translation:rsdefaultoutli
 msgid "Default Outline parameters"
-msgstr "Default Outline parameters(?)"
+msgstr "Исходные параметры схемы"
 
 #: u_translation:rsdefaultcolor
 msgid "Default color"
@@ -1159,7 +1163,7 @@ msgstr "Обозначение"
 
 #: u_translation:rsdesktopenvir
 msgid "Desktop environment"
-msgstr "Настільне середовище(?)"
+msgstr "Оформление стола"
 
 #: u_translation:rsdetails
 msgid "Details"
@@ -1219,7 +1223,7 @@ msgstr "Показ изображения из каталога объектов
 
 #: u_translation:rsdisplaylabel
 msgid "Display labels for all star catalog"
-msgstr ""
+msgstr "Показать метки всех звёздных каталогов"
 
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1231,7 +1235,7 @@ msgstr "Отобразить метки"
 
 #: u_translation:rsdisplaythelo
 msgid "Display the local horizon line"
-msgstr "Отображать контур местного горизонта"
+msgstr "Отображать контур горизонта"
 
 #: u_translation:rsdistance
 msgid "Distance"
@@ -1491,7 +1495,7 @@ msgstr "Окуляр"
 
 #: u_translation:rsfaq
 msgid "FAQ"
-msgstr ""
+msgstr "ЧаВо"
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -1591,7 +1595,7 @@ msgstr "Поисковый круг (окуляр)"
 
 #: u_translation:rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "Прямоугольное поле искателя (CCD)"
+msgstr "Прямоугольное поле CCD"
 
 #: u_translation:rsfirst5000
 msgid "First 5000"
@@ -1831,15 +1835,15 @@ msgstr "Порт INDI сервера"
 
 #: u_translation:rsiconsize
 msgid "Icon Size"
-msgstr ""
+msgstr "Размер иконки"
 
 #: u_translation:rsicontime
 msgid "Icon Time Display"
-msgstr ""
+msgstr "Показ времени на иконке"
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
-msgstr "Вы живёте на высокой горе на океанском побережье и вам нравится наблюдать искаженный образ объекта ниже горизонта."
+msgstr "Если вы наблюдаете с высокой горы, то линия горизонта будет ниже, чем она была бы на уровне моря."
 
 #: u_translation:rsillum
 msgid "Illum."
@@ -1899,7 +1903,7 @@ msgstr "Информация"
 
 #: u_translation:rsinformationd
 msgid "Information detail"
-msgstr ""
+msgstr "Информационная деталь"
 
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
@@ -1935,7 +1939,7 @@ msgstr "Это действительно такая эпоха координа
 
 #: u_translation:rsjd2
 msgid "JD"
-msgstr ""
+msgstr "JD"
 
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
@@ -2027,7 +2031,7 @@ msgstr "Левая панель"
 
 #: u_translation:rslegal
 msgid "Legal"
-msgstr ""
+msgstr "Поясное"
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2139,7 +2143,7 @@ msgstr "Местный горизонт"
 
 #: u_translation:rslocalhorizon2
 msgid "Local Horizon File Name : "
-msgstr "Название файла местного горизонта:"
+msgstr "Название файла горизонта:"
 
 #: u_translation:rslocalsideral
 msgid "Local Sideral Time"
@@ -2291,7 +2295,7 @@ msgstr "Средняя аномалия"
 
 #: u_translation:rsmeanlocal
 msgid "Mean local"
-msgstr ""
+msgstr "Местное средн."
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -2455,7 +2459,7 @@ msgstr "Цвет ночного режима"
 
 #: u_translation:rsnoasteroidda
 msgid "No Asteroid data found!%sPlease load a MPC file first."
-msgstr "Не найдено никаких астероидных данных!%sПажалуйста, сперва загрузите МРС файл."
+msgstr "Не найдено никаких астероидных данных!%sПожалуйста, сперва загрузите МРС файл."
 
 #: u_translation:rsnomargin
 msgid "No Margin"
@@ -2531,7 +2535,7 @@ msgstr "Количество файлов"
 
 #: u_translation:rsnumberofnebu
 msgid "Number of nebulae"
-msgstr ""
+msgstr "Число туманностей"
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"
@@ -3023,7 +3027,7 @@ msgstr "Быстро удалить"
 
 #: u_translation:rsquickstartgu
 msgid "Quick start guide"
-msgstr ""
+msgstr "Быстрое начальное руководство"
 
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
@@ -3155,7 +3159,7 @@ msgstr "Сбросить карту"
 
 #: u_translation:rsresolution
 msgid "Resolution:"
-msgstr "Разделение:(?)"
+msgstr "Разделение:"
 
 #: u_translation:rsreturn
 msgid "Return"
@@ -3419,7 +3423,7 @@ msgstr "Показать вид созвездий"
 
 #: u_translation:rsshowconstell2
 msgid "Show Constellation Limit"
-msgstr "Показать пределы созвездий"
+msgstr "Показать границы созвездий"
 
 #: u_translation:rsshowconstell
 msgid "Show Constellation Line"
@@ -3467,7 +3471,7 @@ msgstr "Показать линии"
 
 #: u_translation:rsshowmark
 msgid "Show Mark"
-msgstr "Показать окуляр(?)"
+msgstr "Показать окуляр"
 
 #: u_translation:rsshowmilkyway
 msgid "Show Milky Way"
@@ -3519,7 +3523,7 @@ msgstr "Показать/убрать DSS изображения"
 
 #: u_translation:rssideral
 msgid "Sideral"
-msgstr ""
+msgstr "Звёздное средн."
 
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
@@ -3551,11 +3555,15 @@ msgstr "Домашняя страница \"Звёздные Карты\" на �
 
 #: u_translation:rsskycharticon
 msgid "Skychart Icon Setup"
-msgstr ""
+msgstr "Установки иконки Звёздных Карт"
 
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Поворот"
+
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"
@@ -3671,7 +3679,7 @@ msgstr "Установки собственных движений звёзд (�
 
 #: u_translation:rsstartmonth
 msgid "Start Month"
-msgstr "Start Month(?)"
+msgstr "С месяца"
 
 #: u_translation:rsstartofobjec
 msgid "Start of object"
@@ -3783,11 +3791,11 @@ msgstr "Температура, °С"
 
 #: u_translation:rstext
 msgid "Text"
-msgstr ""
+msgstr "Вид текста иконки"
 
 #: u_translation:rstextsize
 msgid "Text Size"
-msgstr ""
+msgstr "Размер текста иконки"
 
 #: u_translation:rstextfilecata
 msgid "Text file catalog"
@@ -3903,7 +3911,7 @@ msgstr "Истинное положение"
 
 #: u_translation:rstruesolar
 msgid "True solar"
-msgstr ""
+msgstr "Солнечное истинн."
 
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
@@ -4055,7 +4063,7 @@ msgstr "Идент.Пользователя:"
 
 #: u_translation:rsusingexistin
 msgid "Using existing file %s"
-msgstr ""
+msgstr "Использование существующего файла %s"
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

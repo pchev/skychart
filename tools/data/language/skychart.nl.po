@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-11-05 01:10+0100\n"
+"PO-Revision-Date: 2008-11-10 00:17+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -253,7 +253,7 @@ msgstr "Schijnbaar"
 
 #: u_translation:rsappearance
 msgid "Appearance"
-msgstr ""
+msgstr "Verschijning"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -386,6 +386,10 @@ msgstr "Begin verwerking voor jd=%s / %s"
 #: u_translation:rsbelowthehori
 msgid "Below the horizon"
 msgstr "Onder de horizon"
+
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
 
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
@@ -709,7 +713,7 @@ msgstr "Kompasroos grootte"
 
 #: u_translation:rscompiledwith
 msgid "Compiled with:"
-msgstr ""
+msgstr "Gecompileerd met:"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -1489,7 +1493,7 @@ msgstr "Oculair"
 
 #: u_translation:rsfaq
 msgid "FAQ"
-msgstr ""
+msgstr "FAQ"
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -1829,11 +1833,11 @@ msgstr "INDI server port"
 
 #: u_translation:rsiconsize
 msgid "Icon Size"
-msgstr ""
+msgstr "Icoon grootte"
 
 #: u_translation:rsicontime
 msgid "Icon Time Display"
-msgstr ""
+msgstr "Icoon tijdweergave"
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
@@ -3021,7 +3025,7 @@ msgstr "Snel verwijderen"
 
 #: u_translation:rsquickstartgu
 msgid "Quick start guide"
-msgstr ""
+msgstr "Quick start guide"
 
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
@@ -3549,11 +3553,15 @@ msgstr "Cartes du Ciel - Sterrenkaarten Webpagina"
 
 #: u_translation:rsskycharticon
 msgid "Skychart Icon Setup"
-msgstr ""
+msgstr "Skychart icoon instelling"
 
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Beweeg telescoop naar object"
+
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"
@@ -3781,11 +3789,11 @@ msgstr "Temperatuur (Celsius)"
 
 #: u_translation:rstext
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: u_translation:rstextsize
 msgid "Text Size"
-msgstr ""
+msgstr "Text grootte"
 
 #: u_translation:rstextfilecata
 msgid "Text file catalog"
@@ -3901,7 +3909,7 @@ msgstr "Ware positie"
 
 #: u_translation:rstruesolar
 msgid "True solar"
-msgstr ""
+msgstr "Echte zonnetijd"
 
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"

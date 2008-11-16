@@ -389,6 +389,10 @@ msgstr "开始处理适于儒略日=%s / %s"
 msgid "Below the horizon"
 msgstr "地平以下"
 
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
 msgstr "二进制索引星表"
@@ -3556,6 +3560,10 @@ msgstr ""
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "回转"
+
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"
