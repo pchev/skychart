@@ -72,6 +72,16 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/i386/skychart*.rpm $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
+  #debug
+  cd $wd
+  mkdir $builddir/debug
+  cp skychart/cdc $builddir/debug/skychart
+  cp skychart/cdcicon $builddir/debug/
+  cp varobs/varobs $builddir/debug/
+  cp varobs/varobs_lpv_bulletin $builddir/debug/
+  cd $builddir/debug/
+  tar cvjf bin-linux-debug.tar.bz2 *
+  mv bin-linux-debug.tar.bz2 $wd
 
   cd $wd
   rm -rf $builddir
@@ -97,6 +107,16 @@ if [[ $lastrev -ne $currentrev ]]; then
   wine "$innosetup" "$issscript"
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv $builddir/skychart-*.exe $wd
+  #debug
+  cd $wd
+  mkdir $builddir/debug
+  cp skychart/cdc.exe $builddir/debug/skychart.exe
+  cp skychart/cdcicon.exe $builddir/debug/
+  cp varobs/varobs.exe $builddir/debug/
+  cp varobs/varobs_lpv_bulletin.exe $builddir/debug/
+  cd $builddir/debug/
+  zip bin-windows-debug.zip *
+  mv bin-windows-debug.zip $wd
 
   cd $wd
   rm -rf $builddir
