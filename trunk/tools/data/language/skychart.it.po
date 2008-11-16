@@ -1,7 +1,7 @@
 # translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-20 14:33+0200\n"
+"PO-Revision-Date: 2008-11-09 20:30+0100\n"
 "Last-Translator: Mattia\n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
@@ -254,7 +254,7 @@ msgstr "Apparenti"
 
 #: u_translation:rsappearance
 msgid "Appearance"
-msgstr ""
+msgstr "Aspetto"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -282,7 +282,7 @@ msgstr "Come a schermo (sfondo nero!)"
 
 #: u_translation:rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr ""
+msgstr "Chiedi conferma prima di connetterti a Internet"
 
 #: u_translation:rsasterism
 msgid "Asterism"
@@ -388,6 +388,10 @@ msgstr "Inizia il calcolo per jd=%s / %s"
 msgid "Below the horizon"
 msgstr "Sotto l'orizzonte"
 
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
 msgstr "Catalogo binario indicizzato"
@@ -442,7 +446,7 @@ msgstr "Nebulosa a Emissione"
 
 #: u_translation:rsbrightstarss
 msgid "Bright Stars Size"
-msgstr ""
+msgstr "Dimensione Stelle Brillanti"
 
 #: u_translation:rsbrightstars
 msgid "Bright stars"
@@ -630,7 +634,7 @@ msgstr "Mantieni attiva la connessione"
 
 #: u_translation:rsclock
 msgid "Clock"
-msgstr ""
+msgstr "Orologio"
 
 #: u_translation:rsclose
 msgid "Close"
@@ -710,7 +714,7 @@ msgstr "Diametro bussola"
 
 #: u_translation:rscompiledwith
 msgid "Compiled with:"
-msgstr ""
+msgstr "Compilato con:"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -1218,7 +1222,7 @@ msgstr "Mostra immagini degli oggetti catalogati"
 
 #: u_translation:rsdisplaylabel
 msgid "Display labels for all star catalog"
-msgstr ""
+msgstr "Mostra etichette per tutti i cataloghi stellari"
 
 #: u_translation:rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1490,7 +1494,7 @@ msgstr "Oculare"
 
 #: u_translation:rsfaq
 msgid "FAQ"
-msgstr ""
+msgstr "FAQ"
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -1830,11 +1834,11 @@ msgstr "Porta Server INDI"
 
 #: u_translation:rsiconsize
 msgid "Icon Size"
-msgstr ""
+msgstr "Dimensione Icona"
 
 #: u_translation:rsicontime
 msgid "Icon Time Display"
-msgstr ""
+msgstr "Icona Visualizza Orario"
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
@@ -1898,7 +1902,7 @@ msgstr "Informazioni"
 
 #: u_translation:rsinformationd
 msgid "Information detail"
-msgstr ""
+msgstr "Dettaglio Informazioni"
 
 #: u_translation:rsinitializeda
 msgid "Initialize Database"
@@ -1934,7 +1938,7 @@ msgstr "L'epoca dei dati è veramente %s ?"
 
 #: u_translation:rsjd2
 msgid "JD"
-msgstr ""
+msgstr "Data Giuliana"
 
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
@@ -2026,7 +2030,7 @@ msgstr "Pannello Sinistro"
 
 #: u_translation:rslegal
 msgid "Legal"
-msgstr ""
+msgstr "Legale"
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2182,7 +2186,7 @@ msgstr "M"
 
 #: u_translation:rssmonth
 msgid "M."
-msgstr ""
+msgstr "M."
 
 #: u_translation:rsmbytes
 msgid "MBytes"
@@ -2290,7 +2294,7 @@ msgstr "Anomalia media"
 
 #: u_translation:rsmeanlocal
 msgid "Mean local"
-msgstr ""
+msgstr "Locale media"
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -2530,7 +2534,7 @@ msgstr "Numero di files"
 
 #: u_translation:rsnumberofnebu
 msgid "Number of nebulae"
-msgstr ""
+msgstr "Numero di oggetti"
 
 #: u_translation:rsnumberofstep
 msgid "Number of steps"
@@ -3022,7 +3026,7 @@ msgstr "Cancellazione Veloce"
 
 #: u_translation:rsquickstartgu
 msgid "Quick start guide"
-msgstr ""
+msgstr "Guida Rapida"
 
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
@@ -3518,7 +3522,7 @@ msgstr "Mostra/Nascondi immagini DSS"
 
 #: u_translation:rssideral
 msgid "Sideral"
-msgstr ""
+msgstr "Siderale"
 
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
@@ -3550,11 +3554,15 @@ msgstr "Homepage di Sky Charts"
 
 #: u_translation:rsskycharticon
 msgid "Skychart Icon Setup"
-msgstr ""
+msgstr "Configurazione Icona Skychart"
 
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Muovi"
+
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"
@@ -3782,11 +3790,11 @@ msgstr "Temperatura (Celsius)"
 
 #: u_translation:rstext
 msgid "Text"
-msgstr ""
+msgstr "Testo"
 
 #: u_translation:rstextsize
 msgid "Text Size"
-msgstr ""
+msgstr "Dimensione Testo"
 
 #: u_translation:rstextfilecata
 msgid "Text file catalog"
@@ -3902,7 +3910,7 @@ msgstr "Posizione apparente"
 
 #: u_translation:rstruesolar
 msgid "True solar"
-msgstr ""
+msgstr "Solare reale"
 
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
@@ -4054,7 +4062,7 @@ msgstr "Userid:"
 
 #: u_translation:rsusingexistin
 msgid "Using existing file %s"
-msgstr ""
+msgstr "Uso il file esistente %s"
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

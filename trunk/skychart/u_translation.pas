@@ -1124,6 +1124,8 @@ resourcestring
   rsCompiledWith = 'Compiled with:';
   rsFAQ = 'FAQ';
   rsQuickStartGu = 'Quick start guide';
+  rsSmallStars = 'Small stars';
+  rsBigStars = 'Big stars';
 
 implementation
 

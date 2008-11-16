@@ -387,6 +387,10 @@ msgstr "Hefja útreikninga fyrir jd=%s / %s"
 msgid "Below the horizon"
 msgstr "Neðan sjóndeildarhrings"
 
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
 msgstr "Skrá lykluð í tvíundark."
@@ -3554,6 +3558,10 @@ msgstr ""
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Snúa"
+
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"

@@ -388,6 +388,10 @@ msgstr "Zpracování pro %s / %s"
 msgid "Below the horizon"
 msgstr "Pod horizontem"
 
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
 msgstr "Binárně indexovaný katalog"
@@ -3555,6 +3559,10 @@ msgstr ""
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Sledovat"
+
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"

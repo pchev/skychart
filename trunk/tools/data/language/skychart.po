@@ -4294,3 +4294,11 @@ msgstr ""
 msgid "Quick start guide"
 msgstr ""
 
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
+
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+

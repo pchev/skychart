@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-10-25 08:51+0200\n"
+"PO-Revision-Date: 2008-11-12 17:01+0200\n"
 "Last-Translator: Oleg Maliy <astroclubzp@gmail.com>\n"
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "POT-Creation-Date: \n"
@@ -256,7 +256,7 @@ msgstr "Видимі"
 
 #: u_translation:rsappearance
 msgid "Appearance"
-msgstr ""
+msgstr "Зовнішність"
 
 #: u_translation:rsappendtoanex
 msgid "Append to an existing catalog "
@@ -390,6 +390,10 @@ msgstr "Початок обробки для jd=%s / %s"
 msgid "Below the horizon"
 msgstr "Нижче обрію"
 
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
 msgstr "Бінарно індексований каталог"
@@ -444,7 +448,7 @@ msgstr "Яскрава туманність"
 
 #: u_translation:rsbrightstarss
 msgid "Bright Stars Size"
-msgstr ""
+msgstr "Розміри відображення зірок"
 
 #: u_translation:rsbrightstars
 msgid "Bright stars"
@@ -632,7 +636,7 @@ msgstr "Клієнт перебуває на зв'язку"
 
 #: u_translation:rsclock
 msgid "Clock"
-msgstr ""
+msgstr "Годинник"
 
 #: u_translation:rsclose
 msgid "Close"
@@ -712,7 +716,7 @@ msgstr "Розмір компасу"
 
 #: u_translation:rscompiledwith
 msgid "Compiled with:"
-msgstr ""
+msgstr "Компільовано:"
 
 #: u_translation:rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -1492,7 +1496,7 @@ msgstr "Окуляр"
 
 #: u_translation:rsfaq
 msgid "FAQ"
-msgstr ""
+msgstr "Найчастіші питання"
 
 #: u_translation:rsfitsfile
 msgid "FITS File"
@@ -1832,11 +1836,11 @@ msgstr "Порт INDI серверу"
 
 #: u_translation:rsiconsize
 msgid "Icon Size"
-msgstr ""
+msgstr "Розмір іконки"
 
 #: u_translation:rsicontime
 msgid "Icon Time Display"
-msgstr ""
+msgstr "Відображення часу на іконці"
 
 #: u_translation:rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
@@ -1936,7 +1940,7 @@ msgstr "Це дійсно така епоха координат %s ?"
 
 #: u_translation:rsjd2
 msgid "JD"
-msgstr ""
+msgstr "JD"
 
 #: u_translation:rsjdcalendar
 msgid "JD calendar"
@@ -2028,7 +2032,7 @@ msgstr "Ліва панель"
 
 #: u_translation:rslegal
 msgid "Legal"
-msgstr ""
+msgstr "Поясний"
 
 #: u_translation:rslegend
 msgid "Legend"
@@ -2292,7 +2296,7 @@ msgstr "Середня аномалія"
 
 #: u_translation:rsmeanlocal
 msgid "Mean local"
-msgstr ""
+msgstr "Місцевий серед."
 
 #: u_translation:rsmeanofthedat
 msgid "Mean of the date"
@@ -3024,7 +3028,7 @@ msgstr "Швидко видалити"
 
 #: u_translation:rsquickstartgu
 msgid "Quick start guide"
-msgstr ""
+msgstr "Порадник швидкого старту"
 
 #: u_translation:rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
@@ -3520,7 +3524,7 @@ msgstr "Показати/приховати DSS зображення"
 
 #: u_translation:rssideral
 msgid "Sideral"
-msgstr ""
+msgstr "Зоряний серед."
 
 #: u_translation:rssiderealday
 msgid "Sidereal Day"
@@ -3552,11 +3556,15 @@ msgstr "Домашня сторінка \"Зоряні Мапи\""
 
 #: u_translation:rsskycharticon
 msgid "Skychart Icon Setup"
-msgstr ""
+msgstr "Налаштування іконки Зоряних Мап"
 
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Поворот"
+
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"
@@ -3784,11 +3792,11 @@ msgstr "Температура (Цельсій)"
 
 #: u_translation:rstext
 msgid "Text"
-msgstr ""
+msgstr "Вигляд тексту іконки"
 
 #: u_translation:rstextsize
 msgid "Text Size"
-msgstr ""
+msgstr "Розмір тексту іконки"
 
 #: u_translation:rstextfilecata
 msgid "Text file catalog"
@@ -3904,7 +3912,7 @@ msgstr "Істинне положення"
 
 #: u_translation:rstruesolar
 msgid "True solar"
-msgstr ""
+msgstr "Істин. сонячний"
 
 #: u_translation:rstrumplerclas
 msgid "Trumpler Class"
@@ -3948,7 +3956,7 @@ msgstr "Команда запуску URL"
 
 #: u_translation:rsut
 msgid "UT"
-msgstr "UT"
+msgstr "Всесвітний"
 
 #: u_translation:rsumbra
 msgid "Umbra"
@@ -4056,7 +4064,7 @@ msgstr "Ідент.Користувача:"
 
 #: u_translation:rsusingexistin
 msgid "Using existing file %s"
-msgstr ""
+msgstr "Використання існуючого файлу %s "
 
 #: u_translation:rsvariablestar
 msgid "Variable Star"

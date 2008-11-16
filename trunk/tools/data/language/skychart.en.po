@@ -387,6 +387,10 @@ msgstr ""
 msgid "Below the horizon"
 msgstr ""
 
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
 msgstr ""
@@ -3553,6 +3557,10 @@ msgstr ""
 
 #: u_translation:rsslew
 msgid "Slew"
+msgstr ""
+
+#: u_translation:rssmallstars
+msgid "Small stars"
 msgstr ""
 
 #: u_translation:rssocketerror

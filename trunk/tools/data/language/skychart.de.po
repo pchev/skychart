@@ -387,6 +387,10 @@ msgstr "Beginne Verarbeitung für JD=%s / %s"
 msgid "Below the horizon"
 msgstr "Unter dem Horizont"
 
+#: u_translation:rsbigstars
+msgid "Big stars"
+msgstr ""
+
 #: u_translation:rsbinaryindexe
 msgid "Binary indexed catalog"
 msgstr "Binär indexiert Katalog"
@@ -3554,6 +3558,10 @@ msgstr ""
 #: u_translation:rsslew
 msgid "Slew"
 msgstr "Schwenken"
+
+#: u_translation:rssmallstars
+msgid "Small stars"
+msgstr ""
 
 #: u_translation:rssocketerror
 msgid "Socket error %s.  %s"
