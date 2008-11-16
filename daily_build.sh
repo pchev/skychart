@@ -46,9 +46,9 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # tar
   cd $builddir
-  tar cvjf skychart-linux.tar.bz2 *
+  tar cvjf skychart-3.0.1.5-linux.tar.bz2 *
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv skychart-linux.tar.bz2 $wd
+  mv skychart*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
   # deb
   cd $wd
@@ -99,14 +99,14 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # zip
   cd $builddir/Data
-  zip -r  skychart-windows.zip *
+  zip -r  skychart-3.0.1.5-windows.zip *
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv skychart-windows.zip $wd
+  mv skychart*.zip $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
   # exe
   wine "$innosetup" "$issscript"
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv $builddir/skychart-*.exe $wd
+  mv $builddir/skychart*.exe $wd
   #debug
   cd $wd
   mkdir $builddir/debug
