@@ -481,8 +481,6 @@ type
     procedure HomePage1Click(Sender: TObject);
     procedure Maillist1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
-    procedure Toolbar1MouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
     procedure ReleaseNotes1Click(Sender: TObject);
     procedure ResetAllLabels1Click(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
@@ -495,7 +493,6 @@ type
     procedure SetupSolSysExecute(Sender: TObject);
     procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
-    procedure ToolBar1Enter(Sender: TObject);
     procedure ToolButtonConfigClick(Sender: TObject);
     procedure ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -2355,21 +2352,6 @@ end;
 procedure Tf_main.SetupTimeExecute(Sender: TObject);
 begin
 SetupTimePage(0);
-end;
-
-procedure Tf_main.ToolBar1Enter(Sender: TObject);
-begin
-{$ifdef lclgtk2}
-  quicksearch.Enabled:=true;
-  TimeVal.Enabled:=true;
-  TimeU.Enabled:=true;
-{$endif}
-end;
-
-procedure Tf_main.Toolbar1MouseMove(Sender: TObject; Shift: TShiftState; X,
-  Y: Integer);
-begin
-    ToolBar1Enter(sender);
 end;
 
 procedure Tf_main.ToolButtonConfigClick(Sender: TObject);
@@ -5753,16 +5735,14 @@ end;
 procedure Tf_main.ImageSetFocus(Sender: TObject);
 begin
 // to restore focus to the chart that as no text control
-  activecontrol:=nil;
+  ActiveControl:=nil;
   quicksearch.Enabled:=false;   // add all main form focusable control here
   TimeVal.Enabled:=false;
   TimeU.Enabled:=false;
-  Activecontrol:=Multidoc1;
-{$ifndef lclgtk2}
+  ActiveControl:=Multidoc1.ActiveChild.DockedPanel;
   quicksearch.Enabled:=true;
   TimeVal.Enabled:=true;
   TimeU.Enabled:=true;
-{$endif}
 end;
 
 procedure Tf_main.ListInfo(buf:string);
@@ -5983,13 +5963,19 @@ end;
 
 procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart) and ((Activecontrol=nil)or(Activecontrol=Multidoc1)) then
-   (MultiDoc1.ActiveObject as Tf_chart).FormKeyDown(Sender,Key,Shift);
+if (MultiDoc1.ActiveObject is Tf_chart) and
+   ((Activecontrol=nil)or(Activecontrol=Multidoc1)or
+   (Activecontrol=MultiDoc1.ActiveChild)or(Activecontrol=MultiDoc1.ActiveChild.DockedPanel))
+   then
+      (MultiDoc1.ActiveObject as Tf_chart).FormKeyDown(Sender,Key,Shift);
 end;
 
 procedure Tf_main.FormKeyPress(Sender: TObject; var Key: Char);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart)and ((Activecontrol=nil)or(Activecontrol=Multidoc1)) then
+if (MultiDoc1.ActiveObject is Tf_chart) and
+   ((Activecontrol=nil)or(Activecontrol=Multidoc1)or
+   (Activecontrol=MultiDoc1.ActiveChild)or(Activecontrol=MultiDoc1.ActiveChild.DockedPanel))
+   then
    (MultiDoc1.ActiveObject as Tf_chart).FormKeyPress(Sender,Key);
 end;
 
