@@ -55,6 +55,7 @@ type
   private
     { private declarations }
     icontype, icontextsize, iconinfo : integer;
+    clockposx, clockposy, calposx, calposy: integer;
     iconbg, icontext: TColor;
     bmp:TBitmap;
     language:string;
@@ -154,6 +155,10 @@ iconbg:=ReadInteger(section,'Icon_bg',iconbg);
 icontext:=ReadInteger(section,'Icon_text',icontext);
 icontextsize:=ReadInteger(section,'Icon_textsize',icontextsize);
 iconinfo:=ReadInteger(section,'Icon_info',iconinfo);
+clockposx:=ReadInteger(section,'clockposx',-1);
+clockposy:=ReadInteger(section,'clockposy',-1);
+calposx:=ReadInteger(section,'calposx',-1);
+calposy:=ReadInteger(section,'calposy',-1);
 section:='observatory';
 f_clock.cfgsc.ObsLatitude := ReadFloat(section,'ObsLatitude',0 );
 f_clock.cfgsc.ObsLongitude := ReadFloat(section,'ObsLongitude',0 );
@@ -204,6 +209,10 @@ WriteInteger(section,'Icon_bg',iconbg);
 WriteInteger(section,'Icon_text',icontext);
 WriteInteger(section,'Icon_textsize',icontextsize);
 WriteInteger(section,'Icon_info',iconinfo);
+WriteInteger(section,'clockposx',clockposx);
+WriteInteger(section,'clockposy',clockposy);
+WriteInteger(section,'calposx',calposx);
+WriteInteger(section,'calposy',calposy);
 UpdateFile;
 end;
 finally
@@ -302,7 +311,8 @@ end;
 
 procedure Tf_tray.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  if not WantClose then CloseAction:=caHide;
+  if not WantClose then CloseAction:=caHide
+     else SaveConfig;
 end;
 
 procedure Tf_tray.IconSettingChange(Sender: TObject);
@@ -353,10 +363,16 @@ end;
 procedure Tf_tray.MenuItem1Click(Sender: TObject);
 begin
 if f_clock.Visible then begin
+  clockposx:=f_clock.Left;
+  clockposy:=f_clock.Top;
   f_clock.Hide;
 end else begin
   UpdateIcon(nil);
-  FormPos(f_clock,SysTray.GetPosition.X+SysTray.Icon.Width,SysTray.GetPosition.Y);
+  if (clockposx<0)or(clockposy<0) then begin
+    clockposx:=SysTray.GetPosition.X+SysTray.Icon.Width;
+    clockposy:=SysTray.GetPosition.Y;
+  end;
+  FormPos(f_clock,clockposx,clockposy,false);
   f_clock.Show;
 end;
 end;
@@ -415,7 +431,11 @@ begin
   f_calendar.config.EquinoxName:=rsDate;
   f_calendar.config.Force_DT_UT:=false;
   f_calendar.config.DT_UT:=DTminusUT(y,f_calendar.config);
-  formpos(f_calendar,SysTray.GetPosition.X,SysTray.GetPosition.Y);
+  if (calposx<0)or(calposy<0) then begin
+    calposx:=SysTray.GetPosition.X+SysTray.Icon.Width;
+    calposy:=SysTray.GetPosition.Y;
+  end;
+  formpos(f_calendar,calposx,calposy,false);
   f_calendar.show;
   f_calendar.bringtofront;
 end;
@@ -457,6 +477,14 @@ begin
       end;
   end;
   TrayMsg(copy(buf1,1,2),copy(buf1,4,2),buf2+blank+buf1);
+  if (f_clock<>nil)and f_clock.Visible then begin
+    clockposx:=f_clock.Left;
+    clockposy:=f_clock.Top;
+  end;
+  if (f_calendar<>nil)and f_calendar.Visible then begin
+    calposx:=f_calendar.Left;
+    calposy:=f_calendar.Top;
+  end;
 end;
 
 Procedure Tf_tray.GetAppDir;

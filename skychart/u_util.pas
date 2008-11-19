@@ -87,7 +87,7 @@ Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
 function DTminusUT(annee : integer; c:Tconf_skychart) : double;
-Procedure FormPos(form : Tform; x,y : integer);
+Procedure FormPos(form : Tform; x,y : integer;safe: boolean=true);
 Function ExecProcess(cmd: string; output: TStringList): integer;
 Function Exec(cmd: string; hide: boolean=true): integer;
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
@@ -1118,7 +1118,7 @@ for i:=0 to (length(str)-1) div 2 do begin
 end;
 end;
 
-Procedure FormPos(form : Tform; x,y : integer);
+Procedure FormPos(form : Tform; x,y : integer;safe: boolean=true);
 const bot=40; //minimal distance from screen bottom
 begin
 with Form do begin
@@ -1126,7 +1126,11 @@ with Form do begin
   if left+width>Screen.Width then left:=Screen.Width-width;
   if left<0 then left:=0;
   top:=y;
-  if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
+  if safe then begin
+     if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
+  end else begin
+     if top+height>(Screen.height) then top:=Screen.height-height;
+  end;
   if top<0 then top:=0;
 end;
 end;

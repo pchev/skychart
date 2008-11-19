@@ -678,7 +678,7 @@ type
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
     procedure UpdateConfig;
-    procedure SavePrivateConfig(filename:string; purge: boolean=false);
+    procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
     procedure SaveChartConfig(filename:string; child: TChildDoc);
     procedure SaveVersion;
@@ -1169,7 +1169,7 @@ begin
     def_cfgsc.ObsTZ:='Etc/GMT';
     def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  end;
- SavePrivateConfig(configfile,true);
+ SavePrivateConfig(configfile);
  SaveChartConfig(configfile,nil);
 end;
 
@@ -4181,7 +4181,7 @@ procedure Tf_main.SaveDefault;
 var i,j: integer;
 begin
 try
-SavePrivateConfig(configfile,true);
+SavePrivateConfig(configfile);
 SaveQuickSearch(configfile);
 if (MultiDoc1.ActiveObject is Tf_chart) then begin
    SaveChartConfig(configfile,MultiDoc1.ActiveChild);
@@ -4472,7 +4472,7 @@ except
 end;
 end;
 
-procedure Tf_main.SavePrivateConfig(filename:string; purge: boolean=false);
+procedure Tf_main.SavePrivateConfig(filename:string);
 var i,j:integer;
     inif: TMemIniFile;
     section : string;
@@ -4481,7 +4481,6 @@ try
 inif:=TMeminifile.create(filename);
 try
 with inif do begin
-if purge then Clear;
 section:='main';
 WriteString(section,'version',cdcver);
 WriteString(section,'AppDir',appdir);
