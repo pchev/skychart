@@ -34,19 +34,18 @@ type
   { Tf_manualtelescope }
 
   Tf_manualtelescope = class(TForm)
-    Panel1: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure FormDblClick(Sender: TObject);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Panel1DblClick(Sender: TObject);
   private
     { Private declarations }
     startpoint: TPoint;
@@ -112,6 +111,12 @@ begin
   SetLang;
 end;
 
+procedure Tf_manualtelescope.FormDblClick(Sender: TObject);
+begin
+moving:=false;
+Hide;
+end;
+
 procedure Tf_manualtelescope.FormMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 var P: Tpoint;
@@ -135,12 +140,6 @@ procedure Tf_manualtelescope.FormMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
 moving:=false;
-end;
-
-procedure Tf_manualtelescope.Panel1DblClick(Sender: TObject);
-begin
-moving:=false;
-Hide;
 end;
 
 initialization

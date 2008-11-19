@@ -25,9 +25,9 @@ type
     clock1: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    Panel1: TPanel;
     Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
+    procedure FormDblClick(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -35,7 +35,6 @@ type
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
-    procedure Panel1DblClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
     { private declarations }
@@ -95,6 +94,12 @@ begin
   SetLang;
 end;
 
+procedure Tf_clock.FormDblClick(Sender: TObject);
+begin
+ moving:=false;
+ Hide;
+end;
+
 procedure Tf_clock.FormMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -132,12 +137,6 @@ procedure Tf_clock.FormShow(Sender: TObject);
 begin
   UpdateClock;
   Timer1.Enabled:=true;
-end;
-
-procedure Tf_clock.Panel1DblClick(Sender: TObject);
-begin
-moving:=false;
-Hide;
 end;
 
 procedure Tf_clock.FormHide(Sender: TObject);
