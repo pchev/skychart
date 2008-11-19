@@ -3960,7 +3960,7 @@ end;
 procedure Tf_main.ReadPrivateConfig(filename:string);
 var i,j:integer;
     inif: TMemIniFile;
-    section : string;
+    section,buf : string;
 begin
 inif:=TMeminifile.create(filename);
 try
@@ -3993,10 +3993,14 @@ cfgm.PrtBottomMargin:=ReadInteger(section,'PrtBottomMargin',cfgm.PrtBottomMargin
 cfgm.ThemeName:=ReadString(section,'Theme',cfgm.ThemeName);
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
-cfgm.ConstLfile:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
-cfgm.ConstBfile:=ReadString(section,'ConstBfile',cfgm.ConstBfile);
-cfgm.EarthMapFile:=ReadString(section,'EarthMapFile',cfgm.EarthMapFile);
-cfgm.PlanetDir:=ReadString(section,'PlanetDir',cfgm.PlanetDir);
+buf:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
+if FileExists(buf) then cfgm.ConstLfile:=buf;
+buf:=ReadString(section,'ConstBfile',cfgm.ConstBfile);
+if FileExists(buf) then cfgm.ConstBfile:=buf;
+buf:=ReadString(section,'EarthMapFile',cfgm.EarthMapFile);
+if FileExists(buf) then cfgm.EarthMapFile:=buf;
+buf:=ReadString(section,'PlanetDir',cfgm.PlanetDir);
+if DirectoryExists(buf) then cfgm.PlanetDir:=buf;
 cfgm.horizonfile:=ReadString(section,'horizonfile',cfgm.horizonfile);
 cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
@@ -4010,7 +4014,8 @@ cfgm.db:=ReadString(section,'db',cfgm.db);
 cfgm.dbuser:=ReadString(section,'dbuser',cfgm.dbuser);
 cryptedpwd:=hextostr(ReadString(section,'dbpass',cfgm.dbpass));
 cfgm.dbpass:=DecryptStr(cryptedpwd,encryptpwd);
-cfgm.ImagePath:=ReadString(section,'ImagePath',cfgm.ImagePath);
+buf:=ReadString(section,'ImagePath',cfgm.ImagePath);
+if DirectoryExists(buf) then cfgm.ImagePath:=buf;
 cfgm.ImageLuminosity:=ReadFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
 cfgm.ImageContrast:=ReadFloat(section,'ImageContrast',cfgm.ImageContrast);
 cfgm.ShowChartInfo:=ReadBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
@@ -4076,16 +4081,20 @@ end;
 try
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
-   catalog.cfgcat.starcatpath[i]:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
+   buf:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
+   if DirectoryExists(buf) then catalog.cfgcat.starcatpath[i]:=buf;
 end;
 for i:=1 to maxvarstarcatalog do begin
-   catalog.cfgcat.varstarcatpath[i]:=ReadString(section,'varstarcatpath'+inttostr(i),catalog.cfgcat.varstarcatpath[i]);
+   buf:=ReadString(section,'varstarcatpath'+inttostr(i),catalog.cfgcat.varstarcatpath[i]);
+   if DirectoryExists(buf) then catalog.cfgcat.varstarcatpath[i]:=buf;
 end;
 for i:=1 to maxdblstarcatalog do begin
-   catalog.cfgcat.dblstarcatpath[i]:=ReadString(section,'dblstarcatpath'+inttostr(i),catalog.cfgcat.dblstarcatpath[i]);
+   buf:=ReadString(section,'dblstarcatpath'+inttostr(i),catalog.cfgcat.dblstarcatpath[i]);
+   if DirectoryExists(buf) then catalog.cfgcat.dblstarcatpath[i]:=buf;
 end;
 for i:=1 to maxnebcatalog do begin
-   catalog.cfgcat.nebcatpath[i]:=ReadString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
+   buf:=ReadString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
+   if DirectoryExists(buf) then catalog.cfgcat.nebcatpath[i]:=buf;
 end;
 except
   ShowError('Error reading '+filename+' catalog');
