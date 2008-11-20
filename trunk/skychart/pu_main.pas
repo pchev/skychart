@@ -1559,7 +1559,7 @@ end;
  WriteTrace(step);
 {$endif}
    MultiDoc1.InactiveBorderColor:=$404040;
-   MultiDoc1.TitleColor:=clWhite;
+   MultiDoc1.TitleColor:=clBlack;
    MultiDoc1.BorderColor:=$808080;
 {$endif}
 step:='Bitmap';
@@ -6144,7 +6144,7 @@ if night then begin
  end else begin
    SetButtonImage(cfgm.ButtonStandard);
    MultiDoc1.InactiveBorderColor:=$404040;
-   MultiDoc1.TitleColor:=clWhite;
+   MultiDoc1.TitleColor:=clBlack;
    MultiDoc1.BorderColor:=$808080;
 end;
 for i:=0 to MultiDoc1.ChildCount-1 do
