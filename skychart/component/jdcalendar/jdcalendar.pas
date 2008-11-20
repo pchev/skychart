@@ -878,7 +878,7 @@ begin
 EditH.Text:=FixNum(EditH.Text,2);
 EditM.Text:=FixNum(EditM.Text,2);
 EditS.Text:=FixNum(EditS.Text,2);
-result:=(strtointdef(EditH.Text,0)+(strtointdef(EditM.Text,0)/60)+(strtointdef(EditM.Text,0)/3600))/24;
+result:=(strtointdef(EditH.Text,0)+(strtointdef(EditM.Text,0)/60)+(strtointdef(EditS.Text,0)/3600))/24;
 end;
 
 procedure TTimePicker.Paint;
