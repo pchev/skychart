@@ -1898,6 +1898,8 @@ end;
 function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
 var ts:TSize;
 begin
+if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
+then begin
 // If drawing to the printer force to plot the text label to the canvas
 // even if label editing is selected
 if (cfgchart.onprinter or forcetextlabel) then begin
@@ -1964,6 +1966,7 @@ with labels[i] do begin
   visible:=true;
 end;
 end;
+end;
 result:=0;
 end;
 
@@ -1971,6 +1974,8 @@ procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlig
 var ts:TSize;
     arect: TRect;
 begin
+if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
+then
 with cnv do begin
 TextStyle.Opaque:=opaque;
 if opaque then Brush.Style:=bsSolid
@@ -2016,6 +2021,8 @@ var ls,p:Integer;
     arect: TRect;
     ts: TSize;
 begin
+if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
+then
 with cnv do begin
 TextStyle.Opaque:=opaque;
 if opaque then Brush.Style:=bsSolid
