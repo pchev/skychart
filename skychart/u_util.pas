@@ -1648,7 +1648,7 @@ with form do begin
      end;
   end else begin
      Color:=clBtnFace;
-     font.Color:=clText;
+     font.Color:=clBtnText;
      for i := 0 to ComponentCount-1 do begin
         if  ( Components[i] is TNotebook ) then with (Components[i] as TNotebook) do begin
            if color=nv_black then color:=clWindow;
