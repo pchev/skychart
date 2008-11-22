@@ -11,7 +11,6 @@ object f_config_pictures: Tf_config_pictures
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ParentFont = False
   LCLVersion = '0.9.27'
   object MainPanel: TPanel
     Height = 485
@@ -179,27 +178,27 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TPage
         Caption = 'Background'
-        ClientWidth = 507
-        ClientHeight = 479
+        ClientWidth = 503
+        ClientHeight = 475
         object Label270: TLabel
-          Height = 14
-          Width = 111
+          Height = 16
+          Width = 105
           Caption = 'Background Picture'
           ParentColor = False
         end
         object Label271: TLabel
           Left = 8
-          Height = 14
+          Height = 16
           Top = 22
-          Width = 47
+          Width = 44
           Caption = 'FITS File'
           ParentColor = False
         end
         object backimginfo: TLabel
           Left = 8
-          Height = 14
+          Height = 16
           Top = 47
-          Width = 9
+          Width = 7
           Caption = '  '
           ParentColor = False
         end
@@ -213,7 +212,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 8
           Height = 21
           Top = 80
-          Width = 122
+          Width = 119
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           TabOrder = 1
@@ -292,8 +291,8 @@ object f_config_pictures: Tf_config_pictures
           Top = 8
           Width = 481
           Caption = 'RealSky®'
-          ClientHeight = 340
-          ClientWidth = 477
+          ClientHeight = 355
+          ClientWidth = 481
           TabOrder = 0
           object Label72: TLabel
             Left = 8
@@ -439,8 +438,8 @@ object f_config_pictures: Tf_config_pictures
           Top = 374
           Width = 481
           Caption = 'Online DSS'
-          ClientHeight = 70
-          ClientWidth = 477
+          ClientHeight = 85
+          ClientWidth = 481
           TabOrder = 1
           object OnlineDSS: TCheckBox
             Left = 8

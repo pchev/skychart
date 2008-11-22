@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode delphi}{$H+}
 interface
 
-uses u_translation,
+uses u_translation, FileUtil,
   u_constant, u_util, u_planetrender, u_bitmap, PostscriptCanvas,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics;
@@ -1365,7 +1365,7 @@ if not cfgplot.Invisible then begin
  if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then begin
   if (n=2) and ((ds<5)or(ds>1500)) then n:=1;
   if (n=1) and (ds<5)  then n:=0;
-  if ((not planetrender)and(not Xplanetrender)) and (n=2) then n:=1;
+  if ((not planetrender)and(not use_xplanet)) and (n=2) then n:=1;
   if use_Xplanet and (n=2)and(ipla=10) then n:=1; // xplanet Sun is not usable
   case n of
       0 : begin // magn
@@ -1539,7 +1539,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
   10 : RenderSun(w,pa,poleincl,1,planetsize, fn);
   11 : RenderMoon(w,phase,pa,poleincl,sunincl,1,moonsize, fn);
  end;
- planetbmp.LoadFromFile(fn);
+ planetbmp.LoadFromFile(SysToUTF8(fn));
  planetbmppla:=ipla;
  planetbmpjd:=jdt;
  planetbmprot:=pa;
@@ -1577,7 +1577,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
  DeleteFile(slash(Tempdir)+'planet.png');
  i:=exec(cmd);
  if i=0 then begin
-   xplanetimg.LoadFromFile(slash(Tempdir)+'planet.png');
+   xplanetimg.LoadFromFile(SysToUTF8(slash(Tempdir)+'planet.png'));
    chdir(appdir);
    planetbmp.Assign(xplanetimg.Bitmap);
    planetbmppla:=ipla;

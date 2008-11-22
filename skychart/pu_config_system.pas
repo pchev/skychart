@@ -27,7 +27,7 @@ interface
 
 uses u_help, u_translation, u_constant, u_util, cu_database,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
-  LCLIntf, SysUtils, Graphics, Forms,
+  LCLIntf, SysUtils, Graphics, Forms, FileUtil,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
 
 type
@@ -381,14 +381,14 @@ case DBtype of
           end;
 end;
 skipDBtypeGroupClick:=false;
-dbnamesqlite.Text:=cmain.db;
+dbnamesqlite.Text:=SysToUTF8(cmain.db);
 dbname.Text:=cmain.db;
 dbhost.Text:=cmain.dbhost;
 dbport.value:=cmain.dbport;
 dbuser.Text:=cmain.dbuser;
 dbpass.Text:=cmain.dbpass;
-prgdir.text:=cmain.prgdir;
-persdir.text:=cmain.persdir;
+prgdir.text:=SysToUTF8(cmain.prgdir);
+persdir.text:=SysToUTF8(cmain.persdir);
 {$ifdef linux}
 LinuxDesktopBox.itemIndex:=LinuxDesktop;
 LinuxCmd.Text:=OpenFileCMD;
@@ -472,7 +472,7 @@ if messageDlg(Format(rsAlsoBeSureTh, [DBtypeGroup.hint+crlf+crlf, crlf, crlf]),
         DBtype:=sqlite;
         MysqlBox.visible:=false;
         SqliteBox.visible:=true;
-        dbnamesqlite.text:=slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]);
+        dbnamesqlite.text:=SysToUTF8(slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]));
         dbpath:=extractfilepath(dbnamesqlite.text);
         if not directoryexists(dbpath) then CreateDir(dbpath);
         if not directoryexists(dbpath) then forcedirectories(dbpath);

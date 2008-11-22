@@ -35,7 +35,7 @@ uses
   u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  u_constant, u_util, blcksock, synsock, dynlibs,
+  u_constant, u_util, blcksock, synsock, dynlibs, FileUtil,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
@@ -934,7 +934,7 @@ if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
 savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 savedialog.Title:=rsSaveTheCurre;
 if MultiDoc1.ActiveObject is Tf_chart then
-  if SaveDialog.Execute then SaveChartConfig(SaveDialog.Filename,MultiDoc1.ActiveChild);
+  if SaveDialog.Execute then SaveChartConfig(UTF8ToSys(SaveDialog.Filename),MultiDoc1.ActiveChild);
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
@@ -947,7 +947,7 @@ OpenDialog.Title:=rsOpenAChart;
   if OpenDialog.Execute then begin
     cfgp.Assign(def_cfgplot);
     cfgs.Assign(def_cfgsc);
-    ReadChartConfig(OpenDialog.FileName,true,false,cfgp,cfgs);
+    ReadChartConfig(UTF8ToSys(OpenDialog.FileName),true,false,cfgp,cfgs);
     nam:=stringreplace(extractfilename(OpenDialog.FileName),blank,'_',[rfReplaceAll]);
     p:=pos('.',nam);
     if p>0 then nam:=copy(nam,1,p-1);
@@ -1174,7 +1174,7 @@ begin
 end;
 
 procedure Tf_main.SaveImageExecute(Sender: TObject);
-var ext,format:string;
+var ext,format,fn:string;
 begin
 Savedialog.DefaultExt:='';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
@@ -1183,7 +1183,8 @@ savedialog.Title:=rsSaveImage;
 if MultiDoc1.ActiveObject  is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do
   if SaveDialog.Execute then begin
-     ext:=uppercase(extractfileext(SaveDialog.Filename));
+     fn:=SaveDialog.Filename;
+     ext:=uppercase(extractfileext(fn));
      if ext='' then
         case Savedialog.FilterIndex of
         0,1 : ext:='.PNG';
@@ -1193,7 +1194,7 @@ if MultiDoc1.ActiveObject  is Tf_chart then
      if (ext='.JPG')or(ext='.JPEG') then format:='JPEG'
      else if (ext='.BMP') then format:='BMP'
      else format:='PNG';
-     SaveChartImage(format,SaveDialog.Filename,95);
+     SaveChartImage(format,fn,95);
   end;
 end;
 
@@ -4109,7 +4110,7 @@ f_getdss.cfgdss.dssplateprompt:=ReadBool(section,'dssplateprompt',true);
 f_getdss.cfgdss.dssmaxsize:=ReadInteger(section,'dssmaxsize',2048);
 f_getdss.cfgdss.dssdir:=ReadString(section,'dssdir',slash('cat')+'RealSky');
 f_getdss.cfgdss.dssdrive:=ReadString(section,'dssdrive',default_dssdrive);
-f_getdss.cfgdss.dssfile:=slash(privatedir)+slash('pictures')+'$temp.fit';
+f_getdss.cfgdss.dssfile:=SysToUTF8(slash(privatedir)+slash('pictures')+'$temp.fit');
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:=ReadString(section,'DSSurlName'+inttostr(i),f_getdss.cfgdss.DSSurl[i,0]);
   f_getdss.cfgdss.DSSurl[i,1]:=ReadString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
