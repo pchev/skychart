@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util, FileUtil,
   SysUtils, Types, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
   LResources, PrintersDlgs, EditBtn, LazHelpHTML;
@@ -139,7 +139,7 @@ case cm.PrintMethod of
    customoption.Visible:=true;
    qtoption.Visible:=false;
    printcmd.Text:=cm.PrintCmd1;
-   savepath.Text:=cm.PrintTmpPath;
+   savepath.Directory:=SysToUTF8(cm.PrintTmpPath);
    prtres.Value:=cm.PrinterResolution;
    if cm.PrintCmd1='' then cmdreport.text:=''
    else begin

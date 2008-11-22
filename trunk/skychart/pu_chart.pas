@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
-     Printers, Math, cu_telescope, IntfGraphics, PostscriptCanvas,
+     Printers, Math, cu_telescope, IntfGraphics, PostscriptCanvas, FileUtil,
      LCLIntf, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList, SysUtils, LResources;
      
@@ -820,7 +820,7 @@ var savecolor: Starcolarray;
     fname:WideString;
     i,w,h :integer;
     ps:TPostscriptCanvas;
- begin
+  begin
  zoomstep:=0;
  // save current state
  savecolor:=sc.plot.cfgplot.color;
@@ -902,7 +902,7 @@ try
     sc.Refresh;
     ps.enddoc;
     fname:=slash(printpath)+'cdcprint.ps';
-    ps.savetofile(fname);
+    ps.savetofile(SysToUTF8(fname));
     FixPostscript(fname,PrintLandscape,ps.pagewidth,ps.pageheight);
     chdir(appdir);
     if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
@@ -935,7 +935,7 @@ try
     sc.Refresh;
     // save the bitmap
     fname:=slash(printpath)+'cdcprint.bmp';
-    prtbmp.savetofile(fname);
+    prtbmp.savetofile(SysToUTF8(fname));
     if printcmd2<>'' then begin
        if assigned(Fshowinfo) then Fshowinfo(rsOpenTheBitma , caption);
        execnowait(printcmd2+' "'+fname+'"','',false);

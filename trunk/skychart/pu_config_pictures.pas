@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
   EditBtn, LazHelpHTML;
 
@@ -227,7 +227,7 @@ ImgContrastBar2.position:=round(10*cmain.ImageContrast);
 ShowImagesBox.checked:=csc.ShowImages;
 nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
 save:=csc.ShowBackgroundImage;
-backimg.text:=csc.BackgroundImage;
+backimg.text:=SysToUTF8(csc.BackgroundImage);
 ShowBackImg.checked:=save;
 cmain.NewBackgroundImage:=false;
 ImageTimer1.enabled:=false;

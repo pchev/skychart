@@ -12,7 +12,6 @@ object f_printsetup: Tf_printsetup
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  ParentFont = False
   LCLVersion = '0.9.27'
   object qtoption: TPanel
     Left = 10
@@ -162,10 +161,10 @@ object f_printsetup: Tf_printsetup
     end
     object PaperSize: TComboBox
       Left = 310
-      Height = 25
+      Height = 21
       Top = 21
       Width = 96
-      MaxLength = -1
+      ItemHeight = 13
       OnChange = PaperSizeChange
       Style = csDropDownList
       TabOrder = 4
@@ -186,7 +185,7 @@ object f_printsetup: Tf_printsetup
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 44
+    ClientHeight = 43
     ClientWidth = 418
     Columns = 3
     Items.Strings = (
