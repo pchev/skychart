@@ -3,11 +3,19 @@ object f_main: Tf_main
   Height = 580
   Top = 120
   Width = 860
+  HelpContext = 0
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 560
+  ChildSizing.LeftRightSpacing = 0
+  ChildSizing.TopBottomSpacing = 0
+  ChildSizing.HorizontalSpacing = 0
+  ChildSizing.VerticalSpacing = 0
+  ChildSizing.ControlsPerLine = 0
+  ClientHeight = 557
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
+  Font.Height = 0
+  Font.Style = []
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -21,20 +29,35 @@ object f_main: Tf_main
   LCLVersion = '0.9.27'
   object MultiDoc1: TMultiDoc
     Left = 24
-    Height = 472
+    Height = 469
     Top = 54
     Width = 811
+    HelpContext = 0
     Align = alClient
+    BorderSpacing.Left = 0
+    BorderSpacing.Top = 0
+    BorderSpacing.Right = 0
+    BorderSpacing.Bottom = 0
+    BorderSpacing.Around = 0
+    BorderSpacing.CellAlignHorizontal = ccaFill
+    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
-    BorderWidth = 3
-    ClientHeight = 472
+    BorderWidth = 1
+    ChildSizing.LeftRightSpacing = 0
+    ChildSizing.TopBottomSpacing = 0
+    ChildSizing.HorizontalSpacing = 0
+    ChildSizing.VerticalSpacing = 0
+    ChildSizing.ControlsPerLine = 0
+    ClientHeight = 469
     ClientWidth = 811
     Color = clBlack
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
     TabStop = True
+    Maximized = False
     TitleHeight = 15
+    KeepLastChild = False
     WireframeMoveResize = True
     onMaximize = MultiDoc1Maximize
     onActiveChildChange = MultiDoc1ActiveChildChange
@@ -43,7 +66,16 @@ object f_main: Tf_main
       Height = 133
       Top = 171
       Width = 209
+      HelpContext = 0
       AutoSize = True
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
+      Center = False
       Picture.Data = {
         07544269746D61707A460100424DF5450100000000003600000028000000D100
         0000850000000100180000000000BF450100130B0000130B0000000000000000
@@ -2663,21 +2695,51 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 472
+    Left = 0
+    Height = 469
     Top = 54
     Width = 24
+    HelpContext = 0
     Align = alLeft
+    BorderSpacing.Left = 0
+    BorderSpacing.Top = 0
+    BorderSpacing.Right = 0
+    BorderSpacing.Bottom = 0
+    BorderSpacing.Around = 0
+    BorderSpacing.CellAlignHorizontal = ccaFill
+    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
-    ClientHeight = 472
+    ChildSizing.LeftRightSpacing = 0
+    ChildSizing.TopBottomSpacing = 0
+    ChildSizing.HorizontalSpacing = 0
+    ChildSizing.VerticalSpacing = 0
+    ChildSizing.ControlsPerLine = 0
+    ClientHeight = 469
     ClientWidth = 24
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 472
+      Left = 0
+      Height = 469
+      Top = 0
       Width = 24
+      HelpContext = 0
       Align = alClient
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       ButtonHeight = 23
       Caption = 'ToolBar2'
+      ChildSizing.LeftRightSpacing = 0
+      ChildSizing.TopBottomSpacing = 0
+      ChildSizing.HorizontalSpacing = 0
+      ChildSizing.VerticalSpacing = 0
+      ChildSizing.ControlsPerLine = 0
+      Ctl3D = False
       EdgeBorders = [ebBottom]
       Images = ImageNormal
       ParentShowHint = False
@@ -2687,6 +2749,7 @@ object f_main: Tf_main
       object ToolButton8: TToolButton
         Left = 1
         Hint = 'Set date and time'
+        Top = 0
         Action = SetupTime
         Wrap = True
       end
@@ -2701,6 +2764,7 @@ object f_main: Tf_main
         Left = 1
         Hint = 'Configure the program'
         Top = 46
+        HelpContext = 0
         ImageIndex = 10
         PopupMenu = PopupConfig
         Wrap = True
@@ -2756,6 +2820,7 @@ object f_main: Tf_main
         Left = 1
         Hint = 'Rotate Right'
         Top = 207
+        HelpContext = 0
         ImageIndex = 21
         Wrap = True
         OnMouseUp = ToolButtonRotPMouseUp
@@ -2764,6 +2829,7 @@ object f_main: Tf_main
         Left = 1
         Hint = 'Rotate Left'
         Top = 230
+        HelpContext = 0
         ImageIndex = 22
         Wrap = True
         OnMouseUp = ToolButtonRotMMouseUp
@@ -2772,28 +2838,57 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 835
-    Height = 472
+    Height = 469
     Top = 54
     Width = 25
+    HelpContext = 0
     Align = alRight
+    BorderSpacing.Left = 0
+    BorderSpacing.Top = 0
+    BorderSpacing.Right = 0
+    BorderSpacing.Bottom = 0
+    BorderSpacing.Around = 0
+    BorderSpacing.CellAlignHorizontal = ccaFill
+    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
-    ClientHeight = 472
+    ChildSizing.LeftRightSpacing = 0
+    ChildSizing.TopBottomSpacing = 0
+    ChildSizing.HorizontalSpacing = 0
+    ChildSizing.VerticalSpacing = 0
+    ChildSizing.ControlsPerLine = 0
+    ClientHeight = 469
     ClientWidth = 25
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 222
+      Left = 0
+      Height = 219
       Top = 250
       Width = 25
+      HelpContext = 0
       Align = alClient
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       ButtonHeight = 23
       Caption = 'ToolBar3'
+      ChildSizing.LeftRightSpacing = 0
+      ChildSizing.TopBottomSpacing = 0
+      ChildSizing.HorizontalSpacing = 0
+      ChildSizing.VerticalSpacing = 0
+      ChildSizing.ControlsPerLine = 0
+      Ctl3D = False
       EdgeBorders = [ebBottom]
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -10
       Font.Name = 'Default'
       Font.Pitch = fpVariable
+      Font.Style = []
       Images = ImageNormal
       ParentFont = False
       ParentShowHint = False
@@ -2803,6 +2898,7 @@ object f_main: Tf_main
       object ToolButtonAllSky: TToolButton
         Left = 1
         Hint = 'Show All Sky'
+        Top = 0
         Action = allSky
         Wrap = True
       end
@@ -2842,21 +2938,47 @@ object f_main: Tf_main
       end
     end
     object PanelFieldSize: TPanel
+      Left = 0
       Height = 250
+      Top = 0
       Width = 25
+      HelpContext = 0
       Align = alTop
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       BevelOuter = bvNone
+      ChildSizing.LeftRightSpacing = 0
+      ChildSizing.TopBottomSpacing = 0
+      ChildSizing.HorizontalSpacing = 0
+      ChildSizing.VerticalSpacing = 0
+      ChildSizing.ControlsPerLine = 0
       ClientHeight = 250
       ClientWidth = 25
       TabOrder = 1
       object Field1: TSpeedButton
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
+        Top = 0
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Caption = '10'''
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2871,9 +2993,18 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 27
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2883,13 +3014,23 @@ object f_main: Tf_main
       end
       object Field3: TSpeedButton
         Tag = 2
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 50
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2899,13 +3040,23 @@ object f_main: Tf_main
       end
       object Field4: TSpeedButton
         Tag = 3
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 75
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2915,13 +3066,23 @@ object f_main: Tf_main
       end
       object Field5: TSpeedButton
         Tag = 4
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 100
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2931,13 +3092,23 @@ object f_main: Tf_main
       end
       object Field6: TSpeedButton
         Tag = 5
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 125
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2947,13 +3118,23 @@ object f_main: Tf_main
       end
       object Field7: TSpeedButton
         Tag = 6
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 150
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2963,13 +3144,23 @@ object f_main: Tf_main
       end
       object Field8: TSpeedButton
         Tag = 7
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 175
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2979,13 +3170,23 @@ object f_main: Tf_main
       end
       object Field9: TSpeedButton
         Tag = 8
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 200
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -2995,13 +3196,23 @@ object f_main: Tf_main
       end
       object Field10: TSpeedButton
         Tag = 9
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 227
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
+        Font.Height = 0
         Font.Style = [fsBold]
         NumGlyphs = 0
         OnClick = SetFOVClick
@@ -3012,11 +3223,25 @@ object f_main: Tf_main
     end
   end
   object PanelBottom: TPanel
+    Left = 0
     Height = 34
-    Top = 526
+    Top = 523
     Width = 860
+    HelpContext = 0
     Align = alBottom
+    BorderSpacing.Left = 0
+    BorderSpacing.Top = 0
+    BorderSpacing.Right = 0
+    BorderSpacing.Bottom = 0
+    BorderSpacing.Around = 0
+    BorderSpacing.CellAlignHorizontal = ccaFill
+    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
+    ChildSizing.LeftRightSpacing = 0
+    ChildSizing.TopBottomSpacing = 0
+    ChildSizing.HorizontalSpacing = 0
+    ChildSizing.VerticalSpacing = 0
+    ChildSizing.ControlsPerLine = 0
     ClientHeight = 34
     ClientWidth = 860
     FullRepaint = False
@@ -3024,35 +3249,87 @@ object f_main: Tf_main
     object Shape1: TShape
       Left = 220
       Height = 34
+      Top = 0
       Width = 2
+      HelpContext = 0
       Align = alLeft
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       Brush.Color = clBtnShadow
       Pen.Color = clBtnShadow
       Pen.Cosmetic = True
+      Shape = stRectangle
     end
     object PPanels0: TPanel
+      Left = 0
       Height = 34
+      Top = 0
       Width = 220
+      HelpContext = 0
       Align = alLeft
       Alignment = taLeftJustify
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       BevelOuter = bvNone
+      ChildSizing.LeftRightSpacing = 0
+      ChildSizing.TopBottomSpacing = 0
+      ChildSizing.HorizontalSpacing = 0
+      ChildSizing.VerticalSpacing = 0
+      ChildSizing.ControlsPerLine = 0
       ClientHeight = 34
       ClientWidth = 220
       FullRepaint = False
       TabOrder = 0
       object LPanels0: TPanel
+        Left = 0
         Height = 34
+        Top = 0
         Width = 220
+        HelpContext = 0
         Align = alClient
         Alignment = taLeftJustify
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         BevelOuter = bvNone
+        ChildSizing.LeftRightSpacing = 0
+        ChildSizing.TopBottomSpacing = 0
+        ChildSizing.HorizontalSpacing = 0
+        ChildSizing.VerticalSpacing = 0
+        ChildSizing.ControlsPerLine = 0
         ClientHeight = 34
         ClientWidth = 220
         TabOrder = 0
         object P0L1: TLabel
+          Left = 0
           Height = 34
+          Top = 0
           Width = 220
+          HelpContext = 0
           Align = alClient
+          BorderSpacing.Left = 0
+          BorderSpacing.Top = 0
+          BorderSpacing.Right = 0
+          BorderSpacing.Bottom = 0
+          BorderSpacing.Around = 0
+          BorderSpacing.CellAlignHorizontal = ccaFill
+          BorderSpacing.CellAlignVertical = ccaFill
+          Font.Height = 0
+          Font.Style = []
           ParentColor = False
           ParentFont = False
         end
@@ -3061,28 +3338,67 @@ object f_main: Tf_main
     object PPanels1: TPanel
       Left = 222
       Height = 34
+      Top = 0
       Width = 638
+      HelpContext = 0
       Align = alClient
       Alignment = taLeftJustify
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       BevelOuter = bvNone
+      ChildSizing.LeftRightSpacing = 0
+      ChildSizing.TopBottomSpacing = 0
+      ChildSizing.HorizontalSpacing = 0
+      ChildSizing.VerticalSpacing = 0
+      ChildSizing.ControlsPerLine = 0
       ClientHeight = 34
       ClientWidth = 638
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
+        Left = 0
         Height = 34
+        Top = 0
         Width = 638
+        HelpContext = 0
         Align = alClient
         Alignment = taLeftJustify
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         BevelOuter = bvNone
+        ChildSizing.LeftRightSpacing = 0
+        ChildSizing.TopBottomSpacing = 0
+        ChildSizing.HorizontalSpacing = 0
+        ChildSizing.VerticalSpacing = 0
+        ChildSizing.ControlsPerLine = 0
         ClientHeight = 34
         ClientWidth = 638
         TabOrder = 0
         object P1L1: TLabel
+          Left = 0
           Height = 34
+          Top = 0
           Width = 638
+          HelpContext = 0
           Align = alClient
           AutoSize = False
+          BorderSpacing.Left = 0
+          BorderSpacing.Top = 0
+          BorderSpacing.Right = 0
+          BorderSpacing.Bottom = 0
+          BorderSpacing.Around = 0
+          BorderSpacing.CellAlignHorizontal = ccaFill
+          BorderSpacing.CellAlignVertical = ccaFill
           ParentColor = False
           WordWrap = True
         end
@@ -3090,19 +3406,50 @@ object f_main: Tf_main
     end
   end
   object PanelTop: TPanel
+    Left = 0
     Height = 54
+    Top = 0
     Width = 860
+    HelpContext = 0
     Align = alTop
+    BorderSpacing.Left = 0
+    BorderSpacing.Top = 0
+    BorderSpacing.Right = 0
+    BorderSpacing.Bottom = 0
+    BorderSpacing.Around = 0
+    BorderSpacing.CellAlignHorizontal = ccaFill
+    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
+    ChildSizing.LeftRightSpacing = 0
+    ChildSizing.TopBottomSpacing = 0
+    ChildSizing.HorizontalSpacing = 0
+    ChildSizing.VerticalSpacing = 0
+    ChildSizing.ControlsPerLine = 0
     ClientHeight = 54
     ClientWidth = 860
     FullRepaint = False
     TabOrder = 1
     TabStop = True
     object ToolBar1: TToolBar
+      Left = 0
       Height = 25
+      Top = 0
       Width = 860
+      HelpContext = 0
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       ButtonHeight = 23
+      ChildSizing.LeftRightSpacing = 0
+      ChildSizing.TopBottomSpacing = 0
+      ChildSizing.HorizontalSpacing = 0
+      ChildSizing.VerticalSpacing = 0
+      ChildSizing.ControlsPerLine = 0
+      Ctl3D = False
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
@@ -3138,6 +3485,7 @@ object f_main: Tf_main
         Left = 93
         Hint = 'Night vision color'
         Top = 2
+        HelpContext = 0
         ImageIndex = 82
         OnClick = ToolButtonNightVisionClick
       end
@@ -3145,6 +3493,7 @@ object f_main: Tf_main
         Left = 116
         Top = 2
         Width = 8
+        HelpContext = 0
         ImageIndex = 2
         Style = tbsDivider
       end
@@ -3152,6 +3501,7 @@ object f_main: Tf_main
         Left = 124
         Hint = 'Cascade'
         Top = 2
+        HelpContext = 0
         ImageIndex = 4
         OnClick = WindowCascade1Execute
       end
@@ -3159,6 +3509,7 @@ object f_main: Tf_main
         Left = 147
         Hint = 'Tile Vertically'
         Top = 2
+        HelpContext = 0
         ImageIndex = 14
         OnClick = WindowTileVertical1Execute
       end
@@ -3166,6 +3517,7 @@ object f_main: Tf_main
         Left = 170
         Top = 2
         Width = 8
+        HelpContext = 0
         ImageIndex = 17
         Style = tbsDivider
       end
@@ -3227,6 +3579,7 @@ object f_main: Tf_main
         Left = 507
         Top = 2
         Width = 8
+        HelpContext = 0
         ImageIndex = 8
         Style = tbsDivider
       end
@@ -3252,6 +3605,7 @@ object f_main: Tf_main
         Left = 736
         Top = 2
         Width = 8
+        HelpContext = 0
         ImageIndex = 45
         Style = tbsDivider
       end
@@ -3277,12 +3631,14 @@ object f_main: Tf_main
         Left = 813
         Top = 2
         Width = 8
+        HelpContext = 0
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
         Left = 860
         Top = 2
         Width = 23
+        HelpContext = 0
         AutoSize = True
         Style = tbsSeparator
       end
@@ -3290,18 +3646,21 @@ object f_main: Tf_main
         Left = 407
         Top = 2
         Width = 8
+        HelpContext = 0
         Style = tbsDivider
       end
       object ToolButton11: TToolButton
         Left = 648
         Top = 2
         Width = 8
+        HelpContext = 0
         Style = tbsDivider
       end
       object ToolButton12: TToolButton
         Left = 584
         Top = 2
         Width = 8
+        HelpContext = 0
         Style = tbsDivider
       end
       object quicksearch: TComboBox
@@ -3310,11 +3669,21 @@ object f_main: Tf_main
         Hint = 'Search'
         Top = 2
         Width = 90
+        HelpContext = 0
         ArrowKeysTraverseList = False
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
+        Ctl3D = False
         DropDownCount = 15
-        ItemHeight = 15
+        ItemHeight = 0
+        ItemWidth = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -3325,15 +3694,39 @@ object f_main: Tf_main
         Height = 23
         Top = 2
         Width = 24
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         BevelOuter = bvNone
+        ChildSizing.LeftRightSpacing = 0
+        ChildSizing.TopBottomSpacing = 0
+        ChildSizing.HorizontalSpacing = 0
+        ChildSizing.VerticalSpacing = 0
+        ChildSizing.ControlsPerLine = 0
         ClientHeight = 23
         ClientWidth = 24
         FullRepaint = False
         TabOrder = 4
         object ButtonMoreStar: TImage
+          Left = 0
           Height = 11
           Hint = 'More Stars'
+          Top = 0
           Width = 11
+          HelpContext = 0
+          BorderSpacing.Left = 0
+          BorderSpacing.Top = 0
+          BorderSpacing.Right = 0
+          BorderSpacing.Bottom = 0
+          BorderSpacing.Around = 0
+          BorderSpacing.CellAlignHorizontal = ccaFill
+          BorderSpacing.CellAlignVertical = ccaFill
+          Center = False
           OnClick = MoreStarExecute
           Picture.Data = {
             07544269746D617036050000424D360500000000000036040000280000001000
@@ -3386,7 +3779,17 @@ object f_main: Tf_main
           Left = 12
           Height = 11
           Hint = 'Less Stars'
+          Top = 0
           Width = 11
+          HelpContext = 0
+          BorderSpacing.Left = 0
+          BorderSpacing.Top = 0
+          BorderSpacing.Right = 0
+          BorderSpacing.Bottom = 0
+          BorderSpacing.Around = 0
+          BorderSpacing.CellAlignHorizontal = ccaFill
+          BorderSpacing.CellAlignVertical = ccaFill
+          Center = False
           OnClick = LessStarExecute
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
@@ -3402,10 +3805,20 @@ object f_main: Tf_main
           Transparent = True
         end
         object ButtonMoreNeb: TImage
+          Left = 0
           Height = 11
           Hint = 'More Nebulae'
           Top = 12
           Width = 11
+          HelpContext = 0
+          BorderSpacing.Left = 0
+          BorderSpacing.Top = 0
+          BorderSpacing.Right = 0
+          BorderSpacing.Bottom = 0
+          BorderSpacing.Around = 0
+          BorderSpacing.CellAlignHorizontal = ccaFill
+          BorderSpacing.CellAlignVertical = ccaFill
+          Center = False
           OnClick = MoreNebExecute
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
@@ -3426,6 +3839,15 @@ object f_main: Tf_main
           Hint = 'Less Nebulae'
           Top = 12
           Width = 11
+          HelpContext = 0
+          BorderSpacing.Left = 0
+          BorderSpacing.Top = 0
+          BorderSpacing.Right = 0
+          BorderSpacing.Bottom = 0
+          BorderSpacing.Around = 0
+          BorderSpacing.CellAlignHorizontal = ccaFill
+          BorderSpacing.CellAlignVertical = ccaFill
+          Center = False
           OnClick = LessNebExecute
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
@@ -3447,6 +3869,14 @@ object f_main: Tf_main
         Hint = 'Time'
         Top = 2
         Width = 56
+        HelpContext = 0
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         MaxValue = 1000
         MinValue = 1
         TabOrder = 1
@@ -3454,14 +3884,27 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 23
+        Height = 25
         Hint = 'Time Units'
         Top = 2
         Width = 80
+        HelpContext = 0
+        AutoComplete = False
         AutoCompleteText = [cbactSearchAscending]
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
+        Ctl3D = False
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 15
+        Font.Height = 0
+        Font.Style = []
+        ItemHeight = 0
+        ItemWidth = 0
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2
@@ -3471,15 +3914,38 @@ object f_main: Tf_main
         Height = 23
         Top = 2
         Width = 30
+        HelpContext = 0
         Align = alRight
         AutoSize = True
+        BorderSpacing.Left = 0
+        BorderSpacing.Top = 0
+        BorderSpacing.Right = 0
+        BorderSpacing.Bottom = 0
+        BorderSpacing.Around = 0
+        BorderSpacing.CellAlignHorizontal = ccaFill
+        BorderSpacing.CellAlignVertical = ccaFill
         BevelOuter = bvNone
+        ChildSizing.LeftRightSpacing = 0
+        ChildSizing.TopBottomSpacing = 0
+        ChildSizing.HorizontalSpacing = 0
+        ChildSizing.VerticalSpacing = 0
+        ChildSizing.ControlsPerLine = 0
         ClientHeight = 23
         ClientWidth = 30
         TabOrder = 3
         object BtnRestoreChild: TSpeedButton
+          Left = 0
           Height = 15
+          Top = 0
           Width = 15
+          HelpContext = 0
+          BorderSpacing.Left = 0
+          BorderSpacing.Top = 0
+          BorderSpacing.Right = 0
+          BorderSpacing.Bottom = 0
+          BorderSpacing.Around = 0
+          BorderSpacing.CellAlignHorizontal = ccaFill
+          BorderSpacing.CellAlignVertical = ccaFill
           Color = clBtnFace
           Flat = True
           NumGlyphs = 0
@@ -3488,7 +3954,16 @@ object f_main: Tf_main
         object BtnCloseChild: TSpeedButton
           Left = 15
           Height = 15
+          Top = 0
           Width = 15
+          HelpContext = 0
+          BorderSpacing.Left = 0
+          BorderSpacing.Top = 0
+          BorderSpacing.Right = 0
+          BorderSpacing.Bottom = 0
+          BorderSpacing.Around = 0
+          BorderSpacing.CellAlignHorizontal = ccaFill
+          BorderSpacing.CellAlignVertical = ccaFill
           Color = clBtnFace
           Flat = True
           NumGlyphs = 0
@@ -3497,12 +3972,27 @@ object f_main: Tf_main
       end
     end
     object ToolBar4: TToolBar
+      Left = 0
       Height = 28
       Top = 26
       Width = 860
+      HelpContext = 0
       Align = alBottom
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       ButtonHeight = 24
       Caption = 'ToolBar4'
+      ChildSizing.LeftRightSpacing = 0
+      ChildSizing.TopBottomSpacing = 0
+      ChildSizing.HorizontalSpacing = 0
+      ChildSizing.VerticalSpacing = 0
+      ChildSizing.ControlsPerLine = 0
+      Ctl3D = False
       EdgeBorders = [ebTop, ebBottom]
       Images = ImageNormal
       ParentShowHint = False
@@ -3680,12 +4170,14 @@ object f_main: Tf_main
         Left = 561
         Top = 2
         Width = 8
+        HelpContext = 0
         Style = tbsDivider
       end
       object ToolButton4: TToolButton
         Left = 507
         Top = 2
         Width = 8
+        HelpContext = 0
         Style = tbsDivider
       end
       object ToolButtonBlink: TToolButton
@@ -3703,52 +4195,80 @@ object f_main: Tf_main
     object File1: TMenuItem
       Caption = '&File'
       Hint = 'File related commands'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object FileNewItem: TMenuItem
         Action = FileNew1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileNew1Execute
       end
       object FileOpenItem: TMenuItem
         Action = FileOpen1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileOpen1Execute
       end
       object FileSaveAsItem: TMenuItem
         Action = FileSaveAs1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileSaveAs1Execute
       end
       object SaveImage1: TMenuItem
         Action = SaveImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SaveImageExecute
       end
       object FileCloseItem: TMenuItem
         Action = FileClose1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileClose1Execute
       end
       object N6: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object Calendar1: TMenuItem
         Action = Calendar
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = CalendarExecute
       end
       object VariableStar1: TMenuItem
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = VariableStar1Click
       end
       object N2: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object Print2: TMenuItem
         Action = Print1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Print1Execute
       end
       object PrintSetup2: TMenuItem
         Action = FilePrintSetup1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FilePrintSetup1Execute
       end
       object N1: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object FileExitItem: TMenuItem
         Action = FileExit1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileExit1Execute
       end
     end
@@ -3756,137 +4276,199 @@ object f_main: Tf_main
       Caption = '&Edit'
       GroupIndex = 2
       Hint = 'Edit commands'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object MenuSearch: TMenuItem
         Action = Search1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Search1Execute
       end
       object MenuEditLabels: TMenuItem
         Action = EditLabels
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = EditLabelsExecute
       end
       object CopyItem: TMenuItem
         Action = EditCopy1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = EditCopy1Execute
       end
       object Undo1: TMenuItem
         Action = Undo
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = UndoExecute
       end
       object Redo1: TMenuItem
         Action = Redo
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = RedoExecute
       end
     end
     object Setup1: TMenuItem
       Caption = '&Setup'
       GroupIndex = 2
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object DateConfig1: TMenuItem
         Action = SetupTime
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupTimeExecute
       end
       object ObsConfig1: TMenuItem
         Action = SetupObservatory
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupObservatoryExecute
       end
       object MenuItem2: TMenuItem
         Action = SetupChart
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupChartExecute
       end
       object MenuItem9: TMenuItem
         Action = SetupCatalog
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupCatalogExecute
       end
       object MenuItem3: TMenuItem
         Action = SetupSolSys
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupSolSysExecute
       end
       object MenuItem1: TMenuItem
         Action = SetupDisplay
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupDisplayExecute
       end
       object MenuItem7: TMenuItem
         Action = SetupPictures
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupPicturesExecute
       end
       object MenuItem4: TMenuItem
         Action = SetupSystem
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupSystemExecute
       end
       object MenuItem5: TMenuItem
         Action = SetupInternet
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupInternetExecute
       end
       object MenuItem26: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object MenuItem6: TMenuItem
         Action = SetupConfig
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupConfigExecute
       end
       object N8: TMenuItem
         Caption = '-'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object SaveConfigurationNow1: TMenuItem
         Action = SaveConfiguration
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SaveConfigurationExecute
       end
       object SaveConfigurationOnExit1: TMenuItem
         Action = SaveConfigOnExit
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SaveConfigOnExitExecute
       end
     end
     object View1: TMenuItem
       Caption = '&View'
       GroupIndex = 2
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object FullScreen1: TMenuItem
         Action = ViewFullScreen
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ViewFullScreenExecute
       end
       object NightVision1: TMenuItem
         Caption = 'Night Vision'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ToolButtonNightVisionClick
       end
       object oolBar1: TMenuItem
         Caption = 'Tool Bar'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object ViewToolsBar1: TMenuItem
           Action = ViewBar
           Caption = 'All Tools Bar'
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewBarExecute
         end
         object N5: TMenuItem
           Caption = '-'
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
         end
         object MainBar1: TMenuItem
           Action = ViewMainBar
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewMainBarExecute
         end
         object ObjectBar1: TMenuItem
           Action = ViewObjectBar
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewObjectBarExecute
         end
         object LeftBar1: TMenuItem
           Action = ViewLeftBar
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewLeftBarExecute
         end
         object RightBar1: TMenuItem
           Action = ViewRightBar
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewRightBarExecute
         end
         object ViewStatusBar1: TMenuItem
@@ -3894,303 +4476,449 @@ object f_main: Tf_main
           Caption = 'Status Bar'
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewStatusExecute
         end
       end
       object ViewScrollBar1: TMenuItem
         Caption = 'Scroll Bar'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ViewScrollBar1Click
       end
       object N9: TMenuItem
         Caption = '-'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object ViewInformation1: TMenuItem
         Action = ViewInfo
         Caption = 'Server Information'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ViewInfoExecute
       end
       object MenuItem27: TMenuItem
         Action = ViewClock
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ViewClockExecute
       end
       object N7: TMenuItem
         Caption = '-'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object zoommenu: TMenuItem
         Action = ZoomBar
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ZoomBarExecute
       end
       object zoomplus1: TMenuItem
         Action = zoomplus
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = zoomplusExecute
       end
       object zoomminus1: TMenuItem
         Action = zoomminus
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = zoomminusExecute
       end
       object MenuPosition: TMenuItem
         Action = Position
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = PositionExecute
       end
       object MenuListObj: TMenuItem
         Action = listobj
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = listobjExecute
       end
       object MenuBlinkImage: TMenuItem
         Action = BlinkImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = BlinkImageExecute
       end
       object Menuswitchbackground: TMenuItem
         Action = switchbackground
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = switchbackgroundExecute
       end
     end
     object Chart1: TMenuItem
       Caption = '&Chart'
       GroupIndex = 2
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object Projection1: TMenuItem
         Caption = 'Projection'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object EquatorialCoordinate1: TMenuItem
           Action = EquatorialProjection
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = EquatorialProjectionExecute
         end
         object AltAzProjection1: TMenuItem
           Action = AltAzProjection
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = AltAzProjectionExecute
         end
         object EclipticProjection1: TMenuItem
           Action = EclipticProjection
           Caption = 'Ecliptic Coordinate'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = EclipticProjectionExecute
         end
         object GalacticProjection1: TMenuItem
           Action = GalacticProjection
           Caption = 'Galactic Coordinate'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = GalacticProjectionExecute
         end
       end
       object ransformation1: TMenuItem
         Caption = 'Transformation'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object FlipX1: TMenuItem
           Action = FlipX
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = FlipXExecute
         end
         object FlipY1: TMenuItem
           Action = FlipY
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = FlipYExecute
         end
         object rotplus1: TMenuItem
           Action = rot_plus
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = rot_plusExecute
         end
         object rotminus1: TMenuItem
           Action = rot_minus
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = rot_minusExecute
         end
       end
       object FieldofVision1: TMenuItem
         Caption = 'Field of Vision'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object SetFov1: TMenuItem
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov2: TMenuItem
           Tag = 1
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov3: TMenuItem
           Tag = 2
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov4: TMenuItem
           Tag = 3
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov5: TMenuItem
           Tag = 4
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov6: TMenuItem
           Tag = 5
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov7: TMenuItem
           Tag = 6
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov8: TMenuItem
           Tag = 7
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov9: TMenuItem
           Tag = 8
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov10: TMenuItem
           Tag = 9
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object allSky1: TMenuItem
           Action = allSky
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = allSkyExecute
         end
       end
       object ShowHorizon1: TMenuItem
         Caption = 'View Horizon'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object toN1: TMenuItem
           Action = toN
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = toNExecute
         end
         object toS1: TMenuItem
           Action = toS
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = toSExecute
         end
         object toE1: TMenuItem
           Action = toE
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = toEExecute
         end
         object toW1: TMenuItem
           Action = toW
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = toWExecute
         end
       end
       object ShowObjects1: TMenuItem
         Caption = 'Show Objects'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object ShowStars1: TMenuItem
           Action = ShowStars
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowStarsExecute
         end
         object ShowNebulae1: TMenuItem
           Action = ShowNebulae
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowNebulaeExecute
         end
         object ShowPictures1: TMenuItem
           Action = ShowPictures
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowPicturesExecute
         end
         object ShowLines1: TMenuItem
           Action = ShowLines
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowLinesExecute
         end
         object ShowPlanets1: TMenuItem
           Action = ShowPlanets
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowPlanetsExecute
         end
         object ShowAsteroids1: TMenuItem
           Action = ShowAsteroids
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowAsteroidsExecute
         end
         object ShowComets1: TMenuItem
           Action = ShowComets
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowCometsExecute
         end
         object ShowMilkyWay1: TMenuItem
           Action = ShowMilkyWay
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowMilkyWayExecute
         end
       end
       object ShowGrid1: TMenuItem
         Caption = 'Lines / Grid'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object Grid1: TMenuItem
           Action = Grid
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = GridExecute
         end
         object GridEQ1: TMenuItem
           Action = GridEQ
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = GridEQExecute
         end
         object ShowConstellationLine1: TMenuItem
           Action = ShowConstellationLine
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowConstellationLineExecute
         end
         object ShowConstellationLimit1: TMenuItem
           Action = ShowConstellationLimit
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowConstellationLimitExecute
         end
         object ShowGalacticEquator1: TMenuItem
           Action = ShowGalacticEquator
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowGalacticEquatorExecute
         end
         object ShowEcliptic1: TMenuItem
           Action = ShowEcliptic
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowEclipticExecute
         end
         object ShowMark1: TMenuItem
           Action = ShowMark
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowMarkExecute
         end
       end
       object ShowLabels1: TMenuItem
         Action = ShowLabels
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ShowLabelsExecute
       end
       object ShowObjectbelowthehorizon1: TMenuItem
         Action = ShowObjectbelowHorizon
         Caption = 'Below the horizon'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ShowObjectbelowHorizonExecute
       end
       object MenuItem8: TMenuItem
         Action = ShowBackgroundImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ShowBackgroundImageExecute
       end
       object MenuStarNum: TMenuItem
         Caption = 'Number of stars'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object MenuMoreStar: TMenuItem
           Action = MoreStar
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = MoreStarExecute
         end
         object MenuLessStar: TMenuItem
           Action = LessStar
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = LessStarExecute
         end
       end
       object MenuNebNum: TMenuItem
         Caption = 'Number of nebulae'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object MenuMoreNeb: TMenuItem
           Action = MoreNeb
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = MoreNebExecute
         end
         object MenuLessNeb: TMenuItem
           Action = LessNeb
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = LessNebExecute
         end
       end
       object MenuDSS: TMenuItem
         Action = DSSImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = DSSImageExecute
       end
     end
     object telescope1: TMenuItem
       Caption = '&Telescope'
       GroupIndex = 2
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object telescopeConnect1: TMenuItem
         Action = TelescopeConnect
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TelescopeConnectExecute
       end
       object ControlPanel1: TMenuItem
         Action = TelescopePanel
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TelescopePanelExecute
       end
       object telescopeSlew1: TMenuItem
         Action = TelescopeSlew
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TelescopeSlewExecute
       end
       object telescopeSync1: TMenuItem
         Action = TelescopeSync
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TelescopeSyncExecute
       end
     end
@@ -4198,91 +4926,135 @@ object f_main: Tf_main
       Caption = '&Window'
       GroupIndex = 2
       Hint = 'Window related commands'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object MenuSyncChart: TMenuItem
         Action = SyncChart
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SyncChartExecute
       end
       object MenuTrack: TMenuItem
         Action = Track
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TrackExecute
       end
       object MenuItem28: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object WindowCascadeItem: TMenuItem
         Caption = '&Cascade'
         Hint = 'Cascade'
         ImageIndex = 4
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = WindowCascade1Execute
       end
       object WindowTileItem: TMenuItem
         Caption = 'Tile &Horizontally'
         Hint = 'Tile Horizontally'
         ImageIndex = 5
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = WindowTileHorizontal1Execute
       end
       object WindowTileItem2: TMenuItem
         Caption = 'Tile &Vertically'
         Hint = 'Tile Vertically'
         ImageIndex = 14
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = WindowTileVertical1Execute
       end
       object Maximize1: TMenuItem
         Action = Maximize
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = MaximizeExecute
       end
       object N10: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
     end
     object Help1: TMenuItem
       Caption = '&Help'
       GroupIndex = 2
       Hint = 'Help topics'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object Content1: TMenuItem
         Action = HelpContents1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HelpContents1Execute
       end
       object MenuItem29: TMenuItem
         Action = HelpFaq1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HelpFaq1Execute
       end
       object MenuItem30: TMenuItem
         Action = HelpQS1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HelpQS1Execute
       end
       object MenuItem10: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object HomePage1: TMenuItem
         Caption = 'Skychart Homepage'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HomePage1Click
       end
       object Maillist1: TMenuItem
         Caption = 'MailList'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Maillist1Click
       end
       object BugReport1: TMenuItem
         Caption = 'Report a problem'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = BugReport1Click
       end
       object MenuItem11: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object ReleaseNotes1: TMenuItem
         Caption = 'Release Notes'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ReleaseNotes1Click
       end
       object HelpAboutItem: TMenuItem
         Action = HelpAbout1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HelpAbout1Execute
       end
     end
     object topmessage: TMenuItem
       Caption = ' '
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
   end
   object OpenDialog: TOpenDialog
+    Width = 0
+    Height = 0
     FilterIndex = 0
     Options = [ofEnableSizing]
     left = 184
@@ -4954,6 +5726,8 @@ object f_main: Tf_main
     end
   end
   object SaveDialog: TSaveDialog
+    Width = 0
+    Height = 0
     FilterIndex = 0
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     left = 144
@@ -4967,11 +5741,14 @@ object f_main: Tf_main
     top = 160
   end
   object ImageList2: TImageList
+    Masked = False
+    ShareImages = False
     left = 280
     top = 208
   end
   object ImageNormal: TImageList
     Masked = True
+    ShareImages = False
     left = 280
     top = 160
     Bitmap = {
@@ -7799,6 +8576,8 @@ object f_main: Tf_main
     top = 416
     object ResetAllLabels1: TMenuItem
       Caption = 'Reset All Labels'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = ResetAllLabels1Click
     end
   end
@@ -7807,56 +8586,84 @@ object f_main: Tf_main
     top = 200
     object MenuItem12: TMenuItem
       Action = SetupTime
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupTimeExecute
     end
     object MenuItem13: TMenuItem
       Action = SetupObservatory
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupObservatoryExecute
     end
     object MenuItem14: TMenuItem
       Action = SetupChart
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupChartExecute
     end
     object MenuItem15: TMenuItem
       Action = SetupCatalog
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupCatalogExecute
     end
     object MenuItem16: TMenuItem
       Action = SetupSolSys
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupSolSysExecute
     end
     object MenuItem17: TMenuItem
       Action = SetupDisplay
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupDisplayExecute
     end
     object MenuItem18: TMenuItem
       Action = SetupPictures
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupPicturesExecute
     end
     object MenuItem19: TMenuItem
       Action = SetupSystem
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupSystemExecute
     end
     object MenuItem20: TMenuItem
       Action = SetupInternet
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupInternetExecute
     end
     object MenuItem25: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
     object MenuItem24: TMenuItem
       Action = SetupConfig
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupConfigExecute
     end
     object MenuItem21: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
     object MenuItem22: TMenuItem
       Action = SaveConfiguration
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SaveConfigurationExecute
     end
     object MenuItem23: TMenuItem
       Action = SaveConfigOnExit
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SaveConfigOnExitExecute
     end
   end

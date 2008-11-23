@@ -228,6 +228,7 @@ type
     function cmd_SetSkyMode(onoff:string):string;
     function cmd_SetProjection(proj:string):string;
     function cmd_SetFov(fov:string):string;
+    function cmd_Resize(w,h:string):string;
     function cmd_SetRa(param1:string):string;
     function cmd_SetDec(param1:string):string;
     function cmd_SetDate(dt:string):string;
@@ -2213,6 +2214,14 @@ end else begin
 end
 end;
 
+function Tf_chart.cmd_Resize(w,h:string):string;
+begin
+width:=StrToIntDef(w,width);
+height:=StrToIntDef(h,height);
+refresh;
+result:=msgOK;
+end;
+
 function Tf_chart.cmd_SetRa(param1:string):string;
 var buf : string;
     p : integer;
@@ -2588,6 +2597,7 @@ case n of
  77 : result:=cmd_SetGridNum(arg[1]);
  78 : result:=cmd_SetConstL(arg[1]);
  79 : result:=cmd_SetConstB(arg[1]);
+ 80 : result:=cmd_resize(arg[1],arg[2]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
@@ -2968,6 +2978,7 @@ if identlabel.Visible then begin
 end;
  if fn='' then fn:='cdc.bmp';
  if format='' then format:='BMP';
+ if ExtractFilePath(fn)='' then fn:=slash(TempDir)+fn ;
  if format='PNG' then begin
     fn:=changefileext(fn,'.png');
     PNG := TPortableNetworkGraphic.Create;
