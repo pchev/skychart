@@ -666,7 +666,7 @@ const msgTimeout='Timeout!';
 const
      MaxCmdArg = 10;
 // Main Commands, excuted form main form
-     numcmdmain = 12;
+     numcmdmain = 13;
      maincmdlist: array[1..numcmdmain,1..3] of string=(
      ('NEWCHART','1','chart_name'),
      ('CLOSECHART','2','chart_name'),
@@ -679,11 +679,12 @@ const
      ('FIND' ,'9','! not implemented'),
      ('SAVE' ,'10','! not implemented'),
      ('LOAD' ,'11','! not implemented'),
-     ('?' ,'12','')
+     ('?' ,'12',''),
+     ('SHUTDOWN' ,'13','')
      );
 
 // Chart Commands
-     numcmd = 79;
+     numcmd = 80;
      cmdlist: array[1..numcmd,1..3] of string=(
      ('ZOOM+','1',''),
      ('ZOOM-','2',''),
@@ -765,7 +766,8 @@ const
      // end V2.7 compatibility DDE command
      ('SETGRIDNUM','77','ON/OFF'),
      ('SETCONSTLINE','78','ON/OFF'),
-     ('SETCONSTBOUNDARY','79','ON/OFF')
+     ('SETCONSTBOUNDARY','79','ON/OFF'),
+     ('RESIZE' ,'80','width height')
      );
 
 // INDI Telescope driver

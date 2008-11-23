@@ -3,10 +3,18 @@ object f_chart: Tf_chart
   Height = 338
   Top = 135
   Width = 508
+  HelpContext = 0
   ActiveControl = Panel1
   Caption = 'Chart'
+  ChildSizing.LeftRightSpacing = 0
+  ChildSizing.TopBottomSpacing = 0
+  ChildSizing.HorizontalSpacing = 0
+  ChildSizing.VerticalSpacing = 0
+  ChildSizing.ControlsPerLine = 0
   ClientHeight = 338
   ClientWidth = 508
+  Font.Height = 0
+  Font.Style = []
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
@@ -19,7 +27,20 @@ object f_chart: Tf_chart
     Height = 272
     Top = 8
     Width = 480
+    HelpContext = 0
+    BorderSpacing.Left = 0
+    BorderSpacing.Top = 0
+    BorderSpacing.Right = 0
+    BorderSpacing.Bottom = 0
+    BorderSpacing.Around = 0
+    BorderSpacing.CellAlignHorizontal = ccaFill
+    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
+    ChildSizing.LeftRightSpacing = 0
+    ChildSizing.TopBottomSpacing = 0
+    ChildSizing.HorizontalSpacing = 0
+    ChildSizing.VerticalSpacing = 0
+    ChildSizing.ControlsPerLine = 0
     ClientHeight = 272
     ClientWidth = 480
     FullRepaint = False
@@ -32,12 +53,21 @@ object f_chart: Tf_chart
       Height = 18
       Top = 120
       Width = 67
+      HelpContext = 0
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4
       Font.Color = clWhite
       Font.Height = -12
       Font.Name = 'Sans'
+      Font.Style = []
       ParentColor = False
       ParentFont = False
       ShowAccelChar = False
@@ -49,8 +79,18 @@ object f_chart: Tf_chart
       Cursor = crArrow
       Left = 464
       Height = 256
+      Top = 0
       Width = 16
+      HelpContext = 0
       Align = alRight
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
+      Ctl3D = False
       Kind = sbVertical
       LargeChange = 10
       Max = 50
@@ -60,10 +100,20 @@ object f_chart: Tf_chart
     end
     object HorScrollBar: TScrollBar
       Cursor = crArrow
+      Left = 0
       Height = 16
       Top = 256
       Width = 480
+      HelpContext = 0
       Align = alBottom
+      BorderSpacing.Left = 0
+      BorderSpacing.Top = 0
+      BorderSpacing.Right = 0
+      BorderSpacing.Bottom = 0
+      BorderSpacing.Around = 0
+      BorderSpacing.CellAlignHorizontal = ccaFill
+      BorderSpacing.CellAlignVertical = ccaFill
+      Ctl3D = False
       LargeChange = 10
       Max = 50
       Min = -50
@@ -234,86 +284,130 @@ object f_chart: Tf_chart
     top = 104
     object About1: TMenuItem
       Caption = 'About'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       Visible = False
       OnClick = About1Click
     end
     object About2: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       Visible = False
     end
     object Centre1: TMenuItem
       Action = Centre
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = CentreExecute
     end
     object Zoom1: TMenuItem
       Action = zoomplusmove
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = zoomplusmoveExecute
     end
     object Zoom2: TMenuItem
       Action = zoomminusmove
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = zoomminusmoveExecute
     end
     object N1: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
     object NewFinderCircle1: TMenuItem
       Caption = 'New Finder Circle'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = NewFinderCircle1Click
     end
     object RemoveLastCircle1: TMenuItem
       Caption = 'Remove Last Circle'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = RemoveLastCircle1Click
     end
     object RemoveAllCircles1: TMenuItem
       Caption = 'Remove All Circles'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = RemoveAllCircles1Click
     end
     object MenuItem1: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
     object AddLabel1: TMenuItem
       Caption = 'New Label'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = AddLabel1Click
     end
     object RemoveLastLabel1: TMenuItem
       Caption = 'Remove Last Label'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = RemoveLastLabel1Click
     end
     object RemoveAllLabel1: TMenuItem
       Caption = 'Remove All Labels'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = RemoveAllLabel1Click
     end
     object N2: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
     object elescope1: TMenuItem
       Caption = 'Telescope'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object Slew1: TMenuItem
         Caption = 'Slew'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Slew1Click
       end
       object Sync1: TMenuItem
         Caption = 'Sync'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Sync1Click
       end
       object Connect1: TMenuItem
         Caption = 'Connect'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Connect1Click
       end
       object AbortSlew1: TMenuItem
         Caption = 'Abort Slew'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = AbortSlew1Click
       end
     end
     object N3: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
     object TrackOn1: TMenuItem
       Caption = 'Lock on'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = TrackOn1Click
     end
     object TrackOff1: TMenuItem
       Caption = 'Unlock Chart'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = TrackOff1Click
     end
   end

@@ -674,6 +674,7 @@ type
     DdeOpen : boolean;
     DdeEnqueue: boolean;
     Config_Version : string;
+    showsplash: boolean;
     procedure ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
@@ -1441,6 +1442,7 @@ ThousandSeparator:=',';
 DateSeparator:='/';
 TimeSeparator:=':';
 NeedRestart:=false;
+showsplash:=true;
 ImageListCount:=ImageNormal.Count;
 DisplayIs32bpp:=true;
 isWin98:=false;
@@ -5298,13 +5300,20 @@ case n of
  10 : ;// save
  11 : ;// load
  12 : result:=HelpCmd(trim(uppercase(arg[1])));
+ 13 : Close;
 else begin
  result:='Bad chart name '+cname;
  for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      with MultiDoc1.Childs[i] do
-       if caption=cname then
+       if caption=cname then begin
+         if cmd='RESIZE' then begin // special case with action on main and on the chart
+            Multidoc1.Maximized:=false;
+            MultiDoc1.Childs[i].width:=StrToIntDef(arg[1],MultiDoc1.Childs[i].width);
+            MultiDoc1.Childs[i].height:=StrToIntDef(arg[2],MultiDoc1.Childs[i].height);
+         end;
          result:=(DockedObject as Tf_chart).ExecuteCmd(arg);
+       end;
 end;
 end;
 end;
@@ -5609,6 +5618,11 @@ for i:=0 to Params.Count-1 do begin
          buf:=copy(parms,p+1,999);
          ForceConfig:=trim(buf);
       end;
+   end else if cmd='--daemon' then begin
+      showsplash:=false;
+      Application.ShowMainForm:=false;
+   end else if cmd='--nosplash' then begin
+      showsplash:=false;
    end else if cmd='--test' then begin
    end;
 end;
