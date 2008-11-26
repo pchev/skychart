@@ -5293,8 +5293,8 @@ case n of
  3 : result:=SelectChart(arg[1]);
  4 : result:=ListChart;
  5 : if Genericsearch(cname,arg[1]) then result:=msgOK else result:=msgNotFound;
- 6 : result:=msgOK+blank+LPanels1.Caption;
- 7 : result:=msgOK+blank+LPanels0.Caption;
+ 6 : result:=msgOK+blank+P1L1.Caption;
+ 7 : result:=msgOK+blank+P0L1.Caption;
  8 : result:=msgOK+blank+topmsg;
  9 :  ;// find
  10 : ;// save
