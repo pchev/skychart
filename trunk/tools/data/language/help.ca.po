@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-10-21 16:52+0100\n"
+"PO-Revision-Date: 2008-11-26 11:41+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -68,7 +68,7 @@ msgstr "catalegs.html"
 
 #: u_help.hlpcatgen
 msgid "catgen.html"
-msgstr ""
+msgstr "catgen.html"
 
 #: u_help.hlpcfgchart
 msgid "chart_coordinates.html"
@@ -104,15 +104,15 @@ msgstr "sistema.html"
 
 #: u_help.hlpcmdline
 msgid "line_commands.html"
-msgstr ""
+msgstr "0pcions_linia_comandaments.html"
 
 #: u_help.hlpdoclic
 msgid "documentation_license.html"
-msgstr ""
+msgstr "llicencia_de_la_documentacio.html"
 
 #: u_help.hlpfaq
 msgid "faq.html"
-msgstr ""
+msgstr "FAQ.html"
 
 #: u_help.hlpindex
 msgid "start.html"
@@ -124,35 +124,35 @@ msgstr "informacio_detallada.html"
 
 #: u_help.hlpinstcat
 msgid "install_new_catalogs.html"
-msgstr ""
+msgstr "insta_lar_catalegs_nous.html"
 
 #: u_help.hlpinstfreeb
 msgid "install_on_freebsd.html"
-msgstr ""
+msgstr "instal_lar_en_freebsd.html"
 
 #: u_help.hlpinstlinux
 msgid "install_on_linux_debian.html"
-msgstr ""
+msgstr "instal_lar_en_linux_debian.html"
 
 #: u_help.hlpinstmac
 msgid "install_on_mac_os_x.html"
-msgstr ""
+msgstr "instal_lar_en_mac_os_x.html"
 
 #: u_help.hlpinstsrc
 msgid "install_and_compile_the_source_code.html"
-msgstr ""
+msgstr "instal_lar_i_compilar_el_codi_font.html"
 
 #: u_help.hlpinstwin
 msgid "install_on_windows.html"
-msgstr ""
+msgstr "instal_lar_en_windows.html"
 
 #: u_help.hlpkb
 msgid "keyboard_shortcut.html"
-msgstr ""
+msgstr "dreceres_de_teclat.html"
 
 #: u_help.hlplabel
 msgid "labels.html"
-msgstr ""
+msgstr "etiquetes.html"
 
 #: u_help.hlpmenuchart
 msgid "menuchart.html"
@@ -192,7 +192,7 @@ msgstr "llista_d_objectes.html"
 
 #: u_help.hlppopup
 msgid "menupop_up.html"
-msgstr ""
+msgstr "menucontextual.html"
 
 #: u_help.hlpposition
 msgid "position.html"
@@ -200,27 +200,27 @@ msgstr "posicio.html"
 
 #: u_help.hlpqschart
 msgid "quick_start_chart.html"
-msgstr ""
+msgstr "guia_rapida_carta.html"
 
 #: u_help.hlpqsds
 msgid "quick_start_deep_sky.html"
-msgstr ""
+msgstr "guia_rapida_cel_profund.html"
 
 #: u_help.hlpqsguide
 msgid "quick_start_guide.html"
-msgstr ""
+msgstr "guia_rapida_d_inici.html"
 
 #: u_help.hlpqssol
 msgid "quick_start_solar_system.html"
-msgstr ""
+msgstr "guia_rapida_sistema_solar.html"
 
 #: u_help.hlpqssrv
 msgid "quick_start_server.html"
-msgstr ""
+msgstr "guia_rapida_servidor.html"
 
 #: u_help.hlpqstel
 msgid "quick_start_telescope.html"
-msgstr ""
+msgstr "guia_rapida_telescopi.html"
 
 #: u_help.hlpsearch
 msgid "advanced_search.html"
@@ -232,11 +232,11 @@ msgstr "camp_de_visio.html"
 
 #: u_help.hlpsoftlic
 msgid "software_license.html"
-msgstr ""
+msgstr "llicencia_programari.html"
 
 #: u_help.hlpsrvcmd
 msgid "server_commands.html"
-msgstr ""
+msgstr "comandaments_del_servidor.html"
 
 #: u_help.hlpsrvinfo
 msgid "server_information.html"
