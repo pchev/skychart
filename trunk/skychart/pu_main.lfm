@@ -23,16 +23,16 @@ object f_main: Tf_main
   OnShow = FormShow
   LCLVersion = '0.9.27'
   object MultiDoc1: TMultiDoc
-    Left = 24
+    Left = 26
     Height = 469
     Top = 54
-    Width = 811
+    Width = 806
     HelpContext = 0
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 1
     ClientHeight = 469
-    ClientWidth = 811
+    ClientWidth = 806
     Color = clBlack
     FullRepaint = False
     ParentColor = False
@@ -2673,19 +2673,19 @@ object f_main: Tf_main
     Left = 0
     Height = 469
     Top = 54
-    Width = 24
+    Width = 26
     HelpContext = 0
     Align = alLeft
     BevelOuter = bvNone
     ClientHeight = 469
-    ClientWidth = 24
+    ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
       Height = 469
       Top = 0
-      Width = 24
+      Width = 26
       HelpContext = 0
       Align = alClient
       ButtonHeight = 23
@@ -2788,22 +2788,22 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 835
+    Left = 832
     Height = 469
     Top = 54
-    Width = 25
+    Width = 28
     HelpContext = 0
     Align = alRight
     BevelOuter = bvNone
     ClientHeight = 469
-    ClientWidth = 25
+    ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
       Height = 219
       Top = 250
-      Width = 25
+      Width = 28
       HelpContext = 0
       Align = alClient
       ButtonHeight = 23
@@ -2868,19 +2868,19 @@ object f_main: Tf_main
       Left = 0
       Height = 250
       Top = 0
-      Width = 25
+      Width = 28
       HelpContext = 0
       Align = alTop
       BevelOuter = bvNone
       ClientHeight = 250
-      ClientWidth = 25
+      ClientWidth = 28
       TabOrder = 1
       object Field1: TSpeedButton
         Left = 0
         Height = 24
         Hint = 'Set FOV to'
-        Top = 0
-        Width = 24
+        Top = 3
+        Width = 28
         HelpContext = 0
         Caption = '10'''
         Color = clBtnFace
@@ -2896,11 +2896,11 @@ object f_main: Tf_main
       end
       object Field2: TSpeedButton
         Tag = 1
-        Left = 1
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 27
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
@@ -2919,7 +2919,7 @@ object f_main: Tf_main
         Height = 24
         Hint = 'Set FOV to'
         Top = 50
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
@@ -2938,7 +2938,7 @@ object f_main: Tf_main
         Height = 24
         Hint = 'Set FOV to'
         Top = 75
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
@@ -2957,7 +2957,7 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Set FOV to'
         Top = 100
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
@@ -2976,7 +2976,7 @@ object f_main: Tf_main
         Height = 24
         Hint = 'Set FOV to'
         Top = 125
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
@@ -2995,7 +2995,7 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Set FOV to'
         Top = 150
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
@@ -3014,7 +3014,7 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Set FOV to'
         Top = 175
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
@@ -3033,7 +3033,7 @@ object f_main: Tf_main
         Height = 24
         Hint = 'Set FOV to'
         Top = 200
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
@@ -3052,7 +3052,7 @@ object f_main: Tf_main
         Height = 23
         Hint = 'Set FOV to'
         Top = 227
-        Width = 24
+        Width = 28
         HelpContext = 0
         Color = clBtnFace
         Flat = True
