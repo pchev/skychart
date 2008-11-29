@@ -4306,3 +4306,11 @@ msgstr ""
 msgid "Reset chart and options"
 msgstr ""
 
+#: u_translation:rsiconclickact
+msgid "Icon Click Action"
+msgstr ""
+
+#: u_translation:rsaction
+msgid "Action"
+msgstr ""
+

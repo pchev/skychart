@@ -2,7 +2,7 @@
 # translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po translation of skychart.fr.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-11-29 13:39+0100\n"
+"PO-Revision-Date: 2008-11-29 16:35+0100\n"
 "Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -55,6 +55,10 @@ msgstr "A propos"
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "Au sujet de %s"
+
+#: u_translation.rsaction
+msgid "Action"
+msgstr "Action"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -1779,6 +1783,10 @@ msgstr "Heure, minute, seconde"
 #: u_translation.rshttpproxy
 msgid "HTTP Proxy"
 msgstr "Proxy HTTP"
+
+#: u_translation.rsiconclickact
+msgid "Icon Click Action"
+msgstr "Action du clic sur l'icône"
 
 #: u_translation.rsiconsize
 msgid "Icon Size"

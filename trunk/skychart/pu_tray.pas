@@ -35,10 +35,12 @@ type
     PopupMenu1: TPopupMenu;
     RadioGroup1: TRadioGroup;
     RadioGroup2: TRadioGroup;
+    RadioGroup3: TRadioGroup;
     SpinEdit1: TSpinEdit;
     SysTray: TTrayIcon;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
     Timer1: TTimer;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -54,7 +56,7 @@ type
     procedure UpdateIcon(Sender: TObject);
   private
     { private declarations }
-    icontype, icontextsize, iconinfo : integer;
+    icontype, icontextsize, iconinfo, iconaction : integer;
     clockposx, clockposy, calposx, calposy: integer;
     iconbg, icontext: TColor;
     bmp:TBitmap;
@@ -112,6 +114,11 @@ MenuItem2.caption:=rsSkyCharts;
 MenuItem3.caption:=rsSetup;
 MenuItem4.caption:=rsCalendar;
 MenuItem5.caption:=rsClose;
+TabSheet3.Caption:=rsAction;
+RadioGroup3.Caption:=rsIconClickAct;
+RadioGroup3.Items[0]:=rsClock;
+RadioGroup3.Items[1]:=rsCalendar;
+RadioGroup3.Items[2]:=rsSkyCharts;
 pla[1]:=rsMercury;
 pla[2]:=rsVenus;
 pla[4]:=rsMars;
@@ -131,6 +138,7 @@ var inif: TMemIniFile;
     section : string;
 begin
 {$ifdef mswindows}
+iconaction:=0;
 icontype:=0;
 iconbg:=clBtnFace;
 icontext:=clBtnText;
@@ -138,6 +146,7 @@ icontextsize:=7;
 iconinfo:=4;
 Radiogroup2.enabled:=false;
 {$else}
+iconaction:=0;
 icontype:=1;
 iconbg:=clBtnFace;
 icontext:=clBtnText;
@@ -150,6 +159,7 @@ inif:=TMeminifile.create(configfile);
 try
 with inif do begin
 section:='icon';
+iconaction:=ReadInteger(section,'Icon_action',iconaction);
 icontype:=ReadInteger(section,'Icon_type',icontype);
 iconbg:=ReadInteger(section,'Icon_bg',iconbg);
 icontext:=ReadInteger(section,'Icon_text',icontext);
@@ -204,6 +214,7 @@ inif:=TMeminifile.create(configfile);
 try
 with inif do begin
 section:='icon';
+WriteInteger(section,'Icon_action',iconaction);
 WriteInteger(section,'Icon_type',icontype);
 WriteInteger(section,'Icon_bg',iconbg);
 WriteInteger(section,'Icon_text',icontext);
@@ -298,6 +309,7 @@ begin
   icontext:=ColorBox2.Selected;
   icontextsize:=SpinEdit1.Value;
   iconinfo:=RadioGroup1.ItemIndex;
+  iconaction:=RadioGroup3.ItemIndex;
   SaveConfig;
   Hide;
   LoadIcon;
@@ -334,6 +346,11 @@ begin
   end;
   bmp.Width:=SysTray.Icon.Width;
   bmp.Height:=SysTray.Icon.Height;
+  case iconaction of
+   0 : SysTray.OnClick:=@MenuItem1Click;
+   1 : SysTray.OnClick:=@MenuItem4Click;
+   2 : SysTray.OnClick:=@MenuItem2Click;
+  end;
 end;
 
 procedure Tf_tray.FormCreate(Sender: TObject);
@@ -389,6 +406,7 @@ begin
   ColorBox2.Selected:=icontext;
   SpinEdit1.Value:=icontextsize;
   RadioGroup1.ItemIndex:=iconinfo;
+  RadioGroup3.ItemIndex:=iconaction;
   UpdBmptest('22','22');
   FormPos(Self,SysTray.GetPosition.X,SysTray.GetPosition.Y);
   Show;
@@ -400,13 +418,18 @@ var y,m,d:word;
 const ratio = 0.99664719;
       H0 = 6378140.0 ;
 begin
-  if f_calendar=nil then begin
-    f_calendar:=Tf_calendar.Create(self);
-    f_calendar.planet:=f_clock.planet;
-    f_calendar.cdb:=cdcdb;
-    f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
-    f_calendar.AzNorth:=true;
-  end;
+if f_calendar=nil then begin
+  f_calendar:=Tf_calendar.Create(self);
+  f_calendar.planet:=f_clock.planet;
+  f_calendar.cdb:=cdcdb;
+  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
+  f_calendar.AzNorth:=true;
+end;
+if f_calendar.Visible then begin
+  calposx:=f_calendar.Left;
+  calposy:=f_calendar.Top;
+  f_calendar.Hide;
+end else begin
   f_calendar.config.Assign(f_clock.cfgsc);
   DecodeDate(Now,y,m,d);
   f_calendar.config.CurYear:=y;
@@ -438,6 +461,7 @@ begin
   formpos(f_calendar,calposx,calposy,false);
   f_calendar.show;
   f_calendar.bringtofront;
+end;
 end;
 
 procedure Tf_tray.MenuItem5Click(Sender: TObject);
