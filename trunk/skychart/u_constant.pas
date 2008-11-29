@@ -676,9 +676,9 @@ const
      ('GETMSGBOX','6',''),
      ('GETCOORBOX','7',''),
      ('GETINFOBOX','8',''),
-     ('FIND' ,'9','! not implemented'),
-     ('SAVE' ,'10','! not implemented'),
-     ('LOAD' ,'11','! not implemented'),
+     ('FIND' ,'9','object_class object_name'),  //class: 0=neb, 1=na, 2=star, 3=star,4=var,5=dbl,6=comet,7=ast,8=planet,9=constellation,10=linecat
+     ('SAVE' ,'10','saved_file_name'),
+     ('LOAD' ,'11','saved_file_name'),
      ('?' ,'12',''),
      ('SHUTDOWN' ,'13',''),
      ('RESET' ,'14','')
