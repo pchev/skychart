@@ -13,235 +13,235 @@ msgstr ""
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: u_help:hlpsearch
-msgid "advanced_search.html"
-msgstr "поліпшений_пошук.html"
-
-#: u_help:hlpcalast
-msgid "calendar_asteroid.html"
-msgstr "календар_астероїд.html"
-
-#: u_help:hlpcalcom
-msgid "calendar_comet.html"
-msgstr "календар_комета.html"
-
-#: u_help:hlpcalinput
-msgid "calendar_input_area.html"
-msgstr "календар_вхідна_область.html"
-
-#: u_help:hlpcalluna
-msgid "calendar_lunar_eclipses.html"
-msgstr "календар_місячні_затьмарення.html"
-
-#: u_help:hlpcalpla
-msgid "calendar_planet.html"
-msgstr "календар_планета.html"
-
-#: u_help:hlpcalsol
-msgid "calendar_solar_eclipses.html"
-msgstr "календар_сонячні_затьмарення.html"
-
-#: u_help:hlpcaltw
-msgid "calendar_twilight.html"
-msgstr "календар_присмерки.html"
-
-#: u_help:hlpcatalog
-msgid "catalog.html"
-msgstr "каталог.html"
-
-#: u_help:hlpcatgen
-msgid "catgen.html"
-msgstr ""
-
-#: u_help:hlpcfgchart
-msgid "chart_coordinates.html"
-msgstr "мапа_координати.html"
-
-#: u_help:hlpcfgdate
-msgid "date_time.html"
-msgstr "дата_час.html"
-
-#: u_help:hlpinfo
-msgid "detailed_information.html"
-msgstr "детальна_інформація.html"
-
-#: u_help:hlpcfgdispl
-msgid "display.html"
-msgstr "спосіб_показувати.html"
-
-#: u_help:hlpdoclic
-msgid "documentation_license.html"
-msgstr ""
-
-#: u_help:hlpbasedir
-msgid "en/documentation/"
-msgstr "uk/documentation/"
-
-#: u_help:hlpfaq
-msgid "faq.html"
-msgstr ""
-
-#: u_help:hlpinstsrc
-msgid "install_and_compile_the_source_code.html"
-msgstr ""
-
-#: u_help:hlpinstcat
-msgid "install_new_catalogs.html"
-msgstr ""
-
-#: u_help:hlpinstfreeb
-msgid "install_on_freebsd.html"
-msgstr ""
-
-#: u_help:hlpinstlinux
-msgid "install_on_linux_debian.html"
-msgstr ""
-
-#: u_help:hlpinstmac
-msgid "install_on_mac_os_x.html"
-msgstr ""
-
-#: u_help:hlpinstwin
-msgid "install_on_windows.html"
-msgstr ""
-
-#: u_help:hlpcfgint
-msgid "internet.html"
-msgstr "інтернет.html"
-
-#: u_help:hlpkb
-msgid "keyboard_shortcut.html"
-msgstr ""
-
-#: u_help:hlplabel
-msgid "labels.html"
-msgstr ""
-
-#: u_help:hlpbarleft
+#: u_help.hlpbarleft
 msgid "left_bar.html"
 msgstr "ліва_панель.html"
 
-#: u_help:hlpcmdline
-msgid "line_commands.html"
-msgstr ""
-
-#: u_help:hlpbarmain
+#: u_help.hlpbarmain
 msgid "main_bar.html"
 msgstr "головна_панель.html"
 
-#: u_help:hlpmenuchart
-msgid "menuchart.html"
-msgstr "меню_мапа.html"
-
-#: u_help:hlpmenuedit
-msgid "menuedit.html"
-msgstr "меню_редагування.html"
-
-#: u_help:hlpmenufile
-msgid "menufile.html"
-msgstr "меню_файл.html"
-
-#: u_help:hlpmenuhelp
-msgid "menuhelp.html"
-msgstr "меню_допомога.html"
-
-#: u_help:hlppopup
-msgid "menupop_up.html"
-msgstr ""
-
-#: u_help:hlpmenusetup
-msgid "menusetup.html"
-msgstr "меню_налаштування.html"
-
-#: u_help:hlpmenutel
-msgid "menutelescope.html"
-msgstr "меню_телескоп.html"
-
-#: u_help:hlpmenuview
-msgid "menuview.html"
-msgstr "меню_вид.html"
-
-#: u_help:hlpmenuwin
-msgid "menuwindow.html"
-msgstr "меню_вікно.html"
-
-#: u_help:hlpbarobj
+#: u_help.hlpbarobj
 msgid "object_bar.html"
 msgstr "панель_об'єктів.html"
 
-#: u_help:hlpobjlist
-msgid "object_list.html"
-msgstr "перелік_об'єктів.html"
-
-#: u_help:hlpcfgobs
-msgid "observatory.html"
-msgstr "обсерваторія.html"
-
-#: u_help:hlpcfgpict
-msgid "pictures.html"
-msgstr "зображення.html"
-
-#: u_help:hlpposition
-msgid "position.html"
-msgstr "позиція.html"
-
-#: u_help:hlpqschart
-msgid "quick_start_chart.html"
-msgstr ""
-
-#: u_help:hlpqsds
-msgid "quick_start_deep_sky.html"
-msgstr ""
-
-#: u_help:hlpqsguide
-msgid "quick_start_guide.html"
-msgstr ""
-
-#: u_help:hlpqssrv
-msgid "quick_start_server.html"
-msgstr ""
-
-#: u_help:hlpqssol
-msgid "quick_start_solar_system.html"
-msgstr ""
-
-#: u_help:hlpqstel
-msgid "quick_start_telescope.html"
-msgstr ""
-
-#: u_help:hlpbarright
+#: u_help.hlpbarright
 msgid "right_bar.html"
 msgstr "права_панель.html"
 
-#: u_help:hlpsrvcmd
-msgid "server_commands.html"
-msgstr ""
-
-#: u_help:hlpsrvinfo
-msgid "server_information.html"
-msgstr "серверна_інформація.html"
-
-#: u_help:hlpsetfov
-msgid "set_fov.html"
-msgstr "настанови_поля_зору.html"
-
-#: u_help:hlpsoftlic
-msgid "software_license.html"
-msgstr ""
-
-#: u_help:hlpcfgsol
-msgid "solar_system.html"
-msgstr "сонячна_система.html"
-
-#: u_help:hlpindex
-msgid "start.html"
-msgstr "старт.html"
-
-#: u_help:hlpbarstatus
+#: u_help.hlpbarstatus
 msgid "status_bar.html"
 msgstr "панель_стану.html"
 
-#: u_help:hlpcfgsys
+#: u_help.hlpbasedir
+msgid "en/documentation/"
+msgstr "uk/documentation/"
+
+#: u_help.hlpcalast
+msgid "calendar_asteroid.html"
+msgstr "календар_астероїд.html"
+
+#: u_help.hlpcalcom
+msgid "calendar_comet.html"
+msgstr "календар_комета.html"
+
+#: u_help.hlpcalinput
+msgid "calendar_input_area.html"
+msgstr "календар_вхідна_область.html"
+
+#: u_help.hlpcalluna
+msgid "calendar_lunar_eclipses.html"
+msgstr "календар_місячні_затьмарення.html"
+
+#: u_help.hlpcalpla
+msgid "calendar_planet.html"
+msgstr "календар_планета.html"
+
+#: u_help.hlpcalsol
+msgid "calendar_solar_eclipses.html"
+msgstr "календар_сонячні_затьмарення.html"
+
+#: u_help.hlpcaltw
+msgid "calendar_twilight.html"
+msgstr "календар_присмерки.html"
+
+#: u_help.hlpcatalog
+msgid "catalog.html"
+msgstr "каталог.html"
+
+#: u_help.hlpcatgen
+msgid "catgen.html"
+msgstr ""
+
+#: u_help.hlpcfgchart
+msgid "chart_coordinates.html"
+msgstr "мапа_координати.html"
+
+#: u_help.hlpcfgdate
+msgid "date_time.html"
+msgstr "дата_час.html"
+
+#: u_help.hlpcfgdispl
+msgid "display.html"
+msgstr "спосіб_показувати.html"
+
+#: u_help.hlpcfgint
+msgid "internet.html"
+msgstr "інтернет.html"
+
+#: u_help.hlpcfgobs
+msgid "observatory.html"
+msgstr "обсерваторія.html"
+
+#: u_help.hlpcfgpict
+msgid "pictures.html"
+msgstr "зображення.html"
+
+#: u_help.hlpcfgsol
+msgid "solar_system.html"
+msgstr "сонячна_система.html"
+
+#: u_help.hlpcfgsys
 msgid "system.html"
 msgstr "система.html"
+
+#: u_help.hlpcmdline
+msgid "line_commands.html"
+msgstr ""
+
+#: u_help.hlpdoclic
+msgid "documentation_license.html"
+msgstr ""
+
+#: u_help.hlpfaq
+msgid "faq.html"
+msgstr ""
+
+#: u_help.hlpindex
+msgid "start.html"
+msgstr "старт.html"
+
+#: u_help.hlpinfo
+msgid "detailed_information.html"
+msgstr "детальна_інформація.html"
+
+#: u_help.hlpinstcat
+msgid "install_new_catalogs.html"
+msgstr ""
+
+#: u_help.hlpinstfreeb
+msgid "install_on_freebsd.html"
+msgstr ""
+
+#: u_help.hlpinstlinux
+msgid "install_on_linux_debian.html"
+msgstr ""
+
+#: u_help.hlpinstmac
+msgid "install_on_mac_os_x.html"
+msgstr ""
+
+#: u_help.hlpinstsrc
+msgid "install_and_compile_the_source_code.html"
+msgstr ""
+
+#: u_help.hlpinstwin
+msgid "install_on_windows.html"
+msgstr ""
+
+#: u_help.hlpkb
+msgid "keyboard_shortcut.html"
+msgstr ""
+
+#: u_help.hlplabel
+msgid "labels.html"
+msgstr ""
+
+#: u_help.hlpmenuchart
+msgid "menuchart.html"
+msgstr "меню_мапа.html"
+
+#: u_help.hlpmenuedit
+msgid "menuedit.html"
+msgstr "меню_редагування.html"
+
+#: u_help.hlpmenufile
+msgid "menufile.html"
+msgstr "меню_файл.html"
+
+#: u_help.hlpmenuhelp
+msgid "menuhelp.html"
+msgstr "меню_допомога.html"
+
+#: u_help.hlpmenusetup
+msgid "menusetup.html"
+msgstr "меню_налаштування.html"
+
+#: u_help.hlpmenutel
+msgid "menutelescope.html"
+msgstr "меню_телескоп.html"
+
+#: u_help.hlpmenuview
+msgid "menuview.html"
+msgstr "меню_вид.html"
+
+#: u_help.hlpmenuwin
+msgid "menuwindow.html"
+msgstr "меню_вікно.html"
+
+#: u_help.hlpobjlist
+msgid "object_list.html"
+msgstr "перелік_об'єктів.html"
+
+#: u_help.hlppopup
+msgid "menupop_up.html"
+msgstr ""
+
+#: u_help.hlpposition
+msgid "position.html"
+msgstr "позиція.html"
+
+#: u_help.hlpqschart
+msgid "quick_start_chart.html"
+msgstr ""
+
+#: u_help.hlpqsds
+msgid "quick_start_deep_sky.html"
+msgstr ""
+
+#: u_help.hlpqsguide
+msgid "quick_start_guide.html"
+msgstr ""
+
+#: u_help.hlpqssol
+msgid "quick_start_solar_system.html"
+msgstr ""
+
+#: u_help.hlpqssrv
+msgid "quick_start_server.html"
+msgstr ""
+
+#: u_help.hlpqstel
+msgid "quick_start_telescope.html"
+msgstr ""
+
+#: u_help.hlpsearch
+msgid "advanced_search.html"
+msgstr "поліпшений_пошук.html"
+
+#: u_help.hlpsetfov
+msgid "set_fov.html"
+msgstr "настанови_поля_зору.html"
+
+#: u_help.hlpsoftlic
+msgid "software_license.html"
+msgstr ""
+
+#: u_help.hlpsrvcmd
+msgid "server_commands.html"
+msgstr ""
+
+#: u_help.hlpsrvinfo
+msgid "server_information.html"
+msgstr "серверна_інформація.html"
 

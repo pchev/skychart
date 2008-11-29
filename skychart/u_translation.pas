@@ -1126,6 +1126,7 @@ resourcestring
   rsQuickStartGu = 'Quick start guide';
   rsSmallStars = 'Small stars';
   rsBigStars = 'Big stars';
+  rsResetChartAn = 'Reset chart and options';
 
 implementation
 

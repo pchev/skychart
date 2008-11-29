@@ -666,7 +666,7 @@ const msgTimeout='Timeout!';
 const
      MaxCmdArg = 10;
 // Main Commands, excuted form main form
-     numcmdmain = 13;
+     numcmdmain = 14;
      maincmdlist: array[1..numcmdmain,1..3] of string=(
      ('NEWCHART','1','chart_name'),
      ('CLOSECHART','2','chart_name'),
@@ -680,7 +680,8 @@ const
      ('SAVE' ,'10','! not implemented'),
      ('LOAD' ,'11','! not implemented'),
      ('?' ,'12',''),
-     ('SHUTDOWN' ,'13','')
+     ('SHUTDOWN' ,'13',''),
+     ('RESET' ,'14','')
      );
 
 // Chart Commands

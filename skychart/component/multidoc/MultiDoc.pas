@@ -189,6 +189,7 @@ type
      When resizings
     }
     property OnResize : TNotifyEvent read FOnResize write FOnResize;
+    property OnExit;
   end;
 
 procedure Register;

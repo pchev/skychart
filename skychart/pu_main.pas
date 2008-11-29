@@ -87,6 +87,8 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuItem31: TMenuItem;
+    ResetDefaultChart: TAction;
     EditCopy1: TAction;
     HelpFaq1: TAction;
     HelpQS1: TAction;
@@ -483,6 +485,7 @@ type
     procedure Print1Execute(Sender: TObject);
     procedure ReleaseNotes1Click(Sender: TObject);
     procedure ResetAllLabels1Click(Sender: TObject);
+    procedure ResetDefaultChartExecute(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
     procedure SetupChartExecute(Sender: TObject);
     procedure SetupConfigExecute(Sender: TObject);
@@ -991,6 +994,17 @@ end;
 {$endif}
 end;
 
+{$ifdef unix}
+Procedure RecvSignal(sig:longint);cdecl;
+begin
+WriteTrace('Receiving signal '+inttostr(sig));
+case sig of
+1  : f_main.ResetDefaultChartExecute(nil);
+15 : f_main.Close;
+end;
+end;
+{$endif}
+
 procedure Tf_main.Init;
 var i: integer;
     firstuse: boolean;
@@ -1131,6 +1145,12 @@ if cfgm.AutostartServer then begin
     {$endif}
     StartServer;
 end;
+{$ifdef unix}
+{$ifdef trace_debug}
+ WriteTrace('Add signal handler');
+{$endif}
+CdcSigAction(@RecvSignal);
+{$endif}
 except
   on E: Exception do begin
    WriteTrace('Initialization error: '+E.Message);
@@ -2114,6 +2134,20 @@ procedure Tf_main.ResetAllLabels1Click(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then
       Tf_chart(MultiDoc1.ActiveObject).sc.ResetAllLabel;
+end;
+
+procedure Tf_main.ResetDefaultChartExecute(Sender: TObject);
+var i: integer;
+begin
+WriteTrace('Reload default configuration');
+for i:=1 to MultiDoc1.ChildCount-1 do
+  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+     MultiDoc1.Childs[i].close;
+Multidoc1.Maximized:=true;
+with MultiDoc1.ActiveObject as Tf_chart do begin
+  ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
+  Refresh;
+end;
 end;
 
 procedure Tf_main.EditLabelsExecute(Sender: TObject);
@@ -4823,6 +4857,7 @@ FileOpenItem.caption:=rsOpen;
 FileSaveAsItem.caption:=rsSaveAs;
 SaveImage1.caption:=rsSaveImage;
 FileCloseItem.caption:=rsCloseChart;
+ResetDefaultChart.Caption:=rsResetChartAn;
 Calendar1.caption:=rsCalendar;
 VariableStar1.Caption:=rsVariableStar2;
 Print2.caption:=rsPrint;
@@ -5301,6 +5336,7 @@ case n of
  11 : ;// load
  12 : result:=HelpCmd(trim(uppercase(arg[1])));
  13 : Close;
+ 14 : begin ResetDefaultChartExecute(nil); result:=msgOK; end;
 else begin
  result:='Bad chart name '+cname;
  for i:=0 to MultiDoc1.ChildCount-1 do

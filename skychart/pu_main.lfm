@@ -1,16 +1,11 @@
 object f_main: Tf_main
-  Left = 403
+  Left = 394
   Height = 580
   Top = 120
   Width = 860
   HelpContext = 0
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ChildSizing.LeftRightSpacing = 0
-  ChildSizing.TopBottomSpacing = 0
-  ChildSizing.HorizontalSpacing = 0
-  ChildSizing.VerticalSpacing = 0
-  ChildSizing.ControlsPerLine = 0
   ClientHeight = 557
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
@@ -34,20 +29,8 @@ object f_main: Tf_main
     Width = 811
     HelpContext = 0
     Align = alClient
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
     BorderWidth = 1
-    ChildSizing.LeftRightSpacing = 0
-    ChildSizing.TopBottomSpacing = 0
-    ChildSizing.HorizontalSpacing = 0
-    ChildSizing.VerticalSpacing = 0
-    ChildSizing.ControlsPerLine = 0
     ClientHeight = 469
     ClientWidth = 811
     Color = clBlack
@@ -68,14 +51,6 @@ object f_main: Tf_main
       Width = 209
       HelpContext = 0
       AutoSize = True
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
-      Center = False
       Picture.Data = {
         07544269746D61707A460100424DF5450100000000003600000028000000D100
         0000850000000100180000000000BF450100130B0000130B0000000000000000
@@ -2701,19 +2676,7 @@ object f_main: Tf_main
     Width = 24
     HelpContext = 0
     Align = alLeft
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
-    ChildSizing.LeftRightSpacing = 0
-    ChildSizing.TopBottomSpacing = 0
-    ChildSizing.HorizontalSpacing = 0
-    ChildSizing.VerticalSpacing = 0
-    ChildSizing.ControlsPerLine = 0
     ClientHeight = 469
     ClientWidth = 24
     FullRepaint = False
@@ -2725,20 +2688,8 @@ object f_main: Tf_main
       Width = 24
       HelpContext = 0
       Align = alClient
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
       ButtonHeight = 23
       Caption = 'ToolBar2'
-      ChildSizing.LeftRightSpacing = 0
-      ChildSizing.TopBottomSpacing = 0
-      ChildSizing.HorizontalSpacing = 0
-      ChildSizing.VerticalSpacing = 0
-      ChildSizing.ControlsPerLine = 0
       Ctl3D = False
       EdgeBorders = [ebBottom]
       Images = ImageNormal
@@ -2843,19 +2794,7 @@ object f_main: Tf_main
     Width = 25
     HelpContext = 0
     Align = alRight
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
-    ChildSizing.LeftRightSpacing = 0
-    ChildSizing.TopBottomSpacing = 0
-    ChildSizing.HorizontalSpacing = 0
-    ChildSizing.VerticalSpacing = 0
-    ChildSizing.ControlsPerLine = 0
     ClientHeight = 469
     ClientWidth = 25
     FullRepaint = False
@@ -2867,20 +2806,8 @@ object f_main: Tf_main
       Width = 25
       HelpContext = 0
       Align = alClient
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
       ButtonHeight = 23
       Caption = 'ToolBar3'
-      ChildSizing.LeftRightSpacing = 0
-      ChildSizing.TopBottomSpacing = 0
-      ChildSizing.HorizontalSpacing = 0
-      ChildSizing.VerticalSpacing = 0
-      ChildSizing.ControlsPerLine = 0
       Ctl3D = False
       EdgeBorders = [ebBottom]
       Font.CharSet = ANSI_CHARSET
@@ -2944,19 +2871,7 @@ object f_main: Tf_main
       Width = 25
       HelpContext = 0
       Align = alTop
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
       BevelOuter = bvNone
-      ChildSizing.LeftRightSpacing = 0
-      ChildSizing.TopBottomSpacing = 0
-      ChildSizing.HorizontalSpacing = 0
-      ChildSizing.VerticalSpacing = 0
-      ChildSizing.ControlsPerLine = 0
       ClientHeight = 250
       ClientWidth = 25
       TabOrder = 1
@@ -2967,13 +2882,6 @@ object f_main: Tf_main
         Top = 0
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Caption = '10'''
         Color = clBtnFace
         Flat = True
@@ -2994,13 +2902,6 @@ object f_main: Tf_main
         Top = 27
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3020,13 +2921,6 @@ object f_main: Tf_main
         Top = 50
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3046,13 +2940,6 @@ object f_main: Tf_main
         Top = 75
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3072,13 +2959,6 @@ object f_main: Tf_main
         Top = 100
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3098,13 +2978,6 @@ object f_main: Tf_main
         Top = 125
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3124,13 +2997,6 @@ object f_main: Tf_main
         Top = 150
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3150,13 +3016,6 @@ object f_main: Tf_main
         Top = 175
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3176,13 +3035,6 @@ object f_main: Tf_main
         Top = 200
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3202,13 +3054,6 @@ object f_main: Tf_main
         Top = 227
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Color = clBtnFace
         Flat = True
         Font.Color = clNavy
@@ -3229,19 +3074,7 @@ object f_main: Tf_main
     Width = 860
     HelpContext = 0
     Align = alBottom
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
-    ChildSizing.LeftRightSpacing = 0
-    ChildSizing.TopBottomSpacing = 0
-    ChildSizing.HorizontalSpacing = 0
-    ChildSizing.VerticalSpacing = 0
-    ChildSizing.ControlsPerLine = 0
     ClientHeight = 34
     ClientWidth = 860
     FullRepaint = False
@@ -3253,17 +3086,9 @@ object f_main: Tf_main
       Width = 2
       HelpContext = 0
       Align = alLeft
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
       Brush.Color = clBtnShadow
       Pen.Color = clBtnShadow
       Pen.Cosmetic = True
-      Shape = stRectangle
     end
     object PPanels0: TPanel
       Left = 0
@@ -3273,19 +3098,7 @@ object f_main: Tf_main
       HelpContext = 0
       Align = alLeft
       Alignment = taLeftJustify
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
       BevelOuter = bvNone
-      ChildSizing.LeftRightSpacing = 0
-      ChildSizing.TopBottomSpacing = 0
-      ChildSizing.HorizontalSpacing = 0
-      ChildSizing.VerticalSpacing = 0
-      ChildSizing.ControlsPerLine = 0
       ClientHeight = 34
       ClientWidth = 220
       FullRepaint = False
@@ -3298,19 +3111,7 @@ object f_main: Tf_main
         HelpContext = 0
         Align = alClient
         Alignment = taLeftJustify
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         BevelOuter = bvNone
-        ChildSizing.LeftRightSpacing = 0
-        ChildSizing.TopBottomSpacing = 0
-        ChildSizing.HorizontalSpacing = 0
-        ChildSizing.VerticalSpacing = 0
-        ChildSizing.ControlsPerLine = 0
         ClientHeight = 34
         ClientWidth = 220
         TabOrder = 0
@@ -3321,13 +3122,6 @@ object f_main: Tf_main
           Width = 220
           HelpContext = 0
           Align = alClient
-          BorderSpacing.Left = 0
-          BorderSpacing.Top = 0
-          BorderSpacing.Right = 0
-          BorderSpacing.Bottom = 0
-          BorderSpacing.Around = 0
-          BorderSpacing.CellAlignHorizontal = ccaFill
-          BorderSpacing.CellAlignVertical = ccaFill
           Font.Height = 0
           Font.Style = []
           ParentColor = False
@@ -3343,19 +3137,7 @@ object f_main: Tf_main
       HelpContext = 0
       Align = alClient
       Alignment = taLeftJustify
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
       BevelOuter = bvNone
-      ChildSizing.LeftRightSpacing = 0
-      ChildSizing.TopBottomSpacing = 0
-      ChildSizing.HorizontalSpacing = 0
-      ChildSizing.VerticalSpacing = 0
-      ChildSizing.ControlsPerLine = 0
       ClientHeight = 34
       ClientWidth = 638
       FullRepaint = False
@@ -3368,19 +3150,7 @@ object f_main: Tf_main
         HelpContext = 0
         Align = alClient
         Alignment = taLeftJustify
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         BevelOuter = bvNone
-        ChildSizing.LeftRightSpacing = 0
-        ChildSizing.TopBottomSpacing = 0
-        ChildSizing.HorizontalSpacing = 0
-        ChildSizing.VerticalSpacing = 0
-        ChildSizing.ControlsPerLine = 0
         ClientHeight = 34
         ClientWidth = 638
         TabOrder = 0
@@ -3392,13 +3162,6 @@ object f_main: Tf_main
           HelpContext = 0
           Align = alClient
           AutoSize = False
-          BorderSpacing.Left = 0
-          BorderSpacing.Top = 0
-          BorderSpacing.Right = 0
-          BorderSpacing.Bottom = 0
-          BorderSpacing.Around = 0
-          BorderSpacing.CellAlignHorizontal = ccaFill
-          BorderSpacing.CellAlignVertical = ccaFill
           ParentColor = False
           WordWrap = True
         end
@@ -3412,19 +3175,7 @@ object f_main: Tf_main
     Width = 860
     HelpContext = 0
     Align = alTop
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
     BevelOuter = bvNone
-    ChildSizing.LeftRightSpacing = 0
-    ChildSizing.TopBottomSpacing = 0
-    ChildSizing.HorizontalSpacing = 0
-    ChildSizing.VerticalSpacing = 0
-    ChildSizing.ControlsPerLine = 0
     ClientHeight = 54
     ClientWidth = 860
     FullRepaint = False
@@ -3436,19 +3187,7 @@ object f_main: Tf_main
       Top = 0
       Width = 860
       HelpContext = 0
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
       ButtonHeight = 23
-      ChildSizing.LeftRightSpacing = 0
-      ChildSizing.TopBottomSpacing = 0
-      ChildSizing.HorizontalSpacing = 0
-      ChildSizing.VerticalSpacing = 0
-      ChildSizing.ControlsPerLine = 0
       Ctl3D = False
       Images = ImageNormal
       ParentShowHint = False
@@ -3673,13 +3412,6 @@ object f_main: Tf_main
         ArrowKeysTraverseList = False
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Ctl3D = False
         DropDownCount = 15
         ItemHeight = 0
@@ -3695,19 +3427,7 @@ object f_main: Tf_main
         Top = 2
         Width = 24
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         BevelOuter = bvNone
-        ChildSizing.LeftRightSpacing = 0
-        ChildSizing.TopBottomSpacing = 0
-        ChildSizing.HorizontalSpacing = 0
-        ChildSizing.VerticalSpacing = 0
-        ChildSizing.ControlsPerLine = 0
         ClientHeight = 23
         ClientWidth = 24
         FullRepaint = False
@@ -3719,14 +3439,6 @@ object f_main: Tf_main
           Top = 0
           Width = 11
           HelpContext = 0
-          BorderSpacing.Left = 0
-          BorderSpacing.Top = 0
-          BorderSpacing.Right = 0
-          BorderSpacing.Bottom = 0
-          BorderSpacing.Around = 0
-          BorderSpacing.CellAlignHorizontal = ccaFill
-          BorderSpacing.CellAlignVertical = ccaFill
-          Center = False
           OnClick = MoreStarExecute
           Picture.Data = {
             07544269746D617036050000424D360500000000000036040000280000001000
@@ -3782,14 +3494,6 @@ object f_main: Tf_main
           Top = 0
           Width = 11
           HelpContext = 0
-          BorderSpacing.Left = 0
-          BorderSpacing.Top = 0
-          BorderSpacing.Right = 0
-          BorderSpacing.Bottom = 0
-          BorderSpacing.Around = 0
-          BorderSpacing.CellAlignHorizontal = ccaFill
-          BorderSpacing.CellAlignVertical = ccaFill
-          Center = False
           OnClick = LessStarExecute
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
@@ -3811,14 +3515,6 @@ object f_main: Tf_main
           Top = 12
           Width = 11
           HelpContext = 0
-          BorderSpacing.Left = 0
-          BorderSpacing.Top = 0
-          BorderSpacing.Right = 0
-          BorderSpacing.Bottom = 0
-          BorderSpacing.Around = 0
-          BorderSpacing.CellAlignHorizontal = ccaFill
-          BorderSpacing.CellAlignVertical = ccaFill
-          Center = False
           OnClick = MoreNebExecute
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
@@ -3840,14 +3536,6 @@ object f_main: Tf_main
           Top = 12
           Width = 11
           HelpContext = 0
-          BorderSpacing.Left = 0
-          BorderSpacing.Top = 0
-          BorderSpacing.Right = 0
-          BorderSpacing.Bottom = 0
-          BorderSpacing.Around = 0
-          BorderSpacing.CellAlignHorizontal = ccaFill
-          BorderSpacing.CellAlignVertical = ccaFill
-          Center = False
           OnClick = LessNebExecute
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
@@ -3870,13 +3558,6 @@ object f_main: Tf_main
         Top = 2
         Width = 56
         HelpContext = 0
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         MaxValue = 1000
         MinValue = 1
         TabOrder = 1
@@ -3891,13 +3572,6 @@ object f_main: Tf_main
         HelpContext = 0
         AutoComplete = False
         AutoCompleteText = [cbactSearchAscending]
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         Ctl3D = False
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
@@ -3917,19 +3591,7 @@ object f_main: Tf_main
         HelpContext = 0
         Align = alRight
         AutoSize = True
-        BorderSpacing.Left = 0
-        BorderSpacing.Top = 0
-        BorderSpacing.Right = 0
-        BorderSpacing.Bottom = 0
-        BorderSpacing.Around = 0
-        BorderSpacing.CellAlignHorizontal = ccaFill
-        BorderSpacing.CellAlignVertical = ccaFill
         BevelOuter = bvNone
-        ChildSizing.LeftRightSpacing = 0
-        ChildSizing.TopBottomSpacing = 0
-        ChildSizing.HorizontalSpacing = 0
-        ChildSizing.VerticalSpacing = 0
-        ChildSizing.ControlsPerLine = 0
         ClientHeight = 23
         ClientWidth = 30
         TabOrder = 3
@@ -3939,13 +3601,6 @@ object f_main: Tf_main
           Top = 0
           Width = 15
           HelpContext = 0
-          BorderSpacing.Left = 0
-          BorderSpacing.Top = 0
-          BorderSpacing.Right = 0
-          BorderSpacing.Bottom = 0
-          BorderSpacing.Around = 0
-          BorderSpacing.CellAlignHorizontal = ccaFill
-          BorderSpacing.CellAlignVertical = ccaFill
           Color = clBtnFace
           Flat = True
           NumGlyphs = 0
@@ -3957,13 +3612,6 @@ object f_main: Tf_main
           Top = 0
           Width = 15
           HelpContext = 0
-          BorderSpacing.Left = 0
-          BorderSpacing.Top = 0
-          BorderSpacing.Right = 0
-          BorderSpacing.Bottom = 0
-          BorderSpacing.Around = 0
-          BorderSpacing.CellAlignHorizontal = ccaFill
-          BorderSpacing.CellAlignVertical = ccaFill
           Color = clBtnFace
           Flat = True
           NumGlyphs = 0
@@ -3978,20 +3626,8 @@ object f_main: Tf_main
       Width = 860
       HelpContext = 0
       Align = alBottom
-      BorderSpacing.Left = 0
-      BorderSpacing.Top = 0
-      BorderSpacing.Right = 0
-      BorderSpacing.Bottom = 0
-      BorderSpacing.Around = 0
-      BorderSpacing.CellAlignHorizontal = ccaFill
-      BorderSpacing.CellAlignVertical = ccaFill
       ButtonHeight = 24
       Caption = 'ToolBar4'
-      ChildSizing.LeftRightSpacing = 0
-      ChildSizing.TopBottomSpacing = 0
-      ChildSizing.HorizontalSpacing = 0
-      ChildSizing.VerticalSpacing = 0
-      ChildSizing.ControlsPerLine = 0
       Ctl3D = False
       EdgeBorders = [ebTop, ebBottom]
       Images = ImageNormal
@@ -4215,17 +3851,17 @@ object f_main: Tf_main
         ShowAlwaysCheckable = False
         OnClick = FileSaveAs1Execute
       end
-      object SaveImage1: TMenuItem
-        Action = SaveImage
-        RightJustify = False
-        ShowAlwaysCheckable = False
-        OnClick = SaveImageExecute
-      end
       object FileCloseItem: TMenuItem
         Action = FileClose1
         RightJustify = False
         ShowAlwaysCheckable = False
         OnClick = FileClose1Execute
+      end
+      object MenuItem31: TMenuItem
+        Action = ResetDefaultChart
+        RightJustify = False
+        ShowAlwaysCheckable = False
+        OnClick = ResetDefaultChartExecute
       end
       object N6: TMenuItem
         Caption = '-'
@@ -4247,6 +3883,12 @@ object f_main: Tf_main
         Caption = '-'
         RightJustify = False
         ShowAlwaysCheckable = False
+      end
+      object SaveImage1: TMenuItem
+        Action = SaveImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
+        OnClick = SaveImageExecute
       end
       object Print2: TMenuItem
         Action = Print1
@@ -5066,6 +4708,7 @@ object f_main: Tf_main
     top = 160
     object FileNew1: TAction
       Category = 'File'
+      Caption = 'FileNew1'
       DisableIfNoHandler = True
       Hint = 'New|Create a new chart'
       ImageIndex = 0
@@ -5073,6 +4716,7 @@ object f_main: Tf_main
     end
     object FileOpen1: TAction
       Category = 'File'
+      Caption = 'FileOpen1'
       DisableIfNoHandler = True
       Hint = 'Open|Open a chart'
       ImageIndex = 1
@@ -5080,6 +4724,7 @@ object f_main: Tf_main
     end
     object FileSaveAs1: TAction
       Category = 'File'
+      Caption = 'FileSaveAs1'
       DisableIfNoHandler = True
       Hint = 'Save the current chart'
       ImageIndex = 2
@@ -5087,6 +4732,7 @@ object f_main: Tf_main
     end
     object FileExit1: TAction
       Category = 'File'
+      Caption = 'FileExit1'
       DisableIfNoHandler = True
       Hint = 'Exit|Exit application'
       ImageIndex = 11
@@ -5094,6 +4740,7 @@ object f_main: Tf_main
     end
     object Print1: TAction
       Category = 'File'
+      Caption = 'Print1'
       DisableIfNoHandler = True
       Hint = 'Print the chart'
       ImageIndex = 3
@@ -5101,6 +4748,7 @@ object f_main: Tf_main
     end
     object FilePrintSetup1: TAction
       Category = 'File'
+      Caption = 'FilePrintSetup1'
       DisableIfNoHandler = True
       ImageIndex = 47
       OnExecute = FilePrintSetup1Execute
@@ -5246,6 +4894,7 @@ object f_main: Tf_main
     end
     object SaveImage: TAction
       Category = 'File'
+      Caption = 'SaveImage'
       DisableIfNoHandler = True
       ImageIndex = 36
       OnExecute = SaveImageExecute
@@ -5531,6 +5180,7 @@ object f_main: Tf_main
     end
     object Calendar: TAction
       Category = 'File'
+      Caption = 'Calendar'
       DisableIfNoHandler = True
       Hint = 'Ephemeris Calendar'
       ImageIndex = 75
@@ -5620,6 +5270,7 @@ object f_main: Tf_main
     end
     object FileClose1: TAction
       Category = 'File'
+      Caption = 'FileClose1'
       DisableIfNoHandler = True
       Hint = 'Close Chart'
       OnExecute = FileClose1Execute
@@ -5724,6 +5375,12 @@ object f_main: Tf_main
       OnExecute = EditCopy1Execute
       ShortCut = 16451
     end
+    object ResetDefaultChart: TAction
+      Category = 'File'
+      Caption = 'ResetDefaultChart'
+      DisableIfNoHandler = True
+      OnExecute = ResetDefaultChartExecute
+    end
   end
   object SaveDialog: TSaveDialog
     Width = 0
@@ -5742,13 +5399,11 @@ object f_main: Tf_main
   end
   object ImageList2: TImageList
     Masked = False
-    ShareImages = False
     left = 280
     top = 208
   end
   object ImageNormal: TImageList
     Masked = True
-    ShareImages = False
     left = 280
     top = 160
     Bitmap = {
