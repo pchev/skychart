@@ -492,6 +492,12 @@
       <CustomOptions Value="
 "/>
       <CompilerPath Value="$(CompPath)"/>
+      <ExecuteBefore>
+        <Command Value="echo $LD_LIBRARY_PATH"/>
+      </ExecuteBefore>
+      <ExecuteAfter>
+        <Command Value="echo $LD_LIBRARY_PATH"/>
+      </ExecuteAfter>
     </Other>
   </CompilerOptions>
 </CONFIG>

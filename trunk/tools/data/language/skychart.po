@@ -4302,3 +4302,7 @@ msgstr ""
 msgid "Big stars"
 msgstr ""
 
+#: u_translation:rsresetchartan
+msgid "Reset chart and options"
+msgstr ""
+

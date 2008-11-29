@@ -108,6 +108,7 @@ function CondUTF8Encode(v:string):string;
 function GreekSymbolUtf8(v:string):string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
+function CdcSigAction(const action: pointer):boolean;
 {$endif}
 {$ifdef win32}
 procedure ScaleForm(form: TForm; scale: single);
@@ -1294,6 +1295,25 @@ begin
       writetrace('Could not launch '+cmd);
     end;
   end;
+end;
+
+function CdcSigAction(const action: pointer):boolean;
+var oa,na : psigactionrec;
+begin
+result:=false;
+new(oa);
+new(na);
+na^.sa_Handler:=SigActionHandler(action);
+fillchar(na^.Sa_Mask,sizeof(na^.sa_mask),#0);
+na^.Sa_Flags:=0;
+{$ifdef Linux}
+na^.Sa_Restorer:=Nil;
+{$endif}
+fpSigAction(SIGHUP,na,oa);
+if fpSigAction(SIGTerm,na,oa)<>0 then
+   result:=true;
+Dispose(oa);
+Dispose(na);
 end;
 {$endif}
 
