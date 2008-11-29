@@ -56,6 +56,10 @@ msgstr "Informazioni su..."
 msgid "About %s"
 msgstr "Informazioni su %s"
 
+#: u_translation.rsaction
+msgid "Action"
+msgstr ""
+
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "Tempo attuale di sistema"
@@ -1779,6 +1783,10 @@ msgstr "Ore, minuti, secondi"
 #: u_translation.rshttpproxy
 msgid "HTTP Proxy"
 msgstr "Proxy HTTP"
+
+#: u_translation.rsiconclickact
+msgid "Icon Click Action"
+msgstr ""
 
 #: u_translation.rsiconsize
 msgid "Icon Size"

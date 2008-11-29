@@ -1127,6 +1127,8 @@ resourcestring
   rsSmallStars = 'Small stars';
   rsBigStars = 'Big stars';
   rsResetChartAn = 'Reset chart and options';
+  rsIconClickAct = 'Icon Click Action';
+  rsAction = 'Action';
 
 implementation
 
