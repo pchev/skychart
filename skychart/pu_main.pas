@@ -656,6 +656,9 @@ type
     procedure ApplyConfigInternet(Sender: TObject);
     procedure FirstSetup;
     procedure ShowReleaseNotes(shownext:boolean);
+    function Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
+    function SaveChart(fn: string): string;
+    function OpenChart(fn: string): string;
   {$ifdef win32}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -931,32 +934,48 @@ begin
    MultiDoc1.ActiveChild.close;
 end;
 
+function Tf_main.SaveChart(fn: string): string;
+begin
+if (fn<>'')and(MultiDoc1.ActiveObject is Tf_chart) then begin
+  SaveChartConfig(UTF8ToSys(fn),MultiDoc1.ActiveChild);
+  result:=msgOK;
+end else
+  result:=msgFailed;
+end;
+
 procedure Tf_main.FileSaveAs1Execute(Sender: TObject);
 begin
 Savedialog.DefaultExt:='cdc3';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
 savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 savedialog.Title:=rsSaveTheCurre;
-if MultiDoc1.ActiveObject is Tf_chart then
-  if SaveDialog.Execute then SaveChartConfig(UTF8ToSys(SaveDialog.Filename),MultiDoc1.ActiveChild);
+if SaveDialog.Execute then SaveChart(SaveDialog.Filename);
+end;
+
+function Tf_main.OpenChart(fn: string): string;
+var nam: string;
+    p: integer;
+begin
+if FileExists(fn) then begin
+ cfgp.Assign(def_cfgplot);
+ cfgs.Assign(def_cfgsc);
+ ReadChartConfig(UTF8ToSys(fn),true,false,cfgp,cfgs);
+ nam:=stringreplace(extractfilename(fn),blank,'_',[rfReplaceAll]);
+ p:=pos('.',nam);
+ if p>0 then nam:=copy(nam,1,p-1);
+ CreateChild(GetUniqueName(nam,false) ,false,cfgs,cfgp);
+ result:=msgOK;
+end else
+ result:=msgNotFound;
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
-var nam: string;
-    p: integer;
 begin
 if OpenDialog.InitialDir='' then OpenDialog.InitialDir:=privatedir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 OpenDialog.Title:=rsOpenAChart;
-  if OpenDialog.Execute then begin
-    cfgp.Assign(def_cfgplot);
-    cfgs.Assign(def_cfgsc);
-    ReadChartConfig(UTF8ToSys(OpenDialog.FileName),true,false,cfgp,cfgs);
-    nam:=stringreplace(extractfilename(OpenDialog.FileName),blank,'_',[rfReplaceAll]);
-    p:=pos('.',nam);
-    if p>0 then nam:=copy(nam,1,p-1);
-    CreateChild(GetUniqueName(nam,false) ,false,cfgs,cfgp);
-  end;
+if OpenDialog.Execute then
+    OpenChart(OpenDialog.FileName);
 end;
 
 procedure Tf_main.FormActivate(Sender: TObject);
@@ -1063,7 +1082,7 @@ try
  catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names'),Lang);
  f_search.cfgshr:=catalog.cfgshr;
- f_search.cfgsc:=def_cfgsc;
+ f_search.showpluto:=def_cfgsc.ShowPluto;
  f_search.Init;
 {$ifdef trace_debug}
  WriteTrace('Connect DB');
@@ -2298,11 +2317,27 @@ end;
 end;
 
 procedure Tf_main.Search1Execute(Sender: TObject);
+var ok: string;
+begin
+ formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
+ f_search.InitPlanet;
+ repeat
+   f_search.showmodal;
+   if f_search.modalresult=mrOk then begin
+      ok:=Find(f_search.SearchKind,f_search.Num,f_search.ra,f_search.de);
+      if ok<>msgOK then
+        ShowError(Format(rsNotFoundMayb, [f_search.Num, crlf]) );
+   end;
+ until (ok=msgOK) or (f_search.ModalResult<>mrOk);
+end;
+
+function Tf_main.Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
 var ok: Boolean;
     ar1,de1 : Double;
     i : integer;
     chart:TForm;
 begin
+result:=msgFailed;
 chart:=nil; ok:=false;
 if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject
  else
@@ -2312,28 +2347,22 @@ if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject
       break;
    end;
 if chart is Tf_chart then with chart as Tf_chart do begin
-   formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
-   f_search.cfgsc:=sc.cfgsc;
-   f_search.InitPlanet;
-   repeat
-   f_search.showmodal;
-   if f_search.modalresult=mrOk then begin
-      case f_search.SearchKind of
-      0  : ok:=catalog.SearchNebulae(f_search.Num,ar1,de1) ;
+      case kind of
+      0  : ok:=catalog.SearchNebulae(num,ar1,de1) ;
       1  : begin
-           ar1:=f_search.ra;
-           de1:=f_search.de;
+           ar1:=def_ra;
+           de1:=def_de;
            ok:=true;
            end;
-      2  : ok:=catalog.SearchStar(f_search.Num,ar1,de1) ;
-      3  : ok:=catalog.SearchStar(f_search.Num,ar1,de1) ;
-      4  : ok:=catalog.SearchVarStar(f_search.Num,ar1,de1) ;
-      5  : ok:=catalog.SearchDblStar(f_search.Num,ar1,de1) ;
-      6  : ok:=planet.FindCometName(trim(f_search.Num),ar1,de1,sc.cfgsc);
-      7  : ok:=planet.FindAsteroidName(trim(f_search.Num),ar1,de1,sc.cfgsc);
-      8  : ok:=planet.FindPlanetName(trim(f_search.Num),ar1,de1,sc.cfgsc);
-      9  : ok:=catalog.SearchConstellation(f_search.Num,ar1,de1);
-      10 : ok:=catalog.SearchLines(f_search.Num,ar1,de1) ;
+      2  : ok:=catalog.SearchStar(num,ar1,de1) ;
+      3  : ok:=catalog.SearchStar(num,ar1,de1) ;
+      4  : ok:=catalog.SearchVarStar(num,ar1,de1) ;
+      5  : ok:=catalog.SearchDblStar(num,ar1,de1) ;
+      6  : ok:=planet.FindCometName(trim(num),ar1,de1,sc.cfgsc);
+      7  : ok:=planet.FindAsteroidName(trim(num),ar1,de1,sc.cfgsc);
+      8  : ok:=planet.FindPlanetName(trim(num),ar1,de1,sc.cfgsc);
+      9  : ok:=catalog.SearchConstellation(num,ar1,de1);
+      10 : ok:=catalog.SearchLines(num,ar1,de1) ;
       else ok:=false;
       end;
       if ok then begin
@@ -2343,24 +2372,32 @@ if chart is Tf_chart then with chart as Tf_chart do begin
         if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc);
         sc.movetoradec(ar1,de1);
         Refresh;
-        if sc.cfgsc.fov>0.17 then sc.FindatRaDec(ar1,de1,0.0005,true)
-                             else sc.FindatRaDec(ar1,de1,0.00005,true);
+        if sc.cfgsc.fov>0.17 then ok:=sc.FindatRaDec(ar1,de1,0.0005,true)
+                             else ok:=sc.FindatRaDec(ar1,de1,0.00005,true);
+        if not ok then begin  // object not visible with current chart setting
+          sc.cfgsc.FindName:=Num;
+          sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+blank+tab+Num+tab+''+rsNonVisibleSe+'';
+          sc.cfgsc.FindRA:=ar1;
+          sc.cfgsc.FindDec:=de1;
+          sc.cfgsc.FindSize:=0;
+          sc.cfgsc.FindPM:=false;
+          sc.cfgsc.FindOK:=true;
+        end;
         ShowIdentLabel;
         f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
-        if f_search.SearchKind in [0,2,3,4,5,6,7,8] then begin
-          i:=quicksearch.Items.IndexOf(f_search.Num);
+        if kind in [0,2,3,4,5,6,7,8] then begin
+          i:=quicksearch.Items.IndexOf(num);
           if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
           if i>=0 then quicksearch.Items.Delete(i);
-          quicksearch.Items.Insert(0,f_search.Num);
+          quicksearch.Items.Insert(0,num);
           quicksearch.ItemIndex:=0;
         end;
+        result:=msgOK;
       end
       else begin
-        ShowError(Format(rsNotFoundMayb, [f_search.Num, crlf]) );
+        result:=msgNotFound;
       end;
    end;
-   until ok or (f_search.ModalResult<>mrOk);
-end;
 end;
 
 procedure Tf_main.GetChartConfig(csc:Tconf_skychart);
@@ -5331,9 +5368,9 @@ case n of
  6 : result:=msgOK+blank+P1L1.Caption;
  7 : result:=msgOK+blank+P0L1.Caption;
  8 : result:=msgOK+blank+topmsg;
- 9 :  ;// find
- 10 : ;// save
- 11 : ;// load
+ 9 : result:=Find(StrToIntDef(arg[1],99),arg[2]);
+ 10 : result:=SaveChart(arg[1]);
+ 11 : result:=OpenChart(arg[1]);
  12 : result:=HelpCmd(trim(uppercase(arg[1])));
  13 : Close;
  14 : begin ResetDefaultChartExecute(nil); result:=msgOK; end;

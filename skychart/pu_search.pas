@@ -137,7 +137,7 @@ type
     ra,de: double;
     SearchKind : integer;
     cfgshr: Tconf_shared;
-    cfgsc:  Tconf_skychart;
+    showpluto: boolean;
     procedure SetLang;
     function SearchNebName(Num:string; var ar1,de1: double): boolean;
   end;
@@ -440,7 +440,7 @@ begin
 PlanetBox.Clear;
 for i:=1 to 11 do begin
   if i=3 then continue;
-  if (i=9) and (not cfgsc.ShowPluto) then continue;
+  if (i=9) and (not ShowPluto) then continue;
   PlanetBox.Items.Add(pla[i]);
 end;
 PlanetBox.ItemIndex:=0;
