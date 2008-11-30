@@ -27,6 +27,11 @@ $conf['savedir'] = '/home/www/ap-i/web/skychart/data';
 - Update the new content
 ------------------------
 
+erase /data/cache
+
+cd /home/www/ap-i/web/skychart/data/cache
+rm -rf *
+
 erase + download /data/pages /data/meta /data/media + chmod
 
 cd /home/www/ap-i/web/skychart/data
@@ -38,11 +43,6 @@ chmod -R 777 *
 
 - export content
 ----------------
-
-erase /data/cache
-
-cd /home/www/ap-i/web/skychart/data/cache
-rm -rf *
 
 erase the old doc_en, doc_fr, ...
 
@@ -57,4 +57,8 @@ Update getdoc.sh for new languages
 
 ./getdoc.sh
 
+Make the zip for distribution
 
+./zipdoc.sh
+
+reset /etc/hosts
