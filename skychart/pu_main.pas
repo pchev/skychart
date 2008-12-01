@@ -1344,7 +1344,7 @@ if fileexists(configfile) then begin
   try
   buf:=inif.ReadString('main','AppDir',appdir);
   if Directoryexists(buf) then appdir:=buf;
-  privatedir:=inif.ReadString('main','PrivateDir',privatedir);
+  privatedir:=utf8tosys(inif.ReadString('main','PrivateDir',privatedir));
   finally
    inif.Free;
   end;
@@ -4084,7 +4084,7 @@ cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
 DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
 cfgm.dbhost:=ReadString(section,'dbhost',cfgm.dbhost);
 cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
-cfgm.db:=ReadString(section,'db',cfgm.db);
+cfgm.db:=utf8tosys(ReadString(section,'db',cfgm.db));
 cfgm.dbuser:=ReadString(section,'dbuser',cfgm.dbuser);
 cryptedpwd:=hextostr(ReadString(section,'dbpass',cfgm.dbpass));
 cfgm.dbpass:=DecryptStr(cryptedpwd,encryptpwd);
@@ -4183,7 +4183,7 @@ f_getdss.cfgdss.dssplateprompt:=ReadBool(section,'dssplateprompt',true);
 f_getdss.cfgdss.dssmaxsize:=ReadInteger(section,'dssmaxsize',2048);
 f_getdss.cfgdss.dssdir:=ReadString(section,'dssdir',slash('cat')+'RealSky');
 f_getdss.cfgdss.dssdrive:=ReadString(section,'dssdrive',default_dssdrive);
-f_getdss.cfgdss.dssfile:=SysToUTF8(slash(privatedir)+slash('pictures')+'$temp.fit');
+f_getdss.cfgdss.dssfile:=slash(privatedir)+slash('pictures')+'$temp.fit';
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:=ReadString(section,'DSSurlName'+inttostr(i),f_getdss.cfgdss.DSSurl[i,0]);
   f_getdss.cfgdss.DSSurl[i,1]:=ReadString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
