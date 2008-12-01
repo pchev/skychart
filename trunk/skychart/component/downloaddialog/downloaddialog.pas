@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  LResources, blcksock, HTTPsend, FTPSend,
+  LResources, blcksock, HTTPsend, FTPSend, FileUtil,
   Classes, SysUtils, Dialogs, Buttons, Graphics, Forms, Controls, StdCtrls, ExtCtrls;
 
 type
@@ -176,7 +176,7 @@ begin
   with filetxt do begin
     Parent:=DF;
     width:=400;
-    text:=Ffile;
+    text:=systoutf8(Ffile);
     EditLabel.Caption:=' to file:';
     top:=Editlabel.Height+urltxt.Top+urltxt.Height+4;
     left:=8;
