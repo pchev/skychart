@@ -48,7 +48,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # tar
   cd $builddir
-  tar cvjf skychart-3.0.1.5-linux.tar.bz2 *
+  tar cvjf skychart-3.0.1.5-$currentrev-linux.tar.bz2 *
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -60,6 +60,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   mv lib debian/skychart/usr/
   mv share debian/skychart/usr/
   cd debian
+  sed -i "/Version:/ s/-1/-$currentrev/" skychart/DEBIAN/control
   fakeroot dpkg-deb --build skychart .
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
@@ -70,6 +71,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   cd $builddir
   mv debian/skychart/usr/* rpm/skychart/usr/
   cd rpm
+  sed -i "/Release:/ s/1/$currentrev/" SPECS/skychart.spec
   fakeroot rpmbuild  --define "_topdir $builddir/rpm/" -bb SPECS/skychart.spec
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/i386/skychart*.rpm $wd
@@ -82,8 +84,8 @@ if [[ $lastrev -ne $currentrev ]]; then
   cp varobs/varobs $builddir/debug/
   cp varobs/varobs_lpv_bulletin $builddir/debug/
   cd $builddir/debug/
-  tar cvjf bin-linux-debug.tar.bz2 *
-  mv bin-linux-debug.tar.bz2 $wd
+  tar cvjf bin-linux-debug-$currentrev.tar.bz2 *
+  mv bin-*.tar.bz2 $wd
 
   cd $wd
   rm -rf $builddir
@@ -101,11 +103,12 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # zip
   cd $builddir/Data
-  zip -r  skychart-3.0.1.5-windows.zip *
+  zip -r  skychart-3.0.1.5-$currentrev-windows.zip *
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.zip $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
   # exe
+  sed -i "/OutputBaseFilename/ s/windows/$currentrev-windows/" cdcv3.iss
   wine "$innosetup" "$issscript"
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv $builddir/skychart*.exe $wd
@@ -117,8 +120,8 @@ if [[ $lastrev -ne $currentrev ]]; then
   cp varobs/varobs.exe $builddir/debug/
   cp varobs/varobs_lpv_bulletin.exe $builddir/debug/
   cd $builddir/debug/
-  zip bin-windows-debug.zip *
-  mv bin-windows-debug.zip $wd
+  zip bin-windows-debug-$currentrev.zip *
+  mv bin-*.zip $wd
 
   cd $wd
   rm -rf $builddir
