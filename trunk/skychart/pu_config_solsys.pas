@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, unzip,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
-  downloaddialog, EditBtn, Process, LazHelpHTML;
+  downloaddialog, EditBtn, Process, LazHelpHTML, FileUtil;
 
 type
 
@@ -564,7 +564,7 @@ begin
     end;
  end;
  if ok then begin
-    mpcfile.Text:=fn;
+    mpcfile.Text:=systoutf8(fn);
     application.ProcessMessages;
     LoadMPCClick(Sender);
  end;
@@ -659,7 +659,7 @@ begin
     end;
  end;
  if ok then begin
-    comfile.Text:=fn;
+    comfile.Text:=systoutf8(fn);
     application.ProcessMessages;
     LoadcomClick(Sender);
  end;
@@ -755,7 +755,7 @@ procedure Tf_config_solsys.LoadcomClick(Sender: TObject);
 begin
 if Sender=LoadCom then MemoCom.Clear;
 screen.cursor:=crHourGlass;
-cdb.LoadCometFile(comfile.text,MemoCom);
+cdb.LoadCometFile(utf8tosys(comfile.text),MemoCom);
 memocom.SelStart:=length(memocom.Text)-1;
 UpdComList;
 screen.cursor:=crDefault;
@@ -831,7 +831,7 @@ var ok:boolean;
 begin
 if Sender=LoadMPC then MemoMpc.Clear;
 screen.cursor:=crHourGlass;
-ok:=cdb.LoadAsteroidFile(mpcfile.text,astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
+ok:=cdb.LoadAsteroidFile(utf8tosys(mpcfile.text),astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
 UpdAstList;
 screen.cursor:=crDefault;
 if ok then begin
