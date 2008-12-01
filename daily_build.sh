@@ -108,6 +108,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   mv skychart*.zip $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
   # exe
+  cd $builddir
   sed -i "/OutputBaseFilename/ s/windows/$currentrev-windows/" cdcv3.iss
   wine "$innosetup" "$issscript"
   if [[ $? -ne 0 ]]; then exit 1;fi
