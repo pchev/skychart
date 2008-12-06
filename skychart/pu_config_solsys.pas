@@ -755,7 +755,7 @@ procedure Tf_config_solsys.LoadcomClick(Sender: TObject);
 begin
 if Sender=LoadCom then MemoCom.Clear;
 screen.cursor:=crHourGlass;
-cdb.LoadCometFile(utf8tosys(comfile.text),MemoCom);
+cdb.LoadCometFile(SafeUTF8ToSys(comfile.text),MemoCom);
 memocom.SelStart:=length(memocom.Text)-1;
 UpdComList;
 screen.cursor:=crDefault;
@@ -831,7 +831,7 @@ var ok:boolean;
 begin
 if Sender=LoadMPC then MemoMpc.Clear;
 screen.cursor:=crHourGlass;
-ok:=cdb.LoadAsteroidFile(utf8tosys(mpcfile.text),astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
+ok:=cdb.LoadAsteroidFile(SafeUTF8ToSys(mpcfile.text),astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
 UpdAstList;
 screen.cursor:=crDefault;
 if ok then begin

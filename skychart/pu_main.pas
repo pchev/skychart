@@ -937,7 +937,7 @@ end;
 function Tf_main.SaveChart(fn: string): string;
 begin
 if (fn<>'')and(MultiDoc1.ActiveObject is Tf_chart) then begin
-  SaveChartConfig(UTF8ToSys(fn),MultiDoc1.ActiveChild);
+  SaveChartConfig(SafeUTF8ToSys(fn),MultiDoc1.ActiveChild);
   result:=msgOK;
 end else
   result:=msgFailed;
@@ -959,7 +959,7 @@ begin
 if FileExists(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
- ReadChartConfig(UTF8ToSys(fn),true,false,cfgp,cfgs);
+ ReadChartConfig(SafeUTF8ToSys(fn),true,false,cfgp,cfgs);
  nam:=stringreplace(extractfilename(fn),blank,'_',[rfReplaceAll]);
  p:=pos('.',nam);
  if p>0 then nam:=copy(nam,1,p-1);
@@ -1339,12 +1339,13 @@ configfile:=slash(privatedir)+configfile;
 
 if ForceConfig<>'' then Configfile:=ForceConfig;
 
+
 if fileexists(configfile) then begin
   inif:=TMeminifile.create(configfile);
   try
   buf:=inif.ReadString('main','AppDir',appdir);
   if Directoryexists(buf) then appdir:=buf;
-  privatedir:=utf8tosys(inif.ReadString('main','PrivateDir',privatedir));
+  privatedir:=SafeUTF8ToSys(inif.ReadString('main','PrivateDir',privatedir));
   finally
    inif.Free;
   end;
@@ -4084,7 +4085,7 @@ cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
 DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
 cfgm.dbhost:=ReadString(section,'dbhost',cfgm.dbhost);
 cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
-cfgm.db:=utf8tosys(ReadString(section,'db',cfgm.db));
+cfgm.db:=SafeUTF8ToSys(ReadString(section,'db',cfgm.db));
 cfgm.dbuser:=ReadString(section,'dbuser',cfgm.dbuser);
 cryptedpwd:=hextostr(ReadString(section,'dbpass',cfgm.dbpass));
 cfgm.dbpass:=DecryptStr(cryptedpwd,encryptpwd);
@@ -5689,7 +5690,7 @@ for i:=0 to Params.Count-1 do begin
       p:=pos(' ',parms);
       if p>0 then begin
          buf:=copy(parms,p+1,999);
-         ForceConfig:=trim(buf);
+         ForceConfig:=SafeUTF8ToSys(trim(buf));
       end;
    end else if cmd='--daemon' then begin
       showsplash:=false;
