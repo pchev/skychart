@@ -1,7 +1,7 @@
 # translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-11-09 20:30+0100\n"
+"PO-Revision-Date: 2008-12-05 18:17+0100\n"
 "Last-Translator: Mattia\n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
@@ -58,7 +58,7 @@ msgstr "Informazioni su %s"
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr ""
+msgstr "Azione"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -314,7 +314,7 @@ msgstr "Sotto l'orizzonte"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr ""
+msgstr "Stelle grandi"
 
 #: u_translation.rsbii
 msgid "BII"
@@ -1786,7 +1786,7 @@ msgstr "Proxy HTTP"
 
 #: u_translation.rsiconclickact
 msgid "Icon Click Action"
-msgstr ""
+msgstr "Azione Click su Icona"
 
 #: u_translation.rsiconsize
 msgid "Icon Size"
@@ -3226,7 +3226,7 @@ msgstr "Reimposta cartina"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr ""
+msgstr "Reset cartina e impostazioni"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3634,7 +3634,7 @@ msgstr "Muovi"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr ""
+msgstr "Stelle piccole"
 
 #: u_translation.rssminute
 msgid "M"
