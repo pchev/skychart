@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode delphi}{$H+}
 interface
 
-uses Math, SysUtils, Classes, u_constant, LCLType,
+uses Math, SysUtils, Classes, u_constant, LCLType, FileUtil,
   {$ifdef win32}
     Windows,
   {$endif}
@@ -106,6 +106,7 @@ procedure GetTranslationString(form: TForm; var f: textfile);
 function CondUTF8Decode(v:string):string;
 function CondUTF8Encode(v:string):string;
 function GreekSymbolUtf8(v:string):string;
+function SafeUTF8ToSys(v:string):string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -167,6 +168,12 @@ end;
 {$else}
 result:=v;
 {$endif}
+end;
+
+function SafeUTF8ToSys(v:string):string;
+begin
+result:=UTF8ToSys(v);
+if result='' then result:=v;
 end;
 
 Function mm2pi(l,PrinterResolution : single): integer;
