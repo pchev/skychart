@@ -4240,6 +4240,16 @@ if Config_Version < '3.0.1.3d' then begin
   f_getdss.cfgdss.DSSurl[9,1]:=URL_DSS9;
   SaveDefault;
 end;
+if Config_Version < '3.0.1.5f' then begin
+{$ifdef unix}
+   cfgm.PrintCmd1:=DefaultPrintCmd1;
+   cfgm.PrintCmd2:=DefaultPrintCmd2;
+{$endif}
+{$ifndef darwin}
+   LinuxDesktop:=0;
+   OpenFileCMD:='xdg-open';
+{$endif}
+end;
 end;
 
 procedure Tf_main.SaveVersion;

@@ -1,5 +1,14 @@
 Version 3.0.1.5 SVN  Notes de la version
 
+Changement du 6 décembre:
+
+Corrige l'interface avec Audela.
+Corrige divers problèmes si le répertoire utilisateur contient des accents.
+Mise à jour des zones horaires pour Windows. Utilise les zone horaires du système sous Linux 
+Tient compte du système de coordonnées du télescope.
+Nouvelles commandes serveur et options de ligne de commandes.
+Utilise FreeDesktop xdg-open par défaut pour ouvrir un fichier sous Linux.
+
 Changement du 9 novembre:
 
 Nouveau programme cdcicon qui affiche l'horloge dans la barre de tâche. Il permet aussi d'ouvrir directement le calendrier ou Cartes du Ciel. Faire un clic droit pour le menu.
