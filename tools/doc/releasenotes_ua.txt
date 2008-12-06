@@ -1,5 +1,14 @@
 Коментарі до версії 3.0.1.5 SVN
 
+December 6 change:
+
+Fix the interface with Audela software.
+Fix various problem if the user directory contain national character in path name.
+Update the time zone information for Windows. On Unix use the system time zone.
+Take account for the telescope coordinates system.
+New server commands and command line options.
+Use FreeDesktop xdg-open by default to open a file on Linux.
+
 Зміни 9 листопада:
 
 Нова програма cdcicon, котра показує Годинник на панелі завдань. Із неї безпосередньо можна запустити Календар або Зоряні Мапи, клацнувши іконку правою клавішею мишки, щоб показати меню.

@@ -36,7 +36,7 @@ type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:no
      TSkycolor = array[0..7]of Tcolor;
 
 const cdcversion = 'Version 3 beta 0.1.5 svn';
-      cdcver     = '3.0.1.5e';
+      cdcver     = '3.0.1.5f';
       cdccpy = 'Copyright (C) 2002-2008 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,' ;
@@ -273,8 +273,8 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultPrivateDir='~/cartes_du_ciel';
       Defaultconfigfile='~/.cartesduciel.ini';
       SharedDir='../share/apps/skychart';
-      DefaultPrintCmd1='kghostview';
-      DefaultPrintCmd2='gimp';
+      DefaultPrintCmd1='xdg-open';
+      DefaultPrintCmd2='xdg-open';
       DefaultTmpDir='tmp';
       Default_dssdrive='/mnt/cdrom';
       DefaultVarObs='varobs';
@@ -288,8 +288,8 @@ const cdcversion = 'Version 3 beta 0.1.5 svn';
       DefaultPrivateDir='~/cartes_du_ciel';
       Defaultconfigfile='~/.cartesduciel.ini';
       SharedDir='/usr/share/skychart';
-      DefaultPrintCmd1='kghostview';
-      DefaultPrintCmd2='gimp';
+      DefaultPrintCmd1='open';
+      DefaultPrintCmd2='open';
       DefaultTmpDir='tmp';
       Default_dssdrive='/Volumes';
       DefaultVarObs='varobs';
@@ -617,13 +617,13 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
      isWin98: Boolean;
      DisplayIs32bpp: Boolean;
      ThemePath:string ='data/Themes';
-     LinuxDesktop: integer = 0;  // KDE=0, GNOME=1, Other=2
+     LinuxDesktop: integer = 0;  // FreeDesktop=0, KDE=1, GNOME=2, Other=3
      crRetic: TCursor = 5;
      Params : TStringList;
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //
 {$else}
-     OpenFileCMD:string = 'kfmclient exec';   // default KDE
+     OpenFileCMD:string = 'xdg-open';   // default FreeDesktop.org
 {$endif}
 {$ifdef unix}
      tracefile:string =''; // to stdout
