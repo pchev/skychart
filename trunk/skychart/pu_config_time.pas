@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, u_projection,
+uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
   ButtonPanel, jdcalendar, LazHelpHTML;
@@ -474,7 +474,7 @@ procedure Tf_config_time.TimeChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.curtime:=t_hour.value+t_min.value/60+t_sec.value/3600;
-csc.tz.Date:=EncodeDate(csc.curyear,csc.curmonth,csc.curday)+csc.curtime/secday;
+csc.tz.JD:=jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime/secday);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
 tzlabel.caption:=csc.tz.ZoneName;
 LockChange:=true;
@@ -486,11 +486,13 @@ procedure Tf_config_time.BitBtn4Click(Sender: TObject);
 var y,m,d,h,n,s,ms : word;
 begin
  ADBC.itemindex:=0;
- decodedate(csc.tz.NowLocalTime,y,m,d);
+ if (csc.curyear>cu_tz.minYear)and(csc.curyear<cu_tz.maxYear) then begin
+   decodedate(csc.tz.NowLocalTime,y,m,d);
+   d_year.value:=y;
+   d_month.value:=m;
+   d_day.value:=d;
+ end;
  decodeTime(csc.tz.NowLocalTime,h,n,s,ms);
- d_year.value:=y;
- d_month.value:=m;
- d_day.value:=d;
  t_hour.value:=h;
  t_min.value:=n;
  t_sec.value:=s;
@@ -502,11 +504,13 @@ procedure Tf_config_time.Button5Click(Sender: TObject);
 var y,m,d,h,n,s,ms : word;
 begin
  csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,0);
- decodedate(csc.tz.Date,y,m,d);
+ if (csc.curyear>cu_tz.minYear)and(csc.curyear<cu_tz.maxYear) then begin
+   decodedate(csc.tz.Date,y,m,d);
+   d_year.value:=y;
+   d_month.value:=m;
+   d_day.value:=d;
+ end;
  decodeTime(csc.tz.Date,h,n,s,ms);
- d_year.value:=y;
- d_month.value:=m;
- d_day.value:=d;
  t_hour.value:=h;
  t_min.value:=n;
  t_sec.value:=s;
@@ -518,11 +522,13 @@ procedure Tf_config_time.Button6Click(Sender: TObject);
 var y,m,d,h,n,s,ms : word;
 begin
  csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.timezone);
- decodedate(csc.tz.Date,y,m,d);
+ if (csc.curyear>cu_tz.minYear)and(csc.curyear<cu_tz.maxYear) then begin
+   decodedate(csc.tz.Date,y,m,d);
+   d_year.value:=y;
+   d_month.value:=m;
+   d_day.value:=d;
+ end;
  decodeTime(csc.tz.Date,h,n,s,ms);
- d_year.value:=y;
- d_month.value:=m;
- d_day.value:=d;
  t_hour.value:=h;
  t_min.value:=n;
  t_sec.value:=s;
