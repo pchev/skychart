@@ -129,6 +129,12 @@ type
 const
      secday=24*3600;
      JDUnixDelta=2440587.5;  // 1.1.1970 0h
+     minJD=2415750;// 1.1.1902 risk of 32bit unixtime underflow
+     minYear=1904;   // next leap year after underflow
+     maxJD=2465424;// 1.1.2038 risk of 32bit unixtime overflow
+     maxYear=2036;   // last leap year before overflow
+     minDate=732;    // 1.1.1902 risk of 32bit unixtime underflow
+     maxDate=50406;  // 1.1.2038 risk of 32bit unixtime overflow
 
 implementation
 
@@ -459,10 +465,6 @@ end;
 procedure TCdCTimeZone.SetDate(value: TDateTime);
 var Year, Month, Day: word;
     timer:longint;
-const minDate=732;    // 1.1.1902 risk of 32bit unixtime underflow
-      minYear=1904;   // next leap year after underflow
-      maxDate=50406;  // 1.1.2038 risk of 32bit unixtime overflow
-      maxYear=2036;   // last leap year before overflow
 begin
 if value<minDate then begin
    decodedate(value,Year, Month, Day);
@@ -488,17 +490,13 @@ procedure TCdCTimeZone.SetJD(value: double);
 var Year, Month, Day: integer;
     Hour: double;
     timer:longint;
-const minDate=2415750;// 1.1.1902 risk of 32bit unixtime underflow
-      minYear=1904;   // next leap year after underflow
-      maxDate=2465424;// 1.1.2038 risk of 32bit unixtime overflow
-      maxYear=2036;   // last leap year before overflow
 begin
-if value<minDate then begin
+if value<minJD then begin
    djd(value,Year, Month, Day, Hour);
    Year:=minYear;
    value:=cjd(Year, Month, Day, Hour);
 end;
-if value>maxDate then begin
+if value>maxJD then begin
    djd(value,Year, Month, Day, Hour);
    Year:=maxYear;
    value:=cjd(Year, Month, Day, Hour);
