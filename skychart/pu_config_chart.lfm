@@ -3,7 +3,7 @@ object f_config_chart: Tf_config_chart
   Height = 567
   Top = 86
   Width = 510
-  ActiveControl = CoordType.RadioButton0
+  ActiveControl = StarBox
   Caption = 'Charts'
   ClientHeight = 567
   ClientWidth = 510
@@ -11,10 +11,11 @@ object f_config_chart: Tf_config_chart
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ParentFont = False
   LCLVersion = '0.9.27'
   object MainPanel: TPanel
+    Left = 0
     Height = 517
+    Top = 0
     Width = 510
     Align = alClient
     ClientHeight = 517
@@ -28,16 +29,18 @@ object f_config_chart: Tf_config_chart
       Width = 508
       Align = alClient
       OnPageChanged = Notebook1PageChanged
-      PageIndex = 0
+      PageIndex = 3
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 500
-        ClientHeight = 453
+        ClientWidth = 504
+        ClientHeight = 457
         object Label31: TLabel
-          Height = 16
-          Width = 70
+          Left = 0
+          Height = 15
+          Top = 0
+          Width = 76
           Caption = 'Chart Setting'
           ParentColor = False
         end
@@ -81,9 +84,10 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 39
-            ClientWidth = 413
+            ClientHeight = 42
+            ClientWidth = 415
             Columns = 2
+            Ctl3D = False
             ItemIndex = 0
             Items.Strings = (
               'Mean position'
@@ -98,12 +102,12 @@ object f_config_chart: Tf_config_chart
             Hint = '-20000..20000'
             Top = 12
             Width = 89
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
             OnChange = equinox2Change
+            Ctl3D = False
+            Value = 0
             MinValue = -20000
             MaxValue = 20000
             Digits = 8
@@ -115,14 +119,15 @@ object f_config_chart: Tf_config_chart
             Top = 56
             Width = 417
             Caption = 'Stars proper motion options (if available in the catalog)'
-            ClientHeight = 39
-            ClientWidth = 413
+            ClientHeight = 42
+            ClientWidth = 415
+            Ctl3D = False
             TabOrder = 2
             object PMBox: TCheckBox
               Left = 6
-              Height = 21
+              Height = 22
               Top = 7
-              Width = 373
+              Width = 397
               Caption = 'Use the proper motion to correct the position for the given epoch'
               OnClick = PMBoxClick
               TabOrder = 0
@@ -134,12 +139,12 @@ object f_config_chart: Tf_config_chart
             Hint = '-20000..20000'
             Top = 12
             Width = 89
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
             OnChange = epoch2Change
+            Ctl3D = False
+            Value = 0
             MinValue = -20000
             MaxValue = 20000
             Digits = 8
@@ -161,9 +166,10 @@ object f_config_chart: Tf_config_chart
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 78
-          ClientWidth = 446
+          ClientHeight = 81
+          ClientWidth = 448
           Columns = 2
+          Ctl3D = False
           ItemIndex = 0
           Items.Strings = (
             'Equatorial Coordinates'
@@ -176,9 +182,9 @@ object f_config_chart: Tf_config_chart
         end
         object ExpertMode: TCheckBox
           Left = 21
-          Height = 21
+          Height = 22
           Top = 357
-          Width = 94
+          Width = 96
           Caption = 'Expert mode'
           OnClick = ExpertModeClick
           TabOrder = 3
@@ -206,8 +212,9 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 121
-            ClientWidth = 436
+            ClientHeight = 124
+            ClientWidth = 438
+            Ctl3D = False
             ItemIndex = 0
             Items.Strings = (
               'Apparent'
@@ -223,9 +230,11 @@ object f_config_chart: Tf_config_chart
       object Page2: TPage
         Caption = 'Page2'
         ClientWidth = 504
-        ClientHeight = 434
+        ClientHeight = 433
         object Label30: TLabel
+          Left = 0
           Height = 20
+          Top = 0
           Width = 123
           Caption = 'Field of Vision Setting'
           ParentColor = False
@@ -359,11 +368,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 151
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -374,11 +384,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 179
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -389,11 +400,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 207
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -404,11 +416,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 235
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -419,11 +432,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 263
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 12
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -434,11 +448,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 291
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -449,11 +464,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 319
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 16
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -464,11 +480,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 347
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 18
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -479,11 +496,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 375
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 20
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -493,11 +511,12 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 123
           Width = 60
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -507,13 +526,14 @@ object f_config_chart: Tf_config_chart
           Hint = '0..360'
           Top = 95
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ParentShowHint = False
           ReadOnly = True
           ShowHint = True
           TabOrder = 0
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
@@ -522,11 +542,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 95
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 1
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft1: TFloatEdit
@@ -534,11 +556,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 123
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 3
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft2: TFloatEdit
@@ -546,11 +570,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 151
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 5
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft3: TFloatEdit
@@ -558,11 +584,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 179
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 7
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft4: TFloatEdit
@@ -570,11 +598,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 207
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 9
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft5: TFloatEdit
@@ -582,11 +612,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 235
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 11
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft6: TFloatEdit
@@ -594,11 +626,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 263
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 13
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft7: TFloatEdit
@@ -606,11 +640,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 291
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 15
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft8: TFloatEdit
@@ -618,11 +654,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 319
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 17
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft9: TFloatEdit
@@ -630,11 +668,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 347
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 19
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft10: TFloatEdit
@@ -642,11 +682,13 @@ object f_config_chart: Tf_config_chart
           Height = 21
           Top = 375
           Width = 60
-          BorderStyle = bsSingle
           Color = clBtnFace
-          ParentColor = False
           ReadOnly = True
           TabOrder = 21
+          Ctl3D = False
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object Button1: TButton
@@ -663,7 +705,7 @@ object f_config_chart: Tf_config_chart
       object Page3: TPage
         Caption = 'Page3'
         ClientWidth = 504
-        ClientHeight = 434
+        ClientHeight = 457
         object Bevel7: TBevel
           Left = 15
           Height = 375
@@ -672,14 +714,16 @@ object f_config_chart: Tf_config_chart
           Shape = bsFrame
         end
         object Label158: TLabel
-          Height = 20
+          Left = 0
+          Height = 15
+          Top = 0
           Width = 101
           Caption = 'Projection Setting'
           ParentColor = False
         end
         object Labelp1: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 104
           Width = 12
           Caption = '1 '
@@ -687,7 +731,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp2: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 132
           Width = 8
           Caption = '2'
@@ -695,7 +739,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp3: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 160
           Width = 8
           Caption = '3'
@@ -703,7 +747,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp4: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 188
           Width = 8
           Caption = '4'
@@ -711,7 +755,7 @@ object f_config_chart: Tf_config_chart
         end
         object Label165: TLabel
           Left = 27
-          Height = 20
+          Height = 15
           Top = 43
           Width = 75
           Alignment = taRightJustify
@@ -720,7 +764,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp0: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 76
           Width = 8
           Caption = '0'
@@ -728,7 +772,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp5: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 216
           Width = 8
           Caption = '5'
@@ -736,7 +780,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp6: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 244
           Width = 8
           Caption = '6'
@@ -744,7 +788,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp7: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 272
           Width = 8
           Caption = '7'
@@ -752,7 +796,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp8: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 300
           Width = 8
           Caption = '8'
@@ -760,7 +804,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp9: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 328
           Width = 8
           Caption = '9'
@@ -768,7 +812,7 @@ object f_config_chart: Tf_config_chart
         end
         object Labelp10: TLabel
           Left = 62
-          Height = 20
+          Height = 15
           Top = 356
           Width = 15
           Caption = '10'
@@ -776,7 +820,7 @@ object f_config_chart: Tf_config_chart
         end
         object Label172: TLabel
           Left = 195
-          Height = 20
+          Height = 15
           Top = 43
           Width = 57
           Caption = 'Projection'
@@ -785,32 +829,40 @@ object f_config_chart: Tf_config_chart
         object ComboBox2: TComboBox
           Tag = 1
           Left = 195
-          Height = 21
+          Height = 27
           Top = 99
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 1
           Text = 'ARC'
         end
         object ComboBox1: TComboBox
           Left = 195
-          Height = 21
+          Height = 27
           Top = 71
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 0
           Text = 'ARC'
@@ -818,16 +870,20 @@ object f_config_chart: Tf_config_chart
         object ComboBox3: TComboBox
           Tag = 2
           Left = 195
-          Height = 21
+          Height = 27
           Top = 127
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 2
           Text = 'ARC'
@@ -835,15 +891,19 @@ object f_config_chart: Tf_config_chart
         object ComboBox4: TComboBox
           Tag = 3
           Left = 195
-          Height = 21
+          Height = 27
           Top = 155
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'CAR'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 3
           Text = 'ARC'
@@ -851,15 +911,19 @@ object f_config_chart: Tf_config_chart
         object ComboBox5: TComboBox
           Tag = 4
           Left = 195
-          Height = 21
+          Height = 27
           Top = 183
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'CAR'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 4
           Text = 'ARC'
@@ -867,16 +931,20 @@ object f_config_chart: Tf_config_chart
         object ComboBox6: TComboBox
           Tag = 5
           Left = 195
-          Height = 21
+          Height = 27
           Top = 211
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 5
           Text = 'ARC'
@@ -884,16 +952,20 @@ object f_config_chart: Tf_config_chart
         object ComboBox7: TComboBox
           Tag = 6
           Left = 195
-          Height = 21
+          Height = 27
           Top = 239
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 6
           Text = 'ARC'
@@ -901,16 +973,20 @@ object f_config_chart: Tf_config_chart
         object ComboBox8: TComboBox
           Tag = 7
           Left = 195
-          Height = 21
+          Height = 27
           Top = 267
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 7
           Text = 'ARC'
@@ -918,16 +994,20 @@ object f_config_chart: Tf_config_chart
         object ComboBox9: TComboBox
           Tag = 8
           Left = 195
-          Height = 21
+          Height = 27
           Top = 295
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 8
           Text = 'ARC'
@@ -935,16 +1015,20 @@ object f_config_chart: Tf_config_chart
         object ComboBox10: TComboBox
           Tag = 9
           Left = 195
-          Height = 21
+          Height = 27
           Top = 323
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 9
           Text = 'ARC'
@@ -952,16 +1036,20 @@ object f_config_chart: Tf_config_chart
         object ComboBox11: TComboBox
           Tag = 10
           Left = 195
-          Height = 21
+          Height = 27
           Top = 352
           Width = 73
+          AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
+          Ctl3D = False
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
             'TAN'
             'SIN'
           )
+          ItemWidth = 0
           OnSelect = ProjectionChange
           TabOrder = 10
           Text = 'ARC'
@@ -970,9 +1058,11 @@ object f_config_chart: Tf_config_chart
       object Page4: TPage
         Caption = 'Page4'
         ClientWidth = 504
-        ClientHeight = 434
+        ClientHeight = 457
         object Label29: TLabel
-          Height = 20
+          Left = 0
+          Height = 15
+          Top = 0
           Width = 112
           Caption = 'Object Filter Setting'
           ParentColor = False
@@ -983,15 +1073,16 @@ object f_config_chart: Tf_config_chart
           Top = 16
           Width = 449
           Caption = 'Stars Filter'
-          ClientHeight = 184
-          ClientWidth = 449
+          ClientHeight = 169
+          ClientWidth = 447
+          Ctl3D = False
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
-            Height = 21
+            Height = 22
             Hint = 'Copy|Copies the selection and puts it on the Clipboard'
             Top = 22
-            Width = 88
+            Width = 89
             Caption = 'Filter stars '
             OnClick = StarBoxClick
             TabOrder = 0
@@ -1014,7 +1105,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 2
               object Label32: TLabel
                 Left = 25
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '1'
@@ -1022,7 +1113,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label33: TLabel
                 Left = 66
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '2'
@@ -1030,7 +1121,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label34: TLabel
                 Left = 107
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '3'
@@ -1038,7 +1129,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label35: TLabel
                 Left = 148
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '4'
@@ -1046,7 +1137,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label36: TLabel
                 Left = 189
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '5'
@@ -1054,7 +1145,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label38: TLabel
                 Left = 230
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '6'
@@ -1062,7 +1153,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label39: TLabel
                 Left = 271
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '7'
@@ -1070,7 +1161,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label40: TLabel
                 Left = 312
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '8'
@@ -1078,7 +1169,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label76: TLabel
                 Left = 353
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 8
                 Caption = '9'
@@ -1086,7 +1177,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label78: TLabel
                 Left = 394
-                Height = 20
+                Height = 15
                 Top = 32
                 Width = 15
                 Caption = '10'
@@ -1094,7 +1185,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label108: TLabel
                 Left = 8
-                Height = 20
+                Height = 15
                 Top = 8
                 Width = 134
                 Caption = 'Field of vision number :'
@@ -1102,7 +1193,7 @@ object f_config_chart: Tf_config_chart
               end
               object Label109: TLabel
                 Left = 8
-                Height = 20
+                Height = 15
                 Top = 48
                 Width = 117
                 Caption = 'Limiting magnitude :'
@@ -1115,12 +1206,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 0
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag1: TFloatEdit
@@ -1130,12 +1222,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 1
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag2: TFloatEdit
@@ -1145,12 +1238,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 2
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag3: TFloatEdit
@@ -1160,12 +1254,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 3
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag4: TFloatEdit
@@ -1175,12 +1270,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 4
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag5: TFloatEdit
@@ -1190,12 +1286,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 5
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag6: TFloatEdit
@@ -1205,12 +1302,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 6
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag7: TFloatEdit
@@ -1220,12 +1318,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 7
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag8: TFloatEdit
@@ -1235,12 +1334,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 8
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag9: TFloatEdit
@@ -1250,12 +1350,13 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 66
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 9
                 OnChange = fsmagChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
             end
@@ -1269,7 +1370,7 @@ object f_config_chart: Tf_config_chart
               TabOrder = 1
               object Label110: TLabel
                 Left = 8
-                Height = 20
+                Height = 15
                 Top = 12
                 Width = 119
                 Caption = 'Naked eye reference'
@@ -1281,20 +1382,21 @@ object f_config_chart: Tf_config_chart
                 Hint = '0..99'
                 Top = 7
                 Width = 40
-                BorderStyle = bsSingle
-                ParentColor = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 0
                 OnChange = fsmagvisChange
+                Ctl3D = False
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
             end
             object StarAutoBox: TCheckBox
               Left = 4
-              Height = 21
+              Height = 22
               Top = 6
-              Width = 79
+              Width = 80
               Caption = 'Automatic'
               OnClick = StarAutoBoxClick
               TabOrder = 0
@@ -1307,12 +1409,13 @@ object f_config_chart: Tf_config_chart
           Top = 208
           Width = 449
           Caption = 'Nebulae Filter'
-          ClientHeight = 200
-          ClientWidth = 449
+          ClientHeight = 185
+          ClientWidth = 447
+          Ctl3D = False
           TabOrder = 1
           object BigNebUnit: TLabel
             Left = 389
-            Height = 20
+            Height = 15
             Top = 15
             Width = 47
             Caption = 'minutes'
@@ -1320,18 +1423,18 @@ object f_config_chart: Tf_config_chart
           end
           object NebBox: TCheckBox
             Left = 9
-            Height = 21
+            Height = 22
             Top = 11
-            Width = 99
+            Width = 100
             Caption = 'Filter nebulae'
             OnClick = NebBoxClick
             TabOrder = 0
           end
           object BigNebBox: TCheckBox
             Left = 157
-            Height = 21
+            Height = 22
             Top = 11
-            Width = 150
+            Width = 151
             Caption = 'Hide object wider than'
             OnClick = BigNebBoxClick
             TabOrder = 1
@@ -1346,7 +1449,7 @@ object f_config_chart: Tf_config_chart
             TabOrder = 3
             object Label48: TLabel
               Left = 8
-              Height = 20
+              Height = 15
               Top = 48
               Width = 115
               Caption = 'Limiting Magnitude :'
@@ -1354,7 +1457,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label49: TLabel
               Left = 8
-              Height = 20
+              Height = 15
               Top = 101
               Width = 156
               Caption = 'Limiting Size (arcminutes) :'
@@ -1362,7 +1465,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label41: TLabel
               Left = 25
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '1'
@@ -1370,7 +1473,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label42: TLabel
               Left = 66
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '2'
@@ -1378,7 +1481,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label43: TLabel
               Left = 107
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '3'
@@ -1386,7 +1489,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label44: TLabel
               Left = 148
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '4'
@@ -1394,7 +1497,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label45: TLabel
               Left = 189
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '5'
@@ -1402,7 +1505,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label46: TLabel
               Left = 230
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '6'
@@ -1410,7 +1513,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label47: TLabel
               Left = 271
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '7'
@@ -1418,7 +1521,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label79: TLabel
               Left = 312
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '8'
@@ -1426,7 +1529,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label80: TLabel
               Left = 353
-              Height = 20
+              Height = 15
               Top = 32
               Width = 8
               Caption = '9'
@@ -1434,7 +1537,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label111: TLabel
               Left = 394
-              Height = 20
+              Height = 15
               Top = 32
               Width = 15
               Caption = '10'
@@ -1442,7 +1545,7 @@ object f_config_chart: Tf_config_chart
             end
             object Label112: TLabel
               Left = 8
-              Height = 20
+              Height = 15
               Top = 8
               Width = 134
               Caption = 'Field of vision number :'
@@ -1455,12 +1558,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 0
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag1: TFloatEdit
@@ -1470,12 +1574,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 1
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag2: TFloatEdit
@@ -1485,12 +1590,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 2
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag3: TFloatEdit
@@ -1500,12 +1606,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 3
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag4: TFloatEdit
@@ -1515,12 +1622,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 4
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag5: TFloatEdit
@@ -1530,12 +1638,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 5
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag6: TFloatEdit
@@ -1545,12 +1654,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 6
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fdim0: TFloatEdit
@@ -1560,12 +1670,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 10
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim1: TFloatEdit
@@ -1575,12 +1686,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 11
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim2: TFloatEdit
@@ -1590,12 +1702,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 12
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim3: TFloatEdit
@@ -1605,12 +1718,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 13
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim4: TFloatEdit
@@ -1620,12 +1734,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 14
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim5: TFloatEdit
@@ -1635,12 +1750,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 15
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim6: TFloatEdit
@@ -1650,12 +1766,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 16
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fmag7: TFloatEdit
@@ -1665,12 +1782,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 7
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag8: TFloatEdit
@@ -1680,12 +1798,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 8
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag9: TFloatEdit
@@ -1695,12 +1814,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..99'
               Top = 66
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 9
               OnChange = fmagChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fdim7: TFloatEdit
@@ -1710,12 +1830,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 17
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim8: TFloatEdit
@@ -1725,12 +1846,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 18
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim9: TFloatEdit
@@ -1740,12 +1862,13 @@ object f_config_chart: Tf_config_chart
               Hint = '0..1000'
               Top = 116
               Width = 40
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 19
               OnChange = fdimChange
+              Ctl3D = False
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
           end
@@ -1755,12 +1878,12 @@ object f_config_chart: Tf_config_chart
             Hint = '0..20000'
             Top = 8
             Width = 33
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
             OnChange = fBigNebLimitChange
+            Ctl3D = False
+            Value = 0
             MaxValue = 20000
           end
         end
@@ -1768,14 +1891,17 @@ object f_config_chart: Tf_config_chart
       object Page5: TPage
         Caption = 'Page5'
         ClientWidth = 504
-        ClientHeight = 434
+        ClientHeight = 433
         object Label159: TLabel
+          Left = 0
           Height = 20
+          Top = 0
           Width = 69
           Caption = 'Grid Setting'
           ParentColor = False
         end
         object Label160: TLabel
+          Left = 0
           Height = 34
           Top = 21
           Width = 80
@@ -2039,8 +2165,8 @@ object f_config_chart: Tf_config_chart
           OnChange = TrackBar1Change
           PageSize = 10
           Position = 80
-          ScalePos = trTop
           TickStyle = tsNone
+          Ctl3D = False
           TabOrder = 22
         end
         object RaDec1: TRaDec
@@ -2049,6 +2175,7 @@ object f_config_chart: Tf_config_chart
           Top = 76
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 0
@@ -2060,6 +2187,7 @@ object f_config_chart: Tf_config_chart
           Top = 101
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 2
@@ -2071,6 +2199,7 @@ object f_config_chart: Tf_config_chart
           Top = 126
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 4
@@ -2082,6 +2211,7 @@ object f_config_chart: Tf_config_chart
           Top = 151
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 6
@@ -2093,6 +2223,7 @@ object f_config_chart: Tf_config_chart
           Top = 176
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 8
@@ -2104,6 +2235,7 @@ object f_config_chart: Tf_config_chart
           Top = 201
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 10
@@ -2115,6 +2247,7 @@ object f_config_chart: Tf_config_chart
           Top = 226
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 12
@@ -2126,6 +2259,7 @@ object f_config_chart: Tf_config_chart
           Top = 251
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 14
@@ -2137,6 +2271,7 @@ object f_config_chart: Tf_config_chart
           Top = 276
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 16
@@ -2148,6 +2283,7 @@ object f_config_chart: Tf_config_chart
           Top = 301
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 18
@@ -2159,6 +2295,7 @@ object f_config_chart: Tf_config_chart
           Top = 326
           Width = 176
           kind = DE
+          value = 0
           Enabled = True
           OnChange = DegSpacingChange
           TabOrder = 20
@@ -2168,6 +2305,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 76
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 1
@@ -2178,6 +2317,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 101
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 3
@@ -2188,6 +2329,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 126
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 5
@@ -2198,6 +2341,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 151
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 7
@@ -2208,6 +2353,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 176
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 9
@@ -2218,6 +2365,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 201
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 11
@@ -2228,6 +2377,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 226
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 13
@@ -2238,6 +2389,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 251
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 15
@@ -2248,6 +2401,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 276
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 17
@@ -2258,6 +2413,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 301
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 19
@@ -2268,6 +2425,8 @@ object f_config_chart: Tf_config_chart
           Height = 23
           Top = 326
           Width = 176
+          kind = RA
+          value = 0
           Enabled = True
           OnChange = HourSpacingChange
           TabOrder = 21
@@ -2276,9 +2435,11 @@ object f_config_chart: Tf_config_chart
       object Page6: TPage
         Caption = 'Page6'
         ClientWidth = 504
-        ClientHeight = 434
+        ClientHeight = 433
         object Label95: TLabel
+          Left = 0
           Height = 20
+          Top = 0
           Width = 105
           Caption = 'Object List Setting'
           ParentColor = False
@@ -2289,8 +2450,9 @@ object f_config_chart: Tf_config_chart
           Top = 40
           Width = 369
           Caption = 'Type of object to add to the list'
-          ClientHeight = 223
-          ClientWidth = 369
+          ClientHeight = 208
+          ClientWidth = 367
+          Ctl3D = False
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32
@@ -2461,6 +2623,7 @@ object f_config_chart: Tf_config_chart
     end
   end
   object Panel1: TPanel
+    Left = 0
     Height = 50
     Top = 517
     Width = 510
