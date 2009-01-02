@@ -1301,7 +1301,7 @@ result:=false;
 if locked then exit;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
-dx:=12/sc.cfgsc.BxGlb; // search a 12 pixel radius
+dx:=abs(12/sc.cfgsc.BxGlb); // search a 12 pixel radius
 sc.Findlist(ra,dec,dx,dx,buf,false,true,true);
 if assigned(FListInfo) then FListInfo(buf);
 end;
