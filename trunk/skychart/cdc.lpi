@@ -2,12 +2,13 @@
 <CONFIG>
   <ProjectOptions>
     <PathDelim Value="/"/>
-    <Version Value="6"/>
+    <Version Value="7"/>
     <General>
       <Flags>
         <SaveClosedFiles Value="False"/>
         <SaveOnlyProjectUnits Value="True"/>
         <AlwaysBuild Value="False"/>
+        <LRSInOutputDirectory Value="False"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
@@ -119,7 +120,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_main.lrs"/>
         <UnitName Value="pu_main"/>
       </Unit1>
       <Unit2>
@@ -168,7 +168,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_zoom.lrs"/>
         <UnitName Value="pu_zoom"/>
       </Unit10>
       <Unit11>
@@ -177,7 +176,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_calendar.lrs"/>
         <UnitName Value="pu_calendar"/>
       </Unit11>
       <Unit12>
@@ -186,7 +184,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_chart.lrs"/>
         <UnitName Value="pu_chart"/>
       </Unit12>
       <Unit13>
@@ -195,7 +192,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_detail.lrs"/>
         <UnitName Value="pu_detail"/>
       </Unit13>
       <Unit14>
@@ -204,7 +200,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_getdss.lrs"/>
         <UnitName Value="pu_getdss"/>
       </Unit14>
       <Unit15>
@@ -213,7 +208,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_image.lrs"/>
         <UnitName Value="pu_image"/>
       </Unit15>
       <Unit16>
@@ -222,7 +216,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_info.lrs"/>
         <UnitName Value="pu_info"/>
       </Unit16>
       <Unit17>
@@ -231,7 +224,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_manualtelescope.lrs"/>
         <UnitName Value="pu_manualtelescope"/>
       </Unit17>
       <Unit18>
@@ -240,7 +232,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_position.lrs"/>
         <UnitName Value="pu_position"/>
       </Unit18>
       <Unit19>
@@ -249,7 +240,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_printsetup.lrs"/>
         <UnitName Value="pu_printsetup"/>
       </Unit19>
       <Unit20>
@@ -258,7 +248,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_search.lrs"/>
         <UnitName Value="pu_search"/>
       </Unit20>
       <Unit21>
@@ -287,7 +276,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_catalog.lrs"/>
         <UnitName Value="pu_config_catalog"/>
       </Unit25>
       <Unit26>
@@ -296,7 +284,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_time.lrs"/>
         <UnitName Value="pu_config_time"/>
       </Unit26>
       <Unit27>
@@ -305,7 +292,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_system.lrs"/>
         <UnitName Value="pu_config_system"/>
       </Unit27>
       <Unit28>
@@ -314,7 +300,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_pictures.lrs"/>
         <UnitName Value="pu_config_pictures"/>
       </Unit28>
       <Unit29>
@@ -323,7 +308,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_display.lrs"/>
         <UnitName Value="pu_config_display"/>
       </Unit29>
       <Unit30>
@@ -332,7 +316,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_solsys.lrs"/>
         <UnitName Value="pu_config_solsys"/>
       </Unit30>
       <Unit31>
@@ -341,7 +324,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_chart.lrs"/>
         <UnitName Value="pu_config_chart"/>
       </Unit31>
       <Unit32>
@@ -350,7 +332,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_observatory.lrs"/>
         <UnitName Value="pu_config_observatory"/>
       </Unit32>
       <Unit33>
@@ -359,7 +340,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config_internet.lrs"/>
         <UnitName Value="pu_config_internet"/>
       </Unit33>
       <Unit34>
@@ -368,7 +348,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_catgen.lrs"/>
         <UnitName Value="pu_catgen"/>
       </Unit34>
       <Unit35>
@@ -377,7 +356,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_catgenadv.lrs"/>
         <UnitName Value="pu_catgenadv"/>
       </Unit35>
       <Unit36>
@@ -386,7 +364,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_progressbar.lrs"/>
         <UnitName Value="pu_progressbar"/>
       </Unit36>
       <Unit37>
@@ -395,7 +372,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_addlabel.lrs"/>
         <UnitName Value="pu_addlabel"/>
       </Unit37>
       <Unit38>
@@ -403,7 +379,6 @@
         <ComponentName Value="f_print"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_print.lrs"/>
         <UnitName Value="pu_print"/>
       </Unit38>
       <Unit39>
@@ -417,7 +392,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_about.lrs"/>
         <UnitName Value="pu_about"/>
       </Unit40>
       <Unit41>
@@ -426,7 +400,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_splash.lrs"/>
         <UnitName Value="pu_splash"/>
       </Unit41>
       <Unit42>
@@ -440,7 +413,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_config.lrs"/>
         <UnitName Value="pu_config"/>
       </Unit43>
       <Unit44>
@@ -453,7 +425,6 @@
         <ComponentName Value="f_clock"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="pu_clock.lrs"/>
         <UnitName Value="pu_clock"/>
       </Unit45>
     </Units>
