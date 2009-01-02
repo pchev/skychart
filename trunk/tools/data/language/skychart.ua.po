@@ -1,7 +1,7 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-11-12 17:01+0200\n"
+"PO-Revision-Date: 2008-12-08 18:39+0200\n"
 "Last-Translator: Oleg Maliy <astroclubzp@gmail.com>\n"
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "POT-Creation-Date: \n"
@@ -60,7 +60,7 @@ msgstr "Про %s"
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr ""
+msgstr "Дія"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -316,7 +316,7 @@ msgstr "Нижче обрію"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr ""
+msgstr "Великі розміри"
 
 #: u_translation.rsbii
 msgid "BII"
@@ -1788,7 +1788,7 @@ msgstr "HTTP проксі"
 
 #: u_translation.rsiconclickact
 msgid "Icon Click Action"
-msgstr ""
+msgstr "Дія Клацання Ікони"
 
 #: u_translation.rsiconsize
 msgid "Icon Size"
@@ -3160,7 +3160,7 @@ msgstr "Поновити останню зміну"
 
 #: u_translation.rsreducedetail
 msgid "Reduce detail when moving the chart"
-msgstr "Знижте подробиці при переміщенні мапи"
+msgstr "Знизити подробиці при переміщенні мапи"
 
 #: u_translation.rsreference
 msgid "Reference"
@@ -3228,7 +3228,7 @@ msgstr "Скинути мапу"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr ""
+msgstr "Перезапуск мапи та опцій"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3636,7 +3636,7 @@ msgstr "Поворот"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr ""
+msgstr "Малі розміри"
 
 #: u_translation.rssminute
 msgid "M"

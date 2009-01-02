@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-11-10 00:17+0100\n"
+"PO-Revision-Date: 2008-12-29 13:39+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -57,7 +57,7 @@ msgstr "Over %s"
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr ""
+msgstr "Aktie"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -313,7 +313,7 @@ msgstr "Onder de horizon"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr ""
+msgstr "Grote sterren"
 
 #: u_translation.rsbii
 msgid "BII"
@@ -1785,7 +1785,7 @@ msgstr "HTTP proxy"
 
 #: u_translation.rsiconclickact
 msgid "Icon Click Action"
-msgstr ""
+msgstr "Icoon klik-actie"
 
 #: u_translation.rsiconsize
 msgid "Icon Size"
@@ -2577,7 +2577,7 @@ msgstr "Aantal bestanden"
 
 #: u_translation.rsnumberofmont
 msgid "Number of Month"
-msgstr "Maand nummer"
+msgstr "Aantal maanden"
 
 #: u_translation.rsnumberofnebu
 msgid "Number of nebulae"
@@ -3225,7 +3225,7 @@ msgstr "Reset kaart"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr ""
+msgstr "Reset kaart en opties"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3633,7 +3633,7 @@ msgstr "Beweeg telescoop naar object"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr ""
+msgstr "Kleine sterren"
 
 #: u_translation.rssminute
 msgid "M"
