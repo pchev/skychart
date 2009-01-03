@@ -238,130 +238,86 @@ object f_chart: Tf_chart
     top = 104
     object About1: TMenuItem
       Caption = 'About'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       Visible = False
       OnClick = About1Click
     end
     object About2: TMenuItem
       Caption = '-'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       Visible = False
     end
     object Centre1: TMenuItem
       Action = Centre
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = CentreExecute
     end
     object Zoom1: TMenuItem
       Action = zoomplusmove
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = zoomplusmoveExecute
     end
     object Zoom2: TMenuItem
       Action = zoomminusmove
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = zoomminusmoveExecute
     end
     object N1: TMenuItem
       Caption = '-'
-      RightJustify = False
-      ShowAlwaysCheckable = False
     end
     object NewFinderCircle1: TMenuItem
       Caption = 'New Finder Circle'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = NewFinderCircle1Click
     end
     object RemoveLastCircle1: TMenuItem
       Caption = 'Remove Last Circle'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = RemoveLastCircle1Click
     end
     object RemoveAllCircles1: TMenuItem
       Caption = 'Remove All Circles'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = RemoveAllCircles1Click
     end
     object MenuItem1: TMenuItem
       Caption = '-'
-      RightJustify = False
-      ShowAlwaysCheckable = False
     end
     object AddLabel1: TMenuItem
       Caption = 'New Label'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = AddLabel1Click
     end
     object RemoveLastLabel1: TMenuItem
       Caption = 'Remove Last Label'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = RemoveLastLabel1Click
     end
     object RemoveAllLabel1: TMenuItem
       Caption = 'Remove All Labels'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = RemoveAllLabel1Click
     end
     object N2: TMenuItem
       Caption = '-'
-      RightJustify = False
-      ShowAlwaysCheckable = False
     end
     object elescope1: TMenuItem
       Caption = 'Telescope'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       object Slew1: TMenuItem
         Caption = 'Slew'
-        RightJustify = False
-        ShowAlwaysCheckable = False
         OnClick = Slew1Click
       end
       object Sync1: TMenuItem
         Caption = 'Sync'
-        RightJustify = False
-        ShowAlwaysCheckable = False
         OnClick = Sync1Click
       end
       object Connect1: TMenuItem
         Caption = 'Connect'
-        RightJustify = False
-        ShowAlwaysCheckable = False
         OnClick = Connect1Click
       end
       object AbortSlew1: TMenuItem
         Caption = 'Abort Slew'
-        RightJustify = False
-        ShowAlwaysCheckable = False
         OnClick = AbortSlew1Click
       end
     end
     object N3: TMenuItem
       Caption = '-'
-      RightJustify = False
-      ShowAlwaysCheckable = False
     end
     object TrackOn1: TMenuItem
       Caption = 'Lock on'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = TrackOn1Click
     end
     object TrackOff1: TMenuItem
       Caption = 'Unlock Chart'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = TrackOff1Click
     end
   end

@@ -849,6 +849,9 @@ for i:=0 to MultiDoc1.ChildCount-1 do
         sc.cfgsc.FindOk:=false;
         sc.plot.cfgplot.Assign(def_cfgplot);
       end;
+{$ifdef trace_debug}
+ WriteTrace('RefreshAllChild');
+{$endif}
       AutoRefresh;
      end;
 end;
@@ -881,6 +884,9 @@ if MultiDoc1.ActiveObject is Tf_chart then begin
       sc.cfgsc.TrackOn:=false;
       sc.cfgsc.racentre:=ra;
       sc.cfgsc.decentre:=de;
+{$ifdef trace_debug}
+ WriteTrace('SyncChild');
+{$endif}
       Refresh;
      end;
 end;
@@ -891,6 +897,9 @@ var i: integer;
 begin
 if AutoRefreshLock then exit;
 try
+{$ifdef trace_debug}
+ WriteTrace('AutorefreshTimer');
+{$endif}
 AutoRefreshLock:=true;
 Autorefresh.enabled:=false;
 for i:=0 to MultiDoc1.ChildCount-1 do
@@ -1690,6 +1699,9 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with Tf_chart(MultiDoc1.ActiveObject) do begin
     savelabel:= sc.cfgsc.Editlabels;
+{$ifdef trace_debug}
+ WriteTrace('EditCopy1Execute');
+{$endif}
     try
       if savelabel then begin
          sc.cfgsc.Editlabels:=false;
@@ -1747,6 +1759,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
  f_zoom.showmodal;
  if f_zoom.modalresult=mrOK then begin
     sc.setfov(deg2rad*f_zoom.fov);
+{$ifdef trace_debug}
+ WriteTrace('ZoomBarExecute');
+{$endif}
     Refresh;
  end;
 
@@ -1988,6 +2003,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       sc.cfgsc.TrackOn:=true;
       sc.cfgsc.TrackType:=4;
    end;
+{$ifdef trace_debug}
+ WriteTrace('TimeResetExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -1997,6 +2015,9 @@ procedure Tf_main.ShowStarsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.showstars:=not sc.cfgsc.showstars;
+{$ifdef trace_debug}
+ WriteTrace('ShowStarsExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2005,6 +2026,9 @@ procedure Tf_main.ShowNebulaeExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.shownebulae:=not sc.cfgsc.shownebulae;
+{$ifdef trace_debug}
+ WriteTrace('ShowNebulaeExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2017,6 +2041,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       sc.cfgsc.ShowImages:=false;
       ShowError(rsErrorPleaseC3);
    end;
+{$ifdef trace_debug}
+ WriteTrace('ShowPicturesExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2029,6 +2056,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       sc.cfgsc.ShowBackgroundImage:=false;
       ShowError(rsErrorPleaseC);
    end;
+{$ifdef trace_debug}
+ WriteTrace('ShowBackgroundImageExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2054,6 +2084,9 @@ if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
          sc.cfgsc.TrackType:=5;
          sc.cfgsc.BackgroundImage:=sc.Fits.Filename;
          sc.cfgsc.ShowBackgroundImage:=true;
+{$ifdef trace_debug}
+ WriteTrace('DSSImageExecute');
+{$endif}
          Refresh;
       end;
    end;
@@ -2067,6 +2100,9 @@ if (MultiDoc1.ActiveObject is Tf_chart)
      if BlinkTimer.enabled then begin
         BlinkTimer.enabled:=false;
         sc.cfgsc.ShowBackgroundImage:=true;
+{$ifdef trace_debug}
+ WriteTrace('BlinkImageExecute');
+{$endif}
         Refresh;
      end else begin
         if sc.cfgsc.ShowBackgroundImage then
@@ -2091,6 +2127,9 @@ procedure Tf_main.ShowLinesExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowLine:=not sc.cfgsc.ShowLine;
+{$ifdef trace_debug}
+ WriteTrace('ShowLinesExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2099,6 +2138,9 @@ procedure Tf_main.ShowPlanetsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowPlanet:=not sc.cfgsc.ShowPlanet;
+{$ifdef trace_debug}
+ WriteTrace('ShowPlanetsExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2109,6 +2151,9 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowAsteroid:=not sc.cfgsc.ShowAsteroid;
    showast:=sc.cfgsc.ShowAsteroid;
+{$ifdef trace_debug}
+ WriteTrace('ShowAsteroidsExecute');
+{$endif}
    Refresh;
    if showast<>sc.cfgsc.ShowAsteroid then begin
       f_info.setpage(2);
@@ -2129,6 +2174,9 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
    showcom:=sc.cfgsc.ShowComet;
+{$ifdef trace_debug}
+ WriteTrace('ShowCometsExecute');
+{$endif}
    Refresh;
    if showcom<>sc.cfgsc.ShowComet then ShowError(rsErrorPleaseC2);
 end;
@@ -2138,7 +2186,10 @@ procedure Tf_main.ShowMilkyWayExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowMilkyWay:=not sc.cfgsc.ShowMilkyWay;
-   Refresh;
+ {$ifdef trace_debug}
+ WriteTrace('ShowMilkyWayExecute');
+{$endif}
+  Refresh;
 end;
 end;
 
@@ -2146,6 +2197,9 @@ procedure Tf_main.ShowLabelsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Showlabelall:=not sc.cfgsc.Showlabelall;
+{$ifdef trace_debug}
+ WriteTrace('ShowLabelsExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2166,6 +2220,9 @@ for i:=1 to MultiDoc1.ChildCount-1 do
 Multidoc1.Maximized:=true;
 with MultiDoc1.ActiveObject as Tf_chart do begin
   ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
+{$ifdef trace_debug}
+ WriteTrace('ResetDefaultChartExecute');
+{$endif}
   Refresh;
 end;
 end;
@@ -2174,6 +2231,9 @@ procedure Tf_main.EditLabelsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Editlabels:=not sc.cfgsc.Editlabels;
+{$ifdef trace_debug}
+ WriteTrace('EditLabelsExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2182,6 +2242,9 @@ procedure Tf_main.ShowConstellationLineExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowConstl:=not sc.cfgsc.ShowConstl;
+{$ifdef trace_debug}
+ WriteTrace('ShowConstellationLineExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2190,6 +2253,9 @@ procedure Tf_main.ShowConstellationLimitExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowConstB:=not sc.cfgsc.ShowConstB;
+{$ifdef trace_debug}
+ WriteTrace('ShowConstellationLimitExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2198,6 +2264,9 @@ procedure Tf_main.ShowGalacticEquatorExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowGalactic:=not sc.cfgsc.ShowGalactic;
+{$ifdef trace_debug}
+ WriteTrace('ShowGalacticEquatorExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2206,6 +2275,9 @@ procedure Tf_main.ShowEclipticExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowEcliptic:=not sc.cfgsc.ShowEcliptic;
+{$ifdef trace_debug}
+ WriteTrace('ShowEclipticExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2214,6 +2286,9 @@ procedure Tf_main.ShowMarkExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowCircle:=not sc.cfgsc.ShowCircle;
+{$ifdef trace_debug}
+ WriteTrace('ShowMarkExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2222,6 +2297,9 @@ procedure Tf_main.ShowObjectbelowHorizonExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.horizonopaque:=not sc.cfgsc.horizonopaque;
+{$ifdef trace_debug}
+ WriteTrace('ShowObjectbelowHorizonExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2232,6 +2310,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.projpole:=Equat;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
+{$ifdef trace_debug}
+ WriteTrace('EquatorialProjectionExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2242,6 +2323,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.projpole:=AltAz;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
+{$ifdef trace_debug}
+ WriteTrace('AltAzProjectionExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2252,6 +2336,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.projpole:=Ecl;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
+{$ifdef trace_debug}
+ WriteTrace('EclipticProjectionExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2262,6 +2349,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.projpole:=Gal;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
+{$ifdef trace_debug}
+ WriteTrace('GalacticProjectionExecute');
+{$endif}
    Refresh;
 end;
 end;
@@ -2283,10 +2373,16 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
   if sc.cfgsc.TrackOn then begin
      sc.cfgsc.TrackOn:=false;
+{$ifdef trace_debug}
+ WriteTrace('TrackExecute 1');
+{$endif}
      Refresh;
   end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6)
   then begin
      sc.cfgsc.TrackOn:=true;
+{$ifdef trace_debug}
+ WriteTrace('TrackExecute 2');
+{$endif}
      Refresh;
   end;
 end;
@@ -2312,6 +2408,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       sc.cfgsc.decentre:=deg2rad*f_position.de.value;
       sc.cfgsc.fov:=deg2rad*f_position.fov.value;
       sc.cfgsc.theta:=deg2rad*f_position.rot.value;
+{$ifdef trace_debug}
+ WriteTrace('PositionExecute');
+{$endif}
       refresh;
    end;
 end;
@@ -2372,6 +2471,9 @@ if chart is Tf_chart then with chart as Tf_chart do begin
         precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
         if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc);
         sc.movetoradec(ar1,de1);
+{$ifdef trace_debug}
+ WriteTrace('Search1Execute');
+{$endif}
         Refresh;
         if sc.cfgsc.fov>0.17 then ok:=sc.FindatRaDec(ar1,de1,0.0005,true)
                              else ok:=sc.FindatRaDec(ar1,de1,0.00005,true);
@@ -2415,6 +2517,9 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Assign(csc);
+{$ifdef trace_debug}
+ WriteTrace('DrawChart');
+{$endif}
    Refresh;
 end;
 end;
@@ -3050,6 +3155,10 @@ end;
 procedure Tf_main.ViewScrollBar1Click(Sender: TObject);
 var i: Integer;
 begin
+{$ifdef trace_debug}
+ WriteTrace('ViewScrollBar1Click');
+{$endif}
+
 ViewScrollBar1.Checked:=not ViewScrollBar1.Checked;
 for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then begin
@@ -5123,6 +5232,9 @@ Findit:
       precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
       if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc);
       sc.movetoradec(ar1,de1);
+{$ifdef trace_debug}
+ WriteTrace('GenericSearch');
+{$endif}
       Refresh;
       if sc.cfgsc.fov>0.17 then ok:=sc.FindatRaDec(ar1,de1,0.0005,true)
                         else ok:=sc.FindatRaDec(ar1,de1,0.00005,true);
@@ -5819,6 +5931,9 @@ for i:=0 to MultiDoc1.ChildCount-1 do
      sc.cfgsc.racentre:=sc.cfgsc.FindRa;
      sc.cfgsc.decentre:=sc.cfgsc.FindDec;
      sc.cfgsc.TrackOn:=false;
+{$ifdef trace_debug}
+ WriteTrace('CenterFindObj');
+{$endif}
      Refresh;
      break;
 end;

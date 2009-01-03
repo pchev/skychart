@@ -2807,6 +2807,9 @@ if f1.ShowModal=mrOK then begin
    cfgsc.modlabels[i].fontnum:=fontnum;
    cfgsc.modlabels[i].id:=id;
    cfgsc.modlabels[i].hiden:=false;
+{$ifdef trace_debug}
+ WriteTrace('EditLabelTxt');
+{$endif}
    Refresh;
 end;
 finally
@@ -2847,6 +2850,9 @@ if f_addlabel.ShowModal=mrOK then begin
    cfgsc.customlabels[i].align:=f_addlabel.Lalign;
    SetLabel(lid,x,y,0,fontnum,cfgsc.customlabels[i].labelnum,txt,cfgsc.customlabels[i].align);
    DrawLabels;
+{$ifdef trace_debug}
+ WriteTrace('AddNewLabel');
+{$endif}
    Refresh;
 end;
 end;
@@ -3109,6 +3115,9 @@ if (dist>cfgsc.fov/4)and(cfgsc.TrackOn) then begin
       result:=true;
       cfgsc.scopelock:=true;
       MovetoRaDec(cfgsc.ScopeRa,cfgsc.ScopeDec);
+{$ifdef trace_debug}
+ WriteTrace('TelescopeMove');
+{$endif}
       Refresh;
       cfgsc.scopelock:=false;
    end;
