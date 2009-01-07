@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2009.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2009-01-04 19:27+0100\n"
+"PO-Revision-Date: 2009-01-07 14:47+0100\n"
 "Last-Translator: \n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -62,11 +62,11 @@ msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
-msgstr "Dejanski sistemski čas"
+msgstr "Sedanji sistemski čas"
 
 #: u_translation.rsad
 msgid "AD"
-msgstr ""
+msgstr "N. š."
 
 #: u_translation.rsadd
 msgid "Add"
@@ -302,7 +302,7 @@ msgstr ""
 
 #: u_translation.rsbc
 msgid "BC"
-msgstr ""
+msgstr "Pred n.š."
 
 #: u_translation.rsbeginprocess
 msgid "Begin processing for jd=%s / %s"
@@ -866,7 +866,7 @@ msgstr ""
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Datoteka podatkovne zbirke:"
+msgstr "Datoteka zbirke:"
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -878,7 +878,7 @@ msgstr "Nastavitve podatkovne zbirke..."
 
 #: u_translation.rsdatabasetype
 msgid "Database Type"
-msgstr "Tip podatkovne zbirke"
+msgstr "Tip zbirke"
 
 #: u_translation.rsdatafiles
 msgid "Data Files :"
@@ -1022,7 +1022,7 @@ msgstr "°"
 
 #: u_translation.rsdegree
 msgid "Degree"
-msgstr "Stopinje"
+msgstr "Stopi."
 
 #: u_translation.rsdegreegridsp
 msgid "Degree Grid Spacing"
@@ -1124,6 +1124,7 @@ msgstr ""
 msgid "Diam."
 msgstr ""
 
+#, fuzzy
 #: u_translation.rsdiameter
 msgid "Diameter"
 msgstr ""
@@ -1694,7 +1695,7 @@ msgstr "Grški simbol"
 
 #: u_translation.rsgreen
 msgid "Green"
-msgstr ""
+msgstr "Zeleno"
 
 #: u_translation.rsgridsetting
 msgid "Grid Setting"
@@ -1942,7 +1943,7 @@ msgstr ""
 
 #: u_translation.rskm
 msgid "Km."
-msgstr ""
+msgstr "km"
 
 #: u_translation.rsknot
 msgid "Knot"
@@ -2302,7 +2303,7 @@ msgstr ""
 
 #: u_translation.rsmeters
 msgid "Meters"
-msgstr "Mertri"
+msgstr "Metri"
 
 #: u_translation.rsmilkyway
 msgid "Milky Way"
@@ -3782,7 +3783,7 @@ msgstr "Statusna vrstica"
 
 #: u_translation.rsstepunit
 msgid "Step unit"
-msgstr ""
+msgstr "Enota koraka"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
@@ -3930,7 +3931,7 @@ msgstr "Datoteka ni prepoznana."
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "Ta program je svoboden program; lahko ga podelite drugim in/ali ga spreminjate pod pogoji GNU Genearl Public License"
+msgstr "Ta program je svoboden program; lahko ga podelite drugim in/ali ga spreminjate pod pogoji GNU General Public License"
 
 #: u_translation.rsthursday
 msgid "Thu."
