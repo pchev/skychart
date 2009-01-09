@@ -2815,9 +2815,9 @@ cfgm.persdir:=privatedir;
 ConfigPictures.cmain.Assign(cfgm);
 formpos(ConfigPictures,mouse.cursorpos.x,mouse.cursorpos.y);
 ConfigPictures.Notebook1.PageIndex:=page;
-ConfigPictures.show;
+//ConfigPictures.show;
 ConfigPictures.backimgChange(self);
-ConfigPictures.hide;
+//ConfigPictures.hide;
 ConfigPictures.showmodal;
 if ConfigPictures.ModalResult=mrOK then begin
  activateconfig(ConfigPictures.cmain,ConfigPictures.csc,ConfigPictures.ccat,ConfigPictures.cshr,ConfigPictures.cplot,ConfigPictures.cdss,false);
