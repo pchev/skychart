@@ -4,10 +4,21 @@ object f_main: Tf_main
   Top = 120
   Width = 860
   ActiveControl = quicksearch
+  Align = alNone
+  AllowDropFiles = False
+  AutoScroll = True
+  AutoSize = False
+  BorderIcons = [biSystemMenu, biMinimize, biMaximize]
+  BorderStyle = bsSizeable
   Caption = 'Cartes du Ciel'
-  ClientHeight = 558
+  ClientHeight = 557
   ClientWidth = 860
+  DockSite = False
+  DragKind = dkDrag
+  DragMode = dmManual
+  Enabled = True
   Font.CharSet = ANSI_CHARSET
+  FormStyle = fsNormal
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -18,22 +29,41 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
+  ParentBiDiMode = True
+  ParentFont = False
+  Position = poDesigned
+  ShowInTaskBar = stDefault
+  UseDockManager = False
   LCLVersion = '0.9.27'
+  WindowState = wsNormal
   object MultiDoc1: TMultiDoc
     Left = 26
-    Height = 470
+    Height = 469
     Top = 54
     Width = 806
     Align = alClient
+    Alignment = taCenter
+    AutoSize = False
+    BevelInner = bvNone
     BevelOuter = bvNone
+    BevelWidth = 1
     BorderWidth = 1
-    ClientHeight = 470
+    BorderStyle = bsNone
+    ClientHeight = 469
     ClientWidth = 806
     Color = clBlack
+    DockSite = False
+    DragCursor = crDrag
+    DragKind = dkDrag
+    DragMode = dmManual
+    Enabled = True
     FullRepaint = False
     ParentColor = False
+    ParentFont = True
+    ParentShowHint = True
     TabOrder = 0
     TabStop = True
+    Visible = True
     Maximized = False
     TitleHeight = 15
     KeepLastChild = False
@@ -45,7 +75,13 @@ object f_main: Tf_main
       Height = 133
       Top = 171
       Width = 209
+      Align = alNone
       AutoSize = True
+      Center = False
+      DragCursor = crDrag
+      DragMode = dmManual
+      Enabled = True
+      ParentShowHint = True
       Picture.Data = {
         07544269746D61707A460100424DF5450100000000003600000028000000D100
         0000850000000100180000000000BF450100130B0000130B0000000000000000
@@ -2661,60 +2697,109 @@ object f_main: Tf_main
         0000000000000000000000000000000000000000000000000000000000000000
         000000000000
       }
+      Proportional = False
+      Stretch = False
+      Transparent = False
       Visible = False
     end
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 470
+    Height = 469
     Top = 54
     Width = 26
     Align = alLeft
+    Alignment = taCenter
+    AutoSize = False
+    BevelInner = bvNone
     BevelOuter = bvNone
-    ClientHeight = 470
+    BevelWidth = 1
+    BorderWidth = 0
+    BorderStyle = bsNone
+    ClientHeight = 469
     ClientWidth = 26
+    DockSite = False
+    DragCursor = crDrag
+    DragKind = dkDrag
+    DragMode = dmManual
+    Enabled = True
     FullRepaint = False
+    ParentColor = True
+    ParentFont = True
+    ParentShowHint = True
     TabOrder = 2
+    TabStop = False
+    Visible = True
     object ToolBar2: TToolBar
       Left = 0
-      Height = 470
+      Height = 469
       Top = 0
       Width = 26
       Align = alClient
+      AutoSize = False
+      BorderWidth = 0
       ButtonHeight = 23
       Caption = 'ToolBar2'
       Ctl3D = False
+      DragCursor = crDrag
+      DragKind = dkDrag
+      DragMode = dmManual
       EdgeBorders = [ebBottom]
+      EdgeInner = esRaised
+      EdgeOuter = esLowered
+      Enabled = True
       Images = ImageNormal
+      ParentColor = True
+      ParentFont = True
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      TabStop = False
+      Visible = True
       Wrapable = False
       object ToolButton8: TToolButton
         Left = 1
         Top = 0
         Action = SetupTime
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object ToolButton9: TToolButton
         Left = 1
         Top = 23
         Action = SetupObservatory
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object ToolButtonConfig: TToolButton
         Left = 1
         Hint = 'Configure the program'
         Top = 46
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 10
+        ParentShowHint = True
         PopupMenu = PopupConfig
         Wrap = True
+        Visible = True
         OnClick = ToolButtonConfigClick
       end
       object ToolButtonEQ: TToolButton
         Left = 1
         Top = 69
         Action = EquatorialProjection
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
         Style = tbsCheck
       end
@@ -2722,6 +2807,10 @@ object f_main: Tf_main
         Left = 1
         Top = 92
         Action = AltAzProjection
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
         Style = tbsCheck
       end
@@ -2729,6 +2818,10 @@ object f_main: Tf_main
         Left = 1
         Top = 115
         Action = EclipticProjection
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
         Style = tbsCheck
       end
@@ -2736,6 +2829,10 @@ object f_main: Tf_main
         Left = 1
         Top = 138
         Action = GalacticProjection
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
         Style = tbsCheck
       end
@@ -2743,98 +2840,169 @@ object f_main: Tf_main
         Left = 1
         Top = 161
         Action = FlipX
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object FlipButtonY: TToolButton
         Left = 1
         Top = 184
         Action = FlipY
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object ToolButtonRotP: TToolButton
         Left = 1
         Hint = 'Rotate Right'
         Top = 207
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 21
+        ParentShowHint = True
         Wrap = True
+        Visible = True
         OnMouseUp = ToolButtonRotPMouseUp
       end
       object ToolButtonRotM: TToolButton
         Left = 1
         Hint = 'Rotate Left'
         Top = 230
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 22
+        ParentShowHint = True
         Wrap = True
+        Visible = True
         OnMouseUp = ToolButtonRotMMouseUp
       end
     end
   end
   object PanelRight: TPanel
     Left = 832
-    Height = 470
+    Height = 469
     Top = 54
     Width = 28
     Align = alRight
+    Alignment = taCenter
+    AutoSize = False
+    BevelInner = bvNone
     BevelOuter = bvNone
-    ClientHeight = 470
+    BevelWidth = 1
+    BorderWidth = 0
+    BorderStyle = bsNone
+    ClientHeight = 469
     ClientWidth = 28
+    DockSite = False
+    DragCursor = crDrag
+    DragKind = dkDrag
+    DragMode = dmManual
+    Enabled = True
     FullRepaint = False
+    ParentColor = True
+    ParentFont = True
+    ParentShowHint = True
     TabOrder = 3
+    TabStop = False
+    Visible = True
     object ToolBar3: TToolBar
       Left = 0
-      Height = 220
+      Height = 219
       Top = 250
       Width = 28
       Align = alClient
+      AutoSize = False
+      BorderWidth = 0
       ButtonHeight = 23
       Caption = 'ToolBar3'
       Ctl3D = False
+      DragCursor = crDrag
+      DragKind = dkDrag
+      DragMode = dmManual
       EdgeBorders = [ebBottom]
+      EdgeInner = esRaised
+      EdgeOuter = esLowered
+      Enabled = True
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -10
       Font.Name = 'Default'
       Font.Pitch = fpVariable
       Images = ImageNormal
+      ParentColor = True
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      TabStop = False
+      Visible = True
       Wrapable = False
       object ToolButtonAllSky: TToolButton
         Left = 1
         Top = 0
         Action = allSky
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object ToolButtonToN: TToolButton
         Left = 1
         Top = 23
         Action = toN
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object ToolButtonToS: TToolButton
         Left = 1
         Top = 46
         Action = toS
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object ToolButtonToE: TToolButton
         Left = 1
         Top = 69
         Action = toE
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object ToolButtonToW: TToolButton
         Left = 1
         Top = 92
         Action = toW
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Wrap = True
       end
       object ToolButtonToZ: TToolButton
         Left = 1
         Top = 115
         Action = toZenith
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
     end
     object PanelFieldSize: TPanel
@@ -2843,23 +3011,51 @@ object f_main: Tf_main
       Top = 0
       Width = 28
       Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      BevelInner = bvNone
       BevelOuter = bvNone
+      BevelWidth = 1
+      BorderWidth = 0
+      BorderStyle = bsNone
       ClientHeight = 250
       ClientWidth = 28
+      DockSite = False
+      DragCursor = crDrag
+      DragKind = dkDrag
+      DragMode = dmManual
+      Enabled = True
+      FullRepaint = True
+      ParentColor = True
+      ParentFont = True
+      ParentShowHint = True
       TabOrder = 1
+      TabStop = False
+      Visible = True
       object Field1: TSpeedButton
         Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 3
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Caption = '10'''
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -2871,12 +3067,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 27
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -2888,12 +3095,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 50
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -2905,12 +3123,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 75
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -2922,12 +3151,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 100
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -2939,12 +3179,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 125
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -2956,12 +3207,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 150
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -2973,12 +3235,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 175
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -2990,12 +3263,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 200
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -3007,12 +3291,23 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 227
         Width = 28
+        Align = alNone
+        AllowAllUp = False
         Color = clBtnFace
+        Down = False
+        Enabled = True
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
+        GroupIndex = 0
+        Layout = blGlyphLeft
+        Margin = -1
         NumGlyphs = 0
+        Spacing = 4
+        Transparent = True
+        Visible = True
         OnClick = SetFOVClick
+        ShowCaption = True
         ShowHint = True
         ParentFont = False
         ParentShowHint = False
@@ -3022,14 +3317,30 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 524
+    Top = 523
     Width = 860
     Align = alBottom
+    Alignment = taCenter
+    AutoSize = False
+    BevelInner = bvNone
     BevelOuter = bvNone
+    BevelWidth = 1
+    BorderWidth = 0
+    BorderStyle = bsNone
     ClientHeight = 34
     ClientWidth = 860
+    DockSite = False
+    DragCursor = crDrag
+    DragKind = dkDrag
+    DragMode = dmManual
+    Enabled = True
     FullRepaint = False
+    ParentColor = True
+    ParentFont = True
+    ParentShowHint = True
     TabOrder = 4
+    TabStop = False
+    Visible = True
     object Shape1: TShape
       Left = 220
       Height = 34
@@ -3037,8 +3348,14 @@ object f_main: Tf_main
       Width = 2
       Align = alLeft
       Brush.Color = clBtnShadow
+      DragCursor = crDrag
+      DragKind = dkDrag
+      DragMode = dmManual
+      Enabled = True
+      ParentShowHint = True
       Pen.Color = clBtnShadow
       Pen.Cosmetic = True
+      Visible = True
     end
     object PPanels0: TPanel
       Left = 0
@@ -3047,11 +3364,26 @@ object f_main: Tf_main
       Width = 220
       Align = alLeft
       Alignment = taLeftJustify
+      AutoSize = False
+      BevelInner = bvNone
       BevelOuter = bvNone
+      BevelWidth = 1
+      BorderWidth = 0
+      BorderStyle = bsNone
       ClientHeight = 34
       ClientWidth = 220
+      DockSite = False
+      DragCursor = crDrag
+      DragKind = dkDrag
+      DragMode = dmManual
+      Enabled = True
       FullRepaint = False
+      ParentColor = True
+      ParentFont = True
+      ParentShowHint = True
       TabOrder = 0
+      TabStop = False
+      Visible = True
       object LPanels0: TPanel
         Left = 0
         Height = 34
@@ -3059,18 +3391,47 @@ object f_main: Tf_main
         Width = 220
         Align = alClient
         Alignment = taLeftJustify
+        AutoSize = False
+        BevelInner = bvNone
         BevelOuter = bvNone
+        BevelWidth = 1
+        BorderWidth = 0
+        BorderStyle = bsNone
         ClientHeight = 34
         ClientWidth = 220
+        DockSite = False
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        FullRepaint = True
+        ParentColor = True
+        ParentFont = True
+        ParentShowHint = True
         TabOrder = 0
+        TabStop = False
+        Visible = True
         object P0L1: TLabel
           Left = 0
           Height = 34
           Top = 0
           Width = 220
           Align = alClient
+          Alignment = taLeftJustify
+          AutoSize = True
+          DragCursor = crDrag
+          DragMode = dmManual
+          Enabled = True
+          Layout = tlTop
+          ParentBidiMode = True
           ParentColor = False
           ParentFont = False
+          ParentShowHint = True
+          ShowAccelChar = True
+          Transparent = True
+          Visible = True
+          WordWrap = False
+          OptimalFill = False
         end
       end
     end
@@ -3081,11 +3442,26 @@ object f_main: Tf_main
       Width = 638
       Align = alClient
       Alignment = taLeftJustify
+      AutoSize = False
+      BevelInner = bvNone
       BevelOuter = bvNone
+      BevelWidth = 1
+      BorderWidth = 0
+      BorderStyle = bsNone
       ClientHeight = 34
       ClientWidth = 638
+      DockSite = False
+      DragCursor = crDrag
+      DragKind = dkDrag
+      DragMode = dmManual
+      Enabled = True
       FullRepaint = False
+      ParentColor = True
+      ParentFont = True
+      ParentShowHint = True
       TabOrder = 1
+      TabStop = False
+      Visible = True
       object LPanels1: TPanel
         Left = 0
         Height = 34
@@ -3093,19 +3469,47 @@ object f_main: Tf_main
         Width = 638
         Align = alClient
         Alignment = taLeftJustify
+        AutoSize = False
+        BevelInner = bvNone
         BevelOuter = bvNone
+        BevelWidth = 1
+        BorderWidth = 0
+        BorderStyle = bsNone
         ClientHeight = 34
         ClientWidth = 638
+        DockSite = False
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        FullRepaint = True
+        ParentColor = True
+        ParentFont = True
+        ParentShowHint = True
         TabOrder = 0
+        TabStop = False
+        Visible = True
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
           Width = 638
           Align = alClient
+          Alignment = taLeftJustify
           AutoSize = False
+          DragCursor = crDrag
+          DragMode = dmManual
+          Enabled = True
+          Layout = tlTop
+          ParentBidiMode = True
           ParentColor = False
+          ParentFont = True
+          ParentShowHint = True
+          ShowAccelChar = True
+          Transparent = True
+          Visible = True
           WordWrap = True
+          OptimalFill = False
         end
       end
     end
@@ -3116,201 +3520,375 @@ object f_main: Tf_main
     Top = 0
     Width = 860
     Align = alTop
+    Alignment = taCenter
+    AutoSize = False
+    BevelInner = bvNone
     BevelOuter = bvNone
+    BevelWidth = 1
+    BorderWidth = 0
+    BorderStyle = bsNone
     ClientHeight = 54
     ClientWidth = 860
+    DockSite = False
+    DragCursor = crDrag
+    DragKind = dkDrag
+    DragMode = dmManual
+    Enabled = True
     FullRepaint = False
+    ParentColor = True
+    ParentFont = True
+    ParentShowHint = True
     TabOrder = 1
     TabStop = True
+    Visible = True
     object ToolBar1: TToolBar
       Left = 0
       Height = 25
       Top = 0
       Width = 860
+      AutoSize = False
+      BorderWidth = 0
       ButtonHeight = 23
       Ctl3D = False
+      DragCursor = crDrag
+      DragKind = dkDrag
+      DragMode = dmManual
+      EdgeInner = esRaised
+      EdgeOuter = esLowered
+      Enabled = True
       Images = ImageNormal
+      ParentColor = True
+      ParentFont = True
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       TabStop = True
+      Visible = True
       Wrapable = False
       object ToolButtonNew: TToolButton
         Left = 1
         Top = 2
         Action = FileNew1
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonOpen: TToolButton
         Left = 24
         Top = 2
         Action = FileOpen1
         Caption = ' '
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonSave: TToolButton
         Left = 47
         Top = 2
         Action = FileSaveAs1
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonPrint: TToolButton
         Left = 70
         Top = 2
         Action = Print1
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonNightVision: TToolButton
         Left = 93
         Hint = 'Night vision color'
         Top = 2
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 82
+        ParentShowHint = True
+        Visible = True
         OnClick = ToolButtonNightVisionClick
       end
       object ToolButton3: TToolButton
         Left = 116
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 2
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object ToolButtonCascade: TToolButton
         Left = 124
         Hint = 'Cascade'
         Top = 2
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 4
+        ParentShowHint = True
+        Visible = True
         OnClick = WindowCascade1Execute
       end
       object ToolButtonTile: TToolButton
         Left = 147
         Hint = 'Tile Vertically'
         Top = 2
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 14
+        ParentShowHint = True
+        Visible = True
         OnClick = WindowTileVertical1Execute
       end
       object ToolButton5: TToolButton
         Left = 170
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 17
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object ToolButtonUndo: TToolButton
         Left = 178
         Top = 2
         Action = Undo
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonRedo: TToolButton
         Left = 201
         Top = 2
         Action = Redo
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonZoom: TToolButton
         Left = 224
         Top = 2
         Action = zoomplus
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonUnZoom: TToolButton
         Left = 247
         Top = 2
         Action = zoomminus
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButton1: TToolButton
         Left = 270
         Top = 2
         Action = ZoomBar
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonSearch: TToolButton
         Left = 415
         Hint = 'Advanced Search'
         Top = 2
         Action = Search1
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonPosition: TToolButton
         Left = 438
         Top = 2
         Action = Position
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonListObj: TToolButton
         Left = 461
         Top = 2
         Action = listobj
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonCal: TToolButton
         Left = 484
         Top = 2
         Action = Calendar
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButton35: TToolButton
         Left = 507
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 8
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object ToolButtonTdec: TToolButton
         Left = 515
         Top = 2
         Action = TimeDec
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonTnow: TToolButton
         Left = 538
         Top = 2
         Action = TimeReset
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonTinc: TToolButton
         Left = 561
         Top = 2
         Action = TimeInc
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButton39: TToolButton
         Left = 736
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         ImageIndex = 45
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object TConnect: TToolButton
         Left = 744
         Top = 2
         Action = TelescopeConnect
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object TSlew: TToolButton
         Left = 790
         Top = 2
         Action = TelescopeSlew
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object TSync: TToolButton
         Left = 767
         Top = 2
         Action = TelescopeSync
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButton6: TToolButton
         Left = 813
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object ToolButton7: TToolButton
         Left = 860
         Top = 2
         Width = 23
         AutoSize = True
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        ParentShowHint = True
         Style = tbsSeparator
+        Visible = True
       end
       object ToolButton10: TToolButton
         Left = 407
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object ToolButton11: TToolButton
         Left = 648
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object ToolButton12: TToolButton
         Left = 584
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object quicksearch: TComboBox
         Left = 317
@@ -3318,35 +3896,78 @@ object f_main: Tf_main
         Hint = 'Search'
         Top = 2
         Width = 90
+        Align = alNone
         ArrowKeysTraverseList = False
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+        AutoDropDown = False
+        AutoSelect = False
+        AutoSize = True
+        CharCase = ecNormal
         Ctl3D = False
+        DragCursor = crDrag
+        DragMode = dmManual
         DropDownCount = 15
+        Enabled = True
         ItemHeight = 0
+        ItemIndex = -1
         ItemWidth = 0
+        MaxLength = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
+        ParentBidiMode = True
+        ParentColor = False
+        ParentCtl3D = True
+        ParentFont = True
+        ParentShowHint = True
+        Sorted = False
+        Style = csDropDown
         TabOrder = 0
+        TabStop = True
+        Visible = True
       end
       object MagPanel: TPanel
         Left = 293
         Height = 23
         Top = 2
         Width = 24
+        Align = alNone
+        Alignment = taCenter
+        AutoSize = False
+        BevelInner = bvNone
         BevelOuter = bvNone
+        BevelWidth = 1
+        BorderWidth = 0
+        BorderStyle = bsNone
         ClientHeight = 23
         ClientWidth = 24
+        DockSite = False
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
         FullRepaint = False
+        ParentColor = True
+        ParentFont = True
+        ParentShowHint = True
         TabOrder = 4
+        TabStop = False
+        Visible = True
         object ButtonMoreStar: TImage
           Left = 0
           Height = 11
           Hint = 'More Stars'
           Top = 0
           Width = 11
+          Align = alNone
+          AutoSize = False
+          Center = False
+          DragCursor = crDrag
+          DragMode = dmManual
+          Enabled = True
           OnClick = MoreStarExecute
+          ParentShowHint = True
           Picture.Data = {
             07544269746D617036050000424D360500000000000036040000280000001000
             000010000000010008000000000000000000120B0000120B0000000000000000
@@ -3392,7 +4013,10 @@ object f_main: Tf_main
             0000000000000000000000000000000000000000000000000000000000000000
             0000
           }
+          Proportional = False
+          Stretch = False
           Transparent = True
+          Visible = True
         end
         object ButtonLessStar: TImage
           Left = 12
@@ -3400,7 +4024,14 @@ object f_main: Tf_main
           Hint = 'Less Stars'
           Top = 0
           Width = 11
+          Align = alNone
+          AutoSize = False
+          Center = False
+          DragCursor = crDrag
+          DragMode = dmManual
+          Enabled = True
           OnClick = LessStarExecute
+          ParentShowHint = True
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
             000010000000010004000000000000000000120B0000120B0000000000000000
@@ -3412,7 +4043,10 @@ object f_main: Tf_main
             0000000000000000000000000000000000000000000000000000000000000000
             0000
           }
+          Proportional = False
+          Stretch = False
           Transparent = True
+          Visible = True
         end
         object ButtonMoreNeb: TImage
           Left = 0
@@ -3420,7 +4054,14 @@ object f_main: Tf_main
           Hint = 'More Nebulae'
           Top = 12
           Width = 11
+          Align = alNone
+          AutoSize = False
+          Center = False
+          DragCursor = crDrag
+          DragMode = dmManual
+          Enabled = True
           OnClick = MoreNebExecute
+          ParentShowHint = True
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
             000010000000010004000000000000000000120B0000120B0000000000000000
@@ -3432,7 +4073,10 @@ object f_main: Tf_main
             0000000000000000000000000000000000000000000000000000000000000000
             0000
           }
+          Proportional = False
+          Stretch = False
           Transparent = True
+          Visible = True
         end
         object ButtonLessNeb: TImage
           Left = 12
@@ -3440,7 +4084,14 @@ object f_main: Tf_main
           Hint = 'Less Nebulae'
           Top = 12
           Width = 11
+          Align = alNone
+          AutoSize = False
+          Center = False
+          DragCursor = crDrag
+          DragMode = dmManual
+          Enabled = True
           OnClick = LessNebExecute
+          ParentShowHint = True
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
             000010000000010004000000000000000000120B0000120B0000000000000000
@@ -3452,7 +4103,10 @@ object f_main: Tf_main
             0000000000000000000000000000000000000000000000000000000000000000
             0000
           }
+          Proportional = False
+          Stretch = False
           Transparent = True
+          Visible = True
         end
       end
       object TimeVal: TSpinEdit
@@ -3461,27 +4115,55 @@ object f_main: Tf_main
         Hint = 'Time'
         Top = 2
         Width = 56
+        Align = alNone
+        AutoSelect = False
+        AutoSize = False
+        Enabled = True
+        Increment = 1
         MaxValue = 1000
         MinValue = 1
+        ParentFont = True
+        ParentShowHint = True
+        ReadOnly = False
+        TabStop = True
         TabOrder = 1
         Value = 1
+        Visible = True
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 28
+        Height = 29
         Hint = 'Time Units'
         Top = 2
         Width = 80
+        Align = alNone
+        ArrowKeysTraverseList = True
         AutoComplete = False
         AutoCompleteText = [cbactSearchAscending]
+        AutoDropDown = False
+        AutoSelect = False
+        AutoSize = True
+        CharCase = ecNormal
         Ctl3D = False
+        DragCursor = crDrag
+        DragMode = dmManual
         DropDownCount = 11
+        Enabled = True
         Font.CharSet = ANSI_CHARSET
         ItemHeight = 0
+        ItemIndex = -1
         ItemWidth = 0
+        MaxLength = 0
+        ParentBidiMode = True
+        ParentColor = False
+        ParentCtl3D = True
         ParentFont = False
+        ParentShowHint = True
+        Sorted = False
         Style = csDropDownList
         TabOrder = 2
+        TabStop = True
+        Visible = True
       end
       object ChildControl: TPanel
         Left = 830
@@ -3489,30 +4171,72 @@ object f_main: Tf_main
         Top = 2
         Width = 30
         Align = alRight
+        Alignment = taCenter
         AutoSize = True
+        BevelInner = bvNone
         BevelOuter = bvNone
+        BevelWidth = 1
+        BorderWidth = 0
+        BorderStyle = bsNone
         ClientHeight = 23
         ClientWidth = 30
+        DockSite = False
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        FullRepaint = True
+        ParentColor = True
+        ParentFont = True
+        ParentShowHint = True
         TabOrder = 3
+        TabStop = False
+        Visible = True
         object BtnRestoreChild: TSpeedButton
           Left = 0
           Height = 15
           Top = 0
           Width = 15
+          Align = alNone
+          AllowAllUp = False
           Color = clBtnFace
+          Down = False
+          Enabled = True
           Flat = True
+          GroupIndex = 0
+          Layout = blGlyphLeft
+          Margin = -1
           NumGlyphs = 0
+          Spacing = 4
+          Transparent = True
+          Visible = True
           OnClick = BtnRestoreChildClick
+          ShowCaption = True
+          ParentFont = True
+          ParentShowHint = True
         end
         object BtnCloseChild: TSpeedButton
           Left = 15
           Height = 15
           Top = 0
           Width = 15
+          Align = alNone
+          AllowAllUp = False
           Color = clBtnFace
+          Down = False
+          Enabled = True
           Flat = True
+          GroupIndex = 0
+          Layout = blGlyphLeft
+          Margin = -1
           NumGlyphs = 0
+          Spacing = 4
+          Transparent = True
+          Visible = True
           OnClick = BtnCloseChildClick
+          ShowCaption = True
+          ParentFont = True
+          ParentShowHint = True
         end
       end
     end
@@ -3522,125 +4246,213 @@ object f_main: Tf_main
       Top = 26
       Width = 860
       Align = alBottom
+      AutoSize = False
+      BorderWidth = 0
       ButtonHeight = 24
       Caption = 'ToolBar4'
       Ctl3D = False
+      DragCursor = crDrag
+      DragKind = dkDrag
+      DragMode = dmManual
       EdgeBorders = [ebTop, ebBottom]
+      EdgeInner = esRaised
+      EdgeOuter = esLowered
+      Enabled = True
       Images = ImageNormal
+      ParentColor = True
+      ParentFont = True
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
+      TabStop = False
+      Visible = True
       Wrapable = False
       object ToolButtonShowStars: TToolButton
         Left = 1
         Top = 2
         Action = ShowStars
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowNebulae: TToolButton
         Left = 24
         Top = 2
         Action = ShowNebulae
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowLines: TToolButton
         Left = 47
         Top = 2
         Action = ShowLines
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowPictures: TToolButton
         Left = 70
         Top = 2
         Action = ShowPictures
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonDSS: TToolButton
         Left = 93
         Top = 2
         Action = DSSImage
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonShowBackgroundImage: TToolButton
         Left = 116
         Top = 2
         Action = SetupPictures
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
       end
       object ToolButtonShowPlanets: TToolButton
         Left = 162
         Top = 2
         Action = ShowPlanets
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowAsteroids: TToolButton
         Left = 185
         Top = 2
         Action = ShowAsteroids
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowComets: TToolButton
         Left = 208
         Top = 2
         Action = ShowComets
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowMilkyWay: TToolButton
         Left = 231
         Top = 2
         Action = ShowMilkyWay
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonGrid: TToolButton
         Left = 254
         Top = 2
         Action = Grid
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonGridEq: TToolButton
         Left = 277
         Top = 2
         Action = GridEQ
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLine: TToolButton
         Left = 300
         Top = 2
         Action = ShowConstellationLine
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLimit: TToolButton
         Left = 323
         Top = 2
         Action = ShowConstellationLimit
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowGalacticEquator: TToolButton
         Left = 346
         Top = 2
         Action = ShowGalacticEquator
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowEcliptic: TToolButton
         Left = 369
         Top = 2
         Action = ShowEcliptic
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowMark: TToolButton
         Left = 392
         Top = 2
         Action = ShowMark
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonShowLabels: TToolButton
         Left = 415
         Top = 2
         Action = ShowLabels
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonEditlabels: TToolButton
         Left = 438
         Top = 2
         Action = EditLabels
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         PopupMenu = PopupMenu1
         Style = tbsCheck
       end
@@ -3648,48 +4460,84 @@ object f_main: Tf_main
         Left = 461
         Top = 2
         Action = ShowObjectbelowHorizon
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonswitchbackground: TToolButton
         Left = 484
         Top = 2
         Action = switchbackground
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonSyncChart: TToolButton
         Left = 515
         Top = 2
         Action = SyncChart
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonTrack: TToolButton
         Left = 538
         Top = 2
         Action = Track
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButtonswitchstars: TToolButton
         Left = 569
         Top = 2
         Action = switchstars
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
       object ToolButton2: TToolButton
         Left = 561
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object ToolButton4: TToolButton
         Left = 507
         Top = 2
         Width = 8
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        Enabled = True
+        ParentShowHint = True
         Style = tbsDivider
+        Visible = True
       end
       object ToolButtonBlink: TToolButton
         Left = 139
         Top = 2
         Action = BlinkImage
+        DragCursor = crDrag
+        DragKind = dkDrag
+        DragMode = dmManual
+        ParentShowHint = True
         Style = tbsCheck
       end
     end
@@ -3700,56 +4548,86 @@ object f_main: Tf_main
     object File1: TMenuItem
       Caption = '&File'
       Hint = 'File related commands'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object FileNewItem: TMenuItem
         Action = FileNew1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileNew1Execute
       end
       object FileOpenItem: TMenuItem
         Action = FileOpen1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileOpen1Execute
       end
       object FileSaveAsItem: TMenuItem
         Action = FileSaveAs1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileSaveAs1Execute
       end
       object FileCloseItem: TMenuItem
         Action = FileClose1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileClose1Execute
       end
       object MenuItem31: TMenuItem
         Action = ResetDefaultChart
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ResetDefaultChartExecute
       end
       object N6: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object Calendar1: TMenuItem
         Action = Calendar
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = CalendarExecute
       end
       object VariableStar1: TMenuItem
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = VariableStar1Click
       end
       object N2: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object SaveImage1: TMenuItem
         Action = SaveImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SaveImageExecute
       end
       object Print2: TMenuItem
         Action = Print1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Print1Execute
       end
       object PrintSetup2: TMenuItem
         Action = FilePrintSetup1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FilePrintSetup1Execute
       end
       object N1: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object FileExitItem: TMenuItem
         Action = FileExit1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = FileExit1Execute
       end
     end
@@ -3757,137 +4635,199 @@ object f_main: Tf_main
       Caption = '&Edit'
       GroupIndex = 2
       Hint = 'Edit commands'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object MenuSearch: TMenuItem
         Action = Search1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Search1Execute
       end
       object MenuEditLabels: TMenuItem
         Action = EditLabels
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = EditLabelsExecute
       end
       object CopyItem: TMenuItem
         Action = EditCopy1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = EditCopy1Execute
       end
       object Undo1: TMenuItem
         Action = Undo
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = UndoExecute
       end
       object Redo1: TMenuItem
         Action = Redo
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = RedoExecute
       end
     end
     object Setup1: TMenuItem
       Caption = '&Setup'
       GroupIndex = 2
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object DateConfig1: TMenuItem
         Action = SetupTime
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupTimeExecute
       end
       object ObsConfig1: TMenuItem
         Action = SetupObservatory
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupObservatoryExecute
       end
       object MenuItem2: TMenuItem
         Action = SetupChart
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupChartExecute
       end
       object MenuItem9: TMenuItem
         Action = SetupCatalog
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupCatalogExecute
       end
       object MenuItem3: TMenuItem
         Action = SetupSolSys
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupSolSysExecute
       end
       object MenuItem1: TMenuItem
         Action = SetupDisplay
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupDisplayExecute
       end
       object MenuItem7: TMenuItem
         Action = SetupPictures
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupPicturesExecute
       end
       object MenuItem4: TMenuItem
         Action = SetupSystem
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupSystemExecute
       end
       object MenuItem5: TMenuItem
         Action = SetupInternet
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupInternetExecute
       end
       object MenuItem26: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object MenuItem6: TMenuItem
         Action = SetupConfig
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SetupConfigExecute
       end
       object N8: TMenuItem
         Caption = '-'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object SaveConfigurationNow1: TMenuItem
         Action = SaveConfiguration
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SaveConfigurationExecute
       end
       object SaveConfigurationOnExit1: TMenuItem
         Action = SaveConfigOnExit
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SaveConfigOnExitExecute
       end
     end
     object View1: TMenuItem
       Caption = '&View'
       GroupIndex = 2
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object FullScreen1: TMenuItem
         Action = ViewFullScreen
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ViewFullScreenExecute
       end
       object NightVision1: TMenuItem
         Caption = 'Night Vision'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ToolButtonNightVisionClick
       end
       object oolBar1: TMenuItem
         Caption = 'Tool Bar'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object ViewToolsBar1: TMenuItem
           Action = ViewBar
           Caption = 'All Tools Bar'
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewBarExecute
         end
         object N5: TMenuItem
           Caption = '-'
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
         end
         object MainBar1: TMenuItem
           Action = ViewMainBar
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewMainBarExecute
         end
         object ObjectBar1: TMenuItem
           Action = ViewObjectBar
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewObjectBarExecute
         end
         object LeftBar1: TMenuItem
           Action = ViewLeftBar
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewLeftBarExecute
         end
         object RightBar1: TMenuItem
           Action = ViewRightBar
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewRightBarExecute
         end
         object ViewStatusBar1: TMenuItem
@@ -3895,303 +4835,449 @@ object f_main: Tf_main
           Caption = 'Status Bar'
           Checked = True
           GroupIndex = 2
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ViewStatusExecute
         end
       end
       object ViewScrollBar1: TMenuItem
         Caption = 'Scroll Bar'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ViewScrollBar1Click
       end
       object N9: TMenuItem
         Caption = '-'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object ViewInformation1: TMenuItem
         Action = ViewInfo
         Caption = 'Server Information'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ViewInfoExecute
       end
       object MenuItem27: TMenuItem
         Action = ViewClock
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ViewClockExecute
       end
       object N7: TMenuItem
         Caption = '-'
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object zoommenu: TMenuItem
         Action = ZoomBar
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ZoomBarExecute
       end
       object zoomplus1: TMenuItem
         Action = zoomplus
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = zoomplusExecute
       end
       object zoomminus1: TMenuItem
         Action = zoomminus
         GroupIndex = 2
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = zoomminusExecute
       end
       object MenuPosition: TMenuItem
         Action = Position
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = PositionExecute
       end
       object MenuListObj: TMenuItem
         Action = listobj
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = listobjExecute
       end
       object MenuBlinkImage: TMenuItem
         Action = BlinkImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = BlinkImageExecute
       end
       object Menuswitchbackground: TMenuItem
         Action = switchbackground
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = switchbackgroundExecute
       end
     end
     object Chart1: TMenuItem
       Caption = '&Chart'
       GroupIndex = 2
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object Projection1: TMenuItem
         Caption = 'Projection'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object EquatorialCoordinate1: TMenuItem
           Action = EquatorialProjection
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = EquatorialProjectionExecute
         end
         object AltAzProjection1: TMenuItem
           Action = AltAzProjection
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = AltAzProjectionExecute
         end
         object EclipticProjection1: TMenuItem
           Action = EclipticProjection
           Caption = 'Ecliptic Coordinate'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = EclipticProjectionExecute
         end
         object GalacticProjection1: TMenuItem
           Action = GalacticProjection
           Caption = 'Galactic Coordinate'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = GalacticProjectionExecute
         end
       end
       object ransformation1: TMenuItem
         Caption = 'Transformation'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object FlipX1: TMenuItem
           Action = FlipX
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = FlipXExecute
         end
         object FlipY1: TMenuItem
           Action = FlipY
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = FlipYExecute
         end
         object rotplus1: TMenuItem
           Action = rot_plus
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = rot_plusExecute
         end
         object rotminus1: TMenuItem
           Action = rot_minus
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = rot_minusExecute
         end
       end
       object FieldofVision1: TMenuItem
         Caption = 'Field of Vision'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object SetFov1: TMenuItem
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov2: TMenuItem
           Tag = 1
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov3: TMenuItem
           Tag = 2
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov4: TMenuItem
           Tag = 3
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov5: TMenuItem
           Tag = 4
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov6: TMenuItem
           Tag = 5
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov7: TMenuItem
           Tag = 6
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov8: TMenuItem
           Tag = 7
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov9: TMenuItem
           Tag = 8
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object SetFov10: TMenuItem
           Tag = 9
           Caption = 'SetFov'
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = SetFovExecute
         end
         object allSky1: TMenuItem
           Action = allSky
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = allSkyExecute
         end
       end
       object ShowHorizon1: TMenuItem
         Caption = 'View Horizon'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object toN1: TMenuItem
           Action = toN
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = toNExecute
         end
         object toS1: TMenuItem
           Action = toS
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = toSExecute
         end
         object toE1: TMenuItem
           Action = toE
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = toEExecute
         end
         object toW1: TMenuItem
           Action = toW
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = toWExecute
         end
       end
       object ShowObjects1: TMenuItem
         Caption = 'Show Objects'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object ShowStars1: TMenuItem
           Action = ShowStars
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowStarsExecute
         end
         object ShowNebulae1: TMenuItem
           Action = ShowNebulae
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowNebulaeExecute
         end
         object ShowPictures1: TMenuItem
           Action = ShowPictures
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowPicturesExecute
         end
         object ShowLines1: TMenuItem
           Action = ShowLines
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowLinesExecute
         end
         object ShowPlanets1: TMenuItem
           Action = ShowPlanets
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowPlanetsExecute
         end
         object ShowAsteroids1: TMenuItem
           Action = ShowAsteroids
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowAsteroidsExecute
         end
         object ShowComets1: TMenuItem
           Action = ShowComets
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowCometsExecute
         end
         object ShowMilkyWay1: TMenuItem
           Action = ShowMilkyWay
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowMilkyWayExecute
         end
       end
       object ShowGrid1: TMenuItem
         Caption = 'Lines / Grid'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object Grid1: TMenuItem
           Action = Grid
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = GridExecute
         end
         object GridEQ1: TMenuItem
           Action = GridEQ
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = GridEQExecute
         end
         object ShowConstellationLine1: TMenuItem
           Action = ShowConstellationLine
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowConstellationLineExecute
         end
         object ShowConstellationLimit1: TMenuItem
           Action = ShowConstellationLimit
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowConstellationLimitExecute
         end
         object ShowGalacticEquator1: TMenuItem
           Action = ShowGalacticEquator
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowGalacticEquatorExecute
         end
         object ShowEcliptic1: TMenuItem
           Action = ShowEcliptic
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowEclipticExecute
         end
         object ShowMark1: TMenuItem
           Action = ShowMark
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = ShowMarkExecute
         end
       end
       object ShowLabels1: TMenuItem
         Action = ShowLabels
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ShowLabelsExecute
       end
       object ShowObjectbelowthehorizon1: TMenuItem
         Action = ShowObjectbelowHorizon
         Caption = 'Below the horizon'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ShowObjectbelowHorizonExecute
       end
       object MenuItem8: TMenuItem
         Action = ShowBackgroundImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ShowBackgroundImageExecute
       end
       object MenuStarNum: TMenuItem
         Caption = 'Number of stars'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object MenuMoreStar: TMenuItem
           Action = MoreStar
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = MoreStarExecute
         end
         object MenuLessStar: TMenuItem
           Action = LessStar
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = LessStarExecute
         end
       end
       object MenuNebNum: TMenuItem
         Caption = 'Number of nebulae'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         object MenuMoreNeb: TMenuItem
           Action = MoreNeb
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = MoreNebExecute
         end
         object MenuLessNeb: TMenuItem
           Action = LessNeb
+          RightJustify = False
+          ShowAlwaysCheckable = False
           OnClick = LessNebExecute
         end
       end
       object MenuDSS: TMenuItem
         Action = DSSImage
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = DSSImageExecute
       end
     end
     object telescope1: TMenuItem
       Caption = '&Telescope'
       GroupIndex = 2
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object telescopeConnect1: TMenuItem
         Action = TelescopeConnect
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TelescopeConnectExecute
       end
       object ControlPanel1: TMenuItem
         Action = TelescopePanel
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TelescopePanelExecute
       end
       object telescopeSlew1: TMenuItem
         Action = TelescopeSlew
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TelescopeSlewExecute
       end
       object telescopeSync1: TMenuItem
         Action = TelescopeSync
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TelescopeSyncExecute
       end
     end
@@ -4199,88 +5285,130 @@ object f_main: Tf_main
       Caption = '&Window'
       GroupIndex = 2
       Hint = 'Window related commands'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object MenuSyncChart: TMenuItem
         Action = SyncChart
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = SyncChartExecute
       end
       object MenuTrack: TMenuItem
         Action = Track
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = TrackExecute
       end
       object MenuItem28: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object WindowCascadeItem: TMenuItem
         Caption = '&Cascade'
         Hint = 'Cascade'
         ImageIndex = 4
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = WindowCascade1Execute
       end
       object WindowTileItem: TMenuItem
         Caption = 'Tile &Horizontally'
         Hint = 'Tile Horizontally'
         ImageIndex = 5
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = WindowTileHorizontal1Execute
       end
       object WindowTileItem2: TMenuItem
         Caption = 'Tile &Vertically'
         Hint = 'Tile Vertically'
         ImageIndex = 14
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = WindowTileVertical1Execute
       end
       object Maximize1: TMenuItem
         Action = Maximize
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = MaximizeExecute
       end
       object N10: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
     end
     object Help1: TMenuItem
       Caption = '&Help'
       GroupIndex = 2
       Hint = 'Help topics'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       object Content1: TMenuItem
         Action = HelpContents1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HelpContents1Execute
       end
       object MenuItem29: TMenuItem
         Action = HelpFaq1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HelpFaq1Execute
       end
       object MenuItem30: TMenuItem
         Action = HelpQS1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HelpQS1Execute
       end
       object MenuItem10: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object HomePage1: TMenuItem
         Caption = 'Skychart Homepage'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HomePage1Click
       end
       object Maillist1: TMenuItem
         Caption = 'MailList'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = Maillist1Click
       end
       object BugReport1: TMenuItem
         Caption = 'Report a problem'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = BugReport1Click
       end
       object MenuItem11: TMenuItem
         Caption = '-'
+        RightJustify = False
+        ShowAlwaysCheckable = False
       end
       object ReleaseNotes1: TMenuItem
         Caption = 'Release Notes'
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = ReleaseNotes1Click
       end
       object HelpAboutItem: TMenuItem
         Action = HelpAbout1
+        RightJustify = False
+        ShowAlwaysCheckable = False
         OnClick = HelpAbout1Execute
       end
     end
     object topmessage: TMenuItem
       Caption = ' '
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
   end
   object OpenDialog: TOpenDialog
@@ -4291,682 +5419,1488 @@ object f_main: Tf_main
   end
   object ActionList1: TActionList
     Images = ImageNormal
+    State = asNormal
     left = 328
     top = 160
     object FileNew1: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'FileNew1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'New|Create a new chart'
       ImageIndex = 0
       OnExecute = FileNew1Execute
+      ShortCut = 0
+      Visible = True
     end
     object FileOpen1: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'FileOpen1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Open|Open a chart'
       ImageIndex = 1
       OnExecute = FileOpen1Execute
+      ShortCut = 0
+      Visible = True
     end
     object FileSaveAs1: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'FileSaveAs1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Save the current chart'
       ImageIndex = 2
       OnExecute = FileSaveAs1Execute
+      ShortCut = 0
+      Visible = True
     end
     object FileExit1: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'FileExit1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Exit|Exit application'
       ImageIndex = 11
       OnExecute = FileExit1Execute
+      ShortCut = 0
+      Visible = True
     end
     object Print1: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'Print1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Print the chart'
       ImageIndex = 3
       OnExecute = Print1Execute
+      ShortCut = 0
+      Visible = True
     end
     object FilePrintSetup1: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'FilePrintSetup1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       ImageIndex = 47
       OnExecute = FilePrintSetup1Execute
+      ShortCut = 0
+      Visible = True
     end
     object HelpAbout1: TAction
       Category = 'Help'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'About|Displays program information, version number, and copyright'
+      ImageIndex = -1
       OnExecute = HelpAbout1Execute
+      ShortCut = 0
+      Visible = True
     end
     object HelpContents1: THelpContents
       Category = 'Help'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Help contents'
       ImageIndex = 12
       OnExecute = HelpContents1Execute
+      ShortCut = 0
+      Visible = True
     end
     object Search1: TAction
       Category = 'Search'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Search'
       ImageIndex = 76
       OnExecute = Search1Execute
+      ShortCut = 0
+      Visible = True
     end
     object ViewBar: TAction
       Category = 'View'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'View Tools Bar'
+      ImageIndex = -1
       OnExecute = ViewBarExecute
       ShortCut = 16450
+      Visible = True
     end
     object zoomplus: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Zoom In'
       ImageIndex = 6
       OnExecute = zoomplusExecute
+      ShortCut = 0
+      Visible = True
     end
     object zoomminus: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Zoom Out'
       ImageIndex = 7
       OnExecute = zoomminusExecute
+      ShortCut = 0
+      Visible = True
     end
     object ZoomBar: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Set FOV'
       ImageIndex = 8
       OnExecute = ZoomBarExecute
+      ShortCut = 0
+      Visible = True
     end
     object FlipX: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Mirror Horizontally'
       ImageIndex = 15
       OnExecute = FlipXExecute
+      ShortCut = 0
+      Visible = True
     end
     object FlipY: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Mirror Vertically'
       ImageIndex = 17
       OnExecute = FlipYExecute
+      ShortCut = 0
+      Visible = True
     end
     object ViewStatus: TAction
       Category = 'View'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'View the status bar'
+      ImageIndex = -1
       OnExecute = ViewStatusExecute
+      ShortCut = 0
+      Visible = True
     end
     object SaveConfiguration: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'Save Configuration'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'The the default configuration'
+      ImageIndex = -1
       OnExecute = SaveConfigurationExecute
+      ShortCut = 0
+      Visible = True
     end
     object SaveConfigOnExit: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'Save Config On Exit'
       Checked = True
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Save the configuration when the program close'
+      ImageIndex = -1
       OnExecute = SaveConfigOnExitExecute
+      ShortCut = 0
+      Visible = True
     end
     object Undo: TAction
       Category = 'Undo'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Undo Last Change'
       ImageIndex = 19
       OnExecute = UndoExecute
+      ShortCut = 0
+      Visible = True
     end
     object Redo: TAction
       Category = 'Undo'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Redo Last Change'
       ImageIndex = 20
       OnExecute = RedoExecute
+      ShortCut = 0
+      Visible = True
     end
     object rot_plus: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Rotate Right'
       ImageIndex = 21
       OnExecute = rot_plusExecute
+      ShortCut = 0
+      Visible = True
     end
     object rot_minus: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Rotate Left'
       ImageIndex = 22
       OnExecute = rot_minusExecute
+      ShortCut = 0
+      Visible = True
     end
     object GridEQ: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Add Equatorial Grid'
       ImageIndex = 24
       OnExecute = GridEQExecute
+      ShortCut = 0
+      Visible = True
     end
     object Grid: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Coordinate Grid'
       ImageIndex = 25
       OnExecute = GridExecute
+      ShortCut = 0
+      Visible = True
     end
     object switchstars: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Change Drawing Mode'
       ImageIndex = 34
       OnExecute = switchstarsExecute
+      ShortCut = 0
+      Visible = True
     end
     object switchbackground: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Sky Background Color'
       ImageIndex = 35
       OnExecute = switchbackgroundExecute
+      ShortCut = 0
+      Visible = True
     end
     object SaveImage: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'SaveImage'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       ImageIndex = 36
       OnExecute = SaveImageExecute
+      ShortCut = 0
+      Visible = True
     end
     object ViewInfo: TAction
       Category = 'View'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = ViewInfoExecute
+      ShortCut = 0
+      Visible = True
     end
     object toN: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'North'
       ImageIndex = 38
       OnExecute = toNExecute
+      ShortCut = 0
+      Visible = True
     end
     object toE: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'East'
       ImageIndex = 37
       OnExecute = toEExecute
+      ShortCut = 0
+      Visible = True
     end
     object toS: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'South'
       ImageIndex = 39
       OnExecute = toSExecute
+      ShortCut = 0
+      Visible = True
     end
     object toW: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'West'
       ImageIndex = 40
       OnExecute = toWExecute
+      ShortCut = 0
+      Visible = True
     end
     object toZenith: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Zenith'
       ImageIndex = 41
       OnExecute = toZenithExecute
+      ShortCut = 0
+      Visible = True
     end
     object allSky: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show All Sky'
       ImageIndex = 42
       OnExecute = allSkyExecute
+      ShortCut = 0
+      Visible = True
     end
     object TimeInc: TAction
       Tag = 1
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Increment Time'
       ImageIndex = 44
       OnExecute = TimeIncExecute
+      ShortCut = 0
+      Visible = True
     end
     object TimeDec: TAction
       Tag = -1
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Decrement Time'
       ImageIndex = 43
       OnExecute = TimeIncExecute
+      ShortCut = 0
+      Visible = True
     end
     object TimeReset: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Now'
       ImageIndex = 84
       OnExecute = TimeResetExecute
+      ShortCut = 0
+      Visible = True
     end
     object listobj: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Object List'
       ImageIndex = 46
       OnExecute = listobjExecute
+      ShortCut = 0
+      Visible = True
     end
     object TelescopeConnect: TAction
       Category = 'Telescope'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Connect Telescope'
       ImageIndex = 48
       OnExecute = TelescopeConnectExecute
+      ShortCut = 0
+      Visible = True
     end
     object TelescopeSlew: TAction
       Category = 'Telescope'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Slew'
       ImageIndex = 50
       OnExecute = TelescopeSlewExecute
+      ShortCut = 0
+      Visible = True
     end
     object TelescopeSync: TAction
       Category = 'Telescope'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Sync'
       ImageIndex = 51
       OnExecute = TelescopeSyncExecute
+      ShortCut = 0
+      Visible = True
     end
     object MoreStar: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'More Star'
       ImageIndex = 52
       OnExecute = MoreStarExecute
+      ShortCut = 0
+      Visible = True
     end
     object LessStar: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Less Star'
       ImageIndex = 53
       OnExecute = LessStarExecute
+      ShortCut = 0
+      Visible = True
     end
     object MoreNeb: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'More Nebula'
       ImageIndex = 54
       OnExecute = MoreNebExecute
+      ShortCut = 0
+      Visible = True
     end
     object LessNeb: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Less Nebula'
       ImageIndex = 55
       OnExecute = LessNebExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowStars: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Stars'
       ImageIndex = 56
       OnExecute = ShowStarsExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowNebulae: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Nebulae'
       ImageIndex = 57
       OnExecute = ShowNebulaeExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowPictures: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Pictures'
       ImageIndex = 58
       OnExecute = ShowPicturesExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowLines: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Lines'
       ImageIndex = 59
       OnExecute = ShowLinesExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowPlanets: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Planets'
       ImageIndex = 62
       OnExecute = ShowPlanetsExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowAsteroids: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Asteroids'
       ImageIndex = 60
       OnExecute = ShowAsteroidsExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowComets: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Comets'
       ImageIndex = 61
       OnExecute = ShowCometsExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowMilkyWay: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Milky Way'
       ImageIndex = 63
       OnExecute = ShowMilkyWayExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowLabels: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Labels'
       ImageIndex = 64
       OnExecute = ShowLabelsExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowConstellationLine: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Constellation Line'
       ImageIndex = 65
       OnExecute = ShowConstellationLineExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowConstellationLimit: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Constellation Limit'
       ImageIndex = 66
       OnExecute = ShowConstellationLimitExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowGalacticEquator: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Galactic Equator'
       ImageIndex = 67
       OnExecute = ShowGalacticEquatorExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowEcliptic: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Ecliptic'
       ImageIndex = 68
       OnExecute = ShowEclipticExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowMark: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Mark'
       ImageIndex = 69
       OnExecute = ShowMarkExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowObjectbelowHorizon: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Object below the horizon'
       ImageIndex = 70
       OnExecute = ShowObjectbelowHorizonExecute
+      ShortCut = 0
+      Visible = True
     end
     object EquatorialProjection: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Equatorial Coordinate'
       ImageIndex = 71
       OnExecute = EquatorialProjectionExecute
+      ShortCut = 0
+      Visible = True
     end
     object AltAzProjection: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Alt-Az Coordinate'
       ImageIndex = 72
       OnExecute = AltAzProjectionExecute
+      ShortCut = 0
+      Visible = True
     end
     object EclipticProjection: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Ecliptic Coordinate'
       ImageIndex = 73
       OnExecute = EclipticProjectionExecute
+      ShortCut = 0
+      Visible = True
     end
     object GalacticProjection: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Galactic Coordinate'
       ImageIndex = 74
       OnExecute = GalacticProjectionExecute
+      ShortCut = 0
+      Visible = True
     end
     object ViewMainBar: TAction
       Category = 'View'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = ViewMainBarExecute
+      ShortCut = 0
+      Visible = True
     end
     object ViewObjectBar: TAction
       Category = 'View'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = ViewObjectBarExecute
+      ShortCut = 0
+      Visible = True
     end
     object ViewLeftBar: TAction
       Category = 'View'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = ViewLeftBarExecute
+      ShortCut = 0
+      Visible = True
     end
     object ViewRightBar: TAction
       Category = 'View'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = ViewRightBarExecute
+      ShortCut = 0
+      Visible = True
     end
     object Calendar: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'Calendar'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Ephemeris Calendar'
       ImageIndex = 75
       OnExecute = CalendarExecute
+      ShortCut = 0
+      Visible = True
     end
     object ShowBackgroundImage: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Show Background Image'
       ImageIndex = 77
       OnExecute = ShowBackgroundImageExecute
       ShortCut = 16457
+      Visible = True
     end
     object Position: TAction
       Category = 'Search'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Position'
       ImageIndex = 78
       OnExecute = PositionExecute
+      ShortCut = 0
+      Visible = True
     end
     object SyncChart: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Link All Chart'
       ImageIndex = 79
       OnExecute = SyncChartExecute
+      ShortCut = 0
+      Visible = True
     end
     object Track: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Track'
       ImageIndex = 80
       OnExecute = TrackExecute
+      ShortCut = 0
+      Visible = True
     end
     object DSSImage: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Get DSS Image'
       ImageIndex = 81
       OnExecute = DSSImageExecute
+      ShortCut = 0
+      Visible = True
     end
     object EditLabels: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Edit Labels'
       ImageIndex = 83
       OnExecute = EditLabelsExecute
+      ShortCut = 0
+      Visible = True
     end
     object Cascade1: TAction
       Category = 'Window'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Cascade'
       ImageIndex = 4
       OnExecute = WindowCascade1Execute
+      ShortCut = 0
+      Visible = True
     end
     object TileHorizontal1: TAction
       Category = 'Window'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Tile Horizontally'
       ImageIndex = 5
       OnExecute = WindowTileHorizontal1Execute
+      ShortCut = 0
+      Visible = True
     end
     object TileVertical1: TAction
       Category = 'Window'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Tile Vertically'
       ImageIndex = 14
       OnExecute = WindowTileVertical1Execute
+      ShortCut = 0
+      Visible = True
     end
     object Maximize: TAction
       Category = 'Window'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = MaximizeExecute
+      ShortCut = 0
+      Visible = True
     end
     object TelescopePanel: TAction
       Category = 'Telescope'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Control Panel'
+      ImageIndex = -1
       OnExecute = TelescopePanelExecute
+      ShortCut = 0
+      Visible = True
     end
     object ViewFullScreen: TAction
       Category = 'View'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Full Screen'
+      ImageIndex = -1
       OnExecute = ViewFullScreenExecute
       ShortCut = 122
+      Visible = True
     end
     object FileClose1: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'FileClose1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Close Chart'
+      ImageIndex = -1
       OnExecute = FileClose1Execute
+      ShortCut = 0
+      Visible = True
     end
     object SetupTime: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'Set date and time'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Set date and time'
       ImageIndex = 45
       OnExecute = SetupTimeExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupObservatory: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'Set observatory location'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Set observatory location'
       ImageIndex = 85
       OnExecute = SetupObservatoryExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupDisplay: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'Setup Display'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Setup Display'
+      ImageIndex = -1
       OnExecute = SetupDisplayExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupPictures: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'Setup Pictures'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Change pictures display'
       ImageIndex = 77
       OnExecute = SetupPicturesExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupCatalog: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'Setup Catalog'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Setup Catalog'
+      ImageIndex = -1
       OnExecute = SetupCatalogExecute
+      ShortCut = 0
+      Visible = True
     end
     object BlinkImage: TAction
       Category = 'chart'
+      AutoCheck = False
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
       Hint = 'Blinking Picture'
       ImageIndex = 86
       OnExecute = BlinkImageExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupChart: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'SetupChart'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = SetupChartExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupSolSys: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'SetupSolSys'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = SetupSolSysExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupSystem: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'SetupSystem'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = SetupSystemExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupInternet: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'SetupInternet'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = SetupInternetExecute
+      ShortCut = 0
+      Visible = True
     end
     object SetupConfig: TAction
       Category = 'Setup'
+      AutoCheck = False
       Caption = 'SetupConfig'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = SetupConfigExecute
+      ShortCut = 0
+      Visible = True
     end
     object ViewClock: TAction
       Category = 'View'
+      AutoCheck = False
       Caption = 'ViewClock'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = ViewClockExecute
+      ShortCut = 0
+      Visible = True
     end
     object HelpFaq1: TAction
       Category = 'Help'
+      AutoCheck = False
       Caption = 'HelpFaq1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = HelpFaq1Execute
+      ShortCut = 0
+      Visible = True
     end
     object HelpQS1: TAction
       Category = 'Help'
+      AutoCheck = False
       Caption = 'HelpQS1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = HelpQS1Execute
+      ShortCut = 0
+      Visible = True
     end
     object EditCopy1: TAction
       Category = 'Edit'
+      AutoCheck = False
       Caption = 'EditCopy1'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = EditCopy1Execute
       ShortCut = 16451
+      Visible = True
     end
     object ResetDefaultChart: TAction
       Category = 'File'
+      AutoCheck = False
       Caption = 'ResetDefaultChart'
+      Checked = False
       DisableIfNoHandler = True
+      Enabled = True
+      GroupIndex = 0
+      HelpContext = 0
+      HelpType = htContext
+      ImageIndex = -1
       OnExecute = ResetDefaultChartExecute
+      ShortCut = 0
+      Visible = True
     end
   end
   object SaveDialog: TSaveDialog
@@ -4983,12 +6917,28 @@ object f_main: Tf_main
     top = 160
   end
   object ImageList2: TImageList
+    AllocBy = 4
+    BlendColor = clNone
+    BkColor = clNone
+    DrawingStyle = dsNormal
+    Height = 16
+    ImageType = itImage
     Masked = False
+    ShareImages = False
+    Width = 16
     left = 280
     top = 208
   end
   object ImageNormal: TImageList
+    AllocBy = 4
+    BlendColor = clNone
+    BkColor = clNone
+    DrawingStyle = dsNormal
+    Height = 16
+    ImageType = itImage
     Masked = True
+    ShareImages = False
+    Width = 16
     left = 280
     top = 160
     Bitmap = {
@@ -7816,6 +9766,8 @@ object f_main: Tf_main
     top = 416
     object ResetAllLabels1: TMenuItem
       Caption = 'Reset All Labels'
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = ResetAllLabels1Click
     end
   end
@@ -7824,56 +9776,84 @@ object f_main: Tf_main
     top = 200
     object MenuItem12: TMenuItem
       Action = SetupTime
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupTimeExecute
     end
     object MenuItem13: TMenuItem
       Action = SetupObservatory
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupObservatoryExecute
     end
     object MenuItem14: TMenuItem
       Action = SetupChart
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupChartExecute
     end
     object MenuItem15: TMenuItem
       Action = SetupCatalog
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupCatalogExecute
     end
     object MenuItem16: TMenuItem
       Action = SetupSolSys
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupSolSysExecute
     end
     object MenuItem17: TMenuItem
       Action = SetupDisplay
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupDisplayExecute
     end
     object MenuItem18: TMenuItem
       Action = SetupPictures
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupPicturesExecute
     end
     object MenuItem19: TMenuItem
       Action = SetupSystem
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupSystemExecute
     end
     object MenuItem20: TMenuItem
       Action = SetupInternet
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupInternetExecute
     end
     object MenuItem25: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
     object MenuItem24: TMenuItem
       Action = SetupConfig
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SetupConfigExecute
     end
     object MenuItem21: TMenuItem
       Caption = '-'
+      RightJustify = False
+      ShowAlwaysCheckable = False
     end
     object MenuItem22: TMenuItem
       Action = SaveConfiguration
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SaveConfigurationExecute
     end
     object MenuItem23: TMenuItem
       Action = SaveConfigOnExit
+      RightJustify = False
+      ShowAlwaysCheckable = False
       OnClick = SaveConfigOnExitExecute
     end
   end

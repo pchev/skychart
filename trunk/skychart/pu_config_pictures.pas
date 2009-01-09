@@ -213,6 +213,8 @@ begin
 LockChange:=true;
 ShowImages;
 LockChange:=false;
+ImageTimer1.Interval:=100;
+ImageTimer1.enabled:=true;
 end;
 
 procedure Tf_config_pictures.ShowImages;
@@ -258,6 +260,11 @@ procedure Tf_config_pictures.FormCreate(Sender: TObject);
 begin
  SetLang;
   LockChange:=true;
+  backimginfo.caption:=rsNoPicture;
+  ShowBackImg.checked:=false;
+  Image1.canvas.brush.color:=clBlack;
+  Image1.canvas.pen.color:=clBlack;
+  Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
 end;
 
 procedure Tf_config_pictures.Button2Click(Sender: TObject);
@@ -354,6 +361,7 @@ end;
 procedure Tf_config_pictures.ImageTimer1Timer(Sender: TObject);
 begin
 ImageTimer1.enabled:=false;
+ImageTimer1.Interval:=500;
 RefreshImage;
 end;
 
@@ -385,8 +393,9 @@ var bmp: TBitmap;
     c1,c2:double;
     x,y,dx,dy:integer;
 begin
-  bmp:=Tbitmap.create;
-  FFits.GetBitmap(bmp);
+bmp:=Tbitmap.create;
+FFits.GetBitmap(bmp);
+if bmp.Width>1 then begin
   c1:=Image1.width/Image1.Height;
   c2:=bmp.width/bmp.Height;
   if c1>c2 then begin
@@ -404,7 +413,8 @@ begin
   Image1.canvas.pen.color:=clBlack;
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
   Image1.canvas.stretchdraw(rect(x,y,x+dx,y+dy),bmp);
-  bmp.Free;
+end;
+bmp.Free;
 end;
 
 procedure Tf_config_pictures.ShowBackImgClick(Sender: TObject);
