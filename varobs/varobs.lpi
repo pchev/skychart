@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
-    <PathDelim Value="/"/>
-    <Version Value="6"/>
+    <Version Value="7"/>
     <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
       <Title Value="varobs"/>
-      <Icon Value="AAABAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAA8AAA8AAA8AAAAA/////////////////wAAAP4AoAAAAAAAAAAAAAAAAAD+oKAAAADgAAAAAAAAAAAA/gCgAAAA4AAAAAAOAAAAAPDgAAAADg4AAAAADgAAAA/w4KoAAA4OsAAAAA4LAAAA8OAAAAAOrgAAAADrCwAAAPDgCgAADrDgAAAA6wAAAADwDqAAAOCw67AAAOsKAAAP8A4AAADqAOALAADgsAAAAPAOoAAA4ACuoAAOCroAAADwDgAKrgAADgAADgsKAAAA8ADrAA4LAADroA4AAAAAAPAA4LsOAAAA4KAOCgAAAA/wAOALCqoAAOCgDqoAAAAA8ADgoOAKAAAOoOAAAAAAAPAA4AvqAAAADguwoAAAAADwAA6g4LoAAA4LsAAAAAAA8AAOqwoAAAAA4OuwAAAAD/AADg6gAAAAAO4AAAAAAADwAA4KqqAAAADuAAAAAAAA8AAA7gAAAAAADgAAAAAAAPAAAOAAAAAAAA4AAAAAAADwAADgAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////gAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAAB/////w=="/>
+      <Icon Value="0"/>
       <UseXPManifest Value="True"/>
     </General>
     <VersionInfo>
@@ -23,7 +25,7 @@
       <local>
         <FormatVersion Value="1"/>
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="/home/cdc"/>
+        <WorkingDirectory Value="/home/pch/cdc/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="5">
@@ -57,7 +59,6 @@
         <ComponentName Value="DetailForm"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="detail1.lrs"/>
         <UnitName Value="detail1"/>
       </Unit1>
       <Unit2>
@@ -66,7 +67,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="ObsUnit.lrs"/>
         <UnitName Value="ObsUnit"/>
       </Unit2>
       <Unit3>
@@ -75,7 +75,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="variables1.lrs"/>
         <UnitName Value="variables1"/>
       </Unit3>
       <Unit4>
@@ -84,7 +83,6 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="aavsochart.lrs"/>
         <UnitName Value="aavsochart"/>
       </Unit4>
       <Unit5>
@@ -92,7 +90,6 @@
         <ComponentName Value="OptForm"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="SettingUnit.lrs"/>
         <UnitName Value="SettingUnit"/>
       </Unit5>
       <Unit6>
@@ -100,7 +97,6 @@
         <ComponentName Value="splash"/>
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
-        <ResourceFilename Value="splashunit.lrs"/>
         <UnitName Value="splashunit"/>
       </Unit6>
       <Unit7>
@@ -120,6 +116,11 @@
     <SearchPaths>
       <UnitOutputDirectory Value="units"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <CStyleOperator Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <Linking>
       <Debugging>
         <GenerateDebugInfo Value="True"/>

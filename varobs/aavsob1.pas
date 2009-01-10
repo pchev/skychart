@@ -115,11 +115,38 @@ if not directoryexists(privatedir) then begin
 end;
 if not directoryexists(slash(privatedir)+'quicklook') then CreateDir(slash(privatedir)+'quicklook');
 if not directoryexists(slash(privatedir)+'afoevdata') then CreateDir(slash(privatedir)+'afoevdata');
-{$ifdef unix}  // allow a shared install
-if (not directoryexists(slash(appdir)+slash('data')+slash('varobs'))) and
-   (directoryexists(SharedDir)) then
-   appdir:=SharedDir;
-{$endif}
+
+if (not directoryexists(slash(appdir)+slash('data')+'varobs')) then begin
+  // try under the current directory
+  buf:=GetCurrentDir;
+  if (directoryexists(slash(buf)+slash('data')+'varobs')) then
+     appdir:=buf
+  else begin
+     // try under the program directory
+     buf:=ExtractFilePath(ParamStr(0));
+     if (directoryexists(slash(buf)+slash('data')+'varobs')) then
+        appdir:=buf
+     else begin
+         // try share directory under current location
+         buf:=ExpandFileName(slash(GetCurrentDir)+SharedDir);
+         if (directoryexists(slash(buf)+slash('data')+'varobs')) then
+            appdir:=buf
+         else begin
+            // try share directory at the same location as the program
+            buf:=ExpandFileName(slash(ExtractFilePath(ParamStr(0)))+SharedDir);
+            if (directoryexists(slash(buf)+slash('data')+'varobs')) then
+               appdir:=buf
+            else begin
+               MessageDlg('Could not found the application data directory.'+crlf
+                   +'Please check the program installation.',
+                   mtError, [mbAbort], 0);
+               Halt;
+            end;
+         end;
+     end;
+  end;
+end;
+
 ConstDir:=slash(appdir)+slash('data')+slash('varobs');
 end;
 
@@ -268,6 +295,7 @@ end;
 procedure TForm1.FormShow(Sender: TObject);
 begin
 GetAppDir;
+OpenFileCmd:=DefaultOpenFileCMD;
 DirectoryEdit1.Directory:=slash(appdir)+slash('data')+slash('varobs');
 SpinEdit1.Text:=formatdatetime('yyyy',now);
 FileNameEdit1.FileName:=slash(privatedir)+'BULLET'+formatdatetime('yy',now)+'.TXT';

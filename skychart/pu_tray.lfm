@@ -3,13 +3,10 @@ object f_tray: Tf_tray
   Height = 300
   Top = 120
   Width = 400
-  HelpContext = 0
   ActiveControl = PageControl1
   Caption = 'Skychart Icon Setup'
   ClientHeight = 300
   ClientWidth = 400
-  Font.Height = 0
-  Font.Style = []
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -19,7 +16,6 @@ object f_tray: Tf_tray
     Height = 25
     Top = 264
     Width = 75
-    HelpContext = 0
     Caption = 'OK'
     OnClick = Button1Click
     TabOrder = 0
@@ -29,39 +25,34 @@ object f_tray: Tf_tray
     Height = 248
     Top = 8
     Width = 384
-    HelpContext = 0
     ActivePage = TabSheet1
     TabIndex = 0
     TabOrder = 1
     object TabSheet1: TTabSheet
-      HelpContext = 0
       Caption = 'Appearance'
-      ClientHeight = 221
+      ClientHeight = 220
       ClientWidth = 380
       object Label1: TLabel
         Left = 15
-        Height = 14
+        Height = 15
         Top = 96
         Width = 68
-        HelpContext = 0
         Caption = 'Background'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 220
-        Height = 14
+        Height = 15
         Top = 96
         Width = 23
-        HelpContext = 0
         Caption = 'Text'
         ParentColor = False
       end
       object Label3: TLabel
         Left = 15
-        Height = 14
+        Height = 15
         Top = 154
         Width = 50
-        HelpContext = 0
         Caption = 'Text Size'
         ParentColor = False
       end
@@ -70,14 +61,12 @@ object f_tray: Tf_tray
         Height = 32
         Top = 169
         Width = 64
-        HelpContext = 0
       end
       object ColorBox1: TColorBox
         Left = 15
-        Height = 25
+        Height = 28
         Top = 111
         Width = 150
-        HelpContext = 0
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
         AutoComplete = False
         Ctl3D = False
@@ -88,10 +77,9 @@ object f_tray: Tf_tray
       end
       object ColorBox2: TColorBox
         Left = 220
-        Height = 25
+        Height = 28
         Top = 111
         Width = 150
-        HelpContext = 0
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
         AutoComplete = False
         Ctl3D = False
@@ -105,7 +93,6 @@ object f_tray: Tf_tray
         Height = 23
         Top = 169
         Width = 146
-        HelpContext = 0
         MaxValue = 20
         MinValue = 4
         OnChange = IconSettingChange
@@ -117,7 +104,6 @@ object f_tray: Tf_tray
         Height = 72
         Top = 8
         Width = 353
-        HelpContext = 0
         AutoFill = True
         Caption = 'Icon Size'
         ChildSizing.LeftRightSpacing = 6
@@ -129,7 +115,7 @@ object f_tray: Tf_tray
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 3
         ClientHeight = 57
-        ClientWidth = 349
+        ClientWidth = 351
         Columns = 3
         Ctl3D = False
         Items.Strings = (
@@ -142,16 +128,14 @@ object f_tray: Tf_tray
       end
     end
     object TabSheet2: TTabSheet
-      HelpContext = 0
       Caption = 'Clock'
-      ClientHeight = 221
+      ClientHeight = 220
       ClientWidth = 380
       object RadioGroup1: TRadioGroup
         Left = 55
         Height = 184
         Top = 16
         Width = 280
-        HelpContext = 0
         AutoFill = True
         Caption = 'Icon Time Display'
         ChildSizing.LeftRightSpacing = 6
@@ -163,7 +147,7 @@ object f_tray: Tf_tray
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
         ClientHeight = 169
-        ClientWidth = 276
+        ClientWidth = 278
         Ctl3D = False
         ItemIndex = 0
         Items.Strings = (
@@ -178,16 +162,14 @@ object f_tray: Tf_tray
       end
     end
     object TabSheet3: TTabSheet
-      HelpContext = 0
       Caption = 'Action'
-      ClientHeight = 221
+      ClientHeight = 220
       ClientWidth = 380
       object RadioGroup3: TRadioGroup
         Left = 55
         Height = 105
         Top = 16
         Width = 280
-        HelpContext = 0
         AutoFill = True
         Caption = 'Icon click action'
         ChildSizing.LeftRightSpacing = 6
@@ -199,7 +181,7 @@ object f_tray: Tf_tray
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
         ClientHeight = 90
-        ClientWidth = 276
+        ClientWidth = 278
         Ctl3D = False
         Items.Strings = (
           'Clock'
@@ -215,7 +197,6 @@ object f_tray: Tf_tray
     Height = 25
     Top = 264
     Width = 75
-    HelpContext = 0
     Cancel = True
     Caption = 'Cancel'
     OnClick = Button2Click
@@ -226,37 +207,25 @@ object f_tray: Tf_tray
     top = 264
     object MenuItem1: TMenuItem
       Caption = 'Clock'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = MenuItem1Click
     end
     object MenuItem4: TMenuItem
       Caption = 'Calendar'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = MenuItem4Click
     end
     object MenuItem2: TMenuItem
       Caption = 'Skychart'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = MenuItem2Click
     end
     object MenuItem3: TMenuItem
       Caption = 'Setup'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = MenuItem3Click
     end
     object MenuItem6: TMenuItem
       Caption = '-'
-      RightJustify = False
-      ShowAlwaysCheckable = False
     end
     object MenuItem5: TMenuItem
       Caption = 'Quit'
-      RightJustify = False
-      ShowAlwaysCheckable = False
       OnClick = MenuItem5Click
     end
   end

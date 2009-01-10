@@ -1414,7 +1414,7 @@ if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
                appdir:=buf
             else begin
                MessageDlg('Could not found the application data directory.'+crlf
-                   +'Please edit the file .cartesduciel.ini'+crlf
+                   +'Please edit the file skychart.ini'+crlf
                    +'and indicate at the line Appdir= where you install the data.',
                    mtError, [mbAbort], 0);
                Halt;

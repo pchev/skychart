@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
-    <PathDelim Value="/"/>
-    <Version Value="6"/>
+    <Version Value="7"/>
     <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
       <Title Value="lpv_bulletin"/>
@@ -23,7 +25,7 @@
       <local>
         <FormatVersion Value="1"/>
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="/home/cdc"/>
+        <WorkingDirectory Value="/home/pch/cdc/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="1">
@@ -31,16 +33,14 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="4">
+    <Units Count="7">
       <Unit0>
         <Filename Value="varobs_lpv_bulletin.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="varobs_lpv_bulletin"/>
-        <CursorPos X="37" Y="16"/>
+        <CursorPos X="58" Y="19"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="1"/>
         <UsageCount Value="26"/>
-        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="aavsob1.pas"/>
@@ -48,10 +48,9 @@
         <HasResources Value="True"/>
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <ResourceFilename Value="aavsob1.lrs"/>
         <UnitName Value="aavsob1"/>
-        <CursorPos X="46" Y="249"/>
-        <TopLine Value="246"/>
+        <CursorPos X="1" Y="311"/>
+        <TopLine Value="280"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
@@ -60,7 +59,6 @@
         <Filename Value="copyplan1.pas"/>
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
-        <ResourceFilename Value="copyplan1.lrs"/>
         <UnitName Value="copyplan1"/>
         <CursorPos X="29" Y="4"/>
         <TopLine Value="1"/>
@@ -69,12 +67,112 @@
       <Unit3>
         <Filename Value="u_util2.pas"/>
         <UnitName Value="u_util2"/>
-        <CursorPos X="1" Y="94"/>
-        <TopLine Value="73"/>
+        <CursorPos X="78" Y="1165"/>
+        <TopLine Value="1151"/>
         <UsageCount Value="12"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="variables1.pas"/>
+        <ComponentName Value="VarForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="variables1"/>
+        <CursorPos X="40" Y="540"/>
+        <TopLine Value="505"/>
+        <UsageCount Value="10"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="u_param.pas"/>
+        <UnitName Value="u_param"/>
+        <CursorPos X="7" Y="59"/>
+        <TopLine Value="38"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../../../pch/lazarus/lcl/include/control.inc"/>
+        <CursorPos X="1" Y="2526"/>
+        <TopLine Value="2505"/>
+        <UsageCount Value="10"/>
+      </Unit6>
     </Units>
-    <JumpHistory Count="0" HistoryIndex="-1"/>
+    <JumpHistory Count="19" HistoryIndex="18">
+      <Position1>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="107" Column="1" TopLine="86"/>
+      </Position1>
+      <Position2>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="108" Column="1" TopLine="87"/>
+      </Position2>
+      <Position3>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="109" Column="1" TopLine="88"/>
+      </Position3>
+      <Position4>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="110" Column="1" TopLine="89"/>
+      </Position4>
+      <Position5>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="111" Column="1" TopLine="90"/>
+      </Position5>
+      <Position6>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="116" Column="1" TopLine="95"/>
+      </Position6>
+      <Position7>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="117" Column="1" TopLine="96"/>
+      </Position7>
+      <Position8>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="119" Column="1" TopLine="98"/>
+      </Position8>
+      <Position9>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="121" Column="1" TopLine="100"/>
+      </Position9>
+      <Position10>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="122" Column="1" TopLine="101"/>
+      </Position10>
+      <Position11>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="126" Column="1" TopLine="105"/>
+      </Position11>
+      <Position12>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="127" Column="1" TopLine="106"/>
+      </Position12>
+      <Position13>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="131" Column="1" TopLine="110"/>
+      </Position13>
+      <Position14>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="132" Column="1" TopLine="111"/>
+      </Position14>
+      <Position15>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="133" Column="1" TopLine="112"/>
+      </Position15>
+      <Position16>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="157" Column="54" TopLine="129"/>
+      </Position16>
+      <Position17>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="298" Column="25" TopLine="276"/>
+      </Position17>
+      <Position18>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="107" Column="1" TopLine="86"/>
+      </Position18>
+      <Position19>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="309" Column="27" TopLine="280"/>
+      </Position19>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="8"/>

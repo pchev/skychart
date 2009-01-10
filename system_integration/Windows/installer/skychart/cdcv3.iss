@@ -46,7 +46,7 @@ Name: {app}\doc\wiki_doc\*; Type: filesandordirs ; Components: ; Tasks:
 
 [Files]
 Source: Data\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: PrivateFiles\*; DestDir: {userdocs}\Cartes du Ciel\; Flags: onlyifdoesntexist 
+Source: PrivateFiles\*; DestDir: {userappdata}\skychart\; Flags: onlyifdoesntexist 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]

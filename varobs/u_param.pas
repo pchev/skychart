@@ -51,23 +51,23 @@ aavsocharteast: array[0..1] of string=('right','left');
 skychartopt = '--unique';
 
 {$ifdef linux}
-      DefaultPrivateDir='~/cartes_du_ciel/varobs';
-      Defaultconfigfile='~/.varobs.ini';
-      SharedDir='/usr/share/apps/skychart';
+      DefaultPrivateDir='~/.skychart/varobs';
+      Defaultconfigfile='~/.skychart/varobs.ini';
+      SharedDir='../share/skychart';
       DefaultSkychart='skychart';
       DefaultLpvb='varobs_lpv_bulletin';
-      DefaultOpenFileCMD='kfmclient exec';
+      DefaultOpenFileCMD='xdg-open';
 {$endif}
 {$ifdef darwin}
-      DefaultPrivateDir='~/cartes_du_ciel/varobs';
-      Defaultconfigfile='~/.varobs.ini';
+      DefaultPrivateDir='~/.skychart/varobs';
+      Defaultconfigfile='~/.skychart/varobs.ini';
       SharedDir='/usr/share/skychart';
       DefaultSkychart='skychart';
       DefaultLpvb='varobs_lpv_bulletin';
       DefaultOpenFileCMD='open';
 {$endif}
 {$ifdef mswindows}
-      DefaultPrivateDir='Cartes du Ciel\VarObs';
+      DefaultPrivateDir='Skychart\VarObs';
       Defaultconfigfile='varobs.ini';
       DefaultSkychart='skychart.exe';
       DefaultLpvb='varobs_lpv_bulletin.exe';
