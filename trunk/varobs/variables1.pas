@@ -497,7 +497,7 @@ configfile:=slash(privatedir)+configfile;
 skychart:=slash(appdir)+DefaultSkychart;
 if not FileExists(skychart) then skychart:=DefaultSkychart;
 lpvb:=slash(appdir)+Defaultlpvb;
-if not FileExists(lpvb) then skychart:=Defaultlpvb;
+if not FileExists(lpvb) then lpvb:=Defaultlpvb;
 if not directoryexists(privatedir) then CreateDir(privatedir);
 if not directoryexists(privatedir) then forcedirectory(privatedir);
 if not directoryexists(privatedir) then begin
@@ -507,11 +507,38 @@ if not directoryexists(privatedir) then begin
 end;
 if not directoryexists(slash(privatedir)+'quicklook') then CreateDir(slash(privatedir)+'quicklook');
 if not directoryexists(slash(privatedir)+'afoevdata') then CreateDir(slash(privatedir)+'afoevdata');
-{$ifdef unix}  // allow a shared install
-if (not directoryexists(slash(appdir)+slash('data')+slash('varobs'))) and
-   (directoryexists(SharedDir)) then
-   appdir:=SharedDir;
-{$endif}
+
+if (not directoryexists(slash(appdir)+slash('data')+'varobs')) then begin
+  // try under the current directory
+  buf:=GetCurrentDir;
+  if (directoryexists(slash(buf)+slash('data')+'varobs')) then
+     appdir:=buf
+  else begin
+     // try under the program directory
+     buf:=ExtractFilePath(ParamStr(0));
+     if (directoryexists(slash(buf)+slash('data')+'varobs')) then
+        appdir:=buf
+     else begin
+         // try share directory under current location
+         buf:=ExpandFileName(slash(GetCurrentDir)+SharedDir);
+         if (directoryexists(slash(buf)+slash('data')+'varobs')) then
+            appdir:=buf
+         else begin
+            // try share directory at the same location as the program
+            buf:=ExpandFileName(slash(ExtractFilePath(ParamStr(0)))+SharedDir);
+            if (directoryexists(slash(buf)+slash('data')+'varobs')) then
+               appdir:=buf
+            else begin
+               MessageDlg('Could not found the application data directory.'+crlf
+                   +'Please check the program installation.',
+                   mtError, [mbAbort], 0);
+               Halt;
+            end;
+         end;
+     end;
+  end;
+end;
+
 ConstDir:=slash(appdir)+slash('data')+slash('varobs');
 end;
 

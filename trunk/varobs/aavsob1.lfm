@@ -3,8 +3,6 @@ object Form1: TForm1
   Height = 406
   Top = 96
   Width = 420
-  HorzScrollBar.Page = 419
-  VertScrollBar.Page = 405
   ActiveControl = Button1
   Caption = 'AAVSO Bulletin'
   ClientHeight = 406
@@ -14,27 +12,28 @@ object Form1: TForm1
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefaultPosOnly
+  LCLVersion = '0.9.27'
   object Label2: TLabel
     Left = 32
-    Height = 16
+    Height = 15
     Top = 224
-    Width = 305
+    Width = 325
     Caption = 'AAVSO LPV Bulletin Single file, Plain Text - By designation'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 144
-    Height = 20
+    Height = 22
     Top = 376
-    Width = 10
+    Width = 12
     Alignment = taCenter
     ParentColor = False
   end
   object Label4: TLabel
     Left = 32
-    Height = 16
+    Height = 15
     Top = 288
-    Width = 206
+    Width = 223
     Caption = 'Varobs GCVS by constellation directory'
     ParentColor = False
   end
@@ -51,31 +50,32 @@ object Form1: TForm1
   object Label7: TLabel
     Cursor = crHandPoint
     Left = 32
-    Height = 14
+    Height = 15
     Top = 144
-    Width = 210
+    Width = 243
     Caption = 'http://www.aavso.org/publications/bulletin/'
     Color = clBtnFace
     Font.Color = clBlue
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     ParentColor = False
+    ParentFont = False
     Transparent = False
     OnClick = Label7Click
   end
   object Label8: TLabel
     Left = 32
-    Height = 16
+    Height = 15
     Top = 120
-    Width = 276
+    Width = 293
     Caption = 'Get the AAVSO Validation file and LPV Bulletin from:'
     ParentColor = False
   end
   object Label1: TLabel
     Left = 32
-    Height = 16
+    Height = 15
     Top = 184
-    Width = 24
+    Width = 26
     Caption = 'Year'
     ParentColor = False
   end
@@ -93,9 +93,11 @@ object Form1: TForm1
     Height = 23
     Top = 248
     Width = 304
+    DialogOptions = []
+    FilterIndex = 0
     ButtonWidth = 23
     NumGlyphs = 1
-    ParentColor = False
+    Ctl3D = False
     TabOrder = 1
   end
   object SpinEdit1: TSpinEdit
@@ -114,9 +116,10 @@ object Form1: TForm1
     Height = 23
     Top = 312
     Width = 304
+    ShowHidden = False
     ButtonWidth = 23
     NumGlyphs = 1
-    ParentColor = False
+    Ctl3D = False
     TabOrder = 3
   end
 end
