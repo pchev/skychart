@@ -1445,7 +1445,10 @@ begin
          if rec.star.valid[vsId] then txt:=rec.star.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          txt:=rec.options.ShortName+b+txt;
-         cfgsc.FindName:=txt;
+         if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then
+                cfgsc.FindName:=trim(rec.str[3])
+            else
+                cfgsc.FindName:=txt;
          Desc:=Desc+'  *'+tab+txt+tab;
          if rec.star.magv<90 then str(rec.star.magv:5:2,txt) else txt:=b5;
          Desc:=Desc+trim(rec.options.flabel[lOffset+vsMagv])+dp+txt+tab;
