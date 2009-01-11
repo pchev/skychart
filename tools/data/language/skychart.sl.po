@@ -1120,11 +1120,11 @@ msgstr ""
 msgid "Device Port "
 msgstr ""
 
+#, fuzzy
 #: u_translation.rsdiam
 msgid "Diam."
 msgstr ""
 
-#, fuzzy
 #: u_translation.rsdiameter
 msgid "Diameter"
 msgstr ""
