@@ -1,5 +1,17 @@
 Коментарі до версії 3.0.1.5 SVN
 
+2009, January 11 changes:
+
+WARNING!
+This version change the location of the configuration files.
+For Windows this is now %LOCALAPPDATA%\Skychart and for Linux ~/.skychart
+The program configuration is reset to the default values.
+After the first run you can copy the files you want to keep to the new folder.
+Do NOT copy cartesduciel.ini because it contain invalid file path.
+You can then totally remove the folders My Documents\Cartes du Ciel or ~/cartes_du_ciel and ~/.cartesduciel.ini
+For Linux the application data directory also change for /usr/share/skychart, if you 
+install additional catalogs you must move them from /usr/share/apps/skychart.
+
 December 6 change:
 
 Fix the interface with Audela software.

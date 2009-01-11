@@ -1,5 +1,22 @@
 Version 3.0.1.5 SVN  Notes de la version
 
+Changement du 11 janvier 2009:
+
+ATTENTION!
+Cette version change l'emplacement d'enregistrement des fichiers de configuration.
+Pour Windows c'est maintenant %LOCALAPPDATA%\Skychart et pour Linux ~/.skychart
+La configuration du programme est réinitialisée aux valeurs par défaut.
+Après la première exécution du programme vous pouvez recopier les fichiers que vous voulez
+conserver dans les nouveaux répertoires.
+Ne PAS recopier cartesduciel.ini car il contient des chemins non valide.
+Vous pouvez ensuite complètement effacer Mes Documents\Cartes du Ciel ou ~/cartes_du_ciel et ~/.cartesduciel.ini
+Pour Linux le répertoire d'installation par défaut des données du programme est maintenant 
+/usr/share/skychart, si vous aviez installé des catalogues supplémentaires déplacez les 
+depuis /usr/share/apps/skychart.
+
+Nouvelle traduction en Slovène par Grofaty
+Correction de bug selon: http://www.ap-i.net/mantis/changelog_page.php
+
 Changement du 6 décembre:
 
 Corrige l'interface avec Audela.
