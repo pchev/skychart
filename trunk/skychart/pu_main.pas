@@ -1344,11 +1344,11 @@ privatedir:=expandfilename(PrivateDir);
 {$ifdef win32}
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
-buf:=Folder;
+buf:=trim(Folder);
 if buf='' then begin  // old windows version
    SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
    SHGetPathFromIDList(PIDL, Folder);
-   buf:=Folder;
+   buf:=trim(Folder);
 end;
 privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+configfile;

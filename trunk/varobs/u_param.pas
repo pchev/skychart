@@ -69,6 +69,7 @@ skychartopt = '--unique';
 {$ifdef mswindows}
       DefaultPrivateDir='Skychart\VarObs';
       Defaultconfigfile='varobs.ini';
+      SharedDir='.\';
       DefaultSkychart='skychart.exe';
       DefaultLpvb='varobs_lpv_bulletin.exe';
       DefaultOpenFileCMD='';

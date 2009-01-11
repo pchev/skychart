@@ -521,7 +521,9 @@ var inif: TMemIniFile;
 {$ifdef win32}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
-const CSIDL_PERSONAL = $0005;
+const CSIDL_PERSONAL = $0005;   // My Documents
+      CSIDL_APPDATA  = $001a;   // <user name>\Application Data
+      CSIDL_LOCAL_APPDATA = $001c;  // <user name>\Local Settings\Applicaiton Data (non roaming)
 {$endif}
 begin
 startdir:=ExtractFilePath(ParamStr(0));
@@ -547,9 +549,15 @@ privatedir:=expandfilename(PrivateDir);
 configfile:=expandfilename(Defaultconfigfile);
 {$endif}
 {$ifdef win32}
-SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
+SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
-privatedir:=slash(Folder)+privatedir;
+buf:=trim(Folder);
+if buf='' then begin  // old windows version
+   SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
+   SHGetPathFromIDList(PIDL, Folder);
+   buf:=trim(Folder);
+end;
+privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+Defaultconfigfile;
 {$endif}
 

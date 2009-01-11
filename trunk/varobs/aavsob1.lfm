@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 273
+  Left = 161
   Height = 406
-  Top = 96
+  Top = 161
   Width = 420
   ActiveControl = Button1
   Caption = 'AAVSO Bulletin'
@@ -15,25 +15,25 @@ object Form1: TForm1
   LCLVersion = '0.9.27'
   object Label2: TLabel
     Left = 32
-    Height = 15
+    Height = 14
     Top = 224
-    Width = 325
+    Width = 276
     Caption = 'AAVSO LPV Bulletin Single file, Plain Text - By designation'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 144
-    Height = 22
+    Height = 14
     Top = 376
-    Width = 12
+    Width = 1
     Alignment = taCenter
     ParentColor = False
   end
   object Label4: TLabel
     Left = 32
-    Height = 15
+    Height = 14
     Top = 288
-    Width = 223
+    Width = 185
     Caption = 'Varobs GCVS by constellation directory'
     ParentColor = False
   end
@@ -50,9 +50,9 @@ object Form1: TForm1
   object Label7: TLabel
     Cursor = crHandPoint
     Left = 32
-    Height = 15
+    Height = 14
     Top = 144
-    Width = 243
+    Width = 210
     Caption = 'http://www.aavso.org/publications/bulletin/'
     Color = clBtnFace
     Font.Color = clBlue
@@ -65,17 +65,17 @@ object Form1: TForm1
   end
   object Label8: TLabel
     Left = 32
-    Height = 15
+    Height = 14
     Top = 120
-    Width = 293
+    Width = 247
     Caption = 'Get the AAVSO Validation file and LPV Bulletin from:'
     ParentColor = False
   end
   object Label1: TLabel
     Left = 32
-    Height = 15
+    Height = 14
     Top = 184
-    Width = 26
+    Width = 23
     Caption = 'Year'
     ParentColor = False
   end
@@ -93,11 +93,8 @@ object Form1: TForm1
     Height = 23
     Top = 248
     Width = 304
-    DialogOptions = []
-    FilterIndex = 0
     ButtonWidth = 23
     NumGlyphs = 1
-    Ctl3D = False
     TabOrder = 1
   end
   object SpinEdit1: TSpinEdit
@@ -116,10 +113,8 @@ object Form1: TForm1
     Height = 23
     Top = 312
     Width = 304
-    ShowHidden = False
     ButtonWidth = 23
     NumGlyphs = 1
-    Ctl3D = False
     TabOrder = 3
   end
 end
