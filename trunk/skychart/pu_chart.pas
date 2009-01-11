@@ -1431,7 +1431,6 @@ end;
 
 
 procedure Tf_chart.Image1MouseDown(Sender: TObject; Button: TMouseButton;
-
   Shift: TShiftState; X, Y: Integer);
 begin
 lastx:=x;
@@ -1464,11 +1463,11 @@ if MovingCircle then begin
    Image1.Invalidate;
    {$endif}
 end else
-if shift = [ssLeft] then begin
+if (ssLeft in shift)and(not(ssShift in shift)) then begin
    ZoomBox(2,X,Y);
-end else if (shift=[ssMiddle])or(shift=[ssLeft,ssShift]) then begin
+end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift)) then begin
      TrackCursor(X,Y);
-end else if shift=[ssMiddle,ssCtrl] then begin
+end else if ((ssMiddle in shift)and(ssCtrl in Shift)) then begin
      c:=abs(y-lastyzoom)/200;
      if c>1 then c:=1;
      if (y-lastyzoom)>0 then ZoomCursor(1+c)

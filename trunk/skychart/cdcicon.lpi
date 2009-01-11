@@ -10,7 +10,7 @@
       <TargetFileExt Value=""/>
       <Title Value="cdcicon"/>
       <Icon Value="0"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="1"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -66,7 +66,7 @@
         <UnitName Value="cdcicon"/>
         <CursorPos X="35" Y="20"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -76,8 +76,8 @@
         <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
-        <CursorPos X="41" Y="632"/>
-        <TopLine Value="511"/>
+        <CursorPos X="23" Y="545"/>
+        <TopLine Value="523"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="30"/>
         <Bookmarks Count="2">
@@ -139,9 +139,11 @@
       <Unit9>
         <Filename Value="u_constant.pas"/>
         <UnitName Value="u_constant"/>
-        <CursorPos X="7" Y="275"/>
-        <TopLine Value="254"/>
+        <CursorPos X="7" Y="273"/>
+        <TopLine Value="252"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="cu_tz.pas"/>
@@ -169,7 +171,7 @@
         <UnitName Value="u_translation"/>
         <CursorPos X="11" Y="1131"/>
         <TopLine Value="1111"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit13>
@@ -235,7 +237,7 @@
         <UsageCount Value="10"/>
       </Unit21>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="pu_tray.pas"/>
         <Caret Line="294" Column="12" TopLine="274"/>
@@ -352,6 +354,10 @@
         <Filename Value="pu_tray.pas"/>
         <Caret Line="597" Column="74" TopLine="567"/>
       </Position29>
+      <Position30>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="545" Column="23" TopLine="523"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
