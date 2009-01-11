@@ -4,7 +4,7 @@ object VarForm: TVarForm
   Top = 98
   Width = 800
   Caption = 'Variable stars observer'
-  ClientHeight = 575
+  ClientHeight = 580
   ClientWidth = 800
   Font.Height = -11
   Font.Name = 'Default'
@@ -120,8 +120,7 @@ object VarForm: TVarForm
   ShowHint = True
   LCLVersion = '0.9.27'
   object Grid1: TStringGrid
-    Left = 0
-    Height = 503
+    Height = 508
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 800
@@ -139,9 +138,7 @@ object VarForm: TVarForm
     OnSelectCell = Grid1SelectCell
   end
   object Panel1: TPanel
-    Left = 0
     Height = 70
-    Top = 0
     Width = 800
     Align = alTop
     ClientHeight = 70
@@ -215,10 +212,9 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 22
+      ClientHeight = 20
       ClientWidth = 325
       Columns = 3
-      Ctl3D = False
       ItemIndex = 0
       Items.Strings = (
         'Date/Time'

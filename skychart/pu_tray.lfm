@@ -30,8 +30,8 @@ object f_tray: Tf_tray
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Appearance'
-      ClientHeight = 220
-      ClientWidth = 380
+      ClientHeight = 222
+      ClientWidth = 376
       object Label1: TLabel
         Left = 15
         Height = 15
@@ -64,27 +64,21 @@ object f_tray: Tf_tray
       end
       object ColorBox1: TColorBox
         Left = 15
-        Height = 28
+        Height = 22
         Top = 111
         Width = 150
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
-        AutoComplete = False
-        Ctl3D = False
         ItemHeight = 16
-        ItemWidth = 0
         OnChange = IconSettingChange
         TabOrder = 0
       end
       object ColorBox2: TColorBox
         Left = 220
-        Height = 28
+        Height = 22
         Top = 111
         Width = 150
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
-        AutoComplete = False
-        Ctl3D = False
         ItemHeight = 16
-        ItemWidth = 0
         OnChange = IconSettingChange
         TabOrder = 1
       end
@@ -114,10 +108,9 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 3
-        ClientHeight = 57
-        ClientWidth = 351
+        ClientHeight = 54
+        ClientWidth = 349
         Columns = 3
-        Ctl3D = False
         Items.Strings = (
           '16x16'
           '32x32'
@@ -129,8 +122,8 @@ object f_tray: Tf_tray
     end
     object TabSheet2: TTabSheet
       Caption = 'Clock'
-      ClientHeight = 220
-      ClientWidth = 380
+      ClientHeight = 222
+      ClientWidth = 376
       object RadioGroup1: TRadioGroup
         Left = 55
         Height = 184
@@ -146,9 +139,8 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 169
-        ClientWidth = 278
-        Ctl3D = False
+        ClientHeight = 166
+        ClientWidth = 276
         ItemIndex = 0
         Items.Strings = (
           'Legal'
@@ -163,8 +155,8 @@ object f_tray: Tf_tray
     end
     object TabSheet3: TTabSheet
       Caption = 'Action'
-      ClientHeight = 220
-      ClientWidth = 380
+      ClientHeight = 222
+      ClientWidth = 376
       object RadioGroup3: TRadioGroup
         Left = 55
         Height = 105
@@ -180,9 +172,8 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 90
-        ClientWidth = 278
-        Ctl3D = False
+        ClientHeight = 87
+        ClientWidth = 276
         Items.Strings = (
           'Clock'
           'Calendar'
