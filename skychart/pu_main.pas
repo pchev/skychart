@@ -473,6 +473,7 @@ type
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
     procedure FileExit1Execute(Sender: TObject);
@@ -989,7 +990,16 @@ end;
 
 procedure Tf_main.FormActivate(Sender: TObject);
 begin
+  if (f_clock<>nil)and ViewClock.Checked then begin
+     f_clock.Show;
+     f_main.Setfocus;
+  end;
   ImageSetFocus(Sender);
+end;
+
+procedure Tf_main.FormDeactivate(Sender: TObject);
+begin
+  if (f_clock<>nil)and(f_clock.Visible) then f_clock.Hide;
 end;
 
 procedure Tf_main.FormShow(Sender: TObject);
@@ -3151,12 +3161,14 @@ P:=point(0,110);
      f_clock.cfgsc:=def_cfgsc;
      f_clock.planet:=planet;
   end;
-  if f_clock.visible then
-     f_clock.hide
-  else begin
+  if f_clock.visible then  begin
+     f_clock.hide;
+     ViewClock.Checked:=false;
+  end else begin
      formpos(f_clock,P.x,P.y);
      f_clock.Show;
      f_main.Setfocus;
+     ViewClock.Checked:=true;
   end;
 end;
 
