@@ -1116,11 +1116,11 @@ msgstr "Namizno okolje"
 msgid "Details"
 msgstr ""
 
+#, fuzzy
 #: u_translation.rsdeviceport
 msgid "Device Port "
 msgstr ""
 
-#, fuzzy
 #: u_translation.rsdiam
 msgid "Diam."
 msgstr ""
