@@ -990,16 +990,20 @@ end;
 
 procedure Tf_main.FormActivate(Sender: TObject);
 begin
+{$ifndef mswindows}
   if (f_clock<>nil)and ViewClock.Checked then begin
      f_clock.Show;
      f_main.Setfocus;
   end;
+ {$endif}
   ImageSetFocus(Sender);
 end;
 
 procedure Tf_main.FormDeactivate(Sender: TObject);
 begin
+{$ifndef mswindows}
   if (f_clock<>nil)and(f_clock.Visible) then f_clock.Hide;
+ {$endif}
 end;
 
 procedure Tf_main.FormShow(Sender: TObject);
