@@ -2448,7 +2448,6 @@ procedure Tf_main.Search1Execute(Sender: TObject);
 var ok: string;
 begin
  formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
- f_search.InitPlanet;
  repeat
    f_search.showmodal;
    if f_search.modalresult=mrOk then begin
@@ -3089,6 +3088,7 @@ begin
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
+    f_search.init;
     ConnectDB;
     Fits.min_sigma:=cfgm.ImageLuminosity;
     Fits.max_sigma:=cfgm.ImageContrast;
