@@ -39,14 +39,14 @@ type
   { Tf_detail }
 
   Tf_detail = class(TForm)
+    Copy: TAction;
+    SelectAll: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     IpHtmlPanel1: TIpHtmlPanel;
     Panel1: TPanel;
     Button1: TButton;
     ActionList1: TActionList;
-    EditSelectAll1: TEditSelectAll;
-    EditCopy1: TEditCopy;
     PopupMenu1: TPopupMenu;
     SelectAll1: TMenuItem;
     Copy1: TMenuItem;
@@ -55,8 +55,8 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure EditCopy1Execute(Sender: TObject);
-    procedure EditSelectAll1Execute(Sender: TObject);
+    procedure CopyExecute(Sender: TObject);
+    procedure SelectAllExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -105,13 +105,13 @@ begin
 if assigned(FNeighbor) then FNeighbor(source_chart);
 end;
 
-procedure Tf_detail.EditCopy1Execute(Sender: TObject);
+procedure Tf_detail.CopyExecute(Sender: TObject);
 begin
   if not IpHtmlPanel1.HaveSelection then IpHtmlPanel1.SelectAll;
   IpHtmlPanel1.CopyToClipboard;
 end;
 
-procedure Tf_detail.EditSelectAll1Execute(Sender: TObject);
+procedure Tf_detail.SelectAllExecute(Sender: TObject);
 begin
   IpHtmlPanel1.SelectAll;
 end;
