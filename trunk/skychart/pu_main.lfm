@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 860
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 560
+  ClientHeight = 557
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -22,20 +22,22 @@ object f_main: Tf_main
   LCLVersion = '0.9.27'
   object MultiDoc1: TMultiDoc
     Left = 26
-    Height = 472
+    Height = 469
     Top = 54
     Width = 806
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 1
-    ClientHeight = 472
+    ClientHeight = 469
     ClientWidth = 806
     Color = clBlack
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
     TabStop = True
+    Maximized = False
     TitleHeight = 15
+    KeepLastChild = False
     WireframeMoveResize = True
     onMaximize = MultiDoc1Maximize
     onActiveChildChange = MultiDoc1ActiveChildChange
@@ -2664,21 +2666,25 @@ object f_main: Tf_main
     end
   end
   object PanelLeft: TPanel
-    Height = 472
+    Left = 0
+    Height = 469
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 472
+    ClientHeight = 469
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
-      Height = 472
+      Left = 0
+      Height = 469
+      Top = 0
       Width = 26
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar2'
+      Ctl3D = False
       EdgeBorders = [ebBottom]
       Images = ImageNormal
       ParentShowHint = False
@@ -2687,6 +2693,7 @@ object f_main: Tf_main
       Wrapable = False
       object ToolButton8: TToolButton
         Left = 1
+        Top = 0
         Action = SetupTime
         Wrap = True
       end
@@ -2765,22 +2772,24 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 832
-    Height = 472
+    Height = 469
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 472
+    ClientHeight = 469
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
-      Height = 222
+      Left = 0
+      Height = 219
       Top = 250
       Width = 28
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar3'
+      Ctl3D = False
       EdgeBorders = [ebBottom]
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
@@ -2795,6 +2804,7 @@ object f_main: Tf_main
       Wrapable = False
       object ToolButtonAllSky: TToolButton
         Left = 1
+        Top = 0
         Action = allSky
         Wrap = True
       end
@@ -2829,7 +2839,9 @@ object f_main: Tf_main
       end
     end
     object PanelFieldSize: TPanel
+      Left = 0
       Height = 250
+      Top = 0
       Width = 28
       Align = alTop
       BevelOuter = bvNone
@@ -2837,6 +2849,7 @@ object f_main: Tf_main
       ClientWidth = 28
       TabOrder = 1
       object Field1: TSpeedButton
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 3
@@ -2854,6 +2867,7 @@ object f_main: Tf_main
       end
       object Field2: TSpeedButton
         Tag = 1
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 27
@@ -2870,6 +2884,7 @@ object f_main: Tf_main
       end
       object Field3: TSpeedButton
         Tag = 2
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 50
@@ -2886,6 +2901,7 @@ object f_main: Tf_main
       end
       object Field4: TSpeedButton
         Tag = 3
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 75
@@ -2902,6 +2918,7 @@ object f_main: Tf_main
       end
       object Field5: TSpeedButton
         Tag = 4
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 100
@@ -2918,6 +2935,7 @@ object f_main: Tf_main
       end
       object Field6: TSpeedButton
         Tag = 5
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 125
@@ -2934,6 +2952,7 @@ object f_main: Tf_main
       end
       object Field7: TSpeedButton
         Tag = 6
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 150
@@ -2950,6 +2969,7 @@ object f_main: Tf_main
       end
       object Field8: TSpeedButton
         Tag = 7
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 175
@@ -2966,6 +2986,7 @@ object f_main: Tf_main
       end
       object Field9: TSpeedButton
         Tag = 8
+        Left = 0
         Height = 24
         Hint = 'Set FOV to'
         Top = 200
@@ -2982,6 +3003,7 @@ object f_main: Tf_main
       end
       object Field10: TSpeedButton
         Tag = 9
+        Left = 0
         Height = 23
         Hint = 'Set FOV to'
         Top = 227
@@ -2999,8 +3021,9 @@ object f_main: Tf_main
     end
   end
   object PanelBottom: TPanel
+    Left = 0
     Height = 34
-    Top = 526
+    Top = 523
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -3011,6 +3034,7 @@ object f_main: Tf_main
     object Shape1: TShape
       Left = 220
       Height = 34
+      Top = 0
       Width = 2
       Align = alLeft
       Brush.Color = clBtnShadow
@@ -3018,7 +3042,9 @@ object f_main: Tf_main
       Pen.Cosmetic = True
     end
     object PPanels0: TPanel
+      Left = 0
       Height = 34
+      Top = 0
       Width = 220
       Align = alLeft
       Alignment = taLeftJustify
@@ -3028,7 +3054,9 @@ object f_main: Tf_main
       FullRepaint = False
       TabOrder = 0
       object LPanels0: TPanel
+        Left = 0
         Height = 34
+        Top = 0
         Width = 220
         Align = alClient
         Alignment = taLeftJustify
@@ -3037,7 +3065,9 @@ object f_main: Tf_main
         ClientWidth = 220
         TabOrder = 0
         object P0L1: TLabel
+          Left = 0
           Height = 34
+          Top = 0
           Width = 220
           Align = alClient
           ParentColor = False
@@ -3048,6 +3078,7 @@ object f_main: Tf_main
     object PPanels1: TPanel
       Left = 222
       Height = 34
+      Top = 0
       Width = 638
       Align = alClient
       Alignment = taLeftJustify
@@ -3057,7 +3088,9 @@ object f_main: Tf_main
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
+        Left = 0
         Height = 34
+        Top = 0
         Width = 638
         Align = alClient
         Alignment = taLeftJustify
@@ -3066,7 +3099,9 @@ object f_main: Tf_main
         ClientWidth = 638
         TabOrder = 0
         object P1L1: TLabel
+          Left = 0
           Height = 34
+          Top = 0
           Width = 638
           Align = alClient
           AutoSize = False
@@ -3077,7 +3112,9 @@ object f_main: Tf_main
     end
   end
   object PanelTop: TPanel
+    Left = 0
     Height = 54
+    Top = 0
     Width = 860
     Align = alTop
     BevelOuter = bvNone
@@ -3087,9 +3124,12 @@ object f_main: Tf_main
     TabOrder = 1
     TabStop = True
     object ToolBar1: TToolBar
+      Left = 0
       Height = 25
+      Top = 0
       Width = 860
       ButtonHeight = 23
+      Ctl3D = False
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
@@ -3282,8 +3322,10 @@ object f_main: Tf_main
         ArrowKeysTraverseList = False
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+        Ctl3D = False
         DropDownCount = 15
-        ItemHeight = 15
+        ItemHeight = 0
+        ItemWidth = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -3300,8 +3342,10 @@ object f_main: Tf_main
         FullRepaint = False
         TabOrder = 4
         object ButtonMoreStar: TImage
+          Left = 0
           Height = 11
           Hint = 'More Stars'
+          Top = 0
           Width = 11
           OnClick = MoreStarExecute
           Picture.Data = {
@@ -3355,6 +3399,7 @@ object f_main: Tf_main
           Left = 12
           Height = 11
           Hint = 'Less Stars'
+          Top = 0
           Width = 11
           OnClick = LessStarExecute
           Picture.Data = {
@@ -3371,6 +3416,7 @@ object f_main: Tf_main
           Transparent = True
         end
         object ButtonMoreNeb: TImage
+          Left = 0
           Height = 11
           Hint = 'More Nebulae'
           Top = 12
@@ -3423,14 +3469,17 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 23
+        Height = 29
         Hint = 'Time Units'
         Top = 2
         Width = 80
+        AutoComplete = False
         AutoCompleteText = [cbactSearchAscending]
+        Ctl3D = False
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 15
+        ItemHeight = 0
+        ItemWidth = 0
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2
@@ -3447,7 +3496,9 @@ object f_main: Tf_main
         ClientWidth = 30
         TabOrder = 3
         object BtnRestoreChild: TSpeedButton
+          Left = 0
           Height = 15
+          Top = 0
           Width = 15
           Color = clBtnFace
           Flat = True
@@ -3457,6 +3508,7 @@ object f_main: Tf_main
         object BtnCloseChild: TSpeedButton
           Left = 15
           Height = 15
+          Top = 0
           Width = 15
           Color = clBtnFace
           Flat = True
@@ -3466,12 +3518,14 @@ object f_main: Tf_main
       end
     end
     object ToolBar4: TToolBar
+      Left = 0
       Height = 28
       Top = 26
       Width = 860
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'
+      Ctl3D = False
       EdgeBorders = [ebTop, ebBottom]
       Images = ImageNormal
       ParentShowHint = False
@@ -3789,6 +3843,7 @@ object f_main: Tf_main
     object View1: TMenuItem
       Caption = '&View'
       GroupIndex = 2
+      OnClick = View1Click
       object FullScreen1: TMenuItem
         Action = ViewFullScreen
         GroupIndex = 2
@@ -4930,6 +4985,7 @@ object f_main: Tf_main
     top = 160
   end
   object ImageList2: TImageList
+    Masked = False
     left = 280
     top = 208
   end

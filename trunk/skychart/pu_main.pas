@@ -503,6 +503,7 @@ type
     procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure VariableStar1Click(Sender: TObject);
+    procedure View1Click(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
     procedure ViewClockExecute(Sender: TObject);
     procedure ViewScrollBar1Click(Sender: TObject);
@@ -990,7 +991,7 @@ end;
 
 procedure Tf_main.FormActivate(Sender: TObject);
 begin
-{$ifndef mswindows}
+ {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
   if (f_clock<>nil)and ViewClock.Checked then begin
      f_clock.Show;
      f_main.Setfocus;
@@ -1001,7 +1002,7 @@ end;
 
 procedure Tf_main.FormDeactivate(Sender: TObject);
 begin
-{$ifndef mswindows}
+ {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
   if (f_clock<>nil)and(f_clock.Visible) then f_clock.Hide;
  {$endif}
 end;
@@ -1819,6 +1820,11 @@ end;
 procedure Tf_main.VariableStar1Click(Sender: TObject);
 begin
   ExecNoWait(varobs);
+end;
+
+procedure Tf_main.View1Click(Sender: TObject);
+begin
+    ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
 end;
 
 procedure Tf_main.rot_minusExecute(Sender: TObject);
@@ -5301,6 +5307,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
                telescopeConnect1.caption:=TConnect.hint;
                Tf_chart(sender).Connect1.caption :=TConnect.hint;
           end;
+  ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
   with MultiDoc1.ActiveObject as Tf_chart do begin
     toolbuttonshowStars.down:=sc.cfgsc.showstars;
     ShowStars1.checked:=sc.cfgsc.showstars;
