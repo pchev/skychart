@@ -3916,6 +3916,7 @@ object f_main: Tf_main
       end
       object MenuItem27: TMenuItem
         Action = ViewClock
+        ShowAlwaysCheckable = True
         OnClick = ViewClockExecute
       end
       object N7: TMenuItem
