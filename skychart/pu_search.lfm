@@ -616,8 +616,8 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 202
-    ClientWidth = 414
+    ClientHeight = 201
+    ClientWidth = 412
     Columns = 2
     Ctl3D = False
     ItemIndex = 0
