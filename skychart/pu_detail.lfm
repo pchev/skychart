@@ -9,7 +9,6 @@ object f_detail: Tf_detail
   ClientHeight = 391
   ClientWidth = 398
   OnCreate = FormCreate
-  ParentFont = False
   LCLVersion = '0.9.27'
   object Panel1: TPanel
     Height = 50
@@ -68,37 +67,29 @@ object f_detail: Tf_detail
   object ActionList1: TActionList
     left = 128
     top = 144
-    object EditSelectAll1: TEditSelectAll
-      Category = 'Edit'
-      Caption = 'Select &All'
+    object SelectAll: TAction
+      Caption = 'SelectAll'
       DisableIfNoHandler = True
-      Hint = 'Select All|Selects the entire document'
-      OnExecute = EditSelectAll1Execute
+      OnExecute = SelectAllExecute
       ShortCut = 16449
     end
-    object EditCopy1: TEditCopy
-      Category = 'Edit'
-      Caption = '&Copy'
+    object Copy: TAction
+      Caption = 'Copy'
       DisableIfNoHandler = True
-      Hint = 'Copy|Copies the selection and puts it on the Clipboard'
-      ImageIndex = 1
-      OnExecute = EditCopy1Execute
-      SecondaryShortCuts.Strings = (
-        'Ctrl+C'
-      )
-      ShortCut = 16429
+      OnExecute = CopyExecute
+      ShortCut = 16451
     end
   end
   object PopupMenu1: TPopupMenu
     left = 72
     top = 144
     object SelectAll1: TMenuItem
-      Action = EditSelectAll1
-      OnClick = EditSelectAll1Execute
+      Action = SelectAll
+      OnClick = SelectAllExecute
     end
     object Copy1: TMenuItem
-      Action = EditCopy1
-      OnClick = EditCopy1Execute
+      Action = Copy
+      OnClick = CopyExecute
     end
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
