@@ -436,6 +436,7 @@
     <SearchPaths>
       <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       <SrcPath Value="$(LazarusDir)/lcl/;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)/"/>
+      <LCLWidgetType Value="qt"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
