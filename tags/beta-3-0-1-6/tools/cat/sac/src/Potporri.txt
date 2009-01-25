@@ -1,0 +1,436 @@
+                A POTPOURRI OF ASTRONOMICAL OBJECTS
+                 ALL WITH EQUINOX 2000 COORDINATES
+
+BRIGHT WHITE DWARFS
+                                           VIS   L.Y.    DIAM
+Name              CON    R.A.      DEC.    MAG   DIST     KM
+
+Sirius B          CMA   06 45.1   -16.7    8.3    8.6   10,300
+40 ERI B          ERI   04 15.4   -07.7    9.5   15.7   17,000
+Procyon B         CMI   07 39.3   +05.2   10.7   11.4   17,500
+Feige 34          UMA   10 39.6   +43.1   11.1    55
+W1346             CYG   20 34.4   +25.1   11.5    45    17,000
+EG247             CAM   05 05.5   +52.8   11.8   140    23,000
+He3 (EG50)        AUR   06 47.6   +37.5   12.0    60    13,000
+EG62 (LP 532-81)  PYX   08 41.5   -32.9   12.0    30    22,000
+EG368             DRA   16 48.4   +59.1   12.2    40    17,000
+van Maanen's star PSC   00 49.2   +05.4   12.4    14    17,000
+EG180             CAM   04 31.2   +59.0   12.4    18    16,000
+AC +70 5824       UMI   13 38.9   +70.3   12.8   100
+EG15              ARI   02 08.8   +25.2   13.2   100    18,000
+
+Reference: Sky+Telescope 11/83- with finder charts
+Also Burnham's 416
+
+
+RED STARS  (MOSTLY N TYPE, MOSTLY VARIABLES)
+
+                                        (Days)
+Name         R.A.      DEC     Mag       Per.   Notes
+
+VX AND      00 19.9   +44.7   8.0-9.5    367   VERY RED
+AQ AND      00 27.6   +35.6   6.9-8.2    332
+U  ANT      10 35.2   -39.6   5.7-8.6    170
+V  AQL      19 04.4   -05.7   6.6-8.1    350   DEEP RED
+UV AQL      18 58.6   +14.4   8.6-9.6    340
+V  ARI      02 15.0   +12.2   8.0-8.6    75
+UU AUR      06 36.5   +38.5   5.1-7      235
+U  CAM      05 42.2   +62.5   7.7-9.5    412   NEAR 1502
+ST CAM      04 51.2   +68.1   7.0-8.4    195
+T  CNC      08 56.7   +19.8   7.8-10.6   482
+X  CNC      08 55.4   +17.2   6.2-7.5    170
+Y  CVN      12 45.1   +45.4   5.0-6.4    158   LA SUPERBA  VERY RED
+W  CMA      07 08.0   -11.9   7.0-8      IRR   ORANGE
+VY CMA      07 23.0   -25.8   8.8-9.3    IRR
+RT CAP      20 17.0   -21.3   6.5-8.1    395
+R  CAP      20 11.3   -14.0   9.4-14     345
+ST CAS      00 17.6   +50.3   9.0-10.5   IRR
+WW CAS      01 33.5   +57.8   9.1-11.7   IRR
+mu CEP      21 43.5   +58.8   3.7-5.0    IRR   Wm. HERSCHEL'S GARNET STAR
+T  CRB      15 59.5   +26.0   2.3-10     ---   BLAZE STAR -RECURRENT NOVA
+V  CRB      15 49.5   +39.5   6.9-12.5   358
+U  CYG      20 19.7   +47.9   6.7-11     465   STRONG COLOR
+V  CYG      20 41.3   +48.2   7.8-13.8   420   RED!
+RS CYG      20 13.4   +38.7   6.6-9.4    417
+
+RV CYG      21 43.3   +38.0   7.1-9.3    300   VERY RED
+T  DRA      17 56.5   +58.2   7.2-13     422   VISUAL DOUBLE
+RY DRA      12 56.4   +66.0   6.0-8.2    170
+UX DRA      19 21.6   +76.6   6.2-7.0    170
+TU GEM      06 10.9   +26.0   7.5-8.4    230
+U  HYA      10 37.6   -13.4   4.7-6.2    IRR   VERY RED IN NICE FIELD
+V  HYA      10 51.6   -21.3   6.5-12     533   REDDEST KNOWN
+R  LEP      04 59.6   -14.8   5.9-11     432   HIND'S CRIMSON STAR
+Y  LYN      07 28.2   +46.0   6.9-7.5    110   ORANGE IN A NICE FIELD
+T  LYR      18 32.3   +37.0   7.5-9.3    IRR   VERY RED
+HK LYR      18 42.8   +37.0   8.5-10.6   IRR
+KS MON      06 19.8   -05.3   8.5-10     IRR
+BG MON      06 56.4   +07.0   9.2-10.4   30
+RV MON      06 58.4   +06.1   7.0-8.9    132
+V  OPH      16 26.7   -12.4   7.3-11.5   298
+ALPHA ORI   05 55.2   +07.6   0.4-1.3    ---   BETELGEUSE
+W  ORI      05 05.4   +01.2   6.5-10     210
+GK ORI      06 17.7   +08.6   9.5-11     236
+BL ORI      05 31.9   +07.6   9.0-14     335
+RX PEG      21 56.4   +22.8   8.0-9.5    630
+TW PEG      22 04.0   +28.3   7.0-9.2    956
+Y  PER      03 27.7   +44.2   8.1-10.9   252
+Z  PSC      01 16.1   +25.8   7.0-7.9    144
+TX PSC      23 46.4   +03.5   5.5-6.0    IRR   19 PISCIUM
+RT PUP      08 05.4   -38.7   8.5-9.2    100
+RU PUP      08 07.5   -22.9   8.9-11.1   425
+X  SGE      20 05.1   +20.6   8.7-9.7    196
+BF SGE      20 02.4   +21.0   8.5-10     IRR
+SS SGR      18 30.4   -16.9   9.0-10     IRR
+AQ SGR      19 34.3   -16.4   6.6-7.7    200
+V1942 SGR   19 19.2   -15.9   6.7-7.1    IRR
+ALPHA SCO   16 29.6   -26.6   0.9-1      1730  ANTARES
+SX SCO      17 47.5   -35.7   8.5-9.5    IRR
+SU SCO      16 40.6   -32.4   8.0-9.4    414
+R  SCL      01 27.0   -32.5   6.1-8.8    363   VERY RED
+S  SCT      18 50.3   -07.9   7.3-9      148
+T  SCT      18 55.4   -08.1   8.9-10     122
+RX SCT      18 37.0   -07.6   9.0-11     IRR
+DR SER      18 47.4   +05.5   8.4-11     IRR
+R  SER      15 50.7   +15.2   5.7-14     357
+Y  TAU      05 45.7   +20.7   7.1-9.5    241
+RT UMA      09 18.4   +51.4   8.6-9.6    IRR
+VY UMA      10 45.0   +67.4   6.0-6.6    IRR
+X  VEL      09 55.5   -41.5   8.4-10.7   140
+SS VIR      12 25.3   +00.7   6.0-9.6    355   VERY RED
+BD VUL      20 37.3   +26.5   9.3-12.7   430
+
+RAPID MOTION BINARY STARS
+                                            1984.3    1994.3
+Name            RA       DEC      Mags      PA  Sep   PA   Sep
+xi UMA AB     11 18.2   +31.5   4.3  4.8    94  2.4   329  1.0
+iota LEO      11 23.9   +10.5   4.0  6.7   142  1.4   124  1.6
+gamma VIR     12 41.7   -01.5   3.5  3.5   293  3.6   281  2.6
+78 UMA        13 00.7   +56.4   5.0  7.4    50  1.4    63  1.5
+44 BOO        15 03.8   +47.6   5.3  6.2    41  1.3    50  1.9
+lambda OPH    16 30.9   +02.0   4.2  5.2    17  1.4    26  1.4
+zeta HER AB   16 41.3   +31.6   2.9  5.5   114  1.4    64  1.5
+mu DRA        17 05.3   +54.5   5.6  5.7    35  1.9    17  1.9
+70 OPH        18 05.5   +02.5   4.2  6.0   293  2.2   173  2.2
+
+Reference: Sky+Telescope  4/84 - with orbit diagrams
+
+
+STARS OF VERY LARGE PROPER MOTION
+
+Name               R.A.      DEC.    Mag     B-V     Spec   PrpMo  CON
+Barnard's Star     17 57.9   +04.6   9.54    +1.74   M5V    10.27  OPH
+Kapteyn's Star     05 11.2   -44.9   8.81    +1.59   M0V    8.73   PIC
+Groombridge 1830   11 52.7   +37.8   6.45    +0.75   G8 Vp  7.04   UMA
+Lacaille 9352      23 05.4   -35.8   7.33    +1.48   M2V    6.90   PSA
+Cordoba 32416      00 05.0   -37.3   8.96    +1.46   M4V    6.08   SCL
+Ross 619           08 11.9   +08.8   12.5    +1.7    dM5    5.30   CNC
+61 CYG A           21 06.6   +38.7   5.19    +1.19   K5V    5.20   CYG
+61 CYG B           21 06.6   +38.7   6.02    +1.38   K7V    5.20   CYG
+Lalande 21185      11 03.5   +36.0   7.47    +1.52   M2V    4.78   UMA
+Wolf 359           10 56.7   +07.0   13.66   +1.75   M6E    4.71   LEO
+epsilon IND        22 03.0   -56.8   4.74    +1.07   K5V    4.69   IND
+Lalande 21258      11 05.8   +43.5   8.66    +1.52   M2V    4.53   UMA
+WX UMA             11 05.8   +43.5   14.8    +1.2    dM5.5e 4.53   UMA
+omicron 2 ERI A    04 15.5   -07.6   4.42    +0.81   K1V    4.08   ERI
+omicron 2 ERI B    04 15.5   -07.6   9.50    +0.11   DA     4.08   ERI
+omicron 2 ERI C    04 15.5   -07.6   11.2    +1.5    M4E    4.08   ERI
+Wolf 489           13 36.9   +03.7   14.8    +0.96   DC     3.87   VIR
+Proxima Centauri   14 30.2   -62.7   10.68   +2.72   M5e    3.85   CEN
+BD +5 1668         07 27.4   +05.4   9.82    +1.56   M5     3.76   CMI
+mu CAS             01 07.9   +55.0   5.12    +0.69   G2V1   3.75   CAS
+alpha Centauri A   14 40.0   -60.8   0.33    +0.60   G2V    3.69   CEN
+alpha Centauri B   14 40.0   -60.8   1.70    +0.85   K0V    3.69   CEN
+Washington 5584    15 10.3   -16.3   9.05    +0.78   K0V1   3.68   LIB
+Washington 5583    15 10.3   -16.4   9.44    +0.86   dK0    3.68   LIB
+LP 9-231           17 50.7   +82.7   14.8    +0.6    g      3.59   UMI
+Lacaille 8760      21 17.5   -38.9   6.70    +1.42   M0V    3.46   MIC
+Luyten 726-8A      01 38.8   -17.9   12.5    +1.7    M6e    3.36   CET
+Luyten 726-8B      01 38.8   -17.9   12.95   +1.76   M6e    3.36   CET
+Luyten 789-6       22 38.4   -15.3   12.2    +1.7    M6     3.25   AQR
+Ross 451           11 40.4   +67.3   12.23   +1.45   sdM0   3.20   DRA
+82 ERI             03 19.7   -43.1   4.26    +0.70   G5V    3.14   ERI
+Ross 578           03 38.2   -11.4   13.1    +1.5    M2     3.06   ERI
+van Maanen 1       00 49.1   +05.4   12.4    +0.56   DG     2.98   PSC
+
+Reference: Sky+Telescope 8/69 with notes
+
+GALAXY GROUPS (MANY IN MAIN CATALOG, NEEDED ROOM FOR MORE INFO)
+
+Abell 262 - 01 52.7   +36.1   AND : includes NGC 708 and 753
+     - 100 Mpc, 220 Mly - Tirion #4, Webb 112
+Abell 347 - 02 25.1   +41.8   AND : 1/2 degree South preceding NGC 891
+     - may be part of Perseus group - (Abell 426) - Tirion #4, Webb 120
+NGC 5353 - 13 53.4   +40.3    CVN : 5353 12.3 mag, E5, 1.1x0.4, pB,s,E
+     - yellow and blue star involved with group - Tirion #7, Webb 213
+     - drawing 221
+Abell 1656 - 12 59.8   +27.9   COM : includes NGC 4874 and 4889- A1656
+     is at 130Mpc, 280Mly - 72 galaxies brighter than 15 mag in 2 degree
+     field - Tirion #7, Webb 153
+Abell 2065 - 15 22.1   +27.6   CRB : A2065 is at 1.5 Bly - brightest 6
+     are 15.5 mag in 1/2 degree field - Tirion #7, Webb 169
+Abell 2151 - 16 05.3   +17.7   HER : Hercules cluster of Galaxies
+     - Webb 174
+Abell 2199 - 16 28.6   +39.5   HER : 750 Mly- includes NGC 6166
+     - 13.3 mag E5 - AAVSO #46, no Tirion, Webb 190
+NGC 3750 Copeland's Septet - 11 39.1   +21.8   LEO : AAVSO #65, no Webb,
+     no Tirion - 15 mag for 3750, others at least as dim
+Abell 1367 - 11 44.5   +19.8   LEO : Brightest is 13.6- 500 Mly
+     AAVSO #65, no Tirion, Webb 142
+Stephan's Quintet - 22 36.0   +34.3   PEG : 30 min SSW from NGC 7331,
+     brightest 14.3 - Tirion #9, Webb 217, drawing 221
+Abell 426 - 03 19.7   +41.5   PER : Includes NGC 1275 - Tirion #4, Webb 125
+Abell 194 - 01 25.6   -01.3   PSC : At 110 Mpc or 250 Mly - NGC 450 on
+     Tirion #10, Webb 103
+NGC 6027 Seyfert's Sextet - 15 59.2   +20.8   SER : Mags are 14 or 15
+     Tirion #7, Burnham's 1793
+Hydra Cluster- center of Hydra cluster- (3309, 3311, 3312 all mag 13)
+     3309 (10 36.7 -27.5), 3311 (10 36.8 -27.5), 3312 (10 37.2 -27.6)
+Fornax Cluster- contains 1316, 1317,1326, 1341, 1350, 1351, 1365, 1374,
+     1379, 1380, 1381, 1386, 1387, 1389, 1399, 1404, 1427, 1437
+
+     NAMED OBJECTS   (PARENTHESES CONTAIN A MESSIER NUMBER)
+
+47 TUCANAE                           104        TUC
+ANDROMEDA GALAXY                     224(31)    AND
+ANTENNAE                             4038-9     CRV
+BARBELL NEBULA                       650(76)    PER
+BARNARD'S GALAXY                     6822       SGR
+BARNARD'S LOOP                       Sh2-276    ORI
+BEAR PAW GALAXY                      2537       UMA
+BEEHIVE CLUSTER (PRAESEPE)           2632(44)   CNC
+BLACKEYE NEBULA                      4826(64)   COM
+BLINKING PLANETARY                   6826       CYG
+BLUE FLASH                           6905       DEL
+BAXENDELL'S UNPHOTOGRAPHABLE NEBULA  7088       AQR
+BROCCHI'S CLUSTER                    Cr 399     VUL
+BUBBLE NEBULA                        7635       CAS
+BUG NEBULA                           6302       SCO
+CALIFORNIA NEBULA                    1499       PER
+CAT'S EYE                            6543       DRA
+CAVE NEBULA                          Sh2-155    CEP
+CBS EYE                              3242       HYA
+CHRISTMAS TREE CLUSTER               2264       MON
+CLOWN FACE NEBULA                    2392       GEM
+COAL SACK                                       CRU
+COATHANGER                           Cr 399     VUL
+COCOON NEBULA                        IC 5146    CYG
+CODDINGTON'S GALAXY                  IC 2574    UMA
+CONE NEBULA                          2264       MON
+CRAB NEBULA                          1952(1)    TAU
+CRESCENT                             6445       SGR
+CRESCENT (ALSO 6445)                 6888       CYG
+DUMBBELL NEBULA                      6853(27)   VUL
+EAGLE NEBULA                         6611(16)   SER
+EIGHT-BURST                          3132       ANT
+ESKIMO PLANETARY                     2392       GEM
+ETA CARINA NEBULA                    3372       CAR
+FISH ON A PLATTER                    B 144      CYG
+FLAMING STAR NEBULA                  IC 405     AUR
+FOOTPRINT NEBULA                     M-1-92     CYG
+GHOST OF JUPITER                     3242       HYA
+H PERSEI                              869       PER
+HELIX NEBULA                         7293       AQR
+HERCULES CLUSTER                     6205(13)   HER
+HIND'S VARIABLE NEBULA               1555       TAU
+HORSEHEAD NEBULA                     IC 434     ORI
+HUBBLE'S VARIABLE NEBULA             2261       MON
+HYADES                               Mel 25     TAU
+INKSPOT                              B 86       SGR
+INTEGRAL SIGN GALAXY                 UGC 3697   CAM
+JEWEL BOX                            4755       CRU
+KEYHOLE NEB(ETA CAR)                 3372       CAR
+
+LAGOON NEBULA                        6523(8)    SGR
+LITTLE DUMBBELL NEBULA                650(76)   PER
+LITTLE GEM                           6818       SGR
+LITTLE GHOST                         6369       OPH
+LOWER'S NEBULA                       Sh2-261    ORI
+MEDUSA NEBULA                        ABELL 21   GEM
+MINKOWSKI'S OBJECT (GALXY IN ABELL 194 CLUS)    CET
+NORTH AMERICAN NEBULA                7000       CYG
+OMEGA NEBULA                         6618(17)   SGR
+OMEGA CEN CLUSTER                    5139       CEN
+ORION NEBULA                         1976(42)   ORI
+OWL NEBULA                           3587(97)   UMA
+PARROT'S HEAD                        B 87       SGR
+PELICAN NEBULA                       IC 5067    CYG
+PHANTOM STREAK                       6741       AQL
+PINWHEEL GAL                          598(33)   TRI
+PIPE NEB                             1267       OPH
+PLEIADES                             Mel 22(45) TAU
+POLARISSIMA AUSTRALIS                2573       OCT
+POLARISSIMA BOREALIS                 3172       UMI
+RING NEB                             6720(57)   LYR
+RINGTAIL GAL                         4038       CRV
+ROSETTE                              2244       MON
+RUNNING CHICKEN NEBULA               IC 2944    CEN
+SATURN NEB                           7009       AQR
+SIAMESE TWINS                        4567-8     VIR
+SOMBRERO GAL                         4594(107)  VIR
+SPINDLE NEB                          3115       SEX
+STRUVE'S LOST NEBULA                 1554       TAU
+SUNFLOWER GAL                        5055(63)   CVN
+TABLE OF SCORPIUS                    6231       SCO
+TANK TRACK NEBULA                    2024       ORI
+TOBY JUG NEBULA                      IC 2220    CAR
+TOM THUMB CLUSTER                    6451       SCO
+TRIFID                               6514(20)   SGR
+TUFT IN THE TAIL OF THE DOG          Cr 140     CMA
+VEIL NEB                             6960       CYG
+VEIL NEB                             6992       CYG
+WHIRLPOOL GAL                        5194(51)   CVN
+WITCH-HEAD NEB                       IC 2118    ERI
+WHITE EYED PEA                       IC 4593    SER
+X PER                                 884       PER
+
+NAMED STARS (MOST WITH SOME TYPE OF PECULIAR CHARACTERISTICS)
+THE 'B' ABBREVIATION GIVES A PAGE NUMBER IN BURNHAM'S
+
+ANDREW'S STAR            AUR  GC 7066: SUSPECTED FLARE STAR (B=290)
+BARNARD'S STAR           OPH  LTF 1385: FAINT RED DWARF WITH HIGHEST 
+                              KNOWN PROPER MOTION(B=1251)
+                              FINDER- B 1253
+                              (SEE VERY LARGE PROPER MOTION STARS)
+BARNARD'S RUNAWAY STAR   SEE ABOVE  (B=1251)
+BLAZE STAR               T CRB:  BRIGHTEST AND BEST EXAMPLE OF A
+                              FLARE STAR (B=708)
+                              FINDER- B 710
+                              (SEE RED STARS)
+CRIMSON STAR             R LEP: VERY RED STAR (B=1093)
+                              FINDER- B 1094
+                              (SEE RED STARS)
+DEMON STAR               BETA PER = ALGOL:  (B=1409)
+DOG STAR                 ALPHA CMA = SIRIUS: (B=387)
+FLYING STAR              61 CYG:  FAST PROPER MOTION BINARY (B=768)
+                              ORBIT DIAGRAM- B 769
+                              (SEE VERY LARGE PROPER MOTION STARS)
+HERSHAL'S GARNET STAR    MU CEP:  VERY RED STAR (B=596)
+                              (SEE RED STARS)
+HIND'S CRIMSON STAR      R LEP: SEE CRIMSON STAR ABOVE (B=1093)
+IRON STAR                XX OPH: IONIZED IRON SPECTRUM (B=1246)
+                              FINDER- B 1248
+KAPTEYN'S STAR           PIC  HD 33793: SECOND LARGEST PROPER MOTION
+                              (B=1462)  FINDER- 1463
+                              (SEE VERY LARGE PROPER MOTION STARS)
+KEPLER'S STAR            V843 OPH: NOVA 1604 (B=1249)
+                              CHART- B 1250
+LA SUPERBA               Y CVN: SPLENDED SPECTRUM B-V=2.55 (B=361)
+                              (SEE RED STARS)
+LITTLE DOG STAR          ALPHA CMI = PROCYON:  (B=448)
+LUYTEN'S FLARE STAR      CET  L-726-8:  SMALL BINARY- PERHAPS THE
+                              SMALLEST MASS KNOWN (B=641)
+                              FINDER- B 642
+MEDUSA                   SEE DEMON STAR (B=1409)
+NILE STAR                ALPHA CMA = SIRIUS: (B=387)
+PEACOCK STAR             ALPHA PAV: (B=1355)
+PEARCE'S STAR            AO CAS: ONE OF THE MOST MASSIVE SYSTEMS
+                              KNOWN- 2 O STARS, 3.5 DAYS, 15 MEGMILES
+                              ALMOST TOUCHING- MAYBE THE MOST LUMINOUS
+                              IN GALAXY- (B=503)
+PLASKETT'S STAR          MON  HD 47129: ALMOST MOST MASSIVE BINARY
+                              SYSTEM KNOWN 14.4 DAYS- 2 O STARS  (B=1193)
+TYCHO'S STAR             CAS  NOVA 1572:  NEAR BETA CAS (B=503)
+                              FINDER- B 504
+VAN BIESBROECK'S STAR    AQU  WOLF 1055b, ROSS 652b: RED DWARF
+                              LOWEST SURFACE BRIGHTNESS KNOWN (B=226)
+                              FINDER- B 227
+VAN MAANEN'S STAR        PSC  WOLF 28: EASIEST WHITE DWARF TO FIND
+                              (B=1474)  FINDER- B 1476
+                              (SEE BRIGHT WHITE DWARFS)
+
+
+                  ANNUAL METEOR SHOWERS
+
+***  Jan. 4   Quadrantids: Radiant--Bootes. Very short lived shower,
+   less that one day. Variable rate, but generally around 60 per hour.
+   Speed 41 kps and bluish color.
+***  Jan. 16  Delta Cancrids: Radiant--just west of Beehive. Minor
+   shower, rate about 4 per hour. Very swift.
+***  Jan. 18  Coma Berenicids: Radiant--near Coma star cluster. Only
+   one or two per hour, but among fastest meteors known--65 kps.
+***  Feb. 26  Delta Leonids: Radiant--midway in Leo's back. Feb. 5 to
+   Mar. 19 with peak in late Feb. 5 per hour at 24 kps.
+***  Mar. 16  Corona-Australids: Radiant--16 hr 20 min, -48 deg. 5 to 7
+   per hour from Mar. 14 to Mar. 18.
+***  Mar. 22  Camelopardalids: No definite peak, with only one per hour.
+   Slowest meteors at 7 kps.
+***  Mar. 22  March Geminids: Discovered in 1973 and confirmed in 1975.
+   Rate generally about 40 per hour. Seem to be very slow meteors.
+***  Apr.  4  Kappa Serpentids: Radiant--near Corona Borealis . 4 or 5
+   per hour from Apr. 1 to 7.
+***  Apr. 7  Delta Draconids: Radiant--near Cepheus border. From Mar. 28
+   to Apr. 7.  Slow meteors at about 5 per hour.
+***  Apr. 10  Virginids: Radiant-- near Gamma in bowl of Virgo. 20 per
+   hour.
+***  Apr. 15  April Fireballs: Radiant-- between The Water Jar and
+   Scutum, very erratic. From April 15 to 30 many bright bolides from
+   Southeastern sky.
+***  Apr. 17  Sigma Leonids: Radiant-- at Leo Virgo border, actually
+   has moved into Virgo in recent years. Weak shower of 1 to 2 per hour.
+***  Apr. 22  Lyrids: Radiant-- near Vega. 15 per hour, bright and
+   long lasting meteors. From Comet Thatcher.
+***  April 25  Mu Virginids: Radiant--near Libra. 7 to 10 per hour
+   of medium speed meteors.
+***  Apr. 28  Alpha Bootids: Radiant-- near Arcturus. From Apr. 14
+   to May 13. Slow meteors with fine trails.
+***  May 1  Phi Bootids:  Radiant--near Hercules. From Apr. 16 to
+   May 12. 6 per hour.
+***  May 3  Alpha Scorpiids: Radiant-- Near Antares. From Apr. 16
+   to May 9.
+***  May 4  Eta Aquarids: Radiant-- near  Water Jar. From Apr. 21
+   to May 12. 21 per hour, yellow with bright trails. Comet Halley
+   debris.
+*** June 3  Tau Herculids: Radiant--near Corona Borealis. About a
+   month long, 15 per hour max, most quite faint.
+***  June 5  Scorpiids: Radiant--near Ophiuchus. 20 per hour with
+   some fireballs.
+***  June 7  Arietids: About 30 per hour. Slow moving with some fireballs.
+***  June 13  Ophiuchids: Radiant-- near Scorpius. Only 3 per hour but
+   fast moving bolides are common. Duration--25 days
+***  June 16  June Lyrids: Radiant--near Vega. Another part of May
+   Lyrid meteor stream. 15 per hour, faint blue meteors.
+***  June 20  Ophiuchids: Radiant-- near Sagitarrius. Rate varies from
+   8 to 20, with occaisionally many more.
+***  June 30  June Draconids: Radiant--near handle of Big Dipper.
+   Rate varies from 10 to 100 per hour. Pons-Winnecke Comet is parent.
+
+***  July 28  Delta Aquarids: Radiant--near Capricornus. 25 per hour,
+   slow (24 kps) with yellow trails. Duration--40 days
+***  July 30  Capricornids: Radiant--near Aquarius. Tough to tell these
+   from Delta Aquarids. 10 to 35 per hour with bolides.
+***  Aug 10  Perseids: Radiant--near Double cluster. 50 to 100 per hour,
+   yellow with trails and bolides. The best modern dependable shower.
+   Duration--5 days.
+***  Aug 20  Kappa Cygnids: Radiant--near Deneb. 12 per hour with many
+   fireballs. Duration--15 days.
+***  Aug 31  Andromedids: Radiant-- near Cassiopeia. Occaisionally
+   spectacular, usually 20 per hour. Some red fireballs with trails.
+   Biela's Comet parent.
+***  Sept 23  Alpha Aurigids: Radiant-- near Capella. 12 per hour,
+   fast with trails.
+***  Oct 7  Piscids: Radiant--near Aries. 15 per hour at 28 kps.
+***  Oct 9  Draconids: Raidiant--near Hercules. Spectacular when comet
+   Giacobinni-Zinner passes near Earth. 200 per hour when comet is
+   close is not uncommon, 1000 per hour sometimes.
+***  Oct 20  Orionids: Radiant--near Taurus. 30 per hour, fast (67 kps)
+   often in colors with long trails. Duration--8 days
+***  Nov. 5  Taurids: Radiant--near Pleaides. 10 per hour with many
+   fireballs. Debris from comet Encke.  Duration--45 days.
+***  Nov. 12  Pegasids: Radiant--Near Square. from Oct. 10 to late
+   Nov., 10 per hour, used to be spectacular.
+***  Nov 17  Leonids: Radiant--near Sickle. Most spectacular of modern
+   showers. 1966 saw 500,000 per hour-- 140 per second. Comet
+   Temple--Tuttle is parent. 20 per hour between 33 year shows,
+   fastest known at 71 kps. Duration--4 days.
+***  Dec. 10  Monocerids: Radiant-- near Gemini. 12 per hour.
+***  Dec. 11  Sigma Hydrids: Radiant--near Head. 12 per hour, fast.
+***  Dec. 14  Geminids: Radiant--near Castor. 60 per hour, many bright,
+   white but few trails. Icarus, the Earth-crossing astroid seems to
+   be the parent. Duration--6 days.
+***  Dec. 14  Leo Minorids: 10 per hour, somewhat faint.  Discovered by
+   amateurs in 1971.
+***  Dec. 20  Delta Arietids: 12 per hour, must view in early evening,
+   before radiant sets.
+***  Dec. 22  Ursids: Radiant--Little Dipper Bowl. Medium speed, 20
+   per hour, many with bright trails. Duration--2 days

@@ -1,0 +1,48 @@
+#
+#   Makefile.fpc for Skychart
+#
+
+[package]
+name=skychart
+version=3.0.1.6
+
+[target]
+dirs=skychart varobs
+
+[require]
+libc=y
+packages=rtl
+
+[prerules]
+PREFIX=%PREFIX%
+
+[rules]
+.PHONY: all
+
+all: skychart_all varobs_all
+
+ifeq ($(OS_TARGET),win32)
+install: 
+	.\install.cmd $(PREFIX)
+uninstall: 
+	.\uninstall.cmd $(PREFIX)
+else
+install: 
+	./install.sh $(PREFIX)
+uninstall: 
+	./uninstall.sh $(PREFIX)
+install_win: 
+	./install_win.sh $(PREFIX)
+uninstall_win: 
+	./uninstall_win.sh $(PREFIX)
+install_win_data:
+	\$(MAKE) -C tools install_win 
+uninstall_win_data:
+	\$(MAKE) -C tools uninstall_win
+endif
+data:
+	\$(MAKE) -C tools all
+install_data:
+	\$(MAKE) -C tools install 
+uninstall_data:
+	\$(MAKE) -C tools uninstall

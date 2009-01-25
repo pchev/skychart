@@ -1,0 +1,349 @@
+object ObsForm: TObsForm
+  Left = 680
+  Height = 391
+  Top = 90
+  Width = 638
+  HorzScrollBar.Page = 637
+  VertScrollBar.Page = 371
+  ActiveControl = Edit3
+  Caption = 'New visual observation'
+  ClientHeight = 372
+  ClientWidth = 638
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Menu = MainMenu1
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
+  object Label1: TLabel
+    Left = 8
+    Height = 20
+    Top = 66
+    Width = 66
+    Caption = 'Star Name '
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 422
+    Height = 20
+    Top = 17
+    Width = 64
+    Caption = 'UT decimal'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 200
+    Height = 20
+    Top = 66
+    Width = 35
+    Caption = 'Magn.'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 13
+    Height = 20
+    Top = 17
+    Width = 54
+    Caption = 'Observer'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 392
+    Height = 20
+    Top = 66
+    Width = 56
+    Caption = 'Comment'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    Left = 162
+    Height = 20
+    Top = 102
+    Width = 73
+    Caption = 'Comp Star 1'
+    ParentColor = False
+  end
+  object Label7: TLabel
+    Left = 136
+    Height = 18
+    Top = 16
+    Width = 34
+    Caption = 'Date'
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    ParentColor = False
+  end
+  object Label9: TLabel
+    Left = 416
+    Height = 20
+    Top = 102
+    Width = 32
+    Caption = 'Chart'
+    ParentColor = False
+  end
+  object Label10: TLabel
+    Left = 8
+    Height = 20
+    Top = 140
+    Width = 51
+    Caption = 'Remarks'
+    ParentColor = False
+  end
+  object Label11: TLabel
+    Left = 288
+    Height = 20
+    Top = 102
+    Width = 73
+    Caption = 'Comp Star 2'
+    ParentColor = False
+  end
+  object Edit1: TEdit
+    Left = 72
+    Height = 21
+    Top = 64
+    Width = 113
+    CharCase = ecUppercase
+    TabOrder = 10
+  end
+  object Edit2: TEdit
+    Left = 488
+    Height = 21
+    Top = 15
+    Width = 121
+    CharCase = ecUppercase
+    OnExit = Edit2Change
+    TabStop = False
+    TabOrder = 9
+  end
+  object Edit3: TEdit
+    Left = 240
+    Height = 21
+    Top = 64
+    Width = 41
+    CharCase = ecUppercase
+    TabOrder = 0
+  end
+  object Edit4: TEdit
+    Left = 72
+    Height = 21
+    Top = 15
+    Width = 47
+    CharCase = ecUppercase
+    ReadOnly = True
+    TabStop = False
+    TabOrder = 4
+  end
+  object Edit5: TEdit
+    Left = 456
+    Height = 21
+    Top = 64
+    Width = 88
+    CharCase = ecUppercase
+    TabOrder = 1
+  end
+  object Edit6: TEdit
+    Left = 240
+    Height = 21
+    Top = 100
+    Width = 41
+    CharCase = ecUppercase
+    TabOrder = 2
+  end
+  object Memo1: TMemo
+    Left = 14
+    Height = 153
+    Top = 168
+    Width = 609
+    Font.Height = -11
+    Font.Name = 'Courier New'
+    Font.Pitch = fpFixed
+    ScrollBars = ssBoth
+    TabOrder = 12
+    TabStop = False
+  end
+  object BitBtn1: TBitBtn
+    Left = 481
+    Height = 25
+    Top = 136
+    Width = 142
+    Caption = 'Add'
+    NumGlyphs = 0
+    OnClick = AddClick
+    TabOrder = 8
+  end
+  object BitBtn2: TBitBtn
+    Left = 548
+    Height = 25
+    Top = 334
+    Width = 75
+    Caption = 'Save to File'
+    NumGlyphs = 0
+    OnClick = Button2Click
+    TabOrder = 7
+    TabStop = False
+  end
+  object Edit7: TEdit
+    Left = 456
+    Height = 21
+    Top = 100
+    Width = 88
+    CharCase = ecUppercase
+    TabOrder = 5
+  end
+  object Edit8: TEdit
+    Left = 64
+    Height = 21
+    Top = 138
+    Width = 397
+    MaxLength = 100
+    TabOrder = 6
+  end
+  object CheckBox2: TCheckBox
+    Left = 296
+    Height = 21
+    Top = 64
+    Width = 90
+    Caption = 'Fainter than'
+    TabOrder = 11
+    TabStop = False
+  end
+  object TimePicker1: TTimePicker
+    Left = 288
+    Height = 23
+    Top = 14
+    Width = 101
+    Time = 0.39739583333333
+    OnChange = DateEdit1Change
+    Enabled = True
+    TabOrder = 14
+  end
+  object DateEdit1: TDateEdit
+    Left = 176
+    Height = 23
+    Top = 14
+    Width = 80
+    CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
+    OKCaption = 'OK'
+    CancelCaption = 'Cancel'
+    ReadOnly = False
+    ButtonWidth = 23
+    Glyph.Data = {
+      2F0200002F2A2058504D202A2F0A7374617469632063686172202A63616C656E
+      6461725B5D203D207B0A2F2A20636F6C756D6E7320726F777320636F6C6F7273
+      2063686172732D7065722D706978656C202A2F0A223134203132203137203122
+      2C0A2220206320626C61636B222C0A222E20632023383030303030222C0A2258
+      20632023303038303030222C0A226F20632023383038303030222C0A224F2063
+      206E617679222C0A222B20632023383030303830222C0A224020632023303038
+      303830222C0A222320632023383038303830222C0A2224206320234330433043
+      30222C0A2225206320726564222C0A2226206320677265656E222C0A222A2063
+      2079656C6C6F77222C0A223D206320626C7565222C0A222D2063206D6167656E
+      7461222C0A223B2063206379616E222C0A223A20632067726179313030222C0A
+      223E2063204E6F6E65222C0A2F2A20706978656C73202A2F0A223E3E20202020
+      2020202020203E3E222C0A223E3E3A24242424242424243A4F23222C0A223E3E
+      3A3A3A3A3A3A3A3A3A3A4F23222C0A223E3E3A3A203A3A202020203A4F23222C
+      0A223E3E3A20203A3A203A3A3A3A4F23222C0A223E3E3A3A203A3A202020243A
+      4F23222C0A223E3E3A3A203A3A3A3A3A203A4F23222C0A223E3E3A3A203A3A24
+      3A24203A4F23222C0A223E3E3A2020203A202020243A4F23222C0A223E3E3A3A
+      3A3A3A3A3A3A3A3A4F23222C0A223E3E20204F204F4F204F20204F23222C0A22
+      3E3E3E2323232323232323232323220A7D3B0A
+    }
+    NumGlyphs = 1
+    OnExit = DateEdit1Change
+    TabStop = False
+    TabOrder = 13
+  end
+  object Edit9: TEdit
+    Left = 368
+    Height = 21
+    Top = 100
+    Width = 41
+    CharCase = ecUppercase
+    TabOrder = 3
+  end
+  object FileNameEdit1: TFileNameEdit
+    Left = 14
+    Height = 23
+    Top = 335
+    Width = 486
+    ButtonWidth = 23
+    NumGlyphs = 1
+    ParentColor = False
+    TabOrder = 15
+    TabStop = False
+  end
+  object Button1: TButton
+    Left = 548
+    Height = 21
+    Top = 64
+    Width = 21
+    Caption = '...'
+    OnClick = Button1Click
+    TabOrder = 16
+  end
+  object MainMenu1: TMainMenu
+    left = 16
+    top = 40
+    object MenuItem1: TMenuItem
+      Caption = '&File'
+      object MenuItem4: TMenuItem
+        Caption = '&Save'
+        OnClick = Button2Click
+      end
+      object MenuItem2: TMenuItem
+        Caption = '&Reset input fields'
+        OnClick = MenuItem2Click
+      end
+      object MenuItem3: TMenuItem
+        Caption = '&Quit'
+        OnClick = MenuItem3Click
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 572
+    top = 95
+    object MenuItem5: TMenuItem
+      Caption = 'B: Sky is bright, moon, twilight, light pollution, aurorae.'
+      OnClick = CodeClick
+    end
+    object MenuItem6: TMenuItem
+      Caption = 'U: Clouds, dust, smoke, haze, etc. '
+      OnClick = CodeClick
+    end
+    object MenuItem7: TMenuItem
+      Caption = 'W: Poor seeing. '
+      OnClick = CodeClick
+    end
+    object MenuItem8: TMenuItem
+      Caption = 'L: Low in the sky, near horizon, in trees, obstructed view.'
+      OnClick = CodeClick
+    end
+    object MenuItem9: TMenuItem
+      Caption = 'D: Unusual Activity (fading, flare, bizarre behavior, etc.) '
+      OnClick = CodeClick
+    end
+    object MenuItem10: TMenuItem
+      Caption = 'Y: Outburst.'
+      OnClick = CodeClick
+    end
+    object MenuItem11: TMenuItem
+      Caption = 'K: Non-AAVSO chart. '
+      OnClick = CodeClick
+    end
+    object MenuItem12: TMenuItem
+      Caption = 'S: Comparison sequence problem. '
+      OnClick = CodeClick
+    end
+    object MenuItem13: TMenuItem
+      Caption = 'Z: Magnitude of star uncertain.'
+      OnClick = CodeClick
+    end
+    object MenuItem14: TMenuItem
+      Caption = 'I: Identification of star uncertain. '
+      OnClick = CodeClick
+    end
+    object MenuItem15: TMenuItem
+      Caption = 'V: Faint star, near observing limit, only glimpsed. '
+      OnClick = CodeClick
+    end
+  end
+end

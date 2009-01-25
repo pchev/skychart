@@ -1,0 +1,93 @@
+   The enclosed GET_DSS code is the "latest" (2 Jun 98) version.  It's
+(very loosely!) based on the original STScI GETIMAGE code,  version 2.0,
+available at
+
+http://www.gsss-stsci.edu/dss/getimage/index.html
+
+   It includes a makefile for WATCOM C/C++,  version 11.0.  The
+underlying code has been ported to 32-bit Windows.  (I'm not posting
+the user interface code for the Windows version yet;  I'm not
+entirely happy with it.  But the underlying functions are all done,
+and the break between "underlying functions" and "user interface" is
+a clean one. Also,  most people looking at this code will just want
+to use the underlying routines anyway;  in such cases,  the simpler
+demonstration in GET_DSS.CPP is the way to go.)
+
+   I'm calling this "GET_DSS 1.0" for the moment.  The only code
+I'm currently using from Getimage 2.0 is the code that actually takes a
+RealSky/DSS 'tile' (a 500x500 pixel square) and decompresses it to
+a buffer.  That code is in the files DECODE.CPP, DODECODE.CPP,
+HINV.CPP,  and QTREEDEC.CPP. I've made some pretty major changes to
+these,  to make sure they would compile under C++ and to clean up
+error handling and memory usage. (In general, GETIMAGE 2.0 is fond
+of just printing an error message and bombing out. I wanted to be
+sure that an error code was returned instead.)  Also,  I did a lot
+of work on the file I/O methods used.  The original code had a
+large "QFILE" system, apparently intended to deal with the fact
+that VMS handles file I/O in an unusually messy manner.  I replaced
+all this with ANSI C functions,  plus a simplified "bit I/O"
+scheme.
+
+   I will mostly mumble when discussing the decompression code, since
+I am not too clear as to what it is doing.  Aside from making some
+changes such as byte ordering and such,  I have avoided knowledge of
+it.  It uses an H-transform (somewhat similar to an FFT); the input
+data consists of Huffman-encoded coefficients.  A good chunk of it is
+pretty cryptic, and I never had a good reason to try to figure out
+what it was doing.  (I did do some timing tests to make sure nothing
+in it was absorbing too much CPU time.  I had hopes of finding some
+basic inefficiency that was accounting for 90% of the processing
+time,  that could be eliminated to yield a tenfold speedup.  No such
+luck,  of course... though the sum total of the changes in GET_DSS 1.0
+have indeed resulted in greatly improved performance over the original
+code.)
+
+   Aside from the "decompress a chunk of image" functions in the
+aforementioned .CPP files,  everything else is a total rewrite.
+
+   RealSky and DSS are organized as plates (of course) that were
+scanned in to be 14,000 by 14,000 pixels each.  These were then broken
+up into the aforementioned 500-pixel square chunks,  so you get 28x28
+= 784 pieces. Each plate,  such as "XX005",  gets its own directory,
+with 784 files (one for each piece) in it.  (This actually leads to
+considerable dead space,  due to the 2K cluster size,  and the extra
+directory searching has some effect on performance.  It's not a good
+system,  IMHO... but STScI failed to ask for my opinion.  Some people
+have asked for me to arrange a way to cache the RealSky data on a hard
+drive;  if I do this,  I will combine all the data for a plate into
+one multi-megabyte file,  with an index to the 784 pieces at the start
+of the file.  Otherwise,  the large cluster size on hard drives would
+cause immense grief.)
+
+   The logic to be used in extracting an area works as follows.  First,
+figure out what plates cover that area (there is considerable overlap).
+The code to do this is in PLATELST.CPP;  it returns an array of
+structures, sorted in order of preference ("best" plate first). By
+default,  both my GET_DSS and STScI's GETIMAGE will prefer the plate that
+puts your desired area farthest from a plate edge.  The plate edges
+tend to be a bit dodgy,  so that's not an unreasonable idea.  But there
+are still cases where you might want to override the selection.
+
+   Once you've figured out what plate you're going to use (and what CD
+has that plate),  you can then figure out what 500-pixel square chunks
+cover your image area,  and extract them from the CD to build your image.
+Here,  there is a fundamental difference between GET_DSS and the
+STScI GETIMAGE.  GETIMAGE allocates a monster buffer,  containing
+the whole image,  and builds it in memory.  On a workstation,  that's
+probably no big deal,  and made plenty of sense.  It does mean that a
+full plate consumes (14000^2) * (2 bytes/pixel) = 392,000,000 bytes of
+memory,  and is not too practical.  (GETIMAGE 2.0 had a rather simple but
+painful bug,  resulting in _four_ bytes being allocated per pixel, so it
+would really request 784,000,000 bytes!)
+
+   GET_DSS 1.0,  on the other hand,  just sets up a 500-pixel high
+buffer and grabs a row of chunks at a time,  then writes out the
+results.  So a full plate requires 14000 x 500 x (2 bytes/pixel) = 14
+MBytes.  (There's a noticeable speed improvement as a result of this,
+too.  On some machines,  the speedup is immense,  because memory swapping
+is evaded.)  The code for this is in GETPIECE.CPP;  the function
+grab_realsky_chunk( ) in that file figures out the 500x500 chunks
+needed,  decompresses them,  and fits them into the output file
+(and also builds a histogram and does sampling).
+
+-- Bill

@@ -1,0 +1,134 @@
+object f_zoom: Tf_zoom
+  Left = 453
+  Height = 142
+  Top = 181
+  Width = 308
+  ActiveControl = TrackBar1
+  BorderStyle = bsSizeToolWin
+  Caption = 'Set FOV'
+  ClientHeight = 142
+  ClientWidth = 308
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  FormStyle = fsStayOnTop
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ParentFont = False
+  LCLVersion = '0.9.27'
+  object Label1: TLabel
+    Left = 16
+    Height = 16
+    Top = 8
+    Width = 12
+    Caption = '1'''
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 120
+    Height = 16
+    Top = 8
+    Width = 9
+    Caption = '1'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 172
+    Height = 16
+    Top = 8
+    Width = 17
+    Caption = '10'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 225
+    Height = 16
+    Top = 8
+    Width = 25
+    Caption = '100'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 254
+    Height = 16
+    Top = 8
+    Width = 25
+    Caption = '360'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    Left = 70
+    Height = 16
+    Top = 8
+    Width = 20
+    Caption = '10'''
+    ParentColor = False
+  end
+  object TrackBar1: TTrackBar
+    Left = 8
+    Height = 33
+    Top = 24
+    Width = 273
+    Max = 260
+    Min = -178
+    OnChange = TrackBar1Change
+    PageSize = 10
+    ScalePos = trTop
+    TickMarks = tmTopLeft
+    TickStyle = tsNone
+    TabOrder = 0
+  end
+  object BitBtn1: TBitBtn
+    Left = 112
+    Height = 25
+    Top = 104
+    Width = 73
+    BorderSpacing.InnerBorder = 2
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    NumGlyphs = 0
+    TabOrder = 1
+  end
+  object BitBtn2: TBitBtn
+    Left = 206
+    Height = 25
+    Top = 104
+    Width = 73
+    BorderSpacing.InnerBorder = 2
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    NumGlyphs = 0
+    TabOrder = 2
+  end
+  object Edit1: TEdit
+    Left = 120
+    Height = 24
+    Top = 64
+    Width = 49
+    Color = clBtnFace
+    ReadOnly = True
+    TabStop = False
+    TabOrder = 3
+  end
+  object Button1: TButton
+    Left = 16
+    Height = 25
+    Top = 103
+    Width = 75
+    Caption = 'Help'
+    OnClick = Button1Click
+    TabOrder = 4
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 204
+    top = 69
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 251
+    top = 69
+  end
+end

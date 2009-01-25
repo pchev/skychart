@@ -1,0 +1,106 @@
+object f_detail: Tf_detail
+  Left = 912
+  Height = 391
+  Top = 120
+  Width = 398
+  ActiveControl = Button1
+  BorderStyle = bsSizeToolWin
+  Caption = 'Details'
+  ClientHeight = 391
+  ClientWidth = 398
+  OnCreate = FormCreate
+  LCLVersion = '0.9.27'
+  object Panel1: TPanel
+    Height = 50
+    Width = 398
+    Align = alTop
+    ClientHeight = 46
+    ClientWidth = 394
+    FullRepaint = False
+    TabOrder = 0
+    object Button1: TButton
+      Left = 266
+      Height = 31
+      Top = 6
+      Width = 117
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Close'
+      OnClick = Button1Click
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 8
+      Height = 31
+      Top = 6
+      Width = 117
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Center Object'
+      OnClick = Button2Click
+      TabOrder = 0
+    end
+    object Button3: TButton
+      Left = 138
+      Height = 31
+      Top = 6
+      Width = 117
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Neighbor'
+      OnClick = Button3Click
+      TabOrder = 1
+    end
+  end
+  object IpHtmlPanel1: TIpHtmlPanel
+    Height = 341
+    Top = 50
+    Width = 398
+    Align = alClient
+    FixedTypeface = 'fixed'
+    DefaultTypeFace = 'sans'
+    DefaultFontSize = 8
+    PopupMenu = PopupMenu1
+    PrintSettings.MarginLeft = 0.5
+    PrintSettings.MarginTop = 0.5
+    PrintSettings.MarginRight = 0.5
+    PrintSettings.MarginBottom = 0.5
+  end
+  object ActionList1: TActionList
+    left = 128
+    top = 144
+    object SelectAll: TAction
+      Caption = 'SelectAll'
+      DisableIfNoHandler = True
+      OnExecute = SelectAllExecute
+      ShortCut = 16449
+    end
+    object Copy: TAction
+      Caption = 'Copy'
+      DisableIfNoHandler = True
+      OnExecute = CopyExecute
+      ShortCut = 16451
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 72
+    top = 144
+    object SelectAll1: TMenuItem
+      Action = SelectAll
+      OnClick = SelectAllExecute
+    end
+    object Copy1: TMenuItem
+      Action = Copy
+      OnClick = CopyExecute
+    end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 185
+    top = 144
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 248
+    top = 144
+  end
+end

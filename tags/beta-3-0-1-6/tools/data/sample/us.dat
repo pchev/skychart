@@ -1,0 +1,156 @@
+165344	Montgomery	ppl	AL		Montgomery		322200N	0861800W	32.36667	-86.3					76	
+1404263	Juneau	ppl	AK		Juneau City and Borough		581807N	1342511W	58.30194	-134.41972					2	
+44784	Phoenix	ppl	AZ		Maricopa		332654N	1120424W	33.44833	-112.07333					331	
+83350	Little Rock	ppl	AR		Pulaski		344447N	0921722W	34.74639	-92.28944					102	
+1659564	Sacramento	ppl	CA		Sacramento		383454N	1212936W	38.58167	-121.49333					6	
+213160	Hartford	ppl	CT		Hartford		414549N	0724108W	41.76361	-72.68556					23	
+531871	Washington	ppl	DC		District of Columbia		385342N	0770212W	38.895	-77.03667					5	
+217882	Dover	ppl	DE		Kent		390929N	0753129W	39.15806	-75.52472					11	
+308416	Tallahassee	ppl	FL		Leon		302617N	0841651W	30.43806	-84.28083					57	
+351615	Atlanta	ppl	GA		Fulton		334456N	0842317W	33.74889	-84.38806					320	
+366212	Honolulu	ppl	HI		Honolulu		211825N	1575130W	21.30694	-157.85833					5	
+400590	Boise	ppl	ID		Ada		433649N	1161209W	43.61361	-116.2025					832	
+426595	Springfield	ppl	IL		Sangamon		394806N	0893837W	39.80167	-89.64361					183	
+452890	Indianapolis	ppl	IN		Marion		394606N	0860929W	39.76833	-86.15806					219	
+465961	Des Moines	ppl	IA		Polk		413602N	0933632W	41.60056	-93.60889					263	
+485477	Topeka	ppl	KS		Shawnee		390254N	0954040W	39.04833	-95.67778					305	
+517517	Frankfort	ppl	KY		Franklin		381203N	0845224W	38.20083	-84.87333					155	
+1629914	Baton Rouge	ppl	LA		East Baton Rouge		302702N	0910916W	30.45056	-91.15444					16	
+581636	Augusta	ppl	ME		Kennebec		441838N	0694648W	44.31056	-69.78					47	
+595031	Annapolis	ppl	MD		Anne Arundel		385842N	0762933W	38.97833	-76.4925					12	
+617565	Boston	ppl	MA		Suffolk		422130N	0710337W	42.35833	-71.06028					6	
+1625035	Lansing	ppl	MI		Ingham		424357N	0843320W	42.7325	-84.55556					259	
+662851	Saint Paul	ppl	MN		Ramsey		445640N	0930535W	44.94444	-93.09306					235	
+711543	Jackson	ppl	MS		Hinds		321755N	0901105W	32.29861	-90.18472					90	
+758233	Jefferson City	ppl	MO		Cole		383436N	0921024W	38.57667	-92.17333					214	
+802116	Helena	ppl	MT		Lewis and Clark		463534N	1120207W	46.59278	-112.03528					1247	
+837279	Lincoln	ppl	NE		Lancaster		404800N	0964000W	40.8	-96.66667					362	
+863976	Carson City	ppl	NV		Carson City (city)		390950N	1194559W	39.16389	-119.76639					1442	
+873303	Concord	ppl	NH		Merrimack		431229N	0713217W	43.20806	-71.53806					88	
+884540	Trenton	ppl	NJ		Mercer		401301N	0744436W	40.21694	-74.74333					16	
+936823	Santa Fe	ppl	NM		Santa Fe		354113N	1055614W	35.68694	-105.93722					2130	
+977310	Albany	ppl	NY		Albany		423909N	0734524W	42.6525	-73.75667					39	
+1024242	Raleigh	ppl	NC		Wake		354619N	0783820W	35.77194	-78.63889					107	
+1035849	Bismarck	ppl	ND		Burleigh		464830N	1004700W	46.80833	-100.78333					518	
+1080996	Columbus	ppl	OH		Franklin		395740N	0825956W	39.96111	-82.99889					244	
+1102140	Oklahoma City	ppl	OK		Oklahoma		352803N	0973058W	35.4675	-97.51611					375	
+1167861	Salem	ppl	OR		Marion		445635N	1230202W	44.94306	-123.03389					47	
+1213812	Harrisburg	ppl	PA		Philadelphia		400320N	0750132W	40.05556	-75.02556					24	
+1219851	Providence	ppl	RI		Providence		414926N	0712448W	41.82389	-71.41333					35	
+1245051	Columbia	ppl	SC		Richland		340002N	0810206W	34.00056	-81.035					96	
+1266887	Pierre	ppl	SD		Hughes		442206N	1002102W	44.36833	-100.35056					452	
+1652484	Nashville	ppl	TN		Davidson		360957N	0864704W	36.16583	-86.78444					134	
+1384879	Austin	ppl	TX		Travis		301601N	0974434W	30.26694	-97.74278					153	
+1454997	Salt Lake City	ppl	UT		Salt Lake		404539N	1115325W	40.76083	-111.89028					1300	
+1461834	Montpelier	ppl	VT		Washington		441536N	0723433W	44.26	-72.57583					160	
+1499957	Richmond	ppl	VA		Richmond (city)		373313N	0772738W	37.55361	-77.46056					58	
+1533353	Olympia	ppl	WA		Thurston		470217N	1225358W	47.03806	-122.89944					40	
+1558347	Charleston	ppl	WV		Kanawha		382059N	0813758W	38.34972	-81.63278					185	
+1581834	Madison	ppl	WI		Dane		430423N	0892404W	43.07306	-89.40111					263	
+1609077	Cheyenne	ppl	WY		Laramie		410824N	1044911W	41.14	-104.81972					1849	
+1401892	Ester Dome Observatory	locale	AK		Fairbanks North Star		645246N	1480310W	64.87944	-148.05278					727	
+1417086	USGS Magnectic Observatory	locale	AK		Sitka City and Borough		570327N	1351924W	57.0575	-135.32333					0	
+2855	China Peak Observatory	locale	AZ		Graham		324342N	1101749W	32.72833	-110.29694					1458	
+27815	College Observatory	locale	AZ		Coconino		351103N	1113909W	35.18417	-111.6525					2102	
+6727	Kitt Peak National Observatory	locale	AZ		Pima		315736N	1113551W	31.96	-111.5975					0	
+31334	Lowell Observatory	locale	AZ		Coconino		351211N	1113950W	35.20306	-111.66389					2193	
+8439	Mummy Mountain Observatory	locale	AZ		Maricopa		333319N	1115742W	33.55528	-111.96167					503	
+36846	Smithsonian Astrophysical Observatory	locale	AZ		Santa Cruz		314110N	1105245W	31.68611	-110.87917					2355	
+11835	Steward Observatory	locale	AZ		Pima		315744N	1113559W	31.96222	-111.59972					0	
+37571	University of Arizona Observatory	locale	AZ		Pima		322501N	1104400W	32.41694	-110.73333					2504	
+269809	Big Bear Solar Observatory	locale	CA		San Bernardino		341530N	1165513W	34.25833	-116.92028					0	
+1657231	Bradley Young Observatory	locale	CA		Napa		383439N	1222541W	38.5775	-122.42806					579	
+220867	Chabot Observatory	locale	CA		Alameda		374714N	1221037W	37.78722	-122.17694					0	
+243036	Griffith Observatory	locale	CA		Los Angeles		340707N	1181758W	34.11861	-118.29944					0	
+1733524	Mount Wilson Observatory	locale	CA		Los Angeles		341333N	1180323W	34.22583	-118.05639					0	
+229526	Newton Observatory	locale	CA		Napa		383420N	1222558W	38.57222	-122.43278					0	
+1667241	Owens Valley Radio Observatory	locale	CA		Inyo		371400N	1181658W	37.23333	-118.28278					0	
+1654756	Polomar Observatory	locale	CA		San Diego		332116N	1165138W	33.35444	-116.86056					0	
+273769	Smithsonian Observatory	locale	CA		Los Angeles		342255N	1174038W	34.38194	-117.67722					0	
+1661874	University of California Observatory	locale	CA		Shasta		404903N	1212805W	40.8175	-121.46806					0	
+184837	Chamberlain Observatory	locale	CO		Denver		394033N	1045709W	39.67583	-104.9525					1643	
+1986973	Fritz Peak Observatory	locale	CO		Gilpin		395435N	1052926W	39.90972	-105.49056					0	
+181057	University of Colorado Observatory	locale	CO		Boulder		395649N	1053101W	39.94694	-105.51694					0	
+531916	Georgetown University Observatory	locale	DC		District of Columbia		385443N	0770438W	38.91194	-77.07722					0	
+529065	Old Naval Observatory	locale	DC		District of Columbia		385343N	0770307W	38.89528	-77.05194					0	
+531845	United States Naval Observatory	locale	DC		District of Columbia		385517N	0770400W	38.92139	-77.06667					0	
+325882	Bradley Observatory	locale	GA		DeKalb		334554N	0841737W	33.765	-84.29361					0	
+1389709	Guam Observatory	locale	GU		Guam		133517N	1445157E	13.58806	144.86583					0	
+359337	Honolulu Observatory	locale	HI		Honolulu		211910N	1580006W	21.31944	-158.00167					0	
+1847264	Mauna Loa Observatory	locale	HI		Hawaii		193221N	1553444W	19.53917	-155.57889					0	
+364372	University of Hawaii Solar Observatory	locale	HI		Honolulu		211815N	1573916W	21.30417	-157.65444					0	
+1825159	Luther College Observatory	locale	IA		Winneshiek		432415N	0914708W	43.40417	-91.78556					0	
+462487	University of Iowa Observatory	locale	IA		Johnson		413051N	0913335W	41.51417	-91.55972					0	
+1866878	Dearborn Observatory	locale	IL		Cook		420323N	0874032W	42.05639	-87.67556					0	
+1822537	Mark Evans Observatory	locale	IL		McLean		402930N	0885926W	40.49167	-88.99056					0	
+1807773	Prairie Observatory	locale	IL		Douglas		394206N	0880312W	39.70167	-88.05333					0	
+452327	Goethe Link Observatory	locale	IN		Morgan		393258N	0862343W	39.54944	-86.39528					0	
+603129	Harvard Observatory	locale	MA		Middlesex		422250N	0710743W	42.38056	-71.12861					0	
+604082	Harvard University Observatory	locale	MA		Worcester		423020N	0713329W	42.50556	-71.55806					0	
+605984	John Hancock Observatory	locale	MA		Suffolk		422107N	0710427W	42.35194	-71.07417					0	
+604179	Loines Observatory	locale	MA		Nantucket		411643N	0700643W	41.27861	-70.11194					0	
+1912187	Blueberry Pond Observatory	locale	ME		Hancock		435420N	0700909W	43.90556	-70.1525					0	
+1912655	Little Diamond Island Observatory	locale	ME		Cumberland		434000N	0701217W	43.66667	-70.20472					0	
+1913697	Maynard F Jordan Planetarium and Observatory	locale	ME		Penobscot		445355N	0684024W	44.89861	-68.67333					0	
+1912915	Portland Observatory	locale	ME		Cumberland		433955N	0701450W	43.66528	-70.24722					0	
+631992	McMath-Hulbert Observatory	locale	MI		Oakland		424151N	0831909W	42.6975	-83.31917					0	
+632215	Michigan State University Observatory	locale	MI		Ingham		424224N	0842901W	42.70667	-84.48361					0	
+661095	Darling Observatory	locale	MN		St. Louis		464648N	0920644W	46.78	-92.11222					0	
+755328	Morrison Observatory	locale	MO		Howard		390906N	0924148W	39.15167	-92.69667					0	
+671808	James Observatory	locale	MS		Hinds		321929N	0901057W	32.32472	-90.1825					0	
+1892926	Behlen Observatory	locale	NE		Dodge		412612N	0962919W	41.43667	-96.48861					0	
+1882574	Boswell Observatory	locale	NE		Saline		403721N	0965603W	40.6225	-96.93417					0	
+1884590	Observatory	locale	NE		Adams		403543N	0982208W	40.59528	-98.36889					0	
+1916818	Shattuck Observatory	locale	NH		Grafton		434218N	0721710W	43.705	-72.28611					0	
+1915840	Weston Observatory	locale	NH		Hillsborough		430004N	0712622W	43.00111	-71.43944					0	
+936624	Apache Point Observatory	locale	NM		Otero		324643N	1054848W	32.77861	-105.81333					2778	
+928889	Capilla Peak Observatory	locale	NM		Torrance		344152N	1062415W	34.69778	-106.40417					0	
+935718	Clyde W Tombaugh Observatory	locale	NM		Doña Ana		321844N	1064640W	32.31222	-106.77778					0	
+933318	National Radio Astronomy Observatory	locale	NM		Socorro		340358N	1065422W	34.06611	-106.90611					0	
+974693	Lamont Observatory	locale	NY		Rockland		410015N	0735430W	41.00417	-73.90833					0	
+960196	Perkins Memorial Observatory	locale	NY		Orange		411840N	0740027W	41.31111	-74.0075					0	
+1806888	Abbe Meteorological Observatory	locale	OH		Hamilton		390921N	0843054W	39.15583	-84.515					0	
+1084688	Burrell Observatory	locale	OH		Cuyahoga		412232N	0815105W	41.37556	-81.85139					0	
+1038856	Case Observatory	locale	OH		Cuyahoga		413210N	0813407W	41.53611	-81.56861					0	
+1044378	Perkins Observatory	locale	OH		Delaware		401503N	0830321W	40.25083	-83.05583					0	
+1047361	University Of Cincinnati Observatory	locale	OH		Hamilton		390819N	0842522W	39.13861	-84.42278					0	
+1084853	Weaver Observatory	locale	OH		Clark		395607N	0834859W	39.93528	-83.81639					0	
+1140608	Dam Observatory	locale	OR		Jefferson		443603N	1211627W	44.60083	-121.27417					0	
+1140783	Dee Wright Observatory	locale	OR		Deschutes		441538N	1214802W	44.26056	-121.80056					1623	
+1147719	Pine Mountain Observatory	locale	OR		Deschutes		434731N	1205627W	43.79194	-120.94083					0	
+1206534	Airglow Observatory	locale	PA		Somerset		400752N	0790952W	40.13111	-79.16444					829	
+1168171	Allegheny Observatory	locale	PA		Allegheny		402857N	0800113W	40.4825	-80.02028					0	
+1903505	Fox Point Observatory	locale	RI		Providence		414856N	0712403W	41.81556	-71.40083					0	
+1902170	Frosty Drew Observatory	locale	RI		Washington		412251N	0713856W	41.38083	-71.64889					0	
+1903747	Ladd Observatory	locale	RI		Providence		415022N	0712357W	41.83944	-71.39917					0	
+1249225	Melton Observatory	locale	SC		Richland		335951N	0810136W	33.9975	-81.02667					0	
+1249264	Old Observatory	locale	SC		Richland		335958N	0810141W	33.99944	-81.02806					0	
+1320890	Cumberland Plateau Observatory	locale	TN		Van Buren		353556N	0853405W	35.59889	-85.56806					0	
+1324809	Vanderbilt University Observatory	locale	TN		Davidson		360308N	0864818W	36.05222	-86.805					0	
+1362428	McDonald Observatory	locale	TX		Jeff Davis		304017N	1040116W	30.67139	-104.02111					0	
+1365945	Radio Astronomical Observatory	locale	TX		Wharton		290009N	0961524W	29.0025	-96.25667					0	
+1491195	McCormick Observatory	locale	VA		Albemarle		380157N	0783120W	38.0325	-78.52222					0	
+1690350	National Radio Astronomy Observatory	locale	VA		Albemarle		380212N	0783106W	38.03667	-78.51833					0	
+1614066	Langs Observatory	locale	VI		St. Croix		174437N	0644111W	17.74361	-64.68639					0	
+1514459	Goldendale Astronomical Observatory	locale	WA		Klickitat		455021N	1204850W	45.83917	-120.81389					640	
+1533183	Newport Geophysical Observatory	locale	WA		Pend Oreille		481552N	1170721W	48.26444	-117.1225					0	
+1843492	Buckstaff Observatory	locale	WI		Winnebago		440240N	0883214W	44.04444	-88.53722					0	
+1581315	Pine Bluff Observatory	locale	WI		Dane		430439N	0894018W	43.0775	-89.67167					0	
+1834194	Smith Observatory	locale	WI		Rock		423006N	0890156W	42.50167	-89.03222					0	
+1842743	Washburn Observatory	locale	WI		Dane		430434N	0892432W	43.07611	-89.40889					0	
+1581376	Yerkes Observatory	locale	WI		Walworth		423413N	0883322W	42.57028	-88.55611					0	
+1553670	National Radio Astronomy Observatory	locale	WV		Pocahontas		382616N	0795011W	38.43778	-79.83639					939	
+2042280	Mount Graham International Observatory	building	AZ		Graham		324210N	1095329W	32.70278	-109.89139					0	
+1942772	Roinick Observatory	building	CT		Fairfield		411015N	0731947W	41.17083	-73.32972					0	
+1998977	Admiral's House Naval Observatory	building	DC		District of Columbia		385522N	0770357W	38.92278	-77.06583					0	
+2048561	Drake Observatory	building	IA		Polk		413544N	0934114W	41.59556	-93.68722					0	
+1997283	Gale Observatory	building	IA		Poweshiek		414522N	0924310W	41.75611	-92.71944					0	
+1995706	O'Donoghue Observatory	building	IA		Woodbury		422825N	0962131W	42.47361	-96.35861					0	
+2001212	Observatory	building	IA		Dubuque		423020N	0904043W	42.50556	-90.67861					0	
+1977444	Durfee Observatory	building	MA		Hampshire		422325N	0723122W	42.39028	-72.52278					0	
+1974732	Maria Mitchell Observatory	building	MA		Nantucket		411650N	0700615W	41.28056	-70.10417					0	
+1977831	Williston Observatory	building	MA		Hampshire		421521N	0723443W	42.25583	-72.57861					0	
+2043465	United Astronomy Clubs of New Jersey Observatory	building	NJ		Warren		405424N	0745540W	40.90667	-74.92778					0	
+1993593	National Radio Astronomy Observatory	building	VI		St. Croix		174533N	0643501W	17.75917	-64.58361					0	
+1954412	David A Johnston Cascades Volcano Observatory	building	WA		Clark		453647N	1222944W	45.61306	-122.49556					0	
+2013906	Morgan County Observatory	building	WV		Morgan		392849N	0781317W	39.48028	-78.22139					306	
