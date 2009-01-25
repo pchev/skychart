@@ -1,6 +1,4 @@
-Version 3.0.1.5 SVN  Release Notes
-
-2009, January 11 changes:
+Version 3.0.1.6  Release Notes
 
 WARNING!
 This version change the location of the configuration files.
@@ -12,26 +10,18 @@ You can then totally remove the folders My Documents\Cartes du Ciel or ~/cartes_
 For Linux the application data directory also change for /usr/share/skychart, if you 
 install additional catalogs you must move them from /usr/share/apps/skychart.
 
-December 6 changes:
-
 Fix the interface with Audela software.
 Fix various problem if the user directory contain national character in path name.
 Update the time zone information for Windows. On Unix use the system time zone.
 Take account for the telescope coordinates system.
 New server commands and command line options.
 Use FreeDesktop xdg-open by default to open a file on Linux.
-
-November 9 changes:
-
 New program cdcicon that show the clock on the task bar. It can also start directly the Calendar or Skychat, do a rigth click on the icon to show the menu.
 Add True Solar Time to the clock
 Update the documentation from the wiki thank's to the great work from Marceau GUIHARD and the translators.
 All the windows have now a Help button.
 The meridian line is show with the "other line" color for more visibility.
 Show the compiler version in the About box.
-
-November 2 changes:
-
 New Clock display from View/Clock menu.
 It is now possible to change the star size in line mode for display or printing from configuration/display.
 USNO-A display and search problem is fixed.
@@ -39,34 +29,21 @@ New ASCOM driver.
 Solve for a few crash situation and other bug.
 Improved nebulae common name search by Oleg Maliy.
 Chinese translation by Lam Xiang.
-
-October 18 changes:
-
 To reduce label overlap the label from diferent source are now draw at different position around an object. 
 It is now possible to activate the labels for stars, variables, and double without overlap.
 For the nebulae the SAC label is show on the right, label from other catalog is show on the left.
 There is a new option in Setup/Display/Labels to show the labels from all stars catalog.
-+ bug correction as show in roadmap: http://www.ap-i.net/mantis/roadmap_page.php
-
-Septenber 21 changes:
-
 Add contextual help, press F1 key.
 Add main configuration window again.
 Fix telescope port selection on Linux.
 Add command line parameter --config to specify a configuration .ini file.
 Add command line parameter --unique to allow only one instance to run 
-
-Change since version 3.0.1.4 :
-
 Variable stars module VarObs:
 VarObs is now part of Skychart.
 Modified for new AAVSO files format.
 User files now in same directory as Skychart.
 Improved configuration dialog.
 Can use local time for the observations.
-Work with Skychart version 3.0.
-
-Other changes:
 Separate configuration panel form the main menu.
 Option to not simplify the chart when moving.
 New Icelandic translation by Sverrir Gudmundsson.

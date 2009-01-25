@@ -1,6 +1,6 @@
 Summary: Skychart / Cartes du Ciel planetarium software
 Name: skychart
-Version: 3.0.1.5
+Version: 3.0.1.6
 Release: 1
 Group: Sciences/Astronomy
 License: GPL
