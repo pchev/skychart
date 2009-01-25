@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-12-29 13:39+0100\n"
+"PO-Revision-Date: 2009-01-15 01:26+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -169,7 +169,7 @@ msgstr "Anoniem password"
 
 #: u_translation.rsapparent
 msgid "Apparent"
-msgstr "Schijnbaar"
+msgstr "Van de datum"
 
 #: u_translation.rsappearance
 msgid "Appearance"
@@ -433,7 +433,7 @@ msgstr "Catalogi"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
-msgstr "Catalogus volledige benaming"
+msgstr "Catalogus lange benaming"
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
@@ -677,7 +677,7 @@ msgstr "Bereken"
 
 #: u_translation.rscomputeaster
 msgid "Compute asteroid data for this month"
-msgstr "Bereken planetoïde data voor deze maand"
+msgstr "Bereken planetoïden gegevens van deze maand"
 
 #: u_translation.rscomputefield
 msgid "Compute Field"
@@ -1045,7 +1045,7 @@ msgstr "Klaar met verwijderen"
 
 #: u_translation.rsdeletedailyd
 msgid "Delete daily data"
-msgstr "Verwijder dagelijkse data"
+msgstr "Verwijderen van dagelijkse data"
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
@@ -1053,39 +1053,39 @@ msgstr "Succesvol verwijderd!"
 
 #: u_translation.rsdeletefromel
 msgid "Delete from element table..."
-msgstr "Verwijder van elemententabel.."
+msgstr "Verwijderen van de elemententabel..."
 
 #: u_translation.rsdeletefromel2
 msgid "Delete from element list..."
-msgstr "Verwijder van elementenlijst..."
+msgstr "Verwijderen van de elementenlijst..."
 
 #: u_translation.rsdeletefrommo
 msgid "Delete from monthly table..."
-msgstr "Verwijder van de maand tabel..."
+msgstr "Verwijderen van de maand tabel..."
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
-msgstr "Verwijder van maand tabel van jd<%s"
+msgstr "Verwijderen van maand tabel van jd<%s"
 
 #: u_translation.rsdeletefromna
 msgid "Delete from name list..."
-msgstr "verwijder uit namenlijst..."
+msgstr "Verwijderen uit namenlijst..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete Monthly data "
-msgstr "Verwijder maandelijkse data"
+msgstr "Verwijderen van de maandelijkse gegevens"
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete Monthly data older than "
-msgstr "Verwijder maandelijkse data ouder dan"
+msgstr "Verwijderen van de maandelijkse data ouder dan"
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
-msgstr "Verwijder MPC data selectief"
+msgstr "Selectief verwijderen van MPC data "
 
 #: u_translation.rsdeleteprevio
 msgid "Delete previous data for this date."
-msgstr "Verwijder voorgaande gevevens voor deze datum."
+msgstr "Verwijderen van voorgaande gevevens van deze datum."
 
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database ?"
@@ -1513,7 +1513,7 @@ msgstr "Vullen?"
 
 #: u_translation.rsfillmilkyway
 msgid "Fill Milky Way"
-msgstr "Vul Melkweg"
+msgstr "Vul de Melkweg"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon color"
@@ -1573,7 +1573,7 @@ msgstr "Fonts"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
-msgstr "Selecteer voor een grote catalogus altijd 'binair geïndiceerde catalogus'. Voor een kleine dataset die frequent verandert, selecteer ''Tekstbestand catalogus'. Dit maakt het mogelijk het bestand te bewerken en het resultaat onmiddelijk op de kaart toonbaar te maken zonder de noodzaak deze utility nog eens te draaien."
+msgstr "Selecteer voor een grote catalogus altijd 'binair geïndiceerde catalogus'. Voor een kleine dataset die frequent verandert, selecteer 'Tekstbestand catalogus'. Dit maakt het mogelijk het bestand te bewerken en het resultaat onmiddelijk op de kaart toonbaar te maken zonder de noodzaak deze utility nog eens te draaien."
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1625,19 +1625,19 @@ msgstr "Galact. coörd."
 
 #: u_translation.rsgalaxies
 msgid "Galaxies"
-msgstr "Melkwegstelsels"
+msgstr "Sterrenstelsels"
 
 #: u_translation.rsgalaxy
 msgid "Galaxy"
-msgstr "Melkwegstelsel"
+msgstr "Sterrenstelsel"
 
 #: u_translation.rsgalaxycluste
 msgid "Galaxy Cluster"
-msgstr "Melkwegstelselcluster"
+msgstr "Sterrenstelselcluster"
 
 #: u_translation.rsgalaxycluste2
 msgid "Galaxy cluster"
-msgstr "Melkwegstelselscluster"
+msgstr "Sterrenstelselscluster"
 
 #: u_translation.rsgamma
 msgid "Gamma"
@@ -1661,7 +1661,7 @@ msgstr "Geocentrisch"
 
 #: u_translation.rsgetasteroidl
 msgid "Get Asteroid list."
-msgstr "Haal planetoïden lijst."
+msgstr "Laad de planetoïden lijst."
 
 #: u_translation.rsgetdssimage
 msgid "Get DSS Image"
@@ -2265,7 +2265,7 @@ msgstr "Gemiddelde afwijking"
 
 #: u_translation.rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr "gemiddelde equator, equinox, en epoche voor de datum"
+msgstr "gemiddelde equator, equinox, en epoche van de datum"
 
 #: u_translation.rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
@@ -2285,7 +2285,7 @@ msgstr "Gem. lokaal"
 
 #: u_translation.rsmeanofthedat
 msgid "Mean of the date"
-msgstr "Gemiddeld voor de datum"
+msgstr "Gemiddeld van de datum"
 
 #: u_translation.rsmeanposition
 msgid "Mean position"
@@ -2721,7 +2721,7 @@ msgstr "Oriëntatie"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file :"
-msgstr "Of gebruik een lokaal bestand:"
+msgstr "Of laad een lokaal bestand:"
 
 #: u_translation.rsother
 msgid "Other"
@@ -3001,7 +3001,7 @@ msgstr "Verwerken...%s"
 
 #: u_translation.rsprocessingen
 msgid "Processing ended. Total number of comet :%s"
-msgstr "Verwerken gereed. Total aantal van kometen: %s"
+msgstr "Verwerken gereed. Totaal aantal kometen: %s"
 
 #: u_translation.rsprocessingen2
 msgid "Processing ended. Total number of asteroid :%s"
@@ -3085,11 +3085,11 @@ msgstr "Snel verwijderen"
 
 #: u_translation.rsquicklydelet
 msgid "Quickly delete all comet related data"
-msgstr "Snel verwijderen van alle kometen gerelateerde gegevens"
+msgstr "Snel verwijderen van alle aan kometen gerelateerde gegevens"
 
 #: u_translation.rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
-msgstr "Snel verwijderen van alle planetoïden gerelateerde gegevens"
+msgstr "Snel verwijderen van alle aan planetoïden gerelateerde gegevens"
 
 #: u_translation.rsquickstartgu
 msgid "Quick start guide"
@@ -3553,7 +3553,7 @@ msgstr "Toon veldmarkering zoeker/oculair/camera"
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
-msgstr "Toon Melkweg"
+msgstr "Toon de Melkweg"
 
 #: u_translation.rsshownebulae
 msgid "Show Deep Sky Objects"
@@ -4293,7 +4293,7 @@ msgstr "jaren"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "U bent nu gereed om planetoïden voor deze tijdsperioden weer te geven. "
+msgstr "U bent nu gereed om planetoïden binnen deze tijdsperiode weer te geven. "
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
