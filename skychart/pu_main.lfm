@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 860
   ActiveControl = quicksearch
   Caption = 'Cartes du Ciel'
-  ClientHeight = 557
+  ClientHeight = 558
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -22,13 +22,13 @@ object f_main: Tf_main
   LCLVersion = '0.9.27'
   object MultiDoc1: TMultiDoc
     Left = 26
-    Height = 469
+    Height = 470
     Top = 54
     Width = 806
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 1
-    ClientHeight = 469
+    ClientHeight = 470
     ClientWidth = 806
     Color = clBlack
     FullRepaint = False
@@ -2667,24 +2667,23 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 469
+    Height = 470
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 469
+    ClientHeight = 470
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 469
+      Height = 470
       Top = 0
       Width = 26
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar2'
-      Ctl3D = False
       EdgeBorders = [ebBottom]
       Images = ImageNormal
       ParentShowHint = False
@@ -2772,24 +2771,23 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 832
-    Height = 469
+    Height = 470
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 469
+    ClientHeight = 470
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 219
+      Height = 220
       Top = 250
       Width = 28
       Align = alClient
       ButtonHeight = 23
       Caption = 'ToolBar3'
-      Ctl3D = False
       EdgeBorders = [ebBottom]
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
@@ -3023,7 +3021,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 523
+    Top = 524
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -3129,7 +3127,6 @@ object f_main: Tf_main
       Top = 0
       Width = 860
       ButtonHeight = 23
-      Ctl3D = False
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
@@ -3322,7 +3319,6 @@ object f_main: Tf_main
         ArrowKeysTraverseList = False
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
-        Ctl3D = False
         DropDownCount = 15
         ItemHeight = 0
         ItemWidth = 0
@@ -3469,13 +3465,12 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 29
+        Height = 28
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoComplete = False
         AutoCompleteText = [cbactSearchAscending]
-        Ctl3D = False
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
         ItemHeight = 0
@@ -3525,7 +3520,6 @@ object f_main: Tf_main
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'
-      Ctl3D = False
       EdgeBorders = [ebTop, ebBottom]
       Images = ImageNormal
       ParentShowHint = False

@@ -13,10 +13,11 @@ object f_config_internet: Tf_config_internet
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ParentFont = False
   LCLVersion = '0.9.27'
   object MainPanel: TPanel
+    Left = 0
     Height = 434
+    Top = 0
     Width = 489
     Align = alClient
     BevelOuter = bvNone
@@ -25,16 +26,18 @@ object f_config_internet: Tf_config_internet
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
+      Left = 0
       Height = 434
+      Top = 0
       Width = 489
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
-      PageIndex = 1
+      PageIndex = 2
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Proxy'
-        ClientWidth = 481
+        ClientWidth = 485
         ClientHeight = 403
         object GroupBox1: TGroupBox
           Left = 20
@@ -42,7 +45,7 @@ object f_config_internet: Tf_config_internet
           Top = 12
           Width = 401
           Caption = 'HTTP Proxy'
-          ClientHeight = 186
+          ClientHeight = 185
           ClientWidth = 397
           TabOrder = 0
           object httpproxy: TCheckBox
@@ -59,7 +62,7 @@ object f_config_internet: Tf_config_internet
             Height = 137
             Top = 40
             Width = 369
-            ClientHeight = 122
+            ClientHeight = 121
             ClientWidth = 365
             TabOrder = 1
             object Label2: TLabel
@@ -97,6 +100,7 @@ object f_config_internet: Tf_config_internet
             object proxyhost: TEdit
               Left = 123
               Height = 23
+              Top = 0
               Width = 90
               OnChange = proxyhostChange
               TabOrder = 0
@@ -104,6 +108,7 @@ object f_config_internet: Tf_config_internet
             object proxyport: TEdit
               Left = 307
               Height = 23
+              Top = 0
               Width = 40
               OnChange = proxyportChange
               TabOrder = 1
@@ -132,7 +137,7 @@ object f_config_internet: Tf_config_internet
           Top = 222
           Width = 401
           Caption = 'FTP '
-          ClientHeight = 105
+          ClientHeight = 104
           ClientWidth = 397
           TabOrder = 1
           object Label1: TLabel
@@ -174,10 +179,10 @@ object f_config_internet: Tf_config_internet
       object Page2: TPage
         Caption = 'Orbital Elements'
         ClientWidth = 485
-        ClientHeight = 430
+        ClientHeight = 428
         object Label6: TLabel
           Left = 28
-          Height = 14
+          Height = 15
           Top = 23
           Width = 282
           Caption = 'Comet elements in MPC format (one URL by line) '
@@ -185,7 +190,7 @@ object f_config_internet: Tf_config_internet
         end
         object Label7: TLabel
           Left = 28
-          Height = 14
+          Height = 15
           Top = 196
           Width = 288
           Caption = 'Asteroid elements in MPC format (one URL by line)'
@@ -309,11 +314,11 @@ object f_config_internet: Tf_config_internet
       end
       object Page3: TPage
         Caption = 'Online DSS'
-        ClientWidth = 481
-        ClientHeight = 403
+        ClientWidth = 485
+        ClientHeight = 428
         object Label8: TLabel
           Left = 20
-          Height = 20
+          Height = 15
           Top = 19
           Width = 135
           Caption = 'Online pictures servers'
@@ -326,12 +331,9 @@ object f_config_internet: Tf_config_internet
           Width = 453
           ColCount = 2
           DefaultColWidth = 120
-          ExtendedSelect = True
-          FixedColor = clBtnFace
           FixedCols = 0
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor, goSmoothScroll]
-          ParentColor = False
           RowCount = 11
           TabOrder = 0
           OnEditingDone = DSSpicturesEditingDone
@@ -339,7 +341,7 @@ object f_config_internet: Tf_config_internet
         object DefaultDSS: TButton
           Left = 394
           Height = 25
-          Top = 396
+          Top = 373
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
@@ -350,6 +352,7 @@ object f_config_internet: Tf_config_internet
     end
   end
   object Panel1: TPanel
+    Left = 0
     Height = 50
     Top = 434
     Width = 489
