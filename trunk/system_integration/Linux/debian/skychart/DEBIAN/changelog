@@ -1,3 +1,11 @@
+skychart (3.0.1.6-1) experimental; urgency=low
+
+  * New beta version
+    For the full change log, see :
+    http://skychart.svn.sourceforge.net/viewcvs.cgi/skychart/trunk/?view=log
+
+ -- Patrick Chevalley <pch@freesurf.ch>  Thu, 25 Jan 2009 10:00:00 +0100
+
 skychart (3.0.1.5-1) experimental; urgency=low
 
   * New beta version

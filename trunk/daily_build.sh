@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+version=3.0.1.6
+
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 innosetup="C:\Program Files\Inno Setup 5\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php
 issscript="Z:\tmp\skychart\cdcv3.iss" # Change to match builddir, Z: is defined in ~/.wine/dosdevices
@@ -48,7 +50,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # tar
   cd $builddir
-  tar cvjf skychart-3.0.1.5-$currentrev-linux.tar.bz2 *
+  tar cvjf skychart-$version-$currentrev-linux.tar.bz2 *
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -103,7 +105,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # zip
   cd $builddir/Data
-  zip -r  skychart-3.0.1.5-$currentrev-windows.zip *
+  zip -r  skychart-$version-$currentrev-windows.zip *
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.zip $wd
   if [[ $? -ne 0 ]]; then exit 1;fi

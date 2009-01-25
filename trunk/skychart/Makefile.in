@@ -4,7 +4,7 @@
 
 [package]
 name=skychart
-version=3.0.1.5
+version=3.0.1.6
 
 [target]
 dirs=component library

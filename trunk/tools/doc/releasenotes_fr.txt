@@ -1,6 +1,4 @@
-Version 3.0.1.5 SVN  Notes de la version
-
-Changement du 11 janvier 2009:
+Version 3.0.1.6  Notes de la version
 
 ATTENTION!
 Cette version change l'emplacement d'enregistrement des fichiers de configuration.
@@ -16,27 +14,18 @@ depuis /usr/share/apps/skychart.
 
 Nouvelle traduction en Slovène par Grofaty
 Correction de bug selon: http://www.ap-i.net/mantis/changelog_page.php
-
-Changement du 6 décembre:
-
 Corrige l'interface avec Audela.
 Corrige divers problèmes si le répertoire utilisateur contient des accents.
 Mise à jour des zones horaires pour Windows. Utilise les zone horaires du système sous Linux 
 Tient compte du système de coordonnées du télescope.
 Nouvelles commandes serveur et options de ligne de commandes.
 Utilise FreeDesktop xdg-open par défaut pour ouvrir un fichier sous Linux.
-
-Changement du 9 novembre:
-
 Nouveau programme cdcicon qui affiche l'horloge dans la barre de tâche. Il permet aussi d'ouvrir directement le calendrier ou Cartes du Ciel. Faire un clic droit pour le menu.
 Ajout de l'heure solaire vraie à l'horloge.
 Mise à jour de la documentation a partir du wiki grâce au travail de Marceau GUIHARD et des traducteurs.
 Toutes les fenêtres ont maintenant un bouton d'aide.
 La ligne du méridien utilise la couleur "autres lignes" pour plus de visibilité.
 Affichage de la version du compilateur utilisé dans la fenêtre A Propos.
-
-Changement du 2 novembre:
-
 Nouveau menu Voir/Horloge 
 Il est maintenant possible de choisir la taille des étoiles en mode ligne pour l'affichage ou l'impression depuis le menu configuration/affichage.
 L'affichage et la recherche d'étoiles USNO-A est corrigée.
@@ -44,34 +33,21 @@ Nouveau pilote ASCOM.
 Solution pour certain plantage du programme et correction d'autres bug.
 Amélioration de la recherche par nom commun de nébuleuse par Oleg Maliy.
 Traduction en chinois par Lam Xiang.
-
-Changement du 18 octobre:
-
 Pour réduire le chevauchement des labels provenant de différentes sources sont écrit a différentes position autour de l'objet.
 Il est maintenant possible d'activer les labels pour les étoiles, les variables et les doubles sans chevauchement.
 Pour les nébuleuses le label SAC est écrit à droite et le label des autres catalogue à gauche.
 Il y a une option dans Configuration/Affichage/Label pour afficher les labels de tous les catalogues d'étoiles.
-+ correction de bug selon la roadmap: http://www.ap-i.net/mantis/roadmap_page.php
-
-Changement du 21 septembre:
-
 Ajout de l'aide contextuelle, appuyez sur F1.
 Ajoute a nouveau la fenêtre principale de configuration.
 Corrige le choix du port du télescope sous Linux.
 Ajout de l'option de ligne de commande --config pour indiquer le fichier .ini à utiliser.
 Ajout de l'option de ligne de commande --unique pour n'avoir qu'une seule instance du programme.
-
-Changements depuis la version 3.0.1.4:
-
 Module pour les étoiles variables VarObs:
 VarObs fait maintenant partie de Cartes du Ciel.
 Modifié pour les nouveaux format de fichiers de l'AAVSO.
 Les fichiers utilisateurs sont maintenant dans le même répertoire que Cartes du Ciel.
 Amélioration du dialogue de configuration.
 Possibilité d'utiliser l'heure locale pour les observations.
-Marche avec Cartes du Ciel version 3.0.
-
-Autres changement;
 Séparations des options de configuration dans le menu principal.
 Option pour ne pas simplifier la carte pendant le déplacement.
 Traduction en Islandais par Sverrir Gudmundsson.
