@@ -151,9 +151,9 @@ object f_config: Tf_config
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ParentFont = False
   LCLVersion = '0.9.27'
   object Panel2: TPanel
+    Left = 0
     Height = 41
     Top = 499
     Width = 730
@@ -163,9 +163,9 @@ object f_config: Tf_config
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16
-      Height = 21
+      Height = 33
       Top = 12
-      Width = 181
+      Width = 180
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
@@ -214,7 +214,9 @@ object f_config: Tf_config
     end
   end
   object Panel1: TPanel
+    Left = 0
     Height = 499
+    Top = 0
     Width = 232
     Align = alLeft
     ClientHeight = 499
@@ -227,7 +229,7 @@ object f_config: Tf_config
       Width = 230
       Align = alClient
       AutoExpand = True
-      DefaultItemHeight = 17
+      DefaultItemHeight = 16
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True
@@ -342,6 +344,7 @@ object f_config: Tf_config
   object Panel4: TPanel
     Left = 237
     Height = 499
+    Top = 0
     Width = 493
     Align = alClient
     ClientHeight = 499
@@ -360,11 +363,14 @@ object f_config: Tf_config
       TabOrder = 0
       Maximized = True
       TitleHeight = 12
+      KeepLastChild = False
+      WireframeMoveResize = False
     end
   end
   object Splitter1: TSplitter
     Left = 232
     Height = 499
+    Top = 0
     Width = 5
     Beveled = True
   end

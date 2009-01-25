@@ -2801,11 +2801,12 @@ end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigInternet.cmain.Assign(cfgm);
+ConfigInternet.cdss.Assign(f_getdss.cfgdss);
 formpos(ConfigInternet,mouse.cursorpos.x,mouse.cursorpos.y);
 ConfigInternet.Notebook1.PageIndex:=page;
 ConfigInternet.showmodal;
 if ConfigInternet.ModalResult=mrOK then begin
- activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,nil,false);
+ activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,ConfigInternet.cdss,false);
 end;
 ConfigInternet.Free;
 ConfigInternet:=nil;
@@ -2813,7 +2814,7 @@ end;
 
 procedure Tf_main.ApplyConfigInternet(Sender: TObject);
 begin
- activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,nil,false);
+ activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,ConfigInternet.cdss,false);
 end;
 
 procedure Tf_main.SetupPicturesPage(page:integer);

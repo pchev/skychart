@@ -374,6 +374,7 @@ begin
   if MultiDoc1.ActiveObject=f_config_system1 then begin
     if f_config_system1.Notebook1.ActivePageComponent=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
   end;
+  Fcdss:=f_config_internet1.cdss;
 end;
 
 procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
