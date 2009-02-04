@@ -2,7 +2,7 @@ CPPFLAGS=-I. -DUNIX -D_CONSOLE
 #### For Suns and similar wrong-endian computers, add -DWRONG_WAY_BYTE_ORDER.
 
 OSTYPE = $(shell uname)
-ifneq ($(findstring darwin,$(OSTYPE)),)
+ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name = libgetdss.dylib
 LDFLAGS=  -Wl,-single_module -dynamiclib  -lc -lm -lstdc++
 else

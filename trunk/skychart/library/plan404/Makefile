@@ -3,7 +3,7 @@ CC            = gcc
 #CFLAGS        = -O3 -ffast-math (fast-math removed for better compatibility )
 CFLAGS        = -O3
 OSTYPE = $(shell uname)
-ifneq ($(findstring darwin,$(OSTYPE)),)
+ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libplan404.dylib
 LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm
 else
