@@ -33,6 +33,14 @@ dirs="skychart/component/synapse/source/lib \
      varobs \
      . "
 
+uname | grep -i darwin
+darwin=$?
+if [ $darwin -eq 0 ]; then
+   fpcmake_opt=-q 
+else 
+   fpcmake_opt=-q -Tall
+fi
+
 #  Try to locate fpcbin in PATH
 if [ -z "$fpcbin" ]; then
    export fpcbin=$(which fpcmake | sed 's#/fpcmake##')
@@ -121,8 +129,8 @@ do
    echo create $dir/Makefile 
    cd $dir
    sed "s#%LAZDIR%#$lazarus#" Makefile.in > Makefile.fpc
-   sed -i "s#%PREFIX%#$prefix#" Makefile.fpc
-   $fpcbin/fpcmake -q -Tall Makefile.fpc
+   sed -i xxx "s#%PREFIX%#$prefix#" Makefile.fpc 
+   $fpcbin/fpcmake $fpcmake_opt Makefile.fpc
    rc=$?
    cd $basedir
    if [[ $rc -ne 0 ]]; then 

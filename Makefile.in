@@ -27,6 +27,12 @@ install:
 uninstall: 
 	.\uninstall.cmd $(PREFIX)
 else
+ifeq ($(OS_TARGET),darwin)
+install: 
+	./install_darwin.sh $(PREFIX)
+uninstall: 
+	./uninstall_darwin.sh $(PREFIX)
+else
 install: 
 	./install.sh $(PREFIX)
 uninstall: 
@@ -39,6 +45,7 @@ install_win_data:
 	\$(MAKE) -C tools install_win 
 uninstall_win_data:
 	\$(MAKE) -C tools uninstall_win
+endif
 endif
 data:
 	\$(MAKE) -C tools all
