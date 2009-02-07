@@ -171,7 +171,7 @@ if db.Active then begin
       or (db.RowCount<1) )
    then begin
      {$ifdef trace_debug}
-     WriteTrace('Upgrade DB to 3.0.1.6 ');
+     WriteTrace('Upgrade DB for new country format ');
      {$endif}
      db.Query('drop table cdc_country');
      writetrace('Drop table cdc_country ... '+db.ErrorMessage);
