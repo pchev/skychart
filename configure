@@ -38,7 +38,7 @@ darwin=$?
 if [ $darwin -eq 0 ]; then
    fpcmake_opt=-q 
 else 
-   fpcmake_opt=-q -Tall
+   fpcmake_opt="-q -Tall"
 fi
 
 #  Try to locate fpcbin in PATH
@@ -129,7 +129,7 @@ do
    echo create $dir/Makefile 
    cd $dir
    sed "s#%LAZDIR%#$lazarus#" Makefile.in > Makefile.fpc
-   sed -i xxx "s#%PREFIX%#$prefix#" Makefile.fpc 
+   sed -ixxx "s#%PREFIX%#$prefix#" Makefile.fpc 
    $fpcbin/fpcmake $fpcmake_opt Makefile.fpc
    rc=$?
    cd $basedir
