@@ -3,13 +3,10 @@ object f_config_system: Tf_config_system
   Height = 532
   Top = 132
   Width = 484
-  HelpContext = 0
   ActiveControl = DBtypeGroup.RadioButton0
   Caption = 'System'
   ClientHeight = 532
   ClientWidth = 484
-  Font.Height = 0
-  Font.Style = []
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -20,7 +17,6 @@ object f_config_system: Tf_config_system
     Height = 482
     Top = 0
     Width = 484
-    HelpContext = 0
     Align = alClient
     ClientHeight = 482
     ClientWidth = 484
@@ -31,23 +27,19 @@ object f_config_system: Tf_config_system
       Height = 480
       Top = 1
       Width = 482
-      HelpContext = 0
       Align = alClient
-      Options = []
       PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
-        HelpContext = 0
         Caption = 'Page1'
         ClientWidth = 478
-        ClientHeight = 476
+        ClientHeight = 474
         object Label153: TLabel
           Left = 0
-          Height = 14
+          Height = 15
           Top = 0
           Width = 88
-          HelpContext = 0
           Caption = 'System Setting'
           ParentColor = False
         end
@@ -56,18 +48,15 @@ object f_config_system: Tf_config_system
           Height = 97
           Top = 59
           Width = 441
-          HelpContext = 0
           Caption = 'MySQL  Database'
-          ClientHeight = 82
+          ClientHeight = 81
           ClientWidth = 437
-          Ctl3D = False
           TabOrder = 5
           object Label77: TLabel
             Left = 16
             Height = 14
             Top = 12
             Width = 58
-            HelpContext = 0
             Caption = 'DB Name:'
             ParentColor = False
           end
@@ -76,7 +65,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 12
             Width = 68
-            HelpContext = 0
             Caption = 'Host Name:'
             ParentColor = False
           end
@@ -85,7 +73,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 12
             Width = 28
-            HelpContext = 0
             Caption = 'Port:'
             ParentColor = False
           end
@@ -94,7 +81,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 52
             Width = 42
-            HelpContext = 0
             Caption = 'Userid:'
             ParentColor = False
           end
@@ -103,7 +89,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 52
             Width = 57
-            HelpContext = 0
             Caption = 'Password'
             ParentColor = False
           end
@@ -112,7 +97,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 8
             Width = 65
-            HelpContext = 0
             OnChange = dbnameChange
             TabOrder = 0
           end
@@ -121,12 +105,8 @@ object f_config_system: Tf_config_system
             Height = 22
             Top = 10
             Width = 57
-            HelpContext = 0
-            BorderStyle = bsSingle
-            ParentColor = False
             TabOrder = 1
             OnChange = dbportChange
-            Ctl3D = False
             Value = 0
           end
           object dbhost: TEdit
@@ -134,7 +114,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 8
             Width = 65
-            HelpContext = 0
             OnChange = dbhostChange
             TabOrder = 2
             Text = 'dbhost'
@@ -144,7 +123,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 48
             Width = 100
-            HelpContext = 0
             OnChange = dbuserChange
             TabOrder = 3
             Text = 'dbuser'
@@ -154,7 +132,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 48
             Width = 100
-            HelpContext = 0
             EchoMode = emPassword
             OnChange = dbpassChange
             PasswordChar = '*'
@@ -167,11 +144,9 @@ object f_config_system: Tf_config_system
           Height = 97
           Top = 59
           Width = 441
-          HelpContext = 0
           Caption = 'Sqlite Database'
-          ClientHeight = 82
+          ClientHeight = 81
           ClientWidth = 437
-          Ctl3D = False
           TabOrder = 1
           Visible = False
           object Label1: TLabel
@@ -179,7 +154,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 36
             Width = 84
-            HelpContext = 0
             Caption = 'Database file: '
             ParentColor = False
           end
@@ -188,7 +162,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 32
             Width = 281
-            HelpContext = 0
             Color = clBtnFace
             OnChange = dbnamesqliteChange
             ReadOnly = True
@@ -201,18 +174,15 @@ object f_config_system: Tf_config_system
           Height = 91
           Top = 267
           Width = 441
-          HelpContext = 0
           Caption = 'Directory'
-          ClientHeight = 76
+          ClientHeight = 75
           ClientWidth = 437
-          Ctl3D = False
           TabOrder = 3
           object Label156: TLabel
             Left = 13
             Height = 14
             Top = 10
             Width = 84
-            HelpContext = 0
             Caption = 'Program Data '
             ParentColor = False
           end
@@ -221,7 +191,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 50
             Width = 80
-            HelpContext = 0
             Caption = 'Personal data'
             ParentColor = False
           end
@@ -230,14 +199,9 @@ object f_config_system: Tf_config_system
             Height = 23
             Top = 3
             Width = 250
-            HelpContext = 0
             ShowHidden = False
             ButtonWidth = 23
-            ButtonOnlyWhenFocused = False
             NumGlyphs = 1
-            Flat = False
-            Ctl3D = False
-            ParentColor = False
             TabOrder = 0
             OnChange = prgdirChange
           end
@@ -246,14 +210,9 @@ object f_config_system: Tf_config_system
             Height = 23
             Top = 42
             Width = 250
-            HelpContext = 0
             ShowHidden = False
             ButtonWidth = 23
-            ButtonOnlyWhenFocused = False
             NumGlyphs = 1
-            Flat = False
-            Ctl3D = False
-            ParentColor = False
             TabOrder = 1
             OnChange = persdirChange
           end
@@ -263,17 +222,14 @@ object f_config_system: Tf_config_system
           Height = 98
           Top = 155
           Width = 441
-          HelpContext = 0
-          ClientHeight = 83
+          ClientHeight = 82
           ClientWidth = 437
-          Ctl3D = False
           TabOrder = 2
           object chkdb: TButton
             Left = 16
             Height = 25
             Top = 16
             Width = 110
-            HelpContext = 0
             BorderSpacing.InnerBorder = 4
             Caption = 'Check'
             OnClick = chkdbClick
@@ -284,7 +240,6 @@ object f_config_system: Tf_config_system
             Height = 25
             Top = 16
             Width = 110
-            HelpContext = 0
             BorderSpacing.InnerBorder = 4
             Caption = 'Create Database'
             OnClick = credbClick
@@ -295,7 +250,6 @@ object f_config_system: Tf_config_system
             Height = 25
             Top = 16
             Width = 110
-            HelpContext = 0
             BorderSpacing.InnerBorder = 4
             Caption = 'Drop Database'
             OnClick = dropdbClick
@@ -306,7 +260,6 @@ object f_config_system: Tf_config_system
             Height = 25
             Top = 48
             Width = 110
-            HelpContext = 0
             BorderSpacing.InnerBorder = 4
             Caption = 'Comet Setting'
             OnClick = CometDBClick
@@ -318,7 +271,6 @@ object f_config_system: Tf_config_system
             Height = 25
             Top = 48
             Width = 110
-            HelpContext = 0
             BorderSpacing.InnerBorder = 4
             Caption = 'Asteroid Setting'
             OnClick = AstDBClick
@@ -332,7 +284,6 @@ object f_config_system: Tf_config_system
           Hint = 'Warning! '#13#10'Change to this setting will restart the program now!'
           Top = 3
           Width = 283
-          HelpContext = 0
           AutoFill = True
           Caption = 'Database Type'
           ChildSizing.LeftRightSpacing = 6
@@ -343,10 +294,9 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 33
+          ClientHeight = 32
           ClientWidth = 279
           Columns = 2
-          Ctl3D = False
           ItemIndex = 0
           Items.Strings = (
             'SQLite'
@@ -362,31 +312,27 @@ object f_config_system: Tf_config_system
           Height = 92
           Top = 367
           Width = 440
-          HelpContext = 0
           Caption = 'Desktop environment'
-          ClientHeight = 77
+          ClientHeight = 76
           ClientWidth = 436
-          Ctl3D = False
           TabOrder = 4
           object Label12: TLabel
             Left = 203
-            Height = 14
+            Height = 15
             Top = 8
             Width = 123
-            HelpContext = 0
             Caption = 'URL launch command'
             ParentColor = False
           end
           object LinuxDesktopBox: TComboBox
             Left = 20
-            Height = 25
+            Height = 28
             Top = 33
             Width = 102
-            HelpContext = 0
             AutoComplete = False
             AutoCompleteText = [cbactSearchAscending]
-            Ctl3D = False
             ItemHeight = 0
+            ItemIndex = 1
             Items.Strings = (
               'FreeDesktop'
               'KDE'
@@ -403,7 +349,6 @@ object f_config_system: Tf_config_system
             Height = 23
             Top = 33
             Width = 194
-            HelpContext = 0
             OnChange = LinuxCmdChange
             TabOrder = 1
             Text = 'LinuxCmd'
@@ -411,27 +356,23 @@ object f_config_system: Tf_config_system
         end
       end
       object Page2: TPage
-        HelpContext = 0
         Caption = 'Page2'
         ClientWidth = 478
-        ClientHeight = 453
+        ClientHeight = 449
         object GroupBox3: TGroupBox
           Left = 16
           Height = 247
           Top = 8
           Width = 393
-          HelpContext = 0
           Caption = 'TCP/IP Server'
-          ClientHeight = 232
+          ClientHeight = 231
           ClientWidth = 389
-          Ctl3D = False
           TabOrder = 0
           object Label54: TLabel
             Left = 16
             Height = 20
             Top = 124
             Width = 115
-            HelpContext = 0
             Caption = 'Server IP Interface :'
             ParentColor = False
           end
@@ -440,7 +381,6 @@ object f_config_system: Tf_config_system
             Height = 20
             Top = 168
             Width = 88
-            HelpContext = 0
             Caption = 'Server IP Port :'
             ParentColor = False
           end
@@ -449,18 +389,15 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 32
             Width = 126
-            HelpContext = 0
             Caption = 'Use TCP/IP Server'
             OnClick = UseIPserverClick
             TabOrder = 0
-            UseOnChange = False
           end
           object ipaddr: TEdit
             Left = 144
             Height = 21
             Top = 120
             Width = 100
-            HelpContext = 0
             OnChange = ipaddrChange
             TabOrder = 2
             Text = '127.0.0.1'
@@ -470,7 +407,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 164
             Width = 100
-            HelpContext = 0
             OnChange = ipportChange
             TabOrder = 3
             Text = '3292'
@@ -480,25 +416,21 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 72
             Width = 183
-            HelpContext = 0
             Caption = 'Client Connection Keep Alive'
             OnClick = keepaliveClick
             TabOrder = 1
-            UseOnChange = False
           end
         end
       end
       object Page3: TPage
-        HelpContext = 0
         Caption = 'Page3'
         ClientWidth = 478
-        ClientHeight = 453
+        ClientHeight = 449
         object Label13: TLabel
           Left = 0
           Height = 14
           Top = 0
           Width = 101
-          HelpContext = 0
           Caption = 'Telescope Setting'
           ParentColor = False
         end
@@ -507,11 +439,9 @@ object f_config_system: Tf_config_system
           Height = 297
           Top = 112
           Width = 449
-          HelpContext = 0
           Caption = 'Manual Mount'
-          ClientHeight = 282
+          ClientHeight = 281
           ClientWidth = 445
-          Ctl3D = False
           TabOrder = 3
           Visible = False
           object Label7: TLabel
@@ -519,7 +449,6 @@ object f_config_system: Tf_config_system
             Height = 62
             Top = 3
             Width = 361
-            HelpContext = 0
             AutoSize = False
             Caption = 'Set how the mount move on each axis when you turn the driving knob.'#13#10'Then the Telescope button show you the turns you must do to go from one object to another.'
             ParentColor = False
@@ -530,7 +459,6 @@ object f_config_system: Tf_config_system
             Height = 161
             Top = 119
             Width = 361
-            HelpContext = 0
             ClientHeight = 161
             ClientWidth = 361
             TabOrder = 1
@@ -539,7 +467,6 @@ object f_config_system: Tf_config_system
               Height = 14
               Top = 16
               Width = 45
-              HelpContext = 0
               Caption = 'Azimuth'
               ParentColor = False
             end
@@ -548,7 +475,6 @@ object f_config_system: Tf_config_system
               Height = 14
               Top = 93
               Width = 43
-              HelpContext = 0
               Caption = 'Altitude'
               ParentColor = False
             end
@@ -557,7 +483,6 @@ object f_config_system: Tf_config_system
               Height = 14
               Top = 16
               Width = 83
-              HelpContext = 0
               Caption = 'turns / degree'
               ParentColor = False
             end
@@ -566,7 +491,6 @@ object f_config_system: Tf_config_system
               Height = 14
               Top = 93
               Width = 83
-              HelpContext = 0
               Caption = 'turns / degree'
               ParentColor = False
             end
@@ -575,13 +499,9 @@ object f_config_system: Tf_config_system
               Height = 22
               Top = 11
               Width = 81
-              HelpContext = 0
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               TabOrder = 0
               OnChange = TurnsAzChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 0
@@ -591,13 +511,9 @@ object f_config_system: Tf_config_system
               Height = 22
               Top = 88
               Width = 81
-              HelpContext = 0
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               TabOrder = 2
               OnChange = TurnsAltChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 0
@@ -607,22 +523,18 @@ object f_config_system: Tf_config_system
               Height = 21
               Top = 40
               Width = 106
-              HelpContext = 0
               Caption = 'Revert Az knob'
               OnClick = TurnsAzChange
               TabOrder = 1
-              UseOnChange = False
             end
             object RevertTurnsAlt: TCheckBox
               Left = 128
               Height = 21
               Top = 120
               Width = 108
-              HelpContext = 0
               Caption = 'Revert Alt knob'
               OnClick = TurnsAltChange
               TabOrder = 3
-              UseOnChange = False
             end
           end
           object EquatorialMount: TPanel
@@ -630,7 +542,6 @@ object f_config_system: Tf_config_system
             Height = 161
             Top = 119
             Width = 361
-            HelpContext = 0
             ClientHeight = 161
             ClientWidth = 361
             TabOrder = 2
@@ -639,7 +550,6 @@ object f_config_system: Tf_config_system
               Height = 14
               Top = 16
               Width = 91
-              HelpContext = 0
               Caption = 'Right Ascension'
               ParentColor = False
             end
@@ -648,7 +558,6 @@ object f_config_system: Tf_config_system
               Height = 14
               Top = 93
               Width = 63
-              HelpContext = 0
               Caption = 'Declination'
               ParentColor = False
             end
@@ -657,7 +566,6 @@ object f_config_system: Tf_config_system
               Height = 14
               Top = 16
               Width = 69
-              HelpContext = 0
               Caption = 'turns / hour'
               ParentColor = False
             end
@@ -666,7 +574,6 @@ object f_config_system: Tf_config_system
               Height = 14
               Top = 93
               Width = 83
-              HelpContext = 0
               Caption = 'turns / degree'
               ParentColor = False
             end
@@ -675,13 +582,9 @@ object f_config_system: Tf_config_system
               Height = 22
               Top = 11
               Width = 81
-              HelpContext = 0
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               TabOrder = 0
               OnChange = TurnsRaChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 0
@@ -691,13 +594,9 @@ object f_config_system: Tf_config_system
               Height = 22
               Top = 88
               Width = 81
-              HelpContext = 0
-              BorderStyle = bsSingle
-              ParentColor = False
               ParentShowHint = False
               TabOrder = 1
               OnChange = TurnsDecChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 0
@@ -707,22 +606,18 @@ object f_config_system: Tf_config_system
               Height = 21
               Top = 40
               Width = 108
-              HelpContext = 0
               Caption = 'Revert RA knob'
               OnClick = TurnsRaChange
               TabOrder = 2
-              UseOnChange = False
             end
             object RevertTurnDec: TCheckBox
               Left = 128
               Height = 21
               Top = 120
               Width = 117
-              HelpContext = 0
               Caption = 'Revert DEC knob'
               OnClick = TurnsDecChange
               TabOrder = 3
-              UseOnChange = False
             end
           end
           object ManualMountType: TRadioGroup
@@ -730,7 +625,6 @@ object f_config_system: Tf_config_system
             Height = 41
             Top = 64
             Width = 361
-            HelpContext = 0
             AutoFill = True
             ChildSizing.LeftRightSpacing = 6
             ChildSizing.TopBottomSpacing = 6
@@ -740,10 +634,9 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 26
+            ClientHeight = 25
             ClientWidth = 357
             Columns = 2
-            Ctl3D = False
             Items.Strings = (
               'Equatorial'
               'Alt / Az'
@@ -757,18 +650,15 @@ object f_config_system: Tf_config_system
           Height = 297
           Top = 112
           Width = 450
-          HelpContext = 0
           Caption = 'INDI Driver setting'
-          ClientHeight = 282
+          ClientHeight = 281
           ClientWidth = 446
-          Ctl3D = False
           TabOrder = 1
           object Label75: TLabel
             Left = 8
             Height = 14
             Top = 28
             Width = 99
-            HelpContext = 0
             Caption = 'INDI Server Host '
             ParentColor = False
           end
@@ -777,7 +667,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 28
             Width = 91
-            HelpContext = 0
             Caption = 'INDI server Port'
             ParentColor = False
           end
@@ -786,7 +675,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 104
             Width = 103
-            HelpContext = 0
             Caption = 'Server command '
             ParentColor = False
           end
@@ -795,7 +683,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 136
             Width = 71
-            HelpContext = 0
             Caption = 'Driver name'
             ParentColor = False
           end
@@ -804,7 +691,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 104
             Width = 85
-            HelpContext = 0
             Caption = 'Telescope type'
             ParentColor = False
           end
@@ -813,7 +699,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 180
             Width = 69
-            HelpContext = 0
             Caption = 'Device Port '
             ParentColor = False
           end
@@ -822,7 +707,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 224
             Width = 141
-            HelpContext = 0
             Caption = 'Control Panel command '
             ParentColor = False
           end
@@ -831,7 +715,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 24
             Width = 100
-            HelpContext = 0
             OnChange = IndiServerHostChange
             TabOrder = 0
           end
@@ -840,7 +723,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 24
             Width = 97
-            HelpContext = 0
             OnChange = IndiServerPortChange
             TabOrder = 1
           end
@@ -849,18 +731,15 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 64
             Width = 337
-            HelpContext = 0
             Caption = 'Automatically start a local server if not already running'
             OnClick = IndiAutostartClick
             TabOrder = 2
-            UseOnChange = False
           end
           object IndiServerCmd: TEdit
             Left = 120
             Height = 21
             Top = 100
             Width = 100
-            HelpContext = 0
             OnChange = IndiServerCmdChange
             TabOrder = 3
           end
@@ -869,7 +748,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 132
             Width = 100
-            HelpContext = 0
             Enabled = False
             OnChange = IndiDriverChange
             TabOrder = 5
@@ -879,10 +757,8 @@ object f_config_system: Tf_config_system
             Height = 23
             Top = 100
             Width = 100
-            HelpContext = 0
             AutoComplete = False
             AutoCompleteText = [cbactSearchAscending]
-            Ctl3D = False
             ItemHeight = 0
             ItemWidth = 0
             OnSelect = IndiDevChange
@@ -894,10 +770,8 @@ object f_config_system: Tf_config_system
             Height = 23
             Top = 176
             Width = 185
-            HelpContext = 0
             AutoComplete = False
             AutoCompleteText = [cbactSearchAscending]
-            Ctl3D = False
             ItemHeight = 0
             Items.Strings = (
               'COM1'
@@ -919,7 +793,6 @@ object f_config_system: Tf_config_system
             Height = 21
             Top = 220
             Width = 257
-            HelpContext = 0
             OnChange = PanelCmdChange
             TabOrder = 7
           end
@@ -929,7 +802,6 @@ object f_config_system: Tf_config_system
           Height = 65
           Top = 32
           Width = 450
-          HelpContext = 0
           AutoFill = True
           Caption = 'TelescopeSelect'
           ChildSizing.LeftRightSpacing = 6
@@ -940,10 +812,9 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 50
+          ClientHeight = 49
           ClientWidth = 446
           Columns = 3
-          Ctl3D = False
           Items.Strings = (
             'INDI'
             'Manual'
@@ -957,11 +828,9 @@ object f_config_system: Tf_config_system
           Height = 105
           Top = 112
           Width = 450
-          HelpContext = 0
           Caption = 'CDC plugin setting'
-          ClientHeight = 90
+          ClientHeight = 89
           ClientWidth = 446
-          Ctl3D = False
           TabOrder = 2
           Visible = False
           object Label155: TLabel
@@ -969,7 +838,6 @@ object f_config_system: Tf_config_system
             Height = 14
             Top = 46
             Width = 99
-            HelpContext = 0
             Caption = 'Telescope Plugin '
             ParentColor = False
           end
@@ -978,10 +846,8 @@ object f_config_system: Tf_config_system
             Height = 23
             Top = 42
             Width = 145
-            HelpContext = 0
             AutoComplete = False
             AutoCompleteText = [cbactSearchAscending]
-            Ctl3D = False
             ItemHeight = 0
             ItemWidth = 0
             OnChange = telescopepluginlistChange
@@ -991,16 +857,14 @@ object f_config_system: Tf_config_system
         end
       end
       object Page4: TPage
-        HelpContext = 0
         Caption = 'Page4'
         ClientWidth = 478
-        ClientHeight = 453
+        ClientHeight = 449
         object Label14: TLabel
           Left = 19
           Height = 20
           Top = 24
           Width = 111
-          HelpContext = 0
           Caption = 'Language selection'
           ParentColor = False
         end
@@ -1009,9 +873,7 @@ object f_config_system: Tf_config_system
           Height = 24
           Top = 82
           Width = 260
-          HelpContext = 0
           AutoComplete = False
-          Ctl3D = False
           ItemHeight = 0
           ItemWidth = 0
           OnSelect = LanguageListSelect
@@ -1026,7 +888,6 @@ object f_config_system: Tf_config_system
     Height = 50
     Top = 482
     Width = 484
-    HelpContext = 0
     Align = alBottom
     ClientHeight = 50
     ClientWidth = 484
@@ -1036,7 +897,6 @@ object f_config_system: Tf_config_system
       Height = 25
       Top = 12
       Width = 75
-      HelpContext = 0
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
@@ -1049,7 +909,6 @@ object f_config_system: Tf_config_system
       Height = 25
       Top = 12
       Width = 75
-      HelpContext = 0
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
@@ -1061,7 +920,6 @@ object f_config_system: Tf_config_system
       Height = 25
       Top = 12
       Width = 75
-      HelpContext = 0
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
@@ -1074,7 +932,6 @@ object f_config_system: Tf_config_system
       Height = 25
       Top = 12
       Width = 75
-      HelpContext = 0
       Caption = 'Help'
       OnClick = Button4Click
       TabOrder = 3
