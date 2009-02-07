@@ -112,7 +112,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # exe
   cd $builddir
-  sed -i "AppVerName s/V3/V$version/" cdcv3.iss
+  sed -i "/AppVerName/ s/V3/V$version/" cdcv3.iss
   sed -i "/OutputBaseFilename/ s/windows/$version-$currentrev-windows/" cdcv3.iss
   wine "$innosetup" "$issscript"
   if [[ $? -ne 0 ]]; then exit 1;fi
