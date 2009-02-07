@@ -357,7 +357,7 @@ until eof(f);
 CloseFile(f);
 except
 end;
-application.ProcessMessages;
+//application.ProcessMessages;
 for i:=0 to LanguageList.Items.Count-1 do begin
   if cmain.language=words(LanguageList.Items[i],'',1,1) then LanguageList.itemindex:=i;
 end;

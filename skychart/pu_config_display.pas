@@ -709,7 +709,7 @@ ShowLine;
 Showlabel;
 ShowCircle;
 ShowRectangle;
-Application.ProcessMessages;
+//Application.ProcessMessages;
 LockChange:=false;
 end;
 
@@ -907,7 +907,7 @@ begin
  red_moveBox.Checked:=cplot.red_move;
  StarSizeBar1.position:=cplot.starsize;
  StarDynBar1.position:=cplot.stardyn;
- Application.ProcessMessages;
+// Application.ProcessMessages;
 end;
 
 procedure Tf_config_display.ShowFonts;
