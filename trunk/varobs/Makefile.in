@@ -4,7 +4,7 @@
 
 [package]
 name=varobs
-version=3.0.1.6
+version=3
 
 [target]
 programs=varobs varobs_lpv_bulletin

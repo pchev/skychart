@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=3.0.1.6
+version=3.1
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 innosetup="C:\Program Files\Inno Setup 5\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php
@@ -62,7 +62,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   mv lib debian/skychart/usr/
   mv share debian/skychart/usr/
   cd debian
-  sed -i "/Version:/ s/-1/-$currentrev/" skychart/DEBIAN/control
+  sed -i "/Version:/ s/3/$version-$currentrev/" skychart/DEBIAN/control
   fakeroot dpkg-deb --build skychart .
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
@@ -73,6 +73,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   cd $builddir
   mv debian/skychart/usr/* rpm/skychart/usr/
   cd rpm
+  sed -i "/Version:/ s/3/$version/"  SPECS/skychart.spec
   sed -i "/Release:/ s/1/$currentrev/" SPECS/skychart.spec
   fakeroot rpmbuild  --define "_topdir $builddir/rpm/" -bb SPECS/skychart.spec
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -111,7 +112,8 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # exe
   cd $builddir
-  sed -i "/OutputBaseFilename/ s/windows/$currentrev-windows/" cdcv3.iss
+  sed -i "AppVerName s/V3/V$version/" cdcv3.iss
+  sed -i "/OutputBaseFilename/ s/windows/$version-$currentrev-windows/" cdcv3.iss
   wine "$innosetup" "$issscript"
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv $builddir/skychart*.exe $wd

@@ -3,7 +3,7 @@
  
 [Setup]
 AppName=Cartes du Ciel V3.0
-AppVerName=Cartes du Ciel V3.0 beta 3.0.1.6
+AppVerName=Cartes du Ciel V3
 AppPublisherURL=http://www.ap-i.net/skychart
 AppSupportURL=http://www.ap-i.net/skychart
 AppUpdatesURL=http://www.ap-i.net/skychart
@@ -13,7 +13,7 @@ DefaultGroupName=Cartes du Ciel V3.0
 AllowNoIcons=true
 InfoBeforeFile=Presetup\readme.txt
 OutputDir=.\
-OutputBaseFilename=skychart-3.0.1.6-windows
+OutputBaseFilename=skychart-windows
 Compression=lzma
 SolidCompression=true
 Uninstallable=true
