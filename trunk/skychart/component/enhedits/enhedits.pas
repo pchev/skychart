@@ -120,7 +120,6 @@ type
     property OnMouseMove;
     property OnMouseUp;
     property CharCase;
-    property Ctl3D;
     property DragCursor;
   end;
 
