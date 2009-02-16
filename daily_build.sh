@@ -88,7 +88,9 @@ if [[ $lastrev -ne $currentrev ]]; then
   cp varobs/varobs_lpv_bulletin $builddir/debug/
   cd $builddir/debug/
   tar cvjf bin-linux-debug-$currentrev.tar.bz2 *
+  if [[ $? -ne 0 ]]; then exit 1;fi
   mv bin-*.tar.bz2 $wd
+  if [[ $? -ne 0 ]]; then exit 1;fi
 
   cd $wd
   rm -rf $builddir
@@ -126,7 +128,9 @@ if [[ $lastrev -ne $currentrev ]]; then
   cp varobs/varobs_lpv_bulletin.exe $builddir/debug/
   cd $builddir/debug/
   zip bin-windows-debug-$currentrev.zip *
+  if [[ $? -ne 0 ]]; then exit 1;fi
   mv bin-*.zip $wd
+  if [[ $? -ne 0 ]]; then exit 1;fi
 
   cd $wd
   rm -rf $builddir
@@ -135,6 +139,6 @@ if [[ $lastrev -ne $currentrev ]]; then
   echo $currentrev > last.build
 else
   echo Already build at revision $currentrev
-exit 1
+  exit 4
 fi
 
