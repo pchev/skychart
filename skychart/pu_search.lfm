@@ -39,7 +39,6 @@ object f_search: Tf_search
       Top = 12
       Width = 146
       AutoComplete = False
-      Ctl3D = False
       DropDownCount = 10
       ItemHeight = 0
       ItemWidth = 0
@@ -77,7 +76,6 @@ object f_search: Tf_search
       Top = 10
       Width = 216
       AutoComplete = False
-      Ctl3D = False
       ItemHeight = 0
       ItemWidth = 0
       TabOrder = 2
@@ -114,7 +112,6 @@ object f_search: Tf_search
       Top = 10
       Width = 216
       AutoComplete = False
-      Ctl3D = False
       ItemHeight = 0
       ItemWidth = 0
       TabOrder = 2
@@ -144,7 +141,6 @@ object f_search: Tf_search
       Top = 11
       Width = 280
       AutoComplete = False
-      Ctl3D = False
       ItemHeight = 0
       ItemWidth = 0
       TabOrder = 0
@@ -174,7 +170,6 @@ object f_search: Tf_search
       Top = 11
       Width = 281
       AutoComplete = False
-      Ctl3D = False
       ItemHeight = 0
       ItemWidth = 0
       TabOrder = 0
@@ -204,7 +199,6 @@ object f_search: Tf_search
       Top = 11
       Width = 265
       AutoComplete = False
-      Ctl3D = False
       ItemHeight = 0
       ItemWidth = 0
       Sorted = True
@@ -619,7 +613,6 @@ object f_search: Tf_search
     ClientHeight = 201
     ClientWidth = 412
     Columns = 2
-    Ctl3D = False
     ItemIndex = 0
     Items.Strings = (
       'Nebulae'

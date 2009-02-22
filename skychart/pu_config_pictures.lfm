@@ -337,11 +337,9 @@ object f_config_pictures: Tf_config_pictures
             TickMarks = tmBottomRight
             TickStyle = tsAuto
             Align = alNone
-            Ctl3D = False
             DragCursor = crDrag
             DragMode = dmManual
             Enabled = True
-            ParentCtl3D = True
             ParentShowHint = True
             TabOrder = 0
             Visible = True
@@ -364,11 +362,9 @@ object f_config_pictures: Tf_config_pictures
             TickMarks = tmBottomRight
             TickStyle = tsAuto
             Align = alNone
-            Ctl3D = False
             DragCursor = crDrag
             DragMode = dmManual
             Enabled = True
-            ParentCtl3D = True
             ParentShowHint = True
             TabOrder = 1
             Visible = True
@@ -435,13 +431,11 @@ object f_config_pictures: Tf_config_pictures
           Align = alNone
           AutoSize = False
           AutoSelect = False
-          Ctl3D = False
           DragCursor = crDrag
           DragMode = dmManual
           Enabled = True
           MaxLength = 0
           ParentColor = False
-          ParentCtl3D = True
           ParentFont = True
           ParentShowHint = True
           ReadOnly = False
@@ -659,11 +653,9 @@ object f_config_pictures: Tf_config_pictures
             TickMarks = tmBottomRight
             TickStyle = tsAuto
             Align = alNone
-            Ctl3D = False
             DragCursor = crDrag
             DragMode = dmManual
             Enabled = True
-            ParentCtl3D = True
             ParentShowHint = True
             TabOrder = 0
             Visible = True
@@ -686,11 +678,9 @@ object f_config_pictures: Tf_config_pictures
             TickMarks = tmBottomRight
             TickStyle = tsAuto
             Align = alNone
-            Ctl3D = False
             DragCursor = crDrag
             DragMode = dmManual
             Enabled = True
-            ParentCtl3D = True
             ParentShowHint = True
             TabOrder = 1
             Visible = True
@@ -713,13 +703,11 @@ object f_config_pictures: Tf_config_pictures
           Align = alNone
           AutoSelect = False
           AutoSize = False
-          Ctl3D = False
           DragCursor = crDrag
           DragMode = dmManual
           Enabled = True
           MaxLength = 0
           ParentColor = False
-          ParentCtl3D = True
           ParentFont = True
           ParentShowHint = True
           ReadOnly = False
@@ -746,7 +734,6 @@ object f_config_pictures: Tf_config_pictures
           Caption = 'RealSky®'
           ClientHeight = 338
           ClientWidth = 477
-          Ctl3D = False
           DockSite = False
           DragCursor = crDrag
           DragKind = dkDrag
@@ -754,7 +741,6 @@ object f_config_pictures: Tf_config_pictures
           Enabled = True
           ParentBidiMode = True
           ParentColor = True
-          ParentCtl3D = True
           ParentFont = True
           ParentShowHint = True
           TabOrder = 0
@@ -1090,7 +1076,6 @@ object f_config_pictures: Tf_config_pictures
             Visible = True
             OnChange = realskymaxChange
             CharCase = ecNormal
-            Ctl3D = False
             DragCursor = crDrag
             Value = 0
           end
@@ -1114,7 +1099,6 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 9
             Visible = True
             CharCase = ecNormal
-            Ctl3D = False
             DragCursor = crDrag
             Value = 0
           end
@@ -1129,7 +1113,6 @@ object f_config_pictures: Tf_config_pictures
           Caption = 'Online DSS'
           ClientHeight = 68
           ClientWidth = 477
-          Ctl3D = False
           DockSite = False
           DragCursor = crDrag
           DragKind = dkDrag
@@ -1137,7 +1120,6 @@ object f_config_pictures: Tf_config_pictures
           Enabled = True
           ParentBidiMode = True
           ParentColor = True
-          ParentCtl3D = True
           ParentFont = True
           ParentShowHint = True
           TabOrder = 1
@@ -1180,7 +1162,6 @@ object f_config_pictures: Tf_config_pictures
             AutoSelect = False
             AutoSize = True
             CharCase = ecNormal
-            Ctl3D = False
             DragCursor = crDrag
             DragMode = dmManual
             DropDownCount = 8
@@ -1192,7 +1173,6 @@ object f_config_pictures: Tf_config_pictures
             OnSelect = OnlineDSSListChange
             ParentBidiMode = True
             ParentColor = False
-            ParentCtl3D = True
             ParentFont = True
             ParentShowHint = True
             Sorted = False
