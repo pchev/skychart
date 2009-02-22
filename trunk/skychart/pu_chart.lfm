@@ -52,7 +52,6 @@ object f_chart: Tf_chart
       Top = 0
       Width = 17
       Align = alRight
-      Ctl3D = False
       Kind = sbVertical
       LargeChange = 10
       Max = 50
@@ -67,7 +66,6 @@ object f_chart: Tf_chart
       Top = 255
       Width = 480
       Align = alBottom
-      Ctl3D = False
       LargeChange = 10
       Max = 50
       Min = -50

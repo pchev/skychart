@@ -87,7 +87,6 @@ object f_config_chart: Tf_config_chart
             ClientHeight = 42
             ClientWidth = 415
             Columns = 2
-            Ctl3D = False
             ItemIndex = 0
             Items.Strings = (
               'Mean position'
@@ -106,7 +105,6 @@ object f_config_chart: Tf_config_chart
             ShowHint = True
             TabOrder = 1
             OnChange = equinox2Change
-            Ctl3D = False
             Value = 0
             MinValue = -20000
             MaxValue = 20000
@@ -121,7 +119,6 @@ object f_config_chart: Tf_config_chart
             Caption = 'Stars proper motion options (if available in the catalog)'
             ClientHeight = 42
             ClientWidth = 415
-            Ctl3D = False
             TabOrder = 2
             object PMBox: TCheckBox
               Left = 6
@@ -143,7 +140,6 @@ object f_config_chart: Tf_config_chart
             ShowHint = True
             TabOrder = 3
             OnChange = epoch2Change
-            Ctl3D = False
             Value = 0
             MinValue = -20000
             MaxValue = 20000
@@ -169,7 +165,6 @@ object f_config_chart: Tf_config_chart
           ClientHeight = 81
           ClientWidth = 448
           Columns = 2
-          Ctl3D = False
           ItemIndex = 0
           Items.Strings = (
             'Equatorial Coordinates'
@@ -214,7 +209,6 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ControlsPerLine = 1
             ClientHeight = 124
             ClientWidth = 438
-            Ctl3D = False
             ItemIndex = 0
             Items.Strings = (
               'Apparent'
@@ -371,7 +365,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -387,7 +380,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -403,7 +395,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -419,7 +410,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -435,7 +425,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 12
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -451,7 +440,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -467,7 +455,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 16
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -483,7 +470,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 18
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -499,7 +485,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 20
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -514,7 +499,6 @@ object f_config_chart: Tf_config_chart
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -531,7 +515,6 @@ object f_config_chart: Tf_config_chart
           ReadOnly = True
           ShowHint = True
           TabOrder = 0
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 360
@@ -545,7 +528,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 1
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -559,7 +541,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 3
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -573,7 +554,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 5
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -587,7 +567,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 7
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -601,7 +580,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 9
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -615,7 +593,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 11
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -629,7 +606,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 13
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -643,7 +619,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 15
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -657,7 +632,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 17
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -671,7 +645,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 19
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -685,7 +658,6 @@ object f_config_chart: Tf_config_chart
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 21
-          Ctl3D = False
           Value = 0
           MinValue = 0
           MaxValue = 0
@@ -834,7 +806,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -854,7 +825,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -875,7 +845,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -896,7 +865,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -916,7 +884,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -936,7 +903,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -957,7 +923,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -978,7 +943,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -999,7 +963,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -1020,7 +983,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -1041,7 +1003,6 @@ object f_config_chart: Tf_config_chart
           Width = 73
           AutoComplete = False
           AutoCompleteText = [cbactSearchAscending]
-          Ctl3D = False
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -1075,7 +1036,6 @@ object f_config_chart: Tf_config_chart
           Caption = 'Stars Filter'
           ClientHeight = 169
           ClientWidth = 447
-          Ctl3D = False
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
@@ -1210,7 +1170,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 0
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1226,7 +1185,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 1
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1242,7 +1200,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 2
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1258,7 +1215,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 3
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1274,7 +1230,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 4
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1290,7 +1245,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 5
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1306,7 +1260,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 6
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1322,7 +1275,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 7
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1338,7 +1290,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 8
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1354,7 +1305,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 9
                 OnChange = fsmagChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1386,7 +1336,6 @@ object f_config_chart: Tf_config_chart
                 ShowHint = True
                 TabOrder = 0
                 OnChange = fsmagvisChange
-                Ctl3D = False
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
@@ -1411,7 +1360,6 @@ object f_config_chart: Tf_config_chart
           Caption = 'Nebulae Filter'
           ClientHeight = 185
           ClientWidth = 447
-          Ctl3D = False
           TabOrder = 1
           object BigNebUnit: TLabel
             Left = 389
@@ -1562,7 +1510,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 0
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1578,7 +1525,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 1
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1594,7 +1540,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 2
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1610,7 +1555,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 3
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1626,7 +1570,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 4
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1642,7 +1585,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 5
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1658,7 +1600,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 6
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1674,7 +1615,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 10
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1690,7 +1630,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 11
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1706,7 +1645,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 12
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1722,7 +1660,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 13
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1738,7 +1675,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 14
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1754,7 +1690,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 15
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1770,7 +1705,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 16
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1786,7 +1720,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 7
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1802,7 +1735,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 8
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1818,7 +1750,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 9
               OnChange = fmagChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 99
@@ -1834,7 +1765,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 17
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1850,7 +1780,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 18
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1866,7 +1795,6 @@ object f_config_chart: Tf_config_chart
               ShowHint = True
               TabOrder = 19
               OnChange = fdimChange
-              Ctl3D = False
               Value = 0
               MinValue = 0
               MaxValue = 1000
@@ -1882,7 +1810,6 @@ object f_config_chart: Tf_config_chart
             ShowHint = True
             TabOrder = 2
             OnChange = fBigNebLimitChange
-            Ctl3D = False
             Value = 0
             MaxValue = 20000
           end
@@ -2166,7 +2093,6 @@ object f_config_chart: Tf_config_chart
           PageSize = 10
           Position = 80
           TickStyle = tsNone
-          Ctl3D = False
           TabOrder = 22
         end
         object RaDec1: TRaDec
@@ -2452,7 +2378,6 @@ object f_config_chart: Tf_config_chart
           Caption = 'Type of object to add to the list'
           ClientHeight = 208
           ClientWidth = 367
-          Ctl3D = False
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32
