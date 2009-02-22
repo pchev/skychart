@@ -1,5 +1,3 @@
-{ Ceci est un fichier ressource généré automatiquement par Lazarus }
-
 LazarusResources.Add('Tf_info','FORMDATA',[
   'TPF0'#7'Tf_info'#6'f_info'#4'Left'#3#149#1#6'Height'#3#208#1#3'Top'#2'd'#5'W'
   +'idth'#3#207#2#13'ActiveControl'#7#11'StringGrid1'#11'BorderStyle'#7#13'bsSi'

@@ -1,5 +1,3 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('Tf_catgen','FORMDATA',[
   'TPF0'#9'Tf_catgen'#8'f_catgen'#4'Left'#3#242#0#6'Height'#3#223#1#3'Top'#3#228
   +#0#5'Width'#3#247#1#13'ActiveControl'#7#24'RadioGroup1.RadioButton0'#7'Capti'

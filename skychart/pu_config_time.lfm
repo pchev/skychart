@@ -1,7 +1,7 @@
 object f_config_time: Tf_config_time
-  Left = 537
+  Left = 463
   Height = 564
-  Top = 120
+  Top = 123
   Width = 474
   ActiveControl = MainPanel
   BorderIcons = [biSystemMenu]
@@ -112,9 +112,7 @@ object f_config_time: Tf_config_time
             Hint = '-99999999..99999999'
             Top = 70
             Width = 105
-            BorderStyle = bsSingle
             Enabled = False
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
@@ -130,8 +128,6 @@ object f_config_time: Tf_config_time
           Hint = '10..86400'
           Top = 56
           Width = 41
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
@@ -319,8 +315,6 @@ object f_config_time: Tf_config_time
             Height = 23
             Top = 106
             Width = 131
-            BorderStyle = bsSingle
-            ParentColor = False
             TabOrder = 7
             OnChange = JDEditChange
             Value = 0
