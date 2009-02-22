@@ -1671,7 +1671,7 @@ if not NewAstDay(cfgsc.CurJD,cfgsc.AstmagMax,cfgsc) then begin
    cfgsc.ShowAsteroid:=false;
    exit;
 end;
-d:=maxvalue([0.6*cfgsc.fov,0.02]);
+d:=maxvalue([0.6*cfgsc.fov,0.09]);
 da:=d/cos(cfgsc.decentre);
 qry:='SELECT id,epoch from '+cfgsc.ast_daypos+' where';
 qry:=qry+' mag<='+inttostr(round((cfgsc.StarMagMax+cfgsc.AstMagDiff)*10))+' and';
@@ -1745,7 +1745,7 @@ if not NewComDay(cfgsc.CurJD,cfgsc.CommagMax,cfgsc) then begin
    cfgsc.ShowComet:=false;
    exit;
 end;
-d:=maxvalue([0.6*cfgsc.fov,0.02]);
+d:=maxvalue([0.6*cfgsc.fov,0.09]);
 da:=d/cos(cfgsc.decentre);
 qry:='SELECT id,epoch from '+cfgsc.com_daypos+' where';
 if cfgsc.StarFilter then qry:=qry+' mag<='+inttostr(round((cfgsc.StarMagMax+cfgsc.ComMagDiff)*10))+' and';
