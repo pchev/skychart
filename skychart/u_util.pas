@@ -262,7 +262,7 @@ if traceon then begin
     assignfile(ftrace,tracefile);
     append(ftrace);
  end;   
- writeln(ftrace,FormatDateTime(dateiso,Now)+'  '+buf);
+ writeln(ftrace,FormatDateTime(dateiso,Now)+'  '+UTF8ToSys(buf));
  if tracefile<>'' then closefile(ftrace);
 end;
 except

@@ -5745,7 +5745,7 @@ try
 if Fsock<>nil then
  with Fsock do begin
    if terminated then exit;
-   SendString(str+CRLF);
+   SendString(UTF8ToSys(str)+CRLF);
    if LastError<>0 then
       terminate;
  end;
