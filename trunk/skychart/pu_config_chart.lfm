@@ -1,9 +1,9 @@
 object f_config_chart: Tf_config_chart
-  Left = 526
+  Left = 483
   Height = 567
-  Top = 86
+  Top = 88
   Width = 510
-  ActiveControl = StarBox
+  ActiveControl = MainPanel
   Caption = 'Charts'
   ClientHeight = 567
   ClientWidth = 510
@@ -35,7 +35,7 @@ object f_config_chart: Tf_config_chart
       object Page1: TPage
         Caption = 'Page1'
         ClientWidth = 504
-        ClientHeight = 457
+        ClientHeight = 430
         object Label31: TLabel
           Left = 0
           Height = 15
@@ -84,8 +84,8 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 42
-            ClientWidth = 415
+            ClientHeight = 41
+            ClientWidth = 413
             Columns = 2
             ItemIndex = 0
             Items.Strings = (
@@ -117,8 +117,8 @@ object f_config_chart: Tf_config_chart
             Top = 56
             Width = 417
             Caption = 'Stars proper motion options (if available in the catalog)'
-            ClientHeight = 42
-            ClientWidth = 415
+            ClientHeight = 41
+            ClientWidth = 413
             TabOrder = 2
             object PMBox: TCheckBox
               Left = 6
@@ -162,8 +162,8 @@ object f_config_chart: Tf_config_chart
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 81
-          ClientWidth = 448
+          ClientHeight = 80
+          ClientWidth = 446
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -207,8 +207,8 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 124
-            ClientWidth = 438
+            ClientHeight = 123
+            ClientWidth = 436
             ItemIndex = 0
             Items.Strings = (
               'Apparent'
@@ -224,7 +224,7 @@ object f_config_chart: Tf_config_chart
       object Page2: TPage
         Caption = 'Page2'
         ClientWidth = 504
-        ClientHeight = 433
+        ClientHeight = 430
         object Label30: TLabel
           Left = 0
           Height = 20
@@ -677,7 +677,7 @@ object f_config_chart: Tf_config_chart
       object Page3: TPage
         Caption = 'Page3'
         ClientWidth = 504
-        ClientHeight = 457
+        ClientHeight = 430
         object Bevel7: TBevel
           Left = 15
           Height = 375
@@ -1019,7 +1019,7 @@ object f_config_chart: Tf_config_chart
       object Page4: TPage
         Caption = 'Page4'
         ClientWidth = 504
-        ClientHeight = 457
+        ClientHeight = 455
         object Label29: TLabel
           Left = 0
           Height = 15
@@ -1034,15 +1034,15 @@ object f_config_chart: Tf_config_chart
           Top = 16
           Width = 449
           Caption = 'Stars Filter'
-          ClientHeight = 169
-          ClientWidth = 447
+          ClientHeight = 168
+          ClientWidth = 445
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
-            Height = 22
+            Height = 33
             Hint = 'Copy|Copies the selection and puts it on the Clipboard'
             Top = 22
-            Width = 89
+            Width = 100
             Caption = 'Filter stars '
             OnClick = StarBoxClick
             TabOrder = 0
@@ -1343,9 +1343,9 @@ object f_config_chart: Tf_config_chart
             end
             object StarAutoBox: TCheckBox
               Left = 4
-              Height = 22
+              Height = 33
               Top = 6
-              Width = 80
+              Width = 91
               Caption = 'Automatic'
               OnClick = StarAutoBoxClick
               TabOrder = 0
@@ -1358,8 +1358,8 @@ object f_config_chart: Tf_config_chart
           Top = 208
           Width = 449
           Caption = 'Nebulae Filter'
-          ClientHeight = 185
-          ClientWidth = 447
+          ClientHeight = 184
+          ClientWidth = 445
           TabOrder = 1
           object BigNebUnit: TLabel
             Left = 389
@@ -1371,18 +1371,18 @@ object f_config_chart: Tf_config_chart
           end
           object NebBox: TCheckBox
             Left = 9
-            Height = 22
+            Height = 33
             Top = 11
-            Width = 100
+            Width = 111
             Caption = 'Filter nebulae'
             OnClick = NebBoxClick
             TabOrder = 0
           end
           object BigNebBox: TCheckBox
             Left = 157
-            Height = 22
+            Height = 33
             Top = 11
-            Width = 151
+            Width = 162
             Caption = 'Hide object wider than'
             OnClick = BigNebBoxClick
             TabOrder = 1
@@ -1818,7 +1818,7 @@ object f_config_chart: Tf_config_chart
       object Page5: TPage
         Caption = 'Page5'
         ClientWidth = 504
-        ClientHeight = 433
+        ClientHeight = 430
         object Label159: TLabel
           Left = 0
           Height = 20
@@ -2361,7 +2361,7 @@ object f_config_chart: Tf_config_chart
       object Page6: TPage
         Caption = 'Page6'
         ClientWidth = 504
-        ClientHeight = 433
+        ClientHeight = 430
         object Label95: TLabel
           Left = 0
           Height = 20
@@ -2376,8 +2376,8 @@ object f_config_chart: Tf_config_chart
           Top = 40
           Width = 369
           Caption = 'Type of object to add to the list'
-          ClientHeight = 208
-          ClientWidth = 367
+          ClientHeight = 207
+          ClientWidth = 365
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32

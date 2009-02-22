@@ -1,9 +1,9 @@
 object f_search: Tf_search
-  Left = 527
+  Left = 494
   Height = 326
   Top = 105
   Width = 433
-  ActiveControl = Id
+  ActiveControl = RadioGroup1.RadioButton0
   BorderStyle = bsToolWindow
   Caption = 'Search'
   ClientHeight = 326
@@ -35,7 +35,7 @@ object f_search: Tf_search
     end
     object PlanetBox: TComboBox
       Left = 97
-      Height = 27
+      Height = 28
       Top = 12
       Width = 146
       AutoComplete = False
@@ -72,7 +72,7 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 27
+      Height = 28
       Top = 10
       Width = 216
       AutoComplete = False
@@ -108,7 +108,7 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 27
+      Height = 28
       Top = 10
       Width = 216
       AutoComplete = False
@@ -137,7 +137,7 @@ object f_search: Tf_search
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 27
+      Height = 28
       Top = 11
       Width = 280
       AutoComplete = False
@@ -166,7 +166,7 @@ object f_search: Tf_search
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 27
+      Height = 28
       Top = 11
       Width = 281
       AutoComplete = False
@@ -195,7 +195,7 @@ object f_search: Tf_search
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 27
+      Height = 28
       Top = 11
       Width = 265
       AutoComplete = False

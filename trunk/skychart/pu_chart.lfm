@@ -1,7 +1,7 @@
 object f_chart: Tf_chart
-  Left = 497
+  Left = 459
   Height = 338
-  Top = 135
+  Top = 123
   Width = 508
   ActiveControl = Panel1
   Caption = 'Chart'
@@ -47,10 +47,10 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 463
-      Height = 255
+      Left = 465
+      Height = 257
       Top = 0
-      Width = 17
+      Width = 15
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -62,8 +62,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 0
-      Height = 17
-      Top = 255
+      Height = 15
+      Top = 257
       Width = 480
       Align = alBottom
       LargeChange = 10
