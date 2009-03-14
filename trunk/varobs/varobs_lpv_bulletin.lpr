@@ -10,7 +10,9 @@ uses
   Forms
   { you can add units after this }, aavsob1;
 
+{$ifndef unix}
 {$R manifest.res}
+{$endif}
 
 begin
   Application.Title:='lpv_bulletin';

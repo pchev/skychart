@@ -1,4 +1,4 @@
-CPPFLAGS=-I. -DUNIX -D_CONSOLE
+CPPFLAGS=-I. -DUNIX -D_CONSOLE -fPIC
 #### For Suns and similar wrong-endian computers, add -DWRONG_WAY_BYTE_ORDER.
 
 OSTYPE = $(shell uname)

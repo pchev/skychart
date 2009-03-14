@@ -34,7 +34,9 @@ uses
   downldialog, u_util2, LResources;
 
 {$ifndef darwin}
+{$ifndef unix}
 {$R manifest.res}
+{$endif}
 {$endif}
 
 {$IFDEF WINDOWS}{$R varobs.rc}{$ENDIF}
