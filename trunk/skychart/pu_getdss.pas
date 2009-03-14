@@ -226,6 +226,7 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   DownloadDialog1.URL:=buf;
   DownloadDialog1.SaveToFile:=ExpandFileName(cfgdss.dssfile+'.gz');
   if DownloadDialog1.Execute then begin
+     try
      gzf:=gzopen(pchar(DownloadDialog1.SaveToFile),pchar('rb'));
      Filemode:=2;
      assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
@@ -239,11 +240,14 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
           if copy(gzbuf,1,6)='SIMPLE' then result:=true;
        end;
      until gzeof(gzf);
+     finally
      gzclose(gzf);
      CloseFile(fitsfile);
+     end;
   end
   else begin
      Filemode:=2;
+     try
      assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
      rewrite(fitsfile,1);
      buf:=html_h+DownloadDialog1.ResponseText;
@@ -254,8 +258,10 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
      buf:=buf+htms_h;
      gzbuf:=buf;
      blockwrite(fitsfile,gzbuf,length(buf),n);
+     finally
      CloseFile(fitsfile);
-  end;
+     end;
+     end;
   if (DownloadDialog1.ResponseText<>'')and(not result) then begin
      caption:=rsError;
      Label1.Caption:=DownloadDialog1.ResponseText;

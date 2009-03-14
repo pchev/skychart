@@ -12,11 +12,10 @@ object f_getdss: Tf_getdss
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  ParentFont = False
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.27'
   object Label1: TLabel
     Left = 12
-    Height = 14
+    Height = 15
     Top = 8
     Width = 43
     Caption = 'Label1'
@@ -35,6 +34,7 @@ object f_getdss: Tf_getdss
     FixedTypeface = 'Courier New'
     DefaultTypeFace = 'default'
     DefaultFontSize = 12
+    FlagErrors = False
     PrintSettings.MarginLeft = 0.5
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
@@ -51,6 +51,7 @@ object f_getdss: Tf_getdss
     Font.Name = 'courier'
     Font.Pitch = fpFixed
     IntegralHeight = True
+    ItemHeight = 0
     ParentFont = False
     TabOrder = 0
     TopIndex = -1
@@ -80,6 +81,7 @@ object f_getdss: Tf_getdss
     TabOrder = 2
   end
   object DownloadDialog1: TDownloadDialog
+    FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
     left = 264
