@@ -1597,6 +1597,7 @@ step:='Size control';
 {$ifdef trace_debug}
  WriteTrace(step);
 {$endif}
+MultiDoc1.Align:=alClient;
 starshape.Picture.Bitmap.Transparent:=false;
 TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
 quicksearch.Width:=round( 75 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );

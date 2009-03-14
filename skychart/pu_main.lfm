@@ -3,7 +3,7 @@ object f_main: Tf_main
   Height = 580
   Top = 120
   Width = 860
-  ActiveControl = quicksearch
+  ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
   ClientHeight = 558
   ClientWidth = 860
@@ -21,15 +21,14 @@ object f_main: Tf_main
   OnShow = FormShow
   LCLVersion = '0.9.27'
   object MultiDoc1: TMultiDoc
-    Left = 26
-    Height = 470
-    Top = 54
-    Width = 806
-    Align = alClient
+    Left = 384
+    Height = 230
+    Top = 184
+    Width = 304
     BevelOuter = bvNone
     BorderWidth = 1
-    ClientHeight = 470
-    ClientWidth = 806
+    ClientHeight = 230
+    ClientWidth = 304
     Color = clBlack
     FullRepaint = False
     ParentColor = False
@@ -42,9 +41,9 @@ object f_main: Tf_main
     onMaximize = MultiDoc1Maximize
     onActiveChildChange = MultiDoc1ActiveChildChange
     object starshape: TImage
-      Left = 283
+      Left = 0
       Height = 133
-      Top = 171
+      Top = 0
       Width = 209
       AutoSize = True
       Picture.Data = {
@@ -3037,7 +3036,6 @@ object f_main: Tf_main
       Align = alLeft
       Brush.Color = clBtnShadow
       Pen.Color = clBtnShadow
-      Pen.Cosmetic = True
     end
     object PPanels0: TPanel
       Left = 0
@@ -3690,8 +3688,8 @@ object f_main: Tf_main
     end
   end
   object MainMenu1: TMainMenu
-    left = 96
-    top = 160
+    left = 56
+    top = 104
     object File1: TMenuItem
       Caption = '&File'
       Hint = 'File related commands'
@@ -4283,13 +4281,13 @@ object f_main: Tf_main
   object OpenDialog: TOpenDialog
     FilterIndex = 0
     Options = [ofEnableSizing]
-    left = 184
-    top = 160
+    left = 136
+    top = 224
   end
   object ActionList1: TActionList
     Images = ImageNormal
-    left = 328
-    top = 160
+    left = 144
+    top = 104
     object FileNew1: TAction
       Category = 'File'
       Caption = 'FileNew1'
@@ -4969,25 +4967,24 @@ object f_main: Tf_main
   object SaveDialog: TSaveDialog
     FilterIndex = 0
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
-    left = 144
-    top = 160
+    left = 56
+    top = 224
   end
   object Autorefresh: TTimer
     Enabled = False
     Interval = 60000
     OnTimer = AutorefreshTimer
-    left = 224
-    top = 160
+    left = 288
+    top = 304
   end
   object ImageList2: TImageList
-    Masked = False
-    left = 280
-    top = 208
+    left = 288
+    top = 240
   end
   object ImageNormal: TImageList
     Masked = True
-    left = 280
-    top = 160
+    left = 288
+    top = 176
     Bitmap = {
       4C695800000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
       B5FF9C6B6BFFEF94B5FF9C6B6BFFE78CB5FFA56B6BFFE78CB5FF945A63FF0000
@@ -7809,16 +7806,16 @@ object f_main: Tf_main
     }
   end
   object PopupMenu1: TPopupMenu
-    left = 72
-    top = 416
+    left = 144
+    top = 168
     object ResetAllLabels1: TMenuItem
       Caption = 'Reset All Labels'
       OnClick = ResetAllLabels1Click
     end
   end
   object PopupConfig: TPopupMenu
-    left = 96
-    top = 200
+    left = 56
+    top = 168
     object MenuItem12: TMenuItem
       Action = SetupTime
       OnClick = SetupTimeExecute
@@ -7876,13 +7873,13 @@ object f_main: Tf_main
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True
-    left = 104
-    top = 267
+    left = 56
+    top = 296
   end
   object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
     BrowserParams = '%s'
     AutoRegister = True
-    left = 146
-    top = 267
+    left = 56
+    top = 352
   end
 end

@@ -140,7 +140,7 @@ TCdCPanel = Class(TPanel)
      during move or resize.
     }
     property WireframeMoveResize: boolean read FWireframeMoveResize write FWireframeMoveResize;
-    property onExit;
+//    property onExit;
   end;
 
 implementation
