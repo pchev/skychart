@@ -188,8 +188,8 @@ type
     {
      When resizings
     }
-    property OnResize : TNotifyEvent read FOnResize write FOnResize;
-    property OnExit;
+//    property OnResize : TNotifyEvent read FOnResize write FOnResize;
+//    property OnExit;
   end;
 
 procedure Register;
@@ -211,7 +211,7 @@ FActiveChild:=-1;
 FWindowListOffset:=0;
 setlength(FChild,0);
 color:=clBlack;
-align:=alClient;
+//align:=alClient;
 BevelOuter:=bvNone;
 BevelWidth:=1;
 FBorderWidth:=3;  FTitleHeight:=12;
