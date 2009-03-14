@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-01-03 07:49-0300\n"
+"PO-Revision-Date: 2009-02-15 23:00-0300\n"
 "Last-Translator: Angelo Rober Pulici <apulici@hotmail.com>\n"
 "Project-Id-Version: skychart.pt\n"
 "POT-Creation-Date: \n"
@@ -59,7 +59,7 @@ msgstr "Sobre %s"
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr ""
+msgstr "Ação"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -115,7 +115,7 @@ msgstr "Tudo"
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
-msgstr ""
+msgstr "Todas opções de configuração"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll tables structure exists."
@@ -127,7 +127,7 @@ msgstr "Todas Barras de Ferramentas"
 
 #: u_translation.rsalsobesureth
 msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "% sTambém é segura a requisição de software de banco de dados instalado.% sPor favor consulte a documentação se for inseguro.% sVocê quer continuar?"
+msgstr "%sTambém é segura a requisição de software de banco de dados instalado.%sPor favor consulte a documentação se for inseguro.%sVocê quer continuar?"
 
 #: u_translation.rsalt
 msgid "Alt"
@@ -175,7 +175,7 @@ msgstr "Aparente"
 
 #: u_translation.rsappearance
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
@@ -199,7 +199,7 @@ msgstr "Satélites Artificiais"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr ""
+msgstr "Pedir confirmação antes de alguma conexão na Internet"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -211,19 +211,19 @@ msgstr "Asterismo"
 
 #: u_translation.rsasteroid
 msgid "Asteroid"
-msgstr "Asteróides"
+msgstr "Asteroide"
 
 #: u_translation.rsasteroidelem
 msgid "Asteroid elements in MPC format (one URL by line)"
-msgstr "Elementos de Asteróides em formato MPC (uma URL por linha)"
+msgstr "Elementos de Asteroides em formato MPC (uma URL por linha)"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid Setting"
-msgstr "Configurar Asteróides"
+msgstr "Configurar Asteroides"
 
 #: u_translation.rsasteroidsfro
 msgid "Asteroids from the file"
-msgstr "Asteróides do arquivo"
+msgstr "Asteroides do arquivo"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -263,7 +263,7 @@ msgstr "Reinício Automático"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Reinicie automaticamente tudo em"
+msgstr "Reinicie automaticamente em"
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -315,7 +315,7 @@ msgstr "Debaixo do horizonte"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr ""
+msgstr "Estrelas grandes"
 
 #: u_translation.rsbii
 msgid "BII"
@@ -391,7 +391,7 @@ msgstr "Estrelas Brilhantes"
 
 #: u_translation.rsbrightstarss
 msgid "Bright Stars Size"
-msgstr ""
+msgstr "Brilho das Estrelas"
 
 #: u_translation.rsbuildcatalog
 msgid "Build Catalog"
@@ -583,7 +583,7 @@ msgstr "Conexão Cliente permanece ativa"
 
 #: u_translation.rsclock
 msgid "Clock"
-msgstr ""
+msgstr "Relógio"
 
 #: u_translation.rsclose
 msgid "Close"
@@ -663,7 +663,7 @@ msgstr "Tamanho da rosa dos ventos"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
-msgstr ""
+msgstr "Compilado com:"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 Magnitude"
@@ -703,7 +703,7 @@ msgstr "Conectado para SQL banco de dados %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
-msgstr "Conecção de linhas entre cada posição"
+msgstr "Conexão de linhas entre cada posição"
 
 #: u_translation.rsconnectteles
 msgid "Connect Telescope"
@@ -751,7 +751,7 @@ msgstr "Contraste"
 
 #: u_translation.rscontrolpanel
 msgid "Control Panel"
-msgstr "Paibel de Controle"
+msgstr "Painel de Controle"
 
 #: u_translation.rscontrolpanel2
 msgid "Control Panel command "
@@ -903,7 +903,7 @@ msgstr "Data"
 
 #: u_translation.rsdateformat
 msgid "Date Format"
-msgstr ""
+msgstr "Formato da Data"
 
 #: u_translation.rsdatefrom
 msgid "Date from"
@@ -1175,7 +1175,7 @@ msgstr "Exibir imagem dos objetos catalogados"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalog"
-msgstr ""
+msgstr "Mostrar rótulos para todos os catálogos de estrelas"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1203,7 +1203,7 @@ msgstr "Não leve em conta cometa mais débil que a magnitude"
 
 #: u_translation.rsdonottakeacc2
 msgid "Do not take account of asteroid fainter than magnitude"
-msgstr "Não leve em conta asteróide mais débil que a magnitude"
+msgstr "Não leve em conta asteroide mais débil que a magnitude"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1239,7 +1239,7 @@ msgstr "Você quer salvar a configuração do programa agora?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that represent the proper motion for the next "
-msgstr "  Extrair linha que represente o movimento próprio para os próximos "
+msgstr "Extrair linha que represente o movimento próprio para os próximos "
 
 #: u_translation.rsdrawingtype
 msgid "Drawing Type"
@@ -1347,7 +1347,7 @@ msgstr "Fim do Objeto"
 
 #: u_translation.rsendprocessin
 msgid "End processing: %s asteroids"
-msgstr "Fim do processamento: %s asteróides"
+msgstr "Fim do processamento: %s asteroides"
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris Calendar"
@@ -1475,7 +1475,7 @@ msgstr "Tamanho de Estrelas Lânguidas "
 
 #: u_translation.rsfaq
 msgid "FAQ"
-msgstr ""
+msgstr "FAQ"
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -1563,7 +1563,7 @@ msgstr "Preto fixo"
 
 #: u_translation.rsfixedskycolo
 msgid "Fixed sky color"
-msgstr ""
+msgstr "Escolher cor do céu"
 
 #: u_translation.rsflamsteednum
 msgid "Flamsteed Number"
@@ -1671,7 +1671,7 @@ msgstr "Adquirir Imagem DSS"
 
 #: u_translation.rsgetrecentmea
 msgid "Get recent measurement from JUPOS project"
-msgstr ""
+msgstr "Obter recentes medidas do projeto JUPOS"
 
 #: u_translation.rsglobularclus
 msgid "Globular Cluster"
@@ -1787,15 +1787,15 @@ msgstr "HTTP Proxy"
 
 #: u_translation.rsiconclickact
 msgid "Icon Click Action"
-msgstr ""
+msgstr "Ícone Ação"
 
 #: u_translation.rsiconsize
 msgid "Icon Size"
-msgstr ""
+msgstr "Ícone Tamanho"
 
 #: u_translation.rsicontime
 msgid "Icon Time Display"
-msgstr ""
+msgstr "Ícone Mostrar Tempo"
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -1875,7 +1875,7 @@ msgstr "Informação"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
-msgstr ""
+msgstr "Informação detalhada"
 
 #: u_translation.rsinitializeda
 msgid "Initialize Database"
@@ -1919,7 +1919,7 @@ msgstr "JD:"
 
 #: u_translation.rsjd2
 msgid "JD"
-msgstr ""
+msgstr "JD"
 
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
@@ -2007,7 +2007,7 @@ msgstr "Barra Esquerda"
 
 #: u_translation.rslegal
 msgid "Legal"
-msgstr ""
+msgstr "Legal"
 
 #: u_translation.rslegend
 msgid "Legend"
@@ -2283,7 +2283,7 @@ msgstr "Abaixo de J2000"
 
 #: u_translation.rsmeanlocal
 msgid "Mean local"
-msgstr ""
+msgstr "Local"
 
 #: u_translation.rsmeanofthedat
 msgid "Mean of the date"
@@ -2411,11 +2411,11 @@ msgstr "Banco de dados MySQL"
 
 #: u_translation.rsnakedeye
 msgid "Naked Eye"
-msgstr "Olho Nú"
+msgstr "Olho Nu"
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
-msgstr "Referência à olho nú"
+msgstr "Referência a olho nu"
 
 #: u_translation.rsname
 msgid "Name"
@@ -2583,7 +2583,7 @@ msgstr "Número de Mês"
 
 #: u_translation.rsnumberofnebu
 msgid "Number of nebulae"
-msgstr ""
+msgstr "Número de Nebulosas"
 
 #: u_translation.rsnumberofstar
 msgid "Number of Stars"
@@ -2679,7 +2679,7 @@ msgstr "Servidores de Imagens Online"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
-msgstr "Somente asteróides numerados"
+msgstr "Somente asteroides numerados"
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3007,7 +3007,7 @@ msgstr "Processamento encerrado. Número total de cometas :%s"
 
 #: u_translation.rsprocessingen2
 msgid "Processing ended. Total number of asteroid :%s"
-msgstr "Processamento encerrado. Número total de asteróides :%s"
+msgstr "Processamento encerrado. Número total de asteroides :%s"
 
 #: u_translation.rsprocessingen3
 msgid "Processing ended. Total number of location :%s"
@@ -3055,7 +3055,7 @@ msgstr "Movimento Próprio em Declinação"
 
 #: u_translation.rspropermotion3
 msgid "Proper Motion"
-msgstr ""
+msgstr "Movimento Próprio"
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
@@ -3091,11 +3091,11 @@ msgstr "Apagar rapidamente todos os dados relatados de cometas"
 
 #: u_translation.rsquicklydelet2
 msgid "Quickly delete all asteroid related data"
-msgstr "Apagar todos os dados relatados de asteróides"
+msgstr "Apagar todos os dados relatados de asteroides"
 
 #: u_translation.rsquickstartgu
 msgid "Quick start guide"
-msgstr ""
+msgstr "Guia Rápido"
 
 #: u_translation.rsra
 msgid "RA"
@@ -3159,7 +3159,7 @@ msgstr "Refazer Última Alteração"
 
 #: u_translation.rsreducedetail
 msgid "Reduce detail when moving the chart"
-msgstr ""
+msgstr "Reduzir detalhes quando mover a carta"
 
 #: u_translation.rsreference
 msgid "Reference"
@@ -3227,7 +3227,7 @@ msgstr "Restaurar a Carta"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr ""
+msgstr "Reiniciar carta e opções"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3479,11 +3479,11 @@ msgstr "Mostrar Todo o Céu"
 
 #: u_translation.rsshowasteroid
 msgid "Show Asteroids"
-msgstr "Mostrar Asteróides"
+msgstr "Mostrar Asteroides"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
-msgstr "Mostrar asteróides na carta"
+msgstr "Mostrar asteroides na carta"
 
 #: u_translation.rsshowcomets
 msgid "Show Comets"
@@ -3595,7 +3595,7 @@ msgstr "Mostrar esta figura"
 
 #: u_translation.rssideral
 msgid "Sideral"
-msgstr ""
+msgstr "Sideral"
 
 #: u_translation.rssiderealday
 msgid "Sidereal Day"
@@ -3619,7 +3619,7 @@ msgstr "Skychart Homepage"
 
 #: u_translation.rsskycharticon
 msgid "Skychart Icon Setup"
-msgstr ""
+msgstr "Ícone Skychart"
 
 #: u_translation.rsskycharts
 msgid "Sky Charts"
@@ -3635,7 +3635,7 @@ msgstr "Deslizar"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr ""
+msgstr "Estrelas pequenas"
 
 #: u_translation.rssminute
 msgid "M"
@@ -3643,7 +3643,7 @@ msgstr "M"
 
 #: u_translation.rssmonth
 msgid "M."
-msgstr ""
+msgstr "M."
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -3899,7 +3899,7 @@ msgstr "arquivo temporário"
 
 #: u_translation.rstext
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
@@ -3907,7 +3907,7 @@ msgstr "Catálogo do arquivo texto"
 
 #: u_translation.rstextsize
 msgid "Text Size"
-msgstr ""
+msgstr "Tamanho do Texto"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -4027,7 +4027,7 @@ msgstr "Posição Verdadeira"
 
 #: u_translation.rstruesolar
 msgid "True solar"
-msgstr ""
+msgstr "Solar"
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler Class"
@@ -4187,7 +4187,7 @@ msgstr "Usar Xplanet"
 
 #: u_translation.rsusingexistin
 msgid "Using existing file %s"
-msgstr ""
+msgstr "Usando arquivo existente %s"
 
 #: u_translation.rsut
 msgid "UT"
@@ -4203,7 +4203,7 @@ msgstr "Estrela Variável"
 
 #: u_translation.rsvariablestar2
 msgid "Variable Stars"
-msgstr ""
+msgstr "Estrelas Variáveis"
 
 #: u_translation.rsvenus
 msgid "Venus"
