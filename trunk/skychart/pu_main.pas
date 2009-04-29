@@ -77,11 +77,6 @@ type
     procedure GetACtiveChart;
   end;
 
-  TCdCUniqueInstance = class(TUniqueInstance)
-  public
-    procedure Loaded; override;
-  end;
-
 type
 
   { Tf_main }
@@ -5797,11 +5792,6 @@ except
 end;
 end;
 
-procedure  TCdCUniqueInstance.Loaded;
-begin
-  inherited;
-end;
-
 procedure Tf_main.OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
 var i : integer;
     buf,p: string;
@@ -5829,7 +5819,7 @@ procedure Tf_main.InstanceRunning(Sender : TObject);
 var i : integer;
 begin
 if Params.Find('--unique',i) then
-   halt(1);
+   UniqueInstance1.RetryOrHalt;
 end;
 
 // Parameters that need to be set before program initialisation

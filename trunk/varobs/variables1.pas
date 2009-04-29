@@ -84,7 +84,6 @@ type
     PrepareLPVBulletin1: TMenuItem;
     AAVSOwebpage1: TMenuItem;
     AAVSOChart1: TMenuItem;
-    UniqueInstance1: TUniqueInstance;
     procedure BitBtn1Click(Sender: TObject);
     procedure DateEdit1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -112,12 +111,13 @@ type
     procedure PrepareLPVBulletin1Click(Sender: TObject);
     procedure AAVSOwebpage1Click(Sender: TObject);
     procedure AAVSOChart1Click(Sender: TObject);
-    procedure UniqueInstance1OtherInstance(Sender: TObject;
-      ParamCount: Integer; Parameters: array of String);
   private
     { Private declarations }
     cdc : TCDCclientThrd;
     tcpclient: TCDCclient;
+    UniqueInstance1: TCdCUniqueInstance;
+    procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
+    procedure InstanceRunning(Sender : TObject);
     Procedure GetAppDir;
     Procedure DrawSkyChart;
     procedure SkychartPurge;
@@ -552,6 +552,14 @@ end;
 
 procedure TVarForm.FormCreate(Sender: TObject);
 begin
+{$ifndef darwin}
+  UniqueInstance1:=TCdCUniqueInstance.Create(self);
+  UniqueInstance1.Identifier:='VarObs';
+  UniqueInstance1.OnOtherInstance:=OtherInstance;
+  UniqueInstance1.OnInstanceRunning:=InstanceRunning;
+  UniqueInstance1.Enabled:=true;
+  UniqueInstance1.Loaded;
+{$endif}
 lockdate := false;
 lockselect := false;
 started := false;
@@ -1203,8 +1211,7 @@ FormPos(chartform,mouse.cursorpos.x,mouse.cursorpos.y);
 chartform.ShowModal;
 end;
 
-procedure TVarForm.UniqueInstance1OtherInstance(Sender: TObject;
-  ParamCount: Integer; Parameters: array of String);
+procedure TVarForm.OtherInstance(Sender: TObject; ParamCount: Integer; Parameters: array of String);
 var
   i: integer;
 begin
@@ -1218,6 +1225,13 @@ begin
      ReadParam;
      CalculVar;
   end;
+end;
+
+procedure TVarForm.InstanceRunning(Sender : TObject);
+var i : integer;
+begin
+//if Params.Find('--unique',i) then
+  UniqueInstance1.RetryOrHalt;
 end;
 
 initialization
