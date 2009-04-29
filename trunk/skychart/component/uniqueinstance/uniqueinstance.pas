@@ -38,6 +38,9 @@ unit UniqueInstance;
 interface
 
 uses
+{$ifdef unix}
+  process, math,
+{$endif}
   Forms, Classes, SysUtils, simpleipc, ExtCtrls;
   
 type
@@ -61,11 +64,10 @@ type
     function GetServerId: String;
     procedure ReceiveMessage(Sender: TObject);
     procedure SetUpdateInterval(const AValue: Cardinal);
+    procedure Loaded; override;
     {$ifdef unix}
     procedure CheckMessage(Sender: TObject);
     {$endif}
-  protected
-    procedure Loaded; override;
   public
     constructor Create(AOwner: TComponent); override;
   published
@@ -74,6 +76,22 @@ type
     property UpdateInterval: Cardinal read FUpdateInterval write SetUpdateInterval;
     property OnOtherInstance: TOnOtherInstance read FOnOtherInstance write FOnOtherInstance;
     property OnInstanceRunning: TNotifyEvent read FOnInstanceRunning write FOnInstanceRunning;
+  end;
+
+  { TCdCUniqueInstance }
+
+  TCdCUniqueInstance = class(TUniqueInstance)
+  private
+    retrycount: integer;
+   {$ifdef unix}
+    Process1: TProcess;
+    function  GetPid:string;
+    procedure DeleteLock;
+   {$endif}
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure RetryOrHalt;
+    procedure Loaded; override;
   end;
 
 implementation
@@ -209,6 +227,69 @@ begin
   {$endif}
 end;
 
+////////////// TCdCUniqueInstance ////////////////////
+
+constructor TCdCUniqueInstance.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  retrycount:=0;
+end;
+
+procedure  TCdCUniqueInstance.Loaded;
+begin
+  inherited;
+end;
+
+Procedure TCdCUniqueInstance.RetryOrHalt;
+var i : integer;
+    s:string;
+begin
+{$ifdef unix}
+  inc(retrycount);
+  if retrycount<=1 then begin
+    s:=GetPid;
+    i:=pos(' ',s);
+    if i>0 then
+       Halt(1)
+    else begin
+       DeleteLock;
+       Loaded;
+    end;
+  end;
+{$else}
+  Halt(1);
+{$endif}
+end;
+
+{$ifdef unix}
+procedure TCdCUniqueInstance.DeleteLock;
+var D : String;
+begin
+  D:='/tmp/'; // See fcl-process/src/unix/simpleipc.inc  TPipeServerComm.Create
+  DeleteFile(D+GetServerId);
+end;
+
+function TCdCUniqueInstance.GetPid:string;
+var i: integer;
+    s: array[0..1024] of char;
+begin
+result:='';
+try
+  Process1:=TProcess.Create(nil);
+  FillChar(s,sizeof(s),' ');
+  Process1.CommandLine:='pidof '+ExtractFileName(Application.ExeName);
+  Process1.Options:=[poWaitOnExit,poUsePipes,poNoConsole];
+  Process1.Execute;
+  if Process1.ExitStatus=0 then begin
+     i:=Min(1024,process1.Output.NumBytesAvailable);
+     process1.Output.Read(s,i);
+     result:=Trim(s);
+  end;
+  Process1.Free;
+except
+end;
+end;
+{$endif}
 
 end.
 
