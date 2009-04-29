@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 860
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 558
+  ClientHeight = 559
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -2666,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 470
+    Height = 471
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 470
+    ClientHeight = 471
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 470
+      Height = 471
       Top = 0
       Width = 26
       Align = alClient
@@ -2770,18 +2770,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 832
-    Height = 470
+    Height = 471
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 470
+    ClientHeight = 471
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 220
+      Height = 221
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,7 +3020,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 524
+    Top = 525
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -3463,7 +3463,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 28
+        Height = 29
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -4291,7 +4291,6 @@ object f_main: Tf_main
     object FileNew1: TAction
       Category = 'File'
       Caption = 'FileNew1'
-      DisableIfNoHandler = True
       Hint = 'New|Create a new chart'
       ImageIndex = 0
       OnExecute = FileNew1Execute
@@ -4299,7 +4298,6 @@ object f_main: Tf_main
     object FileOpen1: TAction
       Category = 'File'
       Caption = 'FileOpen1'
-      DisableIfNoHandler = True
       Hint = 'Open|Open a chart'
       ImageIndex = 1
       OnExecute = FileOpen1Execute
@@ -4307,7 +4305,6 @@ object f_main: Tf_main
     object FileSaveAs1: TAction
       Category = 'File'
       Caption = 'FileSaveAs1'
-      DisableIfNoHandler = True
       Hint = 'Save the current chart'
       ImageIndex = 2
       OnExecute = FileSaveAs1Execute
@@ -4315,7 +4312,6 @@ object f_main: Tf_main
     object FileExit1: TAction
       Category = 'File'
       Caption = 'FileExit1'
-      DisableIfNoHandler = True
       Hint = 'Exit|Exit application'
       ImageIndex = 11
       OnExecute = FileExit1Execute
@@ -4323,7 +4319,6 @@ object f_main: Tf_main
     object Print1: TAction
       Category = 'File'
       Caption = 'Print1'
-      DisableIfNoHandler = True
       Hint = 'Print the chart'
       ImageIndex = 3
       OnExecute = Print1Execute
@@ -4331,82 +4326,70 @@ object f_main: Tf_main
     object FilePrintSetup1: TAction
       Category = 'File'
       Caption = 'FilePrintSetup1'
-      DisableIfNoHandler = True
       ImageIndex = 47
       OnExecute = FilePrintSetup1Execute
     end
     object HelpAbout1: TAction
       Category = 'Help'
-      DisableIfNoHandler = True
       Hint = 'About|Displays program information, version number, and copyright'
       OnExecute = HelpAbout1Execute
     end
     object HelpContents1: THelpContents
       Category = 'Help'
-      DisableIfNoHandler = True
       Hint = 'Help contents'
       ImageIndex = 12
       OnExecute = HelpContents1Execute
     end
     object Search1: TAction
       Category = 'Search'
-      DisableIfNoHandler = True
       Hint = 'Search'
       ImageIndex = 76
       OnExecute = Search1Execute
     end
     object ViewBar: TAction
       Category = 'View'
-      DisableIfNoHandler = True
       Hint = 'View Tools Bar'
       OnExecute = ViewBarExecute
       ShortCut = 16450
     end
     object zoomplus: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Zoom In'
       ImageIndex = 6
       OnExecute = zoomplusExecute
     end
     object zoomminus: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Zoom Out'
       ImageIndex = 7
       OnExecute = zoomminusExecute
     end
     object ZoomBar: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Set FOV'
       ImageIndex = 8
       OnExecute = ZoomBarExecute
     end
     object FlipX: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Mirror Horizontally'
       ImageIndex = 15
       OnExecute = FlipXExecute
     end
     object FlipY: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Mirror Vertically'
       ImageIndex = 17
       OnExecute = FlipYExecute
     end
     object ViewStatus: TAction
       Category = 'View'
-      DisableIfNoHandler = True
       Hint = 'View the status bar'
       OnExecute = ViewStatusExecute
     end
     object SaveConfiguration: TAction
       Category = 'Setup'
       Caption = 'Save Configuration'
-      DisableIfNoHandler = True
       Hint = 'The the default configuration'
       OnExecute = SaveConfigurationExecute
     end
@@ -4414,62 +4397,53 @@ object f_main: Tf_main
       Category = 'Setup'
       Caption = 'Save Config On Exit'
       Checked = True
-      DisableIfNoHandler = True
       Hint = 'Save the configuration when the program close'
       OnExecute = SaveConfigOnExitExecute
     end
     object Undo: TAction
       Category = 'Undo'
-      DisableIfNoHandler = True
       Hint = 'Undo Last Change'
       ImageIndex = 19
       OnExecute = UndoExecute
     end
     object Redo: TAction
       Category = 'Undo'
-      DisableIfNoHandler = True
       Hint = 'Redo Last Change'
       ImageIndex = 20
       OnExecute = RedoExecute
     end
     object rot_plus: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Rotate Right'
       ImageIndex = 21
       OnExecute = rot_plusExecute
     end
     object rot_minus: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Rotate Left'
       ImageIndex = 22
       OnExecute = rot_minusExecute
     end
     object GridEQ: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Add Equatorial Grid'
       ImageIndex = 24
       OnExecute = GridEQExecute
     end
     object Grid: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Coordinate Grid'
       ImageIndex = 25
       OnExecute = GridExecute
     end
     object switchstars: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Change Drawing Mode'
       ImageIndex = 34
       OnExecute = switchstarsExecute
     end
     object switchbackground: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Sky Background Color'
       ImageIndex = 35
       OnExecute = switchbackgroundExecute
@@ -4477,53 +4451,45 @@ object f_main: Tf_main
     object SaveImage: TAction
       Category = 'File'
       Caption = 'SaveImage'
-      DisableIfNoHandler = True
       ImageIndex = 36
       OnExecute = SaveImageExecute
     end
     object ViewInfo: TAction
       Category = 'View'
-      DisableIfNoHandler = True
       OnExecute = ViewInfoExecute
     end
     object toN: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'North'
       ImageIndex = 38
       OnExecute = toNExecute
     end
     object toE: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'East'
       ImageIndex = 37
       OnExecute = toEExecute
     end
     object toS: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'South'
       ImageIndex = 39
       OnExecute = toSExecute
     end
     object toW: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'West'
       ImageIndex = 40
       OnExecute = toWExecute
     end
     object toZenith: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Zenith'
       ImageIndex = 41
       OnExecute = toZenithExecute
     end
     object allSky: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show All Sky'
       ImageIndex = 42
       OnExecute = allSkyExecute
@@ -4531,7 +4497,6 @@ object f_main: Tf_main
     object TimeInc: TAction
       Tag = 1
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Increment Time'
       ImageIndex = 44
       OnExecute = TimeIncExecute
@@ -4539,238 +4504,203 @@ object f_main: Tf_main
     object TimeDec: TAction
       Tag = -1
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Decrement Time'
       ImageIndex = 43
       OnExecute = TimeIncExecute
     end
     object TimeReset: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Now'
       ImageIndex = 84
       OnExecute = TimeResetExecute
     end
     object listobj: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Object List'
       ImageIndex = 46
       OnExecute = listobjExecute
     end
     object TelescopeConnect: TAction
       Category = 'Telescope'
-      DisableIfNoHandler = True
       Hint = 'Connect Telescope'
       ImageIndex = 48
       OnExecute = TelescopeConnectExecute
     end
     object TelescopeSlew: TAction
       Category = 'Telescope'
-      DisableIfNoHandler = True
       Hint = 'Slew'
       ImageIndex = 50
       OnExecute = TelescopeSlewExecute
     end
     object TelescopeSync: TAction
       Category = 'Telescope'
-      DisableIfNoHandler = True
       Hint = 'Sync'
       ImageIndex = 51
       OnExecute = TelescopeSyncExecute
     end
     object MoreStar: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'More Star'
       ImageIndex = 52
       OnExecute = MoreStarExecute
     end
     object LessStar: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Less Star'
       ImageIndex = 53
       OnExecute = LessStarExecute
     end
     object MoreNeb: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'More Nebula'
       ImageIndex = 54
       OnExecute = MoreNebExecute
     end
     object LessNeb: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Less Nebula'
       ImageIndex = 55
       OnExecute = LessNebExecute
     end
     object ShowStars: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Stars'
       ImageIndex = 56
       OnExecute = ShowStarsExecute
     end
     object ShowNebulae: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Nebulae'
       ImageIndex = 57
       OnExecute = ShowNebulaeExecute
     end
     object ShowPictures: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Pictures'
       ImageIndex = 58
       OnExecute = ShowPicturesExecute
     end
     object ShowLines: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Lines'
       ImageIndex = 59
       OnExecute = ShowLinesExecute
     end
     object ShowPlanets: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Planets'
       ImageIndex = 62
       OnExecute = ShowPlanetsExecute
     end
     object ShowAsteroids: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Asteroids'
       ImageIndex = 60
       OnExecute = ShowAsteroidsExecute
     end
     object ShowComets: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Comets'
       ImageIndex = 61
       OnExecute = ShowCometsExecute
     end
     object ShowMilkyWay: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Milky Way'
       ImageIndex = 63
       OnExecute = ShowMilkyWayExecute
     end
     object ShowLabels: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Labels'
       ImageIndex = 64
       OnExecute = ShowLabelsExecute
     end
     object ShowConstellationLine: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Constellation Line'
       ImageIndex = 65
       OnExecute = ShowConstellationLineExecute
     end
     object ShowConstellationLimit: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Constellation Limit'
       ImageIndex = 66
       OnExecute = ShowConstellationLimitExecute
     end
     object ShowGalacticEquator: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Galactic Equator'
       ImageIndex = 67
       OnExecute = ShowGalacticEquatorExecute
     end
     object ShowEcliptic: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Ecliptic'
       ImageIndex = 68
       OnExecute = ShowEclipticExecute
     end
     object ShowMark: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Mark'
       ImageIndex = 69
       OnExecute = ShowMarkExecute
     end
     object ShowObjectbelowHorizon: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Object below the horizon'
       ImageIndex = 70
       OnExecute = ShowObjectbelowHorizonExecute
     end
     object EquatorialProjection: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Equatorial Coordinate'
       ImageIndex = 71
       OnExecute = EquatorialProjectionExecute
     end
     object AltAzProjection: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Alt-Az Coordinate'
       ImageIndex = 72
       OnExecute = AltAzProjectionExecute
     end
     object EclipticProjection: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Ecliptic Coordinate'
       ImageIndex = 73
       OnExecute = EclipticProjectionExecute
     end
     object GalacticProjection: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Galactic Coordinate'
       ImageIndex = 74
       OnExecute = GalacticProjectionExecute
     end
     object ViewMainBar: TAction
       Category = 'View'
-      DisableIfNoHandler = True
       OnExecute = ViewMainBarExecute
     end
     object ViewObjectBar: TAction
       Category = 'View'
-      DisableIfNoHandler = True
       OnExecute = ViewObjectBarExecute
     end
     object ViewLeftBar: TAction
       Category = 'View'
-      DisableIfNoHandler = True
       OnExecute = ViewLeftBarExecute
     end
     object ViewRightBar: TAction
       Category = 'View'
-      DisableIfNoHandler = True
       OnExecute = ViewRightBarExecute
     end
     object Calendar: TAction
       Category = 'File'
       Caption = 'Calendar'
-      DisableIfNoHandler = True
       Hint = 'Ephemeris Calendar'
       ImageIndex = 75
       OnExecute = CalendarExecute
     end
     object ShowBackgroundImage: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Show Background Image'
       ImageIndex = 77
       OnExecute = ShowBackgroundImageExecute
@@ -4778,74 +4708,63 @@ object f_main: Tf_main
     end
     object Position: TAction
       Category = 'Search'
-      DisableIfNoHandler = True
       Hint = 'Position'
       ImageIndex = 78
       OnExecute = PositionExecute
     end
     object SyncChart: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Link All Chart'
       ImageIndex = 79
       OnExecute = SyncChartExecute
     end
     object Track: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Track'
       ImageIndex = 80
       OnExecute = TrackExecute
     end
     object DSSImage: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Get DSS Image'
       ImageIndex = 81
       OnExecute = DSSImageExecute
     end
     object EditLabels: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Edit Labels'
       ImageIndex = 83
       OnExecute = EditLabelsExecute
     end
     object Cascade1: TAction
       Category = 'Window'
-      DisableIfNoHandler = True
       Hint = 'Cascade'
       ImageIndex = 4
       OnExecute = WindowCascade1Execute
     end
     object TileHorizontal1: TAction
       Category = 'Window'
-      DisableIfNoHandler = True
       Hint = 'Tile Horizontally'
       ImageIndex = 5
       OnExecute = WindowTileHorizontal1Execute
     end
     object TileVertical1: TAction
       Category = 'Window'
-      DisableIfNoHandler = True
       Hint = 'Tile Vertically'
       ImageIndex = 14
       OnExecute = WindowTileVertical1Execute
     end
     object Maximize: TAction
       Category = 'Window'
-      DisableIfNoHandler = True
       OnExecute = MaximizeExecute
     end
     object TelescopePanel: TAction
       Category = 'Telescope'
-      DisableIfNoHandler = True
       Hint = 'Control Panel'
       OnExecute = TelescopePanelExecute
     end
     object ViewFullScreen: TAction
       Category = 'View'
-      DisableIfNoHandler = True
       Hint = 'Full Screen'
       OnExecute = ViewFullScreenExecute
       ShortCut = 122
@@ -4853,14 +4772,12 @@ object f_main: Tf_main
     object FileClose1: TAction
       Category = 'File'
       Caption = 'FileClose1'
-      DisableIfNoHandler = True
       Hint = 'Close Chart'
       OnExecute = FileClose1Execute
     end
     object SetupTime: TAction
       Category = 'Setup'
       Caption = 'Set date and time'
-      DisableIfNoHandler = True
       Hint = 'Set date and time'
       ImageIndex = 45
       OnExecute = SetupTimeExecute
@@ -4868,7 +4785,6 @@ object f_main: Tf_main
     object SetupObservatory: TAction
       Category = 'Setup'
       Caption = 'Set observatory location'
-      DisableIfNoHandler = True
       Hint = 'Set observatory location'
       ImageIndex = 85
       OnExecute = SetupObservatoryExecute
@@ -4876,14 +4792,12 @@ object f_main: Tf_main
     object SetupDisplay: TAction
       Category = 'Setup'
       Caption = 'Setup Display'
-      DisableIfNoHandler = True
       Hint = 'Setup Display'
       OnExecute = SetupDisplayExecute
     end
     object SetupPictures: TAction
       Category = 'Setup'
       Caption = 'Setup Pictures'
-      DisableIfNoHandler = True
       Hint = 'Change pictures display'
       ImageIndex = 77
       OnExecute = SetupPicturesExecute
@@ -4891,13 +4805,11 @@ object f_main: Tf_main
     object SetupCatalog: TAction
       Category = 'Setup'
       Caption = 'Setup Catalog'
-      DisableIfNoHandler = True
       Hint = 'Setup Catalog'
       OnExecute = SetupCatalogExecute
     end
     object BlinkImage: TAction
       Category = 'chart'
-      DisableIfNoHandler = True
       Hint = 'Blinking Picture'
       ImageIndex = 86
       OnExecute = BlinkImageExecute
@@ -4905,62 +4817,52 @@ object f_main: Tf_main
     object SetupChart: TAction
       Category = 'Setup'
       Caption = 'SetupChart'
-      DisableIfNoHandler = True
       OnExecute = SetupChartExecute
     end
     object SetupSolSys: TAction
       Category = 'Setup'
       Caption = 'SetupSolSys'
-      DisableIfNoHandler = True
       OnExecute = SetupSolSysExecute
     end
     object SetupSystem: TAction
       Category = 'Setup'
       Caption = 'SetupSystem'
-      DisableIfNoHandler = True
       OnExecute = SetupSystemExecute
     end
     object SetupInternet: TAction
       Category = 'Setup'
       Caption = 'SetupInternet'
-      DisableIfNoHandler = True
       OnExecute = SetupInternetExecute
     end
     object SetupConfig: TAction
       Category = 'Setup'
       Caption = 'SetupConfig'
-      DisableIfNoHandler = True
       OnExecute = SetupConfigExecute
     end
     object ViewClock: TAction
       Category = 'View'
       Caption = 'ViewClock'
-      DisableIfNoHandler = True
       OnExecute = ViewClockExecute
     end
     object HelpFaq1: TAction
       Category = 'Help'
       Caption = 'HelpFaq1'
-      DisableIfNoHandler = True
       OnExecute = HelpFaq1Execute
     end
     object HelpQS1: TAction
       Category = 'Help'
       Caption = 'HelpQS1'
-      DisableIfNoHandler = True
       OnExecute = HelpQS1Execute
     end
     object EditCopy1: TAction
       Category = 'Edit'
       Caption = 'EditCopy1'
-      DisableIfNoHandler = True
       OnExecute = EditCopy1Execute
       ShortCut = 16451
     end
     object ResetDefaultChart: TAction
       Category = 'File'
       Caption = 'ResetDefaultChart'
-      DisableIfNoHandler = True
       OnExecute = ResetDefaultChartExecute
     end
   end

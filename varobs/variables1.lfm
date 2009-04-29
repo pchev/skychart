@@ -3,8 +3,9 @@ object VarForm: TVarForm
   Height = 600
   Top = 98
   Width = 800
+  ActiveControl = Panel1
   Caption = 'Variable stars observer'
-  ClientHeight = 580
+  ClientHeight = 579
   ClientWidth = 800
   Font.Height = -11
   Font.Name = 'Default'
@@ -120,7 +121,8 @@ object VarForm: TVarForm
   ShowHint = True
   LCLVersion = '0.9.27'
   object Grid1: TStringGrid
-    Height = 508
+    Left = 0
+    Height = 528
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 800
@@ -138,7 +140,9 @@ object VarForm: TVarForm
     OnSelectCell = Grid1SelectCell
   end
   object Panel1: TPanel
+    Left = 0
     Height = 70
+    Top = 0
     Width = 800
     Align = alTop
     ClientHeight = 70
@@ -212,8 +216,8 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 20
-      ClientWidth = 325
+      ClientHeight = 23
+      ClientWidth = 327
       Columns = 3
       ItemIndex = 0
       Items.Strings = (
@@ -398,13 +402,5 @@ object VarForm: TVarForm
       Caption = 'Cartes du Ciel Chart'
       OnClick = ShowChart1Click
     end
-  end
-  object UniqueInstance1: TUniqueInstance
-    Enabled = True
-    Identifier = 'VarObs'
-    UpdateInterval = 1000
-    OnOtherInstance = UniqueInstance1OtherInstance
-    left = 38
-    top = 147
   end
 end
