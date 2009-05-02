@@ -907,11 +907,11 @@ try
     if assigned(Fshowinfo) then Fshowinfo(rsCreatePostsc , caption);
     ps:=TPostscriptCanvas.Create;
     if PrintLandscape then begin
-       ps.pagewidth:=round(PaperHeight[cm.Paper]*printresol);
-       ps.pageheight:=round(PaperWidth[cm.Paper]*printresol);
+       ps.paperwidth:=round(PaperHeight[cm.Paper]*printresol);
+       ps.paperheight:=round(PaperWidth[cm.Paper]*printresol);
     end else begin
-       ps.pagewidth:=round(PaperWidth[cm.Paper]*printresol);
-       ps.pageheight:=round(PaperHeight[cm.Paper]*printresol);
+       ps.paperwidth:=round(PaperWidth[cm.Paper]*printresol);
+       ps.paperheight:=round(PaperHeight[cm.Paper]*printresol);
     end;
    // draw the chart
     ps.begindoc;
@@ -919,7 +919,7 @@ try
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
-    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
+    sc.plot.cfgchart.fontscale:=maxintvalue([1,printresol div 300]); // because we cannot set a dpi property for the bitmap
     sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
     sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
     sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
@@ -931,7 +931,6 @@ try
     ps.enddoc;
     fname:=slash(printpath)+'cdcprint.ps';
     ps.savetofile(SysToUTF8(fname));
-    FixPostscript(fname,PrintLandscape,ps.pagewidth,ps.pageheight);
     chdir(appdir);
     if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
     execnowait(printcmd1+' "'+fname+'"');
