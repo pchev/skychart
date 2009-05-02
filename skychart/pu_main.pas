@@ -3308,7 +3308,7 @@ cfgm.configpage:=0;
 cfgm.configpage_i:=0;
 cfgm.configpage_j:=0;
 cfgm.Paper:=2;
-cfgm.PrinterResolution:=72;
+cfgm.PrinterResolution:=300;
 cfgm.PrintColor:=0;
 cfgm.PrintLandscape:=true;
 cfgm.PrintMethod:=0;
@@ -4385,6 +4385,10 @@ if Config_Version < '3.0.1.5f' then begin
    LinuxDesktop:=0;
    OpenFileCMD:='xdg-open';
 {$endif}
+end;
+if Config_Version < '3.1a' then begin
+   if cfgm.PrinterResolution<300 then
+      cfgm.PrinterResolution:=300;
 end;
 end;
 
