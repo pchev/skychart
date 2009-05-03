@@ -26,7 +26,7 @@ object f_main: Tf_main
     Top = 184
     Width = 304
     BevelOuter = bvNone
-    BorderWidth = 1
+    BorderWidth = 3
     ClientHeight = 230
     ClientWidth = 304
     Color = clBlack
