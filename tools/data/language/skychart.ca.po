@@ -17,19 +17,19 @@ msgid "102 CD DSS"
 msgstr "102 CD DSS"
 
 #: u_translation.rs184recommend
-msgid "184 (recommended up to 1'000'000 objects)"
+msgid "184 (recommended up to 1,000,000 objects)"
 msgstr "184 (recomanat fins a 1 000 000 d'objectes)"
 
 #: u_translation.rs50recommende
-msgid "50   (recommended up to 100'000 objects)"
+msgid "50   (recommended up to 100,000 objects)"
 msgstr "50   (recomanat fins a 100 000 objectes)"
 
 #: u_translation.rs732recommend
-msgid "732 (recommended up to 5'000'000 objects)"
+msgid "732 (recommended up to 5,000,000 objects)"
 msgstr "732 (recomanat fins a 5 000 000 d'objectes)"
 
 #: u_translation.rs9537largerda
-msgid "9537 (larger dataset)"
+msgid "9537 (larger datasets)"
 msgstr "9537 (catàlegs més grans)"
 
 #: u_translation.rsabbreviation
@@ -77,15 +77,15 @@ msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Afegir un element a la base de dades. Tots els camps són necessaris."
 
 #: u_translation.rsaddequatoria
-msgid "Add Equatorial Grid"
+msgid "Add equatorial grid"
 msgstr "Afegeix la graella equatorial"
 
 #: u_translation.rsaddlabel
-msgid "Add Label"
+msgid "Add label"
 msgstr "Afegeix etiqueta"
 
 #: u_translation.rsaddthealtern
-msgid "Add the alternate names to the index"
+msgid "Add the alternative names to the index"
 msgstr "Afegeix els noms suplementaris a l'índex"
 
 #: u_translation.rsadjustcolour
@@ -97,7 +97,7 @@ msgid "Advanced"
 msgstr "Avançat"
 
 #: u_translation.rsadvancedsear
-msgid "Advanced Search"
+msgid "Advanced search"
 msgstr "Recerca avançada"
 
 #: u_translation.rsage
@@ -117,15 +117,15 @@ msgid "All configuration options"
 msgstr "Totes les opcions de configuració"
 
 #: u_translation.rsalltablesstr
-msgid "%sAll tables structure exists."
+msgid "%sAll table structures exist."
 msgstr "%s: Totes les estructures de taula existeixen."
 
 #: u_translation.rsalltoolsbar
-msgid "All Tools Bar"
+msgid "All tool bars"
 msgstr "Totes les barres d'eines"
 
 #: u_translation.rsalsobesureth
-msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
+msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgstr "%sComproveu també que el programa de base de dades estigui instal·lat.%sConsulteu la documentació si no n'esteu segur.%sVoleu continuar?"
 
 #: u_translation.rsalt
@@ -133,19 +133,19 @@ msgid "Alt"
 msgstr "Alt"
 
 #: u_translation.rsaltazcoord
-msgid "Alt/AZ Coord. "
+msgid "Alt/Az coord. "
 msgstr "Coordenades Alt/AZ "
 
 #: u_translation.rsaltazcoord2
-msgid "Alt/AZ Coord."
+msgid "Alt/Az coord."
 msgstr "Coord. Alt/Az"
 
 #: u_translation.rsaltazcoordin
-msgid "Alt-Az Coordinate"
+msgid "Alt-Az coordinates"
 msgstr "Coordenades Alt-Az"
 
 #: u_translation.rsaltazmount
-msgid "Alt/Az Mount"
+msgid "Alt/Az mount"
 msgstr "Muntura Alt/Az"
 
 #: u_translation.rsaltitude
@@ -157,11 +157,11 @@ msgid "%sAlt turns:"
 msgstr "%svoltes Alt:"
 
 #: u_translation.rsalwaysshowco
-msgid "Always show compass rose"
+msgid "Always show the compass rose"
 msgstr "Rosa dels vents sempre visible"
 
 #: u_translation.rsannualproper
-msgid "Annual Proper Motion"
+msgid "Annual proper motion"
 msgstr "Moviment propi anual"
 
 #: u_translation.rsanonymouspas
@@ -185,7 +185,7 @@ msgid "Apply"
 msgstr "Aplica"
 
 #: u_translation.rsapplychanget
-msgid "Apply Change To All Chart"
+msgid "Apply changes to all charts"
 msgstr "Aplica a totes les cartes"
 
 #: u_translation.rsargumentofpe
@@ -193,7 +193,7 @@ msgid "Argument of perihelion"
 msgstr "Argument del periheli"
 
 #: u_translation.rsartificialsa
-msgid "Artificial Satellites"
+msgid "Artificial satellites"
 msgstr "Satèl·lits artificials"
 
 #: u_translation.rsaskconfirmat
@@ -213,15 +213,15 @@ msgid "Asteroid"
 msgstr "Asteroide"
 
 #: u_translation.rsasteroidelem
-msgid "Asteroid elements in MPC format (one URL by line)"
+msgid "Sources for asteroid elements in MPC format (one URL per line)"
 msgstr "Elements dels asteroides en format MPC (una URL per línia)"
 
 #: u_translation.rsasteroidsett
-msgid "Asteroid Setting"
+msgid "Asteroid settings"
 msgstr "Config. asteroides"
 
 #: u_translation.rsasteroidsfro
-msgid "Asteroids from the file"
+msgid "asteroids from the file"
 msgstr "Asteroides de l'arxiu"
 
 #: u_translation.rsastrometricj
@@ -233,7 +233,7 @@ msgid "Astronomical"
 msgstr "Astronòmic"
 
 #: u_translation.rsastronomical2
-msgid "Astronomical Twilight"
+msgid "Astronomical twilight"
 msgstr "Crepuscle astronòmic"
 
 #: u_translation.rsat
@@ -241,7 +241,7 @@ msgid "at"
 msgstr "a"
 
 #: u_translation.rsatmosphericr
-msgid "Atmospheric Refraction"
+msgid "Atmospheric refraction"
 msgstr "Refracció atmosfèrica"
 
 #: u_translation.rsauthors
@@ -257,7 +257,7 @@ msgid "Automatically start a local server if not already running"
 msgstr "Connecta un servidor local si encara no ho està"
 
 #: u_translation.rsautorefresh
-msgid "AutoRefresh"
+msgid "Auto-refresh"
 msgstr "Refresca automàticament"
 
 #: u_translation.rsautorefreshe
@@ -277,7 +277,7 @@ msgid "Azimuth"
 msgstr "Azimut"
 
 #: u_translation.rsazimuthalcoo
-msgid "Azimuthal Coordinate"
+msgid "Azimuthal coordinates"
 msgstr "Coordenades azimutals"
 
 #: u_translation.rsazturns
@@ -293,11 +293,11 @@ msgid "Background"
 msgstr "Fons"
 
 #: u_translation.rsbackgroundpi
-msgid "Background Picture"
+msgid "Background picture"
 msgstr "Imatge de fons"
 
 #: u_translation.rsbayerletter
-msgid "Bayer Letter"
+msgid "Bayer letter"
 msgstr "Lletra de Bayer"
 
 #: u_translation.rsbc
@@ -329,23 +329,23 @@ msgid "Bitmap"
 msgstr "Mapa de bits"
 
 #: u_translation.rsbitmapfile
-msgid "Bitmap File"
+msgid "Bitmap file"
 msgstr "Fitxer mapa de bits"
 
 #: u_translation.rsblackonwhite
-msgid "Black on White"
+msgid "Black on white"
 msgstr "Blanc sobre negre"
 
 #: u_translation.rsblackwhite
-msgid "Black/White"
+msgid "Black/white"
 msgstr "Blanc/negre"
 
 #: u_translation.rsblackwhiteli
-msgid "Black/White, Line mode"
+msgid "Black/white, line mode"
 msgstr "Blanc/negre, mode línia"
 
 #: u_translation.rsblinkingpict
-msgid "Blinking Picture"
+msgid "Blinking picture"
 msgstr "Imatge parpellejant"
 
 #: u_translation.rsblue
@@ -353,7 +353,7 @@ msgid "Blue"
 msgstr "Blau"
 
 #: u_translation.rsbluemagnitud
-msgid "Blue Magnitude"
+msgid "Blue magnitude"
 msgstr "Magnitud en blau"
 
 #: u_translation.rsbottom
@@ -369,11 +369,11 @@ msgid "Brighter"
 msgstr "Més brillant"
 
 #: u_translation.rsbrighteststa
-msgid "Brightest Star Magnitude"
+msgid "Brightest star magnitude"
 msgstr "Magnitud de l'estel més brillant"
 
 #: u_translation.rsbrightnebula
-msgid "Bright Nebula"
+msgid "Bright nebula"
 msgstr "Nebulosa brillant"
 
 #: u_translation.rsbrightneo
@@ -389,11 +389,11 @@ msgid "Bright stars"
 msgstr "Estels brillants"
 
 #: u_translation.rsbrightstarss
-msgid "Bright Stars Size"
+msgid "Bright star size"
 msgstr "Mida d'estels brillants"
 
 #: u_translation.rsbuildcatalog
-msgid "Build Catalog"
+msgid "Build catalog"
 msgstr "Construir el catàleg"
 
 #: u_translation.rsby
@@ -457,43 +457,43 @@ msgid "CdC format, prefere the compact version"
 msgstr "Format CdC, utilitzeu millor el compacte"
 
 #: u_translation.rscdcnebulae
-msgid "CdC Deep Sky"
+msgid "CdC deep sky"
 msgstr "Cel profund CdC"
 
 #: u_translation.rscdcnebulaeca
-msgid "CDC Deep Sky Catalog Setting"
+msgid "CdC deep sky catalogs and settings"
 msgstr "Catàlegs de cel profund CDC"
 
 #: u_translation.rscdcobsoletec
-msgid "Obsolete CDC Catalog (but you can still use them)"
+msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Catàlegs obsolets (però podeu utilitzar-los sempre que volgueu)"
 
 #: u_translation.rscdcplugin
-msgid "CDC plugin"
+msgid "CdC plugin"
 msgstr "Connector CdC (plugin)"
 
 #: u_translation.rscdcpluginset
-msgid "CDC plugin setting"
+msgid "Select the CdC plugin"
 msgstr "Config. del connector CDC"
 
 #: u_translation.rscdcstars
-msgid "CdC Stars"
+msgid "CdC stars"
 msgstr "Estels CdC"
 
 #: u_translation.rscdcstarscata
-msgid "CDC Stars Catalog Setting"
+msgid "CdC star catalogs and settings"
 msgstr "Catàlegs d'estels CDC"
 
 #: u_translation.rscdctranslator
-msgid "CDCTranslator"
+msgid "Patrick Chevalley, Marc Fokker"
 msgstr "Antoni Clavell"
 
 #: u_translation.rscenter
 msgid "Center"
-msgstr "Centre"
+msgstr "Centre on"
 
 #: u_translation.rscenterobject
-msgid "Center Object"
+msgid "Centre on this object"
 msgstr "Centra l'objecte"
 
 #: u_translation.rscentralmerid
@@ -501,23 +501,25 @@ msgid "Central meridian"
 msgstr "Meridià central"
 
 #: u_translation.rscentralstarb
-msgid "Central Star B Magnitude"
+msgid "Central star B magnitude"
 msgstr "Magnitud blava de l'estel central"
 
 #: u_translation.rscentralstarv
-msgid "Central Star V Magnitude"
+msgid "Central star V magnitude"
 msgstr "Magnitud visual de l'estel central"
 
 #: u_translation.rscentre
-msgid "Centre"
+#, fuzzy
+#| msgid "Centre"
+msgid "Centre on"
 msgstr "Centra"
 
 #: u_translation.rschangedrawin
-msgid "Change Drawing Mode"
+msgid "Change drawing mode"
 msgstr "Modifica el mode de dibuix"
 
 #: u_translation.rschangepictur
-msgid "Change pictures display"
+msgid "Change the displayed picture"
 msgstr "Modifica la presentació de la imatge"
 
 #: u_translation.rschart
@@ -525,19 +527,19 @@ msgid "Chart"
 msgstr "Carta"
 
 #: u_translation.rschart2
-msgid "chart :"
+msgid "chart:"
 msgstr "carta :"
 
 #: u_translation.rschartcoordin
-msgid "Chart, Coordinates"
+msgid "Chart, coordinates"
 msgstr "Carta, Coordenades"
 
 #: u_translation.rschartcoordin2
-msgid "Chart Coordinate System"
+msgid "Chart coordinate systems"
 msgstr "Sistema de coordenades"
 
 #: u_translation.rschartinforma
-msgid "Chart Information"
+msgid "Chart information"
 msgstr "Informació sobre la carta"
 
 #: u_translation.rscharts
@@ -545,7 +547,7 @@ msgid "Charts"
 msgstr "Cartes"
 
 #: u_translation.rschartsetting
-msgid "Chart Setting"
+msgid "Chart settings"
 msgstr "Paràmetres de la carta"
 
 #: u_translation.rschart_
@@ -557,7 +559,7 @@ msgid "Check"
 msgstr "Control"
 
 #: u_translation.rschoosecolour
-msgid "Choose colours for object type"
+msgid "Choose colours for the object types"
 msgstr "Tria de colors per tipus d'objecte"
 
 #: u_translation.rscircle
@@ -573,11 +575,11 @@ msgid "Class"
 msgstr "Classe"
 
 #: u_translation.rsclicktochang
-msgid "Click to change the color "
+msgid "Click to change the colour "
 msgstr "Feu clic per modificar el color"
 
 #: u_translation.rsclientconnec
-msgid "Client Connection Keep Alive"
+msgid "Client connection keep alive"
 msgstr "Manté la connexió client"
 
 #: u_translation.rsclock
@@ -589,11 +591,11 @@ msgid "Close"
 msgstr "Tanca"
 
 #: u_translation.rsclosechart
-msgid "Close Chart"
+msgid "Close chart"
 msgstr "Tanca la carta"
 
 #: u_translation.rscloseconnect
-msgid "Close Connection"
+msgid "Close connection"
 msgstr "Tanca la connexió"
 
 #: u_translation.rsclosedcontou
@@ -609,23 +611,23 @@ msgid "Closing connection"
 msgstr "Tancament de la connexió"
 
 #: u_translation.rsclusterandne
-msgid "Cluster and Nebula"
+msgid "Cluster and nebula"
 msgstr "Cúmul i nebulosa"
 
 #: u_translation.rscolor
-msgid "Color"
+msgid "Colour"
 msgstr "Color"
 
 #: u_translation.rscolorindex
-msgid "Color Index"
+msgid "Colour index"
 msgstr "Índex de color"
 
 #: u_translation.rscolorlinemod
-msgid "Color, Line mode"
+msgid "Colour, line mode"
 msgstr "Color, mode línia"
 
 #: u_translation.rscolorsaturat
-msgid "Color saturation"
+msgid "Colour saturation"
 msgstr "Saturació de color"
 
 #: u_translation.rscomet
@@ -633,11 +635,11 @@ msgid "Comet"
 msgstr "Cometa"
 
 #: u_translation.rscometelement
-msgid "Comet elements in MPC format (one URL by line) "
+msgid "Sources for comet elements in MPC format (one URL per line)"
 msgstr "Element dels cometes en format MPC (una URL per línia)"
 
 #: u_translation.rscometsetting
-msgid "Comet Setting"
+msgid "Comet settings"
 msgstr "Config. cometes"
 
 #: u_translation.rscommandfound
@@ -653,7 +655,7 @@ msgid "Command to use to process the file."
 msgstr "Comandament a usar per processar l'arxiu."
 
 #: u_translation.rscommonname
-msgid "Common Name"
+msgid "Common name"
 msgstr "Nom comú"
 
 #: u_translation.rscompassroses
@@ -665,11 +667,11 @@ msgid "Compiled with:"
 msgstr "Compilat amb:"
 
 #: u_translation.rscomponent1ma
-msgid "Component 1 Magnitude"
+msgid "Component 1 magnitude"
 msgstr "Magnitud del primer component"
 
 #: u_translation.rscomponent2ma
-msgid "Component 2 Magnitude"
+msgid "Component 2 magnitude"
 msgstr "Magnitud del segon component"
 
 #: u_translation.rscompute
@@ -681,7 +683,7 @@ msgid "Compute asteroid data for this month"
 msgstr "Calcula les dades dels asteroides per a aquest mes"
 
 #: u_translation.rscomputefield
-msgid "Compute Field"
+msgid "Compute field"
 msgstr "Calcula els camps"
 
 #: u_translation.rsconfiguratio
@@ -693,11 +695,11 @@ msgid "Configure the program"
 msgstr "Configuració del programa"
 
 #: u_translation.rsconnectedfro
-msgid "%s connected from %s, using chart %s, connect time:%s"
+msgid "%s connected with %s, using chart %s, connected time:%s"
 msgstr "%s connectat des de %s, utilitza la carta %s, temps de connexió:%s"
 
 #: u_translation.rsconnectedtos
-msgid "Connected to SQL database %s"
+msgid "Connected to the SQL database %s"
 msgstr "Connectat a la base de dades SQL %s"
 
 #: u_translation.rsconnectionli
@@ -705,15 +707,15 @@ msgid "Connection lines between each position"
 msgstr "Línies de connexió entre posicions"
 
 #: u_translation.rsconnectteles
-msgid "Connect Telescope"
+msgid "Connect telescope"
 msgstr "Connecta el telescopi"
 
 #: u_translation.rsconnecttofai
-msgid "Connect to %s, %s failed! %sVerify if the MySQL Server is running and control the Userid/Password"
+msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
 msgstr "Connexió a  %s, %s fallida! %sComproveu que el servidor MySQL està engegat i verifiqueu nom i contrasenya"
 
 #: u_translation.rsconnecttosuc
-msgid "Connect to %s, %s successful.%s"
+msgid "Connection to %s, %s successful.%s"
 msgstr "Connectat a %s, %s amb èxit.%s"
 
 #: u_translation.rsconstellatio
@@ -721,23 +723,23 @@ msgid "Constellation"
 msgstr "Constel·lació"
 
 #: u_translation.rsconstellatio2
-msgid "Constellation Figures"
+msgid "Constellation figures"
 msgstr "Figures de les constel·lacions"
 
 #: u_translation.rsconstellatio3
-msgid "Constellation Figure File Name : "
+msgid "Constellation figures file name: "
 msgstr "Nom de l'arxiu de les figures"
 
 #: u_translation.rsconstellatio4
-msgid "Constellation Boundaries"
+msgid "Constellation boundaries"
 msgstr "Límits de les constel·lacions"
 
 #: u_translation.rsconstellatio5
-msgid "Constellation Boundary File Name : "
+msgid "Constellation boundaries file name: "
 msgstr "Nom de l'arxiu dels límits:"
 
 #: u_translation.rsconstellatio6
-msgid "Constellation Label"
+msgid "Constellation label"
 msgstr "Etiquetes de les constel·lacions"
 
 #: u_translation.rsconstellatio7
@@ -749,11 +751,11 @@ msgid "Contrast"
 msgstr "Contrast"
 
 #: u_translation.rscontrolpanel
-msgid "Control Panel"
+msgid "Control panel"
 msgstr "Panell de control"
 
 #: u_translation.rscontrolpanel2
-msgid "Control Panel command "
+msgid "Control panel command "
 msgstr "Panell de control"
 
 #: u_translation.rsconvertcatal
@@ -769,7 +771,7 @@ msgid "Coord."
 msgstr "Coord."
 
 #: u_translation.rscoordgrid
-msgid "Coord. Grid"
+msgid "Coord. grid"
 msgstr "Graelles"
 
 #: u_translation.rscoordinates
@@ -777,11 +779,11 @@ msgid "Coordinates:"
 msgstr "Coordenades:"
 
 #: u_translation.rscoordinatese
-msgid "Coordinates Equinox"
+msgid "Coordinates equinox"
 msgstr "Equinocci"
 
 #: u_translation.rscoordinatesg
-msgid "Coordinates Grid"
+msgid "Coordinates grid"
 msgstr "Graelles de coordenades"
 
 #: u_translation.rscopy
@@ -789,7 +791,7 @@ msgid "Copy"
 msgstr "Copia"
 
 #: u_translation.rscoreradius
-msgid "Core Radius"
+msgid "Core radius"
 msgstr "Radi del nucli"
 
 #: u_translation.rscorrelated
@@ -801,7 +803,7 @@ msgid "Could not load library "
 msgstr "No es pot carregar la llibreria"
 
 #: u_translation.rscountrytimez
-msgid "Country Timezone"
+msgid "Country timezone"
 msgstr "Zona horària del país"
 
 #: u_translation.rscreateanewch
@@ -813,7 +815,7 @@ msgid "Create a search index file"
 msgstr "Crea un índex de recerca"
 
 #: u_translation.rscreatedataba
-msgid "Create Database"
+msgid "Create database"
 msgstr "Crea base de dades"
 
 #: u_translation.rscreatefiles
@@ -837,7 +839,7 @@ msgid "Culmination"
 msgstr "Culminació"
 
 #: u_translation.rscurrentdate
-msgid "Current Date"
+msgid "Date of validity"
 msgstr "Data actual"
 
 #: u_translation.rscw
@@ -845,10 +847,12 @@ msgid "%sCW"
 msgstr "%sa la dreta"
 
 #: u_translation.rsdarknebula
-msgid "Dark Nebula"
+msgctxt "u_translation.rsdarknebula"
+msgid "Dark nebula"
 msgstr "Nebulosa obscura"
 
 #: u_translation.rsdarknebula2
+msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Nebulosa obscura"
 
@@ -857,11 +861,11 @@ msgid "Dash"
 msgstr "Guió"
 
 #: u_translation.rsdashdot1
-msgid "Dash Dot"
+msgid "Dash dot"
 msgstr "Guió punt"
 
 #: u_translation.rsdashdotdot1
-msgid "Dash Dot Dot"
+msgid "Dash dot dot"
 msgstr "Guió punt punt"
 
 #: u_translation.rsdatabasefile
@@ -877,23 +881,23 @@ msgid "Database setting..."
 msgstr "Configura base dades"
 
 #: u_translation.rsdatabasetype
-msgid "Database Type"
+msgid "Database type"
 msgstr "Tipus de base de dades"
 
 #: u_translation.rsdatafiles
-msgid "Data Files :"
+msgid "Data files:"
 msgstr "Fitxers de dades"
 
 #: u_translation.rsdatafilescdr
-msgid "Data Files, CDrom"
+msgid "Data files, CD-ROM"
 msgstr "Fitxers de dades, CD-Rom"
 
 #: u_translation.rsdatamaintena
-msgid "Data Maintenance"
+msgid "Data maintenance"
 msgstr "Manteniment dades"
 
 #: u_translation.rsdatastartonl
-msgid "Data start on line %s"
+msgid "Data starts on line %s"
 msgstr "Les dades comencen a la línia %s"
 
 #: u_translation.rsdate
@@ -901,7 +905,7 @@ msgid "Date"
 msgstr "Data"
 
 #: u_translation.rsdateformat
-msgid "Date Format"
+msgid "Date format"
 msgstr "Format de la data"
 
 #: u_translation.rsdatefrom
@@ -909,15 +913,15 @@ msgid "Date from"
 msgstr "Des de"
 
 #: u_translation.rsdatesmaytake
-msgid "dates may take a long time. Do you want to continue ?"
+msgid "dates may take a long time. Do you want to continue?"
 msgstr "dates poden prendre molt de temps. Voleu continuar?"
 
 #: u_translation.rsdatetime
-msgid "Date / Time"
+msgid "Date / time"
 msgstr "Data / Hora"
 
 #: u_translation.rsdatetime2
-msgid "Date/Time"
+msgid "Date/time"
 msgstr "Data/Hora"
 
 #: u_translation.rsday
@@ -933,7 +937,7 @@ msgid "Day Time"
 msgstr "Temps de dia"
 
 #: u_translation.rsdbinsertfail
-msgid "DB insert failed for %s :%s"
+msgid "DB insert failed for %s: %s"
 msgstr "Error d'inserció a BD per a %s :%s"
 
 #: u_translation.rsdbname
@@ -957,7 +961,7 @@ msgid "Decimal hours"
 msgstr "Hores decimals"
 
 #: u_translation.rsdecimalsouth
-msgid "Decimal South Polar Distance"
+msgid "Decimal south polar distance"
 msgstr "Distància al pol sud"
 
 #: u_translation.rsdeclination
@@ -969,7 +973,7 @@ msgid "DEC options"
 msgstr " Opcions DEC"
 
 #: u_translation.rsdecrementtim
-msgid "Decrement Time"
+msgid "Decrement time"
 msgstr "Decrementa el temps"
 
 #: u_translation.rsdecturns
@@ -981,7 +985,7 @@ msgid "%sDEC turns:"
 msgstr "%svoltes DEC:"
 
 #: u_translation.rsdeepskycolou
-msgid "Deep-sky colour"
+msgid "Deep sky colour"
 msgstr "Color de cel profund"
 
 #: u_translation.rsdeepskyobjec
@@ -993,11 +997,11 @@ msgid "Default"
 msgstr "Per defecte"
 
 #: u_translation.rsdefaultbutto
-msgid "Default Button"
+msgid "Default button"
 msgstr "Botó per defecte"
 
 #: u_translation.rsdefaultcolor
-msgid "Default color"
+msgid "Default colour"
 msgstr "Color per defecte"
 
 #: u_translation.rsdefaultlabel
@@ -1005,15 +1009,15 @@ msgid "Default label"
 msgstr "Etiqueta per defecte"
 
 #: u_translation.rsdefaultmargi
-msgid "Default Margin"
+msgid "Default margin"
 msgstr "Marge per defecte"
 
 #: u_translation.rsdefaultnebul
-msgid "Default Nebulae parameters"
+msgid "Default nebulae parameters"
 msgstr "Paràmetres per defecte de les nebuloses"
 
 #: u_translation.rsdefaultoutli
-msgid "Default Outline parameters"
+msgid "Default outline parameters"
 msgstr "Paràmetres per defecte dels contorns"
 
 #: u_translation.rsdeg
@@ -1025,7 +1029,7 @@ msgid "Degree"
 msgstr "Graus"
 
 #: u_translation.rsdegreegridsp
-msgid "Degree Grid Spacing"
+msgid "Declination grid"
 msgstr "Espaiat en graus"
 
 #: u_translation.rsdegrees
@@ -1045,7 +1049,7 @@ msgid "Delete completed"
 msgstr "Supressió finalitzada"
 
 #: u_translation.rsdeletedailyd
-msgid "Delete daily data"
+msgid "Deleting the daily data"
 msgstr "Suprimeix les dades diàries"
 
 #: u_translation.rsdeletedsucce
@@ -1053,15 +1057,15 @@ msgid "Deleted successfully!"
 msgstr "Supressió acabada amb èxit!"
 
 #: u_translation.rsdeletefromel
-msgid "Delete from element table..."
+msgid "Deleting from the element table..."
 msgstr "Suprimeix de la taula d'elements..."
 
 #: u_translation.rsdeletefromel2
-msgid "Delete from element list..."
+msgid "Deleting from the element list..."
 msgstr "Suprimeix de la llista d'elements..."
 
 #: u_translation.rsdeletefrommo
-msgid "Delete from monthly table..."
+msgid "Deleting from the monthly table for jd<%s"
 msgstr "Suprimeix de la taula mensual..."
 
 #: u_translation.rsdeletefrommo2
@@ -1069,15 +1073,15 @@ msgid "Delete from monthly table for jd<%s"
 msgstr "Suprimeix de la taula mensual per a jd<%s"
 
 #: u_translation.rsdeletefromna
-msgid "Delete from name list..."
+msgid "Deleting from the name list..."
 msgstr "Suprimeix de la llista de noms..."
 
 #: u_translation.rsdeletemonthl
-msgid "Delete Monthly data "
+msgid "Delete monthly data "
 msgstr "Suprimeix les dades mensuals"
 
 #: u_translation.rsdeletemonthl2
-msgid "Delete Monthly data older than "
+msgid "Delete monthly data older than "
 msgstr "Suprimeix les dades mensuals més antigues que "
 
 #: u_translation.rsdeletempcdat
@@ -1089,7 +1093,7 @@ msgid "Delete previous data for this date."
 msgstr "Suprimeix les dades anteriors a aquesta data."
 
 #: u_translation.rsdeletethecur
-msgid "Delete the current location from the database ?"
+msgid "Delete the current location from the database?"
 msgstr "Voleu suprimir el lloc actual de la base de dades?"
 
 #: u_translation.rsdepressionof
@@ -1117,7 +1121,7 @@ msgid "Details"
 msgstr "Detalls"
 
 #: u_translation.rsdeviceport
-msgid "Device Port "
+msgid "Device port "
 msgstr "Port del telescopi"
 
 #: u_translation.rsdiam
@@ -1129,7 +1133,7 @@ msgid "Diameter"
 msgstr "Diàmetre"
 
 #: u_translation.rsdifferenttha
-msgid "%s (different than configured port, maybe busy or other error.)"
+msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (diferent del port configurat, potser està ocupat."
 
 #: u_translation.rsdimension
@@ -1137,7 +1141,7 @@ msgid "Dimension"
 msgstr "Dimensió"
 
 #: u_translation.rsdimensionand
-msgid "Dimension and Units"
+msgid "Dimension and units"
 msgstr "Dimensió i unitats"
 
 #: u_translation.rsdir
@@ -1153,7 +1157,7 @@ msgid "Directory not found %s"
 msgstr "El directori %s no trobat"
 
 #: u_translation.rsdisconnectte
-msgid "Disconnect Telescope"
+msgid "Disconnect telescope"
 msgstr "Desconnecta el telescopi"
 
 #: u_translation.rsdisplay
@@ -1169,11 +1173,11 @@ msgid "Display colour"
 msgstr "Color de presentació"
 
 #: u_translation.rsdisplayimage
-msgid "Display image of cataloged objects"
+msgid "Display images of catalogued objects"
 msgstr "Mostra una imatge dels objectes del catàleg"
 
 #: u_translation.rsdisplaylabel
-msgid "Display labels for all star catalog"
+msgid "Display labels for all star catalogs"
 msgstr "Mostra etiquetes per tots els catàlegs d'estels"
 
 #: u_translation.rsdisplaythech
@@ -1197,11 +1201,11 @@ msgid "Distance to the last object"
 msgstr "Distància a l'objecte precedent"
 
 #: u_translation.rsdonottakeacc
-msgid "Do not take account of comet fainter than magnitude"
+msgid "Do not take into account comets fainter than magnitude"
 msgstr "No tinguis en compte els cometes més febles que la magnitud"
 
 #: u_translation.rsdonottakeacc2
-msgid "Do not take account of asteroid fainter than magnitude"
+msgid "Do not take into account asteroids fainter than magnitude"
 msgstr "No tinguis en compte els asteroides més febles que la magnitud"
 
 #: u_translation.rsdot1
@@ -1213,7 +1217,7 @@ msgid "Doubles"
 msgstr "Dobles"
 
 #: u_translation.rsdoublestar
-msgid "Double Star"
+msgid "Double star"
 msgstr "Estel doble"
 
 #: u_translation.rsdownload
@@ -1229,19 +1233,19 @@ msgid "Download country details"
 msgstr "Descarrega els detalls del país"
 
 #: u_translation.rsdownloadlate
-msgid "Download latest orbital elements"
+msgid "Download the latest orbital elements"
 msgstr "Descarrega els elements orbitals"
 
 #: u_translation.rsdoyouwanttos
-msgid "Do you want to save the program setting now?"
+msgid "Do you want to save the program settings now?"
 msgstr "Voleu desar ara les opcions del programa?"
 
 #: u_translation.rsdrawalinetha
-msgid "Draw a line that represent the proper motion for the next "
+msgid "Draw a line that displays the proper motion for the next"
 msgstr " Dibuixa una línia mostrant el moviment propi per a "
 
 #: u_translation.rsdrawingtype
-msgid "Drawing Type"
+msgid "Drawing type"
 msgstr "Tipus de dibuix"
 
 #: u_translation.rsdrawline
@@ -1249,7 +1253,7 @@ msgid "Draw line"
 msgstr "Dibuixa línia"
 
 #: u_translation.rsdrawplanetas
-msgid "Draw Planet As"
+msgid "Draw planet as"
 msgstr "Mostra els planetes com"
 
 #: u_translation.rsdrawtheappar
@@ -1261,7 +1265,7 @@ msgid "Driver name"
 msgstr "Nom del driver"
 
 #: u_translation.rsdropdatabase
-msgid "Drop Database"
+msgid "Drop database"
 msgstr "Destrueix la base de dades"
 
 #: u_translation.rsdssrealsky
@@ -1269,7 +1273,7 @@ msgid "DSS RealSky"
 msgstr "DSS Realsky"
 
 #: u_translation.rsdtut
-msgid "DT - UT  : "
+msgid "DT - UT: "
 msgstr "TD - TU : "
 
 #: u_translation.rsduration
@@ -1277,7 +1281,7 @@ msgid "Duration"
 msgstr "Durada"
 
 #: u_translation.rsdynamictimed
-msgid "Dynamic Time difference with Universal Time"
+msgid "Dynamic time difference with Universal Time"
 msgstr "Diferència del temps dinàmic al temps universal"
 
 #: u_translation.rsearthshadow
@@ -1301,11 +1305,11 @@ msgid "Ecliptic"
 msgstr "Eclíptiques"
 
 #: u_translation.rseclipticcoor
-msgid "Ecliptic Coordinate"
+msgid "Ecliptic coordinates"
 msgstr "Coordenades eclíptiques"
 
 #: u_translation.rseclipticcoor3
-msgid "Ecliptic Coord."
+msgid "Ecliptic coord."
 msgstr "Coord. eclíptiques"
 
 #: u_translation.rsedit
@@ -1313,23 +1317,23 @@ msgid "Edit"
 msgstr "Edició"
 
 #: u_translation.rseditcolor
-msgid "Edit Color"
+msgid "Edit colour"
 msgstr "Modifica el color"
 
 #: u_translation.rseditlabel
-msgid "Edit Label"
+msgid "Edit label"
 msgstr "Modifica les etiquetes"
 
 #: u_translation.rseditlineoper
-msgid "Edit Line operation"
+msgid "Edit line operation"
 msgstr "Modifica l'acció"
 
 #: u_translation.rseditobjectty
-msgid "Edit Object Types"
+msgid "Edit object types"
 msgstr "Modifica els tipus d'objecte"
 
 #: u_translation.rseditunits
-msgid "Edit Units"
+msgid "Edit units"
 msgstr "Modifica les unitats"
 
 #: u_translation.rselong
@@ -1345,11 +1349,11 @@ msgid "End of object"
 msgstr "Fi de l'objecte"
 
 #: u_translation.rsendprocessin
-msgid "End processing: %s asteroids"
+msgid "End of processing: %s asteroids"
 msgstr "Fi del processat: %s asteroides"
 
 #: u_translation.rsephemeriscal
-msgid "Ephemeris Calendar"
+msgid "Ephemeris calendar"
 msgstr "Calendari de les efemèrides"
 
 #: u_translation.rsepoch
@@ -1365,11 +1369,11 @@ msgid "Epoch of maxima"
 msgstr "Moment del màxim"
 
 #: u_translation.rseqgrid
-msgid "Eq. Grid"
+msgid "Eq. grid"
 msgstr "Graella Eq."
 
 #: u_translation.rsequatorialco
-msgid "Equatorial Coordinate"
+msgid "Equatorial coordinates"
 msgstr "Coordenades equatorials"
 
 #: u_translation.rsequatorialco2
@@ -1377,11 +1381,11 @@ msgid "Equatorial coordinates, equinox: %s"
 msgstr "Coordenades equatorials, equinocci: %s"
 
 #: u_translation.rsequatorialco3
-msgid "Equatorial Coord."
+msgid "Equatorial coord."
 msgstr "Coord. equatorials"
 
 #: u_translation.rsequatorialmo
-msgid "Equatorial Mount"
+msgid "Equatorial mount"
 msgstr "Muntura equatorial"
 
 #: u_translation.rsequinox
@@ -1417,7 +1421,7 @@ msgid "Error! Please check the database parameters and load the picture package.
 msgstr "Error! Reviseu els paràmetres de la base de dades i carregueu el paquet de les imatges"
 
 #: u_translation.rsestimatedfil
-msgid "Estimated file size: %sMB %sDo you want to continue ?"
+msgid "Estimated file size: %sMB %sDo you want to continue?"
 msgstr "El fitxer té una mida d'uns %sMB %sVoleu continuar?"
 
 #: u_translation.rsestimatedtai
@@ -1461,7 +1465,7 @@ msgid "Eyepiece"
 msgstr "Ocular"
 
 #: u_translation.rsfailed
-msgid "Failed : %s"
+msgid "Failed: %s"
 msgstr "Error: %s"
 
 #: u_translation.rsfainter
@@ -1481,11 +1485,11 @@ msgid "Field Number"
 msgstr "Número del camp"
 
 #: u_translation.rsfieldofvisio
-msgid "Field of Vision"
+msgid "Field of vision"
 msgstr "Camp de visió"
 
 #: u_translation.rsfieldofvisio3
-msgid "Field of Vision Setting"
+msgid "Field of vision settings"
 msgstr "Paràmetres del camp de visió"
 
 #: u_translation.rsfieldofvisio5
@@ -1493,7 +1497,7 @@ msgid "Field of vision number :"
 msgstr "Número del camp:"
 
 #: u_translation.rsfieldtoowidt
-msgid "Field too width! Maximum is %s"
+msgid "Field too wide! Maximum is %s"
 msgstr "Camp massa ample! El màxim és %s"
 
 #: u_translation.rsfile
@@ -1505,7 +1509,7 @@ msgid "File not found!"
 msgstr "Fitxer no trobat!"
 
 #: u_translation.rsfilespath
-msgid "Files Path"
+msgid "Files path"
 msgstr "Directori"
 
 #: u_translation.rsfill
@@ -1517,7 +1521,7 @@ msgid "Fill Milky Way"
 msgstr "Reomple la Via Làctia"
 
 #: u_translation.rsfillwithhori
-msgid "Fill with horizon color"
+msgid "Fill with horizon colour"
 msgstr "Omple amb el color de l'horitzó"
 
 #: u_translation.rsfilter
@@ -1525,7 +1529,7 @@ msgid "Filter ->"
 msgstr "Filtre ->"
 
 #: u_translation.rsfilternebula
-msgid "Filter Deep Sky Objects"
+msgid "Filter deep sky objects"
 msgstr "Filtra  objectes  cel profund"
 
 #: u_translation.rsfilterstars
@@ -1537,7 +1541,7 @@ msgid "Find"
 msgstr "Busca"
 
 #: u_translation.rsfindercircle
-msgid "Finder circle (Eyepiece)"
+msgid "Finder circle (eyepiece)"
 msgstr "Cercle del buscador (ocular)"
 
 #: u_translation.rsfinderrectan
@@ -1549,23 +1553,23 @@ msgid "First 5000"
 msgstr "Primers 5000"
 
 #: u_translation.rsfirstchar
-msgid "First Char"
+msgid "First char"
 msgstr "Primer caràcter"
 
 #: u_translation.rsfitsfile
-msgid "FITS File"
+msgid "FITS file"
 msgstr "Fitxer  FITS"
 
 #: u_translation.rsfixedblack
-msgid "Fixed Black"
+msgid "Fixed black"
 msgstr "Fixat negre"
 
 #: u_translation.rsfixedskycolo
-msgid "Fixed sky color"
+msgid "Fixed sky colour"
 msgstr "Color del cel fix"
 
 #: u_translation.rsflamsteednum
-msgid "Flamsteed Number"
+msgid "Flamsteed number"
 msgstr "Número de Flamsteed"
 
 #: u_translation.rsfonts
@@ -1573,7 +1577,7 @@ msgid "Fonts"
 msgstr "Tipus de lletres"
 
 #: u_translation.rsforalargecat
-msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
+msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Per a un catàleg gran escolliu sempre Binari. Per a un de petit amb canvis freqüents de dades, trieu Text; això permet modificar el fitxer i veure immediatement el resultat sense processar-lo de nou."
 
 #: u_translation.rsfov
@@ -1585,7 +1589,7 @@ msgid "FOV:"
 msgstr "Camp:"
 
 #: u_translation.rsfovnumber
-msgid "fov number:"
+msgid "FOV number:"
 msgstr "Camp:"
 
 #: u_translation.rsfriday
@@ -1601,15 +1605,15 @@ msgid "FTP "
 msgstr "FTP"
 
 #: u_translation.rsftppassivemo
-msgid "FTP Passive Mode"
+msgid "FTP passive mode"
 msgstr "FTP mode passiu"
 
 #: u_translation.rsfullname
-msgid "Full Name"
+msgid "Full name"
 msgstr "Nom complet"
 
 #: u_translation.rsfullscreen
-msgid "Full Screen"
+msgid "Full screen"
 msgstr "Pantalla completa"
 
 #: u_translation.rsgalactic
@@ -1617,11 +1621,11 @@ msgid "Galactic"
 msgstr "Galàctiques"
 
 #: u_translation.rsgalacticcoor
-msgid "Galactic Coordinate"
+msgid "Galactic coordinates"
 msgstr "Coordenades galàctiques"
 
 #: u_translation.rsgalacticcoor2
-msgid "Galactic Coord."
+msgid "Galactic coord."
 msgstr "Coordenades galàctiques"
 
 #: u_translation.rsgalaxies
@@ -1633,10 +1637,12 @@ msgid "Galaxy"
 msgstr "Galàxies"
 
 #: u_translation.rsgalaxycluste
-msgid "Galaxy Cluster"
+msgctxt "u_translation.rsgalaxycluste"
+msgid "Galaxy cluster"
 msgstr "Cúmul de galàxies"
 
 #: u_translation.rsgalaxycluste2
+msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Cúmul de galàxies"
 
@@ -1653,7 +1659,7 @@ msgid "General catalog options"
 msgstr "Opcions generals de catàleg"
 
 #: u_translation.rsgeneralsetti
-msgid "General Setting"
+msgid "General settings"
 msgstr "Paràmetres generals"
 
 #: u_translation.rsgeocentric
@@ -1661,19 +1667,19 @@ msgid "Geocentric"
 msgstr "Geocèntrica"
 
 #: u_translation.rsgetasteroidl
-msgid "Get Asteroid list."
+msgid "Get the asteroids list."
 msgstr "Llista dels asteroides."
 
 #: u_translation.rsgetdssimage
-msgid "Get DSS Image"
+msgid "Get the DSS image"
 msgstr "Mostra una imatge DSS"
 
 #: u_translation.rsgetrecentmea
-msgid "Get recent measurement from JUPOS project"
+msgid "Get the recent GRS measurement from JUPOS project."
 msgstr "Obté mesures recents del projecte JUPOS"
 
 #: u_translation.rsglobularclus
-msgid "Globular Cluster"
+msgid "Globular cluster"
 msgstr "Cúmuls globulars"
 
 #: u_translation.rsgraphic
@@ -1689,7 +1695,7 @@ msgid "Greatest"
 msgstr "El més gran"
 
 #: u_translation.rsgreeksymbol
-msgid "Greek symbol"
+msgid "Greek symbols"
 msgstr "Símbol grec"
 
 #: u_translation.rsgreen
@@ -1697,11 +1703,11 @@ msgid "Green"
 msgstr "Verd"
 
 #: u_translation.rsgridsetting
-msgid "Grid Setting"
+msgid "Grid settings"
 msgstr "Paràmetres de les graelles"
 
 #: u_translation.rsgridspacing
-msgid "Grid Spacing"
+msgid "Grid spacing"
 msgstr "Espaiat de les graelles"
 
 #: u_translation.rsgrstransit
@@ -1717,7 +1723,7 @@ msgid "H absolute magnitude"
 msgstr "Magnitud absoluta H"
 
 #: u_translation.rshalfmassradi
-msgid "Half-Mass Radius"
+msgid "Half-mass radius"
 msgstr "Radi de semi-massa"
 
 #: u_translation.rshaltafter100
@@ -1725,7 +1731,7 @@ msgid "Halt after 1000 errors"
 msgstr "Para a més de 1000 errors"
 
 #: u_translation.rshbetamagnitu
-msgid "Hbeta Magnitude"
+msgid "H-Beta magnitude"
 msgstr "Magnitud Hbeta"
 
 #: u_translation.rsheight
@@ -1745,11 +1751,11 @@ msgid "Hide label"
 msgstr "Amaga l'etiqueta"
 
 #: u_translation.rshideobjectwi
-msgid "Hide object wider than"
+msgid "Hide objects wider than"
 msgstr "Amaga l'objecte si és més gran que"
 
 #: u_translation.rshighcolor
-msgid "High Color"
+msgid "High colour"
 msgstr "Color intens"
 
 #: u_translation.rshighsurfaceb
@@ -1761,7 +1767,7 @@ msgid "Horizon"
 msgstr "Horitzó"
 
 #: u_translation.rshostname
-msgid "Host Name:"
+msgid "Hostname:"
 msgstr "Servidor:"
 
 #: u_translation.rshour
@@ -1769,11 +1775,11 @@ msgid "Hour"
 msgstr "Hora"
 
 #: u_translation.rshourangle
-msgid "Hour Angle"
+msgid "Hour angle"
 msgstr "Angle horari"
 
 #: u_translation.rshourgridspac
-msgid "Hour Grid Spacing"
+msgid "Right ascension grid"
 msgstr "Espaiat en hores"
 
 #: u_translation.rshoursminutes
@@ -1781,19 +1787,19 @@ msgid "Hours, minutes, secondes"
 msgstr "Hores, minuts, segons"
 
 #: u_translation.rshttpproxy
-msgid "HTTP Proxy"
+msgid "HTTP proxy"
 msgstr "Proxy HTTP"
 
 #: u_translation.rsiconclickact
-msgid "Icon Click Action"
+msgid "Icon click action"
 msgstr ""
 
 #: u_translation.rsiconsize
-msgid "Icon Size"
+msgid "Icon size"
 msgstr "Mida de la icona"
 
 #: u_translation.rsicontime
-msgid "Icon Time Display"
+msgid "Icon time display"
 msgstr "Mostra la icona de l'hora"
 
 #: u_translation.rsillum
@@ -1801,15 +1807,15 @@ msgid "Illum."
 msgstr "Il·lum."
 
 #: u_translation.rsilluminatedf
-msgid "Illuminated Fraction"
+msgid "Illuminated fraction"
 msgstr "Part il·luminada"
 
 #: u_translation.rsimagedirecto
-msgid "Image Directory"
+msgid "Image directory"
 msgstr "Directori d'imatges"
 
 #: u_translation.rsimageoptions
-msgid "Image Options"
+msgid "Image options"
 msgstr "Opcions de les imatges"
 
 #: u_translation.rsinclination
@@ -1821,23 +1827,23 @@ msgid "Inclination="
 msgstr "Inclinació="
 
 #: u_translation.rsincrementfor
-msgid "Increment for Bright Stars"
+msgid "Increment for bright stars"
 msgstr "Augment de lluminositat"
 
 #: u_translation.rsincrementtim
-msgid "Increment Time"
+msgid "Increment time"
 msgstr "Incrementa el temps"
 
 #: u_translation.rsindicatehere
-msgid "Indicate here how to compute the require value from the data stored in the catalog text file."
+msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
 msgstr "Indiqueu com calcular el valor a partir de les dades del catàleg."
 
 #: u_translation.rsindicatehowt
-msgid "Indicate how to recognize the object size unit :"
+msgid "Indicate how to recognize the object size unit:"
 msgstr "Indiqueu com reconèixer les unitats de les dimensions dels objectes:"
 
 #: u_translation.rsindicatethes
-msgid "Indicate the string identifier for each type of object :"
+msgid "Indicate the string identifier for each type of object:"
 msgstr "Indiqueu el text que identifica cada tipus d'objecte: "
 
 #: u_translation.rsindicatethes2
@@ -1845,23 +1851,23 @@ msgid "Indicate the string for each draw operation"
 msgstr "Indiqueu el text per a cada operació de dibuix"
 
 #: u_translation.rsindicatethes3
-msgid "Indicate the string for each color"
+msgid "Indicate the string for each colour"
 msgstr "Indiqueu el text per a cada color"
 
 #: u_translation.rsindidriver
-msgid "INDI Driver"
+msgid "INDI driver"
 msgstr "Driver INDI"
 
 #: u_translation.rsindidriverse
-msgid "INDI Driver setting"
+msgid "INDI driver settings"
 msgstr "Paràmetres del driver INDI"
 
 #: u_translation.rsindiserverho
-msgid "INDI Server Host "
+msgid "INDI server host "
 msgstr "Servidor INDI"
 
 #: u_translation.rsindiserverpo
-msgid "INDI server Port"
+msgid "INDI server port"
 msgstr "Port servidor INDI"
 
 #: u_translation.rsindrive
@@ -1877,15 +1883,15 @@ msgid "Information detail"
 msgstr "Informació detallada"
 
 #: u_translation.rsinitializeda
-msgid "Initialize Database"
+msgid "Initialize database"
 msgstr "Inicialitza la base de dades"
 
 #: u_translation.rsinputcatalog
-msgid "Input Catalog files"
+msgid "Input catalog files"
 msgstr "Fitxers del catàleg"
 
 #: u_translation.rsinsertfailed
-msgid "insert failed line %s : %s"
+msgid "insert failed line %s: %s"
 msgstr "Error d'inserció, línia %s : %s "
 
 #: u_translation.rsinsertfailed2
@@ -1897,7 +1903,7 @@ msgid "Internet"
 msgstr "Internet"
 
 #: u_translation.rsinvalidepoch
-msgid "invalid epoch on line%s : %s"
+msgid "invalid epoch on line%s: %s"
 msgstr "Època invàlida a la línia %s : %s"
 
 #: u_translation.rsinvalidfitsf
@@ -1909,7 +1915,7 @@ msgid "Invisible at this latitude"
 msgstr "Invisible des d'aquesta latitud"
 
 #: u_translation.rsiscoordinate
-msgid "Is coordinates epoch really %s ?"
+msgid "Is the coordinates epoch really %s?"
 msgstr "L'època de les coordenades és segur que és %s ?"
 
 #: u_translation.rsjd
@@ -1937,7 +1943,7 @@ msgid "Jupiter"
 msgstr "Júpiter"
 
 #: u_translation.rsjupitergrslo
-msgid "Jupiter GRS longitude :"
+msgid "Jupiter GRS longitude:"
 msgstr "Longitud de la gran taca roja"
 
 #: u_translation.rskm
@@ -1961,7 +1967,7 @@ msgid "Label"
 msgstr "Etiqueta"
 
 #: u_translation.rslabelobject
-msgid "Label Object"
+msgid "Label object"
 msgstr "Etiqueta dels objectes"
 
 #: u_translation.rslabels
@@ -1969,7 +1975,7 @@ msgid "Labels"
 msgstr "Etiquetes"
 
 #: u_translation.rslabeltext
-msgid "Label Text"
+msgid "Label text"
 msgstr "Text de l'etiqueta"
 
 #: u_translation.rslandscape
@@ -1989,7 +1995,7 @@ msgid "Language selection"
 msgstr "Tria de la llengua"
 
 #: u_translation.rslatinname
-msgid "Latin Name"
+msgid "Latin name"
 msgstr "Nom llatí"
 
 #: u_translation.rslatitude
@@ -2001,7 +2007,7 @@ msgid "Left"
 msgstr "Esquerra"
 
 #: u_translation.rsleftbar
-msgid "Left Bar"
+msgid "Left bar"
 msgstr "Barra de l'esquerra"
 
 #: u_translation.rslegal
@@ -2017,11 +2023,11 @@ msgid "Length"
 msgstr "Longitud"
 
 #: u_translation.rslessnebulae
-msgid "Less Deep Sky"
+msgid "Less deep sky"
 msgstr "Menys  cel profund"
 
 #: u_translation.rslessstars
-msgid "Less Stars"
+msgid "Less stars"
 msgstr "Menys estels"
 
 #: u_translation.rslibrationinl
@@ -2033,7 +2039,7 @@ msgid "Libration in longitude"
 msgstr "Libració en longitud"
 
 #: u_translation.rslicenseagree
-msgid "License Agreement"
+msgid "License agreement"
 msgstr "Acord de Llicència"
 
 #: u_translation.rslightyears
@@ -2045,15 +2051,15 @@ msgid "LII"
 msgstr "LII"
 
 #: u_translation.rslimitingmagn
-msgid "Limiting magnitude, list :"
+msgid "Limiting magnitude, list:"
 msgstr "Magnitud límit, llista :"
 
 #: u_translation.rslimitingmagn2
-msgid "Limiting magnitude :"
+msgid "Limiting magnitude:"
 msgstr "Magnitud límit :"
 
 #: u_translation.rslimitingsize
-msgid "Limiting Size (arcminutes) :"
+msgid "Limiting size (arcminutes):"
 msgstr "Mida límit (minuts) :"
 
 #: u_translation.rsline1
@@ -2077,7 +2083,7 @@ msgid "Lines"
 msgstr "Línies"
 
 #: u_translation.rslinesgrid
-msgid "Lines / Grid"
+msgid "Lines / grid"
 msgstr "Línies / Graelles"
 
 #: u_translation.rslinewidth
@@ -2085,7 +2091,7 @@ msgid "Line width "
 msgstr "Gruix de la línia"
 
 #: u_translation.rslinkallchart
-msgid "Link All Chart"
+msgid "Link all charts"
 msgstr "Enllaça totes les cartes"
 
 #: u_translation.rslistenonport
@@ -2105,7 +2111,7 @@ msgid "Load file"
 msgstr "Carrega fitxer"
 
 #: u_translation.rsloadmpcfile
-msgid "Load MPC File"
+msgid "Load MPC file"
 msgstr "Carrega el fitxer MPC"
 
 #: u_translation.rsloadmpcforma
@@ -2121,15 +2127,15 @@ msgid "Load project"
 msgstr "Carrega"
 
 #: u_translation.rslocalhorizon
-msgid "Local Horizon"
+msgid "Local horizon"
 msgstr "Horitzó local"
 
 #: u_translation.rslocalhorizon2
-msgid "Local Horizon File Name : "
+msgid "Local horizon file name: "
 msgstr "Nom del fitxer : "
 
 #: u_translation.rslocalsideral
-msgid "Local Sideral Time"
+msgid "Local sidereal time"
 msgstr "Hora sideral local"
 
 #: u_translation.rslockon
@@ -2145,11 +2151,11 @@ msgid "Longitude"
 msgstr "Longitud"
 
 #: u_translation.rslongitudeasc
-msgid "Longitude ascending Node"
+msgid "Longitude ascending node"
 msgstr "Longitud node ascendent"
 
 #: u_translation.rslosange
-msgid "Losange"
+msgid "Lozenge"
 msgstr "Losange"
 
 #: u_translation.rslowsurfacebr
@@ -2161,7 +2167,7 @@ msgid "Luminosity"
 msgstr "Lluminositat"
 
 #: u_translation.rslunareclipse
-msgid "Lunar Eclipses"
+msgid "Lunar eclipses"
 msgstr "Eclipsis lunars"
 
 #: u_translation.rsmag
@@ -2185,7 +2191,7 @@ msgid "Magnitude at minima"
 msgstr "Magnitud al mínim"
 
 #: u_translation.rsmagnitudeban
-msgid "Magnitude Band"
+msgid "Magnitude band"
 msgstr "Banda de magnitud"
 
 #: u_translation.rsmagnitudedif
@@ -2193,11 +2199,11 @@ msgid "Magnitude difference"
 msgstr "Diferència de magnitud"
 
 #: u_translation.rsmagnitudeerr
-msgid "Magnitude Error"
+msgid "Magnitude error"
 msgstr "Error de magnitud"
 
 #: u_translation.rsmagnitudefai
-msgid "magnitude fainter than the stars."
+msgid "magnitudes fainter than the stars."
 msgstr "magnituds més febles que els estels"
 
 #: u_translation.rsmagnitudetyc
@@ -2209,19 +2215,19 @@ msgid "Magnitude Tycho VT"
 msgstr "Magnitud Tycho VT"
 
 #: u_translation.rsmaillist
-msgid "MailList"
+msgid "Mail list (Yahoo group)"
 msgstr "Llista de discussions"
 
 #: u_translation.rsmainbar
-msgid "Main Bar"
+msgid "Main bar"
 msgstr "Barra principal"
 
 #: u_translation.rsmanualmount
-msgid "Manual Mount"
+msgid "Manual mount"
 msgstr "Muntura manual"
 
 #: u_translation.rsmanualtelesc
-msgid "Manual Telescope"
+msgid "Manual telescope"
 msgstr "Telescopi manual"
 
 #: u_translation.rsmap
@@ -2229,7 +2235,7 @@ msgid "Map"
 msgstr "Carta"
 
 #: u_translation.rsmarkthechart
-msgid "Mark the chart center "
+msgid "Mark the centre of the chart"
 msgstr "Marca el centre del mapa"
 
 #: u_translation.rsmars
@@ -2329,15 +2335,15 @@ msgid "minutes"
 msgstr "minuts"
 
 #: u_translation.rsmirrorhorizo
-msgid "Mirror Horizontally"
+msgid "Mirror horizontally"
 msgstr "Mirall horitzontal"
 
 #: u_translation.rsmirrorvertic
-msgid "Mirror Vertically"
+msgid "Mirror vertically"
 msgstr "Mirall vertical"
 
 #: u_translation.rsmisclines
-msgid "Misc. Lines"
+msgid "Misc. lines"
 msgstr "Altres línies"
 
 #: u_translation.rsmodify
@@ -2357,23 +2363,23 @@ msgid "Moon"
 msgstr "Lluna"
 
 #: u_translation.rsmorenebulae
-msgid "More Deep Sky"
+msgid "More deep sky"
 msgstr "Més cel profund"
 
 #: u_translation.rsmoreoptions
-msgid "More Options"
+msgid "More options"
 msgstr "Més opcions"
 
 #: u_translation.rsmorestars
-msgid "More Stars"
+msgid "More stars"
 msgstr "Més estels"
 
 #: u_translation.rsmorethan1000
-msgid "More than 1000 errors! Process aborted."
+msgid "More than 1000 errors! The processing is aborted."
 msgstr "Més de 1000 errors! Procés interromput."
 
 #: u_translation.rsmorethanobje
-msgid "More than %s objects, result truncated."
+msgid "More than %s objects, the result is truncated."
 msgstr "Més de %s objectes, el resultat està truncat."
 
 #: u_translation.rsmorning
@@ -2389,27 +2395,27 @@ msgid "Move label"
 msgstr "Desplaça l'etiqueta"
 
 #: u_translation.rsmpcftp
-msgid "MPC Ftp"
+msgid "MPC FTP"
 msgstr "MPC Ftp"
 
 #: u_translation.rsmpchttp
-msgid "MPC Http"
+msgid "MPC HTTP"
 msgstr "MPC Http"
 
 #: u_translation.rsmultipleflag
-msgid "Multiple Flag"
+msgid "Multiple flag"
 msgstr "Banderola múltiple"
 
 #: u_translation.rsmultiplestar
-msgid "Multiple Star"
+msgid "Multiple star"
 msgstr "Estel múltiple"
 
 #: u_translation.rsmysqldatabas
-msgid "MySQL Database"
+msgid "MySQL database"
 msgstr "Base de dades MySQL"
 
 #: u_translation.rsnakedeye
-msgid "Naked Eye"
+msgid "Naked eye"
 msgstr "Ull nu"
 
 #: u_translation.rsnakedeyerefe
@@ -2425,27 +2431,27 @@ msgid "Nautical"
 msgstr "Nàutic"
 
 #: u_translation.rsnebula
-msgid "Deep Sky Object"
+msgid "Deep sky object"
 msgstr "Objecte de cel profund"
 
 #: u_translation.rsnebulacommon
-msgid "Deep Sky Common Name"
+msgid "Deep sky common name"
 msgstr "Nom comú de cel profund"
 
 #: u_translation.rsnebuladispla
-msgid "Deep Sky Objects Display"
+msgid "Deep sky objects display"
 msgstr "Mostra els objectes de cel profund"
 
 #: u_translation.rsnebulae
-msgid "Deep Sky Objects"
+msgid "Deep sky objects"
 msgstr "Objectes de cel profund"
 
 #: u_translation.rsnebulaefilte
-msgid "Deep Sky Filter"
+msgid "Deep sky filter"
 msgstr "Filtre de cel profund"
 
 #: u_translation.rsnebulaeoroth
-msgid "Deep Sky or other objects"
+msgid "Deep sky or other objects"
 msgstr "Cel profund o altres objectes"
 
 #: u_translation.rsnebulaeoutli
@@ -2453,7 +2459,7 @@ msgid "Nebulae outlines"
 msgstr "Contorn de nebuloses"
 
 #: u_translation.rsneighbor
-msgid "Neighbor"
+msgid "Neighbour"
 msgstr "Veïnatge"
 
 #: u_translation.rsneptune
@@ -2461,15 +2467,15 @@ msgid "Neptune"
 msgstr "Neptú"
 
 #: u_translation.rsnewchart
-msgid "New Chart"
+msgid "New chart"
 msgstr "Carta nova"
 
 #: u_translation.rsnewfindercir
-msgid "New Finder Circle"
+msgid "New finder circle"
 msgstr "Nou cercle"
 
 #: u_translation.rsnewlabel
-msgid "New Label"
+msgid "New label"
 msgstr "Nova etiqueta"
 
 #: u_translation.rsnext
@@ -2477,11 +2483,11 @@ msgid "Next   >>"
 msgstr "Següent  >>"
 
 #: u_translation.rsnightvision
-msgid "Night Vision"
+msgid "Night vision"
 msgstr "Visió de nit"
 
 #: u_translation.rsnightvisionb
-msgid "Night Vision Button"
+msgid "Night vision button"
 msgstr "Visió de nit"
 
 #: u_translation.rsnightvisionc
@@ -2493,11 +2499,11 @@ msgid "No."
 msgstr "No."
 
 #: u_translation.rsnoasteroidda
-msgid "No Asteroid data found!%sPlease load a MPC file first."
+msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "No hi ha dades dels asteroides!%sCarregueu un arxiu MPC."
 
 #: u_translation.rsnomargin
-msgid "No Margin"
+msgid "No margin"
 msgstr "Sense marge"
 
 #: u_translation.rsnone1
@@ -2505,7 +2511,7 @@ msgid "None"
 msgstr "Cap"
 
 #: u_translation.rsnonexistant
-msgid "Non Existant"
+msgid "Non-existent"
 msgstr "No existeix"
 
 #: u_translation.rsnonexistentu
@@ -2513,7 +2519,7 @@ msgid "Non-existent/unknown"
 msgstr "No existeix/desconegut"
 
 #: u_translation.rsnonvisiblese
-msgid "Non visible search result, zoom for more details"
+msgid "Non-visible search result. Zoom for more details, or check object filter settings."
 msgstr "Resultat de recerca no visible, feu zoom per més detalls"
 
 #: u_translation.rsnoobjecttolo
@@ -2525,15 +2531,15 @@ msgid "No picture"
 msgstr "No hi ha imatge"
 
 #: u_translation.rsnoprinterfou
-msgid "No Printer found!"
+msgid "No printer found!"
 msgstr "No trobo la impressora!"
 
 #: u_translation.rsnopropermo
-msgid ", no proper motion"
+msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr ", sense moviment propi"
 
 #: u_translation.rsnormalcolor
-msgid "Normal (color)"
+msgid "Normal (colour)"
 msgstr "Normal (color)"
 
 #: u_translation.rsnorth
@@ -2561,11 +2567,11 @@ msgid "%s not found"
 msgstr "%s no trobat"
 
 #: u_translation.rsnotfoundinan
-msgid "%s  Not found in any installed catalog index."
+msgid "%s  Not found in any of the installed catalog indices."
 msgstr "%s No trobat en els índex de catàlegs instal·lats."
 
 #: u_translation.rsnotfoundmayb
-msgid "%s Not found!%sMaybe the catalog is not installed, or wrong path in catalog setting."
+msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s no trobat!%sPotser que el catàleg no estigui instal·lat, o que  el directori indicat no sigui el correcte."
 
 #: u_translation.rsnow
@@ -2577,7 +2583,7 @@ msgid "Number of files"
 msgstr "Nombre de fitxers"
 
 #: u_translation.rsnumberofmont
-msgid "Number of Month"
+msgid "Number of months"
 msgstr "Nombre del mes"
 
 #: u_translation.rsnumberofnebu
@@ -2585,7 +2591,7 @@ msgid "Number of nebulae"
 msgstr "Nombre objectes cel profund"
 
 #: u_translation.rsnumberofstar
-msgid "Number of Stars"
+msgid "Number of stars"
 msgstr "Nombre d'estels"
 
 #: u_translation.rsnumberofstep
@@ -2593,7 +2599,7 @@ msgid "Number of steps"
 msgstr "Nombre de passos"
 
 #: u_translation.rsnutationaber
-msgid "Nutation ,  Aberration"
+msgid "Nutation, aberration"
 msgstr "Nutació i aberració"
 
 #: u_translation.rsobject
@@ -2601,27 +2607,27 @@ msgid "Object"
 msgstr "Objecte"
 
 #: u_translation.rsobjectbar
-msgid "Object Bar"
+msgid "Object bar"
 msgstr "Barra d'objectes"
 
 #: u_translation.rsobjectfilter
-msgid "Object Filter"
+msgid "Object filter"
 msgstr "Filtre d'objectes"
 
 #: u_translation.rsobjectfilter2
-msgid "Object Filter Setting"
+msgid "Object filter settings"
 msgstr "Paràmetres del filtre d'objectes"
 
 #: u_translation.rsobjectlist
-msgid "Object List"
+msgid "Object list"
 msgstr "Llista dels objectes"
 
 #: u_translation.rsobjectlistse
-msgid "Object List Setting"
+msgid "Object list settings"
 msgstr "Paràmetres de les llistes d'objectes"
 
 #: u_translation.rsobjectname
-msgid "Object Name"
+msgid "Object name"
 msgstr "Nom de l'objecte"
 
 #: u_translation.rsobjects
@@ -2641,7 +2647,7 @@ msgid "Observatory"
 msgstr "Observatori"
 
 #: u_translation.rsobservatoryd
-msgid "Observatory Database"
+msgid "Observatory database"
 msgstr "Base de dades"
 
 #: u_translation.rsobsolete
@@ -2697,7 +2703,7 @@ msgid "Open a chart"
 msgstr "Obre un mapa"
 
 #: u_translation.rsopencluster
-msgid "Open Cluster"
+msgid "Open cluster"
 msgstr "Cúmuls oberts"
 
 #: u_translation.rsopenthebitma
@@ -2713,7 +2719,7 @@ msgid "Orbit"
 msgstr "Òrbita"
 
 #: u_translation.rsorbitaleleme
-msgid "Orbital Elements"
+msgid "Orbital elements"
 msgstr "Elements orbitals"
 
 #: u_translation.rsorientation
@@ -2721,7 +2727,7 @@ msgid "Orientation"
 msgstr "Orientació"
 
 #: u_translation.rsorusealocalf
-msgid "Or use a local file :"
+msgid "Or use a local file:"
 msgstr "Utilitza el fitxer local:"
 
 #: u_translation.rsother
@@ -2733,11 +2739,11 @@ msgid "Other label"
 msgstr "Altra etiqueta"
 
 #: u_translation.rsotherlinesca
-msgid "Other Lines Catalogs"
+msgid "Other line-catalogs"
 msgstr "Altres catàlegs de línia"
 
 #: u_translation.rsoutputcatalo
-msgid "Output Catalog Type"
+msgid "Output catalog type"
 msgstr "Tipus del catàleg de sortida "
 
 #: u_translation.rsoutputcatalo2
@@ -2745,11 +2751,11 @@ msgid "Output catalog options"
 msgstr "Opcions del catàleg de sortida"
 
 #: u_translation.rsoutputdirect
-msgid "Output Directory"
+msgid "Output directory"
 msgstr "Directori de sortida"
 
 #: u_translation.rspagemarginin
-msgid "Page Margin in millimeter"
+msgid "Page margin in millimeters"
 msgstr "Marge en milímetres"
 
 #: u_translation.rsparallax
@@ -2773,11 +2779,11 @@ msgid "Path"
 msgstr "Directori"
 
 #: u_translation.rspathtosaveth
-msgid "Path to save the file :"
+msgid "Path to save the file:"
 msgstr "Camí del fitxer :"
 
 #: u_translation.rspathwidth
-msgid "Path Width"
+msgid "Path width"
 msgstr "Ample ombra"
 
 #: u_translation.rspenumbra
@@ -2805,7 +2811,7 @@ msgid "Phase"
 msgstr "Fase"
 
 #: u_translation.rsphotographic
-msgid "Photographic Plate"
+msgid "Photographic plate"
 msgstr "Placa fotogràfica"
 
 #: u_translation.rsphotographic2
@@ -2825,7 +2831,8 @@ msgid "Planet"
 msgstr "Planeta"
 
 #: u_translation.rsplanetaryneb
-msgid "Planetary Nebula"
+msgctxt "u_translation.rsplanetaryneb"
+msgid "Planetary nebula"
 msgstr "Nebuloses planetàries"
 
 #: u_translation.rsplanetaryneb2
@@ -2833,6 +2840,7 @@ msgid "Planetary nebulae"
 msgstr "Nebulosa planetària"
 
 #: u_translation.rsplanetaryneb3
+msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Nebuloses planetàries"
 
@@ -2841,15 +2849,15 @@ msgid "Planetary satellite"
 msgstr "Satèl·lit planetari"
 
 #: u_translation.rsplanetssetti
-msgid "Planets Setting"
+msgid "Planet settings"
 msgstr "Paràmetres dels planetes"
 
 #: u_translation.rsplatedefect
-msgid "Plate Defect"
+msgid "Plate defect"
 msgstr "Defecte fotogràfic"
 
 #: u_translation.rsplateiddatee
-msgid "Plate Id.    Date   Exp.  Margin  CD  Observatory"
+msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
 msgstr "Placa       Data   Exp.  Marge   CD  Observatori"
 
 #: u_translation.rspleasechecky
@@ -2861,11 +2869,11 @@ msgid "Please configure your DSS file path first."
 msgstr "Si us plau, configureu el camí cap els fitxers DSS."
 
 #: u_translation.rspleaseconfig2
-msgid "Please configure the orbital element URL!"
+msgid "Please configure the orbital elements URL!"
 msgstr "Si us plau, configureu la URL per als elements orbitals!"
 
 #: u_translation.rspleaseconfir
-msgid "Please confirm that the telescope is centered to %s"
+msgid "Please confirm that the telescope is pointed at %s"
 msgstr "Confirmeu que el telescopi està centrat sobre %s"
 
 #: u_translation.rspleaseentera
@@ -2881,11 +2889,11 @@ msgid "Please indicate a catalog long name"
 msgstr "Si us plau, indiqueu un nom llarg del catàleg"
 
 #: u_translation.rspleaseindica3
-msgid "Please indicate the directory where the catalog must to be build"
+msgid "Please indicate the directory where the catalog must be built"
 msgstr "Indiqueu el directori on s'ha de construir el catàleg"
 
 #: u_translation.rspleasemountr
-msgid "Please mount RealSky256 CD number"
+msgid "Please mount RealSky CD number"
 msgstr "Si us palu, entreu el CD-ROM Realsky256 número"
 
 #: u_translation.rspleasereport
@@ -2901,7 +2909,7 @@ msgid "Please try to reinstall the program."
 msgstr "Si us plau, proveu de reinstal·lar el programa"
 
 #: u_translation.rsplottheposit
-msgid "Plot the position of moving object."
+msgid "Plot the position of the moving object."
 msgstr "Dibuixa la posició dels objectes en moviment."
 
 #: u_translation.rspluto
@@ -2933,23 +2941,23 @@ msgid "Position"
 msgstr "Posició"
 
 #: u_translation.rspositionangl
-msgid "Position Angle"
+msgid "Position angle"
 msgstr "Angle de posició"
 
 #: u_translation.rspositionepoc
-msgid "Position Epoch"
+msgid "Position epoch"
 msgstr "Època de la posició"
 
 #: u_translation.rspostscript
-msgid "Postscript"
+msgid "PostScript"
 msgstr "Postscript"
 
 #: u_translation.rsprefixthealt
-msgid "Prefix the alternate names with their label"
+msgid "Prefix the alternative names with their label"
 msgstr "Prefixa el nom suplementari amb la seva etiqueta"
 
 #: u_translation.rsprepareacata
-msgid "Prepare a catalog CatGen"
+msgid "Prepare a catalog with CatGen"
 msgstr "Preparació d'un catàleg CatGen"
 
 #: u_translation.rspreparedata
@@ -2957,7 +2965,7 @@ msgid "Prepare data "
 msgstr "Prepareu les dades"
 
 #: u_translation.rspreparemonth
-msgid "Prepare Monthly Data"
+msgid "Prepare monthly data"
 msgstr "Dades mensuals"
 
 #: u_translation.rspressuremill
@@ -2973,7 +2981,7 @@ msgid "Print"
 msgstr "Imprimeix"
 
 #: u_translation.rsprintchart
-msgid "Print Chart"
+msgid "Print chart"
 msgstr "Impressió de la carta"
 
 #: u_translation.rsprinter
@@ -2985,7 +2993,7 @@ msgid "Printer legend"
 msgstr "Llegenda impresa"
 
 #: u_translation.rsprintersetup
-msgid "Printer Setup"
+msgid "Printer setup"
 msgstr "Opcions impressió"
 
 #: u_translation.rsprintmethod
@@ -3001,11 +3009,11 @@ msgid "Processing... %s"
 msgstr "En procés... %s"
 
 #: u_translation.rsprocessingen
-msgid "Processing ended. Total number of comet :%s"
+msgid "Processing ended. Total number of comets: %s"
 msgstr "Procés acabat. Nombre total de cometes :%s"
 
 #: u_translation.rsprocessingen2
-msgid "Processing ended. Total number of asteroid :%s"
+msgid "Processing ended. Total number of asteroids: %s"
 msgstr "Procés finalitzat. Nombre total d'asteroides :%s"
 
 #: u_translation.rsprocessingen3
@@ -3017,11 +3025,11 @@ msgid "Processing line %s"
 msgstr "Processat de la línia %s"
 
 #: u_translation.rsprogramdata
-msgid "Program Data "
+msgid "Program data "
 msgstr "Dades del programa"
 
 #: u_translation.rsprograminfor
-msgid "Program Information"
+msgid "Program information"
 msgstr "Informació del programa"
 
 #: u_translation.rsprogrammer
@@ -3033,7 +3041,7 @@ msgid "Progress"
 msgstr "En curs"
 
 #: u_translation.rsprogressmess
-msgid "Progress Messages"
+msgid "Progress messages"
 msgstr "Progressió"
 
 #: u_translation.rsprojection
@@ -3041,19 +3049,19 @@ msgid "Projection"
 msgstr "Projecció"
 
 #: u_translation.rsprojectionse
-msgid "Projection Setting"
+msgid "Projection settings"
 msgstr "Paràmetres de projecció"
 
 #: u_translation.rspropermotion
-msgid "Proper Motion in Right ascension"
+msgid "Proper motion in right ascension"
 msgstr "Moviment propi en ascensió recta"
 
 #: u_translation.rspropermotion2
-msgid "Proper Motion in Declination"
+msgid "Proper motion in declination"
 msgstr "Moviment propi en declinació"
 
 #: u_translation.rspropermotion3
-msgid "Proper Motion"
+msgid "Proper motion"
 msgstr "Moviment propi"
 
 #: u_translation.rsproportional
@@ -3081,15 +3089,15 @@ msgid "Quasar"
 msgstr "Quasar"
 
 #: u_translation.rsquickdelete
-msgid "Quick Delete"
+msgid "Quick delete"
 msgstr "Supressió ràpida"
 
 #: u_translation.rsquicklydelet
-msgid "Quickly delete all comet related data"
+msgid "Quickly delete all data related to comets"
 msgstr "Supressió ràpida de totes les dades dels cometes"
 
 #: u_translation.rsquicklydelet2
-msgid "Quickly delete all asteroid related data"
+msgid "Quickly delete all data related to asteroids"
 msgstr "Supressió ràpida de totes les dades dels asteroides"
 
 #: u_translation.rsquickstartgu
@@ -3101,7 +3109,7 @@ msgid "RA"
 msgstr "AR"
 
 #: u_translation.rsradialveloci
-msgid "Radial Velocity"
+msgid "Radial velocity"
 msgstr "Velocitat radial"
 
 #: u_translation.rsrange
@@ -3113,7 +3121,7 @@ msgid "RA options"
 msgstr "Opcions AR"
 
 #: u_translation.rsrasterresolu
-msgid "Raster Resolution"
+msgid "Raster resolution"
 msgstr "Resolució raster"
 
 #: u_translation.rsraturns
@@ -3137,7 +3145,7 @@ msgid "RealSky South"
 msgstr "RealSky sud"
 
 #: u_translation.rsrecognizeuni
-msgid "Recognize Units or Object type from the file:"
+msgid "Recognize units or object type from the file:"
 msgstr "Identifica les unitats o el tipus des del fitxer:"
 
 #: u_translation.rsred
@@ -3145,7 +3153,7 @@ msgid "Red"
 msgstr "Vermell"
 
 #: u_translation.rsredmagnitude
-msgid "Red Magnitude"
+msgid "Red magnitude"
 msgstr "Magnitud en vermell"
 
 #: u_translation.rsredo
@@ -3153,11 +3161,11 @@ msgid "Redo"
 msgstr "Refés"
 
 #: u_translation.rsredolastchan
-msgid "Redo Last Change"
+msgid "Redo last change"
 msgstr "Refés l'últim canvi"
 
 #: u_translation.rsreducedetail
-msgid "Reduce detail when moving the chart"
+msgid "Reduce details when moving the chart"
 msgstr "Reduix detalls quan moguis la carta"
 
 #: u_translation.rsreference
@@ -3173,23 +3181,23 @@ msgid "Refresh"
 msgstr "Refresca"
 
 #: u_translation.rsreleasenotes
-msgid "Release Notes"
+msgid "Release notes"
 msgstr "Notes de l'edició"
 
 #: u_translation.rsremoveallcir
-msgid "Remove All Circles"
+msgid "Remove all circles"
 msgstr "Suprimeix tots els cercles"
 
 #: u_translation.rsremovealllab
-msgid "Remove All Labels"
+msgid "Remove all labels"
 msgstr "Suprimeix totes les etiquetes"
 
 #: u_translation.rsremovelastci
-msgid "Remove Last Circle"
+msgid "Remove last circle"
 msgstr "Suprimeix el darrer cercle"
 
 #: u_translation.rsremovelastla
-msgid "Remove Last Label"
+msgid "Remove last label"
 msgstr "Suprimeix la darrera etiqueta"
 
 #: u_translation.rsreplacedby
@@ -3201,15 +3209,15 @@ msgid "Report a problem"
 msgstr "Indiqueu un problema"
 
 #: u_translation.rsrequesttimeo
-msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
+msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
 msgstr "Petició fora de temps. Probablement heu demanat una àrea que demana massa temps de procés en el servidor remot"
 
 #: u_translation.rsrequiredfiel
-msgid "Required field missing !"
+msgid "Required field missing!"
 msgstr "Falta omplir camp obligat!"
 
 #: u_translation.rsrequirexplan
-msgid "(require Xplanet 1.2.0)"
+msgid "(requires Xplanet 1.2.0)"
 msgstr "(fa falta Xplanet-1.2.0)"
 
 #: u_translation.rsreset
@@ -3217,11 +3225,11 @@ msgid "Reset"
 msgstr "Anul·lació"
 
 #: u_translation.rsresetalllabe
-msgid "Reset All Labels"
+msgid "Reset all labels"
 msgstr "Reinicialitza totes les etiquetes"
 
 #: u_translation.rsresetchart
-msgid "Reset Chart"
+msgid "Reset chart"
 msgstr "Restaura la carta"
 
 #: u_translation.rsresetchartan
@@ -3273,11 +3281,11 @@ msgid "Rise time"
 msgstr "Hora de sortida"
 
 #: u_translation.rsrotateleft
-msgid "Rotate Left"
+msgid "Rotate left"
 msgstr "Rotació a l'esquerra"
 
 #: u_translation.rsrotateright
-msgid "Rotate Right"
+msgid "Rotate right"
 msgstr "Rotació a la dreta"
 
 #: u_translation.rsrotation
@@ -3293,7 +3301,7 @@ msgid "Satellite"
 msgstr "Satèl·lit"
 
 #: u_translation.rssatring
-msgid "Sat.Ring"
+msgid "Sat. ring"
 msgstr "Anells de Saturn"
 
 #: u_translation.rssaturday
@@ -3309,31 +3317,31 @@ msgid "Save"
 msgstr "Desa-ho"
 
 #: u_translation.rssaveas
-msgid "Save As..."
+msgid "Save as..."
 msgstr "Desa-ho com..."
 
 #: u_translation.rssaveconfigur
-msgid "Save Configuration Now"
+msgid "Save configuration now"
 msgstr "Desa la configuració ara"
 
 #: u_translation.rssaveconfigur2
-msgid "Save Configuration On Exit"
+msgid "Save configuration on exit"
 msgstr "Desa la configuració en sortir"
 
 #: u_translation.rssaveimage
-msgid "Save Image..."
+msgid "Save image..."
 msgstr "Desa la imatge..."
 
 #: u_translation.rssaveproject
-msgid "Save Project"
+msgid "Save project"
 msgstr "Desa el projecte"
 
 #: u_translation.rssavethecurre
-msgid "Save the current chart"
+msgid "Save the active chart"
 msgstr "Desa la carta actual"
 
 #: u_translation.rssavetofile
-msgid "Save to File"
+msgid "Save to file"
 msgstr "Desa-ho"
 
 #: u_translation.rsscandirector
@@ -3341,11 +3349,11 @@ msgid "Scan directory"
 msgstr "Escaneja el directori"
 
 #: u_translation.rsscreenandsta
-msgid "Screen and Status Bar"
+msgid "Screen and status bar"
 msgstr "Pantalla i barra d'estat"
 
 #: u_translation.rsscrollbar
-msgid "Scroll Bar"
+msgid "Scroll bar"
 msgstr "Barra de desplaçament"
 
 #: u_translation.rssday
@@ -3361,7 +3369,7 @@ msgid "Search for"
 msgstr "Busca"
 
 #: u_translation.rssearchindex
-msgid "Search Index"
+msgid "Search index"
 msgstr "Índex de recerca"
 
 #: u_translation.rssec
@@ -3381,11 +3389,11 @@ msgid "Seconds"
 msgstr "Segons"
 
 #: u_translation.rsselectall
-msgid "Select All"
+msgid "Select all"
 msgstr "Selecciona-ho tot"
 
 #: u_translation.rsselectplatef
-msgid "Select plate from list"
+msgid "Select a plate from the list"
 msgstr "Trieu la placa de la llista"
 
 #: u_translation.rsselectthefie
@@ -3401,7 +3409,7 @@ msgid "Select the telescope interface"
 msgstr "Seleccioneu la interfície del telescopi"
 
 #: u_translation.rsselectthetyp
-msgid "Select the type of object in your catalog"
+msgid "Select the type of objects in your catalog"
 msgstr "Escolliu el tipus d'objecte del catàleg"
 
 #: u_translation.rssemi
@@ -3409,11 +3417,11 @@ msgid "Semi"
 msgstr "Semi"
 
 #: u_translation.rssemimajoraxi
-msgid "Semimajor Axis"
+msgid "Semimajor axis"
 msgstr "Semieix major"
 
 #: u_translation.rssendcharttop
-msgid "Send chart to printer."
+msgid "Send the chart to the printer."
 msgstr "Envia el mapa a la impressora"
 
 #: u_translation.rsseparation
@@ -3429,15 +3437,15 @@ msgid "Server command "
 msgstr "Comandament del servidor"
 
 #: u_translation.rsserverinform
-msgid "Server Information"
+msgid "Server information"
 msgstr "Informació del servidor"
 
 #: u_translation.rsserveripinte
-msgid "Server IP Interface :"
+msgid "Server IP interface:"
 msgstr "Interfície IP de la xarxa:"
 
 #: u_translation.rsserveripport
-msgid "Server IP Port :"
+msgid "Server IP port:"
 msgstr "Port del servidor IP:"
 
 #: u_translation.rsset
@@ -3457,7 +3465,7 @@ msgid "Set FOV to"
 msgstr "Camp de visió a"
 
 #: u_translation.rssethowthemou
-msgid "Set how the mount move on each axis when you turn the driving knob. Then the Telescope button show you the turns you must do to go from one object to another."
+msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
 msgstr "Indiqueu el moviment de la muntura per cada volta del cargol. Així, el botó Telescopi del menú us indicarà el nombre de voltes a fer per anar d'un objecte a un altre."
 
 #: u_translation.rssetobservato
@@ -3473,11 +3481,11 @@ msgid "H"
 msgstr "H"
 
 #: u_translation.rsshowallsky
-msgid "Show All Sky"
+msgid "Show all sky"
 msgstr "Mostra tot el cel"
 
 #: u_translation.rsshowasteroid
-msgid "Show Asteroids"
+msgid "Show asteroids"
 msgstr "Mostra els asteroides"
 
 #: u_translation.rsshowasteroid3
@@ -3485,7 +3493,7 @@ msgid "Show asteroids on the chart"
 msgstr "Mostra els asteroides en el mapa"
 
 #: u_translation.rsshowcomets
-msgid "Show Comets"
+msgid "Show comets"
 msgstr "Mostra els cometes"
 
 #: u_translation.rsshowcometson
@@ -3493,47 +3501,47 @@ msgid "Show comets on the chart"
 msgstr "Mostra els cometes"
 
 #: u_translation.rsshowconstell
-msgid "Show Constellation Line"
+msgid "Show constellation lines"
 msgstr "Mostra les figures de les constel·lacions"
 
 #: u_translation.rsshowconstell2
-msgid "Show Constellation Limit"
+msgid "Show constellation limits"
 msgstr "Mostra els límits de les constel·lacions"
 
 #: u_translation.rsshowconstell3
-msgid "Show Constellation Figure"
+msgid "Show constellation figures"
 msgstr "Mostra les figures de constel·lacions"
 
 #: u_translation.rsshowconstell4
-msgid "Show Constellation Boundary"
+msgid "Show constellation boundaries"
 msgstr "Mostra els límits de constel·lacions"
 
 #: u_translation.rsshowcoordina
-msgid "Show Coordinate Grid"
+msgid "Show coordinates grid"
 msgstr "Mostra la graella de coordenades"
 
 #: u_translation.rsshowearthsha
-msgid "Show Earth Shadow  (Lunar eclipses)"
+msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Mostra l'ombra de la Terra (eclipsis lunars)"
 
 #: u_translation.rsshowecliptic
-msgid "Show Ecliptic"
+msgid "Show ecliptic"
 msgstr "Mostra l'eclíptica"
 
 #: u_translation.rsshowgalactic
-msgid "Show Galactic Equator"
+msgid "Show galactic equator"
 msgstr "Mostra l'equador galàctic"
 
 #: u_translation.rsshowgrid
-msgid "Show Grid"
+msgid "Show grid"
 msgstr "Mostra la graella"
 
 #: u_translation.rsshowgridlabe
-msgid "Show Grid Label"
+msgid "Show grid label"
 msgstr "Valors a les graelles"
 
 #: u_translation.rsshowhidedssi
-msgid "Show/Hide DSS image"
+msgid "Show/hide DSS image"
 msgstr "Mostra/Amaga les imatges DSS"
 
 #: u_translation.rsshowirvariab
@@ -3541,15 +3549,15 @@ msgid "Show IR variables"
 msgstr "Mostra les variables IR"
 
 #: u_translation.rsshowlabels
-msgid "Show Labels"
+msgid "Show labels"
 msgstr "Mostra les etiquetes"
 
 #: u_translation.rsshowlines
-msgid "Show Lines"
+msgid "Show lines"
 msgstr "Mostra les línies"
 
 #: u_translation.rsshowmark
-msgid "Show Mark"
+msgid "Show mark"
 msgstr "Mostra les marques del buscador"
 
 #: u_translation.rsshowmilkyway
@@ -3557,11 +3565,11 @@ msgid "Show Milky Way"
 msgstr "Mostra la Via Làctia"
 
 #: u_translation.rsshownebulae
-msgid "Show Deep Sky Objects"
+msgid "Show deep sky objects"
 msgstr "Mostra els objectes de cel profund"
 
 #: u_translation.rsshowobjectbe
-msgid "Show Object below the horizon"
+msgid "Show objects below the horizon"
 msgstr "Mostra els objectes sota l'horitzó"
 
 #: u_translation.rsshowobjectpi
@@ -3569,23 +3577,23 @@ msgid "Show object pictures on the chart"
 msgstr "Mostra les imatges en el mapa"
 
 #: u_translation.rsshowobjects
-msgid "Show Objects"
+msgid "Show objects"
 msgstr "Mostra els objectes"
 
 #: u_translation.rsshowpictures
-msgid "Show Pictures"
+msgid "Show pictures"
 msgstr "Mostra les imatges"
 
 #: u_translation.rsshowplaneton
-msgid "Show Planet on the Chart"
+msgid "Show planets on the chart"
 msgstr "Mostra els planetes en el mapa"
 
 #: u_translation.rsshowplanets
-msgid "Show Planets"
+msgid "Show planets"
 msgstr "Mostra els planetes"
 
 #: u_translation.rsshowstars
-msgid "Show Stars"
+msgid "Show stars"
 msgstr "Mostra els estels"
 
 #: u_translation.rsshowthispict
@@ -3593,11 +3601,11 @@ msgid "Show this picture"
 msgstr "Mostra aquesta imatge"
 
 #: u_translation.rssideral
-msgid "Sideral"
+msgid "Sidereal"
 msgstr "Sideral"
 
 #: u_translation.rssiderealday
-msgid "Sidereal Day"
+msgid "Sidereal day"
 msgstr "Dia sideral"
 
 #: u_translation.rssimulation
@@ -3609,15 +3617,15 @@ msgid "Size"
 msgstr "Mida"
 
 #: u_translation.rsskybackgroun
-msgid "Sky Background Color"
+msgid "Sky background colour"
 msgstr "Mostra el color del cel"
 
 #: u_translation.rsskycharthome
-msgid "Skychart Homepage"
+msgid "Skychart homepage"
 msgstr "Pàgina web de Cartes del Cel"
 
 #: u_translation.rsskycharticon
-msgid "Skychart Icon Setup"
+msgid "Skychart icon setup"
 msgstr "Configuració de les icones de CdC"
 
 #: u_translation.rsskycharts
@@ -3625,7 +3633,7 @@ msgid "Sky Charts"
 msgstr "Cartes del Cel"
 
 #: u_translation.rsskycolour
-msgid "Sky Colour"
+msgid "Sky colour"
 msgstr "Color del cel"
 
 #: u_translation.rsslew
@@ -3649,15 +3657,15 @@ msgid "Socket error %s.  %s"
 msgstr "Error de socket %s.  %s"
 
 #: u_translation.rssolardistanc
-msgid "Solar Distance"
+msgid "Solar distance"
 msgstr "Distància al sol"
 
 #: u_translation.rssolareclipse
-msgid "Solar Eclipses"
+msgid "Solar eclipses"
 msgstr "Eclipsis solars"
 
 #: u_translation.rssolarelongat
-msgid "Solar Elongation"
+msgid "Solar elongation"
 msgstr "Elongació solar"
 
 #: u_translation.rssolarsystem
@@ -3665,19 +3673,19 @@ msgid "Solar System"
 msgstr "Sistema solar"
 
 #: u_translation.rssolarsystemo
-msgid "Solar System object"
+msgid "Solar system object"
 msgstr "Objecte del sistema solar"
 
 #: u_translation.rssolarsystems
-msgid "Solar System Setting"
+msgid "Solar system settings"
 msgstr "Paràmetres del sistema solar"
 
 #: u_translation.rssomerecordsw
-msgid "Some records where rejected, see file %sreject.txt for details"
+msgid "Some records where rejected, see the file %sreject.txt for details."
 msgstr "Alguns registres de gravació han estat rebutjats, vegeu el fitxer  %sreject.txt per més detalls"
 
 #: u_translation.rssomethinggow
-msgid "Something go wrong during program initialization. We must now close"
+msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Alguna cosa ha anat malament en iniciar el programa. Cal tancar-lo ara"
 
 #: u_translation.rssortbyra
@@ -3697,7 +3705,7 @@ msgid "South"
 msgstr "Sud"
 
 #: u_translation.rsspectralclas
-msgid "Spectral Class"
+msgid "Spectral class"
 msgstr "Classe espectral"
 
 #: u_translation.rsspline
@@ -3713,7 +3721,7 @@ msgid "SQL database software is probably not installed!"
 msgstr "El programa de base de dades SQL probablement no està instal·lat"
 
 #: u_translation.rssqlitedataba
-msgid "Sqlite Database"
+msgid "SQLite database"
 msgstr "Base de dades Sqlite"
 
 #: u_translation.rssquare
@@ -3725,7 +3733,7 @@ msgid "S"
 msgstr "S"
 
 #: u_translation.rsstandardcolo
-msgid "Standard  Color"
+msgid "Standard  colour"
 msgstr "Color estàndard"
 
 #: u_translation.rsstar
@@ -3733,23 +3741,23 @@ msgid "Star"
 msgstr "Estel"
 
 #: u_translation.rsstarcolourbv
-msgid "Star colour (B-V) :"
+msgid "Star colour (B-V):"
 msgstr "Color dels estels (B-V):"
 
 #: u_translation.rsstarcommonna
-msgid "Star Common Name"
+msgid "Star common name"
 msgstr "Nom comú d'estel"
 
 #: u_translation.rsstardisplay
-msgid "Star Display"
+msgid "Star display"
 msgstr "Mostra els estels"
 
 #: u_translation.rsstardisplayp
-msgid "Star Display  Properties"
+msgid "Star display properties"
 msgstr "Paràmetres de presentació dels estels"
 
 #: u_translation.rsstarlabel
-msgid "Star Label"
+msgid "Star label"
 msgstr "Etiquetes dels estels"
 
 #: u_translation.rsstars
@@ -3757,11 +3765,11 @@ msgid "Stars"
 msgstr "Estels"
 
 #: u_translation.rsstarsandnebu
-msgid "Stars and Deep Sky catalogs prepared with "
+msgid "Stars and deep sky catalogs prepared with "
 msgstr "Catàlegs preparats amb "
 
 #: u_translation.rsstarsfilter
-msgid "Stars Filter"
+msgid "Star filter"
 msgstr "Filtre dels estels"
 
 #: u_translation.rsstarsproperm
@@ -3769,7 +3777,7 @@ msgid "Stars proper motion options (if available in the catalog)"
 msgstr "Opcions del moviment propi dels estels (si hi és en el catàleg)"
 
 #: u_translation.rsstartmonth
-msgid "Start Month"
+msgid "Start month"
 msgstr "Mes d'inici"
 
 #: u_translation.rsstartofobjec
@@ -3777,7 +3785,7 @@ msgid "Start of object"
 msgstr "Inici de l'objecte"
 
 #: u_translation.rsstatusbar
-msgid "Status Bar"
+msgid "Status bar"
 msgstr "Barra d'estat"
 
 #: u_translation.rsstepunit
@@ -3813,7 +3821,7 @@ msgid "Surface"
 msgstr "Surperfície"
 
 #: u_translation.rssurfacebrigh
-msgid "Surface Brightness"
+msgid "Surface brightness"
 msgstr "Lluminositat superficial"
 
 #: u_translation.rssyear
@@ -3829,7 +3837,7 @@ msgid "Sync"
 msgstr "Sincro"
 
 #: u_translation.rssynodicmonth
-msgid "Synodic Month"
+msgid "Synodic month"
 msgstr "Mes sinòdic"
 
 #: u_translation.rssystem
@@ -3837,27 +3845,27 @@ msgid "System"
 msgstr "Sistema"
 
 #: u_translation.rssystemprinte
-msgid "System Printer"
+msgid "System printer"
 msgstr "Impressora del sistema"
 
 #: u_translation.rssystemsettin
-msgid "System Setting"
+msgid "System settings"
 msgstr "Paràmetres sistema"
 
 #: u_translation.rstabledonotex
-msgid "%sTable %s do not exist! %sPlease correct the error and retry."
+msgid "%sTable %s does not exist! %sPlease correct the error and retry."
 msgstr "%s la taula %s no existeix! %sCorregiu l'error i torneu a provar."
 
 #: u_translation.rstableexist
-msgid "%sTable exist %s"
+msgid "%sThis table exists: %s"
 msgstr "%s la taula %s existeix"
 
 #: u_translation.rstcpipconnect
-msgid "TCP/IP Connection"
+msgid "TCP/IP connection"
 msgstr "Connexió TCP/IP"
 
 #: u_translation.rstcpipserver
-msgid "TCP/IP Server"
+msgid "TCP/IP server"
 msgstr "Servidor TCP/IP"
 
 #: u_translation.rstcpipservice
@@ -3877,11 +3885,11 @@ msgid "Telescope not connected"
 msgstr "El telescopi no està connectat"
 
 #: u_translation.rstelescopeplu
-msgid "Telescope Plugin "
+msgid "Telescope plugin "
 msgstr "Connector (plugin) telesc."
 
 #: u_translation.rstelescopeset
-msgid "Telescope Setting"
+msgid "Telescope settings"
 msgstr "Paràmetres del telescopi"
 
 #: u_translation.rstelescopetyp
@@ -3905,7 +3913,7 @@ msgid "Text file catalog"
 msgstr "Catàleg en fitxer de text"
 
 #: u_translation.rstextsize
-msgid "Text Size"
+msgid "Text size"
 msgstr "Mida del text"
 
 #: u_translation.rstheme
@@ -3921,7 +3929,7 @@ msgid "There are %s objects in this field."
 msgstr "Hi ha %s objectes en aquest camp."
 
 #: u_translation.rsthisactionre
-msgid "This action replace all the database content for the country %s using fresh data from NGA and GNIS.%sAll your editing for this country will be lost except the location you added with a new name that will be kept.%sDo you want to continue ?"
+msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
 msgstr "Aquesta acció remplaça tota la base de dades del país %s amb dades fresques del NGA i GNIS.%sTotes les modificacions per a aquest país es perdran llevat dels llocs afegits amb nom nou.%sVoleu continuar ?"
 
 #: u_translation.rsthisfilewasn
@@ -3937,11 +3945,11 @@ msgid "Thu."
 msgstr "Dij."
 
 #: u_translation.rstilehorizont
-msgid "Tile Horizontally"
+msgid "Tile horizontally"
 msgstr "Divisió de pantalla horitzontal"
 
 #: u_translation.rstilevertical
-msgid "Tile Vertically"
+msgid "Tile vertically"
 msgstr "Divisió de pantalla vertical"
 
 #: u_translation.rstime
@@ -3949,15 +3957,15 @@ msgid "Time"
 msgstr "Hora"
 
 #: u_translation.rstimesimulati
-msgid "Time Simulation"
+msgid "Time simulation"
 msgstr "Simulació"
 
 #: u_translation.rstimeunits
-msgid "Time Units"
+msgid "Time units"
 msgstr "Unitats de temps"
 
 #: u_translation.rstimezone
-msgid "Time Zone"
+msgid "Time zone"
 msgstr "Zona horària"
 
 #: u_translation.rsto
@@ -3969,11 +3977,11 @@ msgid "Today"
 msgstr "Avui"
 
 #: u_translation.rstoolbar
-msgid "Tool Bar"
+msgid "Tool bar"
 msgstr "Barres d'eines"
 
 #: u_translation.rstoomanyopenw
-msgid "Too many open window, please close some chart."
+msgid "Too many open windows, please close some charts."
 msgstr "Massa finestres obertes, tanqueu algun mapa, si us plau."
 
 #: u_translation.rstop
@@ -3981,7 +3989,7 @@ msgid "Top"
 msgstr "Dalt"
 
 #: u_translation.rstopocentric
-msgid "TopoCentric"
+msgid "Topocentric"
 msgstr "Topocèntrica"
 
 #: u_translation.rstotal
@@ -3989,11 +3997,11 @@ msgid "Totality"
 msgstr "Totalitat"
 
 #: u_translation.rstotalradius
-msgid "Total Radius"
+msgid "Total radius"
 msgstr "Radi total"
 
 #: u_translation.rstousethisnew
-msgid "To use this new data you must now compute the Monthly Data"
+msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Per usar aquestes dades noves heu de calcular les dades mensuals"
 
 #: u_translation.rstransformati
@@ -4005,15 +4013,15 @@ msgid "Translator:"
 msgstr "Traductor:"
 
 #: u_translation.rstransparentl
-msgid "Transparent line mode (occultation)"
+msgid "Transparent line mode (occultations)"
 msgstr "Mode transparent (ocultacions)"
 
 #: u_translation.rstriplestar
-msgid "Triple Star"
+msgid "Triple star"
 msgstr "Estel triple"
 
 #: u_translation.rstropicalyear
-msgid "Tropical Year"
+msgid "Tropical year"
 msgstr "Any tròpic"
 
 #: u_translation.rstrueequatore
@@ -4029,7 +4037,7 @@ msgid "True solar"
 msgstr "Solar veritable"
 
 #: u_translation.rstrumplerclas
-msgid "Trumpler Class"
+msgid "Trumpler class"
 msgstr "Classe de Trumpler"
 
 #: u_translation.rstuesday
@@ -4061,11 +4069,11 @@ msgid "Type of coordinates"
 msgstr "Tipus de coordenades"
 
 #: u_translation.rstypeofobject
-msgid "Type of object to add to the list"
+msgid "Object types to add to the list"
 msgstr "Tipus d'objecte a incloure en la llista"
 
 #: u_translation.rstypeofvariab
-msgid "Type of Variability"
+msgid "Type of variability"
 msgstr "Tipus de variabilitat"
 
 #: u_translation.rsumbra
@@ -4085,7 +4093,7 @@ msgid "Undo"
 msgstr "Desfés"
 
 #: u_translation.rsundolastchan
-msgid "Undo Last Change"
+msgid "Undo last change"
 msgstr "Desfés el darrer canvi"
 
 #: u_translation.rsuniversaltim
@@ -4093,15 +4101,15 @@ msgid "Universal Time"
 msgstr "Temps Universal"
 
 #: u_translation.rsunknow
-msgid "Unknow"
+msgid "unknown"
 msgstr "Desconegut"
 
 #: u_translation.rsunknowobject
-msgid "Unknow object"
+msgid "Unknown object"
 msgstr "Objecte desconegut"
 
 #: u_translation.rsunlockchart
-msgid "Unlock Chart"
+msgid "Unlock chart"
 msgstr "Desbloca la carta"
 
 #: u_translation.rsupdate1
@@ -4113,7 +4121,7 @@ msgid "Updated successfully!"
 msgstr "Actualitzat correctament!"
 
 #: u_translation.rsupdateoraddt
-msgid "Update or add the current location to the database ?"
+msgid "Update/add the current location to the database?"
 msgstr "Poso al dia o afegeixo el lloc actual en la base de dades ?"
 
 #: u_translation.rsuranus
@@ -4133,7 +4141,7 @@ msgid "Use another DT-UT value"
 msgstr "Usa un altre valor TD-TU"
 
 #: u_translation.rsuseapresetco
-msgid "Use a preset colour scheme :"
+msgid "Use a preset colour scheme:"
 msgstr "Usa un esquema de color predefinit:"
 
 #: u_translation.rsusefultorepr
@@ -4141,7 +4149,7 @@ msgid "(useful to represent a flux)"
 msgstr "(útil per representar un flux)"
 
 #: u_translation.rsusehttpproxy
-msgid "Use HTTP Proxy"
+msgid "Use HTTP proxy"
 msgstr "Utilitza el proxy HTTP"
 
 #: u_translation.rsuseonlinedss
@@ -4149,19 +4157,19 @@ msgid "Use online DSS instead of RealSky"
 msgstr "Usa el DSS en línia en lloc de Realsky"
 
 #: u_translation.rsuseonlycatal
-msgid "Use only the catalog from the same group"
+msgid "Use only catalogs from one single group."
 msgstr "Useu sols catàlegs del mateix grup"
 
 #: u_translation.rsuserid
-msgid "Userid:"
+msgid "User id:"
 msgstr "Usuari"
 
 #: u_translation.rsusername
-msgid "User Name"
+msgid "User name"
 msgstr "Usuari"
 
 #: u_translation.rsusesubsampli
-msgid "Use subsampling to limit image size to"
+msgid "Use subsampling to limit the image size to"
 msgstr "Usa sub-mostreig per limitar la mida d'imatge a"
 
 #: u_translation.rsusesystemtim
@@ -4169,7 +4177,7 @@ msgid "Use system time"
 msgstr "Usa l'hora del sistema"
 
 #: u_translation.rsusetcpipserv
-msgid "Use TCP/IP Server"
+msgid "Use TCP/IP server"
 msgstr "Utilitza el servidor TCP/IP"
 
 #: u_translation.rsusetheproper
@@ -4177,7 +4185,7 @@ msgid "Use the proper motion to correct the position for the given epoch"
 msgstr "Usa el moviment propi per corregir la posició per a l'època donada"
 
 #: u_translation.rsusethisfield
-msgid "Use this field as an Alternate Name"
+msgid "Use this field as an alternative name"
 msgstr "Usa aquest camp com a nom alternatiu"
 
 #: u_translation.rsusexplanet
@@ -4185,7 +4193,7 @@ msgid "Use Xplanet"
 msgstr "Utilitza Xplanet"
 
 #: u_translation.rsusingexistin
-msgid "Using existing file %s"
+msgid "Using the existing file %s"
 msgstr "Usant el fitxer existent %s"
 
 #: u_translation.rsut
@@ -4197,11 +4205,11 @@ msgid "Variables"
 msgstr "Variables"
 
 #: u_translation.rsvariablestar
-msgid "Variable Star"
+msgid "Variable star"
 msgstr "Estel variable"
 
 #: u_translation.rsvariablestar2
-msgid "Variable Stars"
+msgid "Variable stars"
 msgstr "Estels variables"
 
 #: u_translation.rsvenus
@@ -4217,19 +4225,19 @@ msgid "View"
 msgstr "Veure"
 
 #: u_translation.rsviewhorizon
-msgid "View Horizon"
+msgid "View horizon"
 msgstr "Mostra l'horitzó"
 
 #: u_translation.rsvisibilityfo
-msgid "Visibility for observatory"
+msgid "Visibility for your observatory"
 msgstr "Visibilitat per a l'observatori"
 
 #: u_translation.rsvisualmagnit
-msgid "Visual Magnitude"
+msgid "Visual magnitude"
 msgstr "Magnitud visual"
 
 #: u_translation.rswanttotracka
-msgid "Want to track an object before it rise ?"
+msgid "Do you want to track an object before it rises?"
 msgstr "Voleu veure els objectes abans de llur sortida ?"
 
 #: u_translation.rswarningcalcu
@@ -4237,19 +4245,19 @@ msgid "Warning! Calculation of"
 msgstr "Atenció! El càlcul per"
 
 #: u_translation.rswarningthecu
-msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
+msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
 msgstr "Compte! La data i el lloc d'observació han pogut canviar del seu valor per defecte.Si voleu retrobar els vostres valors, respongueu No i useu el botó %s, altrament els perdreu. Voleu continuar ?"
 
 #: u_translation.rswarningyouar
-msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
+msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgstr "Atenció!%sEsteu a punt de destruir la base de dades %s i tot el seu contingut, fins i tot si el contingut no està relacionat amb aquest programa.%sEsteu segur que voleu continuar?"
 
 #: u_translation.rswarningyouar2
-msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
+msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
 msgstr "Atenció! Esteu usant més d'un catàleg per al mateix objecte. Segur que és això el que voleu?"
 
 #: u_translation.rswarningyouha
-msgid "WARNING !%sYou have choose to append the data to an existing catalog.%sThe existing catalog and index must be exactly of the same format, otherwise it will be corrupted.%sIt is a good idea to backup the actual files before this operation.%sDo you want to continue ?"
+msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
 msgstr "Atenció!%sHeu escollit d'afegir aquestes dades a un catàleg existent.%s El catàleg existent i el seu índex han de tenir exactament el mateix format, si no quedarà corromput.%sÉs bona idea desar-ho abans de fer aquesta operació.%sVoleu continuar ? "
 
 #: u_translation.rswednesday
@@ -4261,7 +4269,7 @@ msgid "West"
 msgstr "Oest"
 
 #: u_translation.rswhiteonblack
-msgid "White on Black"
+msgid "White on black"
 msgstr "Negre sobre blanc"
 
 #: u_translation.rswidth
@@ -4281,7 +4289,7 @@ msgid "Xplanet is probably not installed!"
 msgstr "Xplanet probablement no està instal·lat o encaminat!"
 
 #: u_translation.rsxplanetretur
-msgid "%s, xplanet return %s"
+msgid "%s, xplanet returns %s"
 msgstr "%s, xplanet retorna: %s"
 
 #: u_translation.rsyear
@@ -4297,7 +4305,7 @@ msgid "You are now ready to display the asteroid for this time period."
 msgstr "Ara ja esteu preparat per mostrar els asteroides per aquest període."
 
 #: u_translation.rsyouliveonabi
-msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
+msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
 msgstr "Si observeu des d'una muntanya alta, la línia de l'horitzó serà més baixa del que seria al nivell del mar."
 
 #: u_translation.rszenith
@@ -4313,18 +4321,18 @@ msgid "Zoom -"
 msgstr "Zoom -"
 
 #: u_translation.rszoomcentre
-msgid "Zoom + Centre"
+msgid "Zoom + and centre on"
 msgstr "Centra i Zoom +"
 
 #: u_translation.rszoomcentre2
-msgid "Zoom - Centre"
+msgid "Zoom - and centre on"
 msgstr "Centra i Zoom -"
 
 #: u_translation.rszoomin
-msgid "Zoom In"
+msgid "Zoom in"
 msgstr "Zoom augment"
 
 #: u_translation.rszoomout
-msgid "Zoom Out"
+msgid "Zoom out"
 msgstr "Zoom disminució"
 
