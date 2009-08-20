@@ -116,9 +116,9 @@
       </Unit0>
       <Unit1>
         <Filename Value="pu_main.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_main"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_main"/>
       </Unit1>
@@ -164,89 +164,89 @@
       </Unit9>
       <Unit10>
         <Filename Value="pu_zoom.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_zoom"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_zoom"/>
       </Unit10>
       <Unit11>
         <Filename Value="pu_calendar.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_calendar"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_calendar"/>
       </Unit11>
       <Unit12>
         <Filename Value="pu_chart.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_chart"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_chart"/>
       </Unit12>
       <Unit13>
         <Filename Value="pu_detail.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_detail"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_detail"/>
       </Unit13>
       <Unit14>
         <Filename Value="pu_getdss.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_getdss"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_getdss"/>
       </Unit14>
       <Unit15>
         <Filename Value="pu_image.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_image"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_image"/>
       </Unit15>
       <Unit16>
         <Filename Value="pu_info.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_info"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_info"/>
       </Unit16>
       <Unit17>
         <Filename Value="pu_manualtelescope.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_manualtelescope"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_manualtelescope"/>
       </Unit17>
       <Unit18>
         <Filename Value="pu_position.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_position"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_position"/>
       </Unit18>
       <Unit19>
         <Filename Value="pu_printsetup.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_printsetup"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_printsetup"/>
       </Unit19>
       <Unit20>
         <Filename Value="pu_search.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_search"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_search"/>
       </Unit20>
@@ -272,112 +272,112 @@
       </Unit24>
       <Unit25>
         <Filename Value="pu_config_catalog.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_catalog"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_catalog"/>
       </Unit25>
       <Unit26>
         <Filename Value="pu_config_time.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_time"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_time"/>
       </Unit26>
       <Unit27>
         <Filename Value="pu_config_system.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_system"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_system"/>
       </Unit27>
       <Unit28>
         <Filename Value="pu_config_pictures.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_pictures"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_pictures"/>
       </Unit28>
       <Unit29>
         <Filename Value="pu_config_display.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_display"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_display"/>
       </Unit29>
       <Unit30>
         <Filename Value="pu_config_solsys.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_solsys"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_solsys"/>
       </Unit30>
       <Unit31>
         <Filename Value="pu_config_chart.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_chart"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_chart"/>
       </Unit31>
       <Unit32>
         <Filename Value="pu_config_observatory.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_observatory"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_observatory"/>
       </Unit32>
       <Unit33>
         <Filename Value="pu_config_internet.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config_internet"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_internet"/>
       </Unit33>
       <Unit34>
         <Filename Value="pu_catgen.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_catgen"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_catgen"/>
       </Unit34>
       <Unit35>
         <Filename Value="pu_catgenadv.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_catgenadv"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_catgenadv"/>
       </Unit35>
       <Unit36>
         <Filename Value="pu_progressbar.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_progress"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_progressbar"/>
       </Unit36>
       <Unit37>
         <Filename Value="pu_addlabel.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_addlabel"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_addlabel"/>
       </Unit37>
       <Unit38>
         <Filename Value="pu_print.pas"/>
-        <ComponentName Value="f_print"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_print"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_print"/>
       </Unit38>
@@ -388,17 +388,17 @@
       </Unit39>
       <Unit40>
         <Filename Value="pu_about.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_about"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_about"/>
       </Unit40>
       <Unit41>
         <Filename Value="pu_splash.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_splash"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_splash"/>
       </Unit41>
@@ -409,9 +409,9 @@
       </Unit42>
       <Unit43>
         <Filename Value="pu_config.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_config"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config"/>
       </Unit43>
@@ -422,8 +422,8 @@
       </Unit44>
       <Unit45>
         <Filename Value="pu_clock.pas"/>
-        <ComponentName Value="f_clock"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_clock"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_clock"/>
       </Unit45>
@@ -437,6 +437,7 @@
     <SearchPaths>
       <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       <SrcPath Value="$(LazarusDir)/lcl/;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)/"/>
+      <LCLWidgetType Value="gtk2"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
