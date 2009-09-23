@@ -1482,11 +1482,11 @@ for i:=1 to catheader.FileNum do begin
     184    : ffn[i]:=lowercase(trim(catheader.ShortName))+padzeros(inttostr(i),3)+'.dat';
     732    : begin
                for n:=0 to 23 do if i <= zone_lst7[n] then begin; m:=n; break; end;
-               ffn[i]:=zone_nam[m]+'\'+lowercase(trim(catheader.ShortName))+padzeros(inttostr(i),3)+'.dat';
+               ffn[i]:=slash(zone_nam[m])+lowercase(trim(catheader.ShortName))+padzeros(inttostr(i),3)+'.dat';
              end;
     9537   : begin
                for n:=0 to 23 do if i <= zone_lst[n] then begin; m:=n; break; end;
-               ffn[i]:=zone_nam[m]+'\'+lowercase(trim(catheader.ShortName))+padzeros(inttostr(i),4)+'.dat';
+               ffn[i]:=slash(zone_nam[m])+lowercase(trim(catheader.ShortName))+padzeros(inttostr(i),4)+'.dat';
              end;
     else raise ERangeError.CreateFmt('Invalid number of files : %d',[catheader.filenum]);
   end;
