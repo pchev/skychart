@@ -266,7 +266,7 @@ implementation
 const
   zone_lst : array [0..23] of integer = (   593 ,  1177 ,  1728 , 2258  ,  2780 ,  3245 ,  3651 , 4013  , 4293  ,  4491 ,  4614 , 4662  ,  5259 ,  5837 ,  6411 ,  6988 ,  7522 ,  8021 ,  8463 ,  8839 ,  9133 ,  9345 ,  9489 ,  9537 );
   zone_lst7: array [0..23] of integer = (    48 ,    95 ,   140 ,  183  ,   223 ,   259 ,   291 ,  318  ,  339  ,   354 ,   363 ,  366  ,   414 ,   461 ,   506 ,   549 ,   589 ,   625 ,   657 ,   684 ,   705 ,   720 ,   729 ,   732 );
-  zone_nam : array [0..23] of string  = ('N0000','N0730','N1500','N2230','N3000','N3730','N4500','N5230','N6000','N6730','N7500','N8230','S0000','S0730','S1500','S2230','S3000','S3730','S4500','S5230','S6000','S6730','S7500','S8230');
+  zone_nam : array [0..23] of string  = ('n0000','n0730','n1500','n2230','n3000','n3730','n4500','n5230','n6000','n6730','n7500','n8230','s0000','s0730','s1500','s2230','s3000','s3730','s4500','s5230','s6000','s6730','s7500','s8230');
   rahms   : array[0..2] of string = ('[RA (hours)]','RA (minutes)','RA (seconds)');
   rah     : array[0..0] of string = ('[RA decimal (hours)]');
   radms   : array[0..2] of string = ('[RA (degrees)]','RA (minutes)','RA (seconds)');
@@ -1416,8 +1416,8 @@ Procedure Tf_catgen.FindRegion7(ar,de : double; var hemis : char ; var zone,S : 
 var i1,i2,N,L1,L : integer;
     del : double;
 begin
-if de>0 then hemis:='N'
-        else hemis:='S';
+if de>0 then hemis:='n'
+        else hemis:='s';
 i1 := Trunc((de+90)/7.5) ;
 N  := lg_reg_x7[i1,1];
 L1 := lg_reg_x7[i1,2];
@@ -1432,8 +1432,8 @@ Procedure Tf_catgen.FindRegion(ar,de : double; var hemis : char ; var zone,S : i
 var i1,i2,j1,j2,N,L1,L,S1,k : integer;
     arl,del,dar,dde : double;
 begin
-if de>0 then hemis:='N'
-        else hemis:='S';
+if de>0 then hemis:='n'
+        else hemis:='s';
 i1 := Trunc((de+90)/7.5) ;
 N  := lg_reg_x[i1,1];
 L1 := lg_reg_x[i1,2];
