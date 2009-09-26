@@ -1,7 +1,7 @@
 object f_catgen: Tf_catgen
-  Left = 242
+  Left = 359
   Height = 479
-  Top = 228
+  Top = 190
   Width = 503
   ActiveControl = RadioGroup1.RadioButton0
   Caption = 'Prepare a catalog CatGen 3.0'
@@ -3561,7 +3561,6 @@ object f_catgen: Tf_catgen
         TabOrder = 6
         OnMouseUp = Memo1MouseUp
         BookMarkOptions.Xoffset = -18
-        BookMarkOptions.OnChange = nil
         Gutter.Visible = False
         Gutter.Width = 0
         Gutter.MouseActions = <        
@@ -4039,7 +4038,7 @@ object f_catgen: Tf_catgen
             Width = 23
           end
           object TSynGutterLineNumber
-            Width = 17
+            Width = 25
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -4584,7 +4583,7 @@ object f_catgen: Tf_catgen
     end
   end
   object OpenDialog1: TOpenDialog
-    Filter = 'All files|*.*|Project files|*.prj'
+    Filter = 'All files|*|Project files|*.prj'
     FilterIndex = 0
     Options = [ofHideReadOnly, ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     left = 184
