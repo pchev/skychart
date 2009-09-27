@@ -1093,6 +1093,7 @@ resourcestring
   rsResetChartAn = 'Reset chart and options';
   rsIconClickAct = 'Icon click action';
   rsAction = 'Action';
+  rsPrefixNameWi = 'Prefix name with catalog short name';
 
 implementation
 
