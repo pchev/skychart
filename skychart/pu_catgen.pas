@@ -38,6 +38,7 @@ type
   { Tf_catgen }
 
   Tf_catgen = class(TForm)
+    CheckBox8: TCheckBox;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     Label22: TLabel;
@@ -451,6 +452,7 @@ GroupBox6.caption:=rsSearchIndex;
 CheckBox3.caption:=rsCreateASearc;
 CheckBox4.caption:=rsAddTheAltern;
 CheckBox5.caption:=rsPrefixTheAlt;
+CheckBox8.caption:=rsPrefixNameWi;
 Label9.caption:=rsIndicateTheS;
 Button4.caption:=rsReturn;
 Label14.caption:=rsIndicateHowT;
@@ -829,6 +831,7 @@ Procedure Tf_catgen.BuildHeader;
 var i,j,n : integer;
     nextpos,curpos : integer;
     buf : shortstring;
+    CatPrefix: boolean;
 begin
 for i:=1 to 20 do catheader.Spare1[i]:=0;
 for i:=1 to 20 do catheader.Spare2[i]:=0;
@@ -921,11 +924,12 @@ case radiogroup3.itemindex of  // DEC
  1,2 : nextpos:=nextpos+1;
 end;
 usealt[0].i:=0;
+CatPrefix:=CheckBox8.Checked;
 case radiogroup1.itemindex of
 //9 ('Catalog ID','[Magnitude V]','B-V','Magnitude B','Magnitude R','Spectral class','Proper motion RA','Proper motion DEC','epoch','Parallax','Comments');
  0 : begin     // Stars
        if CheckListBox1.Checked[nextpos+0] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+0,2]; end;// ID
-       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; usealt[0].l:=''; end;
+       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; if CatPrefix then usealt[0].l:=trim(edit4.text) else usealt[0].l:=''; ixlen:=ixlen+length(usealt[0].l) end;
        curpos:=curpos+catheader.flen[n]; inc(n);
        if CheckListBox1.Checked[nextpos+1] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=sizeof(smallint);  end;// mag V
        keypos:=curpos;
@@ -955,7 +959,7 @@ case radiogroup1.itemindex of
 //9 ('Catalog ID','[Magnitude max]','[Magnitude min]','Period','Type','Maxima Epoch','Rise Time','Spectral class','Magnitude code','Comments');
  1 : begin     // variables
        if CheckListBox1.Checked[nextpos+0] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+0,2]; end;// ID
-       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; usealt[0].l:=''; end;
+       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; if CatPrefix then usealt[0].l:=trim(edit4.text) else usealt[0].l:=''; ixlen:=ixlen+length(usealt[0].l) end;
        curpos:=curpos+catheader.flen[n]; inc(n);
        if CheckListBox1.Checked[nextpos+1] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=sizeof(smallint); end;// mag1
        keypos:=curpos;
@@ -984,7 +988,7 @@ case radiogroup1.itemindex of
 //9 ('Catalog ID','[Magnitude component 1]','Magnitude component 2','[Separation]','Position angle','Epoch','Component name','Spectral class 1','Spectral class 2','Comments');
  2 : begin     // Doubles Stars
        if CheckListBox1.Checked[nextpos+0] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+0,2]; end;// ID
-       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; usealt[0].l:=''; end;
+       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; if CatPrefix then usealt[0].l:=trim(edit4.text) else usealt[0].l:=''; ixlen:=ixlen+length(usealt[0].l) end;
        curpos:=curpos+catheader.flen[n]; inc(n);
        if CheckListBox1.Checked[nextpos+1] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=sizeof(smallint); end;// mag1
        keypos:=curpos;
@@ -1013,7 +1017,7 @@ case radiogroup1.itemindex of
 //9 ('ID number','Nebula type','Magnitude','Surface brigtness','Largest dimension','Smallest diemnsion','Position angle','Radial velocity','Morphological class','Comments');
  3 : begin     // Nebulae
        if CheckListBox1.Checked[nextpos+0] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+0,2]; end;// ID
-       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; usealt[0].l:=''; end;
+       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; if CatPrefix then usealt[0].l:=trim(edit4.text) else usealt[0].l:=''; ixlen:=ixlen+length(usealt[0].l) end;
        curpos:=curpos+catheader.flen[n]; inc(n);
        if CheckListBox1.Checked[nextpos+1] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=sizeof(byte)    ; end;// type
        curpos:=curpos+catheader.flen[n]; inc(n);
@@ -1043,7 +1047,7 @@ case radiogroup1.itemindex of
 //5 ('Catalog ID','[Line op]','Line width','Line color','use spline','Comments');
  4 : begin     // Outlines
        if CheckListBox1.Checked[nextpos+0] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+0,2]; end;// ID
-       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; usealt[0].l:=''; end;
+       ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; if CatPrefix then usealt[0].l:=trim(edit4.text) else usealt[0].l:=''; ixlen:=ixlen+length(usealt[0].l) end;
        keypos:=curpos;
        curpos:=curpos+catheader.flen[n]; inc(n);
        if CheckListBox1.Checked[nextpos+1] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=sizeof(byte)  ; end;// line type
@@ -1775,6 +1779,7 @@ repeat
         buf:=uppercase(StringReplace(GetString(usealt[j].i),' ','',[rfReplaceAll]));
         if buf>'' then begin
            if (j>0) and (catheader.useprefix=1) then buf:=usealt[j].l+buf;
+           if (j=0) and CheckBox8.Checked then buf:=usealt[j].l+buf;
            PutIxKey(buf);
            WriteIx;
         end;
@@ -2043,6 +2048,7 @@ if savedialog1.execute then begin
   ini.writeBool('Page4','index',checkbox3.checked);
   ini.writeBool('Page4','altindex',checkbox4.checked);
   ini.writeBool('Page4','prefalt',checkbox5.checked);
+  ini.writeBool('Page4','prefname',checkbox8.checked);
   ini.writeBool('Page4','append',checkbox6.checked);
   with stringgrid1 do for i:=1 to 15 do
        ini.writeString('Page5','nebtype'+inttostr(i),cells[1,i]);
@@ -2122,6 +2128,7 @@ if opendialog1.execute then begin
   checkbox3.checked:=ini.readBool('Page4','index',checkbox3.checked);
   checkbox4.checked:=ini.readBool('Page4','altindex',checkbox4.checked);
   checkbox5.checked:=ini.readBool('Page4','prefalt',checkbox5.checked);
+  checkbox8.checked:=ini.readBool('Page4','prefname',checkbox8.checked);
   checkbox6.checked:=ini.readBool('Page4','append',checkbox6.checked);
   with stringgrid1 do for i:=1 to 15 do
        cells[1,i]:=ini.readString('Page5','nebtype'+inttostr(i),cells[1,i]);
