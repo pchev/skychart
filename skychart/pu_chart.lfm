@@ -13,7 +13,7 @@ object f_chart: Tf_chart
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.29'
   object Panel1: TPanel
     Left = 8
     Height = 272
@@ -29,7 +29,7 @@ object f_chart: Tf_chart
     object identlabel: TLabel
       Cursor = crHandPoint
       Left = 136
-      Height = 18
+      Height = 16
       Top = 120
       Width = 67
       Caption = 'identlabel '
@@ -47,10 +47,10 @@ object f_chart: Tf_chart
     end
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 465
-      Height = 257
+      Left = 464
+      Height = 256
       Top = 0
-      Width = 15
+      Width = 16
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -62,8 +62,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 0
-      Height = 15
-      Top = 257
+      Height = 16
+      Top = 256
       Width = 480
       Align = alBottom
       LargeChange = 10

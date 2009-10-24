@@ -622,6 +622,7 @@ type
     procedure InstanceRunning(Sender : TObject);
     procedure ProcessParams1;
     procedure ProcessParams2;
+    procedure ProcessParamsQuit;
     procedure ShowError(msg: string);
     procedure SetButtonImage(button: Integer);
     function CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
@@ -5816,6 +5817,7 @@ begin
   buf:='';
   for i:=0 to Params.Count-1 do buf:=buf+blank+params[i];
   WriteTrace('Receive from new instance: '+buf);
+  ProcessParamsQuit;
   ProcessParams2;
 end;
 
@@ -5867,6 +5869,20 @@ for i:=0 to Params.Count-1 do begin
        pp.Add('test');
        ExecuteCmd('test',pp);
        pp.free;
+   end;
+end;
+end;
+
+procedure Tf_main.ProcessParamsQuit;
+var i: integer;
+    cmd, parms, buf : string;
+    pp: TStringList;
+begin
+for i:=0 to Params.Count-1 do begin
+   parms:= Params[i];
+   cmd:=words(parms,'',1,1);
+   if cmd='--quit' then begin
+       Close;
    end;
 end;
 end;
