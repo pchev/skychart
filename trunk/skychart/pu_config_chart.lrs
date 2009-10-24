@@ -81,7 +81,7 @@ LazarusResources.Add('Tf_config_chart','FORMDATA',[
   +'Left'#2'W'#6'Height'#2#20#3'Top'#3'G'#1#5'Width'#2#8#7'Caption'#6#1'8'#11'P'
   +'arentColor'#8#0#0#6'TLabel'#8'Label104'#4'Left'#2'W'#6'Height'#2#20#3'Top'#3
   +'c'#1#5'Width'#2#8#7'Caption'#6#1'9'#11'ParentColor'#8#0#0#6'TLabel'#8'Label'
-  +'105'#4'Left'#2'P'#6'Height'#2#20#3'Top'#3''#1#5'Width'#2#15#7'Caption'#6#2
+  +'105'#4'Left'#2'P'#6'Height'#2#20#3'Top'#3#127#1#5'Width'#2#15#7'Caption'#6#2
   +'10'#11'ParentColor'#8#0#0#6'TLabel'#8'Label106'#4'Left'#2'/'#6'Height'#2#20
   +#3'Top'#2'@'#5'Width'#2'K'#9'Alignment'#7#14'taRightJustify'#7'Caption'#6#12
   +'Field Number'#11'ParentColor'#8#0#0#6'TLabel'#8'Label107'#4'Left'#3#207#0#6
@@ -196,9 +196,9 @@ LazarusResources.Add('Tf_config_chart','FORMDATA',[
   +'CompleteText'#11#20'cbactSearchAscending'#0#10'ItemHeight'#2#0#9'ItemIndex'
   +#2#0#13'Items.Strings'#1#6#3'ARC'#6#3'TAN'#6#3'SIN'#0#9'ItemWidth'#2#0#8'OnS'
   +'elect'#7#16'ProjectionChange'#8'TabOrder'#2#0#4'Text'#6#3'ARC'#0#0#9'TCombo'
-  +'Box'#9'ComboBox3'#3'Tag'#2#2#4'Left'#3#195#0#6'Height'#2#27#3'Top'#2''#5'W'
-  +'idth'#2'I'#12'AutoComplete'#8#16'AutoCompleteText'#11#20'cbactSearchAscendi'
-  +'ng'#0#10'ItemHeight'#2#0#9'ItemIndex'#2#0#13'Items.Strings'#1#6#3'ARC'#6#3
+  +'Box'#9'ComboBox3'#3'Tag'#2#2#4'Left'#3#195#0#6'Height'#2#27#3'Top'#2#127#5
+  +'Width'#2'I'#12'AutoComplete'#8#16'AutoCompleteText'#11#20'cbactSearchAscend'
+  +'ing'#0#10'ItemHeight'#2#0#9'ItemIndex'#2#0#13'Items.Strings'#1#6#3'ARC'#6#3
   +'TAN'#6#3'SIN'#0#9'ItemWidth'#2#0#8'OnSelect'#7#16'ProjectionChange'#8'TabOr'
   +'der'#2#2#4'Text'#6#3'ARC'#0#0#9'TComboBox'#9'ComboBox4'#3'Tag'#2#3#4'Left'#3
   +#195#0#6'Height'#2#27#3'Top'#3#155#0#5'Width'#2'I'#12'AutoComplete'#8#16'Aut'
