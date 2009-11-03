@@ -3295,6 +3295,7 @@ procedure Tf_main.FormResize(Sender: TObject);
 begin
   MultiDoc1.Align:=alNone;
   MultiDoc1.Width:=MultiDoc1.Width-1;
+  Application.ProcessMessages;
   MultiDoc1.Align:=alClient;
 end;
 
