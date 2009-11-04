@@ -98,7 +98,7 @@ if [[ $lastrev -ne $currentrev ]]; then
 
 # make Windows version
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
-  ./configure $configopt prefix=$builddir/Data target=i386-win32
+  ./configure $configopt prefix=$builddir/Data target=i386-win32,i386-linux
   if [[ $? -ne 0 ]]; then exit 1;fi
   make OS_TARGET=win32 CPU_TARGET=i386 clean
   make OS_TARGET=win32 CPU_TARGET=i386
