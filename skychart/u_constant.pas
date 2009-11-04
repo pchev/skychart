@@ -555,7 +555,7 @@ type
 const
 {$ifdef linux}
       lib404   = 'libplan404.so';
-      libz = 'libz.so';
+      libz = 'libz.so.1';
 //      libsatxy = 'libsatxy.so';
 //      libsatxyfm='Satxyfm';
 {$endif}
@@ -598,7 +598,7 @@ var gzopen : Tgzopen;
     gzeof : Tgzeof;
     gzclose : Tgzclose;
     zlibok: boolean;
-    zlib: longword;
+    zlib: TLibHandle;
 
 // libsatxy
 {type double8 = array[1..8] of double;

@@ -87,7 +87,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    dsslib: Dword;
+    dsslib: TLibHandle;
     Fenabled: boolean;
     ImageExtract: TImageExtract;
     GetPlateList: TGetPlateList;
@@ -140,9 +140,9 @@ cfgdss:=Tconf_dss.Create;
   {$endif}
   dsslib := LoadLibrary(dsslibname);
   if dsslib<>0 then begin
-    ImageExtract:= TImageExtract(GetProcAddress(dsslib, 'ImageExtract'));
-    GetPlateList:= TGetPlateList(GetProcAddress(dsslib, 'GetPlateList'));
-    ImageExtractFromPlate:= TImageExtractFromPlate(GetProcAddress(dsslib, 'ImageExtractFromPlate'));
+    ImageExtract:= TImageExtract(GetProcedureAddress(dsslib, 'ImageExtract'));
+    GetPlateList:= TGetPlateList(GetProcedureAddress(dsslib, 'GetPlateList'));
+    ImageExtractFromPlate:= TImageExtractFromPlate(GetProcedureAddress(dsslib, 'ImageExtractFromPlate'));
     Fenabled:=true;
     {$ifdef trace_debug}
      WriteTrace('Library ok');
@@ -160,7 +160,7 @@ Fenabled:=false;
 ImageExtract:=nil;
 GetPlateList:=nil;
 ImageExtractFromPlate:=nil;
-if dsslib<>0 then Freelibrary(dsslib);
+if dsslib<>0 then UnloadLibrary(dsslib);
 cfgdss.Free;
 except
 writetrace('error destroy '+name);

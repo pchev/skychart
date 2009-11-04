@@ -54,7 +54,7 @@ type
   TTelescope = class(TComponent)
   private
     { Private declarations }
-    Fscopelib : Dword;
+    Fscopelib : TLibHandle;
     Fscopelibok : boolean;
     Fpluginpath : string;
     Fplugin : string;
@@ -146,22 +146,22 @@ try
 UnloadScopeLibrary;
 Fscopelib := LoadLibrary(Pchar(Fpluginpath+Fplugin));
 if Fscopelib<>0 then begin
-    FScopeClose := TScopeClose(GetProcAddress(Fscopelib, 'ScopeClose'));
-    FScopeConnect := TScopeConnect(GetProcAddress(Fscopelib, 'ScopeConnect'));
-    FScopeDisconnect := TScopeDisconnect(GetProcAddress(Fscopelib, 'ScopeDisconnect'));
-    FScopeAlign := TScopeAlign(GetProcAddress(Fscopelib, 'ScopeAlign'));
-    FScopeShowModal := TScopeShowModal(GetProcAddress(Fscopelib, 'ScopeShowModal'));
-    FScopeShow := TScopeShow(GetProcAddress(Fscopelib, 'ScopeShow'));
-    FScopeGetRaDec := TScopeGetRaDec(GetProcAddress(Fscopelib, 'ScopeGetRaDec'));
-    FScopeGetAltAz := TScopeGetAltAz(GetProcAddress(Fscopelib, 'ScopeGetAltAz'));
-    FScopeGetName := TScopeGetName(GetProcAddress(Fscopelib, 'ScopeGetName'));
-    FScopeReset := TScopeReset(GetProcAddress(Fscopelib, 'ScopeReset'));
-    FScopeConnected := TScopeConnected(GetProcAddress(Fscopelib, 'ScopeConnected'));
-    FScopeInitialized := TScopeInitialized(GetProcAddress(Fscopelib, 'ScopeInitialized'));
-    FScopeGetInfo := TScopeGetInfo(GetProcAddress(Fscopelib, 'ScopeGetInfo'));
-    FScopeSetObs := TScopeSetObs(GetProcAddress(Fscopelib, 'ScopeSetObs'));
-    FScopeGoto := TScopeGoto(GetProcAddress(Fscopelib, 'ScopeGoto'));
-    FScopeGetEqSys := TScopeGetEqSys(GetProcAddress(Fscopelib, 'ScopeGetEqSys'));
+    FScopeClose := TScopeClose(GetProcedureAddress(Fscopelib, 'ScopeClose'));
+    FScopeConnect := TScopeConnect(GetProcedureAddress(Fscopelib, 'ScopeConnect'));
+    FScopeDisconnect := TScopeDisconnect(GetProcedureAddress(Fscopelib, 'ScopeDisconnect'));
+    FScopeAlign := TScopeAlign(GetProcedureAddress(Fscopelib, 'ScopeAlign'));
+    FScopeShowModal := TScopeShowModal(GetProcedureAddress(Fscopelib, 'ScopeShowModal'));
+    FScopeShow := TScopeShow(GetProcedureAddress(Fscopelib, 'ScopeShow'));
+    FScopeGetRaDec := TScopeGetRaDec(GetProcedureAddress(Fscopelib, 'ScopeGetRaDec'));
+    FScopeGetAltAz := TScopeGetAltAz(GetProcedureAddress(Fscopelib, 'ScopeGetAltAz'));
+    FScopeGetName := TScopeGetName(GetProcedureAddress(Fscopelib, 'ScopeGetName'));
+    FScopeReset := TScopeReset(GetProcedureAddress(Fscopelib, 'ScopeReset'));
+    FScopeConnected := TScopeConnected(GetProcedureAddress(Fscopelib, 'ScopeConnected'));
+    FScopeInitialized := TScopeInitialized(GetProcedureAddress(Fscopelib, 'ScopeInitialized'));
+    FScopeGetInfo := TScopeGetInfo(GetProcedureAddress(Fscopelib, 'ScopeGetInfo'));
+    FScopeSetObs := TScopeSetObs(GetProcedureAddress(Fscopelib, 'ScopeSetObs'));
+    FScopeGoto := TScopeGoto(GetProcedureAddress(Fscopelib, 'ScopeGoto'));
+    FScopeGetEqSys := TScopeGetEqSys(GetProcedureAddress(Fscopelib, 'ScopeGetEqSys'));
     Fscopelibok:=true;
    {$ifdef win32}
     CoInitialize(nil);
