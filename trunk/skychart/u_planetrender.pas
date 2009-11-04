@@ -44,7 +44,7 @@ TRenderSun = Procedure (cm,pa,poleincl,mult : double; size : integer; fn:shortst
 TRenderCloselib = Procedure; stdcall;
 Var
 planetrender: boolean;
-Prenderlib : Dword = 0;
+Prenderlib : TLibHandle = 0;
 UseCount   : Dword = 0;
 SetTexturePath : TSetTexturePath;
 RenderMercury : TRenderMercury;
@@ -70,7 +70,7 @@ try
  dec(UseCount);
  if UseCount<=0 then begin
     //if Prenderlib<>0 then RenderCloseLib;
-    //freelibrary( Prenderlib );
+    //UnloadLibrary( Prenderlib );
     Prenderlib:=0;
     UseCount:=0;
  end;
@@ -86,18 +86,18 @@ if Prenderlib=0 then begin
  try
   Prenderlib := LoadLibrary('libFPlanetRender.dll');
   if Prenderlib<>0 then begin
-    RenderCloseLib:= TRenderCloseLib(GetProcAddress(Prenderlib, 'CloseLib'));
-    SetTexturePath:= TSetTexturePath(GetProcAddress(Prenderlib, 'SetTexturePath'));
-    RenderMercury:= TRenderMercury(GetProcAddress(Prenderlib, 'RenderMercury'));
-    RenderVenus:= TRenderVenus(GetProcAddress(Prenderlib, 'RenderVenus'));
-    RenderMoon:= TRenderMoon(GetProcAddress(Prenderlib, 'RenderMoon'));
-    RenderMars:= TRenderMars(GetProcAddress(Prenderlib, 'RenderMars'));
-    RenderJupiter:= TRenderJupiter(GetProcAddress(Prenderlib, 'RenderJupiter'));
-    RenderSaturn:= TRenderSaturn(GetProcAddress(Prenderlib, 'RenderSaturn'));
-    RenderUranus:= TRenderUranus(GetProcAddress(Prenderlib, 'RenderUranus'));
-    RenderNeptune:= TRenderNeptune(GetProcAddress(Prenderlib, 'RenderNeptune'));
-    RenderPluto:= TRenderPluto(GetProcAddress(Prenderlib, 'RenderPluto'));
-    RenderSun:= TRenderSun(GetProcAddress(Prenderlib, 'RenderSun'));
+    RenderCloseLib:= TRenderCloseLib(GetProcedureAddress(Prenderlib, 'CloseLib'));
+    SetTexturePath:= TSetTexturePath(GetProcedureAddress(Prenderlib, 'SetTexturePath'));
+    RenderMercury:= TRenderMercury(GetProcedureAddress(Prenderlib, 'RenderMercury'));
+    RenderVenus:= TRenderVenus(GetProcedureAddress(Prenderlib, 'RenderVenus'));
+    RenderMoon:= TRenderMoon(GetProcedureAddress(Prenderlib, 'RenderMoon'));
+    RenderMars:= TRenderMars(GetProcedureAddress(Prenderlib, 'RenderMars'));
+    RenderJupiter:= TRenderJupiter(GetProcedureAddress(Prenderlib, 'RenderJupiter'));
+    RenderSaturn:= TRenderSaturn(GetProcedureAddress(Prenderlib, 'RenderSaturn'));
+    RenderUranus:= TRenderUranus(GetProcedureAddress(Prenderlib, 'RenderUranus'));
+    RenderNeptune:= TRenderNeptune(GetProcedureAddress(Prenderlib, 'RenderNeptune'));
+    RenderPluto:= TRenderPluto(GetProcedureAddress(Prenderlib, 'RenderPluto'));
+    RenderSun:= TRenderSun(GetProcedureAddress(Prenderlib, 'RenderSun'));
     planetrender:=true;
     inc(UseCount);
   end;

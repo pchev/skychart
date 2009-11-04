@@ -1604,10 +1604,10 @@ step:='Load zlib';
 {$endif}
 zlib:=LoadLibrary(libz);
 if zlib<>0 then begin
-  gzopen:= Tgzopen(GetProcAddress(zlib,'gzopen'));
-  gzread:= Tgzread(GetProcAddress(zlib,'gzread'));
-  gzclose:= Tgzclose(GetProcAddress(zlib,'gzclose'));
-  gzeof:= Tgzeof(GetProcAddress(zlib,'gzeof'));
+  gzopen:= Tgzopen(GetProcedureAddress(zlib,'gzopen'));
+  gzread:= Tgzread(GetProcedureAddress(zlib,'gzread'));
+  gzclose:= Tgzclose(GetProcedureAddress(zlib,'gzclose'));
+  gzeof:= Tgzeof(GetProcedureAddress(zlib,'gzeof'));
   zlibok:=true;
 end else zlibok:=false;
 step:='Load plan404';
@@ -1617,7 +1617,7 @@ step:='Load plan404';
 Plan404:=nil;
 Plan404lib:=LoadLibrary(lib404);
 if Plan404lib<>0 then begin
-  Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
+  Plan404:= TPlan404(GetProcedureAddress(Plan404lib,'Plan404'));
 end;
 if @Plan404=nil then begin
    MessageDlg(rsCouldNotLoad+lib404+crlf

@@ -128,7 +128,7 @@ begin
 { satxyok:=true;
  satxylib:=LoadLibrary(libsatxy);
  if satxylib<>0 then begin
-    satxyfm:= TSatxyfm(GetProcAddress(satxylib,libsatxyfm));
+    satxyfm:= TSatxyfm(GetProcedureAddress(satxylib,libsatxyfm));
    if addr(satxyfm)<>nil then satxyok:=true;
  end;}
  if DBtype=mysql then begin
