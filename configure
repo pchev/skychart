@@ -3,7 +3,7 @@
 # create freepascal Makefile to build skychart
 #
 # syntaxe :
-#    ./configure [fpcbin=path_to_fpc_binaries] [fpc=path_to_fpc_units]  [lazarus=path_to_lazarus] [prefix=install_path]
+#    ./configure [fpcbin=path_to_fpc_binaries] [fpc=path_to_fpc_units]  [lazarus=path_to_lazarus] [prefix=install_path] [target=fpcmake_target]
 #
 
 # set parameters
@@ -33,12 +33,10 @@ dirs="skychart/component/synapse/source/lib \
      varobs \
      . "
 
-uname | grep -i darwin
-darwin=$?
-if [ $darwin -eq 0 ]; then
-   fpcmake_opt=-q 
+if [ -n "$target" ]; then
+   fpcmake_opt="-q -T$target" 
 else 
-   fpcmake_opt="-q -Tall"
+   fpcmake_opt="-q"
 fi
 
 #  Try to locate fpcbin in PATH
@@ -121,6 +119,8 @@ if [ -z "$prefix" ]; then
    export prefix=/tmp/skychart
 fi
 echo installing in $prefix
+
+echo fpcmake options: $fpcmake_opt
 
 export FPCDIR=$fpc
 basedir=$(pwd)
