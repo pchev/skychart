@@ -39,7 +39,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm -rf $builddir
 
 # make Linux version
-  ./configure $configopt prefix=$builddir
+  ./configure $configopt prefix=$builddir target=i386-linux
   if [[ $? -ne 0 ]]; then exit 1;fi
   make clean
   make
@@ -97,7 +97,7 @@ if [[ $lastrev -ne $currentrev ]]; then
 
 # make Windows version
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
-  ./configure $configopt prefix=$builddir/Data
+  ./configure $configopt prefix=$builddir/Data target=i386-win32
   if [[ $? -ne 0 ]]; then exit 1;fi
   make OS_TARGET=win32 CPU_TARGET=i386 clean
   make OS_TARGET=win32 CPU_TARGET=i386
