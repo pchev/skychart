@@ -79,7 +79,7 @@ if [[ $lastrev -ne $currentrev ]]; then
 # rpm 4.4
   #fakeroot rpmbuild  --define "_topdir $builddir/rpm/" -bb SPECS/skychart.spec
 # rpm 4.7
-  fakeroot rpmbuild  --buildroot "$builddir/rpm/skychart" -bb SPECS/skychart.spec
+  fakeroot rpmbuild  --buildroot "$builddir/rpm/skychart" --define "_topdir $builddir/rpm/" -bb SPECS/skychart.spec
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/i386/skychart*.rpm $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
