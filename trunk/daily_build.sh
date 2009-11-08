@@ -76,7 +76,10 @@ if [[ $lastrev -ne $currentrev ]]; then
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/skychart.spec
   sed -i "/Release:/ s/1/$currentrev/" SPECS/skychart.spec
-  fakeroot rpmbuild  --define "_topdir $builddir/rpm/" -bb SPECS/skychart.spec
+# rpm 4.4
+  #fakeroot rpmbuild  --define "_topdir $builddir/rpm/" -bb SPECS/skychart.spec
+# rpm 4.7
+  fakeroot rpmbuild  --buildroot "$builddir/rpm/skychart" -bb SPECS/skychart.spec
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/i386/skychart*.rpm $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
