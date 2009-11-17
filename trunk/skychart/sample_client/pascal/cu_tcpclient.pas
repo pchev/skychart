@@ -1,4 +1,7 @@
 unit cu_tcpclient;
+
+{$MODE Delphi}
+
 {                                        
 Copyright (C) 2003 Patrick Chevalley
 
@@ -26,12 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses blcksock, Classes, SysUtils,
-{$ifdef linux}
-    QForms;
-{$endif}
-{$ifdef mswindows}
     Forms;
-{$endif}
 
 type
   TTCPclient = class(TSynaClient)
