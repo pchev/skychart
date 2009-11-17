@@ -1,4 +1,7 @@
-unit tcpclient_vcl1;
+unit cdcclient1;
+
+{$MODE Delphi}
+
 {                                        
 Copyright (C) 2003 Patrick Chevalley
 
@@ -26,8 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses cu_tcpclient,
-  SysUtils, Types, Classes, Variants, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls;
+  SysUtils, Types, Classes, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, LResources;
 
 type
   TForm1 = class(TForm)
@@ -64,7 +67,6 @@ var
 
 implementation
 
-{$R *.dfm}
 
 procedure TForm1.ShowInfo(Sender: TObject; const messagetext:string);
 begin
@@ -82,9 +84,11 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 // connect button
 begin
+writeln('connect');
 if (client=nil)or(client.Terminated) then
    client:=TClientThrd.Create
    else exit;
+writeln('set');
 client.TargetHost:=edit1.Text;
 client.TargetPort:=edit2.Text;
 client.Timeout := 500;    // tcp/ip timeout [ms] also act as a delay before to send command
@@ -92,6 +96,7 @@ client.CmdTimeout := 10;  // cdc response timeout [seconds]
 client.onShowMessage:=ShowInfo;
 client.onReceiveData:=ReceiveData;
 client.Resume;
+writeln('connected');
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -147,5 +152,8 @@ if (client<>nil)and(not client.Terminated) then begin
   memo1.lines.add(resp+', new chart name is '+cname);
 end;
 end;
+
+initialization
+  {$i cdcclient1.lrs}
 
 end.
