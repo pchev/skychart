@@ -140,9 +140,9 @@ procedure TForm1.ShowInfo(Sender: TObject; const messagetext:string);
 begin
 // process here socket status message.
   if connecting and (messagetext='Connection refused')and(ConnectRetry<10) then begin
-     edit3.Text:='Launching Skychart ...';
-     edit3.Invalidate;
      inc(ConnectRetry);
+     edit3.Text:='Launching Skychart ...'+inttostr(ConnectRetry);
+     edit3.Invalidate;
      if ConnectRetry=1 then OpenCDC('');
      ConnectRetryTimer.Enabled:=true;
   end
@@ -177,7 +177,6 @@ client.CmdTimeout := 10;  // cdc response timeout [seconds]
 client.onShowMessage:=ShowInfo;
 client.onReceiveData:=ReceiveData;
 Connecting:=true;
-ConnectRetry:=0;
 client.Resume;
 end;
 
@@ -241,6 +240,7 @@ begin
   GetCdCInfo;
   edit1.Text:=ServerIPaddr;
   edit2.Text:=ServerIPport;
+  ConnectRetry:=0;
 end;
 
 procedure TForm1.GetCdCInfo;
