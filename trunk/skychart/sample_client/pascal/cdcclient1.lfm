@@ -14,6 +14,7 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnClose = FormClose
+  OnShow = FormShow
   LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 8
@@ -105,6 +106,7 @@ object Form1: TForm1
     Top = 104
     Width = 241
     ItemHeight = 0
+    ItemIndex = 4
     Items.Strings = (
       'redraw'
       'newchart tcpclient'
@@ -149,5 +151,12 @@ object Form1: TForm1
     Caption = 'Create chart'
     OnClick = Button4Click
     TabOrder = 8
+  end
+  object ConnectRetryTimer: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = ConnectRetryTimerTimer
+    left = 21
+    top = 393
   end
 end
