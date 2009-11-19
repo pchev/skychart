@@ -5507,7 +5507,9 @@ end;
 
 function Tf_main.ExecuteCmd(cname:string; arg:Tstringlist):string;
 var i,n : integer;
-    var cmd:string;
+    cmd:string;
+    chart:TForm;
+    child:TChildDoc;
 begin
 cmd:=trim(uppercase(arg[0]));
 n:=-1;
@@ -5533,18 +5535,28 @@ case n of
  14 : begin ResetDefaultChartExecute(nil); result:=msgOK; end;
 else begin
  result:='Bad chart name '+cname;
- for i:=0 to MultiDoc1.ChildCount-1 do
-   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     with MultiDoc1.Childs[i] do
-       if caption=cname then begin
-         if cmd='RESIZE' then begin // special case with action on main and on the chart
-            Multidoc1.Maximized:=false;
-            MultiDoc1.Childs[i].width:=StrToIntDef(arg[1],MultiDoc1.Childs[i].width);
-            MultiDoc1.Childs[i].height:=StrToIntDef(arg[2],MultiDoc1.Childs[i].height);
+ if cname='' then begin
+    if MultiDoc1.ActiveObject is Tf_chart then begin
+      chart:=MultiDoc1.ActiveObject;
+      child:=MultiDoc1.ActiveChild;
+    end;
+ end else begin
+    for i:=0 to MultiDoc1.ChildCount-1 do
+      if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+         if MultiDoc1.Childs[i].caption=cname then begin
+           chart:=MultiDoc1.Childs[i].DockedObject;
+           child:=MultiDoc1.Childs[i];
          end;
-         result:=(DockedObject as Tf_chart).ExecuteCmd(arg);
-       end;
-end;
+ end;
+ if chart is Tf_chart then with chart as Tf_chart do begin
+    if cmd='RESIZE' then begin // special case with action on main and on the chart
+       Multidoc1.Maximized:=false;
+       child.width:=StrToIntDef(arg[1],child.width);
+       child.height:=StrToIntDef(arg[2],child.height);
+    end;
+    result:=(chart as Tf_chart).ExecuteCmd(arg);
+ end;
+ end;
 end;
 end;
 
@@ -5856,21 +5868,41 @@ end;
 
 // Parameters that need to be set after a chart is available
 procedure Tf_main.ProcessParams2;
-var i: integer;
-    cmd, parms, buf : string;
+var i,p: integer;
+    cmd, parm, parms, buf : string;
     pp: TStringList;
 begin
+pp:=TStringList.Create;
+try
 for i:=0 to Params.Count-1 do begin
+   pp.Clear;
    parms:= Params[i];
    cmd:=words(parms,'',1,1);
-   if cmd='--test1' then begin
+   p:=pos(' ',parms);
+   if p>0 then
+      parm:=copy(parms,p+1,999)
+   else
+      parm:='';
+   if cmd='--search' then begin
+      pp.Add('SEARCH');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+   end else if cmd='--setproj' then begin
+      pp.Add('SETPROJ');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+   end else if cmd='--setfov' then begin
+      pp.Add('SETFOV');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
    end else if cmd='--test2' then begin
-       pp:=TStringList.Create;
-       pp.Add('NEWCHART');
-       pp.Add('test');
-       ExecuteCmd('test',pp);
-       pp.free;
+      pp.Add('NEWCHART');
+      pp.Add('test');
+      ExecuteCmd('test',pp);
    end;
+end;
+finally
+  pp.free;
 end;
 end;
 
