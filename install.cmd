@@ -19,14 +19,22 @@ if not exist %destdir% (
 
 echo Install skychart to %destdir%
 
-strip -v -o %destdir%\skychart.exe skychart\cdc.exe 
-strip -v -o %destdir%\cdcicon.exe skychart\cdcicon.exe
-strip -v -o %destdir%\varobs.exe varobs\varobs.exe
-strip -v -o %destdir%\varobs_lpv_bulletin.exe varobs\varobs_lpv_bulletin.exe
+del %destdir%\skychart.exe
+xcopy /Y /F skychart\cdc.exe %destdir%\
+rename %destdir%\cdc.exe skychart.exe
+xcopy /Y /F skychart\cdcicon.exe %destdir%\
+xcopy /Y /F varobs\varobs.exe %destdir%\
+xcopy /Y /F varobs\varobs_lpv_bulletin.exe %destdir%\
+
+strip -v %destdir%\skychart.exe
+strip -v %destdir%\cdcicon.exe
+strip -v %destdir%\varobs.exe
+strip -v %destdir%\varobs_lpv_bulletin.exe
+
 xcopy /Y /F skychart\library\getdss\libgetdss.dll  %destdir%\
 xcopy /Y /F skychart\library\plan404\libplan404.dll  %destdir%\
 
-unzip -d %destdir% system_integration\Windows\data\sqlite3.zip 
-unzip -d %destdir% system_integration\Windows\data\plugins.zip 
-unzip -d %destdir% system_integration\Windows\data\planetrender.zip
-unzip -d %destdir% system_integration\Windows\data\zlib.zip
+unzip -o -d %destdir% system_integration\Windows\data\sqlite3.zip 
+unzip -o -d %destdir% system_integration\Windows\data\plugins.zip 
+unzip -o -d %destdir% system_integration\Windows\data\planetrender.zip
+unzip -o -d %destdir% system_integration\Windows\data\zlib.zip

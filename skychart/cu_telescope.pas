@@ -26,7 +26,7 @@ unit cu_telescope;
 interface
 
 Uses
-  {$ifdef win32}
+  {$ifdef mswindows}
     ActiveX,
   {$endif}
   dynlibs,
@@ -132,7 +132,7 @@ if Fscopelib<>0 then begin
    FScopeDisconnect(ok);
    FScopeClose;
    Fscopelib:=0;
-  {$ifdef win32}
+  {$ifdef mswindows}
     CoUnInitialize;
   {$endif}
 end;
@@ -163,7 +163,7 @@ if Fscopelib<>0 then begin
     FScopeGoto := TScopeGoto(GetProcedureAddress(Fscopelib, 'ScopeGoto'));
     FScopeGetEqSys := TScopeGetEqSys(GetProcedureAddress(Fscopelib, 'ScopeGetEqSys'));
     Fscopelibok:=true;
-   {$ifdef win32}
+   {$ifdef mswindows}
     CoInitialize(nil);
    {$endif}
 end else begin

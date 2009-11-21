@@ -98,33 +98,33 @@ object f_config_display: Tf_config_display
           Visible = False
           object Label256: TLabel
             Left = 24
-            Height = 14
+            Height = 16
             Top = 38
-            Width = 93
+            Width = 81
             Caption = 'Faint Stars Size '
             ParentColor = False
           end
           object Label262: TLabel
             Left = 24
-            Height = 14
+            Height = 16
             Top = 112
-            Width = 50
+            Width = 46
             Caption = 'Contrast'
             ParentColor = False
           end
           object Label263: TLabel
             Left = 24
-            Height = 14
+            Height = 16
             Top = 150
-            Width = 93
+            Width = 86
             Caption = 'Color saturation'
             ParentColor = False
           end
           object Label257: TLabel
             Left = 24
-            Height = 14
+            Height = 16
             Top = 75
-            Width = 151
+            Width = 136
             Caption = 'Increment for Bright Stars'
             ParentColor = False
           end
@@ -249,17 +249,17 @@ object f_config_display: Tf_config_display
             TabOrder = 0
             object Label258: TLabel
               Left = 24
-              Height = 14
+              Height = 16
               Top = 38
-              Width = 101
+              Width = 87
               Caption = 'Bright Stars Size '
               ParentColor = False
             end
             object Label259: TLabel
               Left = 24
-              Height = 14
+              Height = 16
               Top = 75
-              Width = 50
+              Width = 46
               Caption = 'Contrast'
               ParentColor = False
             end

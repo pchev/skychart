@@ -3,23 +3,32 @@ rem
 rem create freepascal Makefile to build skychart
 rem
 rem set the variable below before to run
+rem
+rem To compile the C libraries getdss and plan404 
+rem you need to install Mingw and Msys from http://www.mingw.org/
+rem and add them to your PATH
+rem For Windows 64 bits I have success with WPG System64 http://www.cadforte.com/system64.html
+
+rem ################################################################
+rem start parameters
 
 rem where you install sed  ( http://gnuwin32.sourceforge.net/packages/sed.htm )
-set sed=C:\appli\sed
+set sed=C:\GnuWin32\bin
 
 rem where you install fpc 
-set fpc=C:\appli\lazarus\fpc\2.2.2\bin\i386-win32
+set fpc=C:\pp\bin\x86_64-win64
 
 rem where you install lazarus (keep double \\ for path) 
-set lazarus=C:\\appli\\lazarus
+set lazarus=C:\\lazarus
 
 rem where you want to install CdC (keep double \\ for path)
 set prefix=C:\\appli\\cdc
 
 rem end of parameters
+rem ################################################################
 
 set basedir=%CD%
-set PATH=%basedir%;%fpc%;%sed%;C:\WINDOWS\system32;C:\WINDOWS
+set PATH=%basedir%;%fpc%;%sed%;%PATH%
 
 rem test sed
 sed --version

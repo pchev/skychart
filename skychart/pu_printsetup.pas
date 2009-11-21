@@ -146,7 +146,7 @@ case cm.PrintMethod of
      {$ifdef unix}
        ok:=(0=exec('which '+cm.PrintCmd1));
      {$endif}
-     {$ifdef win32}
+     {$ifdef mswindows}
        ok:=Fileexists(cm.PrintCmd1);
      {$endif}
      if ok then begin
@@ -168,7 +168,7 @@ case cm.PrintMethod of
      {$ifdef unix}
        ok:=(0=exec('which '+cm.PrintCmd2));
      {$endif}
-     {$ifdef win32}
+     {$ifdef mswindows}
        ok:=Fileexists(cm.PrintCmd2);
      {$endif}
      if ok then begin
@@ -186,7 +186,7 @@ end;
 
 procedure Tf_printsetup.qtsetupClick(Sender: TObject);
 begin
-{$ifdef win32}
+{$ifdef mswindows}
   PrinterSetupDialog1.execute;
 {$endif}
 {$ifdef unix}
@@ -199,7 +199,7 @@ procedure Tf_printsetup.FormCreate(Sender: TObject);
 var i: integer;
 begin
 SetLang;
-{$ifdef win32}
+{$ifdef mswindows}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
 PaperSize.Clear;

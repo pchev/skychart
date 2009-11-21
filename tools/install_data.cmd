@@ -28,14 +28,14 @@ for /F "usebackq" %%d in (`sed "s#/#\\#g" data.lst`) do (
   echo %%d - %destdir%\%%d
   copy /Y %%d %destdir%\%%d 
 )
-unzip -d %destdir%\data ..\system_integration\Windows\data\zoneinfo.zip 
+unzip -o -d %destdir%\data ..\system_integration\Windows\data\zoneinfo.zip 
 
 for /F "usebackq" %%d in (`sed "s#/#\\#g" doc.lst`) do (
   echo %%d - %destdir%\%%d
   copy /Y %%d %destdir%\%%d 
 )
 
-unzip -d %destdir%\doc doc\wiki_doc.zip 
+unzip -o -d %destdir%\doc doc\wiki_doc.zip 
 
 for /F "usebackq" %%d in (`sed "s#/#\\#g" cat.lst`) do (
   echo %%d - %destdir%\%%d

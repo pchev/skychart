@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses Math, SysUtils, Classes, LCLType,
-  {$ifdef win32}
+  {$ifdef mswindows}
     Windows,
   {$endif}
   {$ifdef unix}
@@ -105,7 +105,7 @@ Function RemoveLastDot(value : string) : string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 procedure ScaleForm(form: TForm; scale: single);
 function FindWin98: boolean;
 function ScreenBPP: integer;
@@ -1086,7 +1086,7 @@ begin
  result:=fpSystem(cmd);
 end;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 var
    bchExec: array[0..1024] of char;
    pchEXEC: Pchar;
@@ -1124,7 +1124,7 @@ begin
  fpSystem(cmd+' &');
 end;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 var
    bchExec: array[0..1024] of char;
    pchEXEC: Pchar;
@@ -1148,7 +1148,7 @@ end;
 {$endif}
 
 Function ExecuteFile(const FileName: string): integer;
-{$ifdef win32}
+{$ifdef mswindows}
 var
   zFileName, zParams, zDir: array[0..255] of Char;
 begin
@@ -1235,7 +1235,7 @@ if w>1 then result:=trunc(v/w)
 end;
 
 
-{$ifdef win32}
+{$ifdef mswindows}
 function FindWin98: boolean;
 var lpversioninfo: TOSVERSIONINFO;
 begin

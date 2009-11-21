@@ -314,7 +314,7 @@ procedure Tf_config_system.FormShow(Sender: TObject);
 begin
 LockChange:=true;
 dbchanged:=false;
-{$ifdef win32}
+{$ifdef mswindows}
   GroupBoxLinux.Visible:=false;
 {$else}
   if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
@@ -406,7 +406,7 @@ end;
 
 procedure Tf_config_system.ShowTelescope;
 var i:integer;
-{$ifdef win32}
+{$ifdef mswindows}
     n:integer;
     fs : TSearchRec;
     buf : string;
@@ -437,7 +437,7 @@ TelescopeselectClick(self);
 {$ifdef unix}
 IndiPort.text:=csc.IndiPort;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 val(rightstr(csc.IndiPort,1),i,n);
 if n=0 then IndiPort.itemindex:=i
        else IndiPort.itemindex:=0;
@@ -752,7 +752,7 @@ if LockChange then exit;
 {$ifdef unix}
 csc.IndiPort:=IndiPort.text;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 csc.IndiPort:='/dev/ttyS'+inttostr(IndiPort.itemindex);
 {$endif}
 end;

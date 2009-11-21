@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  {$ifdef win32}
+  {$ifdef mswindows}
     Windows,
   {$endif}
   u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
@@ -615,7 +615,7 @@ type
     AutoRefreshLock: Boolean;
     compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
-  {$ifdef win32}
+  {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
     procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
@@ -657,7 +657,7 @@ type
     function Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
     function SaveChart(fn: string): string;
     function OpenChart(fn: string): string;
-  {$ifdef win32}
+  {$ifdef mswindows}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
   {$endif}
@@ -740,7 +740,7 @@ uses
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_splash, pu_manualtelescope, pu_print, pu_clock;
 
-{$ifdef win32}
+{$ifdef mswindows}
 const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
 {$endif}
 
@@ -796,7 +796,7 @@ begin
   Child.sc.Fits:=Fits;
   Child.sc.planet:=planet;
   Child.sc.cdb:=cdcdb;
-  {$ifdef win32}
+  {$ifdef mswindows}
   Child.telescopeplugin:=telescope;
   {$endif}
   Child.sc.plot.cfgplot.Assign(cfgp);
@@ -1013,7 +1013,7 @@ try
  if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
  InitFonts;
  SetLpanel1('');
- TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
+ TimeVal.Width:= round( 60 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
  // ensure a first chart is draw, even if it usually result in a double refresh on launch
  for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
@@ -1324,7 +1324,7 @@ var inif: TMemIniFile;
 {$ifdef darwin}
     i: integer;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
 const CSIDL_PERSONAL = $0005;   // My Documents
@@ -1352,7 +1352,7 @@ privatedir:=DefaultPrivateDir;
 appdir:=expandfilename(appdir);
 privatedir:=expandfilename(PrivateDir);
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
 buf:=trim(Folder);
@@ -1446,7 +1446,7 @@ end;
  debugln('appdir='+appdir);
  debugln('privatedir='+privatedir);
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 tracefile:=slash(privatedir)+tracefile;
 {$endif}
 VarObs:=slash(appdir)+DefaultVarObs;     // varobs normally at same location as skychart
@@ -1514,7 +1514,7 @@ showsplash:=true;
 ImageListCount:=ImageNormal.Count;
 DisplayIs32bpp:=true;
 isWin98:=false;
-{$ifdef win32}
+{$ifdef mswindows}
   step:='Windows spefic';
   isWin98:=FindWin98;
   DisplayIs32bpp:=(ScreenBPP=32);
@@ -1595,9 +1595,9 @@ step:='Size control';
 {$endif}
 MultiDoc1.Align:=alClient;
 starshape.Picture.Bitmap.Transparent:=false;
-TimeVal.Width:= round( 60 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
-quicksearch.Width:=round( 75 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
-TimeU.Width:=round( 95 {$ifdef win32} * Screen.PixelsPerInch/96 {$endif} );
+TimeVal.Width:= round( 60 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
+quicksearch.Width:=round( 75 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
+TimeU.Width:=round( 95 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
 step:='Load zlib';
 {$ifdef trace_debug}
  WriteTrace(step);
@@ -1688,7 +1688,7 @@ procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
 var i:integer;
 begin
 try
-{$ifdef win32}
+{$ifdef mswindows}
 if nightvision then ResetWinColor;
 {$endif}
 StopServer;
@@ -2567,12 +2567,12 @@ procedure Tf_main.SetupTimePage(page:integer);
 begin
 if ConfigTime=nil then begin
    ConfigTime:=Tf_config_time.Create(self);
-   {$ifdef win32}ScaleForm(ConfigTime,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows}ScaleForm(ConfigTime,Screen.PixelsPerInch/96);{$endif}
    ConfigTime.Notebook1.ShowTabs:=true;
    ConfigTime.Notebook1.PageIndex:=0;
    ConfigTime.onApplyConfig:=ApplyConfigTime;
 end;
-{$ifdef win32}SetFormNightVision(ConfigTime,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigTime,nightvision);{$endif}
 ConfigTime.ccat.Assign(catalog.cfgcat);
 ConfigTime.cshr.Assign(catalog.cfgshr);
 ConfigTime.cplot.Assign(def_cfgplot);
@@ -2660,12 +2660,12 @@ procedure Tf_main.SetupChartPage(page:integer);
 begin
 if ConfigChart=nil then begin
    ConfigChart:=Tf_config_chart.Create(self);
-   {$ifdef win32}ScaleForm(ConfigChart,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows}ScaleForm(ConfigChart,Screen.PixelsPerInch/96);{$endif}
    ConfigChart.Notebook1.ShowTabs:=true;
    ConfigChart.Notebook1.PageIndex:=0;
    ConfigChart.onApplyConfig:=ApplyConfigChart;
 end;
-{$ifdef win32}SetFormNightVision(ConfigChart,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigChart,nightvision);{$endif}
 ConfigChart.ccat.Assign(catalog.cfgcat);
 ConfigChart.cshr.Assign(catalog.cfgshr);
 ConfigChart.cplot.Assign(def_cfgplot);
@@ -2701,13 +2701,13 @@ procedure Tf_main.SetupSolsysPage(page:integer);
 begin
 if ConfigSolsys=nil then begin
    ConfigSolsys:=Tf_config_solsys.Create(self);
-   {$ifdef win32}ScaleForm(ConfigSolsys,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows}ScaleForm(ConfigSolsys,Screen.PixelsPerInch/96);{$endif}
    ConfigSolsys.Notebook1.ShowTabs:=true;
    ConfigSolsys.Notebook1.PageIndex:=0;
    ConfigSolsys.onApplyConfig:=ApplyConfigSolsys;
    ConfigSolsys.onPrepareAsteroid:=PrepareAsteroid;
 end;
-{$ifdef win32}SetFormNightVision(ConfigSolsys,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigSolsys,nightvision);{$endif}
 ConfigSolsys.cdb:=cdcdb;
 ConfigSolsys.ccat.Assign(catalog.cfgcat);
 ConfigSolsys.cshr.Assign(catalog.cfgshr);
@@ -2744,14 +2744,14 @@ procedure Tf_main.SetupSystemPage(page:integer);
 begin
 if ConfigSystem=nil then begin
    ConfigSystem:=Tf_config_system.Create(self);
-   {$ifdef win32}ScaleForm(ConfigSystem,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows}ScaleForm(ConfigSystem,Screen.PixelsPerInch/96);{$endif}
    ConfigSystem.Notebook1.ShowTabs:=true;
    ConfigSystem.Notebook1.PageIndex:=0;
    ConfigSystem.onApplyConfig:=ApplyConfigSystem;
    ConfigSystem.onDBChange:=ConfigDBChange;
    ConfigSystem.onSaveAndRestart:=SaveAndRestart;
 end;
-{$ifdef win32}SetFormNightVision(ConfigSystem,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigSystem,nightvision);{$endif}
 ConfigSystem.cdb:=cdcdb;
 ConfigSystem.ccat.Assign(catalog.cfgcat);
 ConfigSystem.cshr.Assign(catalog.cfgshr);
@@ -2789,12 +2789,12 @@ procedure Tf_main.SetupInternetPage(page:integer);
 begin
 if ConfigInternet=nil then begin
    ConfigInternet:=Tf_config_internet.Create(self);
-   {$ifdef win32}ScaleForm(ConfigInternet,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows}ScaleForm(ConfigInternet,Screen.PixelsPerInch/96);{$endif}
    ConfigInternet.Notebook1.ShowTabs:=true;
    ConfigInternet.Notebook1.PageIndex:=0;
    ConfigInternet.onApplyConfig:=ApplyConfigInternet;
 end;
-{$ifdef win32}SetFormNightVision(ConfigInternet,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigInternet,nightvision);{$endif}
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigInternet.cmain.Assign(cfgm);
@@ -2818,12 +2818,12 @@ procedure Tf_main.SetupPicturesPage(page:integer);
 begin
 if ConfigPictures=nil then begin
    ConfigPictures:=Tf_config_pictures.Create(self);
-   {$ifdef win32}ScaleForm(ConfigPictures,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows}ScaleForm(ConfigPictures,Screen.PixelsPerInch/96);{$endif}
    ConfigPictures.Notebook1.ShowTabs:=true;
    ConfigPictures.Notebook1.PageIndex:=0;
    ConfigPictures.onApplyConfig:=ApplyConfigPictures;
 end;
-{$ifdef win32}SetFormNightVision(ConfigPictures,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigPictures,nightvision);{$endif}
 ConfigPictures.cdb:=cdcdb;
 ConfigPictures.cdss.Assign(f_getdss.cfgdss);
 ConfigPictures.Fits:=Fits;
@@ -2866,12 +2866,12 @@ procedure Tf_main.SetupObservatoryPage(page:integer; posx:integer=0; posy:intege
 begin
 if ConfigObservatory=nil then begin
    ConfigObservatory:=Tf_config_observatory.Create(self);
-   {$ifdef win32} ScaleForm(ConfigObservatory,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows} ScaleForm(ConfigObservatory,Screen.PixelsPerInch/96);{$endif}
    ConfigObservatory.Notebook1.ShowTabs:=true;
    ConfigObservatory.Notebook1.PageIndex:=0;
    ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
 end;
-{$ifdef win32}SetFormNightVision(ConfigObservatory,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigObservatory,nightvision);{$endif}
 ConfigObservatory.cdb:=cdcdb;
 ConfigObservatory.ccat.Assign(catalog.cfgcat);
 ConfigObservatory.cshr.Assign(catalog.cfgshr);
@@ -2912,13 +2912,13 @@ procedure Tf_main.SetupCatalogPage(page:integer);
 begin
 if ConfigCatalog=nil then begin
    ConfigCatalog:=Tf_config_catalog.Create(self);
-   {$ifdef win32} ScaleForm(ConfigCatalog,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows} ScaleForm(ConfigCatalog,Screen.PixelsPerInch/96);{$endif}
    ConfigCatalog.catalog:=catalog;
    ConfigCatalog.Notebook1.ShowTabs:=true;
    ConfigCatalog.Notebook1.PageIndex:=0;
    ConfigCatalog.onApplyConfig:=ApplyConfigCatalog;
 end;
-{$ifdef win32}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
 ConfigCatalog.ccat.Assign(catalog.cfgcat);
 ConfigCatalog.cshr.Assign(catalog.cfgshr);
 ConfigCatalog.cplot.Assign(def_cfgplot);
@@ -2956,12 +2956,12 @@ procedure Tf_main.SetupDisplayPage(pagegroup:integer);
 begin
 if ConfigDisplay=nil then begin
    ConfigDisplay:=Tf_config_display.Create(self);
-   {$ifdef win32} ScaleForm(ConfigDisplay,Screen.PixelsPerInch/96);{$endif}
+   {$ifdef mswindows} ScaleForm(ConfigDisplay,Screen.PixelsPerInch/96);{$endif}
    ConfigDisplay.Notebook1.ShowTabs:=true;
    ConfigDisplay.Notebook1.PageIndex:=0;
    ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
 end;
-{$ifdef win32}SetFormNightVision(ConfigDisplay,nightvision);{$endif}
+{$ifdef mswindows}SetFormNightVision(ConfigDisplay,nightvision);{$endif}
 ConfigDisplay.ccat.Assign(catalog.cfgcat);
 ConfigDisplay.cshr.Assign(catalog.cfgshr);
 ConfigDisplay.cplot.Assign(def_cfgplot);
@@ -2974,7 +2974,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigDisplay.cmain.Assign(cfgm);
 formpos(ConfigDisplay,mouse.cursorpos.x,mouse.cursorpos.y);
-{$ifdef win32}
+{$ifdef mswindows}
 // Problem with initialization
 ConfigDisplay.show;
 ConfigDisplay.hide;
@@ -3091,7 +3091,7 @@ begin
     Fits.min_sigma:=cfgm.ImageLuminosity;
     Fits.max_sigma:=cfgm.ImageContrast;
     TelescopePanel.visible:=def_cfgsc.IndiTelescope;
-    {$ifdef win32}
+    {$ifdef mswindows}
     if (telescope.scopelibok)and(def_cfgsc.IndiTelescope) then begin
        telescope.ScopeDisconnect;
        telescope.UnloadScopeLibrary;
@@ -3587,7 +3587,7 @@ def_cfgsc.ManualTelescope:=false;
 {$ifdef unix}
    def_cfgsc.ManualTelescope:=true;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
    def_cfgsc.PluginTelescope:=true;
 {$endif}
 def_cfgsc.ManualTelescopeType:=0;
@@ -4186,7 +4186,7 @@ SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.C
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 use_xplanet:=ReadBool(section,'use_xplanet',use_xplanet);
 xplanet_dir:=ReadString(section,'xplanet_dir',xplanet_dir);
 {$endif}
@@ -4725,7 +4725,7 @@ WriteString(section,'PrivateDir',privatedir);
 WriteInteger(section,'LinuxDesktop',LinuxDesktop);
 WriteString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 WriteBool(section,'use_xplanet',use_xplanet);
 WriteString(section,'xplanet_dir',xplanet_dir);
 {$endif}
@@ -4856,7 +4856,7 @@ procedure Tf_main.SaveQuickSearch(filename:string);
 var i,j:integer;
     inif: TMemIniFile;
     section : string;
-    {$ifdef win32}
+    {$ifdef mswindows}
     instini: TIniFile;
     {$endif}
 begin
@@ -5571,7 +5571,7 @@ for i:=1 to Maxwindow do
     and(TCPDaemon.TCPThrd[i].Fsock<>nil)
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
-{$ifdef win32}
+{$ifdef mswindows}
 {if DDEopen then begin
    DdeInfo[0]:=formatdatetime('c',now);
    DdeInfo[2]:='> '+origin+' : '+str;
@@ -6304,7 +6304,7 @@ for i:=0 to MultiDoc1.ChildCount-1 do
     (MultiDoc1.Childs[i].DockedObject as Tf_chart).NightVision:=nightvision;
 end;
 
-{$ifdef win32}
+{$ifdef mswindows}
 // Nightvision change Windows system color
 Procedure Tf_main.SaveWinColor;
 var n : integer;

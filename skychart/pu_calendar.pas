@@ -206,7 +206,7 @@ procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
 begin
 SetLang;
-{$ifdef win32}
+{$ifdef mswindows}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
 config:=Tconf_skychart.Create;
@@ -249,7 +249,7 @@ end;
 
 procedure Tf_calendar.FormShow(Sender: TObject);
 begin
-{$ifdef WIN32}
+{$ifdef mswindows}
 if Fnightvision<>nightvision then begin
    SetFormNightVision(self,nightvision);
    Fnightvision:=nightvision;

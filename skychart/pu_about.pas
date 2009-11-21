@@ -95,7 +95,7 @@ end;
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
 SetLang;
-{$ifdef win32}
+{$ifdef mswindows}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
  panel1.caption:=URL_WebHome;

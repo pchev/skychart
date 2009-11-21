@@ -9,13 +9,12 @@ object f_print: Tf_print
   ClientWidth = 403
   OnCreate = FormCreate
   OnShow = FormShow
-  ParentFont = False
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.28.3'
   object PrinterInfo: TLabel
     Left = 27
-    Height = 14
+    Height = 16
     Top = 14
-    Width = 60
+    Width = 57
     Caption = 'PrinterInfo'
     ParentColor = False
   end
@@ -34,7 +33,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 67
+    ClientHeight = 64
     ClientWidth = 203
     ItemIndex = 0
     Items.Strings = (
@@ -60,7 +59,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 67
+    ClientHeight = 64
     ClientWidth = 145
     Items.Strings = (
       'Portrait'
@@ -107,38 +106,38 @@ object f_print: Tf_print
     Top = 144
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 67
+    ClientHeight = 64
     ClientWidth = 376
     TabOrder = 5
     object Label1: TLabel
       Left = 23
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 25
+      Width = 21
       Caption = 'Left'
       ParentColor = False
     end
     object Label2: TLabel
       Left = 89
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 34
+      Width = 29
       Caption = 'Right'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 153
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 26
+      Width = 22
       Caption = 'Top'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 216
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 45
+      Width = 41
       Caption = 'Bottom'
       ParentColor = False
     end
@@ -148,12 +147,11 @@ object f_print: Tf_print
       Hint = '0..100'
       Top = 34
       Width = 40
-      BorderStyle = bsSingle
-      ParentColor = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       OnChange = LongEdit1Change
+      Value = 0
       MaxValue = 100
     end
     object LongEdit2: TLongEdit
@@ -162,12 +160,11 @@ object f_print: Tf_print
       Hint = '0..100'
       Top = 34
       Width = 40
-      BorderStyle = bsSingle
-      ParentColor = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       OnChange = LongEdit2Change
+      Value = 0
       MaxValue = 100
     end
     object LongEdit3: TLongEdit
@@ -176,12 +173,11 @@ object f_print: Tf_print
       Hint = '0..100'
       Top = 35
       Width = 40
-      BorderStyle = bsSingle
-      ParentColor = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
       OnChange = LongEdit3Change
+      Value = 0
       MaxValue = 100
     end
     object LongEdit4: TLongEdit
@@ -190,12 +186,11 @@ object f_print: Tf_print
       Hint = '0..100'
       Top = 34
       Width = 40
-      BorderStyle = bsSingle
-      ParentColor = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
       OnChange = LongEdit4Change
+      Value = 0
       MaxValue = 100
     end
     object Button1: TButton

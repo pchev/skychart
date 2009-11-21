@@ -56,47 +56,47 @@
       </Unit0>
       <Unit1>
         <Filename Value="detail1.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="DetailForm"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="detail1"/>
       </Unit1>
       <Unit2>
         <Filename Value="ObsUnit.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="ObsForm"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ObsUnit"/>
       </Unit2>
       <Unit3>
         <Filename Value="variables1.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="VarForm"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="variables1"/>
       </Unit3>
       <Unit4>
         <Filename Value="aavsochart.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="chartform"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="aavsochart"/>
       </Unit4>
       <Unit5>
         <Filename Value="SettingUnit.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="OptForm"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="SettingUnit"/>
       </Unit5>
       <Unit6>
         <Filename Value="splashunit.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="splash"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="splashunit"/>
       </Unit6>
       <Unit7>
@@ -132,8 +132,7 @@
       </Options>
     </Linking>
     <Other>
-      <CustomOptions Value="-dUseCThreads
-"/>
+      <CustomOptions Value="-dUseCThreads"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>

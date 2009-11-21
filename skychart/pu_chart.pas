@@ -315,7 +315,7 @@ end;
 procedure Tf_chart.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   RefreshTimer.Enabled:=false;
-{$ifdef win32}
+{$ifdef mswindows}
   TelescopeTimer.Enabled:=false;
  {$endif}
   Action := caFree;
@@ -632,7 +632,7 @@ begin
 {$ifdef trace_debug}
  WriteTrace('HorScrollBarScroll');
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 if ScrollCode in [scPageUp,scPageDown] then exit; // do not refresh while scrolling scEndScroll do the final refresh
 {$endif}
 if lockscrollbar then exit;
@@ -679,7 +679,7 @@ begin
 {$ifdef trace_debug}
  WriteTrace('VertScrollBarScroll');
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 if ScrollCode in [scPageUp,scPageDown] then exit; // do not refresh while scrolling scEndScroll do the final refresh
 {$endif}
 if lockscrollbar then exit;
@@ -2902,7 +2902,7 @@ begin
 {$ifdef trace_debug}
  WriteTrace('Connect1Click');
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 if sc.cfgsc.PluginTelescope then begin
    ConnectPlugin(Sender);
 end;
@@ -2948,7 +2948,7 @@ procedure Tf_chart.Slew1Click(Sender: TObject);
 var ra,dec:double;
 begin
 if Connect1.checked then begin
-{$ifdef win32}
+{$ifdef mswindows}
 if not sc.cfgsc.IndiTelescope then begin
    SlewPlugin(Sender);
 end else
@@ -2969,7 +2969,7 @@ end;
 procedure Tf_chart.AbortSlew1Click(Sender: TObject);
 begin
 if Connect1.checked then begin
-{$ifdef win32}
+{$ifdef mswindows}
 if not sc.cfgsc.IndiTelescope then begin
    AbortSlewPlugin(Sender);
 end else
@@ -2988,7 +2988,7 @@ if Connect1.checked and
    (mrYes=MessageDlg(Format(rsPleaseConfir, [sc.cfgsc.FindName]),
      mtConfirmation, [mbYes, mbNo], 0))
 then begin
-{$ifdef win32}
+{$ifdef mswindows}
 if not sc.cfgsc.IndiTelescope then begin
    SyncPlugin(Sender);
 end else
@@ -3081,7 +3081,7 @@ if FNightVision then begin
    for i:=1 to numlabtype do SaveLabelColor[i]:=sc.plot.cfgplot.labelcolor[i];
    sc.plot.cfgplot.color:=DfRedColor;
    for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=$000000A0;
-   {$ifdef win32}
+   {$ifdef mswindows}
      Panel1.Color:=nv_dark;
    {$endif}
 end else begin
@@ -3093,7 +3093,7 @@ end else begin
       sc.plot.cfgplot.color:=SaveColor;
       for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=SaveLabelColor[i];
    end;
-   {$ifdef win32}
+   {$ifdef mswindows}
      Panel1.Color:=clBtnFace;
    {$endif}
 end;

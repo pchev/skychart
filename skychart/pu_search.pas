@@ -178,7 +178,7 @@ end;
 
 procedure Tf_search.FormShow(Sender: TObject);
 begin
-{$ifdef WIN32}
+{$ifdef mswindows}
 if Fnightvision<>nightvision then begin
    SetFormNightVision(self,nightvision);
    Fnightvision:=nightvision;
@@ -206,7 +206,7 @@ procedure Tf_search.FormCreate(Sender: TObject);
 begin
 SetLang;
   Fnightvision:=false;
-{$ifdef win32}
+{$ifdef mswindows}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
 CometFilter.Text:='C/'+FormatDateTime('yyyy',now);

@@ -37,7 +37,7 @@ unit cu_tz;
 interface
 
 uses
-  {$ifdef win32}
+  {$ifdef mswindows}
     Windows,
   {$endif}
   {$ifdef unix}
@@ -596,7 +596,7 @@ function TCdCTimeZone.GetNowUTC: TDateTime;
 var
   st : TSystemTime;
 begin
-{$ifdef win32}
+{$ifdef mswindows}
  GetSystemTime(st);
  result:=SystemTimeToDateTime(st);
 {$endif}

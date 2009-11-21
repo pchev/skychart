@@ -11,7 +11,7 @@ interface
 {$ifdef unix}
 const lib_catalog='libcatalog.so';
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 const lib_catalog='libcatalog.dll';
 {$endif}
 

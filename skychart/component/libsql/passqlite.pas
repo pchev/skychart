@@ -34,7 +34,7 @@ interface
 
 uses
   //{$IFDEF FPC}LCLIntf, {$ENDIF}
-    {$IFDEF WIN32}Windows, {$ENDIF}
+    {$IFDEF MSWINDOWS}Windows, {$ENDIF}
     Classes, SysUtils, SyncObjs,
     libsqlite,
     {$IFNDEF SQLITE3_STATIC}

@@ -13,7 +13,7 @@ object f_chart: Tf_chart
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.3'
   object Panel1: TPanel
     Left = 8
     Height = 272
@@ -31,7 +31,7 @@ object f_chart: Tf_chart
       Left = 136
       Height = 16
       Top = 120
-      Width = 67
+      Width = 58
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4

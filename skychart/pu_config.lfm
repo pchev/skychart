@@ -151,7 +151,7 @@ object f_config: Tf_config
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.28.3'
   object Panel2: TPanel
     Left = 0
     Height = 41
@@ -163,9 +163,9 @@ object f_config: Tf_config
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16
-      Height = 33
+      Height = 19
       Top = 12
-      Width = 180
+      Width = 144
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
@@ -229,7 +229,7 @@ object f_config: Tf_config
       Width = 230
       Align = alClient
       AutoExpand = True
-      DefaultItemHeight = 16
+      DefaultItemHeight = 15
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True

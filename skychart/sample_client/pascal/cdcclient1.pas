@@ -85,14 +85,14 @@ const
         DefaultCdC='skychart';
         DefaultCdCconfig='~/.skychart/skychart.ini';
   {$endif}
-  {$ifdef win32}
+  {$ifdef mswindows}
         DefaultCdC='skychart.exe';
         DefaultCdCconfig='Skychart\skychart.ini';
   {$endif}
 
 implementation
 
-{$ifdef win32}
+{$ifdef mswindows}
  uses  Windows, ShlObj;
 {$endif}
 {$ifdef unix}
@@ -113,7 +113,7 @@ begin
  fpSystem(cmd+' &');
 end;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 var
    bchExec: array[0..1024] of char;
    pchEXEC: Pchar;
@@ -247,7 +247,7 @@ procedure TForm1.GetCdCInfo;
 var
   buf: string;
   inif: TMemIniFile;
-{$ifdef win32}
+{$ifdef mswindows}
   buf1: string;
   PIDL:   PItemIDList;
   Folder: array[0..MAX_PATH] of char;
@@ -259,7 +259,7 @@ begin
 {$ifdef unix}
   CdCconfig  := ExpandFileName(DefaultCdCconfig);
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
   SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
   SHGetPathFromIDList(PIDL, Folder);
   buf1 := trim(Folder);

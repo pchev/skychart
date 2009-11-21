@@ -57,7 +57,7 @@ uses
 {$IFDEF FPC}
   dynlibs, sysutils;
 {$ELSE}
-  {$IFDEF WIN32}
+  {$IFDEF MSWINDOWS}
   Windows;
   {$ELSE}
   SysUtils;
@@ -116,7 +116,7 @@ end;
 
 procedure Sleep(milliseconds: Cardinal);
 begin
-{$IFDEF WIN32}
+{$IFDEF MSWINDOWS}
   {$IFDEF FPC}
   sysutils.sleep(milliseconds);
   {$ELSE}

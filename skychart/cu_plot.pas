@@ -1032,7 +1032,7 @@ with cnv do begin
            end;
       12:  begin
            SetColor(8);
-           {$ifdef win32}Pen.Width := 1;{$endif}
+           {$ifdef mswindows}Pen.Width := 1;{$endif}
            Pen.Style := psDot;
            Brush.Style := bsClear;
            Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
@@ -1139,7 +1139,7 @@ with cnv do begin
            end;
       12:  begin
            Pen.Color := cfgplot.Color[8];
-           {$ifdef win32}Pen.Width := 1;{$endif}
+           {$ifdef mswindows}Pen.Width := 1;{$endif}
            Pen.Style := psDot;
            Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
            Pen.Width := cfgchart.drawpen;
@@ -1194,7 +1194,7 @@ with cnv do begin
   Pen.Mode:=pmCopy;
   Pen.Color:=lcolor;
   Pen.Style:=style;
-  {$ifdef win32}if style<>psSolid then Pen.width:=1;{$endif}
+  {$ifdef mswindows}if style<>psSolid then Pen.width:=1;{$endif}
   if (abs(x1-cfgchart.hw)<cfgplot.outradius)and(abs(y1-cfgchart.hh)<cfgplot.outradius) and
      (abs(x2-cfgchart.hw)<cfgplot.outradius)and(abs(y2-cfgchart.hh)<cfgplot.outradius)
      then begin
@@ -1378,7 +1378,7 @@ if not cfgplot.Invisible then begin
           end;
       2 : begin // image
           rot:=rot*FlipX*FlipY;
-          {$ifdef win32}
+          {$ifdef mswindows}
           if use_Xplanet then
              PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg)
           else   
@@ -1562,7 +1562,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
  {$ifdef unix}
     cmd:='export LC_ALL=C; xplanet';
  {$endif}
- {$ifdef win32}
+ {$ifdef mswindows}
     if not DirectoryExists(xplanet_dir) then exit;
     chdir(xplanet_dir);
     cmd:='xplanet.exe';
@@ -2426,7 +2426,7 @@ begin
       else
         begin
           cnv.Pen.Style := psDot;
-          {$ifdef win32}cnv.Pen.width:=1;{$endif}
+          {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
           cnv.Brush.Style := bsClear;
         end;
 //      cnv.MoveTo(xx-ds,yy);
@@ -2910,7 +2910,7 @@ begin
       else
         begin
           cnv.Pen.Style := psDot;
-          {$ifdef win32}cnv.Pen.width:=1;{$endif}
+          {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
           cnv.Brush.Style := bsClear;
         end;
 //      cnv.MoveTo(xx-ds,yy);
@@ -3013,7 +3013,7 @@ begin
   ds:=round(max(sz,2*cfgchart.drawpen));
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psDot;
-  {$ifdef win32}cnv.Pen.width:=1;{$endif}
+  {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
   cnv.Pen.Color := cfgplot.Color[32];
   cnv.Brush.Style := bsClear;
 
