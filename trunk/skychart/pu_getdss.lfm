@@ -15,9 +15,9 @@ object f_getdss: Tf_getdss
   LCLVersion = '0.9.28.3'
   object Label1: TLabel
     Left = 12
-    Height = 15
+    Height = 14
     Top = 8
-    Width = 43
+    Width = 49
     Caption = 'Label1'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11
@@ -35,67 +35,6 @@ object f_getdss: Tf_getdss
     DefaultTypeFace = 'default'
     DefaultFontSize = 12
     FlagErrors = False
-    PrintSettings.MarginLeft = 0.5
-    PrintSettings.MarginTop = 0.5
-    PrintSettings.MarginRight = 0.5
-    PrintSettings.MarginBottom = 0.5
-    Visible = False
-  end
-  object ListBox1: TListBox
-    Left = 8
-    Height = 230
-    Top = 32
-    Width = 401
-    Font.CharSet = ANSI_CHARSET
-    Font.Height = -11
-    Font.Name = 'courier'
-    Font.Pitch = fpFixed
-    IntegralHeight = True
-    ItemHeight = 0
-    ParentFont = False
-    TabOrder = 0
-    TopIndex = -1
-  end
-  object BitBtn1: TBitBtn
-    Left = 96
-    Height = 25
-    Top = 272
-    Width = 75
-    BorderSpacing.InnerBorder = 2
-    Caption = 'OK'
-    Default = True
-    ModalResult = 1
-    NumGlyphs = 0
-    TabOrder = 1
-  end
-  object BitBtn2: TBitBtn
-    Left = 206
-    Height = 25
-    Top = 272
-    Width = 75
-    BorderSpacing.InnerBorder = 2
-    Cancel = True
-    Caption = 'Cancel'
-    ModalResult = 2
-    NumGlyphs = 0
-    TabOrder = 2
-  end
-  object DownloadDialog1: TDownloadDialog
-    FtpFwMode = 0
-    FtpFwPassive = True
-    ConfirmDownload = True
-    left = 264
-    top = 16
-  end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 303
-    top = 275
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 352
-    top = 275
+    PrintSettings.MarginLeft = 0
   end
 end

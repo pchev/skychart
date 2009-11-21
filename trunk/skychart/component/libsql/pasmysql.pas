@@ -11,7 +11,7 @@ unit pasmysql;
 
 interface
 uses
-     {$IFDEF WIN32}
+     {$IFDEF MSWINDOWS}
      Windows,
      {$ENDIF}
      Classes, SysUtils,
@@ -118,7 +118,7 @@ implementation
 constructor TMyDB.Create;
 begin
   FLibrary:=DEFAULT_DLL_LOCATION;
-  {$IFDEF WIN32}
+  {$IFDEF MSWINDOWS}
   DLL:=FLibrary;
   {$ENDIF}
   FHost:='localhost';
@@ -167,12 +167,12 @@ begin
   //Close if already active
   if FActive then Close;
 
-  {  $IFDEF WIN32}
+  {  $IFDEF MSWINDOWS}
   //Allow user to change shared library
   if FLibrary<>'' then
     DLL_Client:=FLibrary;
 
-  {$IFDEF WIN32}
+  {$IFDEF MSWINDOWS}
     //Embedded mysql 4.1 will definitively not work without config file.
   if FEmbedded and not fileexists ('c:\my.cnf') then
     //for some reason or another, %sysdir%\mysql.ini is not sufficient

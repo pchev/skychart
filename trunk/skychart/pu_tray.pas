@@ -5,7 +5,7 @@ unit pu_tray;
 interface
 
 uses
-{$ifdef win32}
+{$ifdef mswindows}
   windows,
 {$endif}
   u_help, u_translation, u_util, u_constant, u_projection, cu_planet, cu_database, Inifiles,
@@ -518,7 +518,7 @@ var inif: TMemIniFile;
 {$ifdef darwin}
     i: integer;
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
 const CSIDL_PERSONAL = $0005;   // My Documents
@@ -548,7 +548,7 @@ appdir:=expandfilename(appdir);
 privatedir:=expandfilename(PrivateDir);
 configfile:=expandfilename(Defaultconfigfile);
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
 buf:=trim(Folder);
@@ -623,7 +623,7 @@ end;
  debugln('appdir='+appdir);
  debugln('privatedir='+privatedir);
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
 tracefile:=slash(privatedir)+'tray_'+tracefile;
 {$endif}
 VarObs:=slash(startdir)+DefaultVarObs;     // varobs normally at same location as skychart

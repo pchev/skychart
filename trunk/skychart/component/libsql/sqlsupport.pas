@@ -11,7 +11,7 @@ unit sqlsupport;
 
 interface
 
-uses {$IFDEF WIN32}Windows, {$ENDIF} Classes, SysUtils{, DateUtils}{, System};
+uses {$IFDEF MSWINDOWS}Windows, {$ENDIF} Classes, SysUtils{, DateUtils}{, System};
 //{$IFDEF FPC}, LCLIntf{$ENDIF};
 
 type
@@ -112,14 +112,14 @@ begin
 end;
 
 function SystemErrorMsg(ErrNo: Integer = -1): String;
-{$IFDEF WIN32}
+{$IFDEF MSWINDOWS}
 var
   buf: PChar;
   size: Integer;
   MsgLen: Integer;
   {$ENDIF}
 begin
-  {$IFDEF WIN32}
+  {$IFDEF MSWINDOWS}
   size := 256;
   GetMem(buf, size);
   If ErrNo = - 1 then

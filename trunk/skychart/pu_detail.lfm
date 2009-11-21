@@ -9,13 +9,15 @@ object f_detail: Tf_detail
   ClientHeight = 391
   ClientWidth = 398
   OnCreate = FormCreate
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.28.3'
   object Panel1: TPanel
+    Left = 0
     Height = 50
+    Top = 0
     Width = 398
     Align = alTop
-    ClientHeight = 46
-    ClientWidth = 394
+    ClientHeight = 50
+    ClientWidth = 398
     FullRepaint = False
     TabOrder = 0
     object Button1: TButton
@@ -51,6 +53,7 @@ object f_detail: Tf_detail
     end
   end
   object IpHtmlPanel1: TIpHtmlPanel
+    Left = 0
     Height = 341
     Top = 50
     Width = 398
@@ -58,49 +61,8 @@ object f_detail: Tf_detail
     FixedTypeface = 'fixed'
     DefaultTypeFace = 'sans'
     DefaultFontSize = 8
+    FlagErrors = False
     PopupMenu = PopupMenu1
-    PrintSettings.MarginLeft = 0.5
-    PrintSettings.MarginTop = 0.5
-    PrintSettings.MarginRight = 0.5
-    PrintSettings.MarginBottom = 0.5
-  end
-  object ActionList1: TActionList
-    left = 128
-    top = 144
-    object SelectAll: TAction
-      Caption = 'SelectAll'
-      DisableIfNoHandler = True
-      OnExecute = SelectAllExecute
-      ShortCut = 16449
-    end
-    object Copy: TAction
-      Caption = 'Copy'
-      DisableIfNoHandler = True
-      OnExecute = CopyExecute
-      ShortCut = 16451
-    end
-  end
-  object PopupMenu1: TPopupMenu
-    left = 72
-    top = 144
-    object SelectAll1: TMenuItem
-      Action = SelectAll
-      OnClick = SelectAllExecute
-    end
-    object Copy1: TMenuItem
-      Action = Copy
-      OnClick = CopyExecute
-    end
-  end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 185
-    top = 144
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 248
-    top = 144
+    PrintSettings.MarginLeft = 0
   end
 end

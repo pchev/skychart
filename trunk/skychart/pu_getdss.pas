@@ -103,7 +103,7 @@ type
 
   Var f_getdss: Tf_getdss;
 
-  {$ifdef win32}
+  {$ifdef mswindows}
   Const dsslibname = 'libgetdss.dll';
   {$endif}
   {$ifdef linux}
@@ -132,7 +132,7 @@ procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
 SetLang;
 cfgdss:=Tconf_dss.Create;
-{$ifdef win32}
+{$ifdef mswindows}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
   {$ifdef trace_debug}

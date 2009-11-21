@@ -12,6 +12,12 @@ install:
 uninstall: 
 	.\uninstall_data.cmd $(PREFIX) 
 else
+ifeq ($(OS_TARGET),win64)
+install: 
+	.\install_data.cmd $(PREFIX) 
+uninstall: 
+	.\uninstall_data.cmd $(PREFIX) 
+else
 ifeq ($(OS_TARGET),darwin)
 install: 
 	./install_data_darwin.sh $(PREFIX) 
@@ -28,3 +34,5 @@ uninstall_win:
 	./uninstall_win_data.sh $(PREFIX)
 endif
 endif
+endif
+                        

@@ -82,7 +82,7 @@ if pos('svn',cdcversion)>0 then begin
 end else
    LabelDate.Visible:=false;
 SetLang;
-{$ifdef win32}
+{$ifdef mswindows}
  ScaleForm(self,Screen.PixelsPerInch/96);
 {$endif}
 end;

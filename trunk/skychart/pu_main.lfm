@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 860
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 554
+  ClientHeight = 560
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -19,7 +19,7 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.3'
   object MultiDoc1: TMultiDoc
     Left = 384
     Height = 230
@@ -34,7 +34,6 @@ object f_main: Tf_main
     ParentColor = False
     TabOrder = 0
     TabStop = True
-    OnResize = nil
     Maximized = False
     TitleHeight = 15
     KeepLastChild = False
@@ -2667,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 466
+    Height = 472
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 466
+    ClientHeight = 472
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 466
+      Height = 472
       Top = 0
       Width = 26
       Align = alClient
@@ -2771,18 +2770,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 832
-    Height = 466
+    Height = 472
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 466
+    ClientHeight = 472
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 216
+      Height = 222
       Top = 250
       Width = 28
       Align = alClient
@@ -3021,7 +3020,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 520
+    Top = 526
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -3311,7 +3310,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 317
-        Height = 30
+        Height = 23
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3319,7 +3318,7 @@ object f_main: Tf_main
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
-        ItemHeight = 0
+        ItemHeight = 15
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -3452,7 +3451,7 @@ object f_main: Tf_main
       end
       object TimeVal: TSpinEdit
         Left = 592
-        Height = 24
+        Height = 23
         Hint = 'Time'
         Top = 2
         Width = 56
@@ -3463,14 +3462,14 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 32
+        Height = 23
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 0
+        ItemHeight = 15
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2

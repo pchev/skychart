@@ -1,6 +1,6 @@
 CPPFLAGS=-I. -DUNIX -D_CONSOLE -fPIC
 #### For Suns and similar wrong-endian computers, add -DWRONG_WAY_BYTE_ORDER.
-
+CC            = gcc
 OSTYPE = $(shell uname)
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name = libgetdss.dylib
@@ -10,6 +10,10 @@ SO_Name = libgetdss.so
 LDFLAGS= -shared -WL,-soname,$(SO_Name)
 endif
 ifneq ($(findstring W32,$(OSTYPE)),)
+SO_Name = libgetdss.dll
+LDFLAGS= -shared -WL,-soname,$(SO_Name)
+endif
+ifneq ($(findstring MINGW,$(OSTYPE)),)
 SO_Name = libgetdss.dll
 LDFLAGS= -shared -WL,-soname,$(SO_Name)
 endif

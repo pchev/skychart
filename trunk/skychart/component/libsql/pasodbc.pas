@@ -18,7 +18,7 @@ unit pasodbc;
 
 interface
 uses
-     {$IFDEF WIN32}
+     {$IFDEF MSWINDOWS}
      Windows,
      {$ENDIF}
      Classes, SysUtils,

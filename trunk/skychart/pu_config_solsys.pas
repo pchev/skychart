@@ -936,7 +936,7 @@ try
  {$ifdef unix}
     cmd:='xplanet';
  {$endif}
- {$ifdef win32}
+ {$ifdef mswindows}
     if not DirectoryExists(xplanet_dir) then begin
        XplanetMsg.Caption:=Format(rsDirectoryNot, [xplanet_dir]);
        exit;

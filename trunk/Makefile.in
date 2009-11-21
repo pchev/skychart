@@ -26,12 +26,36 @@ install:
 	.\install.cmd $(PREFIX)
 uninstall: 
 	.\uninstall.cmd $(PREFIX)
+data:
+	$(MAKE) -C tools all
+install_data:
+	$(MAKE) -C tools install 
+uninstall_data:
+	$(MAKE) -C tools uninstall
+else
+ifeq ($(OS_TARGET),win64)
+install: 
+	.\install.cmd $(PREFIX)
+uninstall: 
+	.\uninstall.cmd $(PREFIX)
+data:
+	$(MAKE) -C tools all
+install_data:
+	$(MAKE) -C tools install 
+uninstall_data:
+	$(MAKE) -C tools uninstall
 else
 ifeq ($(OS_TARGET),darwin)
 install: 
 	./install_darwin.sh $(PREFIX)
 uninstall: 
 	./uninstall_darwin.sh $(PREFIX)
+data:
+	\$(MAKE) -C tools all
+install_data:
+	\$(MAKE) -C tools install 
+uninstall_data:
+	\$(MAKE) -C tools uninstall
 else
 install: 
 	./install.sh $(PREFIX)
@@ -45,11 +69,12 @@ install_win_data:
 	\$(MAKE) -C tools install_win 
 uninstall_win_data:
 	\$(MAKE) -C tools uninstall_win
-endif
-endif
 data:
 	\$(MAKE) -C tools all
 install_data:
 	\$(MAKE) -C tools install 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
+endif
+endif
+endif

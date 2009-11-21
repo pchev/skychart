@@ -33,13 +33,13 @@ LazarusResources.Add('Tf_config_display','FORMDATA',[
   +'yClick'#8'TabOrder'#2#0#0#0#9'TGroupBox'#10'starvisual'#4'Left'#2#8#6'Heigh'
   +'t'#3#242#0#3'Top'#3#172#0#5'Width'#3#185#1#7'Caption'#6#24'Star Display  Pr'
   +'operties'#12'ClientHeight'#3#224#0#11'ClientWidth'#3#181#1#8'TabOrder'#2#2#7
-  +'Visible'#8#0#6'TLabel'#8'Label256'#4'Left'#2#24#6'Height'#2#14#3'Top'#2'&'#5
-  +'Width'#2']'#7'Caption'#6#17'Faint Stars Size '#11'ParentColor'#8#0#0#6'TLab'
-  +'el'#8'Label262'#4'Left'#2#24#6'Height'#2#14#3'Top'#2'p'#5'Width'#2'2'#7'Cap'
+  +'Visible'#8#0#6'TLabel'#8'Label256'#4'Left'#2#24#6'Height'#2#16#3'Top'#2'&'#5
+  +'Width'#2'Q'#7'Caption'#6#17'Faint Stars Size '#11'ParentColor'#8#0#0#6'TLab'
+  +'el'#8'Label262'#4'Left'#2#24#6'Height'#2#16#3'Top'#2'p'#5'Width'#2'.'#7'Cap'
   +'tion'#6#8'Contrast'#11'ParentColor'#8#0#0#6'TLabel'#8'Label263'#4'Left'#2#24
-  +#6'Height'#2#14#3'Top'#3#150#0#5'Width'#2']'#7'Caption'#6#16'Color saturatio'
-  +'n'#11'ParentColor'#8#0#0#6'TLabel'#8'Label257'#4'Left'#2#24#6'Height'#2#14#3
-  +'Top'#2'K'#5'Width'#3#151#0#7'Caption'#6#26'Increment for Bright Stars'#11'P'
+  +#6'Height'#2#16#3'Top'#3#150#0#5'Width'#2'V'#7'Caption'#6#16'Color saturatio'
+  +'n'#11'ParentColor'#8#0#0#6'TLabel'#8'Label257'#4'Left'#2#24#6'Height'#2#16#3
+  +'Top'#2'K'#5'Width'#3#136#0#7'Caption'#6#26'Increment for Bright Stars'#11'P'
   +'arentColor'#8#0#0#9'TTrackBar'#11'StarSizeBar'#4'Left'#3#193#0#6'Height'#2
   +#31#3'Top'#2#30#5'Width'#3#225#0#9'Frequency'#2#5#3'Max'#2'2'#3'Min'#2#1#8'O'
   +'nChange'#7#17'StarSizeBarChange'#8'PageSize'#2#5#8'Position'#2#1#8'TabOrder'
@@ -70,9 +70,9 @@ LazarusResources.Add('Tf_config_display','FORMDATA',[
   +'abOrder'#2#4#0#9'TGroupBox'#9'GroupBox9'#4'Left'#2#1#6'Height'#3#240#0#3'To'
   +'p'#2#1#5'Width'#3#183#1#5'Align'#7#8'alClient'#7'Caption'#6#24'Star Display'
   +'  Properties'#12'ClientHeight'#3#222#0#11'ClientWidth'#3#179#1#8'TabOrder'#2
-  +#0#0#6'TLabel'#8'Label258'#4'Left'#2#24#6'Height'#2#14#3'Top'#2'&'#5'Width'#2
-  +'e'#7'Caption'#6#18'Bright Stars Size '#11'ParentColor'#8#0#0#6'TLabel'#8'La'
-  +'bel259'#4'Left'#2#24#6'Height'#2#14#3'Top'#2'K'#5'Width'#2'2'#7'Caption'#6#8
+  +#0#0#6'TLabel'#8'Label258'#4'Left'#2#24#6'Height'#2#16#3'Top'#2'&'#5'Width'#2
+  +'W'#7'Caption'#6#18'Bright Stars Size '#11'ParentColor'#8#0#0#6'TLabel'#8'La'
+  +'bel259'#4'Left'#2#24#6'Height'#2#16#3'Top'#2'K'#5'Width'#2'.'#7'Caption'#6#8
   +'Contrast'#11'ParentColor'#8#0#0#9'TTrackBar'#12'StarSizeBar1'#4'Left'#3#192
   +#0#6'Height'#2'#'#3'Top'#2#30#5'Width'#3#225#0#9'Frequency'#2#5#3'Max'#2'2'#3
   +'Min'#2#1#8'OnChange'#7#18'StarSizeBar1Change'#8'PageSize'#2#5#8'Position'#2

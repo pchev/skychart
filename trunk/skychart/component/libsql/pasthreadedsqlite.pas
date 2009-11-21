@@ -58,7 +58,7 @@ interface
 {$ENDIF}
 
 uses
-    {$IFDEF WIN32}Windows, {$ENDIF}
+    {$IFDEF MSWINDOWS}Windows, {$ENDIF}
     Classes, SysUtils, SyncObjs,
     utf8util,
     passql,

@@ -14,11 +14,12 @@ object f_splash: Tf_splash
   OnCreate = FormCreate
   OnMouseUp = FormMouseUp
   OnShow = FormShow
-  ParentFont = False
   Position = poScreenCenter
-  LCLVersion = '0.9.26'
+  LCLVersion = '0.9.28.3'
   object Panel1: TPanel
+    Left = 0
     Height = 263
+    Top = 0
     Width = 496
     Align = alClient
     BevelOuter = bvNone
@@ -28,7 +29,9 @@ object f_splash: Tf_splash
     TabOrder = 0
     OnDblClick = logoDblClick
     object Image1: TImage
+      Left = 0
       Height = 263
+      Top = 0
       Width = 496
       Align = alClient
       OnDblClick = logoDblClick
@@ -8403,10 +8406,10 @@ object f_splash: Tf_splash
       Stretch = True
     end
     object Label1: TLabel
-      Left = 273
-      Height = 34
+      Left = 312
+      Height = 37
       Top = 108
-      Width = 168
+      Width = 129
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = 'Sky Charts'
@@ -8418,9 +8421,9 @@ object f_splash: Tf_splash
     end
     object Label2: TLabel
       Left = 16
-      Height = 27
+      Height = 29
       Top = 155
-      Width = 124
+      Width = 96
       Caption = 'Version 3 '
       Font.Color = clWhite
       Font.Height = -20
@@ -8455,9 +8458,9 @@ object f_splash: Tf_splash
     end
     object LabelDate: TLabel
       Left = 128
-      Height = 20
+      Height = 21
       Top = 157
-      Width = 38
+      Width = 33
       Caption = 'Date'
       Font.Color = clWhite
       Font.Height = -15

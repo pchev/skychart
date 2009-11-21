@@ -30,7 +30,7 @@ Thanks to Roger Reghin (RReghin@scelectric.ca) for his idea to ValueList.
 
 interface
 
-uses {$IFNDEF FPC}{$IFDEF WIN32}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
+uses {$IFNDEF FPC}{$IFDEF MSWINDOWS}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
 
 const
   SQLITE_OK         =  0;   // Successful result
@@ -63,7 +63,7 @@ const
 
 
 
-  SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite.so'{$ENDIF}{$IFDEF WIN32}'sqlite.dll'{$ENDIF}{$IFDEF WINCE}'sqlite.dll'{$ENDIF}{$IFDEF darwin}'libsqlite.dylib'{$ENDIF};
+  SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite.so'{$ENDIF}{$IFDEF MSWINDOWS}'sqlite.dll'{$ENDIF}{$IFDEF WINCE}'sqlite.dll'{$ENDIF}{$IFDEF darwin}'libsqlite.dylib'{$ENDIF};
 
 function LoadLibSqlite2 (var LibraryPath: String): Boolean;
 
@@ -171,7 +171,7 @@ begin
   {$ELSE}
   DLLHandle := LoadLibrary(PChar(libname));
   {$ENDIF}
-  {$IFNDEF WIN32}
+  {$IFNDEF MSWINDOWS}
       // try other possible library name
       if DLLHandle = 0 then begin
          libname := libname + '.0';

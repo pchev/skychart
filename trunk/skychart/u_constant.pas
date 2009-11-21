@@ -295,7 +295,7 @@ const cdcversion = 'Version 3.1 svn';
       DefaultVarObs='varobs';
       DefaultCdC='skychart';
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
       DefaultFontName='Arial';
       DefaultFontFixed='Courier';
       DefaultFontSymbol='Symbol';
@@ -355,9 +355,6 @@ type
                  end;
      Tconf_catalog = class(TObject)    // catalog setting
                 public
-                constructor Create;
-                destructor Destroy; override;
-                procedure Assign(Source: Tconf_catalog);
                 GCatLst : array of TGCatLst;
                 GCatNum  : Integer;
                 StarmagMax,NebMagMax,NebSizeMin : double;            // limit to extract from catalog
@@ -379,12 +376,12 @@ type
                 NebCatField : array [1..MaxNebCatalog,1..2] of integer; // Field min and max the catalog is active
                 LinCatOn : array [1..MaxLinCatalog] of boolean;    // is the catalog used for current chart
                 UseUSNOBrightStars, UseGSVSIr : Boolean;  // filter specific catalog entry
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_catalog);
                 end;
      Tconf_shared = class(TObject)    // common setting
                 public
-                constructor Create;
-                destructor Destroy; override;
-                procedure Assign(Source: Tconf_shared);
                 FieldNum : array [0..MaxField] of double;  // Field of vision limit
                 StarFilter,NebFilter : boolean;   // filter by magnitude
                 BigNebFilter : boolean;           // filter big nebulae
@@ -410,12 +407,12 @@ type
                 horizonlist : Thorizonlist;
                 StarName: array of string;
                 StarNameHR: array of integer;
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_shared);
                 end;
      Tconf_skychart = class(TObject)    // chart setting
                 public
-                constructor Create;
-                destructor Destroy; override;
-                procedure Assign(Source: Tconf_skychart);
                 tz: TCdCTimeZone;
                 racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP,moved : Boolean;
@@ -466,12 +463,12 @@ type
                 rectangle : array [1..10,1..4] of single; // width, height, rotation, offset
                 rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
                 CircleLst : array[0..MaxCircle,1..2] of double;
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_skychart);
                 end;
      Tconf_plot = class(TObject)    // plot setting
                 public
-                constructor Create;
-                destructor Destroy; override;
-                procedure Assign(Source: Tconf_plot);
                 color : Starcolarray;
                 skycolor : TSkycolor;
                 backgroundcolor,bgcolor : Tcolor;
@@ -505,21 +502,21 @@ type
                 DSOColorFillNE: boolean;
 //  End of deep-sky objects colour
 
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_plot);
                 end;
      Tconf_chart = class(TObject)    // chart window setting
                 public
-                constructor Create;
-                destructor Destroy; override;
-                procedure Assign(Source: Tconf_chart);
                 onprinter : boolean;
                 width,height,drawpen,drawsize,fontscale,hw,hh : integer;
                 min_ma, max_catalog_mag : double;
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_chart);
                 end;
      Tconf_main = class(TObject)    // main form setting
                 public
-                constructor Create;
-                destructor Destroy; override;
-                procedure Assign(Source: Tconf_main);
                 prtname,language,Constellationpath, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
                 Paper,PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
@@ -533,18 +530,21 @@ type
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass: string;
                 FtpPassive, HttpProxy, ConfirmDownload : Boolean;
                 CometUrlList, AsteroidUrlList : TStringList;
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_main);
                 end;
      Tconf_dss  = class(TObject)    // DSS image setting
                 public
-                constructor Create;
-                destructor Destroy; override;
-                procedure Assign(Source: Tconf_dss);
                 dssdir,dssdrive,dssfile : string;
                 dss102,dssnorth,dsssouth,dsssampling,dssplateprompt : boolean;
                 dssmaxsize : integer;
                 OnlineDSS : Boolean;
                 OnlineDSSid: integer;
                 DSSurl: array[1..MaxDSSurl,0..1] of String;
+                constructor Create;
+                destructor Destroy; override;
+                procedure Assign(Source: Tconf_dss);
                 end;
                 
 
@@ -563,7 +563,7 @@ const
       lib404   = 'libplan404.dylib';
       libz = 'libz.dylib';
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
       lib404 = 'libplan404.dll';
       libz = 'zlib1.dll';
 //      libsatxy = 'libsatxy.dll';
@@ -631,7 +631,7 @@ Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
      use_xplanet: boolean = true;
      xplanet_dir: string = '';
 {$endif}
-{$ifdef win32}
+{$ifdef mswindows}
      tracefile:string = 'cdc_trace.txt';
      xplanet_dir: string = 'C:\Program Files\xplanet';
      dcd_cmd: string = 'cmd /c "C: && cd C:\Program Files\dcd && dcd.py"';

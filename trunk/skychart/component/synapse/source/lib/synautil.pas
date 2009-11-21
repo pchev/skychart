@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 004.011.003 |
+| Project : Ararat Synapse                                       | 004.013.000 |
 |==============================================================================|
 | Content: support procedures and functions                                    |
 |==============================================================================|
-| Copyright (c)1999-2005, Lukas Gebauer                                        |
+| Copyright (c)1999-2008, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c) 1999-2005.               |
+| Portions created by Lukas Gebauer are Copyright (c) 1999-2008.               |
 | Portions created by Hernan Sanchez are Copyright (c) 2000.                   |
 | All Rights Reserved.                                                         |
 |==============================================================================|
@@ -58,7 +58,7 @@ unit synautil;
 interface
 
 uses
-{$IFDEF WIN32}
+{$IFDEF MSWINDOWS}
   Windows,
 {$ELSE}
   {$IFDEF FPC}
@@ -71,6 +71,11 @@ uses
   System.IO,
 {$ENDIF}
   SysUtils, Classes, SynaFpc;
+
+{$IFDEF VER100}
+type
+  int64 = integer;
+{$ENDIF}
 
 {:Return your timezone bias from UTC time in minutes.}
 function TimeZoneBias: integer;
@@ -226,7 +231,7 @@ function ParseURL(URL: string; var Prot, User, Pass, Host, Port, Path,
 
 {:Replaces all "Search" string values found within "Value" string, with the
  "Replace" string value.}
-function ReplaceString(Value, Search, Replace: string): string;
+function ReplaceString(Value, Search, Replace: AnsiString): AnsiString;
 
 {:It is like RPos, but search is from specified possition.}
 function RPosEx(const Sub, Value: string; From: integer): Integer;
@@ -306,6 +311,10 @@ function GetTempFile(const Dir, prefix: AnsiString): AnsiString;
  smaller, string is padded by Pad character.}
 function PadString(const Value: AnsiString; len: integer; Pad: AnsiChar): AnsiString;
 
+{:Read header from "Value" stringlist beginning at "Index" position. If header
+ is Splitted into multiple lines, then this procedure de-split it into one line.}
+function NormalizeHeader(Value: TStrings; var Index: Integer): string;
+
 var
   {:can be used for your own months strings for @link(getmonthnumber)}
   CustomMonthNames: array[1..12] of string;
@@ -340,7 +349,7 @@ var
 {==============================================================================}
 
 function TimeZoneBias: integer;
-{$IFNDEF WIN32}
+{$IFNDEF MSWINDOWS}
 {$IFNDEF FPC}
 var
   t: TTime_T;
@@ -691,7 +700,7 @@ end;
 {==============================================================================}
 
 function GetUTTime: TDateTime;
-{$IFDEF WIN32}
+{$IFDEF MSWINDOWS}
 {$IFNDEF FPC}
 var
   st: TSystemTime;
@@ -733,7 +742,7 @@ end;
 {==============================================================================}
 
 function SetUTTime(Newdt: TDateTime): Boolean;
-{$IFDEF WIN32}
+{$IFDEF MSWINDOWS}
 {$IFNDEF FPC}
 var
   st: TSystemTime;
@@ -786,7 +795,7 @@ end;
 
 {==============================================================================}
 
-{$IFNDEF WIN32}
+{$IFNDEF MSWINDOWS}
 function GetTick: LongWord;
 var
   Stamp: TTimeStamp;
@@ -1279,7 +1288,7 @@ end;
 
 {==============================================================================}
 
-function ReplaceString(Value, Search, Replace: string): string;
+function ReplaceString(Value, Search, Replace: AnsiString): AnsiString;
 var
   x, l, ls, lr: Integer;
 begin
@@ -1485,7 +1494,7 @@ end;
 {$IFNDEF CIL}
 function IncPoint(const p: pointer; Value: integer): pointer;
 begin
-  Result := PChar(p) + Value;
+  Result := PAnsiChar(p) + Value;
 end;
 {$ENDIF}
 
@@ -1660,7 +1669,7 @@ end;
 
 function SwapBytes(Value: integer): integer;
 var
-  s: string;
+  s: AnsiString;
   x, y, xl, yl: Byte;
 begin
   s := CodeLongInt(Value);
@@ -1687,7 +1696,7 @@ begin
   Result := StringOf(Buf);
 {$ELSE}
   Setlength(Result, Len);
-  x := Stream.read(Pchar(Result)^, Len);
+  x := Stream.read(PAnsiChar(Result)^, Len);
   SetLength(Result, x);
 {$ENDIF}
 end;
@@ -1704,14 +1713,14 @@ begin
   buf := BytesOf(Value);
   Stream.Write(buf,length(Value));
 {$ELSE}
-  Stream.Write(PChar(Value)^, Length(Value));
+  Stream.Write(PAnsiChar(Value)^, Length(Value));
 {$ENDIF}
 end;
 
 {==============================================================================}
 function GetTempFile(const Dir, prefix: AnsiString): AnsiString;
 {$IFNDEF FPC}
-{$IFDEF WIN32}
+{$IFDEF MSWINDOWS}
 var
   Path: AnsiString;
   x: integer;
@@ -1721,7 +1730,7 @@ begin
 {$IFDEF FPC}
   Result := GetTempFileName(Dir, Prefix);
 {$ELSE}
-  {$IFNDEF WIN32}
+  {$IFNDEF MSWINDOWS}
     Result := tempnam(Pointer(Dir), Pointer(prefix));
   {$ELSE}
     {$IFDEF CIL}
@@ -1755,6 +1764,35 @@ begin
     Result := Copy(value, 1, len)
   else
     Result := Value + StringOfChar(Pad, len - length(value));
+end;
+
+{==============================================================================}
+
+function NormalizeHeader(Value: TStrings; var Index: Integer): string;
+var
+  s, t: string;
+  n: Integer;
+begin
+  s := Value[Index];
+  Inc(Index);
+  if s <> '' then
+    while (Value.Count - 1) > Index do
+    begin
+      t := Value[Index];
+      if t = '' then
+        Break;
+      for n := 1 to Length(t) do
+        if t[n] = #9 then
+          t[n] := ' ';
+      if not(t[1] in [' ', '"', ':', '=']) then
+        Break
+      else
+      begin
+        s := s + ' ' + Trim(t);
+        Inc(Index);
+      end;
+    end;
+  Result := TrimRight(s);
 end;
 
 {==============================================================================}

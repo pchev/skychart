@@ -12,11 +12,12 @@ object f_about: Tf_about
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
-  ParentFont = False
   Position = poMainFormCenter
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.28.3'
   object Panel2: TPanel
+    Left = 0
     Height = 263
+    Top = 0
     Width = 534
     Align = alClient
     BevelOuter = bvNone
@@ -24,7 +25,9 @@ object f_about: Tf_about
     ClientWidth = 534
     TabOrder = 0
     object Panel0: TPanel
+      Left = 0
       Height = 263
+      Top = 0
       Width = 80
       Align = alLeft
       BevelOuter = bvNone
@@ -32,7 +35,9 @@ object f_about: Tf_about
       ClientWidth = 80
       TabOrder = 0
       object Image2: TImage
+        Left = 0
         Height = 263
+        Top = 0
         Width = 80
         Align = alClient
         Picture.Data = {
@@ -2345,6 +2350,7 @@ object f_about: Tf_about
     object Panel4: TPanel
       Left = 80
       Height = 263
+      Top = 0
       Width = 454
       Align = alClient
       ClientHeight = 263
@@ -2381,13 +2387,13 @@ object f_about: Tf_about
         TabOrder = 1
         object Page1: TPage
           Caption = 'About'
-          ClientWidth = 448
-          ClientHeight = 195
+          ClientWidth = 444
+          ClientHeight = 196
           object Label5: TLabel
             Left = 20
-            Height = 18
+            Height = 16
             Top = 30
-            Width = 80
+            Width = 59
             Caption = 'Sky Charts'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2395,9 +2401,9 @@ object f_about: Tf_about
           end
           object Label6: TLabel
             Left = 20
-            Height = 18
+            Height = 16
             Top = 6
-            Width = 105
+            Width = 76
             Caption = 'Cartes du Ciel'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2415,25 +2421,25 @@ object f_about: Tf_about
           end
           object Label8: TLabel
             Left = 20
-            Height = 16
+            Height = 14
             Top = 78
-            Width = 60
+            Width = 45
             Caption = 'Copyright'
             ParentColor = False
           end
           object Label2: TLabel
             Left = 20
-            Height = 16
+            Height = 14
             Top = 54
-            Width = 47
+            Width = 36
             Caption = 'Version'
             ParentColor = False
           end
           object Label4: TLabel
             Left = 20
-            Height = 16
+            Height = 14
             Top = 158
-            Width = 55
+            Width = 41
             Caption = 'Compiler'
             ParentColor = False
           end
@@ -2454,8 +2460,8 @@ object f_about: Tf_about
         end
         object Page2: TPage
           Caption = 'Authors'
-          ClientWidth = 410
-          ClientHeight = 195
+          ClientWidth = 444
+          ClientHeight = 196
           object Label3: TLabel
             Left = 11
             Height = 20
@@ -2467,9 +2473,9 @@ object f_about: Tf_about
           object Memo1: TMemo
             Cursor = crArrow
             Left = 11
-            Height = 146
+            Height = 147
             Top = 50
-            Width = 395
+            Width = 429
             Anchors = [akTop, akLeft, akRight, akBottom]
             Color = clBtnFace
             Lines.Strings = (
@@ -2491,11 +2497,13 @@ object f_about: Tf_about
         end
         object Page3: TPage
           Caption = 'License Agreement'
-          ClientWidth = 410
-          ClientHeight = 195
+          ClientWidth = 444
+          ClientHeight = 196
           object Memo2: TMemo
-            Height = 195
-            Width = 410
+            Left = 0
+            Height = 196
+            Top = 0
+            Width = 444
             Align = alClient
             Color = clBtnFace
             Lines.Strings = (

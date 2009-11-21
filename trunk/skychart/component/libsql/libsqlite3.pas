@@ -32,7 +32,7 @@ interface
 {$DEFINE WTYPES}
 {$ENDIF}
 
-uses {$IFNDEF FPC}{$IFDEF WIN32}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
+uses {$IFNDEF FPC}{$IFDEF MSWINDOWS}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
 
 {$IFDEF WTYPES}
 type
@@ -83,7 +83,7 @@ const SQLITE_TEXT       = 3;
 const SQLITE_BLOB       = 4;
 const SQLITE_NULL       = 5;
 
-const SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite3.so'{$ENDIF}{$IFDEF WIN32}'sqlite3.dll'{$ENDIF}{$IFDEF WINCE}'sqlite3.dll'{$ENDIF}{$IFDEF darwin}'libsqlite3.dylib'{$ENDIF};
+const SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite3.so'{$ENDIF}{$IFDEF MSWINDOWS}'sqlite3.dll'{$ENDIF}{$IFDEF WINCE}'sqlite3.dll'{$ENDIF}{$IFDEF darwin}'libsqlite3.dylib'{$ENDIF};
 
 function LoadLibSqlite3(var libraryName: String): Boolean;
 
@@ -400,7 +400,7 @@ begin
   {$ELSE}
   DLLHandle := LoadLibrary(PChar(libname));
   {$ENDIF}
-  {$IFNDEF WIN32}
+  {$IFNDEF MSWINDOWS}
       // try other possible library name
       if DLLHandle = 0 then begin
          libname := libname + '.0';

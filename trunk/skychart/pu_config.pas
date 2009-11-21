@@ -262,7 +262,7 @@ f_config_system1.onLoadMPCSample:=LoadMPCSample;
 f_config_system1.onDBChange:=SysDBChange;
 f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
 
-{$ifdef win32}
+{$ifdef mswindows}
  ScaleForm(self,Screen.PixelsPerInch/96);
  ScaleForm(f_config_time1,Screen.PixelsPerInch/96);
  ScaleForm(f_config_observatory1,Screen.PixelsPerInch/96);
@@ -277,10 +277,10 @@ f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
-{$ifdef WIN32}var i:integer;{$endif}
+{$ifdef mswindows}var i:integer;{$endif}
 begin
 locktree:=false;
-{$ifdef WIN32}
+{$ifdef mswindows}
 if Fnightvision<>nightvision then begin
    for i:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[i].Color:=nv_dark;
    SetFormNightVision(self,nightvision);

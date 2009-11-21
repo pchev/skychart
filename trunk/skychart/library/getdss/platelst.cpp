@@ -3,12 +3,14 @@
       /* 10 Dec 2001:  Nozomu Muto:  supplied Unix #includes and added */
       /* the missing strlwr() function                                 */
 #include <ctype.h>
+/*
 void    strlwr(char *str)
 {       int     c;
         while(c = *str){
                 *str++ = tolower(c);
         }
 }
+*/
 #else   /*UNIX*/
 #include <conio.h>
 #endif  /*UNIX*/
