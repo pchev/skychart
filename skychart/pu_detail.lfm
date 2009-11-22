@@ -1,9 +1,9 @@
 object f_detail: Tf_detail
-  Left = 912
+  Left = 897
   Height = 391
-  Top = 120
+  Top = 125
   Width = 398
-  ActiveControl = Button1
+  ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
   Caption = 'Details'
   ClientHeight = 391
@@ -63,6 +63,47 @@ object f_detail: Tf_detail
     DefaultFontSize = 8
     FlagErrors = False
     PopupMenu = PopupMenu1
-    PrintSettings.MarginLeft = 0
+    PrintSettings.MarginLeft = 0.5
+    PrintSettings.MarginTop = 0.5
+    PrintSettings.MarginRight = 0.5
+    PrintSettings.MarginBottom = 0.5
+    TabOrder = 1
+  end
+  object ActionList1: TActionList
+    left = 128
+    top = 144
+    object SelectAll: TAction
+      Caption = 'SelectAll'
+      OnExecute = SelectAllExecute
+      ShortCut = 16449
+    end
+    object Copy: TAction
+      Caption = 'Copy'
+      OnExecute = CopyExecute
+      ShortCut = 16451
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 72
+    top = 144
+    object SelectAll1: TMenuItem
+      Action = SelectAll
+      OnClick = SelectAllExecute
+    end
+    object Copy1: TMenuItem
+      Action = Copy
+      OnClick = CopyExecute
+    end
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 185
+    top = 144
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 248
+    top = 144
   end
 end
