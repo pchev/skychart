@@ -3,7 +3,7 @@
 # Patrick Chevalley <pch@ap-i.net>, 2009.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2009-11-22 16:21+0100\n"
+"PO-Revision-Date: 2009-11-22 16:34+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -88,7 +88,7 @@ msgstr "Ajout d'un label"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr "Ajouté les nom supplémentaires à l'index"
+msgstr "Ajouter les noms supplémentaires à l'index"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
@@ -4340,4 +4340,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 
