@@ -277,10 +277,14 @@ case RadioGroup2.ItemIndex of
        Imagetest.Height:=16;
       end;
   1 : begin
+       imagetest.Width:=22;
+       Imagetest.Height:=22;
+      end;
+  2 : begin
        imagetest.Width:=32;
        Imagetest.Height:=32;
       end;
-  2 : begin
+  3 : begin
        imagetest.Width:=64;
        Imagetest.Height:=32;
       end;
@@ -340,8 +344,9 @@ begin
   end else begin
     case icontype of
      0 : SysTray.Icon.LoadFromLazarusResource('black16x16');
-     1 : SysTray.Icon.LoadFromLazarusResource('black32x32');
-     2 : SysTray.Icon.LoadFromLazarusResource('black32x64');
+     1 : SysTray.Icon.LoadFromLazarusResource('black22x22');
+     2 : SysTray.Icon.LoadFromLazarusResource('black32x32');
+     3 : SysTray.Icon.LoadFromLazarusResource('black32x64');
     end;
   end;
   bmp.Width:=SysTray.Icon.Width;

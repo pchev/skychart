@@ -10,7 +10,7 @@
       <TargetFileExt Value=""/>
       <Title Value="cdcicon"/>
       <Icon Value="0"/>
-      <ActiveEditorIndexAtStart Value="1"/>
+      <ActiveEditorIndexAtStart Value="0"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -76,13 +76,13 @@
         <ComponentName Value="f_tray"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
-        <CursorPos X="23" Y="545"/>
-        <TopLine Value="523"/>
+        <CursorPos X="56" Y="439"/>
+        <TopLine Value="681"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="30"/>
         <Bookmarks Count="2">
-          <Item0 X="27" Y="383" ID="1"/>
-          <Item1 X="1" Y="460" ID="2"/>
+          <Item0 X="27" Y="388" ID="1"/>
+          <Item1 X="1" Y="465" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
       </Unit1>
