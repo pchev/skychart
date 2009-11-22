@@ -14,7 +14,7 @@ wget -E -r -p -np -nH --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=in
 
 wget -E -r -p -np -nH --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=index* -P doc_it --cache=off --restrict-file-names=windows -k http://ap-i.net/skychart/it/documentation/start http://ap-i.net/skychart/it/news/start
 
-wget -E -r -p -np -nH --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=index* -P doc_nl --cache=off --restrict-file-names=windows -k http://ap-i.net/skychart/nl/documentation/start http://ap-i.net/skychart/nl/nieuws/start
+wget -E -r -p -np -nH --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=index* -P doc_nl --cache=off --restrict-file-names=windows -k http://ap-i.net/skychart/nl/documentatie/start http://ap-i.net/skychart/nl/nieuws/start
 
 wget -E -r -p -np -nH --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=index* -P doc_ru --cache=off --restrict-file-names=windows -k http://ap-i.net/skychart/ru/documentation/start http://ap-i.net/skychart/ru/news/start
 
