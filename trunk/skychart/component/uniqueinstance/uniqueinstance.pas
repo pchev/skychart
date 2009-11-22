@@ -86,6 +86,7 @@ type
    {$ifdef unix}
     Process1: TProcess;
     function  GetPid:string;
+    function  OtherRunning:boolean;
     procedure DeleteLock;
    {$endif}
   public
@@ -170,6 +171,7 @@ var
   TempStr: String;
   i: Integer;
 begin
+try
   if not (csDesigning in ComponentState) and FEnabled then
   begin
     FIPCClient.ServerId := GetServerId;
@@ -213,6 +215,10 @@ begin
     end;
   end;//if
   inherited;
+
+except
+halt(1);
+end;
 end;
 
 constructor TUniqueInstance.Create(AOwner: TComponent);
@@ -237,6 +243,10 @@ end;
 
 procedure  TCdCUniqueInstance.Loaded;
 begin
+{$ifdef unix}
+  if not OtherRunning then
+     DeleteLock;
+{$endif}
   inherited;
 end;
 
@@ -247,9 +257,7 @@ begin
 {$ifdef unix}
   inc(retrycount);
   if retrycount<=1 then begin
-    s:=GetPid;
-    i:=pos(' ',s);
-    if i>0 then
+    if OtherRunning then
        Halt(1)
     else begin
        DeleteLock;
@@ -278,6 +286,9 @@ try
   Process1:=TProcess.Create(nil);
   FillChar(s,sizeof(s),' ');
   Process1.CommandLine:='pidof '+ExtractFileName(Application.ExeName);
+{$ifdef darwin}
+  Process1.CommandLine:='killall -s '+ExtractFileName(Application.ExeName);
+{$endif}
   Process1.Options:=[poWaitOnExit,poUsePipes,poNoConsole];
   Process1.Execute;
   if Process1.ExitStatus=0 then begin
@@ -289,6 +300,22 @@ try
 except
 end;
 end;
+
+function TCdCUniqueInstance.OtherRunning:boolean;
+var i : integer;
+    s:string;
+const
+{$ifdef darwin}
+  sep=#10;
+{$else}
+  sep=' ';
+{$endif}
+begin
+  s:=GetPid;
+  i:=pos(sep,s);
+  result:= i>0;
+end;
+
 {$endif}
 
 end.
