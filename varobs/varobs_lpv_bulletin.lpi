@@ -44,9 +44,9 @@
       </Unit0>
       <Unit1>
         <Filename Value="aavsob1.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="aavsob1"/>
         <CursorPos X="43" Y="283"/>

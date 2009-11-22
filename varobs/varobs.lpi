@@ -132,7 +132,8 @@
       </Options>
     </Linking>
     <Other>
-      <CustomOptions Value="-dUseCThreads"/>
+      <CustomOptions Value="-dUseCThreads
+"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
