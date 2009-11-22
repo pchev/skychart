@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2009-01-15 01:26+0100\n"
+"PO-Revision-Date: 2009-11-22 11:17+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -85,7 +85,7 @@ msgstr "Voeg label toe"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr "Voeg de gewijzigde namen toe aan de index"
+msgstr "Voeg de extra namen toe aan de index"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
@@ -649,7 +649,7 @@ msgstr "Commando niet gevonden!"
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Commando om bestand te creëren"
+msgstr "Commando om bestand te creëren."
 
 #: u_translation.rscommonname
 msgid "Common name"
@@ -875,7 +875,7 @@ msgstr "%sDatabase %s geopend.%s"
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr "Database instelling..."
+msgstr "Database instellen..."
 
 #: u_translation.rsdatabasetype
 msgid "Database type"
@@ -971,7 +971,7 @@ msgstr "DEC opties"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
-msgstr "verlaag tijd"
+msgstr "Verlaag tijd"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
@@ -1091,7 +1091,7 @@ msgstr "Verwijderen van voorgaande gevevens van deze datum."
 
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
-msgstr "Verwijder de huidige lokatie uit de database?"
+msgstr "Verwijder de huidige locatie uit de database?"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1673,7 +1673,7 @@ msgstr "Haal DSS afbeelding"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
-msgstr "Haal recente meetgegevens van JUPOS project"
+msgstr "Haal de recente Grote Rode Vlek meetgegevens van JUPOS project."
 
 #: u_translation.rsglobularclus
 msgid "Globular cluster"
@@ -1833,7 +1833,7 @@ msgstr "verhoog tijd"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "Geef hier aan hoe de vereiste waarde berekend moet worden uit de opgeslagen gegevens van het catalogus tekst-bestand."
+msgstr "Geef hier aan hoe de vereiste waarden berekend moeten worden uit de opgeslagen gegevens van het catalogus tekst-bestand."
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
@@ -2373,11 +2373,11 @@ msgstr "Meer sterren"
 
 #: u_translation.rsmorethan1000
 msgid "More than 1000 errors! The processing is aborted."
-msgstr "Meer dan 1000 fouten! Proces afgebroken."
+msgstr "Meer dan 1000 fouten! Het verwerken is afgebroken."
 
 #: u_translation.rsmorethanobje
 msgid "More than %s objects, the result is truncated."
-msgstr "Meer dan %s objecten, resultaat afgekort. "
+msgstr "Meer dan %s objecten, het resultaat is afgekort. "
 
 #: u_translation.rsmorning
 msgid "Morning"
@@ -2517,7 +2517,7 @@ msgstr "Bestaat niet/onbekend"
 
 #: u_translation.rsnonvisiblese
 msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "Geen zichtbaar zoekresultaat, zoom voor meer details"
+msgstr "Geen zichtbaar zoekresultaat. Zoom voor meer details, of controleer de object filter instellingen."
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
@@ -2533,7 +2533,7 @@ msgstr "Geen printer gevonden!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr ", geen eigen beweging"
+msgstr "(Niet gecorrigeerd voor eigen beweging, geen eigen bewegingsinformatie beschikbaar in deze catalogus.)"
 
 #: u_translation.rsnormalcolor
 msgid "Normal (colour)"
@@ -2565,7 +2565,7 @@ msgstr "%s niet gevonden"
 
 #: u_translation.rsnotfoundinan
 msgid "%s  Not found in any of the installed catalog indices."
-msgstr "%s Niet gevonden binnen geen van de geïnstalleerde catalogi indices."
+msgstr "%s Niet gevonden binnen de geïnstalleerde catalogi indices."
 
 #: u_translation.rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
@@ -2855,7 +2855,7 @@ msgstr "Plaat defect"
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
-msgstr "Plaat Id.    Datum   Exp.  Marge  CD  Observatorium"
+msgstr "Plaat id.    Datum exp.  Marge  CD  Observatorium"
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
@@ -2949,9 +2949,13 @@ msgstr "Positie Epoche"
 msgid "PostScript"
 msgstr "Postscript"
 
+#: u_translation.rsprefixnamewi
+msgid "Prefix name with catalog short name"
+msgstr ""
+
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
-msgstr "Voorvoegsel van de gewijzigde namen met hun label"
+msgstr "Laat de extra namen voorafgaan door hun label"
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
@@ -3011,11 +3015,11 @@ msgstr "Verwerken gereed. Totaal aantal kometen: %s"
 
 #: u_translation.rsprocessingen2
 msgid "Processing ended. Total number of asteroids: %s"
-msgstr "Verwerken gereed. Total aantal van planetoïden: %s"
+msgstr "Verwerken gereed. Total aantal planetoïden: %s"
 
 #: u_translation.rsprocessingen3
 msgid "Processing ended. Total number of location :%s"
-msgstr "Verwerken gereed. Total aantal van lokaties: %s"
+msgstr "Verwerken gereed. Total aantal locaties: %s"
 
 #: u_translation.rsprocessingli
 msgid "Processing line %s"
@@ -3299,7 +3303,7 @@ msgstr "Satelliet"
 
 #: u_translation.rssatring
 msgid "Sat. ring"
-msgstr "Sat.ring"
+msgstr "Sat. ring"
 
 #: u_translation.rssaturday
 msgid "Sat."
@@ -3467,7 +3471,7 @@ msgstr "Stel per as in hoeveel uw telescoop beweegt wanneer u de betreffende aan
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
-msgstr "Stel waarneemlokatie in"
+msgstr "Stel de waarneemlocatie in"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -3683,7 +3687,7 @@ msgstr "Sommige records zijn geweigerd, zie bestand %sreject.txt voor details."
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr "Iets is fout gegaan tijdens de programma-initialisatie. We moeten nu sluiten."
+msgstr "Iets is fout gegaan tijdens de programma-initialisatie. Het programma moet nu sluiten."
 
 #: u_translation.rssortbyra
 msgid "Sort by RA"
@@ -3927,11 +3931,11 @@ msgstr "Er zijn %s objecten in dit veld"
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Deze handeling vervangt alle database inhoud van het land %s met verse gegevens van NGA en GNIS.%sAl uw bewerkingen voor dit land zullen verloren gaan. Alleen de lokatie die u met een nieuwe naam heeft toegevoegd zal behouden blijven.%sWilt u verder gaan?"
+msgstr "Deze handeling vervangt alle database inhoud van het land %s met verse gegevens van NGA en GNIS.%sAl uw bewerkingen voor dit land zullen verloren gaan. Alleen locaties die u met een nieuwe naam heeft toegevoegd zullen behouden blijven.%sWilt u verder gaan?"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
-msgstr "Het bestand is niet herkent als een MPCORB bestand."
+msgstr "Het bestand is niet herkend als een MPCORB bestand."
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -3999,7 +4003,7 @@ msgstr "Totale straal"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr "Om deze nieuwe gegevens te gebruiken moet u de maandelijkse gegevens berekenen"
+msgstr "Om deze nieuwe gegevens te gebruiken moet u de maandelijkse gegevens berekenen."
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -4119,7 +4123,7 @@ msgstr "Bijwerken succesvol afgerond!"
 
 #: u_translation.rsupdateoraddt
 msgid "Update/add the current location to the database?"
-msgstr "Bijwerken of de huidige lokatie toevoegen aan de database?"
+msgstr "Bijwerken/toevoegen van de huidige locatie aan de database?"
 
 #: u_translation.rsuranus
 msgid "Uranus"
@@ -4155,7 +4159,7 @@ msgstr "Gebruik online DSS in plaats van RealSky"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
-msgstr "Gebruik alleen catalogi binnen dezelfde groep"
+msgstr "Combineer alleen catalogi binnen dezelfde groep."
 
 #: u_translation.rsuserid
 msgid "User id:"
@@ -4251,11 +4255,11 @@ msgstr "Waarschuwing!%sU staat op het punt om de database %s te vernietigen en a
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr "Waarschuwing! U gebruikt verschillende catalogi voor dezelfde objecten. Vergewis u ervan dat u dit wilt."
+msgstr "Waarschuwing! U gebruikt verschillende catalogi voor dezelfde objecten. U riskeert de afbeelding van duplicaten. Vergewis u ervan dat u dit wilt."
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "Waarschuwing! %sU heeft gekozen om data toe te voegen aan een bestaande catalogus.%sDe bestande catalogus en index moeten in precies hetzelfde format zijn, anders zal het beschadigd raken.%sHet is een goed idee om eerst een backup gemaakt te hebben van de huidige bestanden.%sWilt u verder gaan?"
+msgstr "Waarschuwing! %sU heeft gekozen om data toe te voegen aan een bestaande catalogus.%sDe bestaande catalogus en index moeten precies in hetzelfde format zijn, anders zal het beschadigd raken.%sHet is een goed idee om eerst een backup gemaakt te hebben van de huidige bestanden.%sWilt u verder gaan?"
 
 #: u_translation.rswednesday
 msgid "Wed."
@@ -4299,7 +4303,7 @@ msgstr "jaren"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "U bent nu gereed om planetoïden binnen deze tijdsperiode weer te geven. "
+msgstr "U bent nu gereed om planetoïden voor deze tijdsperiode weer te geven. "
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."

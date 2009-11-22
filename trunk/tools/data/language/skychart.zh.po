@@ -2951,6 +2951,10 @@ msgstr "位置历元"
 msgid "PostScript"
 msgstr "Postscript 文件"
 
+#: u_translation.rsprefixnamewi
+msgid "Prefix name with catalog short name"
+msgstr ""
+
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
 msgstr "别名前缀用他的标签"

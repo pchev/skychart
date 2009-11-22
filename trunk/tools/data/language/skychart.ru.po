@@ -2951,6 +2951,10 @@ msgstr "Эпоха положения"
 msgid "PostScript"
 msgstr "Postscript"
 
+#: u_translation.rsprefixnamewi
+msgid "Prefix name with catalog short name"
+msgstr ""
+
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
 msgstr "Префикс альтернативных названий с их метками"
