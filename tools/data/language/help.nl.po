@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-06 10:44+0200\n"
-"Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
+"PO-Revision-Date: 2009-05-28 20:12+0100\n"
+"Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team:  <translation@ap-i.net>\n"
@@ -12,233 +12,233 @@ msgstr ""
 
 #: u_help.hlpbarleft
 msgid "left_bar.html"
-msgstr ""
+msgstr "linker_balk.html"
 
 #: u_help.hlpbarmain
 msgid "main_bar.html"
-msgstr ""
+msgstr "hoofdbalk.html"
 
 #: u_help.hlpbarobj
 msgid "object_bar.html"
-msgstr ""
+msgstr "objectenbalk.html"
 
 #: u_help.hlpbarright
 msgid "right_bar.html"
-msgstr ""
+msgstr "rechter_balk.html"
 
 #: u_help.hlpbarstatus
 msgid "status_bar.html"
-msgstr ""
+msgstr "statusbalk.html"
 
 #: u_help.hlpbasedir
 msgid "en/documentation/"
-msgstr ""
+msgstr "nl/documentatie/"
 
 #: u_help.hlpcalast
 msgid "calendar_asteroid.html"
-msgstr ""
+msgstr "kalender_planetoide.html"
 
 #: u_help.hlpcalcom
 msgid "calendar_comet.html"
-msgstr ""
+msgstr "kalender_komeet.html"
 
 #: u_help.hlpcalinput
 msgid "calendar_input_area.html"
-msgstr ""
+msgstr "kalender_invoer_gebied.html"
 
 #: u_help.hlpcalluna
 msgid "calendar_lunar_eclipses.html"
-msgstr ""
+msgstr "kalender_maansverduisteringen.html"
 
 #: u_help.hlpcalpla
 msgid "calendar_planet.html"
-msgstr ""
+msgstr "kalender_planeet.html"
 
 #: u_help.hlpcalsol
 msgid "calendar_solar_eclipses.html"
-msgstr ""
+msgstr "kalender_zonsverduisteringen.html"
 
 #: u_help.hlpcaltw
 msgid "calendar_twilight.html"
-msgstr ""
+msgstr "kalender_schemer.html"
 
 #: u_help.hlpcatalog
 msgid "catalog.html"
-msgstr ""
+msgstr "catalogi.html"
 
 #: u_help.hlpcatgen
 msgid "catgen.html"
-msgstr ""
+msgstr "catgen.html"
 
 #: u_help.hlpcfgchart
 msgid "chart_coordinates.html"
-msgstr ""
+msgstr "kaart_coordinaten.html"
 
 #: u_help.hlpcfgdate
 msgid "date_time.html"
-msgstr ""
+msgstr "datum_tijd.html"
 
 #: u_help.hlpcfgdispl
 msgid "display.html"
-msgstr ""
+msgstr "weergave.html"
 
 #: u_help.hlpcfgint
 msgid "internet.html"
-msgstr ""
+msgstr "internet.html"
 
 #: u_help.hlpcfgobs
 msgid "observatory.html"
-msgstr ""
+msgstr "observatorium.html"
 
 #: u_help.hlpcfgpict
 msgid "pictures.html"
-msgstr ""
+msgstr "afbeeldingen.html"
 
 #: u_help.hlpcfgsol
 msgid "solar_system.html"
-msgstr ""
+msgstr "zonnestelsel.html"
 
 #: u_help.hlpcfgsys
 msgid "system.html"
-msgstr ""
+msgstr "systeem.html"
 
 #: u_help.hlpcmdline
 msgid "line_commands.html"
-msgstr ""
+msgstr "commandoregel_mogelijkheden.html"
 
 #: u_help.hlpdoclic
 msgid "documentation_license.html"
-msgstr ""
+msgstr "documentatie_licentie.html"
 
 #: u_help.hlpfaq
 msgid "faq.html"
-msgstr ""
+msgstr "faq.html"
 
 #: u_help.hlpindex
 msgid "start.html"
-msgstr ""
+msgstr "start.html"
 
 #: u_help.hlpinfo
 msgid "detailed_information.html"
-msgstr ""
+msgstr "gedetailleerde_informatie.html"
 
 #: u_help.hlpinstcat
 msgid "install_new_catalogs.html"
-msgstr ""
+msgstr "installatie_van_extra_catalogi.html"
 
 #: u_help.hlpinstfreeb
 msgid "install_on_freebsd.html"
-msgstr ""
+msgstr "installatie_op_freebsd.html"
 
 #: u_help.hlpinstlinux
 msgid "install_on_linux_debian.html"
-msgstr ""
+msgstr "installatie_op_linux_debian.html"
 
 #: u_help.hlpinstmac
 msgid "install_on_mac_os_x.html"
-msgstr ""
+msgstr "installatie_op_mac_os_x.html"
 
 #: u_help.hlpinstsrc
 msgid "install_and_compile_the_source_code.html"
-msgstr ""
+msgstr "installatie_en_compileren_van_de_broncode.html"
 
 #: u_help.hlpinstwin
 msgid "install_on_windows.html"
-msgstr ""
+msgstr "installatie_op_windows.html"
 
 #: u_help.hlpkb
 msgid "keyboard_shortcut.html"
-msgstr ""
+msgstr "toetsenbord_sneltoetsen.html"
 
 #: u_help.hlplabel
 msgid "labels.html"
-msgstr ""
+msgstr "labels.html"
 
 #: u_help.hlpmenuchart
 msgid "menuchart.html"
-msgstr ""
+msgstr "menukaart.html"
 
 #: u_help.hlpmenuedit
 msgid "menuedit.html"
-msgstr ""
+msgstr "menubewerken.html"
 
 #: u_help.hlpmenufile
 msgid "menufile.html"
-msgstr ""
+msgstr "menubestand.html"
 
 #: u_help.hlpmenuhelp
 msgid "menuhelp.html"
-msgstr ""
+msgstr "menuhelp.html"
 
 #: u_help.hlpmenusetup
 msgid "menusetup.html"
-msgstr ""
+msgstr "menuinstellingen.html"
 
 #: u_help.hlpmenutel
 msgid "menutelescope.html"
-msgstr ""
+msgstr "menutelescoop.html"
 
 #: u_help.hlpmenuview
 msgid "menuview.html"
-msgstr ""
+msgstr "menuweergave.html"
 
 #: u_help.hlpmenuwin
 msgid "menuwindow.html"
-msgstr ""
+msgstr "menuvenster.html"
 
 #: u_help.hlpobjlist
 msgid "object_list.html"
-msgstr ""
+msgstr "objectenlijst.html"
 
 #: u_help.hlppopup
 msgid "menupop_up.html"
-msgstr ""
+msgstr "menupop-up.html"
 
 #: u_help.hlpposition
 msgid "position.html"
-msgstr ""
+msgstr "positie_en_beeldveld.html"
 
 #: u_help.hlpqschart
 msgid "quick_start_chart.html"
-msgstr ""
+msgstr "snelstart_kaart.html"
 
 #: u_help.hlpqsds
 msgid "quick_start_deep_sky.html"
-msgstr ""
+msgstr "snelstart_deep_sky.html"
 
 #: u_help.hlpqsguide
 msgid "quick_start_guide.html"
-msgstr ""
+msgstr "snelstartgids.html"
 
 #: u_help.hlpqssol
 msgid "quick_start_solar_system.html"
-msgstr ""
+msgstr "snelstart_zonnestelsel.html"
 
 #: u_help.hlpqssrv
 msgid "quick_start_server.html"
-msgstr ""
+msgstr "snelstart_server.html"
 
 #: u_help.hlpqstel
 msgid "quick_start_telescope.html"
-msgstr ""
+msgstr "snelstart_een_telescoop_bedienen.html"
 
 #: u_help.hlpsearch
 msgid "advanced_search.html"
-msgstr ""
+msgstr "geavanceerd_zoeken.html"
 
 #: u_help.hlpsetfov
 msgid "set_fov.html"
-msgstr ""
+msgstr "positie_en_beeldveld.html"
 
 #: u_help.hlpsoftlic
 msgid "software_license.html"
-msgstr ""
+msgstr "software_licentie.html"
 
 #: u_help.hlpsrvcmd
 msgid "server_commands.html"
-msgstr ""
+msgstr "server_commandos.html"
 
 #: u_help.hlpsrvinfo
 msgid "server_information.html"
-msgstr ""
+msgstr "server_informatie.html"
 

@@ -4314,3 +4314,7 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
+#: u_translation:rsprefixnamewi
+msgid "Prefix name with catalog short name"
+msgstr ""
+

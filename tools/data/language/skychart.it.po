@@ -2950,6 +2950,10 @@ msgstr "Epoca dei dati"
 msgid "PostScript"
 msgstr "Postscript"
 
+#: u_translation.rsprefixnamewi
+msgid "Prefix name with catalog short name"
+msgstr ""
+
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
 msgstr "Precedi il nome alternativo con l'etichetta"

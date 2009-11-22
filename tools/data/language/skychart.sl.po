@@ -2950,6 +2950,10 @@ msgstr ""
 msgid "PostScript"
 msgstr ""
 
+#: u_translation.rsprefixnamewi
+msgid "Prefix name with catalog short name"
+msgstr ""
+
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
 msgstr "Dodaj predpono k nadomestnim imenom s svojimi oznakami"

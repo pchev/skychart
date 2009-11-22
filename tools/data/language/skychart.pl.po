@@ -2953,6 +2953,10 @@ msgstr "Epoka pozycji"
 msgid "PostScript"
 msgstr "Przypis"
 
+#: u_translation.rsprefixnamewi
+msgid "Prefix name with catalog short name"
+msgstr ""
+
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
 msgstr "Poprzedź alernatywne nazwy ich etykietami"
