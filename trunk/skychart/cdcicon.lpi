@@ -72,8 +72,8 @@
       </Unit0>
       <Unit1>
         <Filename Value="pu_tray.pas"/>
-        <ComponentName Value="f_tray"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_tray"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
         <CursorPos X="23" Y="545"/>
@@ -127,9 +127,9 @@
       </Unit7>
       <Unit8>
         <Filename Value="pu_clock.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_clock"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_clock"/>
         <CursorPos X="42" Y="74"/>
@@ -170,7 +170,7 @@
         <Filename Value="u_translation.pas"/>
         <UnitName Value="u_translation"/>
         <CursorPos X="11" Y="1131"/>
-        <TopLine Value="1111"/>
+        <TopLine Value="1095"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -198,9 +198,9 @@
       </Unit16>
       <Unit17>
         <Filename Value="pu_calendar.pas"/>
+        <IsPartOfProject Value="True"/>
         <ComponentName Value="f_calendar"/>
         <HasResources Value="True"/>
-        <IsPartOfProject Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_calendar"/>
         <CursorPos X="47" Y="971"/>

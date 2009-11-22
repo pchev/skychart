@@ -38,7 +38,8 @@ extern "C" {
 
 #include "errcode.h"
 
-// const int _MAX_PATH = 255;
+/* comment the folowing line in case of compilation problem */
+const int _MAX_PATH = 255;
 
 /* Structure to pass configuration information between   */
 /* SkyMap and the DLL:                                   */
