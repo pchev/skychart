@@ -79,7 +79,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="cdcclient1"/>
-        <CursorPos X="19" Y="298"/>
+        <CursorPos X="66" Y="283"/>
         <TopLine Value="263"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="24"/>

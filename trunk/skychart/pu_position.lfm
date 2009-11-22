@@ -1,7 +1,7 @@
 object f_position: Tf_position
-  Left = 437
+  Left = 459
   Height = 282
-  Top = 105
+  Top = 107
   Width = 477
   ActiveControl = Panel2
   BorderStyle = bsToolWindow
@@ -45,7 +45,7 @@ object f_position: Tf_position
     TabOrder = 1
     object coord1: TLabel
       Left = 8
-      Height = 14
+      Height = 19
       Top = 36
       Width = 13
       Caption = 'Az'
@@ -53,7 +53,7 @@ object f_position: Tf_position
     end
     object coord2: TLabel
       Left = 248
-      Height = 14
+      Height = 19
       Top = 36
       Width = 13
       Caption = 'Alt'
@@ -61,9 +61,9 @@ object f_position: Tf_position
     end
     object coord: TLabel
       Left = 8
-      Height = 14
+      Height = 19
       Top = 8
-      Width = 28
+      Width = 29
       Caption = 'coord'
       ParentColor = False
     end
@@ -74,6 +74,146 @@ object f_position: Tf_position
       Width = 176
       kind = Az
       value = 0
+      Enabled = True
+      OnChange = CoordChange
+      TabOrder = 0
     end
+    object lat: TRaDec
+      Left = 280
+      Height = 23
+      Top = 32
+      Width = 176
+      kind = Alt
+      value = 0
+      Enabled = True
+      OnChange = CoordChange
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 77
+    Top = 3
+    Width = 464
+    ClientHeight = 77
+    ClientWidth = 464
+    FullRepaint = False
+    TabOrder = 0
+    object eq1: TLabel
+      Left = 8
+      Height = 19
+      Top = 36
+      Width = 16
+      Caption = 'RA'
+      ParentColor = False
+    end
+    object eq2: TLabel
+      Left = 248
+      Height = 19
+      Top = 36
+      Width = 16
+      Caption = 'DE'
+      ParentColor = False
+    end
+    object Equinox: TLabel
+      Left = 8
+      Height = 19
+      Top = 8
+      Width = 39
+      Caption = 'Equinox'
+      ParentColor = False
+    end
+    object ra: TRaDec
+      Left = 64
+      Height = 23
+      Top = 32
+      Width = 176
+      kind = RA
+      value = 0
+      Enabled = True
+      OnChange = EqChange
+      TabOrder = 0
+    end
+    object de: TRaDec
+      Left = 280
+      Height = 23
+      Top = 32
+      Width = 176
+      kind = DE
+      value = 0
+      Enabled = True
+      OnChange = EqChange
+      TabOrder = 1
+    end
+  end
+  object Panel3: TPanel
+    Left = 8
+    Height = 49
+    Top = 176
+    Width = 464
+    ClientHeight = 49
+    ClientWidth = 464
+    FullRepaint = False
+    TabOrder = 2
+    object Label3: TLabel
+      Left = 8
+      Height = 19
+      Top = 14
+      Width = 24
+      Caption = 'FOV'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 248
+      Height = 19
+      Top = 14
+      Width = 41
+      Caption = 'Rotation'
+      ParentColor = False
+    end
+    object Fov: TRaDec
+      Left = 64
+      Height = 23
+      Top = 9
+      Width = 176
+      kind = Az
+      value = 0
+      Enabled = True
+      TabOrder = 0
+    end
+    object rot: TFloatEdit
+      Left = 336
+      Height = 24
+      Hint = '-180..180'
+      Top = 9
+      Width = 73
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      Value = 0
+      MinValue = -180
+      MaxValue = 180
+      Digits = 5
+    end
+  end
+  object Button3: TButton
+    Left = 208
+    Height = 25
+    Top = 240
+    Width = 75
+    Caption = 'Help'
+    OnClick = Button3Click
+    TabOrder = 5
+  end
+  object HTMLHelpDatabase1: THTMLHelpDatabase
+    AutoRegister = True
+    left = 31
+    top = 241
+  end
+  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
+    BrowserParams = '%s'
+    AutoRegister = True
+    left = 80
+    top = 241
   end
 end
