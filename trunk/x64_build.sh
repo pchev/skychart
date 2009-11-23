@@ -73,6 +73,8 @@ echo $lastrev ' - ' $currentrev
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
   cd $builddir
   mv debian/skychart64/usr/* rpm/skychart/usr/
+  # Redhat 64bits lib is lib64 
+  mv rpm/skychart/usr/lib rpm/skychart/usr/lib64
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/skychart64.spec
   sed -i "/Release:/ s/1/$currentrev/" SPECS/skychart64.spec
