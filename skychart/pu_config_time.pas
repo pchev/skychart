@@ -152,6 +152,7 @@ type
 implementation
 
 procedure Tf_config_time.SetLang;
+var Alabels: TDatesLabelsArray;
 begin
 Caption:=rsDateTime;
 Page1.caption:=rsTime;
@@ -203,15 +204,16 @@ Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
 JDCalendarDialog1.Caption:=rsJDCalendar;
-JDCalendarDialog1.labels.Mon:=rsMonday;
-JDCalendarDialog1.labels.Tue:=rsTuesday;
-JDCalendarDialog1.labels.Wed:=rsWednesday;
-JDCalendarDialog1.labels.Thu:=rsThursday;
-JDCalendarDialog1.labels.Fri:=rsFriday;
-JDCalendarDialog1.labels.Sat:=rsSaturday;
-JDCalendarDialog1.labels.Sun:=rsSunday;
-JDCalendarDialog1.labels.jd:=rsJulianDay;
-JDCalendarDialog1.labels.today:=rsToday;
+Alabels.Mon:=rsMonday;
+Alabels.Tue:=rsTuesday;
+Alabels.Wed:=rsWednesday;
+Alabels.Thu:=rsThursday;
+Alabels.Fri:=rsFriday;
+Alabels.Sat:=rsSaturday;
+Alabels.Sun:=rsSunday;
+Alabels.jd:=rsJulianDay;
+Alabels.today:=rsToday;
+JDCalendarDialog1.labels:=Alabels;
 RadioGroup1.Caption:=rsShowLabels;
 RadioGroup1.Items[0]:=rsEveryPositio;
 RadioGroup1.Items[1]:=rsOneOfTwo;
