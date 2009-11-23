@@ -1,7 +1,7 @@
 object f_getdss: Tf_getdss
-  Left = 270
+  Left = 290
   Height = 308
-  Top = 143
+  Top = 144
   Width = 420
   ActiveControl = ListBox1
   Caption = 'List of available plates'
@@ -39,7 +39,6 @@ object f_getdss: Tf_getdss
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
-    TabOrder = 3
     Visible = False
   end
   object ListBox1: TListBox
