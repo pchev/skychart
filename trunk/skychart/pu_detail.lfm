@@ -1,7 +1,7 @@
 object f_detail: Tf_detail
-  Left = 897
+  Left = 875
   Height = 391
-  Top = 125
+  Top = 124
   Width = 398
   ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
@@ -67,7 +67,6 @@ object f_detail: Tf_detail
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
-    TabOrder = 1
   end
   object ActionList1: TActionList
     left = 128
