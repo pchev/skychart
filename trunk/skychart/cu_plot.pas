@@ -1897,6 +1897,7 @@ end;
 
 function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
 var ts:TSize;
+    ATextStyle: TTextStyle;
 begin
 if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
 then begin
@@ -1904,7 +1905,9 @@ then begin
 // even if label editing is selected
 if (cfgchart.onprinter or forcetextlabel) then begin
 with cnv do begin
-  TextStyle.Opaque:=opaque;
+  ATextStyle := TextStyle;
+  ATextStyle.Opaque:=opaque;
+  TextStyle:=ATextStyle;
   if opaque then Brush.Style:=bsSolid
             else Brush.Style:=bsClear;
   Pen.Mode:=pmCopy;
@@ -1973,11 +1976,14 @@ end;
 procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true; clip:boolean=false; marge: integer=5);
 var ts:TSize;
     arect: TRect;
+    ATextStyle:TTextStyle;
 begin
 if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
 then
 with cnv do begin
-TextStyle.Opaque:=opaque;
+ATextStyle := TextStyle;
+ATextStyle.Opaque:=opaque;
+TextStyle:=ATextStyle;
 if opaque then Brush.Style:=bsSolid
           else Brush.Style:=bsClear;
 Brush.Color:=cfgplot.backgroundcolor;
@@ -2020,11 +2026,14 @@ var ls,p:Integer;
     buf: string;
     arect: TRect;
     ts: TSize;
+    ATextStyle:TTextStyle;
 begin
 if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
 then
 with cnv do begin
-TextStyle.Opaque:=opaque;
+ATextStyle := TextStyle;
+ATextStyle.Opaque:=opaque;
+TextStyle:=ATextStyle;
 if opaque then Brush.Style:=bsSolid
           else Brush.Style:=bsClear;
 Brush.Color:=cfgplot.backgroundcolor;

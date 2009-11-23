@@ -25,7 +25,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs, unzip,
+uses
+  {$ifdef VER2_2}
+  unzip,
+  {$else}
+  Unzip51g,
+  {$endif}
+  u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
   Spin, downloaddialog, EditBtn, LazHelpHTML;
