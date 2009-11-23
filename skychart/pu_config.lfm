@@ -3,7 +3,7 @@ object f_config: Tf_config
   Height = 540
   Top = 125
   Width = 730
-  ActiveControl = Applyall
+  ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
   Caption = 'Configuration'
   ClientHeight = 540
@@ -163,9 +163,9 @@ object f_config: Tf_config
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16
-      Height = 19
+      Height = 22
       Top = 12
-      Width = 144
+      Width = 162
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
@@ -229,7 +229,6 @@ object f_config: Tf_config
       Width = 230
       Align = alClient
       AutoExpand = True
-      DefaultItemHeight = 15
       ExpandSignType = tvestArrow
       HideSelection = False
       HotTrack = True

@@ -338,6 +338,7 @@ end;
 end;
 
 procedure Tf_config.ShowPage(i,j:Integer);
+var k: integer;
 begin
    // before the page change:
    if MultiDoc1.ActiveObject=f_config_catalog1 then begin
@@ -347,6 +348,8 @@ begin
      if f_config_system1.Notebook1.ActivePageComponent=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
    end;
    // page change
+   for k:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[k].Visible:=false;
+   MultiDoc1.Childs[i].Visible:=true;
    MultiDoc1.SetActiveChild(i);
    case i of
      0 : begin f_config_time1.Notebook1.PageIndex:=j;        f_config_time1.FormShow(self);  end;
