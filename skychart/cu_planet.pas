@@ -73,7 +73,7 @@ type
      Procedure ComputePlanet(cfgsc: Tconf_skychart);
      Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
      function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
-     function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string):boolean;
+     function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
      Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp : double; highprec:boolean=true);
      Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double; highprec:boolean=true);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double;  highprec:boolean=true);
@@ -98,13 +98,13 @@ type
      Function ConnectDB(host,db,user,pass:string; port:integer):boolean;
      Function NewAstDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewAstDayCallback(Sender:TObject; Row:TResultRow);
-     function  FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string):boolean;
+     function  FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
      function  FindAsteroidName(astname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
      function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
      Procedure PrepareAsteroidCallback(Sender:TObject; Row:TResultRow);
      Function NewComDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewComDayCallback(Sender:TObject; Row:TResultRow);
-     function FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string):boolean;
+     function FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
      function FindCometName(comname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
      procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ; var i: integer; cfgsc: Tconf_skychart);
      procedure PlanetAltitude(pla: integer; jd0,hh:double; cfgsc: Tconf_skychart; var har,sina: double);
@@ -927,7 +927,7 @@ result:=false;
    end;
 end;
 
-function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string):boolean;
+function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
 var
    yy,mm,dd,i : integer;
    tar,tde,ar,de : double;
@@ -969,10 +969,11 @@ repeat
   tar:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
   tde:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
   // search if this planet center is at the position
-  if (tar<x1) or (tar>x2) or
+  if ( trunc ) and (
+     (tar<x1) or (tar>x2) or
      (tde<y1) or (tde>y2) or
      ((CurrentPlanet>11)and (currentplanet<32)and(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]>90))or
-     ((CurrentPlanet>11)and (currentplanet<32)and cfgsc.StarFilter and (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc.StarMagMax))
+     ((CurrentPlanet>11)and (currentplanet<32)and cfgsc.StarFilter and (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc.StarMagMax)) )
      then begin
         // no
         // but ok if the cursor is inside the planetary disk
@@ -1881,7 +1882,7 @@ end
  else result:=false;
 end;
 
-function TPlanet.FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string):boolean;
+function TPlanet.FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
 var
    yy,mm,dd : integer;
    tar,tde : double;
@@ -1905,6 +1906,7 @@ if cfgsc.AsteroidNb>0 then repeat
   tar:=NormRa(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,1]);
   tde:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,2];
   // search if this asteroid is at the position
+  if trunc then begin
   if (tar<x1) or (tar>x2) or
      (tde<y1) or (tde>y2)
      then begin
@@ -1912,6 +1914,8 @@ if cfgsc.AsteroidNb>0 then repeat
         result:=false;
      end
      else result := true;
+  end
+  else result := true;
 until result;
 cfgsc.FindOK:=result;
 if result then begin
@@ -1954,7 +1958,7 @@ cfgsc.FindDesc:=Desc;
 cfgsc.FindNote:='';
 end;
 
-function TPlanet.FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string):boolean;
+function TPlanet.FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
 var
    yy,mm,dd : integer;
    tar,tde : double;
@@ -1978,6 +1982,7 @@ if cfgsc.CometNb>0 then repeat
   tar:=NormRa(cfgsc.CometLst[CurrentComStep,CurrentComet,1]);
   tde:=cfgsc.CometLst[CurrentComStep,CurrentComet,2];
   // search if this comet is at the position
+  if trunc then begin
   if (tar<x1) or (tar>x2) or
      (tde<y1) or (tde>y2)
      then begin
@@ -1985,6 +1990,8 @@ if cfgsc.CometNb>0 then repeat
         result:=false;
      end
      else result := true;
+  end
+  else result:=true;
 until result;
 cfgsc.FindOK:=result;
 if result then begin

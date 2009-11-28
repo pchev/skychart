@@ -1670,7 +1670,6 @@ end;
 end;
 
 procedure Tskychart.FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
-// todo: do not work if crossing 0h ra
 var x1,x2,y1,y2,xx1,yy1:double;
     rec: Gcatrec;
     desc,n,m,d: string;
@@ -1696,7 +1695,7 @@ begin
 end;
 Procedure FindatPosPlanet;
 begin
- ok:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+ ok:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,false);
  while ok do begin
    if i>maxln then break;
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
@@ -1705,12 +1704,12 @@ begin
       text:=text+desc+crlf;
       inc(i);
    end;
-   ok:=fplanet.findplanet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc);
+   ok:=fplanet.findplanet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,false);
  end;
 end;
 Procedure FindatPosAsteroid;
 begin
- ok:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+ ok:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,false);
  while ok do begin
    if i>maxln then break;
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
@@ -1719,12 +1718,12 @@ begin
       text:=text+desc+crlf;
       inc(i);
    end;
-   ok:=fplanet.findasteroid(x1,y1,x2,y2,true,cfgsc,n,m,d,desc);
+   ok:=fplanet.findasteroid(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,false);
  end;
 end;
 Procedure FindatPosComet;
 begin
- ok:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+ ok:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,false);
  while ok do begin
    if i>maxln then break;
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
@@ -1733,7 +1732,7 @@ begin
       text:=text+desc+crlf;
       inc(i);
    end;
-   ok:=fplanet.findcomet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc);
+   ok:=fplanet.findcomet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,false);
  end;
 end;
 /////////////
