@@ -41,7 +41,7 @@ uses
 {$ifdef unix}
   process, math,
 {$endif}
-  Forms, Classes, SysUtils, simpleipc, ExtCtrls;
+  Forms, Classes, SysUtils, cdcsimpleipc, ExtCtrls;
   
 type
 
