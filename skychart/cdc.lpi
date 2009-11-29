@@ -25,7 +25,7 @@
       <local>
         <FormatVersion Value="1"/>
         <CommandLineParams Value="--unique --nosplash"/>
-        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+        <LaunchingApplication PathPlusParams="/usr/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
         <WorkingDirectory Value="/home/pch/cdc/bin"/>
       </local>
     </RunParams>
@@ -460,8 +460,6 @@
       <Verbosity>
         <ShowHints Value="False"/>
       </Verbosity>
-      <CustomOptions Value="
-"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
