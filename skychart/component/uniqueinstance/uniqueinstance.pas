@@ -40,9 +40,12 @@ interface
 uses
 {$ifdef unix}
   process, math,
+  cdcsimpleipc,
+{$else}
+  simpleipc,
 {$endif}
-  Forms, Classes, SysUtils, cdcsimpleipc, ExtCtrls;
-  
+  Forms, Classes, SysUtils,  ExtCtrls;
+
 type
 
   TOnOtherInstance = procedure (Sender : TObject; ParamCount: Integer; Parameters: array of String) of object;
