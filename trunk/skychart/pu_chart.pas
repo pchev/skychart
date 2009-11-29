@@ -29,6 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 {$ifdef lclqt} {$define ImageBuffered} {$endif}
 {$ifdef lclcarbon} {$define ImageBuffered} {$endif}
+{$ifdef lclgtk2} {$define ImageBuffered} {$endif}
 
 interface
 
@@ -720,6 +721,9 @@ end;
 
 procedure Tf_chart.Image1Paint(Sender: TObject);
 begin
+{$ifdef trace_debug}
+ WriteTrace('Paint');
+{$endif}
 sc.plot.FlushCnv;
 {$ifndef ImageBuffered}
 ZoomStep:=0;
@@ -1398,6 +1402,9 @@ end;
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+{$ifdef trace_debug}
+ WriteTrace('MouseUp');
+{$endif}
 if MovingCircle then begin
    sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
    MovingCircle := false;
@@ -1432,6 +1439,9 @@ end;
 procedure Tf_chart.Image1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
+{$ifdef trace_debug}
+ WriteTrace('MouseDown');
+{$endif}
 lastx:=x;
 lasty:=y;
 lastyzoom:=y;
@@ -1514,6 +1524,9 @@ Procedure Tf_chart.ZoomBox(action,x,y:integer);
 var
    x1,x2,y1,y2,dx,dy,xc,yc,lc : integer;
 begin
+{$ifdef trace_debug}
+// WriteTrace('zoombox '+inttostr(action));
+{$endif}
 case action of
 1 : begin    // mouse down
    ZoomMove:=0;
