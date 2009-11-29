@@ -1493,14 +1493,12 @@ try
 {$ifdef trace_debug}
  debugln('Enter f_main.formcreate');
 {$endif}
-{$ifndef darwin}
 UniqueInstance1:=TCdCUniqueInstance.Create(self);
 UniqueInstance1.Identifier:='skychart';
 UniqueInstance1.OnOtherInstance:=OtherInstance;
 UniqueInstance1.OnInstanceRunning:=InstanceRunning;
 UniqueInstance1.Enabled:=true;
 UniqueInstance1.Loaded;
-{$endif}
 step:='Init';
 {$ifdef trace_debug}
  debugln(step);
@@ -3328,11 +3326,7 @@ cfgm.ServerIPaddr:='127.0.0.1';
 cfgm.ServerIPport:='3292'; // x'CDC' :o)
 cfgm.IndiPanelCmd:=dcd_cmd;
 cfgm.keepalive:=true;
-{$ifdef darwin}
-cfgm.AutostartServer:=false;
-{$else}
 cfgm.AutostartServer:=true;
-{$endif}
 cfgm.dbhost:='localhost';
 cfgm.dbport:=3306;
 cfgm.db:=slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]);
