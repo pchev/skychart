@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2009-11-22 11:17+0100\n"
+"PO-Revision-Date: 2009-11-30 08:33+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -161,7 +161,7 @@ msgstr "Altijd kompasroos tonen"
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
-msgstr "Jaarlijkse eigen beweging"
+msgstr "Jaarlijkse eigenbeweging"
 
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
@@ -1239,7 +1239,7 @@ msgstr "Wilt u de programma-instellingen nu opslaan?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
-msgstr "Beeld een lijn af die de eigen beweging weergeeft voor de volgende"
+msgstr "Beeld een lijn af die de eigenbeweging weergeeft voor de volgende"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -2533,7 +2533,7 @@ msgstr "Geen printer gevonden!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr "(Niet gecorrigeerd voor eigen beweging, geen eigen bewegingsinformatie beschikbaar in deze catalogus.)"
+msgstr "(Niet gecorrigeerd voor eigenbeweging, geen eigenbewegingsinformatie beschikbaar in deze catalogus.)"
 
 #: u_translation.rsnormalcolor
 msgid "Normal (colour)"
@@ -2951,7 +2951,7 @@ msgstr "Postscript"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr ""
+msgstr "Voeg de catalogus korte benaming voor de objectnaam"
 
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
@@ -3055,15 +3055,15 @@ msgstr "Projectie-instelling"
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr "Eigen beweging in rechte klimming (RA)"
+msgstr "Eigenbeweging in rechte klimming (RA)"
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
-msgstr "Eigen beweging in declinatie (DEC)"
+msgstr "Eigenbeweging in declinatie (DEC)"
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
-msgstr "Eigen beweging"
+msgstr "Eigenbeweging"
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
@@ -3775,7 +3775,7 @@ msgstr "Sterrenfilter"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "Sterren eigen beweging opties (indien beschikbaar in catalogus)"
+msgstr "Sterren eigenbeweging opties (indien beschikbaar in catalogus)"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
@@ -4183,7 +4183,7 @@ msgstr "Gebruik TCP/IP server"
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr "Gebruik de eigen beweging om de positie te corrigeren voor de gegeven epoche"
+msgstr "Gebruik de eigenbeweging om de positie te corrigeren voor de gegeven epoche"
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
