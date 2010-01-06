@@ -1,1027 +1,1093 @@
-#translation of skychart.po to Polish by Jarosław Wójcik <wojcikj [at] op [dot] pl>, 2010
+# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-01-01 17:23+0100\n"
+"PO-Revision-Date: 2009-02-12 15:35+0200\n"
 "Last-Translator: \n"
-"Project-Id-Version: skychart\n"
+"Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
-"Language-Team: polski <pl@li.org>\n"
+"Language-Team:  <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: 3\n"
-"X-Poedit-Language: Polish\n"
-"X-Poedit-Country: Poland\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
-msgstr "102 CD DSS"
+msgstr ""
 
 #: u_translation.rs184recommend
 msgid "184 (recommended up to 1,000,000 objects)"
-msgstr "184 (rekomendowany do 1.000.000 obiektów)"
+msgstr ""
 
 #: u_translation.rs50recommende
 msgid "50   (recommended up to 100,000 objects)"
-msgstr "50 (rekomendowany do 100.000 obiektów)"
+msgstr ""
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
-msgstr "732 (rekomendowany do 5.000.000 obiektów)"
+msgstr ""
 
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
-msgstr "9537 (większy zestaw danych)"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
-msgstr "Skrót"
+msgstr ""
 
 #: u_translation.rsabort
 msgid "Abort"
-msgstr "Przerwij"
+msgstr ""
 
 #: u_translation.rsabortedbyuse
 msgid "Aborted by user"
-msgstr "Przerwane przez użytkownika"
+msgstr "Διεκόπη από τον χρήστη"
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
-msgstr "Przerwij obrót"
+msgstr ""
 
 #: u_translation.rsabout
 msgid "About"
-msgstr "O programie Cartes du Ciel"
+msgstr "Περί..."
 
 #: u_translation.rsabout2
 msgid "About %s"
-msgstr "O %s"
+msgstr "Περί %s"
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr "Akcja"
+msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
-msgstr "Aktualny czas systemu"
+msgstr "Πραγματική ώρα συστήματος"
 
 #: u_translation.rsad
 msgid "AD"
-msgstr "AD"
+msgstr ""
 
 #: u_translation.rsadd
 msgid "Add"
-msgstr "Dodaj"
+msgstr "Προσθήκη"
 
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
-msgstr "Dopisz pojedynczy element do bazy danych. Wszystkie pola są obowiązkowe."
+msgstr ""
 
 #: u_translation.rsaddequatoria
+#, fuzzy
+#| msgid "Add Equatorial Grid"
 msgid "Add equatorial grid"
-msgstr "Pokaż siatkę równikową"
+msgstr "Προσθήκη ισημερινού πλέγματος"
 
 #: u_translation.rsaddlabel
+#, fuzzy
+#| msgid "Add Label"
 msgid "Add label"
-msgstr "Dodaj etykietę"
+msgstr "Προσθήκη ετικέτας"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr "Dodaj alternatywną nazwę do indeksu."
+msgstr ""
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
-msgstr "Dopasuj jasność koloru"
+msgstr "Ρύθμιση φωτεινότητας χρώματος"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
-msgstr "Zaawansowane"
+msgstr "Προχωρημένα"
 
 #: u_translation.rsadvancedsear
+#, fuzzy
+#| msgid "Advanced Search"
 msgid "Advanced search"
-msgstr "Wyszukiwanie zaawansowane"
+msgstr "Προσωρημένη αναζήτηση"
 
 #: u_translation.rsage
 msgid "Age"
-msgstr "Wiek"
+msgstr "Ηλικία"
 
 #: u_translation.rsalignment
 msgid "Alignment"
-msgstr "Wyrównanie"
+msgstr "Ευθυγράμμιση"
 
 #: u_translation.rsall
 msgid "All"
-msgstr "Wszystkie"
+msgstr "Όλα"
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
-msgstr "Wszystkie opcje programu"
+msgstr ""
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
-msgstr "%sWszystkie struktury tabeli istnieją."
+msgstr ""
 
 #: u_translation.rsalltoolsbar
 msgid "All tool bars"
-msgstr "Wszystkie paski narzędzi"
+msgstr ""
 
 #: u_translation.rsalsobesureth
-#, fuzzy
-#| msgid "%sAlso be sure the required base software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sUpewnij się, czy wymagana baza danych jest zainstalowana.%sPrzejrzyj dokumentację jeśli nie jesteś tego pewny.%sCzy chcesz kontynuować?"
+msgstr ""
 
 #: u_translation.rsalt
 msgid "Alt"
-msgstr "Alt"
+msgstr "Υψ."
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "Współrzędne azymutalne"
+msgstr ""
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
-msgstr "Współ. azymutalne"
+msgstr ""
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr "Współrzędne azymutalne"
+msgstr ""
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
-msgstr "Montaż azymutalny"
+msgstr ""
 
 #: u_translation.rsaltitude
 msgid "Altitude"
-msgstr "Wysokość"
+msgstr ""
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
-msgstr "%sAlt obrotów:"
+msgstr ""
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
-msgstr "Zawsze pokazuj Różę Wiatrów"
+msgstr ""
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
-msgstr "Roczny ruch własny"
+msgstr ""
 
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
-msgstr "Hasło anonimowego użytkownika"
+msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
-msgstr "Pozorne"
+msgstr "Φαινόμενο"
 
 #: u_translation.rsappearance
 msgid "Appearance"
-msgstr "Wygląd"
+msgstr ""
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Dodaj do istniejącego katalogu"
+msgstr ""
 
 #: u_translation.rsapply
 msgid "Apply"
-msgstr "Akceptuj"
+msgstr "Εφαρμογή"
 
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
-msgstr "Zastosuj zmiany do wszystkich map."
+msgstr ""
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
-msgstr "Argument peryhelium"
+msgstr ""
 
 #: u_translation.rsartificialsa
+#, fuzzy
+#| msgid "Artificial Satellites"
 msgid "Artificial satellites"
-msgstr "Sztuczne satelity"
+msgstr "Τεχνητοί Δορυφόροι"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr "Potwierdź nawiązanie połączenia internetowego"
+msgstr ""
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
-msgstr "Jak na ekranie (czarne tło!)"
+msgstr ""
 
 #: u_translation.rsasterism
 msgid "Asterism"
-msgstr "Asteryzm"
+msgstr ""
 
 #: u_translation.rsasteroid
 msgid "Asteroid"
-msgstr "Planetoida"
+msgstr "Αστεροειδής"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "Zasoby planetoid w formacie MPC (jeden adres URL w linii)"
+msgstr ""
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
-msgstr "Ustawienia planetoid"
+msgstr ""
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
-msgstr "planetoid z wybranego pliku"
+msgstr ""
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
-msgstr "Astrometryczne J2000"
+msgstr ""
 
 #: u_translation.rsastronomical
 msgid "Astronomical"
-msgstr "Astronomiczny"
+msgstr ""
 
 #: u_translation.rsastronomical2
+#, fuzzy
+#| msgid "Astronomical Twilight"
 msgid "Astronomical twilight"
-msgstr "Zmierzch astronomiczny"
+msgstr "Αστρονομικό Λυκόφως"
 
 #: u_translation.rsat
 msgid "at"
-msgstr "o"
+msgstr ""
 
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
-msgstr "Atmosferyczna refrakcja"
+msgstr ""
 
 #: u_translation.rsauthors
 msgid "Authors"
-msgstr "Autorzy"
+msgstr "Συγγραφείς"
 
 #: u_translation.rsautomatic
 msgid "Automatic"
-msgstr "Zmienne tło nieba"
+msgstr ""
 
 #: u_translation.rsautomaticall
 msgid "Automatically start a local server if not already running"
-msgstr "Automatycznie uruchom lokalny serwer jeśli aktualnie nie działa"
+msgstr ""
 
 #: u_translation.rsautorefresh
+#, fuzzy
+#| msgid "AutoRefresh"
 msgid "Auto-refresh"
-msgstr "Automatyczne odświeżanie"
+msgstr "Αυτόματη Ανανέωση"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Automatyczne odświeżanie co "
+msgstr "Αυτόματη ανανέωση κάθε"
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
-msgstr "Pliki dodatkowe"
+msgstr "Βοηθητικά αρχεία"
 
 #: u_translation.rsaz
 msgid "Az"
-msgstr "Az"
+msgstr "Αζ."
 
 #: u_translation.rsazimuth
 msgid "Azimuth"
-msgstr "Azymut"
+msgstr "Αζιμούθιο"
 
 #: u_translation.rsazimuthalcoo
 msgid "Azimuthal coordinates"
-msgstr "Współrzędne azymutalne"
+msgstr ""
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
-msgstr "%sAz obrotów:"
+msgstr ""
 
 #: u_translation.rsb
 msgid "B"
-msgstr "B"
+msgstr ""
 
 #: u_translation.rsbackground
 msgid "Background"
-msgstr "Tło"
+msgstr "Φόντο"
 
 #: u_translation.rsbackgroundpi
 msgid "Background picture"
-msgstr "Obrazek tła"
+msgstr ""
 
 #: u_translation.rsbayerletter
+#, fuzzy
+#| msgid "Bayer Letter"
 msgid "Bayer letter"
-msgstr "Oznaczenia Bayera"
+msgstr "Γράμμα bayer"
 
 #: u_translation.rsbc
 msgid "BC"
-msgstr "BC"
+msgstr "π.Χ."
 
 #: u_translation.rsbeginprocess
 msgid "Begin processing for jd=%s / %s"
-msgstr "Rozpocznij przetwarzanie dla jd=%s / %s"
+msgstr ""
 
 #: u_translation.rsbelowthehori
 msgid "Below the horizon"
-msgstr "Pod horyzontem"
+msgstr "Κάτω από τον ορίζοντα"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr "Duże gwiazdy"
+msgstr ""
 
 #: u_translation.rsbii
 msgid "BII"
-msgstr "BII"
+msgstr ""
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Katalog binarny"
+msgstr ""
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
-msgstr "Bitmapa"
+msgstr ""
 
 #: u_translation.rsbitmapfile
 msgid "Bitmap file"
-msgstr "Bitmapa"
+msgstr ""
 
 #: u_translation.rsblackonwhite
+#, fuzzy
+#| msgid "Black on White"
 msgid "Black on white"
-msgstr "Czarny na białym"
+msgstr "Μαύρο σε Άσπρο"
 
 #: u_translation.rsblackwhite
 msgid "Black/white"
-msgstr "Czarny/biały"
+msgstr ""
 
 #: u_translation.rsblackwhiteli
 msgid "Black/white, line mode"
-msgstr "Czarny/biały, tryb liniowy"
+msgstr ""
 
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
-msgstr "Migoczący obraz"
+msgstr ""
 
 #: u_translation.rsblue
 msgid "Blue"
-msgstr "Niebieski"
+msgstr "Μπλε"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
-msgstr "Wielkość gwiazdowa Blue"
+msgstr ""
 
 #: u_translation.rsbottom
 msgid "Bottom"
-msgstr "Dolny"
+msgstr ""
 
 #: u_translation.rsboundary
 msgid "Boundary"
-msgstr "Graniczny"
+msgstr "Σύνορο"
 
 #: u_translation.rsbrighter
 msgid "Brighter"
-msgstr "Jaśniejszy"
+msgstr ""
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
-msgstr "Wielkość gwiazdowa najjaśniejszej gwiazdy"
+msgstr ""
 
 #: u_translation.rsbrightnebula
+#, fuzzy
+#| msgid "Bright Nebula"
 msgid "Bright nebula"
-msgstr "Mgławice jasne"
+msgstr "Φωτεινό Νεφέλωμα"
 
 #: u_translation.rsbrightneo
 msgid "Bright + NEO + TNO"
-msgstr "Jasność + NEO + TNO"
+msgstr ""
 
 #: u_translation.rsbrightness
 msgid "Brightness"
-msgstr "Jasność"
+msgstr "Φωτεινότητα"
 
 #: u_translation.rsbrightstars
 msgid "Bright stars"
-msgstr "Jasne gwiazdy"
+msgstr "Λαμπροί αστέρες"
 
 #: u_translation.rsbrightstarss
 msgid "Bright star size"
-msgstr "Rozmiar jasności gwiazd"
+msgstr ""
 
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
-msgstr "Buduj katalog"
+msgstr ""
 
 #: u_translation.rsby
 msgid "by"
-msgstr "przez"
+msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
-msgstr "Kalendarz"
+msgstr "Ημερολόγιο"
 
 #: u_translation.rscancel
 msgid "Cancel"
-msgstr "Anuluj"
+msgstr "Ακύρωση"
 
 #: u_translation.rscancel2
 msgid "Cancel %s"
-msgstr "Anuluj %s"
+msgstr "Ακύρωση %s"
 
 #: u_translation.rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
-msgstr "Anuluj, może błędny plik zip ?? %s"
+msgstr ""
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
-msgstr "%sNie można otworzyć bazy danych %s! %s"
+msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
-msgstr "Kaskada"
+msgstr ""
 
 #: u_translation.rscat
 msgid "Cat."
-msgstr "Katalog"
+msgstr ""
 
 #: u_translation.rscatalog
 msgid "Catalog"
-msgstr "Katalog"
+msgstr "Κατάλογος"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
-msgstr "Długa nazwa katalogu"
+msgstr "Πλήρες όνομα καταλόγου"
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
-msgstr "Skrócona nazwa katalogu"
+msgstr "Σύντομο όνομα καταλόγου"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
-msgstr "Ciąg znaków katalogu"
+msgstr ""
 
 #: u_translation.rscatalogtype
 msgid "Catalog type"
-msgstr "Typ katalogu"
+msgstr "Τύπος καταλόγου"
 
 #: u_translation.rsccw
 msgid "%sCCW"
-msgstr "%srektascensja (CCW)"
+msgstr ""
 
 #: u_translation.rscdcformatpre
 msgid "CdC format, prefere the compact version"
-msgstr "format CdC, najlepiej wersja kompaktowa"
+msgstr ""
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
-msgstr "Głębokie niebo (CdC)"
+msgstr ""
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr "Katalog głębokiego nieba i ustawienia dla CdC"
+msgstr ""
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr "Przestarzały katalog CdC (ale wciąż można z niego korzystać)"
+msgstr ""
 
 #: u_translation.rscdcplugin
 msgid "CdC plugin"
-msgstr "Wtyczka programu CdC"
+msgstr ""
 
 #: u_translation.rscdcpluginset
 msgid "Select the CdC plugin"
-msgstr "Ustawienia wtyczki programu CdC"
+msgstr ""
 
 #: u_translation.rscdcstars
 msgid "CdC stars"
-msgstr "gwiazdy (CdC)"
+msgstr ""
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
-msgstr "Katalog gwiazd i ustawienia programu CdC"
+msgstr ""
 
 #: u_translation.rscdctranslator
+#, fuzzy
+#| msgid "CDCTranslator"
 msgid "Patrick Chevalley, Marc Fokker"
-msgstr "Jarosław Wójcik"
+msgstr "Ανδρέας Παπαλάμπρου"
 
 #: u_translation.rscenter
 msgid "Center"
-msgstr "Centruj"
+msgstr ""
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
-msgstr "Centruj obiekt"
+msgstr ""
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
-msgstr "Centralny południk"
+msgstr ""
 
 #: u_translation.rscentralstarb
 msgid "Central star B magnitude"
-msgstr "Jasność B gwiazdy centralnej"
+msgstr ""
 
 #: u_translation.rscentralstarv
 msgid "Central star V magnitude"
-msgstr "Jasność V gwiazdy centralnej"
+msgstr ""
 
 #: u_translation.rscentre
+#, fuzzy
+#| msgid "Centre"
 msgid "Centre on"
-msgstr "Centruj na"
+msgstr "Κέντρο"
 
 #: u_translation.rschangedrawin
+#, fuzzy
+#| msgid "Change Drawing Mode"
 msgid "Change drawing mode"
-msgstr "Zmień tryb rysowania"
+msgstr "Αλλαγή Τρόπου Σχεδίασης"
 
 #: u_translation.rschangepictur
 msgid "Change the displayed picture"
-msgstr "Zmień wyświetlany obraz"
+msgstr ""
 
 #: u_translation.rschart
 msgid "Chart"
-msgstr "Mapa"
+msgstr "Χάρτης"
 
 #: u_translation.rschart2
 msgid "chart:"
-msgstr "mapa:"
+msgstr ""
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
-msgstr "Mapa i współrzędne"
+msgstr ""
 
 #: u_translation.rschartcoordin2
 msgid "Chart coordinate systems"
-msgstr "Systemy współrzędnych"
+msgstr ""
 
 #: u_translation.rschartinforma
+#, fuzzy
+#| msgid "Chart Information"
 msgid "Chart information"
-msgstr "Informacje o mapie"
+msgstr "Πληροφορίες Χάρτη"
 
 #: u_translation.rscharts
 msgid "Charts"
-msgstr "Mapy"
+msgstr "Χάρτες"
 
 #: u_translation.rschartsetting
+#, fuzzy
+#| msgid "Chart Setting"
 msgid "Chart settings"
-msgstr "Ustawienia mapy"
+msgstr "Ρυθμίσεις Χάρτη"
 
 #: u_translation.rschart_
 msgid "Chart_"
-msgstr "Mapa_"
+msgstr "Χάρτης_"
 
 #: u_translation.rscheck
 msgid "Check"
-msgstr "Sprawdź"
+msgstr "Έλεγχος"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
-msgstr "Wybierz kolory dla poniższych obiektów"
+msgstr ""
 
 #: u_translation.rscircle
 msgid "Circle"
-msgstr "Okrąg"
+msgstr "Κύκλος"
 
 #: u_translation.rscircumpolar
 msgid "Circumpolar"
-msgstr "Okołobiegunowy"
+msgstr "Αειφανής"
 
 #: u_translation.rsclass
 msgid "Class"
-msgstr "Gromada"
+msgstr ""
 
 #: u_translation.rsclicktochang
+#, fuzzy
+#| msgid "Click to change the color "
 msgid "Click to change the colour "
-msgstr "Kliknij żeby zmienić kolor"
+msgstr "Κάντε κλικ για αλλαγή χρώματος"
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
-msgstr "Utrzymaj aktywne połączenie klienta"
+msgstr ""
 
 #: u_translation.rsclock
 msgid "Clock"
-msgstr "Okno zegara"
+msgstr ""
 
 #: u_translation.rsclose
 msgid "Close"
-msgstr "Zamknij"
+msgstr "Κλείσιμο"
 
 #: u_translation.rsclosechart
+#, fuzzy
+#| msgid "Close Chart"
 msgid "Close chart"
-msgstr "Zamknij mapę"
+msgstr "Κλείσιμο Χάρτη"
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
-msgstr "Zamknij połączenie"
+msgstr ""
 
 #: u_translation.rsclosedcontou
 msgid "Closed contour"
-msgstr "Zamknięte kontury"
+msgstr ""
 
 #: u_translation.rsclosefiles
 msgid "Close files"
-msgstr "Zamknij pliki"
+msgstr "Κλείσιμο Αρχείων"
 
 #: u_translation.rsclosingconne
 msgid "Closing connection"
-msgstr "Zamykanie połączenia"
+msgstr ""
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
-msgstr "Gromady i mgławice"
+msgstr ""
 
 #: u_translation.rscolor
+#, fuzzy
+#| msgid "Color"
 msgid "Colour"
-msgstr "Kolor"
+msgstr "Χρώμα"
 
 #: u_translation.rscolorindex
 msgid "Colour index"
-msgstr "Indeks koloru"
+msgstr ""
 
 #: u_translation.rscolorlinemod
 msgid "Colour, line mode"
-msgstr "Kolorowy, tryb liniowy"
+msgstr ""
 
 #: u_translation.rscolorsaturat
+#, fuzzy
+#| msgid "Color saturation"
 msgid "Colour saturation"
-msgstr "Poziom nasycenia koloru"
+msgstr "Κορεσμός χρώματος"
 
 #: u_translation.rscomet
 msgid "Comet"
-msgstr "Kometa"
+msgstr "Κομήτης"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Zasoby komet w formacie MPC (jeden adres URL w linii)"
+msgstr ""
 
 #: u_translation.rscometsetting
+#, fuzzy
+#| msgid "Comet Setting"
 msgid "Comet settings"
-msgstr "Ustawienia komet"
+msgstr "Ρύθμιση κομήτη"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
-msgstr "Polecenie znaleziono. OK!"
+msgstr ""
 
 #: u_translation.rscommandnotfo
 msgid "Command not found!"
-msgstr "Polecenie nie odnalezione!"
+msgstr ""
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Polecenie do wykonania obróbki pliku"
+msgstr ""
 
 #: u_translation.rscommonname
+#, fuzzy
+#| msgid "Common Name"
 msgid "Common name"
-msgstr "Nazwa własna"
+msgstr "Κοινό Όνομα"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
-msgstr "Wielkość Róży Wiatrów"
+msgstr ""
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
-msgstr "Kompilowany przez:"
+msgstr ""
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
-msgstr "Wielkość gwiazdowa komponentu 1"
+msgstr ""
 
 #: u_translation.rscomponent2ma
 msgid "Component 2 magnitude"
-msgstr "Wielkość gwiazdowa komponentu 2"
+msgstr ""
 
 #: u_translation.rscompute
 msgid "Compute"
-msgstr "Oblicz"
+msgstr "Υπολογισμός"
 
 #: u_translation.rscomputeaster
 msgid "Compute asteroid data for this month"
-msgstr "Oblicz dane planetoid na bieżący miesiąc"
+msgstr ""
 
 #: u_translation.rscomputefield
+#, fuzzy
+#| msgid "Compute Field"
 msgid "Compute field"
-msgstr "Oblicz pole"
+msgstr "Υπολογισμός Πεδίου"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
-msgstr "Konfiguracja"
+msgstr "Ρυθμίσεις"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
-msgstr "Konfiguruj program"
+msgstr "Ρύθμιση του Προγράμματος"
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr "%s połączony z %s używając mapy %s, czas połączenia: %s"
+msgstr ""
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
-msgstr "Podłączony do bazy danych SQL %s"
+msgstr ""
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
-msgstr "Pozycje symulacji łączone linią"
+msgstr ""
 
 #: u_translation.rsconnectteles
+#, fuzzy
+#| msgid "Connect Telescope"
 msgid "Connect telescope"
-msgstr "Podłącz teleskop"
+msgstr "Σύνδεση Τηλεσκοπίου"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Podłączenie do %s, %s nieudane! %sSprawdź czy działa Server MySQL oraz nazwę użytkownika/hasło"
+msgstr ""
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
-msgstr "Podłączenie do %s, %s zakończone sukcesem. %s"
+msgstr ""
 
 #: u_translation.rsconstellatio
 msgid "Constellation"
-msgstr "Gwiazdozbiór"
+msgstr "Αστερισμός"
 
 #: u_translation.rsconstellatio2
+#, fuzzy
+#| msgid "Constellation Figures"
 msgid "Constellation figures"
-msgstr "Kształty gwiazdozbioru"
+msgstr "Μορφές αστερισμών"
 
 #: u_translation.rsconstellatio3
+#, fuzzy
+#| msgid "Constellation Figure File Name : "
 msgid "Constellation figures file name: "
-msgstr "Plik z kształtami gwiazdozbiorów: "
+msgstr "Όνομα αρχείου μορφών αστερισμών :"
 
 #: u_translation.rsconstellatio4
+#, fuzzy
+#| msgid "Constellation Boundaries"
 msgid "Constellation boundaries"
-msgstr "Granice gwiazdozbioru"
+msgstr "Σύνορα αστερισμών"
 
 #: u_translation.rsconstellatio5
+#, fuzzy
+#| msgid "Constellation Boundary File Name : "
 msgid "Constellation boundaries file name: "
-msgstr "Plik z granicami gwiazdozbiorów :"
+msgstr "Όνομα αρχείου συνόρων αστερισμών"
 
 #: u_translation.rsconstellatio6
+#, fuzzy
+#| msgid "Constellation Label"
 msgid "Constellation label"
-msgstr "Etykieta gwiazdozbioru"
+msgstr "Ετικέτα Αστερισμού"
 
 #: u_translation.rsconstellatio7
 msgid "Constellation name"
-msgstr "Nazwy gwiazdozbiorów"
+msgstr "Όνομα Αστερισμού"
 
 #: u_translation.rscontrast
 msgid "Contrast"
-msgstr "Kontrast"
+msgstr "Αντίθεση"
 
 #: u_translation.rscontrolpanel
+#, fuzzy
+#| msgid "Control Panel"
 msgid "Control panel"
-msgstr "Panel sterowania"
+msgstr "Πίνακας Ρυθμίσεων"
 
 #: u_translation.rscontrolpanel2
+#, fuzzy
+#| msgid "Control Panel command "
 msgid "Control panel command "
-msgstr "Polecenie panelu sterowania "
+msgstr "Εντολή πίνακα ελέγχου"
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
-msgstr "Konwertuj plik katalogu %s"
+msgstr ""
 
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
-msgstr "Konwertuj pliki katalogu"
+msgstr ""
 
 #: u_translation.rscoord
 msgid "Coord."
-msgstr "Współ."
+msgstr "Συντ."
 
 #: u_translation.rscoordgrid
+#, fuzzy
+#| msgid "Coord. Grid"
 msgid "Coord. grid"
-msgstr "Siatka współ."
+msgstr "Πλέγμα Συντ."
 
 #: u_translation.rscoordinates
 msgid "Coordinates:"
-msgstr "Współrzędne:"
+msgstr "Συντεταγμένες:"
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
-msgstr "Współrzędne równonocy"
+msgstr ""
 
 #: u_translation.rscoordinatesg
+#, fuzzy
+#| msgid "Coordinates Grid"
 msgid "Coordinates grid"
-msgstr "Siatka współrzędnych"
+msgstr "Πλέγμα Συντεταγμένων"
 
 #: u_translation.rscopy
 msgid "Copy"
-msgstr "Kopiuj"
+msgstr "Αντιγραφή"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
-msgstr "Promień jądra"
+msgstr ""
 
 #: u_translation.rscorrelated
 msgid "Correlated"
-msgstr "Skorelowany"
+msgstr ""
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "Nie mogę wgrać biblioteki"
+msgstr ""
 
 #: u_translation.rscountrytimez
+#, fuzzy
+#| msgid "Country Timezone"
 msgid "Country timezone"
-msgstr "Strefa czasowa w/g kraju"
+msgstr "Ζώνη ώρας της χώρας"
 
 #: u_translation.rscreateanewch
 msgid "Create a new chart"
-msgstr "Utwórz nową mapę"
+msgstr "Δημιουργία νέου χάρτη"
 
 #: u_translation.rscreateasearc
 msgid "Create a search index file"
-msgstr "Utwórz indeks wyszukiwania plików"
+msgstr ""
 
 #: u_translation.rscreatedataba
+#, fuzzy
+#| msgid "Create Database"
 msgid "Create database"
-msgstr "Utwórz bazę danych"
+msgstr "Δημιουργία Βάσης Δεδομένων"
 
 #: u_translation.rscreatefiles
 msgid "Create files"
-msgstr "Utwórz pliki"
+msgstr "Δημιουργία αρχείων"
 
 #: u_translation.rscreateheader
 msgid "Create header"
-msgstr "Utwórz nagłówek"
+msgstr ""
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Tworzenie mapy w PostScript. Proszę czekać..."
+msgstr ""
 
 #: u_translation.rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "Tworzenie mapy rastrowej z %s dpi. Proszę czekać..."
+msgstr ""
 
 #: u_translation.rsculmination
 msgid "Culmination"
-msgstr "Kulminacja"
+msgstr ""
 
 #: u_translation.rscurrentdate
+#, fuzzy
+#| msgid "Current Date"
 msgid "Date of validity"
-msgstr "Wyliczona data"
+msgstr "Τρέχουσα ημερομηνία"
 
 #: u_translation.rscw
 msgid "%sCW"
-msgstr "%sCW"
+msgstr ""
 
 #: u_translation.rsdarknebula
 msgctxt "u_translation.rsdarknebula"
 msgid "Dark nebula"
-msgstr "Mgławice ciemne"
+msgstr ""
 
 #: u_translation.rsdarknebula2
 msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
-msgstr "Mgławice ciemne"
+msgstr "Σκοτεινό νεφέλωμα"
 
 #: u_translation.rsdash1
 msgid "Dash"
-msgstr "Kreska"
+msgstr ""
 
 #: u_translation.rsdashdot1
 msgid "Dash dot"
-msgstr "Kreska kropka"
+msgstr ""
 
 #: u_translation.rsdashdotdot1
 msgid "Dash dot dot"
-msgstr "Kreska kropka kropka"
+msgstr ""
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Plik bazy danych: "
+msgstr ""
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
-msgstr "%sBaza danych %s jest już utworzona.%s"
+msgstr ""
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr "Ustawienia bazy..."
+msgstr ""
 
 #: u_translation.rsdatabasetype
 msgid "Database type"
-msgstr "Typ bazy danych"
+msgstr ""
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
-msgstr "Pliki danych:"
+msgstr ""
 
 #: u_translation.rsdatafilescdr
 msgid "Data files, CD-ROM"
-msgstr "Pliki danych, CD-ROM"
+msgstr ""
 
 #: u_translation.rsdatamaintena
 msgid "Data maintenance"
-msgstr "Utrzymanie danych"
+msgstr ""
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
-msgstr "Dane zaczynają się na linii %s"
+msgstr ""
 
 #: u_translation.rsdate
 msgid "Date"
-msgstr "Data"
+msgstr "Ημερομηνία"
 
 #: u_translation.rsdateformat
 msgid "Date format"
-msgstr "Format daty"
+msgstr ""
 
 #: u_translation.rsdatefrom
 msgid "Date from"
-msgstr "Data od"
+msgstr "Ημερομηνία από"
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
-msgstr "datowanie może zabrać dużo czasu. Czy chcesz kontynuować?"
+msgstr ""
 
 #: u_translation.rsdatetime
+#, fuzzy
+#| msgid "Date / Time"
 msgid "Date / time"
-msgstr "Data / Czas"
+msgstr "Ημερομηνία / Ώρα"
 
 #: u_translation.rsdatetime2
+#, fuzzy
+#| msgid "Date/Time"
 msgid "Date/time"
-msgstr "Data/Czas"
+msgstr "Ημερομηνία/Ώρα"
 
 #: u_translation.rsday
 msgid "Day"
-msgstr "dzień"
+msgstr "Ημέρα"
 
 #: u_translation.rsdays
 msgid "days"
-msgstr "dni"
+msgstr "ημέρες"
 
 #: u_translation.rsdaytime
 msgid "Day Time"
-msgstr "Dzień Czas"
+msgstr ""
 
 #: u_translation.rsdbinsertfail
 msgid "DB insert failed for %s: %s"
-msgstr "Wstawianie DB nieudane dla %s :%s"
+msgstr ""
 
 #: u_translation.rsdbname
 msgid "DB Name:"
-msgstr "Nazwa DB:"
+msgstr ""
 
 #: u_translation.rsde
 msgid "DE"
-msgstr "DE"
+msgstr ""
 
 #: u_translation.rsdec
 msgid "DEC"
-msgstr "DEC"
+msgstr ""
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
-msgstr "Stopnie dziesiętnie"
+msgstr "Δεκαδικές μοίρες"
 
 #: u_translation.rsdecimalhours
 msgid "Decimal hours"
-msgstr "Godziny dziesiętnie"
+msgstr "Δεκαδικές ώρες"
 
 #: u_translation.rsdecimalsouth
 msgid "Decimal south polar distance"
-msgstr "Dziesiętnie dystans południowo polarny"
+msgstr ""
 
 #: u_translation.rsdeclination
 msgid "Declination"
-msgstr "Deklinacja"
+msgstr "Απόκλιση"
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
-msgstr "Opcje DEC"
+msgstr ""
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
-msgstr "Zmniejsz czas"
+msgstr ""
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC obrotów:"
+msgstr ""
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
-msgstr "%sDEC obrotów:"
+msgstr ""
 
 #: u_translation.rsdeepskycolou
 msgid "Deep sky colour"
-msgstr "Kolor głębokiego nieba"
+msgstr ""
 
 #: u_translation.rsdeepskyobjec
 msgid "Deep sky object colour"
-msgstr "Kolor obiektów głębokiego nieba"
+msgstr ""
 
 #: u_translation.rsdefault
 msgid "Default"
-msgstr "Domyślny"
+msgstr ""
 
 #: u_translation.rsdefaultbutto
 msgid "Default button"
-msgstr "Przycisk domyślny"
+msgstr ""
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
-msgstr "Domyślny kolor"
+msgstr ""
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
-msgstr "Domyślna etykieta"
+msgstr ""
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
-msgstr "Domyślny"
+msgstr ""
 
 #: u_translation.rsdefaultnebul
 msgid "Default nebulae parameters"
-msgstr "Domyślne parametry mgławic"
+msgstr ""
 
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
-msgstr "Domyślne parametry zarysu"
+msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1029,1293 +1095,1353 @@ msgstr "°"
 
 #: u_translation.rsdegree
 msgid "Degree"
-msgstr "Stopni"
+msgstr "Μοίρα"
 
 #: u_translation.rsdegreegridsp
 msgid "Declination grid"
-msgstr "Siatka deklinacji"
+msgstr ""
 
 #: u_translation.rsdegrees
 msgid "degrees"
-msgstr "stopni"
+msgstr "μοίρες"
 
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, secondes"
-msgstr "Stopnie, minuty, sekundy"
+msgstr ""
 
 #: u_translation.rsdelete
 msgid "Delete"
-msgstr "Usuń"
+msgstr "Διαγραφή"
 
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
-msgstr "Kasowanie zakończone"
+msgstr ""
 
 #: u_translation.rsdeletedailyd
 msgid "Deleting the daily data"
-msgstr "Kasowanie dziennych danych"
+msgstr ""
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
-msgstr "Kasowanie zakończone sukcesem!"
+msgstr ""
 
 #: u_translation.rsdeletefromel
 msgid "Deleting from the element table..."
-msgstr "Kasowanie z tablicy elementów..."
+msgstr ""
 
 #: u_translation.rsdeletefromel2
 msgid "Deleting from the element list..."
-msgstr "Kasowanie z listy elementów..."
+msgstr ""
 
 #: u_translation.rsdeletefrommo
 msgid "Deleting from the monthly table for jd<%s"
-msgstr "Kasowanie z tabeli miesięcznej dla jd<%s"
+msgstr ""
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
-msgstr "Skasuj z tablicy miesięcznej dla jd<%s"
+msgstr ""
 
 #: u_translation.rsdeletefromna
 msgid "Deleting from the name list..."
-msgstr "Kasowanie z listy nazw..."
+msgstr ""
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "Skasuj dane miesięczne"
+msgstr ""
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "Usuń dane miesięczne starsze niż "
+msgstr ""
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
-msgstr "Skasuj wybrane dane MPC"
+msgstr ""
 
 #: u_translation.rsdeleteprevio
 msgid "Delete previous data for this date."
-msgstr "Skasuj poprzednie dane dla tej daty."
+msgstr ""
 
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
-msgstr "Usunąć akutalną lokalizację z bazy danych?"
+msgstr ""
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
-msgstr "Depresja horyzontu (obniżenie horyzontu)"
+msgstr ""
 
 #: u_translation.rsdesc
 msgid "desc:"
-msgstr "opis:"
+msgstr ""
 
 #: u_translation.rsdescription
 msgid "Description"
-msgstr "Opis"
+msgstr ""
 
 #: u_translation.rsdesignation
 msgid "Designation"
-msgstr "Oznaczenie"
+msgstr ""
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
-msgstr "Środowisko graficzne"
+msgstr ""
 
 #: u_translation.rsdetails
 msgid "Details"
-msgstr "Opis szczegółowy"
+msgstr "Λεπτομέρειες"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "Port urządzenia"
+msgstr ""
 
 #: u_translation.rsdiam
 msgid "Diam."
-msgstr "Śred."
+msgstr "Διάμ."
 
 #: u_translation.rsdiameter
 msgid "Diameter"
-msgstr "Średnica"
+msgstr "Διάμετρος"
 
 #: u_translation.rsdifferenttha
+#, fuzzy
+#| msgid "%s (different than configured port, maybe busy or other error.)"
 msgid "%s (different than the configured port, maybe busy or other error.)"
-msgstr "%s (inny niż skonfigurowany port, może zajęty bądź inny błąd.)"
+msgstr "%s (διαφορετικό από το προρυθμισμένο port, ίσως είναι απασχολημένο ή υπάρχει κάποιο άλλο λάθος.)"
 
 #: u_translation.rsdimension
 msgid "Dimension"
-msgstr "Wymiary"
+msgstr "Διάσταση"
 
 #: u_translation.rsdimensionand
 msgid "Dimension and units"
-msgstr "Wymiary i jednostki"
+msgstr ""
 
 #: u_translation.rsdir
 msgid "Dir"
-msgstr "Fol"
+msgstr "Κατ."
 
 #: u_translation.rsdirectory
 msgid "Directory"
-msgstr "Lokalizacja"
+msgstr "Κατάλογος"
 
 #: u_translation.rsdirectorynot
 msgid "Directory not found %s"
-msgstr "Folder nie znaleziony %s"
+msgstr "Ο Κατάλογος δε βρέθηκε %s"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
-msgstr "Odłącz teleskop"
+msgstr ""
 
 #: u_translation.rsdisplay
 msgid "Display"
-msgstr "Wyświetlanie"
+msgstr ""
 
 #: u_translation.rsdisplayasasy
 msgid "Display as a symbol"
-msgstr "Pokaż jako symbol"
+msgstr ""
 
 #: u_translation.rsdisplaycolou
 msgid "Display colour"
-msgstr "Wyświetl kolor"
+msgstr ""
 
 #: u_translation.rsdisplayimage
 msgid "Display images of catalogued objects"
-msgstr "Wyświetl obrazy skatalogowanych obiektów"
+msgstr ""
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
-msgstr "Wyświetl etykiety dla wszystkich skatalogowanych gwiazd"
+msgstr ""
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
-msgstr "Wyświetl informacje o mapie na pasku menu."
+msgstr ""
 
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
-msgstr "Wyświetl etykiety"
+msgstr ""
 
 #: u_translation.rsdisplaythelo
 msgid "Display the local horizon line"
-msgstr "Wyświetl linię horyzontu lokalnego"
+msgstr ""
 
 #: u_translation.rsdistance
 msgid "Distance"
-msgstr "Odległość"
+msgstr "Απόσταση"
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
-msgstr "Odległość do ostatniego obiektu"
+msgstr ""
 
 #: u_translation.rsdonottakeacc
 msgid "Do not take into account comets fainter than magnitude"
-msgstr "Nie bierz pod uwagę komet słabszych niż wielkość gwiazdowa"
+msgstr ""
 
 #: u_translation.rsdonottakeacc2
 msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "Nie bierz pod uwagę planetoid słabszych niż wielkość gwiazdowa"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
-msgstr "Kropka"
+msgstr ""
 
 #: u_translation.rsdoubles
 msgid "Doubles"
-msgstr "podwójne"
+msgstr "Διπλοί"
 
 #: u_translation.rsdoublestar
+#, fuzzy
+#| msgid "Double Star"
 msgid "Double star"
-msgstr "Gwiazdy podwójne"
+msgstr "Διπλός Αστέρας"
 
 #: u_translation.rsdownload
 msgid "Download"
-msgstr "Pobierz"
+msgstr "Κατέβασμα"
 
 #: u_translation.rsdownload2
 msgid "Download %s"
-msgstr "Pobierz %s"
+msgstr "Κατέβασμα %s"
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
-msgstr "Pobierz szczegóły kraju"
+msgstr "Κατέβασμα λεπτομερειών χώρας"
 
 #: u_translation.rsdownloadlate
+#, fuzzy
+#| msgid "Download latest orbital elements"
 msgid "Download the latest orbital elements"
-msgstr "Pobierz najnowsze elementy orbit"
+msgstr "Κατέβασμα στοιχείων τροχιών πλανητών"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
-msgstr "Czy chcesz zapisać ustawienia programu?"
+msgstr ""
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
-msgstr "Rysuj linię, która reprezentuje prawidłowy ruch własny ciał niebieskich na następne"
+msgstr ""
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
-msgstr "Typ rysowania"
+msgstr ""
 
 #: u_translation.rsdrawline
 msgid "Draw line"
-msgstr "Rysuj linię"
+msgstr "Σχεδιασμός γραμμής"
 
 #: u_translation.rsdrawplanetas
+#, fuzzy
+#| msgid "Draw Planet As"
 msgid "Draw planet as"
-msgstr "Przedstaw planety na mapie jako:"
+msgstr "Σχεδιασμός πλανήτη ως"
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "Rysuj pozorną linię horyzontu"
+msgstr ""
 
 #: u_translation.rsdrivername
 msgid "Driver name"
-msgstr "Nazwa sterownika"
+msgstr ""
 
 #: u_translation.rsdropdatabase
+#, fuzzy
+#| msgid "Drop Database"
 msgid "Drop database"
-msgstr "Opuść bazę danych"
+msgstr "Διαγραφή βάσης δεδομένων"
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
-msgstr "DSS RealSky"
+msgstr ""
 
 #: u_translation.rsdtut
 msgid "DT - UT: "
-msgstr "DT - UT: "
+msgstr ""
 
 #: u_translation.rsduration
 msgid "Duration"
-msgstr "Czas trwania"
+msgstr ""
 
 #: u_translation.rsdynamictimed
 msgid "Dynamic time difference with Universal Time"
-msgstr "Dynamiczna różnica czasu lokalnego i uniwersalnego (UT):"
+msgstr ""
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
-msgstr "Cień Ziemi"
+msgstr "Σκιά Γης"
 
 #: u_translation.rseast
 msgid "East"
-msgstr "Wschód"
+msgstr "Ανατολή"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
-msgstr "Mimośród"
+msgstr "Εκκεντρότητα"
 
 #: u_translation.rseclipse
 msgid "Eclipse"
-msgstr "Zaćmienie"
+msgstr "Έκλειψη"
 
 #: u_translation.rsecliptic
 msgid "Ecliptic"
-msgstr "Ekliptyka"
+msgstr "Εκλειπτική"
 
 #: u_translation.rseclipticcoor
+#, fuzzy
+#| msgid "Ecliptic Coordinate"
 msgid "Ecliptic coordinates"
-msgstr "Współrzędne ekliptyczne"
+msgstr "Εκλειπτικές συντεταγμένες"
 
 #: u_translation.rseclipticcoor3
+#, fuzzy
+#| msgid "Ecliptic Coord."
 msgid "Ecliptic coord."
-msgstr "Współ.ekliptyczne"
+msgstr "Εκλειπτικές συντ."
 
 #: u_translation.rsedit
 msgid "Edit"
-msgstr "Edytuj"
+msgstr "Επεξεργασία"
 
 #: u_translation.rseditcolor
+#, fuzzy
+#| msgid "Edit Color"
 msgid "Edit colour"
-msgstr "Edytuj kolor"
+msgstr "Επεξεργασία χρώματος"
 
 #: u_translation.rseditlabel
+#, fuzzy
+#| msgid "Edit Label"
 msgid "Edit label"
-msgstr "Edytuj etykietę"
+msgstr "Επεξεργασία ετικέτας"
 
 #: u_translation.rseditlineoper
 msgid "Edit line operation"
-msgstr "Edytuj linię operacji"
+msgstr ""
 
 #: u_translation.rseditobjectty
 msgid "Edit object types"
-msgstr "Edytuj typy obiektów"
+msgstr ""
 
 #: u_translation.rseditunits
+#, fuzzy
+#| msgid "Edit Units"
 msgid "Edit units"
-msgstr "Edytuj jednostki"
+msgstr "Επεξεργασία μονάδων"
 
 #: u_translation.rselong
 msgid "Elong."
-msgstr "Elong."
+msgstr ""
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
-msgstr "Mgławice emisyjne"
+msgstr "Νεφέλωμα εκπομπής"
 
 #: u_translation.rsendofobject
 msgid "End of object"
-msgstr "Koniec obiektu"
+msgstr "Τέλος αντικειμένου"
 
 #: u_translation.rsendprocessin
 msgid "End of processing: %s asteroids"
-msgstr "Koniec przetwarzania: %s planetoid"
+msgstr ""
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
-msgstr "Kalendarz efemerydalny"
+msgstr ""
 
 #: u_translation.rsepoch
 msgid "Epoch"
-msgstr "Epoka"
+msgstr ""
 
 #: u_translation.rsepochjd
 msgid "Epoch (JD)"
-msgstr "Epoka (JD)"
+msgstr ""
 
 #: u_translation.rsepochofmaxim
 msgid "Epoch of maxima"
-msgstr "Epoka maksimum"
+msgstr ""
 
 #: u_translation.rseqgrid
+#, fuzzy
+#| msgid "Eq. Grid"
 msgid "Eq. grid"
-msgstr "Siatka równ."
+msgstr "Ισ. Πλέγμα"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr "Współrzędne równikowe"
+msgstr ""
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
-msgstr "Współrzędne równikowe, równonoc: %s"
+msgstr ""
 
 #: u_translation.rsequatorialco3
 msgid "Equatorial coord."
-msgstr "Współ.równikowe"
+msgstr ""
 
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
-msgstr "Montaż paralaktyczny"
+msgstr ""
 
 #: u_translation.rsequinox
 msgid "Equinox:"
-msgstr "Równonoc:"
+msgstr ""
 
 #: u_translation.rsequinox2
 msgid "Equinox"
-msgstr "Równonoc"
+msgstr ""
 
 #: u_translation.rserror
 msgid "Error"
-msgstr "Błąd"
+msgstr "Σφάλμα"
 
 #: u_translation.rserrorcreatin
 msgid "%sError creating table %s"
-msgstr "%sBłąd tworzenia tablicy %s"
+msgstr ""
 
 #: u_translation.rserroropening
 msgid "Error opening %s"
-msgstr "Błąd w czasie otwierania %s"
+msgstr "Σφάλμα ανοίγματος %s"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
-msgstr "Błąd! Proszę sprawdzić parametry bazy danych."
+msgstr ""
 
 #: u_translation.rserrorpleasec2
 msgid "Error! Please check the database parameters and load the comete data file."
-msgstr "Błąd! Proszę sprawdzić parametry bazy danych i załadować plik danych komety."
+msgstr ""
 
 #: u_translation.rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
-msgstr "Błąd! Proszę sprawdzić parametry bazy danych i załadować pakiet obrazów."
+msgstr ""
 
 #: u_translation.rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr "Szacowany rozmiar pliku: %sMB %sCzy chcesz kontynuować?"
+msgstr ""
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
-msgstr "Szacowana długość ogona"
+msgstr ""
 
 #: u_translation.rsevening
 msgid "Evening"
-msgstr "Wieczór"
+msgstr "Βράδυ"
 
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
-msgstr "Zmierzch"
+msgstr "Βραδινό λυκόφως"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "co"
+msgstr "κάθε"
 
 #: u_translation.rseverypositio
 msgid "Every position"
-msgstr "Dla każdej pozycji"
+msgstr ""
 
 #: u_translation.rsexit
 msgid "Exit"
-msgstr "Wyjście"
+msgstr "Έξοδος"
 
 #: u_translation.rsexiting
 msgid "Exiting ..."
-msgstr "Wychodzenie..."
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
-msgstr "Tryb zaawansowany"
+msgstr ""
 
 #: u_translation.rsexternalcata
 msgid "External catalog object"
-msgstr "Zewnętrzny katalog obiektów"
+msgstr ""
 
 #: u_translation.rseyepiece
 msgid "Eyepiece"
-msgstr "Okular"
+msgstr "Προσοφθάλμιο"
 
 #: u_translation.rsfailed
 msgid "Failed: %s"
-msgstr "Nie powiodło się : %s"
+msgstr ""
 
 #: u_translation.rsfainter
 msgid "Fainter"
-msgstr "Słabszy"
+msgstr ""
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Siła rozmycia gwiazd"
+msgstr ""
 
 #: u_translation.rsfaq
 msgid "FAQ"
-msgstr "Często zadawane pytania: FAQ"
+msgstr ""
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
-msgstr "Numer Pola"
+msgstr ""
 
 #: u_translation.rsfieldofvisio
 msgid "Field of vision"
-msgstr "Pole widzenia"
+msgstr ""
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
-msgstr "Ustawienia pola widzenia"
+msgstr ""
 
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
-msgstr "Numer pola widzenia :"
+msgstr ""
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
-msgstr "Pole zbyt szerokie! Maksimum to %s"
+msgstr ""
 
 #: u_translation.rsfile
 msgid "File"
-msgstr "Plik"
+msgstr "Αρχείο"
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
-msgstr "Pliku nie odnaleziono!"
+msgstr "Το αρχείο δε βρέθηκε!"
 
 #: u_translation.rsfilespath
 msgid "Files path"
-msgstr "Ścieżka dostępu plików"
+msgstr ""
 
 #: u_translation.rsfill
 msgid "Fill?"
-msgstr "Wypełnić?"
+msgstr "Γέμισμα;"
 
 #: u_translation.rsfillmilkyway
 msgid "Fill Milky Way"
-msgstr "Wypełnij Drogę Mleczną"
+msgstr "Γέμισμα Γαλαξία"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
-msgstr "Wypełnij horyzont kolorem"
+msgstr ""
 
 #: u_translation.rsfilter
 msgid "Filter ->"
-msgstr "Filtr ->"
+msgstr "Φίλτρο ->"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
-msgstr "Filtr głębokiego nieba"
+msgstr ""
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Włącz filtr gwiazd"
+msgstr ""
 
 #: u_translation.rsfind
 msgid "Find"
-msgstr "Znajdź"
+msgstr ""
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
-msgstr "Koło szukacza (okular)"
+msgstr ""
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "Ramka szukacza (CCD)"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
-msgstr "Pierwsze 5000"
+msgstr "Πρώτα 5000"
 
 #: u_translation.rsfirstchar
 msgid "First char"
-msgstr "Pierwszy znak"
+msgstr ""
 
 #: u_translation.rsfitsfile
+#, fuzzy
+#| msgid "FITS File"
 msgid "FITS file"
-msgstr "Plik FITS "
+msgstr "Αρχείο FITS"
 
 #: u_translation.rsfixedblack
 msgid "Fixed black"
-msgstr "Ustalone tło nieba"
+msgstr ""
 
 #: u_translation.rsfixedskycolo
 msgid "Fixed sky colour"
-msgstr "Wybierz kolor nieba"
+msgstr ""
 
 #: u_translation.rsflamsteednum
+#, fuzzy
+#| msgid "Flamsteed Number"
 msgid "Flamsteed number"
-msgstr "Numer Flamsteeda"
+msgstr "Αριθμός Flamsteed"
 
 #: u_translation.rsfonts
 msgid "Fonts"
-msgstr "Czcionka"
+msgstr "Γραμματοσειρές"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Dla dużego katalogu wybierz zawsze tryb binarny. Dla małego zestawu danych ulegających częstej modyfikacji wybierz tryb tekstowy. Pozwoli to na edytowanie pliku i natychmiastową obserwację wyników bez konieczności powtórnego uruchamiania tego narzędzia."
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
-msgstr "FOV"
+msgstr "Πεδίο"
 
 #: u_translation.rsfov2
 msgid "FOV:"
-msgstr "FOV:"
+msgstr "Πεδίο:"
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
-msgstr "Numer FOV:"
+msgstr ""
 
 #: u_translation.rsfriday
 msgid "Fri."
-msgstr "Pt."
+msgstr ""
 
 #: u_translation.rsfrom
 msgid "From"
-msgstr "od"
+msgstr "Από"
 
 #: u_translation.rsftp
 msgid "FTP "
 msgstr "FTP"
 
 #: u_translation.rsftppassivemo
+#, fuzzy
+#| msgid "FTP Passive Mode"
 msgid "FTP passive mode"
-msgstr "Tryb pasywny dla FTP"
+msgstr "FTP Passive Mode"
 
 #: u_translation.rsfullname
+#, fuzzy
+#| msgid "Full Name"
 msgid "Full name"
-msgstr "Pełna nazwa"
+msgstr "Πλήρες Όνομα"
 
 #: u_translation.rsfullscreen
+#, fuzzy
+#| msgid "Full Screen"
 msgid "Full screen"
-msgstr "Pełny ekran"
+msgstr "Πλήρης Οθόνη"
 
 #: u_translation.rsgalactic
 msgid "Galactic"
-msgstr "Galaktyczny"
+msgstr "Γαλαξιακός"
 
 #: u_translation.rsgalacticcoor
+#, fuzzy
+#| msgid "Galactic Coordinate"
 msgid "Galactic coordinates"
-msgstr "Współrzędne galaktyczne"
+msgstr "Γαλαξιακές Συντενταγμένες"
 
 #: u_translation.rsgalacticcoor2
+#, fuzzy
+#| msgid "Galactic Coord."
 msgid "Galactic coord."
-msgstr "Współ.galaktyczne"
+msgstr "Γαλαξιακές Συντ."
 
 #: u_translation.rsgalaxies
 msgid "Galaxies"
-msgstr "Galaktyki"
+msgstr "Γαλαξίες"
 
 #: u_translation.rsgalaxy
 msgid "Galaxy"
-msgstr "Galaktyka"
+msgstr "γαλαξίας"
 
 #: u_translation.rsgalaxycluste
+#, fuzzy
+#| msgid "Galaxy Cluster"
 msgctxt "u_translation.rsgalaxycluste"
 msgid "Galaxy cluster"
-msgstr "Gromady galaktyczne"
+msgstr "Σμήνος Γαλαξιών"
 
 #: u_translation.rsgalaxycluste2
 msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
-msgstr "Gromady galaktyczne"
+msgstr "Σμήνος γαλαξιών"
 
 #: u_translation.rsgamma
 msgid "Gamma"
-msgstr "Gamma"
+msgstr "Γάμμα"
 
 #: u_translation.rsgeneral
 msgid "General"
-msgstr "Ogólny"
+msgstr "Γενικά"
 
 #: u_translation.rsgeneralcatal
 msgid "General catalog options"
-msgstr "Opcje katalogu ogólnego"
+msgstr ""
 
 #: u_translation.rsgeneralsetti
+#, fuzzy
+#| msgid "General Setting"
 msgid "General settings"
-msgstr "Ustawienia ogólne"
+msgstr "Γενική Ρύθμιση"
 
 #: u_translation.rsgeocentric
 msgid "Geocentric"
-msgstr "Geocentryczna"
+msgstr "Γεωκεντρικό"
 
 #: u_translation.rsgetasteroidl
+#, fuzzy
+#| msgid "Get Asteroid list."
 msgid "Get the asteroids list."
-msgstr "Pobierz liste planetoid."
+msgstr "Λήψη λίστας αστεροειδών"
 
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
-msgstr "Pobierz obraz DSS"
+msgstr ""
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
-msgstr "Pobierz ostatnie pomiary GRS z projektu JUPOS"
+msgstr ""
 
 #: u_translation.rsglobularclus
+#, fuzzy
+#| msgid "Globular Cluster"
 msgid "Globular cluster"
-msgstr "Gromady kuliste"
+msgstr "Σφαιρωτό σμήνος"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
-msgstr "Tryb graficzny"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
-msgstr "Soczewki grawitacyjne"
+msgstr "Βαρυτικός φακός"
 
 #: u_translation.rsgreatest
 msgid "Greatest"
-msgstr "Największy"
+msgstr ""
 
 #: u_translation.rsgreeksymbol
+#, fuzzy
+#| msgid "Greek symbol"
 msgid "Greek symbols"
-msgstr "Symbol grecki"
+msgstr "Ελληνικό σύμβολο"
 
 #: u_translation.rsgreen
 msgid "Green"
-msgstr "Zielony"
+msgstr "Πράσινο"
 
 #: u_translation.rsgridsetting
+#, fuzzy
+#| msgid "Grid Setting"
 msgid "Grid settings"
-msgstr "Ustawienia siatki"
+msgstr "Ρύθμιση πλέγματος"
 
 #: u_translation.rsgridspacing
+#, fuzzy
+#| msgid "Grid Spacing"
 msgid "Grid spacing"
-msgstr "Odstępy siatki"
+msgstr "Απόσταση πλέγματος"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
-msgstr "Przelot GRS"
+msgstr ""
 
 #: u_translation.rsgslopeparame
 msgid "G slope parameter"
-msgstr "Parametr krzywej G"
+msgstr ""
 
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
-msgstr "Wiel.gwiazd.absolutna H"
+msgstr ""
 
 #: u_translation.rshalfmassradi
 msgid "Half-mass radius"
-msgstr "Promień połowy masy"
+msgstr ""
 
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
-msgstr "Stop po osiągnięciu 1000 błędów"
+msgstr "Διακοπή μετά από 1000 λάθη"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
-msgstr "Wielkość gwiazdowa H-Beta"
+msgstr ""
 
 #: u_translation.rsheight
 msgid "Height"
-msgstr "Wysokość"
+msgstr "Ύψος"
 
 #: u_translation.rshelp
 msgid "Help"
-msgstr "Pomoc"
+msgstr "Βοήθεια"
 
 #: u_translation.rshelpcontents
 msgid "Help contents"
-msgstr "Spis tematów"
+msgstr "Περιεχόμενα βοήθειας"
 
 #: u_translation.rshidelabel
 msgid "Hide label"
-msgstr "Ukryj etykietę"
+msgstr "Απόκρυψη ετικέτας"
 
 #: u_translation.rshideobjectwi
+#, fuzzy
+#| msgid "Hide object wider than"
 msgid "Hide objects wider than"
-msgstr "Ukryj ciało niebieskie szersze niż"
+msgstr "Απόκρυψη αντικειμένου πλατύτερου από"
 
 #: u_translation.rshighcolor
 msgid "High colour"
-msgstr "Jaskrawy"
+msgstr ""
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
-msgstr "Duży obszar jasności"
+msgstr ""
 
 #: u_translation.rshorizon
 msgid "Horizon"
-msgstr "Horyzont"
+msgstr "Ορίζοντας"
 
 #: u_translation.rshostname
 msgid "Hostname:"
-msgstr "Nazwa hosta:"
+msgstr ""
 
 #: u_translation.rshour
 msgid "Hour"
-msgstr "godzina"
+msgstr "'Ωρα"
 
 #: u_translation.rshourangle
 msgid "Hour angle"
-msgstr "Kąt godzinny"
+msgstr ""
 
 #: u_translation.rshourgridspac
 msgid "Right ascension grid"
-msgstr "Siatka rektascensji"
+msgstr ""
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
-msgstr "Godziny, minuty, sekundy"
+msgstr ""
 
 #: u_translation.rshttpproxy
+#, fuzzy
+#| msgid "HTTP Proxy"
 msgid "HTTP proxy"
 msgstr "HTTP Proxy"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
-msgstr "Akcja po kliknięciu ikony"
+msgstr ""
 
 #: u_translation.rsiconsize
 msgid "Icon size"
-msgstr "Rozmiar ikony"
+msgstr ""
 
 #: u_translation.rsicontime
 msgid "Icon time display"
-msgstr "Czas wyświetlania ikony"
+msgstr ""
 
 #: u_translation.rsillum
 msgid "Illum."
-msgstr "Oświe."
+msgstr ""
 
 #: u_translation.rsilluminatedf
 msgid "Illuminated fraction"
-msgstr "Część oświetlona"
+msgstr ""
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
-msgstr "Folder obrazów"
+msgstr ""
 
 #: u_translation.rsimageoptions
 msgid "Image options"
-msgstr "Opcje obrazów"
+msgstr ""
 
 #: u_translation.rsinclination
 msgid "Inclination"
-msgstr "Nachylenie"
+msgstr ""
 
 #: u_translation.rsinclination2
 msgid "Inclination="
-msgstr "Nachylenie="
+msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
-msgstr "Stopień jasności gwiazd"
+msgstr ""
 
 #: u_translation.rsincrementtim
 msgid "Increment time"
-msgstr "Przyrost czasu"
+msgstr ""
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "Wskaż tutaj jak obliczyć wymaganą wartość z danych przechowywanych w pliku tekstowym katalogu."
+msgstr ""
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
-msgstr "Wskaż jak rozpoznać jednostkę rozmiaru obiektu:"
+msgstr ""
 
 #: u_translation.rsindicatethes
 msgid "Indicate the string identifier for each type of object:"
-msgstr "Wskaż identyfikator ciągu znaków dla każdego typu obiektu:"
+msgstr ""
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr "Wskaż ciąg znaków dla każdej operacji rysowania"
+msgstr ""
 
 #: u_translation.rsindicatethes3
 msgid "Indicate the string for each colour"
-msgstr "Wskaż ciąg znaków dla każdego koloru"
+msgstr ""
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
-msgstr "Sterownik INDI"
+msgstr ""
 
 #: u_translation.rsindidriverse
 msgid "INDI driver settings"
-msgstr "Ustawienia sterownika INDI"
+msgstr ""
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "Host serwera INDI"
+msgstr ""
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
-msgstr "Port serwera INDI"
+msgstr ""
 
 #: u_translation.rsindrive
 msgid "in drive"
-msgstr "do dysku"
+msgstr ""
 
 #: u_translation.rsinfo
 msgid "Information"
-msgstr "Informacja"
+msgstr "Πληροφορίες"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
-msgstr "Opis szczegółowy"
+msgstr ""
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
-msgstr "Inicjalizacja bazy danych"
+msgstr ""
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr "Wejściowy katalog"
+msgstr ""
 
 #: u_translation.rsinsertfailed
 msgid "insert failed line %s: %s"
-msgstr "wstawianie nie powiodło się na linii %s : %s"
+msgstr ""
 
 #: u_translation.rsinsertfailed2
 msgid "Insert failed! %s"
-msgstr "Wstawianie nie powiodło się! %s"
+msgstr ""
 
 #: u_translation.rsinternet
 msgid "Internet"
-msgstr "Internet"
+msgstr "Διαδίκτυο"
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
-msgstr "błędna epoka w linii%s : %s"
+msgstr ""
 
 #: u_translation.rsinvalidfitsf
 msgid "Invalid FITS file: %s"
-msgstr "Nieprawidłowy plik FITS"
+msgstr ""
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
-msgstr "Niewidoczne dla tej szerokości"
+msgstr ""
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
-msgstr "Czy współrzędne epoki to naprawdę %s?"
+msgstr ""
 
 #: u_translation.rsjd
 msgid "JD:"
-msgstr "JD:"
+msgstr ""
 
 #: u_translation.rsjd2
 msgid "JD"
-msgstr "JD"
+msgstr ""
 
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
-msgstr "Kalendarz JD"
+msgstr ""
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
-msgstr "Dzień Juliański ="
+msgstr ""
 
 #: u_translation.rsjulianyear
 msgid "Julian Year"
-msgstr "rok juliański"
+msgstr ""
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
-msgstr "Jowisz"
+msgstr ""
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
-msgstr "Długość plamy (GRS) Jowisza"
+msgstr ""
 
 #: u_translation.rskm
 msgid "Km."
-msgstr "Km."
+msgstr ""
 
 #: u_translation.rsknot
 msgid "Knot"
-msgstr "Węzeł"
+msgstr ""
 
 #: u_translation.rsl
 msgid "L"
-msgstr "L"
+msgstr ""
 
 #: u_translation.rslabel
 msgid "Label:"
-msgstr "Etykieta:"
+msgstr ""
 
 #: u_translation.rslabel2
 msgid "Label"
-msgstr "Etykieta"
+msgstr ""
 
 #: u_translation.rslabelobject
 msgid "Label object"
-msgstr "Etykieta obiektu"
+msgstr ""
 
 #: u_translation.rslabels
 msgid "Labels"
-msgstr "Etykiety"
+msgstr ""
 
 #: u_translation.rslabeltext
 msgid "Label text"
-msgstr "Zawartość etykiety"
+msgstr ""
 
 #: u_translation.rslandscape
 msgid "Landscape"
-msgstr "Pozioma"
+msgstr ""
 
 #: u_translation.rslanguage
 msgid "Internal language"
-msgstr "Język wbudowany"
+msgstr "English"
 
 #: u_translation.rslanguage2
 msgid "Language"
-msgstr "Język"
+msgstr ""
 
 #: u_translation.rslanguagesele
 msgid "Language selection"
-msgstr "Wybór języka aplikacji Cartes du Ciel."
+msgstr ""
 
 #: u_translation.rslatinname
 msgid "Latin name"
-msgstr "Nazwa łacińska"
+msgstr ""
 
 #: u_translation.rslatitude
 msgid "Latitude"
-msgstr "Szerokość"
+msgstr ""
 
 #: u_translation.rsleft
 msgid "Left"
-msgstr "Lewy"
+msgstr ""
 
 #: u_translation.rsleftbar
 msgid "Left bar"
-msgstr "Lewy pasek narzędzi"
+msgstr ""
 
 #: u_translation.rslegal
 msgid "Legal"
-msgstr "Lokalny"
+msgstr ""
 
 #: u_translation.rslegend
 msgid "Legend"
-msgstr "Legenda"
+msgstr ""
 
 #: u_translation.rslength
 msgid "Length"
-msgstr "Długość"
+msgstr ""
 
 #: u_translation.rslessnebulae
 msgid "Less deep sky"
-msgstr "Mniej głębokiego nieba"
+msgstr ""
 
 #: u_translation.rslessstars
 msgid "Less stars"
-msgstr "Mniej gwiazd"
+msgstr ""
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
-msgstr "Libracja w szerokości"
+msgstr ""
 
 #: u_translation.rslibrationinl2
 msgid "Libration in longitude"
-msgstr "Libracja w długości"
+msgstr ""
 
 #: u_translation.rslicenseagree
 msgid "License agreement"
-msgstr "Umowa licencyjna"
+msgstr ""
 
 #: u_translation.rslightyears
 msgid "light years"
-msgstr "lat świetlnych"
+msgstr "έτη φωτός"
 
 #: u_translation.rslii
 msgid "LII"
-msgstr "LII"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
-msgstr "Graniczna wielkość gwiazdowa, lista:"
+msgstr ""
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
-msgstr "Graniczna wielkość gwiazdowa:"
+msgstr ""
 
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
-msgstr "Graniczny rozmiar (arc-minuty) :"
+msgstr ""
 
 #: u_translation.rsline1
 msgid "Line"
-msgstr "Linia"
+msgstr ""
 
 #: u_translation.rslinemode
 msgid "Line mode"
-msgstr "Tryb liniowy"
+msgstr ""
 
 #: u_translation.rslinemodedraw
 msgid "Line mode drawing"
-msgstr "Tryb liniowy"
+msgstr ""
 
 #: u_translation.rslineoperatio
 msgid "Line operation"
-msgstr "Operacja liniowa"
+msgstr ""
 
 #: u_translation.rslines
 msgid "Lines"
-msgstr "Linie"
+msgstr "Γραμμές"
 
 #: u_translation.rslinesgrid
 msgid "Lines / grid"
-msgstr "Linie / siatka"
+msgstr ""
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Szerokość linii"
+msgstr ""
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr "Połącz wszystkie mapy"
+msgstr ""
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
-msgstr "Nasłuchuj na porcie: %s"
+msgstr ""
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
-msgstr "Lista dostępnych płytek"
+msgstr ""
 
 #: u_translation.rsload
 msgid "Load"
-msgstr "Wgraj"
+msgstr "Φόρτωση"
 
 #: u_translation.rsloadfile
 msgid "Load file"
-msgstr "Wczytaj plik"
+msgstr "Φόρτωση αρχείου"
 
 #: u_translation.rsloadmpcfile
+#, fuzzy
+#| msgid "Load MPC File"
 msgid "Load MPC file"
-msgstr "Wczytaj plik MPC"
+msgstr "Φόρτωση αρχείου MPC"
 
 #: u_translation.rsloadmpcforma
 msgid "Load MPC format file"
-msgstr "Wczytaj plik formatu MPC"
+msgstr "Φόρτωση αρχείου τύπου MPC"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Wczytaj tylko pierwszych "
+msgstr "Φόρτωση μόνο των πρώτων"
 
 #: u_translation.rsloadproject
 msgid "Load project"
-msgstr "Otwórz projekt"
+msgstr ""
 
 #: u_translation.rslocalhorizon
+#, fuzzy
+#| msgid "Local Horizon"
 msgid "Local horizon"
-msgstr "Lokalna linia horyzontu"
+msgstr "Τοπικός Ορίζοντας"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Plik zarysu horyzontu lokalnego: "
+msgstr ""
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
-msgstr "Lokalny czas gwiazdowy"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
-msgstr "Śledzenie %s"
+msgstr ""
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
-msgstr "Skala logarytmiczna"
+msgstr ""
 
 #: u_translation.rslongitude
 msgid "Longitude"
-msgstr "Długość"
+msgstr ""
 
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
-msgstr "Węzeł podnoszenia długości"
+msgstr ""
 
 #: u_translation.rslosange
 msgid "Lozenge"
-msgstr "Romb"
+msgstr ""
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
-msgstr "Mały obszar jasności"
+msgstr ""
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
-msgstr "Luminescencja"
+msgstr ""
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
-msgstr "Zaćmienia Księżyca"
+msgstr ""
 
 #: u_translation.rsmag
 msgid "Mag:"
-msgstr "Mag:"
+msgstr ""
 
 #: u_translation.rsmagn
 msgid "Magn."
-msgstr "Magn."
+msgstr ""
 
 #: u_translation.rsmagnitude
 msgid "Magnitude"
-msgstr "Wielkość gwiazdowa"
+msgstr ""
 
 #: u_translation.rsmagnitudeatm
 msgid "Magnitude at maxima"
-msgstr "Wielkość gwiazdowa w maksimum"
+msgstr ""
 
 #: u_translation.rsmagnitudeatm2
 msgid "Magnitude at minima"
-msgstr "Wielkość gwiazdowa w minimum"
+msgstr ""
 
 #: u_translation.rsmagnitudeban
 msgid "Magnitude band"
-msgstr "Pasmo wielkości gwiazdowej"
+msgstr ""
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
-msgstr "Wielkość gwiazdowa"
+msgstr ""
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
-msgstr "Błąd wielkości gwiazdowej"
+msgstr ""
 
 #: u_translation.rsmagnitudefai
+#, fuzzy
+#| msgid "magnitude fainter than the stars."
 msgid "magnitudes fainter than the stars."
-msgstr "o wielkości gwiazdowej słabszej od gwiazd."
+msgstr "μέγεθος αμυδρότερο από τα αστέρια"
 
 #: u_translation.rsmagnitudetyc
 msgid "Magnitude Tycho BT"
-msgstr "Wielkość gwiazdowa Tycho BT"
+msgstr ""
 
 #: u_translation.rsmagnitudetyc2
 msgid "Magnitude Tycho VT"
-msgstr "Wielkość gwiazdowa Tycho VT"
+msgstr ""
 
 #: u_translation.rsmaillist
 msgid "Mail list (Yahoo group)"
-msgstr "Forum użytkowników (grupa Yahoo)"
+msgstr ""
 
 #: u_translation.rsmainbar
 msgid "Main bar"
-msgstr "Pasek główny"
+msgstr ""
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
-msgstr "Montaż manualny"
+msgstr ""
 
 #: u_translation.rsmanualtelesc
 msgid "Manual telescope"
-msgstr "Manualny teleskop"
+msgstr ""
 
 #: u_translation.rsmap
 msgid "Map"
-msgstr "Mapa"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
-msgstr "Zaznacz środek mapy"
+msgstr ""
 
 #: u_translation.rsmars
 msgid "Mars"
-msgstr "Mars"
+msgstr ""
 
 #: u_translation.rsmax
 msgid "Max."
-msgstr "Maks."
+msgstr ""
 
 #: u_translation.rsmax2
 msgid "max"
-msgstr "max"
+msgstr "μεγ."
 
 #: u_translation.rsmaximize
 msgid "Maximize"
-msgstr "Maksymalizuj"
+msgstr ""
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
-msgstr "Maksymalna wielkość gwiazdowa"
+msgstr ""
 
 #: u_translation.rsmbytes
 msgid "MBytes"
-msgstr "MBajtów"
+msgstr ""
 
 #: u_translation.rsmean
 msgid "Mean"
-msgstr "Średnia"
+msgstr ""
 
 #: u_translation.rsmeananomaly
 msgid "Mean anomaly"
-msgstr "Średnia anomalia"
+msgstr ""
 
 #: u_translation.rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr "Średni równik, równonoc i epoka"
+msgstr ""
 
 #: u_translation.rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr "Średnia równonoc i epoka J2000"
+msgstr ""
 
 #: u_translation.rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr "średnia równonoc J2000 i epoka daty"
+msgstr ""
 
 #: u_translation.rsmeanj2000
 msgid "Mean J2000"
-msgstr "Średnia J2000"
+msgstr ""
 
 #: u_translation.rsmeanlocal
 msgid "Mean local"
-msgstr "Średni lokalny"
+msgstr ""
 
 #: u_translation.rsmeanofthedat
 msgid "Mean of the date"
-msgstr "Średnia daty"
+msgstr ""
 
 #: u_translation.rsmeanposition
 msgid "Mean position"
-msgstr "Średnia pozycja"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
-msgstr "Merkury"
+msgstr "Ερμής"
 
 #: u_translation.rsmessages
 msgid "Messages:"
-msgstr "Komunikaty:"
+msgstr "Μηνύματα"
 
 #: u_translation.rsmeters
 msgid "Meters"
-msgstr "Metry"
+msgstr "Μέτρα"
 
 #: u_translation.rsmilkyway
 msgid "Milky Way"
-msgstr "Droga Mleczna"
+msgstr "Γαλαξίας"
 
 #: u_translation.rsmin
 msgid "m"
@@ -2323,1061 +2449,1077 @@ msgstr "'"
 
 #: u_translation.rsmin2
 msgid "min"
-msgstr "min"
+msgstr "ελ."
 
 #: u_translation.rsmin3
 msgid "Min."
-msgstr "min."
+msgstr "Λεπ."
 
 #: u_translation.rsminute
 msgid "Minute"
-msgstr "minuta"
+msgstr "Λεπτό"
 
 #: u_translation.rsminutes
 msgid "minutes"
-msgstr "minut"
+msgstr "λεπτά"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
-msgstr "Odbij poziomo"
+msgstr ""
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr "Odbij pionowo"
+msgstr ""
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
-msgstr "Różne linie"
+msgstr ""
 
 #: u_translation.rsmodify
 msgid "Modify"
-msgstr "Zmień"
+msgstr "Τροποποίηση"
 
 #: u_translation.rsmonday
 msgid "Mon."
-msgstr "Pn."
+msgstr ""
 
 #: u_translation.rsmonth
 msgid "Month"
-msgstr "miesiąc"
+msgstr "Μήνας"
 
 #: u_translation.rsmoon
 msgid "Moon"
-msgstr "Księżyc"
+msgstr "Σελήνη"
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
-msgstr "Więcej głębokiego nieba"
+msgstr ""
 
 #: u_translation.rsmoreoptions
+#, fuzzy
+#| msgid "More Options"
 msgid "More options"
-msgstr "Więcej opcji"
+msgstr "Περισσότερες Επιλογές"
 
 #: u_translation.rsmorestars
+#, fuzzy
+#| msgid "More Stars"
 msgid "More stars"
-msgstr "Więcej gwiazd"
+msgstr "Περισσότερα Αστέρια"
 
 #: u_translation.rsmorethan1000
 msgid "More than 1000 errors! The processing is aborted."
-msgstr "Wiecej niż 1000 błędów! Pzretwarzanie anulowane."
+msgstr ""
 
 #: u_translation.rsmorethanobje
 msgid "More than %s objects, the result is truncated."
-msgstr "Wiecej niż %s obiektów, wynik jest okrojony."
+msgstr ""
 
 #: u_translation.rsmorning
 msgid "Morning"
-msgstr "Rano"
+msgstr ""
 
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
-msgstr "Świt"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
-msgstr "Przenieś etykietę"
+msgstr ""
 
 #: u_translation.rsmpcftp
 msgid "MPC FTP"
-msgstr "MPC FTP"
+msgstr ""
 
 #: u_translation.rsmpchttp
 msgid "MPC HTTP"
-msgstr "MPC HTTP"
+msgstr ""
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
-msgstr "Wielokrotna flaga"
+msgstr ""
 
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
-msgstr "Gwiazdy wielokrotne"
+msgstr ""
 
 #: u_translation.rsmysqldatabas
 msgid "MySQL database"
-msgstr "Baza danych MySQL"
+msgstr ""
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
-msgstr "Nieuzbrojone oko"
+msgstr ""
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
-msgstr "Odnośnik do nieuzbrojonego oka"
+msgstr ""
 
 #: u_translation.rsname
 msgid "Name"
-msgstr "Nazwa"
+msgstr ""
 
 #: u_translation.rsnautical
 msgid "Nautical"
-msgstr "Żeglarski"
+msgstr ""
 
 #: u_translation.rsnebula
 msgid "Deep sky object"
-msgstr "Obiekt głębokiego nieba"
+msgstr ""
 
 #: u_translation.rsnebulacommon
 msgid "Deep sky common name"
-msgstr "Nazwa potoczna głębokiego nieba"
+msgstr ""
 
 #: u_translation.rsnebuladispla
 msgid "Deep sky objects display"
-msgstr "Wyświetlanie obiektów głębokiego nieba"
+msgstr ""
 
 #: u_translation.rsnebulae
 msgid "Deep sky objects"
-msgstr "Głębokie niebo"
+msgstr ""
 
 #: u_translation.rsnebulaefilte
 msgid "Deep sky filter"
-msgstr "Filtr głębokiego nieba"
+msgstr ""
 
 #: u_translation.rsnebulaeoroth
 msgid "Deep sky or other objects"
-msgstr "Głębokie niebo lub inne obiekty"
+msgstr ""
 
 #: u_translation.rsnebulaeoutli
 msgid "Nebulae outlines"
-msgstr "Zarys mgławicy"
+msgstr ""
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
-msgstr "Sąsiad"
+msgstr ""
 
 #: u_translation.rsneptune
 msgid "Neptune"
-msgstr "Neptun"
+msgstr ""
 
 #: u_translation.rsnewchart
 msgid "New chart"
-msgstr "Nowa mapa"
+msgstr ""
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
-msgstr "Nowe koło szukacza"
+msgstr ""
 
 #: u_translation.rsnewlabel
 msgid "New label"
-msgstr "Nowa etykieta"
+msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
-msgstr "Następny >>"
+msgstr ""
 
 #: u_translation.rsnightvision
 msgid "Night vision"
-msgstr "Tryb nocny"
+msgstr ""
 
 #: u_translation.rsnightvisionb
 msgid "Night vision button"
-msgstr "Przycisk trybu nocnego"
+msgstr ""
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
-msgstr "Kolor trybu nocnego"
+msgstr ""
 
 #: u_translation.rsno
 msgid "No."
-msgstr "Nr."
+msgstr ""
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "Nie znaleziono danych planetoid!%sProszę najpierw wczytać plik MPC."
+msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
-msgstr "Bez marginesu"
+msgstr ""
 
 #: u_translation.rsnone1
 msgid "None"
-msgstr "Żadna"
+msgstr ""
 
 #: u_translation.rsnonexistant
 msgid "Non-existent"
-msgstr "Nie istniejący"
+msgstr ""
 
 #: u_translation.rsnonexistentu
 msgid "Non-existent/unknown"
-msgstr "Nieznane"
+msgstr ""
 
 #: u_translation.rsnonvisiblese
 msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "Brak widzialnych rezultatów. Powiększ dla większej ilości detali lub sprawdź ustawienia filtra obiektów."
+msgstr ""
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
-msgstr "Nie ma obiektu do śledzenia"
+msgstr ""
 
 #: u_translation.rsnopicture
 msgid "No picture"
-msgstr "Nie ma żadnego obrazu"
+msgstr ""
 
 #: u_translation.rsnoprinterfou
 msgid "No printer found!"
-msgstr "Drukarka nie znaleziona!"
+msgstr ""
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr "(nieprawidłowy dla ruchu własnego,brak danych pm dla tego katalogu)"
+msgstr ""
 
 #: u_translation.rsnormalcolor
 msgid "Normal (colour)"
-msgstr "Normalny (kolor)"
+msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
-msgstr "Północ"
+msgstr ""
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
-msgstr "Nie jest to plik FITS, brakuje słowa kluczowego SIMPLE = T"
+msgstr ""
 
 #: u_translation.rsnotavailable
 msgid "Not available"
-msgstr "Niedostępny"
+msgstr ""
 
 #: u_translation.rsnotconnected
 msgid "%s not connected."
-msgstr "%s nie podłączony."
+msgstr ""
 
 #: u_translation.rsnote
 msgid "Note"
-msgstr "Notatka"
+msgstr ""
 
 #: u_translation.rsnotfound
 msgid "%s not found"
-msgstr "%s nie znaleziony"
+msgstr ""
 
 #: u_translation.rsnotfoundinan
+#, fuzzy
+#| msgid "%s  Not found in any installed catalog index."
 msgid "%s  Not found in any of the installed catalog indices."
-msgstr "%s  Nie znaleziono w żadnym z zainstalowanych indeksach katalogu"
+msgstr "%s  δε βρέθηκε σε κανένα εγκατεστημένο κατάλογο."
 
 #: u_translation.rsnotfoundmayb
+#, fuzzy
+#| msgid "%s Not found!%sMaybe the catalog is not installed, or wrong path in catalog setting."
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr "%s Nie znaleziono!%sKatalog może być nie zainstalowany, albo biepoprawna ścieżka w ustawieniach katalogu."
+msgstr "%s Δε βρέθηκε!%sΊσως ο κατάλογος δεν είναι εγκατεστημένος ή υπάρχει λάθος διαδρομή στις ρυθμίσεις καταλόγου."
 
 #: u_translation.rsnow
 msgid "Now"
-msgstr "Teraz"
+msgstr ""
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
-msgstr "Ilość plików"
+msgstr ""
 
 #: u_translation.rsnumberofmont
 msgid "Number of months"
-msgstr "Ilość miesięcy"
+msgstr ""
 
 #: u_translation.rsnumberofnebu
 msgid "Number of nebulae"
-msgstr "Ilość mgławic"
+msgstr ""
 
 #: u_translation.rsnumberofstar
 msgid "Number of stars"
-msgstr "Ilość gwiazd"
+msgstr ""
 
 #: u_translation.rsnumberofstep
 msgid "Number of steps"
-msgstr "Ilość kroków"
+msgstr ""
 
 #: u_translation.rsnutationaber
 msgid "Nutation, aberration"
-msgstr "Nutacja i aberracja"
+msgstr ""
 
 #: u_translation.rsobject
 msgid "Object"
-msgstr "Obiekt"
+msgstr ""
 
 #: u_translation.rsobjectbar
 msgid "Object bar"
-msgstr "Pasek obiektów"
+msgstr ""
 
 #: u_translation.rsobjectfilter
 msgid "Object filter"
-msgstr "Filtr obiektów"
+msgstr ""
 
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
-msgstr "Ustawienia filtru obiektów"
+msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
-msgstr "Lista obiektów"
+msgstr ""
 
 #: u_translation.rsobjectlistse
 msgid "Object list settings"
-msgstr "Ustawienia listy obiektów"
+msgstr ""
 
 #: u_translation.rsobjectname
 msgid "Object name"
-msgstr "Nazwa obiektu"
+msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"
-msgstr "Obiekty"
+msgstr ""
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
-msgstr "Jednostka rozmiaru obiektu"
+msgstr ""
 
 #: u_translation.rsobjecttype
 msgid "Object type"
-msgstr "Typ obiektu"
+msgstr ""
 
 #: u_translation.rsobservatory
 msgid "Observatory"
-msgstr "Obserwatorium"
+msgstr ""
 
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
-msgstr "Miejsce obserwacji"
+msgstr ""
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
-msgstr "Przestarzałe"
+msgstr ""
 
 #: u_translation.rsoffset
 msgid "Offset"
-msgstr "Offset"
+msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
-msgstr "OK"
+msgstr "ΟΚ"
 
 #: u_translation.rsoneofthree
 msgid "One of three"
-msgstr "Jedna z trzech"
+msgstr ""
 
 #: u_translation.rsoneoftwo
 msgid "One of two"
-msgstr "Jedna z dwóch"
+msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
-msgstr "Online DSS"
+msgstr ""
 
 #: u_translation.rsonlinedsspic
 msgid "Online DSS pictures"
-msgstr "Obrazy Online DSS"
+msgstr ""
 
 #: u_translation.rsonlinepictur
 msgid "Online pictures servers"
-msgstr "Serwery obrazów dostępnych online"
+msgstr ""
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
-msgstr "Tylko opisane planetoidy"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
-msgstr "Tylko pierwsza"
+msgstr ""
 
 #: u_translation.rsonlythelast
 msgid "Only the last"
-msgstr "Tylko ostatnia"
+msgstr ""
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr "Otwórz mapę"
+msgstr ""
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
-msgstr "Otwórz mapę"
+msgstr ""
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
-msgstr "Gromady otwarte"
+msgstr ""
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
-msgstr "Otwórz bitmapę."
+msgstr ""
 
 #: u_translation.rsoptions
 msgid "Options"
-msgstr "Opcje"
+msgstr ""
 
 #: u_translation.rsorbit
 msgid "Orbit"
-msgstr "Orbita"
+msgstr ""
 
 #: u_translation.rsorbitaleleme
 msgid "Orbital elements"
-msgstr "Elementy orbitalne"
+msgstr ""
 
 #: u_translation.rsorientation
 msgid "Orientation"
-msgstr "Orientacja"
+msgstr ""
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr "Lub użyj lokalnego pliku:"
+msgstr ""
 
 #: u_translation.rsother
 msgid "Other"
-msgstr "Inne"
+msgstr ""
 
 #: u_translation.rsotherlabel
 msgid "Other label"
-msgstr "Inne etykiety"
+msgstr ""
 
 #: u_translation.rsotherlinesca
 msgid "Other line-catalogs"
-msgstr "Inne katalogi liniowe"
+msgstr ""
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
-msgstr "Wyjściowy typ katalogu"
+msgstr ""
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr "Opcje katalogu wyjściowego"
+msgstr ""
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
-msgstr "Wyjściowy folder"
+msgstr ""
 
 #: u_translation.rspagemarginin
 msgid "Page margin in millimeters"
-msgstr "Marginesy strony w milimetrach"
+msgstr ""
 
 #: u_translation.rsparallax
 msgid "Parallax"
-msgstr "Paralaksa"
+msgstr ""
 
 #: u_translation.rsparametric
 msgid "Parametric"
-msgstr "Parametryczny"
+msgstr ""
 
 #: u_translation.rspartial
 msgid "Partial"
-msgstr "Częściowy"
+msgstr ""
 
 #: u_translation.rspassword
 msgid "Password"
-msgstr "Hasło:"
+msgstr ""
 
 #: u_translation.rspath
 msgid "Path"
-msgstr "Ścieżka"
+msgstr ""
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr "Ścieżka do zapisu pliku:"
+msgstr ""
 
 #: u_translation.rspathwidth
 msgid "Path width"
-msgstr "Szerokość ścieżki"
+msgstr ""
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
-msgstr "Półcień"
+msgstr ""
 
 #: u_translation.rsperihelionda
 msgid "Perihelion date"
-msgstr "Data peryhelium"
+msgstr ""
 
 #: u_translation.rsperiheliondi
 msgid "Perihelion distance"
-msgstr "Dystans peryhelium"
+msgstr ""
 
 #: u_translation.rsperiod
 msgid "Period"
-msgstr "Okres"
+msgstr ""
 
 #: u_translation.rspersonaldata
 msgid "Personal data"
-msgstr "Ustawienia osobiste"
+msgstr ""
 
 #: u_translation.rsphase
 msgid "Phase"
-msgstr "Faza"
+msgstr ""
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
-msgstr "Fotograficzna płytka"
+msgstr ""
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
-msgstr "Fotograficzny"
+msgstr ""
 
 #: u_translation.rspictures
 msgid "Pictures"
-msgstr "Obrazy"
+msgstr ""
 
 #: u_translation.rspixels
 msgid "pixels"
-msgstr "pixeli"
+msgstr "πίξελ"
 
 #: u_translation.rsplanet
 msgid "Planet"
-msgstr "Planeta"
+msgstr ""
 
 #: u_translation.rsplanetaryneb
 msgctxt "u_translation.rsplanetaryneb"
 msgid "Planetary nebula"
-msgstr "Mgławice planetarne"
+msgstr ""
 
 #: u_translation.rsplanetaryneb2
 msgid "Planetary nebulae"
-msgstr "Mgławice planetarne"
+msgstr ""
 
 #: u_translation.rsplanetaryneb3
 msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
-msgstr "Mgławice planetarne"
+msgstr ""
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
-msgstr "Satelita planetarny"
+msgstr ""
 
 #: u_translation.rsplanetssetti
 msgid "Planet settings"
-msgstr "Ustawienia planet"
+msgstr ""
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
-msgstr "Usterka płytki"
+msgstr ""
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
-msgstr "Id.płytki   Data  Exp.  Margines CD  Obserwatorium"
+msgstr ""
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
-msgstr "Proszę sprawdź połączenie internetowe i wpisany adres URL"
+msgstr ""
 
 #: u_translation.rspleaseconfig
 msgid "Please configure your DSS file path first."
-msgstr "Proszę najpierw skonfigurować ścieżkę do pliku DSS."
+msgstr ""
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
-msgstr "Proszę skonfigurować adres URL dla elementu orbit!"
+msgstr ""
 
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
-msgstr "Proszę potwierdzić, że teleskop wskazuje na %s"
+msgstr ""
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
-msgstr "Proszę wpisać identyfikator obiektu."
+msgstr ""
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr "Proszę wskazać krótką nazwę katalogu"
+msgstr ""
 
 #: u_translation.rspleaseindica2
 msgid "Please indicate a catalog long name"
-msgstr "Proszę wskazać długą nazwę katalogu"
+msgstr ""
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr "Proszę wskazać folder gdzie katalog musi być utworzony"
+msgstr ""
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
-msgstr "Proszę włożyć płytkę RealSky CD numer"
+msgstr ""
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
-msgstr "Błędy proszę zgłaszać do:"
+msgstr ""
 
 #: u_translation.rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr "Proszę utworzyć folder samodzielnie i następnie ponownie uruchomić program."
+msgstr ""
 
 #: u_translation.rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr "Proszę przeinstalować program."
+msgstr ""
 
 #: u_translation.rsplottheposit
 msgid "Plot the position of the moving object."
-msgstr "Rysuj pozycję przemieszczającego się obiektu."
+msgstr ""
 
 #: u_translation.rspluto
 msgid "Pluto"
-msgstr "Pluton"
+msgstr ""
 
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
-msgstr "Pluton jest planetą."
+msgstr ""
 
 #: u_translation.rspm
 msgid "pm"
-msgstr "pm"
+msgstr "μμ"
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
-msgstr "Nachylenie bieguna"
+msgstr ""
 
 #: u_translation.rsport
 msgid "Port:"
-msgstr "Port:"
+msgstr ""
 
 #: u_translation.rsportrait
 msgid "Portrait"
-msgstr "Pionowa"
+msgstr ""
 
 #: u_translation.rsposition
 msgid "Position"
-msgstr "Pozycja"
+msgstr ""
 
 #: u_translation.rspositionangl
 msgid "Position angle"
-msgstr "Kąt pozycji"
+msgstr ""
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
-msgstr "Epoka pozycji"
+msgstr ""
 
 #: u_translation.rspostscript
 msgid "PostScript"
-msgstr "PostScript"
+msgstr ""
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr "Prefiks nazwy z krótką nazwą katalogu"
+msgstr ""
 
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
-msgstr "Prefix alternatywnych nazw z ich etykietami"
+msgstr ""
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr "Przygotuj katalog z CatGen"
+msgstr ""
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Przygotuj dane"
+msgstr ""
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
-msgstr "Przygotuj dane miesięczne"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
-msgstr "Ciśnienie (milibar)"
+msgstr ""
 
 #: u_translation.rsprev
 msgid "<<   Prev"
-msgstr "<<   Wstecz"
+msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
-msgstr "Drukuj"
+msgstr ""
 
 #: u_translation.rsprintchart
 msgid "Print chart"
-msgstr "Drukuj mapę"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
-msgstr "Drukarka:"
+msgstr ""
 
 #: u_translation.rsprinterlegen
 msgid "Printer legend"
-msgstr "Legenda druku"
+msgstr ""
 
 #: u_translation.rsprintersetup
 msgid "Printer setup"
-msgstr "Ustawienia druku"
+msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
-msgstr "Metoda drukowania"
+msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
-msgstr "Drukuj mapę"
+msgstr ""
 
 #: u_translation.rsprocessing
 msgid "Processing... %s"
-msgstr "Przetwarzanie... %s"
+msgstr ""
 
 #: u_translation.rsprocessingen
 msgid "Processing ended. Total number of comets: %s"
-msgstr "Koniec przetwarzania. Całkowita ilość komet: %s"
+msgstr ""
 
 #: u_translation.rsprocessingen2
 msgid "Processing ended. Total number of asteroids: %s"
-msgstr "Koniec przetwarzania. Całkowita ilość planetoid: %s"
+msgstr ""
 
 #: u_translation.rsprocessingen3
 msgid "Processing ended. Total number of location :%s"
-msgstr "Koniec przetwarzania. Całkowita ilość lokacji: %s"
+msgstr ""
 
 #: u_translation.rsprocessingli
 msgid "Processing line %s"
-msgstr "Przetwarzana linia %s"
+msgstr ""
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "Dane programu"
+msgstr ""
 
 #: u_translation.rsprograminfor
 msgid "Program information"
-msgstr "Informacje o programie"
+msgstr ""
 
 #: u_translation.rsprogrammer
 msgid "Programmer:"
-msgstr "Programowanie:"
+msgstr ""
 
 #: u_translation.rsprogress
 msgid "Progress"
-msgstr "Postęp"
+msgstr ""
 
 #: u_translation.rsprogressmess
 msgid "Progress messages"
-msgstr "Postęp wiadomości"
+msgstr ""
 
 #: u_translation.rsprojection
 msgid "Projection"
-msgstr "Projekcja"
+msgstr ""
 
 #: u_translation.rsprojectionse
 msgid "Projection settings"
-msgstr "Ustawienia projekcji"
+msgstr ""
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr "Ruch własny w rektascencji"
+msgstr ""
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
-msgstr "Ruch własny w deklinacji"
+msgstr ""
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
-msgstr "Ruch własny"
+msgstr ""
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
-msgstr "Proporcjonalnie do długości ogona"
+msgstr ""
 
 #: u_translation.rsproportional2
 msgid "Proportional to the magnitude"
-msgstr "Proporcjonalnie do wielkości gwiazdowej"
+msgstr ""
 
 #: u_translation.rsproxy
 msgid "Proxy"
-msgstr "Proxy"
+msgstr ""
 
 #: u_translation.rsproxyhost
 msgid "Proxy host"
-msgstr "Host Proxy:"
+msgstr ""
 
 #: u_translation.rsproxyport
 msgid "Proxy port"
-msgstr "Port Proxy:"
+msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"
-msgstr "Kwazar"
+msgstr ""
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
-msgstr "Szybkie kasowanie"
+msgstr ""
 
 #: u_translation.rsquicklydelet
 msgid "Quickly delete all data related to comets"
-msgstr "Usuń wszystkie dane powiązane z kometami"
+msgstr ""
 
 #: u_translation.rsquicklydelet2
 msgid "Quickly delete all data related to asteroids"
-msgstr "Usuń wszystkie dane powiązane z planetoidami"
+msgstr ""
 
 #: u_translation.rsquickstartgu
 msgid "Quick start guide"
-msgstr "Pierwsze kroki - Przewodnik"
+msgstr ""
 
 #: u_translation.rsra
 msgid "RA"
-msgstr "RA"
+msgstr ""
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
-msgstr "Prędkość radialna"
+msgstr ""
 
 #: u_translation.rsrange
 msgid "Range"
-msgstr "Zakres"
+msgstr ""
 
 #: u_translation.rsraoptions
 msgid "RA options"
-msgstr "Opcje RA"
+msgstr ""
 
 #: u_translation.rsrasterresolu
 msgid "Raster resolution"
-msgstr "Rozdzielczość rastrowa"
+msgstr ""
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "Obroty RA:"
+msgstr ""
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
-msgstr "%sRa obrotów:"
+msgstr ""
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
-msgstr "Realistyczne obrazy"
+msgstr ""
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
-msgstr "RealSky North"
+msgstr ""
 
 #: u_translation.rsrealskysouth
 msgid "RealSky South"
-msgstr "RealSky South"
+msgstr ""
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
-msgstr "Rozpoznaj jednostki bądź typy obiektów z pliku:"
+msgstr ""
 
 #: u_translation.rsred
 msgid "Red"
-msgstr "Czerwony"
+msgstr ""
 
 #: u_translation.rsredmagnitude
 msgid "Red magnitude"
-msgstr "Wielkość gwiazdowa Red"
+msgstr ""
 
 #: u_translation.rsredo
 msgid "Redo"
-msgstr "Ponów"
+msgstr ""
 
 #: u_translation.rsredolastchan
 msgid "Redo last change"
-msgstr "Ponów ostatnią zmianę"
+msgstr ""
 
 #: u_translation.rsreducedetail
 msgid "Reduce details when moving the chart"
-msgstr "Ogranicz detale podczas przesuwania mapy"
+msgstr ""
 
 #: u_translation.rsreference
 msgid "Reference"
-msgstr "Odniesienie"
+msgstr ""
 
 #: u_translation.rsreflectionne
 msgid "Reflection nebula"
-msgstr "Mgławice refleksyjne"
+msgstr ""
 
 #: u_translation.rsrefresh
 msgid "Refresh"
-msgstr "Odśwież"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
-msgstr "Informacje o wydaniu"
+msgstr ""
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
-msgstr "Usuń wszystkie okręgi"
+msgstr ""
 
 #: u_translation.rsremovealllab
 msgid "Remove all labels"
-msgstr "Usuń wszystkie etykiety"
+msgstr ""
 
 #: u_translation.rsremovelastci
 msgid "Remove last circle"
-msgstr "Usuń ostatni okrąg"
+msgstr ""
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
-msgstr "Usuń ostatnią etykietę"
+msgstr ""
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
-msgstr "Zastąpione przez"
+msgstr ""
 
 #: u_translation.rsreportaprobl
 msgid "Report a problem"
-msgstr "Zgłoś problem"
+msgstr ""
 
 #: u_translation.rsrequesttimeo
 msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
-msgstr "Żądanie wygasło. Prawdopodobnie zbyt szeroki zakres żądania był przyczyną nadmiernego obciążenia zewnętrznego serwera."
+msgstr ""
 
 #: u_translation.rsrequiredfiel
 msgid "Required field missing!"
-msgstr "Wymagane pole nie wypełnione!"
+msgstr ""
 
 #: u_translation.rsrequirexplan
 msgid "(requires Xplanet 1.2.0)"
-msgstr "(wymagany Xplanet 1.2.0)"
+msgstr ""
 
 #: u_translation.rsreset
 msgid "Reset"
-msgstr "Resetuj"
+msgstr ""
 
 #: u_translation.rsresetalllabe
 msgid "Reset all labels"
-msgstr "Resetuj wszystkie etykiety"
+msgstr ""
 
 #: u_translation.rsresetchart
 msgid "Reset chart"
-msgstr "Resetuj mapę"
+msgstr ""
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr "Resetuj mapę i opcje"
+msgstr ""
 
 #: u_translation.rsresolution
 msgid "Resolution:"
-msgstr "Rozdzielczość:"
+msgstr ""
 
 #: u_translation.rsreturn
 msgid "Return"
-msgstr "Powrót"
+msgstr ""
 
 #: u_translation.rsrevertaltkno
 msgid "Reverse Alt knob"
-msgstr "Odwrotne pokrętło Alt"
+msgstr ""
 
 #: u_translation.rsrevertazknob
 msgid "Reverse Az knob"
-msgstr "Odwrotne pokrętło Az"
+msgstr ""
 
 #: u_translation.rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr "Odwrotne pokrętło DEC"
+msgstr ""
 
 #: u_translation.rsrevertraknob
 msgid "Reverse RA knob"
-msgstr "Odwrotne pokrętło RA"
+msgstr ""
 
 #: u_translation.rsright
 msgid "Right"
-msgstr "Prawy"
+msgstr ""
 
 #: u_translation.rsrightascensi
 msgid "Right Ascension"
-msgstr "Rektascensja"
+msgstr ""
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
-msgstr "Prawy pasek narzędzi"
+msgstr ""
 
 #: u_translation.rsrise
 msgid "Rise"
-msgstr "Wschód"
+msgstr ""
 
 #: u_translation.rsrisetime
 msgid "Rise time"
-msgstr "Czas wschodu"
+msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr "Obróć w lewo"
+msgstr ""
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr "Obróć w prawo"
+msgstr ""
 
 #: u_translation.rsrotation
 msgid "Rotation"
-msgstr "Obrót"
+msgstr ""
 
 #: u_translation.rssaros
 msgid "Saros"
-msgstr "cykl Saros"
+msgstr ""
 
 #: u_translation.rssatellite
 msgid "Satellite"
-msgstr "Satelita"
+msgstr "Δορυφόρος"
 
 #: u_translation.rssatring
 msgid "Sat. ring"
-msgstr "Pierścień Sat."
+msgstr ""
 
 #: u_translation.rssaturday
 msgid "Sat."
-msgstr "So."
+msgstr ""
 
 #: u_translation.rssaturn
 msgid "Saturn"
-msgstr "Saturn"
+msgstr "Κρόνος"
 
 #: u_translation.rssave
 msgid "Save"
-msgstr "Zapisz"
+msgstr "Αποθήκευση"
 
 #: u_translation.rssaveas
+#, fuzzy
+#| msgid "Save As..."
 msgid "Save as..."
-msgstr "Zapisz jako..."
+msgstr "Αποθήκευση ως..."
 
 #: u_translation.rssaveconfigur
+#, fuzzy
+#| msgid "Save Configuration Now"
 msgid "Save configuration now"
-msgstr "Zapisz ustawienia"
+msgstr "Αποθήκευση ρυθμισεων τώρα"
 
 #: u_translation.rssaveconfigur2
+#, fuzzy
+#| msgid "Save Configuration On Exit"
 msgid "Save configuration on exit"
-msgstr "Zapisz ustawienia przy wyjściu z programu"
+msgstr "Αποθήκευση ρυθμίσεων με την έξοδο"
 
 #: u_translation.rssaveimage
+#, fuzzy
+#| msgid "Save Image..."
 msgid "Save image..."
-msgstr "Zapisz obraz..."
+msgstr "Αποθήκευση εικόνας..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
-msgstr "Zapisz projekt"
+msgstr ""
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
-msgstr "Zapisz aktualną mapę"
+msgstr ""
 
 #: u_translation.rssavetofile
 msgid "Save to file"
-msgstr "Zapisz do pliku"
+msgstr ""
 
 #: u_translation.rsscandirector
 msgid "Scan directory"
-msgstr "Skanuj folder"
+msgstr ""
 
 #: u_translation.rsscreenandsta
 msgid "Screen and status bar"
-msgstr "Ekran i pasek stanu"
+msgstr ""
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
-msgstr "Pasek przewijania"
+msgstr ""
 
 #: u_translation.rssday
 msgid "D"
-msgstr "D"
+msgstr ""
 
 #: u_translation.rssearch
 msgid "Search"
-msgstr "Szukaj"
+msgstr "Αναζήτηση"
 
 #: u_translation.rssearchfor
 msgid "Search for"
-msgstr "Szukaj obiektu"
+msgstr "Αναζήτηση για"
 
 #: u_translation.rssearchindex
 msgid "Search index"
-msgstr "Indeks wyszukiwania"
+msgstr ""
 
 #: u_translation.rssec
 msgid "s"
@@ -3385,251 +3527,295 @@ msgstr "\""
 
 #: u_translation.rssec2
 msgid "Sec."
-msgstr "sek."
+msgstr "Δευ."
 
 #: u_translation.rssecond
 msgid "Second"
-msgstr "sekunda"
+msgstr "Δευτερόλεπτο"
 
 #: u_translation.rsseconds
 msgid "Seconds"
-msgstr "sekund(y)"
+msgstr "Δευτερόλεπτα"
 
 #: u_translation.rsselectall
+#, fuzzy
+#| msgid "Select All"
 msgid "Select all"
-msgstr "Wybierz wszystkie"
+msgstr "Επιλογή όλων"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr "Wybierz płytkę z listy"
+msgstr ""
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
-msgstr "Wybierz pola, których chcesz używać i ich pozycję w pliku tekstowym"
+msgstr ""
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr "Wybierz drukarkę systemową oraz jej opcje, których będziesz używać."
+msgstr ""
 
 #: u_translation.rsselectthetel
 msgid "Select the telescope interface"
-msgstr "Wybierz interfejs teleskopu"
+msgstr ""
 
 #: u_translation.rsselectthetyp
 msgid "Select the type of objects in your catalog"
-msgstr "Wybierz typ obiektu w twoim katalogu"
+msgstr ""
 
 #: u_translation.rssemi
 msgid "Semi"
-msgstr "Pół"
+msgstr ""
 
 #: u_translation.rssemimajoraxi
 msgid "Semimajor axis"
-msgstr "Wielka półoś"
+msgstr ""
 
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
-msgstr "Wyślij mapę do drukarki."
+msgstr ""
 
 #: u_translation.rsseparation
 msgid "Separation"
-msgstr "Separacja"
+msgstr ""
 
 #: u_translation.rsserver
 msgid "Server"
-msgstr "Serwer"
+msgstr ""
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "Polecenie serwera"
+msgstr ""
 
 #: u_translation.rsserverinform
 msgid "Server information"
-msgstr "Informacje o serwerze"
+msgstr ""
 
 #: u_translation.rsserveripinte
 msgid "Server IP interface:"
-msgstr "Interfejs serwera IP:"
+msgstr ""
 
 #: u_translation.rsserveripport
 msgid "Server IP port:"
-msgstr "Port IP serwera:"
+msgstr ""
 
 #: u_translation.rsset
 msgid "Set"
-msgstr "Ustaw"
+msgstr ""
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
-msgstr "Ustaw datę i czas"
+msgstr ""
 
 #: u_translation.rssetfov
 msgid "Set FOV"
-msgstr "Pole widzenia (FOV)"
+msgstr ""
 
 #: u_translation.rssetfovto
 msgid "Set FOV to"
-msgstr "Ustaw pole widzenia (FOV) jako"
+msgstr ""
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Ustaw jak statyw porusza się po każdej z osi kiedy kręcisz pokrętłem prowadzenia. Następnie kliknij przycisk 'Podłącz teleskop', który pokaże ile obrotów należy wykonać żeby przejść z jednego obiektu do drugiego."
+msgstr ""
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
-msgstr "Ustaw lokalizację obserwatorium"
+msgstr "Καθορισμός τοποθεσίας παρατηρητηρίου"
 
 #: u_translation.rssetup
 msgid "Setup"
-msgstr "Ustawienia"
+msgstr "Ρυθμίσεις"
 
 #: u_translation.rsshour
 msgid "H"
 msgstr "H"
 
 #: u_translation.rsshowallsky
+#, fuzzy
+#| msgid "Show All Sky"
 msgid "Show all sky"
-msgstr "Pokaż całe niebo"
+msgstr "Εμφάνιση όλο του ουρανού"
 
 #: u_translation.rsshowasteroid
+#, fuzzy
+#| msgid "Show Asteroids"
 msgid "Show asteroids"
-msgstr "Pokaż planetoidy"
+msgstr "Εμφάνιση αστεροειδών"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
-msgstr "Pokaż planetoidy na mapie"
+msgstr "Εμφάνιση αστεροειδών στο χάρτη"
 
 #: u_translation.rsshowcomets
+#, fuzzy
+#| msgid "Show Comets"
 msgid "Show comets"
-msgstr "Pokaż komety"
+msgstr "Εμφάνιση Κομητών"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
-msgstr "Pokaż komety na mapie"
+msgstr "Εμφάνιση κομητών στο χάρτη"
 
 #: u_translation.rsshowconstell
+#, fuzzy
+#| msgid "Show Constellation Line"
 msgid "Show constellation lines"
-msgstr "Pokaż kształty gwiazdozbioru"
+msgstr "Εμφάνιση γραμμής αστερισμού"
 
 #: u_translation.rsshowconstell2
+#, fuzzy
+#| msgid "Show Constellation Limit"
 msgid "Show constellation limits"
-msgstr "Pokaż granice gwiazdozbiorów"
+msgstr "Εμφάνιση ορίου αστερισμού"
 
 #: u_translation.rsshowconstell3
+#, fuzzy
+#| msgid "Show Constellation Figure"
 msgid "Show constellation figures"
-msgstr "Pokaż kształty gwiazdozbiorów"
+msgstr "Εμφάνιση μορφών αστερισμού"
 
 #: u_translation.rsshowconstell4
+#, fuzzy
+#| msgid "Show Constellation Boundary"
 msgid "Show constellation boundaries"
-msgstr "Pokaż granice gwiazdozbiorów"
+msgstr "Εμφάνιση Συνόρων Αστερισμών"
 
 #: u_translation.rsshowcoordina
+#, fuzzy
+#| msgid "Show Coordinate Grid"
 msgid "Show coordinates grid"
-msgstr "Pokaż siatkę współrzędnych"
+msgstr "Εμφάνιση πλέγματος συντεταγμένων"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
-msgstr "Pokaż cień Ziemi (zaćmienie Księżyca)"
+msgstr ""
 
 #: u_translation.rsshowecliptic
 msgid "Show ecliptic"
-msgstr "Pokaż ekliptykę"
+msgstr ""
 
 #: u_translation.rsshowgalactic
+#, fuzzy
+#| msgid "Show Galactic Equator"
 msgid "Show galactic equator"
-msgstr "Pokaż równik galaktyczny"
+msgstr "Εμφάνιση Γαλαξιακού Ισημερινού"
 
 #: u_translation.rsshowgrid
+#, fuzzy
+#| msgid "Show Grid"
 msgid "Show grid"
-msgstr "Pokaż siatkę"
+msgstr "Εμφάνιση Πλέγματος"
 
 #: u_translation.rsshowgridlabe
+#, fuzzy
+#| msgid "Show Grid Label"
 msgid "Show grid label"
-msgstr "Pokaż opis siatki"
+msgstr "Εμφάνιση ετικέτας πλέγματος"
 
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
-msgstr "Pokaż/Ukryj obraz DSS"
+msgstr ""
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
-msgstr "Pokaż zmienne IR"
+msgstr ""
 
 #: u_translation.rsshowlabels
+#, fuzzy
+#| msgid "Show Labels"
 msgid "Show labels"
-msgstr "Pokaż etykiety"
+msgstr "Εμφάνιση Ετικετών"
 
 #: u_translation.rsshowlines
+#, fuzzy
+#| msgid "Show Lines"
 msgid "Show lines"
-msgstr "Pokaż linie"
+msgstr "Εμφάνιση Γραμμών"
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr "Pokaż marker"
+msgstr ""
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
-msgstr "Pokaż Drogę Mleczną"
+msgstr "Εμφάνιση Γαλαξία"
 
 #: u_translation.rsshownebulae
+#, fuzzy
+#| msgid "Show Deep Sky Objects"
 msgid "Show deep sky objects"
-msgstr "Pokaż obiekty głębokiego nieba"
+msgstr "Εμφάνιση αντικειμένων βαθέως ουρανού"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
-msgstr "Pokaż obiekty poniżej horyzontu"
+msgstr ""
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
-msgstr "Pokaż obrazy obiektów na mapie"
+msgstr ""
 
 #: u_translation.rsshowobjects
+#, fuzzy
+#| msgid "Show Objects"
 msgid "Show objects"
-msgstr "Pokaż obiekty"
+msgstr "Εμφάνιση Αντικειμένων"
 
 #: u_translation.rsshowpictures
+#, fuzzy
+#| msgid "Show Pictures"
 msgid "Show pictures"
-msgstr "Pokaż obrazy"
+msgstr "Εμφάνιση Εικόνων"
 
 #: u_translation.rsshowplaneton
+#, fuzzy
+#| msgid "Show Planet on the Chart"
 msgid "Show planets on the chart"
-msgstr "Pokaż planety na mapie"
+msgstr "Εμφάνιση Πλανήτη στο Χάρτη"
 
 #: u_translation.rsshowplanets
+#, fuzzy
+#| msgid "Show Planets"
 msgid "Show planets"
-msgstr "Pokaż planety"
+msgstr "Εμφάνιση Πλανητών"
 
 #: u_translation.rsshowstars
+#, fuzzy
+#| msgid "Show Stars"
 msgid "Show stars"
-msgstr "Pokaż gwiazdy"
+msgstr "Εμφάνιση Αστέρων"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
-msgstr "Pokaż ten obraz"
+msgstr "Εμφάνιση αυτής της εικόνας"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr "Gwiazdowy"
+msgstr ""
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
-msgstr "dzień gwiazdowy"
+msgstr ""
 
 #: u_translation.rssimulation
 msgid "Simulation"
-msgstr "Symulacja"
+msgstr "Εξομοίωση"
 
 #: u_translation.rssize
 msgid "Size"
-msgstr "Rozmiar"
+msgstr "Μέγεθος"
 
 #: u_translation.rsskybackgroun
+#, fuzzy
+#| msgid "Sky Background Color"
 msgid "Sky background colour"
-msgstr "Tło nieba"
+msgstr "Χρώμα φόντου Ουρανού"
 
 #: u_translation.rsskycharthome
+#, fuzzy
+#| msgid "Skychart Homepage"
 msgid "Skychart homepage"
-msgstr "Strona projektu Skychart"
+msgstr "Ιστοσελίδα των Χαρτών το Ουρανού"
 
 #: u_translation.rsskycharticon
 msgid "Skychart icon setup"
@@ -3637,503 +3823,553 @@ msgstr ""
 
 #: u_translation.rsskycharts
 msgid "Sky Charts"
-msgstr "Mapy Nieba (Sky Charts)"
+msgstr "Χάρτες του Ουρανού"
 
 #: u_translation.rsskycolour
+#, fuzzy
+#| msgid "Sky Colour"
 msgid "Sky colour"
-msgstr "Kolor nieba"
+msgstr "Χρώμα Ουρανού"
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr "Obrót"
+msgstr ""
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr "Małe gwiazdy"
+msgstr ""
 
 #: u_translation.rssminute
 msgid "M"
-msgstr "M"
+msgstr ""
 
 #: u_translation.rssmonth
 msgid "M."
-msgstr "M"
+msgstr ""
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
-msgstr "Błąd gniazda %s. %s"
+msgstr ""
 
 #: u_translation.rssolardistanc
+#, fuzzy
+#| msgid "Solar Distance"
 msgid "Solar distance"
-msgstr "Odległość słoneczna"
+msgstr "Ηλιακή Απόσταση"
 
 #: u_translation.rssolareclipse
+#, fuzzy
+#| msgid "Solar Eclipses"
 msgid "Solar eclipses"
-msgstr "Zaćmienia Słońca"
+msgstr "Ηλιακές Εκλείψεις"
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
-msgstr "Elongacja słoneczna"
+msgstr ""
 
 #: u_translation.rssolarsystem
 msgid "Solar System"
-msgstr "Układ Słoneczny"
+msgstr "Ηλιακό Σύστημα"
 
 #: u_translation.rssolarsystemo
+#, fuzzy
+#| msgid "Solar System object"
 msgid "Solar system object"
-msgstr "Obiekty Układu Słonecznego"
+msgstr "Αντικείμενο Ηλιακού Συστήμτος"
 
 #: u_translation.rssolarsystems
 msgid "Solar system settings"
-msgstr "Ustawienia Układu Słonecznego"
+msgstr ""
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr "Niektóre rekordy zostały odrzucone, zobacz plik %sreject.txt w celu uzyskania szczegółów."
+msgstr ""
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr "Coś poszło nie tak, podczas wczytywania programu. Program zostanie zamknięty."
+msgstr ""
 
 #: u_translation.rssortbyra
 msgid "Sort by RA"
-msgstr "Sortuj po RA"
+msgstr "Ταξινόμηση κατά ορθή αναφορά (RA)"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
-msgstr "Sortowanie plików po wielkości gwiazdowej"
+msgstr ""
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Sortowanie pliku indeksu"
+msgstr ""
 
 #: u_translation.rssouth
 msgid "South"
-msgstr "Południe"
+msgstr "Νότος"
 
 #: u_translation.rsspectralclas
+#, fuzzy
+#| msgid "Spectral Class"
 msgid "Spectral class"
-msgstr "Typ widmowy"
+msgstr "Φασματική Τάξη"
 
 #: u_translation.rsspline
 msgid "Spline"
-msgstr "Funkcja sklejania"
+msgstr ""
 
 #: u_translation.rssqldatabasen
 msgid "SQL database not available."
-msgstr "Baza danych SQL nie jest dostępna"
+msgstr ""
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
-msgstr "Wybrana baza danych SQL prawdopodobnie nie jest zainstalowana!"
+msgstr ""
 
 #: u_translation.rssqlitedataba
+#, fuzzy
+#| msgid "Sqlite Database"
 msgid "SQLite database"
-msgstr "Baza danych SQLite"
+msgstr "Βάσγ Δεδομένων Sqlite"
 
 #: u_translation.rssquare
 msgid "Square"
-msgstr "Kwadrat"
+msgstr "Τετράγωνο"
 
 #: u_translation.rsssecond
 msgid "S"
-msgstr "S"
+msgstr ""
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
-msgstr "Kolor standardowy"
+msgstr ""
 
 #: u_translation.rsstar
 msgid "Star"
-msgstr "Gwiazdy"
+msgstr "Αστέρας"
 
 #: u_translation.rsstarcolourbv
+#, fuzzy
+#| msgid "Star colour (B-V) :"
 msgid "Star colour (B-V):"
-msgstr "Kolor gwiazdy (współczynnik B-V):"
+msgstr "Χρώμα Αστέρα (B-V) :"
 
 #: u_translation.rsstarcommonna
+#, fuzzy
+#| msgid "Star Common Name"
 msgid "Star common name"
-msgstr "Nazwy własne gwiazd"
+msgstr "Κοινό Όνομα Αστέρα"
 
 #: u_translation.rsstardisplay
+#, fuzzy
+#| msgid "Star Display"
 msgid "Star display"
-msgstr "Tryb wyświetlania gwiazd"
+msgstr "Προβολή Αστέρων"
 
 #: u_translation.rsstardisplayp
+#, fuzzy
+#| msgid "Star Display  Properties"
 msgid "Star display properties"
-msgstr "Ustawienia wyświetlania gwiazd"
+msgstr "Ιδιότητες Προβολής Αστέρων"
 
 #: u_translation.rsstarlabel
+#, fuzzy
+#| msgid "Star Label"
 msgid "Star label"
-msgstr "Etykieta gwiazd"
+msgstr "Ετικέτες Αστέρων"
 
 #: u_translation.rsstars
 msgid "Stars"
-msgstr "Gwiazdy"
+msgstr "Αστέρες"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Katalogi gwiazd i głębokiego nieba przygotowane przez "
+msgstr ""
 
 #: u_translation.rsstarsfilter
+#, fuzzy
+#| msgid "Stars Filter"
 msgid "Star filter"
-msgstr "Filtr gwiazd"
+msgstr "Φίλτρο Αστέρων"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "Opcje ruchu własnego gwiazd (jeśli dostępne są w katalogu)"
+msgstr ""
 
 #: u_translation.rsstartmonth
 msgid "Start month"
-msgstr "Rozpocznij dla miesiąca"
+msgstr ""
 
 #: u_translation.rsstartofobjec
 msgid "Start of object"
-msgstr "Początek obiektu"
+msgstr ""
 
 #: u_translation.rsstatusbar
+#, fuzzy
+#| msgid "Status Bar"
 msgid "Status bar"
-msgstr "Pasek stanu"
+msgstr "Γραμμή κατάστασης"
 
 #: u_translation.rsstepunit
 msgid "Step unit"
-msgstr "Użyta jednostka"
+msgstr ""
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
-msgstr "Zatrzymaj serwer TCP/IP"
+msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
-msgstr "Słońce"
+msgstr "Ήλιος"
 
 #: u_translation.rssunalt
 msgid "Sun alt."
-msgstr "Słońce alt."
+msgstr ""
 
 #: u_translation.rssunday
 msgid "Sun."
-msgstr "Nd."
+msgstr "Κυρ."
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
-msgstr "Nachylenie Słońca"
+msgstr ""
 
 #: u_translation.rssupernovarem
 msgid "Supernova remnant"
-msgstr "Pozostałości supernowej"
+msgstr "Υπόλειμμα Υπερκαινοφανούς"
 
 #: u_translation.rssurface
 msgid "Surface"
-msgstr "Powierzchnia"
+msgstr "Επιφάνεια"
 
 #: u_translation.rssurfacebrigh
+#, fuzzy
+#| msgid "Surface Brightness"
 msgid "Surface brightness"
-msgstr "Jasność powierzchni"
+msgstr "Επιφανειακή Λαμπρότητα"
 
 #: u_translation.rssyear
 msgid "Y"
-msgstr "Y"
+msgstr ""
 
 #: u_translation.rssymbol
 msgid "Symbol"
-msgstr "Symbol"
+msgstr "Σύμβολο"
 
 #: u_translation.rssync
 msgid "Sync"
-msgstr "Synchronizacja"
+msgstr ""
 
 #: u_translation.rssynodicmonth
+#, fuzzy
+#| msgid "Synodic Month"
 msgid "Synodic month"
-msgstr "miesiąc synodyczny"
+msgstr "Συνοδικός Μήνας"
 
 #: u_translation.rssystem
 msgid "System"
-msgstr "System"
+msgstr "Σύστημα"
 
 #: u_translation.rssystemprinte
+#, fuzzy
+#| msgid "System Printer"
 msgid "System printer"
-msgstr "Ustawienia drukarki"
+msgstr "Εκτυπωτής Συστήματος"
 
 #: u_translation.rssystemsettin
 msgid "System settings"
-msgstr "Ustawienia systemu"
+msgstr ""
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
-msgstr "%sTablica %s nie istnieje! %sProszę poprawić błąd i spróbować ponownie."
+msgstr ""
 
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
-msgstr "%sTablica już istnieje: %s"
+msgstr ""
 
 #: u_translation.rstcpipconnect
+#, fuzzy
+#| msgid "TCP/IP Connection"
 msgid "TCP/IP connection"
-msgstr "Połączenie TCP/IP"
+msgstr "Σύνδεση TCP/IP"
 
 #: u_translation.rstcpipserver
+#, fuzzy
+#| msgid "TCP/IP Server"
 msgid "TCP/IP server"
-msgstr "Ustawienia serwera TCP/IP"
+msgstr "Διακομιστής TCP/IP"
 
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
-msgstr "Usługa TCP/IP nie jest dostępna"
+msgstr "Υπηρεσία TCP/IP μη διαθέσιμη."
 
 #: u_translation.rstelescope
 msgid "Telescope"
-msgstr "Teleskop"
+msgstr "Τηλεσκόπιο"
 
 #: u_translation.rstelescope2
 msgid "Telescope: %s"
-msgstr "Teleskop: %s"
+msgstr "Τηλεσκόπιο: %s"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
-msgstr "Teleskop nie podłączony"
+msgstr "Τηλεσκόπιο μη συνδεδεμένο"
 
 #: u_translation.rstelescopeplu
+#, fuzzy
+#| msgid "Telescope Plugin "
 msgid "Telescope plugin "
-msgstr "Wtyczka dla teleskopu"
+msgstr "Plugin Τηλεσκοπίου"
 
 #: u_translation.rstelescopeset
+#, fuzzy
+#| msgid "Telescope Setting"
 msgid "Telescope settings"
-msgstr "Ustawienia teleskopu"
+msgstr "Ρύθμιση Τηλεσκοπίου"
 
 #: u_translation.rstelescopetyp
 msgid "Telescope type"
-msgstr "Typ teleskopu"
+msgstr "Τύπος τηλεσκοπίου"
 
 #: u_translation.rstemperaturec
 msgid "Temperature (Celsius)"
-msgstr "Temperatura (Celsjusz)"
+msgstr "Θερμοκρασία (β. Κελσίου)"
 
 #: u_translation.rstemporaryfil
 msgid "temporary file"
-msgstr "Plik tymczasowy"
+msgstr "προσωρινό αρχείο"
 
 #: u_translation.rstext
 msgid "Text"
-msgstr "Tekst"
+msgstr ""
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "Katalog tekstowy"
+msgstr ""
 
 #: u_translation.rstextsize
 msgid "Text size"
-msgstr "Rozmiar tekstu"
+msgstr ""
 
 #: u_translation.rstheme
 msgid "Theme"
-msgstr "Kompozycja"
+msgstr "Θέμα"
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
-msgstr "Występuje %s skatalogowanych obrazów"
+msgstr ""
 
 #: u_translation.rsthereareobjec
 msgid "There are %s objects in this field."
-msgstr "Występuje %s obiektów w tym polu"
+msgstr ""
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Ta operacja nadpisze całą zawartość bazy danych dla kraju %s, używając najnowszych danych z NGA oarz GNIS.%sWszystkie zmiany dla tego kraju zostaną utracone, poza miejscami, dla których zostały nadane nowe nazwy.%sCzy chcesz kontynuować?"
+msgstr ""
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
-msgstr "Ten plik nie został rozpoznany jako plik MPCORB."
+msgstr ""
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "Ten program jest darmowy; możesz go rozpowszechniać i/lub modyfikować pod warunkami GNU General Public License"
+msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."
-msgstr "Cz."
+msgstr "Πεμ."
 
 #: u_translation.rstilehorizont
 msgid "Tile horizontally"
-msgstr "Sąsiadująco w poziomie"
+msgstr ""
 
 #: u_translation.rstilevertical
 msgid "Tile vertically"
-msgstr "Sąsiadująco w pionie"
+msgstr ""
 
 #: u_translation.rstime
 msgid "Time"
-msgstr "Czas"
+msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
-msgstr "Symulacja czasu"
+msgstr ""
 
 #: u_translation.rstimeunits
+#, fuzzy
+#| msgid "Time Units"
 msgid "Time units"
-msgstr "Jednostki czasu"
+msgstr "Μονάδες Χρόνου"
 
 #: u_translation.rstimezone
+#, fuzzy
+#| msgid "Time Zone"
 msgid "Time zone"
-msgstr "Strefa czasowa"
+msgstr "Ζώνη Ώρας"
 
 #: u_translation.rsto
 msgid "to"
-msgstr "do"
+msgstr ""
 
 #: u_translation.rstoday
 msgid "Today"
-msgstr "Dziś"
+msgstr "Σήμερα"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
-msgstr "Pasek narzędziowy"
+msgstr ""
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
-msgstr "Zbyt dużo otwartych okien, proszę zamknij jakieś mapy."
+msgstr ""
 
 #: u_translation.rstop
 msgid "Top"
-msgstr "Górny"
+msgstr ""
 
 #: u_translation.rstopocentric
 msgid "Topocentric"
-msgstr "Topocentryczna"
+msgstr ""
 
 #: u_translation.rstotal
 msgid "Totality"
-msgstr "Razem"
+msgstr "Ολικότητα"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
-msgstr "Całkowity promień"
+msgstr ""
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr "Zanim będziesz mógł użyc nowych elementów orbit, musisz przeliczyć dane miesięczne."
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"
-msgstr "Transformacje"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
-msgstr "Tłumaczenie:"
+msgstr "Μεταφραστής:"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
-msgstr "Obiekty przezroczyste (np przy okultacji)"
+msgstr ""
 
 #: u_translation.rstriplestar
+#, fuzzy
+#| msgid "Triple Star"
 msgid "Triple star"
-msgstr "Gwiazdy potrójne"
+msgstr "Τριπλός Αστέρας"
 
 #: u_translation.rstropicalyear
+#, fuzzy
+#| msgid "Tropical Year"
 msgid "Tropical year"
-msgstr "rok zwrotnikowy"
+msgstr "Τροπικό Έτος"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr "rzeczywisty równik, równonoc i epoka"
+msgstr ""
 
 #: u_translation.rstrueposition
 msgid "True position"
-msgstr "Rzeczywista pozycja"
+msgstr ""
 
 #: u_translation.rstruesolar
 msgid "True solar"
-msgstr "Słoneczny"
+msgstr ""
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
-msgstr "Klasa Trumplera"
+msgstr ""
 
 #: u_translation.rstuesday
 msgid "Tue."
-msgstr "Wt."
+msgstr "Τρι."
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
-msgstr "obrotów / stopnie"
+msgstr ""
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
-msgstr "obrotów / godzinę"
+msgstr ""
 
 #: u_translation.rstwilight
 msgid "Twilight"
-msgstr "Świt / Zmierzch"
+msgstr "Λυκόφως"
 
 #: u_translation.rstype
 msgid "Type"
-msgstr "Typ"
+msgstr "Τύπος"
 
 #: u_translation.rstype2
 msgid "Type:"
-msgstr "Typ:"
+msgstr "Τύπος:"
 
 #: u_translation.rstypeofcoordi
 msgid "Type of coordinates"
-msgstr "Typy współrzędnych ciał niebieskich"
+msgstr "Τύπος συντεταγμένων"
 
 #: u_translation.rstypeofobject
 msgid "Object types to add to the list"
-msgstr "Typy ciał niebieskich do dodania na listę obiektów"
+msgstr ""
 
 #: u_translation.rstypeofvariab
+#, fuzzy
+#| msgid "Type of Variability"
 msgid "Type of variability"
-msgstr "Typ zmienności"
+msgstr "Τύπος Μεταβλητότητας"
 
 #: u_translation.rsumbra
 msgid "Umbra"
-msgstr "Cień (plamy słonecznej)"
+msgstr "Σκιά"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "Nie udało się utworzyć folderu "
+msgstr ""
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr "Nie wybieraj jeżeli chcesz uniknąć zdublowania z obiektem 134340 (Pluton)"
+msgstr ""
 
 #: u_translation.rsundo
 msgid "Undo"
-msgstr "Cofnij"
+msgstr ""
 
 #: u_translation.rsundolastchan
 msgid "Undo last change"
-msgstr "Cofnij ostatnią zmianę"
+msgstr ""
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
-msgstr "Czas uniwersalny"
+msgstr ""
 
 #: u_translation.rsunknow
 msgid "unknown"
-msgstr "Nieznany"
+msgstr ""
 
 #: u_translation.rsunknowobject
 msgid "Unknown object"
-msgstr "Nieznany obiekt"
+msgstr ""
 
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
-msgstr "Odblokowana mapa"
+msgstr ""
 
 #: u_translation.rsupdate1
 msgid "Update"
-msgstr "Uaktualnij"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
-msgstr "Uaktualnienie zakończone sukcesem!"
+msgstr ""
 
 #: u_translation.rsupdateoraddt
 msgid "Update/add the current location to the database?"
-msgstr "Czy uaktualnić/dodać bieżącą lokalizację do bazy danych?"
+msgstr ""
 
 #: u_translation.rsuranus
 msgid "Uranus"
-msgstr "Uran"
+msgstr ""
 
 #: u_translation.rsurl
 msgid "URL"
@@ -4141,205 +4377,205 @@ msgstr "URL"
 
 #: u_translation.rsurllaunchcom
 msgid "URL launch command"
-msgstr "Uruchaminanie polecenia URL"
+msgstr ""
 
 #: u_translation.rsuseanotherdt
 msgid "Use another DT-UT value"
-msgstr "Użyj innej wartości DT-UT."
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
-msgstr "Użyj zdefiniowanej kompozycji:"
+msgstr ""
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
-msgstr "(użyteczny dla reprezentacji strumienia pola)"
+msgstr ""
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
-msgstr "Użyj HTTP Proxy"
+msgstr ""
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
-msgstr "Użyj DSS online zamiast RealSky"
+msgstr ""
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
-msgstr "Użyj tylko katalogu tej samej grupy"
+msgstr ""
 
 #: u_translation.rsuserid
 msgid "User id:"
-msgstr "Użytkownik:"
+msgstr ""
 
 #: u_translation.rsusername
 msgid "User name"
-msgstr "Użytkownik:"
+msgstr ""
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr "Użyj półpróbkowania żeby zmniejszyć rozmiar obrazków do"
+msgstr ""
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
-msgstr "Użyj czasu systemowego"
+msgstr ""
 
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
-msgstr "Użyj serwera TCP/IP"
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr "Użyj ruchu własnego aby poprawić pozycję dla danej epoki"
+msgstr ""
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
-msgstr "Użyj tego pola jako nazwy alternatywnej"
+msgstr ""
 
 #: u_translation.rsusexplanet
 msgid "Use Xplanet"
-msgstr "Użyj Xplanet"
+msgstr ""
 
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
-msgstr "Użycie istniejącego pliku %s"
+msgstr ""
 
 #: u_translation.rsut
 msgid "UT"
-msgstr "Uniwersalny"
+msgstr "UT"
 
 #: u_translation.rsvariables
 msgid "Variables"
-msgstr "zmienne"
+msgstr ""
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
-msgstr "Gwiazdy zmienne"
+msgstr ""
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
-msgstr "Gwiazdy zmienne"
+msgstr ""
 
 #: u_translation.rsvenus
 msgid "Venus"
-msgstr "Wenus"
+msgstr ""
 
 #: u_translation.rsvicinity
 msgid "Vicinity"
-msgstr "W pobliżu"
+msgstr ""
 
 #: u_translation.rsview
 msgid "View"
-msgstr "Widok"
+msgstr ""
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"
-msgstr "Widok horyzontu"
+msgstr ""
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
-msgstr "Widoczność dla obserwatorium"
+msgstr ""
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
-msgstr "Wielkość gwiazd. obserwowana"
+msgstr ""
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
-msgstr "Czy chcesz śledzić obiekty przed wyniesieniem ponad horyzont?"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr "Uwaga! Liczenie"
+msgstr ""
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Uwaga! Aktualna data i położenie obserwatorium mogło się zmienić od standardowych wartości. Jeśli nie i użyj przycisku %s teraz żeby powrócić do standardowych wartości, w przeciwym wypadku mogą one zostać utracone. Czy chcesz kontynuować ?"
+msgstr ""
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Uwaga! %sChcesz usunąć bazę danych %s wraz z całą zawartością, nawet jeśli zawartość nie ma nic wspólnego z programem. %s Czy aby napewno chcesz kontynuować?"
+msgstr ""
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr "Uwaga! Używasz wielu katalogów dla tego samego obiektu. Upewnij się, że tego właśnie chcesz."
+msgstr ""
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "UWAGA ! %sZostało wybrane dodanie danych do istniejącego katalogu.%sBieżący katalog i indeks muszą być dokładnie tego samego formatu, inaczej zostanie uszkodzony. %s Dobrym posunięciem jest zrobienie kopi zapasowej przed wykonaniem tej operacji. %sCzy chcesz kontynuować ?"
+msgstr ""
 
 #: u_translation.rswednesday
 msgid "Wed."
-msgstr "Śr."
+msgstr ""
 
 #: u_translation.rswest
 msgid "West"
-msgstr "Zachód"
+msgstr ""
 
 #: u_translation.rswhiteonblack
 msgid "White on black"
-msgstr "Biały na czarnym"
+msgstr ""
 
 #: u_translation.rswidth
 msgid "Width"
-msgstr "Szerokość"
+msgstr ""
 
 #: u_translation.rswindow
 msgid "Window"
-msgstr "Okno"
+msgstr ""
 
 #: u_translation.rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
-msgstr "Xplanet nie jest skompilowany w obsługą JPEG"
+msgstr ""
 
 #: u_translation.rsxplanetispro
 msgid "Xplanet is probably not installed!"
-msgstr "Xplanent prawdopodobnie nie jest zainstalowany!"
+msgstr ""
 
 #: u_translation.rsxplanetretur
 msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet powrót %s "
+msgstr ""
 
 #: u_translation.rsyear
 msgid "Year"
-msgstr "rok"
+msgstr ""
 
 #: u_translation.rsyears
 msgid "years"
-msgstr "lat"
+msgstr "έτη"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "Jesteś teraz gotowy do wyświetlenia planetoid dla tego okresu czasu."
+msgstr ""
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr "Jeśli prowadzisz obserwacje z dużej wysokości, linia horyzontu będzie niżej niż ta obserwowana z poziomu morza."
+msgstr ""
 
 #: u_translation.rszenith
 msgid "Zenith"
-msgstr "Zenit"
+msgstr ""
 
 #: u_translation.rszoom
 msgid "Zoom +"
-msgstr "Przybliż (+)"
+msgstr ""
 
 #: u_translation.rszoom2
 msgid "Zoom -"
-msgstr "Oddal (-)"
+msgstr ""
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"
-msgstr "Przybliż i wycentruj"
+msgstr ""
 
 #: u_translation.rszoomcentre2
 msgid "Zoom - and centre on"
-msgstr "Oddal i wycentruj"
+msgstr ""
 
 #: u_translation.rszoomin
 msgid "Zoom in"
-msgstr "Przybliż (+)"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"
-msgstr "Oddal (-)"
+msgstr ""
 
