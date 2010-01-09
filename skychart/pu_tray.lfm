@@ -84,7 +84,7 @@ object f_tray: Tf_tray
       end
       object SpinEdit1: TSpinEdit
         Left = 15
-        Height = 19
+        Height = 23
         Top = 169
         Width = 146
         MaxValue = 20
@@ -108,8 +108,8 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 4
-        ClientHeight = 58
-        ClientWidth = 351
+        ClientHeight = 57
+        ClientWidth = 349
         Columns = 4
         Items.Strings = (
           '16x16'
@@ -140,8 +140,8 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 170
-        ClientWidth = 278
+        ClientHeight = 180
+        ClientWidth = 276
         ItemIndex = 0
         Items.Strings = (
           'Legal'
@@ -173,8 +173,8 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 91
-        ClientWidth = 278
+        ClientHeight = 101
+        ClientWidth = 276
         Items.Strings = (
           'Clock'
           'Calendar'

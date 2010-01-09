@@ -233,6 +233,7 @@ end;
 
 procedure Tf_tray.UpdBmp(txt1,txt2:string; itype,isize:integer; ibg,ifg:TColor; ubmp:TBitmap);
 var h,w,p1,p2,p3 : integer;
+    ts: TTextStyle;
 begin
 ubmp.Canvas.Brush.Color:=ibg;
 ubmp.Canvas.Brush.Style:=bsSolid;
@@ -240,7 +241,8 @@ ubmp.Canvas.Pen.Color:=ibg;
 ubmp.Canvas.Pen.Mode:=pmCopy;
 ubmp.Canvas.Rectangle(0,0,ubmp.Width,ubmp.Height);
 ubmp.Canvas.Font.Color:=ifg;
-ubmp.Canvas.TextStyle.Opaque:=false;
+ts.Opaque:=false;
+ubmp.Canvas.TextStyle:=ts;
 ubmp.Canvas.Brush.Style:=bsClear;
 ubmp.Canvas.Pen.Mode:=pmCopy;
 ubmp.Canvas.Font.Size:=isize;
