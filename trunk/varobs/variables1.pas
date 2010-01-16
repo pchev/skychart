@@ -565,8 +565,10 @@ lockselect := false;
 started := false;
 param:=Tstringlist.Create;
 GetAppDir;
-decimalseparator:='.';
+DecimalSeparator:='.';
+ThousandSeparator:=',';
 DateSeparator:='-';
+TimeSeparator:=':';
 ShortdateFormat:='yyyy-mm-dd';
 Grid1.ColWidths[0]:=60;
 Grid1.ColWidths[1]:=60;
@@ -587,8 +589,8 @@ var
     hm,jdt : double;
     buf1,buf : string;
 begin
-//if lockdate then begin lockdate:=false; exit; end;
-//if locktime then begin locktime:=false; exit; end;
+if lockdate then begin lockdate:=false; exit; end;
+if locktime then begin locktime:=false; exit; end;
 try
 jdt:=strtofloat(edit1.text);
 djd(jdt+(TZ/24),yy,mm,dd,hm);
@@ -621,8 +623,8 @@ var
     hm,jdt : double;
     buf : string;
 begin
-//if lockdate then begin lockdate:=false; exit; end;
-//if locktime then begin locktime:=false; exit; end;
+if lockdate then begin lockdate:=false; exit; end;
+if locktime then begin locktime:=false; exit; end;
 try
 buf:=trim(edit2.text);
 p:=pos('.',buf);
@@ -767,6 +769,7 @@ if paramcount>0 then begin
 end;
 TZ:=OptForm.tz.Value;
 timepicker1.time:=now;
+lockdate:=true;
 DateEdit1.date:=now;
 started:=true;
 DateEdit1change(sender);
@@ -994,8 +997,8 @@ var y1,m1,d1 : word;
     hm : double;
     buf,buf1 : string;
 begin
-//if lockdate then begin lockdate:=false; exit; end;
-//if locktime then begin locktime:=false; exit; end;
+if lockdate then begin lockdate:=false; exit; end;
+if locktime then begin locktime:=false; exit; end;
 //getdate(DateEdit1.date,y1,m1,d1);
 //hm:=frac(timepicker1.time);
 //buf1:=format('%.4d%.2d%.2d',[y1,m1,d1]);
