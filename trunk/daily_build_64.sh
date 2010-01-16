@@ -17,8 +17,8 @@ wd=`pwd`
 
 # update to last revision
 #svn up --force --non-interactive --accept theirs-full    # svn 1.5 only
-#svn -R revert .
-#svn up --non-interactive
+svn -R revert .
+svn up --non-interactive
 
 # check if new revision since last run
 read lastrev <last.build
