@@ -25,6 +25,7 @@
       <local>
         <FormatVersion Value="1"/>
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+        <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="10">
@@ -170,7 +171,7 @@
         <Filename Value="u_translation.pas"/>
         <UnitName Value="u_translation"/>
         <CursorPos X="11" Y="1131"/>
-        <TopLine Value="1096"/>
+        <TopLine Value="1088"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
