@@ -170,7 +170,7 @@
         <Filename Value="u_translation.pas"/>
         <UnitName Value="u_translation"/>
         <CursorPos X="11" Y="1131"/>
-        <TopLine Value="1085"/>
+        <TopLine Value="1096"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
@@ -370,6 +370,11 @@
         <CStyleOperator Value="False"/>
       </SyntaxOptions>
     </Parsing>
+    <CodeGeneration>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
+    </CodeGeneration>
     <Linking>
       <Options>
         <Win32>
