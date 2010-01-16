@@ -62,8 +62,12 @@ install:
 uninstall: 
 	./uninstall.sh $(PREFIX)
 install_win: 
-	./install_win.sh $(PREFIX)
+	./install_win.sh win32 $(PREFIX)
 uninstall_win: 
+	./uninstall_win.sh $(PREFIX)
+install_win64: 
+	./install_win.sh win64 $(PREFIX)
+uninstall_win64: 
 	./uninstall_win.sh $(PREFIX)
 install_win_data:
 	\$(MAKE) -C tools install_win 
