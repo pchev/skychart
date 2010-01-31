@@ -1,45 +1,7 @@
-Export HTML Skychart wiki from a local copy (do not work from the real wiki)
-
-- copy all (new dokuwiki version)
----------------------------------
-
-su
-cd /home/www/ap-i/web
-mv skychart skychart-old
-cp -a /mnt/web/backup-api/www/web/skychart .
-cd skychart
-cp -a /mnt/web/backup-api/www/data/dokuwiki/bin .
-cp -a /mnt/web/backup-api/www/data/dokuwiki/conf .
-rm -rf data
-cp -a /mnt/web/backup-api/www/data/dokuwiki/data .
-chown -R pch:pch *
-chmod -R 777 data
-
-change .htaccess with doku.php?do=export_html (see htaccess.export file here)
-
-rm .htaccess
-cp /home/cdc/src/tools/wiki_doc/htaccess.export .htaccess
-
-change savedir in conf/local.php
-$conf['savedir'] = '/home/www/ap-i/web/skychart/data';
-
-
-- Update the new content
-------------------------
-
-erase /data/cache
-
-cd /home/www/ap-i/web/skychart/data/cache
-rm -rf *
-
-erase + download /data/pages /data/meta /data/media + chmod
-
-cd /home/www/ap-i/web/skychart/data
-rm -rf pages meta media
-cp -a /mnt/web/backup-api/www/data/dokuwiki/data/pages .
-cp -a /mnt/web/backup-api/www/data/dokuwiki/data/meta .
-cp -a /mnt/web/backup-api/www/data/dokuwiki/data/media .
-chmod -R 777 *
+Export HTML Skychart wiki from a static copy of wiki at http://www.ap-i.net/static/skychart
+It is comfigured with the include .htaccess who add do=export_html option.
+This copy is updated daily by copy of the Dokuwiki data directory
+The data directory is available at http://www.ap-i.net/static/skychart/data/pages/ and http://www.ap-i.net/static/skychart/data/media/
 
 - export content
 ----------------
@@ -49,10 +11,6 @@ erase the old doc_en, doc_fr, ...
 cd /home/cdc/src/tools/wiki_doc
 rm -rf doc_*
 
-change /etc/hosts to fake missing link to real wiki:
-sudo vi /etc/hosts
-127.0.0.1 localhost ap-i.net www.ap-i.net
-
 Update getdoc.sh for new languages
 
 ./getdoc.sh
@@ -61,4 +19,3 @@ Make the zip for distribution
 
 ./zipdoc.sh
 
-reset /etc/hosts
