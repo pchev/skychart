@@ -30,7 +30,7 @@ interface
 
 uses
   {$ifdef mswindows}
-    Windows,
+    Windows, ShlObj,
   {$endif}
   u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
@@ -1325,11 +1325,8 @@ var inif: TMemIniFile;
     i: integer;
 {$endif}
 {$ifdef mswindows}
-    PIDL : PItemIDList;
+    PIDL : LPITEMIDLIST;
     Folder : array[0..MAX_PATH] of Char;
-const CSIDL_PERSONAL = $0005;   // My Documents
-      CSIDL_APPDATA  = $001a;   // <user name>\Application Data
-      CSIDL_LOCAL_APPDATA = $001c;  // <user name>\Local Settings\Applicaiton Data (non roaming)
 {$endif}
 begin
 {$ifdef darwin}
@@ -1353,13 +1350,20 @@ appdir:=expandfilename(appdir);
 privatedir:=expandfilename(PrivateDir);
 {$endif}
 {$ifdef mswindows}
-SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
-SHGetPathFromIDList(PIDL, Folder);
-buf:=trim(Folder);
+SHGetFolderPath(0, CSIDL_LOCAL_APPDATA, 0, 0, Folder);
+buf:=systoutf8(Folder);
+buf:=trim(buf);
+buf:=SafeUTF8ToSys(buf);
 if buf='' then begin  // old windows version
    SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
    SHGetPathFromIDList(PIDL, Folder);
    buf:=trim(Folder);
+end;
+if buf='' then begin
+   MessageDlg(rsUnableToCrea+privatedir+crlf
+             +rsPleaseTryToC,
+             mtError, [mbAbort], 0);
+   Halt;
 end;
 privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+configfile;
@@ -1373,7 +1377,8 @@ if fileexists(configfile) then begin
   try
   buf:=inif.ReadString('main','AppDir',appdir);
   if Directoryexists(buf) then appdir:=buf;
-  privatedir:=SafeUTF8ToSys(inif.ReadString('main','PrivateDir',privatedir));
+//  privatedir:=SafeUTF8ToSys(inif.ReadString('main','PrivateDir',privatedir));
+  privatedir:=inif.ReadString('main','PrivateDir',privatedir);
   finally
    inif.Free;
   end;
@@ -1386,6 +1391,7 @@ if not directoryexists(privatedir) then begin
              mtError, [mbAbort], 0);
    Halt;
 end;
+
 if not directoryexists(slash(privatedir)+'MPC') then CreateDir(slash(privatedir)+'MPC');
 if not directoryexists(slash(privatedir)+'MPC') then forcedirectories(slash(privatedir)+'MPC');
 if not directoryexists(slash(privatedir)+'database') then CreateDir(slash(privatedir)+'database');
@@ -4217,7 +4223,8 @@ cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
 DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
 cfgm.dbhost:=ReadString(section,'dbhost',cfgm.dbhost);
 cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
-cfgm.db:=SafeUTF8ToSys(ReadString(section,'db',cfgm.db));
+//cfgm.db:=SafeUTF8ToSys(ReadString(section,'db',cfgm.db));
+cfgm.db:=ReadString(section,'db',cfgm.db);
 cfgm.dbuser:=ReadString(section,'dbuser',cfgm.dbuser);
 cryptedpwd:=hextostr(ReadString(section,'dbpass',cfgm.dbpass));
 cfgm.dbpass:=DecryptStr(cryptedpwd,encryptpwd);
