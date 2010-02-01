@@ -1350,7 +1350,9 @@ appdir:=expandfilename(appdir);
 privatedir:=expandfilename(PrivateDir);
 {$endif}
 {$ifdef mswindows}
-SHGetFolderPath(0, CSIDL_LOCAL_APPDATA, 0, 0, Folder);
+buf:='';
+SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
+SHGetPathFromIDList(PIDL, Folder);
 buf:=systoutf8(Folder);
 buf:=trim(buf);
 buf:=SafeUTF8ToSys(buf);
