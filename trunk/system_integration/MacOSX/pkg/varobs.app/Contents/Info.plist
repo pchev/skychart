@@ -6,6 +6,8 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>varobs</string>
+	<key>CFBundleIconFile</key>
+	<string>varobs</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.company.varobs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
