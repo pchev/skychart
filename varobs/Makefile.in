@@ -15,7 +15,7 @@ packages=rtl
 [compiler]
 unittargetdir=units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
 includedir=./
-options=-dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi -g -gl -WG -vewni -l 
+options= $(opt_target) -dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi -g -gl -WG -vewni -l 
 unitdir=../skychart/component/uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ ../skychart/component/jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ ../skychart/component/downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ ../skychart/component/enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ ../skychart/component/synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/components/printers/lib/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 
 [clean]
@@ -44,6 +44,11 @@ endif
 endif
 endif
 export LCL_PLATFORM
+ifeq ($(OS_TARGET),darwin)
+opt_target= -k-macosx_version_min -k10.4 -XR/Developer/SDKs/MacOSX10.4u.sdk/
+else
+opt_target=
+endif
 
 [rules]
 .PHONY: all
