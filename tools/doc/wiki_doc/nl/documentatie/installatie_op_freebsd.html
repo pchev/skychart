@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>nl:documentatie:installatie_op_freebsd</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2009-01-04T12:59:11+0100" />
+<meta name="keywords" content="nl,documentatie,installatie_op_freebsd" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/nl/documentatie/installatie_op_freebsd?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=nl:documentatie" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/nl/documentatie/installatie_op_freebsd" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/nl/documentatie/installatie_op_freebsd" />
+<link rel="canonical" href="installatie_op_freebsd.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='nl:documentatie';var JSINFO = {"id":"nl:documentatie:installatie_op_freebsd","namespace":"nl:documentatie"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+
+
+
+<h1><a name="gebruik_van_cdc_v3_onder_freebsd" id="gebruik_van_cdc_v3_onder_freebsd">Gebruik van CDC V3 onder FreeBSD</a></h1>
+<div class="level1">
+
+<p>
+
+<strong>Installatie en gebruik van CDC v3 alpha 0.0.6 voor Linux onder FreeBSD</strong>
+</p>
+
+<p>
+<img src="../../lib/images/smileys/fixme.gif" class="middle" alt="FIXME" /> Deze procedure moet nog aangepast worden voor de beta versie. Je hebt Kylix Qt niet meer nodig, maar je moet wel libgtk1.2 en libgdk-pixbuf2 installeren.
+</p>
+
+<p>
+1 - Zorg dat je de &#039;Linux binary compatibility&#039; geïnstalleerd en geactiveerd hebt. Je kunt het van ports krijgen, nog beter is het gebruik van sysinstall.
+</p>
+
+<p>
+Gedetailleerde instructies kun je hier vinden:<br/>
+
+<a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/linuxemu.html" class="urlextern" title="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/linuxemu.html"  rel="nofollow">http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/linuxemu.html</a>
+</p>
+
+<p>
+2 - Download zowel “Kylix QT runtime RPM” en de “CDC v3 alpha 0.0.6 RPM” vanaf ap-i.net
+</p>
+
+<p>
+<a href="http://www.ap-i.net/skychart/modules.php?op=modload&amp;name=Downloads&amp;file=index&amp;req=viewdownload&amp;cid=8" class="urlextern" title="http://www.ap-i.net/skychart/modules.php?op=modload&amp;name=Downloads&amp;file=index&amp;req=viewdownload&amp;cid=8"  rel="nofollow">www.ap-i.net/skychart/modules.php?op=modload&amp;name=Downloads&amp;file=index&amp;req=viewdownload&amp;cid=8</a>
+</p>
+
+<p>
+3 - Installeer de beide RPMs (als eerste Kylix). Start als root een shell en voer het commando uit:
+
+</p>
+<pre class="code">/compat/Linux/bin/rpm --install path/to/the/filename.rpm</pre>
+
+<p>
+4 - Installeer de graphics/linux-jpeg port. Als root:
+
+</p>
+<pre class="code">cd /usr/ports/graphics/linux-jpeg
+make install clean</pre>
+
+<p>
+5 - Start het programma: /compat/linux/usr/bin/skychart
+</p>
+
+<p>
+Tot nog toe lijkt alles goed te werken.
+</p>
+
+<p>
+Voorlopig is dit een werkende oplossing, maar Linux emulatie voor Ciel is zeker niet wat FreeBSD gebruikers leuk zullen vinden. Het is gemakkelijker om naturel geporteerde compilaties van zowel Ciel als de Kylix bibliotheken te hebben.<br/>
+
+<img src="../../lib/images/smileys/fixme.gif" class="middle" alt="FIXME" /> FreePascal is beschikbaar voor FreeBSB, een naturel FreeBSD compilatie is nu mogelijk.
+</p>
+
+<p>
+(Dit werkte voor mij met gebruik van 5.2.1 en linux_base-7.1_7)<br/>
+
+Hugo D. Valentim
+</p>
+
+</div>
+</div>
+</body>
+</html>

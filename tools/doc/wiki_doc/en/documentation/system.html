@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>en:documentation:system</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2009-05-22T14:17:16+0200" />
+<meta name="keywords" content="en,documentation,system" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/en/documentation/system?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=en:documentation" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/en/documentation/system" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/en/documentation/system" />
+<link rel="canonical" href="system.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='en:documentation';var JSINFO = {"id":"en:documentation:system","namespace":"en:documentation"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="system.html#system" class="toc">System</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="system.html#system1" class="toc">System</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="system.html#server" class="toc">Server</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="system.html#telescope" class="toc">Telescope</a></span></div>
+<ul class="toc">
+<li class="level3"><div class="li"><span class="li"><a href="system.html#indi_driver" class="toc">Indi driver</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="system.html#manual_mount" class="toc">Manual Mount</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="system.html#cdc_plugin" class="toc">CDC Plugin</a></span></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><span class="li"><a href="system.html#language" class="toc">Language</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+
+
+<h1><a name="system" id="system">System</a></h1>
+<div class="level1">
+
+</div>
+<!-- SECTION "System" [1-22] -->
+<h2><a name="system1" id="system1">System</a></h2>
+<div class="level2">
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/en/documentation/system_system.jpg?id=en%3Adocumentation%3Asystem" class="media" title="en:documentation:system_system.jpg"><img src="../../_media/en/documentation/system_system.jpg" class="mediaright" align="right" alt="" /></a>
+In this window, you can manage the SkyChart database. It contains the orbital elements of comets and asteroids, SAC picture information, information about the DSS/RealSky pictures and information of  observatory locations.<br/>
+
+In order to display comets and asteroids, SkyChart needs to calculate the ephemeris, and store them in a database. But before SkyChart can do that, you need to download fresh files with <strong><a href="http://en.wikipedia.org/wiki/Orbital_elements" class="urlextern" title="http://en.wikipedia.org/wiki/Orbital_elements"  rel="nofollow">orbital elements</a></strong> for comets and asteroids. See the <strong><a href="solar_system.html#comet" class="wikilink1" title="en:documentation:solar_system">comet</a></strong> and <strong><a href="solar_system.html#asteroid" class="wikilink1" title="en:documentation:solar_system">asteroid</a></strong> tabs from the <strong>Setup → Solar System</strong> dialog box.<br/>
+
+You may also want to create the SAC pictures information database. For more about installing and downloading SAC pictures, see the <strong><a href="pictures.html#objects" class="wikilink1" title="en:documentation:pictures">Object</a></strong> tab from the <strong>Configuration → Pictures</strong> dialog box.<br/>
+
+The information about countries and the detailed information of Observatory locations are also stored in a database. You can create them by <strong>Configuration → <a href="observatory.html" class="wikilink1" title="en:documentation:observatory">Observatory</a></strong>.
+</p>
+
+<p>
+A standard SkyChart installation creates a SQLite database, but you can choose between SQLite and MySQL SGBD.
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>SQLite</strong>: an input area contains the path to SQLite DB, it is stored in Your_Documents\Cartes du Ciel\database\. You can specify an alternate location. </div>
+</li>
+</ul>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/en/documentation/system_mysql.jpg?id=en%3Adocumentation%3Asystem" class="media" title="en:documentation:system_mysql.jpg"><img src="../../_media/en/documentation/system_mysql.jpg" class="mediaright" align="right" alt="" /></a>
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>MySQL</strong>: You need a MySQL server to connect to. A local server connection is proposed, which works fine with a MySQL local server installation. You can specify an alternate connection with default parameters:</div>
+<ul>
+<li class="level2"><div class="li"> <strong>DB Name</strong> cdc</div>
+</li>
+<li class="level2"><div class="li"> <strong>Host Name</strong> localhost</div>
+</li>
+<li class="level2"><div class="li"> <strong>Userid</strong> root</div>
+</li>
+<li class="level2"><div class="li"> <strong>Password</strong> empty area</div>
+</li>
+<li class="level2"><div class="li"> <strong>Port</strong> 3306 (standard MySQL port)</div>
+</li>
+<li class="level2"><div class="li"> <strong>Asteroid Setting</strong> directs yous to <strong>Configuration → Solar System → <a href="solar_system.html#asteroid" class="wikilink1" title="en:documentation:solar_system">Asteroid</a></strong>. (older SkyChart versions)</div>
+</li>
+<li class="level2"><div class="li"> <strong>Comet Setting</strong> directs you to <strong>Configuration → Solar System → <a href="solar_system.html#comet" class="wikilink1" title="en:documentation:solar_system">Comet</a></strong>. (older SkyChart versions)</div>
+</li>
+<li class="level2"><div class="li"> <strong>Drop DataBase</strong> this button deletes all database content.</div>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="level1"><div class="li"> <strong>Create DataBase</strong> button launches the <acronym title="Structured Query Language">SQL</acronym> “define tables” script.</div>
+</li>
+<li class="level1"><div class="li"> <strong>Check</strong> lets you verify if the tables succesfully are created.</div>
+</li>
+</ul>
+
+<p>
+
+<strong>Directory group</strong> specifies the SkyChart installation path and personal (Your_Documents\Carte du Ciel\) data path. You can specify alternate locations for a non standard installation. Help yourself with the directory icon at right of the input area.
+</p>
+
+</div>
+<!-- SECTION "System" [23-2551] -->
+<h2><a name="server" id="server">Server</a></h2>
+<div class="level2">
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/en/documentation/system_server.jpg?id=en%3Adocumentation%3Asystem" class="media" title="en:documentation:system_server.jpg"><img src="../../_media/en/documentation/system_server.jpg" class="mediaright" align="right" alt="" /></a>
+Here you can set connection parameters to use Skychart as a server.
+You can verify the connection states in <strong>View → <a href="server_information.html" class="wikilink1" title="en:documentation:server_information">Server information</a></strong>
+</p>
+<ul>
+<li class="level1"><div class="li"> SkyChart accepts connections by checking <strong>Use TCP/IP Server</strong>.</div>
+</li>
+<li class="level1"><div class="li"> SkyChart verifies the attendance of the client and closes the connection if the client is not active by checking <strong>Client Connection Keep Alive</strong>.</div>
+</li>
+<li class="level1"><div class="li"> If the client is remote, you set your SkyChart Server IP address in <strong>Server IP Interface</strong>.</div>
+</li>
+<li class="level1"><div class="li"> SkyChart is listening on the port set in <strong>Server IP Port</strong>, if you change this, you must change  client software correspondingly.<br/>
+<br/>
+</div>
+</li>
+</ul>
+
+</div>
+<!-- SECTION "Server" [2552-3233] -->
+<h2><a name="telescope" id="telescope">Telescope</a></h2>
+<div class="level2">
+
+<p>
+<br/>
+<br/>
+
+From the menu: <strong>Setup → System → Telescope</strong>
+<br/>
+<br/>
+
+Before you can use SkyChart to work with your telescope, you need to do some basic settings here. First, select which interface driver you will use. Depending on your choice, the content of the dialog box changes. You can choose from:
+</p>
+
+</div>
+<!-- SECTION "Telescope" [3234-3551] -->
+<h3><a name="indi_driver" id="indi_driver">Indi driver</a></h3>
+<div class="level3">
+
+<p>
+
+Use this on Linux only. The <a href="http://indi.sourceforge.net/index.php/Main_Page" class="urlextern" title="http://indi.sourceforge.net/index.php/Main_Page"  rel="nofollow">Indi package</a> is designed to use with all sorts of astronomical devices. Many computer operated mounts and domes can be driven by Indi. You can <strong><a href="http://indi.sourceforge.net/index.php/Download_INDI" class="urlextern" title="http://indi.sourceforge.net/index.php/Download_INDI"  rel="nofollow">download</a></strong> this driver if it didn&#039;t come with your Linux distribution. When you want to use the Indi driver, make your specific settings in the dialog. 
+</p>
+
+<p>
+It may be difficult to know the port name if you have many adapter or if you use a USB-serial adapter. In this case use the dmesg command to find this name. <br/>
+
+In the following example you must indicate /dev/ttyS0 for the motherboard port or /dev/ttyUSB0 for the USB port. 
+
+</p>
+<pre class="code">
+serial8250: ttyS0 at I/O 0x3f8 (irq = 4) is a 16550A
+usb 5-1: FTDI USB Serial Device converter now attached to ttyUSB0
+</pre>
+
+</div>
+<!-- SECTION "Indi driver" [3552-4418] -->
+<h3><a name="manual_mount" id="manual_mount">Manual Mount</a></h3>
+<div class="level3">
+
+<p>
+When you use this, SkyChart asks you to give the settings for your specific mount. Choose your mount type from <strong>Equatorial Mount</strong> or <strong>Alt/Az Mount</strong>. Next, you set how many full turns you must make on your knob to slew your mount by one degree of arc. Usually, manual mounts are wormgear driven. Most common is a mount with 144 tooths on the worm wheel for both directions. When you know the number of tooths, calculation of the number of turns per degree of arc, or per hour is easy: <br/>
+
+<strong>Per degree: 144 / 360 = 0.4</strong> <br/>
+
+<strong>Per hour: 144 / 24 = 6</strong> <br/>
+
+Also you need the find out how to make the direction setttings for the knobs. Only when a <strong>counter-clockwise</strong> turn of a knob causes an <strong>increase</strong> in the right ascension, azimuth, declination, or altitude, you need to check the appropriate <code>Reverse .. Direction</code>. Otherwise, leave it unchecked. 
+From now on, you can find instructions how to turn the knobs of your mount to move from one object to another. To find these, first click the object on the chart to which your telescope is pointed. Next, click on the object you want to observe. Now click on the label to retrieve the information details. The last lines show you who to turn the knobs on your mount.
+</p>
+
+</div>
+<!-- SECTION "Manual Mount" [4419-5665] -->
+<h3><a name="cdc_plugin" id="cdc_plugin">CDC Plugin</a></h3>
+<div class="level3">
+
+<p>
+When you are using Windows, this is your choice to drive your telescope. Here you can choose from three plugins:
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>Ascom.tid</strong>. With the <strong><a href="http://ascom-standards.org/index.htm" class="urlextern" title="http://ascom-standards.org/index.htm"  rel="nofollow">Ascom.tid</a></strong> plugin you can drive most astronomical equipment like your mount and dome. If you don&#039;t have the Ascom driver installed, you can download it from their site. <br/>
+</div>
+</li>
+<li class="level1"><div class="li"> <strong>Encoder.tid</strong>. You can use this with an encoder box using Tangent protocols like the Ouranos, AAM or NGC-MAX. For configuration details, see the page of the SkyChart 2.7x version <strong><a href="http://www.stargazing.net/astropc/doc/encoder.html" class="urlextern" title="http://www.stargazing.net/astropc/doc/encoder.html"  rel="nofollow">here</a></strong>. <br/>
+</div>
+</li>
+<li class="level1"><div class="li"> <strong>Meade.tid</strong>. This driver supports LX200, Autostar, Magellan I/II and other systems using the LX200 protocol. When you are using <strong><a href="http://www.bbastrodesigns.com/BBAstroDesigns.html#Computer_Operated_Telescopes" class="urlextern" title="http://www.bbastrodesigns.com/BBAstroDesigns.html#Computer_Operated_Telescopes"  rel="nofollow">Mel Bartels&#039; stepper motor system</a></strong> to drive your mount, you can use this driver. My description is not complete. For the moment, have a look on the SkyChart 2.7x version <strong><a href="http://www.stargazing.net/astropc/doc/meade.html" class="urlextern" title="http://www.stargazing.net/astropc/doc/meade.html"  rel="nofollow">here</a></strong> about the configuration details.</div>
+</li>
+</ul>
+
+<p>
+<br/>
+<br/>
+
+On the main bar, you will find the <strong><a href="main_bar.html#telescope_group" class="wikilink1" title="en:documentation:main_bar">telescope group</a></strong> icons. After you made the proper basic settings for your computer operated telescopes, you need to configure the your driver by a click on the <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i48.png?id=en%3Adocumentation%3Asystem" class="media" title="en:documentation:i48.png"><img src="../../_media/en/documentation/i48.png" class="media" alt="" /></a> icon to drive your telescope in the right way. <br/>
+
+You need the <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i51.png?id=en%3Adocumentation%3Asystem" class="media" title="en:documentation:i51.png"><img src="../../_media/en/documentation/i51.png" class="media" alt="" /></a> and <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i50.png?id=en%3Adocumentation%3Asystem" class="media" title="en:documentation:i50.png"><img src="../../_media/en/documentation/i50.png" class="media" alt="" /></a> icons from the main bar to synchronize your mount with an object on the chart or to slew it to another object. See for more information about this the menu <strong><a href="menutelescope.html" class="wikilink1" title="en:documentation:menutelescope">Telescope</a></strong>.
+</p>
+
+</div>
+<!-- SECTION "CDC Plugin" [5666-7361] -->
+<h2><a name="language" id="language">Language</a></h2>
+<div class="level2">
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/en/documentation/system_language.jpg?id=en%3Adocumentation%3Asystem" class="media" title="en:documentation:system_language.jpg"><img src="../../_media/en/documentation/system_language.jpg" class="mediaright" align="right" alt="" /></a>
+Simply select the language from the combo box that you want SkyChart to use. <br/>
+<br/>
+
+If your language isn&#039;t there, why not make your own <acronym title="Graphical User Interface">GUI</acronym> translation? It &#039;s not hard, only takes a few hours. Have look <strong><a href="http://www.ap-i.net/skychart/en/translations#software_translation" class="urlextern" title="http://www.ap-i.net/skychart/en/translations#software_translation"  rel="nofollow">here</a></strong>.
+
+</p>
+
+</div>
+<!-- SECTION "Language" [7362-] --></div>
+</body>
+</html>

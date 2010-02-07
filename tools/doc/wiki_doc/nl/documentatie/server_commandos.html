@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>nl:documentatie:server_commandos</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2009-05-25T21:47:42+0200" />
+<meta name="keywords" content="nl,documentatie,server_commandos" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/nl/documentatie/server_commandos?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=nl:documentatie" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/nl/documentatie/server_commandos" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/nl/documentatie/server_commandos" />
+<link rel="canonical" href="server_commandos.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='nl:documentatie';var JSINFO = {"id":"nl:documentatie:server_commandos","namespace":"nl:documentatie"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="server_commandos.html#server_commando_s" class="toc">Server Commando&#039;s</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="server_commandos.html#hoofdcommando_s" class="toc">Hoofdcommando&#039;s</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="server_commandos.html#kaart_commando_s" class="toc">Kaart Commando&#039;s</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="server_commandos.html#v27_compatibiliteit_met_dde_commando_s" class="toc">V2.7 compatibiliteit met DDE commando&#039;s</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+
+
+<h1><a name="server_commando_s" id="server_commando_s">Server Commando&#039;s</a></h1>
+<div class="level1">
+
+<p>
+
+Cartes du Ciel/Sterrrenkaarten kan server werken. Het accepteert de volgende commando&#039;s vanaf een <strong><a href="systeem.html#server" class="wikilink1" title="nl:documentatie:systeem">TCP/IP verbinding</a></strong>:
+</p>
+
+</div>
+<!-- SECTION "Server Commando's" [1-175] -->
+<h2><a name="hoofdcommando_s" id="hoofdcommando_s">Hoofdcommando&#039;s</a></h2>
+<div class="level2">
+<table class="inline">
+	<tr class="row0">
+		<th class="col0"> Commando </th><th class="col1"> Parameters </th><th class="col2"> Commentaar, betekenis of <acronym title="Graphical User Interface">GUI</acronym>-equivalent </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> NEWCHART </td><td class="col1"> kaart_naam </td><td class="col2"> Bestand → Nieuwe kaart </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> CLOSECHART </td><td class="col1"> kaart_naam </td><td class="col2"> Bestand → Sluit kaart </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> SELECTCHART </td><td class="col1"> kaart_naam </td><td class="col2"> Venster → kaart_naam </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"> LISTCHART </td><td class="col1 leftalign">  </td><td class="col2"> Venster</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"> SEARCH </td><td class="col1"> object_naam </td><td class="col2"> Zoek-functie (hoofdbalk) </td>
+	</tr>
+	<tr class="row6">
+		<td class="col0"> GETMSGBOX </td><td class="col1 leftalign">  </td><td class="col2"> Geeft de inhoud van de statusbalk weer </td>
+	</tr>
+	<tr class="row7">
+		<td class="col0"> GETCOORBOX </td><td class="col1 leftalign">  </td><td class="col2"> Geeft de coördinaten weer zoals in de statusbalk </td>
+	</tr>
+	<tr class="row8">
+		<td class="col0"> GETINFOBOX </td><td class="col1 leftalign">  </td><td class="col2"> Instellingen → Weergave → Labels - Toont de kaartinformatie zoals in de menubalk </td>
+	</tr>
+	<tr class="row9">
+		<td class="col0 leftalign"> FIND  </td><td class="col1"> object_klasse object_naam </td><td class="col2"> Zelfde als &#039;Zoek&#039;, maar geeft je de mogelijkheid om de object-klasse op te geven van het object dat je zoekt: : 0=nevel, 1=na, 2=ster, 3=ster, 4=variabele, 5=dubbele, 6=komeet, 7=planetoïde, 8=planeet, 9=sterrenbeeld, 10=lijnen catalogus </td>
+	</tr>
+	<tr class="row10">
+		<td class="col0 leftalign"> SAVE  </td><td class="col1"> op_te_slaan_bestandsnaam </td><td class="col2"> Sla de huidige kaart op als het op te geven bestand </td>
+	</tr>
+	<tr class="row11">
+		<td class="col0 leftalign"> LOAD  </td><td class="col1"> opgeslagen_bestandsnaam </td><td class="col2"> laad de kaart uit het opgegeven bestand </td>
+	</tr>
+	<tr class="row12">
+		<td class="col0 leftalign"> SHUTDOWN  </td><td class="col1"> </td><td class="col2 leftalign"> Sluit het programma  </td>
+	</tr>
+	<tr class="row13">
+		<td class="col0"> RESET </td><td class="col1"> </td><td class="col2"> Herlaad de standaard kaart en opties (zelfde als HUP-signal) </td>
+	</tr>
+	<tr class="row14">
+		<td class="col0 leftalign"> ?  </td><td class="col1 leftalign">  </td><td class="col2"> Heeft geen <acronym title="Graphical User Interface">GUI</acronym>-equivalent, toont de lijst van beschikbare commando&#039;s </td>
+	</tr>
+</table>
+
+</div>
+<!-- SECTION "Hoofdcommando's" [176-1383] -->
+<h2><a name="kaart_commando_s" id="kaart_commando_s">Kaart Commando&#039;s</a></h2>
+<div class="level2">
+<table class="inline">
+	<tr class="row0">
+		<th class="col0"> Commando </th><th class="col1"> Parameters </th><th class="col2"> Commentaar, betekenis of <acronym title="Graphical User Interface">GUI</acronym>-equivalent </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> ZOOM+ </td><td class="col1 leftalign">  </td><td class="col2"> View → Zoom in </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> ZOOM- </td><td class="col1 leftalign">  </td><td class="col2"> View → Zoom out </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> MOVEEAST </td><td class="col1 leftalign">  </td><td class="col2"> Toetsenbord linker pijltje </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"> MOVEWEST </td><td class="col1 leftalign">  </td><td class="col2"> Toetsenbord rechter pijltje</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"> MOVENORTH </td><td class="col1 leftalign">  </td><td class="col2"> Toetsenbord naar boven pijltje</td>
+	</tr>
+	<tr class="row6">
+		<td class="col0"> MOVESOUTH </td><td class="col1 leftalign">  </td><td class="col2"> Toetsenbord naar beneden pijltje</td>
+	</tr>
+	<tr class="row7">
+		<td class="col0"> MOVENORTHEAST </td><td class="col1 leftalign">  </td><td class="col2"> Nummeriek toetsenbord 7 (Num. Lock &#039;off&#039;) </td>
+	</tr>
+	<tr class="row8">
+		<td class="col0"> MOVENORTHWEST </td><td class="col1 leftalign">  </td><td class="col2"> Nummeriek toetsenbord 9 (Num. Lock &#039;off&#039;) </td>
+	</tr>
+	<tr class="row9">
+		<td class="col0"> MOVESOUTHEAST </td><td class="col1 leftalign">  </td><td class="col2"> Nummeriek toetsenbord 1 (Num. Lock &#039;off&#039;) </td>
+	</tr>
+	<tr class="row10">
+		<td class="col0"> MOVESOUTHWEST </td><td class="col1 leftalign">  </td><td class="col2"> Nummeriek toetsenbord 3 (Num. Lock &#039;off&#039;) </td>
+	</tr>
+	<tr class="row11">
+		<td class="col0"> FLIPX </td><td class="col1 leftalign">  </td><td class="col2"> Kaart &gt; Tranformatie &gt; Spiegel horizontaal </td>
+	</tr>
+	<tr class="row12">
+		<td class="col0"> FLIPY </td><td class="col1 leftalign">  </td><td class="col2"> Kaart &gt; Tranformatie &gt; Spiegel verticaal </td>
+	</tr>
+	<tr class="row13">
+		<td class="col0"> SETCURSOR </td><td class="col1"> pixX pixY </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row14">
+		<td class="col0"> CENTRECURSOR </td><td class="col1 leftalign">  </td><td class="col2"> Rechter-klik → Centreer </td>
+	</tr>
+	<tr class="row15">
+		<td class="col0"> ZOOM+MOVE </td><td class="col1 leftalign">  </td><td class="col2"> Rechter-klik → Zoom + Centreer </td>
+	</tr>
+	<tr class="row16">
+		<td class="col0"> ZOOM-MOVE </td><td class="col1 leftalign">  </td><td class="col2"> Rechter-klik → Zoom - Centreer </td>
+	</tr>
+	<tr class="row17">
+		<td class="col0"> ROT+ </td><td class="col1 leftalign">  </td><td class="col2"> Kaart → Tranformatie → Roteer rechts </td>
+	</tr>
+	<tr class="row18">
+		<td class="col0"> ROT- </td><td class="col1 leftalign">  </td><td class="col2"> Kaart → Tranformatie → Roteer links </td>
+	</tr>
+	<tr class="row19">
+		<td class="col0"> SETEQGRID </td><td class="col1"> ON/OFF </td><td class="col2"> Kaart → Lijnen, rooster → Voeg equatoriaal rooster toe</td>
+	</tr>
+	<tr class="row20">
+		<td class="col0"> SETGRID </td><td class="col1"> ON/OFF </td><td class="col2"> Kaart → Lijnen, rooster → Toon coördinaten rooster </td>
+	</tr>
+	<tr class="row21">
+		<td class="col0"> SETSTARMODE </td><td class="col1"> 0/1/2 </td><td class="col2"> Instellingen → Weergave → Weergave → Ster weergave </td>
+	</tr>
+	<tr class="row22">
+		<td class="col0"> SETNEBMODE </td><td class="col1"> 0/1 </td><td class="col2"> Instellingen → Weergave → Weergave → Deep Sky objecten weergave </td>
+	</tr>
+	<tr class="row23">
+		<td class="col0"> SETAUTOSKY </td><td class="col1"> ON/OFF </td><td class="col2"> Instellingen → Weergave → Hemelkleur </td>
+	</tr>
+	<tr class="row24">
+		<td class="col0"> UNDO </td><td class="col1 leftalign">  </td><td class="col2"> Bewerken → Ongedaan maken</td>
+	</tr>
+	<tr class="row25">
+		<td class="col0"> REDO </td><td class="col1 leftalign">  </td><td class="col2"> Bewerken → Opnieuw </td>
+	</tr>
+	<tr class="row26">
+		<td class="col0"> SETPROJ </td><td class="col1"> ALTAZ/EQUAT/GALACTIC/ECLIPTIC </td><td class="col2"> Kaart → Kaart coördinatensysteem </td>
+	</tr>
+	<tr class="row27">
+		<td class="col0"> SETFOV </td><td class="col1"> 00d00m00s of 00.00 </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i78.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i78.png"><img src="../../_media/en/documentation/i78.png" class="media" alt="" /></a> Icoontje (beeldveld invoervelden) of <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i6.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i6.png"><img src="../../_media/en/documentation/i6.png" class="media" alt="" /></a> icoontje (hoofdbalk) </td>
+	</tr>
+	<tr class="row28">
+		<td class="col0"> SETRA </td><td class="col1"> RA:00h00m00s of RA:00.00 </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i78.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i78.png"><img src="../../_media/en/documentation/i78.png" class="media" alt="" /></a> Icoontje (RA invoervelden </td>
+	</tr>
+	<tr class="row29">
+		<td class="col0"> SETDEC </td><td class="col1"> DEC:+00d00m00s of DEC:00.00 </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i78.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i78.png"><img src="../../_media/en/documentation/i78.png" class="media" alt="" /></a> icoontje (DEC invoervelden) </td>
+	</tr>
+	<tr class="row30">
+		<td class="col0"> SETOBS </td><td class="col1"> LAT:+00d00m00sLON:+000d00m00sALT:000mOBS:naam </td><td class="col2"> Instellingen → Observatorium </td>
+	</tr>
+	<tr class="row31">
+		<td class="col0"> IDCURSOR </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row32">
+		<td class="col0"> SAVEIMG </td><td class="col1"> <acronym title="Portable Network Graphics">PNG</acronym>/<acronym title="Joint Photographics Experts Group">JPEG</acronym>/BMP bestandsnaam kwaliteit </td><td class="col2"> Bestand → Sla afbeelding op … </td>
+	</tr>
+	<tr class="row33">
+		<td class="col0"> SETNORTH </td><td class="col1 leftalign">  </td><td class="col2"> Kaart → Toon horizon → Noord </td>
+	</tr>
+	<tr class="row34">
+		<td class="col0"> SETSOUTH </td><td class="col1 leftalign">  </td><td class="col2"> Kaart → Toon horizon → Zuid </td>
+	</tr>
+	<tr class="row35">
+		<td class="col0"> SETEAST </td><td class="col1 leftalign">  </td><td class="col2"> Kaart → Toon horizon → Oost </td>
+	</tr>
+	<tr class="row36">
+		<td class="col0"> SETWEST </td><td class="col1 leftalign">  </td><td class="col2"> Kaart → Toon horizon → West </td>
+	</tr>
+	<tr class="row37">
+		<td class="col0"> SETZENITH </td><td class="col1 leftalign">  </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i41.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i41.png"><img src="../../_media/en/documentation/i41.png" class="media" alt="" /></a> Icoontje (Rechter balk) </td>
+	</tr>
+	<tr class="row38">
+		<td class="col0"> ALLSKY </td><td class="col1 leftalign">  </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i42.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i42.png"><img src="../../_media/en/documentation/i42.png" class="media" alt="" /></a> Icoontje (Rechter balk) </td>
+	</tr>
+	<tr class="row39">
+		<td class="col0"> REDRAW </td><td class="col1 leftalign">  </td><td class="col2"> Volgt op een wijzigingscommando, vereist om de kaart te updaten </td>
+	</tr>
+	<tr class="row40">
+		<td class="col0"> GETCURSOR </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row41">
+		<td class="col0"> GETEQGRID </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row42">
+		<td class="col0"> GETGRID </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row43">
+		<td class="col0"> GETSTARMODE </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row44">
+		<td class="col0"> GETNEBMODE </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row45">
+		<td class="col0"> GETAUTOSKY </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row46">
+		<td class="col0"> GETPROJ </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row47">
+		<td class="col0"> GETFOV </td><td class="col1"> S/F </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row48">
+		<td class="col0"> GETRA </td><td class="col1"> S/F </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row49">
+		<td class="col0"> GETDEC </td><td class="col1"> S/F </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row50">
+		<td class="col0"> GETDATE </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row51">
+		<td class="col0"> GETOBS </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row52">
+		<td class="col0"> SETDATE </td><td class="col1"> yyyy-mm-ddThh:mm:ss of <br/>
+“yyyy-mm-dd hh:mm:ss” </td><td class="col2"> Instellingen → Datum/Tijd </td>
+	</tr>
+	<tr class="row53">
+		<td class="col0"> SETTZ </td><td class="col1"> Etc/GMT </td><td class="col2"> Instellingen → Observatorium (Landen tijdzone) </td>
+	</tr>
+	<tr class="row54">
+		<td class="col0"> GETTZ </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row55">
+		<td class="col0"> SETGRIDNUM </td><td class="col1"> ON/OFF </td><td class="col2"> Instellingen → Weergave → Lijnen - Toon rooster label</td>
+	</tr>
+	<tr class="row56">
+		<td class="col0"> SETCONSTLINE </td><td class="col1"> ON/OFF </td><td class="col2"> Instellingen → Weergave → Lijnen - Toon sterrenbeeld figuur </td>
+	</tr>
+	<tr class="row57">
+		<td class="col0"> SETCONSTBOUNDARY </td><td class="col1"> ON/OFF </td><td class="col2"> Instellingen → Weergave → Lijnen - Toon sterrenbeeld begrenzing </td>
+	</tr>
+	<tr class="row58">
+		<td class="col0"> RESIZE </td><td class="col1"> breedte hoogte </td><td class="col2"> geef de kaart nieuwe afmetingen</td>
+	</tr>
+</table>
+
+</div>
+<!-- SECTION "Kaart Commando's" [1384-4637] -->
+<h2><a name="v27_compatibiliteit_met_dde_commando_s" id="v27_compatibiliteit_met_dde_commando_s">V2.7 compatibiliteit met DDE commando&#039;s</a></h2>
+<div class="level2">
+<table class="inline">
+	<tr class="row0">
+		<th class="col0"> Commando </th><th class="col1"> Parameters </th><th class="col2"> Commentaar, betekenis of <acronym title="Graphical User Interface">GUI</acronym>-equivalent </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0 leftalign"> MOVE  </td><td class="col1"> verouderd RA: 00h00m00.00s DEC:+00d00m00.0s FOV:+00d00m00s </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i78.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i78.png"><img src="../../_media/en/documentation/i78.png" class="media" alt="" /></a> Icoontje </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0 leftalign"> DATE  </td><td class="col1"> verouderd, gelijk aan SETDATE </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0 leftalign"> OBSL  </td><td class="col1"> verouderd, gelijk aan SETOBS </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 leftalign"> RFSH  </td><td class="col1"> verouderd, gelijk aan REDRAW </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0 leftalign"> PDSS  </td><td class="col1 leftalign">  </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row6">
+		<td class="col0 leftalign"> SBMP  </td><td class="col1"> verouderd, gebruik SAVEIMG </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row7">
+		<td class="col0 leftalign"> SGIF  </td><td class="col1"> verouderd, gebruik SAVEIMG </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row8">
+		<td class="col0 leftalign"> SJPG  </td><td class="col1"> verouderd, gebruik SAVEIMG </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row9">
+		<td class="col0 leftalign"> IDXY  </td><td class="col1"> X:pixelx Y:pixely </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row10">
+		<td class="col0 leftalign"> GOXY  </td><td class="col1"> X:pixelx Y:pixely </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row11">
+		<td class="col0 leftalign"> ZOM+  </td><td class="col1"> verouderd, gelijk aan ZOOM+ </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row12">
+		<td class="col0 leftalign"> ZOM-  </td><td class="col1"> verouderd, gelijk aan ZOOM- </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row13">
+		<td class="col0 leftalign"> STA+  </td><td class="col1 leftalign">  </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i52.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i52.png"><img src="../../_media/en/documentation/i52.png" class="media" alt="" /></a> icoontje (Hoofdbalk) </td>
+	</tr>
+	<tr class="row14">
+		<td class="col0 leftalign"> STA-  </td><td class="col1 leftalign">  </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i53.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i53.png"><img src="../../_media/en/documentation/i53.png" class="media" alt="" /></a> icoontje (Hoofdbalk) </td>
+	</tr>
+	<tr class="row15">
+		<td class="col0 leftalign"> NEB+  </td><td class="col1 leftalign">  </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i54.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i54.png"><img src="../../_media/en/documentation/i54.png" class="media" alt="" /></a> icoontje (Hoofdbalk) </td>
+	</tr>
+	<tr class="row16">
+		<td class="col0 leftalign"> NEB-  </td><td class="col1 leftalign">  </td><td class="col2"> <a href="http://ap-i.net/static/skychart/_detail/en/documentation/i55.png?id=nl%3Adocumentatie%3Aserver_commandos" class="media" title="en:documentation:i55.png"><img src="../../_media/en/documentation/i55.png" class="media" alt="" /></a> icoontje (Hoofdbalk) </td>
+	</tr>
+	<tr class="row17">
+		<td class="col0 leftalign"> GREQ  </td><td class="col1"> verouderd, gebruik SETEQGRID </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row18">
+		<td class="col0 leftalign"> GRAZ  </td><td class="col1"> verouderd, gebruik SETGRID </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row19">
+		<td class="col0 leftalign"> GRNM  </td><td class="col1"> verouderd, gebruik SETGRIDNUM </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row20">
+		<td class="col0 leftalign"> CONL  </td><td class="col1"> verouderd, gebruik SETCONSTLINE </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row21">
+		<td class="col0 leftalign"> CONB  </td><td class="col1"> verouderd, gebruik SETCONSTBOUNDARY </td><td class="col2 leftalign">  </td>
+	</tr>
+	<tr class="row22">
+		<td class="col0 leftalign"> EQAZ  </td><td class="col1"> verouderd, gebruik SETPROJ </td><td class="col2 leftalign">  </td>
+	</tr>
+</table>
+
+</div>
+<!-- SECTION "V2.7 compatibiliteit met DDE commando's" [4638-] --></div>
+</body>
+</html>

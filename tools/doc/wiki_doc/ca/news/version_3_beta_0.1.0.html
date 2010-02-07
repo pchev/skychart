@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ca:news:version_3_beta_0.1.0</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2008-09-27T10:17:25+0200" />
+<meta name="keywords" content="ca,news,version_3_beta_0.1.0" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/ca/news/version_3_beta_0.1.0?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=ca:news" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/ca/news/version_3_beta_0.1.0" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/ca/news/version_3_beta_0.1.0" />
+<link rel="canonical" href="version_3_beta_0.1.0.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='ca:news';var JSINFO = {"id":"ca:news:version_3_beta_0.1.0","namespace":"ca:news"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+
+
+
+<h1><a name="version_3_beta_010" id="version_3_beta_010">Version 3 beta 0.1.0</a></h1>
+<div class="level1">
+
+</div>
+<!-- SECTION "Version 3 beta 0.1.0" [1-36] -->
+<h2><a name="first_beta_version_and_compiler_change_we_now_use_lazarusfreepascal" id="first_beta_version_and_compiler_change_we_now_use_lazarusfreepascal">First beta version and compiler change, we now use Lazarus/FreePascal!</a></h2>
+<div class="level2">
+
+<p>
+
+<img src="../../_media/lazarus.jpg" class="mediaright" align="right" alt="" /> The main change for this new version is purely technical: we now use the Lazarus / FreePascal compiler to develop the software.
+</p>
+
+<p>
+In the short term this must not make any difference to run the program but in the future this open the way to run nativelly on more platform as FreeBSD or Mac <acronym title="Operating System">OS</acronym> X.
+</p>
+
+<p>
+Also the software is now free from end to end.
+</p>
+
+<p>
+
+<a href="http://ap-i.net/static/skychart/_media/en/screenshot/i029.jpg" class="media" title="en:screenshot:i029.jpg"><img src="../../_media/en/screenshot/i029.jpg@w=250" class="mediaright" align="right" alt="" width="250" /></a> <strong>Use Gtk on Linux</strong>
+</p>
+
+<p>
+The main visible change is for Linux user: we now use Gtk instead of the Borland modified Qt.<br/>
+
+libborqt is no longer require but you may need to install libgtk+1.2 and libgdk-pixbuf.
+</p>
+
+<p>
+It is possible to use Gtk theme to match you display preference or achieve night vision effet.<br/>
+
+A good place to browse is <a href="http://themes.freshmeat.net/browse/923/" class="urlextern" title="http://themes.freshmeat.net/browse/923/"  rel="nofollow">http://themes.freshmeat.net/browse/923/</a>
+</p>
+
+<p>
+If the software look ugly with too big or too small font this is probably because your system as not set correctly the Gtk1 environment. Installing and setting one of the theme will solve the problem.
+</p>
+
+<p>
+A set of different color button is available to better match the theme.
+The Configuration-Display setting permit to select which one to use for both normal and nightvision mode.
+</p>
+
+<p>
+You can create your own set of button. Go to the data/Theme/ directory and copy default/ to a new name. You can now replace every button in the icon_color directory. The source package contain a script to make the monochrome button from the color one.
+</p>
+
+<p>
+<br/>
+<br/>
+
+</p>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_media/en/screenshot/i030.jpg" class="media" title="en:screenshot:i030.jpg"><img src="../../_media/en/screenshot/i030.jpg@w=250" class="mediaright" align="right" alt="" width="250" /></a> <strong>Improved observatory database</strong>
+</p>
+
+<p>
+The observatory selection as been improved by using the sql database.
+It is now possible to save the elevation and time zone with the location.<br/>
+
+A small world wide database is installed the first time the program is run. Then you can get the whole detail for the country of interest with the “Download country details” button.<br/>
+
+You can search a location by name with the Search button or around a place with the Vicinity button.
+</p>
+
+<p>
+<br/>
+<br/>
+
+</p>
+
+<p>
+<strong>Other change :</strong>
+</p>
+
+<p>
+Rise / Set time calculation give now coherent result in the different part of the program. The precision is improved for the Moon and the planets.
+</p>
+
+<p>
+Improved list printing from the calendar or object list.
+</p>
+
+<p>
+Every configuration panel that request to select some field number as a list of the current field definition at the bottom of the page.
+</p>
+
+<p>
+You can directly download the comet and asteroid element to update the database.
+</p>
+
+<p>
+The small cursor to adjust the star size in parametric mode from the main tool bar where too difficult to use, they are now removed.<br/>
+
+Use the following key combination instead:
+</p>
+<ul>
+<li class="level1"><div class="li"> Faint stars size: ctrl+a ctrl+q</div>
+</li>
+<li class="level1"><div class="li"> Increment for bright stars: ctrl+w ctrl+s</div>
+</li>
+<li class="level1"><div class="li"> Contrast: ctrl+e crtl+d</div>
+</li>
+<li class="level1"><div class="li"> Color saturation: ctrl+r ctrl+f</div>
+</li>
+</ul>
+
+</div>
+<!-- SECTION "First beta version and compiler change, we now use Lazarus/FreePascal!" [37-] --></div>
+</body>
+</html>

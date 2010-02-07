@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>fr:documentation:catgen</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2008-10-24T15:17:19+0200" />
+<meta name="keywords" content="fr,documentation,catgen" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/fr/documentation/catgen?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=fr:documentation" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/fr/documentation/catgen" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/fr/documentation/catgen" />
+<link rel="canonical" href="catgen.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='fr:documentation';var JSINFO = {"id":"fr:documentation:catgen","namespace":"fr:documentation"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="catgen.html#catgen" class="toc">CATGEN</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="catgen.html#structure_de_catgen" class="toc">Structure de CATGEN</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="catgen.html#page_1" class="toc">Page 1</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="catgen.html#page_2" class="toc">Page 2</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="catgen.html#page_3" class="toc">Page 3</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="catgen.html#page_4" class="toc">Page 4</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+
+
+<h1><a name="catgen" id="catgen">CATGEN</a></h1>
+<div class="level1">
+
+<p>
+
+Les fichiers de catalogues qui contiennent les données pour n&#039;importe quel objet céleste sont disponible par millier depuis les sites web du <strong><a href="http://cdsweb.u-strasbg.fr/cats/Cats.htx" class="urlextern" title="http://cdsweb.u-strasbg.fr/cats/Cats.htx"  rel="nofollow">CDS</a></strong> ou de l&#039;<strong><a href="http://adc.gsfc.nasa.gov/" class="urlextern" title="http://adc.gsfc.nasa.gov/"  rel="nofollow">ADC</a></strong>, ou depuis d&#039;autres sources. Chacun contient des informations sur quelques dizaines ou jusqu&#039;à plusieurs millions d&#039;objets. 
+</p>
+
+<p>
+Le but de ce programme est de préparer un catalogue sous forme de fichier texte pour l&#039;utiliser avec le programme Cartes du Ciel.<br/>
+
+Du fait du grand nombre de données disponible actuellement il est impossible de faire un choix valable pour toutes les utilisations, il vaut mieux que chacun puisse assembler les données qui conviennent le mieux à ses intérêts à partir des catalogues originaux des professionnels. Un autre avantage est de pouvoir disposer rapidement des données dès qu&#039;elles sont publiées.
+</p>
+
+<p>
+Un catalogue préparé sous un format binaire avec cet utilitaire est bien plus performant que d&#039;utiliser directement le fichier texte comme catalogue externe. 
+</p>
+
+<p>
+Il s&#039;agit de simples fichiers textes dont chaque ligne représente un objet et dont les différentes données sont identifiées par leur colonne et leur longueur comme ci-dessous :
+
+</p>
+<pre class="code"> 1          BD+44 4550      3 36042          46           000001.1+444022000509.9+451345114.44
+ 2          BD-01 4525      6128569                       235956.2-010330000503.8-003011 98.33
+ 3 33    PscBD-06 6357     281285721002I         Var?     000013.0-061601000520.1-054227 93.75
+ 4 86    PegBD+12 5063     87 917012004                   000033.8+125023000542.0+132346106.19</pre>
+
+<p>
+
+En général un fichier d&#039;accompagnement (Readme) décrit le format du fichier avec beaucoup de détails. Des informations sur ce fichier sont disponibles <strong><a href="http://vizier.u-strasbg.fr/doc/catstd.htx" class="urlextern" title="http://vizier.u-strasbg.fr/doc/catstd.htx"  rel="nofollow">ici</a></strong> .
+
+</p>
+<pre class="code">Byte-by-byte Description of file: catalog.dat
+--------------------------------------------------------------------------------
+   Bytes Format  Units     Label      Explanations
+--------------------------------------------------------------------------------
+   1-  4  I4     ---       HR         [1/9110]+ Harvard Revised Number = Bright Star Number
+   5- 14  A10    ---       Name       Name, generally Bayer and/or Flamsteed name
+  15- 25  A11    ---       DM         Durchmusterung Identification (zone in bytes 17-19)
+  26- 31  I6     ---       HD         [1/225300]? Henry Draper Catalog Number</pre>
+
+<p>
+
+Il est important de se familiariser avec ce fichier avant de vouloir utiliser le catalogue, il faut faire attention à plusieurs détails: unités, valeurs limites (entre parenthèses carrées), format des nombres, identifiant, format et époque des coordonnées. Un point d&#039;interrogation indique que cette donnée n&#039;est pas toujours présente, il faut regarder dans le fichier de donnée pour avoir une idée de sa fréquence. N&#039;oubliez pas de lire les notes le cas échéant. Un éditeur de texte capable de lire des grand fichiers (comme <strong><a href="http://www.simtel.net/pub/dl/11983.shtml" class="urlextern" title="http://www.simtel.net/pub/dl/11983.shtml"  rel="nofollow">PFE</a></strong>) est très utile. 
+</p>
+
+<p>
+Si les données sont disponibles seulement sous un autre format il est généralement facile d&#039;écrire un simple programme pour les extraire et les formater, un langage de script comme <acronym title="Practical Extraction and Report Language">Perl</acronym> est très utile pour cela. Pour manipuler les fichiers CSV il y a le très bon <strong><a href="http://home.hccnet.nl/s.j.francke/csvdb/csvdb.zip" class="urlextern" title="http://home.hccnet.nl/s.j.francke/csvdb/csvdb.zip"  rel="nofollow">CSVdb</a></strong>, Calc inclu avec <strong><a href="http://www.openoffice.org/" class="urlextern" title="http://www.openoffice.org/"  rel="nofollow">OpenOffice.org</a></strong> a aussi des possibilités.
+</p>
+
+<p>
+Il vous faut choisir quelles données inclure dans votre catalogue. Pour chaque type de catalogue il y a un nombre minimal d&#039;information qui sont requise pour dessiner les cartes, mais vous pouvez choisir d&#039;en ajouter d&#039;autres qui seront affichée en cliquant sur l&#039;objet.
+</p>
+
+<p>
+Il ne faut pas oublier que plus d&#039;information sont ajoutée, plus la taille des fichiers sur le disque de l&#039;ordinateur sera important.<br/>
+
+Ce n&#039;est donc pas forcément une bonne idée de vouloir inclure toutes les informations disponibles, prenez votre temps pour déterminer ce dont vous avez besoin. Il est toujours possible de faire une version complète pour l&#039;ordinateur principal et une autre version plus compacte pour l&#039;ordinateur portable qui à un disque plus petit.
+</p>
+
+</div>
+<!-- SECTION "CATGEN" [1-4265] -->
+<h2><a name="structure_de_catgen" id="structure_de_catgen">Structure de CATGEN</a></h2>
+<div class="level2">
+
+<p>
+
+CATGEN a quatre étapes et une page pour chacune :
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>Page 1</strong> Choisir le fichier d&#039;entrée, le nom du catalogue et son type</div>
+</li>
+<li class="level1"><div class="li"> <strong>Page 2</strong> Régler des paramètres généraux selon le type de catalogue</div>
+</li>
+<li class="level1"><div class="li"> <strong>Page 3</strong> Choisir les données du fichier d&#039;entrée à inclure dans le catalogue</div>
+</li>
+<li class="level1"><div class="li"> <strong>Page 4</strong> Régler les options du catalogue et le construire</div>
+</li>
+</ul>
+
+<p>
+A chaque étape, les paramètres peuvent être sauvés dans un fichier <strong>”.prj”</strong>, ainsi vous pouvez interrompre la construction du catalogue et la reprendre plus tard après restauration des paramètres.<br/>
+
+Deux boutons en bas de chaque page gèrent cette fonction :
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>Enregistrer</strong> permet de créer (s&#039;il n&#039;existe pas encore) le fichier “xxx.prj” (xxx = nom court du catalogue).</div>
+</li>
+<li class="level1"><div class="li"> <strong>Charger</strong> restaure le fichier ”.prj” de votre choix et rempli les paramètres.</div>
+</li>
+</ul>
+
+</div>
+<!-- SECTION "Structure de CATGEN" [4266-5125] -->
+<h2><a name="page_1" id="page_1">Page 1</a></h2>
+<div class="level2">
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_01.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_01.jpg"><img src="../../_media/fr/documentation/catgen_01.jpg" class="mediaright" align="right" alt="" /></a>
+Sur la première page il faut indiquer le type d&#039;objet dans le catalogue, cela permet d&#039;activer des options spécifiques pour les pages suivantes. Vous avez le choix entre étoiles, étoiles variables, étoiles doubles, nébuleuses, contours de nébuleuses.
+</p>
+
+<p>
+<strong>Nom court du catalogue</strong> est le nom utilisé pour identifier le catalogue, préfixer le nom des objets sur la carte, nommer les fichiers du catalogue. Il doit avoir de 1 à 4 caractères de long.
+</p>
+
+<p>
+<strong>Nom long du catalogue</strong> est le nom complet du catalogue.
+</p>
+
+<p>
+Cliquez sur le bouton  pour choisir le fichier du catalogue. Souvent les gros catalogues sont découpés en plusieurs fichiers, dans ce cas il faut choisir tous les fichiers en même temps, l&#039;ordre des fichiers n&#039;a pas d&#039;importance.
+</p>
+
+<p>
+Choisir le <strong>Type du catalogue de sortie</strong>. Avec CdC V3, vous pouvez choisir une sortie sous forme de fichier texte pour les petits catalogues.
+</p>
+
+<p>
+Appuyez sur le bouton <strong>Suivant »</strong> pour passer à la page suivante.
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+</p>
+
+</div>
+<!-- SECTION "Page 1" [5126-6178] -->
+<h2><a name="page_2" id="page_2">Page 2</a></h2>
+<div class="level2">
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_02_dso.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_02_dso.jpg"><img src="../../_media/fr/documentation/catgen_02_dso.jpg" class="mediaright" align="right" alt="" /></a>
+Choisir le format des coordonnées en entrée :
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>Options AD</strong> Heures, minutes, secondes ou heures décimales or degrés, minutes, secondes ou degrés décimaux.</div>
+</li>
+<li class="level1"><div class="li"> <strong>Options DEC</strong> Degrés, minutes, secondes ou degrés décimauxs ou distance au Pôle Sud.</div>
+</li>
+</ul>
+
+<p>
+<strong>Equinoxe</strong>est l&#039;époque des coordonnées pour la précession. Utilisez 2000 pour ICRS.<br/>
+
+<strong>Epoque de la position</strong>est l&#039;époque par défaut de la position relative au mouvement propre, cette date peut être changée pour chaque objet à partir des données du catalogue.<br/>
+
+<strong>Magnitude maximum </strong> est la magnitude de l&#039;objet le plus faible du catalogue. C&#039;est particulièrement important pour les étoiles afin de pouvoir utiliser une échelle de magnitude correcte sur la carte.
+</p>
+
+<p>
+La seconde partie dépend du type du catalogue, elle est vide pour les étoiles, l&#039;image ci-contre présente les options pour le type “Nébuleuses” (tous objets du ciel profond) :
+</p>
+<ul>
+<li class="level1"><div class="li"> <strong>Dimension et Unités</strong> dimension par défaut (en cas de données manquantes) et unité.</div>
+</li>
+<li class="level1"><div class="li"> <strong>Echelle logaritmique</strong> cochez si la taille est un flux, par exemple dans un catalogue de radio-sources.</div>
+</li>
+<li class="level1"><div class="li"> <strong>Modifier les types d&#039;objets</strong> (voir ci-dessous) redéfini les codes de types d&#039;objets (chaines de caractères séparées par des virgules). Cliquez sur “Retour” quand vous êtes prêts.</div>
+</li>
+<li class="level1"><div class="li"> <strong>Modifier les Unités</strong> (voir ci-dessous) redéfini les codes d&#039;unités (chaines de caractères séparées par des virgules). Cliquez sur “Retour” quand vous êtes prêts.</div>
+</li>
+</ul>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_02a_dso.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_02a_dso.jpg"><img src="../../_media/fr/documentation/catgen_02a_dso.jpg" class="media" alt="" /></a> <a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_02b_dso.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_02b_dso.jpg"><img src="../../_media/fr/documentation/catgen_02b_dso.jpg" class="media" alt="" /></a>
+</p>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_02_ol.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_02_ol.jpg"><img src="../../_media/fr/documentation/catgen_02_ol.jpg" class="mediaright" align="right" alt="" /></a>
+<strong>Contours de Nébuleuses</strong>
+  * <strong>Type de tracé</strong> (utilisé pour relier les points de la liste) :
+</p>
+<ul>
+<li class="level1"><div class="li"> Lignes : droites </div>
+</li>
+<li class="level2"><div class="li"> Spline : courbes splines</div>
+</li>
+<li class="level2"><div class="li"> Surface : remplir la surface avec la couleur de ligne</div>
+</li>
+<li class="level2"><div class="li"> <strong>Contour fermé</strong> force à relier le dernier point du tracé au premier.</div>
+</li>
+<li class="level2"><div class="li"> <strong>Epaisseur Line</strong> auto-explicatif (en pixels) </div>
+</li>
+<li class="level2"><div class="li"> <strong>Couleur</strong> de ligne ou de surface (cliquer dessus pour la changer)</div>
+</li>
+<li class="level2"><div class="li"> <strong>Modifier l&#039;action</strong> (voir ci-dessous) redéfini les codes d&#039;opérations de tracé (chaines de caractères séparées par des virgules). Cliquez sur “Retour” quand vous êtes prêts.</div>
+</li>
+<li class="level2"><div class="li"> <strong>Modifier la couleur</strong> (voir ci-dessous) redéfini les codes couleur de tracé (chaines de caractères séparées par des virgules). Cliquez sur “Retour” quand vous êtes prêts.</div>
+</li>
+</ul>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_02a_ol.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_02a_ol.jpg"><img src="../../_media/fr/documentation/catgen_02a_ol.jpg" class="media" alt="" /></a> <a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_02b_ol.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_02b_ol.jpg"><img src="../../_media/fr/documentation/catgen_02b_ol.jpg" class="media" alt="" /></a>
+</p>
+
+<p>
+Appuyez sur le bouton <strong>Suivant »</strong> pour passer à la page suivante.
+</p>
+
+</div>
+<!-- SECTION "Page 2" [6179-8802] -->
+<h2><a name="page_3" id="page_3">Page 3</a></h2>
+<div class="level2">
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_03_dso.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_03_dso.jpg"><img src="../../_media/fr/documentation/catgen_03_dso.jpg" class="mediaright" align="right" alt="" /></a>
+</p>
+
+<p>
+Cette page vous permet d&#039;établir la correspondance entre les données du fichier d&#039;entrée et celles de votre catalogue.
+La liste montre les différent champs qui dépendent du type de catalogue choisit à la première page.<br/>
+
+Cochez chaque champ que vous voulez inclure dans votre catalogue et définissez la position sur la ligne d&#039;exemple.<br/>
+
+Les champs obligatoires sont dans des parenthèses carrées ”[]”, les unités requises sont indiquées entre parenthèse ”()”. Voir le bouton “Advanced” ci-dessous si il est nécessaire d&#039;ajuster les unités.<br/>
+
+</p>
+
+<p>
+<strong>Label</strong> sera l&#039;étiquette affichée pour ce champ.<br/>
+
+<strong>Premier caractère</strong> et <strong>Longueur</strong> sont la position et la longueur du champ d&#039;entrée. Vous pouvez saisir la valeur ici (obtenue du fichier Readme) ou marquer la position avec la souris sur la ligne d&#039;exemple. Dans ce dernier cas il faut s&#039;assurer que le champ marqué est suffisant pour la plus longue donnée du catalogue.
+</p>
+
+<p>
+<strong>Liste des champs selon le type de catalogue :</strong>
+</p>
+
+<p>
+<strong>Champs obligatoires :</strong>
+</p>
+<table class="inline">
+	<tr class="row0">
+		<th class="col0"> Etoiles </th><th class="col1"> Etoiles variables </th><th class="col2"> Etoiles doubles </th><th class="col3"> Nebuleuses </th><th class="col4"> Contour de nébuleuses </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> RA </td><td class="col1"> RA </td><td class="col2"> RA </td><td class="col3"> RA </td><td class="col4"> RA</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> DEC </td><td class="col1"> DEC </td><td class="col2"> DEC </td><td class="col3"> DEC </td><td class="col4"> DEC</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> Magnitude (V) </td><td class="col1 leftalign">   </td><td class="col2"> Magn. comp. 1 </td><td class="col3 leftalign">   </td><td class="col4"> Line operation </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 leftalign">   </td><td class="col1 leftalign">   </td><td class="col2"> Separation </td><td class="col3 leftalign">   </td><td class="col4 leftalign">   </td>
+	</tr>
+</table>
+
+<p>
+
+<strong> Champs utilisés pour dessiner les cartes :</strong>
+</p>
+<table class="inline">
+	<tr class="row0">
+		<th class="col0"> Etoiles </th><th class="col1"> Etoiles variables </th><th class="col2"> Etoiles doubles </th><th class="col3"> Nebuleuses </th><th class="col4"> Contour de nébuleuses </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> Catalog ID </td><td class="col1"> Catalog ID </td><td class="col2"> Catalog ID </td><td class="col3"> Catalog ID </td><td class="col4"> Catalog ID </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> B-V </td><td class="col1"> Magnitude Max. </td><td class="col2"> Position angle </td><td class="col3"> Nebula type </td><td class="col4"> Line width </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> Proper motion RA </td><td class="col1"> Magnitude Min. </td><td class="col2 leftalign">   </td><td class="col3"> Magnitude </td><td class="col4"> Line color </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"> Proper motion DEC </td><td class="col1"> Magnitude code </td><td class="col2 leftalign">   </td><td class="col3"> Surface brightness </td><td class="col4"> Drawing type </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"> Position Epoch </td><td class="col1 leftalign">   </td><td class="col2 leftalign">   </td><td class="col3"> Largest dimension </td><td class="col4 leftalign">   </td>
+	</tr>
+	<tr class="row6">
+		<td class="col0"> Magnitude B </td><td class="col1 leftalign">   </td><td class="col2 leftalign">   </td><td class="col3"> Smallest dimension </td><td class="col4 leftalign">   </td>
+	</tr>
+	<tr class="row7">
+		<td class="col0 leftalign">   </td><td class="col1 leftalign">   </td><td class="col2 leftalign">   </td><td class="col3"> Dimension unit </td><td class="col4 leftalign">   </td>
+	</tr>
+	<tr class="row8">
+		<td class="col0 leftalign">   </td><td class="col1 leftalign">   </td><td class="col2 leftalign">   </td><td class="col3"> Position angle </td><td class="col4 leftalign">   </td>
+	</tr>
+</table>
+
+<p>
+
+<strong> Champs utilisés pour dessiner les cartes :</strong>
+</p>
+<table class="inline">
+	<tr class="row0">
+		<th class="col0"> Etoiles </th><th class="col1"> Etoiles variables </th><th class="col2"> Etoiles doubles </th><th class="col3"> Nebuleuses </th><th class="col4"> Contour de nébuleuses </th>
+	</tr>
+	<tr class="row1">
+		<td class="col0"> Magnitude R </td><td class="col1"> Period </td><td class="col2"> Magn. comp. 2 </td><td class="col3"> Radial velocity </td><td class="col4"> Comment </td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"> Spectral class </td><td class="col1"> Variable type </td><td class="col2"> Epoch </td><td class="col3"> Morphological class </td><td class="col4"> String.. </td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"> Parallax </td><td class="col1"> Maxima Epoch </td><td class="col2"> Component name </td><td class="col3"> Comment </td><td class="col4"> Numeric.. </td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"> Comment </td><td class="col1"> Rise Time </td><td class="col2"> Spectral class comp. 1 </td><td class="col3"> String.. </td><td class="col4 leftalign">   </td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"> String.. </td><td class="col1"> Spectral class </td><td class="col2"> Spectral class comp. 2 </td><td class="col3"> Numeric.. </td><td class="col4 leftalign">   </td>
+	</tr>
+	<tr class="row6">
+		<td class="col0"> Numeric.. </td><td class="col1"> Comment </td><td class="col2"> Comment </td><td class="col3 leftalign">   </td><td class="col4 leftalign">   </td>
+	</tr>
+	<tr class="row7">
+		<td class="col0 leftalign">   </td><td class="col1"> String.. </td><td class="col2"> String.. </td><td class="col3 leftalign">   </td><td class="col4 leftalign">   </td>
+	</tr>
+	<tr class="row8">
+		<td class="col0 leftalign">   </td><td class="col1"> Numeric.. </td><td class="col2"> Numeric.. </td><td class="col3 leftalign">   </td><td class="col4 leftalign">   </td>
+	</tr>
+</table>
+
+<p>
+
+A la fin de la liste vous trouverez dix valeurs chaîne et numérique que vous pouvez utiliser librement pour n&#039;importe quelle données.<br/>
+
+Les valeurs chaînes peuvent être utilisée comme nom secondaire pour l&#039;objet, ce nom est utilisé si le nom principal (Catalog Id) est manquant et il peut être ajouté au fichier d&#039;index, cocher “Utiliser ce champ comme nom supplémentaire” si vous le désirez.<br/>
+
+<a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_03_adv.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_03_adv.jpg"><img src="../../_media/fr/documentation/catgen_03_adv.jpg" class="mediaright" align="right" alt="" /></a>
+<strong>Avancé</strong> Ce bouton permet d&#039;effectuer une transformation linéaire des données du catalogue, il est activé seulement pour les champs numériques. Par exemple pour convertir des minutes en secondes<br/>
+
+Une autre utilisation peut être de calculer les coordonnées des objets si elles ne sont pas directement disponible dans le catalogue.<br/>
+
+Si le catalogue donne la position des objets en millimètre sur la plaque depuis le centre de la galaxie (p.ex: ra: 0h42m42.00s dec:+41°16&#039;00.0”), on sait que le nord est en haut et que l&#039;échelle de la plaque est 2 secondes par millimètre.<br/>
+
+Les coordonnées approximatives (sans correction de plaque) en degrés sont:
+</p>
+<pre class="code">DEC = 41.26667 + Xmm * (2/3600)
+RA = 10.67500 - Ymm * (2/3600/cos(DEC))</pre>
+
+<p>
+Choisir “Decimal degree” pour RA et DEC, indiquez la position en millimètres et utilisez les valeurs “Avancées” suivantes:
+</p>
+<pre class="code">pour RA : -0.00073837 et 10.67500
+pour DEC : 0.00055555 et 41.26667</pre>
+
+<p>
+
+Si vous devez faire une transformation plus complexe il est necessaire de le faire avant de lancer Catgen. Un script <acronym title="Practical Extraction and Report Language">Perl</acronym> permet de résoudre tout les cas de figure. 
+</p>
+
+<p>
+Appuyez sur le bouton <strong>Suivant »</strong> pour passer à la page suivante.
+</p>
+
+</div>
+<!-- SECTION "Page 3" [8803-12947] -->
+<h2><a name="page_4" id="page_4">Page 4</a></h2>
+<div class="level2">
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/fr/documentation/catgen_04_dso.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="fr:documentation:catgen_04_dso.jpg"><img src="../../_media/fr/documentation/catgen_04_dso.jpg" class="mediaright" align="right" alt="" /></a>
+La dernière page permet d&#039;indiquer des options pour le catalogue généré.
+</p>
+
+<p>
+Indiquez le <strong>Nombre de fichiers</strong> comme recommandé en fonction du nombre d&#039;objet dans le catalogue, c&#039;est très important pour obtenir des bonnes performances.<br/>
+
+Cochez <strong>Créer un index de recherche</strong> pour créer un index permettant de rechercher les objets par leur nom.<br/>
+
+Cochez <strong>Ajouter les noms supplémentaires* à l&#039;index</strong> pour ajouter le nom secondaire a l&#039;index.<br/>
+
+Cochez <strong>Préfixe le nom supplémentaire avec son label</strong> pour préfixer les noms secondaires avec leur étiquette. Par exemple si une colonne du catalogue donne les numéros UGC des galaxies cela permet d&#039;utiliser UGC7442 au lieu de 7442 comme entrée dans l&#039;index.<br/>
+
+Choisir un <strong>Répertoire de sortie</strong> pour enregistrer les fichiers du catalogue. C&#039;est un bonne habitude d&#039;utiliser un répertoire séparé pour chaque catalogue.<br/>
+
+Cochez <strong>Ajouter à un catalogue existant</strong> si vous voulez ajouter ces données à un catalogue existant de même nom dans le même répertoire.<br/>
+
+C&#039;est utile pour créer un catalogue unique à partir de plusieurs sources. Dans ce cas la structure du catalogue doit être exactement la même, autrement les données seront perdues, veuillez faire une copie de sauvegarde avant d&#039;essayer cette option.
+</p>
+
+<p>
+Quand tout est prêt, enregistrer le projet avec le bouton <strong>Enregistrer</strong>, puis appuyer sur le bouton <strong>Construire le catalogue</strong>.<br/>
+<br/>
+<br/>
+<br/>
+
+</p>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/en/documentation/catgen_prog_dsl.jpg?id=fr%3Adocumentation%3Acatgen" class="media" title="en:documentation:catgen_prog_dsl.jpg"><img src="../../_media/en/documentation/catgen_prog_dsl.jpg@w=300" class="mediaright" align="right" alt="" width="300" /></a>
+Une boite de progression vous montre l&#039;avancement des opérations. Il est possible de l&#039;interrompre avec le bouton “Abort”, dans ce cas le catalogue n&#039;est pas utilisable.<br/>
+
+Quand tout est terminé la boite de progression se ferme et vous pouvez quitter le programme avec le bouton “Close”.<br/>
+
+Si certaines ligne du fichier catalogue ne contiennent pas des valeurs numériques valides pour certains champs ces objets ne sont pas ajoutés au catalogue mais les lignes sont écrites dans un fichier <strong>reject.txt</strong>.
+</p>
+
+<p>
+C&#039;est une bonne idée de d&#039;abord essayer vos définitions avec un nombre limité d&#039;objet afin d&#039;éviter un fichier reject.txt de plusieurs millions de lignes! Vous pouvez trouver des versions pour Windows des commandes Unix head, tail et grep qui sont très utiles pour extraire quelques lignes d&#039;un gros fichier.
+</p>
+
+<p>
+Si tout c&#039;est bien passé vous êtes maintenant près a utiliser votre catalogue. Referez-vous à la <a href="catalogues.html#catalogues1" class="wikilink1" title="fr:documentation:catalogues">documentation de Cartes du Ciel</a> pour définir ce catalogue dans le programme.
+
+</p>
+
+</div>
+<!-- SECTION "Page 4" [12948-] --></div>
+</body>
+</html>
