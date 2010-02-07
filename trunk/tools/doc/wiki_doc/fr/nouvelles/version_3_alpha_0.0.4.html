@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>fr:nouvelles:version_3_alpha_0.0.4</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2006-10-10T09:43:05+0200" />
+<meta name="keywords" content="fr,nouvelles,version_3_alpha_0.0.4" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/fr/nouvelles/version_3_alpha_0.0.4?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=fr:nouvelles" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/fr/nouvelles/version_3_alpha_0.0.4" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/fr/nouvelles/version_3_alpha_0.0.4" />
+<link rel="canonical" href="version_3_alpha_0.0.4.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='fr:nouvelles';var JSINFO = {"id":"fr:nouvelles:version_3_alpha_0.0.4","namespace":"fr:nouvelles"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+
+
+
+<h1><a name="version_3_alpha_004" id="version_3_alpha_004">Version 3 alpha 0.0.4</a></h1>
+<div class="level1">
+
+</div>
+<!-- SECTION "Version 3 alpha 0.0.4" [1-37] -->
+<h2><a name="cette_version_ajoute_une_base_de_donnee_pour_les_asteroides" id="cette_version_ajoute_une_base_de_donnee_pour_les_asteroides">Cette version ajoute une base de donnée pour les astéroides.</a></h2>
+<div class="level2">
+
+<p>
+
+<a href="http://ap-i.net/static/skychart/_media/en/screenshot/i009.jpg" class="media" title="en:screenshot:i009.jpg"><img src="../../_media/en/screenshot/i009.jpg@w=250" class="mediaright" align="right" alt="" width="250" /></a> Il est maintenant possible d&#039;afficher tout les astéroides connus jusqu&#039;à une magnitude définie sur les cartes.<br/>
+
+Pour rendre cela possible, une base de donnée est utilisée pour enregistrer et retrouver rapidement les éléments de plus de 200&#039;000 asteroides du fichier MPCORB.
+</p>
+
+<p>
+Comme il n&#039;y a toujours pas de documentation je donne quelques explication ici.
+</p>
+
+<p>
+La première étape est de charger le fichier MPCORB dans la base de donnée. Une sélection simplifiée est possible si vous ne voulez pas le fichier complet. Comme les éléments changent avec le temps il est possible d&#039;en conserver plusieurs versions. Le programme utilisera toujours les plus proches de la date courante.
+Le fichier est disponible depuis :<br/>
+
+<a href="ftp://cfa-ftp.harvard.edu/pub/MPCORB/" class="urlextern" title="ftp://cfa-ftp.harvard.edu/pub/MPCORB/"  rel="nofollow">ftp://cfa-ftp.harvard.edu/pub/MPCORB/</a> <br/>
+
+Si vous avez des difficulté pour vous connecter lisez les informations au millieux de cette page:<br/>
+
+cfa-<a href="http://www.harvard.edu/iau/mpc.html" class="urlextern" title="http://www.harvard.edu/iau/mpc.html"  rel="nofollow">http://www.harvard.edu/iau/mpc.html</a>
+</p>
+
+<p>
+Ensuite un calcul est fait de la magnitude de chaque astéroide pour le premier de chaque mois. Cela permet au programme d&#039;éliminer ceux qui sont trop faible pour l&#039;observation et ainsi d&#039;accelerer le calcul.<br/>
+
+Ce processus peut être lent à cause du volume de donnée à traiter, je vous conseil de le faire juste avant d&#039;aller manger!
+</p>
+
+<p>
+C&#039;est tout pour la preparation des données.
+</p>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_media/en/screenshot/i010.jpg" class="media" title="en:screenshot:i010.jpg"><img src="../../_media/en/screenshot/i010.jpg@w=250" class="mediaright" align="right" alt="" width="250" /></a> Quand une nouvelle date est choisie la position de tout les astéroides plus brillant que la limite est calculée pour 0h TU. Cela prend environ 5 secondes jusqu&#039;à la magnitude 18, et 15 secondes jusqu&#039;à la magnitude 20.<br/>
+
+Cette position est utilisée pour savoir quels asteroides sont sur la carte, pour ceux-ci la position precise à l&#039;heure d&#039;observation est calculée en une fraction de seconde.
+</p>
+
+<p>
+Vous pouvez utiliser la boite de recheche pour localiser n&#039;importe quel astéroide de la base de donnée, entrez le numéro ou une partie du nom de l&#039;astéroide.<br/>
+
+Cet astéroide est ajouté temporairement à la liste journalière même si sa magnitude est plus faible que la limite. C&#039;est un moyen simple pour ajouter quelques objets faible à la carte.
+Pour utiliser cette nouvelle fonction il faut installer le serveur de base de donnée MySQL version 4.<br/>
+
+Un paquet d&#039;installation simplifié est disponible pour Windows si vous ne le possédez pas encore.<br/>
+
+Pour Linux je propose que vous utilisiez la version disponible avec votre distribution, ou que vous le téléchargiez depuis <a href="http://www.mysql.com" class="urlextern" title="http://www.mysql.com"  rel="nofollow">www.mysql.com</a> si il n&#039;est pas à la version 4.0. Plus précisement c&#039;est la librarie client qui doit être à la version 4.0, le serveur lui-même peut être d&#039;une autre version.
+</p>
+
+<p>
+Au premier lancement du programme celui-ci vous demande les paramètres de connexion pour la base de donnée. Je conseil de créer une nouvelle base avec le bouton correspondant, ceci charge également un fichier d&#039;exemple avec 1000 asteroides.<br/>
+
+Si vous ne voulez pas utiliser cette fonction cliquez sur Cancel pour désactiver l&#039;affichage des astéroides.
+</p>
+
+<p>
+Le calcul de l&#039;ensemble de ces données peut poser des problèmes si le processeur de votre machine n&#039;est pas assez puissant. Dans ce cas limitez le nombre d&#039;objet chargé depuis le fichier.<br/>
+
+J&#039;ai aussi remarqué que, sur la même machine, le calcul est de deux à trois fois plus lent avec Windows 98 qu&#039;avec Windows 2000 ou Linux.
+</p>
+
+</div>
+<!-- SECTION "Cette version ajoute une base de donnée pour les astéroides." [38-] --></div>
+</body>
+</html>

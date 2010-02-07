@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>nl:documentatie:installatie_en_compileren_van_de_broncode</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2009-01-04T13:01:57+0100" />
+<meta name="keywords" content="nl,documentatie,installatie_en_compileren_van_de_broncode" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/nl/documentatie/installatie_en_compileren_van_de_broncode?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=nl:documentatie" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/nl/documentatie/installatie_en_compileren_van_de_broncode" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/nl/documentatie/installatie_en_compileren_van_de_broncode" />
+<link rel="canonical" href="installatie_en_compileren_van_de_broncode.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='nl:documentatie';var JSINFO = {"id":"nl:documentatie:installatie_en_compileren_van_de_broncode","namespace":"nl:documentatie"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="clear">
+
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="installatie_en_compileren_van_de_broncode.html#hoe_installeer_ik_de_broncode_en_compileer_ik_met_lazarus" class="toc">Hoe installeer ik de broncode en compileer ik met Lazarus.</a></span></div>
+<ul class="toc">
+<li class="level3"><div class="li"><span class="li"><a href="installatie_en_compileren_van_de_broncode.html#haal_de_broncode" class="toc">Haal de broncode</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="installatie_en_compileren_van_de_broncode.html#installeer_lazarus" class="toc">Installeer Lazarus</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="installatie_en_compileren_van_de_broncode.html#interactieve_compilatie" class="toc">Interactieve compilatie</a></span></div></li>
+<li class="level3"><div class="li"><span class="li"><a href="installatie_en_compileren_van_de_broncode.html#geautomatiseerde_compilatie_en_installatie" class="toc">Geautomatiseerde compilatie en installatie</a></span></div></li>
+</ul>
+</li>
+<li class="level2"><div class="li"><span class="li"><a href="installatie_en_compileren_van_de_broncode.html#naamconventie_voor_de_programma_broncode" class="toc">Naamconventie voor de programma broncode</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+
+
+<h2><a name="hoe_installeer_ik_de_broncode_en_compileer_ik_met_lazarus" id="hoe_installeer_ik_de_broncode_en_compileer_ik_met_lazarus">Hoe installeer ik de broncode en compileer ik met Lazarus.</a></h2>
+<div class="level2">
+
+</div>
+<!-- SECTION "Hoe installeer ik de broncode en compileer ik met Lazarus." [1-71] -->
+<h3><a name="haal_de_broncode" id="haal_de_broncode">Haal de broncode</a></h3>
+<div class="level3">
+
+<p>
+Creëer een nieuwe map voor de broncode. Er zijn twee manieren om aan de broncode te geraken: <br/>
+
+<br/>
+
+<strong>1</strong> Download het broncode bestand file skychart_v3_xxx_source.tar.gz in je nieuwe map
+en pak het bestand daar uit. <br/>
+
+Onder Linux is het commando om uit te pakken: tar xzf skychart_v3_xxx_source.tar.gz <br/>
+
+Onder Windows kun je 7-Zip gebruiken, te verkrijgen vanaf: <a href="http://sourceforge.net/projects/sevenzip/" class="urlextern" title="http://sourceforge.net/projects/sevenzip/"  rel="nofollow">http://sourceforge.net/projects/sevenzip/</a>.
+</p>
+
+<p>
+<strong>2</strong> Nog beter kun je de broncode van Subversion binnnen halen met een svn client-programma. <br/>
+
+Het commando is: 
+
+</p>
+<pre class="code">svn co https://skychart.svn.sourceforge.net/svnroot/skychart/trunk .</pre>
+
+<p>
+Uiteindelijk moet je zoiets als het onderstaande hebben:
+</p>
+<pre class="file">
+cdc -|                                    &lt; map die het uitvoerbare programma bevat 
+     |- src -|                            &lt; ontwikkelings map 
+             |- skychart |                &lt; skychart modules
+                         |- component     &lt; project componenten
+                         |- library       &lt; project bibliotheken
+                         |- ...
+                         |- units         &lt; alle gecompileerde objecten gaan hier in
+             |- tools | - data            &lt; de vereiste &quot;data&quot; mappen structuur om het programma te draaien
+                      | - ...             &lt; verschillende tools die niet persé nuttig zijn voor de eindgebruiker
+</pre>
+
+</div>
+<!-- SECTION "Haal de broncode" [72-1456] -->
+<h3><a name="installeer_lazarus" id="installeer_lazarus">Installeer Lazarus</a></h3>
+<div class="level3">
+
+<p>
+
+Gebruik van de Lazarus source code steeds de laatste versie. De dagelijkse verse &#039;snapshot&#039; versie of de SVN versie van de broncode is verkrijgbaar op <a href="http://lazarus.freepascal.org" class="urlextern" title="http://lazarus.freepascal.org"  rel="nofollow">http://lazarus.freepascal.org</a>. Zie <a href="http://wiki.lazarus.freepascal.org/Installing_Lazarus" class="urlextern" title="http://wiki.lazarus.freepascal.org/Installing_Lazarus"  rel="nofollow">http://wiki.lazarus.freepascal.org/Installing_Lazarus</a> voor meer informatie.
+</p>
+
+<p>
+Start Lazarus en open Components-Configure, Installed Packages.
+</p>
+
+<p>
+Controleer dat Printer4Lazarus, JPEGForLazarus en TurboPowerIPro geïnstalleerd zijn, 
+dit is normaal gesproken het geval.
+Als dat niet zo is installeer ze dan vanaf lazarus/component 
+</p>
+<ul>
+<li class="level1"><div class="li"> printers/printer4lazarus.lpk</div>
+</li>
+<li class="level1"><div class="li"> turbopower_ipro/turbopoweripro.lpk</div>
+</li>
+</ul>
+
+<p>
+<br/>
+
+De volgende methode gebruikt Patrick Chevalley om Free Pascal en Lazarus op Linux te installeren en updaten en te gebruiken als cross compiler voor Windows:
+
+</p>
+<pre class="code">
+cd ~/fpc
+# svn co http://svn.freepascal.org/svn/fpc/branches/fixes_2_2 .
+svn up
+make clean
+make build
+sudo make install
+make clean OS_TARGET=win32 CPU_TARGET=i386
+make build OS_TARGET=win32 CPU_TARGET=i386
+sudo make crossinstall OS_TARGET=win32 CPU_TARGET=i386
+ver=`fpc -iV`
+sudo ln -f -s /usr/local/lib/fpc/$ver/ppc386 /usr/local/bin
+sudo ln -f -s /usr/local/lib/fpc/$ver/ppcross386 /usr/local/bin
+cd ~/lazarus
+# svn co http://svn.freepascal.org/svn/lazarus/trunk .
+svn up
+make clean
+make OS_TARGET=win32 CPU_TARGET=i386 clean
+make bigide
+make OS_TARGET=win32 CPU_TARGET=i386 bigide
+</pre>
+
+</div>
+<!-- SECTION "Installeer Lazarus" [1457-2833] -->
+<h3><a name="interactieve_compilatie" id="interactieve_compilatie">Interactieve compilatie</a></h3>
+<div class="level3">
+
+<p>
+Installeer eerst de vereiste componenten vanuit de map src/skychart/component 
+</p>
+
+<p>
+Klik “Open Package”, selecteer “component/cdccomponents.lpk”, Klik “Compile”, “Install”.
+</p>
+
+<p>
+Wanneer de installatie je vertelt om Lazarus opnieuw te bouwen, zeg je Yes.
+</p>
+
+<p>
+Je kunt nu de hoofdproject bestand skychart/cdc.lpi openen en compileren. 
+</p>
+
+<p>
+Om debug mogelijk te maken moet je de Run-Run Parameters-Werk map aanpassen naar je CdC-map.
+</p>
+
+<p>
+Om het voor normale productie uitvoerbare bestand te verkleinen gebruik je strip en upx. 
+</p>
+
+<p>
+De libraries getdss en plan404 zijn in C geschreven. Om deze te compileren, installeer de gcc compiler (<a href="http://www.mingw.org/" class="urlextern" title="http://www.mingw.org/"  rel="nofollow">Mingw</a> voor Windows) en start make in iedere library map. 
+</p>
+
+<p>
+Enkele Windows-specifieke libraries en plugins zijn nog niet geporteerd voor Lazarus, gebuik Delphi voor het compileren hiervan. 
+</p>
+
+</div>
+<!-- SECTION "Interactieve compilatie" [2834-3696] -->
+<h3><a name="geautomatiseerde_compilatie_en_installatie" id="geautomatiseerde_compilatie_en_installatie">Geautomatiseerde compilatie en installatie</a></h3>
+<div class="level3">
+
+<p>
+
+Als je de software wilt compileren zonder gebruik te maken van de interactieve Lazarus omgeving, dan kun je gebruik maken van de scripts in de hoofdmap.
+</p>
+
+<p>
+Voor dat je deze scripts gebruikt, vergewis je ervan dat de Free Pascal binaries in je PATH-omgeving zijn opgenomen. Dit is waar je het fpcmake commando vindt.
+</p>
+
+<p>
+In de hoofdmap vind je ook het &#039;daily_build.sh&#039; script dat je kunt gebruiken om automatisch de packeges te bouwen voor Linux en Windows.
+</p>
+
+</div>
+
+<h4><a name="voor_linux" id="voor_linux">Voor Linux</a></h4>
+<div class="level4">
+<pre class="code">./configure [fpc=free_pascal_path] [lazarus=lazarus_path] [prefix=installation_path]
+make
+make install
+make install_data
+</pre>
+
+</div>
+
+<h4><a name="voor_windows" id="voor_windows">Voor Windows</a></h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"> Vergewis je ervan dat je geen ander &#039;make&#039; commando dan die van Free Pascal in je pad hebt. <br/>
+</div>
+</li>
+<li class="level1"><div class="li"> Compileer handmatig de library &#039;getdss&#039; en &#039;plan404&#039; met <a href="http://www.mingw.org/" class="urlextern" title="http://www.mingw.org/"  rel="nofollow">Mingw</a>.<br/>
+</div>
+</li>
+<li class="level1"><div class="li"> Installeer het programma <a href="http://gnuwin32.sourceforge.net/packages/sed.htm" class="urlextern" title="http://gnuwin32.sourceforge.net/packages/sed.htm"  rel="nofollow">sed for Windows</a>.<br/>
+</div>
+</li>
+<li class="level1"><div class="li"> Bewerk met een editor het bestand &#039;configure.cmd&#039; om de juiste instellingen te geven voor sed=, fpc=, lazarus=, prefix= </div>
+</li>
+</ul>
+<pre class="code">configure.cmd 
+make
+make install
+make install_data
+</pre>
+
+</div>
+<!-- SECTION "Geautomatiseerde compilatie en installatie" [3697-4870] -->
+<h2><a name="naamconventie_voor_de_programma_broncode" id="naamconventie_voor_de_programma_broncode">Naamconventie voor de programma broncode</a></h2>
+<div class="level2">
+
+<p>
+
+De volgende conventie voor de namen wordt gebruikt voor de broncode van het hoofdproject om vlot het doel te herkennen van de units. 
+</p>
+<pre class="code">
+cdc.lpi         : Het hoofdproject
+pu_*.pas        : Form units met alleen specifieke code
+pu_*.lfm        : Form definitie
+cu_*.pas        : Units die niet-visuele objecten bevatten.
+u_*.pas         : Units met algemene code.
+</pre>
+
+</div>
+<!-- SECTION "Naamconventie voor de programma broncode" [4871-] --></div>
+</body>
+</html>

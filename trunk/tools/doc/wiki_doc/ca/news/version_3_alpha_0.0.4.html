@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ca:news:version_3_alpha_0.0.4</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2008-09-27T10:17:24+0200" />
+<meta name="keywords" content="ca,news,version_3_alpha_0.0.4" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/ca/news/version_3_alpha_0.0.4?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=ca:news" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/ca/news/version_3_alpha_0.0.4" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/ca/news/version_3_alpha_0.0.4" />
+<link rel="canonical" href="version_3_alpha_0.0.4.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='ca:news';var JSINFO = {"id":"ca:news:version_3_alpha_0.0.4","namespace":"ca:news"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+
+
+
+<h1><a name="version_3_alpha_004" id="version_3_alpha_004">Version 3 alpha 0.0.4</a></h1>
+<div class="level1">
+
+</div>
+<!-- SECTION "Version 3 alpha 0.0.4" [1-37] -->
+<h2><a name="this_version_add_the_support_for_an_asteroid_database" id="this_version_add_the_support_for_an_asteroid_database">This version add the support for an asteroid database.</a></h2>
+<div class="level2">
+
+<p>
+
+<a href="http://ap-i.net/static/skychart/_media/en/screenshot/i009.jpg" class="media" title="en:screenshot:i009.jpg"><img src="../../_media/en/screenshot/i009.jpg@w=250" class="mediaright" align="right" alt="" width="250" /></a> It is now possible to show all the know asteriods down to a fixed magnitude on any chart.<br/>
+
+This is achieved by using a database system to store and quickly retrieve the related asteroid elements from the 200&#039;000 MPCORB list.
+</p>
+
+<p>
+As there is still no documentation I give a brief explanation here.
+</p>
+
+<p>
+The first step is to load the MPCORB file to the database, a simple selection can be done if you don&#039;t want the full file. As the orbite parameter change over the time it is possible to keep many version of this data. The program will always use the nearest from the observation date.<br/>
+
+The file is available from :<br/>
+
+<a href="ftp://cfa-ftp.harvard.edu/pub/MPCORB/" class="urlextern" title="ftp://cfa-ftp.harvard.edu/pub/MPCORB/"  rel="nofollow">ftp://cfa-ftp.harvard.edu/pub/MPCORB/</a><br/>
+
+If you have difficulties to connect take a look at the middle of this page: <br/>
+
+<a href="http://cfa-www.harvard.edu/iau/mpc.html" class="urlextern" title="http://cfa-www.harvard.edu/iau/mpc.html"  rel="nofollow">http://cfa-www.harvard.edu/iau/mpc.html</a>
+</p>
+
+<p>
+Then a computation of each asteroid magnitude is done for the first of each month. This allow to roughly eliminate the object too faint at a given date and speed up the daily computation.<br/>
+
+This process is slow due to the volume of data to compute, I suggest you click this button just before going lunch.
+</p>
+
+<p>
+This is all for the data preparation.
+</p>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_media/en/screenshot/i010.jpg" class="media" title="en:screenshot:i010.jpg"><img src="../../_media/en/screenshot/i010.jpg@w=250" class="mediaright" align="right" alt="" width="250" /></a> When a new date is selected the position of all the asteroids brighter than the limit is computed for 0h UT. This take 5 seconds for a limiting magnitude of 18, but 15 seconds down to magnitude 20.<br/>
+
+This position is used to choice the asteroid to display to the chart, for this one the precise position at the time of the observation is computed in a fraction of a second.
+</p>
+
+<p>
+You can use the search box to locate any asteroid in the database, enter the asteroid number or a part of the asteroid name.<br/>
+
+This asteroid is temporarily added to the daily list even if is current magnitude is fainter than the limit. This is an easy way to add a few faint target to the chart.
+</p>
+
+<p>
+To use this new function it is necessary to install a MySQL version 4 database server.<br/>
+
+A simplified package to install the database is available for the Windows user that don&#039;t already own one.<br/>
+
+On Linux I suggest you use the version provided by your distribution, or if not at version 4.0 get it from <a href="http://www.mysql.com" class="urlextern" title="http://www.mysql.com"  rel="nofollow">www.mysql.com</a>. More precisely this is the MySql client library that must be at version 4.0, the server itself can be another version.
+</p>
+
+<p>
+When the program is started for the first time it will request the connexion parameters for the database. I sugest you create a new database using the corresponding button, this also load a sample file with 1000 asteroids.<br/>
+
+If you don&#039;t want to use this feature juste click Cancel on this screen to disable the asteroid display.
+</p>
+
+<p>
+Computing all this data may cause some problem if your processor is not powerful enough. In this case use less data by limiting the number of object you load from the file.<br/>
+
+I also remark that on the same computer, the computing speed is two or three time slower using Windows 98 than using Windows 2000 or Linux.
+</p>
+
+</div>
+<!-- SECTION "This version add the support for an asteroid database." [38-] --></div>
+</body>
+</html>

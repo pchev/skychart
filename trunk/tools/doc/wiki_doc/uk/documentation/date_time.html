@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>uk:documentation:date_time</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2008-09-03T14:42:30+0200" />
+<meta name="keywords" content="uk,documentation,date_time" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/uk/documentation/date_time?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=uk:documentation" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/uk/documentation/date_time" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/uk/documentation/date_time" />
+<link rel="canonical" href="date_time.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='uk:documentation';var JSINFO = {"id":"uk:documentation:date_time","namespace":"uk:documentation"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="date_time.html#набір_датачас" class="toc">Набір Дата/Час</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="date_time.html#date_time" class="toc">Date / Time</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="date_time.html#time_simulation" class="toc">Time Simulation</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+
+
+<h1><a name="набір_датачас" id="набір_датачас">Набір Дата/Час</a></h1>
+<div class="level1">
+
+<p>
+
+Набір <code>Дата/Час</code> має дві таблиці:
+</p>
+<ul>
+<li class="level1"><div class="li"> <span class="curid"><a href="date_time.html#date_time" class="wikilink1" title="uk:documentation:date_time">Дата/Час</a></span></div>
+</li>
+<li class="level1"><div class="li"> <span class="curid"><a href="date_time.html#time_simulation" class="wikilink1" title="uk:documentation:date_time">Моделювання в часі</a></span></div>
+</li>
+</ul>
+
+</div>
+<!-- SECTION "Набір Дата/Час" [1-217] -->
+<h2><a name="date_time" id="date_time">Date / Time</a></h2>
+<div class="level2">
+
+<p>
+Define the date and time used to calculate the position of the planets, comets, asteroids as well as the azimuth position and the proper motion.
+</p>
+
+<p>
+It is possible to use the system date and time or you can enter any valid date and time between year -20000 and +20000. Therefore the planets position are only calculated for a date from -3000 to +3000. Beware with the negative  year : 1BC is the year 0 and 2BC is the year -1.
+</p>
+
+<p>
+If the option “Auto Refresh” has been selected, the screen will be updated according to the decided interval of seconds. Otherwise the default time is the one of the program start up and will be used throughout the session ( unless you manually refresh it with the button “Actual time”).
+</p>
+
+<p>
+A time different from the actual one can be chosen by unselecting <code>Use system time</code> and entering desired time manually. Note that defined time is local time of the actual observatory location and UT will depend on its time zone.
+</p>
+
+<p>
+The box <code>More Options</code> allows to change the difference between the dynamic time used by the program and the standard time.
+</p>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/en/documentation/date_time.jpg?id=uk%3Adocumentation%3Adate_time" class="media" title="en:documentation:date_time.jpg"><img src="../../_media/en/documentation/date_time.jpg" class="media" alt="" /></a>
+</p>
+
+</div>
+<!-- SECTION "Date / Time" [218-1351] -->
+<h2><a name="time_simulation" id="time_simulation">Time Simulation</a></h2>
+<div class="level2">
+
+<p>
+
+<a href="http://ap-i.net/static/skychart/_detail/en/documentation/simulation.jpg?id=uk%3Adocumentation%3Adate_time" class="media" title="en:documentation:simulation.jpg"><img src="../../_media/en/documentation/simulation.jpg" class="media" alt="" /></a>
+</p>
+
+<p>
+It is possible to plot in a sky chart the simulation of different time positions for the Sun, Moon, planets, asteroids and comets. The time step can be defined in a day, hour, minute or second basis.
+</p>
+
+<p>
+The different plotted positions can be joined by a line and each of the positions can be labelled with the object&#039;s name, date and magnitude.
+</p>
+
+<p>
+<a href="http://ap-i.net/static/skychart/_detail/en/documentation/simul_ex.jpg?id=uk%3Adocumentation%3Adate_time" class="media" title="en:documentation:simul_ex.jpg"><img src="../../_media/en/documentation/simul_ex.jpg" class="media" alt="" /></a>
+</p>
+
+</div>
+<!-- SECTION "Time Simulation" [1352-] --></div>
+</body>
+</html>

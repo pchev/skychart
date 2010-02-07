@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>es:documentation:instalar_y_compilar_el_codigo_fuente</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2006-11-08T02:25:48+0100" />
+<meta name="keywords" content="es,documentation,instalar_y_compilar_el_codigo_fuente" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/es/documentation/instalar_y_compilar_el_codigo_fuente?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=es:documentation" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/es/documentation/instalar_y_compilar_el_codigo_fuente" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/es/documentation/instalar_y_compilar_el_codigo_fuente" />
+<link rel="canonical" href="instalar_y_compilar_el_codigo_fuente.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='es:documentation';var JSINFO = {"id":"es:documentation:instalar_y_compilar_el_codigo_fuente","namespace":"es:documentation"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div class="toc">
+<div class="tocheader toctoggle" id="toc__header">Table of Contents</div>
+<div id="toc__inside">
+
+<ul class="toc">
+<li class="level1"><div class="li"><span class="li"><a href="instalar_y_compilar_el_codigo_fuente.html#manejando_el_codigo_fuente" class="toc">Manejando el código fuente</a></span></div>
+<ul class="toc">
+<li class="level2"><div class="li"><span class="li"><a href="instalar_y_compilar_el_codigo_fuente.html#como_instalar_el_codigo_fuente_y_compilarlo_con_lazarus" class="toc">Como instalar el código fuente y compilarlo con Lazarus.</a></span></div></li>
+<li class="level2"><div class="li"><span class="li"><a href="instalar_y_compilar_el_codigo_fuente.html#convencion_de_nombres_para_el_codigo_del_programa" class="toc">Convención de nombres para el código del programa</a></span></div></li></ul>
+</li></ul>
+</div>
+</div>
+<!-- TOC END -->
+
+
+
+<h1><a name="manejando_el_codigo_fuente" id="manejando_el_codigo_fuente">Manejando el código fuente</a></h1>
+<div class="level1">
+
+</div>
+<!-- SECTION "Manejando el código fuente" [1-43] -->
+<h2><a name="como_instalar_el_codigo_fuente_y_compilarlo_con_lazarus" id="como_instalar_el_codigo_fuente_y_compilarlo_con_lazarus">Como instalar el código fuente y compilarlo con Lazarus.</a></h2>
+<div class="level2">
+
+<p>
+
+La forma más simple es agregar un directorio ./src en el directorio del biario de cdc existente.
+</p>
+
+<p>
+Descargar el archivo fuente skychart_v3_xxx_source.tar.gz a este directorio y extraer el archivo ahí. <br/>
+
+En Linux, el comando es : tar xzf skychart_v3_xxx_source.tar.gz
+</p>
+
+<p>
+O mejor aún, obtiene el fuente de Subversion utilizando un cliente svn. <br/>
+
+El comando es: 
+
+</p>
+<pre class="code">svn co https://svn.sourceforge.net/svnroot/skychart/trunk .</pre>
+
+<p>
+Finalmente deberías tener algo parecido a esto :
+</p>
+<pre class="file">
+cdc -|                                    &lt; directorio base conteniendo el ejecutable 
+     |- src -|                            &lt; directorio de fuentes
+             |- skychart |                &lt; módulo skychart
+                         |- component     &lt; componente de proyecto
+                         |- library       &lt; librería de proyecto
+                         |- ...
+                         |- units         &lt; todos los objetos de compilación van aquí
+             |- tools | - data            &lt; el directorio &quot;data&quot; es necesario para ejecutar el programa
+                      | - ...             &lt; herramientas varias, no necesariamente útiles para el usuario final
+</pre>
+
+<p>
+Para utilizar este código fuente, instala Lazarus utilizando la última versión 0.9.18 o superior de <a href="http://lazarus.freepascal.org" class="urlextern" title="http://lazarus.freepascal.org"  rel="nofollow">http://lazarus.freepascal.org</a>
+</p>
+
+<p>
+Ejecuta Lazarus y abre Components-Configure, Installed Packages.
+</p>
+
+<p>
+Verifica que Printer4Lazarus, JPEGForLazarus y TurboPowerIPro están instalados, 
+que es lo usual con la versión 0.9.18.
+Si no están, instálalos desde lazarus/component 
+
+</p>
+<pre class="code">
+      printers/printer4lazarus.lpk
+      jpeg/jpegforlazarus.lpk
+      turbopower_ipro/turbopoweripro.lpk
+</pre>
+
+<p>
+Entonces, desde el directorio src/skychart/component instala el paquete para el componente requerido:
+</p>
+
+<p>
+Click en “Open Package”, selecciona “component/cdccomponents.lpk”, click “Compile”, “Install”.
+</p>
+
+<p>
+Cuando el instalador pregunte si deseas reconstruir Lazarus, click en Si.
+</p>
+
+<p>
+Ahora puedes abrir el proyecto principal skychart/cdc.lpi y compilar.
+</p>
+
+<p>
+Para ejecutar en modo debug, ajusta Run-Run Parameters-Working Directory al directorio de CDC.
+</p>
+
+<p>
+Para reducir el tamaño del ejecutable para producción, utiliza strip y upx.
+</p>
+
+<p>
+Algunas librerías y plugins específicos de Windows aún no han sido portados a Lazarus,
+por favor, utiliza Delphi si deseas compilarlos.
+</p>
+
+</div>
+<!-- SECTION "Como instalar el código fuente y compilarlo con Lazarus." [44-2456] -->
+<h2><a name="convencion_de_nombres_para_el_codigo_del_programa" id="convencion_de_nombres_para_el_codigo_del_programa">Convención de nombres para el código del programa</a></h2>
+<div class="level2">
+
+<p>
+
+La siguiente convención se utiliza para el fuente del proyecto principal con el fin de permitir reconocer rápidamente el destino de una unidad.
+</p>
+<pre class="code">
+cdc.lpi         : Proyecto principal
+pu_*.pas        : Unidades de Fromularios con código específico únicamente
+pu_*.lfm        : Definición de Formularios
+cu_*.pas        : Unidad conteniendo objetos no visuales
+u_*.pas         : Unidad con código genérico.
+</pre>
+
+</div>
+<!-- SECTION "Convención de nombres para el código del programa" [2457-] --></div>
+</body>
+</html>

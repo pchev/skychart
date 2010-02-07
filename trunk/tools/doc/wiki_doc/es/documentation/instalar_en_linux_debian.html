@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ lang="en" dir="ltr">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>es:documentation:instalar_en_linux_debian</title>
+<meta name="generator" content="DokuWiki Release 2009-12-25c &quot;Lemming&quot;" />
+<meta name="robots" content="index,follow" />
+<meta name="date" content="2009-08-26T15:17:24+0200" />
+<meta name="keywords" content="es,documentation,instalar_en_linux_debian" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://ap-i.net/static/skychart/lib/exe/opensearch.php" title="Skychart" />
+<link rel="start" href="http://ap-i.net/static/skychart/" />
+<link rel="contents" href="http://ap-i.net/static/skychart/es/documentation/instalar_en_linux_debian?do=index" title="Index" />
+<link rel="alternate" type="application/rss+xml" title="Recent Changes" href="http://ap-i.net/static/skychart/feed.php" />
+<link rel="alternate" type="application/rss+xml" title="Current Namespace" href="http://ap-i.net/static/skychart/feed.php?mode=list&amp;ns=es:documentation" />
+<link rel="alternate" type="text/html" title="Plain HTML" href="http://ap-i.net/static/skychart/_export/xhtml/es/documentation/instalar_en_linux_debian" />
+<link rel="alternate" type="text/plain" title="Wiki Markup" href="http://ap-i.net/static/skychart/_export/raw/es/documentation/instalar_en_linux_debian" />
+<link rel="canonical" href="instalar_en_linux_debian.html" />
+<link rel="stylesheet" media="all" type="text/css" href="../../lib/exe/css.php@s=all&amp;t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="screen" type="text/css" href="../../lib/exe/css.php@t=skychart&amp;tseed=1264943874" />
+<link rel="stylesheet" media="print" type="text/css" href="../../lib/exe/css.php@s=print&amp;t=skychart&amp;tseed=1264943874" />
+<script type="text/javascript" charset="utf-8" ><!--//--><![CDATA[//><!--
+var NS='es:documentation';var JSINFO = {"id":"es:documentation:instalar_en_linux_debian","namespace":"es:documentation"};
+//--><!]]></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js.php@tseed=1264943874" ></script>
+</head>
+<body>
+<div class="dokuwiki export">
+
+
+
+<h1><a name="instalar_en_linux_debian" id="instalar_en_linux_debian">Instalar en Linux Debian</a></h1>
+<div class="level1">
+
+<p>
+
+El paquete para Debian está disponible para permitir la instalación automática utilizando apt-get
+</p>
+
+<p>
+Primero, deben ser root y editar el archivo /etc/apt/sources.list para agregar la siguiente línea:
+</p>
+<pre class="file">deb http://www.ap-i.net/deb/ skychart/</pre>
+
+<p>
+Entonces actualicen la lista de paquetes, desde la línea de comando escriban :
+</p>
+<pre class="code">apt-get update</pre>
+
+<p>
+Instalen el software necesario previamente (pre-requisitos). Normalmente cualquier instalación Debian reciente con un server X está ok. Pueden tener que agregar los paquetes libgtk1.2, libgdk-pixbuf2, libjepg62 y libsqlite3-0
+</p>
+<pre class="code">apt-get install llibgtk1.2 libgdk-pixbuf2 ibjpeg62 libsqlite3-0</pre>
+
+<p>
+e instalen el software :
+</p>
+<pre class="code">apt-get install skychart</pre>
+
+<p>
+y si tienen mucho espacio:
+</p>
+<pre class="code">apt-get install skychart-pictures</pre>
+
+<p>
+Y eso es todo, salgan del shell de root y escriban skychart para ejecutar el programa.
+</p>
+
+<p>
+Nota: cuando hagan un upgrade de una versión anterior a v3 beta 0.1.0 el upgrade no es automático porque cmabian las dependencias. En este caso, instalen el paquete de pre-requisitos como se describió anteriormente.
+</p>
+
+</div>
+</div>
+</body>
+</html>
