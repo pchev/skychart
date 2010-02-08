@@ -35,7 +35,7 @@ for /F "usebackq" %%d in (`sed "s#/#\\#g" doc.lst`) do (
   copy /Y %%d %destdir%\%%d 
 )
 
-unzip -o -d %destdir%\doc doc\wiki_doc.zip 
+xcopy /E /EXCLUDE:exsvn.txt doc\wiki_doc %destdir%\doc\wiki_doc\
 
 for /F "usebackq" %%d in (`sed "s#/#\\#g" cat.lst`) do (
   echo %%d - %destdir%\%%d
