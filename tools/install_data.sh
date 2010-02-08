@@ -32,5 +32,10 @@ do
   install -v -m 644  $f $destdir/share/skychart/$f
 done
 
-unzip -d $destdir/share/skychart/doc/ doc/wiki_doc.zip
+for f in $(find doc/wiki_doc/|grep -v .svn)
+do
+  install -v -D -m 644  $f $destdir/share/skychart/$f
+done
+
+#unzip -d $destdir/share/skychart/doc/ doc/wiki_doc.zip
 
