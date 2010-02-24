@@ -1,4 +1,4 @@
-CPPFLAGS=-I. -DUNIX -D_CONSOLE -fPIC
+CPPFLAGS=-I. -DUNIX -D_CONSOLE -fPIC $(arch_flags)
 #### For Suns and similar wrong-endian computers, add -DWRONG_WAY_BYTE_ORDER.
 CC            = gcc
 OSTYPE = $(shell uname)
@@ -7,7 +7,7 @@ SO_Name = libgetdss.dylib
 LDFLAGS=  -Wl,-single_module -dynamiclib  -lc -lm -lstdc++
 else
 SO_Name = libgetdss.so
-LDFLAGS= -shared -WL,-soname,$(SO_Name)
+LDFLAGS= -shared -WL,-soname,$(SO_Name) $(arch_flags)
 endif
 ifneq ($(findstring W32,$(OSTYPE)),)
 SO_Name = libgetdss.dll
