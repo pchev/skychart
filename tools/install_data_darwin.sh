@@ -25,13 +25,19 @@ do
   install -v -m 644  $f $destdir/$f
 done
 
+for f in $(find doc/wiki_doc|grep -v .svn)
+do  
+ if [ -d $f ]
+   then  install -v -d -m 755  $destdir/$f
+ fi
+done
 
 for f in $(find doc/wiki_doc/|grep -v .svn)
 do
-  install -v -d -m 644  $f $destdir/$f
+ if [ ! -d $f ]
+  then install -v -m 644  $f $destdir/$f
+ fi
 done
-
-#unzip -d $destdir/doc/ doc/wiki_doc.zip
 
 for f in $(cat cat.lst)
 do
