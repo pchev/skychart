@@ -31,7 +31,7 @@ if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
   rm skychart*.dmg
-  rm bin-*.zip
+  rm bin-*.bz2
   rm -rf $basedir
 
 # make i386 Mac version
