@@ -28,7 +28,7 @@ done
 
 for f in $(find doc/wiki_doc/|grep -v .svn)
 do
-  install -v -D -m 644  $f $destdir/$f
+  install -v -d -m 644  $f $destdir/$f
 done
 
 #unzip -d $destdir/doc/ doc/wiki_doc.zip
