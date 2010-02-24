@@ -18,8 +18,18 @@ dirs= catalog \
 all: catalog_all elp82_all satxy_all series96_all
 ifeq ($(OS_TARGET),win32)
 else
+ifeq ($(CPU_TARGET),i386)
+        $(MAKE) -C getdss all arch_flags=-m32
+        $(MAKE) -C plan404 all arch_flags=-m32
+else
+ifeq ($(CPU_TARGET),x86_64)
+        $(MAKE) -C getdss all arch_flags=-m64
+        $(MAKE) -C plan404 all arch_flags=-m64
+else
 	$(MAKE) -C getdss all
-	$(MAKE) -C plan404 all
+        $(MAKE) -C plan404 all
+endif
+endif
 endif
 
 clean: catalog_clean elp82_clean satxy_clean series96_clean
