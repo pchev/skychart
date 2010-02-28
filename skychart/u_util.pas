@@ -470,7 +470,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(t);
     min1:=abs(t-dd)*60;
-    if min1>=59.999 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(t);
        min1:=0.0;
     end;
@@ -491,7 +491,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(de);
     min1:=abs(de-dd)*60;
-    if min1>=59.99 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(de);
        min1:=0.0;
     end;
@@ -517,7 +517,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(de);
     min1:=abs(de-dd)*60;
-    if min1>=59.99 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(de);
        min1:=0.0;
     end;
@@ -543,7 +543,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(de);
     min1:=abs(de-dd)*60;
-    if min1>=59.99 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(de);
        min1:=0.0;
     end;
@@ -569,7 +569,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(tim);
     min1:=abs(tim-dd)*60;
-    if min1>=59.99 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(tim);
        min1:=0.0;
     end;
@@ -615,7 +615,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(ar);
     min1:=abs(ar-dd)*60;
-    if min1>=59.999 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(ar);
        min1:=0.0;
     end;
@@ -639,7 +639,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(de);
     min1:=abs(de-dd)*60;
-    if min1>=59.99 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(de);
        min1:=0.0;
     end;
@@ -665,7 +665,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(ar);
     min1:=abs(ar-dd)*60;
-    if min1>=59.999 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(ar);
        min1:=0.0;
     end;
@@ -753,7 +753,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(de);
     min1:=abs(de-dd)*60;
-    if min1>=59.99 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(de);
        min1:=0.0;
     end;
@@ -778,7 +778,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(ar);
     min1:=abs(ar-dd)*60;
-    if min1>=59.999 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(ar);
        min1:=0.0;
     end;
@@ -803,13 +803,13 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(ar);
     min1:=abs(ar-dd)*60;
-    if min1>=59.999 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(ar);
        min1:=0.0;
     end;
     min:=Int(min1);
     sec:=(min1-min)*60;
-    if sec>=59.95 then begin
+    if sec>=59.5 then begin
        min:=min+1;
        sec:=0.0;
     end;
@@ -908,7 +908,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(l);
     min1:=abs(l-dd)*60;
-    if min1>=59.99 then begin
+    if min1>=59.99166667 then begin
        dd:=dd+sgn(l);
        min1:=0.0;
     end;
