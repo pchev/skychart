@@ -1180,6 +1180,9 @@ for j:=0 to cfgsc.SimNb-1 do begin
             Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
             if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,false);
            end;
+      10 : begin
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,-w1,0,0,0,cfgsc.WhiteBg);
+           end;
       11 : begin
             magn:=-10;  // better to alway show a bright dot for the Moon
             dist:=cfgsc.Planetlst[j,ipla,6];
