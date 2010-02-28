@@ -13,7 +13,7 @@ object f_chart: Tf_chart
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.28.2'
   object Panel1: TPanel
     Left = 8
     Height = 272
