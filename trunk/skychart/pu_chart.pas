@@ -1863,7 +1863,6 @@ txt:=txt+html_br;
 // local position
 txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
 txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+blank+ArToStr3(sc.cfgsc.Curtime)+'  ( '+sc.cfgsc.tz.ZoneName+' )'+html_br;
-//txt:=txt+html_pre;
 djd(sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24,y,m,d,h);
 txt:=txt+html_b+rsUniversalTim+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h);
 txt:=txt+blank+'JD='+formatfloat(f5,sc.cfgsc.CurJD-sc.cfgsc.DT_UT/24)+html_br;
@@ -1916,10 +1915,9 @@ else begin
     txt:=txt+rsInvisibleAtT+html_br;
     end;
 end;
-//txt:=txt+htms_pre;
 // other notes
 buf:=sc.cfgsc.FindNote;
-txt:=txt+html_pre;
+txt:=txt+html_br;
 repeat
   i:=pos(tab,buf);
   if i=0 then i:=length(buf)+1;
@@ -1932,7 +1930,6 @@ repeat
   end;
   txt:=txt+buf2+html_br;
 until buf='';
-txt:=txt+htms_pre;
 //writetrace(txt);
 result:=txt+htms_f+html_br+htms_h;
 end;
