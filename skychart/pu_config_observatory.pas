@@ -26,11 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  {$ifdef VER2_2}
-  unzip,
-  {$else}
-  Unzip51g,
-  {$endif}
+  u_unzip,
   u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
@@ -567,7 +563,7 @@ if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
        end else
           ShowMessage(Format(rsUsingExistin, [fnzip]));
        if FileExists(fnzip) then begin
-          if 1=FileUnzipEx(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
+          if FileUnzip(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
             memo1.Visible:=true;
             memo1.BringToFront;
             application.ProcessMessages;
@@ -594,7 +590,7 @@ if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
        end else
           ShowMessage(Format(rsUsingExistin, [fnzip]));
        if FileExists(fnzip) then begin
-          if 1=FileUnzipEx(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
+          if FileUnzip(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
              memo1.Visible:=true;
              memo1.BringToFront;
              application.ProcessMessages;
