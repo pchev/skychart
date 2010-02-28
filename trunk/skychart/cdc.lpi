@@ -437,6 +437,7 @@
     <SearchPaths>
       <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       <SrcPath Value="$(LazarusDir)/lcl/;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)/"/>
+      <LCLWidgetType Value="win32"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
@@ -445,6 +446,8 @@
     </Parsing>
     <CodeGeneration>
       <HeapSize Value="100000"/>
+      <TargetCPU Value="x86_64"/>
+      <TargetOS Value="Win64"/>
       <Optimizations>
         <OptimizationLevel Value="0"/>
       </Optimizations>

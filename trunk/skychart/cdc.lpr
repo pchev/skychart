@@ -32,7 +32,7 @@ uses
   cu_indiclient, cu_fits, cu_database, cu_telescope, pu_info, pu_image,
   pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection,
-  u_planetrender, u_constant, u_util, MultiDocPackage, pu_main,
+  u_planetrender, u_constant, u_util, MultiDocPackage,
   TurboPowerIPro, enhedit, pu_config_catalog,
   pu_config_system, pu_config_solsys, pu_config_pictures, pu_config_observatory,
   pu_config_display, pu_config_chart, pu_config_internet, libsql,
@@ -40,7 +40,7 @@ uses
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
   pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LResources, LCLProc,
-  pu_clock;
+  pu_clock, pu_main;
   
 var i : integer;
     buf, p, step : string;
