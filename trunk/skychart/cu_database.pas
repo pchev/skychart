@@ -1171,6 +1171,7 @@ var c,f : tsearchrec;
     dummyfile : boolean;
     ra,de,w,h,r: double;
 begin
+if DirectoryExists(ImagePath) then begin
 try
 if db.Active then begin
 ProgressCat.caption:='';
@@ -1251,6 +1252,9 @@ end;
 finally
   findclose(c);
   findclose(f);
+end;
+end else begin
+  ProgressCat.Caption:='Directory not found!';
 end;
 end;
 

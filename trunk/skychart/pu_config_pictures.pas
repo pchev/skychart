@@ -316,6 +316,7 @@ end;
 
 procedure Tf_config_pictures.ScanImagesClick(Sender: TObject);
 begin
+if DirectoryExists(cmain.ImagePath) then begin
 screen.cursor:=crHourGlass;
 ProgressPanel.visible:=true;
 Cdb.ScanImagesDirectory(cmain.ImagePath,ProgressCat,ProgressBar1 );
@@ -323,6 +324,9 @@ ShowImagesBox.checked:=true;
 screen.cursor:=crDefault;
 ProgressPanel.visible:=false;
 nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
+end else begin
+  nimages.Caption:='Directory not found! Please install the Skychart Pictures package.';
+end;
 end;
 
 procedure Tf_config_pictures.ImgLumBarChange(Sender: TObject);
