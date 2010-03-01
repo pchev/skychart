@@ -38,7 +38,7 @@ type
                 end;
 
 const nummsg = 47;
-      maxcombo = 50;
+      maxcombo = 500;
 
 type
 
