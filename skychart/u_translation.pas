@@ -1099,18 +1099,23 @@ implementation
 
 procedure GetDefaultLanguage(var buf1,buf2: string);
 var i : integer;
+ {$ifdef darwin}
     response:Tstringlist;
+ {$endif}
 begin
  GetLanguageIDs(buf1,buf2);
  i:=pos('.',buf1);
  if i>0 then buf1:=copy(buf1,1,i-1);
  {$ifdef darwin}
  if (trim(buf1)='') and (trim(buf2)='') then begin
+    writetrace('No language environment, try to read language from user database');
     response:=TStringList.Create;
     ExecProcess('defaults read -g AppleLocale',response);
-    buf1:=response[0];
-    i:=pos('_',buf1);
-    if i>0 then buf2:=copy(buf1,1,i-1);
+    if response.Count>0 then begin
+      buf1:=response[0];
+      i:=pos('_',buf1);
+      if i>0 then buf2:=copy(buf1,1,i-1);
+    end;
     response.free;
  end;
  {$endif}
