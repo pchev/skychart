@@ -164,8 +164,10 @@ type
 
   private
     { Private declarations }
+    FConfig: string;
   public
     { Public declarations }
+    function  ReadConfig(ConfigPath : shortstring):boolean;
   end;
 
 { Cartes du Ciel Dll export }
@@ -183,6 +185,7 @@ Procedure ScopeReset; stdcall;
 Function  ScopeInitialized : boolean ; stdcall;
 Function  ScopeConnected : boolean ; stdcall;
 Procedure ScopeClose; stdcall;
+Procedure ScopeReadConfig(ConfigPath : shortstring; var ok : boolean); stdcall;
 
 { internal function }
 Procedure InitObject(source : string; alpha,delta:double);
@@ -214,16 +217,15 @@ const crlf=chr(10)+chr(13);
 
 
 procedure InitLib;
-var ini:tinifile;
-    buf : string;
-    av : boolean;
 begin
-     buf:=extractfilepath(paramstr(0));
-     ini:=tinifile.create(buf+'scope.ini');
-     av:=ini.ReadBool('encoders','AlwaysVisible',true);
-     ini.free;
-     if av then pop_scope.FormStyle:=fsStayOnTop
-           else pop_scope.FormStyle:=fsNormal;
+     decimalseparator:='.';
+     Getdir(0,appdir);
+end;
+
+Function Slash(nom : string) : string;
+begin
+result:=trim(nom);
+if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
 end;
 
 {-------------------------------------------------------------------------------
@@ -361,6 +363,11 @@ end;
 Procedure ScopeGoto(ar,de : double; var ok : boolean); stdcall;
 begin
 ok:=false;
+end;
+
+Procedure ScopeReadConfig(ConfigPath : shortstring; var ok : boolean); stdcall;
+begin
+  ok:=pop_scope.ReadConfig(ConfigPath);
 end;
 
 {-------------------------------------------------------------------------------
@@ -580,14 +587,17 @@ begin
      wait_create := false;
 end;
 
-Procedure LoadDefault;
+function Tpop_scope.ReadConfig(ConfigPath : shortstring):boolean;
 var ini:tinifile;
     newcolumn:tlistcolumn;
     buf,nom : string;
 begin
-with pop_scope do begin
-     buf:=extractfilepath(paramstr(0));
-     ini:=tinifile.create(buf+'scope.ini');
+result:=DirectoryExists(ConfigPath);
+if Result then
+  FConfig:=slash(ConfigPath)+'scope.ini'
+else
+  FConfig:=slash(extractfilepath(paramstr(0)))+'scope.ini';
+ini:=tinifile.create(FConfig);
      res_x.text:=ini.readstring('encoders','res_x','2000');
      res_y.text:=ini.readstring('encoders','res_y','2000');
      nom:= ini.readstring('encoders','name','Ouranos');
@@ -625,7 +635,6 @@ with pop_scope do begin
      end;
      Timer1.Interval:=strtointdef(ReadIntBox.text,1000);
      ReadIntBox.text:=inttostr(Timer1.Interval);
-end;
 First_Show:=false;
 end;
 
@@ -962,7 +971,7 @@ procedure Tpop_scope.SaveButton1Click(Sender: TObject);
 var
 ini:tinifile;
 begin
-ini:=tinifile.create(extractfilepath(paramstr(0))+'scope.ini');
+ini:=tinifile.create(FConfig);
 ini.writestring('encoders','res_x',res_x.text);
 ini.writestring('encoders','res_y',res_y.text);
 ini.writestring('encoders','name',cbo_type.text);
@@ -1054,7 +1063,6 @@ end;
 procedure Tpop_scope.FormShow(Sender: TObject);
 begin
 Load_Init_Objects;
-if First_Show then LoadDefault;
 end;
 
 procedure Tpop_scope.CheckBox1Click(Sender: TObject);
@@ -1107,7 +1115,7 @@ end;
 
 procedure Tpop_scope.SpeedButton6Click(Sender: TObject);
 begin
-ExecuteFile('encoder.html','',appdir+'\doc',SW_SHOWNORMAL);
+ExecuteFile('encoder.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
 end;
 
 procedure Tpop_scope.CheckBox4Click(Sender: TObject);

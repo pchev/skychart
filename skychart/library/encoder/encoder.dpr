@@ -42,6 +42,7 @@ Exports
        ScopeGoto,
        ScopeInitialized,
        ScopeConnected,
-       ScopeGetInfo;
+       ScopeGetInfo,
+       ScopeReadConfig;
 
 end.

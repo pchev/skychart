@@ -1,6 +1,6 @@
 object pop_scope: Tpop_scope
-  Left = 263
-  Top = 88
+  Left = 204
+  Top = 96
   BorderStyle = bsToolWindow
   Caption = 'Digital encoders'
   ClientHeight = 448
@@ -45,7 +45,6 @@ object pop_scope: Tpop_scope
     Width = 321
     Height = 421
     ActivePage = TabSheet1
-    TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
@@ -799,7 +798,7 @@ object pop_scope: Tpop_scope
           Caption = 
             'Interface for Tangent like system.'#13#10'Will work with all systems u' +
             'sing same protocol'#13#10'(Ouranos, NGC MAX,MicroGuider,..)'#13#10'PJ Pallez' +
-            ' Nov 1999'#13#10'P. Chevalley Nov 2001'#13#10'Version 1.0'
+            ' Nov 1999'#13#10'P. Chevalley Nov 2001'#13#10'Version 2.0'
         end
       end
     end

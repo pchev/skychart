@@ -1,6 +1,6 @@
 object pop_scope: Tpop_scope
-  Left = 213
-  Top = 118
+  Left = 224
+  Top = 117
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   AutoSize = True
@@ -17,7 +17,6 @@ object pop_scope: Tpop_scope
   OldCreateOrder = False
   Position = poDefault
   OnCloseQuery = kill
-  OnCreate = formcreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -31,9 +30,6 @@ object pop_scope: Tpop_scope
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ExplicitTop = 42
-      ExplicitWidth = 273
-      ExplicitHeight = 331
       object SpeedButton8: TSpeedButton
         Left = 176
         Top = 255
@@ -402,9 +398,6 @@ object pop_scope: Tpop_scope
     object MotorTab: TTabSheet
       Caption = 'Motor'
       ImageIndex = 6
-      ExplicitTop = 42
-      ExplicitWidth = 273
-      ExplicitHeight = 331
       object FanControl: TCheckBox
         Left = 32
         Top = 184
@@ -741,9 +734,6 @@ object pop_scope: Tpop_scope
     object Focus: TTabSheet
       Caption = 'Focus'
       ImageIndex = 3
-      ExplicitTop = 42
-      ExplicitWidth = 273
-      ExplicitHeight = 331
       object SpeedButton6: TSpeedButton
         Left = 168
         Top = 192
@@ -902,9 +892,6 @@ object pop_scope: Tpop_scope
       Caption = 'VirtHP'
       ImageIndex = 4
       TabVisible = False
-      ExplicitTop = 42
-      ExplicitWidth = 273
-      ExplicitHeight = 331
       object VHPTitleLabel: TLabel
         Left = 0
         Top = 16
@@ -1000,9 +987,6 @@ object pop_scope: Tpop_scope
       Caption = 'Scope Adv'
       ImageIndex = 5
       TabVisible = False
-      ExplicitTop = 42
-      ExplicitWidth = 273
-      ExplicitHeight = 331
       object ADVTitleLabel: TLabel
         Left = 0
         Top = 16
@@ -1157,9 +1141,6 @@ object pop_scope: Tpop_scope
       Caption = 'PEC'
       ImageIndex = 7
       TabVisible = False
-      ExplicitTop = 42
-      ExplicitWidth = 273
-      ExplicitHeight = 331
       object RAPEC: TGroupBox
         Left = 24
         Top = 56
@@ -1216,9 +1197,6 @@ object pop_scope: Tpop_scope
     object TabSheet2: TTabSheet
       Caption = 'Configuration'
       ImageIndex = 1
-      ExplicitTop = 42
-      ExplicitWidth = 273
-      ExplicitHeight = 331
       object SaveButton1: TButton
         Left = 192
         Top = 340
@@ -1436,9 +1414,6 @@ object pop_scope: Tpop_scope
     object TabSheet3: TTabSheet
       Caption = 'Comm Settings'
       ImageIndex = 2
-      ExplicitTop = 42
-      ExplicitWidth = 273
-      ExplicitHeight = 331
       object GroupBox4: TGroupBox
         Left = 8
         Top = 4
@@ -1632,7 +1607,7 @@ object pop_scope: Tpop_scope
           Caption = 
             'Interface for LX200 like system.'#13#10'Will work with all systems usi' +
             'ng same protocol'#13#10'PJ Pallez Nov 1999'#13#10'P. Chevalley Feb 2002'#13#10'Ren' +
-            'ato Bonomini Jul 2004'#13#10'Version 1.5.1g'
+            'ato Bonomini Jul 2004'#13#10'Version 2.0'
         end
       end
     end

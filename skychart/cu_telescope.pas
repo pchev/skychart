@@ -50,6 +50,7 @@ type
   TScopeSetObs     = Procedure (latitude,longitude : double); stdcall;
   TScopeGoto       = Procedure (ar,de : double; var ok : boolean); stdcall;
   TScopeGetEqSys   = Procedure (var EqSys : double); stdcall;
+  TScopeReadConfig = Procedure (ConfigPath : shortstring; var ok : boolean); stdcall;
 
   TTelescope = class(TComponent)
   private
@@ -74,6 +75,7 @@ type
     FScopeSetObs : TScopeSetObs;
     FScopeGoto : TScopeGoto;
     FScopeGetEqSys : TScopeGetEqSys;
+    FScopeReadConfig : TScopeReadConfig;
 
   protected
   public
@@ -81,6 +83,7 @@ type
      destructor  Destroy; override;
   published
      procedure InitScopeLibrary;
+     function  ScopeReadConfig(ConfigPath : shortstring) : boolean;
      procedure UnloadScopeLibrary;
      function  ScopeConnect: boolean;
      function  ScopeDisconnect : boolean;
@@ -162,6 +165,7 @@ if Fscopelib<>0 then begin
     FScopeSetObs := TScopeSetObs(GetProcedureAddress(Fscopelib, 'ScopeSetObs'));
     FScopeGoto := TScopeGoto(GetProcedureAddress(Fscopelib, 'ScopeGoto'));
     FScopeGetEqSys := TScopeGetEqSys(GetProcedureAddress(Fscopelib, 'ScopeGetEqSys'));
+    FScopeReadConfig := TScopeReadConfig(GetProcedureAddress(Fscopelib, 'ScopeReadConfig'));
     Fscopelibok:=true;
    {$ifdef mswindows}
     CoInitialize(nil);
@@ -173,6 +177,15 @@ end;
 except
  Fscopelibok:=false;
  Showmessage(Format(rsErrorOpening, [Fplugin]));
+end;
+end;
+
+function TTelescope.ScopeReadConfig(ConfigPath : shortstring) : boolean;
+begin
+try
+ FScopeReadConfig(ConfigPath,result);
+except
+ result:=false;
 end;
 end;
 

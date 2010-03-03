@@ -198,7 +198,6 @@ type
     EqSys1: TComboBox;
     Label21: TLabel;
      {Utility and form functions}
-     procedure formcreate(Sender: TObject);
      procedure kill(Sender: TObject; var CanClose: Boolean);
      procedure Timer1Timer(Sender: TObject);
      procedure setresClick(Sender: TObject);
@@ -281,8 +280,10 @@ type
     procedure SlewSpeedBarChange(Sender: TObject);
   private
     { Private declarations }
+    FConfig: string;
   public
     { Public declarations }
+    function  ReadConfig(ConfigPath : shortstring):boolean;
   end;
 
 procedure InitLib;
@@ -303,6 +304,7 @@ Function  ScopeInitialized : boolean ; stdcall;
 Function  ScopeConnected : boolean ; stdcall;
 Procedure ScopeClose; stdcall;
 Procedure ScopeGetEqSys(var EqSys : double); stdcall;
+Procedure ScopeReadConfig(ConfigPath : shortstring; var ok : boolean); stdcall;
 
 var
   pop_scope: Tpop_scope;
@@ -326,6 +328,12 @@ const crlf=chr(10)+chr(13);
                        Cartes du Ciel Dll functions
 
 --------------------------------------------------------------------------------}
+Function Slash(nom : string) : string;
+begin
+result:=trim(nom);
+if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
+end;
+
 Procedure ShowCoordinates;
 var s1,s2,s3 : string;
 begin
@@ -610,50 +618,61 @@ begin
      result:=sgn*(abs(d)+(m/60));
 end;
 
+Procedure ScopeReadConfig(ConfigPath : shortstring; var ok : boolean); stdcall;
+begin
+  ok:=pop_scope.ReadConfig(ConfigPath);
+end;
+
 {-------------------------------------------------------------------------------
 
                                   Form functions
 
 --------------------------------------------------------------------------------}
 
-procedure Tpop_scope.formcreate(Sender: TObject);
+function Tpop_scope.ReadConfig(ConfigPath : shortstring):boolean;
 var ini:tinifile;
-    buf,nom : string;
+    nom : string;
     av : boolean;
 begin
-     Getdir(0,appdir);
-     buf:=extractfilepath(paramstr(0));
-     ini:=tinifile.create(buf+'scope.ini');
-     nom:= ini.readstring('lx200','name','LX200');
-     cbo_type.text:=nom;
-     cbo_type.ItemIndex:=ini.readinteger('lx200','model',0);
-     ReadIntBox.text:=ini.readstring('lx200','read_interval','1000');
-     cbo_port.text:=ini.readstring('lx200','comport','COM1');
-     if strtoint(copy(cbo_port.text,4,1))>4 then cbo_port.text:='COM1';
-     PortSpeedbox.text:=ini.readstring('lx200','baud','9600');
-     DatabitBox.text:=ini.readstring('lx200','databits','8');
-     Paritybox.text:=ini.readstring('lx200','parity','N');
-     StopbitBox.text:=ini.readstring('lx200','stopbits','1');
-     TimeOutBox.text:=ini.readstring('lx200','timeout','1000');
-     IntTimeOutBox.text:=ini.readstring('lx200','inttimeout','100');
-     checkBox1.Checked:=ini.ReadBool('lx200','hpp',false);
-     ShowAltAz.Checked:=ini.ReadBool('lx200','AltAz',false);
-     av:=ini.ReadBool('lx200','AlwaysVisible',true);
-     checkBox3.Checked:=ini.ReadBool('lx200','SwapNS',false);
-     checkBox4.Checked:=ini.ReadBool('lx200','SwapEW',false);
-     lat.text:=ini.readstring('observatory','latitude','0');
-     long.text:=ini.readstring('observatory','longitude','0');
-     radiogroup5.ItemIndex:=ini.readinteger('lx200','focusmodel',0);
-     radiogroup3.ItemIndex:=ini.readinteger('lx200','focusspeed1',0);
-     radiogroup4.ItemIndex:=ini.readinteger('lx200','focusspeed2',1);
-     checkbox6.Checked:=ini.ReadBool('lx200','focuspulse',false);
-     longedit1.Value:=ini.readinteger('lx200','focusduration',100);
-     eqsys1.ItemIndex:=ini.readinteger('lx200','eqsys',0);
-     ini.free;
-     Timer1.Interval:=strtointdef(ReadIntBox.text,500);
-     // Renato Bonomini:
-     MsArcSecLabel.Caption:='Microstep'#13#10'[arc"/s]';
-     GuideArcSecLabel.Caption:='Guide'#13#10'[arc"/s]';
+  result:=DirectoryExists(ConfigPath);
+  if Result then
+    FConfig:=slash(ConfigPath)+'scope.ini'
+  else
+    FConfig:=slash(extractfilepath(paramstr(0)))+'scope.ini';
+  ini:=tinifile.create(FConfig);
+  if ini.SectionExists('lx200') then PageControl1.ActivePage:=TabSheet1
+                                else PageControl1.ActivePage:=TabSheet2;
+  nom:= ini.readstring('lx200','name','LX200');
+  cbo_type.text:=nom;
+  cbo_type.ItemIndex:=ini.readinteger('lx200','model',0);
+  ReadIntBox.text:=ini.readstring('lx200','read_interval','1000');
+  cbo_port.text:=ini.readstring('lx200','comport','COM1');
+  if strtoint(copy(cbo_port.text,4,1))>4 then cbo_port.text:='COM1';
+  PortSpeedbox.text:=ini.readstring('lx200','baud','9600');
+  DatabitBox.text:=ini.readstring('lx200','databits','8');
+  Paritybox.text:=ini.readstring('lx200','parity','N');
+  StopbitBox.text:=ini.readstring('lx200','stopbits','1');
+  TimeOutBox.text:=ini.readstring('lx200','timeout','1000');
+  IntTimeOutBox.text:=ini.readstring('lx200','inttimeout','100');
+  checkBox1.Checked:=ini.ReadBool('lx200','hpp',false);
+  ShowAltAz.Checked:=ini.ReadBool('lx200','AltAz',false);
+  av:=ini.ReadBool('lx200','AlwaysVisible',true);
+  checkBox3.Checked:=ini.ReadBool('lx200','SwapNS',false);
+  checkBox4.Checked:=ini.ReadBool('lx200','SwapEW',false);
+  lat.text:=ini.readstring('observatory','latitude','0');
+  long.text:=ini.readstring('observatory','longitude','0');
+  radiogroup5.ItemIndex:=ini.readinteger('lx200','focusmodel',0);
+  radiogroup3.ItemIndex:=ini.readinteger('lx200','focusspeed1',0);
+  radiogroup4.ItemIndex:=ini.readinteger('lx200','focusspeed2',1);
+  checkbox6.Checked:=ini.ReadBool('lx200','focuspulse',false);
+  longedit1.Value:=ini.readinteger('lx200','focusduration',100);
+  eqsys1.ItemIndex:=ini.readinteger('lx200','eqsys',0);
+  ini.free;
+  Timer1.Interval:=strtointdef(ReadIntBox.text,1000);
+
+  // Renato Bonomini:
+  MsArcSecLabel.Caption:='Microstep'#13#10'[arc"/s]';
+  GuideArcSecLabel.Caption:='Guide'#13#10'[arc"/s]';
 
 checkbox2.checked:=av;
 
@@ -743,17 +762,9 @@ initial:=false;
 end;
 
 procedure InitLib;
-var ini:tinifile;
-    buf : string;
-    av : boolean;
 begin
      decimalseparator:='.';
-     buf:=extractfilepath(paramstr(0));
-     ini:=tinifile.create(buf+'scope.ini');
-     av:=ini.ReadBool('lx200','AlwaysVisible',true);
-     ini.free;
-     if av then pop_scope.FormStyle:=fsStayOnTop
-           else pop_scope.FormStyle:=fsNormal;
+     Getdir(0,appdir);
 end;
 
 procedure Tpop_scope.kill(Sender: TObject; var CanClose: Boolean);
@@ -787,7 +798,7 @@ procedure Tpop_scope.SaveButton1Click(Sender: TObject);
 var
 ini:tinifile;
 begin
-ini:=tinifile.create(extractfilepath(paramstr(0))+'scope.ini');
+ini:=tinifile.create(FConfig);
 ini.writestring('lx200','name',cbo_type.text);
 ini.writeinteger('lx200','model',cbo_type.ItemIndex);
 ini.writestring('lx200','read_interval',ReadIntBox.text);
@@ -1106,7 +1117,7 @@ end;
 
 procedure Tpop_scope.SpeedButton4Click(Sender: TObject);
 begin
-ExecuteFile('meade.html','',appdir+'\doc',SW_SHOWNORMAL);
+ExecuteFile('meade.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
 end;
 
 procedure Tpop_scope.RadioGroup5Click(Sender: TObject);
